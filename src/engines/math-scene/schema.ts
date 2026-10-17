@@ -8,7 +8,8 @@
  * `Frac` objects here, so `data.json` and the client get structured values;
  * so do the other values (docs/19 §3.0 G1, `lib/value.ts`): whole numbers
  * (`56`), remainders (`"3 r 2"`), times of day (`"09:40"`) and durations
- * (`"1h35m"`). Build time only (zod): client code imports types from this
+ * (`"1h35m"`); so do decimals (`"0.35"`, docs/29 §3.1 X1: exact, never a
+ * JSON number). Build time only (zod): client code imports types from this
  * file, never values.
  */
 import { z } from 'zod';
@@ -16,7 +17,8 @@ import { bilingual, kebabId, theme } from '../../content/schema/common';
 import { sourcesFile } from '../../content/schema/sources';
 import { glossaryFile } from '../../content/schema/glossary';
 import { parseFrac, type Frac } from './lib/fraction';
-import { CLOCK12_NOTATIONS, CLOCK24_NOTATIONS, DEFAULT_NOTATION, parseClock, parseDuration, parseTagged, parseWhole, UNITS, WHOLE_MAX, type AnswerValue, type DurValue } from './lib/value';
+import { ANSWER_UNITS, CLOCK12_NOTATIONS, CLOCK24_NOTATIONS, DEFAULT_NOTATION, parseClock, parseDuration, parseTagged, parseWhole, WHOLE_MAX, type AnswerValue, type DecValue, type DurValue } from './lib/value';
+import { DECIMAL_MAX_WHOLE, fromWhole, parseDecimal, wholePart, type Decimal } from './lib/decimal';
 
 /* ------------------------------------------------------------------ */
 /* Vocabulary                                                          */
@@ -91,11 +93,51 @@ export const TIME_CODES = [
   'wrong-direction',
   '24h-offset',
 ] as const;
-/** The domains, each with its own codes (a task's codes come from one domain, validate). */
-export const MISCONCEPTION_DOMAINS = { fractions: FRACTION_CODES, measure: MEASURE_CODES, 'whole-ops': WHOLE_OPS_CODES, time: TIME_CODES } as const;
+/** Decimals (docs/29 §2.1; rules in lib/diagnose/decimals.ts). `places-short` is the "one step short" case, like `not-simplest`. */
+export const DECIMAL_CODES = [
+  'longer-is-larger',
+  'shorter-is-larger',
+  'trailing-zero-changes',
+  'point-separator',
+  'zero-placeholder',
+  'place-order',
+  'fraction-as-digits',
+  'place-denominator',
+  'interval-misread',
+  'round-truncated',
+  'round-carry-slip',
+  'places-short',
+  'round-wrong-place',
+  'round-chain',
+  'round-half-down',
+  'aligned-right',
+  'smaller-from-larger',
+  'empty-place-brought-down',
+  'point-misplaced',
+  'remainder-as-decimal',
+  'shift-wrong-way',
+  'shift-count-wrong',
+  'zero-appended',
+  'decimal-as-subunit',
+  'unit-factor-wrong',
+] as const;
+/**
+ * Codes registered in another domain that decimals use too (docs/29 D10): the same misconception, with a rule of
+ * its own in lib/diagnose/decimals.ts. A code's rules are the union over the domains that list it; a task is
+ * diagnosed by its own domain's rules.
+ */
+export const DECIMAL_SHARED_CODES = ['tick-counting', 'carry-not-added', 'zero-in-quotient', 'not-simplest'] as const;
+/** The domains, each with the codes its tasks may use (a task's codes come from one domain, validate). */
+export const MISCONCEPTION_DOMAINS = {
+  fractions: FRACTION_CODES,
+  measure: MEASURE_CODES,
+  'whole-ops': WHOLE_OPS_CODES,
+  time: TIME_CODES,
+  decimals: [...DECIMAL_CODES, ...DECIMAL_SHARED_CODES],
+} as const;
 export type MisconceptionDomain = keyof typeof MISCONCEPTION_DOMAINS;
-/** Misconceptions the feedback is designed around, registered by domain (docs/19 §3.0 G5); one flat list, every code unique. */
-export const MISCONCEPTIONS = [...FRACTION_CODES, ...MEASURE_CODES, ...WHOLE_OPS_CODES, ...TIME_CODES] as const;
+/** Misconceptions the feedback is designed around, each registered once in its home domain (docs/19 §3.0 G5); one flat list, every code unique. */
+export const MISCONCEPTIONS = [...FRACTION_CODES, ...MEASURE_CODES, ...WHOLE_OPS_CODES, ...TIME_CODES, ...DECIMAL_CODES] as const;
 export const misconception = z.enum(MISCONCEPTIONS);
 export type MisconceptionCode = (typeof MISCONCEPTIONS)[number];
 
@@ -121,6 +163,10 @@ export const TASK_KINDS = [
   'split-array',
   'regroup',
   'share',
+  'shade-decimal',
+  'round-on-line',
+  'align-add',
+  'shift-digits',
 ] as const;
 /** Task kinds on the square grid (docs/21 §3.2). */
 export const GRID_KINDS = ['count-squares', 'trace-perimeter', 'draw-rectangle', 'split-figure'] as const;
@@ -130,8 +176,8 @@ export const ARRAY_KINDS = ['group', 'arrange', 'skip-count', 'split-array'] as 
 export const BLOCKS_KINDS = ['regroup', 'share'] as const;
 export type TaskKind = (typeof TASK_KINDS)[number];
 
-/** Model views a step may switch between (the VIEW group). `clock` and `timeline` are the time lesson's (docs/20 §3, model A3). */
-export const MODEL_VIEWS = ['bar', 'circle', 'numberline', 'wall', 'barmodel', 'grid', 'array', 'blocks', 'clock', 'timeline'] as const;
+/** Model views a step may switch between (the VIEW group). `clock` and `timeline` are the time lesson's (docs/20 §3, model A3); `decimal-grid`, `place-value` and `money` the decimals' (docs/29 A6; their number line is `numberline`). */
+export const MODEL_VIEWS = ['bar', 'circle', 'numberline', 'wall', 'barmodel', 'grid', 'array', 'blocks', 'clock', 'timeline', 'decimal-grid', 'place-value', 'money'] as const;
 export const modelView = z.enum(MODEL_VIEWS);
 export type ModelView = (typeof MODEL_VIEWS)[number];
 
@@ -175,18 +221,61 @@ export const duration = z.string().transform((text, ctx): DurValue => {
   return d;
 });
 
-/** An answer: a fraction or whole number (`"3/4"`, `"2"`, `56`), a remainder (`"3 r 2"`), a time of day (`"09:40"`) or a duration (`"1h35m"`). */
+const NOT_A_NUMBER = 'write decimals as strings, e.g. "0.5"';
+
+/** A decimal 0–99 999.999999 written as a string (`"0.50"`, `"3"`); a whole JSON number is taken as it is, a JSON number with a point is refused (docs/29 §3.1). */
+export const decimal = z.union([z.number(), z.string()]).transform((v, ctx): Decimal => {
+  if (typeof v === 'number') {
+    if (Number.isInteger(v) && v >= 0 && v <= DECIMAL_MAX_WHOLE) return fromWhole(v);
+    ctx.addIssue({ code: z.ZodIssueCode.custom, message: Number.isInteger(v) ? `${v} is out of range (0–${DECIMAL_MAX_WHOLE})` : NOT_A_NUMBER });
+    return z.NEVER;
+  }
+  const d = parseDecimal(v);
+  if (!d || wholePart(d) > DECIMAL_MAX_WHOLE) {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, message: `"${v}" is not a decimal (write "0.35", "2.5", "3")` });
+    return z.NEVER;
+  }
+  return d;
+});
+
+/** A fraction (`"3/4"`, `"2"`) or a decimal with a point (`"0.35"`): what compare, order, place and choose take. */
+export const numValue = z.string().transform((text, ctx): Frac | DecValue => {
+  const f = parseFrac(text);
+  if (f) return f;
+  const d = /\./.test(text) ? parseDecimal(text) : null;
+  if (d) return { kind: 'dec', ...d };
+  ctx.addIssue({ code: z.ZodIssueCode.custom, message: `"${text}" is not a fraction ("3/4", "1 3/4", "2") or a decimal ("0.35")` });
+  return z.NEVER;
+});
+
+/** A whole number (`26`) or a decimal (`"2.35"`, tagged): the value shared or regrouped on blocks or on the place-value chart. */
+const wholeOrDecimal = z.union([z.number(), z.string()]).transform((v, ctx): number | DecValue => {
+  if (typeof v === 'number' && Number.isInteger(v) && v >= 0 && v <= 999) return v;
+  if (typeof v === 'string' && /\./.test(v)) {
+    const d = parseDecimal(v);
+    if (d) return { kind: 'dec', ...d };
+  }
+  if (typeof v === 'string' && /^\d{1,3}$/.test(v)) return Number(v);
+  ctx.addIssue({ code: z.ZodIssueCode.custom, message: typeof v === 'number' && !Number.isInteger(v) ? NOT_A_NUMBER : `"${v}" is not a whole number 0–999 or a decimal ("2.35")` });
+  return z.NEVER;
+});
+
+/** An answer: a fraction or whole number (`"3/4"`, `"2"`, `56`), a remainder (`"3 r 2"`), a time of day (`"09:40"`), a duration (`"1h35m"`) or a decimal (`"0.35"`). */
 export const answerValue = z.union([z.number(), z.string()]).transform((v, ctx): AnswerValue => {
   if (typeof v === 'number') {
     const n = parseWhole(v);
     if (n !== null) return { n, d: 1 };
+    if (!Number.isInteger(v)) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: NOT_A_NUMBER });
+      return z.NEVER;
+    }
   } else {
     const f = parseFrac(v);
     if (f) return f;
     const tagged = parseTagged(v);
     if (tagged) return tagged;
   }
-  ctx.addIssue({ code: z.ZodIssueCode.custom, message: `"${v}" is not an answer (a fraction "3/4", a whole number 56, "3 r 2", "09:40" or "1h35m")` });
+  ctx.addIssue({ code: z.ZodIssueCode.custom, message: `"${v}" is not an answer (a fraction "3/4", a whole number 56, "3 r 2", "09:40", "1h35m" or a decimal "0.35")` });
   return z.NEVER;
 });
 
@@ -453,7 +542,152 @@ const gridModel = z
   })
   .strict();
 
-export const model = z.discriminatedUnion('kind', [barModel, circleModel, numberLineModel, wallModel, barModelDiagram, gridModel, arrayModel, blocksModel]);
+/* Decimals (docs/29 §3.2–3.5, model A6) */
+const decimalTone = z.enum(['cold', 'hot', 'signal']);
+/** The places of a decimal place-value chart, highest first: thousands … ones, tenths, hundredths, thousandths. */
+export const DPLACES = ['Th', 'H', 'T', 'O', 't', 'h', 'th'] as const;
+export type DPlace = (typeof DPLACES)[number];
+/** Trades on the chart: 10 of a place for 1 of the next (`h>t`), or 1 for 10 of the one below (`t>h`). */
+export const DTRADES = ['th>h', 'h>t', 't>O', 'O>T', 'T>H', 'H>Th', 'Th>H', 'H>T', 'T>O', 'O>t', 't>h', 'h>th'] as const;
+export type DTrade = (typeof DTRADES)[number];
+const dcounts = z
+  .object({ Th: count(99).optional(), H: count(99).optional(), T: count(99).optional(), O: count(99).optional(), t: count(99).optional(), h: count(99).optional(), th: count(99).optional() })
+  .strict();
+export type DCountsSpec = z.output<typeof dcounts>;
+const decimalGridSpec = z.object({
+  /** `10`: ten strips · `100`: 10 × 10 squares · `1000`: the hundred grid with a magnifier of ten slivers. */
+  level: z.union([z.literal(10), z.literal(100), z.literal(1000)]).default(100),
+  /** Wholes side by side (1–3). */
+  wholes: z.number().int().min(1).max(3).optional(),
+  /** One run in cold (the given amount). */
+  given: decimal.optional(),
+  /** Runs shaded in turn, each in its tone (given cold, added signal, a second amount hot). */
+  runs: z.array(z.object({ value: decimal, tone: decimalTone }).strict()).min(1).max(4).optional(),
+  /** Taken away from the end of what is shaded (ink slash). */
+  crossed: decimal.optional(),
+  /** The magnifier: the square starting at this value cut into ten slivers (the thousandths). */
+  zoom: z.object({ at: decimal }).strict().optional(),
+  /** Four equal blocks of 25 squares drawn over the grid (the quarters). */
+  quarters: z.boolean().optional(),
+  /** Under each strip its value (`tenths`), or the squares counted (`hundredths`). */
+  labels: z.enum(['none', 'tenths', 'hundredths']).optional(),
+  /** Ten of a place lit to be put together: ten strips a whole, ten squares a strip, ten slivers a square. */
+  trade: z.enum(['t>O', 'h>t', 'th>h']).optional(),
+  /** `ghost`: the whole drawing faint (to compare with); `hot` / `cold`: the given amount's tone (a pair). */
+  tone: z.enum(['ghost', 'hot', 'cold']).optional(),
+  label: bilingual.optional(),
+});
+const decimalGridModel = decimalGridSpec
+  .extend({
+    kind: z.literal('decimal-grid'),
+    /** Two grids side by side (compare: the first cold, the second hot). */
+    pair: z.array(decimalGridSpec.strict()).length(2).optional(),
+  })
+  .strict();
+export type DecimalGridSpec = z.output<typeof decimalGridSpec>;
+export type DecimalGridModelSpec = z.output<typeof decimalGridModel>;
+const decimalColumn = z
+  .object({
+    op: z.enum(['+', '−', '×', '÷']),
+    a: decimal,
+    /** A decimal (+ −) or a one-digit whole number (× ÷). */
+    b: decimal,
+    show: z.enum(['none', 'all']).default('all'),
+  })
+  .strict();
+export type DecimalColumnSpec = z.output<typeof decimalColumn>;
+const placeValueModel = z
+  .object({
+    kind: z.literal('place-value'),
+    /** A run of places, highest first (default: the value's own, from the ones). */
+    columns: z.array(z.enum(DPLACES)).min(1).max(7).optional(),
+    value: decimal.optional(),
+    /** The digits written in the columns, place-value discs, or both. */
+    show: z.enum(['digits', 'discs', 'both']).default('digits'),
+    /** The order the discs go into their columns (a place-order beat). */
+    fill: z.array(z.enum(DPLACES)).optional(),
+    highlight: z.array(z.enum(DPLACES)).optional(),
+    /** Two to four numbers, one under the other (compare, the column method), lined up on the point or on the last digit. */
+    rows: z.array(decimal).min(2).max(4).optional(),
+    align: z.enum(['point', 'right']).default('point'),
+    /** The empty places filled with faint zeros (`true`), or the number written longer (`"1.500"`). */
+    pad: z.union([z.boolean(), decimal]).optional(),
+    /** × : the value in this many equal rows; `combined` pushes them together column by column. */
+    copies: z.number().int().min(2).max(9).optional(),
+    combined: z.boolean().optional(),
+    /** ÷ : the plates shared into, with what each has (`dealt`) and what is still on the chart (`left`). */
+    plates: z.number().int().min(2).max(9).optional(),
+    dealt: dcounts.optional(),
+    left: dcounts.optional(),
+    trade: z.enum(DTRADES).optional(),
+    /** The digits moved `by` places (× 10ⁿ to the left, ÷ to the right); the point does not move. */
+    shift: z.object({ by: z.union([z.literal(1), z.literal(2), z.literal(3)]), dir: z.enum(['left', 'right']).default('left') }).strict().optional(),
+    /** Discs printed $1 · 10¢ · 1¢ (money). */
+    money: z.boolean().optional(),
+    column: decimalColumn.optional(),
+    label: bilingual.optional(),
+  })
+  .strict();
+export type PlaceValueSpec = z.output<typeof placeValueModel>;
+export const DECIMAL_LINE_UNITS = ['km', 'm', 'cm', 'kg', 'g', 'l', 'ml'] as const;
+const decimalLineModel = z
+  .object({
+    kind: z.literal('numberline'),
+    scale: z.literal('decimal'),
+    from: decimal,
+    to: decimal,
+    /** The tick spacing (≤ 20 steps). */
+    step: decimal,
+    labels: z.enum(['ends', 'wholes', 'all', 'none']).default('ends'),
+    marks: z.array(decimal).optional(),
+    /** A pointer above the line (read-the-line tasks). */
+    arrow: decimal.optional(),
+    /** Lines under it, each one step of the line above cut into ten (at most two). */
+    zoom: z.array(z.object({ from: decimal, to: decimal }).strict()).min(1).max(2).optional(),
+    /** The halfway mark between the ends, dashed. */
+    halfway: z.boolean().optional(),
+    /** Rounding: the nearer end, bold, with an arrow from the mark to it. */
+    nearest: decimal.optional(),
+    unit: z.enum(DECIMAL_LINE_UNITS).optional(),
+    /** A second scale under the line in a smaller unit (`factor` of them to one). */
+    dual: z.object({ unit: z.enum(DECIMAL_LINE_UNITS), factor: z.union([z.literal(10), z.literal(100), z.literal(1000)]) }).strict().optional(),
+    label: bilingual.optional(),
+  })
+  .strict();
+export type DecimalLineSpec = z.output<typeof decimalLineModel>;
+/** Singapore coins and notes (docs/29 §3.5): plain discs and plain notes, no 1-cent coin. */
+export const COINS = ['0.05', '0.1', '0.2', '0.5', '1'] as const;
+export const NOTES = ['2', '5', '10', '50'] as const;
+export const MONEY_PIECES = [...COINS, ...NOTES] as const;
+export type MoneyPiece = (typeof MONEY_PIECES)[number];
+const moneyAmount = z.object({ amount: decimal, label: bilingual.optional() }).strict();
+const moneyModel = z
+  .object({
+    kind: z.literal('money'),
+    amount: decimal.optional(),
+    /** The coins and notes (default: the amount in the fewest pieces). */
+    pieces: z.array(z.enum(MONEY_PIECES)).min(1).max(30).optional(),
+    /** Loose on a tray, or in columns: dollars · ten cents · cents. */
+    layout: z.enum(['tray', 'by-place']).default('tray'),
+    /** Ten 10¢ coins lit to make $1. */
+    trade: z.literal('t>O').optional(),
+    /** A $10 note paid (change). */
+    note: z.boolean().optional(),
+    pair: z.array(moneyAmount).length(2).optional(),
+    label: bilingual.optional(),
+  })
+  .strict();
+export type MoneySpec = z.output<typeof moneyModel>;
+
+const baseModels = z.discriminatedUnion('kind', [barModel, circleModel, numberLineModel, wallModel, barModelDiagram, gridModel, arrayModel, blocksModel, decimalGridModel, placeValueModel, moneyModel]);
+const isDecimalLine = (v: unknown): boolean => !!v && typeof v === 'object' && (v as { kind?: unknown }).kind === 'numberline' && (v as { scale?: unknown }).scale === 'decimal';
+/** A model: by `kind`, the number line by `scale` too (a decimal line has decimal ends and a decimal step). */
+export const model = z.unknown().transform((v, ctx): z.output<typeof baseModels> | DecimalLineSpec => {
+  const r = isDecimalLine(v) ? decimalLineModel.safeParse(v) : baseModels.safeParse(v);
+  if (r.success) return r.data;
+  for (const issue of r.error.issues) ctx.addIssue(issue);
+  return z.NEVER;
+});
 export type Model = z.output<typeof model>;
 export type ArrayModelSpec = z.output<typeof arrayModel>;
 export type NumberLineSpec = z.output<typeof numberLineModel>;
@@ -466,11 +700,39 @@ export type GridDim = z.output<typeof gridDim>;
 /* Tasks                                                               */
 /* ------------------------------------------------------------------ */
 
-export const INPUT_FORMS = ['equal', 'equivalent', 'simplest', 'mixed', 'whole', 'measure', 'remainder', 'time12', 'time24', 'face', 'duration'] as const;
+export const INPUT_FORMS = ['equal', 'equivalent', 'simplest', 'mixed', 'whole', 'measure', 'remainder', 'time12', 'time24', 'face', 'duration', 'decimal'] as const;
 /** Forms whose answer is a fraction (the fraction boxes). */
 export const FRACTION_FORMS = ['equal', 'equivalent', 'simplest', 'mixed'] as const;
 /** Forms whose answer is a time of day or a duration. */
 export const TIME_FORMS = ['time12', 'time24', 'face', 'duration'] as const;
+
+export const WORK_DOES = ['add', 'subtract', 'multiply', 'divide', 'round', 'convert', 'scale', 'to-fraction', 'to-decimal', 'compose', 'read'] as const;
+export const CONVERT_UNITS = ['km', 'm', 'cm', 'kg', 'g', 'l', 'ml', 'dollar', 'cent'] as const;
+export type ConvertUnit = (typeof CONVERT_UNITS)[number];
+const decimalWork = z
+  .object({
+    do: z.enum(WORK_DOES),
+    /** add · subtract · multiply (b a whole number) · divide (b a whole number) · round · scale · convert: the number worked on. */
+    a: decimal.optional(),
+    b: decimal.optional(),
+    /** round: to this many places. */
+    to: z.number().int().min(0).max(3).optional(),
+    /** convert: from one unit into another. */
+    from: z.enum(CONVERT_UNITS).optional(),
+    into: z.enum(CONVERT_UNITS).optional(),
+    /** scale: × or ÷ by 10, 100, 1000 or a multiple of them. */
+    op: z.enum(['×', '÷']).optional(),
+    by: z.number().int().min(2).max(9000).optional(),
+    /** to-fraction (a decimal) · to-decimal (a fraction). */
+    of: numValue.optional(),
+    /** compose: the digits and their places, in the order the question names them. */
+    parts: z.array(z.object({ digit: z.number().int().min(0).max(9), place: z.enum(DPLACES) }).strict()).min(1).max(7).optional(),
+    /** read: the line the arrow is on, and its tick (steps from `from`). */
+    line: z.object({ from: decimal, step: decimal }).strict().optional(),
+    tick: z.number().int().min(0).max(20).optional(),
+  })
+  .strict();
+export type DecimalWork = z.output<typeof decimalWork>;
 
 export const inputSpec = z
   .object({
@@ -480,10 +742,15 @@ export const inputSpec = z
      * Fractions — `equal`: these exact numbers · `equivalent`: any equal value · `simplest`: lowest terms · `mixed`: a mixed number.
      * Whole numbers — `whole`: 1–5 digits · `measure`: a whole number and a unit chip · `remainder`: quotient, "r", remainder.
      * Time — `time12`: hours : minutes and am / pm · `time24`: hh : mm · `face`: hours : minutes as a clock face reads (no am / pm) · `duration`: h + min or min + s.
+     * Decimals — `decimal`: one box with a point key (docs/29 X3).
      */
     form: z.enum(INPUT_FORMS),
-    /** `measure`: the answer's unit (`cm2`, `m`, `unit2` …); `whole` on a grid: the unit printed after the box. */
-    unit: z.enum(UNITS).optional(),
+    /** `measure`: the answer's unit (`cm2`, `m`, `unit2` …); `whole` on a grid: the unit printed after the box; `decimal`: `dollar` ($ before the box) or a unit printed after it. */
+    unit: z.enum(ANSWER_UNITS).optional(),
+    /** `decimal`: the places the answer must be written with (rounding, money; default: judged by value, money 2). */
+    places: z.number().int().min(0).max(3).optional(),
+    /** `decimal` (and a decimal written as a fraction): what is being worked out, for the diagnosis only (docs/29 §3.7). */
+    work: decimalWork.optional(),
     /** Grid: what the number is, measured on the figure (checked against its geometry; tells the diagnosis what to look for). */
     ask: z.enum(['area', 'perimeter', 'length', 'breadth', 'side']).optional(),
     /** Grid: the figure asked about (default: the first that is not a ghost). */
@@ -562,24 +829,30 @@ const cutFields = z.object({ parts: z.number().int().min(2).max(12), snap: z.uni
 /** Parts after folding (the starting parts doubled once per fold). */
 const foldFields = z.object({ parts: z.number().int().min(2).max(16), then: inputSpec.optional() });
 const scaleFields = z.object({ factors: z.array(z.number().int().min(2).max(6)).min(1).max(4), target: frac, then: inputSpec.optional() });
-const placeFields = z.object({ target: frac, snap: z.enum(['ticks', 'free']).default('ticks'), tolerance: z.number().positive().optional() });
+const placeFields = z.object({
+  target: numValue,
+  snap: z.enum(['ticks', 'free']).default('ticks'),
+  tolerance: z.number().positive().optional(),
+  /** A decimal line: how many times the child zooms in (a segment opens a line of ten under it) before placing (docs/29 §3.6). */
+  zoom: z.union([z.literal(0), z.literal(1), z.literal(2)]).optional(),
+});
 const compareFields = z.object({
-  a: frac,
-  b: frac,
+  a: numValue,
+  b: numValue,
   ask: z.enum(['symbol', 'greater', 'smaller']).default('symbol'),
-  /** `split`: a button cuts both bars into same-size parts; `stack`: the bars are lined up under one whole. */
-  align: z.enum(['split', 'stack']).optional(),
+  /** Fractions — `split`: a button cuts both bars into same-size parts; `stack`: the bars are lined up under one whole. Decimals — `point`: a button lines the two numbers up on the point (zeros filled in). */
+  align: z.enum(['split', 'stack', 'point']).optional(),
 });
 const orderFields = z.object({
-  items: z.array(frac).min(3).max(5),
+  items: z.array(numValue).min(3).max(5),
   direction: z.enum(['asc', 'desc']),
-  /** After ordering, the items appear as points on a number line (intervals per whole). */
-  line: z.number().int().min(2).max(12).optional(),
+  /** After ordering, the items appear as points on a number line (fractions: intervals per whole; decimals: `true`, on the task's line). */
+  line: z.union([z.number().int().min(2).max(12), z.literal(true)]).optional(),
 });
 const option = z
   .object({
     id: kebabId,
-    value: frac.optional(),
+    value: numValue.optional(),
     model: model.optional(),
     text: bilingual.optional(),
     correct: z.boolean(),
@@ -645,17 +918,53 @@ const splitArrayFields = z.object({
   then: inputSpec,
 });
 
-/* Place-value tasks (docs/19 §3.2) */
+/* Place-value tasks (docs/19 §3.2; on the decimal chart, docs/29 §3.6) */
 const regroupFields = z.object({
-  value: z.number().int().min(0).max(999),
-  /** The blocks on the mat at the start (not in standard form: 14 tens). */
-  start: placeCounts,
+  /** A whole number on the blocks, or a decimal on the place-value chart. */
+  value: wholeOrDecimal,
+  /** The blocks (or discs) at the start (not in standard form: 14 tens, 13 hundredths). */
+  start: dcounts,
+  /** The chart: the discs to end with when that is not every place under 10 (a tenth traded for 10 hundredths to take away). */
+  goal: dcounts.optional(),
   then: inputSpec.optional(),
 });
 const shareFields = z.object({
-  value: z.number().int().min(1).max(999),
+  /** A whole number on the blocks, or a decimal on the place-value chart (shared to at most three places). */
+  value: wholeOrDecimal,
   k: z.number().int().min(2).max(9),
   then: inputSpec,
+});
+
+/* Decimal tasks (docs/29 §3.6) */
+const shadeDecimalFields = z.object({
+  target: decimal,
+  level: z.union([z.literal(10), z.literal(100), z.literal(1000)]),
+  wholes: z.number().int().min(1).max(3).optional(),
+  /** Already shaded and locked (the given amount). */
+  start: decimal.optional(),
+  /** Only the amount shaded counts, not which squares. */
+  accept: z.literal('value').default('value'),
+});
+const roundOnLineFields = z.object({
+  value: decimal,
+  /** Rounded to the nearest whole number (0), 1 or 2 decimal places. */
+  to: z.union([z.literal(0), z.literal(1), z.literal(2)]),
+  /** `hidden`: the ends are not printed (the child names them in the written part). */
+  labels: z.enum(['ends', 'hidden']).default('ends'),
+  then: inputSpec,
+});
+const alignAddFields = z.object({
+  op: z.enum(['+', '−']),
+  a: decimal,
+  b: decimal,
+  /** Where the second row starts: under the last digit (`right`) or the first (`left`). */
+  start: z.enum(['right', 'left']).default('right'),
+  then: inputSpec,
+});
+const shiftDigitsFields = z.object({
+  value: decimal,
+  op: z.enum(['×', '÷']),
+  by: z.union([z.literal(10), z.literal(100), z.literal(1000)]),
 });
 
 export const taskSchema = z.discriminatedUnion('kind', [
@@ -680,6 +989,10 @@ export const taskSchema = z.discriminatedUnion('kind', [
   base.extend({ kind: z.literal('split-array') }).merge(splitArrayFields).strict(),
   base.extend({ kind: z.literal('regroup') }).merge(regroupFields).strict(),
   base.extend({ kind: z.literal('share') }).merge(shareFields).strict(),
+  base.extend({ kind: z.literal('shade-decimal') }).merge(shadeDecimalFields).strict(),
+  base.extend({ kind: z.literal('round-on-line') }).merge(roundOnLineFields).strict(),
+  base.extend({ kind: z.literal('align-add') }).merge(alignAddFields).strict(),
+  base.extend({ kind: z.literal('shift-digits') }).merge(shiftDigitsFields).strict(),
 ]);
 export type Task = z.output<typeof taskSchema>;
 export type TaskOf<K extends TaskKind> = Extract<Task, { kind: K }>;
@@ -709,7 +1022,7 @@ const syllabusLine = z
 /* ------------------------------------------------------------------ */
 
 /** How the stage gets from the previous beat to this one (a short eased transition; `morph` = another model kind). */
-export const BEAT_MOVES = ['cut', 'shade', 'fold', 'split', 'merge', 'convert', 'place', 'cross', 'morph', 'tile', 'walk', 'arrange', 'group', 'deal', 'rotate', 'cover', 'jump', 'combine', 'trade', 'sweep'] as const;
+export const BEAT_MOVES = ['cut', 'shade', 'fold', 'split', 'merge', 'convert', 'place', 'cross', 'morph', 'tile', 'walk', 'arrange', 'group', 'deal', 'rotate', 'cover', 'jump', 'combine', 'trade', 'sweep', 'zoom', 'slide', 'align', 'round'] as const;
 export type BeatMove = (typeof BEAT_MOVES)[number];
 
 const beatOverlay = z
@@ -777,6 +1090,26 @@ export const stepLimits = z
     step: z.number().int().min(1).max(60).optional(),
     /** Longest duration. */
     maxDuration: duration.optional(),
+    /* Decimals (docs/29 §1.3, X9) */
+    /** Places of the decimals a task gives, `[fewest, most]`. */
+    dp: z.tuple([z.number().int().min(0).max(3), z.number().int().min(0).max(3)]).optional(),
+    /** Most places an answer has. */
+    resultDp: z.number().int().min(0).max(3).optional(),
+    /** The whole number a decimal is multiplied or divided by, `[lo, hi]`. */
+    factor: z.tuple([z.number().int().min(1), z.number().int().min(1)]).optional(),
+    /** Denominators a fraction written as a decimal may have. */
+    denominators: z.array(z.number().int().min(1).max(1000)).min(1).optional(),
+    /** Rounding to `[fewest, most]` places. */
+    roundTo: z.tuple([z.number().int().min(0).max(2), z.number().int().min(0).max(2)]).optional(),
+    /** × ÷ by these (10, 100, 1000) and, with `multiples`, their multiples (20 … 900). */
+    by: z.array(z.union([z.literal(10), z.literal(100), z.literal(1000)])).min(1).optional(),
+    multiples: z.boolean().optional(),
+    /** The unit conversions allowed. */
+    units: z.array(z.enum(['km-m', 'm-cm', 'kg-g', 'l-ml'])).min(1).optional(),
+    /** Amounts of money are whole numbers of 5 cents. */
+    money: z.boolean().optional(),
+    /** Most zoom levels of a decimal line (0–2). */
+    zoomDepth: z.number().int().min(0).max(2).optional(),
   })
   .strict();
 export type StepLimits = z.output<typeof stepLimits>;

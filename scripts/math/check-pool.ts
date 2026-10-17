@@ -7,8 +7,8 @@
  * with the step's number limits: `--topic` + `--step` read them from that
  * topic's lesson.json, `--limits` gives them inline) and proved (`proveTask`:
  * solved by its solution, starts unsolved, every wrong sample and wrong option
- * diagnosed as declared). Prints one line per problem and exits 1 when there
- * is an error.
+ * diagnosed as declared) and warned about a wrong sample two declared codes
+ * both explain. Prints one line per problem and exits 1 when there is an error.
  */
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -16,6 +16,25 @@ import { parseArgs } from 'node:util';
 import { lessonFile, stepLimits, taskSchema, type StepLimits } from '../../src/engines/math-scene/schema';
 import { taskIssues } from '../../src/engines/math-scene/validate';
 import { proveTask } from '../../src/engines/math-scene/lib/proof';
+import { check } from '../../src/engines/math-scene/lib/check';
+import { sampleState } from '../../src/engines/math-scene/lib/solve';
+import type { Task } from '../../src/engines/math-scene/schema';
+
+/** Wrong samples another declared code explains too (docs/29 §3.8: the first in order wins; better numbers make the story single). */
+function sharedSamples(task: Task): string[] {
+  const out: string[] = [];
+  for (const w of task.feedback.wrong) {
+    const state = w.sample ? sampleState(task, w.sample) : null;
+    if (!state || task.kind === 'choose') continue;
+    for (const other of task.feedback.wrong) {
+      if (other.when === w.when) continue;
+      // The same answer, diagnosed with the other code looked for first.
+      const first = { ...task, feedback: { ...task.feedback, wrong: [other, ...task.feedback.wrong.filter((x) => x !== other)] } } as Task;
+      if (check(first, state).code === other.when) out.push(`sample "${w.sample}" of ${w.when} also shows ${other.when} (the first declared wins: pick numbers that tell them apart)`);
+    }
+  }
+  return out;
+}
 
 const { values: opts, positionals } = parseArgs({
   allowPositionals: true,
@@ -70,6 +89,7 @@ list.forEach((item, i) => {
     errors++;
     console.log(`ERROR ${name}: ${problem}`);
   }
+  for (const note of sharedSamples(task)) console.log(`WARN ${name}: ${note}`);
 });
 console.log(`${list.length} task(s), ${errors} error(s)`);
 process.exit(errors > 0 ? 1 : 0);

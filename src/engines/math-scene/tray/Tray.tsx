@@ -24,13 +24,16 @@ import { canMerge, commonParts, inputSpecOf, phasesOf, type TaskState } from '..
 import { answered, answersOf, segments, usesValueBoxes } from '../lib/check';
 import { solvedState } from '../lib/solve';
 import { denominatorEn, numberZh } from '../lib/words';
-import { formatFrac } from '../lib/fraction';
 import { GridModelControls } from './GridControls';
 import { WholeModelControls } from './WholeControls';
 import { AnswerInput } from './inputs';
 import { askOf } from '../lib/diagnose/measure';
 import { squared, unitText } from '../lib/value';
 import { answerTokens } from '../lib/working';
+import { asFrac } from '../lib/check';
+import { numText, numToken } from '../lib/decimal-tasks';
+import { decimalAnswerLine } from '../lib/decimal-working';
+import { DecimalModelControls, hasDecimalControls } from './DecimalControls';
 
 export interface TrayProps {
   ctl: Controller;
@@ -94,7 +97,13 @@ export function Tray(p: TrayProps) {
       {run.revealed && spec && (
         <span className="ms-tray__answer">
           {T('math.tray.answer')}{' '}
-          {task.model.kind === 'grid' ? gridAnswerText(task, locale) : usesValueBoxes(task, spec) ? renderRich(answerTokens(task), locale, { line: true }) : renderRich(answersOf(spec).map((f) => `{${f.w ? `${f.w} ` : ''}${f.n}/${f.d}}`).join(' = '), locale)}
+          {task.model.kind === 'grid'
+            ? gridAnswerText(task, locale)
+            : spec.form === 'decimal'
+              ? renderRich(decimalAnswerLine(task, locale), locale, { line: true })
+              : usesValueBoxes(task, spec)
+                ? renderRich(answerTokens(task), locale, { line: true })
+                : renderRich(answersOf(spec).map((f) => `{${f.w ? `${f.w} ` : ''}${f.n}/${f.d}}`).join(' = '), locale)}
         </span>
       )}
       {run.revealed && !p.practice && run.feedback?.tone !== 'reveal' && <p className="ms-tray__why">{renderRich(tx(task.feedback.reveal, locale), locale)}</p>}
@@ -163,6 +172,8 @@ function Controls(p: TrayProps & { phase: string; locked: boolean }) {
   const wholeKind = task.kind === 'group' || task.kind === 'arrange' || task.kind === 'skip-count' || task.kind === 'split-array' || task.kind === 'regroup' || task.kind === 'share';
   if (phase === 'model' && task.model.kind === 'grid' && task.kind !== 'choose') {
     parts.push(<GridModelControls key="grid" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
+  } else if (phase === 'model' && hasDecimalControls(task)) {
+    parts.push(<DecimalModelControls key="decimal" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
   } else if (phase === 'model' && wholeKind) {
     parts.push(<WholeModelControls key="whole" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
   } else if (phase === 'input') {
@@ -216,8 +227,8 @@ function Controls(p: TrayProps & { phase: string; locked: boolean }) {
     if (task.align) {
       parts.push(
         <button key="align" type="button" className="ms-btn ms-btn--ghost" aria-pressed={s.aligned} disabled={locked || s.aligned} onClick={() => ctl.act({ do: 'align' })}>
-          {T('math.tray.align')}
-          {s.aligned && <span className="ms-tray__count"> · {unitName(commonParts(task.a, task.b))}</span>}
+          {T(task.align === 'point' ? 'math.tray.alignPoint' : 'math.tray.align')}
+          {s.aligned && task.align !== 'point' && <span className="ms-tray__count"> · {unitName(commonParts(asFrac(task.a), asFrac(task.b)))}</span>}
         </button>,
       );
     }
@@ -282,7 +293,7 @@ function gridAnswerText(task: Task, locale: Locale): string {
   const m = task.model;
   if (!spec || m.kind !== 'grid') return '';
   const ask = askOf(task, spec)?.ask;
-  const unit = spec.unit ?? (ask === 'area' || task.kind === 'split-figure' ? squared(m.unit) : m.unit);
+  const unit = (spec.unit === 'dollar' ? undefined : spec.unit) ?? (ask === 'area' || task.kind === 'split-figure' ? squared(m.unit) : m.unit);
   const nums = answersOf(spec).map((f) => f.n);
   if (nums.length === 3) return `${nums[0]} + ${nums[1]} = ${nums[2]} ${unitText(unit, locale, nums[2])}`;
   return `${nums.join(', ')} ${unitText(unit, locale, nums[0])}`;
@@ -316,13 +327,13 @@ function SymbolPicker({ value, onPick, locked, locale, ghost, task }: { value: s
   const name = { '<': T('math.symbol.less'), '=': T('math.symbol.equal'), '>': T('math.symbol.greater') } as const;
   return (
     <div className="ms-symbols" role="radiogroup" aria-label={T('math.symbol.label')} onKeyDown={radioKeys}>
-      {task.kind === 'compare' && <span className="ms-symbols__side">{renderRich(`{${formatFrac(task.a)}}`, locale)}</span>}
+      {task.kind === 'compare' && <span className="ms-symbols__side">{renderRich(numToken(task.a), locale)}</span>}
       {(['<', '=', '>'] as const).map((v) => (
         <button key={v} type="button" role="radio" aria-checked={value === v} aria-label={name[v]} tabIndex={value === v || (value === null && v === '<') ? 0 : -1} className="ms-symbol-btn" data-ghost={ghost === v ? '' : undefined} disabled={locked} onClick={() => onPick(v)}>
           {v}
         </button>
       ))}
-      {task.kind === 'compare' && <span className="ms-symbols__side">{renderRich(`{${formatFrac(task.b)}}`, locale)}</span>}
+      {task.kind === 'compare' && <span className="ms-symbols__side">{renderRich(numToken(task.b), locale)}</span>}
     </div>
   );
 }
@@ -375,7 +386,7 @@ function OrderSlots({ task, state, ctl, locale, locked, ghost }: { task: Task; s
             <span key={i} className="ms-card ms-card--gone" aria-hidden="true" />
           ) : (
             <button key={i} type="button" className="ms-card" data-item={i} disabled={locked} onClick={() => ctl.act({ do: 'order', item: i })}>
-              {renderRich(`{${formatFrac(f)}}`, locale)}
+              {renderRich(numToken(f), locale)}
             </button>
           ),
         )}
@@ -385,10 +396,10 @@ function OrderSlots({ task, state, ctl, locale, locked, ghost }: { task: Task; s
         {task.items.map((_, k) => {
           const i = state.order[k];
           return (
-            <li key={k} data-ghost={right ? formatFrac(task.items[right[k]!]!) : undefined}>
+            <li key={k} data-ghost={right ? numText(task.items[right[k]!]!) : undefined}>
               {i !== undefined ? (
-                <button type="button" className="ms-card ms-card--placed" data-item={i} disabled={locked} aria-label={T('math.order.back', { name: formatFrac(task.items[i]!) })} onClick={() => ctl.act({ do: 'unorder', item: i })}>
-                  {renderRich(`{${formatFrac(task.items[i]!)}}`, locale)}
+                <button type="button" className="ms-card ms-card--placed" data-item={i} disabled={locked} aria-label={T('math.order.back', { name: numText(task.items[i]!) })} onClick={() => ctl.act({ do: 'unorder', item: i })}>
+                  {renderRich(numToken(task.items[i]!), locale)}
                 </button>
               ) : (
                 <span className="ms-slot" aria-label={T('math.order.empty', { n: k + 1 })} />

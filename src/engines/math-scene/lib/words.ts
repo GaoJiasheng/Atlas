@@ -4,13 +4,16 @@
  * whole numbers to 99 999 ("three hundred and five" /「三百零五」); place
  * values ("1 hundred 2 tens 0 ones"); times of day ("seven twenty p.m.",
  * "twenty past seven" /「晚上七点二十分」「十九时二十分」) and durations
- * ("one hour thirty-five minutes" /「一小时三十五分钟」). Used for aria labels,
+ * ("one hour thirty-five minutes" /「一小时三十五分钟」); decimals digit by digit
+ * after the point ("zero point three five" /「零点三五」, docs/29 D9) and money
+ * ("2 dollars 35 cents" /「2 元 35 分」). Used for aria labels,
  * the presentation's spoken captions and `speakable()` (src/lib/rich-text.ts).
  * A `?` in a slot (`{?/12}`, `{8/?}`) reads as a question: "how many
  * twelfths", "eight over what"; zh「十二分之几」「几分之八」.
  */
 import type { Frac } from './fraction';
 import { clockParts, durationParts, periodZh, type ClockMode, type DurUnit } from './value';
+import { fracDigits, wholePart, type Decimal } from './decimal';
 
 const ONES = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
 const TENS = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
@@ -93,6 +96,32 @@ export function numberZh(n: number): string {
 
 /** A whole number in words. */
 export const wholeWords = (n: number, locale: 'en' | 'zh'): string => (locale === 'zh' ? numberZh(n) : numberEn(n));
+
+/**
+ * A decimal read aloud, the digits after the point one by one as written
+ * (docs/29 D9): "zero point three five", "thirty-four point five zero six",
+ * "three point zero"; zh「零点三五」「三十四点五零六」. `more`: a decimal that
+ * goes on (`0.666…`): "…, and so on" /「……，一直下去」.
+ */
+export function decimalWords(d: Decimal, locale: 'en' | 'zh', more = false): string {
+  const f = [...fracDigits(d)].map(Number);
+  if (locale === 'zh') return `${numberZh(wholePart(d))}${f.length ? `点${f.map((x) => ZH_DIGITS[x]).join('')}` : ''}${more ? '，一直下去' : ''}`;
+  return `${numberEn(wholePart(d))}${f.length ? ` point ${f.map((x) => ONES[x]).join(' ')}` : ''}${more ? ', and so on' : ''}`;
+}
+
+/** An amount of money read aloud: "2 dollars 35 cents", "35 cents", "3 dollars"; zh「2 元 35 分」「35 分」「3 元」. */
+export function moneyWords(cents: number, locale: 'en' | 'zh'): string {
+  const dollars = Math.floor(cents / 100);
+  const c = cents % 100;
+  if (locale === 'zh') return [dollars || !c ? `${dollars} 元` : '', c ? `${c} 分` : ''].filter(Boolean).join(' ');
+  return [dollars || !c ? `${dollars} dollar${dollars === 1 ? '' : 's'}` : '', c ? `${c} cent${c === 1 ? '' : 's'}` : ''].filter(Boolean).join(' ');
+}
+
+/** The name of a decimal place: `tenths` /「十分位」 (1 = tenths … 3 = thousandths). */
+export function decimalPlaceName(place: number, locale: 'en' | 'zh'): string {
+  if (locale === 'zh') return ['', '十分位', '百分位', '千分位'][place] ?? '';
+  return ['', 'tenths', 'hundredths', 'thousandths'][place] ?? '';
+}
 
 const PLACE_NAMES = {
   en: [

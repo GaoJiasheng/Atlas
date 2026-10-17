@@ -140,7 +140,7 @@ export function BlocksModel(p: BlocksModelProps) {
   const reserveW = cc && wide ? Math.min(0.34 * box.w, cc.cols * 34 + 40) : 0;
   const reserveH = cc && !wide ? Math.min(box.h * 0.4, cc.rows * 1.5 * 26 + 20) : 0;
   // The plates are laid out for the share's last blocks (each plate's digits of the quotient), so they never grow.
-  const value = task?.kind === 'share' ? task.value : (m.value ?? total(matOf(m)) + k * total(counts(m.dealt)));
+  const value = task?.kind === 'share' && typeof task.value === 'number' ? task.value : (m.value ?? total(matOf(m)) + k * total(counts(m.dealt)));
   const each = k > 0 ? standard(Math.floor(value / k)) : standard(0);
   const fit = matLayout(m.mat ? rowsOf : [ZERO_ROW], k > 0 && m.mat ? { k, each } : null, { w: Math.max(120, box.w - reserveW - 20), h: box.h - reserveH }, p.mini ? 4 : 10);
   const u = fit.u;

@@ -1,0 +1,2756 @@
+{
+  "syllabus": [
+    {
+      "id": "placeholder",
+      "level": "P4",
+      "ref": "Placeholder",
+      "source": "S1",
+      "text": {
+        "en": "Placeholder: no syllabus anchor.",
+        "zh": "占位：没有课纲条目。"
+      }
+    }
+  ],
+  "steps": [
+    {
+      "id": "grids-and-money",
+      "lo": [
+        "placeholder"
+      ],
+      "views": [
+        "decimal-grid",
+        "place-value",
+        "numberline"
+      ],
+      "limits": {
+        "money": true,
+        "dp": [
+          1,
+          3
+        ]
+      },
+      "beats": [
+        {
+          "model": {
+            "kind": "money",
+            "amount": "2.35"
+          },
+          "caption": {
+            "en": "Placeholder: 2 dollars and 35 cents on a tray.",
+            "zh": "占位：托盘上的 2 元 35 分。"
+          },
+          "equation": "$2.35"
+        },
+        {
+          "model": {
+            "kind": "money",
+            "amount": "2.35",
+            "layout": "by-place"
+          },
+          "caption": {
+            "en": "Placeholder: the coins in columns.",
+            "zh": "占位：硬币按列排好。"
+          },
+          "move": "arrange",
+          "equation": "$2.35 = $2 + $0.30 + $0.05"
+        },
+        {
+          "model": {
+            "kind": "money",
+            "pieces": [
+              "0.1",
+              "0.1",
+              "0.1",
+              "0.1",
+              "0.1",
+              "0.1",
+              "0.1",
+              "0.1",
+              "0.1",
+              "0.1"
+            ],
+            "layout": "by-place",
+            "trade": "t>O"
+          },
+          "caption": {
+            "en": "Placeholder: ten 10-cent coins make a dollar.",
+            "zh": "占位：10 枚 10 分是 1 元。"
+          },
+          "move": "trade",
+          "equation": "10 × $0.10 = $1"
+        },
+        {
+          "model": {
+            "kind": "decimal-grid",
+            "level": 100,
+            "runs": [
+              {
+                "value": "0.3",
+                "tone": "cold"
+              },
+              {
+                "value": "0.05",
+                "tone": "signal"
+              }
+            ]
+          },
+          "caption": {
+            "en": "Placeholder: 3 strips and 5 squares.",
+            "zh": "占位：3 条再加 5 小格。"
+          },
+          "move": "morph",
+          "equation": "0.3 + 0.05 = 0.35"
+        },
+        {
+          "model": {
+            "kind": "decimal-grid",
+            "level": 1000,
+            "given": "0.235",
+            "zoom": {
+              "at": "0.23"
+            }
+          },
+          "caption": {
+            "en": "Placeholder: the next square in ten slivers.",
+            "zh": "占位：下一格切成 10 细条。"
+          },
+          "move": "zoom",
+          "equation": "0.235 = 0.2 + 0.03 + 0.005"
+        }
+      ],
+      "keyFacts": [
+        {
+          "en": "Placeholder fact one.",
+          "zh": "占位要点一。"
+        },
+        {
+          "en": "Placeholder fact two.",
+          "zh": "占位要点二。"
+        }
+      ],
+      "pool": [
+        {
+          "id": "gm-shade-006",
+          "kind": "shade-decimal",
+          "model": {
+            "kind": "decimal-grid",
+            "level": 100
+          },
+          "prompt": {
+            "en": "Placeholder: shade 0.06 of the grid.",
+            "zh": "占位：涂出 0.06。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "zero-placeholder",
+                "say": {
+                  "en": "Placeholder feedback for zero-placeholder.",
+                  "zh": "占位反馈：zero-placeholder。"
+                },
+                "sample": "0.6"
+              }
+            ]
+          },
+          "target": "0.06",
+          "level": 100
+        },
+        {
+          "id": "gm-shade-0104",
+          "kind": "shade-decimal",
+          "model": {
+            "kind": "decimal-grid",
+            "level": 1000
+          },
+          "prompt": {
+            "en": "Placeholder: shade 0.104 of the grid.",
+            "zh": "占位：涂出 0.104。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "zero-placeholder",
+                "say": {
+                  "en": "Placeholder feedback for zero-placeholder.",
+                  "zh": "占位反馈：zero-placeholder。"
+                },
+                "sample": "0.14"
+              }
+            ]
+          },
+          "target": "0.104",
+          "level": 1000
+        },
+        {
+          "id": "gm-shade-16",
+          "kind": "shade-decimal",
+          "model": {
+            "kind": "decimal-grid",
+            "level": 10,
+            "wholes": 2
+          },
+          "prompt": {
+            "en": "Placeholder: shade 1.6.",
+            "zh": "占位：涂出 1.6。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": []
+          },
+          "target": "1.6",
+          "level": 10,
+          "wholes": 2
+        },
+        {
+          "id": "gm-coins-160",
+          "kind": "input",
+          "model": {
+            "kind": "money",
+            "pieces": [
+              "1",
+              "0.5",
+              "0.1"
+            ]
+          },
+          "prompt": {
+            "en": "Placeholder: how much money is this?",
+            "zh": "占位：这是多少钱？"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "places-short",
+                "say": {
+                  "en": "Placeholder feedback for places-short.",
+                  "zh": "占位反馈：places-short。"
+                },
+                "sample": "1.6"
+              }
+            ]
+          },
+          "answer": "1.60",
+          "form": "decimal",
+          "unit": "dollar"
+        },
+        {
+          "id": "gm-cents-250",
+          "kind": "input",
+          "model": {
+            "kind": "money",
+            "amount": "2.50"
+          },
+          "prompt": {
+            "en": "Placeholder: write $2.50 in cents.",
+            "zh": "占位：把 $2.50 写成分。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "decimal-as-subunit",
+                "say": {
+                  "en": "Placeholder feedback for decimal-as-subunit.",
+                  "zh": "占位反馈：decimal-as-subunit。"
+                },
+                "sample": "205"
+              }
+            ]
+          },
+          "answer": 250,
+          "form": "decimal",
+          "work": {
+            "do": "convert",
+            "a": "2.5",
+            "from": "dollar",
+            "into": "cent"
+          }
+        },
+        {
+          "id": "gm-choose-125",
+          "kind": "choose",
+          "model": {
+            "kind": "money",
+            "amount": "1.25"
+          },
+          "prompt": {
+            "en": "Placeholder: which tray holds $1.25?",
+            "zh": "占位：哪一盘是 $1.25？"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "place-order",
+                "say": {
+                  "en": "Placeholder feedback for place-order.",
+                  "zh": "占位反馈：place-order。"
+                },
+                "sample": "b"
+              },
+              {
+                "when": "point-separator",
+                "say": {
+                  "en": "Placeholder feedback for point-separator.",
+                  "zh": "占位反馈：point-separator。"
+                },
+                "sample": "c"
+              }
+            ]
+          },
+          "options": [
+            {
+              "id": "a",
+              "correct": true,
+              "model": {
+                "kind": "money",
+                "pieces": [
+                  "1",
+                  "0.1",
+                  "0.1",
+                  "0.05"
+                ]
+              }
+            },
+            {
+              "id": "b",
+              "correct": false,
+              "misconception": "place-order",
+              "model": {
+                "kind": "money",
+                "pieces": [
+                  "1",
+                  "0.1",
+                  "0.1",
+                  "0.1",
+                  "0.1",
+                  "0.1",
+                  "0.1",
+                  "0.1"
+                ]
+              }
+            },
+            {
+              "id": "c",
+              "correct": false,
+              "misconception": "point-separator",
+              "model": {
+                "kind": "money",
+                "pieces": [
+                  "1",
+                  "1",
+                  "0.5"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "gm-compare-03-025",
+          "kind": "compare",
+          "model": {
+            "kind": "decimal-grid",
+            "level": 100,
+            "pair": [
+              {
+                "level": 100,
+                "given": "0.3"
+              },
+              {
+                "level": 100,
+                "given": "0.25",
+                "tone": "hot"
+              }
+            ]
+          },
+          "prompt": {
+            "en": "Placeholder: which is greater, 0.3 or 0.25?",
+            "zh": "占位：0.3 和 0.25 哪个大？"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "longer-is-larger",
+                "say": {
+                  "en": "Placeholder feedback for longer-is-larger.",
+                  "zh": "占位反馈：longer-is-larger。"
+                },
+                "sample": "<"
+              }
+            ]
+          },
+          "a": "0.3",
+          "b": "0.25",
+          "align": "point"
+        },
+        {
+          "id": "gm-fraction-035",
+          "kind": "input",
+          "model": {
+            "kind": "decimal-grid",
+            "level": 100,
+            "given": "0.35"
+          },
+          "prompt": {
+            "en": "Placeholder: write 0.35 as a fraction in its simplest form.",
+            "zh": "占位：把 0.35 化成最简分数。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "place-denominator",
+                "say": {
+                  "en": "Placeholder feedback for place-denominator.",
+                  "zh": "占位反馈：place-denominator。"
+                },
+                "sample": "35/10"
+              },
+              {
+                "when": "not-simplest",
+                "say": {
+                  "en": "Placeholder feedback for not-simplest.",
+                  "zh": "占位反馈：not-simplest。"
+                },
+                "sample": "35/100"
+              }
+            ]
+          },
+          "answer": "7/20",
+          "form": "simplest",
+          "work": {
+            "do": "to-fraction",
+            "of": "0.35"
+          }
+        }
+      ]
+    },
+    {
+      "id": "lines-and-rounding",
+      "lo": [
+        "placeholder"
+      ],
+      "limits": {
+        "zoomDepth": 2,
+        "roundTo": [
+          0,
+          2
+        ],
+        "dp": [
+          1,
+          3
+        ]
+      },
+      "beats": [
+        {
+          "model": {
+            "kind": "numberline",
+            "scale": "decimal",
+            "from": "0",
+            "to": "1",
+            "step": "0.1",
+            "labels": "all",
+            "marks": [
+              "0.3"
+            ]
+          },
+          "caption": {
+            "en": "Placeholder: ten jumps of 0.1.",
+            "zh": "占位：每段 0.1，共 10 段。"
+          },
+          "equation": "0.3"
+        },
+        {
+          "model": {
+            "kind": "numberline",
+            "scale": "decimal",
+            "from": "0",
+            "to": "1",
+            "step": "0.1",
+            "labels": "all",
+            "zoom": [
+              {
+                "from": "0.2",
+                "to": "0.3"
+              }
+            ]
+          },
+          "caption": {
+            "en": "Placeholder: the gap from 0.2 to 0.3, ten times bigger.",
+            "zh": "占位：0.2 到 0.3 这一段放大十倍。"
+          },
+          "move": "zoom",
+          "equation": "0.2 < 0.235 < 0.3"
+        },
+        {
+          "model": {
+            "kind": "numberline",
+            "scale": "decimal",
+            "from": "0",
+            "to": "1",
+            "step": "0.1",
+            "labels": "all",
+            "zoom": [
+              {
+                "from": "0.2",
+                "to": "0.3"
+              },
+              {
+                "from": "0.23",
+                "to": "0.24"
+              }
+            ],
+            "marks": [
+              "0.235"
+            ]
+          },
+          "caption": {
+            "en": "Placeholder: once more: jumps of 0.001.",
+            "zh": "占位：再放大一次：每段 0.001。"
+          },
+          "move": "zoom",
+          "equation": "0.23 < 0.235 < 0.24"
+        },
+        {
+          "model": {
+            "kind": "numberline",
+            "scale": "decimal",
+            "from": "2.9",
+            "to": "3.0",
+            "step": "0.01",
+            "labels": "ends",
+            "marks": [
+              "2.96"
+            ],
+            "halfway": true,
+            "nearest": "3.0"
+          },
+          "caption": {
+            "en": "Placeholder: 2.96 is nearer 3.0.",
+            "zh": "占位：2.96 离 3.0 近。"
+          },
+          "move": "round",
+          "equation": "2.96 ≈ 3.0"
+        },
+        {
+          "model": {
+            "kind": "numberline",
+            "scale": "decimal",
+            "from": "0",
+            "to": "2",
+            "step": "0.1",
+            "labels": "wholes",
+            "unit": "km",
+            "dual": {
+              "unit": "m",
+              "factor": 1000
+            },
+            "marks": [
+              "1.6"
+            ]
+          },
+          "caption": {
+            "en": "Placeholder: kilometres above, metres below.",
+            "zh": "占位：上面是千米，下面是米。"
+          },
+          "move": "morph",
+          "equation": "{u:1.6 km} = {u:1600 m}"
+        }
+      ],
+      "keyFacts": [
+        {
+          "en": "Placeholder fact one.",
+          "zh": "占位要点一。"
+        },
+        {
+          "en": "Placeholder fact two.",
+          "zh": "占位要点二。"
+        }
+      ],
+      "pool": [
+        {
+          "id": "lr-place-0235",
+          "kind": "place",
+          "model": {
+            "kind": "numberline",
+            "scale": "decimal",
+            "from": "0",
+            "to": "1",
+            "step": "0.1",
+            "labels": "all"
+          },
+          "prompt": {
+            "en": "Placeholder: put 0.235 on the line. Zoom in as you need.",
+            "zh": "占位：把 0.235 放到数轴上，需要就放大。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "tick-counting",
+                "say": {
+                  "en": "Placeholder feedback for tick-counting.",
+                  "zh": "占位反馈：tick-counting。"
+                },
+                "sample": "0.234"
+              },
+              {
+                "when": "place-order",
+                "say": {
+                  "en": "Placeholder feedback for place-order.",
+                  "zh": "占位反馈：place-order。"
+                },
+                "sample": "0.325"
+              }
+            ]
+          },
+          "target": "0.235",
+          "zoom": 2
+        },
+        {
+          "id": "lr-place-08",
+          "kind": "place",
+          "model": {
+            "kind": "numberline",
+            "scale": "decimal",
+            "from": "0",
+            "to": "1",
+            "step": "0.1",
+            "labels": "ends"
+          },
+          "prompt": {
+            "en": "Placeholder: put 0.8 on the line.",
+            "zh": "占位：把 0.8 放到数轴上。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "tick-counting",
+                "say": {
+                  "en": "Placeholder feedback for tick-counting.",
+                  "zh": "占位反馈：tick-counting。"
+                },
+                "sample": "0.7"
+              }
+            ]
+          },
+          "target": "0.8"
+        },
+        {
+          "id": "lr-place-0306",
+          "kind": "place",
+          "model": {
+            "kind": "numberline",
+            "scale": "decimal",
+            "from": "0",
+            "to": "1",
+            "step": "0.1",
+            "labels": "all"
+          },
+          "prompt": {
+            "en": "Placeholder: put 0.306 on the line.",
+            "zh": "占位：把 0.306 放到数轴上。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "zero-placeholder",
+                "say": {
+                  "en": "Placeholder feedback for zero-placeholder.",
+                  "zh": "占位反馈：zero-placeholder。"
+                },
+                "sample": "0.36"
+              }
+            ]
+          },
+          "target": "0.306",
+          "zoom": 2
+        },
+        {
+          "id": "lr-round-296",
+          "kind": "round-on-line",
+          "model": {
+            "kind": "numberline",
+            "scale": "decimal",
+            "from": "2.9",
+            "to": "3.0",
+            "step": "0.01",
+            "labels": "ends",
+            "marks": [
+              "2.96"
+            ],
+            "halfway": true
+          },
+          "prompt": {
+            "en": "Placeholder: round 2.96 to 1 decimal place.",
+            "zh": "占位：把 2.96 四舍五入到一位小数。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "round-truncated",
+                "say": {
+                  "en": "Placeholder feedback for round-truncated.",
+                  "zh": "占位反馈：round-truncated。"
+                },
+                "sample": "end:2.9"
+              },
+              {
+                "when": "round-carry-slip",
+                "say": {
+                  "en": "Placeholder feedback for round-carry-slip.",
+                  "zh": "占位反馈：round-carry-slip。"
+                },
+                "sample": "=2.10"
+              },
+              {
+                "when": "places-short",
+                "say": {
+                  "en": "Placeholder feedback for places-short.",
+                  "zh": "占位反馈：places-short。"
+                },
+                "sample": "=3"
+              }
+            ]
+          },
+          "value": "2.96",
+          "to": 1,
+          "then": {
+            "answer": "3.0",
+            "form": "decimal",
+            "places": 1
+          }
+        },
+        {
+          "id": "lr-round-065",
+          "kind": "round-on-line",
+          "model": {
+            "kind": "numberline",
+            "scale": "decimal",
+            "from": "0.6",
+            "to": "0.7",
+            "step": "0.01",
+            "labels": "ends",
+            "marks": [
+              "0.65"
+            ],
+            "halfway": true
+          },
+          "prompt": {
+            "en": "Placeholder: round 0.65 to 1 decimal place.",
+            "zh": "占位：把 0.65 四舍五入到一位小数。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "round-half-down",
+                "say": {
+                  "en": "Placeholder feedback for round-half-down.",
+                  "zh": "占位反馈：round-half-down。"
+                },
+                "sample": "end:0.6"
+              }
+            ]
+          },
+          "value": "0.65",
+          "to": 1,
+          "then": {
+            "answer": "0.7",
+            "form": "decimal",
+            "places": 1
+          }
+        },
+        {
+          "id": "lr-read-027",
+          "kind": "input",
+          "model": {
+            "kind": "numberline",
+            "scale": "decimal",
+            "from": "0.2",
+            "to": "0.3",
+            "step": "0.01",
+            "labels": "ends",
+            "arrow": "0.27"
+          },
+          "prompt": {
+            "en": "Placeholder: which number does the arrow show?",
+            "zh": "占位：箭头指着哪个数？"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "interval-misread",
+                "say": {
+                  "en": "Placeholder feedback for interval-misread.",
+                  "zh": "占位反馈：interval-misread。"
+                },
+                "sample": "0.9"
+              },
+              {
+                "when": "tick-counting",
+                "say": {
+                  "en": "Placeholder feedback for tick-counting.",
+                  "zh": "占位反馈：tick-counting。"
+                },
+                "sample": "0.28"
+              }
+            ]
+          },
+          "answer": "0.27",
+          "form": "decimal",
+          "work": {
+            "do": "read",
+            "line": {
+              "from": "0.2",
+              "step": "0.01"
+            },
+            "tick": 7
+          }
+        },
+        {
+          "id": "lr-round-1257",
+          "kind": "input",
+          "model": {
+            "kind": "numberline",
+            "scale": "decimal",
+            "from": "12.5",
+            "to": "12.6",
+            "step": "0.01",
+            "labels": "ends",
+            "marks": [
+              "12.57"
+            ]
+          },
+          "prompt": {
+            "en": "Placeholder: round 12.57 to 1 decimal place.",
+            "zh": "占位：把 12.57 四舍五入到一位小数。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "round-wrong-place",
+                "say": {
+                  "en": "Placeholder feedback for round-wrong-place.",
+                  "zh": "占位反馈：round-wrong-place。"
+                },
+                "sample": "13"
+              },
+              {
+                "when": "round-truncated",
+                "say": {
+                  "en": "Placeholder feedback for round-truncated.",
+                  "zh": "占位反馈：round-truncated。"
+                },
+                "sample": "12.5"
+              }
+            ]
+          },
+          "answer": "12.6",
+          "form": "decimal",
+          "places": 1,
+          "work": {
+            "do": "round",
+            "a": "12.57",
+            "to": 1
+          }
+        },
+        {
+          "id": "lr-order-four",
+          "kind": "order",
+          "model": {
+            "kind": "numberline",
+            "scale": "decimal",
+            "from": "0.4",
+            "to": "0.6",
+            "step": "0.01",
+            "labels": "ends"
+          },
+          "prompt": {
+            "en": "Placeholder: order from the smallest: 0.5, 0.45, 0.405, 0.54.",
+            "zh": "占位：从小到大排：0.5、0.45、0.405、0.54。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "longer-is-larger",
+                "say": {
+                  "en": "Placeholder feedback for longer-is-larger.",
+                  "zh": "占位反馈：longer-is-larger。"
+                },
+                "sample": "0.5,0.45,0.54,0.405"
+              },
+              {
+                "when": "shorter-is-larger",
+                "say": {
+                  "en": "Placeholder feedback for shorter-is-larger.",
+                  "zh": "占位反馈：shorter-is-larger。"
+                },
+                "sample": "0.405,0.45,0.54,0.5"
+              }
+            ]
+          },
+          "items": [
+            "0.5",
+            "0.45",
+            "0.405",
+            "0.54"
+          ],
+          "direction": "asc",
+          "line": true
+        },
+        {
+          "id": "lr-compare-209-21",
+          "kind": "compare",
+          "model": {
+            "kind": "numberline",
+            "scale": "decimal",
+            "from": "2",
+            "to": "2.2",
+            "step": "0.01",
+            "labels": "ends"
+          },
+          "prompt": {
+            "en": "Placeholder: which is greater, 2.09 or 2.1?",
+            "zh": "占位：2.09 和 2.1 哪个大？"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "longer-is-larger",
+                "say": {
+                  "en": "Placeholder feedback for longer-is-larger.",
+                  "zh": "占位反馈：longer-is-larger。"
+                },
+                "sample": ">"
+              }
+            ]
+          },
+          "a": "2.09",
+          "b": "2.1"
+        }
+      ]
+    },
+    {
+      "id": "charts-and-columns",
+      "lo": [
+        "placeholder"
+      ],
+      "limits": {
+        "factor": [
+          2,
+          9
+        ],
+        "resultDp": 3,
+        "dp": [
+          0,
+          2
+        ]
+      },
+      "beats": [
+        {
+          "model": {
+            "kind": "place-value",
+            "columns": [
+              "T",
+              "O",
+              "t",
+              "h",
+              "th"
+            ],
+            "value": "34.506",
+            "show": "both"
+          },
+          "caption": {
+            "en": "Placeholder: each digit in its place.",
+            "zh": "占位：每个数字在自己的位。"
+          },
+          "equation": "34.506 = 30 + 4 + 0.5 + 0.006"
+        },
+        {
+          "model": {
+            "kind": "place-value",
+            "rows": [
+              "3.4",
+              "1.25"
+            ],
+            "align": "right"
+          },
+          "caption": {
+            "en": "Placeholder: lined up on the last digit.",
+            "zh": "占位：按最后一位对齐。"
+          },
+          "move": "morph",
+          "equation": "3.4 + 1.25 = ?"
+        },
+        {
+          "model": {
+            "kind": "place-value",
+            "rows": [
+              "3.4",
+              "1.25"
+            ],
+            "align": "point",
+            "pad": true
+          },
+          "caption": {
+            "en": "Placeholder: lined up on the point, zeros filled in.",
+            "zh": "占位：按小数点对齐，补上 0。"
+          },
+          "move": "align",
+          "equation": "3.40 + 1.25 = 4.65"
+        },
+        {
+          "model": {
+            "kind": "place-value",
+            "value": "2.35",
+            "copies": 3,
+            "combined": true,
+            "show": "discs",
+            "trade": "h>t",
+            "column": {
+              "op": "×",
+              "a": "2.35",
+              "b": "3"
+            }
+          },
+          "caption": {
+            "en": "Placeholder: three rows pushed together.",
+            "zh": "占位：三行推到一起。"
+          },
+          "move": "combine",
+          "equation": "2.35 × 3 = 7.05"
+        },
+        {
+          "model": {
+            "kind": "place-value",
+            "value": "5.6",
+            "plates": 4,
+            "dealt": {
+              "O": 1,
+              "t": 4
+            },
+            "show": "discs",
+            "column": {
+              "op": "÷",
+              "a": "5.6",
+              "b": "4"
+            }
+          },
+          "caption": {
+            "en": "Placeholder: 1 one and 4 tenths each.",
+            "zh": "占位：每份 1 个一、4 个十分之一。"
+          },
+          "move": "deal",
+          "equation": "5.6 ÷ 4 = 1.4"
+        }
+      ],
+      "keyFacts": [
+        {
+          "en": "Placeholder fact one.",
+          "zh": "占位要点一。"
+        },
+        {
+          "en": "Placeholder fact two.",
+          "zh": "占位要点二。"
+        }
+      ],
+      "pool": [
+        {
+          "id": "cc-align-34-125",
+          "kind": "align-add",
+          "model": {
+            "kind": "place-value",
+            "show": "digits",
+            "rows": [
+              "3.4",
+              "1.25"
+            ]
+          },
+          "prompt": {
+            "en": "Placeholder: line up the points, then add 3.4 + 1.25.",
+            "zh": "占位：对齐小数点，再算 3.4 + 1.25。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "aligned-right",
+                "say": {
+                  "en": "Placeholder feedback for aligned-right.",
+                  "zh": "占位反馈：aligned-right。"
+                },
+                "sample": "align:right"
+              }
+            ]
+          },
+          "op": "+",
+          "a": "3.4",
+          "b": "1.25",
+          "then": {
+            "answer": "4.65",
+            "form": "decimal"
+          }
+        },
+        {
+          "id": "cc-align-72-265",
+          "kind": "align-add",
+          "model": {
+            "kind": "place-value",
+            "show": "digits",
+            "rows": [
+              "7.2",
+              "2.65"
+            ]
+          },
+          "prompt": {
+            "en": "Placeholder: line up the points, then work out 7.2 − 2.65.",
+            "zh": "占位：对齐小数点，再算 7.2 − 2.65。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "aligned-right",
+                "say": {
+                  "en": "Placeholder feedback for aligned-right.",
+                  "zh": "占位反馈：aligned-right。"
+                },
+                "sample": "align:right"
+              },
+              {
+                "when": "empty-place-brought-down",
+                "say": {
+                  "en": "Placeholder feedback for empty-place-brought-down.",
+                  "zh": "占位反馈：empty-place-brought-down。"
+                },
+                "sample": "=4.65"
+              },
+              {
+                "when": "smaller-from-larger",
+                "say": {
+                  "en": "Placeholder feedback for smaller-from-larger.",
+                  "zh": "占位反馈：smaller-from-larger。"
+                },
+                "sample": "=5.45"
+              }
+            ]
+          },
+          "op": "−",
+          "a": "7.2",
+          "b": "2.65",
+          "then": {
+            "answer": "4.55",
+            "form": "decimal"
+          }
+        },
+        {
+          "id": "cc-share-56",
+          "kind": "share",
+          "model": {
+            "kind": "place-value",
+            "value": "5.6",
+            "plates": 4,
+            "show": "discs",
+            "columns": [
+              "O",
+              "t",
+              "h"
+            ]
+          },
+          "prompt": {
+            "en": "Placeholder: share 5.6 equally into 4, then write each share.",
+            "zh": "占位：把 5.6 平均分成 4 份，再写出每份。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "point-misplaced",
+                "say": {
+                  "en": "Placeholder feedback for point-misplaced.",
+                  "zh": "占位反馈：point-misplaced。"
+                },
+                "sample": "=14"
+              }
+            ]
+          },
+          "value": "5.6",
+          "k": 4,
+          "then": {
+            "answer": "1.4",
+            "form": "decimal"
+          }
+        },
+        {
+          "id": "cc-share-15",
+          "kind": "share",
+          "model": {
+            "kind": "place-value",
+            "value": "1.5",
+            "plates": 4,
+            "show": "discs",
+            "columns": [
+              "O",
+              "t",
+              "h",
+              "th"
+            ]
+          },
+          "prompt": {
+            "en": "Placeholder: share 1.5 equally into 4.",
+            "zh": "占位：把 1.5 平均分成 4 份。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": []
+          },
+          "value": "1.5",
+          "k": 4,
+          "then": {
+            "answer": "0.375",
+            "form": "decimal"
+          }
+        },
+        {
+          "id": "cc-regroup-013",
+          "kind": "regroup",
+          "model": {
+            "kind": "place-value",
+            "show": "discs",
+            "columns": [
+              "O",
+              "t",
+              "h"
+            ],
+            "left": {
+              "h": 13
+            },
+            "value": "0.13"
+          },
+          "prompt": {
+            "en": "Placeholder: trade, then write the number.",
+            "zh": "占位：换一换，再写出这个数。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "zero-placeholder",
+                "say": {
+                  "en": "Placeholder feedback for zero-placeholder.",
+                  "zh": "占位反馈：zero-placeholder。"
+                },
+                "sample": "=0.013"
+              }
+            ]
+          },
+          "value": "0.13",
+          "start": {
+            "h": 13
+          },
+          "then": {
+            "answer": "0.13",
+            "form": "decimal"
+          }
+        },
+        {
+          "id": "cc-regroup-072",
+          "kind": "regroup",
+          "model": {
+            "kind": "place-value",
+            "show": "discs",
+            "columns": [
+              "O",
+              "t",
+              "h"
+            ],
+            "value": "0.72"
+          },
+          "prompt": {
+            "en": "Placeholder: trade 1 tenth for 10 hundredths.",
+            "zh": "占位：把 1 个十分之一换成 10 个百分之一。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": []
+          },
+          "value": "0.72",
+          "start": {
+            "t": 7,
+            "h": 2
+          },
+          "goal": {
+            "t": 6,
+            "h": 12
+          }
+        },
+        {
+          "id": "cc-add-068-057",
+          "kind": "input",
+          "model": {
+            "kind": "place-value",
+            "show": "digits",
+            "rows": [
+              "0.68",
+              "0.57"
+            ]
+          },
+          "prompt": {
+            "en": "Placeholder: work out 0.68 + 0.57.",
+            "zh": "占位：算 0.68 + 0.57。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "carry-not-added",
+                "say": {
+                  "en": "Placeholder feedback for carry-not-added.",
+                  "zh": "占位反馈：carry-not-added。"
+                },
+                "sample": "0.15"
+              },
+              {
+                "when": "point-separator",
+                "say": {
+                  "en": "Placeholder feedback for point-separator.",
+                  "zh": "占位反馈：point-separator。"
+                },
+                "sample": "0.125"
+              }
+            ]
+          },
+          "answer": "1.25",
+          "form": "decimal",
+          "work": {
+            "do": "add",
+            "a": "0.68",
+            "b": "0.57"
+          }
+        },
+        {
+          "id": "cc-times-236",
+          "kind": "input",
+          "model": {
+            "kind": "place-value",
+            "show": "digits",
+            "value": "2.36"
+          },
+          "prompt": {
+            "en": "Placeholder: work out 2.36 × 4.",
+            "zh": "占位：算 2.36 × 4。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "carry-not-added",
+                "say": {
+                  "en": "Placeholder feedback for carry-not-added.",
+                  "zh": "占位反馈：carry-not-added。"
+                },
+                "sample": "8.24"
+              },
+              {
+                "when": "point-misplaced",
+                "say": {
+                  "en": "Placeholder feedback for point-misplaced.",
+                  "zh": "占位反馈：point-misplaced。"
+                },
+                "sample": "94.4"
+              },
+              {
+                "when": "point-separator",
+                "say": {
+                  "en": "Placeholder feedback for point-separator.",
+                  "zh": "占位反馈：point-separator。"
+                },
+                "sample": "8.144"
+              }
+            ]
+          },
+          "answer": "9.44",
+          "form": "decimal",
+          "work": {
+            "do": "multiply",
+            "a": "2.36",
+            "b": "4"
+          }
+        },
+        {
+          "id": "cc-divide-612",
+          "kind": "input",
+          "model": {
+            "kind": "place-value",
+            "show": "digits",
+            "value": "6.12"
+          },
+          "prompt": {
+            "en": "Placeholder: work out 6.12 ÷ 6.",
+            "zh": "占位：算 6.12 ÷ 6。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "zero-in-quotient",
+                "say": {
+                  "en": "Placeholder feedback for zero-in-quotient.",
+                  "zh": "占位反馈：zero-in-quotient。"
+                },
+                "sample": "1.2"
+              }
+            ]
+          },
+          "answer": "1.02",
+          "form": "decimal",
+          "work": {
+            "do": "divide",
+            "a": "6.12",
+            "b": "6"
+          }
+        },
+        {
+          "id": "cc-divide-9-4",
+          "kind": "input",
+          "model": {
+            "kind": "money",
+            "amount": "9.00"
+          },
+          "prompt": {
+            "en": "Placeholder: $9 is shared equally among 4. How much does each get?",
+            "zh": "占位：$9 平均分给 4 人，每人多少？"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "remainder-as-decimal",
+                "say": {
+                  "en": "Placeholder feedback for remainder-as-decimal.",
+                  "zh": "占位反馈：remainder-as-decimal。"
+                },
+                "sample": "2.10"
+              },
+              {
+                "when": "point-misplaced",
+                "say": {
+                  "en": "Placeholder feedback for point-misplaced.",
+                  "zh": "占位反馈：point-misplaced。"
+                },
+                "sample": "22.50"
+              }
+            ]
+          },
+          "answer": "2.25",
+          "form": "decimal",
+          "unit": "dollar",
+          "work": {
+            "do": "divide",
+            "a": "9",
+            "b": "4"
+          }
+        }
+      ]
+    },
+    {
+      "id": "shifts-and-measures",
+      "lo": [
+        "placeholder"
+      ],
+      "bridge": true,
+      "views": [
+        "decimal-grid",
+        "place-value",
+        "numberline"
+      ],
+      "limits": {
+        "by": [
+          10,
+          100,
+          1000
+        ],
+        "multiples": true,
+        "units": [
+          "km-m",
+          "m-cm",
+          "kg-g",
+          "l-ml"
+        ]
+      },
+      "beats": [
+        {
+          "model": {
+            "kind": "place-value",
+            "columns": [
+              "Th",
+              "H",
+              "T",
+              "O",
+              "t",
+              "h"
+            ],
+            "value": "2.35"
+          },
+          "caption": {
+            "en": "Placeholder: 2.35 on the chart.",
+            "zh": "占位：位值表上的 2.35。"
+          },
+          "equation": "2.35"
+        },
+        {
+          "model": {
+            "kind": "place-value",
+            "columns": [
+              "Th",
+              "H",
+              "T",
+              "O",
+              "t",
+              "h"
+            ],
+            "value": "2.35",
+            "shift": {
+              "by": 1,
+              "dir": "left"
+            }
+          },
+          "caption": {
+            "en": "Placeholder: every digit one place left.",
+            "zh": "占位：每个数字往左移一位。"
+          },
+          "move": "slide",
+          "equation": "2.35 × 10 = 23.5"
+        },
+        {
+          "model": {
+            "kind": "place-value",
+            "columns": [
+              "Th",
+              "H",
+              "T",
+              "O",
+              "t",
+              "h"
+            ],
+            "value": "2.35",
+            "shift": {
+              "by": 3,
+              "dir": "left"
+            }
+          },
+          "caption": {
+            "en": "Placeholder: three places: a 0 in the ones.",
+            "zh": "占位：移三位：个位补 0。"
+          },
+          "move": "slide",
+          "equation": "2.35 × 1000 = 2350"
+        },
+        {
+          "model": {
+            "kind": "place-value",
+            "columns": [
+              "O",
+              "t",
+              "h",
+              "th"
+            ],
+            "value": "4.8",
+            "shift": {
+              "by": 2,
+              "dir": "right"
+            }
+          },
+          "caption": {
+            "en": "Placeholder: two places right.",
+            "zh": "占位：往右移两位。"
+          },
+          "move": "slide",
+          "equation": "4.8 ÷ 100 = 0.048"
+        },
+        {
+          "model": {
+            "kind": "numberline",
+            "scale": "decimal",
+            "from": "0",
+            "to": "2",
+            "step": "0.1",
+            "labels": "wholes",
+            "unit": "l",
+            "dual": {
+              "unit": "ml",
+              "factor": 1000
+            },
+            "marks": [
+              "1.5"
+            ]
+          },
+          "caption": {
+            "en": "Placeholder: litres above, millilitres below.",
+            "zh": "占位：上面是升，下面是毫升。"
+          },
+          "move": "morph",
+          "equation": "{u:1.5 l} = {u:1500 ml}"
+        }
+      ],
+      "keyFacts": [
+        {
+          "en": "Placeholder fact one.",
+          "zh": "占位要点一。"
+        },
+        {
+          "en": "Placeholder fact two.",
+          "zh": "占位要点二。"
+        }
+      ],
+      "pool": [
+        {
+          "id": "sm-shift-37",
+          "kind": "shift-digits",
+          "model": {
+            "kind": "place-value",
+            "show": "digits",
+            "value": "3.7"
+          },
+          "prompt": {
+            "en": "Placeholder: work out 3.7 × 100 on the chart.",
+            "zh": "占位：在位值表上算 3.7 × 100。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "shift-wrong-way",
+                "say": {
+                  "en": "Placeholder feedback for shift-wrong-way.",
+                  "zh": "占位反馈：shift-wrong-way。"
+                },
+                "sample": "0.037"
+              },
+              {
+                "when": "shift-count-wrong",
+                "say": {
+                  "en": "Placeholder feedback for shift-count-wrong.",
+                  "zh": "占位反馈：shift-count-wrong。"
+                },
+                "sample": "37"
+              }
+            ]
+          },
+          "value": "3.7",
+          "op": "×",
+          "by": 100
+        },
+        {
+          "id": "sm-shift-524",
+          "kind": "shift-digits",
+          "model": {
+            "kind": "place-value",
+            "show": "digits",
+            "value": "52.4"
+          },
+          "prompt": {
+            "en": "Placeholder: work out 52.4 ÷ 10 on the chart.",
+            "zh": "占位：在位值表上算 52.4 ÷ 10。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": []
+          },
+          "value": "52.4",
+          "op": "÷",
+          "by": 10
+        },
+        {
+          "id": "sm-shift-6",
+          "kind": "shift-digits",
+          "model": {
+            "kind": "place-value",
+            "show": "digits",
+            "value": "6"
+          },
+          "prompt": {
+            "en": "Placeholder: work out 6 ÷ 1000 on the chart.",
+            "zh": "占位：在位值表上算 6 ÷ 1000。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": []
+          },
+          "value": "6",
+          "op": "÷",
+          "by": 1000
+        },
+        {
+          "id": "sm-scale-045",
+          "kind": "input",
+          "model": {
+            "kind": "place-value",
+            "show": "digits",
+            "value": "0.45"
+          },
+          "prompt": {
+            "en": "Placeholder: work out 0.45 × 10.",
+            "zh": "占位：算 0.45 × 10。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "zero-appended",
+                "say": {
+                  "en": "Placeholder feedback for zero-appended.",
+                  "zh": "占位反馈：zero-appended。"
+                },
+                "sample": "0.450"
+              }
+            ]
+          },
+          "answer": "4.5",
+          "form": "decimal",
+          "work": {
+            "do": "scale",
+            "a": "0.45",
+            "op": "×",
+            "by": 10
+          }
+        },
+        {
+          "id": "sm-scale-07-40",
+          "kind": "input",
+          "model": {
+            "kind": "place-value",
+            "show": "digits",
+            "value": "0.7"
+          },
+          "prompt": {
+            "en": "Placeholder: work out 0.7 × 40.",
+            "zh": "占位：算 0.7 × 40。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": []
+          },
+          "answer": "28",
+          "form": "decimal",
+          "work": {
+            "do": "scale",
+            "a": "0.7",
+            "op": "×",
+            "by": 40
+          }
+        },
+        {
+          "id": "sm-km-24",
+          "kind": "input",
+          "model": {
+            "kind": "numberline",
+            "scale": "decimal",
+            "from": "2",
+            "to": "3",
+            "step": "0.1",
+            "labels": "ends",
+            "unit": "km",
+            "dual": {
+              "unit": "m",
+              "factor": 1000
+            }
+          },
+          "prompt": {
+            "en": "Placeholder: write 2.4 km in metres.",
+            "zh": "占位：把 2.4 km 写成米。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "unit-factor-wrong",
+                "say": {
+                  "en": "Placeholder feedback for unit-factor-wrong.",
+                  "zh": "占位反馈：unit-factor-wrong。"
+                },
+                "sample": "240"
+              },
+              {
+                "when": "decimal-as-subunit",
+                "say": {
+                  "en": "Placeholder feedback for decimal-as-subunit.",
+                  "zh": "占位反馈：decimal-as-subunit。"
+                },
+                "sample": "2004"
+              }
+            ]
+          },
+          "answer": "2400",
+          "form": "decimal",
+          "unit": "m",
+          "work": {
+            "do": "convert",
+            "a": "2.4",
+            "from": "km",
+            "into": "m"
+          }
+        },
+        {
+          "id": "sm-g-4005",
+          "kind": "input",
+          "model": {
+            "kind": "place-value",
+            "show": "digits",
+            "value": "4005"
+          },
+          "prompt": {
+            "en": "Placeholder: write 4005 g in kilograms.",
+            "zh": "占位：把 4005 g 写成千克。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "decimal-as-subunit",
+                "say": {
+                  "en": "Placeholder feedback for decimal-as-subunit.",
+                  "zh": "占位反馈：decimal-as-subunit。"
+                },
+                "sample": "4.5"
+              }
+            ]
+          },
+          "answer": "4.005",
+          "form": "decimal",
+          "unit": "kg",
+          "work": {
+            "do": "convert",
+            "a": "4005",
+            "from": "g",
+            "into": "kg"
+          }
+        },
+        {
+          "id": "sm-m-305",
+          "kind": "input",
+          "model": {
+            "kind": "place-value",
+            "show": "digits",
+            "value": "3.05"
+          },
+          "prompt": {
+            "en": "Placeholder: write 3.05 m in centimetres.",
+            "zh": "占位：把 3.05 m 写成厘米。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "zero-placeholder",
+                "say": {
+                  "en": "Placeholder feedback for zero-placeholder.",
+                  "zh": "占位反馈：zero-placeholder。"
+                },
+                "sample": "350"
+              }
+            ]
+          },
+          "answer": "305",
+          "form": "decimal",
+          "unit": "cm",
+          "work": {
+            "do": "convert",
+            "a": "3.05",
+            "from": "m",
+            "into": "cm"
+          }
+        },
+        {
+          "id": "sm-choose-15l",
+          "kind": "choose",
+          "model": {
+            "kind": "numberline",
+            "scale": "decimal",
+            "from": "0",
+            "to": "2",
+            "step": "0.1",
+            "labels": "wholes",
+            "unit": "l",
+            "dual": {
+              "unit": "ml",
+              "factor": 1000
+            }
+          },
+          "prompt": {
+            "en": "Placeholder: which is the same as {u:1.5 l}?",
+            "zh": "占位：哪一个和 {u:1.5 l} 一样多？"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "decimal-as-subunit",
+                "say": {
+                  "en": "Placeholder feedback for decimal-as-subunit.",
+                  "zh": "占位反馈：decimal-as-subunit。"
+                },
+                "sample": "b"
+              },
+              {
+                "when": "unit-factor-wrong",
+                "say": {
+                  "en": "Placeholder feedback for unit-factor-wrong.",
+                  "zh": "占位反馈：unit-factor-wrong。"
+                },
+                "sample": "c"
+              }
+            ]
+          },
+          "options": [
+            {
+              "id": "a",
+              "correct": true,
+              "text": {
+                "en": "{u:1500 ml}",
+                "zh": "{u:1500 ml}"
+              }
+            },
+            {
+              "id": "b",
+              "correct": false,
+              "misconception": "decimal-as-subunit",
+              "text": {
+                "en": "{u:1 l} {u:5 ml}",
+                "zh": "{u:1 l} {u:5 ml}"
+              }
+            },
+            {
+              "id": "c",
+              "correct": false,
+              "misconception": "unit-factor-wrong",
+              "text": {
+                "en": "{u:150 ml}",
+                "zh": "{u:150 ml}"
+              }
+            }
+          ]
+        },
+        {
+          "id": "sm-compare-35-350",
+          "kind": "compare",
+          "model": {
+            "kind": "place-value",
+            "show": "digits",
+            "rows": [
+              "3.5",
+              "3.50"
+            ]
+          },
+          "prompt": {
+            "en": "Placeholder: compare 3.5 and 3.50.",
+            "zh": "占位：比较 3.5 和 3.50。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "trailing-zero-changes",
+                "say": {
+                  "en": "Placeholder feedback for trailing-zero-changes.",
+                  "zh": "占位反馈：trailing-zero-changes。"
+                },
+                "sample": ">"
+              }
+            ]
+          },
+          "a": "3.5",
+          "b": "3.50"
+        }
+      ]
+    }
+  ]
+}

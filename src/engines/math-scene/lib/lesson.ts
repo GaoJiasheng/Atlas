@@ -6,6 +6,8 @@
  * in the VIEW group. Pure.
  */
 import type { Beat, Lesson, ModelView, Question, Step, Task } from '../schema';
+import { isDecimalTask } from './decimal-tasks';
+import { decimalViewModel } from './decimal-views';
 
 export type Place =
   | { kind: 'step'; step: Step }
@@ -62,6 +64,8 @@ const SINGLE_KINDS = new Set(['shade', 'fold', 'split', 'merge', 'input', 'build
 export function canShow(task: Task, view: ModelView): boolean {
   const m = task.model;
   if (view === m.kind) return true;
+  // Two decimals compared: the grids, the chart or the line, as far as they can draw them (docs/29 X10).
+  if (isDecimalTask(task)) return task.kind === 'compare' && decimalViewModel(task, view, false) !== null;
   if (m.kind === 'grid' || view === 'grid') return false;
   const singleBar = m.kind === 'bar' && !m.rows && (m.wholes ?? 1) === 1 && m.parts !== null && !m.cuts && !m.diagonal;
   if ((singleBar || m.kind === 'circle') && SINGLE_KINDS.has(task.kind)) {

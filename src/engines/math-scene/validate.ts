@@ -18,6 +18,9 @@ import { dimEnds, extentOf, factsOf, figureOf, labels, polyIssues } from './lib/
 import { askOf } from './lib/diagnose/measure';
 import { isAreaUnit, squared, WHOLE_MAX } from './lib/value';
 import { badTokens } from '../../lib/rich-text';
+import { decimalModelIssues, decimalTaskIssues } from './validate-decimals';
+import { asFrac } from './lib/check';
+import { isDecimalModel } from './lib/decimal-tasks';
 
 export interface LessonIssue {
   level: 'error' | 'warn';
@@ -80,9 +83,10 @@ function targetIssues(task: Task): string[] {
     if (!Number.isInteger(count) || count > parts * wholes) out.push(`target ${t.n}/${t.d} cannot be shaded on ${parts} parts × ${wholes} whole(s)`);
     if (task.accept === 'exact' && parts !== task.target.d) out.push(`accept "exact" needs the model's parts (${parts}) to be the target's denominator (${task.target.d})`);
   }
-  if (task.kind === 'place' && m.kind === 'numberline') {
-    const pos = valueOnLine(task.target, m);
-    if (compare(task.target, { n: m.from, d: 1 }) < 0 || compare(task.target, { n: m.to, d: 1 }) > 0) out.push('place target is off the line');
+  if (task.kind === 'place' && m.kind === 'numberline' && m.scale !== 'decimal') {
+    const target = asFrac(task.target);
+    const pos = valueOnLine(target, m);
+    if (compare(target, { n: m.from, d: 1 }) < 0 || compare(target, { n: m.to, d: 1 }) > 0) out.push('place target is off the line');
     else if (task.snap === 'ticks' && pos === null) out.push('place target is not on a tick (snap: ticks)');
   }
   if (task.kind === 'split' || task.kind === 'merge') {
@@ -95,7 +99,7 @@ function targetIssues(task: Task): string[] {
     if (!Number.isInteger(Math.log2(ratio)) || ratio < 2) out.push(`folding ${parts} part(s) never makes ${task.parts}`);
   }
   if (task.kind === 'cut' && task.snap === 12 && 12 % task.parts !== 0) out.push(`${task.parts} parts do not fit the 12-mark grid (use snap: 24)`);
-  if (task.kind === 'compare' && m.kind === 'wall' && ![task.a.d, task.b.d].every((d) => m.rows.includes(d))) out.push('the wall needs a row for each denominator compared');
+  if (task.kind === 'compare' && m.kind === 'wall' && ![asFrac(task.a).d, asFrac(task.b).d].every((d) => m.rows.includes(d))) out.push('the wall needs a row for each denominator compared');
   return out;
 }
 
@@ -135,6 +139,7 @@ function beatIssues(beat: Beat): string[] {
     if (m.kind === 'bar' && m.rows && beat.crossed) out.push('crossed is for a single bar');
   } else if (beat.crossed) out.push('crossed is for a bar or a circle');
   if (m.kind === 'array' || m.kind === 'blocks' || (m.kind === 'numberline' && m.scale === 'whole')) out.push(...valueModelIssues(m));
+  else if (isDecimalModel(m)) out.push(...decimalModelIssues(m), ...(beat.under ? decimalModelIssues(beat.under) : []));
   else if (m.kind === 'numberline') {
     out.push(...valueModelIssues(m));
     for (const f of [...(m.marks ?? []), ...(m.arrow ? [m.arrow] : [])]) {
@@ -253,7 +258,7 @@ function gridTaskIssues(task: Task, limits: StepLimits | undefined): string[] {
       else if (answers.length === 1 && answers[0]!.n !== want) out.push(`the answer is ${answers[0]!.n}, the figure's ${ctx.ask} is ${want}`);
       const unit = ctx.ask === 'area' ? squared(m.unit) : m.unit;
       if (spec.unit && spec.unit !== unit) out.push(`the ${ctx.ask} is in ${unit}, not ${spec.unit} (no conversion between cm² and m²)`);
-      if (spec.unit && isAreaUnit(spec.unit) !== (ctx.ask === 'area')) out.push(`unit ${spec.unit} does not fit an ${ctx.ask}`);
+      if (spec.unit && spec.unit !== 'dollar' && isAreaUnit(spec.unit) !== (ctx.ask === 'area')) out.push(`unit ${spec.unit} does not fit an ${ctx.ask}`);
       if (fig && (ctx.ask === 'length' || ctx.ask === 'breadth' || ctx.ask === 'side')) {
         const across = labels(m, fig, 'across');
         const up = labels(m, fig, 'up');
@@ -300,6 +305,7 @@ export function taskIssues(task: Task, where: string, opts: { bridge: boolean; p
   const domain = domainOf(task);
   const fractions = domain === 'fractions';
   if (grid) for (const m of gridTaskIssues(task, opts.limits)) error(m);
+  else if (domain === 'decimals') for (const m of decimalTaskIssues(task, opts.limits)) error(m);
   else if (!fractions) for (const m of valueTaskIssues(task, opts.limits)) error(m);
   // Every code from the task's own domain (docs/19 G5).
   if (!grid) for (const c of task.feedback.wrong.map((w) => w.when)) if (!(MISCONCEPTION_DOMAINS[domain] as readonly string[]).includes(c)) error(`"${c}" is a ${domainOfCode(c)} code, not one for ${domain}`);
@@ -316,13 +322,22 @@ export function taskIssues(task: Task, where: string, opts: { bridge: boolean; p
       if (s.a.d !== s.b.d && !related(s.a, s.b)) error(`${s.a.n}/${s.a.d} and ${s.b.n}/${s.b.d} are not related fractions`);
     }
   }
-  for (const m of targetIssues(task)) error(m);
+  for (const m of domain === 'decimals' ? [] : targetIssues(task)) error(m);
   for (const m of feedbackIssues(task)) error(m);
   if (opts.practice && task.hints.length > 1) error('practice questions have at most one hint');
   if (textLength(task.prompt.en) > PROMPT_EN) warn(`prompt is ${textLength(task.prompt.en)} characters (EN ≤ ${PROMPT_EN})`);
   if (task.prompt.zh && textLength(task.prompt.zh) > PROMPT_ZH) warn(`prompt is ${textLength(task.prompt.zh)} characters (ZH ≤ ${PROMPT_ZH})`);
-  for (const [path, text] of strings(task, 'task')) for (const bad of badTokens(text)) error(`${path}: ${tokenMessage(bad)}`);
+  for (const [path, text] of strings(task, 'task')) {
+    for (const bad of badTokens(text)) error(`${path}: ${tokenMessage(bad)}`);
+    for (const bare of path.endsWith('.sample') ? [] : bareTimes(text)) error(`${path}: "${bare}" is a time written as text: write it {t:…} (it would be read as a decimal)`);
+  }
   return issues;
+}
+
+/** A time written as plain text (`9.40 am`) would be read as a decimal: write it `{t:09:40}` (docs/29 X8). */
+const BARE_TIME = /\b\d{1,2}\.\d{2}\s?(?:am|pm|a\.m\.|p\.m\.)(?![a-z])/i;
+export function bareTimes(text: string): string[] {
+  return [...text.matchAll(new RegExp(BARE_TIME.source, 'gi'))].map((m) => m[0]);
 }
 
 /** What is wrong with a bad token. */
@@ -403,7 +418,9 @@ export function lessonIssues(data: MathSceneData, chapters: readonly ChapterInfo
 
   /* 10. tokens (tasks are covered above) */
   const untasked = { syllabus: lesson.syllabus, steps: lesson.steps.map((s) => ({ ...s, pool: [] })) };
-  for (const [path, text] of strings(untasked, 'lesson')) for (const bad of badTokens(text)) error(`${path}: ${tokenMessage(bad)}`);
-  for (const [path, text] of strings(data.glossary ?? {}, 'glossary')) for (const bad of badTokens(text)) error(`${path}: ${tokenMessage(bad)}`);
+  for (const [path, text] of [...strings(untasked, 'lesson'), ...strings(data.glossary ?? {}, 'glossary')]) {
+    for (const bad of badTokens(text)) error(`${path}: ${tokenMessage(bad)}`);
+    for (const bare of path.endsWith('.sample') ? [] : bareTimes(text)) error(`${path}: "${bare}" is a time written as text: write it {t:…} (it would be read as a decimal)`);
+  }
   return issues;
 }

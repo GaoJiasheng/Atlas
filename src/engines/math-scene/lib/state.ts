@@ -13,6 +13,7 @@ import { isUnit } from './value';
 import { fieldDigits, isValueForm } from './forms';
 import { applyTrade, canTrade, counts, sharePlace, standard, ZERO, type Counts } from './blocks';
 import { parseArrayCut } from './array';
+import { cleanDecimal, DECIMAL_ACTIONS, decimalClear, decimalInitial, decimalReduce, onChart, type DecimalAction, type DecimalState } from './decimal-tasks';
 
 export type Sym = '<' | '=' | '>';
 export type Phase = 'model' | 'convert' | 'mark' | 'input';
@@ -71,9 +72,11 @@ export type Action =
   /** Blocks: share one place into the plates as far as it goes. */
   | { do: 'share'; place: PlaceKey }
   /** Check the current phase: on success a multi-part task moves to its next phase. */
-  | { do: 'check' };
+  | { do: 'check' }
+  /** Decimals (docs/29 §3.6): the grid, the line's zoom, the ends, the rows, the digits, the chart. */
+  | DecimalAction;
 
-export interface TaskState {
+export interface TaskState extends DecimalState {
   /** Equal parts per whole (bar / circle), intervals per whole (number line); 0 = not cut yet. */
   parts: number;
   wholes: number;
@@ -142,6 +145,8 @@ export function phasesOf(task: Task): Phase[] {
     case 'split-figure':
     case 'split-array':
     case 'share':
+    case 'round-on-line':
+    case 'align-add':
       return ['model', 'input'];
     case 'group':
     case 'regroup':
@@ -166,7 +171,7 @@ const indices = (set: number | number[] | undefined): number[] =>
 export function baseParts(task: Task): number {
   const m = task.model;
   if (m.kind === 'bar' || m.kind === 'circle') return m.parts ?? 0;
-  if (m.kind === 'numberline') return m.intervals ?? 1;
+  if (m.kind === 'numberline' && m.scale !== 'decimal') return m.intervals ?? 1;
   return 0;
 }
 
@@ -174,8 +179,9 @@ export function initialState(task: Task): TaskState {
   const m = task.model;
   const bar = m.kind === 'bar' || m.kind === 'circle';
   return {
+    ...decimalInitial(task),
     parts: baseParts(task),
-    wholes: m.kind === 'bar' ? (m.wholes ?? 1) : m.kind === 'numberline' ? m.to - m.from : 1,
+    wholes: m.kind === 'bar' ? (m.wholes ?? 1) : m.kind === 'numberline' && m.scale !== 'decimal' ? m.to - m.from : 1,
     shaded: bar ? indices(m.shaded) : [],
     given: bar ? indices(m.given) : [],
     crossed: [],
@@ -197,7 +203,7 @@ export function initialState(task: Task): TaskState {
     groups: task.kind === 'group' && task.by === 'share' ? Array.from({ length: task.k }, () => 0) : [],
     arr: null,
     landings: [],
-    mat: task.kind === 'regroup' ? counts(task.start) : task.kind === 'share' ? standard(task.value) : ZERO,
+    mat: task.kind === 'regroup' && typeof task.value === 'number' ? counts(task.start) : task.kind === 'share' && typeof task.value === 'number' ? standard(task.value) : ZERO,
     dealt: ZERO,
     trades: 0,
     phase: 0,
@@ -278,6 +284,7 @@ export function lineLength(state: TaskState): number {
 
 /** Apply one action (unknown or meaningless actions leave the state as it is). */
 export function reduce(task: Task, state: TaskState, action: Action): TaskState {
+  if (DECIMAL_ACTIONS.has(action.do)) return decimalReduce(task, state, action as DecimalAction);
   switch (action.do) {
     case 'shade': {
       const total = state.parts * state.wholes;
@@ -333,6 +340,8 @@ export function reduce(task: Task, state: TaskState, action: Action): TaskState 
     case 'input': {
       if (action.field === 'u') return isUnit(action.value) || action.value === '' ? { ...state, input: { ...state.input, u: action.value } } : state;
       if (action.field === 'ap') return action.value === 'am' || action.value === 'pm' || action.value === '' ? { ...state, input: { ...state.input, ap: action.value } } : state;
+      // A decimal box keeps digits and one point (`.35` is written 0.35).
+      if (action.field.startsWith('x')) return { ...state, input: { ...state.input, [action.field]: cleanDecimal(action.value) } };
       const value = action.value.replace(/\D/g, '').slice(0, boxDigits(inputSpecOf(task), action.field));
       return { ...state, input: { ...state.input, [action.field]: value } };
     }
@@ -357,6 +366,7 @@ export function reduce(task: Task, state: TaskState, action: Action): TaskState 
       return { ...state, edges: state.edges.includes(action.key) ? state.edges.filter((k) => k !== action.key) : [...state.edges, action.key] };
     }
     case 'clear': {
+      if (onChart(task) || task.kind === 'shade-decimal') return decimalClear(task, state);
       if (task.kind === 'group' || task.kind === 'skip-count' || task.kind === 'regroup' || task.kind === 'share') {
         const start = initialState(task);
         return { ...state, groups: start.groups, landings: [], mat: start.mat, dealt: start.dealt, trades: 0 };
@@ -416,7 +426,7 @@ export function reduce(task: Task, state: TaskState, action: Action): TaskState 
     case 'land': {
       if (task.kind !== 'skip-count') return state;
       const m = task.model;
-      const to = task.to ?? (m.kind === 'numberline' ? m.to : 100);
+      const to = task.to ?? (m.kind === 'numberline' && m.scale !== 'decimal' ? m.to : 100);
       const at = Math.round(action.at);
       if (at < 0 || at > to) return state;
       const landings = state.landings.includes(at) ? state.landings.filter((x) => x !== at) : [...state.landings, at].sort((a, b) => a - b);
@@ -438,7 +448,8 @@ export function reduce(task: Task, state: TaskState, action: Action): TaskState 
       const next = sharePlace(state.mat, state.dealt, action.place, task.k);
       return next.mat === state.mat ? state : { ...state, ...next };
     }
-    case 'check':
+    default:
+      // `check` (and the decimal moves, handled above).
       return state;
   }
 }
@@ -447,7 +458,7 @@ export function reduce(task: Task, state: TaskState, action: Action): TaskState 
 export function modelValue(task: Task, state: TaskState): Frac | null {
   if (state.parts <= 0) return null;
   const kind: TaskKind = task.kind;
-  if (task.model.kind === 'numberline') return state.place === null ? null : { n: state.place, d: state.parts };
+  if (task.model.kind === 'numberline') return state.place === null || task.model.scale === 'decimal' ? null : { n: state.place, d: state.parts };
   const count = kind === 'build-sum' ? state.given.length - state.crossed.length + state.shaded.length : state.shaded.length + (kind === 'shade' ? 0 : state.given.length);
   return { n: count, d: state.parts };
 }

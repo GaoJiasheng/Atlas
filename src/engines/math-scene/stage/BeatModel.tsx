@@ -27,6 +27,12 @@ import { WholeLine } from './WholeLine';
 import type { DisplayModes } from './Stage';
 import { plainText } from '../../../lib/rich-text';
 import { thingsOf } from '../lib/array';
+import { DecimalGrid } from './DecimalGrid';
+import { PlaceValueChart } from './PlaceValueChart';
+import { DecimalLine } from './DecimalLine';
+import { MoneyModel } from './MoneyModel';
+import { isDecimalModel } from '../lib/decimal-tasks';
+import { formatDecimal } from '../lib/decimal';
 
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
 const indices = (set: number | number[] | undefined): number[] => (set === undefined ? [] : Array.isArray(set) ? [...set] : Array.from({ length: set }, (_, i) => i));
@@ -40,6 +46,7 @@ export function beatShape(beat: Beat): string {
     case 'circle':
       return `circle|${m.parts}`;
     case 'numberline':
+      if (m.scale === 'decimal') return `dline|${formatDecimal(m.from)}|${formatDecimal(m.to)}|${formatDecimal(m.step)}|${(m.zoom ?? []).map((z) => formatDecimal(z.from)).join(',')}${beat.under ? `|${beatShape({ ...beat, model: beat.under, under: undefined })}` : ''}`;
       return m.scale === 'whole' ? `wline|${m.from}|${m.to}|${m.step ?? 1}` : `line|${m.from}|${m.to}|${m.intervals}`;
     case 'wall':
       return `wall|${m.rows.join(',')}`;
@@ -54,6 +61,14 @@ export function beatShape(beat: Beat): string {
     case 'blocks':
       // The rows of a × pushed together, a trade or a share change in place (each block keeps its key); another number remounts.
       return `blocks|${m.value ?? ''}|${m.mat}|${m.plates ?? 0}|${m.column ? `${m.column.op}${m.column.a}.${m.column.b}` : ''}`;
+    case 'decimal-grid':
+      // Shading changes in place (the squares ease); another size, another number of wholes or a magnifier remounts.
+      return `dgrid|${(m.pair ?? [m]).map((g) => `${g.level}.${g.wholes ?? 1}.${g.zoom ? formatDecimal(g.zoom.at) : ''}`).join(',')}${beat.under ? `|${beatShape({ ...beat, model: beat.under, under: undefined })}` : ''}`;
+    case 'place-value':
+      // The chart is redrawn for each beat: the move (a trade, a slide, a line-up) plays as it comes in.
+      return `pv|${JSON.stringify(m)}`;
+    case 'money':
+      return `money|${m.layout}|${JSON.stringify(m.pair ?? m.pieces ?? (m.amount ? formatDecimal(m.amount) : ''))}`;
   }
 }
 
@@ -83,6 +98,17 @@ export function BeatModel({ beat, box, defs, modes, locale }: { beat: Beat; box:
   };
 
   if (m.kind === 'grid') return <GridModel defs={defs} box={box} model={m} locale={locale} label={label} />;
+  if (isDecimalModel(m)) {
+    // A second model under the first (a grid over its number line): the box is shared, the first above.
+    const top: Rect = beat.under ? { ...box, h: box.h * 0.6 } : box;
+    const bottom: Rect | null = beat.under ? { ...box, y: box.y + box.h * 0.62, h: box.h * 0.38 } : null;
+    return (
+      <g>
+        <DecimalModel model={m} box={top} defs={defs} label={label} locale={locale} move={beat.move ?? null} />
+        {beat.under && bottom && <DecimalModel model={beat.under} box={bottom} defs={defs} label={label} locale={locale} move={beat.move ?? null} />}
+      </g>
+    );
+  }
   if (m.kind === 'array' || m.kind === 'blocks' || (m.kind === 'numberline' && m.scale === 'whole')) {
     // A second model lined up under the first (the groups and their jumps): the box is shared, the first above.
     const top: Rect = beat.under ? { ...box, h: box.h * 0.58 } : box;
@@ -193,6 +219,15 @@ export function BeatModel({ beat, box, defs, modes, locale }: { beat: Beat; box:
   );
 }
 
+/** A decimal model, read-only: the hundred grid, the place-value chart, the decimal line, money. */
+export function DecimalModel({ model: m, box, defs, label, locale, move }: { model: Beat['model']; box: Rect; defs: string; label: string; locale: Locale; move: Beat['move'] | null }) {
+  if (m.kind === 'decimal-grid') return <DecimalGrid defs={defs} box={box} model={m} locale={locale} label={label} move={move} />;
+  if (m.kind === 'place-value') return <PlaceValueChart box={box} model={m} locale={locale} label={label} move={move} />;
+  if (m.kind === 'money') return <MoneyModel box={box} model={m} locale={locale} label={label} move={move} />;
+  if (m.kind === 'numberline' && m.scale === 'decimal') return <DecimalLine defs={defs} box={box} model={m} locale={locale} label={label} move={move} />;
+  return null;
+}
+
 /** An array, blocks or a whole-number line, read-only (a beat, or the part of a beat under another model). */
 export function ValueModel({ model: m, box, defs, label, locale, move }: { model: Beat['model']; box: Rect; defs: string; label: string; locale: Locale; move: Beat['move'] | null }) {
   if (m.kind === 'array') return <ArrayModel defs={defs} box={box} model={m} locale={locale} label={label} move={move} />;
@@ -209,7 +244,7 @@ export function beatFraction(beat: Beat): Frac | null {
   const m = beat.model;
   // Two lit rows are a comparison (the card shows the pair); more are equivalents or an order (the first names them).
   if (m.kind === 'wall') return beat.highlight && beat.highlight.length !== 2 ? beat.highlight[0]! : null;
-  if (m.kind === 'numberline') return m.marks?.at(-1) ?? m.arrow ?? null;
+  if (m.kind === 'numberline') return m.scale === 'decimal' ? null : (m.marks?.at(-1) ?? m.arrow ?? null);
   if (m.kind === 'bar' && m.rows) return { n: indices(m.rows[0]!.given).length, d: m.rows[0]!.parts ?? 1 };
   return beatValue(beat);
 }
@@ -237,6 +272,6 @@ export function beatCounts(beat: Beat): { parts: number | null; marked: number |
     return { parts, marked: indices(m.given).length + indices(m.shaded).length - indices(beat.crossed).length };
   }
   if (m.kind === 'circle') return { parts: m.parts, marked: indices(m.given).length + indices(m.shaded).length - indices(beat.crossed).length };
-  if (m.kind === 'numberline') return { parts: m.scale === 'whole' ? null : (m.intervals ?? 1) * (m.to - m.from), marked: null };
+  if (m.kind === 'numberline') return { parts: m.scale === 'fraction' ? (m.intervals ?? 1) * (m.to - m.from) : null, marked: null };
   return { parts: null, marked: null };
 }

@@ -763,4 +763,38 @@ validate：每层 `zoom` 是上一层的**恰好一段**（`to − from = 上一
 
 ## 9. 施工记录 / 已知差距
 
-施工时追加。
+### 9.1 引擎（E-dec：X1–X11 与 A6a–A6d，2026-10-18；课的内容未施工）
+
+- **X1 值** `lib/decimal.ts`：`{ units, dp }`（百万分之一的整数 + 写出的位数），逐位解析，`eq` / `same` / `cmp` / `add` / `sub` / `mulWhole` / `divWhole`（长除法）/ `round`（满 5 进一，2.96 → 3.0）/ `truncate` / `scale` / `digitAt` / `toFraction` / `fromFraction`；`tests/math-scene/decimal.test.ts` 有 §3.1 的必测项（`0.1 + 0.2 = 0.3`、`1.005 → 1.01`、`2.96 → 3.0`、`0.65 → 0.7`、`1.5 ÷ 4 = 0.375` exact、`2 ÷ 3` 不 exact 且 `round(…, 2) = 0.67`、`2.35 × 1000`、`4.8 ÷ 100`），并用 grep 查 `decimal.ts`、`diagnose/decimals.ts` 里没有 `parseFloat` / `toFixed` / `toPrecision` / `Number(text)`。zod 转换器 `decimal`（带点的 JSON 数报 "write decimals as strings"）、`numValue`（分数或小数）、`answerValue` 带点识别为 `{ kind: 'dec' }`。
+- **X2** `Measure.value` 改成 `Decimal`，单位加 `km` `g` `kg` `l`（ℓ）`ml`；方格课照旧（整数）。
+- **X3** `decimal` 写法（`tray/inputs/DecimalInput.tsx`）：一个框 + 点键，`places`、`unit`（`dollar` 框前 `$`，量与 `work` 换算的单位印在框后）、`work`（诊断上下文，validate 查它算出来 = `answer`）；`places-short` 是"差一步"（`near`，同 `not-simplest`，控制器的 near 分支按 code 取反馈）；托盘进入写数一段的提示用新的"对。现在把数写出来。"（分数课的"写成分数"不动）。
+- **X4 / X5** DECIMAL 卡（`hud/cards/DecimalCard.tsx`）与四种 PLATE 行（`hud/plate.ts decimalPlateRows`）。
+- **X6 误解** `lib/diagnose/decimals.ts`：§2.1 的 25 个码 + 三个复用码的小数规则，每条 ≥ 2 正例 1 反例（`tests/math-scene/diagnose-decimals.test.ts`）。**注册表的做法**：E0 的注册表是"按域列码"（`MISCONCEPTION_DOMAINS`）+ 每个域一个规则文件，没有 `registerRule`；本课按 D10 的首选做了"一码多域"：`MISCONCEPTION_DOMAINS.decimals = [...DECIMAL_CODES, ...DECIMAL_SHARED_CODES]`（`tick-counting`、`carry-not-added`、`zero-in-quotient`、`not-simplest`），码只在老家域登记一次（`MISCONCEPTIONS` 无重复，zod enum 不变），**一个码的规则是列出它的各域规则之并，一道题按它自己的域诊断**（小数题 → `decimals.ts`）。validate 的"跨域"检查按域名单查，自然认这四个码；"诊断得了吗"按题型 / `work` 查（`validate-decimals.ts undiagnosable`）。没有退回 `decimal-carry-dropped` 一类的新码。
+- **X7 过渡** `zoom`、`slide`、`align`、`round`（≤ 900 ms，减少动态时淡入）。
+- **X8** 裸写的小数与钱是不拆行的值，朗读逐位（"zero point three five" /「零点三五」）、钱（"2 dollars 35 cents" /「2 元 35 分」）、`≈`（"is about" /「约等于」）、`0.666…`（", and so on" /「，一直下去」）；validate 拦裸写的时刻 `\d{1,2}.\d{2} am|pm`（`sample` 字段不查：那是作答写法）。
+- **X9** `limits` 加 `dp`、`resultDp`、`factor`、`denominators`、`roundTo`、`by`、`multiples`、`units`、`money`、`zoomDepth`（`maxValue` 沿用）；`check-pool` 另报"一个错例两条规则都命中"的 warning（§3.8：按声明顺序取第一条，所有域通用）。
+- **X10** VIEW 加 `decimal-grid`、`place-value`、`money`；比较两个小数的题在并排百格 / 位值表对齐 / 一条数轴之间切换（`lib/decimal-views.ts`）。
+- **X11** 每个新题型和扩到小数的题型都有 `solve` / `sampleState` / `proveTask`、`goToTask`、`shoot --tasks` 三张、键盘路径；docs/06「MathScene · 小数」。
+- **A6** 百格 / 千格（放大镜）`stage/DecimalGrid.tsx` + `lib/dgrid.ts`；位值表（圆片、竖式小数点对齐、`slide`）`stage/PlaceValueChart.tsx` + `stage/DecimalColumn.tsx` + `lib/placevalue.ts`；小数数轴（两层放大、四舍五入的两端与中点、双刻度）`stage/DecimalLine.tsx` + `lib/dline.ts`；钱（素面硬币与纸币，按位三列）`stage/MoneyModel.tsx` + `lib/money.ts`。题型状态 / 检查 / 解法 / 错例集中在 `lib/decimal-tasks.ts`，算式行在 `lib/decimal-working.ts`，规则在 `validate-decimals.ts`。
+- **示例主题** `sample-lesson-decimal`（draft，占位数据）：四步 37 道，每个模型、过渡、题型、写法各一次；`tests/math-scene/{decimal,decimal-models,diagnose-decimals,sample-lesson-decimal}.test.ts`。截图：1920 × 1080 下百格边长约 460 px（舞台高的 43 %），位值表 250–370 px，钱按位三列约 300–560 px；390 × 844 托盘打开时都放得下（百格约 155 px，小格 15 px，按条按钮和步进器操作）。
+
+### 9.2 与本文 §3 不同的地方
+
+1. **`round-on-line` 的模型照写**（`numberline` 从下邻到上邻、`step` = 10^-(to+1)、`marks: [value]`、`halfway`），不由引擎推；validate 查两端正是相邻两个保留位、`then.places = to`。
+2. **`share` / `regroup` 的 sample** 写动作序列（`"O,O>t,t"`、`"h>t"`），同 docs/19 §9.2；`regroup` 多一个可选的 `goal`（减法前"1 个十分之一换 10 个百分之一"之后的样子）。
+3. **`compare.align`** 只有 `"point"`（按钮把两数按小数点竖排补 0）；并排百格、数轴用 VIEW 组切换，不做 `grid` / `line` 两个按钮。
+4. **`order.line: true`**：模型必须是小数数轴，做完（或看答案）后把各数画成标记；排序过程中不显示位置（否则等于给答案）。
+5. **竖式 `column.show`** 只有 `none` / `all`（小数竖式不分步写）。
+6. **数轴标记** §3.4 写"落在最深一层的刻度上"，放宽为"在线上"：四舍五入拍的 3.447 在 3.4–3.5（每格 0.01）的两刻度之间。
+7. **`money.note`** 只加读屏文字（$10 的缺省拆法本来就是一张 $10 纸币）。
+8. **DECIMAL 卡在小测里**只给给定的数（算式带 `?`）和读法，不画位名格子：位名把"0.06 在百分位"直接告诉了孩子，等于提示 `zero-placeholder` 的答案。
+9. **作答框**整数部分最多 5 位、小数部分最多 6 位（99 999.999999）：§3.8 例子里 `750 ml = ? ℓ` 的错例 `"750000"` 写不进框，出题换小一点的数（`75 ml → 75000`）。
+10. **`{u:1.5 l}` 的朗读**用逐位读法（"one point five litres"），不是 "1.5 litres"。
+11. `tests-e2e/decimals.spec.ts` 没有写：§7 把它分给阶段 5（P），等课的内容有了再写。
+
+### 9.3 给课的作者（阶段 2–4）
+
+- 小数一律写字符串；整数可写 JSON 数。每道写小数的 `input` 都给 `work`（诊断全靠它；只是"写出这个数"的题可以不给）；钱写 `unit: "dollar"`（缺省两位，`$1.6` 走 `places-short`）。
+- 题型要点：`shade-decimal` 的模型是同 `level` 的空百格（`start` 是锁定的给定量）；`place` 带 `zoom` 时数轴本身不画 `zoom` / `marks` / `arrow`，目标要落在第 `zoom` 层的刻度上；`align-add` 的两个数位数不同，`start: "left"` 不能一开始就对齐；`shift-digits` 的结果在千位到千分位之间（`3.07 × 100` 往右错移得 0.0307 出了表，`shift-wrong-way` 的错例要能画在表上，样例用 `3.7 × 100`）；小数 `share` 的商三位以内除尽，模型 `place-value` 的 `plates = k`。
+- 比较题在步的 `views` 里写 `["decimal-grid", "place-value", "numberline"]`，引擎只给画得出的。
+- 错例写法：`shade-decimal` / `place` / `shift-digits` 写值（`"0.6"`），`round-on-line` 第一段 `"end:2.9"`、第二段 `"=3.0"`，`align-add` `"align:right"` / `"=4.65"`，`choose` 写选项 id，小数框照孩子写的（`"0.10"` 保留）。`pnpm tsx scripts/math/check-pool.ts <draft> --topic decimals --step <id>` 到 0 错，看一眼 WARN（两条规则同时命中时换数字）。
