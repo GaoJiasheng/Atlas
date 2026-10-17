@@ -64,7 +64,7 @@ const blockW = (p: PlaceKey, u: number) => (p === 'H' ? 10 * u : u);
 const blockH = (p: PlaceKey, u: number) => (p === 'O' ? u : 10 * u);
 /** Blocks per row in a column: ones and tens in fives (two fives side by side), hundreds three across. */
 const perRow = (p: PlaceKey) => (p === 'H' ? 3 : p === 'T' ? 10 : 5);
-const gapOf = (u: number) => Math.max(2, u * 0.35);
+const gapOf = (u: number) => Math.max(2, Math.round(u * 0.35));
 
 /** Where block `i` of a place sits inside its column (top-left). */
 function slot(p: PlaceKey, i: number, u: number): { x: number; y: number } {
@@ -85,6 +85,13 @@ function columnSize(p: PlaceKey, n: number, u: number): { w: number; h: number }
   return { w: across * (blockW(p, u) + g) + (p === 'H' ? 0 : Math.floor((across - 1) / 5) * g * 2), h: rows * (blockH(p, u) + g) };
 }
 
+/** A plate's blocks of one place, packed (no room kept for a row of five): its width. */
+function packedWidth(p: PlaceKey, n: number, u: number): number {
+  const g = gapOf(u);
+  const across = Math.min(perRow(p), Math.max(n, 1));
+  return across * (blockW(p, u) + g) + (p === 'H' ? 0 : Math.floor((across - 1) / 5) * g * 2);
+}
+
 interface MatLayout {
   u: number;
   cols: Record<PlaceKey, { x: number; w: number }>;
@@ -97,20 +104,30 @@ interface MatLayout {
 
 const HEAD_H = 34;
 const COUNT_H = 26;
+/** Largest unit cube (px) and the share of the box's height the mat may take (docs/19 §3.2: the mat is read across the stage, like the fraction bars). */
+const MAX_U = 32;
+const MAT_SHARE = 0.62;
 
-/** The unit that fits the mat (its rows of a ×), and under it the plates with the share's final blocks, in the box. */
-function matLayout(rows: Counts[], plates: { k: number; each: Counts } | null, box: { w: number; h: number }, maxU: number): MatLayout {
+/** A row of the mat is at least a rod tall, so the mat keeps its size while blocks are traded between columns. */
+const rowHeight = (c: Counts, u: number) => Math.max(...PLACES.map((p) => columnSize(p, c[p], u).h), 10 * u + gapOf(u));
+
+/**
+ * The unit that fits the mat (its rows of a ×), and under it the plates with the share's final blocks, in the box:
+ * the largest whole-pixel cube (crisp edges) with the mat at most `MAT_SHARE` of the box's height.
+ */
+function matLayout(rows: Counts[], plates: { k: number; each: Counts } | null, box: { w: number; h: number }, maxU: number, share: number, hundreds: boolean): MatLayout {
   const most = (p: PlaceKey) => Math.max(...rows.map((c) => c[p]));
   let best: MatLayout | null = null;
-  for (let u = maxU; u >= 2.5; u -= 0.25) {
-    const pad = Math.max(8, u * 1.4);
+  for (let u = maxU; u >= 3; u -= 1) {
+    const pad = Math.max(8, Math.round(u * 1.4));
     // A column is at least as wide as its head (HUNDREDS) and room for a row of five.
-    const w = PLACES.map((p) => Math.max(columnSize(p, most(p), u).w + 2 * pad, (p === 'O' ? 5 * u * 1.35 : 6 * u) + 2 * pad, 66));
+    // The hundreds column keeps room for a flat only when the number has (or can come to have) hundreds.
+    const w = PLACES.map((p) => Math.round(Math.max(p === 'H' && !hundreds ? 0 : columnSize(p, most(p), u).w + 2 * pad, (p === 'O' ? 5 * u * 1.35 : 6 * u) + 2 * pad, 66)));
     const total = w.reduce((a, b) => a + b, 0);
-    const height = rows.reduce((s, c) => s + Math.max(...PLACES.map((p) => columnSize(p, c[p], u).h)) + u * 1.2, 0);
-    const pu = u * 0.7;
+    const height = rows.reduce((s, c) => s + rowHeight(c, u) + Math.round(u * 1.2), 0);
+    const pu = Math.max(2, Math.floor(u * 0.7));
     const plateH = plates ? Math.max(...PLACES.map((pl) => columnSize(pl, Math.max(plates.each[pl], 1), pu).h)) + 22 : 0;
-    const plateW = plates ? PLACES.reduce((s, pl) => s + (plates.each[pl] ? columnSize(pl, plates.each[pl], pu).w + 8 : 0), 16) : 0;
+    const plateW = plates ? PLACES.reduce((s, pl) => s + (plates.each[pl] ? packedWidth(pl, plates.each[pl], pu) + 8 : 0), 16) : 0;
     let x = 0;
     const cols = {} as MatLayout['cols'];
     PLACES.forEach((p, i) => {
@@ -119,7 +136,7 @@ function matLayout(rows: Counts[], plates: { k: number; each: Counts } | null, b
     });
     best = { u, cols, w: total, h: height, plateH };
     const tall = HEAD_H + height + COUNT_H + (plates ? plateH + 14 : 0);
-    if (total <= box.w && tall <= box.h && (!plates || plateW <= total / plates.k - 8)) return best;
+    if (total <= box.w && tall <= box.h * share && (!plates || plateW <= total / plates.k - 8)) return best;
   }
   return best!;
 }
@@ -136,26 +153,30 @@ export function BlocksModel(p: BlocksModelProps) {
   const column = m.column;
   const cc = column ? columnCells(column) : null;
   const wide = box.w >= 700;
-  // The column working beside the mat on a wide stage, under it on a narrow one.
-  const reserveW = cc && wide ? Math.min(0.34 * box.w, cc.cols * 34 + 40) : 0;
-  const reserveH = cc && !wide ? Math.min(box.h * 0.4, cc.rows * 1.5 * 26 + 20) : 0;
+  // The column working beside the mat on a wide stage, under it on a narrow one; its cell follows the stage (crisp, whole pixels).
+  const cellMax = cc ? Math.round(clamp(Math.min((box.h * (wide ? 0.6 : 0.36)) / (cc.rows * 1.5), (wide ? 0.3 * box.w : box.w - 20) / cc.cols), 16, 56)) : 0;
+  const reserveW = cc && wide ? Math.min(0.34 * box.w, cc.cols * cellMax + 48) : 0;
+  const reserveH = cc && !wide ? Math.min(box.h * 0.4, cc.rows * 1.5 * cellMax + 20) : 0;
   // The plates are laid out for the share's last blocks (each plate's digits of the quotient), so they never grow.
   const value = task?.kind === 'share' && typeof task.value === 'number' ? task.value : (m.value ?? total(matOf(m)) + k * total(counts(m.dealt)));
   const each = k > 0 ? standard(Math.floor(value / k)) : standard(0);
-  const fit = matLayout(m.mat ? rowsOf : [ZERO_ROW], k > 0 && m.mat ? { k, each } : null, { w: Math.max(120, box.w - reserveW - 20), h: box.h - reserveH }, p.mini ? 4 : 10);
+  // Hundreds on the mat now, or in the number worked with (a check's blocks can be traded up into a hundred).
+  const hundreds = rowsOf.some((r) => r.H > 0) || value * (m.copies ?? 1) >= 100 || (task?.kind === 'regroup' && typeof task.value === 'number' && task.value >= 100);
+  const fit = matLayout(m.mat ? rowsOf : [ZERO_ROW], k > 0 && m.mat ? { k, each } : null, { w: Math.max(120, box.w - reserveW - 20), h: box.h - reserveH }, p.mini ? 4 : MAX_U, p.mini ? 1 : MAT_SHARE, hundreds);
   const u = fit.u;
-  const plateU = u * 0.7;
+  const plateU = Math.max(2, Math.floor(u * 0.7));
   const headH = HEAD_H;
   const matW = m.mat ? fit.w : 0;
   const matH = m.mat ? fit.h + HEAD_H + COUNT_H : 0;
   const plates = k > 0 && m.mat ? fit.plateH + 14 : 0;
-  const cellW = cc ? clamp(Math.min(wide ? reserveW / cc.cols : box.w / cc.cols, (wide ? box.h * 0.8 : reserveH) / (cc.rows * 1.5)), 14, 34) : 0;
+  // The written digits about as tall as a ten rod is wide and a half: they read with the mat.
+  const cellW = cc ? Math.round(clamp(Math.min(cellMax, m.mat ? Math.max(22, u * 1.6) : cellMax, wide ? (reserveW - 48) / cc.cols : box.w / cc.cols), 14, 56)) : 0;
   const colW = cc ? cc.cols * cellW : 0;
   const colH = cc ? cc.rows * cellW * 1.5 : 0;
   const contentW = wide ? matW + (cc ? colW + (m.mat ? 40 : 0) : 0) : Math.max(matW, colW);
   const contentH = wide ? Math.max(matH + plates, colH) : matH + plates + (cc ? colH + (m.mat ? 20 : 0) : 0);
-  const x0 = box.x + (box.w - contentW) / 2;
-  const y0 = box.y + Math.max(0, (box.h - contentH) / 2);
+  const x0 = Math.round(box.x + (box.w - contentW) / 2);
+  const y0 = Math.round(box.y + Math.max(0, (box.h - contentH) / 2));
   const focus: PlaceKey | null = m.focus ?? (column ? columnFocus(column) : null) ?? (m.trade ? tradeOf(m.trade).from : null);
   const out: ReactNode[] = [];
   const trade = m.trade && !task ? tradeOf(m.trade) : null;
@@ -215,7 +236,7 @@ export function BlocksModel(p: BlocksModelProps) {
     // Blocks, row by row (one row per copy of a ×).
     let ry = y0 + headH + 6;
     rowsOf.forEach((row, ri) => {
-      const rowH = Math.max(...PLACES.map((pl) => columnSize(pl, row[pl], u).h));
+      const rowH = rowHeight(row, u);
       if (rowsOf.length > 1)
         out.push(
           <text key={`x${ri}`} className="ms-mat__rowno" x={x0 - 8} y={ry + Math.min(rowH, 10 * u) / 2 + 4} textAnchor="end">
@@ -224,7 +245,7 @@ export function BlocksModel(p: BlocksModelProps) {
         );
       PLACES.forEach((place) => {
         const c = fit.cols[place];
-        const pad = (c.w - columnSize(place, Math.max(row[place], 1), u).w) / 2;
+        const pad = Math.round((c.w - columnSize(place, Math.max(row[place], 1), u).w) / 2);
         for (let i = 0; i < row[place]; i++) {
           // Rows of a × share one numbering per place, so pushing them together moves each block.
           const index = rowsOf.slice(0, ri).reduce((s, r) => s + r[place], 0) + i;
@@ -256,7 +277,7 @@ export function BlocksModel(p: BlocksModelProps) {
           }
         }
       });
-      ry += rowH + u * 1.2;
+      ry += rowH + Math.round(u * 1.2);
     });
     // The count under each column.
     PLACES.forEach((place) => {
@@ -285,7 +306,7 @@ export function BlocksModel(p: BlocksModelProps) {
               </g>,
             );
           }
-          if (dealt[place] > 0) bx += columnSize(place, dealt[place], plateU).w + 8;
+          if (dealt[place] > 0) bx += packedWidth(place, dealt[place], plateU) + 8;
         });
       }
     }

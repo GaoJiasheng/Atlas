@@ -14,6 +14,8 @@ import { fieldDigits, isValueForm } from './forms';
 import { applyTrade, canTrade, counts, sharePlace, standard, ZERO, type Counts } from './blocks';
 import { parseArrayCut } from './array';
 import { cleanDecimal, DECIMAL_ACTIONS, decimalClear, decimalInitial, decimalReduce, onChart, type DecimalAction, type DecimalState } from './decimal-tasks';
+import { onDial, snapTo } from './clock';
+import { canHop } from './timeline';
 
 export type Sym = '<' | '=' | '>';
 export type Phase = 'model' | 'convert' | 'mark' | 'input';
@@ -71,6 +73,12 @@ export type Action =
   | { do: 'trade'; trade: Trade }
   /** Blocks: share one place into the plates as far as it goes. */
   | { do: 'share'; place: PlaceKey }
+  /** Clock: the hands set to `t` (seconds since midnight; the minute hand snaps, the hour hand follows). */
+  | { do: 'clock'; t: number }
+  /** Timeline: one jump of `by` seconds from where the jumps have got to (a chip; negative goes back). */
+  | { do: 'hop'; by: number }
+  /** Timeline: the last jump taken back. */
+  | { do: 'unhop' }
   /** Check the current phase: on success a multi-part task moves to its next phase. */
   | { do: 'check' }
   /** Decimals (docs/29 §3.6): the grid, the line's zoom, the ends, the rows, the digits, the chart. */
@@ -124,6 +132,10 @@ export interface TaskState extends DecimalState {
   dealt: Counts;
   /** Blocks: trades made. */
   trades: number;
+  /** Clock: the time the child has set (`null`: not moved, the model's time). */
+  clock: number | null;
+  /** Timeline: the child's jumps (chip presses, signed seconds). */
+  hops: number[];
   /** Index into `phasesOf(task)`. */
   phase: number;
 }
@@ -132,6 +144,8 @@ export interface TaskState extends DecimalState {
 export function phasesOf(task: Task): Phase[] {
   switch (task.kind) {
     case 'input':
+    case 'read-clock':
+    case 'duration':
       return ['input'];
     case 'build-sum':
       return [...(task.convert ? (['convert'] as const) : []), 'mark', 'input'];
@@ -156,10 +170,25 @@ export function phasesOf(task: Task): Phase[] {
   }
 }
 
+/** The written part of a clock or timeline task, as an input spec (one object per task, so it can be compared). */
+const timeSpecs = new WeakMap<Task, InputSpec>();
+
 /** The input spec of a task's input phase (`null` = none). */
 export function inputSpecOf(task: Task): InputSpec | null {
   if (task.kind === 'input') return task;
   if (task.kind === 'build-sum') return task.answer;
+  if (task.kind === 'read-clock' || task.kind === 'duration') {
+    let spec = timeSpecs.get(task);
+    if (!spec) {
+      // A clock is read in its form; a duration task's span (what is known, what is asked) tells the diagnosis what to look for.
+      spec =
+        task.kind === 'read-clock'
+          ? { answer: task.answer, form: task.form, units: task.units }
+          : { ...task.answer, span: task.answer.span ?? { start: task.start, end: task.end, length: task.length, ask: task.ask } };
+      timeSpecs.set(task, spec);
+    }
+    return spec;
+  }
   if ('then' in task && task.then) return task.then;
   return null;
 }
@@ -206,6 +235,8 @@ export function initialState(task: Task): TaskState {
     mat: task.kind === 'regroup' && typeof task.value === 'number' ? counts(task.start) : task.kind === 'share' && typeof task.value === 'number' ? standard(task.value) : ZERO,
     dealt: ZERO,
     trades: 0,
+    clock: null,
+    hops: [],
     phase: 0,
   };
 }
@@ -367,6 +398,7 @@ export function reduce(task: Task, state: TaskState, action: Action): TaskState 
     }
     case 'clear': {
       if (onChart(task) || task.kind === 'shade-decimal') return decimalClear(task, state);
+      if (task.kind === 'duration') return state.hops.length ? { ...state, hops: [] } : state;
       if (task.kind === 'group' || task.kind === 'skip-count' || task.kind === 'regroup' || task.kind === 'share') {
         const start = initialState(task);
         return { ...state, groups: start.groups, landings: [], mat: start.mat, dealt: start.dealt, trades: 0 };
@@ -448,8 +480,19 @@ export function reduce(task: Task, state: TaskState, action: Action): TaskState 
       const next = sharePlace(state.mat, state.dealt, action.place, task.k);
       return next.mat === state.mat ? state : { ...state, ...next };
     }
+    case 'clock': {
+      if (task.kind !== 'set-clock') return state;
+      const t = onDial(snapTo(action.t, task.snap), !!task.ampm);
+      return t === state.clock ? state : { ...state, clock: t };
+    }
+    case 'hop':
+      if (task.kind !== 'duration' || action.by === 0 || !canHop(task, state.hops, action.by)) return state;
+      return { ...state, hops: [...state.hops, action.by] };
+    case 'unhop':
+      return task.kind === 'duration' && state.hops.length ? { ...state, hops: state.hops.slice(0, -1) } : state;
+    case 'check':
     default:
-      // `check` (and the decimal moves, handled above).
+      // the decimal moves, handled above.
       return state;
   }
 }

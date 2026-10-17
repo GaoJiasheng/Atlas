@@ -12,7 +12,7 @@ import { compare, equal, equivalent, isSimplest, sign, toImproper, valueOnLine, 
 import { inputSpecOf, partsFor, phasesOf, taskFigure, tileKeys, type Phase, type Sym, type TaskState } from './state';
 import { boundaryEdges, isHalfKey, parseCut, piecesAfter, rectOf } from './grid';
 import { askOf, diagnoseNumber, drawnRight, drawnShows, measured, unitShows } from './diagnose/measure';
-import { isFracValue, isUnit, type AnswerValue, type Unit } from './value';
+import { clockParts, isFracValue, isUnit, type AnswerValue, type Unit } from './value';
 import { answerValues, isTimeForm, isValueForm, isWholeForm, readWritten, valueFields, writtenEquals, type Written } from './forms';
 import { arrangedShows, diagnoseWhole, groupShows, groupsRight, landingsShow, opResult, skipTarget, wholeContextOf, type WholeWritten } from './diagnose/whole-ops';
 import { diagnoseTime, timeContextOf } from './diagnose/time';
@@ -25,6 +25,7 @@ import type { DecValue } from './value';
 
 /** A fraction, or a decimal as the fraction it is (the fraction checks read decimals this way). */
 export const asFrac = (v: Frac | DecValue): Frac => (isDec(v) ? toFraction(v) : v);
+import { clockSetRight, clockShown } from './clock';
 
 export interface CheckResult {
   ok: boolean;
@@ -528,6 +529,23 @@ function decimalModelPhase(task: Task): boolean {
   return (task.kind === 'compare' || task.kind === 'order') && isDecimalTask(task);
 }
 
+/* ------------------------------------------------------------------ */
+/* The clock (docs/20 §3.4)                                            */
+/* ------------------------------------------------------------------ */
+
+/** The time a set clock shows, as the child's written answer (its 12-hour position; with am / pm, the plate too). */
+export function setClockWritten(task: TaskOf<'set-clock'>, set: number | null): Written {
+  const p = clockParts(clockShown(task, set));
+  return { kind: 'clock', mode: task.ampm ? '12' : 'face', h: p.h12, m: p.m, s: 0, ap: task.ampm ? (p.pm ? 'pm' : 'am') : null };
+}
+
+function checkSetClock(task: TaskOf<'set-clock'>, state: TaskState): CheckResult {
+  if (state.clock === null) return NOT_YET;
+  if (clockSetRight(task, state.clock)) return OK;
+  const code = diagnoseTime(declaredCodes(task), { form: task.ampm ? 'time12' : 'face', answer: task.target }, setClockWritten(task, state.clock));
+  return { ok: false, code };
+}
+
 /** Check one phase of a task. */
 export function checkPhase(task: Task, state: TaskState, phase: Phase): CheckResult {
   if (phase === 'input') {
@@ -548,6 +566,7 @@ export function checkPhase(task: Task, state: TaskState, phase: Phase): CheckRes
   if (decimalModelPhase(task)) return checkDecimalModel(task, state, declaredCodes(task));
   if (task.kind === 'count-squares' || task.kind === 'trace-perimeter' || task.kind === 'draw-rectangle' || task.kind === 'split-figure') return checkGridModel(task, state);
   if (task.kind === 'group' || task.kind === 'arrange' || task.kind === 'skip-count' || task.kind === 'split-array' || task.kind === 'regroup' || task.kind === 'share') return checkWholeModel(task, state);
+  if (task.kind === 'set-clock') return checkSetClock(task, state);
   switch (task.kind) {
     case 'shade':
       return checkShade(task, state);
@@ -634,6 +653,8 @@ export function answered(task: Task, state: TaskState): boolean {
       return state.trades > 0;
     case 'share':
       return state.dealt.H + state.dealt.T + state.dealt.O > 0;
+    case 'set-clock':
+      return state.clock !== null;
     default:
       return false;
   }

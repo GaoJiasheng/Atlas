@@ -33,6 +33,12 @@ import { DecimalLine } from './DecimalLine';
 import { MoneyModel } from './MoneyModel';
 import { isDecimalModel } from '../lib/decimal-tasks';
 import { formatDecimal } from '../lib/decimal';
+import { facesOf } from '../lib/clock';
+import { rangeOf } from '../lib/timeline';
+import { ClockModel } from './ClockModel';
+import { Timeline, timelineNow } from './Timeline';
+import type { TimeShown } from '../hud/cards/TimeCard';
+import { naturalUnits } from '../lib/value';
 
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
 const indices = (set: number | number[] | undefined): number[] => (set === undefined ? [] : Array.isArray(set) ? [...set] : Array.from({ length: set }, (_, i) => i));
@@ -69,6 +75,13 @@ export function beatShape(beat: Beat): string {
       return `pv|${JSON.stringify(m)}`;
     case 'money':
       return `money|${m.layout}|${JSON.stringify(m.pair ?? m.pieces ?? (m.amount ? formatDecimal(m.amount) : ''))}`;
+    case 'clock':
+    case 'timeline': {
+      // The same face keeps its drawing (the hands sweep to the new time, a lens comes and goes; new jumps are drawn on); another face or ruler remounts.
+      const shape = (x: Beat['model']) =>
+        x.kind === 'clock' ? `clock|${facesOf(x).map((f) => f.face).join(',')}` : x.kind === 'timeline' ? `timeline|${x.scale}|${rangeOf(x).from}-${rangeOf(x).to}|${x.labels}|${x.clock ? 'c' : ''}` : x.kind;
+      return `${shape(m)}${beat.under ? `|${shape(beat.under)}` : ''}`;
+    }
   }
 }
 
@@ -106,6 +119,29 @@ export function BeatModel({ beat, box, defs, modes, locale }: { beat: Beat; box:
       <g>
         <DecimalModel model={m} box={top} defs={defs} label={label} locale={locale} move={beat.move ?? null} />
         {beat.under && bottom && <DecimalModel model={beat.under} box={bottom} defs={defs} label={label} locale={locale} move={beat.move ?? null} />}
+      </g>
+    );
+  }
+  if (m.kind === 'clock' || m.kind === 'timeline') {
+    // A clock and a timeline together: side by side on a wide stage (the clock first), else one above the other.
+    const pair = beat.under;
+    if (pair && box.w > box.h * 1.5) {
+      const cw = Math.min(box.w * 0.34, box.h * 1.05);
+      const clockFirst = m.kind === 'clock';
+      const a: Rect = { ...box, w: cw };
+      const b: Rect = { ...box, x: box.x + cw + 24, w: box.w - cw - 24 };
+      return (
+        <g>
+          <ValueModel model={m} box={clockFirst ? a : b} defs={defs} label={label} locale={locale} move={beat.move ?? null} />
+          <ValueModel model={pair} box={clockFirst ? b : a} defs={defs} label={label} locale={locale} move={beat.move ?? null} />
+        </g>
+      );
+    }
+    const top: Rect = pair ? { ...box, h: box.h * 0.58 } : box;
+    return (
+      <g>
+        <ValueModel model={m} box={top} defs={defs} label={label} locale={locale} move={beat.move ?? null} />
+        {pair && <ValueModel model={pair} box={{ ...box, y: box.y + box.h * 0.6, h: box.h * 0.4 }} defs={defs} label={label} locale={locale} move={beat.move ?? null} />}
       </g>
     );
   }
@@ -228,9 +264,11 @@ export function DecimalModel({ model: m, box, defs, label, locale, move }: { mod
   return null;
 }
 
-/** An array, blocks or a whole-number line, read-only (a beat, or the part of a beat under another model). */
+/** An array, blocks, a whole-number line, a clock or a timeline, read-only (a beat, or the part of a beat under another model). */
 export function ValueModel({ model: m, box, defs, label, locale, move }: { model: Beat['model']; box: Rect; defs: string; label: string; locale: Locale; move: Beat['move'] | null }) {
   if (m.kind === 'array') return <ArrayModel defs={defs} box={box} model={m} locale={locale} label={label} move={move} />;
+  if (m.kind === 'clock') return <ClockModel defs={defs} box={box} model={m} locale={locale} label={label} move={move} />;
+  if (m.kind === 'timeline') return <Timeline defs={defs} box={box} model={m} locale={locale} label={label} move={move} />;
   if (m.kind === 'blocks') return <BlocksModel box={box} model={m} locale={locale} label={label} move={move} />;
   if (m.kind === 'numberline' && m.scale === 'whole') {
     const w = clamp(box.w - 80, 240, 960);
@@ -274,4 +312,24 @@ export function beatCounts(beat: Beat): { parts: number | null; marked: number |
   if (m.kind === 'circle') return { parts: m.parts, marked: indices(m.given).length + indices(m.shaded).length - indices(beat.crossed).length };
   if (m.kind === 'numberline') return { parts: m.scale === 'fraction' ? (m.intervals ?? 1) * (m.to - m.from) : null, marked: null };
   return { parts: null, marked: null };
+}
+
+/** What the TIME card shows for a beat: its clock's time (read as the face reads it: with am / pm on its plate, 24-hour with its inner ring), a stopwatch's or a duration scale's duration, a timeline's last mark. */
+export function beatTime(beat: Beat): TimeShown | null {
+  const models = [beat.model, ...(beat.under ? [beat.under] : [])];
+  for (const m of models) {
+    if (m.kind !== 'clock') continue;
+    const f = facesOf(m)[0]!;
+    if (f.face === 'stopwatch') return { seconds: f.elapsed?.t ?? 0, units: naturalUnits(f.elapsed?.t ?? 0) };
+    return { at: f.time, mode: f.ampm === 'show' ? '12' : f.inner24 ? '24' : 'face' };
+  }
+  for (const m of models) {
+    if (m.kind !== 'timeline') continue;
+    if (rangeOf(m).duration) {
+      const seconds = (m.jumps ?? []).reduce((a, [x, y]) => a + Math.abs(y - x), 0);
+      return seconds > 0 ? { seconds, units: naturalUnits(seconds) } : null;
+    }
+    return { at: timelineNow(m, null, null), mode: m.labels === '24h' ? '24' : '12' };
+  }
+  return null;
 }

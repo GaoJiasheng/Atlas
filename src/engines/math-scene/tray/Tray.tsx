@@ -26,6 +26,7 @@ import { solvedState } from '../lib/solve';
 import { denominatorEn, numberZh } from '../lib/words';
 import { GridModelControls } from './GridControls';
 import { WholeModelControls } from './WholeControls';
+import { HopChips, SetClockControls } from './TimeControls';
 import { AnswerInput } from './inputs';
 import { askOf } from '../lib/diagnose/measure';
 import { squared, unitText } from '../lib/value';
@@ -176,7 +177,10 @@ function Controls(p: TrayProps & { phase: string; locked: boolean }) {
     parts.push(<DecimalModelControls key="decimal" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
   } else if (phase === 'model' && wholeKind) {
     parts.push(<WholeModelControls key="whole" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
+  } else if (phase === 'model' && task.kind === 'set-clock') {
+    parts.push(<SetClockControls key="clock" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
   } else if (phase === 'input') {
+    if (task.kind === 'duration') parts.push(<HopChips key="hops" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
     parts.push(<AnswerInput key="input" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
     if (task.model.kind === 'barmodel' && task.model.units) {
       parts.push(

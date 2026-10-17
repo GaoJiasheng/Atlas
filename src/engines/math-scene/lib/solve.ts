@@ -11,12 +11,14 @@ import { answersOf, asFrac, check, inputValues, sortedOrder, usesValueBoxes } fr
 import { baseParts, figureRows, initialState, inputSpecOf, partsFor, phasesOf, reduce, taskFigure, tileKeys, type Action, type Sym, type TaskState } from './state';
 import { allSides, boundaryEdges, cellKey, cutKey, rectCuts } from './grid';
 import { drawnRight } from './diagnose/measure';
-import { parseMeasure } from './value';
+import { HOUR, MINUTE, parseMeasure } from './value';
 import { answerValues, sampleBoxes, valueBoxes } from './forms';
 import { groupTarget, skipTarget } from './diagnose/whole-ops';
 import { applyTrade, canTrade, type Counts } from './blocks';
 import { decimalBoxes, decimalSample, decimalSampleBoxes, decimalSolveModel, isDecimalTask, onChart } from './decimal-tasks';
 import { wholePart } from './decimal';
+import { HALF_DAY } from './clock';
+import { hopStart, hopsTo } from './timeline';
 
 const range = (from: number, count: number) => Array.from({ length: count }, (_, i) => from + i);
 
@@ -91,6 +93,13 @@ function shareActions(task: TaskOf<'share'>): Action[] {
   return out;
 }
 
+/** Where a duration task's jumps end up: the end of the span, or the time asked. */
+export function durationGoal(task: TaskOf<'duration'>): number | null {
+  if (task.ask === 'length') return task.end ?? null;
+  if (task.ask === 'end') return task.start !== undefined && task.length ? task.start + task.length.t : null;
+  return task.end !== undefined && task.length ? task.end - task.length.t : null;
+}
+
 /** Factor that turns the starting model into the target (split ×k / merge ÷k). */
 function scaleFactor(task: TaskOf<'split'> | TaskOf<'merge'>): number | null {
   const start = baseParts(task);
@@ -143,7 +152,17 @@ export function solve(task: Task): Action[] {
     case 'choose':
       return task.options.filter((o) => o.correct).map((o) => ({ do: 'choose', id: o.id }));
     case 'input':
+    case 'read-clock':
       return inputActions(task);
+    case 'set-clock':
+      return [{ do: 'clock', t: task.target }];
+    case 'duration': {
+      // The jumps a child would make on the timeline (to the hour mark, whole hours, the minutes left), then the answer.
+      const s = hopStart(task);
+      const goal = durationGoal(task);
+      const hops = s && goal !== null ? hopsTo(s.at, goal) : [];
+      return [...hops.map((by) => ({ do: 'hop', by }) as Action), ...inputActions(task)];
+    }
     case 'count-squares': {
       if (task.cover === 'all') return withInput(task, [{ do: 'rows', count: figureRows(task).length }]);
       // One full row (the top) and one full column (the left).
@@ -286,6 +305,8 @@ export function sampleState(task: Task, sample: string): TaskState | null {
     return { ...from, input: inputValues(spec, values), phase: inputPhase };
   };
   if (task.kind === 'input') return writeInput(initialState(task), sample);
+  // A clock read or a span worked out: only the answer is checked (`"7:20"`, `"1h75m"`, `"=11:35 am"`).
+  if (task.kind === 'read-clock' || task.kind === 'duration') return writeInput(initialState(task), sample.replace(/^=/, ''));
   if (sample.startsWith('=') && inputPhase >= 0) {
     const actions = solve(task);
     const cut = actions.findLastIndex((a) => a.do === 'check');
@@ -369,6 +390,13 @@ export function sampleState(task: Task, sample: string): TaskState | null {
     case 'align-add':
     case 'shift-digits':
       return null;
+    case 'set-clock': {
+      // `"3:50"` (the 12-hour position the hands are set to), `"3:50 pm"` with the am / pm plate.
+      const m = /^(\d{1,2})[:.](\d{2})\s*(am|pm)?$/i.exec(sample.trim());
+      if (!m || Number(m[1]) < 1 || Number(m[1]) > 12 || Number(m[2]) > 59) return null;
+      const t = (Number(m[1]) % 12) * HOUR + Number(m[2]) * MINUTE + (m[3]?.toLowerCase() === 'pm' ? HALF_DAY : 0);
+      return reduce(task, start, { do: 'clock', t });
+    }
     case 'regroup':
     case 'share': {
       // A list of moves from the start: `T>H` a trade, `T` share that place (`T,T>O,O`).

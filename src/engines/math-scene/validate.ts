@@ -138,7 +138,7 @@ function beatIssues(beat: Beat): string[] {
     if (count(beat.crossed).some((i) => !given.includes(i))) out.push('crossed parts must be given parts');
     if (m.kind === 'bar' && m.rows && beat.crossed) out.push('crossed is for a single bar');
   } else if (beat.crossed) out.push('crossed is for a bar or a circle');
-  if (m.kind === 'array' || m.kind === 'blocks' || (m.kind === 'numberline' && m.scale === 'whole')) out.push(...valueModelIssues(m));
+  if (m.kind === 'array' || m.kind === 'blocks' || m.kind === 'clock' || m.kind === 'timeline' || (m.kind === 'numberline' && m.scale === 'whole')) out.push(...valueModelIssues(m));
   else if (isDecimalModel(m)) out.push(...decimalModelIssues(m), ...(beat.under ? decimalModelIssues(beat.under) : []));
   else if (m.kind === 'numberline') {
     out.push(...valueModelIssues(m));
@@ -159,6 +159,12 @@ function beatIssues(beat: Beat): string[] {
   }
   if (beat.overlay?.equivalent && m.kind !== 'bar' && !(m.kind === 'barmodel' && m.units)) out.push('overlay.equivalent needs a bar (or a model drawing with units)');
   if (beat.overlay?.numberline && m.kind !== 'bar') out.push('overlay.numberline needs a bar');
+  if (beat.under) {
+    const u = beat.under;
+    if (u.kind === 'clock' || u.kind === 'timeline' || u.kind === 'array' || u.kind === 'blocks' || (u.kind === 'numberline' && u.scale === 'whole')) out.push(...valueModelIssues(u).map((x) => `under: ${x}`));
+    const time = (x: Model) => x.kind === 'clock' || x.kind === 'timeline';
+    if (time(m) !== time(u)) out.push('under pairs a clock with a timeline, or whole-number models with each other');
+  }
   return out;
 }
 

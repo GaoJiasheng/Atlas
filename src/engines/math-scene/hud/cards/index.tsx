@@ -19,7 +19,7 @@ import { FractionCard } from './FractionCard';
 import { AreaCard } from './AreaCard';
 import { ProductCard } from './ProductCard';
 import { PlaceValueCard } from './PlaceValueCard';
-import { TimeCard } from './TimeCard';
+import { TimeCard, type TimeShown } from './TimeCard';
 import { DecimalCard } from './DecimalCard';
 import { isDecimalTask } from '../../lib/decimal-tasks';
 
@@ -73,6 +73,8 @@ export interface CardProps {
   /** FRACTION: the beat's fraction, the pair it compares, the expanded names. */
   fixed: Frac | null;
   pair: { a: Frac; b: Frac; open: boolean } | null;
+  /** TIME: what a beat's (or the specimen's) clock or timeline shows. */
+  time?: TimeShown | null;
   expanded: boolean;
   locale: Locale;
 }
@@ -86,7 +88,7 @@ export function Card(p: CardProps) {
     case 'placeValue':
       return <PlaceValueCard model={p.model?.kind === 'blocks' ? p.model : null} task={p.task} state={p.state} done={p.done} locale={p.locale} />;
     case 'time':
-      return <TimeCard task={p.task} state={p.state} done={p.done} locale={p.locale} />;
+      return <TimeCard task={p.task} state={p.state} done={p.done} time={p.time} locale={p.locale} />;
     case 'decimal':
       return <DecimalCard model={p.model} beat={p.beat} task={p.task} state={p.state} done={p.done} expanded={p.expanded} locale={p.locale} />;
     default:

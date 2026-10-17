@@ -39,10 +39,11 @@ import { answered } from './lib/check';
 import type { Action } from './lib/state';
 import { cardValue, workingLines } from './lib/working';
 import { formatFrac } from './lib/fraction';
+import { clockText } from './lib/value';
 import { Defs } from './stage/svg';
-import { SPECIMEN_ARRAY, SPECIMEN_DECIMAL, SPECIMEN_GRID, StageContent } from './stage/Stage';
+import { SPECIMEN_ARRAY, SPECIMEN_CLOCK, SPECIMEN_DECIMAL, SPECIMEN_GRID, StageContent } from './stage/Stage';
 import { isDecimalModel } from './lib/decimal-tasks';
-import { beatCounts, beatFraction, beatPair, beatShape } from './stage/BeatModel';
+import { beatCounts, beatFraction, beatPair, beatShape, beatTime } from './stage/BeatModel';
 import { useStageLayout, type LayoutMode, type Rect } from './stage/layout';
 import { Tray, partsAreNarrow } from './tray/Tray';
 import { Card, CARD_TITLE, cardKindOf, type CardKind } from './hud/cards';
@@ -140,7 +141,7 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
   // The fraction assists (S / E / N, labels) and specimen belong to a lesson on fractions; another lesson's background shows its first model.
   const fractionLesson = useMemo(() => !decimalLesson && lesson.steps.some((x) => x.beats.some((b) => isFractionModel(b.model))), [lesson, decimalLesson]);
   const firstKind = lesson.steps[0]?.beats[0]?.model.kind ?? 'bar';
-  const specimenModel: Model | null = fractionLesson ? null : decimalLesson ? SPECIMEN_DECIMAL : firstKind === 'grid' ? SPECIMEN_GRID : firstKind === 'array' || firstKind === 'blocks' || firstKind === 'numberline' ? SPECIMEN_ARRAY : null;
+  const specimenModel: Model | null = fractionLesson ? null : decimalLesson ? SPECIMEN_DECIMAL : firstKind === 'grid' ? SPECIMEN_GRID : firstKind === 'array' || firstKind === 'blocks' || firstKind === 'numberline' ? SPECIMEN_ARRAY : firstKind === 'clock' || firstKind === 'timeline' ? SPECIMEN_CLOCK : null;
   const lessonCard: CardKind = fractionLesson ? 'fraction' : cardKindOf(specimenModel, null, 'fraction');
   const assists = fractionLesson;
   const explain = slot.kind === 'explain' ? slot.beat : null;
@@ -313,7 +314,7 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
       ? [UP(t('en', 'math.check.title')), ...(value ? [`${UP(t('en', 'math.status.value'))} ${formatFrac(value)}`] : []), ...(run.done ? [UP(t('en', 'math.status.done'))] : [])]
       : explain
         ? [`${UP(t('en', 'math.beat.label'))} ${cur.beat + 1}/${count - 1}`, ...(value ? [`${UP(t('en', 'math.status.value'))} ${formatFrac(value)}`] : [])]
-        : [`${UP(t('en', 'math.status.specimen'))} ${fractionLesson ? '3/4' : decimalLesson ? '0.35' : gridLesson && firstKind === 'grid' ? '4 × 3' : '3 × 4'}`];
+        : [`${UP(t('en', 'math.status.specimen'))} ${fractionLesson ? '3/4' : decimalLesson ? '0.35' : gridLesson && firstKind === 'grid' ? '4 × 3' : specimenModel?.kind === 'clock' ? clockText(specimenModel.time, 'face', lesson.notation) : '3 × 4'}`];
   const [cardExpanded, setCardExpanded] = useState(false);
   const specRows = useMemo<SpecRow[]>(
     () => [
@@ -440,8 +441,8 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
       ? gridRows(gridOnShow, task && run && task.kind !== 'choose' && task.kind !== 'input' ? run.state : null)
       : modelOnShow && decimalPlateRows(modelOnShow, task, run?.state ?? null, !!run?.done)
         ? decimalPlateRows(modelOnShow, task, run?.state ?? null, !!run?.done)!
-      : modelOnShow && valuePlateRows(modelOnShow, task, run?.state ?? null, !!run?.done)
-        ? valuePlateRows(modelOnShow, task, run?.state ?? null, !!run?.done)!
+      : modelOnShow && valuePlateRows(modelOnShow, task, run?.state ?? null, !!run?.done, lesson.notation)
+        ? valuePlateRows(modelOnShow, task, run?.state ?? null, !!run?.done, lesson.notation)!
       : explain
       ? modelRows(t('en', VIEW_KEY[explain.model.kind]), beatCounts(explain).parts, beatCounts(explain).marked, value)
       : task && run
@@ -496,6 +497,7 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
           done={!!run?.done}
           fixed={showSummary ? null : value}
           pair={explain ? beatPair(explain) : null}
+          time={explain ? beatTime(explain) : background && specimenModel?.kind === 'clock' ? { at: specimenModel.time, mode: 'face' } : null}
           expanded={cardExpanded}
           locale={locale}
         />

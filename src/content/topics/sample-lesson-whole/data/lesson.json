@@ -1989,16 +1989,20 @@
         },
         {
           "model": {
-            "kind": "numberline",
-            "scale": "whole",
-            "from": 0,
-            "to": 100,
-            "step": 10,
-            "labels": "tens",
-            "jumps": {
-              "size": 10,
-              "count": 9
-            }
+            "kind": "timeline",
+            "scale": "duration",
+            "to": "120m",
+            "minor": 10,
+            "jumps": [
+              [
+                "0m",
+                "60m"
+              ],
+              [
+                "60m",
+                "95m"
+              ]
+            ]
           },
           "caption": {
             "en": "Placeholder: {d:95m} is {d:1h35m}.",
@@ -2598,6 +2602,744 @@
           },
           "answer": "12:30",
           "form": "time12"
+        }
+      ]
+    },
+    {
+      "id": "clock-and-timeline",
+      "lo": [
+        "placeholder"
+      ],
+      "limits": {
+        "clock": "24h",
+        "maxDuration": "180m",
+        "sameDay": true
+      },
+      "beats": [
+        {
+          "model": {
+            "kind": "clock",
+            "time": "03:00",
+            "minuteLabels": true,
+            "lit": "both"
+          },
+          "caption": {
+            "en": "Placeholder: the short hand and the long hand at {t:3:00|face}.",
+            "zh": "占位：{t:3:00|face} 时的短针和长针。"
+          },
+          "equation": "{t:3:00|face}"
+        },
+        {
+          "model": {
+            "kind": "clock",
+            "time": "03:40",
+            "minuteLabels": true,
+            "hourTrack": {
+              "from": "03:00"
+            },
+            "highlightTicks": [
+              36,
+              37,
+              38,
+              39,
+              40
+            ]
+          },
+          "move": "sweep",
+          "caption": {
+            "en": "Placeholder: the hands sweep on to {t:3:40|face}; the hour hand moves too.",
+            "zh": "占位：两针扫到 {t:3:40|face}；时针也走了。"
+          },
+          "equation": "{t:3:40|face}"
+        },
+        {
+          "model": {
+            "kind": "clock",
+            "time": "02:45",
+            "zoom": "hour"
+          },
+          "move": "sweep",
+          "caption": {
+            "en": "Placeholder: back to {t:2:45|face}; the lens shows the hour hand before 3.",
+            "zh": "占位：退回到 {t:2:45|face}；放大镜里时针还没到 3。"
+          },
+          "equation": "{t:2:45|face}"
+        },
+        {
+          "model": {
+            "kind": "timeline",
+            "scale": "span",
+            "from": "09:00",
+            "to": "12:00",
+            "minor": 5,
+            "marks": [
+              {
+                "at": "09:40",
+                "tone": "cold",
+                "label": {
+                  "en": "start",
+                  "zh": "开始"
+                }
+              },
+              {
+                "at": "11:15",
+                "tone": "hot",
+                "label": {
+                  "en": "end",
+                  "zh": "结束"
+                }
+              }
+            ],
+            "jumps": [
+              [
+                "09:40",
+                "10:00"
+              ],
+              [
+                "10:00",
+                "11:00"
+              ],
+              [
+                "11:00",
+                "11:15"
+              ]
+            ],
+            "clock": true
+          },
+          "move": "jump",
+          "caption": {
+            "en": "Placeholder: jump to the hour, the whole hours, then the minutes left.",
+            "zh": "占位：先跳到整点，再跳整小时，最后跳剩下的分钟。"
+          },
+          "equation": "{t:09:40} → {t:11:15} = {d:1h35m}"
+        },
+        {
+          "model": {
+            "kind": "timeline",
+            "scale": "day",
+            "labels": "both",
+            "bands": "ampm",
+            "marks": [
+              {
+                "at": "07:00",
+                "tone": "cold"
+              },
+              {
+                "at": "19:40",
+                "tone": "hot"
+              }
+            ]
+          },
+          "under": {
+            "kind": "clock",
+            "time": "19:40",
+            "inner24": true,
+            "ampm": "show"
+          },
+          "move": "morph",
+          "caption": {
+            "en": "Placeholder: one day on a line; {t:19:40} is {t:19:40|24}.",
+            "zh": "占位：一天画成一条线；{t:19:40} 就是 {t:19:40|24}。"
+          },
+          "equation": "{t:19:40} = {t:19:40|24}"
+        }
+      ],
+      "keyFacts": [
+        {
+          "en": "Placeholder: the hour hand moves as the minute hand goes round.",
+          "zh": "占位：分针转，时针也跟着走。"
+        },
+        {
+          "en": "Placeholder: jump to the hour, then whole hours, then minutes.",
+          "zh": "占位：先跳到整点，再整小时，再分钟。"
+        }
+      ],
+      "pool": [
+        {
+          "id": "ct-read-720",
+          "kind": "read-clock",
+          "model": {
+            "kind": "clock",
+            "time": "07:20",
+            "minuteLabels": true
+          },
+          "prompt": {
+            "en": "Placeholder: what time does the clock show?",
+            "zh": "占位：钟面上是几点几分？"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "numeral-as-minutes",
+                "say": {
+                  "en": "Placeholder feedback for numeral-as-minutes.",
+                  "zh": "占位反馈：numeral-as-minutes。"
+                },
+                "sample": "7:04"
+              },
+              {
+                "when": "hands-swapped",
+                "say": {
+                  "en": "Placeholder feedback for hands-swapped.",
+                  "zh": "占位反馈：hands-swapped。"
+                },
+                "sample": "4:36"
+              }
+            ]
+          },
+          "answer": "07:20",
+          "form": "face"
+        },
+        {
+          "id": "ct-read-pm",
+          "kind": "read-clock",
+          "model": {
+            "kind": "clock",
+            "time": "19:40",
+            "ampm": "ask"
+          },
+          "prompt": {
+            "en": "Placeholder: it is evening. What time is it?",
+            "zh": "占位：现在是晚上。几点几分？"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "am-pm",
+                "say": {
+                  "en": "Placeholder feedback for am-pm.",
+                  "zh": "占位反馈：am-pm。"
+                },
+                "sample": "7:40 am"
+              },
+              {
+                "when": "next-hour",
+                "say": {
+                  "en": "Placeholder feedback for next-hour.",
+                  "zh": "占位反馈：next-hour。"
+                },
+                "sample": "8:40 pm"
+              }
+            ]
+          },
+          "answer": "19:40",
+          "form": "time12"
+        },
+        {
+          "id": "ct-stopwatch",
+          "kind": "read-clock",
+          "model": {
+            "kind": "clock",
+            "face": "stopwatch",
+            "elapsed": "75s"
+          },
+          "prompt": {
+            "en": "Placeholder: how long does the stopwatch show?",
+            "zh": "占位：秒表上显示多长时间？"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": []
+          },
+          "answer": "1m15s",
+          "form": "duration"
+        },
+        {
+          "id": "ct-set-915",
+          "kind": "set-clock",
+          "model": {
+            "kind": "clock",
+            "time": "12:00"
+          },
+          "prompt": {
+            "en": "Placeholder: set the clock to {t:9:15|face}.",
+            "zh": "占位：把钟拨到 {t:9:15|face}。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "next-hour",
+                "say": {
+                  "en": "Placeholder feedback for next-hour.",
+                  "zh": "占位反馈：next-hour。"
+                },
+                "sample": "10:15"
+              },
+              {
+                "when": "five-count-slip",
+                "say": {
+                  "en": "Placeholder feedback for five-count-slip.",
+                  "zh": "占位反馈：five-count-slip。"
+                },
+                "sample": "9:20"
+              }
+            ]
+          },
+          "target": "09:15",
+          "snap": 5
+        },
+        {
+          "id": "ct-set-250pm",
+          "kind": "set-clock",
+          "model": {
+            "kind": "clock",
+            "time": "12:00",
+            "ampm": "show"
+          },
+          "prompt": {
+            "en": "Placeholder: set the clock to {t:14:50}.",
+            "zh": "占位：把钟拨到 {t:14:50}。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "am-pm",
+                "say": {
+                  "en": "Placeholder feedback for am-pm.",
+                  "zh": "占位反馈：am-pm。"
+                },
+                "sample": "2:50 am"
+              },
+              {
+                "when": "next-hour",
+                "say": {
+                  "en": "Placeholder feedback for next-hour.",
+                  "zh": "占位反馈：next-hour。"
+                },
+                "sample": "3:50 pm"
+              }
+            ]
+          },
+          "target": "14:50",
+          "snap": 1,
+          "ampm": true
+        },
+        {
+          "id": "ct-how-long",
+          "kind": "duration",
+          "model": {
+            "kind": "timeline",
+            "scale": "span",
+            "from": "14:00",
+            "to": "17:00",
+            "minor": 5,
+            "marks": [
+              {
+                "at": "14:40",
+                "tone": "cold"
+              },
+              {
+                "at": "16:15",
+                "tone": "hot"
+              }
+            ],
+            "clock": true
+          },
+          "prompt": {
+            "en": "Placeholder: from {t:14:40} to {t:16:15}. How long?",
+            "zh": "占位：从 {t:14:40} 到 {t:16:15}，经过多长时间？"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "base-100",
+                "say": {
+                  "en": "Placeholder feedback for base-100.",
+                  "zh": "占位反馈：base-100。"
+                },
+                "sample": "1h75m"
+              },
+              {
+                "when": "count-endpoints",
+                "say": {
+                  "en": "Placeholder feedback for count-endpoints.",
+                  "zh": "占位反馈：count-endpoints。"
+                },
+                "sample": "2h35m"
+              }
+            ]
+          },
+          "ask": "length",
+          "start": "14:40",
+          "end": "16:15",
+          "answer": {
+            "answer": "1h35m",
+            "form": "duration"
+          }
+        },
+        {
+          "id": "ct-ends",
+          "kind": "duration",
+          "model": {
+            "kind": "timeline",
+            "scale": "span",
+            "from": "10:00",
+            "to": "13:00",
+            "minor": 5,
+            "bands": "ampm",
+            "marks": [
+              {
+                "at": "10:45",
+                "tone": "cold"
+              }
+            ]
+          },
+          "prompt": {
+            "en": "Placeholder: starts at {t:10:45}, lasts {d:50m}. When does it end?",
+            "zh": "占位：{t:10:45} 开始，用 {d:50m}，几点结束？"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "base-100",
+                "say": {
+                  "en": "Placeholder feedback for base-100.",
+                  "zh": "占位反馈：base-100。"
+                },
+                "sample": "=10:95 am"
+              },
+              {
+                "when": "wrong-direction",
+                "say": {
+                  "en": "Placeholder feedback for wrong-direction.",
+                  "zh": "占位反馈：wrong-direction。"
+                },
+                "sample": "=9:55 am"
+              }
+            ]
+          },
+          "ask": "end",
+          "start": "10:45",
+          "length": "50m",
+          "answer": {
+            "answer": "11:35",
+            "form": "time12"
+          }
+        },
+        {
+          "id": "ct-starts",
+          "kind": "duration",
+          "model": {
+            "kind": "timeline",
+            "scale": "span",
+            "from": "13:00",
+            "to": "16:00",
+            "minor": 5,
+            "labels": "24h",
+            "marks": [
+              {
+                "at": "15:05",
+                "tone": "hot"
+              }
+            ]
+          },
+          "prompt": {
+            "en": "Placeholder: arrived at {t:15:05|24} after {d:40m}. When did it leave?",
+            "zh": "占位：{t:15:05|24} 到，路上 {d:40m}，几点出发？"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "wrong-direction",
+                "say": {
+                  "en": "Placeholder feedback for wrong-direction.",
+                  "zh": "占位反馈：wrong-direction。"
+                },
+                "sample": "=15:45"
+              },
+              {
+                "when": "base-100",
+                "say": {
+                  "en": "Placeholder feedback for base-100.",
+                  "zh": "占位反馈：base-100。"
+                },
+                "sample": "=14:65"
+              }
+            ]
+          },
+          "ask": "start",
+          "end": "15:05",
+          "length": "40m",
+          "answer": {
+            "answer": "14:25",
+            "form": "time24"
+          }
+        },
+        {
+          "id": "ct-which-445",
+          "kind": "choose",
+          "model": {
+            "kind": "clock",
+            "time": "04:45"
+          },
+          "prompt": {
+            "en": "Placeholder: which clock shows {t:4:45|face}?",
+            "zh": "占位：哪个钟是 {t:4:45|face}？"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "hour-hand-on-numeral",
+                "say": {
+                  "en": "Placeholder feedback for hour-hand-on-numeral.",
+                  "zh": "占位反馈：hour-hand-on-numeral。"
+                },
+                "sample": "b"
+              },
+              {
+                "when": "next-hour",
+                "say": {
+                  "en": "Placeholder feedback for next-hour.",
+                  "zh": "占位反馈：next-hour。"
+                },
+                "sample": "c"
+              },
+              {
+                "when": "hands-swapped",
+                "say": {
+                  "en": "Placeholder feedback for hands-swapped.",
+                  "zh": "占位反馈：hands-swapped。"
+                },
+                "sample": "d"
+              }
+            ]
+          },
+          "options": [
+            {
+              "id": "a",
+              "correct": true,
+              "model": {
+                "kind": "clock",
+                "time": "04:45"
+              }
+            },
+            {
+              "id": "b",
+              "correct": false,
+              "misconception": "hour-hand-on-numeral",
+              "model": {
+                "kind": "clock",
+                "time": "04:45",
+                "faulty": "hour-on-numeral"
+              }
+            },
+            {
+              "id": "c",
+              "correct": false,
+              "misconception": "next-hour",
+              "model": {
+                "kind": "clock",
+                "time": "05:45"
+              }
+            },
+            {
+              "id": "d",
+              "correct": false,
+              "misconception": "hands-swapped",
+              "model": {
+                "kind": "clock",
+                "time": "04:45",
+                "faulty": "hands-swapped"
+              }
+            }
+          ]
         }
       ]
     }

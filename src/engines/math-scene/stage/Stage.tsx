@@ -39,12 +39,15 @@ import { decimalWords, wholeWords } from '../lib/words';
 import { matOf, total as blockTotal } from '../lib/blocks';
 import { isDec, isDecimalModel, isDecimalTask } from '../lib/decimal-tasks';
 import { formatDecimal } from '../lib/decimal';
-import type { DecimalGridModelSpec } from '../schema';
+import type { ClockModelSpec, DecimalGridModelSpec } from '../schema';
 import { DecimalTask } from './DecimalTask';
 import { decimalViewModel } from '../lib/decimal-views';
 import { DecimalModel } from './BeatModel';
 import { describeMoney } from './MoneyModel';
 import { DecimalGrid } from './DecimalGrid';
+import { facesOf } from '../lib/clock';
+import { ClockModel, describeClock } from './ClockModel';
+import { Timeline } from './Timeline';
 
 export interface DisplayModes {
   symbol: boolean;
@@ -122,11 +125,15 @@ export const SPECIMEN_GRID: GridModelSpec = {
 /** The background chapter of a lesson on whole numbers: an array of 3 rows of 4, its counts braced. */
 export const SPECIMEN_ARRAY: ArrayModelSpec = { kind: 'array', object: 'dot', layout: 'rows', rows: 3, cols: 4, braces: true, container: 'ring' };
 
+/** The background chapter of a lesson on time: a clock face at 7:20 (the hour hand a third of the way to 8). */
+export const SPECIMEN_CLOCK: ClockModelSpec = { kind: 'clock', time: 7 * 3600 + 20 * 60, face: 'clock', numerals: true, ticks: 'minutes', minuteLabels: true };
+
 /** The background chapter of a lesson on decimals: a hundred grid with 0.35 shaded. */
 export const SPECIMEN_DECIMAL: DecimalGridModelSpec = { kind: 'decimal-grid', level: 100, given: { units: 350_000, dp: 2 } };
 
 function Specimen(p: StageContentProps & { view: ModelView }) {
   const { box, locale, defs } = p;
+  if (p.view === 'clock' || p.view === 'timeline') return <ClockModel defs={defs} box={box} model={SPECIMEN_CLOCK} locale={locale} label={t(locale, 'math.specimen.clock')} />;
   if (p.view === 'grid') return <GridModel defs={defs} box={box} model={SPECIMEN_GRID} locale={locale} label={t(locale, 'math.specimen.grid')} />;
   if (p.view === 'decimal-grid') return <DecimalGrid defs={defs} box={box} model={SPECIMEN_DECIMAL} locale={locale} label={t(locale, 'math.specimen.decimal')} />;
   if (p.view === 'array') return <ArrayModel defs={defs} box={box} model={SPECIMEN_ARRAY} locale={locale} label={t(locale, 'math.specimen.array')} />;
@@ -219,6 +226,16 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
     if (dm) return <DecimalTask task={task} state={state} run={run} model={dm} box={area} defs={defs} locale={locale} label={label} editable={editable} act={act} />;
   }
 
+  /* the clock and the timeline: set the hands, jump along the line, or a picture to read */
+  if (!pictures && (m.kind === 'clock' || m.kind === 'timeline')) {
+    if (m.kind === 'clock') {
+      const live = task.kind === 'set-clock' ? task : null;
+      return <ClockModel defs={defs} box={area} model={m} locale={locale} label={label} task={live} state={live ? state : null} editable={editable} act={act} ghost={ghost && live ? live.target : null} />;
+    }
+    const live = task.kind === 'duration' ? task : null;
+    return <Timeline defs={defs} box={area} model={m} locale={locale} label={label} task={live} state={live ? state : null} ghost={ghost && live ? solvedState(live) : null} />;
+  }
+
   /* choose: picture or number cards on the stage, sentences in the tray */
   if (task.kind === 'choose') {
     const letters = 'ABCDEFG';
@@ -242,6 +259,8 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
                 ? describeArray(o.model, locale)
                 : o.model?.kind === 'blocks'
                   ? wholeWords(blockTotal(matOf(o.model)), locale)
+                  : o.model?.kind === 'clock'
+                    ? facesOf(o.model).map((f) => describeClock(f, locale)).join(' · ')
                   : o.text
                     ? plainText(tx(o.text, locale), locale)
                     : '',
@@ -536,6 +555,8 @@ export function MiniModel({ defs, model, box, locale }: { defs: string; model: T
   if (model.kind === 'grid') return <GridModel defs={defs} box={box} model={model} locale={locale} label={label} mini />;
   if (model.kind === 'array') return <ArrayModel defs={defs} box={box} model={model} locale={locale} label={label} mini />;
   if (model.kind === 'blocks') return <BlocksModel box={box} model={model} locale={locale} label={label} mini />;
+  if (model.kind === 'clock') return <ClockModel defs={defs} box={box} model={model} locale={locale} label={label} mini />;
+  if (model.kind === 'timeline') return <Timeline defs={defs} box={box} model={model} locale={locale} label={label} />;
   if (model.kind === 'numberline' && model.scale === 'whole') return <WholeLine x={box.x + 10} y={box.y + box.h / 2} w={box.w - 20} model={model} locale={locale} label={label} />;
   if (isDecimalModel(model)) return <DecimalModel model={model} box={box} defs={defs} label={label} locale={locale} move={null} />;
   if (model.kind === 'circle') {
