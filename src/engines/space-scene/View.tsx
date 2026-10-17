@@ -75,7 +75,7 @@ import { GroupScaleBars } from './hud/GroupScaleBars';
 import { TryIt } from './explorer/TryIt';
 import { setSim } from './hud/sim';
 import { isControlValue, resolveSimValues, stepValue } from './lib/sim/controls';
-import { evaluateSim } from './lib/sim';
+import { evaluateSimOnStage } from './lib/sim/carrier';
 import type { SimTry } from './sim-schema';
 import { SIM_KEYS } from '../core/controls';
 import './space-scene.css';
@@ -567,7 +567,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
           const values = resolveSimValues(sim, st.sim);
           const state = chapters.find((c) => c.id === st.chapter)?.state as SpaceChapterState | undefined;
           const card = state?.sim?.try ?? null;
-          return { values, set: { ...st.sim }, outputs: evaluateSim(sim, values, card?.observe), try: card, table: ui.getState().simTables[st.chapter ?? ''] ?? [] };
+          return { values, set: { ...st.sim }, outputs: evaluateSimOnStage(sim, file, values, st.pose, card?.observe).outputs, try: card, table: ui.getState().simTables[st.chapter ?? ''] ?? [] };
         },
         // Set controls as the reader would (one at a time, through the choices' `sets`); false if one is not a control value.
         setSim: (values: Record<string, boolean | number | string>) => {

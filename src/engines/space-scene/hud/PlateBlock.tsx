@@ -33,7 +33,7 @@ import { elevation, numberedParts } from '../lib/schematic';
 import { realLength, scaleBar } from '../lib/units';
 import { FOLLOW_LAG, formatReading, lagValue, readingDecimals, readingTarget } from '../lib/telemetry';
 import { numberOf, outputDecimals } from '../lib/sim';
-import type { SimControl, SimData, SimValue } from '../sim-schema';
+import type { SimControl, SimValue } from '../sim-schema';
 import { useSimView } from './sim';
 import type { SpaceSceneExt } from '../index';
 import type { PartsFile, TelemetryRow } from '../schema';
@@ -166,9 +166,10 @@ function controlStatus(c: SimControl, v: SimValue | undefined): string {
   return tx(c.options.find((o) => o.id === v)?.label ?? { en: String(v), zh: String(v) }, 'en').toUpperCase();
 }
 
-function Telemetry({ rows, run, sim }: { rows: readonly TelemetryRow[]; run: boolean; sim: SimData | undefined }) {
+function Telemetry({ rows, run, file }: { rows: readonly TelemetryRow[]; run: boolean; file: PartsFile }) {
+  const sim = file.sim;
   const t = useT();
-  const view = useSimView(sim);
+  const view = useSimView(file);
   // Instant transitions (deep links, snaps for tests / screenshots) jump to the end values.
   const snapId = useScene<SpaceSceneExt, number>((st) => (st.transition.instant ? st.transition.id : -1));
   const snap = useRef(0);
@@ -287,7 +288,7 @@ export function PlateBlock({ file, ui, bridge }: { file: PartsFile; ui: SpaceUiS
             </span>
           ))}
         </p>
-        {file.telemetry && <Telemetry rows={file.telemetry} run={s.run} sim={file.sim} />}
+        {file.telemetry && <Telemetry rows={file.telemetry} run={s.run} file={file} />}
         {picked ? (
           <button type="button" className="space-plate__sel" title={t('space.plate.show', { name: tx(picked.name, locale) })} onClick={showInspector}>
             <b>{partNumber(file, picked.id)}</b>

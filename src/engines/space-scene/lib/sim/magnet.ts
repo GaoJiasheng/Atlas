@@ -4,7 +4,10 @@
  * an electromagnet's moment × cells while on, × its residual while off), the
  * push or pull between the first two, the compass bearing in their field plus
  * Earth's, which field state is on show, and the illustrative paper-clip
- * counts. Field lines and iron filings of a state: lib/sim/field.ts.
+ * counts. Field lines and iron filings of a state: lib/sim/field.ts. A
+ * magnet with a `part` is where that part is now (`frames`,
+ * lib/sim/carrier.ts): its poles are moved and turned along with the part,
+ * after the model's own `move` / `flip`.
  *
  * Quantities: `force` (pull positive, push negative, % of the pull at the
  * `reference` setting; NaN, shown `—`, while the field state on show leaves
@@ -16,6 +19,7 @@
  */
 import type { MagnetData, SimValues } from '../../sim-schema';
 import type { Vec3 } from '../math';
+import { applyFrame, type Frame, type MagnetFrames } from './frame';
 
 interface Pole {
   at: Vec3;
@@ -42,14 +46,17 @@ const len = (a: Vec3) => Math.hypot(a[0], a[1], a[2]);
 const num = (values: SimValues, id: string | undefined, fallback: number) =>
   id !== undefined && typeof values[id] === 'number' ? (values[id] as number) : fallback;
 
-/** A magnet's two poles with these control values (moved along its axis, turned round), unit charges. */
-export function magnetPoles(m: Magnet, values: SimValues): Pole[] {
+/** A magnet's two poles with these control values (moved along its axis, turned round, then where its part's `frame` puts them), unit charges. */
+export function magnetPoles(m: Magnet, values: SimValues, frame?: Frame): Pole[] {
   const move = m.move;
   const d = move ? ((typeof values[move.control] === 'number' ? (values[move.control] as number) : move.origin) - move.origin) * move.per : 0;
   const n = len(move?.axis ?? [1, 0, 0]) || 1;
   const shift: Vec3 = move ? [(move.axis[0] / n) * d, (move.axis[1] / n) * d, (move.axis[2] / n) * d] : [0, 0, 0];
   const turned = m.flip !== undefined && m.flip.when.includes(String(values[m.flip.control]));
-  const at = (p: Vec3): Vec3 => [p[0] + shift[0], p[1] + shift[1], p[2] + shift[2]];
+  const at = (p: Vec3): Vec3 => {
+    const q: Vec3 = [p[0] + shift[0], p[1] + shift[1], p[2] + shift[2]];
+    return frame ? applyFrame(frame, q) : q;
+  };
   return [
     { at: at(turned ? m.south : m.north), q: 1 },
     { at: at(turned ? m.north : m.south), q: -1 },
@@ -65,10 +72,10 @@ export function magnetMoment(m: Magnet, values: SimValues): number {
 }
 
 /** A magnet's poles with their strengths (A·m): ± moment ÷ pole distance. */
-export function magnetCharges(m: Magnet, values: SimValues): Pole[] {
+export function magnetCharges(m: Magnet, values: SimValues, frame?: Frame): Pole[] {
   const d = len(sub(m.north, m.south)) || 1;
   const q = magnetMoment(m, values) / d;
-  return magnetPoles(m, values).map((p) => ({ at: p.at, q: p.q * q }));
+  return magnetPoles(m, values, frame).map((p) => ({ at: p.at, q: p.q * q }));
 }
 
 /** B (tesla) at `p` from these poles. */
@@ -140,14 +147,19 @@ export function bearingOf(b: Vec3, north: Vec3): number {
   return deg < 0 ? deg + 360 : deg;
 }
 
-/** Every magnet quantity for these control values; `compass`: where the needle is (null: no needle reading). */
-export function solveMagnets(m: MagnetData, values: SimValues, compass: Vec3 | null = null): Record<string, number | string> {
+/**
+ * Every magnet quantity for these control values; `compass`: where the needle
+ * is (null: no needle reading); `frames`: where the magnets' parts are now
+ * (the push / pull between them there, of the pull at `reference` on the rest
+ * bench).
+ */
+export function solveMagnets(m: MagnetData, values: SimValues, compass: Vec3 | null = null, frames?: MagnetFrames): Record<string, number | string> {
   const out: Record<string, number | string> = {};
   const [a, b] = m.magnets;
   const state = fieldStateOf(m, values);
   const onBench = new Set(fieldMagnets(m, state).map((g) => g.id));
   if (a && b) {
-    const now = pull(magnetPoles(a, values), magnetPoles(b, values));
+    const now = pull(magnetPoles(a, values, frames?.get(a.id)), magnetPoles(b, values, frames?.get(b.id)));
     const refValues: SimValues = { ...values };
     if (a.move) refValues[a.move.control] = m.reference;
     if (b.move) refValues[b.move.control] = m.reference;
@@ -162,7 +174,7 @@ export function solveMagnets(m: MagnetData, values: SimValues, compass: Vec3 | n
   }
   out['field-state'] = state;
   if (compass) {
-    const poles = fieldMagnets(m, state).flatMap((g) => magnetCharges(g, values));
+    const poles = fieldMagnets(m, state).flatMap((g) => magnetCharges(g, values, frames?.get(g.id)));
     const earth = earthField(m);
     const f = fieldAt(poles, compass);
     out['needle-bearing'] = bearingOf([f[0] + earth.b[0], f[1], f[2] + earth.b[2]], earth.north);

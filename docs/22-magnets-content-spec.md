@@ -690,8 +690,8 @@ state:
 - 删去：马蹄形场态与 `setup: horseshoe`（铁屑纸不在马蹄形下，图样会对不上）；未用的姿态 `fridge-open`、`em-clips-up`；过期的 `VALIDATION.md`；SOURCES.md 里过期的引擎交接段。
 
 **已知差距**
-- 引擎：sim 的场（铁屑、场线、指南针）用数据里写的磁极位置，看不到 `pose` / `rotate` 绑定对磁铁的移动（`src/engines/space-scene/lib/sim/magnet.ts` `solveMagnets`，144–166 行）；本主题用 `setup: away` 绕开。
-- 引擎：试一试的 `tint` 走高亮通道，染零件的全部材质槽（`stages/model3d/PartNode.tsx` 550–558 行），`glow` 只点槽 0；本主题把非铁芯的几何移出了 `em-nail`。
+- ~~引擎：sim 的场（铁屑、场线、指南针）用数据里写的磁极位置，看不到 `pose` / `rotate` 绑定对磁铁的移动~~ 已修（2026-10-17）：磁铁写 `part` 就跟着零件的姿态和绑定走（力、指南针、场线、铁屑；`lib/sim/carrier.ts`，docs/06「磁铁跟着零件走」）。本主题数据还没写 `part`，仍靠 `setup: away` 绕开；补上 `a → bar-magnet-n`、`b → bar-magnet-b`、`em → em-nail` 后可以去掉这个绕法。
+- ~~引擎：试一试的 `tint` 走高亮通道，染零件的全部材质槽，`glow` 只点槽 0~~ 已修（2026-10-17）：`tint` 也只染槽 0（`lib/sim/bind.ts slotTint`），其余槽照常跟高亮；把非铁芯几何移出 `em-nail` 不再必需。
 - `repeat` 的副本以 `at` 为中心对称排开（`lib/parts.ts repeatTransforms`），`count` 显示的是从一端起的前 k 份；docs/06 没写，初稿的回形针串因此整串错位。
 - 手机上 LAYERS / TOOLS 叠层盖住舞台右半（与其他 SpaceScene 主题相同）。
 - 地磁 40 µT 是 SIM 假设，不是新加坡实测；回形针只数全是示意。

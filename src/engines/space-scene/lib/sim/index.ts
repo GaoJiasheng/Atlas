@@ -4,12 +4,14 @@
  * (`circuit` → lib/sim/circuit.ts, `magnet` → lib/sim/magnet.ts) and maps its
  * quantities onto the declared outputs (`from`, default the output's id).
  * The magnet model's `clips` is the clip count the chapter's try-it card
- * observes (`observe`), NaN (shown `—`) where it observes none.
+ * observes (`observe`), NaN (shown `—`) where it observes none. `frames`
+ * (lib/sim/carrier.ts `magnetFrames`): where the magnets' parts are now.
  */
 import type { SimData, SimOutput, SimValues } from '../../sim-schema';
 import { solveCircuit } from './circuit';
 import { CLIP_QUANTITIES, ringPoint, solveMagnets } from './magnet';
 import type { Vec3 } from '../math';
+import type { MagnetFrames } from './frame';
 
 /** An output's value: a number, a state id, or numbers per id (a vector). */
 export type SimOutputValue = number | string | Readonly<Record<string, number>>;
@@ -30,10 +32,10 @@ export function compassPoint(sim: SimData, values: SimValues): Vec3 | null {
 }
 
 /** Every model quantity for these control values; `observe`: the outputs the chapter's try-it card observes. */
-export function simQuantities(sim: SimData, values: SimValues, observe: readonly string[] = []): Record<string, SimOutputValue> {
+export function simQuantities(sim: SimData, values: SimValues, observe: readonly string[] = [], frames?: MagnetFrames): Record<string, SimOutputValue> {
   if (sim.kind === 'circuit' && sim.circuit) return solveCircuit(sim.circuit, values).quantities;
   if (sim.kind === 'magnet' && sim.magnet) {
-    const q: Record<string, SimOutputValue> = solveMagnets(sim.magnet, values, compassPoint(sim, values));
+    const q: Record<string, SimOutputValue> = solveMagnets(sim.magnet, values, compassPoint(sim, values), frames);
     const clip = observe.map((id) => sim.outputs.find((o) => o.id === id)?.from ?? id).find((f) => (CLIP_QUANTITIES as readonly string[]).includes(f));
     q.clips = clip !== undefined ? q[clip]! : NaN;
     return q;
@@ -42,8 +44,8 @@ export function simQuantities(sim: SimData, values: SimValues, observe: readonly
 }
 
 /** The declared outputs for these control values (missing quantities: 0 / the first state / an empty vector). */
-export function evaluateSim(sim: SimData, values: SimValues, observe: readonly string[] = []): SimOutputs {
-  const q = simQuantities(sim, values, observe);
+export function evaluateSim(sim: SimData, values: SimValues, observe: readonly string[] = [], frames?: MagnetFrames): SimOutputs {
+  const q = simQuantities(sim, values, observe, frames);
   const out: Record<string, SimOutputValue> = {};
   for (const o of sim.outputs) {
     const v = q[o.from ?? o.id];

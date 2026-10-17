@@ -16,7 +16,8 @@
  * Try-it bindings (lib/sim/bind.ts) also give a part a glow (`uGlow` on its
  * own material, slot 0; eased: a dull red at a trace warming to the lamp
  * colour, brighter past full), a
- * count of its `repeat` copies on show, a tint (an iron core turned magnet),
+ * count of its `repeat` copies on show, a tint (an iron core turned magnet;
+ * its own material, slot 0, like the glow),
  * a turn that swings and settles (`settle`: a compass needle) about the part
  * centre or a pivot, a filings card's needles laid out for the field state
  * on show, and per animation a speed (a rotate's rpm, integrated so a change
@@ -64,6 +65,7 @@ import { skinnedRaycast } from './skinPick';
 import type { ShapePiece } from './geometry';
 import type { SimSettle } from '../../sim-schema';
 import { nearestTurn, stepSwing } from '../../lib/sim/settle';
+import { slotTint } from '../../lib/sim/bind';
 
 /** Geometry + rest transform of a part (from a primitive or a glb mesh). */
 export interface PartShape {
@@ -305,6 +307,8 @@ export function PartNode(props: PartNodeProps) {
     /** Contraction and highlight tint now; the bone-motion count the skinned anchor was last measured at. */
     contract: 0,
     tint: 0,
+    /** Try-it tint now (slot 0). */
+    simTint: 0,
     skinMoved: -1,
     frame: 0,
     /** `each` animations moved the instances last frame (one more write puts them back at rest). */
@@ -547,16 +551,20 @@ export function PartNode(props: PartNodeProps) {
     }
 
     // Highlight tint (exercise mode, `highlight`): eased like the selection; in an exercise it follows the contraction.
-    // A try-it tint (an iron core turned magnet) takes its place while bound.
+    // A try-it tint (an iron core turned magnet) takes its place on the part's own material only (slot 0, like the glow).
     const c = runtime.contract.get(part.id) ?? 0;
     const st = props.simTint ?? null;
-    const tintTarget = st ? TINT * st.level : display.tint ? TINT * (props.tintLive ? TINT_REST + (1 - TINT_REST) * c : 1) : 0;
+    const tintTarget = display.tint ? TINT * (props.tintLive ? TINT_REST + (1 - TINT_REST) * c : 1) : 0;
     m.tint = snap ? tintTarget : damp(m.tint, tintTarget, 8, dt);
     if (Math.abs(m.tint - tintTarget) < 0.003) m.tint = tintTarget;
-    for (const pm of pms) {
-      pm.uniforms.uHi.value = m.tint;
-      pm.uniforms.uHiColor.value.set(st ? st.color : display.tint === 'custom' && props.tintColor ? props.tintColor : display.tint === 'cold' ? style.cold : style.signal);
-    }
+    const simTarget = st ? TINT * st.level : 0;
+    m.simTint = snap ? simTarget : damp(m.simTint, simTarget, 8, dt);
+    if (Math.abs(m.simTint - simTarget) < 0.003) m.simTint = simTarget;
+    const hiColor = display.tint === 'custom' && props.tintColor ? props.tintColor : display.tint === 'cold' ? style.cold : style.signal;
+    pms.forEach((pm, i) => {
+      pm.uniforms.uHi.value = slotTint(i, m.tint, st ? m.simTint : null);
+      pm.uniforms.uHiColor.value.set(slotTint(i, hiColor, st ? st.color : null));
+    });
 
     // Contraction (MotionDriver): along the fibres in the shader, else a scale below.
     const contractChanged = c !== m.contract;
@@ -755,7 +763,7 @@ export function PartNode(props: PartNodeProps) {
       }
     } else if (sk && m.skinMoved !== runtime.bonesMoved) keepAnimating(state.invalidate); // the last pose still needs measuring
 
-    if (moving || m.fade !== targetFade || m.base !== targetBase || m.aside !== asideTarget || m.sel !== selTarget || m.tint !== tintTarget || m.glow !== glowTarget)
+    if (moving || m.fade !== targetFade || m.base !== targetBase || m.aside !== asideTarget || m.sel !== selTarget || m.tint !== tintTarget || m.simTint !== simTarget || m.glow !== glowTarget)
       keepAnimating(state.invalidate);
   });
 

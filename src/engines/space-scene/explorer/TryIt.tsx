@@ -21,7 +21,8 @@ import type { SpaceSceneExt } from '../index';
 import type { PartsFile } from '../schema';
 import type { SimControl, SimData, SimOutput, SimTry, SimValue } from '../sim-schema';
 import type { SpaceUiStore } from '../ui';
-import { evaluateSim, numberOf, outputDecimals, type SimOutputValue } from '../lib/sim';
+import { numberOf, outputDecimals, type SimOutputValue } from '../lib/sim';
+import { evaluateSimOnStage } from '../lib/sim/carrier';
 import { resolveSimValues, stepValue } from '../lib/sim/controls';
 import { outcomeOf, recordRow } from '../lib/sim/trial';
 import { formatReading } from '../lib/telemetry';
@@ -117,18 +118,19 @@ function Chips({ title, items, tone }: { title: string; items: string[]; tone: '
   );
 }
 
-function Predict({ sim, card, ui, chapter }: { sim: SimData; card: SimTry; ui: SpaceUiStore; chapter: string }) {
+function Predict({ file, sim, card, ui, chapter }: { file: PartsFile; sim: SimData; card: SimTry; ui: SpaceUiStore; chapter: string }) {
   const t = useT();
   const { locale } = useSceneContext();
   const store = useSimStore();
-  const view = useSimView(sim)!;
+  const view = useSimView(file)!;
   const answer = useStore(ui, (u) => (u.simPredict?.chapter === chapter ? u.simPredict : null));
   const p = card.predict!;
   const pick = (id: string) => {
     const before = { ...store.getState().sim };
     // From the prediction's starting point (the switch closed …): read the observed output there, then make the change.
     for (const [k, v] of Object.entries(p.start ?? {})) setSim(store, sim, k, v);
-    const value = numberOf(evaluateSim(sim, resolveSimValues(sim, store.getState().sim), card.observe)[p.observe]);
+    const st = store.getState();
+    const value = numberOf(evaluateSimOnStage(sim, file, resolveSimValues(sim, st.sim), st.pose, card.observe).outputs[p.observe]);
     ui.setState({ simPredict: { chapter, guess: id, before, value } });
     for (const [k, v] of Object.entries(p.change)) setSim(store, sim, k, v);
   };
@@ -170,10 +172,10 @@ function Predict({ sim, card, ui, chapter }: { sim: SimData; card: SimTry; ui: S
   );
 }
 
-function Table({ sim, card, ui, chapter }: { sim: SimData; card: SimTry; ui: SpaceUiStore; chapter: string }) {
+function Table({ file, sim, card, ui, chapter }: { file: PartsFile; sim: SimData; card: SimTry; ui: SpaceUiStore; chapter: string }) {
   const t = useT();
   const { locale } = useSceneContext();
-  const view = useSimView(sim)!;
+  const view = useSimView(file)!;
   const rows = useStore(ui, (u) => u.simTables[chapter]) ?? [];
   const vary = sim.controls.find((c) => c.id === card.vary)!;
   const outs = card.observe.map((id) => sim.outputs.find((o) => o.id === id)!).filter((o) => o.kind !== 'vector');
@@ -239,7 +241,7 @@ export function TryIt({ file, ui }: { file: PartsFile; ui: SpaceUiStore }) {
   const { locale } = useSceneContext();
   const store = useSimStore();
   const chapter = useScene<SpaceSceneExt, string | null>((s) => s.chapter);
-  const view = useSimView(file.sim);
+  const view = useSimView(file);
   if (!view || !view.card || !chapter) return null;
   const { sim, card, values, outputs } = view;
   const controls = [card.vary, ...(card.also ?? [])].map((id) => sim.controls.find((c) => c.id === id)).filter((c): c is SimControl => c !== undefined);
@@ -280,8 +282,8 @@ export function TryIt({ file, ui }: { file: PartsFile; ui: SpaceUiStore }) {
           <span className="atlas-chip">{t('source.simulated').toUpperCase()}</span> {t('space.try.model')}
         </p>
       </dl>
-      {card.predict && <Predict sim={sim} card={card} ui={ui} chapter={chapter} />}
-      {card.record && <Table sim={sim} card={card} ui={ui} chapter={chapter} />}
+      {card.predict && <Predict file={file} sim={sim} card={card} ui={ui} chapter={chapter} />}
+      {card.record && <Table file={file} sim={sim} card={card} ui={ui} chapter={chapter} />}
       {sim.circuit?.diagram && (
         <details className="space-try__diagram" open>
           <summary>{t('space.try.diagram')}</summary>

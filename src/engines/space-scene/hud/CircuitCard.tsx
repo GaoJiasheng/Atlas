@@ -125,7 +125,7 @@ export function CircuitDiagram({ file, sim }: { file: PartsFile; sim: SimData })
   const t = useT();
   const { locale } = useSceneContext();
   const store = useSimStore();
-  const view = useSimView(sim);
+  const view = useSimView(file);
   const selected = useScene<SpaceSceneExt, string | null>((s) => s.part);
   const c = sim.circuit;
   if (!c?.diagram || !view) return null;

@@ -91,6 +91,16 @@ function add(map: Map<string, Vec3>, id: string, d: Vec3): void {
   map.set(id, o ? [o[0] + d[0], o[1] + d[1], o[2] + d[2]] : d);
 }
 
+/**
+ * The tint a material slot takes: a try-it tint (`tint` binding) colours the
+ * part's own material only (slot 0, like `glow`: the iron core, not the
+ * leads, stand or clips drawn with it); the chapter / exercise highlight
+ * colours the other slots, and slot 0 too while no try-it tint is bound.
+ */
+export function slotTint<T>(slot: number, highlight: T, sim: T | null): T {
+  return slot === 0 && sim !== null ? sim : highlight;
+}
+
 export function simEffects(sim: SimData, values: SimValues, outputs: SimOutputs): SimEffects {
   const out: SimEffects = {
     hidden: new Set(),

@@ -314,7 +314,8 @@ export type FieldPlane = z.output<typeof fieldPlaneSchema>;
  * slides it along `axis` (scene units per step value), `flip` the choice
  * option ids that turn it round, `power` the switch (and cell count) of an
  * electromagnet: moment × cells while on, × `residual` while off (a steel core
- * keeps a little).
+ * keeps a little); `part` the part it rides on, so the field follows that
+ * part wherever a pose or binding puts it.
  */
 export const magnetSchema = z
   .object({
@@ -329,6 +330,13 @@ export const magnetSchema = z
             move: z.object({ control: kebabId, axis: vec3, per: z.number(), origin: z.number().default(0) }).strict().optional(),
             flip: z.object({ control: kebabId, when: z.array(kebabId).min(1) }).strict().optional(),
             power: z.object({ switch: kebabId, cells: kebabId.optional(), residual: z.number().min(0).max(1).default(0.15) }).strict().optional(),
+            /**
+             * The part the magnet rides on (a primitive part): its poles follow
+             * that part's pose (chapter / beat, or a try-it `pose` binding) and
+             * its try-it `offset` / `at` / `rotate` bindings, except those of
+             * its own `move` / `flip` controls (lib/sim/carrier.ts).
+             */
+            part: kebabId.optional(),
           })
           .strict(),
       )
@@ -494,6 +502,8 @@ interface SimContext {
   countable: ReadonlySet<string>;
   /** Parts whose primitive is `filings`. */
   filings?: ReadonlySet<string>;
+  /** Parts with a `primitive` (a magnet's `part` must be one). */
+  primitives?: ReadonlySet<string>;
 }
 
 /** Whether a value is a legal value of a control. */
@@ -577,7 +587,7 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
   if (sim.kind === 'circuit' && !sim.circuit) issue(['circuit'], 'a circuit sim needs `circuit`');
   if (sim.kind === 'magnet' && !sim.magnet) issue(['magnet'], 'a magnet sim needs `magnet`');
   if (sim.circuit) circuitIssues(sim.circuit, controls, ctx).forEach((x) => issue(['circuit', ...x.path], x.message));
-  if (sim.magnet) magnetIssues(sim, sim.magnet, controls).forEach((x) => issue(['magnet', ...x.path], x.message));
+  if (sim.magnet) magnetIssues(sim, sim.magnet, controls, ctx).forEach((x) => issue(['magnet', ...x.path], x.message));
   const fieldStates = (o: SimOutput | undefined) => o?.kind === 'state' && (o.from ?? o.id) === 'field-state' && sim.kind === 'magnet';
   const stateBound = new Set<string>();
   sim.bind.forEach((b, i) => {
@@ -676,7 +686,7 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
 }
 
 /** The magnet model's own data: controls it names, rings, the compass, field states and their lines. */
-function magnetIssues(sim: SimData, m: MagnetData, controls: ReadonlyMap<string, SimControl>): { path: (string | number)[]; message: string }[] {
+function magnetIssues(sim: SimData, m: MagnetData, controls: ReadonlyMap<string, SimControl>, ctx: SimContext): { path: (string | number)[]; message: string }[] {
   const out: { path: (string | number)[]; message: string }[] = [];
   const issue = (path: (string | number)[], message: string) => out.push({ path, message });
   const ids = new Set<string>();
@@ -690,6 +700,8 @@ function magnetIssues(sim: SimData, m: MagnetData, controls: ReadonlyMap<string,
       if (c?.kind !== 'choice') issue(['magnets', i, 'flip', 'control'], `"${g.flip.control}" is not a choice control`);
       else for (const w of g.flip.when) if (!c.options.some((o) => o.id === w)) issue(['magnets', i, 'flip', 'when'], `unknown option "${w}"`);
     }
+    if (g.part !== undefined && !ctx.parts.has(g.part)) issue(['magnets', i, 'part'], `unknown part "${g.part}"`);
+    else if (g.part !== undefined && ctx.primitives && !ctx.primitives.has(g.part)) issue(['magnets', i, 'part'], `"${g.part}" has no \`primitive\` (a magnet rides on a primitive part: its centre is the pose's pivot)`);
     if (g.power) {
       if (controls.get(g.power.switch)?.kind !== 'toggle') issue(['magnets', i, 'power', 'switch'], `"${g.power.switch}" is not a toggle`);
       if (g.power.cells !== undefined) {

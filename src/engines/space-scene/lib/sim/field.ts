@@ -1,15 +1,18 @@
 /**
  * Magnet field states (docs/22 §4.2 items 3–4, §4.4 M1 / M3; pure,
  * unit-tested): for each field state of `magnet.fields` (the magnets in it,
- * the controls at their defaults ⊕ its `when`), worked out once when first
- * shown and cached for the loaded data:
+ * the controls at their defaults ⊕ its `when`, each magnet where its part is
+ * now: lib/sim/carrier.ts), worked out once when first shown and cached for
+ * the loaded data and those places:
  *
  * - field lines: a 2-D solve in the state's plane (the poles projected onto
  *   it, the 3-D 1/r² law in the plane). From each north pole, lines × moment
  *   seeds on a small circle, evenly spaced and symmetric about the magnet's
  *   axis; each is traced along B (RK4, a fixed step) until it reaches a south
  *   pole, leaves the plane's rectangle or meets a null point. Polylines in
- *   scene coordinates, ≤ 120 points, ≤ 16 lines a state.
+ *   scene coordinates, ≤ 120 points, ≤ 16 lines a state. Where every magnet
+ *   of the state has moved the same way (one magnet hung up and turned), the
+ *   plane moves and turns with them; otherwise it stays put.
  * - iron filings: on a `filings` card (the part's XZ plane), candidate needles
  *   on a jittered grid (twice the needle budget, one fixed seed, so a needle
  *   turns in place when the state changes) are kept with probability
@@ -21,6 +24,8 @@
 import type { FieldPlane, MagnetData, SimData } from '../../sim-schema';
 import { simDefaults } from './controls';
 import { fieldAt, fieldMagnets, magnetCharges, magnetMoment, MAX_FIELD_LINES } from './magnet';
+import { apply3 } from '../xform';
+import { applyFrame, frameKey, type MagnetFrames } from './frame';
 import type { Vec3 } from '../math';
 
 export interface FieldLine {
@@ -53,8 +58,13 @@ interface Pole {
   q: number;
 }
 
+/** A plane lines are traced in; `u`: its first in-plane axis, when a frame has turned it (else from the normal). */
+export type TracePlane = FieldPlane & { u?: readonly number[] };
+
 /** Points a traced line keeps at most. */
 export const MAX_LINE_POINTS = 120;
+/** Layouts (lines or filings) kept per loaded data before the oldest goes (the places a topic's controls and poses give are few). */
+export const FIELD_CACHE_SIZE = 96;
 /** Steps across the plane's smaller side. */
 const STEPS_ACROSS = 400;
 
@@ -77,10 +87,10 @@ const norm = (v: readonly number[]): Vec3 => {
 const dot = (a: readonly number[], b: readonly number[]) => a[0]! * b[0]! + a[1]! * b[1]! + a[2]! * b[2]!;
 const cross = (a: readonly number[], b: readonly number[]): Vec3 => [a[1]! * b[2]! - a[2]! * b[1]!, a[2]! * b[0]! - a[0]! * b[2]!, a[0]! * b[1]! - a[1]! * b[0]!];
 
-/** In-plane axes of a field plane: u (+X unless the plane faces X), v = normal × u. */
-export function planeAxes(plane: FieldPlane): { n: Vec3; u: Vec3; v: Vec3 } {
+/** In-plane axes of a field plane: u (its own, else +X unless the plane faces X), v = normal × u. */
+export function planeAxes(plane: TracePlane): { n: Vec3; u: Vec3; v: Vec3 } {
   const n = norm(plane.normal ?? [0, 1, 0]);
-  const ref: Vec3 = Math.abs(n[0]) < 0.9 ? [1, 0, 0] : [0, 0, 1];
+  const ref: Vec3 = plane.u ? norm(plane.u) : Math.abs(n[0]) < 0.9 ? [1, 0, 0] : [0, 0, 1];
   const k = dot(ref, n);
   const u = norm([ref[0] - k * n[0], ref[1] - k * n[1], ref[2] - k * n[2]]);
   return { n, u, v: cross(n, u) };
@@ -91,12 +101,30 @@ export function stateValues(sim: SimData, state: string) {
   return { ...simDefaults(sim), ...(sim.magnet?.fields?.[state]?.when ?? {}) };
 }
 
-/** The poles (A·m) of a field state's magnets. */
-export function statePoles(sim: SimData, state: string): Pole[] {
+/** The poles (A·m) of a field state's magnets, each where its part is now (`frames`). */
+export function statePoles(sim: SimData, state: string, frames?: MagnetFrames): Pole[] {
   const m = sim.magnet;
   if (!m) return [];
   const values = stateValues(sim, state);
-  return fieldMagnets(m, state).flatMap((g) => magnetCharges(g, values));
+  return fieldMagnets(m, state).flatMap((g) => magnetCharges(g, values, frames?.get(g.id)));
+}
+
+/** Where a state's magnets are, as a cache key ('' = all at rest). */
+function placeKey(sim: SimData, state: string, frames: MagnetFrames | undefined): string {
+  if (!frames || frames.size === 0 || !sim.magnet) return '';
+  return fieldMagnets(sim.magnet, state)
+    .map((g) => frameKey(frames.get(g.id)))
+    .join(';')
+    .replace(/^;+$/, '');
+}
+
+/** The plane moved with the state's magnets when they all moved alike (else as written). */
+export function movedPlane(sim: SimData, state: string, plane: FieldPlane, frames: MagnetFrames | undefined): TracePlane {
+  const magnets = sim.magnet ? fieldMagnets(sim.magnet, state) : [];
+  const f = frames?.get(magnets[0]?.id ?? '');
+  if (!f || magnets.some((g) => frameKey(frames?.get(g.id)) !== frameKey(f))) return plane;
+  const { n, u } = planeAxes(plane);
+  return { center: applyFrame(f, plane.center), size: plane.size, normal: apply3(f.r, n), u: apply3(f.r, u) };
 }
 
 /** 2-D field in the plane (poles already projected). */
@@ -123,7 +151,7 @@ function field2(poles: readonly { x: number; y: number; q: number }[], x: number
 export function traceFieldLines(
   poles: readonly Pole[],
   starts: readonly { north: Vec3; south: Vec3; lines: number }[],
-  plane: FieldPlane,
+  plane: TracePlane,
   prefix = 'line',
 ): FieldLine[] {
   const { u, v } = planeAxes(plane);
@@ -217,13 +245,16 @@ const caches = new WeakMap<SimData, Map<string, unknown>>();
 function cached<T>(sim: SimData, key: string, make: () => T): T {
   let c = caches.get(sim);
   if (!c) caches.set(sim, (c = new Map()));
-  if (!c.has(key)) c.set(key, make());
+  if (!c.has(key)) {
+    if (c.size >= FIELD_CACHE_SIZE) c.delete(c.keys().next().value!);
+    c.set(key, make());
+  }
   return c.get(key) as T;
 }
 
-/** A field state's field lines (traced once per loaded data, then cached). */
-export function fieldLines(sim: SimData, state: string): FieldLine[] {
-  return cached(sim, `lines|${state}`, () => {
+/** A field state's field lines with its magnets where `frames` put them (traced once per loaded data and place, then cached). */
+export function fieldLines(sim: SimData, state: string, frames?: MagnetFrames): FieldLine[] {
+  return cached(sim, `lines|${state}|${placeKey(sim, state, frames)}`, () => {
     const m: MagnetData | undefined = sim.magnet;
     const f = m?.fields?.[state];
     const plane = f?.plane ?? m?.plane;
@@ -235,10 +266,10 @@ export function fieldLines(sim: SimData, state: string): FieldLine[] {
       f.lines ?? m.lines,
     );
     const starts = magnets.map((g, i) => {
-      const [n, s] = magnetCharges(g, values);
+      const [n, s] = magnetCharges(g, values, frames?.get(g.id));
       return { north: n!.at, south: s!.at, lines: counts[i]! };
     });
-    return traceFieldLines(statePoles(sim, state), starts, plane).slice(0, MAX_FIELD_LINES);
+    return traceFieldLines(statePoles(sim, state, frames), starts, movedPlane(sim, state, plane, frames)).slice(0, MAX_FIELD_LINES);
   });
 }
 
@@ -291,8 +322,9 @@ export function layFilings(poles: readonly Pole[] | null, card: FilingsCard, see
   return out;
 }
 
-/** A filings part's layout for a field state (cached per part and state; '' = no state). */
-export function ironFilings(sim: SimData | undefined, state: string, part: string, card: FilingsCard): Filing[] {
-  if (!sim || !state || !sim.magnet?.fields?.[state]) return layFilings(null, card);
-  return cached(sim, `filings|${part}|${state}`, () => layFilings(statePoles(sim, state), card));
+/** A filings part's layout for a field state, its magnets where `frames` put them (cached per part, state and place; '' = no state). */
+export function ironFilings(sim: SimData | undefined, state: string, part: string, card: FilingsCard, frames?: MagnetFrames): Filing[] {
+  if (!sim) return layFilings(null, card);
+  if (!state || !sim.magnet?.fields?.[state]) return cached(sim, `filings|${part}|`, () => layFilings(null, card));
+  return cached(sim, `filings|${part}|${state}|${placeKey(sim, state, frames)}`, () => layFilings(statePoles(sim, state, frames), card));
 }

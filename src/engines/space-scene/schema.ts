@@ -1166,6 +1166,7 @@ export const partsFileBase = z
         poses: new Set(Object.keys(file.poses ?? {})),
         countable,
         filings: new Set(file.parts.filter((p) => p.primitive?.kind === 'filings').map((p) => p.id)),
+        primitives: new Set(file.parts.filter((p) => p.primitive !== undefined).map((p) => p.id)),
       }))
         ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['sim', ...x.path], message: x.message });
     }

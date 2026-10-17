@@ -52,9 +52,11 @@ import type { StageLook } from './look';
 import { stageDpr } from './dpr';
 import type { SimSettle } from '../../sim-schema';
 import { resolveSimValues } from '../../lib/sim/controls';
-import { evaluateSim, type SimOutputs } from '../../lib/sim';
+import type { SimOutputs } from '../../lib/sim';
+import { evaluateSimOnStage } from '../../lib/sim/carrier';
+import { frameKey, type MagnetFrames } from '../../lib/sim/frame';
 import { simEffects, type SimEffects } from '../../lib/sim/bind';
-import { fieldLines, ironFilings } from '../../lib/sim/field';
+import { fieldLines, ironFilings, type Filing } from '../../lib/sim/field';
 import { filingMatrices, filingsCard } from './geometry';
 import { SimOverlays } from './SimOverlays';
 import type { Matrix4 } from 'three';
@@ -358,13 +360,13 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
   if (body) lastBody.current = body;
   else if (exercising && bodyStyle === 'ghost') lastBody.current = 'wire';
   const bonesOn = s.exercise?.bones === true;
-  // Try-it: the model's outputs for the values on show, and what they do to the parts and flows (lib/sim).
-  const simRun = useMemo<{ effects: SimEffects; outputs: SimOutputs } | null>(() => {
+  // Try-it: the model's outputs for the values on show (the magnets where the pose and bindings put their parts), and what they do to the parts and flows (lib/sim).
+  const simRun = useMemo<{ effects: SimEffects; outputs: SimOutputs; frames: MagnetFrames } | null>(() => {
     if (!data.sim) return null;
     const values = resolveSimValues(data.sim, s.sim);
-    const outputs = evaluateSim(data.sim, values);
-    return { effects: simEffects(data.sim, values, outputs), outputs };
-  }, [data.sim, s.sim]);
+    const { outputs, frames } = evaluateSimOnStage(data.sim, data, values, s.pose);
+    return { effects: simEffects(data.sim, values, outputs), outputs, frames };
+  }, [data, s.sim, s.pose]);
   const sim = simRun?.effects ?? null;
   const displays = useMemo(() => {
     const out = resolveAllPartDisplays(data.parts, { view: s.view, part: s.part, layers: s.layers, hidden: s.hidden, ghosted, solo: s.solo, highlight });
@@ -507,21 +509,26 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
     sim?.tint.forEach((g, id) => out.set(id, { color: resolveDataColor(g.color, look.tokens, look.theme, '#cc6328'), level: g.level }));
     return out;
   }, [sim, look]);
-  // Filings cards: the needles of the field state on show (laid out once per part and state, lib/sim/field.ts).
-  const filingCache = useRef(new Map<string, Matrix4[]>());
+  // Where the magnets are, as one key: the field is laid out again only when one of them moves.
+  const frames = simRun?.frames;
+  const placeKey = frames ? [...frames].map(([id, f]) => `${id}:${frameKey(f)}`).join(';') : '';
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- `placeKey` stands for `frames`
+  const place = useMemo(() => frames, [placeKey]);
+  // Filings cards: the needles of the field state on show (laid out once per part, state and place, lib/sim/field.ts).
+  const filingCache = useRef(new WeakMap<readonly Filing[], Matrix4[]>());
   const filingSets = useMemo(() => {
     const out = new Map<string, Matrix4[]>();
     sim?.states.forEach((state, id) => {
       const prim = data.parts.find((p) => p.id === id)?.primitive;
       if (prim?.kind !== 'filings') return;
-      const key = `${id}|${state}`;
-      let list = filingCache.current.get(key);
-      if (!list) filingCache.current.set(key, (list = filingMatrices(ironFilings(data.sim, state, id, filingsCard(prim)), prim, true)));
+      const filings = ironFilings(data.sim, state, id, filingsCard(prim), place);
+      let list = filingCache.current.get(filings);
+      if (!list) filingCache.current.set(filings, (list = filingMatrices(filings, prim, true)));
       out.set(id, list);
     });
     return out;
-  }, [sim, data.parts, data.sim]);
-  const linesOf = useCallback((state: string) => (data.sim ? fieldLines(data.sim, state) : []), [data.sim]);
+  }, [sim, data.parts, data.sim, place]);
+  const linesOf = useCallback((state: string) => (data.sim ? fieldLines(data.sim, state, place) : []), [data.sim, place]);
   const explodeTarget = targetExplodeAmount(s.view, s.explode);
   const anims = useMemo(() => animationsByPart(data.animations), [data.animations]);
   const alwaysOn = useMemo(
