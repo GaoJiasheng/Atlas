@@ -31,3 +31,12 @@ licensed CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/), with
 the attribution given in `THIRD-PARTY-NOTICES.md`. The texts, muscle sheets and
 exercise sheets of those topics (`src/content/shared/fitness/**`,
 `src/content/topics/muscles-*/chapters/**`) stay under CC BY-NC-SA 4.0 as above.
+
+Exception — Spring and Autumn and Warring States (topic `warring-states`): the
+control areas (`src/content/topics/warring-states/data/control.json`) and the
+dated rivers (`public/geo/warring-states-rivers.json`) are traced from
+Wikimedia Commons maps licensed CC BY-SA 3.0 / 4.0 and CC BY 3.0, and are
+therefore licensed CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/),
+with the attribution given in `src/content/topics/warring-states/data/SOURCES.md`
+and `scripts/geo/warring-states/SOURCES-GEO.md`. The texts, events, entities,
+routes and glossary of that topic stay under CC BY-NC-SA 4.0 as above.
