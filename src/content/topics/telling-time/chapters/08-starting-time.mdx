@@ -1,0 +1,43 @@
+---
+id: starting-time
+order: 8
+title: { en: "When did it start?", zh: "什么时候开始" }
+state:
+  summary: { en: "Finishing time − duration = starting time: jump back, then check by adding forwards.", zh: "结束时刻 − 经过的时间 = 开始时刻：往回跳，再往前加来验算。" }
+---
+
+<Lang en>
+
+In the previous step, you found the <Term id="starting-finishing-time">finishing time</Term> by adding the <Term id="duration">duration</Term> to the starting time. Now you know when a trip ends and how long it takes, and you need to find when it began.
+
+Look at <Beat n={1}>the arrival mark</Beat> on the <Term id="timeline">timeline</Term>. The bus arrives at 4.10 pm, after a trip lasting 1 h 25 min. The missing starting time belongs to the left of that mark, because the bus must leave before it arrives. The number sentence shows this: starting time + duration = finishing time.
+
+Start at the arrival mark and <Beat n={2}>jump back one whole hour</Beat> to 3.10 pm. A whole <Term id="hour">hour</Term> takes you to the same number of <Term id="minute">minutes</Term> past the hour before. You have taken away the hour part of the journey. There are still 25 min to take away, so this landing point is not yet the starting time.
+
+Next, <Beat n={3}>jump back to the full hour</Beat>, 3.00 pm. This jump uses 10 min of the remaining 25 min. Split the minutes here because the full hour gives you a place to count from. Since 25 − 10 = 15, you still need to go back 15 min.
+
+Finally, <Beat n={4}>jump back the last fifteen minutes</Beat> to 2.45 pm. Going back across a full hour means counting back from 60 minutes: 60 − 15 = 45. The bus left at 2.45 pm. Check by adding forwards from there: 2.45 pm + 1 h 25 min = 4.10 pm. You reach the arrival mark again, so the whole journey fits.
+
+A common mistake is to add the duration to the finishing time when finding the start. That gives a time after arrival, but the bus must have started earlier: finishing time − duration = starting time.
+
+When you are ready, <Task id="starting-time">try one question</Task> on finding a starting time by jumping backwards.
+
+</Lang>
+
+<Lang zh>
+
+求结束时刻，是从开始往后跳。如果知道的是结束的时刻和用了多长时间，要求什么时候开始，又该怎么办？
+
+生活里常有这样的问题：知道电影几点开场、坐车要多久，倒推出几点该出门。一趟巴士<Beat n={1}>下午 4 点 10 分到站</Beat>，路上用了 1 小时 25 分钟。这一次，时间线上标出的是结束的时刻。开始的时刻还不知道，它一定在 4 点 10 分的左边。
+
+出发一定在到站之前，所以要<Beat n={2}>往回推</Beat>，不是往后加。弧画在线的下面，表示往回跳。先往回跳 1 小时，从下午 4 点 10 分退到 3 点 10 分。
+
+1 小时 25 分钟里，还剩 25 分钟要退。<Beat n={3}>先退到整点</Beat>：从 3 点 10 分往回 10 分钟，是下午 3 点。25 分钟退掉了 10 分钟，还差 15 分钟。
+
+<Beat n={4}>再往回 15 分钟</Beat>，从 3 点退到 2 点 45 分。所以巴士是下午 2.45 出发的。可以写成：结束时刻 − 经过的时间 = 开始时刻。最后往前验算一遍：2 点 45 分过 1 小时 25 分钟，正好是 4 点 10 分。验算对得上，答案就靠得住。
+
+常见的错误是方向弄反了，把时间加到结束的时刻上，算出 5 点 35 分，这比到站还晚，当然不可能是出发时间。另一个错误是借位时把 1 小时当成 100 分钟，算出“2 点 85 分”这样的时刻。先退到整点，再退剩下的，就不会出错。
+
+准备好了，就<Task id="starting-time">做一道小题</Task>：从结束的时刻往回推，找出开始的时刻。
+
+</Lang>

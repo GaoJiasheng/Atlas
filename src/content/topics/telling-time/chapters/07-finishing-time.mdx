@@ -1,0 +1,43 @@
+---
+id: finishing-time
+order: 7
+title: { en: "When does it end?", zh: "什么时候结束" }
+state:
+  summary: { en: "Starting time + duration = finishing time: jump forwards, and change am to pm after noon.", zh: "开始时刻 + 经过的时间 = 结束时刻：往后跳，过了中午 am 变 pm。" }
+---
+
+<Lang en>
+
+In the last step, you found the <Term id="duration">duration</Term> between two times by adding jumps. Now you know when an activity starts and how long it lasts, and you need to find when it ends.
+
+Look at <Beat n={1}>the swimming lesson's start mark</Beat> on the <Term id="timeline">timeline</Term>. Its <Term id="starting-finishing-time">starting time</Term> is 2.35 pm, and it lasts 50 min. Begin at that mark and move forwards, because the lesson ends later than it starts. Adding the duration to the starting time gives the finishing time.
+
+First, follow <Beat n={2}>the jump to the next full hour</Beat>, 3.00 pm. There are 35 <Term id="minute">minutes</Term> past the <Term id="hour">hour</Term> already, so 60 − 35 = 25 minutes remain before the hour ends. This jump uses 25 min of the lesson's 50 min; the lesson is still going.
+
+Now follow <Beat n={3}>the second jump</Beat> from 3.00 pm. You have used 25 minutes, so 50 − 25 = 25 minutes are left. Add those remaining minutes to reach 3.25 pm, the end mark. The two jumps together cover 50 min, so the swimming lesson ends at 3.25 pm. You have used the whole duration, counting each part once.
+
+Next, look at <Beat n={4}>the jumps across noon</Beat>. This activity starts at 11.40 am and lasts 45 min. Jump 20 min to 12.00 pm, then the remaining 25 min to 12.25 pm. The <Term id="am-pm">am and pm</Term> bands change at <Term id="noon-midnight">noon</Term>, so your answer uses pm. Keeping am would place the finish before the activity started.
+
+A common mistake is to add 40 + 45 and leave 85 in the minutes part. An hour has 60 minutes, so 85 minutes must become one hour and 25 minutes.
+
+When you are ready, <Task id="finishing-time">try one question</Task> on finding a finishing time by jumping forwards from the start.
+
+</Lang>
+
+<Lang zh>
+
+上一步，开始和结束都知道，求经过了多长时间。这一步换一换：知道开始的时刻和用了多长时间，求什么时候结束。用的还是时间线，跳法也一样。
+
+游泳课<Beat n={1}>下午 2 点 35 分开始</Beat>，要上 50 分钟。时间线上只标出了开始的时刻。结束一定在开始之后，所以我们从这个标记出发，往右跳。
+
+<Beat n={2}>先跳到下一个整点</Beat>，下午 3 点。从 2 点 35 分到 3 点是 25 分钟。50 分钟已经用掉了 25 分钟，还剩 50 − 25 = 25 分钟。
+
+<Beat n={3}>再跳剩下的 25 分钟</Beat>：下午 3 点过 25 分钟，是 3 点 25 分。游泳课在下午 3.25 结束。做完可以往回推一遍来检查：3 点 25 分往回 50 分钟，正好回到 2 点 35 分。可以写成一句：<Term id="starting-finishing-time">开始时刻</Term> + 经过的时间 = 结束时刻。
+
+有时候一跳会<Beat n={4}>跨过中午 12 点</Beat>。上午 11 点 40 分开始，过 45 分钟：先跳 20 分钟到中午 12 点，再跳 25 分钟，到 12 点 25 分。跨过了中午，am 就变成 pm，所以要写 12.25 pm。
+
+这一步最常见的错误，是把分钟直接相加：40 + 45 = 85，写成 11.85。可是钟面上没有“85 分”，满 60 分钟就是一小时，要进到下一个整点。先跳到整点，就不会出现这样的数。另一个错误是忘了改 am 和 pm：跨过中午以后，要写 pm。
+
+准备好了，就<Task id="finishing-time">做一道小题</Task>：从开始的时刻往后跳，找出结束的时刻。
+
+</Lang>
