@@ -1,0 +1,19 @@
+---
+/**
+ * `<Dur d="1h35m" />`, `<Dur d="95m" />`, `<Dur d="75s" />`: a duration in a chapter body, written exactly as the
+ * lesson's `{d:…}` token (src/lib/rich-text.ts) — in the units written (`1 h 35 min` / `1 小时 35 分钟`) — one
+ * unbreakable run that screen readers hear as words ("one hour and thirty-five minutes"). `pnpm validate` checks d.
+ */
+import { plainText, speakable } from '../../lib/rich-text';
+import { pageLocale } from './locale';
+import { topicNotation } from './notation';
+
+interface Props {
+  d: string;
+}
+const locale = pageLocale(Astro.url, Astro.currentLocale);
+const token = `{d:${Astro.props.d}}`;
+const text = plainText(token, locale, topicNotation(Astro.url));
+const words = speakable(token, locale);
+---
+<span class="atlas-value" aria-label={words}>{text}</span>

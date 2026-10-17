@@ -1,0 +1,43 @@
+---
+id: hours-and-minutes
+order: 5
+title: { en: "Hours and minutes", zh: "小时和分钟" }
+state:
+  summary: { en: "1 h = 60 min: change hours and minutes into minutes, and minutes back into hours and minutes.", zh: "1 小时 = 60 分钟：几小时几分化成分钟，分钟再化回几小时几分。" }
+---
+
+<Lang en>
+
+You have seen how <Term id="am-pm">am and pm</Term> tell you which part of the day a clock reading belongs to. Now you will measure a <Term id="duration">duration</Term>: how long something lasts.
+
+Look at <Beat n={1}>the band halfway round the clock</Beat>, from <Time t="4:00" as="face" /> to 4.30. The <Term id="minute-hand">minute hand</Term> has travelled from 12 to 6. You can count six groups of five <Term id="minute">minutes</Term> along that path: 6 × 5 = 30 minutes. This is half an <Term id="hour">hour</Term>. You write minutes as min.
+
+Now <Beat n={2}>follow the band all the way round</Beat> to 5.00. The hand has travelled another half turn, adding another <Dur d="30m" />. Together, the two halves make <Dur d="60m" />, or one whole hour. You write hours as h. Each full turn takes the same amount of time, wherever the hand starts.
+
+On the <Term id="timeline">timeline</Term>, <Beat n={3}>look at the two jumps</Beat> that make <Dur d="1h20m" />. The first jump goes from zero to <Dur d="60m" />, using one whole hour. The second adds <Dur d="20m" />. To write the whole duration in minutes, replace the hour with <Dur d="60m" />, then add: 60 + 20 = 80 minutes. The length of time stays the same; only the units change.
+
+You can also <Beat n={4}>split the stretch of <Dur d="95m" /></Beat> into hours and minutes. Take out <Dur d="60m" /> for one whole hour. The minutes left are 95 − 60 = 35, so <Dur d="95m" /> is <Dur d="1h35m" />. Another whole hour would need another <Dur d="60m" />. Only <Dur d="35m" /> remains, so keep that part in minutes.
+
+A common mistake is to count an hour as 100 minutes. That would turn <Dur d="1h20m" /> into <Dur d="120m" />, but the clock shows that each whole hour contains 60 minutes.
+
+When you are ready, <Task id="hours-and-minutes">try one question</Task> on changing between hours and minutes and minutes only.
+
+</Lang>
+
+<Lang zh>
+
+前几步读的是“现在几点”。这一步换一个问题：一段时间有多长。量时间要用单位，最常用的是小时和分钟。
+
+<Beat n={1}>从 4 点到 4 点半</Beat>，分针走了半圈，钟面上那条环带就是它扫过的地方。这段时间是半小时，也就是 30 <Term id="minute">分钟</Term>。分钟写作 min，<Dur d="30m" />写作 30 min。生活里常说的“一刻钟”，就是 <Dur d="15m" />。
+
+接着走到 5 点，<Beat n={2}>分针转了一整圈</Beat>，环带也合成了一整圈。分针转一整圈是 1 <Term id="hour">小时</Term>，小时写作 h。所以 1 h = 60 min：<Dur d="1h" />有 <Dur d="60m" />。
+
+<Beat n={3}><Dur d="1h20m" />有多少分钟</Beat>？在线上先跳一整个小时，是 <Dur d="60m" />；再跳 <Dur d="20m" />。合起来是 60 + 20 = <Dur d="80m" />。要特别当心：<Dur d="1h" />是 <Dur d="60m" />，不是 <Dur d="100m" />。把 <Dur d="1h20m" />写成 <Dur d="120m" />，就是把 <Dur d="1h" />当成了 <Dur d="100m" />。
+
+<Beat n={4}>反过来</Beat>，<Dur d="95m" />是几小时几分钟？每 <Dur d="60m" />凑成 <Dur d="1h" />。95 里拿出 60，凑成 <Dur d="1h" />，还剩 95 − 60 = <Dur d="35m" />。所以 <Dur d="95m" />就是 <Dur d="1h35m" />，写作 1 h 35 min。如果有 <Dur d="150m" />，就能拿出两个 60，凑成 <Dur d="2h" />，还剩 <Dur d="30m" />。
+
+常见的错误是把时间当成普通的数，以为满 100 才进一位：把 <Dur d="2h15m" />写成 <Dur d="215m" />，或者把 <Dur d="150m" />写成 <Dur d="1h50m" />。换算时心里只记一句：一小时，六十分钟。量一节课、一场电影、一段车程有多长，都要用到这个换算。
+
+准备好了，就<Task id="hours-and-minutes">做一道小题</Task>：把小时和分钟换算一下。
+
+</Lang>

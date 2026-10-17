@@ -25,7 +25,8 @@
  *     chapter, 3–5 drawable explanation beats and a check pool of 8–10 per step,
  *     syllabus / source refs, denominators and sums, targets, planned feedback,
  *     prompt length, `{a/b}` tokens; `<Task id>` names a step (its check) or a
- *     pool task, `<Beat n>` a beat of the chapter's step, and `<Frac n d>` has
+ *     pool task, `<Beat n>` a beat of the chapter's step, `<Time t as>` / `<Dur d>` parse as
+ *     the `{t:…}` / `{d:…}` tokens, and `<Frac n d>` has
  *     whole numbers (d ≥ 1)
  *   - referenced files (cover) exist
  *   - TimeScene basemap (docs/06 "TimeScene"): `basemap.local` / `basemap.region`
@@ -68,6 +69,7 @@ import {
 import { sharedSourcesFile } from '../src/content/schema/sources';
 import { glbIssues, glbNodeNames } from './lib/glb-check';
 import { readSharedFitness } from './lib/shared-data';
+import { badTokens } from '../src/lib/rich-text';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 // ATLAS_TOPICS_DIR lets tests / tooling validate another tree.
@@ -267,6 +269,14 @@ function checkBodyComponents(
   for (const m of body.matchAll(/<Frac(?![A-Za-z])([^>]*)>/g)) {
     const a = fracAttrs(m[1] ?? '');
     if (a.n == null || a.d == null || a.d < 1 || (('w' in a) && a.w == null)) error(file, `<Frac> needs whole numbers n and d (d ≥ 1), e.g. <Frac n={3} d={4} />: ${m[0]}`);
+  }
+  // `<Time>` and `<Dur>` write what the `{t:…}` / `{d:…}` tokens write: the same values must parse.
+  for (const { raw, attrs } of tagAttrs(body, 'Time')) {
+    if (attrs.as !== undefined && !['24', 'face', 'ampm'].includes(attrs.as)) error(file, `<Time as>: "24", "face" or "ampm" (12-hour by default): ${raw}`);
+    else if (!attrs.t || badTokens(`{t:${attrs.t}${attrs.as ? `|${attrs.as}` : ''}}`).length) error(file, `<Time> needs a 24-hour time t="HH:MM" (face: hours 1–12), e.g. <Time t="09:40" />: ${raw}`);
+  }
+  for (const { raw, attrs } of tagAttrs(body, 'Dur')) {
+    if (!attrs.d || badTokens(`{d:${attrs.d}}`).length) error(file, `<Dur> needs a duration d like "1h35m", "95m" or "75s": ${raw}`);
   }
 }
 

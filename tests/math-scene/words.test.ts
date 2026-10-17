@@ -119,4 +119,22 @@ describe('whole numbers, place values, times and durations in words (docs/19 G7)
     expect(badTokens('{t:25:00} {d:soon} {u:3 mi} {3/x} {t:09:40} {here}')).toEqual(['{t:25:00}', '{d:soon}', '{u:3 mi}', '{3/x}']);
     expect(badTokens('{t:13:20|face}')).toEqual(['{t:13:20|face}']);
   });
+
+  it('writes the letters am / pm in Chinese too with |ampm, read as the time of day', () => {
+    expect(parseRich('{t:19:20|ampm}')).toEqual([{ time: 69_600, mode: '12', letters: true }]);
+    expect(plainText('{t:19:20|ampm}', 'zh')).toBe('7.20 pm');
+    expect(plainText('{t:07:05|ampm}', 'en')).toBe('7.05 am');
+    expect(speakable('{t:19:20|ampm}', 'zh')).toBe('晚上七点二十分');
+    expect(badTokens('{t:19:20|ampm} {t:19:20|pm}')).toEqual(['{t:19:20|pm}']);
+  });
+
+  it('drops the space between a Chinese word in a token and Chinese text beside it, keeps it beside digits and letters', () => {
+    expect(plainText('所以 1910 是 {t:19:10}。', 'zh')).toBe('所以 1910 是晚上 7.10。');
+    expect(plainText('一共 {d:1h35m} ，对吗', 'zh')).toBe('一共 1 小时 35 分钟，对吗');
+    // The digits end of a time, or a token without Chinese, keeps its spaces.
+    expect(plainText('是 {t:19:10} 吗', 'zh')).toBe('是晚上 7.10 吗');
+    expect(plainText('写作 {t:19:10|ampm} 。', 'zh')).toBe('写作 7.10 pm 。');
+    expect(plainText('at {t:19:10} then', 'en')).toBe('at 7.10 pm then');
+    expect(plainText('等了 {d:20m} 才走', 'zh')).toBe('等了 20 分钟才走');
+  });
 });

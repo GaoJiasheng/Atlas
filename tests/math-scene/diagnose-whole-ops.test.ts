@@ -9,6 +9,7 @@ import { taskSchema, WHOLE_OPS_CODES, type MisconceptionCode, type Task, type Ta
 import {
   arrangedShows,
   carryDropped,
+  multiplicationRows,
   groupShows,
   landingsShow,
   notTradedQuotient,
@@ -41,6 +42,12 @@ describe('worked digits', () => {
     expect(partialProducts(135, 4).map((p) => p.value)).toEqual([20, 120, 400]);
     expect(carryDropped(26, 3)).toBe(68);
     expect(carryDropped(135, 4)).toBe(420);
+    // The top place keeps its whole product: 47 × 3 is written 121, not 21.
+    expect(carryDropped(47, 3)).toBe(121);
+    expect(carryDropped(235, 4)).toBe(820);
+    expect(carryDropped(68, 7)).toBe(426);
+    expect(multiplicationRows(32, 13)).toEqual([96, 320]);
+    expect(multiplicationRows(23, 40)).toEqual([920]);
     expect(placeProductsJoined(26, 3)).toBe(618);
     expect(placeProductsJoined(135, 4)).toBe(41_220);
     expect(notTradedQuotient(72, 3)).toEqual({ q: 20, r: 2 });
@@ -63,9 +70,9 @@ describe('written numbers: every code shows on two answers and not on a third', 
     ['remainder-context', [[ctx(div(50, 8, { round: 'up' })), n(6)], [ctx(div(26, 4, { round: 'down' })), n(7)]], [ctx(div(50, 8, { round: 'up' })), n(8)]],
     ['tens-as-ones', [[ctx(times(30, 4)), n(12)], [ctx(times(23, 14)), n(115)], [{ op: null, answer: n(140) }, n(14)]], [ctx(times(30, 4)), n(1200)]],
     ['extra-zero', [[ctx(times(30, 4)), n(1200)], [{ op: null, answer: n(140) }, n(1400)]], [ctx(times(30, 4)), n(12)]],
-    ['carry-not-added', [[ctx(times(26, 3)), n(68)], [ctx(times(135, 4)), n(420)]], [ctx(times(26, 3)), n(618)]],
+    ['carry-not-added', [[ctx(times(26, 3)), n(68)], [ctx(times(135, 4)), n(420)], [ctx(times(47, 3)), n(121)], [ctx(times(235, 4)), n(820)]], [ctx(times(47, 3)), n(21)]],
     ['digits-concatenated', [[ctx(times(26, 3)), n(618)], [ctx(times(135, 4)), n(41_220)]], [ctx(times(26, 3)), n(68)]],
-    ['partial-product-missed', [[ctx(times(135, 4)), n(520)], [ctx(times(23, 4)), n(83)], [ctx(times(23, 14)), n(212)]], [ctx(times(135, 4)), n(41_220)]],
+    ['partial-product-missed', [[ctx(times(135, 4)), n(520)], [ctx(times(23, 4)), n(83)], [ctx(times(23, 14)), n(212)], [ctx(times(32, 13)), n(96)], [ctx(times(32, 13)), n(320)], [ctx(times(23, 14)), n(92)]], [ctx(times(32, 13)), n(128)]],
     ['zero-in-quotient', [[ctx(div(412, 4)), n(13)], [ctx(div(824, 4)), n(26)], [ctx(div(415, 4)), rem(13, 3)]], [ctx(div(412, 4)), n(103)]],
     ['not-traded', [[ctx(div(72, 3)), rem(20, 2)], [ctx(div(54, 4)), rem(11, 0)]], [ctx(div(72, 3)), rem(24, 0)]],
   ];

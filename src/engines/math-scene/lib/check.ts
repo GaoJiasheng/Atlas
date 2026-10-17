@@ -490,7 +490,7 @@ function checkWholeModel(task: Task, state: TaskState): CheckResult {
       return { ok: false, code: codes.find((c) => groupShows(c, task, state.groups)) ?? null };
     }
     case 'arrange': {
-      if (!state.arr) return NOT_YET;
+      if (!state.arr || state.arr[0] * state.arr[1] === 0) return NOT_YET;
       const [r, c] = state.arr;
       if (task.accept === 'product' ? r * c === task.rows * task.cols : r === task.rows && c === task.cols) return OK;
       return { ok: false, code: codes.find((code) => arrangedShows(code, task, r, c)) ?? null };
@@ -646,7 +646,7 @@ export function answered(task: Task, state: TaskState): boolean {
     case 'group':
       return state.groups.some((g) => g > 0);
     case 'arrange':
-      return state.arr !== null;
+      return state.arr !== null && state.arr[0] * state.arr[1] > 0;
     case 'skip-count':
       return state.landings.length > 0;
     case 'regroup':

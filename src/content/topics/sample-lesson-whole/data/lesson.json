@@ -82,11 +82,11 @@
             "layout": "rows",
             "rows": 4,
             "cols": 3,
-            "braces": true
+            "braces": "cols"
           },
           "caption": {
-            "en": "Placeholder: a quarter turn.",
-            "zh": "占位：转四分之一圈。"
+            "en": "Placeholder: a quarter turn, read by columns.",
+            "zh": "占位：转四分之一圈，按列看。"
           },
           "move": "rotate",
           "equation": "3 × 4 = 4 × 3"
@@ -733,7 +733,7 @@
             "cover": {
               "rows": true
             },
-            "braces": "cols"
+            "braces": true
           },
           "caption": {
             "en": "Placeholder: the rows are covered.",
@@ -999,7 +999,7 @@
             "cover": {
               "rows": true
             },
-            "braces": "cols"
+            "braces": true
           },
           "prompt": {
             "en": "Placeholder: 35 in rows of 5. How many rows?",

@@ -1,7 +1,7 @@
 /**
  * The PRODUCT card (docs/19 §3.0 G3): the fact on the array or the
  * whole-number line — `4 × 3 = 12`, read as "4 groups of 3" / "3 rows of 4" /
- * "6 jumps of 2", the total in words; groups that are not equal are written
+ * "4 columns of 3" (an array read by columns) / "6 jumps of 2", the total in words; groups that are not equal are written
  * as their sum, a covered count as `?`, a split as its two parts. On a check
  * it never says the answer first: the fact with `?` and the child's own work
  * (groups made, the array laid out, the jumps, the cut, what is written).
@@ -31,6 +31,8 @@ function layoutFact(s: ArrayLayoutSpec): { expr: string; read: { key: Parameters
       const [a, b] = split.axis === 'rows' ? [`${split.first} × ${c}`, `${split.second} × ${c}`] : [`${r} × ${split.first}`, `${r} × ${split.second}`];
       return { expr: `${r} × ${c} = ${a} + ${b} = ${r * c}`, read: { key: 'math.card.rowsOf', vars: { n: r, k: c } }, total: n };
     }
+    // Read by columns: so many columns, so many in each.
+    if (s.braces === 'cols' && !extra) return { expr: `${c} × ${r} = ${n}`, read: { key: 'math.card.colsOf', vars: { n: c, k: r } }, total: n };
     const crossed = s.crossed?.rows?.length ?? 0;
     if (crossed) return { expr: `${r} × ${c} − ${crossed} × ${c} = ${(r - crossed) * c}`, read: { key: 'math.card.rowsOf', vars: { n: r - crossed, k: c } }, total: (r - crossed) * c };
     return { expr: `${r} × ${c}${extra} = ${n}`, read: { key: 'math.card.rowsOf', vars: { n: r, k: c } }, total: n };
@@ -81,7 +83,7 @@ export function productTaskRows(task: Task, state: TaskState, done: boolean, loc
       return [fact, { key: 'math.card.total', value: String(task.total) }, { key: 'math.plate.groups', value: g.length ? g.join(' · ') : '—', tone: 'signal' }, { key: 'math.card.left', value: String(loose) }];
     }
     case 'arrange':
-      return [fact, { key: 'math.card.read', value: state.arr ? T('math.card.rowsOf', { n: state.arr[0], k: state.arr[1] }) : '—', tone: 'signal' }];
+      return [fact, { key: 'math.card.read', value: state.arr && state.arr[0] * state.arr[1] > 0 ? T('math.card.rowsOf', { n: state.arr[0], k: state.arr[1] }) : '—', tone: 'signal' }];
     case 'skip-count':
       return [fact, { key: 'math.plate.size', value: `+${task.size}` }, { key: 'math.plate.jumps', value: String(state.landings.length), tone: 'signal' }];
     case 'split-array':

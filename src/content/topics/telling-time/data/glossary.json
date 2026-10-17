@@ -1,0 +1,121 @@
+{
+  "terms": [
+    {
+      "id": "clock-face",
+      "term": { "en": "clock face", "zh": "钟面" },
+      "definition": {
+        "en": "The round face of a clock, with the numbers 1 to 12 and 60 small marks round the edge. The hands turn on it.",
+        "zh": "钟上圆圆的那一面，写着 1 到 12，边上一圈有 60 个小格。针在上面转。"
+      },
+      "see": ["hour-hand", "minute-hand"]
+    },
+    {
+      "id": "hour-hand",
+      "term": { "en": "hour hand", "zh": "时针" },
+      "definition": {
+        "en": "The short hand. It moves from one number to the next in an hour and goes round twice a day. At half past 4 it is halfway between 4 and 5.",
+        "zh": "短的那根针。一小时走一格，一天转两圈。4 点半时，它停在 4 和 5 正中间。"
+      },
+      "see": ["minute-hand"]
+    },
+    {
+      "id": "minute-hand",
+      "term": { "en": "minute hand", "zh": "分针" },
+      "definition": {
+        "en": "The long hand. It goes once round in an hour; each number it passes is 5 more minutes. At 3 it shows 15 minutes past, also called quarter past; at 9 people also say quarter to the next hour.",
+        "zh": "长的那根针。一小时转一圈，每走过一个数就多 5 分钟。指着 3 是 15 分，也叫“一刻”；指着 9 是 45 分，也有人说“差一刻”到下一个整点。"
+      },
+      "see": ["hour-hand", "minute"]
+    },
+    {
+      "id": "second-hand",
+      "term": { "en": "second hand", "zh": "秒针" },
+      "definition": {
+        "en": "The thinnest hand. It goes once round in a minute; each small mark is 1 second.",
+        "zh": "最细的那根针。一分钟转一圈，每一小格是 1 秒。"
+      },
+      "see": ["second"]
+    },
+    {
+      "id": "hour",
+      "term": { "en": "hour (h)", "zh": "小时（h）" },
+      "definition": {
+        "en": "A unit of time: 1 h = 60 min. One full turn of the minute hand takes an hour.",
+        "zh": "时间单位：1 h = 60 min。分针转一整圈是 1 小时。课本上也写作“时”。"
+      },
+      "see": ["minute"]
+    },
+    {
+      "id": "minute",
+      "term": { "en": "minute (min)", "zh": "分钟（min）" },
+      "definition": {
+        "en": "A unit of time: 1 min = 60 s. There are 60 minutes in an hour, not 100.",
+        "zh": "时间单位：1 min = 60 s。1 小时有 60 分钟，不是 100 分钟。课本上也写作“分”。"
+      },
+      "see": ["hour", "second"]
+    },
+    {
+      "id": "second",
+      "term": { "en": "second (s)", "zh": "秒（s）" },
+      "definition": {
+        "en": "A short unit of time: 60 s = 1 min. A stopwatch measures seconds, so {d:75s} is {d:1m15s}.",
+        "zh": "很短的时间单位：60 s = 1 min。秒表量的是秒，{d:75s} 就是 {d:1m15s}。"
+      },
+      "see": ["second-hand", "minute"]
+    },
+    {
+      "id": "am-pm",
+      "term": { "en": "am, pm", "zh": "am（上午）、pm（下午）" },
+      "definition": {
+        "en": "am: the times from midnight to noon. pm: the times from noon to midnight. 7 o'clock in the morning is {t:07:00}; in the evening it is {t:19:00}.",
+        "zh": "am：半夜 12 点到中午 12 点的时刻；pm：中午 12 点到半夜 12 点的时刻。早上 7 点是 {t:07:00}，晚上 7 点是 {t:19:00}。"
+      },
+      "see": ["noon-midnight", "24-hour-clock"]
+    },
+    {
+      "id": "noon-midnight",
+      "term": { "en": "noon, midnight", "zh": "中午 12 点、半夜 12 点" },
+      "definition": {
+        "en": "Noon is 12 o'clock in the middle of the day; midnight is 12 o'clock at night, when a new day starts. Half an hour after noon is {t:12:30}.",
+        "zh": "中午 12 点是一天的正中；半夜 12 点（也叫午夜）在夜里，新的一天从这时开始。中午 12 点过半小时是 {t:12:30}。"
+      },
+      "see": ["am-pm"]
+    },
+    {
+      "id": "duration",
+      "term": { "en": "duration", "zh": "经过的时间" },
+      "definition": {
+        "en": "How long something takes, from its start to its end. From {t:09:40} to {t:11:15} is {d:1h35m}.",
+        "zh": "一件事从开始到结束用了多长时间。从 {t:09:40} 到 {t:11:15}，经过的时间是 {d:1h35m}。"
+      },
+      "see": ["starting-finishing-time", "timeline"]
+    },
+    {
+      "id": "starting-finishing-time",
+      "term": { "en": "starting time, finishing time", "zh": "开始时刻、结束时刻" },
+      "definition": {
+        "en": "When something begins and when it ends. Starting time + duration = finishing time.",
+        "zh": "一件事开始和结束的那一刻。开始时刻 + 经过的时间 = 结束时刻。"
+      },
+      "see": ["duration"]
+    },
+    {
+      "id": "24-hour-clock",
+      "term": { "en": "24-hour clock", "zh": "24 小时计时法" },
+      "definition": {
+        "en": "Times counted from midnight, {t:00:00|24}, up to {t:23:59|24}, with no am or pm. After noon, add 12 to the hour: {t:15:00} is {t:15:00|24}.",
+        "zh": "从半夜 {t:00:00|24} 一直数到 {t:23:59|24}，不用 am 或 pm。中午以后，小时数加 12：{t:15:00} 是 {t:15:00|24}。"
+      },
+      "see": ["am-pm"]
+    },
+    {
+      "id": "timeline",
+      "term": { "en": "timeline", "zh": "时间线" },
+      "definition": {
+        "en": "A line marked with the hours like a ruler. You jump along it to find how long something takes: to the next hour, whole hours, then the minutes left.",
+        "zh": "像尺一样标着钟点的线。在上面跳着数，就能求经过的时间：先跳到整点，再跳整小时，最后跳剩下的分钟。"
+      },
+      "see": ["duration"]
+    }
+  ]
+}

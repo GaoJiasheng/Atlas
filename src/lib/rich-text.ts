@@ -6,6 +6,7 @@
  *   `{t:09:40}`  a time of day in 12-hour time, by the lesson's notation (`9.40 am`; zh prose `上午 9.40`)
  *   `{t:7:20|face}`  as a clock face reads it, no am / pm (`7.20`)
  *   `{t:19:20|24}`  in 24-hour time (`19:20`)
+ *   `{t:19:20|ampm}`  12-hour time with the letters am / pm in Chinese too (`7.20 pm`, where the letters are the point)
  *   `{d:95m}`, `{d:1h35m}`, `{d:75s}`  a duration in the units written (`1 h 35 min` / `1 小时 35 分钟`)
  *   `{u:28 cm2}`, `{u:1.5 l}`  a measure (`28 cm²`, `1.5 ℓ`, read "twenty-eight square centimetres", "one point five litres")
  * Whole numbers are written as they are; `3 r 2` reads "3 remainder 2" /「3 余 2」.
@@ -28,7 +29,8 @@ import { groupRuns, splitGlue } from './frac-glue';
 export type RichPart =
   | { text: string }
   | { frac: FracSlots }
-  | { time: number; mode: ClockMode }
+  /** `letters`: am / pm written as letters in Chinese too (`|ampm`). */
+  | { time: number; mode: ClockMode; letters?: boolean }
   | { dur: number; units: DurUnit[] }
   | { measure: Measure }
   /** A decimal written in the text (`more`: it goes on, `0.666…`). */
@@ -41,7 +43,7 @@ export const NotationContext = createContext<Notation>(DEFAULT_NOTATION);
 
 const CANDIDATE = /\{([^{}]*)\}/g;
 const FRAC = /^(?:(\d+) )?(\d+|\?)\/(\d+|\?)$/;
-const TIME = /^t:(\d{1,2}:\d{2}(?::\d{2})?)(?:\|(face|24))?$/;
+const TIME = /^t:(\d{1,2}:\d{2}(?::\d{2})?)(?:\|(face|24|ampm))?$/;
 const DUR = /^d:(\S+)$/;
 const MEASURE = /^u:(.+)$/;
 
@@ -76,7 +78,7 @@ function tokenPart(body: string): Exclude<RichPart, { text: string }> | null {
     const at = parseClock(t[1]!);
     const mode: ClockMode = t[2] === '24' ? '24' : t[2] === 'face' ? 'face' : '12';
     if (at === null || (mode === 'face' && Number(t[1]!.split(':')[0]) > 12)) return null;
-    return { time: at, mode };
+    return t[2] === 'ampm' ? { time: at, mode, letters: true } : { time: at, mode };
   }
   const d = DUR.exec(body);
   if (d) {
@@ -89,6 +91,27 @@ function tokenPart(body: string): Exclude<RichPart, { text: string }> | null {
     return m ? { measure: m } : null;
   }
   return null;
+}
+
+/** A Chinese character or full-width punctuation. */
+const CJK = /[\u3000-\u303f\u3400-\u9fff\uff00-\uffef]/;
+
+/**
+ * Spaces between a token and Chinese text when the token itself shows Chinese at that end (`上午 9.40`, `1 小时 35 分钟`):
+ * "是 {t:19:10}。" shows "是晚上 7.10。", not "是 晚上 7.10。". A space beside digits or Latin letters stays.
+ */
+function tidySpaces(parts: RichPart[], locale: 'en' | 'zh'): RichPart[] {
+  if (locale !== 'zh') return parts;
+  const out = parts.map((p) => ('text' in p ? { text: p.text } : p));
+  out.forEach((p, i) => {
+    if ('text' in p || 'frac' in p) return;
+    const s = shown(p, locale, DEFAULT_NOTATION, false);
+    const prev = out[i - 1];
+    const next = out[i + 1];
+    if (CJK.test(s[0] ?? '') && prev && 'text' in prev && /\s$/.test(prev.text) && CJK.test(prev.text.trimEnd().at(-1) ?? '')) prev.text = prev.text.trimEnd();
+    if (CJK.test(s.at(-1) ?? '') && next && 'text' in next && /^\s/.test(next.text) && CJK.test(next.text.trimStart()[0] ?? '')) next.text = next.text.trimStart();
+  });
+  return out.filter((p) => !('text' in p) || p.text !== '');
 }
 
 /** Split text into plain runs and tokens. */
@@ -120,7 +143,7 @@ function shown(p: Exclude<RichPart, { text: string }>, locale: 'en' | 'zh', nota
     const s = (v: number | null) => (v === null ? '?' : String(v));
     return `${p.frac.w ? `${p.frac.w} ` : ''}${s(p.frac.n)}/${s(p.frac.d)}`;
   }
-  if ('time' in p) return clockText(p.time, p.mode, notation, locale, line);
+  if ('time' in p) return clockText(p.time, p.mode, notation, locale, line || !!p.letters);
   if ('dur' in p) return durationText(p.dur, p.units, locale, line);
   if ('raw' in p) return p.raw;
   return measureText(p.measure, locale);
@@ -154,7 +177,7 @@ export function speakable(text: string, locale: 'en' | 'zh'): string {
 
 /** Text with every token written out as shown (aria labels, plain strings). */
 export function plainText(text: string, locale: 'en' | 'zh', notation: Notation = DEFAULT_NOTATION, line = false): string {
-  return parseRich(text)
+  return tidySpaces(parseRich(text), line ? 'en' : locale)
     .map((p) => ('text' in p ? p.text : shown(p, locale, notation, line)))
     .join('');
 }
@@ -189,9 +212,9 @@ function ValueToken({ part, locale, line }: { part: Exclude<RichPart, { text: st
  * am / pm and h / min stay as the notation writes them in Chinese too).
  */
 export function renderRich(text: string, locale: 'en' | 'zh', opts: { line?: boolean } = {}): ReactNode {
-  const parts = parseRich(text);
-  if (parts.length === 1 && 'text' in parts[0]!) return text;
   const line = !!opts.line;
+  const parts = tidySpaces(parseRich(text), line ? 'en' : locale);
+  if (parts.length === 1 && 'text' in parts[0]!) return parts[0].text;
   const items: { node: ReactNode; glued: boolean }[] = [];
   const isToken = (p: RichPart | undefined) => p !== undefined && !('text' in p);
   parts.forEach((p, i) => {

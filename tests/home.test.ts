@@ -63,6 +63,11 @@ describe('topicStats', () => {
       { n: 45, key: 'index.stats.beats' },
       { n: 8, key: 'index.stats.questions' },
     ]);
+    expect(topicStats('math-scene', loadData('telling-time'), 13)).toEqual([
+      { n: 11, key: 'index.stats.steps' },
+      { n: 46, key: 'index.stats.beats' },
+      { n: 8, key: 'index.stats.questions' },
+    ]);
     expect(topicStats('math-scene', loadData('multiplication-division'), 14)).toEqual([
       { n: 12, key: 'index.stats.steps' },
       { n: 54, key: 'index.stats.beats' },

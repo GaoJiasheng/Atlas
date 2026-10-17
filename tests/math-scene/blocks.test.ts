@@ -122,6 +122,18 @@ describe('share', () => {
     expect(sampleState(t, 'O>T')).toBeNull();
   });
 
+  it('trades down what is left of a place in one go (regrouping still trades 10 for 1)', () => {
+    const s85 = task({ kind: 'share', model: { kind: 'blocks', value: 85, plates: 5 }, value: 85, k: 5, then: { answer: 17, form: 'whole' } });
+    let s = reduce(s85, initialState(s85), { do: 'share', place: 'T' });
+    expect(s.mat).toEqual({ H: 0, T: 3, O: 5 });
+    s = reduce(s85, s, { do: 'trade', trade: 'T>O' });
+    expect(s.mat).toEqual({ H: 0, T: 0, O: 35 });
+    expect(s.trades).toBe(3);
+    expect(reduce(s85, s, { do: 'trade', trade: 'T>O' })).toBe(s);
+    const up = task({ kind: 'regroup', model: { kind: 'blocks', value: 140, left: { T: 14, O: 0 } }, value: 140, start: { H: 0, T: 14, O: 0 } });
+    expect(reduce(up, initialState(up), { do: 'trade', trade: 'T>H' }).mat).toEqual({ H: 1, T: 4, O: 0 });
+  });
+
   it('checks the quotient (and remainder) against the share', () => {
     const r = task({ kind: 'share', model: { kind: 'blocks', value: 74, plates: 3 }, value: 74, k: 3, then: { answer: '24 r 2', form: 'remainder' } }, [['remainder-too-big', '=23 r 5']]);
     expect(proveTask(r)).toEqual([]);

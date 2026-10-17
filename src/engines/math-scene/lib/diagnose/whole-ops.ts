@@ -52,9 +52,20 @@ export function partialProducts(a: number, b: number): { value: number; place: n
   return out;
 }
 
-/** `a × b` (one-digit b) worked place by place keeping only each place's ones digit: the carries never added (26 × 3 → 68). */
+/**
+ * `a × b` (one-digit b) worked place by place keeping only each place's ones digit, the carries never added;
+ * the top place is written whole, as a child writes it (26 × 3 → 68, 47 × 3 → 121, 235 × 4 → 820).
+ */
 export function carryDropped(a: number, b: number): number {
-  return placeDigits(a).reduce((sum, d, i) => sum + ((d * b) % 10) * 10 ** i, 0);
+  const digits = placeDigits(a);
+  return digits.reduce((sum, d, i) => sum + (i === digits.length - 1 ? d * b : (d * b) % 10) * 10 ** i, 0);
+}
+
+/** The rows of a long multiplication: `a` times each digit of `b` in its place (32 × 13 → 96, 320). */
+export function multiplicationRows(a: number, b: number): number[] {
+  return placeDigits(b)
+    .map((d, j) => a * d * 10 ** j)
+    .filter((v) => v > 0);
 }
 
 /** Each place's product written side by side, highest first (26 × 3 → "6" "18" → 618). */
@@ -150,6 +161,9 @@ export function wholeShows(code: MisconceptionCode, c: WholeContext, x: WholeWri
       if (parts.some((p) => n === product - p.value)) return true;
       // One place of a one-digit multiplication written down without multiplying (23 × 4 → 80 + 3).
       if (op.b < 10 && parts.some((p) => n === product - p.value + p.digit)) return true;
+      // By a two-digit number: a whole row of the column method left out (32 × 13 → 96, only 32 × 3).
+      const rows = multiplicationRows(op.a, op.b);
+      if (rows.length >= 2 && rows.some((row) => n === product - row)) return true;
       // Two-digit by two-digit: only tens × tens and ones × ones (23 × 14 → 200 + 12).
       if (op.a >= 10 && op.a < 100 && op.b >= 10 && op.b < 100) return n === Math.floor(op.a / 10) * Math.floor(op.b / 10) * 100 + (op.a % 10) * (op.b % 10);
       return false;
