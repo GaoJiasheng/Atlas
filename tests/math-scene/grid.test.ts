@@ -81,12 +81,16 @@ describe('grid geometry', () => {
     expect(gridModelIssues({ ...m, figures: [{ id: 'a', tone: 'cold', rect: [0, 0, 3, 2], halves: [[3, 0, 'sw']] }] }).join()).toContain('pairs');
   });
 
-  it('measures are a whole number and a unit', () => {
-    expect(parseMeasure('28 cm2')).toEqual({ value: 28, unit: 'cm2' });
-    expect(parseMeasure('14 cm')).toEqual({ value: 14, unit: 'cm' });
-    expect(parseMeasure('12 square units')).toEqual({ value: 12, unit: 'unit2' });
+  it('measures are a number and a unit (whole on the grid, a decimal in the decimals lesson)', () => {
+    const whole = (n: number) => ({ units: n * 1_000_000, dp: 0 });
+    expect(parseMeasure('28 cm2')).toEqual({ value: whole(28), unit: 'cm2' });
+    expect(parseMeasure('14 cm')).toEqual({ value: whole(14), unit: 'cm' });
+    expect(parseMeasure('12 square units')).toEqual({ value: whole(12), unit: 'unit2' });
+    expect(parseMeasure('1.5 l')).toEqual({ value: { units: 1_500_000, dp: 1 }, unit: 'l' });
+    expect(parseMeasure('750 ml')).toEqual({ value: whole(750), unit: 'ml' });
     expect(parseMeasure('3/4')).toBeNull();
-    expect(formatMeasure({ value: 9, unit: 'm2' })).toBe('9 m2');
+    expect(formatMeasure({ value: whole(9), unit: 'm2' })).toBe('9 m2');
+    expect(formatMeasure({ value: { units: 1_500_000, dp: 1 }, unit: 'l' })).toBe('1.5 l');
   });
 });
 

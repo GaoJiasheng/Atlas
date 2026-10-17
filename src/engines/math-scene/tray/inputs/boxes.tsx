@@ -99,16 +99,21 @@ export function useBoxes(p: InputProps, fields: readonly string[], digits: (fiel
   return { current, box, press };
 }
 
-/** The on-screen keypad: 1–9, 0 and delete. */
-export function Keypad({ press, locked, locale }: { press(key: string): void; locked: boolean; locale: Locale }) {
+/** The on-screen keypad: 1–9, 0, the point (decimals) and delete. */
+export function Keypad({ press, locked, locale, point }: { press(key: string): void; locked: boolean; locale: Locale; point?: boolean }) {
   const T = tr(locale);
   return (
-    <div className="ms-keypad" role="group" aria-label={T('math.input.keypad')}>
+    <div className="ms-keypad" role="group" aria-label={T('math.input.keypad')} data-point={point || undefined}>
       {['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'].map((k) => (
         <button key={k} type="button" className="ms-key" disabled={locked} onPointerDown={(e) => e.preventDefault()} onClick={() => press(k)}>
           {k}
         </button>
       ))}
+      {point && (
+        <button type="button" className="ms-key ms-key--point" aria-label={T('math.input.point')} disabled={locked} onPointerDown={(e) => e.preventDefault()} onClick={() => press('.')}>
+          .
+        </button>
+      )}
       <button type="button" className="ms-key ms-key--back" aria-label={T('math.input.back')} disabled={locked} onPointerDown={(e) => e.preventDefault()} onClick={() => press('back')}>
         ⌫
       </button>

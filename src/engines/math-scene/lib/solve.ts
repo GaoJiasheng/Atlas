@@ -7,7 +7,7 @@
  */
 import type { PlaceKey, Task, TaskOf, Trade } from '../schema';
 import { parseFrac, valueOnLine, type Frac } from './fraction';
-import { answersOf, check, inputValues, sortedOrder, usesValueBoxes } from './check';
+import { answersOf, asFrac, check, inputValues, sortedOrder, usesValueBoxes } from './check';
 import { baseParts, figureRows, initialState, inputSpecOf, partsFor, phasesOf, reduce, taskFigure, tileKeys, type Action, type Sym, type TaskState } from './state';
 import { allSides, boundaryEdges, cellKey, cutKey, rectCuts } from './grid';
 import { drawnRight } from './diagnose/measure';
@@ -15,6 +15,8 @@ import { HOUR, MINUTE, parseMeasure } from './value';
 import { answerValues, sampleBoxes, valueBoxes } from './forms';
 import { groupTarget, skipTarget } from './diagnose/whole-ops';
 import { applyTrade, canTrade, type Counts } from './blocks';
+import { decimalBoxes, decimalSample, decimalSampleBoxes, decimalSolveModel, isDecimalTask, onChart } from './decimal-tasks';
+import { wholePart } from './decimal';
 import { HALF_DAY } from './clock';
 import { hopStart, hopsTo } from './timeline';
 
@@ -24,7 +26,7 @@ const range = (from: number, count: number) => Array.from({ length: count }, (_,
 function inputActions(task: Task): Action[] {
   const spec = inputSpecOf(task);
   if (!spec) return [];
-  const filled = usesValueBoxes(task, spec) ? valueBoxes(spec, splitArrayAnswers(task) ?? answerValues(spec)) : inputValues(spec, answersOf(spec));
+  const filled = spec.form === 'decimal' ? decimalBoxes(spec) : usesValueBoxes(task, spec) ? valueBoxes(spec, splitArrayAnswers(task) ?? answerValues(spec)) : inputValues(spec, answersOf(spec));
   const boxes = Object.entries(filled).map(([field, value]) => ({ do: 'input', field, value }) as Action);
   return spec.form === 'measure' && spec.unit ? [...boxes, { do: 'input', field: 'u', value: spec.unit }] : boxes;
 }
@@ -110,9 +112,14 @@ function withInput(task: Task, model: Action[]): Action[] {
   return phasesOf(task).includes('input') && task.kind !== 'input' ? [...model, { do: 'check' }, ...inputActions(task)] : model;
 }
 
+/** Decimal tasks whose model phase `decimal-tasks.ts` solves. */
+const decimalModel = (task: Task): boolean =>
+  task.kind === 'shade-decimal' || task.kind === 'round-on-line' || task.kind === 'align-add' || task.kind === 'shift-digits' || onChart(task) || ((task.kind === 'place' || task.kind === 'compare' || task.kind === 'order') && isDecimalTask(task));
+
 /** The actions that answer `task` correctly, in the order a child would do them. */
 export function solve(task: Task): Action[] {
   const start = initialState(task);
+  if (decimalModel(task)) return withInput(task, decimalSolveModel(task) as Action[]);
   switch (task.kind) {
     case 'shade': {
       const free = range(0, start.parts * start.wholes).filter((i) => !start.given.includes(i));
@@ -128,12 +135,14 @@ export function solve(task: Task): Action[] {
       return withInput(task, [{ do: 'factor', k: scaleFactor(task) }]);
     case 'place': {
       const m = task.model;
-      const at = valueOnLine(task.target, m.kind === 'numberline' ? m : { from: 0, intervals: start.parts }) ?? 0;
+      const at = valueOnLine(asFrac(task.target), m.kind === 'numberline' && m.scale !== 'decimal' ? m : { from: 0, intervals: start.parts }) ?? 0;
       return [{ do: 'place', at }];
     }
     case 'compare': {
       const align: Action[] = task.align ? [{ do: 'align' }] : [];
-      const c = task.a.n * task.b.d - task.b.n * task.a.d;
+      const a = asFrac(task.a);
+      const b = asFrac(task.b);
+      const c = a.n * b.d - b.n * a.d;
       if (task.ask === 'symbol') return [...align, { do: 'symbol', value: (c < 0 ? '<' : c > 0 ? '>' : '=') as Sym }];
       const aWins = task.ask === 'greater' ? c > 0 : c < 0;
       return [...align, { do: 'pick', side: aWins ? 'a' : 'b' }];
@@ -191,6 +200,11 @@ export function solve(task: Task): Action[] {
       return withInput(task, regroupTrades(start.mat).map((trade) => ({ do: 'trade', trade }) as Action));
     case 'share':
       return withInput(task, shareActions(task));
+    case 'shade-decimal':
+    case 'round-on-line':
+    case 'align-add':
+    case 'shift-digits':
+      return [];
     case 'build-sum': {
       const out: Action[] = [];
       let parts = start.parts;
@@ -270,15 +284,21 @@ export function sampleState(task: Task, sample: string): TaskState | null {
   const writeInput = (from: TaskState, text: string): TaskState | null => {
     const spec = inputSpecOf(task);
     if (!spec) return null;
+    if (spec.form === 'decimal') {
+      const boxes = decimalSampleBoxes(spec, text);
+      return boxes ? { ...from, input: boxes, phase: inputPhase } : null;
+    }
     if (usesValueBoxes(task, spec) && spec.form !== 'measure') {
       const boxes = sampleBoxes(spec, text);
       return boxes ? { ...from, input: boxes, phase: inputPhase } : null;
     }
     if (spec.form === 'measure') {
       // `"28 cm"` (the unit written), or `"28"` (the answer's own unit).
-      const m = parseMeasure(text) ?? (/^\s*\d+\s*$/.test(text) && spec.unit ? { value: Number(text), unit: spec.unit } : null);
-      if (!m) return null;
-      return { ...from, input: { ...inputValues(spec, [{ n: m.value, d: 1 }]), u: m.unit }, phase: inputPhase };
+      const m = parseMeasure(text);
+      const n = m ? wholePart(m.value) : /^\s*\d+\s*$/.test(text) ? Number(text) : null;
+      const unit = m ? m.unit : spec.unit !== 'dollar' ? spec.unit : undefined;
+      if (n === null || !unit) return null;
+      return { ...from, input: { ...inputValues(spec, [{ n, d: 1 }]), u: unit }, phase: inputPhase };
     }
     const values = rawFracs(text);
     if (!values) return null;
@@ -293,6 +313,7 @@ export function sampleState(task: Task, sample: string): TaskState | null {
     return writeInput(apply(task, actions.slice(0, cut + 1)), sample.slice(1));
   }
   const start = initialState(task);
+  if (decimalModel(task) && task.kind !== 'compare') return decimalSample(task, start, sample, (from, moves) => apply(task, moves as Action[], from));
   switch (task.kind) {
     case 'shade': {
       const n = Number(sample);
@@ -308,7 +329,7 @@ export function sampleState(task: Task, sample: string): TaskState | null {
     case 'order': {
       const values = fracs(sample);
       if (!values) return null;
-      const order = values.map((v) => task.items.findIndex((it) => it.n === v.n && it.d === v.d && (it.w ?? 0) === (v.w ?? 0)));
+      const order = values.map((v) => task.items.map(asFrac).findIndex((it) => it.n === v.n && it.d === v.d && (it.w ?? 0) === (v.w ?? 0)));
       return order.includes(-1) ? null : { ...start, order };
     }
     case 'cut': {
@@ -364,6 +385,11 @@ export function sampleState(task: Task, sample: string): TaskState | null {
       const s = reduce(task, start, { do: 'arraycut', cut: sample });
       return s.cut === sample ? s : null;
     }
+    case 'shade-decimal':
+    case 'round-on-line':
+    case 'align-add':
+    case 'shift-digits':
+      return null;
     case 'set-clock': {
       // `"3:50"` (the 12-hour position the hands are set to), `"3:50 pm"` with the am / pm plate.
       const m = /^(\d{1,2})[:.](\d{2})\s*(am|pm)?$/i.exec(sample.trim());

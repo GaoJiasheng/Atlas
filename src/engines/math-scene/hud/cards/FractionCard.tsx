@@ -12,6 +12,7 @@ import { cardValue, equivalentNames, workingLines } from '../../lib/working';
 import { compare, formatFrac, simplify, toImproper, toMixed, type Frac } from '../../lib/fraction';
 import { fractionWords } from '../../lib/words';
 import type { TaskState } from '../../lib/state';
+import { asFrac } from '../../lib/check';
 
 const UP = (s: string) => s.toLocaleUpperCase('en');
 
@@ -37,13 +38,15 @@ export function FractionCard({ task, state, done, fixed, pair, expanded, locale 
   }
   if (task?.kind === 'compare' && state) {
     const s = task.ask === 'symbol' ? state.symbol : null;
+    const a = asFrac(task.a);
+    const b = asFrac(task.b);
     return (
       <div className="ms-card-body ms-card-body--compare">
-        <BigFrac f={task.a} tone="cold" />
+        <BigFrac f={a} tone="cold" />
         <span className="ms-card-body__sign">{s ?? '○'}</span>
-        <BigFrac f={task.b} tone="hot" />
+        <BigFrac f={b} tone="hot" />
         <p className="ms-card-body__words">
-          {fractionWords(task.a, locale)} · {fractionWords(task.b, locale)}
+          {fractionWords(a, locale)} · {fractionWords(b, locale)}
         </p>
       </div>
     );

@@ -41,12 +41,13 @@ import { cardValue, workingLines } from './lib/working';
 import { formatFrac } from './lib/fraction';
 import { clockText } from './lib/value';
 import { Defs } from './stage/svg';
-import { SPECIMEN_ARRAY, SPECIMEN_CLOCK, SPECIMEN_GRID, StageContent } from './stage/Stage';
+import { SPECIMEN_ARRAY, SPECIMEN_CLOCK, SPECIMEN_DECIMAL, SPECIMEN_GRID, StageContent } from './stage/Stage';
+import { isDecimalModel } from './lib/decimal-tasks';
 import { beatCounts, beatFraction, beatPair, beatShape, beatTime } from './stage/BeatModel';
 import { useStageLayout, type LayoutMode, type Rect } from './stage/layout';
 import { Tray, partsAreNarrow } from './tray/Tray';
 import { Card, CARD_TITLE, cardKindOf, type CardKind } from './hud/cards';
-import { valuePlateRows } from './hud/plate';
+import { decimalPlateRows, valuePlateRows } from './hud/plate';
 import { factsOf, figureOf } from './lib/grid';
 import type { GridModelSpec, Model } from './schema';
 import { isFractionModel } from './lib/check';
@@ -70,6 +71,9 @@ const VIEW_KEY: Record<ModelView, Parameters<typeof t>[1]> = {
   blocks: 'math.view.blocks',
   clock: 'math.view.clock',
   timeline: 'math.view.timeline',
+  'decimal-grid': 'math.view.decimalGrid',
+  'place-value': 'math.view.placeValue',
+  money: 'math.view.money',
 };
 const SPECIMEN_VIEWS: ModelView[] = ['bar', 'circle', 'numberline', 'wall'];
 
@@ -132,10 +136,12 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
   const background = place.kind === 'background';
   // A lesson on the square grid (area and perimeter): its own card, plate rows, specimen and no fraction assists.
   const gridLesson = useMemo(() => lesson.steps.some((x) => x.beats.some((b) => b.model.kind === 'grid')), [lesson]);
+  // A lesson on decimals (it draws the hundred grid, the decimal chart or line, money) also draws bars, but it is not a fraction lesson.
+  const decimalLesson = useMemo(() => lesson.steps.some((x) => x.beats.some((b) => isDecimalModel(b.model))), [lesson]);
   // The fraction assists (S / E / N, labels) and specimen belong to a lesson on fractions; another lesson's background shows its first model.
-  const fractionLesson = useMemo(() => lesson.steps.some((x) => x.beats.some((b) => isFractionModel(b.model))), [lesson]);
+  const fractionLesson = useMemo(() => !decimalLesson && lesson.steps.some((x) => x.beats.some((b) => isFractionModel(b.model))), [lesson, decimalLesson]);
   const firstKind = lesson.steps[0]?.beats[0]?.model.kind ?? 'bar';
-  const specimenModel: Model | null = fractionLesson ? null : firstKind === 'grid' ? SPECIMEN_GRID : firstKind === 'array' || firstKind === 'blocks' || firstKind === 'numberline' ? SPECIMEN_ARRAY : firstKind === 'clock' || firstKind === 'timeline' ? SPECIMEN_CLOCK : null;
+  const specimenModel: Model | null = fractionLesson ? null : decimalLesson ? SPECIMEN_DECIMAL : firstKind === 'grid' ? SPECIMEN_GRID : firstKind === 'array' || firstKind === 'blocks' || firstKind === 'numberline' ? SPECIMEN_ARRAY : firstKind === 'clock' || firstKind === 'timeline' ? SPECIMEN_CLOCK : null;
   const lessonCard: CardKind = fractionLesson ? 'fraction' : cardKindOf(specimenModel, null, 'fraction');
   const assists = fractionLesson;
   const explain = slot.kind === 'explain' ? slot.beat : null;
@@ -308,7 +314,7 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
       ? [UP(t('en', 'math.check.title')), ...(value ? [`${UP(t('en', 'math.status.value'))} ${formatFrac(value)}`] : []), ...(run.done ? [UP(t('en', 'math.status.done'))] : [])]
       : explain
         ? [`${UP(t('en', 'math.beat.label'))} ${cur.beat + 1}/${count - 1}`, ...(value ? [`${UP(t('en', 'math.status.value'))} ${formatFrac(value)}`] : [])]
-        : [`${UP(t('en', 'math.status.specimen'))} ${fractionLesson ? '3/4' : gridLesson && firstKind === 'grid' ? '4 × 3' : specimenModel?.kind === 'clock' ? clockText(specimenModel.time, 'face', lesson.notation) : '3 × 4'}`];
+        : [`${UP(t('en', 'math.status.specimen'))} ${fractionLesson ? '3/4' : decimalLesson ? '0.35' : gridLesson && firstKind === 'grid' ? '4 × 3' : specimenModel?.kind === 'clock' ? clockText(specimenModel.time, 'face', lesson.notation) : '3 × 4'}`];
   const [cardExpanded, setCardExpanded] = useState(false);
   const specRows = useMemo<SpecRow[]>(
     () => [
@@ -318,13 +324,15 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
       { id: 'practice', label: both('math.spec.practice'), value: String(lesson.practice.length), mono: true },
       ...(fractionLesson
         ? [{ id: 'denominators', label: both('math.spec.denominators'), value: '≤ 12', mono: true, source: 'ref' as const }]
-        : gridLesson && firstKind === 'grid'
+        : decimalLesson
+          ? [{ id: 'places', label: both('math.spec.places'), value: '≤ 3', mono: true, source: 'ref' as const }]
+          : gridLesson && firstKind === 'grid'
           ? [{ id: 'units', label: both('math.spec.units'), value: 'cm · m · cm² · m²', mono: true, source: 'ref' as const }]
           : maxNumber(lesson) !== null
             ? [{ id: 'numbers', label: both('math.spec.numbers'), value: `≤ ${maxNumber(lesson)}`, mono: true, source: 'ref' as const }]
             : []),
     ],
-    [lesson, gridLesson, fractionLesson, firstKind],
+    [lesson, gridLesson, fractionLesson, decimalLesson, firstKind],
   );
 
   const controls = useMemo<SceneControls>(() => {
@@ -431,6 +439,8 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
       ]
     : gridOnShow
       ? gridRows(gridOnShow, task && run && task.kind !== 'choose' && task.kind !== 'input' ? run.state : null)
+      : modelOnShow && decimalPlateRows(modelOnShow, task, run?.state ?? null, !!run?.done)
+        ? decimalPlateRows(modelOnShow, task, run?.state ?? null, !!run?.done)!
       : modelOnShow && valuePlateRows(modelOnShow, task, run?.state ?? null, !!run?.done, lesson.notation)
         ? valuePlateRows(modelOnShow, task, run?.state ?? null, !!run?.done, lesson.notation)!
       : explain

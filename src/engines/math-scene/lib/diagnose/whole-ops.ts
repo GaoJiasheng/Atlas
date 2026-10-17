@@ -244,7 +244,7 @@ export function wholeContextOf(task: Task, spec: InputSpec, answer: WholeWritten
   if (spec.op) return { op: spec.op, answer, split };
   // A task on the stage carries its own fact: rows × columns split, a share of the blocks, the groups made.
   if (task.kind === 'split-array') return { op: { kind: '×', a: task.rows, b: task.cols }, answer, split };
-  if (task.kind === 'share') return { op: { kind: '÷', a: task.value, b: task.k }, answer, split };
+  if (task.kind === 'share' && typeof task.value === 'number') return { op: { kind: '÷', a: task.value, b: task.k }, answer, split };
   if (task.kind === 'group') return { op: { kind: '÷', a: task.total, b: task.k }, answer, split };
   return { op: null, answer, split };
 }

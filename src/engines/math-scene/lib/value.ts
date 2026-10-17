@@ -10,13 +10,17 @@
  *   it (no am / pm), or in 24-hour time, by the lesson's `notation`.
  * - Duration: seconds (`"1h35m"`, `"95m"`, `"75s"`); shown in the units it
  *   was written in (`95 min`, `1 h 35 min`).
- * - Measure: a whole number and a unit (`"28 cm2"` → `28 cm²`).
+ * - Measure: a number and a unit (`"28 cm2"` → `28 cm²`, `"1.5 l"` → `1.5 ℓ`);
+ *   the number is an exact decimal (docs/29 X2), whole on the grid.
+ * - Decimal: an exact decimal written with a point (`"0.35"`, docs/29 X1,
+ *   `lib/decimal.ts`).
  *
  * The answer types of `input` (`AnswerValue`) are a fraction (`Frac`, which
  * also carries a whole number as `{ n, d: 1 }`) or one of the tagged values
- * below; a new kind of value (decimals) adds one more tagged member.
+ * below.
  */
 import type { Frac } from './fraction';
+import { formatDecimal, hasPoint, parseDecimal, type Decimal } from './decimal';
 
 /* ------------------------------------------------------------------ */
 /* Whole numbers                                                       */
@@ -244,13 +248,17 @@ export function durationText(t: number, units: readonly DurUnit[], locale: 'en' 
 
 export const LENGTH_UNITS = ['unit', 'cm', 'm'] as const;
 export const AREA_UNITS = ['unit2', 'cm2', 'm2'] as const;
-export const UNITS = [...LENGTH_UNITS, ...AREA_UNITS] as const;
+/** The units of the measures written in decimals (docs/29 X2): length, mass, volume of liquid (`l` is shown ℓ). */
+export const DECIMAL_UNITS = ['km', 'g', 'kg', 'l', 'ml'] as const;
+export const UNITS = [...LENGTH_UNITS, ...AREA_UNITS, ...DECIMAL_UNITS] as const;
+/** What an answer box may print beside it: a unit, or `dollar` (`$` before the box). */
+export const ANSWER_UNITS = [...UNITS, 'dollar'] as const;
 export type LengthUnit = (typeof LENGTH_UNITS)[number];
 export type AreaUnit = (typeof AREA_UNITS)[number];
 export type Unit = (typeof UNITS)[number];
 
 export interface Measure {
-  value: number;
+  value: Decimal;
   unit: Unit;
 }
 
@@ -259,21 +267,23 @@ export const isAreaUnit = (u: Unit): u is AreaUnit => (AREA_UNITS as readonly st
 
 /** The area unit of a length unit (`cm` → `cm2`) and back. */
 export const squared = (u: LengthUnit): AreaUnit => `${u}2` as AreaUnit;
-export const lengthOf = (u: Unit): LengthUnit => (isAreaUnit(u) ? (u.slice(0, -1) as LengthUnit) : u);
+/** The length unit of a grid unit (`cm2` → `cm`). */
+export const lengthOf = (u: LengthUnit | AreaUnit): LengthUnit => (isAreaUnit(u) ? (u.slice(0, -1) as LengthUnit) : u);
 
-const MEASURE_RE = /^\s*(\d{1,5})\s*(cm2|cm²|m2|m²|cm|m|unit2|units?|square units?)\s*$/;
+const MEASURE_RE = /^\s*(\d{0,5}(?:\.\d{1,6})?)\s*(cm2|cm²|m2|m²|km|cm|ml|m|kg|g|ℓ|l|unit2|units?|square units?)\s*$/;
 
-/** `"28 cm2"` → `{ value: 28, unit: 'cm2' }`; `null` when it is not a whole number with a unit. */
+/** `"28 cm2"` → 28 cm²; `"1.5 l"` → 1.5 ℓ; `null` when it is not a number with a unit. */
 export function parseMeasure(text: string): Measure | null {
   const m = MEASURE_RE.exec(text);
-  if (!m) return null;
+  const value = m ? parseDecimal(m[1]!) : null;
+  if (!m || !value) return null;
   const raw = m[2]!;
-  const unit: Unit = raw.startsWith('square') || raw === 'unit2' ? 'unit2' : raw.startsWith('unit') ? 'unit' : (raw.replace('²', '2') as Unit);
-  return { value: Number(m[1]), unit };
+  const unit: Unit = raw.startsWith('square') || raw === 'unit2' ? 'unit2' : raw.startsWith('unit') ? 'unit' : raw === 'ℓ' ? 'l' : (raw.replace('²', '2') as Unit);
+  return { value, unit };
 }
 
-/** The data string: `"28 cm2"`. */
-export const formatMeasure = (m: Measure): string => `${m.value} ${m.unit}`;
+/** The data string: `"28 cm2"`, `"1.5 l"`. */
+export const formatMeasure = (m: Measure): string => `${formatDecimal(m.value)} ${m.unit}`;
 
 const SHOWN: Record<Unit, { en: [string, string]; zh: string }> = {
   unit: { en: ['unit', 'units'], zh: '单位' },
@@ -282,6 +292,11 @@ const SHOWN: Record<Unit, { en: [string, string]; zh: string }> = {
   unit2: { en: ['square unit', 'square units'], zh: '平方单位' },
   cm2: { en: ['cm²', 'cm²'], zh: 'cm²' },
   m2: { en: ['m²', 'm²'], zh: 'm²' },
+  km: { en: ['km', 'km'], zh: 'km' },
+  g: { en: ['g', 'g'], zh: 'g' },
+  kg: { en: ['kg', 'kg'], zh: 'kg' },
+  l: { en: ['ℓ', 'ℓ'], zh: 'ℓ' },
+  ml: { en: ['ml', 'ml'], zh: 'ml' },
 };
 
 /** The unit as printed: `cm²`, `square units` (en plural by the count). */
@@ -289,9 +304,12 @@ export function unitText(u: Unit, locale: 'en' | 'zh', count = 2): string {
   return locale === 'zh' ? SHOWN[u].zh : SHOWN[u].en[count === 1 ? 0 : 1];
 }
 
-/** `28 cm²`, `14 units`, `12 平方单位`. */
+/** The count a unit's English name agrees with: 1 (singular) or more. */
+const countOf = (d: Decimal): number => (d.units === 1_000_000 && d.dp === 0 ? 1 : 2);
+
+/** `28 cm²`, `14 units`, `1.5 ℓ`, `12 平方单位`. */
 export function measureText(m: Measure, locale: 'en' | 'zh'): string {
-  return `${m.value} ${unitText(m.unit, locale, m.value)}`;
+  return `${formatDecimal(m.value)} ${unitText(m.unit, locale, countOf(m.value))}`;
 }
 
 const SPOKEN: Record<Unit, { en: [string, string]; zh: string }> = {
@@ -301,6 +319,11 @@ const SPOKEN: Record<Unit, { en: [string, string]; zh: string }> = {
   unit2: { en: ['square unit', 'square units'], zh: '平方单位' },
   cm2: { en: ['square centimetre', 'square centimetres'], zh: '平方厘米' },
   m2: { en: ['square metre', 'square metres'], zh: '平方米' },
+  km: { en: ['kilometre', 'kilometres'], zh: '千米' },
+  g: { en: ['gram', 'grams'], zh: '克' },
+  kg: { en: ['kilogram', 'kilograms'], zh: '千克' },
+  l: { en: ['litre', 'litres'], zh: '升' },
+  ml: { en: ['millilitre', 'millilitres'], zh: '毫升' },
 };
 
 /** The unit read aloud: "square centimetres" /「平方厘米」. */
@@ -312,19 +335,31 @@ export function unitWords(u: Unit, locale: 'en' | 'zh', count = 2): string {
 /* Answers                                                             */
 /* ------------------------------------------------------------------ */
 
+/** A decimal written with a point (`"0.35"`, `"3.0"`). */
+export interface DecValue extends Decimal {
+  kind: 'dec';
+}
+
 /** The value an `input` answer holds: a fraction or whole number, or a tagged value. */
-export type AnswerValue = Frac | RemValue | ClockValue | DurValue;
-export type TaggedValue = RemValue | ClockValue | DurValue;
+export type AnswerValue = Frac | RemValue | ClockValue | DurValue | DecValue;
+export type TaggedValue = RemValue | ClockValue | DurValue | DecValue;
+
+/** A decimal answer (or a whole number, as a decimal with no places); `null` for a fraction, a time … */
+export function decimalOf(v: AnswerValue): Decimal | null {
+  if (isFracValue(v)) return v.d === 1 && !v.w ? { units: v.n * 1_000_000, dp: 0 } : null;
+  return v.kind === 'dec' ? { units: v.units, dp: v.dp } : null;
+}
 
 export const isTagged = (v: AnswerValue): v is TaggedValue => 'kind' in v;
 export const isFracValue = (v: AnswerValue): v is Frac => !('kind' in v);
 
 /**
  * An answer as the data writes it: `56` · `"56"` · `"3/4"` (a fraction, parsed
- * by the caller) · `"3 r 2"` · `"09:40"` · `"1h35m"`. Returns the tagged value,
+ * by the caller) · `"3 r 2"` · `"09:40"` · `"1h35m"` · `"0.35"`. Returns the tagged value,
  * or `null` for text that is not one (a fraction or a whole number then).
  */
 export function parseTagged(text: string): TaggedValue | null {
+  if (hasPoint(text)) return { kind: 'dec', ...parseDecimal(text)! };
   const rem = parseRemainder(text);
   if (rem) return rem;
   const clock = parseClock(text);
@@ -337,5 +372,6 @@ export function formatAnswer(v: AnswerValue): string {
   if (!isTagged(v)) return v.d === 1 && !v.w ? String(v.n) : `${v.w ? `${v.w} ` : ''}${v.n}/${v.d}`;
   if (v.kind === 'rem') return formatRemainder(v);
   if (v.kind === 'clock') return formatClock(v.t);
+  if (v.kind === 'dec') return formatDecimal(v);
   return formatDuration(v.t, v.units);
 }

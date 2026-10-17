@@ -35,7 +35,7 @@ export function WholeInput(p: InputProps) {
   const grid = m.kind === 'grid';
   const gridUnit = m.kind === 'grid' ? m.unit : 'unit';
   const ask = askOf(task, spec)?.ask;
-  const printed: Unit | null = spec.unit ?? (grid ? (ask === 'area' ? squared(gridUnit) : gridUnit) : null);
+  const printed: Unit | null = (spec.unit === 'dollar' ? null : spec.unit) ?? (grid ? (ask === 'area' ? squared(gridUnit) : gridUnit) : null);
   const label = (i: number) => (ask ? t(locale, `math.grid.${ask}`) : T('math.input.w')) + (fields.length > 1 ? ` ${i + 1}` : '');
   const box = (field: string, i: number) => b.box(field, { label: label(i), digits: boxDigits(spec, field), className: 'ms-box--whole' });
   // A sentence prints its words and operators with a box for each `?`.

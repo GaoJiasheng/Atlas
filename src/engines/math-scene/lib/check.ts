@@ -18,6 +18,13 @@ import { arrangedShows, diagnoseWhole, groupShows, groupsRight, landingsShow, op
 import { diagnoseTime, timeContextOf } from './diagnose/time';
 import { parseArrayCut } from './array';
 import { regrouped } from './blocks';
+import { fractionShows } from './diagnose/decimals';
+import { toFraction } from './decimal';
+import { checkDecimalInput, checkDecimalModel, decimalAnswered, decimalLine, isDec, isDecimalTask, onChart, readDecimals } from './decimal-tasks';
+import type { DecValue } from './value';
+
+/** A fraction, or a decimal as the fraction it is (the fraction checks read decimals this way). */
+export const asFrac = (v: Frac | DecValue): Frac => (isDec(v) ? toFraction(v) : v);
 import { clockSetRight, clockShown } from './clock';
 
 export interface CheckResult {
@@ -167,7 +174,7 @@ function inputRule(code: MisconceptionCode, task: Task, spec: InputSpec, v: Frac
       return [spec.from, answer].some((r) => !!r && oneSided(x, toImproper(r)));
     case 'tick-counting': {
       const m = task.model;
-      if (m.kind !== 'numberline' || !m.arrow) return false;
+      if (m.kind !== 'numberline' || m.scale === 'decimal' || !m.arrow) return false;
       const k = valueOnLine(m.arrow, m);
       return k !== null && x.n === k + 1 && x.d === (m.intervals ?? 1) + 1;
     }
@@ -209,7 +216,7 @@ export function checkInputValues(task: Task, spec: InputSpec, values: readonly F
         break;
     }
     if (right) continue;
-    const code = codes.find((c) => c !== 'not-simplest' && inputRule(c, task, spec, v, answer)) ?? null;
+    const code = codes.find((c) => c !== 'not-simplest' && (inputRule(c, task, spec, v, answer) || fractionShows(c, spec.work ?? null, v))) ?? null;
     return { ok: false, code };
   }
   return OK;
@@ -252,12 +259,13 @@ function checkCut(task: TaskOf<'cut'>, state: TaskState): CheckResult {
 function checkPlace(task: TaskOf<'place'>, state: TaskState): CheckResult {
   if (state.place === null) return NOT_YET;
   const m = task.model;
-  const line = m.kind === 'numberline' ? m : { from: 0, intervals: state.parts };
-  const q = valueOnLine(task.target, line);
+  const target = asFrac(task.target);
+  const line = m.kind === 'numberline' && m.scale !== 'decimal' ? m : { from: 0, intervals: state.parts };
+  const q = valueOnLine(target, line);
   if (q === null) return NOT_YET;
   const tol = task.snap === 'free' ? (task.tolerance ?? 0.5) : 0;
   if (Math.abs(state.place - q) <= tol) return OK;
-  const t = toImproper(task.target);
+  const t = toImproper(target);
   const rules: Partial<Record<MisconceptionCode, boolean>> = {
     'tick-counting': Math.abs(state.place - q) === 1,
     'scaled-one-part': state.place === t.n && line.intervals !== t.d,
@@ -276,9 +284,10 @@ export function claimedSymbol(task: TaskOf<'compare'>, state: TaskState): Sym | 
 function checkCompare(task: TaskOf<'compare'>, state: TaskState): CheckResult {
   const s = claimedSymbol(task, state);
   if (s === null) return NOT_YET;
-  const right = SYMBOL[compare(task.a, task.b)];
+  const a = asFrac(task.a);
+  const b = asFrac(task.b);
+  const right = SYMBOL[compare(a, b)];
   if (s === right) return OK;
-  const { a, b } = task;
   const rules: Partial<Record<MisconceptionCode, boolean>> = {
     'bigger-denominator-bigger': a.n === b.n && a.d !== b.d && s === SYMBOL[sign(a.d, b.d)],
     'compare-numerators-only': a.d !== b.d && s === SYMBOL[sign(a.n, b.n)],
@@ -290,7 +299,7 @@ function checkCompare(task: TaskOf<'compare'>, state: TaskState): CheckResult {
 /** Items in the correct order (indices). */
 export function sortedOrder(task: TaskOf<'order'>): number[] {
   const idx = task.items.map((_, i) => i);
-  return idx.sort((i, j) => compare(task.items[i]!, task.items[j]!) * (task.direction === 'asc' ? 1 : -1));
+  return idx.sort((i, j) => compare(asFrac(task.items[i]!), asFrac(task.items[j]!)) * (task.direction === 'asc' ? 1 : -1));
 }
 
 function checkOrder(task: TaskOf<'order'>, state: TaskState): CheckResult {
@@ -298,7 +307,7 @@ function checkOrder(task: TaskOf<'order'>, state: TaskState): CheckResult {
   const right = sortedOrder(task);
   if (state.order.every((v, i) => v === right[i])) return OK;
   const dir = task.direction === 'asc' ? 1 : -1;
-  const items = state.order.map((i) => task.items[i]!);
+  const items = state.order.map((i) => asFrac(task.items[i]!));
   const monotone = (key: (f: Frac) => number) => items.every((f, i) => i === 0 || sign(key(f), key(items[i - 1]!)) * dir >= 0);
   const rules: Partial<Record<MisconceptionCode, boolean>> = {
     'compare-numerators-only': monotone((f) => toImproper(f).n),
@@ -370,7 +379,7 @@ function checkGridInput(task: Task, spec: InputSpec, values: readonly Frac[], st
   const x = numbers[0]!;
   const unit: Unit | null = spec.form === 'measure' ? ((state.input.u as Unit) ?? null) : null;
   if (x === answers[0] && (spec.form !== 'measure' || unit === spec.unit)) return OK;
-  if (x === answers[0]) return { ok: false, code: codes.includes('unit-not-squared') && unitShows(ctx, unit, spec.unit) ? 'unit-not-squared' : null };
+  if (x === answers[0]) return { ok: false, code: codes.includes('unit-not-squared') && unitShows(ctx, unit, spec.unit === 'dollar' ? undefined : spec.unit) ? 'unit-not-squared' : null };
   return { ok: false, code: diagnoseNumber(codes, ctx, x) };
 }
 
@@ -512,6 +521,14 @@ function checkWholeModel(task: Task, state: TaskState): CheckResult {
   }
 }
 
+/** The model phase of a decimal task is checked in `decimal-tasks.ts` (the decimal kinds, a decimal line, decimals compared or ordered, the chart). */
+function decimalModelPhase(task: Task): boolean {
+  if (task.kind === 'shade-decimal' || task.kind === 'round-on-line' || task.kind === 'align-add' || task.kind === 'shift-digits') return true;
+  if (onChart(task)) return true;
+  if (task.kind === 'place') return !!decimalLine(task.model);
+  return (task.kind === 'compare' || task.kind === 'order') && isDecimalTask(task);
+}
+
 /* ------------------------------------------------------------------ */
 /* The clock (docs/20 §3.4)                                            */
 /* ------------------------------------------------------------------ */
@@ -534,6 +551,10 @@ export function checkPhase(task: Task, state: TaskState, phase: Phase): CheckRes
   if (phase === 'input') {
     const spec = inputSpecOf(task);
     if (!spec) return NOT_YET;
+    if (spec.form === 'decimal') {
+      const written = readDecimals(spec, state.input);
+      return written ? checkDecimalInput(task, spec, written, declaredCodes(task)) : NOT_YET;
+    }
     if (usesValueBoxes(task, spec)) {
       const written = readWritten(spec, state.input);
       return written ? checkValueInput(task, spec, written, state) : NOT_YET;
@@ -542,6 +563,7 @@ export function checkPhase(task: Task, state: TaskState, phase: Phase): CheckRes
     if (!values) return NOT_YET;
     return task.model.kind === 'grid' ? checkGridInput(task, spec, values, state) : checkInputValues(task, spec, values);
   }
+  if (decimalModelPhase(task)) return checkDecimalModel(task, state, declaredCodes(task));
   if (task.kind === 'count-squares' || task.kind === 'trace-perimeter' || task.kind === 'draw-rectangle' || task.kind === 'split-figure') return checkGridModel(task, state);
   if (task.kind === 'group' || task.kind === 'arrange' || task.kind === 'skip-count' || task.kind === 'split-array' || task.kind === 'regroup' || task.kind === 'share') return checkWholeModel(task, state);
   if (task.kind === 'set-clock') return checkSetClock(task, state);
@@ -565,9 +587,7 @@ export function checkPhase(task: Task, state: TaskState, phase: Phase): CheckRes
       return checkChoose(task, state);
     case 'build-sum':
       return checkBuildSum(task, state, phase);
-    case 'input':
-    case 'read-clock':
-    case 'duration':
+    default:
       return NOT_YET;
   }
 }
@@ -590,8 +610,10 @@ export function answered(task: Task, state: TaskState): boolean {
   if (phase === 'input') {
     const spec = inputSpecOf(task);
     if (!spec) return false;
+    if (spec.form === 'decimal') return readDecimals(spec, state.input) !== null;
     return usesValueBoxes(task, spec) ? readWritten(spec, state.input) !== null : readInput(spec, state.input) !== null;
   }
+  if (decimalModelPhase(task) && task.kind !== 'compare' && task.kind !== 'order') return decimalAnswered(task, state);
   if (phase === 'convert') return state.factor !== null || state.parts !== (task.model.kind === 'bar' ? task.model.parts : 0);
   if (phase === 'mark') return state.shaded.length + state.crossed.length > 0;
   switch (task.kind) {

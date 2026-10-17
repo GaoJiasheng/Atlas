@@ -1283,21 +1283,23 @@ core 演示系统（字幕卡、两级进度条、自动播放、语音、拍键
 
 ```
 index.ts            descriptor：扩展字段 beat（0 起；URL b，1 起）、model（小测时 VIEW 组的模型，null = 题目自己的）；每章从第一拍开始；fromUrl 收 b / model，从不收作答和抽到的题
-schema.ts           lesson.json 的 zod（构建期）：分数、整数、余数、时刻、时长的字符串；模型（分数五种、方格 grid、阵列 array、数位块 blocks、整数数轴、钟面 clock、时间线 timeline）；讲解节拍（beatSchema）；24 种任务；步（beats、pool、keyFacts、limits）；练习题；课纲条目；notation；章节 state；误解按域登记
-validate.ts         docs/15 §4.10 / §10 的主题级规则：章 ↔ 步、3–5 拍且模型画得出、题库 8–10 道、每道题的规则（taskIssues，与 check-pool 共用）；validate-values.ts 是整数与时间的规则（模型画得出、答案与 op / span / convert 一致、诊断得出、limits）
+schema.ts           lesson.json 的 zod（构建期）：分数、整数、余数、时刻、时长、小数的字符串；模型（分数五种、方格 grid、阵列 array、数位块 blocks、整数数轴、钟面 clock、时间线 timeline、百格 decimal-grid、位值表 place-value、小数数轴、钱 money）；讲解节拍（beatSchema）；28 种任务；步（beats、pool、keyFacts、limits）；练习题；课纲条目；notation；章节 state；误解按域登记
+validate.ts         docs/15 §4.10 / §10 的主题级规则：章 ↔ 步、3–5 拍且模型画得出、题库 8–10 道、每道题的规则（taskIssues，与 check-pool 共用）；validate-values.ts 是整数与时间的规则（模型画得出、答案与 op / span / convert 一致、诊断得出、limits），validate-decimals.ts 是小数的
 View.tsx            HUD 注册、舞台（节拍 / 小测）、算式行、章节轴、阅读面板（节拍行、小测托盘、本章索引）、右上卡、PLATE 块、控制面板、演示适配器
 controller.ts       换拍、抽题（visit / another / skip / force）、孩子的动作、检查、提示、看答案、撤销、练习流程；也是 __atlas.engine 的实现
 ui.ts               引擎自己的内存 store：每道题的作答（模型状态、尝试、提示级、反馈、看答案、完成、"你的尝试"）、每步抽到的题、练习结果、模式
-lib/                纯函数（有单测）：fraction、value（整数、余数、时刻、时长、量 + notation）、forms（分数以外的作答格）、grid（方格几何）、array（阵列的数与排法）、blocks（数位块、换、分、竖式每一位）、
-                    diagnose/{measure,whole-ops,time}（三个域的诊断）、state、check（检查 + 误解诊断）、solve（正确解法、错例 sample → 状态）、proof（任务自证）、
-                    pool（按页面种子抽题，避开上一道）、beats（演示拍）、lesson（定位、拍的槽位、VIEW 可切换的模型）、working（算式）、words（读法）、
-                    clock（针角、拖针、点数字、拨钟的检查）、timeline（标尺的范围与刻度、孩子的跳段、解法的跳法）
+lib/                纯函数（有单测）：fraction、value（整数、余数、时刻、时长、量、小数 + notation）、forms（分数以外的作答格）、grid（方格几何）、array（阵列的数与排法）、blocks（数位块、换、分、竖式每一位）、
+                    clock（针角、拖针、点数字、拨钟的检查）、timeline（标尺的范围与刻度、孩子的跳段、解法的跳法）、
+                    decimal（精确小数）、dgrid（百格涂色）、placevalue（小数位值表）、dline（小数数轴与放大）、money（钱）、decimal-tasks（小数题的状态、动作、检查、解法、错例）、decimal-views、decimal-working（小数算式行）、
+                    diagnose/{measure,whole-ops,time,decimals}（四个域的诊断）、state、check（检查 + 误解诊断）、solve（正确解法、错例 sample → 状态）、proof（任务自证）、
+                    pool（按页面种子抽题，避开上一道）、beats（演示拍）、lesson（定位、拍的槽位、VIEW 可切换的模型）、working（算式）、words（读法）
 stage/              SVG：Stage（小测的模型）、BeatModel（讲解节拍 + 叠加 + 过渡）、BarModel、CircleModel、NumberLine、Rows、BarModelDiagram、GridModel（方格）、ArrayModel（阵列）、WholeLine（整数数轴）、
-                    BlocksModel（数位块）、ColumnWorking（竖式）、ClockModel（钟面、秒表、放大镜、可拖的针）、Timeline（时间线）、CutBar、OptionGrid、svg、layout
+                    BlocksModel（数位块）、ColumnWorking（竖式）、ClockModel（钟面、秒表、放大镜、可拖的针）、Timeline（时间线）、DecimalGrid（百格 / 千格）、PlaceValueChart（小数位值表）、DecimalColumn（小数竖式）、
+                    DecimalLine（小数数轴）、MoneyModel（钱）、DecimalTask、CutBar、OptionGrid、svg、layout
 tray/Tray.tsx       小测托盘（< = >、选项、排序、×k / ÷k、对折、−/+；你的尝试；提示 / 检查 / 看答案 / 再来一道 / 跳过 / 下一章）；tray/inputs/（作答格：FractionInput、WholeInput（整数 / 算式 / 量）、
-                    ValueInputs（余数、time12 / face / time24、时长）、boxes（共用的格子 + 数字键 + 芯片））；tray/GridControls（方格：按行铺、走一圈、长宽步进、切线移动）；tray/WholeControls（阵列与数位块的按钮）；
-                    tray/TimeControls（拨钟的时 / 分步进与 am / pm、时间线的跳段芯片）
-hud/                cards/（右上卡注册表：FRACTION、AREA、PRODUCT、PLACE VALUE、TIME，按模型种类选）、plate.ts（PLATE 行：阵列 / 整数数轴 / 数位块 / 钟面 / 时间线）、BeatLine（节拍行）、ChapterIndex（要点 + 课纲对照）、PlateBlock（左列 PLATE 块）、Overlay（控制面板）
+                    ValueInputs（余数、time12 / face / time24、时长）、DecimalInput（小数框 + 点键）、boxes（共用的格子 + 数字键 + 芯片））；tray/GridControls（方格：按行铺、走一圈、长宽步进、切线移动）；tray/WholeControls（阵列与数位块的按钮）；
+                    tray/TimeControls（拨钟的时 / 分步进与 am / pm、时间线的跳段芯片）；tray/DecimalControls（百格步进、数轴放大、两端、对齐、移位、位值表的分与换）
+hud/                cards/（右上卡注册表：FRACTION、AREA、PRODUCT、PLACE VALUE、TIME、DECIMAL，按模型种类选）、plate.ts（PLATE 行：阵列 / 整数数轴 / 数位块 / 钟面 / 时间线 / 百格 / 位值表 / 小数数轴 / 钱）、BeatLine（节拍行）、ChapterIndex（要点 + 课纲对照）、PlateBlock（左列 PLATE 块）、Overlay（控制面板）
 practice/Summary    练习总结
 math-scene.css      全部样式（token、× --u、触控 ≥ 44 px；节拍过渡；1024 px 以下停在舞台上的托盘）
 scripts/math/check-pool.ts   题库草稿自证：pnpm tsx scripts/math/check-pool.ts <draft.json> [--bridge] [--topic <slug> --step <id>] [--limits <json>]
@@ -1375,6 +1377,33 @@ scripts/math/check-pool.ts   题库草稿自证：pnpm tsx scripts/math/check-po
   - `choose` 的选项可以是钟面（含 `faulty`；替代文字描述针指在哪，不读出时刻），`input` 可以配钟面或时间线（如读时长环带）。
 - **HUD**：TIME 卡——讲解拍是这一拍钟面的时刻（钟面有 am / pm 牌按 12 时制、有内圈按 24 时制、否则钟面读法 "twenty past seven / 七点二十分"；秒表、时长标尺是时长；时间线是最后一个标记），背景章是标本 7:20；`set-clock` 小测是"拨到"（题目里已有）+"钟面上"（孩子拨的，signal）+ 读法；`read-clock` / `duration` 只有已知的和孩子写的。PLATE 行：钟面 MODEL CLOCK · TIME · HAND · NOTATION（时刻按钟面的读法，要读的钟答完前写 ?；HAND = 点亮的针或 H · M（· S）；NOTATION = 这一处的写法 `H.MM`、`H.MM AM`、`HH:MM`、`MIN · S`），时间线 MODEL TIMELINE · FROM · TO · JUMPED（讲解拍：第一跳 / 第一个标记、最后一跳 / 最后一个标记、跳了多久；小测：已知时刻、孩子跳到哪、孩子跳了多久）。`View` 把 `beatTime(beat)` 交给 `Card` 的 `time`。
 - **校验**（`validate-values.ts` 的 `clockIssues` / `timelineIssues` / `timeTaskIssues`）：秒表要 `elapsed`（≤ 30 min）且不带钟面的层；`arc` 往后走、≤ 4 h；`hourTrack.from` 在 12 小时之内；成对的钟面各带 `label`；时间线范围合法（span / duration ≤ 6 h，到 24:00 为止）、标记和弧都在线上；`faulty` 不在题目自己的模型上；`read-clock` 的答案是钟面的时刻；`set-clock` 的目标在 snap 上、开始时不已经对；`duration` 的标尺盖得住；`limits.clock: "12h"` 时不许 24 时写法、`inner24`、24 时标尺；`limits.sameDay` 不许跨午夜。单测 `tests/math-scene/{clock,timeline}.test.ts`。
+
+### 小数（docs/29 §3，X1–X11 与模型 A6）
+
+- **值**（`lib/decimal.ts`，纯函数，**不用浮点**）：`Decimal = { units, dp }`，`units` 是百万分之一的整数，`dp` 是写出的小数位数（`0.5` 与 `0.50` 值相等、写法不同：`eq` / `same`）。逐位解析 `parseDecimal`（`".35"` 读作 0.35；`"1.2.3"`、`"-1"`、6 位整数都拒绝），`add` / `sub` / `mulWhole` / `divWhole`（长除法，`exact` 或截到 6 位）/ `round`（满 5 进一，写够位数：2.96 → 3.0）/ `truncate` / `scale`（× 10ⁿ：数字移位）/ `digitAt` / `toFraction` / `fromFraction`（分母只含 2、5）。数据里**小数一律写字符串**（`"0.50"`）；整数可写 JSON 数，带点的 JSON 数报 "write decimals as strings"。`answer` 带点即识别为小数（`{ kind: 'dec' }`）；`compare` 的 `a` / `b`、`order` 的 `items`、`place` 的 `target`、`choose` 选项的 `value` 收分数或小数；`share` / `regroup` 的 `value` 收整数或小数。
+- **量**（X2）：`Measure.value` 是 `Decimal`（方格课照旧是整数），单位加 `km` `g` `kg` `l`（显示 ℓ）`ml`；`{u:1.5 l}` 显示 `1.5 ℓ`，读 "one point five litres" /「一点五升」。
+- **文本里的小数与钱**（X8，`src/lib/rich-text.ts`）：正文、字幕、题目里**裸写**的小数（`0.235`、`0.666…`）和钱（`$2.35`、`$7`）是一个不拆行的值，与相邻运算符同行；朗读：小数点后逐位 "zero point two three five" /「零点二三五」，`…` 加 ", and so on" /「，一直下去」，钱 "2 dollars 35 cents" /「2 元 35 分」，`≈` 读 "is about" /「约等于」（`lib/words.ts` 的 `decimalWords`、`moneyWords`）。validate 拦裸写的时刻（`9.40 am` 会被读成小数，要写 `{t:09:40}`；`sample` 字段不查）。
+- **模型**
+  - **百格 / 千格** `{ "kind": "decimal-grid", "level": 10 | 100 | 1000, "wholes": 1–3, "given": "0.35", "runs": [{ "value": "0.3", "tone": "cold" }, { "value": "0.05", "tone": "signal" }], "crossed": "0.12", "zoom": { "at": "0.23" }, "quarters": true, "labels": "tenths" | "hundredths", "trade": "t>O" | "h>t" | "th>h", "tone": "ghost" | "hot", "pair": [grid, grid] }`：一个整体是正方形，十分之一是竖条，百分之一是条里的小格（每 5 格一条略重的线）；涂色顺序固定（整体 → 条从左到右 → 格从上到下，`lib/dgrid.ts`）。千分之一画在放大镜里：圆圈 + 两条引线 + 放大的那一格切成 10 细条 + "×10"（宽舞台在右边，窄舞台在下面）；validate 要求有千分位时 `zoom.at` 正是"涂到一半的那一格"。
+  - **位值表** `{ "kind": "place-value", "columns": ["T","O","t","h","th"], "value": "34.506", "show": "digits" | "discs" | "both", "fill": [...], "highlight": [...], "rows": ["3.4","1.25"], "align": "point" | "right", "pad": true | "1.500", "copies": 3, "combined": true, "plates": 4, "dealt": { "O": 1, "t": 4 }, "left": {...}, "trade": "h>t", "shift": { "by": 2, "dir": "right" }, "money": true, "column": { "op": "+" | "−" | "×" | "÷", "a": "2.35", "b": "3", "show": "none" | "all" } }`（位 `Th H T O t h th`，`lib/placevalue.ts`）：列头英文小号大写 + 中文，个位与十分位之间一个大墨点（小数点，`slide` 时数字动、点不动），圆片墨线圆印 `1 / 0.1 / 0.01 / 0.001`（钱版 `$1 / 10¢ / 1¢`），不按位着色；`align: "right"` 只画"对错了"（没对上的点用灰色虚线框标出）；`pad` 的 0 淡显；`plates` + `dealt` 不写 `left` 时表上画剩下的。竖式 `stage/DecimalColumn.tsx`：+ − 逐位，进位 / 退位的小数字在上方（signal），× ÷ 用整数竖式（`ColumnWorking`）再把小数点放回去，积、商、被除数的小数点在同一竖线上，商没有个位时写 0。≤ 120 个圆片，值 ≤ 9999、≤ 三位小数。
+  - **小数数轴** `{ "kind": "numberline", "scale": "decimal", "from": "0", "to": "1", "step": "0.1", "labels": "ends" | "wholes" | "all" | "none", "marks": [...], "arrow": "0.23", "zoom": [{ "from": "0.2", "to": "0.3" }, { "from": "0.23", "to": "0.24" }], "halfway": true, "nearest": "3.0", "unit": "km", "dual": { "unit": "m", "factor": 1000 } }`（`lib/dline.ts`）：≤ 20 段；每层放大是上一层的恰好一段切成 10 段（最多 2 层），被放大的那段加粗、下方方括号、两条引线连到下一层两端、"×10"；端点按写法显示（`3.0` 保留 0），中间刻度按 step 的位数；`nearest` 时较近一端加粗、signal 箭头从标记指过去；`dual` 在线下印小单位（标记也印）。
+  - **钱** `{ "kind": "money", "amount": "2.35", "pieces": ["1","0.1",…], "layout": "tray" | "by-place", "trade": "t>O", "note": true, "pair": [{ "amount": "2.05" }, { "amount": "2.50" }] }`（`lib/money.ts`）：硬币 5¢ 10¢ 20¢ 50¢ $1、纸币 $2 $5 $10 $50，**素面**（圆 + 面额字，$1 内多一圈），没有 1 分；缺省按位拆（几张 $10、几枚 $1、几枚 10¢、一枚 5¢）；`by-place` 三列 DOLLARS · TEN CENTS · CENTS（元 · 10 分 · 分），列下写这一列有几个这一位的单位（10 枚 10¢ 写 10）；`trade` 点亮 10 枚 10¢，元列画一枚虚线 $1。金额必须是 5 分的倍数（validate）。
+- **讲解拍过渡**（X7）：`zoom`（放大镜 / 下一层数轴从上一段展开）、`slide`（位值表数字从原来的列滑过去，原处留虚线影子，点不动）、`align`（第二行从右对齐滑到小数点对齐，补的 0 淡入）、`round`（箭头画出，较近一端加粗）；都 ≤ 900 ms，`prefers-reduced-motion` 时淡入。位值表每拍整幅重挂载（过渡在挂载时播），百格同尺寸时只换涂色。
+- **题型**（括号里是 `sample` 写法）
+  - `shade-decimal` `{ target, level, wholes?, start?, accept: "value" }`：点小格（level 10 点条）涂 / 撤，条下 44 px 条按钮一次涂满 / 清空一条，level 1000 放大镜跟着"下一格"、点细条涂千分之一；托盘 ±0.1、±0.01（±0.001）步进与"重来"；键盘方向键（← → 一条，↑ ↓ 一格）+ Enter，`+` / `−` 一个百分之一（Shift 十分之一）。只查总量（`"0.6"`）。
+  - `place` 在小数数轴上 `{ target, zoom: 0 | 1 | 2 }`：上面的层点一段 = 放大（`zoom`），最深一层点刻度 = 放标记；每层是 `role="slider"`（← → 段 / 刻度，Enter 放大 / 放，Esc 收起最深一层），托盘 ◀ ▶、"放大这一段"、"缩小"（`"0.234"`）。
+  - `compare` / `order` 扩到小数（`"<"`、`"0.5,0.45,0.54,0.405"`）；`compare.align: "point"` 的按钮把两个数按小数点竖排补 0；`order.line: true` 做完后把各数画成标记。
+  - `round-on-line` `{ value, to: 0 | 1 | 2, labels: "ends" | "hidden", then }`：先点较近的一端（舞台上两个 44 px 端点按钮，托盘一组 radio），再写四舍五入的结果（`then.places = to`）。模型照写成两端的数轴（validate 查两端 = 相邻两个保留位）（`"end:2.9"`、`"=3.0"`）。
+  - `align-add` `{ op: "+" | "−", a, b, start: "right" | "left", then }`：用 ◀ ▶（或第二行的 slider ← →）把第二行移到小数点对齐（对上时点变 signal），"补 0" 淡显空位；再写和 / 差（`"align:right"`、`"align:point"`、`"=4.65"`）。两数位数相同或起点已对齐 validate 报错。
+  - `shift-digits` `{ value, op: "×" | "÷", by: 10 | 100 | 1000 }`：**往左一位 / 往右一位**按钮（或 slider ← →）整体移数字，空位出现淡显的 0（`"30.7"`：结果值）。
+  - `share` / `regroup` 扩到位值表（模型 `place-value`）：分一列、剩下的换到右边一列（≤ 三位小数），`regroup` 每列 < 10，或写 `goal` 时换到那个样子（减法前"拿 1 个十分之一换 10 个百分之一"）（动作序列 `"O,O>t,t"`、`"h>t"`；多段 `"=1.4"`）。
+  - `input` 的 **`decimal` 写法**：一个框 + 数字键 + `.` 键（`places`：必须正好写几位，钱 `unit: "dollar"` 缺省 2 位；`unit` 为 `dollar` 时框前印 `$`，量的单位印在框后；`work` 的换算印目标单位）；物理键盘直接打，`,` 忽略，`.35` 写成 0.35。值对位数不够 → `places-short`（"差一步"，同 `not-simplest` 不算尝试）。没有 `sentence` 时按 `work` 印算式（`0.45 + 0.38 = ?`）。sample `"0.43"`（照孩子写的，`"0.10"` 保留）、多框 `"3,5"`。
+  - `work`（只给诊断，validate 查它算出来 = `answer`）：`{ "do": "add" | "subtract" | "multiply" | "divide" | "round" | "convert" | "scale" | "to-fraction" | "to-decimal" | "compose" | "read", "a", "b", "to", "from", "into", "op", "by", "of", "parts", "line", "tick" }`；小数化分数用分数格（`form: "simplest"` + `work: { do: "to-fraction", of: "0.35" }`）。
+- **误解**：`decimals` 域 25 条（`lib/diagnose/decimals.ts`，§2.1 的码，每条 ≥ 2 正例 1 反例，`tests/math-scene/diagnose-decimals.test.ts`）。**一码多域**：`MISCONCEPTION_DOMAINS.decimals` 除自己的 25 条还列 `tick-counting`、`carry-not-added`、`zero-in-quotient`、`not-simplest`；码只在自己的老家域登记一次（`MISCONCEPTIONS` 无重复），一个码的规则是列出它的各域规则之并，**一道题按它自己的域诊断**（小数题走 `decimals.ts` 的规则）。一道题是小数题（`lib/decimal-tasks.ts isDecimalTask`：小数题型、A6 模型、小数的值、`decimal` 写法或 `work`）就归 `decimals` 域，validate 拒绝别的域的码和"这道题诊断不出"的码（如没有 `work: multiply` 却写 `point-misplaced`）。
+- **每步上限**（X9，`limits`）：`dp: [少, 多]`（题目给的小数的位数）、`resultDp`、`maxValue`、`factor: [2, 9]`（× ÷ 一位数）、`denominators`（分数化小数允许的分母）、`roundTo: [0, 2]`、`by: [10, 100, 1000]` + `multiples: true`（20…900）、`units: ["km-m","m-cm","kg-g","l-ml"]`、`money: true`（5 分的倍数）、`zoomDepth`；validate 与 `check-pool --topic --step` 都查。答案框整数部分最多 5 位（99 999）：换算题别出 `750000` 这样的错例。
+- **右上卡 DECIMAL**（X4）：讲解拍 = 大号数字、每位下面英文 + 中文位名、小数点画大，一行分数名 `{235/1000}`（展开后加最简分数与 `0.2 + 0.03 + 0.005`），下面一行读法；钱：`$2.35` · 分数 `235` · "2 dollars 35 cents"；四舍五入拍：`2.96 ≈ 3.0` · "to 1 decimal place"；双刻度：`1.5 ℓ = 1500 ml`。小测只显示给定的数（算式带 `?`）和它的读法，做完才给答案。**PLATE 行**（X5）：百格 MODEL HUNDRED GRID · WHOLES · TENTHS · HUNDREDTHS · THOUSANDTHS · SHADED；位值表 MODEL PLACE VALUE · NUMBER · TRADES · SHIFT；小数数轴 MODEL NUMBER LINE · RANGE · STEP · ZOOM · MARK；钱 MODEL MONEY · COINS · TOTAL。小测里是孩子做的（涂了多少、放在哪、移了几位），"看图写数"的题不先说值。
+- **VIEW**（X10）：`MODEL_VIEWS` 加 `decimal-grid`、`place-value`、`money`（小数数轴沿用 `numberline`）。比较两个小数的题可以在并排百格（≤ 两位小数、≤ 3 个整体）/ 位值表对齐 / 一条数轴之间切换（`lib/decimal-views.ts`，画不出的视图不出现），其余小数题只画自己的模型。小数课（有 A6 模型的课）的背景章画涂了 0.35 的百格；规格表多一行 DECIMAL PLACES ≤ 3；没有 S / E / N / L 辅助。
+- **示例主题** `sample-lesson-decimal`（`status: draft`）：四步（百格与钱 · 数轴与四舍五入 · 位值表与竖式 · 移位与单位，最后一步 `bridge`），37 道题，把上面每个模型、过渡、题型、写法各用一次，`tests/math-scene/sample-lesson-decimal.test.ts` 全部自证；截图 `pnpm shoot sample-lesson-decimal --beats --tasks --keys --layout`。
 
 ### 舞台、阅读面板、HUD（docs/08 §2 全引擎 HUD 铁律）
 
