@@ -45,7 +45,8 @@ const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v
 /** The time the clock beside the line shows: where the child's jumps are, else the last mark (or jump), else the start. */
 export function timelineNow(m: TimelineSpec, task: Task | null | undefined, state: TaskState | null | undefined): number {
   if (task && state && task.kind === 'duration') return hopEnd(task, state.hops) ?? rangeOf(m).from;
-  return m.marks?.at(-1)?.at ?? m.jumps?.at(-1)?.[1] ?? rangeOf(m).from;
+  // A beat's clock follows its latest jump to where it landed; without jumps, the last mark.
+  return m.jumps?.at(-1)?.[1] ?? m.marks?.at(-1)?.at ?? rangeOf(m).from;
 }
 
 export function Timeline(p: TimelineProps) {

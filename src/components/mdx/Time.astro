@@ -1,0 +1,23 @@
+---
+/**
+ * `<Time t="09:40" />`, `<Time t="19:20" as="24" />`, `<Time t="7:20" as="face" />`, `<Time t="19:20" as="ampm" />`:
+ * a time of day in a chapter body, written exactly as the lesson's `{t:…}` token (src/lib/rich-text.ts) — by the
+ * lesson's notation, 12-hour by default (zh prose `上午 9.40`), `24` in 24-hour time, `face` as a clock face reads it,
+ * `ampm` with the letters am / pm in Chinese too — one unbreakable run that screen readers hear as words
+ * ("nine forty a.m." /「上午九点四十分」). Times are 24-hour in the source. `pnpm validate` checks t and as.
+ */
+import { plainText, speakable } from '../../lib/rich-text';
+import { pageLocale } from './locale';
+import { topicNotation } from './notation';
+
+interface Props {
+  t: string;
+  as?: '24' | 'face' | 'ampm';
+}
+const { t, as } = Astro.props;
+const locale = pageLocale(Astro.url, Astro.currentLocale);
+const token = `{t:${t}${as ? `|${as}` : ''}}`;
+const text = plainText(token, locale, topicNotation(Astro.url));
+const words = speakable(token, locale);
+---
+<span class="atlas-value" aria-label={words}>{text}</span>

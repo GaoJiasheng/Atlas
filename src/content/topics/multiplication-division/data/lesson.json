@@ -1988,7 +1988,8 @@
             "object": "egg",
             "layout": "rows",
             "rows": 3,
-            "cols": 4
+            "cols": 4,
+            "braces": "cols"
           },
           "move": "shade",
           "equation": "4 × 3 = 12",
@@ -4603,7 +4604,8 @@
             "object": "orange",
             "layout": "rows",
             "rows": 3,
-            "cols": 5
+            "cols": 5,
+            "braces": "cols"
           },
           "move": "shade",
           "equation": "5 × 3 = 15",
@@ -4687,7 +4689,7 @@
             "layout": "rows",
             "rows": 7,
             "cols": 4,
-            "braces": "cols",
+            "braces": true,
             "cover": {
               "rows": true
             }
@@ -11225,7 +11227,7 @@
           "layout": "rows",
           "rows": 7,
           "cols": 6,
-          "braces": "cols",
+          "braces": true,
           "cover": {
             "rows": true
           }

@@ -349,7 +349,7 @@ export function bareTimes(text: string): string[] {
 /** What is wrong with a bad token. */
 function tokenMessage(bad: string): string {
   if (bad.includes('/') && !/^\{[tdu]:/.test(bad)) return `"${bad}" is not a fraction token ({3/4}, {1 3/4}, {?/12})`;
-  return `"${bad}" is not a time, duration or measure token ({t:09:40}, {t:7:20|face}, {t:19:20|24}, {d:1h35m}, {u:28 cm2})`;
+  return `"${bad}" is not a time, duration or measure token ({t:09:40}, {t:7:20|face}, {t:19:20|24}, {t:19:20|ampm}, {d:1h35m}, {u:28 cm2})`;
 }
 
 /** Every string in a value, with its path. */

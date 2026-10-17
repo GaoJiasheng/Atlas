@@ -16,7 +16,7 @@ Watch as <Beat n={2}>the minute hand moves three small marks further</Beat>. Eac
 
 Now look at <Beat n={3}>the two hands as they light up</Beat>. Use their lengths to tell them apart. The long hand gives the minutes, and the short hand gives the <Term id="hour">hour</Term>. The short hand is between 7 and 8 because part of the hour has passed. Swapping the hands is a mistake because each hand tells you a different part of the time.
 
-Compare <Beat n={4}>the two written times</Beat>: 7.28 and 7.05. Look at the minute hand on each clock. One shows 28 minutes past 7; the other shows five minutes past 7. Write the minutes with two digits. For five minutes, put a zero before the 5 to keep both places filled.
+Compare <Beat n={4}>the two written times</Beat>: <Time t="7:28" as="face" /> and 7.05. Look at the minute hand on each clock. One shows 28 minutes past 7; the other shows five minutes past 7. Write the minutes with two digits. For five minutes, put a zero before the 5 to keep both places filled.
 
 A common counting mistake is to add another five after reaching 25. The hand has moved only three small steps past the 5, so add three ones instead.
 
@@ -26,15 +26,15 @@ When you are ready, <Task id="to-the-minute">try one question</Task> on reading 
 
 <Lang zh>
 
-前面读的都是 5 分钟一跳的时刻。可分针不会只停在数字上，它一格一格地走。这一步学读到每一分钟。
+前面读的都是 <Dur d="5m" />一跳的时刻。可分针不会只停在数字上，它一格一格地走。这一步学读到每一分钟。
 
 先看<Beat n={1}>7 点 25 分</Beat>。分针正指着 5，5 个 5 个地数：5、10、15、20、25。时针过了 7，还没到 8。所以是 7 点 25 分。
 
-过了一会儿，<Beat n={2}>分针又走了 3 小格</Beat>。钟面边上每一小格是 1 分钟。读法分两步：先 5 个 5 个地数到分针走过的最后一个数，也就是 5，得 25；再一格一格地往下数：26、27、28。所以是 7 点 28 分。
+过了一会儿，<Beat n={2}>分针又走了 3 小格</Beat>。钟面边上每一小格是 <Dur d="1m" />。读法分两步：先 5 个 5 个地数到分针走过的最后一个数，也就是 5，得 25；再一格一格地往下数：26、27、28。所以是 7 点 28 分。
 
 接下来<Beat n={3}>两根针轮流亮起来</Beat>。短的是时针，读几时；长的是分针，读几分。要是读反了，把长针当成时针，读出来的就成了另一个时刻，差得很远。比如 7 点 28 分，要是把长针当时针、短针当分针，就会读成 5 点 37 分左右，差了两个多小时。
 
-最后看看<Beat n={4}>怎样写</Beat>。7 点 28 分写作 7.28：点前面是几时，点后面是几分。分钟总是写成两位数，所以 7 点 5 分不写 7.5，而是写作 7.05，在 5 前面补一个 0。这样一看就知道是 5 分，不会和 50 分弄混。
+最后看看<Beat n={4}>怎样写</Beat>。7 点 28 分写作 <Time t="7:28" as="face" />：点前面是几时，点后面是几分。分钟总是写成两位数，所以 7 点 5 分不写 7.5，而是写作 <Time t="7:05" as="face" />，在 5 前面补一个 0。这样一看就知道是 5 分，不会和 50 分弄混。
 
 常见的错误是 5 个 5 个数的时候多数或少数一次。比如 7 点 28 分，有人从 30 往回数，或者数成 33 分。先找准分针走过的最后一个数，再数小格，就不容易出错。
 

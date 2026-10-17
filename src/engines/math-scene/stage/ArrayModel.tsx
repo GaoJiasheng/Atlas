@@ -45,6 +45,8 @@ export interface ArrayModelProps {
   ghost?: TaskState | null;
   /** A picture option: small, no braces' words. */
   mini?: boolean;
+  /** Where the drawing sits in its box: centred (default), or at the top (a number line under it). */
+  align?: 'center' | 'top';
 }
 
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
@@ -211,6 +213,9 @@ interface Drawn {
   h: number;
 }
 
+/** About how wide a brace's words are drawn (13 px mono; a CJK glyph a full em). */
+const textWidth = (text: string): number => [...text].reduce((w, ch) => w + (/[\u3000-\u9fff\uff00-\uffef]/.test(ch) ? 13 : 7.8), 0);
+
 const toneAt = (tones: readonly string[] | undefined, i: number, fallback: Tone): Tone => (tones?.[i] as Tone | undefined) ?? fallback;
 
 /** The share of the box's height an array (a beat's, or a check's) is drawn to at most. */
@@ -235,7 +240,7 @@ function thingSize(s: ArrayLayoutSpec, box: { w: number; h: number }, mini: bool
     down = across * 0.55 + (s.containers ? 3 : 0);
   }
   const k = Math.min(box.w / (across * 1.25), box.h / (down * 1.25));
-  if (mini) return clamp(k, 6, 52);
+  if (mini) return clamp(k, 6, 64);
   // On a big stage the drawing takes about half the stage's height (like the fraction bars), not more.
   const tall = layout === 'rows' ? (s.rows ?? 1) * 1.25 + 0.4 : layout === 'groups' ? down * 1.25 : down * 1.25 * 1.1;
   return clamp(Math.min(k, (box.h * ARRAY_SHARE) / tall), 22, 96);
@@ -254,8 +259,17 @@ function place(s: ArrayLayoutSpec, size: number, locale: Locale, opts: { move?: 
     const rows = s.rows ?? 1;
     const cols = s.cols ?? 1;
     const split = splitParts(s);
-    const left = s.braces === true || s.braces === 'rows' || !!s.cover?.rows ? 64 : 8;
-    const top = s.braces === true || s.braces === 'cols' || !!s.cover?.cols ? 30 : 8;
+    // Read by rows (`true`: "3 rows" left, "4 in each row" on top; `rows`: the left one only), or by columns
+    // (`cols`: "4 columns" on top, "3 in each column" left). A covered count keeps its brace with a ? strip.
+    const byCols = s.braces === 'cols';
+    const vertical = s.braces === true || s.braces === 'rows' || byCols || !!s.cover?.rows;
+    const across = s.braces === true || byCols || !!s.cover?.cols;
+    const sideText = (n: number) => (byCols ? T('math.array.eachCol', { n }) : T(n === 1 ? 'math.array.row' : 'math.array.rows', { n }));
+    const topText = (n: number) => (byCols ? T(n === 1 ? 'math.array.col' : 'math.array.cols', { n }) : T('math.array.each', { n }));
+    // Room on the left for the longest word beside the vertical brace (13 px mono, a CJK glyph a full em).
+    const longest = vertical ? Math.max(...[rows, split?.first ?? 0, split?.second ?? 0].filter((n) => n > 0).map((n) => textWidth(sideText(n)))) : 0;
+    const left = vertical ? Math.max(64, Math.ceil(longest) + 34, s.cover?.rows ? 104 : 0) : 8;
+    const top = across ? 30 : 8;
     const sx = (c: number) => left + c * gap + gap / 2 + (split?.axis === 'cols' && c >= split.first ? size * 0.5 : 0);
     const sy = (r: number) => top + r * gap + gap / 2 + (split?.axis === 'rows' && r >= split.first ? size * 0.5 : 0);
     for (let i = 0; i < rows * cols; i++) {
@@ -270,21 +284,21 @@ function place(s: ArrayLayoutSpec, size: number, locale: Locale, opts: { move?: 
     const w = sx(cols - 1 + (s.extra ? 1 : 0)) + gap / 2 + 8;
     const h = sy(rows - 1) + gap / 2 + 8;
     if (!opts.mini) {
-      const rowsBrace = (from: number, to: number, n: number, key: string, covered = false) =>
-        braces.push(<Brace key={key} x1={left - 14} x2={left - 14} y1={sy(from) - gap / 2 + 3} y2={sy(to) + gap / 2 - 3} text={T(n === 1 ? 'math.array.row' : 'math.array.rows', { n })} side="left" covered={covered} />);
-      if (s.braces === true || s.braces === 'rows' || s.cover?.rows) {
+      const sideBrace = (from: number, to: number, n: number, key: string, covered = false) =>
+        braces.push(<Brace key={key} x1={left - 14} x2={left - 14} y1={sy(from) - gap / 2 + 3} y2={sy(to) + gap / 2 - 3} text={sideText(n)} side="left" covered={covered} />);
+      if (vertical) {
         if (split?.axis === 'rows') {
-          rowsBrace(0, split.first - 1, split.first, 'r0');
-          rowsBrace(split.first, rows - 1, split.second, 'r1');
-        } else rowsBrace(0, rows - 1, rows, 'r', !!s.cover?.rows);
+          sideBrace(0, split.first - 1, split.first, 'r0');
+          sideBrace(split.first, rows - 1, split.second, 'r1');
+        } else sideBrace(0, rows - 1, rows, 'r', !!s.cover?.rows);
       }
-      if (s.braces === true || s.braces === 'cols' || s.cover?.cols) {
-        const colBrace = (from: number, to: number, n: number, key: string, covered = false) =>
-          braces.push(<Brace key={key} x1={sx(from) - gap / 2 + 3} x2={sx(to) + gap / 2 - 3} y1={top - 12} y2={top - 12} text={T('math.array.each', { n })} side="top" covered={covered} />);
+      if (across) {
+        const topBrace = (from: number, to: number, n: number, key: string, covered = false) =>
+          braces.push(<Brace key={key} x1={sx(from) - gap / 2 + 3} x2={sx(to) + gap / 2 - 3} y1={top - 12} y2={top - 12} text={topText(n)} side="top" covered={covered} />);
         if (split?.axis === 'cols') {
-          colBrace(0, split.first - 1, split.first, 'c0');
-          colBrace(split.first, cols - 1, split.second, 'c1');
-        } else colBrace(0, cols - 1, cols, 'c', !!s.cover?.cols);
+          topBrace(0, split.first - 1, split.first, 'c0');
+          topBrace(split.first, cols - 1, split.second, 'c1');
+        } else topBrace(0, cols - 1, cols, 'c', !!s.cover?.cols);
       }
     }
     return { things, containers, braces, extras, w, h };
@@ -357,6 +371,31 @@ function place(s: ArrayLayoutSpec, size: number, locale: Locale, opts: { move?: 
 /* The model                                                           */
 /* ------------------------------------------------------------------ */
 
+/** Where a read-only array is drawn in its box: the things' size, each layout placed, the scale and the top-left corner. */
+export function arrayFrame(m: ArrayModelSpec, box: Rect, locale: Locale, opts: { move?: BeatMove | null; mini?: boolean; align?: 'center' | 'top' } = {}) {
+  const layouts = m.pair ?? [m];
+  const sizes = layouts.map((s) => thingSize(s, { w: box.w / layouts.length - (layouts.length > 1 ? 30 : 0), h: box.h - (layouts.length > 1 ? 40 : 0) }, !!opts.mini));
+  const size = Math.min(...sizes);
+  const drawn = layouts.map((s) => place(s, size, locale, { move: opts.move, mini: opts.mini }));
+  const labelH = layouts.length > 1 && !opts.mini ? 34 : 0;
+  const totalW = drawn.reduce((a, d) => a + d.w, 0) + (layouts.length - 1) * 50;
+  const maxH = Math.max(...drawn.map((d) => d.h)) + labelH;
+  // A picture option fills its card (things up to 64 px); a beat's drawing only ever shrinks to fit.
+  const fit = Math.min(box.w / Math.max(1, totalW), box.h / Math.max(1, maxH));
+  const scale = opts.mini ? Math.min(fit, 64 / Math.max(1, size)) : Math.min(1, fit);
+  const x0 = box.x + (box.w - totalW * scale) / 2;
+  const y0 = opts.align === 'top' ? box.y : box.y + (box.h - maxH * scale) / 2;
+  // The containers' centres on the stage (one layout): what a number line under the groups lines its jumps up with.
+  const centres = layouts.length === 1 ? drawn[0]!.containers.filter((c) => !c.dashed).map((c) => ({ x: x0 + c.cx * scale, y: y0 + (c.cy + labelH) * scale })) : [];
+  return { layouts, size, drawn, labelH, totalW, maxH, scale, x0, y0, w: totalW * scale, h: maxH * scale, centres };
+}
+
+/** The shape of a read-only array's drawing (width ÷ height), as a picture option draws it. */
+export function arrayAspect(m: ArrayModelSpec): number {
+  const f = arrayFrame(m, { x: 0, y: 0, w: 4000, h: 4000 }, 'en', { mini: true });
+  return f.totalW / Math.max(1, f.maxH);
+}
+
 export function ArrayModel(p: ArrayModelProps) {
   const { model: m, box, locale } = p;
   if (p.task && p.state && m.kind === 'array') {
@@ -364,16 +403,7 @@ export function ArrayModel(p: ArrayModelProps) {
     if (p.task.kind === 'arrange') return <ArrangeLayer {...p} />;
     if (p.task.kind === 'split-array') return <SplitLayer {...p} />;
   }
-  const layouts = m.pair ?? [m];
-  const sizes = layouts.map((s) => thingSize(s, { w: box.w / layouts.length - (layouts.length > 1 ? 30 : 0), h: box.h - (layouts.length > 1 ? 40 : 0) }, !!p.mini));
-  const size = Math.min(...sizes);
-  const drawn = layouts.map((s) => place(s, size, locale, { move: p.move, mini: p.mini }));
-  const labelH = layouts.length > 1 && !p.mini ? 34 : 0;
-  const totalW = drawn.reduce((a, d) => a + d.w, 0) + (layouts.length - 1) * 50;
-  const maxH = Math.max(...drawn.map((d) => d.h)) + labelH;
-  const scale = Math.min(1, box.w / Math.max(1, totalW), box.h / Math.max(1, maxH));
-  const x0 = box.x + (box.w - totalW * scale) / 2;
-  const y0 = box.y + (box.h - maxH * scale) / 2;
+  const { layouts, size, drawn, labelH, scale, x0, y0 } = arrayFrame(m, box, locale, { move: p.move, mini: p.mini, align: p.align });
   let ox = 0;
   let index = 0;
   const parts: ReactNode[] = [];
@@ -560,7 +590,8 @@ function ArrangeLayer({ model: m, box, task, state, editable, act, ghost, locale
     const d = e.key === 'ArrowRight' ? [0, 1] : e.key === 'ArrowLeft' ? [0, -1] : e.key === 'ArrowDown' ? [1, 0] : e.key === 'ArrowUp' ? [-1, 0] : null;
     if (!d) return;
     e.preventDefault();
-    act?.({ do: 'arrange', rows: Math.max(1, (r || 1) + d[0]!), cols: Math.max(1, (c || 1) + d[1]!) });
+    // Like the tray's steppers: from 0 × 0, ↓ is the first row and → the first column.
+    act?.({ do: 'arrange', rows: Math.max(0, r + d[0]!), cols: Math.max(0, c + d[1]!) });
   };
   return (
     <g className="ms-array ms-array--task" role="group" aria-label={label}>
@@ -574,12 +605,8 @@ function ArrangeLayer({ model: m, box, task, state, editable, act, ghost, locale
           <Thing object={m.object} s={size} />
         </g>
       ))}
-      {state.arr && (
-        <>
-          <Brace x1={x0 - 14} x2={x0 - 14} y1={y0 + 3} y2={y0 + r * gap - 3} text={T(r === 1 ? 'math.array.row' : 'math.array.rows', { n: r })} side="left" />
-          <Brace x1={x0 + 3} x2={x0 + c * gap - 3} y1={y0 - 12} y2={y0 - 12} text={T('math.array.each', { n: c })} side="top" />
-        </>
-      )}
+      {r > 0 && <Brace x1={x0 - 14} x2={x0 - 14} y1={y0 + 3} y2={y0 + r * gap - 3} text={T(r === 1 ? 'math.array.row' : 'math.array.rows', { n: r })} side="left" />}
+      {c > 0 && <Brace x1={x0 + 3} x2={x0 + c * gap - 3} y1={y0 - 12} y2={y0 - 12} text={T('math.array.each', { n: c })} side="top" />}
       {g && <rect className="ms-array__ghost" x={x0} y={y0} width={g[1] * gap} height={g[0] * gap} aria-hidden="true" />}
       {live && (
         <rect
@@ -617,12 +644,12 @@ function ArrangeLayer({ model: m, box, task, state, editable, act, ghost, locale
           tabIndex={0}
           data-keys="arrows"
           aria-label={T('math.array.handle')}
-          aria-valuemin={1}
+          aria-valuemin={0}
           aria-valuemax={C}
-          aria-valuenow={c || 0}
+          aria-valuenow={c}
           aria-valuetext={state.arr ? T('math.array.handleValue', { r, c }) : '—'}
           onKeyDown={key}
-          transform={`translate(${x0 + (c || 1) * gap} ${y0 + (r || 1) * gap})`}
+          transform={`translate(${x0 + c * gap} ${y0 + r * gap})`}
         >
           <circle className="ms-array__handle-hit" r={22} />
           <circle className="ms-array__handle-dot" r={7} />

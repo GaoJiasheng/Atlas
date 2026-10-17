@@ -122,7 +122,7 @@ export interface TaskState extends DecimalState {
   cut: string | null;
   /** Groups: the things in each container. */
   groups: number[];
-  /** Array: the rows × columns laid out. */
+  /** Array: the rows × columns laid out (one of them still 0 while the steppers set them one at a time). */
   arr: [number, number] | null;
   /** Whole-number line: where the jumps landed, in order along the line. */
   landings: number[];
@@ -451,8 +451,10 @@ export function reduce(task: Task, state: TaskState, action: Action): TaskState 
     }
     case 'arrange': {
       if (task.kind !== 'arrange') return state;
-      const r = Math.max(1, Math.min(12, Math.round(action.rows)));
-      const c = Math.max(1, Math.min(12, Math.round(action.cols)));
+      // From 0 × 0: the steppers set the rows and the columns one at a time (1 row and no columns yet is 1 × 0).
+      const r = Math.max(0, Math.min(12, Math.round(action.rows)));
+      const c = Math.max(0, Math.min(12, Math.round(action.cols)));
+      if (r === 0 && c === 0) return state.arr ? { ...state, arr: null } : state;
       return state.arr && state.arr[0] === r && state.arr[1] === c ? state : { ...state, arr: [r, c] };
     }
     case 'land': {
@@ -473,7 +475,13 @@ export function reduce(task: Task, state: TaskState, action: Action): TaskState 
     }
     case 'trade': {
       if ((task.kind !== 'regroup' && task.kind !== 'share') || !canTrade(state.mat, action.trade)) return state;
-      return { ...state, mat: applyTrade(state.mat, action.trade), trades: state.trades + 1 };
+      // Regrouping trades 10 for 1, one press at a time; sharing trades down all of the place still on the mat
+      // (docs/19 §3.2: what cannot be shared is traded into the next place in one go).
+      let mat = applyTrade(state.mat, action.trade);
+      let n = 1;
+      if (task.kind === 'share')
+        for (; canTrade(mat, action.trade); n++) mat = applyTrade(mat, action.trade);
+      return { ...state, mat, trades: state.trades + n };
     }
     case 'share': {
       if (task.kind !== 'share') return state;

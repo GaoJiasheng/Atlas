@@ -127,7 +127,13 @@ describe('arrange', () => {
   const t = task({ kind: 'arrange', model: { kind: 'array', layout: 'scatter', count: 15, object: 'egg' }, rows: 3, cols: 5 }, [['groups-size-swapped', '5x3']]);
   const any = task({ kind: 'arrange', model: { kind: 'array', layout: 'scatter', count: 12 }, rows: 3, cols: 4, accept: 'product' });
   it('lays out rows × columns from the corner; exact or any array of as many', () => {
-    expect(reduce(t, initialState(t), { do: 'arrange', rows: 20, cols: 0 }).arr).toEqual([12, 1]);
+    expect(reduce(t, initialState(t), { do: 'arrange', rows: 20, cols: 0 }).arr).toEqual([12, 0]);
+    // From 0 × 0 the steppers set one count at a time: the first row, then the first column.
+    const oneRow = reduce(t, initialState(t), { do: 'arrange', rows: 1, cols: 0 });
+    expect(oneRow.arr).toEqual([1, 0]);
+    expect(check(t, oneRow)).toEqual({ ok: false, code: null });
+    expect(reduce(t, oneRow, { do: 'arrange', rows: 1, cols: 1 }).arr).toEqual([1, 1]);
+    expect(reduce(t, oneRow, { do: 'arrange', rows: 0, cols: 0 }).arr).toBeNull();
     expect(check(t, sampleState(t, '3x5')!).ok).toBe(true);
     expect(check(t, sampleState(t, '5x3')!)).toEqual({ ok: false, code: 'groups-size-swapped' });
     expect(check(any, sampleState(any, '2x6')!).ok).toBe(true);

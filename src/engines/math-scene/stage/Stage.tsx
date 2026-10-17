@@ -25,13 +25,13 @@ import { NumberLine } from './NumberLine';
 import { Rows, type RowSpec } from './Rows';
 import { BarModelDiagram } from './BarModelDiagram';
 import { CutBar } from './CutBar';
-import { OptionGrid, type OptionCell } from './OptionGrid';
+import { OptionGrid, optionGrid, type OptionCell } from './OptionGrid';
 import { SvgFrac, type BarObject } from './svg';
 import { BeatModel } from './BeatModel';
 import { GridModel, describeFigure } from './GridModel';
 import type { ArrayModelSpec, GridModelSpec } from '../schema';
 import { figureOf } from '../lib/grid';
-import { ArrayModel, describeArray } from './ArrayModel';
+import { ArrayModel, arrayAspect, describeArray } from './ArrayModel';
 import { BlocksModel } from './BlocksModel';
 import { WholeLine } from './WholeLine';
 import { plainText } from '../../../lib/rich-text';
@@ -277,13 +277,20 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
         },
       }));
     if (cells.length === 0) return null;
-    const gh = Math.min(area.h, cells.length > 3 ? area.h : clamp(area.w / cells.length, 140, 300));
+    // Arrays, blocks and number lines in the cards: the cards take the pictures' shape (lines and groups in a row stack in
+    // one column) and up to about 60 % of a big box's height (all of a small one), so the things in them read like a beat's.
+    const pictures = task.options.flatMap((o) => (o.model ? [o.model] : []));
+    const whole = pictures.length > 0 && pictures.every((pm) => pm.kind === 'array' || pm.kind === 'blocks' || (pm.kind === 'numberline' && pm.scale === 'whole'));
+    const aspect = whole ? Math.exp(pictures.reduce((s, pm) => s + Math.log(pm.kind === 'array' ? clamp(arrayAspect(pm), 0.6, 8) : pm.kind === 'numberline' ? 4.5 : 1.3), 0) / pictures.length) : undefined;
+    const fitted = aspect ? optionGrid(cells.length, area.w, area.h < 520 ? area.h : Math.max(300, area.h * 0.6), aspect) : null;
+    const gh = fitted ? fitted.h : Math.min(area.h, cells.length > 3 ? area.h : clamp(area.w / cells.length, 140, 300));
     return (
       <OptionGrid
         x={area.x}
         y={area.y + (area.h - gh) / 2}
         w={area.w}
         h={gh}
+        shape={fitted ?? undefined}
         cells={cells}
         multi={!!task.multi}
         chosen={state.chosen}

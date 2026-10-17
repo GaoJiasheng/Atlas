@@ -69,9 +69,9 @@ test.describe('multiplication and division (MathScene whole numbers)', () => {
     await expect.poll(async () => (await info(page)).id).toBe('ar-make-3-rows-of-5');
     const rows = tray(page).getByRole('button', { name: 'One row more' });
     const cols = tray(page).getByRole('button', { name: 'One more in each row' });
-    // The first step lays a 1 × 1 array; then each step adds a row or a column.
+    // From 0 × 0 each step adds a row or a column: 5 rows, then 3 in each.
     for (let i = 0; i < 5; i++) await rows.click();
-    for (let i = 0; i < 2; i++) await cols.click();
+    for (let i = 0; i < 3; i++) await cols.click();
     // 5 rows of 3: the swapped array is diagnosed.
     await tray(page).locator('[data-command="check"]').click();
     await expect.poll(async () => (await info(page)).feedback?.code).toBe('groups-size-swapped');
@@ -93,8 +93,8 @@ test.describe('multiplication and division (MathScene whole numbers)', () => {
     // Checked with tens still on the mat: not traded.
     await page.keyboard.press('c');
     await expect.poll(async () => (await info(page)).feedback?.code).toBe('not-traded');
-    // 8 tens shared into 5 leave 3 tens: each trade turns one of them into 10 ones.
-    for (let i = 0; i < 3; i++) await press('Trade 1 ten for 10 ones');
+    // 8 tens shared into 5 leave 3 tens: one trade turns all of them into 30 ones.
+    await press('Trade 3 tens for 30 ones');
     await press('Share the ones');
     await page.keyboard.press('c');
     await expect.poll(async () => (await info(page)).phase).toBe('input');

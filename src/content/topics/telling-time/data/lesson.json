@@ -2675,16 +2675,16 @@
               "correct": false,
               "misconception": "am-pm",
               "text": {
-                "en": "{t:07:00}",
-                "zh": "{t:07:00}"
+                "en": "{t:07:00|ampm}",
+                "zh": "{t:07:00|ampm}"
               }
             },
             {
               "id": "b",
               "correct": true,
               "text": {
-                "en": "{t:19:00}",
-                "zh": "{t:19:00}"
+                "en": "{t:19:00|ampm}",
+                "zh": "{t:19:00|ampm}"
               }
             }
           ],
@@ -2805,16 +2805,16 @@
               "id": "a",
               "correct": true,
               "text": {
-                "en": "{t:06:30}",
-                "zh": "{t:06:30}"
+                "en": "{t:06:30|ampm}",
+                "zh": "{t:06:30|ampm}"
               }
             },
             {
               "id": "b",
               "correct": false,
               "text": {
-                "en": "{t:18:30}",
-                "zh": "{t:18:30}"
+                "en": "{t:18:30|ampm}",
+                "zh": "{t:18:30|ampm}"
               },
               "misconception": "am-pm"
             }
@@ -2874,16 +2874,16 @@
               "id": "a",
               "correct": true,
               "text": {
-                "en": "{t:15:30}",
-                "zh": "{t:15:30}"
+                "en": "{t:15:30|ampm}",
+                "zh": "{t:15:30|ampm}"
               }
             },
             {
               "id": "b",
               "correct": false,
               "text": {
-                "en": "{t:03:30}",
-                "zh": "{t:03:30}"
+                "en": "{t:03:30|ampm}",
+                "zh": "{t:03:30|ampm}"
               },
               "misconception": "am-pm"
             }

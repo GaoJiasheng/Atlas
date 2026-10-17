@@ -6,9 +6,10 @@
  * and wrong option is diagnosed as declared) and within its step's limits
  * (12-hour time only before the 24-hour step, 5-minute times in step 01,
  * durations capped, nothing across midnight from step 06 on); every time
- * misconception planned somewhere; times in the text only as tokens.
+ * misconception planned somewhere; times in the text only as tokens, and in
+ * the chapters only as <Time> / <Dur>.
  */
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { lessonFile, TIME_CODES, type Task } from '../../src/engines/math-scene/schema';
@@ -84,6 +85,33 @@ describe('telling-time lesson', () => {
     expect(texts.filter(([, s]) => typed.test(s.replace(/\{[^{}]*\}/g, '')))).toEqual([]);
     // No school level anywhere in what the child reads.
     expect(texts.filter(([, s]) => /\bP[1-6]\b|Primary [1-6]|小[一二三四五六]/.test(s))).toEqual([]);
+  });
+
+  it('writes times and durations in the chapters only as <Time> / <Dur>, never as typed text', () => {
+    // A typed "7.20 am", "7.20", "1920", "1 h 35 min" or "35 分钟" would not follow the notation or be read as a time.
+    const typed: Record<'en' | 'zh', RegExp[]> = {
+      en: [/\b\d{1,2}[.:]\d{2}\s?(?:am|pm|a\.m\.|p\.m\.)/i, /(?<![\d.])\d{1,2}\.[0-5]\d(?![\d.])/, /(?<![\d.])(?:[01]\d|2[0-3])[0-5]\d(?![\d.])/, /(?<![\d.])\d+ ?(?:h|min|s)\b/],
+      zh: [/\b\d{1,2}[.:]\d{2}\s?(?:am|pm|a\.m\.|p\.m\.)/i, /(?<![\d.])\d{1,2}\.[0-5]\d(?![\d.])/, /(?<![\d.])(?:[01]\d|2[0-3])[0-5]\d(?![\d.])/, /(?<![\d.])\d+ ?(?:小时(?!计时)|分钟|秒)/],
+    };
+    const dir = join(import.meta.dirname, '../../src/content/topics/telling-time/chapters');
+    const found: string[] = [];
+    let components = 0;
+    for (const name of readdirSync(dir).filter((f) => f.endsWith('.mdx'))) {
+      const body = readFileSync(join(dir, name), 'utf8').replace(/^---[\s\S]*?\n---/, '');
+      components += [...body.matchAll(/<(?:Time|Dur)\b/g)].length;
+      for (const [, lang, block] of body.matchAll(/<Lang (en|zh)>([\s\S]*?)<\/Lang>/g)) {
+        // The components, a figure's words and a glossary term's own word ("60 <Term>秒</Term>") are not typed times;
+        // the years of the syllabus, and the wrong working a mistake is shown with (11.15 − 9.40 = 1.75), are numbers.
+        const text = block!
+          .replace(/<Figure[^\n]*/g, '')
+          .replace(/\d+\s*<Term[^>]*>[^<]*<\/Term>/g, '')
+          .replace(/<[^>]+>/g, '')
+          .replace(/\b20(?:21|25)\b/g, '');
+        for (const re of typed[lang as 'en' | 'zh']) for (const m of text.matchAll(new RegExp(re.source, `g${re.flags}`))) found.push(`${name} ${lang}: ${m[0]}`);
+      }
+    }
+    expect(components).toBeGreaterThan(200);
+    expect(found).toEqual([]);
   });
 
   for (const { where, task, limits } of all) {

@@ -413,7 +413,7 @@ const arrayLayout = z.object({
   containers: z.object({ kind: z.enum(CONTAINERS), count: z.number().int().min(1).max(12).optional(), size: z.number().int().min(1).max(12).optional() }).strict().optional(),
   rows: z.number().int().min(1).max(14).optional(),
   cols: z.number().int().min(1).max(14).optional(),
-  /** Count braces: rows (left, "3 rows"), columns (top, "4 in each row"), both, or the groups' (true). */
+  /** Count braces: read by rows (true: "3 rows" left and "4 in each row" on top; "rows": the left one only), by columns ("cols": "4 columns" on top, "3 in each column" left), or the groups' (any). */
   braces: z.union([z.boolean(), z.enum(['rows', 'cols'])]).optional(),
   /** A cut after row k (or column k), the parts drawn a little apart, each with its own count. */
   split: z.object({ rows: z.array(z.number().int().min(1)).length(1).optional(), cols: z.array(z.number().int().min(1)).length(1).optional() }).strict().optional(),

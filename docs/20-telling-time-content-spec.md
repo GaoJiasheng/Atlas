@@ -566,10 +566,18 @@ ZH 显示里 `{d:…}` 用"小时 / 分钟 / 秒"，算式行（中英共用）�
 
 **验收**：`pnpm check`、`pnpm validate`（0 / 0）、`pnpm test`、`pnpm build`、`pnpm e2e`（含新的 `tests-e2e/telling-time.spec.ts` 9 条：点刻度换拍、拖分针时针跟着走 + 托盘时步进、纯键盘拨钟并越过 12 退一小时、读钟写时刻与诊断、am / pm 单选、时间线芯片跳段 + Backspace 收回 + 写答案、练习到总结、zh、390 × 844）全绿；`pnpm shoot telling-time --beats --tasks --keys --layout --locale en,zh --theme paper,cinema` 0 失败。首页计数（`tests/home.test.ts`、`tests-e2e/smoke.spec.ts`）加上本课，并与同时合进 main 的乘与除对齐：已发布 21 个主题、数学 4 个、ww2 的图版号 21。
 
-### 9.5 已知差距 / 要引擎改的
+### 9.5 已知差距 / 要引擎改的（1、2、3、5 已在 §9.6 修好）
 
 1. **正文里的时刻记号**：建议加 MDX 组件 `src/components/mdx/Time.astro`（`<Time t="09:40" />`、`<Time t="19:20" as="24" />`、`<Time t="7:20" as="face" />`）和 `Dur.astro`（`<Dur d="1h35m" />`），用 `clockText` / `durationText` 按 `lesson.json` 的 `notation` 出字，aria 用 `clockWords` / `durationWords`；validate 查格式。有了以后把 13 章正文里的时刻换成组件，`notation` 才真正"一处改、全课变"。
 2. 中文界面里 `{t:…}` 把 am / pm 换成"上午 / 下午 / 晚上"（`clockText` 的中文正文写法）：第 04 步 am / pm 的 choose 在中文里看不到 am、pm 字样。若要中文也练"am / pm"这两个记号，可给记号加 `|ampm`（中文也写 am / pm）。
 3. 讲解拍里时间线旁的钟面指着"最后一个标记"，不跟着这一拍跳到的地方走（第 07 步第 2 拍跳到 3:00，钟仍是 2:35）。
 4. 时间线 `labels: "both"` 时，标记上方的时刻按 12 时制写（第 10 步第 2、3、5 拍），24 时制只在标尺上。
 5. `playwright.config.ts` 端口固定 4329、本地 `reuseExistingServer`：另一份 checkout 的 preview 占着 4329 时，e2e 会测到别人的 dist。本课的 e2e 用临时配置换端口跑（不进 git）。
+
+### 9.6 引擎打磨（2026-10-18，§9.5 的 1、2、3、5 + 中文空格）
+
+1. **正文组件**：`<Time t="09:40" />`（`as="24" | "face" | "ampm"`）与 `<Dur d="1h35m" />`（`src/components/mdx/Time.astro`、`Dur.astro`，在 `[slug].astro` 登记），输出与 `{t:…}` / `{d:…}` 记号一字不差（同走 `plainText` / `speakable`，`aria-label` 是读法），写法按本主题 `lesson.json` 的 `notation`（`components/mdx/notation.ts` 构建时读）。`pnpm validate` 查 `t`、`as`、`d` 能解析。13 章正文（EN / ZH）里的时刻和时长全部换成组件：12 时制带 am / pm 的 → `<Time>`（中文正文原来特意写字母的用 `as="ampm"`），中文"下午 3.25"一类 → `<Time>`（中文显示"下午 3.25"），钟面读数 7.28 → `as="face"`，四位数 1350 → `as="24"`，"1 h 35 min" / "35 分钟" / "15 秒" → `<Dur>`。照写不换的：讲单位写法的 "30 min"、"1 min = 60 s"（中文段讲缩写）、"60 <Term>秒</Term>" 这类名词链接、错例算式里不成立的数（1.75、255、"1 小时 75 分钟"）、年份、2400。`tests/math-scene/telling-time-lesson.test.ts` 的"不手写时刻"检查扩到正文（12 时制、钟面读数、四位数 24 时制、EN 缩写时长、中文"小时 / 分钟 / 秒"时长，去掉组件后不许出现；组件 > 200 个）。
+2. **`{t:…|ampm}`**：12 时制、中文也写字母 am / pm（读法仍是"上午七点"）。第 04 步三道 am / pm 选择题（`ap-choose-dinner`、`ap-choose-early-breakfast`、`ap-choose-afternoon-cca`）的选项改用它：中文选项不再用"上午 / 晚上"把答案说出来。
+3. **时间线旁的钟**：讲解拍里 `clock: true` 的钟（和 TIME 卡）指着这一拍最后一跳落下的地方，没有跳时才指最后一个标记（`timelineNow`）。
+4. **中文空格**：记号在中文里显示的开头或结尾是汉字（上午、晚上、小时、分钟）时，它和旁边汉字之间的空格由渲染器去掉（`rich-text.ts` 的 `tidySpaces`，`renderRich` 与 `plainText` 都走）："所以 1910 是 {t:19:10}。" 显示"所以 1910 是晚上 7.10。"；挨着数字、字母的空格照留。单测在 `tests/math-scene/words.test.ts`。
+5. e2e 端口见 docs/19 §9.5 第 6 条（端口按 checkout 路径算，复用要 `ATLAS_E2E_REUSE=1`），不再需要临时配置。

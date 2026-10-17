@@ -21,12 +21,12 @@ import { Rows, type RowSpec } from './Rows';
 import { BarModelDiagram } from './BarModelDiagram';
 import { SvgFrac } from './svg';
 import { GridModel } from './GridModel';
-import { ArrayModel } from './ArrayModel';
+import { ArrayModel, arrayFrame } from './ArrayModel';
 import { BlocksModel } from './BlocksModel';
 import { WholeLine } from './WholeLine';
 import type { DisplayModes } from './Stage';
 import { plainText } from '../../../lib/rich-text';
-import { thingsOf } from '../lib/array';
+import { layoutOf, thingsOf } from '../lib/array';
 import { DecimalGrid } from './DecimalGrid';
 import { PlaceValueChart } from './PlaceValueChart';
 import { DecimalLine } from './DecimalLine';
@@ -145,6 +145,7 @@ export function BeatModel({ beat, box, defs, modes, locale }: { beat: Beat; box:
       </g>
     );
   }
+  if (m.kind === 'array' && beat.under?.kind === 'numberline' && beat.under.scale === 'whole') return <ArrayOverLine beat={beat} box={box} defs={defs} label={label} locale={locale} />;
   if (m.kind === 'array' || m.kind === 'blocks' || (m.kind === 'numberline' && m.scale === 'whole')) {
     // A second model lined up under the first (the groups and their jumps): the box is shared, the first above.
     const top: Rect = beat.under ? { ...box, h: box.h * 0.58 } : box;
@@ -262,6 +263,46 @@ export function DecimalModel({ model: m, box, defs, label, locale, move }: { mod
   if (m.kind === 'money') return <MoneyModel box={box} model={m} locale={locale} label={label} move={move} />;
   if (m.kind === 'numberline' && m.scale === 'decimal') return <DecimalLine defs={defs} box={box} model={m} locale={locale} label={label} move={move} />;
   return null;
+}
+
+/** Room a whole-number line needs above its line (the arcs and their "+5") and below it (the numbers). */
+const LINE_UP = 62;
+const LINE_DOWN = 40;
+const LINE_GAP = 30;
+
+/**
+ * The groups with their jumps under them (docs/19 §2.2 step 02): the array drawn at the top of the pair and the line close under it,
+ * the two as one figure in the middle of the box. When each group has its jump, the line is laid out so that jump i sits under group i.
+ */
+function ArrayOverLine({ beat, box, defs, label, locale }: { beat: Beat; box: Rect; defs: string; label: string; locale: Locale }) {
+  const m = beat.model;
+  const line = beat.under;
+  if (m.kind !== 'array' || !line || line.kind !== 'numberline' || line.scale === 'decimal') return null;
+  const sizing: Rect = { ...box, h: Math.max(80, box.h - (LINE_UP + LINE_DOWN + LINE_GAP)) };
+  const f = arrayFrame(m, sizing, locale, { move: beat.move ?? null });
+  const total = f.h + LINE_GAP + LINE_UP + LINE_DOWN;
+  const top = box.y + Math.max(0, (box.h - total) / 2);
+  const lineY = top + f.h + LINE_GAP + LINE_UP;
+  let w = clamp(box.w - 80, 240, 960);
+  let x = box.x + (box.w - w) / 2;
+  const j = line.jumps;
+  const c = f.centres;
+  if (j && !m.pair && layoutOf(m) === 'groups' && c.length === j.count && j.count >= 2 && c.every((p) => Math.abs(p.y - c[0]!.y) < 1)) {
+    // Jump i under group i: the line's scale makes one jump as long as the groups' pitch.
+    const span = line.to - line.from;
+    const lw = ((c[1]!.x - c[0]!.x) * span) / j.size;
+    const lx = c[0]!.x - (((j.from ?? line.from) - line.from + j.size / 2) / span) * lw;
+    if (lw >= 240 && lx >= box.x + 8 && lx + lw <= box.x + box.w - 8) {
+      w = lw;
+      x = lx;
+    }
+  }
+  return (
+    <g>
+      <ArrayModel defs={defs} box={{ ...sizing, y: top }} model={m} locale={locale} label={label} move={beat.move ?? null} align="top" />
+      <WholeLine x={x} y={lineY} w={w} model={line} locale={locale} label={label} move={beat.move ?? null} />
+    </g>
+  );
 }
 
 /** An array, blocks, a whole-number line, a clock or a timeline, read-only (a beat, or the part of a beat under another model). */

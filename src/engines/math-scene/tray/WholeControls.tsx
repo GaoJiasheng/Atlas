@@ -5,7 +5,7 @@
  * more or fewer plates, start again (groups); rows and columns steppers
  * (an array); the last jump lifted (skip counting); the cut moved after a row
  * or a column (a split); trade 10 for 1 (regroup); share a place, or trade
- * one of it down (share).
+ * what is left of it down (share).
  */
 import type { Locale } from '../../core/types';
 import { t } from '../../../i18n';
@@ -55,12 +55,13 @@ export function WholeModelControls({ task, state, ctl, locale, locked }: { task:
     );
   }
   if (task.kind === 'arrange') {
+    // From 0 × 0, each stepper sets its own count: the first "more rows" is 1 row, the first "more columns" 1 column.
     const [r, c] = state.arr ?? [0, 0];
-    const set = (nr: number, nc: number) => act({ do: 'arrange', rows: Math.max(1, nr), cols: Math.max(1, nc) });
+    const set = (nr: number, nc: number) => act({ do: 'arrange', rows: Math.max(0, nr), cols: Math.max(0, nc) });
     return (
       <div className="ms-tray__row ms-tray__row--wrap">
-        <Stepper label={T('math.tray.rows')} value={state.arr ? String(r) : '—'} less={() => set(r - 1, c || 1)} more={() => set(r + 1, c || 1)} lessLabel={T('math.tray.rowsLess')} moreLabel={T('math.tray.rowsMore')} lessOff={r <= 1} moreOff={r >= 12} />
-        <Stepper label={T('math.tray.cols')} value={state.arr ? String(c) : '—'} less={() => set(r || 1, c - 1)} more={() => set(r || 1, c + 1)} lessLabel={T('math.tray.colsLess')} moreLabel={T('math.tray.colsMore')} lessOff={c <= 1} moreOff={c >= 12} />
+        <Stepper label={T('math.tray.rows')} value={String(r)} less={() => set(r - 1, c)} more={() => set(r + 1, c)} lessLabel={T('math.tray.rowsLess')} moreLabel={T('math.tray.rowsMore')} lessOff={r <= 0} moreOff={r >= 12} />
+        <Stepper label={T('math.tray.cols')} value={String(c)} less={() => set(r, c - 1)} more={() => set(r, c + 1)} lessLabel={T('math.tray.colsLess')} moreLabel={T('math.tray.colsMore')} lessOff={c <= 0} moreOff={c >= 12} />
       </div>
     );
   }
@@ -129,10 +130,13 @@ export function WholeModelControls({ task, state, ctl, locale, locked }: { task:
             </button>
           ) : null,
         )}
+        {/* What is left of a place is traded down in one go: "Trade 3 tens for 30 ones". */}
         {down.map(({ trade, from }) =>
           state.mat[from] > 0 ? (
             <button key={trade} type="button" className="ms-btn ms-btn--ghost" data-trade={trade} disabled={!canTrade(state.mat, trade)} onClick={() => act({ do: 'trade', trade })}>
-              {T(trade === 'H>T' ? 'math.tray.tradeHT' : 'math.tray.tradeTO')}
+              {state.mat[from] === 1
+                ? T(trade === 'H>T' ? 'math.tray.tradeHT' : 'math.tray.tradeTO')
+                : T(trade === 'H>T' ? 'math.tray.tradeHTn' : 'math.tray.tradeTOn', { n: state.mat[from], m: state.mat[from] * 10 })}
             </button>
           ) : null,
         )}

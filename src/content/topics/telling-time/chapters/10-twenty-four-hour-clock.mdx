@@ -10,17 +10,17 @@ state:
 
 You have used <Term id="second">seconds</Term> to measure short activities. Now look at another way to write the time of day.
 
-Look along <Beat n={1}>the two rows of times</Beat> on the <Term id="timeline">timeline</Term>. They show the same day in two ways. The <Term id="24-hour-clock">24-hour clock</Term> counts the <Term id="hour">hours</Term> from <Term id="noon-midnight">midnight</Term>, 0000, up to 2359. Each hour has its own number, so you do not need <Term id="am-pm">am or pm</Term>.
+Look along <Beat n={1}>the two rows of times</Beat> on the <Term id="timeline">timeline</Term>. They show the same day in two ways. The <Term id="24-hour-clock">24-hour clock</Term> counts the <Term id="hour">hours</Term> from <Term id="noon-midnight">midnight</Term>, <Time t="00:00" as="24" />, up to <Time t="23:59" as="24" />. Each hour has its own number, so you do not need <Term id="am-pm">am or pm</Term>.
 
-Find <Beat n={2}>the morning mark</Beat> at 7.30 am. Directly above it is 0730. Both labels name the same moment. Keep the hour and <Term id="minute">minutes</Term>, but write four digits. A zero before the 7 fills the first place; it does not change the time.
+Find <Beat n={2}>the morning mark</Beat> at <Time t="07:30" />. Directly above it is <Time t="07:30" as="24" />. Both labels name the same moment. Keep the hour and <Term id="minute">minutes</Term>, but write four digits. A zero before the 7 fills the first place; it does not change the time.
 
-Next, find <Beat n={3}>the afternoon mark</Beat> at 3.15 pm. By noon, twelve hours have passed since midnight. For afternoon hours from 1 onwards, add 12 to the hour: 3 + 12 = 15. So 3.15 pm becomes 1515. The minutes stay at 15.
+Next, find <Beat n={3}>the afternoon mark</Beat> at <Time t="15:15" />. By noon, twelve hours have passed since midnight. For afternoon hours from 1 onwards, add 12 to the hour: 3 + 12 = 15. So <Time t="15:15" /> becomes <Time t="15:15" as="24" />. The minutes stay at 15.
 
-On <Beat n={4}>the clock with small inner numbers</Beat>, find 19 beside 7 on the <Term id="clock-face">clock face</Term>. These numbers share a position because the hands go round twice each day. To change 1910 back, calculate 19 − 12 = 7. Keep the minutes: the time is 7.10 pm.
+On <Beat n={4}>the clock with small inner numbers</Beat>, find 19 beside 7 on the <Term id="clock-face">clock face</Term>. These numbers share a position because the hands go round twice each day. To change <Time t="19:10" as="24" /> back, calculate 19 − 12 = 7. Keep the minutes: the time is <Time t="19:10" />.
 
-Finally, compare <Beat n={5}>the marks near midnight and noon</Beat>. Noon is 1200, but midnight starts a new day at 0000. This is why 12.45 pm is 1245, while 12.45 am is 0045. Their minutes match, but they are twelve hours apart.
+Finally, compare <Beat n={5}>the marks near midnight and noon</Beat>. Noon is <Time t="12:00" as="24" />, but midnight starts a new day at <Time t="00:00" as="24" />. This is why <Time t="12:45" /> is <Time t="12:45" as="24" />, while <Time t="00:45" /> is <Time t="00:45" as="24" />. Their minutes match, but they are twelve hours apart.
 
-A common mistake is to add 10 instead of 12: this turns 3.15 pm into 1315. That means 1.15 pm, two hours too early. Another is to forget to add 12 at all, or to write midnight as 2400.
+A common mistake is to add 10 instead of 12: this turns <Time t="15:15" /> into <Time t="13:15" as="24" />. That means <Time t="13:15" />, two hours too early. Another is to forget to add 12 at all, or to write midnight as 2400.
 
 When you are ready, <Task id="twenty-four-hour-clock">try one question</Task> on changing between the two ways of writing time.
 
@@ -30,17 +30,17 @@ When you are ready, <Task id="twenty-four-hour-clock">try one question</Task> on
 
 用 am 和 pm 区分上午下午，说话时很方便，可是写时刻表、看电子钟的时候，人们常用另一种写法，一看就知道是一天里的哪个时候，不用再写 am 或 pm。
 
-这就是<Term id="24-hour-clock">24 小时计时法</Term>。<Beat n={1}>这条时间线</Beat>上下各有一排数：上面一排是 24 时制，下面一排是我们熟悉的 12 时制。24 时制从半夜的 0000 开始，一直数到 2359，一天里每个钟点只有一个名字。
+这就是<Term id="24-hour-clock">24 小时计时法</Term>。<Beat n={1}>这条时间线</Beat>上下各有一排数：上面一排是 24 时制，下面一排是我们熟悉的 12 时制。24 时制从半夜的 <Time t="00:00" as="24" /> 开始，一直数到 <Time t="23:59" as="24" />，一天里每个钟点只有一个名字。
 
-<Beat n={2}>上午的时刻</Beat>，数字不变。上午 7 点 30 分，写作 0730，读作“7 时 30 分”。24 时制总是写四位数：前两位是几时，后两位是几分。7 只有一位，所以前面补一个 0。
+<Beat n={2}>上午的时刻</Beat>，数字不变。上午 7 点 30 分，写作 <Time t="07:30" as="24" />，读作“7 时 30 分”。24 时制总是写四位数：前两位是几时，后两位是几分。7 只有一位，所以前面补一个 0。
 
-<Beat n={3}>中午以后</Beat>，小时数加 12。下午 3 点 15 分：3 + 12 = 15，写作 1515，读作“15 时 15 分”。要当心，是加 12，不是加 10。如果加 10，就写成了 1315，那是下午 1 点 15 分，差了整整两个小时。
+<Beat n={3}>中午以后</Beat>，小时数加 12。下午 3 点 15 分：3 + 12 = 15，写作 <Time t="15:15" as="24" />，读作“15 时 15 分”。要当心，是加 12，不是加 10。如果加 10，就写成了 <Time t="13:15" as="24" />，那是下午 1 点 15 分，差了整整两个小时。
 
-<Beat n={4}>反过来</Beat>，从 24 时制换回 12 时制，小时数减去 12。1910：19 − 12 = 7，就是晚上 7 点 10 分，写作 7.10 pm。这个钟面的里圈多了一圈小数字，13 到 24，正好是中午以后的钟点，可以帮你对照。
+<Beat n={4}>反过来</Beat>，从 24 时制换回 12 时制，小时数减去 12。<Time t="19:10" as="24" />：19 − 12 = 7，就是晚上 7 点 10 分，写作 <Time t="19:10" as="ampm" />。这个钟面的里圈多了一圈小数字，13 到 24，正好是中午以后的钟点，可以帮你对照。
 
-最后看两个特别的时刻。<Beat n={5}>中午 12 点</Beat>写作 1200，半夜 12 点写作 0000，那是新一天的开始。所以中午 12 点 45 分写作 1245，半夜 12 点 45 分却写作 0045。
+最后看两个特别的时刻。<Beat n={5}>中午 12 点</Beat>写作 <Time t="12:00" as="24" />，半夜 12 点写作 <Time t="00:00" as="24" />，那是新一天的开始。所以中午 12 点 45 分写作 <Time t="12:45" as="24" />，半夜 12 点 45 分却写作 <Time t="00:45" as="24" />。
 
-常见的错误有两种：中午以后的时刻加了 10 而不是 12，或者忘了加 12；还有把半夜写成 2400 或 1200。换算之前，先想一想这个时刻在中午以前还是以后。
+常见的错误有两种：中午以后的时刻加了 10 而不是 12，或者忘了加 12；还有把半夜写成 2400 或 <Time t="12:00" as="24" />。换算之前，先想一想这个时刻在中午以前还是以后。
 
 准备好了，就<Task id="twenty-four-hour-clock">做一道小题</Task>：在 12 时制和 24 时制之间换一换。
 
