@@ -14,7 +14,7 @@ import type { Controller } from '../controller';
 import type { TaskRun } from '../ui';
 import { canShow } from '../lib/lesson';
 import { commonParts, modelValue, phasesOf, type Action, type TaskState } from '../lib/state';
-import { sortedOrder } from '../lib/check';
+import { asFrac, sortedOrder } from '../lib/check';
 import { solvedState } from '../lib/solve';
 import { toImproper, toMixed, valueOnLine, type Frac } from '../lib/fraction';
 import { describePicture, fractionWords } from '../lib/words';
@@ -35,9 +35,16 @@ import { ArrayModel, describeArray } from './ArrayModel';
 import { BlocksModel } from './BlocksModel';
 import { WholeLine } from './WholeLine';
 import { plainText } from '../../../lib/rich-text';
-import { wholeWords } from '../lib/words';
+import { decimalWords, wholeWords } from '../lib/words';
 import { matOf, total as blockTotal } from '../lib/blocks';
-import type { ClockModelSpec } from '../schema';
+import { isDec, isDecimalModel, isDecimalTask } from '../lib/decimal-tasks';
+import { formatDecimal } from '../lib/decimal';
+import type { ClockModelSpec, DecimalGridModelSpec } from '../schema';
+import { DecimalTask } from './DecimalTask';
+import { decimalViewModel } from '../lib/decimal-views';
+import { DecimalModel } from './BeatModel';
+import { describeMoney } from './MoneyModel';
+import { DecimalGrid } from './DecimalGrid';
 import { facesOf } from '../lib/clock';
 import { ClockModel, describeClock } from './ClockModel';
 import { Timeline } from './Timeline';
@@ -121,10 +128,14 @@ export const SPECIMEN_ARRAY: ArrayModelSpec = { kind: 'array', object: 'dot', la
 /** The background chapter of a lesson on time: a clock face at 7:20 (the hour hand a third of the way to 8). */
 export const SPECIMEN_CLOCK: ClockModelSpec = { kind: 'clock', time: 7 * 3600 + 20 * 60, face: 'clock', numerals: true, ticks: 'minutes', minuteLabels: true };
 
+/** The background chapter of a lesson on decimals: a hundred grid with 0.35 shaded. */
+export const SPECIMEN_DECIMAL: DecimalGridModelSpec = { kind: 'decimal-grid', level: 100, given: { units: 350_000, dp: 2 } };
+
 function Specimen(p: StageContentProps & { view: ModelView }) {
   const { box, locale, defs } = p;
   if (p.view === 'clock' || p.view === 'timeline') return <ClockModel defs={defs} box={box} model={SPECIMEN_CLOCK} locale={locale} label={t(locale, 'math.specimen.clock')} />;
   if (p.view === 'grid') return <GridModel defs={defs} box={box} model={SPECIMEN_GRID} locale={locale} label={t(locale, 'math.specimen.grid')} />;
+  if (p.view === 'decimal-grid') return <DecimalGrid defs={defs} box={box} model={SPECIMEN_DECIMAL} locale={locale} label={t(locale, 'math.specimen.decimal')} />;
   if (p.view === 'array') return <ArrayModel defs={defs} box={box} model={SPECIMEN_ARRAY} locale={locale} label={t(locale, 'math.specimen.array')} />;
   const label = t(locale, 'math.specimen', { name: fractionWords({ n: 3, d: 4 }, locale) });
   const cx = box.x + box.w / 2;
@@ -209,6 +220,12 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
     );
   }
 
+  /* decimals: the grid, the chart, the line, money (docs/29 A6), or the view of two decimals compared */
+  if (!pictures && isDecimalTask(task)) {
+    const dm = decimalViewModel(task, p.view, state.aligned);
+    if (dm) return <DecimalTask task={task} state={state} run={run} model={dm} box={area} defs={defs} locale={locale} label={label} editable={editable} act={act} />;
+  }
+
   /* the clock and the timeline: set the hands, jump along the line, or a picture to read */
   if (!pictures && (m.kind === 'clock' || m.kind === 'timeline')) {
     if (m.kind === 'clock') {
@@ -229,8 +246,12 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
         id: o.id,
         letter,
         alt: o.value
-          ? fractionWords(o.value, locale)
-          : o.model?.kind === 'bar'
+          ? isDec(o.value)
+            ? decimalWords(o.value, locale)
+            : fractionWords(o.value, locale)
+          : o.model?.kind === 'money'
+            ? describeMoney(o.model, locale)
+            : o.model?.kind === 'bar'
             ? describePicture(o.model.rows ?? [o.model], locale)
             : o.model?.kind === 'grid'
               ? (o.text ? tx(o.text, locale) : (figureOf(o.model) ? describeFigure(o.model, figureOf(o.model)!, locale) : ''))
@@ -243,7 +264,17 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
                   : o.text
                     ? plainText(tx(o.text, locale), locale)
                     : '',
-        draw: (b) => (o.model ? <MiniModel defs={defs} model={o.model} box={b} locale={locale} /> : <SvgFrac cx={b.x + b.w / 2} cy={b.y + b.h / 2 - 8} n={o.value!.n} d={o.value!.d} w={o.value!.w} size={clamp(b.h / 4, 18, 40)} className="ms-option__frac" />),
+        draw: (b) => {
+          if (o.model) return <MiniModel defs={defs} model={o.model} box={b} locale={locale} />;
+          const v = o.value!;
+          if (isDec(v))
+            return (
+              <text className="ms-option__dec" x={b.x + b.w / 2} y={b.y + b.h / 2 + 6} textAnchor="middle" fontSize={clamp(b.h / 3.6, 18, 44)}>
+                {formatDecimal(v)}
+              </text>
+            );
+          return <SvgFrac cx={b.x + b.w / 2} cy={b.y + b.h / 2 - 8} n={v.n} d={v.d} w={v.w} size={clamp(b.h / 4, 18, 40)} className="ms-option__frac" />;
+        },
       }));
     if (cells.length === 0) return null;
     const gh = Math.min(area.h, cells.length > 3 ? area.h : clamp(area.w / cells.length, 140, 300));
@@ -263,6 +294,8 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
       />
     );
   }
+  // Every decimal model is drawn above (a decimal check, or its pictures).
+  if (isDecimalModel(m)) return null;
 
   /* cut */
   if (task.kind === 'cut' && m.kind === 'bar') {
@@ -306,27 +339,30 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
 
   /* compare: two rows, as bars or on the fraction wall */
   if (task.kind === 'compare') {
+    // Fractions here (two decimals compared are drawn above).
+    const ta = asFrac(task.a);
+    const tb = asFrac(task.b);
     const pick = task.ask !== 'symbol' && editable ? (side: 'a' | 'b') => act({ do: 'pick', side }) : undefined;
     const correctSide = (() => {
-      const c = toImproper(task.a).n * task.b.d - toImproper(task.b).n * task.a.d;
+      const c = toImproper(ta).n * tb.d - toImproper(tb).n * ta.d;
       return task.ask === 'greater' ? (c > 0 ? 'a' : 'b') : c < 0 ? 'a' : 'b';
     })();
     const w = clamp(area.w - 90, 220, 820);
     if (p.view === 'wall') {
-      const base = m.kind === 'wall' ? m.rows : [1, task.a.d, task.b.d];
+      const base = m.kind === 'wall' ? m.rows : [1, ta.d, tb.d];
       const rows: RowSpec[] = [];
       let usedA = false;
       let usedB = false;
       for (const d of base) {
-        if (!usedA && d === task.a.d) {
-          rows.push({ parts: d, filled: task.a.n, tone: 'cold', side: 'a', unitLabels: true });
+        if (!usedA && d === ta.d) {
+          rows.push({ parts: d, filled: ta.n, tone: 'cold', side: 'a', unitLabels: true });
           usedA = true;
-          if (task.a.d === task.b.d && !usedB) {
-            rows.push({ parts: d, filled: task.b.n, tone: 'hot', side: 'b', unitLabels: true });
+          if (ta.d === tb.d && !usedB) {
+            rows.push({ parts: d, filled: tb.n, tone: 'hot', side: 'b', unitLabels: true });
             usedB = true;
           }
-        } else if (!usedB && d === task.b.d) {
-          rows.push({ parts: d, filled: task.b.n, tone: 'hot', side: 'b', unitLabels: true });
+        } else if (!usedB && d === tb.d) {
+          rows.push({ parts: d, filled: tb.n, tone: 'hot', side: 'b', unitLabels: true });
           usedB = true;
         } else rows.push({ parts: d, filled: 0, unitLabels: true });
       }
@@ -335,7 +371,7 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
         <Rows x={cx - w / 2} y={cy - (rows.length * (rowH + 10)) / 2} w={w} rowH={rowH} gap={10} rows={rows} onPick={pick} picked={state.pick} ghostSide={ghost && task.ask !== 'symbol' ? correctSide : null} align label={label} locale={locale} />
       );
     }
-    const specRows = m.kind === 'bar' && m.rows ? m.rows : [{ parts: task.a.d, given: task.a.n }, { parts: task.b.d, given: task.b.n }];
+    const specRows = m.kind === 'bar' && m.rows ? m.rows : [{ parts: ta.d, given: ta.n }, { parts: tb.d, given: tb.n }];
     const rows: RowSpec[] = specRows.map((r, i) => ({
       parts: r.parts ?? 1,
       filled: typeof r.given === 'number' ? r.given : (r.given?.length ?? 0),
@@ -353,7 +389,7 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
           rowH={rowH}
           gap={24}
           rows={rows}
-          common={state.aligned ? commonParts(task.a, task.b) : null}
+          common={state.aligned ? commonParts(ta, tb) : null}
           onPick={pick}
           picked={state.pick}
           ghostSide={ghost && task.ask !== 'symbol' ? correctSide : null}
@@ -370,19 +406,20 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
 
   /* order: the items on the wall, or as points on a number line */
   if (task.kind === 'order') {
+    const items = task.items.map(asFrac);
     const placed = run?.done || ghost ? sortedOrder(task) : state.order;
     if (m.kind === 'numberline') {
       const w = clamp(area.w - 80, 240, 880);
       const points = placed.map((i) => {
-        const f = task.items[i]!;
+        const f = items[i]!;
         return { pos: valueOnLine(f, m) ?? 0, label: { n: f.n, d: f.d, w: f.w }, tone: 'mine' as const };
       });
       return <NumberLine defs={defs} x={cx - w / 2} y={cy + 24} w={w} from={m.from} to={m.to} intervals={m.intervals ?? 1} labels={m.labels === 'tens' || m.labels === 'steps' ? 'all' : m.labels} points={points} tickLabels={labels} label={label} locale={locale} />;
     }
-    const base = m.kind === 'wall' ? m.rows : [1, ...task.items.map((f) => f.d)];
+    const base = m.kind === 'wall' ? m.rows : [1, ...items.map((f) => f.d)];
     const rows: RowSpec[] = base.map((d) => {
-      const item = task.items.findIndex((f) => f.d === d);
-      return { parts: d, filled: item >= 0 && placed.includes(item) ? task.items[item]!.n : 0, tone: 'mine' as const, unitLabels: true };
+      const item = items.findIndex((f) => f.d === d);
+      return { parts: d, filled: item >= 0 && placed.includes(item) ? items[item]!.n : 0, tone: 'mine' as const, unitLabels: true };
     });
     const w = clamp(area.w - 60, 220, 820);
     const rowH = clamp((area.h - 20) / rows.length - 10, 24, 46);
@@ -397,7 +434,7 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
     const placeable = editable && phase === 'model' && (task.kind === 'place' || task.kind === 'shade');
     const arrowPos = m.kind === 'numberline' && m.arrow ? valueOnLine(m.arrow, m) : null;
     const arcs = run?.feedback?.code === 'tick-counting' ? (task.kind === 'place' ? state.place : arrowPos) : null;
-    const target = task.kind === 'place' && m.kind === 'numberline' ? valueOnLine(task.target, m) : null;
+    const target = task.kind === 'place' && m.kind === 'numberline' ? valueOnLine(asFrac(task.target), m) : null;
     const y = cy + (line.withBar ? 30 : 10);
     out.push(
       <NumberLine
@@ -493,7 +530,7 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
               else act(mode === 'cross' ? { do: 'cross', part } : { do: 'shade', part });
             }
       }
-      ghost={ghost && phase !== 'input' ? (asPlace ? { parts: state.parts, marked: Array.from({ length: valueOnLine(task.target, { from: 0, intervals: state.parts }) ?? 0 }, (_, i) => i) } : ghostOf(task)) : null}
+      ghost={ghost && phase !== 'input' ? (asPlace ? { parts: state.parts, marked: Array.from({ length: valueOnLine(asFrac(task.target), { from: 0, intervals: state.parts }) ?? 0 }, (_, i) => i) } : ghostOf(task)) : null}
       labels={labels}
       dim={t(locale, 'math.whole')}
       folds={task.kind === 'fold' ? state.folds : undefined}
@@ -521,6 +558,7 @@ export function MiniModel({ defs, model, box, locale }: { defs: string; model: T
   if (model.kind === 'clock') return <ClockModel defs={defs} box={box} model={model} locale={locale} label={label} mini />;
   if (model.kind === 'timeline') return <Timeline defs={defs} box={box} model={model} locale={locale} label={label} />;
   if (model.kind === 'numberline' && model.scale === 'whole') return <WholeLine x={box.x + 10} y={box.y + box.h / 2} w={box.w - 20} model={model} locale={locale} label={label} />;
+  if (isDecimalModel(model)) return <DecimalModel model={model} box={box} defs={defs} label={label} locale={locale} move={null} />;
   if (model.kind === 'circle') {
     const r = Math.max(10, Math.min(box.w, box.h) / 2 - 4);
     const idx = (s: number | number[] | undefined) => (s === undefined ? [] : Array.isArray(s) ? s : Array.from({ length: s }, (_, i) => i));

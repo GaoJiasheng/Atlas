@@ -1,0 +1,11 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "Placeholder source: this fixture topic only exercises the engine.",
+        "zh": "占位来源：这个示例主题只用来测试引擎。"
+      }
+    }
+  ]
+}

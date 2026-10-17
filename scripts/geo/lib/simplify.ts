@@ -46,7 +46,17 @@
  * wider than the 10m vertex spacing. The clipped coast arcs are the same in
  * every keyframe, so they are stored once. At run time the engine draws edges
  * only along arcs shared by two holders (lib/control.ts `frontierOf`), never
- * along the coast. `--no-coast` skips the step.
+ * along the coast. `--no-coast` skips the step. Inside `coast.excludeBox` the
+ * step is skipped (that box is neither land nor water to it): a topic whose
+ * features there are already cut to their own dated coast in compose (the
+ * island coast by era, docs/28 P2) keeps exactly that coast, and no holder
+ * outside the box is grown into it.
+ *
+ * Per-box detail (docs/28 P3): a `pipeline.focus` entry `{ box, fineKm }`
+ * keeps its own fixed interval (an island at metres inside a region at a
+ * kilometre); it is carved out of the plain focus boxes, simplified on its
+ * own and follows the coast with its own land, like the inside / outside
+ * halves. The budget search only moves the plain boxes' interval.
  *
  * THE KNOB — size budget: `--budget` MB (`budgetMB`, default 2.0) for the
  * `plannedKeyframes` (12, docs/09 §4.2), pro rata for fewer: 2.0 MB × (keyframes
@@ -89,8 +99,15 @@ const topic = openTopic(values.topic);
 const config = topic.config;
 
 const PLANNED_KEYFRAMES = config.plannedKeyframes;
-/** [west, south, east, north] boxes that keep the fine interval. */
-const FOCUS: Box[] = config.focus;
+/** [west, south, east, north] boxes that keep a fine interval (every focus entry). */
+const FOCUS: Box[] = config.focus.map((f) => (Array.isArray(f) ? f : f.box));
+/** Plain focus boxes: the searched (or `--fine`) interval. */
+const SEARCHED: Box[] = config.focus.filter((f): f is Box => Array.isArray(f));
+/** `{ box, fineKm }` focus boxes: their own fixed interval (km), first one wins where they overlap; carved out of the plain boxes. */
+const FIXED: { box: Box; km: number }[] = config.focus.flatMap((f) => (Array.isArray(f) ? [] : [{ box: f.box, km: f.fineKm }]));
+/** No coast step inside this box (`coast.excludeBox`): its features keep the coast compose gave them. */
+const EXCLUDE_BOX: Box | null = config.coast.excludeBox;
+const inBox = ([x = 0, y = 0]: readonly number[], [w, s, e, n]: Box) => x >= w && x <= e && y >= s && y <= n;
 /** The detail basemap box and file (ww2: scripts/build-geo.ts `SEA_BBOX`, 1:10m): inside it the coast is the detail land; null = none. */
 const COAST_BOX: Box | null = config.coast.detailBox;
 const COAST_LAND_DETAIL = config.coast.detailLand === null ? null : repoPath(config.coast.detailLand);
@@ -163,13 +180,30 @@ function flatSrc(fc: FeatureCollection): FeatureCollection {
   );
 }
 
-/** The inside/outside split of one keyframe (cut once; independent of the intervals). */
-async function cutKeyframe(fc: FeatureCollection): Promise<{ inside: FeatureCollection; outside: FeatureCollection }> {
+/** The pieces of `a` inside each fixed-interval box (first box first), and `a` with all of them cut out. */
+async function carveFixed(a: FeatureCollection): Promise<{ fixed: FeatureCollection[]; rest: FeatureCollection }> {
+  const fixed: FeatureCollection[] = [];
+  let rest = a;
+  for (const { box } of FIXED) {
+    const b = boxes([box]);
+    fixed.push(await mapshaper('-i a.json b.json combine-files -clip target=a b', { a: rest, b }));
+    rest = await mapshaper('-i a.json b.json combine-files -erase target=a b', { a: rest, b });
+  }
+  return { fixed, rest };
+}
+
+/** The inside/outside split of one keyframe (cut once; independent of the intervals), and its fixed-interval boxes. */
+async function cutKeyframe(fc: FeatureCollection): Promise<{ inside: FeatureCollection; outside: FeatureCollection; fixed: FeatureCollection[] }> {
   const a = flatSrc(fc);
   const focus = boxes(FOCUS);
-  const inside = await mapshaper('-i a.json focus.json combine-files -clip target=a focus', { a, focus });
   const outside = await mapshaper('-i a.json focus.json combine-files -erase target=a focus', { a, focus });
-  return { inside, outside };
+  if (!FIXED.length) {
+    const inside = await mapshaper('-i a.json focus.json combine-files -clip target=a focus', { a, focus });
+    return { inside, outside, fixed: [] };
+  }
+  const { fixed, rest } = await carveFixed(a);
+  const inside = SEARCHED.length ? await mapshaper('-i a.json focus.json combine-files -clip target=a focus', { a: rest, focus: boxes(SEARCHED) }) : toFc([]);
+  return { inside, outside, fixed };
 }
 
 type Cut = Awaited<ReturnType<typeof cutKeyframe>>;
@@ -179,6 +213,8 @@ interface Coast {
   /** Land inside the focus boxes / outside them (where the gap is filled within different reaches). */
   landIn: FeatureCollection;
   landOut: FeatureCollection;
+  /** Land inside each fixed-interval focus box (`FIXED`; `landIn` is then the plain boxes' land only). */
+  landFixed: FeatureCollection[];
   /** `WORLD_BOX` minus all land (thinned outside the focus boxes). */
   water: FeatureCollection;
 }
@@ -235,11 +271,23 @@ async function loadCoast(): Promise<Coast> {
     const outer = await mapshaper('-i land.json world.json combine-files -clip target=land world', { land: base, world });
     land = toFc(areaFeatures(outer));
   }
-  const landIn = await mapshaper('-i land.json focus.json combine-files -clip target=land focus', { land, focus });
+  // The excluded box is neither land nor water: nothing in it is erased, nothing is grown into it.
+  const exclude = EXCLUDE_BOX ? boxes([EXCLUDE_BOX]) : null;
+  if (exclude) land = await mapshaper('-i land.json box.json combine-files -erase target=land box', { land, box: exclude });
+  let landIn: FeatureCollection;
+  let landFixed: FeatureCollection[] = [];
+  if (FIXED.length) {
+    const carved = await carveFixed(land);
+    landFixed = carved.fixed;
+    landIn = SEARCHED.length ? await mapshaper('-i land.json focus.json combine-files -clip target=land focus', { land: carved.rest, focus: boxes(SEARCHED) }) : toFc([]);
+  } else {
+    landIn = await mapshaper('-i land.json focus.json combine-files -clip target=land focus', { land, focus });
+  }
   const outRaw = await mapshaper('-i land.json focus.json combine-files -erase target=land focus', { land, focus });
   const landOut = await mapshaper(`-i land.json -simplify dp interval=${COAST_OUT_KM * 1000} keep-shapes`, { land: outRaw });
-  const water = await mapshaper('-i box.json land.json combine-files -erase target=box land', { box: world, land: toFc([...areaFeatures(landIn), ...areaFeatures(landOut)]) });
-  return { landIn, landOut, water };
+  let water = await mapshaper('-i box.json land.json combine-files -erase target=box land', { box: world, land: toFc([...areaFeatures(landIn), ...landFixed.flatMap(areaFeatures), ...areaFeatures(landOut)]) });
+  if (exclude) water = await mapshaper('-i w.json box.json combine-files -erase target=w box', { w: water, box: exclude });
+  return { landIn, landOut, landFixed, water };
 }
 
 /**
@@ -294,9 +342,9 @@ interface Topo {
  */
 async function build(ids: string[], cuts: Cut[], fine: number, coarse: number, coast: Coast | null): Promise<{ topo: Topo; geojson: Record<string, FeatureCollection> }> {
   const m = mapshaperApi();
-  const part = async (which: 'inside' | 'outside', km: number, islandKm2: number) => {
+  const part = async (which: (cut: Cut) => FeatureCollection, km: number, islandKm2: number) => {
     const files: Record<string, unknown> = {};
-    ids.forEach((id, i) => (files[`${id}.json`] = cuts[i]![which]));
+    ids.forEach((id, i) => (files[`${id}.json`] = which(cuts[i]!)));
     const out = await m.applyCommands(
       `-i ${ids.map((id) => `${id}.json`).join(' ')} combine-files -simplify ${METHOD === 'dp' ? 'dp' : 'weighted'} interval=${km * 1000} keep-shapes -filter-islands min-area=${islandKm2}km2 -o format=geojson precision=0.0001 target=*`,
       files,
@@ -310,16 +358,19 @@ async function build(ids: string[], cuts: Cut[], fine: number, coarse: number, c
     }
     return byId;
   };
-  const inside = await part('inside', fine, FOCUS_ISLAND_KM2);
-  const outside = await part('outside', coarse, COARSE_ISLAND_KM2);
+  const inside = await part((c) => c.inside, fine, FOCUS_ISLAND_KM2);
+  const outside = await part((c) => c.outside, coarse, COARSE_ISLAND_KM2);
+  const fixed: Record<string, FeatureCollection>[] = [];
+  for (const [k, f] of FIXED.entries()) fixed.push(await part((c) => c.fixed[k]!, f.km, FOCUS_ISLAND_KM2));
   if (coast) {
     for (const [i, id] of ids.entries()) {
       inside[id] = await trimIslands(await followCoast(inside[id]!, coast.landIn, coast.water, GAP_KM), FOCUS_ISLAND_KM2);
       outside[id] = await trimIslands(await followCoast(outside[id]!, coast.landOut, coast.water, GAP_KM, cuts[i]!.outside), COARSE_ISLAND_KM2);
+      for (const [k, f] of fixed.entries()) f[id] = await trimIslands(await followCoast(f[id]!, coast.landFixed[k]!, coast.water, GAP_KM), FOCUS_ISLAND_KM2);
     }
   }
   const merged: Record<string, unknown> = {};
-  for (const id of ids) merged[`${id}.json`] = toFc([...inside[id]!.features, ...outside[id]!.features]);
+  for (const id of ids) merged[`${id}.json`] = toFc([...inside[id]!.features, ...outside[id]!.features, ...fixed.flatMap((f) => f[id]!.features)]);
   const dissolved = await m.applyCommands(
     `-i ${ids.map((id) => `${id}.json`).join(' ')} combine-files -dissolve2 holder,label_en,label_zh calc='src=collect(src)' target=* ${coast ? `-filter-islands min-area=${COAST_ISLAND_KM2}km2 target=* ` : ''}-clean target=* ` +
       `-o format=geojson precision=0.0001 target=*`,
@@ -442,7 +493,7 @@ function decodeRings(topo: Topo, id: string): Position[][] {
   return rings;
 }
 
-const inFocus = ([x = 0, y = 0]: readonly number[]) => FOCUS.some(([w, s, e, n]) => x >= w && x <= e && y >= s && y <= n);
+const inFocus = (p: readonly number[]) => FOCUS.some((b) => inBox(p, b));
 
 /** km per degree of latitude; longitude is scaled by cos(lat) of the point. */
 const KM_LAT = 111.195;
@@ -502,7 +553,7 @@ const polyRings = (fc: FeatureCollection): Position[][] =>
 
 /** Point-in-land test against the basemap land (polygon boxes first). */
 function landIndex(coast: Coast): (x: number, y: number) => boolean {
-  const polys = [...areaFeatures(coast.landIn), ...areaFeatures(coast.landOut)].flatMap((f) => (f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates));
+  const polys = [...areaFeatures(coast.landIn), ...coast.landFixed.flatMap(areaFeatures), ...areaFeatures(coast.landOut)].flatMap((f) => (f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates));
   const boxed = polys.map((poly) => {
     const xs = poly[0]!.map((p) => p[0] ?? 0);
     const ys = poly[0]!.map((p) => p[1] ?? 0);
@@ -513,7 +564,7 @@ function landIndex(coast: Coast): (x: number, y: number) => boolean {
 
 function measure(topo: Topo, ids: string[], originals: FeatureCollection[], droppedIslands: boolean, coast: Coast | null): { p50: number; p95: number; p99: number; max: number; n: number } {
   const dev: number[] = [];
-  const coastGrid = coast ? segGrid([...polyRings(coast.landIn), ...polyRings(coast.landOut)]) : null;
+  const coastGrid = coast ? segGrid([...polyRings(coast.landIn), ...coast.landFixed.flatMap(polyRings), ...polyRings(coast.landOut)]) : null;
   const onLand = coast ? landIndex(coast) : null;
   ids.forEach((id, k) => {
     const grid = segGrid(decodeRings(topo, id));
@@ -529,7 +580,8 @@ function measure(topo: Topo, ids: string[], originals: FeatureCollection[], drop
           // Near the basemap coast the boundary is the basemap, not these vertices (coverage is reported separately).
           if (coastGrid && nearestKm(coastGrid, px, py) < COAST_SKIP_KM) continue;
           // Out at sea (the source map's sea or a coast further out than the skip distance): the water is erased on purpose.
-          if (onLand && !onLand(px, py)) continue;
+          // Inside the excluded box there is no coast step, so every vertex counts.
+          if (onLand && !onLand(px, py) && !(EXCLUDE_BOX && inBox([px, py], EXCLUDE_BOX))) continue;
           const best = nearestKm(grid, px, py);
           if (Number.isFinite(best)) dev.push(best);
         }
@@ -596,7 +648,7 @@ async function main(): Promise<void> {
   writeFileSync(file, text);
   const size = statSync(file).size;
   log(
-    `${file}: ${ids.length} keyframes, interval ${fine} km in focus areas / ${coarse} km elsewhere, quantisation ${QUANTIZATION}, ${(size / 1024).toFixed(0)} KB ` +
+    `${file}: ${ids.length} keyframes, interval ${fine} km in focus areas${FIXED.map((f) => ` / ${f.km} km in [${f.box.join(', ')}]`).join('')} / ${coarse} km elsewhere, quantisation ${QUANTIZATION}${EXCLUDE_BOX ? `, no coast step in [${EXCLUDE_BOX.join(', ')}]` : ''}, ${(size / 1024).toFixed(0)} KB ` +
       `(budget ${(budget / 1024).toFixed(0)} KB = ${BUDGET_MB} MB × ${ids.length}/${PLANNED_KEYFRAMES}), ${result.topo.arcs.length} arcs`,
   );
   if (size > budget) warn('control.json is over budget');

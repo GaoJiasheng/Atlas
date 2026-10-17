@@ -1,0 +1,43 @@
+---
+id: known-facts
+order: 4
+title: { en: "New facts from facts you know", zh: "用会的算新的" }
+state:
+  summary: { en: "Split an array into parts you know, then add the parts.", zh: "把阵列切成会算的几块，再把几块加起来。" }
+---
+
+<Lang en>
+
+You know that an <Term id="array">array</Term> is rows × the number in each row. This step shows how a fact you already know can give you a new one, so you do not have to count from 1 again.
+
+Start with <Beat n={1}>2 rows of 7 dots</Beat>. Each row has 7, so 2 rows hold 7 + 7 = 14: 2 × 7 = 14. Keep this fact in mind.
+
+Now look at <Beat n={2}>4 rows of 7, split into 2 rows and 2 rows</Beat>. The line separates the top 2 rows from the bottom 2 rows. Each part is 2 × 7 = 14. Add the parts: 4 × 7 = 2 × 7 + 2 × 7 = 14 + 14 = 28. Four rows are twice two rows, so 4 × is double 2 ×.
+
+Next, <Beat n={3}>3 rows of 7, split after row 2</Beat>. The top part is still 2 × 7 = 14. The bottom part is one whole row of 7 dots: 1 × 7 = 7. Add the parts: 3 × 7 = 14 + 7 = 21. So 3 × is 2 × and one more group.
+
+Last, <Beat n={4}>10 rows of 4</Beat>. You know 10 × 4 = 40. The line splits the array into two equal parts of 5 rows, and the bottom half is crossed out. Each half holds half of the dots, so 5 × 4 is half of 40: 5 × 4 = 20. So 5 × is half of 10 ×.
+
+The common mistake is in the extra part. In 3 × 7, the extra part is a whole row of 7 dots, so you add 7 to 14, not 1. Adding 1 counts the row as if it held one dot. Always ask how many are in the part you add.
+
+When you are ready, <Task id="known-facts">try one question</Task> on splitting an array into facts you know.
+
+</Lang>
+
+<Lang zh>
+
+你已经知道，<Term id="array">阵列</Term>的个数是行数乘每行的个数。这一步讲怎样用已经会的乘法算出新的乘法，不用每次都从 1 数起。
+
+先看<Beat n={1}>2 行、每行 7 个点</Beat>。每行 7 个，两行就是 7 + 7 = 14：2 × 7 = 14。把这道乘法记在心里，等一下要用。
+
+再看<Beat n={2}>4 行 7 个，切成 2 行和 2 行</Beat>。中间那条线把上面 2 行和下面 2 行分开了。每一块都是 2 × 7 = 14，两块加起来：4 × 7 = 2 × 7 + 2 × 7 = 14 + 14 = 28。4 行正好是 2 行的两倍，所以 4 × 就是 2 × 的两倍。
+
+接着看<Beat n={3}>3 行 7 个，在第 2 行下面切开</Beat>。上面一块还是 2 × 7 = 14。下面一块是一整行 7 个点：1 × 7 = 7。两块加起来：3 × 7 = 14 + 7 = 21。所以 3 × 就是 2 × 再多一组。
+
+最后看<Beat n={4}>10 行、每行 4 个</Beat>。10 × 4 = 40，这个你会。那条线把阵列切成一样大的两半，每半 5 行，下面一半划掉了。剩下的一半只有 40 的一半，所以 5 × 4 = 20。也就是说，5 × 是 10 × 的一半。用 10 的乘法表，就能很快算出 5 的乘法表。
+
+常见的错误出在多出来的那一块上。算 3 × 7 时，多出来的是一整行 7 个点，所以要在 14 上加 7，不是加 1。加 1，就等于把这一行当成只有一个点了。每次加上一块之前，先问一问：这一块里有几个？
+
+准备好了，就<Task id="known-facts">做一道小题</Task>：把阵列切成会算的几块，再加起来。
+
+</Lang>

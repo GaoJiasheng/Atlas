@@ -7,8 +7,8 @@ export interface LegendItem {
   label: BilingualText | string;
   /** CSS colour, `var(--x)`, or a data colour ref (`token:accent-axis`). */
   color: string;
-  /** `square`: hollow hairline square; `ring-dashed`: dot in a dashed ring; `site`: small hollow diamond; `triangle`: hollow hairline triangle; `hatch`: 45° hatched box; `dashed`: dashed outline box. */
-  kind?: 'fill' | 'line' | 'point' | 'arrow' | 'square' | 'ring-dashed' | 'site' | 'triangle' | 'hatch' | 'dashed';
+  /** `square`: hollow hairline square; `ring-dashed`: dot in a dashed ring; `site`: small hollow diamond; `triangle`: hollow hairline triangle; `hatch`: 45° hatched box; `dashed`: dashed outline box; `line-dashed`: dashed hairline. */
+  kind?: 'fill' | 'line' | 'point' | 'arrow' | 'square' | 'ring-dashed' | 'site' | 'triangle' | 'hatch' | 'dashed' | 'line-dashed';
 }
 
 export interface LegendProps {
@@ -48,6 +48,8 @@ function Swatch({ color, kind = 'fill' }: { color: string; kind?: LegendItem['ki
           <path d="M6 10.5L11 1.5M10.5 10.5L15.5 1.5M15 10.5L19.5 2.4" stroke={c} strokeWidth="1" />
         </svg>
       );
+    case 'line-dashed':
+      return <svg width="24" height="12" aria-hidden="true"><line x1="2" y1="6" x2="22" y2="6" stroke={c} strokeWidth="1" strokeDasharray="2 2" /></svg>;
     case 'dashed':
       return <svg width="24" height="12" aria-hidden="true"><rect x="4.5" y="1.5" width="15" height="9" fill="none" stroke={c} strokeWidth="1.2" strokeDasharray="3 2" /></svg>;
     case 'site':

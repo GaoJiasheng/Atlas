@@ -1,25 +1,23 @@
 /**
  * Dated river lines of a regional plate (`topic.basemap.region.rivers`,
  * `public/geo/<rivers>.json`; schema `riversFile` in ../schema.ts). A course
- * shows while `from <= t < to` (either end open): the GeoStage filters the
- * river layer only when the set of visible ids changes, so scrubbing costs one
- * set comparison per frame. Pure; unit-tested in tests/time-scene/rivers.test.ts.
+ * shows while `from <= t < to` (either end open; lib/dated.ts): the GeoStage
+ * filters the river layer only when the set of visible ids changes, so
+ * scrubbing costs one set comparison per frame. Pure; unit-tested in
+ * tests/time-scene/rivers.test.ts.
  */
 import { feature as topoFeature } from 'topojson-client';
 import type { Feature, FeatureCollection, Position } from 'geojson';
 import type { BilingualText } from '../../../i18n';
 import type { RiverProperties } from '../schema';
 import { mercY } from './territory';
-import { toNumber, type TimePoint } from './time';
+import { datedAt, datedWindow, type DatedWindow } from './dated';
 import type { LngLat } from './geo';
 
-export interface RiverN {
+/** `from`: first year shown (−∞ when open); `to`: first year no longer shown (+∞ when open). */
+export interface RiverN extends DatedWindow {
   id: string;
   name: BilingualText;
-  /** First year shown (−∞ when open). */
-  from: number;
-  /** First year no longer shown (+∞ when open). */
-  to: number;
   reconstructed: boolean;
   lines: LngLat[][];
   /** Name anchor: `label`, else the middle of the longest line. */
@@ -43,12 +41,6 @@ export function riverFeatures(raw: unknown): Feature[] {
   }
   return data.type === 'FeatureCollection' ? data.features : [];
 }
-
-const time = (t: TimePoint | undefined, open: number) => {
-  if (t === undefined) return open;
-  const n = toNumber(t);
-  return Number.isFinite(n) ? n : open;
-};
 
 function lineLengthDeg(line: readonly LngLat[]): number {
   let d = 0;
@@ -125,8 +117,7 @@ export function parseRivers(raw: unknown): RiverN[] {
     out.push({
       id: p.id,
       name: { en: p.name?.en ?? p.id, zh: p.name?.zh ?? '' },
-      from: time(p.from, Number.NEGATIVE_INFINITY),
-      to: time(p.to, Number.POSITIVE_INFINITY),
+      ...datedWindow(p.from, p.to),
       reconstructed: p.reconstructed === true,
       lines,
       label: pinned ?? auto?.at ?? null,
@@ -138,7 +129,7 @@ export function parseRivers(raw: unknown): RiverN[] {
 
 /** Ids of the courses that exist at `t` (`from <= t < to`), in data order. */
 export function riversAt(rivers: readonly RiverN[], t: number): string[] {
-  return rivers.filter((r) => r.from <= t && t < r.to).map((r) => r.id);
+  return datedAt(rivers, t).map((r) => r.id);
 }
 
 /** The rivers as map features (`id`, `rec` for the dashed reconstructed courses). */

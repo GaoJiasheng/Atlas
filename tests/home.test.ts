@@ -68,6 +68,11 @@ describe('topicStats', () => {
       { n: 46, key: 'index.stats.beats' },
       { n: 8, key: 'index.stats.questions' },
     ]);
+    expect(topicStats('math-scene', loadData('multiplication-division'), 14)).toEqual([
+      { n: 12, key: 'index.stats.steps' },
+      { n: 54, key: 'index.stats.beats' },
+      { n: 8, key: 'index.stats.questions' },
+    ]);
   });
 
   it('drops zero counts and tolerates missing files', () => {

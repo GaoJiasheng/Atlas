@@ -3,15 +3,19 @@
  * `<TopicLink slug="four-taps">Singapore's Four Taps</TopicLink>`: a link from a
  * chapter body to another topic's page, in the reader's language and under the
  * site base (so it works on `/atlas/` deployments and in the Capacitor shell).
- * `pnpm validate` checks the topic exists.
+ * `ch` links to one chapter of it (`?ch=<id>`, docs/06 "URL 参数"):
+ * `<TopicLink slug="ww2" ch="fall-of-singapore">…</TopicLink>`.
+ * `pnpm validate` checks the topic exists, and the chapter when `ch` is given.
  */
 import { localeHref } from '../../i18n';
 import { pageLocale } from './locale';
 
 interface Props {
   slug: string;
+  ch?: string;
 }
-const { slug } = Astro.props;
+const { slug, ch } = Astro.props;
 const locale = pageLocale(Astro.url, Astro.currentLocale);
+const href = localeHref(locale, `/topics/${slug}/`) + (ch ? `?ch=${encodeURIComponent(ch)}` : '');
 ---
-<a href={localeHref(locale, `/topics/${slug}/`)}><slot /></a>
+<a href={href}><slot /></a>

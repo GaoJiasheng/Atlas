@@ -7,19 +7,34 @@
  *   `{t:7:20|face}`  as a clock face reads it, no am / pm (`7.20`)
  *   `{t:19:20|24}`  in 24-hour time (`19:20`)
  *   `{d:95m}`, `{d:1h35m}`, `{d:75s}`  a duration in the units written (`1 h 35 min` / `1 小时 35 分钟`)
- *   `{u:28 cm2}`  a measure (`28 cm²`, read "28 square centimetres")
+ *   `{u:28 cm2}`, `{u:1.5 l}`  a measure (`28 cm²`, `1.5 ℓ`, read "twenty-eight square centimetres", "one point five litres")
  * Whole numbers are written as they are; `3 r 2` reads "3 remainder 2" /「3 余 2」.
+ * Decimals and money are written as they are (`0.235`, `$2.35`, `0.666…`) and
+ * read digit by digit after the point ("zero point two three five" /
+ * 「零点二三五」) and in dollars and cents ("2 dollars 35 cents" /「2 元 35 分」);
+ * `≈` reads "is about" /「约等于」 (docs/29 X8). A decimal, an amount and
+ * the operator beside them stay on one line.
  * Used by the lesson tray, card, reader inspector and the glossary card; text
  * without tokens passes through unchanged. Client-safe (React `createElement`,
  * no JSX file needed). The lesson's notation reaches the time tokens through
  * `NotationContext` (the MathScene view provides it).
  */
 import { createContext, createElement, Fragment, useContext, type ReactNode } from 'react';
-import { clockWords, durationWords, fractionWords, numberEn, numberZh, type FracSlots } from '../engines/math-scene/lib/words';
-import { clockText, DEFAULT_NOTATION, durationText, parseClock, parseDuration, parseMeasure, unitText, unitWords, type ClockMode, type DurUnit, type Measure, type Notation } from '../engines/math-scene/lib/value';
+import { clockWords, decimalWords, durationWords, fractionWords, moneyWords, numberEn, numberZh, type FracSlots } from '../engines/math-scene/lib/words';
+import { clockText, DEFAULT_NOTATION, durationText, measureText, parseClock, parseDuration, parseMeasure, unitWords, type ClockMode, type DurUnit, type Measure, type Notation } from '../engines/math-scene/lib/value';
+import { parseDecimal, type Decimal } from '../engines/math-scene/lib/decimal';
 import { groupRuns, splitGlue } from './frac-glue';
 
-export type RichPart = { text: string } | { frac: FracSlots } | { time: number; mode: ClockMode } | { dur: number; units: DurUnit[] } | { measure: Measure };
+export type RichPart =
+  | { text: string }
+  | { frac: FracSlots }
+  | { time: number; mode: ClockMode }
+  | { dur: number; units: DurUnit[] }
+  | { measure: Measure }
+  /** A decimal written in the text (`more`: it goes on, `0.666…`). */
+  | { dec: Decimal; raw: string; more: boolean }
+  /** An amount of money written in the text, in cents. */
+  | { money: number; raw: string };
 
 /** The lesson's way of writing times (`lesson.json` `notation`). */
 export const NotationContext = createContext<Notation>(DEFAULT_NOTATION);
@@ -31,6 +46,23 @@ const DUR = /^d:(\S+)$/;
 const MEASURE = /^u:(.+)$/;
 
 const slot = (s: string): number | null => (s === '?' ? null : Number(s));
+
+/** Money (`$2.35`, `$7`) and decimals (`0.35`, `0.666…`) in plain text. */
+const NUMBERS = /\$(\d{1,5})(?:\.(\d{2}))?|(?<![\d.])(\d{1,5}\.\d{1,6})(…)?(?![\d.])/g;
+
+/** Plain text split into its runs, decimals and amounts. */
+function numbersIn(text: string): RichPart[] {
+  const out: RichPart[] = [];
+  let last = 0;
+  for (const m of text.matchAll(NUMBERS)) {
+    if (m.index > last) out.push({ text: text.slice(last, m.index) });
+    if (m[1] !== undefined) out.push({ money: Number(m[1]) * 100 + (m[2] ? Number(m[2]) : 0), raw: m[0] });
+    else out.push({ dec: parseDecimal(m[3]!)!, raw: m[0], more: !!m[4] });
+    last = m.index + m[0].length;
+  }
+  if (last < text.length) out.push({ text: text.slice(last) });
+  return out;
+}
 
 /** One `{…}` token's content as a part, or `null` when it is not a token (or a bad one). */
 function tokenPart(body: string): Exclude<RichPart, { text: string }> | null {
@@ -65,9 +97,11 @@ export function parseRich(text: string): RichPart[] {
   let last = 0;
   const push = (s: string) => {
     if (!s) return;
-    const prev = out.at(-1);
-    if (prev && 'text' in prev) prev.text += s;
-    else out.push({ text: s });
+    for (const p of numbersIn(s)) {
+      const prev = out.at(-1);
+      if ('text' in p && prev && 'text' in prev) prev.text += p.text;
+      else out.push(p);
+    }
   };
   for (const m of text.matchAll(CANDIDATE)) {
     const part = tokenPart(m[1]!);
@@ -88,22 +122,32 @@ function shown(p: Exclude<RichPart, { text: string }>, locale: 'en' | 'zh', nota
   }
   if ('time' in p) return clockText(p.time, p.mode, notation, locale, line);
   if ('dur' in p) return durationText(p.dur, p.units, locale, line);
-  return `${p.measure.value} ${unitText(p.measure.unit, locale, p.measure.value)}`;
+  if ('raw' in p) return p.raw;
+  return measureText(p.measure, locale);
 }
 
 /** `3 r 2` read aloud. */
 const REMAINDER = /(\d)\s+r\s+(\d)/g;
 
+/** A measure read aloud: a whole number in words ("twenty-eight square centimetres"), a decimal digit by digit ("one point five litres"). */
+function measureWords(m: Measure, locale: 'en' | 'zh'): string {
+  const whole = m.value.dp === 0 && m.value.units % 1_000_000 === 0;
+  const n = m.value.units / 1_000_000;
+  const number = whole ? (locale === 'zh' ? numberZh(n) : numberEn(n)) : decimalWords(m.value, locale);
+  return `${number}${locale === 'zh' ? '' : ' '}${unitWords(m.unit, locale, whole && n === 1 ? 1 : 2)}`;
+}
+
 /** Text with every token read as words. */
 export function speakable(text: string, locale: 'en' | 'zh'): string {
   return parseRich(text)
     .map((p) => {
-      if ('text' in p) return p.text.replace(REMAINDER, locale === 'zh' ? '$1 余 $2' : '$1 remainder $2');
+      if ('text' in p) return p.text.replace(REMAINDER, locale === 'zh' ? '$1 余 $2' : '$1 remainder $2').replace(/\s*≈\s*/g, locale === 'zh' ? ' 约等于 ' : ' is about ');
       if ('frac' in p) return fractionWords(p.frac, locale);
       if ('time' in p) return clockWords(p.time, p.mode, locale);
       if ('dur' in p) return durationWords(p.dur, p.units, locale);
-      const n = p.measure.value;
-      return `${locale === 'zh' ? numberZh(n) : numberEn(n)}${locale === 'zh' ? '' : ' '}${unitWords(p.measure.unit, locale, n)}`;
+      if ('money' in p) return moneyWords(p.money, locale);
+      if ('dec' in p) return decimalWords(p.dec, locale, p.more);
+      return measureWords(p.measure, locale);
     })
     .join('');
 }
@@ -132,10 +176,10 @@ export function fracNode(f: FracSlots, locale: 'en' | 'zh', key?: string | numbe
   );
 }
 
-/** A time, a duration or a measure: one unbreakable run, its words for screen readers. */
+/** A time, a duration, a measure, a decimal or an amount: one unbreakable run, its words for screen readers. */
 function ValueToken({ part, locale, line }: { part: Exclude<RichPart, { text: string } | { frac: FracSlots }>; locale: 'en' | 'zh'; line: boolean }) {
   const notation = useContext(NotationContext);
-  const words = 'time' in part ? clockWords(part.time, part.mode, locale) : 'dur' in part ? durationWords(part.dur, part.units, locale) : null;
+  const words = 'time' in part ? clockWords(part.time, part.mode, locale) : 'dur' in part ? durationWords(part.dur, part.units, locale) : 'money' in part ? moneyWords(part.money, locale) : 'dec' in part ? decimalWords(part.dec, locale, part.more) : null;
   return createElement('span', { className: 'atlas-value', 'aria-label': words ?? undefined }, shown(part, locale, notation, line));
 }
 

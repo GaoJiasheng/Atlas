@@ -158,10 +158,10 @@ export function BlocksModel(p: BlocksModelProps) {
   const reserveW = cc && wide ? Math.min(0.34 * box.w, cc.cols * cellMax + 48) : 0;
   const reserveH = cc && !wide ? Math.min(box.h * 0.4, cc.rows * 1.5 * cellMax + 20) : 0;
   // The plates are laid out for the share's last blocks (each plate's digits of the quotient), so they never grow.
-  const value = task?.kind === 'share' ? task.value : (m.value ?? total(matOf(m)) + k * total(counts(m.dealt)));
+  const value = task?.kind === 'share' && typeof task.value === 'number' ? task.value : (m.value ?? total(matOf(m)) + k * total(counts(m.dealt)));
   const each = k > 0 ? standard(Math.floor(value / k)) : standard(0);
   // Hundreds on the mat now, or in the number worked with (a check's blocks can be traded up into a hundred).
-  const hundreds = rowsOf.some((r) => r.H > 0) || value * (m.copies ?? 1) >= 100 || (task?.kind === 'regroup' && task.value >= 100);
+  const hundreds = rowsOf.some((r) => r.H > 0) || value * (m.copies ?? 1) >= 100 || (task?.kind === 'regroup' && typeof task.value === 'number' && task.value >= 100);
   const fit = matLayout(m.mat ? rowsOf : [ZERO_ROW], k > 0 && m.mat ? { k, each } : null, { w: Math.max(120, box.w - reserveW - 20), h: box.h - reserveH }, p.mini ? 4 : MAX_U, p.mini ? 1 : MAT_SHARE, hundreds);
   const u = fit.u;
   const plateU = Math.max(2, Math.floor(u * 0.7));

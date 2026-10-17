@@ -59,7 +59,7 @@ describe('area and perimeter lesson', () => {
         const ctx = askOf(task, spec);
         if (!spec || !ctx || task.kind === 'split-figure') return;
         expect(answersOf(spec)[0]!.n).toBe(gridAnswer(task));
-        if (spec.unit && task.model.kind === 'grid') {
+        if (spec.unit && spec.unit !== 'dollar' && task.model.kind === 'grid') {
           expect(isAreaUnit(spec.unit)).toBe(ctx.ask === 'area');
           expect(spec.unit === task.model.unit || spec.unit === squared(task.model.unit)).toBe(true);
         }

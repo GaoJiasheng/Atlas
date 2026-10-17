@@ -142,7 +142,7 @@ export function writtenEquals(spec: InputSpec, w: Written, answer: AnswerValue):
     if (t === null) return false;
     return w.mode === 'face' ? t % (12 * HOUR) === answer.t % (12 * HOUR) : t === answer.t;
   }
-  return w.kind === 'dur' && writtenDuration(w, durationBoxes(spec)) === answer.t;
+  return answer.kind === 'dur' && w.kind === 'dur' && writtenDuration(w, durationBoxes(spec)) === answer.t;
 }
 
 /** The boxes an answer fills (solve, "Show me"). */
@@ -168,6 +168,7 @@ export function valueBoxes(spec: InputSpec, values: readonly AnswerValue[]): Rec
     if (spec.form === 'time12') out.ap = p.pm ? 'pm' : 'am';
     return out;
   }
+  if (a.kind !== 'dur') return out;
   const p = durationParts(a.t, durationBoxes(spec) === 'min-s' ? ['m', 's'] : ['h', 'm']);
   if (durationBoxes(spec) === 'min-s') return { m: String(p.m), s: String(p.s) };
   return { h: String(p.h), m: String(p.m) };

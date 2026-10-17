@@ -146,14 +146,22 @@ export interface Keyframe {
 /** [west, south, east, north] in degrees. */
 export type Box = [number, number, number, number];
 
+/** A focus box: plain (the searched fine interval) or with its own fixed interval in km. */
+export type FocusEntry = Box | { box: Box; fineKm: number };
+
 /** The optional `pipeline` block of sources.json; every field falls back to `PIPELINE_DEFAULTS`. */
 export interface Pipeline {
   /** Keyframes the size budget is planned for (the budget is pro rata for fewer). */
   plannedKeyframes?: number;
   /** control.json size budget in MB for `plannedKeyframes` keyframes. */
   budgetMB?: number;
-  /** Boxes that keep the fine interval (the theatres the chapters zoom into). */
-  focus?: Box[];
+  /**
+   * Boxes that keep the fine interval (the theatres the chapters zoom into). A
+   * `{ box, fineKm }` entry keeps its own fixed interval instead of the
+   * searched one (an island-scale box inside a regional one, docs/28 P3); it
+   * wins over the boxes after it where they overlap.
+   */
+  focus?: FocusEntry[];
   /** Auto search: start at this fine interval (km) and add `fineStepKm` until the file fits. */
   fineStartKm?: number;
   fineStepKm?: number;
@@ -173,6 +181,13 @@ export interface Pipeline {
     /** Repo-relative finer land used inside `detailBox`; both null = no detail region. */
     detailLand?: string | null;
     detailBox?: Box | null;
+    /**
+     * No coast step inside this box (simplify.ts): no water erased, no gap
+     * filled. For a topic whose features there are already clipped to their
+     * own dated coast in compose (Singapore by era, docs/28 P2), which the
+     * basemap's one coastline of today would otherwise undo. Null = none.
+     */
+    excludeBox?: Box | null;
     /** Extent of the control data; coast and water outside it are ignored. */
     worldBox?: Box;
     /** Reach (km) within which uncovered land goes to the nearest holder. */
@@ -245,6 +260,37 @@ export interface LocalLand {
   maskBufferM: number;
   /** Size budget (KB) of the written file. */
   budgetKB: number;
+  /**
+   * The island coast by date (docs/28 §3.3): one whole `kind: land` coast per
+   * era with `from` / `to` (`[from, to)`; the first may leave out `from`, the
+   * last `to`), all in the same TopoJSON so the shoreline the eras share is
+   * stored once. Without `eras` the file holds one undated land (land-sg).
+   */
+  eras?: LocalLandEra[];
+  /** Also write today's coastline (the exterior rings of today's land) as `kind: coast-today`, the GeoStage's dashed reference line. */
+  coastToday?: boolean;
+}
+
+/**
+ * One era of `pipeline.localLand.eras`: today's land (dissolved `dataset`
+ * minus `water`, unsimplified) clipped to `outline`, minus every `minus`,
+ * plus every `plus`, then simplified with the other eras. Each path is a
+ * polygon GeoJSON traced from a source map (lines.ts, georef-*.ts), relative
+ * to the topic folder when it starts with `work/` or `raw/`, else to the repo.
+ */
+export interface LocalLandEra {
+  /** Era id, e.g. `L0`; also names the decoded copy `work/coast-<id>.geojson` (compose's `geojson` selector reads it). */
+  id: string;
+  from?: string;
+  to?: string;
+  /** Keep only the land inside this traced outline (a whole-island coast from an old survey). */
+  outline?: string;
+  /** Land that was still sea in this era (reclaimed later): erased. */
+  minus?: string[];
+  /** Land of this era that is gone today (islands dug away, sand bars): added. */
+  plus?: string[];
+  /** Map source ids (`G#`) written on the feature as `src`. */
+  src?: string[];
 }
 
 export interface Sources {
@@ -260,7 +306,7 @@ export interface Sources {
 export interface PipelineConfig {
   plannedKeyframes: number;
   budgetMB: number;
-  focus: Box[];
+  focus: FocusEntry[];
   fineStartKm: number;
   fineStepKm: number;
   coarseKm: number;
@@ -272,6 +318,7 @@ export interface PipelineConfig {
     land: string;
     detailLand: string | null;
     detailBox: Box | null;
+    excludeBox: Box | null;
     worldBox: Box;
     gapKm: number;
     islandKm2: number;
@@ -305,6 +352,7 @@ export const PIPELINE_DEFAULTS: Omit<PipelineConfig, 'shots'> = {
     // scripts/build-geo.ts `SEA_BBOX`: the 1:10m basemap drawn at high zoom.
     detailLand: 'public/geo/land-10m-sea.json',
     detailBox: [95, -9, 125, 22],
+    excludeBox: null,
     // Antarctica is closed along the pole, which a planar clip would choke on.
     worldBox: [-180, -60, 180, 86],
     gapKm: 6,
@@ -338,6 +386,7 @@ export function pipelineConfig(manifest: Sources, slug: string): PipelineConfig 
       land: c.land ?? d.coast.land,
       detailLand: c.detailLand === undefined ? d.coast.detailLand : c.detailLand,
       detailBox: c.detailBox === undefined ? d.coast.detailBox : c.detailBox,
+      excludeBox: c.excludeBox ?? d.coast.excludeBox,
       worldBox: c.worldBox ?? d.coast.worldBox,
       gapKm: c.gapKm ?? d.coast.gapKm,
       islandKm2: c.islandKm2 ?? d.coast.islandKm2,

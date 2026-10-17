@@ -14,7 +14,7 @@
  *   - MDX bodies carry both <Lang en> and <Lang zh> blocks (warning otherwise)
  *   - data/sources.json: ids unique (S1, S2 …); every event `sources` ref and
  *     every `<Num s="…">` in a chapter body names a listed source
- *   - `<TopicLink slug="…">` names a topic folder
+ *   - `<TopicLink slug="…">` names a topic folder; `ch="…"` a chapter of it
  *   - `<FlyTo preset="…">` names a preset (TimeScene data/presets.json, SpaceScene
  *     parts.json `presets`); `<More>` has a title
  *   - data/glossary.json: term ids unique, `see` refs exist; every `<Term id="…">`
@@ -173,6 +173,23 @@ function tagAttrs(body: string, tag: string): { raw: string; attrs: Record<strin
   return out;
 }
 
+const chapterIds = new Map<string, Set<string>>();
+/** Chapter ids of a topic folder (the `id:` of each chapter's frontmatter), for `<TopicLink ch>`. */
+function chapterIdsOf(slug: string): Set<string> {
+  let ids = chapterIds.get(slug);
+  if (ids) return ids;
+  ids = new Set();
+  const dir = join(TOPICS_DIR, slug, 'chapters');
+  if (isDir(dir))
+    for (const name of readdirSync(dir).filter((f) => f.endsWith('.mdx'))) {
+      const front = /^---\r?\n([\s\S]*?)\r?\n---/.exec(readFileSync(join(dir, name), 'utf8'))?.[1] ?? '';
+      const id = /^id:\s*["']?([^"'\s#]+)/m.exec(front)?.[1];
+      if (id) ids.add(id);
+    }
+  chapterIds.set(slug, ids);
+  return ids;
+}
+
 /** `<Frac n={3} d={4} />` attributes (string or `{number}`). */
 function fracAttrs(raw: string): Record<string, number | null> {
   const out: Record<string, number | null> = {};
@@ -213,6 +230,8 @@ function checkBodyComponents(
     const slug = attrs.slug;
     if (!slug) error(file, `<TopicLink> needs a slug, e.g. <TopicLink slug="four-taps">: ${raw}`);
     else if (!isDir(join(TOPICS_DIR, slug))) error(file, `<TopicLink slug="${slug}">: no such topic`);
+    else if (attrs.ch !== undefined && !chapterIdsOf(slug).has(attrs.ch))
+      error(file, `<TopicLink slug="${slug}" ch="${attrs.ch}">: topic "${slug}" has no chapter "${attrs.ch}"`);
   }
   for (const { raw, attrs } of tagAttrs(body, 'More')) {
     if (!attrs.title) error(file, `<More> needs a title={{ en: "…", zh: "…" }}: ${raw}`);

@@ -14,6 +14,8 @@
  * The style itself is built in style.ts. A regional plate (`basemap.region`)
  * swaps the world for the plate's own land, keeps the camera on the sheet
  * (lib/region.ts), and shows its dated rivers with their names (rivers.ts).
+ * Island-scale land (`basemap.local`) with dated coasts shows the one era at
+ * the playhead (lib/localLand.ts), today's coastline dashed over it.
  * Frontiers along `certainty: approximate` areas are dashed.
  *
  * Loaded lazily (dynamic import) so MapLibre stays out of the View chunk.
@@ -40,6 +42,7 @@ import { referencePair } from '../../lib/stats';
 import { formatTime } from '../../lib/format';
 import { aspectBounds, regionGraticule, regionMaxBounds } from '../../lib/region';
 import { parseRivers, riverCollection, riversAt, type RiverN } from '../../lib/rivers';
+import { decodeLocalLand, localEraAt, localLandFilter, parseLocalLand, type LocalEra } from '../../lib/localLand';
 import { createLeaders, intersects, type LeaderItem } from './leaders';
 import { createTerritoryLabels } from './territory';
 import { createRiverLabels } from './rivers';
@@ -64,6 +67,8 @@ export interface GeoControllerOptions {
   /** The topic's wording for entity dates (`topic.strings`); the UI strings when absent. */
   strings?: EntityStrings;
   onSelectEvent(id: string): void;
+  /** The island-scale land (`basemap.local`) has loaded: whether it has a `coast-today` line (the legend lists it). */
+  onLocalLand?(info: { coastToday: boolean }): void;
 }
 
 export interface GeoController {
@@ -306,6 +311,8 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       for (const id of ids) map.setLayoutProperty(id, 'visibility', show ? 'visible' : 'none');
     }
     map.setLayoutProperty(LAYER.graticule, 'visibility', graticuleOn ? 'visible' : 'none');
+    // Today's coastline over a dated island coast is a reference line, read with the names (N).
+    if (localLand && !region) map.setLayoutProperty(LOCAL.today, 'visibility', territoryOn ? 'visible' : 'none');
     if (on.has('borders') && !region) void ensureCountries();
   };
 
@@ -545,6 +552,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     updateMarks(frame, on, hl, hlSig);
 
     updateRivers(t);
+    updateLocalEra(t);
     updateDashAnimation(on.has('movements') && frame.movements.length > 0);
     updateLeaders(frame);
     updateTerritory(false);
@@ -1057,6 +1065,9 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   map.on('moveend', () => void ensureHiResLand());
 
   /* ---------- island-scale land (topic.basemap.local; fetched once the map has loaded) ---------- */
+  /** Dated coasts of the local land (null: undated, drawn as it is); the era on show (-1 = none yet). */
+  let localEras: LocalEra[] | null = null;
+  let localEra = -1;
   const loadLocalLand = async () => {
     if (!landLocalUrl || !localLand) return;
     try {
@@ -1064,12 +1075,27 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       if (!res.ok) throw new Error(`${res.status} ${landLocalUrl}`);
       const topo = (await res.json()) as Parameters<typeof topoFeature>[0];
       if (destroyed) return;
-      const obj = (topo.objects as Record<string, Parameters<typeof topoFeature>[1]>)[localLand];
-      if (!obj) throw new Error(`${landLocalUrl} has no object "${localLand}"`);
-      source(LOCAL.src)?.setData(topoFeature(topo, obj) as FeatureCollection);
+      const fc = decodeLocalLand(topo, localLand);
+      if (!fc) throw new Error(`${landLocalUrl} has no object "${localLand}"`);
+      const parsed = parseLocalLand(fc);
+      localEras = parsed.eras;
+      localEra = -1;
+      // One era at a time, filtered before the data arrives: never two coasts on screen at once.
+      updateLocalEra(playhead.get());
+      source(LOCAL.src)?.setData(parsed.collection);
+      options.onLocalLand?.({ coastToday: parsed.coastToday });
     } catch (err) {
       console.warn('[atlas] island-scale coastline unavailable:', err);
     }
+  };
+  /** Dated local land: show the coast of the era at `t` (re-filter the fill and edge only when the era changes). */
+  const updateLocalEra = (t: number) => {
+    if (!localEras || !loaded) return;
+    const era = localEraAt(localEras, t);
+    if (era === null || era === localEra) return;
+    localEra = era;
+    map.setFilter(LOCAL.fill, localLandFilter(era));
+    map.setFilter(LOCAL.edge, localLandFilter(era));
   };
 
   /* ---------- regional plate: its land (into the base `land` source) and its rivers ---------- */
@@ -1227,6 +1253,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     setTerritory(on) {
       if (on === territoryOn) return;
       territoryOn = on;
+      applyVisibility();
       updateRivers(playhead.get());
       updateTerritory(true);
       updateLabels();

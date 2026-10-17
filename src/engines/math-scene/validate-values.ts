@@ -15,6 +15,7 @@ import { answerValues } from './lib/forms';
 import { ARRAY_MAX_DOT_ROWS, ARRAY_MAX_ROWS, ARRAY_MAX_THINGS, factOf, groupSizes, layoutOf, layoutsOf, thingCount } from './lib/array';
 import { blockCount, canTrade, counts, matOf, regrouped, standard, total } from './lib/blocks';
 import { opResult } from './lib/diagnose/whole-ops';
+import { isDecimalTask } from './lib/decimal-tasks';
 import { splitArrayCut } from './lib/solve';
 import { DAY, formatAnswer, formatClock, formatDuration, HOUR, isFracValue, MINUTE, WHOLE_MAX, type AnswerValue } from './lib/value';
 import { clockStart, facesOf, HALF_DAY } from './lib/clock';
@@ -31,10 +32,11 @@ const isTimeModel = (m: Model) => m.kind === 'clock' || m.kind === 'timeline';
 
 const modelsOf = (task: Task): Model[] => [task.model, ...(task.kind === 'choose' ? task.options.flatMap((o) => (o.model ? [o.model] : [])) : [])];
 
-/** The domain a task's misconceptions come from (docs/19 G5): grid → measure, times → time, whole numbers → whole-ops, else fractions. */
+/** The domain a task's misconceptions come from (docs/19 G5): grid → measure, decimals → decimals, times → time, whole numbers → whole-ops, else fractions. */
 export function domainOf(task: Task): MisconceptionDomain {
   const models = modelsOf(task);
   if (models.some((m) => m.kind === 'grid') || ['count-squares', 'trace-perimeter', 'draw-rectangle', 'split-figure'].includes(task.kind)) return 'measure';
+  if (isDecimalTask(task)) return 'decimals';
   const spec = inputSpecOf(task);
   if (spec && ((TIME_FORMS as readonly string[]).includes(spec.form) || spec.convert || spec.span)) return 'time';
   if (TIME_TASKS.has(task.kind) || models.some(isTimeModel)) return 'time';
@@ -182,7 +184,7 @@ export function timelineIssues(m: TimelineSpec): string[] {
 export function valueModelIssues(m: Model): string[] {
   if (m.kind === 'clock') return clockIssues(m);
   if (m.kind === 'timeline') return timelineIssues(m);
-  if (m.kind === 'numberline') return lineIssues(m);
+  if (m.kind === 'numberline' && m.scale !== 'decimal') return lineIssues(m);
   if (m.kind === 'array') {
     if (m.pair) return [...layoutsOf(m).flatMap((s, i) => layoutIssues(s, `pair ${i + 1}`)), ...(m.pair.some((p) => !p.label) ? ['each side of a pair needs a label'] : [])];
     return layoutIssues(m);
@@ -269,7 +271,7 @@ function answerIssues(task: Task, spec: InputSpec): string[] {
       if (n[0] !== p * other || n[1] !== (whole - p) * other) out.push(`the parts are ${n[0]} and ${n[1]}; ${task.at ? 'the cut given' : 'no cut of the array'} makes them`);
     }
   }
-  if (task.kind === 'share') {
+  if (task.kind === 'share' && typeof task.value === 'number') {
     const want = opResult({ kind: '÷', a: task.value, b: task.k });
     const a = answers[0];
     const ok = a && ('n' in want ? isFracValue(a) && a.n === want.n : 'kind' in a && a.kind === 'rem' && a.q === want.q && a.r === want.r);
@@ -403,9 +405,10 @@ function numbersOf(task: Task): { factors: [number, number][]; totals: number[];
       out.totals.push(task.count * task.size);
       break;
     case 'regroup':
-      out.values.push(task.value);
+      if (typeof task.value === 'number') out.values.push(task.value);
       break;
     case 'share':
+      if (typeof task.value !== 'number') break;
       out.values.push(task.value);
       out.divisions.push({ a: task.value, b: task.k });
       break;
@@ -487,7 +490,7 @@ export function valueTaskIssues(task: Task, limits: StepLimits | undefined): str
     if (task.by === 'share' && task.k > 12) out.push('at most 12 containers');
     if (task.by === 'pack' && Math.floor(task.total / task.k) > 12) out.push(`${Math.floor(task.total / task.k)} boxes (at most 12)`);
   }
-  if (task.kind === 'skip-count' && m.kind === 'numberline') {
+  if (task.kind === 'skip-count' && m.kind === 'numberline' && m.scale !== 'decimal') {
     const to = task.to ?? m.to;
     if (task.to !== undefined && task.to !== m.to) out.push(`to ${task.to} is not the line's end ${m.to}`);
     if (task.size * task.count > to) out.push(`${task.count} jumps of ${task.size} go past ${to}`);

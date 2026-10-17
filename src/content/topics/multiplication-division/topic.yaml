@@ -1,0 +1,17 @@
+# Multiplication and division (MathScene lesson). Spec: docs/19-multiplication-division-content-spec.md.
+id: multiplication-division
+title: { en: "Multiplication and division", zh: "乘法与除法" }
+subtitle: { en: "Equal groups, arrays, and the column method", zh: "相同的几组、阵列和竖式" }
+subject: math
+levels: [P2, P3]
+tags: [number, singapore]
+moe: ["MOE 2021 P2 Whole Numbers 3 (Multiplication and Division)", "MOE 2021 P3 Whole Numbers 3 (Multiplication and Division)", "MOE 2021 P4 Whole Numbers 3 (Four Operations, going further)"]
+mode: lesson
+engine: math-scene
+stage: svg
+theme: paper
+sensitivity: open
+note: { en: "Interactive lesson · aligned to the MOE 2021 syllabus", zh: "交互课 · 对照 MOE 2021 课纲" }
+status: published
+illustration: multiplication-division
+shortTitle: { en: "× and ÷", zh: "乘与除" }

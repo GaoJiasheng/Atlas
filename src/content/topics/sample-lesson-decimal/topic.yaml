@@ -1,0 +1,17 @@
+# PLACEHOLDER topic: exercises the MathScene decimals engine only (docs/06 "MathScene" · 小数):
+# the hundred grid and its magnifier, the place-value chart with decimal places and the point-aligned
+# column method, the decimal number line with its zoom, money, every new task kind, the decimal answer
+# form and the new beat moves. The numbers and wording are placeholders, not a lesson.
+id: sample-lesson-decimal
+title: { en: "Sample: Decimal lesson", zh: "示例：小数课" }
+subtitle: { en: "A placeholder topic for testing the lesson engine's decimals", zh: "用于测试课引擎小数部分的占位主题" }
+subject: math
+tags: [beyond-syllabus]
+moe:
+  - "Placeholder: no syllabus anchor"
+mode: lesson
+engine: math-scene
+stage: svg
+theme: paper
+sensitivity: open
+status: draft

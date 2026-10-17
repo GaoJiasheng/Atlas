@@ -22,6 +22,12 @@ import { beatCount, beatSlot, findTask, locate, type BeatSlot, type Place } from
 import { drawIndex, pageSeed } from './lib/pool';
 import { formatFrac, lcm } from './lib/fraction';
 import { isUnit, unitText } from './lib/value';
+import { formatDecimal, withPlaces } from './lib/decimal';
+import { DPLACES } from './schema';
+import { asFrac } from './lib/check';
+import { numText, placedValue, readDecimals, shadedValue, shiftResult } from './lib/decimal-tasks';
+import { roundingEnds } from './lib/dline';
+import type { DCounts } from './lib/placevalue';
 import { clockShown, faceLabel, HALF_DAY } from './lib/clock';
 import { hopArcs, jumpLabel } from './lib/timeline';
 
@@ -44,6 +50,9 @@ export function freshRun(task: Task): TaskRun {
   return { state: initialState(task), tries: 0, hints: 0, feedback: null, revealed: false, done: false, log: [], attempts: [] };
 }
 
+/** The discs on the chart by place: `O 1 · T 4`. */
+const chartLabel = (c: DCounts): string => DPLACES.filter((p) => c[p] > 0).map((p) => `${p} ${c[p]}`).join(' · ') || '—';
+
 /** Mono caption of the answer after a move (undo log, "your attempts"). */
 function describe(task: Task, action: Action, s: TaskState): string {
   const total = s.parts * s.wholes;
@@ -64,18 +73,50 @@ function describe(task: Task, action: Action, s: TaskState): string {
     case 'place':
       return `MARK ${s.place ?? 0}/${s.parts}`;
     case 'symbol':
-      return task.kind === 'compare' ? `${formatFrac(task.a)} ${action.value} ${formatFrac(task.b)}` : action.value;
+      return task.kind === 'compare' ? `${numText(task.a)} ${action.value} ${numText(task.b)}` : action.value;
     case 'pick':
-      return task.kind === 'compare' ? `PICK ${formatFrac(action.side === 'a' ? task.a : task.b)}` : 'PICK';
+      return task.kind === 'compare' ? `PICK ${numText(action.side === 'a' ? task.a : task.b)}` : 'PICK';
     case 'align':
-      return task.kind === 'compare' ? `SAME-SIZE PARTS · ${lcm(task.a.d, task.b.d)}` : 'SAME-SIZE PARTS';
+      if (task.kind === 'compare' && task.align === 'point') return 'LINE UP ON THE POINT';
+      return task.kind === 'compare' ? `SAME-SIZE PARTS · ${lcm(asFrac(task.a).d, asFrac(task.b).d)}` : 'SAME-SIZE PARTS';
     case 'order':
     case 'unorder':
-      return task.kind === 'order' ? `ORDER ${s.order.map((i) => formatFrac(task.items[i]!)).join(' · ')}` : 'ORDER';
+      return task.kind === 'order' ? `ORDER ${s.order.map((i) => numText(task.items[i]!)).join(' · ')}` : 'ORDER';
+    case 'dcell':
+    case 'dstrip':
+    case 'dfill':
+    case 'slivers':
+      return task.kind === 'shade-decimal' ? `SHADE ${formatDecimal(withPlaces(shadedValue(task, s), 0))}` : 'SHADE';
+    case 'zoom':
+      return `ZOOM ${s.zoomPath.length}`;
+    case 'dplace': {
+      const v = placedValue(task, s);
+      return v ? `MARK ${formatDecimal(v)}` : 'MARK';
+    }
+    case 'end': {
+      if (task.kind !== 'round-on-line' || !s.end) return 'END';
+      const e = roundingEnds(task.value, task.to);
+      return `NEARER ${formatDecimal(s.end === 'lo' ? e.lo : e.hi)}`;
+    }
+    case 'offset':
+      return s.offset === 0 ? 'ROW ON THE POINT' : `ROW ${Math.abs(s.offset)} ${s.offset > 0 ? 'LEFT' : 'RIGHT'}`;
+    case 'pad':
+      return s.padded ? 'ZEROS IN' : 'ZEROS OUT';
+    case 'shift': {
+      const v = task.kind === 'shift-digits' ? shiftResult(task, s) : null;
+      return `MOVE ${Math.abs(s.shift)} ${s.shift >= 0 ? 'LEFT' : 'RIGHT'}${v ? ` → ${formatDecimal(v)}` : ''}`;
+    }
+    case 'dtrade':
+    case 'dshare':
+      return `${chartLabel(s.pv)}${task.kind === 'share' ? ` | EACH ${chartLabel(s.pvDealt)}` : ''}`;
     case 'choose':
       return `CHOOSE ${s.chosen.map((id) => id.toUpperCase()).join(' ')}`;
     case 'input': {
       const spec = inputSpecOf(task);
+      if (spec?.form === 'decimal') {
+        const d = readDecimals(spec, s.input);
+        return d ? `WRITE ${d.map((x) => `${spec.unit === 'dollar' ? '$' : ''}${formatDecimal(x)}`).join(' · ')}` : 'WRITE …';
+      }
       if (spec && usesValueBoxes(task, spec)) {
         const w = readWritten(spec, s.input);
         return w ? `WRITE ${w.map(writtenLabel).join(' · ')}` : 'WRITE …';
@@ -143,7 +184,7 @@ export function answerLabel(task: Task, s: TaskState): string {
     case 'merge':
       return describe(task, { do: 'factor', k: s.factor }, s);
     case 'place':
-      return describe(task, { do: 'place', at: 0 }, s);
+      return describe(task, task.model.kind === 'numberline' && task.model.scale === 'decimal' ? { do: 'dplace', tick: 0 } : { do: 'place', at: 0 }, s);
     case 'compare':
       return task.ask === 'symbol' && s.symbol ? describe(task, { do: 'symbol', value: s.symbol }, s) : describe(task, { do: 'pick', side: s.pick ?? 'a' }, s);
     case 'order':
@@ -170,7 +211,15 @@ export function answerLabel(task: Task, s: TaskState): string {
       return describe(task, { do: 'arraycut', cut: null }, s);
     case 'regroup':
     case 'share':
-      return describe(task, { do: 'trade', trade: 'O>T' }, s);
+      return task.model.kind === 'place-value' ? describe(task, { do: 'dtrade', trade: 'O>t' }, s) : describe(task, { do: 'trade', trade: 'O>T' }, s);
+    case 'shade-decimal':
+      return describe(task, { do: 'dfill', th: 0 }, s);
+    case 'round-on-line':
+      return describe(task, { do: 'end', side: 'lo' }, s);
+    case 'align-add':
+      return describe(task, { do: 'offset', to: 0 }, s);
+    case 'shift-digits':
+      return describe(task, { do: 'shift', to: 0 }, s);
     case 'set-clock':
       return describe(task, { do: 'clock', t: 0 }, s);
     case 'read-clock':
@@ -223,7 +272,7 @@ export function createController(lesson: Lesson, scene: SceneStore<MathSceneExt>
     (code && task.feedback.wrong.find((w) => w.when === code)?.say) || task.feedback.fallback;
 
   const phaseText = (task: Task, phase: string): BilingualText => {
-    if (phase === 'input') return both('math.phase.input');
+    if (phase === 'input') return both(inputSpecOf(task)?.form === 'decimal' ? 'math.phase.write' : 'math.phase.input');
     if (phase === 'mark') return both(task.kind === 'build-sum' && task.op === '-' ? 'math.phase.cross' : 'math.phase.shade');
     return both('math.phase.next');
   };
@@ -360,8 +409,10 @@ export function createController(lesson: Lesson, scene: SceneStore<MathSceneExt>
         return true;
       }
       if (r.near) {
-        const text = say(task, 'not-simplest') === task.feedback.fallback ? both('math.feedback.near') : say(task, 'not-simplest');
-        setRun(task, { ...run, feedback: { tone: 'near', text, code: 'not-simplest' }, attempts: attempt(task, run, 'near') });
+        // One step short: equal but not in lowest terms (`not-simplest`), or right but not written with the places asked for (`places-short`).
+        const code = r.code ?? 'not-simplest';
+        const text = say(task, code) === task.feedback.fallback ? both(code === 'places-short' ? 'math.feedback.nearPlaces' : 'math.feedback.near') : say(task, code);
+        setRun(task, { ...run, feedback: { tone: 'near', text, code }, attempts: attempt(task, run, 'near') });
         return false;
       }
       setRun(task, { ...run, tries: run.tries + 1, feedback: { tone: 'wrong', text: say(task, r.code), code: r.code }, attempts: attempt(task, run, 'wrong') });

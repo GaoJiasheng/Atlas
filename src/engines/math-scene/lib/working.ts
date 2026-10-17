@@ -23,6 +23,10 @@ import { askOf, measured } from './diagnose/measure';
 import { cutPieces } from './check';
 import { isHalfKey, parseCut, piecesAfter, rectOf } from './grid';
 import { squared, unitText, type Unit } from './value';
+import { asFrac } from './check';
+import { isDecimalTask } from './decimal-tasks';
+import { decimalLines } from './decimal-working';
+import { formatDecimal } from './decimal';
 
 const tok = (f: Frac) => `{${formatFrac(f)}}`;
 const SYM = { '<': '<', '=': '=', '>': '>' } as const;
@@ -72,7 +76,7 @@ function gridLines(task: Task, state: TaskState, locale: Locale, done: boolean):
     if (value !== null) return [`${t(locale, `math.grid.${ctx.ask}`)} = ${value} ${u(ctx.ask === 'area' ? sq : len, value)}`];
   }
   if (phase === 'input' && spec) {
-    const unit = spec.unit ?? (ctx?.ask === 'area' ? sq : len);
+    const unit: Unit = (spec.unit === 'dollar' ? undefined : spec.unit) ?? (ctx?.ask === 'area' ? sq : len);
     if (task.kind === 'split-figure') {
       const p = cutPieces(task, state.cut);
       const boxes = v ? v.map((x) => String(x.n)) : ['?', '?', '?'];
@@ -119,6 +123,7 @@ function valueToken(spec: InputSpec, v: AnswerValue): string {
   if (isFracValue(v)) return spec.form === 'remainder' ? `${v.n} r 0` : String(v.n);
   if (v.kind === 'rem') return `${v.q} r ${v.r}`;
   if (v.kind === 'clock') return `{t:${formatClock(v.t)}${spec.form === 'time24' ? '|24' : spec.form === 'face' ? '|face' : ''}}`;
+  if (v.kind === 'dec') return formatDecimal(v);
   return `{d:${formatDuration(v.t, durationBoxes(spec) === 'min-s' ? ['m', 's'] : ['h', 'm'])}}`;
 }
 
@@ -152,8 +157,8 @@ function sentenceOf(task: Task, spec: InputSpec): string | null {
     return `${op.a} × ${op.b} = ?`;
   }
   // A group or a share written as its quotient: the division it is.
-  if ((task.kind === 'group' || task.kind === 'share') && (spec.form === 'whole' || spec.form === 'remainder')) {
-    const a = task.kind === 'group' ? task.total : task.value;
+  if ((task.kind === 'group' || (task.kind === 'share' && typeof task.value === 'number')) && (spec.form === 'whole' || spec.form === 'remainder')) {
+    const a = task.kind === 'group' ? task.total : (task.value as number);
     const want = opResult({ kind: '÷', a, b: task.k });
     const v = answerValues(spec)[0];
     const fits = v && ('n' in want ? isFracValue(v) && v.n === want.n : !isFracValue(v) && v.kind === 'rem' && v.q === want.q && v.r === want.r);
@@ -228,6 +233,7 @@ function valueLines(task: Task, state: TaskState, locale: Locale, done: boolean,
 
 export function workingLines(task: Task, state: TaskState, locale: Locale, done = false, notation: Notation = DEFAULT_NOTATION): string[] {
   if (task.model.kind === 'grid') return gridLines(task, state, locale, done).filter(Boolean);
+  if (isDecimalTask(task)) return decimalLines(task, state, locale, done).filter(Boolean);
   // A set clock: the time it shows once the hands have moved (the target is in the task's sentence already).
   if (task.kind === 'set-clock') return state.clock === null ? [] : [`{t:${formatClock(clockShown(task, state.clock))}${task.ampm ? '' : '|face'}}`];
   const spec = inputSpecOf(task);
@@ -277,19 +283,21 @@ export function workingLines(task: Task, state: TaskState, locale: Locale, done 
       }
       break;
     case 'compare': {
-      const L = lcm(task.a.d, task.b.d);
+      const A = asFrac(task.a);
+      const B = asFrac(task.b);
+      const L = lcm(A.d, B.d);
       const s = task.ask === 'symbol' ? state.symbol : null;
-      out.push(`${tok(task.a)} ${s ? SYM[s] : '○'} ${tok(task.b)}`);
-      if (state.aligned && task.a.d !== task.b.d) {
-        const a = over(task.a, L)!;
-        const b = over(task.b, L)!;
-        out.push(`${tok(task.a)} = ${tok(a)} · ${tok(task.b)} = ${tok(b)}`);
+      out.push(`${tok(A)} ${s ? SYM[s] : '○'} ${tok(B)}`);
+      if (state.aligned && A.d !== B.d) {
+        const a = over(A, L)!;
+        const b = over(B, L)!;
+        out.push(`${tok(A)} = ${tok(a)} · ${tok(B)} = ${tok(b)}`);
         if (s) out.push(`${tok(a)} ${SYM[s]} ${tok(b)}`);
       }
       break;
     }
     case 'order':
-      if (state.order.length) out.push(state.order.map((i) => tok(task.items[i]!)).join(task.direction === 'asc' ? ' < ' : ' > '));
+      if (state.order.length) out.push(state.order.map((i) => tok(asFrac(task.items[i]!))).join(task.direction === 'asc' ? ' < ' : ' > '));
       break;
     case 'choose':
       break;
@@ -328,7 +336,7 @@ export function workingLines(task: Task, state: TaskState, locale: Locale, done 
  */
 export function cardValue(task: Task, state: TaskState, done = false): Frac | null {
   const m = task.model;
-  if (m.kind === 'grid' || m.kind === 'array' || m.kind === 'blocks' || m.kind === 'clock' || m.kind === 'timeline' || (m.kind === 'numberline' && m.scale === 'whole')) return null;
+  if (m.kind === 'grid' || m.kind === 'array' || m.kind === 'blocks' || m.kind === 'clock' || m.kind === 'timeline' || (m.kind === 'numberline' && m.scale === 'whole') || isDecimalTask(task)) return null;
   const spec = inputSpecOf(task);
   if (spec && usesValueBoxes(task, spec)) return null;
   const phase = phasesOf(task)[state.phase];

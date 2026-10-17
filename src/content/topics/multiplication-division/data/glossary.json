@@ -1,0 +1,121 @@
+{
+  "terms": [
+    {
+      "id": "equal-groups",
+      "term": { "en": "equal groups", "zh": "相同的几组" },
+      "definition": {
+        "en": "Groups that all hold the same number of things. 4 plates with 3 kueh on each are 4 equal groups of 3.",
+        "zh": "每组个数都一样多的几组。4 个盘子，每盘 3 块 kueh，就是 4 组、每组 3 块。"
+      },
+      "see": ["multiplication"]
+    },
+    {
+      "id": "multiplication",
+      "term": { "en": "multiplication, ×", "zh": "乘法，×" },
+      "definition": {
+        "en": "Finding how many there are in a number of equal groups. 4 × 3 means 4 groups of 3: 4 × 3 = 12.",
+        "zh": "求几个相同的组一共有多少。4 × 3 表示 4 组、每组 3 个：4 × 3 = 12。"
+      },
+      "see": ["equal-groups", "product", "division"]
+    },
+    {
+      "id": "product",
+      "term": { "en": "product", "zh": "积" },
+      "definition": {
+        "en": "The answer to a multiplication. The product of 4 and 3 is 12.",
+        "zh": "乘法的结果。4 × 3 的积是 12。"
+      },
+      "see": ["multiplication"]
+    },
+    {
+      "id": "array",
+      "term": { "en": "array", "zh": "阵列" },
+      "definition": {
+        "en": "Things set out in equal rows and columns. 3 rows of 4 is an array for 3 × 4; turned round it shows 4 × 3.",
+        "zh": "排成整齐的行和列的一组东西。3 行、每行 4 个是 3 × 4 的阵列；转过来就是 4 × 3。"
+      },
+      "see": ["multiplication"]
+    },
+    {
+      "id": "skip-counting",
+      "term": { "en": "skip counting", "zh": "几个几个地数" },
+      "definition": {
+        "en": "Counting on by the same number each time: 5, 10, 15, 20. The number of jumps is the number of groups.",
+        "zh": "每次加上同样多地往下数：5、10、15、20。跳了几次，就是几组。"
+      },
+      "see": ["times-table"]
+    },
+    {
+      "id": "times-table",
+      "term": { "en": "multiplication table", "zh": "乘法表" },
+      "definition": {
+        "en": "The products of one number from × 1 to × 10. The 5 times table is 5, 10, 15, … 50.",
+        "zh": "一个数从 × 1 到 × 10 的所有积，也叫乘法口诀。5 的乘法表是 5、10、15……50。"
+      },
+      "see": ["skip-counting", "product"]
+    },
+    {
+      "id": "division",
+      "term": { "en": "division, ÷", "zh": "除法，÷" },
+      "definition": {
+        "en": "Sharing into equal groups, or finding how many equal groups there are. 12 ÷ 3 = 4.",
+        "zh": "平均分成几份，或者看能分成几份。12 ÷ 3 = 4。"
+      },
+      "see": ["quotient", "remainder", "dividend-divisor"]
+    },
+    {
+      "id": "quotient",
+      "term": { "en": "quotient", "zh": "商" },
+      "definition": {
+        "en": "The answer to a division. In 12 ÷ 3 = 4, the quotient is 4.",
+        "zh": "除法的结果。12 ÷ 3 = 4 里，商是 4。"
+      },
+      "see": ["division"]
+    },
+    {
+      "id": "remainder",
+      "term": { "en": "remainder", "zh": "余数" },
+      "definition": {
+        "en": "What is left over when a number cannot be divided equally; it is always less than the divisor. 14 ÷ 4 = 3 r 2: the remainder is 2.",
+        "zh": "不能正好分完时剩下的数，总比除数小。14 ÷ 4 = 3 r 2，余数是 2（中国大陆课本写作 14 ÷ 4 = 3……2）。"
+      },
+      "see": ["division", "quotient"]
+    },
+    {
+      "id": "dividend-divisor",
+      "term": { "en": "dividend, divisor", "zh": "被除数、除数" },
+      "definition": {
+        "en": "In 12 ÷ 3, 12 is the dividend (the number divided) and 3 is the divisor (the number it is divided by).",
+        "zh": "在 12 ÷ 3 里，12 是被除数（要分的数），3 是除数（分成几份或每份几个）。"
+      },
+      "see": ["division"]
+    },
+    {
+      "id": "place-value",
+      "term": { "en": "place value", "zh": "位值" },
+      "definition": {
+        "en": "The value a digit has because of its place. In 352 the 5 stands for 5 tens, which is 50.",
+        "zh": "一个数字在哪一位，就代表几个一、几个十或几个百。352 里的 5 表示 5 个十，就是 50。"
+      },
+      "see": ["regroup"]
+    },
+    {
+      "id": "regroup",
+      "term": { "en": "regroup (also called renaming)", "zh": "换（满十进一、退一作十）" },
+      "definition": {
+        "en": "Trading 10 of one place for 1 of the next place up, or 1 for 10 of the place below. 18 ones is 1 ten and 8 ones; the number stays the same.",
+        "zh": "10 个一换成 1 个十，或者 1 个十换成 10 个一。18 个一就是 1 个十和 8 个一，数的大小不变。"
+      },
+      "see": ["place-value", "column-method"]
+    },
+    {
+      "id": "column-method",
+      "term": { "en": "column method", "zh": "竖式" },
+      "definition": {
+        "en": "Writing the numbers with their places lined up and working one place at a time. 26 × 3 = 78 worked from the ones up.",
+        "zh": "把数按位对齐，一位一位地算的写法。26 × 3 从个位乘起，得 78。"
+      },
+      "see": ["regroup", "place-value"]
+    }
+  ]
+}

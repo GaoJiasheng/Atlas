@@ -1,0 +1,43 @@
+---
+id: two-digit-by-two-digit
+order: 12
+title: { en: "Two-digit by two-digit", zh: "两位数乘两位数" }
+state:
+  summary: { en: "Split both numbers into tens and ones: four parts, all multiplied and all added.", zh: "两个数都拆成几十和几：一共四块，块块都要乘，块块都要加。" }
+---
+
+<Lang en>
+
+In step 10 you multiplied by a one-digit number, place by place. This chapter goes further: both numbers have two digits.
+
+Look at <Beat n={1}>the rectangle of squares</Beat>, 23 squares across and 14 up. It is an array of 14 rows of 23, so it shows 23 × 14. Counting every square would take a long time, so look for parts you know.
+
+<Beat n={2}>Cut it where the tens meet the ones</Beat>. Across, 23 = 20 + 3; up, 14 = 10 + 4. The two cuts make four smaller rectangles. No squares were added or taken away: the four parts still cover the whole rectangle.
+
+Now find the <Term id="product">product</Term> for <Beat n={3}>each of the 4 parts</Beat>. Each one is a fact you know, counted in tens or hundreds. The big part A is 20 × 10 = 200. Part B is 3 × 10 = 30. Part C is 20 × 4 = 80. Part D is 3 × 4 = 12. Add them: 200 + 30 + 80 + 12 = 322.
+
+The <Term id="column-method">column method</Term> adds <Beat n={4}>the same four parts in two rows</Beat>. The first row is 23 × 4 = 92: that is the bottom strip, 80 + 12. The second row is 23 × 10 = 230: that is the top part, 200 + 30. Add the two rows: 23 × 14 = 92 + 230 = 322.
+
+Two mistakes are common. One is to leave out parts: 20 × 10 + 3 × 4 = 212 multiplies only the tens together and the ones together, and misses 30 and 80. The other is to treat the 1 in 14 as 1 one instead of 1 ten, and write 23 instead of 230 in the second row. The 1 in 14 stands for 10.
+
+When you are ready, <Task id="two-digit-by-two-digit">try one question</Task> on multiplying two two-digit numbers.
+
+</Lang>
+
+<Lang zh>
+
+第 10 步算的是几位数乘一位数，一位一位地乘。这一章再往前走一步：两个数都是两位数。
+
+先看<Beat n={1}>这个方格长方形</Beat>：横着 23 格，竖着 14 格。它是一个 14 行、每行 23 格的阵列，表示 23 × 14。一格一格地数要数很久，还是找一找会算的部分吧。
+
+<Beat n={2}>在十和一的分界处切开</Beat>。横着看，23 = 20 + 3；竖着看，14 = 10 + 4。切两刀，分成四个小长方形。一格没多，一格没少，四块合起来还是整个长方形。在这里切，是因为整十的数乘起来最好算。
+
+再算<Beat n={3}>这四块各有多少</Beat>。每一块都是你会的乘法，只是数的是十或百。最大的 A 块是 20 × 10 = 200，B 块是 3 × 10 = 30，C 块是 20 × 4 = 80，D 块是 3 × 4 = 12。四块的<Term id="product">积</Term>加起来：200 + 30 + 80 + 12 = 322。把乘法画成长方形、切成几块来算，这种图叫面积模型。
+
+<Term id="column-method">竖式</Term>其实也是在加<Beat n={4}>这四块，只是写成了两行</Beat>。第一行 23 × 4 = 92，是下面那一长条：80 + 12。第二行 23 × 10 = 230，是上面那一大块：200 + 30。两行加起来：23 × 14 = 92 + 230 = 322。方格图和竖式，算的是同样的四块，只是写法不同。
+
+常见的错误有两种。一是漏掉几块：20 × 10 + 3 × 4 = 212，只把十乘十、一乘一，漏了 30 和 80 这两块。二是把 14 里的 1 当成 1 个一，第二行写成 23，而不是 230。14 里的 1 表示 1 个十，也就是 10。
+
+准备好了，就<Task id="two-digit-by-two-digit">做一道小题</Task>：算一道两位数乘两位数。
+
+</Lang>

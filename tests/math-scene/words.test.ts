@@ -116,7 +116,7 @@ describe('whole numbers, place values, times and durations in words (docs/19 G7)
     expect(speakable('{u:28 cm2}', 'en')).toBe('twenty-eight square centimetres');
     expect(speakable('14 ÷ 4 = 3 r 2', 'en')).toBe('14 ÷ 4 = 3 remainder 2');
     expect(speakable('14 ÷ 4 = 3 r 2', 'zh')).toBe('14 ÷ 4 = 3 余 2');
-    expect(badTokens('{t:25:00} {d:soon} {u:3 km} {3/x} {t:09:40} {here}')).toEqual(['{t:25:00}', '{d:soon}', '{u:3 km}', '{3/x}']);
+    expect(badTokens('{t:25:00} {d:soon} {u:3 mi} {3/x} {t:09:40} {here}')).toEqual(['{t:25:00}', '{d:soon}', '{u:3 mi}', '{3/x}']);
     expect(badTokens('{t:13:20|face}')).toEqual(['{t:13:20|face}']);
   });
 });
