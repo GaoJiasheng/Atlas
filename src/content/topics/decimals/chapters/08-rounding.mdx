@@ -1,0 +1,43 @@
+---
+id: rounding
+order: 8
+title: { en: "Rounding", zh: "四舍五入" }
+state:
+  summary: { en: "Find the two neighbours and the nearer one: look only at the next digit, 5 or more rounds up.", zh: "先找两边的数，再看离哪个近：只看下一位，满 5 进一。" }
+---
+
+<Lang en>
+
+You already know <Term id="round-off">rounding</Term> whole numbers to the nearest 10, 100 or 1000. The number lines in steps 02–04 help you round decimals by finding the nearer neighbour.
+
+Look at <Beat n={1}>3.7 between 3 and 4</Beat>. The halfway mark is 3.5, and 3.7 is beyond it, nearer 4. To the nearest whole number, 3.7 ≈ 4. The sign ≈ means “is about”: you are giving a nearby value.
+
+Now <Beat n={2}>find the neighbours of 4.63</Beat>. To round to 1 <Term id="decimal-places">decimal place</Term>, keep the <Term id="tenth">tenths</Term>. The neighbours are 4.6 and 4.7; 4.63 is below their midpoint, 4.65, so 4.63 ≈ 4.6. Writing 5 rounds to a different place and misses the requested accuracy. For 2 decimal places, keep the <Term id="hundredth">hundredths</Term> and check the thousandths digit.
+
+Next, <Beat n={3}>compare 2.96 with the midpoint 2.95</Beat>. It is nearer 3.0 than 2.9, so 2.96 ≈ 3.0. Writing 2.10 is a carrying mistake: 9 tenths plus 1 tenth makes 10 tenths, which becomes 1 whole. Writing 3 gives the same value but leaves the answer one step short: 3.0 shows the required decimal place.
+
+Look at <Beat n={4}>0.65 exactly halfway</Beat> between 0.6 and 0.7. Neither end is nearer, so use the rule: at halfway, round up, giving 0.65 ≈ 0.7. Rounding down at 5 misses this rule. Check the next digit: 5 or more increases the kept digit; below 5 leaves it unchanged. Cutting off digits without checking can miss an increase, as when 2.96 becomes 2.9.
+
+Finally, <Beat n={5}>locate 3.447 below 3.45</Beat>, the midpoint between 3.4 and 3.5. Its hundredths digit is 4, so 3.447 ≈ 3.4. Rounding in a chain, 3.447 → 3.45 → 3.5, changes the number twice and crosses the midpoint. Use the original number and round once.
+
+When you are ready, <Task id="rounding">try one question</Task> on choosing a neighbour and writing the rounded answer.
+
+</Lang>
+
+<Lang zh>
+
+整数的<Term id="round-off">四舍五入</Term>你已经会了：把 3470 四舍五入到最接近的整百，就看它离 3400 近还是离 3500 近。小数也是一样的想法。
+
+先看<Beat n={1}>3.7</Beat>。它在 3 和 4 之间，过了中点 3.5，离 4 更近。四舍五入到整数，3.7 ≈ 4。“≈”读作<Term id="approximately">约等于</Term>。
+
+四舍五入到一位小数，就是留到十分位。先找它两边的两个一位小数。<Beat n={2}>4.63</Beat> 在 4.6 和 4.7 之间，没到中点 4.65，离 4.6 近，所以 4.63 ≈ 4.6。写成 5 是四舍五入到整数，和题目问的不是同一件事。
+
+<Beat n={3}>2.96</Beat> 在 2.9 和 3.0 之间，离 3.0 近。9 个十分之一再进一个，是 10 个十分之一，也就是 1 个一，所以写 3.0，不能写成 2.10。末尾的 0 也要写：它告诉别人你保留了一位小数。只写 3，值没错，可是还差一步。
+
+正好在中点怎么办？<Beat n={4}>0.65</Beat> 离 0.6 和 0.7 一样远，规则是进一：0.65 ≈ 0.7。所以四舍五入只看要保留那一位的下一位：满 5 进一，不满 5 舍去。不能只是把后面的数字直接去掉，那样 0.68 也会变成 0.6。
+
+最后一个陷阱：<Beat n={5}>3.447</Beat> 四舍五入到一位小数。十分位后面那一位是 4，不满 5，所以 3.447 ≈ 3.4。有人先把它变成 3.45，再变成 3.5，挪了两次，结果落到了中点的另一边。四舍五入只做一次，只看一位。
+
+准备好了，就<Task id="rounding">做一道小题</Task>：在数轴上找较近的一端，再写出近似值。
+
+</Lang>

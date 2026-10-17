@@ -1,0 +1,17 @@
+# Decimals (MathScene lesson). Spec: docs/29-decimals-content-spec.md.
+id: decimals
+title: { en: "Decimals", zh: "小数" }
+subtitle: { en: "Tenths, hundredths and thousandths, and working with them", zh: "十分位、百分位、千分位，以及小数的计算" }
+subject: math
+levels: [P2, P3, P4, P5]
+tags: [number, singapore]
+moe: ["MOE 2021 P2–P3 Money 1", "MOE 2021 P4 Decimals 1–3", "MOE 2021 P5 Decimals 1 (going further)"]
+mode: lesson
+engine: math-scene
+stage: svg
+theme: paper
+sensitivity: open
+note: { en: "Interactive lesson · aligned to the MOE 2021 syllabus", zh: "交互课 · 对照 MOE 2021 课纲" }
+status: published
+illustration: decimals
+shortTitle: { en: "Decimals", zh: "小数" }

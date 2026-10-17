@@ -1,0 +1,43 @@
+---
+id: decimals-and-fractions
+order: 7
+title: { en: "Decimals and fractions", zh: "小数和分数" }
+state:
+  summary: { en: "The last place gives the denominator; to write a fraction as a decimal, make tenths or hundredths first.", zh: "最后一位决定分母；分数化小数，先化成十分之几或百分之几。" }
+---
+
+<Lang en>
+
+In step 03, you saw that 0.35 means 35 <Term id="hundredth">hundredths</Term>. You also know equivalent fractions and how to write them in their simplest form.
+
+Look at the <Beat n={1}>75 shaded squares</Beat> out of 100. Each square is one hundredth, so the <Term id="decimal">decimal</Term> 0.75 = <Frac n={75} d={100} />. A common mistake is writing <Frac n={75} d={10} />, which counts tenths instead of hundredths. Use the last place to choose the denominator: 10 for tenths, 100 for hundredths or 1000 for thousandths.
+
+Now look at the <Beat n={2}>four equal blocks</Beat>. Each contains 25 squares, and three blocks are shaded. Divide both 75 and 100 by 25: <Frac n={75} d={100} /> = <Frac n={3} d={4} />. The shaded amount stays the same. Leaving <Frac n={75} d={100} /> is one step short when you are asked for simplest form, because both numbers still share a factor of 25.
+
+To go the other way, compare the <Beat n={3}>fifths and tenths</Beat> on the bars. Each fifth splits into two <Term id="tenth">tenths</Term>, so multiply both numbers by 2: <Frac n={2} d={5} /> = <Frac n={4} d={10} /> = 0.4. Writing <Frac n={2} d={5} /> as 0.25 is a mistake: copying the digits does not preserve the shaded amount. First make an equivalent fraction in tenths or hundredths.
+
+Compare the <Beat n={4}>third and three tenths</Beat> of equal bars. The third reaches further. Thinking 0.3 equals <Frac n={1} d={3} /> is another mistake: 0.3 means three of ten equal parts, while a third means one of three equal parts. Three groups of 0.3 make only 0.9; three thirds make a whole. So 0.3 &lt; <Frac n={1} d={3} />.
+
+Finally, look at the <Beat n={5}>two wholes and 75 hundredths</Beat>. Keep the two wholes before the <Term id="decimal-point">decimal point</Term>. Rename the fraction part using <Frac n={3} d={4} /> = <Frac n={75} d={100} /> = 0.75, so <Frac w={2} n={3} d={4} /> = 2.75.
+
+When you are ready, <Task id="decimals-and-fractions">try one question</Task> on changing between decimals and fractions.
+
+</Lang>
+
+<Lang zh>
+
+小数和分数是同一个量的两种写法。这一章学怎样从一种换成另一种。
+
+先看<Beat n={1}>0.75</Beat>。它的最后一位在百分位，表示 75 个百分之一，所以 0.75 = <Frac n={75} d={100} />。分母由最后一位决定：最后一位在十分位，分母是 10；在百分位，分母是 100；在千分位，分母是 1000。写成 <Frac n={75} d={10} /> 就不对了，那是 7.5。
+
+<Frac n={75} d={100} /> 还能化简。把百格<Beat n={2}>平均分成 4 块</Beat>，每块 25 格。涂了的 75 格正好是其中 3 块，所以 <Frac n={75} d={100} /> = <Frac n={3} d={4} />。分子分母同时除以 25，得到最简分数。
+
+反过来，分数怎么化成小数？看<Beat n={3}><Frac n={2} d={5} /></Beat>。五分之一不是一个数位，不能直接写。先把它化成十分之几：<Frac n={2} d={5} /> = <Frac n={4} d={10} />，再写成 0.4。常见的错误是把分子分母的数字直接写进小数，写成 0.25 或 0.2。分母是 2、4、5、20、25、50 这样的数时，先化成分母是 10 或 100 的等值分数就行了。
+
+<Beat n={4}>0.3 和 <Frac n={1} d={3} /></Beat> 也常被当成一样的。把它们叠在同一个整体上看：0.3 是平均分成 10 份取 3 份，<Frac n={1} d={3} /> 是平均分成 3 份取 1 份，<Frac n={1} d={3} /> 长一点。两个式子里都有 3，可是 3 的意思完全不同。
+
+<Beat n={5}>带分数</Beat>也一样：整数部分照写在小数点前面，分数部分化成小数。<Frac w={2} n={3} d={4} /> = 2 + <Frac n={75} d={100} /> = 2.75。
+
+准备好了，就<Task id="decimals-and-fractions">做一道小题</Task>：把小数化成最简分数，或者把分数化成小数。
+
+</Lang>

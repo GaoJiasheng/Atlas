@@ -68,6 +68,11 @@ describe('topicStats', () => {
       { n: 54, key: 'index.stats.beats' },
       { n: 8, key: 'index.stats.questions' },
     ]);
+    expect(topicStats('math-scene', loadData('decimals'), 17)).toEqual([
+      { n: 15, key: 'index.stats.steps' },
+      { n: 69, key: 'index.stats.beats' },
+      { n: 8, key: 'index.stats.questions' },
+    ]);
   });
 
   it('drops zero counts and tolerates missing files', () => {

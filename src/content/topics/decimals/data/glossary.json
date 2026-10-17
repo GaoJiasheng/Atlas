@@ -1,0 +1,148 @@
+{
+  "terms": [
+    {
+      "id": "decimal",
+      "term": { "en": "decimal", "zh": "小数" },
+      "definition": {
+        "en": "A number written with a decimal point. The digits after the point are tenths, hundredths and thousandths: 0.35, 2.4.",
+        "zh": "用小数点写的数。小数点后面依次是十分之几、百分之几、千分之几，例如 0.35、2.4。"
+      },
+      "see": ["decimal-point", "tenth", "hundredth"]
+    },
+    {
+      "id": "decimal-point",
+      "term": { "en": "decimal point", "zh": "小数点" },
+      "definition": {
+        "en": "The dot written after the ones place. It separates the whole number part from the part less than 1: the point in 2.35.",
+        "zh": "写在个位后面的点，把整数部分和不到 1 的部分分开，例如 2.35 里的点。"
+      },
+      "see": ["decimal", "place-value"]
+    },
+    {
+      "id": "tenth",
+      "term": { "en": "tenth, tenths place", "zh": "十分之一、十分位" },
+      "definition": {
+        "en": "One of 10 equal parts of a whole, written 0.1. The first place after the point is the tenths place: 0.3 = {3/10}.",
+        "zh": "把一个整体平均分成 10 份，其中的 1 份，写作 0.1。小数点后第一位是十分位：0.3 = {3/10}。"
+      },
+      "see": ["hundredth", "decimal"]
+    },
+    {
+      "id": "hundredth",
+      "term": { "en": "hundredth, hundredths place", "zh": "百分之一、百分位" },
+      "definition": {
+        "en": "One of 100 equal parts of a whole, written 0.01. The second place after the point is the hundredths place: 0.07 = {7/100}.",
+        "zh": "把一个整体平均分成 100 份，其中的 1 份，写作 0.01。小数点后第二位是百分位：0.07 = {7/100}。"
+      },
+      "see": ["tenth", "thousandth"]
+    },
+    {
+      "id": "thousandth",
+      "term": { "en": "thousandth, thousandths place", "zh": "千分之一、千分位" },
+      "definition": {
+        "en": "One of 1000 equal parts of a whole, written 0.001: a tenth of a hundredth. The third place after the point: the 5 in 0.235.",
+        "zh": "把一个整体平均分成 1000 份，其中的 1 份，写作 0.001，是百分之一的十分之一。小数点后第三位是千分位，例如 0.235 里的 5。"
+      },
+      "see": ["hundredth"]
+    },
+    {
+      "id": "place-value",
+      "term": { "en": "place value", "zh": "位值" },
+      "definition": {
+        "en": "What a digit is worth because of the place it is in. In 4.035 the 3 is in the hundredths place, so it is worth 0.03.",
+        "zh": "一个数字在哪一位，就表示多少。4.035 里的 3 在百分位，表示 0.03。"
+      },
+      "see": ["place-value-chart"]
+    },
+    {
+      "id": "place-value-chart",
+      "term": { "en": "place value chart", "zh": "位值表" },
+      "definition": {
+        "en": "A chart with one column for each place: tens, ones, then tenths, hundredths and thousandths to the right of the point.",
+        "zh": "每一位占一列的表：十位、个位，小数点右边接着十分位、百分位、千分位（中国大陆课本叫“数位顺序表”）。"
+      },
+      "see": ["place-value", "decimal-point"]
+    },
+    {
+      "id": "decimal-places",
+      "term": { "en": "decimal places", "zh": "小数位数（一位小数、两位小数……）" },
+      "definition": {
+        "en": "How many digits come after the point. 2.35 has 2 decimal places; \"1 decimal place\" is also written 1 d.p.",
+        "zh": "小数点后面有几位数字。2.35 是两位小数；“保留一位小数”就是留到十分位。"
+      },
+      "see": ["round-off"]
+    },
+    {
+      "id": "trailing-zero",
+      "term": { "en": "zeros at the end", "zh": "末尾的 0" },
+      "definition": {
+        "en": "Writing or leaving out zeros at the end of a decimal does not change it: 0.5 = 0.50 = 0.500.",
+        "zh": "在小数末尾添上 0 或去掉 0，大小不变：0.5 = 0.50 = 0.500（中国大陆课本叫“小数的基本性质”）。"
+      },
+      "see": ["decimal"]
+    },
+    {
+      "id": "round-off",
+      "term": { "en": "round off, rounding", "zh": "四舍五入" },
+      "definition": {
+        "en": "Finding a number close to another with fewer places: look only at the digit after the place you keep. 5 or more rounds up, less than 5 keeps the digit. 2.96 rounded to 1 decimal place is 3.0.",
+        "zh": "取一个近似值：只看要保留那一位的下一位，满 5 进一，不满 5 舍去。2.96 四舍五入到一位小数是 3.0。"
+      },
+      "see": ["approximately", "decimal-places"]
+    },
+    {
+      "id": "approximately",
+      "term": { "en": "is approximately, ≈", "zh": "约等于、近似值" },
+      "definition": {
+        "en": "≈ means \"is about\". 7 ÷ 3 ≈ 2.33, rounded to 2 decimal places.",
+        "zh": "≈ 表示“大约等于”。7 ÷ 3 ≈ 2.33（四舍五入到两位小数）。"
+      },
+      "see": ["round-off"]
+    },
+    {
+      "id": "dollars-and-cents",
+      "term": { "en": "dollars and cents", "zh": "元和分" },
+      "definition": {
+        "en": "100 cents make 1 dollar, so 10 cents is a tenth of a dollar and 1 cent a hundredth. $2.35 is 2 dollars 35 cents.",
+        "zh": "100 分是 1 元，所以 10 分是 1 元的十分之一，1 分是 1 元的百分之一。$2.35 是 2 元 35 分。"
+      },
+      "see": ["decimal"]
+    },
+    {
+      "id": "regroup",
+      "term": { "en": "regroup (also called trading)", "zh": "换（满十进一、退一作十）" },
+      "definition": {
+        "en": "Trading 10 of one place for 1 of the place to its left, or 1 for 10 of the place to its right. 13 hundredths is 1 tenth and 3 hundredths; the number stays the same.",
+        "zh": "把 10 个某一位的单位换成左边一位的 1 个，或者把 1 个换成右边一位的 10 个。13 个百分之一就是 1 个十分之一和 3 个百分之一，大小不变。"
+      },
+      "see": ["place-value"]
+    },
+    {
+      "id": "quotient",
+      "term": { "en": "quotient", "zh": "商" },
+      "definition": {
+        "en": "The answer to a division. In 8.4 ÷ 4 = 2.1, the quotient is 2.1.",
+        "zh": "除法的结果。8.4 ÷ 4 = 2.1 里，商是 2.1。"
+      },
+      "see": ["remainder"]
+    },
+    {
+      "id": "remainder",
+      "term": { "en": "remainder", "zh": "余数" },
+      "definition": {
+        "en": "What is left over after sharing whole numbers. In 7 ÷ 4 = 1 r 3 the remainder is 3; with decimals you can trade it and keep sharing: 7 ÷ 4 = 1.75.",
+        "zh": "整数分完以后剩下的数。7 ÷ 4 = 1 r 3，余数是 3；用小数可以把它换开接着分：7 ÷ 4 = 1.75。"
+      },
+      "see": ["quotient"]
+    },
+    {
+      "id": "compound-unit",
+      "term": { "en": "compound units", "zh": "复合单位（复名数）" },
+      "definition": {
+        "en": "A measurement written with two units, such as 2 km 45 m. In one unit it is 2045 m, or 2.045 km.",
+        "zh": "用两个单位写的量，例如 2 km 45 m。只用一个单位写，就是 2045 m 或 2.045 km。"
+      },
+      "see": ["decimal"]
+    }
+  ]
+}
