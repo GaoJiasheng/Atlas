@@ -1,0 +1,51 @@
+---
+id: remainders
+order: 8
+title: { en: "Some left over", zh: "有余数的除法" }
+state:
+  summary: { en: "What cannot make another full group is the remainder, always less than the divisor; the question decides what to do with it.", zh: "不够再分一组的就是余数，余数总比除数小；余数怎么处理，看题目问什么。" }
+---
+
+<Lang en>
+
+In step 05 every division came out exactly: the things filled the groups with nothing left. Often there are a few left over that cannot make another full group.
+
+<Figure src="figures/multiplication-division-curry-puff-boxes" alt={{ en: "Pencil drawing of four small cardboard boxes on a table: three closed, one open with four curry puffs inside, and two loose curry puffs on a sheet of paper in front.", zh: "桌上四个小纸盒的铅笔画：三个盖着，一个打开，里面装着 4 个咖喱角；前面一张纸上放着 2 个没装进盒子的咖喱角。" }} caption={{ en: "Four boxes of 4 are packed and 2 curry puffs are left over: 18 ÷ 4 = 4 r 2. An illustration made for this lesson.", zh: "装好 4 盒、每盒 4 个，还剩 2 个咖喱角：18 ÷ 4 = 4 r 2。为本课画的示意图。" }} />
+
+Look at the <Beat n={1}>14 curry puffs to be packed</Beat> in boxes of 4. How many boxes can you fill? That is 14 ÷ 4 = ?.
+
+Fill the boxes and you get <Beat n={2}>3 full boxes and 2 left over</Beat>. The 3 boxes hold 12. The other 2 are not enough for another box of 4. The amount left over is the <Term id="remainder">remainder</Term>. Write 14 ÷ 4 = 3 r 2 and read it "14 divided by 4 is 3, remainder 2". The 3 is the <Term id="quotient">quotient</Term>.
+
+Now imagine you stopped at <Beat n={3}>2 boxes with 6 left over</Beat>. Inside those 6 there is still a full box of 4, drawn with a dashed line. When the leftovers can fill another group, you have not finished. So the remainder is always less than the <Term id="dividend-divisor">divisor</Term>, the number in each group. Here it must be less than 4.
+
+To check, <Beat n={4}>line the boxes up as rows</Beat>: 3 rows of 4 is 12, and the 2 left over make 14. Quotient × divisor + remainder gives back the number you started with: 3 × 4 + 2 = 14.
+
+The last beat is a different story: <Beat n={5}>14 children, 4 in each car</Beat>. The division is still 14 ÷ 4 = 3 r 2. But the 2 children left over cannot stay behind, so you need 4 cars. If the question asked how many full boxes you can pack, the answer would be 3. Read the question before you decide what to do with the remainder.
+
+So there are three mistakes to avoid: leaving a remainder big enough for another group, leaving the remainder out of the answer, and forgetting what the story needs.
+
+When you are ready, <Task id="remainders">try one question</Task> on a division with something left over.
+
+</Lang>
+
+<Lang zh>
+
+第 05 步里的除法都正好分完，一个也不剩。可是很多时候，分到最后会剩下几个，不够再分一组。
+
+<Figure src="figures/multiplication-division-curry-puff-boxes" alt={{ en: "Pencil drawing of four small cardboard boxes on a table: three closed, one open with four curry puffs inside, and two loose curry puffs on a sheet of paper in front.", zh: "桌上四个小纸盒的铅笔画：三个盖着，一个打开，里面装着 4 个咖喱角；前面一张纸上放着 2 个没装进盒子的咖喱角。" }} caption={{ en: "Four boxes of 4 are packed and 2 curry puffs are left over: 18 ÷ 4 = 4 r 2. An illustration made for this lesson.", zh: "装好 4 盒、每盒 4 个，还剩 2 个咖喱角：18 ÷ 4 = 4 r 2。为本课画的示意图。" }} />
+
+先看<Beat n={1}>14 个咖喱角</Beat>，每 4 个装一盒。能装满几盒？这就是 14 ÷ 4 = ?。
+
+一盒一盒地装，结果是<Beat n={2}>装满 3 盒，还剩 2 个</Beat>。3 盒装了 12 个，剩下的 2 个不够再装一盒。分剩下的数叫<Term id="remainder">余数</Term>。写作 14 ÷ 4 = 3 r 2，读作"14 除以 4 等于 3 余 2"。这里的 3 是<Term id="quotient">商</Term>。
+
+假如只装了<Beat n={3}>2 盒，剩下 6 个</Beat>，会怎样？这 6 个里面还能装满一盒，图上用虚线圈了出来。剩下的还够再分一组，就说明还没分完。所以余数一定比<Term id="dividend-divisor">除数</Term>小，这里除数是每盒的 4 个，余数只能比 4 小。
+
+想验算，就<Beat n={4}>把盒子排成几行</Beat>：3 行、每行 4 个是 12 个，加上剩下的 2 个正好是 14 个。商 × 除数 + 余数，就回到原来的数：3 × 4 + 2 = 14。
+
+最后一拍换了一个故事：<Beat n={5}>14 个小朋友坐车，每辆坐 4 人</Beat>。算式还是 14 ÷ 4 = 3 r 2，可是剩下的 2 个小朋友不能留在原地，还要再来一辆车，所以一共要 4 辆。如果题目问的是"能装满几盒"，答案就是 3。余数要不要再算一组，先看清题目问什么。
+
+总结起来，要避开三个错误：余数大到还能再分一组；答案里漏了余数；忘了题目里的故事需要什么。
+
+准备好了，就<Task id="remainders">做一道小题</Task>：做一道分不完、有余数的除法。
+
+</Lang>
