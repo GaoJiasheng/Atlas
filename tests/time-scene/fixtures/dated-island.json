@@ -1,0 +1,19 @@
+{
+  "type": "Topology",
+  "arcs": [
+    [[103.6, 1.2], [104.1, 1.2], [104.1, 1.5], [103.6, 1.5], [103.6, 1.2]],
+    [[103.7, 1.25], [103.9, 1.25], [103.9, 1.4], [103.7, 1.4], [103.7, 1.25]],
+    [[103.7, 1.25], [104.0, 1.25], [104.0, 1.42], [103.7, 1.42], [103.7, 1.25]]
+  ],
+  "objects": {
+    "dated-island": {
+      "type": "GeometryCollection",
+      "geometries": [
+        { "type": "Polygon", "arcs": [[0]], "properties": { "kind": "mask" } },
+        { "type": "Polygon", "arcs": [[1]], "properties": { "kind": "land", "id": "early", "to": "1900-01-01", "src": ["G1"] } },
+        { "type": "Polygon", "arcs": [[2]], "properties": { "kind": "land", "id": "late", "from": "1900-01-01", "src": ["G2"] } },
+        { "type": "LineString", "arcs": [2], "properties": { "kind": "coast-today" } }
+      ]
+    }
+  }
+}

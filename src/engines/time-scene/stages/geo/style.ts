@@ -16,6 +16,7 @@ import type { ThemeTokens } from '../../../../theme/theme';
 import type { RegionBasemap } from '../../../../content/schema/topic';
 import type { LngLat } from '../../lib/geo';
 import { regionFrame } from '../../lib/region';
+import { localLandFilter } from '../../lib/localLand';
 
 /* ------------------------------------------------------------------ */
 /* Ids and constants                                                   */
@@ -104,23 +105,43 @@ export function hiResLayers(tk: ThemeTokens): LayerSpecification[] {
  * from URA planning areas, scripts/geo/lib/local-land.ts): drawn above the
  * 1:10m land from zoom 9.4, fully at 9.6. Its `mask` geometry (the coarse
  * polygons it replaces, buffered) fades in in the water colour, its `land`
- * is filled and stroked as the coast. Fetched once the map has loaded, only
- * for topics that set it; the map may then zoom to `basemap.maxZoom`.
+ * is filled and stroked as the coast; dated land (lib/localLand.ts) is
+ * re-filtered by the controller to the one era at the playhead. An optional
+ * `coast-today` line is today's coastline as a dashed ink reference (it
+ * follows the names switch, N). Fetched once the map has loaded, only for
+ * topics that set it; the map may then zoom to `basemap.maxZoom`.
  */
-export const LOCAL = { src: 'ts-land-local', mask: 'ts-land-local-mask', fill: 'ts-land-local-fill', edge: 'ts-land-local-edge' } as const;
+export const LOCAL = { src: 'ts-land-local', mask: 'ts-land-local-mask', fill: 'ts-land-local-fill', edge: 'ts-land-local-edge', today: 'ts-land-local-today' } as const;
 export const LOCAL_MIN_ZOOM = 9.4;
 /** A short fade: in between, two coastlines at half strength read as a ghosted double edge. */
 export const LOCAL_FADE = 0.2;
 /** Default map zoom ceiling (world to one island); `basemap.maxZoom` raises it. */
 export const MAX_ZOOM = 10;
 
+/** Today's coastline over a dated island coast (`kind: coast-today`): ink at this opacity, 0.8 px, dash [2, 2]. */
+export const COAST_TODAY = { opacity: 0.35, width: 0.8, dash: [2, 2] } as const;
+
 export function localLandLayers(tk: ThemeTokens): LayerSpecification[] {
   const fade: ExpressionSpecification = ['interpolate', ['linear'], ['zoom'], LOCAL_MIN_ZOOM, 0, LOCAL_MIN_ZOOM + LOCAL_FADE, 1];
   const kind = (k: string): FilterSpecification => ['==', ['get', 'kind'], k];
   return [
     { id: LOCAL.mask, type: 'fill', source: LOCAL.src, minzoom: LOCAL_MIN_ZOOM, filter: kind('mask'), paint: { 'fill-color': tk.water || '#dde2df', 'fill-opacity': fade, 'fill-antialias': false } },
-    { id: LOCAL.fill, type: 'fill', source: LOCAL.src, minzoom: LOCAL_MIN_ZOOM, filter: kind('land'), paint: { 'fill-color': tk.land || '#e1dbcc', 'fill-opacity': fade, 'fill-antialias': true } },
-    { id: LOCAL.edge, type: 'line', source: LOCAL.src, minzoom: LOCAL_MIN_ZOOM, filter: kind('land'), paint: { 'line-color': tk['land-edge'] || 'rgba(42, 40, 36, 0.3)', 'line-width': 1.2, 'line-opacity': fade } },
+    { id: LOCAL.fill, type: 'fill', source: LOCAL.src, minzoom: LOCAL_MIN_ZOOM, filter: localLandFilter(null), paint: { 'fill-color': tk.land || '#e1dbcc', 'fill-opacity': fade, 'fill-antialias': true } },
+    { id: LOCAL.edge, type: 'line', source: LOCAL.src, minzoom: LOCAL_MIN_ZOOM, filter: localLandFilter(null), paint: { 'line-color': tk['land-edge'] || 'rgba(42, 40, 36, 0.3)', 'line-width': 1.2, 'line-opacity': fade } },
+    {
+      id: LOCAL.today,
+      type: 'line',
+      source: LOCAL.src,
+      minzoom: LOCAL_MIN_ZOOM,
+      filter: kind('coast-today'),
+      layout: { 'line-join': 'round' },
+      paint: {
+        'line-color': tk.ink || '#2a2824',
+        'line-width': COAST_TODAY.width,
+        'line-opacity': ['interpolate', ['linear'], ['zoom'], LOCAL_MIN_ZOOM, 0, LOCAL_MIN_ZOOM + LOCAL_FADE, COAST_TODAY.opacity],
+        'line-dasharray': [...COAST_TODAY.dash],
+      },
+    },
   ];
 }
 

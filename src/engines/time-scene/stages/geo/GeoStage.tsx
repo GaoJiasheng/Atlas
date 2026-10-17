@@ -21,9 +21,11 @@ export interface GeoStageProps {
   onSelectEvent(id: string): void;
   /** The controller once the map chunk has loaded (null on unmount). */
   onController(controller: GeoController | null): void;
+  /** The island-scale land has loaded (`basemap.local`): whether it has today's coastline. */
+  onLocalLand?(info: { coastToday: boolean }): void;
 }
 
-export function GeoStage({ store, playhead, model, locale, onSelectEvent, onController }: GeoStageProps) {
+export function GeoStage({ store, playhead, model, locale, onSelectEvent, onController, onLocalLand }: GeoStageProps) {
   const t = useT();
   const { slots, topic } = useSceneContext();
   const leadersSvg = slots.leaders;
@@ -39,6 +41,8 @@ export function GeoStage({ store, playhead, model, locale, onSelectEvent, onCont
   selectRef.current = onSelectEvent;
   const controllerCb = useRef(onController);
   controllerCb.current = onController;
+  const localLandCb = useRef(onLocalLand);
+  localLandCb.current = onLocalLand;
   const localeRef = useRef(locale);
   localeRef.current = locale;
   const svgRef = useRef<SVGSVGElement | null>(null);
@@ -68,6 +72,7 @@ export function GeoStage({ store, playhead, model, locale, onSelectEvent, onCont
           basemap: basemapRef.current,
           strings: stringsRef.current,
           onSelectEvent: (id) => selectRef.current(id),
+          onLocalLand: (info) => localLandCb.current?.(info),
         });
         controller.setLeadersSvg(svgRef.current);
         controllerRef.current = controller;

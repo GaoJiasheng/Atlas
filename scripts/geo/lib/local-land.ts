@@ -18,17 +18,32 @@
  *      coarse polygon, so the old coastline disappears under the water colour
  *      without hiding the neighbours' land (Johor, the Riau islands);
  *   3. write one TopoJSON object `<id>` with geometries `{ kind: "mask" }` and
- *      `{ kind: "land" }` (the engine strokes the land's outline as the coast).
+ *      `{ kind: "land" }` (the engine strokes the land's outline as the coast);
+ *      with `coastToday`, also `{ kind: "coast-today" }`, today's coastline as
+ *      lines (the engine's dashed reference).
+ *
+ * The island coast by date (`eras`, docs/28 §3.3): instead of one land, one
+ * whole coast per era, `{ kind: "land", id, from?, to?, src? }` (`[from, to)`;
+ * the eras must tile time once, checked before anything is built). Each era
+ * starts from today's unsimplified land (step 1 before the DP), is clipped to
+ * its traced `outline`, has its `minus` (land reclaimed later) erased and its
+ * `plus` (land gone since) added; then the mask, every era and today's
+ * coastline are simplified as one dataset so the shoreline the eras share is
+ * one arc. Every era is also decoded back to `work/coast-<era>.geojson`
+ * (exactly what was published, for compose's `geojson` / `intersect`), and the
+ * area of each era against today's land is printed for SOURCES-GEO.md.
  *
  * Prints the size (budget `budgetKB`), ring sanity (`rings: N, zero-area 0,
  * self-crossing 0`) and the deviation of the original boundary vertices from
  * the written coast (p50 / p95 / max, m) for SOURCES-GEO.md.
  */
-import { statSync, writeFileSync } from 'node:fs';
+import { existsSync, statSync, writeFileSync } from 'node:fs';
 import { parseArgs } from 'node:util';
 import type { Feature, FeatureCollection, Polygon, Position } from 'geojson';
 import { feature as topoFeature } from 'topojson-client';
-import { areaFeatures, log, mapshaper, mapshaperApi, readJson, toFc, warn } from './common';
+import { areaFeatures, log, mapshaper, mapshaperApi, readJson, toFc, warn, writeJson } from './common';
+import { coastTodayLines, eraInputPath, eraProperties, eraRecipeIssues, foldTopology } from './local-eras';
+import type { LocalLandEra } from './manifest';
 import { ringIssues } from './rings';
 import { openTopic, repoPath } from './topic';
 
@@ -74,14 +89,10 @@ const overlaps = (a: readonly number[], b: readonly number[]) => a[0]! <= b[2]! 
 /** km per degree of latitude; longitude scaled by cos(lat). */
 const KM_LAT = 111.195;
 
-/** Distance (m) from each sampled original vertex to the nearest written coast segment. */
-function deviation(original: FeatureCollection, written: FeatureCollection): { p50: number; p95: number; max: number; n: number } {
+/** Distance (m) from each sampled original vertex to the nearest segment of the written coast (`written`: its rings or lines). */
+function deviation(original: FeatureCollection, written: readonly Position[][]): { p50: number; p95: number; max: number; n: number } {
   const segs: number[][] = [];
-  for (const f of areaFeatures(written)) {
-    for (const poly of f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates) {
-      for (const ring of poly) for (let i = 0; i + 1 < ring.length; i++) segs.push([ring[i]![0]!, ring[i]![1]!, ring[i + 1]![0]!, ring[i + 1]![1]!]);
-    }
-  }
+  for (const ring of written) for (let i = 0; i + 1 < ring.length; i++) segs.push([ring[i]![0]!, ring[i]![1]!, ring[i + 1]![0]!, ring[i + 1]![1]!]);
   const cell = 0.01;
   const grid = new Map<string, number[][]>();
   for (const s of segs) {
@@ -174,19 +185,8 @@ async function cutWater(land: FeatureCollection, water: NonNullable<NonNullable<
   return mapshaper('-i a.json b.json combine-files -erase target=a b', { a: land, b: holes });
 }
 
-async function main(): Promise<void> {
-  const ds = topic.sources.datasets[spec!.dataset];
-  if (!ds) throw new Error(`pipeline.localLand.dataset: unknown dataset ${spec!.dataset}`);
-  const source = readJson<FeatureCollection>(topic.rawFile(ds.file));
-  log(`${spec!.id}: ${source.features.length} polygons of ${ds.file} [${ds.ref}] -> one land`);
-  // Original outline (dissolved, unsimplified) for the deviation report.
-  let outline = await mapshaper('-i a.json -dissolve2', { a: toFc(areaFeatures(source).map((f) => ({ ...f, properties: {} }))) });
-  if (spec!.water) outline = await cutWater(outline, spec!.water);
-  const land = await mapshaper(
-    `-i a.json -simplify dp interval=${spec!.simplifyM} keep-shapes -filter-islands min-area=${spec!.minIslandKm2}km2 -clean`,
-    { a: outline },
-  );
-  // Mask: the coarse polygons this land replaces.
+/** The coarse polygons the local land replaces (inside `replaceBox`, touching `land`), buffered, minus their neighbours. */
+async function maskFor(land: FeatureCollection): Promise<FeatureCollection> {
   const coarse = readLand(repoPath(spec!.replaces));
   const landBox = bboxOf(areaFeatures(land).flatMap((f) => (f.geometry.type === 'Polygon' ? f.geometry.coordinates[0]! : f.geometry.coordinates.flatMap((p) => p[0]!))));
   const replaced: Feature<Polygon>[] = [];
@@ -202,9 +202,115 @@ async function main(): Promise<void> {
   const buffered = await mapshaper(`-i a.json -buffer radius=${spec!.maskBufferM}m -dissolve2`, { a: toFc(replaced) });
   const mask = others.length ? await mapshaper('-i a.json b.json combine-files -erase target=a b', { a: buffered, b: toFc(others) }) : buffered;
   log(`  mask: ${replaced.length} coarse polygon(s) of ${spec!.replaces} replaced (buffer ${spec!.maskBufferM} m, minus ${others.length} neighbouring polygon(s))`);
+  return mask;
+}
+
+/** Polygons of an era input (GeoJSON, or TopoJSON with every object decoded), properties dropped. */
+function readPolygons(path: string): FeatureCollection {
+  const file = eraInputPath(topic.dir, path);
+  if (!existsSync(file)) throw new Error(`pipeline.localLand.eras: ${path} not found (${file}); trace it from a source map first`);
+  const data = readJson<FeatureCollection | Topology>(file);
+  const all = data.type === 'Topology' ? Object.values(data.objects).flatMap((o) => (topoFeature(data, o as TopoObject) as unknown as FeatureCollection).features) : data.features;
+  const polys = areaFeatures(toFc(all)).map((f) => ({ ...f, properties: {} }));
+  if (!polys.length) throw new Error(`pipeline.localLand.eras: ${path} has no polygons`);
+  return toFc(polys);
+}
+
+/** TopoJSON grid of the written file (cells across its extent, as the undated land), and the snap of the clean after quantising (about a grid cell). */
+const QUANTIZATION = 100000;
+const SNAP_DEG = 0.00001;
+
+const kmOf = (fc: FeatureCollection) => partsOf(fc).reduce((sum, p) => sum + polyKm2(p), 0);
+
+/**
+ * The island coast by date (`eras`): each era from today's unsimplified land
+ * (`outline`, water cut out), clipped / erased / added per its recipe; all
+ * eras, the mask and (with `coastToday`) today's coastline simplified as one
+ * dataset, so a shoreline two eras share is one arc, simplified once, stored
+ * once; written as one object `<id>`. Each era is also decoded back to
+ * `work/coast-<era>.geojson` (exactly the published coast, for compose).
+ */
+async function writeEras(eras: LocalLandEra[], outline: FeatureCollection, land: FeatureCollection, mask: FeatureCollection): Promise<void> {
+  const issues = eraRecipeIssues(eras);
+  if (issues.length) throw new Error(`pipeline.localLand.eras: ${issues.join('; ')}`);
+  const layers: Record<string, FeatureCollection> = { 'mask.json': toFc(areaFeatures(mask).map((f) => ({ ...f, properties: { kind: 'mask' } }))) };
+  for (const [i, era] of eras.entries()) {
+    let a = outline;
+    if (era.outline) a = await mapshaper('-i a.json b.json combine-files -clip target=a b', { a, b: readPolygons(era.outline) });
+    for (const p of era.minus ?? []) a = await mapshaper('-i a.json b.json combine-files -erase target=a b', { a, b: readPolygons(p) });
+    for (const p of era.plus ?? []) a = await mapshaper('-i a.json b.json combine-files -merge-layers force -dissolve2', { a, b: readPolygons(p) });
+    a = await mapshaper(`-i a.json -dissolve2 -filter-islands min-area=${spec!.minIslandKm2}km2`, { a: toFc(areaFeatures(a).map((f) => ({ ...f, properties: {} }))) });
+    const parts = partsOf(a);
+    if (!parts.length) throw new Error(`pipeline.localLand.eras: ${era.id} has no land left`);
+    layers[`era-${i}.json`] = toFc([{ type: 'Feature', properties: eraProperties(era), geometry: { type: 'MultiPolygon', coordinates: parts } }]);
+  }
+  if (spec!.coastToday) {
+    layers['today.json'] = toFc([{ type: 'Feature', properties: { kind: 'coast-today' }, geometry: { type: 'MultiLineString', coordinates: coastTodayLines(partsOf(outline)) } }]);
+  }
+  const names = Object.keys(layers);
+  const ms = mapshaperApi();
+  const first = await ms.applyCommands(
+    `-i ${names.join(' ')} combine-files -simplify dp interval=${spec!.simplifyM} keep-shapes target=* -clean target=* -o out.json format=topojson quantization=${QUANTIZATION} target=*`,
+    layers,
+  );
+  const quantised = first['out.json'] ?? Object.values(first)[0];
+  if (quantised === undefined) throw new Error('mapshaper wrote no topology');
+  // Quantisation can fold a DP vertex back over its neighbour (a few-metre spike that crosses the next segment):
+  // clean the quantised topology once more, snapping within one grid cell, and export on the same grid.
+  const second = await ms.applyCommands(`-i topo.json -clean snap-interval=${SNAP_DEG} target=* -o out.json format=topojson quantization=${QUANTIZATION} target=*`, {
+    'topo.json': JSON.parse(quantised.toString()) as unknown,
+  });
+  const text = (second['out.json'] ?? Object.values(second)[0])?.toString();
+  if (!text) throw new Error('mapshaper wrote no topology');
+  const topo = foldTopology(JSON.parse(text) as Topology, names.map((n) => n.replace(/\.json$/, '')), spec!.id);
+  const file = repoPath(`public/geo/${spec!.id}.json`);
+  writeFileSync(file, JSON.stringify(topo));
+  const size = statSync(file).size;
+  log(`${file}: ${(size / 1024).toFixed(0)} KB (budget ${spec!.budgetKB} KB), ${eras.length} eras${spec!.coastToday ? ' + coast-today' : ''}, DP ${spec!.simplifyM} m, islands >= ${spec!.minIslandKm2} km²`);
+  if (size > spec!.budgetKB * 1024) warn(`${spec!.id}.json is over its ${spec!.budgetKB} KB budget`);
+  // Decode what was written: per-era areas against today's land, the compose inputs, ring sanity.
+  const decoded = (topoFeature(topo, topo.objects[spec!.id] as TopoObject) as unknown as FeatureCollection).features;
+  const eraFeatures = decoded.filter((f) => f.properties?.kind === 'land');
+  const today = kmOf(land);
+  for (const [i, era] of eras.entries()) {
+    const f = eraFeatures[i];
+    if (!f) throw new Error(`topology lost era ${era.id}`);
+    const km2 = kmOf(toFc([f]));
+    log(`  ${era.id} [${era.from ?? '…'}, ${era.to ?? '…'}): ${km2.toFixed(2)} km², ${(km2 - today).toFixed(2)} km² against today's ${today.toFixed(2)} km²`);
+    writeJson(topic.workFile(`coast-${era.id}.geojson`), toFc([f]));
+  }
+  const rings = ringIssues(areaFeatures(toFc(eraFeatures)).flatMap((f) => (f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates)));
+  log(`rings: ${rings.rings}, zero-area ${rings.zeroArea}, self-crossing ${rings.selfCrossing}`);
+  if (rings.zeroArea || rings.selfCrossing) warn(`${spec!.id}.json has zero-area or self-crossing rings`);
+  log(`  work/coast-<era>.geojson: ${eras.map((e) => e.id).join(', ')} (the decoded published coasts)`);
+  const todayLines = decoded.flatMap((f) => (f.properties?.kind === 'coast-today' && f.geometry.type === 'MultiLineString' ? f.geometry.coordinates : []));
+  if (todayLines.length) {
+    const d = deviation(outline, todayLines);
+    log(`deviation of today's outline vertices from the written coast-today line (m): p50 ${d.p50.toFixed(1)}, p95 ${d.p95.toFixed(1)}, max ${d.max.toFixed(1)} (${d.n} vertices sampled)`);
+  }
+}
+
+async function main(): Promise<void> {
+  const ds = topic.sources.datasets[spec!.dataset];
+  if (!ds) throw new Error(`pipeline.localLand.dataset: unknown dataset ${spec!.dataset}`);
+  const source = readJson<FeatureCollection>(topic.rawFile(ds.file));
+  log(`${spec!.id}: ${source.features.length} polygons of ${ds.file} [${ds.ref}] -> one land`);
+  // Original outline (dissolved, unsimplified) for the deviation report.
+  let outline = await mapshaper('-i a.json -dissolve2', { a: toFc(areaFeatures(source).map((f) => ({ ...f, properties: {} }))) });
+  if (spec!.water) outline = await cutWater(outline, spec!.water);
+  const land = await mapshaper(
+    `-i a.json -simplify dp interval=${spec!.simplifyM} keep-shapes -filter-islands min-area=${spec!.minIslandKm2}km2 -clean`,
+    { a: outline },
+  );
+  const mask = await maskFor(land);
+  if (spec!.eras?.length) {
+    await writeEras(spec!.eras, outline, land, mask);
+    return;
+  }
   const tagged = toFc([
     ...areaFeatures(mask).map((f) => ({ ...f, properties: { kind: 'mask' } })),
     ...areaFeatures(land).map((f) => ({ ...f, properties: { kind: 'land' } })),
+    ...(spec!.coastToday ? [{ type: 'Feature', properties: { kind: 'coast-today' }, geometry: { type: 'MultiLineString', coordinates: coastTodayLines(partsOf(land)) } } as Feature] : []),
   ]);
   const out = await mapshaperApi().applyCommands(`-i layer.json -rename-layers ${spec!.id} -o out.json format=topojson quantization=100000`, { 'layer.json': tagged });
   const text = (out['out.json'] ?? Object.values(out)[0])?.toString();
@@ -219,7 +325,7 @@ async function main(): Promise<void> {
   if (size > spec!.budgetKB * 1024) warn(`${spec!.id}.json is over its ${spec!.budgetKB} KB budget`);
   log(`rings: ${rings.rings}, zero-area ${rings.zeroArea}, self-crossing ${rings.selfCrossing}`);
   if (rings.zeroArea || rings.selfCrossing) warn(`${spec!.id}.json has zero-area or self-crossing rings`);
-  const d = deviation(outline, toFc(decoded));
+  const d = deviation(outline, decoded.flatMap((f) => f.geometry.coordinates));
   log(`deviation of the original outline vertices from the written coast (m): p50 ${d.p50.toFixed(1)}, p95 ${d.p95.toFixed(1)}, max ${d.max.toFixed(1)} (${d.n} vertices sampled)`);
 }
 
