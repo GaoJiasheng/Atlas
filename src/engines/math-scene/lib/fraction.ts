@@ -116,9 +116,10 @@ export function over(f: Frac, d: number): Frac | null {
 }
 
 /** Where the fraction sits on a number line, in intervals from `from` (`intervals` per whole); `null` when it is between ticks. */
-export function valueOnLine(f: Frac, line: { from: number; intervals: number }): number | null {
+export function valueOnLine(f: Frac, line: { from: number; intervals?: number }): number | null {
   const x = toImproper(f);
-  const pos = (x.n * line.intervals) / x.d - line.from * line.intervals;
+  const k = line.intervals ?? 1;
+  const pos = (x.n * k) / x.d - line.from * k;
   return Number.isInteger(pos) ? pos : null;
 }
 

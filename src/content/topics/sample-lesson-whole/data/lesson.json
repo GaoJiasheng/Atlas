@@ -1,0 +1,2605 @@
+{
+  "syllabus": [
+    {
+      "id": "placeholder",
+      "level": "P1",
+      "ref": "Placeholder",
+      "source": "S1",
+      "text": {
+        "en": "Placeholder: no syllabus anchor.",
+        "zh": "占位：没有课纲条目。"
+      }
+    }
+  ],
+  "steps": [
+    {
+      "id": "arrays",
+      "lo": [
+        "placeholder"
+      ],
+      "limits": {
+        "factors": [
+          1,
+          12
+        ],
+        "maxTotal": 60
+      },
+      "beats": [
+        {
+          "model": {
+            "kind": "array",
+            "object": "kueh",
+            "layout": "scatter",
+            "count": 12,
+            "containers": {
+              "kind": "plate",
+              "count": 3
+            }
+          },
+          "caption": {
+            "en": "Placeholder: 12 loose, 3 plates.",
+            "zh": "占位：12 个散放，3 个盘子。"
+          },
+          "equation": "12 ÷ 3 = ?"
+        },
+        {
+          "model": {
+            "kind": "array",
+            "object": "kueh",
+            "layout": "groups",
+            "groups": 3,
+            "size": 4,
+            "container": "plate",
+            "braces": true
+          },
+          "caption": {
+            "en": "Placeholder: dealt round the plates.",
+            "zh": "占位：一轮一个发到盘子里。"
+          },
+          "move": "deal",
+          "equation": "12 ÷ 3 = 4"
+        },
+        {
+          "model": {
+            "kind": "array",
+            "object": "kueh",
+            "layout": "rows",
+            "rows": 3,
+            "cols": 4,
+            "braces": true
+          },
+          "caption": {
+            "en": "Placeholder: the groups lined up as rows.",
+            "zh": "占位：每组排成一行。"
+          },
+          "move": "arrange",
+          "equation": "3 × 4 = 12"
+        },
+        {
+          "model": {
+            "kind": "array",
+            "object": "kueh",
+            "layout": "rows",
+            "rows": 4,
+            "cols": 3,
+            "braces": true
+          },
+          "caption": {
+            "en": "Placeholder: a quarter turn.",
+            "zh": "占位：转四分之一圈。"
+          },
+          "move": "rotate",
+          "equation": "3 × 4 = 4 × 3"
+        },
+        {
+          "model": {
+            "kind": "array",
+            "object": "chopsticks",
+            "layout": "groups",
+            "groups": 6,
+            "size": 2,
+            "container": "ring",
+            "braces": true
+          },
+          "caption": {
+            "en": "Placeholder: jumps of 2 under the pairs.",
+            "zh": "占位：每对筷子下面跳 2。"
+          },
+          "move": "jump",
+          "equation": "6 × 2 = 12",
+          "under": {
+            "kind": "numberline",
+            "scale": "whole",
+            "from": 0,
+            "to": 12,
+            "step": 1,
+            "labels": "all",
+            "jumps": {
+              "size": 2,
+              "count": 6
+            },
+            "counter": true
+          }
+        }
+      ],
+      "keyFacts": [
+        {
+          "en": "Placeholder: equal groups, rows and jumps.",
+          "zh": "占位：相同的几组、行和跳数。"
+        },
+        {
+          "en": "Placeholder: 3 × 4 = 4 × 3.",
+          "zh": "占位：3 × 4 = 4 × 3。"
+        }
+      ],
+      "pool": [
+        {
+          "id": "ar-share-12",
+          "kind": "group",
+          "model": {
+            "kind": "array",
+            "object": "kueh",
+            "layout": "scatter",
+            "count": 12,
+            "containers": {
+              "kind": "plate",
+              "count": 3
+            }
+          },
+          "prompt": {
+            "en": "Placeholder: share 12 on 3 plates.",
+            "zh": "占位：12 个平均放在 3 个盘子里。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "groups-size-swapped",
+                "say": {
+                  "en": "Placeholder feedback for groups-size-swapped.",
+                  "zh": "占位反馈：groups-size-swapped。"
+                },
+                "sample": "4x3"
+              },
+              {
+                "when": "unequal-groups",
+                "say": {
+                  "en": "Placeholder feedback for unequal-groups.",
+                  "zh": "占位反馈：unequal-groups。"
+                },
+                "sample": "4,4,3"
+              }
+            ]
+          },
+          "total": 12,
+          "by": "share",
+          "k": 3
+        },
+        {
+          "id": "ar-pack-14",
+          "kind": "group",
+          "model": {
+            "kind": "array",
+            "object": "curry-puff",
+            "layout": "scatter",
+            "count": 14,
+            "containers": {
+              "kind": "box",
+              "size": 4
+            }
+          },
+          "prompt": {
+            "en": "Placeholder: pack 14 in boxes of 4, then write 14 ÷ 4.",
+            "zh": "占位：每 4 个装一盒，再写 14 ÷ 4。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "groups-size-swapped",
+                "say": {
+                  "en": "Placeholder feedback for groups-size-swapped.",
+                  "zh": "占位反馈：groups-size-swapped。"
+                },
+                "sample": "4x3+2"
+              },
+              {
+                "when": "remainder-too-big",
+                "say": {
+                  "en": "Placeholder feedback for remainder-too-big.",
+                  "zh": "占位反馈：remainder-too-big。"
+                },
+                "sample": "2x4+6"
+              },
+              {
+                "when": "remainder-dropped",
+                "say": {
+                  "en": "Placeholder feedback for remainder-dropped.",
+                  "zh": "占位反馈：remainder-dropped。"
+                },
+                "sample": "=3"
+              }
+            ]
+          },
+          "total": 14,
+          "by": "pack",
+          "k": 4,
+          "then": {
+            "answer": "3 r 2",
+            "form": "remainder",
+            "op": {
+              "kind": "÷",
+              "a": 14,
+              "b": 4
+            }
+          }
+        },
+        {
+          "id": "ar-arrange-3x5",
+          "kind": "arrange",
+          "model": {
+            "kind": "array",
+            "object": "egg",
+            "layout": "scatter",
+            "count": 15
+          },
+          "prompt": {
+            "en": "Placeholder: make 3 rows of 5.",
+            "zh": "占位：排出 3 行，每行 5 个。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "groups-size-swapped",
+                "say": {
+                  "en": "Placeholder feedback for groups-size-swapped.",
+                  "zh": "占位反馈：groups-size-swapped。"
+                },
+                "sample": "5x3"
+              }
+            ]
+          },
+          "rows": 3,
+          "cols": 5
+        },
+        {
+          "id": "ar-skip-5s",
+          "kind": "skip-count",
+          "model": {
+            "kind": "numberline",
+            "scale": "whole",
+            "from": 0,
+            "to": 30,
+            "step": 5,
+            "labels": "tens"
+          },
+          "prompt": {
+            "en": "Placeholder: count 4 jumps of 5.",
+            "zh": "占位：跳 4 次，每次 5。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "skip-count-slip",
+                "say": {
+                  "en": "Placeholder feedback for skip-count-slip.",
+                  "zh": "占位反馈：skip-count-slip。"
+                },
+                "sample": "5,10,15,20,25"
+              }
+            ]
+          },
+          "size": 5,
+          "count": 4
+        },
+        {
+          "id": "ar-split-6x7",
+          "kind": "split-array",
+          "model": {
+            "kind": "array",
+            "object": "dot",
+            "layout": "rows",
+            "rows": 6,
+            "cols": 7
+          },
+          "prompt": {
+            "en": "Placeholder: cut after row 5, then write the parts.",
+            "zh": "占位：在第 5 行后切开，再写出两部分。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "split-slip",
+                "say": {
+                  "en": "Placeholder feedback for split-slip.",
+                  "zh": "占位反馈：split-slip。"
+                },
+                "sample": "=35,7,36"
+              }
+            ]
+          },
+          "rows": 6,
+          "cols": 7,
+          "at": {
+            "rows": [
+              5
+            ]
+          },
+          "then": {
+            "answer": [
+              35,
+              7,
+              42
+            ],
+            "form": "whole",
+            "sentence": "5 × 7 = ?, 1 × 7 = ?, 6 × 7 = ?"
+          }
+        },
+        {
+          "id": "ar-split-7x8",
+          "kind": "split-array",
+          "model": {
+            "kind": "array",
+            "object": "dot",
+            "layout": "rows",
+            "rows": 7,
+            "cols": 8
+          },
+          "prompt": {
+            "en": "Placeholder: cut the array into facts you know.",
+            "zh": "占位：把阵列切成会算的两块。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "split-slip",
+                "say": {
+                  "en": "Placeholder feedback for split-slip.",
+                  "zh": "占位反馈：split-slip。"
+                },
+                "sample": "=40,16,41"
+              }
+            ]
+          },
+          "rows": 7,
+          "cols": 8,
+          "then": {
+            "answer": [
+              40,
+              16,
+              56
+            ],
+            "form": "whole"
+          }
+        },
+        {
+          "id": "ar-input-4x7",
+          "kind": "input",
+          "model": {
+            "kind": "array",
+            "object": "dot",
+            "layout": "rows",
+            "rows": 4,
+            "cols": 7,
+            "braces": true
+          },
+          "prompt": {
+            "en": "Placeholder: how many in all?",
+            "zh": "占位：一共几个？"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "added-not-multiplied",
+                "say": {
+                  "en": "Placeholder feedback for added-not-multiplied.",
+                  "zh": "占位反馈：added-not-multiplied。"
+                },
+                "sample": "11"
+              },
+              {
+                "when": "skip-count-slip",
+                "say": {
+                  "en": "Placeholder feedback for skip-count-slip.",
+                  "zh": "占位反馈：skip-count-slip。"
+                },
+                "sample": "24"
+              }
+            ]
+          },
+          "answer": 28,
+          "form": "whole",
+          "op": {
+            "kind": "×",
+            "a": 4,
+            "b": 7
+          }
+        },
+        {
+          "id": "ar-choose-3x5",
+          "kind": "choose",
+          "model": {
+            "kind": "array",
+            "object": "dot",
+            "layout": "scatter",
+            "count": 15
+          },
+          "prompt": {
+            "en": "Placeholder: which shows 3 groups of 5?",
+            "zh": "占位：哪一幅是 3 组、每组 5 个？"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "groups-size-swapped",
+                "say": {
+                  "en": "Placeholder feedback for groups-size-swapped.",
+                  "zh": "占位反馈：groups-size-swapped。"
+                },
+                "sample": "b"
+              },
+              {
+                "when": "unequal-groups",
+                "say": {
+                  "en": "Placeholder feedback for unequal-groups.",
+                  "zh": "占位反馈：unequal-groups。"
+                },
+                "sample": "c"
+              }
+            ]
+          },
+          "options": [
+            {
+              "id": "a",
+              "correct": true,
+              "model": {
+                "kind": "array",
+                "object": "dot",
+                "layout": "groups",
+                "groups": 3,
+                "size": 5
+              }
+            },
+            {
+              "id": "b",
+              "correct": false,
+              "misconception": "groups-size-swapped",
+              "model": {
+                "kind": "array",
+                "object": "dot",
+                "layout": "groups",
+                "groups": 5,
+                "size": 3
+              }
+            },
+            {
+              "id": "c",
+              "correct": false,
+              "misconception": "unequal-groups",
+              "model": {
+                "kind": "array",
+                "object": "dot",
+                "layout": "groups",
+                "sizes": [
+                  5,
+                  6,
+                  4
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "array-parts",
+      "lo": [
+        "placeholder"
+      ],
+      "limits": {
+        "divisor": [
+          2,
+          9
+        ],
+        "maxQuotient": 10
+      },
+      "beats": [
+        {
+          "model": {
+            "kind": "array",
+            "object": "dot",
+            "layout": "rows",
+            "rows": 6,
+            "cols": 7,
+            "split": {
+              "rows": [
+                5
+              ]
+            },
+            "tones": [
+              "cold",
+              "signal"
+            ],
+            "braces": "rows"
+          },
+          "caption": {
+            "en": "Placeholder: 5 rows you know and one more.",
+            "zh": "占位：会算的 5 行，再多一行。"
+          },
+          "equation": "6 × 7 = 5 × 7 + 1 × 7"
+        },
+        {
+          "model": {
+            "kind": "array",
+            "object": "dot",
+            "layout": "rows",
+            "rows": 10,
+            "cols": 6,
+            "crossed": {
+              "rows": [
+                9
+              ]
+            },
+            "braces": "rows"
+          },
+          "caption": {
+            "en": "Placeholder: one row taken away.",
+            "zh": "占位：拿走一行。"
+          },
+          "move": "cross",
+          "equation": "10 × 6 − 1 × 6 = 54"
+        },
+        {
+          "model": {
+            "kind": "array",
+            "object": "dot",
+            "layout": "rows",
+            "rows": 3,
+            "cols": 5,
+            "cover": {
+              "rows": true
+            },
+            "braces": "cols"
+          },
+          "caption": {
+            "en": "Placeholder: the rows are covered.",
+            "zh": "占位：行数被盖住。"
+          },
+          "move": "cover",
+          "equation": "? × 5 = 15"
+        },
+        {
+          "model": {
+            "kind": "array",
+            "pair": [
+              {
+                "object": "curry-puff",
+                "layout": "groups",
+                "groups": 3,
+                "size": 4,
+                "container": "plate",
+                "label": {
+                  "en": "Share",
+                  "zh": "平均分"
+                }
+              },
+              {
+                "object": "curry-puff",
+                "layout": "groups",
+                "groups": 4,
+                "size": 3,
+                "container": "box",
+                "label": {
+                  "en": "Pack",
+                  "zh": "装盒"
+                }
+              }
+            ]
+          },
+          "caption": {
+            "en": "Placeholder: two ways to divide.",
+            "zh": "占位：除法的两种问法。"
+          },
+          "move": "morph",
+          "equation": "12 ÷ 3 = 4"
+        },
+        {
+          "model": {
+            "kind": "array",
+            "object": "curry-puff",
+            "layout": "groups",
+            "groups": 3,
+            "size": 4,
+            "container": "box",
+            "extra": 2,
+            "another": false
+          },
+          "caption": {
+            "en": "Placeholder: 3 boxes and 2 left.",
+            "zh": "占位：装满 3 盒，剩 2 个。"
+          },
+          "move": "group",
+          "equation": "14 ÷ 4 = 3 r 2"
+        }
+      ],
+      "pool": [
+        {
+          "id": "ap-rem-14",
+          "kind": "input",
+          "model": {
+            "kind": "array",
+            "object": "curry-puff",
+            "layout": "groups",
+            "groups": 3,
+            "size": 4,
+            "container": "box",
+            "extra": 2
+          },
+          "prompt": {
+            "en": "Placeholder: write 14 ÷ 4.",
+            "zh": "占位：写出 14 ÷ 4。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "remainder-too-big",
+                "say": {
+                  "en": "Placeholder feedback for remainder-too-big.",
+                  "zh": "占位反馈：remainder-too-big。"
+                },
+                "sample": "2 r 6"
+              },
+              {
+                "when": "remainder-dropped",
+                "say": {
+                  "en": "Placeholder feedback for remainder-dropped.",
+                  "zh": "占位反馈：remainder-dropped。"
+                },
+                "sample": "3"
+              }
+            ]
+          },
+          "answer": "3 r 2",
+          "form": "remainder",
+          "op": {
+            "kind": "÷",
+            "a": 14,
+            "b": 4
+          }
+        },
+        {
+          "id": "ap-minivans",
+          "kind": "input",
+          "model": {
+            "kind": "array",
+            "object": "seat",
+            "layout": "groups",
+            "groups": 6,
+            "size": 8,
+            "container": "box",
+            "extra": 2
+          },
+          "prompt": {
+            "en": "Placeholder: 50 pupils, 8 in each minivan. How many minivans?",
+            "zh": "占位：50 名学生，每辆小巴坐 8 人，要几辆？"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "remainder-context",
+                "say": {
+                  "en": "Placeholder feedback for remainder-context.",
+                  "zh": "占位反馈：remainder-context。"
+                },
+                "sample": "6"
+              }
+            ]
+          },
+          "answer": 7,
+          "form": "whole",
+          "op": {
+            "kind": "÷",
+            "a": 50,
+            "b": 8,
+            "round": "up"
+          }
+        },
+        {
+          "id": "ap-missing-7",
+          "kind": "input",
+          "model": {
+            "kind": "array",
+            "object": "dot",
+            "layout": "rows",
+            "rows": 7,
+            "cols": 6
+          },
+          "prompt": {
+            "en": "Placeholder: ? × 6 = 42",
+            "zh": "占位：? × 6 = 42"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "operation-swapped",
+                "say": {
+                  "en": "Placeholder feedback for operation-swapped.",
+                  "zh": "占位反馈：operation-swapped。"
+                },
+                "sample": "252"
+              },
+              {
+                "when": "skip-count-slip",
+                "say": {
+                  "en": "Placeholder feedback for skip-count-slip.",
+                  "zh": "占位反馈：skip-count-slip。"
+                },
+                "sample": "8"
+              }
+            ]
+          },
+          "answer": 7,
+          "form": "whole",
+          "op": {
+            "kind": "×",
+            "a": 7,
+            "b": 6,
+            "missing": "a"
+          }
+        },
+        {
+          "id": "ap-div-35",
+          "kind": "input",
+          "model": {
+            "kind": "array",
+            "object": "dot",
+            "layout": "rows",
+            "rows": 7,
+            "cols": 5,
+            "cover": {
+              "rows": true
+            },
+            "braces": "cols"
+          },
+          "prompt": {
+            "en": "Placeholder: 35 in rows of 5. How many rows?",
+            "zh": "占位：35 个，每行 5 个，有几行？"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "operation-swapped",
+                "say": {
+                  "en": "Placeholder feedback for operation-swapped.",
+                  "zh": "占位反馈：operation-swapped。"
+                },
+                "sample": "175"
+              }
+            ]
+          },
+          "answer": 7,
+          "form": "whole",
+          "op": {
+            "kind": "÷",
+            "a": 35,
+            "b": 5
+          }
+        },
+        {
+          "id": "ap-6x8",
+          "kind": "input",
+          "model": {
+            "kind": "array",
+            "object": "dot",
+            "layout": "rows",
+            "rows": 6,
+            "cols": 8,
+            "split": {
+              "rows": [
+                5
+              ]
+            },
+            "braces": "rows"
+          },
+          "prompt": {
+            "en": "Placeholder: 6 × 8 from 5 × 8.",
+            "zh": "占位：用 5 × 8 算 6 × 8。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "split-slip",
+                "say": {
+                  "en": "Placeholder feedback for split-slip.",
+                  "zh": "占位反馈：split-slip。"
+                },
+                "sample": "41"
+              },
+              {
+                "when": "skip-count-slip",
+                "say": {
+                  "en": "Placeholder feedback for skip-count-slip.",
+                  "zh": "占位反馈：skip-count-slip。"
+                },
+                "sample": "40"
+              }
+            ]
+          },
+          "answer": 48,
+          "form": "whole",
+          "op": {
+            "kind": "×",
+            "a": 6,
+            "b": 8,
+            "split": 5
+          }
+        },
+        {
+          "id": "ap-9x6",
+          "kind": "input",
+          "model": {
+            "kind": "array",
+            "object": "dot",
+            "layout": "rows",
+            "rows": 10,
+            "cols": 6,
+            "crossed": {
+              "rows": [
+                9
+              ]
+            },
+            "braces": "rows"
+          },
+          "prompt": {
+            "en": "Placeholder: 9 × 6 from 10 × 6.",
+            "zh": "占位：用 10 × 6 算 9 × 6。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "split-slip",
+                "say": {
+                  "en": "Placeholder feedback for split-slip.",
+                  "zh": "占位反馈：split-slip。"
+                },
+                "sample": "59"
+              }
+            ]
+          },
+          "answer": 54,
+          "form": "whole",
+          "op": {
+            "kind": "×",
+            "a": 9,
+            "b": 6,
+            "split": 10
+          }
+        },
+        {
+          "id": "ap-stories",
+          "kind": "choose",
+          "model": {
+            "kind": "array",
+            "object": "sticker",
+            "layout": "scatter",
+            "count": 20
+          },
+          "prompt": {
+            "en": "Placeholder: which stories are 20 ÷ 4?",
+            "zh": "占位：哪些故事是 20 ÷ 4？"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "operation-swapped",
+                "say": {
+                  "en": "Placeholder feedback for operation-swapped.",
+                  "zh": "占位反馈：operation-swapped。"
+                },
+                "sample": "a,c"
+              },
+              {
+                "when": "sharing-only",
+                "say": {
+                  "en": "Placeholder feedback for sharing-only.",
+                  "zh": "占位反馈：sharing-only。"
+                },
+                "sample": "a"
+              }
+            ]
+          },
+          "multi": true,
+          "options": [
+            {
+              "id": "a",
+              "correct": true,
+              "text": {
+                "en": "20 stickers shared among 4 children.",
+                "zh": "20 张贴纸平均分给 4 人。"
+              }
+            },
+            {
+              "id": "b",
+              "correct": true,
+              "misconception": "sharing-only",
+              "text": {
+                "en": "20 stickers packed 4 to a pack.",
+                "zh": "20 张贴纸每 4 张一包。"
+              }
+            },
+            {
+              "id": "c",
+              "correct": false,
+              "misconception": "operation-swapped",
+              "text": {
+                "en": "4 children each have 20 stickers.",
+                "zh": "4 个人每人有 20 张。"
+              }
+            }
+          ]
+        },
+        {
+          "id": "ap-written",
+          "kind": "choose",
+          "model": {
+            "kind": "array",
+            "object": "dot",
+            "layout": "groups",
+            "groups": 3,
+            "size": 4
+          },
+          "prompt": {
+            "en": "Placeholder: which is written the right way?",
+            "zh": "占位：哪一个写对了？"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "divide-order",
+                "say": {
+                  "en": "Placeholder feedback for divide-order.",
+                  "zh": "占位反馈：divide-order。"
+                },
+                "sample": "b"
+              }
+            ]
+          },
+          "options": [
+            {
+              "id": "a",
+              "correct": true,
+              "text": {
+                "en": "12 ÷ 3 = 4",
+                "zh": "12 ÷ 3 = 4"
+              }
+            },
+            {
+              "id": "b",
+              "correct": false,
+              "misconception": "divide-order",
+              "text": {
+                "en": "3 ÷ 12 = 4",
+                "zh": "3 ÷ 12 = 4"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "place-value",
+      "lo": [
+        "placeholder"
+      ],
+      "limits": {
+        "maxValue": 999
+      },
+      "beats": [
+        {
+          "model": {
+            "kind": "blocks",
+            "value": 26,
+            "copies": 3,
+            "column": {
+              "op": "×",
+              "a": 26,
+              "b": 3,
+              "show": "none"
+            }
+          },
+          "caption": {
+            "en": "Placeholder: 3 rows of 26.",
+            "zh": "占位：3 行，每行 26。"
+          },
+          "equation": "26 × 3"
+        },
+        {
+          "model": {
+            "kind": "blocks",
+            "value": 26,
+            "copies": 3,
+            "left": {
+              "T": 6,
+              "O": 18
+            },
+            "trade": "O>T",
+            "column": {
+              "op": "×",
+              "a": 26,
+              "b": 3,
+              "show": "ones"
+            }
+          },
+          "caption": {
+            "en": "Placeholder: the ones pushed together.",
+            "zh": "占位：个位推到一起。"
+          },
+          "move": "combine",
+          "equation": "6 × 3 = 18"
+        },
+        {
+          "model": {
+            "kind": "blocks",
+            "value": 26,
+            "copies": 3,
+            "left": {
+              "T": 7,
+              "O": 8
+            },
+            "trade": "O>T",
+            "column": {
+              "op": "×",
+              "a": 26,
+              "b": 3,
+              "show": "carry"
+            }
+          },
+          "caption": {
+            "en": "Placeholder: 10 ones traded for a ten.",
+            "zh": "占位：10 个一换 1 个十。"
+          },
+          "move": "trade",
+          "equation": "18 = 1 ten 8 ones"
+        },
+        {
+          "model": {
+            "kind": "blocks",
+            "value": 72,
+            "plates": 3,
+            "dealt": {
+              "T": 2
+            },
+            "left": {
+              "T": 1,
+              "O": 2
+            },
+            "column": {
+              "op": "÷",
+              "a": 72,
+              "b": 3,
+              "show": "tens"
+            }
+          },
+          "caption": {
+            "en": "Placeholder: the tens shared.",
+            "zh": "占位：先分十。"
+          },
+          "move": "morph",
+          "equation": "7 tens ÷ 3 = 2 tens r 1 ten"
+        },
+        {
+          "model": {
+            "kind": "blocks",
+            "value": 72,
+            "plates": 3,
+            "dealt": {
+              "T": 2
+            },
+            "left": {
+              "O": 12
+            },
+            "trade": "T>O",
+            "column": {
+              "op": "÷",
+              "a": 72,
+              "b": 3,
+              "show": "carry"
+            }
+          },
+          "caption": {
+            "en": "Placeholder: the ten left traded for ones.",
+            "zh": "占位：剩下的十换成一。"
+          },
+          "move": "trade",
+          "equation": "1 ten + 2 ones = 12 ones"
+        }
+      ],
+      "pool": [
+        {
+          "id": "pv-regroup-140",
+          "kind": "regroup",
+          "model": {
+            "kind": "blocks",
+            "value": 140,
+            "left": {
+              "T": 14
+            }
+          },
+          "prompt": {
+            "en": "Placeholder: trade, then write the number.",
+            "zh": "占位：换一换，再写出这个数。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "tens-as-ones",
+                "say": {
+                  "en": "Placeholder feedback for tens-as-ones.",
+                  "zh": "占位反馈：tens-as-ones。"
+                },
+                "sample": "=14"
+              },
+              {
+                "when": "extra-zero",
+                "say": {
+                  "en": "Placeholder feedback for extra-zero.",
+                  "zh": "占位反馈：extra-zero。"
+                },
+                "sample": "=1400"
+              }
+            ]
+          },
+          "value": 140,
+          "start": {
+            "T": 14
+          },
+          "then": {
+            "answer": 140,
+            "form": "whole"
+          }
+        },
+        {
+          "id": "pv-regroup-125",
+          "kind": "regroup",
+          "model": {
+            "kind": "blocks",
+            "value": 125,
+            "left": {
+              "T": 11,
+              "O": 15
+            }
+          },
+          "prompt": {
+            "en": "Placeholder: trade until every place is under 10.",
+            "zh": "占位：换到每一位都不满 10。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": []
+          },
+          "value": 125,
+          "start": {
+            "T": 11,
+            "O": 15
+          }
+        },
+        {
+          "id": "pv-share-72",
+          "kind": "share",
+          "model": {
+            "kind": "blocks",
+            "value": 72,
+            "plates": 3
+          },
+          "prompt": {
+            "en": "Placeholder: share 72 into 3.",
+            "zh": "占位：把 72 平均分成 3 份。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "not-traded",
+                "say": {
+                  "en": "Placeholder feedback for not-traded.",
+                  "zh": "占位反馈：not-traded。"
+                },
+                "sample": "T"
+              },
+              {
+                "when": "operation-swapped",
+                "say": {
+                  "en": "Placeholder feedback for operation-swapped.",
+                  "zh": "占位反馈：operation-swapped。"
+                },
+                "sample": "=216"
+              }
+            ]
+          },
+          "value": 72,
+          "k": 3,
+          "then": {
+            "answer": 24,
+            "form": "whole"
+          }
+        },
+        {
+          "id": "pv-share-412",
+          "kind": "share",
+          "model": {
+            "kind": "blocks",
+            "value": 412,
+            "plates": 4
+          },
+          "prompt": {
+            "en": "Placeholder: share 412 into 4.",
+            "zh": "占位：把 412 平均分成 4 份。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "zero-in-quotient",
+                "say": {
+                  "en": "Placeholder feedback for zero-in-quotient.",
+                  "zh": "占位反馈：zero-in-quotient。"
+                },
+                "sample": "=13"
+              }
+            ]
+          },
+          "value": 412,
+          "k": 4,
+          "then": {
+            "answer": 103,
+            "form": "whole"
+          }
+        },
+        {
+          "id": "pv-share-74",
+          "kind": "share",
+          "model": {
+            "kind": "blocks",
+            "value": 74,
+            "plates": 3
+          },
+          "prompt": {
+            "en": "Placeholder: share 74 into 3.",
+            "zh": "占位：把 74 平均分成 3 份。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "remainder-too-big",
+                "say": {
+                  "en": "Placeholder feedback for remainder-too-big.",
+                  "zh": "占位反馈：remainder-too-big。"
+                },
+                "sample": "=23 r 5"
+              }
+            ]
+          },
+          "value": 74,
+          "k": 3,
+          "then": {
+            "answer": "24 r 2",
+            "form": "remainder"
+          }
+        },
+        {
+          "id": "pv-135x4",
+          "kind": "input",
+          "model": {
+            "kind": "blocks",
+            "mat": false,
+            "column": {
+              "op": "×",
+              "a": 135,
+              "b": 4,
+              "show": "none"
+            }
+          },
+          "prompt": {
+            "en": "Placeholder: work out 135 × 4.",
+            "zh": "占位：算 135 × 4。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "carry-not-added",
+                "say": {
+                  "en": "Placeholder feedback for carry-not-added.",
+                  "zh": "占位反馈：carry-not-added。"
+                },
+                "sample": "420"
+              },
+              {
+                "when": "digits-concatenated",
+                "say": {
+                  "en": "Placeholder feedback for digits-concatenated.",
+                  "zh": "占位反馈：digits-concatenated。"
+                },
+                "sample": "41220"
+              },
+              {
+                "when": "partial-product-missed",
+                "say": {
+                  "en": "Placeholder feedback for partial-product-missed.",
+                  "zh": "占位反馈：partial-product-missed。"
+                },
+                "sample": "520"
+              }
+            ]
+          },
+          "answer": 540,
+          "form": "whole",
+          "op": {
+            "kind": "×",
+            "a": 135,
+            "b": 4
+          }
+        },
+        {
+          "id": "pv-30x4",
+          "kind": "input",
+          "model": {
+            "kind": "blocks",
+            "value": 30,
+            "copies": 4
+          },
+          "prompt": {
+            "en": "Placeholder: 4 rows of 3 tens.",
+            "zh": "占位：4 行，每行 3 个十。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "tens-as-ones",
+                "say": {
+                  "en": "Placeholder feedback for tens-as-ones.",
+                  "zh": "占位反馈：tens-as-ones。"
+                },
+                "sample": "12"
+              },
+              {
+                "when": "extra-zero",
+                "say": {
+                  "en": "Placeholder feedback for extra-zero.",
+                  "zh": "占位反馈：extra-zero。"
+                },
+                "sample": "1200"
+              }
+            ]
+          },
+          "answer": 120,
+          "form": "whole",
+          "op": {
+            "kind": "×",
+            "a": 30,
+            "b": 4
+          }
+        },
+        {
+          "id": "pv-sentence-20",
+          "kind": "input",
+          "model": {
+            "kind": "blocks",
+            "value": 20,
+            "plates": 4
+          },
+          "prompt": {
+            "en": "Placeholder: fill in both boxes.",
+            "zh": "占位：两个格子都填上。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "skip-count-slip",
+                "say": {
+                  "en": "Placeholder feedback for skip-count-slip.",
+                  "zh": "占位反馈：skip-count-slip。"
+                },
+                "sample": "6,5"
+              }
+            ]
+          },
+          "answer": [
+            5,
+            5
+          ],
+          "form": "whole",
+          "sentence": "20 ÷ 4 = ?, because ? × 4 = 20",
+          "op": {
+            "kind": "÷",
+            "a": 20,
+            "b": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "time-values",
+      "lo": [
+        "placeholder"
+      ],
+      "limits": {
+        "clock": "24h",
+        "step": 5,
+        "maxDuration": "180m"
+      },
+      "beats": [
+        {
+          "model": {
+            "kind": "numberline",
+            "scale": "whole",
+            "from": 0,
+            "to": 60,
+            "step": 5,
+            "labels": "tens"
+          },
+          "caption": {
+            "en": "Placeholder: {t:19:20} is {t:19:20|24}; a clock face reads {t:7:20|face}.",
+            "zh": "占位：{t:19:20} 就是 {t:19:20|24}；钟面读作 {t:7:20|face}。"
+          },
+          "equation": "{t:09:40}"
+        },
+        {
+          "model": {
+            "kind": "numberline",
+            "scale": "whole",
+            "from": 0,
+            "to": 60,
+            "step": 5,
+            "labels": "tens",
+            "jumps": {
+              "size": 5,
+              "count": 5,
+              "from": 35
+            }
+          },
+          "caption": {
+            "en": "Placeholder: 5 jumps of 5 minutes.",
+            "zh": "占位：5 分钟 5 分钟地跳 5 次。"
+          },
+          "move": "jump",
+          "equation": "{t:09:35} + {d:25m} = {t:10:00}"
+        },
+        {
+          "model": {
+            "kind": "numberline",
+            "scale": "whole",
+            "from": 0,
+            "to": 100,
+            "step": 10,
+            "labels": "tens",
+            "jumps": {
+              "size": 10,
+              "count": 9
+            }
+          },
+          "caption": {
+            "en": "Placeholder: {d:95m} is {d:1h35m}.",
+            "zh": "占位：{d:95m} 就是 {d:1h35m}。"
+          },
+          "move": "morph",
+          "equation": "{d:95m} = {d:1h35m}"
+        }
+      ],
+      "pool": [
+        {
+          "id": "tv-12h-1920",
+          "kind": "input",
+          "model": {
+            "kind": "numberline",
+            "scale": "whole",
+            "from": 0,
+            "to": 60,
+            "step": 5,
+            "labels": "tens"
+          },
+          "prompt": {
+            "en": "Placeholder: write this evening time, {t:19:20|24}, in 12-hour time.",
+            "zh": "占位：把 {t:19:20|24} 写成 12 时制。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "am-pm",
+                "say": {
+                  "en": "Placeholder feedback for am-pm.",
+                  "zh": "占位反馈：am-pm。"
+                },
+                "sample": "7:20 am"
+              },
+              {
+                "when": "hands-swapped",
+                "say": {
+                  "en": "Placeholder feedback for hands-swapped.",
+                  "zh": "占位反馈：hands-swapped。"
+                },
+                "sample": "4:36 pm"
+              }
+            ]
+          },
+          "answer": "19:20",
+          "form": "time12"
+        },
+        {
+          "id": "tv-face-720",
+          "kind": "input",
+          "model": {
+            "kind": "numberline",
+            "scale": "whole",
+            "from": 0,
+            "to": 60,
+            "step": 5,
+            "labels": "tens"
+          },
+          "prompt": {
+            "en": "Placeholder: write the clock reading {t:7:20|face}.",
+            "zh": "占位：写出钟面读数 {t:7:20|face}。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "numeral-as-minutes",
+                "say": {
+                  "en": "Placeholder feedback for numeral-as-minutes.",
+                  "zh": "占位反馈：numeral-as-minutes。"
+                },
+                "sample": "7:04"
+              },
+              {
+                "when": "next-hour",
+                "say": {
+                  "en": "Placeholder feedback for next-hour.",
+                  "zh": "占位反馈：next-hour。"
+                },
+                "sample": "8:20"
+              },
+              {
+                "when": "five-count-slip",
+                "say": {
+                  "en": "Placeholder feedback for five-count-slip.",
+                  "zh": "占位反馈：five-count-slip。"
+                },
+                "sample": "7:25"
+              }
+            ]
+          },
+          "answer": "07:20",
+          "form": "face"
+        },
+        {
+          "id": "tv-24h-315",
+          "kind": "input",
+          "model": {
+            "kind": "numberline",
+            "scale": "whole",
+            "from": 0,
+            "to": 60,
+            "step": 5,
+            "labels": "tens"
+          },
+          "prompt": {
+            "en": "Placeholder: write {t:15:15} in 24-hour time.",
+            "zh": "占位：把 {t:15:15} 写成 24 时制。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "24h-offset",
+                "say": {
+                  "en": "Placeholder feedback for 24h-offset.",
+                  "zh": "占位反馈：24h-offset。"
+                },
+                "sample": "13:15"
+              }
+            ]
+          },
+          "answer": "15:15",
+          "form": "time24"
+        },
+        {
+          "id": "tv-12h-1940",
+          "kind": "input",
+          "model": {
+            "kind": "numberline",
+            "scale": "whole",
+            "from": 0,
+            "to": 60,
+            "step": 5,
+            "labels": "tens"
+          },
+          "prompt": {
+            "en": "Placeholder: write {t:19:40|24} in 12-hour time.",
+            "zh": "占位：把 {t:19:40|24} 写成 12 时制。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "24h-offset",
+                "say": {
+                  "en": "Placeholder feedback for 24h-offset.",
+                  "zh": "占位反馈：24h-offset。"
+                },
+                "sample": "9:40 pm"
+              }
+            ]
+          },
+          "answer": "19:40",
+          "form": "time12"
+        },
+        {
+          "id": "tv-length",
+          "kind": "input",
+          "model": {
+            "kind": "numberline",
+            "scale": "whole",
+            "from": 0,
+            "to": 60,
+            "step": 5,
+            "labels": "tens"
+          },
+          "prompt": {
+            "en": "Placeholder: from {t:14:40} to {t:16:15}. How long?",
+            "zh": "占位：从 {t:14:40} 到 {t:16:15}，经过多长时间？"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "base-100",
+                "say": {
+                  "en": "Placeholder feedback for base-100.",
+                  "zh": "占位反馈：base-100。"
+                },
+                "sample": "1h75m"
+              },
+              {
+                "when": "count-endpoints",
+                "say": {
+                  "en": "Placeholder feedback for count-endpoints.",
+                  "zh": "占位反馈：count-endpoints。"
+                },
+                "sample": "2h35m"
+              }
+            ]
+          },
+          "answer": "1h35m",
+          "form": "duration",
+          "span": {
+            "start": "14:40",
+            "end": "16:15",
+            "ask": "length"
+          }
+        },
+        {
+          "id": "tv-end",
+          "kind": "input",
+          "model": {
+            "kind": "numberline",
+            "scale": "whole",
+            "from": 0,
+            "to": 60,
+            "step": 5,
+            "labels": "tens"
+          },
+          "prompt": {
+            "en": "Placeholder: starts at {t:10:45}, lasts {d:50m}. When does it end?",
+            "zh": "占位：{t:10:45} 开始，用 {d:50m}，几点结束？"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "base-100",
+                "say": {
+                  "en": "Placeholder feedback for base-100.",
+                  "zh": "占位反馈：base-100。"
+                },
+                "sample": "10:95 am"
+              },
+              {
+                "when": "wrong-direction",
+                "say": {
+                  "en": "Placeholder feedback for wrong-direction.",
+                  "zh": "占位反馈：wrong-direction。"
+                },
+                "sample": "9:55 am"
+              }
+            ]
+          },
+          "answer": "11:35",
+          "form": "time12",
+          "span": {
+            "start": "10:45",
+            "length": "50m",
+            "ask": "end"
+          }
+        },
+        {
+          "id": "tv-start",
+          "kind": "input",
+          "model": {
+            "kind": "numberline",
+            "scale": "whole",
+            "from": 0,
+            "to": 60,
+            "step": 5,
+            "labels": "tens"
+          },
+          "prompt": {
+            "en": "Placeholder: arrived at {t:15:05|24} after {d:40m}. When did it leave?",
+            "zh": "占位：{t:15:05|24} 到，路上 {d:40m}，几点出发？"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "wrong-direction",
+                "say": {
+                  "en": "Placeholder feedback for wrong-direction.",
+                  "zh": "占位反馈：wrong-direction。"
+                },
+                "sample": "15:45"
+              },
+              {
+                "when": "base-100",
+                "say": {
+                  "en": "Placeholder feedback for base-100.",
+                  "zh": "占位反馈：base-100。"
+                },
+                "sample": "14:65"
+              }
+            ]
+          },
+          "answer": "14:25",
+          "form": "time24",
+          "span": {
+            "end": "15:05",
+            "length": "40m",
+            "ask": "start"
+          }
+        },
+        {
+          "id": "tv-to-min",
+          "kind": "input",
+          "model": {
+            "kind": "numberline",
+            "scale": "whole",
+            "from": 0,
+            "to": 60,
+            "step": 5,
+            "labels": "tens"
+          },
+          "prompt": {
+            "en": "Placeholder: {d:2h15m} = ? min",
+            "zh": "占位：{d:2h15m} = ? 分钟"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "base-100",
+                "say": {
+                  "en": "Placeholder feedback for base-100.",
+                  "zh": "占位反馈：base-100。"
+                },
+                "sample": "215"
+              }
+            ]
+          },
+          "answer": 135,
+          "form": "whole",
+          "convert": {
+            "from": "2h15m",
+            "to": "min"
+          }
+        },
+        {
+          "id": "tv-to-h-min",
+          "kind": "input",
+          "model": {
+            "kind": "numberline",
+            "scale": "whole",
+            "from": 0,
+            "to": 60,
+            "step": 5,
+            "labels": "tens"
+          },
+          "prompt": {
+            "en": "Placeholder: write {d:150m} in hours and minutes.",
+            "zh": "占位：把 {d:150m} 写成几小时几分钟。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "base-100",
+                "say": {
+                  "en": "Placeholder feedback for base-100.",
+                  "zh": "占位反馈：base-100。"
+                },
+                "sample": "1h50m"
+              }
+            ]
+          },
+          "answer": "2h30m",
+          "form": "duration",
+          "convert": {
+            "from": "150m"
+          }
+        },
+        {
+          "id": "tv-noon",
+          "kind": "input",
+          "model": {
+            "kind": "numberline",
+            "scale": "whole",
+            "from": 0,
+            "to": 60,
+            "step": 5,
+            "labels": "tens"
+          },
+          "prompt": {
+            "en": "Placeholder: write half past twelve in the afternoon, {t:12:30|24}.",
+            "zh": "占位：写出中午 12 点半，{t:12:30|24}。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the model, then answer.",
+            "zh": "占位提示：先看模型，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the model.",
+              "zh": "还不对。占位：再看一看模型。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "noon-midnight",
+                "say": {
+                  "en": "Placeholder feedback for noon-midnight.",
+                  "zh": "占位反馈：noon-midnight。"
+                },
+                "sample": "12:30 am"
+              }
+            ]
+          },
+          "answer": "12:30",
+          "form": "time12"
+        }
+      ]
+    }
+  ]
+}

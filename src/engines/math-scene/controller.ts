@@ -13,7 +13,9 @@ import type { SceneStore } from '../core/store';
 import type { MathSceneExt } from './index';
 import type { Lesson, MisconceptionCode, ModelView, Step, Task } from './schema';
 import type { Attempt, Feedback, MathUiStore, TaskRun } from './ui';
-import { answered, check, readInput, segments } from './lib/check';
+import { answered, check, readInput, segments, usesValueBoxes } from './lib/check';
+import { readWritten, writtenLabel } from './lib/forms';
+import { parseArrayCut } from './lib/array';
 import { apply, sampleState, solve, step } from './lib/solve';
 import { initialState, inputSpecOf, phasesOf, type Action, type TaskState } from './lib/state';
 import { beatCount, beatSlot, findTask, locate, type BeatSlot, type Place } from './lib/lesson';
@@ -72,6 +74,10 @@ function describe(task: Task, action: Action, s: TaskState): string {
       return `CHOOSE ${s.chosen.map((id) => id.toUpperCase()).join(' ')}`;
     case 'input': {
       const spec = inputSpecOf(task);
+      if (spec && usesValueBoxes(task, spec)) {
+        const w = readWritten(spec, s.input);
+        return w ? `WRITE ${w.map(writtenLabel).join(' · ')}` : 'WRITE …';
+      }
       const v = spec ? readInput(spec, s.input) : null;
       const unit = spec?.form === 'measure' && isUnit(s.input.u) ? ` ${unitText(s.input.u, 'en', 2).toLocaleUpperCase('en')}` : '';
       return v ? `WRITE ${v.map(formatFrac).join(' · ')}${unit}` : 'WRITE …';
@@ -90,6 +96,23 @@ function describe(task: Task, action: Action, s: TaskState): string {
       return s.rect ? `DRAW ${s.rect[0]} × ${s.rect[1]}` : 'DRAW';
     case 'gridcut':
       return s.cut ? `CUT ${s.cut.toUpperCase()}` : 'CUT';
+    case 'deal':
+    case 'pack':
+    case 'put':
+    case 'take':
+    case 'containers':
+      return `GROUPS ${s.groups.join(' · ') || '—'}`;
+    case 'arrange':
+      return s.arr ? `ARRAY ${s.arr[0]} × ${s.arr[1]}` : 'ARRAY';
+    case 'land':
+      return `JUMPS ${s.landings.join(' · ') || '—'}`;
+    case 'arraycut': {
+      const c = parseArrayCut(s.cut);
+      return c ? `CUT AFTER ${c.axis === 'rows' ? 'ROW' : 'COLUMN'} ${c.at}` : 'CUT';
+    }
+    case 'trade':
+    case 'share':
+      return `H ${s.mat.H} · T ${s.mat.T} · O ${s.mat.O}${task.kind === 'share' ? ` | EACH H ${s.dealt.H} · T ${s.dealt.T} · O ${s.dealt.O}` : ''}`;
     case 'check':
       return 'CHECK';
   }
@@ -130,6 +153,17 @@ export function answerLabel(task: Task, s: TaskState): string {
       return describe(task, { do: 'rect', w: 0, h: 0 }, s);
     case 'split-figure':
       return describe(task, { do: 'gridcut', cut: null }, s);
+    case 'group':
+      return describe(task, { do: 'deal' }, s);
+    case 'arrange':
+      return describe(task, { do: 'arrange', rows: 0, cols: 0 }, s);
+    case 'skip-count':
+      return describe(task, { do: 'land', at: 0 }, s);
+    case 'split-array':
+      return describe(task, { do: 'arraycut', cut: null }, s);
+    case 'regroup':
+    case 'share':
+      return describe(task, { do: 'trade', trade: 'O>T' }, s);
   }
 }
 

@@ -8,13 +8,13 @@
  * child's own work (squares laid, sides traced, the rectangle drawn, the two
  * pieces) until the check is done.
  */
-import type { Locale } from '../../core/types';
-import { t } from '../../../i18n';
-import type { GridModelSpec, Task } from '../schema';
-import { dimEnds, factsOf, figureOf, isHalfKey, parseCell, parseCut, piecesAfter, readingOrder, rectOf, type Facts } from '../lib/grid';
-import { taskFigure, type TaskState } from '../lib/state';
-import { squared, unitText, type Unit } from '../lib/value';
-import { describeFigure } from '../stage/GridModel';
+import type { Locale } from '../../../core/types';
+import { t } from '../../../../i18n';
+import type { GridModelSpec, Task } from '../../schema';
+import { dimEnds, factsOf, figureOf, isHalfKey, parseCell, parseCut, piecesAfter, readingOrder, rectOf, type Facts } from '../../lib/grid';
+import { taskFigure, type TaskState } from '../../lib/state';
+import { squared, unitText, type Unit } from '../../lib/value';
+import { describeFigure } from '../../stage/GridModel';
 
 const UP = (s: string) => s.toLocaleUpperCase('en');
 

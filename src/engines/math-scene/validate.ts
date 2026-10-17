@@ -7,10 +7,12 @@
  * length, practice shape and the `{a/b}` tokens in every text. Build time only.
  * `taskIssues` is shared with `scripts/math/check-pool.ts` (authoring drafts).
  */
-import { FRACTION_CODES, GRID_KINDS, MEASURE_CODES, type Beat, type GridModelSpec, type Lesson, type MathChapterState, type MathSceneData, type Model, type StepLimits, type Task } from './schema';
+import { GRID_KINDS, MEASURE_CODES, MISCONCEPTION_DOMAINS, type Beat, type GridModelSpec, type Lesson, type MathChapterState, type MathSceneData, type Model, type StepLimits, type Task } from './schema';
+import { domainOf, domainOfCode, valueModelIssues, valueTaskIssues } from './validate-values';
 import { add, compare, gcd, related, sub, toImproper, valueOnLine, type Frac } from './lib/fraction';
 import { baseParts, inputSpecOf } from './lib/state';
-import { cutPieces, gridAnswer } from './lib/check';
+import { answersOf, cutPieces, gridAnswer } from './lib/check';
+import { answerValues } from './lib/forms';
 import { drawnSolution, solve } from './lib/solve';
 import { dimEnds, extentOf, factsOf, figureOf, labels, polyIssues } from './lib/grid';
 import { askOf } from './lib/diagnose/measure';
@@ -132,7 +134,9 @@ function beatIssues(beat: Beat): string[] {
     if (count(beat.crossed).some((i) => !given.includes(i))) out.push('crossed parts must be given parts');
     if (m.kind === 'bar' && m.rows && beat.crossed) out.push('crossed is for a single bar');
   } else if (beat.crossed) out.push('crossed is for a bar or a circle');
-  if (m.kind === 'numberline') {
+  if (m.kind === 'array' || m.kind === 'blocks' || (m.kind === 'numberline' && m.scale === 'whole')) out.push(...valueModelIssues(m));
+  else if (m.kind === 'numberline') {
+    out.push(...valueModelIssues(m));
     for (const f of [...(m.marks ?? []), ...(m.arrow ? [m.arrow] : [])]) {
       if (compare(f, { n: m.from, d: 1 }) < 0 || compare(f, { n: m.to, d: 1 }) > 0) out.push(`${f.n}/${f.d} is off the line`);
       else if (valueOnLine(f, m) === null) out.push(`${f.n}/${f.d} is not on a tick of a line cut in ${m.intervals}`);
@@ -230,7 +234,8 @@ function gridTaskIssues(task: Task, limits: StepLimits | undefined): string[] {
     if ([task.area, task.perimeter, task.length, task.breadth].every((v) => v === undefined)) out.push('a draw-rectangle task needs an area, a perimeter or a side');
   }
   if (spec) {
-    const answers = Array.isArray(spec.answer) ? spec.answer : [spec.answer];
+    const answers = answersOf(spec);
+    if (answers.length !== answerValues(spec).length) out.push('a grid answer is a whole number (not a remainder, a time or a duration)');
     for (const a of answers) if (a.d !== 1 || a.w || a.n > WHOLE_MAX) out.push(`answer ${a.n}/${a.d} is not a whole number (0–${WHOLE_MAX})`);
     if (spec.form !== 'whole' && spec.form !== 'measure') out.push(`form "${spec.form}" is for fractions (use whole or measure)`);
     if (spec.form === 'measure' && !spec.unit) out.push('form measure needs the answer\'s unit');
@@ -281,7 +286,7 @@ function gridTaskIssues(task: Task, limits: StepLimits | undefined): string[] {
       const r = drawnSolution(task);
       if (r && limits.maxSide !== undefined && Math.max(...r) > limits.maxSide) out.push(`the rectangle drawn has a side of ${Math.max(...r)} (limit ${limits.maxSide})`);
     }
-    if (spec && limits.maxPerimeter !== undefined && spec.ask === 'perimeter') for (const a of Array.isArray(spec.answer) ? spec.answer : [spec.answer]) if (a.n > limits.maxPerimeter) out.push(`perimeter ${a.n} (limit ${limits.maxPerimeter})`);
+    if (spec && limits.maxPerimeter !== undefined && spec.ask === 'perimeter') for (const a of answersOf(spec)) if (a.n > limits.maxPerimeter) out.push(`perimeter ${a.n} (limit ${limits.maxPerimeter})`);
   }
   return out;
 }
@@ -292,10 +297,15 @@ export function taskIssues(task: Task, where: string, opts: { bridge: boolean; p
   const error = (message: string) => issues.push({ level: 'error', message: `${where}: ${message}` });
   const warn = (message: string) => issues.push({ level: 'warn', message: `${where}: ${message}` });
   const grid = task.model.kind === 'grid' || modelsOf(task).some((m) => m.kind === 'grid') || (GRID_KINDS as readonly string[]).includes(task.kind);
+  const domain = domainOf(task);
+  const fractions = domain === 'fractions';
   if (grid) for (const m of gridTaskIssues(task, opts.limits)) error(m);
-  else for (const c of task.feedback.wrong.map((w) => w.when)) if (!(FRACTION_CODES as readonly string[]).includes(c)) error(`"${c}" is a grid code, not one for fractions`);
-  for (const f of grid ? [] : fractionsOf(task)) if (toImproper(f).d > 12 || f.d < 1) error(`denominator ${f.d} is out of range (1–12)`);
-  if (!opts.bridge && !grid) {
+  else if (!fractions) for (const m of valueTaskIssues(task, opts.limits)) error(m);
+  // Every code from the task's own domain (docs/19 G5).
+  if (!grid) for (const c of task.feedback.wrong.map((w) => w.when)) if (!(MISCONCEPTION_DOMAINS[domain] as readonly string[]).includes(c)) error(`"${c}" is a ${domainOfCode(c)} code, not one for ${domain}`);
+  for (const m of fractions ? modelsOf(task) : []) if (m.kind === 'numberline') for (const x of valueModelIssues(m)) error(x);
+  for (const f of fractions ? fractionsOf(task) : []) if (toImproper(f).d > 12 || f.d < 1) error(`denominator ${f.d} is out of range (1–12)`);
+  if (!opts.bridge && fractions) {
     for (const f of fractionsOf(task)) {
       const x = toImproper(f);
       if (f.w || x.n > x.d) error(`${f.w ? `${f.w} ` : ''}${f.n}/${f.d} is more than one whole (mixed numbers are the P4 bridge)`);
@@ -311,8 +321,14 @@ export function taskIssues(task: Task, where: string, opts: { bridge: boolean; p
   if (opts.practice && task.hints.length > 1) error('practice questions have at most one hint');
   if (textLength(task.prompt.en) > PROMPT_EN) warn(`prompt is ${textLength(task.prompt.en)} characters (EN ≤ ${PROMPT_EN})`);
   if (task.prompt.zh && textLength(task.prompt.zh) > PROMPT_ZH) warn(`prompt is ${textLength(task.prompt.zh)} characters (ZH ≤ ${PROMPT_ZH})`);
-  for (const [path, text] of strings(task, 'task')) for (const bad of badTokens(text)) error(`${path}: "${bad}" is not a fraction token ({3/4}, {1 3/4}, {?/12})`);
+  for (const [path, text] of strings(task, 'task')) for (const bad of badTokens(text)) error(`${path}: ${tokenMessage(bad)}`);
   return issues;
+}
+
+/** What is wrong with a bad token. */
+function tokenMessage(bad: string): string {
+  if (bad.includes('/') && !/^\{[tdu]:/.test(bad)) return `"${bad}" is not a fraction token ({3/4}, {1 3/4}, {?/12})`;
+  return `"${bad}" is not a time, duration or measure token ({t:09:40}, {t:7:20|face}, {t:19:20|24}, {d:1h35m}, {u:28 cm2})`;
 }
 
 /** Every string in a value, with its path. */
@@ -387,7 +403,7 @@ export function lessonIssues(data: MathSceneData, chapters: readonly ChapterInfo
 
   /* 10. tokens (tasks are covered above) */
   const untasked = { syllabus: lesson.syllabus, steps: lesson.steps.map((s) => ({ ...s, pool: [] })) };
-  for (const [path, text] of strings(untasked, 'lesson')) for (const bad of badTokens(text)) error(`${path}: "${bad}" is not a fraction token ({3/4}, {1 3/4}, {?/12})`);
-  for (const [path, text] of strings(data.glossary ?? {}, 'glossary')) for (const bad of badTokens(text)) error(`${path}: "${bad}" is not a fraction token`);
+  for (const [path, text] of strings(untasked, 'lesson')) for (const bad of badTokens(text)) error(`${path}: ${tokenMessage(bad)}`);
+  for (const [path, text] of strings(data.glossary ?? {}, 'glossary')) for (const bad of badTokens(text)) error(`${path}: ${tokenMessage(bad)}`);
   return issues;
 }

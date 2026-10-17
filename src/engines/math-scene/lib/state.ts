@@ -6,10 +6,13 @@
  * same actions drive the tap / key paths, `solve()` and the "Show me" ghost. Pure.
  * In memory only: never in the URL or storage.
  */
-import type { InputSpec, Task, TaskKind } from '../schema';
+import type { InputSpec, PlaceKey, Task, TaskKind, Trade } from '../schema';
 import { lcm, toImproper, type Frac } from './fraction';
 import { allSides, factsOf, figureOf, halfKey, parseCell, parseCut, readingOrder, rowCells } from './grid';
 import { isUnit } from './value';
+import { fieldDigits, isValueForm } from './forms';
+import { applyTrade, canTrade, counts, sharePlace, standard, ZERO, type Counts } from './blocks';
+import { parseArrayCut } from './array';
 
 export type Sym = '<' | '=' | '>';
 export type Phase = 'model' | 'convert' | 'mark' | 'input';
@@ -47,6 +50,26 @@ export type Action =
   | { do: 'rect'; w: number; h: number }
   /** Grid: the cut along a grid line (`"x:5"`, `"y:4"`, `null` = none). */
   | { do: 'gridcut'; cut: string | null }
+  /** Groups (share): one more to each container, in turn, while any are left. */
+  | { do: 'deal' }
+  /** Groups (pack): a new container filled with `k`. */
+  | { do: 'pack' }
+  /** Groups: one loose thing into container `group` (one past the last: a new container). */
+  | { do: 'put'; group: number }
+  /** Groups: one thing out of container `group`, back with the loose ones. */
+  | { do: 'take'; group: number }
+  /** Groups: this many containers (the things in a removed one go back). */
+  | { do: 'containers'; count: number }
+  /** Array: `rows` × `cols` laid out from the fixed corner. */
+  | { do: 'arrange'; rows: number; cols: number }
+  /** Whole-number line: land a jump on `at` (or lift that landing). */
+  | { do: 'land'; at: number }
+  /** Array: the cut after a row (`"r5"`) or a column (`"c3"`), `null` = none. */
+  | { do: 'arraycut'; cut: string | null }
+  /** Blocks: trade 10 of a place for 1 of the next, or 1 for 10 of the one below. */
+  | { do: 'trade'; trade: Trade }
+  /** Blocks: share one place into the plates as far as it goes. */
+  | { do: 'share'; place: PlaceKey }
   /** Check the current phase: on success a multi-part task moves to its next phase. */
   | { do: 'check' };
 
@@ -84,8 +107,20 @@ export interface TaskState {
   walked: boolean;
   /** Grid: the rectangle drawn, `[across, up]`. */
   rect: [number, number] | null;
-  /** Grid: the cut placed (`"x:5"`). */
+  /** Grid: the cut placed (`"x:5"`); array: the cut after a row or column (`"r5"`, `"c3"`). */
   cut: string | null;
+  /** Groups: the things in each container. */
+  groups: number[];
+  /** Array: the rows × columns laid out. */
+  arr: [number, number] | null;
+  /** Whole-number line: where the jumps landed, in order along the line. */
+  landings: number[];
+  /** Blocks: on the mat, by place. */
+  mat: Counts;
+  /** Blocks: on each plate (a share). */
+  dealt: Counts;
+  /** Blocks: trades made. */
+  trades: number;
   /** Index into `phasesOf(task)`. */
   phase: number;
 }
@@ -105,7 +140,12 @@ export function phasesOf(task: Task): Phase[] {
     case 'count-squares':
     case 'trace-perimeter':
     case 'split-figure':
+    case 'split-array':
+    case 'share':
       return ['model', 'input'];
+    case 'group':
+    case 'regroup':
+      return task.then ? ['model', 'input'] : ['model'];
     default:
       return ['model'];
   }
@@ -126,7 +166,7 @@ const indices = (set: number | number[] | undefined): number[] =>
 export function baseParts(task: Task): number {
   const m = task.model;
   if (m.kind === 'bar' || m.kind === 'circle') return m.parts ?? 0;
-  if (m.kind === 'numberline') return m.intervals;
+  if (m.kind === 'numberline') return m.intervals ?? 1;
   return 0;
 }
 
@@ -154,9 +194,23 @@ export function initialState(task: Task): TaskState {
     walked: false,
     rect: null,
     cut: null,
+    groups: task.kind === 'group' && task.by === 'share' ? Array.from({ length: task.k }, () => 0) : [],
+    arr: null,
+    landings: [],
+    mat: task.kind === 'regroup' ? counts(task.start) : task.kind === 'share' ? standard(task.value) : ZERO,
+    dealt: ZERO,
+    trades: 0,
     phase: 0,
   };
 }
+
+/** Things not yet in a container (a group task). */
+export function looseOf(task: Task, state: TaskState): number {
+  return task.kind === 'group' ? task.total - state.groups.reduce((a, b) => a + b, 0) : 0;
+}
+
+/** Most containers a group task's stage offers. */
+export const MAX_GROUPS = 12;
 
 /** The figure a grid task works on (count, trace, cut), with its cells and halves. */
 export function taskFigure(task: Task) {
@@ -182,9 +236,10 @@ export function figureRows(task: Task): { y: number; keys: string[] }[] {
   return ys.map((y) => ({ y, keys: [...rowCells(fig.facts.cells, y), ...fig.facts.halves.filter((h) => h.y === y).map(halfKey)] }));
 }
 
-/** Digits an answer box takes: two for a fraction's numbers, five for a whole number or a measure. */
-export function boxDigits(spec: InputSpec | null): number {
-  return spec && (spec.form === 'whole' || spec.form === 'measure') ? 5 : 2;
+/** Digits an answer box takes: two for a fraction's numbers, five for a whole number or a measure, two for hours or minutes … (`forms.ts`). */
+export function boxDigits(spec: InputSpec | null, field = 'w'): number {
+  if (!spec) return 2;
+  return isValueForm(spec.form) ? fieldDigits(spec, field) : 2;
 }
 
 const toggle = (list: readonly number[], i: number) => (list.includes(i) ? list.filter((x) => x !== i) : [...list, i].sort((a, b) => a - b));
@@ -277,7 +332,8 @@ export function reduce(task: Task, state: TaskState, action: Action): TaskState 
     }
     case 'input': {
       if (action.field === 'u') return isUnit(action.value) || action.value === '' ? { ...state, input: { ...state.input, u: action.value } } : state;
-      const value = action.value.replace(/\D/g, '').slice(0, boxDigits(inputSpecOf(task)));
+      if (action.field === 'ap') return action.value === 'am' || action.value === 'pm' || action.value === '' ? { ...state, input: { ...state.input, ap: action.value } } : state;
+      const value = action.value.replace(/\D/g, '').slice(0, boxDigits(inputSpecOf(task), action.field));
       return { ...state, input: { ...state.input, [action.field]: value } };
     }
     case 'tile': {
@@ -300,8 +356,13 @@ export function reduce(task: Task, state: TaskState, action: Action): TaskState 
       if (!fig || !allSides(fig.facts.cells).has(action.key)) return state;
       return { ...state, edges: state.edges.includes(action.key) ? state.edges.filter((k) => k !== action.key) : [...state.edges, action.key] };
     }
-    case 'clear':
+    case 'clear': {
+      if (task.kind === 'group' || task.kind === 'skip-count' || task.kind === 'regroup' || task.kind === 'share') {
+        const start = initialState(task);
+        return { ...state, groups: start.groups, landings: [], mat: start.mat, dealt: start.dealt, trades: 0 };
+      }
       return state.tiles.length || state.edges.length ? { ...state, tiles: [], edges: [], walked: false } : state;
+    }
     case 'walk':
       return { ...state, walked: !state.walked };
     case 'rect': {
@@ -316,6 +377,66 @@ export function reduce(task: Task, state: TaskState, action: Action): TaskState 
     case 'gridcut': {
       if (action.cut === null) return { ...state, cut: null };
       return parseCut(action.cut) ? { ...state, cut: action.cut } : state;
+    }
+    case 'deal': {
+      if (task.kind !== 'group' || state.groups.length === 0) return state;
+      let loose = looseOf(task, state);
+      if (loose === 0) return state;
+      const groups = state.groups.map((g) => (loose-- > 0 ? g + 1 : g));
+      return { ...state, groups };
+    }
+    case 'pack': {
+      if (task.kind !== 'group' || looseOf(task, state) < task.k || state.groups.length >= MAX_GROUPS) return state;
+      return { ...state, groups: [...state.groups, task.k] };
+    }
+    case 'put': {
+      if (task.kind !== 'group' || looseOf(task, state) === 0) return state;
+      if (action.group === state.groups.length && state.groups.length < MAX_GROUPS) return { ...state, groups: [...state.groups, 1] };
+      if (action.group < 0 || action.group >= state.groups.length) return state;
+      return { ...state, groups: state.groups.map((g, i) => (i === action.group ? g + 1 : g)) };
+    }
+    case 'take': {
+      if (task.kind !== 'group' || !(state.groups[action.group]! > 0)) return state;
+      const groups = state.groups.map((g, i) => (i === action.group ? g - 1 : g));
+      // A box emptied while packing goes away; a plate to share into stays.
+      return { ...state, groups: task.by === 'pack' && groups[action.group] === 0 ? groups.filter((_, i) => i !== action.group) : groups };
+    }
+    case 'containers': {
+      if (task.kind !== 'group') return state;
+      const n = Math.max(1, Math.min(MAX_GROUPS, Math.round(action.count)));
+      if (n === state.groups.length) return state;
+      return { ...state, groups: n > state.groups.length ? [...state.groups, ...Array.from({ length: n - state.groups.length }, () => 0)] : state.groups.slice(0, n) };
+    }
+    case 'arrange': {
+      if (task.kind !== 'arrange') return state;
+      const r = Math.max(1, Math.min(12, Math.round(action.rows)));
+      const c = Math.max(1, Math.min(12, Math.round(action.cols)));
+      return state.arr && state.arr[0] === r && state.arr[1] === c ? state : { ...state, arr: [r, c] };
+    }
+    case 'land': {
+      if (task.kind !== 'skip-count') return state;
+      const m = task.model;
+      const to = task.to ?? (m.kind === 'numberline' ? m.to : 100);
+      const at = Math.round(action.at);
+      if (at < 0 || at > to) return state;
+      const landings = state.landings.includes(at) ? state.landings.filter((x) => x !== at) : [...state.landings, at].sort((a, b) => a - b);
+      return { ...state, landings };
+    }
+    case 'arraycut': {
+      if (task.kind !== 'split-array') return state;
+      if (action.cut === null) return { ...state, cut: null };
+      const c = parseArrayCut(action.cut);
+      if (!c || c.at < 1 || c.at >= (c.axis === 'rows' ? task.rows : task.cols)) return state;
+      return state.cut === action.cut ? state : { ...state, cut: action.cut };
+    }
+    case 'trade': {
+      if ((task.kind !== 'regroup' && task.kind !== 'share') || !canTrade(state.mat, action.trade)) return state;
+      return { ...state, mat: applyTrade(state.mat, action.trade), trades: state.trades + 1 };
+    }
+    case 'share': {
+      if (task.kind !== 'share') return state;
+      const next = sharePlace(state.mat, state.dealt, action.place, task.k);
+      return next.mat === state.mat ? state : { ...state, ...next };
     }
     case 'check':
       return state;

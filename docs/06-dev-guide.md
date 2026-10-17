@@ -1281,16 +1281,19 @@ core 演示系统（字幕卡、两级进度条、自动播放、语音、拍键
 
 ```
 index.ts            descriptor：扩展字段 beat（0 起；URL b，1 起）、model（小测时 VIEW 组的模型，null = 题目自己的）；每章从第一拍开始；fromUrl 收 b / model，从不收作答和抽到的题
-schema.ts           lesson.json 的 zod（构建期）：分数字符串；模型（含方格 grid）；讲解节拍（beatSchema）；15 种任务；步（beats、pool、keyFacts、limits）；练习题；课纲条目；章节 state；误解按域登记
-validate.ts         docs/15 §4.10 / §10 的主题级规则：章 ↔ 步、3–5 拍且模型画得出、题库 8–10 道、每道题的规则（taskIssues，与 check-pool 共用）
+schema.ts           lesson.json 的 zod（构建期）：分数、整数、余数、时刻、时长的字符串；模型（分数五种、方格 grid、阵列 array、数位块 blocks、整数数轴）；讲解节拍（beatSchema）；21 种任务；步（beats、pool、keyFacts、limits）；练习题；课纲条目；notation；章节 state；误解按域登记
+validate.ts         docs/15 §4.10 / §10 的主题级规则：章 ↔ 步、3–5 拍且模型画得出、题库 8–10 道、每道题的规则（taskIssues，与 check-pool 共用）；validate-values.ts 是整数与时间的规则（模型画得出、答案与 op / span / convert 一致、诊断得出、limits）
 View.tsx            HUD 注册、舞台（节拍 / 小测）、算式行、章节轴、阅读面板（节拍行、小测托盘、本章索引）、右上卡、PLATE 块、控制面板、演示适配器
 controller.ts       换拍、抽题（visit / another / skip / force）、孩子的动作、检查、提示、看答案、撤销、练习流程；也是 __atlas.engine 的实现
 ui.ts               引擎自己的内存 store：每道题的作答（模型状态、尝试、提示级、反馈、看答案、完成、"你的尝试"）、每步抽到的题、练习结果、模式
-lib/                纯函数（有单测）：fraction、value（带单位的量）、grid（方格几何）、diagnose/measure（量度域诊断）、state、check（检查 + 误解诊断）、solve（正确解法、错例 sample → 状态）、proof（任务自证）、
+lib/                纯函数（有单测）：fraction、value（整数、余数、时刻、时长、量 + notation）、forms（分数以外的作答格）、grid（方格几何）、array（阵列的数与排法）、blocks（数位块、换、分、竖式每一位）、
+                    diagnose/{measure,whole-ops,time}（三个域的诊断）、state、check（检查 + 误解诊断）、solve（正确解法、错例 sample → 状态）、proof（任务自证）、
                     pool（按页面种子抽题，避开上一道）、beats（演示拍）、lesson（定位、拍的槽位、VIEW 可切换的模型）、working（算式）、words（读法）
-stage/              SVG：Stage（小测的模型）、BeatModel（讲解节拍：六种模型 + 叠加 + 过渡）、BarModel、CircleModel、NumberLine、Rows、BarModelDiagram、GridModel（方格）、CutBar、OptionGrid、svg、layout
-tray/Tray.tsx       小测托盘（分数框 + 数字键、< = >、选项、排序、×k / ÷k、对折、−/+；你的尝试；提示 / 检查 / 看答案 / 再来一道 / 跳过 / 下一章）；tray/GridControls（方格：按行铺、走一圈、长宽步进、切线移动；整数框 / 量 + 单位芯片 / 算式框）
-hud/                Panels（右上卡 FRACTION）、AreaCard（方格课的右上卡 AREA）、BeatLine（节拍行）、ChapterIndex（要点 + 课纲对照）、PlateBlock（左列 PLATE 块）、Overlay（控制面板）
+stage/              SVG：Stage（小测的模型）、BeatModel（讲解节拍 + 叠加 + 过渡）、BarModel、CircleModel、NumberLine、Rows、BarModelDiagram、GridModel（方格）、ArrayModel（阵列）、WholeLine（整数数轴）、
+                    BlocksModel（数位块）、ColumnWorking（竖式）、CutBar、OptionGrid、svg、layout
+tray/Tray.tsx       小测托盘（< = >、选项、排序、×k / ÷k、对折、−/+；你的尝试；提示 / 检查 / 看答案 / 再来一道 / 跳过 / 下一章）；tray/inputs/（作答格：FractionInput、WholeInput（整数 / 算式 / 量）、
+                    ValueInputs（余数、time12 / face / time24、时长）、boxes（共用的格子 + 数字键 + 芯片））；tray/GridControls（方格：按行铺、走一圈、长宽步进、切线移动）；tray/WholeControls（阵列与数位块的按钮）
+hud/                cards/（右上卡注册表：FRACTION、AREA、PRODUCT、PLACE VALUE、TIME，按模型种类选）、plate.ts（PLATE 行：阵列 / 整数数轴 / 数位块）、BeatLine（节拍行）、ChapterIndex（要点 + 课纲对照）、PlateBlock（左列 PLATE 块）、Overlay（控制面板）
 practice/Summary    练习总结
 math-scene.css      全部样式（token、× --u、触控 ≥ 44 px；节拍过渡；1024 px 以下停在舞台上的托盘）
 scripts/math/check-pool.ts   题库草稿自证：pnpm tsx scripts/math/check-pool.ts <draft.json> [--bridge] [--topic <slug> --step <id>] [--limits <json>]
@@ -1331,6 +1334,31 @@ scripts/math/check-pool.ts   题库草稿自证：pnpm tsx scripts/math/check-po
 - **讲解拍**：新过渡 `tile`（新铺的方块按行淡入）、`walk`（路径画出 + 圆点跑 + 计数）、`arrange`（同样的方块换一种排法，整幅重挂载）；`cut`、`cross`、`shade`、`morph` 复用；`prefers-reduced-motion` 时都换成淡入。带文字的算式写 `words: { en, zh }`（如 `area = length × breadth / 面积 = 长 × 宽`），与 `equation` 二选一。
 - **HUD**：方格课的右上卡是 AREA · PERIMETER（尺寸 · 面积 · 周长；讲解拍只显示这一拍量过的：铺了才有面积、走了才有周长，不按比例的图按尺寸线；有 ? 时不算；小测只显示已知的边和孩子做的：铺了几块、描了几段、画了几 × 几、切成的两块，做完才给面积和周长）；PLATE 块 MODEL GRID · UNIT · SQUARES · SIDES；规格表多一行 UNITS（cm · m · cm² · m²），没有年级；方格课没有 S / E / N / L 辅助。步 `bridge: true` 在阅读面板节拍行上方显示 "Going further / 再往前一步"；**界面任何地方都不显示年级**（课纲对照只写 "MOE syllabus / 课纲" + 原文 + 来源芯片，`level`、`ref` 只留在数据里）。
 
+### 整数与时间（docs/19 §3.0–3.5、docs/20 §3.0–3.5 的共用部分；乘与除、时间两课）
+
+- **值**（`lib/value.ts`，纯函数：解析、比较、显示）：整数 0–99 999（`56` 或 `"56"`）、余数（`"3 r 2"`）、时刻（**一律 24 时制**：`"09:40"`、`"15:05:30"`，内部是午夜起的秒数）、时长（`"1h35m"`、`"95m"`、`"75s"`，记住写的单位）、量（`"28 cm2"`）。`answer` 按写法自动识别种类；分数照旧。以后的小数（docs/17）在 `AnswerValue` 里再加一种。
+- **写法设置**：`lesson.json` 顶层 `notation: { "clock12": "h.mm am" | "h.mm a.m." | "h:mm am", "clock24": "HH:MM" | "HHMM" | "HH MM" }`（缺省 `h.mm am` + `HH:MM`），所有显示都走这一处（`NotationContext`）。
+- **文本记号**（字幕、题目、算式、正文、名词表）：`{t:09:40}` 12 时制（EN `9.40 am`；ZH 正文 `上午 9.40`，算式行仍是 `9.40 am`）、`{t:7:20|face}` 钟面读法（不分上下午）、`{t:19:20|24}` 24 时制、`{d:95m}` 时长（按写的单位显示：`95 min`、`1 h 35 min` / `1 小时 35 分钟`）、`{u:28 cm2}` 量（`28 cm²`）；整数照写；`3 r 2` 朗读为 "3 remainder 2" /「3 余 2」。`speakable` 把记号读成词（`lib/words.ts`：整数到 99 999 "three hundred and five" /「三百零五」、位值、时刻 "seven twenty p.m." /「晚上七点二十分」/「十九时二十分」、"twenty past seven"、时长）；`plainText` 写成显示文字（aria）；validate 拒绝写坏的记号。
+- **模型**
+  - **阵列** `{ "kind": "array", "object": "dot" | "kueh" | "curry-puff" | "egg" | "chopsticks" | "seat" | "orange" | "pencil" | "sticker", "layout": "scatter" | "groups" | "rows", … }`：`scatter` + `count`（+ `containers: { kind, count }` 旁边的空盘 / `{ kind, size }` 空盒）；`groups` + `groups` × `size` 或 `sizes: [2, 5, 5]`、`extra`（剩下的，虚线托着）、`another`（剩下的圈进虚线容器）、`container: ring | plate | box | bag | car`、`filled`（车）；`rows` + `rows` × `cols`、`extra`（最后一列不满）。`braces: true | "rows" | "cols"`（尺寸线语法的计数）、`split: { "rows": [5] }` / `{ "cols": [5] }`（两部分分开画，`tones` 定颜色，缺省 cold、hot）、`cover: { "rows": true }`（纸条盖住那个数，写 ?）、`crossed: { rows | cols | groups: [i] }`（墨色斜线，0 起）、`pair: [layout, layout]`（并排两种，各带 `label`）。规模：散放 / 组 ≤ 60 个，行 ≤ 12 × 12（`dot` ≤ 14 × 14）。
+  - **整数数轴** `{ "kind": "numberline", "scale": "whole", "from": 0, "to": 50, "step": 5, "labels": "ends" | "tens" | "steps" | "all" | "none", "jumps": { "size": 5, "count": 7, "from": 0 }, "counter": true }`（`to` ≤ 100；弧顶写 +5，落点小圆；`counter` 在弧里编号 1、2、3）。分数数轴不变（`scale` 缺省 `fraction`，`intervals` 必填，`to` ≤ 3）。
+  - **数位块** `{ "kind": "blocks", "value": 26, "copies": 3, "combined": true, "left": { "T": 6, "O": 18 }, "plates": 3, "dealt": { "T": 2 }, "trade": "O>T" | "T>H" | "T>O" | "H>T", "focus": "T", "column": { "op": "×" | "÷", "a": 26, "b": 3, "show": "none" | "ones" | "carry" | "tens" | "hundreds" | "all" }, "mat": true }`：百 = 10 × 10 方板、十 = 1 × 10 长条、一 = 小方块，垫子三列 H · T · O（列下写块数）；`copies` 画成几行一样的（×1、×2…），`combined` / `left` 推到一起；`plates` 在垫下画盘，`dealt` 是每盘的；`trade` 在这一拍点亮要换的 10 个（配 `move: trade` 时画换完的样子，换的过程有动画）；竖式在垫子右边（窄屏在下面），× 从个位写起（`carry` 时换上去的小数字写在上一位上方），÷ 用长除号（除数、括号、横线，商写在上面，从最高位写起，0 照写；`carry` = 剩下的换下来、带下一位），亮的那一位与垫上亮的列一致（`focus`，缺省按 `show`）。`mat: false` 只画竖式。值 ≤ 999、同屏 ≤ 120 块。
+  - 节拍可以带 `under`：第二个模型画在第一个下面（例：每对筷子下面的跳数数轴）。
+- **讲解拍过渡**（`move`，都 ≤ 900 ms，`prefers-reduced-motion` 时淡入或直接到位）：`group`（散 → 组，每个东西从原处走到组里）、`deal`（一轮一个，按顺序发到各容器）、`arrange`（组 → 行）、`rotate`（整幅转 90° 进来）、`cover`（纸条滑进来）、`jump`（数轴上的弧一个接一个出现）、`combine`（× 的几行推成一列列）、`trade`（10 个滑进下一列，新块出现）、`sweep`（钟针扫，由钟面模型实现；其它模型淡入）；`cut`、`cross`、`shade`、`morph` 照旧。阵列和数位块在同样的东西之间换拍时**不重挂载**（每个东西 / 块保留自己的 key，CSS transform 过渡），换了数或转 90° 才重挂载。
+- **题型**（括号里是 `sample` 写法）
+  - `group` `{ total, by: "share" | "pack", k, then? }`：share 有 k 个盘（托盘可加减盘），**每盘发一个**一轮一轮发；pack 每次**装满一盒**（k 个）或点新盒逐个放；点容器放一个、点容器里的东西拿出一个，容器是按钮（Enter 放、Delete 拿）。检查：组数、每组个数、剩下的都对（`"4x3"`、`"4x3+2"`、不等的 `"4,4,3"`）。
+  - `arrange` `{ rows, cols, accept: "exact" | "product" }`：从左上角拉出阵列（点格点、拖角柄、角柄 `role=slider` ←→ 列 ↑↓ 行、托盘行 / 每行步进）（`"3x5"`）。
+  - `skip-count` `{ size, count, to? }`：整数数轴上依次落跳（点刻度；游标 ←→ 一格 + Enter；再点一次收回；托盘"收回最后一跳"）（`"5,10,15,20"`）。
+  - `split-array` `{ rows, cols, at?: { rows: [k] } | { cols: [k] }, then }`：在两行（列）之间切一刀（点缝、游标 ↑↓ 行 ←→ 列 + Enter、托盘步进），两块分开各标 `5 × 7`；再填算式（`at` 给定时按题目答案；没给时 `? + ? = ?` 按孩子自己的切法判，两部分可换序）（`"r5"`、`"c3"`；`"=35,7,42"`）。
+  - `regroup` `{ value, start: { H, T, O }, then? }`：某列 ≥ 10 时点那一列或托盘 **10 个一换 1 个十**，直到每列 < 10（`"T>H"`、`"O>T,T>H"`）。
+  - `share` `{ value, k, then }`：从最高位起**分**一列（尽量平均发给 k 盘），分不了的**换开**到下一列，到个位分完（`"T,T>O,O"`：字母 = 分那一列，`X>Y` = 换）；垫上还停着十或百就检查 → `not-traded`。
+  - `input` 加写法：`form: "whole"`（1–5 位；`sentence` 印好的句子按顺序填 `?`；没有句子时按 `op` 印 `4 × 7 = ?` / `? × 6 = 42` / `35 ÷ 5 = ?`）、`"remainder"`（商 r 余数，余数格空 = 0）、`"time12"`（时 . 分 + am / pm 切换）、`"face"`（钟面读数，不分上下午）、`"time24"`（时 : 分，各两位）、`"duration"`（`h` + `min`，答案带秒时 `min` + `s`；`units` 可改）；格子满了自动跳到下一格，Tab 切格，Enter 检查。诊断上下文：`op: { kind: "×" | "÷", a, b, missing?: "a" | "b" | "c", round?: "up" | "down", split? }`、`convert: { from: "2h15m", to: "min" | "s" | "h" }`、`span: { start?, end?, length?, ask: "start" | "end" | "length" }`。sample：`"56"`、`"35,7,42"`、`"3 r 2"`、`"3"`、`"7:20 pm"`、`"7:20"`、`"19:20"`、`"10:95 am"`、`"1h75m"`（照孩子写的样子写，不成立的时刻也照写）。
+- **误解**：`whole-ops` 域 18 条（`lib/diagnose/whole-ops.ts`：`unequal-groups`、`added-not-multiplied`、`groups-size-swapped`、`skip-count-slip`、`split-slip`、`sharing-only`、`divide-order`、`operation-swapped`、`remainder-too-big`、`remainder-dropped`、`remainder-context`、`tens-as-ones`、`extra-zero`、`carry-not-added`、`digits-concatenated`、`partial-product-missed`、`zero-in-quotient`、`not-traded`），`time` 域 11 条（`lib/diagnose/time.ts`：`hands-swapped`、`next-hour`、`hour-hand-on-numeral`、`numeral-as-minutes`、`five-count-slip`、`am-pm`、`noon-midnight`、`base-100`、`count-endpoints`、`wrong-direction`、`24h-offset`）。`divide-order`、`sharing-only`、`hour-hand-on-numeral`（以及 `unequal-groups`，`group` 也能判）只由 `choose` 选项诊断。一道题只用它那个域的 code（validate：方格 → measure；时间写法 / `span` / `convert` → time；阵列 / 数位块 / 整数数轴 / `op` / 余数 → whole-ops；其余 fractions），而且 validate 拒绝"这道题诊断不出"的 code（如没有 `op ×` 却写 `carry-not-added`、不是 `time12` 却写 `am-pm`）。钟面模型以后造自己的 `TimeContext` 调 `diagnoseTime`。
+- **每步上限** `limits`：`factors: [lo, hi]`（乘法两个因数、组数和每组、行和列都在范围内）、`maxTotal`、`divisor: [lo, hi]`、`maxQuotient`、`maxValue`（题里出现的任何整数）、`clock: "12h" | "24h"`（12h 时不许 `time24`）、`step`（时刻和时长都是这么多分钟的整数倍）、`maxDuration`（如 `"180m"`）；validate 与 `check-pool --topic --step` 都查。
+- **右上卡**按模型种类换（`hud/cards/index.tsx` 的注册表）：PRODUCT（阵列、整数数轴：`4 × 3 = 12`、"4 groups of 3 / 3 rows of 4 / 6 jumps of 2"、总数的读法；小测时是孩子做的和带 ? 的算式）、PLACE VALUE（百 · 十 · 一三格 + 名称 + 这个数和读法；小测时格子是孩子的块，数等检查完才给）、TIME（时刻按 notation 显示、"twenty past seven / 七点二十分"、另一种计时法；时长和读法；小测时只给 span 的已知时刻和孩子写的）；分数、方格不变。答案写成时刻或时长的小测一律用 TIME 卡。**PLATE 行**（`hud/plate.ts`）：阵列 MODEL ARRAY · GROUPS · EACH · TOTAL；整数数轴 MODEL LINE · JUMPS · SIZE · LANDS；数位块 MODEL BLOCKS · H · T · O · TRADES。都不先说答案。
+- **VIEW**：`MODEL_VIEWS` 加 `array`、`blocks`、`clock`、`timeline`；这些模型只画自己（没有可切换的别的模型）。整数 / 时间课没有 S / E / N / L 辅助；背景章画第一个模型种类的标本（阵列 3 × 4）；规格表多一行 NUMBERS（各步 `maxValue` / `maxTotal` 的最大值）。
+- **示例主题** `sample-lesson-whole`（`status: draft`，首页不列）：四步、每步 8–10 道，把上面每个模型、过渡、题型、写法各用一次，`tests/math-scene/sample-lesson-whole.test.ts` 全部自证；截图 `pnpm shoot sample-lesson-whole --beats --tasks --keys --layout`。
+
 ### 舞台、阅读面板、HUD（docs/08 §2 全引擎 HUD 铁律）
 
 - **舞台**：讲解拍由 `BeatModel` 画（只读）；结构变了（模型种类、份数）整幅重挂载并按 `move` 播放过渡，只有标记变了时逐份过渡。模型下方一行算式（`.ms-equation`，贴在模型包围盒下方）：讲解拍 = `equation`，小测 = `workingLines` 的最后一行（不先说答案），练习不显示。
@@ -1345,7 +1373,7 @@ scripts/math/check-pool.ts   题库草稿自证：pnpm tsx scripts/math/check-po
 - **演示**（core `usePresentation`）：`lib/beats.ts` 从数据推拍：每步 = 讲解拍 + 小测拍（字幕"轮到你了"，托盘在字幕卡里、带题目句）；练习每题一拍 + 总结一拍；背景章一拍。`gate`：小测拍在答对、看答案或"跳过"之前，自动播放不前进。
 - **URL**：`ch`、`b`（≠ 1 才写）、`model`（≠ 题目默认才写）；作答、抽到的题、进度、练习结果从不进 URL、不进 storage。
 - **`__atlas.engine`**：`task()`（`{ step, beat, slot, index（题库第几道）, id, kind, phase, answered, done, tries, hints, revealed, attempts, feedback, practice }`）、`tasks()`（每道题库题 / 练习题 `{ step, index, id, kind, practice, wrong }`）、`goToTask(step, i, { instant })`（第 i 道题库题作为这一章的小测；练习章 = 第 i 题）、`goToBeat(chapter, i)`、`another()`、`skip()`、`solve()`、`answer(code | 'correct')`、`act(action)`、`practice()`。
-- **`pnpm shoot <topic> --tasks`**：每道题库题三张 `task-<step>-<n>`、`-wrong`、`-solved`；练习每题 `practice-q<n>` + `practice-summary`。`--beats` 每拍一张（小测拍带字幕卡里的托盘）。`--keys` 核对 C / I / U 与 `,` / `.`。
+- **`pnpm shoot <topic> --tasks`**：每道题库题三张 `task-<step>-<n>`、`-wrong`、`-solved`（所有题型同一条路：`goToTask` → `answer(code)` → 检查 → `solve()` 逐段做完）；练习每题 `practice-q<n>` + `practice-summary`。`--beats` 每拍一张（小测拍带字幕卡里的托盘）。`--keys` 核对 C / I / U 与 `,` / `.`。
 - e2e：`tests-e2e/area-perimeter.spec.ts`（点刻度换拍、方格题点按与纯键盘作答、量的单位芯片、练习、zh、390×844）；`tests-e2e/fractions.spec.ts`（点刻度换拍、节拍行与 `<Beat>`、方块打开小测、点按 / 纯键盘作答、错 → 诊断 → 看答案、再来一道、跳过、练习与总结、URL、演示停在小测、zh、390×844、七尺寸布局 en / zh）。
 
 ## PWA、部署与 e2e（Phase 3）

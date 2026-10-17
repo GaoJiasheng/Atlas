@@ -1,21 +1,42 @@
 /**
- * Fractions read aloud (docs/15 §4.6, §4.7): en "three quarters", "one and
- * three quarters"; zh「四分之三」「一又四分之三」. Used for aria labels, the
- * presentation's spoken captions and `speakable()` (src/lib/rich-text.ts).
+ * Numbers read aloud (docs/15 §4.6, §4.7; docs/19 §3.0 G7): fractions en
+ * "three quarters", "one and three quarters", zh「四分之三」「一又四分之三」;
+ * whole numbers to 99 999 ("three hundred and five" /「三百零五」); place
+ * values ("1 hundred 2 tens 0 ones"); times of day ("seven twenty p.m.",
+ * "twenty past seven" /「晚上七点二十分」「十九时二十分」) and durations
+ * ("one hour thirty-five minutes" /「一小时三十五分钟」). Used for aria labels,
+ * the presentation's spoken captions and `speakable()` (src/lib/rich-text.ts).
  * A `?` in a slot (`{?/12}`, `{8/?}`) reads as a question: "how many
  * twelfths", "eight over what"; zh「十二分之几」「几分之八」.
  */
 import type { Frac } from './fraction';
+import { clockParts, durationParts, periodZh, type ClockMode, type DurUnit } from './value';
 
 const ONES = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
 const TENS = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
 
-/** English cardinal for 0–99 (digits beyond that). */
-export function numberEn(n: number): string {
-  if (!Number.isInteger(n) || n < 0 || n > 99) return String(n);
+function under100En(n: number): string {
   if (n < 20) return ONES[n]!;
   const t = TENS[Math.floor(n / 10)]!;
   return n % 10 ? `${t}-${ONES[n % 10]}` : t;
+}
+
+function under1000En(n: number): string {
+  const h = Math.floor(n / 100);
+  const rest = n % 100;
+  if (!h) return under100En(rest);
+  return rest ? `${ONES[h]} hundred and ${under100En(rest)}` : `${ONES[h]} hundred`;
+}
+
+/** English cardinal for 0–99 999, the British way ("three hundred and five", "one thousand and twenty"); digits beyond that. */
+export function numberEn(n: number): string {
+  if (!Number.isInteger(n) || n < 0 || n > 99_999) return String(n);
+  const k = Math.floor(n / 1000);
+  const rest = n % 1000;
+  if (!k) return under1000En(rest);
+  const head = `${under100En(k)} thousand`;
+  if (!rest) return head;
+  return rest < 100 ? `${head} and ${under100En(rest)}` : `${head} ${under1000En(rest)}`;
 }
 
 const ORDINAL: Record<number, [string, string]> = {
@@ -46,14 +67,120 @@ export function denominatorEn(d: number, plural: boolean): string {
 }
 
 const ZH_DIGITS = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
+const ZH_PLACES = ['', '十', '百', '千', '万'];
 
-/** Chinese numeral for 0–99（十、十二、二十、三十五）. */
+/** Chinese numeral for 0–99 999（十、十二、一百零五、一千零二十、二万三千）; digits beyond that. */
 export function numberZh(n: number): string {
-  if (!Number.isInteger(n) || n < 0 || n > 99) return String(n);
+  if (!Number.isInteger(n) || n < 0 || n > 99_999) return String(n);
   if (n < 10) return ZH_DIGITS[n]!;
-  const tens = Math.floor(n / 10);
-  const ones = n % 10;
-  return `${tens === 1 ? '' : ZH_DIGITS[tens]}十${ones ? ZH_DIGITS[ones] : ''}`;
+  const digits = String(n).split('').map(Number);
+  const top = digits.length - 1;
+  let out = '';
+  let zero = false;
+  digits.forEach((d, i) => {
+    const place = top - i;
+    if (d === 0) {
+      zero = out !== '';
+      return;
+    }
+    if (zero) out += '零';
+    zero = false;
+    // 10–19 read 十, 十一 … (not 一十一).
+    out += (d === 1 && place === 1 && i === 0 ? '' : ZH_DIGITS[d]!) + ZH_PLACES[place]!;
+  });
+  return out;
+}
+
+/** A whole number in words. */
+export const wholeWords = (n: number, locale: 'en' | 'zh'): string => (locale === 'zh' ? numberZh(n) : numberEn(n));
+
+const PLACE_NAMES = {
+  en: [
+    ['one', 'ones'],
+    ['ten', 'tens'],
+    ['hundred', 'hundreds'],
+    ['thousand', 'thousands'],
+    ['ten thousand', 'ten thousands'],
+  ],
+  zh: ['一', '十', '百', '千', '万'],
+} as const;
+
+/** The name of a place: `ones`, `tens` /「个位」「十位」… (`count` picks en singular / plural). */
+export function placeName(place: number, locale: 'en' | 'zh', count = 2): string {
+  if (locale === 'zh') return `${['个', '十', '百', '千', '万'][place] ?? ''}位`;
+  const p = PLACE_NAMES.en[place] ?? PLACE_NAMES.en[0];
+  return count === 1 ? p[0] : p[1];
+}
+
+/** Counts by place, highest first: `{ H: 1, T: 2, O: 0 }` → "1 hundred, 2 tens and 0 ones" /「1 个百、2 个十和 0 个一」. */
+export function placeValueWords(counts: readonly number[], locale: 'en' | 'zh'): string {
+  // `counts` are ones first (index = place).
+  const parts = counts
+    .map((c, place) => ({ c, place }))
+    .reverse()
+    .map(({ c, place }) => (locale === 'zh' ? `${c} 个${PLACE_NAMES.zh[place]}` : `${c} ${placeName(place, 'en', c)}`));
+  if (parts.length === 1) return parts[0]!;
+  const last = parts.pop()!;
+  return locale === 'zh' ? `${parts.join('、')}和 ${last}` : `${parts.join(', ')} and ${last}`;
+}
+
+/* ------------------------------------------------------------------ */
+/* Times of day and durations                                          */
+/* ------------------------------------------------------------------ */
+
+const twoEn = (m: number) => (m === 0 ? '' : m < 10 ? `oh ${ONES[m]}` : under100En(m));
+
+/**
+ * A time of day read aloud (docs/20 §3.3): 12-hour "seven twenty p.m.",
+ * "seven o'clock a.m."; a face reading "seven twenty"; 24-hour "nineteen
+ * twenty", "nineteen hundred". zh「晚上七点二十分」「七点二十分」「十九时二十分」.
+ */
+export function clockWords(t: number, mode: ClockMode, locale: 'en' | 'zh'): string {
+  const p = clockParts(t);
+  const sec = (en: boolean) => (p.s ? (en ? ` and ${under100En(p.s)} second${p.s === 1 ? '' : 's'}` : `${numberZh(p.s)}秒`) : '');
+  if (locale === 'zh') {
+    if (mode === '24') return `${numberZh(p.h24)}时${p.m ? `${numberZh(p.m)}分` : p.s ? '零分' : ''}${sec(false)}`;
+    const face = `${numberZh(p.h12)}点${p.m ? `${p.m < 10 ? '零' : ''}${numberZh(p.m)}分` : p.s ? '零分' : ''}${sec(false)}`;
+    return mode === 'face' ? face : `${periodZh(t)}${face}`;
+  }
+  if (mode === '24') {
+    const h = p.h24 < 10 ? `zero ${ONES[p.h24]}` : under100En(p.h24);
+    return `${h} ${p.m ? twoEn(p.m) : 'hundred'}${sec(true)}`;
+  }
+  const face = p.m ? `${ONES[p.h12]} ${twoEn(p.m)}` : `${ONES[p.h12]} o'clock`;
+  return mode === 'face' ? `${face}${sec(true)}` : `${face} ${p.pm ? 'p.m.' : 'a.m.'}${sec(true)}`;
+}
+
+/**
+ * The "past" reading of a clock face (docs/20 D7, no "to"): "seven o'clock",
+ * "quarter past seven", "half past seven", "twenty past seven", "eleven
+ * minutes past seven"; past the half hour, the digital reading ("seven forty").
+ * zh「七点整」「七点半」「七点二十分」.
+ */
+export function clockPastWords(t: number, locale: 'en' | 'zh'): string {
+  const p = clockParts(t);
+  if (locale === 'zh') {
+    if (p.m === 0) return `${numberZh(p.h12)}点整`;
+    if (p.m === 30) return `${numberZh(p.h12)}点半`;
+    return `${numberZh(p.h12)}点${p.m < 10 ? '零' : ''}${numberZh(p.m)}分`;
+  }
+  const h = ONES[p.h12]!;
+  if (p.m === 0) return `${h} o'clock`;
+  if (p.m === 15) return `quarter past ${h}`;
+  if (p.m === 30) return `half past ${h}`;
+  if (p.m < 30) return p.m % 5 === 0 ? `${under100En(p.m)} past ${h}` : `${under100En(p.m)} minute${p.m === 1 ? '' : 's'} past ${h}`;
+  return `${h} ${under100En(p.m)}`;
+}
+
+const DUR_WORDS = { h: ['hour', 'hours', '小时'], m: ['minute', 'minutes', '分钟'], s: ['second', 'seconds', '秒'] } as const;
+
+/** A duration read aloud, in the units it is written in: "one hour thirty-five minutes" /「一小时三十五分钟」. */
+export function durationWords(t: number, units: readonly DurUnit[], locale: 'en' | 'zh'): string {
+  const p = durationParts(t, units);
+  const shown = units.filter((u) => p[u] > 0);
+  const list = shown.length ? shown : units.slice(-1);
+  if (locale === 'zh') return list.map((u) => `${numberZh(p[u])}${DUR_WORDS[u][2]}`).join('');
+  return list.map((u) => `${numberEn(p[u])} ${DUR_WORDS[u][p[u] === 1 ? 0 : 1]}`).join(' ');
 }
 
 /** A slot of a written fraction: a number, or `null` for a `?` blank. */

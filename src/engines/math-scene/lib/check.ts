@@ -7,12 +7,17 @@
  * else is `code: null` and gets the task's fallback. `not-simplest` is the
  * near miss: equal, but not in lowest terms (`near: true`, not counted as a try).
  */
-import type { InputSpec, MisconceptionCode, Task, TaskOf } from '../schema';
+import type { InputSpec, MisconceptionCode, Model, Task, TaskOf } from '../schema';
 import { compare, equal, equivalent, isSimplest, sign, toImproper, valueOnLine, type Frac } from './fraction';
 import { inputSpecOf, partsFor, phasesOf, taskFigure, tileKeys, type Phase, type Sym, type TaskState } from './state';
 import { boundaryEdges, isHalfKey, parseCut, piecesAfter, rectOf } from './grid';
 import { askOf, diagnoseNumber, drawnRight, drawnShows, measured, unitShows } from './diagnose/measure';
-import { isUnit, type Unit } from './value';
+import { isFracValue, isUnit, type AnswerValue, type Unit } from './value';
+import { answerValues, isTimeForm, isValueForm, isWholeForm, readWritten, valueFields, writtenEquals, type Written } from './forms';
+import { arrangedShows, diagnoseWhole, groupShows, groupsRight, landingsShow, opResult, skipTarget, wholeContextOf, type WholeWritten } from './diagnose/whole-ops';
+import { diagnoseTime, timeContextOf } from './diagnose/time';
+import { parseArrayCut } from './array';
+import { regrouped } from './blocks';
 
 export interface CheckResult {
   ok: boolean;
@@ -43,8 +48,19 @@ export interface InputRow {
   slots: { slot: Slot; field: string | null; printed: number | null }[];
 }
 
+/** The answers of a fraction or whole-number input (other values are left out: see `answerValues`). */
 export function answersOf(spec: InputSpec): Frac[] {
-  return Array.isArray(spec.answer) ? spec.answer : [spec.answer];
+  return answerValues(spec).filter(isFracValue);
+}
+
+/** A model drawing fractions (a whole-number answer on one is read in the fraction boxes). */
+export const isFractionModel = (m: Model): boolean => m.kind === 'bar' || m.kind === 'circle' || m.kind === 'wall' || m.kind === 'barmodel' || (m.kind === 'numberline' && m.scale === 'fraction');
+
+/** Is the written part answered in the value boxes (`forms.ts`): whole numbers off the fraction models, remainders, times, durations? */
+export function usesValueBoxes(task: Task, spec: InputSpec): boolean {
+  if (!isValueForm(spec.form)) return false;
+  if (task.model.kind === 'grid') return false;
+  return !(isWholeForm(spec.form) && isFractionModel(task.model) && !spec.op);
 }
 
 /** The written fractions of an input phase, with their boxes. */
@@ -68,12 +84,14 @@ export function inputRows(spec: InputSpec): InputRow[] {
 
 /** Every box the child must fill. */
 export function inputFields(spec: InputSpec): string[] {
+  if (isValueForm(spec.form) && !isWholeForm(spec.form)) return valueFields(spec);
   return inputRows(spec).flatMap((r) => r.slots.flatMap((s) => (s.field ? [s.field] : [])));
 }
 
 /** The fractions as written (`null` while a box is empty, or a measure's unit is not chosen). A whole-number answer is `{ n, d: 1 }`. Zero denominators are kept raw for the diagnosis. */
 export function readInput(spec: InputSpec, input: Readonly<Record<string, string>>): Frac[] | null {
   if (spec.form === 'measure' && !isUnit(input.u)) return null;
+  if (isValueForm(spec.form) && !isWholeForm(spec.form)) return null;
   const out: Frac[] = [];
   for (const row of inputRows(spec)) {
     const v: Partial<Record<Slot, number>> = {};
@@ -150,7 +168,7 @@ function inputRule(code: MisconceptionCode, task: Task, spec: InputSpec, v: Frac
       const m = task.model;
       if (m.kind !== 'numberline' || !m.arrow) return false;
       const k = valueOnLine(m.arrow, m);
-      return k !== null && x.n === k + 1 && x.d === m.intervals + 1;
+      return k !== null && x.n === k + 1 && x.d === (m.intervals ?? 1) + 1;
     }
     case 'whole-changed': {
       const m = task.model;
@@ -185,8 +203,7 @@ export function checkInputValues(task: Task, spec: InputSpec, values: readonly F
       case 'mixed':
         right = v.d > 0 && v.w !== undefined && v.n < v.d && equivalent(v, answer) && isSimplest({ n: v.n, d: v.d });
         break;
-      case 'whole':
-      case 'measure':
+      default:
         right = v.n === answer.n && answer.d === 1;
         break;
     }
@@ -398,16 +415,117 @@ export function gridAnswer(task: Task): number | null {
   return ctx ? measured(ctx) : null;
 }
 
+/* ------------------------------------------------------------------ */
+/* Whole numbers, remainders, times (docs/19 §3, docs/20 §3)           */
+/* ------------------------------------------------------------------ */
+
+const toWhole = (w: Written): WholeWritten | null => (w.kind === 'whole' ? { n: w.n } : w.kind === 'rem' ? { q: w.q, r: w.r } : null);
+const wholeOfAnswer = (a: AnswerValue): WholeWritten | null => (isFracValue(a) ? (a.d === 1 ? { n: a.n } : null) : a.kind === 'rem' ? { q: a.q, r: a.r } : null);
+const sameWhole = (x: WholeWritten, y: WholeWritten) => ('n' in x ? 'n' in y && x.n === y.n : 'q' in y && x.q === y.q && x.r === y.r);
+
+/** The cut of a split-array task as the diagnosis's known part (the rows or columns before it). */
+function splitOf(task: Task, state: TaskState) {
+  if (task.kind !== 'split-array') return null;
+  const c = parseArrayCut(state.cut);
+  return c ? { first: c.at, of: c.axis === 'rows' ? ('a' as const) : ('b' as const) } : null;
+}
+
+/** The answers of a split-array's sentence for the child's cut: the two parts, then the whole (`null` while not cut). */
+export function splitAnswers(task: TaskOf<'split-array'>, cut: string | null): [number, number, number] | null {
+  const c = parseArrayCut(cut);
+  if (!c) return null;
+  const other = c.axis === 'rows' ? task.cols : task.rows;
+  const whole = c.axis === 'rows' ? task.rows : task.cols;
+  return [c.at * other, (whole - c.at) * other, task.rows * task.cols];
+}
+
+/** A written part in the value boxes: every box against its answer; the first wrong one is diagnosed in its domain. */
+function checkValueInput(task: Task, spec: InputSpec, written: readonly Written[], state: TaskState): CheckResult {
+  const codes = declaredCodes(task);
+  let answers = answerValues(spec);
+  // A split array cut anywhere: the sentence's parts are the child's cut's (in either order), the whole is fixed.
+  if (task.kind === 'split-array' && !task.at && answers.length === 3) {
+    const parts = splitAnswers(task, state.cut);
+    if (parts) {
+      const [p, q] = written.map((w) => (w.kind === 'whole' ? w.n : -1));
+      const swap = p === parts[1] && q === parts[0];
+      answers = (swap ? [parts[1], parts[0], parts[2]] : parts).map((n) => ({ n, d: 1 }));
+    }
+  }
+  for (const [i, answer] of answers.entries()) {
+    const w = written[i];
+    if (!w) return NOT_YET;
+    if (writtenEquals(spec, w, answer)) continue;
+    if (isTimeForm(spec.form) || spec.convert || spec.span) {
+      const ctx = timeContextOf(task, spec, answer);
+      return { ok: false, code: ctx ? diagnoseTime(codes, ctx, w) : null };
+    }
+    const x = toWhole(w);
+    const right = wholeOfAnswer(answer);
+    if (!x || !right) return { ok: false, code: null };
+    const ctx = wholeContextOf(task, spec, right, splitOf(task, state));
+    // The fact applies to the box that holds its result (the whole of a split's sentence, the quotient).
+    const op = ctx.op && sameWhole(opResult(ctx.op), right) ? ctx.op : null;
+    return { ok: false, code: diagnoseWhole(codes, { ...ctx, op }, x) };
+  }
+  return OK;
+}
+
+/** The model phase of an array or blocks task. */
+function checkWholeModel(task: Task, state: TaskState): CheckResult {
+  const codes = declaredCodes(task);
+  switch (task.kind) {
+    case 'group': {
+      if (groupsRight(task, state.groups)) return OK;
+      return { ok: false, code: codes.find((c) => groupShows(c, task, state.groups)) ?? null };
+    }
+    case 'arrange': {
+      if (!state.arr) return NOT_YET;
+      const [r, c] = state.arr;
+      if (task.accept === 'product' ? r * c === task.rows * task.cols : r === task.rows && c === task.cols) return OK;
+      return { ok: false, code: codes.find((code) => arrangedShows(code, task, r, c)) ?? null };
+    }
+    case 'skip-count': {
+      const want = skipTarget(task);
+      if (state.landings.length === want.length && state.landings.every((v, i) => v === want[i])) return OK;
+      return { ok: false, code: codes.find((c) => landingsShow(c, task, state.landings)) ?? null };
+    }
+    case 'split-array': {
+      const c = parseArrayCut(state.cut);
+      if (!c) return NOT_YET;
+      const at = task.at?.rows ? { axis: 'rows', at: task.at.rows[0] } : task.at?.cols ? { axis: 'cols', at: task.at.cols[0] } : null;
+      return !at || (at.axis === c.axis && at.at === c.at) ? OK : NOT_YET;
+    }
+    case 'regroup':
+      return regrouped(state.mat) ? OK : NOT_YET;
+    case 'share': {
+      const m = state.mat;
+      if (m.H === 0 && m.T === 0 && m.O < task.k) return OK;
+      // Stopped with a ten (or a hundred) left that cannot be shared as it is: it was not traded.
+      if ((m.H > 0 && m.H < task.k) || (m.T > 0 && m.T < task.k && m.H === 0)) return { ok: false, code: codes.includes('not-traded') ? 'not-traded' : null };
+      if (m.H === 0 && m.T === 0 && m.O >= task.k) return { ok: false, code: codes.includes('remainder-too-big') ? 'remainder-too-big' : null };
+      return NOT_YET;
+    }
+    default:
+      return NOT_YET;
+  }
+}
+
 /** Check one phase of a task. */
 export function checkPhase(task: Task, state: TaskState, phase: Phase): CheckResult {
   if (phase === 'input') {
     const spec = inputSpecOf(task);
     if (!spec) return NOT_YET;
+    if (usesValueBoxes(task, spec)) {
+      const written = readWritten(spec, state.input);
+      return written ? checkValueInput(task, spec, written, state) : NOT_YET;
+    }
     const values = readInput(spec, state.input);
     if (!values) return NOT_YET;
     return task.model.kind === 'grid' ? checkGridInput(task, spec, values, state) : checkInputValues(task, spec, values);
   }
   if (task.kind === 'count-squares' || task.kind === 'trace-perimeter' || task.kind === 'draw-rectangle' || task.kind === 'split-figure') return checkGridModel(task, state);
+  if (task.kind === 'group' || task.kind === 'arrange' || task.kind === 'skip-count' || task.kind === 'split-array' || task.kind === 'regroup' || task.kind === 'share') return checkWholeModel(task, state);
   switch (task.kind) {
     case 'shade':
       return checkShade(task, state);
@@ -450,7 +568,8 @@ export function answered(task: Task, state: TaskState): boolean {
   const phase = phasesOf(task)[state.phase] ?? 'model';
   if (phase === 'input') {
     const spec = inputSpecOf(task);
-    return !!spec && readInput(spec, state.input) !== null;
+    if (!spec) return false;
+    return usesValueBoxes(task, spec) ? readWritten(spec, state.input) !== null : readInput(spec, state.input) !== null;
   }
   if (phase === 'convert') return state.factor !== null || state.parts !== (task.model.kind === 'bar' ? task.model.parts : 0);
   if (phase === 'mark') return state.shaded.length + state.crossed.length > 0;
@@ -479,7 +598,18 @@ export function answered(task: Task, state: TaskState): boolean {
     case 'draw-rectangle':
       return state.rect !== null;
     case 'split-figure':
+    case 'split-array':
       return state.cut !== null;
+    case 'group':
+      return state.groups.some((g) => g > 0);
+    case 'arrange':
+      return state.arr !== null;
+    case 'skip-count':
+      return state.landings.length > 0;
+    case 'regroup':
+      return state.trades > 0;
+    case 'share':
+      return state.dealt.H + state.dealt.T + state.dealt.O > 0;
     default:
       return false;
   }

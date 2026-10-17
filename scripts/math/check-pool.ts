@@ -1,7 +1,7 @@
 /**
  * Check a draft of lesson tasks before it goes into `lesson.json` (docs/15 §10,
- * skill atlas-lesson-topic):
- *   pnpm tsx scripts/math/check-pool.ts <draft.json> [--bridge] [--topic <slug> --step <step-id>] [--limits '{"maxSide":12}']
+ * skill atlas-lesson-topic; every task kind and answer form, docs/06 MathScene):
+ *   pnpm tsx scripts/math/check-pool.ts <draft.json> [--bridge] [--topic <slug> --step <step-id>] [--limits '{"maxSide":12}' | '{"factors":[2,5],"maxTotal":40}' | '{"step":5,"maxDuration":"180m"}']
  * The draft is a JSON array of tasks (or `{ "pool": [...] }`). Every task is
  * parsed with the lesson schema, run through the content rules (`taskIssues`,
  * with the step's number limits: `--topic` + `--step` read them from that
@@ -13,7 +13,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { parseArgs } from 'node:util';
-import { lessonFile, taskSchema, type StepLimits } from '../../src/engines/math-scene/schema';
+import { lessonFile, stepLimits, taskSchema, type StepLimits } from '../../src/engines/math-scene/schema';
 import { taskIssues } from '../../src/engines/math-scene/validate';
 import { proveTask } from '../../src/engines/math-scene/lib/proof';
 
@@ -27,7 +27,8 @@ if (!file) {
   process.exit(2);
 }
 let bridge = opts.bridge ?? false;
-let limits: StepLimits | undefined = opts.limits ? (JSON.parse(opts.limits) as StepLimits) : undefined;
+// Inline limits go through the schema (durations like "180m" parse to seconds).
+let limits: StepLimits | undefined = opts.limits ? stepLimits.parse(JSON.parse(opts.limits)) : undefined;
 if (opts.topic) {
   const lesson = lessonFile.parse(JSON.parse(readFileSync(join(import.meta.dirname, '../../src/content/topics', opts.topic, 'data/lesson.json'), 'utf8')));
   const step = lesson.steps.find((s) => s.id === opts.step);

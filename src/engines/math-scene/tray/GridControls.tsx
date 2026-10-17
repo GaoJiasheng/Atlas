@@ -3,25 +3,20 @@
  * moves as on the stage, as finger-sized buttons that also work from the
  * keyboard — lay or lift a row at a time, "Walk round" (number the traced
  * sides in walking order) and Clear, the length and breadth steppers of a
- * drawn rectangle, the up-and-down / across cut movers — and the written
- * part: whole-number boxes with the unit printed after them, or a measure's
- * number box with its unit chips (cm, cm², m, m²), or a number sentence with
- * a box for each `?` (`? + ? = ?`), all with the on-screen keypad.
+ * drawn rectangle, the up-and-down / across cut movers. The written part is
+ * `inputs/WholeInput.tsx`.
  */
-import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import type { Locale } from '../../core/types';
 import { t } from '../../../i18n';
 import type { Task } from '../schema';
 import type { Controller } from '../controller';
-import { boxDigits, figureRows, inputSpecOf, taskFigure, type TaskState } from '../lib/state';
-import { inputFields } from '../lib/check';
+import { figureRows, taskFigure, type TaskState } from '../lib/state';
 import { parseCut } from '../lib/grid';
-import { askOf } from '../lib/diagnose/measure';
-import { squared, unitText, type Unit } from '../lib/value';
+import { unitText } from '../lib/value';
 
 const tr = (locale: Locale) => (key: Parameters<typeof t>[1], vars?: Record<string, string | number>) => t(locale, key, vars);
 
-function Stepper({ label, value, less, more, lessLabel, moreLabel, lessOff, moreOff }: { label: string; value: string; less(): void; more(): void; lessLabel: string; moreLabel: string; lessOff?: boolean; moreOff?: boolean }) {
+export function Stepper({ label, value, less, more, lessLabel, moreLabel, lessOff, moreOff }: { label: string; value: string; less(): void; more(): void; lessLabel: string; moreLabel: string; lessOff?: boolean; moreOff?: boolean }) {
   return (
     <div className="ms-tray__row ms-gstep">
       <button type="button" className="ms-btn ms-btn--icon" aria-label={lessLabel} disabled={lessOff} onClick={less}>
@@ -128,114 +123,4 @@ export function GridModelControls({ task, state, ctl, locale, locked }: { task: 
     );
   }
   return null;
-}
-
-/** Arrow keys inside a radio group move the choice (the host leaves arrows to radio groups). */
-function radioKeys(e: KeyboardEvent<HTMLElement>) {
-  const items = [...e.currentTarget.querySelectorAll<HTMLButtonElement>('[role="radio"]:not(:disabled)')];
-  const i = items.indexOf(document.activeElement as HTMLButtonElement);
-  const dir = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
-  if (!dir || items.length === 0) return;
-  e.preventDefault();
-  const next = items[(i + dir + items.length) % items.length]!;
-  next.focus();
-  next.click();
-}
-
-/** A grid task's written part: whole-number boxes (unit printed), a measure (box + unit chips) or a sentence, with the keypad. */
-export function WholeInput({ task, state, ctl, locale, locked }: { task: Task; state: TaskState; ctl: Controller; locale: Locale; locked: boolean }) {
-  const T = tr(locale);
-  const spec = inputSpecOf(task)!;
-  const fields = inputFields(spec);
-  const digits = boxDigits(spec);
-  const [active, setActive] = useState<string | null>(null);
-  const refs = useRef<Record<string, HTMLInputElement | null>>({});
-  useEffect(() => setActive(null), [task.id, state.phase]);
-  const m = task.model;
-  const gridUnit = m.kind === 'grid' ? m.unit : 'unit';
-  const ask = askOf(task, spec)?.ask;
-  const printed: Unit = spec.unit ?? (ask === 'area' ? squared(gridUnit) : gridUnit);
-  const write = (field: string, value: string) => ctl.act({ do: 'input', field, value });
-  const first = fields[0];
-  const press = (key: string) => {
-    const field = active ?? first;
-    if (!field || locked) return;
-    const cur = state.input[field] ?? '';
-    write(field, key === 'back' ? cur.slice(0, -1) : (cur + key).slice(-digits));
-    refs.current[field]?.focus({ preventScroll: true });
-    setActive(field);
-  };
-  const label = (i: number) => (ask ? t(locale, `math.grid.${ask}`) : T('math.input.w')) + (fields.length > 1 ? ` ${i + 1}` : '');
-  const box = (field: string, i: number) => (
-    <input
-      key={field}
-      ref={(el) => {
-        refs.current[field] = el;
-      }}
-      className="ms-box ms-box--whole"
-      data-field={field}
-      data-active={(active ?? first) === field || undefined}
-      inputMode="none"
-      autoComplete="off"
-      maxLength={digits}
-      aria-label={label(i)}
-      value={state.input[field] ?? ''}
-      disabled={locked}
-      onFocus={() => setActive(field)}
-      onChange={(e) => write(field, e.currentTarget.value)}
-    />
-  );
-  // A sentence prints its words and operators with a box for each `?`.
-  const sentence = spec.sentence ?? (task.kind === 'split-figure' ? '? + ? = ?' : null);
-  const parts = sentence ? sentence.split('?') : null;
-  const units: Unit[] = gridUnit === 'unit' ? ['unit', 'unit2'] : ['cm', 'cm2', 'm', 'm2'];
-  return (
-    <div className="ms-input" data-keys="own">
-      <div className="ms-input__rows ms-input__rows--whole">
-        {parts ? (
-          parts.map((text, i) => (
-            <span key={i} className="ms-input__part">
-              {text && <span className="ms-input__eq">{text.trim()}</span>}
-              {i < parts.length - 1 && fields[i] && box(fields[i]!, i)}
-            </span>
-          ))
-        ) : (
-          <span className="ms-input__row">
-            {ask && <span className="ms-input__eq">{t(locale, `math.grid.${ask}`)} =</span>}
-            {fields.map((f, i) => box(f, i))}
-          </span>
-        )}
-        {spec.form !== 'measure' && <span className="ms-input__unit">{unitText(printed, locale)}</span>}
-      </div>
-      {spec.form === 'measure' && (
-        <div className="ms-units" role="radiogroup" aria-label={T('math.tray.unit')} onKeyDown={radioKeys}>
-          {units.map((u, i) => (
-            <button
-              key={u}
-              type="button"
-              role="radio"
-              aria-checked={state.input.u === u}
-              tabIndex={state.input.u === u || (!state.input.u && i === 0) ? 0 : -1}
-              className="ms-chip ms-unit"
-              data-unit={u}
-              disabled={locked}
-              onClick={() => write('u', state.input.u === u ? '' : u)}
-            >
-              {unitText(u, locale)}
-            </button>
-          ))}
-        </div>
-      )}
-      <div className="ms-keypad" role="group" aria-label={T('math.input.keypad')}>
-        {['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'].map((k) => (
-          <button key={k} type="button" className="ms-key" disabled={locked} onPointerDown={(e) => e.preventDefault()} onClick={() => press(k)}>
-            {k}
-          </button>
-        ))}
-        <button type="button" className="ms-key ms-key--back" aria-label={T('math.input.back')} disabled={locked} onPointerDown={(e) => e.preventDefault()} onClick={() => press('back')}>
-          ⌫
-        </button>
-      </div>
-    </div>
-  );
 }

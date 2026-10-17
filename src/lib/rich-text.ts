@@ -1,46 +1,123 @@
 /**
- * Fractions inside text (docs/15 §4.2, C10): `{3/4}`, `{1 3/4}` and blanks
- * `{?/12}`, `{8/?}` in data and UI text are typeset as small stacked fractions
- * (`renderRich`) and read as words (`speakable`: "three quarters" /「四分之三」)
- * for the presentation voice and screen readers. Used by the lesson tray,
- * card, reader inspector and the glossary card; text without tokens passes
- * through unchanged. Client-safe (React `createElement`, no JSX file needed).
+ * Numbers inside text (docs/15 §4.2, C10; docs/19 §3.0 G7): tokens in data and
+ * UI text that are typeset (`renderRich`) and read as words (`speakable`) for
+ * the presentation voice and screen readers:
+ *   `{3/4}`, `{1 3/4}`, blanks `{?/12}`, `{8/?}`  a small stacked fraction ("three quarters" /「四分之三」)
+ *   `{t:09:40}`  a time of day in 12-hour time, by the lesson's notation (`9.40 am`; zh prose `上午 9.40`)
+ *   `{t:7:20|face}`  as a clock face reads it, no am / pm (`7.20`)
+ *   `{t:19:20|24}`  in 24-hour time (`19:20`)
+ *   `{d:95m}`, `{d:1h35m}`, `{d:75s}`  a duration in the units written (`1 h 35 min` / `1 小时 35 分钟`)
+ *   `{u:28 cm2}`  a measure (`28 cm²`, read "28 square centimetres")
+ * Whole numbers are written as they are; `3 r 2` reads "3 remainder 2" /「3 余 2」.
+ * Used by the lesson tray, card, reader inspector and the glossary card; text
+ * without tokens passes through unchanged. Client-safe (React `createElement`,
+ * no JSX file needed). The lesson's notation reaches the time tokens through
+ * `NotationContext` (the MathScene view provides it).
  */
-import { createElement, Fragment, type ReactNode } from 'react';
-import { fractionWords, type FracSlots } from '../engines/math-scene/lib/words';
+import { createContext, createElement, Fragment, useContext, type ReactNode } from 'react';
+import { clockWords, durationWords, fractionWords, numberEn, numberZh, type FracSlots } from '../engines/math-scene/lib/words';
+import { clockText, DEFAULT_NOTATION, durationText, parseClock, parseDuration, parseMeasure, unitText, unitWords, type ClockMode, type DurUnit, type Measure, type Notation } from '../engines/math-scene/lib/value';
 import { groupRuns, splitGlue } from './frac-glue';
 
-export type RichPart = { text: string } | { frac: FracSlots };
+export type RichPart = { text: string } | { frac: FracSlots } | { time: number; mode: ClockMode } | { dur: number; units: DurUnit[] } | { measure: Measure };
 
-const TOKEN = /\{(?:(\d+) )?(\d+|\?)\/(\d+|\?)\}/g;
+/** The lesson's way of writing times (`lesson.json` `notation`). */
+export const NotationContext = createContext<Notation>(DEFAULT_NOTATION);
+
+const CANDIDATE = /\{([^{}]*)\}/g;
+const FRAC = /^(?:(\d+) )?(\d+|\?)\/(\d+|\?)$/;
+const TIME = /^t:(\d{1,2}:\d{2}(?::\d{2})?)(?:\|(face|24))?$/;
+const DUR = /^d:(\S+)$/;
+const MEASURE = /^u:(.+)$/;
 
 const slot = (s: string): number | null => (s === '?' ? null : Number(s));
 
-/** Split text into plain runs and fraction tokens. */
+/** One `{…}` token's content as a part, or `null` when it is not a token (or a bad one). */
+function tokenPart(body: string): Exclude<RichPart, { text: string }> | null {
+  const f = FRAC.exec(body);
+  if (f) {
+    const [, w, n, d] = f;
+    return { frac: w !== undefined ? { w: Number(w), n: slot(n!), d: slot(d!) } : { n: slot(n!), d: slot(d!) } };
+  }
+  const t = TIME.exec(body);
+  if (t) {
+    const at = parseClock(t[1]!);
+    const mode: ClockMode = t[2] === '24' ? '24' : t[2] === 'face' ? 'face' : '12';
+    if (at === null || (mode === 'face' && Number(t[1]!.split(':')[0]) > 12)) return null;
+    return { time: at, mode };
+  }
+  const d = DUR.exec(body);
+  if (d) {
+    const v = parseDuration(d[1]!);
+    return v ? { dur: v.t, units: v.units } : null;
+  }
+  const u = MEASURE.exec(body);
+  if (u) {
+    const m = parseMeasure(u[1]!);
+    return m ? { measure: m } : null;
+  }
+  return null;
+}
+
+/** Split text into plain runs and tokens. */
 export function parseRich(text: string): RichPart[] {
   const out: RichPart[] = [];
   let last = 0;
-  for (const m of text.matchAll(TOKEN)) {
-    if (m.index > last) out.push({ text: text.slice(last, m.index) });
-    const [, w, n, d] = m;
-    out.push({ frac: w !== undefined ? { w: Number(w), n: slot(n!), d: slot(d!) } : { n: slot(n!), d: slot(d!) } });
+  const push = (s: string) => {
+    if (!s) return;
+    const prev = out.at(-1);
+    if (prev && 'text' in prev) prev.text += s;
+    else out.push({ text: s });
+  };
+  for (const m of text.matchAll(CANDIDATE)) {
+    const part = tokenPart(m[1]!);
+    if (!part) continue;
+    push(text.slice(last, m.index));
+    out.push(part);
     last = m.index + m[0].length;
   }
-  if (last < text.length) out.push({ text: text.slice(last) });
+  push(text.slice(last));
   return out;
 }
 
-/** Text with every fraction token read as words. */
+/** A token's text as shown (`line`: a number sentence, the notation's am / pm and h / min in both languages). */
+function shown(p: Exclude<RichPart, { text: string }>, locale: 'en' | 'zh', notation: Notation, line: boolean): string {
+  if ('frac' in p) {
+    const s = (v: number | null) => (v === null ? '?' : String(v));
+    return `${p.frac.w ? `${p.frac.w} ` : ''}${s(p.frac.n)}/${s(p.frac.d)}`;
+  }
+  if ('time' in p) return clockText(p.time, p.mode, notation, locale, line);
+  if ('dur' in p) return durationText(p.dur, p.units, locale, line);
+  return `${p.measure.value} ${unitText(p.measure.unit, locale, p.measure.value)}`;
+}
+
+/** `3 r 2` read aloud. */
+const REMAINDER = /(\d)\s+r\s+(\d)/g;
+
+/** Text with every token read as words. */
 export function speakable(text: string, locale: 'en' | 'zh'): string {
   return parseRich(text)
-    .map((p) => ('text' in p ? p.text : fractionWords(p.frac, locale)))
+    .map((p) => {
+      if ('text' in p) return p.text.replace(REMAINDER, locale === 'zh' ? '$1 余 $2' : '$1 remainder $2');
+      if ('frac' in p) return fractionWords(p.frac, locale);
+      if ('time' in p) return clockWords(p.time, p.mode, locale);
+      if ('dur' in p) return durationWords(p.dur, p.units, locale);
+      const n = p.measure.value;
+      return `${locale === 'zh' ? numberZh(n) : numberEn(n)}${locale === 'zh' ? '' : ' '}${unitWords(p.measure.unit, locale, n)}`;
+    })
     .join('');
 }
 
-/** Bad-looking tokens: `{…}` with a slash that is not a valid fraction token (validator). */
+/** Text with every token written out as shown (aria labels, plain strings). */
+export function plainText(text: string, locale: 'en' | 'zh', notation: Notation = DEFAULT_NOTATION, line = false): string {
+  return parseRich(text)
+    .map((p) => ('text' in p ? p.text : shown(p, locale, notation, line)))
+    .join('');
+}
+
+/** Bad-looking tokens (validator): `{…}` with a slash that is not a fraction, or a `{t:…}` / `{d:…}` / `{u:…}` that does not parse. */
 export function badTokens(text: string): string[] {
-  const ok = new Set([...text.matchAll(TOKEN)].map((m) => m.index));
-  return [...text.matchAll(/\{[^{}]*\/[^{}]*\}/g)].filter((m) => !ok.has(m.index)).map((m) => m[0]);
+  return [...text.matchAll(CANDIDATE)].filter((m) => /\/|^[tdu]:/.test(m[1]!) && !tokenPart(m[1]!)).map((m) => m[0]);
 }
 
 const cell = (cls: string, v: number | null) => createElement('span', { className: v === null ? `${cls} atlas-frac__blank` : cls }, v === null ? '?' : String(v));
@@ -55,15 +132,29 @@ export function fracNode(f: FracSlots, locale: 'en' | 'zh', key?: string | numbe
   );
 }
 
-/** Text with its fraction tokens typeset; a fraction and the operator beside it stay on one line. */
-export function renderRich(text: string, locale: 'en' | 'zh'): ReactNode {
+/** A time, a duration or a measure: one unbreakable run, its words for screen readers. */
+function ValueToken({ part, locale, line }: { part: Exclude<RichPart, { text: string } | { frac: FracSlots }>; locale: 'en' | 'zh'; line: boolean }) {
+  const notation = useContext(NotationContext);
+  const words = 'time' in part ? clockWords(part.time, part.mode, locale) : 'dur' in part ? durationWords(part.dur, part.units, locale) : null;
+  return createElement('span', { className: 'atlas-value', 'aria-label': words ?? undefined }, shown(part, locale, notation, line));
+}
+
+/**
+ * Text with its tokens typeset; a fraction (or a time) and the operator beside
+ * it stay on one line. `line`: the text is a number sentence (the 12-hour
+ * am / pm and h / min stay as the notation writes them in Chinese too).
+ */
+export function renderRich(text: string, locale: 'en' | 'zh', opts: { line?: boolean } = {}): ReactNode {
   const parts = parseRich(text);
   if (parts.length === 1 && 'text' in parts[0]!) return text;
+  const line = !!opts.line;
   const items: { node: ReactNode; glued: boolean }[] = [];
+  const isToken = (p: RichPart | undefined) => p !== undefined && !('text' in p);
   parts.forEach((p, i) => {
     if ('frac' in p) items.push({ node: fracNode(p.frac, locale, `f${i}`), glued: true });
+    else if (!('text' in p)) items.push({ node: createElement(ValueToken, { key: `v${i}`, part: p, locale, line }), glued: true });
     else
-      splitGlue(p.text, parts[i - 1] !== undefined && 'frac' in parts[i - 1]!, parts[i + 1] !== undefined && 'frac' in parts[i + 1]!).forEach((piece, k) =>
+      splitGlue(p.text, isToken(parts[i - 1]), isToken(parts[i + 1])).forEach((piece, k) =>
         items.push({ node: createElement(Fragment, { key: `t${i}.${k}` }, piece.text), glued: piece.glue }),
       );
   });

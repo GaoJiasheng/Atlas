@@ -585,7 +585,7 @@ async function simKey(s: Session, key: string, name: string): Promise<{ ok: bool
 
 async function runKeys(s: Session, o: Options, report: RunReport): Promise<void> {
   const { page } = s;
-  const keymap = await s.ev(() => window.__atlas!.keymap());
+  let keymap = await s.ev(() => window.__atlas!.keymap());
   const press = (k: string) => page.keyboard.press(k === ' ' ? 'Space' : k);
   const pressed = (attr: 'preset' | 'mode', name: string) =>
     page.evaluate(([a, n]) => document.querySelector(`[data-${a}="${n}"]`)?.getAttribute('aria-pressed') ?? null, [attr, name] as const);
@@ -611,6 +611,8 @@ async function runKeys(s: Session, o: Options, report: RunReport): Promise<void>
   }
   const firstChapter = (await s.ev(() => window.__atlas!.chapters()))[0];
   await s.apply({ chapter: firstChapter, wait: 800 });
+  // A lesson's keys are those of where the checks start (the VIEW group of the last check shot is gone after the reload).
+  if (await s.ev(() => typeof (window.__atlas!.engine as { tasks?: unknown }).tasks === 'function')) keymap = await s.ev(() => window.__atlas!.keymap());
 
   for (const k of keymap) {
     const base = { key: k.key, type: k.type, name: k.name };

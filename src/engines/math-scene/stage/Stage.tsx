@@ -29,8 +29,14 @@ import { OptionGrid, type OptionCell } from './OptionGrid';
 import { SvgFrac, type BarObject } from './svg';
 import { BeatModel } from './BeatModel';
 import { GridModel, describeFigure } from './GridModel';
-import type { GridModelSpec } from '../schema';
+import type { ArrayModelSpec, GridModelSpec } from '../schema';
 import { figureOf } from '../lib/grid';
+import { ArrayModel, describeArray } from './ArrayModel';
+import { BlocksModel } from './BlocksModel';
+import { WholeLine } from './WholeLine';
+import { plainText } from '../../../lib/rich-text';
+import { wholeWords } from '../lib/words';
+import { matOf, total as blockTotal } from '../lib/blocks';
 
 export interface DisplayModes {
   symbol: boolean;
@@ -105,9 +111,13 @@ export const SPECIMEN_GRID: GridModelSpec = {
   ],
 };
 
+/** The background chapter of a lesson on whole numbers: an array of 3 rows of 4, its counts braced. */
+export const SPECIMEN_ARRAY: ArrayModelSpec = { kind: 'array', object: 'dot', layout: 'rows', rows: 3, cols: 4, braces: true, container: 'ring' };
+
 function Specimen(p: StageContentProps & { view: ModelView }) {
   const { box, locale, defs } = p;
   if (p.view === 'grid') return <GridModel defs={defs} box={box} model={SPECIMEN_GRID} locale={locale} label={t(locale, 'math.specimen.grid')} />;
+  if (p.view === 'array') return <ArrayModel defs={defs} box={box} model={SPECIMEN_ARRAY} locale={locale} label={t(locale, 'math.specimen.array')} />;
   const label = t(locale, 'math.specimen', { name: fractionWords({ n: 3, d: 4 }, locale) });
   const cx = box.x + box.w / 2;
   const cy = box.y + box.h / 2;
@@ -140,7 +150,7 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
   const phase = phasesOf(task)[state.phase] ?? 'model';
   const ghost = run?.revealed ?? false;
   const labels = p.modes.labels;
-  const label = tx(task.prompt, locale).replace(/\{([^}]*)\}/g, '$1');
+  const label = plainText(tx(task.prompt, locale), locale);
   const m = task.model;
   const value = modelValue(task, state);
   const withSymbol = p.modes.symbol && box.w > 480;
@@ -168,6 +178,29 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
     );
   }
 
+  /* the array, the blocks, the whole-number line: group, arrange, split, regroup, share, skip-count, or a picture to read */
+  const pictures = task.kind === 'choose' && task.options.some((o) => o.model || o.value);
+  if (!pictures && (m.kind === 'array' || m.kind === 'blocks' || (m.kind === 'numberline' && m.scale === 'whole'))) {
+    const live = task.kind === 'choose' || task.kind === 'input' ? null : task;
+    const ghostState = ghost && live ? solvedState(task) : null;
+    if (m.kind === 'array') return <ArrayModel defs={defs} box={area} model={m} locale={locale} label={label} task={live} state={live ? state : null} editable={editable} act={act} ghost={ghostState} />;
+    if (m.kind === 'blocks') return <BlocksModel box={area} model={m} locale={locale} label={label} task={live} state={live ? state : null} editable={editable} act={act} ghost={ghostState} />;
+    const w = clamp(area.w - 80, 240, 960);
+    return (
+      <WholeLine
+        x={cx - w / 2}
+        y={cy + 10}
+        w={w}
+        model={m}
+        locale={locale}
+        label={label}
+        landings={task.kind === 'skip-count' ? state.landings : undefined}
+        onLand={task.kind === 'skip-count' && editable ? (at) => act({ do: 'land', at }) : undefined}
+        ghost={task.kind === 'skip-count' && ghost ? solvedState(task).landings : null}
+      />
+    );
+  }
+
   /* choose: picture or number cards on the stage, sentences in the tray */
   if (task.kind === 'choose') {
     const letters = 'ABCDEFG';
@@ -183,7 +216,13 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
             ? describePicture(o.model.rows ?? [o.model], locale)
             : o.model?.kind === 'grid'
               ? (o.text ? tx(o.text, locale) : (figureOf(o.model) ? describeFigure(o.model, figureOf(o.model)!, locale) : ''))
-              : '',
+              : o.model?.kind === 'array'
+                ? describeArray(o.model, locale)
+                : o.model?.kind === 'blocks'
+                  ? wholeWords(blockTotal(matOf(o.model)), locale)
+                  : o.text
+                    ? plainText(tx(o.text, locale), locale)
+                    : '',
         draw: (b) => (o.model ? <MiniModel defs={defs} model={o.model} box={b} locale={locale} /> : <SvgFrac cx={b.x + b.w / 2} cy={b.y + b.h / 2 - 8} n={o.value!.n} d={o.value!.d} w={o.value!.w} size={clamp(b.h / 4, 18, 40)} className="ms-option__frac" />),
       }));
     if (cells.length === 0) return null;
@@ -318,7 +357,7 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
         const f = task.items[i]!;
         return { pos: valueOnLine(f, m) ?? 0, label: { n: f.n, d: f.d, w: f.w }, tone: 'mine' as const };
       });
-      return <NumberLine defs={defs} x={cx - w / 2} y={cy + 24} w={w} from={m.from} to={m.to} intervals={m.intervals} labels={m.labels} points={points} tickLabels={labels} label={label} locale={locale} />;
+      return <NumberLine defs={defs} x={cx - w / 2} y={cy + 24} w={w} from={m.from} to={m.to} intervals={m.intervals ?? 1} labels={m.labels === 'tens' || m.labels === 'steps' ? 'all' : m.labels} points={points} tickLabels={labels} label={label} locale={locale} />;
     }
     const base = m.kind === 'wall' ? m.rows : [1, ...task.items.map((f) => f.d)];
     const rows: RowSpec[] = base.map((d) => {
@@ -349,8 +388,8 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
         w={w}
         from={line.from}
         to={line.to}
-        intervals={line.intervals}
-        labels={line.labels}
+        intervals={line.intervals ?? 1}
+        labels={line.labels === 'tens' || line.labels === 'steps' ? 'all' : line.labels}
         marker={task.kind === 'place' || (task.kind === 'shade' && m.kind !== 'numberline') ? marker : null}
         onPlace={placeable ? (at) => act(task.kind === 'place' ? { do: 'place', at } : { do: 'fill', count: at }) : undefined}
         arrow={arrowPos}
@@ -457,6 +496,9 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
 export function MiniModel({ defs, model, box, locale }: { defs: string; model: Task['model']; box: Rect; locale: Locale }) {
   const label = '';
   if (model.kind === 'grid') return <GridModel defs={defs} box={box} model={model} locale={locale} label={label} mini />;
+  if (model.kind === 'array') return <ArrayModel defs={defs} box={box} model={model} locale={locale} label={label} mini />;
+  if (model.kind === 'blocks') return <BlocksModel box={box} model={model} locale={locale} label={label} mini />;
+  if (model.kind === 'numberline' && model.scale === 'whole') return <WholeLine x={box.x + 10} y={box.y + box.h / 2} w={box.w - 20} model={model} locale={locale} label={label} />;
   if (model.kind === 'circle') {
     const r = Math.max(10, Math.min(box.w, box.h) / 2 - 4);
     const idx = (s: number | number[] | undefined) => (s === undefined ? [] : Array.isArray(s) ? s : Array.from({ length: s }, (_, i) => i));

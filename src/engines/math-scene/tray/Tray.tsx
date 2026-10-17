@@ -13,7 +13,7 @@
  * caption card (`compact`: the task's sentence under the caption, no place
  * label, no Next); Skip there lets the auto-play go on.
  */
-import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
+import { useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
 import type { Locale } from '../../core/types';
 import { t, tx } from '../../../i18n';
 import { renderRich } from '../../../lib/rich-text';
@@ -21,13 +21,16 @@ import type { Task } from '../schema';
 import type { Controller } from '../controller';
 import type { TaskRun } from '../ui';
 import { canMerge, commonParts, inputSpecOf, phasesOf, type TaskState } from '../lib/state';
-import { answered, answersOf, inputRows, segments } from '../lib/check';
+import { answered, answersOf, segments, usesValueBoxes } from '../lib/check';
 import { solvedState } from '../lib/solve';
 import { denominatorEn, numberZh } from '../lib/words';
 import { formatFrac } from '../lib/fraction';
-import { GridModelControls, WholeInput } from './GridControls';
+import { GridModelControls } from './GridControls';
+import { WholeModelControls } from './WholeControls';
+import { AnswerInput } from './inputs';
 import { askOf } from '../lib/diagnose/measure';
 import { squared, unitText } from '../lib/value';
+import { answerTokens } from '../lib/working';
 
 export interface TrayProps {
   ctl: Controller;
@@ -88,7 +91,12 @@ export function Tray(p: TrayProps) {
           </>
         )}
       </p>
-      {run.revealed && spec && <span className="ms-tray__answer">{T('math.tray.answer')} {task.model.kind === 'grid' ? gridAnswerText(task, locale) : renderRich(answersOf(spec).map((f) => `{${f.w ? `${f.w} ` : ''}${f.n}/${f.d}}`).join(' = '), locale)}</span>}
+      {run.revealed && spec && (
+        <span className="ms-tray__answer">
+          {T('math.tray.answer')}{' '}
+          {task.model.kind === 'grid' ? gridAnswerText(task, locale) : usesValueBoxes(task, spec) ? renderRich(answerTokens(task), locale, { line: true }) : renderRich(answersOf(spec).map((f) => `{${f.w ? `${f.w} ` : ''}${f.n}/${f.d}}`).join(' = '), locale)}
+        </span>
+      )}
       {run.revealed && !p.practice && run.feedback?.tone !== 'reveal' && <p className="ms-tray__why">{renderRich(tx(task.feedback.reveal, locale), locale)}</p>}
       {run.attempts.length > 0 && (
         <p className="ms-attempts">
@@ -152,12 +160,13 @@ function Controls(p: TrayProps & { phase: string; locked: boolean }) {
   const parts: ReactNode[] = [];
   const unitName = (d: number) => (locale === 'zh' ? `${numberZh(d)}分之几` : denominatorEn(d, true));
 
-  if (phase === 'input' && task.model.kind === 'grid') {
-    parts.push(<WholeInput key="input" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
-  } else if (phase === 'model' && task.model.kind === 'grid' && task.kind !== 'choose') {
+  const wholeKind = task.kind === 'group' || task.kind === 'arrange' || task.kind === 'skip-count' || task.kind === 'split-array' || task.kind === 'regroup' || task.kind === 'share';
+  if (phase === 'model' && task.model.kind === 'grid' && task.kind !== 'choose') {
     parts.push(<GridModelControls key="grid" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
+  } else if (phase === 'model' && wholeKind) {
+    parts.push(<WholeModelControls key="whole" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
   } else if (phase === 'input') {
-    parts.push(<FractionInput key="input" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
+    parts.push(<AnswerInput key="input" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
     if (task.model.kind === 'barmodel' && task.model.units) {
       parts.push(
         <button key="units" type="button" className="ms-btn ms-btn--ghost" aria-pressed={s.aligned} disabled={locked || s.aligned} onClick={() => ctl.act({ do: 'align' })}>
@@ -285,96 +294,6 @@ function biggestMiddle(cuts: readonly number[], snap: number): number {
   let best = 0;
   for (let i = 1; i < at.length; i++) if (at[i]! - at[i - 1]! > at[best + 1]! - at[best]!) best = i - 1;
   return Math.round((at[best]! + at[best + 1]!) / 2);
-}
-
-/* ------------------------------------------------------------------ */
-/* Fraction boxes + keypad                                             */
-/* ------------------------------------------------------------------ */
-
-function FractionInput({ task, state, ctl, locale, locked }: { task: Task; state: TaskState; ctl: Controller; locale: Locale; locked: boolean }) {
-  const T = tr(locale);
-  const spec = inputSpecOf(task)!;
-  const rows = inputRows(spec);
-  const fields = rows.flatMap((r) => r.slots.flatMap((s) => (s.field ? [s.field] : [])));
-  const [active, setActive] = useState<string | null>(null);
-  const refs = useRef<Record<string, HTMLInputElement | null>>({});
-  // A new sub-step (or phase) starts in its first empty box; the denominator first for a plain fraction (count the whole first, S11).
-  const first = fields.includes('d') && !fields.includes('w') ? 'd' : fields[0];
-  useEffect(() => setActive(null), [task.id, state.phase]);
-  const write = (field: string, value: string) => ctl.act({ do: 'input', field, value });
-  const press = (key: string) => {
-    const field = active ?? first;
-    if (!field || locked) return;
-    const cur = state.input[field] ?? '';
-    write(field, key === 'back' ? cur.slice(0, -1) : (cur + key).slice(-2));
-    refs.current[field]?.focus({ preventScroll: true });
-    setActive(field);
-  };
-  const slotLabel = (slot: string, i: number) => T(`math.input.${slot as 'n' | 'd' | 'w'}`) + (rows.length > 1 ? ` ${i + 1}` : '');
-  const box = (field: string | null, printed: number | null, slot: string, i: number) =>
-    field ? (
-      <input
-        key={field}
-        ref={(el) => {
-          refs.current[field] = el;
-        }}
-        className="ms-box"
-        data-field={field}
-        data-active={(active ?? first) === field || undefined}
-        inputMode="none"
-        autoComplete="off"
-        maxLength={2}
-        aria-label={slotLabel(slot, i)}
-        value={state.input[field] ?? ''}
-        disabled={locked}
-        onFocus={() => setActive(field)}
-        onChange={(e) => write(field, e.currentTarget.value)}
-      />
-    ) : (
-      <span key={`p${slot}${i}`} className="ms-box ms-box--printed" aria-label={`${slotLabel(slot, i)}: ${printed}`}>
-        {printed}
-      </span>
-    );
-  return (
-    <div className="ms-input" data-keys="own">
-      <div className="ms-input__rows">
-        {spec.from && rows.length > 1 && (
-          <>
-            <span className="ms-input__given">{renderRich(`{${formatFrac(spec.from)}}`, locale)}</span>
-            <span className="ms-input__eq">=</span>
-          </>
-        )}
-        {rows.map((r, i) => {
-          const w = r.slots.find((s) => s.slot === 'w');
-          const n = r.slots.find((s) => s.slot === 'n');
-          const d = r.slots.find((s) => s.slot === 'd');
-          return (
-            <span key={i} className="ms-input__row">
-              {i > 0 && <span className="ms-input__eq">=</span>}
-              {w && box(w.field, w.printed, 'w', i)}
-              {n && d && (
-                <span className="ms-input__frac">
-                  {box(n.field, n.printed, 'n', i)}
-                  <i aria-hidden="true" />
-                  {box(d.field, d.printed, 'd', i)}
-                </span>
-              )}
-            </span>
-          );
-        })}
-      </div>
-      <div className="ms-keypad" role="group" aria-label={T('math.input.keypad')}>
-        {['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'].map((k) => (
-          <button key={k} type="button" className="ms-key" disabled={locked} onPointerDown={(e) => e.preventDefault()} onClick={() => press(k)}>
-            {k}
-          </button>
-        ))}
-        <button type="button" className="ms-key ms-key--back" aria-label={T('math.input.back')} disabled={locked} onPointerDown={(e) => e.preventDefault()} onClick={() => press('back')}>
-          ⌫
-        </button>
-      </div>
-    </div>
-  );
 }
 
 /* ------------------------------------------------------------------ */

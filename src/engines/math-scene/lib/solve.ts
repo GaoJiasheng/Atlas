@@ -5,13 +5,16 @@
  * `sampleState` builds the state of a wrong answer written in a task's
  * answer notation (the `sample` of a `feedback.wrong` entry, docs/06 MathScene).
  */
-import type { Task, TaskOf } from '../schema';
+import type { PlaceKey, Task, TaskOf, Trade } from '../schema';
 import { parseFrac, valueOnLine, type Frac } from './fraction';
-import { answersOf, check, inputValues, sortedOrder } from './check';
+import { answersOf, check, inputValues, sortedOrder, usesValueBoxes } from './check';
 import { baseParts, figureRows, initialState, inputSpecOf, partsFor, phasesOf, reduce, taskFigure, tileKeys, type Action, type Sym, type TaskState } from './state';
 import { allSides, boundaryEdges, cellKey, cutKey, rectCuts } from './grid';
 import { drawnRight } from './diagnose/measure';
 import { parseMeasure } from './value';
+import { answerValues, sampleBoxes, valueBoxes } from './forms';
+import { groupTarget, skipTarget } from './diagnose/whole-ops';
+import { applyTrade, canTrade, type Counts } from './blocks';
 
 const range = (from: number, count: number) => Array.from({ length: count }, (_, i) => from + i);
 
@@ -19,7 +22,8 @@ const range = (from: number, count: number) => Array.from({ length: count }, (_,
 function inputActions(task: Task): Action[] {
   const spec = inputSpecOf(task);
   if (!spec) return [];
-  const boxes = Object.entries(inputValues(spec, answersOf(spec))).map(([field, value]) => ({ do: 'input', field, value }) as Action);
+  const filled = usesValueBoxes(task, spec) ? valueBoxes(spec, splitArrayAnswers(task) ?? answerValues(spec)) : inputValues(spec, answersOf(spec));
+  const boxes = Object.entries(filled).map(([field, value]) => ({ do: 'input', field, value }) as Action);
   return spec.form === 'measure' && spec.unit ? [...boxes, { do: 'input', field: 'u', value: spec.unit }] : boxes;
 }
 
@@ -31,6 +35,58 @@ export function drawnSolution(task: TaskOf<'draw-rectangle'>): [number, number] 
   for (let w = cols; w >= 1; w--) for (let h = 1; h <= Math.min(rows, w); h++) if (drawnRight(task, w, h)) return [w, h];
   for (let w = 1; w <= cols; w++) for (let h = 1; h <= rows; h++) if (drawnRight(task, w, h)) return [w, h];
   return null;
+}
+
+/** A split array's cut for its solution: the one its answer's parts belong to (else after 5 rows, or half way). */
+export function splitArrayCut(task: TaskOf<'split-array'>): string {
+  if (task.at?.rows) return `r${task.at.rows[0]}`;
+  if (task.at?.cols) return `c${task.at.cols[0]}`;
+  const a = answersOf(task.then).map((f) => f.n);
+  for (let p = 1; p < task.rows; p++) if (a[0] === p * task.cols && a[1] === (task.rows - p) * task.cols) return `r${p}`;
+  for (let p = 1; p < task.cols; p++) if (a[0] === p * task.rows && a[1] === (task.cols - p) * task.rows) return `c${p}`;
+  return `r${task.rows > 5 ? 5 : Math.max(1, Math.floor(task.rows / 2))}`;
+}
+
+/** A split array without a fixed cut: the solution writes the parts of its own cut. */
+function splitArrayAnswers(task: Task): Frac[] | null {
+  if (task.kind !== 'split-array' || task.at) return null;
+  const c = splitArrayCut(task);
+  const p = Number(c.slice(1));
+  const [other, whole] = c.startsWith('r') ? [task.cols, task.rows] : [task.rows, task.cols];
+  return [p * other, (whole - p) * other, task.rows * task.cols].map((n) => ({ n, d: 1 }));
+}
+
+/** Trades that bring every place under 10 (ones first). */
+function regroupTrades(start: Counts): Trade[] {
+  const out: Trade[] = [];
+  let c = start;
+  for (const t of ['O>T', 'T>H'] as const) {
+    while (canTrade(c, t) && c[t === 'O>T' ? 'O' : 'T'] >= 10) {
+      c = applyTrade(c, t);
+      out.push(t);
+    }
+  }
+  return out;
+}
+
+/** Sharing from the top place: share it, trade what is left down, and on to the next place. */
+function shareActions(task: TaskOf<'share'>): Action[] {
+  const out: Action[] = [];
+  let st = initialState(task);
+  const go = (a: Action) => {
+    out.push(a);
+    st = reduce(task, st, a);
+  };
+  const places: [PlaceKey, Trade | null][] = [
+    ['H', 'H>T'],
+    ['T', 'T>O'],
+    ['O', null],
+  ];
+  for (const [place, down] of places) {
+    if (st.mat[place] >= task.k) go({ do: 'share', place });
+    if (down) while (st.mat[place] > 0) go({ do: 'trade', trade: down });
+  }
+  return out;
 }
 
 /** Factor that turns the starting model into the target (split ×k / merge ÷k). */
@@ -102,6 +158,20 @@ export function solve(task: Task): Action[] {
       const cut = fig ? rectCuts(fig.facts.cells)[0] : undefined;
       return withInput(task, cut ? [{ do: 'gridcut', cut: cutKey(cut) }] : []);
     }
+    case 'group': {
+      const t = groupTarget(task);
+      return withInput(task, Array.from({ length: task.by === 'share' ? t.each : t.groups }, () => ({ do: task.by === 'share' ? 'deal' : 'pack' }) as Action));
+    }
+    case 'arrange':
+      return [{ do: 'arrange', rows: task.rows, cols: task.cols }];
+    case 'skip-count':
+      return skipTarget(task).map((at) => ({ do: 'land', at }) as Action);
+    case 'split-array':
+      return withInput(task, [{ do: 'arraycut', cut: splitArrayCut(task) }]);
+    case 'regroup':
+      return withInput(task, regroupTrades(start.mat).map((trade) => ({ do: 'trade', trade }) as Action));
+    case 'share':
+      return withInput(task, shareActions(task));
     case 'build-sum': {
       const out: Action[] = [];
       let parts = start.parts;
@@ -181,6 +251,10 @@ export function sampleState(task: Task, sample: string): TaskState | null {
   const writeInput = (from: TaskState, text: string): TaskState | null => {
     const spec = inputSpecOf(task);
     if (!spec) return null;
+    if (usesValueBoxes(task, spec) && spec.form !== 'measure') {
+      const boxes = sampleBoxes(spec, text);
+      return boxes ? { ...from, input: boxes, phase: inputPhase } : null;
+    }
     if (spec.form === 'measure') {
       // `"28 cm"` (the unit written), or `"28"` (the answer's own unit).
       const m = parseMeasure(text) ?? (/^\s*\d+\s*$/.test(text) && spec.unit ? { value: Number(text), unit: spec.unit } : null);
@@ -250,5 +324,37 @@ export function sampleState(task: Task, sample: string): TaskState | null {
     }
     case 'split-figure':
       return /^[xy]:\d+$/.test(sample) ? { ...start, cut: sample } : null;
+    case 'group': {
+      // `4x3`: 4 groups of 3 (`4x3+2`: and 2 left, which must be what is left); `2,5,5`: groups of those sizes.
+      const m = /^(\d+)x(\d+)(?:\+(\d+))?$/.exec(sample);
+      const groups = m ? Array.from({ length: Number(m[1]) }, () => Number(m[2])) : /^\d+(,\d+)*$/.test(sample) ? sample.split(',').map(Number) : null;
+      if (!groups) return null;
+      const used = groups.reduce((a, b) => a + b, 0);
+      if (used > task.total || (m?.[3] !== undefined && task.total - used !== Number(m[3]))) return null;
+      return { ...start, groups };
+    }
+    case 'arrange': {
+      const m = /^(\d+)x(\d+)$/.exec(sample);
+      return m ? reduce(task, start, { do: 'arrange', rows: Number(m[1]), cols: Number(m[2]) }) : null;
+    }
+    case 'skip-count':
+      return /^\d+(,\d+)*$/.test(sample) ? { ...start, landings: sample.split(',').map(Number) } : null;
+    case 'split-array': {
+      const s = reduce(task, start, { do: 'arraycut', cut: sample });
+      return s.cut === sample ? s : null;
+    }
+    case 'regroup':
+    case 'share': {
+      // A list of moves from the start: `T>H` a trade, `T` share that place (`T,T>O,O`).
+      let s = start;
+      for (const move of sample.split(',').map((x) => x.trim())) {
+        const a: Action | null = /^[HTO]>[HTO]$/.test(move) ? { do: 'trade', trade: move as Trade } : /^[HTO]$/.test(move) && task.kind === 'share' ? { do: 'share', place: move as PlaceKey } : null;
+        if (!a) return null;
+        const next = reduce(task, s, a);
+        if (next === s) return null;
+        s = next;
+      }
+      return s;
+    }
   }
 }

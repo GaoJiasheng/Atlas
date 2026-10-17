@@ -1,0 +1,16 @@
+# PLACEHOLDER topic: exercises the MathScene whole-number and time engine only (docs/06 "MathScene" · 整数与时间):
+# the array (groups, rows, split, cover, a pair), the whole-number line, the place-value blocks and the
+# column method, every new task kind and answer form. The numbers and wording are placeholders, not a lesson.
+id: sample-lesson-whole
+title: { en: "Sample: Whole-number lesson", zh: "示例：整数课" }
+subtitle: { en: "A placeholder topic for testing the lesson engine's whole numbers and times", zh: "用于测试课引擎整数与时间部分的占位主题" }
+subject: math
+tags: [beyond-syllabus]
+moe:
+  - "Placeholder: no syllabus anchor"
+mode: lesson
+engine: math-scene
+stage: svg
+theme: paper
+sensitivity: open
+status: draft

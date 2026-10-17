@@ -1991,3 +1991,475 @@
     transform: rotate(22deg);
   }
 }
+
+/* ------------------------------------------------------------------ */
+/* Whole numbers and time (docs/19 §3.1–3.2, docs/20 §3): the array,   */
+/* the whole-number line, the blocks, the column working, their cards  */
+/* ------------------------------------------------------------------ */
+
+/* A time, a duration or a measure in text: one unbreakable run. */
+.atlas-value {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Things: given = cold, the child's = signal, a second amount = hot, left over = signal outline; ink line art. */
+.ms-thing {
+  transition: transform 640ms var(--ease-in-out);
+}
+.ms-array[data-move="deal"] .ms-thing {
+  transition-duration: 360ms;
+}
+.ms-thing__body {
+  fill: color-mix(in srgb, var(--cold) 46%, var(--panel-solid));
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+.ms-thing__body--dot {
+  fill: color-mix(in srgb, var(--cold) 70%, var(--panel-solid));
+}
+.ms-thing__line {
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 0.8;
+}
+.ms-thing[data-tone="hot"] .ms-thing__body {
+  fill: color-mix(in srgb, var(--hot) 48%, var(--panel-solid));
+}
+.ms-thing[data-tone="signal"] .ms-thing__body,
+.ms-thing[data-tone="mine"] .ms-thing__body {
+  fill: color-mix(in srgb, var(--signal) 56%, var(--panel-solid));
+}
+:root[data-theme="cinema"] .ms-thing[data-tone="mine"] .ms-thing__body {
+  fill: color-mix(in srgb, var(--signal) 74%, var(--panel-solid));
+}
+.ms-thing[data-tone="ink"] .ms-thing__body {
+  fill: var(--panel-solid);
+}
+.ms-thing__strike {
+  stroke: var(--ink);
+  stroke-width: 1.6;
+}
+/* Taken away: the thing pales under its ink slash. */
+.ms-thing[data-crossed] .ms-thing__body {
+  fill: color-mix(in srgb, var(--cold) 16%, var(--panel-solid));
+}
+.ms-container > * {
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 1;
+}
+.ms-container .ms-container__rim {
+  stroke: var(--ink-3);
+  stroke-width: 0.8;
+}
+.ms-container--dashed > * {
+  stroke-dasharray: 5 4;
+}
+.ms-container[data-tone="hot"] > :first-child {
+  stroke: var(--hot);
+}
+.ms-container[data-tone="signal"] > :first-child {
+  stroke: var(--signal);
+}
+.ms-container {
+  animation: ms-fade-in 420ms var(--ease-out) both;
+}
+.ms-array__tray {
+  fill: none;
+  stroke: var(--hair);
+  stroke-width: 1;
+}
+.ms-array__left {
+  stroke: var(--ink-2);
+  stroke-dasharray: 3 3;
+}
+.ms-array__title,
+.ms-array__count,
+.ms-array__parts text {
+  fill: var(--ink-2);
+  font: 500 13px / 1 var(--font-mono);
+  letter-spacing: 0.02em;
+}
+.ms-array__parts text {
+  fill: var(--ink);
+  font-size: 15px;
+}
+.ms-brace line {
+  stroke: var(--ink-2);
+  stroke-width: 1;
+}
+.ms-brace text {
+  fill: var(--ink);
+  font: 500 13px / 1 var(--font-mono);
+}
+/* The count that is the question: a paper strip over it. */
+.ms-cover rect {
+  fill: var(--paper, var(--panel-solid));
+  stroke: var(--ink-2);
+  stroke-width: 1;
+}
+.ms-cover text {
+  fill: var(--ink);
+  font: 600 15px / 1 var(--font-mono);
+}
+.ms-cover {
+  animation: ms-cover-in 480ms var(--ease-out) both;
+}
+@keyframes ms-cover-in {
+  from {
+    opacity: 0;
+    transform: translateX(-18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+/* The check: a container is a 44 px target; the corner handle and the cut cursor as on the grid. */
+.ms-array__slot {
+  cursor: pointer;
+  outline: none;
+}
+.ms-array__hit,
+.ms-array__hitarea {
+  fill: transparent;
+}
+.ms-array__hitarea {
+  cursor: crosshair;
+}
+.ms-array__slot:focus-visible .ms-container > :first-child {
+  stroke: var(--signal);
+  stroke-width: 2.5;
+}
+@media (hover: hover) {
+  .ms-array__slot:hover .ms-container > :first-child {
+    stroke-width: 1.8;
+  }
+}
+.ms-array__point {
+  fill: color-mix(in srgb, var(--ink) 35%, transparent);
+}
+.ms-array__handle {
+  outline: none;
+  cursor: grab;
+}
+.ms-array__handle-hit {
+  fill: transparent;
+}
+.ms-array__handle-dot {
+  fill: var(--signal);
+  stroke: var(--panel-solid);
+  stroke-width: 2;
+}
+.ms-array__handle:focus-visible .ms-array__handle-dot {
+  stroke: var(--signal);
+  stroke-width: 6;
+  stroke-opacity: 0.35;
+}
+.ms-array__cut {
+  stroke: var(--signal);
+  stroke-width: 2;
+}
+.ms-array__cursor {
+  outline: none;
+}
+.ms-array__cursor-line {
+  stroke: var(--signal);
+  stroke-dasharray: 3 3;
+  opacity: 0;
+}
+.ms-array__cursor:focus-visible .ms-array__cursor-line {
+  opacity: 1;
+}
+/* "Show me": the answer in dashed ink. */
+.ms-array__ghost {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.4;
+  stroke-dasharray: 6 4;
+}
+.ms-array__ghost-line,
+.ms-wline__ghost {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.4;
+  stroke-dasharray: 6 4;
+}
+.ms-array__ghost-count {
+  fill: var(--ink);
+  font: 600 14px / 1 var(--font-mono);
+  text-decoration: underline dashed;
+}
+
+/* The whole-number line: jumps as arcs above, "+5" on each, a ring where it lands; the child's in signal. */
+.ms-wline__jump path {
+  fill: none;
+  stroke: var(--cold);
+  stroke-width: 1.6;
+}
+.ms-wline__jump text {
+  fill: var(--ink-2);
+  font: 500 12px / 1 var(--font-mono);
+}
+.ms-wline__land {
+  fill: var(--panel-solid);
+  stroke: var(--cold);
+  stroke-width: 1.4;
+}
+.ms-wline__jump--mine path,
+.ms-wline__jump--mine .ms-wline__land {
+  stroke: var(--signal);
+}
+.ms-wline__counter {
+  fill: var(--ink) !important;
+  font-size: 13px !important;
+}
+.ms-wline__jump {
+  animation: ms-jump-in 380ms var(--ease-out) both;
+}
+@keyframes ms-jump-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.ms-wline__mark {
+  fill: var(--cold);
+}
+.ms-wline__cursor {
+  outline: none;
+}
+.ms-wline__caret {
+  fill: var(--signal);
+  opacity: 0.35;
+}
+.ms-wline__cursor:focus-visible .ms-wline__caret {
+  opacity: 1;
+}
+
+/* Blocks: hairline ink, given = cold; a trade lit in signal; the new block and the plates' blocks ease in. */
+.ms-block {
+  transition: transform 640ms var(--ease-in-out);
+}
+.ms-block__body {
+  fill: color-mix(in srgb, var(--cold) 34%, var(--panel-solid));
+  stroke: var(--ink);
+  stroke-width: 0.9;
+}
+.ms-block__grid {
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 0.5;
+  opacity: 0.8;
+}
+.ms-block[data-lit] .ms-block__body {
+  fill: color-mix(in srgb, var(--signal) 40%, var(--panel-solid));
+  stroke: var(--signal);
+}
+.ms-block[data-new] {
+  animation: ms-block-new 520ms var(--ease-out) 360ms both;
+}
+.ms-block--dealt .ms-block__body {
+  fill: color-mix(in srgb, var(--signal) 50%, var(--panel-solid));
+}
+.ms-block--dealt {
+  animation: ms-fade-in 360ms var(--ease-out) both;
+}
+.ms-block--gone {
+  animation: ms-block-gone 620ms var(--ease-in-out) both;
+}
+.ms-block--gone .ms-block__body {
+  fill: color-mix(in srgb, var(--signal) 40%, var(--panel-solid));
+  stroke: var(--signal);
+}
+@keyframes ms-block-new {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes ms-block-gone {
+  to {
+    opacity: 0;
+    transform: translateX(var(--dx, 0px)) scale(0.5);
+  }
+}
+.ms-mat__band {
+  fill: none;
+  stroke: var(--hair);
+  stroke-width: 1;
+}
+.ms-mat__col[data-lit] .ms-mat__band {
+  stroke: var(--signal);
+  stroke-width: 1.4;
+  fill: color-mix(in srgb, var(--signal) 6%, transparent);
+}
+.ms-mat__head {
+  fill: var(--ink-2);
+  font: 600 10.5px / 1 var(--font-mono);
+  letter-spacing: 0.12em;
+}
+.ms-mat__head--zh {
+  font: 500 11px / 1 var(--font-hud);
+  letter-spacing: 0;
+}
+.ms-mat__count,
+.ms-mat__rowno {
+  fill: var(--ink);
+  font: 600 14px / 1 var(--font-mono);
+}
+.ms-mat__rowno {
+  fill: var(--ink-2);
+  font-size: 12px;
+}
+.ms-mat__hit {
+  fill: transparent;
+  cursor: pointer;
+  outline: none;
+}
+.ms-mat__hit:focus-visible {
+  stroke: var(--signal);
+  stroke-width: 2.5;
+}
+.ms-plate-dish {
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 1;
+}
+
+/* The column working: monospace digits on a grid, the traded digit small in signal, the place worked lit. */
+.ms-col__digit,
+.ms-col__op {
+  fill: var(--ink);
+  font: 500 22px / 1 var(--font-mono);
+}
+.ms-col__digit--new {
+  fill: var(--ink);
+  animation: ms-fade-in 360ms var(--ease-out) both;
+}
+.ms-col__digit--down {
+  fill: var(--signal);
+}
+.ms-col__carry {
+  fill: var(--signal);
+  font: 600 13px / 1 var(--font-mono);
+}
+.ms-col__rule {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+.ms-col__lit {
+  fill: color-mix(in srgb, var(--signal) 10%, transparent);
+  stroke: var(--signal);
+  stroke-width: 1;
+}
+
+/* Beat moves (docs/19 G6, ≤ 900 ms): the array and the blocks keep their drawing for group, deal, arrange, combine
+   and trade (each thing moves); a quarter turn turns the array in; reduced motion fades. */
+.ms-beat[data-model="array"][data-move="arrange"],
+.ms-beat[data-model="array"][data-move="group"],
+.ms-beat[data-model="array"][data-move="deal"],
+.ms-beat[data-model="blocks"][data-move="combine"],
+.ms-beat[data-model="blocks"][data-move="trade"],
+.ms-beat[data-model="blocks"][data-move="deal"] {
+  animation: none;
+}
+.ms-beat[data-move="rotate"] {
+  animation: ms-beat-rotate 820ms var(--ease-in-out) both;
+}
+@keyframes ms-beat-rotate {
+  from {
+    opacity: 0.4;
+    transform: rotate(-90deg) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.ms-beat[data-move="cover"],
+.ms-beat[data-move="jump"],
+.ms-beat[data-move="sweep"],
+.ms-beat[data-move="group"],
+.ms-beat[data-move="deal"],
+.ms-beat[data-move="combine"],
+.ms-beat[data-move="trade"] {
+  animation: ms-fade-in 420ms var(--ease-out) both;
+}
+
+/* Cards: PRODUCT · PLACE VALUE · TIME (the rows of the AREA card), the headline row big. */
+.ms-areacard__row[data-big] dd {
+  font-size: calc(19px * var(--kb, 1));
+  font-weight: 600;
+}
+.ms-pv {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.ms-pv__cell {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 6px 2px;
+  border: 1px solid var(--hair);
+}
+.ms-pv__cell[data-lit] {
+  border-color: var(--signal);
+}
+.ms-pv__digit {
+  font: 600 calc(26px * var(--kb, 1)) / 1 var(--font-mono);
+  color: var(--ink);
+}
+.ms-pv__name {
+  font: 500 9.5px / 1.2 var(--font-mono);
+  color: var(--ink-2);
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+
+/* Answer boxes: times (h . mm, am / pm), durations (h, min), remainders (q r r). */
+.ms-input__sep,
+.ms-input__r {
+  font: 600 22px / 1 var(--font-mono);
+}
+.ms-input__time .ms-input__part {
+  gap: 4px;
+}
+.ms-box::placeholder {
+  color: var(--ink-3);
+  font-weight: 400;
+  font-size: 15px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ms-thing,
+  .ms-block {
+    transition: none;
+  }
+  .ms-container,
+  .ms-cover,
+  .ms-wline__jump,
+  .ms-block[data-new],
+  .ms-block--dealt,
+  .ms-col__digit--new {
+    animation: ms-fade-in 200ms linear both;
+  }
+  .ms-block--gone {
+    display: none;
+  }
+  .ms-beat[data-move],
+  .ms-beat[data-model][data-move] {
+    animation: ms-fade-in 200ms linear both;
+  }
+}

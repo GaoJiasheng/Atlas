@@ -12,7 +12,7 @@
 import { defineEngine } from '../core/engine';
 import type { MathSceneData, ModelView } from './schema';
 
-export const MODEL_VIEW_IDS: readonly ModelView[] = ['bar', 'circle', 'numberline', 'wall', 'barmodel'];
+export const MODEL_VIEW_IDS: readonly ModelView[] = ['bar', 'circle', 'numberline', 'wall', 'barmodel', 'grid', 'array', 'blocks', 'clock', 'timeline'];
 
 export interface MathSceneExt {
   /** Beat of the chapter on show, 0-based. Every chapter opens on its first beat. */

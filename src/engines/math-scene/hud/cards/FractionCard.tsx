@@ -4,14 +4,14 @@
  * `a ○ b`, a sum as its number sentence; expanded, its equivalent names and
  * simplest form. On a check it never says the answer first (`cardValue`).
  */
-import type { Locale } from '../../core/types';
-import { t, tx } from '../../../i18n';
-import { renderRich } from '../../../lib/rich-text';
-import type { Task } from '../schema';
-import { cardValue, equivalentNames, workingLines } from '../lib/working';
-import { compare, formatFrac, simplify, toImproper, toMixed, type Frac } from '../lib/fraction';
-import { fractionWords } from '../lib/words';
-import type { TaskState } from '../lib/state';
+import type { Locale } from '../../../core/types';
+import { t } from '../../../../i18n';
+import { renderRich } from '../../../../lib/rich-text';
+import type { Task } from '../../schema';
+import { cardValue, equivalentNames, workingLines } from '../../lib/working';
+import { compare, formatFrac, simplify, toImproper, toMixed, type Frac } from '../../lib/fraction';
+import { fractionWords } from '../../lib/words';
+import type { TaskState } from '../../lib/state';
 
 const UP = (s: string) => s.toLocaleUpperCase('en');
 

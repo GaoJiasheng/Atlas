@@ -5,15 +5,18 @@
  * questions — plus the shared `sources.json` / `glossary.json`.
  *
  * Fractions are strings in the data (`"3/4"`, `"1 3/4"`, `"2"`) and parse into
- * `Frac` objects here, so `data.json` and the client get structured values.
- * Build time only (zod): client code imports types from this file, never values.
+ * `Frac` objects here, so `data.json` and the client get structured values;
+ * so do the other values (docs/19 §3.0 G1, `lib/value.ts`): whole numbers
+ * (`56`), remainders (`"3 r 2"`), times of day (`"09:40"`) and durations
+ * (`"1h35m"`). Build time only (zod): client code imports types from this
+ * file, never values.
  */
 import { z } from 'zod';
 import { bilingual, kebabId, theme } from '../../content/schema/common';
 import { sourcesFile } from '../../content/schema/sources';
 import { glossaryFile } from '../../content/schema/glossary';
 import { parseFrac, type Frac } from './lib/fraction';
-import { UNITS } from './lib/value';
+import { CLOCK12_NOTATIONS, CLOCK24_NOTATIONS, DEFAULT_NOTATION, parseClock, parseDuration, parseTagged, parseWhole, UNITS, WHOLE_MAX, type AnswerValue, type DurValue } from './lib/value';
 
 /* ------------------------------------------------------------------ */
 /* Vocabulary                                                          */
@@ -53,18 +56,82 @@ export const MEASURE_CODES = [
   'overlap-counted',
   'inner-edge-counted',
 ] as const;
+/** Whole-number multiplication and division (docs/19 §2.1; rules in lib/diagnose/whole-ops.ts). */
+export const WHOLE_OPS_CODES = [
+  'unequal-groups',
+  'added-not-multiplied',
+  'groups-size-swapped',
+  'skip-count-slip',
+  'split-slip',
+  'sharing-only',
+  'divide-order',
+  'operation-swapped',
+  'remainder-too-big',
+  'remainder-dropped',
+  'remainder-context',
+  'tens-as-ones',
+  'extra-zero',
+  'carry-not-added',
+  'digits-concatenated',
+  'partial-product-missed',
+  'zero-in-quotient',
+  'not-traded',
+] as const;
+/** Telling time and durations (docs/20 §2.1; rules in lib/diagnose/time.ts). */
+export const TIME_CODES = [
+  'hands-swapped',
+  'next-hour',
+  'hour-hand-on-numeral',
+  'numeral-as-minutes',
+  'five-count-slip',
+  'am-pm',
+  'noon-midnight',
+  'base-100',
+  'count-endpoints',
+  'wrong-direction',
+  '24h-offset',
+] as const;
+/** The domains, each with its own codes (a task's codes come from one domain, validate). */
+export const MISCONCEPTION_DOMAINS = { fractions: FRACTION_CODES, measure: MEASURE_CODES, 'whole-ops': WHOLE_OPS_CODES, time: TIME_CODES } as const;
+export type MisconceptionDomain = keyof typeof MISCONCEPTION_DOMAINS;
 /** Misconceptions the feedback is designed around, registered by domain (docs/19 §3.0 G5); one flat list, every code unique. */
-export const MISCONCEPTIONS = [...FRACTION_CODES, ...MEASURE_CODES] as const;
+export const MISCONCEPTIONS = [...FRACTION_CODES, ...MEASURE_CODES, ...WHOLE_OPS_CODES, ...TIME_CODES] as const;
 export const misconception = z.enum(MISCONCEPTIONS);
 export type MisconceptionCode = (typeof MISCONCEPTIONS)[number];
 
-export const TASK_KINDS = ['shade', 'cut', 'fold', 'split', 'merge', 'place', 'compare', 'order', 'choose', 'input', 'build-sum', 'count-squares', 'trace-perimeter', 'draw-rectangle', 'split-figure'] as const;
+export const TASK_KINDS = [
+  'shade',
+  'cut',
+  'fold',
+  'split',
+  'merge',
+  'place',
+  'compare',
+  'order',
+  'choose',
+  'input',
+  'build-sum',
+  'count-squares',
+  'trace-perimeter',
+  'draw-rectangle',
+  'split-figure',
+  'group',
+  'arrange',
+  'skip-count',
+  'split-array',
+  'regroup',
+  'share',
+] as const;
 /** Task kinds on the square grid (docs/21 §3.2). */
 export const GRID_KINDS = ['count-squares', 'trace-perimeter', 'draw-rectangle', 'split-figure'] as const;
+/** Task kinds on the array and the whole-number line (docs/19 §3.1). */
+export const ARRAY_KINDS = ['group', 'arrange', 'skip-count', 'split-array'] as const;
+/** Task kinds on the place-value blocks (docs/19 §3.2). */
+export const BLOCKS_KINDS = ['regroup', 'share'] as const;
 export type TaskKind = (typeof TASK_KINDS)[number];
 
-/** Model views a step may switch between (the VIEW group). */
-export const MODEL_VIEWS = ['bar', 'circle', 'numberline', 'wall', 'barmodel', 'grid'] as const;
+/** Model views a step may switch between (the VIEW group). `clock` and `timeline` are the time lesson's (docs/20 §3, model A3). */
+export const MODEL_VIEWS = ['bar', 'circle', 'numberline', 'wall', 'barmodel', 'grid', 'array', 'blocks', 'clock', 'timeline'] as const;
 export const modelView = z.enum(MODEL_VIEWS);
 export type ModelView = (typeof MODEL_VIEWS)[number];
 
@@ -76,6 +143,51 @@ export const frac = z.string().transform((text, ctx): Frac => {
     return z.NEVER;
   }
   return f;
+});
+
+/** A whole number 0–99 999: `56` or `"56"`. */
+export const whole = z.union([z.number(), z.string()]).transform((v, ctx): number => {
+  const n = parseWhole(v);
+  if (n === null) {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, message: `"${v}" is not a whole number (0–${WHOLE_MAX})` });
+    return z.NEVER;
+  }
+  return n;
+});
+
+/** `"09:40"`, `"15:05:30"` (24-hour time) → seconds since midnight. */
+export const clockTime = z.string().transform((text, ctx): number => {
+  const t = parseClock(text);
+  if (t === null) {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, message: `"${text}" is not a time of day (write 24-hour time: "09:40", "15:05:30")` });
+    return z.NEVER;
+  }
+  return t;
+});
+
+/** `"1h35m"`, `"95m"`, `"75s"` → seconds and the units written. */
+export const duration = z.string().transform((text, ctx): DurValue => {
+  const d = parseDuration(text);
+  if (!d) {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, message: `"${text}" is not a duration (write "1h35m", "95m", "75s")` });
+    return z.NEVER;
+  }
+  return d;
+});
+
+/** An answer: a fraction or whole number (`"3/4"`, `"2"`, `56`), a remainder (`"3 r 2"`), a time of day (`"09:40"`) or a duration (`"1h35m"`). */
+export const answerValue = z.union([z.number(), z.string()]).transform((v, ctx): AnswerValue => {
+  if (typeof v === 'number') {
+    const n = parseWhole(v);
+    if (n !== null) return { n, d: 1 };
+  } else {
+    const f = parseFrac(v);
+    if (f) return f;
+    const tagged = parseTagged(v);
+    if (tagged) return tagged;
+  }
+  ctx.addIssue({ code: z.ZodIssueCode.custom, message: `"${v}" is not an answer (a fraction "3/4", a whole number 56, "3 r 2", "09:40" or "1h35m")` });
+  return z.NEVER;
 });
 
 /** Parts by count (the first n from the left) or by index. */
@@ -118,16 +230,26 @@ const circleModel = z
 const numberLineModel = z
   .object({
     kind: z.literal('numberline'),
+    /** `fraction` (default): wholes cut in `intervals` · `whole`: a whole-number line from `from` to `to` (≤ 100) in steps of `step` (docs/19 §3.1). */
+    scale: z.enum(['fraction', 'whole']).default('fraction'),
     from: z.number().int().min(0).default(0),
-    to: z.number().int().min(1).max(3).default(1),
-    /** Intervals per whole. */
-    intervals: z.number().int().min(1).max(12),
-    labels: z.enum(['ends', 'wholes', 'all', 'none']).default('wholes'),
+    /** Fraction line: 1–3 wholes · whole-number line: up to 100 (validate). */
+    to: z.number().int().min(1).max(100).default(1),
+    /** Fraction line: intervals per whole (required there, validate). */
+    intervals: z.number().int().min(1).max(12).optional(),
+    /** Whole-number line: the tick spacing. */
+    step: z.union([z.literal(1), z.literal(2), z.literal(5), z.literal(10)]).optional(),
+    /** Fraction line: `ends` `wholes` `all` `none` · whole-number line: `ends` `tens` (or `wholes`: every ten and the ends) `steps` `all` `none`. */
+    labels: z.enum(['ends', 'wholes', 'all', 'none', 'tens', 'steps']).default('wholes'),
     marks: z.array(frac).optional(),
     /** A pointer above the line at this value (read-the-line tasks). */
     arrow: frac.optional(),
     /** A strip the length of one whole, drawn above and aligned with the line. */
     withBar: z.boolean().optional(),
+    /** Whole-number line: `count` arcs of `size` from `from` (default the line's start), "+5" on each, a ring where each lands. */
+    jumps: z.object({ size: z.number().int().min(1).max(50), count: z.number().int().min(1).max(20), from: z.number().int().min(0).optional() }).strict().optional(),
+    /** Whole-number line: the jumps numbered 1, 2, 3 … under the arcs (count the jumps, not the marks). */
+    counter: z.boolean().optional(),
   })
   .strict();
 const wallModel = z.object({ kind: z.literal('wall'), rows: z.array(z.number().int().min(1).max(12)).min(2).max(8) }).strict();
@@ -162,6 +284,98 @@ const barModelDiagram = z
     units: z.number().int().min(2).max(12).optional(),
   })
   .strict();
+
+/* The array: equal groups and rows (docs/19 §3.1, model A1) */
+export const ARRAY_OBJECTS = ['dot', 'kueh', 'curry-puff', 'egg', 'chopsticks', 'seat', 'orange', 'pencil', 'sticker'] as const;
+export const CONTAINERS = ['ring', 'plate', 'box', 'bag', 'car'] as const;
+const markTone = z.enum(['cold', 'hot', 'signal', 'ink']);
+const count = (max: number) => z.number().int().min(0).max(max);
+const arrayLayout = z.object({
+  object: z.enum(ARRAY_OBJECTS).default('dot'),
+  /** `scatter`: `count` loose on a tray · `groups`: `groups` containers of `size` (or `sizes`) · `rows`: `rows` × `cols` in rows. */
+  layout: z.enum(['scatter', 'groups', 'rows']).optional(),
+  count: count(60).optional(),
+  groups: z.number().int().min(1).max(12).optional(),
+  size: count(12).optional(),
+  /** Groups of different sizes (`[2, 5, 5]`: not equal groups). */
+  sizes: z.array(count(12)).min(1).max(12).optional(),
+  /** Left over outside the groups (or past the last full column of rows). */
+  extra: count(20).optional(),
+  /** Cars: seats taken in each car (`[4, 4, 4, 2]`). */
+  filled: z.array(count(4)).min(1).max(12).optional(),
+  container: z.enum(CONTAINERS).default('ring'),
+  /** Scatter: empty containers beside the tray (to deal into: `count` of them; to pack in: their `size`). */
+  containers: z.object({ kind: z.enum(CONTAINERS), count: z.number().int().min(1).max(12).optional(), size: z.number().int().min(1).max(12).optional() }).strict().optional(),
+  rows: z.number().int().min(1).max(14).optional(),
+  cols: z.number().int().min(1).max(14).optional(),
+  /** Count braces: rows (left, "3 rows"), columns (top, "4 in each row"), both, or the groups' (true). */
+  braces: z.union([z.boolean(), z.enum(['rows', 'cols'])]).optional(),
+  /** A cut after row k (or column k), the parts drawn a little apart, each with its own count. */
+  split: z.object({ rows: z.array(z.number().int().min(1)).length(1).optional(), cols: z.array(z.number().int().min(1)).length(1).optional() }).strict().optional(),
+  /** Tone of each part of a split (default cold, hot) or of each group (default cold). */
+  tones: z.array(markTone).min(1).max(12).optional(),
+  /** A paper strip over one count: the number of rows (or columns) is the question. */
+  cover: z.object({ rows: z.literal(true).optional(), cols: z.literal(true).optional() }).strict().optional(),
+  /** Taken away (ink slash): rows, columns or groups by index (0-based). */
+  crossed: z.object({ rows: z.array(count(13)).optional(), cols: z.array(count(13)).optional(), groups: z.array(count(11)).optional() }).strict().optional(),
+  /** The left-over ones circled in a dashed container (they would fill one more group). */
+  another: z.boolean().optional(),
+  label: bilingual.optional(),
+});
+const arrayModel = arrayLayout
+  .extend({
+    kind: z.literal('array'),
+    /** Two layouts side by side, each with its label (two ways to divide). */
+    pair: z.array(arrayLayout.strict()).length(2).optional(),
+  })
+  .strict();
+export type ArrayLayoutSpec = z.output<typeof arrayLayout>;
+
+/* Place-value blocks (docs/19 §3.2, model A2): hundreds, tens and ones on a mat */
+export const PLACES = ['H', 'T', 'O'] as const;
+export type PlaceKey = (typeof PLACES)[number];
+export const TRADES = ['O>T', 'T>H', 'T>O', 'H>T'] as const;
+export type Trade = (typeof TRADES)[number];
+const placeCounts = z.object({ H: count(30).optional(), T: count(40).optional(), O: count(40).optional() }).strict();
+export const COLUMN_SHOWS = ['none', 'ones', 'carry', 'tens', 'hundreds', 'all'] as const;
+const columnWorking = z
+  .object({
+    op: z.enum(['×', '÷']),
+    a: z.number().int().min(0).max(9999),
+    b: z.number().int().min(1).max(99),
+    /** What is written so far: × from the ones up (ones · carry · tens · hundreds · all), ÷ from the top place down (hundreds · tens · ones · all). */
+    show: z.enum(COLUMN_SHOWS).default('all'),
+  })
+  .strict();
+const blocksModel = z
+  .object({
+    kind: z.literal('blocks'),
+    /** The number the blocks make (drawn in its standard form unless `left` says otherwise). */
+    value: z.number().int().min(0).max(999).optional(),
+    /** Blocks on the mat by place (still to share; or not in standard form: 18 ones). */
+    left: placeCounts.optional(),
+    /** × : the value drawn in `copies` equal rows (×1, ×2 …). */
+    copies: z.number().int().min(1).max(9).optional(),
+    /** The rows pushed together: each place's blocks in one column. */
+    combined: z.boolean().optional(),
+    /** ÷ : the plates shared into (each with H · T · O). */
+    plates: z.number().int().min(2).max(9).optional(),
+    /** Blocks on each plate. */
+    dealt: placeCounts.optional(),
+    /** The trade this beat shows: lit before it happens; with `move: trade`, the blocks after it, the trade animated. */
+    trade: z.enum(TRADES).optional(),
+    /** The place being worked on: its column on the mat and its digit in the column working light up. */
+    focus: z.enum(PLACES).optional(),
+    /** The written column method beside the mat. */
+    column: columnWorking.optional(),
+    /** The H · T · O mat (default on). */
+    mat: z.boolean().default(true),
+    label: bilingual.optional(),
+  })
+  .strict();
+export type BlocksModelSpec = z.output<typeof blocksModel>;
+export type ColumnSpec = z.output<typeof columnWorking>;
+export type PlaceCounts = z.output<typeof placeCounts>;
 
 /* The square grid (docs/21 §3.1, model A4): grid points with y up, cell (x, y) = [x, x+1] × [y, y+1]. */
 const coord = z.number().int().min(0).max(99);
@@ -239,8 +453,10 @@ const gridModel = z
   })
   .strict();
 
-export const model = z.discriminatedUnion('kind', [barModel, circleModel, numberLineModel, wallModel, barModelDiagram, gridModel]);
+export const model = z.discriminatedUnion('kind', [barModel, circleModel, numberLineModel, wallModel, barModelDiagram, gridModel, arrayModel, blocksModel]);
 export type Model = z.output<typeof model>;
+export type ArrayModelSpec = z.output<typeof arrayModel>;
+export type NumberLineSpec = z.output<typeof numberLineModel>;
 export type BarModelDiagramSpec = z.output<typeof barModelDiagram>;
 export type GridModelSpec = z.output<typeof gridModel>;
 export type GridFigure = z.output<typeof gridFigure>;
@@ -250,12 +466,22 @@ export type GridDim = z.output<typeof gridDim>;
 /* Tasks                                                               */
 /* ------------------------------------------------------------------ */
 
+export const INPUT_FORMS = ['equal', 'equivalent', 'simplest', 'mixed', 'whole', 'measure', 'remainder', 'time12', 'time24', 'face', 'duration'] as const;
+/** Forms whose answer is a fraction (the fraction boxes). */
+export const FRACTION_FORMS = ['equal', 'equivalent', 'simplest', 'mixed'] as const;
+/** Forms whose answer is a time of day or a duration. */
+export const TIME_FORMS = ['time12', 'time24', 'face', 'duration'] as const;
+
 export const inputSpec = z
   .object({
-    /** One answer, or one per written fraction (`blanks`). */
-    answer: z.union([frac, z.array(frac).min(1).max(3)]),
-    /** `equal`: these exact numbers · `equivalent`: any equal value · `simplest`: lowest terms · `mixed`: a mixed number · `whole`: a whole number (1–5 digits) · `measure`: a whole number and a unit chip. */
-    form: z.enum(['equal', 'equivalent', 'simplest', 'mixed', 'whole', 'measure']),
+    /** One answer, or one per written value (`blanks`, the `?` of a `sentence`). */
+    answer: z.union([answerValue, z.array(answerValue).min(1).max(6)]),
+    /**
+     * Fractions — `equal`: these exact numbers · `equivalent`: any equal value · `simplest`: lowest terms · `mixed`: a mixed number.
+     * Whole numbers — `whole`: 1–5 digits · `measure`: a whole number and a unit chip · `remainder`: quotient, "r", remainder.
+     * Time — `time12`: hours : minutes and am / pm · `time24`: hh : mm · `face`: hours : minutes as a clock face reads (no am / pm) · `duration`: h + min or min + s.
+     */
+    form: z.enum(INPUT_FORMS),
     /** `measure`: the answer's unit (`cm2`, `m`, `unit2` …); `whole` on a grid: the unit printed after the box. */
     unit: z.enum(UNITS).optional(),
     /** Grid: what the number is, measured on the figure (checked against its geometry; tells the diagnosis what to look for). */
@@ -272,6 +498,29 @@ export const inputSpec = z
     from: frac.optional(),
     /** The sum or difference being worked out (diagnoses adding denominators, not converting). */
     sum: z.object({ op: z.enum(['+', '-']), a: frac, b: frac }).strict().optional(),
+    /**
+     * The whole-number fact being worked out (docs/19 §3.3; tells the diagnosis what to look for): `a × b` or `a ÷ b`;
+     * `missing` names the number asked for (`a` in `? × 6 = 42`; default the result); `round` for a word problem's
+     * remainder (`up`: one more group for what is left, `down`: what is left does not count); `split` the known part
+     * a times table is worked from (5 in 6 × 7 = 5 × 7 + 1 × 7).
+     */
+    op: z
+      .object({
+        kind: z.enum(['×', '÷']),
+        a: z.number().int().min(0).max(WHOLE_MAX),
+        b: z.number().int().min(1).max(WHOLE_MAX),
+        missing: z.enum(['a', 'b', 'c']).optional(),
+        round: z.enum(['up', 'down']).optional(),
+        split: z.number().int().min(1).max(99).optional(),
+      })
+      .strict()
+      .optional(),
+    /** Time: the duration being converted (`2h15m` → minutes: diagnoses counting 100 minutes to the hour). */
+    convert: z.object({ from: duration, to: z.enum(['h', 'min', 's']).optional() }).strict().optional(),
+    /** Time: the start, end and length of a span, and which one is asked (diagnoses going the wrong way, counting the marks). */
+    span: z.object({ start: clockTime.optional(), end: clockTime.optional(), length: duration.optional(), ask: z.enum(['start', 'end', 'length']) }).strict().optional(),
+    /** `duration`: the two boxes (default from the answer: hours and minutes, or minutes and seconds). */
+    units: z.enum(['h-min', 'min-s']).optional(),
   })
   .strict();
 export type InputSpec = z.output<typeof inputSpec>;
@@ -367,6 +616,48 @@ const drawRectFields = z.object({
 });
 const splitFigureFields = z.object({ figure: kebabId.optional(), then: inputSpec });
 
+/* Array tasks (docs/19 §3.1) */
+const groupFields = z.object({
+  /** Things to put into groups. */
+  total: z.number().int().min(1).max(60),
+  /** `share`: into `k` containers, the same in each · `pack`: `k` in each container. */
+  by: z.enum(['share', 'pack']),
+  k: z.number().int().min(1).max(12),
+  then: inputSpec.optional(),
+});
+const arrangeFields = z.object({
+  rows: z.number().int().min(1).max(12),
+  cols: z.number().int().min(1).max(12),
+  /** `exact`: these rows and columns · `product`: any array with as many (another way to make 12). */
+  accept: z.enum(['exact', 'product']).default('exact'),
+});
+const skipCountFields = z.object({
+  size: z.number().int().min(1).max(25),
+  count: z.number().int().min(1).max(12),
+  /** The end of the line (default the model's). */
+  to: z.number().int().min(1).max(100).optional(),
+});
+const splitArrayFields = z.object({
+  rows: z.number().int().min(2).max(12),
+  cols: z.number().int().min(1).max(12),
+  /** Where the cut must go (after row k, or column k); without it any cut works. */
+  at: z.object({ rows: z.array(z.number().int().min(1)).length(1).optional(), cols: z.array(z.number().int().min(1)).length(1).optional() }).strict().optional(),
+  then: inputSpec,
+});
+
+/* Place-value tasks (docs/19 §3.2) */
+const regroupFields = z.object({
+  value: z.number().int().min(0).max(999),
+  /** The blocks on the mat at the start (not in standard form: 14 tens). */
+  start: placeCounts,
+  then: inputSpec.optional(),
+});
+const shareFields = z.object({
+  value: z.number().int().min(1).max(999),
+  k: z.number().int().min(2).max(9),
+  then: inputSpec,
+});
+
 export const taskSchema = z.discriminatedUnion('kind', [
   base.extend({ kind: z.literal('shade') }).merge(shadeFields).strict(),
   base.extend({ kind: z.literal('cut') }).merge(cutFields).strict(),
@@ -383,6 +674,12 @@ export const taskSchema = z.discriminatedUnion('kind', [
   base.extend({ kind: z.literal('trace-perimeter') }).merge(traceFields).strict(),
   base.extend({ kind: z.literal('draw-rectangle') }).merge(drawRectFields).strict(),
   base.extend({ kind: z.literal('split-figure') }).merge(splitFigureFields).strict(),
+  base.extend({ kind: z.literal('group') }).merge(groupFields).strict(),
+  base.extend({ kind: z.literal('arrange') }).merge(arrangeFields).strict(),
+  base.extend({ kind: z.literal('skip-count') }).merge(skipCountFields).strict(),
+  base.extend({ kind: z.literal('split-array') }).merge(splitArrayFields).strict(),
+  base.extend({ kind: z.literal('regroup') }).merge(regroupFields).strict(),
+  base.extend({ kind: z.literal('share') }).merge(shareFields).strict(),
 ]);
 export type Task = z.output<typeof taskSchema>;
 export type TaskOf<K extends TaskKind> = Extract<Task, { kind: K }>;
@@ -412,7 +709,7 @@ const syllabusLine = z
 /* ------------------------------------------------------------------ */
 
 /** How the stage gets from the previous beat to this one (a short eased transition; `morph` = another model kind). */
-export const BEAT_MOVES = ['cut', 'shade', 'fold', 'split', 'merge', 'convert', 'place', 'cross', 'morph', 'tile', 'walk', 'arrange'] as const;
+export const BEAT_MOVES = ['cut', 'shade', 'fold', 'split', 'merge', 'convert', 'place', 'cross', 'morph', 'tile', 'walk', 'arrange', 'group', 'deal', 'rotate', 'cover', 'jump', 'combine', 'trade', 'sweep'] as const;
 export type BeatMove = (typeof BEAT_MOVES)[number];
 
 const beatOverlay = z
@@ -432,6 +729,8 @@ export const beatSchema = z
   .object({
     /** What the stage shows: the same models as the tasks (`given` = cold, `shaded` = signal). */
     model,
+    /** A second model drawn under the first, lined up with it (an array and its number line). */
+    under: model.optional(),
     /** Bar / circle: given parts taken away (ink hatch). */
     crossed: partSet.optional(),
     /** Fraction wall: fractions lit on their rows (two = cold and hot, compared; more = cold, equivalents or an order). */
@@ -449,7 +748,7 @@ export const beatSchema = z
   .strict();
 export type Beat = z.output<typeof beatSchema>;
 
-const stepLimits = z
+export const stepLimits = z
   .object({
     /** Longest side of any figure (in the model's unit). */
     maxSide: z.number().int().min(1).optional(),
@@ -461,6 +760,23 @@ const stepLimits = z
     gridMax: z.tuple([z.number().int().min(1), z.number().int().min(1)]).optional(),
     /** Sides of a rectilinear figure. */
     sides: z.tuple([z.number().int().min(4), z.number().int().min(4)]).optional(),
+    /* Whole numbers (docs/19 §1.3) */
+    /** Both factors of a multiplication within `[lo, hi]` (groups and each, rows and columns, the numbers multiplied). */
+    factors: z.tuple([z.number().int().min(0), z.number().int().min(0)]).optional(),
+    /** Largest product, total or number shared. */
+    maxTotal: z.number().int().min(1).optional(),
+    /** The number divided by within `[lo, hi]`. */
+    divisor: z.tuple([z.number().int().min(1), z.number().int().min(1)]).optional(),
+    maxQuotient: z.number().int().min(1).optional(),
+    /** Largest whole number anywhere in the task (answers, values, the numbers worked with). */
+    maxValue: z.number().int().min(1).max(WHOLE_MAX).optional(),
+    /* Time (docs/20 §3.6) */
+    /** `12h`: times are read and written in 12-hour time only (no 24-hour forms) · `24h`: both. */
+    clock: z.enum(['12h', '24h']).optional(),
+    /** Every time of day and duration a whole number of this many minutes. */
+    step: z.number().int().min(1).max(60).optional(),
+    /** Longest duration. */
+    maxDuration: duration.optional(),
   })
   .strict();
 export type StepLimits = z.output<typeof stepLimits>;
@@ -500,6 +816,11 @@ export type Question = z.output<typeof question>;
 
 export const lessonFile = z
   .object({
+    /** How times are written everywhere in the lesson (docs/20 §3.0): `7.20 am` / `7.20 a.m.` / `7:20 am`; `19:20` / `1920` / `19 20`. */
+    notation: z
+      .object({ clock12: z.enum(CLOCK12_NOTATIONS).default(DEFAULT_NOTATION.clock12), clock24: z.enum(CLOCK24_NOTATIONS).default(DEFAULT_NOTATION.clock24) })
+      .strict()
+      .default(DEFAULT_NOTATION),
     syllabus: z.array(syllabusLine).min(1),
     steps: z.array(step).min(1),
     practice: z.array(question).default([]),

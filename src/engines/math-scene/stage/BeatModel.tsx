@@ -21,7 +21,12 @@ import { Rows, type RowSpec } from './Rows';
 import { BarModelDiagram } from './BarModelDiagram';
 import { SvgFrac } from './svg';
 import { GridModel } from './GridModel';
+import { ArrayModel } from './ArrayModel';
+import { BlocksModel } from './BlocksModel';
+import { WholeLine } from './WholeLine';
 import type { DisplayModes } from './Stage';
+import { plainText } from '../../../lib/rich-text';
+import { thingsOf } from '../lib/array';
 
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
 const indices = (set: number | number[] | undefined): number[] => (set === undefined ? [] : Array.isArray(set) ? [...set] : Array.from({ length: set }, (_, i) => i));
@@ -35,7 +40,7 @@ export function beatShape(beat: Beat): string {
     case 'circle':
       return `circle|${m.parts}`;
     case 'numberline':
-      return `line|${m.from}|${m.to}|${m.intervals}`;
+      return m.scale === 'whole' ? `wline|${m.from}|${m.to}|${m.step ?? 1}` : `line|${m.from}|${m.to}|${m.intervals}`;
     case 'wall':
       return `wall|${m.rows.join(',')}`;
     case 'barmodel':
@@ -43,6 +48,12 @@ export function beatShape(beat: Beat): string {
     case 'grid':
       // Squares laid, sides walked, dimensions and highlights change in place; new figures, a cut or another scale remount.
       return `grid|${m.unit}|${m.show}|${JSON.stringify(m.figures.map((f) => [f.rect, f.rects, f.cells, f.poly, f.halves]))}|${JSON.stringify(m.cuts ?? [])}|${m.apart ? 'apart' : ''}`;
+    case 'array':
+      // The same things keep the drawing (grouped, dealt, arranged: each one moves); a quarter turn remounts it, turning in.
+      return `array|${m.object}|${thingsOf(m)}|${m.pair ? 'pair' : ''}${beat.move === 'rotate' ? `|turn${m.rows}x${m.cols}` : ''}${beat.under ? `|${beatShape({ ...beat, model: beat.under, under: undefined })}` : ''}`;
+    case 'blocks':
+      // The rows of a × pushed together, a trade or a share change in place (each block keeps its key); another number remounts.
+      return `blocks|${m.value ?? ''}|${m.mat}|${m.plates ?? 0}|${m.column ? `${m.column.op}${m.column.a}.${m.column.b}` : ''}`;
   }
 }
 
@@ -59,7 +70,7 @@ export function BeatModel({ beat, box, defs, modes, locale }: { beat: Beat; box:
   const m = beat.model;
   const o = beat.overlay ?? {};
   const labels = !!o.labels || modes.labels;
-  const label = tx(beat.caption, locale).replace(/\{([^}]*)\}/g, '$1');
+  const label = plainText(tx(beat.caption, locale), locale);
   const symbol = (!!o.symbol || modes.symbol) && box.w > 480;
   const area: Rect = symbol ? { ...box, w: box.w - 120 } : box;
   const cx = area.x + area.w / 2;
@@ -72,6 +83,17 @@ export function BeatModel({ beat, box, defs, modes, locale }: { beat: Beat; box:
   };
 
   if (m.kind === 'grid') return <GridModel defs={defs} box={box} model={m} locale={locale} label={label} />;
+  if (m.kind === 'array' || m.kind === 'blocks' || (m.kind === 'numberline' && m.scale === 'whole')) {
+    // A second model lined up under the first (the groups and their jumps): the box is shared, the first above.
+    const top: Rect = beat.under ? { ...box, h: box.h * 0.58 } : box;
+    const bottom: Rect | null = beat.under ? { ...box, y: box.y + box.h * 0.6, h: box.h * 0.4 } : null;
+    return (
+      <g>
+        <ValueModel model={m} box={top} defs={defs} label={label} locale={locale} move={beat.move ?? null} />
+        {beat.under && bottom && <ValueModel model={beat.under} box={bottom} defs={defs} label={label} locale={locale} move={beat.move ?? null} />}
+      </g>
+    );
+  }
 
   if (m.kind === 'wall') {
     const lit = beat.highlight ?? [];
@@ -112,8 +134,8 @@ export function BeatModel({ beat, box, defs, modes, locale }: { beat: Beat; box:
         w={w}
         from={m.from}
         to={m.to}
-        intervals={m.intervals}
-        labels={m.labels}
+        intervals={m.intervals ?? 1}
+        labels={m.labels === 'tens' || m.labels === 'steps' ? 'all' : m.labels}
         arrow={m.arrow ? valueOnLine(m.arrow, m) : null}
         points={points}
         withBar={m.withBar}
@@ -171,6 +193,17 @@ export function BeatModel({ beat, box, defs, modes, locale }: { beat: Beat; box:
   );
 }
 
+/** An array, blocks or a whole-number line, read-only (a beat, or the part of a beat under another model). */
+export function ValueModel({ model: m, box, defs, label, locale, move }: { model: Beat['model']; box: Rect; defs: string; label: string; locale: Locale; move: Beat['move'] | null }) {
+  if (m.kind === 'array') return <ArrayModel defs={defs} box={box} model={m} locale={locale} label={label} move={move} />;
+  if (m.kind === 'blocks') return <BlocksModel box={box} model={m} locale={locale} label={label} move={move} />;
+  if (m.kind === 'numberline' && m.scale === 'whole') {
+    const w = clamp(box.w - 80, 240, 960);
+    return <WholeLine x={box.x + (box.w - w) / 2} y={box.y + box.h / 2 + 10} w={w} model={m} locale={locale} label={label} move={move} />;
+  }
+  return null;
+}
+
 /** The fraction the card and the plate show for a beat (its bar / circle, else its last lit or marked fraction). */
 export function beatFraction(beat: Beat): Frac | null {
   const m = beat.model;
@@ -204,6 +237,6 @@ export function beatCounts(beat: Beat): { parts: number | null; marked: number |
     return { parts, marked: indices(m.given).length + indices(m.shaded).length - indices(beat.crossed).length };
   }
   if (m.kind === 'circle') return { parts: m.parts, marked: indices(m.given).length + indices(m.shaded).length - indices(beat.crossed).length };
-  if (m.kind === 'numberline') return { parts: m.intervals * (m.to - m.from), marked: null };
+  if (m.kind === 'numberline') return { parts: m.scale === 'whole' ? null : (m.intervals ?? 1) * (m.to - m.from), marked: null };
   return { parts: null, marked: null };
 }

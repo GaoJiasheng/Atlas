@@ -557,4 +557,32 @@ MathScene 现在是"分数引擎"：值只有 `Frac`，作答框两位数，右�
 
 ## 9. 施工记录 / 已知差距
 
-施工时追加。
+### 9.1 引擎（E0 + A1 + A2，2026-10-17；课的内容未施工）
+
+- **共用泛化 G1–G12 全部做完**（面积与周长时已做的 `Measure`、AREA 卡、grid 的 PLATE 行、measure 域、`tile` / `walk` / `arrange`、`steps[].limits`、`check-pool --topic --step`、G8 不显示年级保持不变）：
+  - G1 值：`lib/value.ts` 加整数（0–99 999）、余数、时刻（午夜起的秒数，数据 24 时制）、时长（记住写的单位），解析 / 比较 / 显示；`answer` 按写法自动识别；`lesson.json` 顶层 `notation`（docs/20 D5 / D6 的写法设置）。
+  - G2 写法：`whole`（1–5 位，`sentence`、按 `op` 印的算式）、`remainder`、`time12`、`face`、`time24`、`duration`；托盘拆成 `tray/inputs/*`（格子 + 数字键 ≥ 44 px，物理键盘，Tab 切格，满格自动跳格）。`face` 是为时间课的 `read-clock` 先做的（钟面读数，不分上下午）。
+  - G3 右上卡注册表（`hud/cards/`）：FRACTION、AREA、PRODUCT、PLACE VALUE、**TIME**（时刻按 notation、"twenty past seven / 七点二十分"、另一种计时法；时长）都做了；`clock` / `timeline` 模型一登记就用 TIME 卡。
+  - G4 PLATE 行：阵列 GROUPS · EACH · TOTAL；数位块 H · T · O · TRADES；整数数轴 JUMPS · SIZE · LANDS。
+  - G5 误解分域：`whole-ops` 18 条（§2.1，`lib/diagnose/whole-ops.ts`）、`time` 11 条（docs/20 §2.1，`lib/diagnose/time.ts`），每条 ≥ 2 个正例 1 个反例的单测；validate 拒绝跨域的 code 和"这道题诊断不出"的 code。
+  - G6 过渡：`group`、`deal`、`rotate`、`cover`、`jump`、`combine`、`trade`、`sweep`（登记；钟面模型实现）。
+  - G7 记号 `{t:…}`、`{d:…}`、`{u:…}`，`r` 读作 remainder / 余，`words.ts` 整数到 99 999、位值、时刻、时长。
+  - G9 `P1` 已在；G10 VIEW 加 `array`、`blocks`、`clock`、`timeline`；G11 limits 加 `factors`、`maxTotal`、`divisor`、`maxQuotient`、`maxValue`、`clock`、`step`、`maxDuration`；G12 每个新 kind 有 solve / sampleState / proveTask，`goToTask`、`shoot --tasks`、键盘路径都通。
+- **A1 阵列**（`stage/ArrayModel.tsx` + `lib/array.ts`）与整数数轴（`stage/WholeLine.tsx`，`numberline` 的 `scale: "whole"`）；题型 `group`、`arrange`、`skip-count`、`split-array`。
+- **A2 数位块**（`stage/BlocksModel.tsx` + `lib/blocks.ts`）与竖式（`stage/ColumnWorking.tsx`：× 进位写在上一位上方，÷ 用长除号，商写在被除数上方，0 照写）；题型 `regroup`、`share`。
+- **示例主题** `sample-lesson-whole`（draft，占位数据）四步 36 道题，每个模型、过渡、题型、写法各一次；`pnpm shoot sample-lesson-whole --beats --tasks --keys --layout` 干净。
+
+### 9.2 与本文 §3 不同的地方
+
+1. **`share` 的 sample** 写成动作序列 `"T,T>O,O"`（字母 = 分那一列，`X>Y` = 换），不是 §3.2 的 `"T:2,O:4"`：每盘的结果说不清孩子有没有换（`not-traded` 就是"没换"），动作序列能精确重放。
+2. **阵列没有 `rotate: 90` 字段**：转 90° 只是过渡，写 `move: "rotate"`，模型照转完的样子写（4 行 3 列）。
+3. **`split-array` 的 `then`**：给了 `at` 时答案固定；没给时写成 `? + ? = ?`（两部分 + 总数），按孩子自己的切法判，部分可换序；题库数据的答案仍要写一种切法的数（validate 查得到这种切法）。
+4. **数轴配阵列**（§2.2 第 02 步"同上 + numberline"）：节拍加了 `under`（第二个模型画在第一个下面）。
+5. **`{d:95m}` 按写的单位显示**（`95 min`，不是自动换成 `1 h 35 min`），否则 "{d:95m} = {d:1h35m}" 两边一样。
+6. 竖式的 `show` 对 ÷ 是从最高位数的（`hundreds` · `tens` · `carry`（带下一位）· `ones` / `all`）；× 照 §3.2（`ones` · `carry` · `tens` · `hundreds` · `all`）。
+
+### 9.3 给下一步
+
+- **课的内容**（阶段 2–4）：`group` 的托盘按钮、`share` 的"分 / 换开"、竖式的 `show` 都在 docs/06「整数与时间」；每步写 `limits`（第 01 步 `{ "factors": [2, 5], "maxTotal": 40 }` 一类）；`op` 写在每道 `input` 上（诊断要它）；`choose` 的错选项各带 code；`check-pool --topic multiplication-division --step <id>` 到 0 错。`{t:…}` 只在时间课用。
+- **钟面 / 时间线（A3）**：在 `schema.ts` 的 `model` 联合里加 `clock`、`timeline`（`MODEL_VIEWS`、卡片注册表、`index.ts` 的 URL 视图已经留好）；PLATE 行加到 `hud/plate.ts`；`read-clock` / `set-clock` / `duration` 题型按本仓的四步加（state 动作 + check + solve + sampleState）；诊断用 `lib/diagnose/time.ts` 的 `TimeContext` + `diagnoseTime`（钟面的 `hour-hand-on-numeral` 只由 `choose` 的 `faulty` 选项判）；写法用现成的 `time12` / `face` / `time24` / `duration` 托盘；`sweep` 过渡已登记（CSS 目前是淡入，钟面自己做针扫）；讲解拍上的 TIME 卡要钟面把时刻交给它（`TimeCard` 已收 `time={{ at, mode }}`，`hud/cards/index.tsx` 的 `Card` 加这一个参数）；docs/20 §3.6 的"不跨午夜"上限还没有，加钟面的 limits 时一起加。
+- **已知差距**：手机 390 × 844 上数位块单位格只有 3–5 px（舞台被托盘占去一半），可数但偏小。
