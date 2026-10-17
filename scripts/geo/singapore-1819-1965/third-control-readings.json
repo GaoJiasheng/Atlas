@@ -1,0 +1,165 @@
+{
+  "method": "Native original raster observations selected independently of fit residuals. Predictions used only to locate a 450 px window. Road candidates are not qualified by low residuals.",
+  "readings": [
+    {
+      "map": "G9",
+      "name": "Jurong Road / Bukit Timah Road (now Jalan Jurong Kechil)",
+      "svg": [
+        3974,
+        3728
+      ],
+      "lnglat": [
+        103.776068175,
+        1.3402483
+      ],
+      "guideIndex": 0,
+      "status": "candidate-only-not-qualified",
+      "source": "Independently read road convergence in raw/G9.jpg; current road-axis reference from raw/third-osm-bukit-timah-jurong.json, CP only. The old map/modern junction correspondence is a candidate; road widening and realignment are not independently excluded.",
+      "readUncertaintyPx": 5
+    },
+    {
+      "map": "G9",
+      "name": "Clementi Road / Pasir Panjang Road",
+      "svg": [
+        3807,
+        4681
+      ],
+      "lnglat": [
+        103.7680848,
+        1.2923909
+      ],
+      "guideIndex": 5,
+      "status": "candidate-only-not-qualified",
+      "source": "Independently read road convergence in raw/G9.jpg; current road-axis reference from raw/third-osm-pasir-panjang-clementi.json, CP only. The old map/modern junction correspondence is a candidate; road widening and realignment are not independently excluded.",
+      "readUncertaintyPx": 5
+    },
+    {
+      "map": "G9",
+      "name": "Thomson Road / Balestier Road",
+      "svg": [
+        5281,
+        3964
+      ],
+      "lnglat": [
+        103.8419455,
+        1.3263877
+      ],
+      "guideIndex": 8,
+      "status": "candidate-only-not-qualified",
+      "source": "Independently read road convergence in raw/G9.jpg; current road-axis reference from raw/third-osm-thomson-balestier.json, CP only. The old map/modern junction correspondence is a candidate; road widening and realignment are not independently excluded.",
+      "readUncertaintyPx": 5
+    },
+    {
+      "map": "G11",
+      "name": "Jurong Road / Bukit Timah Road (now Jalan Jurong Kechil)",
+      "svg": [
+        3343,
+        3692
+      ],
+      "lnglat": [
+        103.776068175,
+        1.3402483
+      ],
+      "guideIndex": 0,
+      "status": "candidate-only-not-qualified",
+      "source": "Independently read road convergence in raw/G11.jpg; current road-axis reference from raw/third-osm-bukit-timah-jurong.json, CP only. The old map/modern junction correspondence is a candidate; road widening and realignment are not independently excluded.",
+      "readUncertaintyPx": 5
+    },
+    {
+      "map": "G11",
+      "name": "Clementi Road / Pasir Panjang Road",
+      "svg": [
+        3160,
+        4564
+      ],
+      "lnglat": [
+        103.7680848,
+        1.2923909
+      ],
+      "guideIndex": 5,
+      "status": "candidate-only-not-qualified",
+      "source": "Independently read road convergence in raw/G11.jpg; current road-axis reference from raw/third-osm-pasir-panjang-clementi.json, CP only. The old map/modern junction correspondence is a candidate; road widening and realignment are not independently excluded.",
+      "readUncertaintyPx": 5
+    },
+    {
+      "map": "G11",
+      "name": "Thomson Road / Balestier Road",
+      "svg": [
+        4540,
+        3888
+      ],
+      "lnglat": [
+        103.8419455,
+        1.3263877
+      ],
+      "guideIndex": 8,
+      "status": "candidate-only-not-qualified",
+      "source": "Independently read road convergence in raw/G11.jpg; current road-axis reference from raw/third-osm-thomson-balestier.json, CP only. The old map/modern junction correspondence is a candidate; road widening and realignment are not independently excluded.",
+      "readUncertaintyPx": 5
+    },
+    {
+      "map": "G16",
+      "name": "Jurong Road / Bukit Timah Road (now Jalan Jurong Kechil)",
+      "svg": [
+        9755,
+        6209
+      ],
+      "lnglat": [
+        103.776068175,
+        1.3402483
+      ],
+      "guideIndex": 0,
+      "status": "candidate-only-not-qualified",
+      "source": "Independently read road convergence in raw/G16.jpg; current road-axis reference from raw/third-osm-bukit-timah-jurong.json, CP only. The old map/modern junction correspondence is a candidate; road widening and realignment are not independently excluded.",
+      "readUncertaintyPx": 10
+    },
+    {
+      "map": "G16",
+      "name": "Clementi Road / Pasir Panjang Road",
+      "svg": [
+        9524,
+        7172
+      ],
+      "lnglat": [
+        103.7680848,
+        1.2923909
+      ],
+      "guideIndex": 5,
+      "status": "candidate-only-not-qualified",
+      "source": "Independently read road convergence in raw/G16.jpg; current road-axis reference from raw/third-osm-pasir-panjang-clementi.json, CP only. The old map/modern junction correspondence is a candidate; road widening and realignment are not independently excluded.",
+      "readUncertaintyPx": 10
+    },
+    {
+      "map": "G16",
+      "name": "Thomson Road / Balestier Road",
+      "svg": [
+        11078,
+        6380
+      ],
+      "lnglat": [
+        103.8419455,
+        1.3263877
+      ],
+      "guideIndex": 8,
+      "status": "candidate-only-not-qualified",
+      "source": "Independently read road convergence in raw/G16.jpg; current road-axis reference from raw/third-osm-thomson-balestier.json, CP only. The old map/modern junction correspondence is a candidate; road widening and realignment are not independently excluded.",
+      "readUncertaintyPx": 10
+    },
+    {
+      "map": "G9",
+      "name": "St Andrew\u2019s Cathedral, standing1861 nave/footprint centre",
+      "svg": [
+        5552,
+        4705
+      ],
+      "lnglat": [
+        103.85224460336309,
+        1.2923368361275789
+      ],
+      "status": "standing-building-identity-confirmed-anchor-semantics-unqualified",
+      "source": "georef-fixed-buildings-candidates.json: native cruciform and standing1861 nave centre; NHB Roots identity; OSM centroid CP only",
+      "readUncertaintyPx": 3,
+      "caution": "The named1861 nave survives, but equivalence of the historical generalised cruciform centre to the centroid of the current footprint, including later extensions, is not independently established. This is a diagnostic candidate, not an added qualified CP."
+    }
+  ]
+}

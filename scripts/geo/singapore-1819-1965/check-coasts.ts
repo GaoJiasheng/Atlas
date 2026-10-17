@@ -11,7 +11,7 @@ const spec=read(`${dir}/sources.json`).pipeline.localLand;
 const topo=read('public/geo/land-sg-history.json');
 const baseline:FeatureCollection=toFc(Object.values(topo.objects).flatMap(o=>(feature(topo,o as Parameters<typeof feature>[1]) as unknown as FeatureCollection).features).filter(f=>f.properties?.kind==='coast-today'));
 // Standalone review plates; these are source comparisons, not application screenshots.
-const shots=resolve('docs/screenshots/singapore-1819-1965');mkdirSync(shots,{recursive:true});
+const shots=resolve(process.env.SG_REVIEW_DIR??'docs/screenshots/singapore-1819-1965');mkdirSync(shots,{recursive:true});
 const escapeXml=(s:string)=>s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
 const sourceMaps:Record<string,{map:string;caption:string;crop?:{left:number;top:number;width:number;height:number}}>= {
  L0:{map:'G1',caption:'1822 proposed town plan, backcast to1819; outer island from later G9'},

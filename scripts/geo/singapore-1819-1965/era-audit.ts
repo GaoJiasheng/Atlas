@@ -47,8 +47,16 @@ for(const [a,b] of [['L1','L2'],['L2','L1'],['L4','L5'],['L5','L4']] as const){
    }
   }
  }
- const largestChangedCells=[...cells].sort((a,b)=>b[1]-a[1]).slice(0,20).map(([key,areaKm2])=>{const [x=0,y=0]=key.split(',').map(Number);return{areaKm2,box:[x*0.02,y*0.02,(x+1)*0.02,(y+1)*0.02]};});
- differences.push({a,b,areaKm2,latitudeStepM:5,largestChangedCells});
+ const changedCells=[...cells].sort((a,b)=>b[1]-a[1]).map(([key,areaKm2])=>{const [x=0,y=0]=key.split(',').map(Number);return{areaKm2,box:[x*0.02,y*0.02,(x+1)*0.02,(y+1)*0.02]};});
+ const largestChangedCells=changedCells.slice(0,20);
+ // Measurement bins only: these rectangles never select, erase or add land.
+ const measuredBins=[
+  {name:'Tuas / Pasir Laba source-splice cells',box:[103.58,1.24,103.70,1.44]},
+  {name:'Eastern Jurong / Pandan cells',box:[103.70,1.24,103.78,1.38]},
+  {name:'Northern shore cells',box:[103.70,1.38,104.00,1.50]},
+  {name:'Eastern shore cells',box:[103.90,1.24,104.12,1.38]},
+ ].map(bin=>({...bin,areaKm2:changedCells.filter(c=>c.box[0]!>=bin.box[0]! - 1e-9&&c.box[1]!>=bin.box[1]! - 1e-9&&c.box[2]!<=bin.box[2]! + 1e-9&&c.box[3]!<=bin.box[3]! + 1e-9).reduce((sum,c)=>sum+c.areaKm2,0)}));
+ differences.push({a,b,areaKm2,latitudeStepM:5,largestChangedCells,changedCells,measuredBins});
 }
 const topo=readJson<{arcs:unknown[];objects:Record<string,{geometries:{properties?:{id?:string;kind?:string};arcs?:unknown}[]}>}>('public/geo/land-sg-history.json');
 const uses=new Map<number,Set<string>>();

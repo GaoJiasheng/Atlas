@@ -1,6 +1,6 @@
 /** Review sheets from standalone geo checks; no application build or shoot. */
 import sharp from'sharp';import{resolve}from'node:path';import{existsSync}from'node:fs';import{readJson}from'../lib/common';
-const dir=resolve(import.meta.dirname),shots=resolve(dir,'../../../docs/screenshots/singapore-1819-1965');
+const dir=resolve(import.meta.dirname),shots=resolve(process.env.SG_REVIEW_DIR??`${dir}/../../../docs/screenshots/singapore-1819-1965`);
 const ids=readJson<any>(`${dir}/sources.json`).keyframes.map((k:any)=>k.id).filter((id:string)=>existsSync(`${shots}/geo-${id}.png`));
 const thumbs:any[]=[];for(let i=0;i<ids.length;i++){const input=await sharp(`${shots}/geo-${ids[i]}.png`).extract({left:0,top:0,width:1820,height:750}).resize(728,300).png().toBuffer();thumbs.push({input,left:(i%3)*728,top:Math.floor(i/3)*300});}
 await sharp({create:{width:2184,height:Math.ceil(ids.length/3)*300,channels:3,background:'#fff'}}).composite(thumbs).png().toFile(`${shots}/geo-contact.png`);

@@ -9801,7 +9801,8 @@
           "name": "^(MacRitchie|Lower Peirce|Upper Peirce|Upper Seletar|Bedok|Pulau Tekong) Reservoir$|^Jurong Lake$"
         }
       }
-    }
+    },
+    "shots": "scripts/geo/singapore-1819-1965/work/third-review"
   },
   "draftGaps": {
     "status": "Geographical acceptance has not passed",

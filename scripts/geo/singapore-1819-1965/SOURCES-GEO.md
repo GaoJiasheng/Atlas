@@ -693,3 +693,10 @@ external named-town symbol audit; not exact surveyed surviving-feature control
 
 Source-pixel recipes: jackson.ts (planned divisions), town-early.ts (outer G1/G4 water selectors), town-shore.py plus town-shore.ts (G7 colour-seeded shoreline guides), coast-segment.py plus merged lines.json (whole-main-island source ink). Source image-frame closures select water outside the printed shore; they are not historical territory borders. All control geometry is dataset selection, source-pixel tracing and clipping; no OSM shape or hand-drawn geographic polygon is published.
 <!-- END PARENT GEOGRAPHIC AUDIT -->
+
+
+## Third-pass geographic accuracy review (18 October 2026)
+
+No new source map or geometry was adopted. G9/G11/G16 still fail §3.3; active CP counts remain18/18/6. Explicit source-informed Cassini/Everest and datum-shift candidates, shared auto/polynomial trials, independently read road/building candidates, licence decisions and verified original hashes are recorded in [CODEX-REPORT.md, Third pass](CODEX-REPORT.md#third-pass) and `third-pass-audit.json`. OSM extracts provide registration point references only (© OpenStreetMap contributors, ODbL1.0); their geometry is not published. Kertau1968 is a tested candidate, not a proven earlier datum.
+
+L5 eastern Jurong/Pandan remains incomplete. G14/G15 later corrections cannot all be backdated to1961; G34 is a1903 North Borneo sheet. S76/S374/S375 establish post1961 development chronology but not traced reclamation footprints. No source-boundary exclusion was qualified or published. The existing G16/G15 western method and all geometry remain unchanged. Full measured L4/L5 cells/bins are in era-audit.json; neither area differences nor software checks establish historical accuracy.

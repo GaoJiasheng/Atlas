@@ -264,3 +264,102 @@ The fringe audit uses independent odd-even land membership and indexed edge dist
 Regenerated reviews: all **23** keyframe side-by-side plates, **7** coast/source plates (including western L5), **7** native border trace plates, contact/comparison sheets, and the two extended river-bank overlays plus west-coast diagnostic in `docs/screenshots/singapore-1819-1965/`. The renderer is standalone, not an application build/shoot. Source plates and representative final frames were visually inspected; the images explicitly retain draft/failed-accuracy captions.
 
 Logs: `work/local-land-final.log`, `compose-final.log`, `simplify-final.log`, `colour-final.log`, `validate-final.log`, `check-second-pass-final.log`, `ring-test-final.log`, `audit-final.log`, `check-plates-final.log`, `check-coasts-final.log`. `final-audit.json` and `era-audit.json` retain the final machine-readable measurements. Historical acceptance is not inferred from passing software checks.
+
+
+## Third pass
+
+18 October 2026. **Neither requested accuracy goal is complete.** A: G9/G11/G16 still fail §3.3; no qualified replacement was established. B: eastern Jurong/Pandan has not acquired a complete, independently dated 1961 trace plus source-boundary reclamation exclusions. The existing coast and control assets were rebuilt, but are byte-identical to the second-pass assets. No candidate point, speculative exclusion, or geometry invented to force increasing area was published. The topic remains geographically unaccepted.
+
+### A — projection and control-point review
+
+Metres; columns show **second pass → third pass active fit**. Active control sets were preserved. These are failed accuracy results, not accepted because software gates pass.
+
+| Map | Active CP count | Model | Fit RMS / max | LOO RMS / max | §3.3 result |
+|---|---:|---|---:|---:|---|
+| G9 | 18 → 18 | equirectangular + affine → same | 69.79 / 153.31 → same | 107.71 / 243.91 → same | **Fail:** L3 needs RMS ≤40 m / max ≤80 m; northern/western coverage and some source-mark identities remain inadequate. |
+| G11 | 18 → 18 | equirectangular + affine → same | 61.91 / 124.73 → same | 77.78 / 146.13 → same | **Fail:** RMS ≤30 m / max ≤60 m. |
+| G16 | 6 → 6 | Mercator + affine → same | 41.16 / 53.69 → same | 152.53 / 289.29 → same | **Fail:** RMS ≤30 m / max ≤60 m; only six controls against the ≥16 whole-island minimum. |
+
+`third-projections.ts` reruns all shared `auto` candidates through the unchanged shared `fit.ts` evaluator. It also tests explicit source-informed projections through the same least-squares and leave-one-out functions, using the installed `proj4` in geo/.tools; no package or shared code changed.
+
+- **G11 marginalia:** “JOHORE GRID (Red)”, Cassini Soldner, Everest, origin **2°02′33.30″N / 103°33′45.93″E**, false coordinates **450,000 yards East / 300,000 yards North**. Tested that Cassini/Everest projection with and without a candidate Kertau shift. Best tested Cassini affine: fit **61.93 / 124.74**, LOO **77.80 / 146.15**. It does not improve `auto`.
+- **G9 marginalia:** two-mile reference squares originate at Fort Canning Signal Staff; the printed staff coordinates are **1°17′31.60″N / 103°50′52.61″E**. The sheet does not name a Cassini projection. Fort-Canning-centred Cassini/Everest is therefore a labelled candidate, not a claimed identified CRS. Affine fit **69.79 / 153.35**, LOO **107.73 / 244.09**; a candidate Kertau shift gives effectively the same result.
+- **G16 cartouche:** Mercator. Ellipsoidal Mercator/Everest with the candidate Kertau shift gives fit **41.16 / 53.68**, LOO **152.52 / 289.28**. A hundredth of a metre numerical change does not meet either the accuracy or point-count requirement.
+
+The tested Kertau conversion uses the candidate geocentric translation `[-11,851,5]` metres, corroborated by the installed `mproj/nad/epsg` EPSG4245 definition (file hash in the audit). Its 1968 definition must not be silently backdated to these sheets: the [IHO datum entry](https://registry.iho.int/fdd/view5.do?idx=2272&type=5&valueType=0) explicitly describes the later definition and preceding adjustments. The [PROJ Cassini documentation](https://proj.org/en/stable/operations/projections/cass.html) supplies the projection-method reference. An affine fit largely absorbs a locally uniform datum translation, so merely changing that translation cannot fix ambiguous marks or inconsistent map generalisation. Full model outputs and exact definitions are in `third-pass-audit.json`.
+
+Shared polynomial fits were tested, not adopted: original G9 best polynomial LOO RMS is about **334 m**, G11 about **145 m**; both worsen independent prediction. The shared library exposes affine and quadratic fits, not a piecewise model. No new transform was added to shared code.
+
+Fourteen OSM API extracts were downloaded and hashed for point-reference searches along the old trunk-road network. OSM attribution: **© OpenStreetMap contributors, ODbL 1.0** ([licence](https://www.openstreetmap.org/copyright)); these are registration references only, with no OSM road/building geometry published. Thirty search windows were prepared; ten G9, four G11 and three G16 windows were visually reviewed. Nine independently read road-convergence candidates (Jurong/Bukit Timah, Clementi/Pasir Panjang, Thomson/Balestier on each sheet) and the previously identified G9 cathedral footprint were tested. Predictions only located review windows; predicted coordinates were never accepted as observed source pixels.
+
+| Diagnostic set, **not active / not added to qualified count** | Nominal points | Best shared model | Fit RMS / max m | LOO RMS / max m |
+|---|---:|---|---:|---:|
+| G9 + cathedral candidate | 19 | equirectangular + affine | 75.91 / 153.74 | 110.01 / 238.52 |
+| G9 + cathedral and three road candidates | 22 | LAEA + affine | 102.00 / 276.19 | 124.98 / 303.54 |
+| G11 + three road candidates | 21 | LAEA + quadratic | 53.10 / 115.50 | 95.38 / 236.56 |
+| G16 + three road candidates | 9 | Mercator + affine | 177.57 / 373.98 | 351.81 / 790.11 |
+
+Road widening, changed junction layouts, ambiguous line convergence and weak labels prevent documenting an unchanged exact anchor from these readings. The cathedral's surviving identity is established, but equivalence of the generalised historical footprint centre and the modern footprint centroid remains unqualified. The diagnostics also fail to improve LOO. They were withheld for these identity/anchor limitations, not removed from the active fit as inconvenient outliers. Original active CP coordinates were not moved. Readings, uncertainties, raw extract URLs/hashes, candidate-contact images and complete residuals are retained in `third-control-readings.json`, `third-pass-audit.json` and ignored work/.
+
+### Replacement sources and licences
+
+**New source maps adopted or newly downloaded: none.** No map licence was assumed from age alone. Existing G9/G11/G14/G15/G16/G18 original SHA-256 values were recomputed and verified; their exact source/download URLs and licence templates are repeated in `third-pass-audit.json`. G9 retains `PD-US-expired` / `PD-France`; G11 `PD-USGov-Military`; the UKHO G14/G15/G16 and BIS G18 retain `PD-UKGov` from their recorded file pages. This adds no new reproduction-rights claim.
+
+Replacement review covered Commons, the Library of Congress index/search, NLA/Trove searches, the British Library and Perry–Castañeda. No downloadable, rights-confirmed, era-appropriate whole-island replacement with the required external control validation was established:
+
+- [G18, BIS April1959](https://commons.wikimedia.org/wiki/File:Map_of_Singapore_from_The_State_of_Singapore_(BIS,_1959).jpg) has confirmed PD-UKGov but a schematic/generalised shore; no 60/30 m external fit was established, so it was not substituted.
+- [NAS Singapore1961, TM000014_5](https://www.nas.gov.sg/archivesonline/maps_building_plans/record-details/f915fe8c-115c-11e3-83d5-0050568939ad), Sheet5 500/10/61, is a relevant six-sheet survey. Its page says: **“Viewing permitted. Use and reproduction require written permission from copyright owner.”** It is not a rights-confirmed public-domain replacement in this review and was not traced.
+- G20's [1945 composite file page](https://commons.wikimedia.org/wiki/File:Singapore_Map_-_1945.jpg) describes modern assembly/repair and a self CC BY-SA4.0 licence alongside PD-UKGov. The unresolved rights issue was not waved through.
+- [BL IOR/X/14339](https://searcharchives.bl.uk/catalog/040-002246946) is a 1:500,000 regional source, 1922/reprinted1933, partly based on the existing1916 Singapore source; it cannot replace a detailed1954/1961 coast. The NLA catalogue search returned a bot-protection page, not a map or licence. The [Perry–Castañeda index](https://maps.lib.utexas.edu/maps/singapore.html) leads to the already reviewed1944 Series4203 (G11) rather than a newly validated source.
+
+### B — L5 eastern Jurong / Pandan
+
+**Incomplete.** The active method remains G16, corrected through1954, with the second-pass source-traced G15 natural western Tuas/Pasir Laba splice west of103.691E, followed by shared URA land/water operations. G14's 1961 underlying survey is printed with additions/corrections through1966; its labelled Caltex depot/factory shore cannot be uniformly backdated to1961. G15 also contains later corrections. In this repository **G34 is the1903 Stanford North Borneo map**, so it supplies no Singapore/Jurong shore. No G14 boundary or later industrial installation was promoted to a1961 coast without its date being established.
+
+The [NLB reclamation account, S76](https://biblioasia.nlb.gov.sg/all-sections/vol-13-issue-1-apr-jun-2017-land-from-sand/) dates the first Jurong Industrial Site reclamation to1963. [NLB's Jurong development account, S374](https://curiocity.nlb.gov.sg/digital-stories/jurong/jurong-industrial-estate-development/) dates port wharves to1963 and port operations to1965. [JTC's Dream Factories introduction, S375](https://www.jtc.gov.sg/about-jtc/dream-factories) identifies the estate's1961 conception. Those sources establish chronology; none delineates the individual source boundaries needed to subtract the later fills. An area total or establishment date cannot be converted into a geographic footprint. No new exclusion was written, and no rectangle or invented polygon removed land. A qualified eastern1961 shore and individually traced/datetime-qualified exclusions are still required. These are open acceptance failures, not completed work.
+
+### Era areas and measured L4 / L5 disagreement
+
+Decoded published land, km². The first column uses the same planar diagnostic at1.35°N as the second-pass table; the second uses mapshaper's spherical measurement. Neither is an official land-area statistic.
+
+| Era | Planar second → third km² | Third spherical km² |
+|---|---:|---:|
+| L0 | 509.009381 → unchanged | 510.146489 |
+| L1 | 509.485563 → unchanged | 510.623752 |
+| L2 | 509.517905 → unchanged | 510.656167 |
+| L3 | 510.474163 → unchanged | 511.614593 |
+| L4 | 540.030076 → unchanged | 541.237267 |
+| L5 | 525.290116 → unchanged | 526.464403 |
+
+Independent 5 m scanline set differences are unchanged: **18.518502 km² L4-only** and **3.780004 km² L5-only**, net **−14.738499 km²**. `era-audit.ts` now saves **every changed 0.02° cell**, in addition to the largest20, and disjoint measurement bins. These boxes are measurements only and never alter geometry.
+
+| Measurement bin | L4-only km² | L5-only km² | Net change into L5 km² |
+|---|---:|---:|---:|
+| Tuas / Pasir Laba source-splice cells | 7.769278 | 0.081609 | -7.687669 |
+| Eastern Jurong / Pandan cells | 0.652732 | 0.238420 | -0.414312 |
+| Northern shore cells | 5.764042 | 1.278683 | -4.485359 |
+| Eastern shore cells | 2.505413 | 1.398775 | -1.106638 |
+| Other cells | 1.827036 | 0.782516 | -1.044520 |
+
+The largest loss cells remain **[103.62,1.32,103.64,1.34]:1.429854 km²**, **[103.64,1.30,103.66,1.32]:1.202900 km²**, and **[103.66,1.36,103.68,1.38]:1.040270 km²**. The western source/shoreline-convention splice is a major contribution, but the new bins also expose substantial northern G11/G16 disagreement; eastern Jurong alone cannot explain the island-wide deficit. With failed registration/coverage and different tidal-fringe conventions, these differences cannot be presented as documented1937–1961 land loss. No source-backed historical explanation of every changed cell was established. The full cell ledger makes the remaining discrepancy reviewable instead of forcing monotonicity.
+
+### Shared rebuild, rings, labels and gates
+
+Rebuilt with unchanged shared `local-land.ts --topic singapore-1819-1965`, all23 frames through `keyframes.ts --all` / shared compose, shared simplify, then `finalise-control.ts`. The 5 m Singapore focus, regional focus and coast excludeBox settings remain unchanged. No colour assignment was run because entities.json is outside the authorised scope. All six hold pairs are exact: **K4←K3, K7←K6b, K10←K9, K14←K13, K16←K15a, K18←K17**.
+
+Coast: **193,916 bytes (189.37 KiB)** ≤200 KiB; **393 rings, 0 zero-area, 0 self-crossing**. Control: **526,264 bytes**, below1 MB; **1,960 rings, 0 zero-area, 0 self-crossing**. Both published assets are byte-identical to the prior pass; all existing label text and every control property outside src/certainty are unchanged. Keyframe dates/metadata are unchanged. Coast SHA-256 `f9329c9dc7fc7f829b2021ee28bc95a4ffa6d0de6ce9b7f519850fce552fc76d`; control `3502d55d780594e1c7e7152fcda33c4171a59c9581a584cbec92eb50d4074596`.
+
+Review images regenerated with the shared standalone renderer: **23 frame plates, 7 coast plates, frame contact sheet and K2/K19 comparison**. They are in **scripts/geo/singapore-1819-1965/work/third-review/**, inside the authorised write paths; no docs/screenshots file was written. Topic review helpers accept `SG_REVIEW_DIR`; pipeline.shots points at that ignored directory. Source marginalia, candidate contacts and native search-window grids are also in ignored work/. Representative final plates and the contact sheet were inspected; all retain failed-accuracy/draft qualifications.
+
+| Gate | Third-pass result |
+|---|---|
+| Shared local-land / compose all / simplify / finalise | Completed; exact holds and sizes/rings above |
+| `pnpm tsx scripts/sources-md.ts singapore-1819-1965` | Completed;245 numbered sources; additions/expanded read scope concern geographic chronology only |
+| `pnpm validate` | **29 topics, 0 errors, 0 warnings** |
+| `pnpm check` | **513 files, 0 errors, 0 warnings**, four unrelated hints; no errors in these files |
+| `pnpm vitest run tests/geo-rings.test.ts` | **7 tests passed** |
+| Existing independent5 m control/coast fringe diagnostic | Still fails; maximum **11.8168 m**, unchanged asset; final-audit.json and work/third-final-audit.log retain exit1 |
+| Goal A | **Not achieved** — all three map budgets still fail; G16 control count still fails |
+| Goal B | **Not achieved** — complete source-dated eastern Jurong/Pandan and traced later-fill exclusions still absent |
+
+Only the authorised topic geo directory, geographic sources and SOURCES.md were changed; published geometry was regenerated unchanged. Existing unrelated workspace changes were left alone. No chapters/events/entities/glossary/topic.yaml, engine, shared pipeline, components, package.json or other topic was edited. No build, e2e, shoot or commit ran. Logs: work/third-{local-land,compose,simplify,finalise,validate,check,ring-test,sources-md,review-frames,review-coasts,review-contact,final-audit}.log. `third-pass-audit.json` is the durable source/model/control/cell receipt; raw/ and work/ remain ignored.
