@@ -1,7 +1,7 @@
-# Research and English draft; content specification: docs/28.
+# Content specification and build record: docs/28. Historian review: AUDIT.md; passages for Gavin: REVIEW.md.
 id: singapore-1819-1965
 title: { en: "Singapore, 1819–1965", zh: "新加坡 1819–1965" }
-subtitle: { en: "From trading port to republic", zh: "【待译】From trading port to republic" }
+subtitle: { en: "From trading port to republic", zh: "从商港到共和国" }
 shortTitle: { en: "Singapore 1819–1965", zh: "新加坡 1819–1965" }
 subject: history
 levels: [P4, P5]
@@ -16,11 +16,11 @@ status: draft
 basemap: { local: land-sg-history, maxZoom: 14 }
 colorBy: entity
 blocLabels:
-  neutral: { en: "Governments and plan divisions", zh: "【待译】Governments and plan divisions" }
+  neutral: { en: "Governments and plan divisions", zh: "政权与规划分区" }
 strings:
-  joined: { en: "from", zh: "【待译】from" }
-  left: { en: "until", zh: "【待译】until" }
-  notYet: { en: "Not yet on the map", zh: "【待译】Not yet on the map" }
+  joined: { en: "from", zh: "始于" }
+  left: { en: "until", zh: "止于" }
+  notYet: { en: "Not yet on the map", zh: "尚未出现" }
 note:
-  en: "Island coast by date from georeferenced historical maps · Malayan state borders from Natural Earth"
-  zh: "【待译】Island coast by date from georeferenced historical maps · Malayan state borders from Natural Earth"
+  en: "Island coast by date, traced from georeferenced old maps (approximate) · Malayan state borders from Natural Earth, corrected from an 1898 map"
+  zh: "岛岸按年代描自配准的旧地图（近似）· 马来亚州界取自 Natural Earth，并按 1898 年地图修正"
