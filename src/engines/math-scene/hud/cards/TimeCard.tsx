@@ -16,6 +16,7 @@ import { inputSpecOf, type TaskState } from '../../lib/state';
 import { clockText, DEFAULT_NOTATION, durationText, type ClockMode, type DurUnit, type Notation } from '../../lib/value';
 import { clockPastWords, clockWords, durationWords } from '../../lib/words';
 import { answerValues, durationBoxes, readWritten, writtenClock, writtenDuration } from '../../lib/forms';
+import { clockShown } from '../../lib/clock';
 import { CardRows, type CardRow } from './CardRows';
 
 /** The readings of a time of day: shown, in words (the "past" reading on a face), and on the other clock. */
@@ -70,9 +71,31 @@ export function timeTaskRows(task: Task, state: TaskState, done: boolean, locale
   return rows;
 }
 
-export function TimeCard({ task, state, done, time, locale }: { task: Task | null; state: TaskState | null; done: boolean; time?: { at: number; mode: ClockMode } | null; locale: Locale }) {
+/** A set-clock check: the time asked for (it is the task's sentence) and what the hands show. */
+export function setClockRows(task: Task, state: TaskState, locale: Locale, notation: Notation): CardRow[] {
+  if (task.kind !== 'set-clock') return [];
+  const mode: ClockMode = task.ampm ? '12' : 'face';
+  const rows: CardRow[] = [{ key: 'math.card.target', value: clockText(task.target, mode, notation, locale, true), tone: 'cold' }];
+  if (state.clock === null) return rows;
+  const at = clockShown(task, state.clock);
+  return [...rows, { key: 'math.card.set', value: clockText(at, mode, notation, locale, true), tone: 'signal' }, { key: 'math.card.read', value: mode === 'face' ? clockPastWords(at, locale) : clockWords(at, mode, locale) }];
+}
+
+/** What a beat's clock or timeline shows: a time of day (in the face's way of reading), or a duration (a stopwatch, the jumps on a duration scale). */
+export type TimeShown = { at: number; mode: ClockMode } | { seconds: number; units: DurUnit[] };
+
+export function TimeCard({ task, state, done, time, locale }: { task: Task | null; state: TaskState | null; done: boolean; time?: TimeShown | null; locale: Locale }) {
   const notation = useContext(NotationContext);
-  const rows = task && state ? timeTaskRows(task, state, done, locale, notation) : time ? timeRows(time.at, time.mode, locale, notation) : [];
+  const rows =
+    task && state
+      ? task.kind === 'set-clock'
+        ? setClockRows(task, state, locale, notation)
+        : timeTaskRows(task, state, done, locale, notation)
+      : time
+        ? 'at' in time
+          ? timeRows(time.at, time.mode, locale, notation)
+          : durationRows(time.seconds, time.units, locale)
+        : [];
   if (rows.length === 0)
     return (
       <div className="ms-card-body">

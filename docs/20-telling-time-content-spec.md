@@ -503,4 +503,36 @@ ZH 显示里 `{d:…}` 用"小时 / 分钟 / 秒"，算式行（中英共用）�
 
 ## 9. 施工记录 / 已知差距
 
-施工时追加。
+### 9.1 引擎 A3（钟面 + 时间线，2026-10-18；课的内容未施工）
+
+在 docs/19 §9.1 的 E0 + A1 + A2 之上（值、写法、`{t}` `{d}` 记号与读法、`time` 域 11 条诊断、TIME 卡、notation 设置都已在）：
+
+- **A3a 钟面** `clock`（`stage/ClockModel.tsx` + `lib/clock.ts`）：§3.1 的全部画面层——60 个刻度、1–12 衬线数字、`minuteLabels`、`inner24`、`highlightTicks`、`second`、`hourTrack`、时长环带 `arc`（每满一小时多一圈）、`zoom: "hour"` 放大镜、am / pm 小牌（`show` / `ask`）、秒表 `face: "stopwatch"` + `elapsed`、`faulty`（两种）、`pair`，外加 `lit`（点亮并用引线标出时针 / 分针，§2.2 第 01 步第 2 拍、第 03 步第 3 拍"两针轮流高亮"）。针角严格按 §3.1 公式，角度不取模，`sweep` 用 CSS 过渡从上一拍的时刻顺 / 逆时针扫到这一拍（≤ 900 ms，长的压缩；减少动效时直接到位）。拖分针时针跟着走、越过 12 进 / 退一小时、`ampm` 时越过中午 / 午夜翻转；拖时针整小时；点数字；两根针都是 `role="slider"`；托盘步进器。
+- **A3b 时间线** `timeline`（`stage/Timeline.tsx` + `lib/timeline.ts`）：`day` / `span` / `duration` 三种标尺、`minor`、`labels: 12h | 24h | both`、`bands: "ampm"`、`marks`、`jumps`（向右在上、向左在下，`jump` 逐段画）、`clock: true`（线旁的钟面跟着最后一个标记 / 孩子跳到的地方）。
+- **题型** `read-clock`、`set-clock`、`duration`（state 动作 `clock` / `hop` / `unhop`、check、solve、sampleState、proveTask、托盘控件、键盘路径），诊断都走 `diagnoseTime`；写法用现成的 time12 / face / time24 / duration 托盘。
+- **HUD**：PLATE 行（钟面 TIME · HAND · NOTATION，时间线 FROM · TO · JUMPED），TIME 卡收到讲解拍的时刻（`beatTime` → `Card.time`）；`set-clock` 的卡写"拨到 / 钟面上 / 读法"。背景章的标本是 7:20 的钟面。
+- **校验**：§3.6 全部（时刻合法由 schema；`faulty` 只在讲解拍和 `choose` 选项；`read-clock` 的 `face` 不配 `ampm: "ask"`）+ 钟面 / 时间线画得出 + 答案是钟面的时刻 + 拨钟的目标在 snap 上 + 时间线盖得住 span + 新上限 `limits.sameDay`（不跨午夜）；`limits.clock: "12h"` 也挡 `inner24` 和 24 时标尺。
+- **示例主题** `sample-lesson-whole` 加第 05 步 `clock-and-timeline`（5 拍、9 道题：两种钟面读数 + 秒表、两道拨钟（snap 5；snap 1 + am / pm）、三道 duration（length / end / start）、一道四个钟面的 choose（含两种 `faulty`）），第 04 步第 3 拍换成时长标尺；`tests/math-scene/{clock,timeline}.test.ts`（28 条）。
+- 同时修了数位块和阵列的大小（评审发现 1920 × 1080 时数位块垫子只有约 200 × 100 px、一的小块只剩几个像素）：见 docs/06「整数与时间」的"大小跟舞台走"。
+
+### 9.2 与本文 §3 不同的地方
+
+1. **am / pm 小牌写在钟面模型上**（`ampm: "show" | "ask"`），`read-clock` 没有 §3.4 的 `ampm` 字段；`set-clock` 的 `ampm: true` 照 §3.4（小牌跟着拨，托盘有 am / pm 芯片）。
+2. **键盘**：§3.1 写"钟面是一个 slider"；做成了**两根针各一个 slider**（分针 ←→ 一格 snap、Shift × 5、PgUp / PgDn 一小时、Home 12 点；时针 ←→ 一小时），读法同 `aria-valuetext`。snap 为 5 时 ←→ 走 5 分钟（不是 1 分钟，会被吸回去）。
+3. **跳段弧**：连着按的分钟芯片并成一道弧，直到落在整点（+10、+10 → 一道 "+ 20 min"），整小时芯片一按一道；这样孩子的跳法和讲解拍的"先到整点、再整小时、再剩下的分钟"画出来一样。
+4. **时间线上的标记**没有做成可拖的 `role="slider"`（§3.2 交互一句）：`duration` 题的输入是托盘芯片（Tab + Enter，Backspace 收回），标尺只读；拨钟与时间线的"联动"做成了 `clock: true`——线旁的钟跟着孩子跳到的时刻走。
+5. **`lit`** 是新加的钟面层（§2.2 "两针轮流高亮 / 描边"）：`both` 时先亮时针、0.6 s 后亮分针，两根都带引线名字。
+6. **`zoom: "hour"`** 的放大镜只画落在镜里的东西（刻度、两侧数字、穿过的针段），不是整只钟放大后裁剪，这样算式行仍贴在钟面下方。
+7. 时间线 `labels: "both"` 时线上 24 时标签放不下会隔 2–3 小时一个（12 时标签仍每小时一个）。
+8. 钟面半径 < 100 px 时省掉 `inner24`、< 80 px 时省掉 `minuteLabels`（手机上与数字挤在一起）；时间线的 `clock` 在舞台窄于 560 px 时省掉。
+
+### 9.3 给写课的人
+
+- 每拍只写 `{t:…}` / `{d:…}` 记号；钟面数据一律 24 时制（`"19:40"`），想让钟面带 am / pm 就写 `ampm: "show"`（TIME 卡与 PLATE 随之按 12 时制读），想让孩子判断就写 `"ask"`。
+- 想要针扫：连续几拍用**同一种钟面**（`face`、`zoom` 不变也行，`zoom` 加减不重挂载），写 `move: "sweep"`；换成时间线或秒表会重挂载（没有扫）。时间线连续几拍用同一条标尺（`scale`、`from`、`to`、`labels`、`clock` 不变），往 `jumps` 里加段、写 `move: "jump"`，只有新段画出来。
+- 钟面配时间线写 `under`（哪个在前都行，宽舞台钟面总在左边）。
+- `choose` 的错钟面用 `faulty`，每个错选项带 `misconception`，`feedback.wrong` 写同一个 code（sample 写选项 id）。
+- 第 06–11 步加 `limits.sameDay: true`；第 01–04 步加 `limits.clock: "12h"`（挡住 24 时写法、内圈和 24 时标尺）；第 01 步 `step: 5`。
+- `duration` 的标尺要盖住已知时刻和答案（validate 会说 off the timeline）；`span` 不用另写，ask / start / end / length 自动补进诊断。
+- 检查：`pnpm tsx scripts/math/check-pool.ts <draft.json> --topic telling-time --step <id>`；截图 `pnpm shoot telling-time --beats --tasks --keys --layout`（钟面的拍看针、看放大镜，时间线的拍看标签是否压到弧）。
+- 已知差距：手机 390 × 844 上开着托盘时舞台只剩约 150 px 高，时间线照样画但很挤（线旁的钟面省掉）；数位块在手机上仍小（docs/19 §9.3）。

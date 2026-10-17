@@ -8,7 +8,7 @@
  * (`factors`, `maxTotal`, `divisor`, `maxQuotient`, `maxValue`, `clock`,
  * `step`, `maxDuration`). Build time only; shared with `scripts/math/check-pool.ts`.
  */
-import { ARRAY_KINDS, BLOCKS_KINDS, FRACTION_FORMS, MISCONCEPTION_DOMAINS, TIME_FORMS, type ArrayLayoutSpec, type BlocksModelSpec, type InputSpec, type MisconceptionCode, type MisconceptionDomain, type Model, type NumberLineSpec, type StepLimits, type Task } from './schema';
+import { ARRAY_KINDS, BLOCKS_KINDS, FRACTION_FORMS, MISCONCEPTION_DOMAINS, TIME_FORMS, TIME_KINDS, type ArrayLayoutSpec, type BlocksModelSpec, type ClockFaceSpec, type ClockModelSpec, type InputSpec, type MisconceptionCode, type MisconceptionDomain, type Model, type NumberLineSpec, type StepLimits, type Task, type TimelineSpec } from './schema';
 import { inputSpecOf } from './lib/state';
 import { isFractionModel } from './lib/check';
 import { answerValues } from './lib/forms';
@@ -16,13 +16,18 @@ import { ARRAY_MAX_DOT_ROWS, ARRAY_MAX_ROWS, ARRAY_MAX_THINGS, factOf, groupSize
 import { blockCount, canTrade, counts, matOf, regrouped, standard, total } from './lib/blocks';
 import { opResult } from './lib/diagnose/whole-ops';
 import { splitArrayCut } from './lib/solve';
-import { formatAnswer, formatClock, formatDuration, HOUR, isFracValue, MINUTE, WHOLE_MAX, type AnswerValue } from './lib/value';
+import { DAY, formatAnswer, formatClock, formatDuration, HOUR, isFracValue, MINUTE, WHOLE_MAX, type AnswerValue } from './lib/value';
+import { clockStart, facesOf, HALF_DAY } from './lib/clock';
+import { hopStart, rangeOf } from './lib/timeline';
+import { durationGoal } from './lib/solve';
 
 /** Most blocks a stage draws at once (docs/19 §3.2: trade first). */
 export const BLOCKS_MAX = 120;
 
 const ARRAY_TASKS = new Set<string>(ARRAY_KINDS);
 const BLOCK_TASKS = new Set<string>(BLOCKS_KINDS);
+const TIME_TASKS = new Set<string>(TIME_KINDS);
+const isTimeModel = (m: Model) => m.kind === 'clock' || m.kind === 'timeline';
 
 const modelsOf = (task: Task): Model[] => [task.model, ...(task.kind === 'choose' ? task.options.flatMap((o) => (o.model ? [o.model] : [])) : [])];
 
@@ -32,6 +37,7 @@ export function domainOf(task: Task): MisconceptionDomain {
   if (models.some((m) => m.kind === 'grid') || ['count-squares', 'trace-perimeter', 'draw-rectangle', 'split-figure'].includes(task.kind)) return 'measure';
   const spec = inputSpecOf(task);
   if (spec && ((TIME_FORMS as readonly string[]).includes(spec.form) || spec.convert || spec.span)) return 'time';
+  if (TIME_TASKS.has(task.kind) || models.some(isTimeModel)) return 'time';
   if (ARRAY_TASKS.has(task.kind) || BLOCK_TASKS.has(task.kind)) return 'whole-ops';
   if (models.some((m) => m.kind === 'array' || m.kind === 'blocks' || (m.kind === 'numberline' && m.scale === 'whole'))) return 'whole-ops';
   if (spec && (spec.op || spec.form === 'remainder' || (spec.form === 'whole' && !isFractionModel(task.model)))) return 'whole-ops';
@@ -124,8 +130,58 @@ function blocksIssues(m: BlocksModelSpec): string[] {
   return out;
 }
 
-/** Can a whole-number model be drawn as written? */
+/** A clock face (docs/20 §3.1). */
+function faceIssues(f: ClockFaceSpec, where = ''): string[] {
+  const out: string[] = [];
+  const at = where ? `${where}: ` : '';
+  if (f.face === 'stopwatch') {
+    if (!f.elapsed) out.push(`${at}a stopwatch needs elapsed`);
+    else if (f.elapsed.t > 30 * MINUTE) out.push(`${at}a stopwatch's minute dial goes to 30 min`);
+    if (f.faulty || f.arc || f.hourTrack || f.zoom || f.inner24 || f.minuteLabels || f.ampm || f.second || f.lit || f.highlightTicks) out.push(`${at}a stopwatch draws its own dial (no faulty, arc, hourTrack, zoom, inner24, minuteLabels, ampm, second, lit, highlightTicks)`);
+    return out;
+  }
+  if (f.elapsed) out.push(`${at}elapsed is for a stopwatch`);
+  if (f.arc) {
+    const d = f.arc.to - f.arc.from;
+    if (d <= 0) out.push(`${at}the arc must end after it starts (${formatClock(f.arc.from)} → ${formatClock(f.arc.to)})`);
+    else if (d > 4 * HOUR) out.push(`${at}an arc of more than 4 h has too many rings`);
+  }
+  if (f.hourTrack && f.hourTrack !== true && (f.hourTrack.from > f.time || f.time - f.hourTrack.from > HALF_DAY)) out.push(`${at}hourTrack from ${formatClock(f.hourTrack.from)} is not within 12 hours before ${formatClock(f.time)}`);
+  if (f.faulty && f.second) out.push(`${at}a faulty clock has no second hand`);
+  return out;
+}
+
+/** A clock model: its faces, a pair's labels, the lens. */
+export function clockIssues(m: ClockModelSpec): string[] {
+  if (!m.pair) return faceIssues(m);
+  return [...m.pair.flatMap((f, i) => faceIssues(f, `pair ${i + 1}`)), ...(m.pair.some((f) => !f.label) ? ['each face of a pair needs a label'] : []), ...(m.pair.some((f) => f.zoom) || m.zoom ? ['the lens is for one face'] : [])];
+}
+
+/** A timeline (docs/20 §3.2): its range, marks and jumps on it. */
+export function timelineIssues(m: TimelineSpec): string[] {
+  const out: string[] = [];
+  const r = rangeOf(m);
+  const fmt = (t: number) => (r.duration ? formatDuration(t) : t === DAY ? '24:00' : formatClock(t));
+  if (m.scale === 'day' && (m.from !== undefined || m.to !== undefined)) out.push('a day timeline runs 00:00–24:00 (no from or to)');
+  if (m.scale === 'span' && (m.from === undefined || m.to === undefined)) out.push('a span timeline needs from and to');
+  if (m.scale === 'duration' && m.to === undefined) out.push('a duration timeline needs to');
+  if (m.scale === 'duration' && m.from !== undefined && m.from !== 0) out.push('a duration timeline starts at 0');
+  if (r.to <= r.from) out.push(`the timeline must go forwards (${fmt(r.from)} → ${fmt(r.to)})`);
+  if (r.to > DAY) out.push('a timeline ends by 24:00');
+  if (m.scale !== 'day' && r.to - r.from > 6 * HOUR) out.push(`a ${m.scale} timeline covers 6 h at most`);
+  if (r.duration && (m.labels === 'both' || m.bands)) out.push('labels both and bands are for times of day');
+  for (const k of m.marks ?? []) if (k.at < r.from || k.at > r.to) out.push(`mark ${fmt(k.at)} is off the line`);
+  for (const [a, b] of m.jumps ?? []) {
+    if (a === b) out.push(`a jump from ${fmt(a)} to itself`);
+    if (Math.min(a, b) < r.from || Math.max(a, b) > r.to) out.push(`the jump ${fmt(a)} → ${fmt(b)} is off the line`);
+  }
+  return out;
+}
+
+/** Can a whole-number or time model be drawn as written? */
 export function valueModelIssues(m: Model): string[] {
+  if (m.kind === 'clock') return clockIssues(m);
+  if (m.kind === 'timeline') return timelineIssues(m);
   if (m.kind === 'numberline') return lineIssues(m);
   if (m.kind === 'array') {
     if (m.pair) return [...layoutsOf(m).flatMap((s, i) => layoutIssues(s, `pair ${i + 1}`)), ...(m.pair.some((p) => !p.label) ? ['each side of a pair needs a label'] : [])];
@@ -237,6 +293,10 @@ function undiagnosable(task: Task, code: MisconceptionCode): string | null {
     share: ['not-traded', 'remainder-too-big'],
   };
   if (modelCodes[task.kind]?.includes(code)) return null;
+  if (task.kind === 'set-clock') {
+    const read: MisconceptionCode[] = ['hands-swapped', 'next-hour', 'numeral-as-minutes', 'five-count-slip', ...(task.ampm ? (['am-pm', 'noon-midnight'] as const) : [])];
+    return read.includes(code) ? null : `"${code}" cannot be diagnosed by setting a clock${task.ampm ? '' : ' (am-pm and noon-midnight need ampm: true)'}`;
+  }
   if (!spec) return `"${code}" cannot be diagnosed by a ${task.kind} task`;
   const op = spec.op ?? (task.kind === 'split-array' ? { kind: '×' as const } : task.kind === 'share' || task.kind === 'group' ? { kind: '÷' as const } : null);
   const clock = ['time12', 'time24', 'face'].includes(spec.form);
@@ -313,6 +373,19 @@ function numbersOf(task: Task): { factors: [number, number][]; totals: number[];
       out.values.push(m.to);
       if (m.jumps) out.factors.push([m.jumps.count, m.jumps.size]);
     }
+    if (m.kind === 'clock')
+      for (const f of facesOf(m)) {
+        if (f.face === 'stopwatch') {
+          if (f.elapsed) out.durations.push(f.elapsed.t);
+        } else out.times.push(f.time);
+        if (f.arc) out.times.push(f.arc.from, f.arc.to);
+      }
+    if (m.kind === 'timeline') {
+      const r = rangeOf(m);
+      const points = [...(m.marks ?? []).map((k) => k.at), ...(m.jumps ?? []).flat()];
+      if (r.duration) out.durations.push(...points);
+      else out.times.push(...points.filter((t) => t < DAY));
+    }
   };
   modelsOf(task).forEach(fromModel);
   switch (task.kind) {
@@ -335,6 +408,9 @@ function numbersOf(task: Task): { factors: [number, number][]; totals: number[];
     case 'share':
       out.values.push(task.value);
       out.divisions.push({ a: task.value, b: task.k });
+      break;
+    case 'set-clock':
+      out.times.push(task.target);
       break;
     default:
       break;
@@ -380,7 +456,14 @@ function limitIssues(task: Task, limits: StepLimits): string[] {
   }
   if (limits.maxQuotient !== undefined) for (const d of n.divisions) if (Math.floor(d.a / d.b) > limits.maxQuotient) out.push(`${d.a} ÷ ${d.b} = ${Math.floor(d.a / d.b)} (quotients ≤ ${limits.maxQuotient})`);
   if (limits.maxValue !== undefined) for (const v of n.values) if (v > limits.maxValue) out.push(`${v} (numbers ≤ ${limits.maxValue})`);
-  if (limits.clock === '12h' && spec?.form === 'time24') out.push('this step reads 12-hour time only');
+  if (limits.clock === '12h' && (spec?.form === 'time24' || modelsOf(task).some((m) => m.kind === 'clock' && facesOf(m).some((f) => f.inner24)) || (task.model.kind === 'timeline' && task.model.labels !== '12h'))) out.push('this step reads 12-hour time only');
+  if (limits.sameDay && spec?.span) {
+    const sp = spec.span;
+    const L = sp.length?.t;
+    if (sp.ask === 'end' && sp.start !== undefined && L !== undefined && sp.start + L >= DAY) out.push('the span runs past midnight (sameDay)');
+    if (sp.ask === 'start' && sp.end !== undefined && L !== undefined && sp.end - L < 0) out.push('the span starts before midnight the day before (sameDay)');
+    if (sp.start !== undefined && sp.end !== undefined && sp.end < sp.start) out.push('the span runs past midnight (sameDay)');
+  }
   if (limits.step !== undefined) {
     const s = limits.step * MINUTE;
     for (const t of n.times) if (t % s !== 0) out.push(`${formatClock(t)} is not a whole number of ${limits.step} min`);
@@ -395,7 +478,7 @@ function limitIssues(task: Task, limits: StepLimits): string[] {
 export function valueTaskIssues(task: Task, limits: StepLimits | undefined): string[] {
   const out: string[] = [];
   const domain = domainOf(task);
-  for (const m of modelsOf(task)) if (m.kind === 'array' || m.kind === 'blocks' || (m.kind === 'numberline' && m.scale === 'whole')) out.push(...valueModelIssues(m));
+  for (const m of modelsOf(task)) if (m.kind === 'array' || m.kind === 'blocks' || isTimeModel(m) || (m.kind === 'numberline' && m.scale === 'whole')) out.push(...valueModelIssues(m));
   const m = task.model;
   if (ARRAY_TASKS.has(task.kind) && task.kind !== 'skip-count' && m.kind !== 'array') out.push(`a ${task.kind} task needs an array model`);
   if (task.kind === 'skip-count' && !(m.kind === 'numberline' && m.scale === 'whole')) out.push('a skip-count task needs a whole-number line');
@@ -423,6 +506,7 @@ export function valueTaskIssues(task: Task, limits: StepLimits | undefined): str
     if (regrouped(start)) out.push('the blocks start with every place under 10: nothing to trade');
   }
   if (task.kind === 'share' && m.kind === 'blocks' && (m.plates ?? task.k) !== task.k) out.push(`the model has ${m.plates} plates, the task shares into ${task.k}`);
+  out.push(...timeTaskIssues(task));
   const spec = inputSpecOf(task);
   if (spec && domain !== 'fractions' && domain !== 'measure') {
     out.push(...formIssues(spec));
@@ -436,5 +520,49 @@ export function valueTaskIssues(task: Task, limits: StepLimits | undefined): str
     }
   }
   if (limits) out.push(...limitIssues(task, limits));
+  return out;
+}
+
+/** The clock and timeline tasks (docs/20 §3.4, §3.6): their models, the answer the clock shows, the start of a set clock, the span on the line. */
+function timeTaskIssues(task: Task): string[] {
+  const out: string[] = [];
+  const m = task.model;
+  // A clock drawn wrong is for the explanation and for a choice's wrong pictures only.
+  if (m.kind === 'clock' && facesOf(m).some((f) => f.faulty)) out.push('faulty clocks are for beats and choose options, not a task\'s own model');
+  if (task.kind === 'read-clock') {
+    const face = m.kind === 'clock' && !m.pair ? m : null;
+    if (!face && !(m.kind === 'timeline' && m.clock)) return [...out, 'a read-clock task needs one clock face (or a timeline with its clock)'];
+    const a = task.answer;
+    const shown = face ? (face.face === 'stopwatch' ? (face.elapsed?.t ?? 0) : face.time) : m.kind === 'timeline' ? (m.marks?.at(-1)?.at ?? null) : null;
+    if (task.form === 'duration') {
+      if (face?.face !== 'stopwatch') out.push('a duration is read from a stopwatch');
+      else if (!('kind' in a) || a.kind !== 'dur' || a.t !== shown) out.push(`the stopwatch shows ${formatDuration(shown ?? 0)}, the answer is ${formatAnswer(a)}`);
+    } else {
+      if (face?.face === 'stopwatch') out.push('a stopwatch is read as a duration (form duration)');
+      if (!('kind' in a) || a.kind !== 'clock') out.push(`answer ${formatAnswer(a)} is not a time of day`);
+      else if (shown === null) out.push('the timeline needs a mark for its clock to show');
+      else if (task.form === 'face' ? a.t % HALF_DAY !== shown % HALF_DAY : a.t !== shown) out.push(`the clock shows ${formatClock(shown)}, the answer is ${formatClock(a.t)}`);
+      if (task.form === 'face' && face?.ampm === 'ask') out.push('a clock face reading (form face) does not ask am or pm (ampm: ask)');
+    }
+  }
+  if (task.kind === 'set-clock') {
+    if (m.kind !== 'clock' || m.pair || m.face === 'stopwatch') return [...out, 'a set-clock task needs one clock face'];
+    if (task.target % (task.snap * MINUTE) !== 0) out.push(`${formatClock(task.target)} is not on a ${task.snap}-minute step`);
+    const start = clockStart(task);
+    if (task.ampm ? start === task.target : start % HALF_DAY === task.target % HALF_DAY) out.push('the clock starts at the time to set');
+  }
+  if (task.kind === 'duration') {
+    if (m.kind !== 'timeline') return [...out, 'a duration task needs a timeline'];
+    const r = rangeOf(m);
+    if (r.duration) out.push('a duration task jumps between times of day (scale day or span)');
+    const s = hopStart(task);
+    const goal = durationGoal(task);
+    if (!s) out.push(`ask ${task.ask} needs ${task.ask === 'start' ? 'end' : 'start'}`);
+    for (const [name, t] of [
+      ['the time known', s?.at],
+      ['where the jumps end', goal],
+    ] as const)
+      if (t !== undefined && t !== null && (t < r.from || t > r.to)) out.push(`${name} (${formatClock(t)}) is off the timeline`);
+  }
   return out;
 }

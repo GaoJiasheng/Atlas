@@ -30,8 +30,9 @@ export function ColumnWorking({ spec, x, y, cell, focus }: { spec: ColumnSpec; x
   const { cols, rows } = columnCells(spec);
   const lit = focus ?? columnFocus(spec);
   const prog = columnProgress(spec);
+  // The digits scale with the cell (the carries smaller).
   const digitAt = (col: number, row: number, d: string | number, cls = 'ms-col__digit', key?: string) => (
-    <text key={key ?? `${col},${row}`} className={cls} x={x + col * cell + cell / 2} y={y + row * rh + rh * 0.72} textAnchor="middle">
+    <text key={key ?? `${col},${row}`} className={cls} x={x + col * cell + cell / 2} y={y + row * rh + rh * 0.72} textAnchor="middle" style={{ fontSize: Math.round(cell * (cls === 'ms-col__carry' ? 0.42 : 0.68)) }}>
       {d}
     </text>
   );

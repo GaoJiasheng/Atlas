@@ -16,6 +16,7 @@ import { parseArrayCut } from './array';
 import { splitArrayCut } from './solve';
 import { total as blockTotal } from './blocks';
 import { opResult } from './diagnose/whole-ops';
+import { clockShown } from './clock';
 import { formatFrac, lcm, over, toImproper, toMixed, type Frac } from './fraction';
 import { inputSpecOf, modelValue, phasesOf, taskFigure, type TaskState } from './state';
 import { askOf, measured } from './diagnose/measure';
@@ -227,6 +228,8 @@ function valueLines(task: Task, state: TaskState, locale: Locale, done: boolean,
 
 export function workingLines(task: Task, state: TaskState, locale: Locale, done = false, notation: Notation = DEFAULT_NOTATION): string[] {
   if (task.model.kind === 'grid') return gridLines(task, state, locale, done).filter(Boolean);
+  // A set clock: the time it shows once the hands have moved (the target is in the task's sentence already).
+  if (task.kind === 'set-clock') return state.clock === null ? [] : [`{t:${formatClock(clockShown(task, state.clock))}${task.ampm ? '' : '|face'}}`];
   const spec = inputSpecOf(task);
   const wholeKind = task.kind === 'group' || task.kind === 'arrange' || task.kind === 'skip-count' || task.kind === 'split-array' || task.kind === 'regroup' || task.kind === 'share';
   if (wholeKind || (spec && usesValueBoxes(task, spec))) {
@@ -324,7 +327,8 @@ export function workingLines(task: Task, state: TaskState, locale: Locale, done 
  * marks are the answer (shade, fold, split, merge, place), it is their value.
  */
 export function cardValue(task: Task, state: TaskState, done = false): Frac | null {
-  if (task.model.kind === 'grid' || task.model.kind === 'array' || task.model.kind === 'blocks' || (task.model.kind === 'numberline' && task.model.scale === 'whole')) return null;
+  const m = task.model;
+  if (m.kind === 'grid' || m.kind === 'array' || m.kind === 'blocks' || m.kind === 'clock' || m.kind === 'timeline' || (m.kind === 'numberline' && m.scale === 'whole')) return null;
   const spec = inputSpecOf(task);
   if (spec && usesValueBoxes(task, spec)) return null;
   const phase = phasesOf(task)[state.phase];
@@ -333,8 +337,8 @@ export function cardValue(task: Task, state: TaskState, done = false): Frac | nu
     return v && v.length === 1 && v[0]!.d > 0 ? v[0]! : done ? (answersOf(inputSpecOf(task)!)[0] ?? null) : null;
   }
   if (task.kind === 'build-sum' || task.kind === 'choose' || task.kind === 'order' || task.kind === 'compare' || task.kind === 'cut') return null;
-  const m = modelValue(task, state);
-  return m && m.n > 0 ? m : null;
+  const value = modelValue(task, state);
+  return value && value.n > 0 ? value : null;
 }
 
 /** Whether the read-outs may count the model's parts for the child (not while the child is to write that count). */

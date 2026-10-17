@@ -16,7 +16,7 @@ import { bilingual, kebabId, theme } from '../../content/schema/common';
 import { sourcesFile } from '../../content/schema/sources';
 import { glossaryFile } from '../../content/schema/glossary';
 import { parseFrac, type Frac } from './lib/fraction';
-import { CLOCK12_NOTATIONS, CLOCK24_NOTATIONS, DEFAULT_NOTATION, parseClock, parseDuration, parseTagged, parseWhole, UNITS, WHOLE_MAX, type AnswerValue, type DurValue } from './lib/value';
+import { CLOCK12_NOTATIONS, CLOCK24_NOTATIONS, DAY, DEFAULT_NOTATION, parseClock, parseDuration, parseTagged, parseWhole, UNITS, WHOLE_MAX, type AnswerValue, type DurValue } from './lib/value';
 
 /* ------------------------------------------------------------------ */
 /* Vocabulary                                                          */
@@ -121,6 +121,9 @@ export const TASK_KINDS = [
   'split-array',
   'regroup',
   'share',
+  'read-clock',
+  'set-clock',
+  'duration',
 ] as const;
 /** Task kinds on the square grid (docs/21 §3.2). */
 export const GRID_KINDS = ['count-squares', 'trace-perimeter', 'draw-rectangle', 'split-figure'] as const;
@@ -128,6 +131,8 @@ export const GRID_KINDS = ['count-squares', 'trace-perimeter', 'draw-rectangle',
 export const ARRAY_KINDS = ['group', 'arrange', 'skip-count', 'split-array'] as const;
 /** Task kinds on the place-value blocks (docs/19 §3.2). */
 export const BLOCKS_KINDS = ['regroup', 'share'] as const;
+/** Task kinds on the clock face and the timeline (docs/20 §3.4). */
+export const TIME_KINDS = ['read-clock', 'set-clock', 'duration'] as const;
 export type TaskKind = (typeof TASK_KINDS)[number];
 
 /** Model views a step may switch between (the VIEW group). `clock` and `timeline` are the time lesson's (docs/20 §3, model A3). */
@@ -173,6 +178,17 @@ export const duration = z.string().transform((text, ctx): DurValue => {
     return z.NEVER;
   }
   return d;
+});
+
+/** A point on a timeline: a time of day (`"09:40"`, `"24:00"` = the end of the day) or, on a duration scale, a duration (`"95m"`) → seconds. */
+export const timePoint = z.string().transform((text, ctx): number => {
+  if (/^\s*24:00\s*$/.test(text)) return DAY;
+  const t = parseClock(text) ?? parseDuration(text)?.t ?? null;
+  if (t === null) {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, message: `"${text}" is not a time ("09:40", "24:00") or a duration ("95m")` });
+    return z.NEVER;
+  }
+  return t;
 });
 
 /** An answer: a fraction or whole number (`"3/4"`, `"2"`, `56`), a remainder (`"3 r 2"`), a time of day (`"09:40"`) or a duration (`"1h35m"`). */
@@ -453,7 +469,76 @@ const gridModel = z
   })
   .strict();
 
-export const model = z.discriminatedUnion('kind', [barModel, circleModel, numberLineModel, wallModel, barModelDiagram, gridModel, arrayModel, blocksModel]);
+/* The clock face and the timeline (docs/20 §3.1–3.2, model A3): times in 24-hour time, the face shows their 12-hour position. */
+const clockFace = z.object({
+  /** The time the hands show (default 12:00); am / pm follow from it. */
+  time: clockTime.default('12:00'),
+  /** `clock` (default) or a `stopwatch` (60-second dial, a small minute dial, `elapsed`). */
+  face: z.enum(['clock', 'stopwatch']).default('clock'),
+  /** Stopwatch: the time it shows. */
+  elapsed: duration.optional(),
+  /** The numbers 1–12 (default on). */
+  numerals: z.boolean().default(true),
+  /** The 60 minute marks (every fifth longer), only the fives, or none. */
+  ticks: z.enum(['minutes', 'fives', 'none']).default('minutes'),
+  /** `05 10 … 55` small outside the face (counting in fives). */
+  minuteLabels: z.boolean().optional(),
+  /** `13 … 24` small inside the numbers (the 24-hour clock). */
+  inner24: z.boolean().optional(),
+  /** Minute marks lit (counting the small marks: `[26, 27, 28]`). */
+  highlightTicks: z.array(z.number().int().min(0).max(59)).max(60).optional(),
+  /** The second hand. */
+  second: z.boolean().optional(),
+  /** The hour hand's sweep hatched: from the hour (`true`) or from a time. */
+  hourTrack: z.union([z.literal(true), z.object({ from: clockTime }).strict()]).optional(),
+  /** A duration as a band inside the rim, from one time to another (a ring for each full hour). */
+  arc: z.object({ from: clockTime, to: clockTime }).strict().optional(),
+  /** A lens beside the face: the hour hand's tip and the numbers either side, magnified. */
+  zoom: z.literal('hour').optional(),
+  /** A clock drawn wrong on purpose (beats and `choose` options only): the hour hand on the number, or the hands swapped. */
+  faulty: z.enum(['hour-on-numeral', 'hands-swapped']).optional(),
+  /** A small plate under the centre: `am` / `pm` (`show`) or `?` (`ask`). */
+  ampm: z.enum(['show', 'ask']).optional(),
+  /** Hands lit and named (`both`: the hour hand, then the minute hand). */
+  lit: z.enum(['hour', 'minute', 'both']).optional(),
+  label: bilingual.optional(),
+});
+const clockModel = clockFace
+  .extend({
+    kind: z.literal('clock'),
+    /** Two faces side by side, each with its label (a right and a wrong one; a stopwatch and a clock). */
+    pair: z.array(clockFace.strict()).length(2).optional(),
+  })
+  .strict();
+export type ClockFaceSpec = z.output<typeof clockFace>;
+export type ClockModelSpec = z.output<typeof clockModel>;
+
+const timelineMark = z.object({ at: timePoint, tone: z.enum(['cold', 'hot', 'signal']).default('cold'), label: bilingual.optional() }).strict();
+const timelineModel = z
+  .object({
+    kind: z.literal('timeline'),
+    /** `day`: 00:00–24:00 · `span`: `from`–`to` (≤ 6 h) · `duration`: `0m`–`to`, labelled 0, 1 h, 2 h. */
+    scale: z.enum(['day', 'span', 'duration']).default('span'),
+    from: timePoint.optional(),
+    to: timePoint.optional(),
+    /** Minor marks every so many minutes (lines only). */
+    minor: z.union([z.literal(1), z.literal(5), z.literal(10), z.literal(15), z.literal(30)]).optional(),
+    /** Hour labels in 12-hour time, 24-hour time, or both (24-hour above the line, 12-hour below). */
+    labels: z.enum(['12h', '24h', 'both']).default('12h'),
+    /** The morning and the afternoon in two faint bands, noon and midnight marked. */
+    bands: z.literal('ampm').optional(),
+    /** Times marked with a small triangle and a label (cold = start, hot = end). */
+    marks: z.array(timelineMark).max(6).optional(),
+    /** Jumps as arcs, in order (to the right above the line, back below it), "+ 20 min" on each. */
+    jumps: z.array(z.tuple([timePoint, timePoint])).max(8).optional(),
+    /** A clock face beside the line showing the time at its last mark (on a duration check: where the child's jumps have got to). */
+    clock: z.boolean().optional(),
+    label: bilingual.optional(),
+  })
+  .strict();
+export type TimelineSpec = z.output<typeof timelineModel>;
+
+export const model = z.discriminatedUnion('kind', [barModel, circleModel, numberLineModel, wallModel, barModelDiagram, gridModel, arrayModel, blocksModel, clockModel, timelineModel]);
 export type Model = z.output<typeof model>;
 export type ArrayModelSpec = z.output<typeof arrayModel>;
 export type NumberLineSpec = z.output<typeof numberLineModel>;
@@ -658,6 +743,33 @@ const shareFields = z.object({
   then: inputSpec,
 });
 
+/* Clock and timeline tasks (docs/20 §3.4) */
+const readClockFields = z.object({
+  /** The time the clock shows (a stopwatch: the duration it shows). */
+  answer: answerValue,
+  /** How it is written: 12-hour time with am / pm, the clock face's reading, 24-hour time; a stopwatch's duration. */
+  form: z.enum(TIME_FORMS),
+  /** `duration`: the boxes (default from the answer). */
+  units: z.enum(['h-min', 'min-s']).optional(),
+});
+const setClockFields = z.object({
+  /** The time to set (24-hour; without `ampm` only its 12-hour position counts). */
+  target: clockTime,
+  /** The minute hand moves in 1-minute or 5-minute steps. */
+  snap: z.union([z.literal(1), z.literal(5)]).default(5),
+  /** The clock's am / pm plate is set too (crossing noon or midnight flips it). */
+  ampm: z.boolean().optional(),
+});
+const durationFields = z.object({
+  /** What is asked: the length of the span, its end or its start. */
+  ask: z.enum(['length', 'end', 'start']),
+  start: clockTime.optional(),
+  end: clockTime.optional(),
+  length: duration.optional(),
+  /** How the answer is written (a duration, or a time of day); the span above tells the diagnosis what to look for. */
+  answer: inputSpec,
+});
+
 export const taskSchema = z.discriminatedUnion('kind', [
   base.extend({ kind: z.literal('shade') }).merge(shadeFields).strict(),
   base.extend({ kind: z.literal('cut') }).merge(cutFields).strict(),
@@ -680,6 +792,9 @@ export const taskSchema = z.discriminatedUnion('kind', [
   base.extend({ kind: z.literal('split-array') }).merge(splitArrayFields).strict(),
   base.extend({ kind: z.literal('regroup') }).merge(regroupFields).strict(),
   base.extend({ kind: z.literal('share') }).merge(shareFields).strict(),
+  base.extend({ kind: z.literal('read-clock') }).merge(readClockFields).strict(),
+  base.extend({ kind: z.literal('set-clock') }).merge(setClockFields).strict(),
+  base.extend({ kind: z.literal('duration') }).merge(durationFields).strict(),
 ]);
 export type Task = z.output<typeof taskSchema>;
 export type TaskOf<K extends TaskKind> = Extract<Task, { kind: K }>;
@@ -777,6 +892,8 @@ export const stepLimits = z
     step: z.number().int().min(1).max(60).optional(),
     /** Longest duration. */
     maxDuration: duration.optional(),
+    /** Every span stays within one day (no crossing midnight). */
+    sameDay: z.boolean().optional(),
   })
   .strict();
 export type StepLimits = z.output<typeof stepLimits>;

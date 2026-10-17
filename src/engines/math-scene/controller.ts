@@ -22,6 +22,8 @@ import { beatCount, beatSlot, findTask, locate, type BeatSlot, type Place } from
 import { drawIndex, pageSeed } from './lib/pool';
 import { formatFrac, lcm } from './lib/fraction';
 import { isUnit, unitText } from './lib/value';
+import { clockShown, faceLabel, HALF_DAY } from './lib/clock';
+import { hopArcs, jumpLabel } from './lib/timeline';
 
 export interface Current {
   chapter: string | null;
@@ -113,6 +115,11 @@ function describe(task: Task, action: Action, s: TaskState): string {
     case 'trade':
     case 'share':
       return `H ${s.mat.H} · T ${s.mat.T} · O ${s.mat.O}${task.kind === 'share' ? ` | EACH H ${s.dealt.H} · T ${s.dealt.T} · O ${s.dealt.O}` : ''}`;
+    case 'clock':
+      return `CLOCK ${faceLabel(clockShown(task, s.clock))}${task.kind === 'set-clock' && task.ampm ? (clockShown(task, s.clock) >= HALF_DAY ? ' PM' : ' AM') : ''}`;
+    case 'hop':
+    case 'unhop':
+      return `JUMPS ${hopArcs(task, s.hops).map(([a, b]) => jumpLabel(a, b).replace('min', 'MIN').replace(' h', ' H')).join(' · ') || '—'}`;
     case 'check':
       return 'CHECK';
   }
@@ -164,6 +171,11 @@ export function answerLabel(task: Task, s: TaskState): string {
     case 'regroup':
     case 'share':
       return describe(task, { do: 'trade', trade: 'O>T' }, s);
+    case 'set-clock':
+      return describe(task, { do: 'clock', t: 0 }, s);
+    case 'read-clock':
+    case 'duration':
+      return describe(task, { do: 'input', field: '', value: '' }, s);
   }
 }
 

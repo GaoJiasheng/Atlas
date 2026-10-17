@@ -37,6 +37,10 @@ import { WholeLine } from './WholeLine';
 import { plainText } from '../../../lib/rich-text';
 import { wholeWords } from '../lib/words';
 import { matOf, total as blockTotal } from '../lib/blocks';
+import type { ClockModelSpec } from '../schema';
+import { facesOf } from '../lib/clock';
+import { ClockModel, describeClock } from './ClockModel';
+import { Timeline } from './Timeline';
 
 export interface DisplayModes {
   symbol: boolean;
@@ -114,8 +118,12 @@ export const SPECIMEN_GRID: GridModelSpec = {
 /** The background chapter of a lesson on whole numbers: an array of 3 rows of 4, its counts braced. */
 export const SPECIMEN_ARRAY: ArrayModelSpec = { kind: 'array', object: 'dot', layout: 'rows', rows: 3, cols: 4, braces: true, container: 'ring' };
 
+/** The background chapter of a lesson on time: a clock face at 7:20 (the hour hand a third of the way to 8). */
+export const SPECIMEN_CLOCK: ClockModelSpec = { kind: 'clock', time: 7 * 3600 + 20 * 60, face: 'clock', numerals: true, ticks: 'minutes', minuteLabels: true };
+
 function Specimen(p: StageContentProps & { view: ModelView }) {
   const { box, locale, defs } = p;
+  if (p.view === 'clock' || p.view === 'timeline') return <ClockModel defs={defs} box={box} model={SPECIMEN_CLOCK} locale={locale} label={t(locale, 'math.specimen.clock')} />;
   if (p.view === 'grid') return <GridModel defs={defs} box={box} model={SPECIMEN_GRID} locale={locale} label={t(locale, 'math.specimen.grid')} />;
   if (p.view === 'array') return <ArrayModel defs={defs} box={box} model={SPECIMEN_ARRAY} locale={locale} label={t(locale, 'math.specimen.array')} />;
   const label = t(locale, 'math.specimen', { name: fractionWords({ n: 3, d: 4 }, locale) });
@@ -201,6 +209,16 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
     );
   }
 
+  /* the clock and the timeline: set the hands, jump along the line, or a picture to read */
+  if (!pictures && (m.kind === 'clock' || m.kind === 'timeline')) {
+    if (m.kind === 'clock') {
+      const live = task.kind === 'set-clock' ? task : null;
+      return <ClockModel defs={defs} box={area} model={m} locale={locale} label={label} task={live} state={live ? state : null} editable={editable} act={act} ghost={ghost && live ? live.target : null} />;
+    }
+    const live = task.kind === 'duration' ? task : null;
+    return <Timeline defs={defs} box={area} model={m} locale={locale} label={label} task={live} state={live ? state : null} ghost={ghost && live ? solvedState(live) : null} />;
+  }
+
   /* choose: picture or number cards on the stage, sentences in the tray */
   if (task.kind === 'choose') {
     const letters = 'ABCDEFG';
@@ -220,6 +238,8 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
                 ? describeArray(o.model, locale)
                 : o.model?.kind === 'blocks'
                   ? wholeWords(blockTotal(matOf(o.model)), locale)
+                  : o.model?.kind === 'clock'
+                    ? facesOf(o.model).map((f) => describeClock(f, locale)).join(' · ')
                   : o.text
                     ? plainText(tx(o.text, locale), locale)
                     : '',
@@ -498,6 +518,8 @@ export function MiniModel({ defs, model, box, locale }: { defs: string; model: T
   if (model.kind === 'grid') return <GridModel defs={defs} box={box} model={model} locale={locale} label={label} mini />;
   if (model.kind === 'array') return <ArrayModel defs={defs} box={box} model={model} locale={locale} label={label} mini />;
   if (model.kind === 'blocks') return <BlocksModel box={box} model={model} locale={locale} label={label} mini />;
+  if (model.kind === 'clock') return <ClockModel defs={defs} box={box} model={model} locale={locale} label={label} mini />;
+  if (model.kind === 'timeline') return <Timeline defs={defs} box={box} model={model} locale={locale} label={label} />;
   if (model.kind === 'numberline' && model.scale === 'whole') return <WholeLine x={box.x + 10} y={box.y + box.h / 2} w={box.w - 20} model={model} locale={locale} label={label} />;
   if (model.kind === 'circle') {
     const r = Math.max(10, Math.min(box.w, box.h) / 2 - 4);

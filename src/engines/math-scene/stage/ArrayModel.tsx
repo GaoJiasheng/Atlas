@@ -213,7 +213,10 @@ interface Drawn {
 
 const toneAt = (tones: readonly string[] | undefined, i: number, fallback: Tone): Tone => (tones?.[i] as Tone | undefined) ?? fallback;
 
-/** The size of one thing for a layout drawn in `box` (40 px base, 22 px least). */
+/** The share of the box's height an array (a beat's, or a check's) is drawn to at most. */
+const ARRAY_SHARE = 0.56;
+
+/** The size of one thing for a layout drawn in `box` (22 px least, 96 px most, about half the box's height). */
 function thingSize(s: ArrayLayoutSpec, box: { w: number; h: number }, mini: boolean): number {
   const layout = layoutOf(s);
   let across = 6;
@@ -232,7 +235,10 @@ function thingSize(s: ArrayLayoutSpec, box: { w: number; h: number }, mini: bool
     down = across * 0.55 + (s.containers ? 3 : 0);
   }
   const k = Math.min(box.w / (across * 1.25), box.h / (down * 1.25));
-  return clamp(k, mini ? 6 : 22, 52);
+  if (mini) return clamp(k, 6, 52);
+  // On a big stage the drawing takes about half the stage's height (like the fraction bars), not more.
+  const tall = layout === 'rows' ? (s.rows ?? 1) * 1.25 + 0.4 : layout === 'groups' ? down * 1.25 : down * 1.25 * 1.1;
+  return clamp(Math.min(k, (box.h * ARRAY_SHARE) / tall), 22, 96);
 }
 
 /** Where the things, containers and braces of one layout go (top-left at 0, 0). */
@@ -425,7 +431,7 @@ function GroupLayer({ model: m, box, task, state, editable, act, ghost, locale, 
   const slots = groups.length + (pack && live && groups.length < MAX_GROUPS ? 1 : 0);
   const cap = Math.max(task.k, target.each, ...groups, 1);
   const pk = packOf(Math.min(cap, 12));
-  const size = clamp(Math.min(box.w / (Math.max(slots, 3) * (pk.cols + 1.4) * 1.25 + 2), box.h / ((pk.rows + 1.6) * 1.25 + Math.sqrt(task.total) * 1.2 + 4)), 22, 40);
+  const size = clamp(Math.min(box.w / (Math.max(slots, 3) * (pk.cols + 1.4) * 1.25 + 2), box.h / ((pk.rows + 1.6) * 1.25 + Math.sqrt(task.total) * 1.2 + 4)), 22, 56);
   const gap = size * 1.25;
   const cw = pk.cols * gap;
   const ch = pk.rows * gap;
@@ -537,7 +543,7 @@ function ArrangeLayer({ model: m, box, task, state, editable, act, ghost, locale
   const live = !!editable;
   const R = Math.min(12, Math.max(task.rows, task.cols) + 3);
   const C = R;
-  const size = clamp(Math.min((box.w - 120) / (C * 1.25), (box.h - 80) / (R * 1.25)), 18, 40);
+  const size = clamp(Math.min((box.w - 120) / (C * 1.25), (box.h - 80) / (R * 1.25), (box.h * ARRAY_SHARE * 1.3) / (R * 1.25)), 18, 64);
   const gap = size * 1.25;
   const x0 = box.x + (box.w - C * gap) / 2 + 30;
   const y0 = box.y + (box.h - R * gap) / 2 + 12;
@@ -634,7 +640,7 @@ function SplitLayer({ model: m, box, task, state, editable, act, ghost, locale, 
   const live = !!editable && state.phase === 0;
   const R = task.rows;
   const C = task.cols;
-  const size = clamp(Math.min((box.w - 150) / (C * 1.25 + 0.5), (box.h - 90) / (R * 1.25 + 0.5)), 16, 40);
+  const size = clamp(Math.min((box.w - 150) / (C * 1.25 + 0.5), (box.h - 90) / (R * 1.25 + 0.5), (box.h * ARRAY_SHARE) / (R * 1.25 + 0.5)), 16, 72);
   const gap = size * 1.25;
   const cut = parseArrayCut(state.cut);
   const apart = size * 0.6;
