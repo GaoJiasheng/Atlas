@@ -4,11 +4,11 @@
       "id": "orang-laut",
       "term": {
         "en": "Orang Laut",
-        "zh": "【待译】Orang Laut"
+        "zh": "海人（Orang Laut）"
       },
       "definition": {
-        "en": "Maritime communities of the Malay world living along coasts and on boats; some served Malay rulers as navigators, rowers and patrol forces.",
-        "zh": "【待译】Maritime communities of the Malay world living along coasts and on boats; some served Malay rulers as navigators, rowers and patrol forces."
+        "en": "Sea peoples of the Malay world who lived on boats and along the coasts. Some groups served the Malay rulers as navigators, rowers and patrols.",
+        "zh": "马来世界里以船为家、沿海而居的族群。其中一些群体替马来统治者领航、划船和巡守海面。"
       },
       "see": [
         "temenggong"
@@ -18,11 +18,11 @@
       "id": "temenggong",
       "term": {
         "en": "Temenggong",
-        "zh": "【待译】Temenggong"
+        "zh": "天猛公"
       },
       "definition": {
-        "en": "A senior office in the Johor Sultanate concerned with security and maritime communities. Abdul Rahman held the office in Singapore in 1819.",
-        "zh": "【待译】A senior office in the Johor Sultanate concerned with security and maritime communities. Abdul Rahman held the office in Singapore in 1819."
+        "en": "A senior office of the Johor sultanate, responsible for order and for the sea peoples. In 1819 the Temenggong at Singapore was Abdul Rahman.",
+        "zh": "柔佛苏丹国的高级官职，负责治安，也管辖海人。1819 年住在新加坡的天猛公是阿都拉曼。"
       },
       "see": [
         "orang-laut"
@@ -32,11 +32,11 @@
       "id": "free-trade-port",
       "term": {
         "en": "Free port",
-        "zh": "【待译】Free port"
+        "zh": "自由港"
       },
       "definition": {
-        "en": "A port without ordinary import or export duties. Colonial Singapore raised revenue through other means, including monopolies.",
-        "zh": "【待译】A port without ordinary import or export duties. Colonial Singapore raised revenue through other means, including monopolies."
+        "en": "A port that charges no duties on goods coming in or going out. Colonial Singapore raised its money in other ways, above all from revenue farms.",
+        "zh": "对进出口货物不征关税的港口。殖民地时期的新加坡改从别处筹钱，主要靠饷码。"
       },
       "see": [
         "revenue-farm"
@@ -46,11 +46,11 @@
       "id": "revenue-farm",
       "term": {
         "en": "Revenue farm",
-        "zh": "【待译】Revenue farm"
+        "zh": "饷码"
       },
       "definition": {
-        "en": "A concession auctioned by a government, allowing a merchant to collect income from a specified monopoly or tax. In Singapore these included opium, alcohol and gambling.",
-        "zh": "【待译】A concession auctioned by a government, allowing a merchant to collect income from a specified monopoly or tax. In Singapore these included opium, alcohol and gambling."
+        "en": "The right to run a monopoly, such as selling opium or spirits or keeping gambling houses, which the government sold to the highest bidder for a fixed period.",
+        "zh": "政府把某项专卖权（如卖鸦片、卖酒、开赌馆）按期拍卖给出价最高的商人，商人付钱后在期限内独家经营。"
       },
       "see": [
         "free-trade-port"
@@ -60,11 +60,11 @@
       "id": "straits-settlements-colony",
       "term": {
         "en": "Straits Settlements",
-        "zh": "【待译】Straits Settlements"
+        "zh": "海峡殖民地"
       },
       "definition": {
-        "en": "The British administrative grouping formed in 1826 from Penang, Malacca and Singapore; later additions included Dindings and Labuan. It ended in 1946.",
-        "zh": "【待译】The British administrative grouping formed in 1826 from Penang, Malacca and Singapore; later additions included Dindings and Labuan. It ended in 1946."
+        "en": "The British colony formed in 1826 from Penang, Malacca and Singapore; the Dindings and Labuan were added later. It was dissolved in 1946.",
+        "zh": "1826 年由槟城、马六甲和新加坡组成的英国殖民地，后来加入天定和纳闽，1946 年解散。"
       },
       "see": [
         "crown-colony"
@@ -74,11 +74,11 @@
       "id": "crown-colony",
       "term": {
         "en": "Crown Colony",
-        "zh": "【待译】Crown Colony"
+        "zh": "直辖殖民地"
       },
       "definition": {
-        "en": "A colony administered directly by the British government rather than by the East India Company or British India. The Straits Settlements acquired this status in 1867.",
-        "zh": "【待译】A colony administered directly by the British government rather than by the East India Company or British India. The Straits Settlements acquired this status in 1867."
+        "en": "A colony governed directly by the British government through the Colonial Office, not by the East India Company or British India. The Straits Settlements became one in 1867.",
+        "zh": "由英国政府通过殖民地部直接管理的殖民地，不再经东印度公司或英属印度。海峡殖民地 1867 年改为直辖殖民地。"
       },
       "see": [
         "straits-settlements-colony"
@@ -88,22 +88,22 @@
       "id": "kampong",
       "term": {
         "en": "Kampong",
-        "zh": "【待译】Kampong"
+        "zh": "甘榜"
       },
       "definition": {
-        "en": "Malay for a village or settlement. Colonial town plans also used the word for areas assigned to particular communities.",
-        "zh": "【待译】Malay for a village or settlement. Colonial town plans also used the word for areas assigned to particular communities."
+        "en": "Malay for village or settlement. In the colonial town plan the word was also used for the areas set aside for particular communities.",
+        "zh": "马来语，意思是村落、聚居地。殖民地的城区规划也用这个词称呼划给某个族群的地段。"
       }
     },
     {
       "id": "coolie",
       "term": {
         "en": "“Coolie”",
-        "zh": "【待译】“Coolie”"
+        "zh": "苦力"
       },
       "definition": {
-        "en": "A historical and now derogatory term for Asian manual workers, often recruited through labour agents. This topic uses the term only with historical explanation.",
-        "zh": "【待译】A historical and now derogatory term for Asian manual workers, often recruited through labour agents. This topic uses the term only with historical explanation."
+        "en": "A word used in the nineteenth and twentieth centuries for Asian labourers hired for heavy physical work, often through labour brokers. It is now considered insulting; this topic uses it only when quoting the period.",
+        "zh": "19、20 世纪对经中介招募、出卖体力的亚洲劳工的称呼。今天这个词带有贬义，本主题只在引述当时的说法时使用。"
       },
       "see": [
         "credit-ticket"
@@ -113,11 +113,11 @@
       "id": "credit-ticket",
       "term": {
         "en": "Credit-ticket system",
-        "zh": "【待译】Credit-ticket system"
+        "zh": "赊单制"
       },
       "definition": {
-        "en": "An arrangement in which an agent advanced a migrant’s travel costs and expected repayment through work after arrival. Debt could restrict the worker’s choices.",
-        "zh": "【待译】An arrangement in which an agent advanced a migrant’s travel costs and expected repayment through work after arrival. Debt could restrict the worker’s choices."
+        "en": "A broker paid a migrant’s passage, and the migrant repaid the debt by working, often for a year or more, for an employer who bought the debt. Debt could leave workers with little choice.",
+        "zh": "由客头先垫付移民的船费，移民上岸后被“卖”给买下这笔债的雇主，以做工抵债，往往要做一年以上。欠债的人常常身不由己。"
       },
       "see": [
         "coolie"
@@ -127,44 +127,44 @@
       "id": "kangany",
       "term": {
         "en": "Kangany system",
-        "zh": "【待译】Kangany system"
+        "zh": "工头制（甘加尼制）"
       },
       "definition": {
-        "en": "A system in which an Indian foreman recruited workers through connections in India for employment, notably on plantations.",
-        "zh": "【待译】A system in which an Indian foreman recruited workers through connections in India for employment, notably on plantations."
+        "en": "A way of recruiting Indian workers in which a foreman, the kangany, went back to his home district to bring labourers, mainly for plantations.",
+        "zh": "招募印度劳工的一种办法：由工头（甘加尼）回到家乡招人，带他们来做工，主要去种植园。"
       }
     },
     {
       "id": "kongsi",
       "term": {
         "en": "Kongsi",
-        "zh": "【待译】Kongsi"
+        "zh": "公司（会党）"
       },
       "definition": {
-        "en": "A Chinese association that might organise mutual help, business or secret-society loyalties. Clan associations and secret societies were not identical organisations.",
-        "zh": "【待译】A Chinese association that might organise mutual help, business or secret-society loyalties. Clan associations and secret societies were not identical organisations."
+        "en": "A Chinese association. The word could mean a business partnership, a mutual-help society or a secret society; clan associations and secret societies were different organisations. Secret societies were banned in 1890.",
+        "zh": "华人的结社组织。“公司”可以指合股生意、互助团体，也可以指秘密会党；宗乡会馆和私会党是不同的组织。私会党在 1890 年被取缔。"
       }
     },
     {
       "id": "peranakan",
       "term": {
         "en": "Peranakan",
-        "zh": "【待译】Peranakan"
+        "zh": "土生华人（峇峇娘惹）"
       },
       "definition": {
-        "en": "Locally born communities whose family histories and cultures developed in the Malay world, often combining inherited and local languages and practices. The term is not limited to Chinese descendants.",
-        "zh": "【待译】Locally born communities whose family histories and cultures developed in the Malay world, often combining inherited and local languages and practices. The term is not limited to Chinese descendants."
+        "en": "Families born locally in the Malay world whose language, food and customs mix those of their ancestors with local ones. The word is used for Chinese Peranakans and also for Indian and other Peranakan communities.",
+        "zh": "在马来世界本地出生、语言饮食和习俗融合了祖籍文化与本地文化的家族。最常指土生华人，也有土生印度人等其他群体。"
       }
     },
     {
       "id": "resident",
       "term": {
         "en": "British Resident",
-        "zh": "【待译】British Resident"
+        "zh": "驻扎官"
       },
       "definition": {
-        "en": "An official appointed beside a Malay ruler whose advice was generally to be followed in administration, with exceptions for Malay religion and custom.",
-        "zh": "【待译】An official appointed beside a Malay ruler whose advice was generally to be followed in administration, with exceptions for Malay religion and custom."
+        "en": "A British official placed beside a Malay ruler. The ruler was bound to ask and act on his advice in everything except Malay religion and custom.",
+        "zh": "英国派驻在马来统治者身边的官员。除了伊斯兰教和马来习俗之外，统治者必须征询并听从他的意见。"
       },
       "see": [
         "crown-colony"
@@ -174,11 +174,11 @@
       "id": "self-rule",
       "term": {
         "en": "Self-government",
-        "zh": "【待译】Self-government"
+        "zh": "自治"
       },
       "definition": {
-        "en": "Responsibility for domestic government exercised by Singapore’s elected ministry from 1959, while Britain retained responsibilities including defence and external relations.",
-        "zh": "【待译】Responsibility for domestic government exercised by Singapore’s elected ministry from 1959, while Britain retained responsibilities including defence and external relations."
+        "en": "From 1959 an elected Singapore government ran domestic affairs, while Britain kept defence and foreign affairs; internal security was shared.",
+        "zh": "1959 年起，新加坡民选政府管理内政，国防和外交仍归英国，内部安全由双方共管。"
       },
       "see": [
         "merger-1963"
@@ -188,11 +188,11 @@
       "id": "merger-1963",
       "term": {
         "en": "Merger",
-        "zh": "【待译】Merger"
+        "zh": "合并"
       },
       "definition": {
-        "en": "Singapore’s entry into Malaysia in 1963 with Malaya, Sabah and Sarawak. The terms were politically disputed.",
-        "zh": "【待译】Singapore’s entry into Malaysia in 1963 with Malaya, Sabah and Sarawak. The terms were politically disputed."
+        "en": "Singapore’s joining with Malaya, Sabah and Sarawak to form Malaysia in 1963. The terms were argued over before and after.",
+        "zh": "1963 年新加坡与马来亚、沙巴、砂拉越组成马来西亚。合并的条件在合并前后都有争议。"
       },
       "see": [
         "self-rule"
@@ -202,11 +202,11 @@
       "id": "konfrontasi",
       "term": {
         "en": "Confrontation (Konfrontasi)",
-        "zh": "【待译】Confrontation (Konfrontasi)"
+        "zh": "对抗（Konfrontasi）"
       },
       "definition": {
-        "en": "Indonesia’s political and military campaign against the formation of Malaysia, beginning in 1963 and ending in 1966.",
-        "zh": "【待译】Indonesia’s political and military campaign against the formation of Malaysia, beginning in 1963 and ending in 1966."
+        "en": "Indonesia’s political and armed campaign against the new Malaysia, from 1963 to 1966, including raids in Borneo and bombs in Singapore.",
+        "zh": "印度尼西亚在 1963 年至 1966 年间反对马来西亚成立的政治与武装行动，包括在婆罗洲的越境袭击和在新加坡的爆炸。"
       },
       "see": [
         "merger-1963"

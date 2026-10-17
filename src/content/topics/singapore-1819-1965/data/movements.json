@@ -7,8 +7,8 @@
     "holder": "eic",
     "kind": "sea",
     "label": {
-      "en": "Company expedition: Penang to Singapore (schematic)",
-      "zh": "【待译】Company expedition: Penang to Singapore (schematic)"
+      "en": "Company ships: Penang to Singapore (schematic)",
+      "zh": "东印度公司船队：槟城到新加坡（示意）"
     },
     "path": {
       "type": "LineString",
@@ -74,14 +74,14 @@
   },
   {
     "id": "hussein-riau-1819",
-    "from": "1819-02",
-    "to": "1819-02",
+    "from": "1819-02-01",
+    "to": "1819-02-05",
     "linger": "1824-08-02",
     "holder": "johor",
     "kind": "sea",
     "label": {
-      "en": "Hussein from Riau (schematic; arrival day disputed)",
-      "zh": "【待译】Hussein from Riau (schematic; arrival day disputed)"
+      "en": "Hussein comes from Riau (schematic)",
+      "zh": "胡先从廖内前来（示意）"
     },
     "path": {
       "type": "LineString",
@@ -133,8 +133,8 @@
     "holder": "straits-settlements",
     "kind": "sea",
     "label": {
-      "en": "Amoy junk corridor (schematic)",
-      "zh": "【待译】Amoy junk corridor (schematic)"
+      "en": "Junks from Amoy (schematic)",
+      "zh": "厦门帆船航路（示意）"
     },
     "path": {
       "type": "LineString",
@@ -218,8 +218,8 @@
     "holder": "straits-settlements",
     "kind": "sea",
     "label": {
-      "en": "Canton River junk corridor (schematic)",
-      "zh": "【待译】Canton River junk corridor (schematic)"
+      "en": "Junks from Canton (schematic)",
+      "zh": "广州帆船航路（示意）"
     },
     "path": {
       "type": "LineString",
@@ -291,8 +291,8 @@
     "holder": "straits-settlements",
     "kind": "sea",
     "label": {
-      "en": "Swatow-area junk corridor (schematic)",
-      "zh": "【待译】Swatow-area junk corridor (schematic)"
+      "en": "Junks from Swatow (schematic)",
+      "zh": "汕头帆船航路（示意）"
     },
     "path": {
       "type": "LineString",
@@ -368,8 +368,8 @@
     "holder": "straits-settlements",
     "kind": "sea",
     "label": {
-      "en": "Hainan junk corridor (schematic)",
-      "zh": "【待译】Hainan junk corridor (schematic)"
+      "en": "Junks from Hainan (schematic)",
+      "zh": "海南帆船航路（示意）"
     },
     "path": {
       "type": "LineString",
@@ -437,8 +437,8 @@
     "holder": "straits-settlements",
     "kind": "sea",
     "label": {
-      "en": "Makassar–Singapore trading corridor (schematic)",
-      "zh": "【待译】Makassar–Singapore trading corridor (schematic)"
+      "en": "Bugis traders from Makassar (schematic)",
+      "zh": "武吉斯商船：望加锡到新加坡（示意）"
     },
     "path": {
       "type": "LineString",
@@ -586,8 +586,8 @@
     "holder": "straits-settlements",
     "kind": "sea",
     "label": {
-      "en": "Bawean–Singapore corridor (schematic)",
-      "zh": "【待译】Bawean–Singapore corridor (schematic)"
+      "en": "Boyanese from Bawean (schematic)",
+      "zh": "巴韦安人：巴韦安岛到新加坡（示意）"
     },
     "path": {
       "type": "LineString",
@@ -723,8 +723,8 @@
     "holder": "straits-settlements",
     "kind": "sea",
     "label": {
-      "en": "India–Singapore–Canton country-trade corridor (schematic)",
-      "zh": "【待译】India–Singapore–Canton country-trade corridor (schematic)"
+      "en": "Country trade: India, Singapore, Canton (schematic)",
+      "zh": "港脚贸易：印度—新加坡—广州（示意）"
     },
     "path": {
       "type": "LineString",
@@ -872,8 +872,8 @@
     "holder": "straits-settlements",
     "kind": "sea",
     "label": {
-      "en": "Madras–Singapore convict-transport corridor (schematic)",
-      "zh": "【待译】Madras–Singapore convict-transport corridor (schematic)"
+      "en": "Convict ships from Madras (schematic)",
+      "zh": "罪犯船：马德拉斯到新加坡（示意）"
     },
     "path": {
       "type": "LineString",
@@ -969,8 +969,8 @@
     "holder": "straits-settlements",
     "kind": "sea",
     "label": {
-      "en": "Bencoolen–Singapore convict-transport corridor (schematic)",
-      "zh": "【待译】Bencoolen–Singapore convict-transport corridor (schematic)"
+      "en": "Convict ships from Bencoolen (schematic)",
+      "zh": "罪犯船：明古连到新加坡（示意）"
     },
     "path": {
       "type": "LineString",
@@ -1122,8 +1122,8 @@
     "holder": "straits-settlements",
     "kind": "sea",
     "label": {
-      "en": "Coromandel–Singapore corridor (schematic)",
-      "zh": "【待译】Coromandel–Singapore corridor (schematic)"
+      "en": "Chulia traders from the Coromandel coast (schematic)",
+      "zh": "注辇商人：科罗曼德尔海岸到新加坡（示意）"
     },
     "path": {
       "type": "LineString",
@@ -1219,8 +1219,8 @@
     "holder": "straits-settlements",
     "kind": "sea",
     "label": {
-      "en": "Hadhramaut–Singapore trading corridor (schematic)",
-      "zh": "【待译】Hadhramaut–Singapore trading corridor (schematic)"
+      "en": "Hadhrami traders from southern Arabia (schematic)",
+      "zh": "哈德拉毛商人：南阿拉伯到新加坡（示意）"
     },
     "path": {
       "type": "LineString",
@@ -1360,8 +1360,8 @@
     "holder": "straits-settlements",
     "kind": "sea",
     "label": {
-      "en": "Europe via the Cape (schematic offshore corridor)",
-      "zh": "【待译】Europe via the Cape (schematic offshore corridor)"
+      "en": "Europe by the Cape of Good Hope (schematic)",
+      "zh": "经好望角往欧洲（示意）"
     },
     "path": {
       "type": "LineString",
@@ -1505,8 +1505,8 @@
     "holder": "straits-settlements",
     "kind": "sea",
     "label": {
-      "en": "Via Suez: Red Sea–Singapore segment (schematic)",
-      "zh": "【待译】Via Suez: Red Sea–Singapore segment (schematic)"
+      "en": "By Suez: Red Sea to Singapore (schematic)",
+      "zh": "经苏伊士：红海到新加坡（示意）"
     },
     "path": {
       "type": "LineString",
