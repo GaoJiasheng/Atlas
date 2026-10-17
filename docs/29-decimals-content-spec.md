@@ -828,3 +828,5 @@ validate：每层 `zoom` 是上一层的**恰好一段**（`to − from = 上一
 - `shade-decimal` level 10 的题、`regroup`、部分 `shift-digits` 题不设误解码，错答走通用反馈 + 提示（§2.2 已预期）。
 - 题库中文是"审过、改过"，不是逐道重写。
 - D9 的英文读法照 §0 写（"zero point three five"），施工时没有翻到课本页面核对，仍待 Gavin 看一眼课本。
+
+**门槛**（合并 main 1a551ce 之后，含时间课与 625f087 的 MathScene 打磨）：`pnpm check` 0 错、`pnpm validate` 28 个主题 0 错 0 警告、`pnpm test` 2296 项通过、`pnpm build` 通过、`CI=1 pnpm e2e` 104 项通过（合并后首页计数改为 22 个已发布主题、5 节数学课、44 个卡片标签、ww2 是图版 22）、`pnpm shoot decimals --beats --tasks --keys --layout --locale en,zh --theme paper,cinema` 四种组合都是 0 节拍失败、0 题目失败、0 键位失败、0 布局问题、console 干净。
