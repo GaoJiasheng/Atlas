@@ -275,6 +275,9 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   useEffect(() => controller?.setGraticule(graticuleOn), [controller, graticuleOn]);
   const [territoryOn, setTerritoryOn] = useState(true);
   useEffect(() => controller?.setTerritory(territoryOn), [controller, territoryOn]);
+  /** The island-scale land carries today's coastline (a dashed reference line, listed in the legend while names are on). */
+  const [coastToday, setCoastToday] = useState(false);
+  const onLocalLand = useCallback((info: { coastToday: boolean }) => setCoastToday(info.coastToday), []);
 
 
   /* ---------- REFERENCE (R): adjacent keyframe as dashed outlines ---------- */
@@ -401,6 +404,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       if (approximate) items.push({ id: 'approximate', label: bi('time.legend.approximate'), color: 'var(--line)', kind: 'dashed' });
     }
     if (region?.rivers) items.push({ id: 'river', label: bi('time.legend.river'), color: 'var(--rivers)', kind: 'line' });
+    if (coastToday && territoryOn) items.push({ id: 'coast-today', label: bi('time.legend.coastToday'), color: 'var(--ink)', kind: 'line-dashed' });
     if (layers.includes('movements') && geo.movements.length)
       items.push({ id: 'movement', label: t('time.movement'), color: 'var(--ink-muted)', kind: 'arrow' });
     if (layers.includes('battles')) {
@@ -416,7 +420,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     if (layers.includes('sites') && model.sites.length)
       items.push({ id: 'site', label: t('time.legend.site'), color: 'var(--ink)', kind: 'site' });
     return items;
-  }, [geo, model, layers, locale, topic.blocLabels, byEntity, areas, legendKeyframe, approximate, region]); // `t` is bound to `locale`
+  }, [geo, model, layers, locale, topic.blocLabels, byEntity, areas, legendKeyframe, approximate, region, coastToday, territoryOn]); // `t` is bound to `locale`
 
   /* ---------- control panel: LAYERS (store layers + drawing modes) and TOOLS ---------- */
   const panelLayers = useMemo<ControlRow[]>(
@@ -618,6 +622,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
         locale={locale}
         onSelectEvent={selectEvent}
         onController={setController}
+        onLocalLand={onLocalLand}
       />
 
       <div className="ts-stop" role="status" aria-live="polite">

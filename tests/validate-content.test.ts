@@ -85,6 +85,15 @@ beforeAll(() => {
       chapterFile(['id: noted', 'order: 10', 'title: { en: "Noted", zh: "注" }', 'state:', '  note: { en: "A note.", zh: "说明。" }']),
     );
   });
+  topic('topic-links', (root) => {
+    writeFileSync(
+      join(root, 'chapters/09-links.mdx'),
+      chapterFile(
+        ['id: links', 'order: 9', 'title: { en: "Links", zh: "链接" }'],
+        'See <TopicLink slug="clean" ch="second-look">this</TopicLink>, <TopicLink slug="clean" ch="nowhere">that</TopicLink> and <TopicLink slug="clean">the topic</TopicLink>.',
+      ),
+    );
+  });
   topic('term-without-glossary', (root) => {
     writeFileSync(join(root, 'chapters/09-term.mdx'), chapterFile(['id: term', 'order: 9', 'title: { en: "Term", zh: "词" }'], 'A <Term id="front">front</Term>.'));
   });
@@ -174,7 +183,7 @@ afterAll(() => {
 describe('validate-content', () => {
   it('fails the run when any topic has errors', () => {
     expect(status).toBe(1);
-    expect(output).toMatch(/15 topic\(s\)/);
+    expect(output).toMatch(/16 topic\(s\)/);
   });
 
   it('passes an unmodified copy', () => {
@@ -193,6 +202,12 @@ describe('validate-content', () => {
     const lines = linesFor('bad-body').join('\n');
     expect(lines).toContain('<Num s="S7">: unknown source "S7"');
     expect(lines).toContain('<FlyTo preset="nowhere">: unknown preset');
+  });
+
+  it('checks the chapter a <TopicLink ch> names', () => {
+    const errors = linesFor('topic-links').filter((l) => l.startsWith('error'));
+    expect(errors).toHaveLength(1);
+    expect(errors[0]).toContain('<TopicLink slug="clean" ch="nowhere">: topic "clean" has no chapter "nowhere"');
   });
 
   it('accepts a background chapter (order 0, reading note) and <Term> refs to the glossary', () => {

@@ -38,9 +38,18 @@ describe('GeoStage style', () => {
     expect(GROUPS.control).toEqual(expect.arrayContaining([LAYER.prevDash, LAYER.nextDash]));
   });
 
-  it('island land (basemap.local) as before', () => {
-    const ids = buildGeoStyle({ ...base, local: 'land-sg' }).layers.map((l) => l.id);
-    expect(ids.slice(3, 9)).toEqual([HI.mask, HI.fill, HI.edge, LOCAL.mask, LOCAL.fill, LOCAL.edge]);
+  it('island land (basemap.local) as before, plus today’s coastline (dashed ink, empty for undated land)', () => {
+    const style = buildGeoStyle({ ...base, local: 'land-sg' });
+    const ids = style.layers.map((l) => l.id);
+    expect(ids.slice(3, 10)).toEqual([HI.mask, HI.fill, HI.edge, LOCAL.mask, LOCAL.fill, LOCAL.edge, LOCAL.today]);
+    for (const id of [LOCAL.fill, LOCAL.edge]) expect(style.layers.find((l) => l.id === id)).toMatchObject({ filter: ['==', ['get', 'kind'], 'land'] });
+    expect(style.layers.find((l) => l.id === LOCAL.today)).toMatchObject({
+      type: 'line',
+      source: LOCAL.src,
+      minzoom: 9.4,
+      filter: ['==', ['get', 'kind'], 'coast-today'],
+      paint: { 'line-color': '#2a2824', 'line-width': 0.8, 'line-dasharray': [2, 2], 'line-opacity': ['interpolate', ['linear'], ['zoom'], 9.4, 0, 9.6, 0.35] },
+    });
   });
 
   it('regional plate: no world land, its land filled and its coast stroked, rivers, the sheet on top', () => {

@@ -31,6 +31,7 @@ import { compareTime } from '../../lib/time';
 import { decodeControl, decodeTopologyObject } from './lib/control';
 import { colourConflicts, holderAdjacency } from './lib/holders';
 import { riverFeatures } from './lib/rivers';
+import { datedWindow, eraSequenceIssues, hasDate } from './lib/dated';
 
 /* ------------------------------------------------------------------ */
 /* entities.json                                                       */
@@ -602,7 +603,8 @@ type TopicLike = {
 
 /**
  * `pnpm validate` checks of a TimeScene topic against its topic.yaml:
- * the basemap files exist under public/geo/ (a regional plate's land is a
+ * the basemap files exist under public/geo/ (the island-scale land passes
+ * `localLandIssues`, dated coasts included; a regional plate's land is a
  * TopoJSON with an object named after it holding `kind: land`; its rivers
  * parse as `riversFile`, GeoJSON or TopoJSON), and with `colorBy: entity`
  * every holder has a colour and no two neighbouring holders share one
@@ -613,7 +615,11 @@ export function timeSceneTopicIssues(topic: TopicLike, data: TimeSceneGeoData, r
   const issues: TimeTopicIssue[] = [];
   const geo = (name: string) => `public/geo/${name}.json`;
   const local = topic.basemap?.local;
-  if (local && readGeo(local) === undefined) issues.push({ level: 'error', file: geo(local), message: 'basemap.local: file not found' });
+  if (local) {
+    const raw = readGeo(local);
+    if (raw === undefined) issues.push({ level: 'error', file: geo(local), message: 'basemap.local: file not found' });
+    else for (const message of localLandIssues(raw, local)) issues.push({ level: 'error', file: geo(local), message });
+  }
   const region = topic.basemap?.region;
   if (region) {
     const land = readGeo(region.land) as { type?: unknown; objects?: Record<string, { geometries?: { properties?: { kind?: unknown } }[] }> } | undefined;
@@ -645,6 +651,53 @@ export function timeSceneTopicIssues(topic: TopicLike, data: TimeSceneGeoData, r
     for (const [a, b] of colourConflicts(holders, (id) => colour.get(id)))
       issues.push({ level: 'warning', file: 'data/entities.json', message: `colorBy: entity: neighbours "${a}" and "${b}" share ${colour.get(a)} (run scripts/geo/lib/colour-holders.ts)` });
   }
+  return issues;
+}
+
+/** Geometry kinds of a `basemap.local` file (lib/localLand.ts). */
+export const LOCAL_KINDS = ['mask', 'land', 'coast-today'] as const;
+
+/**
+ * Checks of a `basemap.local` file (`public/geo/<name>.json`): a TopoJSON
+ * with an object `<name>` holding `kind: land` (plus `mask`, and optionally
+ * `coast-today` lines; no other kinds). Dated land (`from` / `to`, the island
+ * coast by date): every `kind: land` geometry carries a date or none does;
+ * dates parse, `to` is after `from`, and the eras tile time exactly once —
+ * no overlap, no gap, only the first open at the start and only the last open
+ * at the end. Messages only; the caller files them under the land file.
+ */
+export function localLandIssues(raw: unknown, name: string): string[] {
+  type Geometry = { type?: unknown; properties?: { kind?: unknown; from?: unknown; to?: unknown } | null };
+  const topo = raw as { type?: unknown; objects?: Record<string, { geometries?: Geometry[] }> } | null;
+  if (!topo || topo.type !== 'Topology' || !topo.objects?.[name]) return [`basemap.local: expected a TopoJSON with an object "${name}" (scripts/geo/lib/local-land.ts writes it)`];
+  const geometries = topo.objects[name]!.geometries ?? [];
+  const issues: string[] = [];
+  geometries.forEach((g, i) => {
+    const kind = g.properties?.kind;
+    if (!LOCAL_KINDS.includes(kind as (typeof LOCAL_KINDS)[number])) issues.push(`geometry #${i}: kind must be one of ${LOCAL_KINDS.join(', ')} (has ${JSON.stringify(kind)})`);
+    if (kind === 'coast-today' && g.type !== 'LineString' && g.type !== 'MultiLineString') issues.push(`geometry #${i}: kind coast-today must be a LineString or MultiLineString (has ${String(g.type)})`);
+    if (kind !== 'land' && hasDate(g.properties)) issues.push(`geometry #${i}: only kind: land carries from / to`);
+  });
+  const land = geometries.map((g, i) => ({ g, i })).filter(({ g }) => g.properties?.kind === 'land');
+  if (!land.length) return [...issues, `basemap.local: object "${name}" has no kind: land geometry`];
+  const dated = land.filter(({ g }) => hasDate(g.properties));
+  if (!dated.length) return issues;
+  if (dated.length !== land.length)
+    issues.push(`dated land: ${land.length - dated.length} of ${land.length} kind: land geometries have no from / to (each era is one whole coast; date every one)`);
+  const windows: { i: number; from: number; to: number }[] = [];
+  for (const { g, i } of dated) {
+    let ok = true;
+    for (const key of ['from', 'to'] as const) {
+      const v = g.properties?.[key];
+      if (v !== undefined && !timePoint.safeParse(v).success) {
+        issues.push(`geometry #${i}: ${key} ${JSON.stringify(v)} is not a date`);
+        ok = false;
+      }
+    }
+    if (ok) windows.push({ i, ...datedWindow(g.properties?.from as TimePointInput | undefined, g.properties?.to as TimePointInput | undefined) });
+  }
+  // Messages from eraSequenceIssues name positions in `windows`; map them back to geometry numbers.
+  for (const message of eraSequenceIssues(windows)) issues.push(`dated land: ${message.replace(/#(\d+)/g, (_, k: string) => `geometry #${windows[Number(k)]!.i}`)}`);
   return issues;
 }
 
