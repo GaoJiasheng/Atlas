@@ -1,0 +1,127 @@
+---
+id: "friction-and-motion"
+order: 4
+title: {"en": "Friction slows moving things", "zh": "摩擦力让运动的物体慢下来"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: false
+  cutaway: "none"
+  layers: ["ramp", "friction", "spring", "drop", "brake", "everyday", "arrows"]
+  hide: ["push-rod", "wheel", "wheel-stand", "brake-caliper", "brake-lever", "brake-cable"]
+  labels: ["toy-car", "runway", "metre-rule"]
+  camera: {"position": [-0.2, 0.75, 1.65], "target": [-0.25, 0.02, 0.2], "fov": 30}
+  summary: {"en": "A rolling car slows down and stops because of friction, not because its push runs out; the less friction, the further it goes.", "zh": "滚动的小车会慢下来、停下，是因为摩擦力，而不是推它的力“用完了”；摩擦越小，走得越远。"}
+  sim:
+    set: {"setup": "roll", "runway": "wood", "ramp-height": 6}
+    try:
+      vary: "runway"
+      keep: ["ramp-height", {"en": "Same car", "zh": "同一辆车"}, {"en": "Let go, no push", "zh": "放手，不推"}]
+      observe: ["distance"]
+      record: {"chart": true}
+      replay: true
+      predict:
+        prompt: {"en": "Change the wooden runway for carpet. Will the car roll further, less far or the same?", "zh": "把木跑道换成地毯，小车会滚得更远、更近，还是一样？"}
+        start: {"runway": "wood"}
+        change: {"runway": "carpet"}
+        observe: "distance"
+        options:
+          - {"id": "further", "label": {"en": "Further", "zh": "更远"}, "means": "more"}
+          - {"id": "less-far", "label": {"en": "Less far", "zh": "更近"}, "means": "less"}
+          - {"id": "same", "label": {"en": "The same", "zh": "一样"}, "means": "same"}
+  beats:
+    - labels: ["toy-car", "release-gate", "ramp-board", "metre-rule"]
+      caption: {"en": "The car was let go from six centimetres up the ramp, with no push. In this model it rolled about fifty-three centimetres along the bare wooden runway.", "zh": "小车从斜面上六厘米高处放手，没有推它。在这个模型里，它在木跑道上滚了约五十三厘米。"}
+    - sim: {"set": {"runway": "glass"}}
+      labels: ["glass-mat", "toy-car", "metre-rule"]
+      caption: {"en": "Same car, same height, but a smooth glass runway: about eighty centimetres.", "zh": "同一辆车、同一高度，换成光滑的玻璃跑道：约八十厘米。"}
+    - sim: {"set": {"runway": "carpet"}}
+      labels: ["carpet-mat", "toy-car", "metre-rule"]
+      caption: {"en": "On carpet it stops after about nineteen centimetres. Only the surface changed, so the surface made the difference.", "zh": "在地毯上，它约十九厘米就停了。只改变了表面，所以差别来自表面。"}
+    - sim: {"set": {"runway": "glass"}}
+      camera: "runway-top"
+      labels: ["toy-car", "glass-mat"]
+      caption: {"en": "Nothing pushed the car once it left the ramp. It kept going by itself until friction slowly brought it to a stop. With less friction it would go further still.", "zh": "离开斜面以后，没有东西推小车。它自己一直往前走，直到摩擦力让它慢慢停下。摩擦再小一些，它会走得更远。"}
+    - sim: {"set": {"ramp-height": 9}}
+      labels: ["release-gate", "toy-car", "metre-rule"]
+      caption: {"en": "A separate fair test: keep the wooden runway and start higher. From nine centimetres the car rolls about eighty centimetres in this model, half as far again as from six.", "zh": "另一个公平测试：木跑道不变，从更高处出发。在这个模型里，从九厘米高处出发，小车滚了约八十厘米，比从六厘米出发远一半。"}
+  index: {"parts": ["ramp-board", "release-gate", "toy-car", "car-wheels", "runway", "glass-mat", "carpet-mat", "metre-rule"]}
+---
+
+<Lang en>
+
+Lift the gate and let the car go from <Num s="S1">6 cm</Num> up the ramp, without pushing it. In this model it rolls about <Num s="S1">53 cm</Num> along the bare wooden runway before it stops. Measure from the foot of the ramp to the car, so that only the runway is counted. <FlyTo preset="ramp-view">Look along the runway</FlyTo>
+
+Lay the glass sheet on the runway and let the car go again from the same height, in the same way. In this model it now rolls about <Num s="S1">80 cm</Num>. On the carpet strip it stops after about <Num s="S1">19 cm</Num>. Only the surface changed, so the surface made the difference. Record each surface with its distance and compare the bars on the graph: furthest on glass, shortest on carpet.
+
+Watch the car once it leaves the ramp. Nothing pushes it along the level runway, yet it keeps moving. A moving object does not need a push to keep going. Its push was not stored inside it to be slowly used up: friction from the surface slows it down until it stops.
+
+With less friction, the car would roll further. On a runway with no friction at all, nothing would change its motion, and it would keep going at the same speed in the same direction. Friction is not always a nuisance, though. A playground slide uses both sides of it: a smooth chute so that you slide down, and ridged steps so that your shoes grip on the way up.
+
+<Figure src="figures/forces-playground-slide" alt={{"en": "An empty playground slide with a smooth curved chute, steps with ridged treads and a rubber mat underneath.", "zh": "一座没有人的游乐场滑梯：光滑弯曲的滑道、有横纹的台阶，下面铺着橡胶垫。"}} caption={{"en": "A smooth chute to slide down, ridged steps to climb. Illustration for this topic.", "zh": "光滑的滑道让人滑下来，有横纹的台阶让人爬上去。为本主题画的示意图。"}} />
+
+<More title={{"en": "Why carpet slows the car so much", "zh": "地毯为什么让小车慢得这么快"}}>
+
+Carpet is soft as well as rough. As the wheels roll, they press the fibres down and the fibres spring up again behind them, which takes effort all the way along. Calling every difference a difference in roughness would leave this out. Which way friction acts on a rolling wheel is not needed here: it is enough that the surface slows the car.
+
+</More>
+
+<More title={{"en": "Twice the height, twice the distance", "zh": "高度加倍，距离也加倍"}}>
+
+Keep the wooden runway and change only the release height. In this model <Num s="S1">3 cm</Num>, <Num s="S1">6 cm</Num> and <Num s="S1">9 cm</Num> give about <Num s="S1">27 cm</Num>, <Num s="S1">53 cm</Num> and <Num s="S1">80 cm</Num>. Before rounding, doubling the height doubles the distance. This is a separate fair test from changing the surface, so record it in a table of its own.
+
+</More>
+
+<More title={{"en": "Repeat and average", "zh": "重复几次，取平均"}}>
+
+With real apparatus, the car never rolls exactly the same distance twice: a slightly different release or a speck of dust changes it. So each setting is usually tried several times, for example three, and the average is recorded. Run again gives the same result every time, because the model has no such small differences.
+
+</More>
+
+<More title={{"en": "About this model", "zh": "关于这个模型"}}>
+
+The distances are illustrative. The model makes the surfaces slow the car far more than they would slow a real toy car, so that every run ends on the bench: a real car would roll much further, especially on glass. The order of the surfaces is what the model gets right.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+抬起挡板，让小车从斜面上 <Num s="S1">6 cm</Num> 高处出发，不推它。在这个模型里，它在木跑道上滚了约 <Num s="S1">53 cm</Num> 才停下。从斜面底端量到小车，只算跑道上的距离。<FlyTo preset="ramp-view">顺着跑道看</FlyTo>
+
+在跑道上铺一块玻璃，让小车从同一高度、用同样的方式再出发一次。在这个模型里，它这次滚了约 <Num s="S1">80 cm</Num>。换成地毯，约 <Num s="S1">19 cm</Num> 就停了。只改变了表面，所以差别来自表面。把每种表面和滚出的距离记下来，比一比图上的条形：在玻璃上最远，在地毯上最近。
+
+看小车离开斜面以后的样子。在水平的跑道上，没有东西推它，它却还在往前走。运动的物体不需要一直有东西推着，才能继续动。推它的力也没有存在车里，一点一点被用完：是表面的摩擦力让它慢下来，直到停住。
+
+摩擦越小，小车就滚得越远。如果跑道完全没有摩擦，就没有东西改变它的运动，它会一直以同样的快慢、朝同一个方向走下去。不过摩擦力并不总是讨厌的。游乐场的滑梯就同时用到了摩擦的两面：滑道很光滑，让你滑得下来；台阶有横纹，让你爬上去时鞋子抓得住。
+
+<Figure src="figures/forces-playground-slide" alt={{"en": "An empty playground slide with a smooth curved chute, steps with ridged treads and a rubber mat underneath.", "zh": "一座没有人的游乐场滑梯：光滑弯曲的滑道、有横纹的台阶，下面铺着橡胶垫。"}} caption={{"en": "A smooth chute to slide down, ridged steps to climb. Illustration for this topic.", "zh": "光滑的滑道让人滑下来，有横纹的台阶让人爬上去。为本主题画的示意图。"}} />
+
+<More title={{"en": "Why carpet slows the car so much", "zh": "地毯为什么让小车慢得这么快"}}>
+
+地毯不只是粗糙，还很软。车轮滚过时，把绒毛压下去，绒毛又在车轮后面弹起来，一路都很费劲。把所有的差别都说成粗糙程度不同，就漏掉了这一点。滚动的车轮受到的摩擦力朝哪个方向，这里不用管：知道是表面让小车慢下来就够了。
+
+</More>
+
+<More title={{"en": "Twice the height, twice the distance", "zh": "高度加倍，距离也加倍"}}>
+
+木跑道不变，只改变释放高度。在这个模型里，<Num s="S1">3 cm</Num>、<Num s="S1">6 cm</Num>、<Num s="S1">9 cm</Num> 分别滚出约 <Num s="S1">27 cm</Num>、<Num s="S1">53 cm</Num>、<Num s="S1">80 cm</Num>。不算四舍五入的话，高度加倍，距离也正好加倍。这和改变表面是两个不同的公平测试，要分开记在两张表里。
+
+</More>
+
+<More title={{"en": "Repeat and average", "zh": "重复几次，取平均"}}>
+
+用真的器材做，小车两次滚出的距离从来不会完全一样：放手时稍有不同，或者多了一点灰尘，距离就变了。所以每种设置通常要做几次，比如三次，再记下平均值。“再跑一次”每次给出的结果都一样，因为模型里没有这些细小的差别。
+
+</More>
+
+<More title={{"en": "About this model", "zh": "关于这个模型"}}>
+
+这些距离是示意值。为了让每一次都能在实验台上跑完，模型让各种表面减慢小车的本事，比对真实玩具车大得多：真的小车会滚得远得多，在玻璃上尤其如此。模型说对的，是几种表面的先后顺序。
+
+</More>
+
+</Lang>

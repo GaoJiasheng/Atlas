@@ -1,0 +1,131 @@
+---
+id: "elastic-spring-force"
+order: 5
+title: {"en": "Elastic spring force", "zh": "弹簧的弹力"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: false
+  cutaway: "none"
+  layers: ["ramp", "friction", "spring", "drop", "brake", "everyday", "arrows"]
+  hide: ["push-rod", "wheel", "wheel-stand", "brake-caliper", "brake-lever", "brake-cable"]
+  labels: ["test-spring", "spring-ruler", "weigh-balance"]
+  camera: {"position": [0.32, 0.34, 1.05], "target": [0.17, 0.27, -0.25], "fov": 30}
+  summary: {"en": "A stretched spring pulls back towards its own length; up to a limit, each extra 50 g stretches it by the same amount, and that is how a spring balance works.", "zh": "被拉长的弹簧要回到原来的长度；在一定限度内，每多挂 50 g，就多伸长同样一段，弹簧秤就是这样工作的。"}
+  sim:
+    set: {"spring-load": 0}
+    try:
+      vary: "spring-load"
+      also: ["unload"]
+      keep: [{"en": "Same spring", "zh": "同一根弹簧"}]
+      observe: ["extension", "load-weight"]
+      record: {"chart": {"y": "extension"}}
+      predict:
+        prompt: {"en": "Go from 100 grams to 200 grams. What happens to the extension?", "zh": "从一百克加到两百克，伸长会怎样？"}
+        start: {"spring-load": 100, "unload": false}
+        change: {"spring-load": 200}
+        observe: "extension"
+        options:
+          - {"id": "more", "label": {"en": "It gets bigger", "zh": "变大"}, "means": "more"}
+          - {"id": "less", "label": {"en": "It gets smaller", "zh": "变小"}, "means": "less"}
+          - {"id": "same", "label": {"en": "It stays the same", "zh": "不变"}, "means": "same"}
+  beats:
+    - sim: {"set": {"spring-load": 50}}
+      labels: ["test-spring", "mass-hanger", "spring-ruler"]
+      caption: {"en": "Hang the fifty gram hanger on the spring. It stretches, bounces a few times and settles one centimetre longer in this model.", "zh": "把五十克的挂钩挂上弹簧。弹簧伸长，弹了几下，停下时在这个模型里比原来长了一厘米。"}
+    - sim: {"set": {"spring-load": 50}}
+      camera: {"position": [0.22, 0.42, 0.25], "target": [0.15, 0.37, -0.25], "fov": 30}
+      labels: ["mass-hanger", "test-spring"]
+      caption: {"en": "The hanger is still, but two forces act on it: gravity pulls it down, in blue, and the stretched spring pulls it up, in green, just as hard.", "zh": "挂钩不动，但它身上有两个力：重力把它往下拉，画成蓝色；被拉长的弹簧把它往上拉，画成绿色，两个力一样大。"}
+    - sim: {"set": {"spring-load": 200}}
+      labels: ["slotted-masses", "spring-ruler", "test-spring"]
+      caption: {"en": "Add slotted masses one at a time. In this model every fifty grams stretches the spring one more centimetre: two hundred grams, four centimetres.", "zh": "一片一片加上槽码。在这个模型里，每多五十克，弹簧就多伸长一厘米：两百克，伸长四厘米。"}
+    - sim: {"set": {"spring-load": 300}}
+      labels: ["test-spring", "spring-ruler", "weigh-balance"]
+      caption: {"en": "Record each load and its extension, and the graph is a straight line up to three hundred grams. The spring balance on the other end of the arm works the same way, with its scale in newtons.", "zh": "把每次的载荷和伸长记下来，到三百克为止，图上是一条直线。横杆另一端的弹簧秤也是这个道理，只是刻度标的是牛顿。"}
+    - sim: {"set": {"spring-load": 400}}
+      labels: ["test-spring", "slotted-masses", "spring-ruler"]
+      caption: {"en": "Hang four hundred grams. In this model the spring stretches nine point two centimetres, much more than the straight line would give.", "zh": "挂上四百克。在这个模型里，弹簧伸长九点二厘米，比照那条直线算出来的多得多。"}
+    - sim: {"set": {"spring-load": 400, "unload": true}}
+      labels: ["test-spring", "spring-ruler"]
+      caption: {"en": "Take the masses off. The spring stays one point two centimetres longer than it was: pulled too far, a spring is damaged.", "zh": "取下砝码。弹簧比原来长了一点二厘米，回不去了：拉过了头，弹簧就坏了。"}
+  index: {"parts": ["retort-stand", "test-spring", "mass-hanger", "slotted-masses", "spring-ruler", "weigh-balance"]}
+---
+
+<Lang en>
+
+Hang the <Num s="S1">50 g</Num> mass hanger on the spring. The spring stretches, bounces a few times and settles. In this model it is now <Num s="S1">1.0 cm</Num> longer than its own length of <Num s="S1">8.0 cm</Num>. That extra length is the <Term id="extension">extension</Term>. Read it on the ruler as the change in the pointer's position, not as the spring's whole length. <FlyTo preset="spring-view">Look at the spring stand</FlyTo>
+
+The hanger hangs still, yet two forces act on it. Gravitational force pulls it down. The stretched spring pulls it up: that pull is the elastic spring force. Once the hanger has settled, the two are the same size. A stretched spring always pulls back towards its own length; a squashed spring pushes back outwards.
+
+Add the slotted masses one at a time, counting the hanger in the load. In this model each <Num s="S1">50 g</Num> adds <Num s="S1">1.0 cm</Num> to the extension, up to <Num s="S1">300 g</Num>: <Num s="S1">200 g</Num> gives <Num s="S1">4.0 cm</Num>. Record each load with its extension. On the graph the points lie on a straight line, so you can read between them: <Num s="S1">175 g</Num> would give about <Num s="S1">3.5 cm</Num>.
+
+A spring balance works the same way. A bigger pull stretches its spring further, and the scale beside the pointer is marked in newtons instead of centimetres.
+
+A spring can be damaged. With <Num s="S1">400 g</Num> hanging from it, this model spring stretches <Num s="S1">9.2 cm</Num>, much more than the straight line would give. Take the masses off and it stays <Num s="S1">1.2 cm</Num> longer than before. Pulled too far, a spring does not go back to its own length.
+
+<More title={{"en": "Elastic limit", "zh": "弹性限度"}}>
+
+The load beyond which a spring no longer goes back to its own length is its elastic limit. In this model it is <Num s="S1">300 g</Num>; after <Num s="S1">350 g</Num> the spring stays <Num s="S1">0.4 cm</Num> longer, and after <Num s="S1">400 g</Num>, <Num s="S1">1.2 cm</Num> longer. Real springs have their own limits. Do not test a classroom spring by overloading it.
+
+</More>
+
+<More title={{"en": "Springs that push", "zh": "往外推的弹簧"}}>
+
+Squash a spring and it pushes outwards as it tries to get back to its own length. A click pen uses a small squashed spring to push its tip back in, and a sprung mattress has hundreds of them.
+
+</More>
+
+<More title={{"en": "Stored energy", "zh": "储存的能量"}}>
+
+A stretched or squashed spring stores energy: let it go and it can throw something or set something moving. How stored energy changes into motion, sound and heat is a topic of its own.
+
+</More>
+
+<More title={{"en": "About this model", "zh": "关于这个模型"}}>
+
+The rule that the extension goes up in equal steps for equal loads, up to a limit, is named after Robert Hooke; you will meet it again in later science. The model spring's numbers, <Num s="S1">1.0 cm</Num> for each <Num s="S1">50 g</Num> and a limit at <Num s="S1">300 g</Num>, are illustrative, not measured on a particular spring. The bounce after each new load is drawn so that you can see the spring settle.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+把 <Num s="S1">50 g</Num> 的砝码挂钩挂上弹簧。弹簧伸长，弹了几下，停了下来。在这个模型里，它比原来的长度 <Num s="S1">8.0 cm</Num> 长了 <Num s="S1">1.0 cm</Num>。多出来的这段长度叫<Term id="extension">伸长</Term>。在竖尺上读的是指针位置的变化，而不是弹簧的总长度。<FlyTo preset="spring-view">看弹簧架</FlyTo>
+
+挂钩静静地挂着，身上却有两个力。重力把它往下拉；被拉长的弹簧把它往上拉，这个拉力就是弹簧的弹力。挂钩停稳以后，这两个力一样大。被拉长的弹簧总想缩回原来的长度；被压短的弹簧则往外推。
+
+一片一片加上槽码，挂钩本身也算在载荷里。在这个模型里，<Num s="S1">300 g</Num> 以内，每多 <Num s="S1">50 g</Num>，伸长就多 <Num s="S1">1.0 cm</Num>：<Num s="S1">200 g</Num> 时伸长 <Num s="S1">4.0 cm</Num>。把每次的载荷和伸长记下来。图上的点连成一条直线，所以两点之间也能读：<Num s="S1">175 g</Num> 大约伸长 <Num s="S1">3.5 cm</Num>。
+
+弹簧秤也是这个道理。拉力越大，里面的弹簧伸得越长；指针旁边的刻度标的不是厘米，而是牛顿。
+
+弹簧也会坏。挂上 <Num s="S1">400 g</Num>，这个模型里的弹簧伸长 <Num s="S1">9.2 cm</Num>，比照那条直线算出来的多得多。取下砝码，它比原来长了 <Num s="S1">1.2 cm</Num>。拉过了头，弹簧就回不到原来的长度了。
+
+<More title={{"en": "Elastic limit", "zh": "弹性限度"}}>
+
+超过某个载荷，弹簧就回不到原来的长度，这个载荷叫弹性限度。在这个模型里是 <Num s="S1">300 g</Num>；挂过 <Num s="S1">350 g</Num> 后弹簧长了 <Num s="S1">0.4 cm</Num>，挂过 <Num s="S1">400 g</Num> 后长了 <Num s="S1">1.2 cm</Num>。真实的弹簧各有各的限度。不要故意挂太重来试课室里的弹簧。
+
+</More>
+
+<More title={{"en": "Springs that push", "zh": "往外推的弹簧"}}>
+
+把弹簧压短，它就往外推，想回到原来的长度。按压式圆珠笔里有一根被压短的小弹簧，把笔尖推回去；弹簧床垫里有好几百根这样的弹簧。
+
+</More>
+
+<More title={{"en": "Stored energy", "zh": "储存的能量"}}>
+
+被拉长或压短的弹簧储存着能量：一放手，它就能把东西弹出去，或者让东西动起来。储存的能量怎样变成运动、声音和热，是另一个专题要讲的。
+
+</More>
+
+<More title={{"en": "About this model", "zh": "关于这个模型"}}>
+
+“在一定限度内，载荷每增加同样多，伸长也增加同样多”，这条规律以罗伯特·胡克的名字命名，以后的科学课还会学到。模型弹簧的数字（每 <Num s="S1">50 g</Num> 伸长 <Num s="S1">1.0 cm</Num>，限度 <Num s="S1">300 g</Num>）是示意值，不是在哪一根具体的弹簧上量出来的。每次加了载荷后的弹跳，是为了让你看到弹簧怎样停稳。
+
+</More>
+
+</Lang>

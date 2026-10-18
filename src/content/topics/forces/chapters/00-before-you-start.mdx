@@ -1,0 +1,87 @@
+---
+id: "before-you-start"
+order: 0
+kind: background
+title: {"en": "Before you start", "zh": "开始之前"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: false
+  cutaway: "none"
+  layers: ["ramp", "friction", "spring", "drop", "brake", "everyday"]
+  hide: ["push-rod"]
+  labels: ["ramp-board", "wooden-block", "test-spring", "drop-stand", "wheel"]
+  camera: {"position": [1.95, 1.3, 4.7], "target": [0.3, -0.28, 0.0], "fov": 30}
+  summary: {"en": "A bench of five sets of apparatus for exploring forces; in each chapter you change one thing and watch what happens.", "zh": "一张实验台、五套器材，用来探究力；每一章你只改变一样东西，看会发生什么。"}
+  note: {"en": "The numbers on this bench come from a simple model of each experiment, worked out the same way every time. They show the right patterns; real measurements would differ a little.", "zh": "这张实验台上的数字来自每个实验的一个简单模型，每次算出来都一样。规律是对的；真实测量会有些出入。"}
+  beats:
+    - labels: ["ramp-board", "wooden-block", "test-spring", "drop-stand", "wheel"]
+      caption: {"en": "This bench holds five sets of apparatus for exploring forces: a ramp and runway, a friction board, a spring stand, a drop tower on the floor and a bicycle wheel with a brake.", "zh": "这张实验台上有五套探究力的器材：斜面和跑道、摩擦板、弹簧架、立在地上的落体架，还有一只带刹车的自行车轮。"}
+    - camera: "ramp-view"
+      labels: ["toy-car", "ramp-board", "runway", "metre-rule"]
+      caption: {"en": "In each chapter you change one thing, such as the surface under this car, and keep everything else the same. That is a fair test.", "zh": "每一章你只改变一样东西，比如这辆小车下面的表面，其余都保持不变。这就是公平测试。"}
+    - camera: "spring-view"
+      sim: {"set": {"spring-load": 100}}
+      labels: ["test-spring", "mass-hanger", "slotted-masses", "spring-ruler"]
+      caption: {"en": "Each result goes into a table, and the table becomes a graph. Here, in this model, the hanger and one slotted mass stretch the spring by two centimetres.", "zh": "每次的结果都记进表格，表格再画成图。在这个模型里，挂钩加一片槽码把弹簧拉长了两厘米。"}
+    - camera: "spring-view"
+      layers: ["ramp", "friction", "spring", "drop", "brake", "everyday", "arrows"]
+      sim: {"set": {"spring-load": 100}}
+      labels: ["mass-hanger", "test-spring"]
+      caption: {"en": "Coloured arrows show forces. The blue arrow is gravity pulling the hanger down; the green arrow is the stretched spring pulling it up.", "zh": "彩色箭头表示力。蓝色箭头是重力把挂钩往下拉，绿色箭头是被拉长的弹簧把它往上拉。"}
+  index: {"parts": ["ramp-board", "toy-car", "friction-board", "wooden-block", "test-spring", "slotted-masses", "drop-stand", "wheel"]}
+---
+
+<Lang en>
+
+This bench is set up to investigate <Term id="force">force</Term>. A force is a <Term id="push">push</Term> or a <Term id="pull">pull</Term>. On the bench are a ramp and runway for a toy car, a friction board with a wooden block, a spring stand, and a bicycle wheel with a brake. Beside the bench, a drop tower stands over a tray of sand on the floor. Each set of apparatus shows forces at work in a different way.
+
+Every chapter after this one has a Try it card. The card says what you change, what you keep the same and what you observe. To compare runway <Term id="surface">surfaces</Term>, for example, keep the same car and the same release height, and change only the surface under the car. Changing one thing at a time is a <Term id="fair-test">fair test</Term>: if the result changes, you know which change caused it.
+
+Record a row for each setting, then look for a pattern in the table and in the graph under it. A bar graph compares choices, such as surfaces; a line graph shows how a result changes as a number, such as the load on a spring, goes up. Run again, or the G key, plays the same run once more. It lets you watch the movement again, but it does not give a new result.
+
+Coloured arrows show the forces, one colour for each kind of force. The KEY beside the model names the kinds drawn at the moment. A longer arrow means a bigger force, and the Forces row under LAYERS turns the arrows off and on.
+
+Readings marked SIM come from a simple model of each experiment. For the same settings the model gives the same result every time. It shows the right patterns, but its numbers are not measurements: real apparatus would give slightly different readings, and real experiments are repeated.
+
+<More title={{"en": "How the arrows are drawn", "zh": "箭头是怎样画的"}}>
+
+An arrow's length grows in step with the size of the force, up to <Num s="S1">25 cm</Num>: a force twice as big has an arrow twice as long. Very small forces are not drawn. An arrow starts on the object the force acts on and points the way the force pushes or pulls it.
+
+</More>
+
+<More title={{"en": "About this model", "zh": "关于这个模型"}}>
+
+The bench is a design study of school science apparatus, not a particular product. Some numbers, such as how far the car rolls and how long the wheel takes to stop, are chosen so that every run fits on the bench and is easy to see. Their order is right; their sizes are not measurements. Use the readings to compare settings with each other.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+这张实验台是用来探究<Term id="force">力</Term>的。力就是<Term id="push">推</Term>或<Term id="pull">拉</Term>。台上有让玩具车滚动的斜面和跑道、放着木块的摩擦板、弹簧架，还有一只带刹车的自行车轮。实验台旁边的地上立着一座落体架，下面是一盘沙。每一套器材都从不同的角度，让我们看到力在起作用。
+
+从下一章起，每章都有一张“试一试”卡片。卡片上写着改变什么、保持什么不变、观察什么。比如要比较跑道的表面，就用同一辆车、从同一高度放手，只改变车下面的<Term id="surface">表面</Term>。一次只改变一样东西，叫作<Term id="fair-test">公平测试</Term>：结果变了，就知道是哪一样改变造成的。
+
+每种设置记一行，再从表格和表格下面的图里找规律。条形图适合比较几种选择，比如几种表面；折线图适合看一个数（比如弹簧上的载荷）增大时，结果怎样跟着变。按“再跑一次”或 G 键，可以把同一次实验再看一遍；它让你再看一次过程，但不会得出新的结果。
+
+彩色箭头表示力，每一种力用一种颜色。模型旁边的图例（KEY）写出此刻画着的是哪几种力。箭头越长，力越大；图层（LAYERS）里“力”这一行可以开关箭头。
+
+标着 SIM 的读数来自每个实验的一个简单模型。设置相同，模型每次给出的结果都一样。它显示的规律是对的，但数字不是实测值：真实器材的读数会有些出入，真实的实验也要重复做几次。
+
+<More title={{"en": "How the arrows are drawn", "zh": "箭头是怎样画的"}}>
+
+箭头的长短跟着力的大小变，最长 <Num s="S1">25 cm</Num>：大一倍的力，箭头也长一倍。很小的力不画。箭头从受力的物体上出发，指向力推它或拉它的方向。
+
+</More>
+
+<More title={{"en": "About this model", "zh": "关于这个模型"}}>
+
+这张实验台是学校科学器材的设计研究，不代表任何具体产品。有些数字，比如小车滚多远、轮子多久停下，是为了让每一次都能在台上做完、看得清楚而取的。它们的先后顺序是对的，大小却不是实测值。读数用来互相比较不同的设置。
+
+</More>
+
+</Lang>

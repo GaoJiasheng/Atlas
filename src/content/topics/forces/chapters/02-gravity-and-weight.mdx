@@ -1,0 +1,143 @@
+---
+id: "gravity-and-weight"
+order: 2
+title: {"en": "Gravity and weight", "zh": "重力与重量"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: false
+  cutaway: "none"
+  layers: ["ramp", "friction", "spring", "drop", "brake", "everyday", "arrows"]
+  hide: ["push-rod"]
+  labels: ["steel-ball-small", "steel-ball-large", "release-clamps", "drop-stand"]
+  camera: {"position": [1.5, 0.0, 3.6], "target": [1.12, -0.42, 0.05], "fov": 30}
+  summary: {"en": "Gravity pulls things towards the ground without touching them; a light and a heavy ball fall together, and the pull of gravity on an object is its weight.", "zh": "重力不用接触，就把东西拉向地面；轻重两只钢球同时落地；重力对物体的拉力就是它的重量。"}
+  sim:
+    set: {"pair": "balls", "drop-height": 1.0}
+    try:
+      vary: "pair"
+      also: ["weigh"]
+      keep: ["drop-height", {"en": "Let go together", "zh": "同时放手"}]
+      observe: ["t-left", "t-right", "landing", "weight"]
+      record: {"chart": {"y": ["t-left", "t-right"]}}
+      replay: true
+      predict:
+        prompt: {"en": "Let go of the small and the big steel ball together. Which lands first?", "zh": "小钢球和大钢球同时放手，哪一只先落地？"}
+        start: {"pair": "ball-paper"}
+        change: {"pair": "balls"}
+        observe: "landing"
+        options:
+          - {"id": "big", "label": {"en": "The big ball", "zh": "大钢球"}, "means": "right-first"}
+          - {"id": "small", "label": {"en": "The small ball", "zh": "小钢球"}, "means": "left-first"}
+          - {"id": "together", "label": {"en": "They land together", "zh": "同时落地"}, "means": "together"}
+  beats:
+    - labels: ["steel-ball-small", "steel-ball-large", "release-clamps", "drop-stand"]
+      caption: {"en": "Two steel balls hung side by side, one metre above the sand: a small one of twenty-eight grams and a big one of two hundred and twenty-four grams, eight times as heavy. The clamps let go of both at once.", "zh": "两只钢球并排挂在沙面上方一米处：小的二十八克，大的二百二十四克，是小球的八倍重。夹子同时松开了两只球。"}
+    - camera: {"position": [1.48, -0.36, 0.88], "target": [1.17, -0.66, 0.12], "fov": 30}
+      labels: ["steel-ball-small", "steel-ball-large", "sand-tray"]
+      caption: {"en": "Nothing touched them, yet gravity pulled both down. Shown four times slower, they landed in the sand at the same moment: in this model both took about zero point four five seconds.", "zh": "没有东西碰它们，重力却把两只球都拉了下来。画面放慢了四倍：它们同时落进沙里。在这个模型里，两只球都用了约零点四五秒。"}
+    - sim: {"set": {"drop-height": 1.5}}
+      camera: {"position": [1.65, 0.15, 5.2], "target": [1.12, -0.32, 0.05], "fov": 30}
+      labels: ["release-clamps", "steel-ball-small", "steel-ball-large"]
+      caption: {"en": "Raise the clamps to one and a half metres and let go again. In this model both balls now take about zero point five five seconds: still together. Being heavier does not make the big ball fall faster.", "zh": "把夹子升到一点五米，再放一次。在这个模型里，两只球这次都用了约零点五五秒，仍然同时落地。更重并没有让大球落得更快。"}
+    - sim: {"set": {"pair": "papers"}}
+      camera: {"position": [1.48, -0.36, 0.88], "target": [1.17, -0.66, 0.12], "fov": 30}
+      labels: ["paper-crumpled", "paper-flat", "sand-tray"]
+      caption: {"en": "Now two matching sheets of paper, one crumpled into a ball. In this model the ball landed in under half a second; the flat sheet took about one second, because the air pushes back much harder on it.", "zh": "换成两张一样的纸，一张揉成团。在这个模型里，纸团不到半秒就落地；摊平的纸用了约一秒，因为空气对它向上推得多得多。"}
+    - sim: {"set": {"weigh": "large-ball"}}
+      camera: {"position": [0.42, 0.4, 0.75], "target": [0.25, 0.3, -0.25], "fov": 30}
+      hide: ["push-rod", "wheel", "wheel-stand", "brake-caliper", "brake-lever", "brake-cable"]
+      labels: ["weigh-balance", "weigh-balance-pointer", "steel-ball-large", "weigh-cradle"]
+      caption: {"en": "Hang the big ball on a spring balance. In this model it reads about two point two newtons. That is its weight: the pull of gravity on it.", "zh": "把大钢球挂在弹簧秤上，在这个模型里读数约二点二牛顿。这就是它的重量：重力对它的拉力。"}
+  index: {"parts": ["drop-stand", "release-clamps", "steel-ball-small", "steel-ball-large", "paper-crumpled", "paper-flat", "sand-tray", "weigh-balance", "weigh-cradle"]}
+---
+
+<Lang en>
+
+Two steel balls hang from the drop tower, side by side, their bottoms <Num s="S1">1.0 m</Num> above a tray of sand. In this design their <Term id="mass">masses</Term> are <Num s="S1">28 g</Num> and <Num s="S1">224 g</Num>. The big ball is twice as wide, so it holds eight times as much steel. Mass tells you how much matter an object has. <FlyTo preset="tower-view">Look at the drop tower</FlyTo>
+
+Open the clamps and both balls fall. Nothing touches them, yet gravitational force pulls them towards the Earth. In this model each ball takes about <Num s="S1">0.45 s</Num> to fall the metre, so they land together. The run is shown slowed down <Num s="S1">4 times</Num> so that you can follow it; the times on the card are the times in the model. Being heavier does not make the big ball fall faster.
+
+Now drop two matching sheets of paper, one crumpled into a ball and one kept flat. They have the same mass, about <Num s="S27">5 g</Num>. In this model the crumpled sheet takes <Num s="S1">0.46 s</Num> and the flat sheet <Num s="S1">1.00 s</Num>. The air pushes back on the wide, flat sheet much more, so it drifts down slowly. The difference comes from the air, not from the weight. Keep the drop height the same for every pair you compare.
+
+Hang the big ball on a <Term id="spring-balance">spring balance</Term> and it reads about <Num s="S1">2.2 N</Num> in this model. N stands for <Term id="newton">newton</Term>, the unit of force. This reading is the ball's <Term id="weight">weight</Term>: the pull of gravity on it. Objects have weight because gravity pulls on them. The small ball weighs about <Num s="S1">0.3 N</Num>. A sheet of paper, about <Num s="S1">0.05 N</Num>, is too light for this balance to show.
+
+<More title={{"en": "Air resistance", "zh": "空气阻力"}}>
+
+The push of the air on something moving through it is called air resistance. It grows as the object moves faster, so a flat sheet soon stops speeding up: in this model it falls at a steady speed of about <Num s="S1">1.1 m/s</Num>. For the steel balls the air's push is tiny compared with their weight. Real paper tips, flutters and slides sideways, so its real fall is less regular than the model's.
+
+</More>
+
+<More title={{"en": "The hammer and the feather", "zh": "锤子和羽毛"}}>
+
+On the Moon there is almost no air. In 1971 the Apollo 15 astronaut David Scott let go of a <Num s="S11">1.32 kg</Num> aluminium hammer and a falcon feather at the same moment. With no air to push back on the feather, they reached the ground together.
+
+</More>
+
+<More title={{"en": "Mass and weight", "zh": "质量和重量"}}>
+
+Mass is measured in grams or kilograms, and it stays the same wherever the object is. Weight is a force, measured in newtons. On the Moon gravity pulls about <Num s="S10">0.165</Num> times as hard as on the Earth, so the big ball would still have a mass of <Num s="S1">224 g</Num> but would weigh only about <Num s="S1">0.4 N</Num>. On the Earth each kilogram weighs about <Num s="S8">9.8 N</Num>. Measuring forces in newtons and comparing mass with weight come again in lower secondary science.
+
+</More>
+
+<More title={{"en": "Forces in a lift", "zh": "电梯里的力"}}>
+
+In a lift, steel ropes run over a grooved wheel at the top of the shaft. One end holds the lift car and the other a heavy counterweight that slides up and down its own rails. The ropes pull the car up while gravity pulls it down. Even when the car stands still at a floor, both forces act on it.
+
+<Figure src="figures/forces-lift" alt={{"en": "A lift shaft drawn cut open: the lift car and a counterweight hang from steel ropes that pass over a grooved wheel at the top.", "zh": "剖开的电梯井：电梯轿厢和对重挂在钢缆两端，钢缆绕过顶上带槽的轮子。"}} caption={{"en": "A lift car and its counterweight hang from steel ropes over a wheel at the top of the shaft. Illustration for this topic.", "zh": "电梯轿厢和对重挂在钢缆两端，钢缆绕过井顶的轮子。为本主题画的示意图。"}} />
+
+</More>
+
+<More title={{"en": "Safety", "zh": "安全"}}>
+
+The drop tower stands over a tray of sand on the floor, and nothing is dropped from higher than <Num s="S1">1.5 m</Num>. Never drop things from a height where someone could be below: in a block of flats, anything thrown or knocked out of a window can kill. In Singapore this is called killer litter.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+两只钢球并排挂在落体架上，球底离下面的沙盘 <Num s="S1">1.0 m</Num>。本设计里，它们的<Term id="mass">质量</Term>分别是 <Num s="S1">28 g</Num> 和 <Num s="S1">224 g</Num>。大球的直径是小球的两倍，钢的量就是小球的八倍。质量表示物体含有多少物质。<FlyTo preset="tower-view">看落体架</FlyTo>
+
+夹子一松，两只球一起落下。没有东西碰它们，重力却把它们拉向地球。在这个模型里，每只球落下这一米都用了约 <Num s="S1">0.45 s</Num>，所以同时落地。画面放慢了 <Num s="S1">4 倍</Num>，好让你看清下落的过程；卡片上的时间是模型里的时间。更重，并没有让大球落得更快。
+
+再换两张一样的纸，一张揉成团，一张摊平。它们的质量相同，都约 <Num s="S27">5 g</Num>。在这个模型里，纸团用了 <Num s="S1">0.46 s</Num>，摊平的纸用了 <Num s="S1">1.00 s</Num>。空气对又宽又平的纸片向上推得多得多，所以它慢慢飘下来。差别来自空气，而不是来自重量。比较每一对物体时，下落高度都要保持不变。
+
+把大钢球挂在<Term id="spring-balance">弹簧秤</Term>上，在这个模型里读数约 <Num s="S1">2.2 N</Num>。N 代表<Term id="newton">牛顿</Term>，是力的单位。这个读数就是钢球的<Term id="weight">重量</Term>：重力对它的拉力。物体有重量，是因为重力在拉它。小钢球的重量约 <Num s="S1">0.3 N</Num>；一张纸约 <Num s="S1">0.05 N</Num>，太轻了，这只秤读不出来。
+
+<More title={{"en": "Air resistance", "zh": "空气阻力"}}>
+
+空气对在它里面运动的物体的推力，叫作空气阻力。物体动得越快，空气阻力越大，所以摊平的纸很快就不再加快：在这个模型里，它以约 <Num s="S1">1.1 m/s</Num> 的速度匀速下落。对钢球来说，空气的推力和它们的重量比起来小得可以不管。真的纸会翻转、飘动、往旁边滑，下落比模型里的不规则。
+
+</More>
+
+<More title={{"en": "The hammer and the feather", "zh": "锤子和羽毛"}}>
+
+月球上几乎没有空气。1971 年，阿波罗 15 号的宇航员戴维·斯科特把一把 <Num s="S11">1.32 kg</Num> 的铝锤和一根隼的羽毛同时放手。没有空气向上推羽毛，两样东西同时落到月面上。
+
+</More>
+
+<More title={{"en": "Mass and weight", "zh": "质量和重量"}}>
+
+质量用克或千克作单位，物体到哪里质量都不变。重量是一种力，用牛顿作单位。月球对物体的拉力约是地球的 <Num s="S10">0.165</Num> 倍，所以大钢球到了月球，质量仍是 <Num s="S1">224 g</Num>，重量却只有约 <Num s="S1">0.4 N</Num>。在地球上，每千克的重量约 <Num s="S8">9.8 N</Num>。用牛顿量力、比较质量和重量，初中科学还会再学。
+
+</More>
+
+<More title={{"en": "Forces in a lift", "zh": "电梯里的力"}}>
+
+电梯井顶上有一个带槽的轮子，钢缆绕过它：一端吊着电梯轿厢，另一端吊着一个沉重的对重，对重沿着自己的导轨上下滑动。钢缆把轿厢往上拉，重力把它往下拉。轿厢停在某一层不动时，这两个力仍然都作用在它身上。
+
+<Figure src="figures/forces-lift" alt={{"en": "A lift shaft drawn cut open: the lift car and a counterweight hang from steel ropes that pass over a grooved wheel at the top.", "zh": "剖开的电梯井：电梯轿厢和对重挂在钢缆两端，钢缆绕过顶上带槽的轮子。"}} caption={{"en": "A lift car and its counterweight hang from steel ropes over a wheel at the top of the shaft. Illustration for this topic.", "zh": "电梯轿厢和对重挂在钢缆两端，钢缆绕过井顶的轮子。为本主题画的示意图。"}} />
+
+</More>
+
+<More title={{"en": "Safety", "zh": "安全"}}>
+
+落体架立在地上的沙盘旁边，落下的高度不超过 <Num s="S1">1.5 m</Num>。千万不要从高处往下扔东西，下面可能有人：在组屋里，从窗口扔出或碰落的东西可能致人死命，这就是“高空抛物”。
+
+</More>
+
+</Lang>

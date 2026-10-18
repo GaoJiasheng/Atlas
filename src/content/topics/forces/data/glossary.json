@@ -1,0 +1,148 @@
+{
+  "terms": [
+    {
+      "id": "force",
+      "term": { "en": "Force", "zh": "力" },
+      "definition": {
+        "en": "A push or a pull. A force can make a still object move, make a moving object speed up, slow down, stop or change direction, and change an object's shape.",
+        "zh": "推或拉。力能使静止的物体运动，使运动的物体加快、减慢、停下或改变方向，还能改变物体的形状。"
+      },
+      "see": ["push", "pull"]
+    },
+    {
+      "id": "push",
+      "term": { "en": "Push", "zh": "推力" },
+      "definition": {
+        "en": "A force that moves or tends to move something away from whatever is pushing it.",
+        "zh": "把物体往离开施力者的方向推、或要把它推开的力。"
+      },
+      "see": ["pull", "force"]
+    },
+    {
+      "id": "pull",
+      "term": { "en": "Pull", "zh": "拉力" },
+      "definition": {
+        "en": "A force that moves or tends to move something towards whatever is pulling it.",
+        "zh": "把物体往施力者这边拉、或要把它拉过来的力。"
+      },
+      "see": ["push", "force"]
+    },
+    {
+      "id": "stationary",
+      "term": { "en": "Stationary", "zh": "静止" },
+      "definition": {
+        "en": "Not moving. A stationary object can still have forces acting on it, as long as they balance.",
+        "zh": "没有在动。静止的物体身上也可以有力，只要这些力互相抵消。"
+      },
+      "see": ["motion"]
+    },
+    {
+      "id": "motion",
+      "term": { "en": "Motion", "zh": "运动" },
+      "definition": {
+        "en": "Movement: a change of position. A force can make motion faster or slower, stop it or change its direction.",
+        "zh": "位置在变。力能使运动变快、变慢、停下，或改变运动的方向。"
+      },
+      "see": ["stationary", "force"]
+    },
+    {
+      "id": "gravitational-force",
+      "term": { "en": "Gravitational force", "zh": "重力（地心引力）" },
+      "definition": {
+        "en": "The pull of the Earth on every object, towards the ground. It acts without contact.",
+        "zh": "地球对每个物体朝地面方向的拉力，不用接触就能起作用。也叫地心引力。"
+      },
+      "see": ["weight"]
+    },
+    {
+      "id": "weight",
+      "term": { "en": "Weight", "zh": "重量" },
+      "definition": {
+        "en": "The pull of gravity on an object, measured in newtons with a spring balance. Weight is not the same as mass. In Chinese, weight is 重量; 重力 is the force of gravity.",
+        "zh": "重力对物体的拉力，用弹簧秤量，单位是牛顿。重量和质量不同。注意：“重量”是 weight，“重力”是 gravitational force。"
+      },
+      "see": ["mass", "gravitational-force", "newton"]
+    },
+    {
+      "id": "mass",
+      "term": { "en": "Mass", "zh": "质量" },
+      "definition": {
+        "en": "How much matter an object has, measured in grams or kilograms. It stays the same wherever the object is, even on the Moon.",
+        "zh": "物体含有多少物质，用克或千克作单位。物体到哪里质量都不变，到了月球也一样。"
+      },
+      "see": ["weight"]
+    },
+    {
+      "id": "frictional-force",
+      "term": { "en": "Frictional force", "zh": "摩擦力" },
+      "definition": {
+        "en": "A force between two surfaces that rub, or are about to rub, against each other. It acts against the motion, or against the start of it.",
+        "zh": "两个表面互相擦过、或将要擦过时，两者之间的力。它阻碍运动，或阻碍物体开始运动。"
+      },
+      "see": ["surface"]
+    },
+    {
+      "id": "surface",
+      "term": { "en": "Surface", "zh": "表面" },
+      "definition": {
+        "en": "The outside layer of an object. Surfaces can be rough or smooth, hard or soft, and these change how much friction there is.",
+        "zh": "物体最外面的一层。表面有粗糙有光滑、有硬有软，这些都会影响摩擦力的大小。"
+      },
+      "see": ["frictional-force"]
+    },
+    {
+      "id": "elastic-spring-force",
+      "term": { "en": "Elastic spring force", "zh": "弹簧的弹力" },
+      "definition": {
+        "en": "The force of a stretched or squashed spring as it tries to get back to its own length: a stretched spring pulls back, a squashed one pushes outwards.",
+        "zh": "被拉长或压短的弹簧想回到原来长度时产生的力：拉长的弹簧往回拉，压短的弹簧往外推。"
+      },
+      "see": ["extension"]
+    },
+    {
+      "id": "extension",
+      "term": { "en": "Extension", "zh": "伸长" },
+      "definition": {
+        "en": "How much longer a spring is than its own length when it is stretched.",
+        "zh": "弹簧被拉长时，比原来的长度多出来的那一段。"
+      },
+      "see": ["elastic-spring-force"]
+    },
+    {
+      "id": "magnetic-force",
+      "term": { "en": "Magnetic force", "zh": "磁力" },
+      "definition": {
+        "en": "The push or pull between magnets, and the pull of a magnet on things made of iron or steel. It acts without contact.",
+        "zh": "磁铁之间的推或拉，以及磁铁对铁或钢制物品的吸引。它不用接触就能起作用。"
+      },
+      "see": ["force"]
+    },
+    {
+      "id": "spring-balance",
+      "term": { "en": "Spring balance", "zh": "弹簧秤" },
+      "definition": {
+        "en": "An instrument that measures a force, such as a pull or a weight, by how far it stretches a spring. Its scale is marked in newtons.",
+        "zh": "用弹簧伸长了多少来量力（比如拉力或重量）的器材，刻度以牛顿为单位。"
+      },
+      "see": ["newton"]
+    },
+    {
+      "id": "newton",
+      "term": { "en": "Newton (N)", "zh": "牛顿（N）" },
+      "definition": {
+        "en": "The unit of force. In this topic newtons are only read from a spring balance, not worked out.",
+        "zh": "力的单位。这一课里只从弹簧秤上读牛顿，不做计算。"
+      },
+      "see": ["spring-balance", "weight"]
+    },
+    {
+      "id": "fair-test",
+      "term": { "en": "Fair test", "zh": "公平测试" },
+      "definition": {
+        "en": "An experiment in which only one thing is changed at a time and everything else is kept the same, so that any change in the result comes from that one thing.",
+        "zh": "一次只改变一样东西、其余都保持不变的实验。这样结果有变化，就知道是那一样东西造成的。"
+      },
+      "see": ["force"]
+    }
+  ]
+}

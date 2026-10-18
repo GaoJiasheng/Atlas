@@ -1,0 +1,16 @@
+# MOE P6 Interaction of Forces (frictional, gravitational, elastic spring force); docs/30, decisions taken 2026-10-18.
+id: forces
+title: { en: "Forces", zh: "力" }
+subtitle: { en: "Push, pull, friction, springs and gravity on a science bench", zh: "在科学实验台上探究推、拉、摩擦、弹簧与重力" }
+subject: science
+tags: [singapore, psle, p6, forces, space]
+moe: []
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: published
+illustration: forces
+shortTitle: { en: "Forces", zh: "力" }
+note: { en: "Generic design study · a school science bench · not a specific product", zh: "通用设计研究 · 小学科学实验台 · 不代表任何具体产品" }

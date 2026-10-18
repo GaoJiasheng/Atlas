@@ -1,0 +1,129 @@
+---
+id: "friction-starting"
+order: 3
+title: {"en": "Friction: getting things moving", "zh": "摩擦力：让东西动起来"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: false
+  cutaway: "none"
+  layers: ["ramp", "friction", "spring", "drop", "brake", "everyday", "arrows"]
+  hide: ["release-gate", "ramp-board", "ramp-block", "push-rod"]
+  labels: ["wooden-block", "pull-balance", "friction-board"]
+  camera: {"position": [-0.5, 0.62, 0.62], "target": [-0.53, 0.0, -0.11], "fov": 30}
+  summary: {"en": "Friction acts between two surfaces even before they slide; a rougher lane or a heavier block needs a bigger pull to get moving.", "zh": "两个表面之间，还没滑动就已经有摩擦力；道越粗糙、木块越重，拉动它所需的力就越大。"}
+  sim:
+    set: {"lane": "wood", "block-load": 0}
+    try:
+      vary: "lane"
+      keep: ["block-load", {"en": "Same block", "zh": "同一块木块"}, {"en": "Pull level and steady", "zh": "水平、平稳地拉"}]
+      observe: ["f-start", "f-move"]
+      record: {"chart": true}
+      replay: true
+      predict:
+        prompt: {"en": "Move the block from the glass lane to the sandpaper. Will the pull needed to start it be more, less or the same?", "zh": "把木块从玻璃道移到砂纸道。开始滑动所需的拉力会变大、变小，还是一样？"}
+        start: {"lane": "glass"}
+        change: {"lane": "sandpaper"}
+        observe: "f-start"
+        options:
+          - {"id": "more", "label": {"en": "More", "zh": "变大"}, "means": "more"}
+          - {"id": "less", "label": {"en": "Less", "zh": "变小"}, "means": "less"}
+          - {"id": "same", "label": {"en": "The same", "zh": "一样"}, "means": "same"}
+  beats:
+    - labels: ["wooden-block", "pull-balance", "pull-string", "friction-board"]
+      caption: {"en": "A cord joins the wooden block to a spring balance. The cord is level, so the balance measures a level pull, in newtons.", "zh": "一根线把木块和弹簧秤连起来。线是水平的，所以弹簧秤量的是水平方向的拉力，单位是牛顿。"}
+    - sim: {"set": {"hold": true}}
+      labels: ["wooden-block", "pull-balance-pointer"]
+      caption: {"en": "Pull gently. The reading climbs, but the block stays still: friction between the surfaces pulls back just as hard. A still object can have forces acting on it.", "zh": "轻轻地拉。读数在升，木块却不动：两个表面之间的摩擦力往回拉，和拉力一样大。不动的物体身上也可以有力。"}
+    - labels: ["wooden-block", "pull-balance-pointer"]
+      caption: {"en": "In this model the block starts to slide at about one newton. Once it is moving, a pull of about zero point six newtons keeps it sliding.", "zh": "在这个模型里，拉到约一牛顿，木块开始滑动。滑起来以后，约零点六牛顿的拉力就能让它一直滑下去。"}
+    - sim: {"set": {"lane": "sandpaper"}}
+      labels: ["sandpaper-lane", "glass-lane", "wooden-block"]
+      caption: {"en": "On sandpaper the block needs about one point eight newtons to start; on glass, only about zero point five. For these surfaces, the rougher the lane, the greater the friction.", "zh": "在砂纸上，木块要约一点八牛顿才开始滑；在玻璃上只要约零点五牛顿。就这几种表面来说，越粗糙，摩擦力越大。"}
+    - sim: {"set": {"block-load": 400}}
+      labels: ["brass-weights", "wooden-block"]
+      caption: {"en": "Back on wood, add both brass weights. The heavier block presses harder on the lane and needs about two point nine newtons to start.", "zh": "回到木面道，放上两只黄铜砝码。木块更重，压得更紧，要约二点九牛顿才开始滑。"}
+  index: {"parts": ["friction-board", "glass-lane", "sandpaper-lane", "wooden-block", "brass-weights", "pull-balance", "pull-balance-pointer", "pull-string"]}
+---
+
+<Lang en>
+
+A cord joins the wooden block to a spring balance. The cord is level with the lane, so the balance measures a level pull, in newtons. Start on the wooden lane with no weights on the block. You will compare two readings: the pull needed to start the block sliding, and the pull needed to keep it sliding steadily. <FlyTo preset="board-view">Look at the friction board</FlyTo>
+
+Pull gently and the reading climbs, but the block stays where it is. Frictional force between the block and the lane pulls back just as hard as you pull. So a still block can have forces acting on it: here, the pull and friction, the same size and in opposite directions. Friction is there before anything slides.
+
+In this model the block starts to slide when the pull reaches about <Num s="S1">1.0 N</Num>. Once it is sliding, the reading drops to about <Num s="S1">0.6 N</Num>, and that smaller pull keeps it sliding steadily. Getting the block moving takes a bigger pull than keeping it going.
+
+Now change only the lane. Keep the same block and pull level and steadily each time. In this model the block needs about <Num s="S1">1.8 N</Num> to start on the sandpaper but only <Num s="S1">0.5 N</Num> on the glass. For these three surfaces, the rougher the lane, the greater the friction. Record the two readings for each lane and compare the bars on the graph.
+
+Treat the weights as a separate fair test, on the wooden lane only. With both brass weights on the block, <Num s="S1">400 g</Num> more, it presses harder on the lane and needs about <Num s="S1">2.9 N</Num> to start.
+
+<More title={{"en": "Why rough surfaces grip", "zh": "粗糙的表面为什么抓得牢"}}>
+
+Even surfaces that look smooth have tiny bumps. Where two surfaces press together, the bumps catch on each other. Sandpaper is covered with hard grains that catch on the wood much more than glass does. Roughness is not the whole story, though: what the surfaces are made of, and whether they are clean, dry or wet, matters too. Grooved rubber soles grip a floor better than smooth leather ones.
+
+<Figure src="figures/forces-shoe-soles" alt={{"en": "A smooth leather sole beside a rubber sole with deep grooves, both seen from below, with a small block of each sole material.", "zh": "一只光滑的皮鞋底和一只带深纹的橡胶鞋底，从下面看，旁边各有一小块鞋底材料。"}} caption={{"en": "A smooth leather sole and a grooved rubber sole, seen from below. Illustration for this topic.", "zh": "从下面看：光滑的皮鞋底和带花纹的橡胶鞋底。为本主题画的示意图。"}} />
+
+</More>
+
+<More title={{"en": "Bigger area, about the same friction", "zh": "接触面大，摩擦力差不多"}}>
+
+Stand the same block on its smaller face, keeping the lane and the weights the same. The pull it needs is about the same. Friction depends on how hard the two surfaces press together, not on how much of them touches. In this model the area does not come into the reading at all.
+
+</More>
+
+<More title={{"en": "Heavier block, more friction", "zh": "木块越重，摩擦力越大"}}>
+
+On the wooden lane in this model, adding <Num s="S1">0 g</Num>, <Num s="S1">200 g</Num> and <Num s="S1">400 g</Num> of brass weights gives starting pulls of <Num s="S1">1.0 N</Num>, <Num s="S1">2.0 N</Num> and <Num s="S1">2.9 N</Num>, and sliding pulls of <Num s="S1">0.6 N</Num>, <Num s="S1">1.2 N</Num> and <Num s="S1">1.8 N</Num>. Keep this test separate from the test of surfaces: in one table, change only one thing.
+
+</More>
+
+<More title={{"en": "About this model", "zh": "关于这个模型"}}>
+
+The wooden-lane readings use typical values for wood sliding on wood. The usual tables do not list wood on glass or wood on sandpaper, so those readings are illustrative values in a sensible order. A real block's readings jump about as it starts and slides, and change with dust and damp, so real readings are taken several times. The model shows the block sliding at a steady speed straight away.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+一根线把木块和弹簧秤连起来。线和道面平行，所以弹簧秤量的是水平方向的拉力，单位是牛顿。先在木面道上做，木块上不放砝码。要比较两个读数：让木块开始滑动所需的拉力，和让它平稳地一直滑下去所需的拉力。<FlyTo preset="board-view">看摩擦板</FlyTo>
+
+轻轻地拉，读数一直往上升，木块却待在原地不动。木块和道面之间的摩擦力往回拉，和你拉的力一样大。所以不动的木块身上也可以有力：这里是拉力和摩擦力，大小相等，方向相反。东西还没滑动，摩擦力就已经在了。
+
+在这个模型里，拉力升到约 <Num s="S1">1.0 N</Num> 时木块开始滑动。滑起来以后，读数回落到约 <Num s="S1">0.6 N</Num>，这个较小的拉力就能让它平稳地一直滑下去。让木块动起来，比让它保持滑动要费更大的力。
+
+现在只换道。每次都用同一块木块，水平、平稳地拉。在这个模型里，木块在砂纸上要约 <Num s="S1">1.8 N</Num> 才开始滑，在玻璃上只要 <Num s="S1">0.5 N</Num>。就这三种表面来说，道越粗糙，摩擦力越大。把每条道的两个读数记下来，比一比图上的条形。
+
+砝码要另做一个公平测试，只在木面道上做。木块上放上两只黄铜砝码，多了 <Num s="S1">400 g</Num>，它压在道上更紧，要约 <Num s="S1">2.9 N</Num> 才开始滑。
+
+<More title={{"en": "Why rough surfaces grip", "zh": "粗糙的表面为什么抓得牢"}}>
+
+看起来光滑的表面也有细小的凸起。两个表面压在一起，凸起就互相卡住。砂纸上布满坚硬的颗粒，卡住木头的本事比玻璃大得多。不过粗糙不是全部：表面是什么材料、干净不干净、是干是湿，也有关系。带花纹的橡胶鞋底，比光滑的皮鞋底更抓得住地面。
+
+<Figure src="figures/forces-shoe-soles" alt={{"en": "A smooth leather sole beside a rubber sole with deep grooves, both seen from below, with a small block of each sole material.", "zh": "一只光滑的皮鞋底和一只带深纹的橡胶鞋底，从下面看，旁边各有一小块鞋底材料。"}} caption={{"en": "A smooth leather sole and a grooved rubber sole, seen from below. Illustration for this topic.", "zh": "从下面看：光滑的皮鞋底和带花纹的橡胶鞋底。为本主题画的示意图。"}} />
+
+</More>
+
+<More title={{"en": "Bigger area, about the same friction", "zh": "接触面大，摩擦力差不多"}}>
+
+把同一块木块侧过来，用较小的一面放在道上，道和砝码都不变。拉动它所需的力差不多一样。摩擦力取决于两个表面压得有多紧，而不是接触的面积有多大。在这个模型里，面积根本不进读数。
+
+</More>
+
+<More title={{"en": "Heavier block, more friction", "zh": "木块越重，摩擦力越大"}}>
+
+在这个模型里，在木面道上加 <Num s="S1">0 g</Num>、<Num s="S1">200 g</Num>、<Num s="S1">400 g</Num> 的黄铜砝码，开始滑动的拉力分别是 <Num s="S1">1.0 N</Num>、<Num s="S1">2.0 N</Num>、<Num s="S1">2.9 N</Num>，保持滑动的拉力分别是 <Num s="S1">0.6 N</Num>、<Num s="S1">1.2 N</Num>、<Num s="S1">1.8 N</Num>。这个测试要和比较表面的测试分开做：一张表里只改变一样东西。
+
+</More>
+
+<More title={{"en": "About this model", "zh": "关于这个模型"}}>
+
+木面道的读数用的是木头在木头上滑动的典型值。常见的数据表里没有木头对玻璃、木头对砂纸，所以这两条道的读数是示意值，只保证先后顺序合理。真实的木块刚开始滑和滑动时，读数会跳来跳去，还会因灰尘、潮湿而变，所以真实的读数要多读几次。模型里的木块一开始滑就是匀速的。
+
+</More>
+
+</Lang>

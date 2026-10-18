@@ -1,0 +1,115 @@
+---
+id: "pushes-and-pulls"
+order: 1
+title: {"en": "Pushes and pulls", "zh": "推和拉"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: false
+  cutaway: "none"
+  layers: ["ramp", "friction", "spring", "drop", "brake", "everyday", "arrows"]
+  hide: ["wheel", "wheel-stand", "brake-caliper", "brake-lever", "brake-cable"]
+  labels: ["toy-car", "push-rod", "glass-mat"]
+  camera: {"position": [0.05, 0.75, 1.75], "target": [0.02, 0.0, 0.18], "fov": 30}
+  summary: {"en": "A force is a push or a pull; it can start, speed up, slow down, stop or turn a moving thing, and it can change a thing's shape.", "zh": "力是推或拉；它能让东西动起来、加快、减慢、停下或改变方向，还能改变东西的形状。"}
+  sim:
+    set: {"setup": "push", "push": "behind", "car-start": "moving", "runway": "glass"}
+    try:
+      vary: "push"
+      also: ["car-start"]
+      keep: [{"en": "Same car", "zh": "同一辆车"}, {"en": "Same glass runway", "zh": "同一条玻璃跑道"}]
+      observe: ["effect", "speed-after"]
+      replay: true
+      predict:
+        prompt: {"en": "The car is rolling. Push it hard from the front. What happens?", "zh": "小车正在滚动。从前面用力推它一下，会怎样？"}
+        start: {"car-start": "moving", "push": "behind"}
+        change: {"push": "front-firm"}
+        observe: "effect"
+        options:
+          - {"id": "faster", "label": {"en": "It speeds up", "zh": "加快"}, "means": "speeds-up"}
+          - {"id": "slower", "label": {"en": "It slows down", "zh": "减慢"}, "means": "slows-down"}
+          - {"id": "stops", "label": {"en": "It stops", "zh": "停下"}, "means": "stops"}
+          - {"id": "turns", "label": {"en": "It changes direction", "zh": "改变方向"}, "means": "turns"}
+  beats:
+    - sim: {"set": {"car-start": "rest"}}
+      labels: ["toy-car", "push-rod", "glass-mat"]
+      caption: {"en": "The car stood still on the glass runway. A short push from behind, and it started to move: a force can make a still object move.", "zh": "小车静静地停在玻璃跑道上。从后面短短推一下，它就动起来了：力能使静止的物体运动。"}
+    - labels: ["toy-car", "push-rod"]
+      caption: {"en": "Now the car is already rolling when it is pushed from behind. It speeds up: in this model, from zero point six to zero point nine metres a second.", "zh": "这一次，小车已经在滚动，再从后面推它。它加快了：在这个模型里，从每秒零点六米加快到每秒零点九米。"}
+    - sim: {"set": {"push": "front"}}
+      labels: ["toy-car", "push-rod"]
+      caption: {"en": "A push from the front slows the rolling car down, to zero point three metres a second in this model.", "zh": "从前面推，滚动的小车就减慢：在这个模型里，减慢到每秒零点三米。"}
+    - sim: {"set": {"push": "front-firm"}}
+      labels: ["toy-car", "push-rod"]
+      caption: {"en": "A harder push from the front stops it where it is. A force can stop a moving object.", "zh": "从前面用力推，小车当场停下。力能使运动的物体停下。"}
+    - sim: {"set": {"push": "side"}}
+      camera: "runway-top"
+      labels: ["toy-car", "push-rod", "metre-rule"]
+      caption: {"en": "A push from the side changes its direction. In this model the car keeps its speed but turns fifteen degrees towards the back of the runway.", "zh": "从侧面推，小车改变了方向。在这个模型里，它的快慢不变，却朝跑道后侧偏了十五度。"}
+    - sim: {"set": {"magnet-push": true, "car-start": "rest"}}
+      labels: ["car-magnet", "bar-magnet", "toy-car"]
+      caption: {"en": "A magnet can push without touching. The north pole of the bar magnet faces the north pole on the car, and the still car is pushed away across the gap.", "zh": "磁铁不用接触也能推。条形磁铁的北极对着车尾的北极，静止的小车隔着空隙被推开了。"}
+    - sim: {"set": {"squash": true}}
+      camera: {"position": [-0.05, 0.32, 0.18], "target": [-0.12, 0.02, -0.28], "fov": 30}
+      labels: ["sponge", "sponge-weight"]
+      caption: {"en": "A force can also change an object's shape. The brass weight presses the sponge flatter; lift it off and the sponge springs back.", "zh": "力还能改变物体的形状。黄铜砝码把海绵压扁；拿开砝码，海绵就弹回原样。"}
+  index: {"parts": ["toy-car", "car-wheels", "push-rod", "glass-mat", "car-magnet", "bar-magnet", "sponge", "sponge-weight"]}
+---
+
+<Lang en>
+
+The toy car stands on the glass runway. It is <Term id="stationary">stationary</Term>: it is not moving. A short push from the rod behind it makes it move. A pull would do the same: a cord tied to the car and pulled would start it too. A push or a pull is a force, and a force can make a stationary object move. <FlyTo preset="runway-top">Look down on the runway</FlyTo>
+
+Now let the car roll in at <Num s="S1">0.6 m/s</Num> and push it as it passes. In this model a push from behind makes it speed up to <Num s="S1">0.90 m/s</Num>; a push from the front slows it down to <Num s="S1">0.30 m/s</Num>; a harder push from the front stops it. A push from the side changes the direction of its <Term id="motion">motion</Term>: here the car keeps its speed of <Num s="S1">0.60 m/s</Num> but turns <Num s="S1">15°</Num> to one side. Speeding up, slowing down, stopping and turning are all effects of a force.
+
+After the push, nothing pushes the car, yet it keeps rolling. The push did not go into the car to be slowly used up. The runway's surface gradually brings the car to a stop, as chapter 4 shows.
+
+Some forces need contact and some do not. The rod has to touch the car. A magnet does not: with the north pole of the bar magnet facing the north pole of the car's magnet, the still car is pushed away across the gap. This is <Term id="magnetic-force">magnetic force</Term>, which you met in <TopicLink slug="magnets" ch="attract-and-repel">Like poles repel, unlike poles attract</TopicLink>.
+
+A force can also change an object's shape. The brass weight presses the sponge flatter; lift it off and the sponge springs back. Four kinds of force act on this bench: magnetic force, <Term id="gravitational-force">gravitational force</Term>, <Term id="elastic-spring-force">elastic spring force</Term> and <Term id="frictional-force">frictional force</Term>. Each of the next chapters looks at one of them.
+
+<More title={{"en": "Contact and non-contact forces", "zh": "接触力与非接触力"}}>
+
+The rod pushes only while it touches the car, and friction needs two surfaces that touch. Magnetic force and gravitational force act without contact: a magnet pushes or pulls across a gap of air, and a ball falls to the ground although nothing touches it on the way.
+
+</More>
+
+<More title={{"en": "About this model", "zh": "关于这个模型"}}>
+
+Each push gives the model car a fixed change of speed: <Num s="S1">0.3 m/s</Num> from behind or from the front, and <Num s="S1">0.6 m/s</Num> for the hard push from the front, which stops a car rolling at <Num s="S1">0.6 m/s</Num>. The push from the side is chosen to turn the car without changing its speed. The magnet gives the still car <Num s="S1">0.4 m/s</Num>. After each push the car slows down on the glass and stops before the end of the runway.
+
+A push lasts only <Num s="S1">0.15 s</Num>, so its purple arrow shows only while the push happens: use Run again to see it. In the still picture, the rod shows where the push came from.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+玩具车停在玻璃跑道上。它是<Term id="stationary">静止</Term>的，也就是没有在动。推杆从后面短短推一下，它就动起来了。拉也一样：在车上系一根线一拉，它也会动起来。推和拉都是力；力能使静止的物体运动。<FlyTo preset="runway-top">从上面看跑道</FlyTo>
+
+再让小车以 <Num s="S1">0.6 m/s</Num> 的速度滚过来，在它经过时推一下。在这个模型里，从后面推，它加快到 <Num s="S1">0.90 m/s</Num>；从前面推，它减慢到 <Num s="S1">0.30 m/s</Num>；从前面用力推，它就停下。从侧面推，会改变它的<Term id="motion">运动</Term>方向：这里小车的快慢不变，仍是 <Num s="S1">0.60 m/s</Num>，却向一边偏了 <Num s="S1">15°</Num>。加快、减慢、停下和改变方向，都是力的作用。
+
+推过以后，再也没有东西推小车，它却还在往前滚。推力并没有钻进车里，被一点一点用完。是跑道的表面让它慢慢停下来，第 4 章会讲到。
+
+有的力要接触才能起作用，有的不用。推杆必须碰到小车，磁铁却不用：条形磁铁的北极对着车尾磁铁的北极，静止的小车隔着空隙就被推开了。这是<Term id="magnetic-force">磁力</Term>，在<TopicLink slug="magnets" ch="attract-and-repel">同极相斥，异极相吸</TopicLink>里已经见过。
+
+力还能改变物体的形状。黄铜砝码把海绵压扁；拿开砝码，海绵又弹了回来。这张实验台上有四种力：磁力、<Term id="gravitational-force">重力</Term>、<Term id="elastic-spring-force">弹簧的弹力</Term>和<Term id="frictional-force">摩擦力</Term>。接下来几章各讲其中一种。
+
+<More title={{"en": "Contact and non-contact forces", "zh": "接触力与非接触力"}}>
+
+推杆只有碰到小车时才在推它；摩擦力也要两个表面互相接触才有。磁力和重力不用接触就能起作用：磁铁隔着一段空气就能推或拉，球往下落时，路上没有任何东西碰它。
+
+</More>
+
+<More title={{"en": "About this model", "zh": "关于这个模型"}}>
+
+在这个模型里，每推一下，小车的速度就改变固定的一份：从后面或从前面推是 <Num s="S1">0.3 m/s</Num>，从前面用力推是 <Num s="S1">0.6 m/s</Num>，刚好让以 <Num s="S1">0.6 m/s</Num> 滚动的小车停下。从侧面推的那一下，是特意取来只改方向、不改快慢的。磁铁让静止的小车得到 <Num s="S1">0.4 m/s</Num> 的速度。每次推过以后，小车都在玻璃上慢下来，在跑道尽头之前停住。
+
+一次推只持续 <Num s="S1">0.15 s</Num>，所以紫色的推力箭头只在推的那一刻出现：按“再跑一次”就能看到。静止的画面里，推杆表示推力从哪里来。
+
+</More>
+
+</Lang>

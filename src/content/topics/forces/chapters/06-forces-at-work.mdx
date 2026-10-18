@@ -1,0 +1,143 @@
+---
+id: "forces-at-work"
+order: 6
+title: {"en": "Forces at work", "zh": "生活中的力"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: false
+  cutaway: "none"
+  layers: ["ramp", "friction", "spring", "drop", "brake", "everyday", "arrows"]
+  hide: ["push-rod", "drop-stand", "release-clamps"]
+  labels: ["wheel", "brake-caliper", "brake-lever"]
+  camera: {"position": [1.3, 0.7, 1.25], "target": [0.64, 0.3, -0.12], "fov": 30}
+  summary: {"en": "Brakes, shoe soles, slides, trains and lifts all put forces to work; friction is often the force we need most.", "zh": "刹车、鞋底、滑梯、列车、电梯都在用力；摩擦力常常是我们最需要的力。"}
+  sim:
+    set: {"squeeze": "none"}
+    try:
+      vary: "squeeze"
+      keep: [{"en": "Same wheel, two turns a second to start", "zh": "同一只轮子，起转每秒两圈"}]
+      observe: ["stop-time", "turns"]
+      record: {"chart": true}
+      replay: true
+      predict:
+        prompt: {"en": "Squeeze the lever harder. Will the wheel take more time, less time or the same time to stop?", "zh": "把刹车把捏得更紧，轮子停下所用的时间会更长、更短，还是一样？"}
+        start: {"squeeze": "light"}
+        change: {"squeeze": "firm"}
+        observe: "stop-time"
+        options:
+          - {"id": "longer", "label": {"en": "More time", "zh": "更长"}, "means": "more"}
+          - {"id": "shorter", "label": {"en": "Less time", "zh": "更短"}, "means": "less"}
+          - {"id": "same", "label": {"en": "The same time", "zh": "一样"}, "means": "same"}
+  beats:
+    - labels: ["wheel", "brake-caliper", "brake-lever", "brake-cable"]
+      caption: {"en": "A bicycle wheel turns on a stand, starting at two turns each second. The rubber brake pads sit just clear of the rim.", "zh": "一只自行车轮装在架子上转，起转时每秒两圈。橡胶刹车块就在轮圈旁边，还没有碰到它。"}
+    - camera: {"position": [1.0, 0.45, 0.75], "target": [0.58, 0.28, -0.12], "fov": 30}
+      labels: ["wheel", "brake-lever"]
+      caption: {"en": "Leave the brake alone. In this model the wheel keeps turning for about eighty seconds; only a little friction at the hub slows it.", "zh": "不碰刹车。在这个模型里，轮子会转约八十秒；只有轴上的一点点摩擦让它慢下来。"}
+    - sim: {"set": {"squeeze": "light"}}
+      labels: ["brake-caliper", "brake-lever"]
+      caption: {"en": "Squeeze the lever lightly. The pads rub on the rim, and friction stops the wheel in about one point eight seconds in this model.", "zh": "轻轻捏刹车把。刹车块擦着轮圈，在这个模型里，摩擦力约一点八秒就让轮子停下。"}
+    - sim: {"set": {"squeeze": "firm"}}
+      labels: ["brake-caliper", "brake-lever"]
+      caption: {"en": "Squeeze it firmly and the wheel stops in about zero point six seconds. Here friction is exactly what we want.", "zh": "用力捏，约零点六秒就停下。在这里，摩擦力正是我们需要的。"}
+    - camera: {"position": [1.95, 1.3, 4.7], "target": [0.3, -0.28, 0.0], "fov": 30}
+      hide: ["push-rod"]
+      labels: ["shoe-soles", "wheel", "toy-car", "test-spring", "steel-ball-large"]
+      caption: {"en": "Grooved soles grip the floor, brakes slow bicycles and trains, and steel ropes lift a lift against gravity. Friction also wears things out, so oil and wheels are used to reduce it where it is not wanted.", "zh": "有花纹的鞋底抓住地面，刹车让自行车和列车慢下来，钢缆顶着重力把电梯拉上去。摩擦也会让东西磨损，所以在不需要它的地方，人们用油和轮子来减小它。"}
+  index: {"parts": ["wheel", "wheel-stand", "brake-caliper", "brake-lever", "brake-cable", "shoe-soles"]}
+---
+
+<Lang en>
+
+A bicycle wheel spins on a stand, starting at <Num s="S1">2 turns per second</Num> in this model. Above it, a rim brake has a rubber pad on each side of the metal rim, joined by a cable to a brake lever. The wheel stays on its stand, so only the brake changes from one run to the next. <FlyTo preset="wheel-view">Look at the brake wheel</FlyTo>
+
+Leave the lever alone and the pads stay clear of the rim. Only a little friction at the hub slows the wheel, so in this model it keeps turning for about <Num s="S1">80 s</Num>. Nothing keeps pushing it round, yet it turns for over a minute; friction slowly brings it to rest.
+
+Squeeze the lever lightly. The cable draws the brake arms together and presses the pads against the rim, and friction between the pads and the rim stops the wheel in about <Num s="S1">1.8 s</Num> in this model. Squeeze firmly and the pads press harder: it stops in about <Num s="S1">0.6 s</Num>. Here friction is exactly what we want.
+
+Friction helps in many places. It lets your shoe soles grip the floor, lets you turn a jar lid, and slows bicycles and trains when they brake. It also wears parts away and makes them hot, so oil, wheels and ball bearings are used to reduce friction where it is not wanted. On a rainy day the floor, the road and a bicycle's rims can all be slippery, so walk with care and brake earlier.
+
+Look back at the bench. Magnetic force acts across a gap. Gravitational force pulls everything down and gives it weight. A stretched spring pulls back towards its own length. Friction acts wherever two surfaces rub, or are about to rub. Each force can be recognised by what it does, and your recorded data can show how strong it is.
+
+<More title={{"en": "Bicycle brakes", "zh": "自行车的刹车"}}>
+
+On a rim brake the pads rub on the metal rim, not on the tyre. When the rim is wet, the brake works less well, so cyclists start braking earlier in the rain. The stopping times on this bench are for a wheel on a stand with no rider; they are not stopping times for a bicycle on a road.
+
+<Figure src="figures/forces-bicycle-brake" alt={{"en": "The front of a bicycle: a caliper rim brake above the tyre, with a rubber pad on each side of the rim and a cable up to the brake lever on the handlebar.", "zh": "自行车前部：轮胎上方的钳式轮圈刹车，轮圈两侧各有一块橡胶刹车块，刹车线通到车把上的刹车把。"}} caption={{"en": "A rim brake: the pads sit on each side of the metal rim, and a cable runs up to the lever. Illustration for this topic.", "zh": "轮圈刹车：刹车块在金属轮圈的两侧，刹车线一直通到刹车把。为本主题画的示意图。"}} />
+
+</More>
+
+<More title={{"en": "When an MRT train slows down", "zh": "地铁列车减速的时候"}}>
+
+When a train brakes, the train slows down but your body tends to keep moving as it was, so you lean forwards. Nothing pushes you forwards; your body simply keeps going while the floor under your feet slows. That is why standing passengers are asked to hold on to a handrail or grab pole.
+
+</More>
+
+<More title={{"en": "Reducing friction", "zh": "减小摩擦"}}>
+
+Oil keeps two moving surfaces apart so that they rub less: bicycle chains and machine parts are oiled. Wheels and ball bearings let things roll instead of slide, which takes much less effort. Where grip is wanted, friction is increased instead: grooved soles, the textured treads of steps and rubber brake pads.
+
+</More>
+
+<More title={{"en": "Is friction good or bad?", "zh": "摩擦力是好是坏"}}>
+
+Both. Without friction you could not walk, hold a pencil or stop a bicycle; with too much, machines wear out and waste effort. Too little friction is dangerous too: on ice or a wet floor, shoes grip far less than on a dry wooden floor.
+
+</More>
+
+<More title={{"en": "About this model", "zh": "关于这个模型"}}>
+
+The wheel's numbers are illustrative. With the brake off it turns for <Num s="S1">80.4 s</Num> and makes <Num s="S1">80.4</Num> turns; a light squeeze stops it in <Num s="S1">1.8 s</Num>, after <Num s="S1">1.8</Num> turns, and a firm squeeze in <Num s="S1">0.6 s</Num>, after <Num s="S1">0.6</Num> turns. The time and the number of turns are the same here only because the wheel starts at <Num s="S1">2 turns per second</Num> and slows down steadily, averaging one turn each second. The model also shows the brake's friction arrow at the moment the wheel stops.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+一只自行车轮装在架子上转，在这个模型里起转时 <Num s="S1">每秒 2 圈</Num>。轮子上方是一只轮圈刹车，金属轮圈两侧各有一块橡胶刹车块，一根刹车线连到刹车把。轮子固定在架子上，所以每一次只改变刹车。<FlyTo preset="wheel-view">看刹车轮</FlyTo>
+
+不碰刹车把，刹车块就不碰轮圈。只有轴上的一点点摩擦让轮子慢下来，所以在这个模型里，它会转约 <Num s="S1">80 s</Num>。没有东西一直推着它转，它却转了一分多钟；是摩擦力让它慢慢停下来。
+
+轻轻捏刹车把。刹车线把两只刹车臂拉拢，刹车块压在轮圈上，在这个模型里，刹车块和轮圈之间的摩擦力约 <Num s="S1">1.8 s</Num> 就让轮子停下。用力捏，刹车块压得更紧：约 <Num s="S1">0.6 s</Num> 就停了。在这里，摩擦力正是我们需要的。
+
+很多地方都靠摩擦力帮忙。鞋底靠它抓住地面，拧瓶盖靠它，自行车和列车刹车也靠它。摩擦力也会把零件磨损、让它们发热，所以在不需要它的地方，人们用油、轮子和滚珠轴承来减小摩擦。下雨天，地面、路面和自行车的轮圈都可能很滑，走路要小心，骑车要早点刹车。
+
+回头看看这张实验台。磁力能隔着空隙起作用。重力把一切往下拉，让东西有重量。被拉长的弹簧总要往回拉，想回到原来的长度。两个表面互相擦过或将要擦过的地方，就有摩擦力。每一种力都能从它的作用认出来，你记下的数据还能说明它有多大。
+
+<More title={{"en": "Bicycle brakes", "zh": "自行车的刹车"}}>
+
+轮圈刹车的刹车块擦的是金属轮圈，不是轮胎。轮圈湿了，刹车的效果就变差，所以下雨天骑车要早一点刹车。这张实验台上的停下用时，指的是架子上、没有人骑的一只轮子，不是自行车在路上的刹车时间。
+
+<Figure src="figures/forces-bicycle-brake" alt={{"en": "The front of a bicycle: a caliper rim brake above the tyre, with a rubber pad on each side of the rim and a cable up to the brake lever on the handlebar.", "zh": "自行车前部：轮胎上方的钳式轮圈刹车，轮圈两侧各有一块橡胶刹车块，刹车线通到车把上的刹车把。"}} caption={{"en": "A rim brake: the pads sit on each side of the metal rim, and a cable runs up to the lever. Illustration for this topic.", "zh": "轮圈刹车：刹车块在金属轮圈的两侧，刹车线一直通到刹车把。为本主题画的示意图。"}} />
+
+</More>
+
+<More title={{"en": "When an MRT train slows down", "zh": "地铁列车减速的时候"}}>
+
+列车刹车时，车厢慢了下来，你的身体却还想照原来的样子往前走，所以人会往前倾。并没有什么东西把你往前推；只是脚下的地板慢了，身体还在往前。所以站着的乘客要扶好扶手或扶杆。
+
+</More>
+
+<More title={{"en": "Reducing friction", "zh": "减小摩擦"}}>
+
+油能把两个互相擦动的表面隔开，让它们少擦一些：自行车链条和机器零件都要上油。轮子和滚珠轴承让东西滚动而不是滑动，省力得多。需要抓得牢的地方，就反过来增大摩擦：带花纹的鞋底、台阶上的防滑纹、橡胶刹车块。
+
+</More>
+
+<More title={{"en": "Is friction good or bad?", "zh": "摩擦力是好是坏"}}>
+
+都有。没有摩擦力，你不能走路，握不住铅笔，也停不下自行车；摩擦力太大，机器会磨损，白白多费力气。摩擦力太小也危险：在冰上或湿地板上，鞋子比在干燥的木地板上难抓牢得多。
+
+</More>
+
+<More title={{"en": "About this model", "zh": "关于这个模型"}}>
+
+车轮的数字是示意值。不捏刹车时，它转 <Num s="S1">80.4 s</Num>，共转 <Num s="S1">80.4</Num> 圈；轻捏 <Num s="S1">1.8 s</Num> 停下，转了 <Num s="S1">1.8</Num> 圈；用力捏 <Num s="S1">0.6 s</Num> 停下，转了 <Num s="S1">0.6</Num> 圈。这里用时和圈数正好一样，只是因为轮子起转时 <Num s="S1">每秒 2 圈</Num>、均匀地慢下来，平均每秒正好转一圈。模型在轮子停下的那一刻，仍然画出刹车的摩擦力箭头。
+
+</More>
+
+</Lang>
