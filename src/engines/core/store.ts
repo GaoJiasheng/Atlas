@@ -209,7 +209,7 @@ export function createSceneStore<E extends EngineExtension>(options: CreateScene
       set({
         ...fullTarget(chapter),
         ...overrides,
-        transition: { id: prev.id + 1, reason: 'url', instant: true },
+        transition: { id: prev.id + 1, reason: 'url', instant: true, fields: Object.keys(overrides) },
       } as Partial<SceneStoreState<E>>);
     },
 

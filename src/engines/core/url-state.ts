@@ -6,7 +6,7 @@
  *
  * Keys: `ch`, `layers`, `cam`, `theme` (core) and `b` (beat, 1-based), `task`, `model`, `t`, `hl`, `part`, `view`,
  * `explode`, `run`, `cut`, `pose`, `sim` (engine passthrough; `sim=cells.3~x.on`, SpaceScene's try-it values). Values equal to the current chapter's
- * target are omitted, so a plain chapter link is just `?ch=<id>`.
+ * target (or the engine's `urlBaseline`, SpaceScene: the beat's scene under `b`) are omitted, so a plain chapter link is just `?ch=<id>`.
  * Unknown query parameters (utm_*, etc.) are preserved.
  *
  * The encode/decode/merge functions are pure and unit-tested; `startUrlSync`

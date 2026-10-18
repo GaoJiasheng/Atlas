@@ -19,9 +19,11 @@
  * (segment, chips, rail, ← →) opens on its first beat once the chapter
  * transition is out; instant chapter changes (tests, shots) show the
  * chapter's own state (`beat: null`). The store's `beat` is in the URL (`b`,
- * 1-based); a deep link with `b` gets the beat's non-URL fields (hide, ghost,
- * exercise, tints, sites) on top of the URL's. After the flight the reader may
- * orbit; selecting a part keeps the beat. P starts at the beat on show.
+ * 1-based); a deep link with `b` opens on the beat as the axis shows it (its
+ * try-it values, view, layers, camera, hide …, runs at their end), the fields
+ * the link sets itself winning; at a beat the URL's baseline is the beat's
+ * scene. After the flight the reader may orbit; selecting a part keeps the
+ * beat. P starts at the beat on show.
  *
  * PRESENTATION (P) runs on the core presentation system (core/presentation).
  * SpaceScene's adapter: a beat is its chapter's target plus the beat's view /
@@ -55,7 +57,8 @@ import { DEFAULT_CAMERA, fitCameraToAspect, REFERENCE_TWEEN_MS, referenceCamera,
 import { modelBounds } from './lib/parts';
 import { POSE_DURATION } from './lib/pose';
 import { targetExplodeAmount } from './lib/explode';
-import { exerciseOf, highlightOf, type SpaceSceneExt } from './index';
+import type { SpaceSceneExt } from './index';
+import { beatBaseline, beatScene as sceneOfBeat, linkedBeatPatch } from './lib/beat-scene';
 import type { SpaceChapterState, SpaceSceneData, SpaceView, ViewPresets } from './schema';
 import { createSpaceUi } from './ui';
 import { cameraSettled, createBridge } from './bridge';
@@ -196,41 +199,14 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
   /** The scene on entering (before ORBIT / REFERENCE / the selection were dropped). */
   const entered = useRef<SpaceSavedState | null>(null);
   /**
-   * Put the stage in a beat's state: its chapter's target plus the beat's
-   * view / part / explode / run / cutaway / layers / hide / pose / ghost /
-   * exercise / highlight / sites and its camera (an orbit camera, a named
-   * preset's camera, else the chapter's). The presentation's `applyBeat` and
-   * the chapter axis share it; the promise says when the beat has settled.
+   * Put the stage in a beat's state (lib/beat-scene.ts): its chapter's target
+   * plus the beat's fields and camera. The presentation's `applyBeat`, the
+   * chapter axis and a deep link with `b` share it; so does the URL baseline.
    */
   const beatScene = (b: Beat<SpaceBeatSpec>) => {
-    const st = store.getState();
-    const target = st.chapterTarget(b.chapter);
-    const spec: SpaceBeatSpec | undefined = b.spec;
-    const view = spec?.view ?? target.view;
-    const preset = typeof spec?.camera === 'string' ? named.find((p) => p.id === spec.camera)?.camera : undefined;
-    const own = typeof spec?.camera === 'object' ? spec.camera : undefined;
-    const camera = own ?? preset ?? chapterCamera(chapters.find((c) => c.id === b.chapter), target.camera, view, file.views);
-    const next: Partial<SceneSnapshot<SpaceSceneExt>> = {
-      ...target,
-      view,
-      ...(spec?.part !== undefined ? { part: spec.part } : {}),
-      ...(spec?.explode !== undefined ? { explode: spec.explode } : {}),
-      ...(spec?.run !== undefined ? { run: spec.run } : {}),
-      ...(spec?.cutaway !== undefined ? { cutaway: spec.cutaway } : {}),
-      ...(spec?.layers ? { layers: [...spec.layers] } : {}),
-      hidden: spec?.hide ? [...spec.hide] : target.hidden,
-      pose: spec?.pose !== undefined ? spec.pose : target.pose,
-      ghosted: spec?.ghost ? [...spec.ghost] : target.ghosted,
-      exercise: spec?.exercise !== undefined ? exerciseOf(spec.exercise) : target.exercise,
-      tints: spec?.highlight !== undefined ? highlightOf(spec.highlight) : target.tints,
-      sites: spec?.sites ? [...spec.sites] : target.sites,
-      demo: null,
-      beat: b.index,
-      // Try-it values: the chapter's, then the beat's (not cumulative across beats).
-      sim: { ...target.sim, ...(spec?.sim?.set ?? {}) },
-      camera,
-    };
-    return next;
+    const target = store.getState().chapterTarget(b.chapter);
+    const chapter = chapters.find((c) => c.id === b.chapter);
+    return sceneOfBeat(b, target, named, (view) => chapterCamera(chapter, target.camera, view, file.views));
   };
   const applyBeatState = (b: Beat<SpaceBeatSpec>, instant: boolean): Promise<void> | undefined => {
     const st = store.getState();
@@ -342,7 +318,8 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
     [store, chapters, isPresenting, beatControls, showBeat],
   );
   // A chapter picked by the reader (axis segment, chips, rail, ← →) opens on its first beat, once that transition is out.
-  // A deep link with `b` gets the beat's fields the URL does not carry (hide, ghost, exercise, tints, sites).
+  // A deep link with `b` opens on the beat as the chapter axis shows it (try-it values, view, layers, camera, hide …,
+  // timelines at their end: the step is instant); a field the link sets itself (`sim=`, `cam=`, `view=` …) wins.
   const urlBeatDone = useRef(false);
   useEffect(() => {
     const settleUrlBeat = () => {
@@ -356,9 +333,14 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         return;
       }
       const next = beatScene(b);
-      st.applyState({ hidden: next.hidden!, ghosted: next.ghosted!, exercise: next.exercise!, tints: next.tints!, sites: next.sites!, demo: null }, { instant: true });
+      const linked = st.transition.fields ?? [];
+      st.applyState(linkedBeatPatch(next, linked), { instant: true });
       ui.setState({ orbit: false });
-      hud.setState({ presetId: null, cameraFree: !sameJson(store.getState().camera, next.camera) });
+      const ownCamera = !linked.includes('camera');
+      hud.setState({
+        presetId: ownCamera && typeof b.spec?.camera === 'string' ? b.spec.camera : null,
+        cameraFree: !sameJson(store.getState().camera, next.camera),
+      });
     };
     settleUrlBeat();
     return store.subscribe((st, prev) => {
@@ -553,6 +535,12 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       card: file.sim?.energy ? both('space.card.energy') : file.sim?.circuit?.diagram ? both('space.card.circuit') : both('space.card.title'),
       beats: beatControls,
       beatStep,
+      // At a beat the URL leaves out what `?ch=<chapter>&b=<n>` brings back (the beat's scene), not the chapter's target.
+      urlBaseline: (state) => {
+        const st = state as SceneSnapshot<SpaceSceneExt>;
+        const b = st.beat === null ? undefined : beatsRef.current.find((x) => x.chapter === st.chapter && x.index === st.beat);
+        return b ? beatBaseline(beatScene(b), store.getState().chapterTarget(b.chapter)) : null;
+      },
       ...(simCommands.length > 0 ? { commands: simCommands, commandsHint: t('space.try.title') } : {}),
       // `pnpm shoot --beats`: hold an exercise beat at its start / end key for a still.
       test: {
@@ -594,6 +582,11 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
           Object.fromEntries(
             [...bridge.energyBars.values()].map((b) => [b.timeline, { potential: Math.round(b.potential * 1000) / 1000, kinetic: Math.round(b.kinetic * 1000) / 1000, lost: Math.round(b.lost * 1000) / 1000, shown: b.shown }]),
           ),
+        // QA: where part `id`'s label anchor is on the stage now (stage CSS px; follows pose, try-it offsets and timeline runs); null before the stage draws it.
+        anchor: (id: string) => {
+          const a = bridge.anchors.get(id);
+          return a ? { x: Math.round(a.x * 10) / 10, y: Math.round(a.y * 10) / 10, shown: a.shown, onScreen: a.onScreen } : null;
+        },
         // QA: hold timeline output `id` at model time `t` (s); false if the stage has no such run.
         simSeek: (id: string, t: number) => {
           if (!bridge.playback.has(id) || !Number.isFinite(t)) return false;

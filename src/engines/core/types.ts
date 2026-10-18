@@ -79,6 +79,12 @@ export interface SceneTransition {
   reason: 'init' | 'chapter' | 'url' | 'preset' | 'snap' | 'state';
   /** Jump without animating (initial load, deep link). */
   instant: boolean;
+  /**
+   * `url` only: the store fields the link set itself (the rest are the
+   * chapter target's), so an engine that completes a link (SpaceScene: a
+   * beat's scene under `b`) fills in only the others.
+   */
+  fields?: readonly string[];
 }
 
 /**

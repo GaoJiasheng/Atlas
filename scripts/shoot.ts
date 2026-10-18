@@ -14,7 +14,8 @@
  *   pnpm shoot fractions --tasks                     # MathScene: every check-pool task (start, a planned wrong answer, solved) and every practice question + the summary
  *
  * `--beats` checks that the energy bars on show add up to 100 % (SpaceScene `energy-bars`), and shoots a looping exercise beat (SpaceScene exercise mode) again held at its start and end keys
- * (`beat-<chapter>-<n>-start.png` / `-end.png`), and lists the ids each chapter's own state asks to label (TimeScene `highlight`, SpaceScene `labels`) that have no label on screen at the chapter camera (listed, not failed).
+ * (`beat-<chapter>-<n>-start.png` / `-end.png`); SpaceScene: it opens every beat again from its link (`?ch=<chapter>&b=<n>`, a page of its own) and fails a beat whose
+ * scene (try-it values, view, layers, camera, hidden parts …) differs from the presentation's, or whose runs are not at their end; it also lists the ids each chapter's own state asks to label (TimeScene `highlight`, SpaceScene `labels`) that have no label on screen at the chapter camera (listed, not failed).
  * `--locale` and `--theme` take a value, a comma list, or `all` (default: en, paper).
  * `--keys` / `--layout` / `--beats` / `--tasks` replace the shot run unless shot names or `--shots` are given.
  * `--keys` also checks `,` / `.` (beats outside the presentation, SpaceScene's chapter axis) where the engine registers them.
@@ -364,11 +365,77 @@ function unlabelled(s: Session): Promise<string[]> {
   });
 }
 
+/** A SpaceScene beat's scene: the fields a beat sets, the try-it values on show and the runs not at their end; `null` for other engines. */
+type BeatScene = Record<string, unknown> & { unfinished: string[] };
+function beatSceneOf(page: Page): Promise<BeatScene | null> {
+  return page.evaluate(() => {
+    if (!document.querySelector('.atlas-scene[data-engine="space-scene"]')) return null;
+    const st = window.__atlas!.state() as unknown as Record<string, unknown>;
+    const keys = ['chapter', 'view', 'part', 'explode', 'run', 'cutaway', 'pose', 'hidden', 'ghosted', 'layers', 'exercise', 'tints', 'sites', 'camera'];
+    type Run = { t: number; duration: number; playing: boolean };
+    const sim = (window.__atlas!.engine as unknown as { sim?(): { values: Record<string, unknown>; timeline: Record<string, Run> } | null }).sim?.() ?? null;
+    return {
+      ...Object.fromEntries(keys.map((k) => [k, st[k] ?? null])),
+      sim: sim?.values ?? null,
+      unfinished: Object.entries(sim?.timeline ?? {})
+        .filter(([, r]) => r.playing || r.t !== r.duration)
+        .map(([id]) => id),
+    };
+  });
+}
+
+/**
+ * Every beat opened from its link (`?ch=<chapter>&b=<n>`) in a page of its own, against the scene the presentation
+ * showed: a field that differs, or a run not at its end (links jump to the end), is a beat failure.
+ */
+async function runBeatLinks(s: Session, o: Options, beats: { chapter: string; index: number }[], shown: Map<string, BeatScene>, report: RunReport): Promise<void> {
+  if (shown.size === 0) return;
+  const theme = await s.ev(() => window.__atlas!.state().appliedTheme);
+  const path = new URL(s.page.url()).pathname;
+  const linked = await s.page.context().newPage();
+  linked.on('console', (m) => {
+    if (m.type() === 'error' && !IGNORED.some((re) => re.test(m.text()))) s.logs.push({ type: m.type(), text: m.text() });
+  });
+  linked.on('pageerror', (e) => {
+    if (!IGNORED.some((re) => re.test(e.message))) s.logs.push({ type: 'pageerror', text: e.message });
+  });
+  let same = 0;
+  try {
+    await linked.setViewportSize({ width: o.size[0], height: o.size[1] });
+    for (const b of beats) {
+      const name = `beat-${b.chapter}-${b.index + 1}`;
+      const want = shown.get(name);
+      if (!want) continue;
+      const link = `?ch=${encodeURIComponent(b.chapter)}&b=${b.index + 1}`;
+      await linked.goto(`${s.origin}${path}${link}${theme ? `&theme=${theme}` : ''}`);
+      await linked.waitForFunction(() => window.__atlas !== undefined, null, { timeout: 60_000 });
+      await linked.evaluate(() => window.__atlas!.ready);
+      await linked.waitForTimeout(400);
+      const got = await beatSceneOf(linked);
+      const diffs: string[] = [];
+      for (const key of Object.keys(want)) {
+        if (key === 'unfinished') continue;
+        const a = JSON.stringify(got?.[key] ?? null);
+        const e = JSON.stringify(want[key] ?? null);
+        if (a !== e) diffs.push(`${key} ${a} (presentation ${e})`);
+      }
+      if (got && got.unfinished.length) diffs.push(`runs not at their end: ${got.unfinished.join(', ')}`);
+      if (diffs.length) report.beatFailures.push(`${name}: opened from ${link}: ${diffs.join('; ')}`);
+      else same++;
+      if (diffs.length) console.log(`  ${`${name} (link)`.padEnd(36)} FAIL  ${diffs.join('; ').slice(0, 300)}`);
+    }
+  } finally {
+    await linked.close();
+  }
+  console.log(`  beat links: ${same} of ${shown.size} open on the presentation's scene`);
+}
+
 /** One screenshot per presentation beat: `beat-<chapter id>-<n>.png` (n = 1-based position inside the chapter). */
 async function runBeats(s: Session, o: Options, out: string, report: RunReport): Promise<void> {
   const beats = await s.ev(() => window.__atlas!.beats());
   mkdirSync(out, { recursive: true });
   if (beats.length === 0) console.log('  (this topic has no presentation beats)');
+  const shown = new Map<string, BeatScene>();
   for (const [i, b] of beats.entries()) {
     const name = `beat-${b.chapter}-${b.index + 1}`;
     await s.apply({ wait: 300 });
@@ -386,6 +453,9 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
       missing = await unlabelled(s);
     }
     if (missing.length) report.beatNotes.push(`${name}: no label for ${missing.join(', ')}`);
+    // The scene this beat shows (SpaceScene), for its link below.
+    const scene = landed ? await beatSceneOf(s.page) : null;
+    if (scene) shown.set(name, scene);
     // Energy bars on show (SpaceScene, docs/31 E-EN6) must add up to 100 %: energy is neither made nor lost.
     const bars = await s.page.evaluate(
       () => (window.__atlas!.engine as unknown as { energyBars?(): Record<string, { potential: number; kinetic: number; lost: number; shown: boolean }> }).energyBars?.() ?? {},
@@ -417,6 +487,7 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
   }
   await s.apply({ wait: 300 });
   console.log(`  beats -> ${out} (${beats.length})`);
+  await runBeatLinks(s, o, beats, shown, report);
 }
 
 /** Ids each chapter's own state asks to label (TimeScene `highlight`, SpaceScene `labels`) with no label on screen at the chapter camera: listed, never a failure. */

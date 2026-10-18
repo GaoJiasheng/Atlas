@@ -16,7 +16,7 @@
  */
 import { createStore, type StoreApi } from 'zustand/vanilla';
 import type { BilingualText } from '../../i18n';
-import type { CameraState, SceneTransition } from './types';
+import type { CameraState, SceneSnapshot, SceneTransition } from './types';
 
 /** HUD text: bilingual content or an already-translated UI string. */
 export type HudText = BilingualText | string;
@@ -199,6 +199,13 @@ export interface SceneControls {
    * beat list, crossing chapters. Omit when the engine has no such axis.
    */
   beatStep?(direction: 1 | -1): void;
+  /**
+   * The scene a link to `state` opens on when it is not the chapter's target
+   * (SpaceScene: under `b`, that beat's scene): the URL then leaves out only
+   * what such a link brings back. Its `beat` must be the chapter target's so
+   * `b` stays in the link. Omit (or return null) for the chapter's target.
+   */
+  urlBaseline?(state: SceneSnapshot): SceneSnapshot | null;
   /** The continuous time on show (TimeScene's playhead; `__atlas.state().playhead`), `null` when the engine has none. */
   time?: {
     now(): number | null;

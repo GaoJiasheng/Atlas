@@ -235,10 +235,10 @@ export default function SceneHost(props: SceneHostProps) {
     if (Object.keys(patch).length > 0) store.getState().hydrate(patch);
     return startUrlSync({
       read: () => store.getState().snapshot() as UrlState,
-      baseline: (state) => store.getState().chapterTarget(state.chapter ?? null) as UrlState,
+      baseline: (state) => (hud.getState().controls.urlBaseline?.(state as SceneSnapshot) ?? store.getState().chapterTarget(state.chapter ?? null)) as UrlState,
       subscribe: (listener) => store.subscribe(listener),
     });
-  }, [store, engine, dataReady]);
+  }, [store, hud, engine, dataReady]);
 
   // Theme: user override > scene (URL / chapter) > topic default.
   const sceneTheme = useStore(store, (s) => s.theme);

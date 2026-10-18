@@ -223,7 +223,7 @@ store.getState().chapterTarget(id);                                // 某章的�
 
 - **SceneState**：`chapter, layers, camera, theme` + 引擎扩展字段（TimeScene：`t, highlight`；SpaceScene：`part, view, explode, run, cutaway`）。
 - **章节目标是累积的**：第 N 章目标 = 默认值 ⊕ 第 1..N 章的 `state` 依次叠加。作者只写变化的字段；同一章永远得到同一状态，URL 可复现。
-- **过渡**：`transition: { id, reason: 'init' | 'chapter' | 'url' | 'preset' | 'snap', instant }`（`preset` = 镜头预设、`snap` = 立即完成，见下文 HUD 控件注册）。引擎监听 `transition.id` 变化，向当前状态做动画（flyTo、时间插值、零件淡入）；`instant: true`（首次加载、深链接）时直接跳过去。用户 `patch()` 不 bump transition，引擎直接跟随。
+- **过渡**：`transition: { id, reason: 'init' | 'chapter' | 'url' | 'preset' | 'snap' | 'state', instant, fields? }`（`preset` = 镜头预设、`snap` = 立即完成，见下文 HUD 控件注册；`fields` 只在 `url` 上：链接自己写了的 store 字段，其余来自章节目标，引擎补全链接时只补其余的）。引擎监听 `transition.id` 变化，向当前状态做动画（flyTo、时间插值、零件淡入）；`instant: true`（首次加载、深链接）时直接跳过去。用户 `patch()` 不 bump transition，引擎直接跟随。
 - **相机**：`GeoCamera { center, zoom, pitch?, bearing? }` 或 `OrbitCamera { position, target, fov? }`。地图 `moveend` 后 `setCamera()` 回写，URL 会自动同步。
 
 ### URL 同步
@@ -409,7 +409,7 @@ skill 里 `shoot.py` 的 Playwright / TypeScript 版，驱动 `window.__atlas`�
 pnpm shoot sample-space                      # 每章 + 每个模式 + 额外预设 + hero-clean -> shots/sample-space/en-paper/*.png
 pnpm shoot sample-time --locale zh --theme cinema --size 3840x2160 --suffix _4k
 pnpm shoot sample-time --keys --layout       # 键位同步 + 八尺寸 HUD 布局（有 `--keys` / `--layout` / `--beats` 且没给截图名时不截默认图）
-pnpm shoot ww2 --beats                       # 每一拍一张 -> shots/ww2/en-paper/beat-<章 id>-<n>.png（n = 本章内第几拍，从 1 起）；脚本核对 state().presentation 与 HUD 隐藏，没落到就失败；这拍要标的 id 里没有标注的（锚点在画面外或对应图层没开，多半是内容 / 镜头问题）逐条打印，不算失败——TimeScene 看 `highlight` 与地图标签 `.ts-co`，SpaceScene 看拍的 `labels`（`.space-leaders` 的 `data-want`）与引线标签 `.space-co[data-id]`（组标注是 `group:<id>`）；`--beats` 末尾还按同一办法列出每章自己 `state.highlight` / `state.labels` 里在章节镜头下没有标注的 id（`chapter highlights`），同样不算失败
+pnpm shoot ww2 --beats                       # 每一拍一张 -> shots/ww2/en-paper/beat-<章 id>-<n>.png（n = 本章内第几拍，从 1 起）；脚本核对 state().presentation 与 HUD 隐藏，没落到就失败；这拍要标的 id 里没有标注的（锚点在画面外或对应图层没开，多半是内容 / 镜头问题）逐条打印，不算失败——TimeScene 看 `highlight` 与地图标签 `.ts-co`，SpaceScene 看拍的 `labels`（`.space-leaders` 的 `data-want`）与引线标签 `.space-co[data-id]`（组标注是 `group:<id>`）；SpaceScene 再在另一页逐拍打开 `?ch=<章>&b=<n>`，场景与演示里的不同（试一试值、视图、图层、镜头、hide …）或时间线不在终态就失败（`beat links: N of N`）；`--beats` 末尾还按同一办法列出每章自己 `state.highlight` / `state.labels` 里在章节镜头下没有标注的 id（`chapter highlights`），同样不算失败
 pnpm shoot sample-space --perf --json out.json   # 每张图后多等 2 s，打印 calls / triangles / fps / gpu；--json 写全部结果
 pnpm shoot sample-time --shots mine.json hero    # 自定义截图表（{name: {chapter?, preset?, modes?, hud?, wait?, js?}}）
 ```
@@ -1088,7 +1088,7 @@ state:
 - **试一试卡片**（`readerTop`，节拍行之后、详情之前；docs/08 §2 铁律 d）：标题 TRY IT / 试一试 + 键位提示；三行芯片（改变 signal 实心、不变 cold 描边、观察墨色描边）；控件：开关钮（`role="switch"`）、‹ 值 ›（`role="group"`，两端禁用）、选项钮（`role="radiogroup"` / `radio`），全部 ≥ 44 px，`data-sim-control` / `data-sim-value`；观察量大号读数 + SIM 芯片"在这个模型里"；先猜后看：选项 → 应用 `start`、读"之前"、应用 `change` → "你猜：… · 观察到：…"（观察 = `lib/sim/trial.ts outcomeOf`：变为零 / 变号 / ±5 % 内差不多一样 / 变大 / 变小，用 `means` 相同的选项的话说），「回到改变前」恢复改变前的值；换章、拍、深链接时清掉。数据表：「记一行」按改变量的值一行（同值覆盖，≤ 12 行，只在内存：刷新即清），列 = 改变量 + 观察量（+ 是 / 否）。手机在底部抽屉里同样可用。
 - **键**：`[` `]` = 本章 `vary` 的上一值 / 下一值（开关 = 关 / 开，选择 = 上 / 下一个选项），`T` = 本章卡片里第一个开关（`vary` 或 `also`），`G` = 再跑一次（卡片有 `replay` 时）；注册为命令 `sim-prev` / `sim-next` / `sim-toggle` / `sim-replay`（`SIM_KEYS`），和按钮、电路图、测试 API 写同一个 store 值（`G` 与「再跑一次」按钮写引擎 UI store 的同一个计数 `simReplay`）；状态行键位提示写 `[ ] T TRY IT`（有 `G` 时 `[ ] T G TRY IT`）。没有卡片的章不注册。
 - **电路图卡**（有 `circuit.diagram` 时代替右上零件链路卡，标题 CIRCUIT DIAGRAM / 电路图；< 1024 px 收进试一试卡片里可折叠的一节）：节点的 `d` 是图上坐标，边的 `via` 是直角拐点，符号放在最长的一段直线上（`at`，默认中点）：电池 = 每节一对长（+）短（−）线、翻转的那节反过来，灯 = 圆内叉（按亮度填 `--lamp`，拔掉时虚线），开关 = 两个接线点 + 刀片（断开时抬起），缺口 = 两个接线点 + 材料（导体实线、铅笔芯虚线、绝缘体空着），蜂鸣器、电机（M）；有电流的边用 `--current` 加粗并带方向箭头（从正极出发），短路时整张图 `--hot`；开关符号 = 拨真开关（`role="button"`、`aria-pressed`、44 px 命中区，Enter / Space），其他符号 = 选中边的 `part`，选中的零件对应符号描 signal；`diagram.labels` 是图上的小字（"手电筒"）。没有 `d` 的节点不画。
-- **测试与 QA**：`__atlas.engine.sim()` → `{ values, set, outputs, try, table, timeline, replays }`（`timeline`：每条时间线输出在舞台上的 `{ t, duration, playing, slow }`，模型秒；`replays`：再跑一次的计数），`__atlas.engine.setSim({ id: value })`（逐个走 `setSimControl`，有非法值返回 false），`__atlas.engine.simSeek(id, t)`（把时间线停在模型时刻 `t`，截过程中的一帧）；`__atlas.state().sim` = 设过的值。`pnpm shoot <slug> --keys` 测 `[` `]` `T` `G`（在第一个有卡片的章：`]` 前进一值、`[` 回来、URL 带 `sim`；`T` 翻转一个开关再翻回；`G`：计数加一、有时间线从头开始播放）；`--beats` 每拍照常截图（拍的 `sim.set` 随 `beatScene` 应用；时间线直接是终态）。
+- **测试与 QA**：`__atlas.engine.sim()` → `{ values, set, outputs, try, table, timeline, replays }`（`timeline`：每条时间线输出在舞台上的 `{ t, duration, playing, slow }`，模型秒；`replays`：再跑一次的计数），`__atlas.engine.setSim({ id: value })`（逐个走 `setSimControl`，有非法值返回 false），`__atlas.engine.simSeek(id, t)`（把时间线停在模型时刻 `t`，截过程中的一帧），`__atlas.engine.anchor(id)`（零件标注锚点此刻在舞台上的 `{ x, y, shown, onScreen }`，CSS px，跟着姿态、试一试 offset 和时间线走）；`__atlas.state().sim` = 设过的值。`pnpm shoot <slug> --keys` 测 `[` `]` `T` `G`（在第一个有卡片的章：`]` 前进一值、`[` 回来、URL 带 `sim`；`T` 翻转一个开关再翻回；`G`：计数加一、有时间线从头开始播放）；`--beats` 每拍照常截图（拍的 `sim.set` 随 `beatScene` 应用；时间线直接是终态），之后在另一页逐拍打开 `?ch=<章>&b=<n>`：场景字段（试一试值、视图、图层、镜头、hide …）与演示里的不同、或有时间线不在终态，记为拍失败。
 - **token**：`--lamp`（灯丝发光，暖白）、`--current`（电流粒子，暗金；短路用 `--hot`）、`--f-gravity` / `--f-friction` / `--f-elastic` / `--f-push`（力的箭头，见「力的箭头」）、`--en-light` / `--en-electrical` / `--en-kinetic` / `--en-sound` / `--en-heat` / `--en-potential`（能量形式，见「能量」）。
 - **已知限制**：读者不能自己拖元件、连线、拖磁铁和指南针、推小车（docs/23 §4.5、docs/22 §4.5、docs/30 §4.6，v2：场线 / 时间线要在运行时重算）。
 
@@ -1395,7 +1395,7 @@ state:
 - 状态行追加：选中零件 `#06 SAMPLE DRUM`、`EXPLODE 80`、`CUTAWAY 50`、REFERENCE 时的锁定说明。规格行追加 PARTS / GROUPS / FLOWS（`hud/spec.ts`）；有 `spec` 时是 PARTS + 主题行。标题块声明行 = `topic.yaml` 的 `note`（没有时用全站文案）。
 - `card`：零件链路示意（有零件的组 = 列，列号 = 组的分区号；零件 = 带编号节点，context 零件不进；`connects` = 细线）；最长一列 > 10 行时行距从 23 降到 16（字号 10）；选中零件填 signal 色；运转时：有 `parts` 的流把它流经的相邻零件之间的连线染成 `stops` 在该处的颜色（`color-mix`）并步进，没有 `parts` 的流照旧染本组内的连线。
 - 原来的三块底部面板（ARCHITECTURE / DETAIL / STATE）已去掉（Gavin 2026-10-11：占地方、DETAIL 常常是空框）：结构和状态并进左列的 PLATE 块，零件详情只在阅读面板里。
-- `bottomBar` = **章节轴**（core `ChapterAxis`，见「布局」）：每章一段、每拍一个刻度，右端 `05 · 2/8`（章号 · 当前拍 / 本章拍数，本章自身状态写 `–`）。点段 = `goToChapter`，读者换章（段、芯片、章节轨、← →，非 instant）后在 microtask 里应用本章第一拍；点刻度、`,` / `.`、节拍行 ‹ › = 在**演示之外**应用那一拍：与演示的 `applyBeat` 同一个 `beatScene()`（镜头 1.4 s、图层、ghost、高亮、标注、姿态、剖切、动作、起止点、运转），先退出 REFERENCE、停 ORBIT，不进演示、不藏 HUD、没有字幕卡；拍的镜头算作者镜头（不是 FREE CAMERA；拍写的是命名预设就亮那个预设）。落定后照常可以转、缩；选零件不改拍。store 字段 `beat`（本章第几拍，0 起；`null` = 本章自身状态：instant 换章、没带 `b` 的深链接），URL `b`（从 1 起）；带 `b` 的深链接在 URL 字段之上补这一拍不进 URL 的字段（hide / ghost / exercise / tints / sites）。P 从当前拍开始演示，退出时放回原来的 `beat`。⌄ 把轴收成发丝线（`panelsOpen`）。引线标注：有当前拍时用这一拍的 `labels`（演示之外不限 6 个）。
+- `bottomBar` = **章节轴**（core `ChapterAxis`，见「布局」）：每章一段、每拍一个刻度，右端 `05 · 2/8`（章号 · 当前拍 / 本章拍数，本章自身状态写 `–`）。点段 = `goToChapter`，读者换章（段、芯片、章节轨、← →，非 instant）后在 microtask 里应用本章第一拍；点刻度、`,` / `.`、节拍行 ‹ › = 在**演示之外**应用那一拍：与演示的 `applyBeat` 同一个 `beatScene()`（镜头 1.4 s、图层、ghost、高亮、标注、姿态、剖切、动作、起止点、运转），先退出 REFERENCE、停 ORBIT，不进演示、不藏 HUD、没有字幕卡；拍的镜头算作者镜头（不是 FREE CAMERA；拍写的是命名预设就亮那个预设）。落定后照常可以转、缩；选零件不改拍。store 字段 `beat`（本章第几拍，0 起；`null` = 本章自身状态：instant 换章、没带 `b` 的深链接），URL `b`（从 1 起）；带 `b` 的深链接打开的就是章节轴上的这一拍：`beatScene()`（`lib/beat-scene.ts`）的全部字段——试一试值（拍的 `sim.set` 叠在本章上，读数、PLATE、`play.when` 跟着）、视图、图层、镜头（命名预设就亮那个预设）、hide / ghost / exercise / tints / sites——瞬切，时间线直接是终态；链接自己写了的字段（`transition.fields`：`sim=`、`cam=`、`view=` …）优先，`sim=` 整组替换拍的值。在某一拍时 URL 的基线是这一拍的场景（`SceneControls.urlBaseline`，`b` 本身照写），所以停在拍上的链接就是 `?ch=<章>&b=<n>`，读者改回本章值的字段也会写进 URL，打开后还原成同一个场景（单测 `tests/space-scene/beat-link.test.ts`，e2e `tests-e2e/beat-links.spec.ts`）。P 从当前拍开始演示，退出时放回原来的 `beat`。⌄ 把轴收成发丝线（`panelsOpen`）。引线标注：有当前拍时用这一拍的 `labels`（演示之外不限 6 个）。
 - `plate`（左列底部 PLATE / 图版块，`hud/PlateBlock.tsx`，表头可收起，`sessionStorage['atlas:plate']`，手机隐藏）：左 = 立面缩略图（零件包围盒在 `views.section` 上的投影，默认 XY；glb 零件用加载后量到的静止包围盒；组色填充、选中描 signal、被 `hide` 的画虚线框、context 斜线；地面线 + 比例尺，有 `units` 用实长）；右 = 小号 标签–值 行 RUN / FLOW（有流时）/ ANIM / VIEW（REFERENCE、亮着的预设、FREE CAMERA 或 `CH 05`）/ EXPLODE（或主题的 `explodeLabel`）；下 = 一行组色图例（名字截短）；有 `telemetry` 时一枚 `SIM` 芯片 + `标签 值 单位` 连排（x(t) = target + (x₀ − target)·e^(−t/lag)，target = run ? `run` : `idle`，4 Hz 刷新、不加抖动；瞬时过渡直接跳到终值）；再下 = 当前选中一行（`#28 COMPRESSOR`，点它展开阅读面板并滚到详情）；末行 perf（`60 FPS · 16 CALLS · 0.02M TRIS · 1520×1026`，按需渲染空闲时 `IDLE`）。高度 ≤ 760 时不画缩略图、图例和 perf。
 - `stageOverlay`：控制面板（`explorer/ExplorerOverlay.tsx`）：LAYERS = 零件组（有零件的组行末带 `⊙` 单显开关，`data-solo`），TOOLS = X-RAY / EXPLODED / CUTAWAY / FLOW / REFERENCE / PRESENTATION / LABELS /（有 `glossary.json` 时）名词表 / 隐藏界面，EXPLODED 时其下出现拆开滑块（44 px 拇指），KEY = 组与流的图例。章节正文里的 `<Term>` 与 TimeScene 相同。
 - `readerTop`（阅读面板章头正下方，docs/08 §2 铁律 c、d）：**节拍行**（`explorer/BeatLine.tsx`：`BEAT 2/8` + 这一拍的字幕（页面语言）+ ‹ ›，44 px 命中区；本章没写拍就不画；拍、章、选中零件或动作一变，阅读面板滚回顶部），然后**选中对象**：动作模式时的动作卡（ExerciseCard），选中零件的详情（编号 + 名称 + 另一种语言、说明、了解更多 / 肌肉零件的四页肌肉卡与 SOLO、左右、所属组、相连芯片），hairline 皮肤；什么都没选就什么都不画（不再有提示框，也不再有迷你爆炸图）。
@@ -1599,12 +1599,12 @@ scripts/math/check-pool.ts   题库草稿自证：pnpm tsx scripts/math/check-po
 
 ## URL 参数
 
-页面 URL 就是场景状态。与「当前章节目标」相同的值不会写进 URL，所以普通章节链接只有 `?ch=<id>`；其它 query（如 `utm_*`）原样保留。非法值被丢弃，不报错。
+页面 URL 就是场景状态。与「当前章节目标」相同的值不会写进 URL，所以普通章节链接只有 `?ch=<id>`（SpaceScene 停在某一拍时基线是这一拍的场景，链接只有 `?ch=<id>&b=<n>`）；其它 query（如 `utm_*`）原样保留。非法值被丢弃，不报错。
 
 | key | 含义 | 取值 | 引擎 | 例 |
 |---|---|---|---|---|
 | `ch` | 当前章节 | 章节 id | 通用 | `ch=power-on` |
-| `b` | 本章的当前拍（章节轴） | 1 起的整数；不写 = 本章自身状态（MathScene：= 1 时不写；讲解拍之后的一拍是小测，练习章第 k 拍是第 k 题） | SpaceScene、MathScene | `ch=training-the-chest&b=2` |
+| `b` | 本章的当前拍（章节轴） | 1 起的整数；不写 = 本章自身状态（SpaceScene：打开 = 章节轴上的这一拍，含拍的 `sim.set` 与镜头，URL 里写了的字段优先；MathScene：= 1 时不写；讲解拍之后的一拍是小测，练习章第 k 拍是第 k 题） | SpaceScene、MathScene | `ch=training-the-chest&b=2` |
 | `layers` | 打开的图层 / 组 | 逗号分隔 id；空值 = 全关 | 通用 | `layers=control,battles` |
 | `cam` | 镜头 | 地图 `lng,lat,zoom[,pitch[,bearing]]`；3D `px,py,pz,tx,ty,tz`；空值 = 无 | 通用 | `cam=103.8,1.35,7.5` |
 | `theme` | 场景主题 | `paper` \| `cinema` | 通用 | `theme=cinema` |
@@ -1616,7 +1616,7 @@ scripts/math/check-pool.ts   题库草稿自证：pnpm tsx scripts/math/check-po
 | `run` | 通电运转 | `1` \| `0` | SpaceScene | `run=1` |
 | `cut` | 剖切 | `none` \| `half` \| 命名剖切面（`views.cuts`，数据里没有就不切） | SpaceScene | `cut=sagittal` |
 | `pose` | 姿态 | `parts.json` `poses` 里的名字；空值 = 静止 | SpaceScene | `pose=wings-open` |
-| `sim` | 试一试的控件值（本章 `sim.set` 之外、读者或拍改过的） | `控件.值` 用 `~` 连，键排序；开关 `on` / `off`，步进写数，选择写选项 id；与本章基线相同时不写 | SpaceScene | `sim=cells.3~flip-2.on` |
+| `sim` | 试一试的控件值（本章 `sim.set` 之外、读者或拍改过的） | `控件.值` 用 `~` 连，键排序；开关 `on` / `off`，步进写数，选择写选项 id；与基线（本章，或带 `b` 时这一拍）相同时不写；写了就整组替换基线的值 | SpaceScene | `sim=cells.3~flip-2.on` |
 | `model` | 小测的模型视图 | `bar` \| `circle` \| `numberline` \| `wall` \| `barmodel`；= 题目默认时不写 | MathScene | `model=circle` |
 
 新增可链接字段：改 `core/types.ts` 的 `UrlEngineFields`、`core/url-state.ts`（`URL_KEY_ORDER`、编解码）、`SceneHost.tsx` 里解构的字段、descriptor 的 `fromUrl`，并补 `tests/url-state.test.ts`。
