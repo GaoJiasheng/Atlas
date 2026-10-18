@@ -1,0 +1,411 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "Atlas design study for this topic (docs/31-energy-conversion-content-spec.md §2.4 and §9): a slice of a generic HDB block, not a real building or product. DESIGN: ground floor and top floor drawn, middle floors left out, the Sun not to scale; 12 rooftop panels of 1.722 × 1.134 m (1.953 m²) tilted 10°, 21 % of the light into electrical energy; sunlight on the panels 900 W/m² (clear noon), 640 W/m² (average noon), 150 W/m² (overcast, illustrative) and 0 (night); a lift car rising 3.8 m; a ceiling fan 1.32 m across; a 2,200 W kettle heating 1.0 kg of water from 30 °C; a 58 g tennis ball 6.7 cm across, let go from 25, 50, 75 or 100 cm (heights to the bottom of the ball); a swing on 2.0 m chains let go at 35°; a wind-up toy running 1.5 s for each turn of its key (0, 2, 4, 6 or 8 turns); a bicycle dynamo giving a current I = 0.5 A × x ÷ √(1 + x²), x = speed ÷ 6 km/h, into a 12 Ω headlamp rated 3 W, with a back wheel 2.07 m round; g = 9.8 N/kg. Shares inside each machine, in % (illustrative): panels 21 electrical, 75 heat, 4 reflected light; inverter 95 electrical, 5 heat; lift motor 80 kinetic, 15 heat, 5 sound; fan 60 kinetic, 38 heat, 2 sound; LED lamp 40 light, 60 heat; filament lamp 10 light, 90 heat; speaker 1 sound, 99 heat; kettle 85 into the water, 14 heat, 1 sound; battery 95 electrical, 5 heat; wind-up toy 95 heat, 5 sound; dynamo 30 electrical, 65 heat, 5 sound; power station 55 electrical, 45 heat; grid 96 electrical, 4 heat. The ball bounces back to 55 % of its drop height on tile, 40 % on rubber, 25 % on carpet and 5 % on sand; the swing loses 3 % of the energy it has left on every swing from one side to the other. SIM: panels 4.43 / 3.15 / 0.74 / 0.00 kW; solar chain 100 → 21 electrical → 20 to the lift (1 heat) → 16 kinetic, 3 heat, 1 sound → 16 potential in the car. Ball from 25 / 50 / 75 / 100 cm reaches the floor at 2.21 / 3.13 / 3.83 / 4.43 m/s; from 100 cm it bounces back to 55 / 40 / 25 / 5 cm (tile, rubber, carpet, sand), from 50 cm on tile to 28 cm; 58 g raised 1 m has about 0.57 J. Swing: 0.36 m higher at 35°, 2.66 m/s at the bottom, 2.9 s there and back (2.906 s by the exact pendulum formula), 78 % left after 8 swings. Toy: 3 / 6 / 9 / 12 s after 2 / 4 / 6 / 8 turns. Torch: 38 % of the stored energy leaves as light. Dynamo at 0 / 5 / 10 / 15 / 20 / 25 km/h: 0.00 / 1.23 / 2.21 / 2.59 / 2.75 / 2.84 W, brightness 0 / 41 / 74 / 86 / 92 / 95 %, back wheel 0 / 40 / 81 / 121 / 161 / 201 turns a minute; 3 % of the pedalling energy leaves the lamp as light. Gas to lamp: filament 100 → 55 electrical (45 heat) → 53 home (2 heat) → 5 light, 48 heat; an LED lamp for the same light starts at 25 → 14 → 13 → 5 light, 8 heat. Kettle: 1 kg × 4,186 J/(kg °C) × 70 °C = 293 kJ; 293 kJ ÷ (2,200 W × 0.85) = 157 s.",
+        "zh": "本主题的 Atlas 设计研究（docs/31-energy-conversion-content-spec.md §2.4、§9）：一座通用组屋的切片，不对应任何真实的建筑或产品。设计值：只画底层和顶层，省略中间楼层，太阳不按比例；屋顶 12 块太阳能板，每块 1.722 × 1.134 m（1.953 m²），倾斜 10°，把 21 % 的光转换成电能；板上的阳光：晴天中午 900 W/m²，一般的中午 640 W/m²，阴天 150 W/m²（示意），夜里 0；电梯轿厢升高 3.8 m；吊扇直径 1.32 m；2,200 W 的水壶把 1.0 kg 水从 30 °C 烧开；58 g、直径 6.7 cm 的网球从 25、50、75 或 100 cm 高处松手（高度量到球底）；秋千链长 2.0 m，从 35° 松手；发条玩具钥匙每转一圈跑 1.5 s（0、2、4、6、8 圈）；自行车发电机电流 I = 0.5 A × x ÷ √(1 + x²)，x = 速度 ÷ 6 km/h，接一盏 12 Ω、额定 3 W 的车灯，后轮周长 2.07 m；g = 每千克 9.8 N。各机器内部的比例（%，示意）：太阳能板 电 21、热 75、反射光 4；逆变器 电 95、热 5；电梯电动机 动 80、热 15、声 5；风扇 动 60、热 38、声 2；LED 灯 光 40、热 60；白炽灯 光 10、热 90；音箱 声 1、热 99；水壶 进水 85、热 14、声 1；电池 电 95、热 5；发条玩具 热 95、声 5；发电机 电 30、热 65、声 5；发电厂 电 55、热 45；电网 电 96、热 4。球在地砖上弹回到下落高度的 55 %，橡胶垫 40 %，地毯 25 %，沙 5 %；秋千每从一边摆到另一边，损失剩下能量的 3 %。模拟值：太阳能板 4.43 / 3.15 / 0.74 / 0.00 kW；太阳能链 100 → 电 21 → 送电梯 20（热 1）→ 动 16、热 3、声 1 → 轿厢势能 16。球从 25 / 50 / 75 / 100 cm 落下，碰地速度 2.21 / 3.13 / 3.83 / 4.43 m/s；从 100 cm 落下弹回 55 / 40 / 25 / 5 cm（地砖、橡胶垫、地毯、沙），从 50 cm 落在地砖上弹回 28 cm；58 g 举高 1 m 约有 0.57 J。秋千：35° 时比最低点高 0.36 m，最低点 2.66 m/s，来回一次 2.9 s（按精确的单摆公式 2.906 s），摆 8 次后剩 78 %。发条车：转 2 / 4 / 6 / 8 圈跑 3 / 6 / 9 / 12 s。手电筒：储存能量的 38 % 变成光。发电机在 0 / 5 / 10 / 15 / 20 / 25 km/h：0.00 / 1.23 / 2.21 / 2.59 / 2.75 / 2.84 W，亮度 0 / 41 / 74 / 86 / 92 / 95 %，后轮每分钟 0 / 40 / 81 / 121 / 161 / 201 圈；踩踏板的能量有 3 % 从车灯变成光。从天然气到灯：白炽灯 100 → 电 55（热 45）→ 到家 53（热 2）→ 光 5、热 48；同样亮的 LED 灯从 25 开始 → 14 → 13 → 光 5、热 8。水壶：1 kg × 4,186 J/(kg °C) × 70 °C = 293 kJ；293 kJ ÷ (2,200 W × 0.85) = 157 s。"
+      },
+      "note": {
+        "en": "Not a measurement. The panel size follows a common 108-cell panel (S13); 21 % lies between the 17 % and just under 25 % of commercial panels (S11). The sunlight inputs are round values near NASA's 2023 noon averages on level ground, about 918 and 645 W/m² (S10), used as illustrative values on the tilted panels; 150 W/m² for an overcast sky is illustrative. The filament lamp's 10 / 90 follows S14; the LED lamp's 40 % light is a model value chosen so that it needs a quarter of the energy for the same light, in line with 'at least 75 % less' (S15), not a measured efficiency; the speaker's 1 % is the value a textbook problem assumes (S16); the 2,200 W kettle follows one common kettle (S17); the kettle's, fan's, inverter's, lift's, battery's, toy's, dynamo's and grid's shares are illustrative, and so is the power station's 55 % (modern combined-cycle stations can pass 60 %, S32). The tile rebound of 55 % lies inside 135–147 cm ÷ 254 cm for approved balls on a rigid block (S20), but as a value for a tile at every height it is the model's choice; rubber, carpet and sand are illustrative (S21). g = 9.8 rounds 9.806 65 (S22); falls leave out the air (S23); the swing's period uses the exact pendulum formula, not the small-angle one (S24); the 3 % loss per swing, the toy's times and the dynamo's curve are illustrative design values, the dynamo levelling off below its 3 W rating (S27). Each chain is rounded node by node to whole per cent, with the rounding added to the heat, so every node gives out what it takes in (S25). The lift chain follows only the car and leaves the counterweight out (S30).",
+        "zh": "不是实测值。太阳能板尺寸取常见的 108 片电池板（S13）；21 % 落在商用板的 17 % 到接近 25 % 之间（S11）。阳光数值取接近美国航天局 2023 年水平地面中午平均值（约 918 和 645 W/m²，S10）的整数，作为倾斜板面上的示意值；阴天 150 W/m² 是示意值。白炽灯的 10 / 90 依据 S14；LED 灯 40 % 变光是为了让它同样亮只用四分之一的能量而取的模型值，与“至少少用 75 %”（S15）相符，不是实测效率；音箱的 1 % 是一道教科书习题假设的值（S16）；2,200 W 的水壶依据一款常见水壶（S17）；水壶、风扇、逆变器、电梯、电池、发条玩具、发电机和电网的比例都是示意值，发电厂的 55 % 也是（现代联合循环电厂可以超过 60 %，S32）。地砖弹回 55 % 落在合格网球在硬试块上 135–147 cm ÷ 254 cm 的范围内（S20），但把它当作地砖在各个高度的值，是模型的选择；橡胶垫、地毯和沙是示意值（S21）。g = 9.8 是 9.806 65 的取整（S22）；下落不算空气（S23）；秋千周期用精确的单摆公式，不用小角度公式（S24）；秋千每次损失 3 %、发条车跑的时间和发电机的曲线都是示意的设计值，发电机在额定 3 W 以下就平了（S27）。每条链逐个节点取整到整数百分比，取整差加到热里，所以每个节点出去的都等于进来的（S25）。电梯链只算轿厢，没有算对重（S30）。"
+      }
+    },
+    {
+      "id": "S2",
+      "text": {
+        "en": "Ministry of Education Singapore, Curriculum Planning and Development Division, Science Teaching & Learning Syllabus, Primary Three to Six, Standard / Foundation (from the 2023 Primary Three cohort, updated January 2026). Printed p. 80, Energy Conversion: energy from most of our energy resources is derived in some ways from the Sun; the forms of energy are kinetic, potential, light, electrical, sound and heat energy (the terms chemical, gravitational and elastic potential energy are not required); investigate energy conversion from one form to another; be responsible in conserving energy in everyday life. Printed pp. 78–79: the Sun is our primary source of energy (light and heat); plants make food from water and carbon dioxide using light energy. Printed pp. 14 and 74: energy is required for things to work; it exists in different forms that can be converted; some energy sources can be used up. Printed p. 76: heat is a form of energy and flows from a hotter object to a colder one. Printed p. 15: design a fair test.",
+        "zh": "新加坡教育部课程规划与发展司《小学三至六年级科学教学大纲》（标准／基础，2023 年小三起实施，2026 年 1 月更新）。印刷页第 80 页“能量转换”：我们大多数能源的能量以某种方式来自太阳；能量形式有动能、势能、光能、电能、声能和热能（不要求化学势能、重力势能、弹性势能这些名词）；探究能量从一种形式到另一种形式的转换；在日常生活中负责任地节约能源。印刷页第 78–79 页：太阳是我们主要的能源（光和热）；植物利用光能，用水和二氧化碳制造食物。印刷页第 14、74 页：事物工作需要能量；能量有不同形式，可以互相转换；有些能源会用完。印刷页第 76 页：热是能量的一种形式，从较热的物体传到较冷的物体。印刷页第 15 页：设计公平测试。"
+      },
+      "url": "https://www.moe.gov.sg/api/media/ba3562d3-5b31-4459-8693-45cde7b97273/Primary-Science-Syllabus-2023_May24.pdf",
+      "note": {
+        "en": "Read 2026-10-18 from the official PDF; printed page numbers (PDF page = printed page + 1). The text uses 'potential energy' for every kind of stored energy, as the syllabus note allows.",
+        "zh": "2026-10-18 读取官方 PDF；页码为印刷页码（PDF 页 = 印刷页 + 1）。按大纲注释的意思，正文把各种储存的能量都叫势能。"
+      }
+    },
+    {
+      "id": "S3",
+      "text": {
+        "en": "US Energy Information Administration, Natural gas explained, 'How did natural gas form?': natural gas formed from the remains of plants and animals that built up in thick layers on the earth's surface and ocean floors millions of years ago, were buried under sand, silt and rock, and were changed by heat and pressure.",
+        "zh": "美国能源信息署《天然气简介》“天然气是怎样形成的”：几百万年前，动植物的遗骸在地表和海底积成厚厚的一层，被沙、泥和岩石埋起来，经过高温和压力变成了天然气。"
+      },
+      "url": "https://www.eia.gov/energyexplained/natural-gas/",
+      "note": {
+        "en": "Read 2026-10-18. Natural gas did not all form at sea; the text says 'on land and on the sea floor'.",
+        "zh": "2026-10-18 读取。天然气不全是在海里形成的；正文写“在陆地上和海底”。"
+      }
+    },
+    {
+      "id": "S4",
+      "text": {
+        "en": "US Energy Information Administration, Coal explained, 'How is coal formed?': coal formed from plants that died in swamps hundreds of millions of years ago and were buried, pressed and heated.",
+        "zh": "美国能源信息署《煤炭简介》“煤是怎样形成的”：煤是几亿年前死在沼泽里的植物，被埋起来、压紧、加热后变成的。"
+      },
+      "url": "https://www.eia.gov/energyexplained/coal/",
+      "note": {
+        "en": "Read 2026-10-18. Used to keep coal's origin apart from natural gas.",
+        "zh": "2026-10-18 读取。用来把煤的来源和天然气分开说。"
+      }
+    },
+    {
+      "id": "S5",
+      "text": {
+        "en": "Energy Market Authority, Singapore Energy Statistics 2025, Chapter 2: Energy Transformation, 'Fuel Mix for Electricity Generation': in 2024 natural gas accounted for 94.0 % of the fuel used to generate Singapore's electricity, other energy products 2.7 %, solar 2.1 %, and coal and petroleum products 1.2 %.",
+        "zh": "新加坡能源市场管理局《新加坡能源统计 2025》第 2 章“能源转换”之“发电燃料构成”：2024 年，新加坡发电所用燃料中天然气占 94.0 %，其他能源产品 2.7 %，太阳能 2.1 %，煤和石油产品 1.2 %。"
+      },
+      "url": "https://www.ema.gov.sg/resources/singapore-energy-statistics/chapter2",
+      "note": {
+        "en": "Read 2026-10-18. Shares of the fuel used to make electricity, not of power-station capacity. The same chapter gives only the first half of 2025 (natural gas 93.1 %, solar 2.5 %), so the topic uses the full year 2024.",
+        "zh": "2026-10-18 读取。这是发电用燃料的比例，不是发电装机容量的比例。同一章 2025 年只有上半年的数字（天然气 93.1 %、太阳能 2.5 %），所以本主题用 2024 年全年的数字。"
+      }
+    },
+    {
+      "id": "S6",
+      "text": {
+        "en": "PUB and Sembcorp, 'Sembcorp and PUB officially open the Sembcorp Tengeh Floating Solar Farm' (14 July 2021): a 60 MWp farm of about 122,000 solar panels spanning 45 hectares of Tengeh Reservoir, expected to produce enough energy in a year for PUB's five local water treatment plants, offsetting about 7 % of PUB's annual energy needs.",
+        "zh": "公用事业局与胜科《胜科与公用事业局正式启用登格浮动太阳能发电场》（2021 年 7 月 14 日）：额定 60 MWp，约 122,000 块太阳能板，铺在登格蓄水池 45 公顷的水面上，一年发的电够公用事业局本地五座自来水厂用，约抵消公用事业局每年所需能量的 7 %。"
+      },
+      "url": "https://www.pub.gov.sg/Resources/News-Room/PressReleases/2021/07/SEMBCORP-AND-PUB-OFFICIALLY-OPEN-THE-SEMBCORP-TENGEH-FLOATING-SOLAR-FARM",
+      "note": {
+        "en": "Read 2026-10-18 (paragraphs 1–3). 'Enough for five waterworks' is a yearly total, not a supply at night. PUB's annual report 2022/23 gives 38 hectares for the same farm, and the 2020 agreement planned over 146,000 panels; the topic uses the figures at the opening and does not try to reconcile the two areas.",
+        "zh": "2026-10-18 读取（第 1–3 段）。“够五座自来水厂用”是一年的总量，不是说夜里也能供电。公用事业局 2022/23 年报写同一座发电场占 38 公顷，2020 年的协议计划装 146,000 多块板；本主题用启用时的数字，不去调和两个面积。"
+      }
+    },
+    {
+      "id": "S7",
+      "text": {
+        "en": "Housing & Development Board, Green Innovations, 'Solar panels': solar panels on HDB blocks power common services such as lifts, lights and water pumps in the daytime, and surplus energy is channelled to the grid; HDB aims to reach 540 MWp of solar capacity by 2030.",
+        "zh": "建屋发展局《绿色创新》“太阳能板”：组屋屋顶的太阳能板白天为电梯、照明、水泵等公共设施供电，用不完的电输入电网；建屋局的目标是 2030 年达到 540 MWp 的太阳能装机容量。"
+      },
+      "url": "https://www.hdb.gov.sg/about-us/our-role/create-smart-and-sustainable-homes/green-innovations",
+      "note": {
+        "en": "Read 2026-10-18 through HDB's official text (the opened page did not show this section; the official search index returned it). This is why the model's panels power the lift and the flat takes its supply from the grid.",
+        "zh": "2026-10-18 通过建屋局的官方文字读取（打开的页面没有显示这一节，官方搜索索引给出了全文）。所以模型里的太阳能板给电梯供电，住家从电网取电。"
+      }
+    },
+    {
+      "id": "S8",
+      "text": {
+        "en": "Energy Market Authority, HDB and JTC, Media factsheet 'Accelerated Solar Deployment to Meet 3 GWp Solar Target by 2030', Annex B (2 March 2026), p. 6: HDB has installed solar panels on around 5,300 blocks, about half of all HDB blocks.",
+        "zh": "能源市场管理局、建屋发展局与裕廊集团《加快部署太阳能，实现 2030 年 3 GWp 目标》媒体资料附件 B（2026 年 3 月 2 日）第 6 页：建屋局已在约 5,300 座组屋、大约一半的组屋上装了太阳能板。"
+      },
+      "url": "https://isomer-user-content.by.gov.sg/166/7faca588-f437-4125-91ab-ef77246c66be/Factsheet%20on%20Accelerated%20Solar%20Deployment%20to%20Meet%203%20GWp%20Solar%20Target%20by%202030%20%5BPDF,%20236%20KB%5D.pdf",
+      "note": {
+        "en": "Read 2026-10-18. The count includes blocks fitted before the SolarNova programme.",
+        "zh": "2026-10-18 读取。这个数字包括 SolarNova 计划之前装的组屋。"
+      }
+    },
+    {
+      "id": "S9",
+      "text": {
+        "en": "Energy Market Authority, media release 'Singapore to Accelerate Solar Deployment to Meet 3 GWp Solar Target by 2030' (2 March 2026): Singapore reached 2 GWp of installed solar capacity in 2025 and raised its target for 2030 to 3 GWp.",
+        "zh": "能源市场管理局新闻稿《新加坡加快部署太阳能，实现 2030 年 3 GWp 目标》（2026 年 3 月 2 日）：新加坡在 2025 年达到 2 GWp 的太阳能装机容量，并把 2030 年的目标提高到 3 GWp。"
+      },
+      "url": "https://www.ema.gov.sg/news-events/news/media-releases/2026/Singapore-to-Accelerate-Solar-Deployment-to-Meet-3-GWp-Solar-Target-by-2030",
+      "note": {
+        "en": "Read 2026-10-18 (paragraphs 1–2). GWp is peak capacity, not the energy made in a year.",
+        "zh": "2026-10-18 读取（第 1–2 段）。GWp 是峰值装机容量，不是一年发的电量。"
+      }
+    },
+    {
+      "id": "S10",
+      "text": {
+        "en": "NASA Langley Research Center, POWER hourly data (SYN1DEG), Singapore 1.35° N 103.82° E, 1 January to 31 December 2023: clear-sky and all-sky sunlight on a level surface. Averaging the 365 values for hour 12, local solar time, gives about 918 W/m² for clear skies and 645 W/m² for the weather as it was.",
+        "zh": "美国航天局兰利研究中心 POWER 逐时数据（SYN1DEG），新加坡北纬 1.35°、东经 103.82°，2023 年 1 月 1 日至 12 月 31 日：水平地面上的晴空阳光和实际天气下的阳光。把当地太阳时 12 时的 365 个值平均，晴天约 918 W/m²，实际天气约 645 W/m²。"
+      },
+      "url": "https://power.larc.nasa.gov/api/temporal/hourly/point?parameters=ALLSKY_SFC_SW_DWN,CLRSKY_SFC_SW_DWN&community=AG&longitude=103.82&latitude=1.35&start=20230101&end=20231231&format=JSON&time-standard=LST",
+      "note": {
+        "en": "Downloaded and averaged for this topic, 2026-10-18 (API version 2.10.3; MJ per hour × 1,000,000 ÷ 3,600 = W/m²). These are hourly averages on level ground, not readings at the moment of noon on tilted panels; the model's 900 and 640 W/m² are round, illustrative inputs.",
+        "zh": "2026-10-18 为本主题下载并求平均（API 2.10.3 版；每小时 MJ × 1,000,000 ÷ 3,600 = W/m²）。这是水平地面上的逐时平均值，不是倾斜板面在正午那一刻的读数；模型的 900 和 640 W/m² 是取整的示意输入。"
+      }
+    },
+    {
+      "id": "S11",
+      "text": {
+        "en": "Fraunhofer Institute for Solar Energy Systems ISE, Photovoltaics Report (updated 14 July 2026), p. 7: in the last ten years the efficiency of average commercial silicon panels rose from about 17 % to just under 25 %.",
+        "zh": "弗劳恩霍夫太阳能系统研究所《光伏报告》（2026 年 7 月 14 日更新）第 7 页：过去十年，一般商用硅太阳能板的效率从约 17 % 提高到接近 25 %。"
+      },
+      "url": "https://www.ise.fraunhofer.de/content/dam/ise/de/documents/publications/studies/Photovoltaics-Report.pdf",
+      "note": {
+        "en": "Read 2026-10-18. The model's 21 % is a point inside this range, not a value from the report.",
+        "zh": "2026-10-18 读取。模型的 21 % 是这个范围里取的一个值，不是报告里的数。"
+      }
+    },
+    {
+      "id": "S12",
+      "text": {
+        "en": "National Renewable Energy Laboratory, 'Increased Spacing of Solar Panels Comes With Benefits' (2022): solar panels turn part of the sunlight into electricity, and the accompanying heat can decrease their power output slightly.",
+        "zh": "美国国家可再生能源实验室《太阳能板间距加大的好处》（2022）：太阳能板把一部分阳光变成电，随之产生的热会让它的输出功率稍微下降。"
+      },
+      "url": "https://www.nlr.gov/news/detail/program/2022/increased-spacing-of-solar-panels-comes-with-benefits",
+      "note": {
+        "en": "Read 2026-10-18. Supports 'most of the rest warms the panel' and 'hot panels give a little less'; the model's 75 % heat and 4 % reflected light are illustrative.",
+        "zh": "2026-10-18 读取。支持“其余大部分让板变热”和“板晒热了产生的电少一点”；模型的热 75 %、反射光 4 % 是示意值。"
+      }
+    },
+    {
+      "id": "S13",
+      "text": {
+        "en": "JinkoSolar, 2022 Product Catalogue, pp. 38–39: a 108-cell (6 × 18 half-cell) panel measuring 1,722 × 1,134 × 30 mm.",
+        "zh": "晶科能源《2022 产品目录》第 38–39 页：108 片（6 × 18 半片）太阳能板，尺寸 1,722 × 1,134 × 30 mm。"
+      },
+      "url": "https://www.jinkosolar.com/uploads/2201212.pdf",
+      "note": {
+        "en": "Read 2026-10-18 from the official catalogue's indexed table. One common panel size, cited as typical; panels come in many sizes.",
+        "zh": "2026-10-18 从官方目录的索引表格读取。一种常见的板的尺寸，只作典型引用；太阳能板有很多种尺寸。"
+      }
+    },
+    {
+      "id": "S14",
+      "text": {
+        "en": "US Department of Energy, Energy Saver, 'Energy Efficient Lighting' (August 2021), p. 1: traditional incandescent (filament) bulbs released about 90 % of their energy as heat and only about 10 % as light.",
+        "zh": "美国能源部《节能指南》“节能照明”（2021 年 8 月）第 1 页：传统白炽灯泡约 90 % 的能量变成热，只有约 10 % 变成光。"
+      },
+      "url": "https://www.energy.gov/sites/default/files/2021-08/ES-EE%20Lighting_080921.pdf",
+      "note": {
+        "en": "Read 2026-10-18. A round, everyday figure used in teaching, not a measurement of one lamp.",
+        "zh": "2026-10-18 读取。教学中常用的整数，不是某一盏灯的测量值。"
+      }
+    },
+    {
+      "id": "S15",
+      "text": {
+        "en": "US Department of Energy / ENERGY STAR, LED Partner Resources Guide (2009), p. 4: ENERGY STAR qualified LED lighting uses at least 75 % less energy than incandescent lighting.",
+        "zh": "美国能源部 / 能源之星《LED 合作伙伴资料指南》（2009）第 4 页：符合能源之星标准的 LED 照明，比白炽灯照明至少少用 75 % 的能量。"
+      },
+      "url": "https://www.energystar.gov/ia/partners/manuf_res/downloads/2009_LED_partner_resource_guide.pdf",
+      "note": {
+        "en": "Read 2026-10-18. It compares lamps giving the same light; it does not say what share of an LED's energy becomes light, so the model's 40 % is a model value (S1).",
+        "zh": "2026-10-18 读取。比较的是给出同样亮光的灯；它没有说 LED 灯有多少能量变成光，所以模型的 40 % 是模型值（S1）。"
+      }
+    },
+    {
+      "id": "S16",
+      "text": {
+        "en": "OpenStax, College Physics 2e, chapter 17 Problems & Exercises, exercise 29 (section 17.3, sound intensity): the problem assumes a loudspeaker with an efficiency of 1.00 %.",
+        "zh": "OpenStax《大学物理》第 2 版第 17 章习题第 29 题（17.3 节“声强”）：题目假设扬声器的效率是 1.00 %。"
+      },
+      "url": "https://openstax.org/books/college-physics-2e/pages/17-problems-exercises",
+      "note": {
+        "en": "Read 2026-10-18. A textbook problem's assumption, used as the model's value; it is not a survey of real speakers.",
+        "zh": "2026-10-18 读取。这是教科书习题的假设，模型借用这个值；不是对真实音箱的调查。"
+      }
+    },
+    {
+      "id": "S17",
+      "text": {
+        "en": "Philips Singapore, Kettle HD9305/26, technical specifications: power 2,200 W.",
+        "zh": "飞利浦新加坡，电热水壶 HD9305/26 技术规格：功率 2,200 W。"
+      },
+      "url": "https://www.philips.com.sg/c-p/HD9305_26/kettle",
+      "note": {
+        "en": "Read 2026-10-18. One kettle sold in Singapore, cited as typical; kettles come in many power ratings.",
+        "zh": "2026-10-18 读取。新加坡市面上的一款水壶，只作典型引用；水壶的功率有很多种。"
+      }
+    },
+    {
+      "id": "S18",
+      "text": {
+        "en": "Consumer Product Safety Office (Enterprise Singapore), 'CPSO's market surveillance finds over 2,900 unregistered household appliances sold online' (17 December 2021), footnote 4: Singapore's mains supply is 230 V AC at 50 Hz.",
+        "zh": "消费品安全局（新加坡企业发展局）《消费品安全局市场监察发现网上售卖逾 2,900 件未注册家电》（2021 年 12 月 17 日）注 4：新加坡的市电是 230 V、50 Hz 交流电。"
+      },
+      "url": "https://www.consumerproductsafety.gov.sg/news-and-media/2021-12-17-cpso-finds-over-2900-unregistered-appliances-sold-online/",
+      "note": {
+        "en": "Read 2026-10-18.",
+        "zh": "2026-10-18 读取。"
+      }
+    },
+    {
+      "id": "S19",
+      "text": {
+        "en": "OpenStax, College Physics 2e, §14.2 Temperature Change and Heat Capacity: the heat needed to warm a mass m by ΔT is Q = m c ΔT; Table 14.1 gives water's specific heat as 4,186 J/(kg °C).",
+        "zh": "OpenStax《大学物理》第 2 版 §14.2“温度变化与热容”：使质量为 m 的物体升温 ΔT 所需的热 Q = m c ΔT；表 14.1 给出水的比热为 4,186 J/(kg °C)。"
+      },
+      "url": "https://openstax.org/books/college-physics-2e/pages/14-2-temperature-change-and-heat-capacity",
+      "note": {
+        "en": "Read 2026-10-18. For the kettle: 1 kg × 4,186 × 70 = 293,020 J, about 293 kJ; with 85 % of 2,200 W, 293,020 ÷ 1,870 ≈ 157 s. 1 L of water is taken as 1 kg and the 30 °C start is the model's choice.",
+        "zh": "2026-10-18 读取。水壶：1 kg × 4,186 × 70 = 293,020 J，约 293 kJ；2,200 W 的 85 % 是 1,870 W，293,020 ÷ 1,870 ≈ 157 s。1 L 水按 1 kg 算，起始 30 °C 是模型的选择。"
+      }
+    },
+    {
+      "id": "S20",
+      "text": {
+        "en": "International Tennis Federation, ITF Approved Tennis Balls, Classified Surfaces & Recognised Courts 2026, Appendix I(b) and test method ITF TB 04/01: a standard (type 2) ball has a mass of 56.0–59.4 g and a diameter of 6.54–6.86 cm; dropped from 254 cm onto a smooth, rigid, heavy block, it must bounce back to between 135 and 147 cm, the heights measured to the bottom of the ball.",
+        "zh": "国际网球联合会《2026 年国际网联认可网球、场地分类与认可球场》附录 I(b) 与测试方法 ITF TB 04/01：标准（二型）网球质量 56.0–59.4 g，直径 6.54–6.86 cm；从 254 cm 高处落到光滑、坚硬、沉重的试块上，必须弹回到 135 到 147 cm 之间，高度量到球的底部。"
+      },
+      "url": "https://www.itftennis.com/media/15648/2026-technical-booklet.pdf",
+      "note": {
+        "en": "Read 2026-10-18 (printed pp. 5, 8 and 11). 135 ÷ 254 to 147 ÷ 254 is 0.53 to 0.58; the model's 0.55 for tile lies in this range, but the test is on a rigid block at one height, so the model's value for a floor tile at every height is its own choice.",
+        "zh": "2026-10-18 读取（印刷页第 5、8、11 页）。135 ÷ 254 到 147 ÷ 254 是 0.53 到 0.58；模型给地砖取 0.55，落在这个范围内，但测试是在硬试块上、从一个高度做的，所以模型把它当作地砖在各个高度的值，是模型自己的选择。"
+      }
+    },
+    {
+      "id": "S21",
+      "text": {
+        "en": "Institute of Physics, IOP Spark, 'Bounce efficiency' (teaching notes): plotting bounce height against drop height gives a straight line whose gradient depends on the ball and the surface used.",
+        "zh": "英国物理学会 IOP Spark《弹跳效率》（教学说明）：以弹起高度对下落高度作图，得到一条直线，它的斜率取决于所用的球和地面。"
+      },
+      "url": "https://spark.iop.org/bounce-efficiency",
+      "note": {
+        "en": "Read 2026-10-18. It gives no values for rubber, carpet or sand, so the model's 0.40, 0.25 and 0.05 are illustrative.",
+        "zh": "2026-10-18 读取。它没有给出橡胶垫、地毯和沙的数值，所以模型的 0.40、0.25、0.05 是示意值。"
+      }
+    },
+    {
+      "id": "S22",
+      "text": {
+        "en": "JCGM / BIPM, International Vocabulary of Metrology (VIM), 2.12 conventional quantity value, Example 1: the standard acceleration of gravity is 9.806 65 m/s².",
+        "zh": "JCGM / BIPM《国际计量学词汇》2.12“约定量值”例 1：标准重力加速度为 9.806 65 m/s²。"
+      },
+      "url": "https://jcgm.bipm.org/vim/en/2.12.html",
+      "note": {
+        "en": "Read 2026-10-18. The model rounds it to 9.8; N/kg and m/s² are the same unit.",
+        "zh": "2026-10-18 读取。模型取整为 9.8；N/kg 和 m/s² 是同一个单位。"
+      }
+    },
+    {
+      "id": "S23",
+      "text": {
+        "en": "OpenStax, College Physics 2e, §2.7 Falling Objects: without air resistance, an object falling from rest through a height h reaches a speed v with v² = 2 g h.",
+        "zh": "OpenStax《大学物理》第 2 版 §2.7“下落的物体”：不计空气阻力时，物体从静止下落高度 h，速度 v 满足 v² = 2 g h。"
+      },
+      "url": "https://openstax.org/books/college-physics-2e/pages/2-7-falling-objects",
+      "note": {
+        "en": "Read 2026-10-18. With g = 9.8: 2.21, 3.13, 3.83 and 4.43 m/s after 25, 50, 75 and 100 cm. The model leaves out the air; how much the air would change a tennis ball's speed was not checked.",
+        "zh": "2026-10-18 读取。取 g = 9.8：下落 25、50、75、100 cm 后速度分别为 2.21、3.13、3.83、4.43 m/s。模型不算空气；空气会让网球的速度改变多少，没有核实。"
+      }
+    },
+    {
+      "id": "S24",
+      "text": {
+        "en": "OpenStax, College Physics 2e, §16.4 The Simple Pendulum: the period T = 2π √(L ÷ g) holds for swings smaller than about 15°.",
+        "zh": "OpenStax《大学物理》第 2 版 §16.4“单摆”：周期公式 T = 2π √(L ÷ g) 适用于小于约 15° 的摆动。"
+      },
+      "url": "https://openstax.org/books/college-physics-2e/pages/16-4-the-simple-pendulum",
+      "note": {
+        "en": "Read 2026-10-18. For a 2.0 m swing let go at 35°, the small-angle formula gives 2.84 s; the model uses the exact formula, 2.906 s, written as about 2.9 s. The seat is 0.36 m higher at 35° and moves at about 2.66 m/s at the bottom (calculated for this topic).",
+        "zh": "2026-10-18 读取。2.0 m 的秋千从 35° 松手，小角度公式得 2.84 s；模型用精确公式，得 2.906 s，写作约 2.9 s。座板在 35° 时高 0.36 m，在最低点约 2.66 m/s（本主题计算）。"
+      }
+    },
+    {
+      "id": "S25",
+      "text": {
+        "en": "OpenStax, College Physics 2e, §7.6 Conservation of Energy: the total energy is constant in any process; it may change form or be transferred, but it is not created or destroyed. Table 7.2: the human body, when cycling or climbing, turns about 20 % of the energy it uses into work.",
+        "zh": "OpenStax《大学物理》第 2 版 §7.6“能量守恒”：在任何过程中，总能量保持不变；能量可以改变形式或转移，但不会产生，也不会消失。表 7.2：人体骑车或爬山时，约把所用能量的 20 % 变成功。"
+      },
+      "url": "https://openstax.org/books/college-physics-2e/pages/7-6-conservation-of-energy",
+      "note": {
+        "en": "Read 2026-10-18. The topic says 'energy is never used up' and 'saving energy' rather than naming the law; the 20 % applies to cycling and climbing, not to every activity.",
+        "zh": "2026-10-18 读取。本主题说“能量不会用完”和“节约能源”，不提定律的名称；20 % 指骑车和爬山，不是所有活动都这样。"
+      }
+    },
+    {
+      "id": "S26",
+      "text": {
+        "en": "OpenStax, College Physics 2e, §21.2 Electromotive Force: Terminal Voltage: a battery's chemical reactions separate charge and push a current round a complete circuit; the energy comes from the substances in the battery, and part of it becomes heat inside the battery because of its internal resistance.",
+        "zh": "OpenStax《大学物理》第 2 版 §21.2“电动势与端电压”：电池里的化学反应分开电荷，推动电流沿闭合电路流动；能量来自电池里的物质，其中一部分因为电池的内阻在电池里变成热。"
+      },
+      "url": "https://openstax.org/books/college-physics-2e/pages/21-2-electromotive-force-terminal-voltage",
+      "note": {
+        "en": "Read 2026-10-18. The model's 95 % electrical and 5 % heat in the battery depend on the load and are illustrative.",
+        "zh": "2026-10-18 读取。模型里电池 95 % 变成电能、5 % 变成热，实际取决于负载，是示意值。"
+      }
+    },
+    {
+      "id": "S27",
+      "text": {
+        "en": "Shimano, DH-3D71 hub dynamo, exploded-view sheet EV-DH-3D71-2418A, p. 1: rated 6 V, 3 W.",
+        "zh": "禧玛诺 DH-3D71 花鼓发电机分解图 EV-DH-3D71-2418A 第 1 页：额定 6 V、3 W。"
+      },
+      "url": "https://si.shimano.com/en/pdfs/ev/DH-3D71-2418/EV-DH-3D71-2418A.pdf",
+      "note": {
+        "en": "Read 2026-10-18. One manufacturer's rating, showing that 6 V and 3 W is a common rating for bicycle dynamos; it is a hub dynamo, not a bottle dynamo, and not every dynamo has this rating.",
+        "zh": "2026-10-18 读取。一家厂商的额定值，说明 6 V、3 W 是自行车发电机常见的规格；它是花鼓发电机，不是瓶式发电机，也不是所有发电机都是这个规格。"
+      }
+    },
+    {
+      "id": "S28",
+      "text": {
+        "en": "OpenStax, College Physics 2e, §23.5 Electric Generators: a generator turns mechanical work into electrical energy; a coil and a magnet turning relative to each other change the magnetic field through the coil, and that drives a current round a complete circuit.",
+        "zh": "OpenStax《大学物理》第 2 版 §23.5“发电机”：发电机把机械功转换成电能；线圈和磁铁相对转动，使穿过线圈的磁场变化，从而推动电流沿闭合电路流动。"
+      },
+      "url": "https://openstax.org/books/college-physics-2e/pages/23-5-electric-generators",
+      "note": {
+        "en": "Read 2026-10-18. A current flows only when the circuit is complete.",
+        "zh": "2026-10-18 读取。只有电路闭合时才有电流。"
+      }
+    },
+    {
+      "id": "S29",
+      "text": {
+        "en": "Busch + Müller, IQ-XS / Upp dynamo front light, technical data: 6 V, 2.4 W; versions with a standlight that keeps the lamp lit for a while after the bicycle stops.",
+        "zh": "Busch + Müller 自行车发电机前灯技术数据：6 V、2.4 W；有些型号带驻车灯功能，车停下后还能亮一阵子。"
+      },
+      "url": "https://bumm.de/de/produkte/dynamo-scheinwerfer/produkt/166ndi.html",
+      "note": {
+        "en": "Read 2026-10-18. Shows that real dynamo lamps vary; the model's 6 V, 12 Ω, 3 W filament lamp is its own choice, and it has no standlight.",
+        "zh": "2026-10-18 读取。说明真实的发电机车灯各不相同；模型的 6 V、12 Ω、3 W 白炽灯是模型自己的选择，没有驻车灯功能。"
+      }
+    },
+    {
+      "id": "S30",
+      "text": {
+        "en": "KONE, Elevator glossary, 'Counterweight': a weight that balances the lift car and a part of its rated load, often taken as 50 %.",
+        "zh": "通力电梯《电梯词汇表》“对重”：平衡轿厢和一部分额定载重的重物，常取额定载重的 50 %。"
+      },
+      "url": "https://www.kone.om/en/tools-downloads/glossary/",
+      "note": {
+        "en": "Read 2026-10-18. No Singapore rule for the share was found. The motor also has to overcome friction and start and stop the moving parts, so the model's lift chain, which follows only the car, is a simplification.",
+        "zh": "2026-10-18 读取。没有找到新加坡关于这个比例的规定。电动机还要克服摩擦、让运动部件起动和停下，所以模型的电梯链只算轿厢，是一种简化。"
+      }
+    },
+    {
+      "id": "S31",
+      "text": {
+        "en": "Energy Market Authority, 'Electricity conservation tips': set the air-conditioner at 25 °C or higher, each degree raised reducing energy needs by around 10 %; choose appliances with more ticks on the energy label; switch off appliances not in use; replace other bulbs with LED lamps.",
+        "zh": "能源市场管理局《节约用电小贴士》：空调设在 25 °C 或更高，每调高一度，所需能量约减少 10 %；选购能效标签上勾数多的电器；不用的电器关掉；把其他灯泡换成 LED 灯。"
+      },
+      "url": "https://www.ema.gov.sg/consumer-information/energy-prices-in-singapore-what-you-need-to-know/electricity-conservation-tips",
+      "note": {
+        "en": "Read 2026-10-18. 'Around 10 %' is general advice, not a promise for every home.",
+        "zh": "2026-10-18 读取。“约 10 %”是一般性的建议，不是对每个家庭的保证。"
+      }
+    },
+    {
+      "id": "S32",
+      "text": {
+        "en": "GE Vernova, 'Breaking the power plant efficiency record again' (2018): a combined-cycle gas power plant (Nishi-Nagoya Block 1) reached 63.08 % gross efficiency.",
+        "zh": "GE Vernova《再次打破电厂效率纪录》（2018）：一座联合循环燃气电厂（西名古屋 1 号机组）达到 63.08 % 的毛效率。"
+      },
+      "url": "https://www.gevernova.com/gas-power/resources/articles/2018/nishi-nagoya-efficiency-record",
+      "note": {
+        "en": "Read 2026-10-18. A record, not the average of Singapore's power stations, which is not given here; the model's 55 % is illustrative.",
+        "zh": "2026-10-18 读取。这是纪录，不是新加坡发电厂的平均值，这里没有给出平均值；模型的 55 % 是示意值。"
+      }
+    },
+    {
+      "id": "S33",
+      "text": {
+        "en": "OpenStax, Biology 2e, §31.1 Nutritional Requirements of Plants: plants absorb water and mineral nutrients from the soil through their roots, and make their own food by photosynthesis, using the energy of light.",
+        "zh": "OpenStax《生物学》第 2 版 §31.1“植物的营养需求”：植物用根从泥土里吸收水和矿物质养分，利用光能通过光合作用自己制造食物。"
+      },
+      "url": "https://openstax.org/books/biology-2e/pages/31-1-nutritional-requirements-of-plants",
+      "note": {
+        "en": "Read 2026-10-18. Used for 'the soil is not where the plant's energy comes from'; the roots do take in minerals as well as water.",
+        "zh": "2026-10-18 读取。用于“植物的能量不是从泥土里来的”；根除了水，也吸收矿物质。"
+      }
+    },
+    {
+      "id": "S34",
+      "text": {
+        "en": "Otis, High-rise elevator safety systems: in a traction lift a motor-driven sheave at the top drives the steel ropes that carry the lift car and a counterweight.",
+        "zh": "Otis《高层电梯安全系统》：曳引式电梯顶部由电动机带动的曳引轮驱动钢丝绳，钢丝绳两端分别吊着轿厢和对重。"
+      },
+      "url": "https://www.otis.com/en/us/tools-resources/high-rise-safety-systems/",
+      "note": {
+        "en": "Read 2026-10-18 for the forces topic. A manufacturer's general description of traction lifts; not every lift is a traction lift.",
+        "zh": "2026-10-18 为“力”主题读取。电梯制造商对曳引式电梯的一般性说明；并不是所有电梯都是曳引式。"
+      }
+    }
+  ]
+}

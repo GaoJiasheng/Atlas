@@ -1,0 +1,12574 @@
+{
+ "parts": [
+  {
+   "id": "sun",
+   "name": {
+    "en": "Sun",
+    "zh": "太阳"
+   },
+   "group": "rooftop",
+   "summary": {
+    "en": "Gives out light and heat; most chains start here.",
+    "zh": "发出光和热；大多数能量链从这里开始。"
+   },
+   "detail": {
+    "en": "The Sun is our main source of energy: it gives out light and heat [S2]. In this model it is drawn small and close, not to scale.\n\nAround noon on a clear day in Singapore, about 918 W of sunlight falls on each square metre of level ground (NASA's averages for 2023) [S10]. The model's panels take round values: 900 W/m² for a clear sky and 640 W/m² for average weather [S1]. Plants, food and natural gas all hold energy that first came from the Sun [S2, S3].",
+    "zh": "太阳是我们主要的能源，发出光和热 [S2]。模型里的太阳画得又小又近，不按比例。\n\n新加坡晴天的中午前后，每平方米水平地面大约照到 918 W 的阳光（美国航天局 2023 年的平均值）[S10]。模型里的太阳能板取整数：晴天 900 W/m²，一般天气 640 W/m² [S1]。植物、食物和天然气里的能量，最初都来自太阳 [S2, S3]。"
+   },
+   "primitive": {
+    "kind": "sphere",
+    "size": [
+     0.9
+    ],
+    "at": [
+     -8.0,
+     12.0,
+     -7.0
+    ],
+    "color": "token:en-light"
+   },
+   "castShadow": false,
+   "connects": [
+    "solar-panels",
+    "window-plant"
+   ]
+  },
+  {
+   "id": "solar-panels",
+   "name": {
+    "en": "Solar panels",
+    "zh": "太阳能板"
+   },
+   "short": {
+    "en": "Panels",
+    "zh": "太阳能板"
+   },
+   "group": "rooftop",
+   "summary": {
+    "en": "Change light energy into electrical energy.",
+    "zh": "把光能转换成电能。"
+   },
+   "detail": {
+    "en": "Twelve panels in two rows, each about 1.72 × 1.13 m like a common 108-cell panel [S13], tilted 10° in this design [S1]. Thin silicon cells change part of the light that falls on them into electrical energy; most of the rest warms the panel, and a little is reflected [S12].\n\nTen years ago commercial panels changed about 17 % of the light into electricity; now the figure is just under 25 % [S11]. The model uses 21 % [S1]. At a clear noon the twelve panels give 4.43 kW in this model, and at night nothing at all [S1]. Hot panels give a little less, which the model leaves out [S12].",
+    "zh": "两排共十二块板，每块约 1.72 × 1.13 m，和常见的 108 片电池板差不多 [S13]，本设计让它们倾斜 10° [S1]。薄薄的硅电池片把照到的光的一部分转换成电能；其余大部分让板变热，还有一点被反射掉 [S12]。\n\n十年前，商用太阳能板大约把 17 % 的光变成电，现在接近 25 % [S11]；这个模型取 21 % [S1]。在这个模型里，晴天中午十二块板一共产生 4.43 kW，夜里一点也没有 [S1]。板晒得越热，产生的电就少一些，模型没有算这一点 [S12]。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     1.134,
+     0.035,
+     1.722
+    ],
+    "at": [
+     0.05,
+     7.25,
+     1.2
+    ],
+    "color": "powder",
+    "bevel": 0.006,
+    "rotation": [
+     10.0,
+     0,
+     0
+    ],
+    "tint": "#25344b"
+   },
+   "extra": [
+    {
+     "kind": "fins",
+     "size": [
+      1.702,
+      0.003,
+      0.012
+     ],
+     "count": 2,
+     "gap": 1.11,
+     "axis": "x",
+     "at": [
+      0.05,
+      7.2687,
+      1.1967
+     ],
+     "color": "casing",
+     "rotation": [
+      10.0,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "fins",
+     "size": [
+      1.114,
+      0.003,
+      0.012
+     ],
+     "count": 2,
+     "gap": 1.698,
+     "axis": "z",
+     "at": [
+      0.05,
+      7.2687,
+      1.1967
+     ],
+     "color": "casing",
+     "rotation": [
+      10.0,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "fins",
+     "size": [
+      1.692,
+      0.002,
+      0.004
+     ],
+     "count": 5,
+     "gap": 0.1844,
+     "axis": "x",
+     "at": [
+      0.05,
+      7.2682,
+      1.1968
+     ],
+     "color": "casing",
+     "rotation": [
+      10.0,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "fins",
+     "size": [
+      1.104,
+      0.002,
+      0.004
+     ],
+     "count": 8,
+     "gap": 0.1889,
+     "axis": "z",
+     "at": [
+      0.05,
+      7.2682,
+      1.1968
+     ],
+     "color": "casing",
+     "rotation": [
+      10.0,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      1.134,
+      0.035,
+      1.722
+     ],
+     "at": [
+      0.05,
+      7.25,
+      -1.2
+     ],
+     "color": "powder",
+     "bevel": 0.006,
+     "rotation": [
+      10.0,
+      0,
+      0
+     ],
+     "tint": "#25344b"
+    },
+    {
+     "kind": "fins",
+     "size": [
+      1.702,
+      0.003,
+      0.012
+     ],
+     "count": 2,
+     "gap": 1.11,
+     "axis": "x",
+     "at": [
+      0.05,
+      7.2687,
+      -1.2033
+     ],
+     "color": "casing",
+     "rotation": [
+      10.0,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "fins",
+     "size": [
+      1.114,
+      0.003,
+      0.012
+     ],
+     "count": 2,
+     "gap": 1.698,
+     "axis": "z",
+     "at": [
+      0.05,
+      7.2687,
+      -1.2033
+     ],
+     "color": "casing",
+     "rotation": [
+      10.0,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "fins",
+     "size": [
+      1.692,
+      0.002,
+      0.004
+     ],
+     "count": 5,
+     "gap": 0.1844,
+     "axis": "x",
+     "at": [
+      0.05,
+      7.2682,
+      -1.2032
+     ],
+     "color": "casing",
+     "rotation": [
+      10.0,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "fins",
+     "size": [
+      1.104,
+      0.002,
+      0.004
+     ],
+     "count": 8,
+     "gap": 0.1889,
+     "axis": "z",
+     "at": [
+      0.05,
+      7.2682,
+      -1.2032
+     ],
+     "color": "casing",
+     "rotation": [
+      10.0,
+      0,
+      0
+     ]
+    }
+   ],
+   "repeat": {
+    "count": 6,
+    "axis": [
+     1,
+     0,
+     0
+    ],
+    "spacing": 1.16
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.5
+   },
+   "connects": [
+    "panel-frames",
+    "rooftop-cables",
+    "inverter"
+   ]
+  },
+  {
+   "id": "panel-frames",
+   "name": {
+    "en": "Panel frames",
+    "zh": "太阳能板支架"
+   },
+   "short": {
+    "en": "Frames",
+    "zh": "支架"
+   },
+   "group": "rooftop",
+   "summary": {
+    "en": "Hold the panels up off the roof at a slight tilt.",
+    "zh": "把太阳能板架离屋顶，微微倾斜。"
+   },
+   "detail": {
+    "en": "Aluminium rails and legs, the back legs taller so that each row leans 10° in this design [S1]. They hold the panels clear of the roof, with room for cables and air underneath.\n\nBy December 2025, panels like these had been fitted on the roofs of around 5,300 HDB blocks, about half of them [S8].",
+    "zh": "铝制的横梁和支脚，后面的支脚高一些，所以在本设计里每排板都倾斜 10° [S1]。支架把板架离屋顶，板下面留出走电缆、通空气的空间。\n\n到 2025 年 12 月，大约 5,300 座组屋、差不多一半组屋的屋顶上已经装了这样的板 [S8]。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     6.95,
+     0.04,
+     0.05
+    ],
+    "at": [
+     0.05,
+     7.3307,
+     0.4988
+    ],
+    "color": "casing",
+    "rotation": [
+     10.0,
+     0,
+     0
+    ]
+   },
+   "extra": [
+    {
+     "kind": "box",
+     "size": [
+      0.04,
+      0.5107,
+      0.04
+     ],
+     "at": [
+      -3.25,
+      7.0554,
+      0.4988
+     ],
+     "color": "casing"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.04,
+      0.5107,
+      0.04
+     ],
+     "at": [
+      -0.994,
+      7.0554,
+      0.4988
+     ],
+     "color": "casing"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.04,
+      0.5107,
+      0.04
+     ],
+     "at": [
+      1.094,
+      7.0554,
+      0.4988
+     ],
+     "color": "casing"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.04,
+      0.5107,
+      0.04
+     ],
+     "at": [
+      3.35,
+      7.0554,
+      0.4988
+     ],
+     "color": "casing"
+    },
+    {
+     "kind": "box",
+     "size": [
+      6.95,
+      0.04,
+      0.05
+     ],
+     "at": [
+      0.05,
+      7.0807,
+      1.9169
+     ],
+     "color": "casing",
+     "rotation": [
+      10.0,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.04,
+      0.2607,
+      0.04
+     ],
+     "at": [
+      -3.25,
+      6.9303,
+      1.9169
+     ],
+     "color": "casing"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.04,
+      0.2607,
+      0.04
+     ],
+     "at": [
+      -0.994,
+      6.9303,
+      1.9169
+     ],
+     "color": "casing"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.04,
+      0.2607,
+      0.04
+     ],
+     "at": [
+      1.094,
+      6.9303,
+      1.9169
+     ],
+     "color": "casing"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.04,
+      0.2607,
+      0.04
+     ],
+     "at": [
+      3.35,
+      6.9303,
+      1.9169
+     ],
+     "color": "casing"
+    },
+    {
+     "kind": "box",
+     "size": [
+      6.95,
+      0.04,
+      0.05
+     ],
+     "at": [
+      0.05,
+      7.3307,
+      -1.9012
+     ],
+     "color": "casing",
+     "rotation": [
+      10.0,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.04,
+      0.5107,
+      0.04
+     ],
+     "at": [
+      -3.25,
+      7.0554,
+      -1.9012
+     ],
+     "color": "casing"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.04,
+      0.5107,
+      0.04
+     ],
+     "at": [
+      -0.994,
+      7.0554,
+      -1.9012
+     ],
+     "color": "casing"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.04,
+      0.5107,
+      0.04
+     ],
+     "at": [
+      1.094,
+      7.0554,
+      -1.9012
+     ],
+     "color": "casing"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.04,
+      0.5107,
+      0.04
+     ],
+     "at": [
+      3.35,
+      7.0554,
+      -1.9012
+     ],
+     "color": "casing"
+    },
+    {
+     "kind": "box",
+     "size": [
+      6.95,
+      0.04,
+      0.05
+     ],
+     "at": [
+      0.05,
+      7.0807,
+      -0.4831
+     ],
+     "color": "casing",
+     "rotation": [
+      10.0,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.04,
+      0.2607,
+      0.04
+     ],
+     "at": [
+      -3.25,
+      6.9303,
+      -0.4831
+     ],
+     "color": "casing"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.04,
+      0.2607,
+      0.04
+     ],
+     "at": [
+      -0.994,
+      6.9303,
+      -0.4831
+     ],
+     "color": "casing"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.04,
+      0.2607,
+      0.04
+     ],
+     "at": [
+      1.094,
+      6.9303,
+      -0.4831
+     ],
+     "color": "casing"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.04,
+      0.2607,
+      0.04
+     ],
+     "at": [
+      3.35,
+      6.9303,
+      -0.4831
+     ],
+     "color": "casing"
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.3
+   },
+   "connects": [
+    "solar-panels"
+   ]
+  },
+  {
+   "id": "inverter",
+   "name": {
+    "en": "Inverter",
+    "zh": "逆变器"
+   },
+   "group": "rooftop",
+   "summary": {
+    "en": "Changes the panels' current into the kind the block uses.",
+    "zh": "把太阳能板的电变成楼里用的那种电。"
+   },
+   "detail": {
+    "en": "The panels make direct current, which always flows the same way; the block's lifts and lights use alternating current. The inverter changes one into the other and sends it on: to the lifts and other shared services while they need it, and into the grid when the block has more than it needs [S7]. You will meet direct and alternating current again in later science lessons.\n\nA little energy becomes heat in the inverter, which is why it has cooling fins: in this model, 1 % of the energy of the light that reaches the panels [S1].",
+    "zh": "太阳能板产生的是直流电，电流总是朝同一个方向流；楼里的电梯和电灯用的是交流电。逆变器把一种变成另一种，再送出去：电梯等公共设施需要时送给它们，楼里用不完的就送进电网 [S7]。直流电和交流电，以后的科学课还会学到。\n\n逆变器里也有一点能量变成热，所以它带着散热片：在这个模型里，是照到板上的光的能量的 1 % [S1]。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.25,
+     0.6,
+     0.5
+    ],
+    "at": [
+     -3.45,
+     7.15,
+     2.75
+    ],
+    "color": "enamel",
+    "bevel": 0.01,
+    "tint": "#d9d6cf"
+   },
+   "extra": [
+    {
+     "kind": "fins",
+     "size": [
+      0.2,
+      0.06,
+      0.008
+     ],
+     "count": 9,
+     "gap": 0.044,
+     "axis": "z",
+     "at": [
+      -3.43,
+      7.48,
+      2.75
+     ],
+     "color": "enamel",
+     "tint": "#d9d6cf"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.04,
+      0.12,
+      0.3
+     ],
+     "at": [
+      -3.31,
+      6.97,
+      2.75
+     ],
+     "color": "enamel",
+     "bevel": 0.008,
+     "tint": "#d9d6cf"
+    }
+   ],
+   "explode": {
+    "dir": [
+     1,
+     0.3,
+     0
+    ],
+    "dist": 0.4
+   },
+   "connects": [
+    "rooftop-cables",
+    "solar-panels"
+   ]
+  },
+  {
+   "id": "rooftop-cables",
+   "name": {
+    "en": "Rooftop cables",
+    "zh": "屋顶电缆"
+   },
+   "short": {
+    "en": "Cables",
+    "zh": "电缆"
+   },
+   "group": "rooftop",
+   "summary": {
+    "en": "Carry electrical energy to the inverter and the lift.",
+    "zh": "把电能送到逆变器和电梯。"
+   },
+   "detail": {
+    "en": "One cable gathers the electrical energy from both rows of panels and takes it to the inverter. From there one cable runs across the roof to the lift motor room, and another goes down into the block's supply, where energy the block does not need goes into the grid [S7].\n\nThe cables warm up a little as energy passes through them; the model counts that in with the inverter [S1].",
+    "zh": "一条电缆把两排板产生的电能汇集起来，送到逆变器。从逆变器出来，一条电缆横过屋顶通到电梯机房，另一条往下接进整座楼的供电线路，楼里用不完的电能就从这里送进电网 [S7]。\n\n电能经过电缆时，电缆也会稍微变热；模型把这一点算在逆变器里 [S1]。"
+   },
+   "primitive": {
+    "kind": "tube",
+    "path": [
+     [
+      3.3,
+      6.835,
+      -1.2
+     ],
+     [
+      -3.62,
+      6.835,
+      -1.2
+     ],
+     [
+      -3.62,
+      6.835,
+      2.62
+     ],
+     [
+      -3.5,
+      6.86,
+      2.62
+     ]
+    ],
+    "radius": 0.016,
+    "at": [
+     0,
+     0,
+     0
+    ],
+    "color": "rubber",
+    "bendRadius": 0.08
+   },
+   "extra": [
+    {
+     "kind": "tube",
+     "path": [
+      [
+       3.3,
+       6.835,
+       1.2
+      ],
+      [
+       -3.62,
+       6.835,
+       1.2
+      ]
+     ],
+     "radius": 0.016,
+     "at": [
+      0,
+      0,
+      0
+     ],
+     "color": "rubber",
+     "bendRadius": 0.08
+    },
+    {
+     "kind": "tube",
+     "path": [
+      [
+       -3.4,
+       6.86,
+       2.9
+      ],
+      [
+       -3.7,
+       6.835,
+       2.9
+      ],
+      [
+       -3.7,
+       6.835,
+       1.0
+      ],
+      [
+       -5.2,
+       6.835,
+       1.0
+      ],
+      [
+       -5.2,
+       6.835,
+       -0.2
+      ],
+      [
+       -5.2,
+       6.98,
+       -0.2
+      ]
+     ],
+     "radius": 0.016,
+     "at": [
+      0,
+      0,
+      0
+     ],
+     "color": "rubber",
+     "bendRadius": 0.08
+    },
+    {
+     "kind": "tube",
+     "path": [
+      [
+       -3.48,
+       6.86,
+       2.55
+      ],
+      [
+       -3.52,
+       6.835,
+       2.35
+      ],
+      [
+       -3.52,
+       6.835,
+       -3.2
+      ],
+      [
+       -3.65,
+       6.835,
+       -3.2
+      ],
+      [
+       -3.65,
+       6.37,
+       -3.2
+      ]
+     ],
+     "radius": 0.016,
+     "at": [
+      0,
+      0,
+      0
+     ],
+     "color": "rubber",
+     "bendRadius": 0.08
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.2
+   },
+   "connects": [
+    "solar-panels",
+    "inverter",
+    "lift-motor",
+    "grid-cable"
+   ]
+  },
+  {
+   "id": "motor-room",
+   "name": {
+    "en": "Lift motor room",
+    "zh": "电梯机房"
+   },
+   "short": {
+    "en": "Motor room",
+    "zh": "机房"
+   },
+   "group": "lift",
+   "summary": {
+    "en": "Houses the lift motor on the roof.",
+    "zh": "屋顶上安放电梯电动机的小房间。"
+   },
+   "detail": {
+    "en": "A small room on the roof above the lift shaft. Its front wall is left off in this model so that the motor inside can be seen [S1].",
+    "zh": "电梯井上方屋顶上的一个小房间。模型里没有画它的前墙，好让人看见里面的电动机 [S1]。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.15,
+     2.2,
+     3.0
+    ],
+    "at": [
+     -5.925,
+     7.9,
+     0.0
+    ],
+    "color": "enamel",
+    "bevel": 0.01,
+    "tint": "#ddd6c8"
+   },
+   "extra": [
+    {
+     "kind": "bevelBox",
+     "size": [
+      2.2,
+      2.2,
+      0.15
+     ],
+     "at": [
+      -4.9,
+      7.9,
+      -1.425
+     ],
+     "color": "enamel",
+     "bevel": 0.01,
+     "tint": "#ddd6c8"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.15,
+      2.2,
+      3.0
+     ],
+     "at": [
+      -3.875,
+      7.9,
+      0.0
+     ],
+     "color": "enamel",
+     "bevel": 0.01,
+     "tint": "#ddd6c8"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      2.3,
+      0.15,
+      3.1
+     ],
+     "at": [
+      -4.9,
+      9.075,
+      0.0
+     ],
+     "color": "enamel",
+     "bevel": 0.01,
+     "tint": "#ddd6c8"
+    }
+   ],
+   "shell": true,
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.8
+   },
+   "connects": [
+    "lift-motor"
+   ]
+  },
+  {
+   "id": "lift-motor",
+   "name": {
+    "en": "Lift motor",
+    "zh": "电梯电动机"
+   },
+   "group": "lift",
+   "summary": {
+    "en": "Changes electrical energy into kinetic energy.",
+    "zh": "把电能转换成动能。"
+   },
+   "detail": {
+    "en": "An electric motor turns a grooved wheel, the sheave. The steel ropes run over the sheave, with the lift car hanging on one side and the counterweight on the other [S34].\n\nIn this model 80 % of the electrical energy reaching the motor becomes kinetic energy of the ropes and the car, 15 % becomes heat and 5 % becomes the motor's hum [S1]. These shares are illustrative, not measured.",
+    "zh": "电动机带动一个带槽的轮子，叫曳引轮。钢丝绳绕过曳引轮，一边吊着电梯轿厢，另一边吊着对重 [S34]。\n\n在这个模型里，送到电动机的电能有 80 % 变成钢丝绳和轿厢的动能，15 % 变成热，5 % 变成电动机的嗡嗡声 [S1]。这些比例只是示意，不是实测。"
+   },
+   "primitive": {
+    "kind": "lathe",
+    "profile": [
+     [
+      0,
+      -0.24
+     ],
+     [
+      0.2,
+      -0.24
+     ],
+     [
+      0.22,
+      -0.2
+     ],
+     [
+      0.22,
+      0.2
+     ],
+     [
+      0.2,
+      0.24
+     ],
+     [
+      0,
+      0.24
+     ]
+    ],
+    "segments": 40,
+    "at": [
+     -5.15,
+     7.27,
+     -0.5
+    ],
+    "color": "powder",
+    "rotation": [
+     0,
+     0,
+     90
+    ],
+    "tint": "#4a5a55"
+   },
+   "extra": [
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0,
+       -0.07
+      ],
+      [
+       0.35,
+       -0.07
+      ],
+      [
+       0.33,
+       -0.04
+      ],
+      [
+       0.35,
+       -0.02
+      ],
+      [
+       0.33,
+       0.0
+      ],
+      [
+       0.35,
+       0.02
+      ],
+      [
+       0.33,
+       0.04
+      ],
+      [
+       0.35,
+       0.07
+      ],
+      [
+       0,
+       0.07
+      ]
+     ],
+     "segments": 48,
+     "at": [
+      -4.6,
+      7.4,
+      -0.5
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0,
+       -0.1
+      ],
+      [
+       0.05,
+       -0.1
+      ],
+      [
+       0.05,
+       0.1
+      ],
+      [
+       0,
+       0.1
+      ]
+     ],
+     "segments": 24,
+     "at": [
+      -4.72,
+      7.4,
+      -0.5
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      1.1,
+      0.2,
+      0.7
+     ],
+     "at": [
+      -4.9,
+      6.9,
+      -0.5
+     ],
+     "color": "powder",
+     "bevel": 0.01,
+     "tint": "#4a5a55"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.2,
+      0.35,
+      0.5
+     ],
+     "at": [
+      -4.72,
+      7.12,
+      -0.5
+     ],
+     "color": "powder",
+     "bevel": 0.01,
+     "tint": "#4a5a55"
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.4
+   },
+   "connects": [
+    "lift-ropes",
+    "counterweight-ropes",
+    "rooftop-cables"
+   ]
+  },
+  {
+   "id": "lift-ropes",
+   "name": {
+    "en": "Lift ropes, car side",
+    "zh": "钢丝绳（轿厢一侧）"
+   },
+   "short": {
+    "en": "Ropes",
+    "zh": "钢丝绳"
+   },
+   "group": "lift",
+   "summary": {
+    "en": "Carry the lift car up and down.",
+    "zh": "吊着轿厢上下。"
+   },
+   "detail": {
+    "en": "Steel ropes from the sheave down to the top of the lift car. As the motor turns the sheave, the ropes move and pull the car up [S34].\n\nWith the car at the top floor this side of the ropes is short: the rest of each rope has gone over the sheave to the counterweight's side [S1].",
+    "zh": "从曳引轮垂到轿厢顶上的钢丝绳。电动机转动曳引轮，钢丝绳跟着移动，把轿厢拉上去 [S34]。\n\n轿厢到了顶层，这一侧的钢丝绳就短了：每根绳的其余部分已经绕过曳引轮，到了对重那一侧 [S1]。"
+   },
+   "primitive": {
+    "kind": "cylinder",
+    "size": [
+     0.008,
+     0.008,
+     4.9
+    ],
+    "at": [
+     -4.63,
+     4.95,
+     -0.15
+    ],
+    "color": "steel"
+   },
+   "extra": [
+    {
+     "kind": "cylinder",
+     "size": [
+      0.008,
+      0.008,
+      4.9
+     ],
+     "at": [
+      -4.57,
+      4.95,
+      -0.15
+     ],
+     "color": "steel"
+    }
+   ],
+   "connects": [
+    "lift-motor",
+    "lift-car"
+   ]
+  },
+  {
+   "id": "counterweight-ropes",
+   "name": {
+    "en": "Lift ropes, counterweight side",
+    "zh": "钢丝绳（对重一侧）"
+   },
+   "short": {
+    "en": "Ropes",
+    "zh": "钢丝绳"
+   },
+   "group": "lift",
+   "summary": {
+    "en": "Hang the counterweight from the far side of the sheave.",
+    "zh": "从曳引轮的另一边吊着对重。"
+   },
+   "detail": {
+    "en": "The same ropes, once they have passed over the sheave, hold the counterweight. When the car goes up, the counterweight comes down by the same distance [S34, S1].",
+    "zh": "同一批钢丝绳绕过曳引轮以后，吊着对重。轿厢上升多少，对重就下降多少 [S34, S1]。"
+   },
+   "primitive": {
+    "kind": "cylinder",
+    "size": [
+     0.008,
+     0.008,
+     1.4
+    ],
+    "at": [
+     -4.63,
+     6.7,
+     -0.85
+    ],
+    "color": "steel"
+   },
+   "extra": [
+    {
+     "kind": "cylinder",
+     "size": [
+      0.008,
+      0.008,
+      1.4
+     ],
+     "at": [
+      -4.57,
+      6.7,
+      -0.85
+     ],
+     "color": "steel"
+    }
+   ],
+   "connects": [
+    "lift-motor",
+    "counterweight"
+   ]
+  },
+  {
+   "id": "lift-car",
+   "name": {
+    "en": "Lift car",
+    "zh": "电梯轿厢"
+   },
+   "short": {
+    "en": "Lift car",
+    "zh": "轿厢"
+   },
+   "group": "lift",
+   "summary": {
+    "en": "Gains potential energy as it is raised.",
+    "zh": "被升高时，势能增加。"
+   },
+   "detail": {
+    "en": "The car rises 3.8 m between the two floors drawn in this model; a real block has many more floors, which are left out here [S1]. The higher the car is, the more potential energy it has.\n\nIt keeps that potential energy while it waits, still, at the top floor. A thing does not have to move to have energy.",
+    "zh": "在这个模型里，轿厢在画出来的两层楼之间升高 3.8 m；真实的组屋有更多楼层，这里省略了 [S1]。轿厢越高，势能越多。\n\n轿厢停在顶层不动时，仍然有这份势能。东西不一定要在运动才有能量。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     1.4,
+     2.3,
+     1.5
+    ],
+    "at": [
+     -4.9,
+     1.3,
+     0.1
+    ],
+    "color": "stainless",
+    "bevel": 0.02
+   },
+   "extra": [
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.44,
+      2.0,
+      0.03
+     ],
+     "at": [
+      -5.13,
+      1.22,
+      0.86
+     ],
+     "color": "stainless",
+     "bevel": 0.006
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.44,
+      2.0,
+      0.03
+     ],
+     "at": [
+      -4.67,
+      1.22,
+      0.86
+     ],
+     "color": "stainless",
+     "bevel": 0.006
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.5,
+      0.08,
+      0.2
+     ],
+     "at": [
+      -4.6,
+      2.49,
+      -0.15
+     ],
+     "color": "stainless",
+     "bevel": 0.01
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     0,
+     1
+    ],
+    "dist": 0.6
+   },
+   "connects": [
+    "lift-ropes",
+    "lift-shaft"
+   ]
+  },
+  {
+   "id": "counterweight",
+   "name": {
+    "en": "Counterweight",
+    "zh": "对重"
+   },
+   "short": {
+    "en": "Counterweight",
+    "zh": "对重"
+   },
+   "group": "lift",
+   "summary": {
+    "en": "Balances the car so the motor needs less energy.",
+    "zh": "平衡轿厢，让电动机少用能量。"
+   },
+   "detail": {
+    "en": "Stacked iron blocks on the other end of the ropes. A counterweight usually balances the car and part of the load it is built to carry, often about half [S30]. The motor then only has to make up the difference, and to overcome friction and start the car moving [S30].\n\nTo keep it simple, the model's energy chain follows only the car and leaves the counterweight out [S1].",
+    "zh": "吊在钢丝绳另一端、叠起来的铁块。对重一般平衡轿厢本身，再加上额定载重的一部分，常见的是一半左右 [S30]。这样电动机只要补上两边的差额，再克服摩擦、让轿厢动起来就行 [S30]。\n\n为了简单，模型的能量链只跟着轿厢走，没有把对重算进去 [S1]。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.9,
+     1.6,
+     0.2
+    ],
+    "at": [
+     -4.6,
+     5.2,
+     -0.9
+    ],
+    "color": "powder",
+    "bevel": 0.01,
+    "tint": "#5c5f62"
+   },
+   "extra": [
+    {
+     "kind": "fins",
+     "size": [
+      0.92,
+      0.012,
+      0.22
+     ],
+     "count": 7,
+     "gap": 0.188,
+     "axis": "y",
+     "at": [
+      -4.6,
+      5.2,
+      -0.9
+     ],
+     "color": "powder",
+     "tint": "#5c5f62"
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     0,
+     -1
+    ],
+    "dist": 0.3
+   },
+   "connects": [
+    "counterweight-ropes",
+    "lift-shaft"
+   ]
+  },
+  {
+   "id": "lift-shaft",
+   "name": {
+    "en": "Lift shaft",
+    "zh": "电梯井"
+   },
+   "short": {
+    "en": "Shaft",
+    "zh": "电梯井"
+   },
+   "group": "lift",
+   "summary": {
+    "en": "Guides the car and the counterweight up and down.",
+    "zh": "让轿厢和对重在里面上下运行。"
+   },
+   "detail": {
+    "en": "A tall concrete shaft from the ground floor to the roof. Its front wall is left off in this model, and it is broken off where the middle floors are left out [S1].",
+    "zh": "从底层一直通到屋顶的高高的混凝土井道。模型里没有画它的前墙；中间楼层省略的地方，井壁也画成断开 [S1]。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.15,
+     3.1,
+     2.75
+    ],
+    "at": [
+     -5.925,
+     1.7,
+     -0.075
+    ],
+    "color": "enamel",
+    "bevel": 0.01,
+    "tint": "#ddd6c8"
+   },
+   "extra": [
+    {
+     "kind": "bevelBox",
+     "size": [
+      2.2,
+      3.1,
+      0.15
+     ],
+     "at": [
+      -4.9,
+      1.7,
+      -1.375
+     ],
+     "color": "enamel",
+     "bevel": 0.01,
+     "tint": "#ddd6c8"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.15,
+      3.1,
+      2.75
+     ],
+     "at": [
+      -3.875,
+      1.7,
+      -0.075
+     ],
+     "color": "enamel",
+     "bevel": 0.01,
+     "tint": "#ddd6c8"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.15,
+      3.05,
+      2.75
+     ],
+     "at": [
+      -5.925,
+      5.275,
+      -0.075
+     ],
+     "color": "enamel",
+     "bevel": 0.01,
+     "tint": "#ddd6c8"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      2.2,
+      3.05,
+      0.15
+     ],
+     "at": [
+      -4.9,
+      5.275,
+      -1.375
+     ],
+     "color": "enamel",
+     "bevel": 0.01,
+     "tint": "#ddd6c8"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.15,
+      3.05,
+      2.75
+     ],
+     "at": [
+      -3.875,
+      5.275,
+      -0.075
+     ],
+     "color": "enamel",
+     "bevel": 0.01,
+     "tint": "#ddd6c8"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      2.2,
+      0.15,
+      2.9
+     ],
+     "at": [
+      -4.9,
+      0.075,
+      -0.0
+     ],
+     "color": "enamel",
+     "bevel": 0.01,
+     "tint": "#ddd6c8"
+    }
+   ],
+   "shell": true,
+   "connects": [
+    "lift-car",
+    "counterweight"
+   ]
+  },
+  {
+   "id": "grid-cable",
+   "name": {
+    "en": "Grid cable",
+    "zh": "电网电缆"
+   },
+   "short": {
+    "en": "Grid",
+    "zh": "电网"
+   },
+   "group": "home",
+   "summary": {
+    "en": "Brings electrical energy from power stations to the flat.",
+    "zh": "把发电厂的电能送到家里。"
+   },
+   "detail": {
+    "en": "The flat's electrical energy comes through the grid, the network of cables that links Singapore's power stations to homes and other buildings. In 2024 natural gas was the fuel for 94.0 % of Singapore's electricity [S5].\n\nThe cables warm up a little along the way: in this model 4 % of the energy they carry becomes heat [S1].",
+    "zh": "家里的电能经电网送来。电网是把新加坡各发电厂和住家、其他建筑连起来的电缆网络。2024 年，新加坡 94.0 % 的电是用天然气发的 [S5]。\n\n电缆一路上也会稍微变热：在这个模型里，电缆送的能量有 4 % 变成热 [S1]。"
+   },
+   "primitive": {
+    "kind": "tube",
+    "path": [
+     [
+      -3.65,
+      0.045,
+      -6.2
+     ],
+     [
+      -3.65,
+      0.045,
+      -3.2
+     ],
+     [
+      -3.65,
+      6.35,
+      -3.2
+     ],
+     [
+      -3.65,
+      6.35,
+      1.55
+     ],
+     [
+      -3.65,
+      5.9,
+      1.55
+     ]
+    ],
+    "radius": 0.026,
+    "at": [
+     0,
+     0,
+     0
+    ],
+    "color": "rubber",
+    "bendRadius": 0.1
+   },
+   "explode": {
+    "dir": [
+     1,
+     0,
+     0
+    ],
+    "dist": 0.3
+   },
+   "connects": [
+    "distribution-board",
+    "rooftop-cables"
+   ]
+  },
+  {
+   "id": "distribution-board",
+   "name": {
+    "en": "Distribution board",
+    "zh": "配电箱"
+   },
+   "short": {
+    "en": "Board",
+    "zh": "配电箱"
+   },
+   "group": "home",
+   "summary": {
+    "en": "Shares the flat's electrical energy among its circuits.",
+    "zh": "把家里的电能分到各个电路。"
+   },
+   "detail": {
+    "en": "Every circuit in the flat starts here, each with its own circuit breaker that switches the circuit off if too much current flows.\n\nIn this model it passes the energy on to whichever appliance is switched on, one at a time [S1].",
+    "zh": "家里的每一个电路都从这里出发，每个电路都有自己的断路器，电流过大时会自动切断电路。\n\n在这个模型里，它把电能送给开着的那一件电器，一次一件 [S1]。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.12,
+     0.6,
+     0.45
+    ],
+    "at": [
+     -3.72,
+     5.6,
+     1.6
+    ],
+    "color": "enamel",
+    "bevel": 0.01,
+    "tint": "#e6e1d6"
+   },
+   "extra": [
+    {
+     "kind": "fins",
+     "size": [
+      0.03,
+      0.08,
+      0.025
+     ],
+     "count": 8,
+     "gap": 0.022,
+     "axis": "z",
+     "at": [
+      -3.65,
+      5.68,
+      1.6
+     ],
+     "color": "enamel",
+     "tint": "#e6e1d6"
+    }
+   ],
+   "explode": {
+    "dir": [
+     1,
+     0,
+     0
+    ],
+    "dist": 0.3
+   },
+   "connects": [
+    "grid-cable",
+    "fan-motor",
+    "led-lamp",
+    "speaker",
+    "kettle"
+   ]
+  },
+  {
+   "id": "fan-motor",
+   "name": {
+    "en": "Ceiling-fan motor",
+    "zh": "吊扇电动机"
+   },
+   "short": {
+    "en": "Fan motor",
+    "zh": "风扇电动机"
+   },
+   "group": "home",
+   "summary": {
+    "en": "Turns the fan blades; warms up and hums as it runs.",
+    "zh": "带动扇叶转动；转的时候会变热、嗡嗡响。"
+   },
+   "detail": {
+    "en": "An electric motor inside the round housing turns the blades. Some of the electrical energy becomes heat in the motor and some becomes its hum.\n\nIn this model 60 % becomes kinetic energy, 38 % heat and 2 % sound; the shares are illustrative [S1].",
+    "zh": "圆形外壳里的电动机带动扇叶转动。一部分电能在电动机里变成热，一部分变成它的嗡嗡声。\n\n在这个模型里，60 % 变成动能，38 % 变成热，2 % 变成声；这些比例只是示意 [S1]。"
+   },
+   "primitive": {
+    "kind": "lathe",
+    "profile": [
+     [
+      0,
+      -0.06
+     ],
+     [
+      0.1,
+      -0.06
+     ],
+     [
+      0.115,
+      -0.03
+     ],
+     [
+      0.115,
+      0.02
+     ],
+     [
+      0.08,
+      0.05
+     ],
+     [
+      0.015,
+      0.06
+     ],
+     [
+      0.015,
+      0.33
+     ],
+     [
+      0.06,
+      0.34
+     ],
+     [
+      0.065,
+      0.38
+     ],
+     [
+      0,
+      0.39
+     ]
+    ],
+    "segments": 48,
+    "at": [
+     -1.3,
+     6.15,
+     -0.3
+    ],
+    "color": "enamel",
+    "tint": "#efebe2"
+   },
+   "explode": {
+    "dir": [
+     0,
+     -1,
+     0
+    ],
+    "dist": 0.3
+   },
+   "connects": [
+    "fan-blades",
+    "distribution-board"
+   ]
+  },
+  {
+   "id": "fan-blades",
+   "name": {
+    "en": "Ceiling-fan blades",
+    "zh": "吊扇扇叶"
+   },
+   "short": {
+    "en": "Fan",
+    "zh": "吊扇"
+   },
+   "group": "home",
+   "summary": {
+    "en": "Push the air, giving it kinetic energy.",
+    "zh": "推动空气，让空气有了动能。"
+   },
+   "detail": {
+    "en": "Five blades 1.32 m across, tilted so that they push air down as they turn [S1]. The moving air carries kinetic energy round the room.\n\nAs the moving air slows down, its kinetic energy becomes heat in the room. The fan does not make the air colder; moving air feels cool on your skin.",
+    "zh": "五片扇叶，直径 1.32 m，叶片是斜的，转动时把空气往下推 [S1]。流动的空气带着动能在房间里转。\n\n流动的空气慢下来时，它的动能变成房间里的热。风扇并不会让空气变冷；是流动的空气吹在皮肤上让人觉得凉。"
+   },
+   "primitive": {
+    "kind": "blades",
+    "layout": "axial",
+    "count": 5,
+    "radius": 0.66,
+    "hub": 0.1,
+    "chord": 0.13,
+    "twist": 0,
+    "sweep": 0,
+    "pitch": 12,
+    "thickness": 0.008,
+    "at": [
+     -1.3,
+     6.075,
+     -0.3
+    ],
+    "color": "wood",
+    "tint": "#8a6440"
+   },
+   "explode": {
+    "dir": [
+     0,
+     -1,
+     0
+    ],
+    "dist": 0.5
+   },
+   "connects": [
+    "fan-motor"
+   ]
+  },
+  {
+   "id": "led-lamp",
+   "name": {
+    "en": "LED ceiling lamp",
+    "zh": "LED 吸顶灯"
+   },
+   "short": {
+    "en": "LED lamp",
+    "zh": "LED 灯"
+   },
+   "group": "home",
+   "summary": {
+    "en": "Changes electrical energy into light, and some into heat.",
+    "zh": "把电能转换成光能，也有一些变成热。"
+   },
+   "detail": {
+    "en": "A flat round lamp with a frosted cover. An LED lamp gives the same light as a filament lamp using at least 75 % less electrical energy [S15]. A filament lamp turns about 90 % of its energy into heat and only about 10 % into light [S14].\n\nThis model gives the LED lamp 40 % light and 60 % heat. That is a model value, chosen so that the LED needs a quarter of the energy for the same light; it is not a measurement [S1].",
+    "zh": "扁圆形的灯，罩着磨砂灯罩。同样亮，LED 灯比白炽灯至少少用 75 % 的电能 [S15]。白炽灯大约把 90 % 的能量变成热，只有约 10 % 变成光 [S14]。\n\n这个模型让 LED 灯 40 % 变成光、60 % 变成热。这是为了让 LED 灯同样亮只用四分之一的能量而取的模型值，不是实测 [S1]。"
+   },
+   "primitive": {
+    "kind": "lathe",
+    "profile": [
+     [
+      0,
+      -0.02
+     ],
+     [
+      0.17,
+      -0.02
+     ],
+     [
+      0.2,
+      0.0
+     ],
+     [
+      0.2,
+      0.012
+     ],
+     [
+      0,
+      0.012
+     ]
+    ],
+    "segments": 48,
+    "at": [
+     1.0,
+     6.47,
+     -1.6
+    ],
+    "color": "glass",
+    "tint": "#f2efe6"
+   },
+   "extra": [
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0,
+       0.012
+      ],
+      [
+       0.205,
+       0.012
+      ],
+      [
+       0.205,
+       0.07
+      ],
+      [
+       0,
+       0.07
+      ]
+     ],
+     "segments": 48,
+     "at": [
+      1.0,
+      6.47,
+      -1.6
+     ],
+     "color": "enamel",
+     "tint": "#efebe2"
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     -1,
+     0
+    ],
+    "dist": 0.3
+   },
+   "connects": [
+    "distribution-board"
+   ]
+  },
+  {
+   "id": "speaker",
+   "name": {
+    "en": "Speaker",
+    "zh": "音箱"
+   },
+   "group": "home",
+   "summary": {
+    "en": "Changes electrical energy into sound energy.",
+    "zh": "把电能转换成声能。"
+   },
+   "detail": {
+    "en": "A wooden box with a cone at the front. A current in a coil behind the cone makes it move back and forth, and the cone pushes on the air, sending out sound.\n\nA speaker turns only a tiny share of its electrical energy into sound. This model uses 1 % sound and 99 % heat, the figure a physics textbook problem also uses [S16, S1].",
+    "zh": "一个木箱，前面装着纸盆。纸盆后面线圈里的电流让纸盆前后振动，纸盆推动空气，发出声音。\n\n音箱只把很小一部分电能变成声音。这个模型取 1 % 变成声、99 % 变成热，一本物理教科书的习题也用这个数 [S16, S1]。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.2,
+     0.32,
+     0.24
+    ],
+    "at": [
+     -3.2,
+     4.55,
+     -3.05
+    ],
+    "color": "wood",
+    "bevel": 0.008,
+    "tint": "#6e4f36"
+   },
+   "explode": {
+    "dir": [
+     0,
+     0,
+     1
+    ],
+    "dist": 0.3
+   },
+   "connects": [
+    "speaker-cone",
+    "distribution-board"
+   ]
+  },
+  {
+   "id": "speaker-cone",
+   "name": {
+    "en": "Speaker cone",
+    "zh": "扬声器纸盆"
+   },
+   "short": {
+    "en": "Cone",
+    "zh": "纸盆"
+   },
+   "group": "home",
+   "summary": {
+    "en": "Moves back and forth to push sound into the air.",
+    "zh": "前后振动，把声音推进空气里。"
+   },
+   "detail": {
+    "en": "A light cone held at its rim. For each note it moves back and forth many times a second; the model draws it moving much less often, so that you can see it move [S1].",
+    "zh": "边缘固定的轻质纸盆。每发一个音，它每秒都要前后振动很多次；模型把它画得慢得多，好让人看得出它在动 [S1]。"
+   },
+   "primitive": {
+    "kind": "lathe",
+    "profile": [
+     [
+      0.012,
+      -0.034
+     ],
+     [
+      0.03,
+      -0.024
+     ],
+     [
+      0.055,
+      -0.008
+     ],
+     [
+      0.064,
+      0.0
+     ],
+     [
+      0.068,
+      0.002
+     ],
+     [
+      0.068,
+      0.004
+     ],
+     [
+      0,
+      0.004
+     ]
+    ],
+    "segments": 40,
+    "at": [
+     -3.2,
+     4.58,
+     -2.93
+    ],
+    "color": "plastic",
+    "rotation": [
+     90,
+     0,
+     0
+    ],
+    "tint": "#2d2b29"
+   },
+   "explode": {
+    "dir": [
+     0,
+     0,
+     1
+    ],
+    "dist": 0.4
+   },
+   "connects": [
+    "speaker"
+   ]
+  },
+  {
+   "id": "kettle",
+   "name": {
+    "en": "Electric kettle",
+    "zh": "电热水壶"
+   },
+   "short": {
+    "en": "Kettle",
+    "zh": "水壶"
+   },
+   "group": "home",
+   "summary": {
+    "en": "Changes electrical energy into heat in the water.",
+    "zh": "把电能转换成水里的热。"
+   },
+   "detail": {
+    "en": "A stainless-steel jug on a base that plugs into the flat's 230 V supply [S18]. This design takes 2,200 W, like one common kettle sold in Singapore [S17, S1].\n\nIn this model 85 % of the electrical energy heats the water, 14 % warms the kettle and the air, and 1 % becomes the hiss as it heats [S1]; these shares are illustrative. Heating 1 kg of water from 30 °C to 100 °C takes 293 kJ, about 157 s at this rate [S19, S1]. The kettle body and the steam are hot.",
+    "zh": "不锈钢壶身坐在底座上，底座插在家里 230 V 的电源上 [S18]。本设计的功率是 2,200 W，和新加坡市面上一款常见的水壶一样 [S17, S1]。\n\n在这个模型里，85 % 的电能让水变热，14 % 让壶身和空气变暖，1 % 变成烧水时的嘶嘶声 [S1]；这些比例只是示意。把 1 kg 水从 30 °C 烧到 100 °C 要 293 kJ，按这个功率约需 157 s [S19, S1]。壶身和蒸汽都很烫。"
+   },
+   "primitive": {
+    "kind": "lathe",
+    "profile": [
+     [
+      0,
+      -0.115
+     ],
+     [
+      0.078,
+      -0.115
+     ],
+     [
+      0.084,
+      -0.08
+     ],
+     [
+      0.087,
+      0.02
+     ],
+     [
+      0.08,
+      0.09
+     ],
+     [
+      0.07,
+      0.11
+     ],
+     [
+      0.03,
+      0.118
+     ],
+     [
+      0.03,
+      0.125
+     ],
+     [
+      0,
+      0.125
+     ]
+    ],
+    "segments": 48,
+    "at": [
+     2.6,
+     4.985,
+     -2.95
+    ],
+    "color": "stainless"
+   },
+   "extra": [
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0,
+       -0.15
+      ],
+      [
+       0.095,
+       -0.15
+      ],
+      [
+       0.095,
+       -0.125
+      ],
+      [
+       0,
+       -0.125
+      ]
+     ],
+     "segments": 40,
+     "at": [
+      2.6,
+      4.985,
+      -2.95
+     ],
+     "color": "plastic",
+     "tint": "#2a2928"
+    },
+    {
+     "kind": "extrude",
+     "shape": [
+      [
+       0.07,
+       -0.08
+      ],
+      [
+       0.13,
+       -0.06
+      ],
+      [
+       0.14,
+       0.06
+      ],
+      [
+       0.07,
+       0.1
+      ],
+      [
+       0.07,
+       0.07
+      ],
+      [
+       0.11,
+       0.045
+      ],
+      [
+       0.105,
+       -0.045
+      ],
+      [
+       0.07,
+       -0.055
+      ]
+     ],
+     "depth": 0.025,
+     "at": [
+      2.6,
+      4.985,
+      -2.95
+     ],
+     "color": "plastic",
+     "tint": "#2a2928"
+    }
+   ],
+   "shell": true,
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.3
+   },
+   "connects": [
+    "kettle-water",
+    "kettle-element",
+    "distribution-board"
+   ]
+  },
+  {
+   "id": "kettle-water",
+   "name": {
+    "en": "Water in the kettle",
+    "zh": "壶里的水"
+   },
+   "short": {
+    "en": "Water",
+    "zh": "水"
+   },
+   "group": "home",
+   "summary": {
+    "en": "Takes in heat from the element and warms up.",
+    "zh": "从发热盘吸收热，温度升高。"
+   },
+   "detail": {
+    "en": "One litre of water. Water next to the element warms first and rises, and cooler water sinks to take its place, so the whole jug warms up. The model's change of colour is a drawing convention, not the water's real colour [S1].",
+    "zh": "一升水。贴着发热盘的水先变热、往上升，较冷的水沉下来补上，整壶水就慢慢热了。模型里水的颜色变化只是画法，不是水真实的颜色 [S1]。"
+   },
+   "primitive": {
+    "kind": "lathe",
+    "profile": [
+     [
+      0,
+      -0.1
+     ],
+     [
+      0.075,
+      -0.1
+     ],
+     [
+      0.08,
+      -0.07
+     ],
+     [
+      0.082,
+      0.03
+     ],
+     [
+      0,
+      0.03
+     ]
+    ],
+    "segments": 40,
+    "at": [
+     2.6,
+     4.985,
+     -2.95
+    ],
+    "color": "glass",
+    "tint": "token:cold"
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.5
+   },
+   "connects": [
+    "kettle",
+    "kettle-element"
+   ]
+  },
+  {
+   "id": "kettle-element",
+   "name": {
+    "en": "Heating element",
+    "zh": "发热盘"
+   },
+   "short": {
+    "en": "Element",
+    "zh": "发热盘"
+   },
+   "group": "home",
+   "summary": {
+    "en": "Gets hot when a current flows through it.",
+    "zh": "电流通过时发热。"
+   },
+   "detail": {
+    "en": "A coiled metal element sealed under the floor of the jug. A current flowing through it makes it hot, and heat passes from the hot element to the cooler water. The model draws it glowing to show where the heat comes from; a real one is hidden under a metal plate and does not glow [S1].",
+    "zh": "封在壶底下面的一圈金属发热体。电流通过时它发热，热从较热的发热盘传给较冷的水。模型把它画成发红，是为了标出热从哪里来；真实的发热盘藏在金属板下面，不会发红 [S1]。"
+   },
+   "primitive": {
+    "kind": "torus",
+    "size": [
+     0.05,
+     0.005
+    ],
+    "at": [
+     2.6,
+     4.88,
+     -2.95
+    ],
+    "color": "steel",
+    "rotation": [
+     90,
+     0,
+     0
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     -1,
+     0
+    ],
+    "dist": 0.2
+   },
+   "connects": [
+    "kettle",
+    "kettle-water"
+   ]
+  },
+  {
+   "id": "window-plant",
+   "name": {
+    "en": "Pot plant",
+    "zh": "盆栽"
+   },
+   "short": {
+    "en": "Plant",
+    "zh": "植物"
+   },
+   "group": "home",
+   "summary": {
+    "en": "Uses light energy to make food in its leaves.",
+    "zh": "用光能在叶子里制造食物。"
+   },
+   "detail": {
+    "en": "A chilli plant on the window ledge. Its leaves take in light energy and use it to make food from water and carbon dioxide [S2].\n\nThe roots take in water and mineral nutrients from the soil, but the soil is not where the plant's energy comes from: that comes from light [S33].",
+    "zh": "窗台上的一盆辣椒。叶子接收光能，用它把水和二氧化碳制成食物 [S2]。\n\n根从土里吸收水和矿物质养分，但植物的能量不是从土里来的，而是来自光 [S33]。"
+   },
+   "primitive": {
+    "kind": "lathe",
+    "profile": [
+     [
+      0,
+      -0.09
+     ],
+     [
+      0.06,
+      -0.09
+     ],
+     [
+      0.075,
+      0.08
+     ],
+     [
+      0.08,
+      0.09
+     ],
+     [
+      0.07,
+      0.09
+     ],
+     [
+      0.068,
+      0.075
+     ],
+     [
+      0,
+      0.075
+     ]
+    ],
+    "segments": 32,
+    "at": [
+     0.4,
+     4.94,
+     -3.17
+    ],
+    "color": "plastic",
+    "tint": "#a65f3a"
+   },
+   "extra": [
+    {
+     "kind": "sweep",
+     "path": [
+      [
+       0.0,
+       0.09,
+       0.0
+      ],
+      [
+       0.0507,
+       0.244,
+       0.0227
+      ],
+      [
+       0.1126,
+       0.31,
+       0.0488
+      ]
+     ],
+     "radius": [
+      0.004,
+      0.022,
+      0.003
+     ],
+     "section": {
+      "flat": 0.2
+     },
+     "up": [
+      0,
+      1,
+      0
+     ],
+     "at": [
+      0.4,
+      4.94,
+      -3.17
+     ],
+     "color": "plastic",
+     "tint": "#4f7a3a"
+    },
+    {
+     "kind": "sweep",
+     "path": [
+      [
+       0.0,
+       0.09,
+       0.0
+      ],
+      [
+       0.0,
+       0.279,
+       0.056
+      ],
+      [
+       0.0,
+       0.36,
+       0.12
+      ]
+     ],
+     "radius": [
+      0.004,
+      0.022,
+      0.003
+     ],
+     "section": {
+      "flat": 0.2
+     },
+     "up": [
+      0,
+      1,
+      0
+     ],
+     "at": [
+      0.4,
+      4.94,
+      -3.17
+     ],
+     "color": "plastic",
+     "tint": "#4f7a3a"
+    },
+    {
+     "kind": "sweep",
+     "path": [
+      [
+       0.0,
+       0.09,
+       0.0
+      ],
+      [
+       -0.0507,
+       0.209,
+       0.0227
+      ],
+      [
+       -0.1126,
+       0.26,
+       0.0488
+      ]
+     ],
+     "radius": [
+      0.004,
+      0.022,
+      0.003
+     ],
+     "section": {
+      "flat": 0.2
+     },
+     "up": [
+      0,
+      1,
+      0
+     ],
+     "at": [
+      0.4,
+      4.94,
+      -3.17
+     ],
+     "color": "plastic",
+     "tint": "#4f7a3a"
+    },
+    {
+     "kind": "sweep",
+     "path": [
+      [
+       0.0,
+       0.09,
+       0.0
+      ],
+      [
+       -0.0624,
+       0.244,
+       -0.028
+      ],
+      [
+       -0.1386,
+       0.31,
+       -0.06
+      ]
+     ],
+     "radius": [
+      0.004,
+      0.022,
+      0.003
+     ],
+     "section": {
+      "flat": 0.2
+     },
+     "up": [
+      0,
+      1,
+      0
+     ],
+     "at": [
+      0.4,
+      4.94,
+      -3.17
+     ],
+     "color": "plastic",
+     "tint": "#4f7a3a"
+    },
+    {
+     "kind": "sweep",
+     "path": [
+      [
+       0.0,
+       0.09,
+       0.0
+      ],
+      [
+       0.0,
+       0.279,
+       -0.0455
+      ],
+      [
+       0.0,
+       0.36,
+       -0.0975
+      ]
+     ],
+     "radius": [
+      0.004,
+      0.022,
+      0.003
+     ],
+     "section": {
+      "flat": 0.2
+     },
+     "up": [
+      0,
+      1,
+      0
+     ],
+     "at": [
+      0.4,
+      4.94,
+      -3.17
+     ],
+     "color": "plastic",
+     "tint": "#4f7a3a"
+    },
+    {
+     "kind": "sweep",
+     "path": [
+      [
+       0.0,
+       0.09,
+       0.0
+      ],
+      [
+       0.0624,
+       0.209,
+       -0.028
+      ],
+      [
+       0.1386,
+       0.26,
+       -0.06
+      ]
+     ],
+     "radius": [
+      0.004,
+      0.022,
+      0.003
+     ],
+     "section": {
+      "flat": 0.2
+     },
+     "up": [
+      0,
+      1,
+      0
+     ],
+     "at": [
+      0.4,
+      4.94,
+      -3.17
+     ],
+     "color": "plastic",
+     "tint": "#4f7a3a"
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0.3
+    ],
+    "dist": 0.3
+   },
+   "connects": [
+    "sun"
+   ]
+  },
+  {
+   "id": "torch",
+   "name": {
+    "en": "Torch",
+    "zh": "手电筒"
+   },
+   "group": "home",
+   "summary": {
+    "en": "Its batteries, switch and LED make a small circuit.",
+    "zh": "电池、开关和 LED 组成一个小电路。"
+   },
+   "detail": {
+    "en": "An aluminium torch lying on the coffee table. Sliding the switch closes the circuit between the batteries and the LED [S26].\n\nIn this model 38 % of the energy stored in the batteries leaves the LED as light; the rest becomes heat in the batteries and in the LED [S1]. These shares are illustrative.",
+    "zh": "躺在茶几上的一支铝制手电筒。推上开关，电池和 LED 之间的电路就闭合了 [S26]。\n\n在这个模型里，电池里储存的能量有 38 % 从 LED 变成光出来；其余的在电池里和 LED 里变成热 [S1]。这些比例只是示意。"
+   },
+   "primitive": {
+    "kind": "lathe",
+    "profile": [
+     [
+      0,
+      -0.08
+     ],
+     [
+      0.0135,
+      -0.08
+     ],
+     [
+      0.015,
+      -0.074
+     ],
+     [
+      0.015,
+      0.04
+     ],
+     [
+      0.019,
+      0.052
+     ],
+     [
+      0.02,
+      0.078
+     ],
+     [
+      0.018,
+      0.08
+     ],
+     [
+      0.016,
+      0.08
+     ],
+     [
+      0.016,
+      0.075
+     ],
+     [
+      0,
+      0.075
+     ]
+    ],
+    "segments": 32,
+    "at": [
+     -1.65,
+     4.37,
+     0.6
+    ],
+    "color": "casing",
+    "rotation": [
+     0,
+     0,
+     90
+    ]
+   },
+   "extra": [
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.018,
+      0.006,
+      0.01
+     ],
+     "at": [
+      -1.63,
+      4.386,
+      0.6
+     ],
+     "color": "casing",
+     "bevel": 0.002
+    },
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0.003,
+       0.0
+      ],
+      [
+       0.0155,
+       0.02
+      ],
+      [
+       0.0155,
+       0.022
+      ],
+      [
+       0.003,
+       0.003
+      ]
+     ],
+     "segments": 24,
+     "at": [
+      -1.705,
+      4.37,
+      0.6
+     ],
+     "color": "casing",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    }
+   ],
+   "shell": true,
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.15
+   },
+   "connects": [
+    "torch-batteries",
+    "torch-led"
+   ]
+  },
+  {
+   "id": "torch-batteries",
+   "name": {
+    "en": "Torch batteries",
+    "zh": "手电筒电池"
+   },
+   "short": {
+    "en": "Batteries",
+    "zh": "电池"
+   },
+   "group": "home",
+   "summary": {
+    "en": "Store potential energy in the substances inside.",
+    "zh": "电池里的物质储存着势能。"
+   },
+   "detail": {
+    "en": "Two cells, end to end. The substances inside store energy. When the circuit is closed, they react and push a current round the circuit; the current is not stored in the batteries, and the LED does not use it up [S26].\n\nIn this model 95 % of the stored energy leaves as electrical energy and 5 % warms the batteries [S1]. When the substances have finished reacting, the battery is flat.",
+    "zh": "两节电池首尾相接。电池里的物质储存着能量。电路闭合时，它们发生反应，推动电流沿电路流动；电流并没有储存在电池里，也不会被 LED 用掉 [S26]。\n\n在这个模型里，储存的能量有 95 % 变成电能出去，5 % 让电池变暖 [S1]。电池里的物质反应完了，电池就没电了。"
+   },
+   "primitive": {
+    "kind": "cylinder",
+    "size": [
+     0.0072,
+     0.0072,
+     0.05
+    ],
+    "at": [
+     -1.662,
+     4.37,
+     0.6
+    ],
+    "color": "steel",
+    "rotation": [
+     0,
+     0,
+     90
+    ]
+   },
+   "extra": [
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0072,
+      0.0072,
+      0.05
+     ],
+     "at": [
+      -1.611,
+      4.37,
+      0.6
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.1
+   },
+   "connects": [
+    "torch",
+    "torch-led"
+   ]
+  },
+  {
+   "id": "torch-led",
+   "name": {
+    "en": "Torch LED",
+    "zh": "手电筒 LED"
+   },
+   "short": {
+    "en": "LED",
+    "zh": "LED"
+   },
+   "group": "home",
+   "summary": {
+    "en": "Changes electrical energy into light and some heat.",
+    "zh": "把电能转换成光能和一些热。"
+   },
+   "detail": {
+    "en": "A small LED in a shiny reflector, which sends its light forward as a beam. In this model it turns 40 % of the electrical energy it receives into light and 60 % into heat, as the ceiling lamp does [S1].",
+    "zh": "装在亮闪闪的反光碗里的一颗小 LED，反光碗把光聚成一束往前射。在这个模型里，它和吸顶灯一样，把收到的电能的 40 % 变成光、60 % 变成热 [S1]。"
+   },
+   "primitive": {
+    "kind": "sphere",
+    "size": [
+     0.0028
+    ],
+    "at": [
+     -1.724,
+     4.37,
+     0.6
+    ],
+    "color": "glass",
+    "tint": "#f4f1e6"
+   },
+   "explode": {
+    "dir": [
+     -1,
+     0,
+     0
+    ],
+    "dist": 0.08
+   },
+   "connects": [
+    "torch-batteries"
+   ]
+  },
+  {
+   "id": "windup-toy",
+   "name": {
+    "en": "Wind-up toy car",
+    "zh": "发条玩具车"
+   },
+   "short": {
+    "en": "Toy car",
+    "zh": "玩具车"
+   },
+   "group": "home",
+   "summary": {
+    "en": "Runs on the energy stored in its wound spring.",
+    "zh": "靠上紧的发条里储存的能量跑起来。"
+   },
+   "detail": {
+    "en": "A small plastic car with a spring inside. Each turn of the key winds the spring tighter and stores more energy in it.\n\nIn this model it runs for 1.5 s for every turn of the key, up to 12 s after 8 turns [S1]. Its top speed and running times are illustrative design values.",
+    "zh": "一辆小塑料车，里面有一根发条。钥匙每转一圈，发条就上得更紧，储存的能量也更多。\n\n在这个模型里，钥匙每转一圈，车跑 1.5 s，转 8 圈能跑 12 s [S1]。车的最高速度和跑的时间都是示意的设计值。"
+   },
+   "primitive": {
+    "kind": "extrude",
+    "shape": [
+     [
+      -0.06,
+      -0.02
+     ],
+     [
+      0.06,
+      -0.02
+     ],
+     [
+      0.06,
+      0.0
+     ],
+     [
+      0.04,
+      0.006
+     ],
+     [
+      0.025,
+      0.026
+     ],
+     [
+      -0.028,
+      0.026
+     ],
+     [
+      -0.043,
+      0.006
+     ],
+     [
+      -0.06,
+      0.002
+     ]
+    ],
+    "depth": 0.06,
+    "at": [
+     -0.95,
+     4.395,
+     0.62
+    ],
+    "color": "plastic",
+    "bevel": 0.003,
+    "tint": "#b0453a"
+   },
+   "shell": true,
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.12
+   },
+   "connects": [
+    "windup-spring",
+    "windup-key",
+    "windup-wheels"
+   ]
+  },
+  {
+   "id": "windup-spring",
+   "name": {
+    "en": "Wind-up spring",
+    "zh": "发条"
+   },
+   "short": {
+    "en": "Spring",
+    "zh": "发条"
+   },
+   "group": "home",
+   "summary": {
+    "en": "Stores potential energy when it is wound tight.",
+    "zh": "上紧时储存势能。"
+   },
+   "detail": {
+    "en": "A coiled strip of spring steel. Winding it coils it tighter, and the energy of your turning hand is stored in it as potential energy. As it unwinds it turns the wheels through small gears.\n\nThe model draws the spring as a simple coil; its stored energy is the potential-energy bar beside the car [S1].",
+    "zh": "一条卷起来的弹簧钢片。上发条时，钢片卷得更紧，转动的手的能量就以势能的形式储存在里面。它松开时，通过小齿轮带动车轮转动。\n\n模型把发条画成一个简单的线圈；它储存的能量，就是车旁边那根势能条 [S1]。"
+   },
+   "primitive": {
+    "kind": "coil",
+    "radius": [
+     0.004,
+     0.016
+    ],
+    "wire": 0.0007,
+    "turns": 6,
+    "length": 0.009,
+    "segments": 32,
+    "radial": 6,
+    "at": [
+     -0.95,
+     4.397,
+     0.62
+    ],
+    "rotation": [
+     90,
+     0,
+     0
+    ],
+    "color": "steel"
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.18
+   },
+   "connects": [
+    "windup-toy",
+    "windup-key"
+   ]
+  },
+  {
+   "id": "windup-key",
+   "name": {
+    "en": "Winding key",
+    "zh": "上发条的钥匙"
+   },
+   "short": {
+    "en": "Key",
+    "zh": "钥匙"
+   },
+   "group": "home",
+   "summary": {
+    "en": "Winds the spring when you turn it.",
+    "zh": "转动它，就能上紧发条。"
+   },
+   "detail": {
+    "en": "A brass key on the side of the car, fixed to the centre of the spring. As the spring unwinds, the key turns back the other way [S1].",
+    "zh": "车身侧面的一把铜钥匙，连在发条中心。发条松开时，钥匙往反方向转回去 [S1]。"
+   },
+   "primitive": {
+    "kind": "extrude",
+    "shape": [
+     [
+      0,
+      0
+     ],
+     [
+      0.012,
+      0.012
+     ],
+     [
+      0.02,
+      0.01
+     ],
+     [
+      0.02,
+      -0.01
+     ],
+     [
+      0.012,
+      -0.012
+     ],
+     [
+      0,
+      0
+     ],
+     [
+      -0.012,
+      -0.012
+     ],
+     [
+      -0.02,
+      -0.01
+     ],
+     [
+      -0.02,
+      0.01
+     ],
+     [
+      -0.012,
+      0.012
+     ]
+    ],
+    "depth": 0.002,
+    "at": [
+     -0.95,
+     4.399,
+     0.677
+    ],
+    "color": "brass"
+   },
+   "extra": [
+    {
+     "kind": "cylinder",
+     "size": [
+      0.002,
+      0.002,
+      0.014
+     ],
+     "at": [
+      -0.95,
+      4.399,
+      0.669
+     ],
+     "color": "brass",
+     "rotation": [
+      90,
+      0,
+      0
+     ]
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     0,
+     1
+    ],
+    "dist": 0.08
+   },
+   "connects": [
+    "windup-spring"
+   ]
+  },
+  {
+   "id": "windup-wheels",
+   "name": {
+    "en": "Toy wheels",
+    "zh": "玩具车轮"
+   },
+   "short": {
+    "en": "Wheels",
+    "zh": "车轮"
+   },
+   "group": "home",
+   "summary": {
+    "en": "Turn as the spring unwinds and move the car along.",
+    "zh": "发条松开时转动，带着车子往前走。"
+   },
+   "detail": {
+    "en": "Four small rubber wheels. Friction in the gears and axles and where the tyres grip the table turns the car's energy into heat, and the gears tick: in this model the spring's energy ends as 95 % heat and 5 % sound [S1].",
+    "zh": "四个小橡胶轮。齿轮和车轴里的摩擦、轮胎和桌面之间的摩擦，把车的能量变成热，齿轮还嗒嗒地响：在这个模型里，发条的能量最后 95 % 变成热、5 % 变成声 [S1]。"
+   },
+   "primitive": {
+    "kind": "cylinder",
+    "size": [
+     0.012,
+     0.012,
+     0.008
+    ],
+    "at": [
+     -0.99,
+     4.362,
+     0.586
+    ],
+    "color": "rubber",
+    "rotation": [
+     90,
+     0,
+     0
+    ]
+   },
+   "extra": [
+    {
+     "kind": "cylinder",
+     "size": [
+      0.012,
+      0.012,
+      0.008
+     ],
+     "at": [
+      -0.99,
+      4.362,
+      0.654
+     ],
+     "color": "rubber",
+     "rotation": [
+      90,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.012,
+      0.012,
+      0.008
+     ],
+     "at": [
+      -0.91,
+      4.362,
+      0.586
+     ],
+     "color": "rubber",
+     "rotation": [
+      90,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.012,
+      0.012,
+      0.008
+     ],
+     "at": [
+      -0.91,
+      4.362,
+      0.654
+     ],
+     "color": "rubber",
+     "rotation": [
+      90,
+      0,
+      0
+     ]
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     -1,
+     0
+    ],
+    "dist": 0.06
+   },
+   "connects": [
+    "windup-toy"
+   ]
+  },
+  {
+   "id": "drop-pole",
+   "name": {
+    "en": "Drop pole",
+    "zh": "落球刻度杆"
+   },
+   "short": {
+    "en": "Pole",
+    "zh": "刻度杆"
+   },
+   "group": "void-deck",
+   "summary": {
+    "en": "Measures how high the ball is let go and bounces.",
+    "zh": "量出球放手的高度和弹起的高度。"
+   },
+   "detail": {
+    "en": "A white pole 1.2 m tall with a mark every 5 cm and a longer mark every 10 cm, measured up from the top of the test floor [S1]. Heights are measured to the bottom of the ball, as in the tennis-ball bounce test [S20].\n\nThe pole has marks only, no numbers: read a height by counting the marks.",
+    "zh": "一根 1.2 m 高的白色刻度杆，从试验地面的顶面量起，每 5 cm 一条短刻度，每 10 cm 一条长刻度 [S1]。高度量到球的底部，和网球弹跳测试的量法一样 [S20]。\n\n杆上只有刻度线，没有数字：数刻度就能读出高度。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.04,
+     1.2,
+     0.025
+    ],
+    "at": [
+     -2.8,
+     0.77,
+     1.8
+    ],
+    "color": "enamel",
+    "bevel": 0.004,
+    "tint": "#f1eee6"
+   },
+   "extra": [
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.22,
+      0.02,
+      0.2
+     ],
+     "at": [
+      -2.85,
+      0.16,
+      1.8
+     ],
+     "color": "enamel",
+     "bevel": 0.004,
+     "tint": "#f1eee6"
+    },
+    {
+     "kind": "fins",
+     "size": [
+      0.024,
+      0.032,
+      0.003
+     ],
+     "count": 13,
+     "gap": 0.097,
+     "axis": "y",
+     "at": [
+      -2.794,
+      0.77,
+      1.8135
+     ],
+     "color": "token:ink"
+    },
+    {
+     "kind": "fins",
+     "size": [
+      0.012,
+      0.032,
+      0.002
+     ],
+     "count": 12,
+     "gap": 0.098,
+     "axis": "y",
+     "at": [
+      -2.788,
+      0.77,
+      1.8135
+     ],
+     "color": "token:ink"
+    }
+   ],
+   "explode": {
+    "dir": [
+     -1,
+     0,
+     0
+    ],
+    "dist": 0.2
+   },
+   "connects": [
+    "release-clamp",
+    "surface-tile"
+   ]
+  },
+  {
+   "id": "release-clamp",
+   "name": {
+    "en": "Release clamp",
+    "zh": "释放夹"
+   },
+   "short": {
+    "en": "Clamp",
+    "zh": "释放夹"
+   },
+   "group": "void-deck",
+   "summary": {
+    "en": "Holds the ball at the chosen height, then lets go.",
+    "zh": "把球夹在选定的高度，再松开。"
+   },
+   "detail": {
+    "en": "A sleeve that slides along the pole, with a ring that holds the ball. It is set at 25, 50, 75 or 100 cm and lets the ball go without pushing it, so every drop starts the same way [S1].",
+    "zh": "套在刻度杆上、可以上下滑动的夹子，用一个圆环托住球。它可以定在 25、50、75 或 100 cm，松开时不推球，所以每次下落都以同样的方式开始 [S1]。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.06,
+     0.05,
+     0.045
+    ],
+    "at": [
+     -2.8,
+     1.2035,
+     1.8
+    ],
+    "color": "steel",
+    "bevel": 0.006
+   },
+   "extra": [
+    {
+     "kind": "box",
+     "size": [
+      0.28,
+      0.012,
+      0.016
+     ],
+     "at": [
+      -2.63,
+      1.2035,
+      1.8
+     ],
+     "color": "steel"
+    },
+    {
+     "kind": "torus",
+     "size": [
+      0.037,
+      0.003
+     ],
+     "at": [
+      -2.45,
+      1.2035,
+      1.8
+     ],
+     "color": "steel",
+     "rotation": [
+      90,
+      0,
+      0
+     ]
+    }
+   ],
+   "explode": {
+    "dir": [
+     -1,
+     0,
+     0
+    ],
+    "dist": 0.2
+   },
+   "connects": [
+    "drop-pole",
+    "tennis-ball"
+   ]
+  },
+  {
+   "id": "tennis-ball",
+   "name": {
+    "en": "Tennis ball",
+    "zh": "网球"
+   },
+   "short": {
+    "en": "Ball",
+    "zh": "网球"
+   },
+   "group": "void-deck",
+   "summary": {
+    "en": "Has potential energy held up, kinetic energy falling.",
+    "zh": "举高时有势能，下落时有动能。"
+   },
+   "detail": {
+    "en": "A standard tennis ball has a mass of 56.0–59.4 g and is 6.54–6.86 cm across; this model uses 58 g and 6.7 cm [S20, S1]. Dropped from 254 cm onto a hard, heavy block, an approved ball must bounce back to between 135 and 147 cm [S20].\n\nIn this model, after falling 100 cm the ball reaches the floor at 4.43 m/s [S23, S1]. On tile it bounces back to 55 % of the height it fell from. The model leaves out the air.",
+    "zh": "标准网球的质量是 56.0–59.4 g，直径 6.54–6.86 cm；这个模型取 58 g、6.7 cm [S20, S1]。从 254 cm 高处落到又硬又重的试块上，合格的网球必须弹回到 135 到 147 cm 之间 [S20]。\n\n在这个模型里，球落下 100 cm，碰到地面时速度是 4.43 m/s [S23, S1]。落在地砖上，它弹回到下落高度的 55 %。模型没有算空气的影响。"
+   },
+   "primitive": {
+    "kind": "sphere",
+    "size": [
+     0.0335
+    ],
+    "at": [
+     -2.45,
+     0.2035,
+     1.8
+    ],
+    "color": "rubber",
+    "tint": "#c9d62f"
+   },
+   "extra": [
+    {
+     "kind": "sweep",
+     "path": [
+      [
+       0.0336,
+       0.0,
+       0.0
+      ],
+      [
+       0.0331,
+       0.0059,
+       -0.0004
+      ],
+      [
+       0.0315,
+       0.0117,
+       -0.0003
+      ],
+      [
+       0.0287,
+       0.0175,
+       0.0008
+      ],
+      [
+       0.0246,
+       0.0227,
+       0.0034
+      ],
+      [
+       0.0193,
+       0.0265,
+       0.0077
+      ],
+      [
+       0.0133,
+       0.0279,
+       0.0133
+      ],
+      [
+       0.0077,
+       0.0265,
+       0.0193
+      ],
+      [
+       0.0034,
+       0.0227,
+       0.0246
+      ],
+      [
+       0.0008,
+       0.0175,
+       0.0287
+      ],
+      [
+       -0.0003,
+       0.0117,
+       0.0315
+      ],
+      [
+       -0.0004,
+       0.0059,
+       0.0331
+      ],
+      [
+       -0.0,
+       0.0,
+       0.0336
+      ],
+      [
+       0.0004,
+       -0.0059,
+       0.0331
+      ],
+      [
+       0.0003,
+       -0.0117,
+       0.0315
+      ],
+      [
+       -0.0008,
+       -0.0175,
+       0.0287
+      ],
+      [
+       -0.0034,
+       -0.0227,
+       0.0246
+      ],
+      [
+       -0.0077,
+       -0.0265,
+       0.0193
+      ],
+      [
+       -0.0133,
+       -0.0279,
+       0.0133
+      ],
+      [
+       -0.0193,
+       -0.0265,
+       0.0077
+      ],
+      [
+       -0.0246,
+       -0.0227,
+       0.0034
+      ],
+      [
+       -0.0287,
+       -0.0175,
+       0.0008
+      ],
+      [
+       -0.0315,
+       -0.0117,
+       -0.0003
+      ],
+      [
+       -0.0331,
+       -0.0059,
+       -0.0004
+      ],
+      [
+       -0.0336,
+       -0.0,
+       -0.0
+      ],
+      [
+       -0.0331,
+       0.0059,
+       0.0004
+      ],
+      [
+       -0.0315,
+       0.0117,
+       0.0003
+      ],
+      [
+       -0.0287,
+       0.0175,
+       -0.0008
+      ],
+      [
+       -0.0246,
+       0.0227,
+       -0.0034
+      ],
+      [
+       -0.0193,
+       0.0265,
+       -0.0077
+      ],
+      [
+       -0.0133,
+       0.0279,
+       -0.0133
+      ],
+      [
+       -0.0077,
+       0.0265,
+       -0.0193
+      ],
+      [
+       -0.0034,
+       0.0227,
+       -0.0246
+      ],
+      [
+       -0.0008,
+       0.0175,
+       -0.0287
+      ],
+      [
+       0.0003,
+       0.0117,
+       -0.0315
+      ],
+      [
+       0.0004,
+       0.0059,
+       -0.0331
+      ],
+      [
+       0.0,
+       0.0,
+       -0.0336
+      ],
+      [
+       -0.0004,
+       -0.0059,
+       -0.0331
+      ],
+      [
+       -0.0003,
+       -0.0117,
+       -0.0315
+      ],
+      [
+       0.0008,
+       -0.0175,
+       -0.0287
+      ],
+      [
+       0.0034,
+       -0.0227,
+       -0.0246
+      ],
+      [
+       0.0077,
+       -0.0265,
+       -0.0193
+      ],
+      [
+       0.0133,
+       -0.0279,
+       -0.0133
+      ],
+      [
+       0.0193,
+       -0.0265,
+       -0.0077
+      ],
+      [
+       0.0246,
+       -0.0227,
+       -0.0034
+      ],
+      [
+       0.0287,
+       -0.0175,
+       -0.0008
+      ],
+      [
+       0.0315,
+       -0.0117,
+       0.0003
+      ],
+      [
+       0.0331,
+       -0.0059,
+       0.0004
+      ],
+      [
+       0.0336,
+       0.0,
+       0.0
+      ]
+     ],
+     "radius": 0.0011,
+     "closed": true,
+     "caps": "none",
+     "at": [
+      -2.45,
+      0.2035,
+      1.8
+     ],
+     "color": "rubber",
+     "tint": "#efeee6"
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.15
+   },
+   "connects": [
+    "drop-pole",
+    "surface-tile"
+   ]
+  },
+  {
+   "id": "surface-tile",
+   "name": {
+    "en": "Floor tile",
+    "zh": "地砖"
+   },
+   "short": {
+    "en": "Tile",
+    "zh": "地砖"
+   },
+   "group": "void-deck",
+   "summary": {
+    "en": "A hard floor: the ball keeps more of its energy.",
+    "zh": "坚硬的地面：球留下的能量多。"
+   },
+   "detail": {
+    "en": "A hard ceramic floor tile. In this model the ball bounces back to 55 % of its drop height on tile, close to how an approved tennis ball bounces on a hard test block [S20, S1]; the other 45 % of its energy becomes heat and sound.",
+    "zh": "一块坚硬的瓷砖。在这个模型里，球落在地砖上弹回到下落高度的 55 %，和合格网球在硬试块上的弹跳差不多 [S20, S1]；另外 45 % 的能量变成热和声。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.6,
+     0.02,
+     0.6
+    ],
+    "at": [
+     -2.45,
+     0.16,
+     1.8
+    ],
+    "color": "enamel",
+    "bevel": 0.003,
+    "tint": "#d8d2c4"
+   },
+   "extra": [
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.296,
+      0.006,
+      0.296
+     ],
+     "at": [
+      -2.601,
+      0.169,
+      1.649
+     ],
+     "color": "enamel",
+     "bevel": 0.002,
+     "tint": "#d8d2c4"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.296,
+      0.006,
+      0.296
+     ],
+     "at": [
+      -2.601,
+      0.169,
+      1.951
+     ],
+     "color": "enamel",
+     "bevel": 0.002,
+     "tint": "#d8d2c4"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.296,
+      0.006,
+      0.296
+     ],
+     "at": [
+      -2.299,
+      0.169,
+      1.649
+     ],
+     "color": "enamel",
+     "bevel": 0.002,
+     "tint": "#d8d2c4"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.296,
+      0.006,
+      0.296
+     ],
+     "at": [
+      -2.299,
+      0.169,
+      1.951
+     ],
+     "color": "enamel",
+     "bevel": 0.002,
+     "tint": "#d8d2c4"
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     -1,
+     0
+    ],
+    "dist": 0.1
+   },
+   "connects": [
+    "tennis-ball"
+   ]
+  },
+  {
+   "id": "surface-rubber",
+   "name": {
+    "en": "Rubber mat",
+    "zh": "橡胶垫"
+   },
+   "short": {
+    "en": "Rubber",
+    "zh": "橡胶垫"
+   },
+   "group": "void-deck",
+   "summary": {
+    "en": "A playground mat: more of the energy turns into heat.",
+    "zh": "游乐场的地垫：更多能量变成热。"
+   },
+   "detail": {
+    "en": "A rubber safety mat like the ones under playgrounds. In this model the ball bounces back to 40 % of its drop height on it [S1]. The value is illustrative: how high a ball bounces depends on the ball and the surface together [S21].",
+    "zh": "和游乐场地上铺的一样的橡胶安全垫。在这个模型里，球落在上面弹回到下落高度的 40 % [S1]。这个数只是示意：球弹多高，要看球和地面两样东西 [S21]。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.6,
+     0.02,
+     0.6
+    ],
+    "at": [
+     -2.45,
+     0.16,
+     1.8
+    ],
+    "color": "rubber",
+    "bevel": 0.004,
+    "tint": "#3d4d42"
+   },
+   "explode": {
+    "dir": [
+     0,
+     -1,
+     0
+    ],
+    "dist": 0.1
+   },
+   "connects": [
+    "tennis-ball"
+   ]
+  },
+  {
+   "id": "surface-carpet",
+   "name": {
+    "en": "Carpet",
+    "zh": "地毯"
+   },
+   "short": {
+    "en": "Carpet",
+    "zh": "地毯"
+   },
+   "group": "void-deck",
+   "summary": {
+    "en": "A soft floor: the ball bounces lower.",
+    "zh": "柔软的地面：球弹得更低。"
+   },
+   "detail": {
+    "en": "A piece of thick carpet. In this model the ball bounces back to 25 % of its drop height on it; the rest of the energy becomes heat and sound as the fibres squash [S1]. The value is illustrative [S21].",
+    "zh": "一块厚地毯。在这个模型里，球落在上面弹回到下落高度的 25 %；地毯的绒毛被压扁，其余的能量变成热和声 [S1]。这个数只是示意 [S21]。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.6,
+     0.02,
+     0.6
+    ],
+    "at": [
+     -2.45,
+     0.16,
+     1.8
+    ],
+    "color": "fabric",
+    "bevel": 0.004,
+    "tint": "#8a5a4a"
+   },
+   "explode": {
+    "dir": [
+     0,
+     -1,
+     0
+    ],
+    "dist": 0.1
+   },
+   "connects": [
+    "tennis-ball"
+   ]
+  },
+  {
+   "id": "surface-sand",
+   "name": {
+    "en": "Sand tray",
+    "zh": "沙盘"
+   },
+   "short": {
+    "en": "Sand",
+    "zh": "沙"
+   },
+   "group": "void-deck",
+   "summary": {
+    "en": "Sand moves aside, so the ball hardly bounces.",
+    "zh": "沙子被推开，球几乎不弹。"
+   },
+   "detail": {
+    "en": "A shallow wooden tray of sand. In this model the ball bounces back to only 5 % of its drop height: pushing the sand aside turns almost all its energy into heat and sound [S1]. The value is illustrative [S21].",
+    "zh": "一个浅浅的木框沙盘。在这个模型里，球只弹回到下落高度的 5 %：推开沙子时，它的能量几乎全部变成了热和声 [S1]。这个数只是示意 [S21]。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.56,
+     0.018,
+     0.56
+    ],
+    "at": [
+     -2.45,
+     0.161,
+     1.8
+    ],
+    "color": "abrasive",
+    "bevel": 0.004,
+    "tint": "#d6c08a"
+   },
+   "extra": [
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.6,
+      0.032,
+      0.02
+     ],
+     "at": [
+      -2.45,
+      0.166,
+      1.51
+     ],
+     "color": "wood",
+     "bevel": 0.004,
+     "tint": "#9a7450"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.6,
+      0.032,
+      0.02
+     ],
+     "at": [
+      -2.45,
+      0.166,
+      2.09
+     ],
+     "color": "wood",
+     "bevel": 0.004,
+     "tint": "#9a7450"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.02,
+      0.032,
+      0.56
+     ],
+     "at": [
+      -2.74,
+      0.166,
+      1.8
+     ],
+     "color": "wood",
+     "bevel": 0.004,
+     "tint": "#9a7450"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.02,
+      0.032,
+      0.56
+     ],
+     "at": [
+      -2.16,
+      0.166,
+      1.8
+     ],
+     "color": "wood",
+     "bevel": 0.004,
+     "tint": "#9a7450"
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     -1,
+     0
+    ],
+    "dist": 0.1
+   },
+   "connects": [
+    "tennis-ball"
+   ]
+  },
+  {
+   "id": "swing-frame",
+   "name": {
+    "en": "Swing frame",
+    "zh": "秋千架"
+   },
+   "short": {
+    "en": "Frame",
+    "zh": "秋千架"
+   },
+   "group": "void-deck",
+   "summary": {
+    "en": "Holds the swing up by its hooks.",
+    "zh": "用挂钩把秋千吊起来。"
+   },
+   "detail": {
+    "en": "A steel A-frame 2.45 m high on a rubber playground mat [S1]. At the hooks at the top, rubbing turns some of the swing's energy into heat and a creak.",
+    "zh": "立在游乐场橡胶地垫上的钢制 A 字架，高 2.45 m [S1]。在顶上的挂钩处，摩擦把秋千的一部分能量变成热和吱吱声。"
+   },
+   "primitive": {
+    "kind": "tube",
+    "path": [
+     [
+      8.0,
+      2.45,
+      -1.62
+     ],
+     [
+      8.0,
+      2.45,
+      1.62
+     ]
+    ],
+    "radius": 0.045,
+    "at": [
+     0,
+     0,
+     0
+    ],
+    "color": "powder",
+    "tint": "#5f7a6a"
+   },
+   "extra": [
+    {
+     "kind": "tube",
+     "path": [
+      [
+       6.6,
+       0.05,
+       -1.5
+      ],
+      [
+       8.0,
+       2.45,
+       -1.5
+      ],
+      [
+       9.4,
+       0.05,
+       -1.5
+      ]
+     ],
+     "radius": 0.04,
+     "at": [
+      0,
+      0,
+      0
+     ],
+     "color": "powder",
+     "bendRadius": 0.12,
+     "tint": "#5f7a6a"
+    },
+    {
+     "kind": "tube",
+     "path": [
+      [
+       6.6,
+       0.05,
+       1.5
+      ],
+      [
+       8.0,
+       2.45,
+       1.5
+      ],
+      [
+       9.4,
+       0.05,
+       1.5
+      ]
+     ],
+     "radius": 0.04,
+     "at": [
+      0,
+      0,
+      0
+     ],
+     "color": "powder",
+     "bendRadius": 0.12,
+     "tint": "#5f7a6a"
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.3
+   },
+   "connects": [
+    "swing-seat"
+   ]
+  },
+  {
+   "id": "swing-seat",
+   "name": {
+    "en": "Swing",
+    "zh": "秋千"
+   },
+   "short": {
+    "en": "Swing",
+    "zh": "秋千"
+   },
+   "group": "void-deck",
+   "summary": {
+    "en": "Swaps potential and kinetic energy as it swings.",
+    "zh": "摆动时，势能和动能互相转换。"
+   },
+   "detail": {
+    "en": "A rubber seat on two chains 2.0 m long [S1]. Pulled back to 35°, it is 0.36 m higher than at the bottom; let go, it is fastest at the bottom, about 2.66 m/s in this model [S24, S1].\n\nA swing there and back takes about 2.9 s [S24, S1]. In this model each swing from one side to the other turns 3 % of the energy that is left into heat and sound, so every swing is a little lower [S1]; that value is illustrative.",
+    "zh": "两条 2.0 m 长的链子吊着一块橡胶座板 [S1]。把它拉到 35°，它比最低点高 0.36 m；一松手，它在最低点最快，在这个模型里约 2.66 m/s [S24, S1]。\n\n秋千来回摆一次约 2.9 s [S24, S1]。在这个模型里，秋千每从一边摆到另一边，剩下的能量就有 3 % 变成热和声，所以每次都摆得低一点 [S1]；这个数只是示意。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.2,
+     0.04,
+     0.46
+    ],
+    "at": [
+     8.0,
+     0.4,
+     0.0
+    ],
+    "color": "rubber",
+    "bevel": 0.01,
+    "tint": "#2b2b2a"
+   },
+   "extra": [
+    {
+     "kind": "cylinder",
+     "size": [
+      0.006,
+      0.006,
+      1.98
+     ],
+     "at": [
+      8.0,
+      1.41,
+      -0.21
+     ],
+     "color": "steel"
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.006,
+      0.006,
+      1.98
+     ],
+     "at": [
+      8.0,
+      1.41,
+      0.21
+     ],
+     "color": "steel"
+    },
+    {
+     "kind": "torus",
+     "size": [
+      0.02,
+      0.004
+     ],
+     "at": [
+      8.0,
+      2.4,
+      -0.21
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      90,
+      0
+     ]
+    },
+    {
+     "kind": "torus",
+     "size": [
+      0.02,
+      0.004
+     ],
+     "at": [
+      8.0,
+      2.4,
+      0.21
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      90,
+      0
+     ]
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     0,
+     1
+    ],
+    "dist": 0.3
+   },
+   "connects": [
+    "swing-frame"
+   ]
+  },
+  {
+   "id": "bicycle-frame",
+   "name": {
+    "en": "Bicycle",
+    "zh": "自行车"
+   },
+   "short": {
+    "en": "Bicycle",
+    "zh": "自行车"
+   },
+   "group": "void-deck",
+   "summary": {
+    "en": "Stands upside down so its back wheel can turn freely.",
+    "zh": "倒放着，后轮可以自由转动。"
+   },
+   "detail": {
+    "en": "An ordinary bicycle resting on its saddle and handlebars, the way people turn a bicycle over to mend it. With the back wheel off the ground, the pedals can turn it while the bicycle stays where it is [S1].",
+    "zh": "一辆普通的自行车，车座和车把着地倒放着，就像修车时那样把车翻过来。后轮离开地面，踩动踏板它就会转，车子本身却不会走 [S1]。"
+   },
+   "primitive": {
+    "kind": "tube",
+    "path": [
+     [
+      1.0,
+      0.82,
+      1.6
+     ],
+     [
+      1.12,
+      0.3,
+      1.6
+     ]
+    ],
+    "radius": 0.016,
+    "at": [
+     0,
+     0,
+     0
+    ],
+    "color": "powder",
+    "tint": "#2f5d62"
+   },
+   "extra": [
+    {
+     "kind": "tube",
+     "path": [
+      [
+       1.12,
+       0.3,
+       1.6
+      ],
+      [
+       0.5,
+       0.27,
+       1.6
+      ]
+     ],
+     "radius": 0.015,
+     "at": [
+      0,
+      0,
+      0
+     ],
+     "color": "powder",
+     "tint": "#2f5d62"
+    },
+    {
+     "kind": "tube",
+     "path": [
+      [
+       1.0,
+       0.82,
+       1.6
+      ],
+      [
+       0.45,
+       0.42,
+       1.6
+      ]
+     ],
+     "radius": 0.018,
+     "at": [
+      0,
+      0,
+      0
+     ],
+     "color": "powder",
+     "tint": "#2f5d62"
+    },
+    {
+     "kind": "tube",
+     "path": [
+      [
+       0.5,
+       0.27,
+       1.6
+      ],
+      [
+       0.45,
+       0.42,
+       1.6
+      ]
+     ],
+     "radius": 0.02,
+     "at": [
+      0,
+      0,
+      0
+     ],
+     "color": "powder",
+     "tint": "#2f5d62"
+    },
+    {
+     "kind": "tube",
+     "path": [
+      [
+       1.0,
+       0.82,
+       1.567
+      ],
+      [
+       1.42,
+       0.77,
+       1.545
+      ]
+     ],
+     "radius": 0.009,
+     "at": [
+      0,
+      0,
+      0
+     ],
+     "color": "powder",
+     "tint": "#2f5d62"
+    },
+    {
+     "kind": "tube",
+     "path": [
+      [
+       1.12,
+       0.3,
+       1.5835
+      ],
+      [
+       1.42,
+       0.77,
+       1.545
+      ]
+     ],
+     "radius": 0.008,
+     "at": [
+      0,
+      0,
+      0
+     ],
+     "color": "powder",
+     "tint": "#2f5d62"
+    },
+    {
+     "kind": "tube",
+     "path": [
+      [
+       0.45,
+       0.42,
+       1.578
+      ],
+      [
+       0.4,
+       0.62,
+       1.545
+      ],
+      [
+       0.38,
+       0.77,
+       1.545
+      ]
+     ],
+     "radius": 0.009,
+     "at": [
+      0,
+      0,
+      0
+     ],
+     "color": "powder",
+     "bendRadius": 0.2,
+     "tint": "#2f5d62"
+    },
+    {
+     "kind": "tube",
+     "path": [
+      [
+       1.0,
+       0.82,
+       1.633
+      ],
+      [
+       1.42,
+       0.77,
+       1.655
+      ]
+     ],
+     "radius": 0.009,
+     "at": [
+      0,
+      0,
+      0
+     ],
+     "color": "powder",
+     "tint": "#2f5d62"
+    },
+    {
+     "kind": "tube",
+     "path": [
+      [
+       1.12,
+       0.3,
+       1.6165
+      ],
+      [
+       1.42,
+       0.77,
+       1.655
+      ]
+     ],
+     "radius": 0.008,
+     "at": [
+      0,
+      0,
+      0
+     ],
+     "color": "powder",
+     "tint": "#2f5d62"
+    },
+    {
+     "kind": "tube",
+     "path": [
+      [
+       0.45,
+       0.42,
+       1.622
+      ],
+      [
+       0.4,
+       0.62,
+       1.655
+      ],
+      [
+       0.38,
+       0.77,
+       1.655
+      ]
+     ],
+     "radius": 0.009,
+     "at": [
+      0,
+      0,
+      0
+     ],
+     "color": "powder",
+     "bendRadius": 0.2,
+     "tint": "#2f5d62"
+    },
+    {
+     "kind": "tube",
+     "path": [
+      [
+       1.135,
+       0.26,
+       1.6
+      ],
+      [
+       1.15,
+       0.2,
+       1.6
+      ]
+     ],
+     "radius": 0.012,
+     "at": [
+      0,
+      0,
+      0
+     ],
+     "color": "steel"
+    },
+    {
+     "kind": "tube",
+     "path": [
+      [
+       0.5,
+       0.27,
+       1.6
+      ],
+      [
+       0.53,
+       0.17,
+       1.6
+      ],
+      [
+       0.56,
+       0.165,
+       1.6
+      ]
+     ],
+     "radius": 0.012,
+     "at": [
+      0,
+      0,
+      0
+     ],
+     "color": "steel",
+     "bendRadius": 0.03
+    },
+    {
+     "kind": "tube",
+     "path": [
+      [
+       0.56,
+       0.162,
+       1.31
+      ],
+      [
+       0.56,
+       0.162,
+       1.89
+      ]
+     ],
+     "radius": 0.011,
+     "at": [
+      0,
+      0,
+      0
+     ],
+     "color": "steel"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.27,
+      0.05,
+      0.15
+     ],
+     "at": [
+      1.16,
+      0.175,
+      1.6
+     ],
+     "color": "rubber",
+     "bevel": 0.012,
+     "tint": "#252423"
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.016,
+      0.016,
+      0.1
+     ],
+     "at": [
+      0.56,
+      0.162,
+      1.33
+     ],
+     "color": "rubber",
+     "rotation": [
+      90,
+      0,
+      0
+     ],
+     "tint": "#252423"
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.016,
+      0.016,
+      0.1
+     ],
+     "at": [
+      0.56,
+      0.162,
+      1.87
+     ],
+     "color": "rubber",
+     "rotation": [
+      90,
+      0,
+      0
+     ],
+     "tint": "#252423"
+    },
+    {
+     "kind": "tube",
+     "path": [
+      [
+       1.0,
+       0.73,
+       1.665
+      ],
+      [
+       1.42,
+       0.73,
+       1.665
+      ],
+      [
+       1.42,
+       0.81,
+       1.665
+      ],
+      [
+       1.0,
+       0.91,
+       1.665
+      ],
+      [
+       1.0,
+       0.73,
+       1.665
+      ]
+     ],
+     "radius": 0.004,
+     "at": [
+      0,
+      0,
+      0
+     ],
+     "color": "steel",
+     "bendRadius": 0.04
+    },
+    {
+     "kind": "tube",
+     "path": [
+      [
+       0.45,
+       0.42,
+       1.6
+      ],
+      [
+       0.34,
+       0.38,
+       1.6
+      ]
+     ],
+     "radius": 0.006,
+     "at": [
+      0,
+      0,
+      0
+     ],
+     "color": "steel"
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.2
+   },
+   "connects": [
+    "front-wheel",
+    "rear-wheel",
+    "crank-pedals",
+    "bicycle-dynamo",
+    "headlamp"
+   ]
+  },
+  {
+   "id": "front-wheel",
+   "name": {
+    "en": "Front wheel",
+    "zh": "前轮"
+   },
+   "short": {
+    "en": "Front wheel",
+    "zh": "前轮"
+   },
+   "group": "void-deck",
+   "summary": {
+    "en": "Stays still; the headlamp is fixed above it.",
+    "zh": "不转动；车灯就装在它旁边。"
+   },
+   "detail": {
+    "en": "A 26-inch wheel. It does not turn in this model: only the back wheel is driven by the pedals [S1].",
+    "zh": "一个 26 吋的车轮。在这个模型里它不转：只有后轮由踏板带动 [S1]。"
+   },
+   "primitive": {
+    "kind": "torus",
+    "size": [
+     0.31,
+     0.022
+    ],
+    "at": [
+     0.38,
+     0.77,
+     1.6
+    ],
+    "color": "rubber",
+    "tint": "#262624"
+   },
+   "extra": [
+    {
+     "kind": "torus",
+     "size": [
+      0.29,
+      0.008
+     ],
+     "at": [
+      0.38,
+      0.77,
+      1.6
+     ],
+     "color": "steel"
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.022,
+      0.022,
+      0.1
+     ],
+     "at": [
+      0.38,
+      0.77,
+      1.6
+     ],
+     "color": "steel",
+     "rotation": [
+      90,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0012,
+      0.0012,
+      0.265
+     ],
+     "at": [
+      0.5325,
+      0.77,
+      1.5825
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      -90.0
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0012,
+      0.0012,
+      0.265
+     ],
+     "at": [
+      0.5209,
+      0.8284,
+      1.6175
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      -67.5
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0012,
+      0.0012,
+      0.265
+     ],
+     "at": [
+      0.4878,
+      0.8778,
+      1.5825
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      -45.0
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0012,
+      0.0012,
+      0.265
+     ],
+     "at": [
+      0.4384,
+      0.9109,
+      1.6175
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      -22.5
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0012,
+      0.0012,
+      0.265
+     ],
+     "at": [
+      0.38,
+      0.9225,
+      1.5825
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      0.0
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0012,
+      0.0012,
+      0.265
+     ],
+     "at": [
+      0.3216,
+      0.9109,
+      1.6175
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      22.5
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0012,
+      0.0012,
+      0.265
+     ],
+     "at": [
+      0.2722,
+      0.8778,
+      1.5825
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      45.0
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0012,
+      0.0012,
+      0.265
+     ],
+     "at": [
+      0.2391,
+      0.8284,
+      1.6175
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      67.5
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0012,
+      0.0012,
+      0.265
+     ],
+     "at": [
+      0.2275,
+      0.77,
+      1.5825
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      90.0
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0012,
+      0.0012,
+      0.265
+     ],
+     "at": [
+      0.2391,
+      0.7116,
+      1.6175
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      112.5
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0012,
+      0.0012,
+      0.265
+     ],
+     "at": [
+      0.2722,
+      0.6622,
+      1.5825
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      135.0
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0012,
+      0.0012,
+      0.265
+     ],
+     "at": [
+      0.3216,
+      0.6291,
+      1.6175
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      157.5
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0012,
+      0.0012,
+      0.265
+     ],
+     "at": [
+      0.38,
+      0.6175,
+      1.5825
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      180.0
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0012,
+      0.0012,
+      0.265
+     ],
+     "at": [
+      0.4384,
+      0.6291,
+      1.6175
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      202.5
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0012,
+      0.0012,
+      0.265
+     ],
+     "at": [
+      0.4878,
+      0.6622,
+      1.5825
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      225.0
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0012,
+      0.0012,
+      0.265
+     ],
+     "at": [
+      0.5209,
+      0.7116,
+      1.6175
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      247.5
+     ]
+    }
+   ],
+   "explode": {
+    "dir": [
+     -1,
+     0,
+     0
+    ],
+    "dist": 0.3
+   },
+   "connects": [
+    "bicycle-frame"
+   ]
+  },
+  {
+   "id": "rear-wheel",
+   "name": {
+    "en": "Back wheel",
+    "zh": "后轮"
+   },
+   "short": {
+    "en": "Back wheel",
+    "zh": "后轮"
+   },
+   "group": "void-deck",
+   "summary": {
+    "en": "Carries kinetic energy from the pedals to the dynamo.",
+    "zh": "把踏板的动能传给发电机。"
+   },
+   "detail": {
+    "en": "A 26-inch wheel about 2.07 m round [S1]. The chain turns it, and its tyre turns the dynamo's small roller. At 15 km/h it turns about 121 times a minute; the model draws it turning more slowly so that the spokes stay easy to see [S1].",
+    "zh": "一个 26 吋的车轮，周长约 2.07 m [S1]。链条带动它转，它的轮胎又带动发电机的小滚轮。时速 15 km/h 时，它每分钟约转 121 圈；模型把它画得转慢一些，好看清辐条 [S1]。"
+   },
+   "primitive": {
+    "kind": "torus",
+    "size": [
+     0.31,
+     0.022
+    ],
+    "at": [
+     1.42,
+     0.77,
+     1.6
+    ],
+    "color": "rubber",
+    "tint": "#262624"
+   },
+   "extra": [
+    {
+     "kind": "torus",
+     "size": [
+      0.29,
+      0.008
+     ],
+     "at": [
+      1.42,
+      0.77,
+      1.6
+     ],
+     "color": "steel"
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.022,
+      0.022,
+      0.1
+     ],
+     "at": [
+      1.42,
+      0.77,
+      1.6
+     ],
+     "color": "steel",
+     "rotation": [
+      90,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0012,
+      0.0012,
+      0.265
+     ],
+     "at": [
+      1.5725,
+      0.77,
+      1.5825
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      -90.0
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0012,
+      0.0012,
+      0.265
+     ],
+     "at": [
+      1.5609,
+      0.8284,
+      1.6175
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      -67.5
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0012,
+      0.0012,
+      0.265
+     ],
+     "at": [
+      1.5278,
+      0.8778,
+      1.5825
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      -45.0
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0012,
+      0.0012,
+      0.265
+     ],
+     "at": [
+      1.4784,
+      0.9109,
+      1.6175
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      -22.5
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0012,
+      0.0012,
+      0.265
+     ],
+     "at": [
+      1.42,
+      0.9225,
+      1.5825
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      0.0
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0012,
+      0.0012,
+      0.265
+     ],
+     "at": [
+      1.3616,
+      0.9109,
+      1.6175
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      22.5
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0012,
+      0.0012,
+      0.265
+     ],
+     "at": [
+      1.3122,
+      0.8778,
+      1.5825
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      45.0
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0012,
+      0.0012,
+      0.265
+     ],
+     "at": [
+      1.2791,
+      0.8284,
+      1.6175
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      67.5
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0012,
+      0.0012,
+      0.265
+     ],
+     "at": [
+      1.2675,
+      0.77,
+      1.5825
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      90.0
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0012,
+      0.0012,
+      0.265
+     ],
+     "at": [
+      1.2791,
+      0.7116,
+      1.6175
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      112.5
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0012,
+      0.0012,
+      0.265
+     ],
+     "at": [
+      1.3122,
+      0.6622,
+      1.5825
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      135.0
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0012,
+      0.0012,
+      0.265
+     ],
+     "at": [
+      1.3616,
+      0.6291,
+      1.6175
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      157.5
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0012,
+      0.0012,
+      0.265
+     ],
+     "at": [
+      1.42,
+      0.6175,
+      1.5825
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      180.0
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0012,
+      0.0012,
+      0.265
+     ],
+     "at": [
+      1.4784,
+      0.6291,
+      1.6175
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      202.5
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0012,
+      0.0012,
+      0.265
+     ],
+     "at": [
+      1.5278,
+      0.6622,
+      1.5825
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      225.0
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0012,
+      0.0012,
+      0.265
+     ],
+     "at": [
+      1.5609,
+      0.7116,
+      1.6175
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      247.5
+     ]
+    },
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0,
+       -0.006
+      ],
+      [
+       0.045,
+       -0.006
+      ],
+      [
+       0.045,
+       0.006
+      ],
+      [
+       0,
+       0.006
+      ]
+     ],
+     "segments": 24,
+     "at": [
+      1.42,
+      0.77,
+      1.665
+     ],
+     "color": "steel",
+     "rotation": [
+      90,
+      0,
+      0
+     ]
+    }
+   ],
+   "explode": {
+    "dir": [
+     1,
+     0,
+     0
+    ],
+    "dist": 0.3
+   },
+   "connects": [
+    "bicycle-frame",
+    "crank-pedals",
+    "bicycle-dynamo"
+   ]
+  },
+  {
+   "id": "crank-pedals",
+   "name": {
+    "en": "Pedals and cranks",
+    "zh": "踏板与曲柄"
+   },
+   "short": {
+    "en": "Pedals",
+    "zh": "踏板"
+   },
+   "group": "void-deck",
+   "summary": {
+    "en": "Turn the chainwheel when pushed round.",
+    "zh": "被踩着转动时，带动牙盘。"
+   },
+   "detail": {
+    "en": "Two cranks and pedals on the chainwheel. Pushing the pedals round gives them kinetic energy, which the chain carries to the back wheel [S1].\n\nYour muscles change energy from your food into this movement. When cycling, about a fifth of it becomes movement and the rest becomes heat, which is why you warm up [S25].",
+    "zh": "牙盘两边各一根曲柄和一个踏板。把踏板踩着转起来，它们就有了动能，链条再把这份动能送到后轮 [S1]。\n\n你的肌肉把食物里的能量变成这种运动。骑车时，大约五分之一变成运动，其余的变成热，所以人会觉得身体发热 [S25]。"
+   },
+   "primitive": {
+    "kind": "lathe",
+    "profile": [
+     [
+      0,
+      -0.003
+     ],
+     [
+      0.095,
+      -0.003
+     ],
+     [
+      0.095,
+      0.003
+     ],
+     [
+      0,
+      0.003
+     ]
+    ],
+    "segments": 40,
+    "at": [
+     1.0,
+     0.82,
+     1.665
+    ],
+    "color": "steel",
+    "rotation": [
+     90,
+     0,
+     0
+    ]
+   },
+   "extra": [
+    {
+     "kind": "tube",
+     "path": [
+      [
+       1.0,
+       0.82,
+       1.685
+      ],
+      [
+       1.0,
+       0.99,
+       1.685
+      ]
+     ],
+     "radius": 0.01,
+     "at": [
+      0,
+      0,
+      0
+     ],
+     "color": "steel"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.1,
+      0.025,
+      0.07
+     ],
+     "at": [
+      1.0,
+      0.99,
+      1.725
+     ],
+     "color": "rubber",
+     "bevel": 0.006,
+     "tint": "#252423"
+    },
+    {
+     "kind": "tube",
+     "path": [
+      [
+       1.0,
+       0.82,
+       1.515
+      ],
+      [
+       1.0,
+       0.65,
+       1.515
+      ]
+     ],
+     "radius": 0.01,
+     "at": [
+      0,
+      0,
+      0
+     ],
+     "color": "steel"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.1,
+      0.025,
+      0.07
+     ],
+     "at": [
+      1.0,
+      0.65,
+      1.475
+     ],
+     "color": "rubber",
+     "bevel": 0.006,
+     "tint": "#252423"
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     1,
+     1
+    ],
+    "dist": 0.25
+   },
+   "connects": [
+    "rear-wheel",
+    "bicycle-frame"
+   ]
+  },
+  {
+   "id": "bicycle-dynamo",
+   "name": {
+    "en": "Bicycle dynamo",
+    "zh": "自行车发电机"
+   },
+   "short": {
+    "en": "Dynamo",
+    "zh": "发电机"
+   },
+   "group": "void-deck",
+   "summary": {
+    "en": "Changes the wheel's kinetic energy into electrical energy.",
+    "zh": "把车轮的动能转换成电能。"
+   },
+   "detail": {
+    "en": "A bottle-shaped dynamo on the back fork. Its small roller presses on the side of the tyre, so the turning wheel spins a magnet inside it [S28]. A common rating for bicycle dynamos is 6 V and 3 W [S27].\n\nIn this model 30 % of the kinetic energy that turns it becomes electrical energy, 65 % heat and 5 % its whirring sound; the shares are illustrative [S1]. Swung off the tyre, it makes no electrical energy, and the wheel is easier to turn.",
+    "zh": "装在后叉上、像个小瓶子的发电机。它的小滚轮压在轮胎侧面，转动的车轮带着里面的磁铁旋转 [S28]。自行车发电机常见的规格是 6 V、3 W [S27]。\n\n在这个模型里，带动它的动能有 30 % 变成电能，65 % 变成热，5 % 变成呼呼声；这些比例只是示意 [S1]。把它从轮胎上扳开，就不产生电能，车轮也更好转。"
+   },
+   "primitive": {
+    "kind": "lathe",
+    "profile": [
+     [
+      0,
+      -0.05
+     ],
+     [
+      0.014,
+      -0.05
+     ],
+     [
+      0.017,
+      -0.035
+     ],
+     [
+      0.017,
+      0.03
+     ],
+     [
+      0.011,
+      0.04
+     ],
+     [
+      0.004,
+      0.042
+     ],
+     [
+      0.004,
+      0.05
+     ],
+     [
+      0.011,
+      0.05
+     ],
+     [
+      0.011,
+      0.062
+     ],
+     [
+      0.004,
+      0.062
+     ],
+     [
+      0,
+      0.062
+     ]
+    ],
+    "segments": 32,
+    "at": [
+     1.2828,
+     0.5551,
+     1.637
+    ],
+    "color": "casing",
+    "rotation": [
+     0,
+     0,
+     -32.55
+    ]
+   },
+   "extra": [
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.02,
+      0.05,
+      0.03
+     ],
+     "at": [
+      1.2828,
+      0.5551,
+      1.611
+     ],
+     "color": "casing",
+     "bevel": 0.004,
+     "rotation": [
+      0,
+      0,
+      -32.55
+     ]
+    }
+   ],
+   "shell": true,
+   "explode": {
+    "dir": [
+     0,
+     0,
+     1
+    ],
+    "dist": 0.15
+   },
+   "connects": [
+    "rear-wheel",
+    "dynamo-magnet",
+    "dynamo-coil",
+    "dynamo-wires"
+   ]
+  },
+  {
+   "id": "dynamo-magnet",
+   "name": {
+    "en": "Dynamo magnet",
+    "zh": "发电机磁铁"
+   },
+   "short": {
+    "en": "Magnet",
+    "zh": "磁铁"
+   },
+   "group": "void-deck",
+   "summary": {
+    "en": "Spins beside the coil inside the dynamo.",
+    "zh": "在发电机里、线圈旁边转动。"
+   },
+   "detail": {
+    "en": "A small permanent magnet on the roller's shaft, half north pole and half south pole. As it spins, the magnetic field through the coil keeps changing, and that makes a current flow once the circuit to the lamp is complete [S28]. The model draws it turning far more slowly than a real one.",
+    "zh": "装在滚轮轴上的一块小永久磁铁，一半是北极，一半是南极。它转动时，穿过线圈的磁场不断变化，只要通到车灯的电路是闭合的，线圈里就有电流流动 [S28]。模型把它画得比真的转得慢得多。"
+   },
+   "primitive": {
+    "kind": "lathe",
+    "profile": [
+     [
+      0,
+      -0.018
+     ],
+     [
+      0.009,
+      -0.018
+     ],
+     [
+      0.009,
+      0.018
+     ],
+     [
+      0,
+      0.018
+     ]
+    ],
+    "segments": 24,
+    "at": [
+     1.2828,
+     0.5551,
+     1.637
+    ],
+    "color": "token:pole-n",
+    "rotation": [
+     0,
+     0,
+     -32.55
+    ],
+    "arc": 180
+   },
+   "extra": [
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0,
+       -0.018
+      ],
+      [
+       0.009,
+       -0.018
+      ],
+      [
+       0.009,
+       0.018
+      ],
+      [
+       0,
+       0.018
+      ]
+     ],
+     "segments": 24,
+     "at": [
+      1.2828,
+      0.5551,
+      1.637
+     ],
+     "color": "token:pole-s",
+     "rotation": [
+      0,
+      0,
+      -32.55
+     ],
+     "arc": 180,
+     "mirror": "z"
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     0,
+     1
+    ],
+    "dist": 0.25
+   },
+   "connects": [
+    "dynamo-coil",
+    "bicycle-dynamo"
+   ]
+  },
+  {
+   "id": "dynamo-coil",
+   "name": {
+    "en": "Dynamo coil",
+    "zh": "发电机线圈"
+   },
+   "short": {
+    "en": "Coil",
+    "zh": "线圈"
+   },
+   "group": "void-deck",
+   "summary": {
+    "en": "A coil of wire where the current is made.",
+    "zh": "产生电流的线圈。"
+   },
+   "detail": {
+    "en": "Many turns of fine copper wire around the magnet. The changing magnetic field makes a current in it; in this model a faster wheel makes more current, up to a limit set by the coil [S28, S1].",
+    "zh": "绕在磁铁外面的很多圈细铜线。变化的磁场在线圈里产生电流；在这个模型里，车轮转得越快，电流越大，但到了线圈决定的上限就不再增加 [S28, S1]。"
+   },
+   "primitive": {
+    "kind": "coil",
+    "radius": 0.0125,
+    "wire": 0.0012,
+    "turns": 14,
+    "length": 0.034,
+    "segments": 24,
+    "radial": 6,
+    "at": [
+     1.2828,
+     0.5551,
+     1.637
+    ],
+    "rotation": [
+     0,
+     0,
+     -32.55
+    ],
+    "color": "copper"
+   },
+   "explode": {
+    "dir": [
+     0,
+     0,
+     1
+    ],
+    "dist": 0.2
+   },
+   "connects": [
+    "dynamo-magnet",
+    "dynamo-wires"
+   ]
+  },
+  {
+   "id": "dynamo-wires",
+   "name": {
+    "en": "Lamp wires",
+    "zh": "车灯导线"
+   },
+   "short": {
+    "en": "Wires",
+    "zh": "导线"
+   },
+   "group": "void-deck",
+   "summary": {
+    "en": "Carry electrical energy from the dynamo to the lamp.",
+    "zh": "把电能从发电机送到车灯。"
+   },
+   "detail": {
+    "en": "Thin wires along the frame complete the circuit from the dynamo to the headlamp [S1].",
+    "zh": "沿着车架走的细导线，把发电机和车灯连成闭合电路 [S1]。"
+   },
+   "primitive": {
+    "kind": "tube",
+    "path": [
+     [
+      1.2989,
+      0.5803,
+      1.617
+     ],
+     [
+      1.27,
+      0.7,
+      1.63
+     ],
+     [
+      1.0,
+      0.79,
+      1.63
+     ],
+     [
+      0.7,
+      0.63,
+      1.63
+     ],
+     [
+      0.45,
+      0.44,
+      1.625
+     ],
+     [
+      0.34,
+      0.38,
+      1.615
+     ]
+    ],
+    "radius": 0.0025,
+    "at": [
+     0,
+     0,
+     0
+    ],
+    "color": "rubber",
+    "bendRadius": 0.04
+   },
+   "explode": {
+    "dir": [
+     0,
+     0,
+     1
+    ],
+    "dist": 0.1
+   },
+   "connects": [
+    "bicycle-dynamo",
+    "headlamp"
+   ]
+  },
+  {
+   "id": "headlamp",
+   "name": {
+    "en": "Headlamp",
+    "zh": "车灯"
+   },
+   "group": "void-deck",
+   "summary": {
+    "en": "Changes electrical energy into light and heat.",
+    "zh": "把电能转换成光能和热。"
+   },
+   "detail": {
+    "en": "A small filament headlamp, taken in this model as 6 V and 12 Ω, so 0.5 A and 3 W at full power [S1]; real dynamo lamps differ, and many are LEDs [S29]. A filament turns about 10 % of its energy into light and 90 % into heat [S14].\n\nThis lamp has no battery of its own, so it goes out as soon as the wheel stops. Some dynamo lamps keep glowing for a few minutes after the bicycle stops [S29].",
+    "zh": "一盏小白炽车灯，这个模型把它当作 6 V、12 Ω，满额时电流 0.5 A、功率 3 W [S1]；真实的发电机车灯各不相同，很多是 LED 灯 [S29]。白炽灯丝大约把 10 % 的能量变成光，90 % 变成热 [S14]。\n\n这盏灯自己没有电池，所以车轮一停，它马上就熄灭。有些发电机车灯在车停下后还能亮几分钟 [S29]。"
+   },
+   "primitive": {
+    "kind": "lathe",
+    "profile": [
+     [
+      0,
+      -0.035
+     ],
+     [
+      0.02,
+      -0.035
+     ],
+     [
+      0.025,
+      -0.01
+     ],
+     [
+      0.026,
+      0.03
+     ],
+     [
+      0.024,
+      0.035
+     ],
+     [
+      0,
+      0.035
+     ]
+    ],
+    "segments": 32,
+    "at": [
+     0.3,
+     0.38,
+     1.6
+    ],
+    "color": "casing",
+    "rotation": [
+     0,
+     0,
+     90
+    ]
+   },
+   "extra": [
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0,
+       0.034
+      ],
+      [
+       0.022,
+       0.034
+      ],
+      [
+       0.022,
+       0.04
+      ],
+      [
+       0,
+       0.04
+      ]
+     ],
+     "segments": 32,
+     "at": [
+      0.3,
+      0.38,
+      1.6
+     ],
+     "color": "glass",
+     "rotation": [
+      0,
+      0,
+      90
+     ],
+     "tint": "#f4f1e6"
+    }
+   ],
+   "explode": {
+    "dir": [
+     -1,
+     0,
+     0
+    ],
+    "dist": 0.15
+   },
+   "connects": [
+    "dynamo-wires"
+   ]
+  },
+  {
+   "id": "block-structure",
+   "name": {
+    "en": "HDB block, model",
+    "zh": "组屋（模型）"
+   },
+   "summary": {
+    "en": "A slice of an HDB block, with the middle floors left out.",
+    "zh": "组屋的一段切片，省略了中间楼层。"
+   },
+   "detail": {
+    "en": "Floor slabs, columns, walls and the roof parapet of a slice of an HDB block. Only the ground floor and the top floor are drawn; zigzag lines mark where the middle floors are left out. The front walls are taken away so that you can see inside, and the sizes are approximate [S1].",
+    "zh": "一座组屋切片的楼板、柱子、墙和屋顶女儿墙。只画了底层和顶层；锯齿线标出省略中间楼层的地方。前墙去掉了，好让人看见里面；尺寸只是大约 [S1]。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     7.8,
+     0.15,
+     7.0
+    ],
+    "at": [
+     0.1,
+     0.075,
+     0
+    ],
+    "color": "enamel",
+    "bevel": 0.01,
+    "tint": "#ddd6c8"
+   },
+   "extra": [
+    {
+     "kind": "bevelBox",
+     "size": [
+      7.8,
+      0.25,
+      7.0
+     ],
+     "at": [
+      0.1,
+      3.125,
+      0
+     ],
+     "color": "enamel",
+     "bevel": 0.01,
+     "tint": "#ddd6c8"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      7.8,
+      0.2,
+      7.0
+     ],
+     "at": [
+      0.1,
+      3.85,
+      0
+     ],
+     "color": "enamel",
+     "bevel": 0.01,
+     "tint": "#ddd6c8"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      10.0,
+      0.25,
+      7.0
+     ],
+     "at": [
+      -1.0,
+      6.675,
+      0
+     ],
+     "color": "enamel",
+     "bevel": 0.01,
+     "tint": "#ddd6c8"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      10.0,
+      0.9,
+      0.15
+     ],
+     "at": [
+      -1.0,
+      7.25,
+      -3.425
+     ],
+     "color": "enamel",
+     "bevel": 0.01,
+     "tint": "#ddd6c8"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      7.8,
+      0.6,
+      0.15
+     ],
+     "at": [
+      0.1,
+      7.1,
+      3.425
+     ],
+     "color": "enamel",
+     "bevel": 0.01,
+     "tint": "#ddd6c8"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.15,
+      0.9,
+      6.7
+     ],
+     "at": [
+      3.925,
+      7.25,
+      0
+     ],
+     "color": "enamel",
+     "bevel": 0.01,
+     "tint": "#ddd6c8"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.15,
+      0.9,
+      2.15
+     ],
+     "at": [
+      -5.925,
+      7.25,
+      -2.425
+     ],
+     "color": "enamel",
+     "bevel": 0.01,
+     "tint": "#ddd6c8"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.15,
+      0.9,
+      2.15
+     ],
+     "at": [
+      -5.925,
+      7.25,
+      2.425
+     ],
+     "color": "enamel",
+     "bevel": 0.01,
+     "tint": "#ddd6c8"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.4,
+      2.85,
+      0.4
+     ],
+     "at": [
+      -1.0,
+      1.575,
+      3.15
+     ],
+     "color": "enamel",
+     "bevel": 0.01,
+     "tint": "#ddd6c8"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.4,
+      2.85,
+      0.4
+     ],
+     "at": [
+      3.75,
+      1.575,
+      3.15
+     ],
+     "color": "enamel",
+     "bevel": 0.01,
+     "tint": "#ddd6c8"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.4,
+      2.85,
+      0.4
+     ],
+     "at": [
+      -1.0,
+      1.575,
+      -3.25
+     ],
+     "color": "enamel",
+     "bevel": 0.01,
+     "tint": "#ddd6c8"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.4,
+      2.85,
+      0.4
+     ],
+     "at": [
+      3.75,
+      1.575,
+      -3.25
+     ],
+     "color": "enamel",
+     "bevel": 0.01,
+     "tint": "#ddd6c8"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      3.0,
+      2.6,
+      0.2
+     ],
+     "at": [
+      -2.3,
+      5.25,
+      -3.4
+     ],
+     "color": "enamel",
+     "bevel": 0.01,
+     "tint": "#ddd6c8"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.5,
+      2.6,
+      0.2
+     ],
+     "at": [
+      1.65,
+      5.25,
+      -3.4
+     ],
+     "color": "enamel",
+     "bevel": 0.01,
+     "tint": "#ddd6c8"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.3,
+      2.6,
+      0.2
+     ],
+     "at": [
+      3.65,
+      5.25,
+      -3.4
+     ],
+     "color": "enamel",
+     "bevel": 0.01,
+     "tint": "#ddd6c8"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      2.2,
+      0.9,
+      0.2
+     ],
+     "at": [
+      0.3,
+      4.4,
+      -3.4
+     ],
+     "color": "enamel",
+     "bevel": 0.01,
+     "tint": "#ddd6c8"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      2.2,
+      0.55,
+      0.2
+     ],
+     "at": [
+      0.3,
+      6.275,
+      -3.4
+     ],
+     "color": "enamel",
+     "bevel": 0.01,
+     "tint": "#ddd6c8"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      1.6,
+      1.25,
+      0.2
+     ],
+     "at": [
+      2.7,
+      4.575,
+      -3.4
+     ],
+     "color": "enamel",
+     "bevel": 0.01,
+     "tint": "#ddd6c8"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      1.6,
+      0.55,
+      0.2
+     ],
+     "at": [
+      2.7,
+      6.275,
+      -3.4
+     ],
+     "color": "enamel",
+     "bevel": 0.01,
+     "tint": "#ddd6c8"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.2,
+      2.6,
+      6.6
+     ],
+     "at": [
+      3.9,
+      5.25,
+      -0.2
+     ],
+     "color": "enamel",
+     "bevel": 0.01,
+     "tint": "#ddd6c8"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.1,
+      2.6,
+      1.6
+     ],
+     "at": [
+      1.25,
+      5.25,
+      -2.5
+     ],
+     "color": "enamel",
+     "bevel": 0.01,
+     "tint": "#ddd6c8"
+    }
+   ],
+   "context": true,
+   "castShadow": true
+  },
+  {
+   "id": "flat-furniture",
+   "name": {
+    "en": "Furniture",
+    "zh": "家具"
+   },
+   "summary": {
+    "en": "The coffee table, TV cabinet, kitchen counter and ledge.",
+    "zh": "茶几、电视柜、厨房台面和窗台。"
+   },
+   "detail": {
+    "en": "Simple furniture for the things in the flat to stand on: a coffee table, a TV cabinet, a kitchen counter and a window ledge [S1].",
+    "zh": "给家里的东西放的简单家具：茶几、电视柜、厨房台面和窗台 [S1]。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     1.9,
+     0.03,
+     0.6
+    ],
+    "at": [
+     -1.3,
+     4.335,
+     0.6
+    ],
+    "color": "wood",
+    "bevel": 0.006,
+    "tint": "#a07a55"
+   },
+   "extra": [
+    {
+     "kind": "box",
+     "size": [
+      0.04,
+      0.37,
+      0.04
+     ],
+     "at": [
+      -2.2,
+      4.135,
+      0.35
+     ],
+     "color": "wood",
+     "tint": "#a07a55"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.04,
+      0.37,
+      0.04
+     ],
+     "at": [
+      -2.2,
+      4.135,
+      0.85
+     ],
+     "color": "wood",
+     "tint": "#a07a55"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.04,
+      0.37,
+      0.04
+     ],
+     "at": [
+      -0.4,
+      4.135,
+      0.35
+     ],
+     "color": "wood",
+     "tint": "#a07a55"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.04,
+      0.37,
+      0.04
+     ],
+     "at": [
+      -0.4,
+      4.135,
+      0.85
+     ],
+     "color": "wood",
+     "tint": "#a07a55"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      1.4,
+      0.44,
+      0.4
+     ],
+     "at": [
+      -3.0,
+      4.17,
+      -3.1
+     ],
+     "color": "wood",
+     "bevel": 0.01,
+     "tint": "#a07a55"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      2.4,
+      0.86,
+      0.6
+     ],
+     "at": [
+      2.62,
+      4.38,
+      -3.0
+     ],
+     "color": "wood",
+     "bevel": 0.01,
+     "tint": "#a07a55"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      2.44,
+      0.04,
+      0.62
+     ],
+     "at": [
+      2.62,
+      4.83,
+      -3.0
+     ],
+     "color": "wood",
+     "bevel": 0.006,
+     "tint": "#a07a55"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      2.3,
+      0.03,
+      0.26
+     ],
+     "at": [
+      0.3,
+      4.835,
+      -3.2
+     ],
+     "color": "wood",
+     "bevel": 0.006,
+     "tint": "#a07a55"
+    }
+   ],
+   "context": true
+  },
+  {
+   "id": "void-deck-floor",
+   "name": {
+    "en": "Void deck floor",
+    "zh": "组屋底层地面"
+   },
+   "summary": {
+    "en": "The open ground floor under the block.",
+    "zh": "组屋底下空旷的底层。"
+   },
+   "detail": {
+    "en": "The tiled floor of the void deck, the open ground floor of an HDB block [S1].",
+    "zh": "组屋底层（void deck）铺着地砖的地面 [S1]。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     7.8,
+     0.012,
+     7.0
+    ],
+    "at": [
+     0.1,
+     0.144,
+     0
+    ],
+    "color": "enamel",
+    "bevel": 0.004,
+    "tint": "#bdb5a5"
+   },
+   "extra": [
+    {
+     "kind": "fins",
+     "size": [
+      7.0,
+      0.002,
+      0.012
+     ],
+     "count": 16,
+     "gap": 0.613,
+     "axis": "x",
+     "at": [
+      0.1,
+      0.146,
+      0
+     ],
+     "color": "enamel",
+     "tint": "#bdb5a5"
+    }
+   ],
+   "context": true
+  },
+  {
+   "id": "playground-mat",
+   "name": {
+    "en": "Playground mat",
+    "zh": "游乐场地垫"
+   },
+   "summary": {
+    "en": "Rubber matting under the swing.",
+    "zh": "秋千下面的橡胶地垫。"
+   },
+   "detail": {
+    "en": "Rubber safety matting under the playground swing [S1].",
+    "zh": "铺在游乐场秋千下面的橡胶安全地垫 [S1]。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     5.2,
+     0.05,
+     4.2
+    ],
+    "at": [
+     8.0,
+     0.025,
+     0.1
+    ],
+    "color": "rubber",
+    "bevel": 0.01,
+    "tint": "#7f8c80"
+   },
+   "context": true
+  },
+  {
+   "id": "break-marks",
+   "name": {
+    "en": "Break lines",
+    "zh": "省略线"
+   },
+   "summary": {
+    "en": "Mark where the middle floors are left out.",
+    "zh": "标出省略中间楼层的地方。"
+   },
+   "detail": {
+    "en": "Zigzag break lines, the drawing convention for a part of a building that has been left out [S1].",
+    "zh": "锯齿形的折断线，是工程图里表示省略了一段建筑的画法 [S1]。"
+   },
+   "primitive": {
+    "kind": "extrude",
+    "shape": [
+     [
+      -6.0,
+      -0.05
+     ],
+     [
+      -5.75,
+      0.05
+     ],
+     [
+      -5.5,
+      -0.05
+     ],
+     [
+      -5.25,
+      0.05
+     ],
+     [
+      -5.0,
+      -0.05
+     ],
+     [
+      -4.75,
+      0.05
+     ],
+     [
+      -4.5,
+      -0.05
+     ],
+     [
+      -4.25,
+      0.05
+     ],
+     [
+      -4.0,
+      -0.05
+     ],
+     [
+      -3.75,
+      0.05
+     ],
+     [
+      -3.5,
+      -0.05
+     ],
+     [
+      -3.25,
+      0.05
+     ],
+     [
+      -3.0,
+      -0.05
+     ],
+     [
+      -2.75,
+      0.05
+     ],
+     [
+      -2.5,
+      -0.05
+     ],
+     [
+      -2.25,
+      0.05
+     ],
+     [
+      -2.0,
+      -0.05
+     ],
+     [
+      -1.75,
+      0.05
+     ],
+     [
+      -1.5,
+      -0.05
+     ],
+     [
+      -1.25,
+      0.05
+     ],
+     [
+      -1.0,
+      -0.05
+     ],
+     [
+      -0.75,
+      0.05
+     ],
+     [
+      -0.5,
+      -0.05
+     ],
+     [
+      -0.25,
+      0.05
+     ],
+     [
+      0.0,
+      -0.05
+     ],
+     [
+      0.25,
+      0.05
+     ],
+     [
+      0.5,
+      -0.05
+     ],
+     [
+      0.75,
+      0.05
+     ],
+     [
+      1.0,
+      -0.05
+     ],
+     [
+      1.25,
+      0.05
+     ],
+     [
+      1.5,
+      -0.05
+     ],
+     [
+      1.75,
+      0.05
+     ],
+     [
+      2.0,
+      -0.05
+     ],
+     [
+      2.25,
+      0.05
+     ],
+     [
+      2.5,
+      -0.05
+     ],
+     [
+      2.75,
+      0.05
+     ],
+     [
+      3.0,
+      -0.05
+     ],
+     [
+      3.25,
+      0.05
+     ],
+     [
+      3.5,
+      -0.05
+     ],
+     [
+      3.75,
+      0.05
+     ],
+     [
+      4.0,
+      -0.05
+     ],
+     [
+      4.0,
+      -0.07
+     ],
+     [
+      3.75,
+      0.03
+     ],
+     [
+      3.5,
+      -0.07
+     ],
+     [
+      3.25,
+      0.03
+     ],
+     [
+      3.0,
+      -0.07
+     ],
+     [
+      2.75,
+      0.03
+     ],
+     [
+      2.5,
+      -0.07
+     ],
+     [
+      2.25,
+      0.03
+     ],
+     [
+      2.0,
+      -0.07
+     ],
+     [
+      1.75,
+      0.03
+     ],
+     [
+      1.5,
+      -0.07
+     ],
+     [
+      1.25,
+      0.03
+     ],
+     [
+      1.0,
+      -0.07
+     ],
+     [
+      0.75,
+      0.03
+     ],
+     [
+      0.5,
+      -0.07
+     ],
+     [
+      0.25,
+      0.03
+     ],
+     [
+      0.0,
+      -0.07
+     ],
+     [
+      -0.25,
+      0.03
+     ],
+     [
+      -0.5,
+      -0.07
+     ],
+     [
+      -0.75,
+      0.03
+     ],
+     [
+      -1.0,
+      -0.07
+     ],
+     [
+      -1.25,
+      0.03
+     ],
+     [
+      -1.5,
+      -0.07
+     ],
+     [
+      -1.75,
+      0.03
+     ],
+     [
+      -2.0,
+      -0.07
+     ],
+     [
+      -2.25,
+      0.03
+     ],
+     [
+      -2.5,
+      -0.07
+     ],
+     [
+      -2.75,
+      0.03
+     ],
+     [
+      -3.0,
+      -0.07
+     ],
+     [
+      -3.25,
+      0.03
+     ],
+     [
+      -3.5,
+      -0.07
+     ],
+     [
+      -3.75,
+      0.03
+     ],
+     [
+      -4.0,
+      -0.07
+     ],
+     [
+      -4.25,
+      0.03
+     ],
+     [
+      -4.5,
+      -0.07
+     ],
+     [
+      -4.75,
+      0.03
+     ],
+     [
+      -5.0,
+      -0.07
+     ],
+     [
+      -5.25,
+      0.03
+     ],
+     [
+      -5.5,
+      -0.07
+     ],
+     [
+      -5.75,
+      0.03
+     ],
+     [
+      -6.0,
+      -0.07
+     ]
+    ],
+    "depth": 0.012,
+    "at": [
+     0,
+     3.27,
+     3.512
+    ],
+    "color": "token:ink-3"
+   },
+   "extra": [
+    {
+     "kind": "extrude",
+     "shape": [
+      [
+       -6.0,
+       -0.05
+      ],
+      [
+       -5.75,
+       0.05
+      ],
+      [
+       -5.5,
+       -0.05
+      ],
+      [
+       -5.25,
+       0.05
+      ],
+      [
+       -5.0,
+       -0.05
+      ],
+      [
+       -4.75,
+       0.05
+      ],
+      [
+       -4.5,
+       -0.05
+      ],
+      [
+       -4.25,
+       0.05
+      ],
+      [
+       -4.0,
+       -0.05
+      ],
+      [
+       -3.75,
+       0.05
+      ],
+      [
+       -3.5,
+       -0.05
+      ],
+      [
+       -3.25,
+       0.05
+      ],
+      [
+       -3.0,
+       -0.05
+      ],
+      [
+       -2.75,
+       0.05
+      ],
+      [
+       -2.5,
+       -0.05
+      ],
+      [
+       -2.25,
+       0.05
+      ],
+      [
+       -2.0,
+       -0.05
+      ],
+      [
+       -1.75,
+       0.05
+      ],
+      [
+       -1.5,
+       -0.05
+      ],
+      [
+       -1.25,
+       0.05
+      ],
+      [
+       -1.0,
+       -0.05
+      ],
+      [
+       -0.75,
+       0.05
+      ],
+      [
+       -0.5,
+       -0.05
+      ],
+      [
+       -0.25,
+       0.05
+      ],
+      [
+       0.0,
+       -0.05
+      ],
+      [
+       0.25,
+       0.05
+      ],
+      [
+       0.5,
+       -0.05
+      ],
+      [
+       0.75,
+       0.05
+      ],
+      [
+       1.0,
+       -0.05
+      ],
+      [
+       1.25,
+       0.05
+      ],
+      [
+       1.5,
+       -0.05
+      ],
+      [
+       1.75,
+       0.05
+      ],
+      [
+       2.0,
+       -0.05
+      ],
+      [
+       2.25,
+       0.05
+      ],
+      [
+       2.5,
+       -0.05
+      ],
+      [
+       2.75,
+       0.05
+      ],
+      [
+       3.0,
+       -0.05
+      ],
+      [
+       3.25,
+       0.05
+      ],
+      [
+       3.5,
+       -0.05
+      ],
+      [
+       3.75,
+       0.05
+      ],
+      [
+       4.0,
+       -0.05
+      ],
+      [
+       4.0,
+       -0.07
+      ],
+      [
+       3.75,
+       0.03
+      ],
+      [
+       3.5,
+       -0.07
+      ],
+      [
+       3.25,
+       0.03
+      ],
+      [
+       3.0,
+       -0.07
+      ],
+      [
+       2.75,
+       0.03
+      ],
+      [
+       2.5,
+       -0.07
+      ],
+      [
+       2.25,
+       0.03
+      ],
+      [
+       2.0,
+       -0.07
+      ],
+      [
+       1.75,
+       0.03
+      ],
+      [
+       1.5,
+       -0.07
+      ],
+      [
+       1.25,
+       0.03
+      ],
+      [
+       1.0,
+       -0.07
+      ],
+      [
+       0.75,
+       0.03
+      ],
+      [
+       0.5,
+       -0.07
+      ],
+      [
+       0.25,
+       0.03
+      ],
+      [
+       0.0,
+       -0.07
+      ],
+      [
+       -0.25,
+       0.03
+      ],
+      [
+       -0.5,
+       -0.07
+      ],
+      [
+       -0.75,
+       0.03
+      ],
+      [
+       -1.0,
+       -0.07
+      ],
+      [
+       -1.25,
+       0.03
+      ],
+      [
+       -1.5,
+       -0.07
+      ],
+      [
+       -1.75,
+       0.03
+      ],
+      [
+       -2.0,
+       -0.07
+      ],
+      [
+       -2.25,
+       0.03
+      ],
+      [
+       -2.5,
+       -0.07
+      ],
+      [
+       -2.75,
+       0.03
+      ],
+      [
+       -3.0,
+       -0.07
+      ],
+      [
+       -3.25,
+       0.03
+      ],
+      [
+       -3.5,
+       -0.07
+      ],
+      [
+       -3.75,
+       0.03
+      ],
+      [
+       -4.0,
+       -0.07
+      ],
+      [
+       -4.25,
+       0.03
+      ],
+      [
+       -4.5,
+       -0.07
+      ],
+      [
+       -4.75,
+       0.03
+      ],
+      [
+       -5.0,
+       -0.07
+      ],
+      [
+       -5.25,
+       0.03
+      ],
+      [
+       -5.5,
+       -0.07
+      ],
+      [
+       -5.75,
+       0.03
+      ],
+      [
+       -6.0,
+       -0.07
+      ]
+     ],
+     "depth": 0.012,
+     "at": [
+      0,
+      3.73,
+      3.512
+     ],
+     "color": "token:ink-3"
+    },
+    {
+     "kind": "extrude",
+     "shape": [
+      [
+       -3.5,
+       -0.05
+      ],
+      [
+       -3.25,
+       0.05
+      ],
+      [
+       -3.0,
+       -0.05
+      ],
+      [
+       -2.75,
+       0.05
+      ],
+      [
+       -2.5,
+       -0.05
+      ],
+      [
+       -2.25,
+       0.05
+      ],
+      [
+       -2.0,
+       -0.05
+      ],
+      [
+       -1.75,
+       0.05
+      ],
+      [
+       -1.5,
+       -0.05
+      ],
+      [
+       -1.25,
+       0.05
+      ],
+      [
+       -1.0,
+       -0.05
+      ],
+      [
+       -0.75,
+       0.05
+      ],
+      [
+       -0.5,
+       -0.05
+      ],
+      [
+       -0.25,
+       0.05
+      ],
+      [
+       0.0,
+       -0.05
+      ],
+      [
+       0.25,
+       0.05
+      ],
+      [
+       0.5,
+       -0.05
+      ],
+      [
+       0.75,
+       0.05
+      ],
+      [
+       1.0,
+       -0.05
+      ],
+      [
+       1.25,
+       0.05
+      ],
+      [
+       1.5,
+       -0.05
+      ],
+      [
+       1.75,
+       0.05
+      ],
+      [
+       2.0,
+       -0.05
+      ],
+      [
+       2.25,
+       0.05
+      ],
+      [
+       2.5,
+       -0.05
+      ],
+      [
+       2.75,
+       0.05
+      ],
+      [
+       3.0,
+       -0.05
+      ],
+      [
+       3.25,
+       0.05
+      ],
+      [
+       3.5,
+       -0.05
+      ],
+      [
+       3.5,
+       -0.07
+      ],
+      [
+       3.25,
+       0.03
+      ],
+      [
+       3.0,
+       -0.07
+      ],
+      [
+       2.75,
+       0.03
+      ],
+      [
+       2.5,
+       -0.07
+      ],
+      [
+       2.25,
+       0.03
+      ],
+      [
+       2.0,
+       -0.07
+      ],
+      [
+       1.75,
+       0.03
+      ],
+      [
+       1.5,
+       -0.07
+      ],
+      [
+       1.25,
+       0.03
+      ],
+      [
+       1.0,
+       -0.07
+      ],
+      [
+       0.75,
+       0.03
+      ],
+      [
+       0.5,
+       -0.07
+      ],
+      [
+       0.25,
+       0.03
+      ],
+      [
+       0.0,
+       -0.07
+      ],
+      [
+       -0.25,
+       0.03
+      ],
+      [
+       -0.5,
+       -0.07
+      ],
+      [
+       -0.75,
+       0.03
+      ],
+      [
+       -1.0,
+       -0.07
+      ],
+      [
+       -1.25,
+       0.03
+      ],
+      [
+       -1.5,
+       -0.07
+      ],
+      [
+       -1.75,
+       0.03
+      ],
+      [
+       -2.0,
+       -0.07
+      ],
+      [
+       -2.25,
+       0.03
+      ],
+      [
+       -2.5,
+       -0.07
+      ],
+      [
+       -2.75,
+       0.03
+      ],
+      [
+       -3.0,
+       -0.07
+      ],
+      [
+       -3.25,
+       0.03
+      ],
+      [
+       -3.5,
+       -0.07
+      ]
+     ],
+     "depth": 0.012,
+     "at": [
+      4.012,
+      3.27,
+      0
+     ],
+     "color": "token:ink-3",
+     "rotation": [
+      0,
+      -90,
+      0
+     ]
+    },
+    {
+     "kind": "extrude",
+     "shape": [
+      [
+       -3.5,
+       -0.05
+      ],
+      [
+       -3.25,
+       0.05
+      ],
+      [
+       -3.0,
+       -0.05
+      ],
+      [
+       -2.75,
+       0.05
+      ],
+      [
+       -2.5,
+       -0.05
+      ],
+      [
+       -2.25,
+       0.05
+      ],
+      [
+       -2.0,
+       -0.05
+      ],
+      [
+       -1.75,
+       0.05
+      ],
+      [
+       -1.5,
+       -0.05
+      ],
+      [
+       -1.25,
+       0.05
+      ],
+      [
+       -1.0,
+       -0.05
+      ],
+      [
+       -0.75,
+       0.05
+      ],
+      [
+       -0.5,
+       -0.05
+      ],
+      [
+       -0.25,
+       0.05
+      ],
+      [
+       0.0,
+       -0.05
+      ],
+      [
+       0.25,
+       0.05
+      ],
+      [
+       0.5,
+       -0.05
+      ],
+      [
+       0.75,
+       0.05
+      ],
+      [
+       1.0,
+       -0.05
+      ],
+      [
+       1.25,
+       0.05
+      ],
+      [
+       1.5,
+       -0.05
+      ],
+      [
+       1.75,
+       0.05
+      ],
+      [
+       2.0,
+       -0.05
+      ],
+      [
+       2.25,
+       0.05
+      ],
+      [
+       2.5,
+       -0.05
+      ],
+      [
+       2.75,
+       0.05
+      ],
+      [
+       3.0,
+       -0.05
+      ],
+      [
+       3.25,
+       0.05
+      ],
+      [
+       3.5,
+       -0.05
+      ],
+      [
+       3.5,
+       -0.07
+      ],
+      [
+       3.25,
+       0.03
+      ],
+      [
+       3.0,
+       -0.07
+      ],
+      [
+       2.75,
+       0.03
+      ],
+      [
+       2.5,
+       -0.07
+      ],
+      [
+       2.25,
+       0.03
+      ],
+      [
+       2.0,
+       -0.07
+      ],
+      [
+       1.75,
+       0.03
+      ],
+      [
+       1.5,
+       -0.07
+      ],
+      [
+       1.25,
+       0.03
+      ],
+      [
+       1.0,
+       -0.07
+      ],
+      [
+       0.75,
+       0.03
+      ],
+      [
+       0.5,
+       -0.07
+      ],
+      [
+       0.25,
+       0.03
+      ],
+      [
+       0.0,
+       -0.07
+      ],
+      [
+       -0.25,
+       0.03
+      ],
+      [
+       -0.5,
+       -0.07
+      ],
+      [
+       -0.75,
+       0.03
+      ],
+      [
+       -1.0,
+       -0.07
+      ],
+      [
+       -1.25,
+       0.03
+      ],
+      [
+       -1.5,
+       -0.07
+      ],
+      [
+       -1.75,
+       0.03
+      ],
+      [
+       -2.0,
+       -0.07
+      ],
+      [
+       -2.25,
+       0.03
+      ],
+      [
+       -2.5,
+       -0.07
+      ],
+      [
+       -2.75,
+       0.03
+      ],
+      [
+       -3.0,
+       -0.07
+      ],
+      [
+       -3.25,
+       0.03
+      ],
+      [
+       -3.5,
+       -0.07
+      ]
+     ],
+     "depth": 0.012,
+     "at": [
+      4.012,
+      3.73,
+      0
+     ],
+     "color": "token:ink-3",
+     "rotation": [
+      0,
+      -90,
+      0
+     ]
+    }
+   ],
+   "context": true
+  }
+ ],
+ "groups": [
+  {
+   "id": "rooftop",
+   "name": {
+    "en": "Sun and rooftop",
+    "zh": "太阳与屋顶"
+   },
+   "color": "token:ink-2"
+  },
+  {
+   "id": "lift",
+   "name": {
+    "en": "Lift",
+    "zh": "电梯"
+   },
+   "color": "token:ink-3"
+  },
+  {
+   "id": "home",
+   "name": {
+    "en": "Home",
+    "zh": "家里"
+   },
+   "color": "token:neutral"
+  },
+  {
+   "id": "void-deck",
+   "name": {
+    "en": "Void deck and playground",
+    "zh": "楼下与游乐场"
+   },
+   "color": "token:cut"
+  },
+  {
+   "id": "light",
+   "name": {
+    "en": "Light energy",
+    "zh": "光能"
+   },
+   "color": "token:en-light"
+  },
+  {
+   "id": "electrical",
+   "name": {
+    "en": "Electrical energy",
+    "zh": "电能"
+   },
+   "color": "token:en-electrical"
+  },
+  {
+   "id": "kinetic",
+   "name": {
+    "en": "Kinetic energy",
+    "zh": "动能"
+   },
+   "color": "token:en-kinetic"
+  },
+  {
+   "id": "sound",
+   "name": {
+    "en": "Sound energy",
+    "zh": "声能"
+   },
+   "color": "token:en-sound"
+  },
+  {
+   "id": "heat",
+   "name": {
+    "en": "Heat energy",
+    "zh": "热能"
+   },
+   "color": "token:en-heat"
+  }
+ ],
+ "flows": [
+  {
+   "id": "light-far",
+   "group": "light",
+   "paths": [
+    {
+     "id": "sun-roof-a",
+     "path": [
+      [
+       -7.3337,
+       11.6633,
+       -6.4125
+      ],
+      [
+       1.3,
+       7.3,
+       1.2
+      ]
+     ]
+    },
+    {
+     "id": "sun-roof-b",
+     "path": [
+      [
+       -7.3502,
+       11.5637,
+       -6.4616
+      ],
+      [
+       -1.0,
+       7.3,
+       -1.2
+      ]
+     ]
+    },
+    {
+     "id": "sun-plant",
+     "path": [
+      [
+       -7.3076,
+       11.4313,
+       -6.6843
+      ],
+      [
+       -1.952,
+       7.032,
+       -4.2424
+      ]
+     ]
+    },
+    {
+     "id": "panel-reflect",
+     "path": [
+      [
+       1.9,
+       7.31,
+       1.1
+      ],
+      [
+       3.4,
+       7.67,
+       2.6
+      ]
+     ]
+    },
+    {
+     "id": "lamp-b",
+     "path": [
+      [
+       1.0,
+       6.42,
+       -1.6
+      ],
+      [
+       0.6,
+       4.55,
+       -0.7
+      ]
+     ]
+    }
+   ],
+   "speed": 2.4,
+   "color": "token:en-light",
+   "ends": "fade",
+   "count": 360,
+   "size": 2.4,
+   "spread": 0.06,
+   "clip": false
+  },
+  {
+   "id": "light-near",
+   "group": "light",
+   "paths": [
+    {
+     "id": "sun-window",
+     "path": [
+      [
+       -1.952,
+       7.032,
+       -4.2424
+      ],
+      [
+       0.4,
+       5.1,
+       -3.17
+      ]
+     ]
+    },
+    {
+     "id": "lamp-room",
+     "path": [
+      [
+       1.0,
+       6.44,
+       -1.6
+      ],
+      [
+       0.75,
+       5.3,
+       -1.05
+      ],
+      [
+       0.5,
+       4.25,
+       -0.5
+      ]
+     ]
+    },
+    {
+     "id": "headlamp-beam",
+     "path": [
+      [
+       0.255,
+       0.38,
+       1.6
+      ],
+      [
+       -0.8,
+       0.34,
+       1.6
+      ]
+     ]
+    }
+   ],
+   "speed": 0.7,
+   "color": "token:en-light",
+   "ends": "fade",
+   "count": 220,
+   "size": 0.8,
+   "spread": 0.02,
+   "clip": false
+  },
+  {
+   "id": "light-tiny",
+   "group": "light",
+   "paths": [
+    {
+     "id": "torch-beam",
+     "path": [
+      [
+       -1.732,
+       4.37,
+       0.6
+      ],
+      [
+       -2.25,
+       4.365,
+       0.6
+      ]
+     ]
+    }
+   ],
+   "speed": 0.25,
+   "color": "token:en-light",
+   "ends": "fade",
+   "count": 60,
+   "size": 0.22,
+   "spread": 0.004,
+   "clip": false
+  },
+  {
+   "id": "electrical-far",
+   "group": "electrical",
+   "paths": [
+    {
+     "id": "panel-inverter",
+     "path": [
+      [
+       3.3,
+       6.865,
+       -1.2
+      ],
+      [
+       -3.62,
+       6.865,
+       -1.2
+      ],
+      [
+       -3.62,
+       6.865,
+       2.62
+      ],
+      [
+       -3.5,
+       6.89,
+       2.62
+      ]
+     ]
+    },
+    {
+     "id": "inverter-motor",
+     "path": [
+      [
+       -3.4,
+       6.89,
+       2.9
+      ],
+      [
+       -3.7,
+       6.865,
+       2.9
+      ],
+      [
+       -3.7,
+       6.865,
+       1.0
+      ],
+      [
+       -5.2,
+       6.865,
+       1.0
+      ],
+      [
+       -5.2,
+       6.865,
+       -0.2
+      ],
+      [
+       -5.2,
+       7.01,
+       -0.2
+      ]
+     ]
+    },
+    {
+     "id": "inverter-grid",
+     "path": [
+      [
+       -3.48,
+       6.89,
+       2.55
+      ],
+      [
+       -3.52,
+       6.865,
+       2.35
+      ],
+      [
+       -3.52,
+       6.865,
+       -3.2
+      ],
+      [
+       -3.65,
+       6.865,
+       -3.2
+      ],
+      [
+       -3.65,
+       6.4,
+       -3.2
+      ]
+     ]
+    },
+    {
+     "id": "grid-feed",
+     "path": [
+      [
+       -3.61,
+       0.075,
+       -6.16
+      ],
+      [
+       -3.61,
+       0.075,
+       -3.16
+      ],
+      [
+       -3.61,
+       6.38,
+       -3.16
+      ],
+      [
+       -3.61,
+       6.38,
+       1.59
+      ],
+      [
+       -3.61,
+       5.93,
+       1.59
+      ]
+     ]
+    }
+   ],
+   "speed": 1.1,
+   "color": "token:en-electrical",
+   "ends": "open",
+   "count": 520,
+   "size": 2.4,
+   "spread": 0.01
+  },
+  {
+   "id": "electrical-near",
+   "group": "electrical",
+   "paths": [
+    {
+     "id": "grid-db",
+     "path": [
+      [
+       -3.61,
+       3.95,
+       -3.16
+      ],
+      [
+       -3.61,
+       6.35,
+       -3.16
+      ],
+      [
+       -3.61,
+       6.35,
+       1.59
+      ],
+      [
+       -3.61,
+       5.9,
+       1.59
+      ]
+     ]
+    },
+    {
+     "id": "db-fan",
+     "path": [
+      [
+       -3.65,
+       5.9,
+       1.6
+      ],
+      [
+       -3.65,
+       6.5,
+       1.6
+      ],
+      [
+       -1.3,
+       6.5,
+       1.6
+      ],
+      [
+       -1.3,
+       6.5,
+       -0.3
+      ],
+      [
+       -1.3,
+       6.25,
+       -0.3
+      ]
+     ]
+    },
+    {
+     "id": "db-lamp",
+     "path": [
+      [
+       -3.65,
+       5.9,
+       1.6
+      ],
+      [
+       -3.65,
+       6.5,
+       1.6
+      ],
+      [
+       1.0,
+       6.5,
+       1.6
+      ],
+      [
+       1.0,
+       6.5,
+       -1.6
+      ],
+      [
+       1.0,
+       6.49,
+       -1.6
+      ]
+     ]
+    },
+    {
+     "id": "db-speaker",
+     "path": [
+      [
+       -3.65,
+       5.3,
+       1.6
+      ],
+      [
+       -3.67,
+       4.23,
+       1.6
+      ],
+      [
+       -3.67,
+       4.23,
+       -3.05
+      ],
+      [
+       -3.28,
+       4.55,
+       -3.05
+      ]
+     ]
+    },
+    {
+     "id": "db-kettle",
+     "path": [
+      [
+       -3.65,
+       5.9,
+       1.6
+      ],
+      [
+       -3.65,
+       6.5,
+       1.6
+      ],
+      [
+       2.6,
+       6.5,
+       1.6
+      ],
+      [
+       2.6,
+       6.5,
+       -3.27
+      ],
+      [
+       2.6,
+       5.0,
+       -3.27
+      ],
+      [
+       2.6,
+       4.87,
+       -3.0
+      ]
+     ]
+    },
+    {
+     "id": "dynamo-lamp",
+     "path": [
+      [
+       1.2989,
+       0.5803,
+       1.629
+      ],
+      [
+       1.27,
+       0.7,
+       1.642
+      ],
+      [
+       1.0,
+       0.79,
+       1.642
+      ],
+      [
+       0.7,
+       0.63,
+       1.642
+      ],
+      [
+       0.45,
+       0.44,
+       1.637
+      ],
+      [
+       0.34,
+       0.38,
+       1.627
+      ]
+     ]
+    }
+   ],
+   "speed": 0.45,
+   "color": "token:en-electrical",
+   "ends": "open",
+   "count": 360,
+   "size": 0.8,
+   "spread": 0.006
+  },
+  {
+   "id": "electrical-tiny",
+   "group": "electrical",
+   "paths": [
+    {
+     "id": "torch-loop",
+     "path": [
+      [
+       -1.718,
+       4.37,
+       0.6
+      ],
+      [
+       -1.718,
+       4.3805,
+       0.6
+      ],
+      [
+       -1.58,
+       4.3805,
+       0.6
+      ],
+      [
+       -1.58,
+       4.37,
+       0.6
+      ],
+      [
+       -1.718,
+       4.37,
+       0.6
+      ]
+     ]
+    }
+   ],
+   "speed": 0.06,
+   "color": "token:en-electrical",
+   "ends": "open",
+   "count": 48,
+   "size": 0.22,
+   "spread": 0.001
+  },
+  {
+   "id": "kinetic-far",
+   "group": "kinetic",
+   "paths": [
+    {
+     "id": "motor-car",
+     "path": [
+      [
+       -4.53,
+       7.575,
+       -0.8031
+      ],
+      [
+       -4.53,
+       7.7031,
+       -0.675
+      ],
+      [
+       -4.53,
+       7.75,
+       -0.5
+      ],
+      [
+       -4.53,
+       7.7031,
+       -0.325
+      ],
+      [
+       -4.53,
+       7.575,
+       -0.1969
+      ],
+      [
+       -4.53,
+       7.4,
+       -0.15
+      ],
+      [
+       -4.53,
+       6.8,
+       -0.15
+      ],
+      [
+       -4.53,
+       6.33,
+       -0.15
+      ]
+     ]
+    }
+   ],
+   "speed": 0.7,
+   "color": "token:en-kinetic",
+   "ends": "fade",
+   "count": 90,
+   "size": 2.4,
+   "spread": 0.01
+  },
+  {
+   "id": "kinetic-near",
+   "group": "kinetic",
+   "paths": [
+    {
+     "id": "fan-air",
+     "path": [
+      [
+       -0.85,
+       6.03,
+       -0.3
+      ],
+      [
+       -0.8843,
+       5.9675,
+       -0.1278
+      ],
+      [
+       -0.9818,
+       5.905,
+       0.0182
+      ],
+      [
+       -1.1278,
+       5.8425,
+       0.1157
+      ],
+      [
+       -1.3,
+       5.78,
+       0.15
+      ],
+      [
+       -1.4722,
+       5.7175,
+       0.1157
+      ],
+      [
+       -1.6182,
+       5.655,
+       0.0182
+      ],
+      [
+       -1.7157,
+       5.5925,
+       -0.1278
+      ],
+      [
+       -1.75,
+       5.53,
+       -0.3
+      ],
+      [
+       -1.7157,
+       5.4675,
+       -0.4722
+      ],
+      [
+       -1.6182,
+       5.405,
+       -0.6182
+      ],
+      [
+       -1.4722,
+       5.3425,
+       -0.7157
+      ],
+      [
+       -1.3,
+       5.28,
+       -0.75
+      ],
+      [
+       -1.1278,
+       5.2175,
+       -0.7157
+      ],
+      [
+       -0.9818,
+       5.155,
+       -0.6182
+      ],
+      [
+       -0.8843,
+       5.0925,
+       -0.4722
+      ],
+      [
+       -0.85,
+       5.03,
+       -0.3
+      ],
+      [
+       -0.8843,
+       4.9675,
+       -0.1278
+      ],
+      [
+       -0.9818,
+       4.905,
+       0.0182
+      ],
+      [
+       -1.1278,
+       4.8425,
+       0.1157
+      ],
+      [
+       -1.3,
+       4.78,
+       0.15
+      ],
+      [
+       -1.4722,
+       4.7175,
+       0.1157
+      ],
+      [
+       -1.6182,
+       4.655,
+       0.0182
+      ],
+      [
+       -1.7157,
+       4.5925,
+       -0.1278
+      ],
+      [
+       -1.75,
+       4.53,
+       -0.3
+      ]
+     ]
+    },
+    {
+     "id": "pedal-wheel",
+     "path": [
+      [
+       1.0,
+       0.65,
+       1.71
+      ],
+      [
+       1.0,
+       0.82,
+       1.69
+      ],
+      [
+       1.21,
+       0.8,
+       1.685
+      ],
+      [
+       1.42,
+       0.77,
+       1.685
+      ],
+      [
+       1.42,
+       0.77,
+       1.64
+      ]
+     ]
+    },
+    {
+     "id": "wheel-dynamo",
+     "path": [
+      [
+       1.42,
+       0.77,
+       1.64
+      ],
+      [
+       1.42,
+       1.08,
+       1.63
+      ],
+      [
+       1.322,
+       1.0641,
+       1.63
+      ],
+      [
+       1.234,
+       1.018,
+       1.63
+      ],
+      [
+       1.1652,
+       0.9465,
+       1.63
+      ],
+      [
+       1.1224,
+       0.8569,
+       1.63
+      ],
+      [
+       1.1102,
+       0.7583,
+       1.63
+      ],
+      [
+       1.1298,
+       0.661,
+       1.63
+      ],
+      [
+       1.1791,
+       0.5748,
+       1.63
+      ],
+      [
+       1.2532,
+       0.5087,
+       1.63
+      ],
+      [
+       1.2532,
+       0.5087,
+       1.637
+      ],
+      [
+       1.2828,
+       0.5551,
+       1.657
+      ]
+     ]
+    }
+   ],
+   "speed": 0.35,
+   "color": "token:en-kinetic",
+   "ends": "fade",
+   "count": 240,
+   "size": 0.8,
+   "spread": 0.008
+  },
+  {
+   "id": "kinetic-tiny",
+   "group": "kinetic",
+   "paths": [
+    {
+     "id": "toy-run",
+     "path": [
+      [
+       -0.95,
+       4.399,
+       0.652
+      ],
+      [
+       -0.45,
+       4.385,
+       0.652
+      ]
+     ]
+    }
+   ],
+   "speed": 0.06,
+   "color": "token:en-kinetic",
+   "ends": "fade",
+   "count": 40,
+   "size": 0.22,
+   "spread": 0.002
+  },
+  {
+   "id": "sound-far",
+   "group": "sound",
+   "paths": [
+    {
+     "id": "motor-hum",
+     "path": [
+      [
+       -4.9,
+       7.5,
+       -0.3
+      ],
+      [
+       -4.3,
+       7.9,
+       1.2
+      ]
+     ]
+    },
+    {
+     "id": "speaker-b",
+     "path": [
+      [
+       -3.2,
+       4.6,
+       -2.85
+      ],
+      [
+       -2.3,
+       4.9,
+       -1.25
+      ]
+     ]
+    }
+   ],
+   "speed": 0.9,
+   "color": "token:en-sound",
+   "ends": "fade",
+   "count": 80,
+   "size": 2.4,
+   "spread": 0.06
+  },
+  {
+   "id": "sound-near",
+   "group": "sound",
+   "paths": [
+    {
+     "id": "speaker-out-a",
+     "path": [
+      [
+       -3.2,
+       4.58,
+       -2.92
+      ],
+      [
+       -2.65,
+       4.63,
+       -1.92
+      ]
+     ]
+    },
+    {
+     "id": "speaker-out-b",
+     "path": [
+      [
+       -3.2,
+       4.58,
+       -2.92
+      ],
+      [
+       -3.2,
+       4.98,
+       -1.82
+      ]
+     ]
+    },
+    {
+     "id": "speaker-out-c",
+     "path": [
+      [
+       -3.2,
+       4.58,
+       -2.92
+      ],
+      [
+       -2.3,
+       4.46,
+       -2.32
+      ]
+     ]
+    },
+    {
+     "id": "fan-hum",
+     "path": [
+      [
+       -1.18,
+       6.15,
+       -0.3
+      ],
+      [
+       -0.6,
+       6.05,
+       0.4
+      ]
+     ]
+    },
+    {
+     "id": "kettle-hiss",
+     "path": [
+      [
+       2.51,
+       5.045,
+       -2.91
+      ],
+      [
+       2.0,
+       5.135,
+       -2.45
+      ]
+     ]
+    },
+    {
+     "id": "dynamo-whirr",
+     "path": [
+      [
+       1.2828,
+       0.5551,
+       1.667
+      ],
+      [
+       1.5328,
+       0.4351,
+       2.187
+      ]
+     ]
+    },
+    {
+     "id": "bounce-thud",
+     "path": [
+      [
+       -2.41,
+       0.19,
+       1.84
+      ],
+      [
+       -2.1,
+       0.24,
+       2.25
+      ]
+     ]
+    },
+    {
+     "id": "swing-creak",
+     "path": [
+      [
+       8.0,
+       2.42,
+       0.22
+      ],
+      [
+       8.6,
+       2.65,
+       0.9
+      ]
+     ]
+    }
+   ],
+   "speed": 0.5,
+   "color": "token:en-sound",
+   "ends": "fade",
+   "count": 240,
+   "size": 0.8,
+   "spread": 0.03
+  },
+  {
+   "id": "sound-tiny",
+   "group": "sound",
+   "paths": [
+    {
+     "id": "toy-tick",
+     "path": [
+      [
+       -0.7,
+       4.425,
+       0.62
+      ],
+      [
+       -0.6,
+       4.515,
+       0.8
+      ]
+     ]
+    }
+   ],
+   "speed": 0.08,
+   "color": "token:en-sound",
+   "ends": "fade",
+   "count": 30,
+   "size": 0.22,
+   "spread": 0.006
+  },
+  {
+   "id": "heat-far",
+   "group": "heat",
+   "paths": [
+    {
+     "id": "panel-heat-a",
+     "path": [
+      [
+       0.4,
+       7.33,
+       1.2
+      ],
+      [
+       0.6,
+       7.53,
+       1.18
+      ],
+      [
+       0.44,
+       7.73,
+       1.16
+      ],
+      [
+       0.76,
+       7.93,
+       1.14
+      ],
+      [
+       0.6,
+       8.13,
+       1.12
+      ],
+      [
+       0.92,
+       8.33,
+       1.1
+      ]
+     ]
+    },
+    {
+     "id": "panel-heat-b",
+     "path": [
+      [
+       -1.8,
+       7.33,
+       -1.2
+      ],
+      [
+       -1.62,
+       7.53,
+       -1.18
+      ],
+      [
+       -1.8,
+       7.73,
+       -1.16
+      ],
+      [
+       -1.5,
+       7.93,
+       -1.14
+      ],
+      [
+       -1.68,
+       8.13,
+       -1.12
+      ],
+      [
+       -1.38,
+       8.33,
+       -1.1
+      ]
+     ]
+    },
+    {
+     "id": "inverter",
+     "path": [
+      [
+       -3.47,
+       7.53,
+       2.75
+      ],
+      [
+       -3.435,
+       7.73,
+       2.75
+      ],
+      [
+       -3.58,
+       7.93,
+       2.75
+      ],
+      [
+       -3.485,
+       8.13,
+       2.75
+      ],
+      [
+       -3.63,
+       8.33,
+       2.75
+      ]
+     ]
+    },
+    {
+     "id": "lift-motor",
+     "path": [
+      [
+       -5.15,
+       7.52,
+       -0.5
+      ],
+      [
+       -5.0775,
+       7.745,
+       -0.45
+      ],
+      [
+       -5.185,
+       7.97,
+       -0.4
+      ],
+      [
+       -5.0525,
+       8.195,
+       -0.35
+      ],
+      [
+       -5.16,
+       8.42,
+       -0.3
+      ]
+     ]
+    },
+    {
+     "id": "grid-cable",
+     "path": [
+      [
+       -3.53,
+       0.4,
+       -3.08
+      ],
+      [
+       -3.53,
+       3.0,
+       -3.06
+      ],
+      [
+       -3.53,
+       6.15,
+       -3.08
+      ]
+     ]
+    },
+    {
+     "id": "fan-b",
+     "path": [
+      [
+       -1.3,
+       6.2,
+       -0.3
+      ],
+      [
+       -1.15,
+       6.3167,
+       -0.2333
+      ],
+      [
+       -1.15,
+       6.4333,
+       -0.1667
+      ],
+      [
+       -0.95,
+       6.55,
+       -0.1
+      ]
+     ]
+    },
+    {
+     "id": "lamp-b",
+     "path": [
+      [
+       1.0,
+       6.47,
+       -1.5
+      ],
+      [
+       1.2,
+       6.49,
+       -1.3667
+      ],
+      [
+       1.4,
+       6.51,
+       -1.2333
+      ],
+      [
+       1.6,
+       6.53,
+       -1.1
+      ]
+     ]
+    },
+    {
+     "id": "kettle-b",
+     "path": [
+      [
+       2.6,
+       5.115,
+       -2.95
+      ],
+      [
+       2.625,
+       5.34,
+       -2.9
+      ],
+      [
+       2.5,
+       5.565,
+       -2.85
+      ],
+      [
+       2.575,
+       5.79,
+       -2.8
+      ],
+      [
+       2.45,
+       6.015,
+       -2.75
+      ]
+     ]
+    },
+    {
+     "id": "speaker-b",
+     "path": [
+      [
+       -3.2,
+       4.72,
+       -3.05
+      ],
+      [
+       -3.125,
+       4.895,
+       -3.025
+      ],
+      [
+       -3.2,
+       5.07,
+       -3.0
+      ],
+      [
+       -3.075,
+       5.245,
+       -2.975
+      ],
+      [
+       -3.15,
+       5.42,
+       -2.95
+      ]
+     ]
+    },
+    {
+     "id": "db-b",
+     "path": [
+      [
+       -3.64,
+       5.9,
+       1.6
+      ],
+      [
+       -3.5667,
+       6.0667,
+       1.6
+      ],
+      [
+       -3.6133,
+       6.2333,
+       1.6
+      ],
+      [
+       -3.5,
+       6.4,
+       1.6
+      ]
+     ]
+    }
+   ],
+   "speed": 0.3,
+   "color": "token:en-heat",
+   "ends": "fade",
+   "count": 460,
+   "size": 2.4,
+   "spread": 0.06
+  },
+  {
+   "id": "heat-near",
+   "group": "heat",
+   "paths": [
+    {
+     "id": "fan",
+     "path": [
+      [
+       -1.3,
+       6.19,
+       -0.3
+      ],
+      [
+       -1.1475,
+       6.27,
+       -0.2375
+      ],
+      [
+       -1.115,
+       6.35,
+       -0.175
+      ],
+      [
+       -0.9225,
+       6.43,
+       -0.1125
+      ],
+      [
+       -0.89,
+       6.51,
+       -0.05
+      ]
+     ]
+    },
+    {
+     "id": "lamp",
+     "path": [
+      [
+       1.0,
+       6.46,
+       -1.42
+      ],
+      [
+       0.8,
+       6.51,
+       -1.1
+      ],
+      [
+       0.5,
+       6.51,
+       -0.7
+      ]
+     ]
+    },
+    {
+     "id": "speaker",
+     "path": [
+      [
+       -3.2,
+       4.72,
+       -3.05
+      ],
+      [
+       -3.1575,
+       4.87,
+       -3.025
+      ],
+      [
+       -3.205,
+       5.02,
+       -3.0
+      ],
+      [
+       -3.1325,
+       5.17,
+       -2.975
+      ],
+      [
+       -3.18,
+       5.32,
+       -2.95
+      ]
+     ]
+    },
+    {
+     "id": "kettle-air",
+     "path": [
+      [
+       2.6,
+       5.115,
+       -2.95
+      ],
+      [
+       2.6175,
+       5.3025,
+       -2.9125
+      ],
+      [
+       2.545,
+       5.49,
+       -2.875
+      ],
+      [
+       2.5925,
+       5.6775,
+       -2.8375
+      ],
+      [
+       2.52,
+       5.865,
+       -2.8
+      ]
+     ]
+    },
+    {
+     "id": "db",
+     "path": [
+      [
+       -3.64,
+       5.9,
+       1.6
+      ],
+      [
+       -3.5933,
+       6.0667,
+       1.6
+      ],
+      [
+       -3.6367,
+       6.2333,
+       1.6
+      ],
+      [
+       -3.56,
+       6.4,
+       1.6
+      ]
+     ]
+    },
+    {
+     "id": "dynamo",
+     "path": [
+      [
+       1.2828,
+       0.5851,
+       1.657
+      ],
+      [
+       1.3153,
+       0.6976,
+       1.6945
+      ],
+      [
+       1.2878,
+       0.8101,
+       1.732
+      ],
+      [
+       1.3403,
+       0.9226,
+       1.7695
+      ],
+      [
+       1.3128,
+       1.0351,
+       1.807
+      ]
+     ]
+    },
+    {
+     "id": "headlamp",
+     "path": [
+      [
+       0.3,
+       0.41,
+       1.6
+      ],
+      [
+       0.3033,
+       0.5267,
+       1.6333
+      ],
+      [
+       0.2467,
+       0.6433,
+       1.6667
+      ],
+      [
+       0.27,
+       0.76,
+       1.7
+      ]
+     ]
+    },
+    {
+     "id": "wheel-hub",
+     "path": [
+      [
+       1.42,
+       0.8,
+       1.66
+      ],
+      [
+       1.4567,
+       0.9333,
+       1.7
+      ],
+      [
+       1.4333,
+       1.0667,
+       1.74
+      ],
+      [
+       1.49,
+       1.2,
+       1.78
+      ]
+     ]
+    },
+    {
+     "id": "floor",
+     "path": [
+      [
+       -2.45,
+       0.18,
+       1.8
+      ],
+      [
+       -2.4133,
+       0.28,
+       1.8267
+      ],
+      [
+       -2.4367,
+       0.38,
+       1.8533
+      ],
+      [
+       -2.38,
+       0.48,
+       1.88
+      ]
+     ]
+    },
+    {
+     "id": "swing-hooks",
+     "path": [
+      [
+       8.0,
+       2.45,
+       0.21
+      ],
+      [
+       8.0467,
+       2.6,
+       0.2433
+      ],
+      [
+       8.0033,
+       2.75,
+       0.2767
+      ],
+      [
+       8.08,
+       2.9,
+       0.31
+      ]
+     ]
+    }
+   ],
+   "speed": 0.12,
+   "color": "token:en-heat",
+   "ends": "fade",
+   "count": 360,
+   "size": 0.8,
+   "spread": 0.02
+  },
+  {
+   "id": "heat-tiny",
+   "group": "heat",
+   "paths": [
+    {
+     "id": "torch-cells",
+     "path": [
+      [
+       -1.638,
+       4.387,
+       0.6
+      ],
+      [
+       -1.6307,
+       4.4303,
+       0.6067
+      ],
+      [
+       -1.6353,
+       4.4737,
+       0.6133
+      ],
+      [
+       -1.624,
+       4.517,
+       0.62
+      ]
+     ]
+    },
+    {
+     "id": "torch-head",
+     "path": [
+      [
+       -1.72,
+       4.39,
+       0.6
+      ],
+      [
+       -1.7193,
+       4.4333,
+       0.6067
+      ],
+      [
+       -1.7307,
+       4.4767,
+       0.6133
+      ],
+      [
+       -1.726,
+       4.52,
+       0.62
+      ]
+     ]
+    },
+    {
+     "id": "toy",
+     "path": [
+      [
+       -0.75,
+       4.355,
+       0.62
+      ],
+      [
+       -0.7273,
+       4.395,
+       0.6267
+      ],
+      [
+       -0.7227,
+       4.435,
+       0.6333
+      ],
+      [
+       -0.694,
+       4.475,
+       0.64
+      ]
+     ]
+    },
+    {
+     "id": "kettle-water",
+     "path": [
+      [
+       2.64,
+       4.935,
+       -2.93
+      ],
+      [
+       2.6346,
+       4.9575,
+       -2.93
+      ],
+      [
+       2.62,
+       4.974,
+       -2.93
+      ],
+      [
+       2.6,
+       4.98,
+       -2.93
+      ],
+      [
+       2.58,
+       4.974,
+       -2.93
+      ],
+      [
+       2.5654,
+       4.9575,
+       -2.93
+      ],
+      [
+       2.56,
+       4.935,
+       -2.93
+      ],
+      [
+       2.5654,
+       4.9125,
+       -2.93
+      ],
+      [
+       2.58,
+       4.896,
+       -2.93
+      ],
+      [
+       2.6,
+       4.89,
+       -2.93
+      ],
+      [
+       2.62,
+       4.896,
+       -2.93
+      ],
+      [
+       2.6346,
+       4.9125,
+       -2.93
+      ],
+      [
+       2.64,
+       4.935,
+       -2.93
+      ]
+     ]
+    }
+   ],
+   "speed": 0.03,
+   "color": "token:en-heat",
+   "ends": "fade",
+   "count": 120,
+   "size": 0.22,
+   "spread": 0.004
+  }
+ ],
+ "animations": [
+  {
+   "id": "fan-spin",
+   "target": "fan-blades",
+   "kind": "rotate",
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "rpm": 40
+  },
+  {
+   "id": "cone-pulse",
+   "target": "speaker-cone",
+   "kind": "pulse",
+   "scale": 1.05,
+   "hz": 2.5
+  },
+  {
+   "id": "wheel-spin",
+   "target": "rear-wheel",
+   "kind": "rotate",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "rpm": 0
+  },
+  {
+   "id": "crank-spin",
+   "target": "crank-pedals",
+   "kind": "rotate",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "rpm": 0
+  },
+  {
+   "id": "magnet-spin",
+   "target": "dynamo-magnet",
+   "kind": "rotate",
+   "axis": [
+    0.538,
+    0.8429,
+    0.0
+   ],
+   "rpm": 0
+  }
+ ],
+ "views": {
+  "assembled": {
+   "camera": {
+    "position": [
+     6.5,
+     8.8,
+     25.0
+    ],
+    "target": [
+     0.4,
+     4.8,
+     0.0
+    ],
+    "fov": 30
+   }
+  },
+  "exploded": {
+   "camera": {
+    "position": [
+     11.4,
+     13.6,
+     26.5
+    ],
+    "target": [
+     0.6,
+     4.8,
+     0.2
+    ],
+    "fov": 30
+   }
+  },
+  "cover": {
+   "position": [
+    7.4,
+    9.6,
+    27.5
+   ],
+   "target": [
+    2.0,
+    5.6,
+    0.0
+   ],
+   "fov": 30
+  },
+  "section": {
+   "plane": "xy"
+  },
+  "cuts": {
+   "dynamo": {
+    "normal": [
+     0,
+     0,
+     -1
+    ],
+    "offset": 1.637,
+    "label": {
+     "en": "Dynamo",
+     "zh": "发电机"
+    }
+   }
+  }
+ },
+ "spec": [
+  {
+   "key": {
+    "en": "Solar panels",
+    "zh": "太阳能板"
+   },
+   "value": "12 × 1.95 m² · 21 %",
+   "tag": "design"
+  },
+  {
+   "key": {
+    "en": "Kettle",
+    "zh": "电热水壶"
+   },
+   "value": "2,200 W",
+   "tag": "design"
+  },
+  {
+   "key": {
+    "en": "Bicycle dynamo",
+    "zh": "自行车发电机"
+   },
+   "value": "6 V · 3 W",
+   "tag": "typical"
+  },
+  {
+   "key": {
+    "en": "Tennis ball",
+    "zh": "网球"
+   },
+   "value": "58 g · Ø 6.7 cm",
+   "tag": "typical"
+  }
+ ],
+ "telemetry": [
+  {
+   "key": {
+    "en": "Panel output",
+    "zh": "板的电功率"
+   },
+   "unit": "kW",
+   "follow": "panel-power"
+  },
+  {
+   "key": {
+    "en": "In the form we want",
+    "zh": "变成想要的形式"
+   },
+   "unit": "%",
+   "follow": "useful"
+  },
+  {
+   "key": {
+    "en": "Heat to the surroundings",
+    "zh": "散到周围的热"
+   },
+   "unit": "%",
+   "follow": "heat"
+  },
+  {
+   "key": {
+    "en": "Bounce height",
+    "zh": "弹回高度"
+   },
+   "unit": "cm",
+   "follow": "bounce-height"
+  },
+  {
+   "key": {
+    "en": "Speed at the floor",
+    "zh": "落地速度"
+   },
+   "unit": "m/s",
+   "follow": "impact-speed"
+  },
+  {
+   "key": {
+    "en": "Lamp power",
+    "zh": "车灯功率"
+   },
+   "unit": "W",
+   "follow": "lamp-power"
+  }
+ ],
+ "presets": [
+  {
+   "id": "roof-view",
+   "label": {
+    "en": "Roof",
+    "zh": "屋顶"
+   },
+   "camera": {
+    "position": [
+     6.5,
+     13.0,
+     13.5
+    ],
+    "target": [
+     -1.5,
+     8.0,
+     -1.0
+    ],
+    "fov": 30
+   }
+  },
+  {
+   "id": "lift-core",
+   "label": {
+    "en": "Lift",
+    "zh": "电梯"
+   },
+   "camera": {
+    "position": [
+     -2.6,
+     9.4,
+     14.5
+    ],
+    "target": [
+     -4.2,
+     4.8,
+     -0.3
+    ],
+    "fov": 30
+   }
+  },
+  {
+   "id": "living-room",
+   "label": {
+    "en": "Living room",
+    "zh": "客厅"
+   },
+   "camera": {
+    "position": [
+     2.0,
+     5.6,
+     8.0
+    ],
+    "target": [
+     -1.4,
+     5.25,
+     -1.0
+    ],
+    "fov": 30
+   }
+  },
+  {
+   "id": "kitchen",
+   "label": {
+    "en": "Kitchen",
+    "zh": "厨房"
+   },
+   "camera": {
+    "position": [
+     2.95,
+     5.35,
+     -1.75
+    ],
+    "target": [
+     2.55,
+     5.0,
+     -2.95
+    ],
+    "fov": 30
+   }
+  },
+  {
+   "id": "ball-drop",
+   "label": {
+    "en": "Ball drop",
+    "zh": "落球"
+   },
+   "camera": {
+    "position": [
+     -3.6,
+     1.0,
+     5.8
+    ],
+    "target": [
+     -2.7,
+     0.68,
+     1.8
+    ],
+    "fov": 28
+   }
+  },
+  {
+   "id": "bicycle",
+   "label": {
+    "en": "Bicycle",
+    "zh": "自行车"
+   },
+   "camera": {
+    "position": [
+     2.0,
+     1.45,
+     4.9
+    ],
+    "target": [
+     0.62,
+     0.64,
+     1.6
+    ],
+    "fov": 30
+   }
+  }
+ ],
+ "poses": {
+  "lift-top": {
+   "lift-car": {
+    "offset": [
+     0,
+     3.8,
+     0
+    ]
+   },
+   "counterweight": {
+    "offset": [
+     0,
+     -3.8,
+     0
+    ]
+   },
+   "lift-ropes": {
+    "pivot": [
+     -4.6,
+     7.4,
+     -0.15
+    ],
+    "scale": [
+     1,
+     0.2245,
+     1
+    ]
+   },
+   "counterweight-ropes": {
+    "pivot": [
+     -4.6,
+     7.4,
+     -0.85
+    ],
+    "scale": [
+     1,
+     3.7143,
+     1
+    ]
+   },
+   "duration": 1.6
+  },
+  "held": {
+   "tennis-ball": {
+    "offset": [
+     0,
+     1.0,
+     0
+    ]
+   },
+   "swing-seat": {
+    "pivot": [
+     8.0,
+     2.4,
+     0.0
+    ],
+    "rotation": [
+     0,
+     0,
+     35
+    ]
+   },
+   "windup-spring": {
+    "scale": [
+     0.72,
+     0.72,
+     1
+    ]
+   },
+   "duration": 0.8
+  },
+  "dynamo-off": {
+   "bicycle-dynamo": {
+    "pivot": [
+     1.2559,
+     0.5129,
+     1.637
+    ],
+    "rotation": [
+     10,
+     0,
+     0
+    ]
+   },
+   "dynamo-magnet": {
+    "pivot": [
+     1.2559,
+     0.5129,
+     1.637
+    ],
+    "rotation": [
+     10,
+     0,
+     0
+    ]
+   },
+   "dynamo-coil": {
+    "pivot": [
+     1.2559,
+     0.5129,
+     1.637
+    ],
+    "rotation": [
+     10,
+     0,
+     0
+    ]
+   },
+   "duration": 0.6
+  }
+ },
+ "sim": {
+  "kind": "energy",
+  "controls": [
+   {
+    "id": "chain",
+    "kind": "choice",
+    "default": "whole",
+    "label": {
+     "en": "Energy chain",
+     "zh": "能量链"
+    },
+    "options": [
+     {
+      "id": "whole",
+      "label": {
+       "en": "Whole block",
+       "zh": "整座楼"
+      }
+     },
+     {
+      "id": "solar",
+      "label": {
+       "en": "Solar panels",
+       "zh": "太阳能板"
+      }
+     },
+     {
+      "id": "home",
+      "label": {
+       "en": "At home",
+       "zh": "家里"
+      }
+     },
+     {
+      "id": "bounce",
+      "label": {
+       "en": "Dropped ball",
+       "zh": "落球"
+      }
+     },
+     {
+      "id": "swing",
+      "label": {
+       "en": "Swing",
+       "zh": "秋千"
+      }
+     },
+     {
+      "id": "windup",
+      "label": {
+       "en": "Wind-up toy",
+       "zh": "发条玩具"
+      }
+     },
+     {
+      "id": "torch",
+      "label": {
+       "en": "Torch",
+       "zh": "手电筒"
+      }
+     },
+     {
+      "id": "dynamo",
+      "label": {
+       "en": "Bicycle dynamo",
+       "zh": "自行车发电机"
+      }
+     },
+     {
+      "id": "gas-to-home",
+      "label": {
+       "en": "Gas to lamp",
+       "zh": "从天然气到灯"
+      }
+     }
+    ]
+   },
+   {
+    "id": "sky",
+    "kind": "choice",
+    "default": "clear",
+    "label": {
+     "en": "Sky",
+     "zh": "天空"
+    },
+    "options": [
+     {
+      "id": "clear",
+      "label": {
+       "en": "Clear noon",
+       "zh": "晴天中午"
+      }
+     },
+     {
+      "id": "average",
+      "label": {
+       "en": "Average noon",
+       "zh": "一般的中午"
+      }
+     },
+     {
+      "id": "overcast",
+      "label": {
+       "en": "Overcast",
+       "zh": "阴天"
+      }
+     },
+     {
+      "id": "night",
+      "label": {
+       "en": "Night",
+       "zh": "夜里"
+      }
+     }
+    ]
+   },
+   {
+    "id": "lift-at",
+    "kind": "choice",
+    "default": "ground",
+    "label": {
+     "en": "Lift car",
+     "zh": "轿厢"
+    },
+    "options": [
+     {
+      "id": "ground",
+      "label": {
+       "en": "Ground floor",
+       "zh": "底层"
+      }
+     },
+     {
+      "id": "top",
+      "label": {
+       "en": "Top floor",
+       "zh": "顶层"
+      }
+     }
+    ]
+   },
+   {
+    "id": "appliance",
+    "kind": "choice",
+    "default": "fan",
+    "label": {
+     "en": "Switched on",
+     "zh": "开着的电器"
+    },
+    "options": [
+     {
+      "id": "fan",
+      "label": {
+       "en": "Fan",
+       "zh": "风扇"
+      }
+     },
+     {
+      "id": "lamp",
+      "label": {
+       "en": "Lamp",
+       "zh": "灯"
+      }
+     },
+     {
+      "id": "speaker",
+      "label": {
+       "en": "Speaker",
+       "zh": "音箱"
+      }
+     },
+     {
+      "id": "kettle",
+      "label": {
+       "en": "Kettle",
+       "zh": "水壶"
+      }
+     }
+    ]
+   },
+   {
+    "id": "drop",
+    "kind": "step",
+    "values": [
+     25,
+     50,
+     75,
+     100
+    ],
+    "default": 100,
+    "unit": "cm",
+    "label": {
+     "en": "Drop height",
+     "zh": "落下高度"
+    }
+   },
+   {
+    "id": "surface",
+    "kind": "choice",
+    "default": "tile",
+    "label": {
+     "en": "Floor",
+     "zh": "地面"
+    },
+    "options": [
+     {
+      "id": "tile",
+      "label": {
+       "en": "Tile",
+       "zh": "地砖"
+      }
+     },
+     {
+      "id": "rubber",
+      "label": {
+       "en": "Rubber mat",
+       "zh": "橡胶垫"
+      }
+     },
+     {
+      "id": "carpet",
+      "label": {
+       "en": "Carpet",
+       "zh": "地毯"
+      }
+     },
+     {
+      "id": "sand",
+      "label": {
+       "en": "Sand",
+       "zh": "沙"
+      }
+     }
+    ]
+   },
+   {
+    "id": "winds",
+    "kind": "step",
+    "values": [
+     0,
+     2,
+     4,
+     6,
+     8
+    ],
+    "default": 0,
+    "label": {
+     "en": "Turns of the key",
+     "zh": "钥匙转的圈数"
+    }
+   },
+   {
+    "id": "torch-on",
+    "kind": "toggle",
+    "default": false,
+    "label": {
+     "en": "Torch switch",
+     "zh": "手电筒开关"
+    }
+   },
+   {
+    "id": "speed",
+    "kind": "step",
+    "values": [
+     0,
+     5,
+     10,
+     15,
+     20,
+     25
+    ],
+    "default": 0,
+    "unit": "km/h",
+    "label": {
+     "en": "Wheel speed",
+     "zh": "车轮速度"
+    }
+   },
+   {
+    "id": "dynamo-on",
+    "kind": "toggle",
+    "default": true,
+    "label": {
+     "en": "Dynamo on the tyre",
+     "zh": "发电机压着轮胎"
+    }
+   },
+   {
+    "id": "lamp-type",
+    "kind": "choice",
+    "default": "led",
+    "label": {
+     "en": "Lamp",
+     "zh": "灯"
+    },
+    "options": [
+     {
+      "id": "led",
+      "label": {
+       "en": "LED",
+       "zh": "LED 灯"
+      }
+     },
+     {
+      "id": "filament",
+      "label": {
+       "en": "Filament",
+       "zh": "白炽灯"
+      }
+     }
+    ]
+   },
+   {
+    "id": "let-go",
+    "kind": "toggle",
+    "default": true,
+    "label": {
+     "en": "Let go",
+     "zh": "松手"
+    }
+   }
+  ],
+  "outputs": [
+   {
+    "id": "chain-state",
+    "kind": "state",
+    "label": {
+     "en": "Chain",
+     "zh": "能量链"
+    },
+    "states": {
+     "whole": {
+      "en": "WHOLE BLOCK",
+      "zh": "整座楼"
+     },
+     "solar": {
+      "en": "SOLAR PANELS",
+      "zh": "太阳能板"
+     },
+     "home": {
+      "en": "AT HOME",
+      "zh": "家里"
+     },
+     "bounce": {
+      "en": "DROPPED BALL",
+      "zh": "落球"
+     },
+     "swing": {
+      "en": "SWING",
+      "zh": "秋千"
+     },
+     "windup": {
+      "en": "WIND-UP TOY",
+      "zh": "发条玩具"
+     },
+     "torch": {
+      "en": "TORCH",
+      "zh": "手电筒"
+     },
+     "dynamo": {
+      "en": "BICYCLE DYNAMO",
+      "zh": "自行车发电机"
+     },
+     "gas-to-home": {
+      "en": "GAS TO LAMP",
+      "zh": "从天然气到灯"
+     }
+    }
+   },
+   {
+    "id": "panel-power",
+    "label": {
+     "en": "Panel output",
+     "zh": "板的电功率"
+    },
+    "unit": "kW",
+    "decimals": 2
+   },
+   {
+    "id": "sun-glow",
+    "label": {
+     "en": "Sunlight",
+     "zh": "阳光"
+    }
+   },
+   {
+    "id": "useful",
+    "label": {
+     "en": "In the form we want",
+     "zh": "变成想要的形式"
+    },
+    "unit": "%"
+   },
+   {
+    "id": "heat",
+    "label": {
+     "en": "Heat to the surroundings",
+     "zh": "散到周围的热"
+    },
+    "unit": "%"
+   },
+   {
+    "id": "sound",
+    "label": {
+     "en": "Sound",
+     "zh": "声"
+    },
+    "unit": "%"
+   },
+   {
+    "id": "bounce-height",
+    "label": {
+     "en": "Bounce height",
+     "zh": "弹回高度"
+    },
+    "unit": "cm"
+   },
+   {
+    "id": "impact-speed",
+    "label": {
+     "en": "Speed at the floor",
+     "zh": "落地速度"
+    },
+    "unit": "m/s",
+    "decimals": 2
+   },
+   {
+    "id": "kept",
+    "label": {
+     "en": "Kept as potential energy",
+     "zh": "留下的势能"
+    },
+    "unit": "%"
+   },
+   {
+    "id": "lost",
+    "label": {
+     "en": "Became heat and sound",
+     "zh": "变成热和声"
+    },
+    "unit": "%"
+   },
+   {
+    "id": "run-time",
+    "label": {
+     "en": "Running time",
+     "zh": "跑的时间"
+    },
+    "unit": "s",
+    "decimals": 0
+   },
+   {
+    "id": "lamp-power",
+    "label": {
+     "en": "Lamp power",
+     "zh": "车灯功率"
+    },
+    "unit": "W",
+    "decimals": 2
+   },
+   {
+    "id": "brightness",
+    "label": {
+     "en": "Brightness",
+     "zh": "亮度"
+    },
+    "unit": "%"
+   },
+   {
+    "id": "wheel-rpm",
+    "label": {
+     "en": "Back wheel",
+     "zh": "后轮"
+    },
+    "unit": "rpm"
+   },
+   {
+    "id": "crank-rpm",
+    "label": {
+     "en": "Pedals",
+     "zh": "踏板"
+    },
+    "unit": "rpm"
+   },
+   {
+    "id": "lamp-glow",
+    "label": {
+     "en": "Ceiling lamp light",
+     "zh": "吸顶灯的光"
+    },
+    "from": "out:lamp:light"
+   },
+   {
+    "id": "water-warm",
+    "label": {
+     "en": "Into the kettle",
+     "zh": "送进水壶"
+    },
+    "from": "in:kettle"
+   },
+   {
+    "id": "fan-in",
+    "label": {
+     "en": "Into the fan",
+     "zh": "送进风扇"
+    },
+    "from": "in:fan"
+   },
+   {
+    "id": "speaker-in",
+    "label": {
+     "en": "Into the speaker",
+     "zh": "送进音箱"
+    },
+    "from": "in:speaker"
+   },
+   {
+    "id": "bounce-on",
+    "label": {
+     "en": "Into the floor",
+     "zh": "落到地面"
+    },
+    "from": "in:floor"
+   },
+   {
+    "id": "swing-on",
+    "label": {
+     "en": "Into the swinging",
+     "zh": "摆动中"
+    },
+    "from": "in:swinging"
+   },
+   {
+    "id": "toy-on",
+    "label": {
+     "en": "Into the toy's wheels",
+     "zh": "送进玩具车轮"
+    },
+    "from": "in:wheels"
+   },
+   {
+    "id": "same-light",
+    "label": {
+     "en": "Energy for the same light",
+     "zh": "同样亮所需的能量"
+    },
+    "unit": "%",
+    "from": "start"
+   },
+   {
+    "id": "bounce-run",
+    "kind": "timeline",
+    "label": {
+     "en": "Ball run",
+     "zh": "落球回放"
+    }
+   },
+   {
+    "id": "swing-run",
+    "kind": "timeline",
+    "label": {
+     "en": "Swing run",
+     "zh": "秋千回放"
+    }
+   },
+   {
+    "id": "toy-run",
+    "kind": "timeline",
+    "label": {
+     "en": "Toy run",
+     "zh": "玩具车回放"
+    }
+   },
+   {
+    "id": "paths",
+    "kind": "vector",
+    "label": {
+     "en": "Energy paths",
+     "zh": "能量路径"
+    }
+   },
+   {
+    "id": "links",
+    "kind": "vector",
+    "label": {
+     "en": "Energy links",
+     "zh": "能量链的带"
+    }
+   }
+  ],
+  "bind": [
+   {
+    "output": "paths",
+    "flow": "light-far",
+    "intensity": {
+     "full": 0.5,
+     "mode": "density"
+    }
+   },
+   {
+    "output": "paths",
+    "flow": "light-near",
+    "intensity": {
+     "full": 0.5,
+     "mode": "density"
+    }
+   },
+   {
+    "output": "paths",
+    "flow": "light-tiny",
+    "intensity": {
+     "full": 0.5,
+     "mode": "density"
+    }
+   },
+   {
+    "output": "paths",
+    "flow": "electrical-far",
+    "intensity": {
+     "full": 0.5,
+     "mode": "density"
+    }
+   },
+   {
+    "output": "paths",
+    "flow": "electrical-near",
+    "intensity": {
+     "full": 0.5,
+     "mode": "density"
+    }
+   },
+   {
+    "output": "paths",
+    "flow": "electrical-tiny",
+    "intensity": {
+     "full": 0.5,
+     "mode": "density"
+    }
+   },
+   {
+    "output": "paths",
+    "flow": "kinetic-far",
+    "intensity": {
+     "full": 0.5,
+     "mode": "density"
+    }
+   },
+   {
+    "output": "paths",
+    "flow": "kinetic-near",
+    "intensity": {
+     "full": 0.5,
+     "mode": "density"
+    }
+   },
+   {
+    "output": "paths",
+    "flow": "kinetic-tiny",
+    "intensity": {
+     "full": 0.5,
+     "mode": "density"
+    }
+   },
+   {
+    "output": "paths",
+    "flow": "sound-far",
+    "intensity": {
+     "full": 0.5,
+     "mode": "density"
+    }
+   },
+   {
+    "output": "paths",
+    "flow": "sound-near",
+    "intensity": {
+     "full": 0.5,
+     "mode": "density"
+    }
+   },
+   {
+    "output": "paths",
+    "flow": "sound-tiny",
+    "intensity": {
+     "full": 0.5,
+     "mode": "density"
+    }
+   },
+   {
+    "output": "paths",
+    "flow": "heat-far",
+    "intensity": {
+     "full": 0.5,
+     "mode": "density"
+    }
+   },
+   {
+    "output": "paths",
+    "flow": "heat-near",
+    "intensity": {
+     "full": 0.5,
+     "mode": "density"
+    }
+   },
+   {
+    "output": "paths",
+    "flow": "heat-tiny",
+    "intensity": {
+     "full": 0.5,
+     "mode": "density"
+    }
+   },
+   {
+    "output": "sun-glow",
+    "part": "sun",
+    "glow": {
+     "color": "token:en-light",
+     "full": 1
+    },
+    "visible": {
+     "gte": 0.01
+    }
+   },
+   {
+    "control": "lift-at",
+    "part": [
+     "lift-car",
+     "counterweight",
+     "lift-ropes",
+     "counterweight-ropes"
+    ],
+    "pose": {
+     "top": "lift-top"
+    }
+   },
+   {
+    "output": "lamp-glow",
+    "part": "led-lamp",
+    "glow": {
+     "color": "token:lamp",
+     "full": 20,
+     "curve": "sqrt"
+    }
+   },
+   {
+    "output": "water-warm",
+    "part": "kettle-water",
+    "tint": {
+     "color": "token:hot",
+     "full": 100
+    }
+   },
+   {
+    "output": "water-warm",
+    "part": "kettle-element",
+    "glow": {
+     "color": "token:hot",
+     "full": 100
+    }
+   },
+   {
+    "control": "torch-on",
+    "part": "torch-led",
+    "glow": {
+     "color": "token:lamp",
+     "full": 1
+    }
+   },
+   {
+    "output": "brightness",
+    "part": "headlamp",
+    "glow": {
+     "color": "token:lamp",
+     "full": 100
+    }
+   },
+   {
+    "output": "fan-in",
+    "animation": "fan-spin",
+    "enabled": {
+     "gte": 1
+    }
+   },
+   {
+    "output": "speaker-in",
+    "animation": "cone-pulse",
+    "enabled": {
+     "gte": 1
+    }
+   },
+   {
+    "output": "wheel-rpm",
+    "animation": "wheel-spin",
+    "rpm": {
+     "per": 0.4
+    }
+   },
+   {
+    "output": "crank-rpm",
+    "animation": "crank-spin",
+    "rpm": {
+     "per": 0.4
+    }
+   },
+   {
+    "output": "wheel-rpm",
+    "animation": "magnet-spin",
+    "rpm": {
+     "per": 0.5
+    }
+   },
+   {
+    "control": "dynamo-on",
+    "animation": "magnet-spin",
+    "enabled": {
+     "eq": true
+    }
+   },
+   {
+    "control": "dynamo-on",
+    "part": [
+     "bicycle-dynamo",
+     "dynamo-magnet",
+     "dynamo-coil"
+    ],
+    "pose": {
+     "false": "dynamo-off"
+    }
+   },
+   {
+    "control": "let-go",
+    "part": [
+     "tennis-ball",
+     "swing-seat",
+     "windup-spring"
+    ],
+    "pose": {
+     "false": "held"
+    }
+   },
+   {
+    "control": "drop",
+    "part": "release-clamp",
+    "offset": {
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "per": 0.01,
+     "origin": 100
+    }
+   },
+   {
+    "control": "surface",
+    "part": "surface-tile",
+    "visible": {
+     "eq": "tile"
+    }
+   },
+   {
+    "control": "surface",
+    "part": "surface-rubber",
+    "visible": {
+     "eq": "rubber"
+    }
+   },
+   {
+    "control": "surface",
+    "part": "surface-carpet",
+    "visible": {
+     "eq": "carpet"
+    }
+   },
+   {
+    "control": "surface",
+    "part": "surface-sand",
+    "visible": {
+     "eq": "sand"
+    }
+   },
+   {
+    "output": "bounce-run",
+    "part": "tennis-ball",
+    "play": {
+     "channel": "y",
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "when": {
+      "control": "let-go",
+      "is": true
+     }
+    }
+   },
+   {
+    "output": "swing-run",
+    "part": "swing-seat",
+    "play": {
+     "channel": "angle",
+     "turn": [
+      0,
+      0,
+      1
+     ],
+     "pivot": [
+      8.0,
+      2.4,
+      0.0
+     ],
+     "when": {
+      "control": "let-go",
+      "is": true
+     }
+    }
+   },
+   {
+    "output": "toy-run",
+    "part": [
+     "windup-toy",
+     "windup-spring",
+     "windup-key",
+     "windup-wheels"
+    ],
+    "play": {
+     "channel": "x",
+     "axis": [
+      1,
+      0,
+      0
+     ],
+     "when": {
+      "control": "let-go",
+      "is": true
+     }
+    }
+   },
+   {
+    "output": "toy-run",
+    "part": "windup-wheels",
+    "play": {
+     "channel": "spin",
+     "turn": [
+      0,
+      0,
+      -1
+     ],
+     "each": true,
+     "when": {
+      "control": "let-go",
+      "is": true
+     }
+    }
+   },
+   {
+    "output": "toy-run",
+    "part": "windup-key",
+    "play": {
+     "channel": "key",
+     "turn": [
+      0,
+      0,
+      1
+     ],
+     "when": {
+      "control": "let-go",
+      "is": true
+     }
+    }
+   }
+  ],
+  "overlays": [
+   {
+    "kind": "energy-bars",
+    "timeline": "bounce-run",
+    "near": "drop-pole",
+    "offset": [
+     -0.42,
+     -0.57,
+     0
+    ],
+    "height": 0.6,
+    "when": {
+     "output": "bounce-on",
+     "is": {
+      "gte": 1
+     }
+    }
+   },
+   {
+    "kind": "energy-bars",
+    "timeline": "swing-run",
+    "near": "swing-frame",
+    "offset": [
+     2.25,
+     -1.1,
+     0.6
+    ],
+    "height": 1.0,
+    "width": 0.08,
+    "gap": 0.04,
+    "when": {
+     "output": "swing-on",
+     "is": {
+      "gte": 1
+     }
+    }
+   },
+   {
+    "kind": "energy-bars",
+    "timeline": "toy-run",
+    "near": "torch",
+    "offset": [
+     0.62,
+     -0.02,
+     -0.2
+    ],
+    "height": 0.16,
+    "width": 0.016,
+    "gap": 0.008,
+    "when": {
+     "output": "toy-on",
+     "is": {
+      "gte": 1
+     }
+    }
+   }
+  ],
+  "energy": {
+   "g": 9.8,
+   "chain": "chain",
+   "solar": {
+    "sky": "sky",
+    "modules": 12,
+    "area": 1.953,
+    "efficiency": 0.21,
+    "irradiance": {
+     "clear": 900,
+     "average": 640,
+     "overcast": 150,
+     "night": 0
+    },
+    "glow": {
+     "clear": 1,
+     "average": 0.8,
+     "overcast": 0.35,
+     "night": 0
+    },
+    "chains": [
+     "solar",
+     "whole"
+    ]
+   },
+   "bounce": {
+    "drop": "drop",
+    "surface": "surface",
+    "ratio": {
+     "tile": 0.55,
+     "rubber": 0.4,
+     "carpet": 0.25,
+     "sand": 0.05
+    },
+    "slow": 2,
+    "chains": [
+     "bounce"
+    ]
+   },
+   "swing": {
+    "length": 2.0,
+    "amplitude": 35,
+    "loss": 0.03,
+    "swings": 8,
+    "sample": 0.08
+   },
+   "windup": {
+    "winds": "winds",
+    "secondsPerTurn": 1.5,
+    "speed": 0.08,
+    "wheel": 0.012,
+    "kinetic": 8,
+    "spinUp": 0.2,
+    "chains": [
+     "windup"
+    ]
+   },
+   "dynamo": {
+    "speed": "speed",
+    "on": "dynamo-on",
+    "imax": 0.5,
+    "v0": 6,
+    "lampOhms": 12,
+    "rated": 3,
+    "wheel": 2.07,
+    "crankRatio": 0.37,
+    "chains": [
+     "dynamo"
+    ]
+   },
+   "shares": {
+    "panel": {
+     "electrical": 21,
+     "heat": 75,
+     "light": 4
+    },
+    "inverter": {
+     "electrical": 95,
+     "heat": 5
+    },
+    "lift": {
+     "kinetic": 80,
+     "heat": 15,
+     "sound": 5
+    },
+    "fan": {
+     "kinetic": 60,
+     "heat": 38,
+     "sound": 2
+    },
+    "led": {
+     "light": 40,
+     "heat": 60
+    },
+    "filament": {
+     "light": 10,
+     "heat": 90
+    },
+    "speaker": {
+     "sound": 1,
+     "heat": 99
+    },
+    "kettle": {
+     "heat-water": 85,
+     "heat": 14,
+     "sound": 1
+    },
+    "battery": {
+     "electrical": 95,
+     "heat": 5
+    },
+    "windup": {
+     "heat": 95,
+     "sound": 5
+    },
+    "dynamo": {
+     "electrical": 30,
+     "heat": 65,
+     "sound": 5
+    },
+    "station": {
+     "electrical": 55,
+     "heat": 45
+    },
+    "grid": {
+     "electrical": 96,
+     "heat": 4
+    }
+   },
+   "chains": {
+    "solar": {
+     "when": [
+      {
+       "control": "sky",
+       "is": {
+        "ne": "night"
+       }
+      }
+     ],
+     "reading": {
+      "node": "panel"
+     },
+     "note": {
+      "en": "Car only: the counterweight is left out",
+      "zh": "只算轿厢，没有算对重"
+     },
+     "nodes": [
+      {
+       "id": "sun",
+       "part": "sun"
+      },
+      {
+       "id": "panel",
+       "part": "solar-panels"
+      },
+      {
+       "id": "inverter",
+       "part": "inverter"
+      },
+      {
+       "id": "motor",
+       "part": "lift-motor"
+      },
+      {
+       "id": "car",
+       "part": "lift-car"
+      },
+      {
+       "id": "car-top",
+       "label": {
+        "en": "Car at the top floor",
+        "zh": "停在顶层的轿厢"
+       }
+      },
+      {
+       "id": "grid",
+       "part": "grid-cable"
+      },
+      {
+       "id": "air",
+       "label": {
+        "en": "The air around",
+        "zh": "周围的空气"
+       },
+       "sink": true
+      }
+     ],
+     "links": [
+      {
+       "id": "s-light",
+       "from": "sun",
+       "to": "panel",
+       "form": "light",
+       "share": "in",
+       "paths": [
+        "light-far:sun-roof-a",
+        "light-far:sun-roof-b",
+        "light-far:sun-plant",
+        "light-near:sun-window"
+       ]
+      },
+      {
+       "id": "s-el",
+       "from": "panel",
+       "to": "inverter",
+       "form": "electrical",
+       "share": "panel.electrical",
+       "paths": [
+        "electrical-far:panel-inverter"
+       ],
+       "useful": true
+      },
+      {
+       "id": "s-heat",
+       "from": "panel",
+       "to": "air",
+       "form": "heat",
+       "share": "panel.heat",
+       "paths": [
+        "heat-far:panel-heat-a",
+        "heat-far:panel-heat-b"
+       ]
+      },
+      {
+       "id": "s-reflect",
+       "from": "panel",
+       "to": "air",
+       "form": "light",
+       "share": "panel.light",
+       "paths": [
+        "light-far:panel-reflect"
+       ]
+      },
+      {
+       "id": "i-motor",
+       "from": "inverter",
+       "to": "motor",
+       "form": "electrical",
+       "share": "inverter.electrical",
+       "paths": [
+        "electrical-far:inverter-motor"
+       ],
+       "when": {
+        "control": "lift-at",
+        "is": {
+         "eq": "top"
+        }
+       }
+      },
+      {
+       "id": "i-grid",
+       "from": "inverter",
+       "to": "grid",
+       "form": "electrical",
+       "share": "inverter.electrical",
+       "paths": [
+        "electrical-far:inverter-grid"
+       ],
+       "when": {
+        "control": "lift-at",
+        "is": {
+         "eq": "ground"
+        }
+       }
+      },
+      {
+       "id": "i-heat",
+       "from": "inverter",
+       "to": "air",
+       "form": "heat",
+       "share": "inverter.heat",
+       "paths": [
+        "heat-far:inverter"
+       ]
+      },
+      {
+       "id": "m-car",
+       "from": "motor",
+       "to": "car",
+       "form": "kinetic",
+       "share": "lift.kinetic",
+       "paths": [
+        "kinetic-far:motor-car"
+       ]
+      },
+      {
+       "id": "m-heat",
+       "from": "motor",
+       "to": "air",
+       "form": "heat",
+       "share": "lift.heat",
+       "paths": [
+        "heat-far:lift-motor"
+       ]
+      },
+      {
+       "id": "m-sound",
+       "from": "motor",
+       "to": "air",
+       "form": "sound",
+       "share": "lift.sound",
+       "paths": [
+        "sound-far:motor-hum"
+       ]
+      },
+      {
+       "id": "c-up",
+       "from": "car",
+       "to": "car-top",
+       "form": "potential",
+       "share": "in"
+      }
+     ]
+    },
+    "home": {
+     "reading": {
+      "node": "db",
+      "through": [
+       "fan",
+       "lamp",
+       "speaker",
+       "kettle"
+      ]
+     },
+     "nodes": [
+      {
+       "id": "grid",
+       "part": "grid-cable"
+      },
+      {
+       "id": "db",
+       "part": "distribution-board"
+      },
+      {
+       "id": "fan",
+       "part": "fan-blades"
+      },
+      {
+       "id": "lamp",
+       "part": "led-lamp"
+      },
+      {
+       "id": "speaker",
+       "part": "speaker"
+      },
+      {
+       "id": "kettle",
+       "part": "kettle"
+      },
+      {
+       "id": "water",
+       "part": "kettle-water"
+      },
+      {
+       "id": "air",
+       "label": {
+        "en": "The air around",
+        "zh": "周围的空气"
+       },
+       "sink": true
+      }
+     ],
+     "links": [
+      {
+       "id": "h-in",
+       "from": "grid",
+       "to": "db",
+       "form": "electrical",
+       "share": "in",
+       "paths": [
+        "electrical-near:grid-db"
+       ]
+      },
+      {
+       "id": "h-fan",
+       "from": "db",
+       "to": "fan",
+       "form": "electrical",
+       "share": "in",
+       "paths": [
+        "electrical-near:db-fan"
+       ],
+       "when": {
+        "control": "appliance",
+        "is": {
+         "eq": "fan"
+        }
+       }
+      },
+      {
+       "id": "h-lamp",
+       "from": "db",
+       "to": "lamp",
+       "form": "electrical",
+       "share": "in",
+       "paths": [
+        "electrical-near:db-lamp"
+       ],
+       "when": {
+        "control": "appliance",
+        "is": {
+         "eq": "lamp"
+        }
+       }
+      },
+      {
+       "id": "h-speaker",
+       "from": "db",
+       "to": "speaker",
+       "form": "electrical",
+       "share": "in",
+       "paths": [
+        "electrical-near:db-speaker"
+       ],
+       "when": {
+        "control": "appliance",
+        "is": {
+         "eq": "speaker"
+        }
+       }
+      },
+      {
+       "id": "h-kettle",
+       "from": "db",
+       "to": "kettle",
+       "form": "electrical",
+       "share": "in",
+       "paths": [
+        "electrical-near:db-kettle"
+       ],
+       "when": {
+        "control": "appliance",
+        "is": {
+         "eq": "kettle"
+        }
+       }
+      },
+      {
+       "id": "f-kin",
+       "from": "fan",
+       "to": "air",
+       "form": "kinetic",
+       "share": "fan.kinetic",
+       "paths": [
+        "kinetic-near:fan-air"
+       ],
+       "useful": true
+      },
+      {
+       "id": "f-heat",
+       "from": "fan",
+       "to": "air",
+       "form": "heat",
+       "share": "fan.heat",
+       "paths": [
+        "heat-near:fan"
+       ]
+      },
+      {
+       "id": "f-sound",
+       "from": "fan",
+       "to": "air",
+       "form": "sound",
+       "share": "fan.sound",
+       "paths": [
+        "sound-near:fan-hum"
+       ]
+      },
+      {
+       "id": "l-light",
+       "from": "lamp",
+       "to": "air",
+       "form": "light",
+       "share": "led.light",
+       "paths": [
+        "light-near:lamp-room"
+       ],
+       "useful": true
+      },
+      {
+       "id": "l-heat",
+       "from": "lamp",
+       "to": "air",
+       "form": "heat",
+       "share": "led.heat",
+       "paths": [
+        "heat-near:lamp"
+       ]
+      },
+      {
+       "id": "sp-sound",
+       "from": "speaker",
+       "to": "air",
+       "form": "sound",
+       "share": "speaker.sound",
+       "paths": [
+        "sound-near:speaker-out-a",
+        "sound-near:speaker-out-b",
+        "sound-near:speaker-out-c"
+       ],
+       "useful": true
+      },
+      {
+       "id": "sp-heat",
+       "from": "speaker",
+       "to": "air",
+       "form": "heat",
+       "share": "speaker.heat",
+       "paths": [
+        "heat-near:speaker"
+       ]
+      },
+      {
+       "id": "k-water",
+       "from": "kettle",
+       "to": "water",
+       "form": "heat",
+       "share": "kettle.heat-water",
+       "paths": [
+        "heat-tiny:kettle-water"
+       ],
+       "useful": true
+      },
+      {
+       "id": "k-heat",
+       "from": "kettle",
+       "to": "air",
+       "form": "heat",
+       "share": "kettle.heat",
+       "paths": [
+        "heat-near:kettle-air"
+       ]
+      },
+      {
+       "id": "k-sound",
+       "from": "kettle",
+       "to": "air",
+       "form": "sound",
+       "share": "kettle.sound",
+       "paths": [
+        "sound-near:kettle-hiss"
+       ]
+      }
+     ]
+    },
+    "bounce": {
+     "when": [
+      {
+       "control": "let-go",
+       "is": true
+      }
+     ],
+     "reading": {
+      "node": "floor"
+     },
+     "nodes": [
+      {
+       "id": "held",
+       "part": "tennis-ball"
+      },
+      {
+       "id": "floor",
+       "label": {
+        "en": "Hitting the floor",
+        "zh": "碰到地面"
+       }
+      },
+      {
+       "id": "top",
+       "label": {
+        "en": "At the top of the bounce",
+        "zh": "弹到最高点"
+       }
+      },
+      {
+       "id": "air",
+       "label": {
+        "en": "The air around",
+        "zh": "周围的空气"
+       },
+       "sink": true
+      }
+     ],
+     "links": [
+      {
+       "id": "b-fall",
+       "from": "held",
+       "to": "floor",
+       "form": "kinetic",
+       "share": "in"
+      },
+      {
+       "id": "b-kept",
+       "from": "floor",
+       "to": "top",
+       "form": "potential",
+       "share": "bounce.potential",
+       "useful": true
+      },
+      {
+       "id": "b-heat",
+       "from": "floor",
+       "to": "air",
+       "form": "heat",
+       "share": "bounce.heat",
+       "paths": [
+        "heat-near:floor"
+       ]
+      },
+      {
+       "id": "b-sound",
+       "from": "floor",
+       "to": "air",
+       "form": "sound",
+       "share": "bounce.sound",
+       "paths": [
+        "sound-near:bounce-thud"
+       ]
+      }
+     ]
+    },
+    "swing": {
+     "when": [
+      {
+       "control": "let-go",
+       "is": true
+      }
+     ],
+     "reading": {
+      "node": "swinging"
+     },
+     "note": {
+      "en": "Paused at a turning point; it would keep swinging lower",
+      "zh": "停在一个最高点；它还会越摆越低"
+     },
+     "nodes": [
+      {
+       "id": "pulled",
+       "part": "swing-seat"
+      },
+      {
+       "id": "swinging",
+       "label": {
+        "en": "Eight swings",
+        "zh": "摆了八次"
+       }
+      },
+      {
+       "id": "paused",
+       "label": {
+        "en": "At the last turning point",
+        "zh": "最后一个最高点"
+       }
+      },
+      {
+       "id": "air",
+       "label": {
+        "en": "The air around",
+        "zh": "周围的空气"
+       },
+       "sink": true
+      }
+     ],
+     "links": [
+      {
+       "id": "w-let-go",
+       "from": "pulled",
+       "to": "swinging",
+       "form": "potential",
+       "share": "in"
+      },
+      {
+       "id": "w-left",
+       "from": "swinging",
+       "to": "paused",
+       "form": "potential",
+       "share": "swing.potential",
+       "useful": true
+      },
+      {
+       "id": "w-heat",
+       "from": "swinging",
+       "to": "air",
+       "form": "heat",
+       "share": "swing.heat",
+       "paths": [
+        "heat-near:swing-hooks"
+       ]
+      },
+      {
+       "id": "w-sound",
+       "from": "swinging",
+       "to": "air",
+       "form": "sound",
+       "share": "swing.sound",
+       "paths": [
+        "sound-near:swing-creak"
+       ]
+      }
+     ]
+    },
+    "windup": {
+     "when": [
+      {
+       "control": "winds",
+       "is": {
+        "ne": 0
+       }
+      },
+      {
+       "control": "let-go",
+       "is": true
+      }
+     ],
+     "nodes": [
+      {
+       "id": "spring",
+       "part": "windup-spring"
+      },
+      {
+       "id": "wheels",
+       "part": "windup-wheels"
+      },
+      {
+       "id": "air",
+       "label": {
+        "en": "The air around",
+        "zh": "周围的空气"
+       },
+       "sink": true
+      }
+     ],
+     "links": [
+      {
+       "id": "t-run",
+       "from": "spring",
+       "to": "wheels",
+       "form": "kinetic",
+       "share": "in",
+       "paths": [
+        "kinetic-tiny:toy-run"
+       ]
+      },
+      {
+       "id": "t-heat",
+       "from": "wheels",
+       "to": "air",
+       "form": "heat",
+       "share": "windup.heat",
+       "paths": [
+        "heat-tiny:toy"
+       ]
+      },
+      {
+       "id": "t-sound",
+       "from": "wheels",
+       "to": "air",
+       "form": "sound",
+       "share": "windup.sound",
+       "paths": [
+        "sound-tiny:toy-tick"
+       ]
+      }
+     ]
+    },
+    "torch": {
+     "when": [
+      {
+       "control": "torch-on",
+       "is": true
+      }
+     ],
+     "reading": {
+      "node": "cells",
+      "through": [
+       "led"
+      ]
+     },
+     "nodes": [
+      {
+       "id": "cells",
+       "part": "torch-batteries"
+      },
+      {
+       "id": "led",
+       "part": "torch-led"
+      },
+      {
+       "id": "air",
+       "label": {
+        "en": "The air around",
+        "zh": "周围的空气"
+       },
+       "sink": true
+      }
+     ],
+     "links": [
+      {
+       "id": "c-el",
+       "from": "cells",
+       "to": "led",
+       "form": "electrical",
+       "share": "battery.electrical",
+       "paths": [
+        "electrical-tiny:torch-loop"
+       ]
+      },
+      {
+       "id": "c-heat",
+       "from": "cells",
+       "to": "air",
+       "form": "heat",
+       "share": "battery.heat",
+       "paths": [
+        "heat-tiny:torch-cells"
+       ]
+      },
+      {
+       "id": "c-light",
+       "from": "led",
+       "to": "air",
+       "form": "light",
+       "share": "led.light",
+       "paths": [
+        "light-tiny:torch-beam"
+       ],
+       "useful": true
+      },
+      {
+       "id": "c-led-heat",
+       "from": "led",
+       "to": "air",
+       "form": "heat",
+       "share": "led.heat",
+       "paths": [
+        "heat-tiny:torch-head"
+       ]
+      }
+     ]
+    },
+    "dynamo": {
+     "when": [
+      {
+       "control": "speed",
+       "is": {
+        "ne": 0
+       }
+      }
+     ],
+     "reading": {
+      "node": "dyn",
+      "through": [
+       "headlamp"
+      ]
+     },
+     "nodes": [
+      {
+       "id": "rider",
+       "part": "crank-pedals"
+      },
+      {
+       "id": "dyn",
+       "part": "bicycle-dynamo"
+      },
+      {
+       "id": "headlamp",
+       "part": "headlamp"
+      },
+      {
+       "id": "air",
+       "label": {
+        "en": "The air around",
+        "zh": "周围的空气"
+       },
+       "sink": true
+      }
+     ],
+     "links": [
+      {
+       "id": "d-in",
+       "from": "rider",
+       "to": "dyn",
+       "form": "kinetic",
+       "share": "in",
+       "paths": [
+        "kinetic-near:pedal-wheel",
+        "kinetic-near:wheel-dynamo"
+       ],
+       "when": {
+        "control": "dynamo-on",
+        "is": {
+         "eq": true
+        }
+       }
+      },
+      {
+       "id": "d-free",
+       "from": "rider",
+       "to": "air",
+       "form": "heat",
+       "share": "in",
+       "paths": [
+        "heat-near:wheel-hub"
+       ],
+       "when": {
+        "control": "dynamo-on",
+        "is": {
+         "eq": false
+        }
+       }
+      },
+      {
+       "id": "d-el",
+       "from": "dyn",
+       "to": "headlamp",
+       "form": "electrical",
+       "share": "dynamo.electrical",
+       "paths": [
+        "electrical-near:dynamo-lamp"
+       ]
+      },
+      {
+       "id": "d-heat",
+       "from": "dyn",
+       "to": "air",
+       "form": "heat",
+       "share": "dynamo.heat",
+       "paths": [
+        "heat-near:dynamo"
+       ]
+      },
+      {
+       "id": "d-sound",
+       "from": "dyn",
+       "to": "air",
+       "form": "sound",
+       "share": "dynamo.sound",
+       "paths": [
+        "sound-near:dynamo-whirr"
+       ]
+      },
+      {
+       "id": "hl-light",
+       "from": "headlamp",
+       "to": "air",
+       "form": "light",
+       "share": "filament.light",
+       "paths": [
+        "light-near:headlamp-beam"
+       ],
+       "useful": true
+      },
+      {
+       "id": "hl-heat",
+       "from": "headlamp",
+       "to": "air",
+       "form": "heat",
+       "share": "filament.heat",
+       "paths": [
+        "heat-near:headlamp"
+       ]
+      }
+     ]
+    },
+    "gas-to-home": {
+     "start": {
+      "control": "lamp-type",
+      "values": {
+       "led": 25,
+       "filament": 100
+      }
+     },
+     "reading": {
+      "node": "station",
+      "through": [
+       "grid",
+       "lamp"
+      ]
+     },
+     "note": {
+      "en": "The gas and the power station are not drawn",
+      "zh": "天然气和发电厂没有画在模型里"
+     },
+     "nodes": [
+      {
+       "id": "gas",
+       "label": {
+        "en": "Natural gas",
+        "zh": "天然气"
+       }
+      },
+      {
+       "id": "station",
+       "label": {
+        "en": "Power station",
+        "zh": "发电厂"
+       }
+      },
+      {
+       "id": "grid",
+       "part": "grid-cable"
+      },
+      {
+       "id": "lamp",
+       "part": "led-lamp"
+      },
+      {
+       "id": "air",
+       "label": {
+        "en": "The air around",
+        "zh": "周围的空气"
+       },
+       "sink": true
+      }
+     ],
+     "links": [
+      {
+       "id": "g-burn",
+       "from": "gas",
+       "to": "station",
+       "form": "potential",
+       "share": "in"
+      },
+      {
+       "id": "g-el",
+       "from": "station",
+       "to": "grid",
+       "form": "electrical",
+       "share": "station.electrical",
+       "paths": [
+        "electrical-far:grid-feed"
+       ]
+      },
+      {
+       "id": "g-heat",
+       "from": "station",
+       "to": "air",
+       "form": "heat",
+       "share": "station.heat"
+      },
+      {
+       "id": "g-home",
+       "from": "grid",
+       "to": "lamp",
+       "form": "electrical",
+       "share": "grid.electrical",
+       "paths": [
+        "electrical-near:grid-db",
+        "electrical-near:db-lamp"
+       ]
+      },
+      {
+       "id": "g-cable",
+       "from": "grid",
+       "to": "air",
+       "form": "heat",
+       "share": "grid.heat",
+       "paths": [
+        "heat-far:grid-cable"
+       ]
+      },
+      {
+       "id": "g-led-light",
+       "from": "lamp",
+       "to": "air",
+       "form": "light",
+       "share": "led.light",
+       "paths": [
+        "light-near:lamp-room",
+        "light-far:lamp-b"
+       ],
+       "when": {
+        "control": "lamp-type",
+        "is": {
+         "eq": "led"
+        }
+       },
+       "useful": true
+      },
+      {
+       "id": "g-led-heat",
+       "from": "lamp",
+       "to": "air",
+       "form": "heat",
+       "share": "led.heat",
+       "paths": [
+        "heat-near:lamp",
+        "heat-far:lamp-b"
+       ],
+       "when": {
+        "control": "lamp-type",
+        "is": {
+         "eq": "led"
+        }
+       }
+      },
+      {
+       "id": "g-fil-light",
+       "from": "lamp",
+       "to": "air",
+       "form": "light",
+       "share": "filament.light",
+       "paths": [
+        "light-near:lamp-room",
+        "light-far:lamp-b"
+       ],
+       "when": {
+        "control": "lamp-type",
+        "is": {
+         "eq": "filament"
+        }
+       },
+       "useful": true
+      },
+      {
+       "id": "g-fil-heat",
+       "from": "lamp",
+       "to": "air",
+       "form": "heat",
+       "share": "filament.heat",
+       "paths": [
+        "heat-near:lamp",
+        "heat-far:lamp-b"
+       ],
+       "when": {
+        "control": "lamp-type",
+        "is": {
+         "eq": "filament"
+        }
+       }
+      }
+     ]
+    },
+    "whole": {
+     "note": {
+      "en": "Two chains side by side, each from its own 100 %",
+      "zh": "两条链并排，各自从 100 % 开始"
+     },
+     "nodes": [
+      {
+       "id": "sun",
+       "part": "sun"
+      },
+      {
+       "id": "panel",
+       "part": "solar-panels"
+      },
+      {
+       "id": "gas",
+       "label": {
+        "en": "Natural gas",
+        "zh": "天然气"
+       }
+      },
+      {
+       "id": "grid",
+       "part": "grid-cable"
+      },
+      {
+       "id": "home",
+       "part": "distribution-board"
+      },
+      {
+       "id": "air",
+       "label": {
+        "en": "The air around",
+        "zh": "周围的空气"
+       },
+       "sink": true
+      }
+     ],
+     "links": [
+      {
+       "id": "a-light",
+       "from": "sun",
+       "to": "panel",
+       "form": "light",
+       "share": "in",
+       "paths": [
+        "light-far:sun-roof-a",
+        "light-far:sun-roof-b",
+        "light-far:sun-plant"
+       ]
+      },
+      {
+       "id": "a-el",
+       "from": "panel",
+       "to": "grid",
+       "form": "electrical",
+       "share": "panel.electrical",
+       "paths": [
+        "electrical-far:panel-inverter",
+        "electrical-far:inverter-grid"
+       ]
+      },
+      {
+       "id": "a-heat",
+       "from": "panel",
+       "to": "air",
+       "form": "heat",
+       "share": "panel.heat",
+       "paths": [
+        "heat-far:panel-heat-a",
+        "heat-far:panel-heat-b",
+        "heat-far:inverter"
+       ]
+      },
+      {
+       "id": "a-reflect",
+       "from": "panel",
+       "to": "air",
+       "form": "light",
+       "share": "panel.light",
+       "paths": [
+        "light-far:panel-reflect"
+       ]
+      },
+      {
+       "id": "a-gas",
+       "from": "gas",
+       "to": "grid",
+       "form": "electrical",
+       "share": "station.electrical",
+       "paths": [
+        "electrical-far:grid-feed"
+       ]
+      },
+      {
+       "id": "a-station",
+       "from": "gas",
+       "to": "air",
+       "form": "heat",
+       "share": "station.heat"
+      },
+      {
+       "id": "a-home",
+       "from": "grid",
+       "to": "home",
+       "form": "electrical",
+       "share": "grid.electrical"
+      },
+      {
+       "id": "a-cable",
+       "from": "grid",
+       "to": "air",
+       "form": "heat",
+       "share": "grid.heat",
+       "paths": [
+        "heat-far:grid-cable"
+       ]
+      },
+      {
+       "id": "a-used",
+       "from": "home",
+       "to": "air",
+       "form": "heat",
+       "share": "in",
+       "paths": [
+        "heat-far:fan-b",
+        "heat-far:lamp-b",
+        "heat-far:kettle-b",
+        "heat-far:speaker-b",
+        "heat-far:db-b"
+       ]
+      }
+     ]
+    }
+   }
+  }
+ }
+}

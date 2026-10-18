@@ -1,0 +1,108 @@
+---
+id: "stored-energy"
+order: 4
+title: {"en": "Stored energy", "zh": "储存的能量"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: true
+  cutaway: "none"
+  layers: ["rooftop", "lift", "home", "void-deck", "light", "electrical", "kinetic", "sound", "heat"]
+  labels: ["windup-toy", "windup-wheels", "windup-key"]
+  camera: {"position": [-0.5, 5.2, 3.6], "target": [-0.7, 4.36, 0.55], "fov": 30}
+  summary: {"en": "Energy can be stored as potential energy, in a wound spring, in a battery or in food, and changed into other forms when it is needed.", "zh": "能量可以以势能的形式储存起来：在上紧的发条里、在电池里、在食物里，需要时再转换成别的形式。"}
+  sim:
+    set: {"chain": "windup", "winds": 6}
+    try:
+      vary: "winds"
+      keep: [{"en": "Same toy, same table", "zh": "同一辆玩具车、同一张桌子"}]
+      observe: ["run-time"]
+      record: {"chart": true}
+      replay: true
+  beats:
+    - labels: ["windup-toy", "windup-wheels", "windup-key"]
+      caption: {"en": "The toy was wound with six turns of its key and let go. The spring turned the wheels, and potential energy changed into kinetic energy and the sound of ticking. After nine seconds the car stopped: its energy had become heat and sound.", "zh": "玩具车的钥匙转了六圈，然后松手。发条带动车轮转动，势能转换成动能和嗒嗒声。九秒以后车停了：它的能量已经变成了热和声。"}
+    - view: "xray"
+      camera: {"position": [-0.72, 4.6, 1.15], "target": [-0.9, 4.39, 0.62], "fov": 30}
+      sim: {"set": {"let-go": false}}
+      labels: ["windup-spring", "windup-key", "windup-toy"]
+      caption: {"en": "Before it is let go, the wound spring holds the energy of your turning hand as potential energy. The toy is still, but there is energy stored inside it.", "zh": "松手之前，上紧的发条把转钥匙的手的能量，以势能的形式储存起来。玩具车停着不动，里面却储存着能量。"}
+    - camera: {"position": [-1.15, 4.8, 1.75], "target": [-1.55, 4.37, 0.55], "fov": 30}
+      sim: {"set": {"chain": "torch", "torch-on": true}}
+      labels: ["torch", "torch-led"]
+      caption: {"en": "A torch's batteries store potential energy. Close the switch and it changes into electrical energy, then into light and heat at the LED.", "zh": "手电筒的电池储存着势能。合上开关，势能转换成电能，再在 LED 那里变成光能和热能。"}
+    - view: "xray"
+      camera: {"position": [-1.4, 4.62, 1.1], "target": [-1.6, 4.37, 0.6], "fov": 30}
+      sim: {"set": {"chain": "torch", "torch-on": true}}
+      labels: ["torch-batteries", "torch-led"]
+      caption: {"en": "A battery does not hold electricity the way a tank holds water. The substances inside store energy, and only when the circuit is closed does it change into electrical energy. When they have finished reacting, the battery is flat.", "zh": "电池并不像水箱装水那样装着电。电池里的物质储存着能量，只有电路闭合时，它才转换成电能。这些物质反应完了，电池就没电了。"}
+    - labels: ["windup-toy", "torch"]
+      caption: {"en": "Food is a store of potential energy too. Your body changes it into kinetic energy and heat when you move, even when you wind up a toy.", "zh": "食物也储存着势能。你活动的时候，身体把它转换成动能和热，连上发条也是这样。"}
+  index: {"parts": ["windup-toy", "windup-spring", "windup-key", "windup-wheels", "torch", "torch-batteries", "torch-led"]}
+---
+
+<Lang en>
+
+Energy can be stored and used later. Turning the key of a wind-up toy winds a spring tight inside it. The kinetic energy of your turning hand is stored in the spring as potential energy, and the toy can sit still on the table while it holds that energy. <FlyTo preset="living-room">Look at the coffee table</FlyTo>
+
+Let go, and the spring unwinds and turns the wheels. Its potential energy changes into kinetic energy as the car runs, and into sound as it ticks along. When the car stops, the energy has not gone: it has become heat in the gears, the wheels and the table, and sound. The bar beside the car shows the stored energy shrinking as the heat and sound grow.
+
+The more turns you give the key, the more energy the spring stores and the longer the car runs: in this model, <Num s="S1">1.5 s</Num> for every turn. In the try-it card, change only the number of turns, keep the same toy on the same table, and record how long it runs.
+
+A torch stores energy too. Its batteries store potential energy in the substances inside them. Close the switch and the circuit is complete: the stored energy changes into electrical energy, and the LED changes that into light energy and heat. A battery does not hold electricity the way a tank holds water. When its substances have finished reacting, it can no longer give energy, and it is flat. The circuit itself is in <TopicLink slug="circuits" ch="inside-a-torch">Inside a torch</TopicLink>.
+
+Food is a store of potential energy as well. Your body changes the energy in food into kinetic energy and heat when you move, even when you wind up a toy, and that energy too first came from the Sun.
+
+<More title={{"en": "Batteries, current and energy", "zh": "电池、电流和能量"}}>
+
+A current flows all the way round a closed circuit. The LED does not use up the current that reaches it; energy is passed from the batteries to the LED, which changes it into light and heat. In this model's torch <Num s="S1">5 %</Num> of the stored energy becomes heat inside the batteries, <Num s="S1">38 %</Num> leaves the LED as light and the rest becomes heat in the LED. More batteries in a circuit are in <TopicLink slug="circuits" ch="more-batteries">Adding batteries</TopicLink>.
+
+</More>
+
+<More title={{"en": "Food and your body", "zh": "食物和身体"}}>
+
+Your body needs energy even while you sit still. When you move, it changes some of the energy from food into movement and much more of it into heat: when cycling, only about a fifth, <Num s="S25">20 %</Num>, becomes movement, which is why exercise makes you warm. How your body breaks food down and takes it in is in <TopicLink slug="digestive-system" ch="a-meals-journey">A meal's journey</TopicLink>.
+
+</More>
+
+<More title={{"en": "About this model", "zh": "关于这个模型"}}>
+
+In this model the toy runs for <Num s="S1">3 s</Num>, <Num s="S1">6 s</Num>, <Num s="S1">9 s</Num> and <Num s="S1">12 s</Num> after <Num s="S1">2</Num>, <Num s="S1">4</Num>, <Num s="S1">6</Num> and <Num s="S1">8</Num> turns; these times are design values, not measurements of a real toy. When it stops, the model counts <Num s="S1">95 %</Num> of the energy as heat and <Num s="S1">5 %</Num> as sound, and the sound soon becomes heat too. The torch's shares are illustrative as well.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+能量可以先储存起来，以后再用。转动发条玩具的钥匙，就把里面的发条上紧。转钥匙的手的动能，以势能的形式储存在发条里；玩具车可以一动不动地放在桌上，里面却存着这份能量。<FlyTo preset="living-room">看茶几</FlyTo>
+
+一松手，发条松开，带动车轮转动。车子跑起来时，发条的势能转换成动能，一路嗒嗒响，也变成了声能。车子停下时，能量并没有不见：它变成了齿轮、车轮和桌面里的热，还有声音。车旁边的条显示，储存的能量越来越少，热和声越来越多。
+
+钥匙转的圈数越多，发条储存的能量就越多，车跑得越久：在这个模型里，每转一圈跑 <Num s="S1">1.5 s</Num>。在试一试卡片里，只改变转的圈数，用同一辆玩具车、同一张桌子，把车跑了多久记下来。
+
+手电筒也储存着能量。它的电池里的物质储存着势能。合上开关，电路就闭合了：储存的能量转换成电能，LED 再把电能转换成光能和热能。电池并不像水箱装水那样装着电。电池里的物质反应完了，它就不能再提供能量，电池就没电了。电路本身见<TopicLink slug="circuits" ch="inside-a-torch">手电筒里面</TopicLink>。
+
+食物也储存着势能。你活动的时候，身体把食物里的能量转换成动能和热，连上发条也是这样；这份能量最初也来自太阳。
+
+<More title={{"en": "Batteries, current and energy", "zh": "电池、电流和能量"}}>
+
+电流沿着闭合的电路流一整圈。LED 并不会把流到它那里的电流用掉；是电池把能量传给 LED，LED 再把它变成光和热。在这个模型的手电筒里，储存的能量有 <Num s="S1">5 %</Num> 在电池里变成热，<Num s="S1">38 %</Num> 从 LED 变成光出来，其余的在 LED 里变成热。电路里多装几节电池会怎样，见<TopicLink slug="circuits" ch="more-batteries">增加电池</TopicLink>。
+
+</More>
+
+<More title={{"en": "Food and your body", "zh": "食物和身体"}}>
+
+就算坐着不动，身体也需要能量。你活动时，身体把食物里的一部分能量变成运动，更多的变成热：骑自行车时，只有大约五分之一，也就是 <Num s="S25">20 %</Num>，变成运动，所以运动会让人发热。身体怎样把食物分解、吸收，见<TopicLink slug="digestive-system" ch="a-meals-journey">一顿饭的旅程</TopicLink>。
+
+</More>
+
+<More title={{"en": "About this model", "zh": "关于这个模型"}}>
+
+在这个模型里，钥匙转 <Num s="S1">2</Num>、<Num s="S1">4</Num>、<Num s="S1">6</Num>、<Num s="S1">8</Num> 圈，车分别跑 <Num s="S1">3 s</Num>、<Num s="S1">6 s</Num>、<Num s="S1">9 s</Num>、<Num s="S1">12 s</Num>；这些时间是设计值，不是在真的玩具上量的。车停下时，模型把 <Num s="S1">95 %</Num> 的能量算作热，<Num s="S1">5 %</Num> 算作声，而声音很快也会变成热。手电筒的各个比例也只是示意。
+
+</More>
+
+</Lang>

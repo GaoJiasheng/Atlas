@@ -1,0 +1,109 @@
+---
+id: "electrical-energy-at-home"
+order: 2
+title: {"en": "Electrical energy at home", "zh": "家里的电能"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: true
+  cutaway: "none"
+  layers: ["rooftop", "lift", "home", "void-deck", "light", "electrical", "kinetic", "sound", "heat"]
+  labels: ["fan-blades", "led-lamp", "speaker"]
+  camera: {"position": [2.0, 5.6, 8.0], "target": [-1.4, 5.25, -1.0], "fov": 30}
+  summary: {"en": "Electrical energy reaches the flat through the grid. Each appliance changes it into the form we want, and always into some heat as well.", "zh": "电能经电网送到家里。每件电器把它转换成我们想要的形式，同时总有一部分变成热。"}
+  sim:
+    set: {"chain": "home", "appliance": "fan"}
+    try:
+      vary: "appliance"
+      keep: [{"en": "Same supply", "zh": "同样的供电"}]
+      observe: ["useful", "heat"]
+      record: {"chart": {"y": ["useful", "heat"]}}
+      predict:
+        prompt: {"en": "Switch from the fan to the speaker. Will more or less of the energy end in the form we want?", "zh": "从风扇换成音箱。最后变成我们想要的形式的那一份，会更多还是更少？"}
+        start: {"appliance": "fan"}
+        change: {"appliance": "speaker"}
+        observe: "useful"
+        options:
+          - {"id": "more", "label": {"en": "More", "zh": "更多"}, "means": "more"}
+          - {"id": "less", "label": {"en": "Less", "zh": "更少"}, "means": "less"}
+          - {"id": "same", "label": {"en": "About the same", "zh": "差不多"}, "means": "same"}
+  beats:
+    - labels: ["grid-cable", "distribution-board"]
+      caption: {"en": "Most of the flat's electrical energy comes through the grid from power stations. In 2024 about ninety-four per cent of Singapore's electricity was made from natural gas.", "zh": "家里的电能大多经电网从发电厂送来。二零二四年，新加坡大约百分之九十四的电是用天然气发的。"}
+    - labels: ["fan-motor", "fan-blades"]
+      caption: {"en": "The fan's motor changes electrical energy into kinetic energy: the blades turn and push the air. The motor also warms up and hums.", "zh": "风扇的电动机把电能转换成动能：扇叶转动，推动空气。电动机也会变热、发出嗡嗡声。"}
+    - sim: {"set": {"appliance": "lamp"}}
+      labels: ["led-lamp"]
+      caption: {"en": "The lamp changes electrical energy into light energy, and some into heat. In this model the LED lamp turns about four tenths of its electrical energy into light.", "zh": "灯把电能转换成光能，也有一部分变成热。在这个模型里，LED 灯大约把十分之四的电能变成光。"}
+    - sim: {"set": {"appliance": "speaker"}}
+      labels: ["speaker", "speaker-cone"]
+      caption: {"en": "The speaker changes electrical energy into sound energy. Only about one part in a hundred becomes sound; the rest becomes heat.", "zh": "音箱把电能转换成声能。一百份里只有大约一份变成声音，其余都变成热。"}
+    - camera: "kitchen"
+      view: "xray"
+      sim: {"set": {"appliance": "kettle"}}
+      labels: ["kettle", "kettle-element", "kettle-water"]
+      caption: {"en": "The kettle changes electrical energy into heat in the water. In this model it would bring one litre from thirty degrees to the boil in a little over two and a half minutes, hissing as it heats.", "zh": "电热水壶把电能转换成水里的热。在这个模型里，它把一升三十摄氏度的水烧开，要两分半钟多一点，烧的时候还会嘶嘶响。"}
+  index: {"parts": ["grid-cable", "distribution-board", "fan-motor", "fan-blades", "led-lamp", "speaker", "speaker-cone", "kettle", "kettle-element", "kettle-water"]}
+---
+
+<Lang en>
+
+Most of the flat's electrical energy comes through the grid from a <Term id="power-station">power station</Term>, a place where the energy of a fuel or another energy resource is changed into electrical energy. In 2024 about <Num s="S5">94 %</Num> of Singapore's electricity was made from natural gas. The rooftop panels in this model power the block's shared services; the flat has its own supply from the grid, and the distribution board shares it out among the flat's circuits. <FlyTo preset="living-room">Look at the living room</FlyTo>
+
+Each appliance changes electrical energy into the form we want from it, and always into some heat as well. The fan's motor changes it into kinetic energy of the blades and the air, and the motor warms up and hums. The lamp changes it into light energy, and some into heat. The speaker's cone moves back and forth and gives out sound energy, but in this model only about one part in a hundred, <Num s="S1">1 %</Num>, becomes sound; the rest becomes heat.
+
+The kettle is different: here heat is the form we want. Its element gets hot, and heat passes into the water. In this model <Num s="S1">85 %</Num> of the electrical energy heats the water, and the kettle would bring one litre from <Num s="S1">30 °C</Num> to the boil in a little over two and a half minutes. <FlyTo preset="kitchen">Look at the kettle</FlyTo>
+
+Read the energy-chain card: the wider a band, the bigger its share of the energy. In the try-it card, keep the same supply and change only the appliance. Record the share that ends in the form we want and the share that becomes heat, then compare the four appliances on the chart.
+
+<More title={{"en": "Where Singapore's electricity comes from", "zh": "新加坡的电从哪里来"}}>
+
+In 2024 natural gas was the fuel for <Num s="S5">94.0 %</Num> of Singapore's electricity, other energy products for <Num s="S5">2.7 %</Num>, solar panels for <Num s="S5">2.1 %</Num>, and coal and oil products for <Num s="S5">1.2 %</Num>. These are national figures for one year. The grid joins many power stations, so the energy reaching a home cannot be traced back to one of them.
+
+</More>
+
+<More title={{"en": "The simulated kettle", "zh": "模拟的电热水壶"}}>
+
+The model's kettle takes <Num s="S1">2,200 W</Num>, like one common kettle sold in Singapore, from the flat's <Num s="S18">230 V</Num> supply. Heating <Num s="S19">1 kg</Num> of water by <Num s="S19">70 °C</Num> takes about <Num s="S19">293 kJ</Num>: <Num s="S19">4,186 J</Num> for each kilogram and each degree. With <Num s="S1">85 %</Num> of <Num s="S1">2,200 W</Num> going into the water, that takes about <Num s="S1">157 s</Num>. The other <Num s="S1">14 %</Num> warms the kettle and the air, and <Num s="S1">1 %</Num> is the hiss; all three shares are illustrative. The kettle body and the steam are hot.
+
+</More>
+
+<More title={{"en": "Even the fan's breeze ends as heat", "zh": "连风扇吹的风最后也变成热"}}>
+
+The fan gives the air kinetic energy. As the moving air slows down, that energy becomes heat in the room. So even a fan, whose job is movement, ends up warming the room a little. Choosing and using appliances well, such as an air conditioner, is in <TopicLink slug="aircon" ch="efficiency-and-use">Using it well</TopicLink>.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+家里的电能大多经电网从<Term id="power-station">发电厂</Term>送来。发电厂是把燃料或其他能源里的能量转换成电能的地方。2024 年，新加坡大约 <Num s="S5">94 %</Num> 的电是用天然气发的。模型里屋顶的太阳能板为整座楼的公共设施供电；住家自己从电网取电，再由配电箱分到家里的各个电路。<FlyTo preset="living-room">看客厅</FlyTo>
+
+每件电器都把电能转换成我们想要的形式，同时总有一部分变成热。风扇的电动机把电能转换成扇叶和空气的动能，电动机自己也会变热、嗡嗡地响。灯把电能转换成光能，也有一部分变成热。音箱的纸盆前后振动，发出声能；但在这个模型里，一百份里只有大约一份，也就是 <Num s="S1">1 %</Num>，变成声音，其余都变成热。
+
+电热水壶不一样：我们要的正是热。发热盘变热，热传进水里。在这个模型里，<Num s="S1">85 %</Num> 的电能让水变热，把一升 <Num s="S1">30 °C</Num> 的水烧开，要两分半钟多一点。<FlyTo preset="kitchen">看水壶</FlyTo>
+
+读一读能量链卡：带子越宽，那一份能量就越多。在试一试卡片里，保持同样的供电，只换电器。把变成想要的形式的那一份和变成热的那一份记下来，再在图上比较四件电器。
+
+<More title={{"en": "Where Singapore's electricity comes from", "zh": "新加坡的电从哪里来"}}>
+
+2024 年，新加坡的电有 <Num s="S5">94.0 %</Num> 是用天然气发的，<Num s="S5">2.7 %</Num> 来自其他能源产品，<Num s="S5">2.1 %</Num> 来自太阳能板，<Num s="S5">1.2 %</Num> 来自煤和石油产品。这些是全国一年的数字。电网连着很多座发电厂，所以送到某一户人家的能量，追不回是哪一座发电厂发的。
+
+</More>
+
+<More title={{"en": "The simulated kettle", "zh": "模拟的电热水壶"}}>
+
+模型里的水壶用家里 <Num s="S18">230 V</Num> 的电源，功率 <Num s="S1">2,200 W</Num>，和新加坡市面上一款常见的水壶一样。把 <Num s="S19">1 kg</Num> 水的温度升高 <Num s="S19">70 °C</Num>，大约要 <Num s="S19">293 kJ</Num>：每千克水每升高一度要 <Num s="S19">4,186 J</Num>。<Num s="S1">2,200 W</Num> 里有 <Num s="S1">85 %</Num> 进到水里，大约要 <Num s="S1">157 s</Num>。另外 <Num s="S1">14 %</Num> 让壶身和空气变暖，<Num s="S1">1 %</Num> 是嘶嘶声；这三个比例都只是示意。壶身和蒸汽都很烫。
+
+</More>
+
+<More title={{"en": "Even the fan's breeze ends as heat", "zh": "连风扇吹的风最后也变成热"}}>
+
+风扇让空气有了动能。流动的空气慢下来时，这份能量就变成房间里的热。所以连本来是用来让空气流动的风扇，最后也让房间变暖了一点。怎样挑选、使用空调这类电器，见<TopicLink slug="aircon" ch="efficiency-and-use">用得好、用得省</TopicLink>。
+
+</More>
+
+</Lang>

@@ -35,7 +35,8 @@ state:
     - labels: ["wooden-block", "pull-balance", "pull-string", "friction-board"]
       caption: {"en": "A cord joins the wooden block to a spring balance. The cord is level, so the balance measures a level pull, in newtons.", "zh": "一根线把木块和弹簧秤连起来。线是水平的，所以弹簧秤量的是水平方向的拉力，单位是牛顿。"}
     - sim: {"set": {"hold": true}}
-      labels: ["wooden-block", "pull-balance-pointer"]
+      camera: {"position": [-0.66, 0.36, 0.62], "target": [-0.68, 0.02, -0.12], "fov": 30}
+      labels: ["pull-balance-pointer", "pull-balance"]
       caption: {"en": "Pull gently. The reading climbs, but the block stays still: friction between the surfaces pulls back just as hard. A still object can have forces acting on it.", "zh": "轻轻地拉。读数在升，木块却不动：两个表面之间的摩擦力往回拉，和拉力一样大。不动的物体身上也可以有力。"}
     - labels: ["wooden-block", "pull-balance-pointer"]
       caption: {"en": "In this model the block starts to slide at about one newton. Once it is moving, a pull of about zero point six newtons keeps it sliding.", "zh": "在这个模型里，拉到约一牛顿，木块开始滑动。滑起来以后，约零点六牛顿的拉力就能让它一直滑下去。"}

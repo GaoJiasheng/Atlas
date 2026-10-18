@@ -1,0 +1,16 @@
+# MOE P6 Energy Conversion (and Energy Forms and Uses: the Sun as our primary source); docs/31, decisions taken 2026-10-18.
+id: energy-conversion
+title: { en: "How Energy Changes Form", zh: "能量是怎样转换的" }
+subtitle: { en: "Follow energy through an HDB block, from the Sun and the grid to heat in the air", zh: "在一座组屋里跟着能量走：从太阳和电网，到散进空气里的热" }
+subject: science
+tags: [singapore, psle, p6, energy, space]
+moe: []
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: published
+illustration: energy-conversion
+shortTitle: { en: "Energy", zh: "能量转换" }
+note: { en: "Model study · an HDB block slice · middle floors left out · the Sun not to scale", zh: "示意模型 · 组屋切片 · 省略中间楼层 · 太阳不按比例" }

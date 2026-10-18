@@ -1,0 +1,132 @@
+---
+id: "energy-from-the-sun"
+order: 1
+title: {"en": "Energy from the Sun", "zh": "来自太阳的能量"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: true
+  cutaway: "none"
+  layers: ["rooftop", "lift", "home", "void-deck", "light", "electrical", "kinetic", "sound", "heat"]
+  labels: ["sun", "solar-panels", "inverter"]
+  camera: {"position": [6.5, 13.0, 13.5], "target": [-1.5, 8.0, -1.0], "fov": 30}
+  summary: {"en": "Light from the Sun reaches the roof, where solar panels change part of it into electrical energy. Most of the energy we use came from the Sun in some way.", "zh": "太阳光照到屋顶，太阳能板把其中一部分转换成电能。我们用的大多数能量，都以某种方式来自太阳。"}
+  sim:
+    set: {"chain": "solar", "sky": "clear"}
+    try:
+      vary: "sky"
+      keep: [{"en": "Same panels, same tilt", "zh": "同样的板、同样的倾角"}]
+      observe: ["panel-power", "useful"]
+      record: {"chart": true}
+      predict:
+        prompt: {"en": "Night falls. What happens to the electrical energy the panels give?", "zh": "天黑了。太阳能板产生的电能会怎样？"}
+        start: {"sky": "clear"}
+        change: {"sky": "night"}
+        observe: "panel-power"
+        options:
+          - {"id": "less", "label": {"en": "It gets less", "zh": "变少"}, "means": "less"}
+          - {"id": "zero", "label": {"en": "It stops", "zh": "没有了"}, "means": "zero"}
+          - {"id": "same", "label": {"en": "It stays the same", "zh": "不变"}, "means": "same"}
+  beats:
+    - labels: ["sun", "solar-panels"]
+      caption: {"en": "The Sun gives out light and heat. In this model about nine hundred watts of sunlight fall on each square metre of the panels around noon on a clear day.", "zh": "太阳发出光和热。在这个模型里，晴天中午前后，太阳能板每平方米大约照到九百瓦的阳光。"}
+    - labels: ["solar-panels", "inverter", "rooftop-cables"]
+      caption: {"en": "The panels change light energy into electrical energy. In this model about a fifth of the light becomes electrical energy; most of the rest warms the panels, and a little is reflected.", "zh": "太阳能板把光能转换成电能。在这个模型里，大约五分之一的光变成电能，其余大部分让板变热，还有一点被反射掉。"}
+    - camera: "lift-core"
+      sim: {"set": {"lift-at": "top"}}
+      labels: ["lift-motor", "lift-ropes", "lift-car"]
+      caption: {"en": "On HDB blocks, rooftop panels supply shared services such as the lifts, corridor lights and water pumps. Here the lift motor changes electrical energy into kinetic energy and raises the car.", "zh": "组屋屋顶的太阳能板为电梯、走廊灯、水泵这些公共设施供电。这里，电梯的电动机把电能转换成动能，把轿厢升上去。"}
+    - sim: {"set": {"sky": "night"}}
+      labels: ["solar-panels", "inverter"]
+      caption: {"en": "At night there is no sunlight, so the panels give no electrical energy. The lifts and lights then take all their electrical energy from the grid.", "zh": "夜里没有阳光，太阳能板不产生电能。这时电梯和电灯用的电能全部来自电网。"}
+    - camera: {"position": [1.6, 5.75, -0.9], "target": [0.35, 5.15, -3.15], "fov": 30}
+      labels: ["window-plant"]
+      caption: {"en": "Plants take in light energy too, and use it to make food in their leaves. The food we eat, and the natural gas that makes most of Singapore's electricity, hold energy that first came from the Sun.", "zh": "植物也接收光能，用它在叶子里制造食物。我们吃的食物，还有新加坡大部分电力所用的天然气，里面的能量最初都来自太阳。"}
+  index: {"parts": ["sun", "solar-panels", "panel-frames", "inverter", "rooftop-cables", "lift-motor", "lift-car", "window-plant"]}
+---
+
+<Lang en>
+
+The Sun is our main source of energy: it gives out light and heat. Sunlight falls on the roof of the block and on the plant on the window ledge of the top-floor flat. <FlyTo preset="roof-view">Look at the roof</FlyTo>
+
+A <Term id="solar-panel">solar panel</Term> changes light energy into electrical energy. In this model about a fifth, <Num s="S1">21 %</Num>, of the light that reaches the panels becomes electrical energy; most of the rest warms the panels, and a little is reflected. A change of energy from one form into other forms is an <Term id="energy-conversion">energy conversion</Term>. The panels do not make energy; they only change its form. At night, with no light coming in, they give none.
+
+On HDB blocks, rooftop panels supply shared services such as the lifts, corridor lights and water pumps during the day. Any energy the block does not need goes into the <Term id="grid">grid</Term>, the network of cables that carries electrical energy between power stations and the buildings that use it. In the model the lift motor changes electrical energy into kinetic energy and raises the car, which gains potential energy. The flats themselves take their electrical energy from the grid.
+
+To compare skies fairly, change only the sky and keep the same panels at the same tilt. That is a <Term id="fair-test">fair test</Term>: change one thing, keep everything else the same. Record the panel output for each sky and compare the bars.
+
+Most of our energy resources got their energy from the Sun in some way. Plants take in light energy and use it to make food, and the food we eat comes from plants, or from animals that ate plants. <Term id="natural-gas">Natural gas</Term> is a <Term id="fossil-fuel">fossil fuel</Term>: it formed from the remains of living things buried millions of years ago, and those living things got their energy from the Sun too.
+
+<Figure src="figures/energy-conversion-sun-sources" alt={{"en": "Pencil drawing of one Sun with lines to four scenes: a chilli plant in a pot beside a bowl of rice; the sea giving off vapour under a cloud, with rain falling behind a dam; layers of rock with tiny sea creatures shown magnified above and a pocket of gas deep below, reached by a pipe; and rows of solar panels on frames.", "zh": "铅笔画：一个太阳连着四个场景：盆里的辣椒和一碗米饭；海面冒出水汽，上方一朵云，云后的水坝前下着雨；一层层的岩石，上方放大画着细小的海洋生物，岩层深处有一团天然气，一根管子通下去；一排排架在支架上的太阳能板。"}} caption={{"en": "Four paths from the Sun: food from plants, the water cycle, natural gas from long-buried living things, and solar panels. An illustration made for this topic.", "zh": "从太阳出发的四条路：植物给的食物、水循环、很久以前埋在地下的生物变成的天然气，还有太阳能板。为本主题画的示意图。"}} />
+
+<More title={{"en": "The simulated panels", "zh": "模拟的太阳能板"}}>
+
+The model's roof has <Num s="S1">12</Num> panels of <Num s="S1">1.953 m²</Num> each, a common panel size, and changes <Num s="S1">21 %</Num> of the light into electrical energy. With <Num s="S1">900 W/m²</Num> of sunlight around a clear noon they give <Num s="S1">4.43 kW</Num> together; with <Num s="S1">640 W/m²</Num> for average weather, <Num s="S1">3.15 kW</Num>; with an illustrative <Num s="S1">150 W/m²</Num> for an overcast sky, <Num s="S1">0.74 kW</Num>; at night <Num s="S1">0.00 kW</Num>. The sunlight values are rounded inputs, not measurements on these panels; NASA's averages for Singapore in 2023 give about <Num s="S10">918 W/m²</Num> around noon on clear days and <Num s="S10">645 W/m²</Num> in average weather, on level ground. The model leaves out dust, and the way hot panels give a little less.
+
+</More>
+
+<More title={{"en": "Tengeh floating solar farm", "zh": "登格浮动太阳能发电场"}}>
+
+Panels also float on water. The floating solar farm on Tengeh Reservoir opened in 2021: about <Num s="S6">122,000</Num> panels over about <Num s="S6">45 hectares</Num>, rated at <Num s="S6">60 MWp</Num>. In a year it makes enough electricity for PUB's <Num s="S6">5</Num> local waterworks, about <Num s="S6">7 %</Num> of PUB's yearly energy needs. Tengeh is one of the reservoirs made by damming a river; see <TopicLink slug="four-taps" ch="damming-the-rivers">Damming the rivers</TopicLink>. Singapore reached <Num s="S9">2 GWp</Num> of solar panels in 2025 and aims for <Num s="S9">3 GWp</Num> by 2030.
+
+<Figure src="figures/energy-conversion-tengeh" alt={{"en": "Pencil drawing from above of a reservoir with six large rectangular rafts of solar panels floating on it, separated by channels of water, with a road along an earth bank in front and trees along the far shore.", "zh": "铅笔画：从高处看一个蓄水池，水面浮着六大块长方形的太阳能板浮台，浮台之间隔着水道；前面一条土堤，堤上有路，对岸长着树。"}} caption={{"en": "A floating solar farm on a reservoir, like the one on Tengeh Reservoir. An illustration made for this topic.", "zh": "蓄水池上的浮动太阳能发电场，就像登格蓄水池上的那座。为本主题画的示意图。"}} />
+
+</More>
+
+<More title={{"en": "How natural gas holds the Sun's energy", "zh": "天然气里怎么会有太阳的能量"}}>
+
+Millions of years ago, the remains of plants and animals built up on land and on the sea floor and were buried under layers of rock. Heat and pressure slowly turned some of them into natural gas. Those plants got their energy from sunlight, and the animals from eating plants, so the gas holds energy that came from the Sun long ago. Coal formed in a different way, mostly from plants that died in swamps. Burning the gas releases its stored energy.
+
+</More>
+
+<More title={{"en": "Plants and the soil", "zh": "植物和泥土"}}>
+
+A plant's roots take in water and mineral nutrients from the soil, but the soil is not where the plant's energy comes from. The leaves use light energy to make food from water and carbon dioxide; see <TopicLink slug="plant" ch="leaves-make-food">Leaves make food</TopicLink>. The Sun also warms the sea and drives the rain that fills our reservoirs: <TopicLink slug="water" ch="the-water-cycle">The Sun drives the water cycle</TopicLink>.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+太阳是我们主要的能源，它发出光和热。阳光照在组屋的屋顶上，也照在顶层住家窗台上的盆栽上。<FlyTo preset="roof-view">看屋顶</FlyTo>
+
+<Term id="solar-panel">太阳能板</Term>把光能转换成电能。在这个模型里，照到板上的光大约有五分之一，也就是 <Num s="S1">21 %</Num>，变成电能；其余大部分让板变热，还有一点被反射掉。能量从一种形式变成别的形式，就是<Term id="energy-conversion">能量转换</Term>。太阳能板并不制造能量，只是改变能量的形式。到了夜里，没有光照进来，它就一点电能也不产生。
+
+组屋屋顶的太阳能板，白天为电梯、走廊灯、水泵这些公共设施供电；楼里用不完的能量就送进<Term id="grid">电网</Term>。电网是一张电缆网络，把电能在发电厂和用电的建筑之间输送。在模型里，电梯的电动机把电能转换成动能，把轿厢升上去，轿厢的势能就增加了。住家自己用的电能则来自电网。
+
+要公平地比较不同的天空，就只改变天空，太阳能板和倾角都保持不变。这就是<Term id="fair-test">公平测试</Term>：一次只改一样东西，其余的都不变。把每种天空下板的电功率记下来，比一比图上的条。
+
+我们的大多数能源，能量都以某种方式来自太阳。植物接收光能，用它制造食物；我们吃的食物来自植物，或者来自吃植物的动物。<Term id="natural-gas">天然气</Term>是一种<Term id="fossil-fuel">化石燃料</Term>，是几百万年前埋在地下的生物遗骸变成的，而那些生物的能量也来自太阳。
+
+<Figure src="figures/energy-conversion-sun-sources" alt={{"en": "Pencil drawing of one Sun with lines to four scenes: a chilli plant in a pot beside a bowl of rice; the sea giving off vapour under a cloud, with rain falling behind a dam; layers of rock with tiny sea creatures shown magnified above and a pocket of gas deep below, reached by a pipe; and rows of solar panels on frames.", "zh": "铅笔画：一个太阳连着四个场景：盆里的辣椒和一碗米饭；海面冒出水汽，上方一朵云，云后的水坝前下着雨；一层层的岩石，上方放大画着细小的海洋生物，岩层深处有一团天然气，一根管子通下去；一排排架在支架上的太阳能板。"}} caption={{"en": "Four paths from the Sun: food from plants, the water cycle, natural gas from long-buried living things, and solar panels. An illustration made for this topic.", "zh": "从太阳出发的四条路：植物给的食物、水循环、很久以前埋在地下的生物变成的天然气，还有太阳能板。为本主题画的示意图。"}} />
+
+<More title={{"en": "The simulated panels", "zh": "模拟的太阳能板"}}>
+
+模型的屋顶上有 <Num s="S1">12</Num> 块板，每块 <Num s="S1">1.953 m²</Num>，是常见的尺寸，把 <Num s="S1">21 %</Num> 的光转换成电能。晴天中午前后阳光取 <Num s="S1">900 W/m²</Num>，十二块板一共产生 <Num s="S1">4.43 kW</Num>；一般天气取 <Num s="S1">640 W/m²</Num>，产生 <Num s="S1">3.15 kW</Num>；阴天取示意的 <Num s="S1">150 W/m²</Num>，产生 <Num s="S1">0.74 kW</Num>；夜里是 <Num s="S1">0.00 kW</Num>。这些阳光数值是取整的输入，不是在这些板上量到的；按美国航天局 2023 年的平均值，新加坡中午前后的水平地面，晴天每平方米约照到 <Num s="S10">918 W/m²</Num>，一般天气约 <Num s="S10">645 W/m²</Num>。模型没有算灰尘的影响，也没有算板晒热以后产生的电会少一点。
+
+</More>
+
+<More title={{"en": "Tengeh floating solar farm", "zh": "登格浮动太阳能发电场"}}>
+
+太阳能板也可以浮在水上。登格蓄水池上的浮动太阳能发电场在 2021 年启用：大约 <Num s="S6">122,000</Num> 块板，占地约 <Num s="S6">45 公顷</Num>，额定容量 <Num s="S6">60 MWp</Num>。它一年发的电，够公用事业局本地 <Num s="S6">5</Num> 座自来水厂用，约占公用事业局每年所需能量的 <Num s="S6">7 %</Num>。登格蓄水池是在河上筑坝建成的蓄水池之一，见<TopicLink slug="four-taps" ch="damming-the-rivers">在河上筑坝</TopicLink>。新加坡在 2025 年装满了 <Num s="S9">2 GWp</Num> 的太阳能板，目标是在 2030 年达到 <Num s="S9">3 GWp</Num>。
+
+<Figure src="figures/energy-conversion-tengeh" alt={{"en": "Pencil drawing from above of a reservoir with six large rectangular rafts of solar panels floating on it, separated by channels of water, with a road along an earth bank in front and trees along the far shore.", "zh": "铅笔画：从高处看一个蓄水池，水面浮着六大块长方形的太阳能板浮台，浮台之间隔着水道；前面一条土堤，堤上有路，对岸长着树。"}} caption={{"en": "A floating solar farm on a reservoir, like the one on Tengeh Reservoir. An illustration made for this topic.", "zh": "蓄水池上的浮动太阳能发电场，就像登格蓄水池上的那座。为本主题画的示意图。"}} />
+
+</More>
+
+<More title={{"en": "How natural gas holds the Sun's energy", "zh": "天然气里怎么会有太阳的能量"}}>
+
+几百万年前，动植物的遗骸在陆地上和海底越积越多，被一层层岩石埋在下面。在高温和压力下，其中一部分慢慢变成了天然气。那些植物的能量来自阳光，动物的能量来自吃下的植物，所以天然气里的能量，是很久以前从太阳来的。煤的形成方式不一样，主要是死在沼泽里的植物变成的。燃烧天然气，就把它储存的能量释放出来。
+
+</More>
+
+<More title={{"en": "Plants and the soil", "zh": "植物和泥土"}}>
+
+植物的根从泥土里吸收水和矿物质养分，但植物的能量不是从泥土里来的。叶子用光能把水和二氧化碳制成食物，见<TopicLink slug="plant" ch="leaves-make-food">叶子造食物</TopicLink>。太阳还让海水变暖，推动降雨，把雨水送进我们的蓄水池：<TopicLink slug="water" ch="the-water-cycle">太阳推动水循环</TopicLink>。
+
+</More>
+
+</Lang>

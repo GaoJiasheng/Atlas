@@ -1,0 +1,97 @@
+---
+id: "before-you-start"
+order: 0
+kind: "background"
+title: {"en": "Before you start: what energy is", "zh": "开始之前：什么是能量"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: true
+  cutaway: "none"
+  layers: ["rooftop", "lift", "home", "void-deck", "light", "electrical", "kinetic", "sound", "heat"]
+  labels: ["sun", "solar-panels", "grid-cable"]
+  camera: {"position": [6.5, 8.8, 25.0], "target": [0.4, 4.8, 0.0], "fov": 30}
+  summary: {"en": "Energy is what makes things work. It comes in different forms, and machines change it from one form into others.", "zh": "能量让事物能够工作。能量有不同的形式，机器把它从一种形式转换成别的形式。"}
+  note:
+    en: "This block is a model. Only its ground floor and top floor are drawn; the floors in between are left out, and the Sun is not to scale. Each form of energy has one colour wherever it appears. The percentages are worked out in this model from rounded values (marked SIM); real machines vary, and the sources say where each number comes from."
+    zh: "这座组屋是模型：只画了底层和顶层，中间的楼层省略了，太阳的大小和距离也不按比例。每种能量形式在整个主题里只用一种颜色。百分数是在这个模型里用取整的数值算出来的（标着 SIM）；真实的机器各不相同，每个数字的出处都写在来源里。"
+  sim:
+    set: {"chain": "whole"}
+  beats:
+    - caption: {"en": "Energy is what makes things work: it lights a room, turns a fan, boils water and lifts a lift. This block shows where some of that energy comes from and where it goes.", "zh": "能量让事物能够工作：照亮房间、转动风扇、烧开水、把电梯升上去。这座组屋显示了一部分能量从哪里来、到哪里去。"}
+    - labels: ["sun", "solar-panels", "inverter", "grid-cable", "kettle"]
+      caption: {"en": "Each form of energy has its own colour: yellow for light, blue for electrical, green for kinetic, purple for sound and orange for heat. Here the light reaches the roof and the heat rises from the panels and the flat.", "zh": "每种能量形式都有自己的颜色：黄色是光能，蓝色是电能，绿色是动能，紫色是声能，橙色是热能。这里，光照到屋顶，热从太阳能板和住家里冒出来。"}
+    - camera: "ball-drop"
+      sim: {"set": {"chain": "bounce"}}
+      labels: ["tennis-ball", "drop-pole", "surface-tile"]
+      caption: {"en": "Potential energy is stored energy, so it is drawn as a bar beside the ball, not as a stream. A ball held up high has it; so do a wound spring and a battery.", "zh": "势能是储存的能量，所以画成球旁边的一根条，而不是流动的小点。举高的球有势能，上紧的发条和电池也有。"}
+    - labels: ["sun", "solar-panels", "grid-cable", "distribution-board"]
+      caption: {"en": "Follow any stream into a machine: energy goes in as one form and comes out as other forms. None of it disappears.", "zh": "跟着任何一条流走进一台机器：能量以一种形式进去，以别的形式出来，一点也不会消失。"}
+  index: {"parts": ["sun", "solar-panels", "lift-car", "fan-blades", "led-lamp", "speaker", "kettle", "tennis-ball", "bicycle-dynamo"]}
+---
+
+<Lang en>
+
+<Term id="energy">Energy</Term> is what makes things work. It lights a room, turns a fan, boils water and lifts a lift. This model of part of an HDB block lets you follow some of that energy from where it comes from to where it goes. Only the ground floor and the top floor are drawn; the middle floors are left out, and the Sun is not drawn to scale.
+
+Energy comes in different forms. A <Term id="form-of-energy">form of energy</Term> is one kind that energy can take. <Term id="kinetic-energy">Kinetic energy</Term> is the energy of anything that moves. <Term id="potential-energy">Potential energy</Term> is stored energy: a raised ball, a wound spring, a battery, food and fuel all have it, even while they stay still. There are also <Term id="light-energy">light energy</Term>, <Term id="electrical-energy">electrical energy</Term>, <Term id="sound-energy">sound energy</Term>, given out by things that vibrate, and <Term id="heat-energy">heat energy</Term>, which passes from hotter things to cooler ones.
+
+On the model each moving form has one colour wherever it appears: yellow for light, blue for electrical, green for kinetic, purple for sound and orange for heat. The more dots on a path, the bigger the share of energy going that way. Potential energy is stored, not moving, so it is drawn as a bar beside the ball, the swing and the toy car, and as a solid block on the energy-chain card.
+
+Follow any stream into a machine: energy goes in as one form and comes out as other forms. The energy-chain card at the top right shows how it is shared out, and the shares that leave each machine always add up to what went in. None of it disappears. An <Term id="energy-resource">energy resource</Term> is something we get energy from, such as sunlight, natural gas or food. Some energy resources can run out; the energy itself does not.
+
+The chapters ask three questions: what forms of energy are around us, how we use energy every day, and why we should save energy.
+
+<More title={{"en": "Heat is not a substance", "zh": "热不是一种物质"}}>
+
+Heat is a form of energy, not a material that fills an object or leaks out of it. When a hot kettle stands in a cooler room, energy passes from the hotter kettle to the cooler air until they are equally warm. Follow heat moving between air and machines in <TopicLink slug="aircon" ch="where-the-air-goes">Where the air goes</TopicLink>.
+
+</More>
+
+<More title={{"en": "How the percentages are worked out", "zh": "百分数是怎样算出来的"}}>
+
+Each chain starts with <Num s="S1">100 %</Num> of the energy going in. At every machine the model shares out what comes in, rounds each share to a whole number and adds any rounding difference to the heat, so what goes out always adds up to what came in. Unless the card says otherwise, every share is a percentage of the energy at the start of the chain. The shares are the model's choices, written down in the sources; real machines vary.
+
+</More>
+
+<More title={{"en": "Where this topic links", "zh": "和其他主题的联系"}}>
+
+Batteries and circuits are in <TopicLink slug="circuits" ch="inside-a-torch">Inside a torch</TopicLink>. How leaves use light to make food is in <TopicLink slug="plant" ch="leaves-make-food">Leaves make food</TopicLink>, and how the Sun drives the rain is in <TopicLink slug="water" ch="the-water-cycle">The Sun drives the water cycle</TopicLink>. Pushes, pulls and the pull of gravity are in <TopicLink slug="forces" ch="gravity-and-weight">Gravity and weight</TopicLink>.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+<Term id="energy">能量</Term>让事物能够工作。它照亮房间、转动风扇、烧开水、把电梯升上去。这个模型画的是一座组屋的一部分，你可以跟着一部分能量，看它从哪里来、到哪里去。模型只画了底层和顶层，中间的楼层省略了，太阳也没有按比例画。
+
+能量有不同的形式。<Term id="form-of-energy">能量形式</Term>就是能量的种类。运动的东西都有<Term id="kinetic-energy">动能</Term>。<Term id="potential-energy">势能</Term>是储存起来的能量：举高的球、上紧的发条、电池、食物和燃料都有势能，就算它们一动不动也一样。另外还有<Term id="light-energy">光能</Term>、<Term id="electrical-energy">电能</Term>、振动的东西发出的<Term id="sound-energy">声能</Term>，以及从较热的物体传到较冷的物体的<Term id="heat-energy">热能</Term>。
+
+在模型上，每种流动的能量形式无论出现在哪里，都只用一种颜色：黄色是光能，蓝色是电能，绿色是动能，紫色是声能，橙色是热能。一条路径上的小点越多，往那边走的能量就越多。势能是储存着的，不会流动，所以画成球、秋千和玩具车旁边的一根条，在能量链卡上画成一块实心的方块。
+
+跟着任何一条流走进一台机器：能量以一种形式进去，以别的形式出来。右上角的能量链卡显示能量是怎样分出去的；从每台机器出来的各份加起来，总是等于进去的那么多，一点也不会消失。<Term id="energy-resource">能源</Term>是我们取得能量的来源，比如阳光、天然气和食物。有些能源会用完，但能量本身不会。
+
+接下来的几章回答三个问题：我们身边有哪些能量形式？我们每天怎样使用能量？我们为什么要节约能源？
+
+<More title={{"en": "Heat is not a substance", "zh": "热不是一种物质"}}>
+
+热是能量的一种形式，不是一种装满物体、又会漏出来的东西。热水壶放在比较凉的房间里，能量就从较热的水壶传给较冷的空气，直到两边一样暖。在<TopicLink slug="aircon" ch="where-the-air-goes">空气去哪了</TopicLink>里，可以看到热在空气和机器之间怎样传递。
+
+</More>
+
+<More title={{"en": "How the percentages are worked out", "zh": "百分数是怎样算出来的"}}>
+
+每条链都从进去的 <Num s="S1">100 %</Num> 能量开始。在每台机器那里，模型把进来的能量分成几份，每份取整到整数，取整差出来的一点加到热里，所以出去的总是等于进来的。除非卡片另有说明，每一份都是这条链起点能量的百分比。这些比例是模型取的值，写在来源里；真实的机器各不相同。
+
+</More>
+
+<More title={{"en": "Where this topic links", "zh": "和其他主题的联系"}}>
+
+电池和电路在<TopicLink slug="circuits" ch="inside-a-torch">手电筒里面</TopicLink>。叶子怎样用光制造食物，在<TopicLink slug="plant" ch="leaves-make-food">叶子造食物</TopicLink>；太阳怎样推动雨水循环，在<TopicLink slug="water" ch="the-water-cycle">太阳推动水循环</TopicLink>。推、拉和重力，在<TopicLink slug="forces" ch="gravity-and-weight">重力与重量</TopicLink>。
+
+</More>
+
+</Lang>

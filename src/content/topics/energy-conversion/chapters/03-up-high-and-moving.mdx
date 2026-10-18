@@ -1,0 +1,136 @@
+---
+id: "up-high-and-moving"
+order: 3
+title: {"en": "Up high, moving fast", "zh": "举高与运动：势能和动能"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: true
+  cutaway: "none"
+  layers: ["rooftop", "lift", "home", "void-deck", "light", "electrical", "kinetic", "sound", "heat"]
+  labels: ["tennis-ball", "drop-pole", "surface-tile"]
+  camera: {"position": [-3.6, 1.0, 5.8], "target": [-2.7, 0.68, 1.8], "fov": 28}
+  summary: {"en": "Anything raised up has potential energy. As it falls the potential energy changes into kinetic energy, and every bounce or swing changes some of it into heat and sound.", "zh": "被举高的东西有势能。落下时势能转换成动能；每弹一次、每摆一次，都有一部分变成热和声。"}
+  sim:
+    set: {"chain": "bounce", "drop": 100, "surface": "tile"}
+    try:
+      vary: "drop"
+      also: ["surface"]
+      keep: ["surface", {"en": "Same ball", "zh": "同一只球"}]
+      observe: ["bounce-height", "impact-speed"]
+      record: {"chart": {"y": "bounce-height"}}
+      replay: ["bounce-run", "swing-run"]
+      predict:
+        prompt: {"en": "Let the ball go from twice the height. How high will it bounce?", "zh": "从两倍的高度放手，球会弹多高？"}
+        start: {"drop": 50}
+        change: {"drop": 100}
+        observe: "bounce-height"
+        options:
+          - {"id": "more", "label": {"en": "Higher", "zh": "更高"}, "means": "more"}
+          - {"id": "less", "label": {"en": "Lower", "zh": "更低"}, "means": "less"}
+          - {"id": "same", "label": {"en": "The same", "zh": "一样高"}, "means": "same"}
+  beats:
+    - labels: ["tennis-ball", "surface-tile", "drop-pole"]
+      caption: {"en": "Let go from one metre above a hard floor, the ball reached the floor at about four point four metres a second as its potential energy changed into kinetic energy. It bounced back to about fifty-five centimetres; the rest became heat and sound.", "zh": "网球从硬地面上方一米高的地方松手。它下落时，势能转换成动能，碰到地面时速度大约每秒四点四米。它弹回到大约五十五厘米高；其余的能量变成了热和声。"}
+    - sim: {"set": {"let-go": false}}
+      labels: ["tennis-ball", "release-clamp", "drop-pole"]
+      caption: {"en": "Before it is let go, the ball held at one metre is not moving, but it has potential energy because it is high up.", "zh": "松手之前，网球被夹在一米高的地方，没有在动，但因为被举高了，所以有势能。"}
+    - sim: {"set": {"surface": "sand"}}
+      labels: ["surface-sand", "tennis-ball"]
+      caption: {"en": "On sand the ball hardly bounces, to about five centimetres. Pushing the sand aside turned almost all its energy into heat and sound.", "zh": "落在沙上，球几乎不弹，只弹起大约五厘米。推开沙子的时候，它的能量几乎全部变成了热和声。"}
+    - camera: "lift-core"
+      sim: {"set": {"chain": "solar", "lift-at": "top"}}
+      labels: ["lift-car", "counterweight", "lift-motor"]
+      caption: {"en": "Raise something and you store energy in it. The lift car at the top floor has more potential energy than it had at the ground floor, even while it stands still.", "zh": "把东西举高，就把能量储存在它里面。轿厢停在顶层时，即使一动不动，它的势能也比在底层时多。"}
+    - camera: {"position": [11.8, 2.7, 7.8], "target": [9.9, 1.25, 0.2], "fov": 30}
+      sim: {"set": {"chain": "swing", "let-go": false}}
+      labels: ["swing-seat", "swing-frame"]
+      caption: {"en": "Pulled back, the swing is higher up, so it has potential energy. Let go, it changes potential energy into kinetic energy and back again: fastest at the lowest point, still for an instant at each end.", "zh": "秋千被拉到后面，位置升高了，所以有势能。一松手，它把势能转换成动能，又转换回势能：在最低点最快，在两头的最高点停住一瞬间。"}
+    - camera: {"position": [11.8, 2.7, 7.8], "target": [9.9, 1.25, 0.2], "fov": 30}
+      sim: {"set": {"chain": "swing"}}
+      labels: ["swing-seat", "swing-frame"]
+      caption: {"en": "Each swing is a little lower, because some energy becomes heat and sound at the hooks and in the air. The run is paused at a turning point; without a push the swing would keep going lower until it stopped.", "zh": "每摆一次都低一点，因为一部分能量在挂钩处和空气里变成了热和声。画面停在一个最高点；没有人推，秋千会越摆越低，最后停下。"}
+  index: {"parts": ["lift-car", "counterweight", "tennis-ball", "release-clamp", "drop-pole", "surface-tile", "surface-rubber", "surface-carpet", "surface-sand", "swing-seat"]}
+---
+
+<Lang en>
+
+Raise something and you store energy in it. The lift car at the top floor has more potential energy than it had at the ground floor, even while it waits there without moving. A thing does not have to be moving to have energy. <FlyTo preset="lift-core">Look at the lift</FlyTo>
+
+A tennis ball held one metre above the floor has potential energy too. Let go, and as it falls its potential energy changes into kinetic energy: it goes faster and faster, and is fastest just as it reaches the floor. The three bars beside the pole follow the change. The potential-energy bar shrinks as the kinetic-energy bar grows, and together they stay the same. <FlyTo preset="ball-drop">Look at the ball</FlyTo>
+
+The ball bounces back up, but not to where it started: on tile, to about <Num s="S1">55 cm</Num> in this model. The rest of the energy has not vanished. As the ball squashed against the floor, some energy became heat in the ball and the floor, and some became the sound of the bounce. The three bars still add up to the whole. On softer floors more becomes heat and sound, and on sand the ball hardly bounces.
+
+<Figure src="figures/energy-conversion-bounce" alt={{"en": "Pencil drawing of a tennis ball drawn many times along its path as it bounces from left to right across a tiled floor, starting high beside a pole with tick marks. Each arc is lower than the one before, the ball squashes a little each time it lands, and at the right it rolls.", "zh": "铅笔画：一只网球从左到右在地砖上弹跳，沿路径画了很多次。它从一根带刻度的杆旁高处出发，每一道弧都比前一道低，每次落地都压扁一点，最右边球在地上滚。"}} caption={{"en": "A ball bounces lower each time, until it only rolls. An illustration made for this topic.", "zh": "球一次比一次弹得低，最后只在地上滚。为本主题画的示意图。"}} />
+
+The swing changes potential energy into kinetic energy and back again. It is fastest at the lowest point and still for an instant at each highest point. Each swing is a little lower, because some energy becomes heat and sound at the hooks and in the air. Without a push, it slowly stops.
+
+In the try-it card, change the drop height with the same ball on the same floor. Changing the floor at the same height is a second, separate fair test: keep each table to one change.
+
+<More title={{"en": "Energy is not a force", "zh": "能量不是力"}}>
+
+A force is a push or a pull. The raised ball falls because the Earth pulls it down; as it falls, its potential energy changes into kinetic energy. Force and energy are different things: a force can start or stop a movement, and energy is what lets things work. The forces on falling things are in <TopicLink slug="forces" ch="gravity-and-weight">Gravity and weight</TopicLink>.
+
+</More>
+
+<More title={{"en": "How much energy is in the ball", "zh": "球里有多少能量"}}>
+
+Energy can be measured in joules. Raising the <Num s="S1">58 g</Num> ball through <Num s="S1">1 m</Num> gives it about <Num s="S1">0.57 J</Num> of potential energy: its mass in kilograms, times <Num s="S22">9.8</Num>, times the height in metres. On tile, about <Num s="S1">55 %</Num> of that is left as potential energy at the top of the bounce, and <Num s="S1">45 %</Num> has become heat and sound. You do not need to work this out; you will meet joules again in later science lessons.
+
+</More>
+
+<More title={{"en": "The lift's counterweight", "zh": "电梯的对重"}}>
+
+The lift's ropes go over the sheave to a counterweight, which goes down as the car goes up. A counterweight usually balances the car and part of the load it is built to carry, often about half, so the motor only has to make up the difference and overcome friction. To keep it simple, the energy chain in this model follows only the car and leaves the counterweight out.
+
+</More>
+
+<More title={{"en": "About this model", "zh": "关于这个模型"}}>
+
+The fall and the bounce are shown slowed down <Num s="S1">2 times</Num>, and the run stops at the top of the first bounce: a pause for looking, not a ball hanging in the air. The model leaves out the air. On tile the ball bounces back to <Num s="S1">55 %</Num> of its drop height, close to how a tennis ball bounces on a hard test block; the values for rubber, carpet and sand are illustrative. The swing takes about <Num s="S24">2.9 s</Num> to swing there and back. In this model it turns <Num s="S1">3 %</Num> of the energy it has left into heat and sound on every swing from one side to the other, an illustrative value, and the run pauses after <Num s="S1">8</Num> swings at a turning point, with about <Num s="S1">78 %</Num> left. Run again pulls it back and lets it go once more. In later science lessons you will learn separate names for the energy stored in raised things, in springs and in fuels; here they are all potential energy.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+把东西举高，就把能量储存在它里面。轿厢停在顶层时，即使在那里一动不动，它的势能也比在底层时多。东西不一定要在运动才有能量。<FlyTo preset="lift-core">看电梯</FlyTo>
+
+网球被举到离地面一米高的地方，也有势能。一松手，它一边下落，势能一边转换成动能：它越落越快，碰到地面的那一刻最快。刻度杆旁边的三根条跟着变化：势能条变短，动能条变长，两根加起来不变。<FlyTo preset="ball-drop">看网球</FlyTo>
+
+球弹了起来，但回不到原来的高度：在这个模型里，落在地砖上只弹回到大约 <Num s="S1">55 cm</Num>。其余的能量并没有消失。球被压扁在地面上时，一部分能量变成了球和地面里的热，一部分变成了落地时“咚”的一声。三根条加起来还是全部。地面越软，变成热和声的就越多；落在沙上，球几乎不弹。
+
+<Figure src="figures/energy-conversion-bounce" alt={{"en": "Pencil drawing of a tennis ball drawn many times along its path as it bounces from left to right across a tiled floor, starting high beside a pole with tick marks. Each arc is lower than the one before, the ball squashes a little each time it lands, and at the right it rolls.", "zh": "铅笔画：一只网球从左到右在地砖上弹跳，沿路径画了很多次。它从一根带刻度的杆旁高处出发，每一道弧都比前一道低，每次落地都压扁一点，最右边球在地上滚。"}} caption={{"en": "A ball bounces lower each time, until it only rolls. An illustration made for this topic.", "zh": "球一次比一次弹得低，最后只在地上滚。为本主题画的示意图。"}} />
+
+秋千把势能转换成动能，又转换回势能。它在最低点最快，在每个最高点停住一瞬间。每摆一次都低一点，因为一部分能量在挂钩处和空气里变成了热和声。没有人推，它就慢慢停下来。
+
+在试一试卡片里，用同一只球、同一种地面，只改变放手的高度。在同样的高度换地面，是另一个公平测试：每张表只改变一样东西。
+
+<More title={{"en": "Energy is not a force", "zh": "能量不是力"}}>
+
+力是推或拉。举高的球会落下，是因为地球把它往下拉；它下落时，势能转换成动能。力和能量是两回事：力可以让运动开始或停止，能量则是让事物能够工作的东西。下落的物体受到什么力，见<TopicLink slug="forces" ch="gravity-and-weight">重力与重量</TopicLink>。
+
+</More>
+
+<More title={{"en": "How much energy is in the ball", "zh": "球里有多少能量"}}>
+
+能量可以用焦耳来量。把 <Num s="S1">58 g</Num> 的球举高 <Num s="S1">1 m</Num>，它就有大约 <Num s="S1">0.57 J</Num> 的势能：用千克表示的质量，乘以 <Num s="S22">9.8</Num>，再乘以用米表示的高度。落在地砖上，弹到最高点时大约还剩 <Num s="S1">55 %</Num> 是势能，<Num s="S1">45 %</Num> 已经变成热和声。这个不必会算；焦耳以后的科学课还会学到。
+
+</More>
+
+<More title={{"en": "The lift's counterweight", "zh": "电梯的对重"}}>
+
+电梯的钢丝绳绕过曳引轮，另一头吊着对重；轿厢上升，对重就下降。对重一般平衡轿厢本身，再加上额定载重的一部分，常见的是一半左右，所以电动机只要补上两边的差额，再克服摩擦就行。为了简单，这个模型的能量链只跟着轿厢走，没有把对重算进去。
+
+</More>
+
+<More title={{"en": "About this model", "zh": "关于这个模型"}}>
+
+下落和弹跳放慢了 <Num s="S1">2 倍</Num>，画面停在第一次弹到的最高点：这是为了方便观察的暂停，不是球悬在半空。模型没有算空气的影响。落在地砖上，球弹回到下落高度的 <Num s="S1">55 %</Num>，和网球在硬试块上的弹跳差不多；橡胶垫、地毯和沙的数值只是示意。秋千来回摆一次约 <Num s="S24">2.9 s</Num>。在这个模型里，秋千每从一边摆到另一边，就把剩下的能量的 <Num s="S1">3 %</Num> 变成热和声，这是示意的数值；摆了 <Num s="S1">8</Num> 次以后，画面停在一个最高点，这时大约还剩 <Num s="S1">78 %</Num>。按“再跑一次”，就是把它重新拉起来再松手。以后的科学课会给举高的东西、弹簧和燃料里储存的能量各取一个名字；在这里，它们都叫势能。
+
+</More>
+
+</Lang>

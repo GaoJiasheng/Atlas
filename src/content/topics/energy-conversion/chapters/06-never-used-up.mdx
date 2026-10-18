@@ -1,0 +1,118 @@
+---
+id: "never-used-up"
+order: 6
+title: {"en": "Energy is never used up", "zh": "能量不会用完"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: true
+  cutaway: "none"
+  layers: ["rooftop", "lift", "home", "void-deck", "light", "electrical", "kinetic", "sound", "heat"]
+  labels: ["grid-cable", "distribution-board", "led-lamp"]
+  camera: {"position": [2.9, 5.7, 11.5], "target": [-1.8, 5.15, -1.0], "fov": 30}
+  summary: {"en": "Energy is never used up. At every step it changes form, and in the end most of it spreads out as heat that is hard to use again. Saving energy means wasting less of it along the way.", "zh": "能量不会用完。每一步它都在转换形式，最后大多散成很难再利用的热。节约能源，就是让路上浪费的少一些。"}
+  sim:
+    set: {"chain": "gas-to-home", "lamp-type": "led"}
+    try:
+      vary: "lamp-type"
+      keep: [{"en": "Same brightness", "zh": "同样的亮度"}]
+      observe: ["same-light", "useful", "heat"]
+      record: {"chart": {"y": "same-light"}}
+      predict:
+        prompt: {"en": "Change the LED lamp for a filament lamp that is just as bright. Will more or less heat go into the air?", "zh": "把 LED 灯换成一样亮的白炽灯，散到空气里的热会更多还是更少？"}
+        start: {"lamp-type": "led"}
+        change: {"lamp-type": "filament"}
+        observe: "heat"
+        options:
+          - {"id": "more", "label": {"en": "More", "zh": "更多"}, "means": "more"}
+          - {"id": "less", "label": {"en": "Less", "zh": "更少"}, "means": "less"}
+          - {"id": "same", "label": {"en": "The same", "zh": "一样"}, "means": "same"}
+  beats:
+    - labels: ["grid-cable", "distribution-board", "led-lamp"]
+      caption: {"en": "Follow energy from natural gas to a lamp in the flat. At the power station, in the cables and at the lamp, some changes into heat each time. None of it disappears.", "zh": "跟着能量从天然气走到家里的一盏灯。在发电厂、在电缆里、在灯里，每一步都有一部分变成热，但没有一份消失。"}
+    - camera: {"position": [6.5, 8.5, 22.0], "target": [0.0, 4.6, 0.0], "fov": 30}
+      layers: ["rooftop", "lift", "home", "void-deck", "heat"]
+      sim: {"set": {"chain": "whole"}}
+      labels: ["solar-panels", "inverter", "grid-cable", "kettle", "fan-blades"]
+      caption: {"en": "Show only the heat. The panels, the inverter, the cables, the fan, the lamp, the speaker and the kettle are all giving off heat to the air around them.", "zh": "只显示热。太阳能板、逆变器、电缆、风扇、灯、音箱和水壶，都在向周围的空气散热。"}
+    - sim: {"set": {"lamp-type": "filament"}}
+      labels: ["led-lamp", "grid-cable"]
+      caption: {"en": "A filament lamp changes only about a tenth of its electrical energy into light; the rest becomes heat. For the same light it needs four times as much energy as the LED lamp.", "zh": "白炽灯只把大约十分之一的电能变成光，其余都变成热。同样亮，它要用的能量是 LED 灯的四倍。"}
+    - labels: ["led-lamp", "distribution-board"]
+      caption: {"en": "An LED lamp turns much more of its energy into light, so it needs only about a quarter of the energy for the same light. Less energy is wasted along the way.", "zh": "LED 灯把多得多的能量变成光，同样亮只需要大约四分之一的能量，路上浪费的也就少了。"}
+    - camera: "living-room"
+      sim: {"set": {"chain": "home", "appliance": "fan"}}
+      labels: ["fan-blades", "fan-motor"]
+      caption: {"en": "Energy is not used up, but the heat that spreads into the air is hard to turn back into electricity. That is why we save energy: switch off what we are not using, and set the air conditioner at twenty-five degrees or higher.", "zh": "能量不会用完，但散进空气里的热很难再变回电。所以我们要节约能源：不用的电器关掉，空调设在二十五摄氏度或更高。"}
+    - camera: {"position": [6.5, 8.8, 25.0], "target": [0.4, 4.8, 0.0], "fov": 30}
+      sim: {"set": {"chain": "whole"}}
+      labels: ["sun", "solar-panels", "grid-cable"]
+      caption: {"en": "Almost all the energy in this block started out as light from the Sun: in the panels today, and in the natural gas long ago.", "zh": "这座组屋里几乎所有的能量，最初都是太阳的光：太阳能板里的是今天的阳光，天然气里的是很久以前的阳光。"}
+  index: {"parts": ["grid-cable", "distribution-board", "led-lamp", "fan-blades", "kettle", "speaker", "solar-panels", "inverter"]}
+---
+
+<Lang en>
+
+Follow energy all the way from natural gas to a lamp in the flat. At the power station, burning the gas releases its stored energy, and part of it is changed into electrical energy; the rest becomes heat. In the cables a little more becomes heat. At the lamp, some becomes light and the rest heat. Even the light, once it falls on the walls and the furniture, ends up as heat. At every step, the energy that goes in equals the energy that comes out: none of it disappears. <FlyTo preset="living-room">Look at the lamp</FlyTo>
+
+So energy is never used up. What changes is how useful it is. Spread out as heat in the air, it is very hard to collect and turn back into electricity or movement. Energy that ends in a form we did not want, and cannot easily use again, is wasted energy.
+
+The lamp you choose makes a difference. A filament lamp changes only about a tenth of its electrical energy into light. An LED lamp gives the same light with at least <Num s="S15">75 %</Num> less electrical energy; in this model it needs <Num s="S1">25 %</Num> of the energy, a quarter, for the same light. In the try-it card, keep the brightness the same, change the lamp, and compare the energy each one needs and the heat each one gives off.
+
+To <Term id="save-energy">save energy</Term> means to waste less of it. Most of Singapore's electricity comes from natural gas, a fuel that will run out one day, and burning it gives off carbon dioxide. Switching off what we are not using, choosing LED lamps and setting the air conditioner at <Num s="S31">25 °C</Num> or higher all mean less gas burnt for the same jobs.
+
+And almost all of this energy started out as light from the Sun: in the panels on the roof today, and in the natural gas long ago.
+
+<More title={{"en": "Saving energy, two meanings", "zh": "节约能源的两层意思"}}>
+
+Scientists say that energy is conserved: the total amount never changes, it only changes form. In everyday life, conserving energy means something else: using less of our energy resources to get a job done, by wasting less along the way. This topic says "save energy" for the everyday meaning.
+
+</More>
+
+<More title={{"en": "The simulated chain", "zh": "模拟的能量链"}}>
+
+In this model, start with <Num s="S1">100 %</Num> of the energy in the gas for a filament lamp. The power station sends <Num s="S1">55 %</Num> on as electrical energy and gives off <Num s="S1">45 %</Num> as heat. The cables lose about <Num s="S1">2 %</Num> as heat, and the filament lamp changes <Num s="S1">5 %</Num> into light and <Num s="S1">48 %</Num> into heat. An LED lamp giving the same light needs only <Num s="S1">25 %</Num> of that gas, and its light is the same <Num s="S1">5 %</Num>. Every share is rounded to a whole number, with the rounding added to the heat.
+
+</More>
+
+<More title={{"en": "Why save energy in Singapore", "zh": "新加坡为什么要节约能源"}}>
+
+In 2024 natural gas was the fuel for <Num s="S5">94.0 %</Num> of Singapore's electricity. EMA's advice for homes includes switching off what is not in use, choosing appliances with more ticks on their energy label, using LED lamps, and setting the air conditioner at <Num s="S31">25 °C</Num> or higher: each degree higher uses about <Num s="S31">10 %</Num> less energy. How an air conditioner can be used well is in <TopicLink slug="aircon" ch="efficiency-and-use">Using it well</TopicLink>.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+跟着能量从天然气一直走到家里的一盏灯。在发电厂，燃烧天然气把它储存的能量释放出来，其中一部分转换成电能，其余的变成热。在电缆里，又有一点变成热。到了灯那里，一部分变成光，其余变成热。就连光，照到墙上和家具上以后，最后也变成了热。每一步，进去的能量都等于出来的能量：一点也没有消失。<FlyTo preset="living-room">看灯</FlyTo>
+
+所以能量不会用完。改变的是它还有多大用处。散在空气里的热，很难再收集起来，变回电或者运动。能量最后变成了我们不想要、又很难再用的形式，这一部分就是浪费掉的能量。
+
+选什么样的灯有差别。白炽灯只把大约十分之一的电能变成光。LED 灯给出同样的光，至少少用 <Num s="S15">75 %</Num> 的电能；在这个模型里，同样亮只要 <Num s="S1">25 %</Num> 的能量，也就是四分之一。在试一试卡片里，保持亮度不变，只换灯，比较每种灯需要的能量和散出的热。
+
+<Term id="save-energy">节约能源</Term>就是少浪费能量。新加坡的电大多用天然气发。天然气是总有一天会用完的燃料，燃烧它还会放出二氧化碳。不用的电器关掉、选用 LED 灯、空调设在 <Num s="S31">25 °C</Num> 或更高，做同样的事就能少烧一些天然气。
+
+而这里几乎所有的能量，最初都是太阳的光：屋顶太阳能板里的是今天的阳光，天然气里的是很久以前的阳光。
+
+<More title={{"en": "Saving energy, two meanings", "zh": "节约能源的两层意思"}}>
+
+科学家说能量是守恒的：总量永远不变，只是改变形式。日常生活里说的节约能源，意思不一样：做同一件事，少用一些能源，路上少浪费一些。本主题说的“节约能源”，是日常生活里的这层意思。
+
+</More>
+
+<More title={{"en": "The simulated chain", "zh": "模拟的能量链"}}>
+
+在这个模型里，用白炽灯时，从天然气里的 <Num s="S1">100 %</Num> 能量开始。发电厂把 <Num s="S1">55 %</Num> 变成电能送出去，<Num s="S1">45 %</Num> 变成热散掉。电缆里约有 <Num s="S1">2 %</Num> 变成热，白炽灯把 <Num s="S1">5 %</Num> 变成光、<Num s="S1">48 %</Num> 变成热。换成同样亮的 LED 灯，只要那么多天然气的 <Num s="S1">25 %</Num>，得到的光也同样是 <Num s="S1">5 %</Num>。每一份都取整到整数，取整差出来的一点加到热里。
+
+</More>
+
+<More title={{"en": "Why save energy in Singapore", "zh": "新加坡为什么要节约能源"}}>
+
+2024 年，新加坡的电有 <Num s="S5">94.0 %</Num> 是用天然气发的。能源市场管理局给家庭的建议包括：不用的电器关掉，选购能效标签上勾数多的电器，用 LED 灯，空调设在 <Num s="S31">25 °C</Num> 或更高：每调高一度，大约少用 <Num s="S31">10 %</Num> 的能量。空调怎样用得好，见<TopicLink slug="aircon" ch="efficiency-and-use">用得好、用得省</TopicLink>。
+
+</More>
+
+</Lang>

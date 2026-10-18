@@ -1,0 +1,133 @@
+---
+id: "pedal-power"
+order: 5
+title: {"en": "Pedal power: making electrical energy", "zh": "踩出来的电能"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: true
+  cutaway: "none"
+  layers: ["rooftop", "lift", "home", "void-deck", "light", "electrical", "kinetic", "sound", "heat"]
+  labels: ["rear-wheel", "bicycle-dynamo", "headlamp"]
+  camera: {"position": [2.0, 1.45, 4.9], "target": [0.62, 0.64, 1.6], "fov": 30}
+  summary: {"en": "A dynamo changes kinetic energy into electrical energy. Turn the wheel faster and the lamp glows brighter; stop, and it goes out.", "zh": "自行车发电机把动能转换成电能。车轮转得越快，车灯越亮；一停下，灯就灭。"}
+  sim:
+    set: {"chain": "dynamo", "speed": 0, "dynamo-on": true}
+    try:
+      vary: "speed"
+      also: ["dynamo-on"]
+      keep: [{"en": "Same lamp, same dynamo", "zh": "同一盏灯、同一个发电机"}]
+      observe: ["lamp-power", "brightness"]
+      record: {"chart": {"y": "lamp-power"}}
+      predict:
+        prompt: {"en": "Stop pedalling. What happens to the lamp?", "zh": "停止踩踏板，车灯会怎样？"}
+        start: {"speed": 15}
+        change: {"speed": 0}
+        observe: "lamp-power"
+        options:
+          - {"id": "less", "label": {"en": "It slowly dims", "zh": "慢慢变暗"}, "means": "less"}
+          - {"id": "zero", "label": {"en": "It goes out", "zh": "熄灭"}, "means": "zero"}
+          - {"id": "same", "label": {"en": "It stays as bright", "zh": "一样亮"}, "means": "same"}
+  beats:
+    - labels: ["rear-wheel", "bicycle-dynamo", "headlamp"]
+      caption: {"en": "This bicycle stands upside down so that its back wheel can turn freely. A small dynamo presses on the tyre and is wired to the lamp.", "zh": "这辆自行车倒放着，后轮可以自由转动。一个小发电机压在轮胎上，用导线接到车灯。"}
+    - sim: {"set": {"speed": 15}}
+      labels: ["crank-pedals", "rear-wheel", "bicycle-dynamo", "headlamp"]
+      caption: {"en": "Turn the pedals and the wheel spins the dynamo. The dynamo changes kinetic energy into electrical energy, and the lamp lights up.", "zh": "踩动踏板，车轮带动发电机转动。发电机把动能转换成电能，车灯亮了。"}
+    - camera: {"position": [1.52, 0.74, 2.12], "target": [1.27, 0.56, 1.63], "fov": 30}
+      cutaway: "dynamo"
+      sim: {"set": {"speed": 15}}
+      labels: ["dynamo-magnet", "dynamo-coil"]
+      caption: {"en": "Inside, a magnet spins beside a coil of wire. The changing magnetic field makes a current flow in the coil and round the circuit to the lamp.", "zh": "发电机里面，一块磁铁在一圈圈导线旁边转动。变化的磁场让线圈里产生电流，电流沿着电路流到车灯。"}
+    - sim: {"set": {"speed": 25}}
+      labels: ["headlamp", "rear-wheel"]
+      caption: {"en": "Pedal faster and the lamp glows brighter, though by less and less. In this model it gets two point eight watts at twenty-five kilometres an hour, close to its full three watts.", "zh": "踩得越快，车灯越亮，但亮得越来越少。在这个模型里，时速二十五公里时，车灯得到二点八瓦，接近满额的三瓦。"}
+    - labels: ["headlamp", "bicycle-dynamo"]
+      caption: {"en": "Stop turning and the lamp goes out at once. This dynamo gives electrical energy only while it is being turned.", "zh": "一停下，车灯马上熄灭。这个发电机只有在转动时才产生电能。"}
+    - sim: {"set": {"speed": 15, "dynamo-on": false}}
+      labels: ["bicycle-dynamo", "rear-wheel", "headlamp"]
+      caption: {"en": "Swing the dynamo off the tyre and the wheel is easier to turn, but the lamp stays dark. With it on, you must push harder: the electrical energy comes from your kinetic energy.", "zh": "把发电机从轮胎上扳开，车轮更好转，但车灯不亮。压上发电机时要更用力：电能来自你踩踏板的动能。"}
+  index: {"parts": ["crank-pedals", "rear-wheel", "bicycle-dynamo", "dynamo-magnet", "dynamo-coil", "dynamo-wires", "headlamp"]}
+---
+
+<Lang en>
+
+This bicycle stands upside down in the void deck, resting on its saddle and handlebars, so that its back wheel can turn freely. A small <Term id="dynamo">dynamo</Term> presses on the side of the tyre and is wired to the headlamp. A dynamo is a small generator: a machine that changes kinetic energy into electrical energy. <FlyTo preset="bicycle">Look at the bicycle</FlyTo>
+
+Turn the pedals and the chain turns the back wheel, and the tyre spins the dynamo's roller. Inside the dynamo a magnet spins beside a coil of wire. The changing magnetic field makes a current flow in the coil and round the circuit to the lamp, which changes the electrical energy into light energy and heat. The dynamo does not make energy: it changes the kinetic energy that you give the wheel.
+
+Pedal faster and the lamp glows brighter, though by less and less at the highest speeds. In this model the lamp gets <Num s="S1">2.59 W</Num> at <Num s="S1">15 km/h</Num> and <Num s="S1">2.84 W</Num> at <Num s="S1">25 km/h</Num>, close to its full <Num s="S1">3 W</Num>. Stop, and it goes out at once: this lamp has no battery, so it gets electrical energy only while the wheel turns. In the try-it card, keep the same lamp and dynamo, change only the speed, and record the lamp's power.
+
+Swing the dynamo off the tyre and the wheel turns more easily, but the lamp stays dark. With the dynamo on, you have to push harder, because the electrical energy comes from your kinetic energy. Most of what you put in becomes heat and sound in the dynamo and in the lamp: in this model only about <Num s="S1">3 %</Num> leaves the lamp as light.
+
+A power station works in the same way, but much larger. In a gas-fired power station, burning gas drives turbines, and the turbines turn generators that change their kinetic energy into electrical energy.
+
+<Figure src="figures/energy-conversion-power-station" alt={{"en": "Pencil drawing of a power-station hall in cutaway: a long gas turbine opened to show rows of blades, joined on one shaft to a large generator whose casing is cut back to show the copper windings and the rotor; behind them a tall boiler that uses the hot exhaust, a smaller steam turbine, and cables leading to a transformer.", "zh": "铅笔画：剖开的发电厂机房。一台长长的燃气涡轮机剖开露出一排排叶片，同一根轴连着一台大发电机，发电机外壳切开，露出铜线绕组和转子；后面是一座利用高温废气的高大锅炉、一台较小的蒸汽涡轮机，还有通往变压器的电缆。"}} caption={{"en": "Inside a gas-fired power station: turbines turn a generator, like a giant version of the bicycle dynamo. An illustration made for this topic.", "zh": "燃气发电厂里面：涡轮机带动发电机转动，就像放大很多倍的自行车发电机。为本主题画的示意图。"}} />
+
+<More title={{"en": "Magnets and coils", "zh": "磁铁和线圈"}}>
+
+A current in a coil can make a magnet, as in <TopicLink slug="magnets" ch="making-magnets">Making a magnet</TopicLink>. A dynamo works the other way round: a magnet moving near a coil makes a current flow, as long as the circuit is closed. In later science lessons this is called electromagnetic induction. The model draws the magnet turning far more slowly than a real one.
+
+</More>
+
+<More title={{"en": "Why the lamp stops getting much brighter", "zh": "车灯为什么后来亮不了多少"}}>
+
+In this model the current that the coil can give has a limit, so the lamp's power rises quickly at first and then levels off below its <Num s="S1">3 W</Num>: <Num s="S1">0.00 W</Num>, <Num s="S1">1.23 W</Num>, <Num s="S1">2.21 W</Num>, <Num s="S1">2.59 W</Num>, <Num s="S1">2.75 W</Num> and <Num s="S1">2.84 W</Num> at <Num s="S1">0 km/h</Num>, <Num s="S1">5 km/h</Num>, <Num s="S1">10 km/h</Num>, <Num s="S1">15 km/h</Num>, <Num s="S1">20 km/h</Num> and <Num s="S1">25 km/h</Num>. The shape of this curve follows real bicycle dynamos, but the numbers are a model, not a test of a real dynamo. A common rating for bicycle dynamos is <Num s="S27">6 V</Num> and <Num s="S27">3 W</Num>; some dynamo lamps keep glowing for a few minutes after the bicycle stops, but this one does not.
+
+</More>
+
+<More title={{"en": "Where the pedalling energy goes", "zh": "踩踏板的能量去了哪里"}}>
+
+In this model the dynamo changes <Num s="S1">30 %</Num> of the kinetic energy it receives into electrical energy, <Num s="S1">65 %</Num> into heat and <Num s="S1">5 %</Num> into its whirring sound. The filament headlamp changes only about a tenth of its electrical energy into light. So only about <Num s="S1">3 %</Num> of the energy turning the dynamo leaves the lamp as light; all the rest becomes heat and sound. These shares are illustrative.
+
+</More>
+
+<More title={{"en": "Power stations", "zh": "发电厂"}}>
+
+A gas-fired power station changes only part of the energy in its fuel into electrical energy; the rest becomes heat. How much varies from station to station: one of the best modern stations has reached about <Num s="S32">63 %</Num>. This topic's model uses <Num s="S1">55 %</Num>. Most of Singapore's power stations burn natural gas.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+这辆自行车倒放在组屋楼下，车座和车把着地，后轮可以自由转动。一个小小的<Term id="dynamo">自行车发电机</Term>压在轮胎侧面，用导线接到车灯。自行车发电机是一种小型的发电机：一种把动能转换成电能的机器。<FlyTo preset="bicycle">看自行车</FlyTo>
+
+踩动踏板，链条带动后轮转动，轮胎又带动发电机的小滚轮。发电机里面，一块磁铁在一圈圈导线旁边转动。变化的磁场让线圈里产生电流，电流沿着电路流到车灯，车灯把电能转换成光能和热。发电机并不制造能量：它转换的是你给车轮的动能。
+
+踩得越快，车灯越亮，但速度很高时，亮度增加得越来越少。在这个模型里，速度是 <Num s="S1">15 km/h</Num> 时，车灯得到 <Num s="S1">2.59 W</Num>；<Num s="S1">25 km/h</Num> 时得到 <Num s="S1">2.84 W</Num>，接近满额的 <Num s="S1">3 W</Num>。一停下，灯马上就灭：这盏灯没有电池，只有车轮在转时才得到电能。在试一试卡片里，用同一盏灯、同一个发电机，只改变速度，把车灯的功率记下来。
+
+把发电机从轮胎上扳开，车轮更好转，但车灯不亮。压上发电机时，你得更用力踩，因为电能来自你的动能。你踩进去的能量，大部分在发电机和车灯里变成了热和声：在这个模型里，只有大约 <Num s="S1">3 %</Num> 从车灯变成光出来。
+
+发电厂用的是同样的道理，只是大得多。在燃气发电厂里，燃烧天然气推动涡轮机，涡轮机带动发电机，把动能转换成电能。
+
+<Figure src="figures/energy-conversion-power-station" alt={{"en": "Pencil drawing of a power-station hall in cutaway: a long gas turbine opened to show rows of blades, joined on one shaft to a large generator whose casing is cut back to show the copper windings and the rotor; behind them a tall boiler that uses the hot exhaust, a smaller steam turbine, and cables leading to a transformer.", "zh": "铅笔画：剖开的发电厂机房。一台长长的燃气涡轮机剖开露出一排排叶片，同一根轴连着一台大发电机，发电机外壳切开，露出铜线绕组和转子；后面是一座利用高温废气的高大锅炉、一台较小的蒸汽涡轮机，还有通往变压器的电缆。"}} caption={{"en": "Inside a gas-fired power station: turbines turn a generator, like a giant version of the bicycle dynamo. An illustration made for this topic.", "zh": "燃气发电厂里面：涡轮机带动发电机转动，就像放大很多倍的自行车发电机。为本主题画的示意图。"}} />
+
+<More title={{"en": "Magnets and coils", "zh": "磁铁和线圈"}}>
+
+线圈里的电流可以造出磁铁，见<TopicLink slug="magnets" ch="making-magnets">制作磁铁</TopicLink>。发电机正好反过来：只要电路是闭合的，磁铁在线圈旁边运动，就会让电流流动。以后的科学课把这叫做电磁感应。模型里的磁铁画得比真的转得慢得多。
+
+</More>
+
+<More title={{"en": "Why the lamp stops getting much brighter", "zh": "车灯为什么后来亮不了多少"}}>
+
+在这个模型里，线圈能给出的电流有一个上限，所以车灯的功率一开始升得很快，后来就慢慢平了，停在 <Num s="S1">3 W</Num> 以下：速度为 <Num s="S1">0 km/h</Num>、<Num s="S1">5 km/h</Num>、<Num s="S1">10 km/h</Num>、<Num s="S1">15 km/h</Num>、<Num s="S1">20 km/h</Num>、<Num s="S1">25 km/h</Num> 时，分别是 <Num s="S1">0.00 W</Num>、<Num s="S1">1.23 W</Num>、<Num s="S1">2.21 W</Num>、<Num s="S1">2.59 W</Num>、<Num s="S1">2.75 W</Num>、<Num s="S1">2.84 W</Num>。曲线的形状和真实的自行车发电机一样，但数字是模型，不是真发电机的测试结果。自行车发电机常见的规格是 <Num s="S27">6 V</Num>、<Num s="S27">3 W</Num>；有些发电机车灯在车停下后还能亮几分钟，这盏不会。
+
+</More>
+
+<More title={{"en": "Where the pedalling energy goes", "zh": "踩踏板的能量去了哪里"}}>
+
+在这个模型里，发电机把收到的动能的 <Num s="S1">30 %</Num> 转换成电能，<Num s="S1">65 %</Num> 变成热，<Num s="S1">5 %</Num> 变成呼呼声。白炽车灯只把大约十分之一的电能变成光。所以带动发电机的能量，只有大约 <Num s="S1">3 %</Num> 从车灯变成光出来，其余全部变成热和声。这些比例只是示意。
+
+</More>
+
+<More title={{"en": "Power stations", "zh": "发电厂"}}>
+
+燃气发电厂只把燃料里的一部分能量转换成电能，其余的变成热。各座电厂转换的多少不一样：现代最好的电厂之一达到了大约 <Num s="S32">63 %</Num>。本主题的模型取 <Num s="S1">55 %</Num>。新加坡的发电厂大多烧天然气。
+
+</More>
+
+</Lang>

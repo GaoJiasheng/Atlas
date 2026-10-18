@@ -1,0 +1,166 @@
+{
+  "terms": [
+    {
+      "id": "energy",
+      "term": { "en": "Energy", "zh": "能量" },
+      "definition": {
+        "en": "What makes things work. Energy comes in different forms and can be changed from one form into others, but it is never made from nothing and never disappears.",
+        "zh": "让事物能够工作的东西。能量有不同的形式，可以从一种形式转换成别的形式，但不会凭空产生，也不会凭空消失。"
+      },
+      "see": ["form-of-energy", "energy-conversion"]
+    },
+    {
+      "id": "form-of-energy",
+      "term": { "en": "Form of energy", "zh": "能量形式" },
+      "definition": {
+        "en": "One kind that energy can take. Six forms are named here: kinetic, potential, light, electrical, sound and heat energy.",
+        "zh": "能量的一种样子。这里讲六种：动能、势能、光能、电能、声能和热能。"
+      },
+      "see": ["energy", "energy-conversion"]
+    },
+    {
+      "id": "kinetic-energy",
+      "term": { "en": "Kinetic energy", "zh": "动能" },
+      "definition": {
+        "en": "The energy of anything that is moving: a turning wheel, a falling ball, moving air. The faster it moves, the more kinetic energy it has.",
+        "zh": "运动的东西所具有的能量，比如转动的车轮、下落的球、流动的空气。运动得越快，动能越多。"
+      },
+      "see": ["potential-energy"]
+    },
+    {
+      "id": "potential-energy",
+      "term": { "en": "Potential energy", "zh": "势能" },
+      "definition": {
+        "en": "Stored energy. A raised ball or lift car, a wound spring, a battery, food and fuels all have potential energy, even when they are not moving.",
+        "zh": "储存起来的能量。被举高的球或轿厢、上紧的发条、电池、食物和燃料都有势能，就算它们不动也一样。"
+      },
+      "see": ["kinetic-energy", "energy-resource"]
+    },
+    {
+      "id": "light-energy",
+      "term": { "en": "Light energy", "zh": "光能" },
+      "definition": {
+        "en": "The energy given out by the Sun, lamps and other things that shine. We see things when light from them reaches our eyes.",
+        "zh": "太阳、灯和其他发光的东西发出的能量。东西发出或反射的光进入我们的眼睛，我们就看见它。"
+      },
+      "see": ["solar-panel"]
+    },
+    {
+      "id": "electrical-energy",
+      "term": { "en": "Electrical energy", "zh": "电能" },
+      "definition": {
+        "en": "Energy passed along a closed circuit by an electric current. Appliances change it into other forms, such as light, kinetic and heat energy.",
+        "zh": "电流沿着闭合电路传送的能量。电器把它转换成光能、动能、热能等别的形式。"
+      },
+      "see": ["grid", "dynamo"]
+    },
+    {
+      "id": "sound-energy",
+      "term": { "en": "Sound energy", "zh": "声能" },
+      "definition": {
+        "en": "The energy given out by things that vibrate, such as a speaker cone. It travels through the air to our ears.",
+        "zh": "振动的东西（比如音箱的纸盆）发出的能量，通过空气传到我们的耳朵。"
+      },
+      "see": ["form-of-energy"]
+    },
+    {
+      "id": "heat-energy",
+      "term": { "en": "Heat energy", "zh": "热能" },
+      "definition": {
+        "en": "A form of energy that passes from a hotter thing to a cooler one. Heat is energy, not a substance. In the end, most energy spreads out as heat in the surroundings.",
+        "zh": "从较热的物体传到较冷的物体的一种能量形式。热是能量，不是一种物质。到最后，大多数能量都散成周围环境里的热。"
+      },
+      "see": ["save-energy"]
+    },
+    {
+      "id": "energy-conversion",
+      "term": { "en": "Energy conversion", "zh": "能量转换" },
+      "definition": {
+        "en": "A change of energy from one form into one or more other forms, such as a solar panel changing light energy into electrical energy and heat. The total amount stays the same.",
+        "zh": "能量从一种形式变成另一种或几种形式，比如太阳能板把光能转换成电能和热。能量的总量不变。"
+      },
+      "see": ["form-of-energy", "energy"]
+    },
+    {
+      "id": "energy-resource",
+      "term": { "en": "Energy resource", "zh": "能源" },
+      "definition": {
+        "en": "Something we get energy from, such as sunlight, natural gas, wind, moving water or food. The energy of most of them came from the Sun in some way; some of them can run out.",
+        "zh": "我们取得能量的来源，比如阳光、天然气、风、流水和食物。它们的能量大多以某种方式来自太阳；有些能源会用完。"
+      },
+      "see": ["fossil-fuel", "natural-gas"]
+    },
+    {
+      "id": "fossil-fuel",
+      "term": { "en": "Fossil fuel", "zh": "化石燃料" },
+      "definition": {
+        "en": "A fuel such as coal, oil or natural gas, formed over millions of years from the remains of living things. Fossil fuels can run out.",
+        "zh": "煤、石油、天然气这类燃料，是生物遗骸经过几百万年变成的。化石燃料会用完。"
+      },
+      "see": ["natural-gas", "energy-resource"]
+    },
+    {
+      "id": "natural-gas",
+      "term": { "en": "Natural gas", "zh": "天然气" },
+      "definition": {
+        "en": "A fossil fuel that burns to release its stored energy. In 2024 it was the fuel for about 94 % of Singapore's electricity.",
+        "zh": "一种化石燃料，燃烧时释放储存的能量。2024 年，新加坡约 94 % 的电是用它发的。"
+      },
+      "see": ["fossil-fuel", "power-station"]
+    },
+    {
+      "id": "solar-panel",
+      "term": { "en": "Solar panel", "zh": "太阳能板" },
+      "definition": {
+        "en": "A panel of cells that changes light energy into electrical energy. It gives electrical energy only while light falls on it.",
+        "zh": "由电池片组成、把光能转换成电能的板。只有光照在上面时，它才产生电能。"
+      },
+      "see": ["light-energy", "energy-conversion"]
+    },
+    {
+      "id": "grid",
+      "term": { "en": "Grid", "zh": "电网" },
+      "definition": {
+        "en": "The network of cables that carries electrical energy from power stations and solar panels to the homes and buildings that use it.",
+        "zh": "把电能从发电厂和太阳能板送到住家和其他用电建筑的电缆网络。"
+      },
+      "see": ["power-station", "electrical-energy"]
+    },
+    {
+      "id": "power-station",
+      "term": { "en": "Power station", "zh": "发电厂" },
+      "definition": {
+        "en": "A place where the energy of a fuel or another energy resource is changed into electrical energy, usually by turbines that turn large generators.",
+        "zh": "把燃料或其他能源里的能量转换成电能的地方，通常是由涡轮机带动大型发电机。"
+      },
+      "see": ["dynamo", "grid"]
+    },
+    {
+      "id": "dynamo",
+      "term": { "en": "Dynamo", "zh": "自行车发电机" },
+      "definition": {
+        "en": "A small generator turned by a bicycle wheel. A magnet moving near a coil of wire changes kinetic energy into electrical energy for the lamp.",
+        "zh": "由自行车车轮带动的小型发电机。磁铁在线圈旁运动，把动能转换成供车灯用的电能。"
+      },
+      "see": ["power-station", "electrical-energy"]
+    },
+    {
+      "id": "save-energy",
+      "term": { "en": "Save energy", "zh": "节约能源" },
+      "definition": {
+        "en": "To waste less energy: switching off what is not in use and choosing machines that turn more of their energy into the form we want. This is different from the scientific idea that the total amount of energy never changes.",
+        "zh": "少浪费能量：不用的电器关掉，选用把更多能量变成我们想要的形式的机器。这和“能量总量永远不变”的科学说法是两回事。"
+      },
+      "see": ["heat-energy", "energy"]
+    },
+    {
+      "id": "fair-test",
+      "term": { "en": "Fair test", "zh": "公平测试" },
+      "definition": {
+        "en": "An experiment in which only one thing is changed and everything else is kept the same, so that any difference in the results comes from that one change.",
+        "zh": "一次只改变一样东西、其余都保持不变的实验，这样结果的差别就只能来自那一样改变。"
+      },
+      "see": []
+    }
+  ]
+}
