@@ -1,0 +1,53 @@
+---
+id: pushes
+order: 1
+title: { en: "Sample push", zh: "示例推力" }
+state:
+  view: assembled
+  explode: 0
+  run: false
+  part: null
+  layers: [ramp, friction, spring, drop, brake, forces]
+  camera: { position: [0.15, 0.5, 1.45], target: [0.0, 0.02, 0.2], fov: 34 }
+  labels: [toy-car, runway]
+  summary: { en: "Sample push: a push from behind, in front or from the side changes how the car moves.", zh: "示例推力：从后面、前面或侧面推，小车的运动就不一样。" }
+  sim:
+    set: { setup: push, push: behind, car-start: moving }
+    try:
+      vary: push
+      also: [car-start, magnet-push]
+      keep: [{ en: "Same car, same glass", zh: "同一辆车、同一块玻璃" }]
+      observe: [effect, speed-after]
+      replay: true
+      predict:
+        prompt: { en: "Sample prediction: push the moving car from the side. What will it do?", zh: "示例猜想：从侧面推正在动的小车，它会怎样？" }
+        start: { push: behind, car-start: moving }
+        change: { push: side }
+        observe: effect
+        options:
+          - { id: turn, label: { en: "Change direction", zh: "改变方向" }, means: turns }
+          - { id: faster, label: { en: "Speed up", zh: "加快" }, means: speeds-up }
+  beats:
+    - labels: [toy-car]
+      caption: { en: "Sample beat one: a push from behind speeds the car up.", zh: "示例节拍一：从后面推，小车加快。" }
+    - sim: { set: { push: side } }
+      labels: [toy-car]
+      caption: { en: "Sample beat two: a push from the side turns it.", zh: "示例节拍二：从侧面推，小车转向。" }
+    - sim: { set: { magnet-push: true, car-start: rest } }
+      labels: [toy-car]
+      caption: { en: "Sample beat three: a magnet pushes the still car without touching it.", zh: "示例节拍三：磁铁不碰到静止的小车，也能把它推动。" }
+  index:
+    parts: [toy-car, car-wheels, runway]
+---
+
+<Lang en>
+
+Sample push: placeholder text for the push sub-model.
+
+</Lang>
+
+<Lang zh>
+
+示例推力：推的子模型的占位文字。
+
+</Lang>

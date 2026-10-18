@@ -1,0 +1,54 @@
+---
+id: springs
+order: 5
+title: { en: "Sample spring", zh: "示例弹簧" }
+state:
+  view: assembled
+  explode: 0
+  run: false
+  part: null
+  layers: [ramp, friction, spring, drop, brake, forces]
+  camera: {"position": [0.22, 0.48, 0.55], "target": [0.1, 0.38, -0.2], "fov": 30}
+  labels: [test-spring, slotted-masses, spring-ruler]
+  summary: { en: "Sample spring: each slotted mass stretches the spring the same amount, up to a limit.", zh: "示例弹簧：每加一片槽码，弹簧伸长一样多，直到某个限度。" }
+  sim:
+    set: { spring-load: 0 }
+    try:
+      vary: spring-load
+      also: [unload]
+      keep: [{ en: "Same spring", zh: "同一根弹簧" }]
+      observe: [extension, load-weight]
+      record: { chart: { y: extension } }
+      predict:
+        prompt: { en: "Sample prediction: hang 400 g, then take it off. Will the spring go back?", zh: "示例猜想：挂上 400 g 再取下，弹簧能回到原长吗？" }
+        start: { spring-load: 400, unload: false }
+        change: { unload: true }
+        observe: returns
+        options:
+          - { id: back, label: { en: "Back to its length", zh: "回到原长" }, means: returns }
+          - { id: longer, label: { en: "Stays longer", zh: "回不到原长" }, means: stays-longer }
+  beats:
+    - sim: { set: { spring-load: 150 } }
+      labels: [test-spring, slotted-masses]
+      caption: { en: "Sample beat one: three fifties stretch the spring three centimetres.", zh: "示例节拍一：三份五十克，弹簧伸长三厘米。" }
+    - sim: { set: { spring-load: 400 } }
+      labels: [test-spring, mass-hanger]
+      caption: { en: "Sample beat two: past the limit it stretches more for each mass.", zh: "示例节拍二：过了限度，每片槽码伸得更多。" }
+    - sim: { set: { spring-load: 400, unload: true } }
+      labels: [test-spring, spring-ruler]
+      caption: { en: "Sample beat three: taken off, it stays a little longer.", zh: "示例节拍三：取下以后，弹簧比原来长了一点。" }
+  index:
+    parts: [test-spring, mass-hanger, slotted-masses, spring-ruler, retort-stand]
+---
+
+<Lang en>
+
+Sample spring: placeholder text for the spring sub-model.
+
+</Lang>
+
+<Lang zh>
+
+示例弹簧：弹簧子模型的占位文字。
+
+</Lang>

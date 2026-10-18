@@ -12,6 +12,8 @@
  *   --xray    X-RAY state                         --cut   cutaway face (ochre)
  *   --food    food in a gut (ochre-green)         --haemolymph  insect blood (teal-grey)
  *   --lamp    a lit filament's glow (warm white)  --current  electric current in a circuit (dark gold)
+ *   --f-gravity / --f-friction / --f-elastic / --f-push  force arrows: gravitational, frictional,
+ *                elastic spring force, a push or pull (the magnetic force is --pole-n)
  *   --muscle-1/2/3  human muscle layers (surface → deep)   --bone  bone (ivory)
  *   --mannequin  the exercise-mode figure (matte, quieter than the muscles)
  *   --holder-1 … --holder-8  one state each on a many-state map (TimeScene
@@ -112,6 +114,11 @@
   /* Magnets (docs/22 §4.3): the painted ends of a bar magnet, muted red and a slate blue. */
   --pole-n: #b5473a;
   --pole-s: #3f5f8a;
+  /* Forces (docs/30 F3): one colour per kind of force arrow, apart from each other, --pole-n and --signal under the three colour-vision deficiencies (ΔE ≥ 9) and ≥ 3:1 on the paper. */
+  --f-gravity: #295568;
+  --f-friction: #744518;
+  --f-elastic: #576a2f;
+  --f-push: #8c5e86;
   /* Human anatomy (docs/16 §5.2): muscle layers, surface warmest to deep darkest; low-saturation, not blood red. */
   --muscle-1: #c48a76;
   --muscle-2: #ad7b6c;
@@ -209,6 +216,10 @@
   --current: #e0b53e;
   --pole-n: #c95a4a;
   --pole-s: #5878a8;
+  --f-gravity: #6791a6;
+  --f-friction: #e5aa77;
+  --f-elastic: #c0d492;
+  --f-push: #ce9bc7;
   --muscle-1: #c9715b;
   --muscle-2: #9d5b53;
   --muscle-3: #70443f;

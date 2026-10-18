@@ -12,6 +12,7 @@ import { z } from 'zod';
 import { bilingual, colorRef, kebabId, vec3 } from '../../content/schema/common';
 import { fieldLines } from './lib/sim/field';
 import { CLIP_QUANTITIES } from './lib/sim/magnet';
+import { FORCE_STATES, forceQuantity, forceTimelineChannels, springExtension, rollRun } from './lib/sim/force';
 
 /** A control value: a toggle's boolean, a step's number, a choice's option id. */
 export const simValue = z.union([z.boolean(), z.number(), kebabId]);
@@ -67,11 +68,13 @@ export const simControlSchema = z.discriminatedUnion('kind', [
 ]);
 export type SimControl = z.output<typeof simControlSchema>;
 
-export const SIM_OUTPUT_KINDS = ['number', 'state', 'vector'] as const;
+export const SIM_OUTPUT_KINDS = ['number', 'state', 'vector', 'timeline'] as const;
 
 /**
  * A model output: a number (`unit`, `decimals`), a state (`states`: label of
- * each value) or a vector (values per id: a circuit's current in each edge).
+ * each value), a vector (values per id: a circuit's current in each edge) or
+ * a timeline (a run of the apparatus over time, lib/sim/timeline.ts: `play`
+ * and `stretch` bindings and force arrows read its channels).
  * `from` names the model quantity (lib/sim: `current:<edge>`, `brightness:<edge>` …);
  * default the output's own id.
  */
@@ -121,6 +124,8 @@ export const GLOW_CURVES = ['linear', 'sqrt'] as const;
  * swings back). A turn takes the short way round (350° → 10° is +20°).
  * Deep links and screenshots jump to the end value.
  */
+export const STRETCH_ANCHORS = ['top', 'bottom', 'centre'] as const;
+
 export const settleSchema = z.object({ period: z.number().min(0.2).max(10), damping: z.number().min(0.05).max(2) }).strict();
 export type SimSettle = z.output<typeof settleSchema>;
 
@@ -144,10 +149,54 @@ const partBind = z
      * magnet while the current flows.
      */
     tint: z.object({ color: colorRef, full: z.number().positive(), curve: z.enum(GLOW_CURVES).default('linear') }).strict().optional(),
-    /** Show the first k copies of a `repeat` part (k = the value, × `per`; `true` = × 1). */
-    count: z.union([z.literal(true), z.object({ per: z.number().positive().default(1) }).strict()]).optional(),
-    /** Move along `axis` (scene units, after any pose) by (value − `origin`) × `per`. */
-    offset: z.object({ axis: vec3, per: z.number(), origin: z.number().default(0) }).strict().optional(),
+    /**
+     * Show the first k copies of a `repeat` part: k = (value − `minus`) ÷ `per`,
+     * rounded, at least 0 (`true`: k = the value). Slotted masses on a 50 g
+     * hanger: `{ per: 50, minus: 50 }` (the hanger is the first 50 g).
+     */
+    count: z.union([z.literal(true), z.object({ per: z.number().positive().default(1), minus: z.number().default(0) }).strict()]).optional(),
+    /**
+     * Move along `axis` (scene units, after any pose) by (value − `origin`) ×
+     * `per`; `settle`: a damped swing to each new value (a hanger bouncing on
+     * its spring) instead of the plain ease.
+     */
+    offset: z.object({ axis: vec3, per: z.number(), origin: z.number().default(0), settle: settleSchema.optional() }).strict().optional(),
+    /**
+     * Stretch the part's coil (its one `coil` primitive, main or `extra`) by
+     * value × `per` scene units along the coil's own axis: the turns spread
+     * apart, the wire keeps its thickness, the `anchor` end stays put (`top`:
+     * the coil's +Y end; `bottom`, `centre`) and the part's other pieces ride
+     * with the nearer end (a hook at the bottom goes down with it). The value
+     * is a number output or control, or with `channel` a timeline channel;
+     * `settle`: a damped bounce to each new value (numbers only).
+     */
+    stretch: z
+      .object({ per: z.number(), channel: z.string().min(1).max(40).optional(), anchor: z.enum(STRETCH_ANCHORS).default('top'), settle: settleSchema.optional() })
+      .strict()
+      .optional(),
+    /**
+     * Play a timeline output (lib/sim/timeline.ts): move the parts along
+     * `axis` by the `channel`'s value × `per` scene units, or turn them about
+     * `turn` by it × `per` degrees (about `pivot`, a scene point, else the
+     * part's centre where it is; `each`: every copy of a `repeat` / `extra`
+     * part about its own centre, wheels on a car). Applied after the pose and
+     * the try-it offset / turn; several `play` bindings on a part add up.
+     * `when`: played only while a control or output meets the condition (one
+     * car on the bench, pushed in one chapter and rolled down the ramp in
+     * another: each run moves it only in its own set-up).
+     */
+    play: z
+      .object({
+        channel: z.string().min(1).max(40),
+        axis: vec3.optional(),
+        turn: vec3.optional(),
+        per: z.number().default(1),
+        pivot: vec3.optional(),
+        each: z.literal(true).optional(),
+        when: z.object({ ...source, is: simCondition.default(true) }).strict().optional(),
+      })
+      .strict()
+      .optional(),
     /**
      * Turn about `axis` by (value − `origin`) × `per` degrees (default × 1),
      * after any pose, through the part's (posed) centre or `pivot` (a scene
@@ -398,6 +447,122 @@ export const magnetSchema = z
   .strict();
 export type MagnetData = z.output<typeof magnetSchema>;
 
+const pos = z.number().positive();
+
+/**
+ * The forces model's data (docs/30 §4.2–4.3, lib/sim/force.ts): six
+ * optional sub-models, each naming the controls it reads. Lengths in metres
+ * unless a control's unit says otherwise (the fall height is in m, the ramp
+ * height in cm, loads in g); `g` in N/kg.
+ */
+export const forceSchema = z
+  .object({
+    g: pos.default(9.8),
+    /**
+     * A push on a car on the runway: `choice` (a choice control: where the rod
+     * pushes) → `dv` (velocity change [x, y, z] m/s per option; y is ignored),
+     * `start` (a choice of `rest` / `moving`, or a toggle: on = moving; default
+     * moving), `speed` (m/s at the push point when moving), `at` (the push
+     * point, m from the runway's start; the car rolls in from there), `runway`
+     * (m to the end stop), the rolling coefficient after the push: `rolling`,
+     * or `surface` (an option of `roll.rolling`), `wheel` (radius, m), `arrow`
+     * (the push channel's value per m/s of Δv: the arrow's length).
+     */
+    push: z
+      .object({
+        choice: kebabId,
+        start: kebabId.optional(),
+        speed: pos,
+        at: pos,
+        approach: pos.optional(),
+        runway: pos,
+        dv: z.record(kebabId, vec3),
+        surface: kebabId.optional(),
+        rolling: pos.optional(),
+        wheel: pos.default(0.011),
+        arrow: pos.default(3),
+      })
+      .strict()
+      .optional(),
+    /** A magnet pushes the car instead of the rod while `toggle` is on: Δv `dv` (needs `push`). */
+    magnet: z.object({ toggle: kebabId, dv: vec3 }).strict().optional(),
+    /**
+     * Two objects let go together: `height` (a step control, m), `pair` (a
+     * choice; each option names two `objects`, left then right, in `pairs`),
+     * `slow` (the run shown this many times slower), `air` (kg/m³), `sample`
+     * (s between timeline samples, default 0.01); an object is `{ part, m (kg),
+     * cd, area (m²), sway? (° of rocking, a sheet of paper; illustrative) }`.
+     * `weigh`: a choice control → the object hung on the weighing balance.
+     */
+    fall: z
+      .object({
+        air: pos.default(1.21),
+        height: kebabId,
+        pair: kebabId,
+        slow: z.number().min(1).max(10).default(1),
+        sample: z.number().min(0.002).max(0.1).optional(),
+        objects: z.record(kebabId, z.object({ part: kebabId, m: pos, cd: pos, area: pos, sway: z.number().min(0).max(45).optional() }).strict()),
+        pairs: z.record(kebabId, z.tuple([kebabId, kebabId])),
+        weigh: z.object({ control: kebabId, map: z.record(kebabId, kebabId) }).strict().optional(),
+      })
+      .strict()
+      .optional(),
+    /**
+     * A block pulled across a surface: `block` (kg) plus `load` (a step control,
+     * g); `lane` (a choice) → `surfaces` [μ starting, μ moving]; the pull rises
+     * over `rise` s, then the block slides `travel` m at `speed` m/s.
+     */
+    slide: z
+      .object({ block: pos, load: kebabId, lane: kebabId, rise: pos, speed: pos, travel: pos, surfaces: z.record(kebabId, z.tuple([pos, pos])) })
+      .strict()
+      .optional(),
+    /**
+     * A car let go on the ramp: `height` (a step control, cm), `surface` (a
+     * choice) → `rolling` (coefficient c), `loss` (share lost on the ramp),
+     * `wheel` (radius, m), `runway` (m to the end stop), `ramp.angle` (°).
+     */
+    roll: z
+      .object({
+        height: kebabId,
+        surface: kebabId,
+        loss: z.number().min(0).max(0.9),
+        wheel: pos,
+        runway: pos,
+        ramp: z.object({ angle: z.number().min(1).max(60) }).strict(),
+        rolling: z.record(kebabId, pos),
+      })
+      .strict()
+      .optional(),
+    /**
+     * A spring: `load` (a step control, g), `unload` (a toggle: the load taken
+     * off), `per50` (cm per 50 g up to `limit` g), past the limit 6 + n · a +
+     * n² · b more (`beyond` [a, b], n = fifties past it), `set` (cm left after
+     * unloading, per load above the limit), `length` (cm unloaded).
+     */
+    spring: z
+      .object({
+        load: kebabId,
+        unload: kebabId.optional(),
+        per50: pos,
+        length: pos,
+        limit: pos,
+        beyond: z.tuple([z.number().min(0), z.number().min(0)]),
+        set: z.record(z.string().regex(/^\d+$/), z.number().min(0)).default({}),
+      })
+      .strict()
+      .optional(),
+    /**
+     * A wheel spun at `rps` and braked: `squeeze` (a choice) → `force` (N per
+     * pad); `inertia` (kg·m²), `radius` (m, where the pads grip), `mu`, `hub` (N·m).
+     */
+    brake: z
+      .object({ squeeze: kebabId, rps: pos, inertia: pos, radius: pos, mu: pos, hub: pos, force: z.record(kebabId, z.number().min(0)) })
+      .strict()
+      .optional(),
+  })
+  .strict();
+export type ForceData = z.output<typeof forceSchema>;
+
 /**
  * Drawn over the stage from the model's outputs (docs/22 §4.4 M5):
  * `force-arrows` = one arrow on each of two parts along the line between
@@ -407,7 +572,46 @@ export type MagnetData = z.output<typeof magnetSchema>;
  * true relative value), `lift` above the parts' centres (default 0.02).
  * Shown while both parts are on show, the value is ≥ 0.5 and `when` holds.
  */
+export const FORCE_KINDS = ['gravity', 'friction', 'elastic', 'push', 'magnetic'] as const;
+export type ForceKind = (typeof FORCE_KINDS)[number];
+export const ARROW_ANCHORS = ['centre', 'top', 'bottom'] as const;
+
+/**
+ * One force arrow (`force-vectors`): on `part`, of one `force` kind (its
+ * colour token and KEY name), along `dir` (scene vector), as long as `value`
+ * newtons × the overlay's `per`: a number, a number output, or a timeline
+ * output's `channel`. It starts at the part's bounds centre, top or bottom
+ * (`at`), shifted by `offset`, and follows the part (pose, offset, play).
+ * `when`: shown only while the condition holds.
+ */
+export const forceArrowSchema = z
+  .object({
+    part: kebabId,
+    force: z.enum(FORCE_KINDS),
+    dir: vec3,
+    value: z.union([z.number(), z.object({ output: kebabId, channel: z.string().min(1).max(40).optional() }).strict()]),
+    at: z.enum(ARROW_ANCHORS).default('centre'),
+    offset: vec3.optional(),
+    when: z.object({ ...source, is: simCondition.default(true) }).strict().optional(),
+  })
+  .strict();
+export type ForceArrow = z.output<typeof forceArrowSchema>;
+
 export const simOverlaySchema = z.discriminatedUnion('kind', [
+  /**
+   * Force arrows (docs/30 F3): `per` scene units per newton (default 0.03),
+   * at most `max` long (0.25), faded below 0.05 N; all arrows one draw call;
+   * `group`: a group (LAYERS row) they show with.
+   */
+  z
+    .object({
+      kind: z.literal('force-vectors'),
+      arrows: z.array(forceArrowSchema).min(1).max(24),
+      per: pos.default(0.03),
+      max: pos.default(0.25),
+      group: kebabId.optional(),
+    })
+    .strict(),
   z
     .object({
       kind: z.literal('force-arrows'),
@@ -423,20 +627,23 @@ export const simOverlaySchema = z.discriminatedUnion('kind', [
 ]);
 export type SimOverlay = z.output<typeof simOverlaySchema>;
 
-export const SIM_KINDS = ['circuit', 'magnet'] as const;
+export const SIM_KINDS = ['circuit', 'magnet', 'force'] as const;
 export type SimKind = (typeof SIM_KINDS)[number];
 
 export const MAX_SIM_CONTROLS = 16;
+/** A forces bench reads two dozen quantities (docs/30 §4.3): timelines, numbers and states. */
+export const MAX_SIM_OUTPUTS = 32;
 
 export const simSchema = z
   .object({
     kind: z.enum(SIM_KINDS),
     controls: z.array(simControlSchema).min(1).max(MAX_SIM_CONTROLS),
-    outputs: z.array(simOutputSchema).min(1).max(16),
+    outputs: z.array(simOutputSchema).min(1).max(MAX_SIM_OUTPUTS),
     bind: z.array(simBindSchema).max(64).default([]),
     overlays: z.array(simOverlaySchema).max(4).default([]),
     circuit: circuitSchema.optional(),
     magnet: magnetSchema.optional(),
+    force: forceSchema.optional(),
   })
   .strict();
 export type SimData = z.output<typeof simSchema>;
@@ -465,15 +672,38 @@ export const simTrySchema = z
     keep: z.array(keepItem).max(5).optional(),
     observe: z.array(kebabId).min(1).max(4),
     record: z
-      .union([z.literal(true), z.object({ judge: z.object({ output: kebabId, gt: z.number().default(0), label: bilingual }).strict() }).strict()])
+      .union([
+        z.literal(true),
+        z
+          .object({
+            judge: z.object({ output: kebabId, gt: z.number().default(0), label: bilingual }).strict().optional(),
+            /**
+             * A small graph under the table (docs/30 F5) once it has two rows: a
+             * line graph over a step control's values, a bar graph over a choice's
+             * options; `y`: the number output(s) drawn (≤ 3, one unit; default
+             * the first number the card observes).
+             */
+            chart: z.union([z.literal(true), z.object({ y: z.union([kebabId, z.array(kebabId).min(1).max(3)]) }).strict()]).optional(),
+          })
+          .strict()
+          .refine((r) => r.judge !== undefined || r.chart !== undefined, 'record: give `judge` or `chart` (or write `record: true`)'),
+      ])
       .optional(),
+    /**
+     * A "Run again" button (and key G) that plays the chapter's timeline
+     * outputs from the start: `true` = those its varied control changes, or
+     * the ids of the timeline outputs. The card also says when a run is shown
+     * slowed down.
+     */
+    replay: z.union([z.literal(true), z.array(kebabId).min(1).max(6)]).optional(),
     predict: z
       .object({
         prompt: bilingual,
         /** Values set first, before the reading is taken (the switch closed, the bulb in): what the prediction starts from. */
         start: simValues.optional(),
         change: simValues,
-        options: z.array(z.object({ id: kebabId, label: bilingual, means: z.enum(PREDICT_MEANS) }).strict()).min(2).max(4),
+        /** `means`: an outcome of a number output, or a state of a state output (the reveal names the state). */
+        options: z.array(z.object({ id: kebabId, label: bilingual, means: z.union([z.enum(PREDICT_MEANS), stateId]) }).strict()).min(2).max(4),
         observe: kebabId,
       })
       .strict()
@@ -504,6 +734,13 @@ interface SimContext {
   filings?: ReadonlySet<string>;
   /** Parts with a `primitive` (a magnet's `part` must be one). */
   primitives?: ReadonlySet<string>;
+  /** Per part: how many `coil` primitives it has (main and `extra`; a `stretch` needs exactly one). */
+  coils?: ReadonlyMap<string, number>;
+  /** Parts with a `repeat`; parts with `extra` (an `each` play turns every copy). */
+  repeated?: ReadonlySet<string>;
+  withExtra?: ReadonlySet<string>;
+  /** Group ids (a force-vectors overlay's `group`). */
+  groups?: ReadonlySet<string>;
 }
 
 /** Whether a value is a legal value of a control. */
@@ -532,6 +769,28 @@ export function circuitQuantities(c: CircuitData): string[] {
  */
 export const MAGNET_QUANTITIES = ['force', 'clips-cards', 'clips-stroke', 'clips-em', 'clips', 'facing', 'needle-bearing', 'field-state'] as const;
 const MAGNET_STATES: readonly string[] = ['facing', 'field-state'];
+
+/** The kind of a model quantity (an output's `from`), or null when the model (or the data it needs) has none of that name. */
+export function quantityKind(sim: SimData, from: string): SimOutput['kind'] | null {
+  switch (sim.kind) {
+    case 'circuit':
+      if (!sim.circuit || !circuitQuantities(sim.circuit).includes(from)) return null;
+      return from === 'edges' ? 'vector' : from.startsWith('status:') || from.startsWith('sound:') ? 'state' : 'number';
+    case 'magnet':
+      if (!(MAGNET_QUANTITIES as readonly string[]).includes(from)) return null;
+      return MAGNET_STATES.includes(from) ? 'state' : 'number';
+    case 'force': {
+      const q = forceQuantity(from);
+      return q && sim.force?.[q.model] ? q.kind : null;
+    }
+  }
+}
+
+/** The channels of a timeline quantity of this sim's model (null: not a timeline it knows). */
+export function simTimelineChannels(sim: SimData, from: string): string[] | null {
+  if (sim.kind === 'force' && sim.force) return forceTimelineChannels(sim.force, from);
+  return null;
+}
 
 /**
  * What a `sim` section names that does not exist or does not fit: control
@@ -573,19 +832,21 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
         issue(['controls', i, 'sets'], 'give one option without `sets` (where a hand-set combination lands, e.g. `free`)');
     }
   });
-  const quantities = new Set(
-    sim.kind === 'circuit' ? (sim.circuit ? circuitQuantities(sim.circuit) : []) : [...MAGNET_QUANTITIES],
-  );
   sim.outputs.forEach((o, i) => {
     if (sim.outputs.findIndex((x) => x.id === o.id) !== i) issue(['outputs', i, 'id'], `duplicate output "${o.id}"`);
     const from = o.from ?? o.id;
-    if (!quantities.has(from)) issue(['outputs', i, 'from'], `the ${sim.kind} model has no quantity "${from}"`);
-    const kind =
-      from === 'edges' ? 'vector' : from.startsWith('status:') || from.startsWith('sound:') || (sim.kind === 'magnet' && MAGNET_STATES.includes(from)) ? 'state' : 'number';
-    if (quantities.has(from) && kind !== o.kind) issue(['outputs', i, 'kind'], `"${from}" is a ${kind}, not a ${o.kind}`);
+    const kind = quantityKind(sim, from);
+    if (kind === null) {
+      const q = sim.kind === 'force' ? forceQuantity(from) : null;
+      issue(['outputs', i, 'from'], q ? `"${from}" needs the force model's \`${q.model}\` data` : `the ${sim.kind} model has no quantity "${from}"`);
+    } else if (kind !== o.kind) issue(['outputs', i, 'kind'], `"${from}" is a ${kind}, not a ${o.kind}`);
+    const states = sim.kind === 'force' ? FORCE_STATES[from] : undefined;
+    if (states && o.kind === 'state') for (const st of states) if (!o.states?.[st]) issue(['outputs', i, 'states'], `"${from}" can be "${st}": give it a label`);
   });
   if (sim.kind === 'circuit' && !sim.circuit) issue(['circuit'], 'a circuit sim needs `circuit`');
   if (sim.kind === 'magnet' && !sim.magnet) issue(['magnet'], 'a magnet sim needs `magnet`');
+  if (sim.kind === 'force' && !sim.force) issue(['force'], 'a force sim needs `force`');
+  if (sim.force) forceIssues(sim.force, controls, ctx).forEach((x) => issue(['force', ...x.path], x.message));
   if (sim.circuit) circuitIssues(sim.circuit, controls, ctx).forEach((x) => issue(['circuit', ...x.path], x.message));
   if (sim.magnet) magnetIssues(sim, sim.magnet, controls, ctx).forEach((x) => issue(['magnet', ...x.path], x.message));
   const fieldStates = (o: SimOutput | undefined) => o?.kind === 'state' && (o.from ?? o.id) === 'field-state' && sim.kind === 'magnet';
@@ -608,6 +869,43 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
       if (b.count) for (const id of ids) if (!ctx.countable.has(id)) issue(['bind', i, 'count'], `"${id}" needs a \`repeat\` and no \`extra\` to show a count of copies`);
       if ((b.glow || b.tint || b.count || b.offset || b.rotate) && outp && outp.kind !== 'number')
         issue(['bind', i], `glow / tint / count / offset / rotate need a number, "${src}" is a ${outp.kind}`);
+      if (outp?.kind === 'timeline' && ['visible', 'pose', 'glow', 'tint', 'count', 'offset', 'rotate', 'at', 'state'].some(has))
+        issue(['bind', i], `"${src}" is a timeline: bind it with \`play\` or a \`stretch\` with a \`channel\``);
+      if (b.play) {
+        const p = b.play;
+        if (outp?.kind !== 'timeline') issue(['bind', i, 'play'], `play needs a timeline output${outp ? `, "${src}" is a ${outp.kind}` : ''}`);
+        else {
+          const channels = simTimelineChannels(sim, outp.from ?? outp.id);
+          if (channels && !channels.includes(p.channel)) issue(['bind', i, 'play', 'channel'], `"${src}" has no channel "${p.channel}" (${channels.join(', ') || 'none'})`);
+        }
+        if ((p.axis === undefined) === (p.turn === undefined)) issue(['bind', i, 'play'], 'give `axis` (a move) or `turn` (a turn), not both');
+        if (p.each && p.turn === undefined) issue(['bind', i, 'play', 'each'], '`each` turns every copy: give `turn`');
+        if (p.each && p.pivot) issue(['bind', i, 'play', 'pivot'], '`each` turns every copy about its own centre: no `pivot`');
+        if (p.pivot && p.turn === undefined) issue(['bind', i, 'play', 'pivot'], 'a `pivot` belongs to a turn');
+        if (p.when) {
+          const w = p.when;
+          if ((w.control === undefined) === (w.output === undefined)) issue(['bind', i, 'play', 'when'], 'name exactly one `control` or `output`');
+          else if (w.control !== undefined && !controls.has(w.control)) issue(['bind', i, 'play', 'when', 'control'], `unknown control "${w.control}"`);
+          else if (w.output !== undefined && !outputs.has(w.output)) issue(['bind', i, 'play', 'when', 'output'], `unknown output "${w.output}"`);
+        }
+        if (p.each) for (const id of ids) if (ctx.repeated && !ctx.repeated.has(id) && !ctx.withExtra?.has(id)) issue(['bind', i, 'play', 'each'], `"${id}" has one copy (no \`repeat\` or \`extra\`): leave \`each\` out`);
+      }
+      if (b.stretch) {
+        const st = b.stretch;
+        for (const id of ids) {
+          if (ctx.coils && (ctx.coils.get(id) ?? 0) !== 1) issue(['bind', i, 'stretch'], `"${id}" needs exactly one \`coil\` primitive to stretch (has ${ctx.coils.get(id) ?? 0})`);
+          if (ctx.repeated?.has(id)) issue(['bind', i, 'stretch'], `"${id}" is repeated: a stretched coil is one copy`);
+        }
+        if (st.channel !== undefined) {
+          if (outp?.kind !== 'timeline') issue(['bind', i, 'stretch', 'channel'], `a \`channel\` needs a timeline output${outp ? `, "${src}" is a ${outp.kind}` : ''}`);
+          else {
+            const channels = simTimelineChannels(sim, outp.from ?? outp.id);
+            if (channels && !channels.includes(st.channel)) issue(['bind', i, 'stretch', 'channel'], `"${src}" has no channel "${st.channel}"`);
+          }
+          if (st.settle) issue(['bind', i, 'stretch', 'settle'], 'a timeline channel is played as it is: no `settle`');
+        } else if (outp && outp.kind !== 'number') issue(['bind', i, 'stretch'], `stretch needs a number (or a timeline with \`channel\`), "${src}" is a ${outp.kind}`);
+        else if (ctl && ctl.kind === 'choice') issue(['bind', i, 'stretch'], `"${src}" is a choice: stretch by a number`);
+      }
       if (b.rotate && outp && (outp.from ?? outp.id) === 'needle-bearing' && sim.kind === 'magnet') {
         // A bearing turns clockwise seen from above: about −Y (a positive turn about +Y is anticlockwise).
         const a = b.rotate.axis;
@@ -630,9 +928,10 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
           stateBound.add(id);
         }
       }
-      const fields = ['visible', 'pose', 'glow', 'tint', 'count', 'offset', 'rotate', 'at', 'state'].filter(has);
-      if (fields.length === 0) issue(['bind', i], 'a part binding needs visible, pose, glow, tint, count, offset, rotate, at or state');
+      const fields = ['visible', 'pose', 'glow', 'tint', 'count', 'offset', 'rotate', 'at', 'state', 'play', 'stretch'].filter(has);
+      if (fields.length === 0) issue(['bind', i], 'a part binding needs visible, pose, glow, tint, count, offset, rotate, at, state, play or stretch');
     } else if ('flow' in b) {
+      if (outp?.kind === 'timeline') issue(['bind', i, 'output'], `"${src}" is a timeline: it moves parts (\`play\`), not flows`);
       const flow = ctx.flows.get(b.flow);
       if (!flow) issue(['bind', i, 'flow'], `unknown flow "${b.flow}"`);
       if (b.intensity) {
@@ -655,6 +954,7 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
       }
       if (!b.visible && !b.intensity && !b.stops && !b.state) issue(['bind', i], 'a flow binding needs visible, intensity, stops or state');
     } else {
+      if (outp?.kind === 'timeline') issue(['bind', i, 'output'], `"${src}" is a timeline: it moves parts (\`play\`), not animations`);
       const anim = ctx.animations.get(b.animation);
       if (!anim) issue(['bind', i, 'animation'], `unknown animation "${b.animation}"`);
       else if (b.rpm && anim.kind !== 'rotate') issue(['bind', i, 'rpm'], `"${b.animation}" is a ${anim.kind} animation (rpm turns a rotate)`);
@@ -668,19 +968,45 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
   });
   for (const id of ctx.filings ?? []) if (!stateBound.has(id)) issue(['bind'], `filings part "${id}" needs a \`state\` binding to the field-state output`);
   for (const [id, f] of ctx.flows) if (f.own === false && !stateBound.has(`flow:${id}`)) issue(['bind'], `flow "${id}" has no path: give it one, or a \`state\` binding to the field-state output`);
+  // Parts turned by a play binding: rolling (or spinning) parts take no frictional-force arrow (docs/30 D3: not in the syllabus).
+  const turned = new Set(sim.bind.flatMap((b) => ('part' in b && b.play?.turn ? (Array.isArray(b.part) ? b.part : [b.part]) : [])));
+  const whenIssues = (path: (string | number)[], w: { control?: string | undefined; output?: string | undefined } | undefined) => {
+    if (!w) return;
+    if ((w.control === undefined) === (w.output === undefined)) issue([...path, 'when'], 'name exactly one `control` or `output`');
+    else if (w.control !== undefined && !controls.has(w.control)) issue([...path, 'when', 'control'], `unknown control "${w.control}"`);
+    else if (w.output !== undefined && !outputs.has(w.output)) issue([...path, 'when', 'output'], `unknown output "${w.output}"`);
+  };
   sim.overlays.forEach((o, i) => {
+    if (o.kind === 'force-vectors') {
+      if (o.group !== undefined && ctx.groups && !ctx.groups.has(o.group)) issue(['overlays', i, 'group'], `unknown group "${o.group}"`);
+      o.arrows.forEach((a, k) => {
+        const at = ['overlays', i, 'arrows', k];
+        if (!ctx.parts.has(a.part)) issue([...at, 'part'], `unknown part "${a.part}"`);
+        if (Math.hypot(a.dir[0], a.dir[1], a.dir[2]) < 1e-9) issue([...at, 'dir'], 'give the arrow a direction');
+        if (a.force === 'friction' && turned.has(a.part))
+          issue([...at, 'part'], `"${a.part}" turns (a wheel): the frictional force on rolling things is not drawn (docs/30 D3)`);
+        if (typeof a.value === 'object') {
+          const v = outputs.get(a.value.output);
+          if (!v) issue([...at, 'value', 'output'], `unknown output "${a.value.output}"`);
+          else if (a.value.channel !== undefined) {
+            if (v.kind !== 'timeline') issue([...at, 'value', 'channel'], `"${a.value.output}" is a ${v.kind}, not a timeline`);
+            else {
+              const channels = simTimelineChannels(sim, v.from ?? v.id);
+              if (channels && !channels.includes(a.value.channel)) issue([...at, 'value', 'channel'], `"${a.value.output}" has no channel "${a.value.channel}"`);
+            }
+          } else if (v.kind !== 'number') issue([...at, 'value', 'output'], `"${a.value.output}" is a ${v.kind}, not a number (a timeline needs \`channel\`)`);
+        }
+        whenIssues(at, a.when);
+      });
+      return;
+    }
     const [a, b] = o.between;
     for (const id of o.between) if (!ctx.parts.has(id)) issue(['overlays', i, 'between'], `unknown part "${id}"`);
     if (a === b) issue(['overlays', i, 'between'], 'two different parts');
     const v = outputs.get(o.output);
     if (!v) issue(['overlays', i, 'output'], `unknown output "${o.output}"`);
     else if (v.kind !== 'number') issue(['overlays', i, 'output'], `"${o.output}" is a ${v.kind}, not a number`);
-    if (o.when) {
-      const w = o.when;
-      if ((w.control === undefined) === (w.output === undefined)) issue(['overlays', i, 'when'], 'name exactly one `control` or `output`');
-      else if (w.control !== undefined && !controls.has(w.control)) issue(['overlays', i, 'when', 'control'], `unknown control "${w.control}"`);
-      else if (w.output !== undefined && !outputs.has(w.output)) issue(['overlays', i, 'when', 'output'], `unknown output "${w.output}"`);
-    }
+    whenIssues(['overlays', i], o.when);
   });
   return out;
 }
@@ -736,6 +1062,93 @@ function magnetIssues(sim: SimData, m: MagnetData, controls: ReadonlyMap<string,
     else if (fieldLines(sim, name).length === 0) issue(['fields', name], 'no field line starts inside the plane (is a north pole in it?)');
   });
   if (labels) for (const name of Object.keys(labels)) if (fields.length > 0 && !m.fields?.[name]) issue(['fields'], `field state "${name}" (an output label) is not in \`fields\``);
+  return out;
+}
+
+/** The forces model's own data: the controls each sub-model reads, its tables, and what its numbers would do on the bench. */
+function forceIssues(f: ForceData, controls: ReadonlyMap<string, SimControl>, ctx: SimContext): { path: (string | number)[]; message: string }[] {
+  const out: { path: (string | number)[]; message: string }[] = [];
+  const issue = (path: (string | number)[], message: string) => out.push({ path, message });
+  const control = (path: (string | number)[], id: string, kinds: readonly SimControl['kind'][]) => {
+    const c = controls.get(id);
+    if (!c) issue(path, `unknown control "${id}"`);
+    else if (!kinds.includes(c.kind)) issue(path, `"${id}" is a ${c.kind} control, not a ${kinds.join(' or ')}`);
+    return c;
+  };
+  const options = (c: SimControl | undefined) => (c?.kind === 'choice' ? c.options.map((o) => o.id) : []);
+  /** Every option of choice `c` is a key of `table` (and every key an option). */
+  const covers = (path: (string | number)[], c: SimControl | undefined, table: Readonly<Record<string, unknown>>, what: string) => {
+    if (c?.kind !== 'choice') return;
+    for (const o of options(c)) if (!(o in table)) issue(path, `option "${o}" of "${c.id}" has no ${what}`);
+    for (const k of Object.keys(table)) if (!options(c).includes(k)) issue(path, `"${k}" is not an option of "${c.id}"`);
+  };
+  if (f.push) {
+    const p = f.push;
+    covers(['push', 'dv'], control(['push', 'choice'], p.choice, ['choice']), p.dv, 'Δv');
+    if (p.start !== undefined) {
+      const c = control(['push', 'start'], p.start, ['choice', 'toggle']);
+      if (c?.kind === 'choice' && !['rest', 'moving'].every((o) => options(c).includes(o))) issue(['push', 'start'], `"${p.start}" needs the options "rest" and "moving"`);
+    }
+    if ((p.rolling === undefined) === (p.surface === undefined)) issue(['push'], 'give `rolling` (a coefficient) or `surface` (an option of `roll.rolling`)');
+    if (p.surface !== undefined && f.roll?.rolling[p.surface] === undefined) issue(['push', 'surface'], `"${p.surface}" is not a surface of \`roll.rolling\``);
+    if (p.at >= p.runway) issue(['push', 'at'], 'the push point must be before the end of the runway');
+  }
+  if (f.magnet) {
+    control(['magnet', 'toggle'], f.magnet.toggle, ['toggle']);
+    if (!f.push) issue(['magnet'], 'the magnet push needs `push` (the car and the runway)');
+  }
+  if (f.fall) {
+    const fl = f.fall;
+    const h = control(['fall', 'height'], fl.height, ['step']);
+    if (h?.kind === 'step' && h.values.some((v) => v <= 0)) issue(['fall', 'height'], 'drop heights are in metres, above 0');
+    covers(['fall', 'pairs'], control(['fall', 'pair'], fl.pair, ['choice']), fl.pairs, 'pair of objects');
+    for (const [k, pair] of Object.entries(fl.pairs)) for (const id of pair) if (!fl.objects[id]) issue(['fall', 'pairs', k], `unknown object "${id}"`);
+    for (const [id, o] of Object.entries(fl.objects)) {
+      if (!ctx.parts.has(o.part)) issue(['fall', 'objects', id, 'part'], `unknown part "${o.part}"`);
+      else if (ctx.primitives && !ctx.primitives.has(o.part)) issue(['fall', 'objects', id, 'part'], `"${o.part}" has no \`primitive\``);
+    }
+    if (fl.weigh) {
+      const c = control(['fall', 'weigh', 'control'], fl.weigh.control, ['choice']);
+      for (const [opt, id] of Object.entries(fl.weigh.map)) {
+        if (c?.kind === 'choice' && !options(c).includes(opt)) issue(['fall', 'weigh', 'map', opt], `"${opt}" is not an option of "${c.id}"`);
+        if (!fl.objects[id]) issue(['fall', 'weigh', 'map', opt], `unknown object "${id}"`);
+      }
+    }
+  }
+  if (f.slide) {
+    const sl = f.slide;
+    const load = control(['slide', 'load'], sl.load, ['step']);
+    if (load?.kind === 'step' && load.values.some((v) => v < 0)) issue(['slide', 'load'], 'loads are in grams, 0 or more');
+    covers(['slide', 'surfaces'], control(['slide', 'lane'], sl.lane, ['choice']), sl.surfaces, 'friction coefficients');
+    for (const [k, [st, mv]] of Object.entries(sl.surfaces)) if (mv > st) issue(['slide', 'surfaces', k], `μ moving (${mv}) is above μ starting (${st}): getting a block moving takes more than keeping it moving`);
+  }
+  if (f.roll) {
+    const r = f.roll;
+    const h = control(['roll', 'height'], r.height, ['step']);
+    const surf = control(['roll', 'surface'], r.surface, ['choice']);
+    covers(['roll', 'rolling'], surf, r.rolling, 'rolling coefficient');
+    // At the defaults the car must stop on the runway (docs/30 §4.2 item 4).
+    if (h?.kind === 'step' && surf?.kind === 'choice') {
+      const c = r.rolling[String(surf.default)];
+      if (c !== undefined && rollRun(r, f.g, h.default, c, '').end === 'off-end') issue(['roll'], `at the defaults (${h.default} cm, ${surf.default}) the car runs off the end of the runway`);
+      if (h.values.some((v) => v <= 0)) issue(['roll', 'height'], 'release heights are in cm, above 0');
+    }
+  }
+  if (f.spring) {
+    const sp = f.spring;
+    const load = control(['spring', 'load'], sp.load, ['step']);
+    if (sp.unload !== undefined) control(['spring', 'unload'], sp.unload, ['toggle']);
+    if (load?.kind === 'step') {
+      if (!load.values.includes(sp.limit)) issue(['spring', 'limit'], `the elastic limit ${sp.limit} g is not a value of "${sp.load}"`);
+      for (const v of load.values) if (v > sp.limit && sp.unload !== undefined && sp.set[String(v)] === undefined) issue(['spring', 'set'], `give the set left after ${v} g (above the limit)`);
+      for (const k of Object.keys(sp.set)) {
+        if (Number(k) <= sp.limit) issue(['spring', 'set', k], `${k} g is not above the elastic limit (${sp.limit} g)`);
+        else if (!load.values.includes(Number(k))) issue(['spring', 'set', k], `${k} g is not a value of "${sp.load}"`);
+        else if (sp.set[k]! >= springExtension(sp, Number(k), false)) issue(['spring', 'set', k], 'the set left after unloading must be less than the stretch under the load');
+      }
+    }
+  }
+  if (f.brake) covers(['brake', 'force'], control(['brake', 'squeeze'], f.brake.squeeze, ['choice']), f.brake.force, 'pad force');
   return out;
 }
 
@@ -802,6 +1215,7 @@ export function chapterSimIssues(where: string, s: { set?: SimValues | undefined
   const out: string[] = [];
   const controls = new Map(sim.controls.map((c) => [c.id, c]));
   const outputs = new Set(sim.outputs.map((o) => o.id));
+  const byId = new Map(sim.outputs.map((o) => [o.id, o]));
   const values = (field: string, set: SimValues) => {
     for (const [id, v] of Object.entries(set)) {
       const c = controls.get(id);
@@ -814,12 +1228,37 @@ export function chapterSimIssues(where: string, s: { set?: SimValues | undefined
   if (t) {
     for (const id of [t.vary, ...(t.also ?? [])]) if (!controls.has(id)) out.push(`${where}sim.try: unknown control "${id}"`);
     for (const k of t.keep ?? []) if (typeof k === 'string' && !controls.has(k)) out.push(`${where}sim.try.keep: unknown control "${k}"`);
-    for (const id of t.observe) if (!outputs.has(id)) out.push(`${where}sim.try.observe: unknown output "${id}"`);
-    if (t.record && t.record !== true && !outputs.has(t.record.judge.output)) out.push(`${where}sim.try.record.judge: unknown output "${t.record.judge.output}"`);
+    for (const id of t.observe) {
+      if (!outputs.has(id)) out.push(`${where}sim.try.observe: unknown output "${id}"`);
+      else if (byId.get(id)!.kind === 'timeline') out.push(`${where}sim.try.observe: "${id}" is a timeline (it plays on the stage; observe its numbers)`);
+    }
+    const rec = t.record && t.record !== true ? t.record : null;
+    if (rec?.judge && !outputs.has(rec.judge.output)) out.push(`${where}sim.try.record.judge: unknown output "${rec.judge.output}"`);
+    if (rec?.chart) {
+      const ys = rec.chart === true ? t.observe.filter((id) => byId.get(id)?.kind === 'number').slice(0, 1) : Array.isArray(rec.chart.y) ? rec.chart.y : [rec.chart.y];
+      if (ys.length === 0) out.push(`${where}sim.try.record.chart: the card observes no number to draw (give \`y\`)`);
+      for (const id of ys) {
+        const o = byId.get(id);
+        if (!o) out.push(`${where}sim.try.record.chart.y: unknown output "${id}"`);
+        else if (o.kind !== 'number') out.push(`${where}sim.try.record.chart.y: "${id}" is a ${o.kind}, not a number`);
+      }
+      const units = new Set(ys.map((id) => byId.get(id)?.unit ?? ''));
+      if (units.size > 1) out.push(`${where}sim.try.record.chart.y: one graph, one unit (${[...units].join(', ')})`);
+    }
+    if (Array.isArray(t.replay))
+      for (const id of t.replay) if (byId.get(id)?.kind !== 'timeline') out.push(`${where}sim.try.replay: "${id}" is not a timeline output`);
+    if (t.replay === true && !sim.outputs.some((o) => o.kind === 'timeline')) out.push(`${where}sim.try.replay: the sim has no timeline output to run again`);
     if (t.predict) {
       values('try.predict.change', t.predict.change);
       if (t.predict.start) values('try.predict.start', t.predict.start);
-      if (!outputs.has(t.predict.observe)) out.push(`${where}sim.try.predict.observe: unknown output "${t.predict.observe}"`);
+      const o = byId.get(t.predict.observe);
+      if (!o) out.push(`${where}sim.try.predict.observe: unknown output "${t.predict.observe}"`);
+      else if (o.kind === 'state') {
+        for (const opt of t.predict.options) if (!o.states?.[opt.means]) out.push(`${where}sim.try.predict.options: "${opt.means}" is not a state of "${o.id}"`);
+      } else if (o.kind === 'number') {
+        for (const opt of t.predict.options)
+          if (!(PREDICT_MEANS as readonly string[]).includes(opt.means)) out.push(`${where}sim.try.predict.options: "${opt.means}" is not an outcome (${PREDICT_MEANS.join(', ')})`);
+      } else out.push(`${where}sim.try.predict.observe: "${o.id}" is a ${o.kind} (predict a number or a state)`);
     }
   }
   return out;

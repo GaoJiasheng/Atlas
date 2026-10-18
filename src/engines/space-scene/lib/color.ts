@@ -2,7 +2,7 @@
  * Colour and material resolution for the 3D stage (pure, unit-tested).
  *
  * Part colours in data are a material family (`casing`, `steel`, `powder`,
- * `stainless`, `copper`, `rubber`, `plastic`, `glass`, `enamel`, `brass`, `wood`, and
+ * `stainless`, `copper`, `rubber`, `plastic`, `glass`, `enamel`, `brass`, `wood`, `fabric`, `abrasive`, and
  * the organism families `chitin`, `membrane`, `tissue`, `muscle`, `trachea`,
  * `nerve`, `eye`; `metal` / `matte` are aliases of `steel` / `plastic`), a theme token
  * (`token:accent-1`) or a hex literal. A family can take a `tint` (token or
@@ -67,10 +67,11 @@ export function rgbaToHex({ r, g, b }: Rgba): string {
 
 /**
  * Procedural surface map a finish uses (built once per stage, see stages/model3d/textures.ts):
- * roughness streaks (brushed), orange peel, fine grain, and the organism normal maps
+ * roughness streaks (brushed), orange peel, fine grain, a wood-grain colour map, the bench
+ * normal maps pile (carpet tufts) and sand (abrasive grit), and the organism normal maps
  * hex (compound-eye facets), fibres (muscle), rings (tracheal taenidia).
  */
-export type SurfaceFinish = 'brushed' | 'brushed-axial' | 'peel' | 'grain' | 'hex' | 'fibres' | 'rings' | 'wood';
+export type SurfaceFinish = 'brushed' | 'brushed-axial' | 'peel' | 'grain' | 'hex' | 'fibres' | 'rings' | 'wood' | 'pile' | 'sand';
 
 export interface MaterialLook {
   /** `#rrggbb` sRGB. */
@@ -122,6 +123,10 @@ export const MATERIAL_FAMILIES: Record<MaterialFamily, FamilySpec> = {
   brass: { color: { paper: '#a88a4c', cinema: '#b39555' }, metalness: 0.9, roughness: 0.32, finish: 'grain' },
   // Sanded, sealed plywood or pine (a circuit board, a bench): matte, its grain a colour map the tint colours.
   wood: { color: { paper: '#c49a64', cinema: '#4f3e2d' }, metalness: 0, roughness: 0.68, finish: 'wood', envIntensity: 0.6 },
+  // Short-pile carpet (docs/30 F7): fully matte, dense tufts in the normal map; tint it for the colour of the rug.
+  fabric: { color: { paper: '#a8937c', cinema: '#8c7b69' }, metalness: 0, roughness: 0.96, finish: 'pile', normal: 0.75, envIntensity: 0.35 },
+  // Sandpaper and sand (docs/30 F7): matte grit, packed grains in the normal map; a light tint makes sand.
+  abrasive: { color: { paper: '#5f574e', cinema: '#6b6359' }, metalness: 0, roughness: 0.93, finish: 'sand', normal: 0.9, envIntensity: 0.4 },
   // Organisms (docs/14 §3.4): restrained, low-saturation colours (no "gore" red); tint chitin per species.
   chitin: { color: { paper: '#8b6d43', cinema: '#a3845a' }, metalness: 0, roughness: 0.42, finish: 'peel', normal: 0.05, envIntensity: 0.9 },
   membrane: {

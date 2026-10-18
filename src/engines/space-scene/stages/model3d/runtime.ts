@@ -8,10 +8,12 @@
  * counts frames in which a part moved into a pose (labels re-check occlusion);
  * `contract`, `root`, `bonesMoved` and `exercise` carry the MotionDriver's
  * output (rig, contraction, exercise position) to the parts, labels, sites,
- * equipment and ground.
+ * equipment and ground; `play` where each try-it timeline is (its run's
+ * model time).
  */
 import { createContext, useContext } from 'react';
 import { Matrix4, Vector3 } from 'three';
+import type { Playback } from '../../lib/sim/timeline';
 
 /** Where the exercise puts the body (scene coordinates), for the free-standing equipment and the ground. */
 export interface ExercisePlacement {
@@ -48,10 +50,12 @@ export interface StageRuntime {
   bonesMoved: number;
   /** Exercise mode's placement (null when no exercise is on show). */
   exercise: ExercisePlacement | null;
+  /** Try-it timelines by output id: where each run is (TimelineClock advances them; parts and force arrows read them). */
+  play: Map<string, Playback>;
 }
 
 export function createRuntime(run: boolean, explode: number): StageRuntime {
-  return { energy: run ? 1 : 0, phase: 0, elapsed: 0, explode, shadowDirty: true, moved: 0, contract: new Map(), root: new Matrix4(), bonesMoved: 0, exercise: null };
+  return { energy: run ? 1 : 0, phase: 0, elapsed: 0, explode, shadowDirty: true, moved: 0, contract: new Map(), root: new Matrix4(), bonesMoved: 0, exercise: null, play: new Map() };
 }
 
 export const RuntimeContext = createContext<StageRuntime | null>(null);

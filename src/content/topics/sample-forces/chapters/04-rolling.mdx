@@ -1,0 +1,43 @@
+---
+id: rolling
+order: 4
+title: { en: "Sample roll", zh: "示例滚动" }
+state:
+  view: assembled
+  explode: 0
+  run: false
+  part: null
+  layers: [ramp, friction, spring, drop, brake, forces]
+  camera: {"position": [-0.2, 0.5, 1.45], "target": [-0.3, 0.03, 0.2], "fov": 34}
+  labels: [toy-car, ramp-board, carpet-mat]
+  summary: { en: "Sample roll: the car rolls down the ramp and slows on the runway.", zh: "示例滚动：小车滚下斜面，在跑道上慢下来。" }
+  sim:
+    set: { setup: roll, runway: wood, ramp-height: 6 }
+    try:
+      vary: ramp-height
+      also: [runway]
+      keep: [{ en: "Same car", zh: "同一辆车" }]
+      observe: [distance, run-time]
+      record: { chart: { y: distance } }
+      replay: true
+  beats:
+    - labels: [toy-car, ramp-board]
+      caption: { en: "Sample beat one: let go at six centimetres, the car stops on the wooden runway.", zh: "示例节拍一：从六厘米高放下，小车停在木跑道上。" }
+    - sim: { set: { runway: carpet } }
+      labels: [toy-car, carpet-mat]
+      caption: { en: "Sample beat two: on the carpet it stops much sooner.", zh: "示例节拍二：在地毯上它停得早得多。" }
+  index:
+    parts: [toy-car, car-wheels, ramp-board, runway, glass-mat, carpet-mat]
+---
+
+<Lang en>
+
+Sample roll: placeholder text for the roll sub-model.
+
+</Lang>
+
+<Lang zh>
+
+示例滚动：滚动子模型的占位文字。
+
+</Lang>

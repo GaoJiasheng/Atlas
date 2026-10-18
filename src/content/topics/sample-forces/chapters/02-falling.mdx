@@ -1,0 +1,43 @@
+---
+id: falling
+order: 2
+title: { en: "Sample fall", zh: "示例下落" }
+state:
+  view: assembled
+  explode: 0
+  run: false
+  part: null
+  layers: [ramp, friction, spring, drop, brake, forces]
+  camera: {"position": [1.75, 0.25, 3.0], "target": [1.15, -0.02, 0.02], "fov": 34}
+  labels: [ball-small, ball-large, sand-tray]
+  summary: { en: "Sample fall: two objects let go together; the slow motion shows which lands first.", zh: "示例下落：两个物体同时放手；慢镜头里看谁先落地。" }
+  sim:
+    set: { pair: balls, drop-height: 1.0 }
+    try:
+      vary: pair
+      also: [drop-height, weigh]
+      keep: [{ en: "Same release", zh: "同样放手" }]
+      observe: [t-left, t-right, landing, weight]
+      record: { chart: { y: [t-left, t-right] } }
+      replay: true
+  beats:
+    - labels: [ball-small, ball-large]
+      caption: { en: "Sample beat one: the light and the heavy ball land together.", zh: "示例节拍一：轻球和重球同时落地。" }
+    - sim: { set: { pair: papers } }
+      labels: [paper-ball, paper-sheet]
+      caption: { en: "Sample beat two: the crumpled sheet lands before the flat one.", zh: "示例节拍二：纸团比摊平的纸先落地。" }
+  index:
+    parts: [ball-small, ball-large, paper-ball, paper-sheet, drop-stand, sand-tray]
+---
+
+<Lang en>
+
+Sample fall: placeholder text for the fall sub-model.
+
+</Lang>
+
+<Lang zh>
+
+示例下落：下落子模型的占位文字。
+
+</Lang>

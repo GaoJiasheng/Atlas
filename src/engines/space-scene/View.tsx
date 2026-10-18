@@ -74,6 +74,8 @@ import { CircuitCard } from './hud/CircuitCard';
 import { GroupScaleBars } from './hud/GroupScaleBars';
 import { TryIt } from './explorer/TryIt';
 import { setSim } from './hud/sim';
+import { replay } from './explorer/TryIt';
+import { cardTimelines } from './lib/sim/replay';
 import { isControlValue, resolveSimValues, stepValue } from './lib/sim/controls';
 import { evaluateSimOnStage } from './lib/sim/carrier';
 import type { SimTry } from './sim-schema';
@@ -426,8 +428,12 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
           if (toggle) setSim(store, sim, toggle.id, !(now()[toggle.id] === true));
         },
       },
+      // `G`: run the card's timelines again (the button writes the same count).
+      ...(simCard.replay
+        ? [{ id: 'sim-replay', key: SIM_KEYS.replay, label: t('space.try.replay'), run: () => replay(ui, cardTimelines(sim, now(), simCard)) }]
+        : []),
     ];
-  }, [file.sim, simCard, store, t, locale]);
+  }, [file.sim, simCard, store, ui, t, locale]);
 
   // HUD hidden (H, hero shots) outside the presentation: the stage frames the cover camera.
   const hudOn = useHud((h) => h.hud);
@@ -567,7 +573,26 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
           const values = resolveSimValues(sim, st.sim);
           const state = chapters.find((c) => c.id === st.chapter)?.state as SpaceChapterState | undefined;
           const card = state?.sim?.try ?? null;
-          return { values, set: { ...st.sim }, outputs: evaluateSimOnStage(sim, file, values, st.pose, card?.observe).outputs, try: card, table: ui.getState().simTables[st.chapter ?? ''] ?? [] };
+          // Timelines: where each run is on the stage (model seconds), whether it plays, and how many times slowed down.
+          const timeline = Object.fromEntries(
+            [...bridge.playback].map(([id, p]) => [id, { t: Math.round(p.t * 1000) / 1000, duration: Math.round(p.timeline.duration * 1000) / 1000, playing: p.playing, slow: p.timeline.slow }]),
+          );
+          return {
+            values,
+            set: { ...st.sim },
+            outputs: evaluateSimOnStage(sim, file, values, st.pose, card?.observe).outputs,
+            try: card,
+            table: ui.getState().simTables[st.chapter ?? ''] ?? [],
+            timeline,
+            replays: ui.getState().simReplay.n,
+          };
+        },
+        // QA: hold timeline output `id` at model time `t` (s); false if the stage has no such run.
+        simSeek: (id: string, t: number) => {
+          if (!bridge.playback.has(id) || !Number.isFinite(t)) return false;
+          const prev = ui.getState().simSeek;
+          ui.setState({ simSeek: { id, t, n: (prev?.n ?? 0) + 1 } });
+          return true;
         },
         // Set controls as the reader would (one at a time, through the choices' `sets`); false if one is not a control value.
         setSim: (values: Record<string, boolean | number | string>) => {

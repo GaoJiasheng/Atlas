@@ -47,6 +47,7 @@ import {
 } from '../../lib/shaped';
 import { DEG2RAD } from '../../lib/math';
 import { mergeBaked, type BasePiece } from './geometry';
+import { STRETCH_ATTRIBUTE } from '../../lib/stretch';
 
 type Kind<K extends Primitive['kind']> = Extract<Primitive, { kind: K }>;
 const ID = () => [new Matrix4()];
@@ -170,7 +171,13 @@ class HelixCurve extends Curve<Vector3> {
 
 function coilGeometry(p: Kind<'coil'>): BufferGeometry {
   const segments = Math.min(2048, Math.ceil(p.turns * (p.segments ?? 24)));
-  return new TubeGeometry(new HelixCurve(p), segments, p.wire, p.radial ?? 8, false);
+  const radial = p.radial ?? 8;
+  const g = new TubeGeometry(new HelixCurve(p), segments, p.wire, radial, false);
+  // Each vertex's place along the coil (its ring's helix parameter): a `stretch` binding slides the rings apart (lib/stretch.ts).
+  const t = new Float32Array(g.getAttribute('position').count);
+  for (let i = 0; i <= segments; i++) t.fill(i / segments, i * (radial + 1), (i + 1) * (radial + 1));
+  g.setAttribute(STRETCH_ATTRIBUTE, new BufferAttribute(t, 1));
+  return g;
 }
 
 function extrudeGeometry(p: Kind<'extrude'>): BufferGeometry {

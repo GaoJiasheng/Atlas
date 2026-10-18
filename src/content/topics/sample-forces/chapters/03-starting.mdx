@@ -1,0 +1,43 @@
+---
+id: starting
+order: 3
+title: { en: "Sample pull", zh: "示例拉力" }
+state:
+  view: assembled
+  explode: 0
+  run: false
+  part: null
+  layers: [ramp, friction, spring, drop, brake, forces]
+  camera: {"position": [-0.45, 0.45, 0.45], "target": [-0.5, 0.03, -0.12], "fov": 32}
+  labels: [wooden-block, pull-balance, sandpaper-lane, glass-lane]
+  summary: { en: "Sample pull: the block holds until the pull is big enough, then slides with less.", zh: "示例拉力：拉力够大木块才动，动起来以后要的拉力小一些。" }
+  sim:
+    set: { lane: wood, block-load: 0 }
+    try:
+      vary: lane
+      also: [block-load]
+      keep: [block-load, { en: "Same block", zh: "同一块木块" }]
+      observe: [f-start, f-move]
+      record: { chart: true }
+      replay: true
+  beats:
+    - labels: [wooden-block, pull-balance]
+      caption: { en: "Sample beat one: the pull rises while the block holds, then it slides.", zh: "示例节拍一：木块不动时拉力升高，然后木块滑动。" }
+    - sim: { set: { lane: sandpaper, block-load: 400 } }
+      labels: [wooden-block, sandpaper-lane, brass-weights]
+      caption: { en: "Sample beat two: a rougher lane and a heavier block take a bigger pull.", zh: "示例节拍二：表面越粗、木块越重，要的拉力越大。" }
+  index:
+    parts: [wooden-block, brass-weights, pull-balance, pull-balance-spring, glass-lane, sandpaper-lane, friction-board]
+---
+
+<Lang en>
+
+Sample pull: placeholder text for the slide sub-model.
+
+</Lang>
+
+<Lang zh>
+
+示例拉力：滑动摩擦子模型的占位文字。
+
+</Lang>

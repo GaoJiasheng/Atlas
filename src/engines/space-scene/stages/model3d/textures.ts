@@ -10,6 +10,8 @@
  *  - fibres        fine parallel fibres along U, normal map (muscle)
  *  - rings         sharp ridges across U, normal map (tracheal taenidia, along a sweep)
  *  - wood          long-grain streaks along U, a grey colour map the family colour tints
+ *  - pile          dense short tufts, normal map and a grey colour map (carpet)
+ *  - sand          packed rounded grains, normal map and a grey colour map (sandpaper, sand)
  */
 import { CanvasTexture, RepeatWrapping, SRGBColorSpace, type Texture } from 'three';
 import type { SurfaceFinish } from '../../lib/color';
@@ -195,12 +197,70 @@ function woodCanvas(): HTMLCanvasElement {
   return c;
 }
 
+/** Short carpet pile: many small round tufts, each a soft dome with a darker gap between (height 0..1). */
+function pileField(size: number): Float32Array {
+  const rand = mulberry32(53);
+  const field = new Float32Array(size * size);
+  for (let i = 0; i < 420; i++) {
+    const cx = rand() * size;
+    const cy = rand() * size;
+    const rad = 2.2 + rand() * 1.6;
+    const h = 0.6 + rand() * 0.4;
+    stamp(field, size, cx, cy, rad, (d) => h * Math.sqrt(1 - d * d));
+  }
+  return field;
+}
+
+/** Abrasive grit: packed small grains of mixed size, sharp-edged domes (height 0..1). */
+function sandField(size: number): Float32Array {
+  const rand = mulberry32(67);
+  const field = new Float32Array(size * size);
+  for (let i = 0; i < 900; i++) {
+    const cx = rand() * size;
+    const cy = rand() * size;
+    const rad = 0.9 + rand() * 1.7;
+    const h = 0.5 + rand() * 0.5;
+    stamp(field, size, cx, cy, rad, (d) => h * (1 - d * d));
+  }
+  return field;
+}
+
+/** Raise a tileable height field by a round bump (max with what is there). */
+function stamp(field: Float32Array, size: number, cx: number, cy: number, rad: number, height: (d: number) => number): void {
+  const r = Math.ceil(rad);
+  for (let dy = -r; dy <= r; dy++)
+    for (let dx = -r; dx <= r; dx++) {
+      const d = Math.hypot(dx, dy) / rad;
+      if (d >= 1) continue;
+      const x = (Math.floor(cx) + dx + size) % size;
+      const y = (Math.floor(cy) + dy + size) % size;
+      field[y * size + x] = Math.max(field[y * size + x]!, height(d));
+    }
+}
+
+/** A grey colour map from a height field: high ground light, gaps dark (the family colour tints it). */
+function shadeCanvas(field: Float32Array, size: number, low: number): HTMLCanvasElement {
+  const [c, g] = canvas(size);
+  const img = g.createImageData(size, size);
+  for (let i = 0; i < size * size; i++) {
+    const n = Math.round(255 * (low + (1 - low) * field[i]!));
+    img.data.set([n, n, n, 255], i * 4);
+  }
+  g.putImageData(img, 0, 0);
+  return c;
+}
+
+const BENCH_SIZE = 128;
+/** Tiles per UV unit: carpet tufts a few millimetres across, sandpaper grit finer. */
+const PILE_REPEAT = 8;
+const SAND_REPEAT = 10;
+
 export interface TextureKit {
   /** Roughness map for a finish (every finish has one: one shader program for all parts). */
   roughness(finish: SurfaceFinish): Texture;
   /** Normal map for a finish (orange peel unless it has its own; strength is set per family). */
   normal(finish?: SurfaceFinish): Texture;
-  /** Colour map for a finish that has one (wood), else null. */
+  /** Colour map for a finish that has one (wood, pile, sand), else null. */
   albedo(finish: SurfaceFinish): Texture | null;
   dispose(): void;
 }
@@ -213,13 +273,28 @@ export function createTextureKit(): TextureKit {
   brushedAxial.rotation = Math.PI / 2;
   const grain = wrap(grainCanvas(), 3);
   const peel = wrap(peelCanvas(), 7);
-  // Organism maps are built on first use (machine topics never pay for them).
+  // Organism and bench maps are built on first use (other topics never pay for them).
   const extra = new Map<SurfaceFinish, Texture>();
+  const colour = new Map<SurfaceFinish, Texture>();
+  // The pile and grit height fields, shared by each finish's normal and colour maps.
+  let pileHeights: Float32Array | null = null;
+  let sandHeights: Float32Array | null = null;
+  const pile = () => (pileHeights ??= pileField(BENCH_SIZE));
+  const sand = () => (sandHeights ??= sandField(BENCH_SIZE));
   const own = (finish: SurfaceFinish): Texture | null => {
-    if (finish !== 'hex' && finish !== 'fibres' && finish !== 'rings') return null;
+    if (finish !== 'hex' && finish !== 'fibres' && finish !== 'rings' && finish !== 'pile' && finish !== 'sand') return null;
     let t = extra.get(finish);
     if (!t) {
-      t = finish === 'hex' ? wrap(hexCanvas(), 6) : finish === 'fibres' ? wrap(fibresCanvas(), 2) : wrap(ringsCanvas(), 1);
+      t =
+        finish === 'hex'
+          ? wrap(hexCanvas(), 6)
+          : finish === 'fibres'
+            ? wrap(fibresCanvas(), 2)
+            : finish === 'pile'
+              ? wrap(normalCanvas(BENCH_SIZE, (x, y) => pile()[y * BENCH_SIZE + x]!, 1.6), PILE_REPEAT)
+              : finish === 'sand'
+                ? wrap(normalCanvas(BENCH_SIZE, (x, y) => sand()[y * BENCH_SIZE + x]!, 2.4), SAND_REPEAT)
+                : wrap(ringsCanvas(), 1);
       if (finish === 'hex') t.repeat.set(6, 3);
       extra.set(finish, t);
     }
@@ -235,12 +310,17 @@ export function createTextureKit(): TextureKit {
       return (finish && own(finish)) || peel;
     },
     albedo(finish) {
-      if (finish !== 'wood') return null;
-      let t = extra.get('wood');
+      if (finish !== 'wood' && finish !== 'pile' && finish !== 'sand') return null;
+      let t = colour.get(finish);
       if (!t) {
-        t = wrap(woodCanvas(), 1);
+        t =
+          finish === 'wood'
+            ? wrap(woodCanvas(), 1)
+            : finish === 'pile'
+              ? wrap(shadeCanvas(pile(), BENCH_SIZE, 0.55), PILE_REPEAT)
+              : wrap(shadeCanvas(sand(), BENCH_SIZE, 0.62), SAND_REPEAT);
         t.colorSpace = SRGBColorSpace;
-        extra.set('wood', t);
+        colour.set(finish, t);
       }
       return t;
     },
@@ -250,6 +330,7 @@ export function createTextureKit(): TextureKit {
       grain.dispose();
       peel.dispose();
       extra.forEach((t) => t.dispose());
+      colour.forEach((t) => t.dispose());
     },
   };
 }

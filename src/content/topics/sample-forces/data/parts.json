@@ -1,0 +1,3232 @@
+{
+  "parts": [
+    {
+      "id": "ramp-board",
+      "name": {
+        "en": "Ramp",
+        "zh": "斜面"
+      },
+      "group": "ramp",
+      "summary": {
+        "en": "Sample ramp: a car starts from a set height.",
+        "zh": "示例斜面：小车从定好的高度出发。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample ramp.",
+        "zh": "占位说明：示例斜面。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.42,
+          0.012,
+          0.1
+        ],
+        "bevel": 0.002,
+        "at": [
+          -0.6838,
+          0.0568,
+          0.22
+        ],
+        "color": "wood",
+        "rotation": [
+          0,
+          0,
+          -14
+        ]
+      }
+    },
+    {
+      "id": "runway",
+      "name": {
+        "en": "Runway",
+        "zh": "跑道"
+      },
+      "group": "ramp",
+      "summary": {
+        "en": "Sample runway the car rolls along.",
+        "zh": "示例跑道：小车在上面滑行。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample runway.",
+        "zh": "占位说明：示例跑道。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          1.3,
+          0.012,
+          0.1
+        ],
+        "bevel": 0.002,
+        "at": [
+          0.17,
+          0.006,
+          0.22
+        ],
+        "color": "wood"
+      }
+    },
+    {
+      "id": "glass-mat",
+      "name": {
+        "en": "Glass sheet",
+        "zh": "玻璃板"
+      },
+      "group": "ramp",
+      "summary": {
+        "en": "Sample smooth surface.",
+        "zh": "示例光滑表面。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample glass sheet.",
+        "zh": "占位说明：示例玻璃板。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          1.2,
+          0.004,
+          0.09
+        ],
+        "bevel": 0.001,
+        "at": [
+          0.12,
+          0.014,
+          0.22
+        ],
+        "color": "glass"
+      }
+    },
+    {
+      "id": "carpet-mat",
+      "name": {
+        "en": "Carpet strip",
+        "zh": "地毯条"
+      },
+      "group": "ramp",
+      "summary": {
+        "en": "Sample soft, furry surface.",
+        "zh": "示例柔软起绒的表面。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample carpet strip.",
+        "zh": "占位说明：示例地毯条。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          1.2,
+          0.008,
+          0.09
+        ],
+        "bevel": 0.002,
+        "at": [
+          0.12,
+          0.016,
+          0.22
+        ],
+        "color": "fabric",
+        "tint": "#8a6f5a"
+      }
+    },
+    {
+      "id": "toy-car",
+      "name": {
+        "en": "Toy car",
+        "zh": "玩具车"
+      },
+      "group": "ramp",
+      "summary": {
+        "en": "Sample car: pushed, or let go on the ramp.",
+        "zh": "示例小车：被推，或从斜面放下。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample toy car.",
+        "zh": "占位说明：示例玩具车。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.09,
+          0.024,
+          0.045
+        ],
+        "bevel": 0.004,
+        "at": [
+          -0.43,
+          0.035,
+          0.22
+        ],
+        "color": "plastic",
+        "tint": "#a8573f"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.04,
+            0.014,
+            0.038
+          ],
+          "bevel": 0.003,
+          "at": [
+            -0.435,
+            0.053000000000000005,
+            0.22
+          ],
+          "color": "plastic",
+          "tint": "#a8573f"
+        }
+      ]
+    },
+    {
+      "id": "car-wheels",
+      "name": {
+        "en": "Car wheels",
+        "zh": "车轮"
+      },
+      "group": "ramp",
+      "summary": {
+        "en": "Sample wheels that turn as the car rolls.",
+        "zh": "示例车轮：小车滚动时转动。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample car wheels.",
+        "zh": "占位说明：示例车轮。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.011,
+          0.011,
+          0.007
+        ],
+        "at": [
+          -0.46,
+          0.023,
+          0.194
+        ],
+        "color": "rubber",
+        "rotation": [
+          90,
+          0,
+          0
+        ]
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "size": [
+            0.011,
+            0.011,
+            0.007
+          ],
+          "at": [
+            -0.46,
+            0.023,
+            0.246
+          ],
+          "color": "rubber",
+          "rotation": [
+            90,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.011,
+            0.011,
+            0.007
+          ],
+          "at": [
+            -0.4,
+            0.023,
+            0.194
+          ],
+          "color": "rubber",
+          "rotation": [
+            90,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.011,
+            0.011,
+            0.007
+          ],
+          "at": [
+            -0.4,
+            0.023,
+            0.246
+          ],
+          "color": "rubber",
+          "rotation": [
+            90,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "friction-board",
+      "name": {
+        "en": "Friction board",
+        "zh": "摩擦板"
+      },
+      "group": "friction",
+      "summary": {
+        "en": "Sample board with three surfaces.",
+        "zh": "示例摩擦板：三种表面。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample friction board.",
+        "zh": "占位说明：示例摩擦板。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.6,
+          0.012,
+          0.24
+        ],
+        "bevel": 0.002,
+        "at": [
+          -0.45,
+          0.006,
+          -0.12
+        ],
+        "color": "wood"
+      }
+    },
+    {
+      "id": "glass-lane",
+      "name": {
+        "en": "Glass lane",
+        "zh": "玻璃道"
+      },
+      "group": "friction",
+      "summary": {
+        "en": "Sample smooth lane.",
+        "zh": "示例光滑的道。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample glass lane.",
+        "zh": "占位说明：示例玻璃道。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.56,
+          0.004,
+          0.07
+        ],
+        "bevel": 0.001,
+        "at": [
+          -0.45,
+          0.014,
+          -0.2
+        ],
+        "color": "glass"
+      }
+    },
+    {
+      "id": "sandpaper-lane",
+      "name": {
+        "en": "Sandpaper lane",
+        "zh": "砂纸道"
+      },
+      "group": "friction",
+      "summary": {
+        "en": "Sample rough lane.",
+        "zh": "示例粗糙的道。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample sandpaper lane.",
+        "zh": "占位说明：示例砂纸道。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.56,
+          0.0015,
+          0.07
+        ],
+        "bevel": 0.0005,
+        "at": [
+          -0.45,
+          0.01275,
+          -0.04
+        ],
+        "color": "abrasive"
+      }
+    },
+    {
+      "id": "wooden-block",
+      "name": {
+        "en": "Wooden block",
+        "zh": "木块"
+      },
+      "group": "friction",
+      "summary": {
+        "en": "Sample block pulled across a lane.",
+        "zh": "示例木块：在道上被拉动。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample wooden block.",
+        "zh": "占位说明：示例木块。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.1,
+          0.04,
+          0.06
+        ],
+        "bevel": 0.003,
+        "at": [
+          -0.66,
+          0.032,
+          -0.12
+        ],
+        "color": "wood"
+      }
+    },
+    {
+      "id": "brass-weights",
+      "name": {
+        "en": "Brass weights",
+        "zh": "黄铜砝码"
+      },
+      "group": "friction",
+      "summary": {
+        "en": "Sample weights that make the block heavier.",
+        "zh": "示例砝码：让木块更重。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample brass weights.",
+        "zh": "占位说明：示例黄铜砝码。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.014,
+          0.014,
+          0.02
+        ],
+        "at": [
+          -0.66,
+          0.0625,
+          -0.12
+        ],
+        "color": "brass"
+      },
+      "repeat": {
+        "count": 2,
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "spacing": 0.021
+      }
+    },
+    {
+      "id": "pull-balance",
+      "name": {
+        "en": "Pull balance",
+        "zh": "拉力弹簧秤"
+      },
+      "group": "friction",
+      "summary": {
+        "en": "Sample balance that reads the pull.",
+        "zh": "示例弹簧秤：读出拉力。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample pull balance.",
+        "zh": "占位说明：示例拉力弹簧秤。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.012,
+          0.012,
+          0.16
+        ],
+        "at": [
+          -0.5,
+          0.032,
+          -0.12
+        ],
+        "color": "glass",
+        "rotation": [
+          0,
+          0,
+          90
+        ]
+      },
+      "shell": true
+    },
+    {
+      "id": "pull-balance-spring",
+      "name": {
+        "en": "Balance spring",
+        "zh": "秤里的弹簧"
+      },
+      "group": "friction",
+      "summary": {
+        "en": "Sample spring inside the balance.",
+        "zh": "示例秤里的弹簧。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample balance spring.",
+        "zh": "占位说明：示例秤里的弹簧。"
+      },
+      "primitive": {
+        "kind": "coil",
+        "radius": 0.006,
+        "wire": 0.0007,
+        "turns": 18,
+        "length": 0.07,
+        "at": [
+          -0.535,
+          0.032,
+          -0.12
+        ],
+        "rotation": [
+          0,
+          0,
+          -90
+        ],
+        "color": "steel"
+      }
+    },
+    {
+      "id": "pull-balance-pointer",
+      "name": {
+        "en": "Balance pointer",
+        "zh": "秤的指针"
+      },
+      "group": "friction",
+      "summary": {
+        "en": "Sample pointer along the scale.",
+        "zh": "示例指针：沿刻度移动。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample balance pointer.",
+        "zh": "占位说明：示例秤的指针。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.004,
+          0.018,
+          0.004
+        ],
+        "bevel": 0.001,
+        "at": [
+          -0.497,
+          0.046,
+          -0.12
+        ],
+        "color": "brass"
+      }
+    },
+    {
+      "id": "retort-stand",
+      "name": {
+        "en": "Retort stand",
+        "zh": "铁架台"
+      },
+      "group": "spring",
+      "summary": {
+        "en": "Sample stand that holds the spring.",
+        "zh": "示例铁架台：挂着弹簧。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample retort stand.",
+        "zh": "占位说明：示例铁架台。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.006,
+          0.006,
+          0.6
+        ],
+        "at": [
+          0.0,
+          0.3,
+          -0.2
+        ],
+        "color": "steel"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.2,
+            0.015,
+            0.14
+          ],
+          "bevel": 0.003,
+          "at": [
+            0.0,
+            0.0075,
+            -0.2
+          ],
+          "color": "powder"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.004,
+            0.004,
+            0.16
+          ],
+          "at": [
+            0.08,
+            0.505,
+            -0.2
+          ],
+          "color": "steel",
+          "rotation": [
+            0,
+            0,
+            90
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test-spring",
+      "name": {
+        "en": "Spring",
+        "zh": "弹簧"
+      },
+      "group": "spring",
+      "summary": {
+        "en": "Sample spring: more weight, more stretch.",
+        "zh": "示例弹簧：挂得越重，伸得越长。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample spring.",
+        "zh": "占位说明：示例弹簧。"
+      },
+      "primitive": {
+        "kind": "coil",
+        "radius": 0.008,
+        "wire": 0.0009,
+        "turns": 30,
+        "length": 0.08,
+        "at": [
+          0.1,
+          0.46,
+          -0.2
+        ],
+        "color": "steel"
+      },
+      "extra": [
+        {
+          "kind": "torus",
+          "size": [
+            0.005,
+            0.0009
+          ],
+          "at": [
+            0.1,
+            0.4148,
+            -0.2
+          ],
+          "color": "steel"
+        }
+      ]
+    },
+    {
+      "id": "mass-hanger",
+      "name": {
+        "en": "Mass hanger",
+        "zh": "挂钩"
+      },
+      "group": "spring",
+      "summary": {
+        "en": "Sample 50 g hanger.",
+        "zh": "示例 50 克挂钩。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample mass hanger.",
+        "zh": "占位说明：示例挂钩。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.0025,
+          0.0025,
+          0.05
+        ],
+        "at": [
+          0.1,
+          0.385,
+          -0.2
+        ],
+        "color": "brass"
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "size": [
+            0.02,
+            0.02,
+            0.004
+          ],
+          "at": [
+            0.1,
+            0.358,
+            -0.2
+          ],
+          "color": "brass"
+        }
+      ]
+    },
+    {
+      "id": "slotted-masses",
+      "name": {
+        "en": "Slotted masses",
+        "zh": "槽码"
+      },
+      "group": "spring",
+      "summary": {
+        "en": "Sample 50 g slotted masses.",
+        "zh": "示例 50 克槽码。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample slotted masses.",
+        "zh": "占位说明：示例槽码。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.02,
+          0.02,
+          0.006
+        ],
+        "at": [
+          0.1,
+          0.3815,
+          -0.2
+        ],
+        "color": "brass"
+      },
+      "repeat": {
+        "count": 7,
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "spacing": 0.0065
+      }
+    },
+    {
+      "id": "spring-ruler",
+      "name": {
+        "en": "Ruler",
+        "zh": "竖尺"
+      },
+      "group": "spring",
+      "summary": {
+        "en": "Sample ruler beside the spring.",
+        "zh": "示例竖尺：立在弹簧旁。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample ruler.",
+        "zh": "占位说明：示例竖尺。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.025,
+          0.3,
+          0.003
+        ],
+        "bevel": 0.001,
+        "at": [
+          0.14,
+          0.36,
+          -0.19
+        ],
+        "color": "wood",
+        "tint": "#d8c08f"
+      }
+    },
+    {
+      "id": "drop-stand",
+      "name": {
+        "en": "Drop tower",
+        "zh": "落体架"
+      },
+      "group": "drop",
+      "summary": {
+        "en": "Sample tower the objects fall from.",
+        "zh": "示例落体架：物体从这里落下。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample drop tower.",
+        "zh": "占位说明：示例落体架。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.008,
+          0.008,
+          1.65
+        ],
+        "at": [
+          1.15,
+          0.075,
+          -0.1
+        ],
+        "color": "steel"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.3,
+            0.02,
+            0.3
+          ],
+          "bevel": 0.004,
+          "at": [
+            1.15,
+            -0.74,
+            -0.1
+          ],
+          "color": "powder"
+        }
+      ]
+    },
+    {
+      "id": "sand-tray",
+      "name": {
+        "en": "Sand tray",
+        "zh": "沙盘"
+      },
+      "group": "drop",
+      "summary": {
+        "en": "Sample sand the objects land in.",
+        "zh": "示例沙盘：物体落在里面。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample sand tray.",
+        "zh": "占位说明：示例沙盘。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.5,
+          0.04,
+          0.3
+        ],
+        "bevel": 0.004,
+        "at": [
+          1.15,
+          -0.73,
+          0.06
+        ],
+        "color": "abrasive",
+        "tint": "#cdb68c"
+      }
+    },
+    {
+      "id": "ball-small",
+      "name": {
+        "en": "Small steel ball",
+        "zh": "小钢球"
+      },
+      "group": "drop",
+      "summary": {
+        "en": "Sample 28 g ball.",
+        "zh": "示例 28 克钢球。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample small steel ball.",
+        "zh": "占位说明：示例小钢球。"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.0095
+        ],
+        "at": [
+          1.05,
+          0.2995,
+          0.06
+        ],
+        "color": "steel"
+      }
+    },
+    {
+      "id": "ball-large",
+      "name": {
+        "en": "Large steel ball",
+        "zh": "大钢球"
+      },
+      "group": "drop",
+      "summary": {
+        "en": "Sample 225 g ball.",
+        "zh": "示例 225 克钢球。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample large steel ball.",
+        "zh": "占位说明：示例大钢球。"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.019
+        ],
+        "at": [
+          1.25,
+          0.309,
+          0.06
+        ],
+        "color": "steel"
+      }
+    },
+    {
+      "id": "paper-ball",
+      "name": {
+        "en": "Crumpled paper",
+        "zh": "纸团"
+      },
+      "group": "drop",
+      "summary": {
+        "en": "Sample sheet crumpled into a ball.",
+        "zh": "示例揉成团的纸。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample crumpled paper.",
+        "zh": "占位说明：示例纸团。"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.025
+        ],
+        "at": [
+          1.05,
+          0.315,
+          0.06
+        ],
+        "color": "enamel"
+      }
+    },
+    {
+      "id": "paper-sheet",
+      "name": {
+        "en": "Flat paper",
+        "zh": "摊平的纸"
+      },
+      "group": "drop",
+      "summary": {
+        "en": "Sample flat sheet of paper.",
+        "zh": "示例摊平的纸。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample flat paper.",
+        "zh": "占位说明：示例摊平的纸。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.21,
+          0.0008,
+          0.297
+        ],
+        "bevel": 0.0002,
+        "at": [
+          1.25,
+          0.291,
+          0.06
+        ],
+        "color": "enamel"
+      }
+    },
+    {
+      "id": "wheel",
+      "name": {
+        "en": "Bicycle wheel",
+        "zh": "自行车轮"
+      },
+      "group": "brake",
+      "summary": {
+        "en": "Sample wheel that spins until friction stops it.",
+        "zh": "示例车轮：一直转，直到摩擦力让它停下。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample bicycle wheel.",
+        "zh": "占位说明：示例自行车轮。"
+      },
+      "primitive": {
+        "kind": "torus",
+        "size": [
+          0.18,
+          0.012
+        ],
+        "at": [
+          0.55,
+          0.3,
+          -0.12
+        ],
+        "color": "rubber"
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "size": [
+            0.02,
+            0.02,
+            0.05
+          ],
+          "at": [
+            0.55,
+            0.3,
+            -0.12
+          ],
+          "color": "casing",
+          "rotation": [
+            90,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.34,
+            0.004,
+            0.004
+          ],
+          "bevel": 0.001,
+          "at": [
+            0.55,
+            0.3,
+            -0.12
+          ],
+          "color": "stainless",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.34,
+            0.004,
+            0.004
+          ],
+          "bevel": 0.001,
+          "at": [
+            0.55,
+            0.3,
+            -0.12
+          ],
+          "color": "stainless",
+          "rotation": [
+            0,
+            0,
+            45
+          ]
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.34,
+            0.004,
+            0.004
+          ],
+          "bevel": 0.001,
+          "at": [
+            0.55,
+            0.3,
+            -0.12
+          ],
+          "color": "stainless",
+          "rotation": [
+            0,
+            0,
+            90
+          ]
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.34,
+            0.004,
+            0.004
+          ],
+          "bevel": 0.001,
+          "at": [
+            0.55,
+            0.3,
+            -0.12
+          ],
+          "color": "stainless",
+          "rotation": [
+            0,
+            0,
+            135
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wheel-stand",
+      "name": {
+        "en": "Wheel stand",
+        "zh": "轮架"
+      },
+      "group": "brake",
+      "summary": {
+        "en": "Sample stand that holds the wheel up.",
+        "zh": "示例轮架：把轮子架起来。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample wheel stand.",
+        "zh": "占位说明：示例轮架。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.3,
+          0.015,
+          0.12
+        ],
+        "bevel": 0.003,
+        "at": [
+          0.55,
+          0.0075,
+          -0.12
+        ],
+        "color": "powder"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.014,
+            0.3,
+            0.014
+          ],
+          "bevel": 0.003,
+          "at": [
+            0.55,
+            0.15,
+            -0.065
+          ],
+          "color": "powder"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.014,
+            0.3,
+            0.014
+          ],
+          "bevel": 0.003,
+          "at": [
+            0.55,
+            0.15,
+            -0.175
+          ],
+          "color": "powder"
+        }
+      ]
+    },
+    {
+      "id": "brake-caliper",
+      "name": {
+        "en": "Brake",
+        "zh": "刹车"
+      },
+      "group": "brake",
+      "summary": {
+        "en": "Sample brake that squeezes pads on the rim.",
+        "zh": "示例刹车：把刹车块夹在轮圈上。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample brake.",
+        "zh": "占位说明：示例刹车。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.05,
+          0.012,
+          0.06
+        ],
+        "bevel": 0.002,
+        "at": [
+          0.55,
+          0.505,
+          -0.12
+        ],
+        "color": "casing"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.03,
+            0.012,
+            0.008
+          ],
+          "bevel": 0.002,
+          "at": [
+            0.55,
+            0.49,
+            -0.096
+          ],
+          "color": "rubber"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.03,
+            0.012,
+            0.008
+          ],
+          "bevel": 0.002,
+          "at": [
+            0.55,
+            0.49,
+            -0.144
+          ],
+          "color": "rubber"
+        }
+      ]
+    },
+    {
+      "id": "bench",
+      "name": {
+        "en": "Bench",
+        "zh": "实验台"
+      },
+      "summary": {
+        "en": "Sample bench.",
+        "zh": "示例实验台。"
+      },
+      "detail": {
+        "en": "Placeholder bench.",
+        "zh": "占位实验台。"
+      },
+      "context": true,
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          1.8,
+          0.03,
+          0.7
+        ],
+        "bevel": 0.004,
+        "at": [
+          0,
+          -0.015,
+          0
+        ],
+        "color": "wood",
+        "tint": "#b58a5a"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.04,
+            0.72,
+            0.04
+          ],
+          "bevel": 0.004,
+          "at": [
+            -0.86,
+            -0.39,
+            -0.31
+          ],
+          "color": "wood",
+          "tint": "#b58a5a"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.04,
+            0.72,
+            0.04
+          ],
+          "bevel": 0.004,
+          "at": [
+            -0.86,
+            -0.39,
+            0.31
+          ],
+          "color": "wood",
+          "tint": "#b58a5a"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.04,
+            0.72,
+            0.04
+          ],
+          "bevel": 0.004,
+          "at": [
+            0.86,
+            -0.39,
+            -0.31
+          ],
+          "color": "wood",
+          "tint": "#b58a5a"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.04,
+            0.72,
+            0.04
+          ],
+          "bevel": 0.004,
+          "at": [
+            0.86,
+            -0.39,
+            0.31
+          ],
+          "color": "wood",
+          "tint": "#b58a5a"
+        }
+      ]
+    },
+    {
+      "id": "floor",
+      "name": {
+        "en": "Floor",
+        "zh": "地面"
+      },
+      "summary": {
+        "en": "Sample floor.",
+        "zh": "示例地面。"
+      },
+      "detail": {
+        "en": "Placeholder floor.",
+        "zh": "占位地面。"
+      },
+      "context": true,
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          3.0,
+          0.01,
+          1.6
+        ],
+        "bevel": 0.002,
+        "at": [
+          0.2,
+          -0.755,
+          0
+        ],
+        "color": "enamel",
+        "tint": "#cfc8b8"
+      }
+    }
+  ],
+  "groups": [
+    {
+      "id": "ramp",
+      "name": {
+        "en": "Ramp and runway",
+        "zh": "斜面与跑道"
+      },
+      "color": "token:ink-2"
+    },
+    {
+      "id": "friction",
+      "name": {
+        "en": "Friction board",
+        "zh": "摩擦板"
+      },
+      "color": "token:accent-1"
+    },
+    {
+      "id": "spring",
+      "name": {
+        "en": "Spring stand",
+        "zh": "弹簧架"
+      },
+      "color": "token:accent-2"
+    },
+    {
+      "id": "drop",
+      "name": {
+        "en": "Drop tower",
+        "zh": "落体架"
+      },
+      "color": "token:ink-3"
+    },
+    {
+      "id": "brake",
+      "name": {
+        "en": "Brake wheel",
+        "zh": "刹车轮"
+      },
+      "color": "token:accent-3"
+    },
+    {
+      "id": "forces",
+      "name": {
+        "en": "Forces",
+        "zh": "力"
+      },
+      "color": "token:f-push"
+    }
+  ],
+  "views": {
+    "assembled": {
+      "camera": {
+        "position": [
+          0.75,
+          1.15,
+          2.9
+        ],
+        "target": [
+          0.25,
+          -0.05,
+          0
+        ],
+        "fov": 34
+      }
+    },
+    "cover": {
+      "position": [
+        0.7,
+        1.0,
+        2.6
+      ],
+      "target": [
+        0.25,
+        -0.05,
+        0
+      ],
+      "fov": 34
+    },
+    "section": {
+      "plane": "xy"
+    }
+  },
+  "spec": [
+    {
+      "key": {
+        "en": "Spring",
+        "zh": "弹簧"
+      },
+      "value": {
+        "en": "1.0 cm per 50 g · up to 300 g",
+        "zh": "每 50 g 伸 1.0 cm · 300 g 以内"
+      },
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Wooden block",
+        "zh": "木块"
+      },
+      "value": "200 g",
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Gravity here",
+        "zh": "这里的重力"
+      },
+      "value": {
+        "en": "≈ 9.8 N per kg",
+        "zh": "每千克约 9.8 N"
+      },
+      "tag": "typical"
+    }
+  ],
+  "telemetry": [
+    {
+      "key": {
+        "en": "Fall time · L · R",
+        "zh": "下落时间 · 左 · 右"
+      },
+      "unit": "s",
+      "follow": [
+        "t-left",
+        "t-right"
+      ]
+    },
+    {
+      "key": {
+        "en": "Weight",
+        "zh": "重量"
+      },
+      "unit": "N",
+      "follow": [
+        "weight",
+        "load-weight"
+      ],
+      "scope": "observe"
+    },
+    {
+      "key": {
+        "en": "Pull to start",
+        "zh": "开始滑动的拉力"
+      },
+      "unit": "N",
+      "follow": "f-start",
+      "scope": "observe"
+    },
+    {
+      "key": {
+        "en": "Distance",
+        "zh": "滑行距离"
+      },
+      "unit": "cm",
+      "follow": "distance"
+    },
+    {
+      "key": {
+        "en": "Extension",
+        "zh": "伸长"
+      },
+      "unit": "cm",
+      "follow": "extension"
+    },
+    {
+      "key": {
+        "en": "Time to stop",
+        "zh": "停下用时"
+      },
+      "unit": "s",
+      "follow": "stop-time"
+    }
+  ],
+  "presets": [
+    {
+      "id": "ramp-view",
+      "label": {
+        "en": "Ramp",
+        "zh": "斜面"
+      },
+      "camera": {
+        "position": [
+          -0.2,
+          0.5,
+          1.45
+        ],
+        "target": [
+          -0.3,
+          0.03,
+          0.2
+        ],
+        "fov": 34
+      }
+    },
+    {
+      "id": "board-view",
+      "label": {
+        "en": "Board",
+        "zh": "摩擦板"
+      },
+      "camera": {
+        "position": [
+          -0.45,
+          0.45,
+          0.45
+        ],
+        "target": [
+          -0.5,
+          0.03,
+          -0.12
+        ],
+        "fov": 32
+      }
+    },
+    {
+      "id": "spring-view",
+      "label": {
+        "en": "Spring",
+        "zh": "弹簧"
+      },
+      "camera": {
+        "position": [
+          0.22,
+          0.48,
+          0.55
+        ],
+        "target": [
+          0.1,
+          0.38,
+          -0.2
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "tower-view",
+      "label": {
+        "en": "Tower",
+        "zh": "落体架"
+      },
+      "camera": {
+        "position": [
+          1.75,
+          0.25,
+          3.0
+        ],
+        "target": [
+          1.15,
+          -0.02,
+          0.02
+        ],
+        "fov": 34
+      }
+    },
+    {
+      "id": "wheel-view",
+      "label": {
+        "en": "Wheel",
+        "zh": "车轮"
+      },
+      "camera": {
+        "position": [
+          0.8,
+          0.45,
+          0.75
+        ],
+        "target": [
+          0.55,
+          0.28,
+          -0.12
+        ],
+        "fov": 30
+      }
+    }
+  ],
+  "poses": {
+    "car-at-push": {
+      "toy-car": {
+        "offset": [
+          0.25,
+          0,
+          0
+        ]
+      },
+      "car-wheels": {
+        "offset": [
+          0.25,
+          0,
+          0
+        ]
+      },
+      "duration": 0.6
+    },
+    "lane-glass": {
+      "wooden-block": {
+        "offset": [
+          0,
+          0,
+          -0.08
+        ]
+      },
+      "brass-weights": {
+        "offset": [
+          0,
+          0,
+          -0.08
+        ]
+      },
+      "pull-balance": {
+        "offset": [
+          0,
+          0,
+          -0.08
+        ]
+      },
+      "pull-balance-spring": {
+        "offset": [
+          0,
+          0,
+          -0.08
+        ]
+      },
+      "pull-balance-pointer": {
+        "offset": [
+          0,
+          0,
+          -0.08
+        ]
+      },
+      "duration": 0.6
+    },
+    "lane-sand": {
+      "wooden-block": {
+        "offset": [
+          0,
+          -0.0012,
+          0.08
+        ]
+      },
+      "brass-weights": {
+        "offset": [
+          0,
+          -0.0012,
+          0.08
+        ]
+      },
+      "pull-balance": {
+        "offset": [
+          0,
+          -0.0012,
+          0.08
+        ]
+      },
+      "pull-balance-spring": {
+        "offset": [
+          0,
+          -0.0012,
+          0.08
+        ]
+      },
+      "pull-balance-pointer": {
+        "offset": [
+          0,
+          -0.0012,
+          0.08
+        ]
+      },
+      "duration": 0.6
+    },
+    "spring-unloaded": {
+      "mass-hanger": {
+        "offset": [
+          0.12,
+          -0.34,
+          0.1
+        ]
+      },
+      "slotted-masses": {
+        "offset": [
+          0.12,
+          -0.34,
+          0.1
+        ]
+      },
+      "duration": 0.8
+    },
+    "brake-on": {
+      "brake-caliper": {
+        "offset": [
+          0,
+          -0.003,
+          0
+        ]
+      },
+      "duration": 0.4
+    }
+  },
+  "units": {
+    "modelUnit": "cm",
+    "scale": 100
+  },
+  "sim": {
+    "kind": "force",
+    "controls": [
+      {
+        "id": "setup",
+        "kind": "choice",
+        "default": "roll",
+        "label": {
+          "en": "Car set-up",
+          "zh": "小车摆法"
+        },
+        "options": [
+          {
+            "id": "roll",
+            "label": {
+              "en": "On the ramp",
+              "zh": "放在斜面"
+            }
+          },
+          {
+            "id": "push",
+            "label": {
+              "en": "At the push point",
+              "zh": "放在推点"
+            }
+          }
+        ]
+      },
+      {
+        "id": "push",
+        "kind": "choice",
+        "default": "behind",
+        "label": {
+          "en": "Push",
+          "zh": "推的方向"
+        },
+        "options": [
+          {
+            "id": "behind",
+            "label": {
+              "en": "From behind",
+              "zh": "从后推"
+            }
+          },
+          {
+            "id": "front",
+            "label": {
+              "en": "From the front",
+              "zh": "从前推"
+            }
+          },
+          {
+            "id": "front-firm",
+            "label": {
+              "en": "Hard from the front",
+              "zh": "从前用力推"
+            }
+          },
+          {
+            "id": "side",
+            "label": {
+              "en": "From the side",
+              "zh": "从侧面推"
+            }
+          }
+        ]
+      },
+      {
+        "id": "car-start",
+        "kind": "choice",
+        "default": "moving",
+        "label": {
+          "en": "Car before",
+          "zh": "推之前"
+        },
+        "options": [
+          {
+            "id": "rest",
+            "label": {
+              "en": "Still",
+              "zh": "静止"
+            }
+          },
+          {
+            "id": "moving",
+            "label": {
+              "en": "Moving",
+              "zh": "在动"
+            }
+          }
+        ]
+      },
+      {
+        "id": "magnet-push",
+        "kind": "toggle",
+        "default": false,
+        "label": {
+          "en": "Magnet push",
+          "zh": "磁铁推"
+        }
+      },
+      {
+        "id": "pair",
+        "kind": "choice",
+        "default": "balls",
+        "label": {
+          "en": "Pair",
+          "zh": "一对物体"
+        },
+        "options": [
+          {
+            "id": "balls",
+            "label": {
+              "en": "Two balls",
+              "zh": "两只钢球"
+            }
+          },
+          {
+            "id": "papers",
+            "label": {
+              "en": "Two papers",
+              "zh": "两张纸"
+            }
+          }
+        ]
+      },
+      {
+        "id": "drop-height",
+        "kind": "step",
+        "values": [
+          0.5,
+          1.0,
+          1.5
+        ],
+        "default": 1.0,
+        "unit": "m",
+        "label": {
+          "en": "Height",
+          "zh": "高度"
+        }
+      },
+      {
+        "id": "weigh",
+        "kind": "choice",
+        "default": "none",
+        "label": {
+          "en": "Weigh",
+          "zh": "称重"
+        },
+        "options": [
+          {
+            "id": "none",
+            "label": {
+              "en": "Nothing",
+              "zh": "不称"
+            }
+          },
+          {
+            "id": "small-ball",
+            "label": {
+              "en": "Small ball",
+              "zh": "小钢球"
+            }
+          },
+          {
+            "id": "large-ball",
+            "label": {
+              "en": "Large ball",
+              "zh": "大钢球"
+            }
+          },
+          {
+            "id": "paper",
+            "label": {
+              "en": "Paper",
+              "zh": "纸"
+            }
+          }
+        ]
+      },
+      {
+        "id": "lane",
+        "kind": "choice",
+        "default": "wood",
+        "label": {
+          "en": "Surface",
+          "zh": "表面"
+        },
+        "options": [
+          {
+            "id": "glass",
+            "label": {
+              "en": "Glass",
+              "zh": "玻璃"
+            }
+          },
+          {
+            "id": "wood",
+            "label": {
+              "en": "Wood",
+              "zh": "木"
+            }
+          },
+          {
+            "id": "sandpaper",
+            "label": {
+              "en": "Sandpaper",
+              "zh": "砂纸"
+            }
+          }
+        ]
+      },
+      {
+        "id": "block-load",
+        "kind": "step",
+        "values": [
+          0,
+          200,
+          400
+        ],
+        "default": 0,
+        "unit": "g",
+        "label": {
+          "en": "Weights",
+          "zh": "砝码"
+        }
+      },
+      {
+        "id": "runway",
+        "kind": "choice",
+        "default": "wood",
+        "label": {
+          "en": "Runway",
+          "zh": "跑道"
+        },
+        "options": [
+          {
+            "id": "glass",
+            "label": {
+              "en": "Glass",
+              "zh": "玻璃"
+            }
+          },
+          {
+            "id": "wood",
+            "label": {
+              "en": "Wood",
+              "zh": "木"
+            }
+          },
+          {
+            "id": "carpet",
+            "label": {
+              "en": "Carpet",
+              "zh": "地毯"
+            }
+          }
+        ]
+      },
+      {
+        "id": "ramp-height",
+        "kind": "step",
+        "values": [
+          3,
+          6,
+          9
+        ],
+        "default": 6,
+        "unit": "cm",
+        "label": {
+          "en": "Ramp height",
+          "zh": "释放高度"
+        }
+      },
+      {
+        "id": "spring-load",
+        "kind": "step",
+        "values": [
+          0,
+          50,
+          100,
+          150,
+          200,
+          250,
+          300,
+          350,
+          400
+        ],
+        "default": 0,
+        "unit": "g",
+        "label": {
+          "en": "Load",
+          "zh": "载荷"
+        }
+      },
+      {
+        "id": "unload",
+        "kind": "toggle",
+        "default": false,
+        "label": {
+          "en": "Take the load off",
+          "zh": "取下砝码"
+        }
+      },
+      {
+        "id": "squeeze",
+        "kind": "choice",
+        "default": "none",
+        "label": {
+          "en": "Brake",
+          "zh": "刹车"
+        },
+        "options": [
+          {
+            "id": "none",
+            "label": {
+              "en": "Not squeezed",
+              "zh": "不捏"
+            }
+          },
+          {
+            "id": "light",
+            "label": {
+              "en": "Light",
+              "zh": "轻捏"
+            }
+          },
+          {
+            "id": "firm",
+            "label": {
+              "en": "Firm",
+              "zh": "用力捏"
+            }
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "id": "effect",
+        "kind": "state",
+        "label": {
+          "en": "Effect",
+          "zh": "作用"
+        },
+        "states": {
+          "none": {
+            "en": "No change",
+            "zh": "没有变化"
+          },
+          "starts": {
+            "en": "Starts moving",
+            "zh": "开始运动"
+          },
+          "speeds-up": {
+            "en": "Speeds up",
+            "zh": "加快"
+          },
+          "slows-down": {
+            "en": "Slows down",
+            "zh": "减慢"
+          },
+          "stops": {
+            "en": "Stops",
+            "zh": "停下"
+          },
+          "turns": {
+            "en": "Changes direction",
+            "zh": "改变方向"
+          }
+        }
+      },
+      {
+        "id": "speed-after",
+        "label": {
+          "en": "Speed after",
+          "zh": "推后的速度"
+        },
+        "unit": "m/s",
+        "decimals": 2
+      },
+      {
+        "id": "push-run",
+        "kind": "timeline",
+        "label": {
+          "en": "Push run",
+          "zh": "推的过程"
+        }
+      },
+      {
+        "id": "magnet-run",
+        "kind": "timeline",
+        "label": {
+          "en": "Magnet run",
+          "zh": "磁铁推的过程"
+        }
+      },
+      {
+        "id": "t-left",
+        "label": {
+          "en": "Left lands",
+          "zh": "左边落地"
+        },
+        "unit": "s",
+        "decimals": 2
+      },
+      {
+        "id": "t-right",
+        "label": {
+          "en": "Right lands",
+          "zh": "右边落地"
+        },
+        "unit": "s",
+        "decimals": 2
+      },
+      {
+        "id": "landing",
+        "kind": "state",
+        "label": {
+          "en": "Landing",
+          "zh": "落地"
+        },
+        "states": {
+          "together": {
+            "en": "Together",
+            "zh": "同时"
+          },
+          "left-first": {
+            "en": "Left first",
+            "zh": "左边先"
+          },
+          "right-first": {
+            "en": "Right first",
+            "zh": "右边先"
+          }
+        }
+      },
+      {
+        "id": "drop-run",
+        "kind": "timeline",
+        "label": {
+          "en": "Drop run",
+          "zh": "下落过程"
+        }
+      },
+      {
+        "id": "weight",
+        "label": {
+          "en": "Weight",
+          "zh": "重量"
+        },
+        "unit": "N",
+        "decimals": 1
+      },
+      {
+        "id": "weigh-note",
+        "kind": "state",
+        "label": {
+          "en": "Balance",
+          "zh": "弹簧秤"
+        },
+        "states": {
+          "none": {
+            "en": "Nothing hung",
+            "zh": "没有挂东西"
+          },
+          "reads": {
+            "en": "Reads",
+            "zh": "有读数"
+          },
+          "too-light": {
+            "en": "Too light to show",
+            "zh": "太轻，读不出"
+          }
+        }
+      },
+      {
+        "id": "f-start",
+        "label": {
+          "en": "Pull to start",
+          "zh": "开始滑动的拉力"
+        },
+        "unit": "N",
+        "decimals": 1
+      },
+      {
+        "id": "f-move",
+        "label": {
+          "en": "Pull to keep moving",
+          "zh": "保持滑动的拉力"
+        },
+        "unit": "N",
+        "decimals": 1
+      },
+      {
+        "id": "pull-run",
+        "kind": "timeline",
+        "label": {
+          "en": "Pull run",
+          "zh": "拉的过程"
+        }
+      },
+      {
+        "id": "distance",
+        "label": {
+          "en": "Distance",
+          "zh": "滑行距离"
+        },
+        "unit": "cm",
+        "decimals": 0
+      },
+      {
+        "id": "run-time",
+        "label": {
+          "en": "Time on the runway",
+          "zh": "滑行时间"
+        },
+        "unit": "s",
+        "decimals": 1
+      },
+      {
+        "id": "run-end",
+        "kind": "state",
+        "label": {
+          "en": "Car",
+          "zh": "小车"
+        },
+        "states": {
+          "stops": {
+            "en": "Stops on the runway",
+            "zh": "停在跑道上"
+          },
+          "off-end": {
+            "en": "Reached the end",
+            "zh": "到了跑道尽头"
+          }
+        }
+      },
+      {
+        "id": "car-run",
+        "kind": "timeline",
+        "label": {
+          "en": "Car run",
+          "zh": "小车滑行过程"
+        }
+      },
+      {
+        "id": "extension",
+        "label": {
+          "en": "Extension",
+          "zh": "伸长"
+        },
+        "unit": "cm",
+        "decimals": 1
+      },
+      {
+        "id": "load-weight",
+        "label": {
+          "en": "Load weight",
+          "zh": "砝码的重量"
+        },
+        "unit": "N",
+        "decimals": 1
+      },
+      {
+        "id": "returns",
+        "kind": "state",
+        "label": {
+          "en": "Spring",
+          "zh": "弹簧"
+        },
+        "states": {
+          "loaded": {
+            "en": "Loaded",
+            "zh": "挂着砝码"
+          },
+          "returns": {
+            "en": "Back to its length",
+            "zh": "回到原长"
+          },
+          "stays-longer": {
+            "en": "Stays longer",
+            "zh": "回不到原长"
+          }
+        }
+      },
+      {
+        "id": "stop-time",
+        "label": {
+          "en": "Time to stop",
+          "zh": "停下用时"
+        },
+        "unit": "s",
+        "decimals": 1
+      },
+      {
+        "id": "turns",
+        "label": {
+          "en": "Turns",
+          "zh": "转的圈数"
+        },
+        "decimals": 1
+      },
+      {
+        "id": "wheel-run",
+        "kind": "timeline",
+        "label": {
+          "en": "Wheel run",
+          "zh": "车轮转动过程"
+        }
+      }
+    ],
+    "bind": [
+      {
+        "control": "setup",
+        "part": [
+          "toy-car",
+          "car-wheels"
+        ],
+        "pose": {
+          "roll": null,
+          "push": "car-at-push"
+        }
+      },
+      {
+        "output": "car-run",
+        "part": [
+          "toy-car",
+          "car-wheels"
+        ],
+        "play": {
+          "channel": "dx",
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "when": {
+            "control": "setup",
+            "is": {
+              "eq": "roll"
+            }
+          }
+        }
+      },
+      {
+        "output": "car-run",
+        "part": [
+          "toy-car",
+          "car-wheels"
+        ],
+        "play": {
+          "channel": "dy",
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "when": {
+            "control": "setup",
+            "is": {
+              "eq": "roll"
+            }
+          }
+        }
+      },
+      {
+        "output": "car-run",
+        "part": "toy-car",
+        "play": {
+          "channel": "pitch",
+          "turn": [
+            0,
+            0,
+            -1
+          ],
+          "when": {
+            "control": "setup",
+            "is": {
+              "eq": "roll"
+            }
+          }
+        }
+      },
+      {
+        "output": "car-run",
+        "part": "car-wheels",
+        "play": {
+          "channel": "pitch",
+          "turn": [
+            0,
+            0,
+            -1
+          ],
+          "pivot": [
+            -0.43,
+            0.035,
+            0.22
+          ],
+          "when": {
+            "control": "setup",
+            "is": {
+              "eq": "roll"
+            }
+          }
+        }
+      },
+      {
+        "output": "car-run",
+        "part": "car-wheels",
+        "play": {
+          "channel": "spin",
+          "turn": [
+            0,
+            0,
+            -1
+          ],
+          "each": true,
+          "when": {
+            "control": "setup",
+            "is": {
+              "eq": "roll"
+            }
+          }
+        }
+      },
+      {
+        "output": "push-run",
+        "part": [
+          "toy-car",
+          "car-wheels"
+        ],
+        "play": {
+          "channel": "x",
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "when": {
+            "control": "setup",
+            "is": {
+              "eq": "push"
+            }
+          }
+        }
+      },
+      {
+        "output": "push-run",
+        "part": [
+          "toy-car",
+          "car-wheels"
+        ],
+        "play": {
+          "channel": "z",
+          "axis": [
+            0,
+            0,
+            1
+          ],
+          "when": {
+            "control": "setup",
+            "is": {
+              "eq": "push"
+            }
+          }
+        }
+      },
+      {
+        "output": "push-run",
+        "part": "toy-car",
+        "play": {
+          "channel": "heading",
+          "turn": [
+            0,
+            -1,
+            0
+          ],
+          "when": {
+            "control": "setup",
+            "is": {
+              "eq": "push"
+            }
+          }
+        }
+      },
+      {
+        "output": "push-run",
+        "part": "car-wheels",
+        "play": {
+          "channel": "heading",
+          "turn": [
+            0,
+            -1,
+            0
+          ],
+          "pivot": [
+            -0.18,
+            0.035,
+            0.22
+          ],
+          "when": {
+            "control": "setup",
+            "is": {
+              "eq": "push"
+            }
+          }
+        }
+      },
+      {
+        "output": "push-run",
+        "part": "car-wheels",
+        "play": {
+          "channel": "spin",
+          "turn": [
+            0,
+            0,
+            -1
+          ],
+          "each": true,
+          "when": {
+            "control": "setup",
+            "is": {
+              "eq": "push"
+            }
+          }
+        }
+      },
+      {
+        "output": "magnet-run",
+        "part": [
+          "toy-car",
+          "car-wheels"
+        ],
+        "play": {
+          "channel": "x",
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "when": {
+            "control": "setup",
+            "is": {
+              "eq": "push"
+            }
+          }
+        }
+      },
+      {
+        "output": "magnet-run",
+        "part": "car-wheels",
+        "play": {
+          "channel": "spin",
+          "turn": [
+            0,
+            0,
+            -1
+          ],
+          "each": true,
+          "when": {
+            "control": "setup",
+            "is": {
+              "eq": "push"
+            }
+          }
+        }
+      },
+      {
+        "control": "runway",
+        "part": "glass-mat",
+        "visible": {
+          "eq": "glass"
+        }
+      },
+      {
+        "control": "runway",
+        "part": "carpet-mat",
+        "visible": {
+          "eq": "carpet"
+        }
+      },
+      {
+        "control": "lane",
+        "part": [
+          "wooden-block",
+          "brass-weights",
+          "pull-balance",
+          "pull-balance-spring",
+          "pull-balance-pointer"
+        ],
+        "pose": {
+          "glass": "lane-glass",
+          "wood": null,
+          "sandpaper": "lane-sand"
+        }
+      },
+      {
+        "control": "block-load",
+        "part": "brass-weights",
+        "count": {
+          "per": 200
+        }
+      },
+      {
+        "output": "pull-run",
+        "part": [
+          "wooden-block",
+          "brass-weights",
+          "pull-balance",
+          "pull-balance-spring",
+          "pull-balance-pointer"
+        ],
+        "play": {
+          "channel": "x",
+          "axis": [
+            1,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "output": "pull-run",
+        "part": "pull-balance-spring",
+        "stretch": {
+          "channel": "pull",
+          "per": 0.01,
+          "anchor": "bottom"
+        }
+      },
+      {
+        "output": "pull-run",
+        "part": "pull-balance-pointer",
+        "play": {
+          "channel": "pull",
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "per": 0.01
+        }
+      },
+      {
+        "output": "extension",
+        "part": "test-spring",
+        "stretch": {
+          "per": 0.01,
+          "settle": {
+            "period": 0.7,
+            "damping": 0.15
+          }
+        }
+      },
+      {
+        "output": "extension",
+        "part": [
+          "mass-hanger",
+          "slotted-masses"
+        ],
+        "offset": {
+          "axis": [
+            0,
+            -1,
+            0
+          ],
+          "per": 0.01,
+          "settle": {
+            "period": 0.7,
+            "damping": 0.15
+          }
+        }
+      },
+      {
+        "control": "spring-load",
+        "part": "mass-hanger",
+        "visible": {
+          "gte": 50
+        }
+      },
+      {
+        "control": "spring-load",
+        "part": "slotted-masses",
+        "count": {
+          "per": 50,
+          "minus": 50
+        }
+      },
+      {
+        "control": "unload",
+        "part": [
+          "mass-hanger",
+          "slotted-masses"
+        ],
+        "pose": {
+          "true": "spring-unloaded"
+        }
+      },
+      {
+        "control": "pair",
+        "part": [
+          "ball-small",
+          "ball-large"
+        ],
+        "visible": {
+          "eq": "balls"
+        }
+      },
+      {
+        "control": "pair",
+        "part": [
+          "paper-ball",
+          "paper-sheet"
+        ],
+        "visible": {
+          "eq": "papers"
+        }
+      },
+      {
+        "control": "drop-height",
+        "part": [
+          "ball-small",
+          "ball-large",
+          "paper-ball",
+          "paper-sheet"
+        ],
+        "offset": {
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "per": 1,
+          "origin": 1
+        }
+      },
+      {
+        "output": "drop-run",
+        "part": "ball-small",
+        "play": {
+          "channel": "small-ball",
+          "axis": [
+            0,
+            -1,
+            0
+          ]
+        }
+      },
+      {
+        "output": "drop-run",
+        "part": "ball-large",
+        "play": {
+          "channel": "large-ball",
+          "axis": [
+            0,
+            -1,
+            0
+          ]
+        }
+      },
+      {
+        "output": "drop-run",
+        "part": "paper-ball",
+        "play": {
+          "channel": "crumpled",
+          "axis": [
+            0,
+            -1,
+            0
+          ]
+        }
+      },
+      {
+        "output": "drop-run",
+        "part": "paper-sheet",
+        "play": {
+          "channel": "flat",
+          "axis": [
+            0,
+            -1,
+            0
+          ]
+        }
+      },
+      {
+        "output": "drop-run",
+        "part": "paper-sheet",
+        "play": {
+          "channel": "flat-sway",
+          "turn": [
+            1,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "control": "squeeze",
+        "part": "brake-caliper",
+        "pose": {
+          "none": null,
+          "light": "brake-on",
+          "firm": "brake-on"
+        }
+      },
+      {
+        "output": "wheel-run",
+        "part": "wheel",
+        "play": {
+          "channel": "spin",
+          "turn": [
+            0,
+            0,
+            1
+          ]
+        }
+      }
+    ],
+    "overlays": [
+      {
+        "kind": "force-vectors",
+        "group": "forces",
+        "per": 0.03,
+        "max": 0.25,
+        "arrows": [
+          {
+            "part": "wooden-block",
+            "force": "push",
+            "dir": [
+              1,
+              0,
+              0
+            ],
+            "value": {
+              "output": "pull-run",
+              "channel": "pull"
+            },
+            "offset": [
+              0.05,
+              0,
+              0
+            ]
+          },
+          {
+            "part": "wooden-block",
+            "force": "friction",
+            "dir": [
+              -1,
+              0,
+              0
+            ],
+            "value": {
+              "output": "pull-run",
+              "channel": "friction"
+            },
+            "at": "bottom",
+            "offset": [
+              -0.05,
+              0.004,
+              0
+            ]
+          },
+          {
+            "part": "mass-hanger",
+            "force": "gravity",
+            "dir": [
+              0,
+              -1,
+              0
+            ],
+            "value": {
+              "output": "load-weight"
+            },
+            "at": "bottom"
+          },
+          {
+            "part": "test-spring",
+            "force": "elastic",
+            "dir": [
+              0,
+              1,
+              0
+            ],
+            "value": {
+              "output": "load-weight"
+            },
+            "offset": [
+              0.025,
+              0,
+              0
+            ]
+          },
+          {
+            "part": "ball-large",
+            "force": "gravity",
+            "dir": [
+              0,
+              -1,
+              0
+            ],
+            "value": 2.2,
+            "when": {
+              "control": "pair",
+              "is": {
+                "eq": "balls"
+              }
+            }
+          },
+          {
+            "part": "brake-caliper",
+            "force": "friction",
+            "dir": [
+              1,
+              0,
+              0
+            ],
+            "value": {
+              "output": "wheel-run",
+              "channel": "brake"
+            },
+            "at": "top",
+            "offset": [
+              0.03,
+              0.012,
+              0
+            ]
+          },
+          {
+            "part": "toy-car",
+            "force": "push",
+            "dir": [
+              1,
+              0,
+              0
+            ],
+            "value": {
+              "output": "push-run",
+              "channel": "push"
+            },
+            "offset": [
+              -0.06,
+              0,
+              0
+            ],
+            "when": {
+              "control": "push",
+              "is": {
+                "eq": "behind"
+              }
+            }
+          },
+          {
+            "part": "toy-car",
+            "force": "push",
+            "dir": [
+              -1,
+              0,
+              0
+            ],
+            "value": {
+              "output": "push-run",
+              "channel": "push"
+            },
+            "offset": [
+              0.06,
+              0,
+              0
+            ],
+            "when": {
+              "control": "push",
+              "is": {
+                "in": [
+                  "front",
+                  "front-firm"
+                ]
+              }
+            }
+          },
+          {
+            "part": "toy-car",
+            "force": "push",
+            "dir": [
+              0,
+              0,
+              1
+            ],
+            "value": {
+              "output": "push-run",
+              "channel": "push"
+            },
+            "offset": [
+              0,
+              0,
+              -0.04
+            ],
+            "when": {
+              "control": "push",
+              "is": {
+                "eq": "side"
+              }
+            }
+          },
+          {
+            "part": "toy-car",
+            "force": "magnetic",
+            "dir": [
+              1,
+              0,
+              0
+            ],
+            "value": {
+              "output": "magnet-run",
+              "channel": "push"
+            },
+            "offset": [
+              -0.06,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    ],
+    "force": {
+      "g": 9.8,
+      "push": {
+        "choice": "push",
+        "start": "car-start",
+        "speed": 0.6,
+        "at": 0.25,
+        "runway": 1.25,
+        "surface": "glass",
+        "dv": {
+          "behind": [
+            0.3,
+            0,
+            0
+          ],
+          "front": [
+            -0.3,
+            0,
+            0
+          ],
+          "front-firm": [
+            -0.6,
+            0,
+            0
+          ],
+          "side": [
+            0,
+            0,
+            0.3
+          ]
+        }
+      },
+      "magnet": {
+        "toggle": "magnet-push",
+        "dv": [
+          0.4,
+          0,
+          0
+        ]
+      },
+      "fall": {
+        "air": 1.21,
+        "height": "drop-height",
+        "pair": "pair",
+        "slow": 4,
+        "objects": {
+          "small-ball": {
+            "part": "ball-small",
+            "m": 0.0282,
+            "cd": 0.45,
+            "area": 0.0002835
+          },
+          "large-ball": {
+            "part": "ball-large",
+            "m": 0.225,
+            "cd": 0.45,
+            "area": 0.001134
+          },
+          "crumpled": {
+            "part": "paper-ball",
+            "m": 0.005,
+            "cd": 0.6,
+            "area": 0.001963
+          },
+          "flat": {
+            "part": "paper-sheet",
+            "m": 0.005,
+            "cd": 1.12,
+            "area": 0.06237,
+            "sway": 8
+          }
+        },
+        "pairs": {
+          "balls": [
+            "small-ball",
+            "large-ball"
+          ],
+          "papers": [
+            "crumpled",
+            "flat"
+          ]
+        },
+        "weigh": {
+          "control": "weigh",
+          "map": {
+            "small-ball": "small-ball",
+            "large-ball": "large-ball",
+            "paper": "flat"
+          }
+        }
+      },
+      "slide": {
+        "block": 0.2,
+        "load": "block-load",
+        "lane": "lane",
+        "rise": 1.2,
+        "speed": 0.15,
+        "travel": 0.25,
+        "surfaces": {
+          "glass": [
+            0.25,
+            0.2
+          ],
+          "wood": [
+            0.5,
+            0.3
+          ],
+          "sandpaper": [
+            0.9,
+            0.7
+          ]
+        }
+      },
+      "roll": {
+        "height": "ramp-height",
+        "surface": "runway",
+        "loss": 0.2,
+        "wheel": 0.011,
+        "runway": 1.25,
+        "ramp": {
+          "angle": 14
+        },
+        "rolling": {
+          "glass": 0.06,
+          "wood": 0.09,
+          "carpet": 0.25
+        }
+      },
+      "spring": {
+        "load": "spring-load",
+        "unload": "unload",
+        "per50": 1.0,
+        "length": 8.0,
+        "limit": 300,
+        "beyond": [
+          1.0,
+          0.3
+        ],
+        "set": {
+          "350": 0.4,
+          "400": 1.2
+        }
+      },
+      "brake": {
+        "squeeze": "squeeze",
+        "rps": 2,
+        "inertia": 0.032,
+        "radius": 0.18,
+        "mu": 0.6,
+        "hub": 0.005,
+        "force": {
+          "none": 0,
+          "light": 1,
+          "firm": 3
+        }
+      }
+    }
+  }
+}

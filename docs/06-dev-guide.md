@@ -155,6 +155,7 @@ pnpm tsx scripts/new-topic.ts <slug> --engine space-scene --subject science|biol
 - **阅读面板**：第一次进入背景章时（每次页面加载一次）阅读面板展开，不管之前是否收起（`SceneHost` 的 `openBackground`，结果照常写回 sessionStorage）；之后照常粘住。< 1024 的底部抽屉不受影响。
 - **阅读说明**：背景章的 `state.note`（`{ en, zh }`，TimeScene chapter-state schema）在阅读面板正文顶部画成细框（`.atlas-note`），标题是 UI 文案 `chapter.note`："How this topic is written / 阅读说明"。
 - ← → 和 Back / Next 照常经过它（它在最前）。演示的节拍列表包含它（默认一拍 = `summary`），排在第 01 章之前；字幕卡表头写"Background"，进度条段落写"BG / 背景"；语音开场读"Background / 背景"而不是章号。
+- **SpaceScene**（docs/30 F0，示例 `sample-forces` 的第 00 章）：章 state 照常写（镜头、标注、拍、`sim.set`、本章索引），可写 `note`；顶栏芯片与章节轨写 `BG` / 空心菱形，阅读面板眉题"Background"；章节轴（引擎的底部条）与 MathScene 一样给它一段 `BG`（每拍一个刻度：背景章也有拍），右端读数 `BG · 1/2`；没有试一试卡片时不注册 `[ ] T G`。
 
 ## 名词表（`data/glossary.json`）
 
@@ -708,15 +709,17 @@ lib/                     纯函数，有单测：explode / visibility（图层�
                          leader-layout（引线标注摆放：两列、避让 HUD 与被标零件、代价搜索）/ shaped（成形零件的版式数学：盘管管位、回弯、叶片）/ xform / math /
                          sweep（扫掠站点、标架、半径轮廓、环节沟）/ wing（扇形折叠）/ bilateral（双侧镜像）/ pose（姿态、关键帧）/ units（实长）/
                          rig（关节角、解剖轴、收缩、动作节拍、肌肉 ↔ 零件）/ sites（起止点）/ equipment（动作器械的基本体）/
-                         sim/（试一试：controls 值与 URL、index 模型注册表、circuit 节点分析、magnet 磁荷与场态、field 场线与铁屑、settle 阻尼摆动、bind 绑定、trial 数据表与先猜后看、diagram 电路图排版）
+                         sim/（试一试：controls 值与 URL、index 模型注册表、circuit 节点分析、magnet 磁荷与场态、field 场线与铁屑、force 力的六个子模型、timeline 时间线与回放规则、
+                         settle 阻尼摆动、bind 绑定、trial 数据表与先猜后看、chart 小图与读屏文字、arrows 力的箭头、replay 卡片影响哪些时间线 / 状态、text 值与读数的文字、diagram 电路图排版）/
+                         stretch（弹簧伸缩：每个顶点在线圈上的位置）
 sim-schema.ts            parts.json `sim` 与章 / 拍 `sim` 的 zod 和交叉校验（见「试一试」）
-stages/model3d/          R3F 舞台：Model3DStage（createRoot 宿主）、SceneRoot、PartNode、geometry（程序化零件）、shaped（成形零件构建）、organic（sweep / wing 构建、FanDeform）、
+stages/model3d/          R3F 舞台：Model3DStage（createRoot 宿主）、SceneRoot、TimelineClock（试一试时间线的时钟）、PartNode、geometry（程序化零件）、shaped（成形零件构建）、organic（sweep / wing 构建、FanDeform）、
                          materials（材质 + 选中边缘 / 剖面 shader 补丁）、textures（程序化贴图）、Lighting、
                          GroundShadow、CameraRig、Flows + flowMaterial、probes（标注投影 / 起止点投影 / 计数 / 阴影更新）、GltfSource（glb、蒙皮、骨架）、
                          MotionDriver（关节、收缩、动作体位）、Equipment（动作器械）
 hud/                     LeaderLabels + SitesOverlay（leaders）、PartChainCard 或 CircuitCard（card：零件链路 / 电路图）、sim.ts（HUD 读写试一试）、PlateBlock（plate：立面缩略图、状态小行、模拟读数、当前选中、
                          PerfReadout）、spec（标题块规格行）
-explorer/                ExplorerOverlay（stageOverlay，EXPLODED 时带 ExplorerBar 拆开滑块）、BeatLine + TryIt + Inspector（readerTop：节拍行；试一试卡片；零件详情、
+explorer/                ExplorerOverlay（stageOverlay，EXPLODED 时带 ExplorerBar 拆开滑块）、BeatLine + TryIt（+ TryChart 数据表下的小图）+ Inspector（readerTop：节拍行；试一试卡片；零件详情、
                          MuscleSheet 四页、ExerciseCard）、ChapterIndex（readerEnd：本章索引）；章节轴是 core 的 ChapterAxis（bottomBar）
 space-scene.css          舞台、标注、卡片与面板绘图、滑块、详情样式（只用 token，尺寸 × --u）
 ```
@@ -805,7 +808,7 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
 - **一个零件多个 primitive**（`extra: [primitive…]`，≤ 32）：`at` 同样是场景坐标；随零件一起移动、淡出、拆开、repeat（绕主 `at` 重复）和转动；引线指向主 `primitive`。每个 primitive 可以有自己的 `color` / `tint`：零件按材质分槽（`partMaterialSlots`：主材质在前，再按出现顺序），**同材质的所有块烘焙合并成一个几何体，一个材质一次绘制**（顶点超过 40 万才保留实例化）。压缩机 = 外壳 + 接线盒 + 底板，阀门 = 阀体 + 阀帽 + 接口，等等
 - **逐个副本的动画**（`each: true`，rotate / oscillate / pulse；b200-server 的 40 只风扇转子）：默认动画让整个零件绕零件中心（或 `pivot`）动，`repeat` 的各列和 `extra` 会一起公转。写 `each: true` 后，零件的每个**副本**——主 primitive 和每个 `extra`、乘以每个 `repeat` 实例（`lib/parts.ts partCopies`）——各自绕自己的 `at`（随 repeat 移过去）转 / 摆 / 缩放，轴仍是场景坐标。这样的零件不再烘焙合并：形状相同的 primitive（`primitiveShapeKey`：除 `at`、`rotation` 外参数与材质全同）共用一个 InstancedMesh，每个副本一个实例（`stages/model3d/geometry.ts eachPieces`，片的 `pivots` = 各实例的转心），舞台每帧写 `T(c) · 动作 · T(−c) · 静止矩阵`；所以 5 列 × 8 只转子 = 1 次绘制。限制：不能和 `pivot` 一起写；零件要有 `repeat` 或 `extra`；不能是 glb 零件；翅脉线、折叠翅在这种零件里是静止的。同一零件里不带 `each` 的动画照旧作用于整个零件，二者叠加。
 - **repeat**：`{count, axis, spacing}`（沿轴、以 `at` 为中心等距）或 `{count, axis, radius}`（绕过 `at` 的轴一圈，每个实例朝外转）。轴是场景坐标。重复的是整个零件（含 `extra`）；同材质的副本烘焙合并成一个几何体（一次绘制），顶点很多时才用 InstancedMesh。
-- **材质族**（`color`）：`casing`（拉丝铝，各向异性）、`steel`（机加工钢）、`powder`（缎面黑粉末涂层，轻微橘皮）、`stainless`（轴向拉丝不锈钢）、`copper`、`brass`（黄铜：阀门、喇叭口螺母）、`rubber`（近黑，roughness .78）、`plastic`（哑光暖砂色，不是默认灰）、`enamel`（暖白烤漆，比纸色深一档，低粗糙度 + 细颗粒粗糙度贴图 = 缎面光泽，家电外壳）、`glass`（半透明）、`wood`（哑光松木 / 胶合板：程序化木纹灰度颜色贴图 × 族色或 `tint`，电路板、实验台、冰棒棍）；旧名 `metal` = steel、`matte` = plastic。或者 `token:<name>` / `#hex`：缎面漆。`primitive.tint`（token 或 #hex）给材质族换颜色、保留它的金属度 / 粗糙度 / 贴图，例如浅灰 `powder` 外壳：`"color": "powder", "tint": "#c4c6c2"`。程序化 canvas 贴图给拉丝方向、粗糙度变化、橘皮法线（`stages/model3d/textures.ts`，种子固定，截图可复现）。
+- **材质族**（`color`）：`casing`（拉丝铝，各向异性）、`steel`（机加工钢）、`powder`（缎面黑粉末涂层，轻微橘皮）、`stainless`（轴向拉丝不锈钢）、`copper`、`brass`（黄铜：阀门、喇叭口螺母）、`rubber`（近黑，roughness .78）、`plastic`（哑光暖砂色，不是默认灰）、`enamel`（暖白烤漆，比纸色深一档，低粗糙度 + 细颗粒粗糙度贴图 = 缎面光泽，家电外壳）、`glass`（半透明）、`wood`（哑光松木 / 胶合板：程序化木纹灰度颜色贴图 × 族色或 `tint`，电路板、实验台、冰棒棍）、`fabric`（短绒地毯：全哑光，`pile` 绒簇法线 + 灰度颜色贴图，docs/30 F7）、`abrasive`（砂纸 / 沙：`sand` 颗粒法线 + 颜色贴图；浅 `tint` = 沙）；旧名 `metal` = steel、`matte` = plastic。或者 `token:<name>` / `#hex`：缎面漆。`primitive.tint`（token 或 #hex）给材质族换颜色、保留它的金属度 / 粗糙度 / 贴图，例如浅灰 `powder` 外壳：`"color": "powder", "tint": "#c4c6c2"`。程序化 canvas 贴图给拉丝方向、粗糙度变化、橘皮法线（`stages/model3d/textures.ts`，种子固定，截图可复现）。
 - **流场**：`path` 首尾点相同 = 闭环。centripetal Catmull-Rom，按弧长烘焙进 shader：每 8 mm（0.008 场景单位）一个点，64–512 个，存成一行浮点纹理（`texelFetch` 取样，不占 uniform 数组），粒子在弯头处贴着曲线走、不抄近路（4 m 的冷媒段约 500 个点，弯头偏差从 64 点时的 15–20 mm 降到 3 mm 以内；盘管仍只能画 2–3 程，不能逐根追 U 形弯头），默认每条 360 个细粒子（贴着中心线，像 CFD 流线而不是魔法粒子），`speed` 是场景单位/秒。`stops` 在顶点着色器里按粒子位置插值（线性 RGB）；分段流（冷媒四段）用 `ends: "open"`，并让各段 `count / 长度 × speed` 大致相等（粒子通量连续）。`whenRun: false` 的流/动画一直播放（只受图层开关）。每条流一次绘制。
 - **已知限制**：同一时刻只有一个剖切面（`views.cutaway` 或一个命名 `views.cuts`，同时切所有零件；两个平面一起切暂不做）；`coilBank` 只做平直和 L 形（弧形蒸发器用两三段倾斜的平直盘管拼）；流不随拆开移动；`extrude` / 贯流叶片用 three 的 `ExtrudeGeometry`（`panelHole` 仍是手工三角化）。
 - **glb**：可以用 meshopt 压缩 + 量化（解码器内联，见「真实网格与人体肌肉」）；不要用 Draco（解码器在 CDN，Atlas 不允许运行时外部请求）。mesh 名找不到是 `pnpm validate` 的 error（运行时不再 console.warn）；glb 整体加载失败时舞台中央出双语说明，积木零件照常显示。glb 零件写 `material`。
@@ -1023,7 +1026,7 @@ docs/22 §4.3（E-SIM 核心，磁铁与电路共用）+ docs/23 §4（电路模
 
 ```jsonc
 "sim": {
-  "kind": "circuit",                                   // circuit | magnet：lib/sim/<kind>.ts
+  "kind": "circuit",                                   // circuit | magnet | force：lib/sim/<kind>.ts
   "controls": [                                        // ≤ 16，id 全主题的 sim 里唯一
     { "id": "main", "kind": "toggle", "default": true, "label": {en, zh} },
     { "id": "cells", "kind": "step", "values": [1, 2, 3], "default": 2, "label": {en, zh}, "unit"?: "cm" },
@@ -1031,7 +1034,7 @@ docs/22 §4.3（E-SIM 核心，磁铁与电路共用）+ docs/23 §4（电路模
       "options": [ { "id": "single", "label": {en, zh} }, …, { "id": "free", "label": {en, zh} } ],
       "sets": { "single": { "x": false, "y": false, "z": true }, "series": { … }, "parallel": { … } } }
   ],
-  "outputs": [                                         // ≤ 16
+  "outputs": [                                         // ≤ 32
     { "id": "i-cells", "label": {en, zh}, "from": "current:cells", "unit": "A", "decimals": 3 },   // from 默认 = id
     { "id": "status", "label": {en, zh}, "kind": "state", "from": "status:cells", "states": { "open": {en, zh}, "closed": … } },
     { "id": "edge-currents", "label": {en, zh}, "kind": "vector", "from": "edges" }
@@ -1053,9 +1056,10 @@ docs/22 §4.3（E-SIM 核心，磁铁与电路共用）+ docs/23 §4（电路模
 - **控件**：`toggle`（开关）、`step`（有序的数，升序或降序，按写的顺序步进：间隙 6 → 3 → 1.5）、`choice`（选项 `{ id, label }`，id 不能是 `on` / `off` / 数字）。`choice.sets`：选这个选项同时设定别的控件（接法 → X / Y / Z）；读者手拨了被覆盖的控件时，选择移到 `sets` 正好成立的选项，否则移到第一个不带 `sets` 的选项（`free`，必须有一个），被覆盖的控件停在原处；`free` 本身一直是 `free`（`lib/sim/controls.ts setSimControl`，有单测）。默认值必须与默认选项的 `sets` 一致（validate 报）。
 - **值从哪里来**：store 字段 `sim` 只存"设过的值"（不累积：章 `state.sim.set`，拍 `sim.set` 叠在本章的上面，读者在卡片 / 键 / 电路图上改的）；显示的值 = 默认 ⊕ 各选择的 `sets` ⊕ 设过的值，无效值忽略（`resolveSimValues`）。换章回到那一章的 `set`；ESC 不清；URL `sim`（见「URL 参数」）；演示的保存 / 恢复带着它；拍的深链接 `b` 照常。
 - **模型**（`lib/sim/index.ts evaluateSim`，同步、< 1 ms，只在值变化时算）：`circuit` = 节点分析（docs/23 §4.2）：电池是诺顿等效（每节 `emf` 默认 1.5 V、`r` 每节内阻，`flip` 指定某节由开关翻转成 −EMF；`cells` 是数或步进控件），`switch`（合上 `closed` 默认 0.001 Ω，断开去掉），`wire`（`r`），`gap`（选择控件 → `materials` 的欧姆数，没列 = 绝缘、断开），`load`（固定 `load` 或选择控件；`present` 开关 = 装没装上；`loads` 的 `lamp`（`rated` W）/ `buzzer`（`on` A 以上响）/ `motor`（`at` V 时 `rpm` 的可视转速，∝ 电压））；每个连通块接地一个节点，高斯消元（部分主元），没有电池的块电流为 0。量名（输出的 `from`）：`current:<边>`、`volts:<边>`（电池 = 端电压）、`power:<边>`、`brightness:<边>`（灯功率 ÷ `reference.power` × 100）、`speed:<边>`、`sound:<边>`（`on` / `off`）、`status:<电池边>`（`open` < 1 mA、`short` > `short` A（默认 3）、`over-rating`：同一回路里有灯超过额定 × `over`（默认 1.5）、否则 `closed`）、`edges`（每条边的带号电流，from → to）。`magnet` = Gilbert 磁荷模型、场态、场线、铁屑、指南针、力箭头，见下面「SpaceScene · 试一试 · 磁铁」。validate 核对输出的 `from` 是这个模型的量、种类（数 / 状态 / 向量）对得上。
-- **绑定**（`lib/sim/bind.ts simEffects`，舞台叠在章节状态上）：零件 `visible`（条件：`true` = 真值 / 非零 / 不是第一个状态；或 `{ eq | ne | in | gte | lte }`）、`pose`（值 → `poses` 里的姿态，只动这些零件，压在章 / 拍的姿态之上；几条绑定动同一零件时非静止的那条胜出）、`glow`（值 ÷ `full`，`sqrt` 或 `linear`，0–2：从暗红渐到 `color`，过 1 更白；只点亮零件自己的材质，即槽 0：灯丝不带支撑丝和铜座）、`tint`（值 ÷ `full`，0–1，`linear` 或 `sqrt`：向 `color` 混色，强度上限同 signal 高亮；铁芯通电变磁铁；同 `glow` 只染零件自己的材质，即槽 0，其余槽照常跟章 / 拍的 `highlight`，`lib/sim/bind.ts slotTint`）、`count`（`repeat` 零件只显示前 k 份，`true` = × 1，或 `{ per }`；该零件不能有 `extra`）、`offset` / `rotate`（(值 − origin) × per（rotate 的 per 默认 1），在姿态之后沿场景轴移 / 绕（姿态后的）零件中心或 `pivot` 场景点转，0.5 s 缓动；`settle: { period, damping }` = 阻尼摆动，转角走近路）、`at`（命名位置环）、`state`（铁屑排哪个场态）——后三者见磁铁一节；流 `visible`、`state`（场线流）、`intensity`（向量输出按 `paths` 的 id：每条路径的粒子速度 ∝ |值| ÷ `full`（夹在 ±2），负值反向，< 1 % 的路径 0.3 s 淡出；相位逐帧积分，变速不跳）、`stops`（状态 → 粒子色，如短路 `token:hot`）；动画 `rpm`（rotate 的转速 = 值 × per，角度积分）、`enabled`（条件不成立时 0.15 s 缓停）。运转（RUN / FLOW）只管"动起来"：灯亮不亮、零件在哪儿不受它影响。
+- **输出种类**：`number`、`state`、`vector`、`timeline`（一段"跑一遍"的过程：见「时间线与回放」；只能被 `play`、带 `channel` 的 `stretch` 和力的箭头读，不进卡片的观察量、读数、glow 等）。
+- **绑定**（`lib/sim/bind.ts simEffects`，舞台叠在章节状态上）：零件 `visible`（条件：`true` = 真值 / 非零 / 不是第一个状态；或 `{ eq | ne | in | gte | lte }`）、`pose`（值 → `poses` 里的姿态，只动这些零件，压在章 / 拍的姿态之上；几条绑定动同一零件时非静止的那条胜出）、`glow`（值 ÷ `full`，`sqrt` 或 `linear`，0–2：从暗红渐到 `color`，过 1 更白；只点亮零件自己的材质，即槽 0：灯丝不带支撑丝和铜座）、`tint`（值 ÷ `full`，0–1，`linear` 或 `sqrt`：向 `color` 混色，强度上限同 signal 高亮；铁芯通电变磁铁；同 `glow` 只染零件自己的材质，即槽 0，其余槽照常跟章 / 拍的 `highlight`，`lib/sim/bind.ts slotTint`）、`count`（`repeat` 零件只显示前 k 份：`true` = k 取值本身，或 `{ per, minus }` = (值 − minus) ÷ per 取整、≥ 0：50 g 挂钩上的 50 g 槽码写 `{ per: 50, minus: 50 }`，两只 200 g 砝码写 `{ per: 200 }`（docs/30 F8；`per` 原先是乘数，没有主题用过）；该零件不能有 `extra`）、`offset` / `rotate`（(值 − origin) × per（rotate 的 per 默认 1），在姿态之后沿场景轴移 / 绕（姿态后的）零件中心或 `pivot` 场景点转，0.5 s 缓动；`settle: { period, damping }` = 阻尼摆动（rotate：转角走近路；offset：挂在弹簧下的挂钩跟着弹簧回弹几下停住，docs/30 F4）、`stretch`（弹簧伸缩）、`play`（播放时间线通道）——这两项见下面「弹簧伸缩」「时间线与回放」、`at`（命名位置环）、`state`（铁屑排哪个场态）——后三者见磁铁一节；流 `visible`、`state`（场线流）、`intensity`（向量输出按 `paths` 的 id：每条路径的粒子速度 ∝ |值| ÷ `full`（夹在 ±2），负值反向，< 1 % 的路径 0.3 s 淡出；相位逐帧积分，变速不跳）、`stops`（状态 → 粒子色，如短路 `token:hot`）；动画 `rpm`（rotate 的转速 = 值 × per，角度积分）、`enabled`（条件不成立时 0.15 s 缓停）。运转（RUN / FLOW）只管"动起来"：灯亮不亮、零件在哪儿不受它影响。
 - **多路径流**（`flows[].paths: [{ id, path }]`，≤ 16 条，代替 `path`）：一条流、一次绘制；粒子按路径长度分配（每条 ≥ 4），每条路径一行浮点纹理，shader 里每条路径一个相位 / 透明度 / 闭合标志（`flowMaterial.ts`）。电路主题每条边一条路径（与导线 sweep 同源，生成脚本写出两者）。不能 `bilateral`。
-- **读数**：`telemetry` 行写 `follow: "<数输出>"`（不写 `idle` / `run`）：跟随输出值、0.3 s 一阶滞后（`lag` 可改）、小数位取输出的；本章 `try.observe` 里的输出在 PLATE 块加粗；块尾一行 `SIM <第一个状态输出> · <本章试一试控件的值>`，短路 / 超额定用 hot 色。
+- **读数**：`telemetry` 行写 `follow: "<数输出>"`（不写 `idle` / `run`）：跟随输出值、0.3 s 一阶滞后（`lag` 可改）、小数位取输出的；`follow` 写 2–3 个同单位的数输出 = 一行两值（`FALL TIME · L · R 0.45 · 0.45 s`）；`scope: "observe"` = 只显示本章卡片观察的那几个，本章一个都不观察时显示 `—`（一行"重量"在落体章读 `weight`、弹簧章读 `load-weight`，docs/30 F6）；本章 `try.observe` 里的输出在 PLATE 块加粗；块尾一行 `SIM <状态> · <本章试一试控件的值>`：状态 = 本章卡片观察的状态输出，否则先猜后看观察的，否则第一个会随卡片控件或本章 `set` 的控件变的；都没有时电路、磁铁照旧写模型的第一个状态，力的模型（几套互不相干的实验，`SEPARATE_EXPERIMENTS`）不写状态；短路 / 超额定用 hot 色。
 - **章节**：
 
 ```yaml
@@ -1067,13 +1071,14 @@ state:
       also: [bulb-a-in]                        # 卡片上再给的控件（≤ 4）
       keep: [cells, { en: "Same bulbs", zh: "同样的灯泡" }]   # 不变的量：控件（显示当前值）或一句话
       observe: [i-cells, bright-a, bright-b]   # 观察的输出（大号读数，PLATE 块加粗）
-      record: true                             # 「记一行」+ 数据表；或 { judge: { output, gt, label } } 加一列是 / 否
+      record: true                             # 「记一行」+ 数据表；或 { judge: { output, gt, label } } 加一列是 / 否；{ chart: true | { y } } 表下画小图（见「数据表下的小图」）
+      replay: true                             # 「再跑一次」按钮与键 G（见「时间线与回放」）；或时间线输出 id 的列表
       predict:                                 # 先猜后看（可选，不判对错）
         prompt: { en, zh }
         start: { main: true }                  # 先设成这样再读"之前"（可选）
         change: { gap: empty }
         observe: bright-a
-        options: [ { id, label, means: same | zero | less | more | positive | negative } ]
+        options: [ { id, label, means: same | zero | less | more | positive | negative } ]   # observe 是状态输出时 means 写它的状态 id，揭晓写状态的标签
   beats:
     - sim: { set: { bulb-a-in: false } }       # 这一拍的值（叠在本章 set 上）
       caption: { en, zh }
@@ -1081,11 +1086,11 @@ state:
 
   validate 核对 `set` / `start` / `change` 的控件与值、`vary` / `also` / `keep` 是控件、`observe` 是输出。
 - **试一试卡片**（`readerTop`，节拍行之后、详情之前；docs/08 §2 铁律 d）：标题 TRY IT / 试一试 + 键位提示；三行芯片（改变 signal 实心、不变 cold 描边、观察墨色描边）；控件：开关钮（`role="switch"`）、‹ 值 ›（`role="group"`，两端禁用）、选项钮（`role="radiogroup"` / `radio`），全部 ≥ 44 px，`data-sim-control` / `data-sim-value`；观察量大号读数 + SIM 芯片"在这个模型里"；先猜后看：选项 → 应用 `start`、读"之前"、应用 `change` → "你猜：… · 观察到：…"（观察 = `lib/sim/trial.ts outcomeOf`：变为零 / 变号 / ±5 % 内差不多一样 / 变大 / 变小，用 `means` 相同的选项的话说），「回到改变前」恢复改变前的值；换章、拍、深链接时清掉。数据表：「记一行」按改变量的值一行（同值覆盖，≤ 12 行，只在内存：刷新即清），列 = 改变量 + 观察量（+ 是 / 否）。手机在底部抽屉里同样可用。
-- **键**：`[` `]` = 本章 `vary` 的上一值 / 下一值（开关 = 关 / 开，选择 = 上 / 下一个选项），`T` = 本章卡片里第一个开关（`vary` 或 `also`）；注册为命令 `sim-prev` / `sim-next` / `sim-toggle`（`SIM_KEYS`），和按钮、电路图、测试 API 写同一个 store 值；状态行键位提示写 `[ ] T TRY IT`。没有卡片的章不注册。
+- **键**：`[` `]` = 本章 `vary` 的上一值 / 下一值（开关 = 关 / 开，选择 = 上 / 下一个选项），`T` = 本章卡片里第一个开关（`vary` 或 `also`），`G` = 再跑一次（卡片有 `replay` 时）；注册为命令 `sim-prev` / `sim-next` / `sim-toggle` / `sim-replay`（`SIM_KEYS`），和按钮、电路图、测试 API 写同一个 store 值（`G` 与「再跑一次」按钮写引擎 UI store 的同一个计数 `simReplay`）；状态行键位提示写 `[ ] T TRY IT`（有 `G` 时 `[ ] T G TRY IT`）。没有卡片的章不注册。
 - **电路图卡**（有 `circuit.diagram` 时代替右上零件链路卡，标题 CIRCUIT DIAGRAM / 电路图；< 1024 px 收进试一试卡片里可折叠的一节）：节点的 `d` 是图上坐标，边的 `via` 是直角拐点，符号放在最长的一段直线上（`at`，默认中点）：电池 = 每节一对长（+）短（−）线、翻转的那节反过来，灯 = 圆内叉（按亮度填 `--lamp`，拔掉时虚线），开关 = 两个接线点 + 刀片（断开时抬起），缺口 = 两个接线点 + 材料（导体实线、铅笔芯虚线、绝缘体空着），蜂鸣器、电机（M）；有电流的边用 `--current` 加粗并带方向箭头（从正极出发），短路时整张图 `--hot`；开关符号 = 拨真开关（`role="button"`、`aria-pressed`、44 px 命中区，Enter / Space），其他符号 = 选中边的 `part`，选中的零件对应符号描 signal；`diagram.labels` 是图上的小字（"手电筒"）。没有 `d` 的节点不画。
-- **测试与 QA**：`__atlas.engine.sim()` → `{ values, set, outputs, try, table }`，`__atlas.engine.setSim({ id: value })`（逐个走 `setSimControl`，有非法值返回 false）；`__atlas.state().sim` = 设过的值。`pnpm shoot <slug> --keys` 测 `[` `]` `T`（在第一个有卡片的章：`]` 前进一值、`[` 回来、URL 带 `sim`；`T` 翻转一个开关再翻回）；`--beats` 每拍照常截图（拍的 `sim.set` 随 `beatScene` 应用）。
-- **token**：`--lamp`（灯丝发光，暖白）、`--current`（电流粒子，暗金；短路用 `--hot`）。
-- **已知限制**：读者不能自己拖元件、连线、拖磁铁和指南针（docs/23 §4.5、docs/22 §4.5，v2：场线要在运行时重算）。
+- **测试与 QA**：`__atlas.engine.sim()` → `{ values, set, outputs, try, table, timeline, replays }`（`timeline`：每条时间线输出在舞台上的 `{ t, duration, playing, slow }`，模型秒；`replays`：再跑一次的计数），`__atlas.engine.setSim({ id: value })`（逐个走 `setSimControl`，有非法值返回 false），`__atlas.engine.simSeek(id, t)`（把时间线停在模型时刻 `t`，截过程中的一帧）；`__atlas.state().sim` = 设过的值。`pnpm shoot <slug> --keys` 测 `[` `]` `T` `G`（在第一个有卡片的章：`]` 前进一值、`[` 回来、URL 带 `sim`；`T` 翻转一个开关再翻回；`G`：计数加一、有时间线从头开始播放）；`--beats` 每拍照常截图（拍的 `sim.set` 随 `beatScene` 应用；时间线直接是终态）。
+- **token**：`--lamp`（灯丝发光，暖白）、`--current`（电流粒子，暗金；短路用 `--hot`）、`--f-gravity` / `--f-friction` / `--f-elastic` / `--f-push`（力的箭头，见「力的箭头」）。
+- **已知限制**：读者不能自己拖元件、连线、拖磁铁和指南针、推小车（docs/23 §4.5、docs/22 §4.5、docs/30 §4.6，v2：场线 / 时间线要在运行时重算）。
 
 ### SpaceScene · 试一试 · 磁铁（magnet）
 
@@ -1169,6 +1174,104 @@ docs/22 §4.2–4.4（E-MAG）。`sim.kind: "magnet"`：磁铁是 Gilbert 磁荷
 - **电磁铁**：`power` 让场态 / 指南针 / 场线随开关和节数变；`tint` 绑定把钉子染色（通电 = 磁铁；只染钉子的主材质，同一零件里别的材质的 extra 不染）；回形针 `count: true` 绑 `clips-em`；电流流 `visible` 绑开关（同电路）。
 - **读数**：`telemetry` `follow: "force"`（Pull %）、`"needle-bearing"`（Needle °）、`"clips"`（Clips held：本章卡片观察的回形针数，加粗；别章显示 `—`，`clips` 不能绑定）。块尾 `SIM <场态标签> · <本章控件值>`。
 - **validate**（`sim-schema.ts magnetIssues` 等）：磁铁 id、两极不重合、`move` / `flip` / `power` 的控件种类、`part` 存在且有 `primitive`；`compass` 环与控件；`needle-bearing` 有读数位置；场态的磁铁、`when` 值、无 `when` 的放最后、每个场态有标签、有平面、平面里真能起线；`at` 的环存在、控件是 1 … count；`state` 绑定的输出是场态、零件有 `filings`、流没有自己的 `path`；每个铁屑零件和每条无路径的流都有 `state` 绑定；指南针方位的转轴方向；`clips` 不绑定；力箭头的零件、数输出、`when`。铁屑 / 场线写了 `states`（手写的生成数据）直接报错：引擎会算。
+
+### SpaceScene · 试一试 · 力（force）
+
+docs/30 §4（E-FORCE，F0–F8）。`sim.kind: "force"`：一张实验台上的六套小实验，每套一个确定性的小模型（纯函数、同步、< 0.1 ms，落体积分在内）。数据里写了哪套就算哪套，没写的子模型不提供它的量（输出引用了会报"needs the force model's `fall` data"）。模型内部全精度，读数按输出的 `decimals` 四舍五入后才进卡片、PLATE、表、图。代码：`lib/sim/force.ts`（模型）、`lib/sim/timeline.ts`（时间线）、`lib/sim/arrows.ts`（箭头）、`lib/sim/chart.ts`（小图）、`lib/stretch.ts`（弹簧伸缩）、`stages/model3d/TimelineClock.tsx`、`SimOverlays.tsx`（`force-vectors`）、`PartNode.tsx`（`play` / `stretch` / 回弹的 `offset`）、`explorer/TryChart.tsx`；单测 `tests/space-scene/{force,timeline,chart,stretch}.test.ts`，样板台 `tests/space-scene/fixtures/forces-bench.ts`（docs/30 §4.3 的全部数字，可当作者模板）；示例主题 `sample-forces`（draft，七章：背景章 + 六个子模型各一张卡）。
+
+```jsonc
+"sim": {
+  "kind": "force",
+  "controls": [ … ],                         // 同核心；选项 id 不能是 off / on（URL），刹车的"不捏"写 none
+  "outputs": [                               // ≤ 32；from 默认 = id，量名见下表
+    { "id": "t-left", "label": {…}, "unit": "s", "decimals": 2 },
+    { "id": "landing", "kind": "state", "states": { "together": {…}, "left-first": {…}, "right-first": {…} } },   // 每个状态都要有标签（validate）
+    { "id": "drop-run", "kind": "timeline", "label": {…} }
+  ],
+  "force": {
+    "g": 9.8,                                // N/kg
+    "push":   { "choice": "push", "start": "car-start", "speed": 0.6, "at": 0.25, "runway": 1.25, "surface": "glass",   // 或 "rolling": 0.06
+                "dv": { "behind": [0.3, 0, 0], "front": [-0.3, 0, 0], "front-firm": [-0.6, 0, 0], "side": [0, 0, 0.3] },
+                "approach"?: 0.25, "wheel"?: 0.011, "arrow"?: 3 },
+    "magnet": { "toggle": "magnet-push", "dv": [0.4, 0, 0] },
+    "fall":   { "height": "drop-height", "pair": "pair", "slow": 4, "air"?: 1.21, "sample"?: 0.01,
+                "objects": { "small-ball": { "part": "ball-small", "m": 0.0282, "cd": 0.45, "area": 2.835e-4 }, …,
+                             "flat": { "part": "paper-sheet", "m": 0.005, "cd": 1.12, "area": 6.237e-2, "sway"?: 8 } },
+                "pairs": { "balls": ["small-ball", "large-ball"], … },        // 每个 pair 选项：左、右两个物体
+                "weigh"?: { "control": "weigh", "map": { "small-ball": "small-ball", "paper": "flat" } } },
+    "slide":  { "block": 0.2, "load": "block-load", "lane": "lane", "rise": 1.2, "speed": 0.15, "travel": 0.25,
+                "surfaces": { "glass": [0.25, 0.20], "wood": [0.50, 0.30], "sandpaper": [0.90, 0.70] } },   // [μ 开始滑动, μ 保持滑动]
+    "roll":   { "height": "ramp-height", "surface": "runway", "loss": 0.2, "wheel": 0.011, "runway": 1.25, "ramp": { "angle": 14 },
+                "rolling": { "glass": 0.06, "wood": 0.09, "carpet": 0.25 } },
+    "spring": { "load": "spring-load", "unload": "unload", "per50": 1.0, "length": 8.0, "limit": 300, "beyond": [1.0, 0.3], "set": { "350": 0.4, "400": 1.2 } },
+    "brake":  { "squeeze": "squeeze", "rps": 2, "inertia": 0.032, "radius": 0.18, "mu": 0.6, "hub": 0.005, "force": { "none": 0, "light": 1, "firm": 3 } }
+  }
+}
+```
+
+| 子模型 | 读的控件 | 量（`from`） | 时间线通道 |
+|---|---|---|---|
+| `push` | `choice`（推的方向，选项 = `dv` 的键）、`start`（`rest` / `moving` 的选择，或开关：开 = 在动；默认在动） | `effect`（状态 `none` / `starts` / `speeds-up` / `slows-down` / `stops` / `turns`：从静止到 ≥ 0.01 m/s = starts，反之 stops，转向 > 10° = turns，±5 % 外 = 加快 / 减慢）、`speed-before`、`speed-after`（m/s）、`push-run` | `x`、`z`（m，沿 / 横过跑道，以推点为 0）、`heading`（°，从 +X 转向 +Z：绑 `turn: [0, -1, 0]`）、`spin`（车轮转过的 °）、`push`（推的 0.15 s 里 = \|Δv\| × `arrow`，箭头用） |
+| `magnet` | `toggle` | `magnet-run`（开着时车被磁铁推 `dv`、`push-run` 静止；关着时反过来） | 同 push |
+| `fall` | `height`（m 的步进）、`pair`、`weigh` | `t-left`、`t-right`（s）、`landing`（\|Δt\| < 0.03 s = together）、`drop-run`、`weight`（N = m g，所称的物体）、`weigh-note`（`none` / `reads` / `too-light`：< 0.05 N 学校弹簧秤读不出） | 每个物体一个通道 = 已下落的 m（只有本对的两个），有 `sway` 的物体另有 `<id>-sway`（°，示意的摆动） |
+| `slide` | `load`（g 的步进）、`lane` | `f-start` = μs m g、`f-move` = μk m g（N），m = `block` + 载荷 | `x`（木块滑过的 m）、`pull`（N：0–`rise` s 线性升到 f-start，0.1 s 降到 f-move）、`friction`（N：拉住时 = 拉力，滑动时 = f-move） |
+| `roll` | `height`（cm 的步进）、`surface` | `distance`（cm）= (1 − loss) h ÷ c，`run-time`（s）= v₀ ÷ c g，`run-end`（`stops` / `off-end`：到了 `runway` 端挡板，distance 写到挡板为止） | `dx`、`dy`（m，以坡底为 0：起点在斜面上）、`pitch`（°，斜面上车头朝下：绑 `turn: [0, 0, -1]`）、`spin` |
+| `spring` | `load`（g 的步进）、`unload`（开关） | `extension`（cm：`limit` 内每 50 g `per50`，过了限度再加 n · a + n² · b，n = 超过的 50 g 份数；取下后 = `set`）、`spring-length`、`load-weight`（N，取下时 0）、`returns`（`loaded` / `returns` / `stays-longer`） | — |
+| `brake` | `squeeze` | `stop-time`（s）= I ω ÷ (hub + 2 μ N r)、`turns`（圈） | `spin`（°，匀减速到停）、`brake`（N，两块刹车块的摩擦力） |
+
+- **validate**（`sim-schema.ts forceIssues`）：每个子模型读的控件存在且种类对（步进 / 选择 / 开关）、选择的每个选项都在表里（`dv`、`pairs`、`surfaces`、`rolling`、`force`）且表里没有多余的键；μ 开始滑动 ≥ μ 保持滑动；落体高度 > 0、`pairs` 的物体存在、物体的 `part` 有 primitive；默认值下小车停在跑道上；弹性限度是 `load` 的一个值、限度以上的每个载荷都有 `set` 且 `set` 小于挂着时的伸长；`magnet` 需要 `push`；状态输出给每个状态写标签。
+- **与真实的差别**（S1 与细看必须写，docs/30 §4.2 第 7 条）：滚动系数、刹车数字为"装得进实验台、看得清"取的示意值，排序对、数字不是实测；每次给同一个数（确定性）。
+
+### SpaceScene · 时间线与回放（timeline / play，docs/30 F2，docs/31 共用）
+
+模型除了数、状态、向量，还能给一段"跑一遍"的过程：**时间线输出**（`kind: "timeline"`，`lib/sim/timeline.ts`）。值的形状（能量主题的落球、秋千、发条车用同一形状）：
+
+```ts
+interface Timeline {
+  kind: 'timeline';
+  key: string;        // 这一跑由什么决定（模型的输入）；key 变了才从头再跑
+  duration: number;   // 模型秒；终态 = t = duration 时的状态
+  slow: number;       // 画面放慢的倍数（1 = 实时）
+  channels: Record<string,
+    | { segments: { t0, t1, x0, v0, a }[] }   // 分段匀加速：x = x0 + v0 (t − t0) + ½ a (t − t0)²；段前取首段起点，段后与段间保持
+    | { samples: [t, x][] }>;                  // 采样（≤ 256，时间升序，线性插值，两端保持）
+}
+```
+
+- **播放规则**（`TimelineClock`，纯规则在 `timeline.ts` 的 `startPlayback / updatePlayback / replayPlayback / stepPlayback`，有单测）：页面第一次看到一条时间线 = 终态；值变了而 key 变了 = 先显示起点、**0.4 s 后从 0 播放**，以 1 ÷ `slow` 的速度，到 `duration` 停住；key 没变（改的是别的实验的量）= 原地不动。深链接、截图、拍的瞬切（instant 过渡）、EXPLODED、REFERENCE、`prefers-reduced-motion` = 直接终态。播放中只由时钟要帧，零件、箭头在同一帧读时刻（时钟挂在零件之前）；播完停帧。
+- **再跑一次**：卡片 `try.replay: true` = 这张卡的控件（`vary`、`also`）会改变的时间线（看 key 变不变，`lib/sim/replay.ts cardTimelines`），或写时间线 id 的列表；卡片上一个 44 px 的「再跑一次 / Run again」按钮，键 `G`（命令 `sim-replay`），两者写同一个计数；这几条时间线里有 `slow` > 1 的，按钮旁一枚芯片「放慢 4 倍 / Slowed down 4 times」。
+- **`play` 绑定**（零件，输出必须是时间线）：`{ "output": "car-run", "part": ["toy-car", "car-wheels"], "play": { "channel": "dx", "axis": [1, 0, 0], "per"?: 1 } }` = 沿 `axis` 移 通道值 × per（场景单位）；`{ "play": { "channel": "pitch", "turn": [0, 0, -1], "pivot"?: [x, y, z] } }` = 绕轴转 通道值 × per 度（绕 `pivot`，没写 = 零件此刻的中心）；`"each": true` = `repeat` / `extra` 的每一份绕自己的中心转（车轮；零件自动按 `each` 的方式实例化）；`"when": { "control" | "output", "is"? }` = 只在条件成立时播放（一辆车第一章被推、第四章从斜面滚下：各跑各的）。叠加顺序：姿态 → 试一试 offset / rotate → `play`（几条 `play` 相加，转在移之前）→ 动画。`pivot` 写**姿态之后**的位置（车先由姿态挪到推点，车轮跟车头一起转时 pivot 写挪过去的车中心）。validate：通道是这个模型的这条时间线有的、`axis` 与 `turn` 二选一、`each` 要 `turn` 且零件有多份、时间线不能绑 `visible` / `glow` 等、不能绑流和动画。
+- **QA**：`sim().timeline`、`simSeek(id, t)`；`pnpm shoot --beats` 截终态，`--keys` 测 `G`。
+
+### SpaceScene · 力的箭头（`overlays: force-vectors`，docs/30 F3）
+
+```jsonc
+"overlays": [ { "kind": "force-vectors", "group": "forces", "per": 0.03, "max": 0.25, "arrows": [
+  { "part": "wooden-block", "force": "push", "dir": [1, 0, 0], "value": { "output": "pull-run", "channel": "pull" } },
+  { "part": "mass-hanger", "force": "gravity", "dir": [0, -1, 0], "value": { "output": "load-weight" }, "at": "bottom" },
+  { "part": "ball-large", "force": "gravity", "dir": [0, -1, 0], "value": 2.2, "when": { "control": "pair", "is": { "eq": "balls" } } },
+  { "part": "toy-car", "force": "push", "dir": [-1, 0, 0], "value": { "output": "push-run", "channel": "push" }, "offset": [0.06, 0, 0],
+    "when": { "control": "push", "is": { "in": ["front", "front-firm"] } } }
+] } ]
+```
+
+- `force` ∈ `gravity` / `friction` / `elastic` / `push` / `magnetic` → token `--f-gravity` / `--f-friction` / `--f-elastic` / `--f-push` / `--pole-n`（docs/08 §1）；KEY 名称"Gravitational force / 重力""Frictional force / 摩擦力""Elastic spring force / 弹簧的弹力""Push or pull / 推力或拉力""Magnetic force / 磁力"（`lib/sim/arrows.ts`）。
+- `value`：一个数、一个数输出（缓动）、或时间线输出的 `channel`（跟着播放走）；负值反向。长度 = `per`（默认 0.03 m / N）× 牛顿，≤ `max`（默认 0.25）；粗细与箭头按 `per` 缩放；< 0.05 N 淡出。起点 = 零件包围盒的中心 / 顶 / 底（`at`）+ `offset`，跟着零件的姿态、offset、`play` 走（读标注锚点）。方向随选项变时写几支带 `when` 的箭头（推的方向）。
+- 一个叠加的全部箭头 = 一个网格（顶点色带透明度），**一次绘制**；零件不在场、`when` 不成立、`group` 的图层关着、EXPLODED 时淡出。`group`：一个没有零件的组（LAYERS 一行"Forces / 力"，章 / 拍的 `layers` 照常控制它）。
+- **KEY**：控制面板的图例自动加上此刻画着的力（箭头的零件在场、`when` 成立、图层开着、时间线在整段里有一处 ≥ 0.05 N 或数 ≥ 0.05 N；`forcesOnShow`）。
+- validate：零件存在、方向非零、数输出 / 时间线通道存在、`when` 的控件或输出存在、`group` 存在；**被 `play` 转动的零件（车轮）不能画摩擦力箭头**（课纲 Note：滚动物体的摩擦方向不要求，docs/30 D3）。
+
+### SpaceScene · 弹簧伸缩（`stretch`）与回弹（docs/30 F4）
+
+- `{ "output": "extension", "part": "test-spring", "stretch": { "per": 0.01, "settle"?: { "period": 0.7, "damping": 0.15 }, "anchor"?: "top" } }`：零件里唯一的 `coil`（主 primitive 或 `extra`）沿自己的轴伸长 值 × per 场景单位：**每一圈刚性平移、圈距变大、钢丝截面不变**（`coil` 几何带每个顶点的螺旋参数 t，`lib/stretch.ts`）；`anchor` 端不动（`top` = 线圈自己的 +Y 端，`bottom`、`centre`）；同一零件的其他块（上下钩环）按它们的中心在线圈上的位置跟着近的一端走。值 = 数输出或步进控件；写 `channel` = 时间线通道（水平弹簧秤里的弹簧跟拉力走），这时不能 `settle`。
+- 回弹：`stretch.settle` 与 `offset.settle` 是同一个二阶阻尼振子（`lib/sim/settle.ts`，长度用 2e-5 m 的停稳阈值）；**挂在弹簧下的挂钩、槽码写同样的 `settle`、同样的值 × per，回弹中也不脱节**（单测）。深链接、截图直接终值。
+- validate：零件恰有一个 `coil`、不 `repeat`。
+
+### SpaceScene · 数据表下的小图（`record.chart`，docs/30 F5，docs/31 共用）
+
+- `record: { chart: true }` 或 `{ chart: { y: "<输出>" | ["<输出>", …] } }`（≤ 3 个同单位的数输出；默认 = 卡片观察的第一个数）；可与 `judge` 同写。表有 ≥ 2 行才画（`explorer/TryChart.tsx`，模型在 `lib/sim/chart.ts`）。
+- 改变量是步进 → **折线图**：x 轴按控件的值（升序，全部值作刻度，与记了哪几行无关），点按 x 排序连线；是选择 → **条形图**：每个选项一格（选项顺序），记了的才有条，条上写数。y 从 0 到一个整齐的上限（1 / 2 / 2.5 / 5 × 10ⁿ，2–6 格）。hairline 坐标轴、mono 数字、轴标题 = 标签 + 单位；墨色，**当前值那一行 signal 色**；多个 y：折线换虚线与点形，条形第二组浅一档，图题后一行小图例。
+- 读屏：`<svg role="img" aria-label>`，文字由数据自动拼（`chartSummary`，中英）：折线 = 起止值 + "一直上升 / 下降 / 有升有降"，或从头开始每一步一样时"每增加 50 g，伸长增加 1.0 cm，直到 300 g，之后增加得更快"；条形 = 每个选项的值 + 最高、最低。表仍是读屏的主体。手机抽屉里与表同宽。
 
 ### 章节怎么写（`state`）
 

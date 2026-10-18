@@ -3,7 +3,8 @@
  * stage (separate React roots): ORBIT turntable, REFERENCE mode, the
  * presentation (on) and the cover
  * camera (HUD hidden) and the glb's loading state and part bounds, and the
- * try-it card's data tables and predict-then-observe answer. None of it
+ * try-it card's data tables, predict-then-observe answer and "Run again"
+ * count (and the QA hold of a timeline). None of it
  * goes into the URL; a chapter change ends ORBIT and REFERENCE.
  */
 import { createStore, type StoreApi } from 'zustand/vanilla';
@@ -48,8 +49,12 @@ export interface SpaceUiState {
   exerciseBody: ExerciseBody | null;
   /** Try-it data tables by chapter id (in memory only: a reload clears them, like MathScene's work). */
   simTables: Readonly<Record<string, readonly TableRow[]>>;
-  /** A predict-then-observe answer: the option picked, and the values and observed reading before the change. */
-  simPredict: { chapter: string; guess: string; before: SimValues; value: number } | null;
+  /** A predict-then-observe answer: the option picked, and the values and observed reading (a number or a state) before the change. */
+  simPredict: { chapter: string; guess: string; before: SimValues; value: number | string } | null;
+  /** "Run again" (the try-it button, key G): a count and the timeline outputs it plays from the start (the stage watches the count). */
+  simReplay: { n: number; ids: readonly string[] };
+  /** QA (`__atlas.engine.simSeek`): hold timeline `id` at model time `t` (a new `n` each request). */
+  simSeek: { id: string; t: number; n: number } | null;
 }
 
 export type SpaceUiStore = StoreApi<SpaceUiState>;
@@ -67,5 +72,7 @@ export function createSpaceUi(): SpaceUiStore {
     exerciseBody: null,
     simTables: {},
     simPredict: null,
+    simReplay: { n: 0, ids: [] },
+    simSeek: null,
   }));
 }

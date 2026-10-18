@@ -21,30 +21,16 @@ import type { SpaceSceneExt } from '../index';
 import type { PartsFile } from '../schema';
 import type { SimControl, SimData, SimOutput, SimTry, SimValue } from '../sim-schema';
 import type { SpaceUiStore } from '../ui';
-import { numberOf, outputDecimals, type SimOutputValue } from '../lib/sim';
+import { numberOf, type SimOutputValue } from '../lib/sim';
 import { evaluateSimOnStage } from '../lib/sim/carrier';
 import { resolveSimValues, stepValue } from '../lib/sim/controls';
 import { outcomeOf, recordRow } from '../lib/sim/trial';
-import { formatReading } from '../lib/telemetry';
+import { outputText, valueText } from '../lib/sim/text';
+import { cardTimelines } from '../lib/sim/replay';
+import { isTimeline } from '../lib/sim/timeline';
 import { setSim, useSimStore, useSimView } from '../hud/sim';
 import { CircuitDiagram } from '../hud/CircuitCard';
-
-const ON_OFF = { on: { en: 'On', zh: '开' }, off: { en: 'Off', zh: '关' } } as const;
-
-/** A control's value as words: `2`, `Series`, `On`. */
-export function valueText(c: SimControl, v: SimValue | undefined, locale: 'en' | 'zh'): string {
-  if (c.kind === 'toggle') return tx(v ? ON_OFF.on : ON_OFF.off, locale);
-  if (c.kind === 'step') return `${v}${c.unit ? ` ${c.unit}` : ''}`;
-  return tx(c.options.find((o) => o.id === v)?.label ?? { en: String(v), zh: String(v) }, locale);
-}
-
-/** An output's value as text: a number with its decimals (`—` where it does not apply), a state's label. */
-export function outputText(o: SimOutput, v: SimOutputValue | undefined, locale: 'en' | 'zh'): string {
-  if (o.kind === 'state') return tx(o.states?.[String(v)] ?? { en: String(v ?? ''), zh: String(v ?? '') }, locale);
-  if (o.kind === 'vector') return '';
-  const n = numberOf(v);
-  return Number.isFinite(n) ? formatReading(n, outputDecimals(o)) : '—';
-}
+import { TryChart } from './TryChart';
 
 function Control({ c, value, onSet, primary }: { c: SimControl; value: SimValue | undefined; onSet(v: SimValue): void; primary: boolean }) {
   const t = useT();
@@ -125,12 +111,15 @@ function Predict({ file, sim, card, ui, chapter }: { file: PartsFile; sim: SimDa
   const view = useSimView(file)!;
   const answer = useStore(ui, (u) => (u.simPredict?.chapter === chapter ? u.simPredict : null));
   const p = card.predict!;
+  const observed = sim.outputs.find((o) => o.id === p.observe);
+  const isState = observed?.kind === 'state';
   const pick = (id: string) => {
     const before = { ...store.getState().sim };
     // From the prediction's starting point (the switch closed …): read the observed output there, then make the change.
     for (const [k, v] of Object.entries(p.start ?? {})) setSim(store, sim, k, v);
     const st = store.getState();
-    const value = numberOf(evaluateSimOnStage(sim, file, resolveSimValues(sim, st.sim), st.pose, card.observe).outputs[p.observe]);
+    const out = evaluateSimOnStage(sim, file, resolveSimValues(sim, st.sim), st.pose, card.observe).outputs[p.observe];
+    const value = isState ? String(out ?? '') : numberOf(out);
     ui.setState({ simPredict: { chapter, guess: id, before, value } });
     for (const [k, v] of Object.entries(p.change)) setSim(store, sim, k, v);
   };
@@ -154,10 +143,12 @@ function Predict({ file, sim, card, ui, chapter }: { file: PartsFile; sim: SimDa
       </div>
     );
   }
-  const outcome = outcomeOf(answer.value, numberOf(view.outputs[p.observe]));
   const guess = p.options.find((o) => o.id === answer.guess);
-  const match = p.options.find((o) => o.means === outcome);
-  const seen = match ? tx(match.label, locale) : t(`space.try.outcome.${outcome}` as UiKey);
+  // A state is revealed by its label (the car turns); a number by how it changed, in the options' words where one matches.
+  const now = view.outputs[p.observe];
+  const outcome = isState ? String(now ?? '') : outcomeOf(typeof answer.value === 'number' ? answer.value : 0, numberOf(now));
+  const match = isState ? undefined : p.options.find((o) => o.means === outcome);
+  const seen = isState && observed ? outputText(observed, now, locale) : match ? tx(match.label, locale) : t(`space.try.outcome.${outcome}` as UiKey);
   return (
     <div className="space-try__predict" data-answered="">
       <p className="space-try__prompt">{tx(p.prompt, locale)}</p>
@@ -178,11 +169,18 @@ function Table({ file, sim, card, ui, chapter }: { file: PartsFile; sim: SimData
   const view = useSimView(file)!;
   const rows = useStore(ui, (u) => u.simTables[chapter]) ?? [];
   const vary = sim.controls.find((c) => c.id === card.vary)!;
-  const outs = card.observe.map((id) => sim.outputs.find((o) => o.id === id)!).filter((o) => o.kind !== 'vector');
-  const judge = card.record !== true && card.record ? card.record.judge : null;
+  const outs = card.observe.map((id) => sim.outputs.find((o) => o.id === id)!).filter((o) => o.kind !== 'vector' && o.kind !== 'timeline');
+  const rec = card.record !== true && card.record ? card.record : null;
+  const judge = rec?.judge ?? null;
+  // The graph's y: the outputs `chart.y` names, else the first number the card observes.
+  const chart = rec?.chart;
+  const ys = chart
+    ? (chart === true ? outs.filter((o) => o.kind === 'number').slice(0, 1) : (Array.isArray(chart.y) ? chart.y : [chart.y]).map((id) => sim.outputs.find((o) => o.id === id)!))
+    : [];
   const record = () => {
     const values: Record<string, SimOutputValue> = {};
     for (const o of outs) values[o.id] = view.outputs[o.id]!;
+    for (const o of ys) values[o.id] = view.outputs[o.id]!;
     if (judge) values[judge.output] = view.outputs[judge.output]!;
     const tables = ui.getState().simTables;
     ui.setState({ simTables: { ...tables, [chapter]: recordRow(tables[chapter] ?? [], { vary: view.values[card.vary]!, values }) } });
@@ -232,8 +230,28 @@ function Table({ file, sim, card, ui, chapter }: { file: PartsFile; sim: SimData
           )}
         </tbody>
       </table>
+      {ys.length > 0 && <TryChart rows={rows} vary={vary} ys={ys} current={view.values[card.vary]} />}
     </div>
   );
+}
+
+/** "Run again" (and key G: the same store count) and, for a run shown slowed down, how much. */
+function Replay({ ids, slow, ui }: { ids: readonly string[]; slow: number; ui: SpaceUiStore }) {
+  const t = useT();
+  if (ids.length === 0) return null;
+  return (
+    <p className="space-try__replay">
+      <button type="button" className="space-try__opt space-try__run" data-sim-replay="" onClick={() => replay(ui, ids)}>
+        {t('space.try.replay')}
+      </button>
+      {slow > 1 && <span className="atlas-chip space-try__slow">{t('space.try.slow', { n: String(slow) })}</span>}
+    </p>
+  );
+}
+
+/** Play these timelines from the start (the stage watches the count). */
+export function replay(ui: SpaceUiStore, ids: readonly string[]): void {
+  ui.setState({ simReplay: { n: ui.getState().simReplay.n + 1, ids: [...ids] } });
 }
 
 export function TryIt({ file, ui }: { file: PartsFile; ui: SpaceUiStore }) {
@@ -250,7 +268,12 @@ export function TryIt({ file, ui }: { file: PartsFile; ui: SpaceUiStore }) {
     const c = sim.controls.find((x) => x.id === k);
     return c ? `${tx(c.label, locale)}: ${valueText(c, values[k], locale)}` : k;
   });
-  const observed = card.observe.map((id) => sim.outputs.find((o) => o.id === id)).filter((o): o is SimOutput => o !== undefined && o.kind !== 'vector');
+  const observed = card.observe.map((id) => sim.outputs.find((o) => o.id === id)).filter((o): o is SimOutput => o !== undefined && o.kind !== 'vector' && o.kind !== 'timeline');
+  const runs = cardTimelines(sim, values, card);
+  const slow = Math.max(1, ...runs.map((id) => {
+    const run = outputs[id];
+    return isTimeline(run) ? run.slow : 1;
+  }));
   return (
     <section className="space-try" aria-label={t('space.try.title')} data-chapter={chapter}>
       <header className="space-try__head">
@@ -258,7 +281,10 @@ export function TryIt({ file, ui }: { file: PartsFile; ui: SpaceUiStore }) {
           {t('space.try.title')}
           <small lang={locale === 'en' ? 'zh-Hans' : 'en'}>{tx({ en: '试一试', zh: 'Try it' }, locale)}</small>
         </h3>
-        <kbd className="space-try__keys">{t('space.try.keys')}</kbd>
+        <kbd className="space-try__keys">
+          {t('space.try.keys')}
+          {runs.length > 0 && ` · ${t('space.try.keysReplay')}`}
+        </kbd>
       </header>
       <Chips title={t('space.try.vary')} items={controls.slice(0, 1).map((c) => tx(c.label, locale))} tone="signal" />
       <Chips title={t('space.try.keep')} items={keep} tone="cold" />
@@ -282,6 +308,7 @@ export function TryIt({ file, ui }: { file: PartsFile; ui: SpaceUiStore }) {
           <span className="atlas-chip">{t('source.simulated').toUpperCase()}</span> {t('space.try.model')}
         </p>
       </dl>
+      <Replay ids={runs} slow={slow} ui={ui} />
       {card.predict && <Predict file={file} sim={sim} card={card} ui={ui} chapter={chapter} />}
       {card.record && <Table file={file} sim={sim} card={card} ui={ui} chapter={chapter} />}
       {sim.circuit?.diagram && (

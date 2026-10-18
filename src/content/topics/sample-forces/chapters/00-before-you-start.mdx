@@ -1,0 +1,38 @@
+---
+id: before-you-start
+order: 0
+kind: background
+title: { en: "Sample background", zh: "示例背景" }
+state:
+  view: assembled
+  explode: 0
+  run: false
+  part: null
+  layers: [ramp, friction, spring, drop, brake, forces]
+  labels: [ramp-board, wooden-block, test-spring, drop-stand, wheel]
+  summary: { en: "Sample background: a placeholder bench of five experiments, one for each kind of force.", zh: "示例背景：一张占位的实验台，五套器材，每套讲一种力。" }
+  note:
+    en: "Sample reading note: the numbers on this placeholder bench come from a simple model, worked out the same way every time."
+    zh: "示例阅读说明：这张占位实验台上的数字来自一个简单的模型，每次算出来都一样。"
+  beats:
+    - labels: [ramp-board, wooden-block, test-spring, drop-stand, wheel]
+      caption: { en: "Sample beat one: the whole placeholder bench with its five experiments.", zh: "示例节拍一：整张占位实验台和上面的五套实验。" }
+    - camera: spring-view
+      sim: { set: { spring-load: 100 } }
+      labels: [test-spring, slotted-masses, mass-hanger]
+      caption: { en: "Sample beat two: a slotted mass stretches the spring; coloured arrows show the forces.", zh: "示例节拍二：一片槽码把弹簧拉长；彩色箭头表示力。" }
+  index:
+    parts: [ramp-board, toy-car, friction-board, wooden-block, test-spring, slotted-masses, drop-stand, wheel]
+---
+
+<Lang en>
+
+Sample background: a placeholder bench that exercises the forces model. Each chapter after this one has a try-it card.
+
+</Lang>
+
+<Lang zh>
+
+示例背景：一张用来测试力的模型的占位实验台。后面每一章都有一张试一试卡片。
+
+</Lang>

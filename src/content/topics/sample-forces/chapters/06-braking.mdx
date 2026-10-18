@@ -1,0 +1,42 @@
+---
+id: braking
+order: 6
+title: { en: "Sample brake", zh: "示例刹车" }
+state:
+  view: assembled
+  explode: 0
+  run: false
+  part: null
+  layers: [ramp, friction, spring, drop, brake, forces]
+  camera: {"position": [0.8, 0.45, 0.75], "target": [0.55, 0.28, -0.12], "fov": 30}
+  labels: [wheel, brake-caliper]
+  summary: { en: "Sample brake: the harder the squeeze, the sooner the wheel stops.", zh: "示例刹车：捏得越紧，轮子停得越快。" }
+  sim:
+    set: { squeeze: light }
+    try:
+      vary: squeeze
+      keep: [{ en: "Same wheel, same start", zh: "同一只轮、同样起转" }]
+      observe: [stop-time, turns]
+      record: { chart: true }
+      replay: true
+  beats:
+    - labels: [wheel, brake-caliper]
+      caption: { en: "Sample beat one: a light squeeze stops the wheel in under two seconds.", zh: "示例节拍一：轻捏刹车，轮子不到两秒就停了。" }
+    - sim: { set: { squeeze: firm } }
+      labels: [wheel, brake-caliper]
+      caption: { en: "Sample beat two: a firm squeeze stops it sooner.", zh: "示例节拍二：用力捏，停得更快。" }
+  index:
+    parts: [wheel, brake-caliper, wheel-stand]
+---
+
+<Lang en>
+
+Sample brake: placeholder text for the brake sub-model.
+
+</Lang>
+
+<Lang zh>
+
+示例刹车：刹车子模型的占位文字。
+
+</Lang>

@@ -80,6 +80,8 @@ export interface StageBridge {
   footSlip: number | null;
   /** The points (x, y, z, scene) the mannequin and the held equipment sweep over an exercise's keys: the exercise camera frames them. */
   exerciseFrame: { id: string; points: Float32Array } | null;
+  /** Try-it timelines on the stage (lib/sim/timeline.ts): per output id, the model time on show and whether it plays (QA, `sim().timeline`). */
+  playback: ReadonlyMap<string, { readonly t: number; readonly playing: boolean; readonly timeline: { readonly duration: number; readonly slow: number } }>;
 }
 
 /** Resolves once the stage has finished the camera move of transition `id` (or after `timeoutMs`, e.g. before the stage has loaded). */
@@ -118,5 +120,6 @@ export function createBridge(): StageBridge {
     settleListeners: new Set(),
     footSlip: null,
     exerciseFrame: null,
+    playback: new Map(),
   };
 }

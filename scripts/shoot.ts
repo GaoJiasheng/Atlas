@@ -532,6 +532,9 @@ async function runTasks(s: Session, out: string, report: RunReport): Promise<voi
 interface SimInfo {
   values: Record<string, unknown>;
   try: { vary: string; also?: string[] } | null;
+  /** Timelines on the stage (docs/30 F2) and the "Run again" count. */
+  timeline?: Record<string, { t: number; duration: number; playing: boolean }>;
+  replays?: number;
 }
 const simEngine = (s: Session) => ({
   get: () => s.page.evaluate(() => (window.__atlas!.engine as unknown as { sim(): SimInfo | null }).sim()),
@@ -541,7 +544,8 @@ const simEngine = (s: Session) => ({
 /**
  * A try-it key on the first chapter with a try-it card: `]` then `[` must step
  * the varied control one value on and back (from its first value), `T` must
- * flip the card's first switch and back, and the URL must carry `sim`.
+ * flip the card's first switch and back, and the URL must carry `sim`; `G`
+ * must count a "Run again" and set a timeline playing from its start.
  */
 async function simKey(s: Session, key: string, name: string): Promise<{ ok: boolean; note: string }> {
   const e = simEngine(s);
@@ -554,6 +558,23 @@ async function simKey(s: Session, key: string, name: string): Promise<{ ok: bool
       await s.page.waitForTimeout(250);
       return (await e.get())!.values;
     };
+    if (name === 'sim-replay') {
+      const on = await s.page.evaluate(() => window.__atlas!.commands().some((x) => x.id === 'sim-replay' && !x.disabled));
+      if (!on) continue;
+      // Let any run started by the chapter change finish first (a slowed fall takes a few seconds).
+      await s.page.evaluate(() => {
+        const e = window.__atlas!.engine as unknown as { sim(): SimInfo | null; simSeek(id: string, t: number): boolean };
+        for (const [id, p] of Object.entries(e.sim()?.timeline ?? {})) e.simSeek(id, p.duration);
+      });
+      await s.page.waitForTimeout(200);
+      const before = (await e.get())!;
+      await s.page.keyboard.press(key);
+      await s.page.waitForTimeout(120);
+      const after = (await e.get())!;
+      const started = Object.entries(after.timeline ?? {}).filter(([, p]) => p.playing && p.t < p.duration);
+      const ok = (after.replays ?? 0) === (before.replays ?? 0) + 1 && started.length > 0;
+      return { ok, note: `${c}: ${ok ? `running again: ${started.map(([id]) => id).join(', ')}` : `replays ${before.replays} → ${after.replays}, playing ${JSON.stringify(after.timeline)}`}` };
+    }
     if (name === 'sim-toggle') {
       const id = (await s.page.evaluate(() => window.__atlas!.commands().find((x) => x.id === 'sim-toggle')?.disabled)) ? null : 'ok';
       if (!id) continue;

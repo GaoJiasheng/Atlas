@@ -746,4 +746,46 @@ LAYERS 另有一行 **FORCES / 力**（F3 的箭头叠加，不是组；默认�
 
 ## 9. 施工记录 / 已知差距
 
-（施工后填写：提交、与 spec 的差异表、计数、验收数据、已知差距。）
+### 9.1 引擎（E-A + E-B 合并为一个 Opus 代理，2026-10-18）
+
+**做了什么**：§4.4 的 F0–F8 全部，文档 F9。夹具主题 `src/content/topics/sample-forces/`（draft，占位文字，只用程序化积木，28 个零件 + 2 个 context）：背景章 00 + 六章各一张试一试卡，每个子模型、回放与「再跑一次」、力的箭头、弹簧伸缩与回弹、数据表下的小图（条形、两组条形、折线）、PLATE 一行两值与"只本章"读数、先猜一个状态、地毯与砂纸、`count` 的 `minus` 各用一次。docs/06 新增「SpaceScene · 试一试 · 力（force）」「时间线与回放」「力的箭头」「弹簧伸缩与回弹」「数据表下的小图」，改了「试一试（sim）」的输出种类、绑定、读数、键、QA 几条和「背景章」；docs/08 §1 功能色表加力的四色。
+
+| 件 | 代码 | 要点 |
+|---|---|---|
+| F0 背景章 | `schema.ts`（`spaceChapterState.note`） | SpaceScene 下 00 的编号、顶栏 `BG`、章节轨菱形、阅读面板眉题与阅读说明细框、演示开场"Background"都已由 core 处理，验证无缺口；只补了 `note`（docs/31 E-EN7 的同一件）。validate 已有"`note` 只能写在背景章" |
+| F1 模型 | `lib/sim/force.ts`、`sim-schema.ts`（`forceSchema`、`forceIssues`、`quantityKind`、`simTimelineChannels`）、`lib/sim/index.ts` | 六个子模型 + 磁铁推；量名与种类表 `FORCE_MODEL`、状态表 `FORCE_STATES`；全部 §2 SIM 表单测钉死；模型 < 0.1 ms |
+| F2 时间线与回放 | `lib/sim/timeline.ts`、`lib/sim/replay.ts`、`stages/model3d/TimelineClock.tsx`、`PartNode.tsx`（`play`）、`ui.ts`（`simReplay`、`simSeek`）、`bridge.ts`（`playback`）、`View.tsx`（`G`、`sim().timeline`、`simSeek`）、`core/controls.ts`（`SIM_KEYS.replay`） | 见 docs/06「时间线与回放」 |
+| F3 力的箭头 | `lib/sim/arrows.ts`、`SimOverlays.tsx`（`ForceVectors`）、`ExplorerOverlay.tsx`（KEY）、`src/theme/{tokens.css,theme.ts}` | 一个叠加一次绘制（顶点色 + 透明度）；LAYERS 行 = 叠加的 `group` |
+| F4 伸缩与回弹 | `lib/stretch.ts`、`stages/model3d/{shaped,geometry}.ts`（coil 顶点的螺旋参数 `atlasStretch`，合并几何保留）、`PartNode.tsx`、`lib/sim/settle.ts`（长度阈值） | 圈刚性平移、钢丝不变粗；挂钩同 settle 不脱节 |
+| F5 小图 | `lib/sim/chart.ts`、`explorer/TryChart.tsx`、`explorer/TryIt.tsx`、`space-scene.css` | 折线 / 条形 / 多组，读屏文字自动拼（中英） |
+| F6 读数与先猜后看 | `schema.ts`（`telemetry.follow` 数组、`scope`）、`hud/PlateBlock.tsx`、`TryIt.tsx`（状态揭晓）、`lib/sim/text.ts` | PLATE 块尾的状态改为"本章的状态"（下表第 12 条） |
+| F7 材质与 token | `lib/color.ts`（`fabric`、`abrasive`）、`lib/presets.ts`、`schema.ts`、`stages/model3d/textures.ts`（`pile`、`sand` 的法线 + 颜色贴图）、`tokens.css` | 四个力的颜色在纸底 / dark plate、三种色觉缺陷模拟下与 `--pole-n`、`--signal` 两两 ΔE ≥ 9 |
+| F8 count minus | `sim-schema.ts`、`lib/sim/bind.ts` | `{ per, minus }` |
+
+**与 §4 的差异**（实现时的决定；内容代理照这里写数据）：
+
+| # | spec | 实现 | 理由 |
+|---|---|---|---|
+| 1 | `squeeze` 选项 `off / light / firm` | `none / light / firm` | 选项 id 不能是 on / off（URL 编码把它们当开关） |
+| 2 | 输出 26 个 | 输出上限从 16 提到 32 | 一张实验台的全部量 |
+| 3 | `play: { channels: { x: [1,0,0], y: "ramp" } }`、`roll.ramp.dir` | 一条 `play` 一个通道（`channel` + `axis` 或 `turn`）；滚动模型直接给场景坐标的 `dx`、`dy`（以坡底为 0）和 `pitch`；`roll.ramp` 只有 `angle` | 引擎里不出现"ramp"这类主题词；能量主题的秋千、落球同一写法 |
+| 4 | 落体 `@side` 通道 | 每个物体一个通道（物体 id），左右位置由 `pair` 的 `visible` / `pose` 绑定摆 | 同上 |
+| 5 | 箭头 `dir: "tangent"`、`"@push"` | 只有向量；推的方向用几支带 `when` 的箭头（按 `push` 选项） | 不需要魔法字符串 |
+| 6 | — | `play.when`（条件成立才播放） | 一辆车两种摆法（推 / 斜面），各自的时间线只在自己的摆法下动它 |
+| 7 | `count: { per: 50, minus: 50 }` | 同；`per` 从乘数改为除数 | 原来的乘数语义没有主题用过 |
+| 8 | `slide.per`，载荷按"只数" | 没有 `per`；`load` 是克数的步进，m = `block` + 载荷 ÷ 1000 | 少一个换算 |
+| 9 | 推的车从斜面滑下 | 车从跑道起点滚到推点（`approach`，默认 = `at`）；`push` 另有 `rolling` 或 `surface`（`roll.rolling` 的键）、`wheel`、`arrow` | 推的模型不依赖斜面数据 |
+| 10 | `distance` 写 `125+`、状态 `off-end` | `distance` 到挡板为止，另一个状态输出 `run-end`（`stops` / `off-end`），卡片写状态的标签 | 数输出只能是数 |
+| 11 | `weigh-note` 状态未列 | `none / reads / too-light` | — |
+| 12 | 块尾 `SIM <本章第一个状态输出>` | 本章卡片观察的状态 → 先猜后看的 → 第一个随卡片控件或本章 `set` 变的；都没有时电路、磁铁照旧用模型的第一个状态（逐章核对没变），力的模型不写状态 | 六套实验互不相干，`effect` 不该出现在弹簧章 |
+| 13 | KEY"本章出现的力" | 此刻场景里画着的力（零件在场、`when` 成立、图层开着、整段里有一处 ≥ 0.05 N） | 由章的 `hide` / `layers` 决定"本章"，引擎不另记 |
+| 14 | F0 在 `sample-space` 加 00 章 | 在 `sample-forces` 验证（`sample-space` 未改）；章节轴照 core 的 ChapterAxis 给背景章一段 `BG`（MathScene 课也是这样），"不占段"只对 TimeScene 的时间条成立 | 引擎间一致 |
+| 15 | 时间线终态可另定 | 终态 = `t = duration` | 规则简单；能量主题"只演一次弹跳"能用 |
+| 16 | 刹车的摩擦力通道 | 停下那一刻仍是 2 μ N（终态截图看得见箭头） | 截图要能说明"是摩擦力让它停下" |
+| 17 | stretch 只给输出 | 也可以是步进控件；`anchor` 有 `top` / `bottom` / `centre` | 水平弹簧秤的弹簧固定在挂钩一端 |
+
+**测试**：`tests/space-scene/force.test.ts`（F-10、F-12、F-14、F-15、F-16、F-20、F-21 全表按显示位数与 3 位有效数字；排序与不变量；弹性限度；时间线终态 = 输出值；确定性；`force` 数据、`play` / `stretch` / `count` 绑定、箭头、卡片字段的 validate；箭头长度、KEY 列表）、`timeline.test.ts`（分段 / 采样插值、峰值、抽稀、播放规则、`cardTimelines`、`cardStates`）、`chart.test.ts`（轴、模型、读屏文字中英）、`stretch.test.ts`（线圈顶点位置、刚性平移、转向的线圈、挂钩与弹簧同 settle 不脱节）；样板台 `tests/space-scene/fixtures/forces-bench.ts`。e2e `tests-e2e/sample-forces.spec.ts`（深链接终态与读数与 KEY、换值自动播放、`G` 与按钮同一计数、放慢芯片、条形图与折线图的读屏文字、先猜状态、背景章、手机 44 px）。`pnpm shoot` 的 `--keys` 加了 `G` 的检查。
+
+**计数**（`sample-forces`，1920 × 1080，SwiftShader）：静止 19–34 calls、3.1–5.1 万三角形；箭头 1 次绘制；回放结束后停帧。
+
+**已知差距 / 留给内容与 QA**：①推的箭头只在推的 0.15 s 里出现，终态截图看不到（要在细看或拍里讲）；②弹簧伸长时标注锚点留在静止中心；③车侧推后会驶出跑道（模型按直线算，内容代理定跑道宽或改 Δv）；④`sample-forces` 的镜头只求看得见，不是作品级取景；⑤能量主题（docs/31）要的 `energy` 模型、能量链卡、能量条、能量 token 与流的 density 模式不在本次。

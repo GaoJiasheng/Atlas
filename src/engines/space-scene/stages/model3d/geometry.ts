@@ -52,6 +52,7 @@ import { shapedPieces } from './shaped';
 import { latheProfileClosed } from '../../lib/shaped';
 import { FanDeform, sweepClosed, sweepGeometry, wingMembrane, wingVeins } from './organic';
 import { layFilings, type Filing, type FilingsCard } from '../../lib/sim/field';
+import { placeAlong, STRETCH_ATTRIBUTE } from '../../lib/stretch';
 
 export interface ShapePiece {
   geometry: BufferGeometry;
@@ -489,11 +490,19 @@ export function partPieces(part: Pick<Part, 'primitive' | 'repeat'> & { extra?: 
   const reps = repeatMatrices(part);
   const bySlot = new Map<number, { geometry: BufferGeometry; matrices: Matrix4[] }[]>();
   const out: ShapePiece[] = [];
+  // A part with one coil: its other pieces ride with the nearer end when the coil is stretched (lib/stretch.ts).
+  const coils = partPrimitives(part).filter((q) => q.kind === 'coil');
+  const coil = coils.length === 1 && coils[0]!.kind === 'coil' ? coils[0] : null;
+  const coilAxis = coil ? new Vector3(0, 1, 0).applyMatrix4(eulerMatrix(coil.rotation)) : null;
   for (const p of partPrimitives(part)) {
     const place = new Matrix4()
       .makeTranslation(p.at[0] - main.at[0], p.at[1] - main.at[1], p.at[2] - main.at[2])
       .multiply(eulerMatrix(p.rotation));
+    const along = coil && coilAxis && p !== coil
+      ? placeAlong((p.at[0] - coil.at[0]) * coilAxis.x + (p.at[1] - coil.at[1]) * coilAxis.y + (p.at[2] - coil.at[2]) * coilAxis.z, coil.length)
+      : null;
     for (const piece of basePieces(p)) {
+      if (along !== null) piece.geometry.setAttribute(STRETCH_ATTRIBUTE, new BufferAttribute(new Float32Array(piece.geometry.getAttribute('position').count).fill(along), 1));
       const slot = keys.indexOf(materialSlotKey(piece.color ?? p.color, piece.color ? undefined : p.tint));
       const matrices = reps.flatMap((r) => piece.instances.map((m) => r.clone().multiply(place).multiply(m)));
       // Folding wings and vein lines stay their own pieces.
@@ -613,9 +622,10 @@ export function mergeBaked(list: { geometry: BufferGeometry; matrices: Matrix4[]
   const pos = new Float32Array(total * 3);
   const nor = new Float32Array(total * 3);
   const uv = new Float32Array(total * 2);
-  // Section faces of a part-turned lathe keep their marker (materials.ts hatches them).
+  // Section faces of a part-turned lathe keep their marker (materials.ts hatches them); a coil's vertices their place along it (lib/stretch.ts).
   const sectioned = flat.some((f) => f.g.getAttribute('atlasSection') !== undefined);
   const sec = sectioned ? new Float32Array(total) : null;
+  const along = flat.some((f) => f.g.getAttribute(STRETCH_ATTRIBUTE) !== undefined) ? new Float32Array(total) : null;
   const v = new Vector3();
   const nm = new Matrix3();
   let o = 0;
@@ -624,6 +634,7 @@ export function mergeBaked(list: { geometry: BufferGeometry; matrices: Matrix4[]
     const N = g.getAttribute('normal');
     const U = g.getAttribute('uv');
     const S = g.getAttribute('atlasSection');
+    const T = g.getAttribute(STRETCH_ATTRIBUTE);
     for (const m of matrices) {
       nm.getNormalMatrix(m);
       const flip = m.determinant() < 0;
@@ -636,6 +647,7 @@ export function mergeBaked(list: { geometry: BufferGeometry; matrices: Matrix4[]
         nor.set([v.x, v.y, v.z], (o + i) * 3);
         if (U) uv.set([U.getX(j), U.getY(j)], (o + i) * 2);
         if (sec && S) sec[o + i] = S.getX(j);
+        if (along && T) along[o + i] = T.getX(j);
       }
       o += P.count;
     }
@@ -647,6 +659,7 @@ export function mergeBaked(list: { geometry: BufferGeometry; matrices: Matrix4[]
   out.setAttribute('normal', new BufferAttribute(nor, 3));
   out.setAttribute('uv', new BufferAttribute(uv, 2));
   if (sec) out.setAttribute('atlasSection', new BufferAttribute(sec, 1));
+  if (along) out.setAttribute(STRETCH_ATTRIBUTE, new BufferAttribute(along, 1));
   out.computeBoundingSphere();
   out.computeBoundingBox();
   return out;

@@ -10,8 +10,8 @@
  * and terminal cover).
  *
  * Transform stack: position (rest centre + explode) → pose (matrix) → the
- * try-it offset / turn (eased) → animations (matrix) → the shape's own
- * transform (glb meshes).
+ * try-it offset / turn (eased) → the played timeline moves / turns →
+ * animations (matrix) → the shape's own transform (glb meshes).
  *
  * Try-it bindings (lib/sim/bind.ts) also give a part a glow (`uGlow` on its
  * own material, slot 0; eased: a dull red at a trace warming to the lamp
@@ -19,9 +19,13 @@
  * count of its `repeat` copies on show, a tint (an iron core turned magnet;
  * its own material, slot 0, like the glow),
  * a turn that swings and settles (`settle`: a compass needle) about the part
- * centre or a pivot, a filings card's needles laid out for the field state
- * on show, and per animation a speed (a rotate's rpm, integrated so a change
- * never jumps) or an off switch (eased out).
+ * centre or a pivot, an offset that bounces and settles (a hanger on its
+ * spring), a coil stretched along its axis (the rings slide apart, the wire
+ * keeps its thickness: lib/stretch.ts), the timeline channels it plays (moves
+ * and turns after the offset, a car's wheels each about its own centre;
+ * read from `runtime.play` every frame), a filings card's needles laid out
+ * for the field state on show, and per animation a speed (a rotate's rpm,
+ * integrated so a change never jumps) or an off switch (eased out).
  *
  * glb parts skinned to the model's skeleton draw as skinned meshes in
  * detached bind mode, so the explode / put-aside / pose transforms still
@@ -64,8 +68,23 @@ import type { FibreMeasure } from './GltfSource';
 import { skinnedRaycast } from './skinPick';
 import type { ShapePiece } from './geometry';
 import type { SimSettle } from '../../sim-schema';
-import { nearestTurn, stepSwing } from '../../lib/sim/settle';
-import { slotTint } from '../../lib/sim/bind';
+import { nearestTurn, SETTLE_EPS_LENGTH, stepSwing } from '../../lib/sim/settle';
+import { slotTint, type SimPlay, type SimStretch } from '../../lib/sim/bind';
+import { channelValue } from '../../lib/sim/timeline';
+import { STRETCH_ATTRIBUTE, stretchPositions } from '../../lib/stretch';
+import { partPrimitives } from '../../lib/parts';
+import { apply3, eulerDeg } from '../../lib/xform';
+import type { BufferAttribute } from 'three';
+
+/** A try-it offset (scene units, eased or bouncing: `offsetSettle`) and turn about a unit axis through the part centre or `pivot` (eased or swinging: `settle`). */
+export interface SimMove {
+  offset: Vec3;
+  offsetSettle?: SimSettle | undefined;
+  axis: Vec3;
+  deg: number;
+  settle?: SimSettle | undefined;
+  pivot?: Vec3 | undefined;
+}
 
 /** Geometry + rest transform of a part (from a primitive or a glb mesh). */
 export interface PartShape {
@@ -145,7 +164,11 @@ export interface PartNodeProps {
   /** Try-it: copies of the part's `repeat` on show (null: all). */
   count?: number | null;
   /** Try-it offset (scene units) and turn about a unit axis through the part centre or `pivot` (a scene point at rest), eased or swinging (`settle`). */
-  simMove?: { offset: Vec3; axis: Vec3; deg: number; settle?: SimSettle | undefined; pivot?: Vec3 | undefined } | null;
+  simMove?: SimMove | null;
+  /** Try-it timeline channels the part plays (moves and turns). */
+  play?: readonly SimPlay[] | null;
+  /** Try-it stretch of the part's coil. */
+  stretch?: SimStretch | null;
   /** Try-it tint: colour (sRGB hex) and level 0–1. */
   simTint?: { color: string; level: number } | null;
   /** Try-it: a filings card's needles for the field state on show (part frame; null: as built). */
@@ -201,6 +224,8 @@ const GLOW_RATE = 14;
 const MOVE_RATE = 7;
 /** Scratch state of a swinging turn (stepped in place each frame). */
 const swing = { x: 0, v: 0 };
+const tmpPlay = new Matrix4();
+const tmpC: Vec3 = [0, 0, 0];
 
 /** An animation that moves every copy of its part about the copy's own centre (schema `each`). */
 const isEach = (a: PartAnimation) => (a.kind === 'rotate' || a.kind === 'oscillate' || a.kind === 'pulse') && a.each === true;
@@ -316,7 +341,15 @@ export function PartNode(props: PartNodeProps) {
     /** Try-it glow level now; offset and turn now. */
     glow: props.glow?.level ?? 0,
     move: [0, 0, 0] as Vec3,
+    /** A bouncing offset's speed per axis (scene units per second). */
+    moveV: [0, 0, 0] as Vec3,
     turn: 0,
+    /** A coil's stretch now (scene units) and its speed (a bounce); the stretch last written into the geometry. */
+    stretch: 0,
+    stretchV: 0,
+    stretchShown: 0,
+    /** The played moves and turns last frame (a change asks the labels and shadows to look again). */
+    playKey: '',
     /** Turning speed of a swinging (`settle`) turn, degrees per second. */
     turnV: 0,
     /** Per animation: its integrated angle (a sim-driven rotate) and how far it is switched on. */
@@ -336,6 +369,19 @@ export function PartNode(props: PartNodeProps) {
   const glowHex = props.glow?.color ?? '#ffffff';
   const glowColor = useMemo(() => new Color(glowHex), [glowHex]);
   const eachPieces = useMemo(() => shape.pieces.filter((p) => p.pivots && p.matrices), [shape]);
+  // A stretched coil: the pieces that carry each vertex's place along it, their rest positions, and the coil's axis (part frame).
+  const stretchable = useMemo(() => {
+    if (!props.stretch) return null;
+    const coil = partPrimitives(part).find((q) => q.kind === 'coil');
+    if (!coil) return null;
+    const axis = apply3(eulerDeg(coil.rotation), [0, 1, 0]);
+    const pieces = shape.pieces
+      .filter((p) => !p.matrices && p.geometry.getAttribute(STRETCH_ATTRIBUTE))
+      .map((p) => ({ piece: p, base: Float32Array.from((p.geometry.getAttribute('position') as BufferAttribute).array as Float32Array), t: (p.geometry.getAttribute(STRETCH_ATTRIBUTE) as BufferAttribute).array as Float32Array }));
+    return pieces.length > 0 ? { axis, pieces } : null;
+    // Only whether the part stretches matters here, not the value.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [shape, part, props.stretch !== null && props.stretch !== undefined]);
   // Per-frame maths without allocation: explode vector and unit animation axes, once. Context parts stay put.
   const push = useMemo(() => (part.context ? ([0, 0, 0] as Vec3) : explodeOffset(part.explode, 1)), [part.explode, part.context]);
   const axes = useMemo(
@@ -598,11 +644,25 @@ export function PartNode(props: PartNodeProps) {
     if (pr) {
       // Try-it offset and turn, eased or swinging: applied after the pose, along the scene axes, about the posed centre or the pivot.
       const sm = props.simMove;
+      const bounce = sm?.offsetSettle;
       for (let a = 0; a < 3; a++) {
         const to = sm?.offset[a] ?? 0;
-        m.move[a] = snap ? to : damp(m.move[a]!, to, MOVE_RATE, dt);
-        if (Math.abs(m.move[a]! - to) < 1e-6) m.move[a] = to;
-        else moving = true;
+        if (snap) {
+          m.move[a] = to;
+          m.moveV[a] = 0;
+        } else if (bounce) {
+          // A hanger on its spring: the same damped bounce as the spring's stretch, so the two stay joined.
+          swing.x = m.move[a]!;
+          swing.v = m.moveV[a]!;
+          if (stepSwing(swing, to, dt, bounce, SETTLE_EPS_LENGTH)) moving = true;
+          m.move[a] = swing.x;
+          m.moveV[a] = swing.v;
+        } else {
+          m.move[a] = damp(m.move[a]!, to, MOVE_RATE, dt);
+          m.moveV[a] = 0;
+          if (Math.abs(m.move[a]! - to) < 1e-6) m.move[a] = to;
+          else moving = true;
+        }
       }
       const settle = sm?.settle;
       // A swinging turn goes the short way round to its target; a plain one eases straight there.
@@ -632,6 +692,37 @@ export function PartNode(props: PartNodeProps) {
         aboutPivot(pr.matrix, tmpTurn.makeRotationAxis(tmpV.set(sm.axis[0], sm.axis[1], sm.axis[2]), m.turn * DEG2RAD), c);
       }
       pr.matrix.multiply(tmpPose);
+      // Played timeline channels: moves along their axes, then turns about the pivot or where the part's centre now is.
+      const play = props.play;
+      if (play && play.length > 0) {
+        let key = '';
+        tmpC[0] = pr.matrix.elements[12]!;
+        tmpC[1] = pr.matrix.elements[13]!;
+        tmpC[2] = pr.matrix.elements[14]!;
+        tmpPlay.identity();
+        let dx = 0;
+        let dy = 0;
+        let dz = 0;
+        for (const p of play) {
+          if (p.each) continue;
+          const pb = runtime.play.get(p.output);
+          const v = channelValue(pb?.timeline, p.channel, pb?.t ?? 0) * p.per;
+          key += `${v},`;
+          if (p.axis) {
+            dx += p.axis[0] * v;
+            dy += p.axis[1] * v;
+            dz += p.axis[2] * v;
+          } else if (p.turn && v !== 0) {
+            const c: Vec3 = p.pivot ? [p.pivot[0] - shape.position[0], p.pivot[1] - shape.position[1], p.pivot[2] - shape.position[2]] : tmpC;
+            aboutPivot(tmpPlay, tmpTurn.makeRotationAxis(tmpV.set(p.turn[0], p.turn[1], p.turn[2]), v * DEG2RAD), c);
+          }
+        }
+        pr.matrix.premultiply(tmpPlay).premultiply(tmpT.makeTranslation(dx, dy, dz));
+        if (key !== m.playKey) {
+          m.playKey = key;
+          moving = true;
+        }
+      }
       pr.matrixWorldNeedsUpdate = true;
       // The label anchor follows the pose.
       const move = (rest: readonly number[], out: Vec3) => {
@@ -702,6 +793,14 @@ export function PartNode(props: PartNodeProps) {
     if (eachPieces.length > 0) {
       tmpEach.identity();
       let active = false;
+      // Played turns of every copy about its own centre (a car's wheels).
+      for (const p of props.play ?? []) {
+        if (!p.each || !p.turn) continue;
+        const pb = runtime.play.get(p.output);
+        const v = channelValue(pb?.timeline, p.channel, pb?.t ?? 0) * p.per;
+        if (v !== 0) tmpEach.multiply(tmpM.makeRotationFromQuaternion(tmpQ.setFromAxisAngle(tmpV.set(p.turn[0], p.turn[1], p.turn[2]), v * DEG2RAD)));
+        active = true;
+      }
       props.animations.forEach((a, i) => {
         if (!isEach(a)) return;
         const always = !a.whenRun;
@@ -733,6 +832,37 @@ export function PartNode(props: PartNodeProps) {
         if (props.castShadow) runtime.shadowDirty = true;
       }
       m.eachMoved = active;
+    }
+    // A stretched coil: the rings slide apart along its axis (lib/stretch.ts); a bounce settles like the hanger's offset.
+    const sc = props.stretch;
+    if (stretchable) {
+      const pb = sc?.channel !== undefined && sc.output !== undefined ? runtime.play.get(sc.output) : undefined;
+      const to = !sc ? 0 : sc.channel !== undefined ? channelValue(pb?.timeline, sc.channel, pb?.t ?? 0) * sc.per : sc.target;
+      if (snap || sc?.channel !== undefined) {
+        m.stretch = to;
+        m.stretchV = 0;
+      } else if (sc?.settle) {
+        swing.x = m.stretch;
+        swing.v = m.stretchV;
+        if (stepSwing(swing, to, dt, sc.settle, SETTLE_EPS_LENGTH)) moving = true;
+        m.stretch = swing.x;
+        m.stretchV = swing.v;
+      } else {
+        m.stretch = damp(m.stretch, to, MOVE_RATE, dt);
+        if (Math.abs(m.stretch - to) < 1e-6) m.stretch = to;
+        else moving = true;
+      }
+      if (m.stretch !== m.stretchShown || snap) {
+        m.stretchShown = m.stretch;
+        for (const { piece, base, t } of stretchable.pieces) {
+          const pos = piece.geometry.getAttribute('position') as BufferAttribute;
+          stretchPositions(base, t, stretchable.axis, sc?.anchor ?? 'top', m.stretch, pos.array as Float32Array);
+          pos.needsUpdate = true;
+          const o = pieces.current.get(piece);
+          if (o) o.frustumCulled = false;
+        }
+        if (props.castShadow) runtime.shadowDirty = true;
+      }
     }
     for (const f of fans) if (f.fan!.apply(fan) && props.castShadow) runtime.shadowDirty = true;
     if (moving) {

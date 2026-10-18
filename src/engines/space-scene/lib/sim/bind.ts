@@ -2,13 +2,15 @@
  * Try-it bindings → what the stage shows (docs/22 §4.3 S4; pure, unit-tested).
  * The stage applies these on top of the chapter state: visibility, a pose per
  * part (on top of the chapter / beat pose), glow, tint, a count of `repeat`
- * copies, an offset (along an axis or to a ring position) or turn (with a
- * damped swing, about a pivot), the field state a filings part lays out, an
- * animation's speed or on / off, and per flow its visibility, per-path
- * intensity, colour and field state.
+ * copies, an offset (along an axis or to a ring position, eased or with a
+ * damped bounce) or turn (with a damped swing, about a pivot), a coil's
+ * stretch, the timeline channels a part plays (moves and turns), the field
+ * state a filings part lays out, an animation's speed or on / off, and per
+ * flow its visibility, per-path intensity, colour and field state.
  */
-import type { SimBind, SimCondition, SimData, SimSettle, SimValue, SimValues } from '../../sim-schema';
+import type { SimBind, SimCondition, SimData, SimSettle, SimValue, SimValues, STRETCH_ANCHORS } from '../../sim-schema';
 import type { SimOutputs, SimOutputValue } from './index';
+import { isTimeline } from './timeline';
 import { ringPoint } from './magnet';
 import { normalize3, type Vec3 } from '../math';
 
@@ -39,6 +41,27 @@ export interface SimTurn {
   pivot?: Vec3;
 }
 
+/** A timeline channel a part plays: a move along `axis` or a turn about `turn` (unit vectors) by the channel's value × `per`. */
+export interface SimPlay {
+  output: string;
+  channel: string;
+  axis?: Vec3;
+  turn?: Vec3;
+  per: number;
+  pivot?: Vec3;
+  each?: boolean;
+}
+
+/** A coil's stretch: `target` scene units (a number source), or a timeline `channel` × `per` (played). */
+export interface SimStretch {
+  target: number;
+  output?: string;
+  channel?: string;
+  per: number;
+  anchor: (typeof STRETCH_ANCHORS)[number];
+  settle?: SimSettle;
+}
+
 export interface SimEffects {
   /** Parts a `visible` binding hides. */
   hidden: Set<string>;
@@ -51,6 +74,12 @@ export interface SimEffects {
   count: Map<string, number>;
   /** Scene-unit offset per part. */
   offset: Map<string, Vec3>;
+  /** A damped bounce to the offset instead of the plain ease (`offset.settle`). */
+  offsetSettle: Map<string, SimSettle>;
+  /** A coil's stretch per part. */
+  stretch: Map<string, SimStretch>;
+  /** Timeline channels each part plays (they add up). */
+  play: Map<string, SimPlay[]>;
   /** Turn about a unit axis through the part centre or a pivot, degrees. */
   rotate: Map<string, SimTurn>;
   /** The field state each filings part lays out. */
@@ -68,6 +97,7 @@ export const MAX_GLOW = 2;
 /** Truthy: on, a non-zero number, a state other than the output's first, a non-empty vector. */
 function truthy(v: SimValue | SimOutputValue | undefined, firstState: string | undefined): boolean {
   if (typeof v === 'boolean') return v;
+  if (isTimeline(v)) return v.duration > 0;
   if (typeof v === 'number') return Math.abs(v) > 1e-9;
   if (typeof v === 'string') return v !== '' && v !== firstState;
   return v !== undefined && Object.values(v).some((x) => Math.abs(x) > 1e-9);
@@ -109,6 +139,9 @@ export function simEffects(sim: SimData, values: SimValues, outputs: SimOutputs)
     tint: new Map(),
     count: new Map(),
     offset: new Map(),
+    offsetSettle: new Map(),
+    stretch: new Map(),
+    play: new Map(),
     rotate: new Map(),
     states: new Map(),
     animations: new Map(),
@@ -136,11 +169,33 @@ export function simEffects(sim: SimData, values: SimValues, outputs: SimOutputs)
           const x = Math.min(1, Math.max(0, num(v) / b.tint.full));
           out.tint.set(id, { color: b.tint.color, level: b.tint.curve === 'sqrt' ? Math.sqrt(x) : x });
         }
-        if (b.count) out.count.set(id, Math.max(0, Math.round(num(v) * (b.count === true ? 1 : b.count.per))));
+        if (b.count) out.count.set(id, Math.max(0, Math.round(b.count === true ? num(v) : (num(v) - b.count.minus) / b.count.per)));
         if (b.offset) {
           const d = (num(v) - b.offset.origin) * b.offset.per;
           const a = normalize3(b.offset.axis);
           add(out.offset, id, [a[0] * d, a[1] * d, a[2] * d]);
+          if (b.offset.settle) out.offsetSettle.set(id, b.offset.settle);
+        }
+        if (b.stretch) {
+          const st = b.stretch;
+          const e: SimStretch = { target: st.channel !== undefined ? 0 : num(v) * st.per, per: st.per, anchor: st.anchor };
+          if (st.channel !== undefined && b.output !== undefined) {
+            e.output = b.output;
+            e.channel = st.channel;
+          }
+          if (st.settle) e.settle = st.settle;
+          out.stretch.set(id, e);
+        }
+        const pw = b.play?.when;
+        const playing = !pw || holds(pw.is, pw.control !== undefined ? values[pw.control] : outputs[pw.output!], pw.output !== undefined ? firstState.get(pw.output) : undefined);
+        if (b.play && b.output !== undefined && playing) {
+          const p = b.play;
+          const e: SimPlay = { output: b.output, channel: p.channel, per: p.per };
+          if (p.axis) e.axis = normalize3(p.axis);
+          if (p.turn) e.turn = normalize3(p.turn);
+          if (p.pivot) e.pivot = p.pivot;
+          if (p.each) e.each = true;
+          out.play.set(id, [...(out.play.get(id) ?? []), e]);
         }
         if (b.at !== undefined) {
           const ring = sim.magnet?.rings?.[b.at];
@@ -163,7 +218,7 @@ export function simEffects(sim: SimData, values: SimValues, outputs: SimOutputs)
       const f = out.flows.get(b.flow) ?? { visible: true, paths: null, color: null, state: null };
       if (b.state && typeof v === 'string') f.state = v;
       if (b.visible !== undefined && !holds(b.visible, v, first)) f.visible = false;
-      if (b.intensity && v !== undefined && typeof v === 'object') {
+      if (b.intensity && v !== undefined && typeof v === 'object' && !isTimeline(v)) {
         const full = b.intensity.full;
         f.paths = Object.fromEntries(
           Object.entries(v).map(([id, x]) => [id, Math.abs(x) < full * FLOW_FLOOR ? 0 : Math.max(-2, Math.min(2, x / full))]),

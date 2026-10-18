@@ -4,7 +4,8 @@
  * mode switches (X-RAY, EXPLODED, CUTAWAY, FLOW, REFERENCE, PRESENTATION, LABELS), the
  * glossary list (topics with data/glossary.json) and Hide HUD as tools, the
  * explode slider while EXPLODED (nothing else sits at the bottom but the
- * chapter axis), and a colour key of the groups and flows.
+ * chapter axis), and a colour key of the groups and flows, and of the kinds
+ * of force the try-it arrows draw in the scene on show (docs/30 F3).
  */
 import { useScene, useSceneContext, useSceneStore, useT } from '../../core/context';
 import { tx, type BilingualText } from '../../../i18n';
@@ -14,6 +15,9 @@ import type { LegendItem } from '../../widgets/Legend';
 import type { SpaceSceneExt } from '../index';
 import type { PartsFile } from '../schema';
 import { ExplorerBar } from './ExplorerBar';
+import { useSimView } from '../hud/sim';
+import { simEffects } from '../lib/sim/bind';
+import { FORCE_COLORS, FORCE_NAMES, forcesOnShow } from '../lib/sim/arrows';
 
 const MODES: ControlRow[] = [
   { kind: 'mode', id: 'xray' },
@@ -32,6 +36,8 @@ export function ExplorerOverlay({ file, glossary = false }: { file: PartsFile; g
   const { locale } = useSceneContext();
   const store = useSceneStore<SpaceSceneExt>();
   const solo = useScene<SpaceSceneExt, string | null>((s) => s.solo);
+  const scene = useScene<SpaceSceneExt, { layers: string[]; hidden: string[] }>((s) => ({ layers: s.layers, hidden: s.hidden }));
+  const sim = useSimView(file);
   // Solo only where it means something: groups that have parts.
   const withParts = new Set(file.parts.map((p) => p.group));
   const layers: ControlRow[] = file.groups.map((g) => ({
@@ -65,6 +71,14 @@ export function ExplorerOverlay({ file, glossary = false }: { file: PartsFile; g
   for (const f of file.flows) {
     const group = file.groups.find((g) => g.id === f.group);
     add({ id: `flow-${f.id}`, label: group?.name ?? f.id, color: f.color, kind: 'arrow' });
+  }
+  // The forces the arrows draw now (their part on show, `when` true, their layer on).
+  if (sim && sim.sim.overlays.some((o) => o.kind === 'force-vectors')) {
+    const off = simEffects(sim.sim, sim.values, sim.outputs).hidden;
+    const groupOf = new Map(file.parts.map((p) => [p.id, p.group]));
+    const shown = (id: string) => !off.has(id) && !scene.hidden.includes(id) && (groupOf.get(id) === undefined || scene.layers.includes(groupOf.get(id)!));
+    for (const k of forcesOnShow(sim.sim, sim.values, sim.outputs, shown, (g) => scene.layers.includes(g)))
+      add({ id: `force-${k}`, label: FORCE_NAMES[k], color: FORCE_COLORS[k], kind: 'arrow' });
   }
   return (
     <div className="atlas-overlay-card space-overlay">

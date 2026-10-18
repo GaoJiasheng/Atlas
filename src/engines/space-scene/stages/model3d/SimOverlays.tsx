@@ -1,6 +1,12 @@
 /**
  * Try-it overlays drawn from the model's outputs (sim `overlays`, docs/22
- * §4.4 M5). `force-arrows`: one arrow on each of two parts, lifted above
+ * §4.4 M5, docs/30 F3). `force-vectors`: an arrow per force on a part, its
+ * colour the kind of force (lib/sim/arrows.ts), its length `per` × newtons
+ * (≤ `max`), its value a number, a number output (eased) or a timeline
+ * channel (read from the playing run every frame); every arrow of the
+ * overlay is one mesh with vertex colours and alpha (one draw call); an arrow
+ * fades below 0.05 N, while its part is off show, its `when` fails, its
+ * group's layer is off or the model is exploded. `force-arrows`: one arrow on each of two parts, lifted above
  * their centres and laid along the line between them, toward each other for
  * a pull and apart for a push; length ∝ √|value| (the PLATE reading gives the
  * true relative value), eased; flat unlit ink in the pull / push colour. Both
@@ -16,11 +22,12 @@ import type { SimData, SimOverlay, SimValues } from '../../sim-schema';
 import { numberOf, type SimOutputs } from '../../lib/sim';
 import { holds } from '../../lib/sim/bind';
 import { resolveSimValues } from '../../lib/sim/controls';
+import { ARROW_FLOOR as VECTOR_FLOOR, arrowLength as vectorLength, arrowValue, arrowWhen, FORCE_COLORS } from '../../lib/sim/arrows';
 import { resolveDataColor } from '../../lib/color';
-import { damp, type Vec3 } from '../../lib/math';
+import { damp, normalize3, type Vec3 } from '../../lib/math';
 import type { PartDisplay } from '../../lib/visibility';
 import type { PartHandle } from './PartNode';
-import { keepAnimating, MAX_DT } from './runtime';
+import { keepAnimating, MAX_DT, useRuntime } from './runtime';
 import type { StageLook } from './look';
 
 /** Default arrow length at 100 % and lift above the parts (scene units). */
@@ -42,9 +49,9 @@ export function arrowLength(value: number, length: number): number {
   return Math.min(1.6, Math.sqrt(Math.abs(value) / 100)) * length;
 }
 
-function arrowIndex(): number[] {
+function arrowIndex(count = 2): number[] {
   const idx: number[] = [];
-  for (let a = 0; a < 2; a++) {
+  for (let a = 0; a < count; a++) {
     const o = a * ARROW_VERTS;
     for (let k = 0; k < SIDES; k++) {
       const k1 = (k + 1) % SIDES;
@@ -58,7 +65,7 @@ function arrowIndex(): number[] {
   return idx;
 }
 
-/** Write one arrow from `s` along unit `d`, `len` long, into `pos` at vertex `o`. */
+/** Write one arrow from `s` along unit `d`, `len` long, into `pos` at vertex `o` (its thickness and head scale with `full`). */
 function writeArrow(pos: Float32Array, o: number, s: Vec3, d: Vec3, len: number, full: number): void {
   // Two unit vectors across the arrow.
   const ref: Vec3 = Math.abs(d[1]) < 0.9 ? [0, 1, 0] : [1, 0, 0];
@@ -164,6 +171,127 @@ function ForceArrows({
   return <mesh ref={ref} geometry={geometry} material={material} renderOrder={3} frustumCulled={false} visible={false} />;
 }
 
+
+type Vectors = Extract<SimOverlay, { kind: 'force-vectors' }>;
+/** A force arrow's shaft and head scale with the overlay's `per` (the length of 1 N): this many newtons' worth. */
+const VECTOR_FULL = 1.6;
+const tmpStart: Vec3 = [0, 0, 0];
+const tmpDir: Vec3 = [0, 0, 0];
+
+function ForceVectors({
+  overlay,
+  sim,
+  values,
+  outputs,
+  handles,
+  displays,
+  layers,
+  exploded,
+  look,
+  snapKey,
+}: {
+  overlay: Vectors;
+  sim: SimData;
+  values: SimValues;
+  outputs: SimOutputs;
+  handles: Map<string, PartHandle>;
+  displays: ReadonlyMap<string, PartDisplay>;
+  layers: readonly string[];
+  exploded: boolean;
+  look: StageLook;
+  snapKey: number;
+}) {
+  const runtime = useRuntime();
+  const ref = useRef<Mesh>(null);
+  const n = overlay.arrows.length;
+  const geometry = useMemo(() => {
+    const g = new BufferGeometry();
+    g.setAttribute('position', new BufferAttribute(new Float32Array(n * ARROW_VERTS * 3), 3));
+    g.setAttribute('color', new BufferAttribute(new Float32Array(n * ARROW_VERTS * 4), 4));
+    g.setIndex(arrowIndex(n));
+    return g;
+  }, [n]);
+  const material = useMemo(() => new MeshBasicMaterial({ vertexColors: true, transparent: true, depthWrite: false, toneMapped: false, side: DoubleSide }), []);
+  useEffect(() => () => geometry.dispose(), [geometry]);
+  useEffect(() => () => material.dispose(), [material]);
+  const colors = useMemo(() => overlay.arrows.map((a) => new Color(resolveDataColor(FORCE_COLORS[a.force], look.tokens, look.theme, '#4f5b66'))), [overlay.arrows, look]);
+  const dirs = useMemo(() => overlay.arrows.map((a) => normalize3(a.dir)), [overlay.arrows]);
+  // Whether each arrow may show (its part, `when`, the group's layer, not exploded); a number value's target.
+  const layerOn = overlay.group === undefined || layers.includes(overlay.group);
+  const on = overlay.arrows.map((a) => !exploded && layerOn && displays.get(a.part)?.visible === true && arrowWhen(a, sim, values, outputs));
+  const m = useRef({ v: overlay.arrows.map(() => 0), fade: overlay.arrows.map(() => 0), snap: true, key: '' });
+  useEffect(() => {
+    m.current.snap = true;
+  }, [snapKey]);
+  const full = overlay.per * VECTOR_FULL;
+
+  useFrame((state, delta) => {
+    const dt = Math.min(delta, MAX_DT);
+    const s = m.current;
+    const snap = s.snap;
+    s.snap = false;
+    const mesh = ref.current;
+    if (!mesh) return;
+    const pos = geometry.getAttribute('position') as BufferAttribute;
+    const col = geometry.getAttribute('color') as BufferAttribute;
+    const parr = pos.array as Float32Array;
+    const carr = col.array as Float32Array;
+    let easing = false;
+    let any = false;
+    let key = '';
+    overlay.arrows.forEach((a, i) => {
+      const live = typeof a.value === 'object' && a.value.channel !== undefined;
+      const pb = live && typeof a.value === 'object' ? runtime.play.get(a.value.output) : undefined;
+      const target = arrowValue(a, outputs, pb?.t);
+      // A timeline channel is played as it is; a number eases like the readings.
+      s.v[i] = snap || live ? target : damp(s.v[i]!, target, 7, dt);
+      if (Math.abs(s.v[i]! - target) < 1e-4) s.v[i] = target;
+      else easing = true;
+      const h = handles.get(a.part);
+      const fadeTo = on[i] && h !== undefined && h.visible && Math.abs(s.v[i]!) >= VECTOR_FLOOR ? 1 : 0;
+      s.fade[i] = snap ? fadeTo : damp(s.fade[i]!, fadeTo, 8, dt);
+      if (Math.abs(s.fade[i]! - fadeTo) < 0.003) s.fade[i] = fadeTo;
+      else easing = true;
+      const o = i * ARROW_VERTS;
+      const c = colors[i]!;
+      for (let k = o * 4, end = (o + ARROW_VERTS) * 4; k < end; k += 4) {
+        carr[k] = c.r;
+        carr[k + 1] = c.g;
+        carr[k + 2] = c.b;
+        carr[k + 3] = s.fade[i]!;
+      }
+      if (!h || s.fade[i]! <= 0) {
+        // Collapse a hidden arrow to a point (nothing drawn).
+        parr.fill(0, o * 3, (o + ARROW_VERTS) * 3);
+        return;
+      }
+      any = true;
+      const lift = a.at === 'top' ? h.half[1] : a.at === 'bottom' ? -h.half[1] : 0;
+      tmpStart[0] = h.object.position.x + h.point[0] + (a.offset?.[0] ?? 0);
+      tmpStart[1] = h.object.position.y + h.point[1] + lift + (a.offset?.[1] ?? 0);
+      tmpStart[2] = h.object.position.z + h.point[2] + (a.offset?.[2] ?? 0);
+      const d = dirs[i]!;
+      const sign = s.v[i]! < 0 ? -1 : 1;
+      tmpDir[0] = d[0] * sign;
+      tmpDir[1] = d[1] * sign;
+      tmpDir[2] = d[2] * sign;
+      const len = Math.max(vectorLength(s.v[i]!, overlay.per, overlay.max), HEAD_L * full * 0.5);
+      key += `${tmpStart[0]},${tmpStart[1]},${tmpStart[2]}|${len}|${sign}|${s.fade[i]};`;
+      writeArrow(parr, o, tmpStart, tmpDir, len, full);
+    });
+    mesh.visible = any;
+    if (key !== s.key) {
+      s.key = key;
+      pos.needsUpdate = true;
+      col.needsUpdate = true;
+      geometry.computeBoundingSphere();
+    }
+    if (easing) keepAnimating(state.invalidate);
+  });
+
+  return <mesh ref={ref} geometry={geometry} material={material} renderOrder={3} frustumCulled={false} visible={false} />;
+}
+
 export function SimOverlays({
   overlays,
   sim,
@@ -171,6 +299,7 @@ export function SimOverlays({
   outputs,
   handles,
   displays,
+  layers,
   exploded,
   look,
   snapKey,
@@ -182,6 +311,8 @@ export function SimOverlays({
   outputs: SimOutputs;
   handles: Map<string, PartHandle>;
   displays: ReadonlyMap<string, PartDisplay>;
+  /** Layers on (a force-vectors overlay's `group`). */
+  layers: readonly string[];
   exploded: boolean;
   look: StageLook;
   snapKey: number;
@@ -190,6 +321,22 @@ export function SimOverlays({
   return (
     <>
       {overlays.map((o, i) => {
+        if (o.kind === 'force-vectors')
+          return (
+            <ForceVectors
+              key={i}
+              overlay={o}
+              sim={sim}
+              values={resolved}
+              outputs={outputs}
+              handles={handles}
+              displays={displays}
+              layers={layers}
+              exploded={exploded}
+              look={look}
+              snapKey={snapKey}
+            />
+          );
         const w = o.when;
         const firstState = w?.output ? Object.keys(sim.outputs.find((x) => x.id === w.output)?.states ?? {})[0] : undefined;
         const when = !w || holds(w.is, w.control !== undefined ? resolved[w.control] : outputs[w.output!], firstState);

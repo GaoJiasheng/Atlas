@@ -32,9 +32,10 @@ import { getPlateExpanded, setPlateExpanded } from '../../../lib/prefs';
 import { elevation, numberedParts } from '../lib/schematic';
 import { realLength, scaleBar } from '../lib/units';
 import { FOLLOW_LAG, formatReading, lagValue, readingDecimals, readingTarget } from '../lib/telemetry';
-import { numberOf, outputDecimals } from '../lib/sim';
+import { numberOf, outputDecimals, SEPARATE_EXPERIMENTS } from '../lib/sim';
 import type { SimControl, SimValue } from '../sim-schema';
 import { useSimView } from './sim';
+import { cardStates } from '../lib/sim/replay';
 import type { SpaceSceneExt } from '../index';
 import type { PartsFile, TelemetryRow } from '../schema';
 import type { SpaceUiStore } from '../ui';
@@ -118,29 +119,35 @@ function Elevation({ file, ui }: { file: PartsFile; ui: SpaceUiStore }) {
   );
 }
 
-/** Lagged readings: each eases to its target (`run` / `idle`, or the followed try-it output) with its time constant. */
-function useReadings(rows: readonly TelemetryRow[], targets: readonly number[], snapId: number): number[] {
+/** A reading cell: one value of a row (a `follow` row of two outputs has two), its time constant and decimals. */
+interface Cell {
+  lag: number;
+  decimals: number;
+}
+
+/** Lagged readings: each cell eases to its target (`run` / `idle`, or the followed try-it output) with its time constant. */
+function useReadings(cells: readonly Cell[], targets: readonly number[], snapId: number): number[] {
   const lag = useRef<{ from: number[]; to: number[]; t0: number } | null>(null);
   const [, setTick] = useState(0);
   const now = () => performance.now();
-  const lagOf = (r: TelemetryRow) => r.lag ?? FOLLOW_LAG;
   const valueAt = (i: number, at: number) => {
     const l = lag.current;
-    if (!l) return targets[i]!;
-    return lagValue(l.from[i]!, l.to[i]!, (at - l.t0) / 1000, lagOf(rows[i]!));
+    if (!l || l.from[i] === undefined) return targets[i]!;
+    return lagValue(l.from[i]!, l.to[i]!, (at - l.t0) / 1000, cells[i]!.lag);
   };
   // A target changed (RUN, a try-it control): start easing from where the readings are now.
   const key = targets.join(',');
-  const seen = useRef<{ key: string; rows: readonly TelemetryRow[]; snap: number } | null>(null);
-  if (!seen.current || seen.current.rows !== rows || seen.current.snap !== snapId) {
+  const shape = cells.map((c) => `${c.lag}/${c.decimals}`).join(',');
+  const seen = useRef<{ key: string; shape: string; snap: number } | null>(null);
+  if (!seen.current || seen.current.shape !== shape || seen.current.snap !== snapId) {
     lag.current = { from: [...targets], to: [...targets], t0: now() };
   } else if (seen.current.key !== key) {
     const at = now();
-    lag.current = { from: rows.map((_, i) => valueAt(i, at)), to: [...targets], t0: at };
+    lag.current = { from: cells.map((_, i) => valueAt(i, at)), to: [...targets], t0: at };
   }
-  seen.current = { key, rows, snap: snapId };
-  const values = rows.map((_, i) => valueAt(i, now()));
-  const settled = rows.every((r, i) => Math.abs(values[i]! - targets[i]!) < 0.5 * 10 ** -readingDecimals(r));
+  seen.current = { key, shape, snap: snapId };
+  const values = cells.map((_, i) => valueAt(i, now()));
+  const settled = cells.every((c, i) => Math.abs(values[i]! - targets[i]!) < 0.5 * 10 ** -c.decimals);
   useEffect(() => {
     if (settled) return;
     const id = setInterval(() => setTick((n) => n + 1), REFRESH_MS);
@@ -175,38 +182,72 @@ function Telemetry({ rows, run, file }: { rows: readonly TelemetryRow[]; run: bo
   const snap = useRef(0);
   if (snapId >= 0) snap.current = snapId;
   const outputs = new Map((sim?.outputs ?? []).map((o) => [o.id, o]));
-  // A followed output that does not apply here (NaN: the clips the card does not observe) reads `—`.
-  const followed = rows.map((r) => (r.follow !== undefined ? numberOf(view?.outputs[r.follow]) : undefined));
-  const na = followed.map((v) => v !== undefined && !Number.isFinite(v));
-  const targets = rows.map((r, i) => readingTarget(r, run, na[i] ? 0 : followed[i]));
-  const values = useReadings(rows, targets, snap.current);
   const observed = new Set(view?.card?.observe ?? []);
-  const decimals = (r: TelemetryRow) => (r.follow !== undefined ? (r.decimals ?? outputDecimals(outputs.get(r.follow) ?? {})) : readingDecimals(r));
-  // `SIM CLOSED · 2 BATTERIES`: the model's state, then the try-it card's controls.
-  const state = sim?.outputs.find((o) => o.kind === 'state' && o.states);
-  const stateValue = state && view ? String(view.outputs[state.id] ?? '') : '';
+  // Each row's cells: its `run` / `idle` value, or the outputs it follows (those the card observes, with `scope: observe`).
+  const rowCells = rows.map((r) => {
+    if (r.follow === undefined) return [{ id: null as string | null, lag: r.lag ?? FOLLOW_LAG, decimals: readingDecimals(r) }];
+    const ids = Array.isArray(r.follow) ? r.follow : [r.follow];
+    const shown = r.scope === 'observe' ? ids.filter((id) => observed.has(id)) : ids;
+    return shown.map((id) => ({ id, lag: r.lag ?? FOLLOW_LAG, decimals: r.decimals ?? outputDecimals(outputs.get(id) ?? {}) }));
+  });
+  const cells = rowCells.flat();
+  // A followed output that does not apply here (NaN: the clips the card does not observe) reads `—`.
+  const followed = cells.map((c) => (c.id !== null ? numberOf(view?.outputs[c.id]) : undefined));
+  const na = followed.map((v) => v !== undefined && !Number.isFinite(v));
+  let k = 0;
+  const targets = rowCells.flatMap((list, i) => list.map(() => {
+    const j = k++;
+    return readingTarget(rows[i]!, run, na[j] ? 0 : followed[j]);
+  }));
+  const values = useReadings(cells, targets, snap.current);
+  // `SIM CLOSED · 2 BATTERIES`: the state the card observes (else predicts, else the first its controls or the chapter's
+  // settings move, else the model's first unless its experiments are separate), then the try-it card's controls.
   const card = view?.card;
+  const states = (sim?.outputs ?? []).filter((o) => o.kind === 'state' && o.states);
+  const moved = useMemo(() => (sim && card && view ? cardStates(sim, view.values, card, view.chapterSet) : null), [sim, card, view]);
+  const separate = sim !== undefined && SEPARATE_EXPERIMENTS[sim.kind];
+  const state = !card
+    ? separate
+      ? undefined
+      : states[0]
+    : (states.find((o) => observed.has(o.id)) ??
+      states.find((o) => o.id === card.predict?.observe) ??
+      states.find((o) => moved?.includes(o.id)) ??
+      (separate ? undefined : states[0]));
+  const stateValue = state && view ? String(view.outputs[state.id] ?? '') : '';
   const tried = card && view ? [card.vary, ...(card.also ?? [])].map((id) => sim!.controls.find((c) => c.id === id)).filter((c): c is SimControl => c !== undefined) : [];
+  let at = 0;
   return (
     <>
       <p className="space-plate__sim">
         <span className="atlas-chip">{t('source.simulated').toUpperCase()}</span>
-        {rows.map((r, i) => (
-          <span
-            key={i}
-            className="space-plate__reading"
-            data-on={(r.follow !== undefined ? !na[i] && followed[i] !== 0 : run) || undefined}
-            data-observe={r.follow !== undefined && (observed.has(r.follow) || (sim?.kind === 'magnet' && (outputs.get(r.follow)?.from ?? r.follow) === 'clips' && !na[i])) ? '' : undefined}
-            title={`${r.key.en} / ${r.key.zh}`}
-          >
-            {r.key.en.toUpperCase()} <b>{na[i] ? '—' : formatReading(values[i]!, decimals(r))}</b>
-            {r.unit && !na[i] && <small> {r.unit}</small>}
-          </span>
-        ))}
+        {rows.map((r, i) => {
+          const list = rowCells[i]!;
+          const start = at;
+          at += list.length;
+          const idx = list.map((_, j) => start + j);
+          const shown = idx.filter((j) => !na[j]);
+          const blank = shown.length === 0;
+          const follows = r.follow !== undefined;
+          const ids = follows ? list.map((c) => c.id!) : [];
+          const isClips = ids.some((id) => sim?.kind === 'magnet' && (outputs.get(id)?.from ?? id) === 'clips');
+          return (
+            <span
+              key={i}
+              className="space-plate__reading"
+              data-on={(follows ? shown.some((j) => followed[j] !== 0) : run) || undefined}
+              data-observe={follows && (ids.some((id) => observed.has(id)) || (isClips && !blank)) ? '' : undefined}
+              title={`${r.key.en} / ${r.key.zh}`}
+            >
+              {r.key.en.toUpperCase()} <b>{blank ? '—' : shown.map((j) => formatReading(values[j]!, cells[j]!.decimals)).join(' · ')}</b>
+              {r.unit && !blank && <small> {r.unit}</small>}
+            </span>
+          );
+        })}
       </p>
-      {state && view && (
+      {view && (state || tried.length > 0) && (
         <p className="space-plate__simstate" data-state={stateValue}>
-          SIM {tx(state.states?.[stateValue] ?? { en: stateValue, zh: stateValue }, 'en').toUpperCase()}
+          SIM{state ? ` ${tx(state.states?.[stateValue] ?? { en: stateValue, zh: stateValue }, 'en').toUpperCase()}` : ''}
           {tried.map((c) => ` · ${controlStatus(c, view.values[c.id])}`).join('')}
         </p>
       )}

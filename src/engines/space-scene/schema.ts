@@ -158,7 +158,8 @@ const PRIMITIVE_ARITY: Record<(typeof PRIMITIVE_KINDS)[number], number> = {
  * per theme (colour, metalness, roughness, procedural brushed / orange-peel
  * maps). `metal` and `matte` are older names kept as aliases of `steel` and
  * `plastic`. `enamel` is warm-white baked enamel (appliance casings), `brass`
- * the yellow alloy of valves and flare nuts. Organism families: `chitin`
+ * the yellow alloy of valves and flare nuts, `fabric` short-pile carpet and
+ * `abrasive` sandpaper grit (or sand, tinted light). Organism families: `chitin`
  * (semi-gloss cuticle, tint it the species' colour), `membrane` (translucent,
  * double-sided: wings, tympana, air sacs), `tissue` (matte soft tissue with a
  * soft-lit look), `muscle` (fibre normal map), `trachea` (white, ringed),
@@ -176,6 +177,8 @@ export const MATERIAL_PRESETS = [
   'enamel',
   'brass',
   'wood',
+  'fabric',
+  'abrasive',
   'chitin',
   'membrane',
   'tissue',
@@ -995,9 +998,16 @@ export const telemetrySchema = z
     /**
      * A number output of `sim` this reading shows instead (docs/22 §4.3 S5):
      * it eases to each new value over `lag`, whatever RUN says; `idle` / `run`
-     * are then left out.
+     * are then left out. Two or three outputs (one unit) share a row,
+     * `0.45 · 0.45 s` (docs/30 F6).
      */
-    follow: kebabId.optional(),
+    follow: z.union([kebabId, z.array(kebabId).min(1).max(3)]).optional(),
+    /**
+     * `observe`: show only the followed outputs this chapter's try-it card
+     * observes (`—` when it observes none of them): one row for a weight the
+     * fall chapter reads and the spring chapter reads as a load.
+     */
+    scope: z.literal('observe').optional(),
   })
   .strict()
   .superRefine((r, ctx) => {
@@ -1005,6 +1015,7 @@ export const telemetrySchema = z
       ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['idle'], message: 'a reading needs `idle`, `run` and `lag`, or `follow` (a sim output)' });
     if (r.follow !== undefined && (r.idle !== undefined || r.run !== undefined))
       ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['follow'], message: 'a `follow` reading takes no `idle` / `run`' });
+    if (r.scope !== undefined && r.follow === undefined) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['scope'], message: '`scope` belongs to a `follow` reading' });
   });
 export type TelemetryRow = z.output<typeof telemetrySchema>;
 export const MAX_TELEMETRY_ROWS = 6;
@@ -1167,6 +1178,10 @@ export const partsFileBase = z
         countable,
         filings: new Set(file.parts.filter((p) => p.primitive?.kind === 'filings').map((p) => p.id)),
         primitives: new Set(file.parts.filter((p) => p.primitive !== undefined).map((p) => p.id)),
+        coils: new Map(file.parts.map((p) => [p.id, [p.primitive, ...(p.extra ?? [])].filter((q) => q?.kind === 'coil').length])),
+        repeated: new Set(file.parts.filter((p) => p.repeat !== undefined).map((p) => p.id)),
+        withExtra: new Set(file.parts.filter((p) => (p.extra ?? []).length > 0).map((p) => p.id)),
+        groups: new Set(file.groups.map((g) => g.id)),
       }))
         ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['sim', ...x.path], message: x.message });
     }
@@ -1186,9 +1201,14 @@ export const partsFileBase = z
     const outputs = new Map((file.sim?.outputs ?? []).map((o) => [o.id, o]));
     file.telemetry?.forEach((r, i) => {
       if (r.follow === undefined) return;
-      const o = outputs.get(r.follow);
-      if (!o) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['telemetry', i, 'follow'], message: file.sim ? `unknown sim output "${r.follow}"` : 'parts.json has no `sim`' });
-      else if (o.kind !== 'number') ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['telemetry', i, 'follow'], message: `"${r.follow}" is a ${o.kind}, not a number` });
+      const ids = Array.isArray(r.follow) ? r.follow : [r.follow];
+      for (const id of ids) {
+        const o = outputs.get(id);
+        if (!o) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['telemetry', i, 'follow'], message: file.sim ? `unknown sim output "${id}"` : 'parts.json has no `sim`' });
+        else if (o.kind !== 'number') ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['telemetry', i, 'follow'], message: `"${id}" is a ${o.kind}, not a number` });
+      }
+      if (new Set(ids.map((id) => outputs.get(id)?.unit ?? '')).size > 1)
+        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['telemetry', i, 'follow'], message: 'one reading, one unit' });
     });
     file.presets?.forEach((p, i) => {
       if ((RESERVED_PRESET_IDS as readonly string[]).includes(p.id))
@@ -1634,6 +1654,8 @@ export const spaceChapterState = z
     summary: bilingual.optional(),
     /** The child's question for this chapter (reading panel header when there is no `summary`). */
     question: bilingual.optional(),
+    /** The background chapter's reading note ("How this topic is written"; docs/06 背景章; only on `kind: background`). */
+    note: bilingual.optional(),
     ...muscleStateFields,
     /** PRESENTATION beats for this chapter; default = one beat (the chapter's state, `summary` as caption). */
     beats: z.array(spaceBeat).min(1).optional(),

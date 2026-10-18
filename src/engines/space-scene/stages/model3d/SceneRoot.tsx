@@ -25,7 +25,7 @@ import { resolveDataColor, resolveMaterialLook } from '../../lib/color';
 import { damp, easeInOutCubic, normalize3, type Vec3 } from '../../lib/math';
 import { POSE_DURATION, restTransform, toTransform, type PartTransform } from '../../lib/pose';
 import { createRuntime, keepAnimating, MAX_DT, RuntimeContext, useRuntime, type StageRuntime } from './runtime';
-import { PartNode, type PartHandle, type PartShape } from './PartNode';
+import { PartNode, type PartHandle, type PartShape, type SimMove } from './PartNode';
 import { Flows } from './Flows';
 import { CameraRig } from './CameraRig';
 import { Lighting } from './Lighting';
@@ -50,7 +50,6 @@ import type { PartStyle } from './materials';
 import type { Box3Like } from '../../lib/parts';
 import type { StageLook } from './look';
 import { stageDpr } from './dpr';
-import type { SimSettle } from '../../sim-schema';
 import { resolveSimValues } from '../../lib/sim/controls';
 import type { SimOutputs } from '../../lib/sim';
 import { evaluateSimOnStage } from '../../lib/sim/carrier';
@@ -59,6 +58,7 @@ import { simEffects, type SimEffects } from '../../lib/sim/bind';
 import { fieldLines, ironFilings, type Filing } from '../../lib/sim/field';
 import { filingMatrices, filingsCard } from './geometry';
 import { SimOverlays } from './SimOverlays';
+import { TimelineClock } from './TimelineClock';
 import type { Matrix4 } from 'three';
 
 const GltfSource = lazy(() => import('./GltfSource'));
@@ -207,13 +207,17 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
   /* ---------------- shapes ---------------- */
   const primitiveShapes = useMemo(() => {
     const out = new Map<string, PartShape>();
-    const each = new Set(data.animations.filter((a) => 'each' in a && a.each).map((a) => a.target));
+    // Copies that move one by one: an `each` animation, or a try-it `play` turn with `each` (a car's wheels).
+    const each = new Set([
+      ...data.animations.filter((a) => 'each' in a && a.each).map((a) => a.target),
+      ...(data.sim?.bind ?? []).flatMap((b) => ('part' in b && b.play?.each ? (Array.isArray(b.part) ? b.part : [b.part]) : [])),
+    ]);
     for (const part of data.parts) {
       const shape = primitiveShape(part, each.has(part.id));
       if (shape) out.set(part.id, shape);
     }
     return out;
-  }, [data.parts, data.animations]);
+  }, [data.parts, data.animations, data.sim]);
   useEffect(() => () => primitiveShapes.forEach((sh) => sh.pieces.forEach((p) => p.geometry.dispose())), [primitiveShapes]);
 
   const meshNames = useMemo(
@@ -497,13 +501,14 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
     return out;
   }, [sim, look]);
   const simMoves = useMemo(() => {
-    const out = new Map<string, { offset: Vec3; axis: Vec3; deg: number; settle?: SimSettle | undefined; pivot?: Vec3 | undefined }>();
+    const out = new Map<string, SimMove>();
     for (const id of new Set([...(sim?.offset.keys() ?? []), ...(sim?.rotate.keys() ?? [])])) {
       const r = sim?.rotate.get(id);
-      out.set(id, { offset: sim?.offset.get(id) ?? [0, 0, 0], axis: r?.axis ?? [0, 1, 0], deg: r?.deg ?? 0, settle: r?.settle, pivot: r?.pivot });
+      out.set(id, { offset: sim?.offset.get(id) ?? [0, 0, 0], offsetSettle: sim?.offsetSettle.get(id), axis: r?.axis ?? [0, 1, 0], deg: r?.deg ?? 0, settle: r?.settle, pivot: r?.pivot });
     }
     return out;
   }, [sim]);
+  const referenceOn = useStore(ui, (u) => u.reference !== null);
   const simTints = useMemo(() => {
     const out = new Map<string, { color: string; level: number }>();
     sim?.tint.forEach((g, id) => out.set(id, { color: resolveDataColor(g.color, look.tokens, look.theme, '#cc6328'), level: g.level }));
@@ -592,6 +597,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
       {equipment.length > 0 && (
         <Equipment specs={equipment} held={false} grips={grips} footing={footing} trunk={trunkBone} style={equipmentStyle} solid={mannequin} thin={body === 'wire'} />
       )}
+      {simRun && <TimelineClock outputs={simRun.outputs} ui={ui} bridge={bridge} snapKey={snap.current.key} still={s.view === 'exploded' || referenceOn} />}
       <group ref={rootRef} matrixAutoUpdate={false}>
       {equipment.length > 0 && <Equipment specs={equipment} held grips={grips} footing={footing} trunk={trunkBone} style={equipmentStyle} solid={mannequin} thin={body === 'wire'} />}
       {skinShape && skinned && <Mannequin shape={skinShape} color={mannequinColor} on={body === 'mannequin'} hands={handBones} />}
@@ -622,6 +628,8 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
             tintColor={display.tintRef ? resolveDataColor(display.tintRef, look.tokens, look.theme) : null}
             count={sim?.count.get(part.id) ?? null}
             simMove={simMoves.get(part.id) ?? null}
+            play={sim?.play.get(part.id) ?? null}
+            stretch={sim?.stretch.get(part.id) ?? null}
             simTint={simTints.get(part.id) ?? null}
             filings={filingSets.get(part.id) ?? null}
             animSim={sim?.animations}
@@ -652,6 +660,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
           outputs={simRun.outputs}
           handles={handles}
           displays={displays}
+          layers={s.layers}
           exploded={s.view === 'exploded'}
           look={look}
           snapKey={snap.current.key}

@@ -1,0 +1,16 @@
+# PLACEHOLDER topic: exercises the SpaceScene forces model (docs/30 §4, F0–F8) only: a background chapter, each
+# force sub-model as a try-it, timeline playback and "Run again", force arrows, a stretched spring that settles,
+# the data-table graph, dual and chapter-only PLATE readings, predict-a-state, carpet and sandpaper, count minus.
+id: sample-forces
+title: { en: "Sample: Forces bench", zh: "示例：力的实验台" }
+subtitle: { en: "A placeholder topic for testing the forces model", zh: "用于测试力的模型的占位主题" }
+subject: science
+levels: [P6]
+moe: []
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: draft
+note: { en: "Placeholder topic · not a real bench", zh: "占位主题 · 不是真实的实验台" }

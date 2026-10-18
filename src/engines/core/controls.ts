@@ -280,8 +280,8 @@ export const LABELS_KEY = 'l';
 const RESERVED_KEYS = new Set([' ', 'h', 'escape', ',', '.']);
 /** Previous / next beat outside the presentation (`SceneControls.beatStep`). */
 export const BEAT_KEYS = { prev: ',', next: '.' } as const;
-/** SpaceScene's try-it card (docs/22 §4.3 S3): `[` `]` step the varied control, `T` flips the card's first switch; registered as commands. */
-export const SIM_KEYS = { prev: '[', next: ']', toggle: 't' } as const;
+/** SpaceScene's try-it card (docs/22 §4.3 S3, docs/30 F2): `[` `]` step the varied control, `T` flips the card's first switch, `G` runs the card's timelines again; registered as commands. */
+export const SIM_KEYS = { prev: '[', next: ']', toggle: 't', replay: 'g' } as const;
 
 /** Engine modes plus the host's LABELS switch when the engine supports it. */
 export function allModes(controls: SceneControls, labelsOn: boolean, labelsText: HudText): SceneMode[] {

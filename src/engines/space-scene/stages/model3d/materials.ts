@@ -36,7 +36,7 @@
  *    hatch as the cut face, so each layer keeps its material.
  *  - glow (`uGlow`): self-light added on top (a filament lit by the try-it
  *    model; PartNode eases it).
- *  - wood (`map`): the family's grain as a colour map.
+ *  - wood, pile, sand (`map`): the family's grain, tufts or grit as a colour map.
  */
 import { Color, DoubleSide, FrontSide, MeshStandardMaterial, Vector3, type Plane } from 'three';
 import type { MaterialLook } from '../../lib/color';

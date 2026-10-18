@@ -23,6 +23,8 @@ export interface SimView {
   outputs: SimOutputs;
   /** This chapter's try-it card, if any. */
   card: SimTry | null;
+  /** The control values this chapter starts from (`state.sim.set`). */
+  chapterSet: Readonly<SimValues>;
 }
 
 /** Set one control (the store keeps only what was set; lib/sim/controls.ts). */
@@ -40,7 +42,7 @@ export function useSimView(file: Pick<PartsFile, 'sim' | 'parts' | 'poses'>): Si
     const values = resolveSimValues(sim, s.set);
     const state = chapters.find((c) => c.id === s.chapter)?.state as SpaceChapterState | undefined;
     const card = state?.sim?.try ?? null;
-    return { sim, values, outputs: evaluateSimOnStage(sim, file, values, s.pose, card?.observe).outputs, card };
+    return { sim, values, outputs: evaluateSimOnStage(sim, file, values, s.pose, card?.observe).outputs, card, chapterSet: state?.sim?.set ?? {} };
   }, [file, s.set, s.chapter, s.pose, chapters]);
 }
 
