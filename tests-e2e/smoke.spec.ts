@@ -106,7 +106,7 @@ for (const locale of LOCALES) {
     await expect(page.locator('[data-topic] [data-figure="drawing"] img')).toHaveCount(23);
     const ww2 = page.locator('[data-topic]', { has: page.locator(`a[href$="/${locale}/topics/ww2/"]`) });
     await expect(ww2.locator('[data-stats]')).toHaveText(WW2_STATS[locale]);
-    await expect(ww2.locator('.plate__no')).toHaveText(locale === 'en' ? 'Plate 22' : '图版 22');
+    await expect(ww2.locator('.plate__no')).toHaveText(locale === 'en' ? 'Plate 23' : '图版 23');
     await expect(page.locator('[data-topic] [data-stats]:empty')).toHaveCount(0);
     // Reserved image boxes: no layout shift while drawings load.
     const box = await page.locator('[data-topic] [data-figure] img').first().boundingBox();
