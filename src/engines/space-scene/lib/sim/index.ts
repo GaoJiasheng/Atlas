@@ -2,7 +2,7 @@
  * The try-it model registry (docs/22 §4.3 S2; pure, synchronous, well under
  * a millisecond): `evaluateSim(sim, values)` runs the topic's model
  * (`circuit` → lib/sim/circuit.ts, `magnet` → lib/sim/magnet.ts, `force` →
- * lib/sim/force.ts) and maps its quantities onto the declared outputs
+ * lib/sim/force.ts, `energy` → lib/sim/energy.ts) and maps its quantities onto the declared outputs
  * (`from`, default the output's id). A timeline output's value is a
  * `Timeline` (lib/sim/timeline.ts).
  * The magnet model's `clips` is the clip count the chapter's try-it card
@@ -15,6 +15,7 @@ import { CLIP_QUANTITIES, ringPoint, solveMagnets } from './magnet';
 import type { Vec3 } from '../math';
 import type { MagnetFrames } from './frame';
 import { solveForces } from './force';
+import { solveEnergy } from './energy';
 import { EMPTY_TIMELINE, type Timeline } from './timeline';
 
 /** An output's value: a number, a state id, numbers per id (a vector) or a run over time (a timeline). */
@@ -45,6 +46,7 @@ export function simQuantities(sim: SimData, values: SimValues, observe: readonly
     return q;
   }
   if (sim.kind === 'force' && sim.force) return solveForces(sim.force, values);
+  if (sim.kind === 'energy' && sim.energy) return solveEnergy(sim.energy, values, sim.controls);
   return {};
 }
 
@@ -61,11 +63,12 @@ export function evaluateSim(sim: SimData, values: SimValues, observe: readonly s
 
 /**
  * Models whose parts are separate experiments on one bench (the forces
- * model's push, fall, slide, roll, spring and brake): the PLATE block names
+ * model's push, fall, slide, roll, spring and brake; the energy model's
+ * chains, one per chapter): the PLATE block names
  * only a state the chapter's card or settings move. A circuit or a set of
  * magnets is one system: its first state always describes the bench.
  */
-export const SEPARATE_EXPERIMENTS: Readonly<Record<SimKind, boolean>> = { circuit: false, magnet: false, force: true };
+export const SEPARATE_EXPERIMENTS: Readonly<Record<SimKind, boolean>> = { circuit: false, magnet: false, force: true, energy: true };
 
 /** A number output's value (0 for states and vectors; NaN = not applicable here). */
 export const numberOf = (v: SimOutputValue | undefined): number => (typeof v === 'number' ? v : 0);

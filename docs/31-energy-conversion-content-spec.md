@@ -905,4 +905,51 @@ Gavin 已说"做"。以下按 Gavin 在 docs/22、23、24、26 定稿时的惯�
 
 ## 9. 实现记录与已知差距
 
-（施工后补。）
+### 9.1 引擎（E-A + E-B 合并为一个 Opus 代理，2026-10-18）
+
+**做了什么**：§4.6 的 EN1–EN8 全部，建在 docs/30 已落地的力的引擎（提交 91dcfe5）之上：时间线、`play`（含 `pivot`、`each`）、再跑一次 / `G`、`slow`、终态、`simSeek`、数据表下的小图、背景章的 `note` 都直接沿用（EN5 的 F2 本体、EN7 的 `note` 不用再做）。夹具主题 `src/content/topics/sample-energy/`（draft，占位文字，只用程序化积木，24 个零件 + 3 个 context）：背景章 00 + 六章各一张试一试卡，每条链、能量链卡、五条能量流（密度绑定）、六个 token、三组能量条、三条时间线、`start` 随控件变、`reading`、`in:` / `out:` 读数各用一次。docs/06 新增「SpaceScene · 试一试 · 能量（energy）」，改了「试一试（sim）」的模型种类、流的 `intensity`、token 三处；docs/08 §1 功能色表加能量形式一行。
+
+| 件 | 代码 | 要点 |
+|---|---|---|
+| EN1 模型 | `lib/sim/energy.ts`、`sim-schema.ts`（`energySchema`、`energyChainSchema`、`energyIssues`、`quantityKind`、`simTimelineChannels`、输出的状态标签）、`lib/sim/index.ts`（注册、`SEPARATE_EXPERIMENTS.energy = true`） | 链：逐节点传播、逐节点取整、取整误差归热带，取整后每个节点进 = 出；validate 对每条链读到的控件的每一种组合校验守恒。子模型：太阳能板、落球、秋千、发条、发电机；三条时间线；全部 §2.4 表单测钉死 |
+| EN2 能量链卡 | `lib/sim/sankey.ts`、`hud/EnergyCard.tsx`、`View.tsx`（卡片槽、标题 ENERGY CHAIN）、`explorer/TryIt.tsx`（< 1024 px 收进试一试卡）、`explorer/ExplorerOverlay.tsx`（KEY 的势能一行）、`space-scene.css`、`i18n/ui.{en,zh}.json` | 见 docs/06「能量」；读屏文字版；点节点选零件；44 px 命中区 |
+| EN3 token | `src/theme/tokens.css`、`src/theme/theme.ts` | 见下表；`tests/space-scene/energy-colors.test.ts` 从 tokens.css 读出来校验 |
+| EN4 密度 | `sim-schema.ts`（`intensity.mode`）、`lib/sim/bind.ts`（`mode`、`<流>:<路径>` 的键）、`stages/model3d/Flows.tsx`（每条路径的份额、0.3 s 缓动、`aRank` 用 van der Corput 次序均匀散开）、`stages/model3d/flowMaterial.ts`（`uShare`） | 默认仍是速度模式，电路、磁铁不受影响 |
+| EN6 能量条 | `lib/sim/bars.ts`、`stages/model3d/SimOverlays.tsx`（`EnergyBars`：全部能量条一个网格）、`hud/EnergyBarLabels.tsx`、`bridge.ts`（`energyBars`）、`stages/model3d/SceneRoot.tsx`（传 bridge） | 读时间线通道；条下标签在 HUD 层 |
+| EN8 QA | `View.tsx`（`__atlas.engine.energyBars()`）、`scripts/shoot.ts`（`--beats` 检查画着的条加起来 = 100 ± 0.5） | `--keys` 的 `G`、`--beats` 的终态沿用 F2 |
+
+**按事实审计（`art/codex-forces-energy/energy-facts.md`）改过的地方**（内容代理照这里写数据与字幕；样板 `tests/space-scene/fixtures/energy-block.ts` 已按此写）：
+
+| 审计条 | 原 spec | 实现 / 样板 | 内容要改的 |
+|---|---|---|---|
+| SIM-G-limit、F-30 | I = 0.55 × x ÷ √(1 + x²)，x = v ÷ 12；表 0.54 / 1.49 / 2.21 / 2.67 / 2.95 W | 公式不变，常数是数据；validate 要求 imax² R ≤ 额定功率（不然"稳定在约 3 W"不成立：0.55² × 12 = 3.63 W）。样板取 imax 0.5 A、v0 6 km/h：0 / 5 / 10 / 15 / 20 / 25 km/h → 0 / 1.23 / 2.21 / 2.59 / 2.75 / 2.84 W，亮度 0 / 41 / 74 / 86 / 92 / 95 %，后轮 0 / 40 / 81 / 121 / 161 / 201 rpm | §2.4 G 表、§8.2 读数一致那一条；不写"灯不会烧坏" |
+| SIM-H-same-light | 天然气 100 → LED 光 21 / 热 32，白炽 5 / 48；两种灯 glow 都是 1 | 链的 `start` 可随控件变：LED 25、白炽 100（同样多的光）。LED：25 → 电 14 + 热 11 → 到家 13 + 电缆热 1 → 光 5 + 热 8；白炽：100 → 55 / 45 → 53 / 2 → 5 / 48。两种灯的光都是 5（灯的 glow 绑 `out:lamp:light`，自然一样亮）；`same-light` = `start` | §2.4 H、第 06 章字幕 |
+| SIM-D-bars、F-24、ENG-MODEL-03 | 势能 = (1 − cos θ) ÷ (1 − cos 35°) × 剩余；周期 2.90 s | 势能按原始能量归一：100 (1 − cos θ) ÷ (1 − cos 35°)，动能 = 剩余 − 势能；每半摆的时长 = 当时摆幅下精确周期（AGM）的一半，35° 时 2.906 s；8 次后势能 78.37 %、动能 0、热和声 21.63 %；终态是暂停 | 字幕写"停在这一瞬，它还会越摆越低"，周期写约 2.9 s |
+| SIM-E-bars | 发条势能线性降、动能恒 8 | 发条在 T 秒里匀速放出能量（热和声 = 100 t ÷ T）；车 0.2 s 加速到最高速再匀减速到停；动能 = 8 % × (速度 ÷ 最高速)²，从发条里来：势能 = 100 (1 − t ÷ T) − 动能，一直降；开始 100 / 0 / 0，结束 0 / 0 / 100；validate 限 `kinetic` | — |
+| ENG-MODEL-02 | `y` = 球心高度 | `y` = 球底离地面的高度（ITF 的量法）；零件画成落在地面上 | 球零件的 `at` = 地面顶 + 半径 |
+| F-18-calc | 292.6 kJ、约 156 s | 模型不出这个数；单测记 293.02 kJ、约 157 s（2 分 37 秒） | 第 02 章细看与零件 detail |
+| ENG-MODEL-01 | 电 20 → 动能 16 → 轿厢势能 16 | 引擎不认对重；链是示意 | 二选一：加一个对重节点（对重下降放出的势能也进链），或链的 `note` 写"只画轿厢，不算对重" |
+| ENG-MODEL-04、F-11-means | 900 / 640 W/m² 当实测 | 辐照是数据（样板沿用 900 / 640 / 150 / 0，作为板面上的示意输入）；NASA 原值取整 918 / 645 W/m² 是水平面逐时平均 | S1 与细看写明"示意的板面辐照" |
+| F-15-led-share、F-16 | LED 40 % 由"省 75 %"推出；音箱 1 % | 都是 `shares` 数据 | 标"示意"，不说 ENERGY STAR 证明了 40 % |
+
+**与 §4 的差异**（实现时的决定）：
+
+| # | spec | 实现 | 理由 |
+|---|---|---|---|
+| 1 | 链的 `active` / `switch` | 链的 `when`（条件数组，都成立才有能量）+ 每条带可写 `when` | 一种写法管住夜里、不踩、没开手电筒、选哪件电器、电梯在哪层、哪种灯 |
+| 2 | `useful` = "最后一个转换节点"的想要的形式 | 链的 `reading: { node, through? }` 定"机器"，带上标 `useful: true` | 电器链一个节点有四种可能、发电机链要把灯算进来；规则写在数据里，不靠猜 |
+| 3 | `whole` 链取各链默认值 × 0.6（写死） | 链的 `mix: { chains, scale }` | 全景链自己有卡片节点，流的路径另从别的链借 |
+| 4 | `lamp-glow`、`water-warm`、`same-light` 是模型的专名输出 | 通用量 `in:<节点>`、`out:<节点>:<形式>`、`start`，作者用输出的 `from` 取名 | 引擎里不出现"lamp""kettle"；灯的亮度跟着光能走（第 06 章两种灯一样亮） |
+| 5 | `paths` 的键 `<流 id>:<路径 id>` 由五条绑定各取 | 同；`intensity` 绑定按流 id 前缀取自己的那些 | — |
+| 6 | 子模型的数"不在当前链里返回 null" | 子模型可写 `chains`：不在这些链里读 NaN（`—`）；不写 = 总是有数；`wheel-rpm` / `crank-rpm` / `sun-glow` / 时间线总是有（动画与绑定要用） | 车轮、太阳在别的章也画着 |
+| 7 | `bounce.slow`、`swing.sample` | 另加 `bounce.heat`、`swing.heat`（损失里热的份额，默认 0.9）、`windup.speed`、`windup.wheel`、`windup.kinetic`、`windup.spinUp`、`dynamo.on` | 卡片要分热与声；车要跑多远、车轮转多少 |
+| 8 | 能量条标签只有名称 | 名称 + 此刻的百分数（三行，色块在前） | 读者看得见"加起来是 100" |
+| 9 | 能量链卡上 `potential` 带画实心块 | 只存着势能的节点画成势能色的宽实心块，势能带不透明度更高；KEY 加"Potential energy (stored)" | 带本身仍是流向 |
+| 10 | token 提议值 | 色相顺序不变，明度 / 饱和度按色觉缺陷模拟调：paper `#A37808` `#2970C2` `#236E5A` `#634783` `#B44225` `#7D6D43`；cinema `#ECCD66` `#4D8DD7` `#58C4A3` `#BD9DDA` `#EC8A5C` `#8C6D3C` | 提议值光能在纸上只有 2.0:1，电能 / 声能在红色盲下 ΔE 3.4、热能 / 势能 1.8；现在两两 ΔE*ab ≥ 10.5（paper）/ 15（cinema），对底色 ≥ 3.15:1 |
+| 11 | EN7 背景章 `note` | 已由 docs/30 F0 做完，未改 | — |
+
+**测试**：`tests/space-scene/energy.test.ts`（§2.4 A–H 全表按显示位数；每条链、每种控件组合的节点守恒（取整与精确）；归零；`links` / `paths` 的键；`in:` / `out:`；密度绑定；三条时间线：落地时刻、弹回 r h、AGM 周期、0.97⁸、发条在 `run-time` 停、每个时刻三者之和 100；确定性；URL `sim=chain.bounce~drop.50~surface.sand` 往返；validate：表不满 100、节点漏能量、未知零件 / 节点 / 表 / 流路径、势能带列路径、环、sink 有出口、链缺选项、发电机超额定、发条动能过大、输出的未知节点、能量条的输出 / 通道 / 零件 / `lostSplit`）、`sankey.test.ts`（确定、分列、带宽 = % × k 且 ≥ 最细、带填满节点、出入次序、空链）、`energy-bars.test.ts`（任何时刻和 = 100、开始势能 100、终态 = 时间线终值、热与声的分法、空时间线）、`energy-colors.test.ts`（两套主题、对比、四种视觉下两两 ΔE）；样板 `tests/space-scene/fixtures/energy-block.ts`。e2e `tests-e2e/sample-energy.spec.ts`（深链接的能量链卡、能量条终态与和、KEY 的势能；换地面重画链并重放、过程中条的和；点节点选零件；中文读屏文字与条名；手机抽屉里的链与 44 px）。
+
+**计数**（`sample-energy`，1920 × 1080，SwiftShader）：全景 38 calls、7.3 万三角形（五条能量流各 1 次、三组能量条共 1 次）；各章预设镜头 17–23 calls；FLOW 关 33 calls。模型一次求值约 0.1 ms（全景链，秋千采样在内，Node 实测）；回放结束后停帧。
+
+**已知差距**：读者不能拖动东西（v2，同 docs/30）；能量流的路径不跟着 `play` 走（发条车跑开后它的动能 / 热 / 声的路径留在原处，内容可把路径画在车的起点与终点之间）；Sankey 卡最多约 5 列，名字超过列宽用省略号（零件的 `short` 名优先）。

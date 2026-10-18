@@ -13,6 +13,7 @@ import { bilingual, colorRef, kebabId, vec3 } from '../../content/schema/common'
 import { fieldLines } from './lib/sim/field';
 import { CLIP_QUANTITIES } from './lib/sim/magnet';
 import { FORCE_STATES, forceQuantity, forceTimelineChannels, springExtension, rollRun } from './lib/sim/force';
+import { COMPUTED_TABLES, ENERGY_FORMS, chainFlow, chainOrder, energyNodes, energyQuantity, energyTimelineChannels, shareTables } from './lib/sim/energy';
 
 /** A control value: a toggle's boolean, a step's number, a choice's option id. */
 export const simValue = z.union([z.boolean(), z.number(), kebabId]);
@@ -218,6 +219,9 @@ const partBind = z
   })
   .strict();
 
+/** How a flow's per-path value shows: particle speed (a circuit's current), or how many particles run (an energy share). */
+export const INTENSITY_MODES = ['speed', 'density'] as const;
+
 const flowBind = z
   .object({
     ...source,
@@ -227,9 +231,13 @@ const flowBind = z
     /**
      * A vector output by path id (a multi-path flow's `paths`): each path's
      * particles move at a speed ∝ |value| ÷ `full` (clamped), against the path
-     * when negative, and vanish below 1 % of `full`.
+     * when negative, and vanish below 1 % of `full`. `mode: "density"` (docs/31
+     * E-EN4): the speed stays the flow's own and the share of the path's
+     * particles on show is |value| ÷ `full` (≤ 1; an energy flow: more
+     * particles where more of the energy goes). A vector keyed `<flow>:<path>`
+     * gives each flow the entries that start with its id.
      */
-    intensity: z.object({ full: z.number().positive() }).strict().optional(),
+    intensity: z.object({ full: z.number().positive(), mode: z.enum(INTENSITY_MODES).default('speed') }).strict().optional(),
     /** State value → particle colour while the output is in that state (a short circuit runs hot). */
     stops: z.record(stateId, colorRef).optional(),
     /**
@@ -563,6 +571,125 @@ export const forceSchema = z
   .strict();
 export type ForceData = z.output<typeof forceSchema>;
 
+/** A control condition (an energy chain or link counts only while it holds). */
+const controlCondition = z.object({ control: kebabId, is: simCondition.default(true) }).strict();
+
+export type EnergyForm = (typeof ENERGY_FORMS)[number];
+/** `in` (all that goes into the node) or `<table>.<key>`: a percentage of `energy.shares` (or of a table the model works out). */
+const SHARE_REF = /^(in|[a-z0-9]+(?:-[a-z0-9]+)*\.[a-z0-9]+(?:-[a-z0-9]+)*)$/;
+/** A flow path a link lights: `<flow id>:<path id>`. */
+const FLOW_PATH_REF = /^[a-z0-9]+(?:-[a-z0-9]+)*:[a-z0-9]+(?:-[a-z0-9]+)*$/;
+
+/**
+ * One energy chain (docs/31 §4.2): the energy-chain card's nodes and bands
+ * and the flow paths it lights. A node is a part (`part`: its short name,
+ * picking it selects the part) or a labelled place (`label`, e.g. "The air
+ * around"); `sink`: where energy ends (drawn in the last column). A link
+ * carries one form of energy from one node to a later one: `share` of what
+ * goes into `from` (`in` = all of it, `<table>.<key>` = that percentage),
+ * lighting `paths` (`<flow>:<path>`; not for potential energy, which is
+ * stored, not a stream) while `when` holds. `start`: what goes into the
+ * first nodes (default 100; a control's table: an LED needs a quarter of the
+ * filament lamp's energy for the same light). `when`: every condition must
+ * hold, else the chain is 0. `reading`: the node (and `through` nodes) whose
+ * output the readings describe: `useful` (its links marked `useful`), `heat`
+ * and `sound` (the others of those forms), % of what goes into `node`. `mix`: also
+ * light other chains' paths at their defaults × `scale` (the whole block).
+ */
+export const energyChainSchema = z
+  .object({
+    nodes: z
+      .array(z.object({ id: kebabId, part: kebabId.optional(), label: bilingual.optional(), sink: z.literal(true).optional() }).strict())
+      .min(1)
+      .max(12),
+    links: z
+      .array(
+        z
+          .object({
+            id: kebabId,
+            from: kebabId,
+            to: kebabId,
+            form: z.enum(ENERGY_FORMS),
+            share: z.string().regex(SHARE_REF, 'a share is `in` or `<table>.<key>`'),
+            paths: z.array(z.string().regex(FLOW_PATH_REF, 'a path is `<flow id>:<path id>`')).max(8).optional(),
+            when: controlCondition.optional(),
+            /** The form the machine is for (the `useful` reading: light from a lamp, heat into the kettle's water). */
+            useful: z.literal(true).optional(),
+          })
+          .strict(),
+      )
+      .max(24),
+    start: z.union([z.number().positive(), z.object({ control: kebabId, values: z.record(kebabId, z.number().min(0)) }).strict()]).optional(),
+    when: z.array(controlCondition).max(4).optional(),
+    reading: z.object({ node: kebabId, through: z.array(kebabId).max(6).optional() }).strict().optional(),
+    mix: z.object({ chains: z.array(kebabId).min(1).max(8), scale: z.number().positive().max(1) }).strict().optional(),
+    /** A line under the card (what this chain leaves out). */
+    note: bilingual.optional(),
+  })
+  .strict();
+export type EnergyChain = z.output<typeof energyChainSchema>;
+
+/** The chain names a sub-model's numbers apply in (elsewhere they read `—`; default: everywhere). */
+const inChains = z.array(kebabId).min(1).max(12).optional();
+const share = z.number().min(0).max(1);
+
+/**
+ * The energy model's data (docs/31 §4.2, lib/sim/energy.ts): `chain` (the
+ * choice control naming the chain on show; one chain per option), `chains`,
+ * `shares` (tables of percentages per node: `panel.electrical` = 21), and
+ * the optional sub-models, each naming the controls it reads. Heights in cm
+ * (the drop), lengths in m, speeds of the dynamo in km/h, g in N/kg.
+ */
+export const energySchema = z
+  .object({
+    g: pos.default(9.8),
+    chain: kebabId,
+    /** Panels: `sky` (a choice) → `irradiance` (W/m² on the panels) and the Sun's `glow` (0–1). */
+    solar: z
+      .object({
+        sky: kebabId,
+        modules: z.number().int().min(1).max(200),
+        area: pos,
+        efficiency: z.number().positive().max(1),
+        irradiance: z.record(kebabId, z.number().min(0)),
+        glow: z.record(kebabId, share),
+        chains: inChains,
+      })
+      .strict()
+      .optional(),
+    /** A dropped ball: `drop` (a step control, cm), `surface` (a choice) → rebound `ratio`; `heat`: the share of the lost energy that is heat (the rest sound); `slow`. */
+    bounce: z
+      .object({ drop: kebabId, surface: kebabId, ratio: z.record(kebabId, z.number().min(0).max(1)), slow: z.number().min(1).max(10).default(1), heat: share.default(0.9), chains: inChains })
+      .strict()
+      .optional(),
+    /** A swing: `length` (m), let go at `amplitude`°, losing `loss` of what is left each half-swing, `swings` half-swings, sampled every `sample` s. */
+    swing: z
+      .object({
+        length: pos,
+        amplitude: z.number().min(1).max(80),
+        loss: z.number().min(0).max(0.5),
+        swings: z.number().int().min(1).max(16),
+        sample: z.number().min(0.02).max(0.2).default(0.08),
+        heat: share.default(0.9),
+      })
+      .strict()
+      .optional(),
+    /** A wind-up toy: `winds` (a step control of turns), `secondsPerTurn`, top `speed` (m/s), `wheel` radius (m), `kinetic` (% at top speed), `spinUp` (s). */
+    windup: z
+      .object({ winds: kebabId, secondsPerTurn: pos, speed: pos, wheel: pos, kinetic: z.number().min(0).max(50).default(8), spinUp: z.number().positive().max(2).default(0.2), chains: inChains })
+      .strict()
+      .optional(),
+    /** A bicycle dynamo: `speed` (a step control, km/h), `on` (a toggle: pressed on the tyre; default always), current cap `imax` (A) and `v0` (km/h), `lampOhms`, `rated` (W), wheel circumference `wheel` (m), `crankRatio`. */
+    dynamo: z
+      .object({ speed: kebabId, on: kebabId.optional(), imax: pos, v0: pos, lampOhms: pos, rated: pos, wheel: pos, crankRatio: pos, chains: inChains })
+      .strict()
+      .optional(),
+    shares: z.record(kebabId, z.record(kebabId, z.number().min(0).max(100))).default({}),
+    chains: z.record(kebabId, energyChainSchema),
+  })
+  .strict();
+export type EnergyData = z.output<typeof energySchema>;
+
 /**
  * Drawn over the stage from the model's outputs (docs/22 §4.4 M5):
  * `force-arrows` = one arrow on each of two parts along the line between
@@ -612,6 +739,32 @@ export const simOverlaySchema = z.discriminatedUnion('kind', [
       group: kebabId.optional(),
     })
     .strict(),
+  /**
+   * Energy bars (docs/31 E-EN6): beside `near` (+ `offset`, scene units from
+   * the part's bounds centre), three upright bars facing the camera, read
+   * from a timeline output's channels (`bars`: potential, kinetic and lost
+   * energy, % of the run's start): potential, kinetic, and heat + sound
+   * (split by `lostSplit`, illustrative); a hairline marks 100 % at `height`
+   * scene units; always summing to 100 %. All bars of all overlays: one draw
+   * call; labels on the HUD layer. `when`: shown only while it holds.
+   */
+  z
+    .object({
+      kind: z.literal('energy-bars'),
+      timeline: kebabId,
+      near: kebabId,
+      offset: vec3.optional(),
+      height: pos.default(0.6),
+      width: pos.default(0.04),
+      gap: pos.default(0.02),
+      bars: z
+        .object({ potential: z.string().min(1).max(40).default('pe'), kinetic: z.string().min(1).max(40).default('ke'), lost: z.string().min(1).max(40).default('lost') })
+        .strict()
+        .default({}),
+      lostSplit: z.object({ heat: z.number().min(0).max(1), sound: z.number().min(0).max(1) }).strict().default({ heat: 0.9, sound: 0.1 }),
+      when: z.object({ ...source, is: simCondition.default(true) }).strict().optional(),
+    })
+    .strict(),
   z
     .object({
       kind: z.literal('force-arrows'),
@@ -627,7 +780,7 @@ export const simOverlaySchema = z.discriminatedUnion('kind', [
 ]);
 export type SimOverlay = z.output<typeof simOverlaySchema>;
 
-export const SIM_KINDS = ['circuit', 'magnet', 'force'] as const;
+export const SIM_KINDS = ['circuit', 'magnet', 'force', 'energy'] as const;
 export type SimKind = (typeof SIM_KINDS)[number];
 
 export const MAX_SIM_CONTROLS = 16;
@@ -644,6 +797,7 @@ export const simSchema = z
     circuit: circuitSchema.optional(),
     magnet: magnetSchema.optional(),
     force: forceSchema.optional(),
+    energy: energySchema.optional(),
   })
   .strict();
 export type SimData = z.output<typeof simSchema>;
@@ -783,12 +937,24 @@ export function quantityKind(sim: SimData, from: string): SimOutput['kind'] | nu
       const q = forceQuantity(from);
       return q && sim.force?.[q.model] ? q.kind : null;
     }
+    case 'energy': {
+      const q = energyQuantity(from);
+      if (!q || !sim.energy) return null;
+      if (q.model === 'chain') {
+        const node = from.startsWith('in:') || from.startsWith('out:') ? from.split(':')[1]! : null;
+        if (node !== null && !energyNodes(sim.energy).has(node)) return null;
+        if (from.startsWith('out:') && !(ENERGY_FORMS as readonly string[]).includes(from.split(':')[2]!)) return null;
+        return q.kind;
+      }
+      return sim.energy[q.model] ? q.kind : null;
+    }
   }
 }
 
 /** The channels of a timeline quantity of this sim's model (null: not a timeline it knows). */
 export function simTimelineChannels(sim: SimData, from: string): string[] | null {
   if (sim.kind === 'force' && sim.force) return forceTimelineChannels(sim.force, from);
+  if (sim.kind === 'energy' && sim.energy) return energyTimelineChannels(from);
   return null;
 }
 
@@ -837,16 +1003,21 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
     const from = o.from ?? o.id;
     const kind = quantityKind(sim, from);
     if (kind === null) {
-      const q = sim.kind === 'force' ? forceQuantity(from) : null;
-      issue(['outputs', i, 'from'], q ? `"${from}" needs the force model's \`${q.model}\` data` : `the ${sim.kind} model has no quantity "${from}"`);
+      const q = sim.kind === 'force' ? forceQuantity(from) : sim.kind === 'energy' ? energyQuantity(from) : null;
+      issue(
+        ['outputs', i, 'from'],
+        q && q.model !== 'chain' ? `"${from}" needs the ${sim.kind} model's \`${q.model}\` data` : `the ${sim.kind} model has no quantity "${from}"`,
+      );
     } else if (kind !== o.kind) issue(['outputs', i, 'kind'], `"${from}" is a ${kind}, not a ${o.kind}`);
-    const states = sim.kind === 'force' ? FORCE_STATES[from] : undefined;
+    const states = sim.kind === 'force' ? FORCE_STATES[from] : sim.kind === 'energy' && from === 'chain-state' && sim.energy ? Object.keys(sim.energy.chains) : undefined;
     if (states && o.kind === 'state') for (const st of states) if (!o.states?.[st]) issue(['outputs', i, 'states'], `"${from}" can be "${st}": give it a label`);
   });
   if (sim.kind === 'circuit' && !sim.circuit) issue(['circuit'], 'a circuit sim needs `circuit`');
   if (sim.kind === 'magnet' && !sim.magnet) issue(['magnet'], 'a magnet sim needs `magnet`');
   if (sim.kind === 'force' && !sim.force) issue(['force'], 'a force sim needs `force`');
+  if (sim.kind === 'energy' && !sim.energy) issue(['energy'], 'an energy sim needs `energy`');
   if (sim.force) forceIssues(sim.force, controls, ctx).forEach((x) => issue(['force', ...x.path], x.message));
+  if (sim.energy) energyIssues(sim, sim.energy, controls, ctx).forEach((x) => issue(['energy', ...x.path], x.message));
   if (sim.circuit) circuitIssues(sim.circuit, controls, ctx).forEach((x) => issue(['circuit', ...x.path], x.message));
   if (sim.magnet) magnetIssues(sim, sim.magnet, controls, ctx).forEach((x) => issue(['magnet', ...x.path], x.message));
   const fieldStates = (o: SimOutput | undefined) => o?.kind === 'state' && (o.from ?? o.id) === 'field-state' && sim.kind === 'magnet';
@@ -1000,6 +1171,20 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
       });
       return;
     }
+    if (o.kind === 'energy-bars') {
+      const at = ['overlays', i];
+      if (!ctx.parts.has(o.near)) issue([...at, 'near'], `unknown part "${o.near}"`);
+      const v = outputs.get(o.timeline);
+      if (!v) issue([...at, 'timeline'], `unknown output "${o.timeline}"`);
+      else if (v.kind !== 'timeline') issue([...at, 'timeline'], `"${o.timeline}" is a ${v.kind}, not a timeline`);
+      else {
+        const channels = simTimelineChannels(sim, v.from ?? v.id);
+        if (channels) for (const ch of Object.values(o.bars)) if (!channels.includes(ch)) issue([...at, 'bars'], `"${o.timeline}" has no channel "${ch}" (${channels.join(', ')})`);
+      }
+      if (Math.abs(o.lostSplit.heat + o.lostSplit.sound - 1) > 1e-9) issue([...at, 'lostSplit'], 'heat + sound must be 1 (they split the lost energy)');
+      whenIssues(at, o.when);
+      return;
+    }
     const [a, b] = o.between;
     for (const id of o.between) if (!ctx.parts.has(id)) issue(['overlays', i, 'between'], `unknown part "${id}"`);
     if (a === b) issue(['overlays', i, 'between'], 'two different parts');
@@ -1008,6 +1193,173 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
     else if (v.kind !== 'number') issue(['overlays', i, 'output'], `"${o.output}" is a ${v.kind}, not a number`);
     whenIssues(['overlays', i], o.when);
   });
+  return out;
+}
+
+/** Every combination of these controls' values (at most `cap`; the rest at `base`). */
+function combinations(controls: readonly SimControl[], base: SimValues, cap = 512): SimValues[] {
+  let out: SimValues[] = [{ ...base }];
+  for (const c of controls) {
+    const vals: SimValue[] = c.kind === 'toggle' ? [false, true] : c.kind === 'step' ? c.values : c.options.map((o) => o.id);
+    if (out.length * vals.length > cap) break;
+    out = out.flatMap((v) => vals.map((x) => ({ ...v, [c.id]: x })));
+  }
+  return out;
+}
+
+/**
+ * The energy model's own data: the controls each sub-model reads and their
+ * tables, the chains (nodes, links, shares, paths, conditions, readings), and
+ * that every node gives out what it takes in for every combination of the
+ * controls the chain reads.
+ */
+function energyIssues(sim: SimData, e: EnergyData, controls: ReadonlyMap<string, SimControl>, ctx: SimContext): { path: (string | number)[]; message: string }[] {
+  const out: { path: (string | number)[]; message: string }[] = [];
+  const issue = (path: (string | number)[], message: string) => out.push({ path, message });
+  const control = (path: (string | number)[], id: string, kinds: readonly SimControl['kind'][]) => {
+    const c = controls.get(id);
+    if (!c) issue(path, `unknown control "${id}"`);
+    else if (!kinds.includes(c.kind)) issue(path, `"${id}" is a ${c.kind} control, not a ${kinds.join(' or ')}`);
+    return c;
+  };
+  const options = (c: SimControl | undefined) => (c?.kind === 'choice' ? c.options.map((o) => o.id) : []);
+  const covers = (path: (string | number)[], c: SimControl | undefined, table: Readonly<Record<string, unknown>>, what: string) => {
+    if (c?.kind !== 'choice') return;
+    for (const o of options(c)) if (!(o in table)) issue(path, `option "${o}" of "${c.id}" has no ${what}`);
+    for (const k of Object.keys(table)) if (!options(c).includes(k)) issue(path, `"${k}" is not an option of "${c.id}"`);
+  };
+  const chainControl = control(['chain'], e.chain, ['choice']);
+  covers(['chains'], chainControl, e.chains, 'chain');
+  const chainIds = new Set(Object.keys(e.chains));
+  const inChains = (path: (string | number)[], list: readonly string[] | undefined) => {
+    for (const id of list ?? []) if (!chainIds.has(id)) issue(path, `unknown chain "${id}"`);
+  };
+  if (e.solar) {
+    const sky = control(['solar', 'sky'], e.solar.sky, ['choice']);
+    covers(['solar', 'irradiance'], sky, e.solar.irradiance, 'irradiance');
+    covers(['solar', 'glow'], sky, e.solar.glow, 'glow');
+    inChains(['solar', 'chains'], e.solar.chains);
+  }
+  if (e.bounce) {
+    const drop = control(['bounce', 'drop'], e.bounce.drop, ['step']);
+    if (drop?.kind === 'step' && drop.values.some((v) => v <= 0)) issue(['bounce', 'drop'], 'drop heights are in cm, above 0');
+    covers(['bounce', 'ratio'], control(['bounce', 'surface'], e.bounce.surface, ['choice']), e.bounce.ratio, 'rebound ratio');
+    inChains(['bounce', 'chains'], e.bounce.chains);
+  }
+  if (e.windup) {
+    const w = e.windup;
+    const winds = control(['windup', 'winds'], w.winds, ['step']);
+    if (winds?.kind === 'step') {
+      if (winds.values.some((v) => v < 0 || !Number.isInteger(v))) issue(['windup', 'winds'], 'winds are whole turns, 0 or more');
+      // The spring keeps giving out energy while the toy slows: potential falls all the way (docs/31 audit SIM-E-bars).
+      const shortest = Math.min(...winds.values.filter((v) => v > 0)) * w.secondsPerTurn;
+      if (Number.isFinite(shortest)) {
+        const tau = Math.min(w.spinUp, shortest / 2);
+        if (w.kinetic > (50 * (shortest - tau)) / shortest)
+          issue(['windup', 'kinetic'], `at most ${Math.floor((50 * (shortest - tau)) / shortest)} % for the shortest run (${shortest} s): the stored energy must keep falling`);
+      }
+    }
+    inChains(['windup', 'chains'], w.chains);
+  }
+  if (e.dynamo) {
+    const d = e.dynamo;
+    const speed = control(['dynamo', 'speed'], d.speed, ['step']);
+    if (speed?.kind === 'step' && speed.values.some((v) => v < 0)) issue(['dynamo', 'speed'], 'speeds are in km/h, 0 or more');
+    if (d.on !== undefined) control(['dynamo', 'on'], d.on, ['toggle']);
+    // The lamp levels off at its rating, never above it (docs/31 audit SIM-G-limit): imax² R ≤ rated.
+    if (d.imax * d.imax * d.lampOhms > d.rated * 1.0001)
+      issue(['dynamo', 'imax'], `the lamp would level off at ${(d.imax * d.imax * d.lampOhms).toFixed(2)} W, above its ${d.rated} W rating: imax ≤ ${Math.sqrt(d.rated / d.lampOhms).toFixed(3)} A`);
+    inChains(['dynamo', 'chains'], d.chains);
+  }
+  for (const name of Object.keys(COMPUTED_TABLES))
+    if (name in e.shares && e[name as keyof typeof COMPUTED_TABLES]) issue(['shares', name], `"${name}" is worked out by the model (its \`${name}\` data): use another table name`);
+  for (const [table, row] of Object.entries(e.shares)) {
+    const sum = Object.values(row).reduce((a, b) => a + b, 0);
+    if (Math.abs(sum - 100) > 1e-6) issue(['shares', table], `the shares of "${table}" add up to ${sum}, not 100 (a node gives out all it takes in)`);
+  }
+  const tableKeys = (name: string): readonly string[] | undefined =>
+    e.shares[name] ? Object.keys(e.shares[name]!) : name in COMPUTED_TABLES && e[name as keyof typeof COMPUTED_TABLES] ? COMPUTED_TABLES[name as keyof typeof COMPUTED_TABLES] : undefined;
+  const condControl = (path: (string | number)[], c: { control: string; is: SimCondition }) => {
+    const ctl = controls.get(c.control);
+    if (!ctl) issue([...path, 'control'], `unknown control "${c.control}"`);
+    else if (c.is !== true && ('eq' in c.is || 'ne' in c.is)) {
+      const v = 'eq' in c.is ? c.is.eq : c.is.ne;
+      if (!legalValue(ctl, v)) issue([...path, 'is'], `${JSON.stringify(v)} is not a value of "${c.control}"`);
+    }
+  };
+  for (const [cid, chain] of Object.entries(e.chains)) {
+    const at = ['chains', cid];
+    const nodes = new Map(chain.nodes.map((n) => [n.id, n]));
+    chain.nodes.forEach((n, k) => {
+      if (chain.nodes.findIndex((x) => x.id === n.id) !== k) issue([...at, 'nodes', k, 'id'], `duplicate node "${n.id}"`);
+      if (n.part === undefined && n.label === undefined) issue([...at, 'nodes', k], 'give the node a `part` or a `label`');
+      if (n.part !== undefined && !ctx.parts.has(n.part)) issue([...at, 'nodes', k, 'part'], `unknown part "${n.part}"`);
+      if (n.sink && chain.links.some((l) => l.from === n.id)) issue([...at, 'nodes', k, 'sink'], `"${n.id}" is a sink: nothing leaves it`);
+    });
+    chain.links.forEach((l, k) => {
+      const lat = [...at, 'links', k];
+      if (chain.links.findIndex((x) => x.id === l.id) !== k) issue([...lat, 'id'], `duplicate link "${l.id}"`);
+      for (const end of ['from', 'to'] as const) if (!nodes.has(l[end])) issue([...lat, end], `unknown node "${l[end]}"`);
+      if (l.from === l.to) issue([...lat, 'to'], 'a link joins two different nodes');
+      if (l.share !== 'in') {
+        const [table, key] = l.share.split('.') as [string, string];
+        const keys = tableKeys(table);
+        if (!keys) issue([...lat, 'share'], `unknown share table "${table}"`);
+        else if (!keys.includes(key)) issue([...lat, 'share'], `"${table}" has no share "${key}" (${keys.join(', ')})`);
+      }
+      if (l.form === 'potential' && (l.paths ?? []).length > 0) issue([...lat, 'paths'], 'potential energy is stored, not a stream: no flow paths');
+      for (const ref of l.paths ?? []) {
+        const [flowId, pathId] = ref.split(':') as [string, string];
+        const flow = ctx.flows.get(flowId);
+        if (!flow) issue([...lat, 'paths'], `unknown flow "${flowId}"`);
+        else if (!flow.paths?.some((p) => p.id === pathId)) issue([...lat, 'paths'], `flow "${flowId}" has no path "${pathId}"`);
+      }
+      if (l.when) condControl([...lat, 'when'], l.when);
+    });
+    (chain.when ?? []).forEach((c, k) => condControl([...at, 'when', k], c));
+    const order = chainOrder(chain);
+    if (!order) issue([...at, 'links'], 'the links go round in a loop: energy moves on from node to node');
+    if (chain.start !== undefined && typeof chain.start !== 'number')
+      covers([...at, 'start', 'values'], control([...at, 'start', 'control'], chain.start.control, ['choice']), chain.start.values, 'start value');
+    if (chain.reading) {
+      for (const id of [chain.reading.node, ...(chain.reading.through ?? [])]) if (!nodes.has(id)) issue([...at, 'reading'], `unknown node "${id}"`);
+    }
+    for (const id of chain.mix?.chains ?? []) if (!chainIds.has(id)) issue([...at, 'mix', 'chains'], `unknown chain "${id}"`);
+    else if (id === cid) issue([...at, 'mix', 'chains'], 'a chain does not mix itself');
+    if (!order || out.length > 0) continue;
+    // In = out at every node, for every combination of the controls this chain (and its tables) read.
+    const read = new Set<string>();
+    for (const l of chain.links) if (l.when) read.add(l.when.control);
+    for (const c of chain.when ?? []) read.add(c.control);
+    if (chain.start !== undefined && typeof chain.start !== 'number') read.add(chain.start.control);
+    if (chain.links.some((l) => l.share.startsWith('bounce.')) && e.bounce) read.add(e.bounce.surface);
+    const reads = [...read].map((id) => controls.get(id)).filter((c): c is SimControl => c !== undefined);
+    const base = Object.fromEntries(sim.controls.map((c) => [c.id, c.default])) as SimValues;
+    base[e.chain] = cid;
+    let leaks = false;
+    for (const values of combinations(reads, base)) {
+      if (leaks) break;
+      const f = chainFlow(cid, chain, values, shareTables(e, values));
+      const into = new Map<string, number>();
+      const outOf = new Map<string, number>();
+      for (const l of chain.links) {
+        into.set(l.to, (into.get(l.to) ?? 0) + (f.exact[l.id] ?? 0));
+        outOf.set(l.from, (outOf.get(l.from) ?? 0) + (f.exact[l.id] ?? 0));
+      }
+      const firsts = new Set(chain.nodes.filter((n) => !chain.links.some((l) => l.to === n.id)).map((n) => n.id));
+      for (const n of chain.nodes) {
+        if (!chain.links.some((l) => l.from === n.id)) continue;
+        const inn = firsts.has(n.id) ? f.start : (into.get(n.id) ?? 0);
+        const o = outOf.get(n.id) ?? 0;
+        if (Math.abs(inn - o) > 1e-6 * Math.max(1, inn)) {
+          const when = reads.map((c) => `${c.id} = ${String(values[c.id])}`).join(', ');
+          issue([...at, 'nodes', n.id], `"${n.id}" takes in ${+inn.toFixed(4)} % and gives out ${+o.toFixed(4)} %${when ? ` (${when})` : ''}: energy is not made or lost at a node`);
+          leaks = true;
+          break;
+        }
+      }
+    }
+  }
   return out;
 }
 

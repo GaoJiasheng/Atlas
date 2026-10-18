@@ -13,7 +13,7 @@
  *   pnpm shoot sample-space --perf --json out.json   # renderer numbers per shot
  *   pnpm shoot fractions --tasks                     # MathScene: every check-pool task (start, a planned wrong answer, solved) and every practice question + the summary
  *
- * `--beats` shoots a looping exercise beat (SpaceScene exercise mode) again held at its start and end keys
+ * `--beats` checks that the energy bars on show add up to 100 % (SpaceScene `energy-bars`), and shoots a looping exercise beat (SpaceScene exercise mode) again held at its start and end keys
  * (`beat-<chapter>-<n>-start.png` / `-end.png`), and lists the ids each chapter's own state asks to label (TimeScene `highlight`, SpaceScene `labels`) that have no label on screen at the chapter camera (listed, not failed).
  * `--locale` and `--theme` take a value, a comma list, or `all` (default: en, paper).
  * `--keys` / `--layout` / `--beats` / `--tasks` replace the shot run unless shot names or `--shots` are given.
@@ -386,6 +386,12 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
       missing = await unlabelled(s);
     }
     if (missing.length) report.beatNotes.push(`${name}: no label for ${missing.join(', ')}`);
+    // Energy bars on show (SpaceScene, docs/31 E-EN6) must add up to 100 %: energy is neither made nor lost.
+    const bars = await s.page.evaluate(
+      () => (window.__atlas!.engine as unknown as { energyBars?(): Record<string, { potential: number; kinetic: number; lost: number; shown: boolean }> }).energyBars?.() ?? {},
+    );
+    for (const [id, v] of Object.entries(bars))
+      if (v.shown && Math.abs(v.potential + v.kinetic + v.lost - 100) > 0.5) report.beatFailures.push(`${name}: energy bars of ${id} add up to ${v.potential + v.kinetic + v.lost}`);
     await s.page.screenshot({ path: join(out, `${name}${o.suffix}.png`) });
     console.log(`  ${name.padEnd(36)} ${landed ? 'OK' : 'FAIL'}${missing.length ? `  (no label: ${missing.join(', ')})` : ''}`);
     // A looping exercise beat (SpaceScene exercise mode) also gets a still at its start and end keys.

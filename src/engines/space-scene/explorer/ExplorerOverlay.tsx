@@ -5,10 +5,11 @@
  * glossary list (topics with data/glossary.json) and Hide HUD as tools, the
  * explode slider while EXPLODED (nothing else sits at the bottom but the
  * chapter axis), and a colour key of the groups and flows, and of the kinds
- * of force the try-it arrows draw in the scene on show (docs/30 F3).
+ * of force the try-it arrows draw in the scene on show (docs/30 F3), and of
+ * stored potential energy in an energy topic (docs/31 E-EN2).
  */
 import { useScene, useSceneContext, useSceneStore, useT } from '../../core/context';
-import { tx, type BilingualText } from '../../../i18n';
+import { t as tl, tx, type BilingualText } from '../../../i18n';
 import { resolveColorRef } from '../../../theme/theme';
 import { ControlPanel, type ControlRow } from '../../widgets/ControlPanel';
 import type { LegendItem } from '../../widgets/Legend';
@@ -80,6 +81,8 @@ export function ExplorerOverlay({ file, glossary = false }: { file: PartsFile; g
     for (const k of forcesOnShow(sim.sim, sim.values, sim.outputs, shown, (g) => scene.layers.includes(g)))
       add({ id: `force-${k}`, label: FORCE_NAMES[k], color: FORCE_COLORS[k], kind: 'arrow' });
   }
+  // Potential energy is stored, never a stream: the energy model keys its colour (bars, the energy-chain card).
+  if (file.sim?.energy) add({ id: 'energy-potential', label: { en: tl('en', 'space.energy.key'), zh: tl('zh', 'space.energy.key') }, color: 'token:en-potential', kind: 'fill' });
   return (
     <div className="atlas-overlay-card space-overlay">
       <ControlPanel layers={layers} tools={glossary ? TOOLS_GLOSSARY : TOOLS} legend={legend} />

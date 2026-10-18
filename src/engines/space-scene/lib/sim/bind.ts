@@ -6,7 +6,8 @@
  * damped bounce) or turn (with a damped swing, about a pivot), a coil's
  * stretch, the timeline channels a part plays (moves and turns), the field
  * state a filings part lays out, an animation's speed or on / off, and per
- * flow its visibility, per-path intensity, colour and field state.
+ * flow its visibility, per-path intensity (speed or particle density),
+ * colour and field state.
  */
 import type { SimBind, SimCondition, SimData, SimSettle, SimValue, SimValues, STRETCH_ANCHORS } from '../../sim-schema';
 import type { SimOutputs, SimOutputValue } from './index';
@@ -24,8 +25,14 @@ export interface SimGlow {
 export interface SimFlowEffect {
   /** `false`: a binding stops the flow. */
   visible: boolean;
-  /** Per path id: signed speed factor (−1…1 for |value| ≤ full, clamped at ±2); 0 = no particles on it. */
+  /**
+   * Per path id: `speed` mode — signed speed factor (−1…1 for |value| ≤
+   * full, clamped at ±2); `density` mode — the share of the path's particles
+   * on show (0–1; negative runs against the path). 0 = no particles on it.
+   */
   paths: Record<string, number> | null;
+  /** How `paths` reads (the intensity binding's `mode`). */
+  mode: 'speed' | 'density';
   /** Particle colour ref while a state asks for one, else null (the flow's own). */
   color: string | null;
   /** The field state whose lines the flow runs along (a `state` binding), else null. */
@@ -215,14 +222,17 @@ export function simEffects(sim: SimData, values: SimValues, outputs: SimOutputs)
         if (b.state && typeof v === 'string') out.states.set(id, v);
       }
     } else if ('flow' in b) {
-      const f = out.flows.get(b.flow) ?? { visible: true, paths: null, color: null, state: null };
+      const f: SimFlowEffect = out.flows.get(b.flow) ?? { visible: true, paths: null, mode: 'speed', color: null, state: null };
       if (b.state && typeof v === 'string') f.state = v;
       if (b.visible !== undefined && !holds(b.visible, v, first)) f.visible = false;
       if (b.intensity && v !== undefined && typeof v === 'object' && !isTimeline(v)) {
-        const full = b.intensity.full;
-        f.paths = Object.fromEntries(
-          Object.entries(v).map(([id, x]) => [id, Math.abs(x) < full * FLOW_FLOOR ? 0 : Math.max(-2, Math.min(2, x / full))]),
-        );
+        const { full, mode } = b.intensity;
+        const cap = mode === 'density' ? 1 : 2;
+        // A vector keyed `<flow>:<path>` (the energy model's `paths`) gives this flow the entries that start with its id.
+        const prefix = `${b.flow}:`;
+        const own = Object.entries(v).flatMap(([id, x]): [string, number][] => (id.startsWith(prefix) ? [[id.slice(prefix.length), x]] : id.includes(':') ? [] : [[id, x]]));
+        f.paths = Object.fromEntries(own.map(([id, x]) => [id, Math.abs(x) < full * FLOW_FLOOR ? 0 : Math.max(-cap, Math.min(cap, x / full))]));
+        f.mode = mode;
       }
       if (b.stops && typeof v === 'string' && b.stops[v] !== undefined) f.color = b.stops[v]!;
       out.flows.set(b.flow, f);

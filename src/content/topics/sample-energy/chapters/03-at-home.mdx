@@ -1,0 +1,40 @@
+---
+id: at-home
+order: 3
+title: { en: "Sample home", zh: "示例家里" }
+state:
+  view: assembled
+  explode: 0
+  run: true
+  part: null
+  layers: [rooftop, home, void-deck, light, electrical, kinetic, sound, heat]
+  camera: {"position": [1.3, 1.7, 1.9], "target": [1.25, 1.05, -0.6], "fov": 34}
+  labels: [distribution-board, fan-blades, led-lamp, speaker, kettle]
+  summary: { en: "Sample home: each appliance changes electrical energy into other forms.", zh: "示例家里：每件电器把电能转换成别的形式。" }
+  sim:
+    set: { chain: home, appliance: fan }
+    try:
+      vary: appliance
+      keep: [{ en: "Same electrical energy in", zh: "进去的电能一样" }]
+      observe: [useful, heat, sound]
+      record: { chart: { y: [useful, heat] } }
+  beats:
+    - caption: { en: "Sample beat one: the fan turns most of it into kinetic energy.", zh: "示例节拍一：风扇把大部分变成动能。" }
+    - sim: { set: { appliance: speaker } }
+      labels: [speaker]
+      caption: { en: "Sample beat two: the speaker turns very little into sound.", zh: "示例节拍二：音箱只把很少一部分变成声能。" }
+  index:
+    parts: [grid-cable, distribution-board, fan-blades, led-lamp, speaker, kettle]
+---
+
+<Lang en>
+
+Sample home: placeholder text for this chain of the energy model.
+
+</Lang>
+
+<Lang zh>
+
+示例家里：能量模型这一条链的占位文字。
+
+</Lang>

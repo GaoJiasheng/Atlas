@@ -1,0 +1,48 @@
+---
+id: never-used-up
+order: 4
+title: { en: "Sample never used up", zh: "示例能量不会用完" }
+state:
+  view: assembled
+  explode: 0
+  run: true
+  part: null
+  layers: [rooftop, home, void-deck, light, electrical, kinetic, sound, heat]
+  camera: {"position": [1.3, 1.7, 1.9], "target": [1.25, 1.05, -0.6], "fov": 34}
+  labels: [grid-cable, led-lamp, distribution-board]
+  summary: { en: "Sample never used up: in the end almost all of it is heat.", zh: "示例能量不会用完：最后几乎全部变成热。" }
+  sim:
+    set: { chain: gas-to-home, lamp-type: led }
+    try:
+      vary: lamp-type
+      keep: [{ en: "Same light", zh: "一样亮" }]
+      observe: [same-light, useful]
+      predict:
+        prompt: { en: "Sample prediction: swap the filament lamp for an LED. How much gas for the same light?", zh: "示例猜想：把白炽灯换成 LED，同样亮要多少天然气？" }
+        start: { lamp-type: filament }
+        change: { lamp-type: led }
+        observe: same-light
+        options:
+          - { id: less, label: { en: "Less", zh: "更少" }, means: less }
+          - { id: same, label: { en: "The same", zh: "一样" }, means: same }
+          - { id: more, label: { en: "More", zh: "更多" }, means: more }
+  beats:
+    - caption: { en: "Sample beat one: from natural gas to the light of a lamp.", zh: "示例节拍一：从天然气到灯光。" }
+    - layers: [rooftop, home, void-deck, heat]
+      sim: { set: { chain: whole } }
+      caption: { en: "Sample beat two: only the heat, coming off every machine.", zh: "示例节拍二：只看热，每台机器都在散热。" }
+  index:
+    parts: [grid-cable, distribution-board, led-lamp]
+---
+
+<Lang en>
+
+Sample never used up: placeholder text for this chain of the energy model.
+
+</Lang>
+
+<Lang zh>
+
+示例能量不会用完：能量模型这一条链的占位文字。
+
+</Lang>

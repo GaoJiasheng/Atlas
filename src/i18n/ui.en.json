@@ -873,5 +873,20 @@
   "space.card.circuit": "Circuit diagram",
   "space.circuit.label": "Circuit diagram of the model. Tap a switch to flip it, any other symbol to select its part.",
   "space.circuit.flip": "Flip {name}: now {state}",
-  "space.circuit.select": "Select {name}"
+  "space.circuit.select": "Select {name}",
+  "space.card.energy": "Energy chain",
+  "space.try.energy": "Energy chain",
+  "space.energy.label": "Energy chain in this model: {text}",
+  "space.energy.none": "No energy is changing form here now.",
+  "space.energy.select": "Select {name}",
+  "space.energy.potential": "Potential",
+  "space.energy.kinetic": "Kinetic",
+  "space.energy.lost": "Heat + sound",
+  "space.energy.key": "Potential energy (stored)",
+  "space.energy.form.light": "light energy",
+  "space.energy.form.electrical": "electrical energy",
+  "space.energy.form.kinetic": "kinetic energy",
+  "space.energy.form.sound": "sound energy",
+  "space.energy.form.heat": "heat energy",
+  "space.energy.form.potential": "potential energy"
 }

@@ -1,0 +1,41 @@
+---
+id: sunlight
+order: 2
+title: { en: "Sample sunlight", zh: "示例阳光" }
+state:
+  view: assembled
+  explode: 0
+  run: true
+  part: null
+  layers: [rooftop, home, void-deck, light, electrical, kinetic, sound, heat]
+  camera: {"position": [-0.9, 3.7, 3.9], "target": [-1.7, 2.0, -0.5], "fov": 34}
+  labels: [sun, solar-panels, inverter, lift-motor]
+  summary: { en: "Sample sunlight: the panels change light into electrical energy.", zh: "示例阳光：太阳能板把光能转换成电能。" }
+  sim:
+    set: { chain: solar, sky: clear }
+    try:
+      vary: sky
+      also: [lift-at]
+      keep: [{ en: "Same panels", zh: "同样的太阳能板" }]
+      observe: [panel-power, useful]
+      record: { chart: { y: panel-power } }
+  beats:
+    - caption: { en: "Sample beat one: light in, electrical energy and heat out.", zh: "示例节拍一：光能进去，电能和热能出来。" }
+    - sim: { set: { lift-at: top } }
+      labels: [lift-motor, lift-car]
+      caption: { en: "Sample beat two: the lift car goes up and stores the energy.", zh: "示例节拍二：电梯轿厢升上去，把能量储存起来。" }
+  index:
+    parts: [sun, solar-panels, inverter, lift-motor, lift-car]
+---
+
+<Lang en>
+
+Sample sunlight: placeholder text for this chain of the energy model.
+
+</Lang>
+
+<Lang zh>
+
+示例阳光：能量模型这一条链的占位文字。
+
+</Lang>

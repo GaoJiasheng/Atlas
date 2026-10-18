@@ -6,7 +6,9 @@
  * happen in the vertex shader (flowMaterial.ts); this component keeps each
  * path's phase. A try-it binding (lib/sim/bind.ts) can stop a flow, run each
  * path at its own speed and direction (a circuit's current per edge; a path
- * with no current fades out) and recolour it while a state holds (a short
+ * with no current fades out) or show a share of its particles at the flow's
+ * own speed (`density`: an energy share, eased over ~0.3 s), and recolour it
+ * while a state holds (a short
  * circuit runs hot). A flow with `clip: false` ignores the cutaway plane.
  * A field-line flow (a `state` binding, lib/sim/field.ts) runs along the
  * lines of the magnet field state on show, drawn under the particles as
@@ -36,7 +38,15 @@ function mulberry32(seed: number): () => number {
   };
 }
 
-/** `spread`: a ball radius, or box half-extents on the scene axes; `perPath`: particles on each path. */
+/** Base-2 radical inverse (van der Corput): ranks that spread any first share of a path's particles evenly along it. */
+function radicalInverse(n: number): number {
+  let x = 0;
+  let f = 0.5;
+  for (let k = n; k > 0; k >>= 1, f /= 2) if (k & 1) x += f;
+  return x;
+}
+
+/** `spread`: a ball radius, or box half-extents on the scene axes; `perPath`: particles on each path; `aRank`: the order a density binding shows them in. */
 function particleGeometry(perPath: readonly number[], seed: number, spread: Flow['spread']): BufferGeometry {
   const rand = mulberry32(seed);
   const count = perPath.reduce((a, b) => a + b, 0);
@@ -44,6 +54,7 @@ function particleGeometry(perPath: readonly number[], seed: number, spread: Flow
   const offset = new Float32Array(count);
   const seeds = new Float32Array(count);
   const path = new Float32Array(count);
+  const rank = new Float32Array(count);
   let i = 0;
   perPath.forEach((n, k) => {
     for (let j = 0; j < n; j++, i++) {
@@ -60,6 +71,7 @@ function particleGeometry(perPath: readonly number[], seed: number, spread: Flow
       offset[i] = (j + rand() * 0.8) / n;
       seeds[i] = rand();
       path[i] = k;
+      rank[i] = radicalInverse(j);
     }
   });
   const g = new BufferGeometry();
@@ -67,6 +79,7 @@ function particleGeometry(perPath: readonly number[], seed: number, spread: Flow
   g.setAttribute('aOffset', new BufferAttribute(offset, 1));
   g.setAttribute('aSeed', new BufferAttribute(seeds, 1));
   g.setAttribute('aPath', new BufferAttribute(path, 1));
+  g.setAttribute('aRank', new BufferAttribute(rank, 1));
   return g;
 }
 
@@ -150,9 +163,9 @@ function FlowPaths({
   const material = useMemo(() => createFlowMaterial(baked, flow.ends === 'open'), [baked, flow.ends]);
   const geometry = useMemo(() => particleGeometry(perPath, 1013 + index * 7919, flow.spread), [index, perPath, flow.spread]);
   /** Each path's phase (fraction travelled) and fade, kept across speed changes. */
-  const state = useRef(paths.map(() => ({ phase: 0, alpha: 1 })));
+  const state = useRef(paths.map(() => ({ phase: 0, alpha: 1, share: 1 })));
   useEffect(() => {
-    state.current = paths.map(() => ({ phase: 0, alpha: 1 }));
+    state.current = paths.map(() => ({ phase: 0, alpha: 1, share: 1 }));
     // A new set of field lines fades in.
     if (lines) fade.current = 0;
   }, [paths, lines]);
@@ -186,6 +199,7 @@ function FlowPaths({
 
   const visible = effect?.visible ?? true;
   const speeds = effect?.paths ?? null;
+  const density = effect?.mode === 'density';
   useFrame((st, delta) => {
     const dt = Math.min(delta, MAX_DT);
     const strength = layerOn && visible ? (flow.whenRun ? runtime.energy : 1) : 0;
@@ -201,18 +215,30 @@ function FlowPaths({
       const len = Math.max(baked[k]!.length, 1e-4);
       if (speeds) {
         // Bound: integrate this path's own speed (no jump when it changes); a path without current fades out.
-        const factor = speeds[p.id] ?? 0;
+        const value = speeds[p.id] ?? 0;
+        // Density: the flow's own speed (its sign: the way along the path), the value is the share of particles on show.
+        const factor = density ? Math.sign(value) : value;
         s.phase += (dt * (flow.whenRun ? runtime.energy : 1) * flow.speed * factor) / len;
-        const target = factor === 0 ? 0 : 1;
+        const target = value === 0 ? 0 : 1;
         s.alpha = damp(s.alpha, target, PATH_FADE, dt);
         if (Math.abs(s.alpha - target) < 0.003) s.alpha = target;
         else easing = true;
+        if (!density) s.share = 1;
+        else if (value !== 0) {
+          // A path fading out keeps its share: its particles fade together rather than drop out one by one.
+          const share = Math.min(1, Math.abs(value));
+          s.share = damp(s.share, share, PATH_FADE, dt);
+          if (Math.abs(s.share - share) < 0.002) s.share = share;
+          else easing = true;
+        }
       } else {
         s.phase = (clock * flow.speed) / len;
         s.alpha = 1;
+        s.share = 1;
       }
       u.uPhase.value[k] = s.phase - Math.floor(s.phase);
       u.uAlpha.value[k] = s.alpha;
+      u.uShare.value[k] = s.share;
     });
     const cam = st.camera as unknown as PerspectiveCamera;
     const fov = ((cam.fov ?? 40) * Math.PI) / 180;

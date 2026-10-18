@@ -71,6 +71,8 @@ import { partNumber } from './hud/common';
 import { LeaderLabels } from './hud/LeaderLabels';
 import { SitesOverlay } from './hud/SitesOverlay';
 import { CircuitCard } from './hud/CircuitCard';
+import { EnergyCard } from './hud/EnergyCard';
+import { EnergyBarLabels } from './hud/EnergyBarLabels';
 import { GroupScaleBars } from './hud/GroupScaleBars';
 import { TryIt } from './explorer/TryIt';
 import { setSim } from './hud/sim';
@@ -548,7 +550,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       },
       specRows: spaceSpecRows(file),
       status,
-      card: file.sim?.circuit?.diagram ? both('space.card.circuit') : both('space.card.title'),
+      card: file.sim?.energy ? both('space.card.energy') : file.sim?.circuit?.diagram ? both('space.card.circuit') : both('space.card.title'),
       beats: beatControls,
       beatStep,
       ...(simCommands.length > 0 ? { commands: simCommands, commandsHint: t('space.try.title') } : {}),
@@ -587,6 +589,11 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
             replays: ui.getState().simReplay.n,
           };
         },
+        // Energy bars on the stage (docs/31 E-EN6): per timeline output, the three bars now (potential + kinetic + lost = 100) and whether they show.
+        energyBars: () =>
+          Object.fromEntries(
+            [...bridge.energyBars.values()].map((b) => [b.timeline, { potential: Math.round(b.potential * 1000) / 1000, kinetic: Math.round(b.kinetic * 1000) / 1000, lost: Math.round(b.lost * 1000) / 1000, shown: b.shown }]),
+          ),
         // QA: hold timeline output `id` at model time `t` (s); false if the stage has no such run.
         simSeek: (id: string, t: number) => {
           if (!bridge.playback.has(id) || !Number.isFinite(t)) return false;
@@ -718,8 +725,9 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         <LeaderLabels file={file} chapters={chapters} bridge={bridge} ui={ui} />
         <SitesOverlay file={file} bridge={bridge} />
         <GroupScaleBars file={file} bridge={bridge} />
+        <EnergyBarLabels file={file} bridge={bridge} />
       </SceneSlot>
-      <SceneSlot name="card">{file.sim?.circuit?.diagram ? <CircuitCard file={file} /> : <PartChainCard file={file} />}</SceneSlot>
+      <SceneSlot name="card">{file.sim?.energy ? <EnergyCard file={file} /> : file.sim?.circuit?.diagram ? <CircuitCard file={file} /> : <PartChainCard file={file} />}</SceneSlot>
       <SceneSlot name="plate">
         <PlateBlock file={file} ui={ui} bridge={bridge} />
       </SceneSlot>

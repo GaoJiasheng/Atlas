@@ -1,0 +1,17 @@
+# PLACEHOLDER topic: exercises the SpaceScene energy model (docs/31 §4, E-EN1–8) only: the energy chains and the
+# energy-chain card, the five energy flows drawn by share (density), the six forms-of-energy colours, the ball,
+# swing and wind-up toy runs with their energy bars, a start scaled by a control (same light), readings of the
+# machine on show, a background chapter with its reading note.
+id: sample-energy
+title: { en: "Sample: Energy block", zh: "示例：能量组屋" }
+subtitle: { en: "A placeholder topic for testing the energy model", zh: "用于测试能量模型的占位主题" }
+subject: science
+levels: [P6]
+moe: []
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: draft
+note: { en: "Placeholder topic · not a real block", zh: "占位主题 · 不是真实的组屋" }

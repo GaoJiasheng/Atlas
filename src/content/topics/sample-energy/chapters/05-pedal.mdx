@@ -1,0 +1,41 @@
+---
+id: pedal
+order: 5
+title: { en: "Sample pedal power", zh: "示例踩出电能" }
+state:
+  view: assembled
+  explode: 0
+  run: true
+  part: null
+  layers: [rooftop, home, void-deck, light, electrical, kinetic, sound, heat]
+  camera: {"position": [-1.5, 1.1, 3.0], "target": [-1.8, 0.55, 1.1], "fov": 32}
+  labels: [rear-wheel, bicycle-dynamo, headlamp]
+  summary: { en: "Sample pedal power: faster pedalling, a brighter lamp, up to its rating.", zh: "示例踩出电能：踩得越快灯越亮，直到额定功率。" }
+  sim:
+    set: { chain: dynamo, speed: 15 }
+    try:
+      vary: speed
+      also: [dynamo-on]
+      keep: [{ en: "Same lamp", zh: "同一盏灯" }]
+      observe: [lamp-power, brightness]
+      record: { chart: { y: lamp-power } }
+  beats:
+    - caption: { en: "Sample beat one: kinetic energy in, electrical energy out.", zh: "示例节拍一：动能进去，电能出来。" }
+    - sim: { set: { dynamo-on: false } }
+      labels: [bicycle-dynamo, headlamp]
+      caption: { en: "Sample beat two: away from the tyre, the lamp goes dark.", zh: "示例节拍二：发电机离开轮胎，车灯就灭了。" }
+  index:
+    parts: [rear-wheel, bicycle-dynamo, headlamp]
+---
+
+<Lang en>
+
+Sample pedal power: placeholder text for this chain of the energy model.
+
+</Lang>
+
+<Lang zh>
+
+示例踩出电能：能量模型这一条链的占位文字。
+
+</Lang>

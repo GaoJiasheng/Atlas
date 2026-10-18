@@ -8,7 +8,9 @@
  * Flows.tsx so a path can change speed or direction without jumping),
  * interpolates the samples, takes its colour from the flow's colour stops at
  * that fraction (linear RGB, up to MAX_STOPS), fades with the path's
- * `uAlpha[k]` and attenuates point size with distance. Open paths fade in /
+ * `uAlpha[k]`, shows only while its rank on the path (`aRank`, spread evenly
+ * over the path) is below the path's `uShare[k]` (density: an energy share;
+ * 1 otherwise) and attenuates point size with distance. Open paths fade in /
  * out at their ends unless the flow is `ends: open` (segments laid end to
  * end). Supports clipping planes (cutaway) like the part materials.
  */
@@ -26,6 +28,7 @@ uniform sampler2D uPath;
 uniform float uCount[MAX_PATHS];
 uniform float uPhase[MAX_PATHS];
 uniform float uAlpha[MAX_PATHS];
+uniform float uShare[MAX_PATHS];
 uniform float uClosed[MAX_PATHS];
 uniform float uOpen;
 uniform float uSize;
@@ -37,6 +40,7 @@ uniform float uStopCount;
 attribute float aOffset;
 attribute float aSeed;
 attribute float aPath;
+attribute float aRank;
 
 varying float vAlpha;
 varying vec3 vColor;
@@ -66,7 +70,9 @@ void main() {
   vec4 mvPosition = modelViewMatrix * vec4(p, 1.0);
   gl_Position = projectionMatrix * mvPosition;
   gl_PointSize = uSize * (0.7 + 0.6 * aSeed) * uScale / max(-mvPosition.z, 0.05);
-  vAlpha = (uClosed[k] > 0.5 || uOpen > 0.5 ? 1.0 : smoothstep(0.0, 0.05, u) * (1.0 - smoothstep(0.92, 1.0, u))) * uAlpha[k];
+  // Density (an energy share): only the particles ranked below the path's share are on show.
+  float shown = aRank < uShare[k] ? 1.0 : 0.0;
+  vAlpha = (uClosed[k] > 0.5 || uOpen > 0.5 ? 1.0 : smoothstep(0.0, 0.05, u) * (1.0 - smoothstep(0.92, 1.0, u))) * uAlpha[k] * shown;
   vColor = stopColor(u);
   #include <clipping_planes_vertex>
 }
@@ -100,6 +106,7 @@ export type FlowMaterial = ShaderMaterial & {
     uCount: { value: number[] };
     uPhase: { value: number[] };
     uAlpha: { value: number[] };
+    uShare: { value: number[] };
     uClosed: { value: number[] };
     uOpen: { value: number };
     uSize: { value: number };
@@ -140,6 +147,7 @@ export function createFlowMaterial(paths: readonly BakedFlow[], open: boolean): 
       uCount: { value: per((b) => b.count) },
       uPhase: { value: per(() => 0) },
       uAlpha: { value: per(() => 1) },
+      uShare: { value: per(() => 1) },
       uClosed: { value: per((b) => (b.closed ? 1 : 0)) },
       uOpen: { value: open ? 1 : 0 },
       uSize: { value: 0.06 },

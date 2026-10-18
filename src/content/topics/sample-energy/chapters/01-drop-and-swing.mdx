@@ -1,0 +1,43 @@
+---
+id: drop-and-swing
+order: 1
+title: { en: "Sample drop and swing", zh: "示例落球与秋千" }
+state:
+  view: assembled
+  explode: 0
+  run: true
+  part: null
+  layers: [rooftop, home, void-deck, light, electrical, kinetic, sound, heat]
+  camera: {"position": [2.55, 0.85, 2.3], "target": [2.75, 0.4, 0.45], "fov": 34}
+  labels: [tennis-ball, drop-pole, surface-tile]
+  summary: { en: "Sample drop: the ball never bounces back as high as it fell.", zh: "示例落球：球弹不回原来的高度。" }
+  sim:
+    set: { chain: bounce, drop: 100, surface: tile }
+    try:
+      vary: drop
+      also: [surface]
+      keep: [{ en: "Same ball", zh: "同一只球" }]
+      observe: [bounce-height, impact-speed, kept]
+      record: { chart: { y: bounce-height } }
+      replay: [bounce-run, swing-run]
+  beats:
+    - caption: { en: "Sample beat one: potential energy, kinetic energy, then heat and sound.", zh: "示例节拍一：势能、动能，然后是热和声。" }
+    - camera: swing
+      sim: { set: { chain: swing } }
+      labels: [swing-seat, swing-frame]
+      caption: { en: "Sample beat two: the swing goes a little lower every time.", zh: "示例节拍二：秋千一次比一次摆得低。" }
+  index:
+    parts: [tennis-ball, drop-pole, surface-tile, swing-seat, swing-frame]
+---
+
+<Lang en>
+
+Sample drop and swing: placeholder text for this chain of the energy model.
+
+</Lang>
+
+<Lang zh>
+
+示例落球与秋千：能量模型这一条链的占位文字。
+
+</Lang>

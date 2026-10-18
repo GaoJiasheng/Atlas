@@ -30,6 +30,7 @@
 | X-RAY | cyan `#3A9AA0` | 透视态 |
 | 剖切面 | ochre `#B8973C` + 45° 剖面线 | CUTAWAY 切口 |
 | 力的箭头（docs/30 F3） | 重力 slate `#295568`、摩擦力 umber `#744518`、弹簧的弹力 olive `#576A2F`、推力或拉力 plum `#8C5E86`（磁力沿用 `--pole-n`） | SpaceScene `force-vectors`，平涂不发光；token `--f-gravity / --f-friction / --f-elastic / --f-push`，cinema 提亮；四色与 `--pole-n`、`--signal` 在三种色觉缺陷模拟下两两 ΔE ≥ 9，纸底对比 ≥ 3:1；KEY 里色块旁总写名称 |
+| 能量形式（docs/31 E-EN3） | 光能 mustard `#A37808`、电能 blue `#2970C2`、动能 teal-green `#236E5A`、声能 purple `#634783`、热能 red-orange `#B44225`、势能 olive-brown `#7D6D43`（cinema 提亮：`#ECCD66` `#4D8DD7` `#58C4A3` `#BD9DDA` `#EC8A5C` `#8C6D3C`） | 能量流粒子、能量链卡的带、能量条；token `--en-*`；一种颜色 = 一种形式，全主题唯一；六色在正常视觉与三种色觉缺陷模拟下两两 ΔE*ab ≥ 10，对底色 ≥ 3:1（`energy-colors.test.ts`）；名称总与颜色一起出现 |
 
 **字体**：标题与 HUD `IBM Plex Sans Condensed`，数字 `IBM Plex Mono`，正文（信息面板里给孩子读的段落）保留衬线以示区分；中文回退 `PingFang SC / Noto Sans CJK SC`，不自托管中文字体。小号大写 + 宽字距（.08–.16em）只用于 HUD 标签，孩子读的正文不大写。**HUD 最小字号 10 px、状态行 / 键位提示 ≥ 10.5 px（1080p，k = 1）**，面向小学生的笔记本屏，不为"技术图版味"再往下压（token 见 docs/06「HUD 缩放与响应式」）。
 

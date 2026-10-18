@@ -873,5 +873,20 @@
   "space.card.circuit": "电路图",
   "space.circuit.label": "模型的电路图。点开关符号拨动开关，点其他符号选中对应的零件。",
   "space.circuit.flip": "拨动{name}：现在{state}",
-  "space.circuit.select": "选中{name}"
+  "space.circuit.select": "选中{name}",
+  "space.card.energy": "能量链",
+  "space.try.energy": "能量链",
+  "space.energy.label": "这个模型里的能量链：{text}",
+  "space.energy.none": "这里现在没有能量在转换。",
+  "space.energy.select": "选中{name}",
+  "space.energy.potential": "势能",
+  "space.energy.kinetic": "动能",
+  "space.energy.lost": "热和声",
+  "space.energy.key": "势能（储存的能量）",
+  "space.energy.form.light": "光能",
+  "space.energy.form.electrical": "电能",
+  "space.energy.form.kinetic": "动能",
+  "space.energy.form.sound": "声能",
+  "space.energy.form.heat": "热能",
+  "space.energy.form.potential": "势能"
 }

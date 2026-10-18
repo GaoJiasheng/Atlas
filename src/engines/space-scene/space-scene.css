@@ -1683,6 +1683,121 @@ button.space-plate__sel:focus-visible {
   }
 }
 
+/* ------------------------------------------------------------------ */
+/* Card: the energy chain (docs/31 E-EN2)                              */
+/* ------------------------------------------------------------------ */
+
+.space-ec-card {
+  padding: calc(4 * var(--u)) calc(8 * var(--u)) calc(8 * var(--u));
+}
+.space-ec {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 46vh;
+  overflow: visible;
+}
+.space-ec__chain {
+  animation: space-ec-in 400ms ease both;
+}
+@keyframes space-ec-in {
+  from {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .space-ec__chain {
+    animation: none;
+  }
+}
+.space-ec__band {
+  fill: none;
+  stroke-opacity: 0.55;
+  stroke-linecap: butt;
+}
+.space-ec__band[data-form="potential"] {
+  stroke-opacity: 0.85;
+}
+.space-ec__pct {
+  font: 600 10px / 1 var(--font-mono);
+  fill: var(--ink);
+  paint-order: stroke;
+  stroke: var(--panel-solid);
+  stroke-width: 2.5px;
+  stroke-linejoin: round;
+}
+.space-ec__bar {
+  fill: var(--ink-2);
+}
+.space-ec__node[data-sink] .space-ec__bar {
+  fill: var(--ink-3);
+}
+.space-ec__node[data-stored] .space-ec__bar {
+  fill: var(--en-potential);
+}
+.space-ec__node[data-picked] .space-ec__bar {
+  stroke: var(--signal);
+  stroke-width: 1.6;
+}
+.space-ec__name {
+  font: 500 10px / 1 var(--font-hud);
+  letter-spacing: 0.02em;
+  fill: var(--ink);
+}
+.space-ec__node[data-picked] .space-ec__name {
+  fill: var(--signal);
+}
+.space-ec__none {
+  font: 500 10.5px / 1 var(--font-hud);
+  fill: var(--ink-3);
+}
+.space-ec__sim {
+  font: 500 10px / 1 var(--font-hud);
+  fill: var(--ink-3);
+}
+.space-ec__chip {
+  font: 600 10px / 1 var(--font-mono);
+  letter-spacing: 0.08em;
+  fill: var(--ink-2);
+}
+.space-ec__target {
+  fill: transparent;
+  stroke: none;
+}
+.space-ec__node[role="button"] {
+  cursor: pointer;
+}
+.space-ec__node[role="button"]:focus-visible {
+  outline: none;
+}
+.space-ec__node[role="button"]:focus-visible .space-ec__target {
+  stroke: var(--signal);
+  stroke-width: 1;
+}
+@media (hover: hover) {
+  .space-ec__node[role="button"]:hover .space-ec__target {
+    fill: var(--hair);
+  }
+}
+
+/* Energy bars' labels on the stage (docs/31 E-EN6): one small block under each set of bars. */
+.space-ebars [data-bars] {
+  transition: opacity 0.2s ease;
+}
+.space-ebars__ground {
+  fill: var(--panel);
+  stroke: var(--hair);
+  stroke-width: 0.6;
+}
+.space-ebars__name {
+  font: 500 10px / 1 var(--font-hud);
+  fill: var(--ink-2);
+}
+.space-ebars__value {
+  font: 600 10px / 1 var(--font-mono);
+  fill: var(--ink);
+}
+
 /* PLATE block: the try-it model's state line under the readings; observed readings in bold. */
 .space-plate__reading[data-observe] {
   color: var(--ink);

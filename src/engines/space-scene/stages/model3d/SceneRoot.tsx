@@ -664,6 +664,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
           exploded={s.view === 'exploded'}
           look={look}
           snapKey={snap.current.key}
+          bridge={bridge}
         />
       )}
       </group>

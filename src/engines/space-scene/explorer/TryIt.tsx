@@ -30,6 +30,7 @@ import { cardTimelines } from '../lib/sim/replay';
 import { isTimeline } from '../lib/sim/timeline';
 import { setSim, useSimStore, useSimView } from '../hud/sim';
 import { CircuitDiagram } from '../hud/CircuitCard';
+import { EnergyDiagram } from '../hud/EnergyCard';
 import { TryChart } from './TryChart';
 
 function Control({ c, value, onSet, primary }: { c: SimControl; value: SimValue | undefined; onSet(v: SimValue): void; primary: boolean }) {
@@ -315,6 +316,12 @@ export function TryIt({ file, ui }: { file: PartsFile; ui: SpaceUiStore }) {
         <details className="space-try__diagram" open>
           <summary>{t('space.try.diagram')}</summary>
           <CircuitDiagram file={file} sim={sim} />
+        </details>
+      )}
+      {sim.energy && (
+        <details className="space-try__diagram" open>
+          <summary>{t('space.try.energy')}</summary>
+          <EnergyDiagram file={file} sim={sim} />
         </details>
       )}
     </section>

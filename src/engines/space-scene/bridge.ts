@@ -36,6 +36,19 @@ export interface SitePoint {
   shown: boolean;
 }
 
+/** One energy-bars overlay on screen (docs/31 E-EN6): the values drawn and where its label block goes (below the bars), stage CSS pixels. */
+export interface EnergyBarsOnScreen {
+  potential: number;
+  kinetic: number;
+  lost: number;
+  heat: number;
+  sound: number;
+  x: number;
+  y: number;
+  /** Drawn now (its part on show, `when` holds, not exploded, in front of the camera). */
+  shown: boolean;
+}
+
 export interface StageStats {
   calls: number;
   triangles: number;
@@ -82,6 +95,8 @@ export interface StageBridge {
   exerciseFrame: { id: string; points: Float32Array } | null;
   /** Try-it timelines on the stage (lib/sim/timeline.ts): per output id, the model time on show and whether it plays (QA, `sim().timeline`). */
   playback: ReadonlyMap<string, { readonly t: number; readonly playing: boolean; readonly timeline: { readonly duration: number; readonly slow: number } }>;
+  /** Energy bars on the stage, by overlay index (QA `energyBars()`, their HUD labels). */
+  energyBars: Map<number, EnergyBarsOnScreen & { timeline: string }>;
 }
 
 /** Resolves once the stage has finished the camera move of transition `id` (or after `timeoutMs`, e.g. before the stage has loaded). */
@@ -121,5 +136,6 @@ export function createBridge(): StageBridge {
     footSlip: null,
     exerciseFrame: null,
     playback: new Map(),
+    energyBars: new Map(),
   };
 }

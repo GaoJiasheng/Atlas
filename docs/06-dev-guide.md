@@ -1026,7 +1026,7 @@ docs/22 §4.3（E-SIM 核心，磁铁与电路共用）+ docs/23 §4（电路模
 
 ```jsonc
 "sim": {
-  "kind": "circuit",                                   // circuit | magnet | force：lib/sim/<kind>.ts
+  "kind": "circuit",                                   // circuit | magnet | force | energy：lib/sim/<kind>.ts
   "controls": [                                        // ≤ 16，id 全主题的 sim 里唯一
     { "id": "main", "kind": "toggle", "default": true, "label": {en, zh} },
     { "id": "cells", "kind": "step", "values": [1, 2, 3], "default": 2, "label": {en, zh}, "unit"?: "cm" },
@@ -1057,7 +1057,7 @@ docs/22 §4.3（E-SIM 核心，磁铁与电路共用）+ docs/23 §4（电路模
 - **值从哪里来**：store 字段 `sim` 只存"设过的值"（不累积：章 `state.sim.set`，拍 `sim.set` 叠在本章的上面，读者在卡片 / 键 / 电路图上改的）；显示的值 = 默认 ⊕ 各选择的 `sets` ⊕ 设过的值，无效值忽略（`resolveSimValues`）。换章回到那一章的 `set`；ESC 不清；URL `sim`（见「URL 参数」）；演示的保存 / 恢复带着它；拍的深链接 `b` 照常。
 - **模型**（`lib/sim/index.ts evaluateSim`，同步、< 1 ms，只在值变化时算）：`circuit` = 节点分析（docs/23 §4.2）：电池是诺顿等效（每节 `emf` 默认 1.5 V、`r` 每节内阻，`flip` 指定某节由开关翻转成 −EMF；`cells` 是数或步进控件），`switch`（合上 `closed` 默认 0.001 Ω，断开去掉），`wire`（`r`），`gap`（选择控件 → `materials` 的欧姆数，没列 = 绝缘、断开），`load`（固定 `load` 或选择控件；`present` 开关 = 装没装上；`loads` 的 `lamp`（`rated` W）/ `buzzer`（`on` A 以上响）/ `motor`（`at` V 时 `rpm` 的可视转速，∝ 电压））；每个连通块接地一个节点，高斯消元（部分主元），没有电池的块电流为 0。量名（输出的 `from`）：`current:<边>`、`volts:<边>`（电池 = 端电压）、`power:<边>`、`brightness:<边>`（灯功率 ÷ `reference.power` × 100）、`speed:<边>`、`sound:<边>`（`on` / `off`）、`status:<电池边>`（`open` < 1 mA、`short` > `short` A（默认 3）、`over-rating`：同一回路里有灯超过额定 × `over`（默认 1.5）、否则 `closed`）、`edges`（每条边的带号电流，from → to）。`magnet` = Gilbert 磁荷模型、场态、场线、铁屑、指南针、力箭头，见下面「SpaceScene · 试一试 · 磁铁」。validate 核对输出的 `from` 是这个模型的量、种类（数 / 状态 / 向量）对得上。
 - **输出种类**：`number`、`state`、`vector`、`timeline`（一段"跑一遍"的过程：见「时间线与回放」；只能被 `play`、带 `channel` 的 `stretch` 和力的箭头读，不进卡片的观察量、读数、glow 等）。
-- **绑定**（`lib/sim/bind.ts simEffects`，舞台叠在章节状态上）：零件 `visible`（条件：`true` = 真值 / 非零 / 不是第一个状态；或 `{ eq | ne | in | gte | lte }`）、`pose`（值 → `poses` 里的姿态，只动这些零件，压在章 / 拍的姿态之上；几条绑定动同一零件时非静止的那条胜出）、`glow`（值 ÷ `full`，`sqrt` 或 `linear`，0–2：从暗红渐到 `color`，过 1 更白；只点亮零件自己的材质，即槽 0：灯丝不带支撑丝和铜座）、`tint`（值 ÷ `full`，0–1，`linear` 或 `sqrt`：向 `color` 混色，强度上限同 signal 高亮；铁芯通电变磁铁；同 `glow` 只染零件自己的材质，即槽 0，其余槽照常跟章 / 拍的 `highlight`，`lib/sim/bind.ts slotTint`）、`count`（`repeat` 零件只显示前 k 份：`true` = k 取值本身，或 `{ per, minus }` = (值 − minus) ÷ per 取整、≥ 0：50 g 挂钩上的 50 g 槽码写 `{ per: 50, minus: 50 }`，两只 200 g 砝码写 `{ per: 200 }`（docs/30 F8；`per` 原先是乘数，没有主题用过）；该零件不能有 `extra`）、`offset` / `rotate`（(值 − origin) × per（rotate 的 per 默认 1），在姿态之后沿场景轴移 / 绕（姿态后的）零件中心或 `pivot` 场景点转，0.5 s 缓动；`settle: { period, damping }` = 阻尼摆动（rotate：转角走近路；offset：挂在弹簧下的挂钩跟着弹簧回弹几下停住，docs/30 F4）、`stretch`（弹簧伸缩）、`play`（播放时间线通道）——这两项见下面「弹簧伸缩」「时间线与回放」、`at`（命名位置环）、`state`（铁屑排哪个场态）——后三者见磁铁一节；流 `visible`、`state`（场线流）、`intensity`（向量输出按 `paths` 的 id：每条路径的粒子速度 ∝ |值| ÷ `full`（夹在 ±2），负值反向，< 1 % 的路径 0.3 s 淡出；相位逐帧积分，变速不跳）、`stops`（状态 → 粒子色，如短路 `token:hot`）；动画 `rpm`（rotate 的转速 = 值 × per，角度积分）、`enabled`（条件不成立时 0.15 s 缓停）。运转（RUN / FLOW）只管"动起来"：灯亮不亮、零件在哪儿不受它影响。
+- **绑定**（`lib/sim/bind.ts simEffects`，舞台叠在章节状态上）：零件 `visible`（条件：`true` = 真值 / 非零 / 不是第一个状态；或 `{ eq | ne | in | gte | lte }`）、`pose`（值 → `poses` 里的姿态，只动这些零件，压在章 / 拍的姿态之上；几条绑定动同一零件时非静止的那条胜出）、`glow`（值 ÷ `full`，`sqrt` 或 `linear`，0–2：从暗红渐到 `color`，过 1 更白；只点亮零件自己的材质，即槽 0：灯丝不带支撑丝和铜座）、`tint`（值 ÷ `full`，0–1，`linear` 或 `sqrt`：向 `color` 混色，强度上限同 signal 高亮；铁芯通电变磁铁；同 `glow` 只染零件自己的材质，即槽 0，其余槽照常跟章 / 拍的 `highlight`，`lib/sim/bind.ts slotTint`）、`count`（`repeat` 零件只显示前 k 份：`true` = k 取值本身，或 `{ per, minus }` = (值 − minus) ÷ per 取整、≥ 0：50 g 挂钩上的 50 g 槽码写 `{ per: 50, minus: 50 }`，两只 200 g 砝码写 `{ per: 200 }`（docs/30 F8；`per` 原先是乘数，没有主题用过）；该零件不能有 `extra`）、`offset` / `rotate`（(值 − origin) × per（rotate 的 per 默认 1），在姿态之后沿场景轴移 / 绕（姿态后的）零件中心或 `pivot` 场景点转，0.5 s 缓动；`settle: { period, damping }` = 阻尼摆动（rotate：转角走近路；offset：挂在弹簧下的挂钩跟着弹簧回弹几下停住，docs/30 F4）、`stretch`（弹簧伸缩）、`play`（播放时间线通道）——这两项见下面「弹簧伸缩」「时间线与回放」、`at`（命名位置环）、`state`（铁屑排哪个场态）——后三者见磁铁一节；流 `visible`、`state`（场线流）、`intensity`（向量输出按 `paths` 的 id：每条路径的粒子速度 ∝ |值| ÷ `full`（夹在 ±2），负值反向，< 1 % 的路径 0.3 s 淡出；相位逐帧积分，变速不跳；`mode: "density"` = 速度不变、**可见粒子的比例** = |值| ÷ `full`（≤ 1，0.3 s 缓动；粒子按路径上均匀散开的次序出现，不扎堆），能量主题用它表示"这一份多 / 少"；向量的键写成 `<流 id>:<路径 id>` 时，每条流只取以自己 id 开头的那些）、`stops`（状态 → 粒子色，如短路 `token:hot`）；动画 `rpm`（rotate 的转速 = 值 × per，角度积分）、`enabled`（条件不成立时 0.15 s 缓停）。运转（RUN / FLOW）只管"动起来"：灯亮不亮、零件在哪儿不受它影响。
 - **多路径流**（`flows[].paths: [{ id, path }]`，≤ 16 条，代替 `path`）：一条流、一次绘制；粒子按路径长度分配（每条 ≥ 4），每条路径一行浮点纹理，shader 里每条路径一个相位 / 透明度 / 闭合标志（`flowMaterial.ts`）。电路主题每条边一条路径（与导线 sweep 同源，生成脚本写出两者）。不能 `bilateral`。
 - **读数**：`telemetry` 行写 `follow: "<数输出>"`（不写 `idle` / `run`）：跟随输出值、0.3 s 一阶滞后（`lag` 可改）、小数位取输出的；`follow` 写 2–3 个同单位的数输出 = 一行两值（`FALL TIME · L · R 0.45 · 0.45 s`）；`scope: "observe"` = 只显示本章卡片观察的那几个，本章一个都不观察时显示 `—`（一行"重量"在落体章读 `weight`、弹簧章读 `load-weight`，docs/30 F6）；本章 `try.observe` 里的输出在 PLATE 块加粗；块尾一行 `SIM <状态> · <本章试一试控件的值>`：状态 = 本章卡片观察的状态输出，否则先猜后看观察的，否则第一个会随卡片控件或本章 `set` 的控件变的；都没有时电路、磁铁照旧写模型的第一个状态，力的模型（几套互不相干的实验，`SEPARATE_EXPERIMENTS`）不写状态；短路 / 超额定用 hot 色。
 - **章节**：
@@ -1089,7 +1089,7 @@ state:
 - **键**：`[` `]` = 本章 `vary` 的上一值 / 下一值（开关 = 关 / 开，选择 = 上 / 下一个选项），`T` = 本章卡片里第一个开关（`vary` 或 `also`），`G` = 再跑一次（卡片有 `replay` 时）；注册为命令 `sim-prev` / `sim-next` / `sim-toggle` / `sim-replay`（`SIM_KEYS`），和按钮、电路图、测试 API 写同一个 store 值（`G` 与「再跑一次」按钮写引擎 UI store 的同一个计数 `simReplay`）；状态行键位提示写 `[ ] T TRY IT`（有 `G` 时 `[ ] T G TRY IT`）。没有卡片的章不注册。
 - **电路图卡**（有 `circuit.diagram` 时代替右上零件链路卡，标题 CIRCUIT DIAGRAM / 电路图；< 1024 px 收进试一试卡片里可折叠的一节）：节点的 `d` 是图上坐标，边的 `via` 是直角拐点，符号放在最长的一段直线上（`at`，默认中点）：电池 = 每节一对长（+）短（−）线、翻转的那节反过来，灯 = 圆内叉（按亮度填 `--lamp`，拔掉时虚线），开关 = 两个接线点 + 刀片（断开时抬起），缺口 = 两个接线点 + 材料（导体实线、铅笔芯虚线、绝缘体空着），蜂鸣器、电机（M）；有电流的边用 `--current` 加粗并带方向箭头（从正极出发），短路时整张图 `--hot`；开关符号 = 拨真开关（`role="button"`、`aria-pressed`、44 px 命中区，Enter / Space），其他符号 = 选中边的 `part`，选中的零件对应符号描 signal；`diagram.labels` 是图上的小字（"手电筒"）。没有 `d` 的节点不画。
 - **测试与 QA**：`__atlas.engine.sim()` → `{ values, set, outputs, try, table, timeline, replays }`（`timeline`：每条时间线输出在舞台上的 `{ t, duration, playing, slow }`，模型秒；`replays`：再跑一次的计数），`__atlas.engine.setSim({ id: value })`（逐个走 `setSimControl`，有非法值返回 false），`__atlas.engine.simSeek(id, t)`（把时间线停在模型时刻 `t`，截过程中的一帧）；`__atlas.state().sim` = 设过的值。`pnpm shoot <slug> --keys` 测 `[` `]` `T` `G`（在第一个有卡片的章：`]` 前进一值、`[` 回来、URL 带 `sim`；`T` 翻转一个开关再翻回；`G`：计数加一、有时间线从头开始播放）；`--beats` 每拍照常截图（拍的 `sim.set` 随 `beatScene` 应用；时间线直接是终态）。
-- **token**：`--lamp`（灯丝发光，暖白）、`--current`（电流粒子，暗金；短路用 `--hot`）、`--f-gravity` / `--f-friction` / `--f-elastic` / `--f-push`（力的箭头，见「力的箭头」）。
+- **token**：`--lamp`（灯丝发光，暖白）、`--current`（电流粒子，暗金；短路用 `--hot`）、`--f-gravity` / `--f-friction` / `--f-elastic` / `--f-push`（力的箭头，见「力的箭头」）、`--en-light` / `--en-electrical` / `--en-kinetic` / `--en-sound` / `--en-heat` / `--en-potential`（能量形式，见「能量」）。
 - **已知限制**：读者不能自己拖元件、连线、拖磁铁和指南针、推小车（docs/23 §4.5、docs/22 §4.5、docs/30 §4.6，v2：场线 / 时间线要在运行时重算）。
 
 ### SpaceScene · 试一试 · 磁铁（magnet）
@@ -1272,6 +1272,69 @@ interface Timeline {
 - `record: { chart: true }` 或 `{ chart: { y: "<输出>" | ["<输出>", …] } }`（≤ 3 个同单位的数输出；默认 = 卡片观察的第一个数）；可与 `judge` 同写。表有 ≥ 2 行才画（`explorer/TryChart.tsx`，模型在 `lib/sim/chart.ts`）。
 - 改变量是步进 → **折线图**：x 轴按控件的值（升序，全部值作刻度，与记了哪几行无关），点按 x 排序连线；是选择 → **条形图**：每个选项一格（选项顺序），记了的才有条，条上写数。y 从 0 到一个整齐的上限（1 / 2 / 2.5 / 5 × 10ⁿ，2–6 格）。hairline 坐标轴、mono 数字、轴标题 = 标签 + 单位；墨色，**当前值那一行 signal 色**；多个 y：折线换虚线与点形，条形第二组浅一档，图题后一行小图例。
 - 读屏：`<svg role="img" aria-label>`，文字由数据自动拼（`chartSummary`，中英）：折线 = 起止值 + "一直上升 / 下降 / 有升有降"，或从头开始每一步一样时"每增加 50 g，伸长增加 1.0 cm，直到 300 g，之后增加得更快"；条形 = 每个选项的值 + 最高、最低。表仍是读屏的主体。手机抽屉里与表同宽。
+
+### SpaceScene · 试一试 · 能量（energy）
+
+docs/31 §4（E-EN1–EN8）。`sim.kind: "energy"`：同一个场景里跟着能量走。两半：**能量链**（能量链卡、五条能量流、读数）和几个**子模型**（太阳能板、落球、秋千、发条玩具、自行车发电机；数据里写了哪个就算哪个）。全部纯函数、同步、确定性（< 1 ms，秋千的采样在内）。代码：`lib/sim/energy.ts`（模型）、`lib/sim/sankey.ts`（卡片排版）、`lib/sim/bars.ts`（能量条读数）、`hud/EnergyCard.tsx`（右上卡）、`stages/model3d/SimOverlays.tsx`（`energy-bars`）、`hud/EnergyBarLabels.tsx`（能量条的标签）；单测 `tests/space-scene/{energy,sankey,energy-bars,energy-colors}.test.ts`，样板 `tests/space-scene/fixtures/energy-block.ts`（docs/31 §2.4 的全部链与数，按事实审计改过；可当作者模板）；示例主题 `sample-energy`（draft，七章：背景章 + 六张卡）；e2e `tests-e2e/sample-energy.spec.ts`。
+
+```jsonc
+"sim": {
+  "kind": "energy",
+  "controls": [ { "id": "chain", "kind": "choice", "default": "whole", "options": [ … 每条链一个选项 … ] }, … ],
+  "outputs": [
+    { "id": "chain-state", "kind": "state", "states": { "whole": {…}, "solar": {…}, … } },   // 每条链都要有标签
+    { "id": "useful", "unit": "%" }, { "id": "heat", "unit": "%" }, { "id": "sound", "unit": "%" },
+    { "id": "lamp-glow", "from": "out:lamp:light" },       // 当前链里某个节点出来的某种形式（%）
+    { "id": "water-warm", "from": "in:kettle" },           // 进当前链里某个节点的能量（%）
+    { "id": "same-light", "from": "start", "unit": "%" },  // 当前链起点的值
+    { "id": "bounce-run", "kind": "timeline" }, { "id": "paths", "kind": "vector" }, { "id": "links", "kind": "vector" }
+  ],
+  "bind": [
+    { "output": "paths", "flow": "heat-energy", "intensity": { "full": 0.6, "mode": "density" } },   // 五条流各一条
+    { "output": "swing-run", "part": "swing-seat", "play": { "channel": "angle", "turn": [0, 0, 1], "pivot": [8.0, 2.4, 0] } }
+  ],
+  "overlays": [ { "kind": "energy-bars", "timeline": "bounce-run", "near": "drop-pole", "offset": [0.25, 0, 0], "height": 0.6 } ],
+  "energy": {
+    "g": 9.8,
+    "chain": "chain",                                      // 选链的选择控件（不进试一试卡片：章 / 拍的 sim.set 选）
+    "solar":  { "sky": "sky", "modules": 12, "area": 1.953, "efficiency": 0.21,
+                "irradiance": { "clear": 900, "average": 640, "overcast": 150, "night": 0 }, "glow": { "clear": 1, … }, "chains"?: ["solar", "whole"] },
+    "bounce": { "drop": "drop", "surface": "surface", "ratio": { "tile": 0.55, … }, "slow": 2, "heat"?: 0.9, "chains"?: ["bounce"] },
+    "swing":  { "length": 2.0, "amplitude": 35, "loss": 0.03, "swings": 8, "sample"?: 0.08, "heat"?: 0.9 },
+    "windup": { "winds": "winds", "secondsPerTurn": 1.5, "speed": 0.08, "wheel": 0.009, "kinetic"?: 8, "spinUp"?: 0.2, "chains"?: ["windup"] },
+    "dynamo": { "speed": "speed", "on"?: "dynamo-on", "imax": 0.5, "v0": 6, "lampOhms": 12, "rated": 3, "wheel": 2.07, "crankRatio": 0.37, "chains"?: ["dynamo"] },
+    "shares": { "panel": { "electrical": 21, "heat": 75, "light": 4 }, "fan": { "kinetic": 60, "heat": 38, "sound": 2 }, … },   // 每张表加起来 = 100
+    "chains": {
+      "dynamo": {
+        "when": [ { "control": "speed", "is": { "ne": 0 } } ],          // 都成立才有能量（夜里、不踩、没上发条 = 整链 0）
+        "reading": { "node": "dyn", "through": ["lamp"] },               // 读数说的是哪台"机器"
+        "start"?: 100,                                                   // 或 { "control": "lamp-type", "values": { "led": 25, "filament": 100 } }
+        "nodes": [ { "id": "rider", "part": "rear-wheel" }, { "id": "dyn", "part": "bicycle-dynamo" }, { "id": "lamp", "part": "headlamp" },
+                   { "id": "air", "label": { "en": "The air around", "zh": "周围的空气" }, "sink": true } ],
+        "links": [
+          { "id": "d-in", "from": "rider", "to": "dyn", "form": "kinetic", "share": "in", "paths": ["kinetic-energy:pedal-wheel"], "when"?: { "control": "dynamo-on", "is": { "eq": true } } },
+          { "id": "d-el", "from": "dyn", "to": "lamp", "form": "electrical", "share": "dynamo.electrical", "paths": ["electrical-energy:dynamo-lamp"] },
+          { "id": "l-light", "from": "lamp", "to": "air", "form": "light", "share": "filament.light", "paths": ["light-energy:headlamp-beam"], "useful": true },
+          …
+        ],
+        "mix"?: { "chains": ["solar", "home"], "scale": 0.6 },          // 也点亮别的链（默认值下）的路径 × scale（全景）
+        "note"?: { "en": "…", "zh": "…" }                                // 卡片底下一行（如"只算轿厢，不算对重"）
+      }, …
+    }
+  }
+}
+```
+
+- **能量链**：`chain` 控件的每个选项一条链。链的第一批节点（没有带进来的）各得 `start`（默认 100）；每条带 = 一种形式（`light` / `electrical` / `kinetic` / `sound` / `heat` / `potential`），值 = 进 `from` 节点的能量 × `share`（`in` = 全部，`<表>.<键>` = `shares` 里的百分数；`bounce`、`swing` 两张表由模型算：落球留下 r、热和声 1 − r，按 `heat` 分成热与声；秋千摆完剩下 (1 − loss)^swings）。带的 `when` 不成立 = 0（选哪件电器、电梯在不在顶层、LED 还是白炽灯）。**守恒**：显示值逐节点取整到 1 %，取整误差加到这个节点的热带上（没有热带就加到最大的那条），所以**每个节点取整后进 = 出**；validate 对每条链读到的控件的**每一种组合**算一遍，任何节点进 ≠ 出都报（"`db` takes in 100 % and gives out 0 % (appliance = kettle)"）。
+- **量**（输出的 `from`）：`chain-state`（状态 = 当前链）、`links`（向量：带 id → %）、`paths`（向量：`<流>:<路径>` → 这条路径的份额 0–1 = 带的 % ÷ 100，几条带共用一条路径取最大；`mix` 另加别的链默认值下的 × `scale`）、`start`、`useful` / `heat` / `sound`（`reading` 的"机器" = `node` + `through`：从机器出去的带里，标 `useful` 的、其余的热、其余的声，各占进 `node` 的能量的 %；没有 `reading` 或没有能量进来 = NaN，显示 `—`）、`in:<节点>`、`out:<节点>:<形式>`（当前链里；别的链 = 0）。子模型：`panel-power`（kW = 块数 × 面积 × 辐照 × 效率 ÷ 1000）、`sun-glow`（天空的 `glow`）；`impact-speed` = √(2 g h)、`bounce-height` = r h（cm）、`kept`、`lost`、`bounce-run`；`swing-run`；`run-time` = `secondsPerTurn` × 圈数、`toy-run`；`lamp-power` = I² R，I = imax · x ÷ √(1 + x²)，x = 速度 ÷ v0，`brightness` = 功率 ÷ `rated` × 100，`wheel-rpm` = 速度 ÷ 3.6 ÷ 周长 × 60，`crank-rpm` = 后轮 × `crankRatio`。子模型写了 `chains` 时，不在这些链里它的数读 `—`；时间线总是算。
+- **时间线**（共用「时间线与回放」）：`bounce-run`：`y`（m，**球底**离地面的高度，ITF 的量法；零件画成落在地面上，`play` 沿 +Y 移）、`pe`、`ke`、`lost`（%，分段匀加速，精确：落下历时 √(2h ÷ g)、弹回到 r h 的最高点，空中不损失）；`swing-run`：`angle`（°，绕挂点 `pivot` 转）、`pe`、`ke`、`lost`（采样 ≤ 256；每半摆损失剩下的 `loss`，摆幅按 1 − cos θ ∝ 剩下的能量变小，每半摆的时长 = 那个摆幅下精确周期的一半（AGM 公式：35°、2 m = 2.906 s，比小角公式长 2.4 %）；条：势能 = 100 (1 − cos θ) ÷ (1 − cos θ₀)、动能 = 剩下的 − 势能、热和声 = 100 − 剩下的；终态停在最后一个转折点，**只是暂停**：字幕写"停在这一瞬，它还会越摆越低"）；`toy-run`：`x`（m，车走过的）、`spin`（°，车轮）、`key`（°，钥匙往回转）、`pe`、`ke`、`lost`（发条在 T 秒里匀速放出能量：热和声 = 100 t ÷ T；车在 `spinUp` 秒里加速到 `speed`，再匀减速到 T 停下；动能 = `kinetic` % × (速度 ÷ 最高速)²，从发条里来，所以势能一直在降、三者之和恒为 100；0 圈 = 空时间线）。
+- **validate**（`sim-schema.ts energyIssues`）：`chain` 是选择控件、每个选项一条链；子模型读的控件存在且种类对、表覆盖选择的每个选项；落下高度 > 0、圈数为非负整数、速度 ≥ 0；**发电机的上限 imax² R 不能超过灯的额定功率**（"稳定在约 3 W"要真的稳定在 3 W，事实审计 SIM-G-limit）；**发条的 `kinetic` ≤ 50 (T − spinUp) ÷ T**（最短的一跑也要让势能一直降）；`shares` 每张表加起来 = 100、不能用 `bounce` / `swing` 这两个模型算的表名；节点有 `part`（存在）或 `label`、sink 没有出去的带；带的两端是节点、`share` 的表和键存在、`potential` 不列 `paths`、`paths` 的流和路径存在、`when` 的控件和值存在；链无环；`start` 的表覆盖控件的选项；`reading`、`mix` 的节点和链存在；守恒（上面）。输出：`in:` / `out:` 的节点要在某条链里，`chain-state` 给每条链写标签。
+- **能量链卡**（`hud/EnergyCard.tsx`，有 `sim.energy` 时代替右上的零件链路卡；标题 ENERGY CHAIN / 能量链；< 1024 px 收进试一试卡片里可折叠的一节，同电路图卡）：当前链的 Sankey 图（`lib/sim/sankey.ts`，纯函数、确定性）。只画此刻有能量的带和它们连着的节点；节点按"从第一批节点数过来最长的带数"分列，sink 在最后一列；节点条高 = max(进, 出) × k，**全卡一个 k**，带宽 = % × k（最细 1.5 px），带按目标的高低依次从源节点出、按源的高低依次进目标节点；颜色 = `--en-<形式>`，≥ 8 % 的带上写百分数；只存着势能的节点（升到顶层的轿厢、弹到最高点的球）画成势能色的宽实心块。名字都写在节点上方、从节点起向右，一列的名字在下一列之前截断，最后一列的名字用右侧留出的 84 px；点节点 = 选中它的零件（44 px 命中区，Enter / Space），选中的描 signal。底下一行 `SIM` + "In this model / 在这个模型里"（+ 链的 `note`）。换链 0.4 s 淡入（减少动态时不淡）。读屏：`aria-label` 是整条链的文字（"Tennis ball → Test floor: kinetic energy 100 %; …"）；没有能量时写"这里现在没有能量在转换"。
+- **五条能量流**（数据，不是引擎件）：每种**流动的**形式一条多路径流（`light-energy`、`electrical-energy`、`kinetic-energy`、`sound-energy`、`heat-energy`；颜色 `token:en-*`；组 = 只有流的组 `light` / `electrical` / `kinetic` / `sound` / `heat`，LAYERS 里可以单开一种），每条 ≤ 16 条路径、一次绘制；`{ "output": "paths", "flow": <流>, "intensity": { "full": …, "mode": "density" } }` 让每条路径上的粒子数 ∝ 那条带的份额（`full` = 粒子全满时的份额；份额相对链的起点，越往下游越稀）。不用 `stops` 沿路径变色。势能不画流：KEY 由引擎追加一行"Potential energy (stored) / 势能（储存的能量）"。
+- **能量条**（`overlays: energy-bars`）：`{ "kind": "energy-bars", "timeline": <时间线输出>, "near": <零件>, "offset"?: [x, y, z], "height"?: 0.6, "width"?: 0.04, "gap"?: 0.02, "bars"?: { "potential": "pe", "kinetic": "ke", "lost": "lost" }, "lostSplit"?: { "heat": 0.9, "sound": 0.1 }, "when"?: { "control" | "output", "is" } }`：在零件包围盒中心 + `offset` 处立三根竖条（绕竖直轴转向镜头，平涂不受光）：势能、动能、热（底段）+ 声（顶段，按 `lostSplit`，示意）；`height` 处一条 100 % 发丝线，底部一条底线；**数值直接读时间线通道**（跟着回放走，终态 = 终值；`lib/sim/bars.ts` 把三者各夹到 ≥ 0 再归一到 100）。全部能量条 = 一个网格、**一次绘制**；零件不在场、`when` 不成立、时间线为空、EXPLODED 时淡出。标签在 HUD 层（`hud/EnergyBarLabels.tsx`，经 bridge 投影到条下）：三行"色块 + 名称 + 百分数"（Potential / Kinetic / Heat + sound；势能 / 动能 / 热和声），名称与颜色总在一起。validate：时间线输出存在且有这些通道、零件存在、`lostSplit` 两项之和为 1。
+- **token**（docs/08 §1）：`--en-light` 芥黄（纸底上最亮的一档）、`--en-electrical` 蓝、`--en-kinetic` 青绿、`--en-sound` 紫、`--en-heat` 橙红、`--en-potential` 橄榄褐；paper / cinema 各一套。单测 `energy-colors.test.ts` 从 `tokens.css` 读出来校验：每色对底色 ≥ 3:1；正常视觉与红色盲、绿色盲、蓝色盲模拟（Machado 2009，严重度 1，线性 RGB）下两两 ΔE*ab ≥ 10。
+- **测试与 QA**：`__atlas.engine.energyBars()` → `{ <时间线 id>: { potential, kinetic, lost, shown } }`（此刻画着的值）；`pnpm shoot --beats` 每拍检查画着的能量条加起来 = 100 ± 0.5（不等记为拍失败）；其余同「时间线与回放」（`simSeek`、`G`）。
+- **数字纪律**（docs/31 §0-10 与 2026-10-18 事实审计 `art/codex-forces-energy/energy-facts.md`）：链上的百分数、示意的子模型参数都是 SIM / 示意，卡片与试一试卡都写"在这个模型里"。审计改过的几处已体现在样板里：发电机上限取 imax = √(3 W ÷ 12 Ω) = 0.5 A（SIM-G-limit：原来的 0.55 A 会趋向 3.63 W）；同样亮的 LED 链从 25 % 起（`start`，SIM-H-same-light）；秋千的势能条按原始能量归一（SIM-D-bars）；发条的动能从发条里来、停下时为 0（SIM-E-bars）；落球高度量球底（ENG-MODEL-02）。
 
 ### 章节怎么写（`state`）
 
