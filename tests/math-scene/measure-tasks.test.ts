@@ -187,6 +187,13 @@ describe('quantities compared, ordered, converted', () => {
     expect(workingLines(t, aligned, 'en')).toEqual(['{u:900 g} ○ {u:1 kg}', '{u:900 g} ○ {u:1000 g}']);
   });
 
+  it('keeps paired vessels on the same physical scale, including across units', () => {
+    const jug = (unit: string, to: number, major: number, minor: number, value: number) => ({ type: 'jug', unit, from: 0, to, major, minor, value, label: text });
+    const task = (right: Record<string, unknown>) => mk({ id: 'capacity', kind: 'compare', model: { kind: 'instrument', pair: [jug('ml', 1000, 100, 50, 900), right] }, a: '900 ml', b: '1 l' });
+    expect(issues(task(jug('l', 1, 1, 1, 1)))).toEqual([]);
+    expect(issues(task(jug('l', 5, 1, 1, 1)))).toContain('paired scales must use the same physical range (convert units or draw a common stretch)');
+  });
+
   it('orders by value and diagnoses the printed numbers ordered', () => {
     const t = mk({ id: 'ord', kind: 'order', model: pair, items: ['1 kg', '850 g', '1 kg 200 g'], direction: 'asc' }, [['ignored-unit', '1 kg,1 kg 200 g,850 g']]);
     expect(proveTask(t)).toEqual([]);

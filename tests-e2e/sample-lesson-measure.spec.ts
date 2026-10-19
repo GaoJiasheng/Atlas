@@ -146,6 +146,8 @@ test.describe('measuring engine fixture', () => {
     await task(page, 'jugs-and-two-units', 3);
     await tray(page).getByRole('button', { name: 'Change to the same unit' }).click();
     await expect(page.locator('.ms-equation')).toContainText('1000');
+    const levels = await page.locator('.ms-inst__level').evaluateAll((els) => els.map((el) => el.getBoundingClientRect().top));
+    expect(levels[0]).toBeGreaterThan(levels[1]!);
   });
 
   test('all fixture task phases solve through the browser controller', async ({ page }) => {

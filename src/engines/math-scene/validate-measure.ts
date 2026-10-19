@@ -150,6 +150,12 @@ export function instrumentModelIssues(m: InstrumentModelSpec, opts: { nearest?: 
   if (members.length > 1) {
     if (members.some((s) => !s.label)) out.push('each instrument of a pair or a set has its label');
     if (new Set(members.map((s) => s.type)).size > 1) out.push('a pair or a set is of one kind of instrument (drawn to one scale)');
+    const scales = members.map(scaleOf);
+    const first = scales[0];
+    if (first && scales.every((s) => s !== null)) {
+      const inFirstUnit = (s: Scale, units: number) => qtyIn({ kind: 'meas', unit: s.unit, value: { units, dp: 0 } }, first.unit)?.units;
+      if (scales.some((s) => inFirstUnit(s!, s!.from) !== first.from || inFirstUnit(s!, s!.to) !== first.to)) out.push('paired scales must use the same physical range (convert units or draw a common stretch)');
+    }
   }
   return out;
 }
