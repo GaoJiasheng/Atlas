@@ -582,12 +582,12 @@ SpaceScene / Model3DStage，paper 默认、cinema 可切。原型：`archetypes.
 
 ### 4.6 引擎验收
 
-- [ ] 单测：§2.4 的阶段边界、`to-adult`、`larva-days`、`pupa-days`、`days-left` 四个温度 × 第 0–8 天全表；`total` 缩放后各段之和 = `total`；没有 `total` 时 = Σ；`emptying` 六个步进值 × 擦壁开关；`rate` 四个温度；`on:` / `size:`（夹具里写一组假数据）/ `control:` 量；确定性；URL `sim=temp.32~day.4` 往返。
-- [ ] validate 报错用例：温度缺行 / 多行、阶段缺天数、`start` 不存在、`adult` 不在最后、负的历期、`total` 与 Σ 差 > 5 %、`part` 不存在或是 context、控件种类不对、`rate.flow` 没有 `paths`、`compare.link` 的章不存在、输出的 `from` 不是本模型的量。
-- [ ] 环卡单测：节点位置确定、顺时针、第一个在 12 点；弧的天数文字 = 模型的段长（1 位小数）；`in: water` 的弧带覆盖正确的节点；`compare` 开时两环；读屏文字中英。
-- [ ] e2e（`sample-life-cycle`）：深链接 `?ch=…&sim=day.4` 标记圈在第 4 站、环卡高亮四龄；`]` 走一天；改水温后环卡天数变、流变快；倒水章 `every` 8 → 飞走的成虫出现；擦壁 → 卵消失；点环卡节点选中零件；< 1024 px 环卡在试一试卡片里；中文页。
-- [ ] `sample-space`、`sample-forces`、`sample-energy`、`grasshopper`、`circuits`、`energy-conversion` 截图与 `--beats` 不回归。
-- [ ] 门槛全绿（`pnpm check`、`validate`、`test`、`build`、`e2e`）。
+- [x] 单测：§2.4 的阶段边界、`to-adult`、`larva-days`、`pupa-days`、`days-left` 四个温度 × 第 0–8 天全表；`total` 缩放后各段之和 = `total`；没有 `total` 时 = Σ；`emptying` 六个步进值 × 擦壁开关；`rate` 四个温度；`on:` / `size:`（夹具里写一组假数据）/ `control:` 量；确定性；URL `sim=temp.32~day.4` 往返。
+- [x] validate 报错用例：温度缺行 / 多行、阶段缺天数、`start` 不存在、`adult` 不在最后、负的历期、`total` 与 Σ 差 > 5 %、`part` 不存在或是 context、控件种类不对、`rate.flow` 没有 `paths`、`compare.link` 的章不存在、输出的 `from` 不是本模型的量。
+- [x] 环卡单测：节点位置确定、顺时针、第一个在 12 点；弧的天数文字 = 模型的段长（1 位小数）；`in: water` 的弧带覆盖正确的节点；`compare` 开时两环；读屏文字中英。
+- [x] e2e（`sample-life-cycle`）：深链接 `?ch=…&sim=day.4` 标记圈在第 4 站、环卡高亮四龄；`]` 走一天；改水温后环卡天数变、流变快；倒水章 `every` 8 → 飞走的成虫出现；擦壁 → 卵消失；点环卡节点选中零件；< 1024 px 环卡在试一试卡片里；中文页。
+- [x] `sample-space`、`sample-forces`、`sample-energy`、`grasshopper`、`circuits`、`energy-conversion` 截图与 `--beats` 不回归。
+- [x] 门槛全绿（`pnpm check`、`validate`、`test`、`build`、`e2e`）。
 
 ### 4.7 不做（v2）
 
@@ -925,7 +925,7 @@ SpaceScene / Model3DStage，paper 默认、cinema 可切。原型：`archetypes.
 | 3 | 阶段 `in`：water / wall / air | 另加 `land`；`part` 可不写 | 以后的青蛙、蝗虫、植物 |
 | 4 | 对照环"并排"（左本主题、右蝗虫） | 第二个环画在主环**下面**；卡上一个开关（`role="switch"`）写同一个 `compare` 控件，开时出"See the grasshopper / 看蝗虫"链接 | 右上卡约 260–280 px 宽，主环连圈外的字已占满宽度；并排要把字缩到 7 px 以下。章 / 拍 `sim.set` 照样能开关 |
 | 5 | 节点"下方标签"；整张卡 `role="img"` | 名字和弧上的字都在圈外（名字在站的方位，天数在两站之间，交替不撞）；"在水里"的带和组括号在圈内；整张卡 `role="group"` + `aria-label`（读屏文字），站是按钮，当前阶段 `aria-current="step"` | 圈外一圈、圈内一圈才放得下；`role="img"` 会把里面的按钮藏起来 |
-| 6 | 节点 44 px 命中区 | 命中方块是 viewBox 的 54 单位：卡片按 ≥ 82 % 画（1280 px 宽的右列）时 ≥ 44 CSS px；e2e 在 1600 与 900 宽量过 | 卡片 SVG 随列宽缩放 |
+| 6 | 节点 44 px 命中区 | 命中方块是 viewBox 的 54 单位：卡片按 ≥ 82 % 画（1280 px 宽的右列）时 ≥ 44 CSS px；e2e 在 1600、1280 与 900 宽量过 | 卡片 SVG 随列宽缩放 |
 | 7 | `emptying:adults` 按 28 °C | 按**当前水温**的总数（T3 在 28 °C，结果相同）；单测另钉 32 °C、20 °C 的临界 | 模型不写死温度 |
 | 8 | `control:<控件>` | 步进控件 = 值，开关 = 1 / 0；选择控件不提供 | 量是数 |
 | 9 | validate `adult` order | The final stage takes no days; stages before `start` take no days. When a stage uses id `adult`, validation explicitly requires it to be last, even if the author adjusts the row coverage. | Preserves generic terminal-stage semantics and enforces the named adult rule. |
@@ -936,3 +936,23 @@ SpaceScene / Model3DStage，paper 默认、cinema 可切。原型：`archetypes.
 **门槛与回归**：最终记录见本节末尾与根目录 `CODEX-ENGINE-REPORT.md`。回归范围按 §4.6：`sample-space`、`sample-forces`、`sample-energy`、`grasshopper`、`circuits`、`energy-conversion`。
 
 **已知差距**：`size:`（头壳宽）没有来源，夹具不写，单测用占位数；种群模拟、按温度改孑孓摆动、读者拖动标记圈仍是 v2（§4.7）。
+
+**最终引擎验收 / Codex, 2026-10-19**（本工作树，§4.6 全部完成；这里只验收引擎，不勾选 §8.2 的蚊子内容）：
+
+| 门槛 | 结果 |
+|---|---|
+| `pnpm install --frozen-lockfile` | 通过；无依赖变更 |
+| `pnpm check` | 548 files，0 errors、0 warnings；3 个既有 unused-variable hints |
+| `pnpm validate` | 34 topics，0 errors、0 warnings |
+| `VITEST_MAX_FORKS=4 VITEST_MIN_FORKS=1 pnpm test` | 101 files、2673 tests 全过；只限制本机 worker 并发，未改断言或超时 |
+| `pnpm build` | 通过；71 个静态页面 |
+| `pnpm shoot sample-life-cycle --beats --keys --layout` | 11/11 拍深链接相符，0 key failures、0 layout issues、0 beat failures，console clean；8 个尺寸从 3840 × 2160 到 390 × 844 |
+| `CI=1 pnpm e2e` | 142/142 通过，exit 0（20.7 min）；其中本夹具 10/10 |
+
+回归命令逐个运行 `pnpm shoot <topic> --beats --keys`：`sample-space` 15/15、`sample-forces` 16/16、`sample-energy` 14/14、`grasshopper` 32/32、`circuits` 31/31、`energy-conversion` 37/37；共 145 个拍深链接，全部匹配，键盘 0 失败，console clean。
+
+逐张打开并检查最终 `shots/sample-life-cycle/en-paper/beat-*.png` 的全部 11 张；修正了旧夹具中皿体遮挡、孑孓太小及穿过皿底、倒水后水面仍在、其他章冒出飞走的成虫等问题。四个龄期各一只、壁上五粒卵、倒水拍三只飞走的成虫可辨；擦壁后卵不见。另查 1280 / 1024 / 390 宽排版；补拍 EN / ZH × paper / cinema 的环卡、对照与倒水状态，并查看各语言 / 主题的对照图。既有主题另抽查 24 张回归图，未见本次引擎造成的回归；`sample-forces` 的 falling 第 2 拍落点薄片部分藏在演示字幕后，是既有内容构图，本次未改其他主题内容。
+
+验收期间修正两个 QA 时序问题：`shoot` 的拍 / 排版深链接改为在同一标签页完整导航，每次释放前一个 WebGL 场景、保留新 document / store 检查，且就绪等待上限 60 秒；既有 HUD 键盘测试在断言隐藏前等待 CSS fade 完成，保留原隐藏断言和总超时。初次全量 e2e 的 141 过 / 1 失败与后续单项重现均定位到软件 WebGL 下 CSS 动画时钟未推进；修正后单项和最终全量均通过。默认单测并发曾令既有 WWII anchor 测试超过其 5 秒上限，最终用上表 worker 限制完整通过。
+
+本机纯模型热身后 100,000 次求值平均约 0.00369 ms；夹具正常约 15 calls / 29,104 triangles，倒水约 13 / 25,456。浏览器是 headless 软件 WebGL，未据此宣称真机 FPS。`shoot` 报该页加载 JS 464.9 KB gzip（11 files），超过 docs/02 的 300 KB 目标；既有 `sample-space` 同测约 484.8 KB。这是共享 SpaceScene bundle 的预算差距，本次没有扩大到依赖或打包重构。未完成项：本次要求的引擎项无；有来源的 `size:` 内容与 §4.7 v2 仍不在本次范围。完整数据契约、文件与记录见根目录 `CODEX-ENGINE-REPORT.md`。
