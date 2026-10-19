@@ -702,7 +702,7 @@ toSmall(c) → Measure(235 cm) ;  fromSmall(Measure(1250 ml), 'l') → 1 ℓ 250
 1. **`sub` 的写法**按 §3.2 的 JSON：`unit` 是值的单位（小单位），`sub.unit` 是大单位（`per` 可写，必须等于进率）。§2.2 拍表里 `dial{… sub {g, 1000} …}` 一类简写写成 `unit: "g", sub: { unit: "kg" }`。
 2. **`major` / `minor`** 是任意正数（小数写字符串 `"0.1"`），validate 查 `major` 是 `minor` 的 1–10 倍、`from` 在刻度上、`(to − from)` 是整格；§3.2 的"1–10 的整数"读作两者的比。圆盘角度写器具顶层 `sweep`，不是草案 JSON 的 `dial.sweep`。
 3. **`unroll`** 是一个器具在 `straight: false` 与 `straight: true` 之间的过渡（≤ 900 ms）。第 06 步第 2 拍"拉直再卷回"写成：第 2 拍 `straight: true`（拉直），下一拍同一器具不带 `straight` 再写 `move: "unroll"`（卷回）；拉直的样子在 VIEW 里也是同一个画法。
-4. **拉直的刻度（VIEW）**是器具自己的直线画法（`straight`：同样的刻度和数、读数一个三角、`set-scale` 的游标照样能拖能键盘），不是换成 `numberline` 模型（换模型就丢了孩子的把手和放大镜）。M10 要的整数数轴放宽照做（`to ≤ 10 000`、`step` 任意、新 `major`），作者写数轴拍时用。
+4. **拉直的刻度（VIEW）**是器具自己的直线画法（`straight`：同样的刻度和数、读数一个三角、`set-scale` 的游标照样能拖能键盘），不是换成 `numberline` 模型（换模型就丢了孩子的把手和放大镜）。M10 要的整数数轴放宽照做（`to ≤ 10 000`、`step` 任意、新 `major`），作者写数轴拍时用。共用整数数轴保留既有的最多 100 格校验；器具仍是最多 60 个可见小格（或配 `zoom`），本课的数轴拍按 §3.7 的 60 格以内写。
 5. **`measure` 的芯片缺省**已按 §3.5 收尾：解析步骤时继承本步 `limits.units`；独立题 / 练习无步上限时取答案那一族（cm / m / km、g / kg、ml / ℓ）。题的显式 `units` 优先，也可只给一个芯片。
 6. **`limits.units`** 一个键两种值：小数课的换算对（`km-m` …）与本课的单位（`cm` …），各自的规则只看自己那一种。
 7. **数字不相撞**用"隔几个写一个"（每 2、5、10 个标数写一个，两端总写；圆盘首尾也查），没有做"手机上只画需要的一段"。密集刻度应写 `zoom` 或只给需要的范围；读数工具也可放大。窄屏缩短指针秤的秤盘，保留圆盘空间。量杯标签预留已收紧，复合括号不再把杯身挤成缩略图（336 px 模型框的带括号量杯 ≥ 200 px 高的几何单测）。
@@ -720,3 +720,24 @@ toSmall(c) → Measure(235 cm) ;  fromSmall(Measure(1250 ml), 'l') → 1 ℓ 250
 - `read-scale` 的答案必须等于读数（validate）；读复合单位的题写 `form: "compound"`，器具要有 `sub`（或是大单位的小数刻度：第 13 步）。
 - `count-intervals` 的 `ask: "part"` 必须是相邻两个标数刻度；`set-scale` 的 `weights` 题右盘空着、左盘放东西。
 - 想让误解被诊断出来，要选"故事唯一"的数（`check-pool` 报 WARN 的就换数）：例如路 0–3 km 每格 100 m 时 `1 km 4 m` 既是"每格当 1"又是"小单位 ÷100"，换成每格 200 m。
+
+
+### 9.4 Codex 引擎收尾验收（2026-10-19）
+
+从 WIP `c842cd9` 继续；正式 `measuring` 课程未施工。收尾提交 `5735f31`、`78412c7`、`742d460`：补 12 个 fixture e2e；单位芯片继承步上限；中英文器具读屏描述不代算答案；修压短卷尺拖动反映射、圆盘缺口取近端；量杯印单位并扩大窄屏器具；开放尺子末端放大；验证砝码目标 / 最少解不超过盘的 12 个上限、读数括号从 0 开始，以及成组器具换算后范围一致。最后一项修正示例中两个相同杯身却使用不同容量范围的比较图。
+
+| 门槛 | 结果 |
+|---|---|
+| `pnpm install --frozen-lockfile` | 通过；未改依赖、lockfile 或 package.json |
+| `pnpm check` | 570 文件，0 errors、0 warnings；4 个既有 unused-symbol hints 在本次引擎范围外 |
+| `pnpm validate` | 34 topics，0 errors、0 warnings |
+| `pnpm test` | 105 文件、2734 tests 全部通过 |
+| `pnpm build` | 通过，71 个静态页面 |
+| `pnpm shoot sample-lesson-measure --beats --tasks --keys --layout` | 通过；24 拍、32 题（95 张题目状态图）、键盘 / 布局均 0 失败 |
+| 最后按要求重跑 `pnpm shoot sample-lesson-measure --beats --keys --layout` | 通过；24 拍全部打开检查；8 个尺寸（390×844 至 3840×2160），16 张布局图，0 issues；成对量杯修正后补拍其开始 / 错误 / 正确三态 |
+| 五个已发布 MathScene 主题回归截图 | fractions 15、multiplication-division 15、telling-time 14、area-perimeter 14、decimals 18，共 76 张与引擎施工前 `9b66ac6` 逐字节相同；8 张有 HUD 淡入差异的帧在两份构建上都关掉 CSS 动画后重拍比较 |
+| `CI=1 pnpm e2e` | 144 passed（23.0 分钟，单 worker）；含 fixture 的 12 项、32 题浏览器解法、中文 cinema 手机器具尺寸与 44 px 控件 |
+
+截图在 `shots/sample-lesson-measure/{en-paper,zh-cinema}/`；回归基线、比较清单、门槛日志在 `shots/measuring-regression/`（照仓库规则不进 git）。fixture 页面 JS 为 283.5 KB gzip（10 文件）。已看全部 24 拍，并检查 paper 的桌面 / 平板 / 手机与中文 cinema 手机的工具、作答与器具；修掉量杯过小及容量比较误导的问题。
+
+并行截图期间曾触发现有地理单测的 5 秒超时，以及既有 SpaceScene 锚点等待误差；最终验收采用串行完整 CI，全部通过，未放宽测试容差、未改其他主题内容。没有 merge 或 push。数据形状、文件索引与剩余差异见根目录 `CODEX-ENGINE-REPORT.md`；§8 的正式课程内容验收仍留给课程施工。
