@@ -904,4 +904,33 @@ SpaceScene / Model3DStage，paper 默认、cinema 可切。原型：`archetypes.
 
 ## 9. 施工记录 / 已知差距
 
-（空；施工后补：引擎记录、与 spec 的差异表、计数、门槛、已知差距、参考图表与写实轮次。）
+### 9.1 引擎（E-M1 + E-M2，一个 Opus 引擎代理，2026-10-19）
+
+**做了什么**：§4.6 的 E-M1、E-M2 全部，建在 docs/30、docs/31 已落地的试一试核心之上：试一试卡（改变 / 不变 / 观察、`[ ]`、`T`、记一行、`record.chart` 折线图、先猜后看、URL `sim=`）、`visible` / `pose` / `tint` 绑定、多路径流的 `intensity`（速度模式）、背景章的 `note`、PLATE 读数与块尾 `SIM` 行都直接沿用，没有改它们的代码。夹具主题 `src/content/topics/sample-life-cycle/`（draft，占位文字，只用程序化积木，12 个零件 + 1 个 context：一只玻璃浅皿、水、壁上的卵、四个占位孑孓、蛹、羽化站、成虫、飞走的成虫、标记圈；一条三路径的环流 `ring` / `out` / `lay`；6 个标记姿态 + `drained`）：背景章 00（`note`）、01 天数卡（T1）、02 水温卡（T2，表 + 折线图 + 先猜后看）、03 倒水卡（T3，`drained` 姿态、擦壁开关）、04 两个环（`compare`）；`stage`、`to-adult`、`days:<组>`、`days:<阶段>`、`days-left`、`on:`、`control:`、`emptying:*`、`rate` 各用一次（`size:` 只在单测里用占位数，§4.2 说"只在 F-26 找到来源时写"）。docs/06 新增「SpaceScene · 试一试 · 生活史（life-cycle）」，改了「试一试（sim）」的模型种类一行和代码清单。
+
+| 件 | 代码 | 要点 |
+|---|---|---|
+| E-M1 模型 | `lib/sim/lifecycle.ts`（新）、`sim-schema.ts`（`lifeCycleSchema`、`LIFE_STAGE_PLACES`、`SIM_KINDS` 加 `life-cycle`、`quantityKind` 一支、`lifeCycleIssues`、状态标签检查、`SimContext.contextParts`）、`schema.ts`（传 context 零件）、`lib/sim/index.ts`（注册、`SEPARATE_EXPERIMENTS['life-cycle'] = false`）、`scripts/validate-content.ts`（`card.compare.link` 的主题与章） | §4.2 全部量；`total` 缩放、最后一个边界钉在总数上；单测钉死 §2.4 全表 |
+| E-M2 环卡 | `lib/sim/cycle.ts`（新，版式 + 弧上的字 + 读屏文字）、`hud/CycleCard.tsx`（新）、`View.tsx`（卡片槽、标题 LIFE CYCLE / 生活史）、`explorer/TryIt.tsx`（< 1024 px 收进试一试卡）、`space-scene.css`、`src/i18n/ui.{en,zh}.json`（`space.card.cycle`、`space.try.cycle`、`space.cycle.*`） | 见 docs/06「生活史」 |
+| 测试 | `tests/space-scene/lifecycle.test.ts`（40 条）、`tests/space-scene/cycle-card.test.ts`（9 条）、样板 `tests/space-scene/fixtures/aedes-cycle.ts`（§4.2 的完整数据 = 作者模板）、`tests-e2e/sample-life-cycle.spec.ts`（8 条） | §4.6 的清单逐条 |
+
+**§2.4 全表（单测钉死）**：阶段边界 28 °C L1 [0, 1.877)、L2 [1.877, 2.556)、L3 [2.556, 3.555)、L4 [3.555, 5.373)、蛹 [5.373, 7.23)（§2.4 写的 5.372 是 5.3726 截断，按四舍五入是 5.373，整数天的结果不变）；第 0–8 天：20 °C 一一一一二三三四四、25 °C 一一一二三四四四蛹、28 °C 一一二三四四蛹蛹成、32 °C 一一二三四蛹蛹成成；孵化到成虫 13.4 / 10.2 / 7.2 / 6.4，幼虫 9.3 / 7.6 / 5.4 / 4.7，蛹 4.1 / 2.6 / 1.9 / 1.7，环速 0.54 / 0.71 / 1 / 1.13；倒水 2 / 4 / 6 / 8 / 10 / 14 → none / none / none / some / some / some；临界：28 °C 隔 7 天 none（7 ≤ 7.23）、32 °C 隔 7 天 some（7 > 6.40）、20 °C 隔 10 天 none、隔 14 天 some。环卡弧上的字 28 °C：等水来 · 1.9 · 0.7 · 1.0 · 1.8 · 1.9 天 · 产卵。
+
+**与 §4 的差异**（实现时的决定）：
+
+| # | spec | 实现 | 理由 |
+|---|---|---|---|
+| 1 | `rate: { flow, reference }`，模型给"该流每条路径"一个值 | `rate: { flow, paths, reference }`，`paths` 由作者列出，validate 要求恰好是这条流的全部路径 | 模型是只读 `sim` 的纯函数，流在 parts.json 别处；漏列的路径会停，所以必须列全 |
+| 2 | `groups: { larva: [...] }`，环卡括号写 "Larva / 幼虫（孑孓）" | 组可写数组，或 `{ stages, label }`（`label` = 环卡括号的名字）；成员必须是相邻、按顺序的计天阶段 | 括号的字要有来处 |
+| 3 | 阶段 `in`：water / wall / air | 另加 `land`；`part` 可不写 | 以后的青蛙、蝗虫、植物 |
+| 4 | 对照环"并排"（左本主题、右蝗虫） | 第二个环画在主环**下面**；卡上一个开关（`role="switch"`）写同一个 `compare` 控件，开时出"See the grasshopper / 看蝗虫"链接 | 右上卡约 260–280 px 宽，主环连圈外的字已占满宽度；并排要把字缩到 7 px 以下。章 / 拍 `sim.set` 照样能开关 |
+| 5 | 节点"下方标签"；整张卡 `role="img"` | 名字和弧上的字都在圈外（名字在站的方位，天数在两站之间，交替不撞）；"在水里"的带和组括号在圈内；整张卡 `role="group"` + `aria-label`（读屏文字），站是按钮，当前阶段 `aria-current="step"` | 圈外一圈、圈内一圈才放得下；`role="img"` 会把里面的按钮藏起来 |
+| 6 | 节点 44 px 命中区 | 命中方块是 viewBox 的 54 单位：卡片按 ≥ 82 % 画（1280 px 宽的右列）时 ≥ 44 CSS px；e2e 在 1600 与 900 宽量过 | 卡片 SVG 随列宽缩放 |
+| 7 | `emptying:adults` 按 28 °C | 按**当前水温**的总数（T3 在 28 °C，结果相同）；单测另钉 32 °C、20 °C 的临界 | 模型不写死温度 |
+| 8 | `control:<控件>` | 步进控件 = 值，开关 = 1 / 0；选择控件不提供 | 量是数 |
+| 9 | validate"`adult` 不在最后" | 规则写成通用的：最后一个阶段是成虫、不计天，`start` 之前的阶段也不计天；某行给它们写了天数就报"takes no days"，没写给真正计天的阶段就报"no days for stage"——成虫没放最后时两条都会报 | 引擎里不出现 "adult" 这个名字 |
+| 10 | §4.5 写"不提交" | 引擎在工作分支上提交（主会话的 brief 要求），push 等 Gavin | — |
+
+**门槛与回归**：见 §9.1 末尾的 brief 报告（`pnpm check`、`validate`、`test`、`build`、`shoot sample-life-cycle --beats --keys --layout`、`CI=1 pnpm e2e`；`grasshopper`、`forces`、`energy-conversion`、`magnets`、`circuits` 的 `--beats --keys` 改前 / 改后对比）。
+
+**已知差距**：`size:`（头壳宽）没有来源，夹具不写，单测用占位数；种群模拟、按温度改孑孓摆动、读者拖动标记圈仍是 v2（§4.7）。

@@ -1,0 +1,46 @@
+---
+id: tip-out
+order: 3
+title: { en: "Sample tip it out", zh: "示例倒掉积水" }
+state:
+  view: assembled
+  explode: 0
+  run: true
+  part: null
+  layers: [water-dish, stages, grown, cycle]
+  pose: drained
+  hide: [follow-marker]
+  camera: {"position": [0.3, 10.8, 6.6], "target": [0, 0.4, 0.2], "fov": 34}
+  labels: [eggs, dish-water, escaped-adults]
+  summary: { en: "Sample tip it out: how often the water goes, and whether the wall is scrubbed.", zh: "示例倒掉积水：多久倒一次水，壁有没有刷。" }
+  sim:
+    set: { temp: 28, every: 6, wipe: false }
+    try:
+      vary: every
+      also: [wipe]
+      keep: [temp]
+      observe: [adults, eggs-left]
+      record: true
+  beats:
+    - caption: { en: "Sample beat one: tipped out every six days, no adult gets away.", zh: "示例节拍一：每六天倒一次，没有成虫飞走。" }
+    - sim: { set: { every: 14 } }
+      labels: [escaped-adults]
+      caption: { en: "Sample beat two: left for two weeks, some adults fly away.", zh: "示例节拍二：放两个星期，有成虫飞走了。" }
+    - sim: { set: { wipe: true } }
+      labels: [dish]
+      caption: { en: "Sample beat three: scrub the wall too and the eggs go with the water.", zh: "示例节拍三：连壁一起刷，卵也跟着清掉了。" }
+  index:
+    parts: [dish, dish-water, eggs, escaped-adults]
+---
+
+<Lang en>
+
+Sample tip it out: placeholder text for breaking the cycle.
+
+</Lang>
+
+<Lang zh>
+
+示例倒掉积水：打断这一圈的占位文字。
+
+</Lang>

@@ -888,5 +888,13 @@
   "space.energy.form.kinetic": "kinetic energy",
   "space.energy.form.sound": "sound energy",
   "space.energy.form.heat": "heat energy",
-  "space.energy.form.potential": "potential energy"
+  "space.energy.form.potential": "potential energy",
+  "space.card.cycle": "Life cycle",
+  "space.try.cycle": "Life cycle",
+  "space.cycle.days": "d",
+  "space.cycle.daysLong": "{n} days",
+  "space.cycle.lays": "lays eggs",
+  "space.cycle.inWater": "in water",
+  "space.cycle.summary": "Life cycle in this model at {temp}: {stages}.",
+  "space.cycle.see": "See the {name}"
 }

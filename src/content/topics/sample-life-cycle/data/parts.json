@@ -1,0 +1,1344 @@
+{
+  "parts": [
+    {
+      "id": "dish",
+      "name": {
+        "en": "Dish",
+        "zh": "浅皿"
+      },
+      "group": "water-dish",
+      "summary": {
+        "en": "Sample dish: placeholder summary.",
+        "zh": "示例浅皿：占位概述。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample dish.",
+        "zh": "占位说明：示例浅皿。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          3.2,
+          3.2,
+          1.0
+        ],
+        "at": [
+          0,
+          0.5,
+          0
+        ],
+        "color": "glass"
+      }
+    },
+    {
+      "id": "dish-water",
+      "name": {
+        "en": "Water",
+        "zh": "水"
+      },
+      "group": "water-dish",
+      "summary": {
+        "en": "Sample water: placeholder summary.",
+        "zh": "示例水：占位概述。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample water.",
+        "zh": "占位说明：示例水。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          3.12,
+          3.12,
+          0.72
+        ],
+        "at": [
+          0,
+          0.44,
+          0
+        ],
+        "color": "membrane",
+        "tint": "token:cold"
+      }
+    },
+    {
+      "id": "eggs",
+      "name": {
+        "en": "Eggs",
+        "zh": "卵"
+      },
+      "group": "stages",
+      "summary": {
+        "en": "Sample eggs: placeholder summary.",
+        "zh": "示例卵：占位概述。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample eggs.",
+        "zh": "占位说明：示例卵。"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.12
+        ],
+        "scale": [
+          1,
+          0.45,
+          0.45
+        ],
+        "at": [
+          -3.08,
+          0.98,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "color": "chitin",
+        "tint": "#2a2622"
+      },
+      "repeat": {
+        "count": 5,
+        "axis": [
+          0,
+          0,
+          1
+        ],
+        "spacing": 0.16
+      }
+    },
+    {
+      "id": "larva-l1",
+      "name": {
+        "en": "Larva 1",
+        "zh": "一龄幼虫"
+      },
+      "group": "stages",
+      "summary": {
+        "en": "Sample larva 1: placeholder summary.",
+        "zh": "示例一龄幼虫：占位概述。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample larva 1.",
+        "zh": "占位说明：示例一龄幼虫。"
+      },
+      "primitive": {
+        "kind": "capsule",
+        "size": [
+          0.07,
+          0.22
+        ],
+        "at": [
+          -1.803,
+          0.56,
+          -1.803
+        ],
+        "color": "chitin",
+        "tint": "#6b5a44"
+      }
+    },
+    {
+      "id": "larva-l2",
+      "name": {
+        "en": "Larva 2",
+        "zh": "二龄幼虫"
+      },
+      "group": "stages",
+      "summary": {
+        "en": "Sample larva 2: placeholder summary.",
+        "zh": "示例二龄幼虫：占位概述。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample larva 2.",
+        "zh": "占位说明：示例二龄幼虫。"
+      },
+      "primitive": {
+        "kind": "capsule",
+        "size": [
+          0.09,
+          0.36
+        ],
+        "at": [
+          -0.0,
+          0.47,
+          -2.55
+        ],
+        "color": "chitin",
+        "tint": "#6b5a44"
+      }
+    },
+    {
+      "id": "larva-l3",
+      "name": {
+        "en": "Larva 3",
+        "zh": "三龄幼虫"
+      },
+      "group": "stages",
+      "summary": {
+        "en": "Sample larva 3: placeholder summary.",
+        "zh": "示例三龄幼虫：占位概述。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample larva 3.",
+        "zh": "占位说明：示例三龄幼虫。"
+      },
+      "primitive": {
+        "kind": "capsule",
+        "size": [
+          0.12,
+          0.52
+        ],
+        "at": [
+          1.803,
+          0.36,
+          -1.803
+        ],
+        "color": "chitin",
+        "tint": "#6b5a44"
+      }
+    },
+    {
+      "id": "larva-l4",
+      "name": {
+        "en": "Larva 4",
+        "zh": "四龄幼虫"
+      },
+      "group": "stages",
+      "summary": {
+        "en": "Sample larva 4: placeholder summary.",
+        "zh": "示例四龄幼虫：占位概述。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample larva 4.",
+        "zh": "占位说明：示例四龄幼虫。"
+      },
+      "primitive": {
+        "kind": "capsule",
+        "size": [
+          0.15,
+          0.72
+        ],
+        "at": [
+          2.55,
+          0.23,
+          -0.0
+        ],
+        "color": "chitin",
+        "tint": "#6b5a44"
+      }
+    },
+    {
+      "id": "pupa",
+      "name": {
+        "en": "Pupa",
+        "zh": "蛹"
+      },
+      "group": "stages",
+      "summary": {
+        "en": "Sample pupa: placeholder summary.",
+        "zh": "示例蛹：占位概述。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample pupa.",
+        "zh": "占位说明：示例蛹。"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.26
+        ],
+        "scale": [
+          1,
+          0.85,
+          1.15
+        ],
+        "at": [
+          1.803,
+          0.5,
+          1.803
+        ],
+        "color": "chitin",
+        "tint": "#5a4a38"
+      }
+    },
+    {
+      "id": "emerging-adult",
+      "name": {
+        "en": "Emerging adult",
+        "zh": "正在羽化的成虫"
+      },
+      "group": "stages",
+      "summary": {
+        "en": "Sample emerging adult: placeholder summary.",
+        "zh": "示例正在羽化的成虫：占位概述。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample emerging adult.",
+        "zh": "占位说明：示例正在羽化的成虫。"
+      },
+      "primitive": {
+        "kind": "capsule",
+        "size": [
+          0.1,
+          0.5
+        ],
+        "at": [
+          0.0,
+          1.02,
+          2.55
+        ],
+        "rotation": [
+          0,
+          0,
+          90
+        ],
+        "color": "chitin",
+        "tint": "#3a332c"
+      }
+    },
+    {
+      "id": "adult",
+      "name": {
+        "en": "Adult",
+        "zh": "成虫"
+      },
+      "group": "grown",
+      "summary": {
+        "en": "Sample adult: placeholder summary.",
+        "zh": "示例成虫：占位概述。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample adult.",
+        "zh": "占位说明：示例成虫。"
+      },
+      "primitive": {
+        "kind": "capsule",
+        "size": [
+          0.16,
+          0.8
+        ],
+        "at": [
+          -3.9,
+          0.36,
+          3.6
+        ],
+        "rotation": [
+          0,
+          30,
+          90
+        ],
+        "color": "chitin",
+        "tint": "#2f2a25"
+      }
+    },
+    {
+      "id": "escaped-adults",
+      "name": {
+        "en": "Adults flying away",
+        "zh": "飞走的成虫"
+      },
+      "group": "grown",
+      "summary": {
+        "en": "Sample adults flying away: placeholder summary.",
+        "zh": "示例飞走的成虫：占位概述。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample adults flying away.",
+        "zh": "占位说明：示例飞走的成虫。"
+      },
+      "primitive": {
+        "kind": "capsule",
+        "size": [
+          0.08,
+          0.36
+        ],
+        "at": [
+          0.6,
+          2.6,
+          -0.4
+        ],
+        "rotation": [
+          0,
+          0,
+          90
+        ],
+        "color": "chitin",
+        "tint": "#2f2a25"
+      },
+      "repeat": {
+        "count": 3,
+        "axis": [
+          1,
+          0.4,
+          0.6
+        ],
+        "spacing": 0.6
+      }
+    },
+    {
+      "id": "follow-marker",
+      "name": {
+        "en": "Marker",
+        "zh": "标记圈"
+      },
+      "group": "cycle",
+      "summary": {
+        "en": "Sample marker: placeholder summary.",
+        "zh": "示例标记圈：占位概述。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample marker.",
+        "zh": "占位说明：示例标记圈。"
+      },
+      "primitive": {
+        "kind": "torus",
+        "size": [
+          0.38,
+          0.025
+        ],
+        "at": [
+          -1.803,
+          0.84,
+          -1.803
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "color": "token:signal"
+      }
+    },
+    {
+      "id": "bench",
+      "name": {
+        "en": "Bench",
+        "zh": "台面"
+      },
+      "context": true,
+      "summary": {
+        "en": "Sample bench: placeholder summary.",
+        "zh": "示例台面：占位概述。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample bench.",
+        "zh": "占位说明：示例台面。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          11,
+          0.2,
+          9
+        ],
+        "bevel": 0.04,
+        "at": [
+          0,
+          -0.1,
+          1.2
+        ],
+        "color": "wood"
+      }
+    }
+  ],
+  "groups": [
+    {
+      "id": "water-dish",
+      "name": {
+        "en": "Dish and water",
+        "zh": "浅皿与水"
+      },
+      "color": "token:cold"
+    },
+    {
+      "id": "stages",
+      "name": {
+        "en": "Young stages",
+        "zh": "各阶段"
+      },
+      "color": "token:ink-2"
+    },
+    {
+      "id": "grown",
+      "name": {
+        "en": "Adult",
+        "zh": "成虫"
+      },
+      "color": "token:neutral"
+    },
+    {
+      "id": "cycle",
+      "name": {
+        "en": "Cycle",
+        "zh": "环"
+      },
+      "color": "token:signal"
+    }
+  ],
+  "flows": [
+    {
+      "id": "life-cycle",
+      "group": "cycle",
+      "color": "token:ink-2",
+      "speed": 0.5,
+      "count": 260,
+      "size": 0.6,
+      "clip": false,
+      "whenRun": false,
+      "paths": [
+        {
+          "id": "ring",
+          "path": [
+            [
+              -2.55,
+              1.05,
+              -0.0
+            ],
+            [
+              -2.463,
+              1.05,
+              -0.66
+            ],
+            [
+              -2.208,
+              1.05,
+              -1.275
+            ],
+            [
+              -1.803,
+              1.05,
+              -1.803
+            ],
+            [
+              -1.275,
+              1.05,
+              -2.208
+            ],
+            [
+              -0.66,
+              1.05,
+              -2.463
+            ],
+            [
+              -0.0,
+              1.05,
+              -2.55
+            ],
+            [
+              0.66,
+              1.05,
+              -2.463
+            ],
+            [
+              1.275,
+              1.05,
+              -2.208
+            ],
+            [
+              1.803,
+              1.05,
+              -1.803
+            ],
+            [
+              2.208,
+              1.05,
+              -1.275
+            ],
+            [
+              2.463,
+              1.05,
+              -0.66
+            ],
+            [
+              2.55,
+              1.05,
+              -0.0
+            ],
+            [
+              2.463,
+              1.05,
+              0.66
+            ],
+            [
+              2.208,
+              1.05,
+              1.275
+            ],
+            [
+              1.803,
+              1.05,
+              1.803
+            ],
+            [
+              1.275,
+              1.05,
+              2.208
+            ],
+            [
+              0.66,
+              1.05,
+              2.463
+            ],
+            [
+              0.0,
+              1.05,
+              2.55
+            ]
+          ]
+        },
+        {
+          "id": "out",
+          "path": [
+            [
+              0.0,
+              1.05,
+              2.55
+            ],
+            [
+              0.0,
+              1.5,
+              3.1
+            ],
+            [
+              -1.6,
+              1.3,
+              3.9
+            ],
+            [
+              -3.6,
+              0.76,
+              3.6
+            ]
+          ]
+        },
+        {
+          "id": "lay",
+          "path": [
+            [
+              -4.3,
+              0.51,
+              3.4
+            ],
+            [
+              -4.2,
+              1.2,
+              2.2
+            ],
+            [
+              -3.6,
+              1.3,
+              0.8
+            ],
+            [
+              -3.15,
+              1.05,
+              0.25
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "animations": [],
+  "views": {
+    "assembled": {
+      "camera": {
+        "position": [
+          5.6,
+          10.2,
+          14.2
+        ],
+        "target": [
+          -0.6,
+          0.4,
+          1.2
+        ],
+        "fov": 34
+      }
+    },
+    "cover": {
+      "position": [
+        5.2,
+        9.6,
+        13.4
+      ],
+      "target": [
+        -0.6,
+        0.4,
+        1.2
+      ],
+      "fov": 34
+    },
+    "section": {
+      "plane": "xz"
+    }
+  },
+  "spec": [
+    {
+      "key": {
+        "en": "Stages",
+        "zh": "阶段"
+      },
+      "value": {
+        "en": "Egg → larva ×4 → pupa → adult",
+        "zh": "卵 → 幼虫 4 龄 → 蛹 → 成虫"
+      },
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Model",
+        "zh": "模型"
+      },
+      "value": {
+        "en": "Placeholder dish",
+        "zh": "占位浅皿"
+      },
+      "tag": "design"
+    }
+  ],
+  "telemetry": [
+    {
+      "key": {
+        "en": "Hatch to adult",
+        "zh": "孵化到成虫"
+      },
+      "unit": "d",
+      "follow": "to-adult"
+    },
+    {
+      "key": {
+        "en": "Larva",
+        "zh": "幼虫期"
+      },
+      "unit": "d",
+      "follow": "larva-days"
+    },
+    {
+      "key": {
+        "en": "Pupa",
+        "zh": "蛹期"
+      },
+      "unit": "d",
+      "follow": "pupa-days"
+    },
+    {
+      "key": {
+        "en": "Water",
+        "zh": "水温"
+      },
+      "unit": "°C",
+      "follow": "temp-now"
+    }
+  ],
+  "presets": [
+    {
+      "id": "dish-view",
+      "label": {
+        "en": "Dish",
+        "zh": "浅皿"
+      },
+      "camera": {
+        "position": [
+          0.3,
+          10.8,
+          6.6
+        ],
+        "target": [
+          0,
+          0.4,
+          0.2
+        ],
+        "fov": 34
+      }
+    },
+    {
+      "id": "adult-view",
+      "label": {
+        "en": "Adult",
+        "zh": "成虫"
+      },
+      "camera": {
+        "position": [
+          -1.6,
+          2.2,
+          7.4
+        ],
+        "target": [
+          -3.6,
+          0.4,
+          3.4
+        ],
+        "fov": 30
+      }
+    }
+  ],
+  "poses": {
+    "marker-l1": {
+      "follow-marker": {
+        "offset": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "marker-l2": {
+      "follow-marker": {
+        "offset": [
+          1.803,
+          0.0,
+          -0.747
+        ]
+      }
+    },
+    "marker-l3": {
+      "follow-marker": {
+        "offset": [
+          3.606,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "marker-l4": {
+      "follow-marker": {
+        "offset": [
+          4.353,
+          0.0,
+          1.803
+        ]
+      }
+    },
+    "marker-pupa": {
+      "follow-marker": {
+        "offset": [
+          3.606,
+          0.0,
+          3.606
+        ]
+      }
+    },
+    "marker-adult": {
+      "follow-marker": {
+        "offset": [
+          -2.097,
+          -0.18,
+          5.403
+        ]
+      }
+    },
+    "drained": {
+      "dish-water": {
+        "scale": [
+          1,
+          0.06,
+          1
+        ],
+        "offset": [
+          0,
+          -0.33,
+          0
+        ]
+      },
+      "larva-l1": {
+        "rotation": [
+          0,
+          0,
+          85
+        ],
+        "offset": [
+          0,
+          -0.44,
+          0
+        ]
+      },
+      "larva-l2": {
+        "rotation": [
+          0,
+          0,
+          85
+        ],
+        "offset": [
+          0,
+          -0.33,
+          0
+        ]
+      },
+      "larva-l3": {
+        "rotation": [
+          0,
+          0,
+          85
+        ],
+        "offset": [
+          0,
+          -0.19,
+          0
+        ]
+      },
+      "larva-l4": {
+        "rotation": [
+          0,
+          0,
+          85
+        ],
+        "offset": [
+          0,
+          -0.03,
+          0
+        ]
+      },
+      "pupa": {
+        "offset": [
+          0,
+          -0.2,
+          0
+        ]
+      },
+      "emerging-adult": {
+        "offset": [
+          0,
+          -0.85,
+          0
+        ]
+      }
+    }
+  },
+  "sim": {
+    "kind": "life-cycle",
+    "controls": [
+      {
+        "id": "temp",
+        "kind": "step",
+        "values": [
+          20,
+          25,
+          28,
+          32
+        ],
+        "default": 28,
+        "unit": "°C",
+        "label": {
+          "en": "Water temperature",
+          "zh": "水温"
+        }
+      },
+      {
+        "id": "day",
+        "kind": "step",
+        "values": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "default": 0,
+        "unit": "d",
+        "label": {
+          "en": "Days after hatching",
+          "zh": "孵化后第几天"
+        }
+      },
+      {
+        "id": "every",
+        "kind": "step",
+        "values": [
+          2,
+          4,
+          6,
+          8,
+          10,
+          14
+        ],
+        "default": 14,
+        "unit": "d",
+        "label": {
+          "en": "Water tipped out every",
+          "zh": "每隔几天倒一次水"
+        }
+      },
+      {
+        "id": "wipe",
+        "kind": "toggle",
+        "default": false,
+        "label": {
+          "en": "Wall scrubbed too",
+          "zh": "倒水后也刷壁"
+        }
+      },
+      {
+        "id": "compare",
+        "kind": "toggle",
+        "default": false,
+        "label": {
+          "en": "Show a second cycle",
+          "zh": "并排看另一种动物"
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "id": "stage",
+        "kind": "state",
+        "label": {
+          "en": "Stage",
+          "zh": "阶段"
+        },
+        "states": {
+          "egg": {
+            "en": "Egg",
+            "zh": "卵"
+          },
+          "l1": {
+            "en": "Larva 1",
+            "zh": "一龄幼虫"
+          },
+          "l2": {
+            "en": "Larva 2",
+            "zh": "二龄幼虫"
+          },
+          "l3": {
+            "en": "Larva 3",
+            "zh": "三龄幼虫"
+          },
+          "l4": {
+            "en": "Larva 4",
+            "zh": "四龄幼虫"
+          },
+          "pupa": {
+            "en": "Pupa",
+            "zh": "蛹"
+          },
+          "adult": {
+            "en": "Adult",
+            "zh": "成虫"
+          }
+        }
+      },
+      {
+        "id": "to-adult",
+        "label": {
+          "en": "Hatching to adult",
+          "zh": "孵化到成虫"
+        },
+        "unit": "d",
+        "decimals": 1
+      },
+      {
+        "id": "larva-days",
+        "from": "days:larva",
+        "label": {
+          "en": "As a larva",
+          "zh": "幼虫期"
+        },
+        "unit": "d",
+        "decimals": 1
+      },
+      {
+        "id": "pupa-days",
+        "from": "days:pupa",
+        "label": {
+          "en": "As a pupa",
+          "zh": "蛹期"
+        },
+        "unit": "d",
+        "decimals": 1
+      },
+      {
+        "id": "days-left",
+        "label": {
+          "en": "Days to adult",
+          "zh": "还有几天变成虫"
+        },
+        "unit": "d",
+        "decimals": 1
+      },
+      {
+        "id": "temp-now",
+        "from": "control:temp",
+        "label": {
+          "en": "Water",
+          "zh": "水温"
+        },
+        "unit": "°C",
+        "decimals": 0
+      },
+      {
+        "id": "on-pupa",
+        "from": "on:pupa",
+        "label": {
+          "en": "Pupa on show",
+          "zh": "正在蛹期"
+        }
+      },
+      {
+        "id": "adults",
+        "kind": "state",
+        "from": "emptying:adults",
+        "label": {
+          "en": "Adults fly away",
+          "zh": "有没有成虫飞走"
+        },
+        "states": {
+          "none": {
+            "en": "None",
+            "zh": "没有"
+          },
+          "some": {
+            "en": "Some",
+            "zh": "有"
+          }
+        }
+      },
+      {
+        "id": "eggs-left",
+        "kind": "state",
+        "from": "emptying:eggs",
+        "label": {
+          "en": "Eggs on the wall",
+          "zh": "壁上还有卵"
+        },
+        "states": {
+          "yes": {
+            "en": "Yes",
+            "zh": "有"
+          },
+          "none": {
+            "en": "None",
+            "zh": "没有"
+          }
+        }
+      },
+      {
+        "id": "rate",
+        "kind": "vector",
+        "label": {
+          "en": "Cycle speed",
+          "zh": "环的速度"
+        }
+      }
+    ],
+    "bind": [
+      {
+        "output": "stage",
+        "part": "follow-marker",
+        "pose": {
+          "l1": "marker-l1",
+          "l2": "marker-l2",
+          "l3": "marker-l3",
+          "l4": "marker-l4",
+          "pupa": "marker-pupa",
+          "adult": "marker-adult"
+        }
+      },
+      {
+        "output": "on-pupa",
+        "part": "pupa",
+        "tint": {
+          "color": "token:signal",
+          "full": 1
+        }
+      },
+      {
+        "output": "eggs-left",
+        "part": "eggs",
+        "visible": {
+          "eq": "yes"
+        }
+      },
+      {
+        "output": "adults",
+        "part": "escaped-adults",
+        "visible": {
+          "eq": "some"
+        }
+      },
+      {
+        "output": "rate",
+        "flow": "life-cycle",
+        "intensity": {
+          "full": 1
+        }
+      }
+    ],
+    "lifeCycle": {
+      "temp": "temp",
+      "day": "day",
+      "start": "l1",
+      "stages": [
+        {
+          "id": "egg",
+          "in": "wall",
+          "part": "eggs",
+          "label": {
+            "en": "Egg",
+            "zh": "卵"
+          },
+          "note": {
+            "en": "waits for water",
+            "zh": "等水来"
+          }
+        },
+        {
+          "id": "l1",
+          "in": "water",
+          "part": "larva-l1",
+          "label": {
+            "en": "Larva 1",
+            "zh": "一龄"
+          }
+        },
+        {
+          "id": "l2",
+          "in": "water",
+          "part": "larva-l2",
+          "label": {
+            "en": "Larva 2",
+            "zh": "二龄"
+          }
+        },
+        {
+          "id": "l3",
+          "in": "water",
+          "part": "larva-l3",
+          "label": {
+            "en": "Larva 3",
+            "zh": "三龄"
+          }
+        },
+        {
+          "id": "l4",
+          "in": "water",
+          "part": "larva-l4",
+          "label": {
+            "en": "Larva 4",
+            "zh": "四龄"
+          }
+        },
+        {
+          "id": "pupa",
+          "in": "water",
+          "part": "pupa",
+          "label": {
+            "en": "Pupa",
+            "zh": "蛹"
+          }
+        },
+        {
+          "id": "adult",
+          "in": "air",
+          "part": "adult",
+          "label": {
+            "en": "Adult",
+            "zh": "成虫"
+          }
+        }
+      ],
+      "groups": {
+        "larva": {
+          "stages": [
+            "l1",
+            "l2",
+            "l3",
+            "l4"
+          ],
+          "label": {
+            "en": "Larva",
+            "zh": "幼虫"
+          }
+        }
+      },
+      "days": {
+        "20": {
+          "l1": 2.99,
+          "l2": 1.52,
+          "l3": 1.62,
+          "l4": 3.15,
+          "pupa": 4.04,
+          "total": 13.4
+        },
+        "25": {
+          "l1": 2.53,
+          "l2": 1.17,
+          "l3": 1.08,
+          "l4": 2.77,
+          "pupa": 2.61,
+          "total": 10.18
+        },
+        "28": {
+          "l1": 1.88,
+          "l2": 0.68,
+          "l3": 1.0,
+          "l4": 1.82,
+          "pupa": 1.86,
+          "total": 7.23
+        },
+        "32": {
+          "l1": 1.55,
+          "l2": 0.95,
+          "l3": 0.7,
+          "l4": 1.63,
+          "pupa": 1.7,
+          "total": 6.4
+        }
+      },
+      "emptying": {
+        "every": "every",
+        "wipe": "wipe"
+      },
+      "rate": {
+        "flow": "life-cycle",
+        "paths": [
+          "ring",
+          "out",
+          "lay"
+        ],
+        "reference": 28
+      },
+      "card": {
+        "compare": {
+          "control": "compare",
+          "label": {
+            "en": "Grasshopper",
+            "zh": "蝗虫"
+          },
+          "stages": [
+            {
+              "id": "egg",
+              "label": {
+                "en": "Egg",
+                "zh": "卵"
+              }
+            },
+            {
+              "id": "nymph",
+              "label": {
+                "en": "Nymph",
+                "zh": "若虫"
+              }
+            },
+            {
+              "id": "adult",
+              "label": {
+                "en": "Adult",
+                "zh": "成虫"
+              }
+            }
+          ],
+          "link": {
+            "topic": "grasshopper",
+            "chapter": "nerves-and-growing-up"
+          }
+        }
+      }
+    }
+  }
+}

@@ -888,5 +888,13 @@
   "space.energy.form.kinetic": "动能",
   "space.energy.form.sound": "声能",
   "space.energy.form.heat": "热能",
-  "space.energy.form.potential": "势能"
+  "space.energy.form.potential": "势能",
+  "space.card.cycle": "生活史",
+  "space.try.cycle": "生活史",
+  "space.cycle.days": "天",
+  "space.cycle.daysLong": "{n} 天",
+  "space.cycle.lays": "产卵",
+  "space.cycle.inWater": "在水里",
+  "space.cycle.summary": "这个模型里水温 {temp} 时的生活史：{stages}。",
+  "space.cycle.see": "看{name}"
 }

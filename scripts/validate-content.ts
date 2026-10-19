@@ -14,7 +14,8 @@
  *   - MDX bodies carry both <Lang en> and <Lang zh> blocks (warning otherwise)
  *   - data/sources.json: ids unique (S1, S2 …); every event `sources` ref and
  *     every `<Num s="…">` in a chapter body names a listed source
- *   - `<TopicLink slug="…">` names a topic folder; `ch="…"` a chapter of it
+ *   - `<TopicLink slug="…">` names a topic folder; `ch="…"` a chapter of it (so
+ *     does a SpaceScene life-cycle ring card's `sim.lifeCycle.card.compare.link`)
  *   - `<FlyTo preset="…">` names a preset (TimeScene data/presets.json, SpaceScene
  *     parts.json `presets`); `<More>` has a title
  *   - data/glossary.json: term ids unique, `see` refs exist; every `<Term id="…">`
@@ -417,6 +418,14 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
     const skin = file.parts.some((p) => p.context === true && p.mesh !== undefined && !p.mesh.startsWith('skin-hand'));
     if (file.views?.exerciseBody === 'wire' && skin && !(await glbNodeNames(join(PUBLIC_DIR, model))).has('skin-wire'))
       warn(join(dataDir, 'parts.json'), `views.exerciseBody "wire": model ${model} has no "skin-wire" node, so the engine decimates the skin outline at load (slower, rougher)`);
+  }
+  // The life-cycle ring card's second ring links to another topic (docs/33 §4.3): checked like `<TopicLink slug ch>`.
+  const cycleLink = data !== undefined ? (data as { parts?: { sim?: { lifeCycle?: { card?: { compare?: { link?: { topic: string; chapter?: string } } } } } } }).parts?.sim?.lifeCycle?.card?.compare?.link : undefined;
+  if (cycleLink) {
+    const where = join(dataDir, 'parts.json');
+    if (!isDir(join(TOPICS_DIR, cycleLink.topic))) error(where, `sim.lifeCycle.card.compare.link: no topic "${cycleLink.topic}"`);
+    else if (cycleLink.chapter !== undefined && !chapterIdsOf(cycleLink.topic).has(cycleLink.chapter))
+      error(where, `sim.lifeCycle.card.compare.link: topic "${cycleLink.topic}" has no chapter "${cycleLink.chapter}"`);
   }
   if (data !== undefined && topic.engine === 'time-scene' && topic.stage === 'geo') {
     const readGeo = (name: string) => {

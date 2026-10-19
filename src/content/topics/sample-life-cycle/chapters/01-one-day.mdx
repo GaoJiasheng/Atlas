@@ -1,0 +1,39 @@
+---
+id: one-day
+order: 1
+title: { en: "Sample day by day", zh: "示例一天一天看" }
+state:
+  view: assembled
+  explode: 0
+  run: true
+  part: null
+  layers: [water-dish, stages, grown, cycle]
+  camera: {"position": [0.3, 10.8, 6.6], "target": [0, 0.4, 0.2], "fov": 34}
+  labels: [larva-l1, larva-l4, pupa]
+  summary: { en: "Sample day by day: follow one larva from hatching.", zh: "示例一天一天看：从孵化起跟着一只幼虫。" }
+  sim:
+    set: { temp: 28, day: 0 }
+    try:
+      vary: day
+      keep: [temp, { en: "Same food", zh: "同样的食物" }]
+      observe: [stage, days-left]
+  beats:
+    - caption: { en: "Sample beat one: day 0, just hatched.", zh: "示例节拍一：第 0 天，刚孵化。" }
+    - sim: { set: { day: 4 } }
+      labels: [larva-l4]
+      caption: { en: "Sample beat two: day 4, the marker has moved on.", zh: "示例节拍二：第 4 天，标记圈往前走了。" }
+  index:
+    parts: [larva-l1, larva-l2, larva-l3, larva-l4, pupa, follow-marker]
+---
+
+<Lang en>
+
+Sample day by day: placeholder text for following one larva through the stages.
+
+</Lang>
+
+<Lang zh>
+
+示例一天一天看：跟着一只幼虫走过各阶段的占位文字。
+
+</Lang>

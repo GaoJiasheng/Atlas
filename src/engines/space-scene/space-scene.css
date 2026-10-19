@@ -1780,6 +1780,160 @@ button.space-plate__sel:focus-visible {
   }
 }
 
+/* ------------------------------------------------------------------ */
+/* Card: the life-cycle ring (docs/33 E-M2)                            */
+/* ------------------------------------------------------------------ */
+
+.space-cy-card {
+  padding: calc(4 * var(--u)) calc(8 * var(--u)) calc(8 * var(--u));
+}
+.space-cy {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 52vh;
+  overflow: visible;
+}
+.space-cy__band {
+  fill: none;
+  stroke: var(--cold);
+  stroke-opacity: 0.15;
+  stroke-linecap: butt;
+}
+.space-cy__water {
+  font: 600 7px / 1 var(--font-hud);
+  letter-spacing: 0.14em;
+  fill: var(--cold);
+}
+.space-cy__bracket {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 0.8;
+}
+.space-cy__groupname {
+  font: 500 9px / 1 var(--font-hud);
+  fill: var(--ink-2);
+}
+.space-cy__line {
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 1;
+}
+.space-cy__head {
+  fill: var(--ink-2);
+}
+.space-cy__dot {
+  fill: var(--panel-solid);
+  stroke: var(--ink-2);
+  stroke-width: 1.2;
+}
+.space-cy__node[data-on] .space-cy__dot {
+  fill: var(--signal);
+  stroke: var(--signal);
+}
+.space-cy__node[data-picked] .space-cy__dot {
+  stroke: var(--signal);
+  stroke-width: 2;
+}
+.space-cy__wall {
+  stroke: var(--ink-3);
+  stroke-width: 1.4;
+}
+.space-cy__name {
+  font: 500 10.5px / 1 var(--font-hud);
+  letter-spacing: 0.02em;
+  fill: var(--ink);
+}
+.space-cy__node[data-on] .space-cy__name,
+.space-cy__node[data-picked] .space-cy__name {
+  fill: var(--signal);
+}
+.space-cy__days,
+.space-cy__note,
+.space-cy__total,
+.space-cy__temp {
+  animation: space-cy-in 300ms ease both;
+}
+.space-cy__days {
+  font: 600 10px / 1 var(--font-mono);
+  fill: var(--ink-2);
+}
+.space-cy__note {
+  font: italic 500 9.5px / 1 var(--font-hud);
+  fill: var(--ink-3);
+}
+.space-cy__total {
+  font: 600 13px / 1 var(--font-mono);
+  fill: var(--ink);
+}
+.space-cy__temp {
+  font: 500 9.5px / 1 var(--font-mono);
+  fill: var(--ink-3);
+}
+@keyframes space-cy-in {
+  from {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .space-cy__days,
+  .space-cy__note,
+  .space-cy__total,
+  .space-cy__temp {
+    animation: none;
+  }
+}
+.space-cy__title {
+  font: 600 9px / 1 var(--font-hud);
+  letter-spacing: 0.12em;
+  fill: var(--ink-2);
+}
+.space-cy__sim {
+  font: 500 10px / 1 var(--font-hud);
+  fill: var(--ink-3);
+}
+.space-cy__chip {
+  font: 600 10px / 1 var(--font-mono);
+  letter-spacing: 0.08em;
+  fill: var(--ink-2);
+}
+.space-cy__target {
+  fill: transparent;
+  stroke: none;
+}
+.space-cy__node[role="button"] {
+  cursor: pointer;
+}
+.space-cy__node[role="button"]:focus-visible {
+  outline: none;
+}
+.space-cy__node[role="button"]:focus-visible .space-cy__target {
+  stroke: var(--signal);
+  stroke-width: 1;
+}
+@media (hover: hover) {
+  .space-cy__node[role="button"]:hover .space-cy__target {
+    fill: var(--hair);
+  }
+}
+.space-cy__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+  margin-top: 6px;
+}
+.space-cy__compare {
+  flex: none;
+}
+.space-cy__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--hit);
+  font: 500 11px / 1.2 var(--font-hud);
+  color: var(--signal);
+}
+
 /* Energy bars' labels on the stage (docs/31 E-EN6): one small block under each set of bars. */
 .space-ebars [data-bars] {
   transition: opacity 0.2s ease;
