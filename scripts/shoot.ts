@@ -393,40 +393,37 @@ async function runBeatLinks(s: Session, o: Options, beats: { chapter: string; in
   if (shown.size === 0) return;
   const theme = await s.ev(() => window.__atlas!.state().appliedTheme);
   const path = new URL(s.page.url()).pathname;
-  const linked = await s.page.context().newPage();
-  linked.on('console', (m) => {
-    if (m.type() === 'error' && !IGNORED.some((re) => re.test(m.text()))) s.logs.push({ type: m.type(), text: m.text() });
-  });
-  linked.on('pageerror', (e) => {
-    if (!IGNORED.some((re) => re.test(e.message))) s.logs.push({ type: 'pageerror', text: e.message });
-  });
+  // Full navigation gives every link a fresh document and store. Reuse the
+  // tab so the captured presentation's WebGL context is destroyed first:
+  // always-on flows keep rendering even when that background scene pauses.
+  const linked = s.page;
   let same = 0;
-  try {
-    await linked.setViewportSize({ width: o.size[0], height: o.size[1] });
-    for (const b of beats) {
-      const name = `beat-${b.chapter}-${b.index + 1}`;
-      const want = shown.get(name);
-      if (!want) continue;
-      const link = `?ch=${encodeURIComponent(b.chapter)}&b=${b.index + 1}`;
-      await linked.goto(`${s.origin}${path}${link}${theme ? `&theme=${theme}` : ''}`);
-      await linked.waitForFunction(() => window.__atlas !== undefined, null, { timeout: 60_000 });
-      await linked.evaluate(() => window.__atlas!.ready);
-      await linked.waitForTimeout(400);
-      const got = await beatSceneOf(linked);
-      const diffs: string[] = [];
-      for (const key of Object.keys(want)) {
-        if (key === 'unfinished') continue;
-        const a = JSON.stringify(got?.[key] ?? null);
-        const e = JSON.stringify(want[key] ?? null);
-        if (a !== e) diffs.push(`${key} ${a} (presentation ${e})`);
-      }
-      if (got && got.unfinished.length) diffs.push(`runs not at their end: ${got.unfinished.join(', ')}`);
-      if (diffs.length) report.beatFailures.push(`${name}: opened from ${link}: ${diffs.join('; ')}`);
-      else same++;
-      if (diffs.length) console.log(`  ${`${name} (link)`.padEnd(36)} FAIL  ${diffs.join('; ').slice(0, 300)}`);
+  await linked.setViewportSize({ width: o.size[0], height: o.size[1] });
+  for (const b of beats) {
+    const name = `beat-${b.chapter}-${b.index + 1}`;
+    const want = shown.get(name);
+    if (!want) continue;
+    const link = `?ch=${encodeURIComponent(b.chapter)}&b=${b.index + 1}`;
+    await linked.goto(`${s.origin}${path}${link}${theme ? `&theme=${theme}` : ''}`);
+    await linked.waitForFunction(() => window.__atlas !== undefined, null, { timeout: 60_000 });
+    const ready = await linked.evaluate(() => Promise.race([
+      window.__atlas!.ready,
+      new Promise<boolean>((resolve) => window.setTimeout(() => resolve(false), 60_000)),
+    ]));
+    if (!ready) throw new Error(`${name}: linked stage never became ready`);
+    await linked.waitForTimeout(400);
+    const got = await beatSceneOf(linked);
+    const diffs: string[] = [];
+    for (const key of Object.keys(want)) {
+      if (key === 'unfinished') continue;
+      const a = JSON.stringify(got?.[key] ?? null);
+      const e = JSON.stringify(want[key] ?? null);
+      if (a !== e) diffs.push(`${key} ${a} (presentation ${e})`);
     }
-  } finally {
-    await linked.close();
+    if (got && got.unfinished.length) diffs.push(`runs not at their end: ${got.unfinished.join(', ')}`);
+    if (diffs.length) report.beatFailures.push(`${name}: opened from ${link}: ${diffs.join('; ')}`);
+    else same++;
+    if (diffs.length) console.log(`  ${`${name} (link)`.padEnd(36)} FAIL  ${diffs.join('; ').slice(0, 300)}`);
   }
   console.log(`  beat links: ${same} of ${shown.size} open on the presentation's scene`);
 }
@@ -978,28 +975,21 @@ async function runLayout(s: Session, out: string, report: RunReport, locale: str
     }
     await s.apply({ chapter: chapters[0], wait: 800 });
     await page.screenshot({ path: join(out, `layout-${w}x${h}.png`) });
-    // Opened from a link at this size (a shared beat: `?ch=<chapter>&b=2`, the reader and the HUD laid out on load, not after a
-    // resize), in a page of its own. Engines without beats ignore `b` and open at the chapter.
-    const linked = await page.context().newPage();
-    linked.on('console', (m) => {
-      if (m.type() === 'error' && !IGNORED.some((re) => re.test(m.text()))) s.logs.push({ type: m.type(), text: m.text() });
-    });
-    linked.on('pageerror', (e) => {
-      if (!IGNORED.some((re) => re.test(e.message))) s.logs.push({ type: 'pageerror', text: e.message });
-    });
-    try {
-      await linked.setViewportSize({ width: w, height: h });
-      for (const c of chapters) {
-        await linked.goto(`${s.origin}/${locale}/topics/${s.topic}/?ch=${encodeURIComponent(c)}&b=2&theme=${theme}`);
-        await linked.waitForFunction(() => window.__atlas !== undefined, null, { timeout: 60_000 });
-        await linked.evaluate(() => window.__atlas!.ready);
-        await linked.waitForTimeout(700);
-        await check(`${c} opened at beat 2`, linked);
-      }
-      await linked.screenshot({ path: join(out, `layout-${w}x${h}-linked.png`) });
-    } finally {
-      await linked.close();
+    // Full navigation checks the load-time layout in a fresh document,
+    // releasing the previous WebGL context before starting the next one.
+    // Engines without beats ignore `b` and open at the chapter.
+    for (const c of chapters) {
+      await page.goto(`${s.origin}/${locale}/topics/${s.topic}/?ch=${encodeURIComponent(c)}&b=2&theme=${theme}`);
+      await page.waitForFunction(() => window.__atlas !== undefined, null, { timeout: 60_000 });
+      const ready = await page.evaluate(() => Promise.race([
+        window.__atlas!.ready,
+        new Promise<boolean>((resolve) => window.setTimeout(() => resolve(false), 60_000)),
+      ]));
+      if (!ready) throw new Error(`${c}: linked layout stage never became ready`);
+      await page.waitForTimeout(700);
+      await check(`${c} opened at beat 2`);
     }
+    await page.screenshot({ path: join(out, `layout-${w}x${h}-linked.png`) });
     console.log(`  ${`${w}x${h}`.padEnd(10)} ${issues.length ? issues.length + ' issue(s)' : 'OK'}`);
     for (const i of issues) console.log(`      ${i}`);
   }
