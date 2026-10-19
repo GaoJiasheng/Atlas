@@ -5,7 +5,7 @@
  * and the records make a graph; the gas-to-lamp chain redraws for a filament
  * lamp and a node selects its part; predict-then-observe names the outcome;
  * the Chinese page reads in Chinese; on a phone the chain and the card fit
- * the drawer with 44 px targets.
+ * the drawer with 44 px targets; a drag from the orbit view frees the camera.
  */
 import { expect, test, type Page } from '@playwright/test';
 
@@ -101,6 +101,24 @@ test.describe('energy-conversion', () => {
     await expect(chainCard(page)).toHaveAttribute('aria-label', /发电机/);
     await expect(page.locator('body')).toContainText('踩出来的电能');
     await expect(page.locator('body')).toContainText('发电机并不制造能量');
+  });
+
+  test('dragging the stage from the orbit view frees the camera once the damped orbit comes to rest', async ({ page }) => {
+    // The building-sized model at ~4 fps under software GL settles in about 20 s (scripts/lib/drag-settle.ts).
+    test.setTimeout(150_000);
+    await open(page, '/en/topics/energy-conversion/');
+    await page.keyboard.press('1');
+    await expect.poll(async () => (await page.evaluate(() => window.__atlas!.state())).preset).toBe('orbit');
+    await expect(page.locator('[data-preset="orbit"]')).toHaveAttribute('aria-pressed', 'true');
+    // Nothing on the stage centre takes the drag.
+    expect(await page.evaluate(() => document.elementFromPoint(800, 450)?.tagName)).toBe('CANVAS');
+    await page.mouse.move(800, 450);
+    await page.mouse.down();
+    await page.mouse.move(940, 480, { steps: 8 });
+    await page.mouse.up();
+    await expect.poll(async () => (await page.evaluate(() => window.__atlas!.state())).preset, { timeout: 120_000, intervals: [500] }).toBeNull();
+    await expect(page.locator('[data-preset][aria-pressed="true"]')).toHaveCount(0);
+    await expect(page.locator('.space-plate')).toContainText('FREE CAMERA');
   });
 
   test('phone: the chain sits in the try-it card, inside the screen, with 44 px targets', async ({ page }) => {

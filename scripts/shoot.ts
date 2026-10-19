@@ -33,6 +33,7 @@ import { parseArgs } from 'node:util';
 import { gzipSync } from 'node:zlib';
 import { chromium, type Browser, type Page } from '@playwright/test';
 import { hudLayoutIssues, LAYOUT_SIZES } from '../tests-e2e/hud-layout';
+import { dragVerdict, type DragSample, type DragVerdict } from './lib/drag-settle';
 
 const ROOT = resolve(import.meta.dirname, '..');
 const DIST = join(ROOT, 'dist');
@@ -884,25 +885,46 @@ async function runKeys(s: Session, o: Options, report: RunReport): Promise<void>
     // A regional plate's whole-plate view sits at minimum zoom inside its bounds lock, so a drag there cannot move the camera:
     // that view is skipped and the drag is tried from the next preset.
     let free = false;
+    let verdict: DragVerdict = 'wait';
+    let waited = 0;
     for (const k of presetKeys.slice(0, 3)) {
       first = k;
       await page.keyboard.press(k.key);
       await page.waitForTimeout(2400);
+      // The camera is written back (FREE CAMERA) once the damped orbit stops: wait while the live camera still moves (scripts/lib/drag-settle.ts).
+      const sample = async (t0: number): Promise<DragSample> => ({
+        at: Date.now() - t0,
+        free: (await s.state()).preset === null,
+        camera: await page.evaluate(() => {
+          const cam = (window.__atlas!.stats() as { camera?: unknown }).camera;
+          return cam === undefined ? null : JSON.stringify(cam);
+        }),
+      });
+      const t0 = Date.now();
+      const samples = [await sample(t0)];
       await page.mouse.move(w * 0.5, h * 0.5);
       await page.mouse.down();
       await page.mouse.move(w * 0.5 + 140, h * 0.5 + 30, { steps: 8 });
       await page.mouse.up();
-      // Orbit damping is frame-count based: software GL at ~10 fps takes several seconds to settle before the camera is written back.
-      for (let i = 0; i < 64 && !free; i++) {
+      for (verdict = 'wait'; verdict === 'wait'; verdict = dragVerdict(samples)) {
         await page.waitForTimeout(250);
-        free = (await s.state()).preset === null;
+        samples.push(await sample(t0));
       }
+      free = verdict === 'free';
+      waited = samples.at(-1)!.at;
       const locked = !free && (await page.evaluate(() => document.querySelector('[data-region-plate]') !== null));
       if (!locked) break;
     }
     const target = first;
     const lit = await page.evaluate(() => document.querySelectorAll('[data-preset][aria-pressed="true"]').length);
-    record({ key: 'drag', type: 'camera', name: 'free-camera', ok: free && lit === 0, note: free && lit === 0 ? '' : `preset=${(await s.state()).preset} lit=${lit}` });
+    const why = { wait: '', free: '', still: 'the camera came to rest', unmoved: 'the drag did not move the camera', timeout: 'not freed' }[verdict];
+    record({
+      key: 'drag',
+      type: 'camera',
+      name: 'free-camera',
+      ok: free && lit === 0,
+      note: free && lit === 0 ? '' : `${why} after ${(waited / 1000).toFixed(1)} s: preset=${(await s.state()).preset} lit=${lit}`,
+    });
     await page.keyboard.press(target.key);
     // Wait for the preset to be applied (state and lit button), not a fixed delay: the heaviest models stall software GL.
     const back = await until(
