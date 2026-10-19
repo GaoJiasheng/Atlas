@@ -3321,3 +3321,446 @@
   fill: var(--ink);
   font-weight: 700;
 }
+
+/* ------------------------------------------------------------------ */
+/* Instruments (docs/32 §3.2, model A11): one scale grammar — hairline   */
+/* marks, 1.5 px numbered marks, serif numbers — on a ruler, a tape, a  */
+/* dial, a jug; a balance. Given = cold, the child's = signal, a second */
+/* = hot, "Show me" = dashed ink. No shading, no red / green.           */
+/* ------------------------------------------------------------------ */
+
+.ms-inst__major,
+.ms-inst__minor {
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+.ms-inst__major {
+  stroke-width: 1.5;
+}
+.ms-inst__major[data-lit],
+.ms-inst__minor[data-lit] {
+  stroke-width: 3;
+}
+.ms-inst__num {
+  fill: var(--ink);
+  font-family: var(--font-serif);
+  font-weight: 500;
+  /* A paper halo: a needle passing under a number leaves it readable. */
+  paint-order: stroke;
+  stroke: var(--panel-solid);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+.ms-inst__marks--dual .ms-inst__num {
+  fill: var(--ink-2);
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+.ms-inst__hidden {
+  fill: var(--panel-solid);
+  stroke: var(--ink-2);
+  stroke-width: 1;
+}
+.ms-inst__body {
+  fill: color-mix(in srgb, var(--ink) 4%, var(--panel-solid));
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+.ms-inst__body[data-look="metre-rule"] {
+  fill: color-mix(in srgb, var(--hot) 12%, var(--panel-solid));
+}
+.ms-inst__body[data-look="tape"] {
+  fill: color-mix(in srgb, var(--signal) 9%, var(--panel-solid));
+}
+.ms-inst__body[data-look="height-chart"] {
+  fill: color-mix(in srgb, var(--cold) 8%, var(--panel-solid));
+}
+.ms-inst__hook,
+.ms-inst__cap {
+  fill: var(--ink-2);
+  stroke: none;
+}
+.ms-inst__wall {
+  stroke: var(--ink-2);
+  stroke-width: 1;
+}
+.ms-inst__road rect {
+  fill: color-mix(in srgb, var(--ink) 6%, var(--panel-solid));
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+.ms-inst__road line {
+  stroke: var(--ink-3);
+  stroke-width: 1;
+}
+.ms-inst__skip path {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+.ms-inst__thing {
+  transition-property: transform;
+  transition-timing-function: var(--ease-in-out);
+}
+.ms-inst__drop {
+  stroke: var(--ink-2);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+.ms-inst__line {
+  stroke: var(--signal);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+.ms-inst__line[data-tone="cold"] {
+  stroke: var(--cold);
+}
+.ms-inst__arrow,
+.ms-inst__arrow path {
+  fill: var(--ink);
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+.ms-inst__arrow--mine {
+  fill: var(--signal);
+  stroke: var(--signal);
+}
+.ms-inst__ghost,
+.ms-inst__ghost-arrow {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.6;
+  stroke-dasharray: 5 4;
+}
+.ms-inst__person {
+  fill: color-mix(in srgb, var(--cold) 28%, var(--panel-solid));
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+.ms-inst__board {
+  fill: var(--ink-2);
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+.ms-inst__hit {
+  fill: transparent;
+  cursor: pointer;
+}
+.ms-inst__handle {
+  cursor: grab;
+  outline: none;
+}
+.ms-inst__grip {
+  fill: var(--signal);
+  stroke: var(--panel-solid);
+  stroke-width: 2;
+}
+.ms-inst__handle:focus-visible .ms-inst__grip {
+  stroke: var(--ink);
+  stroke-width: 2.5;
+}
+.ms-inst__stem {
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+.ms-inst__pan,
+.ms-bal__pan {
+  fill: color-mix(in srgb, var(--ink) 6%, var(--panel-solid));
+  stroke: var(--ink);
+  stroke-width: 1.2;
+}
+.ms-inst__dial {
+  fill: var(--panel-solid);
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+.ms-inst__rim {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 0.8;
+}
+.ms-inst__unit {
+  fill: var(--ink);
+  font-family: var(--font-mono);
+  font-weight: 600;
+  paint-order: stroke;
+  stroke: var(--panel-solid);
+  stroke-width: 5px;
+  stroke-linejoin: round;
+}
+.ms-inst__axis {
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+.ms-inst__turn {
+  transition-property: transform;
+  transition-timing-function: var(--ease-in-out);
+}
+.ms-inst__needle {
+  stroke: var(--ink);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+.ms-inst__needle--mine {
+  stroke: var(--signal);
+}
+.ms-inst__needle--ghost {
+  stroke-width: 2;
+  stroke-dasharray: 6 4;
+}
+.ms-inst__hub {
+  fill: var(--ink);
+}
+.ms-inst__liquid {
+  fill: color-mix(in srgb, var(--cold) 34%, var(--panel-solid));
+  transition-property: transform;
+  transition-timing-function: var(--ease-in-out);
+}
+.ms-inst__liquid[data-tone="hot"] {
+  fill: color-mix(in srgb, var(--hot) 34%, var(--panel-solid));
+}
+.ms-inst__liquid[data-mine] {
+  fill: color-mix(in srgb, var(--signal) 40%, var(--panel-solid));
+}
+.ms-inst__level {
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  transition-property: transform;
+  transition-timing-function: var(--ease-in-out);
+}
+.ms-inst__level[data-mine] {
+  stroke: var(--signal);
+  stroke-width: 2;
+}
+.ms-inst__vessel {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+}
+.ms-inst__eye line {
+  stroke: var(--ink);
+  stroke-width: 1;
+  stroke-dasharray: 5 4;
+}
+.ms-eye path {
+  fill: var(--panel-solid);
+  stroke: var(--ink);
+  stroke-width: 1.2;
+}
+.ms-eye circle {
+  fill: var(--ink);
+}
+.ms-inst__bracket line {
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+.ms-inst__bracket .ms-inst__ext {
+  stroke: var(--ink-3);
+}
+.ms-inst__bracket text {
+  fill: var(--ink);
+  font: 600 14px / 1 var(--font-mono);
+}
+.ms-inst__bracket[data-tone="signal"] line:not(.ms-inst__ext) {
+  stroke: var(--signal);
+}
+.ms-inst__bracket[data-tone="signal"] text {
+  fill: var(--signal);
+}
+.ms-inst__bracket[data-tone="cold"] line:not(.ms-inst__ext) {
+  stroke: var(--cold);
+}
+.ms-inst__count path {
+  fill: none;
+  stroke: var(--signal);
+  stroke-width: 1.4;
+}
+.ms-inst__count text {
+  fill: var(--signal);
+  font: 600 12px / 1 var(--font-mono);
+}
+.ms-inst__arc {
+  animation: ms-fade-in 260ms var(--ease-out) both;
+}
+.ms-inst__part path {
+  fill: transparent;
+  stroke: none;
+  cursor: pointer;
+}
+.ms-inst__part {
+  outline: none;
+}
+.ms-inst__part:focus-visible path {
+  fill: color-mix(in srgb, var(--signal) 14%, transparent);
+  stroke: var(--signal);
+  stroke-width: 1.5;
+}
+.ms-inst__part[aria-pressed="true"] path {
+  fill: color-mix(in srgb, var(--signal) 10%, transparent);
+}
+.ms-inst__ring,
+.ms-inst__leader {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+.ms-inst__lens {
+  fill: var(--panel-solid);
+  stroke: var(--ink);
+  stroke-width: 1.2;
+}
+
+/* Things measured: line art, a flat tone. */
+.ms-glyph path,
+.ms-glyph rect,
+.ms-glyph circle,
+.ms-glyph ellipse,
+path.ms-glyph {
+  fill: color-mix(in srgb, var(--cold) 26%, var(--panel-solid));
+  stroke: var(--ink);
+  stroke-width: 1;
+  stroke-linejoin: round;
+}
+.ms-glyph--hot path,
+.ms-glyph--hot rect,
+.ms-glyph--hot circle,
+.ms-glyph--hot ellipse,
+path.ms-glyph--hot {
+  fill: color-mix(in srgb, var(--hot) 26%, var(--panel-solid));
+}
+.ms-glyph--signal path,
+.ms-glyph--signal rect,
+.ms-glyph--signal circle,
+.ms-glyph--signal ellipse,
+path.ms-glyph--signal {
+  fill: color-mix(in srgb, var(--signal) 30%, var(--panel-solid));
+}
+.ms-glyph .ms-glyph__line {
+  fill: none;
+}
+.ms-glyph .ms-glyph__hole {
+  fill: var(--panel-solid);
+}
+.ms-glyph .ms-glyph__paper {
+  fill: var(--panel-solid);
+}
+path.ms-glyph--cord {
+  fill: none;
+}
+.ms-weight rect {
+  fill: color-mix(in srgb, var(--ink) 10%, var(--panel-solid));
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+.ms-weight--signal rect {
+  fill: color-mix(in srgb, var(--signal) 32%, var(--panel-solid));
+}
+.ms-weight[data-dashed] rect {
+  fill: none;
+  stroke-dasharray: 4 3;
+}
+.ms-weight text {
+  fill: var(--ink);
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+
+/* The balance: the beam turns, the pans stay level. */
+.ms-bal__base,
+.ms-bal__post {
+  fill: color-mix(in srgb, var(--ink) 10%, var(--panel-solid));
+  stroke: var(--ink);
+  stroke-width: 1.2;
+}
+.ms-bal__beam {
+  fill: color-mix(in srgb, var(--ink) 14%, var(--panel-solid));
+  stroke: var(--ink);
+  stroke-width: 1.2;
+}
+.ms-bal__pointer,
+.ms-bal__stem {
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+.ms-bal__pivot {
+  fill: var(--ink);
+}
+.ms-bal__side {
+  transition-property: transform;
+  transition-timing-function: var(--ease-in-out);
+}
+.ms-bal__thing {
+  cursor: pointer;
+  outline: none;
+}
+.ms-bal__thing:focus-visible rect:not(.ms-inst__hit) {
+  stroke: var(--signal);
+  stroke-width: 2.4;
+}
+.ms-bal__tag {
+  fill: var(--ink-2);
+  font: 600 13px / 1 var(--font-mono);
+}
+
+/* The card's line under its rows: "Each small part stands for 50 g". */
+.ms-card-body__note {
+  margin: 6px 0 0;
+  font: 500 calc(12px * var(--kb, 1)) / 1.35 var(--font-hud);
+  color: var(--ink-2);
+}
+
+/* Beat moves (docs/32 §3.3, ≤ 900 ms): the same instrument keeps its drawing, the moves are its transitions. */
+.ms-beat[data-model="instrument"][data-move="slide"],
+.ms-beat[data-model="instrument"][data-move="sweep"],
+.ms-beat[data-model="instrument"][data-move="fill"],
+.ms-beat[data-model="instrument"][data-move="tip"],
+.ms-beat[data-model="instrument"][data-move="unroll"],
+.ms-beat[data-model="instrument"][data-move="jump"],
+.ms-beat[data-model="instrument"][data-move="zoom"],
+.ms-beat[data-model="instrument"][data-move="shade"],
+.ms-beat[data-model="instrument"][data-move="place"] {
+  animation: none;
+}
+.ms-beat[data-move="zoom"] .ms-inst__mag {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ms-zoom-in 760ms var(--ease-out) both;
+}
+.ms-beat:not([data-move="jump"]) .ms-inst__arc {
+  animation-duration: 200ms;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ms-inst__thing,
+  .ms-inst__turn,
+  .ms-inst__liquid,
+  .ms-inst__level,
+  .ms-bal__side {
+    transition: none;
+  }
+  .ms-inst__arc,
+  .ms-beat[data-move="zoom"] .ms-inst__mag {
+    animation: ms-fade-in 200ms linear both;
+  }
+}
+
+/* Quantities to order (docs/32): cards and slots as wide as "1 kg 200 g". */
+.ms-order[data-qty] .ms-order__cards,
+.ms-order[data-qty] .ms-order__slots {
+  flex-wrap: wrap;
+}
+.ms-order[data-qty] .ms-card,
+.ms-order[data-qty] .ms-slot {
+  width: auto;
+  min-width: 104px;
+  padding: 0 10px;
+  font-size: 17px;
+  white-space: nowrap;
+}
+
+/* Setting an instrument from the tray: the four steps two by two. */
+.ms-mset {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, max-content));
+  gap: 8px;
+}

@@ -48,6 +48,10 @@ import { DecimalGrid } from './DecimalGrid';
 import { facesOf } from '../lib/clock';
 import { ClockModel, describeClock } from './ClockModel';
 import { Timeline } from './Timeline';
+import { InstrumentModel } from './Instrument';
+import type { InstrumentModelSpec } from '../schema';
+import { isQty, qtyText } from '../lib/value';
+import { qtyWords } from '../lib/words';
 
 export interface DisplayModes {
   symbol: boolean;
@@ -128,11 +132,27 @@ export const SPECIMEN_ARRAY: ArrayModelSpec = { kind: 'array', object: 'dot', la
 /** The background chapter of a lesson on time: a clock face at 7:20 (the hour hand a third of the way to 8). */
 export const SPECIMEN_CLOCK: ClockModelSpec = { kind: 'clock', time: 7 * 3600 + 20 * 60, face: 'clock', numerals: true, ticks: 'minutes', minuteLabels: true };
 
+/** The background chapter of a measuring lesson (docs/32 §3.7): a 0–1000 g dial scale, its needle at 0 (look before you weigh). */
+export const SPECIMEN_DIAL: InstrumentModelSpec = {
+  kind: 'instrument',
+  type: 'dial',
+  unit: 'g',
+  from: { units: 0, dp: 0 },
+  to: { units: 1000_000_000, dp: 0 },
+  major: { units: 100_000_000, dp: 0 },
+  minor: { units: 50_000_000, dp: 0 },
+  value: { units: 0, dp: 0 },
+  labels: 'major',
+  scale: true,
+  tilt: 'auto',
+};
+
 /** The background chapter of a lesson on decimals: a hundred grid with 0.35 shaded. */
 export const SPECIMEN_DECIMAL: DecimalGridModelSpec = { kind: 'decimal-grid', level: 100, given: { units: 350_000, dp: 2 } };
 
 function Specimen(p: StageContentProps & { view: ModelView }) {
   const { box, locale, defs } = p;
+  if (p.view === 'instrument' || p.view === 'straight') return <InstrumentModel model={SPECIMEN_DIAL} box={box} defs={defs} locale={locale} label={t(locale, 'math.specimen.dial')} />;
   if (p.view === 'clock' || p.view === 'timeline') return <ClockModel defs={defs} box={box} model={SPECIMEN_CLOCK} locale={locale} label={t(locale, 'math.specimen.clock')} />;
   if (p.view === 'grid') return <GridModel defs={defs} box={box} model={SPECIMEN_GRID} locale={locale} label={t(locale, 'math.specimen.grid')} />;
   if (p.view === 'decimal-grid') return <DecimalGrid defs={defs} box={box} model={SPECIMEN_DECIMAL} locale={locale} label={t(locale, 'math.specimen.decimal')} />;
@@ -199,6 +219,11 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
 
   /* the array, the blocks, the whole-number line: group, arrange, split, regroup, share, skip-count, or a picture to read */
   const pictures = task.kind === 'choose' && task.options.some((o) => o.model || o.value);
+
+  /* an instrument (docs/32 §3.4): read it, set it, count its parts, or a picture beside the numbers compared, ordered, written */
+  if (!pictures && m.kind === 'instrument') {
+    return <InstrumentModel model={m} box={area} defs={defs} locale={locale} label={label} task={task} state={state} editable={editable} act={act} ghost={ghost} straight={p.view === 'straight'} />;
+  }
   if (!pictures && (m.kind === 'array' || m.kind === 'blocks' || (m.kind === 'numberline' && m.scale === 'whole'))) {
     const live = task.kind === 'choose' || task.kind === 'input' ? null : task;
     const ghostState = ghost && live ? solvedState(task) : null;
@@ -246,7 +271,9 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
         id: o.id,
         letter,
         alt: o.value
-          ? isDec(o.value)
+          ? isQty(o.value)
+            ? qtyWords(o.value, locale)
+            : isDec(o.value)
             ? decimalWords(o.value, locale)
             : fractionWords(o.value, locale)
           : o.model?.kind === 'money'
@@ -267,6 +294,12 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
         draw: (b) => {
           if (o.model) return <MiniModel defs={defs} model={o.model} box={b} locale={locale} />;
           const v = o.value!;
+          if (isQty(v))
+            return (
+              <text className="ms-option__dec" x={b.x + b.w / 2} y={b.y + b.h / 2 + 6} textAnchor="middle" fontSize={clamp(b.h / 4.2, 16, 38)}>
+                {qtyText(v, locale)}
+              </text>
+            );
           if (isDec(v))
             return (
               <text className="ms-option__dec" x={b.x + b.w / 2} y={b.y + b.h / 2 + 6} textAnchor="middle" fontSize={clamp(b.h / 3.6, 18, 44)}>
@@ -560,6 +593,7 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
 export function MiniModel({ defs, model, box, locale }: { defs: string; model: Task['model']; box: Rect; locale: Locale }) {
   const label = '';
   if (model.kind === 'grid') return <GridModel defs={defs} box={box} model={model} locale={locale} label={label} mini />;
+  if (model.kind === 'instrument') return <InstrumentModel model={model} box={box} defs={defs} locale={locale} label={label} mini />;
   if (model.kind === 'array') return <ArrayModel defs={defs} box={box} model={model} locale={locale} label={label} mini />;
   if (model.kind === 'blocks') return <BlocksModel box={box} model={model} locale={locale} label={label} mini />;
   if (model.kind === 'clock') return <ClockModel defs={defs} box={box} model={model} locale={locale} label={label} mini />;

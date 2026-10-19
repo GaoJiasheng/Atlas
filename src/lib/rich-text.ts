@@ -9,6 +9,7 @@
  *   `{t:19:20|ampm}`  12-hour time with the letters am / pm in Chinese too (`7.20 pm`, where the letters are the point)
  *   `{d:95m}`, `{d:1h35m}`, `{d:75s}`  a duration in the units written (`1 h 35 min` / `1 小时 35 分钟`)
  *   `{u:28 cm2}`, `{u:1.5 l}`  a measure (`28 cm²`, `1.5 ℓ`, read "twenty-eight square centimetres", "one point five litres")
+ *   `{u:2 m 35 cm}`, `{u:1 l 250 ml}`  a measure in two units (`1 ℓ 250 ml`, read "1 litre 250 millilitres" /「1 升 250 毫升」, docs/32 §3.1)
  * Whole numbers are written as they are; `3 r 2` reads "3 remainder 2" /「3 余 2」.
  * Decimals and money are written as they are (`0.235`, `$2.35`, `0.666…`) and
  * read digit by digit after the point ("zero point two three five" /
@@ -22,7 +23,7 @@
  */
 import { createContext, createElement, Fragment, useContext, type ReactNode } from 'react';
 import { clockWords, decimalWords, durationWords, fractionWords, moneyWords, numberEn, numberZh, type FracSlots } from '../engines/math-scene/lib/words';
-import { clockText, DEFAULT_NOTATION, durationText, measureText, parseClock, parseDuration, parseMeasure, unitWords, type ClockMode, type DurUnit, type Measure, type Notation } from '../engines/math-scene/lib/value';
+import { clockText, compoundText, compoundWords, DEFAULT_NOTATION, durationText, measureText, parseClock, parseCompound, parseDuration, parseMeasure, unitWords, type ClockMode, type Compound, type DurUnit, type Measure, type Notation } from '../engines/math-scene/lib/value';
 import { parseDecimal, type Decimal } from '../engines/math-scene/lib/decimal';
 import { groupRuns, splitGlue } from './frac-glue';
 
@@ -33,6 +34,7 @@ export type RichPart =
   | { time: number; mode: ClockMode; letters?: boolean }
   | { dur: number; units: DurUnit[] }
   | { measure: Measure }
+  | { compound: Compound }
   /** A decimal written in the text (`more`: it goes on, `0.666…`). */
   | { dec: Decimal; raw: string; more: boolean }
   /** An amount of money written in the text, in cents. */
@@ -88,7 +90,9 @@ function tokenPart(body: string): Exclude<RichPart, { text: string }> | null {
   const u = MEASURE.exec(body);
   if (u) {
     const m = parseMeasure(u[1]!);
-    return m ? { measure: m } : null;
+    if (m) return { measure: m };
+    const c = parseCompound(u[1]!);
+    return c && c.smallPart > 0 ? { compound: c } : null;
   }
   return null;
 }
@@ -146,6 +150,7 @@ function shown(p: Exclude<RichPart, { text: string }>, locale: 'en' | 'zh', nota
   if ('time' in p) return clockText(p.time, p.mode, notation, locale, line || !!p.letters);
   if ('dur' in p) return durationText(p.dur, p.units, locale, line);
   if ('raw' in p) return p.raw;
+  if ('compound' in p) return compoundText(p.compound, locale);
   return measureText(p.measure, locale);
 }
 
@@ -170,6 +175,7 @@ export function speakable(text: string, locale: 'en' | 'zh'): string {
       if ('dur' in p) return durationWords(p.dur, p.units, locale);
       if ('money' in p) return moneyWords(p.money, locale);
       if ('dec' in p) return decimalWords(p.dec, locale, p.more);
+      if ('compound' in p) return compoundWords(p.compound, locale);
       return measureWords(p.measure, locale);
     })
     .join('');
@@ -202,7 +208,18 @@ export function fracNode(f: FracSlots, locale: 'en' | 'zh', key?: string | numbe
 /** A time, a duration, a measure, a decimal or an amount: one unbreakable run, its words for screen readers. */
 function ValueToken({ part, locale, line }: { part: Exclude<RichPart, { text: string } | { frac: FracSlots }>; locale: 'en' | 'zh'; line: boolean }) {
   const notation = useContext(NotationContext);
-  const words = 'time' in part ? clockWords(part.time, part.mode, locale) : 'dur' in part ? durationWords(part.dur, part.units, locale) : 'money' in part ? moneyWords(part.money, locale) : 'dec' in part ? decimalWords(part.dec, locale, part.more) : null;
+  const words =
+    'time' in part
+      ? clockWords(part.time, part.mode, locale)
+      : 'dur' in part
+        ? durationWords(part.dur, part.units, locale)
+        : 'money' in part
+          ? moneyWords(part.money, locale)
+          : 'dec' in part
+            ? decimalWords(part.dec, locale, part.more)
+            : 'compound' in part
+              ? compoundWords(part.compound, locale)
+              : measureWords(part.measure, locale);
   return createElement('span', { className: 'atlas-value', 'aria-label': words ?? undefined }, shown(part, locale, notation, line));
 }
 

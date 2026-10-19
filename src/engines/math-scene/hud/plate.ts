@@ -21,7 +21,11 @@ import { placedValue, shadedValue, shiftResult } from '../lib/decimal-tasks';
 import { clockShown, faceTime, facesOf } from '../lib/clock';
 import { hopEnd, hopStart, rangeOf } from '../lib/timeline';
 import { clockText, DEFAULT_NOTATION, durationText, naturalUnits, sep12, sep24, type ClockMode, type Notation } from '../lib/value';
-import type { ClockFaceSpec } from '../schema';
+import type { ClockFaceSpec, PanThing } from '../schema';
+import { beamTilt, panMass, partsOf, readingOf, scaleOf, unitOf } from '../lib/instrument';
+import { isInstrument } from '../lib/measure-kind';
+import { instrumentOf, setValue } from '../lib/measure-tasks';
+import { instrumentText, stepText } from '../lib/measure-working';
 
 const dash = '—';
 
@@ -194,4 +198,63 @@ function timelineRows(m: Extract<Model, { kind: 'timeline' }>, task: Task | null
   const from = jumps[0]?.[0] ?? m.marks?.[0]?.at ?? r.from;
   const to = jumps.at(-1)?.[1] ?? (m.marks && m.marks.length > 1 ? m.marks.at(-1)!.at : r.to);
   return rows(at(from), at(to), span(jumps.reduce((a, [x, y]) => a + Math.abs(y - x), 0)));
+}
+
+/** The plate's name of an instrument: RULER, TAPE, HEIGHT CHART, METRE RULER, PATH, SCALE, MEASURING CUP, BALANCE. */
+function instrumentName(m: Extract<Model, { kind: 'instrument' }>): string {
+  const s = partsOf(m)[0]!;
+  if (s.type === 'dial') return 'SCALE';
+  if (s.type === 'jug') return 'MEASURING CUP';
+  if (s.type === 'balance') return 'BALANCE';
+  if (s.look === 'height-chart') return 'HEIGHT CHART';
+  if (s.look === 'metre-rule') return 'METRE RULER';
+  if (s.look === 'path') return 'PATH';
+  return s.type === 'ruler' ? 'RULER' : 'TAPE';
+}
+
+const grams = (g: number) => (g >= 1000 && g % 1000 === 0 ? `${g / 1000} KG` : `${g} G`);
+
+/**
+ * Rows for an instrument (docs/32 §3.7): MODEL · UNIT · NUMBERS EVERY · SMALL PART and where it reads (START · END on a ruler or a
+ * tape, NEEDLE on a dial, LEVEL on a jug); a balance LEFT · RIGHT · BEAM. On a check the reading is `?` until done, the small
+ * part `—` until the parts are counted; a set-scale shows the child's own value.
+ */
+export function measurePlateRows(m: Model, task: Task | null, state: TaskState | null, done: boolean): PlateRow[] | null {
+  if (!isInstrument(m)) return null;
+  const s = (task && instrumentOf(task)) ?? partsOf(m)[0]!;
+  const rows: PlateRow[] = [{ key: 'math.plate.model', value: instrumentName(m) }];
+  const T = (text: string) => text.toLocaleUpperCase('en');
+  if (s.type === 'balance') {
+    const right: PanThing[] = task?.kind === 'set-scale' && state ? state.mweights.map((w) => ({ weight: w })) : (s.right ?? []);
+    const left = (s.left ?? []).map((x) => (x.item ? T(x.item.replace('-', ' ')) : grams(x.weight!))).join(' + ') || dash;
+    const tilt = task?.kind === 'set-scale' && state ? (panMass(s.left ?? []) === panMass(right) ? 0 : panMass(s.left ?? []) > panMass(right) ? -1 : 1) : beamTilt(s, right);
+    rows.push({ key: 'math.plate.left', value: left }, { key: 'math.plate.right', value: right.map((x) => (x.weight !== undefined ? grams(x.weight) : T(x.item!))).join(' + ') || dash }, { key: 'math.plate.beam', value: tilt === 0 ? 'LEVEL' : tilt < 0 ? 'LEFT DOWN' : 'RIGHT DOWN', on: true });
+    return rows;
+  }
+  const sc = scaleOf(s);
+  if (!sc) return rows;
+  const counting = task?.kind === 'count-intervals';
+  // What the child reads off the instrument stays `?` until done (quantities compared or ordered are given in the task).
+  const reading = !!task && !done && (task.kind === 'read-scale' || task.kind === 'input' || task.kind === 'choose');
+  const U = (x: string) => (x === 'l' ? 'ℓ' : T(x));
+  rows.push({ key: 'math.plate.unit', value: s.sub ? `${U(s.sub.unit)} · ${U(unitOf(s))}` : U(unitOf(s)) });
+  rows.push({ key: 'math.plate.every', value: T(stepText(s, sc.major, 'en')) });
+  rows.push({ key: 'math.plate.part', value: counting && !done ? dash : T(stepText(s, sc.minor, 'en')) });
+  const text = (v: number) => T(instrumentText(s, v, 'en'));
+  if (task?.kind === 'set-scale' && state) {
+    const key = s.type === 'dial' ? 'math.plate.needle' : s.type === 'jug' ? 'math.plate.level' : task.mode === 'arrow' ? 'math.plate.arrow' : 'math.plate.end';
+    rows.push({ key, value: state.mset === null ? dash : text(setValue(task, state)), on: true });
+    return rows;
+  }
+  const r = readingOf(s);
+  if (s.type === 'dial' || s.type === 'jug') {
+    rows.push({ key: s.type === 'dial' ? 'math.plate.needle' : 'math.plate.level', value: reading ? '?' : r ? text(r.value) : dash, on: true });
+    return rows;
+  }
+  if (r?.a !== undefined && r.b !== undefined) {
+    rows.push({ key: 'math.plate.start', value: text(r.a) }, { key: 'math.plate.end', value: reading ? '?' : text(r.value + r.a), on: true });
+    return rows;
+  }
+  rows.push({ key: s.head ? 'math.plate.end' : 'math.plate.arrow', value: reading ? '?' : r ? text(r.value) : dash, on: true });
+  return rows;
 }

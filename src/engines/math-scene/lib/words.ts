@@ -12,7 +12,7 @@
  * twelfths", "eight over what"; zh「十二分之几」「几分之八」.
  */
 import type { Frac } from './fraction';
-import { clockParts, durationParts, periodZh, type ClockMode, type DurUnit } from './value';
+import { clockParts, compoundWords, durationParts, periodZh, unitWords, type ClockMode, type DurUnit, type QtyValue } from './value';
 import { fracDigits, wholePart, type Decimal } from './decimal';
 
 const ONES = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
@@ -276,4 +276,16 @@ export function describePicture(rows: BarPicture[], locale: 'en' | 'zh'): string
   };
   if (rows.length === 1) return one(rows[0]!);
   return rows.map((r, i) => (locale === 'zh' ? `第 ${i + 1} 行：${one(r)}` : `Row ${i + 1}: ${one(r)}`)).join('; ');
+}
+
+/**
+ * A quantity read aloud (docs/32 §3.1): one unit with the number in words ("three hundred and fifty grams" /
+ * 「三百五十克」, a decimal digit by digit); two units "2 metres 35 centimetres" /「2 米 35 厘米」.
+ */
+export function qtyWords(q: QtyValue, locale: 'en' | 'zh'): string {
+  if (q.kind === 'cmp') return compoundWords(q, locale);
+  const whole = q.value.units % 1_000_000 === 0;
+  const n = q.value.units / 1_000_000;
+  const number = whole ? (locale === 'zh' ? numberZh(n) : numberEn(n)) : decimalWords(q.value, locale);
+  return `${number}${locale === 'zh' ? '' : ' '}${unitWords(q.unit, locale, whole && n === 1 ? 1 : 2)}`;
 }

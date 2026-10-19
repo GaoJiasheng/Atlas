@@ -14,6 +14,9 @@
  *   the number is an exact decimal (docs/29 X2), whole on the grid.
  * - Decimal: an exact decimal written with a point (`"0.35"`, docs/29 X1,
  *   `lib/decimal.ts`).
+ * - Quantity (docs/32 §3.1): a measure of length, mass or volume in one unit
+ *   (`"900 g"`) or in two (`"2 m 35 cm"`: a `Compound`, kept as 235 cm and
+ *   how it was written), compared and ordered in the family's smallest unit.
  *
  * The answer types of `input` (`AnswerValue`) are a fraction (`Frac`, which
  * also carries a whole number as `{ n, d: 1 }`) or one of the tagged values
@@ -332,6 +335,184 @@ export function unitWords(u: Unit, locale: 'en' | 'zh', count = 2): string {
 }
 
 /* ------------------------------------------------------------------ */
+/* Quantities: a measure in one unit or in two (docs/32 §3.1, M1)       */
+/* ------------------------------------------------------------------ */
+
+/** The pairs a compound measure is written in: big unit, small unit, how many small make one big. */
+export const COMPOUND_PAIRS = ['km-m', 'm-cm', 'kg-g', 'l-ml'] as const;
+export type CompoundPair = (typeof COMPOUND_PAIRS)[number];
+export type BigUnit = 'km' | 'm' | 'kg' | 'l';
+export type SmallUnit = 'm' | 'cm' | 'g' | 'ml';
+export const PAIR: Record<CompoundPair, { big: BigUnit; small: SmallUnit; factor: number }> = {
+  'km-m': { big: 'km', small: 'm', factor: 1000 },
+  'm-cm': { big: 'm', small: 'cm', factor: 100 },
+  'kg-g': { big: 'kg', small: 'g', factor: 1000 },
+  'l-ml': { big: 'l', small: 'ml', factor: 1000 },
+};
+/** The factor between a pair's units, by the pair's id. */
+export const FACTOR: Record<CompoundPair, number> = { 'km-m': 1000, 'm-cm': 100, 'kg-g': 1000, 'l-ml': 1000 };
+
+/** A measurement in two units, kept as a whole count of the small unit plus how it was written (`2 m 35 cm`: 235 cm). */
+export interface Compound {
+  big: BigUnit;
+  small: SmallUnit;
+  /** The whole measurement in the small unit. */
+  total: number;
+  bigPart: number;
+  smallPart: number;
+}
+
+/** The pair of two units (`m`, `cm` → `m-cm`), `null` when they are not one. */
+export function pairOf(big: Unit, small: Unit): CompoundPair | null {
+  return COMPOUND_PAIRS.find((p) => PAIR[p].big === big && PAIR[p].small === small) ?? null;
+}
+
+/** The pair a unit is the big one of (`m` → `m-cm`, `kg` → `kg-g`), else the one it is the small one of. */
+export function pairWithBig(u: Unit): CompoundPair | null {
+  return COMPOUND_PAIRS.find((p) => PAIR[p].big === u) ?? null;
+}
+
+const UNIT_TEXT = '(km|cm|ml|m|kg|g|ℓ|l)';
+const COMPOUND_RE = new RegExp(`^\\s*(\\d{1,2})\\s*${UNIT_TEXT}(?:\\s+(\\d{1,4})\\s*${UNIT_TEXT})?\\s*$`);
+const normUnit = (u: string): Unit => (u === 'ℓ' ? 'l' : (u as Unit));
+
+/** A compound made from its parts (`null`: not a pair, or the small part is a whole big unit or more). */
+export function makeCompound(pair: CompoundPair, bigPart: number, smallPart: number): Compound | null {
+  const { big, small, factor } = PAIR[pair];
+  if (!Number.isInteger(bigPart) || !Number.isInteger(smallPart) || bigPart < 0 || smallPart < 0 || smallPart >= factor || bigPart > 99) return null;
+  return { big, small, total: bigPart * factor + smallPart, bigPart, smallPart };
+}
+
+/** `"2 m 35 cm"`, `"1 l 250 ml"`, `"2 ℓ 250 ml"`, `"2 m"` (no small part) → a compound; `null` for `"2 m 135 cm"`, `"2 kg 35 cm"`. */
+export function parseCompound(text: string): Compound | null {
+  const m = COMPOUND_RE.exec(text);
+  if (!m) return null;
+  const big = normUnit(m[2]!);
+  if (m[3] === undefined) {
+    const pair = pairWithBig(big);
+    return pair ? makeCompound(pair, Number(m[1]), 0) : null;
+  }
+  const pair = pairOf(big, normUnit(m[4]!));
+  return pair ? makeCompound(pair, Number(m[1]), Number(m[3])) : null;
+}
+
+/** A compound from a total in the small unit (`1250 ml` in ℓ and ml → 1 ℓ 250 ml). */
+export function fromSmall(total: number, pair: CompoundPair): Compound {
+  const { big, small, factor } = PAIR[pair];
+  return { big, small, total, bigPart: Math.floor(total / factor), smallPart: total % factor };
+}
+
+/** The compound's pair. */
+export const compoundPair = (c: Compound): CompoundPair => pairOf(c.big, c.small)!;
+
+/** The compound as one measure in its small unit (`2 m 35 cm` → 235 cm). */
+export const toSmall = (c: Compound): Measure => ({ value: { units: c.total * 1_000_000, dp: 0 }, unit: c.small });
+
+/** The data string: `"2 m 35 cm"`, `"1 l 250 ml"` (a small part of 0 is left out: `"3 kg"`). */
+export const formatCompound = (c: Compound): string => `${c.bigPart} ${c.big}${c.smallPart ? ` ${c.smallPart} ${c.small}` : ''}`;
+
+/** As shown, in both languages with the symbols (`l` is shown ℓ): `2 m 35 cm`, `1 ℓ 250 ml`. */
+export function compoundText(c: Compound, locale: 'en' | 'zh' = 'en'): string {
+  const big = `${c.bigPart} ${unitText(c.big, locale)}`;
+  return c.smallPart ? `${big} ${c.smallPart} ${unitText(c.small, locale)}` : big;
+}
+
+/** Read aloud: "2 metres 35 centimetres" /「2 米 35 厘米」(docs/32 §3.1). */
+export function compoundWords(c: Compound, locale: 'en' | 'zh'): string {
+  const part = (n: number, u: Unit) => (locale === 'zh' ? `${n} ${unitWords(u, 'zh')}` : `${n} ${unitWords(u, 'en', n === 1 ? 1 : 2)}`);
+  return c.smallPart ? `${part(c.bigPart, c.big)} ${part(c.smallPart, c.small)}` : part(c.bigPart, c.big);
+}
+
+/** What a measure measures: length, mass or volume of liquid (the area units and the grid's `unit` are not quantities here). */
+export type Family = 'length' | 'mass' | 'volume';
+/** Each unit's family and its size in the family's smallest unit (cm, g, ml). */
+const IN_BASE: Partial<Record<Unit, { family: Family; base: number }>> = {
+  km: { family: 'length', base: 100_000 },
+  m: { family: 'length', base: 100 },
+  cm: { family: 'length', base: 1 },
+  kg: { family: 'mass', base: 1000 },
+  g: { family: 'mass', base: 1 },
+  l: { family: 'volume', base: 1000 },
+  ml: { family: 'volume', base: 1 },
+};
+export const familyOf = (u: Unit): Family | null => IN_BASE[u]?.family ?? null;
+/** The units of a family, smallest first. */
+export const FAMILY_UNITS: Record<Family, Unit[]> = { length: ['cm', 'm', 'km'], mass: ['g', 'kg'], volume: ['ml', 'l'] };
+/** How many of the family's smallest unit one `u` is (km → 100 000 cm). */
+export const baseOf = (u: Unit): number => IN_BASE[u]?.base ?? 1;
+
+/** A measure in one unit (`"900 g"`, `"1.4 kg"`), tagged. */
+export interface MeasValue extends Measure {
+  kind: 'meas';
+}
+/** A measure in two units (`"1 m 5 cm"`), tagged. */
+export interface CmpValue extends Compound {
+  kind: 'cmp';
+}
+/** A quantity compared, ordered, chosen or written: one unit or two. */
+export type QtyValue = MeasValue | CmpValue;
+
+const QTY_RE = new RegExp(`^\\s*\\d{1,5}(?:\\.\\d{1,6})?\\s+${UNIT_TEXT}\\s*$`);
+
+/**
+ * A quantity as the data writes it, always with a space before the unit (`"350 g"`, `"1.4 kg"`,
+ * `"2 m 35 cm"`, `"1 l 250 ml"`); `"50m"` stays a duration. `null` for anything else.
+ */
+export function parseQuantity(text: string): QtyValue | null {
+  if (QTY_RE.test(text)) {
+    const m = parseMeasure(text);
+    if (m && familyOf(m.unit)) return { kind: 'meas', ...m };
+  }
+  if (/\d\s+\D+\s+\d/.test(text)) {
+    const c = parseCompound(text);
+    if (c) return { kind: 'cmp', ...c };
+  }
+  return null;
+}
+
+export const isQty = (v: unknown): v is QtyValue => !!v && typeof v === 'object' && ((v as { kind?: unknown }).kind === 'meas' || (v as { kind?: unknown }).kind === 'cmp');
+
+/** The quantity's unit family. */
+export const qtyFamily = (q: QtyValue): Family => familyOf(q.kind === 'cmp' ? q.small : q.unit)!;
+
+/** The quantity in its family's smallest unit (an exact decimal: 1.4 kg → 1400 g, 2 m 5 cm → 205 cm). */
+export function qtyBase(q: QtyValue): Decimal {
+  if (q.kind === 'cmp') return { units: q.total * baseOf(q.small) * 1_000_000, dp: 0 };
+  return { units: q.value.units * baseOf(q.unit), dp: 0 };
+}
+
+/** The quantity in a unit of its family (`null`: another family, or not a whole number of millionths). */
+export function qtyIn(q: QtyValue, u: Unit): Decimal | null {
+  if (familyOf(u) !== qtyFamily(q)) return null;
+  const b = qtyBase(q).units;
+  const per = baseOf(u);
+  return b % per === 0 ? { units: b / per, dp: 0 } : null;
+}
+
+/** Compare two quantities of one family by value (`null`: different families). */
+export function compareQty(a: QtyValue, b: QtyValue): -1 | 0 | 1 | null {
+  if (qtyFamily(a) !== qtyFamily(b)) return null;
+  const x = qtyBase(a).units;
+  const y = qtyBase(b).units;
+  return x < y ? -1 : x > y ? 1 : 0;
+}
+
+/** The number printed first (`900` of 900 g, `1` of 1 m 5 cm): what a child compares who ignores the units. */
+export const printedNumber = (q: QtyValue): Decimal => (q.kind === 'cmp' ? { units: q.bigPart * 1_000_000, dp: 0 } : q.value);
+
+/** The data string: `"900 g"`, `"1 m 5 cm"`. */
+export const formatQty = (q: QtyValue): string => (q.kind === 'cmp' ? formatCompound(q) : formatMeasure(q));
+/** As rich text (`{u:900 g}`), shown and read by `src/lib/rich-text.ts`. */
+export const qtyToken = (q: QtyValue): string => `{u:${formatQty(q)}}`;
+/** As shown: `900 g`, `1 m 5 cm`, `1 ℓ 250 ml`. */
+export const qtyText = (q: QtyValue, locale: 'en' | 'zh' = 'en'): string => (q.kind === 'cmp' ? compoundText(q, locale) : measureText(q, locale));
+/** The measure in its family's smallest unit, as a token (`{u:1000 g}`): "change to the same unit". */
+export function baseToken(q: QtyValue): string {
+  const unit = FAMILY_UNITS[qtyFamily(q)][0]!;
+  return `{u:${formatDecimal(qtyBase(q))} ${unit}}`;
+}
+
+/* ------------------------------------------------------------------ */
 /* Answers                                                             */
 /* ------------------------------------------------------------------ */
 
@@ -340,9 +521,9 @@ export interface DecValue extends Decimal {
   kind: 'dec';
 }
 
-/** The value an `input` answer holds: a fraction or whole number, or a tagged value. */
-export type AnswerValue = Frac | RemValue | ClockValue | DurValue | DecValue;
-export type TaggedValue = RemValue | ClockValue | DurValue | DecValue;
+/** The value an `input` answer holds: a fraction or whole number, or a tagged value (a quantity: docs/32 §3.1). */
+export type AnswerValue = Frac | RemValue | ClockValue | DurValue | DecValue | QtyValue;
+export type TaggedValue = RemValue | ClockValue | DurValue | DecValue | QtyValue;
 
 /** A decimal answer (or a whole number, as a decimal with no places); `null` for a fraction, a time … */
 export function decimalOf(v: AnswerValue): Decimal | null {
@@ -355,10 +536,12 @@ export const isFracValue = (v: AnswerValue): v is Frac => !('kind' in v);
 
 /**
  * An answer as the data writes it: `56` · `"56"` · `"3/4"` (a fraction, parsed
- * by the caller) · `"3 r 2"` · `"09:40"` · `"1h35m"` · `"0.35"`. Returns the tagged value,
+ * by the caller) · `"3 r 2"` · `"09:40"` · `"1h35m"` · `"0.35"` · a quantity `"350 g"`, `"1 l 250 ml"`. Returns the tagged value,
  * or `null` for text that is not one (a fraction or a whole number then).
  */
 export function parseTagged(text: string): TaggedValue | null {
+  const qty = parseQuantity(text);
+  if (qty) return qty;
   if (hasPoint(text)) return { kind: 'dec', ...parseDecimal(text)! };
   const rem = parseRemainder(text);
   if (rem) return rem;
@@ -373,5 +556,6 @@ export function formatAnswer(v: AnswerValue): string {
   if (v.kind === 'rem') return formatRemainder(v);
   if (v.kind === 'clock') return formatClock(v.t);
   if (v.kind === 'dec') return formatDecimal(v);
+  if (v.kind === 'meas' || v.kind === 'cmp') return formatQty(v);
   return formatDuration(v.t, v.units);
 }

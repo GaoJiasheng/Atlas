@@ -21,6 +21,7 @@ import Figure from '../../../components/mdx/Figure.astro';
 import TopicLink from '../../../components/mdx/TopicLink.astro';
 import Time from '../../../components/mdx/Time.astro';
 import Dur from '../../../components/mdx/Dur.astro';
+import Qty from '../../../components/mdx/Qty.astro';
 import { LOCALES, localeHref, tx, withBase, type Locale } from '../../../i18n';
 import { chapterThemeMap, getTopicChapters, getTopics, topicEngineData, type TopicEntry } from '../../../lib/content';
 
@@ -48,7 +49,7 @@ topicEngineData(topic);
 const dataUrl = withBase(`/topics/${topic.id}/data.json`) + (import.meta.env.DEV ? '/' : '');
 
 // MDX components chapter bodies use without imports.
-const components = { Lang: locale === 'zh' ? LangZh : LangEn, More, Num, FlyTo, Term, Frac, Task, Beat, Figure, TopicLink, Time, Dur };
+const components = { Lang: locale === 'zh' ? LangZh : LangEn, More, Num, FlyTo, Term, Frac, Task, Beat, Figure, TopicLink, Time, Dur, Qty };
 ---
 <BaseLayout
   locale={locale}

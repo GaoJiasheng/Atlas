@@ -19,6 +19,9 @@ import { decimalBoxes, decimalSample, decimalSampleBoxes, decimalSolveModel, isD
 import { wholePart } from './decimal';
 import { HALF_DAY } from './clock';
 import { hopStart, hopsTo } from './timeline';
+import { isMeasureTask } from './measure-kind';
+import { measureBoxes, measureSample, measureSampleBoxes, measureSolveModel } from './measure-tasks';
+import { formatQty, isQty, parseQuantity } from './value';
 
 const range = (from: number, count: number) => Array.from({ length: count }, (_, i) => from + i);
 
@@ -26,6 +29,7 @@ const range = (from: number, count: number) => Array.from({ length: count }, (_,
 function inputActions(task: Task): Action[] {
   const spec = inputSpecOf(task);
   if (!spec) return [];
+  if (isMeasureTask(task)) return Object.entries(measureBoxes(task, spec)).map(([field, value]) => ({ do: 'input', field, value }) as Action);
   const filled = spec.form === 'decimal' ? decimalBoxes(spec) : usesValueBoxes(task, spec) ? valueBoxes(spec, splitArrayAnswers(task) ?? answerValues(spec)) : inputValues(spec, answersOf(spec));
   const boxes = Object.entries(filled).map(([field, value]) => ({ do: 'input', field, value }) as Action);
   return spec.form === 'measure' && spec.unit ? [...boxes, { do: 'input', field: 'u', value: spec.unit }] : boxes;
@@ -120,6 +124,8 @@ const decimalModel = (task: Task): boolean =>
 export function solve(task: Task): Action[] {
   const start = initialState(task);
   if (decimalModel(task)) return withInput(task, decimalSolveModel(task) as Action[]);
+  const measured = isMeasureTask(task) ? measureSolveModel(task) : null;
+  if (measured) return withInput(task, measured as Action[]);
   switch (task.kind) {
     case 'shade': {
       const free = range(0, start.parts * start.wholes).filter((i) => !start.given.includes(i));
@@ -153,6 +159,7 @@ export function solve(task: Task): Action[] {
       return task.options.filter((o) => o.correct).map((o) => ({ do: 'choose', id: o.id }));
     case 'input':
     case 'read-clock':
+    case 'read-scale':
       return inputActions(task);
     case 'set-clock':
       return [{ do: 'clock', t: task.target }];
@@ -204,6 +211,8 @@ export function solve(task: Task): Action[] {
     case 'round-on-line':
     case 'align-add':
     case 'shift-digits':
+    case 'set-scale':
+    case 'count-intervals':
       return [];
     case 'build-sum': {
       const out: Action[] = [];
@@ -284,6 +293,10 @@ export function sampleState(task: Task, sample: string): TaskState | null {
   const writeInput = (from: TaskState, text: string): TaskState | null => {
     const spec = inputSpecOf(task);
     if (!spec) return null;
+    if (isMeasureTask(task) && spec.form !== 'compound') {
+      const boxes = measureSampleBoxes(spec, text);
+      return boxes ? { ...from, input: boxes, phase: inputPhase } : null;
+    }
     if (spec.form === 'decimal') {
       const boxes = decimalSampleBoxes(spec, text);
       return boxes ? { ...from, input: boxes, phase: inputPhase } : null;
@@ -305,8 +318,8 @@ export function sampleState(task: Task, sample: string): TaskState | null {
     return { ...from, input: inputValues(spec, values), phase: inputPhase };
   };
   if (task.kind === 'input') return writeInput(initialState(task), sample);
-  // A clock read or a span worked out: only the answer is checked (`"7:20"`, `"1h75m"`, `"=11:35 am"`).
-  if (task.kind === 'read-clock' || task.kind === 'duration') return writeInput(initialState(task), sample.replace(/^=/, ''));
+  // A clock or a scale read, a span worked out: only the answer is checked (`"7:20"`, `"1h75m"`, `"=11:35 am"`, `"350 kg"`).
+  if (task.kind === 'read-clock' || task.kind === 'duration' || task.kind === 'read-scale') return writeInput(initialState(task), sample.replace(/^=/, ''));
   if (sample.startsWith('=') && inputPhase >= 0) {
     const actions = solve(task);
     const cut = actions.findLastIndex((a) => a.do === 'check');
@@ -314,6 +327,19 @@ export function sampleState(task: Task, sample: string): TaskState | null {
   }
   const start = initialState(task);
   if (decimalModel(task) && task.kind !== 'compare') return decimalSample(task, start, sample, (from, moves) => apply(task, moves as Action[], from));
+  if (isMeasureTask(task)) {
+    const m = measureSample(task, start, sample, (from, moves) => apply(task, moves as Action[], from));
+    if (m !== undefined) return m;
+    // Quantities in an order: `"1 kg,1 kg 200 g,850 g"` (as written in the task).
+    if (task.kind === 'order' && task.items.every(isQty)) {
+      const names = task.items.map((v) => (isQty(v) ? formatQty(v) : ''));
+      const order = sample.split(',').map((x) => {
+        const q = parseQuantity(x.trim());
+        return q ? names.indexOf(formatQty(q)) : -1;
+      });
+      return order.includes(-1) || order.length !== task.items.length ? null : { ...start, order };
+    }
+  }
   switch (task.kind) {
     case 'shade': {
       const n = Number(sample);
@@ -389,6 +415,8 @@ export function sampleState(task: Task, sample: string): TaskState | null {
     case 'round-on-line':
     case 'align-add':
     case 'shift-digits':
+    case 'set-scale':
+    case 'count-intervals':
       return null;
     case 'set-clock': {
       // `"3:50"` (the 12-hour position the hands are set to), `"3:50 pm"` with the am / pm plate.

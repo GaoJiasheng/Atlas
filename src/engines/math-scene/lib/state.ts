@@ -15,6 +15,7 @@ import { applyTrade, canTrade, counts, sharePlace, standard, ZERO, type Counts }
 import { parseArrayCut } from './array';
 import { cleanDecimal, DECIMAL_ACTIONS, decimalClear, decimalInitial, decimalReduce, onChart, type DecimalAction, type DecimalState } from './decimal-tasks';
 import { onDial, snapTo } from './clock';
+import { MEASURE_ACTIONS, measureClear, measureInitial, measureReduce, type MeasureAction, type MeasureState } from './measure-tasks';
 import { canHop } from './timeline';
 
 export type Sym = '<' | '=' | '>';
@@ -82,9 +83,11 @@ export type Action =
   /** Check the current phase: on success a multi-part task moves to its next phase. */
   | { do: 'check' }
   /** Decimals (docs/29 §3.6): the grid, the line's zoom, the ends, the rows, the digits, the chart. */
-  | DecimalAction;
+  | DecimalAction
+  /** Measuring (docs/32 §3.4): a value set on an instrument, weights on a balance, parts tapped, the tray's tools. */
+  | MeasureAction;
 
-export interface TaskState extends DecimalState {
+export interface TaskState extends DecimalState, MeasureState {
   /** Equal parts per whole (bar / circle), intervals per whole (number line); 0 = not cut yet. */
   parts: number;
   wholes: number;
@@ -146,6 +149,7 @@ export function phasesOf(task: Task): Phase[] {
     case 'input':
     case 'read-clock':
     case 'duration':
+    case 'read-scale':
       return ['input'];
     case 'build-sum':
       return [...(task.convert ? (['convert'] as const) : []), 'mark', 'input'];
@@ -161,6 +165,7 @@ export function phasesOf(task: Task): Phase[] {
     case 'share':
     case 'round-on-line':
     case 'align-add':
+    case 'count-intervals':
       return ['model', 'input'];
     case 'group':
     case 'regroup':
@@ -176,7 +181,7 @@ const timeSpecs = new WeakMap<Task, InputSpec>();
 /** The input spec of a task's input phase (`null` = none). */
 export function inputSpecOf(task: Task): InputSpec | null {
   if (task.kind === 'input') return task;
-  if (task.kind === 'build-sum') return task.answer;
+  if (task.kind === 'build-sum' || task.kind === 'read-scale') return task.answer;
   if (task.kind === 'read-clock' || task.kind === 'duration') {
     let spec = timeSpecs.get(task);
     if (!spec) {
@@ -209,6 +214,7 @@ export function initialState(task: Task): TaskState {
   const bar = m.kind === 'bar' || m.kind === 'circle';
   return {
     ...decimalInitial(task),
+    ...measureInitial(),
     parts: baseParts(task),
     wholes: m.kind === 'bar' ? (m.wholes ?? 1) : m.kind === 'numberline' && m.scale !== 'decimal' ? m.to - m.from : 1,
     shaded: bar ? indices(m.shaded) : [],
@@ -316,6 +322,7 @@ export function lineLength(state: TaskState): number {
 /** Apply one action (unknown or meaningless actions leave the state as it is). */
 export function reduce(task: Task, state: TaskState, action: Action): TaskState {
   if (DECIMAL_ACTIONS.has(action.do)) return decimalReduce(task, state, action as DecimalAction);
+  if (MEASURE_ACTIONS.has(action.do)) return measureReduce(task, state, action as MeasureAction);
   switch (action.do) {
     case 'shade': {
       const total = state.parts * state.wholes;
@@ -398,6 +405,7 @@ export function reduce(task: Task, state: TaskState, action: Action): TaskState 
     }
     case 'clear': {
       if (onChart(task) || task.kind === 'shade-decimal') return decimalClear(task, state);
+      if (task.kind === 'set-scale' || task.kind === 'count-intervals' || task.kind === 'read-scale') return measureClear(state);
       if (task.kind === 'duration') return state.hops.length ? { ...state, hops: [] } : state;
       if (task.kind === 'group' || task.kind === 'skip-count' || task.kind === 'regroup' || task.kind === 'share') {
         const start = initialState(task);

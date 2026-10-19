@@ -59,12 +59,13 @@ export function WholeLine(p: WholeLineProps) {
         return v === m.from || v === m.to;
       case 'tens':
       case 'wholes':
-        return v % 10 === 0 || v === m.from || v === m.to;
+        return v % (m.major ?? 10) === 0 || v === m.from || v === m.to;
       default:
         return true;
     }
   };
-  const major = (v: number) => v % 10 === 0 || v === m.from || v === m.to;
+  // A longer, numbered tick every ten (or every `major`: a scale straightened, docs/32 §3.7).
+  const major = (v: number) => v % (m.major ?? 10) === 0 || v === m.from || v === m.to;
   // Few pixels per tick: label fewer.
   const crowded = p.w / Math.max(1, ticks) < 22;
   const beatArcs = m.jumps ? Array.from({ length: m.jumps.count }, (_, i) => ({ a: (m.jumps!.from ?? m.from) + i * m.jumps!.size, b: (m.jumps!.from ?? m.from) + (i + 1) * m.jumps!.size })) : [];

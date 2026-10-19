@@ -14,7 +14,8 @@ import { inputSpecOf } from './lib/state';
 import { add, cmp, divWhole, eq, formatDecimal, fromFraction, minPlaces, round, sub, thousandths, toFraction, wholePart, type Decimal } from './lib/decimal';
 import { equivalent, formatFrac, type Frac } from './lib/fraction';
 import { answerValues } from './lib/forms';
-import { decimalOf, isFracValue, type DecValue } from './lib/value';
+import { decimalOf, isFracValue, type DecValue, type QtyValue } from './lib/value';
+import { decimalWorkOf } from './lib/measure-kind';
 import { gridsOf, levelPlaces, partialCells, runsOf, shadedTh, zoomCell, type GridLevel } from './lib/dgrid';
 import { baseLevel, levelsOf, LINE_MAX_STEPS, pathTo, roundingEnds, tickOf } from './lib/dline';
 import { chartCounts, dcounts, discCount, dregrouped, dtotal, fitsChart } from './lib/placevalue';
@@ -191,7 +192,7 @@ function wantOf(task: Task, spec: InputSpec): Decimal | null {
     return q.exact ? q.q : null;
   }
   if (task.kind === 'regroup' && typeof task.value !== 'number') return task.value;
-  const w = spec.work;
+  const w = decimalWorkOf(spec);
   if (!w) return null;
   if (w.do === 'divide' && w.a && w.b && spec.places !== undefined) return round(divWhole(w.a, wholePart(w.b), 6).q, spec.places);
   if (w.do === 'to-decimal' && w.of && !isDec(w.of)) return fromFraction(w.of, 3);
@@ -201,7 +202,7 @@ function wantOf(task: Task, spec: InputSpec): Decimal | null {
 /** The decimals a task gives (not its answer), for the limits. */
 function givenDecimals(task: Task): Decimal[] {
   const out: Decimal[] = [];
-  const num = (v: Frac | DecValue) => {
+  const num = (v: Frac | DecValue | QtyValue) => {
     if (isDec(v)) out.push(v);
   };
   switch (task.kind) {
@@ -233,7 +234,7 @@ function givenDecimals(task: Task): Decimal[] {
       break;
   }
   const spec = inputSpecOf(task);
-  const w = spec?.work;
+  const w = decimalWorkOf(spec);
   if (w?.a) out.push(w.a);
   if (w?.b && w.do !== 'multiply' && w.do !== 'divide') out.push(w.b);
   if (w?.of && isDec(w.of)) out.push(w.of);

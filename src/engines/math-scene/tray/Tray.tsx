@@ -29,12 +29,14 @@ import { WholeModelControls } from './WholeControls';
 import { HopChips, SetClockControls } from './TimeControls';
 import { AnswerInput } from './inputs';
 import { askOf } from '../lib/diagnose/measure';
-import { squared, unitText } from '../lib/value';
+import { isQty, squared, unitText } from '../lib/value';
 import { answerTokens } from '../lib/working';
 import { asFrac } from '../lib/check';
 import { numText, numToken } from '../lib/decimal-tasks';
 import { decimalAnswerLine } from '../lib/decimal-working';
 import { DecimalModelControls, hasDecimalControls } from './DecimalControls';
+import { hasMeasureControls, MeasureModelControls } from './MeasureControls';
+import { isMeasureTask } from '../lib/measure-kind';
 
 export interface TrayProps {
   ctl: Controller;
@@ -100,7 +102,9 @@ export function Tray(p: TrayProps) {
           {T('math.tray.answer')}{' '}
           {task.model.kind === 'grid'
             ? gridAnswerText(task, locale)
-            : spec.form === 'decimal'
+            : isMeasureTask(task)
+              ? renderRich(answerTokens(task), locale, { line: true })
+              : spec.form === 'decimal'
               ? renderRich(decimalAnswerLine(task, locale), locale, { line: true })
               : usesValueBoxes(task, spec)
                 ? renderRich(answerTokens(task), locale, { line: true })
@@ -173,6 +177,8 @@ function Controls(p: TrayProps & { phase: string; locked: boolean }) {
   const wholeKind = task.kind === 'group' || task.kind === 'arrange' || task.kind === 'skip-count' || task.kind === 'split-array' || task.kind === 'regroup' || task.kind === 'share';
   if (phase === 'model' && task.model.kind === 'grid' && task.kind !== 'choose') {
     parts.push(<GridModelControls key="grid" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
+  } else if (phase === 'model' && hasMeasureControls(task, phase)) {
+    parts.push(<MeasureModelControls key="measure" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
   } else if (phase === 'model' && hasDecimalControls(task)) {
     parts.push(<DecimalModelControls key="decimal" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
   } else if (phase === 'model' && wholeKind) {
@@ -181,6 +187,7 @@ function Controls(p: TrayProps & { phase: string; locked: boolean }) {
     parts.push(<SetClockControls key="clock" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
   } else if (phase === 'input') {
     if (task.kind === 'duration') parts.push(<HopChips key="hops" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
+    if (hasMeasureControls(task, phase)) parts.push(<MeasureModelControls key="tools" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
     parts.push(<AnswerInput key="input" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
     if (task.model.kind === 'barmodel' && task.model.units) {
       parts.push(
@@ -231,8 +238,8 @@ function Controls(p: TrayProps & { phase: string; locked: boolean }) {
     if (task.align) {
       parts.push(
         <button key="align" type="button" className="ms-btn ms-btn--ghost" aria-pressed={s.aligned} disabled={locked || s.aligned} onClick={() => ctl.act({ do: 'align' })}>
-          {T(task.align === 'point' ? 'math.tray.alignPoint' : 'math.tray.align')}
-          {s.aligned && task.align !== 'point' && <span className="ms-tray__count"> · {unitName(commonParts(asFrac(task.a), asFrac(task.b)))}</span>}
+          {T(task.align === 'point' ? 'math.tray.alignPoint' : task.align === 'unit' ? 'math.tray.alignUnit' : 'math.tray.align')}
+          {s.aligned && task.align !== 'point' && task.align !== 'unit' && <span className="ms-tray__count"> · {unitName(commonParts(asFrac(task.a), asFrac(task.b)))}</span>}
         </button>,
       );
     }
@@ -383,7 +390,7 @@ function OrderSlots({ task, state, ctl, locale, locked, ghost }: { task: Task; s
   if (task.kind !== 'order') return null;
   const right = ghost ? solvedState(task).order : null;
   return (
-    <div className="ms-order">
+    <div className="ms-order" data-qty={task.items.some(isQty) || undefined}>
       <div className="ms-order__cards" role="group" aria-label={T('math.order.cards')}>
         {task.items.map((f, i) =>
           state.order.includes(i) ? (

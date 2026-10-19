@@ -40,6 +40,8 @@ import { ClockModel } from './ClockModel';
 import { Timeline, timelineNow } from './Timeline';
 import type { TimeShown } from '../hud/cards/TimeCard';
 import { naturalUnits } from '../lib/value';
+import { InstrumentModel } from './Instrument';
+import { partsOf } from '../lib/instrument';
 
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
 const indices = (set: number | number[] | undefined): number[] => (set === undefined ? [] : Array.isArray(set) ? [...set] : Array.from({ length: set }, (_, i) => i));
@@ -76,6 +78,12 @@ export function beatShape(beat: Beat): string {
       return `pv|${JSON.stringify(m)}`;
     case 'money':
       return `money|${m.layout}|${JSON.stringify(m.pair ?? m.pieces ?? (m.amount ? formatDecimal(m.amount) : ''))}`;
+    case 'instrument':
+      // The same scale keeps its drawing (a thing slides, a needle sweeps, a level fills, a beam tips, a dial unrolls, arcs and a magnifier come);
+      // another scale, another instrument or another number of them remounts.
+      return `instrument|${partsOf(m)
+        .map((x) => [x.type, x.unit, x.from && formatDecimal(x.from), x.to && formatDecimal(x.to), x.major && formatDecimal(x.major), x.minor && formatDecimal(x.minor), x.look, x.orient, x.shape, x.scale, x.broken, x.inset && formatDecimal(x.inset), x.sub?.unit, x.dual, x.skip && formatDecimal(x.skip.from)].join(','))
+        .join('|')}`;
     case 'clock':
     case 'timeline': {
       // The same face keeps its drawing (the hands sweep to the new time, a lens comes and goes; new jumps are drawn on); another face or ruler remounts.
@@ -112,6 +120,7 @@ export function BeatModel({ beat, box, defs, modes, locale }: { beat: Beat; box:
   };
 
   if (m.kind === 'grid') return <GridModel defs={defs} box={box} model={m} locale={locale} label={label} />;
+  if (m.kind === 'instrument') return <InstrumentModel model={m} box={box} defs={defs} locale={locale} label={label} move={beat.move ?? null} />;
   if (isDecimalModel(m)) {
     if (m.kind === 'decimal-grid' && beat.under) {
       const lined = gridOverLine(m, beat.under, box);

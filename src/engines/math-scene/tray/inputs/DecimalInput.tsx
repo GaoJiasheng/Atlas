@@ -11,6 +11,9 @@ import { inputSpecOf } from '../../lib/state';
 import { decimalFields, workOf } from '../../lib/decimal-tasks';
 import { resultUnit, workSentence } from '../../lib/decimal-working';
 import { unitText, type Unit } from '../../lib/value';
+import { isMeasureTask } from '../../lib/measure-kind';
+import { printedUnit } from '../../lib/measure-tasks';
+import { convertSentence } from '../../lib/measure-working';
 import { t } from '../../../../i18n';
 import { Keypad, tr, type InputProps } from './boxes';
 import { useRef, useState } from 'react';
@@ -34,7 +37,9 @@ export function DecimalInput(p: InputProps) {
     else if (cur.length < DIGITS) write(current, cur + key);
   };
   const w = workOf(task, spec);
-  const unit = resultUnit(spec, w);
+  // A decimal read off an instrument (docs/32 step 13): its unit after the box, a quantity's conversion before it.
+  const measuring = isMeasureTask(task);
+  const unit = measuring ? (printedUnit(task, spec) ?? undefined) : resultUnit(spec, w);
   const dollar = unit === 'dollar';
   const after = !unit || dollar ? null : unit === 'cent' ? t(locale, 'math.money.cents') : unitText(unit as Unit, locale);
   const box = (field: string, i: number) => (
@@ -59,7 +64,7 @@ export function DecimalInput(p: InputProps) {
       {after && <span className="ms-input__unit">{after}</span>}
     </span>
   );
-  const sentence = spec.sentence ?? (w && task.kind === 'input' ? workSentence(w, spec, locale) : null);
+  const sentence = spec.sentence ?? (measuring ? convertSentence(spec) : w && task.kind === 'input' ? workSentence(w, spec, locale) : null);
   const parts = sentence ? sentence.split('?') : null;
   return (
     <div className="ms-input" data-keys="own">

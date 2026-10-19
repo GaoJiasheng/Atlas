@@ -16,6 +16,7 @@ import { ARRAY_MAX_DOT_ROWS, ARRAY_MAX_ROWS, ARRAY_MAX_THINGS, factOf, groupSize
 import { blockCount, canTrade, counts, matOf, regrouped, standard, total } from './lib/blocks';
 import { opResult } from './lib/diagnose/whole-ops';
 import { isDecimalTask } from './lib/decimal-tasks';
+import { isMeasureTask } from './lib/measure-kind';
 import { splitArrayCut } from './lib/solve';
 import { DAY, formatAnswer, formatClock, formatDuration, HOUR, isFracValue, MINUTE, WHOLE_MAX, type AnswerValue } from './lib/value';
 import { clockStart, facesOf, HALF_DAY } from './lib/clock';
@@ -32,10 +33,11 @@ const isTimeModel = (m: Model) => m.kind === 'clock' || m.kind === 'timeline';
 
 const modelsOf = (task: Task): Model[] => [task.model, ...(task.kind === 'choose' ? task.options.flatMap((o) => (o.model ? [o.model] : [])) : [])];
 
-/** The domain a task's misconceptions come from (docs/19 G5): grid → measure, decimals → decimals, times → time, whole numbers → whole-ops, else fractions. */
+/** The domain a task's misconceptions come from (docs/19 G5): grid → measure, instruments and quantities → measure-reading (docs/32), decimals → decimals, times → time, whole numbers → whole-ops, else fractions. */
 export function domainOf(task: Task): MisconceptionDomain {
   const models = modelsOf(task);
   if (models.some((m) => m.kind === 'grid') || ['count-squares', 'trace-perimeter', 'draw-rectangle', 'split-figure'].includes(task.kind)) return 'measure';
+  if (isMeasureTask(task)) return 'measure-reading';
   if (isDecimalTask(task)) return 'decimals';
   const spec = inputSpecOf(task);
   if (spec && ((TIME_FORMS as readonly string[]).includes(spec.form) || spec.convert || spec.span)) return 'time';
@@ -89,7 +91,7 @@ function lineIssues(m: NumberLineSpec): string[] {
   if (m.scale === 'fraction') {
     if (m.intervals === undefined) out.push('a fraction number line needs intervals (per whole)');
     if (m.to > 3) out.push(`a fraction number line goes to 3 at most (to: ${m.to})`);
-    if (m.step || m.jumps || m.counter) out.push('step, jumps and counter are for the whole-number line (scale: whole)');
+    if (m.step || m.jumps || m.counter || m.major) out.push('step, major, jumps and counter are for the whole-number line (scale: whole)');
     if (m.labels === 'tens' || m.labels === 'steps') out.push(`labels "${m.labels}" are for the whole-number line`);
     return out;
   }
@@ -98,6 +100,7 @@ function lineIssues(m: NumberLineSpec): string[] {
   if (m.to <= m.from) out.push('the line must go up');
   if ((m.to - m.from) % step !== 0) out.push(`from ${m.from} to ${m.to} is not a whole number of steps of ${step}`);
   if ((m.to - m.from) / step > 100) out.push('more than 100 ticks');
+  if (m.major !== undefined && m.major % step !== 0) out.push(`numbered ticks every ${m.major} are not on ticks of ${step}`);
   for (const f of [...(m.marks ?? []), ...(m.arrow ? [m.arrow] : [])]) {
     if (f.d !== 1 || f.w) out.push(`${f.n}/${f.d} is not a whole number (scale: whole)`);
     else if (f.n < m.from || f.n > m.to) out.push(`${f.n} is off the line`);

@@ -17,7 +17,7 @@ import { bilingual, kebabId, theme } from '../../content/schema/common';
 import { sourcesFile } from '../../content/schema/sources';
 import { glossaryFile } from '../../content/schema/glossary';
 import { parseFrac, type Frac } from './lib/fraction';
-import { ANSWER_UNITS, CLOCK12_NOTATIONS, CLOCK24_NOTATIONS, DAY, DEFAULT_NOTATION, parseClock, parseDuration, parseTagged, parseWhole, WHOLE_MAX, type AnswerValue, type DecValue, type DurValue } from './lib/value';
+import { ANSWER_UNITS, CLOCK12_NOTATIONS, CLOCK24_NOTATIONS, COMPOUND_PAIRS, DAY, DEFAULT_NOTATION, parseClock, parseDuration, parseQuantity, parseTagged, parseWhole, UNITS, WHOLE_MAX, type AnswerValue, type DecValue, type DurValue, type QtyValue } from './lib/value';
 import { DECIMAL_MAX_WHOLE, fromWhole, parseDecimal, wholePart, type Decimal } from './lib/decimal';
 
 /* ------------------------------------------------------------------ */
@@ -127,6 +127,22 @@ export const DECIMAL_CODES = [
  * diagnosed by its own domain's rules.
  */
 export const DECIMAL_SHARED_CODES = ['tick-counting', 'carry-not-added', 'zero-in-quotient', 'not-simplest'] as const;
+/** Reading instruments and quantities in units (docs/32 §2.1; rules in lib/diagnose/measure-reading.ts). The grid's area and perimeter keep `measure`. */
+export const MEASURE_READING_CODES = [
+  'read-end-mark',
+  'not-nearest',
+  'wrong-unit',
+  'unreasonable-estimate',
+  'ignored-unit',
+  'size-is-mass',
+  'taller-holds-more',
+  'balance-misread',
+  'compound-concatenated',
+  'compound-place',
+  'compound-split-wrong',
+] as const;
+/** Codes registered elsewhere that reading instruments uses too (docs/32 D13), each with a rule of its own in lib/diagnose/measure-reading.ts. */
+export const MEASURE_READING_SHARED_CODES = ['tick-counting', 'interval-misread', 'unit-factor-wrong', 'decimal-as-subunit'] as const;
 /** The domains, each with the codes its tasks may use (a task's codes come from one domain, validate). */
 export const MISCONCEPTION_DOMAINS = {
   fractions: FRACTION_CODES,
@@ -134,10 +150,11 @@ export const MISCONCEPTION_DOMAINS = {
   'whole-ops': WHOLE_OPS_CODES,
   time: TIME_CODES,
   decimals: [...DECIMAL_CODES, ...DECIMAL_SHARED_CODES],
+  'measure-reading': [...MEASURE_READING_CODES, ...MEASURE_READING_SHARED_CODES],
 } as const;
 export type MisconceptionDomain = keyof typeof MISCONCEPTION_DOMAINS;
 /** Misconceptions the feedback is designed around, each registered once in its home domain (docs/19 §3.0 G5); one flat list, every code unique. */
-export const MISCONCEPTIONS = [...FRACTION_CODES, ...MEASURE_CODES, ...WHOLE_OPS_CODES, ...TIME_CODES, ...DECIMAL_CODES] as const;
+export const MISCONCEPTIONS = [...FRACTION_CODES, ...MEASURE_CODES, ...WHOLE_OPS_CODES, ...TIME_CODES, ...DECIMAL_CODES, ...MEASURE_READING_CODES] as const;
 export const misconception = z.enum(MISCONCEPTIONS);
 export type MisconceptionCode = (typeof MISCONCEPTIONS)[number];
 
@@ -170,6 +187,9 @@ export const TASK_KINDS = [
   'read-clock',
   'set-clock',
   'duration',
+  'read-scale',
+  'set-scale',
+  'count-intervals',
 ] as const;
 /** Task kinds on the square grid (docs/21 §3.2). */
 export const GRID_KINDS = ['count-squares', 'trace-perimeter', 'draw-rectangle', 'split-figure'] as const;
@@ -179,10 +199,15 @@ export const ARRAY_KINDS = ['group', 'arrange', 'skip-count', 'split-array'] as 
 export const BLOCKS_KINDS = ['regroup', 'share'] as const;
 /** Task kinds on the clock face and the timeline (docs/20 §3.4). */
 export const TIME_KINDS = ['read-clock', 'set-clock', 'duration'] as const;
+/** Task kinds on an instrument (docs/32 §3.4). */
+export const MEASURE_KINDS = ['read-scale', 'set-scale', 'count-intervals'] as const;
 export type TaskKind = (typeof TASK_KINDS)[number];
 
-/** Model views a step may switch between (the VIEW group). `clock` and `timeline` are the time lesson's (docs/20 §3, model A3); `decimal-grid`, `place-value` and `money` the decimals' (docs/29 A6; their number line is `numberline`). */
-export const MODEL_VIEWS = ['bar', 'circle', 'numberline', 'wall', 'barmodel', 'grid', 'array', 'blocks', 'clock', 'timeline', 'decimal-grid', 'place-value', 'money'] as const;
+/**
+ * Model views a step may switch between (the VIEW group). `clock` and `timeline` are the time lesson's (docs/20 §3, model A3); `decimal-grid`, `place-value` and `money` the decimals' (docs/29 A6; their number line is `numberline`);
+ * `instrument` the measuring lesson's and `straight` its dial or jug drawn as the straight number line it is (docs/32 §3.7).
+ */
+export const MODEL_VIEWS = ['bar', 'circle', 'numberline', 'wall', 'barmodel', 'grid', 'array', 'blocks', 'clock', 'timeline', 'decimal-grid', 'place-value', 'money', 'instrument', 'straight'] as const;
 export const modelView = z.enum(MODEL_VIEWS);
 export type ModelView = (typeof MODEL_VIEWS)[number];
 
@@ -243,13 +268,33 @@ export const decimal = z.union([z.number(), z.string()]).transform((v, ctx): Dec
   return d;
 });
 
-/** A fraction (`"3/4"`, `"2"`) or a decimal with a point (`"0.35"`): what compare, order, place and choose take. */
+/** A quantity with a space before its unit (`"900 g"`, `"1 m 5 cm"`, docs/32 §3.1). */
+export const quantity = z.string().transform((text, ctx): QtyValue => {
+  const q = parseQuantity(text);
+  if (q) return q;
+  ctx.addIssue({ code: z.ZodIssueCode.custom, message: `"${text}" is not a quantity (write "900 g", "1.4 kg", "2 m 35 cm", "1 l 250 ml": a space before each unit, the small part under one big unit)` });
+  return z.NEVER;
+});
+
+/** A fraction (`"3/4"`, `"2"`) or a decimal with a point (`"0.35"`): what place takes, and a fraction or decimal worked on. */
 export const numValue = z.string().transform((text, ctx): Frac | DecValue => {
   const f = parseFrac(text);
   if (f) return f;
   const d = /\./.test(text) ? parseDecimal(text) : null;
   if (d) return { kind: 'dec', ...d };
   ctx.addIssue({ code: z.ZodIssueCode.custom, message: `"${text}" is not a fraction ("3/4", "1 3/4", "2") or a decimal ("0.35")` });
+  return z.NEVER;
+});
+
+/** A fraction, a decimal or a quantity (`"900 g"`, `"1 m 5 cm"`, docs/32 §3.4): what compare, order and choose take. */
+export const numOrQty = z.string().transform((text, ctx): Frac | DecValue | QtyValue => {
+  const q = parseQuantity(text);
+  if (q) return q;
+  const f = parseFrac(text);
+  if (f) return f;
+  const d = /\./.test(text) ? parseDecimal(text) : null;
+  if (d) return { kind: 'dec', ...d };
+  ctx.addIssue({ code: z.ZodIssueCode.custom, message: `"${text}" is not a fraction ("3/4", "1 3/4", "2"), a decimal ("0.35") or a quantity ("900 g")` });
   return z.NEVER;
 });
 
@@ -291,7 +336,7 @@ export const answerValue = z.union([z.number(), z.string()]).transform((v, ctx):
     const tagged = parseTagged(v);
     if (tagged) return tagged;
   }
-  ctx.addIssue({ code: z.ZodIssueCode.custom, message: `"${v}" is not an answer (a fraction "3/4", a whole number 56, "3 r 2", "09:40", "1h35m" or a decimal "0.35")` });
+  ctx.addIssue({ code: z.ZodIssueCode.custom, message: `"${v}" is not an answer (a fraction "3/4", a whole number 56, "3 r 2", "09:40", "1h35m", a decimal "0.35" or a quantity "350 g", "1 l 250 ml")` });
   return z.NEVER;
 });
 
@@ -335,15 +380,17 @@ const circleModel = z
 const numberLineModel = z
   .object({
     kind: z.literal('numberline'),
-    /** `fraction` (default): wholes cut in `intervals` · `whole`: a whole-number line from `from` to `to` (≤ 100) in steps of `step` (docs/19 §3.1). */
+    /** `fraction` (default): wholes cut in `intervals` · `whole`: a whole-number line from `from` to `to` (≤ 10 000) in steps of `step` (docs/19 §3.1; docs/32 §3.7 widened it for a scale straightened). */
     scale: z.enum(['fraction', 'whole']).default('fraction'),
     from: z.number().int().min(0).default(0),
-    /** Fraction line: 1–3 wholes · whole-number line: up to 100 (validate). */
-    to: z.number().int().min(1).max(100).default(1),
+    /** Fraction line: 1–3 wholes · whole-number line: up to 10 000 (validate). */
+    to: z.number().int().min(1).max(10_000).default(1),
     /** Fraction line: intervals per whole (required there, validate). */
     intervals: z.number().int().min(1).max(12).optional(),
-    /** Whole-number line: the tick spacing. */
-    step: z.union([z.literal(1), z.literal(2), z.literal(5), z.literal(10)]).optional(),
+    /** Whole-number line: the tick spacing (any whole number; at most 100 ticks, validate). */
+    step: z.number().int().min(1).max(10_000).optional(),
+    /** Whole-number line: a longer, numbered tick every so many (default every ten and the ends). */
+    major: z.number().int().min(1).max(10_000).optional(),
     /** Fraction line: `ends` `wholes` `all` `none` · whole-number line: `ends` `tens` (or `wholes`: every ten and the ends) `steps` `all` `none`. */
     labels: z.enum(['ends', 'wholes', 'all', 'none', 'tens', 'steps']).default('wholes'),
     marks: z.array(frac).optional(),
@@ -695,6 +742,107 @@ const moneyModel = z
   .strict();
 export type MoneySpec = z.output<typeof moneyModel>;
 
+/* Instruments (docs/32 §3.2, model A11): a ruler, a tape (a height chart, a metre rule, a path), a dial scale, a measuring jug and a balance; every scale is a number line. */
+export const INSTRUMENT_TYPES = ['ruler', 'tape', 'dial', 'jug', 'balance'] as const;
+export type InstrumentType = (typeof INSTRUMENT_TYPES)[number];
+/** The units an instrument is marked in (values are written in this unit; with `sub`, the small one). */
+export const INSTRUMENT_UNITS = ['cm', 'm', 'km', 'g', 'kg', 'ml', 'l'] as const;
+export type InstrumentUnit = (typeof INSTRUMENT_UNITS)[number];
+/** Things laid along a ruler or a tape (outlines, docs/32 §3.2). */
+export const LENGTH_THINGS = ['pencil', 'crayon', 'eraser', 'key', 'ribbon', 'leaf', 'straw', 'string', 'rope', 'book', 'whiteboard', 'corridor', 'door'] as const;
+/** Things weighed: on a dial's pan or a balance's (outlines). */
+export const LOADS = ['fish', 'prawns', 'kangkong', 'long-beans', 'pineapple', 'papaya', 'watermelon', 'mango', 'guava', 'onion', 'rice', 'flour', 'beans', 'paper-clip', 'beach-ball', 'stone'] as const;
+export type LoadKind = (typeof LOADS)[number];
+export const LIQUIDS = ['water', 'juice', 'milk'] as const;
+export const JUG_SHAPES = ['beaker', 'cup', 'jug', 'pail', 'bottle', 'bowl', 'bottle-jug'] as const;
+export const TAPE_LOOKS = ['ruler', 'metre-rule', 'tape', 'height-chart', 'path'] as const;
+const mTone = z.enum(['cold', 'hot', 'signal']);
+const span = z.object({ from: decimal, to: decimal }).strict();
+/**
+ * One thing in a balance's pan (docs/32 §3.2; built so the algebra balance, docs/17 A9, can put its own things in):
+ * a load with its mass in grams, or a plain weight of so many grams.
+ */
+const panThing = z
+  .object({
+    item: z.enum(LOADS).optional(),
+    weight: z.number().int().min(1).max(5000).optional(),
+    /** The load's mass in grams (a weight's is its own). */
+    mass: z.number().int().min(1).max(20_000).optional(),
+    /** Drawn big or small (the big ball and the small stone: size is not mass). */
+    size: z.enum(['small', 'big']).optional(),
+  })
+  .strict()
+  .refine((t) => (t.item === undefined) !== (t.weight === undefined), { message: 'a thing in a pan is an item (with its mass) or a weight' })
+  .refine((t) => t.item === undefined || t.mass !== undefined, { message: 'an item in a pan needs its mass (grams)' });
+export type PanThing = z.output<typeof panThing>;
+const instrumentSpec = z.object({
+  type: z.enum(INSTRUMENT_TYPES).optional(),
+  unit: z.enum(INSTRUMENT_UNITS).optional(),
+  /** The printed range, a number every `major`, a mark every `minor` (in `unit`: with `sub`, the small unit). */
+  from: decimal.optional(),
+  to: decimal.optional(),
+  major: decimal.optional(),
+  minor: decimal.optional(),
+  /** Numbers on every major mark, at the ends only, none, or every major mark but these (a box where they would be). */
+  labels: z.union([z.enum(['major', 'ends', 'none']), z.object({ hide: z.array(decimal).min(1).max(12) }).strict()]).default('major'),
+  /** A scale in two units: the values in the small unit (`unit`), each whole big unit printed "1 m", the numbers between as what is left in the small unit. */
+  sub: z.object({ unit: z.enum(['km', 'm', 'kg', 'l']), per: z.number().int().optional() }).strict().optional(),
+  /** The small unit's totals printed on the other side of the scale too (1 m 32 cm and 132 cm). */
+  dual: z.boolean().optional(),
+  /** A tape: this stretch drawn short between two break lines (a height chart need not be drawn from 0). */
+  skip: span.optional(),
+  orient: z.enum(['horizontal', 'vertical']).optional(),
+  look: z.enum(TAPE_LOOKS).optional(),
+  /** A ruler: how far the 0 mark is in from the ruler's end (in `unit`). */
+  inset: decimal.optional(),
+  /** A ruler with its left end broken off: it starts at `from`. */
+  broken: z.boolean().optional(),
+  /** A thing laid along a ruler or a tape, end to end (`to` may be off the marks: to the nearest centimetre). */
+  object: z.object({ kind: z.enum(LENGTH_THINGS), from: decimal, to: decimal, tone: mTone.default('cold') }).strict().optional(),
+  /** A line drawn along the ruler. */
+  line: span.extend({ tone: mTone.default('signal') }).strict().optional(),
+  /** A tape's arrow; a height chart's head board. */
+  arrow: decimal.optional(),
+  head: decimal.optional(),
+  /** A dial's needle, a jug's level. */
+  value: decimal.optional(),
+  load: z.enum(LOADS).optional(),
+  liquid: z.enum(LIQUIDS).optional(),
+  shape: z.enum(JUG_SHAPES).optional(),
+  /** `false`: the container alone, no marks (comparing by looking). */
+  scale: z.boolean().default(true),
+  /** A dial: the angle full scale takes, from 0 at the top clockwise (default 330°: a gap between full and 0). */
+  sweep: z.number().int().min(180).max(345).optional(),
+  /** A balance's pans. */
+  left: z.array(panThing).max(8).optional(),
+  right: z.array(panThing).max(8).optional(),
+  /** A balance's beam: by the masses (`auto`), or as written (validate: the same as the masses). */
+  tilt: z.enum(['auto', 'left', 'right', 'level']).default('auto'),
+  /** The items' masses kept to themselves. */
+  hideMass: z.boolean().optional(),
+  /** Overlays: each small part numbered (count the parts), a magnifier on one stretch, dimension brackets under the scale, the eye-level line, marks drawn bold. */
+  count: span.optional(),
+  zoom: span.optional(),
+  brackets: z.array(span.extend({ label: bilingual, tone: mTone.optional() }).strict()).min(1).max(3).optional(),
+  eye: z.boolean().optional(),
+  highlight: z.array(decimal).min(1).max(20).optional(),
+  /** A dial or a jug drawn as the straight number line it is (an `unroll` beat moves between the two). */
+  straight: z.boolean().optional(),
+  /** The second of two compared (hot). */
+  tone: z.enum(['cold', 'hot']).optional(),
+  label: bilingual.optional(),
+});
+const instrumentModel = instrumentSpec
+  .extend({
+    kind: z.literal('instrument'),
+    /** Two or three instruments side by side, each with its label, drawn to one scale. */
+    pair: z.array(instrumentSpec.strict()).length(2).optional(),
+    set: z.array(instrumentSpec.strict()).length(3).optional(),
+  })
+  .strict();
+export type InstrumentSpec = z.output<typeof instrumentSpec>;
+export type InstrumentModelSpec = z.output<typeof instrumentModel>;
+
 /* The clock face and the timeline (docs/20 §3.1–3.2, model A3): times in 24-hour time, the face shows their 12-hour position. */
 const clockFace = z.object({
   /** The time the hands show (default 12:00); am / pm follow from it. */
@@ -764,7 +912,7 @@ const timelineModel = z
   .strict();
 export type TimelineSpec = z.output<typeof timelineModel>;
 
-const baseModels = z.discriminatedUnion('kind', [barModel, circleModel, numberLineModel, wallModel, barModelDiagram, gridModel, arrayModel, blocksModel, clockModel, timelineModel, decimalGridModel, placeValueModel, moneyModel]);
+const baseModels = z.discriminatedUnion('kind', [barModel, circleModel, numberLineModel, wallModel, barModelDiagram, gridModel, arrayModel, blocksModel, clockModel, timelineModel, decimalGridModel, placeValueModel, moneyModel, instrumentModel]);
 const isDecimalLine = (v: unknown): boolean => !!v && typeof v === 'object' && (v as { kind?: unknown }).kind === 'numberline' && (v as { scale?: unknown }).scale === 'decimal';
 /** A model: by `kind`, the number line by `scale` too (a decimal line has decimal ends and a decimal step). */
 export const model = z.unknown().transform((v, ctx): z.output<typeof baseModels> | DecimalLineSpec => {
@@ -785,7 +933,7 @@ export type GridDim = z.output<typeof gridDim>;
 /* Tasks                                                               */
 /* ------------------------------------------------------------------ */
 
-export const INPUT_FORMS = ['equal', 'equivalent', 'simplest', 'mixed', 'whole', 'measure', 'remainder', 'time12', 'time24', 'face', 'duration', 'decimal'] as const;
+export const INPUT_FORMS = ['equal', 'equivalent', 'simplest', 'mixed', 'whole', 'measure', 'remainder', 'time12', 'time24', 'face', 'duration', 'decimal', 'compound'] as const;
 /** Forms whose answer is a fraction (the fraction boxes). */
 export const FRACTION_FORMS = ['equal', 'equivalent', 'simplest', 'mixed'] as const;
 /** Forms whose answer is a time of day or a duration. */
@@ -818,6 +966,15 @@ const decimalWork = z
   })
   .strict();
 export type DecimalWork = z.output<typeof decimalWork>;
+/** A quantity changed into a unit (`"3 kg 40 g"` into `g`) or into a pair of units (`"1250 ml"` into `l-ml`): docs/32 §3.5. */
+const measureWork = z
+  .object({
+    do: z.literal('convert'),
+    from: quantity,
+    into: z.union([z.enum(INSTRUMENT_UNITS), z.enum(COMPOUND_PAIRS)]),
+  })
+  .strict();
+export type MeasureWork = z.output<typeof measureWork>;
 
 export const inputSpec = z
   .object({
@@ -828,14 +985,15 @@ export const inputSpec = z
      * Whole numbers — `whole`: 1–5 digits · `measure`: a whole number and a unit chip · `remainder`: quotient, "r", remainder.
      * Time — `time12`: hours : minutes and am / pm · `time24`: hh : mm · `face`: hours : minutes as a clock face reads (no am / pm) · `duration`: h + min or min + s.
      * Decimals — `decimal`: one box with a point key (docs/29 X3).
+     * Measures — `compound`: a box for each unit of a compound measure, the units printed (docs/32 §3.5; the small box empty is 0).
      */
     form: z.enum(INPUT_FORMS),
-    /** `measure`: the answer's unit (`cm2`, `m`, `unit2` …); `whole` on a grid: the unit printed after the box; `decimal`: `dollar` ($ before the box) or a unit printed after it. */
+    /** `measure`: the answer's unit (`cm2`, `m`, `unit2` …); `whole` on a grid or an instrument: the unit printed after the box; `decimal`: `dollar` ($ before the box) or a unit printed after it. */
     unit: z.enum(ANSWER_UNITS).optional(),
     /** `decimal`: the places the answer must be written with (rounding, money; default: judged by value, money 2). */
     places: z.number().int().min(0).max(3).optional(),
-    /** `decimal` (and a decimal written as a fraction): what is being worked out, for the diagnosis only (docs/29 §3.7). */
-    work: decimalWork.optional(),
+    /** `decimal` (and a decimal written as a fraction): what is being worked out, for the diagnosis only (docs/29 §3.7); a quantity changed into other units (docs/32 §3.5). */
+    work: z.union([decimalWork, measureWork]).optional(),
     /** Grid: what the number is, measured on the figure (checked against its geometry; tells the diagnosis what to look for). */
     ask: z.enum(['area', 'perimeter', 'length', 'breadth', 'side']).optional(),
     /** Grid: the figure asked about (default: the first that is not a ghost). */
@@ -871,8 +1029,8 @@ export const inputSpec = z
     convert: z.object({ from: duration, to: z.enum(['h', 'min', 's']).optional() }).strict().optional(),
     /** Time: the start, end and length of a span, and which one is asked (diagnoses going the wrong way, counting the marks). */
     span: z.object({ start: clockTime.optional(), end: clockTime.optional(), length: duration.optional(), ask: z.enum(['start', 'end', 'length']) }).strict().optional(),
-    /** `duration`: the two boxes (default from the answer: hours and minutes, or minutes and seconds). */
-    units: z.enum(['h-min', 'min-s']).optional(),
+    /** `duration`: the two boxes (default from the answer: hours and minutes, or minutes and seconds) · `measure` on an instrument: the unit chips offered (default the answer's family). */
+    units: z.union([z.enum(['h-min', 'min-s']), z.array(z.enum(UNITS)).min(2).max(6)]).optional(),
   })
   .strict();
 export type InputSpec = z.output<typeof inputSpec>;
@@ -922,14 +1080,14 @@ const placeFields = z.object({
   zoom: z.union([z.literal(0), z.literal(1), z.literal(2)]).optional(),
 });
 const compareFields = z.object({
-  a: numValue,
-  b: numValue,
+  a: numOrQty,
+  b: numOrQty,
   ask: z.enum(['symbol', 'greater', 'smaller']).default('symbol'),
-  /** Fractions — `split`: a button cuts both bars into same-size parts; `stack`: the bars are lined up under one whole. Decimals — `point`: a button lines the two numbers up on the point (zeros filled in). */
-  align: z.enum(['split', 'stack', 'point']).optional(),
+  /** Fractions — `split`: a button cuts both bars into same-size parts; `stack`: the bars are lined up under one whole. Decimals — `point`: a button lines the two numbers up on the point (zeros filled in). Quantities — `unit`: a button writes both in the same (smallest) unit. */
+  align: z.enum(['split', 'stack', 'point', 'unit']).optional(),
 });
 const orderFields = z.object({
-  items: z.array(numValue).min(3).max(5),
+  items: z.array(numOrQty).min(3).max(5),
   direction: z.enum(['asc', 'desc']),
   /** After ordering, the items appear as points on a number line (fractions: intervals per whole; decimals: `true`, on the task's line). */
   line: z.union([z.number().int().min(2).max(12), z.literal(true)]).optional(),
@@ -937,7 +1095,7 @@ const orderFields = z.object({
 const option = z
   .object({
     id: kebabId,
-    value: numValue.optional(),
+    value: numOrQty.optional(),
     model: model.optional(),
     text: bilingual.optional(),
     correct: z.boolean(),
@@ -1079,6 +1237,29 @@ const durationFields = z.object({
   answer: inputSpec,
 });
 
+/* Instrument tasks (docs/32 §3.4) */
+const readScaleFields = z.object({
+  /** The reading, written in its form: `whole` (the unit printed after the box), `measure` (unit chips), `compound`, `decimal`. */
+  answer: inputSpec,
+  /** The tray's tools: a magnifier on the stretch where the reading is, the small parts numbered as the child taps them (a scratch, not checked). */
+  tools: z.array(z.enum(['zoom', 'count'])).min(1).max(2).optional(),
+});
+const setScaleFields = z.object({
+  /** What to set: a number in the instrument's unit (with `sub`, the small unit) or a quantity (`"450 g"`, `"1 l 250 ml"`). */
+  target: z.union([quantity, decimal]),
+  /** Draw a line from 0, move a tape's arrow, load a dial, fill a jug, or put weights on a balance until it is level. */
+  mode: z.enum(['line', 'arrow', 'load', 'fill', 'weights']),
+  /** `weights`: the weights in the tray (grams). */
+  weights: z.array(z.number().int().min(1).max(5000)).min(1).max(8).optional(),
+});
+const countIntervalsFields = z.object({
+  /** Two marks: the small parts between them are tapped one by one. */
+  between: z.tuple([decimal, decimal]),
+  /** Then the written part: what each small part stands for (`part`), or how long the stretch is (`length`). */
+  ask: z.enum(['part', 'length']),
+  then: inputSpec,
+});
+
 export const taskSchema = z.discriminatedUnion('kind', [
   base.extend({ kind: z.literal('shade') }).merge(shadeFields).strict(),
   base.extend({ kind: z.literal('cut') }).merge(cutFields).strict(),
@@ -1108,6 +1289,9 @@ export const taskSchema = z.discriminatedUnion('kind', [
   base.extend({ kind: z.literal('read-clock') }).merge(readClockFields).strict(),
   base.extend({ kind: z.literal('set-clock') }).merge(setClockFields).strict(),
   base.extend({ kind: z.literal('duration') }).merge(durationFields).strict(),
+  base.extend({ kind: z.literal('read-scale') }).merge(readScaleFields).strict(),
+  base.extend({ kind: z.literal('set-scale') }).merge(setScaleFields).strict(),
+  base.extend({ kind: z.literal('count-intervals') }).merge(countIntervalsFields).strict(),
 ]);
 export type Task = z.output<typeof taskSchema>;
 export type TaskOf<K extends TaskKind> = Extract<Task, { kind: K }>;
@@ -1137,7 +1321,7 @@ const syllabusLine = z
 /* ------------------------------------------------------------------ */
 
 /** How the stage gets from the previous beat to this one (a short eased transition; `morph` = another model kind). */
-export const BEAT_MOVES = ['cut', 'shade', 'fold', 'split', 'merge', 'convert', 'place', 'cross', 'morph', 'tile', 'walk', 'arrange', 'group', 'deal', 'rotate', 'cover', 'jump', 'combine', 'trade', 'sweep', 'zoom', 'slide', 'align', 'round'] as const;
+export const BEAT_MOVES = ['cut', 'shade', 'fold', 'split', 'merge', 'convert', 'place', 'cross', 'morph', 'tile', 'walk', 'arrange', 'group', 'deal', 'rotate', 'cover', 'jump', 'combine', 'trade', 'sweep', 'zoom', 'slide', 'align', 'round', 'unroll', 'fill', 'tip'] as const;
 export type BeatMove = (typeof BEAT_MOVES)[number];
 
 const beatOverlay = z
@@ -1219,8 +1403,23 @@ export const stepLimits = z
     /** × ÷ by these (10, 100, 1000) and, with `multiples`, their multiples (20 … 900). */
     by: z.array(z.union([z.literal(10), z.literal(100), z.literal(1000)])).min(1).optional(),
     multiples: z.boolean().optional(),
-    /** The unit conversions allowed. */
-    units: z.array(z.enum(['km-m', 'm-cm', 'kg-g', 'l-ml'])).min(1).optional(),
+    /** Decimals: the unit conversions allowed (`km-m` …) · measuring: the units a task may use (`cm`, `m` …; docs/32 §3.5). */
+    units: z.array(z.enum([...COMPOUND_PAIRS, ...INSTRUMENT_UNITS])).min(1).optional(),
+    /* Measuring (docs/32 §3.5, M9) */
+    /** What each small part of an instrument may stand for. */
+    parts: z.array(decimal).min(1).optional(),
+    /** How many small parts may lie between two numbered marks. */
+    partsPerLabel: z.tuple([z.number().int().min(1), z.number().int().min(1)]).optional(),
+    /** A length to the nearest centimetre: an object's end may be off the marks. */
+    nearest: z.boolean().optional(),
+    /** The compound pairs a task may use (none: no compound measures). */
+    compound: z.array(z.enum(COMPOUND_PAIRS)).min(1).optional(),
+    /** Largest big part of a compound measure. */
+    bigMax: z.number().int().min(1).max(99).optional(),
+    /** The small part of a compound measure in g, ml or m is a multiple of this. */
+    smallStep: z.number().int().min(1).optional(),
+    /** The weights a balance may use (grams). */
+    weights: z.array(z.number().int().min(1)).min(1).optional(),
     /** Amounts of money are whole numbers of 5 cents. */
     money: z.boolean().optional(),
     /** Most zoom levels of a decimal line (0–2). */

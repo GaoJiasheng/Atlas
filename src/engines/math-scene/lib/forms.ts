@@ -12,21 +12,30 @@
  *   time12           `h`, `m` (`s` when the answer has seconds) and the am / pm toggle `ap`
  *   face / time24    `h`, `m` (`s`)
  *   duration         `h`, `m` (hours and minutes) or `m`, `s` (minutes and seconds)
+ *   compound         `b`, `s`: the big unit and the small one, printed after each (docs/32 §3.5; an empty small box is 0)
  */
 import type { InputSpec } from '../schema';
-import { clockParts, durationParts, isFracValue, MINUTE, HOUR, type AnswerValue, type ClockMode } from './value';
+import { clockParts, compoundPair, durationParts, FACTOR, isFracValue, MINUTE, HOUR, PAIR, type AnswerValue, type ClockMode, type CompoundPair } from './value';
 
 export type Written =
   | { kind: 'whole'; n: number }
   | { kind: 'rem'; q: number; r: number }
   | { kind: 'clock'; mode: ClockMode; h: number; m: number; s: number; ap: 'am' | 'pm' | null }
-  | { kind: 'dur'; h: number; m: number; s: number };
+  | { kind: 'dur'; h: number; m: number; s: number }
+  /** A compound measure as written: its two boxes, raw (1 m 50 cm for 1 m 5 cm stays). */
+  | { kind: 'cmp'; big: number; small: number; pair: CompoundPair };
 
 export const isTimeForm = (form: InputSpec['form']): form is 'time12' | 'time24' | 'face' | 'duration' => form === 'time12' || form === 'time24' || form === 'face' || form === 'duration';
 /** Forms with a whole number in each box (and the unit chip of a measure). */
 export const isWholeForm = (form: InputSpec['form']): form is 'whole' | 'measure' => form === 'whole' || form === 'measure';
 /** Forms this module writes (everything but the fraction boxes). */
-export const isValueForm = (form: InputSpec['form']): boolean => isWholeForm(form) || form === 'remainder' || isTimeForm(form);
+export const isValueForm = (form: InputSpec['form']): boolean => isWholeForm(form) || form === 'remainder' || isTimeForm(form) || form === 'compound';
+
+/** The pair a compound answer is written in (default metres and centimetres). */
+export function compoundPairOf(spec: InputSpec): CompoundPair {
+  const a = answerValues(spec)[0];
+  return a && !isFracValue(a) && a.kind === 'cmp' ? compoundPair(a) : 'm-cm';
+}
 
 export const answerValues = (spec: InputSpec): AnswerValue[] => (Array.isArray(spec.answer) ? spec.answer : [spec.answer]);
 
@@ -40,7 +49,7 @@ function withSeconds(spec: InputSpec): boolean {
 
 /** The two boxes of a duration: hours and minutes, or minutes and seconds. */
 export function durationBoxes(spec: InputSpec): 'h-min' | 'min-s' {
-  if (spec.units) return spec.units;
+  if (typeof spec.units === 'string') return spec.units;
   const a = answerValues(spec)[0];
   return a && !isFracValue(a) && a.kind === 'dur' && a.units.includes('s') ? 'min-s' : 'h-min';
 }
@@ -60,6 +69,8 @@ export function valueFields(spec: InputSpec): string[] {
       return withSeconds(spec) ? ['h', 'm', 's'] : ['h', 'm'];
     case 'duration':
       return durationBoxes(spec) === 'min-s' ? ['m', 's'] : ['h', 'm'];
+    case 'compound':
+      return ['b', 's'];
     default:
       return [];
   }
@@ -68,6 +79,8 @@ export function valueFields(spec: InputSpec): string[] {
 /** Digits a box takes. */
 export function fieldDigits(spec: InputSpec, field: string): number {
   if (isWholeForm(spec.form) || field === 'q') return 5;
+  // A compound's big part (to 99) and its small part (to one less than a big unit: 99 cm, 999 g).
+  if (spec.form === 'compound') return field === 'b' ? 2 : String(FACTOR[compoundPairOf(spec)] - 1).length;
   if (field === 'r') return 3;
   if (spec.form === 'duration') return field === 'h' ? 2 : 3;
   return 2;
@@ -112,6 +125,11 @@ export function readWritten(spec: InputSpec, input: Readonly<Record<string, stri
       if (a === null || b === null) return null;
       return [pair === 'min-s' ? { kind: 'dur', h: 0, m: a, s: b } : { kind: 'dur', h: a, m: b, s: 0 }];
     }
+    case 'compound': {
+      const big = num(input.b);
+      if (big === null) return null;
+      return [{ kind: 'cmp', big, small: num(input.s) ?? 0, pair: compoundPairOf(spec) }];
+    }
     default:
       return null;
   }
@@ -142,6 +160,7 @@ export function writtenEquals(spec: InputSpec, w: Written, answer: AnswerValue):
     if (t === null) return false;
     return w.mode === 'face' ? t % (12 * HOUR) === answer.t % (12 * HOUR) : t === answer.t;
   }
+  if (answer.kind === 'cmp') return w.kind === 'cmp' && w.small < FACTOR[w.pair] && w.big * FACTOR[w.pair] + w.small === answer.total;
   return answer.kind === 'dur' && w.kind === 'dur' && writtenDuration(w, durationBoxes(spec)) === answer.t;
 }
 
@@ -160,6 +179,7 @@ export function valueBoxes(spec: InputSpec, values: readonly AnswerValue[]): Rec
     return out;
   }
   if (a.kind === 'rem') return { q: String(a.q), r: String(a.r) };
+  if (a.kind === 'cmp') return { b: String(a.bigPart), s: String(a.smallPart) };
   if (a.kind === 'clock') {
     const p = clockParts(a.t);
     out.h = String(spec.form === 'time24' ? p.h24 : p.h12);
@@ -212,6 +232,12 @@ export function sampleBoxes(spec: InputSpec, text: string): Record<string, strin
       if (!m || (m[1] === undefined && m[2] === undefined && m[3] === undefined)) return null;
       return durationBoxes(spec) === 'min-s' ? { m: m[2] ?? '0', s: m[3] ?? '0' } : { h: m[1] ?? '0', m: m[2] ?? '0' };
     }
+    case 'compound': {
+      // `"1,250"`: the big box, then the small one (`"3,"` or `"3"` leaves it empty); each within its box.
+      const m = /^(\d+)\s*(?:,\s*(\d*))?$/.exec(t);
+      if (!m || m[1]!.length > fieldDigits(spec, 'b') || (m[2] ?? '').length > fieldDigits(spec, 's')) return null;
+      return { b: m[1]!, s: m[2] ?? '' };
+    }
     default:
       return null;
   }
@@ -228,5 +254,9 @@ export function writtenLabel(w: Written): string {
       return `${w.h}:${String(w.m).padStart(2, '0')}${w.s ? `:${String(w.s).padStart(2, '0')}` : ''}${w.ap ? ` ${w.ap.toUpperCase()}` : ''}`;
     case 'dur':
       return [w.h ? `${w.h} H` : '', w.m || (!w.h && !w.s) ? `${w.m} MIN` : '', w.s ? `${w.s} S` : ''].filter(Boolean).join(' ');
+    case 'cmp': {
+      const up = (u: string) => (u === 'l' ? 'ℓ' : u.toLocaleUpperCase('en'));
+      return `${w.big} ${up(PAIR[w.pair].big)} ${w.small} ${up(PAIR[w.pair].small)}`;
+    }
   }
 }

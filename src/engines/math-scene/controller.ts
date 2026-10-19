@@ -14,6 +14,8 @@ import type { MathSceneExt } from './index';
 import type { Lesson, MisconceptionCode, ModelView, Step, Task } from './schema';
 import type { Attempt, Feedback, MathUiStore, TaskRun } from './ui';
 import { answered, check, readInput, segments, usesValueBoxes } from './lib/check';
+import { workingLines } from './lib/working';
+import { plainText } from '../../lib/rich-text';
 import { readWritten, writtenLabel } from './lib/forms';
 import { parseArrayCut } from './lib/array';
 import { apply, sampleState, solve, step } from './lib/solve';
@@ -30,6 +32,9 @@ import { roundingEnds } from './lib/dline';
 import type { DCounts } from './lib/placevalue';
 import { clockShown, faceLabel, HALF_DAY } from './lib/clock';
 import { hopArcs, jumpLabel } from './lib/timeline';
+import { instrumentOf, setValue } from './lib/measure-tasks';
+import { instrumentText } from './lib/measure-working';
+import { isMeasureTask } from './lib/measure-kind';
 
 export interface Current {
   chapter: string | null;
@@ -111,8 +116,24 @@ function describe(task: Task, action: Action, s: TaskState): string {
       return `${chartLabel(s.pv)}${task.kind === 'share' ? ` | EACH ${chartLabel(s.pvDealt)}` : ''}`;
     case 'choose':
       return `CHOOSE ${s.chosen.map((id) => id.toUpperCase()).join(' ')}`;
+    case 'mset':
+    case 'mnudge': {
+      const inst = instrumentOf(task);
+      return task.kind === 'set-scale' && inst ? `SET ${instrumentText(inst, setValue(task, s), 'en').toLocaleUpperCase('en')}` : 'SET';
+    }
+    case 'weigh':
+    case 'unweigh':
+      return `WEIGHTS ${s.mweights.map((w) => (w >= 1000 && w % 1000 === 0 ? `${w / 1000} KG` : `${w} G`)).join(' + ') || '—'}`;
+    case 'mpart':
+      return `PARTS ${s.mparts.length}`;
+    case 'mtool':
+      return action.tool === 'zoom' ? (s.mzoom ? 'ZOOM IN' : 'ZOOM OUT') : s.mcount ? 'COUNT' : 'COUNT OFF';
     case 'input': {
       const spec = inputSpecOf(task);
+      if (spec && isMeasureTask(task)) {
+        const line = workingLines(task, s, 'en', false).at(-1);
+        return line ? `WRITE ${plainText(line, 'en', undefined, true).toLocaleUpperCase('en')}` : 'WRITE …';
+      }
       if (spec?.form === 'decimal') {
         const d = readDecimals(spec, s.input);
         return d ? `WRITE ${d.map((x) => `${spec.unit === 'dollar' ? '$' : ''}${formatDecimal(x)}`).join(' · ')}` : 'WRITE …';
@@ -224,7 +245,12 @@ export function answerLabel(task: Task, s: TaskState): string {
       return describe(task, { do: 'clock', t: 0 }, s);
     case 'read-clock':
     case 'duration':
+    case 'read-scale':
       return describe(task, { do: 'input', field: '', value: '' }, s);
+    case 'set-scale':
+      return task.mode === 'weights' ? describe(task, { do: 'weigh', w: 0 }, s) : describe(task, { do: 'mset', to: 0 }, s);
+    case 'count-intervals':
+      return describe(task, { do: 'mpart', part: 0 }, s);
   }
 }
 

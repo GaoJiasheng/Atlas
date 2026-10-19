@@ -1,0 +1,18 @@
+# PLACEHOLDER topic: exercises the MathScene measuring engine only (docs/06 "MathScene" · 量的读数, docs/32 §3):
+# the five instruments of model A11 (a ruler, a broken ruler, a tape, a metre rule, a height chart, a path, a dial,
+# jugs, a balance), the two-unit scale, every overlay and new beat move, the three new task kinds, quantities
+# compared, ordered, chosen and converted, the compound answer form and the measure-reading misconceptions.
+# The numbers and wording are placeholders, not a lesson.
+id: sample-lesson-measure
+title: { en: "Sample: Measuring lesson", zh: "示例：量的读数课" }
+subtitle: { en: "A placeholder topic for testing the lesson engine's instruments", zh: "用于测试课引擎读数器具的占位主题" }
+subject: math
+tags: [beyond-syllabus]
+moe:
+  - "Placeholder: no syllabus anchor"
+mode: lesson
+engine: math-scene
+stage: svg
+theme: paper
+sensitivity: open
+status: draft

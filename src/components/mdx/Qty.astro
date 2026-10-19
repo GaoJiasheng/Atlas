@@ -1,0 +1,18 @@
+---
+/**
+ * `<Qty u="9 cm" />`, `<Qty u="1.5 l" />`, `<Qty u="2 m 35 cm" />`: a quantity in a chapter body, written exactly as the
+ * lesson's `{u:…}` token (src/lib/rich-text.ts; docs/32 §2.0, M8) — `ℓ` for litres, a compound in both units — one
+ * unbreakable run that screen readers hear as words ("nine centimetres", "2 metres 35 centimetres"). `pnpm validate` checks u.
+ */
+import { plainText, speakable } from '../../lib/rich-text';
+import { pageLocale } from './locale';
+
+interface Props {
+  u: string;
+}
+const locale = pageLocale(Astro.url, Astro.currentLocale);
+const token = `{u:${Astro.props.u}}`;
+const text = plainText(token, locale);
+const words = speakable(token, locale);
+---
+<span class="atlas-value" aria-label={words}>{text}</span>

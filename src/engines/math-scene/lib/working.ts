@@ -22,11 +22,13 @@ import { inputSpecOf, modelValue, phasesOf, taskFigure, type TaskState } from '.
 import { askOf, measured } from './diagnose/measure';
 import { cutPieces } from './check';
 import { isHalfKey, parseCut, piecesAfter, rectOf } from './grid';
-import { squared, unitText, type Unit } from './value';
+import { PAIR, qtyToken, squared, unitText, type Unit } from './value';
 import { asFrac } from './check';
 import { isDecimalTask } from './decimal-tasks';
 import { decimalLines } from './decimal-working';
 import { formatDecimal } from './decimal';
+import { isMeasureTask } from './measure-kind';
+import { convertSentence, measureAnswerToken, measureLines } from './measure-working';
 
 const tok = (f: Frac) => `{${formatFrac(f)}}`;
 const SYM = { '<': '<', '=': '=', '>': '>' } as const;
@@ -124,6 +126,7 @@ function valueToken(spec: InputSpec, v: AnswerValue): string {
   if (v.kind === 'rem') return `${v.q} r ${v.r}`;
   if (v.kind === 'clock') return `{t:${formatClock(v.t)}${spec.form === 'time24' ? '|24' : spec.form === 'face' ? '|face' : ''}}`;
   if (v.kind === 'dec') return formatDecimal(v);
+  if (v.kind === 'meas' || v.kind === 'cmp') return qtyToken(v);
   return `{d:${formatDuration(v.t, durationBoxes(spec) === 'min-s' ? ['m', 's'] : ['h', 'm'])}}`;
 }
 
@@ -142,6 +145,8 @@ function writtenText(spec: InputSpec, w: Written, notation: Notation): string {
     }
     case 'dur':
       return durationBoxes(spec) === 'min-s' ? `${w.m} min ${w.s} s` : `${w.h} h ${w.m} min`;
+    case 'cmp':
+      return `${w.big} ${unitText(PAIR[w.pair].big, 'en')} ${w.small} ${unitText(PAIR[w.pair].small, 'en')}`;
   }
 }
 
@@ -180,6 +185,11 @@ function sentenceOf(task: Task, spec: InputSpec): string | null {
 export function answerTokens(task: Task): string {
   const spec = inputSpecOf(task);
   if (!spec) return '';
+  if (isMeasureTask(task)) {
+    const sentence = convertSentence(spec);
+    const ans = measureAnswerToken(task, spec);
+    return sentence ? sentence.replace('?', ans) : ans;
+  }
   const values = task.kind === 'split-array' && !task.at ? (splitAnswers(task, splitArrayCut(task)) ?? []).map((n) => ({ n, d: 1 })) : answerValues(spec);
   const tokens = values.map((v) => valueToken(spec, v));
   const sentence = sentenceOf(task, spec);
@@ -232,6 +242,7 @@ function valueLines(task: Task, state: TaskState, locale: Locale, done: boolean,
 }
 
 export function workingLines(task: Task, state: TaskState, locale: Locale, done = false, notation: Notation = DEFAULT_NOTATION): string[] {
+  if (isMeasureTask(task)) return measureLines(task, state, locale, done).filter(Boolean);
   if (task.model.kind === 'grid') return gridLines(task, state, locale, done).filter(Boolean);
   if (isDecimalTask(task)) return decimalLines(task, state, locale, done).filter(Boolean);
   // A set clock: the time it shows once the hands have moved (the target is in the task's sentence already).
@@ -336,7 +347,7 @@ export function workingLines(task: Task, state: TaskState, locale: Locale, done 
  */
 export function cardValue(task: Task, state: TaskState, done = false): Frac | null {
   const m = task.model;
-  if (m.kind === 'grid' || m.kind === 'array' || m.kind === 'blocks' || m.kind === 'clock' || m.kind === 'timeline' || (m.kind === 'numberline' && m.scale === 'whole') || isDecimalTask(task)) return null;
+  if (m.kind === 'grid' || m.kind === 'array' || m.kind === 'blocks' || m.kind === 'clock' || m.kind === 'timeline' || m.kind === 'instrument' || (m.kind === 'numberline' && m.scale === 'whole') || isDecimalTask(task) || isMeasureTask(task)) return null;
   const spec = inputSpecOf(task);
   if (spec && usesValueBoxes(task, spec)) return null;
   const phase = phasesOf(task)[state.phase];

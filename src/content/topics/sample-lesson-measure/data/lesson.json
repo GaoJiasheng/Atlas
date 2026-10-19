@@ -1,0 +1,3076 @@
+{
+  "syllabus": [
+    {
+      "id": "placeholder",
+      "level": "P2",
+      "ref": "Placeholder",
+      "source": "S1",
+      "text": {
+        "en": "Placeholder: no syllabus anchor.",
+        "zh": "占位：没有课纲条目。"
+      }
+    }
+  ],
+  "steps": [
+    {
+      "id": "rulers-and-tapes",
+      "lo": [
+        "placeholder"
+      ],
+      "limits": {
+        "units": [
+          "cm",
+          "m"
+        ],
+        "nearest": true,
+        "maxValue": 200,
+        "parts": [
+          1,
+          2,
+          5
+        ],
+        "partsPerLabel": [
+          1,
+          5
+        ]
+      },
+      "beats": [
+        {
+          "model": {
+            "kind": "instrument",
+            "type": "ruler",
+            "unit": "cm",
+            "from": 0,
+            "to": 15,
+            "major": 1,
+            "minor": 1,
+            "inset": "0.6",
+            "object": {
+              "kind": "pencil",
+              "from": 0,
+              "to": 9
+            }
+          },
+          "equation": "{u:9 cm}",
+          "caption": {
+            "en": "Placeholder: beat 1.",
+            "zh": "占位：第 1 拍。"
+          }
+        },
+        {
+          "model": {
+            "kind": "instrument",
+            "type": "ruler",
+            "unit": "cm",
+            "from": 0,
+            "to": 15,
+            "major": 1,
+            "minor": 1,
+            "inset": "0.6",
+            "object": {
+              "kind": "pencil",
+              "from": 0,
+              "to": 9
+            },
+            "count": {
+              "from": 0,
+              "to": 9
+            }
+          },
+          "move": "jump",
+          "equation": "9 × {u:1 cm} = {u:9 cm}",
+          "caption": {
+            "en": "Placeholder: beat 2.",
+            "zh": "占位：第 2 拍。"
+          }
+        },
+        {
+          "model": {
+            "kind": "instrument",
+            "type": "ruler",
+            "unit": "cm",
+            "from": 0,
+            "to": 15,
+            "major": 1,
+            "minor": 1,
+            "inset": "0.6",
+            "object": {
+              "kind": "pencil",
+              "from": 3,
+              "to": 12
+            },
+            "highlight": [
+              3,
+              12
+            ]
+          },
+          "move": "slide",
+          "equation": "12 − 3 = 9",
+          "caption": {
+            "en": "Placeholder: beat 3.",
+            "zh": "占位：第 3 拍。"
+          }
+        },
+        {
+          "model": {
+            "kind": "instrument",
+            "type": "ruler",
+            "unit": "cm",
+            "from": 4,
+            "to": 15,
+            "major": 1,
+            "minor": 1,
+            "broken": true,
+            "labels": {
+              "hide": [
+                10
+              ]
+            },
+            "object": {
+              "kind": "ribbon",
+              "from": 6,
+              "to": 13
+            }
+          },
+          "move": "morph",
+          "equation": "13 − 6 = 7",
+          "caption": {
+            "en": "Placeholder: beat 4.",
+            "zh": "占位：第 4 拍。"
+          }
+        },
+        {
+          "model": {
+            "kind": "instrument",
+            "type": "ruler",
+            "unit": "cm",
+            "from": 0,
+            "to": 15,
+            "major": 1,
+            "minor": 1,
+            "object": {
+              "kind": "crayon",
+              "from": 0,
+              "to": "6.7"
+            }
+          },
+          "move": "morph",
+          "words": {
+            "en": "about {u:7 cm}",
+            "zh": "大约 {u:7 cm}"
+          },
+          "caption": {
+            "en": "Placeholder: beat 5.",
+            "zh": "占位：第 5 拍。"
+          }
+        }
+      ],
+      "pool": [
+        {
+          "id": "rt-key",
+          "kind": "read-scale",
+          "model": {
+            "kind": "instrument",
+            "type": "ruler",
+            "unit": "cm",
+            "from": 0,
+            "to": 15,
+            "major": 1,
+            "minor": 1,
+            "object": {
+              "kind": "key",
+              "from": 3,
+              "to": 8
+            }
+          },
+          "prompt": {
+            "en": "Placeholder: task rt-key.",
+            "zh": "占位：题目 rt-key。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the instrument, then answer.",
+            "zh": "占位提示：先看器具，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the instrument.",
+              "zh": "还不对。占位：再看一看器具。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "read-end-mark",
+                "say": {
+                  "en": "Placeholder feedback for read-end-mark.",
+                  "zh": "占位反馈：read-end-mark。"
+                },
+                "sample": "8"
+              },
+              {
+                "when": "tick-counting",
+                "say": {
+                  "en": "Placeholder feedback for tick-counting.",
+                  "zh": "占位反馈：tick-counting。"
+                },
+                "sample": "6"
+              }
+            ]
+          },
+          "answer": {
+            "answer": 5,
+            "form": "whole",
+            "unit": "cm"
+          }
+        },
+        {
+          "id": "rt-leaf-nearest",
+          "kind": "read-scale",
+          "model": {
+            "kind": "instrument",
+            "type": "ruler",
+            "unit": "cm",
+            "from": 0,
+            "to": 15,
+            "major": 1,
+            "minor": 1,
+            "object": {
+              "kind": "leaf",
+              "from": 0,
+              "to": "8.3"
+            }
+          },
+          "prompt": {
+            "en": "Placeholder: task rt-leaf-nearest.",
+            "zh": "占位：题目 rt-leaf-nearest。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the instrument, then answer.",
+            "zh": "占位提示：先看器具，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the instrument.",
+              "zh": "还不对。占位：再看一看器具。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "not-nearest",
+                "say": {
+                  "en": "Placeholder feedback for not-nearest.",
+                  "zh": "占位反馈：not-nearest。"
+                },
+                "sample": "9"
+              }
+            ]
+          },
+          "answer": {
+            "answer": 8,
+            "form": "whole",
+            "unit": "cm"
+          }
+        },
+        {
+          "id": "rt-broken",
+          "kind": "read-scale",
+          "model": {
+            "kind": "instrument",
+            "type": "ruler",
+            "unit": "cm",
+            "from": 4,
+            "to": 15,
+            "major": 1,
+            "minor": 1,
+            "broken": true,
+            "object": {
+              "kind": "straw",
+              "from": 5,
+              "to": 12
+            }
+          },
+          "prompt": {
+            "en": "Placeholder: task rt-broken.",
+            "zh": "占位：题目 rt-broken。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the instrument, then answer.",
+            "zh": "占位提示：先看器具，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the instrument.",
+              "zh": "还不对。占位：再看一看器具。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "read-end-mark",
+                "say": {
+                  "en": "Placeholder feedback for read-end-mark.",
+                  "zh": "占位反馈：read-end-mark。"
+                },
+                "sample": "12"
+              }
+            ]
+          },
+          "answer": {
+            "answer": 7,
+            "form": "whole",
+            "unit": "cm"
+          }
+        },
+        {
+          "id": "rt-draw-line",
+          "kind": "set-scale",
+          "model": {
+            "kind": "instrument",
+            "type": "tape",
+            "look": "metre-rule",
+            "unit": "cm",
+            "from": 0,
+            "to": 100,
+            "major": 10,
+            "minor": 5
+          },
+          "prompt": {
+            "en": "Placeholder: task rt-draw-line.",
+            "zh": "占位：题目 rt-draw-line。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the instrument, then answer.",
+            "zh": "占位提示：先看器具，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the instrument.",
+              "zh": "还不对。占位：再看一看器具。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "tick-counting",
+                "say": {
+                  "en": "Placeholder feedback for tick-counting.",
+                  "zh": "占位反馈：tick-counting。"
+                },
+                "sample": "40"
+              }
+            ]
+          },
+          "target": 45,
+          "mode": "line"
+        },
+        {
+          "id": "rt-count-key",
+          "kind": "count-intervals",
+          "model": {
+            "kind": "instrument",
+            "type": "ruler",
+            "unit": "cm",
+            "from": 0,
+            "to": 15,
+            "major": 1,
+            "minor": 1,
+            "object": {
+              "kind": "key",
+              "from": 3,
+              "to": 8
+            }
+          },
+          "prompt": {
+            "en": "Placeholder: task rt-count-key.",
+            "zh": "占位：题目 rt-count-key。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the instrument, then answer.",
+            "zh": "占位提示：先看器具，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the instrument.",
+              "zh": "还不对。占位：再看一看器具。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "tick-counting",
+                "say": {
+                  "en": "Placeholder feedback for tick-counting.",
+                  "zh": "占位反馈：tick-counting。"
+                },
+                "sample": "=6"
+              }
+            ]
+          },
+          "between": [
+            3,
+            8
+          ],
+          "ask": "length",
+          "then": {
+            "answer": 5,
+            "form": "whole",
+            "unit": "cm"
+          }
+        },
+        {
+          "id": "rt-choose-start",
+          "kind": "choose",
+          "model": {
+            "kind": "instrument",
+            "type": "ruler",
+            "unit": "cm",
+            "from": 0,
+            "to": 15,
+            "major": 1,
+            "minor": 1
+          },
+          "prompt": {
+            "en": "Placeholder: task rt-choose-start.",
+            "zh": "占位：题目 rt-choose-start。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the instrument, then answer.",
+            "zh": "占位提示：先看器具，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the instrument.",
+              "zh": "还不对。占位：再看一看器具。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "read-end-mark",
+                "say": {
+                  "en": "Placeholder feedback for read-end-mark.",
+                  "zh": "占位反馈：read-end-mark。"
+                },
+                "sample": "b"
+              }
+            ]
+          },
+          "options": [
+            {
+              "id": "a",
+              "correct": true,
+              "model": {
+                "kind": "instrument",
+                "type": "ruler",
+                "unit": "cm",
+                "from": 0,
+                "to": 15,
+                "major": 1,
+                "minor": 1,
+                "object": {
+                  "kind": "pencil",
+                  "from": 0,
+                  "to": 6
+                }
+              }
+            },
+            {
+              "id": "b",
+              "correct": false,
+              "model": {
+                "kind": "instrument",
+                "type": "ruler",
+                "unit": "cm",
+                "from": 0,
+                "to": 15,
+                "major": 1,
+                "minor": 1,
+                "object": {
+                  "kind": "pencil",
+                  "from": 1,
+                  "to": 7
+                }
+              },
+              "misconception": "read-end-mark"
+            }
+          ]
+        },
+        {
+          "id": "rt-height",
+          "kind": "read-scale",
+          "model": {
+            "kind": "instrument",
+            "type": "tape",
+            "look": "height-chart",
+            "unit": "cm",
+            "from": 100,
+            "to": 150,
+            "major": 10,
+            "minor": 2,
+            "head": 128
+          },
+          "prompt": {
+            "en": "Placeholder: task rt-height.",
+            "zh": "占位：题目 rt-height。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the instrument, then answer.",
+            "zh": "占位提示：先看器具，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the instrument.",
+              "zh": "还不对。占位：再看一看器具。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "interval-misread",
+                "say": {
+                  "en": "Placeholder feedback for interval-misread.",
+                  "zh": "占位反馈：interval-misread。"
+                },
+                "sample": "124"
+              },
+              {
+                "when": "tick-counting",
+                "say": {
+                  "en": "Placeholder feedback for tick-counting.",
+                  "zh": "占位反馈：tick-counting。"
+                },
+                "sample": "130"
+              },
+              {
+                "when": "wrong-unit",
+                "say": {
+                  "en": "Placeholder feedback for wrong-unit.",
+                  "zh": "占位反馈：wrong-unit。"
+                },
+                "sample": "128 m"
+              }
+            ]
+          },
+          "answer": {
+            "answer": "128 cm",
+            "form": "measure",
+            "units": [
+              "cm",
+              "m"
+            ]
+          },
+          "tools": [
+            "zoom",
+            "count"
+          ]
+        },
+        {
+          "id": "rt-arrow",
+          "kind": "set-scale",
+          "model": {
+            "kind": "instrument",
+            "type": "tape",
+            "look": "tape",
+            "unit": "cm",
+            "from": 0,
+            "to": 100,
+            "major": 10,
+            "minor": 5
+          },
+          "prompt": {
+            "en": "Placeholder: task rt-arrow.",
+            "zh": "占位：题目 rt-arrow。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the instrument, then answer.",
+            "zh": "占位提示：先看器具，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the instrument.",
+              "zh": "还不对。占位：再看一看器具。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "tick-counting",
+                "say": {
+                  "en": "Placeholder feedback for tick-counting.",
+                  "zh": "占位反馈：tick-counting。"
+                },
+                "sample": "30"
+              },
+              {
+                "when": "interval-misread",
+                "say": {
+                  "en": "Placeholder feedback for interval-misread.",
+                  "zh": "占位反馈：interval-misread。"
+                },
+                "sample": "55"
+              }
+            ]
+          },
+          "target": 35,
+          "mode": "arrow"
+        }
+      ],
+      "keyFacts": [
+        {
+          "en": "Placeholder fact one.",
+          "zh": "占位要点一。"
+        },
+        {
+          "en": "Placeholder fact two.",
+          "zh": "占位要点二。"
+        }
+      ]
+    },
+    {
+      "id": "scales-and-balances",
+      "lo": [
+        "placeholder"
+      ],
+      "limits": {
+        "units": [
+          "g",
+          "kg"
+        ],
+        "maxValue": 1000,
+        "weights": [
+          1000,
+          500,
+          200,
+          100,
+          50,
+          20,
+          10
+        ],
+        "parts": [
+          1,
+          20,
+          50
+        ],
+        "partsPerLabel": [
+          2,
+          5
+        ]
+      },
+      "beats": [
+        {
+          "model": {
+            "kind": "instrument",
+            "type": "dial",
+            "unit": "g",
+            "from": 0,
+            "to": 1000,
+            "major": 100,
+            "minor": 50,
+            "value": 0
+          },
+          "equation": "{u:0 g}",
+          "caption": {
+            "en": "Placeholder: beat 1.",
+            "zh": "占位：第 1 拍。"
+          }
+        },
+        {
+          "model": {
+            "kind": "instrument",
+            "type": "dial",
+            "unit": "g",
+            "from": 0,
+            "to": 1000,
+            "major": 100,
+            "minor": 50,
+            "value": 0,
+            "straight": true
+          },
+          "move": "unroll",
+          "equation": "0, 100, 200 … 1000",
+          "caption": {
+            "en": "Placeholder: beat 2.",
+            "zh": "占位：第 2 拍。"
+          }
+        },
+        {
+          "model": {
+            "kind": "instrument",
+            "type": "dial",
+            "unit": "g",
+            "from": 0,
+            "to": 1000,
+            "major": 100,
+            "minor": 50,
+            "value": 0,
+            "count": {
+              "from": 200,
+              "to": 300
+            }
+          },
+          "move": "unroll",
+          "equation": "300 − 200 = 100 · 100 ÷ 2 = 50",
+          "caption": {
+            "en": "Placeholder: beat 3.",
+            "zh": "占位：第 3 拍。"
+          }
+        },
+        {
+          "model": {
+            "kind": "instrument",
+            "type": "dial",
+            "unit": "g",
+            "from": 0,
+            "to": 1000,
+            "major": 100,
+            "minor": 50,
+            "value": 350,
+            "load": "fish"
+          },
+          "move": "sweep",
+          "equation": "300 + 50 = {u:350 g}",
+          "caption": {
+            "en": "Placeholder: beat 4.",
+            "zh": "占位：第 4 拍。"
+          }
+        },
+        {
+          "model": {
+            "kind": "instrument",
+            "type": "balance",
+            "left": [
+              {
+                "item": "pineapple",
+                "mass": 1000
+              }
+            ],
+            "right": [
+              {
+                "weight": 1000
+              }
+            ]
+          },
+          "move": "tip",
+          "words": {
+            "en": "pineapple = {u:1 kg}",
+            "zh": "黄梨 = {u:1 kg}"
+          },
+          "caption": {
+            "en": "Placeholder: beat 5.",
+            "zh": "占位：第 5 拍。"
+          }
+        }
+      ],
+      "pool": [
+        {
+          "id": "sb-prawns",
+          "kind": "read-scale",
+          "model": {
+            "kind": "instrument",
+            "type": "dial",
+            "unit": "g",
+            "from": 0,
+            "to": 500,
+            "major": 100,
+            "minor": 20,
+            "value": 280,
+            "load": "prawns"
+          },
+          "prompt": {
+            "en": "Placeholder: task sb-prawns.",
+            "zh": "占位：题目 sb-prawns。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the instrument, then answer.",
+            "zh": "占位提示：先看器具，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the instrument.",
+              "zh": "还不对。占位：再看一看器具。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "interval-misread",
+                "say": {
+                  "en": "Placeholder feedback for interval-misread.",
+                  "zh": "占位反馈：interval-misread。"
+                },
+                "sample": "204"
+              },
+              {
+                "when": "tick-counting",
+                "say": {
+                  "en": "Placeholder feedback for tick-counting.",
+                  "zh": "占位反馈：tick-counting。"
+                },
+                "sample": "300"
+              },
+              {
+                "when": "wrong-unit",
+                "say": {
+                  "en": "Placeholder feedback for wrong-unit.",
+                  "zh": "占位反馈：wrong-unit。"
+                },
+                "sample": "280 kg"
+              }
+            ]
+          },
+          "answer": {
+            "answer": "280 g",
+            "form": "measure",
+            "units": [
+              "g",
+              "kg"
+            ]
+          },
+          "tools": [
+            "zoom",
+            "count"
+          ]
+        },
+        {
+          "id": "sb-load",
+          "kind": "set-scale",
+          "model": {
+            "kind": "instrument",
+            "type": "dial",
+            "unit": "g",
+            "from": 0,
+            "to": 500,
+            "major": 100,
+            "minor": 20,
+            "value": 0,
+            "load": "rice"
+          },
+          "prompt": {
+            "en": "Placeholder: task sb-load.",
+            "zh": "占位：题目 sb-load。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the instrument, then answer.",
+            "zh": "占位提示：先看器具，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the instrument.",
+              "zh": "还不对。占位：再看一看器具。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "tick-counting",
+                "say": {
+                  "en": "Placeholder feedback for tick-counting.",
+                  "zh": "占位反馈：tick-counting。"
+                },
+                "sample": "140"
+              },
+              {
+                "when": "interval-misread",
+                "say": {
+                  "en": "Placeholder feedback for interval-misread.",
+                  "zh": "占位反馈：interval-misread。"
+                },
+                "sample": "220"
+              }
+            ]
+          },
+          "target": "160 g",
+          "mode": "load"
+        },
+        {
+          "id": "sb-count-part",
+          "kind": "count-intervals",
+          "model": {
+            "kind": "instrument",
+            "type": "dial",
+            "unit": "g",
+            "from": 0,
+            "to": 500,
+            "major": 100,
+            "minor": 20,
+            "value": 0
+          },
+          "prompt": {
+            "en": "Placeholder: task sb-count-part.",
+            "zh": "占位：题目 sb-count-part。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the instrument, then answer.",
+            "zh": "占位提示：先看器具，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the instrument.",
+              "zh": "还不对。占位：再看一看器具。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "tick-counting",
+                "say": {
+                  "en": "Placeholder feedback for tick-counting.",
+                  "zh": "占位反馈：tick-counting。"
+                },
+                "sample": "=25"
+              },
+              {
+                "when": "interval-misread",
+                "say": {
+                  "en": "Placeholder feedback for interval-misread.",
+                  "zh": "占位反馈：interval-misread。"
+                },
+                "sample": "=1"
+              }
+            ]
+          },
+          "between": [
+            200,
+            300
+          ],
+          "ask": "part",
+          "then": {
+            "answer": 20,
+            "form": "whole",
+            "unit": "g"
+          }
+        },
+        {
+          "id": "sb-weights",
+          "kind": "set-scale",
+          "model": {
+            "kind": "instrument",
+            "type": "balance",
+            "left": [
+              {
+                "item": "papaya",
+                "mass": 800
+              }
+            ]
+          },
+          "prompt": {
+            "en": "Placeholder: task sb-weights.",
+            "zh": "占位：题目 sb-weights。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the instrument, then answer.",
+            "zh": "占位提示：先看器具，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the instrument.",
+              "zh": "还不对。占位：再看一看器具。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": []
+          },
+          "target": "800 g",
+          "mode": "weights",
+          "weights": [
+            500,
+            200,
+            100,
+            50
+          ]
+        },
+        {
+          "id": "sb-onion",
+          "kind": "read-scale",
+          "model": {
+            "kind": "instrument",
+            "type": "balance",
+            "left": [
+              {
+                "item": "onion",
+                "mass": 720
+              }
+            ],
+            "right": [
+              {
+                "weight": 500
+              },
+              {
+                "weight": 200
+              },
+              {
+                "weight": 20
+              }
+            ]
+          },
+          "prompt": {
+            "en": "Placeholder: task sb-onion.",
+            "zh": "占位：题目 sb-onion。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the instrument, then answer.",
+            "zh": "占位提示：先看器具，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the instrument.",
+              "zh": "还不对。占位：再看一看器具。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "wrong-unit",
+                "say": {
+                  "en": "Placeholder feedback for wrong-unit.",
+                  "zh": "占位反馈：wrong-unit。"
+                },
+                "sample": "720 kg"
+              }
+            ]
+          },
+          "answer": {
+            "answer": "720 g",
+            "form": "measure",
+            "units": [
+              "g",
+              "kg"
+            ]
+          }
+        },
+        {
+          "id": "sb-ball-stone",
+          "kind": "choose",
+          "model": {
+            "kind": "instrument",
+            "type": "balance",
+            "left": [
+              {
+                "item": "beach-ball",
+                "mass": 60,
+                "size": "big"
+              }
+            ],
+            "right": [
+              {
+                "item": "stone",
+                "mass": 400,
+                "size": "small"
+              }
+            ],
+            "hideMass": true
+          },
+          "prompt": {
+            "en": "Placeholder: task sb-ball-stone.",
+            "zh": "占位：题目 sb-ball-stone。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the instrument, then answer.",
+            "zh": "占位提示：先看器具，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the instrument.",
+              "zh": "还不对。占位：再看一看器具。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "size-is-mass",
+                "say": {
+                  "en": "Placeholder feedback for size-is-mass.",
+                  "zh": "占位反馈：size-is-mass。"
+                },
+                "sample": "b"
+              },
+              {
+                "when": "balance-misread",
+                "say": {
+                  "en": "Placeholder feedback for balance-misread.",
+                  "zh": "占位反馈：balance-misread。"
+                },
+                "sample": "c"
+              }
+            ]
+          },
+          "options": [
+            {
+              "id": "a",
+              "correct": true,
+              "text": {
+                "en": "Placeholder: the stone.",
+                "zh": "占位：石头。"
+              }
+            },
+            {
+              "id": "b",
+              "correct": false,
+              "text": {
+                "en": "Placeholder: the ball, it is bigger.",
+                "zh": "占位：球，它更大。"
+              },
+              "misconception": "size-is-mass"
+            },
+            {
+              "id": "c",
+              "correct": false,
+              "text": {
+                "en": "Placeholder: the side that is up.",
+                "zh": "占位：翘起来的那边。"
+              },
+              "misconception": "balance-misread"
+            }
+          ]
+        },
+        {
+          "id": "sb-which-dial",
+          "kind": "choose",
+          "model": {
+            "kind": "instrument",
+            "type": "dial",
+            "unit": "g",
+            "from": 0,
+            "to": 500,
+            "major": 100,
+            "minor": 20,
+            "value": 0
+          },
+          "prompt": {
+            "en": "Placeholder: task sb-which-dial.",
+            "zh": "占位：题目 sb-which-dial。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the instrument, then answer.",
+            "zh": "占位提示：先看器具，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the instrument.",
+              "zh": "还不对。占位：再看一看器具。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "tick-counting",
+                "say": {
+                  "en": "Placeholder feedback for tick-counting.",
+                  "zh": "占位反馈：tick-counting。"
+                },
+                "sample": "b"
+              }
+            ]
+          },
+          "options": [
+            {
+              "id": "a",
+              "correct": true,
+              "model": {
+                "kind": "instrument",
+                "type": "dial",
+                "unit": "g",
+                "from": 0,
+                "to": 500,
+                "major": 100,
+                "minor": 50,
+                "value": 350
+              }
+            },
+            {
+              "id": "b",
+              "correct": false,
+              "model": {
+                "kind": "instrument",
+                "type": "dial",
+                "unit": "g",
+                "from": 0,
+                "to": 500,
+                "major": 100,
+                "minor": 50,
+                "value": 400
+              },
+              "misconception": "tick-counting"
+            }
+          ]
+        },
+        {
+          "id": "sb-estimate",
+          "kind": "choose",
+          "model": {
+            "kind": "instrument",
+            "type": "dial",
+            "unit": "kg",
+            "from": 0,
+            "to": 10,
+            "major": 2,
+            "minor": 1,
+            "value": 0,
+            "load": "watermelon"
+          },
+          "prompt": {
+            "en": "Placeholder: task sb-estimate.",
+            "zh": "占位：题目 sb-estimate。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the instrument, then answer.",
+            "zh": "占位提示：先看器具，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the instrument.",
+              "zh": "还不对。占位：再看一看器具。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "wrong-unit",
+                "say": {
+                  "en": "Placeholder feedback for wrong-unit.",
+                  "zh": "占位反馈：wrong-unit。"
+                },
+                "sample": "b"
+              },
+              {
+                "when": "unreasonable-estimate",
+                "say": {
+                  "en": "Placeholder feedback for unreasonable-estimate.",
+                  "zh": "占位反馈：unreasonable-estimate。"
+                },
+                "sample": "c"
+              }
+            ]
+          },
+          "options": [
+            {
+              "id": "a",
+              "correct": true,
+              "text": {
+                "en": "{u:3 kg}",
+                "zh": "{u:3 kg}"
+              }
+            },
+            {
+              "id": "b",
+              "correct": false,
+              "text": {
+                "en": "{u:3 g}",
+                "zh": "{u:3 g}"
+              },
+              "misconception": "wrong-unit"
+            },
+            {
+              "id": "c",
+              "correct": false,
+              "text": {
+                "en": "{u:300 kg}",
+                "zh": "{u:300 kg}"
+              },
+              "misconception": "unreasonable-estimate"
+            }
+          ]
+        }
+      ],
+      "keyFacts": [
+        {
+          "en": "Placeholder fact one.",
+          "zh": "占位要点一。"
+        },
+        {
+          "en": "Placeholder fact two.",
+          "zh": "占位要点二。"
+        }
+      ]
+    },
+    {
+      "id": "jugs-and-two-units",
+      "lo": [
+        "placeholder"
+      ],
+      "views": [
+        "instrument",
+        "straight"
+      ],
+      "limits": {
+        "units": [
+          "l",
+          "ml",
+          "cm",
+          "m",
+          "km"
+        ],
+        "compound": [
+          "m-cm",
+          "l-ml",
+          "km-m"
+        ],
+        "bigMax": 9,
+        "smallStep": 5,
+        "maxValue": 3000,
+        "parts": [
+          1,
+          2,
+          5,
+          20,
+          50,
+          200
+        ],
+        "partsPerLabel": [
+          1,
+          10
+        ]
+      },
+      "beats": [
+        {
+          "model": {
+            "kind": "instrument",
+            "pair": [
+              {
+                "type": "jug",
+                "shape": "bottle",
+                "scale": false,
+                "liquid": "water",
+                "label": {
+                  "en": "Placeholder A",
+                  "zh": "占位 A"
+                }
+              },
+              {
+                "type": "jug",
+                "shape": "bowl",
+                "scale": false,
+                "liquid": "water",
+                "label": {
+                  "en": "Placeholder B",
+                  "zh": "占位 B"
+                }
+              }
+            ]
+          },
+          "words": {
+            "en": "A ? B",
+            "zh": "A ? B"
+          },
+          "caption": {
+            "en": "Placeholder: beat 1.",
+            "zh": "占位：第 1 拍。"
+          }
+        },
+        {
+          "model": {
+            "kind": "instrument",
+            "type": "jug",
+            "unit": "ml",
+            "from": 0,
+            "to": 1000,
+            "major": 100,
+            "minor": 50,
+            "shape": "beaker",
+            "value": 350,
+            "liquid": "juice"
+          },
+          "move": "morph",
+          "equation": "{u:350 ml}",
+          "caption": {
+            "en": "Placeholder: beat 2.",
+            "zh": "占位：第 2 拍。"
+          }
+        },
+        {
+          "model": {
+            "kind": "instrument",
+            "type": "jug",
+            "unit": "ml",
+            "from": 0,
+            "to": 1000,
+            "major": 100,
+            "minor": 50,
+            "shape": "beaker",
+            "value": 350,
+            "liquid": "juice",
+            "zoom": {
+              "from": 300,
+              "to": 400
+            },
+            "count": {
+              "from": 300,
+              "to": 400
+            }
+          },
+          "move": "zoom",
+          "equation": "100 ÷ 2 = 50",
+          "caption": {
+            "en": "Placeholder: beat 3.",
+            "zh": "占位：第 3 拍。"
+          }
+        },
+        {
+          "model": {
+            "kind": "instrument",
+            "type": "jug",
+            "unit": "ml",
+            "from": 0,
+            "to": 1000,
+            "major": 100,
+            "minor": 50,
+            "shape": "beaker",
+            "value": 750,
+            "eye": true
+          },
+          "move": "fill",
+          "equation": "{u:750 ml}",
+          "caption": {
+            "en": "Placeholder: beat 4.",
+            "zh": "占位：第 4 拍。"
+          }
+        },
+        {
+          "model": {
+            "kind": "instrument",
+            "type": "tape",
+            "look": "height-chart",
+            "unit": "cm",
+            "sub": {
+              "unit": "m",
+              "per": 100
+            },
+            "dual": true,
+            "from": 0,
+            "to": 150,
+            "major": 10,
+            "minor": 2,
+            "skip": {
+              "from": 0,
+              "to": 100
+            },
+            "head": 132,
+            "brackets": [
+              {
+                "from": 0,
+                "to": 100,
+                "label": {
+                  "en": "{u:1 m}",
+                  "zh": "{u:1 m}"
+                }
+              },
+              {
+                "from": 100,
+                "to": 132,
+                "label": {
+                  "en": "{u:32 cm}",
+                  "zh": "{u:32 cm}"
+                },
+                "tone": "signal"
+              }
+            ]
+          },
+          "move": "morph",
+          "equation": "{u:1 m 32 cm} = {u:132 cm}",
+          "caption": {
+            "en": "Placeholder: beat 5.",
+            "zh": "占位：第 5 拍。"
+          }
+        }
+      ],
+      "pool": [
+        {
+          "id": "ju-compound",
+          "kind": "read-scale",
+          "model": {
+            "kind": "instrument",
+            "type": "jug",
+            "unit": "ml",
+            "sub": {
+              "unit": "l"
+            },
+            "from": 0,
+            "to": 2000,
+            "major": 500,
+            "minor": 50,
+            "shape": "jug",
+            "value": 1250
+          },
+          "prompt": {
+            "en": "Placeholder: task ju-compound.",
+            "zh": "占位：题目 ju-compound。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the instrument, then answer.",
+            "zh": "占位提示：先看器具，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the instrument.",
+              "zh": "还不对。占位：再看一看器具。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "compound-place",
+                "say": {
+                  "en": "Placeholder feedback for compound-place.",
+                  "zh": "占位反馈：compound-place。"
+                },
+                "sample": "1,25"
+              },
+              {
+                "when": "interval-misread",
+                "say": {
+                  "en": "Placeholder feedback for interval-misread.",
+                  "zh": "占位反馈：interval-misread。"
+                },
+                "sample": "1,5"
+              }
+            ]
+          },
+          "answer": {
+            "answer": "1 l 250 ml",
+            "form": "compound"
+          },
+          "tools": [
+            "zoom"
+          ]
+        },
+        {
+          "id": "ju-fill",
+          "kind": "set-scale",
+          "model": {
+            "kind": "instrument",
+            "type": "jug",
+            "unit": "ml",
+            "from": 0,
+            "to": 1000,
+            "major": 100,
+            "minor": 50,
+            "shape": "cup",
+            "value": 0
+          },
+          "prompt": {
+            "en": "Placeholder: task ju-fill.",
+            "zh": "占位：题目 ju-fill。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the instrument, then answer.",
+            "zh": "占位提示：先看器具，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the instrument.",
+              "zh": "还不对。占位：再看一看器具。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "interval-misread",
+                "say": {
+                  "en": "Placeholder feedback for interval-misread.",
+                  "zh": "占位反馈：interval-misread。"
+                },
+                "sample": "550"
+              },
+              {
+                "when": "tick-counting",
+                "say": {
+                  "en": "Placeholder feedback for tick-counting.",
+                  "zh": "占位反馈：tick-counting。"
+                },
+                "sample": "300"
+              }
+            ]
+          },
+          "target": 350,
+          "mode": "fill"
+        },
+        {
+          "id": "ju-compare",
+          "kind": "compare",
+          "model": {
+            "kind": "instrument",
+            "pair": [
+              {
+                "type": "jug",
+                "unit": "ml",
+                "from": 0,
+                "to": 1000,
+                "major": 100,
+                "minor": 50,
+                "value": 900,
+                "label": {
+                  "en": "Placeholder A",
+                  "zh": "占位 A"
+                }
+              },
+              {
+                "type": "jug",
+                "unit": "l",
+                "from": 0,
+                "to": 5,
+                "major": 1,
+                "minor": 1,
+                "value": 1,
+                "label": {
+                  "en": "Placeholder B",
+                  "zh": "占位 B"
+                }
+              }
+            ]
+          },
+          "prompt": {
+            "en": "Placeholder: task ju-compare.",
+            "zh": "占位：题目 ju-compare。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the instrument, then answer.",
+            "zh": "占位提示：先看器具，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the instrument.",
+              "zh": "还不对。占位：再看一看器具。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "ignored-unit",
+                "say": {
+                  "en": "Placeholder feedback for ignored-unit.",
+                  "zh": "占位反馈：ignored-unit。"
+                },
+                "sample": ">"
+              }
+            ]
+          },
+          "a": "900 ml",
+          "b": "1 l",
+          "align": "unit"
+        },
+        {
+          "id": "ju-compare-compound",
+          "kind": "compare",
+          "model": {
+            "kind": "instrument",
+            "pair": [
+              {
+                "type": "tape",
+                "look": "height-chart",
+                "unit": "cm",
+                "sub": {
+                  "unit": "m"
+                },
+                "from": 100,
+                "to": 200,
+                "major": 10,
+                "minor": 5,
+                "head": 105,
+                "label": {
+                  "en": "Placeholder A",
+                  "zh": "占位 A"
+                }
+              },
+              {
+                "type": "tape",
+                "look": "height-chart",
+                "unit": "cm",
+                "sub": {
+                  "unit": "m"
+                },
+                "from": 100,
+                "to": 200,
+                "major": 10,
+                "minor": 5,
+                "head": 150,
+                "label": {
+                  "en": "Placeholder B",
+                  "zh": "占位 B"
+                }
+              }
+            ]
+          },
+          "prompt": {
+            "en": "Placeholder: task ju-compare-compound.",
+            "zh": "占位：题目 ju-compare-compound。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the instrument, then answer.",
+            "zh": "占位提示：先看器具，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the instrument.",
+              "zh": "还不对。占位：再看一看器具。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "compound-place",
+                "say": {
+                  "en": "Placeholder feedback for compound-place.",
+                  "zh": "占位反馈：compound-place。"
+                },
+                "sample": "="
+              }
+            ]
+          },
+          "a": "1 m 5 cm",
+          "b": "1 m 50 cm"
+        },
+        {
+          "id": "ju-order",
+          "kind": "order",
+          "model": {
+            "kind": "instrument",
+            "set": [
+              {
+                "type": "tape",
+                "look": "tape",
+                "unit": "cm",
+                "from": 0,
+                "to": 150,
+                "major": 10,
+                "minor": 5,
+                "object": {
+                  "kind": "string",
+                  "from": 0,
+                  "to": 85
+                },
+                "label": {
+                  "en": "Placeholder A",
+                  "zh": "占位 A"
+                }
+              },
+              {
+                "type": "tape",
+                "look": "tape",
+                "unit": "cm",
+                "from": 0,
+                "to": 150,
+                "major": 10,
+                "minor": 5,
+                "object": {
+                  "kind": "string",
+                  "from": 0,
+                  "to": 100
+                },
+                "label": {
+                  "en": "Placeholder B",
+                  "zh": "占位 B"
+                }
+              },
+              {
+                "type": "tape",
+                "look": "tape",
+                "unit": "cm",
+                "from": 0,
+                "to": 150,
+                "major": 10,
+                "minor": 5,
+                "object": {
+                  "kind": "string",
+                  "from": 0,
+                  "to": 120
+                },
+                "label": {
+                  "en": "Placeholder C",
+                  "zh": "占位 C"
+                }
+              }
+            ]
+          },
+          "prompt": {
+            "en": "Placeholder: task ju-order.",
+            "zh": "占位：题目 ju-order。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the instrument, then answer.",
+            "zh": "占位提示：先看器具，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the instrument.",
+              "zh": "还不对。占位：再看一看器具。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "ignored-unit",
+                "say": {
+                  "en": "Placeholder feedback for ignored-unit.",
+                  "zh": "占位反馈：ignored-unit。"
+                },
+                "sample": "1 m,85 cm,120 cm"
+              }
+            ]
+          },
+          "items": [
+            "85 cm",
+            "1 m",
+            "120 cm"
+          ],
+          "direction": "asc"
+        },
+        {
+          "id": "ju-taller",
+          "kind": "choose",
+          "model": {
+            "kind": "instrument",
+            "pair": [
+              {
+                "type": "jug",
+                "shape": "bottle",
+                "scale": false,
+                "liquid": "water",
+                "label": {
+                  "en": "Placeholder A",
+                  "zh": "占位 A"
+                }
+              },
+              {
+                "type": "jug",
+                "shape": "bowl",
+                "scale": false,
+                "liquid": "water",
+                "label": {
+                  "en": "Placeholder B",
+                  "zh": "占位 B"
+                }
+              }
+            ]
+          },
+          "prompt": {
+            "en": "Placeholder: task ju-taller.",
+            "zh": "占位：题目 ju-taller。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the instrument, then answer.",
+            "zh": "占位提示：先看器具，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the instrument.",
+              "zh": "还不对。占位：再看一看器具。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "taller-holds-more",
+                "say": {
+                  "en": "Placeholder feedback for taller-holds-more.",
+                  "zh": "占位反馈：taller-holds-more。"
+                },
+                "sample": "b"
+              }
+            ]
+          },
+          "options": [
+            {
+              "id": "a",
+              "correct": true,
+              "text": {
+                "en": "Placeholder: the bowl.",
+                "zh": "占位：碗。"
+              }
+            },
+            {
+              "id": "b",
+              "correct": false,
+              "text": {
+                "en": "Placeholder: the bottle, it is taller.",
+                "zh": "占位：瓶子，它更高。"
+              },
+              "misconception": "taller-holds-more"
+            }
+          ]
+        },
+        {
+          "id": "ju-path",
+          "kind": "read-scale",
+          "model": {
+            "kind": "instrument",
+            "type": "tape",
+            "look": "path",
+            "unit": "m",
+            "sub": {
+              "unit": "km",
+              "per": 1000
+            },
+            "from": 0,
+            "to": 3000,
+            "major": 1000,
+            "minor": 200,
+            "arrow": 1400
+          },
+          "prompt": {
+            "en": "Placeholder: task ju-path.",
+            "zh": "占位：题目 ju-path。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the instrument, then answer.",
+            "zh": "占位提示：先看器具，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the instrument.",
+              "zh": "还不对。占位：再看一看器具。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "interval-misread",
+                "say": {
+                  "en": "Placeholder feedback for interval-misread.",
+                  "zh": "占位反馈：interval-misread。"
+                },
+                "sample": "1,2"
+              },
+              {
+                "when": "compound-place",
+                "say": {
+                  "en": "Placeholder feedback for compound-place.",
+                  "zh": "占位反馈：compound-place。"
+                },
+                "sample": "1,40"
+              }
+            ]
+          },
+          "answer": {
+            "answer": "1 km 400 m",
+            "form": "compound"
+          }
+        },
+        {
+          "id": "ju-whole-ml",
+          "kind": "read-scale",
+          "model": {
+            "kind": "instrument",
+            "type": "jug",
+            "unit": "ml",
+            "from": 0,
+            "to": 500,
+            "major": 100,
+            "minor": 20,
+            "shape": "beaker",
+            "value": 260
+          },
+          "prompt": {
+            "en": "Placeholder: task ju-whole-ml.",
+            "zh": "占位：题目 ju-whole-ml。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the instrument, then answer.",
+            "zh": "占位提示：先看器具，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the instrument.",
+              "zh": "还不对。占位：再看一看器具。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "tick-counting",
+                "say": {
+                  "en": "Placeholder feedback for tick-counting.",
+                  "zh": "占位反馈：tick-counting。"
+                },
+                "sample": "280"
+              },
+              {
+                "when": "interval-misread",
+                "say": {
+                  "en": "Placeholder feedback for interval-misread.",
+                  "zh": "占位反馈：interval-misread。"
+                },
+                "sample": "203"
+              }
+            ]
+          },
+          "answer": {
+            "answer": 260,
+            "form": "whole",
+            "unit": "ml"
+          },
+          "tools": [
+            "count"
+          ]
+        }
+      ],
+      "keyFacts": [
+        {
+          "en": "Placeholder fact one.",
+          "zh": "占位要点一。"
+        },
+        {
+          "en": "Placeholder fact two.",
+          "zh": "占位要点二。"
+        }
+      ]
+    },
+    {
+      "id": "changing-units",
+      "lo": [
+        "placeholder"
+      ],
+      "bridge": true,
+      "limits": {
+        "units": [
+          "kg",
+          "g",
+          "l",
+          "ml"
+        ],
+        "compound": [
+          "kg-g",
+          "l-ml"
+        ],
+        "bigMax": 9,
+        "smallStep": 5,
+        "dp": [
+          0,
+          1
+        ],
+        "maxValue": 4000,
+        "weights": [
+          1000,
+          20
+        ]
+      },
+      "beats": [
+        {
+          "model": {
+            "kind": "instrument",
+            "type": "balance",
+            "left": [
+              {
+                "item": "rice",
+                "mass": 3040
+              }
+            ],
+            "right": [
+              {
+                "weight": 1000
+              },
+              {
+                "weight": 1000
+              },
+              {
+                "weight": 1000
+              },
+              {
+                "weight": 20
+              },
+              {
+                "weight": 20
+              }
+            ]
+          },
+          "words": {
+            "en": "{u:3 kg 40 g} = {u:3040 g}",
+            "zh": "{u:3 kg 40 g} = {u:3040 g}"
+          },
+          "caption": {
+            "en": "Placeholder: beat 1.",
+            "zh": "占位：第 1 拍。"
+          }
+        },
+        {
+          "model": {
+            "kind": "instrument",
+            "type": "jug",
+            "unit": "ml",
+            "sub": {
+              "unit": "l"
+            },
+            "from": 0,
+            "to": 2000,
+            "major": 500,
+            "minor": 50,
+            "shape": "jug",
+            "value": 1250,
+            "brackets": [
+              {
+                "from": 0,
+                "to": 1000,
+                "label": {
+                  "en": "{u:1 l}",
+                  "zh": "{u:1 l}"
+                }
+              },
+              {
+                "from": 1000,
+                "to": 1250,
+                "label": {
+                  "en": "{u:250 ml}",
+                  "zh": "{u:250 ml}"
+                },
+                "tone": "signal"
+              }
+            ]
+          },
+          "move": "morph",
+          "equation": "{u:1250 ml} = {u:1 l 250 ml}",
+          "caption": {
+            "en": "Placeholder: beat 2.",
+            "zh": "占位：第 2 拍。"
+          }
+        },
+        {
+          "model": {
+            "kind": "instrument",
+            "type": "jug",
+            "unit": "ml",
+            "sub": {
+              "unit": "l"
+            },
+            "from": 0,
+            "to": 2000,
+            "major": 500,
+            "minor": 50,
+            "shape": "jug",
+            "value": 1500
+          },
+          "move": "fill",
+          "equation": "{u:1500 ml} = {u:1 l 500 ml}",
+          "caption": {
+            "en": "Placeholder: beat 3.",
+            "zh": "占位：第 3 拍。"
+          }
+        },
+        {
+          "model": {
+            "kind": "instrument",
+            "type": "dial",
+            "unit": "kg",
+            "from": 0,
+            "to": 3,
+            "major": 1,
+            "minor": "0.1",
+            "value": "1.4",
+            "load": "flour",
+            "count": {
+              "from": 1,
+              "to": 2
+            }
+          },
+          "move": "morph",
+          "equation": "{u:1.4 kg} = {u:1 kg 400 g} = {u:1400 g}",
+          "caption": {
+            "en": "Placeholder: beat 4.",
+            "zh": "占位：第 4 拍。"
+          }
+        }
+      ],
+      "pool": [
+        {
+          "id": "cu-rice",
+          "kind": "input",
+          "model": {
+            "kind": "instrument",
+            "type": "balance",
+            "left": [
+              {
+                "item": "rice",
+                "mass": 3040
+              }
+            ],
+            "right": [
+              {
+                "weight": 1000
+              },
+              {
+                "weight": 1000
+              },
+              {
+                "weight": 1000
+              },
+              {
+                "weight": 20
+              },
+              {
+                "weight": 20
+              }
+            ]
+          },
+          "prompt": {
+            "en": "Placeholder: task cu-rice.",
+            "zh": "占位：题目 cu-rice。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the instrument, then answer.",
+            "zh": "占位提示：先看器具，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the instrument.",
+              "zh": "还不对。占位：再看一看器具。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "compound-concatenated",
+                "say": {
+                  "en": "Placeholder feedback for compound-concatenated.",
+                  "zh": "占位反馈：compound-concatenated。"
+                },
+                "sample": "340"
+              },
+              {
+                "when": "compound-place",
+                "say": {
+                  "en": "Placeholder feedback for compound-place.",
+                  "zh": "占位反馈：compound-place。"
+                },
+                "sample": "3400"
+              }
+            ]
+          },
+          "answer": 3040,
+          "form": "whole",
+          "unit": "g",
+          "work": {
+            "do": "convert",
+            "from": "3 kg 40 g",
+            "into": "g"
+          }
+        },
+        {
+          "id": "cu-litres",
+          "kind": "input",
+          "model": {
+            "kind": "instrument",
+            "type": "jug",
+            "unit": "ml",
+            "sub": {
+              "unit": "l"
+            },
+            "from": 0,
+            "to": 4000,
+            "major": 1000,
+            "minor": 250,
+            "value": 3250
+          },
+          "prompt": {
+            "en": "Placeholder: task cu-litres.",
+            "zh": "占位：题目 cu-litres。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the instrument, then answer.",
+            "zh": "占位提示：先看器具，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the instrument.",
+              "zh": "还不对。占位：再看一看器具。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "unit-factor-wrong",
+                "say": {
+                  "en": "Placeholder feedback for unit-factor-wrong.",
+                  "zh": "占位反馈：unit-factor-wrong。"
+                },
+                "sample": "550"
+              }
+            ]
+          },
+          "answer": 3250,
+          "form": "whole",
+          "unit": "ml",
+          "work": {
+            "do": "convert",
+            "from": "3 l 250 ml",
+            "into": "ml"
+          }
+        },
+        {
+          "id": "cu-split",
+          "kind": "input",
+          "model": {
+            "kind": "instrument",
+            "type": "jug",
+            "unit": "ml",
+            "sub": {
+              "unit": "l"
+            },
+            "from": 0,
+            "to": 2000,
+            "major": 500,
+            "minor": 50,
+            "shape": "jug",
+            "value": 1250
+          },
+          "prompt": {
+            "en": "Placeholder: task cu-split.",
+            "zh": "占位：题目 cu-split。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the instrument, then answer.",
+            "zh": "占位提示：先看器具，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the instrument.",
+              "zh": "还不对。占位：再看一看器具。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "compound-split-wrong",
+                "say": {
+                  "en": "Placeholder feedback for compound-split-wrong.",
+                  "zh": "占位反馈：compound-split-wrong。"
+                },
+                "sample": "12,50"
+              },
+              {
+                "when": "compound-place",
+                "say": {
+                  "en": "Placeholder feedback for compound-place.",
+                  "zh": "占位反馈：compound-place。"
+                },
+                "sample": "1,25"
+              }
+            ]
+          },
+          "answer": "1 l 250 ml",
+          "form": "compound",
+          "work": {
+            "do": "convert",
+            "from": "1250 ml",
+            "into": "l-ml"
+          }
+        },
+        {
+          "id": "cu-decimal",
+          "kind": "input",
+          "model": {
+            "kind": "instrument",
+            "type": "dial",
+            "unit": "kg",
+            "from": 0,
+            "to": 3,
+            "major": 1,
+            "minor": "0.1",
+            "value": "1.4",
+            "load": "flour"
+          },
+          "prompt": {
+            "en": "Placeholder: task cu-decimal.",
+            "zh": "占位：题目 cu-decimal。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the instrument, then answer.",
+            "zh": "占位提示：先看器具，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the instrument.",
+              "zh": "还不对。占位：再看一看器具。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "decimal-as-subunit",
+                "say": {
+                  "en": "Placeholder feedback for decimal-as-subunit.",
+                  "zh": "占位反馈：decimal-as-subunit。"
+                },
+                "sample": "1004"
+              },
+              {
+                "when": "unit-factor-wrong",
+                "say": {
+                  "en": "Placeholder feedback for unit-factor-wrong.",
+                  "zh": "占位反馈：unit-factor-wrong。"
+                },
+                "sample": "140"
+              }
+            ]
+          },
+          "answer": 1400,
+          "form": "whole",
+          "unit": "g",
+          "work": {
+            "do": "convert",
+            "from": "1.4 kg",
+            "into": "g"
+          }
+        },
+        {
+          "id": "cu-read-decimal",
+          "kind": "read-scale",
+          "model": {
+            "kind": "instrument",
+            "type": "dial",
+            "unit": "kg",
+            "from": 0,
+            "to": 3,
+            "major": 1,
+            "minor": "0.1",
+            "value": "2.6",
+            "load": "rice"
+          },
+          "prompt": {
+            "en": "Placeholder: task cu-read-decimal.",
+            "zh": "占位：题目 cu-read-decimal。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the instrument, then answer.",
+            "zh": "占位提示：先看器具，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the instrument.",
+              "zh": "还不对。占位：再看一看器具。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "interval-misread",
+                "say": {
+                  "en": "Placeholder feedback for interval-misread.",
+                  "zh": "占位反馈：interval-misread。"
+                },
+                "sample": "2.06"
+              },
+              {
+                "when": "tick-counting",
+                "say": {
+                  "en": "Placeholder feedback for tick-counting.",
+                  "zh": "占位反馈：tick-counting。"
+                },
+                "sample": "2.7"
+              }
+            ]
+          },
+          "answer": {
+            "answer": "2.6",
+            "form": "decimal",
+            "unit": "kg"
+          },
+          "tools": [
+            "zoom"
+          ]
+        },
+        {
+          "id": "cu-read-compound",
+          "kind": "read-scale",
+          "model": {
+            "kind": "instrument",
+            "type": "dial",
+            "unit": "kg",
+            "from": 0,
+            "to": 3,
+            "major": 1,
+            "minor": "0.1",
+            "value": "1.4",
+            "load": "flour"
+          },
+          "prompt": {
+            "en": "Placeholder: task cu-read-compound.",
+            "zh": "占位：题目 cu-read-compound。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the instrument, then answer.",
+            "zh": "占位提示：先看器具，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the instrument.",
+              "zh": "还不对。占位：再看一看器具。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "decimal-as-subunit",
+                "say": {
+                  "en": "Placeholder feedback for decimal-as-subunit.",
+                  "zh": "占位反馈：decimal-as-subunit。"
+                },
+                "sample": "1,4"
+              }
+            ]
+          },
+          "answer": {
+            "answer": "1 kg 400 g",
+            "form": "compound"
+          }
+        },
+        {
+          "id": "cu-same-as",
+          "kind": "choose",
+          "model": {
+            "kind": "instrument",
+            "type": "dial",
+            "unit": "kg",
+            "from": 0,
+            "to": 3,
+            "major": 1,
+            "minor": "0.1",
+            "value": "2",
+            "load": "flour"
+          },
+          "prompt": {
+            "en": "Placeholder: task cu-same-as.",
+            "zh": "占位：题目 cu-same-as。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the instrument, then answer.",
+            "zh": "占位提示：先看器具，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the instrument.",
+              "zh": "还不对。占位：再看一看器具。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "compound-concatenated",
+                "say": {
+                  "en": "Placeholder feedback for compound-concatenated.",
+                  "zh": "占位反馈：compound-concatenated。"
+                },
+                "sample": "b"
+              },
+              {
+                "when": "compound-place",
+                "say": {
+                  "en": "Placeholder feedback for compound-place.",
+                  "zh": "占位反馈：compound-place。"
+                },
+                "sample": "c"
+              },
+              {
+                "when": "unit-factor-wrong",
+                "say": {
+                  "en": "Placeholder feedback for unit-factor-wrong.",
+                  "zh": "占位反馈：unit-factor-wrong。"
+                },
+                "sample": "d"
+              }
+            ]
+          },
+          "options": [
+            {
+              "id": "a",
+              "correct": true,
+              "text": {
+                "en": "{u:2005 g}",
+                "zh": "{u:2005 g}"
+              }
+            },
+            {
+              "id": "b",
+              "correct": false,
+              "text": {
+                "en": "{u:25 g}",
+                "zh": "{u:25 g}"
+              },
+              "misconception": "compound-concatenated"
+            },
+            {
+              "id": "c",
+              "correct": false,
+              "text": {
+                "en": "{u:2500 g}",
+                "zh": "{u:2500 g}"
+              },
+              "misconception": "compound-place"
+            },
+            {
+              "id": "d",
+              "correct": false,
+              "text": {
+                "en": "{u:205 g}",
+                "zh": "{u:205 g}"
+              },
+              "misconception": "unit-factor-wrong"
+            }
+          ]
+        },
+        {
+          "id": "cu-compare",
+          "kind": "compare",
+          "model": {
+            "kind": "instrument",
+            "pair": [
+              {
+                "type": "dial",
+                "unit": "g",
+                "sub": {
+                  "unit": "kg"
+                },
+                "from": 0,
+                "to": 3000,
+                "major": 500,
+                "minor": 50,
+                "value": 2050,
+                "label": {
+                  "en": "Placeholder A",
+                  "zh": "占位 A"
+                }
+              },
+              {
+                "type": "dial",
+                "unit": "g",
+                "sub": {
+                  "unit": "kg"
+                },
+                "from": 0,
+                "to": 3000,
+                "major": 500,
+                "minor": 50,
+                "value": 2500,
+                "label": {
+                  "en": "Placeholder B",
+                  "zh": "占位 B"
+                }
+              }
+            ]
+          },
+          "prompt": {
+            "en": "Placeholder: task cu-compare.",
+            "zh": "占位：题目 cu-compare。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the instrument, then answer.",
+            "zh": "占位提示：先看器具，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint.",
+              "zh": "占位提示。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder.",
+              "zh": "对。占位。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: look again at the instrument.",
+              "zh": "还不对。占位：再看一看器具。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer is shown on the stage.",
+              "zh": "占位：答案画在舞台上。"
+            },
+            "wrong": [
+              {
+                "when": "compound-place",
+                "say": {
+                  "en": "Placeholder feedback for compound-place.",
+                  "zh": "占位反馈：compound-place。"
+                },
+                "sample": "="
+              }
+            ]
+          },
+          "a": "2 kg 50 g",
+          "b": "2500 g",
+          "align": "unit"
+        }
+      ],
+      "keyFacts": [
+        {
+          "en": "Placeholder fact one.",
+          "zh": "占位要点一。"
+        },
+        {
+          "en": "Placeholder fact two.",
+          "zh": "占位要点二。"
+        }
+      ]
+    }
+  ]
+}

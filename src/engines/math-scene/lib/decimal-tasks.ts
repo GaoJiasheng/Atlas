@@ -16,7 +16,8 @@
 import type { DecimalGridModelSpec, DecimalLineSpec, DecimalWork, DPlace, DTrade, InputSpec, MisconceptionCode, Model, MoneySpec, PlaceValueSpec, Task, TaskOf } from '../schema';
 import { DPLACES } from '../schema';
 import { cmp, divWhole, eq, formatDecimal, parseDecimal, same, withPlaces, type Decimal } from './decimal';
-import { decimalOf, type AnswerValue, type DecValue } from './value';
+import { decimalOf, isQty, qtyText, qtyToken, type AnswerValue, type DecValue, type QtyValue } from './value';
+import { decimalWorkOf, isMeasureTask } from './measure-kind';
 import type { Frac } from './fraction';
 import { cellsPerWhole, cellTh, fillTo, levelPlaces, shadingTh, type GridLevel } from './dgrid';
 import { levelsFor, pathTo, roundingEnds, valueAt } from './dline';
@@ -32,13 +33,15 @@ export type DecimalModelSpec = DecimalGridModelSpec | PlaceValueSpec | MoneySpec
 export const isDecimalModel = (m: Model): m is DecimalModelSpec => m.kind === 'decimal-grid' || m.kind === 'place-value' || m.kind === 'money' || (m.kind === 'numberline' && m.scale === 'decimal');
 export const isDec = (v: Frac | DecValue | AnswerValue): v is DecValue => 'kind' in v && v.kind === 'dec';
 /** A whole number written as a fraction (`"2"`) counts as a decimal on a decimal task. */
-export const decOf = (v: Frac | DecValue): Decimal | null => (isDec(v) ? v : decimalOf(v));
+export const decOf = (v: Frac | DecValue | QtyValue): Decimal | null => (isDec(v) ? v : decimalOf(v));
 
 /** The decimal line of a task's model (`null`: another model). */
 export const decimalLine = (m: Model): DecimalLineSpec | null => (m.kind === 'numberline' && m.scale === 'decimal' ? m : null);
 
 /** Is the task about decimals (its kind, its model, its numbers or its answer form)? Its misconceptions are the decimals domain's. */
 export function isDecimalTask(task: Task): boolean {
+  // A measure in decimals (docs/32 step 13) is read on an instrument: the measure-reading domain's.
+  if (isMeasureTask(task)) return false;
   if (task.kind === 'shade-decimal' || task.kind === 'round-on-line' || task.kind === 'align-add' || task.kind === 'shift-digits') return true;
   const models = [task.model, ...(task.kind === 'choose' ? task.options.flatMap((o) => (o.model ? [o.model] : [])) : [])];
   if (models.some(isDecimalModel)) return true;
@@ -48,16 +51,16 @@ export function isDecimalTask(task: Task): boolean {
   if (task.kind === 'choose' && task.options.some((o) => o.value && isDec(o.value))) return true;
   if ((task.kind === 'share' || task.kind === 'regroup') && typeof task.value !== 'number') return true;
   const spec = task.kind === 'input' ? task : 'then' in task ? task.then : undefined;
-  return !!spec && (spec.form === 'decimal' || !!spec.work);
+  return !!spec && (spec.form === 'decimal' || !!decimalWorkOf(spec));
 }
 
 /** Share and regroup on the place-value chart (not the blocks). */
 export const onChart = (task: Task): boolean => (task.kind === 'share' || task.kind === 'regroup') && task.model.kind === 'place-value';
 
-/** A fraction or a decimal as the data writes it: `3/4`, `0.35`. */
-export const numText = (v: Frac | DecValue): string => (isDec(v) ? formatDecimal(v) : v.d === 1 && !v.w ? String(v.n) : `${v.w ? `${v.w} ` : ''}${v.n}/${v.d}`);
-/** The same as rich text: a fraction token `{3/4}`, a decimal as it is. */
-export const numToken = (v: Frac | DecValue): string => (isDec(v) ? formatDecimal(v) : `{${numText(v)}}`);
+/** A fraction, a decimal or a quantity as written: `3/4`, `0.35`, `900 g`, `1 ℓ 250 ml`. */
+export const numText = (v: Frac | DecValue | QtyValue): string => (isQty(v) ? qtyText(v) : isDec(v) ? formatDecimal(v) : v.d === 1 && !v.w ? String(v.n) : `${v.w ? `${v.w} ` : ''}${v.n}/${v.d}`);
+/** The same as rich text: a fraction token `{3/4}`, a decimal as it is, a quantity `{u:900 g}`. */
+export const numToken = (v: Frac | DecValue | QtyValue): string => (isQty(v) ? qtyToken(v) : isDec(v) ? formatDecimal(v) : `{${numText(v)}}`);
 
 /* ------------------------------------------------------------------ */
 /* State                                                               */
@@ -253,7 +256,8 @@ export const shiftTarget = (task: TaskOf<'shift-digits'>): Decimal => shiftedVal
 
 /** The work a written decimal is diagnosed against: the input's own, or the task's numbers (align-add, round-on-line, a share). */
 export function workOf(task: Task, spec: InputSpec): DecimalWork | null {
-  if (spec.work) return spec.work;
+  const own = decimalWorkOf(spec);
+  if (own) return own;
   if (task.kind === 'align-add') return { do: task.op === '+' ? 'add' : 'subtract', a: task.a, b: task.b };
   if (task.kind === 'round-on-line') return { do: 'round', a: task.value, to: task.to };
   if (task.kind === 'share' && typeof task.value !== 'number') return { do: 'divide', a: task.value, b: { units: task.k * 1_000_000, dp: 0 } };

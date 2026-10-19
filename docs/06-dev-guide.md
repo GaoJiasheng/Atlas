@@ -1451,7 +1451,7 @@ core 演示系统（字幕卡、两级进度条、自动播放、语音、拍键
 ```
 index.ts            descriptor：扩展字段 beat（0 起；URL b，1 起）、model（小测时 VIEW 组的模型，null = 题目自己的）；每章从第一拍开始；fromUrl 收 b / model，从不收作答和抽到的题
 schema.ts           lesson.json 的 zod（构建期）：分数、整数、余数、时刻、时长、小数的字符串；模型（分数五种、方格 grid、阵列 array、数位块 blocks、整数数轴、钟面 clock、时间线 timeline、百格 decimal-grid、位值表 place-value、小数数轴、钱 money）；讲解节拍（beatSchema）；28 种任务；步（beats、pool、keyFacts、limits）；练习题；课纲条目；notation；章节 state；误解按域登记
-validate.ts         docs/15 §4.10 / §10 的主题级规则：章 ↔ 步、3–5 拍且模型画得出、题库 8–10 道、每道题的规则（taskIssues，与 check-pool 共用）；validate-values.ts 是整数与时间的规则（模型画得出、答案与 op / span / convert 一致、诊断得出、limits），validate-decimals.ts 是小数的
+validate.ts         docs/15 §4.10 / §10 的主题级规则：章 ↔ 步、3–5 拍且模型画得出、题库 8–10 道、每道题的规则（taskIssues，与 check-pool 共用）；validate-values.ts 是整数与时间的规则（模型画得出、答案与 op / span / convert 一致、诊断得出、limits），validate-decimals.ts 是小数的，validate-measure.ts 是量读数的
 View.tsx            HUD 注册、舞台（节拍 / 小测）、算式行、章节轴、阅读面板（节拍行、小测托盘、本章索引）、右上卡、PLATE 块、控制面板、演示适配器
 controller.ts       换拍、抽题（visit / another / skip / force）、孩子的动作、检查、提示、看答案、撤销、练习流程；也是 __atlas.engine 的实现
 ui.ts               引擎自己的内存 store：每道题的作答（模型状态、尝试、提示级、反馈、看答案、完成、"你的尝试"）、每步抽到的题、练习结果、模式
@@ -1459,14 +1459,15 @@ lib/                纯函数（有单测）：fraction、value（整数、余�
                     clock（针角、拖针、点数字、拨钟的检查）、timeline（标尺的范围与刻度、孩子的跳段、解法的跳法）、
                     decimal（精确小数）、dgrid（百格涂色）、placevalue（小数位值表）、dline（小数数轴与放大）、money（钱）、decimal-tasks（小数题的状态、动作、检查、解法、错例）、decimal-views、decimal-working（小数算式行）、
                     diagnose/{measure,whole-ops,time,decimals}（四个域的诊断）、state、check（检查 + 误解诊断）、solve（正确解法、错例 sample → 状态）、proof（任务自证）、
-                    pool（按页面种子抽题，避开上一道）、beats（演示拍）、lesson（定位、拍的槽位、VIEW 可切换的模型）、working（算式）、words（读法）
+                    pool（按页面种子抽题，避开上一道）、beats（演示拍）、lesson（定位、拍的槽位、VIEW 可切换的模型）、working（算式）、words（读法）、
+                    instrument（A11 的刻度、位置、读数、天平）、measure-kind（哪些题归量读数域）、measure-tasks（量读数题的状态、动作、检查、解法、错例）、measure-working（量读数的算式与卡片的话）、diagnose/measure-reading
 stage/              SVG：Stage（小测的模型）、BeatModel（讲解节拍 + 叠加 + 过渡）、BarModel、CircleModel、NumberLine、Rows、BarModelDiagram、GridModel（方格）、ArrayModel（阵列）、WholeLine（整数数轴）、
                     BlocksModel（数位块）、ColumnWorking（竖式）、ClockModel（钟面、秒表、放大镜、可拖的针）、Timeline（时间线）、DecimalGrid（百格 / 千格）、PlaceValueChart（小数位值表）、DecimalColumn（小数竖式）、
-                    DecimalLine（小数数轴）、MoneyModel（钱）、DecimalTask、CutBar、OptionGrid、svg、layout
+                    DecimalLine（小数数轴）、MoneyModel（钱）、DecimalTask、Instrument + instrument/（尺、卷尺、秤、量杯、天平、放大镜、尺寸线、把手、轨道几何）、glyphs/measure（物体轮廓）、CutBar、OptionGrid、svg、layout
 tray/Tray.tsx       小测托盘（< = >、选项、排序、×k / ÷k、对折、−/+；你的尝试；提示 / 检查 / 看答案 / 再来一道 / 跳过 / 下一章）；tray/inputs/（作答格：FractionInput、WholeInput（整数 / 算式 / 量）、
                     ValueInputs（余数、time12 / face / time24、时长）、DecimalInput（小数框 + 点键）、boxes（共用的格子 + 数字键 + 芯片））；tray/GridControls（方格：按行铺、走一圈、长宽步进、切线移动）；tray/WholeControls（阵列与数位块的按钮）；
-                    tray/TimeControls（拨钟的时 / 分步进与 am / pm、时间线的跳段芯片）；tray/DecimalControls（百格步进、数轴放大、两端、对齐、移位、位值表的分与换）
-hud/                cards/（右上卡注册表：FRACTION、AREA、PRODUCT、PLACE VALUE、TIME、DECIMAL，按模型种类选）、plate.ts（PLATE 行：阵列 / 整数数轴 / 数位块 / 钟面 / 时间线 / 百格 / 位值表 / 小数数轴 / 钱）、BeatLine（节拍行）、ChapterIndex（要点 + 课纲对照）、PlateBlock（左列 PLATE 块）、Overlay（控制面板）
+                    tray/TimeControls（拨钟的时 / 分步进与 am / pm、时间线的跳段芯片）；tray/DecimalControls（百格步进、数轴放大、两端、对齐、移位、位值表的分与换）；tray/MeasureControls（读数工具、设器具的步进、砝码芯片、数格子）；tray/inputs/CompoundInput（复合单位两框）
+hud/                cards/（右上卡注册表：FRACTION、AREA、PRODUCT、PLACE VALUE、TIME、DECIMAL、MEASURE，按模型种类选）、plate.ts（PLATE 行：阵列 / 整数数轴 / 数位块 / 钟面 / 时间线 / 百格 / 位值表 / 小数数轴 / 钱 / 器具）、BeatLine（节拍行）、ChapterIndex（要点 + 课纲对照）、PlateBlock（左列 PLATE 块）、Overlay（控制面板）
 practice/Summary    练习总结
 math-scene.css      全部样式（token、× --u、触控 ≥ 44 px；节拍过渡；1024 px 以下停在舞台上的托盘）
 scripts/math/check-pool.ts   题库草稿自证：pnpm tsx scripts/math/check-pool.ts <draft.json> [--bridge] [--topic <slug> --step <id>] [--limits <json>]
@@ -1514,7 +1515,7 @@ scripts/math/check-pool.ts   题库草稿自证：pnpm tsx scripts/math/check-po
 - **文本记号**（字幕、题目、算式、正文、名词表）：`{t:09:40}` 12 时制（EN `9.40 am`；ZH 正文 `上午 9.40`，算式行仍是 `9.40 am`）、`{t:7:20|face}` 钟面读法（不分上下午）、`{t:19:20|24}` 24 时制、`{t:19:20|ampm}` 12 时制但中文也写字母 am / pm（问上午还是下午的选项）、`{d:95m}` 时长（按写的单位显示：`95 min`、`1 h 35 min` / `1 小时 35 分钟`）、`{u:28 cm2}` 量（`28 cm²`）；整数照写；`3 r 2` 朗读为 "3 remainder 2" /「3 余 2」。`speakable` 把记号读成词（`lib/words.ts`：整数到 99 999 "three hundred and five" /「三百零五」、位值、时刻 "seven twenty p.m." /「晚上七点二十分」/「十九时二十分」、"twenty past seven"、时长）；`plainText` 写成显示文字（aria）；validate 拒绝写坏的记号。章节正文写 `<Time>` / `<Dur>`（同一套显示和读法）。中文里记号显示的开头或结尾是汉字（上午、晚上、小时、分钟）时，它和旁边汉字之间的空格自动去掉（"是 {t:19:10}。" 显示"是晚上 7.10。"），挨着数字、字母的空格照留。
 - **模型**
   - **阵列** `{ "kind": "array", "object": "dot" | "kueh" | "curry-puff" | "egg" | "chopsticks" | "seat" | "orange" | "pencil" | "sticker", "layout": "scatter" | "groups" | "rows", … }`：`scatter` + `count`（+ `containers: { kind, count }` 旁边的空盘 / `{ kind, size }` 空盒）；`groups` + `groups` × `size` 或 `sizes: [2, 5, 5]`、`extra`（剩下的，虚线托着）、`another`（剩下的圈进虚线容器）、`container: ring | plate | box | bag | car`、`filled`（车）；`rows` + `rows` × `cols`、`extra`（最后一列不满）。`braces`（尺寸线语法的计数）：按行读 `true`（左 "3 rows / 3 行" + 上 "4 in each row / 每行 4 个"）、`"rows"`（只有左边的），按列读 `"cols"`（上 "4 columns / 4 列" + 左 "3 in each column / 每列 3 个"，PRODUCT 卡写 `4 × 3`、"4 columns of 3"）；左边留够竖括号文字的宽；`split: { "rows": [5] }` / `{ "cols": [5] }`（两部分分开画，`tones` 定颜色，缺省 cold、hot）、`cover: { "rows": true }`（纸条盖住那个数，写 ?）、`crossed: { rows | cols | groups: [i] }`（墨色斜线，0 起）、`pair: [layout, layout]`（并排两种，各带 `label`）。规模：散放 / 组 ≤ 60 个，行 ≤ 12 × 12（`dot` ≤ 14 × 14）。每个东西 22–96 px，整幅约占模型框高度的一半（小测的层同样按框高放大）；选择题选项卡里的阵列放大到填满卡（东西至多 64 px）。
-  - **整数数轴** `{ "kind": "numberline", "scale": "whole", "from": 0, "to": 50, "step": 5, "labels": "ends" | "tens" | "steps" | "all" | "none", "jumps": { "size": 5, "count": 7, "from": 0 }, "counter": true }`（`to` ≤ 100；弧顶写 +5，落点小圆；`counter` 在弧里编号 1、2、3）。分数数轴不变（`scale` 缺省 `fraction`，`intervals` 必填，`to` ≤ 3）。
+  - **整数数轴** `{ "kind": "numberline", "scale": "whole", "from": 0, "to": 50, "step": 5, "labels": "ends" | "tens" | "steps" | "all" | "none", "jumps": { "size": 5, "count": 7, "from": 0 }, "counter": true, "major": 10 }`（`to` ≤ 10 000、≤ 100 个刻度，`step` 任意正整数，`major` 定长刻度与标数的间隔（缺省每 10），docs/32 放宽；弧顶写 +5，落点小圆；`counter` 在弧里编号 1、2、3）。分数数轴不变（`scale` 缺省 `fraction`，`intervals` 必填，`to` ≤ 3）。
   - **数位块** `{ "kind": "blocks", "value": 26, "copies": 3, "combined": true, "left": { "T": 6, "O": 18 }, "plates": 3, "dealt": { "T": 2 }, "trade": "O>T" | "T>H" | "T>O" | "H>T", "focus": "T", "column": { "op": "×" | "÷", "a": 26, "b": 3, "show": "none" | "ones" | "carry" | "tens" | "hundreds" | "all" }, "mat": true }`：百 = 10 × 10 方板、十 = 1 × 10 长条、一 = 小方块，垫子三列 H · T · O（列下写块数）；`copies` 画成几行一样的（×1、×2…），`combined` / `left` 推到一起；`plates` 在垫下画盘，`dealt` 是每盘的；`trade` 在这一拍点亮要换的 10 个（配 `move: trade` 时画换完的样子，换的过程有动画）；竖式在垫子右边（窄屏在下面），× 从个位写起（`carry` 时换上去的小数字写在上一位上方），÷ 用长除号（除数、括号、横线，商写在上面，从最高位写起，0 照写；`carry` = 剩下的换下来、带下一位），亮的那一位与垫上亮的列一致（`focus`，缺省按 `show`）。`mat: false` 只画竖式。值 ≤ 999、同屏 ≤ 120 块。**大小跟舞台走**：单位块取整像素（最大 32 px，`copies` 的几行最大 40 px，边线清楚），垫子连盘至多占模型框高度的 62 %（1920 × 1080 约为舞台高的 40–55 %），单个垫子每行至少留一根十的高（换的时候垫子不变大小），`copies` 的每行只有自己的块高（一行个位就是一个小方块高），这几行没有的位和换不出百位的百位列只留列头的宽；盘一排可以比垫子宽（每盘按商的块排开，不为盘把块缩小）；竖式的格随舞台、不跟块（14–56 px，字号跟格；宽舞台在右边、至多约框高的 55 %；窄舞台在垫子下面，垫子和竖式按"格 ≈ 6 个单位块、格至少 18 px"分框高）。
   - 节拍可以带 `under`：第二个模型画在第一个下面（例：每对筷子下面的跳数数轴）。阵列 + 整数数轴时两者当一幅图竖向居中、数轴紧贴在阵列下面；一行组、组数 = 跳数时数轴按组距排开，第 i 跳正好在第 i 组下面（放不下就照常居中）。
   - `choose` 的选项全是阵列、数位块或整数数轴时，卡片按图的形状排（数轴、一排组这种宽图一列竖排），整组卡至多占大框高度的 60 %（小框全用），图在卡里放大填满；其它选项（分数、钟面、钱、方格）照旧。
@@ -1572,6 +1573,49 @@ scripts/math/check-pool.ts   题库草稿自证：pnpm tsx scripts/math/check-po
 - **右上卡 DECIMAL**（X4）：讲解拍 = 大号数字、每位下面英文 + 中文位名、小数点画大，一行分数名 `{235/1000}`（展开后加最简分数与 `0.2 + 0.03 + 0.005`），下面一行读法；钱：`$2.35` · 分数 `235` · "2 dollars 35 cents"；四舍五入拍：`2.96 ≈ 3.0` · "to 1 decimal place"；双刻度：`1.5 ℓ = 1500 ml`。小测只显示给定的数（算式带 `?`）和它的读法，做完才给答案。**PLATE 行**（X5）：百格 MODEL HUNDRED GRID · WHOLES · TENTHS · HUNDREDTHS · THOUSANDTHS · SHADED；位值表 MODEL PLACE VALUE · NUMBER · TRADES · SHIFT；小数数轴 MODEL NUMBER LINE · RANGE · STEP · ZOOM · MARK；钱 MODEL MONEY · COINS · TOTAL。小测里是孩子做的（涂了多少、放在哪、移了几位），"看图写数"的题不先说值。
 - **VIEW**（X10）：`MODEL_VIEWS` 加 `decimal-grid`、`place-value`、`money`（小数数轴沿用 `numberline`）。比较两个小数的题可以在并排百格（≤ 两位小数、≤ 3 个整体）/ 位值表对齐 / 一条数轴之间切换（`lib/decimal-views.ts`，画不出的视图不出现），其余小数题只画自己的模型。小数课（有 A6 模型的课）的背景章画涂了 0.35 的百格；规格表多一行 DECIMAL PLACES ≤ 3；没有 S / E / N / L 辅助。
 - **示例主题** `sample-lesson-decimal`（`status: draft`）：四步（百格与钱 · 数轴与四舍五入 · 位值表与竖式 · 移位与单位，最后一步 `bridge`），37 道题，把上面每个模型、过渡、题型、写法各用一次，`tests/math-scene/sample-lesson-decimal.test.ts` 全部自证；截图 `pnpm shoot sample-lesson-decimal --beats --tasks --keys --layout`。
+
+### 量的读数（docs/32 §3，M1–M12 与模型 A11）
+
+- **量**（M1，`lib/value.ts`，纯函数）：一个量是一个单位（`MeasValue`：`"900 g"`、`"1.4 kg"`）或两个单位（`CmpValue` / `Compound`：`"2 m 35 cm"`，内部存小单位的整数 235 cm + 写法）。数据里**单位前一定有空格**（`"50m"` 仍是时长、`"50 m"` 是量）。复合单位只认 km–m、m–cm、kg–g、ℓ–ml 四对（`COMPOUND_PAIRS`），小单位部分 < 进率、大单位 ≤ 99；`"2 m 135 cm"`、`"2 kg 35 cm"` 拒绝。`parseQuantity` / `parseCompound` / `fromSmall` / `toSmall` / `qtyIn`（换成同族的另一个单位，不整除时 `null`）/ `compareQty`（一律换成同族最小单位 cm、g、ml 比）/ `printedNumber`（印出来的第一个数：只比数的孩子比的是它）。`answer`、`compare` 的 `a` / `b`、`order` 的 `items`、`choose` 选项的 `value` 都收量。文本记号 `{u:2 m 35 cm}`、`{u:1 l 250 ml}`（显示 `1 ℓ 250 ml`，两种语言都写符号；读 "2 metres 35 centimetres" /「2 米 35 厘米」）；单一单位照旧（"three hundred and fifty grams" /「三百五十克」）。章节正文写 `<Qty u="9 cm" />`（同一套显示与读法，validate 查 `u`）。
+- **模型 A11 `instrument`**（`schema.ts instrumentSpec`；几何与读数在 `lib/instrument.ts`，画法在 `stage/Instrument.tsx` + `stage/instrument/*`，物体轮廓在 `stage/glyphs/measure.tsx`）：
+
+  ```json
+  { "kind": "instrument", "type": "ruler" | "tape" | "dial" | "jug" | "balance",
+    "unit": "cm",                       // 值都写这个单位（有 sub 时是小单位）；缺省 ruler / tape cm、dial g、jug ℓ
+    "from": 0, "to": 15, "major": 1, "minor": 1,   // 印出的范围、每 major 标一个数、每 minor 一条刻度（小数写字符串 "0.1"）
+    "labels": "major" | "ends" | "none" | { "hide": [10] },
+    "sub": { "unit": "m" },             // 两种单位的刻度：整大单位处印 "1 m"，其余标数印小单位的余数（per 可写，须 = 进率）
+    "dual": true,                       // 另一侧再印一遍小单位的总数（需要 sub）
+    "skip": { "from": 0, "to": 100 },   // tape：这一段画成两格长 + 两条断开线
+    "orient": "vertical", "look": "ruler" | "metre-rule" | "tape" | "height-chart" | "path",
+    "inset": "0.6", "broken": true,     // ruler：0 刻度离左端多远；左端断口
+    "object": { "kind": "pencil", "from": 0, "to": "6.7", "tone": "cold" },   // 放在尺上的东西（to 可以不在刻度上：limits.nearest）
+    "line": { "from": 0, "to": 5 }, "arrow": 35, "head": 128,                // 画出的线、卷尺的箭头、身高尺的头顶板
+    "value": 280, "load": "prawns",     // dial 的指针 / jug 的液面；秤盘上的东西
+    "liquid": "water", "shape": "beaker" | "cup" | "jug" | "pail" | "bottle" | "bowl" | "bottle-jug", "scale": false,
+    "sweep": 330,                       // dial：满量程的角度（0 在正上方顺时针，满量程与 0 之间留缺口）
+    "left": [{ "item": "pineapple", "mass": 1000, "size": "big" }], "right": [{ "weight": 500 }],
+    "tilt": "auto" | "left" | "right" | "level", "hideMass": true,
+    "count": { "from": 30, "to": 40 }, "zoom": { "from": 200, "to": 300 },
+    "brackets": [{ "from": 0, "to": 100, "label": { "en": "{u:1 m}", "zh": "{u:1 m}" } }, { "from": 100, "to": 132, "label": { … }, "tone": "signal" }],
+    "eye": true, "highlight": [3, 8], "straight": true, "tone": "hot", "label": { … },
+    "pair": [ … ], "set": [ … ] }        // 两个 / 三个同类器具并排（各带 label、同一比例；长条的尺上下叠）
+  ```
+
+  每一条刻度都由"轨道"（`stage/instrument/geometry.ts`：直的或圆的，给出某个值在页面上的位置和刻度朝向）放，所以**每一小格一样大**是构造出来的（`instrument.test.ts` 查尺、跳段的卷尺、秤盘、量杯）。刻度语法同数轴：小格发丝线、标数长刻度 1.5 px、十格时第 5 格中长；数字衬线体、≥ 13 px、带纸色描边（指针压过也读得清）；`highlight` 的刻度加粗；`hide` 的数位置画小空框。**画面**：尺子（浅色长条，0 刻度按 `inset`，断口锯齿）；卷尺（带钩的条）、米尺（木色条 + 端头）、身高尺（竖贴墙的长条 + 头顶板 + 一个人的轮廓，无脸）、路（路面 + 每格一根桩，箭头在路下）；指针秤（秤盘 + 圆盘 + 大号单位 + 指针，`straight` 时变成同样刻度的数轴）；量杯（按 `shape` 的轮廓，刻度在右侧，液面是一条水平线、没有弯月面，`eye` 时液面高度一条虚线 + 一个眼睛记号；`scale: false` 的瓶和碗画满水）；天平（底座、立柱、绕支点转的横梁，重的一边低 8°，两个托盘始终水平）。`stage/instrument/Balance.tsx` 的 `BalanceDrawing` 不认识克：托盘里的东西自己画自己（`PanItem`），以后代数课（docs/17 A9）的天平直接用它放 x 和 1。**叠加**：`count` 每一小格一条编号的弧（signal，在刻度线的另一侧）；`zoom` 放大镜（器具上一个圈、两条引线、旁边（窄舞台在下面）一个大框，把那一段拉直放大，只在两端印数，读数的位置画一个三角）；`brackets` 刻度外侧的尺寸线（复合单位的两段）。**规模**：1920 × 1080 下 15 cm 尺约占模型框宽 88 %、秤直径约框高 70 %、量杯高约框高 80 %、身高尺高约框高 86 %。
+- **过渡**（M4，都 ≤ 900 ms，减少动态时直接到位）：同一种器具、同样的刻度之间换拍**不重挂载**（`BeatModel beatShape` 只认类型、单位、范围、刻度、外形）。`slide` 物体沿刻度滑到新位置（同一种物体）；`sweep` 指针按值的顺序转过去；`fill` 液面升降；`tip` 天平横梁转到新的倾角（新挂载时先按右盘空着画，再转到位）；`unroll` 指针秤 / 量杯的每条刻度沿自己的路径插值到直线上的同一位置（`straight` 从 false 到 true，或反过来卷回；`lib/instrument.ts unrollPoint` 两端精确）；`jump` 弧一条接一条；`zoom` 放大镜展开；`morph` 换器具。
+- **题型**（M5，`lib/measure-tasks.ts`，括号里是 `sample` 写法）
+  - `read-scale` `{ model, answer: inputSpec, tools?: ["zoom", "count"] }`：舞台只读；托盘有两个工具按钮（**放大这一段**：读数所在的那一段标数间隔进放大镜；**数格子**：点格子出现编号的弧，是草稿、不检查），然后写读数。写法 `whole`（框后印单位：`unit`，缺省器具的单位）、`measure`（数 + 单位芯片）、`compound`、`decimal`（桥）。validate 查答案 = 器具读数（物体是末端 − 起点，不在刻度上时取最近的刻度；指针、液面、箭头、头顶板；天平是右盘砝码之和）（`"13"`、`"350 kg"`、`"1,23"`、`"2.06"`）。
+  - `set-scale` `{ model, target, mode: "line" | "arrow" | "load" | "fill" | "weights", weights? }`：`target` 写器具单位的数或量（`160`、`"160 g"`、`"1 l 250 ml"`）。`line`（尺 / 卷尺：从起点拖出一条线，线端是 44 px 的把手）、`arrow`（卷尺的箭头）、`load`（指针秤：拖指针，或托盘"加一点 / 拿走一点 / 多加一些 / 多拿走一些"）、`fill`（量杯：拖液面，或"倒一点 / 倒出一点……"）都是 `role="slider"`（← → ↑ ↓ 一小格，Shift 或 PgUp / PgDn 一个标数间隔，Home 回到起点，End 到头；`aria-valuetext` 是孩子自己设的读数），值吸附到刻度；`weights`（天平：点托盘里的砝码芯片放到右盘，点盘里的砝码拿下来；"看答案"把最少个数的一组画成虚线）（`"6"`、`"550"`、`"weights:500,200"`）。
+  - `count-intervals` `{ model, between: [200, 300], ask: "part" | "length", then }`：`between` 两条刻度加粗；先点两者之间的每一格（格子是按钮，← → 移、Enter 点；托盘"再数一格 / 撤销最后一格"，窄于手指的格子也能做），全部点完才进入写数（`ask: part` 写每一小格表示多少，`length` 写长度）（第一段 `"parts:4"`，第二段 `"=25"`）。
+  - `compare` / `order` 扩到量（`align: "unit"` 的按钮把两个量写成同族最小单位：算式行多一行 `{u:900 g} ○ {u:1000 g}`）（`"<"`、`"1 kg,1 kg 200 g,850 g"`）；`choose` 的选项可以是器具图（`model`）、量卡（`value`）或带 `{u:…}` 的句子。
+  - `input` 的量：`form: "measure"`（芯片按题的 `units`，缺省是答案那一族：cm / m / km、g / kg、ml / ℓ）；`form: "compound"`（`tray/inputs/CompoundInput.tsx`：两个框、单位印在框后，满了跳下一框，小单位框空 = 0；`"1,250"`）；换算 `work: { "do": "convert", "from": "3 kg 40 g", "into": "g" }` 或 `"into": "l-ml"`（化成复合单位），validate 查它算出来 = 答案，托盘印 `{u:3 kg 40 g} =`。
+- **误解**（M7）：`measure-reading` 域 11 条（`read-end-mark`、`not-nearest`、`wrong-unit`、`unreasonable-estimate`、`ignored-unit`、`size-is-mass`、`taller-holds-more`、`balance-misread`、`compound-concatenated`、`compound-place`、`compound-split-wrong`）+ 一码多域复用 4 条（`tick-counting`、`interval-misread`、`unit-factor-wrong`、`decimal-as-subunit`），规则在 `lib/diagnose/measure-reading.ts`（读数记作 L、U、M、i、n、k、a、b，docs/32 §3.6 的写法；每条 ≥ 2 正例 1 反例，`diagnose-measure-reading.test.ts`）。一道题有器具模型、是三种新题型、比 / 排 / 选量、写复合单位或量、或 `work.convert` 带量，就归这个域（`lib/measure-kind.ts isMeasureTask`；小数课第 15 步的换算仍归小数域）。**并排写法优先于 × 100**：`3 kg 40 g → 340` 只算 `compound-concatenated`，`unit-factor-wrong` 排除这个值。`size-is-mass`、`taller-holds-more`、`balance-misread`、`unreasonable-estimate` 只由 `choose` 选项诊断。validate 拒绝别的域的码和"这道题诊断不出"的码（如不是从非 0 开始的物体却写 `read-end-mark`）。
+- **校验**（M8 / M11，`validate-measure.ts`，与 `check-pool` 共用 `taskIssues`）：器具画得出（字段配器具类型、`(to − from)` 是 `minor` 的整数倍、`major` 是 `minor` 的 1–10 倍、`from` 在刻度上、可见格子 ≤ 60（或配 `zoom`）、指针 / 液面 / 箭头 / 头顶板 / 物体两端在刻度上（`limits.nearest` 时物体末端离最近刻度 0.2–0.4 格）、`sub` 是同族一对、`dual` 要 `sub`、`brackets` 首尾相接且合起来 = 读数、天平写的 `tilt` 与质量一致、成对的各带 label 且同类）；答案 = 读数 / 换算结果；`set-scale` 的 `mode` 配器具、目标在刻度上且起点不已经等于它、砝码凑得出；`count-intervals` 的 `between` 在刻度上（`ask: part` 时是相邻两个标数刻度）。**裸写的量**：有器具的课里，字幕、算式、题目、反馈、名词表和章节正文里"数 + 单位"必须写成 `{u:…}` / `<Qty>`（`bareQuantities`；`sample` 与课纲原文不查）。
+- **每步上限**（M9，`limits` 新键）：`units`（题里能用的单位，与小数课的换算对 `km-m` 等共用一个键）、`parts`（每一小格允许的值）、`partsPerLabel: [少, 多]`、`maxValue`（小单位的数）、`nearest`、`compound`（允许的复合单位对；没有就不许两种单位的刻度和复合量）、`bigMax`、`smallStep`（g / ml / m 的小单位部分是它的倍数）、`weights`（天平砝码）、`dp`（有小数的步：刻度和量的位数）。`check-pool --topic <slug> --step <id>` 同样查。
+- **HUD**（M10）：右上卡 **MEASURE**（`hud/cards/MeasureCard.tsx`）——讲解拍是器具的读数（大号；复合单位带 `dual` 或 `brackets` 时加一行 `= 132 cm`）、读法、"Each small part stands for 50 g / 每一小格表示 50 g"；天平写"平：一样重 / 左边重 / 右边重"。小测只给题目给的（"每 100 g 标一个数"）和 `?`；`set-scale` 给"设到"和孩子设的读数；`count-intervals` 的每一小格答完前是 `?`、旁边是孩子数了几格。**PLATE 行**（`hud/plate.ts measurePlateRows`）：MODEL RULER / TAPE / HEIGHT CHART / METRE RULER / PATH / SCALE / MEASURING CUP · UNIT · NUMBERS EVERY · SMALL PART · START · END（NEEDLE / LEVEL / ARROW）；BALANCE · LEFT · RIGHT · BEAM。小测里要读的那一行是 `?`，`count-intervals` 的 SMALL PART 答完前是 `—`，`set-scale` 是孩子设的值。**VIEW**：`MODEL_VIEWS` 加 `instrument` 和 `straight`；读 / 设指针秤或量杯的题自动多一个"拉直的刻度"（同一个器具画成数轴，读数是一个三角，`set-scale` 的游标照样能拖、能用键盘）。整数数轴（`scale: "whole"`）放宽到 `to ≤ 10 000`、`step` 任意正整数，`major` 定每隔多少画长刻度、标数。**背景章**：有器具的课画 0–1000 g、指针指着 0 的指针秤（状态行 `SPECIMEN 0 G`），规格表多一行 UNITS（课里用到的单位，按 cm · m · km · g · kg · ℓ · ml）。
+- **算式行**（`lib/measure-working.ts`）：`read-scale` 是 `? g` → 孩子写的 `{u:204 g}` → 做完是读数；`set-scale` 是孩子设的读数；`count-intervals` 是 `{u:300 g} − {u:200 g} = {u:100 g} · {u:100 g} ÷ 5 = ?`；比较、排序、换算同理。都不先说答案。
+- **示例主题** `sample-lesson-measure`（`status: draft`）：四步 32 道，五种器具（含断尺、卷尺、米尺、身高尺、路）、两种单位的刻度、每个叠加与过渡、三种新题型（`set-scale` 五种 mode、`count-intervals` 两种 ask）、四种写法、15 个码各至少一次；`tests/math-scene/sample-lesson-measure.test.ts` 全部自证；截图 `pnpm shoot sample-lesson-measure --beats --tasks --keys --layout`。单测另有 `compound`、`instrument`、`diagnose-measure-reading`、`measure-tasks`。
 
 ### 舞台、阅读面板、HUD（docs/08 §2 全引擎 HUD 铁律）
 

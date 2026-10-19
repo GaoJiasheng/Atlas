@@ -684,4 +684,38 @@ toSmall(c) → Measure(235 cm) ;  fromSmall(Measure(1250 ml), 'l') → 1 ℓ 250
 
 ## 9. 施工记录 / 已知差距
 
-（施工时追加。）
+### 9.1 引擎（E-meas：M1–M12 与模型 A11，2026-10-19；课的内容未施工）
+
+- **M1 量** `lib/value.ts`：`Compound`（小单位的整数 + 写法）、`parseCompound` / `makeCompound` / `fromSmall` / `toSmall` / `compoundText` / `compoundWords`（"2 metres 35 centimetres" /「2 米 35 厘米」）；量的值 `MeasValue` / `CmpValue`（`QtyValue`）进 `AnswerValue`，`parseQuantity` 要求单位前有空格（`"50m"` 仍是时长）；`qtyIn`、`qtyBase`、`compareQty`（同族最小单位比）、`printedNumber`、`qtyToken`、`baseToken`。zod：`quantity`、`numOrQty`（`compare` / `order` / `choose` 选项的值；`place` 与小数的 `work.of` 仍是 `numValue`）。`{u:…}` 记号收复合单位（`src/lib/rich-text.ts`：显示 ℓ，`aria-label` 是读法，单一单位的记号也补了读法）；章节正文的 `<Qty u="…" />`（`src/components/mdx/Qty.astro`，在 `[slug].astro` 注册）。`tests/math-scene/compound.test.ts`。
+- **M2 / M3 模型 A11** `schema.ts instrumentSpec` / `instrumentModel`（`pair` 2、`set` 3），`lib/instrument.ts`（刻度、标数、跳段的位置、圆盘角与反算、`unrollPoint`、读数与它的构成 L / U / M / i / n / k / a / b、最接近的刻度、放大的那一段、天平的质量与倾角、最少砝码 `fewestWeights`）。画法：`stage/Instrument.tsx`（成组、叠加、过渡、小测的把手 / 格子 / 砝码 / 工具）+ `stage/instrument/{geometry,Scale,Ruler,Dial,Jug,Balance,Magnifier,Brackets,Handle}` + `stage/glyphs/measure.tsx`（13 种长条物体、16 种秤盘上的东西、素面砝码、眼睛记号）。**每一小格一样大**由"轨道"保证（直的、圆的；`unroll` 是两条轨道的插值），`tests/math-scene/instrument.test.ts` 量尺、跳段卷尺、秤盘弦长、量杯。天平拆成不认识克的 `BalanceDrawing`（托盘里放 `PanItem`，自己画自己）和本课的 `BalanceInstrument`：代数课的天平（docs/17 A9）直接用前者。
+- **M4 过渡** `slide`、`sweep`（指针按值的顺序转，CSS transform）、`fill`（液面平移）、`tip`（横梁转、托盘平移；新挂载时先按右盘空着画再转到位）、`unroll`（requestAnimationFrame 插值 780 ms）、`jump`（弧依次出现）、`zoom`（放大镜展开）；同一器具同样刻度之间不重挂载（`beatShape`）；减少动态时直接到位。
+- **M5 题型** `lib/measure-tasks.ts`（状态 `mset` / `mweights` / `mparts` / `mzoom` / `mcount`，动作 `mset` / `mnudge` / `weigh` / `unweigh` / `mpart` / `mtool`，检查、解法、错例），`lib/measure-kind.ts`（`isMeasureTask`、`measureWorkOf` / `decimalWorkOf`：两种 `work` 并存），`tray/MeasureControls.tsx`（读数工具、"加一点 / 倒一点"四步、砝码芯片、再数一格 / 撤销最后一格），`check.ts` / `solve.ts` / `state.ts` / `working.ts` / `controller.ts` 接入。`tests/math-scene/measure-tasks.test.ts`。
+- **M6 写法** `measure` 的芯片按题（`units`，与时长的 `h-min` / `min-s` 共用一个字段），缺省答案那一族；新 `compound`（`tray/inputs/CompoundInput.tsx`，`forms.ts` 的 `b` / `s` 框，小单位框空 = 0，`"1,250"`）；`decimal` 写法在量读数题里印器具的单位；换算的句子 `{u:3 kg 40 g} = ?` 印在框前（`WholeInput` 的句子改用 `renderRich`，旧句子显示不变）。
+- **M7 误解** `measure-reading` 域 11 条 + 复用 4 条，`lib/diagnose/measure-reading.ts`，`tests/math-scene/diagnose-measure-reading.test.ts`（每条 ≥ 2 正例 1 反例；choose-only 四条用选项测；`3 kg 40 g → 340` 只算并排）。
+- **M8 / M11 校验** `validate-measure.ts`（器具、答案 = 读数 / 换算、诊断得了、limits、裸写的量 `bareQuantities`），挂在 `validate.ts`（题目、字幕、名词表；有器具的课才查裸写的量，课纲原文不查）与 `scripts/validate-content.ts`（`<Qty u>` 能解析；有器具的课的章节正文不许裸写量）。
+- **M9 limits** `units`（与小数课的换算对共用一个键）、`parts`、`partsPerLabel`、`nearest`、`compound`、`bigMax`、`smallStep`、`weights`；`maxValue`、`dp` 沿用。`check-pool --topic --step` 照查。
+- **M10 HUD** MEASURE 卡（`hud/cards/MeasureCard.tsx`，卡片注册表加 `measure`）、PLATE 行（`hud/plate.ts measurePlateRows`）、VIEW `instrument` / `straight`（读 / 设指针秤或量杯时自动多"拉直的刻度"，`lib/lesson.ts canShow` / `viewsFor`）、整数数轴放宽（`to ≤ 10 000`、`step` 任意、`major`）、背景章标本（0–1000 g 指针秤，指针指 0；规格表 UNITS 行）。
+- **M12** 示例主题 `src/content/topics/sample-lesson-measure/**`（draft，占位文字）：四步 19 拍 32 道（尺子与卷尺 · 秤与天平 · 量杯与复合单位 · 换算（`bridge`）），五种器具、全部外形、`sub` / `dual` / `skip` / `count` / `zoom` / `brackets` / `eye` / `highlight` / `hide` / `scale: false` / `straight` / 小数刻度、八种过渡、七种题型（`set-scale` 五种 mode、`count-intervals` 两种 ask）、四种写法、15 个码；`tests/math-scene/sample-lesson-measure.test.ts`。docs/06 新一节「量的读数」。
+
+### 9.2 与本文 §3 不同的地方
+
+1. **`sub` 的写法**按 §3.2 的 JSON：`unit` 是值的单位（小单位），`sub.unit` 是大单位（`per` 可写，必须等于进率）。§2.2 拍表里 `dial{… sub {g, 1000} …}` 一类简写写成 `unit: "g", sub: { unit: "kg" }`。
+2. **`major` / `minor`** 是任意正数（小数写字符串 `"0.1"`），validate 查 `major` 是 `minor` 的 1–10 倍、`from` 在刻度上、`(to − from)` 是整格；§3.2 的"1–10 的整数"读作两者的比。
+3. **`unroll`** 是一个器具在 `straight: false` 与 `straight: true` 之间的过渡（≤ 900 ms）。第 06 步第 2 拍"拉直再卷回"写成：第 2 拍 `straight: true`（拉直），下一拍同一器具不带 `straight` 再写 `move: "unroll"`（卷回）；拉直的样子在 VIEW 里也是同一个画法。
+4. **拉直的刻度（VIEW）**是器具自己的直线画法（`straight`：同样的刻度和数、读数一个三角、`set-scale` 的游标照样能拖能键盘），不是换成 `numberline` 模型（换模型就丢了孩子的把手和放大镜）。M10 要的整数数轴放宽照做（`to ≤ 10 000`、`step` 任意、新 `major`），作者写数轴拍时用。
+5. **`measure` 的芯片缺省**取答案那一族（cm / m / km、g / kg、ml / ℓ），不是步的 `limits.units`（托盘不知道步；练习题没有步）。要别的芯片就写 `units`。
+6. **`limits.units`** 一个键两种值：小数课的换算对（`km-m` …）与本课的单位（`cm` …），各自的规则只看自己那一种。
+7. **数字不相撞**用"隔几个写一个"（每 2、5、10 个标数写一个，两端总写；圆盘首尾也查），没有做"手机上只画需要的一段"。390 × 844 托盘打开时：指针秤的秤盘缩成一条边、圆盘直径约 190 px；三根并排的卷尺按框高缩小；身高尺约 150 px 高，每小格约 6 px（§3.2 的下限）。
+8. **`interval-misread` 的错格值**取 {1, 10, 0.1, 0.01, M / 10} 去掉真格值：§3.6 写 {1, M/10, 10}，加十分之一、百分之一是为了第 13 步"每格当 0.01"（1.25 ℓ 写 1.05）。`tick-counting` 在 `count-intervals`（`ask: length`）用"两端的刻度都数了"（`(b − a) + i`）。`compound-place` 在 `compare` 的规则是"把一边复合量的小单位读成 ×10ⁿ 或 ÷10ⁿ 后得到的符号"。
+9. **复合量的读法**照 §3.1 写数字（"2 metres 35 centimetres" /「2 米 35 厘米」）；单一单位仍读成词（"three hundred and fifty grams" /「三百五十克」），与 docs/29 一致。
+10. **天平**：`read-scale` 的读数是右盘砝码之和；物体的质量只在讲解拍印（物体上方的小字，`hideMass` 不印），小测里从不印。物体可写 `size: "big" | "small"`（大球与小石头）。
+11. **量读数域的每道题都画器具**（`model.kind` 必须是 `instrument`），`compare` / `order` / 换算题也一样（画两台秤、三根绳子、一个量杯）。
+12. **示例主题没有练习章**（同 `sample-lesson-decimal`）。`tests-e2e/measuring.spec.ts` 照 §7 留给阶段 5（P）。
+
+### 9.3 给课的作者（阶段 2–4）
+
+- 量一律写 `{u:…}`（正文 `<Qty u="…" />`），单位前空格，升写 `l`（显示 ℓ），复合 `{u:1 l 250 ml}`；`sample` 照孩子写的（`"350 kg"`、`"1,23"`、`"weights:500,200"`、`"parts:4"`、`"=25"`）。
+- 器具的值用器具的单位（有 `sub` 时用小单位：身高 132 不是 1.32）；物体从左到右；`limits.nearest` 只给第 01 步。
+- `read-scale` 的答案必须等于读数（validate）；读复合单位的题写 `form: "compound"`，器具要有 `sub`（或是大单位的小数刻度：第 13 步）。
+- `count-intervals` 的 `ask: "part"` 必须是相邻两个标数刻度；`set-scale` 的 `weights` 题右盘空着、左盘放东西。
+- 想让误解被诊断出来，要选"故事唯一"的数（`check-pool` 报 WARN 的就换数）：例如路 0–3 km 每格 100 m 时 `1 km 4 m` 既是"每格当 1"又是"小单位 ÷100"，换成每格 200 m。

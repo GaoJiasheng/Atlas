@@ -64,6 +64,9 @@ const SINGLE_KINDS = new Set(['shade', 'fold', 'split', 'merge', 'input', 'build
 export function canShow(task: Task, view: ModelView): boolean {
   const m = task.model;
   if (view === m.kind) return true;
+  // A dial or a jug to read or to set: its scale straightened, the number line it is (docs/32 §3.7).
+  if (view === 'straight') return m.kind === 'instrument' && (task.kind === 'read-scale' || task.kind === 'set-scale') && !m.pair && !m.set && (m.type === 'dial' || m.type === 'jug') && m.scale && !!m.to;
+  if (m.kind === 'instrument') return false;
   // Two decimals compared: the grids, the chart or the line, as far as they can draw them (docs/29 X10).
   if (isDecimalTask(task)) return task.kind === 'compare' && decimalViewModel(task, view, false) !== null;
   if (m.kind === 'grid' || view === 'grid') return false;
@@ -84,5 +87,7 @@ export function canShow(task: Task, view: ModelView): boolean {
 export function viewsFor(step: Step | null, task: Task): ModelView[] {
   const own = ownView(task);
   const listed = (step?.views ?? [own]).filter((v) => canShow(task, v));
-  return listed.includes(own) ? listed : [own, ...listed];
+  const views = listed.includes(own) ? listed : [own, ...listed];
+  // A dial or a jug always offers its straightened scale.
+  return canShow(task, 'straight') && !views.includes('straight') ? [...views, 'straight'] : views;
 }

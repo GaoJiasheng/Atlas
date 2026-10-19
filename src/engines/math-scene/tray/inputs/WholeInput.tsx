@@ -12,6 +12,10 @@ import { inputFields } from '../../lib/check';
 import { askOf } from '../../lib/diagnose/measure';
 import { squared, unitText, type Unit } from '../../lib/value';
 import type { InputSpec } from '../../schema';
+import { renderRich } from '../../../../lib/rich-text';
+import { isMeasureTask } from '../../lib/measure-kind';
+import { printedUnit, unitChips } from '../../lib/measure-tasks';
+import { convertSentence } from '../../lib/measure-working';
 import { Chips, Keypad, tr, useBoxes, type InputProps } from './boxes';
 
 /** The number sentence an `op` prints round its box: `4 × 7 = ?`, `? × 6 = 42`, `35 ÷ 5 = ?` (a word problem's has none). */
@@ -35,20 +39,22 @@ export function WholeInput(p: InputProps) {
   const grid = m.kind === 'grid';
   const gridUnit = m.kind === 'grid' ? m.unit : 'unit';
   const ask = askOf(task, spec)?.ask;
-  const printed: Unit | null = (spec.unit === 'dollar' ? null : spec.unit) ?? (grid ? (ask === 'area' ? squared(gridUnit) : gridUnit) : null);
+  const measuring = isMeasureTask(task);
+  const printed: Unit | null = measuring ? printedUnit(task, spec) : ((spec.unit === 'dollar' ? null : spec.unit) ?? (grid ? (ask === 'area' ? squared(gridUnit) : gridUnit) : null));
   const label = (i: number) => (ask ? t(locale, `math.grid.${ask}`) : T('math.input.w')) + (fields.length > 1 ? ` ${i + 1}` : '');
   const box = (field: string, i: number) => b.box(field, { label: label(i), digits: boxDigits(spec, field), className: 'ms-box--whole' });
   // A sentence prints its words and operators with a box for each `?`.
-  const sentence = spec.sentence ?? (task.kind === 'split-figure' || task.kind === 'split-array' ? '? + ? = ?' : (opSentence(spec) ?? null));
+  const sentence = spec.sentence ?? (task.kind === 'split-figure' || task.kind === 'split-array' ? '? + ? = ?' : (opSentence(spec) ?? convertSentence(spec)));
   const parts = sentence ? sentence.split('?') : null;
-  const units: Unit[] = gridUnit === 'unit' ? ['unit', 'unit2'] : ['cm', 'cm2', 'm', 'm2'];
+  // The grid's chips (its unit and its square); an instrument's from the task (docs/32 M6).
+  const units: Unit[] = measuring ? unitChips(spec) : gridUnit === 'unit' ? ['unit', 'unit2'] : ['cm', 'cm2', 'm', 'm2'];
   return (
     <div className="ms-input" data-keys="own">
       <div className="ms-input__rows ms-input__rows--whole">
         {parts ? (
           parts.map((text, i) => (
             <span key={i} className="ms-input__part">
-              {text && <span className="ms-input__eq">{text.trim()}</span>}
+              {text.trim() && <span className="ms-input__eq">{renderRich(text.trim(), locale, { line: true })}</span>}
               {i < parts.length - 1 && fields[i] && box(fields[i]!, i)}
             </span>
           ))

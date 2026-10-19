@@ -21,6 +21,7 @@ import { badTokens } from '../../lib/rich-text';
 import { decimalModelIssues, decimalTaskIssues } from './validate-decimals';
 import { asFrac } from './lib/check';
 import { isDecimalModel } from './lib/decimal-tasks';
+import { bareQuantities, instrumentModelIssues, measureTaskIssues } from './validate-measure';
 
 export interface LessonIssue {
   level: 'error' | 'warn';
@@ -123,7 +124,7 @@ function feedbackIssues(task: Task): string[] {
 }
 
 /** Can the beat's model be drawn as written? (parts in range, marks on ticks, lit rows present) */
-function beatIssues(beat: Beat): string[] {
+function beatIssues(beat: Beat, limits?: StepLimits): string[] {
   const out: string[] = [];
   const m = beat.model;
   const count = (set: number | number[] | undefined) => (set === undefined ? [] : Array.isArray(set) ? set : Array.from({ length: set }, (_, i) => i));
@@ -138,7 +139,10 @@ function beatIssues(beat: Beat): string[] {
     if (count(beat.crossed).some((i) => !given.includes(i))) out.push('crossed parts must be given parts');
     if (m.kind === 'bar' && m.rows && beat.crossed) out.push('crossed is for a single bar');
   } else if (beat.crossed) out.push('crossed is for a bar or a circle');
-  if (m.kind === 'array' || m.kind === 'blocks' || m.kind === 'clock' || m.kind === 'timeline' || (m.kind === 'numberline' && m.scale === 'whole')) out.push(...valueModelIssues(m));
+  if (m.kind === 'instrument') {
+    out.push(...instrumentModelIssues(m, { nearest: !!limits?.nearest }));
+    if (beat.under) out.push('an instrument beat has no model under it (side by side: pair or set)');
+  } else if (m.kind === 'array' || m.kind === 'blocks' || m.kind === 'clock' || m.kind === 'timeline' || (m.kind === 'numberline' && m.scale === 'whole')) out.push(...valueModelIssues(m));
   else if (isDecimalModel(m)) out.push(...decimalModelIssues(m), ...(beat.under ? decimalModelIssues(beat.under) : []));
   else if (m.kind === 'numberline') {
     out.push(...valueModelIssues(m));
@@ -311,6 +315,7 @@ export function taskIssues(task: Task, where: string, opts: { bridge: boolean; p
   const domain = domainOf(task);
   const fractions = domain === 'fractions';
   if (grid) for (const m of gridTaskIssues(task, opts.limits)) error(m);
+  else if (domain === 'measure-reading') for (const m of measureTaskIssues(task, opts.limits)) error(m);
   else if (domain === 'decimals') for (const m of decimalTaskIssues(task, opts.limits)) error(m);
   else if (!fractions) for (const m of valueTaskIssues(task, opts.limits)) error(m);
   // Every code from the task's own domain (docs/19 G5).
@@ -328,7 +333,7 @@ export function taskIssues(task: Task, where: string, opts: { bridge: boolean; p
       if (s.a.d !== s.b.d && !related(s.a, s.b)) error(`${s.a.n}/${s.a.d} and ${s.b.n}/${s.b.d} are not related fractions`);
     }
   }
-  for (const m of domain === 'decimals' ? [] : targetIssues(task)) error(m);
+  for (const m of domain === 'decimals' || domain === 'measure-reading' ? [] : targetIssues(task)) error(m);
   for (const m of feedbackIssues(task)) error(m);
   if (opts.practice && task.hints.length > 1) error('practice questions have at most one hint');
   if (textLength(task.prompt.en) > PROMPT_EN) warn(`prompt is ${textLength(task.prompt.en)} characters (EN ≤ ${PROMPT_EN})`);
@@ -336,6 +341,8 @@ export function taskIssues(task: Task, where: string, opts: { bridge: boolean; p
   for (const [path, text] of strings(task, 'task')) {
     for (const bad of badTokens(text)) error(`${path}: ${tokenMessage(bad)}`);
     for (const bare of path.endsWith('.sample') ? [] : bareTimes(text)) error(`${path}: "${bare}" is a time written as text: write it {t:…} (it would be read as a decimal)`);
+    // A measuring task writes its quantities as tokens (docs/32 M8): shown with ℓ, read "350 grams", never split across lines.
+    if (domain === 'measure-reading' && !path.endsWith('.sample')) for (const bare of bareQuantities(text)) error(`${path}: "${bare}" is a quantity written as text: write it {u:${bare.replace(/(\d)(?=[a-zℓ])/, '$1 ')}}`);
   }
   return issues;
 }
@@ -389,7 +396,7 @@ export function lessonIssues(data: MathSceneData, chapters: readonly ChapterInfo
   for (const s of lesson.steps) {
     if (s.beats.length < BEATS_MIN || s.beats.length > BEATS_MAX) error(`step "${s.id}": ${s.beats.length} beats (${BEATS_MIN}–${BEATS_MAX})`);
     s.beats.forEach((b, i) => {
-      for (const m of beatIssues(b)) error(`step "${s.id}" / beat ${i + 1}: ${m}`);
+      for (const m of beatIssues(b, s.limits)) error(`step "${s.id}" / beat ${i + 1}: ${m}`);
       if (i === 0 && b.move) warn(`step "${s.id}" / beat 1: the first beat has no previous one to move from`);
       if (b.equation && b.words) error(`step "${s.id}" / beat ${i + 1}: write equation or words, not both`);
     });
@@ -424,9 +431,17 @@ export function lessonIssues(data: MathSceneData, chapters: readonly ChapterInfo
 
   /* 10. tokens (tasks are covered above) */
   const untasked = { syllabus: lesson.syllabus, steps: lesson.steps.map((s) => ({ ...s, pool: [] })) };
+  const measuring = measureLessonOf(data);
   for (const [path, text] of [...strings(untasked, 'lesson'), ...strings(data.glossary ?? {}, 'glossary')]) {
     for (const bad of badTokens(text)) error(`${path}: ${tokenMessage(bad)}`);
     for (const bare of path.endsWith('.sample') ? [] : bareTimes(text)) error(`${path}: "${bare}" is a time written as text: write it {t:…} (it would be read as a decimal)`);
+    // A lesson on reading instruments writes every quantity as a token (docs/32 M8); the syllabus is quoted as it is.
+    if (measuring && !path.startsWith('lesson.syllabus')) for (const bare of bareQuantities(text)) error(`${path}: "${bare}" is a quantity written as text: write it {u:…}`);
   }
   return issues;
+}
+
+/** A lesson on reading instruments (it draws one in a beat): its texts write quantities as `{u:…}` tokens (docs/32 M8). */
+export function measureLessonOf(data: MathSceneData): boolean {
+  return data.lesson.steps.some((s) => s.beats.some((b) => b.model.kind === 'instrument'));
 }

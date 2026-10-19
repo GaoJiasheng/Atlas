@@ -70,6 +70,7 @@ import { sharedSourcesFile } from '../src/content/schema/sources';
 import { glbIssues, glbNodeNames } from './lib/glb-check';
 import { readSharedFitness } from './lib/shared-data';
 import { badTokens } from '../src/lib/rich-text';
+import { bareQuantities } from '../src/engines/math-scene/validate-measure';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 // ATLAS_TOPICS_DIR lets tests / tooling validate another tree.
@@ -211,6 +212,7 @@ function checkBodyComponents(
   terms: Set<string> | null,
   tasks: Set<string> | null,
   beats: number | null,
+  measuring = false,
 ): void {
   for (const { raw, attrs } of tagAttrs(body, 'Num')) {
     const ids = (attrs.s ?? '').split(/[\s,]+/).filter(Boolean);
@@ -278,6 +280,20 @@ function checkBodyComponents(
   for (const { raw, attrs } of tagAttrs(body, 'Dur')) {
     if (!attrs.d || badTokens(`{d:${attrs.d}}`).length) error(file, `<Dur> needs a duration d like "1h35m", "95m" or "75s": ${raw}`);
   }
+  // `<Qty>` writes what `{u:…}` writes; a lesson on reading instruments writes every quantity so (docs/32 M8).
+  for (const { raw, attrs } of tagAttrs(body, 'Qty')) {
+    if (!attrs.u || badTokens(`{u:${attrs.u}}`).length) error(file, `<Qty> needs a quantity u like "9 cm", "1.5 l" or "2 m 35 cm": ${raw}`);
+  }
+  if (measuring) {
+    const prose = body.replace(/<[^>]*>/g, ' ').replace(/^---[\s\S]*?---/, '');
+    for (const bare of bareQuantities(prose)) error(file, `"${bare}" is a quantity written as text: write <Qty u="${bare.replace(/(\d)(?=[a-zℓ])/, '$1 ')}" />`);
+  }
+}
+
+/** MathScene: a lesson on reading instruments (a beat draws one), whose chapter bodies write quantities with `<Qty>` (docs/32 M8). */
+function drawsInstruments(data: unknown): boolean {
+  const steps = (data as { lesson?: { steps?: { beats?: { model?: { kind?: string } }[] }[] } }).lesson?.steps;
+  return !!steps?.some((x) => x.beats?.some((b) => b.model?.kind === 'instrument'));
 }
 
 /** MathScene: the explanation beats of a chapter's step (`<Beat n>`), `null` when the chapter has none. */
@@ -461,7 +477,7 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
     checkBilingual(file, front);
     checkLangBlocks(file, match[2] ?? '');
     // Only when the data parsed: otherwise the data errors already explain missing ids.
-    if (data !== undefined) checkBodyComponents(file, match[2] ?? '', sources, presets, terms, tasks, lessonBeats(data, (front as { id?: unknown }).id));
+    if (data !== undefined) checkBodyComponents(file, match[2] ?? '', sources, presets, terms, tasks, lessonBeats(data, (front as { id?: unknown }).id), drawsInstruments(data));
 
     const parsed = chapterSchema.safeParse(front);
     if (!parsed.success) {
