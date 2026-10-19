@@ -123,4 +123,30 @@ test.describe('sample-life-cycle (SpaceScene life-cycle model)', () => {
     expect((await target.boundingBox())!.height).toBeGreaterThanOrEqual(44);
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(900);
   });
+
+  test('narrow comparison chapters keep the ring without a try-it experiment', async ({ page }) => {
+    await page.setViewportSize({ width: 900, height: 1200 });
+    await open(page, '/en/topics/sample-life-cycle/?ch=two-cycles');
+    await page.getByRole('button', { name: 'Read', exact: true }).click();
+    const diagram = page.locator('.space-try__diagram .space-cy');
+    await diagram.scrollIntoViewIfNeeded();
+    await expect(diagram.locator('[data-second]')).toBeVisible();
+    await expect(page.locator('.space-try__diagram .space-cy__link')).toBeVisible();
+  });
+
+  test('cinema: node keyboard selection and comparison targets at 1280 px', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 720 });
+    await open(page, '/en/topics/sample-life-cycle/?ch=two-cycles&theme=cinema');
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'cinema');
+    for (const target of await ring(page).locator('.space-cy__target').all()) {
+      const box = await target.boundingBox();
+      expect(box!.width).toBeGreaterThanOrEqual(44);
+      expect(box!.height).toBeGreaterThanOrEqual(44);
+    }
+    const node = ring(page).locator('[data-node="l2"]');
+    await node.focus();
+    await page.keyboard.press('Enter');
+    await expect(node).toHaveAttribute('data-picked', 'true');
+  });
+
 });

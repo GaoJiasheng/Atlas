@@ -11,7 +11,6 @@
 import { z } from 'zod';
 import { bilingual, colorRef, kebabId, vec3 } from '../../content/schema/common';
 import { fieldLines } from './lib/sim/field';
-import { CLIP_QUANTITIES } from './lib/sim/magnet';
 import { FORCE_STATES, forceQuantity, forceTimelineChannels, springExtension, rollRun } from './lib/sim/force';
 import { COMPUTED_TABLES, ENERGY_FORMS, chainFlow, chainOrder, energyNodes, energyQuantity, energyTimelineChannels, shareTables } from './lib/sim/energy';
 import { EMPTYING_STATES, groupStages, lastStage, lifeCycleQuantity, timedStages } from './lib/sim/lifecycle';
@@ -730,10 +729,10 @@ export const lifeCycleSchema = z
       .min(2)
       .max(10),
     groups: z.record(kebabId, z.union([z.array(lifeStageId).min(2).max(8), z.object({ stages: z.array(lifeStageId).min(2).max(8), label: bilingual }).strict()])).optional(),
-    days: z.record(z.string().regex(/^-?\d+(\.\d+)?$/, 'a row is keyed by a temperature value'), z.record(z.string(), z.number())),
-    size: z.record(kebabId, z.object({ unit: z.string().trim().min(1).max(8), values: z.record(lifeStageId, z.number().positive()) }).strict()).optional(),
+    days: z.record(z.string().regex(/^-?\d+(\.\d+)?$/, 'a row is keyed by a temperature value'), z.record(z.string(), z.number().finite())),
+    size: z.record(kebabId, z.object({ unit: z.string().trim().min(1).max(8), values: z.record(lifeStageId, z.number().finite().positive()) }).strict()).optional(),
     emptying: z.object({ every: kebabId, wipe: kebabId.optional() }).strict().optional(),
-    rate: z.object({ flow: kebabId, paths: z.array(kebabId).min(1).max(16), reference: z.number() }).strict().optional(),
+    rate: z.object({ flow: kebabId, paths: z.array(kebabId).min(1).max(16), reference: z.number().finite() }).strict().optional(),
     card: z
       .object({
         compare: z
@@ -1479,6 +1478,7 @@ function lifeCycleIssues(lc: LifeCycleData, controls: ReadonlyMap<string, SimCon
     }
   });
   const last = lastStage(lc);
+  if (ids.includes('adult') && last !== 'adult') issue(['stages'], '"adult" must be the last stage');
   if (!ids.includes(lc.start)) issue(['start'], `unknown stage "${lc.start}" (${ids.join(', ')})`);
   else if (lc.start === last) issue(['start'], `"${lc.start}" is the last stage (the adult): day 0 is a stage that takes days`);
   const timed = timedStages(lc);
@@ -1487,7 +1487,10 @@ function lifeCycleIssues(lc: LifeCycleData, controls: ReadonlyMap<string, SimCon
   if (day && day.values.some((v) => v < 0)) issue(['day'], 'days after hatching are 0 or more');
   if (temp) {
     for (const v of temp.values) if (!lc.days[String(v)]) issue(['days'], `no measured row for ${v}${temp.unit ? ` ${temp.unit}` : ''} (a value of "${temp.id}")`);
-    for (const k of Object.keys(lc.days)) if (!temp.values.includes(Number(k))) issue(['days', k], `${k} is not a value of "${temp.id}"`);
+    for (const k of Object.keys(lc.days)) {
+      if (!temp.values.includes(Number(k))) issue(['days', k], `${k} is not a value of "${temp.id}"`);
+      else if (String(Number(k)) !== k) issue(['days', k], `write the temperature key as "${Number(k)}" (one row per value)`);
+    }
   }
   for (const [k, row] of Object.entries(lc.days)) {
     for (const id of timed) {
@@ -1502,7 +1505,8 @@ function lifeCycleIssues(lc: LifeCycleData, controls: ReadonlyMap<string, SimCon
     const sum = timed.reduce((s, id) => s + (row[id] ?? 0), 0);
     if (row.total !== undefined) {
       if (!(row.total > 0)) issue(['days', k, 'total'], `${row.total}: the total is more than 0 days`);
-      else if (Math.abs(row.total - sum) > 0.05 * sum) issue(['days', k, 'total'], `total ${row.total} is more than 5 % from the stages' sum ${+sum.toFixed(4)} (a mistyped number?)`);
+      else if (Math.abs(row.total - sum) > 0.05 * sum + Number.EPSILON * Math.max(row.total, sum))
+        issue(['days', k, 'total'], `total ${row.total} is more than 5 % from the stages' sum ${+sum.toFixed(4)} (a mistyped number?)`);
     }
   }
   for (const [g, def] of Object.entries(lc.groups ?? {})) {
@@ -1519,6 +1523,7 @@ function lifeCycleIssues(lc: LifeCycleData, controls: ReadonlyMap<string, SimCon
     if (lc.emptying.wipe !== undefined) control(['emptying', 'wipe'], lc.emptying.wipe, 'toggle');
   }
   if (lc.rate) {
+    if (new Set(lc.rate.paths).size !== lc.rate.paths.length) issue(['rate', 'paths'], 'duplicate path ids');
     const flow = ctx.flows.get(lc.rate.flow);
     if (!flow) issue(['rate', 'flow'], `unknown flow "${lc.rate.flow}"`);
     else if (!flow.paths) issue(['rate', 'flow'], `flow "${lc.rate.flow}" has no \`paths\` (the rate is a speed per path)`);
@@ -1790,4 +1795,3 @@ export function chapterSimIssues(where: string, s: { set?: SimValues | undefined
   }
   return out;
 }
-

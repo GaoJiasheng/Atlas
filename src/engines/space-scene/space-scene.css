@@ -1801,7 +1801,7 @@ button.space-plate__sel:focus-visible {
   stroke-linecap: butt;
 }
 .space-cy__water {
-  font: 600 7px / 1 var(--font-hud);
+  font: 600 12.5px / 1 var(--font-hud);
   letter-spacing: 0.14em;
   fill: var(--cold);
 }
@@ -1811,7 +1811,7 @@ button.space-plate__sel:focus-visible {
   stroke-width: 0.8;
 }
 .space-cy__groupname {
-  font: 500 9px / 1 var(--font-hud);
+  font: 500 12.5px / 1 var(--font-hud);
   fill: var(--ink-2);
 }
 .space-cy__line {
@@ -1840,7 +1840,7 @@ button.space-plate__sel:focus-visible {
   stroke-width: 1.4;
 }
 .space-cy__name {
-  font: 500 10.5px / 1 var(--font-hud);
+  font: 500 12.5px / 1 var(--font-hud);
   letter-spacing: 0.02em;
   fill: var(--ink);
 }
@@ -1855,11 +1855,11 @@ button.space-plate__sel:focus-visible {
   animation: space-cy-in 300ms ease both;
 }
 .space-cy__days {
-  font: 600 10px / 1 var(--font-mono);
+  font: 600 12.5px / 1 var(--font-mono);
   fill: var(--ink-2);
 }
 .space-cy__note {
-  font: italic 500 9.5px / 1 var(--font-hud);
+  font: italic 500 12.5px / 1 var(--font-hud);
   fill: var(--ink-3);
 }
 .space-cy__total {
@@ -1867,7 +1867,7 @@ button.space-plate__sel:focus-visible {
   fill: var(--ink);
 }
 .space-cy__temp {
-  font: 500 9.5px / 1 var(--font-mono);
+  font: 500 12.5px / 1 var(--font-mono);
   fill: var(--ink-3);
 }
 @keyframes space-cy-in {
@@ -1884,16 +1884,16 @@ button.space-plate__sel:focus-visible {
   }
 }
 .space-cy__title {
-  font: 600 9px / 1 var(--font-hud);
+  font: 600 12.5px / 1 var(--font-hud);
   letter-spacing: 0.12em;
   fill: var(--ink-2);
 }
 .space-cy__sim {
-  font: 500 10px / 1 var(--font-hud);
+  font: 500 12.5px / 1 var(--font-hud);
   fill: var(--ink-3);
 }
 .space-cy__chip {
-  font: 600 10px / 1 var(--font-mono);
+  font: 600 12.5px / 1 var(--font-mono);
   letter-spacing: 0.08em;
   fill: var(--ink-2);
 }

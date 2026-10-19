@@ -1397,6 +1397,8 @@ docs/33 §4（E-M1 模型、E-M2 生活史环卡）。`sim.kind: "life-cycle"`�
 - **测试与 QA**：`__atlas.engine.sim()` 的 `outputs.stage`、`outputs.rate`；环卡 `.space-cy[data-stage]`、`[data-node][data-on]`、`[data-arc]`、`[data-second]`、`[data-cycle-compare]`；`pnpm shoot <slug> --beats --keys` 照常（`]` 走一天）。
 - **数字纪律**（docs/33 D5、§2.4）：天数是一项实验室研究的雄蚊平均值，卡片、PLATE、试一试都带 SIM / "在这个模型里"；正文写取整的"约 7 天"。同一个模型以后给课纲点名的其他动物（蝴蝶、青蛙、鸡、甲虫、蟑螂）和植物复用：换 `stages`、`days`、`in`。
 
+Life-cycle authoring checks also reject non-finite measurements, duplicate rate paths, and non-canonical temperature keys (`28.0` must be `28`). If a stage uses the id `adult`, it must come last. Ring text keeps a 10 px minimum at the narrowest desktop card. Below 1024 px, chapters without a try-it experiment retain a collapsible life-cycle diagram in the reading panel, including the comparison switch and link.
+
 ### 章节怎么写（`state`）
 
 ```yaml

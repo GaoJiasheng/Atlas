@@ -16,6 +16,9 @@ export const AEDES_PARTS = ['eggs', 'larva-l1', 'larva-l2', 'larva-l3', 'larva-l
 export const AEDES_FLOWS: Record<string, string[]> = { 'life-cycle': ['ring', 'out', 'lay'] };
 export const AEDES_POSES = ['marker-l1', 'marker-l2', 'marker-l3', 'marker-l4', 'marker-pupa', 'marker-adult'];
 
+/** Invented sizes for exercising `size:` only; not measurements or author content. */
+export const AEDES_TEST_SIZES = { head: { unit: 'mm', values: { l1: 0.3, l2: 0.45, l3: 0.65, l4: 0.95 } } };
+
 export const aedesSim: SimData = simSchema.parse({
   kind: 'life-cycle',
   controls: [

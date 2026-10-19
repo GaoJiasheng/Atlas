@@ -16,7 +16,7 @@ import { lifeCycleQuantity, stageOnDay, stageSpans, timedStages } from '../../sr
 import { simEffects } from '../../src/engines/space-scene/lib/sim/bind';
 import { chapterSimIssues, simIssues, simSchema, type SimData, type SimValues } from '../../src/engines/space-scene/sim-schema';
 import { formatReading } from '../../src/engines/space-scene/lib/telemetry';
-import { AEDES_FLOWS, AEDES_PARTS, AEDES_POSES, aedesSim } from './fixtures/aedes-cycle';
+import { AEDES_FLOWS, AEDES_PARTS, AEDES_POSES, AEDES_TEST_SIZES, aedesSim } from './fixtures/aedes-cycle';
 
 const run = (set: SimValues = {}) => evaluateSim(aedesSim, resolveSimValues(aedesSim, set));
 const n = (v: unknown) => v as number;
@@ -47,6 +47,13 @@ const TABLE = [
   [32, 6.4, 4.7, 1.7, 1.13],
 ] as const;
 
+const DAYS_LEFT: Record<number, number[]> = {
+  20: [13.4, 12.4, 11.4, 10.4, 9.4, 8.4, 7.4, 6.4, 5.4],
+  25: [10.2, 9.2, 8.2, 7.2, 6.2, 5.2, 4.2, 3.2, 2.2],
+  28: [7.2, 6.2, 5.2, 4.2, 3.2, 2.2, 1.2, 0.2, 0],
+  32: [6.4, 5.4, 4.4, 3.4, 2.4, 1.4, 0.4, 0, 0],
+};
+
 describe('stage on day d, days at each temperature (docs/33 §2.4)', () => {
   it.each(Object.entries(STAGES))('%s °C: the stage on days 0–8', (temp, stages) => {
     stages.forEach((st, day) => expect(run({ temp: Number(temp), day }).stage, `day ${day}`).toBe(st));
@@ -59,9 +66,19 @@ describe('stage on day d, days at each temperature (docs/33 §2.4)', () => {
     expect(n(o['larva-days']) + n(o['pupa-days'])).toBeCloseTo(n(o['to-adult']), 9);
     const r = o.rate as Record<string, number>;
     expect(Object.keys(r).sort()).toEqual(['life-cycle:lay', 'life-cycle:out', 'life-cycle:ring']);
-    for (const v of Object.values(r)) expect(shown(v, 2)).toBe(rate);
+    for (const v of Object.values(r)) {
+      expect(shown(v, 2)).toBe(rate);
+      expect(v).toBeCloseTo(7.23 / lc.days[String(temp)]!.total!, 12);
+    }
+    for (let day = 0; day <= 8; day++) {
+      const atDay = run({ temp, day });
+      expect(shown(n(atDay['to-adult']))).toBe(total);
+      expect(shown(n(atDay['larva-days']))).toBe(larva);
+      expect(shown(n(atDay['pupa-days']))).toBe(pupa);
+      expect(shown(n(atDay['days-left']))).toBe(DAYS_LEFT[temp]![day]);
+    }
   });
-  it('28 °C boundaries: L1 [0, 1.877), L2 [1.877, 2.556), L3 [2.556, 3.555), L4 [3.555, 5.372), pupa [5.372, 7.23)', () => {
+  it('28 °C boundaries: scaled stage spans rounded to three decimal places', () => {
     const s = stageSpans(lc, 28)!;
     expect(s.total).toBe(7.23);
     expect(s.spans.map((x) => [x.id, +x.from.toFixed(3), +x.to.toFixed(3)])).toEqual([
@@ -73,10 +90,6 @@ describe('stage on day d, days at each temperature (docs/33 §2.4)', () => {
     ]);
     // The spec rounds 5.3726 down to 5.372; the boundary is 1.82 × 0.99862 past 3.5551.
     expect(s.spans[3]!.to).toBeCloseTo(5.3726, 4);
-  });
-  it('days left: max(0, total − day), one decimal', () => {
-    expect([0, 1, 2, 3, 4, 5, 6, 7, 8].map((day) => shown(n(run({ temp: 28, day })['days-left'])))).toEqual([7.2, 6.2, 5.2, 4.2, 3.2, 2.2, 1.2, 0.2, 0]);
-    expect([0, 4, 7, 8].map((day) => shown(n(run({ temp: 32, day })['days-left'])))).toEqual([6.4, 2.4, 0, 0]);
   });
   it('the stages are scaled to the total; without a total they add up to Σ', () => {
     for (const t of [20, 25, 28, 32]) {
@@ -91,11 +104,15 @@ describe('stage on day d, days at each temperature (docs/33 §2.4)', () => {
     expect(s.spans.map((x) => +x.days.toFixed(2))).toEqual([1.88, 0.68, 1.0, 1.82, 1.86]);
   });
   it('a stage covers [from, to): the boundary day belongs to the next stage; on or after the total, the adult', () => {
-    const s = stageSpans(lc, 28)!;
-    expect(stageOnDay(s.spans, s.total, 'adult', s.spans[1]!.from)).toBe('l2');
-    expect(stageOnDay(s.spans, s.total, 'adult', s.spans[1]!.from - 1e-9)).toBe('l1');
-    expect(stageOnDay(s.spans, s.total, 'adult', 7.23)).toBe('adult');
-    expect(stageOnDay(s.spans, s.total, 'adult', 7.2299)).toBe('pupa');
+    for (const temp of [20, 25, 28, 32]) {
+      const s = stageSpans(lc, temp)!;
+      s.spans.forEach((span, i) => {
+        expect(stageOnDay(s.spans, s.total, 'adult', span.from)).toBe(span.id);
+        expect(stageOnDay(s.spans, s.total, 'adult', span.to - 1e-9)).toBe(span.id);
+        expect(stageOnDay(s.spans, s.total, 'adult', span.to)).toBe(s.spans[i + 1]?.id ?? 'adult');
+      });
+      expect(stageOnDay(s.spans, s.total, 'adult', s.total + 20)).toBe('adult');
+    }
   });
   it('the egg takes no days: the stage is never the egg, and there is no days:egg', () => {
     for (const temp of [20, 25, 28, 32]) for (let day = 0; day <= 8; day++) expect(run({ temp, day }).stage).not.toBe('egg');
@@ -143,7 +160,7 @@ describe('tipping the water out (emptying)', () => {
     [10, 'some'],
     [14, 'some'],
   ] as const)('28 °C, every %s days → adults %s', (every, adults) => {
-    expect(run({ temp: 28, every }).adults).toBe(adults);
+    for (const wipe of [false, true]) expect(run({ temp: 28, every, wipe }).adults).toBe(adults);
   });
   it('the wall switch: eggs stay unless the wall is scrubbed too', () => {
     for (const every of [2, 4, 6, 8, 10, 14]) {
@@ -164,12 +181,19 @@ describe('tipping the water out (emptying)', () => {
     expect(at(20, 14)).toBe('some');
     expect(simIssues(sim, ctx)).toEqual([]);
   });
+  it('emptying exactly at the mean produces no adults; strictly later does', () => {
+    const raw = JSON.parse(JSON.stringify(aedesSim));
+    raw.controls.find((c: { id: string }) => c.id === 'every').values = [7.23, 7.2301, 14];
+    const sim = simSchema.parse(raw);
+    expect(evaluateSim(sim, resolveSimValues(sim, { every: 7.23 })).adults).toBe('none');
+    expect(evaluateSim(sim, resolveSimValues(sim, { every: 7.2301 })).adults).toBe('some');
+  });
 });
 
 describe('quantities, bindings, URL', () => {
   const extra = () => {
     const raw = JSON.parse(JSON.stringify(aedesSim));
-    raw.lifeCycle.size = { head: { unit: 'mm', values: { l1: 0.3, l2: 0.45, l3: 0.65, l4: 0.95 } } };
+    raw.lifeCycle.size = AEDES_TEST_SIZES;
     raw.outputs.push(
       { id: 'head', from: 'size:head', label: { en: 'Head', zh: '头' }, unit: 'mm', decimals: 2 },
       { id: 'on-pupa', from: 'on:pupa', label: { en: 'Pupa', zh: '蛹' } },
@@ -179,7 +203,7 @@ describe('quantities, bindings, URL', () => {
     );
     return simSchema.parse(raw);
   };
-  it('size:, on:, control:, days:<stage> (placeholder sizes)', () => {
+  it('size:, on:, control:, days:<stage> (invented test sizes)', () => {
     const sim = extra();
     expect(simIssues(sim, ctx)).toEqual([]);
     const o = (set: SimValues) => evaluateSim(sim, resolveSimValues(sim, set));
@@ -189,6 +213,7 @@ describe('quantities, bindings, URL', () => {
     expect(o({ day: 5 })['on-pupa']).toBe(0);
     expect(o({ day: 5 })['day-now']).toBe(5);
     expect(o({ wipe: true }).wiped).toBe(1);
+    expect(o({ wipe: false }).wiped).toBe(0);
     expect(shown(n(o({ temp: 28 })['l3-days']), 2)).toBe(1.0);
     expect(run({ temp: 32 })['temp-now']).toBe(32);
   });
@@ -212,7 +237,9 @@ describe('quantities, bindings, URL', () => {
     expect(SEPARATE_EXPERIMENTS['life-cycle']).toBe(false);
   });
   it('deterministic', () => {
+    const before = JSON.stringify(aedesSim);
     expect(JSON.stringify(run({ temp: 25, day: 6, every: 10 }))).toBe(JSON.stringify(run({ temp: 25, day: 6, every: 10 })));
+    expect(JSON.stringify(aedesSim)).toBe(before);
   });
   it('URL round trip: sim=temp.32~day.4', () => {
     const values = decodeSimParam('temp.32~day.4');
@@ -250,6 +277,7 @@ describe('validate: life-cycle data and outputs', () => {
   it('a temperature without a row, a row that is not a temperature', () => {
     expect(issuesOf((s) => void delete lcOf(s).days['25'])).toContain('lifeCycle.days: no measured row for 25 °C (a value of "temp")');
     expect(issuesOf((s) => void (lcOf(s).days['30'] = { ...lcOf(s).days['28']! }))).toContain('lifeCycle.days.30: 30 is not a value of "temp"');
+    expect(issuesOf((s) => void (lcOf(s).days['028'] = { ...lcOf(s).days['28']! }))).toContain('lifeCycle.days.028: write the temperature key as "28" (one row per value)');
   });
   it('a stage without days, days for the egg or the adult, a negative length, a total 5 % off', () => {
     expect(issuesOf((s) => void delete lcOf(s).days['28']!.l3)).toContain('lifeCycle.days.28.l3: no days for stage "l3"');
@@ -258,6 +286,18 @@ describe('validate: life-cycle data and outputs', () => {
     expect(issuesOf((s) => void (lcOf(s).days['28']!.l2 = -0.68))).toContain('lifeCycle.days.28.l2: -0.68: a stage lasts more than 0 days');
     expect(issuesOf((s) => void (lcOf(s).days['28']!.total = 8.0)).some((x) => x.startsWith('lifeCycle.days.28.total: total 8 is more than 5 %'))).toBe(true);
     expect(issuesOf((s) => void (lcOf(s).days['28']!.total = 7.5))).toEqual([]);
+  });
+  it('the 5 % total tolerance is inclusive despite floating point rounding', () => {
+    const sum = 1.88 + 0.68 + 1 + 1.82 + 1.86;
+    for (const factor of [0.95, 1.05]) expect(issuesOf((s) => void (lcOf(s).days['28']!.total = sum * factor))).toEqual([]);
+    for (const factor of [0.949, 1.051]) expect(issuesOf((s) => void (lcOf(s).days['28']!.total = sum * factor)).some((x) => x.includes('more than 5 %'))).toBe(true);
+  });
+  it('measured days, sizes and the reference temperature must be finite', () => {
+    for (const value of [NaN, Infinity, -Infinity]) {
+      expect(simSchema.safeParse({ ...aedesSim, lifeCycle: { ...lc, days: { ...lc.days, '28': { ...lc.days['28'], l1: value } } } }).success).toBe(false);
+      expect(simSchema.safeParse({ ...aedesSim, lifeCycle: { ...lc, size: { head: { unit: 'mm', values: { l1: value } } } } }).success).toBe(false);
+      expect(simSchema.safeParse({ ...aedesSim, lifeCycle: { ...lc, rate: { ...lc.rate!, reference: value } } }).success).toBe(false);
+    }
   });
   it('start not a stage, start the last stage; the adult not last', () => {
     expect(issuesOf((s) => void (lcOf(s).start = 'hatchling')).some((x) => x.startsWith('lifeCycle.start: unknown stage "hatchling"'))).toBe(true);
@@ -268,6 +308,7 @@ describe('validate: life-cycle data and outputs', () => {
     });
     expect(moved.some((x) => x.includes('"adult"') && x.includes('no days'))).toBe(true);
     expect(moved.some((x) => x.includes('"pupa" takes no days'))).toBe(true);
+    expect(moved).toContain('lifeCycle.stages: "adult" must be the last stage');
   });
   it('unknown or context parts, duplicate stages, groups', () => {
     expect(issuesOf((s) => void (lcOf(s).stages[2]!.part = 'nope'))).toContain('lifeCycle.stages.2.part: unknown part "nope"');
@@ -283,12 +324,21 @@ describe('validate: life-cycle data and outputs', () => {
     expect(issuesOf((s) => void (lcOf(s).card.compare.control = 'temp'))).toContain('lifeCycle.card.compare.control: "temp" is a step control, not a toggle');
     expect(issuesOf((s) => void ((s.lifeCycle as unknown as { temp: string }).temp = 'wipe'))).toContain('lifeCycle.temp: "wipe" is a toggle control, not a step');
     expect(issuesOf((s) => void ((s.lifeCycle as unknown as { day: string }).day = 'missing'))).toContain('lifeCycle.day: unknown control "missing"');
+    expect(issuesOf((s) => {
+      const day = s.controls.find((c) => c.id === 'day');
+      if (day?.kind === 'step') day.values.unshift(-1);
+    })).toContain('lifeCycle.day: days after hatching are 0 or more');
+    expect(issuesOf((s) => {
+      const every = s.controls.find((c) => c.id === 'every');
+      if (every?.kind === 'step') every.values.unshift(0);
+    })).toContain('lifeCycle.emptying.every: the water is tipped out every so many days: above 0');
   });
   it('the rate: a flow with these paths, every path listed, a reference temperature', () => {
     expect(issuesOf((s) => void (lcOf(s).rate.flow = 'other'))).toContain('lifeCycle.rate.flow: unknown flow "other"');
     expect(issuesOf((s) => void (lcOf(s).rate.paths = ['ring', 'out']))).toContain('lifeCycle.rate.paths: list path "lay" of flow "life-cycle" too (a path left out stops)');
     expect(issuesOf((s) => void (lcOf(s).rate.paths = ['ring', 'out', 'lay', 'back']))).toContain('lifeCycle.rate.paths: flow "life-cycle" has no path "back"');
     expect(issuesOf((s) => void (lcOf(s).rate.reference = 30))).toContain('lifeCycle.rate.reference: 30 is not a value of "temp"');
+    expect(issuesOf((s) => void lcOf(s).rate.paths.push('ring'))).toContain('lifeCycle.rate.paths: duplicate path ids');
     const pathless = simIssues(aedesSim, { ...ctx, flows: new Map([['life-cycle', { own: true }]]) }).map((x) => x.message);
     expect(pathless).toContain('flow "life-cycle" has no `paths` (the rate is a speed per path)');
   });

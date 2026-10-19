@@ -257,13 +257,24 @@ export function replay(ui: SpaceUiStore, ids: readonly string[]): void {
   ui.setState({ simReplay: { n: ui.getState().simReplay.n + 1, ids: [...ids] } });
 }
 
+function LifeCycleFold({ file, sim }: { file: PartsFile; sim: SimData }) {
+  const t = useT();
+  return (
+    <details className="space-try__diagram" open>
+      <summary>{t('space.try.cycle')}</summary>
+      <CycleDiagram file={file} sim={sim} />
+    </details>
+  );
+}
+
 export function TryIt({ file, ui }: { file: PartsFile; ui: SpaceUiStore }) {
   const t = useT();
   const { locale } = useSceneContext();
   const store = useSimStore();
   const chapter = useScene<SpaceSceneExt, string | null>((s) => s.chapter);
   const view = useSimView(file);
-  if (!view || !view.card || !chapter) return null;
+  if (!view || !chapter) return null;
+  if (!view.card) return view.sim.lifeCycle ? <LifeCycleFold file={file} sim={view.sim} /> : null;
   const { sim, card, values, outputs } = view;
   const controls = [card.vary, ...(card.also ?? [])].map((id) => sim.controls.find((c) => c.id === id)).filter((c): c is SimControl => c !== undefined);
   const keep = (card.keep ?? []).map((k) => {
@@ -326,12 +337,7 @@ export function TryIt({ file, ui }: { file: PartsFile; ui: SpaceUiStore }) {
           <EnergyDiagram file={file} sim={sim} />
         </details>
       )}
-      {sim.lifeCycle && (
-        <details className="space-try__diagram" open>
-          <summary>{t('space.try.cycle')}</summary>
-          <CycleDiagram file={file} sim={sim} />
-        </details>
-      )}
+      {sim.lifeCycle && <LifeCycleFold file={file} sim={sim} />}
     </section>
   );
 }
