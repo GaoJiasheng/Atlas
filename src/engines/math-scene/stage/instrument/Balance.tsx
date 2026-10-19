@@ -76,7 +76,7 @@ export function BalanceDrawing({ f, tilt, left, right, tipMs, label }: { f: Bala
     );
   };
   return (
-    <g className="ms-bal" role="img" aria-label={label}>
+    <g className="ms-bal" role="group" aria-label={label}>
       <rect className="ms-bal__base" x={f.base.x} y={f.base.y} width={f.base.w} height={f.base.h} />
       <path className="ms-bal__post" d={`M${pivot.x - 8} ${f.base.y}L${pivot.x - 3} ${pivot.y}h6L${pivot.x + 8} ${f.base.y}Z`} />
       <g transform={`translate(${pivot.x} ${pivot.y})`}>

@@ -892,7 +892,6 @@
   "math.view.instrument": "Instrument",
   "math.view.straight": "Straightened scale",
   "math.specimen.dial": "A weighing scale marked 0 to 1000 g, its needle at 0",
-  "math.measure.part": "The small part from {a} to {b}",
   "math.measure.takeOff": "Take the {w} weight off",
   "math.measure.handle.line": "End of the line",
   "math.measure.handle.arrow": "Arrow",
@@ -948,5 +947,15 @@
   "math.input.big": "Big unit",
   "math.input.small": "Small unit",
   "math.status.instrument": "Scale",
-  "math.plate.counted": "Parts counted"
+  "math.plate.counted": "Parts counted",
+  "math.measure.describe.scale": "Scale from {a} to {b}; numbers every {gap}; {n} equal small parts between numbered marks.",
+  "math.measure.describe.between": "The pointer is between {a} and {b}, {n} small parts after {a}.",
+  "math.measure.describe.mark": "The pointer is on the numbered mark {v}.",
+  "math.measure.describe.ends": "The object starts at {a}; its end is between {b} and {c}.",
+  "math.measure.describe.onEnds": "The object runs from the mark {a} to the mark {b}.",
+  "math.measure.describe.balance": "Left pan: {a}. Right pan: {b}. {tilt}.",
+  "math.measure.describe.object": "an object",
+  "math.measure.describe.empty": "empty",
+  "math.measure.describe.container": "A container without a scale.",
+  "math.measure.partAfter": "Small part {n} after the numbered mark {a}"
 }

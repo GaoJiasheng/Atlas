@@ -296,7 +296,10 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
     numberline: u.modes.numberline && !practice && view !== 'numberline',
     labels: labelsOn && !practice,
   };
-  const equation = explain ? (explain.equation ?? (explain.words ? tx(explain.words, locale) : null)) : task && run && !practice ? (workingLines(task, run.state, locale, run.done, lesson.notation).at(-1) ?? null) : null;
+  // On a phone the read-scale boxes already show the child's quantity. Keep
+  // the height for the instrument instead of repeating that quantity below it.
+  const phoneReading = sheet && L.w < 760 && task?.kind === 'read-scale';
+  const equation = phoneReading ? null : explain ? (explain.equation ?? (explain.words ? tx(explain.words, locale) : null)) : task && run && !practice ? (workingLines(task, run.state, locale, run.done, lesson.notation).at(-1) ?? null) : null;
   const modelBox: Rect = equation ? { ...L.free, h: Math.max(0, L.free.h - EQUATION_H) } : L.free;
   // The sentence sits right under the drawing (its bounding box), not at the foot of the free rectangle.
   const drawingRef = useRef<SVGGElement>(null);

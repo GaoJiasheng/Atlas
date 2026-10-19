@@ -135,6 +135,13 @@ describe('set-scale', () => {
     const bad = mk({ id: 'x', kind: 'set-scale', model: dial(), target: 170, mode: 'fill' });
     expect(issues(bad)).toEqual(expect.arrayContaining(['mode fill is for a jug', 'the target 170 is not on a mark']));
   });
+
+  it('requires the weights target to agree with the object being weighed', () => {
+    const t = mk({ id: 'mismatch', kind: 'set-scale', model: { kind: 'instrument', type: 'balance', left: [{ item: 'papaya', mass: 800 }] }, target: '700 g', mode: 'weights', weights: [500, 200, 100] });
+    expect(issues(t)).toContain('the target must equal the mass on the left pan');
+    const tooMany = mk({ id: 'too-many', kind: 'set-scale', model: { kind: 'instrument', type: 'balance', left: [{ item: 'papaya', mass: 800 }] }, target: '800 g', mode: 'weights', weights: [50] });
+    expect(issues(tooMany)).toContain('the mass needs more than the 12 weights the pan can hold');
+  });
 });
 
 describe('count-intervals', () => {
@@ -215,6 +222,11 @@ describe('validation', () => {
   it('refuses a scale whose marks are not the same parts, or a reading off the marks', () => {
     const t = mk({ id: 'w', kind: 'read-scale', model: dial({ to: 510, value: 290 }), answer: { answer: '290 g', form: 'measure' } });
     expect(issues(t)).toEqual(expect.arrayContaining(['from 0 to 510 is not a whole number of small parts of 20', 'the needle 290 is not on a mark (every 20)']));
+  });
+
+  it('requires compound reading brackets to start at zero', () => {
+    const t = mk({ id: 'bracket', kind: 'read-scale', model: { kind: 'instrument', type: 'jug', unit: 'ml', from: 0, to: 1000, major: 100, minor: 50, value: 350, brackets: [{ from: 100, to: 350, label: text }] }, answer: { answer: 350, form: 'whole', unit: 'ml' } });
+    expect(issues(t)).toContain('brackets for a reading start at 0');
   });
 
   it('takes a whole-number line to 10 000 in any step, numbered every major (a scale straightened)', () => {

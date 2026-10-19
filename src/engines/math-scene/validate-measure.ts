@@ -132,6 +132,7 @@ function memberIssues(s: InstrumentSpec, opts: { nearest: boolean; where: string
     const r = readingOf(s);
     const end = s.brackets.at(-1)!.to.units;
     const start = s.brackets[0]!.from.units;
+    if (r && r.a === undefined && start !== 0) err('brackets for a reading start at 0');
     if (r && r.a === undefined && end !== r.value) err(`the brackets end at ${V(end)}, the reading is ${V(r.value)}`);
     if (r && r.a !== undefined && (start !== r.a || end - start !== r.value)) err('the brackets run from the thing\'s start to its end');
     if (!STRAIGHT.has(s.type) && s.type !== 'jug') err('brackets go beside a straight scale or a jug');
@@ -304,9 +305,14 @@ export function measureTaskIssues(task: Task, limits: StepLimits | undefined): s
       if (!want[task.mode].includes(s.type!)) out.push(`mode ${task.mode} is for a ${want[task.mode].join(' or ')}`);
       if (task.mode === 'weights') {
         if (!task.weights?.length) out.push('mode weights needs the weights in the tray');
-        else if (!fewestWeights(loadMass(s), task.weights)) out.push(`${loadMass(s)} g cannot be made from ${task.weights.join(', ')} g`);
+        else {
+          const solution = fewestWeights(loadMass(s), task.weights);
+          if (!solution) out.push(`${loadMass(s)} g cannot be made from ${task.weights.join(', ')} g`);
+          else if (solution.length > 12) out.push('the mass needs more than the 12 weights the pan can hold');
+        }
         if ((s.right ?? []).length) out.push('the right pan starts empty (the child puts the weights on)');
         if (!(s.left ?? []).length) out.push('the left pan holds what is weighed');
+        if (setTarget(task) !== loadMass(s) * SCALE) out.push('the target must equal the mass on the left pan');
         break;
       }
       if (task.weights) out.push('weights are for mode weights');
@@ -447,4 +453,3 @@ export function bareQuantities(text: string): string[] {
   const plain = text.replace(/\{[^{}]*\}/g, ' ');
   return [...plain.matchAll(BARE_QTY)].map((m) => m[0]);
 }
-

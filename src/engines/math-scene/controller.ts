@@ -83,6 +83,7 @@ function describe(task: Task, action: Action, s: TaskState): string {
       return task.kind === 'compare' ? `PICK ${numText(action.side === 'a' ? task.a : task.b)}` : 'PICK';
     case 'align':
       if (task.kind === 'compare' && task.align === 'point') return 'LINE UP ON THE POINT';
+      if (task.kind === 'compare' && task.align === 'unit') return 'SAME UNIT';
       return task.kind === 'compare' ? `SAME-SIZE PARTS · ${lcm(asFrac(task.a).d, asFrac(task.b).d)}` : 'SAME-SIZE PARTS';
     case 'order':
     case 'unorder':

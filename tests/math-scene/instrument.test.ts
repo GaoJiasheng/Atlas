@@ -45,6 +45,7 @@ describe('the scale', () => {
     const ys = Array.from({ length: 26 }, (_, i) => f.track.at((100 + 2 * i) * M).y);
     expect(new Set(gaps(ys)).size).toBe(1);
     expect(f.vertical).toBe(true);
+    for (const v of [0, 100, 112, 132, 150]) expect(f.track.valueAt(f.track.at(v * M))).toBeCloseTo(v * M, 6);
   });
 
   it('draws the marks of a jug the same height apart, the level in proportion', () => {
@@ -55,6 +56,11 @@ describe('the scale', () => {
     expect(new Set(gaps(ys)).size).toBe(1);
     expect(f.floor - f.levelY(500 * M)).toBeCloseTo(2 * (f.floor - f.levelY(250 * M)), 9);
     expect(f.levelY(350 * M)).toBeCloseTo(f.track!.at(350 * M).y, 9);
+  });
+
+  it('keeps a compound jug large enough on a phone while reserving its bracket labels', () => {
+    const jug = inst({ type: 'jug', unit: 'ml', from: 0, to: 2000, major: 500, minor: 50, value: 1250, brackets: [{ from: 0, to: 1000, label: { en: '1 ℓ', zh: '1 ℓ' } }, { from: 1000, to: 1250, label: { en: '250 ml', zh: '250 ml' } }] });
+    expect(jugFrame(jug, scaleOf(jug), { x: 0, y: 0, w: 336, h: 400 }).body.h).toBeGreaterThanOrEqual(200);
   });
 
   it('numbers a two-unit scale in whole big units and what is over', () => {
@@ -86,6 +92,10 @@ describe('the dial', () => {
     expect(valueAtAngle(d, sc, 170)).toBe(500 * M);
     expect(valueAtAngle(d, sc, 340)).toBe(1000 * M);
     expect(valueAtAngle(d, sc, 355)).toBe(0);
+    const f = dialFrame(d, sc, box);
+    for (const [angle, value] of [[340, 1000], [355, 0], [165, 500]]) {
+      expect(f.track.valueAt(rimPoint(f.c.x, f.c.y, f.r, angle!))).toBe(value! * M);
+    }
   });
 
   it('draws every small part the same length of rim', () => {

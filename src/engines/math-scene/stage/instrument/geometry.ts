@@ -7,7 +7,7 @@
  * every small part is the same size by construction. Pure (no DOM).
  */
 import type { InstrumentSpec } from '../../schema';
-import { dialAngle, drawnParts, rimPoint, shareOf, type Scale } from '../../lib/instrument';
+import { dialAngle, drawnParts, rimPoint, shareOf, SKIP_PARTS, valueAtAngle, type Scale } from '../../lib/instrument';
 import type { Rect } from '../layout';
 
 export interface Pt {
@@ -46,8 +46,15 @@ export function straightTrack(s: InstrumentSpec, sc: Scale, p0: Pt, dir: Pt, len
       return { x: p0.x + dir.x * k, y: p0.y + dir.y * k, nx: n.x, ny: n.y };
     },
     valueAt: (p) => {
-      const k = (p.x - p0.x) * dir.x + (p.y - p0.y) * dir.y;
-      return sc.from + (k / length) * (sc.to - sc.from);
+      const share = ((p.x - p0.x) * dir.x + (p.y - p0.y) * dir.y) / length;
+      if (!s.skip) return sc.from + share * (sc.to - sc.from);
+      const a = s.skip.from.units;
+      const b = s.skip.to.units;
+      const short = SKIP_PARTS * sc.minor;
+      const distance = share * (sc.to - sc.from - (b - a) + short);
+      if (distance <= a - sc.from) return sc.from + distance;
+      if (distance >= a - sc.from + short) return sc.from + distance + b - a - short;
+      return a + ((distance - (a - sc.from)) / short) * (b - a);
     },
     marks: { minor: major * 0.5, mid: major * 0.72, major },
     font: clamp(major * 0.62, 13, 22),
@@ -68,9 +75,7 @@ export function dialTrack(s: InstrumentSpec, sc: Scale, c: Pt, r: number): Track
     },
     valueAt: (p) => {
       const a = (Math.atan2(p.y - c.y, p.x - c.x) * 180) / Math.PI + 90;
-      const sweep = s.sweep ?? 330;
-      const d = ((a % 360) + 360) % 360;
-      return sc.from + (Math.min(d, sweep) / sweep) * (sc.to - sc.from);
+      return valueAtAngle(s, sc, a);
     },
     marks: { minor: major * 0.5, mid: major * 0.72, major },
     font: clamp(r * 0.085, 13, 22),
@@ -196,7 +201,7 @@ export interface DialFrame {
 
 export function dialFrame(s: InstrumentSpec, sc: Scale, box: Rect): DialFrame {
   // A short box (a phone with the tray open): the pan shrinks to a rim so the face keeps its size (≥ 180 px across, docs/32 §3.2).
-  const panK = box.h < 360 ? 0.16 : 0.62;
+  const panK = box.h < 360 ? 0.08 : 0.62;
   const r = clamp(Math.min((box.h - 24) / (2 + panK + 0.13), box.w * 0.42), 60, 420);
   const panH = r * panK;
   const total = panH + 2 * r;
@@ -230,8 +235,10 @@ export interface JugFrame {
 export function jugFrame(s: InstrumentSpec, sc: Scale | null, box: Rect): JugFrame {
   const shape = s.shape ?? 'jug';
   const aspect = shape === 'bottle' ? 0.38 : shape === 'bowl' ? 1.9 : shape === 'pail' ? 0.95 : shape === 'beaker' ? 0.62 : shape === 'cup' ? 0.72 : shape === 'bottle-jug' ? 0.5 : 0.7;
-  const maxH = box.h * (shape === 'bowl' ? 0.42 : 0.8);
-  const scaleRoom = s.scale && sc ? 110 + (s.brackets ? 120 : 0) : 20;
+  const maxH = box.h * (shape === 'bowl' ? 0.42 : box.h < 300 ? 0.94 : 0.8);
+  // Keep room for the numbers and dimension labels without shrinking the
+  // vessel to a thumbnail on a phone or beside the 1024 px reader.
+  const scaleRoom = s.scale && sc ? s.eye ? 160 : s.brackets?.length ? 150 : 80 : 20;
   const h = Math.min(maxH, (box.w - scaleRoom - 40) / aspect);
   const w = h * aspect;
   const x = box.x + (box.w - w - scaleRoom) / 2;

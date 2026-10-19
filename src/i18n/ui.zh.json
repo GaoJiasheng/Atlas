@@ -892,7 +892,6 @@
   "math.view.instrument": "器具",
   "math.view.straight": "拉直的刻度",
   "math.specimen.dial": "刻度 0 到 1000 g 的指针秤，指针指着 0",
-  "math.measure.part": "{a} 到 {b} 之间的一小格",
   "math.measure.takeOff": "把 {w} 的砝码拿下来",
   "math.measure.handle.line": "线的末端",
   "math.measure.handle.arrow": "箭头",
@@ -948,5 +947,15 @@
   "math.input.big": "大单位",
   "math.input.small": "小单位",
   "math.status.instrument": "刻度",
-  "math.plate.counted": "数了几格"
+  "math.plate.counted": "数了几格",
+  "math.measure.describe.scale": "刻度从{a}到{b}；每{gap}标一个数，相邻标数之间有{n}个相等的小格。",
+  "math.measure.describe.between": "指示位置在{a}和{b}之间，从{a}往后数{n}小格。",
+  "math.measure.describe.mark": "指示位置在标了数的{v}刻度上。",
+  "math.measure.describe.ends": "物体从{a}开始，末端在{b}和{c}之间。",
+  "math.measure.describe.onEnds": "物体从{a}刻度到{b}刻度。",
+  "math.measure.describe.balance": "左盘：{a}。右盘：{b}。{tilt}。",
+  "math.measure.describe.object": "一个物体",
+  "math.measure.describe.empty": "空盘",
+  "math.measure.describe.container": "一个没有刻度的容器。",
+  "math.measure.partAfter": "标数{a}之后的第{n}小格"
 }

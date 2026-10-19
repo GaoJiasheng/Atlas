@@ -17,9 +17,10 @@ import type { Locale } from '../../core/types';
 import { t, tx } from '../../../i18n';
 import type { BeatMove, InstrumentModelSpec, InstrumentSpec, PanThing, Task } from '../schema';
 import type { Action, TaskState } from '../lib/state';
-import { markAt, partsBetween, partsOf, pointerOf, readingOf, scaleOf, unitOf, zoomStretch, type Scale } from '../lib/instrument';
+import { markAt, majorBelow, partsBetween, partsOf, pointerOf, readingOf, scaleOf, unitOf, zoomStretch, type Scale } from '../lib/instrument';
 import { countParts, ghostWeights, readingQty, setStart, setTarget, setValue } from '../lib/measure-tasks';
 import { qtyText } from '../lib/value';
+import { describeInstrument } from '../lib/instrument-description';
 import type { Rect } from './layout';
 import { balanceFrame, dialFrame, jugFrame, magnifierSplit, sideBySide, straightFrame, type Track } from './instrument/geometry';
 import { StraightInstrument } from './instrument/Ruler';
@@ -112,7 +113,7 @@ interface Live {
 export function InstrumentModel(p: InstrumentProps) {
   const members = partsOf(p.model);
   const live: Live | null = p.task && p.state ? { task: p.task, state: p.state, editable: !!p.editable, act: p.act ?? (() => undefined), ghost: !!p.ghost } : null;
-  if (members.length === 1) return <Member s={members[0]!} box={p.box} p={p} live={live} index={0} />;
+  if (members.length === 1) return <Member s={members[0]!} box={p.box} p={p} live={live} />;
   // Side by side, the same box each (one scale); long flat ones stacked.
   const flat = members.every((s) => (s.type === 'ruler' || s.type === 'tape') && s.orient !== 'vertical' && s.look !== 'height-chart');
   const boxes = sideBySide(p.box, members.length, flat);
@@ -125,7 +126,7 @@ export function InstrumentModel(p: InstrumentProps) {
               {tx(s.label, p.locale)}
             </text>
           )}
-          <Member s={s} box={boxes[i]!} p={p} live={i === 0 ? live : null} index={i} />
+          <Member s={s} box={boxes[i]!} p={p} live={i === 0 ? live : null} />
         </g>
       ))}
     </g>
@@ -138,7 +139,7 @@ function valueText(s: InstrumentSpec, v: number, locale: Locale): string {
   return q ? qtyText(q, locale) : String(v / 1_000_000);
 }
 
-function Member({ s, box, p, live, index }: { s: InstrumentSpec; box: Rect; p: InstrumentProps; live: Live | null; index: number }) {
+function Member({ s, box, p, live }: { s: InstrumentSpec; box: Rect; p: InstrumentProps; live: Live | null }) {
   const reduced = useReduced();
   const move = reduced ? null : (p.move ?? null);
   const ms = (m: keyof typeof MOVE_MS) => (move === m ? MOVE_MS[m] : 0);
@@ -151,7 +152,8 @@ function Member({ s, box, p, live, index }: { s: InstrumentSpec; box: Rect; p: I
   const straight = !!p.straight || !!s.straight;
   const tween = useTween(straight ? 1 : 0, MOVE_MS.unroll, move === 'unroll');
   const settled = useSettled(move === 'tip');
-  const label = p.label;
+  const description = set ? { ...s, value: undefined, arrow: undefined, line: undefined, right: st!.mweights.map((weight) => ({ weight })) } : s;
+  const label = [p.label, describeInstrument(description, p.locale)].filter(Boolean).join(' ');
 
   /* the magnifier: the beat's, or the tray's tool on the stretch the reading is in */
   const pointer = sc ? pointerOf(s) : null;
@@ -163,7 +165,11 @@ function Member({ s, box, p, live, index }: { s: InstrumentSpec; box: Rect; p: I
   const counted = sc ? (counting || (reading && st?.mcount) ? st!.mparts : s.count ? partsBetween(sc, s.count.from.units, s.count.to.units) : undefined) : undefined;
   const partList = sc && live?.editable ? (counting && st?.phase === 0 ? countParts(counting) : reading && st?.mcount ? Array.from({ length: sc.parts }, (_, k) => k) : null) : null;
   const shown: InstrumentSpec = counting ? { ...s, highlight: [...(s.highlight ?? []), counting.between[0], counting.between[1]] } : s;
-  const partLabel = (k: number) => (sc ? t(p.locale, 'math.measure.part', { a: valueText(s, markAt(sc, k), p.locale), b: valueText(s, markAt(sc, k + 1), p.locale) }) : '');
+  const partLabel = (k: number) => {
+    if (!sc) return '';
+    const start = Math.max(sc.from, majorBelow(sc, markAt(sc, k)));
+    return t(p.locale, 'math.measure.partAfter', { n: (markAt(sc, k) - start) / sc.minor + 1, a: valueText(s, start, p.locale) });
+  };
   const buttons = (track: Track) =>
     partList && sc ? <PartButtons sc={sc} track={track} parts={partList} counted={st!.mparts} onToggle={(part) => live!.act({ do: 'mpart', part })} enabled={!!live?.editable} label={partLabel} /> : null;
 
@@ -231,7 +237,7 @@ function Member({ s, box, p, live, index }: { s: InstrumentSpec; box: Rect; p: I
   }
 
   return (
-    <g className="ms-inst-member" role={index === 0 && partsOf(p.model).length === 1 ? 'group' : undefined} aria-label={index === 0 && partsOf(p.model).length === 1 ? label : undefined} data-type={s.type}>
+    <g className="ms-inst-member" role="group" aria-label={label} data-type={s.type}>
       {drawing}
       {split && sc && track && zoom && <Magnifier s={shown} sc={sc} track={track} stretch={zoom} pointer={readingPointer(s, sc, mine)} mag={split.mag} counted={!!s.count && s.count.from.units === zoom.from} />}
     </g>

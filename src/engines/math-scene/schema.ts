@@ -1029,8 +1029,8 @@ export const inputSpec = z
     convert: z.object({ from: duration, to: z.enum(['h', 'min', 's']).optional() }).strict().optional(),
     /** Time: the start, end and length of a span, and which one is asked (diagnoses going the wrong way, counting the marks). */
     span: z.object({ start: clockTime.optional(), end: clockTime.optional(), length: duration.optional(), ask: z.enum(['start', 'end', 'length']) }).strict().optional(),
-    /** `duration`: the two boxes (default from the answer: hours and minutes, or minutes and seconds) · `measure` on an instrument: the unit chips offered (default the answer's family). */
-    units: z.union([z.enum(['h-min', 'min-s']), z.array(z.enum(UNITS)).min(2).max(6)]).optional(),
+    /** `duration`: the two boxes · `measure`: the unit chips (default step limits.units, otherwise the answer's family). */
+    units: z.union([z.enum(['h-min', 'min-s']), z.array(z.enum(UNITS)).min(1).max(UNITS.length)]).optional(),
   })
   .strict();
 export type InputSpec = z.output<typeof inputSpec>;
@@ -1449,7 +1449,16 @@ const step = z
     /** The chapter index in the reading panel: 2–4 one-line facts. */
     keyFacts: z.array(bilingual).min(1).max(4).optional(),
   })
-  .strict();
+  .strict()
+  .transform((s) => {
+    const units = s.limits?.units?.filter((u): u is InstrumentUnit => (INSTRUMENT_UNITS as readonly string[]).includes(u));
+    if (!units?.length) return s;
+    for (const task of s.pool) {
+      const spec = task.kind === 'input' ? task : task.kind === 'read-scale' ? task.answer : 'then' in task ? task.then : null;
+      if (spec?.form === 'measure' && spec.units === undefined) spec.units = [...units];
+    }
+    return s;
+  });
 export type Step = z.output<typeof step>;
 
 const question = z

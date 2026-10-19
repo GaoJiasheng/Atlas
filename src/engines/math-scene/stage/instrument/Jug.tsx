@@ -10,6 +10,8 @@
 import { useId, type ReactNode } from 'react';
 import type { InstrumentSpec } from '../../schema';
 import type { Scale } from '../../lib/instrument';
+import { unitOf } from '../../lib/instrument';
+import { unitText } from '../../lib/value';
 import { EyeGlyph } from '../glyphs/measure';
 import type { Rect } from '../layout';
 import { blendTrack, type JugFrame } from './geometry';
@@ -115,6 +117,7 @@ export function JugInstrument(p: JugProps) {
         </g>
       )}
       {sc && track && <Marks s={s} sc={sc} track={track} gap={5} />}
+      {sc && s.scale !== false && <text className="ms-inst__unit" x={b.x + b.w / 2} y={b.y + b.h * 0.08} textAnchor="middle" fontSize={Math.max(16, Math.min(24, b.h * 0.07))} opacity={face} aria-hidden="true">{unitText(unitOf(s), p.locale)}</text>}
       {sc && f.track && t === 0 && <Brackets s={s} track={f.track} offset={f.track.marks.major + f.track.font * 3.2 + 18} defs={p.defs} locale={p.locale} />}
       {sc && track && p.counted && <CountArcs sc={sc} track={track} parts={p.counted} stagger={p.stagger} />}
       {p.children}

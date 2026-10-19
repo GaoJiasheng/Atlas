@@ -41,6 +41,20 @@ describe('sample-lesson-measure (engine fixture)', () => {
     expect(tasks.filter((t) => domainOf(t) !== 'measure-reading').map((t) => t.id)).toEqual([]);
   });
 
+  it('inherits unit chips from the step while respecting explicit task units', () => {
+    const lesson = json('lesson.json');
+    const step = lesson.steps[0];
+    step.limits.units = ['cm', 'm', 'km'];
+    const height = step.pool.find((t: { id: string }) => t.id === 'rt-height');
+    delete height.answer.units;
+    const parsed = mathSceneData.parse({ lesson });
+    const inherited = parsed.lesson.steps[0]!.pool.find((t) => t.id === 'rt-height')!;
+    expect(inherited.kind === 'read-scale' && inherited.answer.units).toEqual(['cm', 'm', 'km']);
+    height.answer.units = ['cm'];
+    const explicit = mathSceneData.parse({ lesson }).lesson.steps[0]!.pool.find((t) => t.id === 'rt-height')!;
+    expect(explicit.kind === 'read-scale' && explicit.answer.units).toEqual(['cm']);
+  });
+
   it('shows every instrument, look and overlay', () => {
     const types = new Set(instruments.map((s) => s.type));
     expect([...types].sort()).toEqual(['balance', 'dial', 'jug', 'ruler', 'tape']);
