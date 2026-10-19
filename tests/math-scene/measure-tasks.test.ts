@@ -87,6 +87,12 @@ describe('read-scale', () => {
     expect(issues(bad).some((m) => m.includes('should be 280 g'))).toBe(true);
   });
 
+  it('can magnify a ruler endpoint without rounding the visible pointer', () => {
+    const ruler = mk({ id: 'near-zoom', kind: 'read-scale', model: { kind: 'instrument', type: 'ruler', unit: 'cm', from: 0, to: 15, major: 1, minor: 1, object: { kind: 'leaf', from: 0, to: '8.3' } }, answer: { answer: 8, form: 'whole', unit: 'cm' }, tools: ['zoom'] });
+    expect(issues(ruler, { nearest: true })).toEqual([]);
+    expect(proveTask(ruler)).toEqual([]);
+  });
+
   it('reads a compound on a two-unit scale and diagnoses the small part misplaced', () => {
     const c = mk({ id: 'c', kind: 'read-scale', model: { kind: 'instrument', type: 'jug', unit: 'ml', sub: { unit: 'l' }, from: 0, to: 2000, major: 500, minor: 50, value: 1250 }, answer: { answer: '1 l 250 ml', form: 'compound' } }, [
       ['compound-place', '1,25'],

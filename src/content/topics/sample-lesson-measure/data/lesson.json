@@ -294,7 +294,11 @@
             "answer": 8,
             "form": "whole",
             "unit": "cm"
-          }
+          },
+          "tools": [
+            "zoom",
+            "count"
+          ]
         },
         {
           "id": "rt-broken",

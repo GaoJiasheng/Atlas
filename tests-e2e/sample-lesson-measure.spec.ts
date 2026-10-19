@@ -54,6 +54,9 @@ test.describe('measuring engine fixture', () => {
     await expect.poll(async () => (await engineInfo(page)).id).not.toBe('sb-prawns');
     await tray(page).locator('[data-skip]').click();
     await expect(tray(page)).toHaveCount(0);
+    await task(page, 'rulers-and-tapes', 2);
+    await tray(page).locator('[data-tool="zoom"]').click();
+    await expect(page.locator('.ms-inst__mag')).toBeVisible();
   });
 
   for (const mode of [

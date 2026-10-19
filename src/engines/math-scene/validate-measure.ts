@@ -293,7 +293,6 @@ export function measureTaskIssues(task: Task, limits: StepLimits | undefined): s
         const bad = answerIs(task, spec, want);
         if (bad) out.push(bad);
       }
-      if (task.tools?.includes('zoom') && r.a !== undefined && s.type === 'ruler') out.push('the magnifier reads a needle, a level or an arrow');
       break;
     }
     case 'set-scale': {
