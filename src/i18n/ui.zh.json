@@ -960,5 +960,12 @@
   "math.measure.describe.pointer": "指示位置在{p}。",
   "math.measure.describe.scaleEnds": "刻度从{a}到{b}，只在两端标数；一共{n}个相等的小格。",
   "math.measure.describe.scaleNone": "一条没有标数的刻度，一共{n}个相等的小格。",
-  "math.measure.partAfter": "标数{a}之后的第{n}小格"
+  "math.measure.partAfter": "标数{a}之后的第{n}小格",
+  "space.card.cycle": "生活史",
+  "space.try.cycle": "生活史",
+  "space.cycle.days": "天",
+  "space.cycle.daysLong": "{n} 天",
+  "space.cycle.lays": "产卵",
+  "space.cycle.inWater": "在水里",
+  "space.cycle.summary": "这个模型里水温 {temp} 时的生活史：{stages}。"
 }

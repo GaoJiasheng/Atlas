@@ -87,6 +87,13 @@ for (const topic of TOPICS) {
 
     await page.keyboard.press('h');
     await expect.poll(async () => (await api()).hud).toBe(false);
+    await expect(page.locator('.atlas-scene')).toHaveAttribute('data-hud', 'off');
+    // The software WebGL renderer can hold the compositor's animation
+    // clock while the cover camera settles. Wait for the actual HUD fade,
+    // then assert its final visibility within the test's existing timeout.
+    await page.locator('.atlas-topbar').evaluate(async (el) => {
+      await Promise.all(el.getAnimations().map((animation) => animation.finished.catch(() => undefined)));
+    });
     await expect(page.locator('.atlas-topbar')).toBeHidden();
     await page.keyboard.press('Escape');
     await expect.poll(async () => (await api()).hud).toBe(true);

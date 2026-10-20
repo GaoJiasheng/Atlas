@@ -960,5 +960,12 @@
   "math.measure.describe.pointer": "The pointer is {p}.",
   "math.measure.describe.scaleEnds": "Scale from {a} to {b}, numbered at its ends only; {n} equal small parts in all.",
   "math.measure.describe.scaleNone": "A scale of {n} equal small parts with no numbers printed.",
-  "math.measure.partAfter": "Small part {n} after the numbered mark {a}"
+  "math.measure.partAfter": "Small part {n} after the numbered mark {a}",
+  "space.card.cycle": "Life cycle",
+  "space.try.cycle": "Life cycle",
+  "space.cycle.days": "d",
+  "space.cycle.daysLong": "{n} days",
+  "space.cycle.lays": "lays eggs",
+  "space.cycle.inWater": "in water",
+  "space.cycle.summary": "Life cycle in this model at {temp}: {stages}."
 }

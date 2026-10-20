@@ -9,7 +9,8 @@
  * the card says what was observed, never right or wrong; "back to before"
  * undoes it) and the data table ("record a row": one row per value of the
  * varied control, a yes / no column with `judge`; in memory only). Below
- * 1024 px, where the top-right card is hidden, the circuit diagram folds in
+ * 1024 px, where the top-right card is hidden, the circuit diagram (the
+ * energy chain, the life-cycle ring) folds in
  * here. Buttons, `[` `]` / `T` and the diagram's switches write the same
  * store value (lib/sim/controls.ts), so the URL (`sim`) follows.
  */
@@ -31,6 +32,7 @@ import { isTimeline } from '../lib/sim/timeline';
 import { setSim, useSimStore, useSimView } from '../hud/sim';
 import { CircuitDiagram } from '../hud/CircuitCard';
 import { EnergyDiagram } from '../hud/EnergyCard';
+import { CycleDiagram } from '../hud/CycleCard';
 import { TryChart } from './TryChart';
 
 function Control({ c, value, onSet, primary }: { c: SimControl; value: SimValue | undefined; onSet(v: SimValue): void; primary: boolean }) {
@@ -255,13 +257,24 @@ export function replay(ui: SpaceUiStore, ids: readonly string[]): void {
   ui.setState({ simReplay: { n: ui.getState().simReplay.n + 1, ids: [...ids] } });
 }
 
+function LifeCycleFold({ file, sim }: { file: PartsFile; sim: SimData }) {
+  const t = useT();
+  return (
+    <details className="space-try__diagram" open>
+      <summary>{t('space.try.cycle')}</summary>
+      <CycleDiagram file={file} sim={sim} />
+    </details>
+  );
+}
+
 export function TryIt({ file, ui }: { file: PartsFile; ui: SpaceUiStore }) {
   const t = useT();
   const { locale } = useSceneContext();
   const store = useSimStore();
   const chapter = useScene<SpaceSceneExt, string | null>((s) => s.chapter);
   const view = useSimView(file);
-  if (!view || !view.card || !chapter) return null;
+  if (!view || !chapter) return null;
+  if (!view.card) return view.sim.lifeCycle ? <LifeCycleFold file={file} sim={view.sim} /> : null;
   const { sim, card, values, outputs } = view;
   const controls = [card.vary, ...(card.also ?? [])].map((id) => sim.controls.find((c) => c.id === id)).filter((c): c is SimControl => c !== undefined);
   const keep = (card.keep ?? []).map((k) => {
@@ -324,6 +337,7 @@ export function TryIt({ file, ui }: { file: PartsFile; ui: SpaceUiStore }) {
           <EnergyDiagram file={file} sim={sim} />
         </details>
       )}
+      {sim.lifeCycle && <LifeCycleFold file={file} sim={sim} />}
     </section>
   );
 }

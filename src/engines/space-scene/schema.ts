@@ -1182,6 +1182,7 @@ export const partsFileBase = z
         repeated: new Set(file.parts.filter((p) => p.repeat !== undefined).map((p) => p.id)),
         withExtra: new Set(file.parts.filter((p) => (p.extra ?? []).length > 0).map((p) => p.id)),
         groups: new Set(file.groups.map((g) => g.id)),
+        contextParts: new Set(file.parts.filter((p) => p.context).map((p) => p.id)),
       }))
         ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['sim', ...x.path], message: x.message });
     }

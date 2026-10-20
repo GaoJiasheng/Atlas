@@ -409,7 +409,7 @@ skill 里 `shoot.py` 的 Playwright / TypeScript 版，驱动 `window.__atlas`�
 pnpm shoot sample-space                      # 每章 + 每个模式 + 额外预设 + hero-clean -> shots/sample-space/en-paper/*.png
 pnpm shoot sample-time --locale zh --theme cinema --size 3840x2160 --suffix _4k
 pnpm shoot sample-time --keys --layout       # 键位同步 + 八尺寸 HUD 布局（有 `--keys` / `--layout` / `--beats` 且没给截图名时不截默认图）
-pnpm shoot ww2 --beats                       # 每一拍一张 -> shots/ww2/en-paper/beat-<章 id>-<n>.png（n = 本章内第几拍，从 1 起）；脚本核对 state().presentation 与 HUD 隐藏，没落到就失败；这拍要标的 id 里没有标注的（锚点在画面外或对应图层没开，多半是内容 / 镜头问题）逐条打印，不算失败——TimeScene 看 `highlight` 与地图标签 `.ts-co`，SpaceScene 看拍的 `labels`（`.space-leaders` 的 `data-want`）与引线标签 `.space-co[data-id]`（组标注是 `group:<id>`）；SpaceScene 再在另一页逐拍打开 `?ch=<章>&b=<n>`，场景与演示里的不同（试一试值、视图、图层、镜头、hide …）或时间线不在终态就失败（`beat links: N of N`）；`--beats` 末尾还按同一办法列出每章自己 `state.highlight` / `state.labels` 里在章节镜头下没有标注的 id（`chapter highlights`），同样不算失败
+pnpm shoot ww2 --beats                       # 每一拍一张 -> shots/ww2/en-paper/beat-<章 id>-<n>.png（n = 本章内第几拍，从 1 起）；脚本核对 state().presentation 与 HUD 隐藏，没落到就失败；这拍要标的 id 里没有标注的（锚点在画面外或对应图层没开，多半是内容 / 镜头问题）逐条打印，不算失败——TimeScene 看 `highlight` 与地图标签 `.ts-co`，SpaceScene 看拍的 `labels`（`.space-leaders` 的 `data-want`）与引线标签 `.space-co[data-id]`（组标注是 `group:<id>`）；SpaceScene 再逐拍全页加载 `?ch=<章>&b=<n>`，场景与演示里的不同（试一试值、视图、图层、镜头、hide …）或时间线不在终态就失败（`beat links: N of N`）；`--beats` 末尾还按同一办法列出每章自己 `state.highlight` / `state.labels` 里在章节镜头下没有标注的 id（`chapter highlights`），同样不算失败
 pnpm shoot sample-space --perf --json out.json   # 每张图后多等 2 s，打印 calls / triangles / fps / gpu；--json 写全部结果
 pnpm shoot sample-time --shots mine.json hero    # 自定义截图表（{name: {chapter?, preset?, modes?, hud?, wait?, js?}}）
 ```
@@ -417,9 +417,10 @@ pnpm shoot sample-time --shots mine.json hero    # 自定义截图表（{name: {
 - `--locale en|zh|all`、`--theme paper|cinema|all`（也接受逗号列表），默认 `en` + `paper`；`shots/` 已 gitignore。主题用 `__atlas.setTheme()` 切换。`--gpu` 改用真 GPU（macOS 走 Metal），默认软件 GL（SwiftShader，与 e2e 相同），fps 数字只在 `--gpu` 下有意义。
 - 默认截图：每章一张；首章上每个注册模式各一张（`presentation` 除外；默认开着的模式截"关"，文件名 `mode-<id>-off`）；非章节预设（`orbit` / `reference` / `world` / `theatre` / `presets.json` 里的）各一张；`hero-clean`（HUD 关；SpaceScene 这时是封面镜头，等 0.8 s 的飞行做完）。截图表里 `preset` 和 `modes` 同时写也落在预设镜头上（不用 `js` 延时）。每次截图前把模式、HUD、暂停恢复到加载时的状态（阅读面板、卡片、泳道这些宿主 / 引擎 UI 状态不复位，自定截图表里的 `js` 要自己摆好）。
 - `--keys`：对 `keymap()` 逐项按键：预设（`state().preset` + `[data-preset]` 的 `aria-pressed`）、模式（状态翻转 + `[data-mode]` 的 `aria-pressed`，再按一次恢复；按钮在控制面板里，面板收起也照样在 DOM 里；按钮被禁用则跳过）、SPACE、H（HUD 隐藏且"H 显示界面"可见）、ESC（HUD 隐藏后恢复）、← →、`,` / `.`（注册了 `beatStep` 的引擎：当前拍在拍表里前后移一格、不进演示、对应刻度 `data-filled`）；最后拖动舞台应变 FREE CAMERA（没有预设亮着），再按预设应收回。
-- `--layout`：3840×2160 / 2560×1440 / 1920×1080 / 1600×900 / 1280×720 / **1024×768** / 900×1200 / 390×844 × 每章 × 额外预设，用 `tests-e2e/hud-layout.ts` 的 `hudLayoutIssues()`（与 `pnpm e2e` 共用同一份逻辑）查 `[data-hud-panel]` 出屏 / 重叠（1 px 容差）/ 横向溢出 / 内容比面板宽，并存 `layout-WxH.png`；舞台带 `data-stage-free="w h"`（MathScene：模型的空间）时另查"舞台被挤"（宽 < 200 px（手机 150）或高 < 100 px）。每个尺寸再在新页面里**从链接打开**每一章（`?ch=<章>&b=2&theme=…`：分享出去的节拍链接，HUD 和阅读面板在加载时排版，不是换章后），同样查一遍，存 `layout-WxH-linked.png`（没有节拍的引擎忽略 `b`）。
+- `--layout`：3840×2160 / 2560×1440 / 1920×1080 / 1600×900 / 1280×720 / **1024×768** / 900×1200 / 390×844 × 每章 × 额外预设，用 `tests-e2e/hud-layout.ts` 的 `hudLayoutIssues()`（与 `pnpm e2e` 共用同一份逻辑）查 `[data-hud-panel]` 出屏 / 重叠（1 px 容差）/ 横向溢出 / 内容比面板宽，并存 `layout-WxH.png`；舞台带 `data-stage-free="w h"`（MathScene：模型的空间）时另查"舞台被挤"（宽 < 200 px（手机 150）或高 < 100 px）。每个尺寸再全页加载，**从链接打开**每一章（`?ch=<章>&b=2&theme=…`：分享出去的节拍链接，HUD 和阅读面板在加载时排版，不是换章后），同样查一遍，存 `layout-WxH-linked.png`（没有节拍的引擎忽略 `b`）。
 - 一直收集 console error / warning、pageerror、同源 4xx/5xx 和任何指向外部主机的请求（违反"无运行时外部请求"）；GPU / SwiftShader 噪音与 smoke.spec.ts 同一过滤。退出码 1 = 有 error / pageerror / 外部请求 / 键位失败 / 布局问题（warning 只打印）。
 - 轨道阻尼按帧数衰减，软件 GL 下拖动后要几秒才回写相机，`--keys` 的 FREE CAMERA 检查已按此放宽。
+- 拍链接与排版链接都在本会话的同一个标签页里整页加载（`Session.load`）：每次是新的 document 和 store，前一个 WebGL 场景随之释放——不再开第二个标签页，否则留在后面的演示场景（一直开着的流在暂停时也照画）会和要检查的场景抢软件 GL；舞台 60 s 内没有 ready 就让这次运行失败。查完再按会话打开时的样子重新加载主题（`Session.reopen`：主题页 + 当前主题色），后面的检查照旧从加载状态开始。
 
 ### HUD 缩放与响应式
 
@@ -1022,11 +1023,11 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
 
 ### SpaceScene · 试一试（sim）
 
-docs/22 §4.3（E-SIM 核心，磁铁与电路共用）+ docs/23 §4（电路模型与电路图卡）。一个 SpaceScene 主题可以在 `parts.json` 里加一段 `sim`：读者能改的几个量（控件）、一个纯函数模型、模型给出的量（输出），以及控件 / 输出到零件、流、动画的绑定。没有独立的 Simulation 引擎（docs/03 §C）。代码：`sim-schema.ts`（zod 与交叉校验）、`lib/sim/`（`controls.ts` 值的合成与 URL、`index.ts` 模型注册表、`circuit.ts`、`magnet.ts`、`bind.ts`、`trial.ts`、`diagram.ts`，全部纯函数、有单测 `tests/space-scene/sim.test.ts`）、`explorer/TryIt.tsx`（试一试卡片）、`hud/CircuitCard.tsx`（电路图卡）、`hud/sim.ts`（HUD 读写的入口）。
+docs/22 §4.3（E-SIM 核心，磁铁与电路共用）+ docs/23 §4（电路模型与电路图卡）。一个 SpaceScene 主题可以在 `parts.json` 里加一段 `sim`：读者能改的几个量（控件）、一个纯函数模型、模型给出的量（输出），以及控件 / 输出到零件、流、动画的绑定。没有独立的 Simulation 引擎（docs/03 §C）。代码：`sim-schema.ts`（zod 与交叉校验）、`lib/sim/`（`controls.ts` 值的合成与 URL、`index.ts` 模型注册表、`circuit.ts`、`magnet.ts`、`force.ts`、`energy.ts`、`lifecycle.ts`、`bind.ts`、`trial.ts`、`diagram.ts`，全部纯函数、有单测 `tests/space-scene/sim.test.ts`）、`explorer/TryIt.tsx`（试一试卡片）、`hud/CircuitCard.tsx`（电路图卡）、`hud/sim.ts`（HUD 读写的入口）。
 
 ```jsonc
 "sim": {
-  "kind": "circuit",                                   // circuit | magnet | force | energy：lib/sim/<kind>.ts
+  "kind": "circuit",                                   // circuit | magnet | force | energy | life-cycle：lib/sim/<kind>.ts（life-cycle → lifecycle.ts）
   "controls": [                                        // ≤ 16，id 全主题的 sim 里唯一
     { "id": "main", "kind": "toggle", "default": true, "label": {en, zh} },
     { "id": "cells", "kind": "step", "values": [1, 2, 3], "default": 2, "label": {en, zh}, "unit"?: "cm" },
@@ -1088,7 +1089,7 @@ state:
 - **试一试卡片**（`readerTop`，节拍行之后、详情之前；docs/08 §2 铁律 d）：标题 TRY IT / 试一试 + 键位提示；三行芯片（改变 signal 实心、不变 cold 描边、观察墨色描边）；控件：开关钮（`role="switch"`）、‹ 值 ›（`role="group"`，两端禁用）、选项钮（`role="radiogroup"` / `radio`），全部 ≥ 44 px，`data-sim-control` / `data-sim-value`；观察量大号读数 + SIM 芯片"在这个模型里"；先猜后看：选项 → 应用 `start`、读"之前"、应用 `change` → "你猜：… · 观察到：…"（观察 = `lib/sim/trial.ts outcomeOf`：变为零 / 变号 / ±5 % 内差不多一样 / 变大 / 变小，用 `means` 相同的选项的话说），「回到改变前」恢复改变前的值；换章、拍、深链接时清掉。数据表：「记一行」按改变量的值一行（同值覆盖，≤ 12 行，只在内存：刷新即清），列 = 改变量 + 观察量（+ 是 / 否）。手机在底部抽屉里同样可用。
 - **键**：`[` `]` = 本章 `vary` 的上一值 / 下一值（开关 = 关 / 开，选择 = 上 / 下一个选项），`T` = 本章卡片里第一个开关（`vary` 或 `also`），`G` = 再跑一次（卡片有 `replay` 时）；注册为命令 `sim-prev` / `sim-next` / `sim-toggle` / `sim-replay`（`SIM_KEYS`），和按钮、电路图、测试 API 写同一个 store 值（`G` 与「再跑一次」按钮写引擎 UI store 的同一个计数 `simReplay`）；状态行键位提示写 `[ ] T TRY IT`（有 `G` 时 `[ ] T G TRY IT`）。没有卡片的章不注册。
 - **电路图卡**（有 `circuit.diagram` 时代替右上零件链路卡，标题 CIRCUIT DIAGRAM / 电路图；< 1024 px 收进试一试卡片里可折叠的一节）：节点的 `d` 是图上坐标，边的 `via` 是直角拐点，符号放在最长的一段直线上（`at`，默认中点）：电池 = 每节一对长（+）短（−）线、翻转的那节反过来，灯 = 圆内叉（按亮度填 `--lamp`，拔掉时虚线），开关 = 两个接线点 + 刀片（断开时抬起），缺口 = 两个接线点 + 材料（导体实线、铅笔芯虚线、绝缘体空着），蜂鸣器、电机（M）；有电流的边用 `--current` 加粗并带方向箭头（从正极出发），短路时整张图 `--hot`；开关符号 = 拨真开关（`role="button"`、`aria-pressed`、44 px 命中区，Enter / Space），其他符号 = 选中边的 `part`，选中的零件对应符号描 signal；`diagram.labels` 是图上的小字（"手电筒"）。没有 `d` 的节点不画。
-- **测试与 QA**：`__atlas.engine.sim()` → `{ values, set, outputs, try, table, timeline, replays }`（`timeline`：每条时间线输出在舞台上的 `{ t, duration, playing, slow }`，模型秒；`replays`：再跑一次的计数），`__atlas.engine.setSim({ id: value })`（逐个走 `setSimControl`，有非法值返回 false），`__atlas.engine.simSeek(id, t)`（把时间线停在模型时刻 `t`，截过程中的一帧），`__atlas.engine.anchor(id)`（零件标注锚点此刻在舞台上的 `{ x, y, shown, onScreen }`，CSS px，跟着姿态、试一试 offset 和时间线走）；`__atlas.state().sim` = 设过的值。`pnpm shoot <slug> --keys` 测 `[` `]` `T` `G`（在第一个有卡片的章：`]` 前进一值、`[` 回来、URL 带 `sim`；`T` 翻转一个开关再翻回；`G`：计数加一、有时间线从头开始播放）；`--beats` 每拍照常截图（拍的 `sim.set` 随 `beatScene` 应用；时间线直接是终态），之后在另一页逐拍打开 `?ch=<章>&b=<n>`：场景字段（试一试值、视图、图层、镜头、hide …）与演示里的不同、或有时间线不在终态，记为拍失败。
+- **测试与 QA**：`__atlas.engine.sim()` → `{ values, set, outputs, try, table, timeline, replays }`（`timeline`：每条时间线输出在舞台上的 `{ t, duration, playing, slow }`，模型秒；`replays`：再跑一次的计数），`__atlas.engine.setSim({ id: value })`（逐个走 `setSimControl`，有非法值返回 false），`__atlas.engine.simSeek(id, t)`（把时间线停在模型时刻 `t`，截过程中的一帧），`__atlas.engine.anchor(id)`（零件标注锚点此刻在舞台上的 `{ x, y, shown, onScreen }`，CSS px，跟着姿态、试一试 offset 和时间线走）；`__atlas.state().sim` = 设过的值。`pnpm shoot <slug> --keys` 测 `[` `]` `T` `G`（在第一个有卡片的章：`]` 前进一值、`[` 回来、URL 带 `sim`；`T` 翻转一个开关再翻回；`G`：计数加一、有时间线从头开始播放）；`--beats` 每拍照常截图（拍的 `sim.set` 随 `beatScene` 应用；时间线直接是终态），之后逐拍全页加载 `?ch=<章>&b=<n>`：场景字段（试一试值、视图、图层、镜头、hide …）与演示里的不同、或有时间线不在终态，记为拍失败。
 - **token**：`--lamp`（灯丝发光，暖白）、`--current`（电流粒子，暗金；短路用 `--hot`）、`--f-gravity` / `--f-friction` / `--f-elastic` / `--f-push`（力的箭头，见「力的箭头」）、`--en-light` / `--en-electrical` / `--en-kinetic` / `--en-sound` / `--en-heat` / `--en-potential`（能量形式，见「能量」）。
 - **已知限制**：读者不能自己拖元件、连线、拖磁铁和指南针、推小车（docs/23 §4.5、docs/22 §4.5、docs/30 §4.6，v2：场线 / 时间线要在运行时重算）。
 
@@ -1335,6 +1336,67 @@ docs/31 §4（E-EN1–EN8）。`sim.kind: "energy"`：同一个场景里跟着�
 - **token**（docs/08 §1）：`--en-light` 芥黄（纸底上最亮的一档）、`--en-electrical` 蓝、`--en-kinetic` 青绿、`--en-sound` 紫、`--en-heat` 橙红、`--en-potential` 橄榄褐；paper / cinema 各一套。单测 `energy-colors.test.ts` 从 `tokens.css` 读出来校验：每色对底色 ≥ 3:1；正常视觉与红色盲、绿色盲、蓝色盲模拟（Machado 2009，严重度 1，线性 RGB）下两两 ΔE*ab ≥ 10。
 - **测试与 QA**：`__atlas.engine.energyBars()` → `{ <时间线 id>: { potential, kinetic, lost, shown } }`（此刻画着的值）；`pnpm shoot --beats` 每拍检查画着的能量条加起来 = 100 ± 0.5（不等记为拍失败）；其余同「时间线与回放」（`simSeek`、`G`）。
 - **数字纪律**（docs/31 §0-10 与 2026-10-18 事实审计 `art/codex-forces-energy/energy-facts.md`）：链上的百分数、示意的子模型参数都是 SIM / 示意，卡片与试一试卡都写"在这个模型里"。审计改过的几处已体现在样板里：发电机上限取 imax = √(3 W ÷ 12 Ω) = 0.5 A（SIM-G-limit：原来的 0.55 A 会趋向 3.63 W）；同样亮的 LED 链从 25 % 起（`start`，SIM-H-same-light）；秋千的势能条按原始能量归一（SIM-D-bars）；发条的动能从发条里来、停下时为 0（SIM-E-bars）；落球高度量球底（ENG-MODEL-02）。
+
+### SpaceScene · 试一试 · 生活史（life-cycle）
+
+docs/33 §4（E-M1 模型、E-M2 生活史环卡）。`sim.kind: "life-cycle"`：一种动物的生活史。数据里是**有来源的实测历期**（每个温度一行：每个阶段的平均天数 + 论文自己的孵化到成虫总数），模型只做推导：第 d 天在哪一阶段、到成虫还有几天、各段与各组的天数、多久倒一次水会不会有成虫飞走、环流转多快——这些都是 SIM（docs/30 D2：不做通用查表模型，表是测量，显示的数由模型算出）。纯函数、同步、确定性（< 0.1 ms）。代码：`lib/sim/lifecycle.ts`（模型）、`lib/sim/cycle.ts`（环卡的版式与读屏文字）、`hud/CycleCard.tsx`（右上卡）、`explorer/TryIt.tsx`（< 1024 px 收进试一试卡）、`sim-schema.ts`（`lifeCycleSchema`、`lifeCycleIssues`、`quantityKind` 的 `life-cycle` 一支、状态标签）、`scripts/validate-content.ts`（第二个环的 `link`）；单测 `tests/space-scene/{lifecycle,cycle-card}.test.ts`，样板 `tests/space-scene/fixtures/aedes-cycle.ts`（docs/33 §4.2 的完整数据：埃及伊蚊 S16 表 2 四个温度，可当作者模板）；示例主题 `sample-life-cycle`（draft，五章：背景章 + 天数卡 + 水温卡（表、小图、先猜后看）+ 倒水卡 + 两个环）；e2e `tests-e2e/sample-life-cycle.spec.ts`。
+
+```jsonc
+"sim": {
+  "kind": "life-cycle",
+  "controls": [
+    { "id": "temp", "kind": "step", "values": [20, 25, 28, 32], "default": 28, "unit": "°C", "label": {…} },
+    { "id": "day", "kind": "step", "values": [0, 1, 2, 3, 4, 5, 6, 7, 8], "default": 0, "unit": "d", "label": {…} },
+    { "id": "every", "kind": "step", "values": [2, 4, 6, 8, 10, 14], "default": 14, "unit": "d", "label": {…} },
+    { "id": "wipe", "kind": "toggle", "default": false, "label": {…} },
+    { "id": "compare", "kind": "toggle", "default": false, "label": {…} }      // 只给环卡（章 / 拍 sim.set 或卡上的开关），不进试一试卡
+  ],
+  "outputs": [
+    { "id": "stage", "kind": "state", "states": { "egg": {…}, "l1": {…}, …, "adult": {…} } },   // 从 start 到最后一个阶段都要有标签（egg 可写可不写）
+    { "id": "to-adult", "unit": "d", "decimals": 1 },
+    { "id": "larva-days", "from": "days:larva", "unit": "d", "decimals": 1 },
+    { "id": "pupa-days", "from": "days:pupa", "unit": "d", "decimals": 1 },
+    { "id": "days-left", "unit": "d", "decimals": 1 },
+    { "id": "temp-now", "from": "control:temp", "unit": "°C", "decimals": 0 },
+    { "id": "on-pupa", "from": "on:pupa" },                                   // 1 / 0，给 tint 绑定
+    { "id": "head", "from": "size:head", "unit": "mm", "decimals": 2 },       // 只在 size 有来源时写
+    { "id": "adults", "kind": "state", "from": "emptying:adults", "states": { "none": {…}, "some": {…} } },
+    { "id": "eggs-left", "kind": "state", "from": "emptying:eggs", "states": { "yes": {…}, "none": {…} } },
+    { "id": "rate", "kind": "vector" }
+  ],
+  "bind": [
+    { "output": "stage", "part": "follow-marker", "pose": { "l1": "marker-l1", …, "adult": "marker-adult" } },
+    { "output": "eggs-left", "part": "eggs", "visible": { "eq": "yes" } },
+    { "output": "adults", "part": "escaped-adults", "visible": { "eq": "some" } },
+    { "output": "rate", "flow": "life-cycle", "intensity": { "full": 1 } }
+  ],
+  "lifeCycle": {
+    "temp": "temp", "day": "day",                     // 两个步进控件
+    "start": "l1",                                    // 第 0 天 = 孵化；之前的阶段（卵）不计天
+    "stages": [                                       // 环上的顺序，最后一个 = 成虫（不计天）；in: water | wall | air | land
+      { "id": "egg", "in": "wall", "part": "eggs", "label": {…}, "note": { "en": "waits for water", "zh": "等水来" } },
+      { "id": "l1", "in": "water", "part": "larva-l1", "label": {…} }, …,
+      { "id": "adult", "in": "air", "part": "thorax", "label": {…} }
+    ],
+    "groups": { "larva": { "stages": ["l1", "l2", "l3", "l4"], "label": { "en": "Larva", "zh": "幼虫（孑孓）" } } },   // 或只写数组（环卡不写括号名）
+    "days": {                                         // 键 = temp 的每个值；各段 + 可选 total（论文的孵化到成虫）
+      "28": { "l1": 1.88, "l2": 0.68, "l3": 1.00, "l4": 1.82, "pupa": 1.86, "total": 7.23 }, …
+    },
+    "size"?: { "head": { "unit": "mm", "values": { "l1": …, "l4": … } } },
+    "emptying"?: { "every": "every", "wipe"?: "wipe" },
+    "rate"?: { "flow": "life-cycle", "paths": ["ring", "out", "lay"], "reference": 28 },
+    "card"?: { "compare": { "control": "compare", "label": {…}, "stages": [ { "id": "egg", "label": {…} }, { "id": "nymph", … }, { "id": "adult", … } ],
+                            "link"?: { "topic": "grasshopper", "chapter": "nerves-and-growing-up", "label": { "en": "See the grasshopper", "zh": "看蝗虫" } } } }
+  }
+}
+```
+
+- **模型**（`lib/sim/lifecycle.ts`）：取 `temp` 当前值那一行；计天的阶段 = 从 `start` 到最后一个阶段之前；写了 `total` 时各段 × total ÷ Σ（论文的总数是全体个体的平均、各段样本数不同，所以 Σ 与总数差一点），不写 = Σ；最后一个边界就是总数本身（不因缩放漂移）。`stage` = 第 `day` 天落在哪一段（左闭右开：边界那天属于下一段；≥ 总数 = 最后一个阶段；永远不会是 `start` 之前的阶段——卵由环卡上的 `note` 和字幕讲）。
+- **量**（输出的 `from`）：`stage`（状态）、`to-adult`（总数）、`days-left` = max(0, 总数 − day)、`days:<阶段>`（缩放后的段长）、`days:<组>`（组内各段之和）、`on:<阶段>`（1 / 0）、`size:<量>`（当前阶段的值，没有 = NaN 显示 `—`）、`control:<控件>`（步进的值、开关 1 / 0：PLATE 的水温回显）、`emptying:adults`（`every` > 总数 → `some`，否则 `none`：按平均历期画的界线，个体有快有慢，内容要写明）、`emptying:eggs`（`wipe` 开 → `none`，否则 `yes`：卵在水线以上、耐干）、`rate`（向量 `<rate.flow>:<路径>` → 参考温度的总数 ÷ 当前总数，绑流的 `intensity`（速度模式），`paths` 要列全这条流的路径，没列的路径会停）。`SEPARATE_EXPERIMENTS['life-cycle'] = false`：PLATE 块尾照常写状态（本章卡片观察的状态，否则卡片控件或本章 `set` 会改的第一个状态，否则 `stage`）。
+- **validate**（`sim-schema.ts lifeCycleIssues`）：`temp`、`day`、`every` 是步进控件（`day` ≥ 0、`every` > 0），`wipe`、`compare.control` 是开关；`temp` 的每个值都有一行、没有多余的行；温度键写成规范的数（`28`，不是 `28.0`）；每行恰好覆盖计天的阶段（各 > 0、有限），写给卵或成虫的天数报"不计天"，`|total − Σ| ≤ 5 % Σ`（抄错；含边界）；阶段 id 唯一、不能叫 `total`，有 `adult` 时它必须是最后一个，`start` 存在且不是最后一个；`part` 存在且不是 context 零件；组的成员是相邻、按顺序的计天阶段，组名不与阶段重名；`size` 的键是阶段；`rate.flow` 是有 `paths` 的流、`paths` 是它的全部路径（不重复）、`reference` 是 `temp` 的一个值；输出的 `from` 是本模型的量（`days:egg`、`size:` 没有 `size` 数据、`emptying:` 没有 `emptying` 数据都报）、种类对、`stage` / `emptying:*` 的每个可能状态有标签、不写永远不会出现的状态。`pnpm validate` 另查 `card.compare.link` 的主题与章存在（同 `<TopicLink>`）。
+- **生活史环卡**（`hud/CycleCard.tsx`，有 `sim.lifeCycle` 时代替右上的零件链路卡；标题 LIFE CYCLE / 生活史；< 1024 px 收进试一试卡片里可折叠的一节，同电路图卡、能量链卡；没有试一试卡的章（如对照章）在阅读面板里单独放这一节，开关和链接照样在；手机同其他右上卡隐藏，试一试卡里照常有）：版式在 `lib/sim/cycle.ts ringLayout`（纯函数、确定）：阶段等距排在圆上，**第一个在 12 点、顺时针**；相邻两站之间一段带箭头的弧（hairline 墨线，箭头在弧中点）；名字在圈外、弧的字在圈外两站之间：计天的阶段写当前水温下的段长（`1.9 d` / `1.9 天`，1 位小数，= 模型的 `days:<阶段>`），`start` 之前的阶段写它的 `note`（"waits for water / 等水来"），最后一个阶段回到第一个的弧写"lays eggs / 产卵"；`in: water` 的连续几站后面一条 `--cold` 15 % 的宽弧带（圈内），带上沿弧写 IN WATER / 在水里；`wall` 的站旁一小段竖线（壁）；组的阶段小一号、圈内一个括号 + 组名。圆心 `≈ 7.2 d` + 水温。当前 `stage` 的站实心 signal，其余描边；天数与圆心读数在值变时 0.3 s 淡入（减少动态时不淡）。站是按钮（44 px 命中区，Enter / Space，`aria-current="step"` 标当前阶段）：点 = 选中该阶段的 `part`，选中的描 signal。有 `card.compare` 时卡下一个开关（`role="switch"`，字 = 那个控件的 `label`，写同一个 `compare` 控件），开时圈下面再画第二个小环（只有站、箭头和名字，不写天数；右上卡只有 260–280 px 宽，并排放不下圈外的字）和链接（字 = `link.label`，如"See the grasshopper / 看蝗虫"；`link` → `/<语言>/topics/<主题>/?ch=<章>`）。命中方块是 viewBox 的 54 单位：卡片画到 ≥ 82 %（1280 px 宽的右列）时 ≥ 44 CSS px；圈上的字最小 10 px。底下一行 `SIM` + "In this model / 在这个模型里"。读屏：`aria-label` = `cycleSummary`（"Life cycle in this model at 28 °C: Egg, waits for water; Larva 1, 1.9 days; …; Adult, lays eggs." / "这个模型里水温 28 °C 时的生活史：卵，等水来；一龄，1.9 天；…；成虫，产卵。"）。i18n：`space.card.cycle`、`space.try.cycle`、`space.cycle.*`。
+- **测试与 QA**：`__atlas.engine.sim()` 的 `outputs.stage`、`outputs.rate`；环卡 `.space-cy[data-stage]`、`[data-node][data-on]`、`[data-arc]`、`[data-second]`、`[data-cycle-compare]`；`pnpm shoot <slug> --beats --keys` 照常（`]` 走一天）。
+- **数字纪律**（docs/33 D5、§2.4）：天数是一项实验室研究的雄蚊平均值，卡片、PLATE、试一试都带 SIM / "在这个模型里"；正文写取整的"约 7 天"。同一个模型以后给课纲点名的其他动物（蝴蝶、青蛙、鸡、甲虫、蟑螂）和植物复用：换 `stages`、`days`、`in`。
 
 ### 章节怎么写（`state`）
 
