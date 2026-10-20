@@ -638,12 +638,12 @@ SpaceScene / Model3DStage，paper 默认、cinema 可切。原型：`archetypes.
 
 ### 4.6 引擎验收
 
-- [ ] 单测 `matter.test.ts`：§2.4 全表（T1 五个质量、T2 五个读数、T3 四个液面与体积、T4 五档质量 / 空气 / 软硬、杯子三种状态的 H / x / 纸巾 / 气泡、T5 五档 × 三种、T6 六档的读数 / 空气 / `vs-sum` / 气泡）；不变量：`pour` 四种容器的体积相同、液面严格不同；`squeeze` 的空气单调减、水与沙恒定；`pump` 每下增量相同；`pores` 拐点在孔隙处；确定性；URL `sim=container.flask~load.2` 往返。
-- [ ] 单测 `fill.test.ts`：圆柱、截头圆锥、球冠、带空腔的轮廓、`box` 的体积与解析式相符（相对误差 < 1e-6）；`levelForVolume(volumeBelow(y)) = y`；`below` 的偏移；`capacity`；剪裁后的轮廓封闭；`meniscus` 不改变体积的读法（只是装饰，单测写明）；100 帧缓动的重建耗时。
-- [ ] validate 报错用例：控件不存在 / 种类不对、选项不在 `objects`、`floats` 的物体放进 `displace`、`pour.liquids` 缺选项、液体零件不是 `lathe` / `box` 或有 `extra`、`pour.volume` 超容积、杯子没入不完全、孔隙越界、输出的 `from` 不是本模型的量、`fill` 的输出是状态、同一零件两条 `fill`。
-- [ ] e2e（`sample-matter`）：深链接 `?ch=…&sim=container.bowl` 碗里有水、量筒是空的、`__atlas.engine.fill` 的液面 = `level` 读数；`]` 换容器时两个液面同时缓动；`load.4` 柱塞下移、`load.0` 回弹停在 20 ml；杯子 `pushed` + 开孔：纸巾变色、气泡路径出现、盆里水面回落；T6 第 2 档气泡出现、第 3 档消失；中文页；手机 390 × 844 卡片可用。
-- [ ] `sample-space`、`sample-forces`、`sample-energy`、`sample-life-cycle`、`forces`、`mosquito`、`water` 截图与 `--beats` 不回归（`fill` 与流按路径显隐不影响旧数据）。
-- [ ] 门槛全绿（`pnpm check`、`validate`、`test`、`build`、`e2e`）。
+- [x] 单测 `matter.test.ts`：§2.4 全表（T1 五个质量、T2 五个读数、T3 四个液面与体积、T4 五档质量 / 空气 / 软硬、杯子三种状态的 H / x / 纸巾 / 气泡、T5 五档 × 三种、T6 六档的读数 / 空气 / `vs-sum` / 气泡）；不变量：`pour` 四种容器的体积相同、液面严格不同；`squeeze` 的空气单调减、水与沙恒定；`pump` 每下增量相同；`pores` 拐点在孔隙处；确定性；URL `sim=container.flask~load.2` 往返。
+- [x] 单测 `fill.test.ts`：圆柱、截头圆锥、球冠、带空腔的轮廓、`box` 的体积与解析式相符（相对误差 < 1e-6）；`levelForVolume(volumeBelow(y)) = y`；`below` 的偏移；`capacity`；剪裁后的轮廓封闭；`meniscus` 不改变体积的读法（只是装饰，单测写明）；100 帧缓动的重建耗时。
+- [x] validate 报错用例：控件不存在 / 种类不对、选项不在 `objects`、`floats` 的物体放进 `displace`、`pour.liquids` 缺选项、液体零件不是 `lathe` / `box` 或有 `extra`、`pour.volume` 超容积、杯子没入不完全、孔隙越界、输出的 `from` 不是本模型的量、`fill` 的输出是状态、同一零件两条 `fill`。
+- [x] e2e（`sample-matter`）：深链接 `?ch=…&sim=container.bowl` 碗里有水、量筒是空的、`__atlas.engine.fill` 的液面 = `level` 读数；`]` 换容器时两个液面同时缓动；`load.4` 柱塞下移、`load.0` 回弹停在 20 ml；杯子 `pushed` + 开孔：纸巾变色、气泡路径出现、盆里水面回落；T6 第 2 档气泡出现、第 3 档消失；中文页；手机 390 × 844 卡片可用。
+- [x] `sample-space`、`sample-forces`、`sample-energy`、`sample-life-cycle`、`forces`、`mosquito`、`water` 截图与 `--beats` 不回归（`fill` 与流按路径显隐不影响旧数据）。
+- [x] 门槛全绿（`pnpm check`、`validate`、`test`、`build`、`e2e`）。
 
 ### 4.7 不做（v2）
 
@@ -954,4 +954,30 @@ SpaceScene / Model3DStage，paper 默认、cinema 可切。原型：`archetypes.
 
 ## 9. 施工记录 / 已知差距
 
-（施工后补：§9.1 引擎（E-MA1 + E-MA2）、§9.2 主题施工；与 spec 的差异表、计数、性能、门槛、已知差距、给 Gavin 的事项。）
+### 9.1 引擎 E-MA1 + E-MA2（Codex，2026-10-20）
+
+本轮只施工引擎与 `sample-matter` draft 夹具；没有创建或展开 `states-of-matter` 正文。提交 `31b7907`（`codex/space-matter`），不 merge、不 push。
+
+**E-MA1**：`lib/sim/matter.ts` 七个可选纯子模型 `weigh` / `displace` / `pour` / `cup` / `pump` / `squeeze` / `pores`；严格作者 schema 与引用校验独立在 `matter-schema.ts`，共享注册文件只加一个种类、一个模型字段与短分支，便于同 `light` 合并。`SIM_KINDS`、`simQuantities`、`quantityKind`、状态标签、`SEPARATE_EXPERIMENTS.matter = true` 完整注册；没有 timeline，沿用 `simTimelineChannels` 的 null 分支。`evaluateSim` / `simQuantities` 可选第五参数传零件；`evaluateSimOnStage` 把几何交给模型，舞台、PLATE、试一试、记录、先猜后看用同一个容器轮廓求液面。旧磁铁载体最小 `{ at }` 契约保留。
+
+§2.4 所有显示数字、压力、空气压缩率、质量 / 体积比例与孔隙拐点均由单测钉住，无数字偏差。模型除 `weigh.step` 指定的秤分度外保留全精度（弹珠排水 2.145 ml、水的微小压缩等），UI 仍按输出 `decimals` 格式化。无用 objects 经 validator 报 warning；液体容积上界对 matter 量和 step 控件静态核对。
+
+**E-MA2**：`lib/fill.ts` 水平裁剪、帕普斯体积、40 次二分反解、容积、下垫体积 `below`、装饰弯月面与体积三次缓动。支持带杯子空腔的弱简单轮廓；拒绝非轴自交、未封闭轮廓。支持直立全周 lathe / box、Y 缩放 / 镜像、圆轮廓等比 X/Z 缩放与 box 的 Y 轴旋转。倾斜容器、部分 arc 与椭圆横截面不属于本轮，校验明确拒绝。
+
+`fillGeometry.ts` 采用 **48 径向段 + 预分配位置 / 法线 / UV / index 缓冲**，只写变化的顶点与 drawRange；没有逐帧 new geometry / material。与 §4.3 的逐帧 new LatheGeometry 表述不同，这是保留同一裁剪轮廓与体积结果的性能改进。平顶、环形空腔、箱体、圆形 / 矩形弯月面均在同一 mesh；弯月面不计入体积读数。小于容积 0.1% 不画、溢出夹满。液体正常被剖切，切面用液体自身颜色；非 shell 液体 X-RAY 不淡化。
+
+几件液体用同一帧的时钟按体积缓动，倒出 / 倒入守恒；瞬切、拍链接、减少动态效果与 REFERENCE 到终值，瞬切后不会重新从旧的缓动起点播放。原有 `pose` / `offset` / `settle` / `count` / `tint` 不改契约。流 `visible.paths` 独立控制路径透明度，并与原有 intensity、density、整流开关相乘；深链接从目标透明度开始，实时变化仍淡入淡出，不增加绘制。
+
+**QA API 与截图**：现有 `SceneControls.test` 自动挂到 core 的 `__atlas.engine`，由 View 提供 `fill(id) → { volume, level, shown }`（m³、primitive 局部 Y）、`flow(id)`（当前逐路径可见性）、`fillBenchmark(id)`（100 次重建的暖机五组中位数，恢复原几何）。`scripts/shoot.ts --beats` 对每拍和每个拍链接核对全部液体的模型体积、反解液面、pour 高度与 cup 杯内 / 盆外读数，液面容差 0.5 mm。
+
+**夹具**：`sample-matter` 45 个零件（全部 primitive，部分带 extra）、6 组、6 实验章 + 背景章、10 个 fill、1 条双路径气泡流；六张卡包括记录、小图与先猜后看。轮廓覆盖直筒、锥形瓶、半球碗、空腔与 box，沙上水用 below。仅夹具文字占位，状态 draft；实物识别级建模与正式内容仍属于后续主题施工。视觉复核修了液体错误使用不透明 token 材质（改 membrane + token tint）、过大气泡（24 点、size 0.08）和 centered repeat 砝码穿过托盘（整叠基准抬高）。
+
+**测试与性能**：新增 `matter.test.ts` 58 项、`fill.test.ts` 17 项；完整作者模板 `tests/space-scene/fixtures/matter-bench.ts`。覆盖 §2.4 全表、不变量、URL、schema 错误、独立路径、解析体积 / 反解、空腔、装饰弯月面、变换、缓冲复用与复杂轮廓预算。全库 111 文件 / 3,033 单测通过；共享机器并行重负载下原有地理测试出现 5 秒超时，使用 `VITEST_MAX_FORKS=2 VITEST_MIN_FORKS=1 pnpm test` 全量通过，未跳题、未放宽断言。`sample-matter.spec.ts` 15 项覆盖真实缓动、深链接、杯子 / 气泡、柱塞回弹、图表、预测、中文 cinema、减少动态与 390 × 844 / 44 px。
+
+暖机全模型平均 0.0312 ms / 次。Node 100 帧重建中位数 1.1622 ms；headless Chromium / Apple M5 Max Metal 对全部 10 件液体测量，最慢半球碗 100 帧 2.3 ms（< 5 ms）。这些是 CPU 几何成本，不把软件渲染的 FPS 当 GPU 性能。最终 hero 在 paper / cinema 均为 51 calls / 41,880 三角形 / 62 geometries / 10 textures，1920 × 1080、DPR 1、Metal 60 fps；各章 HUD 8–21 calls。页面 JS 471.9 KB gzip / 11 files（变更前共享场景 467.6 KB）。
+
+**截图与回归**：夹具 paper / cinema 合计 42 拍及 42 个拍链接、54 个 key 检查、每套 8 个布局尺寸全部通过，0 note / error / 外部请求；逐张打开并看完 `shots/sample-matter/` 的 90 张 PNG（42 拍、32 layout、12 章 HUD、2 剖切、2 hero）。五个指定真实主题 `forces` / `energy-conversion` / `mosquito` / `magnets` / `circuits` 的 `--beats --keys` 全过；另补 §4.6 的 `sample-space` / `sample-forces` / `sample-energy` / `sample-life-cycle` / `water` 同样全过。全部十个场景同保存的变更前 dist 的 hero 比较，calls / triangles / geometries / textures 不变；`forces` / `sample-forces` / `water` 像素完全相同，其余差异在粒子、动态和细边缘，无结构 / 材质回归。`mosquito` 原有一条拍和一条章 label note 保留，没有改正式主题。
+
+**门槛**：`pnpm check` 0 error / warning（3 条原有 hint）；`pnpm validate` 38 topics、0 error / warning；全量单测 111 files / 3,033 tests；`pnpm build` 79 pages / 25.59 s；上述全部截图门槛通过；最终原样 `CI=1 pnpm e2e` **186 passed / 27.0 min**。前轮共享机器上既有 sample-space voice 时序断言得到 3,685 ms（要求 < 2,800 ms），该项隔离重跑和完整重跑均通过，未改断言 / 超时 / 配置；首轮日志和 trace 留在报告所列路径。最终 CI 的 flask 100 次几何更新为 0.5 ms。
+
+本轮 E-MA1 / E-MA2 无未完项；正式主题施工尚未开始。作者数据形状、所有门槛 / 截图 / baseline 路径和范围差异详见 worktree 外 `../codex-matter-engine-REPORT.md`。
