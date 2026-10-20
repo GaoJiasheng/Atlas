@@ -116,7 +116,7 @@ export interface SimEffects {
   /** Parts a `pose` binding moves: the pose name (null: rest). */
   poses: Map<string, string | null>;
   glow: Map<string, SimGlow>;
-  /** Tint toward a colour ref, level 0–1. */
+  /** Tint toward a colour ref, actual blend strength 0–1 (binding `max`, default .55). */
   tint: Map<string, SimGlow>;
   /** Copies of a `repeat` part on show. */
   count: Map<string, number>;
@@ -209,9 +209,10 @@ export function simEffects(sim: SimData, values: SimValues, outputs: SimOutputs)
         if (b.visible !== undefined && !holds(b.visible, v, first)) out.hidden.add(id);
         if (b.pose) {
           const name = b.pose[String(v)];
-          // Another binding's pose for the same part wins only if this one would leave it at rest.
+          // Unmapped values leave the chapter / beat pose intact; only explicit null requests rest.
+          // A named pose wins over explicit rest when several bindings target the same part.
           if (name !== undefined && name !== null) out.poses.set(id, name);
-          else if (!out.poses.has(id)) out.poses.set(id, null);
+          else if (name === null && !out.poses.has(id)) out.poses.set(id, null);
         }
         if (b.glow) {
           const x = Math.min(MAX_GLOW, Math.max(0, num(v) / b.glow.full));
@@ -219,7 +220,7 @@ export function simEffects(sim: SimData, values: SimValues, outputs: SimOutputs)
         }
         if (b.tint) {
           const x = Math.min(1, Math.max(0, num(v) / b.tint.full));
-          out.tint.set(id, { color: b.tint.color, level: b.tint.curve === 'sqrt' ? Math.sqrt(x) : x });
+          out.tint.set(id, { color: b.tint.color, level: (b.tint.curve === 'sqrt' ? Math.sqrt(x) : x) * b.tint.max });
         }
         if (b.fill) out.fill.set(id, { volume: Math.max(0, num(v) * b.fill.per), below: b.fill.below * b.fill.per, meniscus: b.fill.meniscus, ease: b.fill.ease });
         if (b.count) out.count.set(id, Math.max(0, Math.round(b.count === true ? num(v) : (num(v) - b.count.minus) / b.count.per)));

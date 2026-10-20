@@ -37,6 +37,7 @@ interface Part {
   shell?: boolean;
   context?: boolean;
   castShadow?: boolean;
+  clip?: boolean;
 }
 
 const OUT = join(import.meta.dirname, '../../../src/content/topics/states-of-matter/data/parts.json');
@@ -764,6 +765,7 @@ const legs = (cx: number, cz: number, hx: number, hz: number): Prim[] =>
   [[-1, -1], [1, -1], [-1, 1], [1, 1]].map(([sx, sz]) => box([cx + sx! * hx, -0.4, cz + sz! * hz], [0.045, 0.76, 0.045], 'wood', { tint: '#c7a77c' }));
 add1({
   id: 'bench',
+  clip: false,
   primitive: bevel([0, -0.02, 0], [1.8, 0.04, 0.7], 0.006, 'wood', { tint: '#d3b58b' }),
   extra: [...legs(0, 0, 0.84, 0.3), box([0, -0.68, 0], [1.68, 0.03, 0.03], 'wood', { tint: '#c7a77c' })],
   context: true,
@@ -771,6 +773,7 @@ add1({
 });
 add1({
   id: 'side-table',
+  clip: false,
   group: 'around-you',
   primitive: bevel([TABLE_X, -0.02, 0], [0.8, 0.04, 0.6], 0.006, 'wood', { tint: '#c9a57a' }),
   extra: legs(TABLE_X, 0, 0.36, 0.26),
@@ -920,9 +923,6 @@ const sim = {
     { id: 'cup-hole', kind: 'toggle', default: false, label: label('cup-hole') },
     { id: 'load', kind: 'step', values: [0, 1, 2, 3, 4], default: 0, unit: 'kg', label: label('load') },
     { id: 'water-added', kind: 'step', values: [0, 20, 40, 60, 80, 100], default: 0, unit: 'ml', label: label('water-added') },
-    // Scene switches for two beats of chapters 1 and 2; no model reads them.
-    { id: 'beam', kind: 'toggle', default: false, label: label('beam') },
-    { id: 'squeeze', kind: 'toggle', default: false, label: label('squeeze') },
   ],
   outputs: [
     out('mass', 'weigh:mass', 'g', 1),
@@ -959,7 +959,7 @@ const sim = {
     vol('water-left', 'jug-water'),
   ],
   bind: [
-    { control: 'weigh-object', part: ['stone', 'sponge', 'marble', 'clay-ball', 'water-beaker'], pose: { stone: 'pan-stone', sponge: 'pan-sponge', marble: 'pan-marble', clay: 'pan-clay', water: 'pan-water' } },
+    ...Object.entries({ stone: ['stone', 'pan-stone'], sponge: ['sponge', 'pan-sponge'], marble: ['marble', 'pan-marble'], clay: ['clay-ball', 'pan-clay'], water: ['water-beaker', 'pan-water'] }).map(([value, [part, pose]]) => ({ control: 'weigh-object', part, pose: { [value]: pose } })),
     { control: 'drop-object', part: ['drop-stone', 'drop-marble', 'drop-clay-ball', 'drop-clay-roll'], pose: { stone: 'in-cyl-stone', marble: 'in-cyl-marble', 'clay-ball': 'in-cyl-clay-ball', 'clay-roll': 'in-cyl-clay-roll' } },
     { output: 'v-cyl-a', part: 'cyl-a-water', fill: { per: ML, meniscus: 0.0015, ease: 1.2 } },
     { output: 'v-glass', part: 'glass-water', fill: { per: ML, ease: 1.2 } },
@@ -971,8 +971,6 @@ const sim = {
     { output: 'v-cup', part: 'cup-water', fill: { per: ML, ease: 1.0 } },
     { output: 'water-above', part: 'water-over-sand', fill: { per: ML, below: SAND_ML, meniscus: 0.0015 } },
     { output: 'water-left', part: 'jug-water', fill: { per: ML } },
-    { control: 'beam', part: ['beam-balance', 'stone', 'sponge'], pose: { true: 'beam-tilt' } },
-    { control: 'squeeze', part: 'sponge', pose: { true: 'sponge-squeezed' } },
     { control: 'cup-place', part: ['cup', 'cup-hole-mark', 'cup-water', 'tissue', 'trapped-air'], pose: { pushed: 'cup-pushed' } },
     { control: 'cup-place', part: 'trapped-air', visible: { eq: 'pushed' } },
     { control: 'cup-hole', part: 'trapped-air', visible: { eq: false } },

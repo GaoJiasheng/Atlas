@@ -42,9 +42,10 @@ export function magnetFrames(sim: SimData, source: CarrierSource, values: SimVal
     const own = new Set([m.move?.control, m.flip?.control]);
     const bind = sim.bind.filter((b) => names(b) && b.control !== undefined && !own.has(b.control));
     const e = simEffects({ ...sim, bind }, values, {});
-    // A part a try-it binding poses ignores the chapter pose (SceneRoot `partPose`), even where that binding is the model's own.
-    const bound = sim.bind.some((b) => names(b) && 'pose' in b && b.pose !== undefined);
-    const name = e.poses.has(id) ? (e.poses.get(id) ?? null) : bound ? null : pose;
+    // A mapped pose driven by the model's own move / flip is already applied
+    // by that model. Only an unmapped value inherits the chapter / beat pose.
+    const ownPose = sim.bind.some((b) => names(b) && b.control !== undefined && own.has(b.control) && 'pose' in b && b.pose?.[String(values[b.control])] !== undefined);
+    const name = e.poses.has(id) ? (e.poses.get(id) ?? null) : ownPose ? null : pose;
     const entry = name ? source.poses?.[name]?.parts[id] : undefined;
     const centre = source.parts.find((p) => p.id === id)?.primitive?.at ?? [0, 0, 0];
     const f = partFrame(centre, entry ? toTransform(entry) : restTransform(), e.offset.get(id), e.rotate.get(id) ?? null);

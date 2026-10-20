@@ -10,6 +10,7 @@ import { describe, expect, it } from 'vitest';
 import { parse as parseYaml } from 'yaml';
 import { evaluateSim } from '../../src/engines/space-scene/lib/sim';
 import { resolveSimValues } from '../../src/engines/space-scene/lib/sim/controls';
+import { simEffects } from '../../src/engines/space-scene/lib/sim/bind';
 import { capacity, fillShapeForPrimitive } from '../../src/engines/space-scene/lib/fill';
 import { simSchema, type SimData } from '../../src/engines/space-scene/sim-schema';
 import type { MatterPart } from '../../src/engines/space-scene/matter-schema';
@@ -21,6 +22,7 @@ const parts: MatterPart[] = file.parts;
 const part = (id: string) => file.parts.find((p: { id: string }) => p.id === id);
 
 interface Beat {
+  pose?: string;
   sim?: { set?: Record<string, unknown> };
   caption: { en: string; zh: string };
 }
@@ -183,6 +185,44 @@ describe('states-of-matter topic: wording rules (docs/36 D3, D5)', () => {
 });
 
 describe('states-of-matter topic: content fixes from the engine review', () => {
+  it('the beam comparison and squeezed sponge use beat poses without scene-only controls', () => {
+    expect(sim.controls.map((c) => c.id)).not.toContain('beam');
+    expect(sim.controls.map((c) => c.id)).not.toContain('squeeze');
+    const beam = chapter('mass-and-space').beats[2]!;
+    const squeezed = chapter('solids').beats[3]!;
+    expect(beam.pose).toBe('beam-tilt');
+    expect(squeezed.pose).toBe('sponge-squeezed');
+    for (const [c, beat, ids] of [
+      [chapter('mass-and-space'), beam, ['beam-balance', 'stone', 'sponge']],
+      [chapter('solids'), squeezed, ['sponge']],
+    ] as const) {
+      const values = resolveSimValues(sim, { ...c.set, ...beat.sim?.set });
+      const effects = simEffects(sim, values, evaluateSim(sim, values, [], undefined, parts));
+      for (const id of ids) {
+        expect(effects.poses.has(id), `${c.id}: ${id} must keep its beat pose`).toBe(false);
+        expect(file.poses[beat.pose!][id]).toBeDefined();
+      }
+    }
+    expect(file.poses['beam-tilt']['beam-balance'].rotation).toEqual([0, 0, -6]);
+    expect(file.poses['sponge-squeezed'].sponge.scale).toEqual([1.06, 0.45, 1.04]);
+  });
+
+  it('weighing one object leaves the other four available to chapter poses', () => {
+    for (const [value, id] of [['stone', 'stone'], ['sponge', 'sponge'], ['marble', 'marble'], ['clay', 'clay-ball'], ['water', 'water-beaker']]) {
+      const values = resolveSimValues(sim, { 'weigh-object': value });
+      const effects = simEffects(sim, values, evaluateSim(sim, values, [], undefined, parts));
+      for (const other of ['stone', 'sponge', 'marble', 'clay-ball', 'water-beaker']) {
+        expect(effects.poses.has(other), `${value}: ${other}`).toBe(other === id);
+      }
+    }
+  });
+
+  it('basin cuts leave both wooden support surfaces intact', () => {
+    expect(part('bench').clip).toBe(false);
+    expect(part('side-table').clip).toBe(false);
+    expect(part('basin').clip).not.toBe(false);
+  });
+
   const lum = (hex: string) => {
     const n = parseInt(hex.slice(1), 16);
     return 0.2126 * ((n >> 16) & 255) + 0.7152 * ((n >> 8) & 255) + 0.0722 * (n & 255);

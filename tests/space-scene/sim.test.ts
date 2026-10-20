@@ -239,10 +239,33 @@ describe('bindings', () => {
     expect(fx({}).hidden.has('cell-3')).toBe(true);
     expect(fx({ cells: 3 }).hidden.has('cell-3')).toBe(false);
     expect(fx({ gap: 'pencil-lead' }).poses.get('pencil-lead')).toBe('pencil-in-gap');
-    expect(fx({}).poses.get('pencil-lead')).toBeNull();
+    expect(fx({}).poses.has('pencil-lead')).toBe(false);
     expect(fx({}).glow.get('filament-a')!.level).toBeCloseTo(1, 2);
     expect(fx({ cells: 1 }).glow.get('filament-a')!.level).toBeCloseTo(Math.sqrt(0.2563), 3);
     expect(fx({ main: false }).glow.get('filament-a')!.level).toBe(0);
+  });
+  it('only explicit null overrides a chapter pose with rest; named poses beat rest in either binding order', () => {
+    const named = { control: 'gap', part: 'pencil-lead', pose: { 'pencil-lead': 'pencil-in-gap' } };
+    const rest = { control: 'gap', part: 'pencil-lead', pose: { link: null, 'pencil-lead': null } };
+    for (const bind of [[named, rest], [rest, named]]) {
+      const bound = simSchema.parse({ ...sim, bind });
+      expect(simEffects(bound, { gap: 'link' }, {}).poses.get('pencil-lead')).toBeNull();
+      expect(simEffects(bound, { gap: 'wood' }, {}).poses.has('pencil-lead')).toBe(false);
+      expect(simEffects(bound, { gap: 'pencil-lead' }, {}).poses.get('pencil-lead')).toBe('pencil-in-gap');
+    }
+  });
+  it('tint keeps the .55 default and supports full darkening, curves and clamping', () => {
+    const tint = (value: number, extra: Record<string, unknown> = {}) => {
+      const bound = simSchema.parse({ ...sim, bind: [{ control: 'cells', part: 'cell-3', tint: { color: 'token:ink', full: 4, ...extra } }] });
+      return simEffects(bound, { cells: value }, {}).tint.get('cell-3')!.level;
+    };
+    expect(tint(4)).toBe(0.55);
+    expect(tint(1)).toBe(0.55 / 4);
+    expect(tint(4, { max: 1 })).toBe(1);
+    expect(tint(1, { max: 1, curve: 'sqrt' })).toBe(0.5);
+    expect(tint(8, { max: 0.8 })).toBe(0.8);
+    expect(tint(-1, { max: 1 })).toBe(0);
+    for (const max of [-0.01, 1.01]) expect(() => tint(4, { max })).toThrow();
   });
   it('flows: per-path intensity, direction, a hot short', () => {
     const f = fx({}).flows.get('current')!;

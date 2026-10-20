@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { chainKey, elevation, flowLinks, labelBudget, partChain, planeAxes, scaleStep } from '../../src/engines/space-scene/lib/schematic';
+import { chainKey, chainName, elevation, flowLinks, labelBudget, partChain, planeAxes, scaleStep } from '../../src/engines/space-scene/lib/schematic';
 import type { Part } from '../../src/engines/space-scene/schema';
 
 const p = (id: string, group: string, at: [number, number, number], connects: string[] = []) =>
@@ -106,5 +106,17 @@ describe('elevation of glb parts', () => {
     const el = elevation(mesh, 'xy', 0, bounds);
     expect(el.rects.map((r) => r.id)).toEqual(['pec']);
     expect([el.u0, el.u1, el.v0, el.v1]).toEqual([0, 0.2, -0.1, 0.1]);
+  });
+});
+
+describe('chain names', () => {
+  it('uses the bilingual chain-only name, then the shared short name, then the full name', () => {
+    const name = { en: 'Opaque object on stand', zh: '支架上的不透明物体' };
+    const short = { en: 'Opaque object', zh: '不透明物体' };
+    const chain = { en: 'Object', zh: '物体' };
+    expect(chainName({ name })).toBe(name);
+    expect(chainName({ name, short })).toBe(short);
+    expect(chainName({ name, short, chainName: chain })).toBe(chain);
+    expect(short).toEqual({ en: 'Opaque object', zh: '不透明物体' });
   });
 });

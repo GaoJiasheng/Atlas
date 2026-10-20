@@ -145,7 +145,7 @@ const partBind = z
     part: z.union([kebabId, z.array(kebabId).min(1)]),
     /** Shown while the condition holds (else it fades out and is not pickable). */
     visible: simCondition.optional(),
-    /** Value → a pose of `poses` (null: rest) for these parts only; values not listed: rest. */
+    /** Value → a pose of `poses` (null: rest) for these parts only; values not listed: chapter / beat pose. */
     pose: z.record(z.string(), kebabId.nullable()).optional(),
     /**
      * Self-light: the value (0 … `full`, through `curve`) sets how strongly the
@@ -153,11 +153,11 @@ const partBind = z
      */
     glow: z.object({ color: colorRef, full: z.number().positive(), curve: z.enum(GLOW_CURVES).default('sqrt') }).strict().optional(),
     /**
-     * Tint toward `color` (the highlight mix, up to the signal tint's strength):
+     * Tint toward `color` (maximum `max`, default .55):
      * the value ÷ `full` (0–1, `linear` or `sqrt`) — an iron core that is a
      * magnet while the current flows.
      */
-    tint: z.object({ color: colorRef, full: z.number().positive(), curve: z.enum(GLOW_CURVES).default('linear') }).strict().optional(),
+    tint: z.object({ color: colorRef, full: z.number().positive(), curve: z.enum(GLOW_CURVES).default('linear'), max: z.number().min(0).max(1).default(0.55) }).strict().optional(),
     /**
      * Show the first k copies of a `repeat` part: k = (value − `minus`) ÷ `per`,
      * rounded, at least 0 (`true`: k = the value). Slotted masses on a 50 g

@@ -70,8 +70,6 @@ export const CONTROL_TEXT = {
   'cup-hole': { label: t('Hole in the cup', '杯底开孔') },
   load: { label: t('Mass on each plunger', '每支柱塞上的砝码') },
   'water-added': { label: t('Water poured onto the sand', '倒进沙里的水') },
-  beam: { label: t('Stone and sponge on the beam balance', '石头和海绵放上天平') },
-  squeeze: { label: t('Squeeze the sponge', '捏海绵') },
 };
 
 export const OUTPUT_TEXT: Record<string, T> = {
