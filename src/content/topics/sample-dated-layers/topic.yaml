@@ -1,0 +1,38 @@
+id: sample-dated-layers
+title: { en: "Sample: Dated Layers", zh: "示例：按年份变化的图层" }
+subtitle: { en: "Synthetic engine test data on Singapore's real coastline", zh: "真实新加坡海岸上的引擎合成测试数据" }
+subject: geography
+tags: [beyond-syllabus, singapore]
+moe: ["Engine fixture: no syllabus claim"]
+mode: time
+engine: time-scene
+stage: geo
+theme: paper
+sensitivity: open
+status: draft
+basemap: { local: land-sg, maxZoom: 13 }
+datePrecision: year
+colorBy: entity
+blocLabels:
+  neutral: { en: "Sample categories", zh: "示例类别" }
+strings:
+  joined: { en: "appears", zh: "出现" }
+  left: { en: "ends", zh: "结束" }
+  notYet: { en: "Not yet shown", zh: "尚未显示" }
+datedLayers:
+  - id: sample-blocks
+    file: sample-dated-blocks
+    kind: point
+    holder: housing
+    label: { en: "HDB blocks (synthetic)", zh: "组屋（合成）" }
+    count: true
+  - id: sample-rail
+    file: sample-dated-rail
+    kind: line
+    color: token:holder-6
+    label: { en: "Sample route", zh: "示例路线" }
+  - id: sample-gardens
+    file: sample-dated-gardens
+    kind: area
+    holder: green
+    label: { en: "Sample green areas", zh: "示例绿地" }

@@ -205,7 +205,8 @@ describe('TimeScene schema extensions', () => {
 
   it('accepts `summary` and the `sites` layer in chapter state', () => {
     expect(timeChapterState.safeParse({ summary: { en: 'One line.', zh: '一句话。' }, layers: ['base', 'sites'] }).success).toBe(true);
-    expect(timeChapterState.safeParse({ layers: ['monuments'] }).success).toBe(false);
+    // Topic-defined ids are checked against topic.yaml by the content validator.
+    expect(timeChapterState.safeParse({ layers: ['monuments'] }).success).toBe(true);
   });
 
   it('accepts presentation beats (caption required, audio a site path) and lists their highlight refs', () => {

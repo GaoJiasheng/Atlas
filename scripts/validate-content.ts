@@ -57,7 +57,7 @@ import { KEBAB_ID } from '../src/content/schema/common';
 import { sourceIds, type SourcesFile } from '../src/content/schema/sources';
 import { glossaryIds, type GlossaryFile } from '../src/content/schema/glossary';
 import { engineSchemas, formatIssues } from '../src/engines/schemas';
-import { timeSceneTopicIssues, type TimeSceneGeoData } from '../src/engines/time-scene/schema';
+import { timeChapterLayerIssues, timeSceneTopicIssues, type TimeChapterState, type TimeSceneGeoData } from '../src/engines/time-scene/schema';
 import {
   exercisesFile,
   musclesFile,
@@ -382,6 +382,7 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
 
   const ids = new IdRegistry(topicFile);
   ids.add(topic.id, 'topic');
+  for (const layer of topic.datedLayers ?? []) ids.add(layer.id, 'dated layer');
   const schemas = engineSchemas(topic.engine, topic.stage);
 
   /* ---- data ---- */
@@ -520,6 +521,8 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
         if (!ids.has(ref)) error(file, `state references unknown id "${ref}"`);
       }
       for (const issue of schemas.chapterIssues?.(state.data, data) ?? []) error(file, issue);
+      if (topic.engine === 'time-scene' && topic.stage === 'geo')
+        for (const issue of timeChapterLayerIssues(state.data as TimeChapterState, topic.datedLayers)) error(file, issue);
     }
   }
   if (data !== undefined) {

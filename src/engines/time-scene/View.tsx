@@ -61,6 +61,8 @@ import { Timeline, formatReadout } from './timeline/Timeline';
 import { EventInspector } from './EventInspector';
 import { EntityInspector } from './EntityInspector';
 import { BandCard, PerfReadout, useFps } from './hud/HudPanels';
+import { DatedLayerPlate } from './hud/DatedLayerPlate';
+import type { DatedLayerIndex } from './lib/datedLayers';
 import { BLOC_CSS, entityCssColor } from './colors';
 import { blocsOf, changesBloc } from './lib/bloc';
 import { blocLabel, blocLabelText } from './lib/blocLabels';
@@ -278,6 +280,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   /** The island-scale land carries today's coastline (a dashed reference line, listed in the legend while names are on). */
   const [coastToday, setCoastToday] = useState(false);
   const onLocalLand = useCallback((info: { coastToday: boolean }) => setCoastToday(info.coastToday), []);
+  const [datedIndexes, setDatedIndexes] = useState<{ id: string; index: DatedLayerIndex }[]>([]);
 
 
   /* ---------- REFERENCE (R): adjacent keyframe as dashed outlines ---------- */
@@ -369,14 +372,15 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   // `colorBy: entity` lists the holders of the keyframe on show, largest first: follow the dominant keyframe (re-render only when it changes).
   const legendKeyframe = useSyncExternalStore(
     playhead.subscribe,
-    () => (byEntity ? dominantKeyframe(model, playhead.get()) : -1),
-    () => (byEntity ? dominantKeyframe(model, playhead.get()) : -1),
+    () => dominantKeyframe(model, playhead.get()),
+    () => dominantKeyframe(model, playhead.get()),
   );
   const areas = useMemo(() => (byEntity ? controlAreas(model) : null), [byEntity, model]);
   const approximate = useMemo(() => model.keyframes.some((k) => k.keyframe.features.features.some((f) => f.properties.certainty === 'approximate')), [model]);
   const legend = useMemo<LegendItem[]>(() => {
     const items: LegendItem[] = [];
-    if (layers.includes('control') || layers.includes('participation')) {
+    const hasControl = (model.keyframes[Math.max(0, legendKeyframe)]?.keyframe.features.features.length ?? 0) > 0;
+    if (hasControl && (layers.includes('control') || layers.includes('participation'))) {
       if (byEntity && areas) {
         // Every holder of this keyframe, each in its own colour, largest area first (never collapsed into one "states" row).
         const k = Math.max(0, legendKeyframe);
@@ -405,12 +409,19 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     }
     if (region?.rivers) items.push({ id: 'river', label: bi('time.legend.river'), color: 'var(--rivers)', kind: 'line' });
     if (coastToday && territoryOn) items.push({ id: 'coast-today', label: bi('time.legend.coastToday'), color: 'var(--ink)', kind: 'line-dashed' });
+    for (const layer of topic.datedLayers ?? []) {
+      if (!layers.includes(layer.id)) continue;
+      items.push({ id: layer.id, label: layer.label, color: layer.color ?? entityCssColor(geo.entities.find((e) => e.id === layer.holder)), kind: layer.kind === 'area' ? 'fill' : layer.kind === 'line' ? 'line' : 'point' });
+    }
+    if (topic.datedLayers?.some((layer) => layer.kind === 'point' && layers.includes(layer.id)))
+      items.push({ id: 'dated-recent', label: bi('time.legend.datedRecent'), color: 'var(--signal)', kind: 'ring' });
     if (layers.includes('movements') && geo.movements.length)
       items.push({ id: 'movement', label: t('time.movement'), color: 'var(--ink-muted)', kind: 'arrow' });
     if (layers.includes('battles')) {
       const kinds = new Set(model.events.map((e) => e.event.kind));
-      if ([...kinds].some((k) => !SQUARE_KINDS.has(k) && !TRIANGLE_KINDS.has(k)))
+      if ([...kinds].some((k) => k !== 'milestone' && !SQUARE_KINDS.has(k) && !TRIANGLE_KINDS.has(k)))
         items.push({ id: 'event', label: t('time.event'), color: 'var(--ink-muted)', kind: 'point' });
+      if (kinds.has('milestone')) items.push({ id: 'milestone', label: bi('time.kind.milestone'), color: 'var(--ink)', kind: 'ring' });
       if (kinds.has('siege')) items.push({ id: 'siege', label: t('time.legend.siege'), color: 'var(--ink-muted)', kind: 'ring-dashed' });
       if ([...kinds].some((k) => SQUARE_KINDS.has(k)))
         items.push({ id: 'atrocity', label: bi('time.legend.atrocity'), color: 'var(--ink)', kind: 'square' });
@@ -420,7 +431,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     if (layers.includes('sites') && model.sites.length)
       items.push({ id: 'site', label: t('time.legend.site'), color: 'var(--ink)', kind: 'site' });
     return items;
-  }, [geo, model, layers, locale, topic.blocLabels, byEntity, areas, legendKeyframe, approximate, region, coastToday, territoryOn]); // `t` is bound to `locale`
+  }, [geo, model, layers, locale, topic.blocLabels, topic.datedLayers, byEntity, areas, legendKeyframe, approximate, region, coastToday, territoryOn]); // `t` is bound to `locale`
 
   /* ---------- control panel: LAYERS (store layers + drawing modes) and TOOLS ---------- */
   const panelLayers = useMemo<ControlRow[]>(
@@ -434,9 +445,10 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       { kind: 'layer', id: 'battles', label: t('time.layer.battles') },
       { kind: 'layer', id: 'participation', label: t('time.layer.participation') },
       ...(model.sites.length > 0 ? [{ kind: 'layer' as const, id: 'sites', label: t('time.layer.sites') }] : []),
+      ...(topic.datedLayers ?? []).map((layer) => ({ kind: 'layer' as const, id: layer.id, label: layer.label, color: layer.color ?? entityCssColor(geo.entities.find((e) => e.id === layer.holder)) })),
       { kind: 'mode', id: 'labels', label: t('time.layer.labels') },
     ],
-    [model, locale, region], // `t` is bound to `locale`
+    [model, locale, region, topic.datedLayers, geo.entities], // `t` is bound to `locale`
   );
   const hasGlossary = (geo.glossary?.terms.length ?? 0) > 0;
   const panelTools = useMemo<ControlRow[]>(
@@ -623,6 +635,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
         onSelectEvent={selectEvent}
         onController={setController}
         onLocalLand={onLocalLand}
+        onDatedLayers={setDatedIndexes}
       />
 
       <div className="ts-stop" role="status" aria-live="polite">
@@ -662,6 +675,11 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       <SceneSlot name="perf">
         <PerfReadout read={readStats} />
       </SceneSlot>
+      {topic.datedLayers?.some((layer) => layer.count) && (
+        <SceneSlot name="plate">
+          <DatedLayerPlate definitions={topic.datedLayers} indexes={datedIndexes} layers={layers} playhead={playhead} locale={locale} />
+        </SceneSlot>
+      )}
 
       <SceneSlot name="bottomBar">
         <Timeline

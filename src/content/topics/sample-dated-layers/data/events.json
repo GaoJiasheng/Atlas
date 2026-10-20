@@ -1,0 +1,4 @@
+[
+  { "id": "sample-change", "t": "1966", "kind": "milestone", "importance": 2, "at": [103.850, 1.335], "title": { "en": "Sample milestone", "zh": "示例里程碑" }, "summary": { "en": "The synthetic control patch is now absent. The dated points and lines remain.", "zh": "合成控制区色块现已消失，按年份显示的点和线仍在。" }, "sources": ["S1"] },
+  { "id": "sample-replacement", "t": "1980", "kind": "milestone", "importance": 2, "at": [103.849, 1.350], "title": { "en": "Sample replacement", "zh": "示例替换" }, "summary": { "en": "One thousand invented blocks replace one thousand others; the total stays the same.", "zh": "一千座虚构楼宇替换另外一千座，总数不变。" }, "sources": ["S1"] }
+]
