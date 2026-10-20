@@ -1088,3 +1088,5 @@ SpaceScene / Model3DStage，paper 默认、cinema 可切。原型：docs/30、do
 **验收截图**：`pnpm shoot light-and-shadows --beats --keys --layout --locale en,zh --theme paper,cinema`（见下"门槛"）；EN paper 41 拍逐张看过，ZH / cinema 抽查。
 
 **已知差距**：① 右上零件链路卡 4 列，名称截断（"SMALL T…"、"DARKNES…"），引擎没有短名字段；② 光束半角 40°，光斑在大多数距离下比屏幕大，屏幕整块被照亮（米黄），"亮的一片"读作"整块屏幕被照亮"；③ 侧视镜头里个别引线穿过手电筒；④ 纸圆锥侧放时悬在夹子上方约 1.2 cm；⑤ 暗箱的"黑"是示意零件，不是光照；⑥ 背景章、第 01 章的透视图里小孔本身看不清（箱壁在 X-RAY 下透明），靠出射光线表示"从小孔出来"。
+
+**门槛（2026-10-21，合并 main `f3624a9` 之后）**：`pnpm check`（631 文件，0 error / 0 warning）、`pnpm validate`（42 主题，0 / 0）、`pnpm test`（124 文件 / 3,271 项）、`pnpm build` 通过；`CI=1 pnpm e2e` 全量 207 / 208，唯一失败是刚合并的 `singapore-land-use.spec.ts`"farmland, reserves and reservoirs"（全量负载下水库计数 13 ≠ 3），单独重跑 3 / 3 通过，与本主题无关；本主题 9 项全过。`pnpm shoot light-and-shadows --beats --keys --layout --locale en,zh --theme paper,cinema`：四种组合各 41 拍 0 失败、拍链接 41 / 41、chapter highlights 全在屏、键位 0 失败、8 个尺寸 0 布局问题、console 干净。施工中 `[ ]` 键检查曾在第 01 章失败（开关默认开、`]` 回到章节值，URL 不带 `sim`）：第 01 章改为从"关灯"开始（第 1 拍关、第 2 拍开灯），T1 的先猜后看不变。
