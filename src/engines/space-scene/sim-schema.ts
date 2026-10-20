@@ -90,7 +90,7 @@ export const simOutputSchema = z
     kind: z.enum(SIM_OUTPUT_KINDS).default('number'),
     from: z.string().min(1).max(64).optional(),
     unit: z.string().trim().max(8).optional(),
-      format: z.literal('time').optional(),
+    format: z.literal('time').optional(),
     decimals: z.number().int().min(0).max(3).optional(),
     states: z.record(stateId, bilingual).optional(),
   })

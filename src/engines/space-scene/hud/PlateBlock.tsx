@@ -167,10 +167,10 @@ function Row({ label, value, on }: { label: BilingualText; value: ReactNode; on?
 }
 
 /** A try-it control's value in the status line: `2 BATTERIES`, `SERIES`, `SWITCH ON`. */
-function controlStatus(c: SimControl, v: SimValue | undefined, locale: 'en' | 'zh'): string {
+function controlStatus(c: SimControl, v: SimValue | undefined): string {
   const label = c.label.en.toUpperCase();
   if (c.kind === 'toggle') return `${label}: ${v ? 'ON' : 'OFF'}`;
-  if (c.kind === 'step' && c.format === 'time') return timeText(Number(v), locale);
+  if (c.kind === 'step' && c.format === 'time') return timeText(Number(v), 'en').toUpperCase();
   if (c.kind === 'step') return `${v}${c.unit ? ` ${c.unit.toUpperCase()}` : ''} ${label}`;
   return tx(c.options.find((o) => o.id === v)?.label ?? { en: String(v), zh: String(v) }, 'en').toUpperCase();
 }
@@ -242,7 +242,7 @@ function Telemetry({ rows, run, file }: { rows: readonly TelemetryRow[]; run: bo
               data-observe={follows && (ids.some((id) => observed.has(id)) || (isClips && !blank)) ? '' : undefined}
               title={`${r.key.en} / ${r.key.zh}`}
             >
-              {r.key.en.toUpperCase()} <b>{blank ? '—' : shown.map((j) => cells[j]!.id !== null && outputs.get(cells[j]!.id!)?.format === 'time' ? timeText(values[j]!, locale) : formatReading(values[j]!, cells[j]!.decimals)).join(' · ')}</b>
+              {r.key.en.toUpperCase()} <b>{blank ? '—' : shown.map((j) => cells[j]!.id !== null && outputs.get(cells[j]!.id!)?.format === 'time' ? timeText(values[j]!, 'en').toUpperCase() : formatReading(values[j]!, cells[j]!.decimals)).join(' · ')}</b>
               {r.unit && !blank && !ids.some((id) => outputs.get(id)?.format === 'time') && <small> {r.unit}</small>}
             </span>
           );
@@ -251,7 +251,7 @@ function Telemetry({ rows, run, file }: { rows: readonly TelemetryRow[]; run: bo
       {view && (state || tried.length > 0) && (
         <p className="space-plate__simstate" data-state={stateValue} aria-label={['SIM', state ? tx(state.states?.[stateValue] ?? { en: stateValue, zh: stateValue }, locale) : '', ...tried.map((c) => valueWords(c, view.values[c.id], locale))].filter(Boolean).join(' · ')}>
           SIM{state ? ` ${tx(state.states?.[stateValue] ?? { en: stateValue, zh: stateValue }, 'en').toUpperCase()}` : ''}
-          {tried.map((c) => ` · ${controlStatus(c, view.values[c.id], locale)}`).join('')}
+          {tried.map((c) => ` · ${controlStatus(c, view.values[c.id])}`).join('')}
         </p>
       )}
     </>

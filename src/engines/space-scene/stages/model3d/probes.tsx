@@ -427,7 +427,7 @@ export function ShadowUpdater({ runtime, enabled = true, bridge }: { runtime: St
   useFrame(() => {
     if (runtime.shadowDirty) {
       gl.shadowMap.needsUpdate = enabled;
-      if(enabled) bridge.stats.shadowMapUpdates++;
+      if (enabled) bridge.stats.shadowMapUpdates++;
       runtime.shadowDirty = false;
     }
   });

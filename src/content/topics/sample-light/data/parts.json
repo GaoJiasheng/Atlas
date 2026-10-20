@@ -1053,8 +1053,7 @@
           1,
           0.05
         ],
-        "color": "enamel",
-        "tint": "token:paper"
+        "color": "enamel"
       },
       "castShadow": false
     },
@@ -2778,7 +2777,7 @@
     "section": {
       "plane": "xy"
     },
-    "shadows": "contact",
+    "shadows": "none",
     "reference": {
       "fit": "layers"
     }

@@ -4,7 +4,7 @@
  * atmospheric refraction correction follow the original calculator.
  * Local time is hours in the exported convenience functions; NOAA uses minutes.
  */
-import type { Vec3 } from "../math";
+import type { Vec3 } from '../math';
 const degToRad = (degrees: number) => (degrees * Math.PI) / 180;
 const radToDeg = (radians: number) => (radians * 180) / Math.PI;
 
@@ -40,10 +40,7 @@ export function calcSunEqOfCenter(t: number) {
   let sinm = Math.sin(mrad);
   let sin2m = Math.sin(mrad + mrad);
   let sin3m = Math.sin(mrad + mrad + mrad);
-  let C =
-    sinm * (1.914602 - t * (0.004817 + 0.000014 * t)) +
-    sin2m * (0.019993 - 0.000101 * t) +
-    sin3m * 0.000289;
+  let C = sinm * (1.914602 - t * (0.004817 + 0.000014 * t)) + sin2m * (0.019993 - 0.000101 * t) + sin3m * 0.000289;
   return C; // in degrees
 }
 
@@ -97,12 +94,7 @@ export function calcEquationOfTime(t: number) {
   let sin4l0 = Math.sin(4.0 * degToRad(l0));
   let sin2m = Math.sin(2.0 * degToRad(m));
 
-  let Etime =
-    y * sin2l0 -
-    2.0 * e * sinm +
-    4.0 * e * y * sinm * cos2l0 -
-    0.5 * y * y * sin4l0 -
-    1.25 * e * e * sin2m;
+  let Etime = y * sin2l0 - 2.0 * e * sinm + 4.0 * e * y * sinm * cos2l0 - 0.5 * y * y * sin4l0 - 1.25 * e * e * sin2m;
   return radToDeg(Etime) * 4.0; // in minutes of time
 }
 
@@ -113,12 +105,7 @@ export function getJD(year: number, month: number, day: number) {
   }
   let A = Math.floor(year / 100);
   let B = 2 - A + Math.floor(A / 4);
-  let JD =
-    Math.floor(365.25 * (year + 4716)) +
-    Math.floor(30.6001 * (month + 1)) +
-    day +
-    B -
-    1524.5;
+  let JD = Math.floor(365.25 * (year + 4716)) + Math.floor(30.6001 * (month + 1)) + day + B - 1524.5;
   return JD;
 }
 
@@ -129,12 +116,9 @@ export function calcRefraction(elev: number) {
   } else {
     let te = Math.tan(degToRad(elev));
     if (elev > 5.0) {
-      correction =
-        58.1 / te - 0.07 / (te * te * te) + 0.000086 / (te * te * te * te * te);
+      correction = 58.1 / te - 0.07 / (te * te * te) + 0.000086 / (te * te * te * te * te);
     } else if (elev > -0.575) {
-      correction =
-        1735.0 +
-        elev * (-518.2 + elev * (103.4 + elev * (-12.79 + elev * 0.711)));
+      correction = 1735.0 + elev * (-518.2 + elev * (103.4 + elev * (-12.79 + elev * 0.711)));
     } else {
       correction = -20.774 / te;
     }
@@ -144,13 +128,7 @@ export function calcRefraction(elev: number) {
   return correction;
 }
 
-export function calcAzEl(
-  T: number,
-  localtime: number,
-  latitude: number,
-  longitude: number,
-  zone: number,
-) {
+export function calcAzEl(T: number, localtime: number, latitude: number, longitude: number, zone: number) {
   let eqTime = calcEquationOfTime(T);
   let theta = calcSunDeclination(T);
 
@@ -164,9 +142,7 @@ export function calcAzEl(
     hourAngle += 360.0;
   }
   let haRad = degToRad(hourAngle);
-  let csz =
-    Math.sin(degToRad(latitude)) * Math.sin(degToRad(theta)) +
-    Math.cos(degToRad(latitude)) * Math.cos(degToRad(theta)) * Math.cos(haRad);
+  let csz = Math.sin(degToRad(latitude)) * Math.sin(degToRad(theta)) + Math.cos(degToRad(latitude)) * Math.cos(degToRad(theta)) * Math.cos(haRad);
   if (csz > 1.0) {
     csz = 1.0;
   } else if (csz < -1.0) {
@@ -176,10 +152,7 @@ export function calcAzEl(
   let azDenom = Math.cos(degToRad(latitude)) * Math.sin(degToRad(zenith));
   let azimuth: number;
   if (Math.abs(azDenom) > 0.001) {
-    let azRad =
-      (Math.sin(degToRad(latitude)) * Math.cos(degToRad(zenith)) -
-        Math.sin(degToRad(theta))) /
-      azDenom;
+    let azRad = (Math.sin(degToRad(latitude)) * Math.cos(degToRad(zenith)) - Math.sin(degToRad(theta))) / azDenom;
     if (Math.abs(azRad) > 1.0) {
       if (azRad < 0) {
         azRad = -1.0;
@@ -231,17 +204,11 @@ export function calcSolNoon(jd: number, longitude: number, timezone: number) {
 
 /** Julian date at midnight of an ISO civil date. */
 export function julianDate(date: string): number {
-  const [year, month, day] = date.split("-").map(Number);
+  const [year, month, day] = date.split('-').map(Number);
   return getJD(year!, month!, day!);
 }
 /** Apparent elevation and bearing clockwise from geographic north. */
-export function sunPosition(
-  date: string,
-  hours: number,
-  lat: number,
-  lon: number,
-  zone: number,
-): { height: number; bearing: number } {
+export function sunPosition(date: string, hours: number, lat: number, lon: number, zone: number): { height: number; bearing: number } {
   const t = calcTimeJulianCent(julianDate(date) + (hours - zone) / 24);
   const at = calcAzEl(t, hours * 60, lat, lon, zone);
   return { height: at.elevation, bearing: at.azimuth };
@@ -251,11 +218,7 @@ export function solarNoon(date: string, lon: number, zone: number): number {
   return calcSolNoon(julianDate(date), lon, zone) / 60;
 }
 /** The direction toward the Sun, rotated to a horizontal scene north. */
-export function sunVector(
-  height: number,
-  bearing: number,
-  north: Vec3 = [0, 0, -1],
-): { x: number; y: number; z: number } {
+export function sunVector(height: number, bearing: number, north: Vec3 = [0, 0, -1]): { x: number; y: number; z: number } {
   const h = degToRad(height),
     a = degToRad(bearing),
     c = Math.cos(h);

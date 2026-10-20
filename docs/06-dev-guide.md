@@ -1353,13 +1353,13 @@ docs/35 §4，`sim.kind: "light"`。纯函数 `lib/sim/light.ts`（几何、散�
 | `seeing` | `torch` 开关、`target` 选择、`reflects: { 选项: 状态 }` | `seeing:eye`（none 或 reflects 的状态）、`seeing:dark`（关灯 1） |
 | `sun` | `lat`、`lon`、`zone`、`time` 小时步进、`date` 选择、`dates: { 选项: ISO日期 }`、`pole` m、`north` 水平单位向量 | `sun:height` / `bearing`（°）、`length`（m）、`points`（八方位状态）、`noon`（h）、`noon-length`（m）、`at`（xyz 单位向量） |
 
-`objects` 的每件是 `{ part, shape, names: { 角度: 状态名 } }`，中心 = holder：`disc { d, thick }`、`polygon { points: [[横,高],…], thick }` 在 yz 平面；`cylinder / cone { d, length, axis: "z", apex?: "+" | "-" }`；`sphere { d }`，尺寸全部 cm。模型按解析表面投影采样，球按切线锥；厚卡近表面会比零厚相似三角形略大。无物体或关灯时高宽 NaN（`—`），形状 none。材料光量 = `100 × (straight + scattered × r²/(r²+b²) × ((a+b)/a)²)`，`r² = 宽×高/π`，上限 100；这是明确标为 SIM 的朗伯散射模型。材质自身的 glass / enamel 画法与这个读数分开。
+`objects` 的每件是 `{ part, shape, names: { 角度: 状态名 } }`，中心 = holder：`disc { d, thick }`、`polygon { points: [[横,高],…], thick }` 在 yz 平面；`cylinder / cone { d, length, axis: "z", apex?: "+" | "-" }`；`sphere { d }`，尺寸全部 cm。模型按解析表面投影采样（圆盘 / 多边形取前后两面，圆柱取两端圆周、圆锥取底圆周 + 顶点：透视投影保持凸包，所以包围盒是精确的），球按切线锥；厚卡近表面会比零厚相似三角形略大。无物体或关灯时高宽 NaN（`—`），形状 none。材料光量 = `100 × (straight + scattered × r²/(r²+b²) × ((a+b)/a)²)`，`r² = 宽×高/π`，上限 100；这是明确标为 SIM 的朗伯散射模型。材质自身的 glass / enamel 画法与这个读数分开。
 
 校验严格覆盖控件种类、选择键、零件引用（模型物体不得 context）、状态标签、透光率与阈值、形状名、日期、north、全部日期×时间高度 ≥ 5°、全部物体×角度×距离不碰光源/屏幕且投影完全落在屏幕与光束内。**docs/35 原始全距离范围与 60×45 cm 屏幕不兼容**：12 cm 卡在 10/60 cm 时影高约 84 cm，数据会被拒绝。夹具采用安全距离子集；内容作者应缩窄控件范围、拆实验或扩大实际屏幕，同时保持模型和网格尺寸一致。
 
 ### SpaceScene · 影子投射（shadow-cast）
 
-`sim.overlays` 的一支（`SimOverlays.tsx` → `ShadowCast.tsx`，纯数学 `lib/sim/shadow.ts`），从挡光物的**实际网格，含 extra** 投到接收面；不用阴影贴图。光学主题写 `views.shadows: "contact"`，避免主光再投一条不同方向的影子。
+`sim.overlays` 的一支（`SimOverlays.tsx` → `ShadowCast.tsx`，纯数学 `lib/sim/shadow.ts`），从挡光物的**实际网格，含 extra** 投到接收面；不用阴影贴图。光学主题关掉主光的投影，避免主光再投一条不同方向的影子：单处实验写 `views.shadows: "contact"`；两处相隔很远（实验台 + 户外空地）写 `"none"`，因为接触斑按整个模型的包围球放在原点，会在两处之间落下一块没有挡光物的灰斑。
 
 ```jsonc
 { "kind": "shadow-cast",
@@ -1373,7 +1373,7 @@ docs/35 §4，`sim.kind: "light"`。纯函数 `lib/sim/light.ts`（几何、散�
 // trail = { control: "time" }；rays = { group: "rays", edges: "tip", parallel: [-0.4,0.4] }
 ```
 
-`source.point` 是零偏移时的世界坐标，跟零件当前矩阵走；receiver 的 normal 是局部法线，size / radius 是场景单位。投影矩阵 `M = (n·L)I − L nᵀ`（点光 w=1、平行光 w=0），影子平涂成接收面混 ink 的不透明颜色，三角形重叠和孔卡多张叠加不会重复加深。矩形 / 圆接收面与光束裁剪独立于 CUTAWAY。零件隐藏、图层关时不投；关灯 0.3 s 淡出，拆开整层淡出，REFERENCE 保留。光线归 rays.group，RUN 流动、减少动态静止；extra 的接收面坐标是 cm，遇不透光网格即停，through dark 允许透光片后继续。trail 按时间步进值留下 Ø4 cm 粉笔点，当前点空心，换日期重算。
+`source.point` 是零偏移时的世界坐标，跟零件当前矩阵走；receiver 的 normal 是局部法线，size / radius 是场景单位。投影矩阵 `M = (n·L)I − L nᵀ`（点光 w=1、平行光 w=0），影子平涂成接收面混 ink 的不透明颜色，三角形重叠和孔卡多张叠加不会重复加深。矩形 / 圆接收面与光束裁剪独立于 CUTAWAY。零件隐藏、图层关时不投；关灯 0.3 s 淡出，拆开整层淡出，REFERENCE 保留。光线归 rays.group，RUN 流动、减少动态静止；extra 的接收面坐标是 cm，对挡光物的世界三角形求交（`lib/sim/shadow.ts segmentMesh`：包围盒先筛，再 Möller–Trumbore，不分配内存），遇不透光网格即停（`edges: vertical` 的边缘光线同理：光源与被擦过的边之间有另一个不透光挡光物——近 1 mm 以上——就不画），through dark 允许透光片后继续。trail 按时间步进值留下 Ø4 cm 粉笔点，当前点空心，换日期重算。
 
 QA：`__atlas.engine.shadows()` 返回 `{ [叠加序号]: { casters: { [part]: { min: [u,v], max: [u,v] } }, spot?: { radius }, trail: [[u,v],…], rays } }`，接收面坐标与半径为 cm。用 max−min 对模型 `shadow-height / width`，误差必须 <0.2 cm；太阳 trail 与杆顶平行投影相同。状态不变时不更新几何或要求帧。每挡光物一次绘制，光斑、全部光线、全部粉笔点各一次；台面 ≤45 calls，户外 ≤20，<0.25 M 三角形。测试 `light.test.ts`、`sun.test.ts`、`shadow.test.ts`、`light-display.test.ts` 与 `tests-e2e/sample-light.spec.ts`。
 

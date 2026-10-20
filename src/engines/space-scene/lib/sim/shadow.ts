@@ -1,5 +1,5 @@
 /** Deterministic straight-line projection, in metres; receiver readings are centimetres. */
-import type { Vec3 } from "../math";
+import type { Vec3 } from '../math';
 
 export type ShadowPlane = readonly [number, number, number, number];
 export type ShadowLight = readonly [number, number, number, number];
@@ -13,13 +13,8 @@ export interface ShadowBounds {
   min: [number, number];
   max: [number, number];
 }
-const dot = (a: readonly number[], b: readonly number[]) =>
-  a.reduce((s, x, i) => s + x * b[i]!, 0);
-const cross = (a: Vec3, b: Vec3): Vec3 => [
-  a[1] * b[2] - a[2] * b[1],
-  a[2] * b[0] - a[0] * b[2],
-  a[0] * b[1] - a[1] * b[0],
-];
+const dot = (a: readonly number[], b: readonly number[]) => a.reduce((s, x, i) => s + x * b[i]!, 0);
+const cross = (a: Vec3, b: Vec3): Vec3 => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
 const unit = (a: Vec3): Vec3 => {
   const n = Math.hypot(...a);
   return a.map((x) => x / n) as Vec3;
@@ -28,34 +23,18 @@ const unit = (a: Vec3): Vec3 => {
 /** Column-major M = (plane · light) I − light planeᵀ. */
 export function shadowMatrix(plane: ShadowPlane, light: ShadowLight): number[] {
   const d = dot(plane, light);
-  return Array.from(
-    { length: 16 },
-    (_, k) => (k % 5 === 0 ? d : 0) - light[k % 4]! * plane[Math.floor(k / 4)]!,
-  );
+  return Array.from({ length: 16 }, (_, k) => (k % 5 === 0 ? d : 0) - light[k % 4]! * plane[Math.floor(k / 4)]!);
 }
-export function projectShadow(
-  point: Vec3,
-  plane: ShadowPlane,
-  light: ShadowLight,
-): Vec3 {
+export function projectShadow(point: Vec3, plane: ShadowPlane, light: ShadowLight): Vec3 {
   const d = dot(plane, light),
-    side =
-      plane[0] * point[0] +
-      plane[1] * point[1] +
-      plane[2] * point[2] +
-      plane[3];
+    side = plane[0] * point[0] + plane[1] * point[1] + plane[2] * point[2] + plane[3];
   const w = d - light[3] * side;
-  return [
-    (d * point[0] - light[0] * side) / w,
-    (d * point[1] - light[1] * side) / w,
-    (d * point[2] - light[2] * side) / w,
-  ];
+  return [(d * point[0] - light[0] * side) / w, (d * point[1] - light[1] * side) / w, (d * point[2] - light[2] * side) / w];
 }
 /** Screen u runs across its width, v upward; ground v points north (−z). */
 export function receiverFrame(centre: Vec3, normal: Vec3): ReceiverFrame {
   const n = unit(normal);
-  const u =
-    Math.abs(n[1]) > 0.99 ? ([1, 0, 0] as Vec3) : unit(cross([0, 1, 0], n));
+  const u = Math.abs(n[1]) > 0.99 ? ([1, 0, 0] as Vec3) : unit(cross([0, 1, 0], n));
   return { centre, normal: n, u, v: unit(cross(n, u)) };
 }
 export function receiverPlane(f: ReceiverFrame): ShadowPlane {
@@ -65,24 +44,12 @@ export function receiverUV(point: Vec3, f: ReceiverFrame): [number, number] {
   const x = point[0] - f.centre[0],
     y = point[1] - f.centre[1],
     z = point[2] - f.centre[2];
-  return [
-    x * f.u[0] + y * f.u[1] + z * f.u[2],
-    x * f.v[0] + y * f.v[1] + z * f.v[2],
-  ];
+  return [x * f.u[0] + y * f.u[1] + z * f.u[2], x * f.v[0] + y * f.v[1] + z * f.v[2]];
 }
-export function receiverPoint(
-  uv: readonly [number, number],
-  f: ReceiverFrame,
-  bias = 0,
-): Vec3 {
-  return f.centre.map(
-    (x, i) => x + f.u[i]! * uv[0] + f.v[i]! * uv[1] + f.normal[i]! * bias,
-  ) as Vec3;
+export function receiverPoint(uv: readonly [number, number], f: ReceiverFrame, bias = 0): Vec3 {
+  return f.centre.map((x, i) => x + f.u[i]! * uv[0] + f.v[i]! * uv[1] + f.normal[i]! * bias) as Vec3;
 }
-export function shadowBounds(
-  points: readonly Vec3[],
-  frame: ReceiverFrame,
-): ShadowBounds {
+export function shadowBounds(points: readonly Vec3[], frame: ReceiverFrame): ShadowBounds {
   const min: [number, number] = [Infinity, Infinity],
     max: [number, number] = [-Infinity, -Infinity];
   for (const p of points) {
@@ -98,28 +65,12 @@ export function shadowBounds(
   }
   return { min, max };
 }
-export function inReceiver(
-  uv: readonly [number, number],
-  size?: readonly [number, number],
-  radius?: number,
-): boolean {
-  return (
-    (!size ||
-      (Math.abs(uv[0]) <= size[0] / 2 && Math.abs(uv[1]) <= size[1] / 2)) &&
-    (radius === undefined || Math.hypot(...uv) <= radius)
-  );
+export function inReceiver(uv: readonly [number, number], size?: readonly [number, number], radius?: number): boolean {
+  return (!size || (Math.abs(uv[0]) <= size[0] / 2 && Math.abs(uv[1]) <= size[1] / 2)) && (radius === undefined || Math.hypot(...uv) <= radius);
 }
-export function inBeam(
-  point: Vec3,
-  source: Vec3,
-  axis: Vec3,
-  halfAngle: number,
-): boolean {
+export function inBeam(point: Vec3, source: Vec3, axis: Vec3, halfAngle: number): boolean {
   const d = point.map((x, i) => x - source[i]!) as Vec3;
-  return (
-    dot(d, unit(axis)) >=
-    Math.hypot(...d) * Math.cos((halfAngle * Math.PI) / 180) - 1e-12
-  );
+  return dot(d, unit(axis)) >= Math.hypot(...d) * Math.cos((halfAngle * Math.PI) / 180) - 1e-12;
 }
 /** A perpendicular screen receives a circular spot. General oblique planes are clipped by the cone itself. */
 export function spotRadius(distance: number, halfAngle: number): number {
@@ -128,26 +79,67 @@ export function spotRadius(distance: number, halfAngle: number): number {
 export function spotOpacity(distance: number): number {
   return Math.max(0.12, Math.min(0.45, 0.35 * (0.4 / distance) ** 2));
 }
-/** First intersection of a segment with a triangle; null for a miss. Möller–Trumbore, double-sided. */
-export function segmentTriangle(
-  start: Vec3,
-  end: Vec3,
-  a: Vec3,
-  b: Vec3,
-  c: Vec3,
-): number | null {
-  const sub = (p: Vec3, q: Vec3) => p.map((x, i) => x - q[i]!) as Vec3;
-  const d = sub(end, start),
-    e1 = sub(b, a),
-    e2 = sub(c, a),
-    h = cross(d, e2),
-    det = dot(e1, h);
+/**
+ * First intersection of a segment with a triangle as a fraction of the segment
+ * (0 = start, 1 = end); null for a miss. Möller–Trumbore, double-sided,
+ * allocation-free (rays are re-traced every frame while a part eases).
+ */
+export function segmentTriangle(start: Vec3, end: Vec3, a: Vec3, b: Vec3, c: Vec3): number | null {
+  const dx = end[0] - start[0],
+    dy = end[1] - start[1],
+    dz = end[2] - start[2];
+  const e1x = b[0] - a[0],
+    e1y = b[1] - a[1],
+    e1z = b[2] - a[2];
+  const e2x = c[0] - a[0],
+    e2y = c[1] - a[1],
+    e2z = c[2] - a[2];
+  const hx = dy * e2z - dz * e2y,
+    hy = dz * e2x - dx * e2z,
+    hz = dx * e2y - dy * e2x;
+  const det = e1x * hx + e1y * hy + e1z * hz;
   if (Math.abs(det) < 1e-12) return null;
-  const s = sub(start, a),
-    u = dot(s, h) / det;
+  const sx = start[0] - a[0],
+    sy = start[1] - a[1],
+    sz = start[2] - a[2];
+  const u = (sx * hx + sy * hy + sz * hz) / det;
   if (u < 0 || u > 1) return null;
-  const q = cross(s, e1),
-    v = dot(d, q) / det,
-    t = dot(e2, q) / det;
-  return v < 0 || u + v > 1 || t < 0 || t > 1 ? null : t;
+  const qx = sy * e1z - sz * e1y,
+    qy = sz * e1x - sx * e1z,
+    qz = sx * e1y - sy * e1x;
+  const v = (dx * qx + dy * qy + dz * qz) / det;
+  if (v < 0 || u + v > 1) return null;
+  const t = (e2x * qx + e2y * qy + e2z * qz) / det;
+  return t < 0 || t > 1 ? null : t;
+}
+
+/** Whether a segment meets an axis-aligned box (slab test). */
+export function segmentMeetsBox(start: Vec3, end: Vec3, min: Vec3, max: Vec3): boolean {
+  let lo = 0,
+    hi = 1;
+  for (let i = 0; i < 3; i++) {
+    const d = end[i]! - start[i]!;
+    if (Math.abs(d) < 1e-15) {
+      if (start[i]! < min[i]! || start[i]! > max[i]!) return false;
+      continue;
+    }
+    let t0 = (min[i]! - start[i]!) / d,
+      t1 = (max[i]! - start[i]!) / d;
+    if (t0 > t1) [t0, t1] = [t1, t0];
+    lo = Math.max(lo, t0);
+    hi = Math.min(hi, t1);
+    if (lo > hi) return false;
+  }
+  return true;
+}
+
+/** First hit of a segment with a triangle soup (world vertices, three per triangle); null for a miss. */
+export function segmentMesh(start: Vec3, end: Vec3, triangles: readonly Vec3[], min: Vec3, max: Vec3): number | null {
+  if (!segmentMeetsBox(start, end, min, max)) return null;
+  let best: number | null = null;
+  for (let j = 0; j + 2 < triangles.length; j += 3) {
+    const t = segmentTriangle(start, end, triangles[j]!, triangles[j + 1]!, triangles[j + 2]!);
+    if (t !== null && (best === null || t < best)) best = t;
+  }
+  return best;
 }
