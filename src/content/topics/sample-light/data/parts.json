@@ -1582,7 +1582,7 @@
           0.55,
           0
         ],
-        "color": "wood"
+        "color": "powder"
       },
       "castShadow": false
     },
@@ -2557,7 +2557,8 @@
         "en": "Materials",
         "zh": "材料"
       },
-      "color": "token:ink-3"
+      "color": "token:ink-3",
+      "card": false
     },
     {
       "id": "screen",
@@ -2573,7 +2574,8 @@
         "en": "Hole cards",
         "zh": "有孔卡片"
       },
-      "color": "token:ink-3"
+      "color": "token:ink-3",
+      "card": false
     },
     {
       "id": "dark-box",
@@ -2581,7 +2583,8 @@
         "en": "Dark box",
         "zh": "暗箱"
       },
-      "color": "token:ink-3"
+      "color": "token:ink-3",
+      "card": false
     },
     {
       "id": "outdoors",
@@ -2589,7 +2592,8 @@
         "en": "Courtyard",
         "zh": "空地"
       },
-      "color": "token:ink-3"
+      "color": "token:ink-3",
+      "card": false
     },
     {
       "id": "rays",
@@ -2676,7 +2680,7 @@
       "count": 120,
       "size": 0.12,
       "spread": 0,
-      "whenRun": false
+      "whenRun": true
     },
     {
       "id": "box-mirror-light",
@@ -2723,7 +2727,7 @@
       "count": 120,
       "size": 0.12,
       "spread": 0,
-      "whenRun": false
+      "whenRun": true
     }
   ],
   "animations": [],
@@ -2774,130 +2778,11 @@
     "section": {
       "plane": "xy"
     },
-    "shadows": "contact"
-  },
-  "presets": [
-    {
-      "id": "bench-view",
-      "label": {
-        "en": "BENCH",
-        "zh": "实验台"
-      },
-      "camera": {
-        "position": [
-          -1.15,
-          1.65,
-          1.8
-        ],
-        "target": [
-          0.02,
-          0.94,
-          0.02
-        ],
-        "fov": 32
-      }
-    },
-    {
-      "id": "side-view",
-      "label": {
-        "en": "SIDE",
-        "zh": "侧面"
-      },
-      "camera": {
-        "position": [
-          0,
-          1.1,
-          3.8
-        ],
-        "target": [
-          0,
-          0.97,
-          0.05
-        ],
-        "fov": 22
-      }
-    },
-    {
-      "id": "screen-view",
-      "label": {
-        "en": "SCREEN",
-        "zh": "屏幕"
-      },
-      "camera": {
-        "position": [
-          -1.4,
-          1.27,
-          0.72
-        ],
-        "target": [
-          0.15,
-          1,
-          0.05
-        ],
-        "fov": 28
-      }
-    },
-    {
-      "id": "box-view",
-      "label": {
-        "en": "BOX",
-        "zh": "暗箱"
-      },
-      "camera": {
-        "position": [
-          0.05,
-          1.28,
-          0.55
-        ],
-        "target": [
-          0.4,
-          0.95,
-          -0.23
-        ],
-        "fov": 26
-      }
-    },
-    {
-      "id": "yard-view",
-      "label": {
-        "en": "YARD",
-        "zh": "空地"
-      },
-      "camera": {
-        "position": [
-          24,
-          12,
-          16
-        ],
-        "target": [
-          10,
-          2,
-          0
-        ],
-        "fov": 40
-      }
-    },
-    {
-      "id": "sky-view",
-      "label": {
-        "en": "SKY",
-        "zh": "俯视"
-      },
-      "camera": {
-        "position": [
-          10,
-          18,
-          2
-        ],
-        "target": [
-          10,
-          0.05,
-          0
-        ],
-        "fov": 48
-      }
+    "shadows": "contact",
+    "reference": {
+      "fit": "layers"
     }
-  ],
+  },
   "poses": {
     "hole-moved": {
       "hole-card-2": {

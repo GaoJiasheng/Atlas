@@ -1007,4 +1007,35 @@ SpaceScene / Model3DStage，paper 默认、cinema 可切。原型：docs/30、do
 
 ## 9. 施工记录 / 已知差距
 
-（施工后补：§9.1 引擎、§9.2 主题施工；与 spec 的差异表、计数、性能、门槛、已知差距、给 Gavin 的问题。）
+### 9.1 引擎（Codex，2026-10-20，`codex/space-light`）
+
+**实现**：§4 E-L1–E-L7。`light.ts` 五个子模型（bench / sheets / holes / seeing / sun），`sun.ts` 逐函数移植 NOAA `main.js` 的 Meeus 算法、折射与两次迭代正午；`SIM_KINDS`、`simQuantities`、`quantityKind`、状态域与 `SEPARATE_EXPERIMENTS.light` 已注册；没有 timeline 量，`simTimelineChannels` 返回 null，既有力、能量、生活史的回放契约不变。
+
+| 件 | 代码 / 作者入口 |
+|---|---|
+| 模型与验证 | `lib/sim/{light,sun}.ts`、`sim-schema.ts` 的 `lightSchema / lightIssues`；完整模板 `tests/space-scene/fixtures/light-bench.ts` |
+| 几何投影 | `lib/sim/shadow.ts`、`stages/model3d/ShadowCast.tsx`、`SimOverlays.tsx` 的独立分支；真实网格含 extra 与实例，点光 / 平行光、矩形 / 光锥 / 圆裁剪、不透明影子并集、光斑、光线与粉笔点 |
+| 舞台绑定 | `lib/sim/bind.ts` 的 `place`，`PartNode.tsx` 沿球面 0.5 s 插值、+Y 朝 centre，深链接直接终值；复用既有 offset / rotate / pose / visible / tint / glow |
+| 时间显示 | `lib/sim/text.ts`、`chart.ts`、`TryIt.tsx`、`TryChart.tsx`、`PlateBlock.tsx`，全部走全站 `{t:HH:MM}`；整点轴短写，读屏读时刻，间隔读小时，URL 仍是数 |
+| 阴影模式与 QA | `views.shadows: auto / contact / none`；contact 不更新主光阴影贴图，只留接触斑；`__atlas.engine.shadows()` 返回接收面 cm 包围盒 / 光斑 / trail / rays；`stats().shadowMapUpdates` 为主光阴影更新请求计数 |
+| 夹具 | `sample-light`，draft，34 个 primitive 零件、5 章 / 25 拍：背景章含暗箱与孔卡，距离卡（记录、折线图、预测）、7 件物体×转向、4 种材料（条形图）、太阳（3 日期、时刻、轨迹、粉笔点） |
+
+**作者要注意的差异与决定**：
+
+1. **原稿的距离范围几何上不相容**：12 cm 大圆卡在 a=10、b=60 cm 时影高约 84 cm，不能完整落在 60×45 cm 屏幕；a=10 cm 还会让第一张孔卡与光源重合。没有放宽守门：模板与夹具用 torch `[20,30,40,60]`、screen `[10,20,30,40]`。T5 / T6 的完整原稿表仍由单测单独核对；原始全范围有明确拒绝用例。内容作者须缩窄范围、拆实验或同步扩大真实屏幕。
+2. 选择互设保留既有 `control.sets: { option: { other: value } }` 语法；原稿选项里的 `sets` 不是既有数据形状。现在允许把有 sets 的另一个选择重设到它**不带 sets 的 free 选项**，仍拒绝递归链；选材料清物体、选罐子清材料、URL 往返都已测试。
+3. 五个子模型可各自省略，便于小夹具；sheets / holes 必须有 bench。实际数据尺寸与模型尺寸要一致，卡片厚度不能省略；光源 point 是零偏移时的世界坐标。
+4. 裁剪由叠加自己 shader 的矩形 / 光锥 / 圆测试完成，不借全局 CUTAWAY。效果与平面裁剪相同，互不干扰。影子与光斑不透明、`depthWrite:false`，保留 depthTest；这消除了共面前后面投影竞争造成的白色放射缝，且多张孔卡自然取并集。
+5. 超出接收面 / 光束的边缘光线不画（支架底座的投影落在桌面以下）；extra 轴线对网格求交、透明片后按透光量继续。关灯有限 0.3 s 淡出；拆开时冻结实验投影并淡出，避免把拆开位移当实验。
+6. 夹具的 courtyard 是可选普通零件，符合 overlay 不接收 context 的校验；暗箱的静态流归 `dark-box` 组，避免户外的 rays 图层把实验桌外的静态光路也带出来。太阳章 id 为 `sun-shadows`，避免与零件 `sun` 撞全局 id。夹具标题与字幕是用户明确授权的占位内容；没有新建正式 `light-and-shadows` 内容目录。
+7. NOAA 的独立参考值从主工作树 `art/codex-research/light-and-shadows/sources/solar-results.json` 复制进 `noaa-singapore.json`，含来源；不是拿新实现的输出自造参考表。描图纸 0.65 在夹具只是 spec 的 SIM 系数，正式内容仍须按 §0.1-3 核实来源。
+8. 夹具只保留内建 ORBIT / REF.：命名预设只换镜头、不换章节图层，从暗箱切到空地预设会对着隐藏的装置。五章与各拍负责两个地点的取景，避免把这种空镜头当作作者模板。右侧 chain 只列 source / objects / screen 三组，其他组仍在 LAYERS 和章节索引中；杆子改用现有 powder 材质 token，纸色地面上也看得清。
+9. 暗箱两条流用 `whenRun: true`，对应三拍开启 RUN；不能把它们写成 always-on，否则已有 RunClock 会在流图层隐藏时也持续要帧，令静止实验台无法 IDLE。
+10. T5 的 a=10 cm 还有一个精度边界：2 mm 厚卡的近面在 a−0.1 cm，真实影高比零厚公式大 `1/99 ≈ 1.0101%`，略超 §4.8 写的 <1%。保留真实厚度与网格一致；单测明确钉死这项差值，其余表格距离均 <1%，取整仍逐格相等。没有用舍入后的数字冒充内部误差合格。
+11. 视觉 QA 发现默认 REFERENCE 会把相距 10 m 的两套实验一起取景，隐藏的空地把实验台缩成一点。增加可选 `views.reference: { fit: "layers" }`，只按当前图层中未隐藏、非 context 的零件取景；显式 camera 优先，既有主题缺省行为不变。夹具启用，两地点的 e2e 都核对 REFERENCE 的目标中心。
+
+**测试**：新增 88 个单测（四个文件 `light.test.ts`、`sun.test.ts`、`shadow.test.ts`、`light-display.test.ts`），钉死 T5 / T6、7×3 轮廓、材料 91/45/35/0 与 18/14、孔 Ø2 cm、暗箱三态、选择互设 / URL、非法数据；实际几何顶点投影与模型相差 <0.2 cm，边缘光线误差 <1 mm，孔卡并集 / 裁剪 / 每小时杆顶投影。NOAA 七行高度 / 方位误差 <1e-8°，正午钟点一致；11 行整点表、夏冬方向与三月近天顶。6 个 fixture e2e 包括 21 种真实物体 / 角度组合 <2 mm、深链接与缓动、材料图、时刻与中文手机 44 px、主光阴影计数 0。已有主题内容、`package.json` 与依赖均未改。
+
+**性能实测**：Metal（Apple M5 Max），1600×900 的暂停距离章 19 calls / 3,268 triangles，太阳章 9 / 8,236，均进入 IDLE、主光阴影更新 0；六个 fixture e2e 另钉死两个地点的暂停 IDLE。完整五子模型 `evaluateSim` 固定默认值重复 100,000 次平均 0.00505 ms；首次冷求值（建采样缓存与 JIT）6.20 ms，**冷启动不满足 <0.1 ms**，不能把稳态均值说成冷启动也合格。共享 SpaceScene 页面 JS 从基线 467.6 KB gz 到 476.0 KB（+8.4 KB）；300 KB 页级旧预算在基线已超，本次没有解决这个既有体积缺口。
+
+**基线与门槛**：基线为施工前 `2fb289e` 的独立静态构建。用户指定五主题的 Metal hero 前后图已逐张看：forces 逐像素相同，energy-conversion / mosquito / magnets / circuits 的 >8 RGB 差像素分别约 0.2685% / 0.2885% / 0.0014% / 0.0115%，来自流动粒子，几何、光照与影子相同。五主题加 grasshopper / aircon 的 beats / keys 均通过，控制台干净。check（594 文件，0 error / warning，3 个已有 hint）、validate（38 主题，0 error / warning）、test（113 文件 / 3,046 tests，限制 Vitest worker 至 2）、build（79 页）已通过。完整 CI 首跑 175/177：能量章镜头稳定性比较失败一次，独立重跑通过；另一项是主会话并行 Playwright 运行清理同一输出目录造成的 trace 文件冲突。最终 `CI=1 pnpm e2e` 完整单次运行 **177/177 通过（29.0 分钟）**，没有并行浏览器 QA 干扰。`pnpm shoot sample-light --beats --keys --layout`：25/25 拍链接、0 key 失败、8 尺寸 / 0 layout 问题、控制台干净；最终 61 张 PNG（EN paper 的拍与布局、EN cinema、ZH 两主题）全部逐张打开核对。完整日志、61 图 SHA-256 清单、前后基线与差值保存在工作树外 `../codex-light-engine-QA/` 及报告中。

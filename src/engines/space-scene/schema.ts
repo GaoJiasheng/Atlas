@@ -914,8 +914,9 @@ export const viewsSchema = z
       .optional(),
     /** Optional elevation plane for the ARCHITECTURE panel and REFERENCE view. */
     section: z.object({ plane: z.enum(SECTION_PLANES) }).strict().optional(),
-    /** Optional REFERENCE camera; default: a long-lens straight view on the section plane. */
-    reference: viewPreset.optional(),
+    /** Optional REFERENCE camera, or fit the active layers of a study with separate experiments. */
+    reference: z.object({ camera: orbitCamera.optional(), fit: z.literal('layers').optional() }).strict()
+      .refine((r) => r.camera !== undefined || r.fit !== undefined, { message: 'reference needs a camera or fit: layers' }).optional(),
     /** Name of the EXPLODED mode and slider in this topic (e.g. PEEL / 剥层 for staged muscle layers). */
     explodeLabel: bilingual.optional(),
     /**

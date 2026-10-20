@@ -1377,6 +1377,8 @@ docs/35 §4，`sim.kind: "light"`。纯函数 `lib/sim/light.ts`（几何、散�
 
 QA：`__atlas.engine.shadows()` 返回 `{ [叠加序号]: { casters: { [part]: { min: [u,v], max: [u,v] } }, spot?: { radius }, trail: [[u,v],…], rays } }`，接收面坐标与半径为 cm。用 max−min 对模型 `shadow-height / width`，误差必须 <0.2 cm；太阳 trail 与杆顶平行投影相同。状态不变时不更新几何或要求帧。每挡光物一次绘制，光斑、全部光线、全部粉笔点各一次；台面 ≤45 calls，户外 ≤20，<0.25 M 三角形。测试 `light.test.ts`、`sun.test.ts`、`shadow.test.ts`、`light-display.test.ts` 与 `tests-e2e/sample-light.spec.ts`。
 
+两个实验相距很远时，可写 `views.reference: { fit: "layers" }`：REFERENCE 仍是 section 平面的长焦正视图，但只按当前图层中未隐藏、非 context 的零件取景，避免隐藏的空地把实验台缩成一点。显式 `reference.camera` 优先；不写 fit 时保持全模型取景。这只改变镜头，不切图层或实验状态。夹具的暗箱流用 `whenRun: true`，对应拍开启 RUN；always-on 流会让已有 RunClock 在流图层隐藏时仍持续要帧。
+
 ### SpaceScene · 试一试 · 生活史（life-cycle）
 
 docs/33 §4（E-M1 模型、E-M2 生活史环卡）。`sim.kind: "life-cycle"`：一种动物的生活史。数据里是**有来源的实测历期**（每个温度一行：每个阶段的平均天数 + 论文自己的孵化到成虫总数），模型只做推导：第 d 天在哪一阶段、到成虫还有几天、各段与各组的天数、多久倒一次水会不会有成虫飞走、环流转多快——这些都是 SIM（docs/30 D2：不做通用查表模型，表是测量，显示的数由模型算出）。纯函数、同步、确定性（< 0.1 ms）。代码：`lib/sim/lifecycle.ts`（模型）、`lib/sim/cycle.ts`（环卡的版式与读屏文字）、`hud/CycleCard.tsx`（右上卡）、`explorer/TryIt.tsx`（< 1024 px 收进试一试卡）、`sim-schema.ts`（`lifeCycleSchema`、`lifeCycleIssues`、`quantityKind` 的 `life-cycle` 一支、状态标签）、`scripts/validate-content.ts`（第二个环的 `link`）；单测 `tests/space-scene/{lifecycle,cycle-card}.test.ts`，样板 `tests/space-scene/fixtures/aedes-cycle.ts`（docs/33 §4.2 的完整数据：埃及伊蚊 S16 表 2 四个温度，可当作者模板）；示例主题 `sample-life-cycle`（draft，五章：背景章 + 天数卡 + 水温卡（表、小图、先猜后看）+ 倒水卡 + 两个环）；e2e `tests-e2e/sample-life-cycle.spec.ts`。

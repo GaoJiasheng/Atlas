@@ -173,11 +173,14 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       });
       st.patch({ run: false, view: st.view === 'exploded' ? 'assembled' : st.view });
       const aspect = bridge.width > 0 && bridge.height > 0 ? bridge.width / bridge.height : 1.5;
-      const cam: OrbitCamera = file.views.reference?.camera ?? (bounds ? referenceCamera(bounds, plane, aspect) : DEFAULT_CAMERA);
+      const referenceBounds = file.views.reference?.fit === 'layers'
+        ? modelBounds(file.parts.filter((p) => !p.context && (p.group === undefined || st.layers.includes(p.group)) && !st.hidden.includes(p.id))) ?? bounds
+        : bounds;
+      const cam: OrbitCamera = file.views.reference?.camera ?? (referenceBounds ? referenceCamera(referenceBounds, plane, aspect) : DEFAULT_CAMERA);
       st.applyCameraPreset(cam, { instant });
       hud.setState({ presetId: REFERENCE_PRESET, cameraFree: false });
     },
-    [ui, store, hud, bridge, file.views.reference, bounds, plane],
+    [ui, store, hud, bridge, file.parts, file.views.reference, bounds, plane],
   );
 
   const exitReference = useCallback(

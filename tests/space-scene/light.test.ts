@@ -63,6 +63,11 @@ describe("light bench geometry from docs/35 §2.4", () => {
       (8 * (a + 30)) / (a - 0.1),
       10,
     );
+    const ideal = (8 * (a + 30)) / a;
+    const relative = benchShadow(bench, "card-circle", 0, a, 30).height / ideal - 1;
+    // At the spec's rejected 10 cm setting, 2 mm thickness necessarily adds 1/99.
+    if (a === 10) expect(relative).toBeCloseTo(1 / 99, 12);
+    else expect(relative).toBeLessThan(0.01);
   });
   it.each([
     [10, 12],

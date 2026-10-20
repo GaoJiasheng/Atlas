@@ -5,6 +5,7 @@ type Bounds = { min: [number, number]; max: [number, number] };
 type Shadows = Record<string, { casters: Record<string, Bounds>; trail: [number, number][]; rays: number; spot?: { radius: number } }>;
 type Sim = { values: Record<string, string | boolean | number>; outputs: Record<string, string | number | Record<string, number>>; timeline: Record<string, unknown> };
 type Engine = { sim(): Sim; shadows(): Shadows; setSim(values: Record<string, string | boolean | number>): boolean };
+type CameraStats = { camera: { target: number[]; fov: number } };
 const sim = (page: Page) => page.evaluate(() => (window.__atlas!.engine as unknown as Engine).sim());
 const shadows = (page: Page) => page.evaluate(() => (window.__atlas!.engine as unknown as Engine).shadows());
 const card = (page: Page) => page.locator('.space-try');
@@ -62,6 +63,10 @@ test.describe('sample-light (SpaceScene light model)', () => {
     expect(samples.some((h) => h < start - 0.1 && h > after + 0.1)).toBe(true);
     expect((await shadows(page))['0']!.rays).toBeGreaterThanOrEqual(3);
     await expect(page).toHaveURL(/sim=.*d-torch\.30/);
+    await expect(page.locator('.space-perf')).toContainText('IDLE', { timeout: 10_000 });
+    await page.keyboard.press('r');
+    await expect.poll(() => page.evaluate(() => (window.__atlas!.stats() as unknown as CameraStats).camera.fov)).toBe(16);
+    await expect.poll(async () => Math.abs(await page.evaluate(() => (window.__atlas!.stats() as unknown as CameraStats).camera.target[0]!))).toBeLessThan(1);
   });
 
   test('all seven shapes and turns project their real mesh within two millimetres', async ({ page }) => {
@@ -124,6 +129,10 @@ test.describe('sample-light (SpaceScene light model)', () => {
     const oct = (await shadows(page))['1']!.trail;
     await card(page).locator('[data-sim-control="date"] [data-sim-value="jun-21"]').click();
     await expect.poll(async () => JSON.stringify((await shadows(page))['1']?.trail)).not.toBe(JSON.stringify(oct));
+    await expect(page.locator('.space-perf')).toContainText('IDLE', { timeout: 10_000 });
+    await page.keyboard.press('r');
+    await expect.poll(() => page.evaluate(() => (window.__atlas!.stats() as unknown as CameraStats).camera.fov)).toBe(16);
+    await expect.poll(async () => Math.abs(await page.evaluate(() => (window.__atlas!.stats() as unknown as CameraStats).camera.target[0]!) - 10)).toBeLessThan(1);
   });
 
   test('Chinese and the phone drawer retain clock labels, fitting charts and 44 px controls', async ({ page }) => {
