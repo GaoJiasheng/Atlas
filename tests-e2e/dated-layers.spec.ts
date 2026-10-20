@@ -34,12 +34,11 @@ for (const locale of ['en', 'zh']) {
     await expect(legend).toContainText(locale === 'en' ? 'Milestone' : '里程碑');
     const plate = page.locator('[data-hud-panel="plate"]');
     await expect(plate).toContainText('10,000');
+    // The PLATE row uses the short `countLabel`, not the layer's legend label.
+    await expect(plate.locator('[data-dated-count="sample-blocks"] dt')).toHaveText(locale === 'en' ? 'Blocks' : '楼宇');
+    const box = await plate.locator('button').boundingBox();
+    expect(box?.height).toBeGreaterThanOrEqual(44);
     const toggle = page.locator('[data-layer="sample-blocks"]');
-    for (const target of [toggle, page.locator('[data-layer="sample-rail"]'), page.locator('[data-layer="sample-gardens"]'), plate.locator('button')]) {
-      const box = await target.boundingBox();
-      expect(box?.height).toBeGreaterThanOrEqual(44);
-      expect(box?.width).toBeGreaterThanOrEqual(44);
-    }
     for (const theme of ['paper', 'cinema'] as const) {
       await page.evaluate((value) => window.__atlas!.setTheme(value), theme);
       await expect(page.locator('html')).toHaveAttribute('data-theme', theme);

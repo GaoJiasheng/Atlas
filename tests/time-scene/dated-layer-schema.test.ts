@@ -20,6 +20,18 @@ describe('dated layer definitions', () => {
     for (const color of ['#fff', 'red', 'token:missing-color']) expect(datedLayerDef.safeParse({ ...layer, color }).success).toBe(false);
   });
 
+  it('takes a short PLATE name only for a counted layer', () => {
+    const countLabel = { en: 'Blocks', zh: '楼宇' };
+    expect(datedLayerDef.parse({ ...layer, countLabel }).countLabel).toEqual(countLabel);
+    expect(datedLayerDef.safeParse({ ...layer, count: undefined, countLabel }).success).toBe(false);
+    expect(datedLayerDef.safeParse({ ...layer, countLabel: { zh: '楼宇' } }).success).toBe(false);
+  });
+
+  it('accepts a quantized point topology (the pipeline writes a transform)', () => {
+    const quantized = { ...topology([{ type: 'Point', coordinates: [52000, 54000], properties: { f: 1960 } }]), transform: { scale: [0.0000055, 0.0000035], translate: [103.55, 1.15] } };
+    expect(datedLayerIssues(quantized, layer)).toEqual([]);
+  });
+
   it('reserves built-in layer ids and rejects duplicate topic layer ids', () => {
     expect(datedLayers.safeParse([layer, layer]).success).toBe(false);
     for (const id of ['control', 'sites', 'base']) expect(datedLayers.safeParse([{ ...layer, id }]).success).toBe(false);

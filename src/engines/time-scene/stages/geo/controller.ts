@@ -562,8 +562,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     updateRivers(t);
     updateLocalEra(t);
     for (const layer of datedLayers) {
-      const def = options.datedLayers?.find((d) => d.id === layer.id);
-      if (def) layer.setTheme(tokens, datedColor(def, t));
+      layer.setTheme(tokens, datedColor(layer.def, t));
       layer.update(t);
     }
     updateDashAnimation(on.has('movements') && frame.movements.length > 0);

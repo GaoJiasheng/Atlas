@@ -26,6 +26,7 @@ datedLayers:
     holder: housing
     label: { en: "HDB blocks (synthetic)", zh: "组屋（合成）" }
     count: true
+    countLabel: { en: "Blocks", zh: "楼宇" }
   - id: sample-rail
     file: sample-dated-rail
     kind: line

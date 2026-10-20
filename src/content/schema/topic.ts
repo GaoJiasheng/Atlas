@@ -118,9 +118,12 @@ export const datedLayerDef = z
     color: z.string().refine((value) => value.startsWith('token:') && TOKEN_NAMES.some((name) => value === `token:${name}`), 'must reference a known theme token: token:<name>').optional(),
     label: bilingual,
     count: z.boolean().optional(),
+    /** The PLATE row's short name (`HDB blocks` / `组屋`); defaults to `label`. */
+    countLabel: bilingual.optional(),
   })
   .strict()
-  .refine((layer) => layer.holder !== undefined || layer.color !== undefined, { path: ['color'], message: 'a dated layer needs `holder` or `color`' });
+  .refine((layer) => layer.holder !== undefined || layer.color !== undefined, { path: ['color'], message: 'a dated layer needs `holder` or `color`' })
+  .refine((layer) => layer.countLabel === undefined || layer.count === true, { path: ['countLabel'], message: '`countLabel` needs `count: true`' });
 export type DatedLayerDef = z.output<typeof datedLayerDef>;
 
 export const datedLayers = z.array(datedLayerDef).superRefine((layers, ctx) => {

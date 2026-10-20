@@ -27,6 +27,8 @@ function inRing(point: Position, ring: Position[]): boolean {
   }
   return inside;
 }
+/** Every generated point has a distinct position, so its coordinates identify it. */
+const key = (f: (typeof blocks)[number]) => (f.geometry as Point).coordinates.join(',');
 const visible = (year: number) => blocks.filter((f) => f.properties!.f <= year && year < (f.properties!.u ?? Infinity));
 
 describe('dated-layers synthetic fixture', () => {
@@ -49,15 +51,15 @@ describe('dated-layers synthetic fixture', () => {
       const p = f.geometry.coordinates;
       return !inRing(p, mainland[0]!) || mainland.slice(1).some((ring) => inRing(p, ring));
     });
-    expect(outside.map((f) => f.properties!.id)).toEqual([]);
-    expect(new Set(blocks.map((f) => (f.geometry as Point).coordinates.join(','))).size).toBe(11000);
+    expect(outside.map((f) => key(f))).toEqual([]);
+    expect(new Set(blocks.map(key)).size).toBe(11000);
   });
 
   it('reaches 10,000 simultaneously visible points and replaces identities at equal count', () => {
     expect([1958, 1959, 1965, 1966, 1970, 1979, 1980, 2019, 2020].map((t) => visible(t).length))
       .toEqual([0, 500, 2000, 2000, 5000, 5000, 5000, 10000, 10000]);
-    const oldIds = new Set(visible(1979).map((f) => f.properties!.id));
-    const newIds = new Set(visible(1980).map((f) => f.properties!.id));
+    const oldIds = new Set(visible(1979).map(key));
+    const newIds = new Set(visible(1980).map(key));
     expect([...oldIds].filter((id) => !newIds.has(id))).toHaveLength(1000);
     expect([...newIds].filter((id) => !oldIds.has(id))).toHaveLength(1000);
     expect(blocks.every((f, i) => !i || blocks[i - 1]!.properties!.f <= f.properties!.f)).toBe(true);

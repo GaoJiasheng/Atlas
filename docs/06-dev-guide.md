@@ -551,6 +551,7 @@ datedLayers:
     holder: housing              # entities.json 的 id；与控制区走同一配色路径
     label: { en: HDB blocks, zh: 组屋 }
     count: true                  # 左列 PLATE 中显示当前可见数
+    countLabel: { en: HDB blocks, zh: 组屋 }   # 可选：PLATE 行的短名（缺省用 label；只配 count: true）
   - id: dated-rail
     file: sg-dated-rail
     kind: line
@@ -558,7 +559,7 @@ datedLayers:
     label: { en: Railway, zh: 铁路线 }
 ```
 
-- 文件必须是 **TopoJSON，且只有一个与 `file` 同名的对象**。`point` 对应 Point / MultiPoint，`line` 对应 LineString / MultiLineString，`area` 对应 Polygon / MultiPolygon。每个几何的 `properties` 至少 `{ f: 1960 }`；可选 `u: 1980`、`certainty: approximate`（缺省 `certain`）、`h: 12`（楼层元数据，本轮不按高度改点大小）。`f` / `u` 是**有限的十进制年数字**，预先转换 ISO 日期；`f < u`，无 `u` 表示一直保留。语义复用 `lib/dated.ts` 的 `[from, to)`：开始年出现、结束年消失。数组宜按 `f` 排序；引擎载入时只把日期索引排序一次，几何顺序不影响结果。
+- 文件必须是 **TopoJSON，且只有一个与 `file` 同名的对象**。`point` 对应 Point / MultiPoint，`line` 对应 LineString / MultiLineString，`area` 对应 Polygon / MultiPolygon。可以量化（带 `transform`，管线 `quantization=100000` 的输出照用）。每个几何的 `properties` 至少 `{ f: 1960 }`；可选 `u: 1980`、`certainty: approximate`（缺省 `certain`）、`h: 12`（楼层元数据，本轮不按高度改点大小）。`f` / `u` 是**有限的十进制年数字**，预先转换 ISO 日期；`f < u`，无 `u` 表示一直保留。语义复用 `lib/dated.ts` 的 `[from, to)`：开始年出现、结束年消失。数组宜按 `f` 排序；引擎载入时只把日期索引排序一次，几何顺序不影响结果。
 - 章节及拍的 `layers` 直接写图层 `id`，比如 `[base, control, housing-blocks, dated-rail, battles]`；没列出即关闭。图层文件的年份不另行扩展时间轴范围，章节日期或控制区关键帧（不是拍的日期）应覆盖要展示的年代。控制面板 LAYERS 每层一行，开关和章节共用 store（URL 状态同其它图层）。KEY 每个开启图层一行；点图层另有“过去一年新增”图例。
 - 每层一个 GeoJSON source，载入后只 `setData` 一次。MapLibre GPU 过滤数字属性：`f <= T && (u ?? +∞) > T`；点半径随缩放为 1.2–3 px。过去一年新增点（`T-1 < f <= T`，且尚未消失）大一号、signal 色描边。线为 hairline；面淡底 .35、同色 .6 px 边，近似面淡底再 ×.7、边虚线。放在控制区之上、事件之下；颜色随 paper / cinema token 更新。
 - `lib/datedLayers.ts` 对开始、结束和新增窗口的结束边界各建有序索引，二分求当前计数。只在**可见集合变化**时重设过滤器（不是只比较计数：同年拆一栋又建一栋也要更新）；播放头在两次边界之间缓动不会逐帧 `setFilter`。新增窗口同样单独缓存。
@@ -566,7 +567,7 @@ datedLayers:
 - `pnpm validate` 检查文件、对象、几何、日期区间、holder、token、双语以及章节 / 拍的图层引用；图层 id 与其它主题对象共用唯一命名空间，不能占用内置图层名。
 - 控制区允许空帧：GeoJSON `features: []`，或 TopoJSON 空 `GeometryCollection`。交叉淡化可淡入 / 淡出空帧，空帧无控制区名称、颜色图例与 REFERENCE 轮廓，关键帧状态串继续显示正常序号。
 - 中性事件 `kind: milestone`（Milestone / 里程碑）不要求 sides / result；墨色点加环，与 political 的中性画法相同，KEY 有独立一行，详情眉题显示里程碑。
-- 开发示例 `sample-dated-layers`（draft）：仅 fixture 使用新加坡形状范围内的合成建筑点及合成线面，峰值同时可见 10,000 个点；占位数据不能当作实际土地用途资料。生成方式、计数边界及来源说明在 fixture 的 `data/README.md`。
+- 开发示例 `sample-dated-layers`（draft）：仅 fixture 使用新加坡形状范围内的合成建筑点及合成线面，峰值同时可见 10,000 个点；占位数据不能当作实际土地用途资料。生成方式、计数边界及来源说明在 fixture 的 `data/SOURCES.md`。
 
 ### 引线标注（`leaders.ts`，docs/08 §5 + skill master-spec J）
 

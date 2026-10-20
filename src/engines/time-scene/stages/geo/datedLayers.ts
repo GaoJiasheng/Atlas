@@ -41,6 +41,7 @@ export function datedLayerStyles(def: DatedLayerDef, tokens: ThemeTokens, color:
 
 export interface DatedMapLayer {
   id: string;
+  def: DatedLayerDef;
   index: DatedLayerIndex;
   update(t: number): void;
   setVisible(on: boolean): void;
@@ -61,6 +62,7 @@ export function createDatedMapLayer(map: MlMap, def: DatedLayerDef, collection: 
   for (const layer of layers) map.addLayer(layer, LAYER.eventRing);
   return {
     id: def.id,
+    def,
     index,
     update(nextTime) {
       const next = datedLayerState(index, nextTime);

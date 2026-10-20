@@ -33,7 +33,7 @@ export interface LayerSolo {
 }
 
 export type ControlRow =
-  | { kind: 'layer'; id: string; label: HudText; color?: string; solo?: LayerSolo; minTarget?: 44 }
+  | { kind: 'layer'; id: string; label: HudText; color?: string; solo?: LayerSolo }
   /** A registered mode; the label defaults to the mode's own. */
   | { kind: 'mode'; id: string; label?: HudText }
   | { kind: 'hud' }
@@ -61,7 +61,6 @@ function Row({
   phoneOff,
   onClick,
   data,
-  minTarget,
 }: {
   on: boolean;
   label: string;
@@ -72,13 +71,11 @@ function Row({
   phoneOff?: boolean;
   onClick(): void;
   data?: Record<string, string>;
-  minTarget?: 44;
 }) {
   return (
     <button
       type="button"
       className="atlas-ctl__row"
-      style={minTarget ? { minHeight: minTarget, minWidth: minTarget } : undefined}
       aria-pressed={on}
       disabled={disabled}
       data-tone={tone && tone !== 'ink' ? tone : undefined}
@@ -131,7 +128,6 @@ export function ControlPanel({ layers, tools, legend }: ControlPanelProps) {
           on={on}
           label={tx(r.label, locale)}
           color={r.color}
-          minTarget={r.minTarget}
           onClick={() => store.getState().toggleLayer(r.id)}
           data={{ 'data-layer': r.id }}
         />

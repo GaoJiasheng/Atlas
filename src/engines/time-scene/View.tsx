@@ -369,7 +369,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
 
   /* ---------- legend ---------- */
   const byEntity = topic.colorBy === 'entity';
-  // `colorBy: entity` lists the holders of the keyframe on show, largest first: follow the dominant keyframe (re-render only when it changes).
+  // The keyframe on show (re-render only when it changes): `colorBy: entity` lists its holders, largest first; an empty one has no control rows.
   const legendKeyframe = useSyncExternalStore(
     playhead.subscribe,
     () => dominantKeyframe(model, playhead.get()),
@@ -379,8 +379,9 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   const approximate = useMemo(() => model.keyframes.some((k) => k.keyframe.features.features.some((f) => f.properties.certainty === 'approximate')), [model]);
   const legend = useMemo<LegendItem[]>(() => {
     const items: LegendItem[] = [];
-    const hasControl = (model.keyframes[Math.max(0, legendKeyframe)]?.keyframe.features.features.length ?? 0) > 0;
-    if (hasControl && (layers.includes('control') || layers.includes('participation'))) {
+    // An empty control keyframe (docs/34 E2) has no holder rows; participation shading does not depend on it.
+    const emptyFrame = model.keyframes.length > 0 && model.keyframes[Math.max(0, legendKeyframe)]!.keyframe.features.features.length === 0;
+    if (layers.includes('participation') || (layers.includes('control') && !emptyFrame)) {
       if (byEntity && areas) {
         // Every holder of this keyframe, each in its own colour, largest area first (never collapsed into one "states" row).
         const k = Math.max(0, legendKeyframe);
@@ -445,7 +446,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       { kind: 'layer', id: 'battles', label: t('time.layer.battles') },
       { kind: 'layer', id: 'participation', label: t('time.layer.participation') },
       ...(model.sites.length > 0 ? [{ kind: 'layer' as const, id: 'sites', label: t('time.layer.sites') }] : []),
-      ...(topic.datedLayers ?? []).map((layer) => ({ kind: 'layer' as const, id: layer.id, label: layer.label, color: layer.color ?? entityCssColor(geo.entities.find((e) => e.id === layer.holder)), minTarget: 44 as const })),
+      ...(topic.datedLayers ?? []).map((layer) => ({ kind: 'layer' as const, id: layer.id, label: layer.label, color: layer.color ?? entityCssColor(geo.entities.find((e) => e.id === layer.holder))})),
       { kind: 'mode', id: 'labels', label: t('time.layer.labels') },
     ],
     [model, locale, region, topic.datedLayers, geo.entities], // `t` is bound to `locale`

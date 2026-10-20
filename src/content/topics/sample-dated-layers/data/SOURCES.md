@@ -8,7 +8,7 @@ This draft fixture contains placeholder data, not a Singapore land-use lesson. N
 
 Rebuild from the repository root: `node src/content/topics/sample-dated-layers/generate.mjs`.
 
-`sample-dated-blocks.json`, `sample-dated-rail.json` and `sample-dated-gardens.json` are TopoJSON; each has one object named exactly like its filename stem. Point features have numeric `f`, optional `u`, and numeric `h` (floor height metadata). All intervals use `[f, u)`.
+`sample-dated-blocks.json`, `sample-dated-rail.json` and `sample-dated-gardens.json` are TopoJSON; each has one object named exactly like its filename stem. The blocks file is quantized (a `transform` over a 100,000-step grid, as the shared pipeline writes it). Point features have numeric `f`, optional `u`, and numeric `h` (floor height metadata). All intervals use `[f, u)`.
 
 | Time | Active points | Recent points at the exact year | Meaning |
 |---|---:|---:|---|
@@ -22,3 +22,5 @@ Rebuild from the repository root: `node src/content/topics/sample-dated-layers/g
 | 2020 | 10,000 | 0 | Recent highlight expires |
 
 Control K1 (1959) and K3 (2019) use G2 synthetic patches; K2 (1966) deliberately contains no features. The shared engine crossfade is unchanged. The route changes geometry at 1980; the first approximate area expires at 1980 and is replaced, with a second certain area added in 2019. Milestones have no sides.
+
+The fixture exercises independent dates, retirement, replacement with an unchanged count, one-year new-point outlines, per-layer toggles and legend rows, PLATE counts, chapter and beat layer targets, milestone events without sides, and an empty control keyframe between two nonempty ones. Clipping and counts: `pnpm test tests/time-scene/dated-fixture.test.ts`; browser coverage: `tests-e2e/dated-layers.spec.ts`.

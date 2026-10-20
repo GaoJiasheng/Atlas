@@ -35,6 +35,15 @@ const centres = [
   [103.747, 1.385], [103.787, 1.438], [103.819, 1.447], [103.838, 1.429],
   [103.749, 1.359], [103.904, 1.302], [103.872, 1.351], [103.817, 1.282],
 ];
+// Quantized like the pipeline's TopoJSON output (mapshaper quantization=100000 over the island).
+const BOUNDS = [[103.55, 1.15], [104.1, 1.5]];
+const Q = 100000;
+const transform = {
+  scale: [0, 1].map((k) => (BOUNDS[1][k] - BOUNDS[0][k]) / (Q - 1)),
+  translate: BOUNDS[0],
+};
+const quantize = (p) => p.map((v, k) => Math.round((v - transform.translate[k]) / transform.scale[k]));
+const dequantize = (q) => q.map((v, k) => v * transform.scale[k] + transform.translate[k]);
 function location(index) {
   const centre = centres[index % centres.length];
   for (;;) {
@@ -43,31 +52,27 @@ function location(index) {
     const direction = (index % centres.length) * 0.37;
     const x = radius * Math.cos(angle) * 0.0045;
     const y = radius * Math.sin(angle) * 0.0028;
-    const point = [
-      +(centre[0] + x * Math.cos(direction) - y * Math.sin(direction)).toFixed(6),
-      +(centre[1] + x * Math.sin(direction) + y * Math.cos(direction)).toFixed(6),
-    ];
-    if (onMainland(point)) return point;
+    const grid = quantize([centre[0] + x * Math.cos(direction) - y * Math.sin(direction), centre[1] + x * Math.sin(direction) + y * Math.cos(direction)]);
+    if (onMainland(dequantize(grid))) return grid;
   }
 }
 const blocks = Array.from({ length: 11000 }, (_, i) => ({
   type: 'Point',
   coordinates: location(i),
   properties: {
-    id: `sample-block-${String(i + 1).padStart(5, '0')}`,
     f: i < 500 ? 1959 : i < 2000 ? 1965 : i < 5000 ? 1970 : i < 10000 ? 2019 : 1980,
     ...(i < 1000 ? { u: 1980 } : {}),
     h: 4 + i % 37,
   },
 })).sort((a, b) => a.properties.f - b.properties.f);
 
-function topology(name, geometries, arcs = []) {
-  return { type: 'Topology', objects: { [name]: { type: 'GeometryCollection', geometries } }, arcs };
+function topology(name, geometries, arcs = [], quantized) {
+  return { type: 'Topology', ...(quantized ? { transform: quantized } : {}), objects: { [name]: { type: 'GeometryCollection', geometries } }, arcs };
 }
 function save(name, content) {
   writeFileSync(`${root}public/geo/${name}.json`, `${JSON.stringify(content)}\n`);
 }
-save('sample-dated-blocks', topology('sample-dated-blocks', blocks));
+save('sample-dated-blocks', topology('sample-dated-blocks', blocks, [], transform));
 save('sample-dated-rail', topology('sample-dated-rail', [
   { type: 'LineString', arcs: [0], properties: { f: 1965, u: 1980 } },
   { type: 'LineString', arcs: [1], properties: { f: 1980 } },

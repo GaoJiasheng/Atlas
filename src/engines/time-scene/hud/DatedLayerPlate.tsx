@@ -36,7 +36,7 @@ export function DatedLayerPlate({ definitions, indexes, layers, playhead, locale
       </button>
       {open && <dl className="ts-plate__rows">
         {counted.map((layer, i) => <div key={layer.id} className="ts-plate__row" data-dated-count={layer.id} data-enabled={layers.includes(layer.id)}>
-          <dt>{tx(layer.label, locale)}</dt>
+          <dt>{tx(layer.countLabel ?? layer.label, locale)}</dt>
           <dd>{values[i] === '—' ? '—' : Number(values[i]).toLocaleString(locale === 'zh' ? 'zh-SG' : 'en-SG')}</dd>
         </div>)}
       </dl>}
