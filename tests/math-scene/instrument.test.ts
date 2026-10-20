@@ -63,6 +63,16 @@ describe('the scale', () => {
     expect(jugFrame(jug, scaleOf(jug), { x: 0, y: 0, w: 336, h: 400 }).body.h).toBeGreaterThanOrEqual(200);
   });
 
+  it('keeps each of three jugs across a phone visible, its scale beside it', () => {
+    const jug = inst({ type: 'jug', unit: 'l', from: 0, to: 6, major: 1, minor: 1, value: 3 });
+    for (const w of [106, 160]) {
+      const f = jugFrame(jug, scaleOf(jug), { x: 0, y: 0, w, h: 220 });
+      expect(f.body.w).toBeGreaterThanOrEqual(w * 0.4 - 0.5);
+      expect(f.body.x).toBeGreaterThanOrEqual(0);
+      expect(f.body.x + f.body.w).toBeLessThan(w);
+    }
+  });
+
   it('numbers a two-unit scale in whole big units and what is over', () => {
     const sc = scaleOf(inst({ type: 'tape', unit: 'cm', sub: { unit: 'm' }, from: 100, to: 150, major: 10, minor: 2 }))!;
     expect(markText(sc, 100 * M)).toBe('1 m');
