@@ -630,6 +630,9 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
             simMove={simMoves.get(part.id) ?? null}
             play={sim?.play.get(part.id) ?? null}
             stretch={sim?.stretch.get(part.id) ?? null}
+            fill={sim?.fill.get(part.id) ?? null}
+            fillBridge={bridge}
+            fillStill={referenceOn}
             simTint={simTints.get(part.id) ?? null}
             filings={filingSets.get(part.id) ?? null}
             animSim={sim?.animations}
@@ -669,7 +672,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
       )}
       </group>
       {/* Flow paths do not follow the parts apart: no particles while exploded (docs/12 §7.5, G16). */}
-      <Flows flows={data.flows} layers={s.view === 'exploded' ? NO_LAYERS : s.layers} look={look} clipping={clipping} effects={sim?.flows} fieldLines={linesOf} />
+      <Flows bridge={bridge} flows={data.flows} layers={s.view === 'exploded' ? NO_LAYERS : s.layers} look={look} clipping={clipping} effects={sim?.flows} fieldLines={linesOf} />
       <CameraRig
         store={store}
         ui={ui}

@@ -62,7 +62,17 @@ export interface StageStats {
   lastFrame: number;
 }
 
+export interface FillReading {
+  /** Drawn volume (scene units cubed) and local surface y. */
+  volume: number;
+  level: number;
+  shown: boolean;
+}
+
 export interface StageBridge {
+  fills: Map<string, FillReading>;
+  fillBenchmarks: Map<string, () => number>;
+  flowPaths: Map<string, Record<string, { visible: boolean }>>;
   /** Stage size in CSS pixels. */
   width: number;
   height: number;
@@ -125,6 +135,9 @@ export function createBridge(): StageBridge {
     focal: 0,
     modelRadius: 1,
     anchors: new Map(),
+    fills: new Map(),
+    fillBenchmarks: new Map(),
+    flowPaths: new Map(),
     sites: new Map(),
     labelled: null,
     stats: { calls: 0, triangles: 0, geometries: 0, textures: 0, fps: undefined, gpu: undefined, buffer: [0, 0], lastFrame: 0 },

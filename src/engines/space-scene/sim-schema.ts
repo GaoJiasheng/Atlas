@@ -9,6 +9,9 @@
  * Build-time only (zod); the client imports the types.
  */
 import { z } from 'zod';
+import { matterSchema, matterIssues, type MatterPart } from './matter-schema';
+import { matterQuantity, matterQuantityRange, matterLiquidShapes } from './lib/sim/matter';
+import { capacity, fillShapeForPrimitive, validateFillProfile } from './lib/fill';
 import { bilingual, colorRef, kebabId, vec3 } from '../../content/schema/common';
 import { fieldLines } from './lib/sim/field';
 import { FORCE_STATES, forceQuantity, forceTimelineChannels, springExtension, rollRun } from './lib/sim/force';
@@ -155,6 +158,7 @@ const partBind = z
      * rounded, at least 0 (`true`: k = the value). Slotted masses on a 50 g
      * hanger: `{ per: 50, minus: 50 }` (the hanger is the first 50 g).
      */
+    fill: z.object({ per: z.number().positive(), below: z.number().nonnegative().default(0), meniscus: z.number().nonnegative().max(0.01).default(0), ease: z.number().nonnegative().max(10).default(0.6) }).strict().optional(),
     count: z.union([z.literal(true), z.object({ per: z.number().positive().default(1), minus: z.number().default(0) }).strict()]).optional(),
     /**
      * Move along `axis` (scene units, after any pose) by (value − `origin`) ×
@@ -226,6 +230,7 @@ const flowBind = z
   .object({
     ...source,
     flow: kebabId,
+    paths: z.array(kebabId).min(1).max(16).optional(),
     /** The flow runs only while the condition holds. */
     visible: simCondition.optional(),
     /**
@@ -842,7 +847,7 @@ export const simOverlaySchema = z.discriminatedUnion('kind', [
 ]);
 export type SimOverlay = z.output<typeof simOverlaySchema>;
 
-export const SIM_KINDS = ['circuit', 'magnet', 'force', 'energy', 'life-cycle'] as const;
+export const SIM_KINDS = ['circuit', 'magnet', 'force', 'energy', 'life-cycle', 'matter'] as const;
 export type SimKind = (typeof SIM_KINDS)[number];
 
 export const MAX_SIM_CONTROLS = 16;
@@ -861,6 +866,7 @@ export const simSchema = z
     force: forceSchema.optional(),
     energy: energySchema.optional(),
     lifeCycle: lifeCycleSchema.optional(),
+    matter: matterSchema.optional(),
   })
   .strict();
 export type SimData = z.output<typeof simSchema>;
@@ -940,6 +946,7 @@ export const beatSimSchema = z.object({ set: simValues }).strict();
 /* ------------------------------------------------------------------ */
 
 interface SimContext {
+  partData?: readonly MatterPart[];
   parts: ReadonlySet<string>;
   /** `own`: the flow has a `path` or `paths` of its own. */
   flows: ReadonlyMap<string, { paths?: readonly { id: string }[] | undefined; own?: boolean }>;
@@ -992,6 +999,8 @@ const MAGNET_STATES: readonly string[] = ['facing', 'field-state'];
 /** The kind of a model quantity (an output's `from`), or null when the model (or the data it needs) has none of that name. */
 export function quantityKind(sim: SimData, from: string): SimOutput['kind'] | null {
   switch (sim.kind) {
+    case 'matter':
+      return sim.matter ? matterQuantity(sim.matter, from)?.kind ?? null : null;
     case 'circuit':
       if (!sim.circuit || !circuitQuantities(sim.circuit).includes(from)) return null;
       return from === 'edges' ? 'vector' : from.startsWith('status:') || from.startsWith('sound:') ? 'state' : 'number';
@@ -1084,7 +1093,9 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
       issue(['outputs', i, 'from'], needs ? `"${from}" needs the ${sim.kind} model's \`${needs}\` data` : `the ${sim.kind} model has no quantity "${from}"`);
     } else if (kind !== o.kind) issue(['outputs', i, 'kind'], `"${from}" is a ${kind}, not a ${o.kind}`);
     const states =
-      sim.kind === 'force'
+      sim.kind === 'matter' && sim.matter
+        ? matterQuantity(sim.matter, from)?.states
+        : sim.kind === 'force'
         ? FORCE_STATES[from]
         : sim.kind === 'energy' && from === 'chain-state' && sim.energy
           ? Object.keys(sim.energy.chains)
@@ -1099,6 +1110,8 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
       for (const st of Object.keys(o.states ?? {})) if (!known.includes(st)) issue(['outputs', i, 'states', st], `"${from}" is never "${st}" (${known.join(', ')})`);
     }
   });
+  if (sim.kind === 'matter' && !sim.matter) issue(['matter'], 'a matter sim needs `matter`');
+  if (sim.matter) matterIssues(sim.matter, controls, ctx.partData ?? []).forEach((x) => issue(['matter', ...x.path], x.message));
   if (sim.kind === 'circuit' && !sim.circuit) issue(['circuit'], 'a circuit sim needs `circuit`');
   if (sim.kind === 'magnet' && !sim.magnet) issue(['magnet'], 'a magnet sim needs `magnet`');
   if (sim.kind === 'force' && !sim.force) issue(['force'], 'a force sim needs `force`');
@@ -1111,6 +1124,7 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
   if (sim.magnet) magnetIssues(sim, sim.magnet, controls, ctx).forEach((x) => issue(['magnet', ...x.path], x.message));
   const fieldStates = (o: SimOutput | undefined) => o?.kind === 'state' && (o.from ?? o.id) === 'field-state' && sim.kind === 'magnet';
   const stateBound = new Set<string>();
+  const filled = new Set<string>();
   sim.bind.forEach((b, i) => {
     const has = (k: string) => k in b && (b as Record<string, unknown>)[k] !== undefined;
     if (has('control') === has('output')) {
@@ -1126,9 +1140,27 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
       const ids = Array.isArray(b.part) ? b.part : [b.part];
       for (const id of ids) if (!ctx.parts.has(id)) issue(['bind', i, 'part'], `unknown part "${id}"`);
       for (const pose of Object.values(b.pose ?? {})) if (pose !== null && !ctx.poses.has(pose)) issue(['bind', i, 'pose'], `unknown pose "${pose}"`);
+      if (b.fill) {
+        if (outp && outp.kind !== 'number' || ctl && ctl.kind !== 'step') issue(['bind', i, 'fill'], 'fill needs a number output or step control');
+        for (const id of ids) {
+          if (filled.has(id)) issue(['bind', i, 'fill'], `duplicate fill for "${id}"`);
+          filled.add(id);
+          const part = ctx.partData?.find((p) => p.id === id);
+          const shape = part?.primitive && fillShapeForPrimitive(part.primitive);
+          if (!shape || part?.context || part?.repeat || part?.extra?.length) {
+            issue(['bind', i, 'fill'], `"${id}" needs one upright full-round lathe or box primitive, no context, repeat or extra`);
+            continue;
+          }
+          if (part.primitive?.kind === 'lathe') for (const message of validateFillProfile(part.primitive.profile)) issue(['bind', i, 'fill'], message);
+          const cap = capacity(shape);
+          if (b.fill.below * b.fill.per >= cap) issue(['bind', i, 'fill', 'below'], 'below must be less than capacity');
+          const max = ctl?.kind === 'step' ? Math.max(...ctl.values) : sim.matter && outp ? matterQuantityRange(sim.matter, outp.from ?? outp.id, controls, matterLiquidShapes(ctx.partData ?? []))?.[1] ?? null : null;
+          if (max !== null && (max + b.fill.below) * b.fill.per > cap + 1e-12) issue(['bind', i, 'fill'], `maximum fill exceeds capacity of "${id}"`);
+        }
+      }
       if (b.count) for (const id of ids) if (!ctx.countable.has(id)) issue(['bind', i, 'count'], `"${id}" needs a \`repeat\` and no \`extra\` to show a count of copies`);
-      if ((b.glow || b.tint || b.count || b.offset || b.rotate) && outp && outp.kind !== 'number')
-        issue(['bind', i], `glow / tint / count / offset / rotate need a number, "${src}" is a ${outp.kind}`);
+      if ((b.glow || b.tint || b.count || b.offset || b.rotate || b.fill) && outp && outp.kind !== 'number')
+        issue(['bind', i], `glow / tint / count / offset / rotate / fill need a number, "${src}" is a ${outp.kind}`);
       if (outp?.kind === 'timeline' && ['visible', 'pose', 'glow', 'tint', 'count', 'offset', 'rotate', 'at', 'state'].some(has))
         issue(['bind', i], `"${src}" is a timeline: bind it with \`play\` or a \`stretch\` with a \`channel\``);
       if (b.play) {
@@ -1188,12 +1220,17 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
           stateBound.add(id);
         }
       }
-      const fields = ['visible', 'pose', 'glow', 'tint', 'count', 'offset', 'rotate', 'at', 'state', 'play', 'stretch'].filter(has);
+      const fields = ['visible', 'pose', 'glow', 'tint', 'count', 'offset', 'rotate', 'at', 'state', 'play', 'stretch', 'fill'].filter(has);
       if (fields.length === 0) issue(['bind', i], 'a part binding needs visible, pose, glow, tint, count, offset, rotate, at, state, play or stretch');
     } else if ('flow' in b) {
       if (outp?.kind === 'timeline') issue(['bind', i, 'output'], `"${src}" is a timeline: it moves parts (\`play\`), not flows`);
       const flow = ctx.flows.get(b.flow);
       if (!flow) issue(['bind', i, 'flow'], `unknown flow "${b.flow}"`);
+      if (b.paths) {
+        if (!b.visible) issue(['bind', i, 'paths'], 'paths belongs to a visible binding');
+        if (new Set(b.paths).size !== b.paths.length) issue(['bind', i, 'paths'], 'duplicate path ids');
+        for (const path of b.paths) if (!flow?.paths?.some((p) => p.id === path)) issue(['bind', i, 'paths'], `unknown path "${path}" of flow "${b.flow}"`);
+      }
       if (b.intensity) {
         if (outp?.kind !== 'vector') issue(['bind', i, 'intensity'], 'intensity needs a vector output (a value per path id)');
         if (flow && !flow.paths) issue(['bind', i, 'intensity'], `flow "${b.flow}" has no \`paths\``);

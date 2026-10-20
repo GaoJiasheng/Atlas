@@ -1,0 +1,169 @@
+---
+{
+  "id": "pores",
+  "order": 6,
+  "title": {
+    "en": "Sample sand pores",
+    "zh": "示例沙孔隙"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "layers": [
+      "grains",
+      "air-flow"
+    ],
+    "labels": [
+      "sand-cylinder",
+      "jug",
+      "sand-in-cylinder"
+    ],
+    "camera": {
+      "position": [
+        1.25,
+        0.29,
+        0.52
+      ],
+      "target": [
+        1.13,
+        0.105,
+        0.02
+      ],
+      "fov": 32
+    },
+    "summary": {
+      "en": "Sample sand pores: values from the model.",
+      "zh": "示例沙孔隙：模型算出的数值。"
+    },
+    "index": {
+      "parts": [
+        "sand-cylinder",
+        "sand-in-cylinder",
+        "jug",
+        "water-over-sand"
+      ]
+    },
+    "sim": {
+      "set": {
+        "water-added": 0,
+        "cup-place": "above",
+        "cup-hole": false
+      },
+      "try": {
+        "vary": "water-added",
+        "observe": [
+          "sand-reading",
+          "air-gaps"
+        ],
+        "keep": [
+          {
+            "en": "Same 100 ml of dry sand",
+            "zh": "相同的 100 ml 干沙"
+          }
+        ],
+        "record": {
+          "chart": {
+            "y": "sand-reading"
+          }
+        },
+        "predict": {
+          "prompt": {
+            "en": "Sample prediction: compare the next reading.",
+            "zh": "示例猜想：比较下一次读数。"
+          },
+          "change": {
+            "water-added": 100
+          },
+          "observe": "vs-sum",
+          "options": [
+            {
+              "id": "equal",
+              "label": {
+                "en": "Equal",
+                "zh": "相同"
+              },
+              "means": "equal"
+            },
+            {
+              "id": "less",
+              "label": {
+                "en": "Less",
+                "zh": "较少"
+              },
+              "means": "less"
+            },
+            {
+              "id": "more",
+              "label": {
+                "en": "More",
+                "zh": "较多"
+              },
+              "means": "more"
+            }
+          ]
+        }
+      }
+    },
+    "beats": [
+      {
+        "sim": {
+          "set": {
+            "water-added": 0
+          }
+        },
+        "caption": {
+          "en": "Sample: dry sand contains air spaces.",
+          "zh": "示例：干沙有空气空隙。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "water-added": 20
+          }
+        },
+        "caption": {
+          "en": "Sample: water enters the spaces and bubbles escape.",
+          "zh": "示例：水进入空隙，气泡冒出。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "water-added": 40
+          }
+        },
+        "caption": {
+          "en": "Sample: water rises above the sand.",
+          "zh": "示例：水面升到沙面以上。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "water-added": 100
+          }
+        },
+        "caption": {
+          "en": "Sample: the reading reaches 165 ml.",
+          "zh": "示例：读数达到 165 ml。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Sample sand pores: a draft engine fixture.
+
+</Lang>
+
+<Lang zh>
+
+示例沙孔隙：引擎测试草稿。
+
+</Lang>

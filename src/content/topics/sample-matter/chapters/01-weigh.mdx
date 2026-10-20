@@ -1,0 +1,145 @@
+---
+{
+  "id": "weigh",
+  "order": 1,
+  "title": {
+    "en": "Sample weighing",
+    "zh": "示例称质量"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "layers": [
+      "weighing"
+    ],
+    "labels": [
+      "balance",
+      "stone",
+      "sponge"
+    ],
+    "camera": {
+      "position": [
+        -0.77,
+        0.33,
+        0.64
+      ],
+      "target": [
+        -0.97,
+        0.045,
+        0
+      ],
+      "fov": 34
+    },
+    "summary": {
+      "en": "Sample weighing: values from the model.",
+      "zh": "示例称质量：模型算出的数值。"
+    },
+    "index": {
+      "parts": [
+        "balance",
+        "stone",
+        "sponge",
+        "marble",
+        "clay-ball",
+        "water-beaker"
+      ]
+    },
+    "sim": {
+      "set": {
+        "weigh-object": "stone"
+      },
+      "try": {
+        "vary": "weigh-object",
+        "observe": [
+          "mass"
+        ],
+        "keep": [
+          {
+            "en": "Same balance",
+            "zh": "同一台秤"
+          }
+        ],
+        "record": {
+          "chart": {
+            "y": "mass"
+          }
+        },
+        "predict": {
+          "prompt": {
+            "en": "Sample prediction: compare the next reading.",
+            "zh": "示例猜想：比较下一次读数。"
+          },
+          "change": {
+            "weigh-object": "sponge"
+          },
+          "observe": "mass",
+          "options": [
+            {
+              "id": "more",
+              "label": {
+                "en": "More",
+                "zh": "较多"
+              },
+              "means": "more"
+            },
+            {
+              "id": "same",
+              "label": {
+                "en": "Same",
+                "zh": "相同"
+              },
+              "means": "same"
+            },
+            {
+              "id": "less",
+              "label": {
+                "en": "Less",
+                "zh": "较少"
+              },
+              "means": "less"
+            }
+          ]
+        }
+      }
+    },
+    "beats": [
+      {
+        "sim": {
+          "set": {
+            "weigh-object": "stone"
+          }
+        },
+        "caption": {
+          "en": "Sample: the stone is on the balance.",
+          "zh": "示例：石头放上秤。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "weigh-object": "sponge"
+          }
+        },
+        "caption": {
+          "en": "Sample: the sponge replaces the stone.",
+          "zh": "示例：海绵换下石头。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Sample weighing: a draft engine fixture.
+
+</Lang>
+
+<Lang zh>
+
+示例称质量：引擎测试草稿。
+
+</Lang>

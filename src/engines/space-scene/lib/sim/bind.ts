@@ -22,7 +22,15 @@ export interface SimGlow {
   level: number;
 }
 
+export interface SimFill {
+  volume: number;
+  below: number;
+  meniscus: number;
+  ease: number;
+}
+
 export interface SimFlowEffect {
+  visibility?: Record<string, boolean>;
   /** `false`: a binding stops the flow. */
   visible: boolean;
   /**
@@ -79,6 +87,7 @@ export interface SimEffects {
   tint: Map<string, SimGlow>;
   /** Copies of a `repeat` part on show. */
   count: Map<string, number>;
+  fill: Map<string, SimFill>;
   /** Scene-unit offset per part. */
   offset: Map<string, Vec3>;
   /** A damped bounce to the offset instead of the plain ease (`offset.settle`). */
@@ -145,6 +154,7 @@ export function simEffects(sim: SimData, values: SimValues, outputs: SimOutputs)
     glow: new Map(),
     tint: new Map(),
     count: new Map(),
+    fill: new Map(),
     offset: new Map(),
     offsetSettle: new Map(),
     stretch: new Map(),
@@ -176,6 +186,7 @@ export function simEffects(sim: SimData, values: SimValues, outputs: SimOutputs)
           const x = Math.min(1, Math.max(0, num(v) / b.tint.full));
           out.tint.set(id, { color: b.tint.color, level: b.tint.curve === 'sqrt' ? Math.sqrt(x) : x });
         }
+        if (b.fill) out.fill.set(id, { volume: Math.max(0, num(v) * b.fill.per), below: b.fill.below * b.fill.per, meniscus: b.fill.meniscus, ease: b.fill.ease });
         if (b.count) out.count.set(id, Math.max(0, Math.round(b.count === true ? num(v) : (num(v) - b.count.minus) / b.count.per)));
         if (b.offset) {
           const d = (num(v) - b.offset.origin) * b.offset.per;
@@ -224,7 +235,12 @@ export function simEffects(sim: SimData, values: SimValues, outputs: SimOutputs)
     } else if ('flow' in b) {
       const f: SimFlowEffect = out.flows.get(b.flow) ?? { visible: true, paths: null, mode: 'speed', color: null, state: null };
       if (b.state && typeof v === 'string') f.state = v;
-      if (b.visible !== undefined && !holds(b.visible, v, first)) f.visible = false;
+      if (b.visible !== undefined) {
+        if (b.paths) {
+          f.visibility ??= {};
+          for (const path of b.paths) f.visibility[path] = (f.visibility[path] ?? true) && holds(b.visible, v, first);
+        } else if (!holds(b.visible, v, first)) f.visible = false;
+      }
       if (b.intensity && v !== undefined && typeof v === 'object' && !isTimeline(v)) {
         const { full, mode } = b.intensity;
         const cap = mode === 'density' ? 1 : 2;

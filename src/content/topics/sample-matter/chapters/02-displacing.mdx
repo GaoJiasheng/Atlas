@@ -1,0 +1,166 @@
+---
+{
+  "id": "displacing",
+  "order": 2,
+  "title": {
+    "en": "Sample displacement",
+    "zh": "示例排水"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "layers": [
+      "measuring"
+    ],
+    "labels": [
+      "cyl-b",
+      "drop-stone",
+      "drop-clay-ball"
+    ],
+    "camera": {
+      "position": [
+        -0.4,
+        0.3,
+        0.48
+      ],
+      "target": [
+        -0.55,
+        0.11,
+        -0.16
+      ],
+      "fov": 32
+    },
+    "summary": {
+      "en": "Sample displacement: values from the model.",
+      "zh": "示例排水：模型算出的数值。"
+    },
+    "index": {
+      "parts": [
+        "cyl-b",
+        "drop-stone",
+        "drop-marble",
+        "drop-clay-ball",
+        "drop-clay-roll"
+      ]
+    },
+    "sim": {
+      "set": {
+        "drop-object": "nothing"
+      },
+      "try": {
+        "vary": "drop-object",
+        "observe": [
+          "reading",
+          "object-volume"
+        ],
+        "keep": [
+          {
+            "en": "Same starting water",
+            "zh": "相同的起始水量"
+          }
+        ],
+        "record": {
+          "chart": {
+            "y": "reading"
+          }
+        },
+        "predict": {
+          "prompt": {
+            "en": "Sample prediction: compare the next reading.",
+            "zh": "示例猜想：比较下一次读数。"
+          },
+          "change": {
+            "drop-object": "stone"
+          },
+          "observe": "reading",
+          "options": [
+            {
+              "id": "more",
+              "label": {
+                "en": "More",
+                "zh": "较多"
+              },
+              "means": "more"
+            },
+            {
+              "id": "same",
+              "label": {
+                "en": "Same",
+                "zh": "相同"
+              },
+              "means": "same"
+            },
+            {
+              "id": "less",
+              "label": {
+                "en": "Less",
+                "zh": "较少"
+              },
+              "means": "less"
+            }
+          ]
+        }
+      }
+    },
+    "beats": [
+      {
+        "sim": {
+          "set": {
+            "drop-object": "nothing"
+          }
+        },
+        "caption": {
+          "en": "Sample: the cylinder starts at 100 ml.",
+          "zh": "示例：量筒开始为 100 ml。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "drop-object": "stone"
+          }
+        },
+        "caption": {
+          "en": "Sample: the stone raises the level.",
+          "zh": "示例：石头让液面升高。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "drop-object": "clay-roll"
+          }
+        },
+        "caption": {
+          "en": "Sample: the clay roll occupies its model volume.",
+          "zh": "示例：黏土条占据模型体积。"
+        }
+      }
+    ],
+    "hide": [
+      "cyl-a",
+      "cyl-a-water",
+      "glass",
+      "glass-water",
+      "flask",
+      "flask-water",
+      "bowl",
+      "bowl-water"
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Sample displacement: a draft engine fixture.
+
+</Lang>
+
+<Lang zh>
+
+示例排水：引擎测试草稿。
+
+</Lang>
