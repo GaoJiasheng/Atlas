@@ -21,7 +21,7 @@ for(const m of [40,50,60,70,80,90,100,120]){
   const second=await mapshaperApi().applyCommands(`-i q.json -clean snap-interval=0.00001 target=* -rename-layers land-sg-modern -o out.json format=topojson quantization=${quant}`,{'q.json':JSON.parse(first['q.json']!.toString())});
   const parsed=JSON.parse(second['out.json']!.toString());const topo=foldTopology(parsed,Object.keys(parsed.objects),'land-sg-modern');
   const fc=feature(topo,topo.objects['land-sg-modern']) as any;
-  if(fc.features.filter((f:any)=>f.properties.kind==='land').length!==8)throw Error('Packing lost a dated era');
+  if(fc.features.filter((f:any)=>f.properties.kind==='land').length!==7)throw Error('Packing lost a dated era');
   const polygons=fc.features.flatMap((f:any)=>f.geometry.type==='Polygon'?[f.geometry.coordinates]:f.geometry.type==='MultiPolygon'?f.geometry.coordinates:[]);
   const rings=ringIssues(polygons);const text=JSON.stringify(topo);const bytes=Buffer.byteLength(text);attempts.push({dpM:m,quant,bytes,...rings});console.log('packed',attempts.at(-1));
   if(bytes<=250*1024&&!rings.zeroArea&&!rings.selfCrossing){

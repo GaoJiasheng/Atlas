@@ -1,154 +1,74 @@
 ---
-{
-  "id": "getting-around",
-  "order": 4,
-  "title": {
-    "en": "Roads and railways",
-    "zh": "【待译】Roads and railways"
-  },
-  "sensitive": false,
-  "state": {
-    "time": "1975-06-02",
-    "camera": {
-      "center": [
-        103.84,
-        1.33
-      ],
-      "zoom": 10.8
-    },
-    "layers": [
-      "base",
-      "control",
-      "movements",
-      "battles",
-      "sites",
-      "hdb-blocks"
-    ],
-    "highlight": [
-      "area-licensing-scheme",
-      "changi-airport-opens",
-      "mrt-official-opening",
-      "coe-1990",
-      "erp-1998"
-    ],
-    "summary": {
-      "en": "Road pricing, an airport and expanding railways connect homes and jobs while competing for land.",
-      "zh": "【待译】Road pricing, an airport and expanding railways connect homes and jobs while competing for land."
-    },
-    "beats": [
-      {
-        "t": "1975-06-02",
-        "camera": {
-          "center": [
-            103.85,
-            1.29
-          ],
-          "zoom": 12.6
-        },
-        "highlight": [
-          "area-licensing-scheme"
-        ],
-        "caption": {
-          "en": "2 June 1975: vehicles entering the city centre during charging hours need a paid licence, to reduce congestion.",
-          "zh": "【待译】2 June 1975: vehicles entering the city centre during charging hours need a paid licence, to reduce congestion."
-        }
-      },
-      {
-        "t": "1981-07-01",
-        "camera": {
-          "center": [
-            103.99,
-            1.36
-          ],
-          "zoom": 11.8
-        },
-        "highlight": [
-          "changi-airport-opens"
-        ],
-        "caption": {
-          "en": "1 July 1981: Changi Airport opens at the eastern tip, much of it on land filled in from the sea.",
-          "zh": "【待译】1 July 1981: Changi Airport opens at the eastern tip, much of it on land filled in from the sea."
-        }
-      },
-      {
-        "t": "1987-11-07",
-        "camera": {
-          "center": [
-            103.85,
-            1.35
-          ],
-          "zoom": 12.4
-        },
-        "highlight": [
-          "nsl-toa-payoh-yio-chu-kang"
-        ],
-        "caption": {
-          "en": "7 November 1987: the first MRT trains run between Toa Payoh and Yio Chu Kang, five stations long.",
-          "zh": "【待译】7 November 1987: the first MRT trains run between Toa Payoh and Yio Chu Kang, five stations long."
-        }
-      },
-      {
-        "t": "1990-12-31",
-        "camera": {
-          "center": [
-            103.82,
-            1.35
-          ],
-          "zoom": 10.4
-        },
-        "highlight": [
-          "ewl-boon-lay-1990"
-        ],
-        "caption": {
-          "en": "1990: the first two lines reach Boon Lay in the west, Pasir Ris in the east and Marina Bay in the south.",
-          "zh": "【待译】1990: the first two lines reach Boon Lay in the west, Pasir Ris in the east and Marina Bay in the south."
-        }
-      },
-      {
-        "t": "2024-12-31",
-        "camera": {
-          "center": [
-            103.82,
-            1.36
-          ],
-          "zoom": 10.2
-        },
-        "highlight": [],
-        "caption": {
-          "en": "2024: the MRT network is about 240 kilometres long; light rail also connects neighbourhoods within new towns.",
-          "zh": "【待译】2024: the MRT network is about 240 kilometres long; light rail also connects neighbourhoods within new towns."
-        }
-      }
-    ]
-  }
-}
+id: getting-around
+order: 4
+title: { en: "Roads and railways", zh: "路与铁路" }
+sensitive: false
+state:
+  time: "1975-06-02"
+  camera: { center: [103.84, 1.33], zoom: 10.8 }
+  layers: [base, control, movements, battles]
+  highlight: [area-licensing-scheme, changi-airport-opens, nsl-toa-payoh-yio-chu-kang, ewl-boon-lay-1990]
+  summary:
+    en: "A small island cannot keep adding roads, so it charges for driving into the city, limits the number of cars and builds railways underground and on viaducts."
+    zh: "小岛不能一直加路，于是开车进城要付费，汽车数量受到限制，铁路则建在地下和高架上。"
+  beats:
+    - t: "1975-06-02"
+      camera: { center: [103.85, 1.29], zoom: 12.6 }
+      highlight: [area-licensing-scheme]
+      caption:
+        en: "2 June 1975: most cars driving into the city centre in the morning rush must now show a paid licence. The charge keeps the narrow streets moving."
+        zh: "1975 年 6 月 2 日：早上交通高峰时，大部分汽车进入市中心都要先买通行证。收费是为了让狭窄的街道不塞车。"
+    - t: "1981-07-01"
+      camera: { center: [103.985, 1.36], zoom: 11.8 }
+      highlight: [changi-airport-opens]
+      caption:
+        en: "1 July 1981: Changi Airport opens at the eastern tip of the island, partly on land filled in from the sea. Flights move here from Paya Lebar."
+        zh: "1981 年 7 月 1 日：樟宜机场在岛的东端启用，一部分建在填海得来的土地上。民航班机从巴耶利峇搬到这里。"
+    - t: "1987-11-07"
+      camera: { center: [103.85, 1.35], zoom: 12.4 }
+      highlight: [nsl-toa-payoh-yio-chu-kang]
+      caption:
+        en: "7 November 1987: the first MRT trains carry passengers between Toa Payoh and Yio Chu Kang, a line five stations long."
+        zh: "1987 年 11 月 7 日：第一段地铁载客通车，从大巴窑到杨厝港，共五个站。"
+    - t: "1990-12-31"
+      camera: { center: [103.83, 1.345], zoom: 10.8 }
+      highlight: [ewl-boon-lay-1990, ewl-tanah-merah-pasir-ris]
+      caption:
+        en: "1990: the first two MRT lines reach Boon Lay in the west, Pasir Ris in the east and Marina Bay in the south."
+        zh: "1990 年：最早的两条地铁线西到文礼，东到巴西立，南到滨海湾。"
+    - t: "2024-12-31"
+      camera: { center: [103.82, 1.36], zoom: 10.2 }
+      highlight: [bplrt-loop, sklrt-east, pglrt-east]
+      caption:
+        en: "2024: the MRT lines are about 240 kilometres long, and small light rail loops run inside Bukit Panjang, Sengkang and Punggol."
+        zh: "2024 年：地铁线全长约 240 公里，武吉班让、盛港和榜鹅三个新镇里还有轻轨小环线。"
 ---
 
 <Lang en>
 
-People need to travel between homes, schools, shops and workplaces. Roads make those journeys possible, but roads also take land. Adding lanes cannot be the only response to traffic on a small island. In 1973 several bus companies merged into Singapore Bus Service. On 2 June 1975 the Area Licensing Scheme began charging vehicles entering the restricted city zone during charging hours.
+Roads take land, and a small island cannot keep adding them. In 1973 several bus companies were merged into Singapore Bus Service. On 2 June 1975 the government began the Area Licensing Scheme: most cars entering the city centre in the morning rush had to show a paid licence; buses, taxis, goods vehicles and cars carrying <Num s="S157">four</Num> people were let through free. Charging for the busiest streets was a way to share road space without widening every road.
 
-Connections beyond the island changed too. Changi Airport opened for commercial operations on 1 July 1981. Reclamation had enlarged its site at the eastern tip. Choosing the location gave the airport room to grow, while moving civilian flights away from Paya Lebar. An airport needs much more land than the terminal building alone: runways, access roads and other facilities also need space.
+Travel beyond the island needed land too. Changi Airport opened on 1 July 1981 at the eastern tip, partly on land reclaimed from the sea, and took over civilian flights from Paya Lebar. An airport needs far more room than its terminal: runways, taxiways and roads all take space.
 
-On 7 November 1987 passenger trains began running between Toa Payoh and Yio Chu Kang. That first MRT section had <Num s="S154">five</Num> stations. Lines then extended towards more towns and workplaces. Some tracks run underground and others on viaducts, allowing railways to cross the city without a continuous strip of land at street level.
+On 7 November 1987 the first Mass Rapid Transit trains carried passengers between Toa Payoh and Yio Chu Kang, <Num s="S154">five</Num> stations apart. By 1990 the two first lines reached Boon Lay, Pasir Ris and Marina Bay. In the city the trains run underground and outside it mostly on viaducts, so a railway uses little land at street level.
 
-The MRT network grew from <Num s="S156">67</Num> kilometres in 1990 to <Num s="S156">242.5</Num> kilometres in 2024. Light rail connects neighbourhoods inside some new towns. Vehicle quotas and Electronic Road Pricing also manage demand for road space. The map’s lines appear by first passenger-service dates; a ceremonial opening can happen later.
+The MRT grew from <Num s="S156">67</Num> kilometres of line in 1990 to <Num s="S156">242.5</Num> kilometres in 2024. Light rail loops link homes in Bukit Panjang, Sengkang and Punggol with MRT stations. Since May 1990 a person buying a car needs a Certificate of Entitlement, and from 1 April 1998 Electronic Road Pricing began charging drivers for using busy roads at busy times, first on the East Coast Parkway and from September 1998 in the city.
 
-<More title={{"en": "Different ways of managing traffic", "zh": "【待译】Different ways of managing traffic"}}>
+<More title={{ en: "Three ways to manage traffic", zh: "管理交通的三种办法" }}>
 
-A Certificate of Entitlement controls registration of a new vehicle through a quota. ERP charges for using busy roads at specified times [S153]. The Area Licensing Scheme used a paid paper licence for entry into a restricted zone [S157]. These measures act at different points: owning a vehicle, using a road, or entering an area.
-
-</More>
-
-<More title={{"en": "Passenger service and official opening", "zh": "【待译】Passenger service and official opening"}}>
-
-The MRT’s first passenger section opened on 7 November 1987 [S154]. The official opening was on 12 March 1988 [S155]. The railway layer uses passenger service, so a line can already be visible before an opening-ceremony event.
+The Area Licensing Scheme charged for **entering an area**: a paper licence bought for the day and displayed in the car. The Certificate of Entitlement controls **owning a vehicle**: only a set number of new vehicles can be registered, and buyers bid for the right. Electronic Road Pricing charges for **using a road**: gantries over the road detect a unit fitted in every vehicle and take the charge from a card in it. All three try to keep traffic moving on a fixed amount of road.
 
 </More>
 
-<More title={{"en": "Light rail and the map", "zh": "【待译】Light rail and the map"}}>
+<More title={{ en: "Opening day and first passengers", zh: "开幕日与第一批乘客" }}>
 
-Light rail carries passengers around neighbourhoods and links them with MRT interchanges. On the map, sections appear when passenger service begins. A line may later gain new stations, so a railway’s first opening does not date every stop along it. MRT length and LRT length are counted separately; adding them gives a different network total.
+The first MRT trains carried passengers on 7 November 1987, but the system's official opening was on 12 March 1988. This map uses the day each stretch first carried passengers, so the first lines are already on the map before the ceremony.
+
+</More>
+
+<More title={{ en: "Light rail in the new towns", zh: "新镇里的轻轨" }}>
+
+Light rail trains are small and run on their own tracks above the streets. The first, in Bukit Panjang, opened in 1999; Sengkang followed in 2003 and Punggol in 2005. Later stations were added to loops that were already running, so a loop's first day does not date every stop on it. The light rail lines are not counted in the MRT length above.
 
 </More>
 
@@ -156,29 +76,29 @@ Light rail carries passengers around neighbourhoods and links them with MRT inte
 
 <Lang zh>
 
-【待译】People need to travel between homes, schools, shops and workplaces. Roads make those journeys possible, but roads also take land. Adding lanes cannot be the only response to traffic on a small island. In 1973 several bus companies merged into Singapore Bus Service. On 2 June 1975 the Area Licensing Scheme began charging vehicles entering the restricted city zone during charging hours.
+道路要占地，小岛不能一直加路。1973 年，几家巴士公司合并成新加坡巴士服务有限公司。1975 年 6 月 2 日，政府推行区域执照计划：早上交通高峰时进入市中心的汽车，大多要出示付费买来的通行证；巴士、德士、货车和载满 <Num s="S157">4</Num> 人的汽车可以免费通过。对最拥挤的街道收费，是不必把每条路都拓宽也能分配路面的办法。
 
-Connections beyond the island changed too. Changi Airport opened for commercial operations on 1 July 1981. Reclamation had enlarged its site at the eastern tip. Choosing the location gave the airport room to grow, while moving civilian flights away from Paya Lebar. An airport needs much more land than the terminal building alone: runways, access roads and other facilities also need space.
+往来岛外也需要土地。1981 年 7 月 1 日，樟宜机场在岛的东端启用，一部分建在填海得来的土地上，民航班机也从巴耶利峇搬到这里。机场需要的地远比航站楼大：跑道、滑行道和道路都要占地。
 
-On 7 November 1987 passenger trains began running between Toa Payoh and Yio Chu Kang. That first MRT section had <Num s="S154">five</Num> stations. Lines then extended towards more towns and workplaces. Some tracks run underground and others on viaducts, allowing railways to cross the city without a continuous strip of land at street level.
+1987 年 11 月 7 日，第一段地铁载客通车，从大巴窑到杨厝港，共 <Num s="S154">5</Num> 个站。到 1990 年，最早的两条线已经通到文礼、巴西立和滨海湾。地铁在市区走地下，出了市区多半走高架，所以铁路在地面上占的地不多。
 
-The MRT network grew from <Num s="S156">67</Num> kilometres in 1990 to <Num s="S156">242.5</Num> kilometres in 2024. Light rail connects neighbourhoods inside some new towns. Vehicle quotas and Electronic Road Pricing also manage demand for road space. The map’s lines appear by first passenger-service dates; a ceremonial opening can happen later.
+地铁线从 1990 年的 <Num s="S156">67</Num> 公里，增加到 2024 年的 <Num s="S156">242.5</Num> 公里。武吉班让、盛港和榜鹅还有轻轨，把住家和地铁站连起来。1990 年 5 月起，买车要先有拥车证；1998 年 4 月 1 日起，电子道路收费在繁忙时段向使用繁忙道路的车辆收费，先在东海岸公园大道实施，同年 9 月扩大到市区。
 
-<More title={{"en": "Different ways of managing traffic", "zh": "【待译】Different ways of managing traffic"}}>
+<More title={{ en: "Three ways to manage traffic", zh: "管理交通的三种办法" }}>
 
-【待译】A Certificate of Entitlement controls registration of a new vehicle through a quota. ERP charges for using busy roads at specified times [S153]. The Area Licensing Scheme used a paid paper licence for entry into a restricted zone [S157]. These measures act at different points: owning a vehicle, using a road, or entering an area.
-
-</More>
-
-<More title={{"en": "Passenger service and official opening", "zh": "【待译】Passenger service and official opening"}}>
-
-【待译】The MRT’s first passenger section opened on 7 November 1987 [S154]. The official opening was on 12 March 1988 [S155]. The railway layer uses passenger service, so a line can already be visible before an opening-ceremony event.
+区域执照计划管的是**进入一个地区**：一张当天买来、放在车上让人看见的纸质通行证。拥车证管的是**拥有车辆**：每段时间只能登记一定数量的新车，买车的人要竞标这个权利。电子道路收费管的是**使用道路**：路上的闸门感应每辆车上装的车内单元，从插在里面的卡扣费。三种办法都是为了让有限的道路保持通畅。
 
 </More>
 
-<More title={{"en": "Light rail and the map", "zh": "【待译】Light rail and the map"}}>
+<More title={{ en: "Opening day and first passengers", zh: "开幕日与第一批乘客" }}>
 
-【待译】Light rail carries passengers around neighbourhoods and links them with MRT interchanges. On the map, sections appear when passenger service begins. A line may later gain new stations, so a railway’s first opening does not date every stop along it. MRT length and LRT length are counted separately; adding them gives a different network total.
+地铁在 1987 年 11 月 7 日第一次载客，正式开幕却是 1988 年 3 月 12 日。这张地图用的是每一段第一次载客的日子，所以开幕典礼之前，最早的线路已经出现在地图上。
+
+</More>
+
+<More title={{ en: "Light rail in the new towns", zh: "新镇里的轻轨" }}>
+
+轻轨列车比较小，在高出街道的专用轨道上行驶。第一条在武吉班让，1999 年通车；盛港 2003 年、榜鹅 2005 年接着通车。有些车站是后来才加进已经在运行的环线里的，所以一条环线的通车日，不等于线上每个车站的启用日。上面的地铁长度不包括轻轨。
 
 </More>
 

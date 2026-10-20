@@ -1,159 +1,81 @@
 ---
-{
-  "id": "more-land",
-  "order": 5,
-  "title": {
-    "en": "Making more land",
-    "zh": "【待译】Making more land"
-  },
-  "sensitive": false,
-  "state": {
-    "time": "1981-07-01",
-    "camera": {
-      "center": [
-        103.8,
-        1.32
-      ],
-      "zoom": 10.2
-    },
-    "layers": [
-      "base",
-      "control",
-      "movements",
-      "battles",
-      "sites",
-      "hdb-blocks",
-      "estates"
-    ],
-    "highlight": [
-      "east-coast-reclamation",
-      "marina-bay-reclamation",
-      "jurong-island-opens",
-      "jurong-rock-caverns",
-      "pinnacle-duxton",
-      "tuas-reclamation",
-      "changi-airport-opens"
-    ],
-    "summary": {
-      "en": "Reclamation extends the shore; underground space and taller buildings change how existing land can be used.",
-      "zh": "【待译】Reclamation extends the shore; underground space and taller buildings change how existing land can be used."
-    },
-    "beats": [
-      {
-        "t": "1981-07-01",
-        "camera": {
-          "center": [
-            103.93,
-            1.31
-          ],
-          "zoom": 11.6
-        },
-        "highlight": [],
-        "caption": {
-          "en": "1981: compare the coast with the dashed line of today. Along the East Coast and at Changi, reclamation has already pushed the shore out to sea.",
-          "zh": "【待译】1981: compare the coast with the dashed line of today. Along the East Coast and at Changi, reclamation has already pushed the shore out to sea."
-        }
-      },
-      {
-        "t": "1991-04-28",
-        "camera": {
-          "center": [
-            103.7,
-            1.27
-          ],
-          "zoom": 11.2
-        },
-        "highlight": [],
-        "caption": {
-          "en": "1991: compare this approximate satellite shoreline around the Jurong islands with today’s dashed coast. Reclamation changes the water between them.",
-          "zh": "【待译】1991: compare this approximate satellite shoreline around the Jurong islands with today’s dashed coast. Reclamation changes the water between them."
-        }
-      },
-      {
-        "t": "2002-10-11",
-        "camera": {
-          "center": [
-            103.69,
-            1.26
-          ],
-          "zoom": 11.8
-        },
-        "highlight": [
-          "jurong-island-opens"
-        ],
-        "caption": {
-          "en": "2002: by this satellite snapshot, seven former islands have been joined for oil and chemical plants. Jurong Island officially opened in 2000.",
-          "zh": "【待译】2002: by this satellite snapshot, seven former islands have been joined for oil and chemical plants. Jurong Island officially opened in 2000."
-        }
-      },
-      {
-        "t": "2014-09-02",
-        "camera": {
-          "center": [
-            103.7,
-            1.26
-          ],
-          "zoom": 12.6
-        },
-        "highlight": [
-          "jurong-rock-caverns"
-        ],
-        "caption": {
-          "en": "2014: deep below Jurong Island, rock caverns store liquid hydrocarbons, freeing surface land for other uses.",
-          "zh": "【待译】2014: deep below Jurong Island, rock caverns store liquid hydrocarbons, freeing surface land for other uses."
-        }
-      },
-      {
-        "t": "2019-12-31",
-        "camera": {
-          "center": [
-            103.82,
-            1.33
-          ],
-          "zoom": 10.2
-        },
-        "highlight": [
-          "pinnacle-duxton"
-        ],
-        "caption": {
-          "en": "Today: compare the enlarged island with its older shores. Some HDB blocks, such as Pinnacle@Duxton, rise fifty storeys.",
-          "zh": "【待译】Today: compare the enlarged island with its older shores. Some HDB blocks, such as Pinnacle@Duxton, rise fifty storeys."
-        }
-      }
-    ]
-  }
-}
+id: more-land
+order: 5
+title: { en: "Making more land", zh: "土地不够怎么办" }
+sensitive: false
+state:
+  time: "1981-07-01"
+  camera: { center: [103.82, 1.32], zoom: 10.2 }
+  layers: [base, control, movements, battles]
+  highlight: [east-coast-reclamation, jurong-island-opens, jurong-rock-caverns, pinnacle-duxton]
+  summary:
+    en: "When land runs short, an island can add land at its edges, dig below the ground and build higher."
+    zh: "土地不够用的时候，岛可以在海边造地，往地下挖，也可以往高处建。"
+  beats:
+    - t: "1981-07-01"
+      camera: { center: [103.95, 1.33], zoom: 11.4 }
+      highlight: [east-coast-reclamation]
+      caption:
+        en: "1981: compare the coast with the dashed line of today. Along the East Coast and at Changi, sand has already pushed the shore far out to sea."
+        zh: "1981 年：把海岸和今天的虚线比一比。东海岸和樟宜一带，填进去的沙已经把海岸往海里推出去很远。"
+    - t: "1991-04-28"
+      camera: { center: [103.70, 1.255], zoom: 11.6 }
+      highlight: []
+      caption:
+        en: "April 1991: off Jurong, the small southern islands are still separate. The dashed line shows the one large island they will become."
+        zh: "1991 年 4 月：裕廊外海的几个小岛还是分开的。虚线画出它们后来连成的那一个大岛。"
+    - t: "2002-10-11"
+      camera: { center: [103.69, 1.265], zoom: 11.6 }
+      highlight: [jurong-island-opens]
+      caption:
+        en: "October 2002: most of the gaps between the islands have been filled. Jurong Island, opened in 2000, holds oil refineries and chemical plants."
+        zh: "2002 年 10 月：岛与岛之间大多已经填平。2000 年启用的裕廊岛，岛上是炼油厂和化工厂。"
+    - t: "2014-09-02"
+      camera: { center: [103.705, 1.26], zoom: 12.4 }
+      highlight: [jurong-rock-caverns]
+      caption:
+        en: "2 September 2014: deep under Jurong Island, caverns cut into rock now store oil, so the land above can be used for other things."
+        zh: "2014 年 9 月 2 日：裕廊岛地底深处，在岩石里挖出的岩洞开始储油，地面上的土地就能另作他用。"
+    - t: "2019-12-31"
+      camera: { center: [103.82, 1.33], zoom: 10.2 }
+      layers: [base, movements, battles, hdb-blocks]
+      highlight: [pinnacle-duxton]
+      caption:
+        en: "Today: the island is about a quarter larger than in 1960, and new homes are built higher. The tallest HDB blocks have fifty storeys."
+        zh: "今天：岛比 1960 年大了约四分之一，新的组屋也越建越高，最高的有 50 层。"
 ---
 
 <Lang en>
 
-Singapore can change the way it uses land, and it can also add land. <Term id="land-reclamation">Land reclamation</Term> turns shallow sea into land by enclosing an area and filling it. East Coast reclamation began in 1966. Other projects extended Changi, Marina Bay, Jurong and Tuas. The dashed coast helps show where the shoreline has moved.
+A small island can use its land in new ways, and it can also make more of it. <Term id="land-reclamation">Land reclamation</Term> turns shallow sea into land: a wall of rock and sand closes off an area, and sand is poured in until it rises above the water. Reclamation along the East Coast began in 1966 and went on in stages for about thirty years. Changi, Marina Bay, Tuas and the islands off Jurong were all enlarged the same way.
 
-Jurong Island officially opened on 14 October 2000. Reclamation joined <Num s="S208">seven</Num> islands for oil and chemical plants. The opening did not mean that every reclamation phase had finished. Different sources give later completion dates for works with different scopes. The satellite snapshots show land on particular days, rather than the exact day each project became usable.
+Off Jurong, work began in 1993 to join <Num s="S208">seven</Num> small islands into one, Jurong Island, for oil refineries and chemical plants. It was officially opened on 14 October 2000, and that stage of reclamation was finished in 2003. The coasts on this map come from satellite images taken on particular days, so each shows the shore on that day, not the day each project was finished.
 
-Space can also be found below and above the surface. Jurong Rock Caverns opened on 2 September 2014 to store liquid hydrocarbons underground. Deep tunnels carry used water towards treatment plants. Taller housing puts more homes on a building site: Pinnacle@Duxton, completed in 2009, has <Num s="S51">50</Num>-storey blocks. Building higher still requires lifts, services and shared outdoor space.
+Land can also be found below ground and higher up. Under Jurong Island, the Jurong Rock Caverns opened on 2 September 2014 to store oil in rock far below the seabed, freeing about <Num s="S210">60</Num> hectares of land at the surface. Deep tunnels carry used water to treatment plants. Homes went upwards: the seven towers of Pinnacle@Duxton, finished in 2009, have <Num s="S51">50</Num> storeys.
 
-Official land-area figures rose from <Num s="S200">581.5</Num> square kilometres at the end of 1960 to <Num s="S200">735.7</Num> at the end of 2024. The calculation method changed in 2002, so the figures are not perfectly comparable. More land also involves choices: filling the sea alters coastal habitats, and sand must come from somewhere.
+Singapore's official land area grew from <Num s="S200">581.5</Num> square kilometres at the end of 1960 to <Num s="S200">735.7</Num> at the end of 2024, about a quarter more. The way it is measured changed in 2002, so the figures are not exactly comparable. New land has costs too: reclamation changes coasts and sea life, and the sand has to come from somewhere.
 
-<More title={{"en": "How reclamation works", "zh": "【待译】How reclamation works"}}>
+<More title={{ en: "How land is reclaimed", zh: "怎样填海造地" }}>
 
-<Figure src="figures/singapore-land-use-reclamation-section" alt={{"en": "A cutaway of fill above a seabed and a separate rock cavern far below.", "zh": "【待译】A cutaway of fill above a seabed and a separate rock cavern far below."}} caption={{"en": "A teaching section of reclamation and underground storage. The relative depths and materials are schematic.", "zh": "【待译】A teaching section of reclamation and underground storage. The relative depths and materials are schematic."}} />
+<Figure src="figures/singapore-land-use-reclamation-section" alt={{ en: "A cutaway of sand fill above a soft seabed, with a rock seawall at the edge and a separate rock cavern far below.", zh: "剖面图：软海床上填着一层层沙，海边有石块堆成的海堤，远在下方的岩石里另有一个岩洞。" }} caption={{ en: "Drawing made for this topic: reclaimed land and an underground cavern. Depths and materials are simplified.", zh: "为本主题画的示意图：填海得来的土地和地下岩洞。深度和材料都经过简化。" }} />
 
-Dykes contain the fill. Sand and other material are placed inside, and the ground must settle and be improved before many buildings can be constructed [S207]. A new-looking shore in a satellite image is therefore not proof that the site was ready for occupation. Fill can come from local excavation or imports. NLB notes limits including imported-sand costs and damage to ecosystems [S207]. Singapore’s foreign ministry distinguishes Indonesia’s sea-sand ban in 2003 from its land-sand ban in 2007, which affected construction [S209]. Reclamation adds useful space while changing the coast and requiring material from elsewhere.
-
-</More>
-
-<More title={{"en": "Reading the coast carefully", "zh": "【待译】Reading the coast carefully"}}>
-
-Water reflects green and infrared light differently from land. Comparing those reflections helps distinguish land from water. Cloud, tide and mixed coastal pixels limit the result. Early MSS images have coarser pixels than later Landsat images. Each shore is an approximate snapshot of a particular day. The older shores copied from historical maps are estimates too; neither should be read as an exact survey.
+First a seawall of rock is built around the area. Sand is pumped or dumped inside until it rises above the sea. The new ground is soft and must be left to settle, and often pressed or drained, before large buildings can stand on it. For the East Coast the fill came from Singapore's own hills, at Siglap, Bedok and Tampines; at Changi it was dredged from the nearby seabed; for later projects, such as Pulau Tekong, sand was also imported from neighbouring countries.
 
 </More>
 
-<More title={{"en": "Building higher", "zh": "【待译】Building higher"}}>
+<More title={{ en: "Where the sand came from: two views", zh: "沙从哪里来：两种看法" }}>
 
-The median is the middle value after the blocks are arranged by height. These calculated medians group today’s residential HDB property records by completion decade [S219].
+Reclamation added about a quarter to Singapore's land, for homes, an airport, industry and a port. The National Library Board also lists its costs: imported sand grew more expensive, and filling the sea harms the living things of the shore. Where the sand comes from is argued about. In 2010 the campaign group Global Witness said that sand dredged in Cambodia for Singapore was harming the environment there, including inside a wildlife sanctuary. Singapore's Ministry of National Development replied that sand is imported by private companies and that it checks where imports come from, including licence papers from Cambodia. In 2007 Singapore's foreign minister told Parliament that Indonesia had stopped exporting sea sand in 2003. These questions are still debated.
 
-| Completed | Median maximum floor level |
+</More>
+
+<More title={{ en: "How these coastlines were drawn, and how high the blocks go", zh: "海岸线怎么画的，组屋有多高" }}>
+
+Each coast from 1973 on was traced from a Landsat satellite image by a fixed rule: water reflects green and infrared light differently from land, and the shore is drawn where one changes into the other. Clouds, tides and the size of a pixel (60 metres in the 1970s images, 30 metres later) limit the result. Along shores that have not changed, half of the traced points lie within about 20 to 50 metres of the true coast, but some lie a few hundred metres out.
+
+The typical (median) height of HDB blocks standing today, calculated from HDB's data and grouped by the decade they were completed:
+
+| Completed | Typical number of storeys |
 |---|---:|
 | 1960s | <Num s="S219">10</Num> |
 | 1970s | <Num s="S219">13</Num> |
@@ -162,8 +84,6 @@ The median is the middle value after the blocks are arranged by height. These ca
 | 2000s | <Num s="S219">17</Num> |
 | 2010s | <Num s="S219">16</Num> |
 | 2020–2026 | <Num s="S219">16</Num> |
-
-Later blocks are often taller than early ones, but the pattern does not rise in every decade. The last group is incomplete. These are surviving buildings, so demolished blocks are missing; the table does not measure every block built in the past.
 
 </More>
 
@@ -171,43 +91,43 @@ Later blocks are often taller than early ones, but the pattern does not rise in 
 
 <Lang zh>
 
-【待译】Singapore can change the way it uses land, and it can also add land. <Term id="land-reclamation">Land reclamation</Term> turns shallow sea into land by enclosing an area and filling it. East Coast reclamation began in 1966. Other projects extended Changi, Marina Bay, Jurong and Tuas. The dashed coast helps show where the shoreline has moved.
+小岛可以换个方式用土地，也可以多造一些土地。<Term id="land-reclamation">填海</Term>就是把浅海变成陆地：先用石块和沙筑一道堤把一片海围起来，再往里面填沙，直到高出水面。东海岸的填海从 1966 年开始，分几期进行了约 30 年。樟宜、滨海湾、大士和裕廊外海的岛屿，也都是这样扩大的。
 
-Jurong Island officially opened on 14 October 2000. Reclamation joined <Num s="S208">seven</Num> islands for oil and chemical plants. The opening did not mean that every reclamation phase had finished. Different sources give later completion dates for works with different scopes. The satellite snapshots show land on particular days, rather than the exact day each project became usable.
+1993 年起，裕廊外海的 <Num s="S208">7</Num> 个小岛被逐步连成一个岛，就是裕廊岛，岛上建了炼油厂和化工厂。裕廊岛在 2000 年 10 月 14 日正式启用，这一期填海到 2003 年完成。这张地图上的海岸取自某几天拍的卫星影像，所以画的是那一天的海岸，不是每项工程完工的日子。
 
-Space can also be found below and above the surface. Jurong Rock Caverns opened on 2 September 2014 to store liquid hydrocarbons underground. Deep tunnels carry used water towards treatment plants. Taller housing puts more homes on a building site: Pinnacle@Duxton, completed in 2009, has <Num s="S51">50</Num>-storey blocks. Building higher still requires lifts, services and shared outdoor space.
+土地也可以往地下找、往高处找。2014 年 9 月 2 日，裕廊岛下的裕廊岩洞启用，在海床下深处的岩石里储油，腾出地面上约 <Num s="S210">60</Num> 公顷的土地。深层隧道把用过的水送到处理厂。住家也往上发展：2009 年落成的达士岭组屋，七座楼都有 <Num s="S51">50</Num> 层。
 
-Official land-area figures rose from <Num s="S200">581.5</Num> square kilometres at the end of 1960 to <Num s="S200">735.7</Num> at the end of 2024. The calculation method changed in 2002, so the figures are not perfectly comparable. More land also involves choices: filling the sea alters coastal habitats, and sand must come from somewhere.
+新加坡的官方陆地面积，从 1960 年底的 <Num s="S200">581.5</Num> 平方公里，增加到 2024 年底的 <Num s="S200">735.7</Num> 平方公里，多了约四分之一。2002 年起计算方法改了，前后的数字不能完全对比。多出来的土地也有代价：填海改变了海岸和海里的生物，填海的沙也得从别的地方来。
 
-<More title={{"en": "How reclamation works", "zh": "【待译】How reclamation works"}}>
+<More title={{ en: "How land is reclaimed", zh: "怎样填海造地" }}>
 
-<Figure src="figures/singapore-land-use-reclamation-section" alt={{"en": "A cutaway of fill above a seabed and a separate rock cavern far below.", "zh": "【待译】A cutaway of fill above a seabed and a separate rock cavern far below."}} caption={{"en": "A teaching section of reclamation and underground storage. The relative depths and materials are schematic.", "zh": "【待译】A teaching section of reclamation and underground storage. The relative depths and materials are schematic."}} />
+<Figure src="figures/singapore-land-use-reclamation-section" alt={{ en: "A cutaway of sand fill above a soft seabed, with a rock seawall at the edge and a separate rock cavern far below.", zh: "剖面图：软海床上填着一层层沙，海边有石块堆成的海堤，远在下方的岩石里另有一个岩洞。" }} caption={{ en: "Drawing made for this topic: reclaimed land and an underground cavern. Depths and materials are simplified.", zh: "为本主题画的示意图：填海得来的土地和地下岩洞。深度和材料都经过简化。" }} />
 
-【待译】Dykes contain the fill. Sand and other material are placed inside, and the ground must settle and be improved before many buildings can be constructed [S207]. A new-looking shore in a satellite image is therefore not proof that the site was ready for occupation. Fill can come from local excavation or imports. NLB notes limits including imported-sand costs and damage to ecosystems [S207]. Singapore’s foreign ministry distinguishes Indonesia’s sea-sand ban in 2003 from its land-sand ban in 2007, which affected construction [S209]. Reclamation adds useful space while changing the coast and requiring material from elsewhere.
-
-</More>
-
-<More title={{"en": "Reading the coast carefully", "zh": "【待译】Reading the coast carefully"}}>
-
-【待译】Water reflects green and infrared light differently from land. Comparing those reflections helps distinguish land from water. Cloud, tide and mixed coastal pixels limit the result. Early MSS images have coarser pixels than later Landsat images. Each shore is an approximate snapshot of a particular day. The older shores copied from historical maps are estimates too; neither should be read as an exact survey.
+先用石块在要填的海域四周筑起海堤，再把沙泵进去或倒进去，直到高出海面。新填的地很软，要放着让它慢慢沉实，常常还要压实或排水，才能盖大型建筑。东海岸填海用的土，取自新加坡本地的实乞纳、勿洛和淡滨尼一带的山丘；樟宜用的是附近海床挖上来的沙；后来的工程，比如德光岛，也从邻国进口沙。
 
 </More>
 
-<More title={{"en": "Building higher", "zh": "【待译】Building higher"}}>
+<More title={{ en: "Where the sand came from: two views", zh: "沙从哪里来：两种看法" }}>
 
-【待译】The median is the middle value after the blocks are arranged by height. These calculated medians group today’s residential HDB property records by completion decade [S219].
+填海让新加坡的陆地多了约四分之一，用来建住屋、机场、工业区和港口。国家图书馆管理局也列出了代价：进口的沙越来越贵，填海也伤害海岸的生物。沙从哪里来，各方说法不一。2010 年，倡议组织“全球见证”指出，在柬埔寨为新加坡挖的沙破坏了当地的环境，连野生动物保护区里也有人挖沙。新加坡国家发展部回应说，沙由私人公司进口，政府会查核进口的来源，包括柬埔寨方面的执照文件。2007 年，新加坡外交部长在国会说，印尼自 2003 年起已停止出口海沙。这些问题至今仍有争议。
 
-| Completed | Median maximum floor level |
+</More>
+
+<More title={{ en: "How these coastlines were drawn, and how high the blocks go", zh: "海岸线怎么画的，组屋有多高" }}>
+
+1973 年以后的每一条海岸，都按同一条规则从 Landsat 卫星影像描出来：水和陆地反射绿光和红外线的方式不同，海岸就画在一种变成另一种的地方。云、潮水和像素的大小（1970 年代的影像 60 米，后来 30 米）都会影响结果。在没有变动的海岸上，一半的点离真实海岸约 20 到 50 米以内，但也有偏出几百米的地方。
+
+下表是今天还在的组屋按竣工年代分组的典型（中位数）层数，根据建屋局的数据算出：
+
+| 竣工年代 | 典型层数 |
 |---|---:|
-| 1960s | <Num s="S219">10</Num> |
-| 1970s | <Num s="S219">13</Num> |
-| 1980s | <Num s="S219">12</Num> |
-| 1990s | <Num s="S219">14</Num> |
-| 2000s | <Num s="S219">17</Num> |
-| 2010s | <Num s="S219">16</Num> |
-| 2020–2026 | <Num s="S219">16</Num> |
-
-Later blocks are often taller than early ones, but the pattern does not rise in every decade. The last group is incomplete. These are surviving buildings, so demolished blocks are missing; the table does not measure every block built in the past.
+| 1960 年代 | <Num s="S219">10</Num> |
+| 1970 年代 | <Num s="S219">13</Num> |
+| 1980 年代 | <Num s="S219">12</Num> |
+| 1990 年代 | <Num s="S219">14</Num> |
+| 2000 年代 | <Num s="S219">17</Num> |
+| 2010 年代 | <Num s="S219">16</Num> |
+| 2020–2026 年 | <Num s="S219">16</Num> |
 
 </More>
 

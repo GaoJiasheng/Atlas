@@ -96,6 +96,32 @@ save('layers-hdb-blocks.geojson',{'type':'FeatureCollection','features':sorted(p
 land=load('ura-mp2019-landuse.geojson')['features']
 business=[shape(f['geometry']) for f in land if f['properties']['LU_DESC'].startswith('BUSINESS')]
 agriculture=[shape(f['geometry']) for f in land if f['properties']['LU_DESC']=='AGRICULTURE']
+# Review 2026-10-20 (Opus): today's extent must not be drawn over the sea of an earlier year. Each area is
+# cut into one piece per coast era of land-sg-modern (work/coast-<era>.geojson from build-coasts.ts), clipped
+# to that era's land and dated [max(start, era from), era to). Areas whose start precedes no reclamation
+# yield a single piece.
+ERAS=[('L5',None,'1973-10-17'),('L6','1973-10-17','1979-10-31'),('L7','1979-10-31','1991-04-28'),('L8','1991-04-28','2002-10-11'),('L9','2002-10-11','2011-02-14'),('L10','2011-02-14','2019-11-18'),('L11','2019-11-18',None)]
+def decimal_year(t):
+    import datetime
+    d=datetime.date.fromisoformat(t); y=datetime.date(d.year,1,1); n=datetime.date(d.year+1,1,1)
+    return d.year+(d-y).days/(n-y).days
+_era_land={}
+def era_land(e):
+    if e not in _era_land:
+        _era_land[e]=valid(unary_union([valid(shape(f['geometry'])) for f in json.loads((WORK/f'coast-{e}.geojson').read_text())['features']]))
+    return _era_land[e]
+def by_coast_era(geom,year):
+    out=[]
+    for e,a,b in ERAS:
+        fa=decimal_year(a) if a else None; fb=decimal_year(b) if b else None
+        if fb is not None and fb<=year: continue
+        piece=valid(geom.intersection(era_land(e)))
+        if piece.is_empty or transform(project,piece).area<2000: continue
+        f=max(year,fa) if fa is not None else year
+        if out and out[-1][0].symmetric_difference(piece).area<1e-12:
+            out[-1]=(out[-1][0],out[-1][1],fb); continue
+        out.append((piece,f,fb))
+    return out
 def polygon_features(name, configurations, source):
     features=[]; details=[]
     for label, year, area_names in configurations:
@@ -105,8 +131,11 @@ def polygon_features(name, configurations, source):
         if not selected:
             details.append({'name':label,'f':year,'parcels':0,'areaKm2':0}); continue
         merged=valid(unary_union(selected))
-        clean=transform(unproject,transform(project,merged).simplify(5,preserve_topology=True))
-        features.append({'type':'Feature','properties':{'f':year,'certainty':'approximate','name':label},'geometry':mapping(clean)})
+        for g,f,u in by_coast_era(merged,year):
+            clean=transform(unproject,transform(project,g).simplify(5,preserve_topology=True))
+            props={'f':f,'certainty':'approximate','name':label}
+            if u is not None: props['u']=u
+            features.append({'type':'Feature','properties':props,'geometry':mapping(clean)})
         details.append({'name':label,'f':year,'planningAreas':area_names,'parcels':len(selected),'areaKm2':transform(project,merged).area/1e6})
     save('layers-'+name+'.geojson',{'type':'FeatureCollection','features':features})
     report[name]=details
@@ -115,18 +144,25 @@ polygon_features('estates',[
     ('Seletar Aerospace Park',2007,['SELETAR']),
 ],business)
 polygon_features('farm-parks',[
-    ('Lim Chu Kang, Murai and Ah Ma Keng farmland',1986,['LIM CHU KANG','WESTERN WATER CATCHMENT']),
+    ('Agrotechnology-park farmland in Lim Chu Kang and the Western Water Catchment (Master Plan 2019)',1986,['LIM CHU KANG','WESTERN WATER CATCHMENT']),
     ('Sungei Tengah farmland',1986,['CHOA CHU KANG','TENGAH']),
     ('Nee Soon farmland',1986,['YISHUN','MANDAI']),
     ('Loyang farmland',1986,['PASIR RIS','CHANGI']),
 ],agriculture)
-reserve_dates={'CENTRAL CATCHMENT NATURE RESERVE':1990,'BUKIT TIMAH NATURE RESERVE':1990,'LABRADOR NATURE RESERVE':2002,'SUNGEI BULOH WETLAND RESERVE':2002}
+# Review 2026-10-20 (Opus): NParks' Bukit Timah history says Bukit Timah and the Municipal Water Catchment
+# area became legally protected under the Nature Reserves Ordinance 1951; 1990 re-declared them under the
+# National Parks Act. They are drawn from 1951 (continuous legal protection). Labrador, also listed in 1951,
+# was later downgraded to a nature park, so it is drawn from its 2002 gazette, like Sungei Buloh.
+reserve_dates={'CENTRAL CATCHMENT NATURE RESERVE':1951,'BUKIT TIMAH NATURE RESERVE':1951,'LABRADOR NATURE RESERVE':2002,'SUNGEI BULOH WETLAND RESERVE':2002}
 features=[]
 for f in load('parks.geojson')['features']:
     n=f['properties']['NAME']
     if n not in reserve_dates: continue
-    g=transform(unproject,transform(project,valid(shape(f['geometry']))).simplify(5,preserve_topology=True))
-    features.append({'type':'Feature','properties':{'f':reserve_dates[n],'certainty':'approximate','name':n},'geometry':mapping(g)})
+    for piece,fy,uy in by_coast_era(valid(shape(f['geometry'])),reserve_dates[n]):
+        g=transform(unproject,transform(project,piece).simplify(5,preserve_topology=True))
+        props={'f':fy,'certainty':'approximate','name':n}
+        if uy is not None: props['u']=uy
+        features.append({'type':'Feature','properties':props,'geometry':mapping(g)})
 save('layers-reserves.geojson',{'type':'FeatureCollection','features':features})
 report['reserves']=[f['properties'] for f in features]
 # Earlier planning agriculture totals are calculations, never descriptions of actual farming.

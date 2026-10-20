@@ -7,8 +7,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "NSL: Toa Payoh–Yio Chu Kang",
-      "zh": "【待译】NSL: Toa Payoh–Yio Chu Kang"
+      "en": "North–South Line: Toa Payoh–Yio Chu Kang",
+      "zh": "南北线：大巴窑—杨厝港"
     },
     "path": {
       "type": "LineString",
@@ -240,8 +240,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "NSL: Toa Payoh–Raffles Place",
-      "zh": "【待译】NSL: Toa Payoh–Raffles Place"
+      "en": "North–South Line: Toa Payoh–Raffles Place",
+      "zh": "南北线：大巴窑—莱佛士坊"
     },
     "path": {
       "type": "LineString",
@@ -569,8 +569,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "EWL: Raffles Place–Outram Park",
-      "zh": "【待译】EWL: Raffles Place–Outram Park"
+      "en": "East–West Line: Raffles Place–Outram Park",
+      "zh": "东西线：莱佛士坊—欧南园"
     },
     "path": {
       "type": "LineString",
@@ -668,14 +668,14 @@
   },
   {
     "id": "ewl-outram-park-clementi",
-    "from": "1988-03-13",
-    "to": "1988-03-13",
+    "from": "1988-03-12",
+    "to": "1988-03-12",
     "persist": true,
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "EWL: Outram Park–Clementi",
-      "zh": "【待译】EWL: Outram Park–Clementi"
+      "en": "East–West Line: Outram Park–Clementi",
+      "zh": "东西线：欧南园—金文泰"
     },
     "path": {
       "type": "LineString",
@@ -1055,8 +1055,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "EWL: Clementi–Lakeside",
-      "zh": "【待译】EWL: Clementi–Lakeside"
+      "en": "East–West Line: Clementi–Lakeside",
+      "zh": "东西线：金文泰—湖畔"
     },
     "path": {
       "type": "LineString",
@@ -1312,8 +1312,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "NSL: Yio Chu Kang–Yishun",
-      "zh": "【待译】NSL: Yio Chu Kang–Yishun"
+      "en": "North–South Line: Yio Chu Kang–Yishun",
+      "zh": "南北线：杨厝港—义顺"
     },
     "path": {
       "type": "LineString",
@@ -1565,8 +1565,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "EWL: City Hall–Tanah Merah",
-      "zh": "【待译】EWL: City Hall–Tanah Merah"
+      "en": "East–West Line: City Hall–Tanah Merah",
+      "zh": "东西线：政府大厦—丹那美拉"
     },
     "path": {
       "type": "LineString",
@@ -1982,8 +1982,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "NSL: Raffles Place–Marina Bay",
-      "zh": "【待译】NSL: Raffles Place–Marina Bay"
+      "en": "North–South Line: Raffles Place–Marina Bay",
+      "zh": "南北线：莱佛士坊—滨海湾"
     },
     "path": {
       "type": "LineString",
@@ -2035,8 +2035,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "EWL: Tanah Merah–Pasir Ris",
-      "zh": "【待译】EWL: Tanah Merah–Pasir Ris"
+      "en": "East–West Line: Tanah Merah–Pasir Ris",
+      "zh": "东西线：丹那美拉—巴西立"
     },
     "path": {
       "type": "LineString",
@@ -2284,8 +2284,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "NSL (original Branch Line): Jurong East–Choa Chu Kang",
-      "zh": "【待译】NSL (original Branch Line): Jurong East–Choa Chu Kang"
+      "en": "Branch Line (now North–South Line): Jurong East–Choa Chu Kang",
+      "zh": "支线（今南北线）：裕廊东—蔡厝港"
     },
     "path": {
       "type": "LineString",
@@ -2545,8 +2545,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "EWL: Lakeside–Boon Lay",
-      "zh": "【待译】EWL: Lakeside–Boon Lay"
+      "en": "East–West Line: Lakeside–Boon Lay",
+      "zh": "东西线：湖畔—文礼"
     },
     "path": {
       "type": "LineString",
@@ -2616,14 +2616,14 @@
   },
   {
     "id": "nsl-woodlands-extension",
-    "from": "1996-02",
-    "to": "1996-02",
+    "from": "1996-02-10",
+    "to": "1996-02-10",
     "persist": true,
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "NSL: Choa Chu Kang–Yishun",
-      "zh": "【待译】NSL: Choa Chu Kang–Yishun"
+      "en": "North–South Line, Woodlands extension: Choa Chu Kang–Yishun",
+      "zh": "南北线兀兰延长段：蔡厝港—义顺"
     },
     "path": {
       "type": "LineString",
@@ -3199,8 +3199,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "EWL airport branch: Tanah Merah–Expo",
-      "zh": "【待译】EWL airport branch: Tanah Merah–Expo"
+      "en": "East–West Line, airport branch: Tanah Merah–Expo",
+      "zh": "东西线机场支线：丹那美拉—博览"
     },
     "path": {
       "type": "LineString",
@@ -3296,8 +3296,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "EWL airport branch: Expo–Changi Airport",
-      "zh": "【待译】EWL airport branch: Expo–Changi Airport"
+      "en": "East–West Line, airport branch: Expo–Changi Airport",
+      "zh": "东西线机场支线：博览—樟宜机场"
     },
     "path": {
       "type": "LineString",
@@ -3477,8 +3477,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "NEL: HarbourFront–Punggol",
-      "zh": "【待译】NEL: HarbourFront–Punggol"
+      "en": "North East Line: HarbourFront–Punggol",
+      "zh": "东北线：港湾—榜鹅"
     },
     "path": {
       "type": "LineString",
@@ -4182,8 +4182,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "EWL: Boon Lay–Joo Koon",
-      "zh": "【待译】EWL: Boon Lay–Joo Koon"
+      "en": "East–West Line: Boon Lay–Joo Koon",
+      "zh": "东西线：文礼—裕群"
     },
     "path": {
       "type": "LineString",
@@ -4339,8 +4339,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "CCL: Bartley–Marymount",
-      "zh": "【待译】CCL: Bartley–Marymount"
+      "en": "Circle Line: Bartley–Marymount",
+      "zh": "环线：巴特礼—玛丽蒙"
     },
     "path": {
       "type": "LineString",
@@ -4600,8 +4600,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "CCL: Dhoby Ghaut–Bartley",
-      "zh": "【待译】CCL: Dhoby Ghaut–Bartley"
+      "en": "Circle Line: Dhoby Ghaut–Bartley",
+      "zh": "环线：多美歌—巴特礼"
     },
     "path": {
       "type": "LineString",
@@ -5005,8 +5005,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "CCL: Marymount–HarbourFront",
-      "zh": "【待译】CCL: Marymount–HarbourFront"
+      "en": "Circle Line: Marymount–HarbourFront",
+      "zh": "环线：玛丽蒙—港湾"
     },
     "path": {
       "type": "LineString",
@@ -5710,8 +5710,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "CCL extension: Promenade–Marina Bay",
-      "zh": "【待译】CCL extension: Promenade–Marina Bay"
+      "en": "Circle Line extension: Promenade–Marina Bay",
+      "zh": "环线延长段：宝门廊—滨海湾"
     },
     "path": {
       "type": "LineString",
@@ -5803,8 +5803,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "DTL: Bugis–Chinatown",
-      "zh": "【待译】DTL: Bugis–Chinatown"
+      "en": "Downtown Line: Bugis–Chinatown",
+      "zh": "滨海市区线：武吉士—牛车水"
     },
     "path": {
       "type": "LineString",
@@ -5984,8 +5984,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "NSL: Marina Bay–Marina South Pier",
-      "zh": "【待译】NSL: Marina Bay–Marina South Pier"
+      "en": "North–South Line: Marina Bay–Marina South Pier",
+      "zh": "南北线：滨海湾—滨海南码头"
     },
     "path": {
       "type": "LineString",
@@ -6049,8 +6049,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "DTL: Bukit Panjang–Bugis",
-      "zh": "【待译】DTL: Bukit Panjang–Bugis"
+      "en": "Downtown Line: Bukit Panjang–Bugis",
+      "zh": "滨海市区线：武吉班让—武吉士"
     },
     "path": {
       "type": "LineString",
@@ -6630,8 +6630,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "EWL: Joo Koon–Tuas Link",
-      "zh": "【待译】EWL: Joo Koon–Tuas Link"
+      "en": "East–West Line: Joo Koon–Tuas Link",
+      "zh": "东西线：裕群—大士连路"
     },
     "path": {
       "type": "LineString",
@@ -6911,8 +6911,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "DTL: Chinatown–Expo",
-      "zh": "【待译】DTL: Chinatown–Expo"
+      "en": "Downtown Line: Chinatown–Expo",
+      "zh": "滨海市区线：牛车水—博览"
     },
     "path": {
       "type": "LineString",
@@ -7776,8 +7776,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "TEL: Woodlands North–Woodlands South",
-      "zh": "【待译】TEL: Woodlands North–Woodlands South"
+      "en": "Thomson–East Coast Line: Woodlands North–Woodlands South",
+      "zh": "汤申—东海岸线：兀兰北—兀兰南"
     },
     "path": {
       "type": "LineString",
@@ -7917,8 +7917,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "TEL: Woodlands South–Caldecott",
-      "zh": "【待译】TEL: Woodlands South–Caldecott"
+      "en": "Thomson–East Coast Line: Woodlands South–Caldecott",
+      "zh": "汤申—东海岸线：兀兰南—加利谷"
     },
     "path": {
       "type": "LineString",
@@ -8462,8 +8462,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "TEL: Caldecott–Gardens by the Bay",
-      "zh": "【待译】TEL: Caldecott–Gardens by the Bay"
+      "en": "Thomson–East Coast Line: Caldecott–Gardens by the Bay",
+      "zh": "汤申—东海岸线：加利谷—滨海湾花园"
     },
     "path": {
       "type": "LineString",
@@ -9043,8 +9043,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "TEL: Gardens by the Bay–Bayshore",
-      "zh": "【待译】TEL: Gardens by the Bay–Bayshore"
+      "en": "Thomson–East Coast Line: Gardens by the Bay–Bayshore",
+      "zh": "汤申—东海岸线：滨海湾花园—碧湾"
     },
     "path": {
       "type": "LineString",
@@ -9492,8 +9492,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "NEL: Punggol–Punggol Coast",
-      "zh": "【待译】NEL: Punggol–Punggol Coast"
+      "en": "North East Line: Punggol–Punggol Coast",
+      "zh": "东北线：榜鹅—榜鹅海岸"
     },
     "path": {
       "type": "LineString",
@@ -9574,7 +9574,7 @@
     "kind": "land",
     "label": {
       "en": "Bukit Panjang LRT: Choa Chu Kang–Bukit Panjang",
-      "zh": "【待译】Bukit Panjang LRT: Choa Chu Kang–Bukit Panjang"
+      "zh": "武吉班让轻轨：蔡厝港—武吉班让"
     },
     "path": {
       "type": "LineString",
@@ -9722,8 +9722,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "Bukit Panjang LRT: Bukit Panjang–Bukit Panjang loop",
-      "zh": "【待译】Bukit Panjang LRT: Bukit Panjang–Bukit Panjang loop"
+      "en": "Bukit Panjang LRT: Bukit Panjang loop",
+      "zh": "武吉班让轻轨：武吉班让环线"
     },
     "path": {
       "type": "LineString",
@@ -9999,8 +9999,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "Sengkang LRT: Sengkang–East Loop",
-      "zh": "【待译】Sengkang LRT: Sengkang–East Loop"
+      "en": "Sengkang LRT: East Loop",
+      "zh": "盛港轻轨：东环"
     },
     "path": {
       "type": "LineString",
@@ -10224,8 +10224,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "Sengkang LRT: Sengkang–West Loop",
-      "zh": "【待译】Sengkang LRT: Sengkang–West Loop"
+      "en": "Sengkang LRT: West Loop",
+      "zh": "盛港轻轨：西环"
     },
     "path": {
       "type": "LineString",
@@ -10505,8 +10505,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "Punggol LRT: Punggol–Cove–Kadaloor",
-      "zh": "【待译】Punggol LRT: Punggol–Cove–Kadaloor"
+      "en": "Punggol LRT: East Loop",
+      "zh": "榜鹅轻轨：东环"
     },
     "path": {
       "type": "LineString",
@@ -10770,8 +10770,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "Punggol LRT: Punggol–Soo Teck–Sumang–Nibong",
-      "zh": "【待译】Punggol LRT: Punggol–Soo Teck–Sumang–Nibong"
+      "en": "Punggol LRT: West Loop, Punggol–Nibong",
+      "zh": "榜鹅轻轨：西环，榜鹅—尼蒙"
     },
     "path": {
       "type": "LineString",
@@ -10879,8 +10879,8 @@
     "holder": "transport",
     "kind": "land",
     "label": {
-      "en": "Punggol LRT: Sam Kee–Nibong",
-      "zh": "【待译】Punggol LRT: Sam Kee–Nibong"
+      "en": "Punggol LRT: West Loop, Nibong–Sam Kee",
+      "zh": "榜鹅轻轨：西环，尼蒙—三记"
     },
     "path": {
       "type": "LineString",

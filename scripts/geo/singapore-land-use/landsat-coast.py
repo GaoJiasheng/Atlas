@@ -45,7 +45,7 @@ def extract():
  from pyproj import Transformer
  from rasterio.features import rasterize,shapes
  from skimage.filters import threshold_otsu
- from scipy.ndimage import binary_closing,binary_opening,binary_fill_holes
+ from scipy.ndimage import binary_closing,binary_opening,binary_fill_holes,label
  import matplotlib
  matplotlib.use('Agg')
  import matplotlib.pyplot as plt
@@ -79,10 +79,23 @@ def extract():
   reference=transform(to.transform,coast_reference)
   belt=unary_union([p.exterior for p in pieces(reference)]).buffer(2000);band=rasterize([(mapping(belt),1)],out_shape=a.shape,transform=trs).astype(bool)
   threshold=float(threshold_otsu(idx[band&valid&~cloud]));dry=idx<threshold
-  # Clouds/shadows and invalid pixels are unknown: retain today's land there, never infer reclamation under cloud.
-  dry=np.where(valid&~cloud,dry,inside)
-  # 3x3 closing only (1 pixel); remove isolated fragments during 0.1 km² vector filter. No smoothing of 2-pixel uncertainty buffers.
+  # Clouds/shadows and invalid pixels are unknown: keep today's land status there, never infer
+  # reclamation under cloud (first-pass rule, kept).
+  unknown=~(valid&~cloud)
+  dry=np.where(unknown,inside,dry)
+  # 3x3 closing only (1 pixel). No smoothing of 2-pixel uncertainty buffers.
   dry=binary_closing(dry,structure=np.ones((3,3)))
+  # Review 2026-10-20 (Opus): the 0.1 km² noise rule now also applies to land specks, and a dry patch
+  # that is mostly cloud and stands apart from the island is dropped. Before this, single bright pixels and
+  # cloud blobs over seas reclaimed later (Changi, Tekong, Jurong) became round islets once buffered by
+  # two pixels below.
+  lab,n=label(dry,structure=np.ones((3,3)))
+  px=res*res
+  sizes=np.bincount(lab.ravel(),minlength=n+1)
+  cloudy=np.bincount(lab.ravel(),weights=unknown.ravel().astype(float),minlength=n+1)
+  drop=np.zeros(n+1,bool)
+  drop[1:]=(sizes[1:]*px<100000)|((cloudy[1:]>0.5*sizes[1:])&(sizes[1:]*px<2e6))
+  dry=dry&~drop[lab]
   geoms=[shape(g) for g,v in shapes(dry.astype('uint8'),mask=dry,transform=trs) if v==1]
   observed=make_valid(unary_union(geoms))
   outer=unary_union([p.exterior for p in pieces(land)])

@@ -11,6 +11,8 @@ run(['scripts/geo/lib/simplify.ts','--topic','singapore-land-use','--budget','2.
 const file='src/content/topics/singapore-land-use/data/control.json';const d=JSON.parse(readFileSync(file,'utf8'));
 for(const id of ['K2','K3'])d.topology.objects[id]={type:'GeometryCollection',geometries:[]};
 for(const g of d.topology.objects.K1.geometries)g.properties.certainty='approximate';
-d.keyframes=[{t:'1959-04-01',object:'K1'},{t:'1966-01-01',object:'K2'},{t:'2019-01-01',object:'K3'},{t:'2019-11-18',object:'K4'}];
+// Review 2026-10-20 (Opus): a hold frame (same object as K4) ends the timeline on 31 December 2025, as the spec
+// sets; without it the last dated event (November 2025) would end the axis and clamp the final beat.
+d.keyframes=[{t:'1959-04-01',object:'K1'},{t:'1966-01-01',object:'K2'},{t:'2019-01-01',object:'K3'},{t:'2019-11-18',object:'K4'},{t:'2025-12-31',object:'K4'}];
 writeFileSync(file,JSON.stringify(d));
 console.log('Inserted empty K2/K3; marked each K1 feature approximate. Geometry unchanged.');

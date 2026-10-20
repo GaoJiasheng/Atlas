@@ -4,7 +4,7 @@
       "id": "island",
       "label": {
         "en": "Island",
-        "zh": "【待译】Island"
+        "zh": "全岛"
       },
       "camera": {
         "center": [
@@ -18,7 +18,7 @@
       "id": "north",
       "label": {
         "en": "North",
-        "zh": "【待译】North"
+        "zh": "北部"
       },
       "camera": {
         "center": [
@@ -31,8 +31,8 @@
     {
       "id": "south",
       "label": {
-        "en": "South",
-        "zh": "【待译】South"
+        "en": "South and city",
+        "zh": "南部与城区"
       },
       "camera": {
         "center": [
@@ -46,7 +46,7 @@
       "id": "east",
       "label": {
         "en": "East",
-        "zh": "【待译】East"
+        "zh": "东部"
       },
       "camera": {
         "center": [
@@ -60,7 +60,7 @@
       "id": "west",
       "label": {
         "en": "West",
-        "zh": "【待译】West"
+        "zh": "西部"
       },
       "camera": {
         "center": [
@@ -74,7 +74,7 @@
       "id": "central",
       "label": {
         "en": "Central",
-        "zh": "【待译】Central"
+        "zh": "中部"
       },
       "camera": {
         "center": [

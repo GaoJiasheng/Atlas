@@ -168,13 +168,13 @@
     {
       "id": "K1",
       "t": "1959-04-01",
-      "method": "G1 source-pixel trace of stipple edge, georeferenced from constructed border graticule; countryside is L4 land minus traced City/Naval Base and three reservoirs. Draft approximation; control-point independence remains a limitation.",
+      "method": "G1 source-pixel trace of stipple edge, georeferenced from constructed border graticule; countryside is first-era (L5 + 1973 detached islands) land minus traced City/Naval Base and three reservoirs. Draft approximation; control-point independence remains a limitation.",
       "steps": [
         {
           "holder": "town-and-services",
           "label": {
             "en": "City of Singapore (homes, shops and the port)",
-            "zh": "【待译】City of Singapore (homes, shops and the port)"
+            "zh": "新加坡市区（住家、商店与港口）"
           },
           "certainty": "approximate",
           "from": {
@@ -185,7 +185,7 @@
               },
               {
                 "parts": {
-                  "geojson": "coast-L4"
+                  "geojson": "coast-L5"
                 },
                 "at": [
                   [
@@ -205,7 +205,7 @@
           "holder": "defence-special",
           "label": {
             "en": "Naval Base (British)",
-            "zh": "【待译】Naval Base (British)"
+            "zh": "海军基地（英国）"
           },
           "certainty": "approximate",
           "from": {
@@ -216,7 +216,7 @@
               },
               {
                 "parts": {
-                  "geojson": "coast-L4"
+                  "geojson": "coast-L5"
                 },
                 "at": [
                   [
@@ -238,7 +238,7 @@
           "from": {
             "difference": [
               {
-                "geojson": "coast-L4"
+                "geojson": "coast-L5"
               },
               {
                 "union": [
@@ -250,7 +250,7 @@
                       },
                       {
                         "parts": {
-                          "geojson": "coast-L4"
+                          "geojson": "coast-L5"
                         },
                         "at": [
                           [
@@ -269,7 +269,7 @@
                       },
                       {
                         "parts": {
-                          "geojson": "coast-L4"
+                          "geojson": "coast-L5"
                         },
                         "at": [
                           [
@@ -556,7 +556,7 @@
           "name": "^(MacRitchie|Lower Peirce|Upper Peirce|Upper Seletar|Bedok|Pulau Tekong) Reservoir$|^Jurong Lake$"
         }
       },
-      "simplifyM": 90,
+      "simplifyM": 50,
       "minIslandKm2": 0.02,
       "replaces": "public/geo/land-10m-sea.json",
       "replaceBox": [
@@ -570,20 +570,15 @@
       "coastToday": true,
       "eras": [
         {
-          "id": "L4",
-          "to": "1961-01-01",
-          "outline": "work/input-L4.geojson",
-          "src": [
-            "G11"
-          ]
-        },
-        {
           "id": "L5",
-          "from": "1961-01-01",
           "to": "1973-10-17",
           "outline": "work/input-L5.geojson",
+          "plus": [
+            "work/islands-L6-detached.geojson"
+          ],
           "src": [
-            "G11"
+            "G11",
+            "G9"
           ]
         },
         {

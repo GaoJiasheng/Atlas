@@ -1,14 +1,14 @@
 {
-  "dpM": 90,
+  "dpM": 50,
   "quant": 10000,
   "gridM": [
     5.368293553892357,
-    3.376905896353248
+    3.4704775914604835
   ],
-  "bytes": 250603,
-  "gzip": 76635,
+  "bytes": 246899,
+  "gzip": 71565,
   "rings": {
-    "rings": 965,
+    "rings": 751,
     "zeroArea": 0,
     "selfCrossing": 0
   },
@@ -16,48 +16,16 @@
     {
       "dpM": 40,
       "quant": 10000,
-      "bytes": 296282,
-      "rings": 1017,
+      "bytes": 260153,
+      "rings": 795,
       "zeroArea": 0,
       "selfCrossing": 0
     },
     {
       "dpM": 50,
       "quant": 10000,
-      "bytes": 282733,
-      "rings": 980,
-      "zeroArea": 0,
-      "selfCrossing": 0
-    },
-    {
-      "dpM": 60,
-      "quant": 10000,
-      "bytes": 272397,
-      "rings": 996,
-      "zeroArea": 0,
-      "selfCrossing": 0
-    },
-    {
-      "dpM": 70,
-      "quant": 10000,
-      "bytes": 263452,
-      "rings": 980,
-      "zeroArea": 0,
-      "selfCrossing": 0
-    },
-    {
-      "dpM": 80,
-      "quant": 10000,
-      "bytes": 256209,
-      "rings": 975,
-      "zeroArea": 0,
-      "selfCrossing": 0
-    },
-    {
-      "dpM": 90,
-      "quant": 10000,
-      "bytes": 250603,
-      "rings": 965,
+      "bytes": 246899,
+      "rings": 751,
       "zeroArea": 0,
       "selfCrossing": 0
     }

@@ -8,7 +8,7 @@ P=Path(__file__).parent;TOP=Path('src/content/topics/singapore-land-use');W=P/'w
 read=lambda f:json.load(open(f))
 stats=read(P/'coast-statistics.json');packing=read(P/'coast-packing.json');fit=read(W/'lines-fit.json')['bis1959'];proj=Transformer.from_crs(4326,3414,always_xy=True)
 areas={}
-for e in ['L4','L5','L6','L7','L8','L9','L10','L11']:
+for e in ['L5','L6','L7','L8','L9','L10','L11']:
  fc=read(W/f'coast-{e}.geojson');areas[e]=transform(proj.transform,unary_union([shape(f['geometry']) for f in fc['features']])).area/1e6
 (P/'published-coast-areas.json').write_text(json.dumps(areas,indent=2))
 files=[TOP/'data/control.json',Path('public/geo/land-sg-modern.json')]+[Path('public/geo')/f'sg-{x}.json' for x in ['hdb-blocks','estates','farm-parks','reserves','reservoirs']]
@@ -18,8 +18,8 @@ for f in files:
  budget+=f'| `{f.name}` | {len(b):,} | {len(gzip.compress(b,mtime=0)):,} | {limit} |\n'
 scene='| Era | Scene ID (STAC item) | Date | Scene / island QA cloud % | Bands and index | Otsu threshold |\n|---|---|---|---:|---|---:|\n'
 accuracy='| Era | Acquisition / reference | Published land km² | Difference to L11 km² | Diagnostic p50 / p95 m | Samples |\n|---|---|---:|---:|---:|---:|\n'
-for e in ['L4','L5']:
- accuracy+=f'| {e} | Inherited G11 approximate outline | {areas[e]:.3f} | {areas[e]-areas["L11"]:.3f} | Not requalified | — |\n'
+for e in ['L5']:
+ accuracy+=f'| {e} | Inherited G11 L5 outline (charts 1954–1961) + detached islands from L6 1973 | {areas[e]:.3f} | {areas[e]-areas["L11"]:.3f} | Not requalified | — |\n'
 for r in stats:
  scene+=f'| {r["era"]} | `{r["id"]}` | {r["date"]} | {r["scene_cloud_pct"]:.2f} / {r["island_cloud_shadow_pct"]:.2f} | {r["bands"]}; {r["index"]} | {r["threshold"]:.8f} |\n'
  e=r['era'];accuracy+=f'| {e} | {r["date"]} | {areas[e]:.3f} | {areas[e]-areas["L11"]:.3f} | {r["unchanged_p50_m"]:.2f} / {r["unchanged_p95_m"]:.2f} | {r["unchanged_samples"]} |\n'
@@ -49,9 +49,19 @@ source_table='| Source | Dataset | Licence |\n|---|---|---|\n'
 for key,ds in manifest['datasets'].items():
  if key.startswith('coast-'):continue
  source_table+=f"| {ds['ref']} | [{ds['title']}]({ds['url']}) | {ds['license']} |\n"
-text=f'''# Singapore land use — geographic audit, second pass
+text=f'''# Singapore land use — geographic audit
 
-Built on 20 October 2026. **Draft; geographic accuracy is not accepted.** The required software gates are separate from the remaining K1 control-point and coastline accuracy requirements. Earlier access findings are retained in CODEX-REPORT.md and research/landsat-access.json.
+Built on 20 October 2026 (Codex, second pass), revised the same day in the historian review (Opus). **Draft; geographic accuracy is not accepted.** The required software gates are separate from the remaining K1 control-point and coastline accuracy requirements. Earlier access findings are retained in CODEX-REPORT.md and research/landsat-access.json.
+
+## Review changes (Opus, 20 October 2026)
+
+1. **Speck and cloud islets.** The second-pass extraction gave cloud and invalid pixels today's land status; over seas reclaimed later this left round islets in every era (45 holes in L6's reclaimed areas, e.g. Changi, Tekong, Jurong). The rule is kept, and the method's 0.1 km² noise rule now also applies to land: dry patches under 0.1 km², and dry patches under 2 km² that are mostly cloud/invalid, are dropped before buffering (`landsat-coast.py`). Holes left: L6 9, L7 4, L8 3, L9 0, L10 0, all real islands later joined to the main island (e.g. Pulau Tekong Kechil, the Jurong islands, Coney Island).
+2. **One inherited era.** L4 (1941 AMS map) is no longer used: for April 1959–1961 it would show about 15 km² more western mangrove land than L5, a change of source, not of land. The first era is G11 L5 until the first Landsat date.
+3. **Detached islands.** G11 L5 lacks Pulau Ubin, Pulau Tekong and the southern and Jurong islands, which the BIS 1959 map (G1) draws as land. Every L6 (1973) land piece that does not touch L5 and is at least 0.02 km² is added to the first era (`historic-islands.py`, 27 islands, 48.3 km²). Changes to these islands between 1959 and 1973 (refinery works on Pulau Ayer Chawan, Pulau Bukom) therefore appear early.
+4. **K1** is rebuilt on the corrected first era, so the islands are coloured as countryside in 1959. Blakang Mati's forts and Pulau Bukom's oil depot are not separated from countryside; the BIS map does not mark them.
+5. **Display simplification** is 50 m (was 90 m) within the same 250 KB budget, because the speck filter removed many small rings.
+6. **Dated areas** (estates, farmland, reserves) are cut by coast era, one piece per era with `[from, to)`, so today's extent is never drawn over the sea of its year; the area clean keeps overlaps (`-clean allow-overlaps`). Reserves at Bukit Timah and the Central Catchment start in 1951 (Nature Reserves Ordinance), not 1990. Linggiu (Johor) is removed from the reservoir layer.
+
 
 ## Source ledger and licences
 
@@ -60,8 +70,8 @@ Built on 20 October 2026. **Draft; geographic accuracy is not accepted.** The re
 Additional inherited sources:
 
 - **G9:** USGS Landsat Collection 2 through the anonymous [Planetary Computer STAC API](https://planetarycomputer.microsoft.com/api/stac/v1). Exact scene IDs, bands, cloud measurements and thresholds appear below. Images courtesy of the U.S. Geological Survey, public domain.
-- **G10:** canonical four-taps reservoir geometry, names and dates. Singapore water surfaces are URA SODL; name matching and the Linggiu outline use **© OpenStreetMap contributors**, [ODbL 1.0](https://www.openstreetmap.org/copyright). Database obligations remain in force.
-- **G11:** decoded L4/L5 from `public/geo/land-sg-history.json`, unchanged upstream. Public-domain British maps, URA SODL and inherited OSM name selectors. The upstream audit calls these **rejected research drafts**. L4 uses a 1937 source; L5 includes earlier chart corrections and is not a certified 1961 survey. This topic preserves that limitation.
+- **G10:** canonical four-taps reservoir geometry, names and dates. Singapore water surfaces are URA SODL; name matching uses **© OpenStreetMap contributors**, [ODbL 1.0](https://www.openstreetmap.org/copyright). Database obligations remain in force.
+- **G11:** decoded L4/L5 from `public/geo/land-sg-history.json`, unchanged upstream. Public-domain British maps, URA SODL and inherited OSM name selectors. The upstream audit calls these **rejected research drafts**. Only L5 is used (review change 2); it includes earlier chart corrections and is not a certified 1961 survey. This topic preserves that limitation.
 - **G13:** historical topic Admiralty charts G14–G17 copied read-only to ignored refs/. Chart 2014, published in 1966, was visually inspected: the separate Jurong islands broadly correspond to the early satellite pattern. Publication, survey and correction dates differ. No chart geometry was newly traced. TPC 1984 was not newly fetched; this independent check remains incomplete.
 
 The [Singapore Open Data Licence 1.0](https://data.gov.sg/open-data-licence) permits reuse and adaptation with attribution and a current licence link. Catalogue wording: “Free forever for personal or commercial use, under the Open Data Licence.” Contains information from the URA, HDB, NParks and statistical datasets listed above, accessed on 20 October 2026 from data.gov.sg, made available under the Singapore Open Data Licence version 1.0. Per-file timestamps, SHA-256 hashes and source URLs are retained in fetch-receipts.json, dated-layers-report.md and rail-report.md.
@@ -82,7 +92,7 @@ All returned corrected MSS and TM/ETM+ candidates in the recorded date windows w
 
 `landsat-coast.ts` runs the topic-local Python raster method. MSS NDWI = (green B4 − NIR B7) / (green B4 + NIR B7), using MTL reflectance multipliers and offsets. The shared solar-elevation factor cancels. B7 covers 0.8–1.1 µm; see [USGS band designations](https://www.usgs.gov/faqs/what-are-band-designations-landsat-satellites) and the [USGS Landsat handbook](https://pubs.usgs.gov/gip/70039196/report.pdf). TM/ETM+ MNDWI uses SR_B2 and SR_B5; reflectance = DN × 0.0000275 − 0.2.
 
-Otsu thresholds are computed on valid, clear pixels within 2 km of the original G3 outer coast, excluding inland reservoir shores. The lower-index class is land. QA bits 1, 3 and 4 identify dilated cloud, cloud and shadow. Unknown/cloud pixels conservatively retain today's land status; this is **not an observation of historical land beneath cloud**. A 3 × 3 closing fills one-pixel gaps.
+Otsu thresholds are computed on valid, clear pixels within 2 km of the original G3 outer coast, excluding inland reservoir shores. The lower-index class is land. QA bits 1, 3 and 4 identify dilated cloud, cloud and shadow. Unknown/cloud pixels retain today's land status; this is **not an observation of historical land beneath cloud**. A 3 × 3 closing fills one-pixel gaps. Dry components under 0.1 km², and dry components under 2 km² of which more than half is cloud or invalid, are then removed (review change 1).
 
 Vectorise at native 60 m MSS / 30 m TM resolution. Minus = today's land minus scene land buffered by two pixels. Drop pieces below 0.1 km²; keep coastal-connected pieces to avoid mistaking inland reservoir water for reclamation. Plus = scene land eroded by two pixels minus today's land buffered by two pixels. Restrict plus to G11 L5 land to exclude Malaysia, Indonesia and turbid-water false positives; drop pieces below 0.1 km². No qualifying plus pieces remain. This extra conservative attribution mask cannot recover lost islands absent from L5. No nuisance polygons were hand-deleted.
 
@@ -92,13 +102,13 @@ Sample every 100 m along G3's largest exterior ring where it lies within one nat
 
 {accuracy}
 
-Published areas are SVY21 projected areas of final packed geometries, not national statistical land area. The specified G3 MP2019 outline is indicative planning geometry rather than an independently surveyed 2026 coast. The official values (581.5 km² in 1960, 617.8 in 1980, 682.7 in 2000 and 735.7 in 2024) use a different definition, including a 2002 method change. L4 → L5 is not an accepted measured growth series.
+Published areas are SVY21 projected areas of final packed geometries, not national statistical land area. The specified G3 MP2019 outline is indicative planning geometry rather than an independently surveyed 2026 coast. The official values (581.5 km² in 1960, 617.8 in 1980, 682.7 in 2000 and 735.7 in 2024) use a different definition, including a 2002 method change. The first era's area includes the detached islands added from 1973.
 
-The unchanged shared `local-land.ts` applies the exact four-taps water/keepMatch configuration and writes eight dated eras, mask and today's reference coast. `build-coasts.ts` keeps each era in a separate cleaning layer, so overlapping eras cannot erase each other. It then folds the layers into one object and asserts that all eight eras survive. Final display DP is **{packing['dpM']} m**, with quantisation {packing['quant']} and a grid of approximately {packing['gridM'][0]:.2f} × {packing['gridM'][1]:.2f} m. Post-quantisation cleaning uses a 0.00001° snap. This display simplification is a disclosed budget tradeoff, not compliance with the tighter geographic accuracy targets. All final rings are checked; see coast-packing.json.
+The unchanged shared `local-land.ts` applies the exact four-taps water/keepMatch configuration and writes seven dated eras, mask and today's reference coast. `build-coasts.ts` keeps each era in a separate cleaning layer, so overlapping eras cannot erase each other. It then folds the layers into one object and asserts that all seven eras survive. Final display DP is **{packing['dpM']} m**, with quantisation {packing['quant']} and a grid of approximately {packing['gridM'][0]:.2f} × {packing['gridM'][1]:.2f} m. Post-quantisation cleaning uses a 0.00001° snap. This display simplification is a disclosed budget tradeoff, not compliance with the tighter geographic accuracy targets. All final rings are checked; see coast-packing.json.
 
 ## Control maps
 
-**K1:** G1's contiguous City and Naval Base stipple edges are traced through dense source-pixel anchors in lines.json. Straight connectors join image-observed anchors; the all-pixel mask is not claimed as a colour-detection accuracy test. Offshore closures only select a side and are clipped to G11 L4 mainland. Sentosa is not painted as City. Countryside is L4 minus City, Naval Base and three early named reservoirs. Unbounded forest/swamp symbols are not traced. Every K1 feature is approximate.
+**K1:** G1's contiguous City and Naval Base stipple edges are traced through dense source-pixel anchors in lines.json. Straight connectors join image-observed anchors; the all-pixel mask is not claimed as a colour-detection accuracy test. Offshore closures only select a side and are clipped to the first-era mainland. Sentosa is not painted as City. Countryside is the first-era land (G11 L5 plus the 1973 detached islands) minus City, Naval Base and three early named reservoirs. Unbounded forest/swamp symbols are not traced. Every K1 feature is approximate.
 
 The retained source is a 1920 × 1205 Commons preview. Original-resolution requests failed with HTTP 403/429. Projection auto selected {fit['model']}. The 16 constructed graticule intersections have internal RMS {fit['rmsKm']*1000:.2f} m, max {fit['maxKm']*1000:.2f} m; leave-one-out RMS {fit['looRmsKm']*1000:.2f} m, max {fit['looMaxKm']*1000:.2f} m. **These are correlated constructions from border ticks, not 16 independent ground identifications. They do not satisfy the brief's control-point requirement or establish external 150/300 m accuracy.** See k1-review.md.
 
@@ -108,15 +118,15 @@ The retained source is a 1920 × 1205 Commons preview. Original-resolution reque
 
 ## Dated layers and railway
 
-The full [dated-layer audit](dated-layers-report.md) records the per-town HDB join and all area-date sources. There are 10,644 matched blocks from 10,817 residential property rows (98.401%); 121 ambiguous and 52 unmatched rows are omitted. No OneMap. Multiple footprint pieces dissolve to one centroid; only numeric f/h remain. Eighteen canonical reservoir geometries, arcs, transform and dates match four-taps, with ISO dates converted to decimal calendar years. Estates, farm parcels and reserves carry per-feature approximate certainty and present-day extent semantics. Tuas/Woodlands exact opening dates and unsupported separate historical farm boundaries are omitted.
+The full [dated-layer audit](dated-layers-report.md) records the per-town HDB join and all area-date sources. There are 10,644 matched blocks from 10,817 residential property rows (98.401%); 121 ambiguous and 52 unmatched rows are omitted. No OneMap. Multiple footprint pieces dissolve to one centroid; only numeric f/h remain. Seventeen canonical reservoir geometries (Linggiu removed), arcs, transform and dates match four-taps, with ISO dates converted to decimal calendar years. Estates, farm parcels and reserves carry per-feature approximate certainty and present-day extent semantics, cut by coast era. Tuas/Woodlands exact opening dates and unsupported separate historical farm boundaries are omitted.
 
-The [rail audit](rail-report.md) records 37 opening segments, 2,594 vertices, source feature IDs, station-derived connectors and date citations. Railway geometry is URA SODL and OSM-free. Every route persists, uses holder transport and has equal from/to. Some dates use primary operator, MOT or NAS sources rather than the preferred LTA/NLB; two retain month precision. The closed Ten Mile Junction spur is omitted. Partial Punggol West service in 2014 is not rendered as a whole loop.
+The [rail audit](rail-report.md) records 37 opening segments (two dates corrected in review: Outram Park–Clementi 1988-03-12, Woodlands extension 1996-02-10; see data/SOURCES.md), 2,594 vertices, source feature IDs, station-derived connectors and date citations. Railway geometry is URA SODL and OSM-free. Every route persists, uses holder transport and has equal from/to. Some dates use primary operator, MOT or NAS sources rather than the preferred LTA/NLB; Marina South Pier retains month precision. The closed Ten Mile Junction spur is omitted. Partial Punggol West service in 2014 is not rendered as a whole loop.
 
 ## Budgets and review
 
 {budget}
 
-HDB's budget is gzip per §9. The four area files total 105,577 raw bytes. PNG source comparisons and dated-layer reviews are under ignored docs/screenshots/singapore-land-use/. Existing chapter illustration assets were reused. Visual comparison is evidence for review, not historical acceptance.
+HDB's budget is gzip per §9. The four area files total {sum(Path(f'public/geo/sg-{x}.json').stat().st_size for x in ['estates','farm-parks','reserves','reservoirs']):,} raw bytes. PNG source comparisons and dated-layer reviews are under ignored docs/screenshots/singapore-land-use/. Existing chapter illustration assets were reused. Visual comparison is evidence for review, not historical acceptance.
 
 ## Every retained difference piece at least 0.1 km²
 
@@ -126,56 +136,4 @@ Names below are candidate geographic correspondences inferred from centroid loca
 '''
 # Make long generated prose readable without changing named English words.
 (P/'SOURCES-GEO.md').write_text(text.rstrip()+'\n')
-counts={k:len(read(TOP/'data'/f'{k}.json')) for k in ['entities','events','movements']}
-counts['sources']=len(read(TOP/'data/sources.json')['sources']);counts['glossary']=len(read(TOP/'data/glossary.json')['terms'])
-report=f'''\n## Second pass — 20 October 2026
-
-Anonymous MPC SAS access resolved the Landsat gate. The draft data and chapters are built. **Geographic acceptance is incomplete:** K1 lacks independent ground controls and the full-resolution source; coast p95 targets, tide matching and complete engineering-project matches remain unresolved. Passing software gates does not waive these requirements.
-
-### Counts
-
-- Eight coast eras, a mask and today's reference coast; four control frames with 3 / 0 / 0 / 7 features; eight fixed-colour entities.
-- 10,644 HDB points from 10,817 residential rows: 98.401% matched, 121 ambiguous and 52 unmatched omitted. No OneMap. Per-town counts are in dated-layers-report.md. The 26 blocks dated 2026 remain outside the 1959–2025 playback.
-- Dated areas: two industrial areas, one supported western farmland group, four reserves and 18 canonical reservoirs.
-- {counts['movements']} rail segments, 2,594 vertices; {counts['events']} events; {counts['sources']} sources; {counts['glossary']} glossary terms; seven English chapter drafts, 33 beats and six presets. Chinese uses 【待译】 except required canonical copies.
-- Existing cover and four chapter figures reused. Twenty layer plates, two control plates, eight coast plates and a rail overview are retained in the ignored screenshot directory.
-
-### Sources, licences and method
-
-URA/HDB/NParks/statistics use SODL 1.0. BIS 1959 is PD-UKGov; Landsat is USGS public domain. G11's inherited historical estimates retain their rejected-draft status. Reservoir name matching and Linggiu use © OpenStreetMap contributors, ODbL 1.0. Railway geometry is OSM-free. No NAS/SLA/NUS/journal/SFA map artwork was traced. Original research was recovered read-only from main and preserved with an evidence crosswalk. Exact receipts, hashes and chronology citations are in SOURCES-GEO.md, fetch-receipts.json and the layer/rail audits.
-
-{scene}
-
-MSS uses calibrated B4/B7 NDWI; TM/ETM+ uses SR_B2/SR_B5 MNDWI. Otsu thresholds use a 2 km outer-coast belt, followed by one-pixel closing, two-pixel uncertainty buffers and a 0.1 km² piece filter. Cloud pixels conservatively retain today's land status. Plus is constrained to G11 L5 to exclude foreign land; zero qualifying plus pieces remain. Low-QA but visibly hazy 1992/2009 scenes were rejected. Tide matching is unverified.
-
-### Coast statistics and K1
-
-{accuracy}
-
-All p95 values exceed the brief's sensor-specific targets. The unchanged-coast selector itself uses rejected G11 L5 as a provisional check. National statistical areas and planning-outline areas are different measures. Every retained minus piece, candidate project correspondence and unmatched result is listed in SOURCES-GEO.md. The Admiralty chart check is qualitative; TPC 1984 was not newly fetched.
-
-K1 uses a 1920 px Commons preview and 16 correlated graticule constructions. Internal RMS/max are {fit['rmsKm']*1000:.2f}/{fit['maxKm']*1000:.2f} m; leave-one-out RMS/max are {fit['looRmsKm']*1000:.2f}/{fit['looMaxKm']*1000:.2f} m. **These do not satisfy 16 independent geographic controls or certify external accuracy.** Source-pixel City/Naval Base traces are approximate. Intermediate whole-island land-use frames are empty.
-
-### Budgets
-
-{budget}
-
-Coast display packing uses DP {packing['dpM']} m and quantisation {packing['quant']}, approximately {packing['gridM'][0]:.2f} × {packing['gridM'][1]:.2f} m cells. This is a disclosed size tradeoff and does not meet the tighter geographic accuracy specification. K4 uses 10 m DP and quantisation 50000; HDB uses 100000. Topic-local adapters handle packing and empty frames. Engine, shared pipeline, package files and other topics remain unchanged.
-
-### Gates and visual review
-
-Final results are recorded in gates.json and appended below after integration. Earlier temporary failures are distinguished from remaining geographic accuracy gaps.
-
-### Unverifiable facts and remaining acceptance work
-
-- K1 full-resolution image and 16 independent geographic controls; externally established residuals.
-- Coast p95 accuracy, tide levels and complete dated engineering-footprint matches. Lost islands absent from G11 L5 are not recovered; inherited L4/L5 remain rejected estimates.
-- TPC 1984 comparison. Admiralty checks are qualitative; publication dates are not equivalent to survey dates.
-- Exact Tuas/Woodlands estate openings; separate historical boundaries and opening dates of the six farm parks. One supported western farmland group is not a reconstruction of six parks.
-- July 2024 syllabus differences; original Loh book pages on fire-cause accounts; HDB's exact founding-day office; precise current State-land share; Jurong West's first development; historical Chinese farm-park names; exact indoor-farm point; affected farmers' responses to 2026 proposals; causal claims about particular sand shipments. Unsupported exact claims are not asserted.
-- Woodlands and Marina South Pier first-service days retain month precision. Operator/MOT/NAS date sources are a disclosed exception to the preferred LTA/NLB register. Closed spurs and unverified historical realignments are omitted.
-- Existing approved illustration assets were reused rather than regenerated.
-
-Status remains draft. No push.
-'''
-f=P/'CODEX-REPORT.md';old=f.read_text();old=old.split('\n## Second pass —')[0];f.write_text(old+report)
+# Review 2026-10-20 (Opus): CODEX-REPORT.md is a historical hand-off and is no longer regenerated here.

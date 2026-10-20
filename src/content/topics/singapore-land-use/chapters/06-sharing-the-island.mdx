@@ -1,160 +1,90 @@
 ---
-{
-  "id": "sharing-the-island",
-  "order": 6,
-  "title": {
-    "en": "Sharing a small island today",
-    "zh": "【待译】Sharing a small island today"
-  },
-  "sensitive": false,
-  "state": {
-    "time": "2019-11-18",
-    "camera": {
-      "center": [
-        103.82,
-        1.36
-      ],
-      "zoom": 10.2
-    },
-    "layers": [
-      "base",
-      "control",
-      "movements",
-      "battles",
-      "sites",
-      "hdb-blocks",
-      "estates",
-      "farm-parks",
-      "reserves",
-      "reservoirs"
-    ],
-    "highlight": [
-      "master-plan-2019",
-      "site-macritchie-reservoir",
-      "sungei-buloh-reserve",
-      "labrador-reserve"
-    ],
-    "summary": {
-      "en": "The Master Plan shows planned use; the dated layers show particular buildings, transport and protected places.",
-      "zh": "【待译】The Master Plan shows planned use; the dated layers show particular buildings, transport and protected places."
-    },
-    "beats": [
-      {
-        "t": "2019-11-18",
-        "camera": {
-          "center": [
-            103.82,
-            1.36
-          ],
-          "zoom": 10.2
-        },
-        "highlight": [],
-        "caption": {
-          "en": "Master Plan 2019: colours show planned use. Rose is housing, indigo is industry, and green is parks and nature reserves.",
-          "zh": "【待译】Master Plan 2019: colours show planned use. Rose is housing, indigo is industry, and green is parks and nature reserves."
-        }
-      },
-      {
-        "t": "2019-11-18",
-        "camera": {
-          "center": [
-            103.8,
-            1.37
-          ],
-          "zoom": 11.4
-        },
-        "highlight": [
-          "site-macritchie-reservoir"
-        ],
-        "caption": {
-          "en": "The forest in the middle is protected for water and wildlife: rain falling here flows into reservoirs.",
-          "zh": "【待译】The forest in the middle is protected for water and wildlife: rain falling here flows into reservoirs."
-        }
-      },
-      {
-        "t": "2019-11-18",
-        "camera": {
-          "center": [
-            103.68,
-            1.33
-          ],
-          "zoom": 11.0
-        },
-        "highlight": [
-          "defence-special",
-          "industry"
-        ],
-        "caption": {
-          "en": "In the west, Master Plan planned use includes large areas for industry and special use.",
-          "zh": "【待译】In the west, Master Plan planned use includes large areas for industry and special use."
-        }
-      },
-      {
-        "t": "2025-12-31",
-        "camera": {
-          "center": [
-            103.82,
-            1.36
-          ],
-          "zoom": 10.6
-        },
-        "highlight": [],
-        "caption": {
-          "en": "Today: zoom in to find where you live, then drag the timeline back to 1959 to compare the evidence shown there.",
-          "zh": "【待译】Today: zoom in to find where you live, then drag the timeline back to 1959 to compare the evidence shown there."
-        }
-      }
-    ]
-  }
-}
+id: sharing-the-island
+order: 6
+title: { en: "Sharing a small island today", zh: "今天怎样分配一座小岛" }
+sensitive: false
+state:
+  time: "2019-11-18"
+  camera: { center: [103.82, 1.36], zoom: 10.2 }
+  layers: [base, control, movements, battles, sites, reserves, reservoirs]
+  highlight: [housing, industry, green, master-plan-2019, sungei-buloh-reserve, labrador-reserve]
+  summary:
+    en: "The Master Plan gives every piece of land a planned use. Homes, work, transport, water, food and nature all need room on the same small island."
+    zh: "总蓝图给每一块地定下规划用途。住家、工作、交通、水源、粮食和自然，都要在同一座小岛上找到位置。"
+  beats:
+    - t: "2019-11-18"
+      camera: { center: [103.82, 1.36], zoom: 10.2 }
+      highlight: [housing, industry, green]
+      caption:
+        en: "Master Plan 2019: every piece of land has a planned use. Rose is housing, indigo is industry and green is parks and nature reserves."
+        zh: "2019 年总蓝图：每一块地都有规划用途。玫瑰色是住宅，靛蓝色是工业，绿色是公园和自然保护区。"
+    - t: "2019-11-18"
+      camera: { center: [103.8, 1.375], zoom: 11.6 }
+      highlight: [site-macritchie-reservoir, site-upper-seletar-reservoir]
+      caption:
+        en: "In the middle of the island, forest is kept for water and for wildlife. The rain that falls here flows into the reservoirs."
+        zh: "岛的中部保留着森林，为了水源，也为了野生动植物。落在这里的雨水流进蓄水池。"
+    - t: "2019-11-18"
+      camera: { center: [103.70, 1.355], zoom: 11.0 }
+      highlight: [defence-special, industry]
+      caption:
+        en: "In the west, large areas are planned for industry and for military use, away from most homes."
+        zh: "西部有大片土地规划给工业和军事用途，离大部分住宅区较远。"
+    - t: "2025-12-31"
+      camera: { center: [103.82, 1.36], zoom: 10.6 }
+      layers: [base, control, movements, battles, hdb-blocks]
+      highlight: []
+      caption:
+        en: "Today: zoom in to find where you live. Then drag the timeline back to 1959 and see what the map shows there."
+        zh: "今天：放大地图，找找你住的地方，再把时间轴拖回 1959 年，看看地图上那里是什么。"
 ---
 
 <Lang en>
 
-The <Term id="master-plan">Master Plan</Term> sets out the planned use of land and how densely it may be developed. The Urban Redevelopment Authority reviews it every <Num s="S212">five</Num> years. On this map, Master Plan 2019 planned use groups homes, industry, transport, green space and other needs into broad colours. It does not show what was actually standing on every plot on the publication day.
+The <Term id="master-plan">Master Plan</Term> is the government's plan for every piece of land: what it may be used for and how much may be built on it. The Urban Redevelopment Authority reviews it every <Num s="S212">five</Num> years. The coloured map is the 2019 plan. It shows **planned use**, so a plot coloured for housing may still be empty, and a plot marked as a reserve site is being kept for a decision later.
 
-Land serves needs that can support one another or compete. Homes need routes to workplaces. Factories need services and access for goods. Food production needs suitable sites. Reservoirs need places to collect water. A <Term id="water-catchment">water catchment</Term> is land that sends rain towards a reservoir; it is much larger than the blue water surface itself.
+All the needs in this topic meet on one small island. Homes need to be near work and transport. Factories need roads and ports. Farms need flat, open land. Reservoirs need a <Term id="water-catchment">water catchment</Term>: land where the rain is collected and led into them, much larger than the water you can see.
 
-A <Term id="nature-reserve">nature reserve</Term> protects habitats and wildlife under law. Forest in the centre also helps protect water quality. Sungei Buloh protects coastal wetlands, while Labrador protects a different coastal environment. These places cannot simply be treated as empty spaces waiting for buildings. The map uses today’s reserve boundaries approximately; legal protection and earlier forest-reserve designations have their own histories.
+A <Term id="nature-reserve">nature reserve</Term> is protected by law. The forest in the centre shelters plants and animals and also keeps rainwater clean for the reservoirs. Sungei Buloh in the north-west protects mangroves and mudflats, and Labrador on the south coast protects a strip of coastal forest. The reserves are drawn with today's boundaries.
 
-Find a familiar place, then compare the dated layers around it. Travel back to 1959 and look again. Some changes are visible, but a blank layer is a gap in the evidence, not proof that nothing was there. Sharing a small island requires choices about homes, jobs, food, travel, water and living habitats, as well as the people already using each place.
+Now find a place you know. Drag the timeline back to 1959 and look again: you may see countryside, sea or an old shoreline where homes and railways stand today. A part of the map with nothing on it does not mean nothing was there; it may mean no open map of that time exists.
 
-<More title={{"en": "Reading planned-use colours", "zh": "【待译】Reading planned-use colours"}}>
+<More title={{ en: "One island, many planned uses", zh: "一座岛，多种规划用途" }}>
 
-Master Plan 2019 planned-use plots are grouped into broad teaching categories. These calculated shares use only the coloured planned-use groups as their denominator; roads and water are excluded [S219].
+These areas were calculated for this topic from the Master Plan 2019 map, grouped into the colours used here. Roads and water are left out, so the shares add up to the coloured land only.
 
-| Planned-use group | Area (km²) | Share of coloured groups |
+| Planned use | Area (km²) | Share |
 |---|---:|---:|
-| Housing | <Num s="S219">136.7</Num> | <Num s="S219">20.7%</Num> |
-| City, shops and services | <Num s="S219">167.3</Num> | <Num s="S219">25.4%</Num> |
-| Parks and green space | <Num s="S219">130.4</Num> | <Num s="S219">19.8%</Num> |
-| Industry | <Num s="S219">121.8</Num> | <Num s="S219">18.5%</Num> |
-| Transport | <Num s="S219">49.9</Num> | <Num s="S219">7.6%</Num> |
-| Defence and special use | <Num s="S219">47.0</Num> | <Num s="S219">7.1%</Num> |
-| Farmland | <Num s="S219">6.0</Num> | <Num s="S219">0.9%</Num> |
+| City, shops and services | <Num s="S219">167.3</Num> | <Num s="S219">25.4</Num>% |
+| Housing | <Num s="S219">136.7</Num> | <Num s="S219">20.7</Num>% |
+| Parks and nature reserves | <Num s="S219">130.4</Num> | <Num s="S219">19.8</Num>% |
+| Industry | <Num s="S219">121.8</Num> | <Num s="S219">18.5</Num>% |
+| Transport | <Num s="S219">49.9</Num> | <Num s="S219">7.6</Num>% |
+| Defence and special use | <Num s="S219">47.0</Num> | <Num s="S219">7.1</Num>% |
+| Farmland | <Num s="S219">6.0</Num> | <Num s="S219">0.9</Num>% |
 
-The countryside category belongs to the earlier map, so it is not a separate Master Plan 2019 planned-use group. “City, shops and services” combines several detailed planned uses, including reserve sites. A reserve site is kept for a future decision; it is different from a nature reserve. The green group also includes open space and beaches, rather than only protected forest.
-
-</More>
-
-<More title={{"en": "Protected places and water", "zh": "【待译】Protected places and water"}}>
-
-The reservoir shapes, names and dates match <TopicLink slug="four-taps" ch="the-first-reservoirs">The first reservoirs</TopicLink>. They show today’s water surfaces, including later enlargements. NParks records both earlier forest protection and later nature-reserve declarations [S204, S205]. A single date should not be read as the beginning of all conservation.
+“City, shops and services” also includes schools, hospitals, places of worship, cemeteries, sports grounds and reserve sites. “Parks and nature reserves” also includes open spaces and beaches.
 
 </More>
 
-<More title={{"en": "Plans can change", "zh": "【待译】Plans can change"}}>
+<More title={{ en: "Why nature reserves are left alone", zh: "为什么自然保护区不能开发" }}>
 
-Master Plans show planned use. The calculated agricultural planned-use areas change between editions [S219]:
+Rain falling on the forest around the first three reservoirs runs into them with little to pollute it, which is why no major building is allowed in these catchments. The forest is also home to many plants and animals. Bukit Timah became a forest reserve in the 1880s. Since 1951 Bukit Timah and the forest around the central reservoirs have been protected by law as nature reserves. Sungei Buloh, opened as a nature park in 1993, and Labrador became nature reserves in 2002. The reservoirs on this map have the same shapes, names and years as in <TopicLink slug="four-taps" ch="the-first-reservoirs">The Four National Taps</TopicLink>.
 
-| Master Plan edition | Agricultural planned-use area (km²) |
+</More>
+
+<More title={{ en: "Plans change", zh: "规划会改" }}>
+
+Each new Master Plan can move land from one use to another. Land planned for farming, calculated from four editions of the plan:
+
+| Master Plan | Farmland planned (km²) |
 |---|---:|
 | 2003 | <Num s="S219">8.9</Num> |
 | 2008 | <Num s="S219">8.1</Num> |
 | 2014 | <Num s="S219">9.8</Num> |
 | 2019 | <Num s="S219">6.1</Num> |
 
-These figures do not measure the land actually cultivated. After this timeline ends, a May 2026 government release proposed changing land use in Lim Chu Kang, with agriculture in the north and defence in the south [S215]. It says farms retain existing tenures until expiry and may bid for alternative sites. A later proposal does not change what the earlier plan meant.
+These are planned areas, not land actually farmed. In May 2026, after the end of this map's timeline, the government announced that it will reorganise the land in Lim Chu Kang: farms to the north, military training to the south. It said the affected farms could stay until their leases end and could bid for other sites. Farmers and the food targets of chapter 3 are both affected, and the plan is still being worked out.
 
 </More>
 
@@ -162,50 +92,50 @@ These figures do not measure the land actually cultivated. After this timeline e
 
 <Lang zh>
 
-【待译】The <Term id="master-plan">Master Plan</Term> sets out the planned use of land and how densely it may be developed. The Urban Redevelopment Authority reviews it every <Num s="S212">five</Num> years. On this map, Master Plan 2019 planned use groups homes, industry, transport, green space and other needs into broad colours. It does not show what was actually standing on every plot on the publication day.
+<Term id="master-plan">总蓝图</Term>是政府为每一块地定下的规划：可以拿来做什么，可以建多密。市区重建局每 <Num s="S212">5</Num> 年检讨一次。地图上的颜色是 2019 年的总蓝图，画的是**规划用途**：涂成住宅色的地，可能还空着；标为“预留地”的，是留待以后再决定的地。
 
-Land serves needs that can support one another or compete. Homes need routes to workplaces. Factories need services and access for goods. Food production needs suitable sites. Reservoirs need places to collect water. A <Term id="water-catchment">water catchment</Term> is land that sends rain towards a reservoir; it is much larger than the blue water surface itself.
+本主题讲到的各种需要，都挤在同一座小岛上。住家要靠近工作地点和交通，工厂需要道路和港口，农场需要平坦开阔的土地，蓄水池需要<Term id="water-catchment">集水区</Term>：把雨水收集起来、引进蓄水池的那片土地，比看得见的水面大得多。
 
-A <Term id="nature-reserve">nature reserve</Term> protects habitats and wildlife under law. Forest in the centre also helps protect water quality. Sungei Buloh protects coastal wetlands, while Labrador protects a different coastal environment. These places cannot simply be treated as empty spaces waiting for buildings. The map uses today’s reserve boundaries approximately; legal protection and earlier forest-reserve designations have their own histories.
+<Term id="nature-reserve">自然保护区</Term>受法律保护。中部的森林是动植物的家，也让流进蓄水池的雨水保持干净。西北的双溪布洛保护红树林和泥滩，南岸的拉柏多保护一小片海边的森林。图上的保护区用的是今天的边界。
 
-Find a familiar place, then compare the dated layers around it. Travel back to 1959 and look again. Some changes are visible, but a blank layer is a gap in the evidence, not proof that nothing was there. Sharing a small island requires choices about homes, jobs, food, travel, water and living habitats, as well as the people already using each place.
+现在找一个你熟悉的地方，把时间轴拖回 1959 年再看一次：今天的住家和铁路那里，当年可能是乡村、海，或者一条旧海岸线。地图上空着的地方，不一定当时什么都没有，也可能只是找不到可以公开使用的那个年代的地图。
 
-<More title={{"en": "Reading planned-use colours", "zh": "【待译】Reading planned-use colours"}}>
+<More title={{ en: "One island, many planned uses", zh: "一座岛，多种规划用途" }}>
 
-【待译】Master Plan 2019 planned-use plots are grouped into broad teaching categories. These calculated shares use only the coloured planned-use groups as their denominator; roads and water are excluded [S219].
+下表的面积是本主题根据 2019 年总蓝图算出来的，按本图的颜色分组。道路和水面不计，所以比例只是有颜色的土地之间的比例。
 
-| Planned-use group | Area (km²) | Share of coloured groups |
+| 规划用途 | 面积（平方公里） | 比例 |
 |---|---:|---:|
-| Housing | <Num s="S219">136.7</Num> | <Num s="S219">20.7%</Num> |
-| City, shops and services | <Num s="S219">167.3</Num> | <Num s="S219">25.4%</Num> |
-| Parks and green space | <Num s="S219">130.4</Num> | <Num s="S219">19.8%</Num> |
-| Industry | <Num s="S219">121.8</Num> | <Num s="S219">18.5%</Num> |
-| Transport | <Num s="S219">49.9</Num> | <Num s="S219">7.6%</Num> |
-| Defence and special use | <Num s="S219">47.0</Num> | <Num s="S219">7.1%</Num> |
-| Farmland | <Num s="S219">6.0</Num> | <Num s="S219">0.9%</Num> |
+| 城区、商业与公共设施 | <Num s="S219">167.3</Num> | <Num s="S219">25.4</Num>% |
+| 住宅 | <Num s="S219">136.7</Num> | <Num s="S219">20.7</Num>% |
+| 公园与自然保护区 | <Num s="S219">130.4</Num> | <Num s="S219">19.8</Num>% |
+| 工业 | <Num s="S219">121.8</Num> | <Num s="S219">18.5</Num>% |
+| 交通 | <Num s="S219">49.9</Num> | <Num s="S219">7.6</Num>% |
+| 国防与特殊用途 | <Num s="S219">47.0</Num> | <Num s="S219">7.1</Num>% |
+| 农业用地 | <Num s="S219">6.0</Num> | <Num s="S219">0.9</Num>% |
 
-The countryside category belongs to the earlier map, so it is not a separate Master Plan 2019 planned-use group. “City, shops and services” combines several detailed planned uses, including reserve sites. A reserve site is kept for a future decision; it is different from a nature reserve. The green group also includes open space and beaches, rather than only protected forest.
-
-</More>
-
-<More title={{"en": "Protected places and water", "zh": "【待译】Protected places and water"}}>
-
-【待译】The reservoir shapes, names and dates match <TopicLink slug="four-taps" ch="the-first-reservoirs">The first reservoirs</TopicLink>. They show today’s water surfaces, including later enlargements. NParks records both earlier forest protection and later nature-reserve declarations [S204, S205]. A single date should not be read as the beginning of all conservation.
+“城区、商业与公共设施”还包括学校、医院、宗教场所、坟场、体育场地和预留地；“公园与自然保护区”还包括休闲空地和海滩。
 
 </More>
 
-<More title={{"en": "Plans can change", "zh": "【待译】Plans can change"}}>
+<More title={{ en: "Why nature reserves are left alone", zh: "为什么自然保护区不能开发" }}>
 
-【待译】Master Plans show planned use. The calculated agricultural planned-use areas change between editions [S219]:
+落在最早三个蓄水池四周森林里的雨水，流进蓄水池时几乎没有受到污染，所以这些集水区不准大规模开发。森林里也住着许多动植物。武吉知马在 1880 年代成为森林保留地。1951 年起，武吉知马和中部蓄水池四周的森林依法受到保护，成为自然保护区。双溪布洛 1993 年开放为自然公园，它和拉柏多都在 2002 年成为自然保护区。图上蓄水池的形状、名称和年份，与<TopicLink slug="four-taps" ch="the-first-reservoirs">“四大水喉”</TopicLink>主题相同。
 
-| Master Plan edition | Agricultural planned-use area (km²) |
+</More>
+
+<More title={{ en: "Plans change", zh: "规划会改" }}>
+
+每一版新的总蓝图，都可能把土地从一种用途改为另一种。下面是根据四个版本算出的农业用地规划面积：
+
+| 总蓝图 | 规划农业用地（平方公里） |
 |---|---:|
 | 2003 | <Num s="S219">8.9</Num> |
 | 2008 | <Num s="S219">8.1</Num> |
 | 2014 | <Num s="S219">9.8</Num> |
 | 2019 | <Num s="S219">6.1</Num> |
 
-These figures do not measure the land actually cultivated. After this timeline ends, a May 2026 government release proposed changing land use in Lim Chu Kang, with agriculture in the north and defence in the south [S215]. It says farms retain existing tenures until expiry and may bid for alternative sites. A later proposal does not change what the earlier plan meant.
+这些是规划面积，不是实际耕种的面积。2026 年 5 月，也就是这张地图的时间轴结束之后，政府宣布重新安排林厝港的土地：北面留给农场，南面作军事训练。政府说，农场可以经营到租约期满，也可以竞标别处的地段。这牵涉到农民，也牵涉到第 03 章讲的粮食目标，具体安排仍在进行中。
 
 </More>
 

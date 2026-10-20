@@ -1,6 +1,16 @@
-# Singapore land use — geographic audit, second pass
+# Singapore land use — geographic audit
 
-Built on 20 October 2026. **Draft; geographic accuracy is not accepted.** The required software gates are separate from the remaining K1 control-point and coastline accuracy requirements. Earlier access findings are retained in CODEX-REPORT.md and research/landsat-access.json.
+Built on 20 October 2026 (Codex, second pass), revised the same day in the historian review (Opus). **Draft; geographic accuracy is not accepted.** The required software gates are separate from the remaining K1 control-point and coastline accuracy requirements. Earlier access findings are retained in CODEX-REPORT.md and research/landsat-access.json.
+
+## Review changes (Opus, 20 October 2026)
+
+1. **Speck and cloud islets.** The second-pass extraction gave cloud and invalid pixels today's land status; over seas reclaimed later this left round islets in every era (45 holes in L6's reclaimed areas, e.g. Changi, Tekong, Jurong). The rule is kept, and the method's 0.1 km² noise rule now also applies to land: dry patches under 0.1 km², and dry patches under 2 km² that are mostly cloud/invalid, are dropped before buffering (`landsat-coast.py`). Holes left: L6 9, L7 4, L8 3, L9 0, L10 0, all real islands later joined to the main island (e.g. Pulau Tekong Kechil, the Jurong islands, Coney Island).
+2. **One inherited era.** L4 (1941 AMS map) is no longer used: for April 1959–1961 it would show about 15 km² more western mangrove land than L5, a change of source, not of land. The first era is G11 L5 until the first Landsat date.
+3. **Detached islands.** G11 L5 lacks Pulau Ubin, Pulau Tekong and the southern and Jurong islands, which the BIS 1959 map (G1) draws as land. Every L6 (1973) land piece that does not touch L5 and is at least 0.02 km² is added to the first era (`historic-islands.py`, 27 islands, 48.3 km²). Changes to these islands between 1959 and 1973 (refinery works on Pulau Ayer Chawan, Pulau Bukom) therefore appear early.
+4. **K1** is rebuilt on the corrected first era, so the islands are coloured as countryside in 1959. Blakang Mati's forts and Pulau Bukom's oil depot are not separated from countryside; the BIS map does not mark them.
+5. **Display simplification** is 50 m (was 90 m) within the same 250 KB budget, because the speck filter removed many small rings.
+6. **Dated areas** (estates, farmland, reserves) are cut by coast era, one piece per era with `[from, to)`, so today's extent is never drawn over the sea of its year; the area clean keeps overlaps (`-clean allow-overlaps`). Reserves at Bukit Timah and the Central Catchment start in 1951 (Nature Reserves Ordinance), not 1990. Linggiu (Johor) is removed from the reservoir layer.
+
 
 ## Source ledger and licences
 
@@ -25,8 +35,8 @@ Built on 20 October 2026. **Draft; geographic accuracy is not accepted.** The re
 Additional inherited sources:
 
 - **G9:** USGS Landsat Collection 2 through the anonymous [Planetary Computer STAC API](https://planetarycomputer.microsoft.com/api/stac/v1). Exact scene IDs, bands, cloud measurements and thresholds appear below. Images courtesy of the U.S. Geological Survey, public domain.
-- **G10:** canonical four-taps reservoir geometry, names and dates. Singapore water surfaces are URA SODL; name matching and the Linggiu outline use **© OpenStreetMap contributors**, [ODbL 1.0](https://www.openstreetmap.org/copyright). Database obligations remain in force.
-- **G11:** decoded L4/L5 from `public/geo/land-sg-history.json`, unchanged upstream. Public-domain British maps, URA SODL and inherited OSM name selectors. The upstream audit calls these **rejected research drafts**. L4 uses a 1937 source; L5 includes earlier chart corrections and is not a certified 1961 survey. This topic preserves that limitation.
+- **G10:** canonical four-taps reservoir geometry, names and dates. Singapore water surfaces are URA SODL; name matching uses **© OpenStreetMap contributors**, [ODbL 1.0](https://www.openstreetmap.org/copyright). Database obligations remain in force.
+- **G11:** decoded L4/L5 from `public/geo/land-sg-history.json`, unchanged upstream. Public-domain British maps, URA SODL and inherited OSM name selectors. The upstream audit calls these **rejected research drafts**. Only L5 is used (review change 2); it includes earlier chart corrections and is not a certified 1961 survey. This topic preserves that limitation.
 - **G13:** historical topic Admiralty charts G14–G17 copied read-only to ignored refs/. Chart 2014, published in 1966, was visually inspected: the separate Jurong islands broadly correspond to the early satellite pattern. Publication, survey and correction dates differ. No chart geometry was newly traced. TPC 1984 was not newly fetched; this independent check remains incomplete.
 
 The [Singapore Open Data Licence 1.0](https://data.gov.sg/open-data-licence) permits reuse and adaptation with attribution and a current licence link. Catalogue wording: “Free forever for personal or commercial use, under the Open Data Licence.” Contains information from the URA, HDB, NParks and statistical datasets listed above, accessed on 20 October 2026 from data.gov.sg, made available under the Singapore Open Data Licence version 1.0. Per-file timestamps, SHA-256 hashes and source URLs are retained in fetch-receipts.json, dated-layers-report.md and rail-report.md.
@@ -54,7 +64,7 @@ All returned corrected MSS and TM/ETM+ candidates in the recorded date windows w
 
 `landsat-coast.ts` runs the topic-local Python raster method. MSS NDWI = (green B4 − NIR B7) / (green B4 + NIR B7), using MTL reflectance multipliers and offsets. The shared solar-elevation factor cancels. B7 covers 0.8–1.1 µm; see [USGS band designations](https://www.usgs.gov/faqs/what-are-band-designations-landsat-satellites) and the [USGS Landsat handbook](https://pubs.usgs.gov/gip/70039196/report.pdf). TM/ETM+ MNDWI uses SR_B2 and SR_B5; reflectance = DN × 0.0000275 − 0.2.
 
-Otsu thresholds are computed on valid, clear pixels within 2 km of the original G3 outer coast, excluding inland reservoir shores. The lower-index class is land. QA bits 1, 3 and 4 identify dilated cloud, cloud and shadow. Unknown/cloud pixels conservatively retain today's land status; this is **not an observation of historical land beneath cloud**. A 3 × 3 closing fills one-pixel gaps.
+Otsu thresholds are computed on valid, clear pixels within 2 km of the original G3 outer coast, excluding inland reservoir shores. The lower-index class is land. QA bits 1, 3 and 4 identify dilated cloud, cloud and shadow. Unknown/cloud pixels retain today's land status; this is **not an observation of historical land beneath cloud**. A 3 × 3 closing fills one-pixel gaps. Dry components under 0.1 km², and dry components under 2 km² of which more than half is cloud or invalid, are then removed (review change 1).
 
 Vectorise at native 60 m MSS / 30 m TM resolution. Minus = today's land minus scene land buffered by two pixels. Drop pieces below 0.1 km²; keep coastal-connected pieces to avoid mistaking inland reservoir water for reclamation. Plus = scene land eroded by two pixels minus today's land buffered by two pixels. Restrict plus to G11 L5 land to exclude Malaysia, Indonesia and turbid-water false positives; drop pieces below 0.1 km². No qualifying plus pieces remain. This extra conservative attribution mask cannot recover lost islands absent from L5. No nuisance polygons were hand-deleted.
 
@@ -64,23 +74,22 @@ Sample every 100 m along G3's largest exterior ring where it lies within one nat
 
 | Era | Acquisition / reference | Published land km² | Difference to L11 km² | Diagnostic p50 / p95 m | Samples |
 |---|---|---:|---:|---:|---:|
-| L4 | Inherited G11 approximate outline | 536.397 | -219.514 | Not requalified | — |
-| L5 | Inherited G11 approximate outline | 521.855 | -234.057 | Not requalified | — |
-| L6 | 1973-10-17 | 599.991 | -155.920 | 42.47 / 168.94 | 435 |
-| L7 | 1979-10-31 | 629.848 | -126.063 | 47.60 / 214.38 | 477 |
-| L8 | 1991-04-28 | 645.415 | -110.496 | 24.20 / 157.58 | 412 |
-| L9 | 2002-10-11 | 704.788 | -51.123 | 19.19 / 113.64 | 422 |
-| L10 | 2011-02-14 | 727.444 | -28.467 | 26.53 / 266.04 | 392 |
-| L11 | URA MP2019 outline, from 2019-11-18 | 755.911 | 0.000 | Reference only | — |
+| L5 | Inherited G11 L5 outline (charts 1954–1961) + detached islands from L6 1973 | 570.314 | -186.277 | Not requalified | — |
+| L6 | 1973-10-17 | 594.469 | -162.123 | 40.49 / 172.63 | 400 |
+| L7 | 1979-10-31 | 624.656 | -131.936 | 48.24 / 215.02 | 466 |
+| L8 | 1991-04-28 | 644.058 | -112.533 | 24.65 / 157.58 | 412 |
+| L9 | 2002-10-11 | 704.513 | -52.079 | 19.19 / 113.73 | 420 |
+| L10 | 2011-02-14 | 726.579 | -30.013 | 26.53 / 267.99 | 390 |
+| L11 | URA MP2019 outline, from 2019-11-18 | 756.591 | 0.000 | Reference only | — |
 
 
-Published areas are SVY21 projected areas of final packed geometries, not national statistical land area. The specified G3 MP2019 outline is indicative planning geometry rather than an independently surveyed 2026 coast. The official values (581.5 km² in 1960, 617.8 in 1980, 682.7 in 2000 and 735.7 in 2024) use a different definition, including a 2002 method change. L4 → L5 is not an accepted measured growth series.
+Published areas are SVY21 projected areas of final packed geometries, not national statistical land area. The specified G3 MP2019 outline is indicative planning geometry rather than an independently surveyed 2026 coast. The official values (581.5 km² in 1960, 617.8 in 1980, 682.7 in 2000 and 735.7 in 2024) use a different definition, including a 2002 method change. The first era's area includes the detached islands added from 1973.
 
-The unchanged shared `local-land.ts` applies the exact four-taps water/keepMatch configuration and writes eight dated eras, mask and today's reference coast. `build-coasts.ts` keeps each era in a separate cleaning layer, so overlapping eras cannot erase each other. It then folds the layers into one object and asserts that all eight eras survive. Final display DP is **90 m**, with quantisation 10000 and a grid of approximately 5.37 × 3.38 m. Post-quantisation cleaning uses a 0.00001° snap. This display simplification is a disclosed budget tradeoff, not compliance with the tighter geographic accuracy targets. All final rings are checked; see coast-packing.json.
+The unchanged shared `local-land.ts` applies the exact four-taps water/keepMatch configuration and writes seven dated eras, mask and today's reference coast. `build-coasts.ts` keeps each era in a separate cleaning layer, so overlapping eras cannot erase each other. It then folds the layers into one object and asserts that all seven eras survive. Final display DP is **50 m**, with quantisation 10000 and a grid of approximately 5.37 × 3.47 m. Post-quantisation cleaning uses a 0.00001° snap. This display simplification is a disclosed budget tradeoff, not compliance with the tighter geographic accuracy targets. All final rings are checked; see coast-packing.json.
 
 ## Control maps
 
-**K1:** G1's contiguous City and Naval Base stipple edges are traced through dense source-pixel anchors in lines.json. Straight connectors join image-observed anchors; the all-pixel mask is not claimed as a colour-detection accuracy test. Offshore closures only select a side and are clipped to G11 L4 mainland. Sentosa is not painted as City. Countryside is L4 minus City, Naval Base and three early named reservoirs. Unbounded forest/swamp symbols are not traced. Every K1 feature is approximate.
+**K1:** G1's contiguous City and Naval Base stipple edges are traced through dense source-pixel anchors in lines.json. Straight connectors join image-observed anchors; the all-pixel mask is not claimed as a colour-detection accuracy test. Offshore closures only select a side and are clipped to the first-era mainland. Sentosa is not painted as City. Countryside is the first-era land (G11 L5 plus the 1973 detached islands) minus City, Naval Base and three early named reservoirs. Unbounded forest/swamp symbols are not traced. Every K1 feature is approximate.
 
 The retained source is a 1920 × 1205 Commons preview. Original-resolution requests failed with HTTP 403/429. Projection auto selected laea(103.8,1.3)+poly2. The 16 constructed graticule intersections have internal RMS 20.17 m, max 40.12 m; leave-one-out RMS 37.49 m, max 68.80 m. **These are correlated constructions from border ticks, not 16 independent ground identifications. They do not satisfy the brief's control-point requirement or establish external 150/300 m accuracy.** See k1-review.md.
 
@@ -90,24 +99,24 @@ The retained source is a 1920 × 1205 Commons preview. Original-resolution reque
 
 ## Dated layers and railway
 
-The full [dated-layer audit](dated-layers-report.md) records the per-town HDB join and all area-date sources. There are 10,644 matched blocks from 10,817 residential property rows (98.401%); 121 ambiguous and 52 unmatched rows are omitted. No OneMap. Multiple footprint pieces dissolve to one centroid; only numeric f/h remain. Eighteen canonical reservoir geometries, arcs, transform and dates match four-taps, with ISO dates converted to decimal calendar years. Estates, farm parcels and reserves carry per-feature approximate certainty and present-day extent semantics. Tuas/Woodlands exact opening dates and unsupported separate historical farm boundaries are omitted.
+The full [dated-layer audit](dated-layers-report.md) records the per-town HDB join and all area-date sources. There are 10,644 matched blocks from 10,817 residential property rows (98.401%); 121 ambiguous and 52 unmatched rows are omitted. No OneMap. Multiple footprint pieces dissolve to one centroid; only numeric f/h remain. Seventeen canonical reservoir geometries (Linggiu removed), arcs, transform and dates match four-taps, with ISO dates converted to decimal calendar years. Estates, farm parcels and reserves carry per-feature approximate certainty and present-day extent semantics, cut by coast era. Tuas/Woodlands exact opening dates and unsupported separate historical farm boundaries are omitted.
 
-The [rail audit](rail-report.md) records 37 opening segments, 2,594 vertices, source feature IDs, station-derived connectors and date citations. Railway geometry is URA SODL and OSM-free. Every route persists, uses holder transport and has equal from/to. Some dates use primary operator, MOT or NAS sources rather than the preferred LTA/NLB; two retain month precision. The closed Ten Mile Junction spur is omitted. Partial Punggol West service in 2014 is not rendered as a whole loop.
+The [rail audit](rail-report.md) records 37 opening segments (two dates corrected in review: Outram Park–Clementi 1988-03-12, Woodlands extension 1996-02-10; see data/SOURCES.md), 2,594 vertices, source feature IDs, station-derived connectors and date citations. Railway geometry is URA SODL and OSM-free. Every route persists, uses holder transport and has equal from/to. Some dates use primary operator, MOT or NAS sources rather than the preferred LTA/NLB; Marina South Pier retains month precision. The closed Ten Mile Junction spur is omitted. Partial Punggol West service in 2014 is not rendered as a whole loop.
 
 ## Budgets and review
 
 | File | Bytes | gzip -9 bytes | Budget |
 |---|---:|---:|---|
-| `control.json` | 1,029,411 | 319,960 | 1.2 MiB raw |
-| `land-sg-modern.json` | 250,603 | 74,604 | 250 KiB raw |
+| `control.json` | 1,076,281 | 335,314 | 1.2 MiB raw |
+| `land-sg-modern.json` | 246,899 | 70,082 | 250 KiB raw |
 | `sg-hdb-blocks.json` | 806,969 | 85,478 | 300 KB gzip |
-| `sg-estates.json` | 36,910 | 14,628 | 400 KB raw, all four area files combined |
-| `sg-farm-parks.json` | 7,483 | 3,451 | 400 KB raw, all four area files combined |
-| `sg-reserves.json` | 8,430 | 3,617 | 400 KB raw, all four area files combined |
-| `sg-reservoirs.json` | 52,754 | 14,144 | 400 KB raw, all four area files combined |
+| `sg-estates.json` | 47,497 | 17,405 | 400 KB raw, all four area files combined |
+| `sg-farm-parks.json` | 7,575 | 3,502 | 400 KB raw, all four area files combined |
+| `sg-reserves.json` | 8,898 | 3,802 | 400 KB raw, all four area files combined |
+| `sg-reservoirs.json` | 52,462 | 14,039 | 400 KB raw, all four area files combined |
 
 
-HDB's budget is gzip per §9. The four area files total 105,577 raw bytes. PNG source comparisons and dated-layer reviews are under ignored docs/screenshots/singapore-land-use/. Existing chapter illustration assets were reused. Visual comparison is evidence for review, not historical acceptance.
+HDB's budget is gzip per §9. The four area files total 116,432 raw bytes. PNG source comparisons and dated-layer reviews are under ignored docs/screenshots/singapore-land-use/. Existing chapter illustration assets were reused. Visual comparison is evidence for review, not historical acceptance.
 
 ## Every retained difference piece at least 0.1 km²
 
@@ -115,145 +124,156 @@ Names below are candidate geographic correspondences inferred from centroid loca
 
 | Era | Kind / piece | Area km² | Centroid lng, lat | Named correspondence / unresolved |
 |---|---|---:|---|---|
-| L6 | minus 1 | 37.4030 | 103.62925, 1.26742 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
-| L6 | minus 2 | 30.8800 | 104.00213, 1.33989 | unmatched |
-| L6 | minus 3 | 24.9788 | 104.05831, 1.38059 | unmatched |
-| L6 | minus 4 | 19.3894 | 103.6777, 1.2591 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
-| L6 | minus 5 | 6.1306 | 104.02673, 1.42776 | unmatched |
-| L6 | minus 6 | 6.0915 | 103.86625, 1.28138 | Candidate Marina Bay — [URA Marina Bay, History and beginnings; 1971–1994 reclamation](https://www.ura.gov.sg/land-planning/shaping-our-city/marina-bay/); not a dated footprint match |
+| L6 | minus 1 | 37.7032 | 103.62931, 1.26719 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L6 | minus 2 | 33.6181 | 104.0029, 1.34013 | unmatched |
+| L6 | minus 3 | 26.5465 | 104.05781, 1.38048 | unmatched |
+| L6 | minus 4 | 19.7918 | 103.67799, 1.25919 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L6 | minus 5 | 6.1764 | 103.86598, 1.28117 | Candidate Marina Bay — [URA Marina Bay, History and beginnings; 1971–1994 reclamation](https://www.ura.gov.sg/land-planning/shaping-our-city/marina-bay/); not a dated footprint match |
+| L6 | minus 6 | 6.1306 | 104.02673, 1.42776 | unmatched |
 | L6 | minus 7 | 5.6200 | 103.7728, 1.27533 | unmatched |
-| L6 | minus 8 | 3.3242 | 103.77098, 1.19901 | Candidate Semakau — [NEA, Celebrating20years, paragraph4 and AnnexA; 1999/2015](https://www.nea.gov.sg/media/news/news/index/celebrating-20-years-of-semakau-landfill); not a dated footprint match |
-| L6 | minus 9 | 3.1062 | 103.88495, 1.42273 | unmatched |
-| L6 | minus 10 | 2.9344 | 103.92874, 1.39875 | unmatched |
-| L6 | minus 11 | 2.5544 | 103.71908, 1.27329 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L6 | minus 8 | 3.6944 | 103.7716, 1.19979 | Candidate Semakau — [NEA, Celebrating20years, paragraph4 and AnnexA; 1999/2015](https://www.nea.gov.sg/media/news/news/index/celebrating-20-years-of-semakau-landfill); not a dated footprint match |
+| L6 | minus 9 | 3.3539 | 103.71763, 1.27486 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L6 | minus 10 | 3.1062 | 103.88495, 1.42273 | unmatched |
+| L6 | minus 11 | 2.9344 | 103.92874, 1.39875 | unmatched |
 | L6 | minus 12 | 2.1152 | 103.9937, 1.40926 | unmatched |
 | L6 | minus 13 | 1.8316 | 103.71867, 1.20728 | unmatched |
-| L6 | minus 14 | 1.1023 | 103.75147, 1.23283 | unmatched |
-| L6 | minus 15 | 0.9049 | 103.86653, 1.4429 | unmatched |
-| L6 | minus 16 | 0.8148 | 103.71812, 1.28968 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
-| L6 | minus 17 | 0.5377 | 103.8432, 1.24959 | unmatched |
+| L6 | minus 14 | 1.3849 | 103.75038, 1.23302 | unmatched |
+| L6 | minus 15 | 1.1104 | 103.71948, 1.28895 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L6 | minus 16 | 0.9049 | 103.86653, 1.4429 | unmatched |
+| L6 | minus 17 | 0.5786 | 103.84289, 1.24982 | unmatched |
 | L6 | minus 18 | 0.5057 | 103.74749, 1.44253 | unmatched |
-| L6 | minus 19 | 0.4689 | 103.85092, 1.24143 | unmatched |
-| L6 | minus 20 | 0.4056 | 103.76905, 1.23227 | unmatched |
-| L6 | minus 21 | 0.4040 | 103.85266, 1.22996 | unmatched |
-| L6 | minus 22 | 0.2934 | 103.83818, 1.25998 | unmatched |
-| L6 | minus 23 | 0.2928 | 103.85395, 1.45558 | unmatched |
-| L6 | minus 24 | 0.2881 | 103.63718, 1.35017 | unmatched |
-| L6 | minus 25 | 0.2819 | 103.67695, 1.30033 | unmatched |
-| L6 | minus 26 | 0.2612 | 103.66984, 1.2931 | unmatched |
-| L6 | minus 27 | 0.1727 | 103.63631, 1.34116 | unmatched |
-| L6 | minus 28 | 0.1313 | 103.95464, 1.38115 | unmatched |
-| L6 | minus 29 | 0.1090 | 103.79924, 1.20275 | unmatched |
-| L6 | minus 30 | 0.1063 | 103.65171, 1.30193 | unmatched |
-| L6 | minus 31 | 0.1026 | 103.838, 1.24042 | unmatched |
-| L7 | minus 1 | 35.7391 | 103.62892, 1.26443 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
-| L7 | minus 2 | 21.9472 | 104.01032, 1.33744 | unmatched |
-| L7 | minus 3 | 21.0579 | 104.0547, 1.37771 | unmatched |
-| L7 | minus 4 | 18.9568 | 103.67744, 1.2584 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
-| L7 | minus 5 | 5.6019 | 104.02498, 1.42742 | unmatched |
-| L7 | minus 6 | 3.3417 | 103.7712, 1.19913 | Candidate Semakau — [NEA, Celebrating20years, paragraph4 and AnnexA; 1999/2015](https://www.nea.gov.sg/media/news/news/index/celebrating-20-years-of-semakau-landfill); not a dated footprint match |
-| L7 | minus 7 | 2.7088 | 103.76611, 1.27812 | unmatched |
-| L7 | minus 8 | 2.6132 | 103.88398, 1.42296 | unmatched |
+| L6 | minus 19 | 0.4779 | 103.76859, 1.23237 | unmatched |
+| L6 | minus 20 | 0.4689 | 103.85092, 1.24143 | unmatched |
+| L6 | minus 21 | 0.4042 | 103.85266, 1.22996 | unmatched |
+| L6 | minus 22 | 0.3714 | 103.67787, 1.30019 | unmatched |
+| L6 | minus 23 | 0.2934 | 103.83818, 1.25998 | unmatched |
+| L6 | minus 24 | 0.2928 | 103.85395, 1.45558 | unmatched |
+| L6 | minus 25 | 0.2881 | 103.63718, 1.35017 | unmatched |
+| L6 | minus 26 | 0.2666 | 103.83794, 1.23114 | unmatched |
+| L6 | minus 27 | 0.2612 | 103.66984, 1.2931 | unmatched |
+| L6 | minus 28 | 0.1872 | 103.72545, 1.30318 | unmatched |
+| L6 | minus 29 | 0.1727 | 103.63631, 1.34116 | unmatched |
+| L6 | minus 30 | 0.1606 | 103.83567, 1.26872 | unmatched |
+| L6 | minus 31 | 0.1318 | 103.75279, 1.4417 | unmatched |
+| L6 | minus 32 | 0.1313 | 103.95464, 1.38115 | unmatched |
+| L6 | minus 33 | 0.1198 | 103.73063, 1.30297 | unmatched |
+| L6 | minus 34 | 0.1090 | 103.79924, 1.20275 | unmatched |
+| L6 | minus 35 | 0.1063 | 103.65171, 1.30193 | unmatched |
+| L6 | minus 36 | 0.1026 | 103.838, 1.24042 | unmatched |
+| L7 | minus 1 | 35.8500 | 103.62888, 1.26445 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L7 | minus 2 | 22.0247 | 104.01032, 1.3374 | unmatched |
+| L7 | minus 3 | 21.7877 | 104.05456, 1.37761 | unmatched |
+| L7 | minus 4 | 19.7905 | 103.67799, 1.25923 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L7 | minus 5 | 5.7417 | 104.02532, 1.42764 | unmatched |
+| L7 | minus 6 | 3.7208 | 103.77155, 1.19982 | Candidate Semakau — [NEA, Celebrating20years, paragraph4 and AnnexA; 1999/2015](https://www.nea.gov.sg/media/news/news/index/celebrating-20-years-of-semakau-landfill); not a dated footprint match |
+| L7 | minus 7 | 3.1410 | 103.88422, 1.42263 | unmatched |
+| L7 | minus 8 | 2.7088 | 103.76611, 1.27812 | unmatched |
 | L7 | minus 9 | 2.4277 | 103.93065, 1.39553 | unmatched |
-| L7 | minus 10 | 2.0449 | 103.87068, 1.28267 | Candidate Marina Bay — [URA Marina Bay, History and beginnings; 1971–1994 reclamation](https://www.ura.gov.sg/land-planning/shaping-our-city/marina-bay/); not a dated footprint match |
+| L7 | minus 10 | 2.2671 | 103.87096, 1.28282 | Candidate Marina Bay — [URA Marina Bay, History and beginnings; 1971–1994 reclamation](https://www.ura.gov.sg/land-planning/shaping-our-city/marina-bay/); not a dated footprint match |
 | L7 | minus 11 | 1.7026 | 103.78657, 1.26439 | unmatched |
-| L7 | minus 12 | 1.2187 | 103.99759, 1.40933 | unmatched |
-| L7 | minus 13 | 1.0588 | 103.72441, 1.26916 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
-| L7 | minus 14 | 0.9981 | 103.75307, 1.23139 | unmatched |
-| L7 | minus 15 | 0.8638 | 103.86631, 1.4437 | unmatched |
-| L7 | minus 16 | 0.4815 | 104.00391, 1.37518 | unmatched |
-| L7 | minus 17 | 0.4689 | 103.85092, 1.24143 | unmatched |
-| L7 | minus 18 | 0.2713 | 103.71645, 1.29113 | unmatched |
-| L7 | minus 19 | 0.2705 | 103.84209, 1.26746 | Candidate Marina Bay — [URA Marina Bay, History and beginnings; 1971–1994 reclamation](https://www.ura.gov.sg/land-planning/shaping-our-city/marina-bay/); not a dated footprint match |
-| L7 | minus 20 | 0.1629 | 103.84079, 1.2506 | Candidate Marina Bay — [URA Marina Bay, History and beginnings; 1971–1994 reclamation](https://www.ura.gov.sg/land-planning/shaping-our-city/marina-bay/); not a dated footprint match |
-| L7 | minus 21 | 0.1244 | 103.69436, 1.28892 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
-| L7 | minus 22 | 0.1232 | 103.70263, 1.28696 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
-| L7 | minus 23 | 0.1231 | 103.74693, 1.44326 | unmatched |
-| L7 | minus 24 | 0.1087 | 103.83768, 1.24027 | unmatched |
-| L7 | minus 25 | 0.1022 | 103.75723, 1.44166 | unmatched |
-| L7 | minus 26 | 0.1020 | 103.8562, 1.45507 | unmatched |
-| L8 | minus 1 | 23.7714 | 103.62714, 1.24881 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
-| L8 | minus 2 | 20.5248 | 104.05598, 1.37686 | unmatched |
+| L7 | minus 12 | 1.4684 | 104.07801, 1.39867 | unmatched |
+| L7 | minus 13 | 1.4623 | 103.75362, 1.23118 | unmatched |
+| L7 | minus 14 | 1.2637 | 103.7243, 1.26997 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L7 | minus 15 | 1.2187 | 103.99759, 1.40933 | unmatched |
+| L7 | minus 16 | 0.8638 | 103.86631, 1.4437 | unmatched |
+| L7 | minus 17 | 0.7644 | 103.72007, 1.2887 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L7 | minus 18 | 0.4815 | 104.00391, 1.37518 | unmatched |
+| L7 | minus 19 | 0.4689 | 103.85092, 1.24143 | unmatched |
+| L7 | minus 20 | 0.4219 | 103.84263, 1.26753 | Candidate Marina Bay — [URA Marina Bay, History and beginnings; 1971–1994 reclamation](https://www.ura.gov.sg/land-planning/shaping-our-city/marina-bay/); not a dated footprint match |
+| L7 | minus 21 | 0.4041 | 103.85266, 1.22996 | unmatched |
+| L7 | minus 22 | 0.3703 | 103.84206, 1.2514 | Candidate Marina Bay — [URA Marina Bay, History and beginnings; 1971–1994 reclamation](https://www.ura.gov.sg/land-planning/shaping-our-city/marina-bay/); not a dated footprint match |
+| L7 | minus 23 | 0.2666 | 103.83794, 1.23114 | unmatched |
+| L7 | minus 24 | 0.2286 | 103.70346, 1.28595 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L7 | minus 25 | 0.1231 | 103.74693, 1.44326 | unmatched |
+| L7 | minus 26 | 0.1110 | 103.84009, 1.2581 | Candidate Marina Bay — [URA Marina Bay, History and beginnings; 1971–1994 reclamation](https://www.ura.gov.sg/land-planning/shaping-our-city/marina-bay/); not a dated footprint match |
+| L7 | minus 27 | 0.1087 | 103.83768, 1.24027 | unmatched |
+| L7 | minus 28 | 0.1022 | 103.75723, 1.44166 | unmatched |
+| L7 | minus 29 | 0.1020 | 103.8562, 1.45507 | unmatched |
+| L8 | minus 1 | 25.4381 | 103.6273, 1.2489 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L8 | minus 2 | 20.6826 | 104.05594, 1.37692 | unmatched |
 | L8 | minus 3 | 19.1302 | 104.01249, 1.33819 | unmatched |
-| L8 | minus 4 | 17.7318 | 103.67612, 1.25849 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
-| L8 | minus 5 | 7.1037 | 104.02748, 1.42723 | unmatched |
-| L8 | minus 6 | 3.9577 | 103.77382, 1.2724 | unmatched |
-| L8 | minus 7 | 3.5889 | 103.77112, 1.19948 | Candidate Semakau — [NEA, Celebrating20years, paragraph4 and AnnexA; 1999/2015](https://www.nea.gov.sg/media/news/news/index/celebrating-20-years-of-semakau-landfill); not a dated footprint match |
-| L8 | minus 8 | 2.5348 | 103.71899, 1.2763 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
-| L8 | minus 9 | 2.1694 | 103.99345, 1.40935 | unmatched |
+| L8 | minus 4 | 17.8950 | 103.67618, 1.25847 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L8 | minus 5 | 7.1867 | 104.02761, 1.42728 | unmatched |
+| L8 | minus 6 | 4.5706 | 103.77285, 1.27394 | unmatched |
+| L8 | minus 7 | 3.7837 | 103.77144, 1.1999 | Candidate Semakau — [NEA, Celebrating20years, paragraph4 and AnnexA; 1999/2015](https://www.nea.gov.sg/media/news/news/index/celebrating-20-years-of-semakau-landfill); not a dated footprint match |
+| L8 | minus 8 | 3.3273 | 103.71823, 1.27931 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L8 | minus 9 | 2.2512 | 103.99322, 1.40923 | unmatched |
 | L8 | minus 10 | 2.0607 | 103.64138, 1.30278 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
-| L8 | minus 11 | 0.8054 | 103.86606, 1.4436 | unmatched |
-| L8 | minus 12 | 0.5840 | 103.74709, 1.44251 | unmatched |
-| L8 | minus 13 | 0.5225 | 103.7563, 1.44155 | unmatched |
+| L8 | minus 11 | 0.9606 | 103.86618, 1.44345 | unmatched |
+| L8 | minus 12 | 0.5946 | 103.74717, 1.44245 | unmatched |
+| L8 | minus 13 | 0.5411 | 103.75626, 1.44162 | unmatched |
 | L8 | minus 14 | 0.4689 | 103.85092, 1.24143 | unmatched |
-| L8 | minus 15 | 0.3713 | 103.85312, 1.45571 | unmatched |
-| L8 | minus 16 | 0.3699 | 103.85585, 1.26845 | Candidate Marina Bay — [URA Marina Bay, History and beginnings; 1971–1994 reclamation](https://www.ura.gov.sg/land-planning/shaping-our-city/marina-bay/); not a dated footprint match |
-| L8 | minus 17 | 0.3104 | 103.94037, 1.39199 | unmatched |
+| L8 | minus 15 | 0.3874 | 103.85328, 1.45569 | unmatched |
+| L8 | minus 16 | 0.3869 | 103.85593, 1.26845 | Candidate Marina Bay — [URA Marina Bay, History and beginnings; 1971–1994 reclamation](https://www.ura.gov.sg/land-planning/shaping-our-city/marina-bay/); not a dated footprint match |
+| L8 | minus 17 | 0.3257 | 103.94049, 1.39198 | unmatched |
 | L8 | minus 18 | 0.3061 | 103.75226, 1.23111 | unmatched |
-| L8 | minus 19 | 0.2753 | 103.76471, 1.28977 | unmatched |
-| L8 | minus 20 | 0.2695 | 103.71264, 1.29729 | unmatched |
-| L8 | minus 21 | 0.2396 | 103.93533, 1.39824 | unmatched |
-| L8 | minus 22 | 0.1983 | 103.62927, 1.33084 | unmatched |
-| L8 | minus 23 | 0.1773 | 103.83696, 1.24043 | unmatched |
-| L8 | minus 24 | 0.1747 | 103.84478, 1.25098 | Candidate Marina Bay — [URA Marina Bay, History and beginnings; 1971–1994 reclamation](https://www.ura.gov.sg/land-planning/shaping-our-city/marina-bay/); not a dated footprint match |
-| L8 | minus 25 | 0.1596 | 103.63569, 1.349 | unmatched |
-| L8 | minus 26 | 0.1418 | 103.6942, 1.28894 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L8 | minus 19 | 0.2666 | 103.83794, 1.23114 | unmatched |
+| L8 | minus 20 | 0.2484 | 103.93541, 1.39823 | unmatched |
+| L8 | minus 21 | 0.1983 | 103.62927, 1.33084 | unmatched |
+| L8 | minus 22 | 0.1773 | 103.83696, 1.24043 | unmatched |
+| L8 | minus 23 | 0.1747 | 103.84478, 1.25098 | Candidate Marina Bay — [URA Marina Bay, History and beginnings; 1971–1994 reclamation](https://www.ura.gov.sg/land-planning/shaping-our-city/marina-bay/); not a dated footprint match |
+| L8 | minus 24 | 0.1596 | 103.63569, 1.349 | unmatched |
+| L8 | minus 25 | 0.1418 | 103.6942, 1.28894 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L8 | minus 26 | 0.1407 | 103.84407, 1.46124 | unmatched |
 | L8 | minus 27 | 0.1269 | 103.73676, 1.27161 | unmatched |
-| L8 | minus 28 | 0.1094 | 103.84414, 1.46109 | unmatched |
-| L8 | minus 29 | 0.1085 | 103.86334, 1.43207 | unmatched |
-| L8 | minus 30 | 0.1021 | 103.62232, 1.31618 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
-| L9 | minus 1 | 17.6295 | 104.05522, 1.37579 | unmatched |
-| L9 | minus 2 | 4.3620 | 104.03266, 1.43161 | unmatched |
-| L9 | minus 3 | 4.2671 | 103.63612, 1.21756 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
-| L9 | minus 4 | 2.5286 | 103.63103, 1.25004 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
-| L9 | minus 5 | 2.2556 | 103.99315, 1.40927 | unmatched |
-| L9 | minus 6 | 2.1083 | 103.61314, 1.26686 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
-| L9 | minus 7 | 2.0854 | 103.63961, 1.2337 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
-| L9 | minus 8 | 1.9057 | 103.67339, 1.24281 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L8 | minus 28 | 0.1111 | 103.86331, 1.43201 | unmatched |
+| L8 | minus 29 | 0.1021 | 103.62232, 1.31618 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L9 | minus 1 | 17.7180 | 104.05509, 1.37589 | unmatched |
+| L9 | minus 2 | 4.7388 | 104.0331, 1.43196 | unmatched |
+| L9 | minus 3 | 4.3859 | 103.63587, 1.21765 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L9 | minus 4 | 2.6371 | 103.63112, 1.25002 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L9 | minus 5 | 2.2840 | 103.99309, 1.40921 | unmatched |
+| L9 | minus 6 | 2.1884 | 103.63966, 1.23365 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L9 | minus 7 | 2.1083 | 103.61314, 1.26686 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L9 | minus 8 | 2.0608 | 103.67318, 1.24239 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
 | L9 | minus 9 | 1.6162 | 103.78608, 1.26413 | unmatched |
-| L9 | minus 10 | 1.0934 | 103.76766, 1.19559 | Candidate Semakau — [NEA, Celebrating20years, paragraph4 and AnnexA; 1999/2015](https://www.nea.gov.sg/media/news/news/index/celebrating-20-years-of-semakau-landfill); not a dated footprint match |
+| L9 | minus 10 | 1.1128 | 103.76765, 1.19554 | Candidate Semakau — [NEA, Celebrating20years, paragraph4 and AnnexA; 1999/2015](https://www.nea.gov.sg/media/news/news/index/celebrating-20-years-of-semakau-landfill); not a dated footprint match |
 | L9 | minus 11 | 1.0486 | 103.63607, 1.26401 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
-| L9 | minus 12 | 1.0065 | 103.64248, 1.30689 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
-| L9 | minus 13 | 0.8712 | 103.866, 1.44368 | unmatched |
-| L9 | minus 14 | 0.7610 | 103.62583, 1.3237 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
-| L9 | minus 15 | 0.7581 | 104.01887, 1.41199 | unmatched |
+| L9 | minus 12 | 1.0189 | 103.64255, 1.30696 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L9 | minus 13 | 0.9486 | 103.86621, 1.44346 | unmatched |
+| L9 | minus 14 | 0.7745 | 104.0191, 1.41201 | unmatched |
+| L9 | minus 15 | 0.7610 | 103.62583, 1.3237 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
 | L9 | minus 16 | 0.5951 | 103.74723, 1.44242 | unmatched |
 | L9 | minus 17 | 0.5818 | 103.72875, 1.2658 | unmatched |
 | L9 | minus 18 | 0.5445 | 103.7563, 1.4416 | unmatched |
-| L9 | minus 19 | 0.4689 | 103.85092, 1.24143 | unmatched |
-| L9 | minus 20 | 0.4346 | 103.68652, 1.23913 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
-| L9 | minus 21 | 0.3994 | 103.70461, 1.28306 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L9 | minus 19 | 0.4755 | 103.70452, 1.28327 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L9 | minus 20 | 0.4689 | 103.85092, 1.24143 | unmatched |
+| L9 | minus 21 | 0.4490 | 103.68644, 1.23911 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
 | L9 | minus 22 | 0.3941 | 103.8559, 1.26844 | Candidate Marina Bay — [URA Marina Bay, History and beginnings; 1971–1994 reclamation](https://www.ura.gov.sg/land-planning/shaping-our-city/marina-bay/); not a dated footprint match |
-| L9 | minus 23 | 0.3758 | 103.85311, 1.4557 | unmatched |
+| L9 | minus 23 | 0.3907 | 103.85327, 1.45567 | unmatched |
 | L9 | minus 24 | 0.3647 | 104.01156, 1.31208 | unmatched |
-| L9 | minus 25 | 0.3114 | 103.75227, 1.23116 | unmatched |
-| L9 | minus 26 | 0.2825 | 103.65635, 1.27272 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
-| L9 | minus 27 | 0.2772 | 103.69275, 1.25779 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
-| L9 | minus 28 | 0.2580 | 103.94047, 1.39237 | unmatched |
-| L9 | minus 29 | 0.1373 | 103.84405, 1.46128 | unmatched |
-| L9 | minus 30 | 0.1186 | 103.60814, 1.22136 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
-| L9 | minus 31 | 0.1160 | 103.86325, 1.43198 | unmatched |
-| L10 | minus 1 | 5.1781 | 104.06968, 1.36045 | unmatched |
-| L10 | minus 2 | 3.6132 | 103.63611, 1.21812 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
-| L10 | minus 3 | 2.9289 | 103.63414, 1.23365 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
-| L10 | minus 4 | 2.5461 | 103.63006, 1.24973 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
-| L10 | minus 5 | 2.5073 | 104.03351, 1.38926 | unmatched |
+| L9 | minus 25 | 0.3289 | 103.95001, 1.40333 | unmatched |
+| L9 | minus 26 | 0.3114 | 103.75227, 1.23116 | unmatched |
+| L9 | minus 27 | 0.3004 | 103.65622, 1.27248 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L9 | minus 28 | 0.2772 | 103.69275, 1.25779 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L9 | minus 29 | 0.2666 | 103.83794, 1.23114 | unmatched |
+| L9 | minus 30 | 0.2633 | 103.94053, 1.39235 | unmatched |
+| L9 | minus 31 | 0.1373 | 103.84405, 1.46128 | unmatched |
+| L9 | minus 32 | 0.1186 | 103.60814, 1.22136 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L9 | minus 33 | 0.1160 | 103.86325, 1.43198 | unmatched |
+| L10 | minus 1 | 5.5164 | 104.07031, 1.35941 | unmatched |
+| L10 | minus 2 | 3.8299 | 103.6368, 1.21816 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L10 | minus 3 | 3.3434 | 103.63464, 1.23363 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L10 | minus 4 | 2.8289 | 103.63049, 1.24975 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L10 | minus 5 | 2.5598 | 104.03351, 1.38919 | unmatched |
 | L10 | minus 6 | 1.9196 | 103.61044, 1.23104 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
-| L10 | minus 7 | 1.4846 | 103.65992, 1.25913 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L10 | minus 7 | 1.5629 | 103.66004, 1.25875 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
 | L10 | minus 8 | 0.8860 | 103.64223, 1.30653 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
-| L10 | minus 9 | 0.7691 | 103.63674, 1.26362 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L10 | minus 9 | 0.7843 | 103.63676, 1.26357 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
 | L10 | minus 10 | 0.7528 | 103.62581, 1.32371 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
-| L10 | minus 11 | 0.6013 | 103.76622, 1.19583 | Candidate Semakau — [NEA, Celebrating20years, paragraph4 and AnnexA; 1999/2015](https://www.nea.gov.sg/media/news/news/index/celebrating-20-years-of-semakau-landfill); not a dated footprint match |
-| L10 | minus 12 | 0.5358 | 103.74694, 1.44282 | unmatched |
-| L10 | minus 13 | 0.4499 | 103.7289, 1.26578 | unmatched |
-| L10 | minus 14 | 0.4358 | 103.78794, 1.26249 | unmatched |
-| L10 | minus 15 | 0.3978 | 103.61072, 1.26199 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
-| L10 | minus 16 | 0.3509 | 103.99376, 1.41609 | unmatched |
-| L10 | minus 17 | 0.3221 | 103.84967, 1.24162 | unmatched |
-| L10 | minus 18 | 0.3219 | 103.86898, 1.43811 | unmatched |
-| L10 | minus 19 | 0.2798 | 103.70382, 1.28462 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
-| L10 | minus 20 | 0.2009 | 103.85445, 1.26875 | Candidate Marina Bay — [URA Marina Bay, History and beginnings; 1971–1994 reclamation](https://www.ura.gov.sg/land-planning/shaping-our-city/marina-bay/); not a dated footprint match |
-| L10 | minus 21 | 0.1813 | 103.86105, 1.45076 | unmatched |
-| L10 | minus 22 | 0.1624 | 103.69341, 1.2551 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
-| L10 | minus 23 | 0.1482 | 103.85535, 1.45423 | unmatched |
-| L10 | minus 24 | 0.1113 | 103.86332, 1.43203 | unmatched |
+| L10 | minus 11 | 0.6185 | 103.76624, 1.19573 | Candidate Semakau — [NEA, Celebrating20years, paragraph4 and AnnexA; 1999/2015](https://www.nea.gov.sg/media/news/news/index/celebrating-20-years-of-semakau-landfill); not a dated footprint match |
+| L10 | minus 12 | 0.5543 | 103.78804, 1.26221 | unmatched |
+| L10 | minus 13 | 0.5358 | 103.74694, 1.44282 | unmatched |
+| L10 | minus 14 | 0.5311 | 103.86884, 1.4397 | unmatched |
+| L10 | minus 15 | 0.4689 | 103.85092, 1.24143 | unmatched |
+| L10 | minus 16 | 0.4499 | 103.7289, 1.26578 | unmatched |
+| L10 | minus 17 | 0.3978 | 103.61072, 1.26199 | Candidate Tuas — [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L10 | minus 18 | 0.3623 | 103.70387, 1.28455 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L10 | minus 19 | 0.3509 | 103.99376, 1.41609 | unmatched |
+| L10 | minus 20 | 0.3289 | 103.95001, 1.40333 | unmatched |
+| L10 | minus 21 | 0.2666 | 103.83794, 1.23114 | unmatched |
+| L10 | minus 22 | 0.2234 | 103.85471, 1.26851 | Candidate Marina Bay — [URA Marina Bay, History and beginnings; 1971–1994 reclamation](https://www.ura.gov.sg/land-planning/shaping-our-city/marina-bay/); not a dated footprint match |
+| L10 | minus 23 | 0.1813 | 103.86105, 1.45076 | unmatched |
+| L10 | minus 24 | 0.1677 | 103.85557, 1.45431 | unmatched |
+| L10 | minus 25 | 0.1624 | 103.69341, 1.2551 | Candidate Jurong Island — [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match |
+| L10 | minus 26 | 0.1113 | 103.86332, 1.43203 | unmatched |

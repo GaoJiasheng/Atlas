@@ -23,12 +23,13 @@ const budgets: Record<string, { features: number; bytes: number; gzipBytes: numb
 for (const id of ['hdb-blocks', 'estates', 'farm-parks', 'reserves']) {
   const file = `sg-${id}`;
   const input = read(join(base, `work/layers-${id}.geojson`));
-  const clean = id === 'hdb-blocks' ? '' : ' -clean';
+  // Era pieces of one area overlap in space (they differ in [f, u)), so cleaning must keep overlaps.
+  const clean = id === 'hdb-blocks' ? '' : ' -clean allow-overlaps';
   const out = await mapshaperApi().applyCommands(`-i input.geojson -rename-layers ${file}${clean} -o output.json format=topojson quantization=100000`, { 'input.geojson': input });
   let output = out['output.json'];
   if (output === undefined) throw new Error(`Mapshaper did not write ${file}`);
   if (id !== 'hdb-blocks') {
-    const cleaned = await mapshaperApi().applyCommands('-i quantized.json -clean snap-interval=0.000005 -o output.json format=topojson quantization=100000', { 'quantized.json': output });
+    const cleaned = await mapshaperApi().applyCommands('-i quantized.json -clean allow-overlaps snap-interval=0.000005 -o output.json format=topojson quantization=100000', { 'quantized.json': output });
     output = cleaned['output.json'];
     if (output === undefined) throw new Error(`Mapshaper post-quantization clean failed for ${file}`);
   }
@@ -51,7 +52,10 @@ function decimal(t: string): number {
   return y + (Date.UTC(y, Number(month) - 1, Number(day)) - Date.UTC(y, 0, 1)) / (Date.UTC(y + 1, 0, 1) - Date.UTC(y, 0, 1));
 }
 const manifest: unknown[] = [];
-const geoms = latest.geometries.map(g => {
+// Review 2026-10-20 (Opus): this topic maps Singapore only (docs/34 §1.2), so the Johor reservoir
+// (Linggiu) is left out; the other geometries, arcs, transform and dates stay exactly as four-taps.
+const outside = new Set(['Linggiu Reservoir']);
+const geoms = latest.geometries.filter(g => !outside.has(((g.properties as Record<string, unknown>)?.label as { en: string }).en)).map(g => {
   const label = (g.properties as Record<string, unknown>)?.label as { en: string; zh: string };
   const event = events.find(e => e.title.en === label.en);
   if (!event) throw new Error(`No four-taps site event for ${label.en}`);

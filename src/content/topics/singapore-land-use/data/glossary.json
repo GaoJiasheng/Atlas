@@ -4,11 +4,11 @@
       "id": "land-use",
       "term": {
         "en": "Land use",
-        "zh": "【待译】Land use"
+        "zh": "土地用途"
       },
       "definition": {
-        "en": "What a piece of land is used for: homes, farms, factories, roads or green space. A Master Plan shows planned use.",
-        "zh": "【待译】What a piece of land is used for: homes, farms, factories, roads or green space. A Master Plan shows planned use."
+        "en": "What a piece of land is used for: homes, farms, factories, roads, parks and so on. A Master Plan shows the planned use, not what stands there today.",
+        "zh": "一块地拿来做什么：住家、农场、工厂、道路、公园等等。总蓝图上写的是规划用途，不是地上现在有什么。"
       },
       "see": [
         "master-plan"
@@ -18,11 +18,11 @@
       "id": "master-plan",
       "term": {
         "en": "Master Plan",
-        "zh": "【待译】Master Plan"
+        "zh": "总蓝图"
       },
       "definition": {
-        "en": "A legal land-use plan prepared by the Urban Redevelopment Authority. It shows permitted uses and building density and is reviewed every five years.",
-        "zh": "【待译】A legal land-use plan prepared by the Urban Redevelopment Authority. It shows permitted uses and building density and is reviewed every five years."
+        "en": "The statutory plan of the Urban Redevelopment Authority. It shows the use allowed for each piece of land and how densely it may be built on, and is reviewed every five years.",
+        "zh": "市区重建局依法制定的规划，标明每块地允许的用途和发展密度，每五年检讨一次。"
       },
       "see": [
         "land-use"
@@ -32,11 +32,11 @@
       "id": "kampong",
       "term": {
         "en": "Kampong",
-        "zh": "【待译】Kampong"
+        "zh": "甘榜"
       },
       "definition": {
-        "en": "The Malay word for village. Singapore kampongs included clusters of timber houses; services and living conditions varied from place to place.",
-        "zh": "【待译】The Malay word for village. Singapore kampongs included clusters of timber houses; services and living conditions varied from place to place."
+        "en": "The Malay word for village. In Singapore, kampongs were clusters of timber or attap houses; some had piped water and electricity and some did not.",
+        "zh": "马来语“村子”的意思。新加坡的甘榜是一群木屋或亚答屋聚成的村落，有的通了自来水和电，有的没有。"
       },
       "see": [
         "attap-house"
@@ -46,11 +46,11 @@
       "id": "attap-house",
       "term": {
         "en": "Attap house",
-        "zh": "【待译】Attap house"
+        "zh": "亚答屋"
       },
       "definition": {
-        "en": "A timber house roofed with palm leaves. Raised floors help air circulate and keep the house above wet ground.",
-        "zh": "【待译】A timber house roofed with palm leaves. Raised floors help air circulate and keep the house above wet ground."
+        "en": "A timber house with a sloping roof thatched with attap palm leaves, and a floor raised above the ground to let air through.",
+        "zh": "木造的房子，斜屋顶用亚答叶（一种棕榈叶）铺成，地板离地架高，好让空气流通。"
       },
       "see": [
         "kampong"
@@ -60,11 +60,11 @@
       "id": "hdb-flat",
       "term": {
         "en": "HDB flat",
-        "zh": "【待译】HDB flat"
+        "zh": "组屋"
       },
       "definition": {
-        "en": "A public housing apartment built by the Housing and Development Board. Flats sold by HDB generally have a 99-year lease.",
-        "zh": "【待译】A public housing apartment built by the Housing and Development Board. Flats sold by HDB generally have a 99-year lease."
+        "en": "A home in a block built by the Housing and Development Board. Flats sold by the Board are generally on a 99-year lease.",
+        "zh": "建屋发展局建造的公共住宅。建屋局出售的组屋一般是 99 年的地契。"
       },
       "see": [
         "new-town"
@@ -74,11 +74,11 @@
       "id": "new-town",
       "term": {
         "en": "New town",
-        "zh": "【待译】New town"
+        "zh": "新镇"
       },
       "definition": {
-        "en": "A housing town planned with a centre, schools, shops, clinics and transport, as well as homes.",
-        "zh": "【待译】A housing town planned with a centre, schools, shops, clinics and transport, as well as homes."
+        "en": "A housing town planned as a whole, with its own centre, shops, schools, clinics and transport as well as homes.",
+        "zh": "整体规划的组屋区，除了住家，还有自己的镇中心、商店、学校、诊所和交通。"
       },
       "see": [
         "hdb-flat"
@@ -88,11 +88,11 @@
       "id": "resettlement",
       "term": {
         "en": "Resettlement",
-        "zh": "【待译】Resettlement"
+        "zh": "搬迁"
       },
       "definition": {
-        "en": "Moving residents or businesses to another place when land is needed for a new use. Compensation or housing assistance follows the rules in force at the time.",
-        "zh": "【待译】Moving residents or businesses to another place when land is needed for a new use. Compensation or housing assistance follows the rules in force at the time."
+        "en": "Moving residents, farmers or businesses away when the government needs the land for a new use. They receive compensation or a new home under the rules of the time.",
+        "zh": "政府需要土地另作他用时，让原来的住户、农户或商户迁走；他们按当时的规定得到补偿或安置。"
       },
       "see": [
         "land-acquisition"
@@ -102,11 +102,11 @@
       "id": "land-acquisition",
       "term": {
         "en": "Land acquisition",
-        "zh": "【待译】Land acquisition"
+        "zh": "土地征用"
       },
       "definition": {
-        "en": "The government taking private land under a law for public purposes, with compensation. Owners can dispute an award through the legal process.",
-        "zh": "【待译】The government taking private land under a law for public purposes, with compensation. Owners can dispute an award through the legal process."
+        "en": "The government taking private land under a law, for a public purpose, and paying compensation. Owners can appeal against the amount.",
+        "zh": "政府依照法律，为公共用途把私人土地收归国有，并付给补偿。地主对补偿数额可以上诉。"
       },
       "see": [
         "resettlement"
@@ -116,11 +116,11 @@
       "id": "land-reclamation",
       "term": {
         "en": "Land reclamation",
-        "zh": "【待译】Land reclamation"
+        "zh": "填海"
       },
       "definition": {
-        "en": "Making new land by enclosing shallow sea and filling it with sand or other material.",
-        "zh": "【待译】Making new land by enclosing shallow sea and filling it with sand or other material."
+        "en": "Making new land by walling off shallow sea and filling it with sand or other material.",
+        "zh": "在浅海筑堤围起来，填进沙土等材料，造出新的陆地。"
       },
       "see": []
     },
@@ -128,11 +128,11 @@
       "id": "agrotechnology-park",
       "term": {
         "en": "Agrotechnology park",
-        "zh": "【待译】Agrotechnology park"
+        "zh": "农业科技园"
       },
       "definition": {
-        "en": "Land set aside and leased to farms using technology to produce crops, animals or fish.",
-        "zh": "【待译】Land set aside and leased to farms using technology to produce crops, animals or fish."
+        "en": "An area the government set aside from 1986 and leased to farms using modern methods, so that more food can be grown on less land.",
+        "zh": "政府从 1986 年起划出、出租给采用现代方法耕作的农场的地区，好在较少的土地上生产更多食物。"
       },
       "see": [
         "hydroponics"
@@ -142,11 +142,11 @@
       "id": "hydroponics",
       "term": {
         "en": "Hydroponics",
-        "zh": "【待译】Hydroponics"
+        "zh": "水耕"
       },
       "definition": {
-        "en": "Growing plants without soil, with their roots supplied by water containing nutrients.",
-        "zh": "【待译】Growing plants without soil, with their roots supplied by water containing nutrients."
+        "en": "Growing plants without soil, with their roots in water that contains nutrients.",
+        "zh": "不用泥土种植，把植物的根放在含有养分的水里。"
       },
       "see": [
         "agrotechnology-park"
@@ -156,11 +156,11 @@
       "id": "industrial-estate",
       "term": {
         "en": "Industrial estate",
-        "zh": "【待译】Industrial estate"
+        "zh": "工业区"
       },
       "definition": {
-        "en": "An area planned for factories and related businesses, with shared roads, water and electricity.",
-        "zh": "【待译】An area planned for factories and related businesses, with shared roads, water and electricity."
+        "en": "An area planned for factories, with shared roads, water, electricity and often a port.",
+        "zh": "专门规划给工厂的地区，有共用的道路、水电，常常还有码头。"
       },
       "see": []
     },
@@ -168,11 +168,11 @@
       "id": "nature-reserve",
       "term": {
         "en": "Nature reserve",
-        "zh": "【待译】Nature reserve"
+        "zh": "自然保护区"
       },
       "definition": {
-        "en": "A place protected by law for its natural habitats, plants and animals. Development and activities are restricted.",
-        "zh": "【待译】A place protected by law for its natural habitats, plants and animals. Development and activities are restricted."
+        "en": "A place protected by law for its forests, wetlands, plants and animals, where building is not allowed.",
+        "zh": "依法保护的地方，保护那里的森林、湿地和动植物，不准在里面开发建设。"
       },
       "see": [
         "water-catchment"
@@ -182,7 +182,7 @@
       "id": "water-catchment",
       "term": {
         "en": "Water catchment",
-        "zh": "【待译】Water catchment"
+        "zh": "集水区"
       },
       "definition": {
         "en": "Land where the rain that falls is collected and led by streams, drains and canals into the same reservoir.",

@@ -55,7 +55,7 @@ MP2019 BUSINESS parcels are selected by majority spatial overlap with official U
 | Jurong industrial area | 1961 | Conception year, not the opening date of every factory. [JTC, Dream Factories](https://www.jtc.gov.sg/about-jtc/dream-factories), introduction: “Jurong Industrial Estate, conceptualised in 1961”. |
 | Seletar Aerospace Park | 2007 | Launch of development, not completion of every phase. [MTI, 11 February 2014 speech](https://www.mti.gov.sg/newsroom/speech-by-second-minister-s-iswaran-at-the-opening-ceremony-of-bombardier-service-centre-at-seletar-aerospace-park/), paragraph beginning “Our investments”: “Since the launch of its development in 2007”. |
 | Lim Chu Kang / western water catchment farmland | 1986 | Land reservation, not opening of every farm. [CLC, Food and the City](https://isomer-user-content.by.gov.sg/50/da33e51c-ad22-4d45-969d-319bc63dd0fc/food-and-the-city-overcoming-challenges-for-food-security.pdf), 1986 agrotechnology parks passage; source previously read and logged in `research/land-food.json`. |
-| Bukit Timah and Central Catchment Nature Reserves | 1990 | Declared Nature Reserves according to [NParks, History of Bukit Timah Nature Reserve](https://www.nparks.gov.sg/visit/parks/bukit-timah-nature-reserve/special-features/history), “Important periods”. Earlier forest-reserve/1951 Ordinance protections are separate milestones, not silently conflated. |
+| Bukit Timah and Central Catchment Nature Reserves | 1951 | Legally protected under the Nature Reserves Ordinance 1951 and re-declared Nature Reserves in 1990, according to [NParks, History of Bukit Timah Nature Reserve](https://www.nparks.gov.sg/visit/parks/bukit-timah-nature-reserve/special-features/history), “Important periods”. Review 2026-10-20: drawn from 1951, the start of continuous legal protection; 1990 is the re-declaration under the National Parks Act. |
 | Sungei Buloh Wetland Reserve | 2002 | Gazette year, distinct from nature park opening 1993. [NParks, Nature areas](https://www.nparks.gov.sg/visit/when-visiting-parks/about-parks-nature-reserves-pcns), Sungei Buloh section. |
 | Labrador Nature Reserve | 2002 | Gazette year. [Civil Service College, A City in a Garden](https://knowledge.csc.gov.sg/world-cities-summit-issue/a-city-in-a-garden/), conservation discussion: “The Sungei Buloh Wetland Reserve and Labrador Nature Reserve were gazetted in January 2002.” |
 
@@ -65,7 +65,7 @@ The G7 download has numeric `N_RESERVE = 1`, not the spec’s string `Y`. It fla
 
 ## Reservoir identity check
 
-All 18 geometries in four-taps’ final K7 are copied with their arc indices, full canonical arc array and transform unchanged. Labels are matched exactly to canonical site-event titles; IDs and source IDs are retained in `work/layers-reservoir-manifest.json`. `f` comes from the canonical site-event `t`, converted as actual elapsed UTC days divided by the length of that calendar year; year-only dates become integer years. Marina’s `2008-10-31` becomes `2008.8306010928961`. This includes Jurong Lake and Linggiu Reservoir exactly as the upstream topic does; Linggiu lies outside the Singapore island view. Lower Peirce’s conservative 1920 and Pulau Tekong’s unverified completion/first-drawn-2008 convention remain unchanged. Original source IDs refer to four-taps’ source list, not this topic’s independently numbered list. No opening-date corrections are silently applied to canonical water data.
+All four-taps reservoir geometries except Linggiu (Johor, outside this topic’s Singapore-only map; removed in review) are copied with their arc indices, full canonical arc array and transform unchanged. Labels are matched exactly to canonical site-event titles; IDs and source IDs are retained in `work/layers-reservoir-manifest.json`. `f` comes from the canonical site-event `t`, converted as actual elapsed UTC days divided by the length of that calendar year; year-only dates become integer years. Marina’s `2008-10-31` becomes `2008.8306010928961`. This includes Jurong Lake exactly as the upstream topic does. Lower Peirce’s conservative 1920 and Pulau Tekong’s unverified completion/first-drawn-2008 convention remain unchanged. Original source IDs refer to four-taps’ source list, not this topic’s independently numbered list. No opening-date corrections are silently applied to canonical water data.
 
 ## Calculated planned agriculture areas
 
@@ -83,12 +83,12 @@ These are sums of projected URA `AGRICULTURE` parcel areas, in SVY21, not observ
 | Layer | Features | Bytes | gzip bytes |
 |---|---:|---:|---:|
 | hdb-blocks | 10644 | 806969 | 93539 |
-| estates | 2 | 36910 | 14750 |
-| farm-parks | 1 | 7483 | 3454 |
-| reserves | 4 | 8430 | 3627 |
-| reservoirs | 18 | 52754 | 14297 |
+| estates | 4 | 47497 | 17636 |
+| farm-parks | 1 | 7575 | 3507 |
+| reserves | 4 | 8898 | 3811 |
+| reservoirs | 17 | 52462 | 14195 |
 
-HDB gzip 93,539 bytes ≤ 300,000. All area layers total 105,577 raw bytes ≤ 400,000. Every public file is TopoJSON with exactly one object matching its filename stem. The four non-reservoir outputs use 100000 quantization; reservoir quantization is unchanged from four-taps.
+HDB gzip 93,539 bytes ≤ 300,000. All area layers total 116,432 raw bytes ≤ 400,000. Every public file is TopoJSON with exactly one object matching its filename stem. The four non-reservoir outputs use 100000 quantization; reservoir quantization is unchanged from four-taps.
 
 ## Sources and licences
 
@@ -96,7 +96,7 @@ HDB Property Information G4 (`d_17f5382f26140b1fdae0ba2ef6239d2f`), HDB Existing
 
 Contains information from HDB Property Information, HDB Existing Building, Master Plan 2019 Land Use, Master Plan 2019 Planning Area Boundary (No Sea), NParks Parks and Nature Reserves, Master Plan 2003 Land Use, MP08 Land Use, and Master Plan 2014 Land Use accessed on 20 October 2026 from data.gov.sg which is made available under the terms of the Singapore Open Data Licence version 1.0.
 
-Reservoir source and attribution copied from four-taps: URA waterbody geometry (SODL v1.0); reservoir matching/names and Linggiu outline: **© OpenStreetMap contributors**, [ODbL 1.0](https://www.openstreetmap.org/copyright). Derived OSM database material retains ODbL obligations; the topic’s prose/content licence does not replace source database licences.
+Reservoir source and attribution copied from four-taps: URA waterbody geometry (SODL v1.0); reservoir matching/names: **© OpenStreetMap contributors**, [ODbL 1.0](https://www.openstreetmap.org/copyright). Derived OSM database material retains ODbL obligations; the topic’s prose/content licence does not replace source database licences.
 
 New source receipts (full receipts also remain in `raw/fetch-log.json`):
 
@@ -116,7 +116,7 @@ New source receipts (full receipts also remain in `raw/fetch-log.json`):
 | hdb-blocks | 244 | 1751 | 7818 | 9890 | 10618 |
 | estates | 1 | 1 | 1 | 2 | 2 |
 | farm-parks | 0 | 0 | 1 | 1 | 1 |
-| reserves | 0 | 0 | 2 | 4 | 4 |
-| reservoirs | 3 | 7 | 14 | 18 | 18 |
+| reserves | 2 | 2 | 2 | 4 | 4 |
+| reservoirs | 3 | 7 | 13 | 17 | 17 |
 
 The build enforces the gzip HDB budget and raw aggregate area budget. Standalone TypeScript compilation was used to resolve topic-local script issues; overall project gates belong to the parent integration run. Review images are `docs/screenshots/singapore-land-use/layers-<layer>-{1965,1980,2000,2019}.png`, generated from decoded final TopoJSON and the real official present-day planning outline (explicitly labelled a reference). These are map data reviews, not a substitute for final TimeScene screenshots.

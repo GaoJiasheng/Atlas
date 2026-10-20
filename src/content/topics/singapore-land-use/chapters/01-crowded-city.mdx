@@ -1,159 +1,76 @@
 ---
-{
-  "id": "crowded-city",
-  "order": 1,
-  "title": {
-    "en": "A crowded city and the first flats, 1959–1965",
-    "zh": "【待译】A crowded city and the first flats, 1959–1965"
-  },
-  "sensitive": false,
-  "state": {
-    "time": "1960-02-01",
-    "camera": {
-      "center": [
-        103.84,
-        1.3
-      ],
-      "zoom": 11.8
-    },
-    "layers": [
-      "base",
-      "control",
-      "movements",
-      "battles",
-      "sites",
-      "hdb-blocks"
-    ],
-    "highlight": [
-      "hdb-founded",
-      "bukit-ho-swee-fire",
-      "bukit-ho-swee-rebuilt",
-      "queenstown-first-flats",
-      "home-ownership-1964"
-    ],
-    "summary": {
-      "en": "HDB builds flats quickly, while fire and rehousing change the lives of many families.",
-      "zh": "【待译】HDB builds flats quickly, while fire and rehousing change the lives of many families."
-    },
-    "beats": [
-      {
-        "t": "1959-06-03",
-        "camera": {
-          "center": [
-            103.85,
-            1.295
-          ],
-          "zoom": 12.6
-        },
-        "highlight": [
-          "town-and-services"
-        ],
-        "caption": {
-          "en": "1959: about 1.6 million people live on the island; the city is crowded, and wooden houses stand on the hills around it.",
-          "zh": "【待译】1959: about 1.6 million people live on the island; the city is crowded, and wooden houses stand on the hills around it."
-        }
-      },
-      {
-        "t": "1960-02-01",
-        "camera": {
-          "center": [
-            103.83,
-            1.29
-          ],
-          "zoom": 12.8
-        },
-        "highlight": [
-          "hdb-founded"
-        ],
-        "caption": {
-          "en": "1 February 1960: the Housing and Development Board is set up to build low-cost flats quickly.",
-          "zh": "【待译】1 February 1960: the Housing and Development Board is set up to build low-cost flats quickly."
-        }
-      },
-      {
-        "t": "1961-05-25",
-        "camera": {
-          "center": [
-            103.827,
-            1.288
-          ],
-          "zoom": 13.4
-        },
-        "highlight": [
-          "bukit-ho-swee-fire"
-        ],
-        "caption": {
-          "en": "25 May 1961: a fire sweeps through the kampong at Bukit Ho Swee. About 16,000 people lose their homes and four people die.",
-          "zh": "【待译】25 May 1961: a fire sweeps through the kampong at Bukit Ho Swee. About 16,000 people lose their homes and four people die."
-        }
-      },
-      {
-        "t": "1963-12-31",
-        "camera": {
-          "center": [
-            103.81,
-            1.29
-          ],
-          "zoom": 12.6
-        },
-        "highlight": [
-          "bukit-ho-swee-rebuilt",
-          "queenstown-first-flats"
-        ],
-        "caption": {
-          "en": "1962 to 1963: new blocks rise on the burnt land and in Queenstown. Each dot is a block that still stands today.",
-          "zh": "【待译】1962 to 1963: new blocks rise on the burnt land and in Queenstown. Each dot is a block that still stands today."
-        }
-      },
-      {
-        "t": "1964-02-12",
-        "camera": {
-          "center": [
-            103.82,
-            1.33
-          ],
-          "zoom": 10.8
-        },
-        "highlight": [
-          "home-ownership-1964"
-        ],
-        "caption": {
-          "en": "1964: the Board begins to sell flats to families, so they can own their homes.",
-          "zh": "【待译】1964: the Board begins to sell flats to families, so they can own their homes."
-        }
-      }
-    ]
-  }
-}
+id: crowded-city
+order: 1
+title: { en: "A crowded city and the first flats, 1959–1965", zh: "拥挤的城市与第一批组屋（1959–1965）" }
+sensitive: true
+state:
+  time: "1959-06-03"
+  camera: { center: [103.835, 1.30], zoom: 11.8 }
+  layers: [base, control, movements, battles, hdb-blocks]
+  highlight: [hdb-founded, bukit-ho-swee-fire, bukit-ho-swee-rebuilt, queenstown-first-flats, home-ownership-1964]
+  summary:
+    en: "A new housing board builds small flats as fast as it can. A great fire at Bukit Ho Swee leaves about 16,000 people homeless, and many of them move into the new blocks."
+    zh: "新成立的建屋局以最快的速度建造小单位组屋。河水山大火让约 1 万 6000 人无家可归，许多人搬进了新建的组屋。"
+  beats:
+    - t: "1959-06-03"
+      camera: { center: [103.845, 1.30], zoom: 12.4 }
+      highlight: [town-and-services]
+      caption:
+        en: "1959: about 1.6 million people live in Singapore. In the crowded city, some families rent a single small room in a shophouse."
+        zh: "1959 年：新加坡约有 160 万人。拥挤的市区里，有些家庭在店屋里只租得起一个小房间。"
+    - t: "1960-02-01"
+      camera: { center: [103.84, 1.295], zoom: 12.6 }
+      highlight: [hdb-founded]
+      caption:
+        en: "1 February 1960: the Housing and Development Board takes over from the Singapore Improvement Trust. The dots are blocks the Trust built earlier that still stand today."
+        zh: "1960 年 2 月 1 日：建屋发展局接替新加坡改良信托局。图上的点是改良信托局早年建造、今天还在的楼。"
+    - t: "1961-05-25"
+      camera: { center: [103.827, 1.288], zoom: 13.4 }
+      highlight: [bukit-ho-swee-fire]
+      caption:
+        en: "25 May 1961: a fire sweeps through the kampong at Bukit Ho Swee. About 16,000 people lose their homes and four people die."
+        zh: "1961 年 5 月 25 日：河水山甘榜发生大火，约 1 万 6000 人失去家园，4 人死亡。"
+    - t: "1963-12-31"
+      camera: { center: [103.815, 1.292], zoom: 12.8 }
+      highlight: [bukit-ho-swee-rebuilt, queenstown-first-flats]
+      caption:
+        en: "End of 1963: new blocks stand on and around the burnt land at Bukit Ho Swee, and in Queenstown to the west. Each dot is a block that still stands today."
+        zh: "1963 年底：河水山的火场上和四周，以及西边的女皇镇，都盖起了新楼。每个点是一座今天还在的楼。"
+    - t: "1964-02-29"
+      camera: { center: [103.82, 1.33], zoom: 10.8 }
+      highlight: [home-ownership-1964]
+      caption:
+        en: "February 1964: the Board begins selling flats to the families who live in them, so that they can own their homes."
+        zh: "1964 年 2 月：建屋局开始把组屋卖给住户，让他们拥有自己的家。"
 ---
 
 <Lang en>
 
-In 1959 Singapore had about <Num s="S63">1.6 million</Num> people. Some city families lived in small shophouse cubicles, sharing a building with many other households. In some wooden-house settlements, water, electricity and toilets were inadequate. Conditions differed between places. A village could also offer familiar neighbours, room for a small business and help from nearby relatives.
+In 1959 about <Num s="S63">1.6 million</Num> people lived in Singapore. In the city, some families rented a single small room in a shophouse and shared the kitchen and toilet with other households. Thousands of people lived in settlements of wooden houses with no piped water, unreliable electricity and poor drains. Not every kampong was like this, but the need for homes was great.
 
-On 1 February 1960 the Housing and Development Board replaced the Singapore Improvement Trust. It began building <Term id="hdb-flat">HDB flats</Term> quickly, including small rental homes. In Queenstown, blocks begun under the earlier board were completed in October 1960. Families received those flats the following year. Tall buildings allowed many households to share a smaller piece of land.
+On 1 February 1960 the Housing and Development Board took over from the Singapore Improvement Trust, which had built about <Num s="S50,S51">23,000</Num> homes in 32 years. The new Board wanted to build fast and cheaply. Many of its first homes were small rental flats, some with only one room. Its first blocks, at Stirling Road in Queenstown, an estate the Trust had begun, were finished in October 1960.
 
-On 25 May 1961 a fire swept through Bukit Ho Swee. About <Num s="S55">16,000</Num> people lost their homes and <Num s="S55">four</Num> people died. The cause remains unknown. The government arranged temporary shelter and rehousing. By February 1962 the remaining affected families had been rehoused, while construction continued on and around the burnt land.
+On 25 May 1961 a fire swept through the kampong at Bukit Ho Swee. About <Num s="S55">16,000</Num> people lost their homes and <Num s="S55">four</Num> people died. The cause has never been established. By 5 p.m. that day about <Num s="S55">7,000</Num> people had been sheltered in <Num s="S55">five</Num> schools along Kim Seng Road, and HDB finished new blocks for them within months. By February 1962 all the remaining families had been rehoused.
 
-HDB began its home-ownership scheme on 12 February 1964. By 1965 about <Num s="S65">23%</Num> of the total population lived in HDB flats. The dots on this map are blocks standing today, appearing by their year of completion. They leave out early blocks that were later demolished. A sparse patch of dots does not mean that nobody lived there then.
+In February 1964 HDB began selling flats to their tenants, so that they could own their homes. By 1965 about <Num s="S65">23</Num> in every 100 people lived in HDB flats. The dots on the map are blocks that still stand today, appearing in the year they were finished. Many early blocks were pulled down later, so a place with few dots may have been full of homes.
 
-<More title={{"en": "Building quickly", "zh": "【待译】Building quickly"}}>
+<More title={{ en: "The Bukit Ho Swee fire: what is known and what is argued", zh: "河水山大火：已知的与有争议的" }}>
 
-<Figure src="figures/singapore-land-use-housing-change" alt={{"en": "A timber house with a palm-leaf roof beside an early slab block.", "zh": "【待译】A timber house with a palm-leaf roof beside an early slab block."}} caption={{"en": "A comparison specimen: kampong housing and an early block with occupied ground-floor space. An illustration, not a reconstruction of a particular street.", "zh": "【待译】A comparison specimen: kampong housing and an early block with occupied ground-floor space. An illustration, not a reconstruction of a particular street."}} />
-
-Early rental designs varied. NLB describes blocks from <Num s="S50">five</Num> to <Num s="S50">twelve</Num> storeys, and emergency flats that sometimes shared kitchens or toilets. NHB records <Num s="S67">five</Num> blocks completed in <Num s="S67">nine</Num> months after the fire. These were urgent responses, rather than a single design used for every estate.
+The National Library Board and the National Heritage Board both say the cause of the fire is unknown. Because nobody knew, rumours spread. The historian Loh Kah Seng, who recorded the memories of former residents, writes that many suspected arson, some blaming gangs and some the government, which had found it hard to move people off the land. One former resident told him that after a fire “you had to move even if you were unwilling”. The government of the day said it wanted to remove any reason for arson: it changed the law so that landowners could not profit from land cleared by fire. No one has shown how the fire started. What is certain is that about <Num s="S55">16,000</Num> people lost their homes and <Num s="S55">four</Num> people died.
 
 </More>
 
-<More title={{"en": "The fire, evidence and memory", "zh": "【待译】The fire, evidence and memory"}}>
+<More title={{ en: "Building fast", zh: "盖得快" }}>
 
-NLB says the cause is unknown [S55]. Historian Loh Kah Seng studies the fire, relocation and how people remember them [S56]. Memories help explain people’s experiences, while a conclusion about how a fire began requires evidence about its cause. Families gained shelter, but losing a home and community was also a major disruption.
+<Figure src="figures/singapore-land-use-housing-change" alt={{ en: "A timber house with a palm-leaf roof beside an early block of flats.", zh: "一间棕榈叶屋顶的木屋，旁边是一座早期的组屋。" }} caption={{ en: "Drawing made for this topic comparing a kampong house with an early block of flats; not a particular building.", zh: "为本主题画的示意图，比较甘榜木屋和早期组屋，不是某一座真实的建筑。" }} />
+
+The first blocks were plain and quick to build. NLB describes blocks of <Num s="S50">five</Num> to <Num s="S50">twelve</Num> storeys and emergency flats in which some families shared kitchens or toilets. After the Bukit Ho Swee fire, <Num s="S67">five</Num> blocks were finished in <Num s="S67">nine</Num> months. In many early blocks the ground floor held homes or shops; the open “void deck” became common only in the 1970s.
 
 </More>
 
-<More title={{"en": "Buildings are different from homes", "zh": "【待译】Buildings are different from homes"}}>
+<More title={{ en: "Why so few dots?", zh: "为什么点这么少？" }}>
 
-A map dot is a building, while a housing unit is a home inside it. NLB reports roughly <Num s="S50">53,000</Num> flats by the end of 1965; MND gives <Num s="S51">54,430</Num> units by mid-1965. The publications describe the programme differently; their figures should not be combined into a single precise total.
+A dot is a building that stands today, and a building holds many homes. By 1965 HDB had built <Num s="S51">54,430</Num> units, according to a government history; the National Library Board says about <Num s="S50">53,000</Num> flats. HDB's own figures explain the difference: <Num s="S65">653</Num> of the units were shops and offices, leaving <Num s="S65">53,777</Num> homes. Most of those blocks have since been replaced, so only a few hundred of them appear on the map. The oldest dots, from the 1930s to the 1950s, are blocks built by the Singapore Improvement Trust, such as the flats at Tiong Bahru.
 
 </More>
 
@@ -161,31 +78,31 @@ A map dot is a building, while a housing unit is a home inside it. NLB reports r
 
 <Lang zh>
 
-【待译】In 1959 Singapore had about <Num s="S63">1.6 million</Num> people. Some city families lived in small shophouse cubicles, sharing a building with many other households. In some wooden-house settlements, water, electricity and toilets were inadequate. Conditions differed between places. A village could also offer familiar neighbours, room for a small business and help from nearby relatives.
+1959 年，新加坡约有 <Num s="S63">160 万</Num>人。市区里，有些家庭在店屋里只租得起一个小房间，和别的住户共用厨房和厕所。成千上万人住在木屋区，没有自来水，电时有时无，排水也很差。不是每个甘榜都这样，但住房的需要非常大。
 
-On 1 February 1960 the Housing and Development Board replaced the Singapore Improvement Trust. It began building <Term id="hdb-flat">HDB flats</Term> quickly, including small rental homes. In Queenstown, blocks begun under the earlier board were completed in October 1960. Families received those flats the following year. Tall buildings allowed many households to share a smaller piece of land.
+1960 年 2 月 1 日，建屋发展局接替了新加坡改良信托局。改良信托局 32 年间建了约 <Num s="S50,S51">2 万 3000</Num> 个单位。新的建屋局要盖得快、盖得便宜，早期的组屋多是出租的小单位，有些只有一个房间。它的第一批组屋在女皇镇史特林路（女皇镇原是改良信托局开始兴建的屋区），1960 年 10 月完工。
 
-On 25 May 1961 a fire swept through Bukit Ho Swee. About <Num s="S55">16,000</Num> people lost their homes and <Num s="S55">four</Num> people died. The cause remains unknown. The government arranged temporary shelter and rehousing. By February 1962 the remaining affected families had been rehoused, while construction continued on and around the burnt land.
+1961 年 5 月 25 日，河水山甘榜发生大火，约 <Num s="S55">1 万 6000</Num> 人失去家园，<Num s="S55">4</Num> 人死亡。起火原因至今没有查明。当天下午 5 时，已有约 <Num s="S55">7000</Num> 名灾民被安置在金声路一带的 <Num s="S55">5</Num> 所学校里；建屋局在几个月内为他们盖好了新楼。到 1962 年 2 月，余下的受灾家庭全部得到安置。
 
-HDB began its home-ownership scheme on 12 February 1964. By 1965 about <Num s="S65">23%</Num> of the total population lived in HDB flats. The dots on this map are blocks standing today, appearing by their year of completion. They leave out early blocks that were later demolished. A sparse patch of dots does not mean that nobody lived there then.
+1964 年 2 月，建屋局开始把组屋卖给住户，让他们拥有自己的家。到 1965 年，每 100 人中约有 <Num s="S65">23</Num> 人住在组屋里。地图上的点是今天还在的楼，在落成那年出现。许多早期的楼后来拆掉了，所以点少的地方，当年可能住满了人。
 
-<More title={{"en": "Building quickly", "zh": "【待译】Building quickly"}}>
+<More title={{ en: "The Bukit Ho Swee fire: what is known and what is argued", zh: "河水山大火：已知的与有争议的" }}>
 
-<Figure src="figures/singapore-land-use-housing-change" alt={{"en": "A timber house with a palm-leaf roof beside an early slab block.", "zh": "【待译】A timber house with a palm-leaf roof beside an early slab block."}} caption={{"en": "A comparison specimen: kampong housing and an early block with occupied ground-floor space. An illustration, not a reconstruction of a particular street.", "zh": "【待译】A comparison specimen: kampong housing and an early block with occupied ground-floor space. An illustration, not a reconstruction of a particular street."}} />
-
-【待译】Early rental designs varied. NLB describes blocks from <Num s="S50">five</Num> to <Num s="S50">twelve</Num> storeys, and emergency flats that sometimes shared kitchens or toilets. NHB records <Num s="S67">five</Num> blocks completed in <Num s="S67">nine</Num> months after the fire. These were urgent responses, rather than a single design used for every estate.
+国家图书馆管理局和国家文物局都说，大火的起因不明。正因为不知道原因，各种传言四起。历史学者 Loh Kah Seng 记录了许多当年居民的回忆，他写到，不少人怀疑有人纵火，有的怪私会党，有的怪当时很难让居民迁走的政府。一位老居民对他说，一场火之后，“你不愿意也得搬”。当时的政府则表示要消除纵火的动机：它修改法律，让地主不能从被火烧光的土地上获利。至今没有人能证明火是怎样烧起来的。确定的是：约 <Num s="S55">1 万 6000</Num> 人失去家园，<Num s="S55">4</Num> 人死亡。
 
 </More>
 
-<More title={{"en": "The fire, evidence and memory", "zh": "【待译】The fire, evidence and memory"}}>
+<More title={{ en: "Building fast", zh: "盖得快" }}>
 
-【待译】NLB says the cause is unknown [S55]. Historian Loh Kah Seng studies the fire, relocation and how people remember them [S56]. Memories help explain people’s experiences, while a conclusion about how a fire began requires evidence about its cause. Families gained shelter, but losing a home and community was also a major disruption.
+<Figure src="figures/singapore-land-use-housing-change" alt={{ en: "A timber house with a palm-leaf roof beside an early block of flats.", zh: "一间棕榈叶屋顶的木屋，旁边是一座早期的组屋。" }} caption={{ en: "Drawing made for this topic comparing a kampong house with an early block of flats; not a particular building.", zh: "为本主题画的示意图，比较甘榜木屋和早期组屋，不是某一座真实的建筑。" }} />
+
+最早的组屋样子朴素，盖得很快。国家图书馆管理局写到，这些楼有 <Num s="S50">5</Num> 到 <Num s="S50">12</Num> 层，还有一些紧急组屋，几户人家共用厨房或厕所。河水山大火之后，<Num s="S67">5</Num> 座楼在 <Num s="S67">9</Num> 个月内完工。许多早期组屋的底层也住人或开店，空出来的“组屋楼下”（void deck）到 1970 年代才普遍。
 
 </More>
 
-<More title={{"en": "Buildings are different from homes", "zh": "【待译】Buildings are different from homes"}}>
+<More title={{ en: "Why so few dots?", zh: "为什么点这么少？" }}>
 
-【待译】A map dot is a building, while a housing unit is a home inside it. NLB reports roughly <Num s="S50">53,000</Num> flats by the end of 1965; MND gives <Num s="S51">54,430</Num> units by mid-1965. The publications describe the programme differently; their figures should not be combined into a single precise total.
+一个点是今天还在的一座楼，一座楼里有许多单位。据一本政府出版的历史书，到 1965 年建屋局建了 <Num s="S51">54,430</Num> 个单位；国家图书馆管理局则说约 <Num s="S50">5 万 3000</Num> 个。建屋局自己的统计说明了差别：其中 <Num s="S65">653</Num> 个是商店和办公单位，住家单位是 <Num s="S65">53,777</Num> 个。这些楼大多已经重建，所以地图上只剩几百个点。最早的点是 1930 到 1950 年代改良信托局建的楼，比如中峇鲁的组屋。
 
 </More>
 
