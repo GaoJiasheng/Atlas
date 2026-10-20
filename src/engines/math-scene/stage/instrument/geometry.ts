@@ -122,14 +122,23 @@ export interface StraightFrame {
   ppu: number;
   /** A height chart's floor (page y), drawn only when its scale starts at 0. */
   floor: number | null;
+  /** Radius of the head beside a vertical chart (zero for a horizontal strip). */
+  personRadius: number;
 }
 
 /** Room a part-counting row and a thing laid on the scale take (px). */
 const COUNT_ROOM = 34;
+/** Room right of a standing chart for its counting arcs and their 44 px targets (px). */
+export const SIDE_COUNT_ROOM = 50;
 const BRACKET_ROW = 40;
 
+/** The head's position along a chart, shared by grouped charts to keep one scale. */
+export function heightHeadShare(s: InstrumentSpec, sc: Scale): number {
+  return s.head ? clamp(shareOf(s, sc, s.head.units), 0, 1) : 1;
+}
+
 /** A ruler or a tape in a box: horizontal by default, a height chart standing up. */
-export function straightFrame(s: InstrumentSpec, sc: Scale, box: Rect, opts: { counting: boolean }): StraightFrame {
+export function straightFrame(s: InstrumentSpec, sc: Scale, box: Rect, opts: { counting: boolean; headShare?: number }): StraightFrame {
   const vertical = s.orient === 'vertical' || (s.orient === undefined && s.look === 'height-chart');
   const brackets = (s.brackets?.length ? 1 : 0) * BRACKET_ROW + (s.dual ? 22 : 0);
   const units = (sc.to - sc.from) / 1_000_000;
@@ -168,19 +177,34 @@ export function straightFrame(s: InstrumentSpec, sc: Scale, box: Rect, opts: { c
       vertical: false,
       ppu,
       floor: null,
+      personRadius: 0,
     };
   }
   // Standing up: the strip on the right of the box's middle, the person (the head board) on its left, brackets to its right.
   // About half the stage tall on a large screen (docs/32 §3.2), most of a small box.
-  const height = Math.min(box.h * 0.86, box.h - 40, box.h * 0.6 + 100);
+  const desiredHeight = Math.max(box.h * 0.2, Math.min(box.h * 0.86, box.h - 40, box.h * 0.6 + 100));
+  const desiredStrip = clamp(desiredHeight * 0.16, 70, 120) + (s.dual ? 60 : 0);
+  const right = (opts.counting ? SIDE_COUNT_ROOM : 0) + brackets * 1.8;
+  // Fit the actual head, shoulders and head board beside the strip, even
+  // when two charts share a phone's width.
+  const personRoom = box.w - desiredStrip - right - 16;
+  const widthRadius = Math.max(1, Math.min((personRoom - 26) / 2.9, (personRoom - 34) / 2));
+  const personRadius = Math.min(34, clamp(desiredStrip * 1.7, 110, 220) * 0.2, box.h * 0.1, widthRadius);
+  // Reserve only the part of a cropped person's head and shoulders below
+  // the lowest mark. Higher readings keep the chart's full height.
+  const croppedPerson = sc.from > 0 && s.head !== undefined;
+  const headShare = opts.headShare ?? heightHeadShare(s, sc);
+  const extension = Math.min(16, box.h * 0.08) + personRadius * 3.6;
+  const available = box.h - Math.min(20, box.h * 0.1);
+  const height = croppedPerson && headShare < 1 ? Math.min(desiredHeight, (available - extension) / (1 - headShare)) : desiredHeight;
+  const reserve = croppedPerson ? Math.max(0, extension - headShare * height) : 0;
   const ppu = height / (units * (drawnParts(s, sc) / Math.max(1, sc.parts)));
   // A second scale (`dual`) needs room for both columns of numbers across the strip.
   const stripW = clamp(height * 0.16, 70, 120) + (s.dual ? 60 : 0);
-  const left = clamp(stripW * 1.7, 110, 220);
-  const right = (opts.counting ? COUNT_ROOM : 0) + brackets * 1.8;
+  const left = s.head ? Math.max(26 + personRadius * 2.9, 34 + personRadius * 2) : clamp(stripW * 1.7, 110, 220);
   const total = left + stripW + right;
-  const x0 = box.x + Math.max(8, (box.w - total) / 2) + left;
-  const yBottom = box.y + (box.h + height) / 2;
+  const x0 = box.x + (s.head ? (box.w - total) / 2 : Math.max(8, (box.w - total) / 2)) + left;
+  const yBottom = box.y + (box.h + height - reserve) / 2;
   const track = straightTrack(s, sc, { x: x0, y: yBottom }, { x: 0, y: -1 }, height, { x: 1, y: 0 }, stripW * 0.32);
   // The strip runs a little past its end marks, so the end numbers sit on the strip and not on its edges.
   const pad = clamp(track.font * 0.9, 12, 20);
@@ -192,6 +216,7 @@ export function straightFrame(s: InstrumentSpec, sc: Scale, box: Rect, opts: { c
     vertical: true,
     ppu,
     floor: sc.from === 0 ? yBottom : null,
+    personRadius,
   };
 }
 
@@ -249,8 +274,11 @@ export function jugFrame(s: InstrumentSpec, sc: Scale | null, box: Rect): JugFra
   const maxH = shape === 'bowl' ? box.h * 0.42 : Math.min(box.h * (box.h < 300 ? 0.94 : 0.8), box.h * 0.5 + 110);
   // Keep room for the numbers and dimension labels without shrinking the
   // vessel to a thumbnail on a phone or beside the 1024 px reader.
-  const scaleRoom = s.scale && sc ? s.eye ? 160 : s.brackets?.length ? 150 : 80 : 20;
-  const h = Math.min(maxH, (box.w - scaleRoom - 40) / aspect);
+  // In a narrow box (three jugs across a phone) the vessel keeps 40 % of the
+  // width and the scale's room shrinks, rather than the vessel vanishing.
+  const margin = Math.min(40, box.w * 0.12);
+  const scaleRoom = Math.min(s.scale && sc ? s.eye ? 160 : s.brackets?.length ? 150 : 80 : 20, box.w * 0.6 - margin);
+  const h = Math.max(0, Math.min(maxH, (box.w - scaleRoom - margin) / aspect));
   const w = h * aspect;
   const x = box.x + (box.w - w - scaleRoom) / 2;
   const y = box.y + (box.h - h) / 2 + (shape === 'bowl' ? box.h * 0.12 : 0);
