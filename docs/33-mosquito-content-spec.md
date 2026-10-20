@@ -962,6 +962,16 @@ SpaceScene / Model3DStage，paper 默认、cinema 可切。原型：`archetypes.
 
 **门槛（复核后，本工作树）**：
 
-GATES_PLACEHOLDER
+| 门槛 | 结果 |
+|---|---|
+| `git merge main` | 合入 `c337a9b`（measuring / mosquito 的封面与配图，只加图和 `illustrations.json`），无冲突 |
+| `pnpm install --frozen-lockfile` | 通过；无依赖变更 |
+| `pnpm check` | 548 files，0 errors、0 warnings；3 个既有 hint（`scripts/geo/warring-states` 两处、`tests/space-scene/sim.test.ts` 一处） |
+| `pnpm validate` | 34 topics，0 errors、0 warnings |
+| `pnpm test` | 101 files、2673 tests 全过（默认并发） |
+| `pnpm build` | 通过；71 个静态页面 |
+| `pnpm shoot sample-life-cycle --beats --keys --layout` | 11/11 拍深链接相符，键位 0 失败，8 个尺寸排版 0 问题，console 干净；11 张拍图逐张看过；另补拍 EN / ZH × paper / cinema 的对照章与水温章环卡 |
+| 回归 `pnpm shoot <t> --beats --keys` | `grasshopper` 32/32、`forces` 37/37、`energy-conversion` 37/37、`magnets` 34/34、`circuits` 31/31；键位 0 失败，console 干净 |
+| `CI=1 pnpm e2e` | 142/142 通过（18.6 min）；此前两次全量各有一条与本分支无关的计时性失败（`card fold (SpaceScene)` 重载后 tab 未在 5 s 内出现、`segmented timeline (ww2)` 播放头 1.5 s 后仍在缓动），当时主机负载约 19（其他代理并行），两条各单独重复 3 次全过，未改这些测试 |
 
 **已知差距**：`size:`（头壳宽）没有来源，夹具不写，单测用占位数；组名（"Larva / 幼虫"）在圈内括号旁，离圆心读数较近，蚊子主题 R 轮看真数据时再定要不要挪；种群模拟、按温度改孑孓摆动、读者拖动标记圈仍是 v2（§4.7）。蚊子内容的验收（§8.2）不在本节。
