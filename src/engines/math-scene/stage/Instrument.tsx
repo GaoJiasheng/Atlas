@@ -15,6 +15,7 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import type { Locale } from '../../core/types';
 import { t, tx } from '../../../i18n';
+import { plainText, speakable } from '../../../lib/rich-text';
 import type { BeatMove, InstrumentModelSpec, InstrumentSpec, PanThing, Task } from '../schema';
 import type { Action, TaskState } from '../lib/state';
 import { markAt, majorBelow, partsBetween, partsOf, pointerOf, readingOf, scaleOf, unitOf, zoomStretch, type Scale } from '../lib/instrument';
@@ -22,8 +23,8 @@ import { countParts, ghostWeights, readingQty, setStart, setTarget, setValue } f
 import { qtyText } from '../lib/value';
 import { describeInstrument } from '../lib/instrument-description';
 import type { Rect } from './layout';
-import { balanceFrame, dialFrame, jugFrame, magnifierSplit, sideBySide, straightFrame, type Track } from './instrument/geometry';
-import { StraightInstrument } from './instrument/Ruler';
+import { balanceFrame, dialFrame, heightHeadShare, jugFrame, magnifierSplit, sideBySide, straightFrame, type Track } from './instrument/geometry';
+import { countingTrack, StraightInstrument } from './instrument/Ruler';
 import { DialInstrument } from './instrument/Dial';
 import { JugInstrument } from './instrument/Jug';
 import { BalanceInstrument } from './instrument/Balance';
@@ -117,16 +118,20 @@ export function InstrumentModel(p: InstrumentProps) {
   // Side by side, the same box each (one scale); long flat ones stacked.
   const flat = members.every((s) => (s.type === 'ruler' || s.type === 'tape') && s.orient !== 'vertical' && s.look !== 'height-chart');
   const boxes = sideBySide(p.box, members.length, flat);
+  const headShare = Math.min(...members.map((s) => {
+    const sc = scaleOf(s);
+    return sc ? heightHeadShare(s, sc) : 1;
+  }));
   return (
     <g className="ms-inst-set" role="group" aria-label={p.label}>
       {members.map((s, i) => (
         <g key={i}>
           {s.label && (
-            <text className="ms-array__title" x={boxes[i]!.x + boxes[i]!.w / 2} y={boxes[i]!.y - 8} textAnchor="middle">
-              {tx(s.label, p.locale)}
+            <text className="ms-array__title" x={boxes[i]!.x + boxes[i]!.w / 2} y={boxes[i]!.y - 8} textAnchor="middle" aria-hidden="true">
+              {plainText(tx(s.label, p.locale), p.locale)}
             </text>
           )}
-          <Member s={s} box={boxes[i]!} p={p} live={i === 0 ? live : null} />
+          <Member s={s} box={boxes[i]!} p={p} live={i === 0 ? live : null} headShare={headShare} />
         </g>
       ))}
     </g>
@@ -138,7 +143,7 @@ function valueText(s: InstrumentSpec, v: number, locale: Locale): string {
   return qtyText(readingQty(s, v), locale);
 }
 
-function Member({ s, box, p, live }: { s: InstrumentSpec; box: Rect; p: InstrumentProps; live: Live | null }) {
+function Member({ s, box, p, live, headShare }: { s: InstrumentSpec; box: Rect; p: InstrumentProps; live: Live | null; headShare?: number }) {
   const reduced = useReduced();
   const move = reduced ? null : (p.move ?? null);
   const ms = (m: keyof typeof MOVE_MS) => (move === m ? MOVE_MS[m] : 0);
@@ -152,7 +157,7 @@ function Member({ s, box, p, live }: { s: InstrumentSpec; box: Rect; p: Instrume
   const tween = useTween(straight ? 1 : 0, MOVE_MS.unroll, move === 'unroll');
   const settled = useSettled(move === 'tip');
   const description = set ? { ...s, value: undefined, arrow: undefined, line: undefined, right: st!.mweights.map((weight) => ({ weight })) } : s;
-  const label = [p.label, describeInstrument(description, p.locale)].filter(Boolean).join(' ');
+  const label = [p.label, s.label && speakable(tx(s.label, p.locale), p.locale), describeInstrument(description, p.locale)].filter(Boolean).join(' ');
 
   /* the magnifier: the beat's, or the tray's tool on the stretch the reading is in */
   const pointer = sc ? pointerOf(s) : null;
@@ -208,13 +213,13 @@ function Member({ s, box, p, live }: { s: InstrumentSpec; box: Rect; p: Instrume
       />
     );
   } else if (sc && (s.type === 'ruler' || s.type === 'tape')) {
-    const f = straightFrame(shown, sc, instBox, { counting: !!counted || !!partList });
+    const f = straightFrame(shown, sc, instBox, { counting: !!counted || !!partList, headShare });
     track = f.track;
     const line = set?.mode === 'line' && mine !== null ? (moved ? { from: setStart(set), to: mine } : null) : s.line ? { from: s.line.from.units, to: s.line.to.units } : null;
     const arrow = set?.mode === 'arrow' ? mine : (s.arrow?.units ?? null);
     drawing = (
       <StraightInstrument s={shown} sc={sc} f={f} defs={p.defs} locale={p.locale} line={line} arrow={arrow} head={s.head?.units ?? null} ghost={ghost} counted={counted} handle={handle} slideMs={ms('slide')} stagger={move === 'jump'}>
-        {buttons(f.track)}
+        {buttons(countingTrack(f))}
       </StraightInstrument>
     );
   } else if (sc && s.type === 'dial') {
@@ -238,7 +243,7 @@ function Member({ s, box, p, live }: { s: InstrumentSpec; box: Rect; p: Instrume
   return (
     <g className="ms-inst-member" role="group" aria-label={label} data-type={s.type}>
       {drawing}
-      {split && sc && track && zoom && <Magnifier s={shown} sc={sc} track={track} stretch={zoom} pointer={readingPointer(s, sc, mine)} mag={split.mag} counted={!!s.count && s.count.from.units === zoom.from} />}
+      {split && sc && track && zoom && <Magnifier s={shown} sc={sc} track={track} stretch={zoom} pointer={readingPointer(s, sc, mine)} mag={split.mag} counted={counted} />}
     </g>
   );
 }

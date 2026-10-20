@@ -131,8 +131,8 @@ export function SkipBreaks({ s, track, depth }: { s: InstrumentSpec; track: Trac
   );
 }
 
-/** Arcs over parts (`parts`: the mark each starts at), numbered 1, 2, 3 … in the order given, on the side away from the marks. */
-export function CountArcs({ sc, track, parts, tone = 'signal', stagger, lift = 2 }: { sc: Scale; track: Track; parts: number[]; tone?: 'signal' | 'ink'; stagger?: boolean; lift?: number }) {
+/** Arcs over parts (`parts`: the mark each starts at), numbered in order (or with the source `numbers` in a zoom), on the side away from the marks. */
+export function CountArcs({ sc, track, parts, numbers, tone = 'signal', stagger, lift = 2 }: { sc: Scale; track: Track; parts: number[]; numbers?: number[]; tone?: 'signal' | 'ink'; stagger?: boolean; lift?: number }) {
   if (parts.length === 0) return null;
   const h = Math.min(26, Math.max(10, track.partPx * 0.45));
   return (
@@ -149,7 +149,7 @@ export function CountArcs({ sc, track, parts, tone = 'signal', stagger, lift = 2
             <path d={`M${p.x - p.nx * lift} ${p.y - p.ny * lift}Q${c.x} ${c.y} ${q.x - q.nx * lift} ${q.y - q.ny * lift}`} />
             {track.partPx >= 9 && (
               <text x={label.x} y={label.y} textAnchor="middle" dominantBaseline="central">
-                {n + 1}
+                {numbers?.[n] ?? n + 1}
               </text>
             )}
           </g>
