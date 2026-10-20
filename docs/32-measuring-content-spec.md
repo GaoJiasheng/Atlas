@@ -712,6 +712,7 @@ toSmall(c) → Measure(235 cm) ;  fromSmall(Measure(1250 ml), 'l') → 1 ℓ 250
 11. **量读数域的每道题都画器具**（`model.kind` 必须是 `instrument`），`compare` / `order` / 换算题也一样（画两台秤、三根绳子、一个量杯）。
 12. **示例主题没有练习章**（同 `sample-lesson-decimal`）。引擎 e2e 已放在 `tests-e2e/sample-lesson-measure.spec.ts`（32 题浏览器解法、工具、拖动、键盘、复合两框、误解 / 看答案 / 再来一道 / 跳过、zh / cinema / 手机）。正式课的 `tests-e2e/measuring.spec.ts` 与练习总结按 §7 留给正式课施工。
 13. **手机 `read-scale`**：舞台省掉与托盘作答框重复的量行，把高度留给器具；其他题与讲解拍保留算式。砝码盘最多 12 个，validate 额外拒绝最少解超过 12 个的题，避免数学上凑得出、交互上却放不下。
+14. **规模**：§3.2 写秤直径约框高 70 %、量杯约 75 %；1920 × 1080 下那样会占舞台高的六到七成。审查时收成大屏约为舞台高的一半（秤直径、量杯高约 50 %，身高尺约 58 %），手机等小框不变（秤直径 ≥ 180 px、量杯 ≥ 200 px）。
 
 ### 9.3 给课的作者（阶段 2–4）
 
@@ -721,6 +722,34 @@ toSmall(c) → Measure(235 cm) ;  fromSmall(Measure(1250 ml), 'l') → 1 ℓ 250
 - `count-intervals` 的 `ask: "part"` 必须是相邻两个标数刻度；`set-scale` 的 `weights` 题右盘空着、左盘放东西。
 - 想让误解被诊断出来，要选"故事唯一"的数（`check-pool` 报 WARN 的就换数）：例如路 0–3 km 每格 100 m 时 `1 km 4 m` 既是"每格当 1"又是"小单位 ÷100"，换成每格 200 m。
 
+**数据形状速查**（引擎实际收的写法；照抄示例主题 `sample-lesson-measure` 的一道完整题再改最省事）：
+
+- 数写普通数或小数字符串（`"0.05"`）；内部的百万分之一整数由解析产生，不要手写。单位只有 `cm` `m` `km` `g` `kg` `l` `ml`，数与单位之间一个空格（`"50m"` 仍是时长）。复合只认 km–m、m–cm、kg–g、ℓ–ml：`"2 m 35 cm"`、`"3 kg 40 g"`、`"1 l 250 ml"`、`"4 km 50 m"`；小单位部分 < 进率，大单位解析上限 99，课里由 `limits.bigMax` 收到 9 以内。
+- 器具（A11）：
+
+  ```json
+  { "kind": "instrument", "type": "jug", "unit": "ml", "sub": { "unit": "l" },
+    "from": 0, "to": 2000, "major": 500, "minor": 50, "value": 1250,
+    "brackets": [ { "from": 0, "to": 1000, "label": { "en": "{u:1 l}", "zh": "{u:1 l}" } },
+                  { "from": 1000, "to": 1250, "tone": "signal", "label": { "en": "{u:250 ml}", "zh": "{u:250 ml}" } } ] }
+  ```
+
+  有 `sub` 时 `unit` 是**小**单位，所有坐标和值都用它（身高 132 配 `sub: { "unit": "m" }`）；`sub.per` 可省，写了必须等于进率。`major / minor` 是 1–10 的整数，`from` 在刻度上，可见小格 ≤ 60（多了写 `skip` 或配 `zoom`）。读数落在刻度上，只有 `limits.nearest` 的步里物体末端可以离最近刻度 0.2–0.4 格。`pair` 两个、`set` 三个，各带双语 `label`、同一种器具、换算后范围相同（0–1000 ml 与 0–1 ℓ 可以，0–1000 ml 与 0–5 ℓ 不行）。天平：`left: [{ "item": "papaya", "mass": 800 }]`、`right: [{ "weight": 500 }]`，都是克；砝码题右盘空着、左盘放东西，最少的一组砝码不超过盘能放的 12 个。
+- 题型（括号里是 `sample` 的写法）：
+
+  | kind | 要写的字段 | 错答 `sample` |
+  |---|---|---|
+  | `read-scale` | `answer: { "answer": "280 g", "form": "measure", "units": ["g", "kg"] }`，可选 `tools: ["zoom", "count"]` | `"204"`、`"280 kg"`、复合 `"1,25"` |
+  | `set-scale` | `target`（器具单位的数或量）、`mode: "line" \| "arrow" \| "load" \| "fill" \| "weights"`；`weights` 模式另给 `weights: [500, 200, 100, 50]` | `"550"`、`"weights:500,200"` |
+  | `count-intervals` | `between: [200, 300]`、`ask: "part" \| "length"`、`then: { "answer": 20, "form": "whole", "unit": "g" }` | 第一段 `"parts:4"`（不诊断），第二段 `"=25"` |
+  | `compare` | 量 `a` / `b`，可选 `align: "unit"` | `"<"`、`">"`、`"="` |
+  | `order` | 量 `items`（3–5 个）、`direction` | 按孩子的顺序写量，逗号隔开 |
+  | `choose` | 选项可带器具 `model`、量 `value` 或带 `{u:…}` 的句子 | 错选项 id（选项带 `misconception`） |
+  | `input` | 写法见下，换算加 `work` | 写的数，或复合 `"12,50"` |
+
+- 写法：`whole`（框后印 `unit`，读数题缺省器具的单位）、`measure`（数 + 单位芯片；题的 `units` 优先，否则继承本步 `limits.units`，独立题与练习取答案那一族）、`compound`（两个框、单位印在框后，小单位框空 = 0，`answer: "1 l 250 ml"`）、`decimal`（桥：`answer: "2.6", form: "decimal", unit: "kg"`）。换算：`work: { "do": "convert", "from": "3 kg 40 g", "into": "g" }`，或 `"into": "l-ml"` 化成复合；validate 查它算出来 = `answer`。
+- 每步上限（`limits`）：`units`、`parts`、`partsPerLabel`、`maxValue`、`nearest`、`compound`、`bigMax`、`smallStep`、`weights`、`dp`（§3.5）。`pnpm tsx scripts/math/check-pool.ts <draft.json> --topic <slug> --step <id>` 与 validate 同一套规则，逐题证明答案与每个声明的错答。
+- 误解码：本域 11 个（§2.1）加复用的 `tick-counting`、`interval-misread`、`unit-factor-wrong`、`decimal-as-subunit`；`size-is-mass`、`taller-holds-more`、`balance-misread`、`unreasonable-estimate` 只由 `choose` 的错选项诊断；validate 拒绝本题诊断不出的码（§3.6）。
 
 ### 9.4 Codex 引擎收尾验收（2026-10-19）
 
@@ -740,4 +769,4 @@ toSmall(c) → Measure(235 cm) ;  fromSmall(Measure(1250 ml), 'l') → 1 ℓ 250
 
 截图在 `shots/sample-lesson-measure/{en-paper,zh-cinema}/`；回归基线、比较清单、门槛日志在 `shots/measuring-regression/`（照仓库规则不进 git）。fixture 页面 JS 为 283.5 KB gzip（10 文件）。已看全部 24 拍，并检查 paper 的桌面 / 平板 / 手机与中文 cinema 手机的工具、作答与器具；修掉量杯过小及容量比较误导的问题。
 
-并行截图期间曾触发现有地理单测的 5 秒超时，以及既有 SpaceScene 锚点等待误差；最终验收采用串行完整 CI，全部通过，未放宽测试容差、未改其他主题内容。没有 merge 或 push。数据形状、文件索引与剩余差异见根目录 `CODEX-ENGINE-REPORT.md`；§8 的正式课程内容验收仍留给课程施工。
+并行截图期间曾触发现有地理单测的 5 秒超时，以及既有 SpaceScene 锚点等待误差；最终验收采用串行完整 CI，全部通过，未放宽测试容差、未改其他主题内容。没有 merge 或 push。数据形状见 §9.3，与 §3 的差异见 §9.2；§8 的正式课程内容验收仍留给课程施工。

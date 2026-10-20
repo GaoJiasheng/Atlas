@@ -9,7 +9,7 @@
  * of the small unit's totals along the other edge (`dual`), brackets, break
  * lines over a skipped stretch. The child's line end or arrow is a slider.
  */
-import type { ReactNode } from 'react';
+import { useId, type ReactNode } from 'react';
 import type { Locale } from '../../../core/types';
 import type { InstrumentSpec } from '../../schema';
 import type { Scale } from '../../lib/instrument';
@@ -72,13 +72,15 @@ function Body({ s, f }: { s: InstrumentSpec; f: StraightFrame }) {
       <rect className="ms-inst__body" data-look={look} x={x} y={y} width={w} height={h} rx={look === 'ruler' ? 3 : 1} />
       {look === 'tape' && !f.vertical && <path className="ms-inst__hook" d={`M${x} ${y - 8}V${y + h * 0.3}h-7V${y - 8}Z`} />}
       {look === 'metre-rule' && !f.vertical && <path className="ms-inst__cap" d={`M${x} ${y}h6v${h}h-6ZM${x + w - 6} ${y}h6v${h}h-6Z`} />}
-      {look === 'height-chart' && f.vertical && <line className="ms-inst__wall" x1={f.thing.x - 10} x2={x + w + 40} y1={y + h + 1} y2={y + h + 1} />}
+      {/* The floor either side of the strip (not across it: the 0 there stays clear). */}
+      {look === 'height-chart' && f.vertical && f.floor !== null && <path className="ms-inst__wall" d={`M${f.thing.x - 10} ${f.floor}H${x}M${x + w} ${f.floor}h40`} />}
     </g>
   );
 }
 
 export function StraightInstrument(p: StraightProps) {
   const { s, sc, f } = p;
+  const clip = `ms-person${useId().replace(/[^a-z0-9]/gi, '')}`;
   const T = f.track;
   const at = (v: number) => T.at(v);
   const thing = s.object;
@@ -138,10 +140,18 @@ export function StraightInstrument(p: StraightProps) {
     const r = Math.min(34, (f.body.x - f.thing.x) * 0.2);
     const hx = f.body.x - 26 - r;
     const top = q.y + 4;
+    // The person reaches down to the chart's lowest mark (the floor, or where a chart not from 0 cuts them off).
+    const bottom = at(sc.from).y;
+    const feet = Math.max(bottom, top + r * 3.6);
     out.push(
       <g key="head" className="ms-inst__head">
-        <circle className="ms-inst__person" cx={hx} cy={top + r} r={r} />
-        <path className="ms-inst__person" d={`M${hx - r * 1.9} ${top + r * 3.6}Q${hx - r * 1.8} ${top + r * 2.2} ${hx} ${top + r * 2.2}Q${hx + r * 1.8} ${top + r * 2.2} ${hx + r * 1.9} ${top + r * 3.6}`} />
+        <clipPath id={clip}>
+          <rect x={f.thing.x - r * 4} y={top - r * 4} width={f.body.x - f.thing.x + r * 4} height={bottom - top + r * 4} />
+        </clipPath>
+        <g clipPath={`url(#${clip})`}>
+          <circle className="ms-inst__person" cx={hx} cy={top + r} r={r} />
+          <path className="ms-inst__person" d={`M${hx - r * 1.9} ${feet}V${top + r * 3.2}Q${hx - r * 1.8} ${top + r * 2.2} ${hx} ${top + r * 2.2}Q${hx + r * 1.8} ${top + r * 2.2} ${hx + r * 1.9} ${top + r * 3.2}V${feet}Z`} />
+        </g>
         <rect className="ms-inst__board" x={hx - r - 8} y={q.y - 4} width={f.body.x - (hx - r - 8)} height={8} />
       </g>,
     );

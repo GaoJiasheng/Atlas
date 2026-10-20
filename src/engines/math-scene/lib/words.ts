@@ -12,7 +12,7 @@
  * twelfths", "eight over what"; zh「十二分之几」「几分之八」.
  */
 import type { Frac } from './fraction';
-import { clockParts, compoundWords, durationParts, periodZh, unitWords, type ClockMode, type DurUnit, type QtyValue } from './value';
+import { clockParts, compoundWords, durationParts, periodZh, unitWords, type ClockMode, type DurUnit, type Measure, type QtyValue } from './value';
 import { fracDigits, wholePart, type Decimal } from './decimal';
 
 const ONES = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
@@ -283,9 +283,13 @@ export function describePicture(rows: BarPicture[], locale: 'en' | 'zh'): string
  * 「三百五十克」, a decimal digit by digit); two units "2 metres 35 centimetres" /「2 米 35 厘米」.
  */
 export function qtyWords(q: QtyValue, locale: 'en' | 'zh'): string {
-  if (q.kind === 'cmp') return compoundWords(q, locale);
-  const whole = q.value.units % 1_000_000 === 0;
-  const n = q.value.units / 1_000_000;
-  const number = whole ? (locale === 'zh' ? numberZh(n) : numberEn(n)) : decimalWords(q.value, locale);
-  return `${number}${locale === 'zh' ? '' : ' '}${unitWords(q.unit, locale, whole && n === 1 ? 1 : 2)}`;
+  return q.kind === 'cmp' ? compoundWords(q, locale) : measureWords(q, locale);
+}
+
+/** A measure in one unit read aloud: a whole number in words, a decimal digit by digit ("one point five litres"). */
+export function measureWords(m: Measure, locale: 'en' | 'zh'): string {
+  const whole = m.value.dp === 0 && m.value.units % 1_000_000 === 0;
+  const n = m.value.units / 1_000_000;
+  const number = whole ? (locale === 'zh' ? numberZh(n) : numberEn(n)) : decimalWords(m.value, locale);
+  return `${number}${locale === 'zh' ? '' : ' '}${unitWords(m.unit, locale, whole && n === 1 ? 1 : 2)}`;
 }

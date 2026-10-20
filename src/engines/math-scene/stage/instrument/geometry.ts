@@ -120,6 +120,8 @@ export interface StraightFrame {
   vertical: boolean;
   /** Pixels per unit along the scale. */
   ppu: number;
+  /** A height chart's floor (page y), drawn only when its scale starts at 0. */
+  floor: number | null;
 }
 
 /** Room a part-counting row and a thing laid on the scale take (px). */
@@ -165,25 +167,31 @@ export function straightFrame(s: InstrumentSpec, sc: Scale, box: Rect, opts: { c
       below: y0 + bodyH + (path ? 30 : 8),
       vertical: false,
       ppu,
+      floor: null,
     };
   }
   // Standing up: the strip on the right of the box's middle, the person (the head board) on its left, brackets to its right.
-  const height = Math.min(box.h * 0.86, box.h - 40);
+  // About half the stage tall on a large screen (docs/32 §3.2), most of a small box.
+  const height = Math.min(box.h * 0.86, box.h - 40, box.h * 0.6 + 100);
   const ppu = height / (units * (drawnParts(s, sc) / Math.max(1, sc.parts)));
-  const stripW = clamp(height * 0.16, 70, 120) + (s.dual ? 34 : 0);
+  // A second scale (`dual`) needs room for both columns of numbers across the strip.
+  const stripW = clamp(height * 0.16, 70, 120) + (s.dual ? 60 : 0);
   const left = clamp(stripW * 1.7, 110, 220);
   const right = (opts.counting ? COUNT_ROOM : 0) + brackets * 1.8;
   const total = left + stripW + right;
   const x0 = box.x + Math.max(8, (box.w - total) / 2) + left;
   const yBottom = box.y + (box.h + height) / 2;
   const track = straightTrack(s, sc, { x: x0, y: yBottom }, { x: 0, y: -1 }, height, { x: 1, y: 0 }, stripW * 0.32);
+  // The strip runs a little past its end marks, so the end numbers sit on the strip and not on its edges.
+  const pad = clamp(track.font * 0.9, 12, 20);
   return {
     track,
-    body: { x: x0, y: yBottom - height, w: stripW, h: height },
+    body: { x: x0, y: yBottom - height - pad, w: stripW, h: height + 2 * pad },
     thing: { x: x0 - left, y: yBottom - height, w: left, h: height },
     below: x0 + stripW + 10,
     vertical: true,
     ppu,
+    floor: sc.from === 0 ? yBottom : null,
   };
 }
 
@@ -199,10 +207,12 @@ export interface DialFrame {
   lineRect: Rect;
 }
 
-export function dialFrame(s: InstrumentSpec, sc: Scale, box: Rect): DialFrame {
+export function dialFrame(s: InstrumentSpec, sc: Scale, box: Rect, opts: { counting: boolean }): DialFrame {
   // A short box (a phone with the tray open): the pan shrinks to a rim so the face keeps its size (≥ 180 px across, docs/32 §3.2).
   const panK = box.h < 360 ? 0.08 : 0.62;
-  const r = clamp(Math.min((box.h - 24) / (2 + panK + 0.13), box.w * 0.42), 60, 420);
+  // Counting arcs stand outside the rim: room for them; a large box keeps the face about half the stage tall.
+  const room = opts.counting ? 56 : 0;
+  const r = clamp(Math.min((box.h - 24 - room) / (2 + panK + 0.13), (box.w - 2 * room) * 0.42, box.h * 0.24 + 50), 60, 420);
   const panH = r * panK;
   const total = panH + 2 * r;
   const top = box.y + Math.max(6, (box.h - total) / 2);
@@ -235,7 +245,8 @@ export interface JugFrame {
 export function jugFrame(s: InstrumentSpec, sc: Scale | null, box: Rect): JugFrame {
   const shape = s.shape ?? 'jug';
   const aspect = shape === 'bottle' ? 0.38 : shape === 'bowl' ? 1.9 : shape === 'pail' ? 0.95 : shape === 'beaker' ? 0.62 : shape === 'cup' ? 0.72 : shape === 'bottle-jug' ? 0.5 : 0.7;
-  const maxH = box.h * (shape === 'bowl' ? 0.42 : box.h < 300 ? 0.94 : 0.8);
+  // About half the stage tall on a large screen (docs/32 §3.2), most of a phone's short box.
+  const maxH = shape === 'bowl' ? box.h * 0.42 : Math.min(box.h * (box.h < 300 ? 0.94 : 0.8), box.h * 0.5 + 110);
   // Keep room for the numbers and dimension labels without shrinking the
   // vessel to a thumbnail on a phone or beside the 1024 px reader.
   const scaleRoom = s.scale && sc ? s.eye ? 160 : s.brackets?.length ? 150 : 80 : 20;

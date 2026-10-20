@@ -135,8 +135,7 @@ export function InstrumentModel(p: InstrumentProps) {
 
 /** The value a check's slider shows as words ("280 g", "1 m 32 cm"). */
 function valueText(s: InstrumentSpec, v: number, locale: Locale): string {
-  const q = readingQty(s, v);
-  return q ? qtyText(q, locale) : String(v / 1_000_000);
+  return qtyText(readingQty(s, v), locale);
 }
 
 function Member({ s, box, p, live }: { s: InstrumentSpec; box: Rect; p: InstrumentProps; live: Live | null }) {
@@ -219,7 +218,7 @@ function Member({ s, box, p, live }: { s: InstrumentSpec; box: Rect; p: Instrume
       </StraightInstrument>
     );
   } else if (sc && s.type === 'dial') {
-    const f = dialFrame(shown, sc, instBox);
+    const f = dialFrame(shown, sc, instBox, { counting: !!counted || !!partList });
     track = tween >= 0.5 ? f.line : f.track;
     drawing = (
       <DialInstrument s={shown} sc={sc} f={f} unit={unitOf(s)} value={mine ?? s.value?.units ?? sc.from} mine={mine !== null} ghost={ghost} counted={counted} t={tween} sweepMs={ms('sweep')} handle={handle} stagger={move === 'jump'}>

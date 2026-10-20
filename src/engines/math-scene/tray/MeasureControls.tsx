@@ -13,9 +13,9 @@ import type { Task } from '../schema';
 import type { Controller } from '../controller';
 import type { TaskState } from '../lib/state';
 import { countParts, setStart, setValue, taskScale } from '../lib/measure-tasks';
+import { weightText } from '../lib/instrument';
 
 const tr = (locale: Locale) => (key: Parameters<typeof t>[1], vars?: Record<string, string | number>) => t(locale, key, vars);
-const grams = (g: number) => (g >= 1000 && g % 1000 === 0 ? `${g / 1000} kg` : `${g} g`);
 
 /** Does the task's phase have measuring controls in the tray? */
 export function hasMeasureControls(task: Task, phase: string): boolean {
@@ -66,8 +66,8 @@ export function MeasureModelControls({ task, state, ctl, locale, locked }: { tas
       <div className="ms-tray__row ms-tray__row--wrap">
         <div className="ms-chips" role="group" aria-label={T('math.tray.weights')}>
           {(task.weights ?? []).map((w) => (
-            <button key={w} type="button" className="ms-chip" data-weight={w} aria-label={T('math.tray.weightAdd', { w: grams(w) })} onClick={() => act({ do: 'weigh', w })}>
-              {grams(w)}
+            <button key={w} type="button" className="ms-chip" data-weight={w} aria-label={T('math.tray.weightAdd', { w: weightText(w) })} onClick={() => act({ do: 'weigh', w })}>
+              {weightText(w)}
             </button>
           ))}
         </div>

@@ -10,35 +10,26 @@
 import type { Locale } from '../../core/types';
 import { t } from '../../../i18n';
 import type { InputSpec, InstrumentSpec, Task } from '../schema';
-import { SCALE } from './decimal';
 import { answerValues, readWritten } from './forms';
-import { partsOf, scaleOf, unitOf, type Scale } from './instrument';
+import { numText, partsOf, scaleOf, unitOf, weightText, type Scale } from './instrument';
 import { measureWorkOf } from './measure-kind';
 import { countParts, instrumentOf, printedUnit, qtyOrder, readingQty, setTarget, setValue } from './measure-tasks';
 import { inputSpecOf, phasesOf, type TaskState } from './state';
 import { baseToken, isFracValue, isQty, PAIR, qtyText, qtyToken, unitText, type QtyValue, type Unit } from './value';
 
-const asText = (units: number): string => {
-  const whole = Math.floor(units / SCALE);
-  const rest = units % SCALE;
-  return rest ? `${whole}.${String(rest).padStart(6, '0').replace(/0+$/, '')}` : String(whole);
-};
-
 /** A value of an instrument (millionths of its unit) as a token: `{u:280 g}`, on a two-unit scale `{u:1 m 32 cm}`. */
 export function instrumentToken(s: InstrumentSpec, v: number): string {
-  const q = readingQty(s, v);
-  return q ? qtyToken(q) : asText(v);
+  return qtyToken(readingQty(s, v));
 }
 
 /** The same as plain text for the card and the plate: `280 g`, `1 m 32 cm`. */
 export function instrumentText(s: InstrumentSpec, v: number, locale: Locale): string {
-  const q = readingQty(s, v);
-  return q ? qtyText(q, locale) : asText(v);
+  return qtyText(readingQty(s, v), locale);
 }
 
 /** A gap or a small part of a scale as a measure (`100 g`, `2 cm`: on a two-unit scale, in the small unit). */
 export function stepText(s: InstrumentSpec, units: number, locale: Locale): string {
-  return `${asText(units)} ${unitText(unitOf(s), locale)}`;
+  return `${numText(units)} ${unitText(unitOf(s), locale)}`;
 }
 
 /** The facts an instrument gives: its unit, a number every so many, a small part. */
@@ -54,7 +45,6 @@ export function scaleFacts(s: InstrumentSpec, locale: Locale): ScaleFacts | null
   if (!sc) return null;
   return { unit: unitOf(s), every: stepText(s, sc.major, locale), part: stepText(s, sc.minor, locale), sc };
 }
-
 
 /* ------------------------------------------------------------------ */
 /* The number sentence of a check                                      */
@@ -86,7 +76,7 @@ export function measureAnswerToken(task: Task, spec: InputSpec): string {
   if (!a) return '';
   if (isQty(a)) return qtyToken(a);
   const unit = printedUnit(task, spec);
-  const v = isFracValue(a) ? String(a.n) : a.kind === 'dec' ? asText(a.units) : '';
+  const v = isFracValue(a) ? String(a.n) : a.kind === 'dec' ? numText(a.units) : '';
   return unit ? `{u:${v} ${unit}}` : v;
 }
 
@@ -100,7 +90,7 @@ export function measureLines(task: Task, state: TaskState, locale: Locale, done:
   switch (task.kind) {
     case 'set-scale': {
       if (!s) return [];
-      if (task.mode === 'weights') return state.mweights.length ? [state.mweights.map((w) => `{u:${w >= 1000 && w % 1000 === 0 ? `${w / 1000} kg` : `${w} g`}}`).join(' + ')] : [];
+      if (task.mode === 'weights') return state.mweights.length ? [state.mweights.map((w) => `{u:${weightText(w)}}`).join(' + ')] : [];
       const target = setTarget(task);
       if (state.mset === null || target === null) return [];
       return [instrumentToken(s, setValue(task, state))];
@@ -145,7 +135,6 @@ export function measureLines(task: Task, state: TaskState, locale: Locale, done:
     }
   }
 }
-
 
 /** The units a lesson's instruments and quantities use, in the lesson's order of the units (the spec table's UNITS row). */
 export function lessonUnits(lesson: { steps: { beats: { model: Task['model'] }[]; pool: Task[] }[] }): string {

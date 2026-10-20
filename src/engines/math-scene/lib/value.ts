@@ -350,7 +350,7 @@ export const PAIR: Record<CompoundPair, { big: BigUnit; small: SmallUnit; factor
   'l-ml': { big: 'l', small: 'ml', factor: 1000 },
 };
 /** The factor between a pair's units, by the pair's id. */
-export const FACTOR: Record<CompoundPair, number> = { 'km-m': 1000, 'm-cm': 100, 'kg-g': 1000, 'l-ml': 1000 };
+export const FACTOR = Object.fromEntries(COMPOUND_PAIRS.map((p) => [p, PAIR[p].factor])) as Record<CompoundPair, number>;
 
 /** A measurement in two units, kept as a whole count of the small unit plus how it was written (`2 m 35 cm`: 235 cm). */
 export interface Compound {
@@ -367,7 +367,7 @@ export function pairOf(big: Unit, small: Unit): CompoundPair | null {
   return COMPOUND_PAIRS.find((p) => PAIR[p].big === big && PAIR[p].small === small) ?? null;
 }
 
-/** The pair a unit is the big one of (`m` → `m-cm`, `kg` → `kg-g`), else the one it is the small one of. */
+/** The pair a unit is the big one of (`m` → `m-cm`, `kg` → `kg-g`; `null`: cm, g, ml). */
 export function pairWithBig(u: Unit): CompoundPair | null {
   return COMPOUND_PAIRS.find((p) => PAIR[p].big === u) ?? null;
 }

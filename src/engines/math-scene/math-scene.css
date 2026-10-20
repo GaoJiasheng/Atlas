@@ -1173,6 +1173,7 @@
 /* < = > */
 .ms-symbols {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 8px;
 }
@@ -3381,6 +3382,7 @@
   stroke: none;
 }
 .ms-inst__wall {
+  fill: none;
   stroke: var(--ink-2);
   stroke-width: 1;
 }
@@ -3758,9 +3760,15 @@ path.ms-glyph--cord {
   white-space: nowrap;
 }
 
-/* Setting an instrument from the tray: the four steps two by two. */
+/* Setting an instrument from the tray: the four steps two by two, each label wrapping inside its button. */
 .ms-mset {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, max-content));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
+}
+.ms-mset .ms-btn {
+  padding: 6px 10px;
+  line-height: 1.2;
+  white-space: normal;
+  text-align: center;
 }

@@ -8,6 +8,7 @@
 import type { ReactNode } from 'react';
 import type { LoadKind } from '../../schema';
 import type { Rect } from '../layout';
+import { weightText } from '../../lib/instrument';
 
 type LengthThing = 'pencil' | 'crayon' | 'eraser' | 'key' | 'ribbon' | 'leaf' | 'straw' | 'string' | 'rope' | 'book' | 'whiteboard' | 'corridor' | 'door';
 
@@ -256,7 +257,7 @@ export function LoadGlyph({ kind, box, tone }: { kind: LoadKind; box: Rect; tone
 
 /** A plain weight: a cylinder seen from the side with its mass on it (`500 g`, `1 kg`). */
 export function WeightGlyph({ x, y, w, h, grams, tone, dashed }: { x: number; y: number; w: number; h: number; grams: number; tone: 'cold' | 'signal' | 'ink'; dashed?: boolean }) {
-  const text = grams >= 1000 && grams % 1000 === 0 ? `${grams / 1000} kg` : `${grams} g`;
+  const text = weightText(grams);
   return (
     <g className={`ms-weight ms-weight--${tone}`} data-dashed={dashed || undefined}>
       <rect x={x} y={y + h * 0.18} width={w} height={h * 0.82} rx={2} />

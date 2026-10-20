@@ -13,17 +13,13 @@
 import type { InputSpec, InstrumentModelSpec, InstrumentSpec, MisconceptionCode, Model, StepLimits, Task } from './schema';
 import { SCALE } from './lib/decimal';
 import { answerValues } from './lib/forms';
-import { drawnParts, fewestWeights, loadMass, markOf, panMass, partsOf, readingOf, scaleOf, tiltOf, unitOf, type Scale } from './lib/instrument';
+import { drawnParts, fewestWeights, loadMass, markOf, numText, PAN_MAX, panMass, partsOf, readingOf, scaleOf, tiltOf, unitOf, type Scale } from './lib/instrument';
 import { isInstrument, measureWorkOf } from './lib/measure-kind';
 import { countParts, instrumentOf, printedUnit, readingQty, setStart, setTarget } from './lib/measure-tasks';
 import { inputSpecOf } from './lib/state';
 import { compareQty, FACTOR, familyOf, fromSmall, isFracValue, isQty, PAIR, pairOf, qtyFamily, qtyIn, type QtyValue, type Unit } from './lib/value';
 
-const V = (units: number) => {
-  const whole = Math.floor(units / SCALE);
-  const rest = units % SCALE;
-  return rest ? `${whole}.${String(rest).padStart(6, '0').replace(/0+$/, '')}` : String(whole);
-};
+const V = (units: number) => numText(units);
 
 /** Most small parts an instrument draws (more: draw a stretch, or magnify it). */
 export const PARTS_MAX = 60;
@@ -291,8 +287,8 @@ export function measureTaskIssues(task: Task, limits: StepLimits | undefined): s
         out.push('the instrument has nothing to read (a thing, a line, an arrow, a head board, a needle, a level, weights on a balance)');
         break;
       }
-      const q = s.type === 'balance' ? ({ kind: 'meas', value: { units: r.value, dp: 0 }, unit: 'g' } as QtyValue) : readingQty(s, r.value);
-      if (q && spec) {
+      const q: QtyValue = s.type === 'balance' ? { kind: 'meas', value: { units: r.value, dp: 0 }, unit: 'g' } : readingQty(s, r.value);
+      if (spec) {
         // A compound read off a decimal scale in the big unit (1.4 kg = 1 kg 400 g).
         const a = answerValues(spec)[0];
         const want = spec.form === 'compound' && a && !isFracValue(a) && a.kind === 'cmp' && q.kind === 'meas' && q.unit === a.big ? (qtyIn(q, a.small) ? ({ kind: 'meas', value: qtyIn(q, a.small)!, unit: a.small } as QtyValue) : q) : q;
@@ -313,7 +309,7 @@ export function measureTaskIssues(task: Task, limits: StepLimits | undefined): s
         else {
           const solution = fewestWeights(loadMass(s), task.weights);
           if (!solution) out.push(`${loadMass(s)} g cannot be made from ${task.weights.join(', ')} g`);
-          else if (solution.length > 12) out.push('the mass needs more than the 12 weights the pan can hold');
+          else if (solution.length > PAN_MAX) out.push(`the mass needs more than the ${PAN_MAX} weights the pan can hold`);
         }
         if ((s.right ?? []).length) out.push('the right pan starts empty (the child puts the weights on)');
         if (!(s.left ?? []).length) out.push('the left pan holds what is weighed');

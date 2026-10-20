@@ -94,7 +94,7 @@ export function labelled(s: InstrumentSpec, sc: Scale, v: number): boolean {
 /** A number hidden under a small empty box (`labels: { hide }`). */
 export const hiddenLabel = (s: InstrumentSpec, v: number): boolean => typeof s.labels === 'object' && s.labels.hide.some((h) => h.units === v);
 
-/** A number in millionths as printed with the scale's places (`2.5`, `0.25`, `400`). */
+/** A number in millionths as printed, with the places it needs and at least `dp` (`2.5`, `0.25`, `400`). */
 export function numText(units: number, dp = 0): string {
   const whole = Math.floor(units / SCALE);
   const rest = units % SCALE;
@@ -264,11 +264,15 @@ export function partsBetween(sc: Scale, from: number, to: number): number[] {
   return Array.from({ length: b - a }, (_, j) => a + j);
 }
 
-
-
 /* ------------------------------------------------------------------ */
 /* The balance                                                         */
 /* ------------------------------------------------------------------ */
+
+/** Most weights a pan holds (the tray and validate both keep to it). */
+export const PAN_MAX = 12;
+
+/** A weight as printed on it and in the tray: `500 g`, a whole number of kilograms `1 kg`. */
+export const weightText = (g: number): string => (g >= 1000 && g % 1000 === 0 ? `${g / 1000} kg` : `${g} g`);
 
 /** A pan's mass in grams (its items and weights). */
 export const panMass = (things: readonly PanThing[]): number => things.reduce((a, t) => a + (t.weight ?? t.mass ?? 0), 0);

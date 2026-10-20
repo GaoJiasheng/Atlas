@@ -27,4 +27,16 @@ describe('instrument descriptions give landmarks without doing the reading', () 
     expect(describeInstrument(s, 'en')).toContain('Left side heavier');
     expect(describeInstrument(s, 'en')).not.toContain('eight hundred');
   });
+
+  it('never reads out a number the scale hides or does not print', () => {
+    const hidden = instrument({ type: 'ruler', unit: 'cm', from: 0, to: 15, major: 5, minor: 1, labels: { hide: [10] }, object: { kind: 'key', from: 0, to: 10 } });
+    expect(describeInstrument(hidden, 'en')).toContain('5 small parts after five centimetres');
+    expect(describeInstrument(hidden, 'en')).not.toContain('ten centimetres');
+    const bare = instrument({ type: 'dial', unit: 'g', from: 0, to: 500, major: 100, minor: 20, value: 280, labels: 'none' });
+    expect(describeInstrument(bare, 'en')).toContain('14 small parts from the start');
+    expect(describeInstrument(bare, 'en')).not.toMatch(/hundred/);
+    const ends = instrument({ type: 'jug', unit: 'ml', from: 0, to: 500, major: 100, minor: 50, value: 350, labels: 'ends' });
+    expect(describeInstrument(ends, 'zh')).toContain('在零毫升和五百毫升之间，从零毫升往后数7小格');
+    expect(describeInstrument(ends, 'zh')).not.toContain('一百');
+  });
 });

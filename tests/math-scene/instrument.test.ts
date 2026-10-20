@@ -92,14 +92,14 @@ describe('the dial', () => {
     expect(valueAtAngle(d, sc, 170)).toBe(500 * M);
     expect(valueAtAngle(d, sc, 340)).toBe(1000 * M);
     expect(valueAtAngle(d, sc, 355)).toBe(0);
-    const f = dialFrame(d, sc, box);
+    const f = dialFrame(d, sc, box, { counting: false });
     for (const [angle, value] of [[340, 1000], [355, 0], [165, 500]]) {
       expect(f.track.valueAt(rimPoint(f.c.x, f.c.y, f.r, angle!))).toBe(value! * M);
     }
   });
 
   it('draws every small part the same length of rim', () => {
-    const f = dialFrame(d, sc, box);
+    const f = dialFrame(d, sc, box, { counting: false });
     const pts = Array.from({ length: sc.parts + 1 }, (_, i) => f.track.at(markAt(sc, i)));
     const chords = pts.slice(1).map((p, i) => Math.round(Math.hypot(p.x - pts[i]!.x, p.y - pts[i]!.y) * 1e6) / 1e6);
     expect(new Set(chords).size).toBe(1);

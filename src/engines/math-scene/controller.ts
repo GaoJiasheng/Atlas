@@ -33,6 +33,7 @@ import type { DCounts } from './lib/placevalue';
 import { clockShown, faceLabel, HALF_DAY } from './lib/clock';
 import { hopArcs, jumpLabel } from './lib/timeline';
 import { instrumentOf, setValue } from './lib/measure-tasks';
+import { weightText } from './lib/instrument';
 import { instrumentText } from './lib/measure-working';
 import { isMeasureTask } from './lib/measure-kind';
 
@@ -124,7 +125,7 @@ function describe(task: Task, action: Action, s: TaskState): string {
     }
     case 'weigh':
     case 'unweigh':
-      return `WEIGHTS ${s.mweights.map((w) => (w >= 1000 && w % 1000 === 0 ? `${w / 1000} KG` : `${w} G`)).join(' + ') || '—'}`;
+      return `WEIGHTS ${s.mweights.map((w) => weightText(w).toLocaleUpperCase('en')).join(' + ') || '—'}`;
     case 'mpart':
       return `PARTS ${s.mparts.length}`;
     case 'mtool':

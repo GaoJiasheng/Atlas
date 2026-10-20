@@ -22,7 +22,7 @@ import { clockShown, faceTime, facesOf } from '../lib/clock';
 import { hopEnd, hopStart, rangeOf } from '../lib/timeline';
 import { clockText, DEFAULT_NOTATION, durationText, naturalUnits, sep12, sep24, type ClockMode, type Notation } from '../lib/value';
 import type { ClockFaceSpec, PanThing } from '../schema';
-import { beamTilt, panMass, partsOf, readingOf, scaleOf, unitOf } from '../lib/instrument';
+import { beamTilt, panMass, partsOf, readingOf, scaleOf, tiltOf, unitOf, weightText } from '../lib/instrument';
 import { isInstrument } from '../lib/measure-kind';
 import { instrumentOf, setValue } from '../lib/measure-tasks';
 import { instrumentText, stepText } from '../lib/measure-working';
@@ -212,7 +212,7 @@ function instrumentName(m: Extract<Model, { kind: 'instrument' }>): string {
   return s.type === 'ruler' ? 'RULER' : 'TAPE';
 }
 
-const grams = (g: number) => (g >= 1000 && g % 1000 === 0 ? `${g / 1000} KG` : `${g} G`);
+const grams = (g: number) => weightText(g).toLocaleUpperCase('en');
 
 /**
  * Rows for an instrument (docs/32 §3.7): MODEL · UNIT · NUMBERS EVERY · SMALL PART and where it reads (START · END on a ruler or a
@@ -227,13 +227,13 @@ export function measurePlateRows(m: Model, task: Task | null, state: TaskState |
   if (s.type === 'balance') {
     const right: PanThing[] = task?.kind === 'set-scale' && state ? state.mweights.map((w) => ({ weight: w })) : (s.right ?? []);
     const left = (s.left ?? []).map((x) => (x.item ? T(x.item.replace('-', ' ')) : grams(x.weight!))).join(' + ') || dash;
-    const tilt = task?.kind === 'set-scale' && state ? (panMass(s.left ?? []) === panMass(right) ? 0 : panMass(s.left ?? []) > panMass(right) ? -1 : 1) : beamTilt(s, right);
+    const tilt = task?.kind === 'set-scale' && state ? tiltOf(panMass(s.left ?? []), panMass(right)) : beamTilt(s, right);
     rows.push({ key: 'math.plate.left', value: left }, { key: 'math.plate.right', value: right.map((x) => (x.weight !== undefined ? grams(x.weight) : T(x.item!))).join(' + ') || dash }, { key: 'math.plate.beam', value: tilt === 0 ? 'LEVEL' : tilt < 0 ? 'LEFT DOWN' : 'RIGHT DOWN', on: true });
     return rows;
   }
   const sc = scaleOf(s);
   if (!sc) return rows;
-  const counting = task?.kind === 'count-intervals';
+  const counting = task?.kind === 'count-intervals' && task.ask === 'part';
   // What the child reads off the instrument stays `?` until done (quantities compared or ordered are given in the task).
   const reading = !!task && !done && (task.kind === 'read-scale' || task.kind === 'input' || task.kind === 'choose');
   const U = (x: string) => (x === 'l' ? 'ℓ' : T(x));

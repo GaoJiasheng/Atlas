@@ -75,6 +75,28 @@ describe('reading an instrument', () => {
   });
 });
 
+describe('choosing the unit', () => {
+  const reading = (spec: Record<string, unknown>, answer: string, units: string[]) =>
+    taskSchema.parse({
+      id: 'r',
+      kind: 'read-scale',
+      model: { kind: 'instrument', ...spec },
+      answer: { answer, form: 'measure', units },
+      prompt: { en: 'p', zh: 'p' },
+      guide: { en: 'g', zh: 'g' },
+      hints: [{ en: 'h', zh: 'h' }],
+      feedback: { correct: { en: 'c', zh: 'c' }, fallback: { en: 'f', zh: 'f' }, reveal: { en: 'r', zh: 'r' }, wrong: [{ when: 'wrong-unit', say: { en: 's', zh: 's' } }] },
+    }) as Task;
+  const dial = reading({ type: 'dial', unit: 'g', from: 0, to: 500, major: 100, minor: 20, value: 280 }, '280 g', ['g', 'kg']);
+  const pencil = reading({ type: 'ruler', unit: 'cm', from: 0, to: 15, major: 1, minor: 1, object: { kind: 'pencil', from: 0, to: 9 } }, '9 cm', ['cm', 'm']);
+  const write = (t: Task, w: string, u: string) => check(t, { ...initialState(t), input: { w, u } }).code;
+  it('wrong-unit: the right number with another unit', () => {
+    expect(write(dial, '280', 'kg')).toBe('wrong-unit');
+    expect(write(pencil, '9', 'm')).toBe('wrong-unit');
+    expect(write(dial, '300', 'kg')).toBeNull();
+  });
+});
+
 describe('counting the parts', () => {
   const r = { M: 100 * M, i: 20 * M, n: 5 };
   it('tick-counting: the short marks counted (100 ÷ 4) or all the marks (a whole number only)', () => {
@@ -174,12 +196,14 @@ describe('codes only a choice diagnoses', () => {
         { id: 'a', correct: true, text: { en: 'stone', zh: 'stone' } },
         { id: 'b', correct: false, misconception: code, text: { en: 'ball', zh: 'ball' } },
         { id: 'c', correct: false, text: { en: 'none', zh: 'none' } },
+        { id: 'd', correct: false, misconception: code, text: { en: 'the raised side', zh: 'the raised side' } },
       ],
     }) as Task;
   for (const code of ['size-is-mass', 'balance-misread', 'taller-holds-more', 'unreasonable-estimate']) {
-    it(`${code}: the option that shows it, not another`, () => {
+    it(`${code}: the options that show it, not another`, () => {
       const t = choose(code);
       expect(check(t, { ...initialState(t), chosen: ['b'] }).code).toBe(code);
+      expect(check(t, { ...initialState(t), chosen: ['d'] }).code).toBe(code);
       expect(check(t, { ...initialState(t), chosen: ['c'] }).code).toBeNull();
     });
   }

@@ -16,9 +16,9 @@
 import type { InputSpec, InstrumentSpec, MisconceptionCode, Task, TaskOf } from '../schema';
 import { SCALE, parseDecimal } from './decimal';
 import { answerValues, compoundPairOf, readWritten, valueBoxes } from './forms';
-import { breakdown, fewestWeights, loadMass, partsBetween, partsOf, readingOf, scaleOf, snap, unitOf, type Reading, type Scale } from './instrument';
+import { breakdown, fewestWeights, loadMass, numText, PAN_MAX, partsBetween, partsOf, readingOf, scaleOf, snap, unitOf, type Reading, type Scale } from './instrument';
 import { isInstrument, measureWorkOf } from './measure-kind';
-import { baseOf, compareQty, FACTOR, FAMILY_UNITS, familyOf, isFracValue, isQty, PAIR, pairOf, parseQuantity, printedNumber, qtyBase, qtyIn, type AnswerValue, type QtyValue, type Unit } from './value';
+import { baseOf, compareQty, FACTOR, FAMILY_UNITS, familyOf, fromSmall, isFracValue, isQty, PAIR, pairOf, parseQuantity, printedNumber, qtyBase, qtyIn, type AnswerValue, type QtyValue, type Unit } from './value';
 import { compareShows, compoundReadShows, convertShows, decimalAsCompound, orderShows, partShows, readShows, setShows, toCompoundShows, toSmallShows, type Claim, type Side } from './diagnose/measure-reading';
 
 /* ------------------------------------------------------------------ */
@@ -96,7 +96,7 @@ export function measureReduce<S extends MeasureState>(task: Task, state: S, acti
       return v === state.mset ? state : { ...state, mset: v };
     }
     case 'weigh':
-      if (task.kind !== 'set-scale' || task.mode !== 'weights' || !(task.weights ?? []).includes(action.w) || state.mweights.length >= 12) return state;
+      if (task.kind !== 'set-scale' || task.mode !== 'weights' || !(task.weights ?? []).includes(action.w) || state.mweights.length >= PAN_MAX) return state;
       return { ...state, mweights: [...state.mweights, action.w] };
     case 'unweigh':
       if (task.kind !== 'set-scale' || action.at < 0 || action.at >= state.mweights.length) return state;
@@ -130,17 +130,11 @@ export function countParts(task: TaskOf<'count-intervals'>): number[] {
 /* Readings and answers                                                */
 /* ------------------------------------------------------------------ */
 
-
-/** The reading as a quantity in its instrument's unit (a two-unit scale: a compound), `null` when not whole millionths. */
-export function readingQty(s: InstrumentSpec, value: number): QtyValue | null {
+/** A value of an instrument as a quantity in its unit (on a two-unit scale, a whole number of the small unit is a compound). */
+export function readingQty(s: InstrumentSpec, value: number): QtyValue {
   const sc = scaleOf(s);
-  const unit = unitOf(s);
-  if (sc?.sub && value % SCALE === 0) {
-    const pair = sc.sub.pair;
-    const total = value / SCALE;
-    return { kind: 'cmp', big: PAIR[pair].big, small: PAIR[pair].small, total, bigPart: Math.floor(total / FACTOR[pair]), smallPart: total % FACTOR[pair] };
-  }
-  return { kind: 'meas', value: { units: value, dp: 0 }, unit };
+  if (sc?.sub && value % SCALE === 0) return { kind: 'cmp', ...fromSmall(value / SCALE, sc.sub.pair) };
+  return { kind: 'meas', value: { units: value, dp: 0 }, unit: unitOf(s) };
 }
 
 /** The unit printed after a whole or decimal box: the spec's, or the instrument's (`null`: none). */
@@ -392,20 +386,13 @@ export function measureBoxes(task: Task, spec: InputSpec): Record<string, string
   if (spec.form === 'compound') return valueBoxes(spec, [a]);
   if (spec.form === 'decimal') {
     const w = answerAsWrote(task, spec, a);
-    return w ? { x: decimalText(w.value) } : {};
+    return w ? { x: numText(w.value) } : {};
   }
   const w = answerAsWrote(task, spec, a);
   if (!w) return {};
   const out: Record<string, string> = { w: String(Math.round(w.value / SCALE)) };
   if (spec.form === 'measure') out.u = w.unit;
   return out;
-}
-
-/** A value in millionths written with the places it needs (`1.25`, `3`). */
-function decimalText(units: number): string {
-  const whole = Math.floor(units / SCALE);
-  const rest = units % SCALE;
-  return rest ? `${whole}.${String(rest).padStart(6, '0').replace(/0+$/, '')}` : String(whole);
 }
 
 /** The moves of a measuring task's model phase, done right (`null`: not one of them). */

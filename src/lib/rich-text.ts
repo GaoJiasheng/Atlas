@@ -22,8 +22,8 @@
  * `NotationContext` (the MathScene view provides it).
  */
 import { createContext, createElement, Fragment, useContext, type ReactNode } from 'react';
-import { clockWords, decimalWords, durationWords, fractionWords, moneyWords, numberEn, numberZh, type FracSlots } from '../engines/math-scene/lib/words';
-import { clockText, compoundText, compoundWords, DEFAULT_NOTATION, durationText, measureText, parseClock, parseCompound, parseDuration, parseMeasure, unitWords, type ClockMode, type Compound, type DurUnit, type Measure, type Notation } from '../engines/math-scene/lib/value';
+import { clockWords, decimalWords, durationWords, fractionWords, measureWords, moneyWords, type FracSlots } from '../engines/math-scene/lib/words';
+import { clockText, compoundText, compoundWords, DEFAULT_NOTATION, durationText, measureText, parseClock, parseCompound, parseDuration, parseMeasure, type ClockMode, type Compound, type DurUnit, type Measure, type Notation } from '../engines/math-scene/lib/value';
 import { parseDecimal, type Decimal } from '../engines/math-scene/lib/decimal';
 import { groupRuns, splitGlue } from './frac-glue';
 
@@ -157,14 +157,6 @@ function shown(p: Exclude<RichPart, { text: string }>, locale: 'en' | 'zh', nota
 /** `3 r 2` read aloud. */
 const REMAINDER = /(\d)\s+r\s+(\d)/g;
 
-/** A measure read aloud: a whole number in words ("twenty-eight square centimetres"), a decimal digit by digit ("one point five litres"). */
-function measureWords(m: Measure, locale: 'en' | 'zh'): string {
-  const whole = m.value.dp === 0 && m.value.units % 1_000_000 === 0;
-  const n = m.value.units / 1_000_000;
-  const number = whole ? (locale === 'zh' ? numberZh(n) : numberEn(n)) : decimalWords(m.value, locale);
-  return `${number}${locale === 'zh' ? '' : ' '}${unitWords(m.unit, locale, whole && n === 1 ? 1 : 2)}`;
-}
-
 /** Text with every token read as words. */
 export function speakable(text: string, locale: 'en' | 'zh'): string {
   return parseRich(text)
@@ -220,7 +212,7 @@ function ValueToken({ part, locale, line }: { part: Exclude<RichPart, { text: st
             : 'compound' in part
               ? compoundWords(part.compound, locale)
               : measureWords(part.measure, locale);
-  return createElement('span', { className: 'atlas-value', 'aria-label': words ?? undefined }, shown(part, locale, notation, line));
+  return createElement('span', { className: 'atlas-value', 'aria-label': words }, shown(part, locale, notation, line));
 }
 
 /**

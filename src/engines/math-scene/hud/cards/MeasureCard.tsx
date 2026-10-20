@@ -14,7 +14,7 @@ import { plainText, renderRich } from '../../../../lib/rich-text';
 import type { Model, Task } from '../../schema';
 import type { TaskState } from '../../lib/state';
 import { inputSpecOf } from '../../lib/state';
-import { beamTilt, panMass, partsOf, readingOf } from '../../lib/instrument';
+import { beamTilt, panMass, partsOf, readingOf, weightText } from '../../lib/instrument';
 import { isInstrument, measureWorkOf } from '../../lib/measure-kind';
 import { instrumentOf, readingQty, setTarget, setValue } from '../../lib/measure-tasks';
 import { instrumentText, measureAnswerToken, measureLines, scaleFacts } from '../../lib/measure-working';
@@ -35,7 +35,7 @@ function beatRows(m: Model, locale: Locale): { rows: CardRow[]; note: string | n
       const tilt = beamTilt(s);
       rows.push({ key: 'math.plate.beam', value: t(locale, tilt === 0 ? 'math.measure.level' : tilt < 0 ? 'math.measure.leftHeavier' : 'math.measure.rightHeavier'), big: i === 0 });
       const w = panMass(s.right ?? []);
-      if (tilt === 0 && w > 0) rows.push({ key: 'math.measure.reading', value: w >= 1000 && w % 1000 === 0 ? `${w / 1000} kg` : `${w} g` });
+      if (tilt === 0 && w > 0) rows.push({ key: 'math.measure.reading', value: weightText(w) });
       return;
     }
     const r = readingOf(s);
@@ -62,7 +62,7 @@ function checkRows(task: Task, state: TaskState, done: boolean, locale: Locale):
   if (task.kind === 'set-scale' && s) {
     const target = setTarget(task);
     if (task.mode === 'weights') {
-      rows.push({ key: 'math.measure.onPan', value: state.mweights.length ? state.mweights.map((w) => (w >= 1000 && w % 1000 === 0 ? `${w / 1000} kg` : `${w} g`)).join(' + ') : '—', tone: 'signal' });
+      rows.push({ key: 'math.measure.onPan', value: state.mweights.length ? state.mweights.map(weightText).join(' + ') : '—', tone: 'signal' });
       return rows;
     }
     if (target !== null) rows.unshift({ key: 'math.measure.setTo', value: instrumentText(s, target, locale), tone: 'cold', big: true });
@@ -70,7 +70,9 @@ function checkRows(task: Task, state: TaskState, done: boolean, locale: Locale):
     return rows;
   }
   if (task.kind === 'count-intervals' && s) {
-    rows.push({ key: 'math.plate.part', value: done && f ? f.part : '?', big: true });
+    // What is asked: a small part, or the stretch's length.
+    if (task.ask === 'part') rows.push({ key: 'math.plate.part', value: done && f ? f.part : '?', big: true });
+    else rows.push({ key: 'math.measure.reading', value: done ? instrumentText(s, task.between[1].units - task.between[0].units, locale) : '?', big: true });
     rows.push({ key: 'math.plate.counted', value: String(state.mparts.length), tone: 'signal' });
     return rows;
   }

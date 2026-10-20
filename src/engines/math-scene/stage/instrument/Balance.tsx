@@ -13,7 +13,7 @@ import type { ReactNode } from 'react';
 import type { Locale } from '../../../core/types';
 import { t } from '../../../../i18n';
 import type { InstrumentSpec, PanThing } from '../../schema';
-import { beamAngle, beamTilt, tiltOf } from '../../lib/instrument';
+import { beamAngle, beamTilt, tiltOf, weightText } from '../../lib/instrument';
 import type { Rect } from '../layout';
 import { LoadGlyph, loadAspect, WeightGlyph } from '../glyphs/measure';
 import type { BalanceFrame } from './geometry';
@@ -92,8 +92,6 @@ export function BalanceDrawing({ f, tilt, left, right, tipMs, label }: { f: Bala
   );
 }
 
-const grams = (g: number) => (g >= 1000 && g % 1000 === 0 ? `${g / 1000} kg` : `${g} g`);
-
 /** The measuring lesson's things: a load (its outline; its mass kept to itself with `hideMass`) or a plain weight. */
 export function panItems(things: readonly PanThing[], key: string, tone: 'cold' | 'hot' | 'signal', locale: Locale, onTap?: (i: number) => void, dashed = false, massTag = false): PanItem[] {
   return things.map((th, i) => {
@@ -105,12 +103,12 @@ export function panItems(things: readonly PanThing[], key: string, tone: 'cold' 
         size: w >= 1000 ? 1.15 : w >= 200 ? 0.95 : 0.75,
         draw: (b: Rect) => <WeightGlyph x={b.x} y={b.y} w={b.w} h={b.h} grams={w} tone={tone === 'signal' ? 'signal' : dashed ? 'ink' : 'cold'} dashed={dashed} />,
         onTap: onTap ? () => onTap(i) : undefined,
-        label: onTap ? t(locale, 'math.measure.takeOff', { w: grams(w) }) : undefined,
+        label: onTap ? t(locale, 'math.measure.takeOff', { w: weightText(w) }) : undefined,
       };
     }
     const kind = th.item!;
     const big = th.size === 'big' ? 1.9 : th.size === 'small' ? 0.6 : 1.25;
-    const tag = massTag && th.mass !== undefined ? grams(th.mass) : null;
+    const tag = massTag && th.mass !== undefined ? weightText(th.mass) : null;
     return {
       key: `${key}${i}`,
       aspect: loadAspect(kind),
