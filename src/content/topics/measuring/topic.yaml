@@ -1,0 +1,17 @@
+# Measuring: reading rulers, scales and measuring jugs (MathScene lesson). Spec: docs/32-measuring-content-spec.md.
+id: measuring
+title: { en: "Measuring", zh: "量的读数" }
+subtitle: { en: "Rulers, scales and measuring jugs: what each small part stands for", zh: "尺子、秤和量杯：每一小格表示多少" }
+subject: math
+levels: [P1, P2, P3, P5]
+tags: [measurement, singapore]
+moe: ["MOE 2021 P1 Measurement 1 (Length)", "MOE 2021 P2 Measurement 1 (Length, Mass and Volume)", "MOE 2021 P3 Measurement 1 (Length, Mass and Volume)", "MOE 2021 P5 Decimals 1.2 (going further)"]
+mode: lesson
+engine: math-scene
+stage: svg
+theme: paper
+sensitivity: open
+note: { en: "Interactive lesson · aligned to the MOE 2021 syllabus", zh: "交互课 · 对照 MOE 2021 课纲" }
+status: published
+illustration: measuring
+shortTitle: { en: "Measuring", zh: "量的读数" }

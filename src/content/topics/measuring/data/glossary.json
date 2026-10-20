@@ -1,0 +1,148 @@
+{
+  "terms": [
+    {
+      "id": "length",
+      "term": { "en": "length", "zh": "长度" },
+      "definition": {
+        "en": "How long something is, from one end to the other. A pencil can be {u:9 cm} long.",
+        "zh": "一样东西从一端到另一端有多长。一支铅笔可以长 {u:9 cm}。"
+      },
+      "see": ["centimetre", "metre"]
+    },
+    {
+      "id": "centimetre",
+      "term": { "en": "centimetre (cm)", "zh": "厘米（cm）" },
+      "definition": {
+        "en": "A unit for short lengths. On a school ruler, the part between two marks next to each other is {u:1 cm}.",
+        "zh": "量短东西的单位。学校尺子上，两条相邻刻度线中间的一格是 {u:1 cm}。"
+      },
+      "see": ["length", "metre"]
+    },
+    {
+      "id": "metre",
+      "term": { "en": "metre (m)", "zh": "米（m）" },
+      "definition": {
+        "en": "A unit for longer lengths. {u:1 m} = {u:100 cm}; a classroom door is about {u:2 m} tall.",
+        "zh": "量长一些的东西的单位。{u:1 m} = {u:100 cm}；教室的门大约 {u:2 m} 高。"
+      },
+      "see": ["centimetre", "kilometre"]
+    },
+    {
+      "id": "kilometre",
+      "term": { "en": "kilometre (km)", "zh": "千米（km）" },
+      "definition": {
+        "en": "A unit for long distances. {u:1 km} = {u:1000 m}.",
+        "zh": "量路程的单位。{u:1 km} = {u:1000 m}。在新加坡，口语里常说“公里”，1 公里就是 1 千米。"
+      },
+      "see": ["metre"]
+    },
+    {
+      "id": "mass",
+      "term": { "en": "mass", "zh": "质量" },
+      "definition": {
+        "en": "How heavy something is. This pineapple has a mass of {u:1 kg}.",
+        "zh": "一样东西有多重。这个黄梨的质量是 {u:1 kg}。日常也说“重量”；本课用“质量”，和英文的 mass 对应。"
+      },
+      "see": ["gram", "kilogram", "balance"]
+    },
+    {
+      "id": "gram",
+      "term": { "en": "gram (g)", "zh": "克（g）" },
+      "definition": {
+        "en": "A unit for the mass of light things. A paper clip is about {u:1 g}.",
+        "zh": "量轻东西的质量单位。一个回形针大约 {u:1 g}。"
+      },
+      "see": ["kilogram", "mass"]
+    },
+    {
+      "id": "kilogram",
+      "term": { "en": "kilogram (kg)", "zh": "千克（kg）" },
+      "definition": {
+        "en": "A unit for the mass of heavier things. {u:1 kg} = {u:1000 g}.",
+        "zh": "量重一些的东西的质量单位。{u:1 kg} = {u:1000 g}。在新加坡，口语里常说“公斤”，1 公斤就是 1 千克。"
+      },
+      "see": ["gram", "mass"]
+    },
+    {
+      "id": "volume",
+      "term": { "en": "volume (of liquid)", "zh": "容量" },
+      "definition": {
+        "en": "How much liquid there is, or how much a container holds. To compare, pour into the same kind of container.",
+        "zh": "有多少液体，或者一个容器装得下多少液体。要比，就倒进一样的容器里比。英文里 MOE 写 volume；以后学正方体、长方体时，同一个量叫“体积”。"
+      },
+      "see": ["litre", "millilitre", "measuring-cup"]
+    },
+    {
+      "id": "litre",
+      "term": { "en": "litre (ℓ)", "zh": "升（ℓ）" },
+      "definition": {
+        "en": "A unit of volume, written ℓ. {u:1 l} = {u:1000 ml}.",
+        "zh": "容量的单位，写作 ℓ。{u:1 l} = {u:1000 ml}。"
+      },
+      "see": ["millilitre", "volume"]
+    },
+    {
+      "id": "millilitre",
+      "term": { "en": "millilitre (ml)", "zh": "毫升（ml）" },
+      "definition": {
+        "en": "A unit for small amounts of liquid. A beaker filled to {u:1000 ml} holds {u:1 l}.",
+        "zh": "量少量液体的单位。量杯装到 {u:1000 ml}，就是 {u:1 l}。"
+      },
+      "see": ["litre", "volume"]
+    },
+    {
+      "id": "scale",
+      "term": { "en": "scale, marks", "zh": "刻度" },
+      "definition": {
+        "en": "The lines and numbers on a ruler, a weighing scale or a measuring cup that you read a measurement from. Long marks have numbers; short marks often do not.",
+        "zh": "尺子、秤、量杯上一条条的线和数，用来读出量。长刻度标数，短刻度常常不标。"
+      },
+      "see": ["small-part"]
+    },
+    {
+      "id": "small-part",
+      "term": { "en": "each small part", "zh": "每一小格" },
+      "definition": {
+        "en": "The space between two marks next to each other. What it stands for = the difference between two numbered marks ÷ the number of parts between them.",
+        "zh": "两条相邻刻度线之间的一段。每一小格表示多少 = 两个相邻标数之差 ÷ 它们中间的格数。"
+      },
+      "see": ["scale"]
+    },
+    {
+      "id": "balance",
+      "term": { "en": "balance", "zh": "天平" },
+      "definition": {
+        "en": "A tool for comparing masses: the heavier side goes down, and when the two sides are level they have the same mass.",
+        "zh": "比轻重的器具：重的一边往下沉，两边一样高就是一样重。"
+      },
+      "see": ["mass"]
+    },
+    {
+      "id": "measuring-cup",
+      "term": { "en": "measuring cup, beaker", "zh": "量杯" },
+      "definition": {
+        "en": "A cup or jug with marks on its side for measuring liquid. Read it from the side, with your eyes level with the water.",
+        "zh": "侧面带刻度、用来量液体的杯子或壶。要从侧面读，眼睛和水面一样高。实验室里直筒的那种叫“烧杯”。"
+      },
+      "see": ["volume", "millilitre"]
+    },
+    {
+      "id": "compound-units",
+      "term": { "en": "compound units", "zh": "复合单位" },
+      "definition": {
+        "en": "A measurement written with two units together, such as {u:2 m 35 cm} or {u:3 kg 40 g}.",
+        "zh": "用两个单位一起写的量，比如 {u:2 m 35 cm}、{u:3 kg 40 g}。也叫“复名数”。"
+      },
+      "see": ["metre", "kilogram"]
+    },
+    {
+      "id": "estimate",
+      "term": { "en": "estimate", "zh": "估计" },
+      "definition": {
+        "en": "A sensible guess of about how much, made before you measure, to check your reading. A door is about {u:2 m} tall.",
+        "zh": "量之前先猜一个大约的数，用来检查读得对不对。门大约 {u:2 m} 高。"
+      },
+      "see": ["scale"]
+    }
+  ]
+}
