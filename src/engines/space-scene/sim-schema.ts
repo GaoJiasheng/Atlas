@@ -11,9 +11,9 @@
 import { z } from 'zod';
 import { bilingual, colorRef, kebabId, vec3 } from '../../content/schema/common';
 import { fieldLines } from './lib/sim/field';
-import { CLIP_QUANTITIES } from './lib/sim/magnet';
 import { FORCE_STATES, forceQuantity, forceTimelineChannels, springExtension, rollRun } from './lib/sim/force';
 import { COMPUTED_TABLES, ENERGY_FORMS, chainFlow, chainOrder, energyNodes, energyQuantity, energyTimelineChannels, shareTables } from './lib/sim/energy';
+import { EMPTYING_STATES, groupStages, lastStage, lifeCycleQuantity, timedStages } from './lib/sim/lifecycle';
 
 /** A control value: a toggle's boolean, a step's number, a choice's option id. */
 export const simValue = z.union([z.boolean(), z.number(), kebabId]);
@@ -690,6 +690,68 @@ export const energySchema = z
   .strict();
 export type EnergyData = z.output<typeof energySchema>;
 
+/** Where a life-cycle stage lives: `water` (the card's in-water band), `wall` (above the water line: a short wall stroke), `air`, `land`. */
+export const LIFE_STAGE_PLACES = ['water', 'wall', 'air', 'land'] as const;
+
+/** A stage id of the life-cycle model (not `total`: that key of a `days` row is the study's own total). */
+const lifeStageId = kebabId.refine((v) => v !== 'total', { message: '"total" is the key of a row\'s measured total, not a stage' });
+
+/**
+ * The life-cycle model's data (docs/33 §4.2 E-M1, lib/sim/lifecycle.ts):
+ * `temp` and `day` (step controls), the `stages` in order round the cycle
+ * (the last is the adult; `start` is day 0, hatching: stages before it, the
+ * egg, take no days), `groups` (the four larval stages: a list, or with a
+ * `label` for the card's bracket), `days` (measured mean days per stage, one
+ * row per temperature value, `total` the study's own hatching-to-adult
+ * mean), `size` (a measured size per stage, optional), `emptying` (the
+ * tipping-out controls), `rate` (the cycle flow and its paths, and the
+ * reference temperature where it runs at speed 1), `card` (the ring card's
+ * second ring, shown while `compare.control` is on).
+ */
+export const lifeCycleSchema = z
+  .object({
+    temp: kebabId,
+    day: kebabId,
+    start: lifeStageId,
+    stages: z
+      .array(
+        z
+          .object({
+            id: lifeStageId,
+            in: z.enum(LIFE_STAGE_PLACES),
+            part: kebabId.optional(),
+            label: bilingual,
+            /** The card writes this on the arc out of a stage that takes no days (the egg: "waits for water"). */
+            note: bilingual.optional(),
+          })
+          .strict(),
+      )
+      .min(2)
+      .max(10),
+    groups: z.record(kebabId, z.union([z.array(lifeStageId).min(2).max(8), z.object({ stages: z.array(lifeStageId).min(2).max(8), label: bilingual }).strict()])).optional(),
+    days: z.record(z.string().regex(/^-?\d+(\.\d+)?$/, 'a row is keyed by a temperature value'), z.record(z.string(), z.number().finite())),
+    size: z.record(kebabId, z.object({ unit: z.string().trim().min(1).max(8), values: z.record(lifeStageId, z.number().finite().positive()) }).strict()).optional(),
+    emptying: z.object({ every: kebabId, wipe: kebabId.optional() }).strict().optional(),
+    rate: z.object({ flow: kebabId, paths: z.array(kebabId).min(1).max(16), reference: z.number().finite() }).strict().optional(),
+    card: z
+      .object({
+        compare: z
+          .object({
+            control: kebabId,
+            label: bilingual,
+            stages: z.array(z.object({ id: kebabId, label: bilingual }).strict()).min(2).max(8),
+            /** The link under the second ring to that animal's topic (its words: "See the grasshopper"). */
+            link: z.object({ topic: kebabId, chapter: kebabId.optional(), label: bilingual }).strict().optional(),
+          })
+          .strict()
+          .optional(),
+      })
+      .strict()
+      .optional(),
+  })
+  .strict();
+export type LifeCycleData = z.output<typeof lifeCycleSchema>;
+
 /**
  * Drawn over the stage from the model's outputs (docs/22 §4.4 M5):
  * `force-arrows` = one arrow on each of two parts along the line between
@@ -780,7 +842,7 @@ export const simOverlaySchema = z.discriminatedUnion('kind', [
 ]);
 export type SimOverlay = z.output<typeof simOverlaySchema>;
 
-export const SIM_KINDS = ['circuit', 'magnet', 'force', 'energy'] as const;
+export const SIM_KINDS = ['circuit', 'magnet', 'force', 'energy', 'life-cycle'] as const;
 export type SimKind = (typeof SIM_KINDS)[number];
 
 export const MAX_SIM_CONTROLS = 16;
@@ -798,6 +860,7 @@ export const simSchema = z
     magnet: magnetSchema.optional(),
     force: forceSchema.optional(),
     energy: energySchema.optional(),
+    lifeCycle: lifeCycleSchema.optional(),
   })
   .strict();
 export type SimData = z.output<typeof simSchema>;
@@ -895,6 +958,8 @@ interface SimContext {
   withExtra?: ReadonlySet<string>;
   /** Group ids (a force-vectors overlay's `group`). */
   groups?: ReadonlySet<string>;
+  /** Context parts (never selected: a life-cycle stage's `part` may not be one). */
+  contextParts?: ReadonlySet<string>;
 }
 
 /** Whether a value is a legal value of a control. */
@@ -947,6 +1012,16 @@ export function quantityKind(sim: SimData, from: string): SimOutput['kind'] | nu
         return q.kind;
       }
       return sim.energy[q.model] ? q.kind : null;
+    }
+    case 'life-cycle': {
+      const lc = sim.lifeCycle;
+      const q = lifeCycleQuantity(from);
+      if (!q || !lc || (q.needs && !lc[q.needs])) return null;
+      if (q.prefix === 'days' && !timedStages(lc).includes(q.ref!) && !lc.groups?.[q.ref!]) return null;
+      if (q.prefix === 'on' && !lc.stages.some((s) => s.id === q.ref)) return null;
+      if (q.prefix === 'size' && !lc.size?.[q.ref!]) return null;
+      if (q.prefix === 'control' && !sim.controls.some((c) => c.id === q.ref && c.kind !== 'choice')) return null;
+      return q.kind;
     }
   }
 }
@@ -1004,18 +1079,32 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
     const kind = quantityKind(sim, from);
     if (kind === null) {
       const q = sim.kind === 'force' ? forceQuantity(from) : sim.kind === 'energy' ? energyQuantity(from) : null;
-      issue(
-        ['outputs', i, 'from'],
-        q && q.model !== 'chain' ? `"${from}" needs the ${sim.kind} model's \`${q.model}\` data` : `the ${sim.kind} model has no quantity "${from}"`,
-      );
+      const lq = sim.kind === 'life-cycle' ? lifeCycleQuantity(from) : null;
+      const needs = q && q.model !== 'chain' ? q.model : lq?.needs && sim.lifeCycle && !sim.lifeCycle[lq.needs] ? lq.needs : null;
+      issue(['outputs', i, 'from'], needs ? `"${from}" needs the ${sim.kind} model's \`${needs}\` data` : `the ${sim.kind} model has no quantity "${from}"`);
     } else if (kind !== o.kind) issue(['outputs', i, 'kind'], `"${from}" is a ${kind}, not a ${o.kind}`);
-    const states = sim.kind === 'force' ? FORCE_STATES[from] : sim.kind === 'energy' && from === 'chain-state' && sim.energy ? Object.keys(sim.energy.chains) : undefined;
+    const states =
+      sim.kind === 'force'
+        ? FORCE_STATES[from]
+        : sim.kind === 'energy' && from === 'chain-state' && sim.energy
+          ? Object.keys(sim.energy.chains)
+          : sim.kind === 'life-cycle' && sim.lifeCycle
+            ? from === 'stage'
+              ? [...timedStages(sim.lifeCycle), lastStage(sim.lifeCycle)]
+              : EMPTYING_STATES[from]
+            : undefined;
     if (states && o.kind === 'state') for (const st of states) if (!o.states?.[st]) issue(['outputs', i, 'states'], `"${from}" can be "${st}": give it a label`);
+    if (sim.kind === 'life-cycle' && sim.lifeCycle && o.kind === 'state' && kind === 'state') {
+      const known = from === 'stage' ? sim.lifeCycle.stages.map((s) => s.id) : (EMPTYING_STATES[from] ?? []);
+      for (const st of Object.keys(o.states ?? {})) if (!known.includes(st)) issue(['outputs', i, 'states', st], `"${from}" is never "${st}" (${known.join(', ')})`);
+    }
   });
   if (sim.kind === 'circuit' && !sim.circuit) issue(['circuit'], 'a circuit sim needs `circuit`');
   if (sim.kind === 'magnet' && !sim.magnet) issue(['magnet'], 'a magnet sim needs `magnet`');
   if (sim.kind === 'force' && !sim.force) issue(['force'], 'a force sim needs `force`');
   if (sim.kind === 'energy' && !sim.energy) issue(['energy'], 'an energy sim needs `energy`');
+  if (sim.kind === 'life-cycle' && !sim.lifeCycle) issue(['lifeCycle'], 'a life-cycle sim needs `lifeCycle`');
+  if (sim.lifeCycle) lifeCycleIssues(sim.lifeCycle, controls, ctx).forEach((x) => issue(['lifeCycle', ...x.path], x.message));
   if (sim.force) forceIssues(sim.force, controls, ctx).forEach((x) => issue(['force', ...x.path], x.message));
   if (sim.energy) energyIssues(sim, sim.energy, controls, ctx).forEach((x) => issue(['energy', ...x.path], x.message));
   if (sim.circuit) circuitIssues(sim.circuit, controls, ctx).forEach((x) => issue(['circuit', ...x.path], x.message));
@@ -1363,6 +1452,98 @@ function energyIssues(sim: SimData, e: EnergyData, controls: ReadonlyMap<string,
   return out;
 }
 
+/**
+ * The life-cycle model's own data (docs/33 §4.2): the temperature and day
+ * controls, the stages and `start`, one measured row per temperature that
+ * covers exactly the stages that take days (each > 0, the `total` within
+ * 5 % of their sum: a mistyped number), groups of consecutive stages, sizes,
+ * the emptying controls, the cycle flow's paths and reference temperature,
+ * and the card's second ring. The second ring's link is checked against
+ * the topic folders by `pnpm validate` (like `<TopicLink>`).
+ */
+function lifeCycleIssues(lc: LifeCycleData, controls: ReadonlyMap<string, SimControl>, ctx: SimContext): { path: (string | number)[]; message: string }[] {
+  const out: { path: (string | number)[]; message: string }[] = [];
+  const issue = (path: (string | number)[], message: string) => out.push({ path, message });
+  const control = <K extends SimControl['kind']>(path: (string | number)[], id: string, kind: K): Extract<SimControl, { kind: K }> | undefined => {
+    const c = controls.get(id);
+    if (!c) issue(path, `unknown control "${id}"`);
+    else if (c.kind !== kind) issue(path, `"${id}" is a ${c.kind} control, not a ${kind}`);
+    return c?.kind === kind ? (c as Extract<SimControl, { kind: K }>) : undefined;
+  };
+  const ids = lc.stages.map((s) => s.id);
+  lc.stages.forEach((s, i) => {
+    if (ids.indexOf(s.id) !== i) issue(['stages', i, 'id'], `duplicate stage "${s.id}"`);
+    if (s.part !== undefined) {
+      if (!ctx.parts.has(s.part)) issue(['stages', i, 'part'], `unknown part "${s.part}"`);
+      else if (ctx.contextParts?.has(s.part)) issue(['stages', i, 'part'], `"${s.part}" is a context part (never selected)`);
+    }
+  });
+  const last = lastStage(lc);
+  if (ids.includes('adult') && last !== 'adult') issue(['stages'], '"adult" must be the last stage');
+  if (!ids.includes(lc.start)) issue(['start'], `unknown stage "${lc.start}" (${ids.join(', ')})`);
+  else if (lc.start === last) issue(['start'], `"${lc.start}" is the last stage (the adult): day 0 is a stage that takes days`);
+  const timed = timedStages(lc);
+  const temp = control(['temp'], lc.temp, 'step');
+  const day = control(['day'], lc.day, 'step');
+  if (day && day.values.some((v) => v < 0)) issue(['day'], 'days after hatching are 0 or more');
+  if (temp) {
+    for (const v of temp.values) if (!lc.days[String(v)]) issue(['days'], `no measured row for ${v}${temp.unit ? ` ${temp.unit}` : ''} (a value of "${temp.id}")`);
+    for (const k of Object.keys(lc.days)) {
+      if (!temp.values.includes(Number(k))) issue(['days', k], `${k} is not a value of "${temp.id}"`);
+      else if (String(Number(k)) !== k) issue(['days', k], `write the temperature key as "${Number(k)}" (one row per value)`);
+    }
+  }
+  for (const [k, row] of Object.entries(lc.days)) {
+    for (const id of timed) {
+      const v = row[id];
+      if (v === undefined) issue(['days', k, id], `no days for stage "${id}"`);
+      else if (!(v > 0)) issue(['days', k, id], `${v}: a stage lasts more than 0 days`);
+    }
+    for (const key of Object.keys(row)) {
+      if (key === 'total' || timed.includes(key)) continue;
+      issue(['days', k, key], ids.includes(key) ? `"${key}" takes no days (${key === last ? 'the last stage, the adult' : `before \`start\` "${lc.start}"`})` : `unknown stage "${key}"`);
+    }
+    const sum = timed.reduce((s, id) => s + (row[id] ?? 0), 0);
+    if (row.total !== undefined) {
+      if (!(row.total > 0)) issue(['days', k, 'total'], `${row.total}: the total is more than 0 days`);
+      else if (Math.abs(row.total - sum) > 0.05 * sum + Number.EPSILON * Math.max(row.total, sum))
+        issue(['days', k, 'total'], `total ${row.total} is more than 5 % from the stages' sum ${+sum.toFixed(4)} (a mistyped number?)`);
+    }
+  }
+  for (const [g, def] of Object.entries(lc.groups ?? {})) {
+    const members = groupStages(def);
+    if (ids.includes(g)) issue(['groups', g], `"${g}" is also a stage (days:${g} would mean both)`);
+    for (const m of members) if (!timed.includes(m)) issue(['groups', g], `"${m}" is not a stage that takes days`);
+    const at = members.map((m) => ids.indexOf(m));
+    if (at.every((x) => x >= 0) && at.some((x, j) => j > 0 && x !== at[j - 1]! + 1)) issue(['groups', g], 'a group is stages next to each other, in order');
+  }
+  for (const [name, sz] of Object.entries(lc.size ?? {})) for (const k of Object.keys(sz.values)) if (!ids.includes(k)) issue(['size', name, 'values', k], `unknown stage "${k}"`);
+  if (lc.emptying) {
+    const every = control(['emptying', 'every'], lc.emptying.every, 'step');
+    if (every && every.values.some((v) => v <= 0)) issue(['emptying', 'every'], 'the water is tipped out every so many days: above 0');
+    if (lc.emptying.wipe !== undefined) control(['emptying', 'wipe'], lc.emptying.wipe, 'toggle');
+  }
+  if (lc.rate) {
+    if (new Set(lc.rate.paths).size !== lc.rate.paths.length) issue(['rate', 'paths'], 'duplicate path ids');
+    const flow = ctx.flows.get(lc.rate.flow);
+    if (!flow) issue(['rate', 'flow'], `unknown flow "${lc.rate.flow}"`);
+    else if (!flow.paths) issue(['rate', 'flow'], `flow "${lc.rate.flow}" has no \`paths\` (the rate is a speed per path)`);
+    else {
+      const own = flow.paths.map((p) => p.id);
+      for (const p of lc.rate.paths) if (!own.includes(p)) issue(['rate', 'paths'], `flow "${lc.rate.flow}" has no path "${p}"`);
+      for (const p of own) if (!lc.rate.paths.includes(p)) issue(['rate', 'paths'], `list path "${p}" of flow "${lc.rate.flow}" too (a path left out stops)`);
+    }
+    if (temp && !temp.values.includes(lc.rate.reference)) issue(['rate', 'reference'], `${lc.rate.reference} is not a value of "${temp.id}"`);
+  }
+  const cmp = lc.card?.compare;
+  if (cmp) {
+    control(['card', 'compare', 'control'], cmp.control, 'toggle');
+    const cids = cmp.stages.map((s) => s.id);
+    if (new Set(cids).size !== cids.length) issue(['card', 'compare', 'stages'], 'duplicate stage ids');
+  }
+  return out;
+}
+
 /** The magnet model's own data: controls it names, rings, the compass, field states and their lines. */
 function magnetIssues(sim: SimData, m: MagnetData, controls: ReadonlyMap<string, SimControl>, ctx: SimContext): { path: (string | number)[]; message: string }[] {
   const out: { path: (string | number)[]; message: string }[] = [];
@@ -1615,4 +1796,3 @@ export function chapterSimIssues(where: string, s: { set?: SimValues | undefined
   }
   return out;
 }
-

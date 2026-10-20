@@ -1,0 +1,18 @@
+# PLACEHOLDER topic: exercises the SpaceScene life-cycle model (docs/33 §4, E-M1–E-M2) only: the stage on a day
+# after hatching (a marker pose per stage), measured days per stage and temperature scaled to the study's total,
+# the water-emptying cut-off with the "wall scrubbed too" switch (eggs and escaped adults shown by state), the
+# cycle flow's speed by temperature, `on:` / `control:` quantities, a data table with a line graph, predict then
+# observe, the life-cycle ring card with a second ring and its topic link, and a background chapter with its note.
+id: sample-life-cycle
+title: { en: "Sample: Life cycle dish", zh: "示例：生活史浅皿" }
+subtitle: { en: "A placeholder topic for testing the life-cycle model", zh: "用于测试生活史模型的占位主题" }
+subject: biology
+levels: [P3]
+moe: []
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: draft
+note: { en: "Placeholder topic · not a real animal", zh: "占位主题 · 不是真实的动物" }

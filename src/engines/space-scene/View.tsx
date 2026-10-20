@@ -75,6 +75,7 @@ import { LeaderLabels } from './hud/LeaderLabels';
 import { SitesOverlay } from './hud/SitesOverlay';
 import { CircuitCard } from './hud/CircuitCard';
 import { EnergyCard } from './hud/EnergyCard';
+import { CycleCard } from './hud/CycleCard';
 import { EnergyBarLabels } from './hud/EnergyBarLabels';
 import { GroupScaleBars } from './hud/GroupScaleBars';
 import { TryIt } from './explorer/TryIt';
@@ -532,7 +533,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       },
       specRows: spaceSpecRows(file),
       status,
-      card: file.sim?.energy ? both('space.card.energy') : file.sim?.circuit?.diagram ? both('space.card.circuit') : both('space.card.title'),
+      card: file.sim?.lifeCycle ? both('space.card.cycle') : file.sim?.energy ? both('space.card.energy') : file.sim?.circuit?.diagram ? both('space.card.circuit') : both('space.card.title'),
       beats: beatControls,
       beatStep,
       // At a beat the URL leaves out what `?ch=<chapter>&b=<n>` brings back (the beat's scene), not the chapter's target.
@@ -720,7 +721,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         <GroupScaleBars file={file} bridge={bridge} />
         <EnergyBarLabels file={file} bridge={bridge} />
       </SceneSlot>
-      <SceneSlot name="card">{file.sim?.energy ? <EnergyCard file={file} /> : file.sim?.circuit?.diagram ? <CircuitCard file={file} /> : <PartChainCard file={file} />}</SceneSlot>
+      <SceneSlot name="card">{file.sim?.lifeCycle ? <CycleCard file={file} /> : file.sim?.energy ? <EnergyCard file={file} /> : file.sim?.circuit?.diagram ? <CircuitCard file={file} /> : <PartChainCard file={file} />}</SceneSlot>
       <SceneSlot name="plate">
         <PlateBlock file={file} ui={ui} bridge={bridge} />
       </SceneSlot>

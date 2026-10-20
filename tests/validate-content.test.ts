@@ -12,6 +12,7 @@ import { mergeSourcesMd, sourceLine, sourcesBlock, BEGIN, END } from '../scripts
 const ROOT = join(import.meta.dirname, '..');
 const SAMPLE = join(ROOT, 'src/content/topics/sample-time');
 const SAMPLE_SPACE = join(ROOT, 'src/content/topics/sample-space');
+const SAMPLE_CYCLE = join(ROOT, 'src/content/topics/sample-life-cycle');
 const FRACTIONS = join(ROOT, 'src/content/topics/fractions');
 
 let dir = '';
@@ -23,7 +24,7 @@ function topic(slug: string, edit: (root: string) => void = () => {}, from = SAM
   const root = join(dir, slug);
   cpSync(from, root, { recursive: true });
   const yaml = join(root, 'topic.yaml');
-  writeFileSync(yaml, readFileSync(yaml, 'utf8').replace(/^id: (sample-time|sample-space|fractions)$/m, `id: ${slug}`));
+  writeFileSync(yaml, readFileSync(yaml, 'utf8').replace(/^id: (sample-time|sample-space|sample-life-cycle|fractions)$/m, `id: ${slug}`));
   edit(root);
 }
 
@@ -107,6 +108,19 @@ beforeAll(() => {
     writeFileSync(join(root, 'chapters/09-term.mdx'), chapterFile(['id: term', 'order: 9', 'title: { en: "Term", zh: "词" }'], 'A <Term id="trench">trench</Term>.'));
   });
   topic('space-clean', () => {}, SAMPLE_SPACE);
+  for (const [slug, link] of [
+    ['cycle-link-clean', { topic: 'clean', chapter: 'second-look' }],
+    ['cycle-link-topic', { topic: 'missing-topic' }],
+    ['cycle-link-chapter', { topic: 'clean', chapter: 'missing-chapter' }],
+  ] as const) {
+    topic(slug, (root) => {
+      editJson(join(root, 'data/parts.json'), (file: { sim: { lifeCycle: { card: { compare: { link: { topic: string; chapter?: string; label: { en: string; zh: string } } } } } } }) => {
+        file.sim.lifeCycle.card.compare.link = { ...link, label: { en: 'See it', zh: '去看' } };
+      });
+      const chapter = join(root, 'chapters/04-two-cycles.mdx');
+      writeFileSync(chapter, readFileSync(chapter, 'utf8').replaceAll('slug="grasshopper" ch="nerves-and-growing-up"', 'slug="clean" ch="second-look"'));
+    }, SAMPLE_CYCLE);
+  }
   topic(
     'space-bad-beats',
     (root) => {
@@ -183,7 +197,7 @@ afterAll(() => {
 describe('validate-content', () => {
   it('fails the run when any topic has errors', () => {
     expect(status).toBe(1);
-    expect(output).toMatch(/16 topic\(s\)/);
+    expect(output).toMatch(/19 topic\(s\)/);
   });
 
   it('passes an unmodified copy', () => {
@@ -208,6 +222,16 @@ describe('validate-content', () => {
     const errors = linesFor('topic-links').filter((l) => l.startsWith('error'));
     expect(errors).toHaveLength(1);
     expect(errors[0]).toContain('<TopicLink slug="clean" ch="nowhere">: topic "clean" has no chapter "nowhere"');
+  });
+
+  it('checks a life-cycle comparison link topic and chapter', () => {
+    const linkErrors = (slug: string) => linesFor(slug).filter((line) => line.includes('sim.lifeCycle.card.compare.link'));
+    expect(linesFor('cycle-link-clean').filter((line) => line.startsWith('error'))).toEqual([]);
+    expect(linkErrors('cycle-link-clean')).toEqual([]);
+    expect(linkErrors('cycle-link-topic')).toHaveLength(1);
+    expect(linkErrors('cycle-link-topic')[0]).toContain('no topic "missing-topic"');
+    expect(linkErrors('cycle-link-chapter')).toHaveLength(1);
+    expect(linkErrors('cycle-link-chapter')[0]).toContain('topic "clean" has no chapter "missing-chapter"');
   });
 
   it('accepts a background chapter (order 0, reading note) and <Term> refs to the glossary', () => {

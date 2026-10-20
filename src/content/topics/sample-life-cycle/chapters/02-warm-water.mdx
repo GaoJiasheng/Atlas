@@ -1,0 +1,48 @@
+---
+id: warm-water
+order: 2
+title: { en: "Sample warm water", zh: "示例温水" }
+state:
+  view: assembled
+  explode: 0
+  run: true
+  part: null
+  hide: [escaped-adults]
+  layers: [water-dish, stages, grown, cycle]
+  labels: [larva-l4, pupa, adult]
+  summary: { en: "Sample warm water: the same larvae in water of four temperatures.", zh: "示例温水：同样的幼虫放在四种水温里。" }
+  sim:
+    set: { temp: 28, day: 0 }
+    try:
+      vary: temp
+      keep: [{ en: "Same food", zh: "同样的食物" }, { en: "Same number of larvae", zh: "同样多的幼虫" }]
+      observe: [to-adult, larva-days, pupa-days]
+      record: { chart: { y: to-adult } }
+      predict:
+        prompt: { en: "Sample prediction: in warmer water, how long from hatching to adult?", zh: "示例猜想：水更暖时，从孵化到成虫要多久？" }
+        start: { temp: 25 }
+        change: { temp: 32 }
+        observe: to-adult
+        options:
+          - { id: shorter, label: { en: "Shorter", zh: "更短" }, means: less }
+          - { id: same, label: { en: "About the same", zh: "差不多" }, means: same }
+          - { id: longer, label: { en: "Longer", zh: "更长" }, means: more }
+  beats:
+    - caption: { en: "Sample beat one: at 28 °C the cycle runs at its usual speed.", zh: "示例节拍一：28 °C 时环照常转。" }
+    - sim: { set: { temp: 20 } }
+      caption: { en: "Sample beat two: in cooler water every stage takes longer.", zh: "示例节拍二：水凉一些，每个阶段都更久。" }
+  index:
+    parts: [larva-l1, larva-l4, pupa, adult]
+---
+
+<Lang en>
+
+Sample warm water: placeholder text for a fair test of water temperature.
+
+</Lang>
+
+<Lang zh>
+
+示例温水：水温公平测试的占位文字。
+
+</Lang>
