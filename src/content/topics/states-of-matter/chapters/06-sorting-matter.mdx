@@ -1,0 +1,148 @@
+---
+id: "sorting-matter"
+order: 6
+title: {"en": "Solid, liquid or gas", "zh": "固体、液体还是气体"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: false
+  cutaway: "none"
+  layers: ["grains", "around-you", "air-flow"]
+  hide: ["torch-beam"]
+  labels: ["sand-in-cylinder", "cylinder-c", "pour-cup"]
+  camera: {"position": [0.95, 0.32, 0.52], "target": [0.78, 0.09, 0.0], "fov": 30}
+  summary: {"en": "Solids keep their shape and volume; liquids keep their volume but not their shape; gases keep neither. Use these two questions to sort the matter around you, from sand to a can of drink.", "zh": "固体的形状和体积都固定；液体的体积固定、形状不固定；气体两样都不固定。用这两个问题，给身边的物质分分类，从一把沙到一罐汽水。"}
+  sim:
+    set: {"water-added": 0}
+    try:
+      vary: "water-added"
+      keep: [{"en": "The same 100 ml of dry sand", "zh": "同样的 100 毫升干沙"}]
+      observe: ["sand-reading", "air-gaps"]
+      record: {"chart": {"y": "sand-reading"}}
+      predict:
+        prompt: {"en": "Pour all 100 ml of water onto 100 ml of dry sand. Will the cylinder read 200 ml, less, or more?", "zh": "把 100 毫升水全倒进 100 毫升干沙里，量筒会读 200 毫升、少一些，还是多一些？"}
+        start: {"water-added": 0}
+        change: {"water-added": 100}
+        observe: "vs-sum"
+        options:
+          - {"id": "equal", "label": {"en": "200 ml", "zh": "200 毫升"}, "means": "equal"}
+          - {"id": "less", "label": {"en": "Less", "zh": "少一些"}, "means": "less"}
+          - {"id": "more", "label": {"en": "More", "zh": "多一些"}, "means": "more"}
+  beats:
+    - labels: ["sand-in-cylinder", "cylinder-c", "jug-water", "pour-cup"]
+      caption: {"en": "This cylinder holds one hundred millilitres of dry sand. Next to it is one hundred millilitres of water.", "zh": "这只量筒装着一百毫升干沙，旁边是一百毫升水。"}
+    - sim: {"set": {"water-added": 20}}
+      labels: ["sand-in-cylinder", "cylinder-c", "jug-water"]
+      caption: {"en": "As water soaks into the sand, bubbles of air come up from between the grains, and the reading stays at one hundred millilitres.", "zh": "水渗进沙里，沙粒之间冒出一个个气泡，读数却还是一百毫升。"}
+    - sim: {"set": {"water-added": 100}}
+      labels: ["sand-in-cylinder", "water-over-sand", "cylinder-c"]
+      caption: {"en": "With all the water in, the cylinder reads one hundred and sixty-five millilitres in this model, not two hundred. Thirty-five millilitres of this sand was air.", "zh": "水全倒进去以后，在这个模型里量筒读一百六十五毫升，不是两百。这些沙里有三十五毫升原来是空气。"}
+    - layers: ["around-you"]
+      view: "xray"
+      camera: {"position": [-1.02, 0.3, 0.62], "target": [-1.18, 0.06, 0.13], "fov": 30}
+      labels: ["drink-can", "can-drink"]
+      caption: {"en": "In this unopened can, the can is a solid, the drink is a liquid, and the space above the drink holds gas.", "zh": "这罐没开的汽水里，罐是固体，汽水是液体，汽水上面的空间里是气体。"}
+    - layers: ["around-you"]
+      camera: {"position": [-1.42, 0.3, 0.66], "target": [-1.55, 0.05, 0.13], "fov": 30}
+      labels: ["ice-cube", "juice-glass"]
+      caption: {"en": "Water can be all three: ice is a solid, water is a liquid, and water vapour, an invisible gas, is in the air around us.", "zh": "水三种都可以是：冰是固体，水是液体，水蒸气是一种看不见的气体，就在我们周围的空气里。"}
+  index: {"parts": ["sand-in-cylinder", "water-over-sand", "jug-water", "sand-heap", "drink-can", "can-drink", "ice-cube", "juice-glass", "kaya-jar", "bicycle-wheel"]}
+---
+
+<Lang en>
+
+Two questions sort most matter. Does it keep its own shape? Does it keep its own volume? A solid keeps both; a liquid keeps its volume but takes the shape of its container; a gas keeps neither and spreads out to fill whatever holds it.
+
+Measuring cylinder C holds <Num s="S1">100 ml</Num> of dry sand, with <Num s="S1">100 ml</Num> of water beside it. Pour the water in. At first, bubbles of air come up from between the grains and the reading does not move: water is filling spaces that held air. In this model, after <Num s="S1">20 ml</Num> of water the reading is still <Num s="S1">100 ml</Num>. With all the water in, it reads <Num s="S1">165 ml</Num>, not <Num s="S1">200 ml</Num>. About <Num s="S1">35 ml</Num> of the dry sand was air, which escaped as bubbles. The grains themselves did not shrink: each is a solid.
+
+Now look at the small table. In an unopened can of drink, the metal can is a solid, the drink is a liquid, and the small space above the drink holds gas. The drink also has carbon dioxide gas dissolved in it; you see it only when the can is opened and bubbles form.
+
+Ice, the water in juice and the invisible water vapour in the air show that one substance can be a solid, a liquid or a gas. <TopicLink slug="water" ch="the-water-cycle">Water in Singapore: the water cycle</TopicLink> follows how water changes between them. The air in a bicycle tyre and in a basketball is a gas squeezed into a container.
+
+Use the Try it card to pour the water in steps of <Num s="S1">20 ml</Num>, keeping the same dry sand. Record each step: the line stays flat while water fills the gaps between the grains, then rises once the water stands above the sand.
+
+<More title={{"en": "Three states in a table", "zh": "一张三态表"}}>
+
+Compare the same sample without heating it or losing any of it.
+
+| State | Definite shape | Fixed volume | Squashed into a smaller space |
+|---|---|---|---|
+| Solid | Yes | Yes | Very little; some solids can be bent or reshaped |
+| Liquid | No | Yes | Much harder to squash than air |
+| Gas | No | No | Easily |
+
+For a heap of sand, look at the grains, not at the heap: each grain has a definite shape and a fixed volume, and the spaces between them hold air.
+
+</More>
+
+<More title={{"en": "Hard to sort", "zh": "不好分类的东西"}}>
+
+Kaya is a sweet, thick spread made with coconut milk or cream, eggs and sugar. It spreads and flows slowly, yet a scoop of it holds its shape for a while. Toothpaste and jelly are like that too. The simple examples in the table do not describe them well, and scientists use more words for such materials. The primary syllabus doesn't cover how to sort them; you'll learn more about how materials behave in secondary school. Be curious: watch what a sample does before you give it a name.
+
+</More>
+
+<More title={{"en": "Water in three states", "zh": "水的三态"}}>
+
+Water vapour is a gas and cannot be seen. The white mist above a kettle or a cold drink is made of tiny drops of liquid water, not vapour. How water melts, evaporates, boils and condenses is in <TopicLink slug="water" ch="the-water-cycle">Water in Singapore: the water cycle</TopicLink>.
+
+</More>
+
+<More title={{"en": "Look closer (beyond the syllabus)", "zh": "凑近看（课纲之外）"}}>
+
+Scientists use a model in which matter is made of tiny <Term id="particle">particles</Term>. In a solid the particles are packed close and stay in place, only jiggling; in a liquid they are close but can slide past each other; in a gas they are far apart and move about freely. This is a model scientists use: the primary syllabus doesn't cover it; you'll learn it in secondary school. Every question in this topic can be answered without it, using mass, space, shape and volume.
+
+<Figure src="figures/states-of-matter-look-closer" alt={{"en": "Three glass boxes of the same size: in the first, beads packed in neat rows; in the second, beads jumbled but touching; in the third, only a few beads far apart.", "zh": "三只一样大的玻璃盒：第一只里珠子排得整整齐齐；第二只里珠子乱堆但互相挨着；第三只里只有几颗珠子，相隔很远。"}} caption={{"en": "The particle model, beyond the primary syllabus: packed in a solid, touching but jumbled in a liquid, far apart in a gas. The beads stand for particles; real particles are far too small to see. Illustration for this topic.", "zh": "微粒模型，小学课纲之外：固体里排得紧，液体里挨着但乱，气体里相隔很远。珠子代表微粒；真实的微粒小得根本看不见。为本主题画的示意图。"}} />
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+用两个问题，就能给大多数物质分类：它有没有自己固定的形状？有没有自己固定的体积？固体两样都有；液体体积固定，形状随容器变；气体两样都没有，会散开，充满装它的东西。
+
+量筒 C 装着 <Num s="S1">100 ml</Num> 干沙，旁边有 <Num s="S1">100 ml</Num> 水。把水倒进去。一开始，沙粒之间冒出气泡，读数却不动：水正在填原来装着空气的空隙。在这个模型里，倒进 <Num s="S1">20 ml</Num> 水以后，读数还是 <Num s="S1">100 ml</Num>。水全倒进去，读 <Num s="S1">165 ml</Num>，不是 <Num s="S1">200 ml</Num>。干沙里约有 <Num s="S1">35 ml</Num> 是空气，冒着泡跑掉了。沙粒本身并没有变小：每一粒都是固体。
+
+再看小桌。一罐没开的汽水里，金属罐是固体，汽水是液体，汽水上面那一小段空间里是气体。汽水里还溶着二氧化碳，要等罐子打开、冒出气泡才看得见。
+
+冰、果汁里的水、空气里看不见的水蒸气，说明同一种物质可以是固体、液体，也可以是气体。水怎样在这三态之间变化，在<TopicLink slug="water" ch="the-water-cycle">“新加坡的水”主题的水循环一章</TopicLink>里讲。脚车轮胎和篮球里的空气，是压进容器里的气体。
+
+用“试一试”卡片每次倒 <Num s="S1">20 ml</Num> 水，沙始终是那一量筒干沙。每倒一次记一行：水还在填沙粒之间的空隙时，折线是平的；水面升到沙面上以后，折线才往上走。
+
+<More title={{"en": "Three states in a table", "zh": "一张三态表"}}>
+
+比较的是同一份东西，不加热，也不让它少掉。
+
+| 状态 | 固定的形状 | 固定的体积 | 能不能压进更小的空间 |
+|---|---|---|---|
+| 固体 | 有 | 有 | 几乎不能；有些固体能弯曲或改变形状 |
+| 液体 | 没有 | 有 | 比空气难压得多 |
+| 气体 | 没有 | 没有 | 容易 |
+
+看一堆沙，要看沙粒，不要看沙堆：每一粒都有固定的形状和固定的体积，沙粒之间的空隙里是空气。
+
+</More>
+
+<More title={{"en": "Hard to sort", "zh": "不好分类的东西"}}>
+
+咖椰是用椰浆、鸡蛋和糖做的又甜又稠的抹酱。它能抹开，也会慢慢流动，挖出来的一勺却能保持形状一阵子。牙膏、果冻也有点像这样。表里那几个简单的例子描述不好它们，科学家用更多的词来描述这类东西。小学课纲没有讲它们怎么分类，中学会学更多关于材料性质的知识。保持好奇：先看看它会怎样，再给它起名字。
+
+</More>
+
+<More title={{"en": "Water in three states", "zh": "水的三态"}}>
+
+水蒸气是气体，看不见。水壶口上或冰饮料旁边的白雾，是一颗颗很小的液态水滴，不是水蒸气。水怎样融化、蒸发、沸腾和凝结，在<TopicLink slug="water" ch="the-water-cycle">“新加坡的水”主题的水循环一章</TopicLink>里讲。
+
+</More>
+
+<More title={{"en": "Look closer (beyond the syllabus)", "zh": "凑近看（课纲之外）"}}>
+
+科学家用一种模型来解释物质：物质由极小的<Term id="particle">微粒</Term>组成。固体里的微粒挨得很紧，待在原位，只在那里振动；液体里的微粒也挨着，但能互相滑过；气体里的微粒相隔很远，到处自由运动。这是科学家用的一种模型：小学课纲没有讲，中学会学。本主题的每个问题，不用它也都答得出，用质量、空间、形状和体积就够了。
+
+<Figure src="figures/states-of-matter-look-closer" alt={{"en": "Three glass boxes of the same size: in the first, beads packed in neat rows; in the second, beads jumbled but touching; in the third, only a few beads far apart.", "zh": "三只一样大的玻璃盒：第一只里珠子排得整整齐齐；第二只里珠子乱堆但互相挨着；第三只里只有几颗珠子，相隔很远。"}} caption={{"en": "The particle model, beyond the primary syllabus: packed in a solid, touching but jumbled in a liquid, far apart in a gas. The beads stand for particles; real particles are far too small to see. Illustration for this topic.", "zh": "微粒模型，小学课纲之外：固体里排得紧，液体里挨着但乱，气体里相隔很远。珠子代表微粒；真实的微粒小得根本看不见。为本主题画的示意图。"}} />
+
+</More>
+
+</Lang>

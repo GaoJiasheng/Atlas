@@ -1,0 +1,93 @@
+---
+id: "before-you-start"
+order: 0
+kind: background
+title: {"en": "Before you start", "zh": "开始之前"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: false
+  cutaway: "none"
+  layers: ["weighing", "measuring", "air-bench", "syringes", "grains", "air-flow"]
+  hide: ["torch-beam"]
+  labels: ["cylinder-a", "basin", "syringe-rack"]
+  camera: {"position": [0.66, 1.02, 1.9], "target": [-0.06, 0.03, -0.02], "fov": 30}
+  summary: {"en": "Everything on this bench is matter: the stone, the water and even the air. This topic measures how much space things take up and how much mass they have, and sorts them into solids, liquids and gases.", "zh": "这张实验台上的东西都是物质：石头、水，连空气也是。本主题量一量东西占据多少空间、有多少质量，再把它们分成固体、液体和气体。"}
+  note: {"en": "This is a model of a school science bench, drawn life size. The readings on the balances, cylinders and syringes are worked out by the model from measured values for air and water and from the sizes of the apparatus (marked SIM); a real experiment gives slightly different readings each time. The sand and sugar grains in chapter 2 are drawn 40 times life size, separately from the bench.", "zh": "这是一张按实物大小画的学校科学实验台。秤、量筒、针筒上的读数，是模型根据空气和水的实测数值、器材的尺寸算出来的（标 SIM）；真实的实验每次读数会有一点不同。第 2 章的沙粒、糖粒放大了 40 倍，和实验台分开画。"}
+  beats:
+    - labels: ["balance-a", "cylinder-a", "basin", "syringe-rack", "sand-heap"]
+      caption: {"en": "This bench has five stations: weighing, measuring volume, air, squeezing, and sand and sugar. Each one tests a different idea about matter.", "zh": "这张实验台有五个工位：称质量、量体积、空气、压缩，还有沙和糖。每个工位检验一个关于物质的想法。"}
+    - camera: "scales-view"
+      labels: ["stone", "balance-a", "object-tray"]
+      caption: {"en": "Matter is anything that has mass and takes up space. An electronic balance measures mass, in grams.", "zh": "物质是任何有质量、占据空间的东西。电子秤量的是质量，单位是克。"}
+    - camera: "cylinders-view"
+      labels: ["cylinder-a", "cyl-a-water"]
+      caption: {"en": "A measuring cylinder measures the volume of a liquid, in millilitres. Volume is how much space something takes up.", "zh": "量筒量的是液体的体积，单位是毫升。体积就是东西占据的空间有多大。"}
+    - camera: "table-view"
+      layers: ["around-you"]
+      labels: ["drink-can", "ice-cube", "bicycle-wheel"]
+      caption: {"en": "Solids, liquids and gases are all around us, even in a can of drink. The last chapter sorts some of them.", "zh": "固体、液体、气体就在我们身边，连一罐汽水里都有。最后一章把它们分一分。"}
+  index: {"parts": ["balance-a", "cylinder-a", "basin", "syringe-air", "sand-heap", "drink-can"]}
+---
+
+<Lang en>
+
+Look across the science bench. You can weigh a stone, pour water from one vessel into another, trap air under water in a cup and press on sealed syringes. Each of these gives you evidence about <Term id="matter">matter</Term>. In science, matter is anything that has <Term id="mass">mass</Term> and <Term id="occupy-space">takes up space</Term>. Mass is how much matter something contains, measured in grams or kilograms.
+
+The bench has five stations. At the first, an electronic <Term id="balance">balance</Term> and a beam balance measure and compare masses. At the second, a <Term id="measuring-cylinder">measuring cylinder</Term> measures how much space a liquid or a solid takes up: its <Term id="volume">volume</Term>. The third tests whether air takes up space and has mass. At the fourth, three sealed syringes are squeezed. The fifth compares a heap of sand with the water beside it. A small table holds things from home.
+
+Each chapter uses shape and volume to tell apart the three <Term id="state-of-matter">states of matter</Term>: <Term id="solid">solid</Term>, <Term id="liquid">liquid</Term> and <Term id="gas">gas</Term>. Look for evidence in the readings, not only in how things look. A can of drink holds all three.
+
+From chapter 1 on, each chapter has a Try it card. It names what you change, what you keep the same and what you observe. Make a prediction, change the setting and record a row; a bar graph compares choices and a line graph follows a number as it goes up. Readings marked SIM are worked out by this model. Real apparatus gives slightly different readings each time, so real experiments are repeated.
+
+<More title={{"en": "How this model works", "zh": "这个模型怎样算"}}>
+
+The bench is drawn life size; the sizes of the vessels and the objects are design choices for this topic. The readings follow rules that use measured values for air and water, such as about <Num s="S6">1.2 g</Num> for a litre of air, and the sizes of the apparatus. For the same settings the model always gives the same reading. The sand and sugar grains in chapter 2 are drawn <Num s="S1">40 times</Num> life size, on their own, away from the bench.
+
+</More>
+
+<More title={{"en": "Matter in everyday words", "zh": "日常说法里的“物质”"}}>
+
+In everyday English, “it does not matter” means it is not important. In science, matter is the stuff things are made of. A stone, the water in a glass and the air in a room are all matter, whether or not you can see them or hold them.
+
+</More>
+
+<More title={{"en": "What you need from measuring", "zh": "要用到的量的知识"}}>
+
+Reading a scale, millilitres and litres, and grams and kilograms are in <TopicLink slug="measuring" ch="millilitres">Measuring: millilitres</TopicLink>. This topic uses those skills to compare materials. How ice turns into water and water into water vapour is in <TopicLink slug="water" ch="the-water-cycle">Water in Singapore: the water cycle</TopicLink>; this topic does not cover changes of state.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+看一看这张科学实验台。你可以称一块石头，把水从一个容器倒进另一个容器，在杯子里把空气关进水下，再压一压封了口的针筒。每一件事都给你一些关于<Term id="matter">物质</Term>的证据。在科学里，物质是任何有<Term id="mass">质量</Term>、<Term id="occupy-space">占据空间</Term>的东西。质量就是东西里有多少物质，单位是克或千克。
+
+实验台上有五个工位。第一个工位用<Term id="balance">电子秤</Term>和天平称质量、比质量。第二个工位用<Term id="measuring-cylinder">量筒</Term>量液体或固体占据多少空间，也就是它的<Term id="volume">体积</Term>。第三个工位检验空气是不是占据空间、有没有质量。第四个工位压三支封了口的针筒。第五个工位把一堆沙和旁边的一碟水放在一起比较。旁边还有一张小桌，放着家里常见的东西。
+
+每一章都从形状和体积两方面，区分<Term id="state-of-matter">物质的三态</Term>：<Term id="solid">固体</Term>、<Term id="liquid">液体</Term>和<Term id="gas">气体</Term>。判断时要看读数这些证据，不能只看样子。一罐汽水里，三态都有。
+
+从第 1 章起，每章都有一张“试一试”卡片。卡片写明改变什么、保持什么不变、观察什么。先猜一猜，再改变设置，记下一行；条形图用来比较几种选择，折线图用来看一个数增大时读数怎样变。标 SIM 的读数是这个模型算出来的。真实的器材每次读数都会差一点，所以真实的实验要重复做。
+
+<More title={{"en": "How this model works", "zh": "这个模型怎样算"}}>
+
+实验台按实物大小画；容器和物体的尺寸是本主题的设计取值。读数按一些规则算出来，规则用到空气和水的实测数值，比如每升空气约 <Num s="S6">1.2 g</Num>，也用到器材的尺寸。设置相同，模型给出的读数每次都一样。第 2 章的沙粒和糖粒放大了 <Num s="S1">40 倍</Num>，单独画，不在实验台上。
+
+</More>
+
+<More title={{"en": "Matter in everyday words", "zh": "日常说法里的“物质”"}}>
+
+日常说的“物质生活”“物质条件”，指的是吃的、用的东西和钱，不是科学里的“物质”。科学里的物质，是构成东西的材料：一块石头、一杯水、一屋子的空气，都是物质，不管你看不看得见、拿不拿得住。
+
+</More>
+
+<More title={{"en": "What you need from measuring", "zh": "要用到的量的知识"}}>
+
+怎样读刻度、毫升和升、克和千克，在<TopicLink slug="measuring" ch="millilitres">“量的读数”主题的“毫升与量杯”</TopicLink>里学过。本主题用这些本领来比较不同的材料。冰怎样变成水、水怎样变成水蒸气，在<TopicLink slug="water" ch="the-water-cycle">“新加坡的水”主题的水循环一章</TopicLink>里讲；本主题不讲物态变化。
+
+</More>
+
+</Lang>

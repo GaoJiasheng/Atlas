@@ -981,3 +981,47 @@ SpaceScene / Model3DStage，paper 默认、cinema 可切。原型：`archetypes.
 **门槛**：`pnpm check` 0 error / warning（3 条原有 hint）；`pnpm validate` 38 topics、0 error / warning；全量单测 111 files / 3,033 tests；`pnpm build` 79 pages / 25.59 s；上述全部截图门槛通过；最终原样 `CI=1 pnpm e2e` **186 passed / 27.0 min**。前轮共享机器上既有 sample-space voice 时序断言得到 3,685 ms（要求 < 2,800 ms），该项隔离重跑和完整重跑均通过，未改断言 / 超时 / 配置；首轮日志和 trace 留在报告所列路径。最终 CI 的 flask 100 次几何更新为 0.5 ms。
 
 本轮 E-MA1 / E-MA2 无未完项；正式主题施工尚未开始。作者数据形状见 docs/06「SpaceScene · 试一试 · 物质（matter）」「SpaceScene · 液面（`fill`）」与 `tests/space-scene/fixtures/matter-bench.ts`。
+
+### 9.2 主题施工（Claude Opus，2026-10-20）
+
+在 1caf36d（matter + light 引擎）与 fb6d6ba（配图）之上施工；**没有改引擎代码**，没有改 `package.json`。
+
+**数据**：`scripts/geo/states-of-matter/build-parts.ts` 生成 `parts.json`（文字在同目录 `text.ts`）。68 个零件 + 4 个 context（实验台、小桌、天平座、颗粒台座），13 个姿态、3 条流、6 个预设、1 个命名剖切面 `basin-section`。每个液体零件的轮廓与它的容器、`matter` 数据出自同一组常数（量筒内半径 1.85 cm、杯 3.0 cm、锥形瓶 4.2 → 1.6 cm、碗 8 cm 半球、水盆 12 cm、倒扣杯 3.5 cm × 9.0 cm、针筒内径 2.0 cm），单测比对。章节 7 个（00 背景 + 01–06），**36 拍**（§5.8 的 35 拍 + 第 05 章把“拿走砝码弹回”和“脚车打气”分成两拍，画面各说各的）。名词 16 个（删去 `container`、`grain`），来源 31 条（编号规则与空号见 `SOURCES.md`）。
+
+**与 §3–§5 的差异（都是为了“每一拍看得到字幕说的东西”）**：
+
+- **布局**：实验台改 1.8 m（1.6 m 放不下六个工位的真实尺寸）；量体积工位改成后排四只容器（量筒 A、高杯、锥形瓶、宽碗）一字排开、前排量筒 B 和四样固体；空气工位把水盆放前面、篮球与电子秤 B 放后面（24 cm 的篮球原先挡住水盆和杯子）；小桌 0.8 × 0.6 m，`side-table` 归 `around-you` 组（hero 不开这一组时空桌子也不画）；放大台座放在台后 1.7 m，只在第 02 章第 6 拍单独入镜。
+- **天平与捏海绵**：引擎的 `pose` 绑定会把绑定零件在“其它值”时压回静止（`lib/sim/bind.ts`：同一零件的绑定姿态优先于章 / 拍姿态），所以 §5.2 第 3 拍的拍姿态 `beam-tilt`、§5.3 第 4 拍的 `sponge-squeezed` 在 T1 绑定下不起作用。做法：加两个**不进模型的场景开关**控件 `beam`、`squeeze`（toggle，默认关），绑定在 T1 绑定之后（非静止的后者胜出），拍里写 `sim.set`。代价：这两个值会出现在 URL 的 `sim=` 里。引擎层面更干净的做法见“引擎问题”。
+- **球不画瘪**（Codex 事实核查 F-15-baseline）：600.0 g 是“未打气、外形不变”的读数，球外形一直是 75 cm 的球，状态 `flat` 的标签改为“Not pumped / 未打气”，删去 `ball-flat` 姿态；规格行写 `600 G UNPUMPED`。
+- **汽水罐不画气泡**（F-24-SEALED-CAN）：没开的罐里，汽水上方是一小段气体；溶解的二氧化碳开罐才冒泡。
+- **黏土长条**：`capsule` 的第二个尺寸是中段长度，20 cm³ 要中段 8.88 cm（全长 10.48 cm），不是 9.9 cm。
+- **气球**：几何画瘪的小尺寸，`balloons-full` 姿态把它们吹大（§3.7 原写法是反过来的）。
+- **不画“倒扣杯子倾斜”**：同 D10，用开孔。
+
+**引擎审查要求的内容修正**：
+
+- 湿沙、湿纸巾向**固定的深色 hex**（`#3d2e1b`、`#7f7c74`）混色，不用 `token:ink-*`（cinema 下是浅色，会变亮）；单测核对两色比原色暗 40 % 以上。
+- 封口 / 开孔的杯子：第 04 章第 2、3 拍用剖切面 `basin-section`（切掉水盆前半）并移开后面的篮球、气球；封口时画一团**关住的空气**（新零件 `trapped-air`，开口轮廓、浅色哑光，`cup-place = pushed` 且 `cup-hole = false` 时可见），开孔后它消失、杯里灌满水、气泡流出现、纸巾变深——两拍一眼分得开。
+- 弹珠排开的体积：输出 `object-volume` 取 1 位小数，卡片读 2.1 cm³，量筒读 102 ml。
+- 篮球与打气筒把手不相交：打气筒平放在球的前方，把手离球心 > 球半径 + 3 cm（单测）。
+
+**事实（Codex 第一轮事实核查，`art/codex-drafts/states-of-matter/facts-pass1.*`，55 条）**：§2.4 的显示数字全部不变（模型取整常数 1.18 g/ℓ、0.997 g/ml、4.5 × 10⁻⁷ /kPa 有 CIPM-2007、IAPWS 原文支持；若用不取整的 25 °C 干空气 1.184 g/ℓ，只有打 15 下变成 603.6 g，S6 的 note 写明）。改了的：FIBA 7 号球 750–770 mm、580–620 g（S38，原 749–780 mm、567–650 g 是旧版二手数据）；7.5–8.5 psi 只属于 NBA（S10），FIBA 只要求标气压和回弹测试；黏土密度来源改成一家厂商的 1.60 g/cm³（S18），通用 1.4–1.8 范围删去；软泡沫 15–60 kg/m³（S17）；休止角用一份实测 32.5° ± 2.4°（S14），不写“30–35°”的通用范围；砂糖粒度是各规格的平均筛孔（S40），糖粒“短棱柱”的形状写成示意；倒水“挂壁 1–2 ml”删去（无来源）；开孔后盆里水面高 1.3 mm（§0 D10 / §8.2 里的 1.0 mm 是杯里的水高出杯口，两者分开写）。标“示意 / 设计取值”的：容器内轮廓（ISO 尺寸表读不到）、篮球内 7.0 ℓ、每下 0.2 ℓ（S43 说明真实打气筒不同）、35 % 孔隙、沙柱不动、方框里的教室 9 × 7 × 3 m。
+
+**Codex 用到的**：研究（`art/codex-research/states-of-matter/`）、事实核查与重算、七章英文正文草稿与 35 条字幕草稿。英文逐章改写（并入节拍顺序、改掉不对应画面的句子、去掉 `<Num>` 包住非数字的写法）；字幕按最终画面重写；中文全部独立写成（固定的形状 / 固定的体积、脚车（自行车）、咖椰，只用“ ”）。
+
+**参考图**：没有下载 R1–R9 到 `scripts/geo/states-of-matter/refs/`；量筒、锥形瓶、针筒、电子秤的比例取自 S19–S21、S41 的厂商规格，其余按 §3.3 的 Tier-1 描述建模。这是已知差距（acceptance 的并排对照图未做）。
+
+**性能**（`pnpm shoot states-of-matter --perf --gpu`，1920 × 1080，Apple M5 Max / Metal）：全景静止 84 calls、FLOW 开 85、三角形 0.18 M、60 fps；各章 11–32 calls；预设 8–50。全部在 §3.4 / §8.2 的预算内（85 / 90 / 100、各章 ≤ 60、< 0.4 M）。
+
+**截图验收**：`pnpm shoot states-of-matter --beats --keys --layout --locale en,zh --theme paper,cinema` 四种组合各 36 拍、36 个拍链接全部打开在同一场景，液面核对 0 失败，键位 0 失败，八个尺寸 0 布局问题，`chapter highlights: all on screen`，console 干净。en-paper 每一拍都看过；zh / cinema 抽看（背景章、固体、液体、杯子剖面、针筒、沙）。
+
+**测试**：`tests/space-scene/states-of-matter-topic.test.ts`（62 项：24 个字幕数字 = 该拍设置下的模型输出、9 个状态、杯子三态、弹珠 2.1 cm³；正文每个 `<Num s="S1">` = 模型输出或设计值；措辞规则；湿色变暗；关住的空气只在封口时可见；黏土长条 20 cm³；篮球与打气筒把手不相交；罐里无气泡；10 个液体零件与容器同轴、不宽于内腔、装得下模型给的最大体积）；`tests-e2e/states-of-matter.spec.ts`（13 项）；首页统计与 smoke 计数改为 27 个已发布主题（并行的 light-and-shadows、singapore-land-use 合并时再加，ww2 的“图版 n”随字母序后移）。
+
+**引擎与流程问题（未改引擎）**：
+
+1. `pose` 绑定会把列出的零件在没有映射的值上压回静止，章 / 拍的 `pose` 因此管不到这些零件（见上“天平与捏海绵”）。建议：没有映射的值返回 `undefined`（不参与），只有显式写 `null` 才压回静止；之后可以删掉 `beam`、`squeeze` 两个场景开关，改回拍姿态。
+2. 剖切面同时切到实验台（context），台面剖面的金色斜线在第 04 章第 2、3 拍占了画面底部一条；建议 context 零件可选 `clip: false`。
+3. 液体（`membrane`）在剖面里不填色，封口杯里的空气要靠一个“开口轮廓”的零件画出来；若引擎给液体剖面填色，就不需要 `trapped-air` 这类辅助零件。
+4. （流程）共享 scratchpad：并行代理的 `shoot` 日志若用同名文件会互相覆盖（本轮遇到一次），日志要放各自的子目录。
+
+**门槛**（合并 main f3624a9 之后）：`pnpm check` 0 error / 0 warning；`pnpm validate` 42 topics、0 error / 0 warning；`pnpm test` 124 files / 3,267 tests；`pnpm build` 通过；`CI=1 pnpm e2e` 212 passed（31.7 min）；上面的截图验收四种组合 0 失败。`status: published`。

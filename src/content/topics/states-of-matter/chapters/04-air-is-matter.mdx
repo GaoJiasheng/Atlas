@@ -1,0 +1,127 @@
+---
+id: "air-is-matter"
+order: 4
+title: {"en": "Air is matter", "zh": "空气也是物质"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: false
+  cutaway: "none"
+  layers: ["air-bench", "air-flow"]
+  hide: ["torch-beam"]
+  labels: ["cup", "basin", "basketball"]
+  camera: {"position": [0.4, 0.4, 0.92], "target": [0.18, 0.12, -0.03], "fov": 30}
+  summary: {"en": "Air is matter. It takes up space: air trapped in an upside-down cup stops the water filling it. And it has mass: pump air into a ball and the balance reads more.", "zh": "空气是物质。它占据空间：倒扣的杯子里关着空气，水就灌不满杯子。它也有质量：给球打气，秤的读数就变大。"}
+  sim:
+    set: {"cup-place": "above", "cup-hole": false, "pumps": 0}
+    try:
+      vary: "pumps"
+      keep: [{"en": "Same ball, same balance", "zh": "同一只球，同一台秤"}]
+      observe: ["ball-mass", "air-added", "firmness"]
+      record: {"chart": {"y": "air-added"}}
+      predict:
+        prompt: {"en": "Pump twenty times. Will the balance read more, less or the same?", "zh": "打 20 下气，秤的读数会变大、变小，还是不变？"}
+        start: {"pumps": 0}
+        change: {"pumps": 20}
+        observe: "ball-mass"
+        options:
+          - {"id": "more", "label": {"en": "More", "zh": "变大"}, "means": "more"}
+          - {"id": "less", "label": {"en": "Less", "zh": "变小"}, "means": "less"}
+          - {"id": "same", "label": {"en": "The same", "zh": "不变"}, "means": "same"}
+  beats:
+    - camera: "basin-view"
+      labels: ["cup", "tissue", "basin", "basin-water"]
+      caption: {"en": "This cup looks empty, but it is full of air. A dry tissue is pushed into its bottom, and the cup is held upside down over a basin of water.", "zh": "这只杯子看起来是空的，其实装满了空气。杯底塞了一团干纸巾，杯子倒扣着，悬在一盆水上方。"}
+    - sim: {"set": {"cup-place": "pushed"}}
+      cutaway: "basin-section"
+      hide: ["torch-beam", "balance-b", "basketball", "ball-pump", "balloon-pump", "balloon-round", "balloon-long"]
+      camera: {"position": [0.22, 0.17, 0.66], "target": [0.19, 0.095, 0.12], "fov": 30}
+      labels: ["cup", "trapped-air", "cup-water", "basin-water-cup", "tissue"]
+      caption: {"en": "Pushed straight down, the cup keeps its air, so the air stops the cup filling and the tissue stays dry. In this model the water outside rises by about nine millimetres.", "zh": "把杯子竖直压下去，杯里的空气还在，空气挡住了水，杯子灌不满，纸巾还是干的。在这个模型里，外面的水面升高了约九毫米。"}
+    - sim: {"set": {"cup-place": "pushed", "cup-hole": true}}
+      cutaway: "basin-section"
+      hide: ["torch-beam", "balance-b", "basketball", "ball-pump", "balloon-pump", "balloon-round", "balloon-long"]
+      camera: {"position": [0.22, 0.17, 0.66], "target": [0.19, 0.095, 0.12], "fov": 30}
+      labels: ["cup-hole-mark", "tissue", "cup-water", "basin-water-cup"]
+      caption: {"en": "With a hole in the bottom of the cup, the air bubbles out and water rushes in. The tissue gets wet, and the water outside drops back down. Tilting the cup lets the air out in the same way.", "zh": "杯底开一个孔，空气冒着泡出去，水涌了进来。纸巾湿了，外面的水面又落了下来。把杯子倾斜，空气也会这样跑出去。"}
+    - sim: {"set": {"cup-place": "above", "cup-hole": false, "pumps": 0}}
+      camera: {"position": [0.52, 0.38, 0.32], "target": [0.17, 0.13, -0.18], "fov": 30}
+      labels: ["basketball", "balance-b"]
+      caption: {"en": "Air also has mass. Before it is pumped, this basketball reads six hundred grams in this model.", "zh": "空气也有质量。在这个模型里，这只篮球打气前读六百克。"}
+    - sim: {"set": {"cup-place": "above", "cup-hole": false, "pumps": 20}}
+      run: true
+      camera: {"position": [0.52, 0.38, 0.32], "target": [0.17, 0.13, -0.18], "fov": 30}
+      labels: ["basketball", "balance-b"]
+      caption: {"en": "After twenty pumps the ball is firm, and in this model it reads six hundred and four point seven grams. The extra mass is the air pumped in.", "zh": "打了二十下，球鼓起来了，在这个模型里读六百零四点七克。多出来的质量，就是打进去的空气。"}
+  index: {"parts": ["cup", "tissue", "trapped-air", "basin", "basin-water-cup", "cup-water", "cup-hole-mark", "basketball", "balance-b", "ball-pump"]}
+---
+
+<Lang en>
+
+The cup above the basin looks empty, but it is full of <Term id="air">air</Term>. A dry tissue is pushed into its bottom, and the cup is held upside down. You cannot see the air, but you can see what it does.
+
+Push the cup straight down into the water. The air cannot get out, so the air stops the cup filling and the tissue stays dry. In this model the water outside rises by about <Num s="S1">9 mm</Num>: the cup and the air trapped in it take up space, and the water cannot be in the same place at the same time. The water pushes the trapped air into a slightly smaller space, so it creeps only about <Num s="S1">1 mm</Num> above the rim inside the cup.
+
+<Figure src="figures/states-of-matter-air-takes-space" alt={{"en": "A round glass basin of water with an upside-down drinking glass pushed under the water; a dry crumpled tissue is wedged in the top of the glass, and the glass is almost all air.", "zh": "一盆水里倒扣着压进去一只玻璃杯；揉皱的干纸巾塞在杯子顶上，杯里几乎全是空气。"}} caption={{"en": "An upside-down glass pushed under water: the trapped air keeps the water out and the tissue dry. Illustration for this topic.", "zh": "倒扣着压进水里的杯子：关在里面的空气把水挡在外面，纸巾是干的。为本主题画的示意图。"}} />
+
+Now make a hole in the bottom of the cup. The air bubbles out through the hole, water rushes in, and the tissue gets wet. The water outside falls back, to only about <Num s="S1">1.3 mm</Num> above where it started: that is the space the glass itself takes up. Tilting the cup lets the air out in the same way, as bubbles escape from under the rim.
+
+Air also has mass. On balance B, the basketball reads <Num s="S1">600.0 g</Num> before it is pumped, in this model. After <Num s="S1">20</Num> pumps it reads about <Num s="S1">604.7 g</Num>. The ball keeps the same outside size, so the extra <Num s="S1">4.7 g</Num> is the air pumped in. Air takes up space and has mass, so air is matter, even though you cannot see it.
+
+Use the Try it card to change the number of pumps, keeping the same ball and the same balance. Each pump in this model pushes in the same amount of air, so the graph rises in a straight line.
+
+<More title={{"en": "The water outside rose", "zh": "外面的水面升高了"}}>
+
+In this model the basin starts at <Num s="S1">14.0 cm</Num>. With the cup's air trapped, it rises to <Num s="S1">14.9 cm</Num>, and the water inside the cup is <Num s="S1">1.0 mm</Num> above the rim. With the hole open, it falls to <Num s="S1">14.1 cm</Num>. The trapped air is squashed a little by the water, just as air is squashed in the syringes of chapter 5.
+
+</More>
+
+<More title={{"en": "Balloons on a balance", "zh": "天平上的气球"}}>
+
+A classroom demonstration balances two sets of balloons, one inside the other, on a beam balance. One set is blown up with a pump and put back: that pan goes down. A pump is used instead of breath so that no moisture from your lungs gets in. This topic weighs a basketball instead, because a balloon gets much bigger as it is blown up, and the air around it then pushes up on it more, which makes the extra reading hard to work out.
+
+</More>
+
+<More title={{"en": "How heavy is air", "zh": "空气有多重"}}>
+
+Dry air at <Num s="S6">25 °C</Num> and ordinary air pressure has a mass of about <Num s="S6">1.2 g</Num> for every litre; warmer or damper air is a little lighter. In this model each pump pushes in <Num s="S1">0.236 g</Num> of air. A classroom <Num s="S1">9 × 7 × 3 m</Num> holds about <Num s="S1">220 kg</Num> of air at that density. Do not pump a ball, a balloon or a tyre harder than its maker says.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+水盆上方的杯子看起来是空的，其实装满了<Term id="air">空气</Term>。杯底塞了一团干纸巾，杯子倒扣着。空气看不见，但你可以看见它做了什么。
+
+把杯子竖直压进水里。空气出不去，挡住了水，杯子灌不满，纸巾还是干的。在这个模型里，外面的水面升高了约 <Num s="S1">9 mm</Num>：杯子和关在里面的空气占据了空间，水不能同时待在同一个地方。水把关在里面的空气压紧了一点，所以杯里的水只比杯口高约 <Num s="S1">1 mm</Num>。
+
+<Figure src="figures/states-of-matter-air-takes-space" alt={{"en": "A round glass basin of water with an upside-down drinking glass pushed under the water; a dry crumpled tissue is wedged in the top of the glass, and the glass is almost all air.", "zh": "一盆水里倒扣着压进去一只玻璃杯；揉皱的干纸巾塞在杯子顶上，杯里几乎全是空气。"}} caption={{"en": "An upside-down glass pushed under water: the trapped air keeps the water out and the tissue dry. Illustration for this topic.", "zh": "倒扣着压进水里的杯子：关在里面的空气把水挡在外面，纸巾是干的。为本主题画的示意图。"}} />
+
+现在在杯底开一个孔。空气从孔里冒着泡出去，水涌了进来，纸巾湿了。外面的水面落了回去，只比原来高约 <Num s="S1">1.3 mm</Num>：那是玻璃杯本身占据的空间。把杯子倾斜，空气也会这样从杯口跑出去。
+
+空气也有质量。在这个模型里，电子秤 B 上的篮球打气前读 <Num s="S1">600.0 g</Num>，打了 <Num s="S1">20</Num> 下以后读约 <Num s="S1">604.7 g</Num>。球的外面大小不变，所以多出来的 <Num s="S1">4.7 g</Num> 就是打进去的空气。空气占据空间，又有质量，所以空气是物质，哪怕你看不见它。
+
+用“试一试”卡片改变打气的次数，球和秤都不换。在这个模型里，每打一下压进去的空气一样多，所以图上是一条直线。
+
+<More title={{"en": "The water outside rose", "zh": "外面的水面升高了"}}>
+
+在这个模型里，盆里的水开始时深 <Num s="S1">14.0 cm</Num>。杯里的空气关住时，水面升到 <Num s="S1">14.9 cm</Num>，杯里的水比杯口高 <Num s="S1">1.0 mm</Num>。开了孔，水面落到 <Num s="S1">14.1 cm</Num>。关在里面的空气被水压紧了一点，就像第 5 章针筒里的空气被压紧一样。
+
+</More>
+
+<More title={{"en": "Balloons on a balance", "zh": "天平上的气球"}}>
+
+课堂上有一个演示：把两套套在一起的双层气球放在天平两边，先让天平平衡。用打气筒把其中一套打大，再放回原来的秤盘：那一边沉了下去。用打气筒而不用嘴吹，是为了不把肺里的水汽带进去。本主题改为称篮球，因为气球越吹越大，周围的空气托它的力也跟着变大，多出来的读数就不好算了。
+
+</More>
+
+<More title={{"en": "How heavy is air", "zh": "空气有多重"}}>
+
+<Num s="S6">25 °C</Num>、普通气压下的干空气，每升质量约 <Num s="S6">1.2 g</Num>；空气热一点、湿一点，就轻一点。在这个模型里，每打一下压进 <Num s="S1">0.236 g</Num> 空气。按这个密度，一间 <Num s="S1">9 × 7 × 3 m</Num> 的教室里约有 <Num s="S1">220 kg</Num> 空气。给球、气球、轮胎打气，不要超过上面标的气压。
+
+</More>
+
+</Lang>

@@ -1,0 +1,113 @@
+---
+id: "liquids"
+order: 3
+title: {"en": "Liquids", "zh": "液体"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: false
+  cutaway: "none"
+  layers: ["measuring"]
+  hide: ["torch-beam", "cylinder-b", "cyl-b-water", "drop-stone", "drop-marble", "drop-clay-ball", "drop-clay-roll"]
+  labels: ["cylinder-a", "cyl-a-water", "flask"]
+  camera: {"position": [-0.16, 0.3, 0.66], "target": [-0.22, 0.1, -0.12], "fov": 30}
+  summary: {"en": "A liquid has no definite shape: it takes the shape of its container. But it keeps its volume. The same 200 ml of water stands tall in a narrow cylinder and low in a wide bowl, and still measures 200 ml when poured back.", "zh": "液体没有固定的形状，它的形状随容器变；但它的体积不变。同样 200 毫升的水，在细长的量筒里高、在宽碗里矮，倒回量筒还是 200 毫升。"}
+  sim:
+    set: {"container": "cylinder"}
+    try:
+      vary: "container"
+      keep: [{"en": "The same 200 ml of water", "zh": "同样的 200 毫升水"}]
+      observe: ["level", "poured"]
+      record: {"chart": {"y": "level"}}
+      predict:
+        prompt: {"en": "Pour the water from the tall glass into the wide bowl, then back into the cylinder. Will it measure more than, less than, or the same as 200 ml?", "zh": "把水从高玻璃杯倒进宽碗，再倒回量筒，读数会比 200 毫升多、少，还是一样？"}
+        start: {"container": "glass"}
+        change: {"container": "bowl"}
+        observe: "poured"
+        options:
+          - {"id": "more", "label": {"en": "More", "zh": "多"}, "means": "more"}
+          - {"id": "less", "label": {"en": "Less", "zh": "少"}, "means": "less"}
+          - {"id": "same", "label": {"en": "The same", "zh": "一样"}, "means": "same"}
+  beats:
+    - labels: ["cylinder-a", "cyl-a-water"]
+      caption: {"en": "Two hundred millilitres of water fills this narrow measuring cylinder to a height of eighteen point six centimetres in this model.", "zh": "在这个模型里，两百毫升水把这只细长的量筒装到十八点六厘米高。"}
+    - sim: {"set": {"container": "glass"}}
+      labels: ["tall-glass", "glass-water", "cylinder-a"]
+      caption: {"en": "Poured into a tall glass, the same water takes the shape of the glass. In this model it stands seven point one centimetres high.", "zh": "倒进高玻璃杯，同样的水变成了杯子的形状。在这个模型里，水高七点一厘米。"}
+    - sim: {"set": {"container": "flask"}}
+      labels: ["flask", "flask-water"]
+      caption: {"en": "In the conical flask it spreads over the wide bottom and stands only five centimetres high.", "zh": "倒进锥形瓶，水铺满宽宽的瓶底，只有五厘米高。"}
+    - sim: {"set": {"container": "bowl"}}
+      labels: ["bowl", "bowl-water"]
+      caption: {"en": "In the wide bowl it is only three centimetres deep. The water looks like less, but it is the same water.", "zh": "倒进宽碗，水只有三厘米深。看起来少了，其实还是那些水。"}
+    - sim: {"set": {"container": "cylinder"}}
+      labels: ["cylinder-a", "cyl-a-water", "bowl"]
+      caption: {"en": "Poured back into the cylinder, it measures two hundred millilitres again. A liquid changes its shape, but not its volume.", "zh": "倒回量筒，又是两百毫升。液体会改变形状，但不会改变体积。"}
+  index: {"parts": ["cylinder-a", "cyl-a-water", "tall-glass", "glass-water", "flask", "flask-water", "bowl", "bowl-water"]}
+---
+
+<Lang en>
+
+Measuring cylinder A holds <Num s="S1">200 ml</Num> of water. In this model the water stands about <Num s="S1">18.6 cm</Num> high, because the cylinder is narrow. Read the volume from the scale on its side, not from how tall the water looks: you will follow the same water from vessel to vessel.
+
+Pour it into the tall glass. The water spreads across the wider bottom and takes the shape of the inside of the glass, standing about <Num s="S1">7.1 cm</Num> high in this model. The glass is a container: it holds the water and gives it its shape. Unlike the stone, the water does not keep a shape of its own when it is moved.
+
+Next pour it into the conical flask, then into the wide bowl. In this model the water stands about <Num s="S1">5.0 cm</Num> high in the flask and only about <Num s="S1">3.0 cm</Num> deep in the bowl. Each time its outline changes. The low surface in the bowl does not mean that water has gone: the same amount is spread over a wider space.
+
+Pour it back into the cylinder and it measures <Num s="S1">200 ml</Num> again. A liquid has no definite shape, but it has a fixed volume: the same water keeps its volume when it is poured from one container to another, as long as none is spilt. In every vessel its surface settles flat and level. Juice, oil and syrup behave the same way, although thick liquids flow more slowly.
+
+Use the Try it card to change the container, keeping the same water. Record the height and the volume for each. The bars for height are all different; the volume column stays the same.
+
+<More title={{"en": "Why the level changes", "zh": "为什么液面高低不同"}}>
+
+The same volume spread over a wider bottom makes a thinner layer. The shape matters too: the flask is wide at the bottom and the bowl gets wider as the water rises. In this model the heights are <Num s="S1">18.6 cm</Num> in the cylinder, <Num s="S1">7.1 cm</Num> in the glass, <Num s="S1">5.0 cm</Num> in the flask and <Num s="S1">3.0 cm</Num> in the bowl.
+
+</More>
+
+<More title={{"en": "A level surface", "zh": "平平的液面"}}>
+
+Where water touches the glass wall of a cylinder, its surface curves up a little. This curve is the <Term id="meniscus">meniscus</Term>. Keep your eye level with the water and read the bottom of the curve. In a real pour a few drops cling to the walls; this model pours every drop.
+
+</More>
+
+<More title={{"en": "What a fixed volume means", "zh": "“体积固定”是什么意思"}}>
+
+A fixed volume here means that the same sample keeps its volume when it is moved from one container to another. It does not mean the volume can never change: most materials get a little bigger when they are heated and a little smaller when they cool. This investigation keeps the temperature the same.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+量筒 A 装着 <Num s="S1">200 ml</Num> 水。在这个模型里，水高约 <Num s="S1">18.6 cm</Num>，因为量筒很细。读体积要看侧面的刻度，不要看水显得有多高：接下来要跟着同样的这些水，从一个容器倒到另一个容器。
+
+把它倒进高玻璃杯。水铺满比较宽的杯底，变成杯子里面的形状，在这个模型里高约 <Num s="S1">7.1 cm</Num>。杯子是容器：它装着水，也给了水形状。水和石头不一样，挪个地方，它不会保持自己的形状。
+
+接着把水倒进锥形瓶，再倒进宽碗。在这个模型里，水在锥形瓶里高约 <Num s="S1">5.0 cm</Num>，在碗里只有约 <Num s="S1">3.0 cm</Num> 深。每倒一次，水的轮廓就变一次。碗里的水面低，不等于水少了：同样多的水摊在更宽的地方。
+
+再倒回量筒，读数又是 <Num s="S1">200 ml</Num>。液体没有固定的形状，但有固定的体积：只要没洒出来，同样的水从一个容器倒进另一个容器，体积不变。不管倒进哪个容器，水面都是平平的。果汁、油、糖浆也一样，只是稠的液体流得慢一些。
+
+用“试一试”卡片换容器，水始终是那 200 毫升。每种容器记下液面高度和体积。代表高度的条形高低各不相同；体积那一列却每行都一样。
+
+<More title={{"en": "Why the level changes", "zh": "为什么液面高低不同"}}>
+
+同样的体积摊在更宽的底上，水层就更薄。形状也有关系：锥形瓶底部宽，碗越往上越宽。在这个模型里，水在量筒里高 <Num s="S1">18.6 cm</Num>，在杯里 <Num s="S1">7.1 cm</Num>，在锥形瓶里 <Num s="S1">5.0 cm</Num>，在碗里 <Num s="S1">3.0 cm</Num>。
+
+</More>
+
+<More title={{"en": "A level surface", "zh": "平平的液面"}}>
+
+水碰到量筒玻璃壁的地方，水面会往上弯一点。这一圈弯起的液面叫<Term id="meniscus">弯月面</Term>。读数时眼睛和水面平齐，读弯曲液面最低的地方。真实倒水时，会有几滴挂在壁上；这个模型把每一滴都倒过去了。
+
+</More>
+
+<More title={{"en": "What a fixed volume means", "zh": "“体积固定”是什么意思"}}>
+
+这里说的“体积固定”，是指同一份东西从一个容器换到另一个容器，体积不变。不是说体积永远不会变：大多数东西受热会胀大一点，变冷会缩小一点。这个实验里温度一直不变。
+
+</More>
+
+</Lang>

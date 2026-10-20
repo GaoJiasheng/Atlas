@@ -1,0 +1,120 @@
+---
+id: "mass-and-space"
+order: 1
+title: {"en": "Mass and space", "zh": "质量与空间"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: false
+  cutaway: "none"
+  layers: ["weighing", "measuring"]
+  hide: ["torch-beam"]
+  labels: ["balance-a", "stone", "sponge"]
+  camera: {"position": [-0.42, 0.45, 0.8], "target": [-0.6, 0.03, 0.0], "fov": 30}
+  summary: {"en": "Everything that is matter has mass and takes up space. A big thing is not always heavier than a small one: a large sponge has less mass than a small stone.", "zh": "凡是物质都有质量，都占据空间。大的东西不一定比小的重：一大块海绵的质量比一小块石头还小。"}
+  sim:
+    set: {"weigh-object": "stone"}
+    try:
+      vary: "weigh-object"
+      keep: [{"en": "Same balance, set to zero first", "zh": "同一台电子秤，先归零"}]
+      observe: ["mass"]
+      record: {"chart": true}
+      predict:
+        prompt: {"en": "The sponge is much bigger than the stone. Swap the sponge for the stone: will the reading go up, go down or stay the same?", "zh": "海绵比石头大得多。把秤上的海绵换成石头，读数会变大、变小，还是不变？"}
+        start: {"weigh-object": "sponge"}
+        change: {"weigh-object": "stone"}
+        observe: "mass"
+        options:
+          - {"id": "more", "label": {"en": "Go up", "zh": "变大"}, "means": "more"}
+          - {"id": "less", "label": {"en": "Go down", "zh": "变小"}, "means": "less"}
+          - {"id": "same", "label": {"en": "Stay the same", "zh": "不变"}, "means": "same"}
+  beats:
+    - labels: ["balance-a", "stone", "object-tray"]
+      caption: {"en": "Everything on this tray is matter. Each thing has mass, and the electronic balance measures it in grams. In this model the stone reads sixty-six point three grams.", "zh": "托盘上的每样东西都是物质，都有质量，电子秤以克为单位量出来。在这个模型里，石头读六十六点三克。"}
+    - sim: {"set": {"weigh-object": "sponge"}}
+      labels: ["sponge", "balance-a", "stone"]
+      caption: {"en": "The sponge takes up about fifteen times as much space as the stone, but in this model it reads only eleven point five grams.", "zh": "海绵占据的空间差不多是石头的十五倍，可是在这个模型里，它只读十一点五克。"}
+    - sim: {"set": {"weigh-object": "water", "beam": true}}
+      camera: {"position": [-0.48, 0.3, 0.42], "target": [-0.62, 0.1, -0.17], "fov": 30}
+      labels: ["beam-balance", "sponge", "stone"]
+      caption: {"en": "On the beam balance, the side with the small stone goes down. A bigger thing is not always heavier.", "zh": "放在天平上，小石头那一边沉了下去。大的东西不一定更重。"}
+    - sim: {"set": {"weigh-object": "water"}}
+      labels: ["water-beaker", "balance-a"]
+      caption: {"en": "Liquids have mass too. With the empty beaker set to zero first, two hundred millilitres of water reads one hundred and ninety-nine point four grams in this model.", "zh": "液体也有质量。先放空烧杯归零，在这个模型里，两百毫升水读一百九十九点四克。"}
+    - hide: []
+      layers: ["around-you"]
+      camera: {"position": [-1.36, 0.3, 0.74], "target": [-1.56, 0.05, 0.22], "fov": 30}
+      labels: ["torch", "torch-beam"]
+      caption: {"en": "The torch is matter, but the light from it is not. Light has no mass and takes up no space. Light and heat are forms of energy.", "zh": "手电筒是物质，它发出的光却不是。光没有质量，也不占据空间。光和热是能量的形式。"}
+  index: {"parts": ["balance-a", "beam-balance", "stone", "sponge", "marble", "clay-ball", "water-beaker", "torch"]}
+---
+
+<Lang en>
+
+Start with the stone on the electronic balance. Its reading is the stone's mass, in grams: in this model it reads about <Num s="S1">66 g</Num>. Before you weigh anything, set the balance to zero. To weigh a liquid, put the empty beaker on first and zero the balance with it in place; then the reading is only what you pour in.
+
+Now swap the stone for the sponge. The sponge takes up about <Num s="S1">15 times</Num> as much space, but in this model it reads only about <Num s="S1">12 g</Num>. Put the two on the beam balance and the side with the small stone goes down. You do not need a number to see it: the smaller thing has more mass. How big something is does not tell you how heavy it is.
+
+Mass and volume are two different quantities. The sponge is mostly holes full of air, and its thin solid walls do not have much mass. The stone is solid rock through and through. Both take up space: two things cannot be in the same place at the same time. Lower a stone into water and the water has to move aside, which the next chapter uses to measure the stone's volume.
+
+Liquids have mass too. In this model, <Num s="S1">200 ml</Num> of water in a zeroed beaker reads about <Num s="S1">199 g</Num>. Air has mass as well, as chapter 4 shows.
+
+Not everything is matter. A torch is matter, but the light it gives out is not: light has no mass and takes up no space. Light, sound and heat are forms of energy, which <TopicLink slug="energy-conversion" ch="before-you-start">How Energy Changes Form</TopicLink> follows.
+
+Use the Try it card to put each object on the balance in turn. Predict first, then record a row for each one and compare the bars: a taller bar means more mass, whatever the size of the object.
+
+<More title={{"en": "Mass and weight", "zh": "质量与重量"}}>
+
+Mass is how much matter something contains; its unit is the kilogram (kg). Weight is a different quantity: the pull of gravity on that mass. Everyday speech mixes the two words, but the balance readings here are masses. <TopicLink slug="forces" ch="gravity-and-weight">Forces: gravity and weight</TopicLink> explains the difference.
+
+</More>
+
+<More title={{"en": "Set it to zero", "zh": "先归零"}}>
+
+Setting a balance to zero with an empty container on it is called taring. The container's mass is then left out of the next reading, so you read only what you add. Keep the beaker on the pan while you pour. Comparing masses on balances is also in <TopicLink slug="measuring" ch="mass-and-balances">Measuring: mass and balances</TopicLink>. School balances can read to <Num s="S41">0.1 g</Num>, but the last digit of a display can drift a little.
+
+</More>
+
+<More title={{"en": "Big but light", "zh": "个子大，却轻"}}>
+
+In this model the sponge takes up <Num s="S1">384 cm³</Num> and reads <Num s="S1">11.5 g</Num>; the stone takes up <Num s="S1">25 cm³</Num> and reads <Num s="S1">66.3 g</Num>. These are the numbers for this model stone and this model sponge; a stone you weigh will give its own reading. Comparing how much mass there is in each cubic centimetre leads to an idea called density, which the primary syllabus doesn't cover; you'll learn it in secondary school.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+先看放在电子秤上的石头。秤上的读数就是石头的质量，单位是克：在这个模型里，它读约 <Num s="S1">66 g</Num>。称东西以前，先把秤归零。要称液体，就先把空烧杯放上去，连着烧杯一起归零；这样读数就只是倒进去的东西。
+
+现在把石头换成海绵。海绵占据的空间差不多是石头的 <Num s="S1">15 倍</Num>，可是在这个模型里，它只读约 <Num s="S1">12 g</Num>。把两样都放到天平上，小石头那一边沉了下去。不用看数字也看得出：小的那个质量反而大。东西大不大，说明不了它重不重。
+
+质量和体积是两个不同的量。海绵大部分是装满空气的孔，薄薄的固体孔壁没有多少质量；石头却里里外外都是实心的岩石。两样东西都占据空间：两样东西不能同时在同一个地方。把石头放进水里，水只好让开；下一章就用这一点来量石头的体积。
+
+液体也有质量。在这个模型里，先归零的烧杯里装 <Num s="S1">200 ml</Num> 水，读约 <Num s="S1">199 g</Num>。空气也有质量，第 4 章会看到。
+
+不是所有东西都是物质。手电筒是物质，它发出的光却不是：光没有质量，也不占据空间。光、声音和热都是能量的形式，<TopicLink slug="energy-conversion" ch="before-you-start">“能量是怎样转换的”</TopicLink>主题会跟着能量走一遍。
+
+用“试一试”卡片把几样东西轮流放上秤。先猜一猜，再每样记一行，比一比条形图：条越高，质量越大，跟东西的大小无关。
+
+<More title={{"en": "Mass and weight", "zh": "质量与重量"}}>
+
+质量是东西里有多少物质，单位是千克（kg）。重量是另一个量：重力对这份质量的拉力。日常说话常把两个词混着用，但这里秤上的读数都是质量。<TopicLink slug="forces" ch="gravity-and-weight">“力”主题的“重力与重量”</TopicLink>讲两者的分别。
+
+</More>
+
+<More title={{"en": "Set it to zero", "zh": "先归零"}}>
+
+放着空容器把秤调回零，叫作“归零”（也叫去皮）。这样，下一次读数里就不含容器的质量，读到的只是加进去的东西。倒水时烧杯要一直放在秤盘上。用秤比较质量，也可以看<TopicLink slug="measuring" ch="mass-and-balances">“量的读数”主题的“质量：哪个重”</TopicLink>。学校用的电子秤可以读到 <Num s="S41">0.1 g</Num>，但显示屏最后一位会有一点漂移。
+
+</More>
+
+<More title={{"en": "Big but light", "zh": "个子大，却轻"}}>
+
+在这个模型里，海绵占据 <Num s="S1">384 cm³</Num>，读 <Num s="S1">11.5 g</Num>；石头占据 <Num s="S1">25 cm³</Num>，读 <Num s="S1">66.3 g</Num>。这些是这块模型海绵、这块模型石头的数；你称的石头会有自己的读数。比较每立方厘米里有多少质量，会引出一个叫“密度”的概念，小学课纲没有讲，中学会学。
+
+</More>
+
+</Lang>
