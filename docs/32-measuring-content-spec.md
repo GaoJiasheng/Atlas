@@ -770,3 +770,39 @@ toSmall(c) → Measure(235 cm) ;  fromSmall(Measure(1250 ml), 'l') → 1 ℓ 250
 截图在 `shots/sample-lesson-measure/{en-paper,zh-cinema}/`；回归基线、比较清单、门槛日志在 `shots/measuring-regression/`（照仓库规则不进 git）。fixture 页面 JS 为 283.5 KB gzip（10 文件）。已看全部 24 拍，并检查 paper 的桌面 / 平板 / 手机与中文 cinema 手机的工具、作答与器具；修掉量杯过小及容量比较误导的问题。
 
 并行截图期间曾触发现有地理单测的 5 秒超时，以及既有 SpaceScene 锚点等待误差；最终验收采用串行完整 CI，全部通过，未放宽测试容差、未改其他主题内容。没有 merge 或 push。数据形状见 §9.3，与 §3 的差异见 §9.2；§8 的正式课程内容验收仍留给课程施工。
+
+### 9.5 正式课施工（2026-10-20，阶段 2–6）
+
+**规模**：13 步 58 拍（第 08 步 5 拍，见下）、题库 128 道（每步 8–10：第 11、13 步 9 道，其余 10 道）+ 练习 8 道（read-scale、count-intervals、set-scale、choose、order、input 六种），共 136 道全部自证；背景章 00 + 13 章 + 练习章；名词表 16 条、来源 19 条（`sources.json` / `SOURCES.md`）；三张章节图放在第 04、05、07 章第一段之后（alt / caption 按画面写，双语）；`topic.yaml` `status: published`，`illustration: measuring`。`tests/math-scene/measuring-lesson.test.ts`（144 项：0 lesson issue、步数拍数题数、每拍每题都画器具且归量读数域、15 个码都有题能诊断、km / ml 从第 10 步起、复合单位从第 11 步起、小数只在桥步、第 12 步 ≥ 3 道占位 0、固定说法、章节里无年级与 L / mL、每道题自证且在本步 `limits` 内）；`tests-e2e/measuring.spec.ts`（9 项：点刻度换拍与放大镜、读秤 + 工具 + 单位诊断、天平放砝码、数格子 + tick-counting 诊断、复合两框 + compound-place、纯键盘倒水、练习到总结 + compound-concatenated、zh 与“再往前一步”、390 × 844）；首页 / 冒烟计数改为 25 个已发布主题（数学 6 个、徽章 50、ww2 图版 25）。
+
+**分工与 Codex**：拍、要点、`limits`、每步 2 道样板题、练习 8 题由 Claude 手写（构建脚本在 scratchpad，产物是 `data/lesson.json`）。题库其余 102 道由 Codex 起草：13 条 `codex exec --sandbox danger-full-access`（4 条并行），brief 是 `scripts/math/drafts/BRIEF-measuring.md`（照 skill 的 codex-pool-brief 改：A11 写法、`{u:…}`、§9.3 的数据形状、各步题库计划），13 份草稿交回时都已 `check-pool --topic measuring --step <id>` 0 错 0 警告（Codex 在自己的会话里跑到通过），Claude 逐题读过（题意、数、课纲、中文）。英文正文由 Codex 按 `TEXT-BRIEF-measuring.md` 起草（4 条并行，以 `art/codex-drafts/measuring/` 的旧稿为底、按现在的拍重写），Claude 逐句核对、改写后定稿；中文正文（15 章）Claude 独立写，“ ”引号，术语按 D14（质量、容量、千克、千米；名词表注“公斤”“公里”）。
+
+**审题删改**（合并脚本里逐条记录）：两道几乎相同的选秤题删一道；两道读数不从 0 开始的指针秤（2–4 kg、2000–2100 g）改成从 0 起或换成天平；与练习 Q7（1 m 26 cm）、拍里 Mei Ling 128 cm 重复的身高改人名和数；与读数题同值的加米题改成 2 kg 400 g；身高尺比 1 m 5 cm 的题改成两条卷尺的箭头（见引擎问题 2）；书桌改巴士（书桌常用厘米）；中文“标数刻度”统一为“标了数的刻度”，“叶片 / 细绳”改“叶子 / 绳子”。改过的题全部重新自证。
+
+**与 §2.2 拍表不同的地方**（引擎约束下的写法）：
+1. `pair` / `set` 只收同一种器具、同一物理范围：第 04 步第 1 拍只画米尺（括号标 1 m），第 3 拍只画走廊的卷尺（铅笔只在算式与字幕里）；第 08 步原第 1 拍"尺、秤、量杯三件并排"拆成五个单器具拍（尺上铅笔 → 回形针 0–20 g 秤 → 米 0–10 kg 秤 → 木瓜 0–5 kg 秤 → 一桶水），所以全课 58 拍不是 57；第 09 步第 2 拍两台同为 0–1000 g 的秤（B 袋指到 1000），在同一刻度上看出 1 kg = 1000 g。
+2. 第 11 步第 4 拍、第 12 步第 5 拍用卷尺的箭头比 1 m 5 cm / 1 m 50 cm 与 205 / 250 cm（身高尺从 1 m 截断时，1 m 5 cm 只露出半个头顶）。
+3. 第 03 步第 4、5 拍加放大镜（数格子的弧画在身高尺有人的一侧，被头挡住）；第 06 步第 3 拍只用 `count` 不用 `zoom`（圆盘上的放大镜圈很大，压住表盘）；第 13 步第 2 拍用 `count` 1 → 1.4 代替放大镜。
+4. 成对 / 三件器具的 `label` 不写量（引擎问题 1），量写在字幕里（"Bag A is {u:900 g}…"）。
+5. 第 07 步第 2 拍两只同样的量杯 0–6 ℓ、不标数（`labels: none`），读"第 3 / 第 5 条线"。
+6. `limits`：第 04 步 `maxValue 100`（米尺 100 cm）、`partsPerLabel [1, 10]`（整米卷尺每格都标数）；第 11 步每小格加 5 cm（比 1 m 5 cm）与 200 g；`maxValue` 是刻度上限，按步给 30 / 200 / 100 / 1000 / 10 / 2000 / 5000 / 9999。
+
+**引擎问题（未改引擎，交主会话）**：
+1. 成对 / 三件器具的 `label` 原样印出，不走 `renderRich`：`{u:900 g}` 显示成字面量。课里已避开；应让 label 与括号标签一样渲染记号（并让 bare-quantity 校验覆盖它）。
+2. 身高尺 `from > 0`（如 100–200 cm）时人形截在最低一条刻度，读数在最低处时只剩半个头顶；可考虑这种情况下省掉人形或画到框底。
+3. 竖放身高尺的 `count` 弧画在人形一侧，被头挡住；`zoom` 的大框里画的是整段的弧（`count` 120 → 128 时框里仍是 1–5），与舞台上的 `count` 跨度不一致。
+4. 圆盘上 `zoom` 的小圆框按整段标数间隔的弦长画，半径很大，压住表盘中心和单位字。
+
+**门槛**（合并 main `99f37a8` 之后，同一工作树串行跑）：
+
+| 门槛 | 结果 |
+|---|---|
+| `pnpm check` | 0 errors、0 warnings（3 个既有 hints） |
+| `pnpm validate` | 36 topics，0 errors、0 warnings |
+| `pnpm test` | 108 文件、2932 tests 全部通过（含 `measuring-lesson.test.ts` 144 项） |
+| `pnpm build` | 通过，75 个静态页面 |
+| `pnpm shoot measuring --beats --tasks --keys --layout --locale en,zh --theme paper,cinema` | 四组（en / zh × paper / cinema）各 0 beat、0 task（128 道题库 × 三态 + 8 道练习与总结）、0 key、0 layout（8 个尺寸，含 390 × 844、1024 × 768 与从链接打开）失败，console 干净；页面 JS 283.8 KB gz |
+| `CI=1 pnpm e2e` | 163 passed（22.2 分钟；含 `measuring.spec.ts` 9 项、冒烟的 25 个主题计数） |
+
+截图在 `shots/measuring/{en,zh}-{paper,cinema}/`（不进 git）。逐张看过 en-paper 的 58 拍，抽看了 zh-paper、cinema、390 × 844、1024 × 768 与题目三态 / 练习总结。
+

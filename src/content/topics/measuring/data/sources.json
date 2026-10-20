@@ -1,0 +1,232 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "Ministry of Education Singapore, Curriculum Planning and Development Division. Mathematics Syllabus Primary One to Six (implementation starting with the 2021 Primary One cohort; updated October 2025). Big Ideas about Measures: p. 12; Skills: p. 14; Measurement: pp. 32, 34 and 36; Decimals: pp. 38 and 41.",
+        "zh": "新加坡教育部课程规划与发展司：《小学一至六年级数学课程纲要》（2021 年版，2025 年 10 月更新）。关于量的大概念：第 12 页；技能：第 14 页；量度：第 32、34、36 页；小数：第 38、41 页。"
+      },
+      "url": "https://www.moe.gov.sg/api/media/92bff26d-b2b4-4535-b868-b8415c744b91/2021-Primary-Mathematics-Syllabus-P1-to-P6-Updated-October-2025.pdf",
+      "note": {
+        "en": "The only source for what each step covers; the syllabus lines in the lesson are quoted from it. Pages as printed on the PDF; wording checked against the PDF on 2026-10-19. Estimating is not a syllabus line of its own: the Skills page names it as taught throughout, so step 08 teaches it and the checks only ask which estimate is sensible.",
+        "zh": "每一步学什么，只以这份课纲为准；课里的课纲条目照原文引用。页码是 PDF 上印的页码；措辞于 2026-10-19 对照 PDF 核对。估计不是单独的课纲条目：“技能”一页说它贯穿各课去教，所以第 08 步讲估计，小题只问哪个估计合理。"
+      }
+    },
+    {
+      "id": "S2",
+      "text": {
+        "en": "Ministry of Education Singapore: primary syllabuses page.",
+        "zh": "新加坡教育部：小学课程纲要页面。"
+      },
+      "url": "https://www.moe.gov.sg/primary/curriculum/syllabus",
+      "note": {
+        "en": "Version check of S1.",
+        "zh": "用于核对 S1 的版本。"
+      }
+    },
+    {
+      "id": "S3",
+      "text": {
+        "en": "TIMSS 2015 Encyclopedia. Singapore: The Mathematics Curriculum in Primary and Lower Secondary Grades. TIMSS & PIRLS International Study Center, Boston College.",
+        "zh": "《TIMSS 2015 百科》新加坡条目：小学与初中的数学课程。波士顿学院 TIMSS & PIRLS 国际研究中心。"
+      },
+      "url": "https://timssandpirls.bc.edu/timss2015/encyclopedia/countries/singapore/the-mathematics-curriculum-in-primary-and-lower-secondary-grades/",
+      "note": {
+        "en": "The Concrete-Pictorial-Abstract approach: the instrument on the stage, the number sentence under it, the words in the beat line.",
+        "zh": "“具体—图像—抽象”教学法：舞台上是器具，下面写算式，节拍行里是话。"
+      }
+    },
+    {
+      "id": "S4",
+      "text": {
+        "en": "Ministry of Education Singapore, Curriculum Planning and Development Division. Primary Mathematics Textbook 2A (2022), 2B (2022) and 3B (2023). Star Publishing.",
+        "zh": "新加坡教育部课程规划与发展司：《小学数学》课本 2A（2022）、2B（2022）、3B（2023）。Star Publishing 出版。"
+      },
+      "url": "https://sites.google.com/moe.edu.sg/math-resources-fsps/p2/tb-and-pb",
+      "note": {
+        "en": "For the usual order and the words used in class only, not copied: \"Each small part stands for 10 g\" and \"about 1 kg\" (2A, pp. 135–140), \"We write ℓ for litre\" (2B, p. 76), \"We write ml for millilitre\" and the level drawn flat (3B, pp. 62–64). Questions, pictures and wording in this lesson are our own.",
+        "zh": "只参考通常的教学顺序和课堂用语，不照抄：“Each small part stands for 10 g”和“about 1 kg”（2A 第 135–140 页），“We write ℓ for litre”（2B 第 76 页），“We write ml for millilitre”以及画成水平线的水面（3B 第 62–64 页）。本课的题目、插图和措辞都是自己写的。"
+      }
+    },
+    {
+      "id": "S5",
+      "text": {
+        "en": "Solomon, T. L., Vasilyeva, M., Huttenlocher, J. & Levine, S. C. (2015). Minding the gap: Children's difficulty conceptualizing spatial intervals as linear measurement units. Developmental Psychology 51(11), 1564–1573.",
+        "zh": "Solomon, T. L. 等（2015）：注意间隔——儿童难以把空间间隔理解为长度单位。《发展心理学》第 51 卷第 11 期，1564–1573 页。"
+      },
+      "url": "https://doi.org/10.1037/a0039707",
+      "note": {
+        "en": "Counting the marks instead of the spaces, and reading the end of a thing that does not start at 0 (steps 01, 02; the codes tick-counting and read-end-mark).",
+        "zh": "数刻度线而不数间隔；物体不从 0 开始时直接读末端（第 01、02 步；误解 tick-counting、read-end-mark）。"
+      }
+    },
+    {
+      "id": "S6",
+      "text": {
+        "en": "Gómezescobar, A., Guerrero, S. & Fernández-Cézar, R. (2020). How long is it? Difficulties with conventional ruler use in children aged 5 to 8. Early Childhood Education Journal 48, 693–701.",
+        "zh": "Gómezescobar, A.、Guerrero, S. 与 Fernández-Cézar, R.（2020）：有多长？5 到 8 岁儿童用尺子的困难。《幼儿教育杂志》第 48 卷，693–701 页。"
+      },
+      "url": "https://doi.org/10.1007/s10643-020-01030-y",
+      "note": {
+        "en": "Lining a thing up with 1 or with the edge of the ruler instead of 0 (step 01, beat 3).",
+        "zh": "把物体对准 1 或尺子的边，而不是对准 0（第 01 步第 3 拍）。"
+      }
+    },
+    {
+      "id": "S7",
+      "text": {
+        "en": "Clements, D. H. et al. (2020, online). Young children's actions on length measurement tasks: strategies and cognitive attributes. Mathematical Thinking and Learning.",
+        "zh": "Clements, D. H. 等（2020 年网络首发）：幼儿在量长度任务中的做法——策略与认知特点。《数学思维与学习》。"
+      },
+      "url": "https://doi.org/10.1080/10986065.2020.1843231",
+      "note": {
+        "en": "Counting from 1 on a broken ruler (step 02).",
+        "zh": "在断了的尺子上从 1 数起（第 02 步）。"
+      }
+    },
+    {
+      "id": "S8",
+      "text": {
+        "en": "Oxford University Press (2022). Numicon 3 Planning: Reading and creating scales with different intervals, p. 25.",
+        "zh": "牛津大学出版社（2022）：《Numicon 3 教学计划》，“读出和制作不同间隔的刻度”，第 25 页。"
+      },
+      "url": "https://cdn.oxfordowl.co.uk/2024/10/31/16/54/24/2209f377-1e1f-4e34-b193-65b5d81ffe80/Numicon_Planning_3.pdf",
+      "note": {
+        "en": "Reading scales whose small parts stand for 2, 5, 10, 20, 25, 50 or 100 (steps 03, 06, 10). The diagnosis of taking every small part as 1 is this lesson's own; this source gives no error rates.",
+        "zh": "读每一小格表示 2、5、10、20、25、50 或 100 的刻度（第 03、06、10 步）。“把每一小格都当成 1”这个诊断是本课自己提出的，这份资料没有统计错误率。"
+      }
+    },
+    {
+      "id": "S9",
+      "text": {
+        "en": "MacDonald, A. (2010). Heavy thinking: Young children's theorising about mass. Australian Primary Mathematics Classroom 15(4), 4–8.",
+        "zh": "MacDonald, A.（2010）：关于“重”的想法——幼儿对质量的理解。《澳大利亚小学数学课堂》第 15 卷第 4 期，4–8 页。"
+      },
+      "url": "https://files.eric.ed.gov/fulltext/EJ906679.pdf",
+      "note": {
+        "en": "\"Bigger is heavier\", and comparing a big light thing with a small heavy one (step 05).",
+        "zh": "“大的就重”，以及拿又大又轻的东西和又小又重的东西对比（第 05 步）。"
+      }
+    },
+    {
+      "id": "S10",
+      "text": {
+        "en": "Cheeseman, J. & McDonough, A. (2013). Testing young children's ideas of mass measurement. International Journal for Mathematics Teaching and Learning.",
+        "zh": "Cheeseman, J. 与 McDonough, A.（2013）：检验幼儿对质量测量的想法。《国际数学教与学杂志》。"
+      },
+      "url": "https://www.cimt.org.uk/journal/cheeseman.pdf",
+      "note": {
+        "en": "Reading a balance led by size and material, and drawing pans with clear bottoms (step 05; the codes balance-misread and size-is-mass).",
+        "zh": "看天平时被大小和材料带偏；天平的盘底要画清楚（第 05 步；误解 balance-misread、size-is-mass）。"
+      }
+    },
+    {
+      "id": "S11",
+      "text": {
+        "en": "Oak National Academy (2025). Use knowledge of decimal place value to convert between and compare metres and centimetres (Year 5).",
+        "zh": "Oak 国家学院（2025）：用小数的位值知识换算和比较米与厘米（五年级）。"
+      },
+      "url": "https://www.thenational.academy/teachers/lessons/use-knowledge-of-decimal-place-value-to-convert-between-and-compare-metres-and-centimetres",
+      "note": {
+        "en": "2 m 5 cm and 2 m 50 cm, and the zero that holds a place (steps 11, 12, 13; the code compound-place).",
+        "zh": "2 m 5 cm 与 2 m 50 cm，以及占位的 0（第 11、12、13 步；误解 compound-place）。"
+      }
+    },
+    {
+      "id": "S12",
+      "text": {
+        "en": "Rose, S. (2020, 28 August). A closer focus: Common misconceptions in maths. NFER.",
+        "zh": "Rose, S.（2020 年 8 月 28 日）：细看数学里的常见误解。英国国家教育研究基金会（NFER）。"
+      },
+      "url": "https://www.nfer.ac.uk/assessment-hub/a-closer-focus-common-misconceptions-in-maths/",
+      "note": {
+        "en": "Using 100 instead of 1000 between litres and millilitres (steps 10, 12). NFER notes it may also be a slip in working, so the feedback only says what the factor is.",
+        "zh": "升与毫升之间用 100 代替 1000（第 10、12 步）。NFER 也说这可能只是算错，所以反馈只说明进率是多少。"
+      }
+    },
+    {
+      "id": "S13",
+      "text": {
+        "en": "Bureau International des Poids et Mesures (2026). The International System of Units (SI), 9th edition, version 4.01: prefixes, p. 138; the litre, p. 142.",
+        "zh": "国际计量局（2026）：《国际单位制（SI）》第 9 版 4.01 版：词头，第 138 页；升，第 142 页。"
+      },
+      "url": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9-EN.pdf",
+      "note": {
+        "en": "Kilo is a thousand, centi a hundredth, milli a thousandth: the 1000 and 100 between the units. Both ℓ and L are allowed for the litre; this lesson writes ℓ, as MOE does.",
+        "zh": "千（kilo）是一千，厘（centi）是百分之一，毫（milli）是千分之一：这就是单位之间的 1000 和 100。升可以写 ℓ 也可以写 L；本课照教育部写 ℓ。"
+      }
+    },
+    {
+      "id": "S14",
+      "text": {
+        "en": "Weights and Measures Office, Singapore. Consumer tips for products sold by weight.",
+        "zh": "新加坡度量衡办公室：按重量出售商品的消费者须知。"
+      },
+      "url": "https://www.weightsandmeasures.gov.sg/consumers/consumer-tips-for-products-sold-by-weight/",
+      "note": {
+        "en": "Checking that a scale shows zero before weighing (step 06, beat 1).",
+        "zh": "称东西以前先看秤是不是指着 0（第 06 步第 1 拍）。"
+      }
+    },
+    {
+      "id": "S15",
+      "text": {
+        "en": "SPRING Singapore (2014). The SAFETY Mark, Accuracy Label, and You. The Consumer, 2014 Issue 2, p. 4 (CASE).",
+        "zh": "新加坡标新局（2014）：安全标志、准确标签与你。《消费者》2014 年第 2 期第 4 页（新加坡消费者协会）。"
+      },
+      "url": "https://www.nea.gov.sg/docs/default-source/resource/case-the-consumer-2014-issue-2.pdf",
+      "note": {
+        "en": "Wet-market scales with a needle or a number display (the cover drawing; steps 06 and 11).",
+        "zh": "湿巴刹的秤，有指针的，也有显示数字的（封面图；第 06、11 步）。"
+      }
+    },
+    {
+      "id": "S16",
+      "text": {
+        "en": "Meteorological Service Singapore. Observing the weather: measuring rainfall.",
+        "zh": "新加坡气象局：观测天气——量雨量。"
+      },
+      "url": "https://www.weather.gov.sg/learn_observations",
+      "note": {
+        "en": "Rainfall is a depth in millimetres, so this lesson, which has no millimetres, does not use a rain gauge.",
+        "zh": "雨量是以毫米计的深度；本课不教毫米，所以不用雨量计。"
+      }
+    },
+    {
+      "id": "S17",
+      "text": {
+        "en": "Health Promotion Board, HealthHub. Health screening for primary school.",
+        "zh": "保健促进局 HealthHub：小学的健康检查。"
+      },
+      "url": "https://www.healthhub.sg/well-being-and-lifestyle/personal-care/health_screening_for_primary_school",
+      "note": {
+        "en": "Pupils' heights are measured at school (the height chart in steps 03, 11 and 12). The heights in the lesson are made up.",
+        "zh": "学校会给学生量身高（第 03、11、12 步的身高尺）。课里的身高数字是编的。"
+      }
+    },
+    {
+      "id": "S18",
+      "text": {
+        "en": "St Margaret's School (Primary). School rules and expectations.",
+        "zh": "圣玛格烈小学：校规与要求。"
+      },
+      "url": "https://www.stmargaretspri.moe.edu.sg/school-information/school-rules-n-expectations/",
+      "note": {
+        "en": "A 15 cm ruler in a pupil's school things (the ruler in step 01).",
+        "zh": "学生文具里的 15 cm 尺子（第 01 步的尺子）。"
+      }
+    },
+    {
+      "id": "S19",
+      "text": {
+        "en": "Chinese usage in Singapore, as a check, not a textbook standard: Changi Airport's Chinese pages, the Singaporean Mandarin Database, a Tan Tock Seng Hospital leaflet in Chinese.",
+        "zh": "新加坡的中文用词，仅作旁证，不是课本标准：樟宜机场中文页、新加坡华语资料库、陈笃生医院的中文单张。"
+      },
+      "url": "https://www.languagecouncils.sg/mandarin/ch/learning-resources/singaporean-mandarin-database/terms/corridor",
+      "note": {
+        "en": "No official Chinese terms for Singapore primary mathematics were found. The lesson follows mainland primary textbooks (千米, 千克, 容量) and notes the everyday 公里 and 公斤 in the glossary.",
+        "zh": "没有找到新加坡小学数学的官方中文术语。本课以中国大陆小学课本的用法为底（千米、千克、容量），日常说的“公里”“公斤”写在名词表的注里。"
+      }
+    }
+  ]
+}
