@@ -114,8 +114,8 @@ beforeAll(() => {
     ['cycle-link-chapter', { topic: 'clean', chapter: 'missing-chapter' }],
   ] as const) {
     topic(slug, (root) => {
-      editJson(join(root, 'data/parts.json'), (file: { sim: { lifeCycle: { card: { compare: { link: { topic: string; chapter?: string } } } } } }) => {
-        file.sim.lifeCycle.card.compare.link = link;
+      editJson(join(root, 'data/parts.json'), (file: { sim: { lifeCycle: { card: { compare: { link: { topic: string; chapter?: string; label: { en: string; zh: string } } } } } } }) => {
+        file.sim.lifeCycle.card.compare.link = { ...link, label: { en: 'See it', zh: '去看' } };
       });
       const chapter = join(root, 'chapters/04-two-cycles.mdx');
       writeFileSync(chapter, readFileSync(chapter, 'utf8').replaceAll('slug="grasshopper" ch="nerves-and-growing-up"', 'slug="clean" ch="second-look"'));

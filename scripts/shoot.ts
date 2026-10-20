@@ -188,6 +188,8 @@ class Session {
     readonly page: Page,
     readonly origin: string,
     readonly topic: string,
+    readonly locale: string,
+    readonly theme: string,
   ) {}
 
   static async open(
@@ -204,7 +206,7 @@ class Session {
       (window as unknown as { __name: <T>(fn: T) => T }).__name = (fn) => fn;
     });
     const page = await context.newPage();
-    const s = new Session(page, origin, topic);
+    const s = new Session(page, origin, topic, locale, theme);
     page.on('console', (m) => {
       if ((m.type() === 'error' || m.type() === 'warning') && !IGNORED.some((re) => re.test(m.text()))) s.logs.push({ type: m.type(), text: m.text() });
     });
@@ -219,15 +221,35 @@ class Session {
       if (r.url().startsWith(origin) && /\.js$/.test(r.url().split('?')[0]!)) s.jsFiles.add(r.url().slice(origin.length).split('?')[0]!);
       if (r.status() >= 400 && r.url().startsWith(origin)) s.logs.push({ type: 'http-' + r.status(), text: r.url().slice(origin.length) });
     });
-    await page.goto(`${origin}/${locale}/topics/${topic}/`);
-    await page.waitForFunction(() => window.__atlas !== undefined, null, { timeout: 60_000 });
-    if (!(await page.evaluate(() => window.__atlas!.ready))) throw new Error(`${topic}: stage never became ready`);
-    await page.evaluate((t) => window.__atlas!.setTheme(t as 'paper' | 'cinema'), theme);
-    await page.waitForTimeout(800);
+    await s.reopen();
     const st = await page.evaluate(() => window.__atlas!.state());
     s.baseline = st.modes;
     s.baselinePaused = st.paused;
     return s;
+  }
+
+  /**
+   * Load a page of the site in this session's tab (`path` from the origin)
+   * and wait, 60 s at most, for its stage. A full navigation in the same tab
+   * gives a fresh document and store and releases the previous WebGL
+   * context, so a scene left behind (always-on flows keep drawing while
+   * paused) never competes with the one being checked.
+   */
+  async load(path: string, what: string): Promise<void> {
+    const { page } = this;
+    await page.goto(`${this.origin}${path}`);
+    await page.waitForFunction(() => window.__atlas !== undefined, null, { timeout: 60_000 });
+    const ready = await page.evaluate(() =>
+      Promise.race([window.__atlas!.ready, new Promise<boolean>((resolve) => window.setTimeout(() => resolve(false), 60_000))]),
+    );
+    if (!ready) throw new Error(`${what}: stage never became ready`);
+  }
+
+  /** The topic page as the session opened it (after link checks have navigated the tab away): loaded, in the session's theme. */
+  async reopen(): Promise<void> {
+    await this.load(`/${this.locale}/topics/${this.topic}/`, this.topic);
+    await this.page.evaluate((t) => window.__atlas!.setTheme(t as 'paper' | 'cinema'), this.theme);
+    await this.page.waitForTimeout(800);
   }
 
   ev<T>(fn: () => T): Promise<T> {
@@ -386,31 +408,24 @@ function beatSceneOf(page: Page): Promise<BeatScene | null> {
 }
 
 /**
- * Every beat opened from its link (`?ch=<chapter>&b=<n>`) in a page of its own, against the scene the presentation
+ * Every beat opened from its link (`?ch=<chapter>&b=<n>`) in a fresh document of its own, against the scene the presentation
  * showed: a field that differs, or a run not at its end (links jump to the end), is a beat failure.
  */
-async function runBeatLinks(s: Session, o: Options, beats: { chapter: string; index: number }[], shown: Map<string, BeatScene>, report: RunReport): Promise<void> {
+async function runBeatLinks(s: Session, beats: { chapter: string; index: number }[], shown: Map<string, BeatScene>, report: RunReport): Promise<void> {
   if (shown.size === 0) return;
   const theme = await s.ev(() => window.__atlas!.state().appliedTheme);
   const path = new URL(s.page.url()).pathname;
-  // Full navigation gives every link a fresh document and store. Reuse the
-  // tab so the captured presentation's WebGL context is destroyed first:
-  // always-on flows keep rendering even when that background scene pauses.
+  // Each link loads in the session's own tab (Session.load: a fresh document
+  // and store, the presentation's WebGL context released); the topic is
+  // reopened afterwards for the checks that follow.
   const linked = s.page;
   let same = 0;
-  await linked.setViewportSize({ width: o.size[0], height: o.size[1] });
   for (const b of beats) {
     const name = `beat-${b.chapter}-${b.index + 1}`;
     const want = shown.get(name);
     if (!want) continue;
     const link = `?ch=${encodeURIComponent(b.chapter)}&b=${b.index + 1}`;
-    await linked.goto(`${s.origin}${path}${link}${theme ? `&theme=${theme}` : ''}`);
-    await linked.waitForFunction(() => window.__atlas !== undefined, null, { timeout: 60_000 });
-    const ready = await linked.evaluate(() => Promise.race([
-      window.__atlas!.ready,
-      new Promise<boolean>((resolve) => window.setTimeout(() => resolve(false), 60_000)),
-    ]));
-    if (!ready) throw new Error(`${name}: linked stage never became ready`);
+    await s.load(`${path}${link}${theme ? `&theme=${theme}` : ''}`, `${name} (link)`);
     await linked.waitForTimeout(400);
     const got = await beatSceneOf(linked);
     const diffs: string[] = [];
@@ -425,6 +440,7 @@ async function runBeatLinks(s: Session, o: Options, beats: { chapter: string; in
     else same++;
     if (diffs.length) console.log(`  ${`${name} (link)`.padEnd(36)} FAIL  ${diffs.join('; ').slice(0, 300)}`);
   }
+  await s.reopen();
   console.log(`  beat links: ${same} of ${shown.size} open on the presentation's scene`);
 }
 
@@ -485,7 +501,7 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
   }
   await s.apply({ wait: 300 });
   console.log(`  beats -> ${out} (${beats.length})`);
-  await runBeatLinks(s, o, beats, shown, report);
+  await runBeatLinks(s, beats, shown, report);
 }
 
 /** Ids each chapter's own state asks to label (TimeScene `highlight`, SpaceScene `labels`) with no label on screen at the chapter camera: listed, never a failure. */
@@ -959,8 +975,8 @@ async function runLayout(s: Session, out: string, report: RunReport, locale: str
     await page.setViewportSize({ width: w, height: h });
     await page.waitForTimeout(500);
     const issues: string[] = [];
-    const check = async (where: string, target: Page = page) => {
-      for (const i of [...(await hudLayoutIssues(target)), ...(await stageIssues(target))]) {
+    const check = async (where: string) => {
+      for (const i of [...(await hudLayoutIssues(page)), ...(await stageIssues(page))]) {
         issues.push(`${where}: ${i}`);
         report.layout.push({ size: `${w}x${h}`, where, issues: [i] });
       }
@@ -975,21 +991,16 @@ async function runLayout(s: Session, out: string, report: RunReport, locale: str
     }
     await s.apply({ chapter: chapters[0], wait: 800 });
     await page.screenshot({ path: join(out, `layout-${w}x${h}.png`) });
-    // Full navigation checks the load-time layout in a fresh document,
-    // releasing the previous WebGL context before starting the next one.
-    // Engines without beats ignore `b` and open at the chapter.
+    // Opened from a link at this size (a shared beat: `?ch=<chapter>&b=2`, the reader and the HUD laid out on load, not after a
+    // resize), each in a fresh document (Session.load); then the topic again as the session opened it. Engines without beats
+    // ignore `b` and open at the chapter.
     for (const c of chapters) {
-      await page.goto(`${s.origin}/${locale}/topics/${s.topic}/?ch=${encodeURIComponent(c)}&b=2&theme=${theme}`);
-      await page.waitForFunction(() => window.__atlas !== undefined, null, { timeout: 60_000 });
-      const ready = await page.evaluate(() => Promise.race([
-        window.__atlas!.ready,
-        new Promise<boolean>((resolve) => window.setTimeout(() => resolve(false), 60_000)),
-      ]));
-      if (!ready) throw new Error(`${c}: linked layout stage never became ready`);
+      await s.load(`/${locale}/topics/${s.topic}/?ch=${encodeURIComponent(c)}&b=2&theme=${theme}`, `${c} (layout link)`);
       await page.waitForTimeout(700);
       await check(`${c} opened at beat 2`);
     }
     await page.screenshot({ path: join(out, `layout-${w}x${h}-linked.png`) });
+    await s.reopen();
     console.log(`  ${`${w}x${h}`.padEnd(10)} ${issues.length ? issues.length + ' issue(s)' : 'OK'}`);
     for (const i of issues) console.log(`      ${i}`);
   }

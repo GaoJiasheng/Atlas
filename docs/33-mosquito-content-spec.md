@@ -904,55 +904,64 @@ SpaceScene / Model3DStage，paper 默认、cinema 可切。原型：`archetypes.
 
 ## 9. 施工记录 / 已知差距
 
-### 9.1 引擎（E-M1 + E-M2，WIP + Codex, 2026-10-19）
+### 9.1 引擎（E-M1 + E-M2；Opus WIP → Codex 完成 2026-10-19 → Opus 复核 2026-10-20）
 
-**做了什么**：§4.6 的 E-M1、E-M2 全部，建在 docs/30、docs/31 已落地的试一试核心之上：试一试卡（改变 / 不变 / 观察、`[ ]`、`T`、记一行、`record.chart` 折线图、先猜后看、URL `sim=`）、`visible` / `pose` / `tint` 绑定、多路径流的 `intensity`（速度模式）、背景章的 `note`、PLATE 读数与块尾 `SIM` 行都直接沿用，没有改它们的代码。夹具主题 `src/content/topics/sample-life-cycle/`（draft，占位文字，只用程序化积木，12 个零件 + 1 个 context：一只玻璃浅皿、水、壁上的卵、四个占位孑孓、蛹、羽化站、成虫、飞走的成虫、标记圈；一条三路径的环流 `ring` / `out` / `lay`；6 个标记姿态 + `drained`）：背景章 00（`note`）、01 天数卡（T1）、02 水温卡（T2，表 + 折线图 + 先猜后看）、03 倒水卡（T3，`drained` 姿态、擦壁开关）、04 两个环（`compare`）；`stage`、`to-adult`、`days:<组>`、`days:<阶段>`、`days-left`、`on:`、`control:`、`emptying:*`、`rate` 各用一次（`size:` 只在单测里用占位数，§4.2 说"只在 F-26 找到来源时写"）。docs/06 新增「SpaceScene · 试一试 · 生活史（life-cycle）」，改了「试一试（sim）」的模型种类一行和代码清单。
+**做了什么**：§4.6 的 E-M1、E-M2 全部，建在 docs/30、docs/31 已落地的试一试核心之上：试一试卡（改变 / 不变 / 观察、`[ ]`、`T`、记一行、`record.chart` 折线图、先猜后看、URL `sim=`）、`visible` / `pose` / `tint` 绑定、多路径流的 `intensity`（速度模式）、背景章的 `note`、PLATE 读数与块尾 `SIM` 行都直接沿用，没有改它们的代码。夹具主题 `src/content/topics/sample-life-cycle/`（draft，占位文字，只用程序化积木，12 个零件 + 1 个 context：一只开口玻璃浅皿、薄水层、壁上五粒卵、四个占位孑孓、蛹、羽化站、成虫、三只飞走的成虫、标记圈；一条三路径的环流 `ring` / `out` / `lay`；6 个标记姿态 + `drained`；色彩全部 token）：背景章 00（`note`）、01 天数卡（T1）、02 水温卡（T2，表 + 折线图 + 先猜后看）、03 倒水卡（T3，`drained` 姿态、擦壁开关）、04 两个环（`compare`），共 11 拍；`stage`、`to-adult`、`days:<组>`、`days:<阶段>`、`days-left`、`on:`、`control:`、`emptying:*`、`rate` 各用一次（`size:` 只在单测里用占位数，§4.2 说"只在 F-26 找到来源时写"）。作者文档在 docs/06「SpaceScene · 试一试 · 生活史（life-cycle）」。
 
 | 件 | 代码 | 要点 |
 |---|---|---|
-| E-M1 模型 | `lib/sim/lifecycle.ts`（新）、`sim-schema.ts`（`lifeCycleSchema`、`LIFE_STAGE_PLACES`、`SIM_KINDS` 加 `life-cycle`、`quantityKind` 一支、`lifeCycleIssues`、状态标签检查、`SimContext.contextParts`）、`schema.ts`（传 context 零件）、`lib/sim/index.ts`（注册、`SEPARATE_EXPERIMENTS['life-cycle'] = false`）、`scripts/validate-content.ts`（`card.compare.link` 的主题与章） | §4.2 全部量；`total` 缩放、最后一个边界钉在总数上；单测钉死 §2.4 全表 |
-| E-M2 环卡 | `lib/sim/cycle.ts`（新，版式 + 弧上的字 + 读屏文字）、`hud/CycleCard.tsx`（新）、`View.tsx`（卡片槽、标题 LIFE CYCLE / 生活史）、`explorer/TryIt.tsx`（< 1024 px 收进试一试卡）、`space-scene.css`、`src/i18n/ui.{en,zh}.json`（`space.card.cycle`、`space.try.cycle`、`space.cycle.*`） | 见 docs/06「生活史」 |
-| 测试 | `tests/space-scene/lifecycle.test.ts`（42 条）、`tests/space-scene/cycle-card.test.ts`（9 条）、样板 `tests/space-scene/fixtures/aedes-cycle.ts`（§4.2 的完整数据 = 作者模板）、`tests-e2e/sample-life-cycle.spec.ts`（10 条） | §4.6 的清单逐条 |
+| E-M1 模型 | `lib/sim/lifecycle.ts`（新）、`sim-schema.ts`（`lifeCycleSchema`、`LIFE_STAGE_PLACES`、`SIM_KINDS` 加 `life-cycle`、`quantityKind` 一支、`lifeCycleIssues`、状态标签检查、`SimContext.contextParts`）、`schema.ts`（传 context 零件）、`lib/sim/index.ts`（注册、`SEPARATE_EXPERIMENTS['life-cycle'] = false`）、`scripts/validate-content.ts`（`card.compare.link` 的主题与章） | §4.2 全部量；`total` 缩放、最后一个边界钉在总数上；没有时间线量（`simTimelineChannels` 不用加分支） |
+| E-M2 环卡 | `lib/sim/cycle.ts`（新，版式 + 弧上的字 + 读屏文字）、`hud/CycleCard.tsx`（新）、`View.tsx`（卡片槽、标题 LIFE CYCLE / 生活史）、`explorer/TryIt.tsx`（< 1024 px 收进试一试卡；没有卡的章单独一节）、`space-scene.css`、`src/i18n/ui.{en,zh}.json`（`space.card.cycle`、`space.try.cycle`、`space.cycle.*`） | 见 docs/06「生活史」 |
+| 测试 | `tests/space-scene/lifecycle.test.ts`（42 条）、`cycle-card.test.ts`（9 条）、样板 `tests/space-scene/fixtures/aedes-cycle.ts`（§4.2 的完整数据 = 作者模板；其中 `AEDES_TEST_SIZES` 是编的单测数，**不能**抄进内容）、`tests/validate-content.test.ts`（第二个环的链接 3 例）、`tests-e2e/sample-life-cycle.spec.ts`（10 条） | §4.6 的清单逐条 |
+| QA 共用件 | `scripts/shoot.ts`（拍 / 排版链接在同一标签页整页加载，见 docs/06「QA：`pnpm shoot`」）、`tests-e2e/hud.spec.ts`（`H` 隐藏后等 topbar 的淡出动画结束再断言隐藏） | 不放宽任何检查 |
 
-**§2.4 全表（单测钉死）**：阶段边界 28 °C L1 [0, 1.877)、L2 [1.877, 2.556)、L3 [2.556, 3.555)、L4 [3.555, 5.373)、蛹 [5.373, 7.23)（§2.4 写的 5.372 是 5.3726 截断，按四舍五入是 5.373，整数天的结果不变）；第 0–8 天：20 °C 一一一一二三三四四、25 °C 一一一二三四四四蛹、28 °C 一一二三四四蛹蛹成、32 °C 一一二三四蛹蛹成成；孵化到成虫 13.4 / 10.2 / 7.2 / 6.4，幼虫 9.3 / 7.6 / 5.4 / 4.7，蛹 4.1 / 2.6 / 1.9 / 1.7，环速 0.54 / 0.71 / 1 / 1.13；倒水 2 / 4 / 6 / 8 / 10 / 14 → none / none / none / some / some / some；临界：28 °C 隔 7 天 none（7 ≤ 7.23）、32 °C 隔 7 天 some（7 > 6.40）、20 °C 隔 10 天 none、隔 14 天 some。环卡弧上的字 28 °C：等水来 · 1.9 · 0.7 · 1.0 · 1.8 · 1.9 天 · 产卵。
+**§2.4 全表（单测钉死）**：阶段边界 28 °C L1 [0, 1.877)、L2 [1.877, 2.556)、L3 [2.556, 3.555)、L4 [3.555, 5.373)、蛹 [5.373, 7.23)（§2.4 写的 5.372 是 5.3726 截断，四舍五入是 5.373，整数天的结果不变）；第 0–8 天：20 °C 一一一一二三三四四、25 °C 一一一二三四四四蛹、28 °C 一一二三四四蛹蛹成、32 °C 一一二三四蛹蛹成成；孵化到成虫 13.4 / 10.2 / 7.2 / 6.4，幼虫 9.3 / 7.6 / 5.4 / 4.7，蛹 4.1 / 2.6 / 1.9 / 1.7，环速 0.54 / 0.71 / 1 / 1.13；倒水 2 / 4 / 6 / 8 / 10 / 14 → none / none / none / some / some / some；临界：28 °C 隔 7 天 none（7 ≤ 7.23，步进值里不设 7）、32 °C 隔 7 天 some（7 > 6.40）、20 °C 隔 10 天 none、隔 14 天 some；恰好等于平均值 → none（严格大于才 some）。擦壁关 → 卵 `yes`（卵在水线以上、耐干，倒水不带走），开 → `none`。环卡弧上的字 28 °C：等水来 · 1.9 · 0.7 · 1.0 · 1.8 · 1.9 天 · 产卵。
 
 **与 §4 的差异**（实现时的决定）：
 
 | # | spec | 实现 | 理由 |
 |---|---|---|---|
-| 1 | `rate: { flow, reference }`，模型给"该流每条路径"一个值 | `rate: { flow, paths, reference }`，`paths` 由作者列出，validate 要求恰好是这条流的全部路径 | 模型是只读 `sim` 的纯函数，流在 parts.json 别处；漏列的路径会停，所以必须列全 |
+| 1 | `rate: { flow, reference }`，模型给"该流每条路径"一个值 | `rate: { flow, paths, reference }`，`paths` 由作者列出，validate 要求恰好是这条流的全部路径、不重复 | 模型是只读 `sim` 的纯函数，流在 parts.json 别处；漏列的路径会停，所以必须列全 |
 | 2 | `groups: { larva: [...] }`，环卡括号写 "Larva / 幼虫（孑孓）" | 组可写数组，或 `{ stages, label }`（`label` = 环卡括号的名字）；成员必须是相邻、按顺序的计天阶段 | 括号的字要有来处 |
-| 3 | 阶段 `in`：water / wall / air | 另加 `land`；`part` 可不写 | 以后的青蛙、蝗虫、植物 |
-| 4 | 对照环"并排"（左本主题、右蝗虫） | 第二个环画在主环**下面**；卡上一个开关（`role="switch"`）写同一个 `compare` 控件，开时出"See the grasshopper / 看蝗虫"链接 | 右上卡约 260–280 px 宽，主环连圈外的字已占满宽度；并排要把字缩到 7 px 以下。章 / 拍 `sim.set` 照样能开关 |
+| 3 | 阶段 `in`：water / wall / air | 另加 `land`；`part` 可不写（不写就不是按钮） | 以后的青蛙、蝗虫、植物 |
+| 4 | 对照环"并排"（左本主题、右蝗虫） | 第二个环画在主环**下面**；卡上一个开关（`role="switch"`，字 = `compare` 控件的 `label`）写同一个控件，开时出链接 | 右上卡约 260–280 px 宽，主环连圈外的字已占满宽度；并排要把字缩到 7 px 以下。章 / 拍 `sim.set` 照样能开关 |
 | 5 | 节点"下方标签"；整张卡 `role="img"` | 名字和弧上的字都在圈外（名字在站的方位，天数在两站之间，交替不撞）；"在水里"的带和组括号在圈内；整张卡 `role="group"` + `aria-label`（读屏文字），站是按钮，当前阶段 `aria-current="step"` | 圈外一圈、圈内一圈才放得下；`role="img"` 会把里面的按钮藏起来 |
-| 6 | 节点 44 px 命中区 | 命中方块是 viewBox 的 54 单位：卡片按 ≥ 82 % 画（1280 px 宽的右列）时 ≥ 44 CSS px；e2e 在 1600、1280 与 900 宽量过 | 卡片 SVG 随列宽缩放 |
+| 6 | 节点 44 px 命中区 | 命中方块是 viewBox 的 54 单位：卡片画到 ≥ 82 %（1280 px 宽的右列）时 ≥ 44 CSS px；e2e 在 1600、1280 与 900 宽量过 | 卡片 SVG 随列宽缩放 |
 | 7 | `emptying:adults` 按 28 °C | 按**当前水温**的总数（T3 在 28 °C，结果相同）；单测另钉 32 °C、20 °C 的临界 | 模型不写死温度 |
 | 8 | `control:<控件>` | 步进控件 = 值，开关 = 1 / 0；选择控件不提供 | 量是数 |
-| 9 | validate `adult` order | The final stage takes no days; stages before `start` take no days. When a stage uses id `adult`, validation explicitly requires it to be last, even if the author adjusts the row coverage. | Preserves generic terminal-stage semantics and enforces the named adult rule. |
-| 10 | §4.5 写"不提交" | 引擎在工作分支上提交（主会话的 brief 要求），push 等 Gavin | — |
+| 9 | validate "`adult` 在最后" | 最后一个阶段不计天、`start` 之前的阶段不计天（通用的"终点阶段"）；另外凡是有 id 叫 `adult` 的阶段，必须是最后一个 | 模型通用，同时守住 spec 点名的规则 |
+| 10 | `link: { topic, chapter }`，链接字"See the grasshopper / 看蝗虫" | `link: { topic, chapter?, label }`，链接的字由数据给（`label` 必填） | 原来用代码把英文首字母改小写拼"See the …"，换一种动物或专名就错；展示文字一律 `{ en, zh }` 来自数据 |
+| 11 | §4.5 写"不提交" | 引擎在工作分支上提交（主会话的 brief 要求），push 等 Gavin | — |
 
-**续建 / Codex completion**: tightened finite measurements, canonical temperature keys, duplicate rate paths and the inclusive 5 % tolerance; pinned every temperature/day reading and every stage boundary; added comparison-link validator tests. The fixture now has an open glass dish, a thin water surface, larger stage blocks that fit above the dish floor, a drained chapter without water, and escaped adults confined to that chapter. All fixture tints use tokens. Ring type meets the narrow desktop minimum; narrow chapters without a try-it experiment retain a collapsible ring. Browser tests also cover narrow comparison, cinema, 1280 px targets and keyboard selection.
+**作者要写的数据**（完整模板：`tests/space-scene/fixtures/aedes-cycle.ts` 的 `aedesSim` 与 docs/06 的 jsonc）：
 
-**门槛与回归**：最终记录见本节末尾与根目录 `CODEX-ENGINE-REPORT.md`。回归范围按 §4.6：`sample-space`、`sample-forces`、`sample-energy`、`grasshopper`、`circuits`、`energy-conversion`。
-
-**已知差距**：`size:`（头壳宽）没有来源，夹具不写，单测用占位数；种群模拟、按温度改孑孓摆动、读者拖动标记圈仍是 v2（§4.7）。
-
-**最终引擎验收 / Codex, 2026-10-19**（本工作树，§4.6 全部完成；这里只验收引擎，不勾选 §8.2 的蚊子内容）：
-
-| 门槛 | 结果 |
+| 字段 | 形状与规则 |
 |---|---|
-| `pnpm install --frozen-lockfile` | 通过；无依赖变更 |
-| `pnpm check` | 548 files，0 errors、0 warnings；3 个既有 unused-variable hints |
-| `pnpm validate` | 34 topics，0 errors、0 warnings |
-| `VITEST_MAX_FORKS=4 VITEST_MIN_FORKS=1 pnpm test` | 101 files、2673 tests 全过；只限制本机 worker 并发，未改断言或超时 |
-| `pnpm build` | 通过；71 个静态页面 |
-| `pnpm shoot sample-life-cycle --beats --keys --layout` | 11/11 拍深链接相符，0 key failures、0 layout issues、0 beat failures，console clean；8 个尺寸从 3840 × 2160 到 390 × 844 |
-| `CI=1 pnpm e2e` | 142/142 通过，exit 0（20.7 min）；其中本夹具 10/10 |
+| `temp`、`day` | 步进控件的 id；`temp` 的每个值恰好一行 `days`；`day` 的值 ≥ 0 |
+| `start` | 第一个计天的阶段（第 0 天 = 孵化）；之前的阶段（卵）在环上、不计天 |
+| `stages` | 有序 `{ id, label, in, part?, note? }`；`in` ∈ water / wall / air / land；`part` 存在且不是 context；最后一个是终点（成虫）、不计天 |
+| `groups` | 组 id → 相邻、按顺序的计天阶段数组，或 `{ stages, label }`（环卡括号的名字） |
+| `days` | 规范写法的温度键（`"28"`）→ 恰好覆盖计天阶段的正数天数 + 可选 `total`（论文的孵化到成虫；与 Σ 差 ≤ 5 %） |
+| `size` | 可选 `{ 量: { unit, values: { 阶段: 数 } } }`，**只写有来源的**；当前阶段没有值 → NaN，显示 `—` |
+| `emptying` | 可选 `{ every: 步进控件（值 > 0）, wipe?: 开关 }` |
+| `rate` | 可选 `{ flow, paths: [这条流的全部路径], reference: temp 的一个值 }` |
+| `card.compare` | 可选 `{ control: 开关, label, stages: [{ id, label }], link?: { topic, chapter?, label } }`；`pnpm validate` 查主题与章 |
 
-回归命令逐个运行 `pnpm shoot <topic> --beats --keys`：`sample-space` 15/15、`sample-forces` 16/16、`sample-energy` 14/14、`grasshopper` 32/32、`circuits` 31/31、`energy-conversion` 37/37；共 145 个拍深链接，全部匹配，键盘 0 失败，console clean。
+输出（`from`）：`stage`（状态，`start` 起每个可能的阶段都要有标签）、`to-adult`、`days-left`、`days:<阶段或组>`、`on:<阶段>`、`size:<量>`、`control:<控件>`、`emptying:adults`（`none` / `some`）、`emptying:eggs`（`yes` / `none`）、`rate`（向量，绑流的 `intensity: { full: 1 }`）。常用绑定：`stage` → 标记圈的 `pose` 映射；两个 `emptying` 状态 → 卵 / 飞走的成虫的 `visible`；`rate` → 环流。这是平均历期的教学模型，不是种群或存活模型。
 
-逐张打开并检查最终 `shots/sample-life-cycle/en-paper/beat-*.png` 的全部 11 张；修正了旧夹具中皿体遮挡、孑孓太小及穿过皿底、倒水后水面仍在、其他章冒出飞走的成虫等问题。四个龄期各一只、壁上五粒卵、倒水拍三只飞走的成虫可辨；擦壁后卵不见。另查 1280 / 1024 / 390 宽排版；补拍 EN / ZH × paper / cinema 的环卡、对照与倒水状态，并查看各语言 / 主题的对照图。既有主题另抽查 24 张回归图，未见本次引擎造成的回归；`sample-forces` 的 falling 第 2 拍落点薄片部分藏在演示字幕后，是既有内容构图，本次未改其他主题内容。
+**复核（Opus，2026-10-20）**：逐行读了 `git diff main...HEAD`、Codex 报告与本节。模型、校验、环卡版式和测试质量好：每个显示的数都由模型从实测表推出，7 天临界与"卵不怕干、要刷壁"按 spec 做，注册走现有契约（`SIM_KINDS`、`simQuantities`、`quantityKind`、`SEPARATE_EXPERIMENTS`），两套主题都只用 token。改了：
 
-验收期间修正两个 QA 时序问题：`shoot` 的拍 / 排版深链接改为在同一标签页完整导航，每次释放前一个 WebGL 场景、保留新 document / store 检查，且就绪等待上限 60 秒；既有 HUD 键盘测试在断言隐藏前等待 CSS fade 完成，保留原隐藏断言和总超时。初次全量 e2e 的 141 过 / 1 失败与后续单项重现均定位到软件 WebGL 下 CSS 动画时钟未推进；修正后单项和最终全量均通过。默认单测并发曾令既有 WWII anchor 测试超过其 5 秒上限，最终用上表 worker 限制完整通过。
+1. 第二个环的链接字改由数据给（`link.label`，见差异 #10），删 `space.cycle.see` 和代码里改大小写的拼接；对照开关的字改用 `compare` 控件自己的 `label`（原来只写动物名"Grasshopper"，读屏听不出是开关做什么）。
+2. 第二个环整体下移 14 单位：原来标题 GRASSHOPPER 紧贴主环最下面一段弧的"1.0 d"。
+3. `shoot` 的链接检查：Codex 把拍 / 排版链接改到会话自己的标签页里加载（释放前一个 WebGL 场景，思路对），但之后的 chapter highlights、`--keys`、下一个尺寸的排版都落在"最后一个链接打开的页面"上，不再是会话加载时的页面。现在抽出 `Session.load`（整页加载 + 60 s 有界等待 ready）与 `Session.reopen`（查完链接回到主题页 + 当前主题色），`Session.open` 也走它；去掉重复的 ready 竞速代码和不再用的参数。
+4. docs/06 里两段英文改写成中文并入对应条目；删根目录 `CODEX-ENGINE-REPORT.md`，有用的内容（数据契约、差异、性能、QA 修正）并入本节。
 
-本机纯模型热身后 100,000 次求值平均约 0.00369 ms；夹具正常约 15 calls / 29,104 triangles，倒水约 13 / 25,456。浏览器是 headless 软件 WebGL，未据此宣称真机 FPS。`shoot` 报该页加载 JS 464.9 KB gzip（11 files），超过 docs/02 的 300 KB 目标；既有 `sample-space` 同测约 484.8 KB。这是共享 SpaceScene bundle 的预算差距，本次没有扩大到依赖或打包重构。未完成项：本次要求的引擎项无；有来源的 `size:` 内容与 §4.7 v2 仍不在本次范围。完整数据契约、文件与记录见根目录 `CODEX-ENGINE-REPORT.md`。
+`tests-e2e/hud.spec.ts` 的改动看过：只是在原来的隐藏断言前多等 `data-hud="off"` 和 topbar 的动画 `finished`，断言本身和总超时没变，不放宽。
+
+**性能**：纯模型热身后 100,000 次求值平均约 0.0037 ms（< 0.1 ms）；夹具正常约 15 calls / 29,104 三角形，倒水约 13 / 25,456。`shoot` 报该页加载 JS 464.9 KB gzip（11 个文件），超过 docs/02 的 300 KB 目标；既有 `sample-space` 同测约 484.8 KB——这是共享 SpaceScene 包的预算差距，本次没有扩大，也没有做打包重构。headless 软件 GL 不据此宣称真机 FPS。
+
+**门槛（复核后，本工作树）**：
+
+GATES_PLACEHOLDER
+
+**已知差距**：`size:`（头壳宽）没有来源，夹具不写，单测用占位数；组名（"Larva / 幼虫"）在圈内括号旁，离圆心读数较近，蚊子主题 R 轮看真数据时再定要不要挪；种群模拟、按温度改孑孓摆动、读者拖动标记圈仍是 v2（§4.7）。蚊子内容的验收（§8.2）不在本节。

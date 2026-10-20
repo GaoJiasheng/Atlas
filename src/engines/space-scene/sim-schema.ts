@@ -740,7 +740,8 @@ export const lifeCycleSchema = z
             control: kebabId,
             label: bilingual,
             stages: z.array(z.object({ id: kebabId, label: bilingual }).strict()).min(2).max(8),
-            link: z.object({ topic: kebabId, chapter: kebabId.optional() }).strict().optional(),
+            /** The link under the second ring to that animal's topic (its words: "See the grasshopper"). */
+            link: z.object({ topic: kebabId, chapter: kebabId.optional(), label: bilingual }).strict().optional(),
           })
           .strict()
           .optional(),

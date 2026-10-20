@@ -895,6 +895,5 @@
   "space.cycle.daysLong": "{n} days",
   "space.cycle.lays": "lays eggs",
   "space.cycle.inWater": "in water",
-  "space.cycle.summary": "Life cycle in this model at {temp}: {stages}.",
-  "space.cycle.see": "See the {name}"
+  "space.cycle.summary": "Life cycle in this model at {temp}: {stages}."
 }

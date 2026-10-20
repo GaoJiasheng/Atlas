@@ -75,7 +75,7 @@ export function CycleDiagram({ file, sim }: { file: PartsFile; sim: SimData }) {
   const words = cycleArcWords(lc, spans);
   const cmp = lc.card?.compare;
   const comparing = cmp !== undefined && view.values[cmp.control] === true;
-  const second = comparing ? ringLayout(cmp.stages, { cx: W / 2, cy: CY + R + 64 + R2, radius: R2, node: 5, outside: 9, places: false }) : null;
+  const second = comparing ? ringLayout(cmp.stages, { cx: W / 2, cy: CY + R + 78 + R2, radius: R2, node: 5, outside: 9, places: false }) : null;
   const height = second ? second.cy + R2 + 22 : CY + R + 34;
   const parts = new Map(file.parts.map((p) => [p.id, p]));
   const summary = cycleSummary(lc, spans, tempText, locale);
@@ -94,8 +94,11 @@ export function CycleDiagram({ file, sim }: { file: PartsFile; sim: SimData }) {
     ev.preventDefault();
     pick(part);
   };
-  const link = cmp?.link ? localeHref(locale, `/topics/${cmp.link.topic}/`) + (cmp.link.chapter ? `?ch=${encodeURIComponent(cmp.link.chapter)}` : '') : null;
+  const link = cmp?.link
+    ? { href: localeHref(locale, `/topics/${cmp.link.topic}/`) + (cmp.link.chapter ? `?ch=${encodeURIComponent(cmp.link.chapter)}` : ''), label: tx(cmp.link.label, locale) }
+    : null;
   const cmpName = cmp ? tx(cmp.label, locale) : '';
+  const compareControl = cmp ? sim.controls.find((c) => c.id === cmp.control) : undefined;
   return (
     <div className="space-cy-wrap">
       <svg className="space-cy" viewBox={`0 0 ${W} ${height}`} role="group" aria-label={summary} data-stage={stage} data-compare={comparing || undefined}>
@@ -191,11 +194,11 @@ export function CycleDiagram({ file, sim }: { file: PartsFile; sim: SimData }) {
             <span className="space-try__toggle" aria-hidden="true">
               <i />
             </span>
-            <span>{cmpName}</span>
+            <span>{compareControl ? tx(compareControl.label, locale) : cmpName}</span>
           </button>
           {comparing && link && (
-            <a className="space-cy__link" href={link}>
-              {t('space.cycle.see', { name: locale === 'en' ? cmpName.charAt(0).toLowerCase() + cmpName.slice(1) : cmpName })}
+            <a className="space-cy__link" href={link.href}>
+              {link.label}
             </a>
           )}
         </div>

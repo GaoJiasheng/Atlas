@@ -1356,7 +1356,11 @@
           ],
           "link": {
             "topic": "grasshopper",
-            "chapter": "nerves-and-growing-up"
+            "chapter": "nerves-and-growing-up",
+            "label": {
+              "en": "See the grasshopper",
+              "zh": "看蝗虫"
+            }
           }
         }
       }

@@ -93,7 +93,7 @@ export const aedesSim: SimData = simSchema.parse({
           { id: 'nymph', label: b('Nymph', '若虫') },
           { id: 'adult', label: b('Adult', '成虫') },
         ],
-        link: { topic: 'grasshopper', chapter: 'nerves-and-growing-up' },
+        link: { topic: 'grasshopper', chapter: 'nerves-and-growing-up', label: b('See the grasshopper', '看蝗虫') },
       },
     },
   },
