@@ -14,7 +14,7 @@
  * a quantity (a measure with its unit chip, a compound, a conversion).
  */
 import type { InputSpec, InstrumentSpec, MisconceptionCode, Task, TaskOf } from '../schema';
-import { SCALE, parseDecimal } from './decimal';
+import { SCALE, minPlaces, parseDecimal } from './decimal';
 import { answerValues, compoundPairOf, readWritten, valueBoxes } from './forms';
 import { breakdown, fewestWeights, loadMass, numText, PAN_MAX, partsBetween, partsOf, readingOf, scaleOf, snap, unitOf, type Reading, type Scale } from './instrument';
 import { isInstrument, measureWorkOf } from './measure-kind';
@@ -134,7 +134,7 @@ export function countParts(task: TaskOf<'count-intervals'>): number[] {
 export function readingQty(s: InstrumentSpec, value: number): QtyValue {
   const sc = scaleOf(s);
   if (sc?.sub && value % SCALE === 0) return { kind: 'cmp', ...fromSmall(value / SCALE, sc.sub.pair) };
-  return { kind: 'meas', value: { units: value, dp: 0 }, unit: unitOf(s) };
+  return { kind: 'meas', value: { units: value, dp: minPlaces({ units: value, dp: 0 }) }, unit: unitOf(s) };
 }
 
 /** The unit printed after a whole or decimal box: the spec's, or the instrument's (`null`: none). */
@@ -191,7 +191,7 @@ function wroteOf(task: Task, spec: InputSpec, input: Readonly<Record<string, str
   return unit ? { value: n * SCALE, unit } : null;
 }
 
-const asQty = (w: Wrote): QtyValue => ({ kind: 'meas', value: { units: w.value, dp: 0 }, unit: w.unit });
+const asQty = (w: Wrote): QtyValue => ({ kind: 'meas', value: { units: w.value, dp: minPlaces({ units: w.value, dp: 0 }) }, unit: w.unit });
 /** Two written values the same quantity (1000 g = 1 kg)? */
 const sameQty = (a: Wrote, b: Wrote): boolean => compareQty(asQty(a), asQty(b)) === 0;
 /** A value in another unit of its family (`null`: not exact). */
