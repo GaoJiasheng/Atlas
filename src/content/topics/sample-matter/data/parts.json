@@ -3744,8 +3744,7 @@
       "displace": {
         "object": "drop-object",
         "water": 100,
-        "liquid": "cyl-b-water",
-        "step": 1
+        "liquid": "cyl-b-water"
       },
       "pour": {
         "container": "container",

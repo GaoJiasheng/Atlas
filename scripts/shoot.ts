@@ -409,25 +409,21 @@ function beatSceneOf(page: Page): Promise<BeatScene | null> {
   });
 }
 
-/**
- * Every beat opened from its link (`?ch=<chapter>&b=<n>`) in a fresh document of its own, against the scene the presentation
- * showed: a field that differs, or a run not at its end (links jump to the end), is a beat failure.
- */
 /** Every filled surface uses the model's current volume and agrees with its height reading. */
 async function fillIssues(s: Session): Promise<string[]> {
   const path = join(ROOT, 'src/content/topics', s.topic, 'data/parts.json');
   if (!existsSync(path)) return [];
   const file = JSON.parse(readFileSync(path, 'utf8')) as PartsFile;
   if (!file.sim?.bind.some((b) => 'part' in b && b.fill)) return [];
-  const state = await s.page.evaluate(() => {
+  const ids = file.sim.bind.flatMap((b) => ('part' in b && b.fill ? (typeof b.part === 'string' ? [b.part] : b.part) : []));
+  const state = await s.page.evaluate((ids) => {
     const e = window.__atlas!.engine as unknown as {
       sim(): { values: Record<string, unknown>; outputs: Record<string, unknown> };
       fill(id: string): { volume: number; level: number; shown: boolean } | null;
     };
-    return { sim: e.sim() };
-  });
-  const ids = file.sim.bind.flatMap((b) => 'part' in b && b.fill ? typeof b.part === 'string' ? [b.part] : b.part : []);
-  const fills = await s.page.evaluate((ids) => Object.fromEntries(ids.map((id) => [id, (window.__atlas!.engine as unknown as { fill(id: string): { volume: number; level: number; shown: boolean } | null }).fill(id)])), ids);
+    return { sim: e.sim(), fills: Object.fromEntries(ids.map((id) => [id, e.fill(id)])) };
+  }, ids);
+  const fills = state.fills;
   const issues: string[] = [];
   for (const b of file.sim.bind) {
     if (!('part' in b) || !b.fill) continue;
@@ -462,6 +458,10 @@ async function fillIssues(s: Session): Promise<string[]> {
   return issues;
 }
 
+/**
+ * Every beat opened from its link (`?ch=<chapter>&b=<n>`) in a fresh document of its own, against the scene the presentation
+ * showed: a field that differs, or a run not at its end (links jump to the end), is a beat failure.
+ */
 async function runBeatLinks(s: Session, beats: { chapter: string; index: number }[], shown: Map<string, BeatScene>, report: RunReport): Promise<void> {
   if (shown.size === 0) return;
   const theme = await s.ev(() => window.__atlas!.state().appliedTheme);

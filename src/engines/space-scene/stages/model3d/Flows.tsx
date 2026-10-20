@@ -1,4 +1,3 @@
-import type { StageBridge } from '../../bridge';
 /**
  * Flow particles ("air", "refrigerant", "current"): `count` points per flow
  * (default 360) that travel along the flow's Catmull-Rom path (or paths:
@@ -10,7 +9,8 @@ import type { StageBridge } from '../../bridge';
  * with no current fades out) or show a share of its particles at the flow's
  * own speed (`density`: an energy share, eased over ~0.3 s), and recolour it
  * while a state holds (a short
- * circuit runs hot). A flow with `clip: false` ignores the cutaway plane.
+ * circuit runs hot); a `visible` binding with `paths` shows or hides only
+ * those paths (each fades on its own alpha). A flow with `clip: false` ignores the cutaway plane.
  * A field-line flow (a `state` binding, lib/sim/field.ts) runs along the
  * lines of the magnet field state on show, drawn under the particles as
  * hairlines in the flow's colour (one more draw call); a new state fades in.
@@ -19,6 +19,7 @@ import { useEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { BufferAttribute, BufferGeometry, LineBasicMaterial, type LineSegments, type PerspectiveCamera, type Plane, type Points } from 'three';
 import type { Flow } from '../../schema';
+import type { StageBridge } from '../../bridge';
 import { bakeFlowPath, particlesPerPath, type BakedFlow } from '../../lib/flow-curve';
 import { resolveDataColor } from '../../lib/color';
 import { damp } from '../../lib/math';

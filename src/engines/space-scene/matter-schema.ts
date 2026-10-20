@@ -18,7 +18,7 @@ export const matterSchema = z.object({
   water: z.object({ density: positive, squash: nonnegative }).strict().default({ density: 0.997, squash: 4.5e-7 }),
   objects: z.record(kebabId, z.object({ volume: positive, density: positive, floats: z.boolean().optional() }).strict()).default({}),
   weigh: z.object({ object: kebabId, step: positive }).strict().optional(),
-  displace: z.object({ object: kebabId, water: nonnegative, liquid: kebabId, step: positive }).strict().optional(),
+  displace: z.object({ object: kebabId, water: nonnegative, liquid: kebabId }).strict().optional(),
   pour: z.object({ container: kebabId, volume: positive, liquids: z.record(kebabId, kebabId) }).strict().optional(),
   pump: z.object({ pumps: kebabId, ball: positive, stroke: positive, inside: positive, firm: z.tuple([positive, positive]) }).strict().optional(),
   cup: z.object({

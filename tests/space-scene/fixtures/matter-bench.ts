@@ -15,7 +15,7 @@ export const matterBench = matterSchema.parse({
     'clay-ball': { volume: 20, density: 1.6 }, 'clay-roll': { volume: 20, density: 1.6 }, water: { volume: 200, density: 0.997 },
   },
   weigh: { object: 'weigh-object', step: 0.1 },
-  displace: { object: 'drop-object', water: 100, liquid: 'cyl-b-water', step: 1 },
+  displace: { object: 'drop-object', water: 100, liquid: 'cyl-b-water' },
   pour: { container: 'container', volume: 200, liquids: { cylinder: 'cyl-a-water', glass: 'glass-water', flask: 'flask-water', bowl: 'bowl-water' } },
   pump: { pumps: 'pumps', ball: 600, stroke: 0.2, inside: 7, firm: [51.7, 58.6] },
   cup: { place: 'cup-place', hole: 'cup-hole', basin: { radius: 12, depth: 14 }, cup: { radius: 3.5, height: 9, glass: 57.9, rim: 3, top: 12.4 }, liquids: { basin: 'basin-water', around: 'basin-water-cup', inside: 'cup-water' } },

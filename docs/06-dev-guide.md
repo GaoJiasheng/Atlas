@@ -1407,7 +1407,7 @@ docs/36 §4 E-MA1。`kind: "matter"` 注册于 `SIM_KINDS`、`simQuantities`、`
 | 子模型数据 | 计算 / `from` |
 |---|---|
 | `objects: { id: { volume, density, floats? } }`，`weigh: { object: <choice>, step: 0.1 }` | ml × g/ml → `weigh:mass`，按 step 取整 |
-| `displace: { object: <choice>, water: 100, liquid: <part>, step: 1 }` | `displace:reading` = 水 + 固体体积，`displace:volume` = 固体体积；`nothing` = 0；浮物不能选 |
+| `displace: { object: <choice>, water: 100, liquid: <part> }` | `displace:reading` = 水 + 固体体积（全精度，读到几位由输出的 `decimals` 定），`displace:volume` = 固体体积；`nothing` = 0；浮物不能选 |
 | `pour: { container: <choice>, volume: 200, liquids: { option: <part> } }` | `pour:volume` 不变，所选容器有水、其余为零；`pour:level` 是 cm，由实际液体 primitive 的同一 `levelForVolume` 求出 |
 | `pump: { pumps: <step>, ball: 600, stroke: 0.2, inside: 7, firm: [51.7,58.6] }` | `pump:mass`、`pump:air`（g）；`pump:firmness` = flat / soft / firm / too-hard |
 | `cup: { place: <choice above/pushed>, hole: <toggle>, basin: {radius,depth}, cup: {radius,height,glass,rim,top}, liquids: {basin,around,inside} }` | 尺寸 cm、玻璃体积 ml；联立水量守恒与等温气体压缩；`cup:basin-level` cm、`basin-rise` / `cup-rise` mm、`wet` 0/1、`tissue` dry/wet、`bubbles` none/rising |

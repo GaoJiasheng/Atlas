@@ -312,11 +312,18 @@ function Piece({
 
 export function PartNode(props: PartNodeProps) {
   const { part, display, clipping, styles } = props;
-  const fillShape = useMemo(() => props.fill && part.primitive ? fillShapeForPrimitive(part.primitive) : null, [part, !!props.fill]);
-  const fillGeometry = useMemo(() => fillShape ? createFillGeometry(fillShape, props.fill?.meniscus ?? 0) : null, [fillShape]);
-  useEffect(() => () => fillGeometry?.dispose(), [fillGeometry]);
+  // A filled liquid (docs/36 §4.3): its cavity primitive, redrawn in place up to the bound volume.
+  const filled = !!props.fill;
+  const fillShape = useMemo(() => (filled && part.primitive ? fillShapeForPrimitive(part.primitive) : null), [part, filled]);
+  const meniscus = props.fill?.meniscus ?? 0;
+  const fillGeometry = useMemo(() => (fillShape ? createFillGeometry(fillShape, meniscus) : null), [fillShape, meniscus]);
   const shape = useMemo(() => fillGeometry ? { ...props.shape, pieces: [{ ...props.shape.pieces[0]!, geometry: fillGeometry, matrices: null }] } : props.shape, [props.shape, fillGeometry]);
   const fillMotion = useRef({ from: 0, to: NaN, now: 0, start: 0, shown: false, level: 0, volume: 0, drawn: NaN });
+  useEffect(() => {
+    // New buffers start empty: draw the current volume into them on the next frame.
+    fillMotion.current.drawn = NaN;
+    return () => fillGeometry?.dispose();
+  }, [fillGeometry]);
   useEffect(() => () => { props.fillBridge?.fills.delete(part.id); }, [props.fillBridge, part.id]);
   useEffect(() => {
     if (!fillShape || !fillGeometry || !props.fillBridge || !props.fill) return;

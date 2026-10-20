@@ -1,4 +1,6 @@
 /** Every SIM number and invariant in docs/36 §2.4, plus the registration and author checks. */
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { matterIssues, matterSchema, matterWarnings, type MatterData, type MatterPart } from '../../src/engines/space-scene/matter-schema';
 import { evaluateSim, SEPARATE_EXPERIMENTS } from '../../src/engines/space-scene/lib/sim';
@@ -273,5 +275,21 @@ describe('fill and independent bubble-path bindings', () => {
     expect(visibility({ 'cup-place': 'pushed', 'cup-hole': true, 'water-added': 20 })?.visible).toBe(true);
     const invalid = filled([{ ...binds[0], paths: ['missing'] }]);
     expect(simIssues(invalid, flowContext).some((x) => x.message.includes('missing'))).toBe(true);
+  });
+});
+
+describe('the sample-matter fixture draws the same §2.4 readings from its own cavities', () => {
+  const file = JSON.parse(readFileSync(join(import.meta.dirname, '../../src/content/topics/sample-matter/data/parts.json'), 'utf8')) as { parts: MatterPart[]; sim: unknown };
+  const fixture = simSchema.parse(file.sim);
+  const out = (set: SimValues) => evaluateSim(fixture, resolveSimValues(fixture, set), [], undefined, file.parts);
+  it.each([['cylinder', 18.6], ['glass', 7.1], ['flask', 5.0], ['bowl', 3.0]] as const)('%s → %s cm', (container, level) => {
+    expect(shown(out({ container }).level)).toBe(level);
+  });
+  it('reads the cup, pump, syringe and sand tables', () => {
+    expect(shown(out({ 'cup-place': 'pushed' })['basin-level'])).toBe(14.9);
+    expect(shown(out({ 'cup-place': 'pushed', 'cup-hole': true })['basin-level'])).toBe(14.1);
+    expect(shown(out({ pumps: 20 })['ball-mass'])).toBe(604.7);
+    expect(shown(out({ load: 4 })['v-air'])).toBe(9.0);
+    expect(out({ 'water-added': 40 })['sand-reading']).toBe(105);
   });
 });

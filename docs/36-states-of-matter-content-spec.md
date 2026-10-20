@@ -580,7 +580,7 @@ SpaceScene / Model3DStage，paper 默认、cinema 可切。原型：`archetypes.
       "water":     { "volume": 200,   "density": 0.997 }
     },
     "weigh":    { "object": "weigh-object", "step": 0.1 },
-    "displace": { "object": "drop-object", "water": 100, "liquid": "cyl-b-water", "step": 1 },
+    "displace": { "object": "drop-object", "water": 100, "liquid": "cyl-b-water" },
     "pour":     { "container": "container", "volume": 200, "liquids": { "cylinder": "cyl-a-water", "glass": "glass-water", "flask": "flask-water", "bowl": "bowl-water" } },
     "pump":     { "pumps": "pumps", "ball": 600.0, "stroke": 0.2, "inside": 7.0, "firm": [51.7, 58.6] },
     "cup":      { "place": "cup-place", "hole": "cup-hole", "basin": { "radius": 12, "depth": 14.0 }, "cup": { "radius": 3.5, "height": 9.0, "glass": 57.9, "rim": 3.0, "top": 12.4 },
@@ -968,7 +968,7 @@ SpaceScene / Model3DStage，paper 默认、cinema 可切。原型：`archetypes.
 
 几件液体用同一帧的时钟按体积缓动，倒出 / 倒入守恒；瞬切、拍链接、减少动态效果与 REFERENCE 到终值，瞬切后不会重新从旧的缓动起点播放。原有 `pose` / `offset` / `settle` / `count` / `tint` 不改契约。流 `visible.paths` 独立控制路径透明度，并与原有 intensity、density、整流开关相乘；深链接从目标透明度开始，实时变化仍淡入淡出，不增加绘制。
 
-**QA API 与截图**：现有 `SceneControls.test` 自动挂到 core 的 `__atlas.engine`，由 View 提供 `fill(id) → { volume, level, shown }`（m³、primitive 局部 Y）、`flow(id)`（当前逐路径可见性）、`fillBenchmark(id)`（100 次重建的暖机五组中位数，恢复原几何）。`scripts/shoot.ts --beats` 对每拍和每个拍链接核对全部液体的模型体积、反解液面、pour 高度与 cup 杯内 / 盆外读数，液面容差 0.5 mm。
+**QA API 与截图**：`__atlas.engine`（View 挂上）新增 `fill(id) → { volume, level, shown }`（m³、primitive 局部 Y）、`flow(id)`（当前逐路径可见性）、`fillBenchmark(id)`（100 次重建的暖机五组中位数，恢复原几何）。`scripts/shoot.ts --beats` 对每拍和每个拍链接核对全部液体的模型体积、反解液面、pour 高度与 cup 杯内 / 盆外读数，液面容差 0.5 mm。
 
 **夹具**：`sample-matter` 45 个零件（全部 primitive，部分带 extra）、6 组、6 实验章 + 背景章、10 个 fill、1 条双路径气泡流；六张卡包括记录、小图与先猜后看。轮廓覆盖直筒、锥形瓶、半球碗、空腔与 box，沙上水用 below。仅夹具文字占位，状态 draft；实物识别级建模与正式内容仍属于后续主题施工。视觉复核修了液体错误使用不透明 token 材质（改 membrane + token tint）、过大气泡（24 点、size 0.08）和 centered repeat 砝码穿过托盘（整叠基准抬高）。
 
@@ -980,4 +980,4 @@ SpaceScene / Model3DStage，paper 默认、cinema 可切。原型：`archetypes.
 
 **门槛**：`pnpm check` 0 error / warning（3 条原有 hint）；`pnpm validate` 38 topics、0 error / warning；全量单测 111 files / 3,033 tests；`pnpm build` 79 pages / 25.59 s；上述全部截图门槛通过；最终原样 `CI=1 pnpm e2e` **186 passed / 27.0 min**。前轮共享机器上既有 sample-space voice 时序断言得到 3,685 ms（要求 < 2,800 ms），该项隔离重跑和完整重跑均通过，未改断言 / 超时 / 配置；首轮日志和 trace 留在报告所列路径。最终 CI 的 flask 100 次几何更新为 0.5 ms。
 
-本轮 E-MA1 / E-MA2 无未完项；正式主题施工尚未开始。作者数据形状、所有门槛 / 截图 / baseline 路径和范围差异详见 worktree 外 `../codex-matter-engine-REPORT.md`。
+本轮 E-MA1 / E-MA2 无未完项；正式主题施工尚未开始。作者数据形状见 docs/06「SpaceScene · 试一试 · 物质（matter）」「SpaceScene · 液面（`fill`）」与 `tests/space-scene/fixtures/matter-bench.ts`。
