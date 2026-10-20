@@ -229,11 +229,11 @@ div.space-inspector__detail:not([hidden]) {
 
 .space-co {
   cursor: pointer;
-  pointer-events: auto;
+  pointer-events: none;
 }
 .space-co__hit {
   fill: transparent;
-  pointer-events: all;
+  touch-action: none;
 }
 .space-co__plate {
   fill: var(--stage-bg);
@@ -242,6 +242,7 @@ div.space-inspector__detail:not([hidden]) {
   transition: opacity var(--dur-fast) linear;
 }
 .space-co__text {
+  pointer-events: none;
   paint-order: stroke;
   stroke: var(--bg);
   stroke-width: calc(3 * var(--u));
@@ -268,15 +269,18 @@ div.space-inspector__detail:not([hidden]) {
   fill: var(--ink-3);
 }
 .space-co__tri {
+  pointer-events: none;
   fill: var(--ink);
 }
 .space-co__leader {
+  pointer-events: none;
   fill: none;
   stroke: var(--ink);
   stroke-width: 0.7;
   vector-effect: non-scaling-stroke;
 }
 .space-co__dot {
+  pointer-events: none;
   fill: var(--bg);
   stroke: var(--ink);
   stroke-width: 1;

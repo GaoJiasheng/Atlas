@@ -34,6 +34,12 @@ export const SRC = {
   sites: 'ts-sites',
 } as const;
 
+/** Only completed infrastructure grows at island zoom; ordinary movement widths stay data-driven. */
+const movementWidth: ExpressionSpecification = ['interpolate', ['linear'], ['zoom'],
+  10, ['number', ['get', 'width']],
+  13, ['*', ['get', 'width'], ['case', ['boolean', ['get', 'persist'], false], 2.5, 1]],
+];
+
 /** The regional plate's own sources (`basemap.region`): the river lines and the sheet around the plate. */
 export const REGION = {
   rivers: 'ts-rivers',
@@ -273,7 +279,7 @@ export function dataLayers(tk: ThemeTokens): LayerSpecification[] {
       type: 'line',
       source: SRC.movements,
       layout: { 'line-cap': 'round', 'line-join': 'round' },
-      paint: { 'line-color': ['get', 'color'], 'line-width': ['get', 'width'], 'line-opacity': ['*', 0.3, ['get', 'op']] },
+      paint: { 'line-color': ['get', 'color'], 'line-width': movementWidth, 'line-opacity': ['*', ['case', ['boolean', ['get', 'persist'], false], 1, 0.3], ['get', 'op']] },
     },
     {
       id: LAYER.moveLine,
@@ -282,7 +288,7 @@ export function dataLayers(tk: ThemeTokens): LayerSpecification[] {
       layout: { 'line-join': 'round' },
       paint: {
         'line-color': ['get', 'color'],
-        'line-width': ['get', 'width'],
+        'line-width': movementWidth,
         'line-opacity': ['get', 'op'],
         'line-dasharray': DASH_SEQUENCE[0] as number[],
       },

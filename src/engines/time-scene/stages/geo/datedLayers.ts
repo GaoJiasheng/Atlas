@@ -30,7 +30,7 @@ export function datedLayerStyles(def: DatedLayerDef, tokens: ThemeTokens, color:
     ];
   }
   if (def.kind === 'line') return [
-    { id: id('line'), source, type: 'line', filter, layout: { 'line-join': 'round' }, paint: { 'line-color': color, 'line-width': 0.8, 'line-opacity': 0.9 } },
+    { id: id('line'), source, type: 'line', filter, layout: { 'line-join': 'round' }, paint: { 'line-color': color, 'line-width': ['interpolate', ['linear'], ['zoom'], 10, 1, 13, 2.5], 'line-opacity': 0.9 } },
   ];
   return [
     { id: id('fill'), source, type: 'fill', filter, paint: { 'fill-color': color, 'fill-opacity': ['case', approximate, 0.35 * 0.7, 0.35] } },

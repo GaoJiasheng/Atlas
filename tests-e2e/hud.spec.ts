@@ -14,17 +14,20 @@ for (const topic of TOPICS) {
     test(`${topic} (${locale}): HUD layout has no overlap or overflow at 7 sizes`, async ({ page }) => {
       test.setTimeout(180_000);
       await openScene(page, `/${locale}/topics/${topic}/`);
-      const problems: string[] = [];
       for (const [width, height] of LAYOUT_SIZES) {
         await page.setViewportSize({ width, height });
         await page.waitForTimeout(400);
         for (const chapter of await page.evaluate(() => window.__atlas!.chapters())) {
           await page.evaluate((id) => window.__atlas!.goToChapter(id, { instant: true }), chapter);
           await page.waitForTimeout(150);
-          for (const issue of await hudLayoutIssues(page)) problems.push(`${width}x${height} ${chapter}: ${issue}`);
+          // ResizeObserver updates the SVG drawings after CSS has resized the
+          // panel; software rendering can leave the previous width for a frame.
+          await expect.poll(() => hudLayoutIssues(page), {
+            message: `${width}x${height} ${chapter}`,
+            timeout: 10_000,
+          }).toEqual([]);
         }
       }
-      expect(problems).toEqual([]);
     });
   }
 

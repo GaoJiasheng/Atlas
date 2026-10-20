@@ -49,6 +49,7 @@ import type { PartsFile, SpaceChapterState } from '../schema';
 import type { ScreenAnchor, StageBridge } from '../bridge';
 import type { SpaceUiStore } from '../ui';
 import { clip, partNumber } from './common';
+import { beginLabelGesture } from '../lib/label-gesture';
 
 interface LabelDom {
   g: SVGGElement;
@@ -214,7 +215,7 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
       l.dom.hit.setAttribute('y', String(b.y + b.height / 2 - hh / 2));
       l.dom.hit.setAttribute('height', String(hh));
       l.dom.hit.setAttribute('x', '-4');
-      l.dom.hit.setAttribute('width', String(b.width + TRI + 8));
+      l.dom.hit.setAttribute('width', String(Math.max(HIT, b.width + TRI + 8)));
       // Paper knock-out behind the text: placards may sit over the model.
       l.dom.plate.setAttribute('x', String(TRI - PLATE_PAD));
       l.dom.plate.setAttribute('y', String(b.y - PLATE_PAD / 2));
@@ -380,7 +381,7 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
         const baseline = l.y - l.top;
         l.dom.g.setAttribute('transform', `translate(${l.x.toFixed(1)} ${baseline.toFixed(1)})`);
         l.dom.g.style.opacity = l.vis.toFixed(3);
-        l.dom.g.style.pointerEvents = l.vis > 0.5 ? '' : 'none';
+        l.dom.hit.style.pointerEvents = l.vis > 0.5 && !presenting && labelGroup(p.id) === null ? 'all' : 'none';
         l.dom.leader.setAttribute(
           'd',
           `M${(p.sx + dx).toFixed(1)} ${(p.sy + dy).toFixed(1)}H${(p.ex + dx).toFixed(1)}L${a.x.toFixed(1)} ${a.y.toFixed(1)}`,
@@ -398,7 +399,7 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
         }
         if (l.vis === 0) l.y = -1;
         l.dom.g.style.opacity = l.vis.toFixed(3);
-        l.dom.g.style.pointerEvents = 'none';
+        l.dom.hit.style.pointerEvents = 'none';
         l.dom.leader.style.opacity = (l.vis * 0.9).toFixed(3);
         l.dom.dot.style.opacity = l.vis.toFixed(3);
       }
@@ -471,6 +472,8 @@ function Label(props: {
   const leader = useRef<SVGPathElement>(null);
   const dot = useRef<SVGCircleElement>(null);
   const { id, register } = props;
+  const gesture = useRef<(() => void) | null>(null);
+  useEffect(() => () => gesture.current?.(), []);
   useLayoutEffect(() => {
     register(id, { g: g.current!, text: text.current!, hit: hit.current!, plate: plate.current!, tri: tri.current!, leader: leader.current!, dot: dot.current! });
     return () => register(id, null);
@@ -486,12 +489,15 @@ function Label(props: {
         data-group={props.group || undefined}
         data-on={props.on || undefined}
         style={{ opacity: 0 }}
-        onClick={(e) => {
-          e.stopPropagation();
-          props.onSelect?.();
+        onPointerDown={(e) => {
+          const stage = e.currentTarget.closest('.atlas-scene')?.querySelector<HTMLElement>('.space-stage');
+          if (!stage || !props.onSelect) return;
+          e.preventDefault();
+          gesture.current?.();
+          gesture.current = beginLabelGesture(e.nativeEvent, stage, props.onSelect);
         }}
       >
-        <rect ref={hit} className="space-co__hit" />
+        <rect ref={hit} className="space-co__hit" style={{ pointerEvents: 'none' }} />
         <rect ref={plate} className="space-co__plate" />
         <path ref={tri} className="space-co__tri" d="M0 -6.2L5 -3.1L0 0Z" />
         <text ref={text} className="space-co__text">

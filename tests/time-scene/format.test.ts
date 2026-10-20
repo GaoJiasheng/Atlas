@@ -1,5 +1,18 @@
 import { describe, expect, it } from 'vitest';
-import { coarser, formatTime, nicePer, yearLabel } from '../../src/engines/time-scene/lib/format';
+import { coarser, formatTime, formatTimeRange, nicePer, yearLabel } from '../../src/engines/time-scene/lib/format';
+
+describe('formatTimeRange for event and movement labels', () => {
+  it.each(['en', 'zh'] as const)('prints a one-day opening once (%s)', (locale) => {
+    expect(formatTimeRange('1987-11-07', '1987-11-07', locale)).toBe(formatTime('1987-11-07', locale));
+    expect(formatTimeRange('1987-11-07', undefined, locale)).toBe(formatTime('1987-11-07', locale));
+  });
+
+  it.each(['en', 'zh'] as const)('keeps distinct dates but collapses identical displayed precision (%s)', (locale) => {
+    expect(formatTimeRange('1987-11-07', '1987-11-08', locale)).toBe(`${formatTime('1987-11-07', locale)} – ${formatTime('1987-11-08', locale)}`);
+    expect(formatTimeRange('1987-11-07', '1987-12-01', locale, 'year')).toBe(formatTime('1987', locale));
+    expect(formatTimeRange({ ma: 200 }, { ma: 200 }, locale)).toBe(formatTime({ ma: 200 }, locale));
+  });
+});
 
 describe('formatTime', () => {
   it('formats ISO dates by precision (en)', () => {

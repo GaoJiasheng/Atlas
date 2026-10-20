@@ -418,6 +418,8 @@
   will-change: transform;
 }
 button.ts-co {
+  min-width: var(--hit);
+  min-height: var(--hit);
   pointer-events: auto;
   cursor: pointer;
 }
@@ -476,10 +478,10 @@ button.ts-co:focus-visible {
   outline: 1px solid var(--signal);
   outline-offset: 2px;
 }
-@media (pointer: coarse) {
-  button.ts-co {
-    min-height: var(--hit);
-  }
+.ts-leaders,
+.ts-leader,
+.ts-leader__dot {
+  pointer-events: none;
 }
 .ts-leader {
   fill: none;
