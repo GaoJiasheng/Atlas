@@ -1,0 +1,124 @@
+---
+id: "gases"
+order: 5
+title: {"en": "Gases spread and squash", "zh": "气体会散开，也能被压缩"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: false
+  cutaway: "none"
+  layers: ["syringes", "air-bench", "air-flow"]
+  hide: ["torch-beam", "basketball", "balance-b", "ball-pump", "basin", "basin-water", "basin-water-cup", "cup", "cup-water", "tissue", "cup-hole-mark", "trapped-air"]
+  labels: ["syringe-air", "syringe-water", "syringe-sand"]
+  camera: {"position": [0.62, 0.33, 0.66], "target": [0.52, 0.14, -0.05], "fov": 30}
+  summary: {"en": "A gas has no definite shape and no fixed volume: it spreads out to fill whatever holds it. That is why air can be squashed into a smaller space, while water is much harder to squash and the sand grains hold firm.", "zh": "气体没有固定的形状，也没有固定的体积：它会散开，充满装它的东西。所以空气能被压进更小的空间，水却难压得多，沙粒也互相顶住。"}
+  sim:
+    set: {"load": 0}
+    try:
+      vary: "load"
+      keep: [{"en": "Same syringes, each filled to 20 ml", "zh": "同样的针筒，每支都装到 20 毫升"}, {"en": "Tips sealed", "zh": "针口封住"}, {"en": "The same mass on each plunger", "zh": "每支柱塞上放同样的砝码"}]
+      observe: ["v-air", "v-water", "v-sand"]
+      record: {"chart": {"y": ["v-air", "v-water", "v-sand"]}}
+      predict:
+        prompt: {"en": "Put 2 kg on each plunger. What happens to the volume of the water?", "zh": "每支柱塞上放 2 千克，水的体积会怎样？"}
+        start: {"load": 0}
+        change: {"load": 2}
+        observe: "v-water"
+        options:
+          - {"id": "less", "label": {"en": "Gets smaller", "zh": "变小"}, "means": "less"}
+          - {"id": "same", "label": {"en": "Stays the same", "zh": "不变"}, "means": "same"}
+          - {"id": "more", "label": {"en": "Gets bigger", "zh": "变大"}, "means": "more"}
+  beats:
+    - labels: ["syringe-air", "syringe-water", "syringe-sand", "syringe-rack"]
+      caption: {"en": "Three syringes are each filled to twenty millilitres, one with air, one with water and one with sand. Their tips are sealed, so nothing can get out.", "zh": "三支针筒都装到二十毫升：一支是空气，一支是水，一支是沙。针口都封住了，里面的东西出不去。"}
+    - pose: "balloons-full"
+      run: true
+      camera: {"position": [0.47, 0.6, 0.07], "target": [0.45, 0.13, -0.29], "fov": 30}
+      labels: ["balloon-round", "balloon-long", "balloon-pump"]
+      caption: {"en": "A gas spreads out to fill its container. Pumped into a round balloon, air takes a round shape; in a long balloon, a long shape.", "zh": "气体会散开，充满装它的容器。打进圆气球，空气就是圆的；在长气球里，就是长的。"}
+    - sim: {"set": {"load": 2}}
+      labels: ["plunger-air", "masses-air", "syringe-water", "syringe-sand"]
+      caption: {"en": "With two kilograms on each plunger, the air is squashed to about twelve point four millilitres in this model. The water and the sand stay at twenty.", "zh": "每支柱塞上放两千克，在这个模型里空气被压到约十二点四毫升，水和沙还是二十毫升。"}
+    - sim: {"set": {"load": 4}}
+      labels: ["syringe-air", "plunger-air", "masses-air"]
+      caption: {"en": "With four kilograms, the air is squashed to about nine millilitres. Each extra kilogram squashes it a little less than the one before.", "zh": "放到四千克，空气被压到约九毫升。每多加一千克，压下去的比上一次少一点。"}
+    - sim: {"set": {"load": 0}}
+      labels: ["plunger-air", "syringe-air"]
+      caption: {"en": "Take the masses off and the squashed air pushes the plunger back up to twenty millilitres.", "zh": "拿走砝码，被压紧的空气把柱塞推回二十毫升。"}
+    - layers: ["around-you"]
+      camera: "table-view"
+      run: true
+      labels: ["bicycle-wheel", "floor-pump"]
+      caption: {"en": "Pumping a bicycle tyre squeezes more and more air into the same tyre, so the tyre gets harder.", "zh": "给脚车轮胎打气，就是把越来越多的空气压进同一条轮胎，所以轮胎越来越硬。"}
+  index: {"parts": ["syringe-air", "syringe-water", "syringe-sand", "plunger-air", "masses-air", "water-column", "sand-column", "balloon-round", "balloon-long", "bicycle-wheel"]}
+---
+
+<Lang en>
+
+Air takes no shape of its own. Pumped into the round balloon, it takes a round shape; in the long balloon, a long one. A gas has no definite shape and no fixed volume: it spreads out to fill whatever holds it. Even a little air spreads through the whole of a bottle; it does not stay near the top or by the opening.
+
+The three <Term id="syringe">syringes</Term> on the press are each filled to <Num s="S1">20 ml</Num>: one with air, one with water and one with dry sand. Their tips are sealed, so nothing can get in or out. The same masses go on all three plungers at once. Only the filling changes, which makes this a fair test.
+
+To <Term id="compress">compress</Term> something is to squash it into a smaller space. With <Num s="S1">2 kg</Num> on each plunger, the air is squashed to about <Num s="S1">12.4 ml</Num> in this model; with <Num s="S1">4 kg</Num>, to about <Num s="S1">9.0 ml</Num>. Each extra kilogram squashes it a little less than the one before. Take the masses off and the squashed air pushes the plunger back up to <Num s="S1">20.0 ml</Num>.
+
+Water is much harder to squash. It does get a tiny bit smaller, but far too little to see, so its reading stays at <Num s="S1">20.0 ml</Num>. The sand has air between its grains, but the grains touch each other and hold the plunger up, so in this model it stays at <Num s="S1">20.0 ml</Num> too.
+
+A bicycle tyre works the same way. Each stroke of the pump squeezes more air into the same tyre, so the air inside is packed closer together and the tyre feels harder.
+
+Use the Try it card to add the masses one at a time, keeping the same syringes and sealed tips. Record each load: on the graph the air's line curves down while the water's and the sand's stay level.
+
+<More title={{"en": "A fair test", "zh": "公平测试"}}>
+
+The three syringes are the same size, filled to the same <Num s="S1">20 ml</Num> and loaded with the same masses, so the only difference is what is inside. Push the air bubbles out of the water first: draw up about <Num s="S32">12 ml</Num>, push the air out with the tip upwards, then set the plunger. With an open tip, air or water would escape and a falling reading would not show squashing. The primary syllabus doesn't cover compression; you'll learn it in secondary school. Here it is the clearest evidence that a gas has no fixed volume.
+
+</More>
+
+<More title={{"en": "Real readings", "zh": "真实的读数"}}>
+
+In one published classroom set-up, students squashed nitrogen in a sealed syringe from <Num s="S33">60.0 ml</Num> to <Num s="S33">30.0 ml</Num>, measured with a pressure gauge. The model's readings, such as <Num s="S1">12.4 ml</Num> under <Num s="S1">2 kg</Num>, are worked out, not measured. The model shows <Num s="S1">0.1 ml</Num>; a real syringe marked every <Num s="S21">1 ml</Num> can only be read to about half a mark. In a classroom, press gently by hand; if masses are used, stack them carefully with an adult present.
+
+</More>
+
+<More title={{"en": "Air in the gaps", "zh": "沙粒间的空气"}}>
+
+Dry sand has air between its grains, but the grains carry the load where they touch. Real loose sand can settle a little as the grains move closer; this model keeps them where they are. Real plungers can also stick or leak, so a real plunger may not return exactly to where it started.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+空气没有自己的形状。打进圆气球，它就是圆的；打进长气球，它就是长的。气体没有固定的形状，也没有固定的体积：它会散开，充满装它的东西。哪怕只有一点点空气，也会散满整只瓶子，不会只待在瓶口或者瓶子上面。
+
+压针筒架上的三支<Term id="syringe">针筒</Term>都装到 <Num s="S1">20 ml</Num>：一支装空气，一支装水，一支装干沙。针口都封住了，里面的东西进不来也出不去。三支柱塞上同时放同样的砝码。只有装的东西不同，所以这是公平测试。
+
+<Term id="compress">压缩</Term>就是把东西压进更小的空间。在这个模型里，每支柱塞上放 <Num s="S1">2 kg</Num>，空气被压到约 <Num s="S1">12.4 ml</Num>；放 <Num s="S1">4 kg</Num>，压到约 <Num s="S1">9.0 ml</Num>。每多加 1 千克，压下去的比上一次少一点。拿走砝码，被压紧的空气把柱塞推回 <Num s="S1">20.0 ml</Num>。
+
+水难压得多。它确实会变小一点点，但小得根本看不出，所以读数还是 <Num s="S1">20.0 ml</Num>。沙粒之间有空气，可是沙粒互相挨着，把柱塞顶住了，所以在这个模型里，沙也还是 <Num s="S1">20.0 ml</Num>。
+
+脚车（自行车）的轮胎也是这个道理。打气筒每打一下，就把更多空气压进同一条轮胎，里面的空气挤得更紧，轮胎摸起来就更硬。
+
+用“试一试”卡片一块一块地加砝码，针筒和封住的针口都不换。每加一次记一行：图上空气那条线往下弯，水和沙的线却是平的。
+
+<More title={{"en": "A fair test", "zh": "公平测试"}}>
+
+三支针筒一样大，都装到 <Num s="S1">20 ml</Num>，放一样的砝码，唯一不同的是里面装的东西。装水时要先把气泡排掉：先抽约 <Num s="S32">12 ml</Num> 水，针口朝上推出空气，再推到要的刻度。针口要是开着，空气或水会跑掉，读数变小就说明不了被压缩。小学课纲没有讲压缩，中学会学。在这里，它是“气体没有固定的体积”最清楚的证据。
+
+</More>
+
+<More title={{"en": "Real readings", "zh": "真实的读数"}}>
+
+有一套公开的课堂装置，学生把封口针筒里的氮气从 <Num s="S33">60.0 ml</Num> 压到 <Num s="S33">30.0 ml</Num>，用压力表量。模型里的读数，比如放 <Num s="S1">2 kg</Num> 时的 <Num s="S1">12.4 ml</Num>，是算出来的，不是量出来的。模型写到 <Num s="S1">0.1 ml</Num>；每 <Num s="S21">1 ml</Num> 一格的真实针筒，只能估到半格左右。课堂上用手轻轻压；要是用砝码，要放稳，要有大人在场。
+
+</More>
+
+<More title={{"en": "Air in the gaps", "zh": "沙粒间的空气"}}>
+
+干沙的沙粒之间有空气，但沙粒在互相接触的地方把重量撑住了。真实的松沙，沙粒挤近一些时会稍微沉下去一点；这个模型让沙粒保持原位。真实的柱塞还可能卡住或漏气，所以拿走砝码后，不一定刚好回到原来的位置。
+
+</More>
+
+</Lang>

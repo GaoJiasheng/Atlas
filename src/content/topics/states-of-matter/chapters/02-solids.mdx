@@ -1,0 +1,126 @@
+---
+id: "solids"
+order: 2
+title: {"en": "Solids", "zh": "固体"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: false
+  cutaway: "none"
+  layers: ["measuring", "weighing", "grains"]
+  hide: ["torch-beam"]
+  labels: ["cylinder-b", "drop-stone", "cyl-b-water"]
+  camera: {"position": [-0.16, 0.3, 0.68], "target": [-0.27, 0.07, 0.15], "fov": 30}
+  summary: {"en": "A solid has a definite shape and a fixed volume. Its volume can be measured by how much it makes the water in a measuring cylinder rise. Sand pours, but each grain is a solid.", "zh": "固体有固定的形状和固定的体积。把它放进量筒的水里，看水面升高多少，就能量出它的体积。沙会倒，但每一粒都是固体。"}
+  sim:
+    set: {"drop-object": "nothing"}
+    try:
+      vary: "drop-object"
+      keep: [{"en": "Same cylinder, 100 ml of water to start", "zh": "同一只量筒，开始时都装 100 毫升水"}]
+      observe: ["reading", "object-volume"]
+      record: {"chart": {"y": "object-volume"}}
+      predict:
+        prompt: {"en": "Roll the clay ball into a long shape and put it in. Will the water rise more, less or the same?", "zh": "把黏土球搓成长条再放进去，水面会升得更高、更低，还是一样？"}
+        start: {"drop-object": "clay-ball"}
+        change: {"drop-object": "clay-roll"}
+        observe: "reading"
+        options:
+          - {"id": "more", "label": {"en": "More", "zh": "更高"}, "means": "more"}
+          - {"id": "less", "label": {"en": "Less", "zh": "更低"}, "means": "less"}
+          - {"id": "same", "label": {"en": "The same", "zh": "一样"}, "means": "same"}
+  beats:
+    - labels: ["cylinder-b", "cyl-b-water", "drop-stone"]
+      caption: {"en": "A solid keeps its shape and its volume. This measuring cylinder holds one hundred millilitres of water, ready for the stone.", "zh": "固体的形状和体积都是固定的。这只量筒装了一百毫升水，等着放进石头。"}
+    - sim: {"set": {"drop-object": "stone"}}
+      labels: ["drop-stone", "cyl-b-water", "cylinder-b"]
+      caption: {"en": "The stone takes up space, so the water rises to one hundred and twenty-five millilitres. The stone's volume is twenty-five cubic centimetres.", "zh": "石头占据了空间，水面就升到一百二十五毫升。石头的体积是二十五立方厘米。"}
+    - sim: {"set": {"drop-object": "clay-roll"}}
+      labels: ["drop-clay-roll", "cyl-b-water", "cylinder-b"]
+      caption: {"en": "A ball of clay raises the water to one hundred and twenty millilitres. The same clay rolled into a long shape raises it to one hundred and twenty too. Its shape changed; its volume did not.", "zh": "一团黏土球让水面升到一百二十毫升；同一团黏土搓成长条，水面也升到一百二十毫升。形状变了，体积没变。"}
+    - sim: {"set": {"squeeze": true}}
+      camera: {"position": [-0.36, 0.24, 0.46], "target": [-0.46, 0.03, 0.13], "fov": 30}
+      labels: ["sponge", "object-tray"]
+      caption: {"en": "Squeeze a sponge and it gets smaller, but only because air is pushed out of its holes. Its thin solid walls just fold up.", "zh": "捏海绵，它变小了，那只是因为孔里的空气被挤了出去。薄薄的固体孔壁只是折了起来。"}
+    - camera: "grains-view"
+      labels: ["sand-heap", "sugar-heap", "water-dish"]
+      caption: {"en": "Sand and sugar pour, but they are not liquids. Poured out, they pile up in a heap with sloping sides. Water spreads out flat.", "zh": "沙和糖会倒，但它们不是液体。倒出来，它们堆成有斜坡的小山；水却会摊平。"}
+    - layers: ["closer"]
+      camera: {"position": [0.0, 0.3, -1.42], "target": [0.0, 0.0, -1.7], "fov": 30}
+      labels: ["sand-grains", "sugar-crystals"]
+      caption: {"en": "Magnified forty times, each grain of sand and each crystal of sugar has its own shape and volume. Each grain is a solid.", "zh": "放大四十倍，每一粒沙、每一粒糖都有自己的形状和体积。每一粒都是固体。"}
+  index: {"parts": ["cylinder-b", "cyl-b-water", "drop-stone", "drop-marble", "drop-clay-ball", "drop-clay-roll", "sponge", "sand-heap", "sugar-heap", "sand-grains"]}
+---
+
+<Lang en>
+
+A solid has a definite shape and a fixed volume. Move the stone from the bench to the tray and it stays the same shape and the same size; put it in a box and it does not spread out to fill the box. The glass marble and the ball of clay behave the same way.
+
+To measure a solid's volume, use the water in measuring cylinder B. It starts at <Num s="S1">100 ml</Num>. Lower the stone in until it is completely under the water and the reading rises to <Num s="S1">125 ml</Num>. The stone takes up space, so the water has to move aside and rise. Subtract the start: the stone's volume is <Num s="S1">25 cm³</Num>. A volume of <Num s="S11">1 ml</Num> is the same as <Num s="S11">1 cm³</Num>, so the rise in millilitres is the volume in cubic centimetres.
+
+A force can change the shape of some solids. Roll the ball of clay into a long shape, keeping all of the clay. In this model either shape raises the water to <Num s="S1">120 ml</Num>: the shape changed, the volume did not. A sponge gets smaller when you squeeze it only because the air in its holes is pushed out; its thin solid walls fold but keep their own volume.
+
+<Figure src="figures/states-of-matter-sponge" alt={{"en": "A sponge cut open to show a network of thin solid walls around many holes, beside the same sponge pressed flat between two wooden blocks.", "zh": "切开的海绵露出许多孔和孔周围薄薄的固体孔壁；旁边是同一块海绵被两块木块压扁。"}} caption={{"en": "Inside a sponge: thin solid walls around holes full of air. Pressed flat, the holes close and the walls fold. Illustration for this topic.", "zh": "海绵里面：薄薄的固体孔壁围着装满空气的孔。压扁时，孔合上了，孔壁折了起来。为本主题画的示意图。"}} />
+
+Sand and sugar pour, so they can look like liquids. They are not. Poured onto a dish, sand piles up in a heap with sloping sides, while water spreads out flat. Magnified, each <Num s="S13">0.0625–2 mm</Num> grain of sand has its own shape and volume: each grain is a solid. Pouring only lets the grains roll past each other.
+
+<Figure src="figures/states-of-matter-sand-grains" alt={{"en": "A small cone of dry sand on a dish, a dish of water with a flat surface, and a round magnified view of loose sand grains of different sizes with gaps between them.", "zh": "碟子里一小堆干沙，一碟表面平平的水，还有一个圆形的放大视野，里面是大小不一的沙粒，彼此之间有空隙。"}} caption={{"en": "Sand heaps up, water lies flat. Seen as if through a hand lens, each grain has its own shape, with air between the grains. Illustration for this topic.", "zh": "沙会堆起来，水却是平的。像透过放大镜看，每一粒沙都有自己的形状，沙粒之间是空气。为本主题画的示意图。"}} />
+
+Use the Try it card to change what goes into the water, keeping the same cylinder and the same <Num s="S1">100 ml</Num> to start. Predict whether rolling the clay long changes the rise, then compare the bars.
+
+<More title={{"en": "Measuring by displacement", "zh": "排水法"}}>
+
+Measuring a volume this way is called <Term id="displacement">displacement</Term>: read the cylinder before and after, then subtract the first reading from the second. The object must be completely under the water, and it must not float, dissolve, soak up water or trap bubbles. The primary syllabus doesn't cover the method by name; you'll learn it in secondary school. Here the rising water is the evidence that a solid takes up space.
+
+</More>
+
+<More title={{"en": "Why the sponge stays out", "zh": "为什么不把海绵放进量筒"}}>
+
+A sponge floats, and it soaks up water, so dropping it into a measuring cylinder would not give the volume of its outside. Its holes are full of air: in this model its <Num s="S1">384 cm³</Num> has a mass of only <Num s="S1">11.5 g</Num>.
+
+</More>
+
+<More title={{"en": "Grains", "zh": "颗粒"}}>
+
+Grains of sand differ in size and colour, and their corners are worn round. A dry sand heap slopes at about <Num s="S14">32.5°</Num>; the model draws <Num s="S1">33°</Num>. The slope depends on the sand and on how it is poured. Granulated sugar is made of small crystals, on average about <Num s="S40">0.4–1.0 mm</Num> across.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+固体有固定的形状和固定的体积。把石头从实验台拿到托盘上，它还是那个形状、那么大；把它放进一只盒子，它也不会散开去填满盒子。玻璃弹珠、黏土球也是这样。
+
+要量固体的体积，就用量筒 B 里的水。开始时是 <Num s="S1">100 ml</Num>。把石头放进去，让它整个没入水中，读数升到 <Num s="S1">125 ml</Num>。石头占据了空间，水只好让开、升上来。减去开始时的读数，石头的体积就是 <Num s="S1">25 cm³</Num>。<Num s="S11">1 ml</Num> 和 <Num s="S11">1 cm³</Num> 一样大，所以水面升高了多少毫升，体积就是多少立方厘米。
+
+用力可以改变某些固体的形状。把黏土球搓成长条，一点黏土也不少。在这个模型里，两种形状都让水面升到 <Num s="S1">120 ml</Num>：形状变了，体积没变。海绵一捏就变小，只是因为孔里的空气被挤了出去；薄薄的固体孔壁折了起来，它们自己的体积并没有变。
+
+<Figure src="figures/states-of-matter-sponge" alt={{"en": "A sponge cut open to show a network of thin solid walls around many holes, beside the same sponge pressed flat between two wooden blocks.", "zh": "切开的海绵露出许多孔和孔周围薄薄的固体孔壁；旁边是同一块海绵被两块木块压扁。"}} caption={{"en": "Inside a sponge: thin solid walls around holes full of air. Pressed flat, the holes close and the walls fold. Illustration for this topic.", "zh": "海绵里面：薄薄的固体孔壁围着装满空气的孔。压扁时，孔合上了，孔壁折了起来。为本主题画的示意图。"}} />
+
+沙和糖会倒，看起来有点像液体，其实不是。倒在碟子上，沙堆成一座有斜坡的小山，水却摊得平平的。放大来看，每一粒 <Num s="S13">0.0625–2 mm</Num> 的沙都有自己的形状和体积：每一粒都是固体。会倒，只是因为沙粒能互相滚过去。
+
+<Figure src="figures/states-of-matter-sand-grains" alt={{"en": "A small cone of dry sand on a dish, a dish of water with a flat surface, and a round magnified view of loose sand grains of different sizes with gaps between them.", "zh": "碟子里一小堆干沙，一碟表面平平的水，还有一个圆形的放大视野，里面是大小不一的沙粒，彼此之间有空隙。"}} caption={{"en": "Sand heaps up, water lies flat. Seen as if through a hand lens, each grain has its own shape, with air between the grains. Illustration for this topic.", "zh": "沙会堆起来，水却是平的。像透过放大镜看，每一粒沙都有自己的形状，沙粒之间是空气。为本主题画的示意图。"}} />
+
+用“试一试”卡片换放进水里的东西，每次都用同一只量筒，开始时都是 <Num s="S1">100 ml</Num> 水。先猜一猜把黏土搓长会不会改变水面升高的多少，再比一比条形图。
+
+<More title={{"en": "Measuring by displacement", "zh": "排水法"}}>
+
+这样量体积的方法叫<Term id="displacement">排水法</Term>：放进去之前读一次，放进去之后再读一次，两数相减。物体要整个没入水中，不能浮、不能溶、不能吸水，也不能带着气泡。小学课纲没有讲到这个方法的名称，中学会学。在这里，水面升高就是固体占据空间的证据。
+
+</More>
+
+<More title={{"en": "Why the sponge stays out", "zh": "为什么不把海绵放进量筒"}}>
+
+海绵会浮，还会吸水，所以把它丢进量筒，量不出它外形的体积。它的孔里全是空气：在这个模型里，<Num s="S1">384 cm³</Num> 的海绵只有 <Num s="S1">11.5 g</Num>。
+
+</More>
+
+<More title={{"en": "Grains", "zh": "颗粒"}}>
+
+沙粒大小、颜色各不相同，棱角被磨圆了。干沙堆的坡约 <Num s="S14">32.5°</Num>；模型画的是 <Num s="S1">33°</Num>。坡度取决于沙的种类和倒的方法。砂糖是一粒粒小晶体，平均约 <Num s="S40">0.4–1.0 mm</Num>。
+
+</More>
+
+</Lang>

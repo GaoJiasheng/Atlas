@@ -1,0 +1,16 @@
+# MOE P4 Cycles in Matter and Water (Matter); docs/36, decisions taken 2026-10-20. Parts: pnpm tsx scripts/geo/states-of-matter/build-parts.ts
+id: states-of-matter
+title: { en: "States of Matter", zh: "物质的三态" }
+subtitle: { en: "Solids, liquids and gases on a science bench: mass, space, shape and volume", zh: "在实验台上看固体、液体、气体：质量、空间、形状与体积" }
+subject: science
+tags: [singapore, psle, p4, space]
+moe: ["MOE 2023 Science P4 Cycles in Matter and Water (Matter)"]
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: published
+illustration: states-of-matter
+shortTitle: { en: "Matter", zh: "物质" }
+note: { en: "Generic design study · a school science bench drawn life size · magnified grains drawn separately", zh: "通用设计研究 · 小学科学实验台，按实物大小画 · 放大的颗粒另按比例画" }

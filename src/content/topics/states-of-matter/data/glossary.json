@@ -1,0 +1,148 @@
+{
+ "terms": [
+  {
+   "id": "matter",
+   "term": { "en": "Matter", "zh": "物质" },
+   "definition": {
+    "en": "Anything that has mass and takes up space. Stones, water and air are matter; light, sound and heat are not.",
+    "zh": "任何有质量、占据空间的东西。石头、水、空气都是物质；光、声音、热不是。"
+   },
+   "see": ["mass", "volume", "occupy-space"]
+  },
+  {
+   "id": "mass",
+   "term": { "en": "Mass", "zh": "质量" },
+   "definition": {
+    "en": "How much matter something contains, measured with a balance in grams (g) or kilograms (kg). In everyday speech, how heavy something is. Weight is a different quantity: the pull of gravity on that mass.",
+    "zh": "东西里有多少物质，用秤量，单位是克（g）或千克（kg）。日常说的“有多重”。重量是另一个量：重力对这份质量的拉力。"
+   },
+   "see": ["balance", "matter"]
+  },
+  {
+   "id": "volume",
+   "term": { "en": "Volume", "zh": "体积" },
+   "definition": {
+    "en": "How much space something takes up. A liquid's volume is measured in millilitres (ml), a solid's in cubic centimetres (cm³); 1 ml is the same as 1 cm³. In the measuring lessons in mathematics, the amount of liquid is also called capacity.",
+    "zh": "东西占据的空间有多大。液体的体积用毫升（ml），固体的体积用立方厘米（cm³）；1 毫升和 1 立方厘米一样大。数学课量液体时也叫“容量”。"
+   },
+   "see": ["measuring-cylinder", "occupy-space"]
+  },
+  {
+   "id": "occupy-space",
+   "term": { "en": "Take up space", "zh": "占据空间" },
+   "definition": {
+    "en": "To fill a place so that nothing else can be in it at the same time. A stone lowered into water pushes the water aside; air trapped in a cup keeps the water out.",
+    "zh": "把一个地方占住，别的东西就不能同时在那里。石头放进水里，就把水推开；关在杯里的空气，把水挡在外面。"
+   },
+   "see": ["volume", "matter"]
+  },
+  {
+   "id": "state-of-matter",
+   "term": { "en": "States of matter", "zh": "物质的三态" },
+   "definition": {
+    "en": "The three forms matter is usually found in: solid, liquid and gas. They are told apart by whether their shape and their volume are fixed.",
+    "zh": "物质常见的三种状态：固体、液体、气体。看它的形状和体积是不是固定的，就能区分。"
+   },
+   "see": ["solid", "liquid", "gas"]
+  },
+  {
+   "id": "solid",
+   "term": { "en": "Solid", "zh": "固体" },
+   "definition": {
+    "en": "Matter with a definite shape and a fixed volume. A force can change the shape of some solids, such as clay, but not their volume. Sand and sugar pour, but each grain is a solid.",
+    "zh": "有固定的形状和固定的体积的物质。用力可以改变某些固体（比如黏土）的形状，但改变不了它的体积。沙和糖会倒，但每一粒都是固体。"
+   },
+   "see": ["liquid", "gas"]
+  },
+  {
+   "id": "liquid",
+   "term": { "en": "Liquid", "zh": "液体" },
+   "definition": {
+    "en": "Matter with a fixed volume but no definite shape: it takes the shape of its container, and its surface settles flat and level.",
+    "zh": "有固定的体积、没有固定的形状的物质：它的形状随容器而变，表面是平的。"
+   },
+   "see": ["solid", "gas"]
+  },
+  {
+   "id": "gas",
+   "term": { "en": "Gas", "zh": "气体" },
+   "definition": {
+    "en": "Matter with no definite shape and no fixed volume: it spreads out to fill whatever holds it, and it can be squashed into a smaller space.",
+    "zh": "没有固定的形状、也没有固定的体积的物质：它会散开，充满装它的东西，也能被压进更小的空间。"
+   },
+   "see": ["air", "compress"]
+  },
+  {
+   "id": "air",
+   "term": { "en": "Air", "zh": "空气" },
+   "definition": {
+    "en": "The mixture of gases around us. It takes up space and has mass, so it is matter: about 1.2 g in every litre.",
+    "zh": "我们周围几种气体的混合物。它占据空间，也有质量，所以是物质：每升约 1.2 克。"
+   },
+   "see": ["gas"]
+  },
+  {
+   "id": "compress",
+   "term": { "en": "Compress (squash)", "zh": "压缩" },
+   "definition": {
+    "en": "To squeeze something into a smaller space. Air in a sealed syringe can be compressed a lot; water is much harder to squash; the grains of sand hold the plunger up.",
+    "zh": "把东西压进更小的空间。封口针筒里的空气能被压缩很多；水难压得多；沙粒会把柱塞顶住。"
+   },
+   "see": ["gas", "syringe"]
+  },
+  {
+   "id": "balance",
+   "term": { "en": "Balance", "zh": "秤（电子秤、天平）" },
+   "definition": {
+    "en": "An instrument for measuring mass. An electronic balance shows a reading; a beam balance compares two masses. Put an empty container on first and set the balance to zero (tare).",
+    "zh": "量质量的器材。电子秤显示读数；天平比较两样东西的质量。先放上空容器，把秤归零。"
+   },
+   "see": ["mass"]
+  },
+  {
+   "id": "measuring-cylinder",
+   "term": { "en": "Measuring cylinder", "zh": "量筒" },
+   "definition": {
+    "en": "A tall, narrow container with a scale up its side, for measuring the volume of a liquid. Read it with your eye level with the liquid, at the bottom of the curved surface.",
+    "zh": "侧面有刻度的细高容器，用来量液体的体积。读数时眼睛和液面平齐，读弯曲液面最低的地方。"
+   },
+   "see": ["volume", "meniscus"]
+  },
+  {
+   "id": "syringe",
+   "term": { "en": "Syringe", "zh": "针筒" },
+   "definition": {
+    "en": "A barrel with a plunger that slides inside it, marked in millilitres. In this topic it has no needle and its tip is sealed, so nothing can get in or out.",
+    "zh": "一根带刻度的筒，里面有能滑动的柱塞，以毫升为单位。本主题用的是无针针筒，针口封住，里面的东西进不来也出不去。"
+   },
+   "see": ["compress"]
+  },
+  {
+   "id": "displacement",
+   "term": { "en": "Displacement (extension)", "zh": "排水法（扩展）" },
+   "definition": {
+    "en": "Measuring a solid's volume by putting it completely under water and reading how much the water level rises. The primary syllabus doesn't name it; you'll learn it in secondary school.",
+    "zh": "把固体整个放进水里，读水面升高了多少，来量它的体积。小学课纲没有讲到这个名称，中学会学。"
+   },
+   "see": ["volume", "measuring-cylinder"]
+  },
+  {
+   "id": "meniscus",
+   "term": { "en": "Meniscus (extension)", "zh": "弯月面（扩展）" },
+   "definition": {
+    "en": "The curve of a liquid's surface where it meets the wall of its container. Water in a glass cylinder curves up at the wall; read the bottom of the curve.",
+    "zh": "液面碰到容器壁的地方弯起的一圈。玻璃量筒里的水在壁上往上弯；读弯曲液面最低的地方。"
+   },
+   "see": ["measuring-cylinder"]
+  },
+  {
+   "id": "particle",
+   "term": { "en": "Particle (beyond the syllabus)", "zh": "微粒（课纲之外）" },
+   "definition": {
+    "en": "A model scientists use: matter is made of tiny particles, close and fixed in place in a solid, close but moving past each other in a liquid, far apart in a gas. The primary syllabus doesn't cover it; you'll learn it in secondary school.",
+    "zh": "科学家用的一种模型：物质由极小的微粒组成，固体里的微粒挨得紧、在原地振动，液体里的挨着但能互相滑过，气体里的相隔很远。小学课纲没有讲，中学会学。"
+   },
+   "see": ["state-of-matter"]
+  }
+ ]
+}
