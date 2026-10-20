@@ -1,0 +1,1282 @@
+[
+  {
+    "id": "site-macritchie-reservoir",
+    "t": "1867",
+    "at": [
+      103.8326,
+      1.3436
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "MacRitchie Reservoir",
+      "zh": "麦里芝蓄水池"
+    },
+    "summary": {
+      "en": "Singapore's first reservoir, completed in 1867; named after the engineer James MacRitchie in 1922.",
+      "zh": "新加坡第一个蓄水池，1867 年建成；1922 年以工程师麦里芝命名。"
+    },
+    "sources": [
+      "S21",
+      "S32"
+    ]
+  },
+  {
+    "id": "site-lower-peirce-reservoir",
+    "t": "1920",
+    "at": [
+      103.8229,
+      1.3702
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Lower Peirce Reservoir",
+      "zh": "贝雅士蓄水池下段"
+    },
+    "summary": {
+      "en": "The second reservoir, first called Kallang River Reservoir; renamed Peirce in 1922 and Lower Peirce in 1975.",
+      "zh": "第二个蓄水池，原名加冷河蓄水池；1922 年改名贝雅士，1975 年改名贝雅士蓄水池下段。"
+    },
+    "sources": [
+      "S27",
+      "S23"
+    ]
+  },
+  {
+    "id": "site-upper-seletar-reservoir",
+    "t": "1920",
+    "at": [
+      103.8011,
+      1.4015
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Upper Seletar Reservoir",
+      "zh": "实里达蓄水池上段"
+    },
+    "summary": {
+      "en": "The third reservoir, Seletar, from 1920; enlarged in 1940 and 1967; renamed Upper Seletar in 1992.",
+      "zh": "第三个蓄水池实里达，1920 年起；1940 年和 1967 年两次扩建；1992 年改名实里达蓄水池上段。"
+    },
+    "sources": [
+      "S24",
+      "S22"
+    ]
+  },
+  {
+    "id": "site-upper-peirce-reservoir",
+    "t": "1975",
+    "at": [
+      103.8089,
+      1.3689
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Upper Peirce Reservoir",
+      "zh": "贝雅士蓄水池上段"
+    },
+    "summary": {
+      "en": "A higher dam upstream of Peirce Reservoir, completed in 1975.",
+      "zh": "在贝雅士蓄水池上游筑起更高的坝，1975 年建成。"
+    },
+    "sources": [
+      "S25"
+    ]
+  },
+  {
+    "id": "site-jurong-lake",
+    "t": "1971",
+    "at": [
+      103.7277,
+      1.3414
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Jurong Lake",
+      "zh": "裕廊湖"
+    },
+    "summary": {
+      "en": "Formed when the upper Jurong River was dammed in 1971.",
+      "zh": "1971 年在裕廊河上游筑坝形成。"
+    },
+    "sources": [
+      "S29"
+    ]
+  },
+  {
+    "id": "site-kranji-reservoir",
+    "t": "1975",
+    "at": [
+      103.7422,
+      1.4288
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Kranji Reservoir",
+      "zh": "克兰芝蓄水池"
+    },
+    "summary": {
+      "en": "A river mouth dammed under the Kranji–Pandan Water Scheme, completed in 1975.",
+      "zh": "按克兰芝—班丹水源计划在河口筑坝，1975 年完成。"
+    },
+    "sources": [
+      "S21",
+      "S30"
+    ]
+  },
+  {
+    "id": "site-pandan-reservoir",
+    "t": "1975",
+    "at": [
+      103.7414,
+      1.3139
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Pandan Reservoir",
+      "zh": "班丹蓄水池"
+    },
+    "summary": {
+      "en": "The swamps of the Pandan river mouth enclosed with an earthen dyke in 1974.",
+      "zh": "1974 年用土堤围住班丹河口的沼泽而成。"
+    },
+    "sources": [
+      "S28",
+      "S21"
+    ]
+  },
+  {
+    "id": "site-murai-reservoir",
+    "t": "1981",
+    "at": [
+      103.673,
+      1.4039
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Murai Reservoir",
+      "zh": "慕莱蓄水池"
+    },
+    "summary": {
+      "en": "One of the western rivers dammed between 1975 and 1981.",
+      "zh": "1975 年至 1981 年间筑坝的西部河流之一。"
+    },
+    "sources": [
+      "S30"
+    ]
+  },
+  {
+    "id": "site-poyan-reservoir",
+    "t": "1981",
+    "at": [
+      103.6667,
+      1.3782
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Poyan Reservoir",
+      "zh": "波扬蓄水池"
+    },
+    "summary": {
+      "en": "One of the western rivers dammed between 1975 and 1981.",
+      "zh": "1975 年至 1981 年间筑坝的西部河流之一。"
+    },
+    "sources": [
+      "S30"
+    ]
+  },
+  {
+    "id": "site-sarimbun-reservoir",
+    "t": "1981",
+    "at": [
+      103.6812,
+      1.4234
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Sarimbun Reservoir",
+      "zh": "莎琳汶蓄水池"
+    },
+    "summary": {
+      "en": "One of the western rivers dammed between 1975 and 1981.",
+      "zh": "1975 年至 1981 年间筑坝的西部河流之一。"
+    },
+    "sources": [
+      "S30"
+    ]
+  },
+  {
+    "id": "site-tengeh-reservoir",
+    "t": "1981",
+    "at": [
+      103.6416,
+      1.3504
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Tengeh Reservoir",
+      "zh": "登格蓄水池"
+    },
+    "summary": {
+      "en": "One of the western rivers dammed between 1975 and 1981.",
+      "zh": "1975 年至 1981 年间筑坝的西部河流之一。"
+    },
+    "sources": [
+      "S30",
+      "S32"
+    ]
+  },
+  {
+    "id": "site-lower-seletar-reservoir",
+    "t": "1986",
+    "at": [
+      103.8401,
+      1.4048
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Lower Seletar Reservoir",
+      "zh": "实里达蓄水池下段"
+    },
+    "summary": {
+      "en": "The mouth of the Seletar River dammed in 1986 (Sungei Seletar–Bedok Water Scheme).",
+      "zh": "1986 年在实里达河口筑坝而成（实里达河—勿洛水源计划）。"
+    },
+    "sources": [
+      "S22",
+      "S24"
+    ]
+  },
+  {
+    "id": "site-bedok-reservoir",
+    "t": "1986",
+    "at": [
+      103.9235,
+      1.3429
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Bedok Reservoir",
+      "zh": "勿洛蓄水池"
+    },
+    "summary": {
+      "en": "A former sand quarry turned into a reservoir, completed in 1986.",
+      "zh": "由采沙场改建的蓄水池，1986 年建成。"
+    },
+    "sources": [
+      "S26"
+    ]
+  },
+  {
+    "id": "site-pulau-tekong-reservoir",
+    "t": "2008",
+    "at": [
+      104.0421,
+      1.4144
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Pulau Tekong Reservoir",
+      "zh": "德光岛蓄水池"
+    },
+    "summary": {
+      "en": "The reservoir on the island of Pulau Tekong, one of the 17.",
+      "zh": "德光岛上的蓄水池，17 个之一。"
+    },
+    "sources": [
+      "S20"
+    ]
+  },
+  {
+    "id": "site-marina-reservoir",
+    "t": "2008-10-31",
+    "at": [
+      103.8665,
+      1.2871
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Marina Reservoir",
+      "zh": "滨海蓄水池"
+    },
+    "summary": {
+      "en": "The 15th reservoir and the first in the city centre, behind Marina Barrage (2008); fresh water from 2010.",
+      "zh": "第 15 个蓄水池，也是第一个位于市中心的蓄水池，在滨海堤坝之内（2008 年）；2010 年起成为淡水蓄水池。"
+    },
+    "sources": [
+      "S31"
+    ]
+  },
+  {
+    "id": "site-punggol-reservoir",
+    "t": "2011",
+    "at": [
+      103.8907,
+      1.406
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Punggol Reservoir",
+      "zh": "榜鹅蓄水池"
+    },
+    "summary": {
+      "en": "An estuary reservoir commissioned in 2011.",
+      "zh": "2011 年启用的河口蓄水池。"
+    },
+    "sources": [
+      "S21"
+    ]
+  },
+  {
+    "id": "site-serangoon-reservoir",
+    "t": "2011",
+    "at": [
+      103.9269,
+      1.4019
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Serangoon Reservoir",
+      "zh": "实龙岗蓄水池"
+    },
+    "summary": {
+      "en": "An estuary reservoir commissioned in 2011, bringing the number of reservoirs to 17.",
+      "zh": "2011 年启用的河口蓄水池，蓄水池总数由此达到 17 个。"
+    },
+    "sources": [
+      "S21",
+      "S20"
+    ]
+  },
+  {
+    "id": "singapore-naval-base",
+    "t": "1938-02-14",
+    "at": [
+      103.82,
+      1.46
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Singapore Naval Base",
+      "zh": "新加坡海军基地"
+    },
+    "summary": {
+      "en": "Britain's naval base at Sembawang, begun in 1928, is officially opened with the King George VI Dock; it is called the 'Gibraltar of the East'.",
+      "zh": "英国在三巴旺修建的海军基地 1928 年动工，与乔治六世船坞一同正式启用，被称为“东方直布罗陀”。"
+    },
+    "detail": {
+      "en": "The base was built to receive a British fleet sent from Europe in an emergency; no large fleet was stationed there. Planning assumed the fleet could arrive within 70 days of war breaking out; in September 1939, with war in Europe, the Chiefs of Staff extended this 'period before relief' to 180 days.",
+      "zh": "基地是为了在紧急时接纳从欧洲派来的英国舰队而修的，平时并没有大舰队驻扎。计划假定开战后 70 天内舰队可以赶到；1939 年 9 月欧洲开战后，参谋长委员会把这一“待援期”延长到 180 天。"
+    },
+    "sources": [
+      "S216",
+      "S217"
+    ]
+  },
+  {
+    "id": "site-paya-lebar-airport",
+    "t": "1955-08-20",
+    "at": [
+      103.909,
+      1.357
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Paya Lebar Airport",
+      "zh": "巴耶利峇机场"
+    },
+    "summary": {
+      "en": "Singapore's civil airport, officially opened on 20 August 1955. Civilian flights moved to Changi in 1981.",
+      "zh": "新加坡的民用机场，1955 年 8 月 20 日正式启用。1981 年民航班机迁往樟宜。"
+    },
+    "sources": [
+      "S60"
+    ]
+  },
+  {
+    "id": "site-seletar-airbase",
+    "t": "1928",
+    "at": [
+      103.867,
+      1.416
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Seletar airfield",
+      "zh": "实里达机场"
+    },
+    "summary": {
+      "en": "A Royal Air Force airfield: flying began in 1928 and it was officially opened on 1 January 1930.",
+      "zh": "英国皇家空军的机场：1928 年开始起降，1930 年 1 月 1 日正式启用。"
+    },
+    "sources": [
+      "S61"
+    ]
+  },
+  {
+    "id": "site-tengah-airbase",
+    "t": "1939",
+    "at": [
+      103.708,
+      1.387
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Tengah airfield",
+      "zh": "登加机场"
+    },
+    "summary": {
+      "en": "A Royal Air Force airfield built in 1939 in the west of the island.",
+      "zh": "英国皇家空军 1939 年在岛的西部建造的机场。"
+    },
+    "sources": [
+      "S62"
+    ]
+  },
+  {
+    "id": "site-sembawang-airbase",
+    "t": "1959-04-01",
+    "at": [
+      103.813,
+      1.425
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Sembawang airfield",
+      "zh": "三巴旺机场"
+    },
+    "summary": {
+      "en": "A military airfield marked on the 1959 map, near the naval base.",
+      "zh": "1959 年地图上标出的军用机场，靠近海军基地。"
+    },
+    "sources": [
+      "S9"
+    ],
+    "detail": {
+      "en": "The date is that of the 1959 map, not the airfield's opening, which was not confirmed for this topic.",
+      "zh": "日期是 1959 年地图的日期，不是机场的启用日期；本主题没能核实启用日期。"
+    }
+  },
+  {
+    "id": "site-changi-airbase",
+    "t": "1959-04-01",
+    "at": [
+      103.974,
+      1.394
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Changi airfield",
+      "zh": "樟宜机场（空军）"
+    },
+    "summary": {
+      "en": "A military airfield at the eastern tip, marked on the 1959 map. The civil Changi Airport opened beside it in 1981.",
+      "zh": "岛东端的军用机场，1959 年地图上已有标出。1981 年，民用的樟宜机场在它旁边启用。"
+    },
+    "sources": [
+      "S9"
+    ],
+    "detail": {
+      "en": "The date is that of the 1959 map, not the airfield's opening, which was not confirmed for this topic.",
+      "zh": "日期是 1959 年地图的日期，不是机场的启用日期；本主题没能核实启用日期。"
+    }
+  },
+  {
+    "id": "hdb-founded",
+    "t": "1960-02-01",
+    "at": [
+      103.835,
+      1.29
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "The Housing and Development Board is set up",
+      "zh": "建屋发展局成立"
+    },
+    "summary": {
+      "en": "HDB takes over from the Singapore Improvement Trust, which had built about 23,000 homes since 1927, and sets out to build low-cost flats quickly.",
+      "zh": "建屋局接替新加坡改良信托局。改良信托局从 1927 年起共建了约 2 万 3000 个单位；建屋局要尽快建造廉价组屋。"
+    },
+    "sources": [
+      "S50",
+      "S51"
+    ],
+    "detail": {
+      "en": "The marker stands for the city; the Board's first office address on that day was not confirmed.",
+      "zh": "标记代表市区；建屋局成立当天的办公地址没能核实。"
+    }
+  },
+  {
+    "id": "bukit-ho-swee-fire",
+    "t": "1961-05-25",
+    "at": [
+      103.827,
+      1.288
+    ],
+    "kind": "disaster",
+    "importance": 3,
+    "title": {
+      "en": "The Bukit Ho Swee fire",
+      "zh": "河水山大火"
+    },
+    "summary": {
+      "en": "Fire sweeps through about 100 acres of the kampong at Bukit Ho Swee. About 16,000 people lose their homes and four people die. The cause has never been established.",
+      "zh": "大火烧毁河水山甘榜约 100 英亩的土地，约 1 万 6000 人失去家园，4 人死亡。起火原因至今没有查明。"
+    },
+    "sources": [
+      "S55",
+      "S226",
+      "S221",
+      "S231"
+    ],
+    "detail": {
+      "en": "NLB counts about 2,800 homes destroyed. The cause is unknown; rumours at the time blamed gangs or the government, and the government changed the land law so that landowners could not profit from land cleared by fire. See the chapter's More block for these accounts. Two years earlier, on 13 February 1959, a fire in neighbouring Kampong Tiong Bahru had destroyed the homes of about 12,000 people.",
+      "zh": "据国家图书馆管理局，约 2800 间房屋被烧毁。起火原因不明；当时有传言怪私会党，也有传言怪政府；政府则修改土地法律，让地主不能从被火烧光的土地上获利。各种说法见本章的“细看”。两年前，1959 年 2 月 13 日，邻近的中峇鲁甘榜也发生大火，约 1 万 2000 人的家被烧毁。"
+    }
+  },
+  {
+    "id": "bukit-ho-swee-rebuilt",
+    "t": "1962",
+    "at": [
+      103.827,
+      1.288
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "Rehousing after the fire",
+      "zh": "火灾后的安置"
+    },
+    "summary": {
+      "en": "By February 1962 all the remaining families from the fire had been rehoused. HDB went on building on the burnt land and around it.",
+      "zh": "到 1962 年 2 月，余下的受灾家庭全部得到安置。建屋局继续在火场和四周建屋。"
+    },
+    "sources": [
+      "S55",
+      "S67"
+    ],
+    "until": "1967",
+    "detail": {
+      "en": "By 1967 HDB had built 12,562 flats on the fire site and the land next to it. Few of these blocks still stand, so few appear as dots.",
+      "zh": "到 1967 年，建屋局在火场和邻近土地上建了 12,562 个单位。这些楼今天还在的不多，所以地图上的点很少。"
+    }
+  },
+  {
+    "id": "queenstown-first-flats",
+    "t": "1960-10",
+    "at": [
+      103.803,
+      1.298
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "HDB's first blocks, Stirling Road",
+      "zh": "建屋局第一批组屋（史特林路）"
+    },
+    "summary": {
+      "en": "Blocks 45, 48 and 49 at Stirling Road in Queenstown are finished in October 1960; families move in during 1961.",
+      "zh": "女皇镇史特林路第 45、48、49 座在 1960 年 10 月完工，住户在 1961 年迁入。"
+    },
+    "sources": [
+      "S79",
+      "S70"
+    ],
+    "detail": {
+      "en": "The Singapore Improvement Trust had planned Queenstown as a satellite town in 1953.",
+      "zh": "新加坡改良信托局早在 1953 年就把女皇镇规划为卫星镇。"
+    }
+  },
+  {
+    "id": "home-ownership-1964",
+    "t": "1964-02-12",
+    "at": [
+      103.835,
+      1.29
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "Home Ownership for the People",
+      "zh": "“居者有其屋”计划"
+    },
+    "summary": {
+      "en": "On 12 February 1964 HDB launches a scheme to sell flats to the families who live in them, so that they can own their homes.",
+      "zh": "1964 年 2 月 12 日，建屋局推出计划，把组屋卖给住户，让他们拥有自己的家。"
+    },
+    "sources": [
+      "S51"
+    ],
+    "detail": {
+      "en": "A policy for the whole island; the marker stands for the city.",
+      "zh": "这是全岛的政策，标记代表市区。"
+    }
+  },
+  {
+    "id": "land-acquisition-act",
+    "t": "1966-10-26",
+    "at": [
+      103.85,
+      1.29
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "The Land Acquisition Act",
+      "zh": "《土地征用法令》"
+    },
+    "summary": {
+      "en": "Parliament passes a law letting the government acquire private land for public use, with compensation set by the law. It comes into force on 17 June 1967.",
+      "zh": "国会通过法令，让政府可以为公共用途征用私人土地，按法令规定付补偿。法令在 1967 年 6 月 17 日生效。"
+    },
+    "sources": [
+      "S53",
+      "S54"
+    ],
+    "detail": {
+      "en": "The government argued that land was needed for housing and industry and that gains in land value created by public spending belonged to the public. Many owners found the compensation, based on values at an earlier fixed date from 1973, too low to buy a similar property. The rules were changed in 2007 to use market value.",
+      "zh": "政府的理由是：建住屋和工业需要土地，公共开支带来的地价上涨应归公众。许多地主认为补偿太低（1973 年起按较早某一固定日期的价值计算），买不到相当的房地产。2007 年起改以市价计算。"
+    }
+  },
+  {
+    "id": "toa-payoh-new-town",
+    "t": "1964",
+    "at": [
+      103.85,
+      1.335
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "Toa Payoh: the first town built by HDB",
+      "zh": "大巴窑：第一个由建屋局兴建的新镇"
+    },
+    "summary": {
+      "en": "Building starts at the end of 1964 on the first town conceived and built entirely by HDB; the first tenants move in on 20 June 1966.",
+      "zh": "1964 年底，第一个完全由建屋局构想和兴建的新镇动工；首批住户在 1966 年 6 月 20 日迁入。"
+    },
+    "sources": [
+      "S229",
+      "S71"
+    ]
+  },
+  {
+    "id": "jurong-industrial-estate",
+    "t": "1961",
+    "at": [
+      103.7,
+      1.32
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "Jurong Industrial Estate",
+      "zh": "裕廊工业区"
+    },
+    "summary": {
+      "en": "Plans are made from 1961 to turn swamps and low hills at Jurong into an industrial estate with roads, water, power and a port.",
+      "zh": "从 1961 年起，政府计划把裕廊的沼泽和小山变成工业区，配备道路、水电和港口。"
+    },
+    "sources": [
+      "S203",
+      "S230"
+    ],
+    "detail": {
+      "en": "1961 is the year the estate was conceived, not the day any factory opened.",
+      "zh": "1961 年是构想工业区的年份，不是哪一间工厂开工的日子。"
+    }
+  },
+  {
+    "id": "jtc-founded",
+    "t": "1968-06-01",
+    "at": [
+      103.71,
+      1.32
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "Jurong Town Corporation is set up",
+      "zh": "裕廊镇管理局成立"
+    },
+    "summary": {
+      "en": "On 1 June 1968 a statutory board is set up to develop and run Jurong and Singapore's other industrial estates, a job first given to the Economic Development Board in 1961.",
+      "zh": "1968 年 6 月 1 日，政府成立法定机构，负责发展和管理裕廊以及新加坡其他工业区；这项工作原先在 1961 年交给经济发展局。"
+    },
+    "sources": [
+      "S230",
+      "S203"
+    ]
+  },
+  {
+    "id": "amk-first-blocks",
+    "t": "1973",
+    "at": [
+      103.845,
+      1.37
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "Ang Mo Kio's first blocks",
+      "zh": "宏茂桥第一批组屋"
+    },
+    "summary": {
+      "en": "The first long slab blocks of Ang Mo Kio go up in 1973, in what are now Neighbourhoods 2 and 3.",
+      "zh": "1973 年，宏茂桥的第一批板式组屋在今天的第 2、3 邻区建起。"
+    },
+    "sources": [
+      "S72"
+    ],
+    "detail": {
+      "en": "The blocks of 1973 that still stand appear as dots from the year they were finished.",
+      "zh": "1973 年动工、今天还在的楼，在它们落成的年份以点出现。"
+    }
+  },
+  {
+    "id": "tampines-begins",
+    "t": "1979",
+    "at": [
+      103.945,
+      1.353
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "Building starts at Tampines",
+      "zh": "淡滨尼动工"
+    },
+    "summary": {
+      "en": "Work begins on Tampines New Town in the east; its first blocks still standing date from the early 1980s.",
+      "zh": "东部的淡滨尼新镇动工；今天还在的第一批组屋建于 1980 年代初。"
+    },
+    "sources": [
+      "S73"
+    ]
+  },
+  {
+    "id": "woodlands-new-town",
+    "t": "1971",
+    "at": [
+      103.773,
+      1.438
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "Building starts at Woodlands",
+      "zh": "兀兰动工"
+    },
+    "summary": {
+      "en": "Construction of Woodlands New Town begins in 1971; the first flats, Blocks 1 to 5 at Marsiling, are finished in 1973.",
+      "zh": "兀兰新镇 1971 年动工；第一批组屋，即马西岭第 1 至 5 座，1973 年完工。"
+    },
+    "sources": [
+      "S58"
+    ]
+  },
+  {
+    "id": "farm-phase-out-begins",
+    "t": "1975",
+    "at": [
+      103.72,
+      1.41
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "Thousands of farms close",
+      "zh": "数以千计的农场关闭"
+    },
+    "summary": {
+      "en": "Between 1975 and 1984 about 8,000 farms are phased out to free land for housing, industry and reservoirs; about 7,900 remain.",
+      "zh": "1975 到 1984 年间，约 8000 个农场被逐步淘汰，腾出土地给住屋、工业和蓄水池，剩下约 7900 个。"
+    },
+    "sources": [
+      "S101"
+    ],
+    "until": "1984",
+    "detail": {
+      "en": "The farms of these years are not on the map: no open map of them exists. The marker stands for the farming areas of the north-west.",
+      "zh": "这些年间的农场没有画在地图上，因为找不到可以公开使用的地图。标记代表西北部的农业区。"
+    }
+  },
+  {
+    "id": "pig-farming-phase-out",
+    "t": "1984-03",
+    "at": [
+      103.9,
+      1.41
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "Pig farming is phased out",
+      "zh": "逐步停止养猪"
+    },
+    "summary": {
+      "en": "In March 1984 the government announces in Parliament that pig farming will end; the last pig farms close in 1989.",
+      "zh": "1984 年 3 月，政府在国会宣布停止养猪；最后一批养猪场在 1989 年关闭。"
+    },
+    "sources": [
+      "S100",
+      "S101",
+      "S225"
+    ],
+    "until": "1989",
+    "detail": {
+      "en": "The government cited heavy pollution, the cost of treating pig waste, the shortage of land and water, and complaints from nearby housing estates. In the 1970s pig farms had been moved to Punggol to protect water catchments; farmers who had just invested there, and the Member of Parliament Koh Lip Lin in 1988, criticised the change.",
+      "zh": "政府提出的理由是：污染严重、处理猪粪污水费用高、土地和水资源不足，以及附近住宅区居民投诉。1970 年代，养猪场为了保护集水区被迁到榜鹅；刚在那里投资的农户，以及国会议员 Koh Lip Lin（1988 年），都批评这项改变。"
+    }
+  },
+  {
+    "id": "agrotech-parks-1986",
+    "t": "1986-09",
+    "at": [
+      103.71,
+      1.43
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "Land for agrotechnology parks",
+      "zh": "划出农业科技园"
+    },
+    "summary": {
+      "en": "Land is set aside for agrotechnology parks; the first 120 hectares, at Sungei Tengah, Murai and Loyang, are put out to tender in September 1986.",
+      "zh": "政府划出农业科技园的土地；1986 年 9 月，双溪登加、慕莱和罗央的第一批 120 公顷土地开始招标。"
+    },
+    "sources": [
+      "S103",
+      "S101"
+    ],
+    "detail": {
+      "en": "The green area on the map is today's farmland in Lim Chu Kang and the western catchment, not the 1986 park boundaries.",
+      "zh": "地图上的绿色区块是今天林厝港和西部集水区的农业用地，不是 1986 年园区的边界。"
+    }
+  },
+  {
+    "id": "first-indoor-farm",
+    "t": "2014",
+    "at": [
+      103.73,
+      1.33
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "The first indoor farm",
+      "zh": "第一个室内菜园"
+    },
+    "summary": {
+      "en": "Singapore's first licensed indoor vegetable farm is set up; its builder dates it to October 2013 and announced a trial supply to a restaurant chain on 31 July 2014.",
+      "zh": "新加坡第一个获得执照的室内菜园设立；建造它的公司说它在 2013 年 10 月设立，并在 2014 年 7 月 31 日宣布开始试行向一家连锁餐馆供菜。"
+    },
+    "sources": [
+      "S105",
+      "S106"
+    ],
+    "detail": {
+      "en": "The marker stands for western Singapore; the farm's exact site was not confirmed for this topic.",
+      "zh": "标记代表新加坡西部；本主题没能核实菜园的确切地点。"
+    }
+  },
+  {
+    "id": "food-story-2",
+    "t": "2025-11",
+    "at": [
+      103.82,
+      1.36
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "Singapore Food Story 2",
+      "zh": "新加坡食物故事 2"
+    },
+    "summary": {
+      "en": "New goals for 2035 replace “30 by 30”: local farms should be able to supply 20 per cent of the vegetables and mushrooms eaten, and 30 per cent of the eggs and seafood.",
+      "zh": "新的 2035 年目标取代“30·30 愿景”：本地农场要能供应国人所吃蔬菜和菇类的 20%，以及鸡蛋和海产的 30%。"
+    },
+    "sources": [
+      "S220",
+      "S201"
+    ],
+    "detail": {
+      "en": "A policy for the whole island; the marker stands for Singapore as a whole.",
+      "zh": "这是全岛的政策，标记代表整个新加坡。"
+    }
+  },
+  {
+    "id": "site-kampong-lorong-buangkok",
+    "t": "1959-04-01",
+    "at": [
+      103.878,
+      1.383
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Kampong Lorong Buangkok",
+      "zh": "甘榜罗弄万国"
+    },
+    "summary": {
+      "en": "One of the last kampongs on the main island, where some families still live.",
+      "zh": "本岛上最后的甘榜之一，至今仍有人家居住。"
+    },
+    "sources": [
+      "S213",
+      "S214"
+    ],
+    "detail": {
+      "en": "The marker shows where the village is today; the date is the start of this map, not the village's founding.",
+      "zh": "标记是村子今天的位置；日期是本图的起始日，不是村子形成的年份。"
+    }
+  },
+  {
+    "id": "area-licensing-scheme",
+    "t": "1975-06-02",
+    "at": [
+      103.85,
+      1.29
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "The Area Licensing Scheme begins",
+      "zh": "区域执照计划实施"
+    },
+    "summary": {
+      "en": "Cars entering the city centre during the morning rush must show a paid licence.",
+      "zh": "早上交通高峰时进入市中心的车辆，必须出示付费的通行证。"
+    },
+    "sources": [
+      "S157"
+    ]
+  },
+  {
+    "id": "changi-airport-opens",
+    "t": "1981-07-01",
+    "at": [
+      103.989,
+      1.364
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "Changi Airport opens",
+      "zh": "樟宜机场启用"
+    },
+    "summary": {
+      "en": "The new airport at the eastern tip, built partly on reclaimed land, begins operating and takes over civilian flights from Paya Lebar.",
+      "zh": "建在岛东端、部分在填海地上的新机场开始运作，接手巴耶利峇的民航班机。"
+    },
+    "sources": [
+      "S151",
+      "S222"
+    ]
+  },
+  {
+    "id": "mrt-official-opening",
+    "t": "1988-03-12",
+    "at": [
+      103.85,
+      1.335
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "The MRT is officially opened",
+      "zh": "地铁正式开幕"
+    },
+    "summary": {
+      "en": "The official opening ceremony of the Mass Rapid Transit, four months after the first trains carried passengers.",
+      "zh": "地铁系统的正式开幕典礼，在第一批列车载客四个月之后举行。"
+    },
+    "sources": [
+      "S96",
+      "S155"
+    ]
+  },
+  {
+    "id": "coe-1990",
+    "t": "1990-05",
+    "at": [
+      103.85,
+      1.29
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "Certificates of Entitlement",
+      "zh": "拥车证"
+    },
+    "summary": {
+      "en": "From May 1990 anyone registering a new vehicle needs a Certificate of Entitlement, and only a fixed number are issued.",
+      "zh": "1990 年 5 月起，登记新车必须先有拥车证，而拥车证的数量是固定的。"
+    },
+    "sources": [
+      "S158",
+      "S153"
+    ],
+    "detail": {
+      "en": "A policy for the whole island; the marker stands for the city.",
+      "zh": "这是全岛的政策，标记代表市区。"
+    }
+  },
+  {
+    "id": "erp-1998",
+    "t": "1998-04-01",
+    "at": [
+      103.85,
+      1.29
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "Electronic Road Pricing begins",
+      "zh": "电子道路收费开始"
+    },
+    "summary": {
+      "en": "Gantries begin charging vehicles electronically for using busy roads at busy times: first on the East Coast Parkway, then from September 1998 in the city.",
+      "zh": "闸门开始以电子方式向繁忙时段使用繁忙道路的车辆收费：先在东海岸公园大道，1998 年 9 月起扩大到市区。"
+    },
+    "sources": [
+      "S152",
+      "S224"
+    ]
+  },
+  {
+    "id": "east-coast-reclamation",
+    "t": "1966",
+    "at": [
+      103.93,
+      1.31
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "East Coast reclamation begins",
+      "zh": "东海岸填海开始"
+    },
+    "summary": {
+      "en": "The first of several reclamation phases along the east coast, which together pushed the shore out to sea over about thirty years.",
+      "zh": "东海岸分几期填海的第一期。前后约 30 年，海岸线被推向海里。"
+    },
+    "sources": [
+      "S207"
+    ]
+  },
+  {
+    "id": "marina-bay-reclamation",
+    "t": "1974",
+    "at": [
+      103.868,
+      1.285
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "Reclamation around Marina Bay",
+      "zh": "滨海湾填海"
+    },
+    "summary": {
+      "en": "Land is reclaimed for Marina Centre from 1974, and later for Marina East and Marina South, enclosing what became Marina Bay.",
+      "zh": "1974 年起为滨海中心填海，之后又填出滨海东和滨海南，围出了后来的滨海湾。"
+    },
+    "sources": [
+      "S207"
+    ]
+  },
+  {
+    "id": "jurong-island-opens",
+    "t": "2000-10-14",
+    "at": [
+      103.69,
+      1.265
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "Jurong Island is officially opened",
+      "zh": "裕廊岛正式启用"
+    },
+    "summary": {
+      "en": "Seven small islands off Jurong, joined by reclamation from 1993, become one island for oil refineries and chemical plants.",
+      "zh": "裕廊外海的七个小岛从 1993 年起经填海连接，成为一个岛，用来建炼油厂和化工厂。"
+    },
+    "sources": [
+      "S208",
+      "S207"
+    ],
+    "detail": {
+      "en": "The opening did not end the reclamation: the scheme was completed in 2003, and later works enlarged the island further.",
+      "zh": "启用不代表填海结束：这项计划在 2003 年完成，之后的工程又把岛扩大了。"
+    }
+  },
+  {
+    "id": "jurong-rock-caverns",
+    "t": "2014-09-02",
+    "at": [
+      103.705,
+      1.26
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "Jurong Rock Caverns open",
+      "zh": "裕廊岩洞启用"
+    },
+    "summary": {
+      "en": "Caverns dug in rock deep below Jurong Island store oil underground, freeing about 60 hectares of land at the surface.",
+      "zh": "在裕廊岛地底深处的岩石里挖出的岩洞用来储油，腾出地面上约 60 公顷的土地。"
+    },
+    "sources": [
+      "S210"
+    ]
+  },
+  {
+    "id": "pinnacle-duxton",
+    "t": "2009-12-13",
+    "at": [
+      103.841,
+      1.277
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "Pinnacle@Duxton",
+      "zh": "达士岭组屋"
+    },
+    "summary": {
+      "en": "Keys are handed over at seven linked 50-storey blocks, the tallest HDB flats.",
+      "zh": "七座相连、各 50 层的组屋交钥匙，是最高的组屋。"
+    },
+    "sources": [
+      "S51",
+      "S59"
+    ]
+  },
+  {
+    "id": "tuas-reclamation",
+    "t": "1970",
+    "at": [
+      103.63,
+      1.32
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "Reclamation at Tuas",
+      "zh": "大士填海"
+    },
+    "summary": {
+      "en": "From the 1970s the coast at Tuas, at the western end of the island, is pushed out for industry; more was added from the late 1980s.",
+      "zh": "1970 年代起，岛西端大士的海岸为了工业向外推出；1980 年代末起又再扩大。"
+    },
+    "sources": [
+      "S207"
+    ],
+    "detail": {
+      "en": "No single start day is known; the marker is placed at the start of the 1970s.",
+      "zh": "没有确切的开工日期，标记放在 1970 年代开头。"
+    }
+  },
+  {
+    "id": "master-plan-2019",
+    "t": "2019-11-18",
+    "at": [
+      103.846,
+      1.279
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "Master Plan 2019",
+      "zh": "2019 年总蓝图"
+    },
+    "summary": {
+      "en": "The Urban Redevelopment Authority's plan for the planned use of every piece of land, approved on 18 November 2019.",
+      "zh": "市区重建局为每一块地定下规划用途的总蓝图，2019 年 11 月 18 日批准。"
+    },
+    "sources": [
+      "S2",
+      "S212"
+    ],
+    "detail": {
+      "en": "It was gazetted on 27 November 2019. The map shows planned use, not what stood on every plot that day.",
+      "zh": "总蓝图在 2019 年 11 月 27 日刊登宪报。地图画的是规划用途，不是当天每块地上实际有什么。"
+    }
+  },
+  {
+    "id": "sungei-buloh-reserve",
+    "t": "2002-01",
+    "at": [
+      103.73,
+      1.446
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Sungei Buloh Wetland Reserve",
+      "zh": "双溪布洛湿地保护区"
+    },
+    "summary": {
+      "en": "Mangroves and mudflats in the north-west, opened as a nature park in 1993; 130 hectares were made a nature reserve in 2002.",
+      "zh": "西北部的红树林和泥滩，1993 年开放为自然公园；2002 年，其中 130 公顷成为自然保护区。"
+    },
+    "sources": [
+      "S206",
+      "S218"
+    ]
+  },
+  {
+    "id": "labrador-reserve",
+    "t": "2002-01",
+    "at": [
+      103.803,
+      1.264
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Labrador Nature Reserve",
+      "zh": "拉柏多自然保护区"
+    },
+    "summary": {
+      "en": "A strip of coastal forest on the south coast, made a nature reserve in January 2002.",
+      "zh": "南岸的一片海边森林，2002 年 1 月成为自然保护区。"
+    },
+    "sources": [
+      "S218",
+      "S204"
+    ],
+    "detail": {
+      "en": "Labrador was already among the places protected in 1951, but it was later made a park; the map draws it from 2002, with today's boundary.",
+      "zh": "拉柏多在 1951 年已是受保护的地方之一，后来改为公园；地图从 2002 年起画出它，用的是今天的边界。"
+    }
+  }
+]

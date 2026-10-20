@@ -1,0 +1,969 @@
+[
+  {
+    "id": "pig-farming-announcement",
+    "spec": "F11; §2.2 ch03",
+    "fact": "Goh Keng Swee announced the phase-out policy in Parliament in March 1984.",
+    "status": "confirmed",
+    "source": {
+      "title": "The Phasing Out of Pig Farms",
+      "publisher": "Ministry of the Environment, 23 April 1985 / National Archives of Singapore",
+      "url": "https://www.nas.gov.sg/archivesonline/data/pdfdoc/19850423_0003.pdf",
+      "section": "printed p. 1, opening paragraph",
+      "access_date": "2026-10-20",
+      "quotation": "in Parliament in March 1984"
+    },
+    "evidence_ids": [],
+    "notes": "Full two-page government release read; do not invent a day within March.",
+    "date": "1984-03"
+  },
+  {
+    "id": "pig-farming-government-rationale",
+    "spec": "F11; §1.4; ch03",
+    "fact": "Government cited treatment cost, scarce land/water, smell and homes approaching farmland. Lim Chu Kang farms were to stop by June 1986.",
+    "status": "confirmed",
+    "source": {
+      "title": "The Phasing Out of Pig Farms",
+      "publisher": "Ministry of the Environment, 23 April 1985 / National Archives of Singapore",
+      "url": "https://www.nas.gov.sg/archivesonline/data/pdfdoc/19850423_0003.pdf",
+      "section": "printed pp. 1–2",
+      "access_date": "2026-10-20",
+      "quotation": "land and water"
+    },
+    "evidence_ids": [],
+    "notes": "Release also promises resettlement benefits and at least one year notice for subsequent areas. Catchment-specific rationale has a separate source below."
+  },
+  {
+    "id": "pig-farming-catchment",
+    "spec": "F11; §1.4; ch03",
+    "fact": "Pig-farm runoff threatened Kranji catchment; relocation preceded the island-wide phase-out.",
+    "status": "confirmed",
+    "source": {
+      "title": "Food and The City: Overcoming Challenges for Food Security",
+      "publisher": "Centre for Liveable Cities, Ministry of National Development; Elyssa Ludher and Thinesh Kumar s/o Paramasilvam (2018)",
+      "url": "https://www.clc.gov.sg/docs/default-source/urban-systems-studies/food-and-the-city-overcoming-challenges-for-food-security.pdf",
+      "section": "printed pp. 29–31; PDF pp. 23–24",
+      "access_date": "2026-10-20",
+      "quotation": "water catchment areas"
+    },
+    "evidence_ids": [],
+    "notes": "Water protection is a documented rationale; do not imply every closed farm polluted a reservoir."
+  },
+  {
+    "id": "pig-farming-completion",
+    "spec": "F11; ch03 pig-farming-phase-out",
+    "fact": "CLC dates the last pig phase-out to 1989.",
+    "status": "corrected",
+    "source": {
+      "title": "Food and The City: Overcoming Challenges for Food Security",
+      "publisher": "Centre for Liveable Cities, Ministry of National Development; Elyssa Ludher and Thinesh Kumar s/o Paramasilvam (2018)",
+      "url": "https://www.clc.gov.sg/docs/default-source/urban-systems-studies/food-and-the-city-overcoming-challenges-for-food-security.pdf",
+      "section": "printed p. 35; PDF p. 26",
+      "access_date": "2026-10-20",
+      "quotation": "1989"
+    },
+    "evidence_ids": [],
+    "notes": "Replace approximate 1990 endpoint with source-qualified 1989; no exact day verified.",
+    "date": "1989"
+  },
+  {
+    "id": "pig-farming-farmers-perspective",
+    "spec": "§1.4; ch03",
+    "fact": "Koh Lip Lin criticised the reversal after farmers invested in Punggol; some families entered retail. CLC describes loss of family ties and identity.",
+    "status": "confirmed",
+    "source": {
+      "title": "Food and The City: Overcoming Challenges for Food Security",
+      "publisher": "Centre for Liveable Cities, Ministry of National Development; Elyssa Ludher and Thinesh Kumar s/o Paramasilvam (2018)",
+      "url": "https://www.clc.gov.sg/docs/default-source/urban-systems-studies/food-and-the-city-overcoming-challenges-for-food-security.pdf",
+      "section": "printed pp. 27–28, 35; PDF pp. 22–23, 26",
+      "access_date": "2026-10-20",
+      "quotation": "last frontier"
+    },
+    "evidence_ids": [],
+    "notes": "Attribution is essential. CLC reproduces Koh’s parliamentary criticism and describes the Tan Chye Huat family’s supermarket business."
+  },
+  {
+    "id": "pig-farmers-overseas",
+    "spec": "§1.4 farmers moving to neighbouring countries",
+    "fact": "Individual farmers’ relocation to neighbouring countries was not verified in the inspected sources.",
+    "status": "unverifiable",
+    "source": {
+      "title": "Of Swine and Sustainability",
+      "publisher": "National Heritage Board / Roots",
+      "url": "https://www.roots.gov.sg/stories-landing/stories/of-swine-and-sustainability/story",
+      "section": "access attempt: robot-verification page",
+      "access_date": "2026-10-20",
+      "quotation": ""
+    },
+    "evidence_ids": [],
+    "notes": "Do not state overseas relocation without a readable specific case. A search excerpt exists but full page was blocked."
+  },
+  {
+    "id": "farm-count-and-area-transition",
+    "spec": "F1; F10; ch03",
+    "fact": "SFA gives 20,000 farms in 1959 and farmland shrinking from about 14,000 to 8,400 hectares as the 1970s began.",
+    "status": "confirmed",
+    "source": {
+      "title": "Of Change & Challenges: Reminders from Singapore’s Past Agricultural Transformations",
+      "publisher": "Singapore Food Agency; Choo RuiZhi, 12 October 2022",
+      "url": "https://www.sfa.gov.sg/food-for-thought/article/detail/of-change-challenges-reminders-from-singapore-s-past-agricultural-transformations",
+      "section": "Evolution of Singapore’s Agri-food Industry",
+      "access_date": "2026-10-20",
+      "quotation": "20,000 farms"
+    },
+    "evidence_ids": [
+      "E054",
+      "E055"
+    ],
+    "notes": "Source opened during this pass; historic all-farm totals differ from modern food-farm licences."
+  },
+  {
+    "id": "farm-phaseout-count",
+    "spec": "F10; ch03",
+    "fact": "CLC reports roughly 8,000 farms phased out in 1975–1984, about 7,900 remaining, and about 1,500 hectares by the 1980s.",
+    "status": "confirmed",
+    "source": {
+      "title": "Food and The City: Overcoming Challenges for Food Security",
+      "publisher": "Centre for Liveable Cities, Ministry of National Development; Elyssa Ludher and Thinesh Kumar s/o Paramasilvam (2018)",
+      "url": "https://www.clc.gov.sg/docs/default-source/urban-systems-studies/food-and-the-city-overcoming-challenges-for-food-security.pdf",
+      "section": "printed p. 27; PDF p. 22",
+      "access_date": "2026-10-20",
+      "quotation": "7,900"
+    },
+    "evidence_ids": [
+      "E057",
+      "E058"
+    ],
+    "notes": "The 1980s figure has no exact year. It is not a 1980 data point."
+  },
+  {
+    "id": "farm-park-lim-chu-kang",
+    "spec": "F12; §3.4 farm-parks",
+    "fact": "Lim Chu Kang: 1986 land reservation verified; individual opening/gazette year unverified.",
+    "status": "unverifiable",
+    "source": {
+      "title": "Food and The City: Overcoming Challenges for Food Security",
+      "publisher": "Centre for Liveable Cities, Ministry of National Development; Elyssa Ludher and Thinesh Kumar s/o Paramasilvam (2018)",
+      "url": "https://www.clc.gov.sg/docs/default-source/urban-systems-studies/food-and-the-city-overcoming-challenges-for-food-security.pdf",
+      "section": "printed p. 36 and endnote 101; PDF pp. 27, 67",
+      "access_date": "2026-10-20",
+      "quotation": "Lim Chu Kang"
+    },
+    "evidence_ids": [
+      "E059"
+    ],
+    "notes": "1986 may be used only as reservation/programme date, with approximate current footprint. Ah Ma Keng was later redesignated; no end year recovered.",
+    "reservation_year": 1986,
+    "opening_year": null
+  },
+  {
+    "id": "farm-park-murai",
+    "spec": "F12; §3.4 farm-parks",
+    "fact": "Murai: 1986 land reservation verified; individual opening/gazette year unverified.",
+    "status": "unverifiable",
+    "source": {
+      "title": "Food and The City: Overcoming Challenges for Food Security",
+      "publisher": "Centre for Liveable Cities, Ministry of National Development; Elyssa Ludher and Thinesh Kumar s/o Paramasilvam (2018)",
+      "url": "https://www.clc.gov.sg/docs/default-source/urban-systems-studies/food-and-the-city-overcoming-challenges-for-food-security.pdf",
+      "section": "printed p. 36 and endnote 101; PDF pp. 27, 67",
+      "access_date": "2026-10-20",
+      "quotation": "Murai"
+    },
+    "evidence_ids": [
+      "E059"
+    ],
+    "notes": "1986 may be used only as reservation/programme date, with approximate current footprint. Ah Ma Keng was later redesignated; no end year recovered.",
+    "reservation_year": 1986,
+    "opening_year": null
+  },
+  {
+    "id": "farm-park-sungei-tengah",
+    "spec": "F12; §3.4 farm-parks",
+    "fact": "Sungai Tengah: 1986 land reservation verified; individual opening/gazette year unverified.",
+    "status": "unverifiable",
+    "source": {
+      "title": "Food and The City: Overcoming Challenges for Food Security",
+      "publisher": "Centre for Liveable Cities, Ministry of National Development; Elyssa Ludher and Thinesh Kumar s/o Paramasilvam (2018)",
+      "url": "https://www.clc.gov.sg/docs/default-source/urban-systems-studies/food-and-the-city-overcoming-challenges-for-food-security.pdf",
+      "section": "printed p. 36 and endnote 101; PDF pp. 27, 67",
+      "access_date": "2026-10-20",
+      "quotation": "Sungai Tengah"
+    },
+    "evidence_ids": [
+      "E059"
+    ],
+    "notes": "1986 may be used only as reservation/programme date, with approximate current footprint. Ah Ma Keng was later redesignated; no end year recovered.",
+    "reservation_year": 1986,
+    "opening_year": null
+  },
+  {
+    "id": "farm-park-nee-soon",
+    "spec": "F12; §3.4 farm-parks",
+    "fact": "Nee Soon: 1986 land reservation verified; individual opening/gazette year unverified.",
+    "status": "unverifiable",
+    "source": {
+      "title": "Food and The City: Overcoming Challenges for Food Security",
+      "publisher": "Centre for Liveable Cities, Ministry of National Development; Elyssa Ludher and Thinesh Kumar s/o Paramasilvam (2018)",
+      "url": "https://www.clc.gov.sg/docs/default-source/urban-systems-studies/food-and-the-city-overcoming-challenges-for-food-security.pdf",
+      "section": "printed p. 36 and endnote 101; PDF pp. 27, 67",
+      "access_date": "2026-10-20",
+      "quotation": "Nee Soon"
+    },
+    "evidence_ids": [
+      "E059"
+    ],
+    "notes": "1986 may be used only as reservation/programme date, with approximate current footprint. Ah Ma Keng was later redesignated; no end year recovered.",
+    "reservation_year": 1986,
+    "opening_year": null
+  },
+  {
+    "id": "farm-park-loyang",
+    "spec": "F12; §3.4 farm-parks",
+    "fact": "Loyang: 1986 land reservation verified; individual opening/gazette year unverified.",
+    "status": "unverifiable",
+    "source": {
+      "title": "Food and The City: Overcoming Challenges for Food Security",
+      "publisher": "Centre for Liveable Cities, Ministry of National Development; Elyssa Ludher and Thinesh Kumar s/o Paramasilvam (2018)",
+      "url": "https://www.clc.gov.sg/docs/default-source/urban-systems-studies/food-and-the-city-overcoming-challenges-for-food-security.pdf",
+      "section": "printed p. 36 and endnote 101; PDF pp. 27, 67",
+      "access_date": "2026-10-20",
+      "quotation": "Loyang"
+    },
+    "evidence_ids": [
+      "E059"
+    ],
+    "notes": "1986 may be used only as reservation/programme date, with approximate current footprint. Ah Ma Keng was later redesignated; no end year recovered.",
+    "reservation_year": 1986,
+    "opening_year": null
+  },
+  {
+    "id": "farm-park-ah-ma-keng",
+    "spec": "F12; §3.4 farm-parks",
+    "fact": "Ah Ma Keng: 1986 land reservation verified; individual opening/gazette year unverified.",
+    "status": "unverifiable",
+    "source": {
+      "title": "Food and The City: Overcoming Challenges for Food Security",
+      "publisher": "Centre for Liveable Cities, Ministry of National Development; Elyssa Ludher and Thinesh Kumar s/o Paramasilvam (2018)",
+      "url": "https://www.clc.gov.sg/docs/default-source/urban-systems-studies/food-and-the-city-overcoming-challenges-for-food-security.pdf",
+      "section": "printed p. 36 and endnote 101; PDF pp. 27, 67",
+      "access_date": "2026-10-20",
+      "quotation": "Ah Ma Keng"
+    },
+    "evidence_ids": [
+      "E059"
+    ],
+    "notes": "1986 may be used only as reservation/programme date, with approximate current footprint. Ah Ma Keng was later redesignated; no end year recovered.",
+    "reservation_year": 1986,
+    "opening_year": null
+  },
+  {
+    "id": "agrotech-first-tender",
+    "spec": "F12; ch03 agrotech-parks-1986",
+    "fact": "The September 1986 release scheduled first tenders for Sungei Tengah, Murai and Loyang for 5 September 1986; wider development was planned for 1986–1992.",
+    "status": "confirmed",
+    "source": {
+      "title": "Tendering of Land for Farming in Agrotechnology Parks",
+      "publisher": "Singapore Government / Primary Production Department / NAS",
+      "url": "https://www.nas.gov.sg/archivesonline/data/pdfdoc/1181-1986-09-03.pdf",
+      "section": "printed p. 1, paragraphs 1–3; inspected existing rendered scan",
+      "access_date": "2026-10-20",
+      "quotation": "to be tendered out on 5 Sep 86"
+    },
+    "evidence_ids": [],
+    "notes": "Plan publication is not an opening. The primary release lists more future locations than CLC’s six. Maps remain look-only; no open reproduction licence established.",
+    "date": "1986-09-05"
+  },
+  {
+    "id": "farm-park-chinese-names",
+    "spec": "F12 Chinese place names",
+    "fact": "Chinese names for all six historical agrotechnology parks were not individually verified.",
+    "status": "unverifiable",
+    "source": {
+      "title": "Food and The City: Overcoming Challenges for Food Security",
+      "publisher": "Centre for Liveable Cities, Ministry of National Development; Elyssa Ludher and Thinesh Kumar s/o Paramasilvam (2018)",
+      "url": "https://www.clc.gov.sg/docs/default-source/urban-systems-studies/food-and-the-city-overcoming-challenges-for-food-security.pdf",
+      "section": "printed p. 36; English list only",
+      "access_date": "2026-10-20",
+      "quotation": ""
+    },
+    "evidence_ids": [
+      "E059"
+    ],
+    "notes": "Retain Chinese fields as 【待译】; especially Murai and Ah Ma Keng require local usage evidence."
+  },
+  {
+    "id": "food-import-share",
+    "spec": "F13; ch03 final beat",
+    "fact": "SFA states that Singapore imports over 90% of its food.",
+    "status": "confirmed",
+    "source": {
+      "title": "Champions of tomorrow - supporting local farmers",
+      "publisher": "Singapore Food Agency",
+      "url": "https://www.sfa.gov.sg/fromsgtosg/our-sg-food-story/champions-of-tomorrow-supporting-local-farmers",
+      "section": "opening section, paragraph 3",
+      "access_date": "2026-10-20",
+      "quotation": "imports over 90% of its food"
+    },
+    "evidence_ids": [],
+    "notes": "SFA’s broad statement; no denominator or precise 2024 measurement supplied. “Most food comes from abroad” is supported."
+  },
+  {
+    "id": "first-indoor-farm-sfa",
+    "spec": "F13; ch03 first-indoor-farm",
+    "fact": "SFA dates Singapore’s first indoor farm to 2014.",
+    "status": "confirmed",
+    "source": {
+      "title": "Agriculture Technologies",
+      "publisher": "Singapore Food Agency",
+      "url": "https://www.sfa.gov.sg/food-science-and-technology/technology/agriculture-technologies",
+      "section": "Indoor agricultural farms",
+      "access_date": "2026-10-20",
+      "quotation": "Singapore’s first indoor farm was established in 2014"
+    },
+    "evidence_ids": [
+      "E007"
+    ],
+    "notes": "",
+    "date": "2014"
+  },
+  {
+    "id": "first-indoor-farm-panasonic",
+    "spec": "F13; ch03 first-indoor-farm",
+    "fact": "Panasonic announced pilot commercial supply on 31 July 2014; its release says the facility was established in October 2013.",
+    "status": "corrected",
+    "source": {
+      "title": "Panasonic Contributes to Singapore’s Self-Sufficiency Level of Vegetables with First Indoor Vegetable Farm",
+      "publisher": "Panasonic Asia Pacific, 31 July 2014",
+      "url": "https://www.mynewsdesk.com/sg/panasonicapac/pressreleases/panasonic-contributes-to-singapore-s-self-sufficiency-level-of-vegetables-with-first-indoor-vegetable-farm-1104976",
+      "section": "opening paragraph; About Panasonic Factory Solutions Asia Pacific",
+      "access_date": "2026-10-20",
+      "quotation": "In October 2013, the facility established its indoor agriculture farm"
+    },
+    "evidence_ids": [],
+    "notes": "Different milestones. The release describes soil cultivation under LED light; do not automatically describe this first farm as hydroponic.",
+    "dates": {
+      "facility": "2013-10",
+      "commercial_announcement": "2014-07-31"
+    }
+  },
+  {
+    "id": "first-indoor-farm-location",
+    "spec": "ch03 first-indoor-farm coordinates",
+    "fact": "Jalan Ahmad Ibrahim is reported by The Straits Times; exact site/address and publishable point coordinates were not verified from primary evidence.",
+    "status": "unverifiable",
+    "source": {
+      "title": "Panasonic runs one of Singapore’s largest indoor farms",
+      "publisher": "The Straits Times",
+      "url": "https://www.straitstimes.com/singapore/panasonic-runs-one-of-singapores-largest-indoor-farms?ai-allowed=1",
+      "section": "search excerpt only",
+      "access_date": "2026-10-20",
+      "quotation": "located in Jalan Ahmad Ibrahim"
+    },
+    "evidence_ids": [],
+    "notes": "Do not use the speculative west-island beat coordinate as a precise farm point. Panasonic release has no address; attached scanned fact sheet gave no extractable text."
+  },
+  {
+    "id": "jurong-conception",
+    "spec": "F9; ch02 jurong-industrial-estate",
+    "fact": "JTC dates the estate’s conception to 1961.",
+    "status": "confirmed",
+    "source": {
+      "title": "Dream Factories",
+      "publisher": "JTC Corporation",
+      "url": "https://www.jtc.gov.sg/about-jtc/dream-factories",
+      "section": "Dream Factories introduction",
+      "access_date": "2026-10-20",
+      "quotation": "Jurong Industrial Estate, conceptualised in 1961"
+    },
+    "evidence_ids": [
+      "E008"
+    ],
+    "notes": "Conception is not inauguration or start of every parcel.",
+    "date": "1961"
+  },
+  {
+    "id": "jurong-construction-day",
+    "spec": "F9; ch02 jurong-industrial-estate",
+    "fact": "A single estate-wide start/opening day was not established; sources disagree on the National Iron & Steel Mills foundation-stone day.",
+    "status": "unverifiable",
+    "source": {
+      "title": "Industrial Revolution",
+      "publisher": "National Library Board, Curiocity",
+      "url": "https://curiocity.nlb.gov.sg/digital-stories/jurong/jurong-industrial-estate-development/",
+      "section": "page accessed; compare URA NatSteel conservation page",
+      "access_date": "2026-10-20",
+      "quotation": ""
+    },
+    "evidence_ids": [],
+    "notes": "Search extract says 1 September 1962; URA 22 Tanjong Kling Road search extract says 16 September 1962. Do not silently choose. Estate conception 1961 remains independently verified."
+  },
+  {
+    "id": "jtc-founded",
+    "spec": "F9; ch02 jtc-founded",
+    "fact": "Jurong Town Corporation Act commencement is 1 June 1968, but direct SSO access was blocked.",
+    "status": "unverifiable",
+    "source": {
+      "title": "Jurong Town Corporation Act 1968",
+      "publisher": "Attorney-General’s Chambers / Singapore Statutes Online",
+      "url": "https://sso.agc.gov.sg/act/jtca1968",
+      "section": "search-rendered Act header; direct request returned 403",
+      "access_date": "2026-10-20",
+      "quotation": "[1 June 1968]"
+    },
+    "evidence_ids": [],
+    "notes": "Date visible in official search excerpt, not full direct page; human/direct-source verification still required.",
+    "candidate_date": "1968-06-01"
+  },
+  {
+    "id": "tuas-industrial-opening",
+    "spec": "§3.4 estates: Tuas",
+    "fact": "NLB describes industrial development following 1970s resettlement; no precise estate opening year was verified.",
+    "status": "unverifiable",
+    "source": {
+      "title": "Tuas",
+      "publisher": "National Library Board, Infopedia",
+      "url": "https://www.nlb.gov.sg/main/article-detail?cmsuuid=bb47d299-4da2-4e58-a883-6002e8f05011",
+      "section": "Historical background, search extract",
+      "access_date": "2026-10-20",
+      "quotation": "In the 1970s"
+    },
+    "evidence_ids": [],
+    "notes": "Do not turn a decade into 1970 or use reclamation dates as an estate opening."
+  },
+  {
+    "id": "woodlands-industrial-opening",
+    "spec": "§3.4 estates: Woodlands",
+    "fact": "Woodlands Town Plan 1971–1975 included industry, but an industrial-estate opening year was not verified.",
+    "status": "unverifiable",
+    "source": {
+      "title": "MUSE SG, Volume 11 Issue 1 / Woodlands feature",
+      "publisher": "National Heritage Board",
+      "url": "https://www.roots.gov.sg/-/media/Roots/Images/resources/muse/issues/muse18_magazinevol38_r15_fa-compressed.ashx",
+      "section": "printed p. 45, search extract",
+      "access_date": "2026-10-20",
+      "quotation": "Woodlands Town Plan (1971-75)"
+    },
+    "evidence_ids": [],
+    "notes": "Housing completion in 1972 is not industry inauguration. Estate dates require further primary research."
+  },
+  {
+    "id": "seletar-aerospace-opening",
+    "spec": "§3.4 estates: Seletar Aerospace Park",
+    "fact": "JTC’s indexed Dream Factories timeline places first tenants in 2010; full PDF text could not be read reliably.",
+    "status": "unverifiable",
+    "source": {
+      "title": "Dream Factories + Destination: A Future Perfect",
+      "publisher": "JTC Corporation",
+      "url": "https://www.jtc.gov.sg/-/media/project/jtc-cx/corpweb/assets/jtc-dream-factories.pdf",
+      "section": "printed p. 48 timeline; search extract only",
+      "access_date": "2026-10-20",
+      "quotation": "welcomed its first tenants"
+    },
+    "evidence_ids": [],
+    "notes": "Separate JTC story says development since 2008. Do not label 2008 or 2010 an official opening without fuller primary verification.",
+    "candidate_year": 2010
+  },
+  {
+    "id": "reserve-bukit-timah",
+    "spec": "F19; §3.4 reserves",
+    "fact": "Bukit Timah was declared a Nature Reserve in 1990, according to NParks’ current history page.",
+    "status": "confirmed",
+    "source": {
+      "title": "History of Bukit Timah Nature Reserve",
+      "publisher": "National Parks Board",
+      "url": "https://www.nparks.gov.sg/visit/parks/bukit-timah-nature-reserve/special-features/history",
+      "section": "Important periods in the Reserve’s history",
+      "access_date": "2026-10-20",
+      "quotation": "1990:"
+    },
+    "evidence_ids": [],
+    "notes": "Present footprint is approximate for earlier dates. Forest/catchment protection existed earlier; 1990 is current statutory-status milestone.",
+    "date": "1990"
+  },
+  {
+    "id": "reserve-central-catchment",
+    "spec": "F19; §3.4 reserves",
+    "fact": "Central Catchment was declared a Nature Reserve in 1990, according to NParks’ current history page.",
+    "status": "confirmed",
+    "source": {
+      "title": "History of Bukit Timah Nature Reserve",
+      "publisher": "National Parks Board",
+      "url": "https://www.nparks.gov.sg/visit/parks/bukit-timah-nature-reserve/special-features/history",
+      "section": "Important periods in the Reserve’s history",
+      "access_date": "2026-10-20",
+      "quotation": "Central Catchment"
+    },
+    "evidence_ids": [],
+    "notes": "Present footprint is approximate for earlier dates. Forest/catchment protection existed earlier; 1990 is current statutory-status milestone.",
+    "date": "1990"
+  },
+  {
+    "id": "reserve-bukit-timah-earlier-status",
+    "spec": "F19 chronology conflict",
+    "fact": "NParks’ public history gives forest-reserve establishment 1883 and Ordinance protection 1951; its research paper dates forest/nature declarations 1887/1951.",
+    "status": "corrected",
+    "source": {
+      "title": "Historical review of Bukit Timah Nature Reserve, Singapore",
+      "publisher": "G.W.H. Davison & P.T. Chew / Gardens’ Bulletin Singapore 71(Suppl. 1), NParks, 2019",
+      "url": "https://www.nparks.gov.sg/sbg/research/publications/gardens-bulletin-singapore/-/media/sbg/gardens-bulletin/gbs_71_s1_y2019_v71_s1/71_s1_02_y2019_v71s1_gbs_pg19.pdf",
+      "section": "printed p. 19 abstract; compare current NParks history page",
+      "access_date": "2026-10-20",
+      "quotation": "forest reserve (1887) and nature reserve (1951)"
+    },
+    "evidence_ids": [],
+    "notes": "Preserve all milestone meanings and disagreement; do not flatten to a single founding date."
+  },
+  {
+    "id": "reserve-sungei-buloh",
+    "spec": "F19; ch06 sungei-buloh-reserve",
+    "fact": "Sungei Buloh opened as a Nature Park in 1993 and was gazetted a Nature Reserve in 2002.",
+    "status": "confirmed",
+    "source": {
+      "title": "History of Sungei Buloh Wetland Reserve",
+      "publisher": "National Parks Board",
+      "url": "https://www.nparks.gov.sg/visit/parks/sungei-buloh-wetland-reserve/special-features",
+      "section": "About Sungei Buloh Wetland Reserve’s history",
+      "access_date": "2026-10-20",
+      "quotation": "In 2002, 130 hectares were officially gazetted as a Nature Reserve."
+    },
+    "evidence_ids": [],
+    "notes": "",
+    "date": "2002"
+  },
+  {
+    "id": "reserve-labrador",
+    "spec": "F19; ch06 labrador-reserve",
+    "fact": "NParks’ indexed educational factsheet gives gazette date 1 January 2002; full PDF could not be retrieved.",
+    "status": "unverifiable",
+    "source": {
+      "title": "Factsheet on Labrador Nature Reserve, Annex 1b",
+      "publisher": "National Parks Board",
+      "url": "https://www.nparks.gov.sg/-/media/nparks-real-content/learning/learning-journeys/guided-walks/diy-guided-walks/heritage-comes-alie/worksheets-for-students.pdf",
+      "section": "search extract; direct PDF retrieval failed",
+      "access_date": "2026-10-20",
+      "quotation": "gazetted as a nature reserve on 1 January 2002"
+    },
+    "evidence_ids": [],
+    "notes": "2002 corroborated by other official indexed NParks materials. Exact day still requires readable primary confirmation.",
+    "candidate_date": "2002-01-01"
+  },
+  {
+    "id": "east-coast-reclamation",
+    "spec": "F16; ch05 east-coast-reclamation",
+    "fact": "Official start 1966; seven phases over about thirty years. The spec’s 1985 overall endpoint is unsupported.",
+    "status": "corrected",
+    "source": {
+      "title": "Land From Sand: Singapore’s Reclamation Story",
+      "publisher": "Lim Tin Seng / National Library Board, BiblioAsia, 4 April 2017",
+      "url": "https://biblioasia.nlb.gov.sg/all-sections/vol-13-issue-1-apr-jun-2017-land-from-sand/",
+      "section": "East Coast: The Great Reclamation",
+      "access_date": "2026-10-20",
+      "quotation": "1966"
+    },
+    "evidence_ids": [],
+    "notes": "Text chronology only; copyrighted figures not traced or republished. Scene-date spatial correspondence requires coast analysis."
+  },
+  {
+    "id": "east-coast-phases",
+    "spec": "F16; coast matching",
+    "fact": "Phases I–II: 1966–1971; III–IV: 1971–1975; V: 1974–1977.",
+    "status": "confirmed",
+    "source": {
+      "title": "Land From Sand: Singapore’s Reclamation Story",
+      "publisher": "Lim Tin Seng / National Library Board, BiblioAsia, 4 April 2017",
+      "url": "https://biblioasia.nlb.gov.sg/all-sections/vol-13-issue-1-apr-jun-2017-land-from-sand/",
+      "section": "East Coast: The Great Reclamation",
+      "access_date": "2026-10-20",
+      "quotation": "1975"
+    },
+    "evidence_ids": [],
+    "notes": "Text chronology only; copyrighted figures not traced or republished. Scene-date spatial correspondence requires coast analysis."
+  },
+  {
+    "id": "marina-bay-reclamation",
+    "spec": "F16; ch05 marina-bay-reclamation",
+    "fact": "Marina Centre: 1974–1977; Marina East/South phases began 1979; bay-edge works: 1990–1992.",
+    "status": "confirmed",
+    "source": {
+      "title": "Land From Sand: Singapore’s Reclamation Story",
+      "publisher": "Lim Tin Seng / National Library Board, BiblioAsia, 4 April 2017",
+      "url": "https://biblioasia.nlb.gov.sg/all-sections/vol-13-issue-1-apr-jun-2017-land-from-sand/",
+      "section": "East Coast: The Great Reclamation",
+      "access_date": "2026-10-20",
+      "quotation": "1979"
+    },
+    "evidence_ids": [],
+    "notes": "Text chronology only; copyrighted figures not traced or republished. Scene-date spatial correspondence requires coast analysis."
+  },
+  {
+    "id": "jurong-tuas-reclamation",
+    "spec": "F16; ch05 tuas-reclamation",
+    "fact": "Jurong reclamation: 1963; Jurong/Tuas expansion: 1970s; Tuas extension: late 1980s.",
+    "status": "confirmed",
+    "source": {
+      "title": "Land From Sand: Singapore’s Reclamation Story",
+      "publisher": "Lim Tin Seng / National Library Board, BiblioAsia, 4 April 2017",
+      "url": "https://biblioasia.nlb.gov.sg/all-sections/vol-13-issue-1-apr-jun-2017-land-from-sand/",
+      "section": "New Lands for Industries: JTC",
+      "access_date": "2026-10-20",
+      "quotation": "1963"
+    },
+    "evidence_ids": [],
+    "notes": "Text chronology only; copyrighted figures not traced or republished. Scene-date spatial correspondence requires coast analysis."
+  },
+  {
+    "id": "jurong-island-completion-conflict",
+    "spec": "F16; coast matching",
+    "fact": "NLB reports scheme beginning 1993 and completion 2003; JTC timeline gives completion 2009; opening 2000 is separate.",
+    "status": "corrected",
+    "source": {
+      "title": "Land From Sand: Singapore’s Reclamation Story",
+      "publisher": "Lim Tin Seng / National Library Board, BiblioAsia, 4 April 2017",
+      "url": "https://biblioasia.nlb.gov.sg/all-sections/vol-13-issue-1-apr-jun-2017-land-from-sand/",
+      "section": "New Lands for Industries: JTC",
+      "access_date": "2026-10-20",
+      "quotation": "2003"
+    },
+    "evidence_ids": [],
+    "notes": "Text chronology only; copyrighted figures not traced or republished. Scene-date spatial correspondence requires coast analysis."
+  },
+  {
+    "id": "changi-reclamation",
+    "spec": "F16; ch04 changi-airport-opens",
+    "fact": "Airport reclamation began 1975; later Changi East stages ran 1992–2004.",
+    "status": "confirmed",
+    "source": {
+      "title": "Land From Sand: Singapore’s Reclamation Story",
+      "publisher": "Lim Tin Seng / National Library Board, BiblioAsia, 4 April 2017",
+      "url": "https://biblioasia.nlb.gov.sg/all-sections/vol-13-issue-1-apr-jun-2017-land-from-sand/",
+      "section": "New Lands for Infrastructure and Recreation: MPA",
+      "access_date": "2026-10-20",
+      "quotation": "1975"
+    },
+    "evidence_ids": [],
+    "notes": "Text chronology only; copyrighted figures not traced or republished. Scene-date spatial correspondence requires coast analysis."
+  },
+  {
+    "id": "west-coast-reclamation",
+    "spec": "coast piece matching",
+    "fact": "Clementi west-coast reclamation: 1976–1978.",
+    "status": "confirmed",
+    "source": {
+      "title": "Land From Sand: Singapore’s Reclamation Story",
+      "publisher": "Lim Tin Seng / National Library Board, BiblioAsia, 4 April 2017",
+      "url": "https://biblioasia.nlb.gov.sg/all-sections/vol-13-issue-1-apr-jun-2017-land-from-sand/",
+      "section": "Other Reclamation Projects by HDB",
+      "access_date": "2026-10-20",
+      "quotation": "1978"
+    },
+    "evidence_ids": [],
+    "notes": "Text chronology only; copyrighted figures not traced or republished. Scene-date spatial correspondence requires coast analysis."
+  },
+  {
+    "id": "northeast-reclamation",
+    "spec": "coast piece matching",
+    "fact": "Pasir Ris: 1979–1980; Punggol: 1983–1986; Pasir Ris–Seletar: 1985–2001.",
+    "status": "confirmed",
+    "source": {
+      "title": "Land From Sand: Singapore’s Reclamation Story",
+      "publisher": "Lim Tin Seng / National Library Board, BiblioAsia, 4 April 2017",
+      "url": "https://biblioasia.nlb.gov.sg/all-sections/vol-13-issue-1-apr-jun-2017-land-from-sand/",
+      "section": "Other Reclamation Projects by HDB",
+      "access_date": "2026-10-20",
+      "quotation": "1986"
+    },
+    "evidence_ids": [],
+    "notes": "Text chronology only; copyrighted figures not traced or republished. Scene-date spatial correspondence requires coast analysis."
+  },
+  {
+    "id": "tekong-reclamation",
+    "spec": "coast piece matching",
+    "fact": "First Tekong reclamation: 1981–1985; additional scheme approved 2000.",
+    "status": "confirmed",
+    "source": {
+      "title": "Land From Sand: Singapore’s Reclamation Story",
+      "publisher": "Lim Tin Seng / National Library Board, BiblioAsia, 4 April 2017",
+      "url": "https://biblioasia.nlb.gov.sg/all-sections/vol-13-issue-1-apr-jun-2017-land-from-sand/",
+      "section": "New Lands for Infrastructure and Recreation: MPA",
+      "access_date": "2026-10-20",
+      "quotation": "1985"
+    },
+    "evidence_ids": [],
+    "notes": "Text chronology only; copyrighted figures not traced or republished. Scene-date spatial correspondence requires coast analysis."
+  },
+  {
+    "id": "pasir-panjang-reclamation",
+    "spec": "coast piece matching",
+    "fact": "Foreshore works: 1972–1979; new-terminal first phases: 1993–1999.",
+    "status": "confirmed",
+    "source": {
+      "title": "Land From Sand: Singapore’s Reclamation Story",
+      "publisher": "Lim Tin Seng / National Library Board, BiblioAsia, 4 April 2017",
+      "url": "https://biblioasia.nlb.gov.sg/all-sections/vol-13-issue-1-apr-jun-2017-land-from-sand/",
+      "section": "New Lands for Infrastructure and Recreation: MPA",
+      "access_date": "2026-10-20",
+      "quotation": "1999"
+    },
+    "evidence_ids": [],
+    "notes": "Text chronology only; copyrighted figures not traced or republished. Scene-date spatial correspondence requires coast analysis."
+  },
+  {
+    "id": "reclamation-method",
+    "spec": "§5 land-reclamation",
+    "fact": "Containment dykes enclose fill; soil improvement accelerates settling.",
+    "status": "confirmed",
+    "source": {
+      "title": "Land From Sand: Singapore’s Reclamation Story",
+      "publisher": "Lim Tin Seng / National Library Board, BiblioAsia, 4 April 2017",
+      "url": "https://biblioasia.nlb.gov.sg/all-sections/vol-13-issue-1-apr-jun-2017-land-from-sand/",
+      "section": "LAND RECLAMATION: HOW DOES IT WORK?",
+      "access_date": "2026-10-20",
+      "quotation": "containment dykes"
+    },
+    "evidence_ids": [],
+    "notes": "Text chronology only; copyrighted figures not traced or republished. Scene-date spatial correspondence requires coast analysis."
+  },
+  {
+    "id": "jurong-island-official-opening",
+    "spec": "F16; ch05 jurong-island-opens",
+    "fact": "Official opening took place on 14 October 2000; speech describes joining seven islands.",
+    "status": "confirmed",
+    "source": {
+      "title": "Speech by Prime Minister Goh Chok Tong at the Official Opening of Jurong Island on Saturday, 14 October 2000, at 7.00 pm",
+      "publisher": "Prime Minister’s Office / Singapore Government Media Release / NAS",
+      "url": "https://www.nas.gov.sg/archivesonline/data/pdfdoc/2000101403.htm",
+      "section": "title; opening paragraph",
+      "access_date": "2026-10-20",
+      "quotation": "built by merging seven separate islands"
+    },
+    "evidence_ids": [],
+    "notes": "",
+    "date": "2000-10-14"
+  },
+  {
+    "id": "sand-government-distinction",
+    "spec": "F16; §1.4; ch05",
+    "fact": "MFA said Indonesian sea-sand imports stopped after the February 2003 ban; the 2007 land-sand ban concerned construction rather than reclamation.",
+    "status": "confirmed",
+    "source": {
+      "title": "Transcript of Reply by Minister of Foreign Affairs George Yeo to Question in Parliament on sand and land reclamation, 12 February 2007",
+      "publisher": "Ministry of Foreign Affairs",
+      "url": "https://www.mfa.gov.sg/newsroom/press-statements-transcripts-and-photos/transcript-of-reply-by-minister-of-foreign-affairs-george-yeo-to-question-in-parliament-on-sand-and-12-feb-2007/",
+      "section": "Reply, opening three paragraphs",
+      "access_date": "2026-10-20",
+      "quotation": "distinguishing sea sand from land sand"
+    },
+    "evidence_ids": [],
+    "notes": "Attribute to minister. Do not repeat inaccurate general claim that 2007 ban covered Indonesian sea sand."
+  },
+  {
+    "id": "sand-environmental-claims",
+    "spec": "F16; §1.4; ch05",
+    "fact": "Neighbour-country coastal damage and Cambodian-sand controversy require further directly readable reporting; no specific causal finding verified here.",
+    "status": "unverifiable",
+    "source": {
+      "title": "S’pore has strict criteria for sand imports, says Govt, as controversy over Cambodian imports brews",
+      "publisher": "CNA",
+      "url": "https://www.channelnewsasia.com/singapore/spore-has-strict-criteria-sand-imports-says-govt-controversy-over-cambodian-imports-brews-5769186",
+      "section": "search excerpt; full retrieval repeatedly timed out",
+      "access_date": "2026-10-20",
+      "quotation": ""
+    },
+    "evidence_ids": [],
+    "notes": "Do not present allegations as settled fact. NLB separately identifies ecological limits to reclamation but not a site-specific foreign damage finding."
+  },
+  {
+    "id": "semakau-reclamation-dates",
+    "spec": "coast piece matching",
+    "fact": "Semakau reclamation dates were not researched before mandated Landsat access stop.",
+    "status": "unverifiable",
+    "source": {
+      "title": "No source inspected",
+      "publisher": "not established",
+      "url": "",
+      "section": "not established",
+      "access_date": "2026-10-20",
+      "quotation": ""
+    },
+    "evidence_ids": [],
+    "notes": "Mark any corresponding coast piece unmatched until sourced."
+  },
+  {
+    "id": "jurong-rock-caverns",
+    "spec": "F17; ch05 jurong-rock-caverns",
+    "fact": "Jurong Rock Caverns officially opened on 2 September 2014 for underground liquid hydrocarbon storage; PM said it freed 60 hectares of surface land.",
+    "status": "confirmed",
+    "source": {
+      "title": "PM Lee Hsien Loong at the Official Opening of the Jurong Rock Caverns",
+      "publisher": "Prime Minister’s Office Singapore",
+      "url": "https://www.pmo.gov.sg/newsroom/transcript-prime-minister-lee-hsien-loongs-speech-official-opening-jurong-rock-caverns/",
+      "section": "date; opening paragraph; surface-land paragraph",
+      "access_date": "2026-10-20",
+      "quotation": "it freed up 60 hectares of surface land"
+    },
+    "evidence_ids": [],
+    "notes": "",
+    "date": "2014-09-02"
+  },
+  {
+    "id": "pinnacle-duxton",
+    "spec": "F17; ch05 pinnacle-duxton",
+    "fact": "HDB’s indexed publications give completion 2009 and 50 storeys; exact December date was not verified from full source.",
+    "status": "unverifiable",
+    "source": {
+      "title": "Home Truly: Building Dreams, Housing Hopes",
+      "publisher": "Housing & Development Board",
+      "url": "https://assets.hdb.gov.sg/about-us/news-and-publications/home/Home-Truly-1.pdf",
+      "section": "2009 timeline; search extract only",
+      "access_date": "2026-10-20",
+      "quotation": "first 50-storey development"
+    },
+    "evidence_ids": [],
+    "notes": "Use neither an exact day nor exact month without reading primary page.",
+    "candidate_date": "2009"
+  },
+  {
+    "id": "dtss",
+    "spec": "F17; ch05 underground sewerage",
+    "fact": "PUB describes gravity tunnels carrying used water to reclamation plants; Phase 1 completed in 2008.",
+    "status": "confirmed",
+    "source": {
+      "title": "5 things you may not have known about NEWater",
+      "publisher": "PUB, Singapore’s National Water Agency, 27 August 2021",
+      "url": "https://www.pub.gov.sg/Resources/News-Room/Featured-Stories/2021/5-things-about-NEWater",
+      "section": "Deep Tunnel Sewerage System section",
+      "access_date": "2026-10-20",
+      "quotation": "DTSS Phase 1, which serves the eastern part of Singapore was completed in 2008."
+    },
+    "evidence_ids": [],
+    "notes": "2021 page’s forecast for Phase 2 is not evidence of actual completion; no Phase 2 claim added.",
+    "date": "2008"
+  },
+  {
+    "id": "master-plan-five-year-review",
+    "spec": "F20; §5 master-plan",
+    "fact": "URA states that the statutory Master Plan is reviewed every five years and maps permissible land use and density.",
+    "status": "confirmed",
+    "source": {
+      "title": "Master Plan",
+      "publisher": "Urban Redevelopment Authority",
+      "url": "https://www.ura.gov.sg/land-planning/master-plan/",
+      "section": "opening explanation",
+      "access_date": "2026-10-20",
+      "quotation": "It is reviewed every five years"
+    },
+    "evidence_ids": [
+      "E005"
+    ],
+    "notes": "Page read in full; all topic references to the map must say planned use."
+  },
+  {
+    "id": "kampong-lorong-buangkok-name-status",
+    "spec": "F21; ch03 site-kampong-lorong-buangkok",
+    "fact": "Singapore Mandarin Council attests 甘榜罗弄万国; its entry records resident households as of 2023 and unimplemented redevelopment plans.",
+    "status": "confirmed",
+    "source": {
+      "title": "Buangkok / 万国",
+      "publisher": "Singapore Mandarin Council, Singaporean Mandarin Database",
+      "url": "https://www.languagecouncils.sg/mandarin/en/learning-resources/singaporean-mandarin-database/terms/buangkok",
+      "section": "Etymology / 由来, second and third bullets",
+      "access_date": "2026-10-20",
+      "quotation": "甘榜罗弄万国（Kampong Lorong Buangkok）"
+    },
+    "evidence_ids": [],
+    "notes": "Supports living village, not a preserved museum. Do not claim formal conservation status. For current mainland-village wording see companion Zaobao source."
+  },
+  {
+    "id": "kampong-lorong-buangkok-current",
+    "spec": "F21 current status",
+    "fact": "September 2026 reporting calls 罗弄万国村 a still-inhabited mainland kampong.",
+    "status": "confirmed",
+    "source": {
+      "title": "潮什么：不用花大钱！解锁本地宝藏景点",
+      "publisher": "王博涵 / 联合早报, 4 September 2026",
+      "url": "https://www.zaobao.com.sg/lifestyle/campus/story20260904-9624249",
+      "section": "到甘榜体验慢活",
+      "access_date": "2026-10-20",
+      "quotation": "罗弄万国村（Kampong Lorong Buangkok）"
+    },
+    "evidence_ids": [],
+    "notes": "Opened readable article; source date is after timeline endpoint, so use as a current-status check, not a 2025 event."
+  },
+  {
+    "id": "lim-chu-kang-future",
+    "spec": "§1.4; ch06 detail only",
+    "fact": "Joint May 2026 release plans agriculture to the north and defence in the south; farms retain tenures until expiry and may bid for alternate sites.",
+    "status": "confirmed",
+    "source": {
+      "title": "Government to implement land-use change in Lim Chu Kang",
+      "publisher": "Singapore Food Agency; Ministry of Defence; NParks; Singapore Land Authority",
+      "url": "https://www.sfa.gov.sg/news-publications/newsroom/government-to-implement-land-use-change-in-lim-chu-kang",
+      "section": "Benefits of Consolidating Land Uses; Supporting Affected Farms",
+      "access_date": "2026-10-20",
+      "quotation": "There will be no early termination of leases."
+    },
+    "evidence_ids": [
+      "E011"
+    ],
+    "notes": "Post-2025 scope: detail only. Government describes implementation planned, not merely undecided discussion. Independent farmer testimony not verified."
+  },
+  {
+    "id": "lim-chu-kang-farmers-perspective",
+    "spec": "§1.4 future farm changes",
+    "fact": "Affected farmers’ own responses to the 2026 changes were not verified.",
+    "status": "unverifiable",
+    "source": {
+      "title": "Government to implement land-use change in Lim Chu Kang",
+      "publisher": "Singapore Food Agency; Ministry of Defence; NParks; Singapore Land Authority",
+      "url": "https://www.sfa.gov.sg/news-publications/newsroom/government-to-implement-land-use-change-in-lim-chu-kang",
+      "section": "Supporting Affected Farms",
+      "access_date": "2026-10-20",
+      "quotation": ""
+    },
+    "evidence_ids": [
+      "E011"
+    ],
+    "notes": "Official support statement does not substitute for farmers’ accounts."
+  },
+  {
+    "id": "existing-food-series-reuse",
+    "spec": "F12–F13 preverified series",
+    "fact": "Reuse E014 (2000 park/farming-area distinction), E063–E068 (2024 farms/shares, former target, revised target and definitions).",
+    "status": "confirmed",
+    "source": {
+      "title": "Singapore Food Statistics 2024",
+      "publisher": "Singapore Food Agency",
+      "url": "https://www.sfa.gov.sg/docs/default-source/publication/sg-food-statistics/singapore-food-statistics-2024.pdf",
+      "section": "printed p. 5, prior research verification",
+      "access_date": "2026-10-20",
+      "quotation": ""
+    },
+    "evidence_ids": [
+      "E014",
+      "E063",
+      "E064",
+      "E065",
+      "E066",
+      "E067",
+      "E068"
+    ],
+    "notes": "Not independently re-fetched in this pass. Parent facts.json preserves exact source for each evidence ID. These are several sources; this compact index must not become a source citation for all claims."
+  },
+  {
+    "id": "hydroponics-glossary",
+    "spec": "§5 hydroponics",
+    "fact": "SFA distinguishes hydroponics from soil cultivation and describes nutrient-water systems.",
+    "status": "confirmed",
+    "source": {
+      "title": "Agriculture Technologies",
+      "publisher": "Singapore Food Agency",
+      "url": "https://www.sfa.gov.sg/food-science-and-technology/technology/agriculture-technologies",
+      "section": "Land-based / Indoor / Rooftop agricultural farms",
+      "access_date": "2026-10-20",
+      "quotation": "hydroponic systems"
+    },
+    "evidence_ids": [
+      "E006"
+    ],
+    "notes": "The definition may describe water with dissolved nutrients; it must not claim all indoor farms use hydroponics."
+  }
+]

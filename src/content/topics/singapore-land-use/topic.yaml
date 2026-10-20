@@ -1,0 +1,54 @@
+# Authoring contract: docs/34-singapore-land-use-content-spec.md.
+id: singapore-land-use
+title: { en: "Homes, Food and Getting Around: Singapore's Land", zh: "新加坡的家、粮、路：土地利用的变化" }
+subtitle: { en: "How a small island changed its land, 1959–today", zh: "一座小岛怎样改变土地的用途（1959 年至今）" }
+shortTitle: { en: "Singapore's land", zh: "土地利用" }
+subject: geography
+mode: time
+engine: time-scene
+stage: geo
+theme: paper
+sensitivity: open
+status: draft
+levels: [P3]
+tags: [singapore, geography, map]
+illustration: singapore-land-use
+basemap: { local: land-sg-modern, maxZoom: 14 }
+colorBy: entity
+blocLabels:
+  neutral: { en: "Land use", zh: "土地用途" }
+strings:
+  joined: { en: "on the map from", zh: "地图上始于" }
+  left: { en: "until", zh: "止于" }
+  notYet: { en: "Not on the map yet", zh: "尚未出现" }
+note:
+  en: "1959 map traced from a British government map · 2019 map is URA Master Plan planned use · HDB dots are blocks standing today · coasts from 1973 on from Landsat satellite images (approximate)"
+  zh: "1959 年的图描自英国政府地图 · 2019 年的图是市区重建局总蓝图的规划用途 · 组屋点是今天还在的楼 · 1973 年以后的海岸取自 Landsat 卫星影像（近似）"
+datedLayers:
+  - id: hdb-blocks
+    file: sg-hdb-blocks
+    kind: point
+    holder: housing
+    count: true
+    countLabel: { en: "HDB blocks", zh: "组屋" }
+    label: { en: "HDB blocks standing today, by year completed", zh: "今天还在的组屋，按竣工年份" }
+  - id: estates
+    file: sg-estates
+    kind: area
+    holder: industry
+    label: { en: "Industrial estates (today's extent)", zh: "工业区（今天的范围）" }
+  - id: farm-parks
+    file: sg-farm-parks
+    kind: area
+    holder: agriculture
+    label: { en: "Farmland in the agrotechnology parks (today's extent)", zh: "农业科技园的农业用地（今天的范围）" }
+  - id: reserves
+    file: sg-reserves
+    kind: area
+    holder: green
+    label: { en: "Nature reserves (today's extent)", zh: "自然保护区（今天的范围）" }
+  - id: reservoirs
+    file: sg-reservoirs
+    kind: area
+    color: "token:cold"
+    label: { en: "Reservoirs, by year completed", zh: "蓄水池，按建成年份" }

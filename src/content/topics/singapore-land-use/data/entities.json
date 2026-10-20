@@ -1,0 +1,82 @@
+[
+  {
+    "id": "housing",
+    "name": {
+      "en": "Housing",
+      "zh": "住宅"
+    },
+    "bloc": "neutral",
+    "joined": "1959-04-01",
+    "color": "token:holder-3"
+  },
+  {
+    "id": "countryside",
+    "name": {
+      "en": "Kampongs, farms and estates",
+      "zh": "甘榜、农场与种植园"
+    },
+    "bloc": "neutral",
+    "joined": "1959-04-01",
+    "color": "token:holder-2"
+  },
+  {
+    "id": "agriculture",
+    "name": {
+      "en": "Farmland",
+      "zh": "农业用地"
+    },
+    "bloc": "neutral",
+    "joined": "1986",
+    "color": "token:holder-5"
+  },
+  {
+    "id": "industry",
+    "name": {
+      "en": "Industry",
+      "zh": "工业"
+    },
+    "bloc": "neutral",
+    "joined": "1961",
+    "color": "token:holder-1"
+  },
+  {
+    "id": "green",
+    "name": {
+      "en": "Parks and nature reserves",
+      "zh": "公园与自然保护区"
+    },
+    "bloc": "neutral",
+    "joined": "1959-04-01",
+    "color": "token:holder-8"
+  },
+  {
+    "id": "transport",
+    "name": {
+      "en": "Transport",
+      "zh": "交通"
+    },
+    "bloc": "neutral",
+    "joined": "1987-11-07",
+    "color": "token:holder-6"
+  },
+  {
+    "id": "defence-special",
+    "name": {
+      "en": "Defence and special use",
+      "zh": "国防与特殊用途"
+    },
+    "bloc": "neutral",
+    "joined": "1959-04-01",
+    "color": "token:holder-7"
+  },
+  {
+    "id": "town-and-services",
+    "name": {
+      "en": "City, shops and services",
+      "zh": "城区、商业与公共设施"
+    },
+    "bloc": "neutral",
+    "joined": "1959-04-01",
+    "color": "token:holder-4"
+  }
+]

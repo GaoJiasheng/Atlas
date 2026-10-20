@@ -1,0 +1,746 @@
+{
+  "read_date": "2026-10-20",
+  "original_receipts": [
+    {
+      "file": "original-facts.json",
+      "original": "/Users/gavin/work/atlas/art/codex-research/singapore-land-use/facts.json",
+      "sha256": "18bb7bc7dbbb36c3bd7ee60633e735a54068e07f847fbe866e5cf86251ee89aa"
+    },
+    {
+      "file": "original-datasets.json",
+      "original": "/Users/gavin/work/atlas/art/codex-research/singapore-land-use/datasets.json",
+      "sha256": "e82b564f4cea07293763467cde8384edd28f85ce3d805d96b5fcc8d28be41b1b"
+    },
+    {
+      "file": "original-land-use-research.md",
+      "original": "/Users/gavin/work/atlas/art/codex-research/singapore-land-use/land-use-research.md",
+      "sha256": "a3b8682d9088689a4406b3facd5789549e71206280782a0fd3f6e165a66af6e2"
+    }
+  ],
+  "crosswalk": [
+    {
+      "topic_source": "S1",
+      "original_sources": [
+        "S001"
+      ],
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E003"
+      ],
+      "fact_ids": [
+        "syllabus-inquiry",
+        "syllabus-knowledge",
+        "syllabus-skills",
+        "syllabus-values",
+        "syllabus-conservation",
+        "syllabus-land",
+        "syllabus-food",
+        "syllabus-housing",
+        "syllabus-transport"
+      ]
+    },
+    {
+      "topic_source": "S2",
+      "original_sources": [
+        "S054"
+      ],
+      "evidence_ids": [
+        "E129"
+      ],
+      "fact_ids": []
+    },
+    {
+      "topic_source": "S3",
+      "original_sources": [
+        "S061"
+      ],
+      "evidence_ids": [
+        "E136"
+      ],
+      "fact_ids": []
+    },
+    {
+      "topic_source": "S4",
+      "original_sources": [
+        "S059"
+      ],
+      "evidence_ids": [
+        "E134"
+      ],
+      "fact_ids": []
+    },
+    {
+      "topic_source": "S5",
+      "original_sources": [
+        "S060"
+      ],
+      "evidence_ids": [
+        "E135"
+      ],
+      "fact_ids": []
+    },
+    {
+      "topic_source": "S6",
+      "original_sources": [
+        "S062"
+      ],
+      "evidence_ids": [
+        "E137",
+        "E138"
+      ],
+      "fact_ids": []
+    },
+    {
+      "topic_source": "S7",
+      "original_sources": [
+        "S082"
+      ],
+      "evidence_ids": [
+        "E158"
+      ],
+      "fact_ids": []
+    },
+    {
+      "topic_source": "S8",
+      "original_sources": [
+        "S013"
+      ],
+      "evidence_ids": [
+        "E025",
+        "E026",
+        "E027",
+        "E028",
+        "E029",
+        "E030",
+        "E031",
+        "E032",
+        "E033",
+        "E034",
+        "E035",
+        "E036",
+        "E037",
+        "E038",
+        "E039",
+        "E163"
+      ],
+      "fact_ids": [
+        "total-population-1957",
+        "total-population-1970",
+        "resident-population-1970",
+        "total-population-1980",
+        "resident-population-1980",
+        "total-population-1990",
+        "resident-population-1990",
+        "total-population-2000",
+        "resident-population-2000",
+        "total-population-2010",
+        "resident-population-2010",
+        "total-population-2020",
+        "resident-population-2020",
+        "total-population-2024",
+        "resident-population-2024"
+      ]
+    },
+    {
+      "topic_source": "S9",
+      "original_sources": [
+        "S067"
+      ],
+      "evidence_ids": [
+        "E143"
+      ],
+      "fact_ids": []
+    },
+    {
+      "topic_source": "S16",
+      "original_sources": [
+        "S058"
+      ],
+      "evidence_ids": [
+        "E133"
+      ],
+      "fact_ids": []
+    },
+    {
+      "topic_source": "S17",
+      "original_sources": [
+        "S057"
+      ],
+      "evidence_ids": [
+        "E132"
+      ],
+      "fact_ids": []
+    },
+    {
+      "topic_source": "S18",
+      "original_sources": [
+        "S056"
+      ],
+      "evidence_ids": [
+        "E131"
+      ],
+      "fact_ids": []
+    },
+    {
+      "topic_source": "S24",
+      "original_sources": [
+        "S045"
+      ],
+      "evidence_ids": [
+        "E115"
+      ],
+      "fact_ids": [
+        "reservoir-lowerseletar-1986"
+      ]
+    },
+    {
+      "topic_source": "S25",
+      "original_sources": [
+        "S041"
+      ],
+      "evidence_ids": [
+        "E111"
+      ],
+      "fact_ids": [
+        "reservoir-upperpeirce-1975"
+      ]
+    },
+    {
+      "topic_source": "S28",
+      "original_sources": [
+        "S042"
+      ],
+      "evidence_ids": [
+        "E112"
+      ],
+      "fact_ids": [
+        "reservoir-pandan-1974"
+      ]
+    },
+    {
+      "topic_source": "S55",
+      "original_sources": [
+        "S031"
+      ],
+      "evidence_ids": [
+        "E090",
+        "E091",
+        "E092",
+        "E093",
+        "E094",
+        "E095"
+      ],
+      "fact_ids": [
+        "living-bhs-date",
+        "living-bhs-area",
+        "living-bhs-people",
+        "living-bhs-cause",
+        "living-bhs-rehousing",
+        "living-bhs-flats"
+      ]
+    },
+    {
+      "topic_source": "S63",
+      "original_sources": [
+        "S013"
+      ],
+      "evidence_ids": [
+        "E025",
+        "E026",
+        "E027",
+        "E028",
+        "E029",
+        "E030",
+        "E031",
+        "E032",
+        "E033",
+        "E034",
+        "E035",
+        "E036",
+        "E037",
+        "E038",
+        "E039",
+        "E163"
+      ],
+      "fact_ids": [
+        "total-population-1957",
+        "total-population-1970",
+        "resident-population-1970",
+        "total-population-1980",
+        "resident-population-1980",
+        "total-population-1990",
+        "resident-population-1990",
+        "total-population-2000",
+        "resident-population-2000",
+        "total-population-2010",
+        "resident-population-2010",
+        "total-population-2020",
+        "resident-population-2020",
+        "total-population-2024",
+        "resident-population-2024"
+      ]
+    },
+    {
+      "topic_source": "S64",
+      "original_sources": [
+        "S010"
+      ],
+      "evidence_ids": [
+        "E013"
+      ],
+      "fact_ids": [
+        "kampong-services-varied"
+      ]
+    },
+    {
+      "topic_source": "S65",
+      "original_sources": [
+        "S015"
+      ],
+      "evidence_ids": [
+        "E041",
+        "E042",
+        "E043",
+        "E044",
+        "E045",
+        "E046",
+        "E047",
+        "E048",
+        "E049",
+        "E050",
+        "E051"
+      ],
+      "fact_ids": [
+        "hdb-population-share-1960",
+        "hdb-population-share-1965",
+        "hdb-population-share-1970",
+        "hdb-population-share-1975",
+        "hdb-population-share-1980",
+        "hdb-population-share-1985",
+        "hdb-population-share-1990",
+        "hdb-population-share-1995",
+        "hdb-population-share-2000",
+        "hdb-population-share-2005",
+        "hdb-population-share-2010",
+        "hdb-population-share-2015",
+        "hdb-population-share-2021"
+      ]
+    },
+    {
+      "topic_source": "S66",
+      "original_sources": [
+        "S016"
+      ],
+      "evidence_ids": [
+        "E052",
+        "E053"
+      ],
+      "fact_ids": [
+        "hdb-resident-share-2024-03-31",
+        "hdb-resident-share-2025-03-31"
+      ]
+    },
+    {
+      "topic_source": "S67",
+      "original_sources": [
+        "S032"
+      ],
+      "evidence_ids": [
+        "E096",
+        "E097",
+        "E098",
+        "E099",
+        "E100",
+        "E101"
+      ],
+      "fact_ids": [
+        "living-shophouses",
+        "living-services",
+        "living-hdb-design",
+        "living-bhs-fast-blocks",
+        "living-hdb-amenities",
+        "living-adjustment"
+      ]
+    },
+    {
+      "topic_source": "S68",
+      "original_sources": [
+        "S033"
+      ],
+      "evidence_ids": [
+        "E102"
+      ],
+      "fact_ids": [
+        "living-attap-material"
+      ]
+    },
+    {
+      "topic_source": "S69",
+      "original_sources": [
+        "S034"
+      ],
+      "evidence_ids": [
+        "E103",
+        "E122"
+      ],
+      "fact_ids": [
+        "living-resettlement-personal",
+        "term-newtown"
+      ]
+    },
+    {
+      "topic_source": "S70",
+      "original_sources": [
+        "S036"
+      ],
+      "evidence_ids": [
+        "E105"
+      ],
+      "fact_ids": [
+        "town-queenstown-1953"
+      ]
+    },
+    {
+      "topic_source": "S71",
+      "original_sources": [
+        "S037"
+      ],
+      "evidence_ids": [
+        "E106"
+      ],
+      "fact_ids": [
+        "town-toapayoh-1964"
+      ]
+    },
+    {
+      "topic_source": "S72",
+      "original_sources": [
+        "S038"
+      ],
+      "evidence_ids": [
+        "E107"
+      ],
+      "fact_ids": [
+        "town-amk-1973"
+      ]
+    },
+    {
+      "topic_source": "S73",
+      "original_sources": [
+        "S039"
+      ],
+      "evidence_ids": [
+        "E108"
+      ],
+      "fact_ids": [
+        "town-tampines-1979"
+      ]
+    },
+    {
+      "topic_source": "S74",
+      "original_sources": [
+        "S040"
+      ],
+      "evidence_ids": [
+        "E109",
+        "E110"
+      ],
+      "fact_ids": [
+        "town-tengah-keys-2023",
+        "town-tengah-projects-2023"
+      ]
+    },
+    {
+      "topic_source": "S75",
+      "original_sources": [
+        "S049"
+      ],
+      "evidence_ids": [
+        "E121"
+      ],
+      "fact_ids": [
+        "term-hdb"
+      ]
+    },
+    {
+      "topic_source": "S76",
+      "original_sources": [
+        "S035"
+      ],
+      "evidence_ids": [
+        "E104",
+        "E123"
+      ],
+      "fact_ids": [
+        "living-kampong-community",
+        "term-kampong"
+      ]
+    },
+    {
+      "topic_source": "S90",
+      "original_sources": [
+        "S062"
+      ],
+      "evidence_ids": [
+        "E137",
+        "E138"
+      ],
+      "fact_ids": []
+    },
+    {
+      "topic_source": "S93",
+      "original_sources": [
+        "S027"
+      ],
+      "evidence_ids": [
+        "E084"
+      ],
+      "fact_ids": [
+        "ccl-first-stage-opening"
+      ]
+    },
+    {
+      "topic_source": "S94",
+      "original_sources": [
+        "S028"
+      ],
+      "evidence_ids": [
+        "E085",
+        "E086",
+        "E087"
+      ],
+      "fact_ids": [
+        "dtl-stage-1-opening",
+        "dtl-stage-2-opening",
+        "dtl-stage-3-opening"
+      ]
+    },
+    {
+      "topic_source": "S101",
+      "original_sources": [
+        "S018"
+      ],
+      "evidence_ids": [
+        "E057",
+        "E058",
+        "E059"
+      ],
+      "fact_ids": [
+        "farmland-1980s-rounded",
+        "farm-phase-out-1975-84",
+        "agrotech-1986-land-reservation"
+      ]
+    },
+    {
+      "topic_source": "S102",
+      "original_sources": [
+        "S017"
+      ],
+      "evidence_ids": [
+        "E054",
+        "E055",
+        "E056"
+      ],
+      "fact_ids": [
+        "farms-1959",
+        "farm-land-early-transition",
+        "agrotech-locations"
+      ]
+    },
+    {
+      "topic_source": "S103",
+      "original_sources": [
+        "S009"
+      ],
+      "evidence_ids": [
+        "E012",
+        "E161"
+      ],
+      "fact_ids": [
+        "agrotech-programme-1986"
+      ]
+    },
+    {
+      "topic_source": "S105",
+      "original_sources": [
+        "S004"
+      ],
+      "evidence_ids": [
+        "E006",
+        "E007"
+      ],
+      "fact_ids": [
+        "farm-types-and-tech",
+        "farm-indoor-2014"
+      ]
+    },
+    {
+      "topic_source": "S120",
+      "original_sources": [
+        "S020"
+      ],
+      "evidence_ids": [
+        "E063",
+        "E064"
+      ],
+      "fact_ids": [
+        "food-farms-2024",
+        "local-food-shares-2024"
+      ]
+    },
+    {
+      "topic_source": "S154",
+      "original_sources": [
+        "S025"
+      ],
+      "evidence_ids": [
+        "E082"
+      ],
+      "fact_ids": [
+        "mrt-first-service"
+      ]
+    },
+    {
+      "topic_source": "S156",
+      "original_sources": [
+        "S024"
+      ],
+      "evidence_ids": [
+        "E069",
+        "E070",
+        "E071",
+        "E072",
+        "E073",
+        "E074",
+        "E075",
+        "E076",
+        "E077",
+        "E078",
+        "E079",
+        "E080",
+        "E081",
+        "E164"
+      ],
+      "fact_ids": [
+        "mrt-network-length-1990",
+        "mrt-network-length-1996",
+        "mrt-network-length-2000",
+        "mrt-network-length-2003",
+        "mrt-network-length-2005",
+        "mrt-network-length-2010",
+        "mrt-network-length-2015",
+        "mrt-network-length-2017",
+        "mrt-network-length-2020",
+        "mrt-network-length-2021",
+        "mrt-network-length-2022",
+        "mrt-network-length-2023",
+        "mrt-network-length-2024"
+      ]
+    },
+    {
+      "topic_source": "S200",
+      "original_sources": [
+        "S012"
+      ],
+      "evidence_ids": [
+        "E015",
+        "E016",
+        "E017",
+        "E018",
+        "E019",
+        "E020",
+        "E021",
+        "E022",
+        "E023",
+        "E024",
+        "E162"
+      ],
+      "fact_ids": [
+        "land-area-dec-1960",
+        "land-area-dec-1965",
+        "land-area-dec-1970",
+        "land-area-dec-1980",
+        "land-area-dec-1990",
+        "land-area-dec-2000",
+        "land-area-dec-2010",
+        "land-area-dec-2020",
+        "land-area-dec-2024",
+        "land-area-method-break"
+      ]
+    },
+    {
+      "topic_source": "S201",
+      "original_sources": [
+        "S021"
+      ],
+      "evidence_ids": [
+        "E065"
+      ],
+      "fact_ids": [
+        "previous-30-by-30-target"
+      ]
+    },
+    {
+      "topic_source": "S202",
+      "original_sources": [
+        "S020"
+      ],
+      "evidence_ids": [
+        "E063",
+        "E064"
+      ],
+      "fact_ids": [
+        "food-farms-2024",
+        "local-food-shares-2024"
+      ]
+    },
+    {
+      "topic_source": "S203",
+      "original_sources": [
+        "S005"
+      ],
+      "evidence_ids": [
+        "E008"
+      ],
+      "fact_ids": [
+        "jurong-industrial-1961"
+      ]
+    },
+    {
+      "topic_source": "S207",
+      "original_sources": [
+        "S079"
+      ],
+      "evidence_ids": [
+        "E155"
+      ],
+      "fact_ids": []
+    },
+    {
+      "topic_source": "S212",
+      "original_sources": [
+        "S003"
+      ],
+      "evidence_ids": [
+        "E005"
+      ],
+      "fact_ids": [
+        "master-plan-meaning"
+      ]
+    },
+    {
+      "topic_source": "S215",
+      "original_sources": [
+        "S008"
+      ],
+      "evidence_ids": [
+        "E011",
+        "E159"
+      ],
+      "fact_ids": [
+        "lim-chu-kang-2026"
+      ]
+    }
+  ]
+}

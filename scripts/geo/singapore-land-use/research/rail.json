@@ -1,0 +1,1303 @@
+[
+  {
+    "id": "nsl-toa-payoh-yio-chu-kang",
+    "line": "NSL",
+    "endpoints": [
+      "Toa Payoh",
+      "Yio Chu Kang"
+    ],
+    "date": "1987-11-07",
+    "type": "segment",
+    "status": "confirmed",
+    "evidence_ids": [
+      "E082"
+    ],
+    "sources": [
+      {
+        "id": "E082",
+        "title": "Speech by Minister Khaw Boon Wan at Decommissioning of 66 First-Generation NSEWL Trains",
+        "publisher": "Ministry of Transport",
+        "url": "https://www.mot.gov.sg/news-resources/newsroom/speech-by-minister-khaw-boon-wan-at-decommissioning-of-66-first-generation-nsewl-trains/",
+        "section": "paragraph 14",
+        "access_date": "2026-10-20",
+        "access": "existing evidence E082 reused"
+      }
+    ],
+    "note": ""
+  },
+  {
+    "id": "nsl-toa-payoh-raffles-place",
+    "line": "NSL",
+    "endpoints": [
+      "Toa Payoh",
+      "Raffles Place"
+    ],
+    "date": "1987-12-12",
+    "type": "segment",
+    "status": "confirmed",
+    "evidence_ids": [
+      "R-rail-01"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-01",
+        "title": "The Mass Rapid Transit",
+        "publisher": "National Heritage Board",
+        "url": "https://www.roots.gov.sg/stories-landing/stories/the-mass-rapid-transit/story",
+        "section": "All aboard!",
+        "access_date": "2026-10-20",
+        "access": "read via indexed page"
+      }
+    ],
+    "note": "Modern-line split of original Toa Payoh–Outram Park opening; same-date EWL continuation separate."
+  },
+  {
+    "id": "ewl-raffles-place-outram-park",
+    "line": "EWL",
+    "endpoints": [
+      "Raffles Place",
+      "Outram Park"
+    ],
+    "date": "1987-12-12",
+    "type": "segment",
+    "status": "confirmed",
+    "evidence_ids": [
+      "R-rail-01"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-01",
+        "title": "The Mass Rapid Transit",
+        "publisher": "National Heritage Board",
+        "url": "https://www.roots.gov.sg/stories-landing/stories/the-mass-rapid-transit/story",
+        "section": "All aboard!",
+        "access_date": "2026-10-20",
+        "access": "read via indexed page"
+      }
+    ],
+    "note": ""
+  },
+  {
+    "id": "ewl-outram-park-clementi",
+    "line": "EWL",
+    "endpoints": [
+      "Outram Park",
+      "Clementi"
+    ],
+    "date": null,
+    "type": "segment",
+    "status": "unverifiable",
+    "evidence_ids": [
+      "R-rail-gap"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-gap",
+        "title": "Candidate register for further primary-source verification",
+        "publisher": "Research locator only",
+        "url": "https://www.sgtrains.com/network-figures.html",
+        "section": "Opening-date tables",
+        "access_date": "2026-10-20",
+        "access": "secondary locator read, not acceptable verification under brief; candidate dates must not activate geometry"
+      }
+    ],
+    "note": "Ceremonial inauguration on 12 March 1988 is verified; first passenger day of west extension not independently checked.",
+    "candidate_date": "1988-03-12"
+  },
+  {
+    "id": "ewl-clementi-lakeside",
+    "line": "EWL",
+    "endpoints": [
+      "Clementi",
+      "Lakeside"
+    ],
+    "date": "1988-11-05",
+    "type": "segment",
+    "status": "confirmed",
+    "evidence_ids": [
+      "R-rail-02"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-02",
+        "title": "Speech at the opening of Section 4 of the MRT system at Jurong East Station",
+        "publisher": "Ministry of Communications and Information / NAS",
+        "url": "https://www.nas.gov.sg/archivesonline/data/pdfdoc/ynh19881105s.pdf",
+        "section": "heading and first paragraph",
+        "access_date": "2026-10-20",
+        "access": "read indexed official transcript"
+      }
+    ],
+    "note": ""
+  },
+  {
+    "id": "nsl-yio-chu-kang-yishun",
+    "line": "NSL",
+    "endpoints": [
+      "Yio Chu Kang",
+      "Yishun"
+    ],
+    "date": null,
+    "type": "segment",
+    "status": "unverifiable",
+    "evidence_ids": [
+      "R-rail-gap"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-gap",
+        "title": "Candidate register for further primary-source verification",
+        "publisher": "Research locator only",
+        "url": "https://www.sgtrains.com/network-figures.html",
+        "section": "Opening-date tables",
+        "access_date": "2026-10-20",
+        "access": "secondary locator read, not acceptable verification under brief; candidate dates must not activate geometry"
+      }
+    ],
+    "note": "Exact first-passenger-service day not verified in LTA/NLB or primary transcript before required stop.",
+    "candidate_date": "1988-12-20"
+  },
+  {
+    "id": "ewl-city-hall-tanah-merah",
+    "line": "EWL",
+    "endpoints": [
+      "City Hall",
+      "Tanah Merah"
+    ],
+    "date": "1989-11-04",
+    "type": "segment",
+    "status": "confirmed",
+    "evidence_ids": [
+      "R-rail-03"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-03",
+        "title": "Eunos",
+        "publisher": "National Library Board",
+        "url": "https://www.nlb.gov.sg/main/article-detail?cmsuuid=1d48db31-1bbc-42b0-91db-614c1e10515d",
+        "section": "paragraph before Author; reference 7",
+        "access_date": "2026-10-20",
+        "access": "read indexed NLB text"
+      }
+    ],
+    "note": "NLB confirms nine newly opened EWL stations, including Eunos."
+  },
+  {
+    "id": "nsl-raffles-place-marina-bay",
+    "line": "NSL",
+    "endpoints": [
+      "Raffles Place",
+      "Marina Bay"
+    ],
+    "date": null,
+    "type": "segment",
+    "status": "unverifiable",
+    "evidence_ids": [
+      "R-rail-gap"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-gap",
+        "title": "Candidate register for further primary-source verification",
+        "publisher": "Research locator only",
+        "url": "https://www.sgtrains.com/network-figures.html",
+        "section": "Opening-date tables",
+        "access_date": "2026-10-20",
+        "access": "secondary locator read, not acceptable verification under brief; candidate dates must not activate geometry"
+      }
+    ],
+    "note": "Exact first-passenger-service day not verified in LTA/NLB or primary transcript before required stop.",
+    "candidate_date": "1989-11-04"
+  },
+  {
+    "id": "ewl-tanah-merah-pasir-ris",
+    "line": "EWL",
+    "endpoints": [
+      "Tanah Merah",
+      "Pasir Ris"
+    ],
+    "date": null,
+    "type": "segment",
+    "status": "unverifiable",
+    "evidence_ids": [
+      "R-rail-gap"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-gap",
+        "title": "Candidate register for further primary-source verification",
+        "publisher": "Research locator only",
+        "url": "https://www.sgtrains.com/network-figures.html",
+        "section": "Opening-date tables",
+        "access_date": "2026-10-20",
+        "access": "secondary locator read, not acceptable verification under brief; candidate dates must not activate geometry"
+      }
+    ],
+    "note": "NLB BiblioAsia Pasir Ris article confirms month and cites “3 Stations Open Today”, Straits Times, 16 December 1989, p.30; original not read.",
+    "candidate_date": "1989-12-16"
+  },
+  {
+    "id": "branch-jurong-east-choa-chu-kang",
+    "line": "NSL (original Branch Line)",
+    "endpoints": [
+      "Jurong East",
+      "Choa Chu Kang"
+    ],
+    "date": null,
+    "type": "segment",
+    "status": "unverifiable",
+    "evidence_ids": [
+      "R-rail-gap"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-gap",
+        "title": "Candidate register for further primary-source verification",
+        "publisher": "Research locator only",
+        "url": "https://www.sgtrains.com/network-figures.html",
+        "section": "Opening-date tables",
+        "access_date": "2026-10-20",
+        "access": "secondary locator read, not acceptable verification under brief; candidate dates must not activate geometry"
+      }
+    ],
+    "note": "Exact first-passenger-service day not verified in LTA/NLB or primary transcript before required stop.",
+    "candidate_date": "1990-03-10"
+  },
+  {
+    "id": "ewl-boon-lay-1990",
+    "line": "EWL",
+    "endpoints": [
+      "Lakeside",
+      "Boon Lay"
+    ],
+    "date": null,
+    "type": "segment",
+    "status": "unverifiable",
+    "evidence_ids": [
+      "R-rail-04"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-04",
+        "title": "Speech at the closing ceremony to mark completion of MRT project and opening of Boon Lay station",
+        "publisher": "Ministry of Communications and Information / NAS",
+        "url": "https://www.nas.gov.sg/archivesonline/data/pdfdoc/ynh19900706s.pdf",
+        "section": "heading; first paragraph",
+        "access_date": "2026-10-20",
+        "access": "read indexed official transcript"
+      }
+    ],
+    "note": "Official completion/opening speech; day of first service needs separate check if distinguishing ceremony. Parent audit: opening day is sourced, but passenger-service day remains unverified; excluded from map-ready dates.",
+    "candidate_date": "1990-07-06",
+    "verified_official_opening_date": "1990-07-06"
+  },
+  {
+    "id": "nsl-woodlands-extension",
+    "line": "NSL",
+    "endpoints": [
+      "Choa Chu Kang",
+      "Yishun"
+    ],
+    "date": null,
+    "type": "segment",
+    "status": "unverifiable",
+    "evidence_ids": [
+      "R-rail-gap"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-gap",
+        "title": "Candidate register for further primary-source verification",
+        "publisher": "Research locator only",
+        "url": "https://www.sgtrains.com/network-figures.html",
+        "section": "Opening-date tables",
+        "access_date": "2026-10-20",
+        "access": "secondary locator read, not acceptable verification under brief; candidate dates must not activate geometry"
+      }
+    ],
+    "note": "Official NAS opening speech and LTA 2014/15 annual report confirm inauguration; same-day first passenger service not independently established.",
+    "candidate_date": "1996-02-10"
+  },
+  {
+    "id": "ewl-tanah-merah-expo",
+    "line": "EWL airport branch",
+    "endpoints": [
+      "Tanah Merah",
+      "Expo"
+    ],
+    "date": "2001-01-10",
+    "type": "segment",
+    "status": "confirmed",
+    "evidence_ids": [
+      "R-rail-06"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-06",
+        "title": "Annual Review 2001",
+        "publisher": "SMRT Corporation",
+        "url": "https://www.smrt.com.sg/getmedia/61dc9386-7f96-4d8d-9ae6-e373e5a02d0f/2001_AR.pdf?ext=.pdf",
+        "section": "printed p.27, Opening of Expo station",
+        "access_date": "2026-10-20",
+        "access": "read indexed operator report"
+      }
+    ],
+    "note": ""
+  },
+  {
+    "id": "ewl-dover-infill",
+    "line": "EWL",
+    "endpoints": [
+      "Dover",
+      "Dover"
+    ],
+    "date": null,
+    "type": "station-on-existing-track",
+    "status": "unverifiable",
+    "evidence_ids": [
+      "R-rail-gap"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-gap",
+        "title": "Candidate register for further primary-source verification",
+        "publisher": "Research locator only",
+        "url": "https://www.sgtrains.com/network-figures.html",
+        "section": "Opening-date tables",
+        "access_date": "2026-10-20",
+        "access": "secondary locator read, not acceptable verification under brief; candidate dates must not activate geometry"
+      }
+    ],
+    "note": "SMRT 2002 report confirms October 2001 only; station added on existing track, never delay 1988 track to 2001.",
+    "candidate_date": "2001-10-18"
+  },
+  {
+    "id": "ewl-expo-changi-airport",
+    "line": "EWL airport branch",
+    "endpoints": [
+      "Expo",
+      "Changi Airport"
+    ],
+    "date": "2002-02-08",
+    "type": "segment",
+    "status": "confirmed",
+    "evidence_ids": [
+      "R-rail-07"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-07",
+        "title": "Annual Report 2002",
+        "publisher": "SMRT Corporation",
+        "url": "https://www.smrt.com.sg/getmedia/d616a462-7d80-457d-a06b-b2513d6a27f7/2002_AR.pdf%3Fext%3D.pdf",
+        "section": "Our reach for greater convenience",
+        "access_date": "2026-10-20",
+        "access": "read indexed operator report"
+      }
+    ],
+    "note": "Disagreement retained: NLB BiblioAsia “How Changi Airport Came To Be” says airport MRT opened in 2001; operator first-train account says 8 February 2002."
+  },
+  {
+    "id": "nel-harbourfront-punggol",
+    "line": "NEL",
+    "endpoints": [
+      "HarbourFront",
+      "Punggol"
+    ],
+    "date": "2003-06-20",
+    "type": "segment",
+    "status": "confirmed",
+    "evidence_ids": [
+      "R-rail-08"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-08",
+        "title": "Annual Report 2003",
+        "publisher": "SBS Transit",
+        "url": "https://www.sbstransit.com.sg/Uploads/Investor_Relations/Annual_Report/sbst_annualreport03.pdf",
+        "section": "Operations Review; Rail Business; Service Enhancements",
+        "access_date": "2026-10-20",
+        "access": "read indexed operator report; extract also explicitly says East Loop"
+      }
+    ],
+    "note": "Track through Buangkok and Woodleigh opened; those stations opened later."
+  },
+  {
+    "id": "nel-buangkok-opens",
+    "line": "NEL",
+    "endpoints": [
+      "Buangkok",
+      "Buangkok"
+    ],
+    "date": null,
+    "type": "station-on-existing-track",
+    "status": "unverifiable",
+    "evidence_ids": [
+      "R-rail-gap"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-gap",
+        "title": "Candidate register for further primary-source verification",
+        "publisher": "Research locator only",
+        "url": "https://www.sgtrains.com/network-figures.html",
+        "section": "Opening-date tables",
+        "access_date": "2026-10-20",
+        "access": "secondary locator read, not acceptable verification under brief; candidate dates must not activate geometry"
+      }
+    ],
+    "note": "Exact first-passenger-service day not verified in LTA/NLB or primary transcript before required stop.",
+    "candidate_date": "2006-01-15"
+  },
+  {
+    "id": "nel-woodleigh-opens",
+    "line": "NEL",
+    "endpoints": [
+      "Woodleigh",
+      "Woodleigh"
+    ],
+    "date": null,
+    "type": "station-on-existing-track",
+    "status": "unverifiable",
+    "evidence_ids": [
+      "R-rail-gap"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-gap",
+        "title": "Candidate register for further primary-source verification",
+        "publisher": "Research locator only",
+        "url": "https://www.sgtrains.com/network-figures.html",
+        "section": "Opening-date tables",
+        "access_date": "2026-10-20",
+        "access": "secondary locator read, not acceptable verification under brief; candidate dates must not activate geometry"
+      }
+    ],
+    "note": "Exact first-passenger-service day not verified in LTA/NLB or primary transcript before required stop.",
+    "candidate_date": "2011-06-20"
+  },
+  {
+    "id": "ewl-boon-lay-joo-koon",
+    "line": "EWL",
+    "endpoints": [
+      "Boon Lay",
+      "Joo Koon"
+    ],
+    "date": "2009-02-28",
+    "type": "segment",
+    "status": "confirmed",
+    "evidence_ids": [
+      "R-rail-09"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-09",
+        "title": "Annual Report 2009",
+        "publisher": "SMRT Corporation",
+        "url": "https://www.smrt.com.sg/getmedia/bff0d1e9-de22-474a-aaa5-0433ee08f1cb/2009_AR.pdf?ext=.pdf",
+        "section": "MRT, Highlights in FY2009",
+        "access_date": "2026-10-20",
+        "access": "read indexed operator report"
+      }
+    ],
+    "note": ""
+  },
+  {
+    "id": "ccl-bartley-marymount",
+    "line": "CCL",
+    "endpoints": [
+      "Bartley",
+      "Marymount"
+    ],
+    "date": "2009-05-28",
+    "type": "segment",
+    "status": "confirmed",
+    "evidence_ids": [
+      "E084"
+    ],
+    "sources": [
+      {
+        "id": "E084",
+        "title": "Circle Line Book",
+        "publisher": "Land Transport Authority",
+        "url": "https://www.lta.gov.sg/content/dam/ltagov/who_we_are/statistics_and_publications/books/pdf/Circle_Line_Book.pdf",
+        "section": "Over to You",
+        "access_date": "2026-10-20",
+        "access": "existing E084 reused; page text additionally read for Stages 1 and 2; quote consists of two date excerpts"
+      }
+    ],
+    "note": ""
+  },
+  {
+    "id": "ccl-dhoby-ghaut-bartley",
+    "line": "CCL",
+    "endpoints": [
+      "Dhoby Ghaut",
+      "Bartley"
+    ],
+    "date": "2010-04-17",
+    "type": "segment",
+    "status": "confirmed",
+    "evidence_ids": [
+      "E084"
+    ],
+    "sources": [
+      {
+        "id": "E084",
+        "title": "Circle Line Book",
+        "publisher": "Land Transport Authority",
+        "url": "https://www.lta.gov.sg/content/dam/ltagov/who_we_are/statistics_and_publications/books/pdf/Circle_Line_Book.pdf",
+        "section": "Over to You",
+        "access_date": "2026-10-20",
+        "access": "existing E084 reused; page text additionally read for Stages 1 and 2; quote consists of two date excerpts"
+      }
+    ],
+    "note": "Stages 1 and 2 opened together; joins existing Stage 3 at Bartley."
+  },
+  {
+    "id": "ccl-marymount-harbourfront",
+    "line": "CCL",
+    "endpoints": [
+      "Marymount",
+      "HarbourFront"
+    ],
+    "date": "2011-10-08",
+    "type": "segment",
+    "status": "confirmed",
+    "evidence_ids": [
+      "R-rail-10"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-10",
+        "title": "Annual Report 2012",
+        "publisher": "SMRT Corporation",
+        "url": "https://www.smrt.com.sg/getmedia/6d890d93-79eb-442b-b318-4dc0a1921a12/2012_AR.pdf?ext=.pdf",
+        "section": "Operating and Financial Review, Circle Line",
+        "access_date": "2026-10-20",
+        "access": "read indexed operator report; same paragraph confirms 14 January 2012 extension"
+      }
+    ],
+    "note": "Stages 4 and 5; Bukit Brown station remains unopened through end-2025."
+  },
+  {
+    "id": "ccl-promenade-marina-bay",
+    "line": "CCL extension",
+    "endpoints": [
+      "Promenade",
+      "Marina Bay"
+    ],
+    "date": "2012-01-14",
+    "type": "segment",
+    "status": "confirmed",
+    "evidence_ids": [
+      "R-rail-10"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-10",
+        "title": "Annual Report 2012",
+        "publisher": "SMRT Corporation",
+        "url": "https://www.smrt.com.sg/getmedia/6d890d93-79eb-442b-b318-4dc0a1921a12/2012_AR.pdf?ext=.pdf",
+        "section": "Operating and Financial Review, Circle Line",
+        "access_date": "2026-10-20",
+        "access": "read indexed operator report; same paragraph confirms 14 January 2012 extension"
+      }
+    ],
+    "note": ""
+  },
+  {
+    "id": "dtl-bugis-chinatown",
+    "line": "DTL",
+    "endpoints": [
+      "Bugis",
+      "Chinatown"
+    ],
+    "date": "2013-12-22",
+    "type": "segment",
+    "status": "confirmed",
+    "evidence_ids": [
+      "E085-E087"
+    ],
+    "sources": [
+      {
+        "id": "E085-E087",
+        "title": "Downtown Line",
+        "publisher": "Land Transport Authority",
+        "url": "https://www.lta.gov.sg/content/ltagov/en/getting_around/public_transport/rail_network/downtown_line.html",
+        "section": "Stages 1, 2 and 3: Opening date",
+        "access_date": "2026-10-20",
+        "access": "existing E085, E086, E087 reused; current page read"
+      }
+    ],
+    "note": ""
+  },
+  {
+    "id": "nsl-marina-bay-marina-south-pier",
+    "line": "NSL",
+    "endpoints": [
+      "Marina Bay",
+      "Marina South Pier"
+    ],
+    "date": null,
+    "type": "segment",
+    "status": "unverifiable",
+    "evidence_ids": [
+      "R-rail-gap"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-gap",
+        "title": "Candidate register for further primary-source verification",
+        "publisher": "Research locator only",
+        "url": "https://www.sgtrains.com/network-figures.html",
+        "section": "Opening-date tables",
+        "access_date": "2026-10-20",
+        "access": "secondary locator read, not acceptable verification under brief; candidate dates must not activate geometry"
+      }
+    ],
+    "note": "LTA confirms 2014 extension; exact day located but direct release was not recovered before stop.",
+    "candidate_date": "2014-11-23"
+  },
+  {
+    "id": "dtl-bukit-panjang-bugis",
+    "line": "DTL",
+    "endpoints": [
+      "Bukit Panjang",
+      "Bugis"
+    ],
+    "date": "2015-12-27",
+    "type": "segment",
+    "status": "confirmed",
+    "evidence_ids": [
+      "E085-E087"
+    ],
+    "sources": [
+      {
+        "id": "E085-E087",
+        "title": "Downtown Line",
+        "publisher": "Land Transport Authority",
+        "url": "https://www.lta.gov.sg/content/ltagov/en/getting_around/public_transport/rail_network/downtown_line.html",
+        "section": "Stages 1, 2 and 3: Opening date",
+        "access_date": "2026-10-20",
+        "access": "existing E085, E086, E087 reused; current page read"
+      }
+    ],
+    "note": "Includes through-track at Hume; Hume station opened 2025."
+  },
+  {
+    "id": "ewl-joo-koon-tuas-link",
+    "line": "EWL",
+    "endpoints": [
+      "Joo Koon",
+      "Tuas Link"
+    ],
+    "date": null,
+    "type": "segment",
+    "status": "unverifiable",
+    "evidence_ids": [
+      "R-rail-gap"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-gap",
+        "title": "Candidate register for further primary-source verification",
+        "publisher": "Research locator only",
+        "url": "https://www.sgtrains.com/network-figures.html",
+        "section": "Opening-date tables",
+        "access_date": "2026-10-20",
+        "access": "secondary locator read, not acceptable verification under brief; candidate dates must not activate geometry"
+      }
+    ],
+    "note": "LTA current EWL page confirms June 2017. Original 27 April 2017 release URL returns 404; exact day not verified from available primary text.",
+    "candidate_date": "2017-06-18"
+  },
+  {
+    "id": "dtl-chinatown-expo",
+    "line": "DTL",
+    "endpoints": [
+      "Chinatown",
+      "Expo"
+    ],
+    "date": "2017-10-21",
+    "type": "segment",
+    "status": "confirmed",
+    "evidence_ids": [
+      "E085-E087"
+    ],
+    "sources": [
+      {
+        "id": "E085-E087",
+        "title": "Downtown Line",
+        "publisher": "Land Transport Authority",
+        "url": "https://www.lta.gov.sg/content/ltagov/en/getting_around/public_transport/rail_network/downtown_line.html",
+        "section": "Stages 1, 2 and 3: Opening date",
+        "access_date": "2026-10-20",
+        "access": "existing E085, E086, E087 reused; current page read"
+      }
+    ],
+    "note": ""
+  },
+  {
+    "id": "nsl-canberra-infill",
+    "line": "NSL",
+    "endpoints": [
+      "Canberra",
+      "Canberra"
+    ],
+    "date": "2019-11-02",
+    "type": "station-on-existing-track",
+    "status": "confirmed",
+    "evidence_ids": [
+      "R-rail-12"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-12",
+        "title": "Annual Report 2019/20",
+        "publisher": "Land Transport Authority",
+        "url": "https://www.lta.gov.sg/content/dam/ltagov/who_we_are/statistics_and_publications/report/pdf/LTA_AR1920.pdf",
+        "section": "Completed rail expansions; Canberra, printed p.19",
+        "access_date": "2026-10-20",
+        "access": "read indexed report; TEL1 paragraph also confirms service 31 January 2020"
+      }
+    ],
+    "note": "Infill station; surrounding track was already passenger-operating from Woodlands extension."
+  },
+  {
+    "id": "tel-woodlands-north-woodlands-south",
+    "line": "TEL",
+    "endpoints": [
+      "Woodlands North",
+      "Woodlands South"
+    ],
+    "date": "2020-01-31",
+    "type": "segment",
+    "status": "confirmed",
+    "evidence_ids": [
+      "E088",
+      "R-rail-12"
+    ],
+    "sources": [
+      {
+        "id": "E088",
+        "title": "Thomson-East Coast Line",
+        "publisher": "Land Transport Authority",
+        "url": "https://www.lta.gov.sg/content/ltagov/en/upcoming_projects/rail_expansion/thomson_east_coast_line.html/1000",
+        "section": "Location of stations, Stage 1",
+        "access_date": "2026-10-20",
+        "access": "existing E088 reused and page read"
+      },
+      {
+        "id": "R-rail-12",
+        "title": "Annual Report 2019/20",
+        "publisher": "Land Transport Authority",
+        "url": "https://www.lta.gov.sg/content/dam/ltagov/who_we_are/statistics_and_publications/report/pdf/LTA_AR1920.pdf",
+        "section": "Completed rail expansions; Canberra, printed p.19",
+        "access_date": "2026-10-20",
+        "access": "read indexed report; TEL1 paragraph also confirms service 31 January 2020"
+      }
+    ],
+    "note": ""
+  },
+  {
+    "id": "tel-woodlands-south-caldecott",
+    "line": "TEL",
+    "endpoints": [
+      "Woodlands South",
+      "Caldecott"
+    ],
+    "date": "2021-08-28",
+    "type": "segment",
+    "status": "confirmed",
+    "evidence_ids": [
+      "R-rail-13"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-13",
+        "title": "Factsheet: Thomson–East Coast Line 2 to Welcome Commuters from 28 August 2021",
+        "publisher": "Land Transport Authority",
+        "url": "https://www.lta.gov.sg/content/ltagov/en/newsroom.html?keyword=mytransport.sg",
+        "section": "30 June 2021 release listing",
+        "access_date": "2026-10-20",
+        "access": "read LTA newsroom listing, direct release not recovered"
+      }
+    ],
+    "note": ""
+  },
+  {
+    "id": "tel-caldecott-gardens-by-the-bay",
+    "line": "TEL",
+    "endpoints": [
+      "Caldecott",
+      "Gardens by the Bay"
+    ],
+    "date": "2022-11-13",
+    "type": "segment",
+    "status": "confirmed",
+    "evidence_ids": [
+      "R-rail-14"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-14",
+        "title": "TEL3 Hits the City: Get fed, get fit and overall, feel fab!",
+        "publisher": "Land Transport Authority",
+        "url": "https://www.lta.gov.sg/content/ltagov/en/who_we_are/statistics_and_publications/Connect/tel3hitsthecity.html",
+        "section": "opening and closing paragraphs",
+        "access_date": "2026-10-20",
+        "access": "read indexed page"
+      }
+    ],
+    "note": "Mount Pleasant and Marina South stations not passenger-operating through end-2025; through-track operates."
+  },
+  {
+    "id": "tel-gardens-by-the-bay-bayshore",
+    "line": "TEL",
+    "endpoints": [
+      "Gardens by the Bay",
+      "Bayshore"
+    ],
+    "date": "2024-06-23",
+    "type": "segment",
+    "status": "confirmed",
+    "evidence_ids": [
+      "R-rail-15"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-15",
+        "title": "Annual Report 2024/25",
+        "publisher": "Land Transport Authority",
+        "url": "https://www.lta.gov.sg/content/dam/ltagov/who_we_are/statistics_and_publications/report/pdf/LTA%20AR2024_25%20PDFa%20%28web%29.pdf",
+        "section": "printed pp.14,16, Key Highlights",
+        "access_date": "2026-10-20",
+        "access": "read indexed report; p.16 confirms Punggol Coast 10 December and Teck Lee 15 August 2024"
+      }
+    ],
+    "note": ""
+  },
+  {
+    "id": "nel-punggol-punggol-coast",
+    "line": "NEL",
+    "endpoints": [
+      "Punggol",
+      "Punggol Coast"
+    ],
+    "date": "2024-12-10",
+    "type": "segment",
+    "status": "confirmed",
+    "evidence_ids": [
+      "R-rail-16"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-16",
+        "title": "Factsheet: Punggol Coast Station Welcomes Commuters from 10 December 2024",
+        "publisher": "Land Transport Authority",
+        "url": "https://www.lta.gov.sg/content/ltagov/en/newsroom/2024/12/news-releases/punggol_coast_station_welcomes_commuters.html",
+        "section": "paragraph 1",
+        "access_date": "2026-10-20",
+        "access": "read; publication date 10 December 2024"
+      }
+    ],
+    "note": ""
+  },
+  {
+    "id": "dtl-hume-infill",
+    "line": "DTL",
+    "endpoints": [
+      "Hume",
+      "Hume"
+    ],
+    "date": "2025-02-28",
+    "type": "station-on-existing-track",
+    "status": "confirmed",
+    "evidence_ids": [
+      "R-rail-11"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-11",
+        "title": "Hume Station to Open on 28 February 2025",
+        "publisher": "Land Transport Authority",
+        "url": "https://www.lta.gov.sg/content/ltagov/en/newsroom/2025/1/news-releases/hume_station_to_open.html",
+        "section": "paragraphs 1–3",
+        "access_date": "2026-10-20",
+        "access": "read"
+      }
+    ],
+    "note": "Through-track opened with DTL2 in 2015; no new route length."
+  },
+  {
+    "id": "bplrt-initial",
+    "line": "Bukit Panjang LRT",
+    "endpoints": [
+      "Choa Chu Kang",
+      "Bukit Panjang loop / Ten Mile Junction"
+    ],
+    "date": "1999-11-06",
+    "type": "segment",
+    "status": "confirmed",
+    "evidence_ids": [
+      "R-rail-17"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-17",
+        "title": "First Light Rail Transit system",
+        "publisher": "National Library Board",
+        "url": "https://www.nlb.gov.sg/main/article-detail?cmsuuid=fe1e33e6-6770-4f4b-a800-51def14c2c04",
+        "section": "The pilot LRT system – Bukit Panjang",
+        "access_date": "2026-10-20",
+        "access": "read; preceding sentence gives 6 November 1999"
+      }
+    ],
+    "note": "Initial fourteen stations including Ten Mile Junction. Closure/reopening history of that spur not verified here; do not assume still operating today."
+  },
+  {
+    "id": "sklrt-east",
+    "line": "Sengkang LRT",
+    "endpoints": [
+      "Sengkang",
+      "East Loop"
+    ],
+    "date": "2003-01-18",
+    "type": "segment",
+    "status": "confirmed",
+    "evidence_ids": [
+      "R-rail-08"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-08",
+        "title": "Annual Report 2003",
+        "publisher": "SBS Transit",
+        "url": "https://www.sbstransit.com.sg/Uploads/Investor_Relations/Annual_Report/sbst_annualreport03.pdf",
+        "section": "Operations Review; Rail Business; Service Enhancements",
+        "access_date": "2026-10-20",
+        "access": "read indexed operator report; extract also explicitly says East Loop"
+      }
+    ],
+    "note": ""
+  },
+  {
+    "id": "sklrt-west",
+    "line": "Sengkang LRT",
+    "endpoints": [
+      "Sengkang",
+      "West Loop"
+    ],
+    "date": "2005-01-29",
+    "type": "segment",
+    "status": "confirmed",
+    "evidence_ids": [
+      "R-rail-18"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-18",
+        "title": "Punggol LRT and Sengkang LRT West Loop to Commence Revenue Service on 29 January 2005",
+        "publisher": "SBS Transit",
+        "url": "https://web.archive.org/web/20190830050757/https://www.sbstransit.com.sg/press/2005jan_10-3.aspx",
+        "section": "Phased Opening; Five Stations To Open First",
+        "access_date": "2026-10-20",
+        "access": "read full archived primary release; initial closed stations named"
+      }
+    ],
+    "note": "Cheng Lim, Farmway and Kupang station stops deferred; full loop first-passenger track geometry still requires operational-path verification."
+  },
+  {
+    "id": "sklrt-farmway",
+    "line": "Sengkang LRT",
+    "endpoints": [
+      "Farmway",
+      "Farmway"
+    ],
+    "date": "2007-11-15",
+    "type": "station-on-existing-track",
+    "status": "confirmed",
+    "evidence_ids": [
+      "R-rail-19"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-19",
+        "title": "Farmway LRT Station to Open on 15 November 2007",
+        "publisher": "SBS Transit",
+        "url": "https://web.archive.org/web/20170907075334/http://www.sbstransit.com.sg/press/2007-11-14-01-S.aspx",
+        "section": "opening paragraph",
+        "access_date": "2026-10-20",
+        "access": "read archived primary release"
+      }
+    ],
+    "note": ""
+  },
+  {
+    "id": "sklrt-cheng-lim",
+    "line": "Sengkang LRT",
+    "endpoints": [
+      "Cheng Lim",
+      "Cheng Lim"
+    ],
+    "date": "2013-01-01",
+    "type": "station-on-existing-track",
+    "status": "confirmed",
+    "evidence_ids": [
+      "R-rail-20"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-20",
+        "title": "Cheng Lim LRT Station To Open And Sengkang West LRT to Run in Both Directions",
+        "publisher": "SBS Transit",
+        "url": "https://web.archive.org/web/20121224110914/http://www.sbstransit.com.sg/press/2012-12-21-01.aspx",
+        "section": "first two paragraphs",
+        "access_date": "2026-10-20",
+        "access": "read archived primary release; same-day station opening stated in next paragraph"
+      }
+    ],
+    "note": ""
+  },
+  {
+    "id": "sklrt-kupang",
+    "line": "Sengkang LRT",
+    "endpoints": [
+      "Kupang",
+      "Kupang"
+    ],
+    "date": "2015-06-27",
+    "type": "station-on-existing-track",
+    "status": "confirmed",
+    "evidence_ids": [
+      "R-rail-21"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-21",
+        "title": "Kupang LRT Station to Open and More than 260 Weekly Trips to be Added to the Sengkang/Punggol LRT",
+        "publisher": "SBS Transit",
+        "url": "https://web.archive.org/web/20171010155818/https://www.sbstransit.com.sg/press/2015-06-15-02.aspx",
+        "section": "first paragraph",
+        "access_date": "2026-10-20",
+        "access": "read archived primary release"
+      }
+    ],
+    "note": ""
+  },
+  {
+    "id": "pglrt-east",
+    "line": "Punggol LRT",
+    "endpoints": [
+      "Punggol",
+      "Cove–Kadaloor"
+    ],
+    "date": "2005-01-29",
+    "type": "segment",
+    "status": "confirmed",
+    "evidence_ids": [
+      "R-rail-18"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-18",
+        "title": "Punggol LRT and Sengkang LRT West Loop to Commence Revenue Service on 29 January 2005",
+        "publisher": "SBS Transit",
+        "url": "https://web.archive.org/web/20190830050757/https://www.sbstransit.com.sg/press/2005jan_10-3.aspx",
+        "section": "Phased Opening; Five Stations To Open First",
+        "access_date": "2026-10-20",
+        "access": "read full archived primary release; initial closed stations named"
+      }
+    ],
+    "note": "Initial six stations including Punggol; Oasis and Damai deferred. Do not infer full loop passenger geometry from station dates alone."
+  },
+  {
+    "id": "pglrt-oasis",
+    "line": "Punggol LRT",
+    "endpoints": [
+      "Oasis",
+      "Oasis"
+    ],
+    "date": null,
+    "type": "station-on-existing-track",
+    "status": "unverifiable",
+    "evidence_ids": [
+      "R-rail-gap"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-gap",
+        "title": "Candidate register for further primary-source verification",
+        "publisher": "Research locator only",
+        "url": "https://www.sgtrains.com/network-figures.html",
+        "section": "Opening-date tables",
+        "access_date": "2026-10-20",
+        "access": "secondary locator read, not acceptable verification under brief; candidate dates must not activate geometry"
+      }
+    ],
+    "note": "Archived SBS opening release found; no readable body recovered before stop.",
+    "candidate_date": "2007-06-15"
+  },
+  {
+    "id": "pglrt-damai",
+    "line": "Punggol LRT",
+    "endpoints": [
+      "Damai",
+      "Damai"
+    ],
+    "date": null,
+    "type": "station-on-existing-track",
+    "status": "unverifiable",
+    "evidence_ids": [
+      "R-rail-gap"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-gap",
+        "title": "Candidate register for further primary-source verification",
+        "publisher": "Research locator only",
+        "url": "https://www.sgtrains.com/network-figures.html",
+        "section": "Opening-date tables",
+        "access_date": "2026-10-20",
+        "access": "secondary locator read, not acceptable verification under brief; candidate dates must not activate geometry"
+      }
+    ],
+    "note": "Original SBS 17 June 2011 release/poster located; body not recovered before stop.",
+    "candidate_date": "2011-06-20"
+  },
+  {
+    "id": "pglrt-west-initial",
+    "line": "Punggol LRT",
+    "endpoints": [
+      "Punggol",
+      "Soo Teck–Sumang–Nibong"
+    ],
+    "date": "2014-06-29",
+    "type": "segment",
+    "status": "confirmed",
+    "evidence_ids": [
+      "R-rail-22"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-22",
+        "title": "Punggol West LRT System to Commence Passenger Service and North East Line to Add More Train Trips",
+        "publisher": "SBS Transit",
+        "url": "https://www.sbstransit.com.sg/news/punggol-west-lrt-system-to-commence-passenger-service-and-north-east-line-to-add-more-train-trips",
+        "section": "paragraphs 1,2,5–8",
+        "access_date": "2026-10-20",
+        "access": "read; Nibong/Sumang/Soo Teck opened 29 June 2014; not whole West Loop"
+      }
+    ],
+    "note": "Partial loop via crossover; source explicitly excludes service between PW1 and PW4. Do not paint entire West Loop in 2014."
+  },
+  {
+    "id": "pglrt-west-sam-kee",
+    "line": "Punggol LRT",
+    "endpoints": [
+      "Sam Kee",
+      "Nibong"
+    ],
+    "date": "2016-02-29",
+    "type": "segment",
+    "status": "confirmed",
+    "evidence_ids": [
+      "R-rail-23"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-23",
+        "title": "Sam Kee Station on Punggol LRT System to open for Passenger Services",
+        "publisher": "SBS Transit",
+        "url": "https://www.sbstransit.com.sg/news/sam-kee-station-on-punggol-lrt-system-to-open-for-passenger-services",
+        "section": "paragraphs 1,4,7",
+        "access_date": "2026-10-20",
+        "access": "read; service is extended round loop, Teck Lee/Punggol Point/Samudera still closed"
+      }
+    ],
+    "note": "Service extended around loop; Teck Lee/Punggol Point/Samudera stops remain closed. Track is passenger-used past closed stations; split line geometry at operational junctions."
+  },
+  {
+    "id": "pglrt-punggol-point",
+    "line": "Punggol LRT",
+    "endpoints": [
+      "Punggol Point",
+      "Punggol Point"
+    ],
+    "date": null,
+    "type": "station-on-existing-track",
+    "status": "unverifiable",
+    "evidence_ids": [
+      "R-rail-gap"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-gap",
+        "title": "Candidate register for further primary-source verification",
+        "publisher": "Research locator only",
+        "url": "https://www.sgtrains.com/network-figures.html",
+        "section": "Opening-date tables",
+        "access_date": "2026-10-20",
+        "access": "secondary locator read, not acceptable verification under brief; candidate dates must not activate geometry"
+      }
+    ],
+    "note": "Exact first-passenger-service day not verified in LTA/NLB or primary transcript before required stop.",
+    "candidate_date": "2016-12-29"
+  },
+  {
+    "id": "pglrt-samudera",
+    "line": "Punggol LRT",
+    "endpoints": [
+      "Samudera",
+      "Samudera"
+    ],
+    "date": null,
+    "type": "station-on-existing-track",
+    "status": "unverifiable",
+    "evidence_ids": [
+      "R-rail-gap"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-gap",
+        "title": "Candidate register for further primary-source verification",
+        "publisher": "Research locator only",
+        "url": "https://www.sgtrains.com/network-figures.html",
+        "section": "Opening-date tables",
+        "access_date": "2026-10-20",
+        "access": "secondary locator read, not acceptable verification under brief; candidate dates must not activate geometry"
+      }
+    ],
+    "note": "Exact first-passenger-service day not verified in LTA/NLB or primary transcript before required stop.",
+    "candidate_date": "2017-03-31"
+  },
+  {
+    "id": "pglrt-teck-lee",
+    "line": "Punggol LRT",
+    "endpoints": [
+      "Teck Lee",
+      "Teck Lee"
+    ],
+    "date": "2024-08-15",
+    "type": "station-on-existing-track",
+    "status": "confirmed",
+    "evidence_ids": [
+      "R-rail-15"
+    ],
+    "sources": [
+      {
+        "id": "R-rail-15",
+        "title": "Annual Report 2024/25",
+        "publisher": "Land Transport Authority",
+        "url": "https://www.lta.gov.sg/content/dam/ltagov/who_we_are/statistics_and_publications/report/pdf/LTA%20AR2024_25%20PDFa%20%28web%29.pdf",
+        "section": "printed pp.14,16, Key Highlights",
+        "access_date": "2026-10-20",
+        "access": "read indexed report; p.16 confirms Punggol Coast 10 December and Teck Lee 15 August 2024"
+      }
+    ],
+    "note": ""
+  }
+]

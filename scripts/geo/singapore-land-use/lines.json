@@ -1,0 +1,500 @@
+{
+  "maps": {
+    "bis1959": {
+      "dataset": "bis1959",
+      "projection": "auto",
+      "maxResidualKm": 0.3,
+      "controlPoints": [
+        {
+          "name": "constructed graticule 103.666667 E 1.416667 N",
+          "svg": [
+            241.2,
+            345.88
+          ],
+          "lnglat": [
+            103.66666666666667,
+            1.4166666666666667
+          ]
+        },
+        {
+          "name": "constructed graticule 103.750000 E 1.416667 N",
+          "svg": [
+            548.33,
+            350.24
+          ],
+          "lnglat": [
+            103.75,
+            1.4166666666666667
+          ]
+        },
+        {
+          "name": "constructed graticule 103.833333 E 1.416667 N",
+          "svg": [
+            854.98,
+            354.59
+          ],
+          "lnglat": [
+            103.83333333333333,
+            1.4166666666666667
+          ]
+        },
+        {
+          "name": "constructed graticule 103.916667 E 1.416667 N",
+          "svg": [
+            1161.19,
+            358.93
+          ],
+          "lnglat": [
+            103.91666666666667,
+            1.4166666666666667
+          ]
+        },
+        {
+          "name": "constructed graticule 104.000000 E 1.416667 N",
+          "svg": [
+            1469.27,
+            363.3
+          ],
+          "lnglat": [
+            104,
+            1.4166666666666667
+          ]
+        },
+        {
+          "name": "constructed graticule 103.666667 E 1.333333 N",
+          "svg": [
+            237.38,
+            652.43
+          ],
+          "lnglat": [
+            103.66666666666667,
+            1.3333333333333333
+          ]
+        },
+        {
+          "name": "constructed graticule 103.750000 E 1.333333 N",
+          "svg": [
+            543.66,
+            657.63
+          ],
+          "lnglat": [
+            103.75,
+            1.3333333333333333
+          ]
+        },
+        {
+          "name": "constructed graticule 103.833333 E 1.333333 N",
+          "svg": [
+            850.03,
+            662.82
+          ],
+          "lnglat": [
+            103.83333333333333,
+            1.3333333333333333
+          ]
+        },
+        {
+          "name": "constructed graticule 103.916667 E 1.333333 N",
+          "svg": [
+            1156.51,
+            667.99
+          ],
+          "lnglat": [
+            103.91666666666667,
+            1.3333333333333333
+          ]
+        },
+        {
+          "name": "constructed graticule 104.000000 E 1.333333 N",
+          "svg": [
+            1463.74,
+            673.21
+          ],
+          "lnglat": [
+            104,
+            1.3333333333333333
+          ]
+        },
+        {
+          "name": "constructed graticule 103.666667 E 1.250000 N",
+          "svg": [
+            233.7,
+            946.77
+          ],
+          "lnglat": [
+            103.66666666666667,
+            1.25
+          ]
+        },
+        {
+          "name": "constructed graticule 103.750000 E 1.250000 N",
+          "svg": [
+            539.22,
+            950.96
+          ],
+          "lnglat": [
+            103.75,
+            1.25
+          ]
+        },
+        {
+          "name": "constructed graticule 103.833333 E 1.250000 N",
+          "svg": [
+            845.34,
+            955.14
+          ],
+          "lnglat": [
+            103.83333333333333,
+            1.25
+          ]
+        },
+        {
+          "name": "constructed graticule 103.916667 E 1.250000 N",
+          "svg": [
+            1152.09,
+            959.31
+          ],
+          "lnglat": [
+            103.91666666666667,
+            1.25
+          ]
+        },
+        {
+          "name": "constructed graticule 104.000000 E 1.250000 N",
+          "svg": [
+            1458.56,
+            963.52
+          ],
+          "lnglat": [
+            104,
+            1.25
+          ]
+        },
+        {
+          "name": "constructed graticule 103.700000 E 1.416667 N",
+          "svg": [
+            364.28,
+            347.74
+          ],
+          "lnglat": [
+            103.7,
+            1.4166666666666667
+          ]
+        }
+      ],
+      "controlPointMethod": "16 intersections constructed by linearly joining opposite labelled border graticule ticks; these are not 16 independent ground identifications. Causeway check excluded from fit and retained in K1 audit, not used to lower residuals. Preview 1920 px; full original was blocked."
+    }
+  },
+  "lines": {
+    "city": {
+      "note": "Trace outer edge of contiguous stipple, not scattered forest/swamp marks. Gaps between close source-pixel anchors cross stipple at its edge. South closure is offshore and clipped to L4. Manual dense source-pixel anchors; all-pixel mask makes connectors straight, so colour-support percentage is not a line-detection accuracy metric.",
+      "parts": [
+        {
+          "map": "bis1959",
+          "color": [
+            "#000000",
+            "#ffffff"
+          ],
+          "tolerance": 450,
+          "snapPx": 0,
+          "gapCost": 1,
+          "via": [
+            [
+              757,
+              895
+            ],
+            [
+              727,
+              871
+            ],
+            [
+              712,
+              846
+            ],
+            [
+              708,
+              817
+            ],
+            [
+              728,
+              803
+            ],
+            [
+              756,
+              802
+            ],
+            [
+              761,
+              780
+            ],
+            [
+              743,
+              762
+            ],
+            [
+              714,
+              734
+            ],
+            [
+              714,
+              705
+            ],
+            [
+              718,
+              676
+            ],
+            [
+              731,
+              660
+            ],
+            [
+              752,
+              649
+            ],
+            [
+              777,
+              650
+            ],
+            [
+              798,
+              653
+            ],
+            [
+              800,
+              642
+            ],
+            [
+              791,
+              629
+            ],
+            [
+              780,
+              622
+            ],
+            [
+              776,
+              606
+            ],
+            [
+              776,
+              589
+            ],
+            [
+              787,
+              577
+            ],
+            [
+              792,
+              569
+            ],
+            [
+              804,
+              576
+            ],
+            [
+              823,
+              578
+            ],
+            [
+              837,
+              589
+            ],
+            [
+              851,
+              605
+            ],
+            [
+              859,
+              616
+            ],
+            [
+              879,
+              616
+            ],
+            [
+              900,
+              612
+            ],
+            [
+              924,
+              612
+            ],
+            [
+              940,
+              611
+            ],
+            [
+              960,
+              615
+            ],
+            [
+              982,
+              599
+            ],
+            [
+              1002,
+              580
+            ],
+            [
+              1017,
+              575
+            ],
+            [
+              1030,
+              606
+            ],
+            [
+              1044,
+              638
+            ],
+            [
+              1056,
+              661
+            ],
+            [
+              1073,
+              695
+            ],
+            [
+              1083,
+              713
+            ],
+            [
+              1107,
+              708
+            ],
+            [
+              1134,
+              701
+            ],
+            [
+              1160,
+              697
+            ],
+            [
+              1177,
+              689
+            ],
+            [
+              1188,
+              719
+            ],
+            [
+              1193,
+              734
+            ]
+          ]
+        }
+      ],
+      "close": [
+        [
+          103.95,
+          1.2
+        ],
+        [
+          103.8,
+          1.2
+        ]
+      ]
+    },
+    "naval": {
+      "note": "Stippled British Naval Base; northern offshore closure clipped to L4. Manual dense source-pixel anchors; all-pixel mask makes connectors straight, so colour-support percentage is not a line-detection accuracy metric.",
+      "parts": [
+        {
+          "map": "bis1959",
+          "color": [
+            "#000000",
+            "#ffffff"
+          ],
+          "tolerance": 450,
+          "snapPx": 0,
+          "gapCost": 1,
+          "via": [
+            [
+              640,
+              246
+            ],
+            [
+              668,
+              249
+            ],
+            [
+              696,
+              237
+            ],
+            [
+              713,
+              225
+            ],
+            [
+              728,
+              217
+            ],
+            [
+              752,
+              212
+            ],
+            [
+              779,
+              223
+            ],
+            [
+              795,
+              238
+            ],
+            [
+              809,
+              251
+            ],
+            [
+              817,
+              264
+            ],
+            [
+              834,
+              276
+            ],
+            [
+              849,
+              253
+            ],
+            [
+              867,
+              231
+            ],
+            [
+              861,
+              215
+            ],
+            [
+              846,
+              208
+            ],
+            [
+              824,
+              202
+            ],
+            [
+              814,
+              190
+            ],
+            [
+              794,
+              188
+            ]
+          ]
+        }
+      ],
+      "close": [
+        [
+          103.82,
+          1.49
+        ],
+        [
+          103.75,
+          1.49
+        ]
+      ]
+    }
+  }
+}

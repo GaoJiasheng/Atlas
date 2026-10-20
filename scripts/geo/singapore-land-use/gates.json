@@ -1,0 +1,59 @@
+{
+  "date": "2026-10-20",
+  "branch": "codex/landuse-data",
+  "status": "draft",
+  "install": "pnpm install --frozen-lockfile passed",
+  "validate": {
+    "exit": 0,
+    "topics": 39,
+    "errors": 0,
+    "warnings": 0
+  },
+  "check": {
+    "exit": 0,
+    "errors": 0,
+    "warnings": 0,
+    "hints": 11,
+    "hint_context": "3 pre-existing unused-variable hints and 8 hints from ignored matplotlib dependency JavaScript"
+  },
+  "geo-rings": {
+    "command": "pnpm vitest run tests/geo-rings.test.ts",
+    "exit": 0,
+    "tests": 8,
+    "slug_added": true
+  },
+  "build": {
+    "exit": 0,
+    "pages": 81
+  },
+  "shoot": {
+    "command": "pnpm shoot singapore-land-use --beats",
+    "exit": 0,
+    "locale": "en",
+    "theme": "paper",
+    "beats": 33,
+    "beat_failures": 0,
+    "console": "clean",
+    "nonfatal_notice": "Background chapter default view has no on-screen leader label for countryside, town-and-services, defence-special, site-changi-airbase; relevant beats were reviewed separately."
+  },
+  "layers_check": {
+    "exit": 0,
+    "invalid": 0,
+    "empty": 0,
+    "bad_dates": 0,
+    "hdb_outside_current_land": 0
+  },
+  "geographic_acceptance": {
+    "accepted": false,
+    "remaining": [
+      "K1 full-resolution source and 16 independent ground controls",
+      "Landsat p95 accuracy targets",
+      "Tide matching",
+      "Complete dated reclamation engineering-piece matches",
+      "Inherited L4/L5 rejected-draft accuracy status"
+    ]
+  },
+  "review_images": "docs/screenshots/singapore-land-use/ (gitignored)",
+  "source_review_images": 31,
+  "beat_review_images": 33
+}

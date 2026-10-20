@@ -1,0 +1,88 @@
+{
+  "presets": [
+    {
+      "id": "island",
+      "label": {
+        "en": "Island",
+        "zh": "全岛"
+      },
+      "camera": {
+        "center": [
+          103.82,
+          1.36
+        ],
+        "zoom": 10.2
+      }
+    },
+    {
+      "id": "north",
+      "label": {
+        "en": "North",
+        "zh": "北部"
+      },
+      "camera": {
+        "center": [
+          103.8,
+          1.43
+        ],
+        "zoom": 11.4
+      }
+    },
+    {
+      "id": "south",
+      "label": {
+        "en": "South and city",
+        "zh": "南部与城区"
+      },
+      "camera": {
+        "center": [
+          103.84,
+          1.28
+        ],
+        "zoom": 11.8
+      }
+    },
+    {
+      "id": "east",
+      "label": {
+        "en": "East",
+        "zh": "东部"
+      },
+      "camera": {
+        "center": [
+          103.94,
+          1.35
+        ],
+        "zoom": 11.4
+      }
+    },
+    {
+      "id": "west",
+      "label": {
+        "en": "West",
+        "zh": "西部"
+      },
+      "camera": {
+        "center": [
+          103.7,
+          1.34
+        ],
+        "zoom": 11.2
+      }
+    },
+    {
+      "id": "central",
+      "label": {
+        "en": "Central",
+        "zh": "中部"
+      },
+      "camera": {
+        "center": [
+          103.81,
+          1.36
+        ],
+        "zoom": 11.6
+      }
+    }
+  ]
+}

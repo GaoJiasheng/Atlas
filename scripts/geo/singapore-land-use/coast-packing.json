@@ -1,0 +1,33 @@
+{
+  "dpM": 50,
+  "quant": 10000,
+  "gridM": [
+    5.368293553892357,
+    3.4704775914604835
+  ],
+  "bytes": 246899,
+  "gzip": 71565,
+  "rings": {
+    "rings": 751,
+    "zeroArea": 0,
+    "selfCrossing": 0
+  },
+  "attempts": [
+    {
+      "dpM": 40,
+      "quant": 10000,
+      "bytes": 260153,
+      "rings": 795,
+      "zeroArea": 0,
+      "selfCrossing": 0
+    },
+    {
+      "dpM": 50,
+      "quant": 10000,
+      "bytes": 246899,
+      "rings": 751,
+      "zeroArea": 0,
+      "selfCrossing": 0
+    }
+  ]
+}
