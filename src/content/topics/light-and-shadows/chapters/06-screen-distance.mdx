@@ -11,7 +11,7 @@ state:
   cutaway: "none"
   layers: ["source", "objects", "sheets", "screen", "rays"]
   labels: ["screen-board", "card-circle", "torch"]
-  camera: {"position": [-0.05, 1.08, 3.3], "target": [-0.05, 1.04, 0.05], "fov": 20}
+  camera: {"position": [-1.4, 1.5, 1.6], "target": [-0.13, 1.03, 0.05], "fov": 30}
   summary: {"en": "The farther the screen is from an object, the bigger the object's shadow, as long as the torch and the object stay where they are.", "zh": "只要手电筒和物体不动，屏幕离物体越远，物体的影子越大。"}
   sim:
     set: {"object": "card-circle", "material": "none", "turn": 0, "d-torch": 20, "d-screen": 10}
@@ -38,11 +38,11 @@ state:
     - sim: {"set": {"d-screen": 40}}
       labels: ["screen-board", "screen-stand", "card-circle"]
       caption: {"en": "At forty centimetres it is twenty-four centimetres across. The farther the screen, the bigger the shadow.", "zh": "到了四十厘米，影子直径二十四厘米。屏幕越远，影子越大。"}
-    - camera: {"position": [-1.25, 1.42, 0.62], "target": [0.12, 1.03, 0.05], "fov": 30}
+    - camera: {"position": [-1.4, 1.5, 1.6], "target": [-0.13, 1.03, 0.05], "fov": 30}
       sim: {"set": {"d-screen": 30}}
       labels: ["card-circle", "screen-board"]
       caption: {"en": "In this model the shadow grows by the same amount, four centimetres, for every ten centimetres the screen moves back.", "zh": "在这个模型里，屏幕每往后移十厘米，影子就大四厘米，每次一样多。"}
-    - camera: {"position": [-1.02, 1.52, 1.52], "target": [0.06, 1.0, 0.02], "fov": 30}
+    - camera: {"position": [-1.4, 1.5, 1.6], "target": [-0.13, 1.03, 0.05], "fov": 30}
       sim: {"set": {"d-screen": 30}}
       labels: ["torch", "screen-board", "card-circle"]
       caption: {"en": "Moving the torch and moving the screen both change the shadow, but they are two separate fair tests. Change one, and keep the other the same.", "zh": "移动手电筒和移动屏幕都会改变影子，但这是两个分开的公平测试：改变一个，另一个保持不变。"}
