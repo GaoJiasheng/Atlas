@@ -1,0 +1,1 @@
+{"type":"Topology","objects":{"sample-dated-rail":{"type":"GeometryCollection","geometries":[{"type":"LineString","arcs":[0],"properties":{"f":1965,"u":1980}},{"type":"LineString","arcs":[1],"properties":{"f":1980}}]}},"arcs":[[[103.842,1.328],[103.846,1.332],[103.851,1.335],[103.855,1.34]],[[103.842,1.328],[103.847,1.335],[103.85,1.343],[103.849,1.351]]]}

@@ -11,6 +11,7 @@ import { useSceneContext, useT } from '../../../core/context';
 import type { TimeSceneExt } from '../../index';
 import type { TimeModel } from '../../lib/model';
 import type { Playhead } from '../../lib/playhead';
+import type { DatedLayerLoaded } from '../../lib/datedLayers';
 import type { GeoController } from './controller';
 
 export interface GeoStageProps {
@@ -23,15 +24,17 @@ export interface GeoStageProps {
   onController(controller: GeoController | null): void;
   /** The island-scale land has loaded (`basemap.local`): whether it has today's coastline. */
   onLocalLand?(info: { coastToday: boolean }): void;
+  onDatedLayers?(info: DatedLayerLoaded[]): void;
 }
 
-export function GeoStage({ store, playhead, model, locale, onSelectEvent, onController, onLocalLand }: GeoStageProps) {
+export function GeoStage({ store, playhead, model, locale, onSelectEvent, onController, onLocalLand, onDatedLayers }: GeoStageProps) {
   const t = useT();
   const { slots, topic } = useSceneContext();
   const leadersSvg = slots.leaders;
   const blocLabelsRef = useRef(topic.blocLabels);
   const basemapRef = useRef(topic.basemap);
   const stringsRef = useRef(topic.strings);
+  const datedLayersRef = useRef(topic.datedLayers);
   const containerRef = useRef<HTMLDivElement>(null);
   const labelsRef = useRef<HTMLDivElement>(null);
   const territoryRef = useRef<HTMLDivElement>(null);
@@ -43,6 +46,8 @@ export function GeoStage({ store, playhead, model, locale, onSelectEvent, onCont
   controllerCb.current = onController;
   const localLandCb = useRef(onLocalLand);
   localLandCb.current = onLocalLand;
+  const datedLayersCb = useRef(onDatedLayers);
+  datedLayersCb.current = onDatedLayers;
   const localeRef = useRef(locale);
   localeRef.current = locale;
   const svgRef = useRef<SVGSVGElement | null>(null);
@@ -71,8 +76,10 @@ export function GeoStage({ store, playhead, model, locale, onSelectEvent, onCont
           blocLabels: blocLabelsRef.current,
           basemap: basemapRef.current,
           strings: stringsRef.current,
+          datedLayers: datedLayersRef.current,
           onSelectEvent: (id) => selectRef.current(id),
           onLocalLand: (info) => localLandCb.current?.(info),
+          onDatedLayers: (info) => datedLayersCb.current?.(info),
         });
         controller.setLeadersSvg(svgRef.current);
         controllerRef.current = controller;

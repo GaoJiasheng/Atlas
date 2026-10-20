@@ -1,0 +1,4 @@
+[
+  { "id": "housing", "name": { "en": "Sample housing", "zh": "示例住宅" }, "bloc": "neutral", "joined": "1959", "color": "token:holder-1" },
+  { "id": "green", "name": { "en": "Sample green space", "zh": "示例绿地类别" }, "bloc": "neutral", "joined": "1959", "color": "token:holder-3" }
+]

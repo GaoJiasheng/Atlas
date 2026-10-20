@@ -8,7 +8,7 @@ export interface LegendItem {
   /** CSS colour, `var(--x)`, or a data colour ref (`token:accent-axis`). */
   color: string;
   /** `square`: hollow hairline square; `ring-dashed`: dot in a dashed ring; `site`: small hollow diamond; `triangle`: hollow hairline triangle; `hatch`: 45° hatched box; `dashed`: dashed outline box; `line-dashed`: dashed hairline. */
-  kind?: 'fill' | 'line' | 'point' | 'arrow' | 'square' | 'ring-dashed' | 'site' | 'triangle' | 'hatch' | 'dashed' | 'line-dashed';
+  kind?: 'fill' | 'line' | 'point' | 'ring' | 'arrow' | 'square' | 'ring-dashed' | 'site' | 'triangle' | 'hatch' | 'dashed' | 'line-dashed';
 }
 
 export interface LegendProps {
@@ -30,6 +30,8 @@ function Swatch({ color, kind = 'fill' }: { color: string; kind?: LegendItem['ki
       );
     case 'point':
       return <svg width="24" height="12" aria-hidden="true"><circle cx="12" cy="6" r="5" fill={c} /></svg>;
+    case 'ring':
+      return <svg width="24" height="12" aria-hidden="true"><circle cx="12" cy="6" r="5" fill="none" stroke={c} strokeWidth="1" /><circle cx="12" cy="6" r="1.8" fill={c} /></svg>;
     case 'square':
       return <svg width="24" height="12" aria-hidden="true"><rect x="7.5" y="1.5" width="9" height="9" fill="none" stroke={c} strokeWidth="1" /></svg>;
     case 'triangle':

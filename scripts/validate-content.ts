@@ -57,7 +57,7 @@ import { KEBAB_ID } from '../src/content/schema/common';
 import { sourceIds, type SourcesFile } from '../src/content/schema/sources';
 import { glossaryIds, type GlossaryFile } from '../src/content/schema/glossary';
 import { engineSchemas, formatIssues } from '../src/engines/schemas';
-import { timeSceneTopicIssues, type TimeSceneGeoData } from '../src/engines/time-scene/schema';
+import { timeChapterLayerIssues, timeSceneTopicIssues, type TimeChapterState, type TimeSceneGeoData } from '../src/engines/time-scene/schema';
 import {
   exercisesFile,
   musclesFile,
@@ -71,6 +71,8 @@ import { sharedSourcesFile } from '../src/content/schema/sources';
 import { glbIssues, glbNodeNames } from './lib/glb-check';
 import { readSharedFitness } from './lib/shared-data';
 import { badTokens } from '../src/lib/rich-text';
+import { matterWarnings } from '../src/engines/space-scene/matter-schema';
+import type { PartsFile } from '../src/engines/space-scene/schema';
 import { bareQuantities } from '../src/engines/math-scene/validate-measure';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -382,6 +384,7 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
 
   const ids = new IdRegistry(topicFile);
   ids.add(topic.id, 'topic');
+  for (const layer of topic.datedLayers ?? []) ids.add(layer.id, 'dated layer');
   const schemas = engineSchemas(topic.engine, topic.stage);
 
   /* ---- data ---- */
@@ -435,6 +438,8 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
     if (file.views?.exerciseBody === 'wire' && skin && !(await glbNodeNames(join(PUBLIC_DIR, model))).has('skin-wire'))
       warn(join(dataDir, 'parts.json'), `views.exerciseBody "wire": model ${model} has no "skin-wire" node, so the engine decimates the skin outline at load (slower, rougher)`);
   }
+  const matterFile = topic.engine === 'space-scene' && data ? (data as { parts?: PartsFile }).parts : undefined;
+  if (matterFile?.sim?.matter) for (const issue of matterWarnings(matterFile.sim.matter, new Map(matterFile.sim.controls.map((c) => [c.id, c])))) warn(join(dataDir, 'parts.json'), `sim.matter.${issue.path.join('.')}: ${issue.message}`);
   // The life-cycle ring card's second ring links to another topic (docs/33 §4.3): checked like `<TopicLink slug ch>`.
   const cycleLink = data !== undefined ? (data as { parts?: { sim?: { lifeCycle?: { card?: { compare?: { link?: { topic: string; chapter?: string } } } } } } }).parts?.sim?.lifeCycle?.card?.compare?.link : undefined;
   if (cycleLink) {
@@ -520,6 +525,8 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
         if (!ids.has(ref)) error(file, `state references unknown id "${ref}"`);
       }
       for (const issue of schemas.chapterIssues?.(state.data, data) ?? []) error(file, issue);
+      if (topic.engine === 'time-scene' && topic.stage === 'geo')
+        for (const issue of timeChapterLayerIssues(state.data as TimeChapterState, topic.datedLayers)) error(file, issue);
     }
   }
   if (data !== undefined) {

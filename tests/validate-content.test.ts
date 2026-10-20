@@ -52,6 +52,15 @@ const linesFor = (slug: string) => output.split('\n').filter((l) => l.includes(`
 beforeAll(() => {
   dir = mkdtempSync(join(tmpdir(), 'atlas-validate-'));
   topic('clean');
+  topic('dated-layer-refs', (root) => {
+    const yaml = join(root, 'topic.yaml');
+    writeFileSync(yaml, `${readFileSync(yaml, 'utf8')}\ndatedLayers:\n  - id: north-sample\n    file: missing-dated-overlay\n    kind: point\n    holder: unknown-holder\n    label: { en: Sample blocks, zh: 示例楼宇 }\n`);
+    writeFileSync(join(root, 'chapters/09-dated-overlays.mdx'), chapterFile([
+      'id: dated-overlays', 'order: 9', 'title: { en: Overlays, zh: 图层 }', 'state:',
+      '  layers: [base, north-sample, missing-layer]', '  beats:',
+      '    - caption: { en: Sample, zh: 示例 }', '      layers: [north-sample, missing-beat-layer]',
+    ]));
+  });
   topic('bad-kind', (root) =>
     editJson(join(root, 'data/events.json'), (events: { kind: string }[]) => {
       events[1]!.kind = 'skirmish';
@@ -197,7 +206,7 @@ afterAll(() => {
 describe('validate-content', () => {
   it('fails the run when any topic has errors', () => {
     expect(status).toBe(1);
-    expect(output).toMatch(/19 topic\(s\)/);
+    expect(output).toMatch(/20 topic\(s\)/);
   });
 
   it('passes an unmodified copy', () => {
@@ -206,6 +215,16 @@ describe('validate-content', () => {
 
   it('reports an unknown event kind', () => {
     expect(linesFor('bad-kind').join('\n')).toMatch(/data\.events\.1\.kind: Invalid enum value.*'skirmish'/);
+  });
+
+  it('checks dated overlay files, holders, layer references and the shared id namespace', () => {
+    const lines = linesFor('dated-layer-refs').join('\n');
+    expect(lines).toContain('entity id "north-sample" duplicates dated layer "north-sample"');
+    expect(lines).toContain('dated layer "north-sample": unknown entity "unknown-holder"');
+    expect(output).toContain('dated layer "north-sample": file not found');
+    expect(lines).toContain('state.layers: unknown layer "missing-layer"');
+    expect(lines).toContain('state.beats.0.layers: unknown layer "missing-beat-layer"');
+    expect(lines).not.toContain('unknown layer "north-sample"');
   });
 
   it('reports an event source missing from sources.json', () => {

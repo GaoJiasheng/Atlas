@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { bilingual, kebabId, level, theme } from './common';
+import { TOKEN_NAMES } from '../../theme/theme';
 
 /** The six fixed top-level categories, in display order. */
 export const SUBJECTS = [
@@ -104,6 +105,35 @@ export const entityStrings = z
   .strict();
 export type EntityStrings = z.output<typeof entityStrings>;
 
+/** Built-in GeoStage layer ids; topic-defined layers share this namespace. */
+export const BUILTIN_TIME_LAYER_IDS = ['base', 'control', 'borders', 'movements', 'battles', 'participation', 'labels', 'sites'] as const;
+
+/** A static TopoJSON overlay whose features carry numeric `[f, u)` dates. */
+export const datedLayerDef = z
+  .object({
+    id: kebabId,
+    file: kebabId,
+    kind: z.enum(['point', 'line', 'area']),
+    holder: kebabId.optional(),
+    color: z.string().refine((value) => value.startsWith('token:') && TOKEN_NAMES.some((name) => value === `token:${name}`), 'must reference a known theme token: token:<name>').optional(),
+    label: bilingual,
+    count: z.boolean().optional(),
+    /** The PLATE row's short name (`HDB blocks` / `组屋`); defaults to `label`. */
+    countLabel: bilingual.optional(),
+  })
+  .strict()
+  .refine((layer) => layer.holder !== undefined || layer.color !== undefined, { path: ['color'], message: 'a dated layer needs `holder` or `color`' })
+  .refine((layer) => layer.countLabel === undefined || layer.count === true, { path: ['countLabel'], message: '`countLabel` needs `count: true`' });
+export type DatedLayerDef = z.output<typeof datedLayerDef>;
+
+export const datedLayers = z.array(datedLayerDef).superRefine((layers, ctx) => {
+  const seen = new Set<string>(BUILTIN_TIME_LAYER_IDS);
+  layers.forEach((layer, i) => {
+    if (seen.has(layer.id)) ctx.addIssue({ code: z.ZodIssueCode.custom, path: [i, 'id'], message: `layer id "${layer.id}" is taken` });
+    seen.add(layer.id);
+  });
+});
+
 /** `src/content/topics/<slug>/topic.yaml` (docs/02). */
 export const topicSchema = z
   .object({
@@ -145,6 +175,8 @@ export const topicSchema = z
     blocLabels: blocLabels.optional(),
     /** TimeScene: island- / city-scale basemap (`{ local: land-sg, maxZoom: 13 }`) or a regional plate (`{ region: { bounds, land, rivers } }`). */
     basemap: basemapOptions.optional(),
+    /** TimeScene GeoStage: dated GPU overlays from public/geo/<file>.json. */
+    datedLayers: datedLayers.optional(),
     /**
      * TimeScene: `entity` colours every control area by its holder (`entities[].color`,
      * `token:holder-1` … `token:holder-8`, assigned by scripts/geo/lib/colour-holders.ts)
@@ -167,6 +199,8 @@ export const topicSchema = z
   })
   .strict()
   .superRefine((topic, ctx) => {
+    if (topic.datedLayers !== undefined && (topic.engine !== 'time-scene' || topic.stage !== 'geo'))
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['datedLayers'], message: '`datedLayers` requires time-scene with stage: geo' });
     const stages: readonly string[] = ENGINE_STAGES[topic.engine];
     if (!stages.includes(topic.stage)) {
       ctx.addIssue({

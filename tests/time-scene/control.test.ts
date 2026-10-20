@@ -7,6 +7,9 @@ import control from '../../src/content/topics/sample-time/data/control.json';
 import movements from '../../src/content/topics/sample-time/data/movements.json';
 import events from '../../src/content/topics/sample-time/data/events.json';
 import sources from '../../src/content/topics/sample-time/data/sources.json';
+import { frameAt } from '../../src/engines/time-scene/lib/frame';
+import { controlAreas, frameStats, referencePair } from '../../src/engines/time-scene/lib/stats';
+import { labelGeometries } from '../../src/engines/time-scene/lib/territory';
 
 /**
  * A quantised topology (scale 1, translate 0) of two unit squares:
@@ -56,6 +59,28 @@ const topoControl = (patch: Record<string, unknown> = {}) => ({
 });
 
 describe('TopoJSON control keyframes', () => {
+  it('keeps empty GeoJSON and TopoJSON frames throughout a populated–empty–populated story', () => {
+    const empty = { type: 'FeatureCollection', features: [] };
+    const topo = {
+      topology: { ...topology, objects: { ...topology.objects, empty: { type: 'GeometryCollection', geometries: [] } } },
+      keyframes: [{ t: '2000', object: 'A' }, { t: '2001', object: 'empty' }, { t: '2018', object: 'empty' }, { t: '2019', object: 'B' }],
+    };
+    const plain = { keyframes: [{ t: '2000', features: decodeTopologyObject(topology, 'A') }, { t: '2001', features: empty }, { t: '2018', features: empty }, { t: '2019', features: decodeTopologyObject(topology, 'B') }] };
+    for (const control of [topo, plain]) {
+      const parsed = timeSceneGeoData.parse({ entities, control, movements: [], events: [] });
+      const model = buildTimeModel(parsed, []);
+      expect(model.keyframes.map((kf) => kf.keyframe.features.features.length)).toEqual([2, 0, 0, 1]);
+      const areas = controlAreas(model);
+      expect(areas.get('north-sample')?.slice(1, 3)).toEqual([0, 0]);
+      expect(model.keyframes[1]?.keyframe.frontier).toBeUndefined();
+      expect(labelGeometries([])).toEqual([]);
+      const frame = frameAt(model, 2010);
+      expect(frame.control.prev?.keyframe.features.features).toEqual([]);
+      expect(frame.control.next?.keyframe.features.features).toEqual([]);
+      expect(frameStats(model, frame)).toMatchObject({ prevIndex: 1, nextIndex: 2 });
+      expect(referencePair(model, frame)).toEqual({ current: 1, other: 0 });
+    }
+  });
   it('decodes an object to a FeatureCollection with GeoJSON winding and properties', () => {
     const fc = decodeTopologyObject(topology, 'A');
     expect(fc.type).toBe('FeatureCollection');

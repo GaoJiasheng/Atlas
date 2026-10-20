@@ -1,0 +1,175 @@
+---
+{
+  "id": "pouring",
+  "order": 3,
+  "title": {
+    "en": "Sample pouring",
+    "zh": "示例倒水"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "layers": [
+      "measuring"
+    ],
+    "labels": [
+      "cyl-a",
+      "glass",
+      "flask",
+      "bowl"
+    ],
+    "camera": {
+      "position": [
+        -0.18,
+        0.44,
+        0.93
+      ],
+      "target": [
+        -0.45,
+        0.105,
+        0
+      ],
+      "fov": 32
+    },
+    "summary": {
+      "en": "Sample pouring: values from the model.",
+      "zh": "示例倒水：模型算出的数值。"
+    },
+    "index": {
+      "parts": [
+        "cyl-a",
+        "glass",
+        "flask",
+        "bowl"
+      ]
+    },
+    "sim": {
+      "set": {
+        "container": "cylinder"
+      },
+      "try": {
+        "vary": "container",
+        "observe": [
+          "level",
+          "poured"
+        ],
+        "keep": [
+          {
+            "en": "Same 200 ml of water",
+            "zh": "相同的 200 ml 水"
+          }
+        ],
+        "record": {
+          "chart": {
+            "y": "level"
+          }
+        },
+        "predict": {
+          "prompt": {
+            "en": "Sample prediction: compare the next reading.",
+            "zh": "示例猜想：比较下一次读数。"
+          },
+          "change": {
+            "container": "glass"
+          },
+          "observe": "level",
+          "options": [
+            {
+              "id": "more",
+              "label": {
+                "en": "More",
+                "zh": "较多"
+              },
+              "means": "more"
+            },
+            {
+              "id": "same",
+              "label": {
+                "en": "Same",
+                "zh": "相同"
+              },
+              "means": "same"
+            },
+            {
+              "id": "less",
+              "label": {
+                "en": "Less",
+                "zh": "较少"
+              },
+              "means": "less"
+            }
+          ]
+        }
+      }
+    },
+    "beats": [
+      {
+        "sim": {
+          "set": {
+            "container": "cylinder"
+          }
+        },
+        "caption": {
+          "en": "Sample: 200 ml is in the cylinder.",
+          "zh": "示例：200 ml 水换到量筒。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "container": "glass"
+          }
+        },
+        "caption": {
+          "en": "Sample: 200 ml is in the glass.",
+          "zh": "示例：200 ml 水换到杯。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "container": "flask"
+          }
+        },
+        "caption": {
+          "en": "Sample: 200 ml is in the flask.",
+          "zh": "示例：200 ml 水换到瓶。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "container": "bowl"
+          }
+        },
+        "caption": {
+          "en": "Sample: 200 ml is in the bowl.",
+          "zh": "示例：200 ml 水换到碗。"
+        }
+      }
+    ],
+    "hide": [
+      "cyl-b",
+      "cyl-b-water",
+      "drop-stone",
+      "drop-marble",
+      "drop-clay-ball",
+      "drop-clay-roll"
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Sample pouring: a draft engine fixture.
+
+</Lang>
+
+<Lang zh>
+
+示例倒水：引擎测试草稿。
+
+</Lang>

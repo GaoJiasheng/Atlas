@@ -32,6 +32,7 @@ import { decodeControl, decodeTopologyObject } from './lib/control';
 import { colourConflicts, holderAdjacency } from './lib/holders';
 import { riverFeatures } from './lib/rivers';
 import { datedWindow, eraSequenceIssues, hasDate } from './lib/dated';
+import { BUILTIN_TIME_LAYER_IDS, type DatedLayerDef } from '../../content/schema/topic';
 
 /* ------------------------------------------------------------------ */
 /* entities.json                                                       */
@@ -303,6 +304,8 @@ export const EVENT_KINDS = [
   'surrender',
   'bombing',
   'political',
+  /** A neutral dated change: no sides or result required. */
+  'milestone',
   'massacre',
   'siege',
   'evacuation',
@@ -500,17 +503,7 @@ export type TimeSceneData = TimeSceneGeoData;
 /* ------------------------------------------------------------------ */
 
 /** GeoStage layers (docs/03 §A). */
-export const TIME_LAYERS = [
-  'base',
-  'control',
-  'borders',
-  'movements',
-  'battles',
-  'participation',
-  'labels',
-  /** Static `site` events (default off). */
-  'sites',
-] as const;
+export const TIME_LAYERS = BUILTIN_TIME_LAYER_IDS;
 export type TimeLayer = (typeof TIME_LAYERS)[number];
 
 /**
@@ -524,7 +517,7 @@ export const timeBeat = z
   .object({
     t: timePoint.optional(),
     camera: geoCamera.optional(),
-    layers: z.array(z.enum(TIME_LAYERS)).optional(),
+    layers: z.array(kebabId).optional(),
     highlight: z.array(kebabId).optional(),
     caption: bilingual,
     audio: z
@@ -541,7 +534,7 @@ export const timeChapterState = z
     /** Target time for the chapter (`t` in the URL). */
     time: timePoint.optional(),
     camera: geoCamera.optional(),
-    layers: z.array(z.enum(TIME_LAYERS)).optional(),
+    layers: z.array(kebabId).optional(),
     /** Event / movement / entity ids to emphasise. */
     highlight: z.array(kebabId).optional(),
     theme: theme.optional(),
@@ -567,12 +560,13 @@ export type TimeChapterState = z.output<typeof timeChapterState>;
 /* Id helpers for the validator                                        */
 /* ------------------------------------------------------------------ */
 
-export function timeSceneIds(data: TimeSceneGeoData): { kind: string; id: string }[] {
+export function timeSceneIds(data: TimeSceneGeoData, topic?: Pick<TopicLike, 'datedLayers'>): { kind: string; id: string }[] {
   return [
     ...data.entities.map((e) => ({ kind: 'entity', id: e.id })),
     ...data.movements.map((m) => ({ kind: 'movement', id: m.id })),
     ...data.events.map((e) => ({ kind: 'event', id: e.id })),
     ...(data.presets?.presets ?? []).map((p) => ({ kind: 'preset', id: p.id })),
+    ...(topic?.datedLayers ?? []).map((layer) => ({ kind: 'dated layer', id: layer.id })),
   ];
 }
 
@@ -583,6 +577,18 @@ export function timeScenePresetIds(data: TimeSceneGeoData): string[] {
 
 export function timeChapterRefs(state: TimeChapterState): string[] {
   return [...(state.highlight ?? []), ...(state.beats ?? []).flatMap((b) => b.highlight ?? [])];
+}
+
+/** Layer ids are topic-dependent, so check them after parsing the chapter. */
+export function timeChapterLayerIssues(state: TimeChapterState, layers: readonly Pick<DatedLayerDef, 'id'>[] = []): string[] {
+  const known = new Set<string>([...TIME_LAYERS, ...layers.map((layer) => layer.id)]);
+  const issues: string[] = [];
+  const check = (ids: readonly string[] | undefined, path: string) => {
+    for (const id of ids ?? []) if (!known.has(id)) issues.push(`${path}: unknown layer "${id}"`);
+  };
+  check(state.layers, 'state.layers');
+  state.beats?.forEach((beat, i) => check(beat.layers, `state.beats.${i}.layers`));
+  return issues;
 }
 
 /* ------------------------------------------------------------------ */
@@ -599,7 +605,41 @@ export interface TimeTopicIssue {
 type TopicLike = {
   colorBy?: 'bloc' | 'entity';
   basemap?: { local?: string; region?: { land: string; rivers?: string } };
+  datedLayers?: DatedLayerDef[];
 };
+
+/** Properties shared by every feature of a dated overlay (`h` is optional floor-count metadata). */
+export const datedLayerProperties = z.object({
+  f: z.number().finite(),
+  u: z.number().finite().optional(),
+  certainty: z.enum(CERTAINTIES).optional(),
+  h: z.number().finite().nonnegative().optional(),
+}).passthrough().refine((p) => p.u === undefined || p.f < p.u, { path: ['u'], message: '`u` must be after `f`' });
+
+const datedPointGeometry = z.discriminatedUnion('type', [
+  z.object({ type: z.literal('Point'), coordinates: position }).strict(),
+  z.object({ type: z.literal('MultiPoint'), coordinates: z.array(position).min(1) }).strict(),
+]);
+const datedLineGeometry = z.discriminatedUnion('type', [lineString, multiLineString]);
+
+/** Validate the one named TopoJSON object and its decoded dated geometries. */
+export function datedLayerIssues(raw: unknown, layer: Pick<DatedLayerDef, 'file' | 'kind'>): string[] {
+  const parsed = topologySchema.safeParse(raw);
+  if (!parsed.success) return parsed.error.issues.slice(0, 10).map((issue) => `${issue.path.join('.')}: ${issue.message}`);
+  if (!Object.hasOwn(parsed.data.objects, layer.file)) return [`dated layer: expected a TopoJSON object "${layer.file}"`];
+  if (Object.keys(parsed.data.objects).length !== 1) return [`dated layer: expected only the TopoJSON object "${layer.file}"`];
+  const geometry = layer.kind === 'point' ? datedPointGeometry : layer.kind === 'line' ? datedLineGeometry : areaGeometry;
+  try {
+    const decoded = decodeTopologyObject(parsed.data, layer.file);
+    const object = parsed.data.objects[layer.file]!;
+    if (object.type === 'GeometryCollection' && Array.isArray(object.geometries) && decoded.features.length !== object.geometries.length)
+      return ['dated layer: every feature must have a non-null geometry'];
+    const result = featureCollection(feature(geometry, datedLayerProperties)).safeParse(decoded);
+    return result.success ? [] : result.error.issues.slice(0, 10).map((issue) => `${issue.path.join('.')}: ${issue.message}`);
+  } catch (error) {
+    return [`dated layer: cannot decode "${layer.file}": ${(error as Error).message}`];
+  }
+}
 
 /**
  * `pnpm validate` checks of a TimeScene topic against its topic.yaml:
@@ -614,6 +654,14 @@ type TopicLike = {
 export function timeSceneTopicIssues(topic: TopicLike, data: TimeSceneGeoData, readGeo: (name: string) => unknown): TimeTopicIssue[] {
   const issues: TimeTopicIssue[] = [];
   const geo = (name: string) => `public/geo/${name}.json`;
+  const entities = new Set(data.entities.map((entity) => entity.id));
+  for (const layer of topic.datedLayers ?? []) {
+    if (layer.holder !== undefined && !entities.has(layer.holder))
+      issues.push({ level: 'error', file: 'topic.yaml', message: `dated layer "${layer.id}": unknown entity "${layer.holder}"` });
+    const raw = readGeo(layer.file);
+    if (raw === undefined) issues.push({ level: 'error', file: geo(layer.file), message: `dated layer "${layer.id}": file not found` });
+    else for (const message of datedLayerIssues(raw, layer)) issues.push({ level: 'error', file: geo(layer.file), message });
+  }
   const local = topic.basemap?.local;
   if (local) {
     const raw = readGeo(local);

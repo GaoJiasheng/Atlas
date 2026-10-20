@@ -1,0 +1,4 @@
+{ "sources": [
+  { "id": "S1", "text": { "en": "Deterministic synthetic fixture. Every building, route, area, event date and count is invented for engine testing and makes no historical claim.", "zh": "固定种子生成的合成测试数据。楼宇、路线、区域、事件日期与数量均为引擎测试而虚构，不代表历史事实。" } },
+  { "id": "S2", "text": { "en": "Contains information from Master Plan 2019 Planning Area Boundary (No Sea) and Master Plan 2019 Land Use layer accessed on 14 October 2026 from data.gov.sg which is made available under the terms of the Singapore Open Data Licence version 1.0. Reuses Atlas's land-sg basemap unchanged.", "zh": "包含于 2026 年 10 月 14 日从 data.gov.sg 获取的《2019 年总蓝图规划区边界（不含海域）》及《2019 年总蓝图土地用途图层》信息，按《新加坡开放数据许可》1.0 版提供。原样复用 Atlas 的 land-sg 底图。" }, "url": "https://data.gov.sg/datasets/d_4765db0e87b9c86336792efe8a1f7a66/view" }
+] }

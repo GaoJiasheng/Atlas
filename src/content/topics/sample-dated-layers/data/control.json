@@ -1,0 +1,115 @@
+{
+  "keyframes": [
+    {
+      "t": "1959",
+      "features": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "properties": {
+              "holder": "housing",
+              "label": {
+                "en": "Early sample patch",
+                "zh": "早期示例色块"
+              },
+              "src": [
+                "G2"
+              ]
+            },
+            "geometry": {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [
+                    103.786,
+                    1.288
+                  ],
+                  [
+                    103.801,
+                    1.288
+                  ],
+                  [
+                    103.805,
+                    1.297
+                  ],
+                  [
+                    103.797,
+                    1.302
+                  ],
+                  [
+                    103.785,
+                    1.297
+                  ],
+                  [
+                    103.786,
+                    1.288
+                  ]
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "t": "1966",
+      "features": {
+        "type": "FeatureCollection",
+        "features": []
+      }
+    },
+    {
+      "t": "2019",
+      "features": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "properties": {
+              "holder": "housing",
+              "label": {
+                "en": "Late sample patch",
+                "zh": "后期示例色块"
+              },
+              "src": [
+                "G2"
+              ]
+            },
+            "geometry": {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [
+                    103.93,
+                    1.343
+                  ],
+                  [
+                    103.943,
+                    1.341
+                  ],
+                  [
+                    103.95,
+                    1.35
+                  ],
+                  [
+                    103.944,
+                    1.359
+                  ],
+                  [
+                    103.931,
+                    1.356
+                  ],
+                  [
+                    103.93,
+                    1.343
+                  ]
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

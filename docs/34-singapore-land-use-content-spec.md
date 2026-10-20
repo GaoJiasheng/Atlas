@@ -459,4 +459,16 @@ id 查重：实体（`housing`、`countryside`、`agriculture`、`industry`、`g
 
 ## 9. 实现记录与已知差距
 
-（施工后填写。）
+### 9.1 引擎（2026-10-20，`codex/timescene-dated-layers`）
+
+- **E1 已实现**：`topic.yaml.datedLayers` 的点 / 线 / 面，单文件单同名 TopoJSON 对象，数字 `f` / `u` 的 `[f, u)` 日期；复用 `lib/dated.ts`。每层一个静态 GPU source，日期索引二分求数，开始 / 结束边界分别缓存，等量替换也刷新、没有边界时不 `setFilter`。过去一年新增点大一号、signal 描边；近似面淡底 ×.7、边虚线。配色复用 holder / token，paper / cinema 均可；图例及 LAYERS 独立开关，章节和拍可引用；计数进左列可折叠 PLATE，关闭显示 0。
+- **E2 已支持并补测**：GeoJSON 空 FeatureCollection、TopoJSON 空 GeometryCollection 都有效；控制区名称、图例、面积、REFERENCE 可处理空帧，`K2→K3` 等状态序号不变。本轮只补空帧图例的显隐与测试，没有另造控制区格式。
+- **E3 已实现**：中性 `milestone`（Milestone / 里程碑），墨色点和环，独立图例及详情名称，无须 sides / result。
+- **E4 / E5 本轮未做**：不按楼层改变点大小，不新增作者自定义时序读数。`h` 仅保留为数值楼层元数据；不影响 E1–E3，也不影响正文 / 细看写数字。
+- **fixture**：`sample-dated-layers` 为 draft，仅合成占位数据。3 个正式章 + 背景、10 拍（含背景）、3 个 GPU 图层、2 个中性里程碑、1959 → 1966 空帧 → 2019 的控制区。11,000 个源点在 2019 同时显示 10,000 个；1980 年拆 1,000 / 建 1,000 验证同数量换集合。每个点都测试在真实新加坡本岛陆地内、避开水面孔洞；原有海岸文件未改。生成命令、形状和计数见 fixture `data/SOURCES.md`。
+- **作者契约**：docs/06「按年份出现的图层」给出 YAML、属性、关闭 / 缺载读数、几何计数语义与校验规则。文件 / 对象 / 几何 / 日期 / holder / token、图层命名与章节 / 拍引用均构建期校验。
+- **性能实测**：Apple M5 Max，Chromium ANGLE Metal（非 SwiftShader），1920×1080 drawing buffer，DPR 1。连续拖动中每套主题各取 300 个 rAF 帧，10,000 个活跃点 + 5,000 个新增描边：paper **59.84 fps**、cinema **60.17 fps**；同一窗口 `stats().fps = 60`。有 HUD 时（1520×1023 画布、1920×1080 视口）分别 59.86 / 60.05 fps。测试机测量，不代表所有设备；源与过滤器调用数的单测另有覆盖。
+- **门槛**：`pnpm check` 0 errors / 0 warnings（3 个原有未使用变量提示）；`pnpm validate` 38 个主题 0 / 0；`pnpm test`（4 个 worker）112 文件、2,985 测试通过；`pnpm build` 79 页通过。完整浏览器套件用 `ATLAS_E2E_GPU=1 CI=1 pnpm e2e`，175 / 175 通过（默认 SwiftShader 不变）；fixture 的最后范围更正后另跑 4 / 4。PLATE 折叠钮有 ≥44 px 的浏览器断言，MapLibre 样式表达式过官方 style validator。
+- **视觉与回归**：fixture 的 EN / ZH × paper / cinema 拍、键位与八尺寸布局全通过、console 干净；最后把章节范围延到 2021，重拍四套拍图、重跑 EN paper 的键位 / 布局，2020 拍确实去掉新增描边、2021 拍关闭路线。四个既有主题的 `--keys` 两主题通过；改前每章与 hero-clean 的 88 张基线图保留在 `shots/_baseline-dated-layers/`。岛岸、控制面、河道没有变化；排除路线动画、箭头、FPS、顶栏栅格化后，章节图只有两处单通道 1 级的抗锯齿差别。部分 hero 名称的避让随截图落定时间不同；另从原始提交 `ff669e8` 独立构建、同样等待落定的 warring-states 四张图，静态像素差为 0。没有改旧主题内容、底图文件或标签算法。
+- **复核（2026-10-20，Opus）**：LAYERS 里的图层行去掉单独的 44 px 内联高度，与其它行一致（触屏 `pointer: coarse` 下统一 44 px，`scene.css`）；KEY 的控制区行只在当前关键帧为空时隐藏，`participation` 不受空帧影响；新增可选 `countLabel`（PLATE 行短名，只配 `count: true`，例：`hdb-blocks` 写 `{ en: HDB blocks, zh: 组屋 }`，否则 PLATE 显示整句图层说明）；fixture 的点文件改为量化 TopoJSON（`transform`，与管线 `quantization=100000` 输出同形；1.2 MB → 843 KB，gzip 96 KB）并去掉无用的 `id` 属性，说明并入 `data/SOURCES.md`（`data/` 里的 README 会被 validate 警告）。四个既有主题 `--keys` 两主题通过；four-taps、singapore-1819-1965 与改前基线逐像素比：岛岸、控制面、河道 0 差，只有路线虚线动画与 FPS 读数不同。
+- **给内容作者**：每个 milestone 事件仍要 `at`（§2.2 有几条没写坐标）；`certainty: approximate` 写在每个要素的属性里，不是图层上；四水喉蓄水池的 ISO 日期要换成十进制年 `f`；一栋楼一个 Point（带 `f`、`h`）约 75 字节，1 万点原始体积约 0.75 MB（gzip 约 0.1 MB），§3.4 的 300 KB 预算按 gzip 计才达得到——E4 未做时可去掉 `h` 再省约 10%。

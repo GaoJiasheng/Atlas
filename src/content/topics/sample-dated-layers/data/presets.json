@@ -1,0 +1,4 @@
+{ "presets": [
+  { "id": "sample-island", "label": { "en": "Island", "zh": "全岛" }, "camera": { "center": [103.825, 1.365], "zoom": 10.6 } },
+  { "id": "sample-estates", "label": { "en": "Estates", "zh": "示例住宅区" }, "camera": { "center": [103.850, 1.345], "zoom": 12.2 } }
+] }

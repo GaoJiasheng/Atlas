@@ -21,7 +21,12 @@ const bound = (t: TimePoint | undefined, open: number) => {
 
 /** The numeric window of a `from` / `to` pair (a missing or malformed end is open). */
 export function datedWindow(from: TimePoint | undefined, to: TimePoint | undefined): DatedWindow {
-  return { from: bound(from, Number.NEGATIVE_INFINITY), to: bound(to, Number.POSITIVE_INFINITY) };
+  return numericDatedWindow(bound(from, Number.NEGATIVE_INFINITY), bound(to, Number.POSITIVE_INFINITY));
+}
+
+/** The same `[from, to)` window for precomputed numeric years (`f` / `u` in dated layers). */
+export function numericDatedWindow(from: number, to?: number): DatedWindow {
+  return { from, to: to ?? Number.POSITIVE_INFINITY };
 }
 
 /** Whether `t` lies in the window (`from <= t < to`). */

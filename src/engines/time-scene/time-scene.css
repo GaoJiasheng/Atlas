@@ -1157,3 +1157,50 @@ button.ts-co:focus-visible {
     transition: none;
   }
 }
+.ts-plate {
+  border-top: 1px solid var(--line);
+  text-shadow: none;
+}
+.ts-plate__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: 600 calc(10.5 * var(--u)) / 1 var(--font-hud);
+  letter-spacing: .14em;
+  cursor: pointer;
+}
+.ts-plate__head small {
+  margin-left: calc(8 * var(--u));
+  color: var(--ink-3);
+  font-weight: 400;
+}
+.ts-plate__head:focus-visible {
+  outline: 1px solid var(--signal);
+}
+.ts-plate__rows { margin: 0; }
+.ts-plate__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  border-bottom: 1px solid var(--hair);
+}
+.ts-plate__row dt {
+  min-width: 0;
+  color: var(--ink-3);
+  font: 500 calc(10.5 * var(--u)) / 1.8 var(--font-hud);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.ts-plate__row dd {
+  margin: 0;
+  color: var(--ink);
+  font: 500 calc(12 * var(--u)) / 1.5 var(--font-mono);
+}
+.ts-plate__row[data-enabled="false"] dd { color: var(--ink-3); }

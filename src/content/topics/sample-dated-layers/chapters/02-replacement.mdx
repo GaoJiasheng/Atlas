@@ -1,0 +1,32 @@
+---
+id: replacement
+order: 2
+title: { en: "The same count, different dots", zh: "数量相同，点已替换" }
+state:
+  time: "1979"
+  camera: { center: [103.850, 1.345], zoom: 12.2 }
+  layers: [base, control, battles, sample-blocks, sample-rail, sample-gardens]
+  highlight: []
+  summary: { en: "Retirement and appearance happen at the same boundary.", zh: "在同一个时间边界，一批消失，另一批出现。" }
+  beats:
+    - t: "1979"
+      caption: { en: "5,000 synthetic blocks are visible before the replacement.", zh: "替换前可见 5,000 座合成楼宇。" }
+    - t: "1980"
+      highlight: [sample-replacement]
+      caption: { en: "1,000 blocks retire and 1,000 appear. The total is still 5,000; the line and approximate area change too.", zh: "1,000 座消失，1,000 座出现。总数仍为 5,000；路线与近似区域也改变。" }
+    - t: "1981"
+      highlight: []
+      caption: { en: "5,000 blocks remain. The one-year highlight has expired.", zh: "仍可见 5,000 座；一年的新建强调已结束。" }
+---
+
+<Lang en>
+
+The invented replacement uses an end date that excludes 1980 and a start date that includes it. The count stays at <Num s="S1">5,000</Num>, but the map must display the new set of dots. The route and green area also change at this boundary. REFERENCE can compare the empty control frame with its neighbour without adding a control patch to the empty date.
+
+</Lang>
+
+<Lang zh>
+
+虚构的替换采用半开区间：结束日期不含 1980 年，开始日期包含该年。计数仍是 <Num s="S1">5,000</Num>，地图却应显示新的一批点。路线和绿地也在同年替换。“版图对照”可比较空控制区帧与相邻帧，空日期本身不会因此多出色块。
+
+</Lang>

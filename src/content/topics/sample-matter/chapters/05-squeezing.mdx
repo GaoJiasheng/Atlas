@@ -1,0 +1,161 @@
+---
+{
+  "id": "squeezing",
+  "order": 5,
+  "title": {
+    "en": "Sample squeezing",
+    "zh": "示例压缩"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "layers": [
+      "syringes"
+    ],
+    "labels": [
+      "syringe-air",
+      "syringe-water",
+      "syringe-sand"
+    ],
+    "camera": {
+      "position": [
+        0.85,
+        0.25,
+        0.41
+      ],
+      "target": [
+        0.725,
+        0.075,
+        -0.05
+      ],
+      "fov": 32
+    },
+    "summary": {
+      "en": "Sample squeezing: values from the model.",
+      "zh": "示例压缩：模型算出的数值。"
+    },
+    "index": {
+      "parts": [
+        "syringe-air",
+        "syringe-water",
+        "syringe-sand",
+        "plunger-air",
+        "masses-air"
+      ]
+    },
+    "sim": {
+      "set": {
+        "load": 0
+      },
+      "try": {
+        "vary": "load",
+        "observe": [
+          "v-air",
+          "v-water",
+          "v-sand"
+        ],
+        "keep": [
+          {
+            "en": "Same sealed 20 ml syringes",
+            "zh": "同样封口的 20 ml 针筒"
+          }
+        ],
+        "record": {
+          "chart": {
+            "y": [
+              "v-air",
+              "v-water",
+              "v-sand"
+            ]
+          }
+        },
+        "predict": {
+          "prompt": {
+            "en": "Sample prediction: compare the next reading.",
+            "zh": "示例猜想：比较下一次读数。"
+          },
+          "change": {
+            "load": 4
+          },
+          "observe": "v-air",
+          "options": [
+            {
+              "id": "more",
+              "label": {
+                "en": "More",
+                "zh": "较多"
+              },
+              "means": "more"
+            },
+            {
+              "id": "same",
+              "label": {
+                "en": "Same",
+                "zh": "相同"
+              },
+              "means": "same"
+            },
+            {
+              "id": "less",
+              "label": {
+                "en": "Less",
+                "zh": "较少"
+              },
+              "means": "less"
+            }
+          ]
+        }
+      }
+    },
+    "beats": [
+      {
+        "sim": {
+          "set": {
+            "load": 0
+          }
+        },
+        "caption": {
+          "en": "Sample: no masses on the plungers.",
+          "zh": "示例：柱塞上没有砝码。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "load": 4
+          }
+        },
+        "caption": {
+          "en": "Sample: equal masses lower the air plunger.",
+          "zh": "示例：相同砝码压低空气柱塞。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "load": 0
+          }
+        },
+        "caption": {
+          "en": "Sample: the air plunger returns.",
+          "zh": "示例：空气柱塞回到原处。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Sample squeezing: a draft engine fixture.
+
+</Lang>
+
+<Lang zh>
+
+示例压缩：引擎测试草稿。
+
+</Lang>
