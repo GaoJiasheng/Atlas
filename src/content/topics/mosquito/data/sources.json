@@ -1,0 +1,490 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "Atlas design study for this topic (a model, not a particular specimen; docs/33). Design values: the mosquitoes, eggs, larvae and pupa drawn 200 × life size (1 scene unit = 5 mm); a female Aedes aegypti 4.5 mm from the front of the head to the tip of the abdomen, the male drawn 0.85 of her size; the female's palps drawn about a fifth of the proboscis; eight visible abdominal segments; three stylets drawn for the bundle of six; a display dish 40 mm across holding water about 9 mm deep, with twelve eggs on its wall and the stages set round it in order; a ruler of 40 mm; the larvae drawn to the measured body lengths and head widths of S29; the pupa to the measurements of S23; the home corner drawn life size (floor tiles 55 cm). Simulated results (the life-cycle model, from the measured stage means of S16): hatching to adult 13.4, 10.2, 7.2 and 6.4 days at 20, 25, 28 and 32 °C; as a larva 9.3, 7.6, 5.4 and 4.7 days; as a pupa 4.1, 2.6, 1.9 and 1.7 days; at 28 °C the larval instars last 1.9, 0.7, 1.0 and 1.8 days and the stage on each day after hatching is larva 1 (days 0–1), larva 2 (day 2), larva 3 (day 3), larva 4 (days 4–5), pupa (days 6–7) and adult (day 8); the cycle runs at 0.54, 0.71, 1 and 1.13 times its speed at 28 °C; tipped out every 2, 4 or 6 days no adult comes out, every 8, 10 or 14 days some do; with the wall scrubbed no eggs are left on it.",
+        "zh": "本主题的 Atlas 设计研究（是模型，不对应某一只标本；docs/33）。设计值：蚊子、卵、孑孓和蛹都放大 200 倍画（1 个场景单位 = 5 毫米）；雌性埃及伊蚊从头前端到腹末长 4.5 毫米，雄蚊画成她的 0.85 倍；雌蚊的触须画成喙长的约五分之一；腹部画出八节；六根口针只画三根；展示用的浅皿直径 40 毫米，水深约 9 毫米，皿壁上画十二粒卵，各阶段按顺序绕皿排开；尺长 40 毫米；孑孓按 S29 测得的体长和头宽画，蛹按 S23 的测量画；家居一角按实物大小画（地砖边长 55 厘米）。模拟结果（生活史模型，由 S16 测得的各阶段平均天数推出）：水温 20、25、28、32 °C 时，孵化到成虫分别为 13.4、10.2、7.2、6.4 天；幼虫期 9.3、7.6、5.4、4.7 天；蛹期 4.1、2.6、1.9、1.7 天；28 °C 时四个龄期分别为 1.9、0.7、1.0、1.8 天，孵化后各天所在的阶段是：第 0–1 天一龄、第 2 天二龄、第 3 天三龄、第 4–5 天四龄、第 6–7 天蛹、第 8 天成虫；环转动的速度是 28 °C 时的 0.54、0.71、1、1.13 倍；每 2、4、6 天倒一次水，没有成虫出来，每 8、10、14 天倒一次，就有成虫出来；刷过壁，壁上就没有卵。"
+      },
+      "note": {
+        "en": "Not a measurement. The day counts are worked out from one laboratory study of male mosquitoes (S16): each stage's mean is scaled so that the stages add up to the study's own mean from hatching to adult (13.40, 10.18, 7.23 and 6.40 days); a stage starts on the day its scaled boundary is reached. The emptying result compares the interval with that mean: if the water stays longer than it, some adults come out. This is a line drawn through averages, for one batch hatched together; real mosquitoes vary, females develop a little more slowly than males (S13), and food and crowding change the times too (S37). The head widths (S29) come from a different sample of larvae from the timed ones. The model's sizes, the palp ratio and the dish are drawing choices; measured sizes are in S16, S22, S23, S29 and S44.",
+        "zh": "不是实测值。天数由一项雄蚊的实验室研究（S16）推出：把每个阶段的平均天数按比例缩放，使各阶段之和等于该研究自己测得的孵化到成虫的平均天数（13.40、10.18、7.23、6.40 天）；到了缩放后的分界那一天，就进入下一阶段。倒水的结果是把间隔和这个平均天数相比：积水留得比它久，就有成虫出来。这是按平均值、对一批同时孵化的孑孓画出的界线；真实的蚊子有快有慢，雌蚊比雄蚊发育得稍慢（S13），食物多少、孑孓密度也会改变天数（S37）。头宽（S29）来自另一批孑孓，不是被计时的那一批。模型里的大小、触须的比例和浅皿都是画法上的选择；实测的大小见 S16、S22、S23、S29 和 S44。"
+      }
+    },
+    {
+      "id": "S2",
+      "text": {
+        "en": "Ministry of Education Singapore (CPDD), Science Teaching & Learning Syllabus, Primary Three to Six, Standard / Foundation (implementation from the 2023 Primary Three cohort; updated January 2026), p. 38 (Diversity: insects) and pp. 41–42 (Cycles; Life Cycles: observe and compare the life cycles of animals, mosquito among them).",
+        "zh": "新加坡教育部课程规划与发展司，《小学三至六年级科学教学大纲（标准 / 基础）》（2023 年小三起实施，2026 年 1 月更新），第 38 页（多样性：昆虫）、第 41–42 页（循环；生活史：观察和比较动物的生活史，蚊子是其中之一）。"
+      },
+      "url": "https://www.moe.gov.sg/api/media/ba3562d3-5b31-4459-8693-45cde7b97273/Primary-Science-Syllabus-2023_May24.pdf"
+    },
+    {
+      "id": "S3",
+      "text": {
+        "en": "Ministry of Education Singapore, Physical Education Syllabus: Primary, Secondary and Pre-University (from 2024), p. 96, Primary 3, Physical Health and Safety: mosquito-borne diseases, their signs, symptoms and preventive measures.",
+        "zh": "新加坡教育部，《体育课程大纲：小学、中学和大学先修班》（2024 年起），第 96 页，小三，身体健康与安全：蚊媒疾病的征兆、症状和预防措施。"
+      }
+    },
+    {
+      "id": "S4",
+      "text": {
+        "en": "National Environment Agency (NEA), Aedes Mosquito (updated 13 April 2026): under optimal conditions eggs hatch in less than a day, larvae become pupae in about four days and adults come out about two days later; eggs can survive dry for up to about nine months; only females bite, needing the protein in blood for their eggs; eggs are laid about three days after a blood meal, about 100 at a time, about three times in a lifetime; adults live about two weeks on average in nature; a mosquito becomes infective about seven days after biting a person carrying the virus.",
+        "zh": "国家环境局（环境局），《伊蚊》（2026 年 4 月 13 日更新）：在最适宜的条件下，卵不到一天孵化，幼虫约四天化蛹，再约两天羽化为成虫；卵能干着活长达约九个月；只有雌蚊叮人，她需要血里的蛋白质让卵发育；吸血后约三天产卵，每次约 100 粒，一生约三次；成虫在野外平均约活两周；蚊子叮了带病毒的人约七天后，就能传播病毒。"
+      },
+      "url": "https://www.nea.gov.sg/dengue-zika/prevent-aedes-mosquito-breeding/aedes-mosquito",
+      "note": {
+        "en": "Approximate public-health guidance: no temperature, strain or study is given, so it is set beside the laboratory figures of S16 and S21, not combined with them.",
+        "zh": "这是大约的公共卫生指引，没有写温度、品系或研究出处，所以和 S16、S21 的实验室数字并列，不合在一起算。"
+      }
+    },
+    {
+      "id": "S5",
+      "text": {
+        "en": "NEA, Know The Potential Aedes Breeding Sites (updated 14 April 2026): the top five breeding habitats found in homes in 2025 were domestic containers such as pails, flowerpot plates and trays, ornamental containers such as vases, refuse bins outside landed homes, and canvas or plastic sheets; in 2024 the list included plants (hardened soil and leaf axils).",
+        "zh": "环境局，《了解可能的伊蚊滋生处》（2026 年 4 月 14 日更新）：2025 年在住家发现的五大滋生处是水桶等家用容器、花盆底盘和托盘、花瓶等装饰容器、有地住宅门外的垃圾桶，以及帆布或塑料布；2024 年的名单里有植物（干硬的泥土和叶腋）。"
+      },
+      "url": "https://www.nea.gov.sg/dengue-zika/prevent-aedes-mosquito-breeding/know-the-potential-aedes-breeding-sites"
+    },
+    {
+      "id": "S6",
+      "text": {
+        "en": "NEA, Fight Dengue leaflet, bilingual A5 (2022), Chinese page: 进行灭蚊行动，杜绝骨痛热症 — B-L-O-C-K: 铲松干硬的泥土；清除花盆底盘的积水；倒置存放水桶并擦干水桶边缘；更换花瓶里的水；疏通阻塞的屋顶檐槽并放置BTI杀蚊药. S-A-W: 喷杀虫剂（检查家中阴暗角落）；用驱蚊剂（定期防范）；穿长衣长裤（免蚊虫叮咬）.",
+        "zh": "环境局，双语 A5 传单（2022），中文页：《进行灭蚊行动，杜绝骨痛热症》。B-L-O-C-K：铲松干硬的泥土；清除花盆底盘的积水；倒置存放水桶并擦干水桶边缘；更换花瓶里的水；疏通阻塞的屋顶檐槽并放置BTI杀蚊药。S-A-W：喷杀虫剂（检查家中阴暗角落）；用驱蚊剂（定期防范）；穿长衣长裤（免蚊虫叮咬）。"
+      },
+      "url": "https://www.nea.gov.sg/docs/default-source/default-document-library/65403_nea-005-t22r_a5leaflet_2pp_r1-(002).pdf",
+      "note": {
+        "en": "The Chinese page is an image; its wording was read from the page itself. The Chinese B-L-O-C-K and S-A-W in this topic quote it.",
+        "zh": "中文页是图片，文字是对着页面读出来的。本主题中文的 B-L-O-C-K 和 S-A-W 照录这一页。"
+      }
+    },
+    {
+      "id": "S7",
+      "text": {
+        "en": "NEA, Mozzie Wipeout Checklist (2019): “Check your home regularly for mosquito breeding.” / 灭蚊行动检测清单：“定期检查，以防伊蚊在家中滋生。” Common breeding spots: pails, flower vases and bowls, flower pots and plates, hardened soil, roof gutters.",
+        "zh": "环境局，《灭蚊行动检测清单》（2019）：“定期检查，以防伊蚊在家中滋生。”常见滋生处：水桶、花瓶 / 碗、花盆 / 底盘、干硬的泥土、屋顶檐槽。"
+      },
+      "url": "https://www.nea.gov.sg/docs/default-source/resource/mozzie-wipeout-checklist.pdf"
+    },
+    {
+      "id": "S9",
+      "text": {
+        "en": "NEA Environmental Health Institute, How Does Wolbachia-Aedes Suppression Technology Work? (updated 9 April 2026): male Aedes aegypti carrying Wolbachia are released; when they mate with local females that do not carry the same Wolbachia, the eggs do not hatch, and fewer mosquitoes follow.",
+        "zh": "环境局环境卫生研究所，《沃尔巴克氏菌-伊蚊抑制技术如何起作用》（2026 年 4 月 9 日更新）：释放带沃尔巴克氏菌的雄性埃及伊蚊；它们和不带同一种沃尔巴克氏菌的本地雌蚊交配后，卵不会孵化，下一代就少了。"
+      },
+      "url": "https://www.nea.gov.sg/corporate-functions/resources/research/environmental_health_institute/wolbachia-aedes-mosquito-suppression-strategy/wolbachia-aedes-mosquito-suppression-strategy-how-it-works"
+    },
+    {
+      "id": "S10",
+      "text": {
+        "en": "NEA Environmental Health Institute, Male Mosquitoes Do Not Bite or Transmit Disease: male mosquitoes feed on plant juices and do not bite people; only females take blood.",
+        "zh": "环境局环境卫生研究所，《雄蚊不叮人，也不传播疾病》：雄蚊吸食植物汁液，不叮人；只有雌蚊吸血。"
+      },
+      "url": "https://www.nea.gov.sg/corporate-functions/resources/research/environmental_health_institute/wolbachia-aedes-mosquito-suppression-strategy/male-mosquitoes-do-not-bite"
+    },
+    {
+      "id": "S11",
+      "text": {
+        "en": "NEA, Project Wolbachia Reaches Half Of Singapore Households With Expansion To Five New Areas (13 March 2026, updated 14 August 2026), paragraph 2: in release areas the Aedes aegypti population fell by 80 to 90 per cent and the risk of dengue was over 70 per cent lower.",
+        "zh": "环境局，《沃尔巴克氏菌项目扩展到五个新地区，覆盖新加坡一半家庭》（2026 年 3 月 13 日，8 月 14 日更新），第 2 段：在释放地区，埃及伊蚊减少了 80% 至 90%，骨痛热症的风险低了 70% 以上。"
+      },
+      "url": "https://www.nea.gov.sg/media/news/news/index/project-wolbachia-reaches-half-of-singapore-households-with-expansion-to-five-new-areas",
+      "note": {
+        "en": "The figures are for the release areas, not all of Singapore. The half-of-households coverage in the title is a target for the end of 2026; it is not stated in this topic.",
+        "zh": "这些数字只说释放地区，不是全新加坡。标题里“覆盖一半家庭”是 2026 年底的目标，本主题不写。"
+      }
+    },
+    {
+      "id": "S12",
+      "text": {
+        "en": "Lim J. T. et al., Project Wolbachia–Singapore Consortium, Dengue Suppression by Male Wolbachia-Infected Mosquitoes, New England Journal of Medicine (2026), DOI 10.1056/NEJMoa2503304: a cluster-randomised trial in 15 clusters over 24 months (2022–2024); protective efficacy against dengue 71–72 % after 3 to 12 months or more of exposure.",
+        "zh": "Lim J. T. 等，新加坡沃尔巴克氏菌项目联合研究组，《以带沃尔巴克氏菌的雄蚊抑制骨痛热症》，《新英格兰医学杂志》（2026），DOI 10.1056/NEJMoa2503304：在 15 个区群进行、为期 24 个月（2022–2024 年）的整群随机对照试验；接触 3 至 12 个月以上后，对骨痛热症的保护效力为 71%–72%。"
+      },
+      "url": "https://www.nea.gov.sg/docs/default-source/project-wolbachia/nejm_project-wolbachia.pdf"
+    },
+    {
+      "id": "S13",
+      "text": {
+        "en": "Zettel Nalen C. M. & Kaufman P. E., Yellow Fever Mosquito, Aedes aegypti (Linnaeus), University of Florida IFAS Featured Creatures EENY-434, DOI 10.32473/edis-in792-2009: description of the adult (white scale patches, the lyre, banded legs and abdomen, short female palps with white tips, plumose male antennae), eggs laid singly above the water, four larval instars hanging from the surface by the siphon with mouth brushes, the comma-shaped pupa that tumbles and does not feed, emergence by swallowing air and splitting the pupal skin, males developing faster than females.",
+        "zh": "Zettel Nalen C. M. 与 Kaufman P. E.，《黄热病蚊：埃及伊蚊》，佛罗里达大学 IFAS“精选生物”EENY-434，DOI 10.32473/edis-in792-2009：成虫的形态（白色鳞斑、竖琴纹、带白环的足和腹、雌蚊末端发白的短触须、雄蚊的羽状触角），卵单粒产在水面上方，四个龄期的幼虫靠呼吸管倒挂在水面下、用口刷取食，逗号形的蛹会翻滚、不进食，成虫吞气撑裂蛹皮钻出，雄蚊比雌蚊发育快。"
+      },
+      "url": "https://ask.ifas.ufl.edu/publication/IN792",
+      "note": {
+        "en": "An institutional profile. Its counts of eggs per batch (100–200, up to five batches) are not used, because the measurements behind them were not found; NEA's figures (S4) are used instead.",
+        "zh": "这是机构编写的物种简介。它写的每批卵数（100–200 粒、最多五批）没有采用，因为没找到背后的测量；改用环境局的数字（S4）。"
+      }
+    },
+    {
+      "id": "S14",
+      "text": {
+        "en": "Service M. W., Medical Entomology for Students, 2nd edition (Cambridge University Press, 2000), chapter 1, Mosquitoes, pp. 2–10: halteres are the reduced hind wings; larval anal papillae concern water and salt balance, not breathing; the pupa is comma-shaped and does not feed.",
+        "zh": "Service M. W.，《医学昆虫学》第二版（剑桥大学出版社，2000），第 1 章“蚊子”，第 2–10 页：平衡棒是退化的后翅；幼虫的肛鳃管理水分和盐分，不是用来呼吸；蛹呈逗号形，不进食。"
+      },
+      "url": "https://assets.cambridge.org/97805216/66596/sample/9780521666596wsc00.pdf",
+      "note": {
+        "en": "A textbook, read in the publisher's sample chapter.",
+        "zh": "教科书，读的是出版社公开的样章。"
+      }
+    },
+    {
+      "id": "S15",
+      "text": {
+        "en": "University of Florida IFAS Featured Creatures EENY-319, Asian Tiger Mosquito, Aedes albopictus (Skuse): a single white stripe down the middle of the thorax.",
+        "zh": "佛罗里达大学 IFAS“精选生物”EENY-319，《亚洲虎蚊：白纹伊蚊》：胸背正中一条白色纵纹。"
+      },
+      "url": "https://ask.ifas.ufl.edu/publication/IN594"
+    },
+    {
+      "id": "S16",
+      "text": {
+        "en": "Sasmita H. I., Tu W.-C., Bong L.-J. & Neoh K.-B. (2019), Effects of larval diets and temperature regimes on life history traits, energy reserves and temperature tolerance of male Aedes aegypti, Parasites & Vectors 12:578, DOI 10.1186/s13071-019-3830-z (CC BY 4.0), Table 2 (Khan's diet): mean days as larva 1, 2, 3, 4 and pupa, and hatching to adult — 20 °C 2.99, 1.52, 1.62, 3.15, 4.04, total 13.40; 25 °C 2.53, 1.17, 1.08, 2.77, 2.61, total 10.18; 28 °C 1.88, 0.68, 1.00, 1.82, 1.86, total 7.23; 32 °C 1.55, 0.95, 0.70, 1.63, 1.70, total 6.40. Male wing length at 28 °C on Khan's diet 2.16 ± 0.01 mm.",
+        "zh": "Sasmita H. I.、Tu W.-C.、Bong L.-J. 与 Neoh K.-B.（2019），《幼虫饲料和温度对雄性埃及伊蚊生活史性状、能量储备和耐温性的影响》，《Parasites & Vectors》12:578，DOI 10.1186/s13071-019-3830-z（CC BY 4.0），表 2（Khan 饲料）：一至四龄和蛹的平均天数，以及孵化到成虫——20 °C 2.99、1.52、1.62、3.15、4.04，合计 13.40；25 °C 2.53、1.17、1.08、2.77、2.61，合计 10.18；28 °C 1.88、0.68、1.00、1.82、1.86，合计 7.23；32 °C 1.55、0.95、0.70、1.63、1.70，合计 6.40。28 °C、Khan 饲料下雄蚊翅长 2.16 ± 0.01 毫米。"
+      },
+      "url": "https://link.springer.com/article/10.1186/s13071-019-3830-z",
+      "note": {
+        "en": "Bora Bora strain, males only, each larva reared alone in a well with the same daily food, at constant temperature. The stage means do not add up exactly to the total (the numbers of mosquitoes measured differ between stages); the model scales the stages to the total (S1).",
+        "zh": "Bora Bora 品系，只测雄蚊；每只幼虫单独养在一个小格里，每天同样的饲料，恒温。各阶段的平均值加起来不完全等于总数（各阶段测量的个体数不同）；模型把各阶段按比例缩放到总数（S1）。"
+      }
+    },
+    {
+      "id": "S17",
+      "text": {
+        "en": "NEA, Understanding Singapore's Mosquito Landscape: Why Different Species Matter (Annex B, 13 March 2026): Aedes aegypti is dark with white bands on its legs and a white lyre-shaped pattern on its thorax; Aedes albopictus has a single white stripe down its thorax and is often found in greener areas; both bite mostly in the daytime, and also at night in well-lit places.",
+        "zh": "环境局，《认识新加坡的蚊子：为什么不同的蚊种很重要》（附件 B，2026 年 3 月 13 日）：埃及伊蚊身体深色，足上有白环，胸背有白色竖琴形花纹；白纹伊蚊胸背只有一条白色纵纹，常见于绿化较多的地方；两种都主要在白天叮人，在灯光明亮处夜里也会叮人。"
+      },
+      "url": "https://www.nea.gov.sg/docs/default-source/default-document-library/annex-b85ebef97-131a-4753-8275-dd613650bb0b.pdf"
+    },
+    {
+      "id": "S18",
+      "text": {
+        "en": "US Centers for Disease Control and Prevention (CDC), About Mosquitoes (14 May 2024): the parts of an adult mosquito: head (eyes, antennae that detect carbon dioxide from breath and moving air, palps that sense smells, proboscis), thorax (six legs, one pair of wings, halteres for balance), abdomen; the leg's femur, tibia and tarsus.",
+        "zh": "美国疾病控制与预防中心（CDC），《关于蚊子》（2024 年 5 月 14 日）：成蚊的各部分：头（眼、能察觉呼气中二氧化碳和空气流动的触角、能闻气味的触须、喙）、胸（六条足、一对翅、帮助平衡的平衡棒）、腹；足的股节、胫节和跗节。"
+      },
+      "url": "https://www.cdc.gov/mosquitoes/about/"
+    },
+    {
+      "id": "S19",
+      "text": {
+        "en": "CDC, Life Cycle of Aedes Mosquitoes (16 April 2024): eggs are laid on the inner walls of containers just above the water and hatch when water covers them; they can survive dry for up to 8 months; larvae and pupae live in water; going from egg to adult takes 7–10 days; four stages: egg, larva, pupa, adult.",
+        "zh": "CDC，《伊蚊的生活史》（2024 年 4 月 16 日）：卵产在容器内壁、水面稍上方，水淹没它时孵化；卵能干着活长达 8 个月；幼虫和蛹生活在水里；从卵到成虫需要 7–10 天；四个阶段：卵、幼虫、蛹、成虫。"
+      },
+      "url": "https://www.cdc.gov/mosquitoes/about/life-cycle-of-aedes-mosquitoes.html"
+    },
+    {
+      "id": "S20",
+      "text": {
+        "en": "World Health Organization (WHO), Dengue and severe dengue: questions and answers (2 October 2024): Aedes aegypti can fly up to about 400 metres looking for water-filled containers to lay eggs in, and mostly stays close to where people live; it bites most in the early morning and before dusk.",
+        "zh": "世界卫生组织（世卫），《骨痛热症和重症骨痛热症：问答》（2024 年 10 月 2 日）：埃及伊蚊为了找积水容器产卵，可以飞约 400 米，一般待在人住的地方附近；叮人的高峰在清晨和傍晚前。"
+      },
+      "url": "https://www.who.int/news-room/questions-and-answers/item/dengue-and-severe-dengue"
+    },
+    {
+      "id": "S21",
+      "text": {
+        "en": "Farnesi L. C. et al. (2009), Embryonic development of Aedes aegypti (Diptera: Culicidae): influence of different constant temperatures, Memórias do Instituto Oswaldo Cruz 104(1):124–126, DOI 10.1590/S0074-02762009000100020: hours for development inside a freshly laid egg at 16, 22, 25, 28 and 31 °C — 489.3, 98.3, 77.4, 61.6 and 48.4; eggs hatched at 22–31 °C (83–96 %), 48.5 % at 35 °C and none at 36 °C; the larva at hatching has a head, three fused thoracic segments and eight abdominal segments.",
+        "zh": "Farnesi L. C. 等（2009），《埃及伊蚊的胚胎发育：不同恒温的影响》，《Memórias do Instituto Oswaldo Cruz》104(1):124–126，DOI 10.1590/S0074-02762009000100020：刚产下的卵在 16、22、25、28、31 °C 下完成胚胎发育的小时数——489.3、98.3、77.4、61.6、48.4；22–31 °C 时卵的孵化率为 83%–96%，35 °C 时 48.5%，36 °C 时没有卵孵化；刚孵出的幼虫有头、愈合的三节胸和八节腹。"
+      },
+      "url": "https://www.scielo.br/j/mioc/a/6QjKLKZYL5Yr8KFfwGGqSPc/?format=pdf",
+      "note": {
+        "en": "Rockefeller strain; moist eggs given a hatching stimulus; the time is counted from laying. It is a different measurement from NEA's “less than a day” for an egg to hatch (S4).",
+        "zh": "Rockefeller 品系；卵保持湿润并给予孵化刺激；时间从产卵算起。这和环境局说的卵“不到一天”孵化（S4）是不同的量。"
+      }
+    },
+    {
+      "id": "S22",
+      "text": {
+        "en": "Farnesi L. C. et al. (2015), Physical features and chitin content of eggs from the mosquito vectors Aedes aegypti, Anopheles aquasalis and Culex quinquefasciatus: connection with distinct levels of resistance to desiccation, Journal of Insect Physiology 83:43–52, DOI 10.1016/j.jinsphys.2015.10.006: Aedes aegypti eggs 0.634 ± 0.034 mm long and 0.169 mm wide (measured at 80 % of development); resistance to drying comes from a layer that forms while the embryo develops.",
+        "zh": "Farnesi L. C. 等（2015），《蚊媒埃及伊蚊、Anopheles aquasalis 和致倦库蚊卵的物理特征和几丁质含量：与耐干能力差异的关系》，《Journal of Insect Physiology》83:43–52，DOI 10.1016/j.jinsphys.2015.10.006：埃及伊蚊卵长 0.634 ± 0.034 毫米、宽 0.169 毫米（在胚胎发育到 80% 时测量）；卵耐干的能力来自胚胎发育过程中形成的一层膜。"
+      },
+      "url": "https://doi.org/10.1016/j.jinsphys.2015.10.006"
+    },
+    {
+      "id": "S23",
+      "text": {
+        "en": "Yamany A. S., Adham F. K. & Abdel-Gaber R. (2024), Morphological description of the pupa of Aedes aegypti (Diptera: Culicidae) using a scanning electron microscope, Arquivo Brasileiro de Medicina Veterinária e Zootecnia 76(1):43–54, DOI 10.1590/1678-4162-13120: the cephalothorax holds the sheaths of the adult's appendages; respiratory trumpet 0.53–0.69 mm (mean 0.61), abdomen 2.33–2.95 mm (mean 2.63), paddle 0.78–1.13 mm (mean 0.92).",
+        "zh": "Yamany A. S.、Adham F. K. 与 Abdel-Gaber R.（2024），《用扫描电镜描述埃及伊蚊蛹的形态》，《Arquivo Brasileiro de Medicina Veterinária e Zootecnia》76(1):43–54，DOI 10.1590/1678-4162-13120：头胸部里有成虫附肢的鞘；呼吸角长 0.53–0.69 毫米（平均 0.61），腹部 2.33–2.95 毫米（平均 2.63），游泳桨 0.78–1.13 毫米（平均 0.92）。"
+      },
+      "url": "https://www.scielo.br/j/abmvz/a/6KGtFgmhGbqSgRzCjbDw3rq/?format=pdf&lang=en",
+      "note": {
+        "en": "A laboratory colony, prepared specimens. Which way the paddle was measured is not clear in the paper.",
+        "zh": "实验室品系，处理过的标本。论文没有说清楚游泳桨是沿哪个方向量的。"
+      }
+    },
+    {
+      "id": "S24",
+      "text": {
+        "en": "WHO, Dengue (fact sheet, 21 August 2025): dengue is a viral infection spread mainly by infected female Aedes aegypti mosquitoes; most infections cause no symptoms or a mild illness, and some people become seriously ill; symptoms include high fever, severe headache, pain behind the eyes, muscle and joint pains, nausea, vomiting, swollen glands and rash; after feeding on an infected person the virus takes about 8–12 days to reach the mosquito's salivary glands at 25–28 °C.",
+        "zh": "世卫，《骨痛热症》（事实说明，2025 年 8 月 21 日）：骨痛热症是一种病毒感染，主要由受感染的雌性埃及伊蚊传播；多数感染没有症状或病情轻微，有些人会病得很重；症状包括高烧、严重头痛、眼睛后面痛、肌肉和关节痛、恶心、呕吐、淋巴结肿大和皮疹；在 25–28 °C 时，蚊子叮了受感染的人以后，病毒大约要 8–12 天才到达它的唾液腺。"
+      },
+      "url": "https://www.who.int/news-room/fact-sheets/detail/dengue-and-severe-dengue",
+      "note": {
+        "en": "WHO also records rarer ways the virus passes (from mother to baby, through blood products and transplants, and in mosquitoes from mother to eggs); the topic says only that dengue is not spread by ordinary contact.",
+        "zh": "世卫也记录了比较少见的传播途径（母亲传给婴儿、经血液制品和器官移植，以及蚊子由母体传给卵）；本主题只说骨痛热症不会通过日常接触传染。"
+      }
+    },
+    {
+      "id": "S25",
+      "text": {
+        "en": "Ministry of Health Singapore, Dengue (HealthHub): symptoms include a sudden fever, severe headache with pain behind the eyes, joint and muscle pain, skin rashes, nausea and vomiting; if you think you have dengue, see a doctor straight away.",
+        "zh": "新加坡卫生部，《骨痛热症》（HealthHub）：症状包括突然发烧、严重头痛并伴有眼睛后面痛、关节和肌肉痛、皮疹、恶心和呕吐；怀疑得了骨痛热症，要马上看医生。"
+      },
+      "url": "https://www.healthhub.sg/health-conditions/topic_dengue_fever_moh"
+    },
+    {
+      "id": "S26",
+      "text": {
+        "en": "University of California Statewide IPM Program, Insects with incomplete metamorphosis develop through three life stages: egg, nymph, and adult (illustration caption).",
+        "zh": "加州大学全州病虫害综合治理项目，《不完全变态的昆虫经历三个阶段：卵、若虫、成虫》（插图说明）。"
+      },
+      "url": "https://ipm.ucanr.edu/PMG/O/I-HM-OTRI-LC.001.html"
+    },
+    {
+      "id": "S27",
+      "text": {
+        "en": "NEA, Dengue Cases (updated 17 October 2026), Mozzie Wipeout: “Break up hardened soil”, “Lift and empty flowerpot plates”, “Overturn pails and wipe their rims”, “Change water in vases”, “Keep roof gutters clear and place BTI insecticide inside”; check homes regularly.",
+        "zh": "环境局，《骨痛热症病例》（2026 年 10 月 17 日更新），灭蚊行动 B-L-O-C-K 的英文原文：“Break up hardened soil”“Lift and empty flowerpot plates”“Overturn pails and wipe their rims”“Change water in vases”“Keep roof gutters clear and place BTI insecticide inside”；定期检查住家。"
+      },
+      "url": "https://www.nea.gov.sg/dengue-zika/dengue/dengue-cases"
+    },
+    {
+      "id": "S28",
+      "text": {
+        "en": "NEA, NEA Urges Continued Vigilance To Prevent Dengue Cases From Rising At Year-End (5 December 2022), paragraph 7: the B-L-O-C-K steps, including “Change water in vases” and “Keep roof gutters clear and place BTI insecticide inside”.",
+        "zh": "环境局，《环境局呼吁继续保持警惕，防止年底骨痛热症病例上升》（2022 年 12 月 5 日），第 7 段：B-L-O-C-K 各步，包括“Change water in vases”和“Keep roof gutters clear and place BTI insecticide inside”。"
+      },
+      "url": "https://www.nea.gov.sg/media/news/news/index/nea-urges-continued-vigilance-to-prevent-dengue-cases-from-rising-at-year-end"
+    },
+    {
+      "id": "S29",
+      "text": {
+        "en": "Bar A. & Andrew J. (2013), Morphology and Morphometry of Aedes aegypti Larvae, Annual Review & Research in Biology 3(1):1–21: mean body length (head, thorax and abdomen, without the siphon) of larvae 1–4: 1.745, 2.935, 4.343 and 7.202 mm; mean head width 0.235, 0.392, 0.640 and 0.987 mm; four anal papillae.",
+        "zh": "Bar A. 与 Andrew J.（2013），《埃及伊蚊幼虫的形态与形态测量》，《Annual Review & Research in Biology》3(1):1–21：一至四龄幼虫的平均体长（头、胸、腹，不含呼吸管）1.745、2.935、4.343、7.202 毫米；平均头宽 0.235、0.392、0.640、0.987 毫米；四个肛鳃。"
+      },
+      "url": "https://journalarrb.com/index.php/ARRB/article/view/1899",
+      "note": {
+        "en": "Twenty preserved larvae per instar, collected in Agra, India; not the same larvae as the timed ones of S16. Other studies give somewhat different widths (for example 0.27–0.30 mm for the first instar in a Florida laboratory strain), so these are one sample's means, not fixed sizes.",
+        "zh": "每龄 20 只保存的幼虫，采自印度阿格拉；和 S16 计时的不是同一批。别的研究测得的头宽稍有不同（例如佛罗里达一个实验室品系的一龄为 0.27–0.30 毫米），所以这些是一个样本的平均值，不是固定的大小。"
+      }
+    },
+    {
+      "id": "S30",
+      "text": {
+        "en": "NEA, Number Of Weekly Dengue Cases Expected To Exceed The Historical High Of 891 Unless Urgent Collective Community Action Is Taken (3 June 2020): 15,998 dengue cases in 2019.",
+        "zh": "环境局，《若不立即集体行动，每周骨痛热症病例预计将超过 891 起的历史最高》（2020 年 6 月 3 日）：2019 年骨痛热症病例 15,998 起。"
+      },
+      "url": "https://www.nea.gov.sg/media/news/news/index/number-of-weekly-dengue-cases-expected-to-exceed-the-historical-high-of-891-unless-urgent-collective-community-action-is-taken"
+    },
+    {
+      "id": "S31",
+      "text": {
+        "en": "NEA, Integrated Sustainability Report 2020/2021, High Standards of Public Health (updated 14 November 2021): 35,315 dengue cases in 2020.",
+        "zh": "环境局，《2020/2021 综合可持续发展报告》，“高标准的公共卫生”（2021 年 11 月 14 日更新）：2020 年骨痛热症病例 35,315 起。"
+      },
+      "url": "https://www.nea.gov.sg/committee-of-supply-2022/integrated-sustainability-report-2020-2021/review-of-fy2020/ensuring-a-clean-and-sustainable-environment-for-singapore/high-standards-of-public-health"
+    },
+    {
+      "id": "S32",
+      "text": {
+        "en": "NEA, Integrated Sustainability Report 2021/2022, p. 18: 5,258 dengue cases in 2021, against 35,266 in 2020.",
+        "zh": "环境局，《2021/2022 综合可持续发展报告》，第 18 页：2021 年骨痛热症病例 5,258 起，2020 年为 35,266 起。"
+      },
+      "url": "https://www.nea.gov.sg/docs/default-source/isr/nea-integrated-sustainability-report-2021-2022.pdf",
+      "note": {
+        "en": "Its 2020 total differs from the earlier report's 35,315 (S31); the reason is not given. Both are shown.",
+        "zh": "这里 2020 年的总数和较早报告的 35,315（S31）不同，原因没有说明。两个数都列出。"
+      }
+    },
+    {
+      "id": "S33",
+      "text": {
+        "en": "NEA, Dengue Cases Dropped By 69 Per Cent To 9,949 Cases In 2023; Vigilance Needed To Prevent Dengue Surge In 2024 (31 March 2024): 32,173 cases in 2022 and 9,949 in 2023.",
+        "zh": "环境局，《2023 年骨痛热症病例下降 69% 至 9,949 起；2024 年仍需警惕防止病例激增》（2024 年 3 月 31 日）：2022 年 32,173 起，2023 年 9,949 起。"
+      },
+      "url": "https://www.nea.gov.sg/media/news/news/index/dengue-cases-dropped-69-per-cent-9-949-in-2023-vigilance-needed-prevent-dengue-surge-2024"
+    },
+    {
+      "id": "S34",
+      "text": {
+        "en": "NEA, Singapore Enters Peak Dengue Season; Public Urged To Stay Vigilant To Prevent Surge In Cases (16 May 2026): 13,651 dengue cases in 2024; S-A-W: “Spray insecticide in dark corners around the house”, “Apply insect repellent regularly”, “Wear long-sleeve tops and long pants”.",
+        "zh": "环境局，《新加坡进入骨痛热症高峰期，呼吁公众保持警惕防止病例激增》（2026 年 5 月 16 日）：2024 年骨痛热症病例 13,651 起；S-A-W 的英文原文：“Spray insecticide in dark corners around the house”“Apply insect repellent regularly”“Wear long-sleeve tops and long pants”。"
+      },
+      "url": "https://www.nea.gov.sg/media/news/news/index/singapore-enters-peak-dengue-season-public-urged-to-stay-vigilant-to-prevent-surge-in-cases"
+    },
+    {
+      "id": "S35",
+      "text": {
+        "en": "NEA and the Ministry of Health (from the fourth quarter of 2025, the Communicable Diseases Agency), Quarterly Dengue Surveillance Data: deaths due to local dengue infection in 2019–2024 (20, 32, 5, 19, 6, 17), and the 2025 quarters: 1,222, 1,361, 874 and 579 cases (4,036 in all).",
+        "zh": "环境局与卫生部（2025 年第四季起为传染病局），《骨痛热症季度监测数据》：2019–2024 年本地感染骨痛热症死亡人数（20、32、5、19、6、17），以及 2025 年四个季度的病例：1,222、1,361、874、579 起（合计 4,036 起）。"
+      },
+      "url": "https://www.nea.gov.sg/dengue-zika/dengue/quarterly-dengue-surveillance-data",
+      "note": {
+        "en": "The 2025 total is the sum of the four quarterly reports, not a separately published yearly figure.",
+        "zh": "2025 年的总数是四份季度报告相加，不是另外公布的全年数字。"
+      }
+    },
+    {
+      "id": "S36",
+      "text": {
+        "en": "Meteorological Service Singapore, Climate of Singapore (high and uniform temperatures all year round) and Annual Climate Assessment 2021, p. 21: long-term average air temperature 27.8 °C at the Changi climate station, 1991–2020.",
+        "zh": "新加坡气象局，《新加坡的气候》（全年气温高而均匀）和《2021 年度气候评估》第 21 页：樟宜气候站 1991–2020 年的长期平均气温为 27.8 °C。"
+      },
+      "url": "https://www.weather.gov.sg/climate-climate-of-singapore/",
+      "note": {
+        "en": "Air temperature, not the temperature of water in a container.",
+        "zh": "这是气温，不是容器里积水的水温。"
+      }
+    },
+    {
+      "id": "S37",
+      "text": {
+        "en": "Couret J., Dotson E. & Benedict M. Q. (2014), Temperature, Larval Diet, and Density Effects on Development Rate and Survival of Aedes aegypti (Diptera: Culicidae), PLOS ONE 9(2):e87468: temperature, food and the number of larvae in the water together change how fast larvae develop.",
+        "zh": "Couret J.、Dotson E. 与 Benedict M. Q.（2014），《温度、幼虫饲料和密度对埃及伊蚊发育速度和存活的影响》，《PLOS ONE》9(2):e87468：温度、食物和水里幼虫的多少，共同影响幼虫发育的快慢。"
+      },
+      "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0087468"
+    },
+    {
+      "id": "S38",
+      "text": {
+        "en": "Jung J. W. et al. (2015), A novel olfactory pathway is essential for fast and efficient blood-feeding in mosquitoes, Scientific Reports 5:13444 (the stylet bundle: labrum, hypopharynx, two mandibles and two maxillae); Wei Xiang W. et al. (2022), Dengue virus infection modifies mosquito blood-feeding behavior to increase transmission to the host, PNAS 119(3):e2117589119 (the labium bends back as the six stylets enter; blood is drawn up the labrum and saliva passes down the hypopharynx).",
+        "zh": "Jung J. W. 等（2015），《一条新的嗅觉通路是蚊子快速高效吸血的关键》，《Scientific Reports》5:13444（口针束：上唇、舌、两根上颚和两根下颚）；Wei Xiang W. 等（2022），《骨痛热症病毒感染改变蚊子的吸血行为，增加向宿主的传播》，《PNAS》119(3):e2117589119（六根口针刺入时下唇向后弯起；血从上唇吸上去，唾液从舌流下去）。"
+      },
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4549640/"
+    },
+    {
+      "id": "S41",
+      "text": {
+        "en": "NEA, Stop Dengue Now (updated 13 August 2026): “Do the Mozzie Wipeout at least once a week to prevent mosquito breeding.”",
+        "zh": "环境局，《立即阻止骨痛热症》（2026 年 8 月 13 日更新）：至少每周进行一次灭蚊行动，以防蚊子滋生。"
+      },
+      "url": "https://www.nea.gov.sg/dengue-zika/stop-dengue-now"
+    },
+    {
+      "id": "S42",
+      "text": {
+        "en": "NEA, Other Preventive Measures, Checklist For A Mozzie-Free Home: every other day, remove water from flowerpot plates and change the water in flower vases, scrubbing the inner sides of vases.",
+        "zh": "环境局，《其他预防措施》，“无蚊家居清单”：隔天清除花盆底盘的积水、更换花瓶里的水，并刷洗花瓶内壁。"
+      },
+      "url": "https://www.nea.gov.sg/dengue-zika/prevent-aedes-mosquito-breeding/other-preventive-measures"
+    },
+    {
+      "id": "S43",
+      "text": {
+        "en": "NEA, Prevent Aedes Mosquito Breeding: the Aedes mosquito “prefers to breed in clean, stagnant water easily found in our homes”.",
+        "zh": "环境局，《防止伊蚊滋生》：伊蚊喜欢在干净的积水里滋生，这样的水在我们家里很容易找到。"
+      },
+      "url": "https://www.nea.gov.sg/dengue-zika/prevent-aedes-mosquito-breeding"
+    },
+    {
+      "id": "S44",
+      "text": {
+        "en": "Ramyasoma H. P. B. K. et al. (2021), Assessment of Developmental and Reproductive Fitness of Dengue-Resistant Transgenic Aedes aegypti and Improvement of Fitness Using Antibiotics, BioMed Research International 2021:6649038, Table 1: wild-strain body length from the head to the tip of the abdomen, females 3.77 mm and males 3.02 mm on average.",
+        "zh": "Ramyasoma H. P. B. K. 等（2021），《抗骨痛热症转基因埃及伊蚊的发育和繁殖适应度评估及用抗生素改善适应度》，《BioMed Research International》2021:6649038，表 1：野生品系从头到腹末的体长，雌蚊平均 3.77 毫米，雄蚊平均 3.02 毫米。"
+      },
+      "url": "https://onlinelibrary.wiley.com/doi/10.1155/2021/6649038",
+      "note": {
+        "en": "A Sri Lankan strain reared in the laboratory; the averages of that study, not a size every Aedes aegypti has.",
+        "zh": "实验室饲养的斯里兰卡品系；这是这项研究的平均值，不是每只埃及伊蚊都一样大。"
+      }
+    },
+    {
+      "id": "S45",
+      "text": {
+        "en": "NEA Vox, Why are NEA officers scattering chemicals into drains, and are they safe? (21 April 2025): such substances “specifically target and kill mosquito larvae in areas where water cannot be completely removed”; US Environmental Protection Agency, Bti for Mosquito Control: Bti is a naturally occurring soil bacterium whose toxins affect the larvae of mosquitoes, black flies and fungus gnats; Health Canada, Bti fact sheet (archived): larvae swallow the crystals as they feed and the gut is damaged.",
+        "zh": "环境局《NEA Vox》，《环境局人员为什么往沟里撒药？安全吗？》（2025 年 4 月 21 日）：这类药专门针对、杀死积水无法完全清除之处的孑孓；美国环境保护署，《用 Bti 控制蚊子》：Bti 是土壤里天然存在的一种细菌，它的毒素只影响蚊子、蚋和蕈蚊的幼虫；加拿大卫生部，Bti 说明（存档）：幼虫取食时吞下晶体，肠道受损。"
+      },
+      "url": "https://www.nea.gov.sg/media/nea-vox/index/why-are-nea-officers-scattering-chemicals-into-drains-and-are-they-safe"
+    },
+    {
+      "id": "S46",
+      "text": {
+        "en": "Vogel K. J. et al. (2017), Transcriptome Sequencing Reveals Large-Scale Changes in Axenic Aedes aegypti Larvae, PLOS Neglected Tropical Diseases 11(1):e0005273: larvae grow longer within an instar, while the head capsule widens at each moult.",
+        "zh": "Vogel K. J. 等（2017），《转录组测序揭示无菌埃及伊蚊幼虫的大规模变化》，《PLOS Neglected Tropical Diseases》11(1):e0005273：幼虫在一个龄期里身体会变长，头壳则在每次蜕皮时变宽。"
+      },
+      "url": "https://journals.plos.org/plosntds/article?id=10.1371/journal.pntd.0005273"
+    },
+    {
+      "id": "S48",
+      "text": {
+        "en": "Gutierrez E. H. J. et al. (2022), Using body size as an indicator for age structure in field populations of Aedes aegypti, Parasites & Vectors 15:479: once they emerge as adults, mosquitoes stay the same size throughout adulthood.",
+        "zh": "Gutierrez E. H. J. 等（2022），《用体型判断野外埃及伊蚊种群的年龄结构》，《Parasites & Vectors》15:479：蚊子羽化为成虫以后，整个成虫期大小不变。"
+      },
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9773510/"
+    },
+    {
+      "id": "S49",
+      "text": {
+        "en": "Göpfert M. C., Briegel H. & Robert D. (1999), Mosquito hearing: sound-induced antennal vibrations in male and female Aedes aegypti, Journal of Experimental Biology 202:2727–2738: male mosquitoes are attracted by the flight sounds of females; sound makes the antenna vibrate and a sense organ at its base detects it.",
+        "zh": "Göpfert M. C.、Briegel H. 与 Robert D.（1999），《蚊子的听觉：雄性和雌性埃及伊蚊触角受声音引起的振动》，《Journal of Experimental Biology》202:2727–2738：雄蚊会被雌蚊飞行的声音吸引；声音使触角振动，触角基部的感觉器官察觉这种振动。"
+      },
+      "url": "https://pubmed.ncbi.nlm.nih.gov/10504309/",
+      "note": {
+        "en": "Abstract read.",
+        "zh": "读的是摘要。"
+      }
+    },
+    {
+      "id": "S50",
+      "text": {
+        "en": "Gillett J. D. (1983), Diuresis in newly emerged, unfed mosquitoes. II., Proceedings of the Royal Society of London B 217:237–242: newly emerged mosquitoes escape from the surface of the water within minutes.",
+        "zh": "Gillett J. D.（1983），《新羽化、未进食蚊子的排尿作用 II》，《伦敦皇家学会会刊 B》217:237–242：新羽化的蚊子几分钟内就离开水面。"
+      },
+      "url": "https://pubmed.ncbi.nlm.nih.gov/6132392/",
+      "note": {
+        "en": "Abstract read. How long the climb out of the pupal skin itself takes was not found, so the animation does not claim a speed.",
+        "zh": "读的是摘要。没有找到从蛹皮里钻出来本身要多久，所以动画不说明真实速度。"
+      }
+    },
+    {
+      "id": "S51",
+      "text": {
+        "en": "CDC, About Culex Mosquitoes (updated 3 September 2025): Culex eggs stick together in a raft that floats on the water.",
+        "zh": "CDC，《关于库蚊》（2025 年 9 月 3 日更新）：库蚊的卵粘在一起，成为一块浮在水面上的卵筏。"
+      },
+      "url": "https://www.cdc.gov/mosquitoes/about/culex-mosquitoes.html"
+    },
+    {
+      "id": "S52",
+      "text": {
+        "en": "Persistence of Aedes aegypti and Molecular Detection of DENV in Mosquitoes in Red Sea Governorate, Egypt (2022), Egyptian Academic Journal of Biological Sciences, p. 299: front and middle tarsi have a white band at the base of tarsomeres I and II; hind tarsi at the base of I–IV, and V is all white.",
+        "zh": "《埃及红海省埃及伊蚊的存续及蚊体内骨痛热症病毒的分子检测》（2022），《Egyptian Academic Journal of Biological Sciences》，第 299 页：前足和中足的跗节第一、二节基部有白环；后足第一至四节基部有白环，第五节全白。"
+      },
+      "url": "https://journals.ekb.eg/article_231071_854652647d395a8d3a8010cfbdae4dd4.pdf"
+    },
+    {
+      "id": "S53",
+      "text": {
+        "en": "Wahid I., Sunahara T. & Mogi M. (2002), Mouthparts of male Aedes (Stegomyia) mosquitoes, Journal of the American Mosquito Control Association 18(2):73–80, p. 76: in Aedes aegypti the male's palps are about as long as, or a little longer than, the proboscis.",
+        "zh": "Wahid I.、Sunahara T. 与 Mogi M.（2002），《伊蚊（Stegomyia 亚属）雄蚊的口器》，《Journal of the American Mosquito Control Association》18(2):73–80，第 76 页：埃及伊蚊雄蚊的触须和喙差不多一样长，或稍长。"
+      },
+      "url": "https://www.biodiversitylibrary.org/content/part/JAMCA/JAMCA_V18_N2_P073-080.pdf"
+    },
+    {
+      "id": "S54",
+      "text": {
+        "en": "Gingl E., Hinterwirth A. & Tichy H. (2005), Sensory Representation of Temperature in Mosquito Warm and Cold Cells, Journal of Neurophysiology 94(1): cells on the tip of the Aedes aegypti antenna respond to warming and to cooling.",
+        "zh": "Gingl E.、Hinterwirth A. 与 Tichy H.（2005），《蚊子温觉细胞和冷觉细胞对温度的感受》，《Journal of Neurophysiology》94(1)：埃及伊蚊触角尖端的细胞对变暖和变冷有反应。"
+      },
+      "url": "https://journals.physiology.org/doi/full/10.1152/jn.01164.2004"
+    },
+    {
+      "id": "S55",
+      "text": {
+        "en": "Kok M. L. (1971), Laboratory studies on the life-history of Valanga nigricornis nigricornis (Burm.), Bulletin of Entomological Research 61(3):439–446: at about 28 °C the life cycle took 6½–8½ months; males normally have six nymphal instars and females seven.",
+        "zh": "Kok M. L.（1971），《黑角瓦兰蝗生活史的实验室研究》，《Bulletin of Entomological Research》61(3):439–446：在约 28 °C 下，整个生活史需要 6½–8½ 个月；若虫期雄虫通常六龄，雌虫七龄。"
+      },
+      "url": "https://doi.org/10.1017/S0007485300040360",
+      "note": {
+        "en": "Abstract read. The same study is the grasshopper topic's source for these numbers.",
+        "zh": "读的是摘要。蝗虫主题的这些数字也出自这项研究。"
+      }
+    },
+    {
+      "id": "S57",
+      "text": {
+        "en": "Abouelmagd et al. (2024), Scanning of antennae and maxillary palps of anthropophilic Aedes aegypti and ornithophilic Culex pipiens as potential arbovirus vectors, Veterinary World 17(10), p. 2249: the antenna has a scape, a pedicel and a flagellum of 13 flagellomeres.",
+        "zh": "Abouelmagd 等（2024），《嗜人的埃及伊蚊和嗜鸟的尖音库蚊作为潜在虫媒病毒媒介的触角和下颚须扫描》，《Veterinary World》17(10)，第 2249 页：触角由柄节、梗节和 13 个鞭小节组成的鞭节构成。"
+      },
+      "url": "https://www.veterinaryworld.org/Vol.17/October-2024/6.pdf"
+    }
+  ]
+}

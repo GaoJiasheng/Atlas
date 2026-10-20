@@ -1,0 +1,110 @@
+---
+id: female-and-male
+order: 2
+title: { en: "Female and male", zh: "雌蚊与雄蚊" }
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  layers: [head, thorax-wings, belly, male]
+  labels: [antennae, male-antennae, proboscis]
+  camera: { position: [-4.6, 1.3, 1.5], target: [-2.55, 0.5, -0.6], fov: 30 }
+  summary: { en: "Only the female mosquito bites. She needs protein from blood to make her eggs; males and females both feed on plant sugars.", zh: "只有雌蚊叮人。她需要血里的蛋白质来制造卵；雄蚊和雌蚊都吸植物的糖汁。" }
+  sim:
+    set: { day: 8 }
+  beats:
+    - labels: [antennae, male-antennae, palps, male-palps]
+      caption: { en: "The male's antennae are bushy, covered in long fine hairs; the female's have only short hairs. The male's palps are long, and he is a little smaller.", zh: "雄蚊的触角毛茸茸的，长满细长的毛；雌蚊的触角只有短毛。雄蚊的触须很长，个子也小一点。" }
+    - view: xray
+      layers: [head, thorax-wings, belly]
+      pose: bite-parts
+      camera: { position: [-3.25, 0.62, 1.25], target: [-3.08, 0.45, 0.0], fov: 30 }
+      labels: [proboscis, stylets]
+      caption: { en: "Inside the female's proboscis are fine, sharp stylets. When she feeds on blood they go into the skin, while the outer sheath bends back and stays outside.", zh: "雌蚊的喙里有几根又细又尖的口针。她吸血时，口针刺进皮肤，外面的鞘向后弯起，留在外面。" }
+    - view: xray
+      layers: [head, thorax-wings, belly]
+      pose: fed
+      camera: { position: [-2.3, 0.95, 2.35], target: [-2.3, 0.55, 0.0], fov: 30 }
+      labels: [abdomen, midgut]
+      caption: { en: "Only females take blood, because they need its protein to make eggs. Afterwards the abdomen is stretched. Males and females both drink sugary plant juices such as nectar.", zh: "只有雌蚊吸血，因为她需要血里的蛋白质来制造卵。吸过血，腹部会撑大。雄蚊和雌蚊都吸花蜜之类的植物糖汁。" }
+    - view: xray
+      layers: [head, thorax-wings, belly]
+      pose: gravid
+      camera: { position: [-2.3, 0.95, 2.35], target: [-2.3, 0.55, 0.0], fov: 30 }
+      labels: [ovaries, abdomen]
+      caption: { en: "About three days after a blood meal her eggs are ready. She lays about a hundred at a time, and can do this about three times in her life.", zh: "吸血后大约三天，卵就成熟了。她每次产约一百粒卵，一生大约能产三次。" }
+    - view: xray
+      layers: [head, thorax-wings, belly]
+      camera: { position: [-3.15, 0.95, 1.75], target: [-2.75, 0.55, 0.0], fov: 30 }
+      labels: [salivary-glands, proboscis]
+      caption: { en: "If a female bites a person who has dengue, the virus multiplies inside her. About seven days later it reaches her salivary glands, and her bites can pass it on. Only an infected mosquito can spread dengue.", zh: "雌蚊如果叮了患骨痛热症的人，病毒会在她体内繁殖。大约七天后病毒到达唾液腺，她再叮人就可能把病毒传出去。只有受感染的蚊子才会传播骨痛热症。" }
+  index:
+    parts: [antennae, male-antennae, palps, male-palps, proboscis, stylets, abdomen, midgut, ovaries, salivary-glands]
+---
+
+<Lang en>
+
+Compare the two heads. The male's antennae carry rings of long, fine hairs and look bushy; the female's have only short hairs. The male's palps are about as long as his proboscis, while the female's are short. He is also a little smaller than she is.
+
+The female's proboscis is not a single tube. Inside a sheath is a bundle of fine, sharp stylets. When she feeds on blood, the stylets go into the skin while the sheath bends back and stays outside. The model draws three stylets; the real bundle has <Num s="S38">six</Num>.
+
+Only females take blood: they need the protein in it to make their eggs. After a meal the midgut swells and the abdomen stretches. Males do not bite. Both males and females drink nectar and other sugary plant juices, which give them energy.
+
+The eggs grow in the ovaries. NEA says a female lays them about <Num s="S4">three days</Num> after a blood meal, about <Num s="S4">100</Num> at a time, and can do this about <Num s="S4">three times</Num> in her life.
+
+A female picks up the dengue virus when she bites a person who has it. The virus multiplies inside her and reaches her salivary glands; NEA gives about <Num s="S4">seven days</Num> for this. After that, her bites can pass the virus on to other people. A bite from a mosquito that does not carry the virus cannot give anyone dengue.
+
+<More title={{ en: "How many eggs?", zh: "产多少卵" }}>
+
+NEA's figures are rough guides for Singapore, not a count every female reaches: how many eggs she lays depends on how much she has fed and how she was reared. The model draws only a few eggs in the ovaries and twelve on the wall of the dish, so that their shape and place can be seen.
+
+</More>
+
+<More title={{ en: "Not every bite", zh: "不是每一口都会让人生病" }}>
+
+Dengue is spread mainly by infected female Aedes mosquitoes. It is not passed on by everyday contact with someone who is ill. Many people who catch it have only a mild illness or none at all, but some become seriously ill. The time the virus takes to reach a mosquito's salivary glands depends on the temperature: WHO gives <Num s="S24">8–12 days</Num> at <Num s="S24">25–28 °C</Num>. If you feel unwell, tell an adult; a doctor can check what is wrong.
+
+</More>
+
+<More title={{ en: "What the males do", zh: "雄蚊做什么" }}>
+
+Male mosquitoes drink plant juices and mate with females; they do not bite people. Singapore uses this difference: the mosquitoes it releases to bring down the number of Aedes aegypti are all males. The last chapter shows how.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+比较一下两个头。雄蚊的触角上一圈圈都是细长的毛，看起来毛茸茸的；雌蚊的触角只有短毛。雄蚊的触须差不多和喙一样长，雌蚊的触须却很短。雄蚊的个子也比雌蚊小一点。
+
+雌蚊的喙不是一根简单的管子。外面是一个鞘，里面包着一束又细又尖的口针。她吸血时，口针刺进皮肤，鞘向后弯起，留在外面。模型只画了三根口针，真正的一束有 <Num s="S38">六</Num>根。
+
+只有雌蚊吸血：她需要血里的蛋白质来制造卵。吸过血，中肠胀大，腹部也撑大了。雄蚊不叮人。雄蚊和雌蚊都吸花蜜和别的含糖植物汁液，从中得到能量。
+
+卵在卵巢里长成。环境局说，雌蚊吸血后大约 <Num s="S4">三天</Num>产卵，每次约 <Num s="S4">100</Num> 粒，一生大约能产 <Num s="S4">三次</Num>。
+
+雌蚊叮了患骨痛热症的人，就会吸进病毒。病毒在她体内繁殖，到达唾液腺；环境局说这大约要 <Num s="S4">七天</Num>。之后她再叮人，就可能把病毒传给别人。没有带病毒的蚊子，叮了人也不会让人得骨痛热症。
+
+<More title={{ en: "How many eggs?", zh: "产多少卵" }}>
+
+环境局的数字是新加坡的大约参考，并不是每只雌蚊都产这么多：产多少卵，要看她吸了多少血、是怎样长大的。模型只在卵巢里画了几粒卵，在皿壁上画了十二粒，让人看清卵的形状和位置。
+
+</More>
+
+<More title={{ en: "Not every bite", zh: "不是每一口都会让人生病" }}>
+
+骨痛热症主要由受感染的雌性伊蚊传播，不会通过和病人的日常接触传染。许多人感染后只有轻微的症状，甚至没有症状，但也有人病得很重。病毒要多久才到达蚊子的唾液腺，和温度有关：世界卫生组织说，在 <Num s="S24">25–28 °C</Num> 时要 <Num s="S24">8–12 天</Num>。觉得不舒服，要告诉大人；医生会检查是什么问题。
+
+</More>
+
+<More title={{ en: "What the males do", zh: "雄蚊做什么" }}>
+
+雄蚊吸植物汁液、和雌蚊交配，不叮人。新加坡就利用了这一点：为了减少埃及伊蚊而释放的蚊子，全都是雄蚊。最后一章讲这是怎么做到的。
+
+</More>
+
+</Lang>

@@ -1,0 +1,103 @@
+---
+id: the-adult
+order: 1
+title: { en: "An Aedes mosquito", zh: "一只伊蚊" }
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  layers: [head, thorax-wings, belly, male]
+  labels: ["group:head", thorax, abdomen]
+  camera: { position: [-4.9, 2.0, 3.6], target: [-2.3, 0.45, -0.2], fov: 30 }
+  summary: { en: "An adult Aedes mosquito is a small black insect with white markings, a few millimetres long. Like other flies, it has only one pair of wings.", zh: "成年伊蚊是一种几毫米长、黑底白斑的小昆虫。和其他蝇类一样，它只有一对翅。" }
+  sim:
+    set: { day: 8 }
+  beats:
+    - caption: { en: "Head, thorax and abdomen: the adult has the same three body parts as every insect. This one is a female Aedes aegypti.", zh: "头、胸、腹：成虫和所有昆虫一样分三部分。这是一只雌性埃及伊蚊。" }
+    - camera: { position: [-3.8, 0.98, 1.3], target: [-2.95, 0.52, 0.0], fov: 30 }
+      layers: [head, thorax-wings, belly]
+      labels: [compound-eyes, antennae, palps, proboscis]
+      caption: { en: "Two large compound eyes cover most of the head. The long, thin mouthpart is the proboscis. The two short feelers beside it are the palps, with white tips.", zh: "两只大复眼几乎占满了头。细长的口器叫喙，旁边两根短短的、末端发白的是触须。" }
+    - camera: above
+      layers: [head, thorax-wings, belly]
+      labels: [thorax, wings]
+      caption: { en: "From above, white scales on the thorax make a lyre shape. Its close relative, Aedes albopictus, has one white stripe there instead.", zh: "从上面看，胸背的白鳞片排成竖琴的形状。它的近亲白纹伊蚊，这里只有一条白纹。" }
+    - pose: wings-spread
+      layers: [head, thorax-wings, belly]
+      camera: { position: [-2.3, 3.9, 1.9], target: [-2.35, 0.5, 0.1], fov: 30 }
+      labels: [wings, halteres]
+      caption: { en: "A mosquito has only one pair of wings. Behind them are two small knobs, the halteres, which help it keep its balance in flight.", zh: "蚊子只有一对翅。翅后面有两个小棒，叫平衡棒，帮助它在飞行时保持平衡。" }
+    - camera: { position: [-2.3, 0.66, 3.5], target: [-2.35, 0.36, 0.0], fov: 30 }
+      layers: [head, thorax-wings, belly]
+      labels: [fore-legs, mid-legs, hind-legs]
+      caption: { en: "All six long legs join the thorax. White bands near the feet give the Aedes mosquito its striped look.", zh: "六条细长的足都长在胸上。足上靠近末端的白环，让伊蚊看起来一节黑一节白。" }
+  index:
+    parts: [head-capsule, compound-eyes, antennae, palps, proboscis, thorax, wings, halteres, fore-legs, mid-legs, hind-legs, abdomen]
+---
+
+<Lang en>
+
+The main specimen is a female Aedes aegypti. Her body is black, with white markings on the thorax, the abdomen and the legs. From the front of her head to the tip of her abdomen she is drawn <Num s="S1">4.5 mm</Num> long, enlarged 200 times; the smaller male behind her is there to compare.
+
+Two large compound eyes cover most of the head. The long mouthpart is the <Term id="proboscis">proboscis</Term>. Beside it are two short feelers, the palps, with silvery white tips, and above them the two antennae, which pick up smells, the carbon dioxide in a person's breath, and warmth.
+
+From above, white scales on the thorax make the shape of a lyre, a harp-like instrument: two curved stripes at the sides and two thin lines down the middle. The lyre is the mark of Aedes aegypti. Its close relative Aedes albopictus, also found in Singapore, has a single white stripe there instead. <FlyTo preset="above">See it from above</FlyTo>
+
+A mosquito has only <Num s="S18">one pair</Num> of wings. Behind them are two small knobs on stalks, the <Term id="haltere">halteres</Term>, which help it keep its balance and steer in flight; they are what a second pair of wings has become. A grasshopper has two full pairs.
+
+All <Num s="S18">six</Num> legs are joined to the thorax. Each has a femur, a tibia and a foot of <Num s="S52">five</Num> small segments, and white bands near the feet give the mosquito its striped look. Behind the thorax the abdomen is long and slim, with white bands on its segments.
+
+<More title={{ en: "Two kinds of Aedes in Singapore", zh: "新加坡的两种伊蚊" }}>
+
+Aedes aegypti has the lyre on its thorax. Aedes albopictus has a single white stripe and is more often found in greener places. Both breed in containers of water, and both bite mostly in the daytime, though they can also bite at night in well-lit places. WHO says Aedes aegypti bites most in the early morning and before dusk, and can fly about <Num s="S20">400 metres</Num> looking for water to lay its eggs in, though it mostly stays close to where people live.
+
+</More>
+
+<More title={{ en: "Only two wings", zh: "只有两只翅" }}>
+
+Mosquitoes belong to the true flies, the group of insects with one pair of wings; their second pair has become the halteres. Compare the grasshopper's two pairs of wings in <TopicLink slug="grasshopper" ch="armour-and-senses">Armour, eyes, mouth, legs and wings</TopicLink>.
+
+</More>
+
+<More title={{ en: "How big is it?", zh: "它有多大" }}>
+
+The model's <Num s="S1">4.5 mm</Num> is a drawing choice, not a measurement of one mosquito. In a laboratory study of a Sri Lankan strain, females averaged <Num s="S44">3.77 mm</Num> and males <Num s="S44">3.02 mm</Num> from the head to the tip of the abdomen. Wings are measured on their own: in another study, males reared in water at <Num s="S16">28 °C</Num> had wings <Num s="S16">2.16 mm</Num> long on average. Sizes vary with food and temperature, so these are averages of those studies, not a size every mosquito has. The scale bar under the model gives real lengths.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+主标本是一只雌性埃及伊蚊。她的身体是黑色的，胸、腹和足上都有白斑。从头的前端到腹部末端，她画成 <Num s="S1">4.5 毫米</Num>长，放大了 200 倍；她后面那只小一点的雄蚊，是用来对照的。
+
+两只大复眼几乎占满了头。细长的口器叫<Term id="proboscis">喙</Term>。喙旁边是两根短短的触须，末端是银白色的；再上面是两根触角，能感受气味、人呼出的二氧化碳和温暖。
+
+从上面看，胸背上的白色鳞片排成竖琴的形状：两侧两道弯弯的条纹，中间两条细线。竖琴纹是埃及伊蚊的标志。它的近亲白纹伊蚊在新加坡也有，胸背上只有正中一条白纹。<FlyTo preset="above">从上面看看</FlyTo>
+
+蚊子只有 <Num s="S18">一对</Num>翅。翅后面是两根末端带小球的细柄，叫<Term id="haltere">平衡棒</Term>，帮助它在飞行时保持平衡、控制方向；它们是第二对翅变来的。蝗虫则有完整的两对翅。
+
+<Num s="S18">六</Num>条足都长在胸上。每条足有股节、胫节，以及由 <Num s="S52">五</Num>个小节组成的跗节；靠近末端的白环，让蚊子看起来一节黑一节白。胸的后面是细长的腹部，每节上也有白带。
+
+<More title={{ en: "Two kinds of Aedes in Singapore", zh: "新加坡的两种伊蚊" }}>
+
+埃及伊蚊的胸背有竖琴纹；白纹伊蚊只有一条白色纵纹，比较常在绿化多的地方出现。两种伊蚊都在容器的积水里滋生，都主要在白天叮人，不过在灯光明亮的地方，夜里也会叮人。世界卫生组织说，埃及伊蚊在清晨和傍晚前叮人最多；为了找积水产卵，它可以飞约 <Num s="S20">400 米</Num>，但一般待在人住的地方附近。
+
+</More>
+
+<More title={{ en: "Only two wings", zh: "只有两只翅" }}>
+
+蚊子属于双翅目，也就是只有一对翅的昆虫；它们的第二对翅变成了平衡棒。可以和蝗虫的两对翅比较一下：<TopicLink slug="grasshopper" ch="armour-and-senses">外面：盔甲、眼睛、口、足和翅</TopicLink>。
+
+</More>
+
+<More title={{ en: "How big is it?", zh: "它有多大" }}>
+
+模型里的 <Num s="S1">4.5 毫米</Num>是画法上的选择，不是量了某一只蚊子。一项实验室研究测了斯里兰卡的一个品系：从头到腹末，雌蚊平均 <Num s="S44">3.77 毫米</Num>，雄蚊平均 <Num s="S44">3.02 毫米</Num>。翅是另外量的：在另一项研究里，在 <Num s="S16">28 °C</Num> 的水里养大的雄蚊，翅平均长 <Num s="S16">2.16 毫米</Num>。大小会随食物和温度变化，所以这些只是那几项研究的平均值，不是每只蚊子都一样大。模型下面的比例尺标的是真实长度。
+
+</More>
+
+</Lang>
