@@ -422,11 +422,12 @@ export function StatsProbe({ bridge }: { bridge: StageBridge }) {
   return null;
 }
 
-export function ShadowUpdater({ runtime }: { runtime: StageRuntime }) {
+export function ShadowUpdater({ runtime, enabled = true, bridge }: { runtime: StageRuntime; enabled?: boolean; bridge: StageBridge }) {
   const gl = useThree((s) => s.gl) as unknown as WebGLRenderer;
   useFrame(() => {
     if (runtime.shadowDirty) {
-      gl.shadowMap.needsUpdate = true;
+      gl.shadowMap.needsUpdate = enabled;
+      if (enabled) bridge.stats.shadowMapUpdates++;
       runtime.shadowDirty = false;
     }
   });

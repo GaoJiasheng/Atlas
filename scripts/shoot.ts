@@ -33,6 +33,8 @@ import { parseArgs } from 'node:util';
 import { gzipSync } from 'node:zlib';
 import { chromium, type Browser, type Page } from '@playwright/test';
 import { hudLayoutIssues, LAYOUT_SIZES } from '../tests-e2e/hud-layout';
+import { capacity, fillBounds, fillShapeForPrimitive, levelForVolume } from '../src/engines/space-scene/lib/fill';
+import type { PartsFile } from '../src/engines/space-scene/schema';
 import { dragVerdict, type DragSample, type DragVerdict } from './lib/drag-settle';
 
 const ROOT = resolve(import.meta.dirname, '..');
@@ -407,6 +409,55 @@ function beatSceneOf(page: Page): Promise<BeatScene | null> {
   });
 }
 
+/** Every filled surface uses the model's current volume and agrees with its height reading. */
+async function fillIssues(s: Session): Promise<string[]> {
+  const path = join(ROOT, 'src/content/topics', s.topic, 'data/parts.json');
+  if (!existsSync(path)) return [];
+  const file = JSON.parse(readFileSync(path, 'utf8')) as PartsFile;
+  if (!file.sim?.bind.some((b) => 'part' in b && b.fill)) return [];
+  const ids = file.sim.bind.flatMap((b) => ('part' in b && b.fill ? (typeof b.part === 'string' ? [b.part] : b.part) : []));
+  const state = await s.page.evaluate((ids) => {
+    const e = window.__atlas!.engine as unknown as {
+      sim(): { values: Record<string, unknown>; outputs: Record<string, unknown> };
+      fill(id: string): { volume: number; level: number; shown: boolean } | null;
+    };
+    return { sim: e.sim(), fills: Object.fromEntries(ids.map((id) => [id, e.fill(id)])) };
+  }, ids);
+  const fills = state.fills;
+  const issues: string[] = [];
+  for (const b of file.sim.bind) {
+    if (!('part' in b) || !b.fill) continue;
+    const value = b.control ? state.sim.values[b.control] : state.sim.outputs[b.output!];
+    if (typeof value !== 'number') continue;
+    for (const id of typeof b.part === 'string' ? [b.part] : b.part) {
+      const shape = fillShapeForPrimitive(file.parts.find((p) => p.id === id)?.primitive);
+      const drawn = fills[id];
+      if (!shape || !drawn) { issues.push(`${id}: no fill geometry on stage`); continue; }
+      const below = (b.fill.below ?? 0) * b.fill.per;
+      const volume = Math.max(0, Math.min(capacity(shape) - below, value * b.fill.per));
+      const level = levelForVolume(shape, below + volume);
+      if (Math.abs(drawn.level - level) > 0.0005) issues.push(`${id}: liquid level ${drawn.level} differs from model ${level}`);
+      if (volume >= capacity(shape) * 0.001 && Math.abs(drawn.volume - volume) > Math.max(1e-10, volume * 0.001)) issues.push(`${id}: drawn volume ${drawn.volume} differs from model ${volume}`);
+      const cup = file.sim.matter?.cup;
+      if (cup) {
+        const pushed = state.sim.values[cup.place] === 'pushed';
+        const from = id === cup.liquids.inside ? 'cup:cup-rise' : (id === cup.liquids.basin && !pushed || id === cup.liquids.around && pushed) ? 'cup:basin-level' : null;
+        const output = file.sim.outputs.find((o) => (o.from ?? o.id) === from);
+        const reading = output ? state.sim.outputs[output.id] : undefined;
+        const unit = from === 'cup:cup-rise' ? 1000 : 100;
+        if (typeof reading === 'number' && Math.abs(drawn.level - fillBounds(shape).min - reading / unit) > 0.0005) issues.push(`${id}: liquid surface differs from cup reading ${reading}`);
+      }
+      const pour = file.sim.matter?.pour;
+      if (pour && pour.liquids[String(state.sim.values[pour.container])] === id) {
+        const output = file.sim.outputs.find((o) => (o.from ?? o.id) === 'pour:level');
+        const reading = output ? state.sim.outputs[output.id] : undefined;
+        if (typeof reading === 'number' && Math.abs(drawn.level - fillBounds(shape).min - reading / 100) > 0.0005) issues.push(`${id}: drawn level differs from height reading ${reading} cm`);
+      }
+    }
+  }
+  return issues;
+}
+
 /**
  * Every beat opened from its link (`?ch=<chapter>&b=<n>`) in a fresh document of its own, against the scene the presentation
  * showed: a field that differs, or a run not at its end (links jump to the end), is a beat failure.
@@ -436,6 +487,7 @@ async function runBeatLinks(s: Session, beats: { chapter: string; index: number 
       if (a !== e) diffs.push(`${key} ${a} (presentation ${e})`);
     }
     if (got && got.unfinished.length) diffs.push(`runs not at their end: ${got.unfinished.join(', ')}`);
+    for (const issue of await fillIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     if (diffs.length) report.beatFailures.push(`${name}: opened from ${link}: ${diffs.join('; ')}`);
     else same++;
     if (diffs.length) console.log(`  ${`${name} (link)`.padEnd(36)} FAIL  ${diffs.join('; ').slice(0, 300)}`);
@@ -476,6 +528,7 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
     );
     for (const [id, v] of Object.entries(bars))
       if (v.shown && Math.abs(v.potential + v.kinetic + v.lost - 100) > 0.5) report.beatFailures.push(`${name}: energy bars of ${id} add up to ${v.potential + v.kinetic + v.lost}`);
+    for (const issue of await fillIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     await s.page.screenshot({ path: join(out, `${name}${o.suffix}.png`) });
     console.log(`  ${name.padEnd(36)} ${landed ? 'OK' : 'FAIL'}${missing.length ? `  (no label: ${missing.join(', ')})` : ''}`);
     // A looping exercise beat (SpaceScene exercise mode) also gets a still at its start and end keys.

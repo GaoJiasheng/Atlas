@@ -1,0 +1,266 @@
+---
+{
+  "id": "before-you-start",
+  "order": 0,
+  "title": {
+    "en": "Sample background",
+    "zh": "示例背景"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "layers": [
+      "source",
+      "objects",
+      "sheets",
+      "screen",
+      "rays"
+    ],
+    "camera": {
+      "position": [
+        -1.15,
+        1.65,
+        1.8
+      ],
+      "target": [
+        0.02,
+        0.94,
+        0.02
+      ],
+      "fov": 32
+    },
+    "labels": [
+      "torch",
+      "card-circle",
+      "screen-board"
+    ],
+    "summary": {
+      "en": "Sample background: placeholder text for the light engine.",
+      "zh": "示例背景：光模型引擎的占位文字。"
+    },
+    "sim": {
+      "set": {}
+    },
+    "beats": [
+      {
+        "caption": {
+          "en": "Sample: the bench and its geometric shadow.",
+          "zh": "示例：实验台与几何投影。"
+        }
+      },
+      {
+        "caption": {
+          "en": "Sample: the dark box contains a ball.",
+          "zh": "示例：暗箱里放着球。"
+        },
+        "view": "xray",
+        "layers": [
+          "dark-box",
+          "rays"
+        ],
+        "camera": {
+          "position": [
+            0.05,
+            1.28,
+            0.55
+          ],
+          "target": [
+            0.4,
+            0.95,
+            -0.23
+          ],
+          "fov": 26
+        },
+        "labels": [
+          "box",
+          "box-torch",
+          "box-ball"
+        ],
+        "sim": {
+          "set": {
+            "box-torch": true,
+            "in-box": "ball"
+          }
+        },
+        "run": true
+      },
+      {
+        "caption": {
+          "en": "Sample: switching off the torch removes the reflected light.",
+          "zh": "示例：关掉手电筒就没有反射出来的光。"
+        },
+        "view": "xray",
+        "layers": [
+          "dark-box",
+          "rays"
+        ],
+        "camera": {
+          "position": [
+            0.05,
+            1.28,
+            0.55
+          ],
+          "target": [
+            0.4,
+            0.95,
+            -0.23
+          ],
+          "fov": 26
+        },
+        "labels": [
+          "box",
+          "box-ball"
+        ],
+        "sim": {
+          "set": {
+            "box-torch": false
+          }
+        },
+        "run": true
+      },
+      {
+        "caption": {
+          "en": "Sample: the mirror reflects the torch light.",
+          "zh": "示例：镜子反射手电筒的光。"
+        },
+        "view": "xray",
+        "layers": [
+          "dark-box",
+          "rays"
+        ],
+        "camera": {
+          "position": [
+            0.05,
+            1.28,
+            0.55
+          ],
+          "target": [
+            0.4,
+            0.95,
+            -0.23
+          ],
+          "fov": 26
+        },
+        "labels": [
+          "box",
+          "box-mirror"
+        ],
+        "sim": {
+          "set": {
+            "box-torch": true,
+            "in-box": "mirror"
+          }
+        },
+        "run": true
+      },
+      {
+        "caption": {
+          "en": "Sample: the aligned holes leave a bright dot.",
+          "zh": "示例：三个小孔排成直线，屏上留下亮点。"
+        },
+        "layers": [
+          "source",
+          "hole-cards",
+          "screen",
+          "rays"
+        ],
+        "camera": {
+          "position": [
+            -1.4,
+            1.27,
+            0.72
+          ],
+          "target": [
+            0.15,
+            1,
+            0.05
+          ],
+          "fov": 28
+        },
+        "labels": [
+          "hole-card-1",
+          "hole-card-2",
+          "hole-card-3"
+        ],
+        "sim": {
+          "set": {
+            "object": "none",
+            "material": "none",
+            "middle": "in-line"
+          }
+        }
+      },
+      {
+        "caption": {
+          "en": "Sample: moving the middle card blocks the dot.",
+          "zh": "示例：挪开中间卡片，亮点被挡住。"
+        },
+        "layers": [
+          "source",
+          "hole-cards",
+          "screen",
+          "rays"
+        ],
+        "camera": {
+          "position": [
+            -1.4,
+            1.27,
+            0.72
+          ],
+          "target": [
+            0.15,
+            1,
+            0.05
+          ],
+          "fov": 28
+        },
+        "labels": [
+          "hole-card-2",
+          "screen-board"
+        ],
+        "sim": {
+          "set": {
+            "object": "none",
+            "material": "none",
+            "middle": "moved"
+          }
+        }
+      }
+    ],
+    "index": {
+      "parts": [
+        "torch",
+        "track",
+        "card-circle",
+        "screen-board",
+        "box",
+        "box-torch",
+        "box-ball",
+        "box-mirror",
+        "hole-card-1",
+        "hole-card-2",
+        "hole-card-3"
+      ]
+    },
+    "note": {
+      "en": "Sample reading note: all readings are calculated. The dark box uses illustrative lighting; rays are drawn, not visible light.",
+      "zh": "示例阅读说明：所有读数都来自计算。暗箱使用示意照明；细线是画出来的，不是实际看得见的光。"
+    }
+  },
+  "kind": "background"
+}
+---
+
+<Lang en>
+
+Sample background: placeholder text for testing the light engine.
+
+</Lang>
+
+<Lang zh>
+
+示例背景：用来测试光模型引擎的占位文字。
+
+</Lang>

@@ -22,7 +22,15 @@ export interface SimGlow {
   level: number;
 }
 
+export interface SimFill {
+  volume: number;
+  below: number;
+  meniscus: number;
+  ease: number;
+}
+
 export interface SimFlowEffect {
+  visibility?: Record<string, boolean>;
   /** `false`: a binding stops the flow. */
   visible: boolean;
   /**
@@ -69,6 +77,39 @@ export interface SimStretch {
   settle?: SimSettle;
 }
 
+/** A point on a sphere, with optional facing toward its centre. */
+export interface SimPlace {
+  direction: Vec3;
+  centre: Vec3;
+  radius: number;
+  face?: 'centre';
+}
+
+/** Spherical interpolation, including coincident and opposite directions; writes into `out`. */
+export function placeDirection(from: Vec3, to: Vec3, t: number, out: Vec3): void {
+  const dot = Math.max(-1, Math.min(1, from[0] * to[0] + from[1] * to[1] + from[2] * to[2]));
+  if (dot > 0.999999) {
+    for (let i = 0; i < 3; i++) out[i] = from[i]! + (to[i]! - from[i]!) * t;
+  } else if (dot < -0.999999) {
+    // Pick a stable perpendicular so a half-circle still stays on the sphere.
+    const x = Math.abs(from[0]) < 0.9 ? 1 : 0;
+    const y = x ? 0 : 1;
+    const d = from[0] * x + from[1] * y;
+    const px = x - d * from[0], py = y - d * from[1], pz = -d * from[2];
+    const n = Math.hypot(px, py, pz);
+    const c = Math.cos(Math.PI * t), k = Math.sin(Math.PI * t) / n;
+    out[0] = from[0] * c + px * k;
+    out[1] = from[1] * c + py * k;
+    out[2] = from[2] * c + pz * k;
+  } else {
+    const angle = Math.acos(dot), den = Math.sin(angle);
+    const a = Math.sin((1 - t) * angle) / den, b = Math.sin(t * angle) / den;
+    for (let i = 0; i < 3; i++) out[i] = from[i]! * a + to[i]! * b;
+  }
+  const length = Math.hypot(...out);
+  for (let i = 0; i < 3; i++) out[i] = out[i]! / length;
+}
+
 export interface SimEffects {
   /** Parts a `visible` binding hides. */
   hidden: Set<string>;
@@ -79,8 +120,10 @@ export interface SimEffects {
   tint: Map<string, SimGlow>;
   /** Copies of a `repeat` part on show. */
   count: Map<string, number>;
+  fill: Map<string, SimFill>;
   /** Scene-unit offset per part. */
   offset: Map<string, Vec3>;
+  place: Map<string, SimPlace>;
   /** A damped bounce to the offset instead of the plain ease (`offset.settle`). */
   offsetSettle: Map<string, SimSettle>;
   /** A coil's stretch per part. */
@@ -145,7 +188,9 @@ export function simEffects(sim: SimData, values: SimValues, outputs: SimOutputs)
     glow: new Map(),
     tint: new Map(),
     count: new Map(),
+    fill: new Map(),
     offset: new Map(),
+    place: new Map(),
     offsetSettle: new Map(),
     stretch: new Map(),
     play: new Map(),
@@ -176,12 +221,17 @@ export function simEffects(sim: SimData, values: SimValues, outputs: SimOutputs)
           const x = Math.min(1, Math.max(0, num(v) / b.tint.full));
           out.tint.set(id, { color: b.tint.color, level: b.tint.curve === 'sqrt' ? Math.sqrt(x) : x });
         }
+        if (b.fill) out.fill.set(id, { volume: Math.max(0, num(v) * b.fill.per), below: b.fill.below * b.fill.per, meniscus: b.fill.meniscus, ease: b.fill.ease });
         if (b.count) out.count.set(id, Math.max(0, Math.round(b.count === true ? num(v) : (num(v) - b.count.minus) / b.count.per)));
         if (b.offset) {
           const d = (num(v) - b.offset.origin) * b.offset.per;
           const a = normalize3(b.offset.axis);
           add(out.offset, id, [a[0] * d, a[1] * d, a[2] * d]);
           if (b.offset.settle) out.offsetSettle.set(id, b.offset.settle);
+        }
+        if (b.place && v && typeof v === 'object' && !isTimeline(v)) {
+          const direction = normalize3([v.x ?? 0, v.y ?? 0, v.z ?? 0]);
+          out.place.set(id, { direction, centre: b.place.centre, radius: b.place.radius, ...(b.place.face ? { face: b.place.face } : {}) });
         }
         if (b.stretch) {
           const st = b.stretch;
@@ -224,7 +274,12 @@ export function simEffects(sim: SimData, values: SimValues, outputs: SimOutputs)
     } else if ('flow' in b) {
       const f: SimFlowEffect = out.flows.get(b.flow) ?? { visible: true, paths: null, mode: 'speed', color: null, state: null };
       if (b.state && typeof v === 'string') f.state = v;
-      if (b.visible !== undefined && !holds(b.visible, v, first)) f.visible = false;
+      if (b.visible !== undefined) {
+        if (b.paths) {
+          f.visibility ??= {};
+          for (const path of b.paths) f.visibility[path] = (f.visibility[path] ?? true) && holds(b.visible, v, first);
+        } else if (!holds(b.visible, v, first)) f.visible = false;
+      }
       if (b.intensity && v !== undefined && typeof v === 'object' && !isTimeline(v)) {
         const { full, mode } = b.intensity;
         const cap = mode === 'density' ? 1 : 2;

@@ -60,9 +60,28 @@ export interface StageStats {
   buffer: [number, number];
   /** `performance.now()` of the last rendered frame (idle detection). */
   lastFrame: number;
+  /** Requested main-light shadow-map renders (zero in contact/none mode). */
+  shadowMapUpdates: number;
+}
+
+export interface ShadowOnScreen {
+  casters: Record<string, { min: [number, number]; max: [number, number] }>;
+  spot?: { radius: number };
+  trail: [number, number][];
+  rays: number;
+}
+
+export interface FillReading {
+  /** Drawn volume (scene units cubed) and local surface y. */
+  volume: number;
+  level: number;
+  shown: boolean;
 }
 
 export interface StageBridge {
+  fills: Map<string, FillReading>;
+  fillBenchmarks: Map<string, () => number>;
+  flowPaths: Map<string, Record<string, { visible: boolean }>>;
   /** Stage size in CSS pixels. */
   width: number;
   height: number;
@@ -97,6 +116,8 @@ export interface StageBridge {
   playback: ReadonlyMap<string, { readonly t: number; readonly playing: boolean; readonly timeline: { readonly duration: number; readonly slow: number } }>;
   /** Energy bars on the stage, by overlay index (QA `energyBars()`, their HUD labels). */
   energyBars: Map<number, EnergyBarsOnScreen & { timeline: string }>;
+  /** Projected mesh bounds and construction geometry, receiver centimetres (QA). */
+  shadows: Map<number, ShadowOnScreen>;
 }
 
 /** Resolves once the stage has finished the camera move of transition `id` (or after `timeoutMs`, e.g. before the stage has loaded). */
@@ -125,9 +146,12 @@ export function createBridge(): StageBridge {
     focal: 0,
     modelRadius: 1,
     anchors: new Map(),
+    fills: new Map(),
+    fillBenchmarks: new Map(),
+    flowPaths: new Map(),
     sites: new Map(),
     labelled: null,
-    stats: { calls: 0, triangles: 0, geometries: 0, textures: 0, fps: undefined, gpu: undefined, buffer: [0, 0], lastFrame: 0 },
+    stats: { calls: 0, triangles: 0, geometries: 0, textures: 0, fps: undefined, gpu: undefined, buffer: [0, 0], lastFrame: 0, shadowMapUpdates: 0 },
     listeners: new Set(),
     invalidate: () => {},
     liveCamera: () => null,
@@ -137,5 +161,6 @@ export function createBridge(): StageBridge {
     exerciseFrame: null,
     playback: new Map(),
     energyBars: new Map(),
+    shadows: new Map(),
   };
 }

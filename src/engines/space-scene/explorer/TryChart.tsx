@@ -14,7 +14,7 @@ import { chartModel, chartSummary } from '../lib/sim/chart';
 import type { TableRow } from '../lib/sim/trial';
 import { outputDecimals } from '../lib/sim';
 import { formatReading } from '../lib/telemetry';
-import { valueText } from '../lib/sim/text';
+import { outputText, timeText, valueText } from '../lib/sim/text';
 
 const W = 320;
 const H = 172;
@@ -42,15 +42,16 @@ export function TryChart({ rows, vary, ys, current }: { rows: readonly TableRow[
   const yTicks: number[] = [];
   for (let v = 0; v <= m.yMax + 1e-9; v += m.yStep) yTicks.push(Number(v.toPrecision(12)));
   const yDec = Math.max(0, ...yTicks.map((v) => (String(v).split('.')[1] ?? '').length));
-  const unit = ys[0]!.unit;
+  const unit = ys[0]!.format === 'time' ? undefined : ys[0]!.unit;
   const yTitle = `${ys.map((o) => tx(o.label, locale)).join(' · ')}${unit ? ` (${unit})` : ''}`;
-  const xTitle = `${tx(vary.label, locale)}${vary.kind === 'step' && vary.unit ? ` (${vary.unit})` : ''}`;
+  const xTitle = `${tx(vary.label, locale)}${vary.kind === 'step' && vary.unit && vary.format !== 'time' ? ` (${vary.unit})` : ''}`;
   const label = chartSummary(m, {
     locale,
     x: tx(vary.label, locale),
     xText: (v) => valueText(vary, v, locale),
+    ...(vary.kind === 'step' && vary.format === 'time' ? { xDeltaText: (v: number) => `${v} ${locale === 'zh' ? '小时' : 'h'}` } : {}),
     y: (o) => tx(o.label, locale),
-    yText: (o, v) => `${formatReading(v, outputDecimals(o))}${o.unit ? ` ${o.unit}` : ''}`,
+    yText: (o, v) => `${outputText(o, v, locale)}${o.unit && o.format !== 'time' ? ` ${o.unit}` : ''}`,
   });
   const slot = pw / m.ticks.length;
   const barW = (slot * 0.56) / ys.length;
@@ -83,12 +84,14 @@ export function TryChart({ rows, vary, ys, current }: { rows: readonly TableRow[
         <path className="space-chart__axis" d={`M${PAD.l} ${PAD.t - 4}V${PAD.t + ph}`} />
         {m.ticks.map((v, i) => {
           const x = m.kind === 'line' ? sx(v as number) : sx(i);
-          const text = m.kind === 'line' ? String(v) : valueText(vary, v, locale);
+          const time = vary.kind === 'step' && vary.format === 'time';
+          const text = time ? timeText(Number(v), locale, true) : m.kind === 'line' ? String(v) : valueText(vary, v, locale);
+          const show = !time || m.ticks.length <= 6 || i % 2 === 0;
           return (
             <g key={String(v)}>
               <path className="space-chart__axis" d={`M${f1(x)} ${PAD.t + ph}v4`} />
               <text className="space-chart__tick" x={f1(x)} y={PAD.t + ph + 14} textAnchor="middle">
-                {text}
+                {show ? text : ''}
               </text>
             </g>
           );

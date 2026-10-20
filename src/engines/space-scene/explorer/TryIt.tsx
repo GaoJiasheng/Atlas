@@ -26,7 +26,7 @@ import { numberOf, type SimOutputValue } from '../lib/sim';
 import { evaluateSimOnStage } from '../lib/sim/carrier';
 import { resolveSimValues, stepValue } from '../lib/sim/controls';
 import { outcomeOf, recordRow } from '../lib/sim/trial';
-import { outputText, valueText } from '../lib/sim/text';
+import { outputText, outputWords, valueText, valueWords } from '../lib/sim/text';
 import { cardTimelines } from '../lib/sim/replay';
 import { isTimeline } from '../lib/sim/timeline';
 import { setSim, useSimStore, useSimView } from '../hud/sim';
@@ -61,7 +61,7 @@ function Control({ c, value, onSet, primary }: { c: SimControl; value: SimValue 
           <button type="button" className="space-try__btn" aria-label={`${label}: ${t('space.try.prev')}`} disabled={i <= 0} onClick={() => onSet(stepValue(c, value!, -1))}>
             <Icon name="chevron-left" size={16} />
           </button>
-          <output className="space-try__value" aria-live="polite">
+          <output className="space-try__value" aria-live="polite" aria-label={valueWords(c, value, locale)}>
             {valueText(c, value, locale)}
           </output>
           <button
@@ -189,7 +189,7 @@ function Table({ file, sim, card, ui, chapter }: { file: PartsFile; sim: SimData
     ui.setState({ simTables: { ...tables, [chapter]: recordRow(tables[chapter] ?? [], { vary: view.values[card.vary]!, values }) } });
   };
   const clear = () => ui.setState({ simTables: { ...ui.getState().simTables, [chapter]: [] } });
-  const head = (o: SimOutput) => `${tx(o.label, locale)}${o.unit ? ` (${o.unit})` : ''}`;
+  const head = (o: SimOutput) => `${tx(o.label, locale)}${o.unit && o.format !== 'time' ? ` (${o.unit})` : ''}`;
   return (
     <div className="space-try__record">
       <span className="space-try__actions">
@@ -225,7 +225,7 @@ function Table({ file, sim, card, ui, chapter }: { file: PartsFile; sim: SimData
               <tr key={String(r.vary)}>
                 <th scope="row">{valueText(vary, r.vary, locale)}</th>
                 {outs.map((o) => (
-                  <td key={o.id}>{outputText(o, r.values[o.id], locale)}</td>
+                  <td key={o.id} aria-label={outputWords(o, r.values[o.id], locale)}>{outputText(o, r.values[o.id], locale)}</td>
                 ))}
                 {judge && <td>{t(numberOf(r.values[judge.output]) > judge.gt ? 'space.try.yes' : 'space.try.no')}</td>}
               </tr>
@@ -313,8 +313,8 @@ export function TryIt({ file, ui }: { file: PartsFile; ui: SpaceUiStore }) {
           <div key={o.id} className="space-try__readout" data-sim-output={o.id} data-state={o.kind === 'state' ? String(outputs[o.id]) : undefined}>
             <dt>{tx(o.label, locale)}</dt>
             <dd>
-              <b>{outputText(o, outputs[o.id], locale)}</b>
-              {o.kind === 'number' && o.unit && <small> {o.unit}</small>}
+              <b aria-label={outputWords(o, outputs[o.id], locale)}>{outputText(o, outputs[o.id], locale)}</b>
+              {o.kind === 'number' && o.unit && o.format !== 'time' && <small> {o.unit}</small>}
             </dd>
           </div>
         ))}

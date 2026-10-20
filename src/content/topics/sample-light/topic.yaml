@@ -1,0 +1,13 @@
+id: sample-light
+title: { en: "Sample: Light", zh: "示例：光与影" }
+subtitle: { en: "A placeholder fixture for the light engine", zh: "光模型引擎的占位夹具" }
+subject: science
+levels: [P4]
+moe: []
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: draft
+note: { en: "Model fixture · drawn rays · straight-line shadows · not measured observations", zh: "模型夹具 · 光线是画出来的 · 影子按直线几何算出 · 不是实测数据" }

@@ -94,6 +94,8 @@ export interface SummaryWords {
   /** The varied control's name, and a value as words (`300 g`, `Glass`). */
   x: string;
   xText(v: SimValue): string;
+  /** A time interval uses duration units, rather than a clock reading. */
+  xDeltaText?(v: number): string;
   /** An output's name, and a reading with its unit (`6.0 cm`). */
   y(o: SimOutput): string;
   yText(o: SimOutput, v: number): string;
@@ -129,7 +131,7 @@ export function chartSummary(m: ChartModel, w: SummaryWords): string {
       const dx = Math.min(...st.slice(0, k + 1).map((x) => x.dx));
       const dy = Math.abs(rate * dx);
       const upTo = pts[k + 1]!;
-      const per = w.xText(dx).replace(/^-/, '');
+      const per = (w.xDeltaText?.(dx) ?? w.xText(dx)).replace(/^-/, '');
       const by = w.yText(s.output, dy);
       const rises = rate > 0;
       if (k + 1 === st.length)

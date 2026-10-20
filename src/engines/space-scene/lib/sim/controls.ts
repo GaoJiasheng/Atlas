@@ -50,9 +50,16 @@ export function resolveSimValues(sim: Pick<SimData, 'controls'>, set: Readonly<R
     const c = controls.get(id);
     return c !== undefined && isControlValue(c, v);
   }) as [string, SimValue][];
-  for (const [id, v] of valid) if (controls.get(id)!.kind === 'choice') out[id] = v;
+  // Defaults first; an explicitly selected choice then owns its free target
+  // options (e.g. selecting a sheet clears the opaque object in the holder).
   for (const c of choicesWithSets(sim)) Object.assign(out, c.sets?.[String(out[c.id])] ?? {});
-  for (const [id, v] of valid) out[id] = v;
+  for (const [id, v] of valid) {
+    const c = controls.get(id)!;
+    if (c.kind !== 'choice') continue;
+    out[id] = v;
+    Object.assign(out, c.sets?.[String(v)] ?? {});
+  }
+  for (const [id, v] of valid) if (controls.get(id)!.kind !== 'choice') out[id] = v;
   for (const c of choicesWithSets(sim)) out[c.id] = matchingOption(c, out);
   return out;
 }

@@ -173,11 +173,14 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       });
       st.patch({ run: false, view: st.view === 'exploded' ? 'assembled' : st.view });
       const aspect = bridge.width > 0 && bridge.height > 0 ? bridge.width / bridge.height : 1.5;
-      const cam: OrbitCamera = file.views.reference?.camera ?? (bounds ? referenceCamera(bounds, plane, aspect) : DEFAULT_CAMERA);
+      const referenceBounds = file.views.reference?.fit === 'layers'
+        ? modelBounds(file.parts.filter((p) => !p.context && (p.group === undefined || st.layers.includes(p.group)) && !st.hidden.includes(p.id))) ?? bounds
+        : bounds;
+      const cam: OrbitCamera = file.views.reference?.camera ?? (referenceBounds ? referenceCamera(referenceBounds, plane, aspect) : DEFAULT_CAMERA);
       st.applyCameraPreset(cam, { instant });
       hud.setState({ presetId: REFERENCE_PRESET, cameraFree: false });
     },
-    [ui, store, hud, bridge, file.views.reference, bounds, plane],
+    [ui, store, hud, bridge, file.parts, file.views.reference, bounds, plane],
   );
 
   const exitReference = useCallback(
@@ -517,11 +520,12 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       stats: () => {
         const st = bridge.stats;
         const live = bridge.liveCamera();
-        const out: Partial<SceneStats> & { geometries: number; textures: number; camera?: OrbitCamera; footSlip?: number } = {
+        const out: Partial<SceneStats> & { geometries: number; textures: number; shadowMapUpdates: number; camera?: OrbitCamera; footSlip?: number } = {
           calls: st.calls,
           triangles: st.triangles,
           geometries: st.geometries,
           textures: st.textures,
+          shadowMapUpdates: st.shadowMapUpdates,
           fps: st.fps === undefined ? undefined : Math.round(st.fps * 10) / 10,
           gpu: st.gpu,
           // The live camera (tests: where the stage really is, not the stored target).
@@ -577,6 +581,16 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
             timeline,
             replays: ui.getState().simReplay.n,
           };
+        },
+        shadows: () => Object.fromEntries(bridge.shadows),
+        flow: (id: string) => {
+          const paths = bridge.flowPaths.get(id);
+          return paths ? { paths: Object.fromEntries(Object.entries(paths).map(([key, value]) => [key, { ...value }])) } : null;
+        },
+        fillBenchmark: (id: string) => bridge.fillBenchmarks.get(id)?.() ?? null,
+        fill: (id: string) => {
+          const f = bridge.fills.get(id);
+          return f ? { ...f } : null;
         },
         // Energy bars on the stage (docs/31 E-EN6): per timeline output, the three bars now (potential + kinetic + lost = 100) and whether they show.
         energyBars: () =>

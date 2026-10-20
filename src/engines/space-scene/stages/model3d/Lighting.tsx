@@ -80,12 +80,14 @@ export function Lighting({
   center,
   radius,
   runtime,
+  shadows = 'auto',
 }: {
   look: StageLook;
   /** Model centre and bounding radius (key light and shadow camera are fitted to them). */
   center: Vec3;
   radius: number;
   runtime: StageRuntime;
+  shadows?: 'auto' | 'contact' | 'none';
 }) {
   const rig = RIGS[look.theme === 'cinema' ? 'cinema' : 'paper'];
   const gl = useThree((s) => s.gl) as unknown as WebGLRenderer;
@@ -123,7 +125,7 @@ export function Lighting({
         color={rig.key[0]}
         intensity={rig.key[1]}
         position={at(KEY_DIR, far)}
-        castShadow
+        castShadow={shadows === 'auto'}
         shadow-mapSize={[1024, 1024]}
         shadow-radius={7}
         shadow-blurSamples={16}

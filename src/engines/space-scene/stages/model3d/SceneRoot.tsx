@@ -502,9 +502,9 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
   }, [sim, look]);
   const simMoves = useMemo(() => {
     const out = new Map<string, SimMove>();
-    for (const id of new Set([...(sim?.offset.keys() ?? []), ...(sim?.rotate.keys() ?? [])])) {
+    for (const id of new Set([...(sim?.offset.keys() ?? []), ...(sim?.rotate.keys() ?? []), ...(sim?.place.keys() ?? [])])) {
       const r = sim?.rotate.get(id);
-      out.set(id, { offset: sim?.offset.get(id) ?? [0, 0, 0], offsetSettle: sim?.offsetSettle.get(id), axis: r?.axis ?? [0, 1, 0], deg: r?.deg ?? 0, settle: r?.settle, pivot: r?.pivot });
+      out.set(id, { offset: sim?.offset.get(id) ?? [0, 0, 0], offsetSettle: sim?.offsetSettle.get(id), axis: r?.axis ?? [0, 1, 0], deg: r?.deg ?? 0, settle: r?.settle, pivot: r?.pivot, place: sim?.place.get(id) });
     }
     return out;
   }, [sim]);
@@ -573,8 +573,8 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
     <RuntimeContext.Provider value={runtime}>
       <RunClock run={s.run} alwaysOn={alwaysOn} />
       <ExplodeClock target={explodeTarget} snapKey={snap.current.key} />
-      <Lighting look={look} center={bounds.center} radius={bounds.modelRadius} runtime={runtime} />
-      <GroundShadow floor={bounds.floor} radius={bounds.radius} look={look} runtime={runtime} />
+      <Lighting look={look} center={bounds.center} radius={bounds.modelRadius} runtime={runtime} shadows={data.views.shadows} />
+      <GroundShadow floor={bounds.floor} radius={bounds.radius} look={look} runtime={runtime} shadows={data.views.shadows} />
       {needsMotion && (
         <MotionDriver
           data={data}
@@ -630,6 +630,9 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
             simMove={simMoves.get(part.id) ?? null}
             play={sim?.play.get(part.id) ?? null}
             stretch={sim?.stretch.get(part.id) ?? null}
+            fill={sim?.fill.get(part.id) ?? null}
+            fillBridge={bridge}
+            fillStill={referenceOn}
             simTint={simTints.get(part.id) ?? null}
             filings={filingSets.get(part.id) ?? null}
             animSim={sim?.animations}
@@ -669,7 +672,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
       )}
       </group>
       {/* Flow paths do not follow the parts apart: no particles while exploded (docs/12 §7.5, G16). */}
-      <Flows flows={data.flows} layers={s.view === 'exploded' ? NO_LAYERS : s.layers} look={look} clipping={clipping} effects={sim?.flows} fieldLines={linesOf} />
+      <Flows bridge={bridge} flows={data.flows} layers={s.view === 'exploded' ? NO_LAYERS : s.layers} look={look} clipping={clipping} effects={sim?.flows} fieldLines={linesOf} />
       <CameraRig
         store={store}
         ui={ui}
@@ -691,7 +694,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
       {data.sites && <SitesProbe bridge={bridge} handles={handles} sites={data.sites} active={sitesOn} clipping={clipping} />}
       <LabelProbe bridge={bridge} handles={handles} groups={groupMembers} clipping={clipping} xray={s.view === 'xray'} runtime={runtime} />
       <StatsProbe bridge={bridge} />
-      <ShadowUpdater runtime={runtime} />
+      <ShadowUpdater runtime={runtime} enabled={!data.views.shadows || data.views.shadows === 'auto'} bridge={bridge} />
       <ResolutionGovernor bridge={bridge} base={stageDpr} />
     </RuntimeContext.Provider>
   );

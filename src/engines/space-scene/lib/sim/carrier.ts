@@ -13,6 +13,7 @@
  * the field is solved once per change (lib/sim/field.ts caches it per
  * place). Frames: lib/sim/frame.ts.
  */
+import type { Primitive } from '../../schema';
 import type { SimData, SimValues } from '../../sim-schema';
 import { restTransform, toTransform, type TransformInput } from '../pose';
 import { simEffects } from './bind';
@@ -23,7 +24,7 @@ const NO_FRAMES: MagnetFrames = new Map();
 
 /** What the frames are worked out from: the parts' rest centres and the named poses (parts.json). */
 export interface CarrierSource {
-  parts: readonly { id: string; primitive?: { at: readonly number[] } | undefined }[];
+  parts: readonly { id: string; primitive?: Primitive | { at: readonly number[] } | undefined }[];
   poses?: Readonly<Record<string, { parts: Readonly<Record<string, TransformInput>> }>> | undefined;
 }
 
@@ -61,5 +62,5 @@ export function evaluateSimOnStage(
   observe: readonly string[] = [],
 ): { outputs: SimOutputs; frames: MagnetFrames } {
   const frames = sim.magnet ? magnetFrames(sim, source, values, pose) : NO_FRAMES;
-  return { outputs: evaluateSim(sim, values, observe, frames), frames };
+  return { outputs: evaluateSim(sim, values, observe, frames, sim.kind === 'matter' ? source.parts.map((p) => ({ id: p.id, ...(p.primitive && 'kind' in p.primitive ? { primitive: p.primitive } : {}) })) : []), frames };
 }

@@ -62,22 +62,26 @@ import { explodeOffset, stagedAmount } from '../../lib/explode';
 import { contractScale, STRIPE_OPACITY } from '../../lib/rig';
 import { damp, DEG2RAD, easeInOutCubic, normalize3, type Vec3 } from '../../lib/math';
 import { isRest, lerpTransform, restTransform, sampleSequence, sequenceLength, smoothstep01, type PartTransform } from '../../lib/pose';
-import { keepAnimating, MAX_DT, useRuntime } from './runtime';
+import { keepAnimating, MAX_DT, prefersReducedMotion, useRuntime } from './runtime';
 import { createPartMaterial, setPartClipping, stylePartMaterial, styleFibreGrain, type PartStyle } from './materials';
 import type { FibreMeasure } from './GltfSource';
 import { skinnedRaycast } from './skinPick';
 import type { ShapePiece } from './geometry';
 import type { SimSettle } from '../../sim-schema';
 import { nearestTurn, SETTLE_EPS_LENGTH, stepSwing } from '../../lib/sim/settle';
-import { slotTint, type SimPlay, type SimStretch } from '../../lib/sim/bind';
+import { placeDirection, slotTint, type SimFill, type SimPlace, type SimPlay, type SimStretch } from '../../lib/sim/bind';
 import { channelValue } from '../../lib/sim/timeline';
 import { STRETCH_ATTRIBUTE, stretchPositions } from '../../lib/stretch';
 import { partPrimitives } from '../../lib/parts';
 import { apply3, eulerDeg } from '../../lib/xform';
 import type { BufferAttribute } from 'three';
+import type { StageBridge } from '../../bridge';
+import { capacity, fillShapeForPrimitive, easeFillVolume } from '../../lib/fill';
+import { createFillGeometry, updateFillGeometry } from './fillGeometry';
 
 /** A try-it offset (scene units, eased or bouncing: `offsetSettle`) and turn about a unit axis through the part centre or `pivot` (eased or swinging: `settle`). */
 export interface SimMove {
+  place?: SimPlace | undefined;
   offset: Vec3;
   offsetSettle?: SimSettle | undefined;
   axis: Vec3;
@@ -169,6 +173,9 @@ export interface PartNodeProps {
   play?: readonly SimPlay[] | null;
   /** Try-it stretch of the part's coil. */
   stretch?: SimStretch | null;
+  fill?: SimFill | null;
+  fillBridge?: StageBridge;
+  fillStill?: boolean;
   /** Try-it tint: colour (sRGB hex) and level 0–1. */
   simTint?: { color: string; level: number } | null;
   /** Try-it: a filings card's needles for the field state on show (part frame; null: as built). */
@@ -179,6 +186,8 @@ export interface PartNodeProps {
   onHover(id: string | null): void;
 }
 
+const placeQuaternion = new Quaternion();
+const placeFacing = new Vector3();
 const noRaycast = () => {};
 const LONG_PRESS_MS = 400;
 /** X-RAY fade rate: ~0.3 s to settle (master-spec H). */
@@ -305,7 +314,38 @@ function Piece({
 }
 
 export function PartNode(props: PartNodeProps) {
-  const { part, shape, display, clipping, styles } = props;
+  const { part, display, clipping, styles } = props;
+  // A filled liquid (docs/36 §4.3): its cavity primitive, redrawn in place up to the bound volume.
+  const filled = !!props.fill;
+  const fillShape = useMemo(() => (filled && part.primitive ? fillShapeForPrimitive(part.primitive) : null), [part, filled]);
+  const meniscus = props.fill?.meniscus ?? 0;
+  const fillGeometry = useMemo(() => (fillShape ? createFillGeometry(fillShape, meniscus) : null), [fillShape, meniscus]);
+  const shape = useMemo(() => fillGeometry ? { ...props.shape, pieces: [{ ...props.shape.pieces[0]!, geometry: fillGeometry, matrices: null }] } : props.shape, [props.shape, fillGeometry]);
+  const fillMotion = useRef({ from: 0, to: NaN, now: 0, start: 0, shown: false, level: 0, volume: 0, drawn: NaN });
+  useEffect(() => {
+    // New buffers start empty: draw the current volume into them on the next frame.
+    fillMotion.current.drawn = NaN;
+    return () => fillGeometry?.dispose();
+  }, [fillGeometry]);
+  useEffect(() => () => { props.fillBridge?.fills.delete(part.id); }, [props.fillBridge, part.id]);
+  useEffect(() => {
+    if (!fillShape || !fillGeometry || !props.fillBridge || !props.fill) return;
+    const binding = props.fill;
+    const bench = () => {
+      const volume = Math.max(0, capacity(fillShape) - binding.below);
+      const run = () => {
+        const start = performance.now();
+        for (let i = 0; i < 100; i++) updateFillGeometry(fillGeometry, fillShape, volume * i / 100, binding.below, binding.meniscus);
+        return performance.now() - start;
+      };
+      run();
+      const samples = Array.from({ length: 5 }, run).sort((a, b) => a - b);
+      updateFillGeometry(fillGeometry, fillShape, fillMotion.current.now, binding.below, binding.meniscus);
+      return samples[2]!;
+    };
+    props.fillBridge.fillBenchmarks.set(part.id, bench);
+    return () => { props.fillBridge?.fillBenchmarks.delete(part.id); };
+  }, [fillShape, fillGeometry, props.fillBridge, props.fill, part.id]);
   const style = styles[0]!;
   const runtime = useRuntime();
   const posRef = useRef<Group>(null);
@@ -344,6 +384,10 @@ export function PartNode(props: PartNodeProps) {
     /** A bouncing offset's speed per axis (scene units per second). */
     moveV: [0, 0, 0] as Vec3,
     turn: 0,
+    placeFrom: [0, 1, 0] as Vec3,
+    placeNow: [0, 1, 0] as Vec3,
+    placeTarget: null as SimPlace | null,
+    placeStart: 0,
     /** A coil's stretch now (scene units) and its speed (a bounce); the stretch last written into the geometry. */
     stretch: 0,
     stretchV: 0,
@@ -412,9 +456,13 @@ export function PartNode(props: PartNodeProps) {
 
   useEffect(() => {
     pms.forEach((pm, i) => {
-      // Membranes are double-sided and never cut-filled.
+      // Filled liquids retain their own material on cut faces.
       const sheet = (styles[i] ?? style).look.doubleSided;
-      setPartClipping(pm, clipping, shape.closed && !sheet, shape.twoSided || sheet);
+      setPartClipping(pm, clipping, shape.closed && (!sheet || !!props.fill), shape.twoSided || sheet);
+      if (props.fill) {
+        pm.uniforms.uCutColor.value.set((styles[i] ?? style).look.color);
+        pm.uniforms.uHatchColor.value.set((styles[i] ?? style).look.color);
+      }
     });
     if (lineMat) {
       lineMat.clippingPlanes = clipping;
@@ -528,6 +576,29 @@ export function PartNode(props: PartNodeProps) {
     const snap = m.snap;
     m.snap = false;
     let moving = false;
+    const fill = props.fill;
+    const fm = fillMotion.current;
+    if (fill && fillShape && fillGeometry) {
+      const clock = state.clock.elapsedTime;
+      if (fm.to !== fill.volume) {
+        fm.from = fm.now;
+        fm.to = fill.volume;
+        fm.start = clock;
+      }
+      if (snap || props.fillStill || prefersReducedMotion()) {
+        fm.from = fm.now = fm.to;
+        fm.start = clock;
+      } else fm.now = easeFillVolume(fm.from, fm.to, clock - fm.start, fill.ease);
+      if (fm.now !== fm.to) moving = true;
+      if (fm.drawn !== fm.now || snap) {
+        const drawn = updateFillGeometry(fillGeometry, fillShape, fm.now, fill.below, fill.meniscus);
+        fm.drawn = fm.now;
+        fm.level = drawn.level;
+        fm.volume = drawn.volume;
+        fm.shown = drawn.shown;
+        if (props.castShadow) runtime.shadowDirty = true;
+      }
+    }
 
     // Put aside: linear clock, eased slide, fade over the second half.
     const asideTarget = display.hidden ? 1 : 0;
@@ -554,7 +625,13 @@ export function PartNode(props: PartNodeProps) {
     const prevFade = m.fade;
     m.fade = m.base * (1 - smooth(0.45, 1, m.aside));
     const targetFade = display.hidden ? 0 : targetBase;
-    const shown = m.fade > 0.004;
+    const shown = m.fade > 0.004 && (!fill || fm.shown);
+    if (fill && props.fillBridge) {
+      const reading = props.fillBridge.fills.get(part.id);
+      const volume = fm.shown ? fm.volume : 0;
+      if (reading) { reading.volume = volume; reading.level = fm.level; reading.shown = shown && display.visible; }
+      else props.fillBridge.fills.set(part.id, { volume, level: fm.level, shown: shown && display.visible });
+    }
     pms.forEach((pm, i) => {
       const mat = pm.material;
       mat.opacity = m.fade * (styles[i] ?? style).look.opacity;
@@ -692,6 +769,30 @@ export function PartNode(props: PartNodeProps) {
         aboutPivot(pr.matrix, tmpTurn.makeRotationAxis(tmpV.set(sm.axis[0], sm.axis[1], sm.axis[2]), m.turn * DEG2RAD), c);
       }
       pr.matrix.multiply(tmpPose);
+      const place = sm?.place;
+      if (place) {
+        if (m.placeTarget !== place) {
+          m.placeFrom[0] = m.placeNow[0];
+          m.placeFrom[1] = m.placeNow[1];
+          m.placeFrom[2] = m.placeNow[2];
+          m.placeStart = performance.now();
+          m.placeTarget = place;
+        }
+        const t = snap ? 1 : Math.min(1, (performance.now() - m.placeStart) / 500);
+        placeDirection(m.placeFrom, place.direction, smoothstep01(t), m.placeNow);
+        if (t < 1) moving = true;
+        // Absolute placement: the geometry is centred on shape.position inside this group.
+        tmpTurn.identity();
+        if (place.face === 'centre') {
+          placeQuaternion.setFromUnitVectors(tmpV.set(0, 1, 0), placeFacing.set(-m.placeNow[0], -m.placeNow[1], -m.placeNow[2]));
+          tmpTurn.makeRotationFromQuaternion(placeQuaternion);
+        }
+        pr.matrix.copy(tmpTurn).setPosition(
+          place.centre[0] + place.radius * m.placeNow[0] - shape.position[0],
+          place.centre[1] + place.radius * m.placeNow[1] - shape.position[1],
+          place.centre[2] + place.radius * m.placeNow[2] - shape.position[2],
+        );
+      }
       // Played timeline channels: moves along their axes, then turns about the pivot or where the part's centre now is.
       const play = props.play;
       if (play && play.length > 0) {

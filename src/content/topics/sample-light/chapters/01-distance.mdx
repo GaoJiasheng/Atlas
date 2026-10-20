@@ -1,0 +1,161 @@
+---
+{
+  "id": "distance",
+  "order": 1,
+  "title": {
+    "en": "Sample distance",
+    "zh": "示例距离"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "layers": [
+      "source",
+      "objects",
+      "sheets",
+      "screen",
+      "rays"
+    ],
+    "camera": {
+      "position": [
+        0,
+        1.1,
+        3.8
+      ],
+      "target": [
+        0,
+        0.97,
+        0.05
+      ],
+      "fov": 22
+    },
+    "labels": [
+      "torch",
+      "card-circle",
+      "screen-board"
+    ],
+    "summary": {
+      "en": "Sample distance: placeholder text for the light engine.",
+      "zh": "示例距离：光模型引擎的占位文字。"
+    },
+    "sim": {
+      "set": {
+        "d-torch": 20,
+        "d-screen": 30,
+        "object": "card-circle",
+        "material": "none",
+        "turn": 0,
+        "torch-on": true
+      },
+      "try": {
+        "vary": "d-torch",
+        "also": [
+          "d-screen",
+          "torch-on"
+        ],
+        "keep": [
+          "d-screen",
+          {
+            "en": "Same round card and turn",
+            "zh": "同一张圆卡片、同一朝向"
+          }
+        ],
+        "observe": [
+          "shadow-height",
+          "shadow-width",
+          "shadow-shape"
+        ],
+        "record": {
+          "chart": {
+            "y": "shadow-height"
+          }
+        },
+        "predict": {
+          "prompt": {
+            "en": "Sample prediction: move the torch farther away.",
+            "zh": "示例猜想：把手电筒移远。"
+          },
+          "start": {
+            "d-torch": 20,
+            "d-screen": 30
+          },
+          "change": {
+            "d-torch": 60
+          },
+          "observe": "shadow-height",
+          "options": [
+            {
+              "id": "smaller",
+              "label": {
+                "en": "Smaller",
+                "zh": "变小"
+              },
+              "means": "less"
+            },
+            {
+              "id": "larger",
+              "label": {
+                "en": "Larger",
+                "zh": "变大"
+              },
+              "means": "more"
+            }
+          ]
+        }
+      }
+    },
+    "beats": [
+      {
+        "caption": {
+          "en": "Sample: one round card casts a larger shadow.",
+          "zh": "示例：一张圆卡片投出较大的影子。"
+        }
+      },
+      {
+        "caption": {
+          "en": "Sample: moving the torch away reduces the shadow.",
+          "zh": "示例：把手电筒移远，影子变小。"
+        },
+        "sim": {
+          "set": {
+            "d-torch": 60
+          }
+        }
+      },
+      {
+        "caption": {
+          "en": "Sample: moving the screen changes the other distance.",
+          "zh": "示例：移动屏幕改变另一个距离。"
+        },
+        "sim": {
+          "set": {
+            "d-torch": 20,
+            "d-screen": 40
+          }
+        }
+      }
+    ],
+    "index": {
+      "parts": [
+        "torch",
+        "card-circle",
+        "screen-board"
+      ]
+    }
+  }
+}
+---
+
+<Lang en>
+
+Sample distance: placeholder text for testing the light engine.
+
+</Lang>
+
+<Lang zh>
+
+示例距离：用来测试光模型引擎的占位文字。
+
+</Lang>
