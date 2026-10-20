@@ -15,7 +15,7 @@ import type { InstrumentSpec } from '../../schema';
 import type { Scale } from '../../lib/instrument';
 import { DoorGlyph, LengthGlyph } from '../glyphs/measure';
 import { Brackets } from './Brackets';
-import { straightTrack, type StraightFrame, type Track } from './geometry';
+import { SIDE_COUNT_ROOM, straightTrack, type StraightFrame, type Track } from './geometry';
 import { Handle } from './Handle';
 import { CountArcs, Marks, SkipBreaks } from './Scale';
 
@@ -179,7 +179,7 @@ export function StraightInstrument(p: StraightProps) {
       <SkipBreaks s={s} track={T} depth={f.vertical ? f.body.w : f.body.h} />
       {p.counted && <CountArcs sc={sc} track={countingTrack(f)} parts={p.counted} stagger={p.stagger} />}
       {out}
-      <Brackets s={s} track={T} offset={f.vertical ? f.body.w + 18 + (p.counted ? 50 : 0) : f.body.h + (s.dual ? 26 : 16)} defs={p.defs} locale={p.locale} />
+      <Brackets s={s} track={T} offset={f.vertical ? f.body.w + 18 + (p.counted ? SIDE_COUNT_ROOM : 0) : f.body.h + (s.dual ? 26 : 16)} defs={p.defs} locale={p.locale} />
       {p.children}
       {p.handle && (
         <Handle

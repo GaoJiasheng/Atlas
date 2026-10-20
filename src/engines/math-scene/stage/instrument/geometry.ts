@@ -128,6 +128,8 @@ export interface StraightFrame {
 
 /** Room a part-counting row and a thing laid on the scale take (px). */
 const COUNT_ROOM = 34;
+/** Room right of a standing chart for its counting arcs and their 44 px targets (px). */
+export const SIDE_COUNT_ROOM = 50;
 const BRACKET_ROW = 40;
 
 /** The head's position along a chart, shared by grouped charts to keep one scale. */
@@ -182,7 +184,7 @@ export function straightFrame(s: InstrumentSpec, sc: Scale, box: Rect, opts: { c
   // About half the stage tall on a large screen (docs/32 §3.2), most of a small box.
   const desiredHeight = Math.max(box.h * 0.2, Math.min(box.h * 0.86, box.h - 40, box.h * 0.6 + 100));
   const desiredStrip = clamp(desiredHeight * 0.16, 70, 120) + (s.dual ? 60 : 0);
-  const right = (opts.counting ? 50 : 0) + brackets * 1.8;
+  const right = (opts.counting ? SIDE_COUNT_ROOM : 0) + brackets * 1.8;
   // Fit the actual head, shoulders and head board beside the strip, even
   // when two charts share a phone's width.
   const personRoom = box.w - desiredStrip - right - 16;
@@ -272,8 +274,11 @@ export function jugFrame(s: InstrumentSpec, sc: Scale | null, box: Rect): JugFra
   const maxH = shape === 'bowl' ? box.h * 0.42 : Math.min(box.h * (box.h < 300 ? 0.94 : 0.8), box.h * 0.5 + 110);
   // Keep room for the numbers and dimension labels without shrinking the
   // vessel to a thumbnail on a phone or beside the 1024 px reader.
-  const scaleRoom = s.scale && sc ? s.eye ? 160 : s.brackets?.length ? 150 : 80 : 20;
-  const h = Math.min(maxH, (box.w - scaleRoom - 40) / aspect);
+  // In a narrow box (three jugs across a phone) the vessel keeps 40 % of the
+  // width and the scale's room shrinks, rather than the vessel vanishing.
+  const margin = Math.min(40, box.w * 0.12);
+  const scaleRoom = Math.min(s.scale && sc ? s.eye ? 160 : s.brackets?.length ? 150 : 80 : 20, box.w * 0.6 - margin);
+  const h = Math.max(0, Math.min(maxH, (box.w - scaleRoom - margin) / aspect));
   const w = h * aspect;
   const x = box.x + (box.w - w - scaleRoom) / 2;
   const y = box.y + (box.h - h) / 2 + (shape === 'bowl' ? box.h * 0.12 : 0);
