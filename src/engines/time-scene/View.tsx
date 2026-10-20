@@ -411,7 +411,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     if (coastToday && territoryOn) items.push({ id: 'coast-today', label: bi('time.legend.coastToday'), color: 'var(--ink)', kind: 'line-dashed' });
     for (const layer of topic.datedLayers ?? []) {
       if (!layers.includes(layer.id)) continue;
-      items.push({ id: layer.id, label: layer.label, color: layer.color ?? entityCssColor(geo.entities.find((e) => e.id === layer.holder)), kind: layer.kind === 'area' ? 'fill' : layer.kind === 'line' ? 'line' : 'point' });
+      items.push({ id: `dated-layer-${layer.id}`, label: layer.label, color: layer.color ?? entityCssColor(geo.entities.find((e) => e.id === layer.holder)), kind: layer.kind === 'area' ? 'fill' : layer.kind === 'line' ? 'line' : 'point' });
     }
     if (topic.datedLayers?.some((layer) => layer.kind === 'point' && layers.includes(layer.id)))
       items.push({ id: 'dated-recent', label: bi('time.legend.datedRecent'), color: 'var(--signal)', kind: 'ring' });

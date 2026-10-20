@@ -1,6 +1,10 @@
 import { readFileSync } from 'node:fs';
 import type { Point, Position } from 'geojson';
 import { describe, expect, it } from 'vitest';
+import { parse } from 'yaml';
+import { buildTimeModel } from '../../src/engines/time-scene/lib/model';
+import { toNumber } from '../../src/engines/time-scene/lib/time';
+import { timeSceneGeoData, type TimeChapterState } from '../../src/engines/time-scene/schema';
 import { decodeTopologyObject } from '../../src/engines/time-scene/lib/control';
 
 const read = (file: string) => JSON.parse(readFileSync(new URL(`../../${file}`, import.meta.url), 'utf8')) as unknown;
@@ -26,6 +30,17 @@ function inRing(point: Position, ring: Position[]): boolean {
 const visible = (year: number) => blocks.filter((f) => f.properties!.f <= year && year < (f.properties!.u ?? Infinity));
 
 describe('dated-layers synthetic fixture', () => {
+  it('covers every authored beat in the timeline range, including recent-point expiry', () => {
+    const chapters = ['01-appearance', '02-replacement', '03-full-set'].map((name) => parse(readFileSync(new URL(`../../src/content/topics/sample-dated-layers/chapters/${name}.mdx`, import.meta.url), 'utf8').split('---')[1]!) as { id: string; state: TimeChapterState });
+    const data = timeSceneGeoData.parse(Object.fromEntries(['control', 'entities', 'events', 'movements', 'sources', 'glossary', 'presets'].map((name) => [name, read(`src/content/topics/sample-dated-layers/data/${name}.json`)])));
+    const model = buildTimeModel(data, chapters.map((chapter) => ({ id: chapter.id, t: chapter.state.time })));
+    expect(model.max).toBe(2021);
+    for (const chapter of chapters) for (const beat of chapter.state.beats ?? []) {
+      const year = toNumber(beat.t ?? chapter.state.time!);
+      expect(year).toBeGreaterThanOrEqual(model.min);
+      expect(year).toBeLessThanOrEqual(model.max);
+    }
+  });
   it('puts all 11,000 generated points on real Singapore mainland, outside water holes', () => {
     expect(blocks).toHaveLength(11000);
     expect(mainland.length).toBeGreaterThan(0);

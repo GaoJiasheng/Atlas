@@ -85,6 +85,14 @@ test('dated filters stay cached between boundaries and update at a same-count re
   await page.evaluate((i) => window.__atlas!.goToBeat(i, { instant: true }), after);
   await expect.poll(async () => (await dated(page))['sample-blocks']!.recent).toBe(0);
   expect((await dated(page))['sample-blocks']!.visible).toBe(5000);
+  const finalYear = beats.findIndex((beat) => beat.chapter === 'full-set' && beat.index === 1);
+  await page.evaluate((i) => window.__atlas!.goToBeat(i, { instant: true }), finalYear);
+  await expect.poll(() => page.evaluate(() => window.__atlas!.state().playhead)).toBe(2020);
+  await expect.poll(async () => (await dated(page))['sample-blocks']).toMatchObject({ visible: 10000, recent: 0 });
+  const finalBeat = beats.findIndex((beat) => beat.chapter === 'full-set' && beat.index === 2);
+  await page.evaluate((i) => window.__atlas!.goToBeat(i, { instant: true }), finalBeat);
+  await expect.poll(() => page.evaluate(() => window.__atlas!.state().playhead)).toBe(2021);
+  await expect.poll(async () => (await dated(page))['sample-rail']!.visible).toBe(0);
 });
 
 test('empty control frame has no territory labels and REFERENCE accepts an empty neighbour', async ({ page }) => {
