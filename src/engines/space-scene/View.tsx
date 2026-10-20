@@ -578,6 +578,15 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
             replays: ui.getState().simReplay.n,
           };
         },
+        flow: (id: string) => {
+          const paths = bridge.flowPaths.get(id);
+          return paths ? { paths: Object.fromEntries(Object.entries(paths).map(([key, value]) => [key, { ...value }])) } : null;
+        },
+        fillBenchmark: (id: string) => bridge.fillBenchmarks.get(id)?.() ?? null,
+        fill: (id: string) => {
+          const f = bridge.fills.get(id);
+          return f ? { ...f } : null;
+        },
         // Energy bars on the stage (docs/31 E-EN6): per timeline output, the three bars now (potential + kinetic + lost = 100) and whether they show.
         energyBars: () =>
           Object.fromEntries(

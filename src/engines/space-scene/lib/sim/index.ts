@@ -17,6 +17,8 @@ import type { Vec3 } from '../math';
 import type { MagnetFrames } from './frame';
 import { solveForces } from './force';
 import { solveEnergy } from './energy';
+import type { MatterPart } from '../../matter-schema';
+import { solveMatter, matterLiquidShapes } from './matter';
 import { solveLifeCycle } from './lifecycle';
 import { EMPTY_TIMELINE, type Timeline } from './timeline';
 
@@ -39,7 +41,8 @@ export function compassPoint(sim: SimData, values: SimValues): Vec3 | null {
 }
 
 /** Every model quantity for these control values; `observe`: the outputs the chapter's try-it card observes. */
-export function simQuantities(sim: SimData, values: SimValues, observe: readonly string[] = [], frames?: MagnetFrames): Record<string, SimOutputValue> {
+export function simQuantities(sim: SimData, values: SimValues, observe: readonly string[] = [], frames?: MagnetFrames, parts: readonly MatterPart[] = []): Record<string, SimOutputValue> {
+  if (sim.kind === 'matter' && sim.matter) return solveMatter(sim.matter, values, matterLiquidShapes(parts));
   if (sim.kind === 'circuit' && sim.circuit) return solveCircuit(sim.circuit, values).quantities;
   if (sim.kind === 'magnet' && sim.magnet) {
     const q: Record<string, SimOutputValue> = solveMagnets(sim.magnet, values, compassPoint(sim, values), frames);
@@ -54,8 +57,8 @@ export function simQuantities(sim: SimData, values: SimValues, observe: readonly
 }
 
 /** The declared outputs for these control values (missing quantities: 0 / the first state / an empty vector / a still timeline). */
-export function evaluateSim(sim: SimData, values: SimValues, observe: readonly string[] = [], frames?: MagnetFrames): SimOutputs {
-  const q = simQuantities(sim, values, observe, frames);
+export function evaluateSim(sim: SimData, values: SimValues, observe: readonly string[] = [], frames?: MagnetFrames, parts: readonly MatterPart[] = []): SimOutputs {
+  const q = simQuantities(sim, values, observe, frames, parts);
   const out: Record<string, SimOutputValue> = {};
   for (const o of sim.outputs) {
     const v = q[o.from ?? o.id];
@@ -72,7 +75,7 @@ export function evaluateSim(sim: SimData, values: SimValues, observe: readonly s
  * magnets or one animal's life cycle is one system: its first state (the
  * stage on the day on show) always describes the bench.
  */
-export const SEPARATE_EXPERIMENTS: Readonly<Record<SimKind, boolean>> = { circuit: false, magnet: false, force: true, energy: true, 'life-cycle': false };
+export const SEPARATE_EXPERIMENTS: Readonly<Record<SimKind, boolean>> = { circuit: false, magnet: false, force: true, energy: true, 'life-cycle': false, matter: true };
 
 /** A number output's value (0 for states and vectors; NaN = not applicable here). */
 export const numberOf = (v: SimOutputValue | undefined): number => (typeof v === 'number' ? v : 0);

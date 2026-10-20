@@ -1,0 +1,173 @@
+---
+{
+  "id": "air",
+  "order": 4,
+  "title": {
+    "en": "Sample air",
+    "zh": "示例空气"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "layers": [
+      "air-bench",
+      "air-flow"
+    ],
+    "labels": [
+      "cup",
+      "basin",
+      "basketball"
+    ],
+    "camera": {
+      "position": [
+        0.46,
+        0.45,
+        0.91
+      ],
+      "target": [
+        0.25,
+        0.13,
+        -0.02
+      ],
+      "fov": 34
+    },
+    "summary": {
+      "en": "Sample air: values from the model.",
+      "zh": "示例空气：模型算出的数值。"
+    },
+    "index": {
+      "parts": [
+        "cup",
+        "basin",
+        "tissue",
+        "basketball",
+        "pump"
+      ]
+    },
+    "sim": {
+      "set": {
+        "pumps": 0,
+        "cup-place": "above",
+        "cup-hole": false
+      },
+      "try": {
+        "vary": "pumps",
+        "observe": [
+          "ball-mass",
+          "air-added"
+        ],
+        "keep": [
+          {
+            "en": "Same ball and pump stroke",
+            "zh": "同一只球和同样的一下气"
+          }
+        ],
+        "record": {
+          "chart": {
+            "y": "ball-mass"
+          }
+        },
+        "predict": {
+          "prompt": {
+            "en": "Sample prediction: compare the next reading.",
+            "zh": "示例猜想：比较下一次读数。"
+          },
+          "change": {
+            "pumps": 20
+          },
+          "observe": "ball-mass",
+          "options": [
+            {
+              "id": "more",
+              "label": {
+                "en": "More",
+                "zh": "较多"
+              },
+              "means": "more"
+            },
+            {
+              "id": "same",
+              "label": {
+                "en": "Same",
+                "zh": "相同"
+              },
+              "means": "same"
+            },
+            {
+              "id": "less",
+              "label": {
+                "en": "Less",
+                "zh": "较少"
+              },
+              "means": "less"
+            }
+          ]
+        }
+      }
+    },
+    "beats": [
+      {
+        "sim": {
+          "set": {
+            "cup-place": "above",
+            "cup-hole": false
+          }
+        },
+        "caption": {
+          "en": "Sample: the cup starts above the water.",
+          "zh": "示例：杯子开始在水面上方。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "cup-place": "pushed",
+            "cup-hole": false
+          }
+        },
+        "caption": {
+          "en": "Sample: the sealed cup is fully underwater.",
+          "zh": "示例：封住的杯子完全浸在水里。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "cup-place": "pushed",
+            "cup-hole": true
+          }
+        },
+        "caption": {
+          "en": "Sample: the hole lets air escape.",
+          "zh": "示例：开孔后空气冒出来。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "pumps": 20
+          }
+        },
+        "caption": {
+          "en": "Sample: twenty pumps add mass.",
+          "zh": "示例：打二十下气，质量增加。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Sample air: a draft engine fixture.
+
+</Lang>
+
+<Lang zh>
+
+示例空气：引擎测试草稿。
+
+</Lang>

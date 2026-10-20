@@ -1,3 +1,4 @@
+import type { StageBridge } from '../../bridge';
 /**
  * Flow particles ("air", "refrigerant", "current"): `count` points per flow
  * (default 360) that travel along the flow's Catmull-Rom path (or paths:
@@ -116,6 +117,7 @@ function FlowParticles({
   clipping,
   effect,
   fieldLines,
+  bridge,
 }: {
   flow: Flow;
   index: number;
@@ -124,6 +126,7 @@ function FlowParticles({
   clipping: Plane[] | null;
   effect: SimFlowEffect | undefined;
   fieldLines: ((state: string) => readonly FlowPath[]) | undefined;
+  bridge?: StageBridge;
 }) {
   const field = effect?.state ?? null;
   const paths = useMemo<readonly FlowPath[]>(
@@ -131,7 +134,7 @@ function FlowParticles({
     [field, fieldLines, flow.paths, flow.id, flow.path],
   );
   if (paths.length === 0) return null;
-  return <FlowPaths flow={flow} index={index} layerOn={layerOn} look={look} clipping={clipping} effect={effect} paths={paths} lines={field !== null} />;
+  return <FlowPaths bridge={bridge} flow={flow} index={index} layerOn={layerOn} look={look} clipping={clipping} effect={effect} paths={paths} lines={field !== null} />;
 }
 
 function FlowPaths({
@@ -143,6 +146,7 @@ function FlowPaths({
   effect,
   paths,
   lines,
+  bridge,
 }: {
   flow: Flow;
   index: number;
@@ -153,6 +157,7 @@ function FlowPaths({
   paths: readonly FlowPath[];
   /** Draw the paths as hairlines too (field lines). */
   lines: boolean;
+  bridge?: StageBridge;
 }) {
   const runtime = useRuntime();
   const ref = useRef<Points>(null);
@@ -163,9 +168,9 @@ function FlowPaths({
   const material = useMemo(() => createFlowMaterial(baked, flow.ends === 'open'), [baked, flow.ends]);
   const geometry = useMemo(() => particleGeometry(perPath, 1013 + index * 7919, flow.spread), [index, perPath, flow.spread]);
   /** Each path's phase (fraction travelled) and fade, kept across speed changes. */
-  const state = useRef(paths.map(() => ({ phase: 0, alpha: 1, share: 1 })));
+  const state = useRef(paths.map((p) => ({ phase: 0, alpha: 1, share: 1, visibility: effect?.visibility?.[p.id] === false ? 0 : 1 })));
   useEffect(() => {
-    state.current = paths.map(() => ({ phase: 0, alpha: 1, share: 1 }));
+    state.current = paths.map((p) => ({ phase: 0, alpha: 1, share: 1, visibility: effect?.visibility?.[p.id] === false ? 0 : 1 }));
     // A new set of field lines fades in.
     if (lines) fade.current = 0;
   }, [paths, lines]);
@@ -179,6 +184,11 @@ function FlowPaths({
     lineMaterial?.color.set(resolveDataColor(flow.color, look.tokens, look.theme));
   }, [lineMaterial, flow.color, look]);
 
+  const visibility = useMemo(() => Object.fromEntries(paths.map((p) => [p.id, { visible: false }])), [paths]);
+  useEffect(() => {
+    bridge?.flowPaths.set(flow.id, visibility);
+    return () => { bridge?.flowPaths.delete(flow.id); };
+  }, [bridge, flow.id, visibility]);
   const color = effect?.color ?? null;
   useEffect(() => {
     const hex = (ref: string) => resolveDataColor(ref, look.tokens, look.theme);
@@ -236,8 +246,13 @@ function FlowPaths({
         s.alpha = 1;
         s.share = 1;
       }
+      const targetVisibility = effect?.visibility?.[p.id] === false ? 0 : 1;
+      s.visibility = damp(s.visibility, targetVisibility, PATH_FADE, dt);
+      if (Math.abs(s.visibility - targetVisibility) < 0.003) s.visibility = targetVisibility;
+      else easing = true;
       u.uPhase.value[k] = s.phase - Math.floor(s.phase);
-      u.uAlpha.value[k] = s.alpha;
+      u.uAlpha.value[k] = s.alpha * s.visibility;
+      visibility[p.id]!.visible = fade.current * s.alpha * s.visibility > 0.003;
       u.uShare.value[k] = s.share;
     });
     const cam = st.camera as unknown as PerspectiveCamera;
@@ -266,6 +281,7 @@ export function Flows({
   clipping,
   effects,
   fieldLines,
+  bridge,
 }: {
   flows: readonly Flow[];
   layers: readonly string[];
@@ -275,6 +291,7 @@ export function Flows({
   effects?: ReadonlyMap<string, SimFlowEffect>;
   /** A field state's lines (a field-line flow's paths). */
   fieldLines?: (state: string) => readonly FlowPath[];
+  bridge?: StageBridge;
 }) {
   return (
     <>
@@ -288,6 +305,7 @@ export function Flows({
           clipping={clipping}
           effect={effects?.get(flow.id)}
           fieldLines={fieldLines}
+          bridge={bridge}
         />
       ))}
     </>

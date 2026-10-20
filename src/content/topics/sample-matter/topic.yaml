@@ -1,0 +1,14 @@
+# Engine fixture; deliberately schematic captions and primitives.
+id: sample-matter
+title: { en: "Sample: Matter bench", zh: "示例：物质实验台" }
+subtitle: { en: "A draft fixture for the matter engine", zh: "物质引擎的草稿测试主题" }
+subject: science
+levels: [P4]
+moe: []
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: draft
+note: { en: "Engine fixture · schematic primitives · values are SIM", zh: "引擎测试 · 基础几何示意 · 数值为模拟值" }

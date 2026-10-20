@@ -1,0 +1,3812 @@
+{
+  "parts": [
+    {
+      "id": "bench",
+      "name": {
+        "en": "Test bench",
+        "zh": "测试台"
+      },
+      "summary": {
+        "en": "Sample test bench: engine fixture.",
+        "zh": "示例测试台：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          0.05,
+          -0.022,
+          0
+        ],
+        "color": "wood",
+        "size": [
+          2.6,
+          0.04,
+          0.62
+        ]
+      },
+      "context": true
+    },
+    {
+      "id": "balance",
+      "name": {
+        "en": "Balance",
+        "zh": "电子秤"
+      },
+      "group": "weighing",
+      "summary": {
+        "en": "Sample balance: engine fixture.",
+        "zh": "示例电子秤：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          -0.95,
+          0.022,
+          0
+        ],
+        "color": "enamel",
+        "size": [
+          0.2,
+          0.04,
+          0.16
+        ]
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "at": [
+            -0.95,
+            0.05,
+            0
+          ],
+          "color": "stainless",
+          "size": [
+            0.07,
+            0.07,
+            0.014
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            -0.95,
+            0.025,
+            0.084
+          ],
+          "color": "token:ink-2",
+          "size": [
+            0.08,
+            0.018,
+            0.004
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stone",
+      "name": {
+        "en": "Stone",
+        "zh": "石头"
+      },
+      "group": "weighing",
+      "summary": {
+        "en": "Sample stone: engine fixture.",
+        "zh": "示例石头：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          -1.13,
+          0.025,
+          0.12
+        ],
+        "color": "token:ink-3",
+        "size": [
+          0.022
+        ],
+        "scale": [
+          1.4,
+          0.7,
+          1
+        ]
+      }
+    },
+    {
+      "id": "sponge",
+      "name": {
+        "en": "Sponge",
+        "zh": "海绵"
+      },
+      "group": "weighing",
+      "summary": {
+        "en": "Sample sponge: engine fixture.",
+        "zh": "示例海绵：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          -1.13,
+          0.025,
+          -0.12
+        ],
+        "color": "token:accent-3",
+        "size": [
+          0.12,
+          0.04,
+          0.08
+        ]
+      }
+    },
+    {
+      "id": "marble",
+      "name": {
+        "en": "Marble",
+        "zh": "弹珠"
+      },
+      "group": "weighing",
+      "summary": {
+        "en": "Sample marble: engine fixture.",
+        "zh": "示例弹珠：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          -0.8,
+          0.013,
+          0.12
+        ],
+        "color": "glass",
+        "size": [
+          0.008
+        ]
+      }
+    },
+    {
+      "id": "clay-ball",
+      "name": {
+        "en": "Clay",
+        "zh": "黏土"
+      },
+      "group": "weighing",
+      "summary": {
+        "en": "Sample clay: engine fixture.",
+        "zh": "示例黏土：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          -0.8,
+          0.02,
+          -0.12
+        ],
+        "color": "token:cut",
+        "size": [
+          0.0168
+        ]
+      }
+    },
+    {
+      "id": "water-beaker",
+      "name": {
+        "en": "Water beaker",
+        "zh": "水杯"
+      },
+      "group": "weighing",
+      "summary": {
+        "en": "Sample water beaker: engine fixture.",
+        "zh": "示例水杯：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "at": [
+          -0.75,
+          0.04,
+          0
+        ],
+        "color": "token:cold",
+        "size": [
+          0.024,
+          0.024,
+          0.07
+        ]
+      }
+    },
+    {
+      "id": "cyl-a",
+      "name": {
+        "en": "Cylinder A",
+        "zh": "量筒甲"
+      },
+      "group": "measuring",
+      "summary": {
+        "en": "Sample cylinder a: engine fixture.",
+        "zh": "示例量筒甲：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          -0.68,
+          0,
+          0
+        ],
+        "color": "glass",
+        "profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.02,
+            0.002
+          ],
+          [
+            0.02,
+            0.242
+          ],
+          [
+            0.0185,
+            0.242
+          ],
+          [
+            0.0185,
+            0.242
+          ],
+          [
+            0.0185,
+            0.002
+          ],
+          [
+            0,
+            0.002
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "segments": 40
+      },
+      "shell": true
+    },
+    {
+      "id": "cyl-a-water",
+      "name": {
+        "en": "Liquid · cyl-a-water",
+        "zh": "液体 · cyl-a-water"
+      },
+      "group": "measuring",
+      "summary": {
+        "en": "Sample liquid · cyl-a-water: engine fixture.",
+        "zh": "示例液体 · cyl-a-water：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          -0.68,
+          0.003,
+          0
+        ],
+        "color": "membrane",
+        "profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.0185,
+            0
+          ],
+          [
+            0.0185,
+            0.24
+          ],
+          [
+            0,
+            0.24
+          ]
+        ],
+        "segments": 40,
+        "tint": "token:cold"
+      }
+    },
+    {
+      "id": "glass",
+      "name": {
+        "en": "Glass",
+        "zh": "玻璃杯"
+      },
+      "group": "measuring",
+      "summary": {
+        "en": "Sample glass: engine fixture.",
+        "zh": "示例玻璃杯：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          -0.54,
+          0,
+          0
+        ],
+        "color": "glass",
+        "profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.0315,
+            0.002
+          ],
+          [
+            0.0315,
+            0.122
+          ],
+          [
+            0.03,
+            0.122
+          ],
+          [
+            0.03,
+            0.122
+          ],
+          [
+            0.03,
+            0.002
+          ],
+          [
+            0,
+            0.002
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "segments": 40
+      },
+      "shell": true
+    },
+    {
+      "id": "glass-water",
+      "name": {
+        "en": "Liquid · glass-water",
+        "zh": "液体 · glass-water"
+      },
+      "group": "measuring",
+      "summary": {
+        "en": "Sample liquid · glass-water: engine fixture.",
+        "zh": "示例液体 · glass-water：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          -0.54,
+          0.003,
+          0
+        ],
+        "color": "membrane",
+        "profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.03,
+            0
+          ],
+          [
+            0.03,
+            0.12
+          ],
+          [
+            0,
+            0.12
+          ]
+        ],
+        "segments": 40,
+        "tint": "token:cold"
+      }
+    },
+    {
+      "id": "flask",
+      "name": {
+        "en": "Flask",
+        "zh": "锥形瓶"
+      },
+      "group": "measuring",
+      "summary": {
+        "en": "Sample flask: engine fixture.",
+        "zh": "示例锥形瓶：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          -0.39,
+          0,
+          0
+        ],
+        "color": "glass",
+        "profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.043500000000000004,
+            0.002
+          ],
+          [
+            0.0175,
+            0.10200000000000001
+          ],
+          [
+            0.0175,
+            0.14200000000000002
+          ],
+          [
+            0.016,
+            0.14200000000000002
+          ],
+          [
+            0.016,
+            0.14200000000000002
+          ],
+          [
+            0.016,
+            0.10200000000000001
+          ],
+          [
+            0.042,
+            0.002
+          ],
+          [
+            0,
+            0.002
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "segments": 40
+      },
+      "shell": true
+    },
+    {
+      "id": "flask-water",
+      "name": {
+        "en": "Liquid · flask-water",
+        "zh": "液体 · flask-water"
+      },
+      "group": "measuring",
+      "summary": {
+        "en": "Sample liquid · flask-water: engine fixture.",
+        "zh": "示例液体 · flask-water：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          -0.39,
+          0.003,
+          0
+        ],
+        "color": "membrane",
+        "profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.042,
+            0
+          ],
+          [
+            0.016,
+            0.1
+          ],
+          [
+            0.016,
+            0.14
+          ],
+          [
+            0,
+            0.14
+          ]
+        ],
+        "segments": 40,
+        "tint": "token:cold"
+      }
+    },
+    {
+      "id": "bowl",
+      "name": {
+        "en": "Bowl",
+        "zh": "宽碗"
+      },
+      "group": "measuring",
+      "summary": {
+        "en": "Sample bowl: engine fixture.",
+        "zh": "示例宽碗：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          -0.2,
+          0,
+          0
+        ],
+        "color": "glass",
+        "profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.022689138534559054,
+            0.004857142857142857
+          ],
+          [
+            0.03119229955832361,
+            0.007714285714285714
+          ],
+          [
+            0.03752720060833856,
+            0.010571428571428572
+          ],
+          [
+            0.042706300291017026,
+            0.013428571428571429
+          ],
+          [
+            0.047124912636203754,
+            0.016285714285714285
+          ],
+          [
+            0.05098716593053935,
+            0.019142857142857142
+          ],
+          [
+            0.054415026221291816,
+            0.022
+          ],
+          [
+            0.05748833697790121,
+            0.024857142857142855
+          ],
+          [
+            0.060262753717723244,
+            0.027714285714285712
+          ],
+          [
+            0.06277888739864919,
+            0.030571428571428576
+          ],
+          [
+            0.06506741560367711,
+            0.03342857142857143
+          ],
+          [
+            0.06715214453186319,
+            0.03628571428571429
+          ],
+          [
+            0.06905194524306794,
+            0.039142857142857146
+          ],
+          [
+            0.0707820323027551,
+            0.042
+          ],
+          [
+            0.07235483867221283,
+            0.04485714285714286
+          ],
+          [
+            0.0737806322324201,
+            0.047714285714285716
+          ],
+          [
+            0.07506796108333562,
+            0.05057142857142858
+          ],
+          [
+            0.0762239818892687,
+            0.05342857142857143
+          ],
+          [
+            0.07725470619178773,
+            0.056285714285714286
+          ],
+          [
+            0.07816518779999279,
+            0.05914285714285715
+          ],
+          [
+            0.07895966692414834,
+            0.062
+          ],
+          [
+            0.07964168189244197,
+            0.06485714285714286
+          ],
+          [
+            0.08021415607974806,
+            0.06771428571428571
+          ],
+          [
+            0.08067946548886297,
+            0.07057142857142858
+          ],
+          [
+            0.08103949089757174,
+            0.07342857142857143
+          ],
+          [
+            0.08129565739296539,
+            0.07628571428571429
+          ],
+          [
+            0.08144896331218984,
+            0.07914285714285715
+          ],
+          [
+            0.0815,
+            0.082
+          ],
+          [
+            0.08,
+            0.082
+          ],
+          [
+            0.08,
+            0.082
+          ],
+          [
+            0.07994896331218984,
+            0.07914285714285715
+          ],
+          [
+            0.07979565739296539,
+            0.07628571428571429
+          ],
+          [
+            0.07953949089757174,
+            0.07342857142857143
+          ],
+          [
+            0.07917946548886297,
+            0.07057142857142858
+          ],
+          [
+            0.07871415607974806,
+            0.06771428571428571
+          ],
+          [
+            0.07814168189244197,
+            0.06485714285714286
+          ],
+          [
+            0.07745966692414834,
+            0.062
+          ],
+          [
+            0.07666518779999279,
+            0.05914285714285715
+          ],
+          [
+            0.07575470619178773,
+            0.056285714285714286
+          ],
+          [
+            0.0747239818892687,
+            0.05342857142857143
+          ],
+          [
+            0.07356796108333562,
+            0.05057142857142858
+          ],
+          [
+            0.0722806322324201,
+            0.047714285714285716
+          ],
+          [
+            0.07085483867221283,
+            0.04485714285714286
+          ],
+          [
+            0.06928203230275509,
+            0.042
+          ],
+          [
+            0.06755194524306794,
+            0.039142857142857146
+          ],
+          [
+            0.06565214453186319,
+            0.03628571428571429
+          ],
+          [
+            0.06356741560367711,
+            0.03342857142857143
+          ],
+          [
+            0.061278887398649194,
+            0.030571428571428576
+          ],
+          [
+            0.05876275371772324,
+            0.027714285714285712
+          ],
+          [
+            0.05598833697790121,
+            0.024857142857142855
+          ],
+          [
+            0.052915026221291815,
+            0.022
+          ],
+          [
+            0.04948716593053935,
+            0.019142857142857142
+          ],
+          [
+            0.04562491263620375,
+            0.016285714285714285
+          ],
+          [
+            0.041206300291017024,
+            0.013428571428571429
+          ],
+          [
+            0.036027200608338555,
+            0.010571428571428572
+          ],
+          [
+            0.029692299558323608,
+            0.007714285714285714
+          ],
+          [
+            0.021189138534559053,
+            0.004857142857142857
+          ],
+          [
+            0,
+            0.002
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "segments": 40
+      },
+      "shell": true
+    },
+    {
+      "id": "bowl-water",
+      "name": {
+        "en": "Liquid · bowl-water",
+        "zh": "液体 · bowl-water"
+      },
+      "group": "measuring",
+      "summary": {
+        "en": "Sample liquid · bowl-water: engine fixture.",
+        "zh": "示例液体 · bowl-water：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          -0.2,
+          0.003,
+          0
+        ],
+        "color": "membrane",
+        "profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.021189138534559053,
+            0.002857142857142857
+          ],
+          [
+            0.029692299558323608,
+            0.005714285714285714
+          ],
+          [
+            0.036027200608338555,
+            0.008571428571428572
+          ],
+          [
+            0.041206300291017024,
+            0.011428571428571429
+          ],
+          [
+            0.04562491263620375,
+            0.014285714285714287
+          ],
+          [
+            0.04948716593053935,
+            0.017142857142857144
+          ],
+          [
+            0.052915026221291815,
+            0.02
+          ],
+          [
+            0.05598833697790121,
+            0.022857142857142857
+          ],
+          [
+            0.05876275371772324,
+            0.025714285714285714
+          ],
+          [
+            0.061278887398649194,
+            0.028571428571428574
+          ],
+          [
+            0.06356741560367711,
+            0.03142857142857143
+          ],
+          [
+            0.06565214453186319,
+            0.03428571428571429
+          ],
+          [
+            0.06755194524306794,
+            0.037142857142857144
+          ],
+          [
+            0.06928203230275509,
+            0.04
+          ],
+          [
+            0.07085483867221283,
+            0.04285714285714286
+          ],
+          [
+            0.0722806322324201,
+            0.045714285714285714
+          ],
+          [
+            0.07356796108333562,
+            0.04857142857142858
+          ],
+          [
+            0.0747239818892687,
+            0.05142857142857143
+          ],
+          [
+            0.07575470619178773,
+            0.054285714285714284
+          ],
+          [
+            0.07666518779999279,
+            0.05714285714285715
+          ],
+          [
+            0.07745966692414834,
+            0.06
+          ],
+          [
+            0.07814168189244197,
+            0.06285714285714286
+          ],
+          [
+            0.07871415607974806,
+            0.06571428571428571
+          ],
+          [
+            0.07917946548886297,
+            0.06857142857142857
+          ],
+          [
+            0.07953949089757174,
+            0.07142857142857142
+          ],
+          [
+            0.07979565739296539,
+            0.07428571428571429
+          ],
+          [
+            0.07994896331218984,
+            0.07714285714285715
+          ],
+          [
+            0.08,
+            0.08
+          ],
+          [
+            0,
+            0.08
+          ]
+        ],
+        "segments": 40,
+        "tint": "token:cold"
+      }
+    },
+    {
+      "id": "cyl-b",
+      "name": {
+        "en": "Displacement cylinder",
+        "zh": "排水量筒"
+      },
+      "group": "measuring",
+      "summary": {
+        "en": "Sample displacement cylinder: engine fixture.",
+        "zh": "示例排水量筒：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          -0.52,
+          0,
+          -0.2
+        ],
+        "color": "glass",
+        "profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.02,
+            0.002
+          ],
+          [
+            0.02,
+            0.242
+          ],
+          [
+            0.0185,
+            0.242
+          ],
+          [
+            0.0185,
+            0.242
+          ],
+          [
+            0.0185,
+            0.002
+          ],
+          [
+            0,
+            0.002
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "segments": 40
+      },
+      "shell": true
+    },
+    {
+      "id": "cyl-b-water",
+      "name": {
+        "en": "Liquid · cyl-b-water",
+        "zh": "液体 · cyl-b-water"
+      },
+      "group": "measuring",
+      "summary": {
+        "en": "Sample liquid · cyl-b-water: engine fixture.",
+        "zh": "示例液体 · cyl-b-water：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          -0.52,
+          0.003,
+          -0.2
+        ],
+        "color": "membrane",
+        "profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.0185,
+            0
+          ],
+          [
+            0.0185,
+            0.24
+          ],
+          [
+            0,
+            0.24
+          ]
+        ],
+        "segments": 40,
+        "tint": "token:cold"
+      }
+    },
+    {
+      "id": "drop-stone",
+      "name": {
+        "en": "Drop stone",
+        "zh": "入水石头"
+      },
+      "group": "measuring",
+      "summary": {
+        "en": "Sample drop stone: engine fixture.",
+        "zh": "示例入水石头：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          -0.73,
+          0.023,
+          -0.23
+        ],
+        "color": "token:ink-3",
+        "size": [
+          0.018
+        ]
+      }
+    },
+    {
+      "id": "drop-marble",
+      "name": {
+        "en": "Drop marble",
+        "zh": "入水弹珠"
+      },
+      "group": "measuring",
+      "summary": {
+        "en": "Sample drop marble: engine fixture.",
+        "zh": "示例入水弹珠：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          -0.6849999999999999,
+          0.023,
+          -0.23
+        ],
+        "color": "token:ink-3",
+        "size": [
+          0.008
+        ]
+      }
+    },
+    {
+      "id": "drop-clay-ball",
+      "name": {
+        "en": "Clay ball",
+        "zh": "黏土球"
+      },
+      "group": "measuring",
+      "summary": {
+        "en": "Sample clay ball: engine fixture.",
+        "zh": "示例黏土球：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          -0.64,
+          0.023,
+          -0.23
+        ],
+        "color": "token:cut",
+        "size": [
+          0.0168
+        ]
+      }
+    },
+    {
+      "id": "drop-clay-roll",
+      "name": {
+        "en": "Clay roll",
+        "zh": "黏土条"
+      },
+      "group": "measuring",
+      "summary": {
+        "en": "Sample clay roll: engine fixture.",
+        "zh": "示例黏土条：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          -0.595,
+          0.023,
+          -0.23
+        ],
+        "color": "token:cut",
+        "size": [
+          0.008
+        ],
+        "scale": [
+          1,
+          1,
+          6
+        ]
+      }
+    },
+    {
+      "id": "basin",
+      "name": {
+        "en": "Basin",
+        "zh": "水盆"
+      },
+      "group": "air-bench",
+      "summary": {
+        "en": "Sample basin: engine fixture.",
+        "zh": "示例水盆：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          0.2,
+          0,
+          -0.08
+        ],
+        "color": "glass",
+        "profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.1215,
+            0.002
+          ],
+          [
+            0.1215,
+            0.182
+          ],
+          [
+            0.12,
+            0.182
+          ],
+          [
+            0.12,
+            0.182
+          ],
+          [
+            0.12,
+            0.002
+          ],
+          [
+            0,
+            0.002
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "segments": 40
+      },
+      "shell": true
+    },
+    {
+      "id": "basin-water",
+      "name": {
+        "en": "Basin liquid",
+        "zh": "盆里的水"
+      },
+      "group": "air-bench",
+      "summary": {
+        "en": "Sample basin liquid: engine fixture.",
+        "zh": "示例盆里的水：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          0.2,
+          0.003,
+          -0.08
+        ],
+        "color": "membrane",
+        "profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.12,
+            0
+          ],
+          [
+            0.12,
+            0.18
+          ],
+          [
+            0,
+            0.18
+          ]
+        ],
+        "segments": 40,
+        "tint": "token:cold"
+      }
+    },
+    {
+      "id": "basin-water-cup",
+      "name": {
+        "en": "Liquid around cup",
+        "zh": "杯外的水"
+      },
+      "group": "air-bench",
+      "summary": {
+        "en": "Sample liquid around cup: engine fixture.",
+        "zh": "示例杯外的水：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          0.2,
+          0.003,
+          -0.08
+        ],
+        "color": "membrane",
+        "profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.12,
+            0
+          ],
+          [
+            0.12,
+            0.18
+          ],
+          [
+            0,
+            0.18
+          ],
+          [
+            0,
+            0.124
+          ],
+          [
+            0.037,
+            0.124
+          ],
+          [
+            0.037,
+            0.03
+          ],
+          [
+            0,
+            0.03
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "segments": 40,
+        "tint": "token:cold"
+      }
+    },
+    {
+      "id": "cup",
+      "name": {
+        "en": "Inverted cup",
+        "zh": "倒扣杯"
+      },
+      "group": "air-bench",
+      "summary": {
+        "en": "Sample inverted cup: engine fixture.",
+        "zh": "示例倒扣杯：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          0.2,
+          0.173,
+          -0.08
+        ],
+        "color": "glass",
+        "profile": [
+          [
+            0.035,
+            0
+          ],
+          [
+            0.037,
+            0
+          ],
+          [
+            0.037,
+            0.094
+          ],
+          [
+            0,
+            0.094
+          ],
+          [
+            0,
+            0.09
+          ],
+          [
+            0.035,
+            0.09
+          ],
+          [
+            0.035,
+            0
+          ]
+        ],
+        "segments": 40
+      },
+      "shell": true
+    },
+    {
+      "id": "cup-water",
+      "name": {
+        "en": "Liquid in cup",
+        "zh": "杯里的水"
+      },
+      "group": "air-bench",
+      "summary": {
+        "en": "Sample liquid in cup: engine fixture.",
+        "zh": "示例杯里的水：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          0.2,
+          0.173,
+          -0.08
+        ],
+        "color": "membrane",
+        "profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.035,
+            0
+          ],
+          [
+            0.035,
+            0.09
+          ],
+          [
+            0,
+            0.09
+          ]
+        ],
+        "segments": 40,
+        "tint": "token:cold"
+      }
+    },
+    {
+      "id": "tissue",
+      "name": {
+        "en": "Tissue",
+        "zh": "纸巾"
+      },
+      "group": "air-bench",
+      "summary": {
+        "en": "Sample tissue: engine fixture.",
+        "zh": "示例纸巾：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          0.2,
+          0.255,
+          -0.08
+        ],
+        "color": "enamel",
+        "size": [
+          0.018
+        ],
+        "scale": [
+          1,
+          0.4,
+          1
+        ]
+      }
+    },
+    {
+      "id": "cup-hole-mark",
+      "name": {
+        "en": "Cup hole",
+        "zh": "杯底孔"
+      },
+      "group": "air-bench",
+      "summary": {
+        "en": "Sample cup hole: engine fixture.",
+        "zh": "示例杯底孔：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "at": [
+          0.2,
+          0.269,
+          -0.08
+        ],
+        "color": "token:ink-2",
+        "size": [
+          0.003,
+          0.003,
+          0.002
+        ]
+      }
+    },
+    {
+      "id": "basketball",
+      "name": {
+        "en": "Basketball",
+        "zh": "篮球"
+      },
+      "group": "air-bench",
+      "summary": {
+        "en": "Sample basketball: engine fixture.",
+        "zh": "示例篮球：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          0.39,
+          0.125,
+          0.12
+        ],
+        "color": "token:accent-3",
+        "size": [
+          0.115
+        ]
+      }
+    },
+    {
+      "id": "pump",
+      "name": {
+        "en": "Air pump",
+        "zh": "打气筒"
+      },
+      "group": "air-bench",
+      "summary": {
+        "en": "Sample air pump: engine fixture.",
+        "zh": "示例打气筒：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "at": [
+          0.53,
+          0.07,
+          0.12
+        ],
+        "color": "steel",
+        "size": [
+          0.012,
+          0.012,
+          0.14
+        ]
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "at": [
+            0.53,
+            0.145,
+            0.12
+          ],
+          "color": "rubber",
+          "size": [
+            0.07,
+            0.012,
+            0.012
+          ]
+        }
+      ]
+    },
+    {
+      "id": "syringe-air",
+      "name": {
+        "en": "Air syringe",
+        "zh": "空气针筒"
+      },
+      "group": "syringes",
+      "summary": {
+        "en": "Sample air syringe: engine fixture.",
+        "zh": "示例空气针筒：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          0.65,
+          0,
+          -0.05
+        ],
+        "color": "glass",
+        "profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.0115,
+            0.002
+          ],
+          [
+            0.0115,
+            0.077
+          ],
+          [
+            0.01,
+            0.077
+          ],
+          [
+            0.01,
+            0.077
+          ],
+          [
+            0.01,
+            0.002
+          ],
+          [
+            0,
+            0.002
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "segments": 40
+      },
+      "shell": true
+    },
+    {
+      "id": "plunger-air",
+      "name": {
+        "en": "Air plunger",
+        "zh": "空气柱塞"
+      },
+      "group": "syringes",
+      "summary": {
+        "en": "Sample air plunger: engine fixture.",
+        "zh": "示例空气柱塞：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "at": [
+          0.65,
+          0.067,
+          -0.05
+        ],
+        "color": "rubber",
+        "size": [
+          0.0095,
+          0.0095,
+          0.006
+        ]
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "at": [
+            0.65,
+            0.093,
+            -0.05
+          ],
+          "color": "steel",
+          "size": [
+            0.003,
+            0.003,
+            0.05
+          ]
+        },
+        {
+          "kind": "cylinder",
+          "at": [
+            0.65,
+            0.12,
+            -0.05
+          ],
+          "color": "stainless",
+          "size": [
+            0.021,
+            0.021,
+            0.005
+          ]
+        }
+      ]
+    },
+    {
+      "id": "masses-air",
+      "name": {
+        "en": "Air masses",
+        "zh": "砝码 · air"
+      },
+      "group": "syringes",
+      "summary": {
+        "en": "Sample air masses: engine fixture.",
+        "zh": "示例砝码 · air：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "at": [
+          0.65,
+          0.15,
+          -0.05
+        ],
+        "color": "brass",
+        "size": [
+          0.017,
+          0.017,
+          0.012
+        ]
+      },
+      "repeat": {
+        "count": 4,
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "spacing": 0.014
+      }
+    },
+    {
+      "id": "syringe-water",
+      "name": {
+        "en": "Water syringe",
+        "zh": "水针筒"
+      },
+      "group": "syringes",
+      "summary": {
+        "en": "Sample water syringe: engine fixture.",
+        "zh": "示例水针筒：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          0.725,
+          0,
+          -0.05
+        ],
+        "color": "glass",
+        "profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.0115,
+            0.002
+          ],
+          [
+            0.0115,
+            0.077
+          ],
+          [
+            0.01,
+            0.077
+          ],
+          [
+            0.01,
+            0.077
+          ],
+          [
+            0.01,
+            0.002
+          ],
+          [
+            0,
+            0.002
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "segments": 40
+      },
+      "shell": true
+    },
+    {
+      "id": "plunger-water",
+      "name": {
+        "en": "Water plunger",
+        "zh": "水柱塞"
+      },
+      "group": "syringes",
+      "summary": {
+        "en": "Sample water plunger: engine fixture.",
+        "zh": "示例水柱塞：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "at": [
+          0.725,
+          0.067,
+          -0.05
+        ],
+        "color": "rubber",
+        "size": [
+          0.0095,
+          0.0095,
+          0.006
+        ]
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "at": [
+            0.725,
+            0.093,
+            -0.05
+          ],
+          "color": "steel",
+          "size": [
+            0.003,
+            0.003,
+            0.05
+          ]
+        },
+        {
+          "kind": "cylinder",
+          "at": [
+            0.725,
+            0.12,
+            -0.05
+          ],
+          "color": "stainless",
+          "size": [
+            0.021,
+            0.021,
+            0.005
+          ]
+        }
+      ]
+    },
+    {
+      "id": "masses-water",
+      "name": {
+        "en": "Water masses",
+        "zh": "砝码 · water"
+      },
+      "group": "syringes",
+      "summary": {
+        "en": "Sample water masses: engine fixture.",
+        "zh": "示例砝码 · water：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "at": [
+          0.725,
+          0.15,
+          -0.05
+        ],
+        "color": "brass",
+        "size": [
+          0.017,
+          0.017,
+          0.012
+        ]
+      },
+      "repeat": {
+        "count": 4,
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "spacing": 0.014
+      }
+    },
+    {
+      "id": "syringe-fill-water",
+      "name": {
+        "en": "Water filling",
+        "zh": "针筒填充 · water"
+      },
+      "group": "syringes",
+      "summary": {
+        "en": "Sample water filling: engine fixture.",
+        "zh": "示例针筒填充 · water：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "at": [
+          0.725,
+          0.035,
+          -0.05
+        ],
+        "color": "token:cold",
+        "size": [
+          0.009,
+          0.009,
+          0.064
+        ]
+      }
+    },
+    {
+      "id": "syringe-sand",
+      "name": {
+        "en": "Sand syringe",
+        "zh": "沙针筒"
+      },
+      "group": "syringes",
+      "summary": {
+        "en": "Sample sand syringe: engine fixture.",
+        "zh": "示例沙针筒：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          0.8,
+          0,
+          -0.05
+        ],
+        "color": "glass",
+        "profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.0115,
+            0.002
+          ],
+          [
+            0.0115,
+            0.077
+          ],
+          [
+            0.01,
+            0.077
+          ],
+          [
+            0.01,
+            0.077
+          ],
+          [
+            0.01,
+            0.002
+          ],
+          [
+            0,
+            0.002
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "segments": 40
+      },
+      "shell": true
+    },
+    {
+      "id": "plunger-sand",
+      "name": {
+        "en": "Sand plunger",
+        "zh": "沙柱塞"
+      },
+      "group": "syringes",
+      "summary": {
+        "en": "Sample sand plunger: engine fixture.",
+        "zh": "示例沙柱塞：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "at": [
+          0.8,
+          0.067,
+          -0.05
+        ],
+        "color": "rubber",
+        "size": [
+          0.0095,
+          0.0095,
+          0.006
+        ]
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "at": [
+            0.8,
+            0.093,
+            -0.05
+          ],
+          "color": "steel",
+          "size": [
+            0.003,
+            0.003,
+            0.05
+          ]
+        },
+        {
+          "kind": "cylinder",
+          "at": [
+            0.8,
+            0.12,
+            -0.05
+          ],
+          "color": "stainless",
+          "size": [
+            0.021,
+            0.021,
+            0.005
+          ]
+        }
+      ]
+    },
+    {
+      "id": "masses-sand",
+      "name": {
+        "en": "Sand masses",
+        "zh": "砝码 · sand"
+      },
+      "group": "syringes",
+      "summary": {
+        "en": "Sample sand masses: engine fixture.",
+        "zh": "示例砝码 · sand：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "at": [
+          0.8,
+          0.15,
+          -0.05
+        ],
+        "color": "brass",
+        "size": [
+          0.017,
+          0.017,
+          0.012
+        ]
+      },
+      "repeat": {
+        "count": 4,
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "spacing": 0.014
+      }
+    },
+    {
+      "id": "syringe-fill-sand",
+      "name": {
+        "en": "Sand filling",
+        "zh": "针筒填充 · sand"
+      },
+      "group": "syringes",
+      "summary": {
+        "en": "Sample sand filling: engine fixture.",
+        "zh": "示例针筒填充 · sand：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "at": [
+          0.8,
+          0.035,
+          -0.05
+        ],
+        "color": "token:accent-3",
+        "size": [
+          0.009,
+          0.009,
+          0.064
+        ]
+      }
+    },
+    {
+      "id": "sand-cylinder",
+      "name": {
+        "en": "Sand cylinder",
+        "zh": "沙量筒"
+      },
+      "group": "grains",
+      "summary": {
+        "en": "Sample sand cylinder: engine fixture.",
+        "zh": "示例沙量筒：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          1.08,
+          0,
+          0.02
+        ],
+        "color": "glass",
+        "profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.02,
+            0.002
+          ],
+          [
+            0.02,
+            0.242
+          ],
+          [
+            0.0185,
+            0.242
+          ],
+          [
+            0.0185,
+            0.242
+          ],
+          [
+            0.0185,
+            0.002
+          ],
+          [
+            0,
+            0.002
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "segments": 40
+      },
+      "shell": true
+    },
+    {
+      "id": "sand-in-cylinder",
+      "name": {
+        "en": "Sand",
+        "zh": "沙"
+      },
+      "group": "grains",
+      "summary": {
+        "en": "Sample sand: engine fixture.",
+        "zh": "示例沙：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "at": [
+          1.08,
+          0.0495,
+          0.02
+        ],
+        "color": "abrasive",
+        "size": [
+          0.018,
+          0.018,
+          0.093
+        ],
+        "tint": "token:accent-3"
+      }
+    },
+    {
+      "id": "water-over-sand",
+      "name": {
+        "en": "Water above sand",
+        "zh": "沙面上的水"
+      },
+      "group": "grains",
+      "summary": {
+        "en": "Sample water above sand: engine fixture.",
+        "zh": "示例沙面上的水：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          1.08,
+          0.003,
+          0.02
+        ],
+        "color": "membrane",
+        "profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.0185,
+            0
+          ],
+          [
+            0.0185,
+            0.24
+          ],
+          [
+            0,
+            0.24
+          ]
+        ],
+        "segments": 40,
+        "tint": "token:cold"
+      }
+    },
+    {
+      "id": "jug",
+      "name": {
+        "en": "Box jug",
+        "zh": "方水壶"
+      },
+      "group": "grains",
+      "summary": {
+        "en": "Sample box jug: engine fixture.",
+        "zh": "示例方水壶：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          1.22,
+          0.043,
+          0.02
+        ],
+        "color": "glass",
+        "size": [
+          0.052,
+          0.08,
+          0.052
+        ]
+      },
+      "shell": true
+    },
+    {
+      "id": "jug-water",
+      "name": {
+        "en": "Jug liquid",
+        "zh": "壶里的水"
+      },
+      "group": "grains",
+      "summary": {
+        "en": "Sample jug liquid: engine fixture.",
+        "zh": "示例壶里的水：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the matter engine.",
+        "zh": "物质引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          1.22,
+          0.042,
+          0.02
+        ],
+        "color": "membrane",
+        "size": [
+          0.05,
+          0.08,
+          0.05
+        ],
+        "tint": "token:cold"
+      }
+    }
+  ],
+  "groups": [
+    {
+      "id": "weighing",
+      "name": {
+        "en": "Weighing",
+        "zh": "称质量"
+      },
+      "color": "token:ink-2",
+      "scale": {
+        "unit": "cm",
+        "magnification": 1
+      }
+    },
+    {
+      "id": "measuring",
+      "name": {
+        "en": "Volume",
+        "zh": "量体积"
+      },
+      "color": "token:accent-2",
+      "scale": {
+        "unit": "cm",
+        "magnification": 1
+      }
+    },
+    {
+      "id": "air-bench",
+      "name": {
+        "en": "Air",
+        "zh": "空气"
+      },
+      "color": "token:cold",
+      "scale": {
+        "unit": "cm",
+        "magnification": 1
+      }
+    },
+    {
+      "id": "syringes",
+      "name": {
+        "en": "Syringes",
+        "zh": "针筒"
+      },
+      "color": "token:ink-3",
+      "scale": {
+        "unit": "cm",
+        "magnification": 1
+      }
+    },
+    {
+      "id": "grains",
+      "name": {
+        "en": "Sand pores",
+        "zh": "沙孔隙"
+      },
+      "color": "token:cut",
+      "scale": {
+        "unit": "cm",
+        "magnification": 1
+      }
+    },
+    {
+      "id": "air-flow",
+      "name": {
+        "en": "Air bubbles",
+        "zh": "气泡"
+      },
+      "color": "token:cold",
+      "scale": {
+        "unit": "cm",
+        "magnification": 1
+      }
+    }
+  ],
+  "views": {
+    "assembled": {
+      "camera": {
+        "position": [
+          0.6,
+          1.1,
+          3.1
+        ],
+        "target": [
+          0.03,
+          0.05,
+          0
+        ],
+        "fov": 34
+      }
+    },
+    "cover": {
+      "position": [
+        0.6,
+        1.1,
+        3.1
+      ],
+      "target": [
+        0.03,
+        0.05,
+        0
+      ],
+      "fov": 34
+    },
+    "section": {
+      "plane": "xy"
+    }
+  },
+  "units": {
+    "modelUnit": "cm",
+    "scale": 100
+  },
+  "presets": [
+    {
+      "id": "weighing-view",
+      "label": {
+        "en": "Weighing",
+        "zh": "示例镜头"
+      },
+      "camera": {
+        "position": [
+          -0.77,
+          0.33,
+          0.64
+        ],
+        "target": [
+          -0.97,
+          0.045,
+          0
+        ],
+        "fov": 34
+      }
+    },
+    {
+      "id": "displacing-view",
+      "label": {
+        "en": "Displacing",
+        "zh": "示例镜头"
+      },
+      "camera": {
+        "position": [
+          -0.4,
+          0.3,
+          0.48
+        ],
+        "target": [
+          -0.55,
+          0.11,
+          -0.16
+        ],
+        "fov": 32
+      }
+    },
+    {
+      "id": "pouring-view",
+      "label": {
+        "en": "Pouring",
+        "zh": "示例镜头"
+      },
+      "camera": {
+        "position": [
+          -0.18,
+          0.44,
+          0.93
+        ],
+        "target": [
+          -0.45,
+          0.105,
+          0
+        ],
+        "fov": 32
+      }
+    },
+    {
+      "id": "air-view",
+      "label": {
+        "en": "Air",
+        "zh": "示例镜头"
+      },
+      "camera": {
+        "position": [
+          0.46,
+          0.45,
+          0.91
+        ],
+        "target": [
+          0.25,
+          0.13,
+          -0.02
+        ],
+        "fov": 34
+      }
+    },
+    {
+      "id": "squeezing-view",
+      "label": {
+        "en": "Squeezing",
+        "zh": "示例镜头"
+      },
+      "camera": {
+        "position": [
+          0.85,
+          0.25,
+          0.41
+        ],
+        "target": [
+          0.725,
+          0.075,
+          -0.05
+        ],
+        "fov": 32
+      }
+    },
+    {
+      "id": "pores-view",
+      "label": {
+        "en": "Pores",
+        "zh": "示例镜头"
+      },
+      "camera": {
+        "position": [
+          1.25,
+          0.29,
+          0.52
+        ],
+        "target": [
+          1.13,
+          0.105,
+          0.02
+        ],
+        "fov": 32
+      }
+    }
+  ],
+  "poses": {
+    "pan-stone": {
+      "stone": {
+        "offset": [
+          0.17999999999999994,
+          0.049999999999999996,
+          -0.12
+        ]
+      },
+      "duration": 0.6
+    },
+    "pan-sponge": {
+      "sponge": {
+        "offset": [
+          0.17999999999999994,
+          0.049999999999999996,
+          0.12
+        ]
+      },
+      "duration": 0.6
+    },
+    "pan-marble": {
+      "marble": {
+        "offset": [
+          -0.1499999999999999,
+          0.062,
+          -0.12
+        ]
+      },
+      "duration": 0.6
+    },
+    "pan-clay": {
+      "clay-ball": {
+        "offset": [
+          -0.1499999999999999,
+          0.05499999999999999,
+          0.12
+        ]
+      },
+      "duration": 0.6
+    },
+    "pan-water": {
+      "water-beaker": {
+        "offset": [
+          -0.19999999999999996,
+          0.034999999999999996,
+          0
+        ]
+      },
+      "duration": 0.6
+    },
+    "in-cyl-stone": {
+      "drop-stone": {
+        "offset": [
+          0.20999999999999996,
+          0.002999999999999999,
+          0.03
+        ]
+      },
+      "duration": 0.6
+    },
+    "in-cyl-marble": {
+      "drop-marble": {
+        "offset": [
+          0.16499999999999992,
+          0.002999999999999999,
+          0.03
+        ]
+      },
+      "duration": 0.6
+    },
+    "in-cyl-clay-ball": {
+      "drop-clay-ball": {
+        "offset": [
+          0.12,
+          0.002999999999999999,
+          0.03
+        ]
+      },
+      "duration": 0.6
+    },
+    "in-cyl-clay-roll": {
+      "drop-clay-roll": {
+        "offset": [
+          0.07499999999999996,
+          0.002999999999999999,
+          0.03
+        ]
+      },
+      "duration": 0.6
+    },
+    "cup-pushed": {
+      "cup": {
+        "offset": [
+          0,
+          -0.14,
+          0
+        ]
+      },
+      "cup-hole-mark": {
+        "offset": [
+          0,
+          -0.14,
+          0
+        ]
+      },
+      "cup-water": {
+        "offset": [
+          0,
+          -0.14,
+          0
+        ]
+      },
+      "tissue": {
+        "offset": [
+          0,
+          -0.14,
+          0
+        ]
+      },
+      "duration": 0.8
+    },
+    "ball-flat": {
+      "basketball": {
+        "scale": [
+          1,
+          0.6,
+          1
+        ],
+        "offset": [
+          0,
+          -0.046,
+          0
+        ]
+      },
+      "duration": 0.6
+    }
+  },
+  "flows": [
+    {
+      "id": "escaping-air",
+      "group": "air-flow",
+      "paths": [
+        {
+          "id": "cup-hole",
+          "path": [
+            [
+              0.2,
+              0.13,
+              -0.08
+            ],
+            [
+              0.21,
+              0.16,
+              -0.08
+            ],
+            [
+              0.2,
+              0.19,
+              -0.08
+            ]
+          ]
+        },
+        {
+          "id": "sand-gaps",
+          "path": [
+            [
+              1.08,
+              0.09,
+              0.025
+            ],
+            [
+              1.09,
+              0.13,
+              0.025
+            ],
+            [
+              1.08,
+              0.17,
+              0.025
+            ]
+          ]
+        }
+      ],
+      "speed": 0.05,
+      "color": "token:cold",
+      "count": 24,
+      "size": 0.08,
+      "spread": 0.001,
+      "whenRun": false
+    }
+  ],
+  "telemetry": [
+    {
+      "key": {
+        "en": "Mass",
+        "zh": "质量"
+      },
+      "unit": "g",
+      "follow": [
+        "mass",
+        "ball-mass"
+      ],
+      "scope": "observe"
+    },
+    {
+      "key": {
+        "en": "Liquid height",
+        "zh": "液面高度"
+      },
+      "unit": "cm",
+      "follow": "level",
+      "scope": "observe"
+    },
+    {
+      "key": {
+        "en": "Cylinder reading",
+        "zh": "量筒读数"
+      },
+      "unit": "ml",
+      "follow": [
+        "reading",
+        "sand-reading"
+      ],
+      "scope": "observe"
+    },
+    {
+      "key": {
+        "en": "Air · water · sand",
+        "zh": "空气 · 水 · 沙"
+      },
+      "unit": "ml",
+      "follow": [
+        "v-air",
+        "v-water",
+        "v-sand"
+      ],
+      "scope": "observe"
+    },
+    {
+      "key": {
+        "en": "Basin rise",
+        "zh": "盆里上升"
+      },
+      "unit": "mm",
+      "follow": "basin-rise",
+      "scope": "observe"
+    }
+  ],
+  "sim": {
+    "kind": "matter",
+    "controls": [
+      {
+        "id": "weigh-object",
+        "kind": "choice",
+        "label": {
+          "en": "On the balance",
+          "zh": "秤上放的"
+        },
+        "default": "stone",
+        "options": [
+          {
+            "id": "stone",
+            "label": {
+              "en": "Stone",
+              "zh": "石头"
+            }
+          },
+          {
+            "id": "sponge",
+            "label": {
+              "en": "Sponge",
+              "zh": "海绵"
+            }
+          },
+          {
+            "id": "marble",
+            "label": {
+              "en": "Marble",
+              "zh": "弹珠"
+            }
+          },
+          {
+            "id": "clay",
+            "label": {
+              "en": "Clay",
+              "zh": "黏土"
+            }
+          },
+          {
+            "id": "water",
+            "label": {
+              "en": "Water",
+              "zh": "水"
+            }
+          }
+        ]
+      },
+      {
+        "id": "drop-object",
+        "kind": "choice",
+        "label": {
+          "en": "Put into water",
+          "zh": "放进水里的"
+        },
+        "default": "nothing",
+        "options": [
+          {
+            "id": "nothing",
+            "label": {
+              "en": "Nothing",
+              "zh": "不放"
+            }
+          },
+          {
+            "id": "stone",
+            "label": {
+              "en": "Stone",
+              "zh": "石头"
+            }
+          },
+          {
+            "id": "marble",
+            "label": {
+              "en": "Marble",
+              "zh": "弹珠"
+            }
+          },
+          {
+            "id": "clay-ball",
+            "label": {
+              "en": "Clay ball",
+              "zh": "黏土球"
+            }
+          },
+          {
+            "id": "clay-roll",
+            "label": {
+              "en": "Clay roll",
+              "zh": "黏土条"
+            }
+          }
+        ]
+      },
+      {
+        "id": "container",
+        "kind": "choice",
+        "label": {
+          "en": "Water poured into",
+          "zh": "水倒进"
+        },
+        "default": "cylinder",
+        "options": [
+          {
+            "id": "cylinder",
+            "label": {
+              "en": "Cylinder",
+              "zh": "量筒"
+            }
+          },
+          {
+            "id": "glass",
+            "label": {
+              "en": "Glass",
+              "zh": "杯"
+            }
+          },
+          {
+            "id": "flask",
+            "label": {
+              "en": "Flask",
+              "zh": "瓶"
+            }
+          },
+          {
+            "id": "bowl",
+            "label": {
+              "en": "Bowl",
+              "zh": "碗"
+            }
+          }
+        ]
+      },
+      {
+        "id": "pumps",
+        "kind": "step",
+        "label": {
+          "en": "Pumps of air",
+          "zh": "打气次数"
+        },
+        "values": [
+          0,
+          5,
+          10,
+          15,
+          20
+        ],
+        "default": 0
+      },
+      {
+        "id": "cup-place",
+        "kind": "choice",
+        "label": {
+          "en": "Cup",
+          "zh": "杯子"
+        },
+        "default": "above",
+        "options": [
+          {
+            "id": "above",
+            "label": {
+              "en": "Above",
+              "zh": "上方"
+            }
+          },
+          {
+            "id": "pushed",
+            "label": {
+              "en": "Pushed",
+              "zh": "压入"
+            }
+          }
+        ]
+      },
+      {
+        "id": "cup-hole",
+        "kind": "toggle",
+        "default": false,
+        "label": {
+          "en": "Hole in cup",
+          "zh": "杯底开孔"
+        }
+      },
+      {
+        "id": "load",
+        "kind": "step",
+        "label": {
+          "en": "Mass on each plunger",
+          "zh": "每支柱塞的砝码"
+        },
+        "values": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "default": 0,
+        "unit": "kg"
+      },
+      {
+        "id": "water-added",
+        "kind": "step",
+        "label": {
+          "en": "Water added",
+          "zh": "倒入的水"
+        },
+        "values": [
+          0,
+          20,
+          40,
+          60,
+          80,
+          100
+        ],
+        "default": 0,
+        "unit": "ml"
+      }
+    ],
+    "outputs": [
+      {
+        "id": "mass",
+        "from": "weigh:mass",
+        "label": {
+          "en": "Mass",
+          "zh": "质量"
+        },
+        "decimals": 1,
+        "unit": "g"
+      },
+      {
+        "id": "reading",
+        "from": "displace:reading",
+        "label": {
+          "en": "Cylinder reading",
+          "zh": "量筒读数"
+        },
+        "decimals": 0,
+        "unit": "ml"
+      },
+      {
+        "id": "object-volume",
+        "from": "displace:volume",
+        "label": {
+          "en": "Object volume",
+          "zh": "物体体积"
+        },
+        "decimals": 0,
+        "unit": "cm³"
+      },
+      {
+        "id": "level",
+        "from": "pour:level",
+        "label": {
+          "en": "Liquid height",
+          "zh": "液面高度"
+        },
+        "decimals": 1,
+        "unit": "cm"
+      },
+      {
+        "id": "poured",
+        "from": "pour:volume",
+        "label": {
+          "en": "Poured volume",
+          "zh": "倒回体积"
+        },
+        "decimals": 0,
+        "unit": "ml"
+      },
+      {
+        "id": "ball-mass",
+        "from": "pump:mass",
+        "label": {
+          "en": "Ball mass",
+          "zh": "球的质量"
+        },
+        "decimals": 1,
+        "unit": "g"
+      },
+      {
+        "id": "air-added",
+        "from": "pump:air",
+        "label": {
+          "en": "Added air mass",
+          "zh": "空气增加质量"
+        },
+        "decimals": 1,
+        "unit": "g"
+      },
+      {
+        "id": "basin-level",
+        "from": "cup:basin-level",
+        "label": {
+          "en": "Basin height",
+          "zh": "盆里液面"
+        },
+        "decimals": 1,
+        "unit": "cm"
+      },
+      {
+        "id": "basin-rise",
+        "from": "cup:basin-rise",
+        "label": {
+          "en": "Basin rise",
+          "zh": "盆里上升"
+        },
+        "decimals": 1,
+        "unit": "mm"
+      },
+      {
+        "id": "cup-rise",
+        "from": "cup:cup-rise",
+        "label": {
+          "en": "Water above cup rim",
+          "zh": "杯口以上液面"
+        },
+        "decimals": 1,
+        "unit": "mm"
+      },
+      {
+        "id": "v-air",
+        "from": "squeeze:air",
+        "label": {
+          "en": "Air volume",
+          "zh": "空气体积"
+        },
+        "decimals": 1,
+        "unit": "ml"
+      },
+      {
+        "id": "v-water",
+        "from": "squeeze:water",
+        "label": {
+          "en": "Water volume",
+          "zh": "水体积"
+        },
+        "decimals": 1,
+        "unit": "ml"
+      },
+      {
+        "id": "v-sand",
+        "from": "squeeze:sand",
+        "label": {
+          "en": "Sand volume",
+          "zh": "沙体积"
+        },
+        "decimals": 1,
+        "unit": "ml"
+      },
+      {
+        "id": "sand-reading",
+        "from": "pores:reading",
+        "label": {
+          "en": "Sand cylinder reading",
+          "zh": "沙量筒读数"
+        },
+        "decimals": 0,
+        "unit": "ml"
+      },
+      {
+        "id": "air-gaps",
+        "from": "pores:air",
+        "label": {
+          "en": "Air in pores",
+          "zh": "孔隙空气"
+        },
+        "decimals": 0,
+        "unit": "ml"
+      },
+      {
+        "id": "wet",
+        "from": "pores:wet",
+        "label": {
+          "en": "Sand wetness",
+          "zh": "沙湿度"
+        },
+        "decimals": 3
+      },
+      {
+        "id": "tissue-wet",
+        "from": "cup:wet",
+        "label": {
+          "en": "Tissue wetness",
+          "zh": "纸巾湿度"
+        },
+        "decimals": 0
+      },
+      {
+        "id": "firmness",
+        "from": "pump:firmness",
+        "label": {
+          "en": "Ball state",
+          "zh": "球的状态"
+        },
+        "kind": "state",
+        "states": {
+          "flat": {
+            "en": "Flat",
+            "zh": "瘪"
+          },
+          "soft": {
+            "en": "Soft",
+            "zh": "软"
+          },
+          "firm": {
+            "en": "Firm",
+            "zh": "适中"
+          },
+          "too-hard": {
+            "en": "Too hard",
+            "zh": "过硬"
+          }
+        }
+      },
+      {
+        "id": "tissue",
+        "from": "cup:tissue",
+        "label": {
+          "en": "Tissue",
+          "zh": "纸巾"
+        },
+        "kind": "state",
+        "states": {
+          "dry": {
+            "en": "Dry",
+            "zh": "干"
+          },
+          "wet": {
+            "en": "Wet",
+            "zh": "湿"
+          }
+        }
+      },
+      {
+        "id": "cup-bubbles",
+        "from": "cup:bubbles",
+        "label": {
+          "en": "Cup bubbles",
+          "zh": "杯子气泡"
+        },
+        "kind": "state",
+        "states": {
+          "none": {
+            "en": "None",
+            "zh": "没有"
+          },
+          "rising": {
+            "en": "Rising",
+            "zh": "冒出"
+          }
+        }
+      },
+      {
+        "id": "sand-bubbles",
+        "from": "pores:bubbles",
+        "label": {
+          "en": "Sand bubbles",
+          "zh": "沙里气泡"
+        },
+        "kind": "state",
+        "states": {
+          "none": {
+            "en": "None",
+            "zh": "没有"
+          },
+          "rising": {
+            "en": "Rising",
+            "zh": "冒出"
+          }
+        }
+      },
+      {
+        "id": "vs-sum",
+        "from": "pores:vs-sum",
+        "label": {
+          "en": "Compared with sum",
+          "zh": "与相加比较"
+        },
+        "kind": "state",
+        "states": {
+          "equal": {
+            "en": "Equal",
+            "zh": "相同"
+          },
+          "less": {
+            "en": "Less",
+            "zh": "较少"
+          },
+          "more": {
+            "en": "More",
+            "zh": "较多"
+          }
+        }
+      },
+      {
+        "id": "v-cyl-a",
+        "from": "volume:cyl-a-water",
+        "label": {
+          "en": "Volume · cyl-a-water",
+          "zh": "体积 · cyl-a-water"
+        },
+        "decimals": 3,
+        "unit": "ml"
+      },
+      {
+        "id": "v-glass",
+        "from": "volume:glass-water",
+        "label": {
+          "en": "Volume · glass-water",
+          "zh": "体积 · glass-water"
+        },
+        "decimals": 3,
+        "unit": "ml"
+      },
+      {
+        "id": "v-flask",
+        "from": "volume:flask-water",
+        "label": {
+          "en": "Volume · flask-water",
+          "zh": "体积 · flask-water"
+        },
+        "decimals": 3,
+        "unit": "ml"
+      },
+      {
+        "id": "v-bowl",
+        "from": "volume:bowl-water",
+        "label": {
+          "en": "Volume · bowl-water",
+          "zh": "体积 · bowl-water"
+        },
+        "decimals": 3,
+        "unit": "ml"
+      },
+      {
+        "id": "v-basin",
+        "from": "volume:basin-water",
+        "label": {
+          "en": "Volume · basin-water",
+          "zh": "体积 · basin-water"
+        },
+        "decimals": 3,
+        "unit": "ml"
+      },
+      {
+        "id": "v-basin-cup",
+        "from": "volume:basin-water-cup",
+        "label": {
+          "en": "Volume · basin-water-cup",
+          "zh": "体积 · basin-water-cup"
+        },
+        "decimals": 3,
+        "unit": "ml"
+      },
+      {
+        "id": "v-cup",
+        "from": "volume:cup-water",
+        "label": {
+          "en": "Volume · cup-water",
+          "zh": "体积 · cup-water"
+        },
+        "decimals": 3,
+        "unit": "ml"
+      },
+      {
+        "id": "water-above",
+        "from": "volume:water-over-sand",
+        "label": {
+          "en": "Volume · water-over-sand",
+          "zh": "体积 · water-over-sand"
+        },
+        "decimals": 3,
+        "unit": "ml"
+      },
+      {
+        "id": "water-left",
+        "from": "volume:jug-water",
+        "label": {
+          "en": "Volume · jug-water",
+          "zh": "体积 · jug-water"
+        },
+        "decimals": 3,
+        "unit": "ml"
+      }
+    ],
+    "bind": [
+      {
+        "control": "weigh-object",
+        "part": [
+          "stone",
+          "sponge",
+          "marble",
+          "clay-ball",
+          "water-beaker"
+        ],
+        "pose": {
+          "stone": "pan-stone",
+          "sponge": "pan-sponge",
+          "marble": "pan-marble",
+          "clay": "pan-clay",
+          "water": "pan-water"
+        }
+      },
+      {
+        "control": "drop-object",
+        "part": [
+          "drop-stone",
+          "drop-marble",
+          "drop-clay-ball",
+          "drop-clay-roll"
+        ],
+        "pose": {
+          "stone": "in-cyl-stone",
+          "marble": "in-cyl-marble",
+          "clay-ball": "in-cyl-clay-ball",
+          "clay-roll": "in-cyl-clay-roll"
+        }
+      },
+      {
+        "output": "v-cyl-a",
+        "part": "cyl-a-water",
+        "fill": {
+          "per": 1e-06,
+          "ease": 1.2,
+          "meniscus": 0.0015
+        }
+      },
+      {
+        "output": "v-glass",
+        "part": "glass-water",
+        "fill": {
+          "per": 1e-06,
+          "ease": 1.2
+        }
+      },
+      {
+        "output": "v-flask",
+        "part": "flask-water",
+        "fill": {
+          "per": 1e-06,
+          "ease": 1.2
+        }
+      },
+      {
+        "output": "v-bowl",
+        "part": "bowl-water",
+        "fill": {
+          "per": 1e-06,
+          "ease": 1.2
+        }
+      },
+      {
+        "output": "v-basin",
+        "part": "basin-water",
+        "fill": {
+          "per": 1e-06
+        }
+      },
+      {
+        "output": "v-basin-cup",
+        "part": "basin-water-cup",
+        "fill": {
+          "per": 1e-06,
+          "ease": 1.0
+        }
+      },
+      {
+        "output": "v-cup",
+        "part": "cup-water",
+        "fill": {
+          "per": 1e-06,
+          "ease": 1.0
+        }
+      },
+      {
+        "output": "water-above",
+        "part": "water-over-sand",
+        "fill": {
+          "per": 1e-06,
+          "meniscus": 0.0015,
+          "below": 100
+        }
+      },
+      {
+        "output": "water-left",
+        "part": "jug-water",
+        "fill": {
+          "per": 1e-06
+        }
+      },
+      {
+        "output": "reading",
+        "part": "cyl-b-water",
+        "fill": {
+          "per": 1e-06,
+          "meniscus": 0.0015
+        }
+      },
+      {
+        "control": "cup-place",
+        "part": [
+          "cup",
+          "cup-hole-mark",
+          "cup-water",
+          "tissue"
+        ],
+        "pose": {
+          "pushed": "cup-pushed"
+        }
+      },
+      {
+        "control": "cup-hole",
+        "part": "cup-hole-mark",
+        "visible": true
+      },
+      {
+        "control": "cup-place",
+        "part": "basin-water",
+        "visible": {
+          "eq": "above"
+        }
+      },
+      {
+        "control": "cup-place",
+        "part": "basin-water-cup",
+        "visible": {
+          "eq": "pushed"
+        }
+      },
+      {
+        "output": "tissue-wet",
+        "part": "tissue",
+        "tint": {
+          "color": "token:ink-3",
+          "full": 1
+        }
+      },
+      {
+        "output": "cup-bubbles",
+        "flow": "escaping-air",
+        "paths": [
+          "cup-hole"
+        ],
+        "visible": {
+          "eq": "rising"
+        }
+      },
+      {
+        "output": "firmness",
+        "part": "basketball",
+        "pose": {
+          "flat": "ball-flat"
+        }
+      },
+      {
+        "output": "wet",
+        "part": "sand-in-cylinder",
+        "tint": {
+          "color": "token:ink-2",
+          "full": 1
+        }
+      },
+      {
+        "output": "sand-bubbles",
+        "flow": "escaping-air",
+        "paths": [
+          "sand-gaps"
+        ],
+        "visible": {
+          "eq": "rising"
+        }
+      },
+      {
+        "output": "v-air",
+        "part": [
+          "plunger-air",
+          "masses-air"
+        ],
+        "offset": {
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "per": 0.00318,
+          "origin": 20,
+          "settle": {
+            "period": 0.5,
+            "damping": 0.25
+          }
+        }
+      },
+      {
+        "control": "load",
+        "part": "masses-air",
+        "count": {
+          "per": 1
+        }
+      },
+      {
+        "output": "v-water",
+        "part": [
+          "plunger-water",
+          "masses-water"
+        ],
+        "offset": {
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "per": 0.00318,
+          "origin": 20,
+          "settle": {
+            "period": 0.5,
+            "damping": 0.25
+          }
+        }
+      },
+      {
+        "control": "load",
+        "part": "masses-water",
+        "count": {
+          "per": 1
+        }
+      },
+      {
+        "output": "v-sand",
+        "part": [
+          "plunger-sand",
+          "masses-sand"
+        ],
+        "offset": {
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "per": 0.00318,
+          "origin": 20,
+          "settle": {
+            "period": 0.5,
+            "damping": 0.25
+          }
+        }
+      },
+      {
+        "control": "load",
+        "part": "masses-sand",
+        "count": {
+          "per": 1
+        }
+      }
+    ],
+    "matter": {
+      "g": 9.8,
+      "p0": 101.325,
+      "air": 1.18,
+      "water": {
+        "density": 0.997,
+        "squash": 4.5e-07
+      },
+      "objects": {
+        "stone": {
+          "volume": 25,
+          "density": 2.65
+        },
+        "sponge": {
+          "volume": 384,
+          "density": 0.03,
+          "floats": true
+        },
+        "marble": {
+          "volume": 2.145,
+          "density": 2.5
+        },
+        "clay": {
+          "volume": 20,
+          "density": 1.6
+        },
+        "clay-ball": {
+          "volume": 20,
+          "density": 1.6
+        },
+        "clay-roll": {
+          "volume": 20,
+          "density": 1.6
+        },
+        "water": {
+          "volume": 200,
+          "density": 0.997
+        }
+      },
+      "weigh": {
+        "object": "weigh-object",
+        "step": 0.1
+      },
+      "displace": {
+        "object": "drop-object",
+        "water": 100,
+        "liquid": "cyl-b-water",
+        "step": 1
+      },
+      "pour": {
+        "container": "container",
+        "volume": 200,
+        "liquids": {
+          "cylinder": "cyl-a-water",
+          "glass": "glass-water",
+          "flask": "flask-water",
+          "bowl": "bowl-water"
+        }
+      },
+      "pump": {
+        "pumps": "pumps",
+        "ball": 600,
+        "stroke": 0.2,
+        "inside": 7,
+        "firm": [
+          51.7,
+          58.6
+        ]
+      },
+      "cup": {
+        "place": "cup-place",
+        "hole": "cup-hole",
+        "basin": {
+          "radius": 12,
+          "depth": 14
+        },
+        "cup": {
+          "radius": 3.5,
+          "height": 9,
+          "glass": 57.9,
+          "rim": 3,
+          "top": 12.4
+        },
+        "liquids": {
+          "basin": "basin-water",
+          "around": "basin-water-cup",
+          "inside": "cup-water"
+        }
+      },
+      "squeeze": {
+        "load": "load",
+        "volume": 20,
+        "bore": 2,
+        "fillings": {
+          "air": "gas",
+          "water": "liquid",
+          "sand": "grains"
+        }
+      },
+      "pores": {
+        "water": "water-added",
+        "sand": 100,
+        "porosity": 0.35,
+        "liquids": {
+          "above": "water-over-sand",
+          "jug": "jug-water"
+        },
+        "jug": 100
+      }
+    }
+  }
+}

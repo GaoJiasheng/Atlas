@@ -1172,6 +1172,7 @@ export const partsFileBase = z
       const countable = new Set(file.parts.filter((p) => p.repeat !== undefined && (p.extra ?? []).length === 0).map((p) => p.id));
       for (const x of simIssues(file.sim, {
         parts: new Set(file.parts.map((p) => p.id)),
+        partData: file.parts,
         flows: new Map(file.flows.map((f) => [f.id, { paths: f.paths, own: f.path.length > 0 }])),
         animations: new Map(file.animations.map((a) => [a.id, { kind: a.kind, target: a.target }])),
         poses: new Set(Object.keys(file.poses ?? {})),
