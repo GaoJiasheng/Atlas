@@ -1,0 +1,116 @@
+---
+id: "straight-lines"
+order: 2
+title: {"en": "Light travels in straight lines", "zh": "光沿直线传播"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: true
+  cutaway: "none"
+  layers: ["source", "objects", "sheets", "screen", "hole-cards", "rays"]
+  labels: ["hole-card-1", "hole-card-2", "hole-card-3"]
+  camera: {"position": [-1.02, 1.52, 1.52], "target": [0.06, 1.0, 0.02], "fov": 30}
+  summary: {"en": "Light travels in straight lines. When something blocks it, the light cannot bend round, and there is a shadow behind.", "zh": "光沿直线传播。光被东西挡住时，不会拐弯绕过去，后面就形成影子。"}
+  sim:
+    set: {"object": "none", "material": "none", "middle": "in-line", "d-torch": 20, "d-screen": 30}
+    try:
+      vary: "middle"
+      keep: ["d-torch", "d-screen", {"en": "Same three cards", "zh": "同样的三张卡片"}]
+      observe: ["dot"]
+      record: true
+      predict:
+        prompt: {"en": "If the middle card is moved 2 cm to one side, will there still be a bright dot on the screen?", "zh": "如果把中间那张卡片往旁边挪 2 厘米，屏幕上还会有亮点吗？"}
+        start: {"middle": "in-line"}
+        change: {"middle": "moved"}
+        observe: "dot"
+        options:
+          - {"id": "dot", "label": {"en": "Yes, a dot", "zh": "有亮点"}, "means": "yes"}
+          - {"id": "no-dot", "label": {"en": "No dot", "zh": "没有亮点"}, "means": "no"}
+  beats:
+    - labels: ["hole-card-1", "hole-card-2", "hole-card-3", "screen-board"]
+      caption: {"en": "Three cards with small holes stand in a line between the torch and the screen. Light passes through all three holes and makes a bright dot on the screen.", "zh": "三张开了小孔的卡片排成一直线，立在手电筒和屏幕之间。光穿过三个小孔，在屏幕上照出一个亮点。"}
+    - camera: {"position": [-1.25, 1.42, 0.62], "target": [0.12, 1.03, 0.05], "fov": 30}
+      sim: {"set": {"middle": "moved"}}
+      labels: ["hole-card-2", "screen-board"]
+      caption: {"en": "Move the middle card two centimetres to one side, and the dot is gone. The light cannot bend round to reach the hole. Light travels in straight lines.", "zh": "把中间那张卡片往旁边挪两厘米，亮点就不见了：光不会拐弯去找那个小孔。光沿直线传播。"}
+    - sim: {"set": {"object": "card-circle"}}
+      hide: ["hole-card-1", "hole-card-2", "hole-card-3"]
+      labels: ["card-circle", "screen-board", "torch"]
+      caption: {"en": "Now a solid card stands in the way. The light that hits it is blocked; the light that misses it goes straight on to the screen. Where no light arrives, there is a shadow.", "zh": "现在挡在中间的是一张实心卡片。照到它的光被挡住，没照到它的光直走到屏幕上。光到不了的地方，就是影子。"}
+    - camera: {"position": [-0.05, 1.08, 3.3], "target": [-0.05, 1.04, 0.05], "fov": 20}
+      sim: {"set": {"object": "card-circle"}}
+      hide: ["hole-card-1", "hole-card-2", "hole-card-3"]
+      labels: ["card-circle", "torch", "screen-board"]
+      caption: {"en": "The lines that just miss the top and bottom of the card meet the screen at the edges of the shadow.", "zh": "刚好擦过卡片上下边缘的光线，落在屏幕上，正是影子的边缘。"}
+    - sim: {"set": {"object": "card-circle", "torch-on": false}}
+      hide: ["hole-card-1", "hole-card-2", "hole-card-3"]
+      labels: ["torch", "card-circle", "screen-board"]
+      caption: {"en": "Switch the torch off, and the shadow goes with the light. A shadow is not a copy of the card; it is the place the light cannot reach.", "zh": "关掉手电筒，影子就跟着光一起不见了。影子不是卡片的复制品，而是光照不到的地方。"}
+  index: {"parts": ["hole-card-1", "hole-card-2", "hole-card-3", "card-circle", "torch", "screen-board"]}
+---
+
+<Lang en>
+
+Three cards, each with a small hole <Num s="S1">1.2 cm</Num> across, stand in a line between the torch and the screen. When the three holes and the torch are on one straight line, light passes through all of them and makes a bright dot on the screen. Follow the drawn path: it stays straight all the way.
+
+Move the middle card <Num s="S1">2 cm</Num> to one side. The dot is gone. Its hole is still there, but it is no longer on the straight line from the torch, and the light cannot bend round to reach it. On the Try it card, change only the middle card's position, keep the cards and both distances the same, and record whether there is a dot.
+
+Now take the cards away and put a solid round card in the holder. The light that hits the card is blocked. The light that misses it goes straight on to the screen. The place behind the card that the light cannot reach is its shadow, and on the screen you see where that place begins.
+
+Look from the side at the rays that just miss the top and bottom of the card. They meet the screen exactly at the edges of the shadow. These two rays come back in the next chapters: they explain why moving the torch or the screen changes the size of the shadow.
+
+Switch the torch off and the shadow goes, together with the bright patch. The card and the screen are still there. A shadow is not a copy of the card and does not carry its colour or pattern: it is simply the place where the light is missing.
+
+<More title={{"en": "Holes of light in a shadow", "zh": "影子里的亮孔"}}>
+
+Each card with a hole makes a square shadow with a bright spot where light gets through the hole. With all three holes in line, in this model, one bright dot about <Num s="S1">2.0 cm</Num> across is left on the screen. A shadow keeps the holes and the outline of what makes it, nothing else.
+
+</More>
+
+<More title={{"en": "The space behind the card", "zh": "卡片后面的空间"}}>
+
+The shadow is not only on the screen. Hold a small piece of white paper anywhere between the card and the screen, in line with the card, and it is dark too: the light cannot reach any of that space. The screen just shows where the space ends. Light bouncing off the walls of a room can still reach it a little, so a real shadow is seldom completely black.
+
+</More>
+
+<More title={{"en": "Why real shadows can look blurry", "zh": "真实的影子为什么会模糊"}}>
+
+This goes beyond the syllabus. A real lamp or torch is not a single point: light comes from an area. Near the edge of a shadow, an object can block the light from part of that area while light from the rest still gets through. This half-lit edge is called the <Term id="penumbra">penumbra</Term>, and you will meet it again in secondary school. The torch in this model is a single point, so its shadows have sharp edges.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+三张卡片排成一直线，立在手电筒和屏幕之间，每张中间都有一个直径 <Num s="S1">1.2 厘米</Num>的小孔。三个小孔和手电筒在同一条直线上时，光穿过所有小孔，在屏幕上照出一个亮点。顺着画出来的路径看，它一路都是直的。
+
+把中间那张卡片往旁边挪 <Num s="S1">2 厘米</Num>，亮点就不见了。小孔还在，可是它已经不在从手电筒出发的那条直线上，光也不会拐弯去找它。在“试一试”卡片上，只改变中间那张卡片的位置，卡片和两个距离都保持不变，记下屏幕上有没有亮点。
+
+现在拿走这三张卡片，在支架上换一张实心的圆卡片。照到卡片的光被挡住，没照到它的光直走到屏幕上。卡片后面光照不到的那块地方就是它的影子；屏幕让我们看见这块地方从哪里开始。
+
+从侧面看那两条刚好擦过卡片上下边缘的光线：它们落到屏幕上，正好是影子的边缘。后面几章还会用到这两条光线，用它们来说明为什么移动手电筒或屏幕，影子的大小会变。
+
+关掉手电筒，影子和亮光一起消失了，卡片和屏幕却还在原处。影子不是卡片的复制品，不会带着卡片的颜色和花纹：它只是光照不到的地方。
+
+<More title={{"en": "Holes of light in a shadow", "zh": "影子里的亮孔"}}>
+
+每张有孔卡片都投下一个正方形的影子，中间有光透过小孔留下的亮点。三个小孔排成直线时，在这个模型里，屏幕上留下一个直径约 <Num s="S1">2.0 厘米</Num>的亮点。影子只记得挡光物的轮廓和孔洞，别的什么都没有。
+
+</More>
+
+<More title={{"en": "The space behind the card", "zh": "卡片后面的空间"}}>
+
+影子不只在屏幕上。在卡片和屏幕之间、正对着卡片的任何地方举起一小张白纸，白纸上也是暗的：那整块空间光都照不到，屏幕只是让我们看到这块空间的尽头。房间的墙会把一点光反射进来，所以真实的影子很少是全黑的。
+
+</More>
+
+<More title={{"en": "Why real shadows can look blurry", "zh": "真实的影子为什么会模糊"}}>
+
+这部分超出了课纲。真实的灯和手电筒不是一个点，光是从一块面积上发出的。在影子边缘，物体可能挡住了从这块面积一部分发出的光，另一部分的光还照得到。这一圈半明半暗的边缘叫<Term id="penumbra">半影</Term>，中学会再学。这个模型里的手电筒是一个点，所以影子的边缘是清楚的。
+
+</More>
+
+</Lang>

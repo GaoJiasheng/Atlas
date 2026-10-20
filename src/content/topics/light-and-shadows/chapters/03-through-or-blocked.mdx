@@ -1,0 +1,117 @@
+---
+id: "through-or-blocked"
+order: 3
+title: {"en": "Through, partly, or not at all", "zh": "光能不能穿过"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: true
+  cutaway: "none"
+  layers: ["source", "objects", "sheets", "screen", "rays"]
+  labels: ["clear-glass", "screen-board", "light-sensor"]
+  camera: {"position": [-1.25, 1.4, 0.7], "target": [-0.02, 1.02, 0.05], "fov": 30}
+  summary: {"en": "Some materials let most light through, some let some light through, and some let none through. The less light a sheet lets through to the screen, the darker its shadow.", "zh": "有的材料让大部分光穿过，有的让一部分光穿过，有的完全不让光穿过。照到屏幕上的光越少，影子就越深。"}
+  sim:
+    set: {"object": "none", "material": "clear-glass", "d-torch": 20, "d-screen": 10}
+    try:
+      vary: "material"
+      keep: ["d-torch", "d-screen", {"en": "Same size of sheet", "zh": "同样大小的材料片"}, {"en": "Same room lighting", "zh": "同样的室内光线"}]
+      observe: ["light-behind", "shadow-kind"]
+      record: {"chart": {"y": "light-behind"}}
+      predict:
+        prompt: {"en": "Change the clear glass for frosted glass. Will more or less light reach the screen behind it?", "zh": "把透明玻璃换成磨砂玻璃，照到后面屏幕上的光会更多还是更少？"}
+        start: {"material": "clear-glass"}
+        change: {"material": "frosted-glass"}
+        observe: "light-behind"
+        options:
+          - {"id": "more", "label": {"en": "More", "zh": "更多"}, "means": "more"}
+          - {"id": "less", "label": {"en": "Less", "zh": "更少"}, "means": "less"}
+          - {"id": "same", "label": {"en": "About the same", "zh": "差不多"}, "means": "same"}
+  beats:
+    - labels: ["clear-glass", "screen-board"]
+      caption: {"en": "Clear glass lets most light through. Its shadow is so faint you can hardly see it, and you can see clearly through the glass.", "zh": "透明玻璃让大部分光穿过。它的影子淡得几乎看不出来，隔着玻璃也看得清清楚楚。"}
+    - sim: {"set": {"material": "frosted-glass"}}
+      labels: ["frosted-glass", "screen-board"]
+      caption: {"en": "Frosted glass also lets a lot of light through, but it scatters the light in all directions. Less of it reaches the screen straight behind, so the shadow is lighter, not dark.", "zh": "磨砂玻璃也让很多光穿过，但它把光向四面八方散开，照到正后方屏幕上的光就少了，所以影子是淡的，不是黑的。"}
+    - sim: {"set": {"material": "tracing-paper"}}
+      labels: ["tracing-paper", "screen-board"]
+      caption: {"en": "Tracing paper lets some light through and scatters it too. Its shadow is lighter than the shadow of cardboard.", "zh": "描图纸让一部分光穿过，也把光散开。它的影子比硬纸板的淡。"}
+    - sim: {"set": {"material": "cardboard"}}
+      labels: ["cardboard-sheet", "screen-board"]
+      caption: {"en": "Cardboard lets no light through. All the light that hits it is blocked, so its shadow is dark.", "zh": "硬纸板不让光穿过。照到它的光全被挡住，所以影子很深。"}
+    - camera: {"position": [0.75, 1.3, 0.95], "target": [0.12, 0.92, 0.08], "fov": 30}
+      sim: {"set": {"material": "frosted-glass"}}
+      labels: ["light-sensor", "datalogger", "screen-board"]
+      caption: {"en": "A light sensor on the screen measures the light reaching it, compared with an empty holder. In this model: clear glass ninety-one percent, frosted glass forty-five, tracing paper thirty-five, cardboard zero.", "zh": "屏幕上的光传感器测量照到它的光，和支架上什么都不放时比较。在这个模型里：透明玻璃百分之九十一，磨砂玻璃百分之四十五，描图纸百分之三十五，硬纸板是零。"}
+  index: {"parts": ["clear-glass", "frosted-glass", "tracing-paper", "cardboard-sheet", "light-sensor", "datalogger", "screen-board"]}
+---
+
+<Lang en>
+
+Put clear glass in the holder and look at the screen. Most of the light goes straight through, so the glass leaves only a very faint shadow, and you can see clearly through it. A glass maker gives the light passing through clear glass of this kind as <Num s="S8">91 %</Num>.
+
+Change to frosted glass. It lets a lot of light through as well: about <Num s="S9">83 %</Num> for the frosted glass in the maker's figures. But its rough face scatters the light in all directions, so you cannot see clearly through it, and less light reaches the screen straight behind. Its shadow is lighter, not dark. Tracing paper does the same: it lets some light through and scatters it, so its shadow is lighter than cardboard's.
+
+<Figure src="figures/light-and-shadows-opaque-translucent" alt={{"en": "Three square sheets standing in a wooden rack beside a torch lying on its side: clear glass, through which the rack behind shows sharply; frosted glass, through which it is only a blur; and a wooden board, through which nothing shows.", "zh": "木架上竖着三块方形的板，旁边横放着一支手电筒：透过透明玻璃，后面的木架看得清清楚楚；透过磨砂玻璃，只看到一片模糊；木板后面什么也看不见。"}} caption={{"en": "Clear, frosted, and a board that lets no light through. Illustration for this topic.", "zh": "透明玻璃、磨砂玻璃，还有一块完全不透光的木板。为本主题画的示意图。"}} />
+
+Now try the cardboard. It lets no light through: all the light that reaches it is blocked, so its shadow is dark.
+
+The light sensor in the middle of the screen measures the light reaching it, compared with the reading when the holder is empty. In this model it reads <Num s="S1">91 %</Num> for clear glass, <Num s="S1">45 %</Num> for frosted glass, <Num s="S1">35 %</Num> for tracing paper and <Num s="S1">0 %</Num> for cardboard. Frosted glass lets most of the light through, but only part of it reaches the small sensor straight behind.
+
+This is a fair test of the sheets: keep the distances, the size of the sheet and the room lighting the same, and change only the sheet. Record each reading and compare the bars on the graph.
+
+<More title={{"en": "Most, some or none", "zh": "大部分、一部分、完全不"}}>
+
+You can sort materials by whether they let most light, some light or no light through. Some books use three words for this: <Term id="transparent">transparent</Term> for materials you can see clearly through, such as clear glass; <Term id="translucent">translucent</Term> for materials that let light through but blur what is behind, such as frosted glass and tracing paper; and <Term id="opaque">opaque</Term> for materials that let no light through, such as cardboard. You do not need these words; "most, some or none" says the same thing. Translucent does not mean exactly half the light.
+
+</More>
+
+<More title={{"en": "Frosted glass lets most light through", "zh": "磨砂玻璃让大部分光穿过"}}>
+
+Letting light through and letting you see through are not the same. Frosted glass lets about <Num s="S9">83 %</Num> of the light through, nearly as much as clear glass, but it spreads that light out. In this model, with the screen <Num s="S1">30 cm</Num> behind the sheet instead of <Num s="S1">10 cm</Num>, the sensor reads only <Num s="S1">18 %</Num> for frosted glass and <Num s="S1">14 %</Num> for tracing paper: the spread-out light thins out over the longer distance, so the shadow looks darker.
+
+</More>
+
+<More title={{"en": "About these numbers", "zh": "关于这些数字"}}>
+
+The two glass figures are what a maker states for its products. For tracing paper, one measured sample of thick tracing paper let about <Num s="S10">65 %</Num> of the light through; thinner tracing papers let through more. The way this model spreads the light is deliberately simple, so its sensor readings are a guide, not a prediction for a sheet in your classroom. Cardboard is taken to let no light through. In a real test, first take a reading with nothing in the holder, then compare each sheet with it.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+把透明玻璃放进支架，看看屏幕。大部分光直穿过去，所以玻璃只留下很淡的影子，隔着它也看得清清楚楚。玻璃厂商给出这类透明玻璃的透光率是 <Num s="S8">91%</Num>。
+
+换成磨砂玻璃。它也让很多光穿过：按厂商的数据，这种磨砂玻璃的透光率约 <Num s="S9">83%</Num>。可是它粗糙的那一面把光向四面八方散开，所以隔着它看不清楚，照到正后方屏幕上的光也少了。它的影子是淡的，不是黑的。描图纸也一样：它让一部分光穿过，并把光散开，所以影子比硬纸板的淡。
+
+<Figure src="figures/light-and-shadows-opaque-translucent" alt={{"en": "Three square sheets standing in a wooden rack beside a torch lying on its side: clear glass, through which the rack behind shows sharply; frosted glass, through which it is only a blur; and a wooden board, through which nothing shows.", "zh": "木架上竖着三块方形的板，旁边横放着一支手电筒：透过透明玻璃，后面的木架看得清清楚楚；透过磨砂玻璃，只看到一片模糊；木板后面什么也看不见。"}} caption={{"en": "Clear, frosted, and a board that lets no light through. Illustration for this topic.", "zh": "透明玻璃、磨砂玻璃，还有一块完全不透光的木板。为本主题画的示意图。"}} />
+
+再试试硬纸板。它不让光穿过：照到它的光全被挡住，所以影子很深。
+
+屏幕中间的光传感器测量照到它的光，和支架上什么都不放时的读数比较。在这个模型里，透明玻璃是 <Num s="S1">91%</Num>，磨砂玻璃是 <Num s="S1">45%</Num>，描图纸是 <Num s="S1">35%</Num>，硬纸板是 <Num s="S1">0%</Num>。磨砂玻璃让大部分光穿过，可是只有一部分照到正后方那个小小的传感器上。
+
+这是比较几种材料片的公平测试：距离、材料片的大小、房间里的光线都保持不变，只换材料片。把每次的读数记下来，再比较条形图上的柱子。
+
+<More title={{"en": "Most, some or none", "zh": "大部分、一部分、完全不"}}>
+
+可以按“让大部分光、一部分光，还是完全不让光穿过”给材料分类。有些书用三个词来说：<Term id="transparent">透明</Term>，指隔着它看得清楚的材料，例如透明玻璃；<Term id="translucent">半透明</Term>，指让光穿过、但后面看不清的材料，例如磨砂玻璃和描图纸；<Term id="opaque">不透明</Term>，指完全不让光穿过的材料，例如硬纸板。不用这三个词也没关系，说“大部分、一部分、完全不”意思一样。“半透明”不是“正好一半的光”。
+
+</More>
+
+<More title={{"en": "Frosted glass lets most light through", "zh": "磨砂玻璃让大部分光穿过"}}>
+
+让光穿过和让人看得清，不是一回事。磨砂玻璃让约 <Num s="S9">83%</Num> 的光穿过，差不多和透明玻璃一样多，只是把光散开了。在这个模型里，屏幕从材料片后面 <Num s="S1">10 厘米</Num>移到 <Num s="S1">30 厘米</Num>，磨砂玻璃的读数只剩 <Num s="S1">18%</Num>，描图纸只剩 <Num s="S1">14%</Num>：散开的光走得越远越稀，影子看起来就更深。
+
+</More>
+
+<More title={{"en": "About these numbers", "zh": "关于这些数字"}}>
+
+两种玻璃的数字是厂商对自己产品的说明。描图纸方面，一种较厚的描图纸实测让约 <Num s="S10">65%</Num> 的光穿过，薄一些的透过得更多。这个模型让光散开的算法是故意简化的，所以传感器读数只能作参考，不能用来预测你教室里某一张材料片的读数。硬纸板当作完全不透光。真正做实验时，先在支架上什么都不放，读一次数，再拿每张材料片和它比较。
+
+</More>
+
+</Lang>

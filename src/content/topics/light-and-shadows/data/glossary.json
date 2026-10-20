@@ -1,0 +1,87 @@
+{
+  "terms": [
+    {
+      "id": "light-source",
+      "term": { "en": "Light source", "zh": "光源" },
+      "definition": { "en": "Something that gives out its own light, such as the Sun, a lit lamp or a torch that is switched on.", "zh": "自己会发出光的东西，例如太阳、亮着的灯、打开的手电筒。" },
+      "see": ["reflect"]
+    },
+    {
+      "id": "reflect",
+      "term": { "en": "Reflect", "zh": "反射" },
+      "definition": { "en": "When light hits something and bounces off it. Dull, rough things reflect light in many directions; a mirror reflects it very well.", "zh": "光照到物体上又被弹回来。暗的、粗糙的东西把光向许多方向反射；镜子把光反射得很好。" },
+      "see": ["light-source"]
+    },
+    {
+      "id": "light-ray",
+      "term": { "en": "Light ray", "zh": "光线" },
+      "definition": { "en": "A straight line drawn to show the path that light takes. Rays are drawn in; you cannot see them from the side.", "zh": "画来表示光走的路径的直线。光线是画上去的，从旁边是看不见的。" },
+      "see": ["shadow"]
+    },
+    {
+      "id": "shadow",
+      "term": { "en": "Shadow", "zh": "影子" },
+      "definition": { "en": "The place behind an object that the light cannot reach because the object blocks it. A shadow has the object's outline but no colour or pattern.", "zh": "物体挡住光以后，它后面光照不到的地方。影子有物体的轮廓，但没有颜色和花纹。" },
+      "see": ["light-ray", "screen"]
+    },
+    {
+      "id": "screen",
+      "term": { "en": "Screen", "zh": "屏幕" },
+      "definition": { "en": "A surface that catches light and shows the shadow: a white board, a wall, the floor or a sheet of paper.", "zh": "接住光、让影子显出来的面：白板、墙、地面或一张纸都可以。" },
+      "see": ["shadow"]
+    },
+    {
+      "id": "transparent",
+      "term": { "en": "Transparent", "zh": "透明" },
+      "definition": { "en": "Lets most light through, so you can see clearly through it, like clear glass. The syllabus does not ask you to use this word.", "zh": "让大部分光穿过，隔着它看得清楚，例如透明玻璃。课纲不要求用这个词。" },
+      "see": ["translucent", "opaque"]
+    },
+    {
+      "id": "translucent",
+      "term": { "en": "Translucent", "zh": "半透明" },
+      "definition": { "en": "Lets some light through but scatters it, so you cannot see clearly through it, like frosted glass or tracing paper. It does not mean exactly half the light. The syllabus does not ask you to use this word.", "zh": "让一部分光穿过，但把光散开，隔着它看不清楚，例如磨砂玻璃、描图纸。它不是“正好一半的光”。课纲不要求用这个词。" },
+      "see": ["transparent", "opaque"]
+    },
+    {
+      "id": "opaque",
+      "term": { "en": "Opaque", "zh": "不透明" },
+      "definition": { "en": "Lets no light through, like cardboard or wood. The syllabus does not ask you to use this word.", "zh": "不让光穿过，例如硬纸板、木板。课纲不要求用这个词。" },
+      "see": ["transparent", "translucent"]
+    },
+    {
+      "id": "light-sensor",
+      "term": { "en": "Light sensor", "zh": "光传感器" },
+      "definition": { "en": "A small probe that measures how much light falls on it.", "zh": "测量照到它的光有多少的小探头。" },
+      "see": ["datalogger"]
+    },
+    {
+      "id": "datalogger",
+      "term": { "en": "Datalogger", "zh": "数据记录器" },
+      "definition": { "en": "An instrument that shows and records the readings from a sensor.", "zh": "显示并记下传感器读数的仪器。" },
+      "see": ["light-sensor"]
+    },
+    {
+      "id": "fair-test",
+      "term": { "en": "Fair test", "zh": "公平测试" },
+      "definition": { "en": "An experiment in which you change only the one thing you are testing and keep everything else that could affect the result the same.", "zh": "只改变要研究的那一个因素，其他会影响结果的条件都保持不变的实验。" },
+      "see": ["variable"]
+    },
+    {
+      "id": "variable",
+      "term": { "en": "Variable", "zh": "变量" },
+      "definition": { "en": "Something in an experiment that can change and may affect the result, such as the distance from the torch to the object.", "zh": "实验里可以改变、可能影响结果的量，例如手电筒到物体的距离。" },
+      "see": ["fair-test"]
+    },
+    {
+      "id": "penumbra",
+      "term": { "en": "Penumbra", "zh": "半影" },
+      "definition": { "en": "The blurry edge of a shadow, where an object blocks only part of the light from a light source that has some size. You will learn more about it in secondary school.", "zh": "影子边缘模糊的一圈：光源有一定大小时，那里只有一部分光被挡住。中学会再学。" },
+      "see": ["shadow"]
+    },
+    {
+      "id": "compass-direction",
+      "term": { "en": "Compass direction", "zh": "方位" },
+      "definition": { "en": "One of the eight directions north, north-east, east, south-east, south, south-west, west and north-west.", "zh": "北、东北、东、东南、南、西南、西、西北这八个方向之一。" }
+    }
+  ]
+}

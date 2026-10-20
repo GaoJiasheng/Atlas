@@ -1,0 +1,111 @@
+---
+id: "seeing-light"
+order: 1
+title: {"en": "Seeing light", "zh": "看见光"}
+sensitive: false
+state:
+  view: "xray"
+  explode: 0
+  part: null
+  run: true
+  cutaway: "none"
+  layers: ["dark-box", "rays"]
+  labels: ["box", "box-torch", "box-ball"]
+  camera: {"position": [0.24, 1.08, 0.38], "target": [-0.42, 0.82, -0.13], "fov": 30}
+  summary: {"en": "We see a light source because its light enters our eyes. We see other things only when light falls on them and they reflect some of it into our eyes.", "zh": "我们看见光源，是因为它的光进入了眼睛。别的东西，要有光照到它、它把一部分光反射进我们的眼睛，我们才看得见。"}
+  sim:
+    set: {"box-torch": false, "in-box": "ball"}
+    try:
+      vary: "box-torch"
+      also: ["in-box"]
+      keep: [{"en": "Same closed box", "zh": "同一只盖好的盒子"}, {"en": "Same small hole", "zh": "同一个小孔"}]
+      observe: ["eye"]
+      record: true
+      predict:
+        prompt: {"en": "The torch in the box is switched off. Will any light come out through the hole?", "zh": "关掉箱里的手电筒，还会有光从小孔出来吗？"}
+        start: {"box-torch": true, "in-box": "ball"}
+        change: {"box-torch": false}
+        observe: "eye"
+        options:
+          - {"id": "yes", "label": {"en": "Yes, some", "zh": "会，有一些"}, "means": "some"}
+          - {"id": "no", "label": {"en": "No, none", "zh": "不会，一点也没有"}, "means": "none"}
+  beats:
+    - labels: ["box", "box-ball", "box-inside"]
+      caption: {"en": "The torch in the box is off and the lid is closed. No light reaches the ball and none comes out through the hole. Looking in, you would see nothing at all.", "zh": "箱里的手电筒关着，盖子也盖着。没有光照到球上，也没有光从小孔出来。从小孔看进去，什么也看不见。"}
+    - sim: {"set": {"box-torch": true}}
+      labels: ["box-torch", "box-ball", "box"]
+      caption: {"en": "Switch the torch on. Light travels to the ball, and some of the light the ball reflects comes out through the hole, into your eye. Now you can see the ball.", "zh": "打开手电筒。光照到球上，球反射的光有一部分从小孔出来，进入你的眼睛，你就看见球了。"}
+    - sim: {"set": {"box-torch": true}}
+      labels: ["box-torch", "box-ball"]
+      caption: {"en": "The torch is a light source: it gives out its own light. The ball is not. We can see the ball only because it reflects some of the torch's light.", "zh": "手电筒是光源，自己会发光；球不是。我们看得见球，只是因为它把手电筒的一部分光反射了出来。"}
+    - sim: {"set": {"box-torch": true, "in-box": "mirror"}}
+      labels: ["box-mirror", "box-torch"]
+      caption: {"en": "A mirror reflects light too, and very well. Through the hole you would see a bright patch of the torch's light.", "zh": "镜子也反射光，而且反射得很好。从小孔看进去，会看到一片明亮的手电筒光。"}
+    - labels: ["box-ball", "box", "box-inside"]
+      caption: {"en": "Our eyes do not send out light; they only take it in. If they sent out light, you could see the ball in the dark box.", "zh": "眼睛不会发出光，只会接收光。要是眼睛会发光，在暗箱里也能看见球了。"}
+  index: {"parts": ["box", "box-torch", "box-ball", "box-mirror", "box-inside"]}
+---
+
+<Lang en>
+
+Inside the box, a small torch points across at a ball, and the lid is closed. The box is drawn here as if you could see through its walls; through the small hole in the front you would see only what light brings out to you. The torch is a light source. The ball is not: it gives out no light of its own.
+
+With the torch switched off, the ball is still in the box, but no light reaches it, so there is no light for it to send out through the hole. Looking in, you would see nothing at all; the model shades the inside of the box dark to show this. A white or pale ball is no different: in complete darkness, nothing can be seen.
+
+Switch the torch on and follow the drawn paths. Light travels from the torch to the ball. The ball <Term id="reflect">reflects</Term> some of it: light bounces off its surface in many directions, and some of that light comes out through the hole and into your eye. Now you can see the ball. Your eye takes light in; it does not send light out to find the ball.
+
+Now put the mirror in the box instead. A mirror reflects light very well, so through the hole you would see a bright patch of torchlight. A dull ball reflects light too, only it spreads the light out in many directions. Books, walls and clothes are seen in the same way, by the light they reflect into your eyes.
+
+On the Try it card, switch the torch off and on and record what comes out of the hole. Keep the same closed box and the same hole. Then try the mirror in place of the ball.
+
+<More title={{"en": "Light sources and things that reflect", "zh": "光源和反射光的东西"}}>
+
+The Sun, a lit lamp and a torch that is switched on give out their own light: they are light sources. A ball, a book and the Moon are not. The Moon does not make its own light: moonlight is sunlight reflected from the Moon. Something that looks bright or shiny is not always a light source.
+
+</More>
+
+<More title={{"en": "Dull things reflect light too", "zh": "不亮的东西也反射光"}}>
+
+A rough surface, such as paper, cloth or a wall, reflects light in many different directions. That is why you can see a sheet of paper from anywhere in a lit room. A mirror sends the light on together, so you see a bright reflection only from certain places. Both reflect light; they spread it differently.
+
+</More>
+
+<More title={{"en": "Does light go farther at night?", "zh": "晚上光走得更远吗"}}>
+
+No. A torch's light goes just as far by day as by night. At night the surroundings are dark, so the bright patch where the light lands stands out more. If there is dust or mist in the air, a little light bounces off it into your eyes, and then you can see part of the beam from the side.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+箱子里，一支小手电筒对着一只球，盖子是盖着的。这里把箱子画得像能看穿箱壁一样；真的从正面的小孔看进去，只看得到光从里面带出来的东西。手电筒是光源。球不是，它自己一点光也不发。
+
+手电筒关着的时候，球还在箱子里，可是没有光照到它，也就没有光能从小孔送出来。从小孔看进去，什么也看不见；模型把箱子里面画暗，表示这一点。白色或浅色的球也一样：完全没有光的地方，什么都看不见。
+
+打开手电筒，顺着画出来的路径看。光从手电筒照到球上，球把一部分光<Term id="reflect">反射</Term>出去：光从球面弹向许多方向，其中一些从小孔出来，进入你的眼睛，你就看见球了。眼睛是接收光的，不是向外发光去“找”球。
+
+现在把箱里的球换成镜子。镜子把光反射得很好，所以从小孔看进去，会看到一片明亮的手电筒光。哑光的球也反射光，只是把光散向许多方向。书、墙、衣服也是这样被看见的：它们把光反射进我们的眼睛。
+
+在“试一试”卡片上，把手电筒关上、打开，记下从小孔出来的是什么光。盒子、小孔都保持不变。然后再把球换成镜子试试。
+
+<More title={{"en": "Light sources and things that reflect", "zh": "光源和反射光的东西"}}>
+
+太阳、亮着的灯、打开的手电筒，都自己发出光，它们是光源。球、书、月亮不是。月亮自己不发光，月光是月亮反射的太阳光。看起来很亮、亮闪闪的东西，不一定是光源。
+
+</More>
+
+<More title={{"en": "Dull things reflect light too", "zh": "不亮的东西也反射光"}}>
+
+纸、布、墙这些粗糙的表面，把光反射向许多不同的方向，所以在亮着灯的房间里，从哪个位置都看得见一张纸。镜子则把光整束地送出去，只有在某些位置才看得到明亮的倒影。两者都反射光，只是把光送出去的方式不同。
+
+</More>
+
+<More title={{"en": "Does light go farther at night?", "zh": "晚上光走得更远吗"}}>
+
+不会。手电筒的光白天和晚上走得一样远。晚上周围暗，光照到的那一片才显得特别亮。要是空气里有灰尘或雾，一点点光会被它们弹进眼睛，这时从旁边也能看到一段光束。
+
+</More>
+
+</Lang>

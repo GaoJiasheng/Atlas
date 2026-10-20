@@ -1,0 +1,5722 @@
+{
+  "parts": [
+    {
+      "id": "torch",
+      "name": {
+        "en": "Torch",
+        "zh": "手电筒"
+      },
+      "group": "source",
+      "summary": {
+        "en": "A light source: it gives out its own light.",
+        "zh": "光源：自己发出光。"
+      },
+      "detail": {
+        "en": "A small LED torch on a clamp. Light leaves the lens and spreads out in a cone; in this model it comes from a single point at the centre of the lens and the beam spreads 40° each side of its middle line [S1]. Because the source is a point, every shadow on the screen has a sharp edge.\n\nA real torch has an LED and a shiny reflector of some size, so the edge of its shadow is a little blurred [S7]. Never shine a torch into anyone’s eyes.",
+        "zh": "一支夹在夹座上的小 LED 手电筒。光从镜片射出，向前散开成一个圆锥。在这个模型里，光从镜片中心的一个点发出，光束向中线两边各张开 40° [S1]。光源是一个点，所以屏幕上每个影子的边缘都是清楚的。\n\n真实的手电筒里，LED 和反光杯都有一定大小，影子的边缘会有点模糊 [S7]。不要用手电筒照别人的眼睛。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0,
+            -0.0007
+          ],
+          [
+            0.0172,
+            -0.0007
+          ],
+          [
+            0.0172,
+            0.0007
+          ],
+          [
+            0,
+            0.0007
+          ]
+        ],
+        "segments": 48,
+        "at": [
+          -0.0007,
+          1.05,
+          0.05
+        ],
+        "rotation": [
+          0,
+          0,
+          90
+        ],
+        "color": "glass"
+      },
+      "extra": [
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              0.004
+            ],
+            [
+              0.0172,
+              0.004
+            ],
+            [
+              0.0172,
+              0.0006
+            ],
+            [
+              0.0215,
+              0.0006
+            ],
+            [
+              0.0222,
+              0.002
+            ],
+            [
+              0.0222,
+              0.028
+            ],
+            [
+              0.0158,
+              0.05
+            ],
+            [
+              0.0148,
+              0.054
+            ],
+            [
+              0.0148,
+              0.132
+            ],
+            [
+              0.0157,
+              0.134
+            ],
+            [
+              0.0157,
+              0.152
+            ],
+            [
+              0.0125,
+              0.158
+            ],
+            [
+              0,
+              0.158
+            ]
+          ],
+          "segments": 48,
+          "at": [
+            0,
+            1.05,
+            0.05
+          ],
+          "rotation": [
+            0,
+            0,
+            90
+          ],
+          "color": "powder",
+          "tint": "#3e4246"
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0.006,
+              0.0035
+            ],
+            [
+              0.0168,
+              0.0016
+            ],
+            [
+              0.0168,
+              0.0022
+            ],
+            [
+              0.006,
+              0.0041
+            ]
+          ],
+          "segments": 48,
+          "at": [
+            0,
+            1.05,
+            0.05
+          ],
+          "rotation": [
+            0,
+            0,
+            90
+          ],
+          "color": "stainless"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.014,
+            0.005,
+            0.009
+          ],
+          "bevel": 0.002,
+          "at": [
+            -0.075,
+            1.0658,
+            0.05
+          ],
+          "color": "rubber"
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0.0149,
+              -0.012
+            ],
+            [
+              0.0154,
+              -0.012
+            ],
+            [
+              0.0154,
+              0.012
+            ],
+            [
+              0.0149,
+              0.012
+            ]
+          ],
+          "segments": 48,
+          "at": [
+            -0.112,
+            1.05,
+            0.05
+          ],
+          "rotation": [
+            0,
+            0,
+            90
+          ],
+          "color": "rubber"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.12
+      },
+      "connects": [
+        "torch-stand",
+        "object-holder"
+      ]
+    },
+    {
+      "id": "torch-stand",
+      "name": {
+        "en": "Torch clamp",
+        "zh": "手电筒夹座"
+      },
+      "group": "source",
+      "summary": {
+        "en": "Holds the torch level, sliding along the track.",
+        "zh": "把手电筒托平，可沿轨道滑动。"
+      },
+      "detail": {
+        "en": "A ring clamp on an upright rod, fixed to a carriage that slides along the track. The clamp holds the torch so that the centre of its lens is level with the middle of the object and of the screen, 30 cm above the table [S1].\n\nMoving the carriage changes only one distance: from the torch to the object.",
+        "zh": "立杆上的一个环形夹，立杆装在可以沿轨道滑动的滑座上。夹座把手电筒托住，让镜片中心与物体中心、屏幕中心一样高，都在桌面上方 30 厘米 [S1]。\n\n移动滑座，只改变一个距离：手电筒到物体的距离。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.005,
+          0.005,
+          0.24550000000000005
+        ],
+        "at": [
+          -0.085,
+          0.9087500000000001,
+          0.05
+        ],
+        "color": "steel"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.06,
+            0.026,
+            0.075
+          ],
+          "bevel": 0.003,
+          "at": [
+            -0.085,
+            0.773,
+            0.05
+          ],
+          "color": "powder",
+          "tint": "#4a4d50"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.007,
+            0.007,
+            0.012
+          ],
+          "at": [
+            -0.085,
+            0.774,
+            0.0935
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "color": "rubber"
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0.0149,
+              -0.007
+            ],
+            [
+              0.0185,
+              -0.007
+            ],
+            [
+              0.0185,
+              0.007
+            ],
+            [
+              0.0149,
+              0.007
+            ]
+          ],
+          "segments": 48,
+          "at": [
+            -0.085,
+            1.05,
+            0.05
+          ],
+          "rotation": [
+            0,
+            0,
+            90
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.014,
+            0.012,
+            0.014
+          ],
+          "bevel": 0.002,
+          "at": [
+            -0.085,
+            1.0290000000000001,
+            0.05
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.004,
+            0.004,
+            0.012
+          ],
+          "at": [
+            -0.085,
+            1.0290000000000001,
+            0.062
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "color": "rubber"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.06
+      },
+      "connects": [
+        "torch",
+        "track"
+      ]
+    },
+    {
+      "id": "track",
+      "name": {
+        "en": "Track",
+        "zh": "轨道"
+      },
+      "group": "source",
+      "summary": {
+        "en": "Keeps the torch, object and screen in a line.",
+        "zh": "让手电筒、物体、屏幕排成一线。"
+      },
+      "detail": {
+        "en": "A straight aluminium rail 150 cm long, marked every centimetre with a longer mark every 10 cm [S1]. The torch, the object holder and the screen ride on it, so they always stay on one straight line.\n\nRead a distance from one carriage to the next. The marks have no numbers on this model.",
+        "zh": "一条 150 厘米长的直铝轨，每 1 厘米一个刻度，每 10 厘米一条长刻度 [S1]。手电筒、物体支架和屏幕都装在它上面，所以总是在一条直线上。\n\n距离从一个滑座量到另一个滑座。这个模型的刻度上没有数字。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          1.5,
+          0.020000000000000018,
+          0.05
+        ],
+        "bevel": 0.002,
+        "at": [
+          0,
+          0.76,
+          0.05
+        ],
+        "color": "casing"
+      },
+      "extra": [
+        {
+          "kind": "fins",
+          "size": [
+            0.007,
+            0.0006,
+            0.0007
+          ],
+          "count": 151,
+          "gap": 0.0093,
+          "axis": "x",
+          "at": [
+            0,
+            0.7703,
+            0.0675
+          ],
+          "color": "powder"
+        },
+        {
+          "kind": "fins",
+          "size": [
+            0.014,
+            0.0007,
+            0.001
+          ],
+          "count": 16,
+          "gap": 0.099,
+          "axis": "x",
+          "at": [
+            0,
+            0.77035,
+            0.064
+          ],
+          "color": "powder"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.012,
+            0.03,
+            0.056
+          ],
+          "bevel": 0.002,
+          "at": [
+            -0.756,
+            0.765,
+            0.05
+          ],
+          "color": "powder",
+          "tint": "#4a4d50"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.012,
+            0.03,
+            0.056
+          ],
+          "bevel": 0.002,
+          "at": [
+            0.756,
+            0.765,
+            0.05
+          ],
+          "color": "powder",
+          "tint": "#4a4d50"
+        }
+      ],
+      "connects": [
+        "torch-stand",
+        "object-holder",
+        "screen-stand"
+      ]
+    },
+    {
+      "id": "object-holder",
+      "name": {
+        "en": "Holder",
+        "zh": "物体支架"
+      },
+      "group": "objects",
+      "summary": {
+        "en": "Holds the object on the line of the light.",
+        "zh": "把物体固定在光的路线上。"
+      },
+      "detail": {
+        "en": "A thin steel rod, 4 mm across, with a small clip at the top, on a carriage fixed at the middle of the track [S1]. The cards and sheets stand in the clip; the tin, the cone and the ball rest on top of it.\n\nThe rod blocks light too. The thin line of shadow below the main shadow on the screen is the rod’s; a real holder makes one as well.",
+        "zh": "一根直径 4 毫米的细钢杆，顶上有一个小夹子，装在固定于轨道中点的滑座上 [S1]。卡片和材料片夹在夹子里；罐子、圆锥和球放在夹子上面。\n\n细杆也会挡光。屏幕上主影子下面那条细细的影子就是细杆的；真实的支架也会有。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.002,
+          0.002,
+          0.21199999999999997
+        ],
+        "at": [
+          0.0045,
+          0.892,
+          0.05
+        ],
+        "color": "steel"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.05,
+            0.026,
+            0.075
+          ],
+          "bevel": 0.003,
+          "at": [
+            0,
+            0.773,
+            0.05
+          ],
+          "color": "powder",
+          "tint": "#4a4d50"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.007,
+            0.007,
+            0.012
+          ],
+          "at": [
+            0,
+            0.774,
+            0.0935
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "color": "rubber"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.008,
+            0.022,
+            0.014
+          ],
+          "bevel": 0.0015,
+          "at": [
+            0.0045,
+            1.0070000000000001,
+            0.05
+          ],
+          "color": "powder",
+          "tint": "#2f3134"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          -1,
+          0
+        ],
+        "dist": 0.03
+      },
+      "connects": [
+        "track",
+        "torch",
+        "screen-board"
+      ]
+    },
+    {
+      "id": "card-circle",
+      "name": {
+        "en": "Round card",
+        "zh": "圆形卡片"
+      },
+      "group": "objects",
+      "summary": {
+        "en": "Blocks light; its shadow has its round outline.",
+        "zh": "挡住光，影子是它的圆形轮廓。"
+      },
+      "detail": {
+        "en": "A shape cut from grey-brown cardboard 2 mm thick, clipped upright in the holder so that it faces the torch [S1]. Cardboard lets no light through in this model, so the card blocks every ray that reaches it and the screen behind shows its outline.\n\nTurn the card and its shadow narrows; edge-on to the torch it leaves only a thin strip. The shadow has the outline of the card as seen from the torch, never its colour or any pattern printed on it.",
+        "zh": "从 2 毫米厚的灰褐色硬纸板上剪下的形状，竖着夹在支架上，正对手电筒 [S1]。在这个模型里，硬纸板不让光穿过，照到卡片的光全被挡住，后面的屏幕上就留下它的轮廓。\n\n转动卡片，影子会变窄；侧对手电筒时，只剩一条细细的影子。影子是从手电筒那边看过去卡片的轮廓，不会有卡片的颜色，也不会有印在上面的图案。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0,
+            -0.001
+          ],
+          [
+            0.04,
+            -0.001
+          ],
+          [
+            0.04,
+            0.001
+          ],
+          [
+            0,
+            0.001
+          ]
+        ],
+        "segments": 96,
+        "at": [
+          0,
+          1.05,
+          0.05
+        ],
+        "rotation": [
+          0,
+          0,
+          90
+        ],
+        "color": "plastic",
+        "tint": "#b39a78"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.16
+      },
+      "connects": [
+        "object-holder"
+      ]
+    },
+    {
+      "id": "card-square",
+      "name": {
+        "en": "Square card",
+        "zh": "正方形卡片"
+      },
+      "group": "objects",
+      "summary": {
+        "en": "Blocks light; its shadow has its square outline.",
+        "zh": "挡住光，影子是它的正方形轮廓。"
+      },
+      "detail": {
+        "en": "A shape cut from grey-brown cardboard 2 mm thick, clipped upright in the holder so that it faces the torch [S1]. Cardboard lets no light through in this model, so the card blocks every ray that reaches it and the screen behind shows its outline.\n\nTurn the card and its shadow narrows; edge-on to the torch it leaves only a thin strip. The shadow has the outline of the card as seen from the torch, never its colour or any pattern printed on it.",
+        "zh": "从 2 毫米厚的灰褐色硬纸板上剪下的形状，竖着夹在支架上，正对手电筒 [S1]。在这个模型里，硬纸板不让光穿过，照到卡片的光全被挡住，后面的屏幕上就留下它的轮廓。\n\n转动卡片，影子会变窄；侧对手电筒时，只剩一条细细的影子。影子是从手电筒那边看过去卡片的轮廓，不会有卡片的颜色，也不会有印在上面的图案。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "extrude",
+        "shape": [
+          [
+            -0.04,
+            -0.04
+          ],
+          [
+            0.04,
+            -0.04
+          ],
+          [
+            0.04,
+            0.04
+          ],
+          [
+            -0.04,
+            0.04
+          ]
+        ],
+        "depth": 0.002,
+        "at": [
+          0,
+          1.05,
+          0.05
+        ],
+        "rotation": [
+          0,
+          90,
+          0
+        ],
+        "color": "plastic",
+        "tint": "#b39a78"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.16
+      },
+      "connects": [
+        "object-holder"
+      ]
+    },
+    {
+      "id": "card-triangle",
+      "name": {
+        "en": "Triangle card",
+        "zh": "三角形卡片"
+      },
+      "group": "objects",
+      "summary": {
+        "en": "Blocks light; its shadow has its triangle outline.",
+        "zh": "挡住光，影子是它的三角形轮廓。"
+      },
+      "detail": {
+        "en": "A shape cut from grey-brown cardboard 2 mm thick, clipped upright in the holder so that it faces the torch [S1]. Cardboard lets no light through in this model, so the card blocks every ray that reaches it and the screen behind shows its outline.\n\nTurn the card and its shadow narrows; edge-on to the torch it leaves only a thin strip. The shadow has the outline of the card as seen from the torch, never its colour or any pattern printed on it.",
+        "zh": "从 2 毫米厚的灰褐色硬纸板上剪下的形状，竖着夹在支架上，正对手电筒 [S1]。在这个模型里，硬纸板不让光穿过，照到卡片的光全被挡住，后面的屏幕上就留下它的轮廓。\n\n转动卡片，影子会变窄；侧对手电筒时，只剩一条细细的影子。影子是从手电筒那边看过去卡片的轮廓，不会有卡片的颜色，也不会有印在上面的图案。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "extrude",
+        "shape": [
+          [
+            -0.0462,
+            -0.04
+          ],
+          [
+            0.0462,
+            -0.04
+          ],
+          [
+            0,
+            0.04
+          ]
+        ],
+        "depth": 0.002,
+        "at": [
+          0,
+          1.05,
+          0.05
+        ],
+        "rotation": [
+          0,
+          90,
+          0
+        ],
+        "color": "plastic",
+        "tint": "#b39a78"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.16
+      },
+      "connects": [
+        "object-holder"
+      ]
+    },
+    {
+      "id": "card-circle-big",
+      "name": {
+        "en": "Big round card",
+        "zh": "大圆卡片"
+      },
+      "group": "objects",
+      "summary": {
+        "en": "A bigger card in the same place: a bigger shadow.",
+        "zh": "同一个位置，卡片越大，影子越大。"
+      },
+      "detail": {
+        "en": "A round card 12 cm across, cut from the same cardboard as the 8 cm card [S1]. In the same place, with the torch and the screen where they were, it makes a bigger shadow: 30 cm across instead of 20 cm in this model [S1].\n\nThe shadow keeps the card’s round outline; only its size changes.",
+        "zh": "一张直径 12 厘米的圆卡片，和 8 厘米的卡片用同样的硬纸板做成 [S1]。放在同一个位置，手电筒和屏幕都不动，它的影子更大：在这个模型里，直径是 30 厘米，不是 20 厘米 [S1]。\n\n影子仍然是圆形的轮廓，变的只是大小。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0,
+            -0.001
+          ],
+          [
+            0.06,
+            -0.001
+          ],
+          [
+            0.06,
+            0.001
+          ],
+          [
+            0,
+            0.001
+          ]
+        ],
+        "segments": 96,
+        "at": [
+          0,
+          1.05,
+          0.05
+        ],
+        "rotation": [
+          0,
+          0,
+          90
+        ],
+        "color": "plastic",
+        "tint": "#b39a78"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.16
+      },
+      "connects": [
+        "object-holder"
+      ]
+    },
+    {
+      "id": "tin",
+      "name": {
+        "en": "Tin",
+        "zh": "罐子"
+      },
+      "group": "objects",
+      "summary": {
+        "en": "Side-on a rectangle, end-on a circle.",
+        "zh": "侧对是长方形，端对是圆形。"
+      },
+      "detail": {
+        "en": "A plain metal tin 6.6 cm across and 12 cm long, lying on its side across the line of the light [S1]. Seen from the torch, its outline is a rectangle, so its shadow is a rectangle. Turn its round end towards the torch and the same tin makes a round shadow.\n\nOne object can make shadows of different shapes: what counts is the outline it shows to the light.",
+        "zh": "一只没有标签的铁罐，直径 6.6 厘米，长 12 厘米，横躺着，横过光的路线 [S1]。从手电筒那边看，它的轮廓是长方形，所以影子是长方形的。把圆圆的一头转向手电筒，同一个罐子的影子就变成圆形。\n\n同一个物体可以有不同形状的影子：要看它对着光源的那一面是什么轮廓。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0,
+            -0.0595
+          ],
+          [
+            0.0316,
+            -0.0595
+          ],
+          [
+            0.033,
+            -0.06
+          ],
+          [
+            0.0328,
+            -0.0565
+          ],
+          [
+            0.032,
+            -0.055
+          ],
+          [
+            0.0324,
+            -0.04
+          ],
+          [
+            0.032,
+            -0.038
+          ],
+          [
+            0.0324,
+            0.038
+          ],
+          [
+            0.032,
+            0.04
+          ],
+          [
+            0.0324,
+            0.055
+          ],
+          [
+            0.032,
+            0.0565
+          ],
+          [
+            0.0328,
+            0.0565
+          ],
+          [
+            0.033,
+            0.06
+          ],
+          [
+            0.0316,
+            0.0595
+          ],
+          [
+            0,
+            0.0595
+          ]
+        ],
+        "segments": 64,
+        "at": [
+          0,
+          1.05,
+          0.05
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "color": "stainless"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.16
+      },
+      "connects": [
+        "object-holder"
+      ]
+    },
+    {
+      "id": "cone",
+      "name": {
+        "en": "Paper cone",
+        "zh": "纸圆锥"
+      },
+      "group": "objects",
+      "summary": {
+        "en": "Side-on a triangle, end-on a circle.",
+        "zh": "侧对是三角形，端对是圆形。"
+      },
+      "detail": {
+        "en": "A cone rolled from white paper, 8 cm across the base and 10 cm long, lying on its side [S1]. Side-on to the torch its outline is a triangle; turned so that its base faces the torch, it makes a round shadow.\n\nA round shadow alone cannot tell you whether it came from a cone, a ball, a tin or a card.",
+        "zh": "用白纸卷成的圆锥，底面直径 8 厘米，长 10 厘米，横躺着 [S1]。侧对手电筒时，它的轮廓是三角形；把底面转向手电筒，影子就是圆形的。\n\n只看一个圆形的影子，说不出它是圆锥、球、罐子，还是卡片留下的。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0,
+            -0.0498
+          ],
+          [
+            0.0396,
+            -0.0498
+          ],
+          [
+            0.04,
+            -0.05
+          ],
+          [
+            0,
+            0.05
+          ]
+        ],
+        "segments": 64,
+        "at": [
+          0,
+          1.05,
+          0.05
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "color": "plastic",
+        "tint": "#e8e2d4"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.16
+      },
+      "connects": [
+        "object-holder"
+      ]
+    },
+    {
+      "id": "ball",
+      "name": {
+        "en": "Ball",
+        "zh": "球"
+      },
+      "group": "objects",
+      "summary": {
+        "en": "Makes a round shadow whichever way it turns.",
+        "zh": "怎么转，影子都是圆的。"
+      },
+      "detail": {
+        "en": "A ball 6.5 cm across with a dull, felt-like cover [S1]. From every direction its outline is a circle, so turning it never changes the shape of its shadow.\n\nIn this model its shadow is about 16 cm across with the torch 20 cm away and the screen 30 cm behind; it is slightly bigger than for a flat disc of the same size, because the torch sees a little round the curve of the ball [S1].",
+        "zh": "一只直径 6.5 厘米的球，表面是毛毡一样的哑光面 [S1]。从哪个方向看，它的轮廓都是圆形，所以怎么转，影子的形状都不变。\n\n在这个模型里，手电筒在前面 20 厘米、屏幕在后面 30 厘米时，它的影子直径约 16 厘米。这比同样大小的扁圆片的影子略大一点，因为从手电筒那边能看到球面再往外绕过一点 [S1]。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0,
+            -0.0325
+          ],
+          [
+            0.0025,
+            -0.0324
+          ],
+          [
+            0.0051,
+            -0.0321
+          ],
+          [
+            0.0076,
+            -0.0316
+          ],
+          [
+            0.01,
+            -0.0309
+          ],
+          [
+            0.0124,
+            -0.03
+          ],
+          [
+            0.0148,
+            -0.029
+          ],
+          [
+            0.017,
+            -0.0277
+          ],
+          [
+            0.0191,
+            -0.0263
+          ],
+          [
+            0.0211,
+            -0.0247
+          ],
+          [
+            0.023,
+            -0.023
+          ],
+          [
+            0.0247,
+            -0.0211
+          ],
+          [
+            0.0263,
+            -0.0191
+          ],
+          [
+            0.0277,
+            -0.017
+          ],
+          [
+            0.029,
+            -0.0148
+          ],
+          [
+            0.03,
+            -0.0124
+          ],
+          [
+            0.0309,
+            -0.01
+          ],
+          [
+            0.0316,
+            -0.0076
+          ],
+          [
+            0.0321,
+            -0.0051
+          ],
+          [
+            0.0324,
+            -0.0025
+          ],
+          [
+            0.0325,
+            0
+          ],
+          [
+            0.0324,
+            0.0025
+          ],
+          [
+            0.0321,
+            0.0051
+          ],
+          [
+            0.0316,
+            0.0076
+          ],
+          [
+            0.0309,
+            0.01
+          ],
+          [
+            0.03,
+            0.0124
+          ],
+          [
+            0.029,
+            0.0148
+          ],
+          [
+            0.0277,
+            0.017
+          ],
+          [
+            0.0263,
+            0.0191
+          ],
+          [
+            0.0247,
+            0.0211
+          ],
+          [
+            0.023,
+            0.023
+          ],
+          [
+            0.0211,
+            0.0247
+          ],
+          [
+            0.0191,
+            0.0263
+          ],
+          [
+            0.017,
+            0.0277
+          ],
+          [
+            0.0148,
+            0.029
+          ],
+          [
+            0.0124,
+            0.03
+          ],
+          [
+            0.01,
+            0.0309
+          ],
+          [
+            0.0076,
+            0.0316
+          ],
+          [
+            0.0051,
+            0.0321
+          ],
+          [
+            0.0025,
+            0.0324
+          ],
+          [
+            0,
+            0.0325
+          ]
+        ],
+        "segments": 48,
+        "at": [
+          0,
+          1.05,
+          0.05
+        ],
+        "color": "fabric",
+        "tint": "#c9cf8e"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.16
+      },
+      "connects": [
+        "object-holder"
+      ]
+    },
+    {
+      "id": "clear-glass",
+      "name": {
+        "en": "Clear glass",
+        "zh": "透明玻璃"
+      },
+      "group": "sheets",
+      "summary": {
+        "en": "Lets most light through; you can see through it.",
+        "zh": "让大部分光穿过，看得清后面。"
+      },
+      "detail": {
+        "en": "A square of clear glass 10 cm across and 4 mm thick [S1]. A glass maker gives 91 % light transmission for clear float glass of this thickness [S8]: most of the light goes straight through, so the shadow is so faint you can hardly see it and you can see clearly through the glass.\n\nThe 91 % in this model is that published figure for one product, not a measurement of this sheet.",
+        "zh": "一块边长 10 厘米、厚 4 毫米的透明玻璃 [S1]。玻璃厂商给出这种厚度的透明浮法玻璃透光率为 91% [S8]：大部分光直穿过去，所以它的影子淡得几乎看不出来，隔着玻璃也看得清清楚楚。\n\n模型里的 91% 是一种产品公开的数据，不是在这块玻璃上量出来的。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.004,
+          0.1,
+          0.1
+        ],
+        "bevel": 0.0008,
+        "at": [
+          0,
+          1.05,
+          0.05
+        ],
+        "color": "glass"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.16
+      },
+      "connects": [
+        "object-holder"
+      ]
+    },
+    {
+      "id": "frosted-glass",
+      "name": {
+        "en": "Frosted glass",
+        "zh": "磨砂玻璃"
+      },
+      "group": "sheets",
+      "summary": {
+        "en": "Lets light through but scatters it.",
+        "zh": "让光穿过，但把光散开。"
+      },
+      "detail": {
+        "en": "A square of frosted glass 10 cm across and 4 mm thick; one face has been made rough with acid [S1]. The maker gives 83 % light transmission [S9], so most of the light gets through, but the rough face scatters it in every direction. You cannot see clearly through it, and less light reaches the screen straight behind.\n\nIn this model the sensor 10 cm behind reads 45 %; with the screen 30 cm behind, only 18 % [S1].",
+        "zh": "一块边长 10 厘米、厚 4 毫米的磨砂玻璃，一面用酸蚀成粗糙的面 [S1]。厂商给出它的透光率是 83% [S9]：大部分光都能穿过，但粗糙的那一面把光向四面八方散开。隔着它看不清后面，照到正后方屏幕上的光也少了。\n\n在这个模型里，屏幕在后面 10 厘米时，传感器读数是 45%；屏幕在后面 30 厘米时，只有 18% [S1]。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.004,
+          0.1,
+          0.1
+        ],
+        "bevel": 0.0008,
+        "at": [
+          0,
+          1.05,
+          0.05
+        ],
+        "color": "enamel",
+        "tint": "#e4e6e3"
+      },
+      "shell": true,
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.16
+      },
+      "connects": [
+        "object-holder"
+      ]
+    },
+    {
+      "id": "tracing-paper",
+      "name": {
+        "en": "Tracing paper",
+        "zh": "描图纸"
+      },
+      "group": "sheets",
+      "summary": {
+        "en": "Lets some light through and scatters it.",
+        "zh": "让一部分光穿过，并把光散开。"
+      },
+      "detail": {
+        "en": "A sheet of tracing paper 10 cm across, held by a clip [S1]. One measured sample of thick tracing paper, 70 g per square metre, let about 65 % of the light through, and scattered almost all of it [S10]. Thinner tracing papers let more through.\n\nIn this model it gives a lighter shadow than cardboard; the sensor 10 cm behind reads 35 % [S1].",
+        "zh": "一张边长 10 厘米的描图纸，用夹子夹着 [S1]。一种较厚的描图纸（每平方米 70 克）实测让约 65% 的光穿过，而且几乎把这些光全部散开 [S10]；薄一些的描图纸透过的光更多。\n\n在这个模型里，它的影子比硬纸板的淡；屏幕在后面 10 厘米时，传感器读数是 35% [S1]。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "plane",
+        "size": [
+          0.1,
+          0.1
+        ],
+        "at": [
+          0,
+          1.05,
+          0.05
+        ],
+        "rotation": [
+          0,
+          90,
+          0
+        ],
+        "color": "membrane",
+        "tint": "#f1ebdc"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.16
+      },
+      "connects": [
+        "object-holder"
+      ]
+    },
+    {
+      "id": "cardboard-sheet",
+      "name": {
+        "en": "Cardboard",
+        "zh": "硬纸板"
+      },
+      "group": "sheets",
+      "summary": {
+        "en": "Lets no light through.",
+        "zh": "不让光穿过。"
+      },
+      "detail": {
+        "en": "A square of grey-brown cardboard 10 cm across and 3 mm thick [S1]. All the light that reaches it is blocked, so its shadow is dark.\n\nThis model takes the light passing through cardboard as zero [S1]. That is a choice for the model, not a measured value for every kind of cardboard.",
+        "zh": "一块边长 10 厘米、厚 3 毫米的灰褐色硬纸板 [S1]。照到它的光全被挡住，所以它的影子很深。\n\n这个模型把穿过硬纸板的光当作零 [S1]。这是模型的取值，不是每一种硬纸板的实测值。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.003,
+          0.1,
+          0.1
+        ],
+        "bevel": 0.0006,
+        "at": [
+          0,
+          1.05,
+          0.05
+        ],
+        "color": "plastic",
+        "tint": "#a68b68"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.16
+      },
+      "connects": [
+        "object-holder"
+      ]
+    },
+    {
+      "id": "screen-board",
+      "name": {
+        "en": "Screen",
+        "zh": "屏幕"
+      },
+      "group": "screen",
+      "summary": {
+        "en": "Catches the light and the shadow.",
+        "zh": "接住光和影子。"
+      },
+      "detail": {
+        "en": "A white board 60 cm wide and 50 cm high, standing square to the track with its centre on the line of the light [S1]. The bright patch on it is where the torch’s light lands; the shadow is the part of that patch the light cannot reach.\n\nA wall, the floor or a sheet of white paper can be a screen too. The screen does not make the shadow; it shows where the light is missing.",
+        "zh": "一块 60 厘米宽、50 厘米高的白板，垂直立在轨道上，中心在光的路线上 [S1]。上面亮的一片是手电筒的光照到的地方；影子是这片亮光里光照不到的部分。\n\n墙、地面、一张白纸都可以当屏幕。影子不是屏幕造出来的，屏幕只是让我们看见哪里没有光。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.005,
+          0.5,
+          0.6
+        ],
+        "bevel": 0.0015,
+        "at": [
+          0.0025,
+          1.05,
+          0.05
+        ],
+        "color": "enamel",
+        "tint": "#f3f0e8"
+      },
+      "explode": {
+        "dir": [
+          1,
+          0,
+          0
+        ],
+        "dist": 0.1
+      },
+      "connects": [
+        "screen-stand",
+        "light-sensor",
+        "object-holder"
+      ]
+    },
+    {
+      "id": "screen-stand",
+      "name": {
+        "en": "Screen stand",
+        "zh": "屏幕支架"
+      },
+      "group": "screen",
+      "summary": {
+        "en": "Holds the screen upright, sliding along the track.",
+        "zh": "让屏幕竖直立着，可沿轨道滑动。"
+      },
+      "detail": {
+        "en": "A frame round the screen on a carriage that slides along the track, with a small shelf behind for the datalogger [S1]. Moving it changes only the distance from the object to the screen.",
+        "zh": "屏幕四周的框架装在可沿轨道滑动的滑座上，后面有一个小托板放数据记录器 [S1]。移动它，只改变物体到屏幕的距离。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.016,
+          0.012,
+          0.624
+        ],
+        "bevel": 0.002,
+        "at": [
+          0.004,
+          0.794,
+          0.05
+        ],
+        "color": "powder",
+        "tint": "#4a4d50"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.016,
+            0.012,
+            0.624
+          ],
+          "bevel": 0.002,
+          "at": [
+            0.004,
+            1.306,
+            0.05
+          ],
+          "color": "powder",
+          "tint": "#4a4d50"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.016,
+            0.5,
+            0.012
+          ],
+          "bevel": 0.002,
+          "at": [
+            0.004,
+            1.05,
+            -0.256
+          ],
+          "color": "powder",
+          "tint": "#4a4d50"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.016,
+            0.5,
+            0.012
+          ],
+          "bevel": 0.002,
+          "at": [
+            0.004,
+            1.05,
+            0.356
+          ],
+          "color": "powder",
+          "tint": "#4a4d50"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.07,
+            0.026,
+            0.08
+          ],
+          "bevel": 0.003,
+          "at": [
+            0.016,
+            0.773,
+            0.05
+          ],
+          "color": "powder",
+          "tint": "#4a4d50"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.007,
+            0.007,
+            0.012
+          ],
+          "at": [
+            0.016,
+            0.774,
+            0.096
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "color": "rubber"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.11,
+            0.006,
+            0.12
+          ],
+          "bevel": 0.0015,
+          "at": [
+            0.085,
+            0.789,
+            0.12000000000000001
+          ],
+          "color": "powder",
+          "tint": "#4a4d50"
+        }
+      ],
+      "explode": {
+        "dir": [
+          1,
+          0,
+          0
+        ],
+        "dist": 0.06
+      },
+      "connects": [
+        "screen-board",
+        "track",
+        "datalogger"
+      ]
+    },
+    {
+      "id": "light-sensor",
+      "name": {
+        "en": "Light sensor",
+        "zh": "光传感器"
+      },
+      "group": "screen",
+      "summary": {
+        "en": "Measures how much light reaches the screen.",
+        "zh": "测量照到屏幕的光有多少。"
+      },
+      "detail": {
+        "en": "A small probe clipped behind the middle of the screen, looking through a hole in it [S1]. It measures the light reaching its own small window. A fair way to use it: first take a reading with nothing in the holder, then compare each sheet with that reading, with everything else unchanged [S11].\n\nIn this model the reading is given as a percentage of the empty-holder reading. It measures only its own small spot, not all the light that passes through a sheet.",
+        "zh": "一个小探头，夹在屏幕中心的背面，从屏幕上的小孔往外“看” [S1]。它测量照到它那个小窗口的光。公平的用法是：先在支架上什么都不放，读一次数；再换上各种材料片，在其他条件都不变时和这个读数比较 [S11]。\n\n在这个模型里，读数写成“什么都不放时的百分之几”。它只测自己那一小块地方的光，不是穿过材料片的全部光。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.008,
+          0.008,
+          0.022
+        ],
+        "at": [
+          0.016,
+          1.05,
+          0.05
+        ],
+        "rotation": [
+          0,
+          0,
+          90
+        ],
+        "color": "rubber"
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0045,
+            0.0045,
+            0.006
+          ],
+          "at": [
+            0.0025,
+            1.05,
+            0.05
+          ],
+          "rotation": [
+            0,
+            0,
+            90
+          ],
+          "color": "glass"
+        },
+        {
+          "kind": "tube",
+          "path": [
+            [
+              0.027,
+              0,
+              0
+            ],
+            [
+              0.036,
+              0,
+              0
+            ],
+            [
+              0.036,
+              -0.215,
+              0
+            ],
+            [
+              0.04,
+              -0.236,
+              0.035
+            ],
+            [
+              0.05,
+              -0.246,
+              0.075
+            ]
+          ],
+          "radius": 0.0018,
+          "bendRadius": 0.02,
+          "at": [
+            0,
+            1.05,
+            0.05
+          ],
+          "color": "rubber"
+        }
+      ],
+      "explode": {
+        "dir": [
+          1,
+          0.3,
+          0
+        ],
+        "dist": 0.12
+      },
+      "connects": [
+        "screen-board",
+        "datalogger"
+      ]
+    },
+    {
+      "id": "datalogger",
+      "name": {
+        "en": "Datalogger",
+        "zh": "数据记录器"
+      },
+      "group": "screen",
+      "summary": {
+        "en": "Shows and records the sensor’s readings.",
+        "zh": "显示并记录传感器的读数。"
+      },
+      "detail": {
+        "en": "A small box with a display, joined to the light sensor by a cable and riding on the screen’s carriage [S1]. It shows each reading and keeps a record, so the readings can be put in a table and drawn as a graph.\n\nNothing is written on its display in this model; the readings appear on the Try it card.",
+        "zh": "一个带显示屏的小盒子，用线和光传感器连着，放在屏幕的滑座上 [S1]。它显示每次的读数并记录下来，方便填表、画图。\n\n这个模型的显示屏上不写字；读数显示在“试一试”卡片上。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.07,
+          0.024,
+          0.09
+        ],
+        "bevel": 0.004,
+        "at": [
+          0.085,
+          0.804,
+          0.125
+        ],
+        "color": "plastic",
+        "tint": "#55585b"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.038,
+            0.002,
+            0.05
+          ],
+          "bevel": 0.0008,
+          "at": [
+            0.079,
+            0.8160000000000001,
+            0.125
+          ],
+          "color": "glass",
+          "tint": "#1c2326"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.012,
+            0.003,
+            0.012
+          ],
+          "bevel": 0.001,
+          "at": [
+            0.10700000000000001,
+            0.8160000000000001,
+            0.105
+          ],
+          "color": "rubber"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.012,
+            0.003,
+            0.012
+          ],
+          "bevel": 0.001,
+          "at": [
+            0.10700000000000001,
+            0.8160000000000001,
+            0.145
+          ],
+          "color": "rubber"
+        }
+      ],
+      "explode": {
+        "dir": [
+          1,
+          0,
+          0.4
+        ],
+        "dist": 0.14
+      },
+      "connects": [
+        "light-sensor"
+      ]
+    },
+    {
+      "id": "hole-card-1",
+      "name": {
+        "en": "Card with a hole 1",
+        "zh": "有孔卡片 1"
+      },
+      "group": "hole-cards",
+      "summary": {
+        "en": "Light passes only when the holes line up.",
+        "zh": "小孔排成直线，光才穿得过。"
+      },
+      "detail": {
+        "en": "A card 10 cm square with a hole 1.2 cm across in the middle, on its own stand 10 cm in front of the holder [S1]. With all three holes on one straight line from the torch, light passes through them and makes a bright dot on the screen.",
+        "zh": "一张边长 10 厘米的卡片，中间有一个直径 1.2 厘米的小孔，立在自己的支架上，在物体支架前 10 厘米 [S1]。三个小孔和手电筒在一条直线上时，光穿过它们，在屏幕上照出一个亮点。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "panelHole",
+        "size": [
+          0.1,
+          0.1,
+          0.002
+        ],
+        "hole": {
+          "r": 0.006,
+          "at": [
+            0,
+            0
+          ]
+        },
+        "at": [
+          -0.1,
+          1.05,
+          0.05
+        ],
+        "rotation": [
+          0,
+          90,
+          0
+        ],
+        "color": "plastic",
+        "tint": "#b39a78"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.04,
+            0.026,
+            0.06
+          ],
+          "bevel": 0.003,
+          "at": [
+            -0.1,
+            0.773,
+            0.05
+          ],
+          "color": "powder",
+          "tint": "#4a4d50"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.002,
+            0.002,
+            0.21399999999999997
+          ],
+          "at": [
+            -0.1,
+            0.893,
+            0.05
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.008,
+            0.014,
+            0.014
+          ],
+          "bevel": 0.0015,
+          "at": [
+            -0.1,
+            1,
+            0.05
+          ],
+          "color": "powder",
+          "tint": "#2f3134"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.14
+      },
+      "connects": [
+        "hole-card-2"
+      ]
+    },
+    {
+      "id": "hole-card-2",
+      "name": {
+        "en": "Card with a hole 2",
+        "zh": "有孔卡片 2"
+      },
+      "group": "hole-cards",
+      "summary": {
+        "en": "Move it 2 cm to one side and the dot is gone.",
+        "zh": "往旁边挪 2 厘米，亮点就没了。"
+      },
+      "detail": {
+        "en": "The middle card, clipped in the holder [S1]. Moved 2 cm to one side, its hole is no longer on the straight line through the other two, and the bright dot disappears: the light cannot bend round to reach it [S1, S3].",
+        "zh": "中间那张卡片，夹在物体支架上 [S1]。往旁边挪 2 厘米，它的小孔就不在穿过另外两个小孔的那条直线上了，亮点随即消失：光不会拐弯去找那个小孔 [S1, S3]。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "panelHole",
+        "size": [
+          0.1,
+          0.1,
+          0.002
+        ],
+        "hole": {
+          "r": 0.006,
+          "at": [
+            0,
+            0
+          ]
+        },
+        "at": [
+          0,
+          1.05,
+          0.05
+        ],
+        "rotation": [
+          0,
+          90,
+          0
+        ],
+        "color": "plastic",
+        "tint": "#b39a78"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.14
+      },
+      "connects": [
+        "object-holder",
+        "hole-card-1",
+        "hole-card-3"
+      ]
+    },
+    {
+      "id": "hole-card-3",
+      "name": {
+        "en": "Card with a hole 3",
+        "zh": "有孔卡片 3"
+      },
+      "group": "hole-cards",
+      "summary": {
+        "en": "The third hole on the line to the screen.",
+        "zh": "通往屏幕的直线上的第三个小孔。"
+      },
+      "detail": {
+        "en": "The third card with a hole, on its own stand 10 cm behind the holder [S1]. Light that comes through all three holes travels on to the screen in the same straight line.",
+        "zh": "第三张有孔卡片，立在自己的支架上，在物体支架后 10 厘米 [S1]。穿过三个小孔的光沿着同一条直线继续走到屏幕上。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "panelHole",
+        "size": [
+          0.1,
+          0.1,
+          0.002
+        ],
+        "hole": {
+          "r": 0.006,
+          "at": [
+            0,
+            0
+          ]
+        },
+        "at": [
+          0.1,
+          1.05,
+          0.05
+        ],
+        "rotation": [
+          0,
+          90,
+          0
+        ],
+        "color": "plastic",
+        "tint": "#b39a78"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.04,
+            0.026,
+            0.06
+          ],
+          "bevel": 0.003,
+          "at": [
+            0.1,
+            0.773,
+            0.05
+          ],
+          "color": "powder",
+          "tint": "#4a4d50"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.002,
+            0.002,
+            0.21399999999999997
+          ],
+          "at": [
+            0.1,
+            0.893,
+            0.05
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.008,
+            0.014,
+            0.014
+          ],
+          "bevel": 0.0015,
+          "at": [
+            0.1,
+            1,
+            0.05
+          ],
+          "color": "powder",
+          "tint": "#2f3134"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.14
+      },
+      "connects": [
+        "hole-card-2"
+      ]
+    },
+    {
+      "id": "box",
+      "name": {
+        "en": "Dark box",
+        "zh": "暗箱"
+      },
+      "group": "dark-box",
+      "summary": {
+        "en": "A closed box: no light gets in except the torch’s.",
+        "zh": "一只封闭的盒子，只有手电筒的光进得来。"
+      },
+      "detail": {
+        "en": "A box about the size of a shoebox, 30 × 20 × 18 cm, painted black inside, with the lid closed [S1]. There is a viewing hole 1 cm across in the front and a small torch pushed through the left side. With the torch off, no light at all reaches what is inside.\n\nThe cut-open view lets you see inside for the explanation. Looking through the hole, you would see nothing until light from inside comes out of it.",
+        "zh": "一只鞋盒大小的盒子，30 × 20 × 18 厘米，里面涂成黑色，盖子盖着 [S1]。正面有一个直径 1 厘米的观察孔，左侧插着一支小手电筒。手电筒关着时，箱里的东西一点光也照不到。\n\n透视图让我们看到箱子里面，是为了讲解。从小孔往里看，只有箱里的光从小孔出来，才看得见东西。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "panelHole",
+        "size": [
+          0.3,
+          0.18,
+          0.004
+        ],
+        "hole": {
+          "r": 0.005,
+          "at": [
+            0,
+            0.02
+          ]
+        },
+        "at": [
+          -0.45,
+          0.84,
+          -0.082
+        ],
+        "color": "plastic",
+        "tint": "#a9875c"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.3,
+            0.18,
+            0.004
+          ],
+          "bevel": 0.0012,
+          "at": [
+            -0.45,
+            0.84,
+            -0.278
+          ],
+          "color": "plastic",
+          "tint": "#a9875c"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.3,
+            0.004,
+            0.2
+          ],
+          "bevel": 0.0012,
+          "at": [
+            -0.45,
+            0.752,
+            -0.18
+          ],
+          "color": "plastic",
+          "tint": "#a9875c"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.004,
+            0.18,
+            0.2
+          ],
+          "bevel": 0.0012,
+          "at": [
+            -0.302,
+            0.84,
+            -0.18
+          ],
+          "color": "plastic",
+          "tint": "#a9875c"
+        },
+        {
+          "kind": "panelHole",
+          "size": [
+            0.2,
+            0.18,
+            0.004
+          ],
+          "hole": {
+            "r": 0.0125,
+            "at": [
+              0,
+              0.02
+            ]
+          },
+          "at": [
+            -0.598,
+            0.84,
+            -0.18
+          ],
+          "rotation": [
+            0,
+            90,
+            0
+          ],
+          "color": "plastic",
+          "tint": "#a9875c"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.31,
+            0.006,
+            0.21000000000000002
+          ],
+          "bevel": 0.0012,
+          "at": [
+            -0.45,
+            0.933,
+            -0.18
+          ],
+          "color": "plastic",
+          "tint": "#a9875c"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.31,
+            0.02,
+            0.003
+          ],
+          "bevel": 0.0012,
+          "at": [
+            -0.45,
+            0.923,
+            -0.0765
+          ],
+          "color": "plastic",
+          "tint": "#a9875c"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.292,
+            0.172,
+            0.001
+          ],
+          "at": [
+            -0.45,
+            0.84,
+            -0.2755
+          ],
+          "color": "powder",
+          "tint": "#151515"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.292,
+            0.001,
+            0.192
+          ],
+          "at": [
+            -0.45,
+            0.7545,
+            -0.18
+          ],
+          "color": "powder",
+          "tint": "#151515"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.292,
+            0.001,
+            0.192
+          ],
+          "at": [
+            -0.45,
+            0.9295,
+            -0.18
+          ],
+          "color": "powder",
+          "tint": "#151515"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.001,
+            0.172,
+            0.192
+          ],
+          "at": [
+            -0.3045,
+            0.84,
+            -0.18
+          ],
+          "color": "powder",
+          "tint": "#151515"
+        }
+      ],
+      "shell": true,
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.18
+      },
+      "connects": [
+        "box-torch",
+        "box-ball",
+        "box-mirror"
+      ]
+    },
+    {
+      "id": "box-torch",
+      "name": {
+        "en": "Small torch",
+        "zh": "小手电筒"
+      },
+      "group": "dark-box",
+      "summary": {
+        "en": "The only light source inside the box.",
+        "zh": "箱里唯一的光源。"
+      },
+      "detail": {
+        "en": "A small torch pushed through the side of the box, shining across the inside [S1]. It is the only light source in the box: switch it off and nothing inside can be seen.",
+        "zh": "一支从侧面插进箱里的小手电筒，光照向箱子里面 [S1]。它是箱里唯一的光源：关掉它，箱里什么也看不见。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0,
+            -0.0006
+          ],
+          [
+            0.0095,
+            -0.0006
+          ],
+          [
+            0.0095,
+            0.0006
+          ],
+          [
+            0,
+            0.0006
+          ]
+        ],
+        "segments": 48,
+        "at": [
+          -0.5856,
+          0.86,
+          -0.18
+        ],
+        "rotation": [
+          0,
+          0,
+          90
+        ],
+        "color": "glass"
+      },
+      "extra": [
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              0.003
+            ],
+            [
+              0.0095,
+              0.003
+            ],
+            [
+              0.0095,
+              0.0004
+            ],
+            [
+              0.0122,
+              0.0004
+            ],
+            [
+              0.0124,
+              0.022
+            ],
+            [
+              0.0108,
+              0.03
+            ],
+            [
+              0.0108,
+              0.1
+            ],
+            [
+              0.0085,
+              0.104
+            ],
+            [
+              0,
+              0.104
+            ]
+          ],
+          "segments": 48,
+          "at": [
+            -0.585,
+            0.86,
+            -0.18
+          ],
+          "rotation": [
+            0,
+            0,
+            90
+          ],
+          "color": "powder",
+          "tint": "#3e4246"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.012,
+            0.004,
+            0.007
+          ],
+          "bevel": 0.0015,
+          "at": [
+            -0.655,
+            0.871,
+            -0.18
+          ],
+          "color": "rubber"
+        }
+      ],
+      "explode": {
+        "dir": [
+          -1,
+          0,
+          0
+        ],
+        "dist": 0.1
+      },
+      "connects": [
+        "box",
+        "box-ball",
+        "box-mirror"
+      ]
+    },
+    {
+      "id": "box-ball",
+      "name": {
+        "en": "Ball in the box",
+        "zh": "箱里的球"
+      },
+      "group": "dark-box",
+      "summary": {
+        "en": "Seen only when it reflects light to your eye.",
+        "zh": "把光反射进眼睛，才被看见。"
+      },
+      "detail": {
+        "en": "A dull ball 6.5 cm across, lying on the floor of the box [S1]. It gives out no light of its own. Its rough surface reflects the torch’s light in many directions [S4], and some of that light leaves through the hole and enters your eye.\n\nWith the torch off, the model darkens the ball to show that no light reaches it. A pale ball is no exception: in complete darkness it cannot be seen.",
+        "zh": "一只直径 6.5 厘米的哑光球，放在箱底 [S1]。它自己不发光。它粗糙的表面把手电筒的光向许多方向反射出去 [S4]，其中一部分从小孔出来，进入你的眼睛。\n\n手电筒关着时，模型把球画暗，表示没有光照到它。颜色浅的球也一样：完全没有光，它就看不见。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0,
+            -0.0325
+          ],
+          [
+            0.0025,
+            -0.0324
+          ],
+          [
+            0.0051,
+            -0.0321
+          ],
+          [
+            0.0076,
+            -0.0316
+          ],
+          [
+            0.01,
+            -0.0309
+          ],
+          [
+            0.0124,
+            -0.03
+          ],
+          [
+            0.0148,
+            -0.029
+          ],
+          [
+            0.017,
+            -0.0277
+          ],
+          [
+            0.0191,
+            -0.0263
+          ],
+          [
+            0.0211,
+            -0.0247
+          ],
+          [
+            0.023,
+            -0.023
+          ],
+          [
+            0.0247,
+            -0.0211
+          ],
+          [
+            0.0263,
+            -0.0191
+          ],
+          [
+            0.0277,
+            -0.017
+          ],
+          [
+            0.029,
+            -0.0148
+          ],
+          [
+            0.03,
+            -0.0124
+          ],
+          [
+            0.0309,
+            -0.01
+          ],
+          [
+            0.0316,
+            -0.0076
+          ],
+          [
+            0.0321,
+            -0.0051
+          ],
+          [
+            0.0324,
+            -0.0025
+          ],
+          [
+            0.0325,
+            0
+          ],
+          [
+            0.0324,
+            0.0025
+          ],
+          [
+            0.0321,
+            0.0051
+          ],
+          [
+            0.0316,
+            0.0076
+          ],
+          [
+            0.0309,
+            0.01
+          ],
+          [
+            0.03,
+            0.0124
+          ],
+          [
+            0.029,
+            0.0148
+          ],
+          [
+            0.0277,
+            0.017
+          ],
+          [
+            0.0263,
+            0.0191
+          ],
+          [
+            0.0247,
+            0.0211
+          ],
+          [
+            0.023,
+            0.023
+          ],
+          [
+            0.0211,
+            0.0247
+          ],
+          [
+            0.0191,
+            0.0263
+          ],
+          [
+            0.017,
+            0.0277
+          ],
+          [
+            0.0148,
+            0.029
+          ],
+          [
+            0.0124,
+            0.03
+          ],
+          [
+            0.01,
+            0.0309
+          ],
+          [
+            0.0076,
+            0.0316
+          ],
+          [
+            0.0051,
+            0.0321
+          ],
+          [
+            0.0025,
+            0.0324
+          ],
+          [
+            0,
+            0.0325
+          ]
+        ],
+        "segments": 48,
+        "at": [
+          -0.42,
+          0.7865,
+          -0.2
+        ],
+        "color": "fabric",
+        "tint": "#c9cf8e"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.12
+      },
+      "connects": [
+        "box-torch",
+        "box"
+      ]
+    },
+    {
+      "id": "box-mirror",
+      "name": {
+        "en": "Mirror",
+        "zh": "镜子"
+      },
+      "group": "dark-box",
+      "summary": {
+        "en": "Reflects light very well.",
+        "zh": "把光反射得很好。"
+      },
+      "detail": {
+        "en": "A small flat mirror 6 cm square on a stand, turned so that the torch’s light reflects towards the hole [S1]. A mirror reflects light very well, so looking through the hole you would see a bright patch of torchlight.\n\nA dull ball reflects light too, but it spreads the light in many directions; the mirror sends it on together.",
+        "zh": "一面边长 6 厘米的小平面镜，立在小架子上，转到能把手电筒的光反射向小孔的方向 [S1]。镜子把光反射得很好，所以从小孔看进去，会看到一片明亮的手电筒光。\n\n哑光的球也反射光，只是把光散向许多方向；镜子则把光整束地送出去。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.06,
+          0.06,
+          0.003
+        ],
+        "bevel": 0.001,
+        "at": [
+          -0.36,
+          0.86,
+          -0.18
+        ],
+        "rotation": [
+          0,
+          -65.9936,
+          0
+        ],
+        "color": "stainless",
+        "tint": "#e6e9ea"
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "size": [
+            0.003,
+            0.003,
+            0.07599999999999996
+          ],
+          "at": [
+            -0.36,
+            0.792,
+            -0.18
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.014,
+            0.016,
+            0.006
+          ],
+          "at": [
+            -0.36,
+            0.757,
+            -0.18
+          ],
+          "color": "powder",
+          "tint": "#2f3134"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.12
+      },
+      "connects": [
+        "box-torch",
+        "box"
+      ]
+    },
+    {
+      "id": "box-inside",
+      "name": {
+        "en": "Darkness in the box (drawn)",
+        "zh": "箱里的黑暗（示意）"
+      },
+      "group": "dark-box",
+      "summary": {
+        "en": "Drawn while no light at all is inside the box.",
+        "zh": "箱里完全没有光时画出的黑暗。"
+      },
+      "detail": {
+        "en": "Not a real object: the model fills the box with this dark shading while the small torch is off, to show that no light is inside [S1]. The ball is still there, but nothing can be seen through the hole.\n\nThe cut-open view is lit by the light of the page, not of the box, so without this shading the ball would still look lit.",
+        "zh": "这不是真实的东西：小手电筒关着时，模型用这层暗色把箱子里面填满，表示箱里没有光 [S1]。球还在箱里，可是从小孔看进去什么也看不见。\n\n透视图是靠画面本身的光照亮的，不是箱里的光；没有这层暗色，球看起来还是亮的。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.288,
+          0.16799999999999998,
+          0.188
+        ],
+        "at": [
+          -0.45,
+          0.84,
+          -0.18
+        ],
+        "color": "membrane",
+        "tint": "#050505"
+      },
+      "connects": [
+        "box"
+      ]
+    },
+    {
+      "id": "pole",
+      "name": {
+        "en": "Pole",
+        "zh": "杆子"
+      },
+      "group": "outdoors",
+      "summary": {
+        "en": "A 1 m pole: its shadow shows where the Sun is.",
+        "zh": "1 米长的杆子，影子告诉你太阳在哪里。"
+      },
+      "detail": {
+        "en": "A straight wooden pole 5 cm thick standing upright on a heavy round base, 1 m above the ground [S1]. Its shadow always points away from the Sun: long when the Sun is low, short when it is high.\n\nThe model works out the shadow from the Sun’s height and direction, which come from NOAA’s solar calculator for Singapore [S12].",
+        "zh": "一根 5 厘米粗的木杆，竖直立在圆形重底座上，高出地面 1 米 [S1]。它的影子总是背着太阳：太阳低，影子长；太阳高，影子短。\n\n模型按太阳的高度和方向算出影子；太阳的高度和方向来自美国国家海洋和大气管理局（NOAA）的太阳计算器，地点是新加坡 [S12]。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.025,
+          0.025,
+          1
+        ],
+        "at": [
+          10,
+          0.55,
+          0
+        ],
+        "color": "wood"
+      },
+      "extra": [
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              0
+            ],
+            [
+              0.1,
+              0
+            ],
+            [
+              0.1,
+              0.03
+            ],
+            [
+              0.07,
+              0.04
+            ],
+            [
+              0.02,
+              0.04
+            ],
+            [
+              0,
+              0.04
+            ]
+          ],
+          "segments": 48,
+          "at": [
+            10,
+            0.05,
+            0
+          ],
+          "color": "powder",
+          "tint": "#4a4d50"
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              0
+            ],
+            [
+              0.0265,
+              0
+            ],
+            [
+              0.0265,
+              0.006
+            ],
+            [
+              0,
+              0.008
+            ]
+          ],
+          "segments": 32,
+          "at": [
+            10,
+            1.042,
+            0
+          ],
+          "color": "powder",
+          "tint": "#4a4d50"
+        }
+      ],
+      "connects": [
+        "courtyard",
+        "north-arrow"
+      ]
+    },
+    {
+      "id": "north-arrow",
+      "name": {
+        "en": "North arrow",
+        "zh": "指北箭头"
+      },
+      "group": "outdoors",
+      "summary": {
+        "en": "Points north.",
+        "zh": "指向北方。"
+      },
+      "detail": {
+        "en": "A dark arrow painted on the ground, pointing north [S1]. Use it to read which way the pole’s shadow points.",
+        "zh": "画在地上的箭头，指向北方 [S1]。用它来看杆子的影子指向哪个方位。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "extrude",
+        "shape": [
+          [
+            -0.03,
+            -0.3
+          ],
+          [
+            0.03,
+            -0.3
+          ],
+          [
+            0.03,
+            0.12
+          ],
+          [
+            0.09,
+            0.12
+          ],
+          [
+            0,
+            0.3
+          ],
+          [
+            -0.09,
+            0.12
+          ],
+          [
+            -0.03,
+            0.12
+          ]
+        ],
+        "depth": 0.002,
+        "at": [
+          10,
+          0.051000000000000004,
+          -4.6
+        ],
+        "rotation": [
+          -90,
+          0,
+          0
+        ],
+        "color": "powder",
+        "tint": "#2b2d2f"
+      },
+      "extra": [
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              0
+            ],
+            [
+              0.12,
+              0
+            ],
+            [
+              0.12,
+              0.002
+            ],
+            [
+              0,
+              0.002
+            ]
+          ],
+          "segments": 48,
+          "at": [
+            10,
+            0.05,
+            -4.2
+          ],
+          "color": "powder",
+          "tint": "#2b2d2f"
+        }
+      ],
+      "connects": [
+        "pole"
+      ]
+    },
+    {
+      "id": "sun",
+      "name": {
+        "en": "Sun (not to scale)",
+        "zh": "太阳（不按比例）"
+      },
+      "group": "outdoors",
+      "summary": {
+        "en": "The light source outdoors (not to scale).",
+        "zh": "户外的光源（不按比例）。"
+      },
+      "detail": {
+        "en": "The Sun is drawn as a small ball 5.5 m from the foot of the pole, in the direction of the real Sun at that time [S1, S12]. The real Sun is so far away that its light reaches the courtyard in almost parallel lines.\n\nNever look straight at the Sun.",
+        "zh": "太阳画成一个小球，离杆脚 5.5 米，方向就是那一刻真实太阳的方向 [S1, S12]。真实的太阳非常远，照到空地上的光几乎是平行的。\n\n不要直视太阳。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0,
+            -0.25
+          ],
+          [
+            0.0196,
+            -0.2492
+          ],
+          [
+            0.0391,
+            -0.2469
+          ],
+          [
+            0.0584,
+            -0.2431
+          ],
+          [
+            0.0773,
+            -0.2378
+          ],
+          [
+            0.0957,
+            -0.231
+          ],
+          [
+            0.1135,
+            -0.2228
+          ],
+          [
+            0.1306,
+            -0.2132
+          ],
+          [
+            0.1469,
+            -0.2023
+          ],
+          [
+            0.1624,
+            -0.1901
+          ],
+          [
+            0.1768,
+            -0.1768
+          ],
+          [
+            0.1901,
+            -0.1624
+          ],
+          [
+            0.2023,
+            -0.1469
+          ],
+          [
+            0.2132,
+            -0.1306
+          ],
+          [
+            0.2228,
+            -0.1135
+          ],
+          [
+            0.231,
+            -0.0957
+          ],
+          [
+            0.2378,
+            -0.0773
+          ],
+          [
+            0.2431,
+            -0.0584
+          ],
+          [
+            0.2469,
+            -0.0391
+          ],
+          [
+            0.2492,
+            -0.0196
+          ],
+          [
+            0.25,
+            0
+          ],
+          [
+            0.2492,
+            0.0196
+          ],
+          [
+            0.2469,
+            0.0391
+          ],
+          [
+            0.2431,
+            0.0584
+          ],
+          [
+            0.2378,
+            0.0773
+          ],
+          [
+            0.231,
+            0.0957
+          ],
+          [
+            0.2228,
+            0.1135
+          ],
+          [
+            0.2132,
+            0.1306
+          ],
+          [
+            0.2023,
+            0.1469
+          ],
+          [
+            0.1901,
+            0.1624
+          ],
+          [
+            0.1768,
+            0.1768
+          ],
+          [
+            0.1624,
+            0.1901
+          ],
+          [
+            0.1469,
+            0.2023
+          ],
+          [
+            0.1306,
+            0.2132
+          ],
+          [
+            0.1135,
+            0.2228
+          ],
+          [
+            0.0957,
+            0.231
+          ],
+          [
+            0.0773,
+            0.2378
+          ],
+          [
+            0.0584,
+            0.2431
+          ],
+          [
+            0.0391,
+            0.2469
+          ],
+          [
+            0.0196,
+            0.2492
+          ],
+          [
+            0,
+            0.25
+          ]
+        ],
+        "segments": 32,
+        "at": [
+          10,
+          5.55,
+          0
+        ],
+        "color": "token:en-light"
+      },
+      "connects": [
+        "pole"
+      ]
+    },
+    {
+      "id": "sun-path-oct",
+      "name": {
+        "en": "Sun’s path, 20 Oct",
+        "zh": "太阳路径（10 月 20 日）"
+      },
+      "group": "outdoors",
+      "summary": {
+        "en": "The Sun’s path across the sky that day.",
+        "zh": "那一天太阳在天上走过的路线。"
+      },
+      "detail": {
+        "en": "The way the Sun seems to move across the sky on 20 October 2026, seen from the courtyard, worked out with NOAA’s solar calculator [S12]. The Sun seems to move because the Earth turns, once a day [S18].",
+        "zh": "从空地上看，2026 年 10 月 20 日太阳在天上看起来走过的路线，用 NOAA 的太阳计算器算出 [S12]。太阳看起来在动，是因为地球每天自转一圈 [S18]。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "sweep",
+        "path": [
+          [
+            5.4056,
+            0.2474,
+            0.9837
+          ],
+          [
+            5.3777,
+            0.5883,
+            0.9921
+          ],
+          [
+            5.327,
+            0.9341,
+            1.0003
+          ],
+          [
+            5.2535,
+            1.2781,
+            1.0085
+          ],
+          [
+            5.1575,
+            1.6175,
+            1.0166
+          ],
+          [
+            5.0395,
+            1.9504,
+            1.0246
+          ],
+          [
+            4.8998,
+            2.2751,
+            1.0323
+          ],
+          [
+            4.7392,
+            2.5901,
+            1.0398
+          ],
+          [
+            4.5583,
+            2.894,
+            1.0471
+          ],
+          [
+            4.3579,
+            3.1856,
+            1.054
+          ],
+          [
+            4.1388,
+            3.4634,
+            1.0607
+          ],
+          [
+            3.902,
+            3.7264,
+            1.067
+          ],
+          [
+            3.6485,
+            3.9733,
+            1.073
+          ],
+          [
+            3.3793,
+            4.2032,
+            1.0786
+          ],
+          [
+            3.0957,
+            4.415,
+            1.0837
+          ],
+          [
+            2.7988,
+            4.6078,
+            1.0885
+          ],
+          [
+            2.49,
+            4.7808,
+            1.0927
+          ],
+          [
+            2.1705,
+            4.9332,
+            1.0965
+          ],
+          [
+            1.8417,
+            5.0644,
+            1.0999
+          ],
+          [
+            1.505,
+            5.1739,
+            1.1027
+          ],
+          [
+            1.1619,
+            5.2611,
+            1.105
+          ],
+          [
+            0.8139,
+            5.3256,
+            1.1069
+          ],
+          [
+            0.4623,
+            5.3673,
+            1.1082
+          ],
+          [
+            0.1088,
+            5.3859,
+            1.1089
+          ],
+          [
+            -0.2452,
+            5.3814,
+            1.1092
+          ],
+          [
+            -0.5981,
+            5.3537,
+            1.1089
+          ],
+          [
+            -0.9485,
+            5.3031,
+            1.1081
+          ],
+          [
+            -1.2948,
+            5.2296,
+            1.1068
+          ],
+          [
+            -1.6355,
+            5.1336,
+            1.105
+          ],
+          [
+            -1.9692,
+            5.0156,
+            1.1026
+          ],
+          [
+            -2.2945,
+            4.876,
+            1.0998
+          ],
+          [
+            -2.6099,
+            4.7155,
+            1.0965
+          ],
+          [
+            -2.9142,
+            4.5347,
+            1.0928
+          ],
+          [
+            -3.2059,
+            4.3344,
+            1.0886
+          ],
+          [
+            -3.484,
+            4.1155,
+            1.084
+          ],
+          [
+            -3.747,
+            3.8788,
+            1.079
+          ],
+          [
+            -3.9941,
+            3.6256,
+            1.0736
+          ],
+          [
+            -4.224,
+            3.3567,
+            1.0678
+          ],
+          [
+            -4.4358,
+            3.0734,
+            1.0617
+          ],
+          [
+            -4.6287,
+            2.777,
+            1.0553
+          ],
+          [
+            -4.8017,
+            2.4687,
+            1.0487
+          ],
+          [
+            -4.9541,
+            2.1498,
+            1.0418
+          ],
+          [
+            -5.0853,
+            1.8218,
+            1.0347
+          ],
+          [
+            -5.1947,
+            1.4864,
+            1.0274
+          ],
+          [
+            -5.2819,
+            1.145,
+            1.02
+          ],
+          [
+            -5.3465,
+            0.8001,
+            1.0124
+          ],
+          [
+            -5.3883,
+            0.4549,
+            1.0048
+          ],
+          [
+            -5.4075,
+            0.1211,
+            0.9973
+          ]
+        ],
+        "radius": 0.012,
+        "at": [
+          10,
+          0.05,
+          0
+        ],
+        "color": "token:en-light"
+      },
+      "connects": [
+        "sun"
+      ]
+    },
+    {
+      "id": "sun-path-jun",
+      "name": {
+        "en": "Sun’s path, 21 Jun",
+        "zh": "太阳路径（6 月 21 日）"
+      },
+      "group": "outdoors",
+      "summary": {
+        "en": "The Sun’s path across the sky that day.",
+        "zh": "那一天太阳在天上走过的路线。"
+      },
+      "detail": {
+        "en": "The Sun’s path on 21 June 2026 [S12]. At midday it passes a little to the north of overhead, so the shadow at midday points south.",
+        "zh": "2026 年 6 月 21 日太阳的路线 [S12]。中午时，太阳从头顶稍偏北的地方经过，所以中午的影子指向南边。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "sweep",
+        "path": [
+          [
+            5.0417,
+            0.261,
+            -2.1824
+          ],
+          [
+            5.0184,
+            0.5792,
+            -2.1748
+          ],
+          [
+            4.9739,
+            0.9017,
+            -2.1673
+          ],
+          [
+            4.9081,
+            1.2228,
+            -2.16
+          ],
+          [
+            4.8213,
+            1.5398,
+            -2.1528
+          ],
+          [
+            4.7138,
+            1.8509,
+            -2.1457
+          ],
+          [
+            4.5862,
+            2.1546,
+            -2.1388
+          ],
+          [
+            4.4389,
+            2.4495,
+            -2.1321
+          ],
+          [
+            4.2727,
+            2.7342,
+            -2.1256
+          ],
+          [
+            4.0882,
+            3.0075,
+            -2.1194
+          ],
+          [
+            3.8861,
+            3.2682,
+            -2.1135
+          ],
+          [
+            3.6674,
+            3.5152,
+            -2.1079
+          ],
+          [
+            3.4331,
+            3.7474,
+            -2.1026
+          ],
+          [
+            3.184,
+            3.9638,
+            -2.0977
+          ],
+          [
+            2.9213,
+            4.1635,
+            -2.0932
+          ],
+          [
+            2.6461,
+            4.3456,
+            -2.089
+          ],
+          [
+            2.3595,
+            4.5093,
+            -2.0853
+          ],
+          [
+            2.0629,
+            4.654,
+            -2.082
+          ],
+          [
+            1.7574,
+            4.779,
+            -2.0792
+          ],
+          [
+            1.4444,
+            4.8837,
+            -2.0768
+          ],
+          [
+            1.1253,
+            4.9677,
+            -2.0749
+          ],
+          [
+            0.8013,
+            5.0308,
+            -2.0735
+          ],
+          [
+            0.4738,
+            5.0725,
+            -2.0725
+          ],
+          [
+            0.1444,
+            5.0927,
+            -2.0721
+          ],
+          [
+            -0.1857,
+            5.0914,
+            -2.0721
+          ],
+          [
+            -0.5149,
+            5.0684,
+            -2.0726
+          ],
+          [
+            -0.842,
+            5.024,
+            -2.0736
+          ],
+          [
+            -1.1655,
+            4.9584,
+            -2.0751
+          ],
+          [
+            -1.484,
+            4.8717,
+            -2.0771
+          ],
+          [
+            -1.7961,
+            4.7644,
+            -2.0795
+          ],
+          [
+            -2.1005,
+            4.637,
+            -2.0824
+          ],
+          [
+            -2.396,
+            4.4899,
+            -2.0858
+          ],
+          [
+            -2.6811,
+            4.3238,
+            -2.0895
+          ],
+          [
+            -2.9548,
+            4.1395,
+            -2.0937
+          ],
+          [
+            -3.2159,
+            3.9376,
+            -2.0983
+          ],
+          [
+            -3.4632,
+            3.7192,
+            -2.1033
+          ],
+          [
+            -3.6957,
+            3.4851,
+            -2.1086
+          ],
+          [
+            -3.9123,
+            3.2363,
+            -2.1142
+          ],
+          [
+            -4.1122,
+            2.974,
+            -2.1202
+          ],
+          [
+            -4.2945,
+            2.6992,
+            -2.1264
+          ],
+          [
+            -4.4584,
+            2.4131,
+            -2.1329
+          ],
+          [
+            -4.6032,
+            2.1171,
+            -2.1397
+          ],
+          [
+            -4.7284,
+            1.8124,
+            -2.1466
+          ],
+          [
+            -4.8332,
+            1.5004,
+            -2.1537
+          ],
+          [
+            -4.9174,
+            1.1828,
+            -2.1609
+          ],
+          [
+            -4.9806,
+            0.8614,
+            -2.1683
+          ],
+          [
+            -5.0225,
+            0.5389,
+            -2.1758
+          ],
+          [
+            -5.0432,
+            0.2222,
+            -2.1834
+          ]
+        ],
+        "radius": 0.012,
+        "at": [
+          10,
+          0.05,
+          0
+        ],
+        "color": "token:en-light"
+      },
+      "connects": [
+        "sun"
+      ]
+    },
+    {
+      "id": "sun-path-mar",
+      "name": {
+        "en": "Sun’s path, 24 Mar",
+        "zh": "太阳路径（3 月 24 日）"
+      },
+      "group": "outdoors",
+      "summary": {
+        "en": "The Sun’s path across the sky that day.",
+        "zh": "那一天太阳在天上走过的路线。"
+      },
+      "detail": {
+        "en": "The Sun’s path on 24 March 2026 [S12]. Around midday it passes almost straight overhead, so the pole’s shadow is very short.",
+        "zh": "2026 年 3 月 24 日太阳的路线 [S12]。中午前后，太阳几乎从头顶正上方经过，所以杆子的影子非常短。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "sweep",
+        "path": [
+          [
+            5.4971,
+            0.1292,
+            -0.1251
+          ],
+          [
+            5.4787,
+            0.4694,
+            -0.1174
+          ],
+          [
+            5.4373,
+            0.8207,
+            -0.1097
+          ],
+          [
+            5.3728,
+            1.1717,
+            -0.102
+          ],
+          [
+            5.2852,
+            1.519,
+            -0.0945
+          ],
+          [
+            5.1751,
+            1.8604,
+            -0.0871
+          ],
+          [
+            5.0427,
+            2.1942,
+            -0.0799
+          ],
+          [
+            4.8888,
+            2.5188,
+            -0.0729
+          ],
+          [
+            4.7139,
+            2.8328,
+            -0.0662
+          ],
+          [
+            4.5188,
+            3.1348,
+            -0.0597
+          ],
+          [
+            4.3044,
+            3.4234,
+            -0.0536
+          ],
+          [
+            4.0715,
+            3.6974,
+            -0.0477
+          ],
+          [
+            3.8212,
+            3.9556,
+            -0.0423
+          ],
+          [
+            3.5545,
+            4.1969,
+            -0.0372
+          ],
+          [
+            3.2726,
+            4.4203,
+            -0.0325
+          ],
+          [
+            2.9767,
+            4.6248,
+            -0.0283
+          ],
+          [
+            2.668,
+            4.8095,
+            -0.0245
+          ],
+          [
+            2.3479,
+            4.9736,
+            -0.0211
+          ],
+          [
+            2.0177,
+            5.1165,
+            -0.0183
+          ],
+          [
+            1.6789,
+            5.2375,
+            -0.0159
+          ],
+          [
+            1.3329,
+            5.336,
+            -0.0141
+          ],
+          [
+            0.9812,
+            5.4118,
+            -0.0128
+          ],
+          [
+            0.6253,
+            5.4643,
+            -0.012
+          ],
+          [
+            0.2668,
+            5.4935,
+            -0.0117
+          ],
+          [
+            -0.093,
+            5.4992,
+            -0.012
+          ],
+          [
+            -0.4525,
+            5.4813,
+            -0.0128
+          ],
+          [
+            -0.8097,
+            5.44,
+            -0.0141
+          ],
+          [
+            -1.1637,
+            5.3755,
+            -0.0159
+          ],
+          [
+            -1.5126,
+            5.2879,
+            -0.0183
+          ],
+          [
+            -1.855,
+            5.1777,
+            -0.0212
+          ],
+          [
+            -2.1895,
+            5.0453,
+            -0.0246
+          ],
+          [
+            -2.5147,
+            4.8914,
+            -0.0285
+          ],
+          [
+            -2.829,
+            4.7165,
+            -0.0329
+          ],
+          [
+            -3.1312,
+            4.5215,
+            -0.0377
+          ],
+          [
+            -3.4201,
+            4.3071,
+            -0.0429
+          ],
+          [
+            -3.6942,
+            4.0744,
+            -0.0486
+          ],
+          [
+            -3.9526,
+            3.8242,
+            -0.0547
+          ],
+          [
+            -4.194,
+            3.5577,
+            -0.0611
+          ],
+          [
+            -4.4174,
+            3.276,
+            -0.0679
+          ],
+          [
+            -4.6219,
+            2.9803,
+            -0.075
+          ],
+          [
+            -4.8066,
+            2.672,
+            -0.0824
+          ],
+          [
+            -4.9707,
+            2.3524,
+            -0.0901
+          ],
+          [
+            -5.1135,
+            2.0229,
+            -0.098
+          ],
+          [
+            -5.2345,
+            1.685,
+            -0.1061
+          ],
+          [
+            -5.333,
+            1.3403,
+            -0.1143
+          ],
+          [
+            -5.4086,
+            0.9908,
+            -0.1227
+          ],
+          [
+            -5.4612,
+            0.6391,
+            -0.1311
+          ],
+          [
+            -5.4905,
+            0.2911,
+            -0.1397
+          ]
+        ],
+        "radius": 0.012,
+        "at": [
+          10,
+          0.05,
+          0
+        ],
+        "color": "token:en-light"
+      },
+      "connects": [
+        "sun"
+      ]
+    },
+    {
+      "id": "courtyard",
+      "name": {
+        "en": "Courtyard",
+        "zh": "水泥空地"
+      },
+      "group": "outdoors",
+      "summary": {
+        "en": "Level ground that catches the pole’s shadow.",
+        "zh": "平整的地面，接住杆子的影子。"
+      },
+      "detail": {
+        "en": "A round patch of level, pale concrete 11 m across, standing for an open school courtyard in Singapore at 1.3° N, 103.8° E [S1, S13]. The model takes the ground as perfectly flat and the sky as clear.\n\nIt is drawn 10 m from the light bench so that each can be shown on its own; the two are never on the same view.",
+        "zh": "一块直径 11 米的浅色平整水泥地，代表新加坡（北纬 1.3°、东经 103.8°）一所学校里的空地 [S1, S13]。模型假设地面完全平整、天空无云。\n\n它画在光学实验台旁边 10 米外，两处各看各的，从不同框。"
+      },
+      "castShadow": false,
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0,
+            -0.025
+          ],
+          [
+            5.5,
+            -0.025
+          ],
+          [
+            5.5,
+            0.025
+          ],
+          [
+            0,
+            0.025
+          ]
+        ],
+        "segments": 96,
+        "at": [
+          10,
+          0.025,
+          0
+        ],
+        "color": "plastic",
+        "tint": "#8f8b82"
+      },
+      "connects": [
+        "pole"
+      ]
+    },
+    {
+      "id": "bench-table",
+      "name": {
+        "en": "Classroom table",
+        "zh": "教室桌"
+      },
+      "group": "source",
+      "summary": {
+        "en": "The table the light bench stands on.",
+        "zh": "放光学实验台的桌子。"
+      },
+      "detail": {
+        "en": "An ordinary classroom table 180 × 60 cm, with its top 75 cm above the floor [S1]. It is here only to hold the bench and the dark box.",
+        "zh": "一张普通的教室桌，180 × 60 厘米，桌面离地 75 厘米 [S1]。它只是用来放实验台和暗箱。"
+      },
+      "castShadow": false,
+      "context": true,
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          1.8,
+          0.03,
+          0.6
+        ],
+        "bevel": 0.004,
+        "at": [
+          0,
+          0.735,
+          0
+        ],
+        "color": "wood"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.04,
+            0.72,
+            0.04
+          ],
+          "bevel": 0.003,
+          "at": [
+            -0.86,
+            0.36,
+            -0.26
+          ],
+          "color": "powder",
+          "tint": "#5a5d60"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.04,
+            0.72,
+            0.04
+          ],
+          "bevel": 0.003,
+          "at": [
+            -0.86,
+            0.36,
+            0.26
+          ],
+          "color": "powder",
+          "tint": "#5a5d60"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.04,
+            0.72,
+            0.04
+          ],
+          "bevel": 0.003,
+          "at": [
+            0.86,
+            0.36,
+            -0.26
+          ],
+          "color": "powder",
+          "tint": "#5a5d60"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.04,
+            0.72,
+            0.04
+          ],
+          "bevel": 0.003,
+          "at": [
+            0.86,
+            0.36,
+            0.26
+          ],
+          "color": "powder",
+          "tint": "#5a5d60"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            1.68,
+            0.06,
+            0.02
+          ],
+          "bevel": 0.002,
+          "at": [
+            0,
+            0.69,
+            0.27
+          ],
+          "color": "powder",
+          "tint": "#5a5d60"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            1.68,
+            0.06,
+            0.02
+          ],
+          "bevel": 0.002,
+          "at": [
+            0,
+            0.69,
+            -0.27
+          ],
+          "color": "powder",
+          "tint": "#5a5d60"
+        }
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "id": "source",
+      "name": {
+        "en": "Light source",
+        "zh": "光源"
+      },
+      "color": "token:ink-2"
+    },
+    {
+      "id": "objects",
+      "name": {
+        "en": "Objects",
+        "zh": "物体"
+      },
+      "color": "token:ink-3"
+    },
+    {
+      "id": "sheets",
+      "name": {
+        "en": "Sheets",
+        "zh": "材料片"
+      },
+      "color": "token:neutral",
+      "card": false
+    },
+    {
+      "id": "screen",
+      "name": {
+        "en": "Screen",
+        "zh": "屏幕"
+      },
+      "color": "token:cold"
+    },
+    {
+      "id": "hole-cards",
+      "name": {
+        "en": "Cards with holes",
+        "zh": "有孔的卡片"
+      },
+      "color": "token:accent-2",
+      "card": false
+    },
+    {
+      "id": "dark-box",
+      "name": {
+        "en": "Dark box",
+        "zh": "暗箱"
+      },
+      "color": "token:cut"
+    },
+    {
+      "id": "outdoors",
+      "name": {
+        "en": "Courtyard",
+        "zh": "户外空地"
+      },
+      "color": "token:loop",
+      "card": false
+    },
+    {
+      "id": "rays",
+      "name": {
+        "en": "Light rays (drawn)",
+        "zh": "光线（示意）"
+      },
+      "color": "token:en-light"
+    }
+  ],
+  "flows": [
+    {
+      "id": "box-ball-light",
+      "group": "dark-box",
+      "paths": [
+        {
+          "id": "in",
+          "path": [
+            [
+              -0.585,
+              0.86,
+              -0.18
+            ],
+            [
+              -0.4495,
+              0.7996,
+              -0.1964
+            ]
+          ]
+        },
+        {
+          "id": "out",
+          "path": [
+            [
+              -0.4268,
+              0.8031,
+              -0.1729
+            ],
+            [
+              -0.45,
+              0.86,
+              -0.08
+            ],
+            [
+              -0.4834,
+              0.9417,
+              0.0534
+            ]
+          ]
+        },
+        {
+          "id": "side-1",
+          "path": [
+            [
+              -0.42,
+              0.8188,
+              -0.1968
+            ],
+            [
+              -0.42,
+              0.8736,
+              -0.1913
+            ]
+          ]
+        },
+        {
+          "id": "side-2",
+          "path": [
+            [
+              -0.4293,
+              0.8052,
+              -0.2249
+            ],
+            [
+              -0.4451,
+              0.8368,
+              -0.267
+            ]
+          ]
+        },
+        {
+          "id": "side-3",
+          "path": [
+            [
+              -0.3909,
+              0.801,
+              -0.2
+            ],
+            [
+              -0.3417,
+              0.8256,
+              -0.2
+            ]
+          ]
+        }
+      ],
+      "speed": 0.1,
+      "color": "token:en-light",
+      "count": 160,
+      "size": 0.22,
+      "spread": 0,
+      "clip": false,
+      "whenRun": true
+    },
+    {
+      "id": "box-mirror-light",
+      "group": "dark-box",
+      "paths": [
+        {
+          "id": "in",
+          "path": [
+            [
+              -0.585,
+              0.86,
+              -0.18
+            ],
+            [
+              -0.362,
+              0.86,
+              -0.18
+            ]
+          ]
+        },
+        {
+          "id": "out",
+          "path": [
+            [
+              -0.36,
+              0.86,
+              -0.18
+            ],
+            [
+              -0.45,
+              0.86,
+              -0.08
+            ],
+            [
+              -0.557,
+              0.86,
+              0.0389
+            ]
+          ]
+        }
+      ],
+      "speed": 0.1,
+      "color": "token:en-light",
+      "count": 120,
+      "size": 0.26,
+      "spread": 0,
+      "clip": false,
+      "whenRun": true
+    }
+  ],
+  "views": {
+    "assembled": {
+      "camera": {
+        "position": [
+          -1.02,
+          1.52,
+          1.52
+        ],
+        "target": [
+          0.06,
+          1,
+          0.02
+        ],
+        "fov": 30
+      }
+    },
+    "exploded": {
+      "camera": {
+        "position": [
+          -1.1,
+          1.75,
+          1.75
+        ],
+        "target": [
+          0.06,
+          1.06,
+          0.02
+        ],
+        "fov": 30
+      }
+    },
+    "cover": {
+      "position": [
+        -0.86,
+        1.42,
+        1.25
+      ],
+      "target": [
+        0.1,
+        1.02,
+        0.02
+      ],
+      "fov": 30
+    },
+    "section": {
+      "plane": "xy"
+    },
+    "shadows": "none",
+    "reference": {
+      "fit": "layers"
+    }
+  },
+  "poses": {
+    "hole-moved": {
+      "hole-card-2": {
+        "offset": [
+          0,
+          0,
+          0.02
+        ]
+      },
+      "duration": 0.5
+    }
+  },
+  "units": {
+    "modelUnit": "cm",
+    "scale": 100
+  },
+  "spec": [
+    {
+      "key": {
+        "en": "Track",
+        "zh": "轨道"
+      },
+      "value": {
+        "en": "150 CM · 1 CM MARKS",
+        "zh": "150 厘米 · 1 厘米刻度"
+      },
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Torch",
+        "zh": "手电筒"
+      },
+      "value": {
+        "en": "LED · BEAM ±40°",
+        "zh": "LED · 光束 ±40°"
+      },
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Screen",
+        "zh": "屏幕"
+      },
+      "value": {
+        "en": "60 × 50 CM",
+        "zh": "60 × 50 厘米"
+      },
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Sun",
+        "zh": "太阳"
+      },
+      "value": "NOAA · 1.3° N 103.8° E · UTC+8",
+      "tag": "typical"
+    }
+  ],
+  "telemetry": [
+    {
+      "key": {
+        "en": "Shadow H · W",
+        "zh": "影子 高 · 宽"
+      },
+      "unit": "cm",
+      "follow": [
+        "shadow-height",
+        "shadow-width"
+      ],
+      "scope": "observe"
+    },
+    {
+      "key": {
+        "en": "Gaps T · S",
+        "zh": "距离 手 · 屏"
+      },
+      "unit": "cm",
+      "follow": [
+        "gap-torch",
+        "gap-screen"
+      ]
+    },
+    {
+      "key": {
+        "en": "Light on screen",
+        "zh": "屏上的光"
+      },
+      "unit": "%",
+      "follow": "light-behind",
+      "scope": "observe"
+    },
+    {
+      "key": {
+        "en": "Sun height",
+        "zh": "太阳高度"
+      },
+      "unit": "°",
+      "follow": "sun-height",
+      "scope": "observe"
+    },
+    {
+      "key": {
+        "en": "Shadow length",
+        "zh": "影长"
+      },
+      "unit": "m",
+      "follow": "shadow-length",
+      "scope": "observe"
+    },
+    {
+      "key": {
+        "en": "Time",
+        "zh": "时间"
+      },
+      "unit": "h",
+      "follow": "time-now",
+      "scope": "observe"
+    }
+  ],
+  "sim": {
+    "kind": "light",
+    "controls": [
+      {
+        "id": "d-torch",
+        "kind": "step",
+        "values": [
+          15,
+          20,
+          30,
+          40,
+          60
+        ],
+        "default": 20,
+        "unit": "cm",
+        "label": {
+          "en": "Torch to object",
+          "zh": "手电筒到物体"
+        }
+      },
+      {
+        "id": "d-screen",
+        "kind": "step",
+        "values": [
+          10,
+          20,
+          30,
+          40
+        ],
+        "default": 30,
+        "unit": "cm",
+        "label": {
+          "en": "Object to screen",
+          "zh": "物体到屏幕"
+        }
+      },
+      {
+        "id": "object",
+        "kind": "choice",
+        "default": "card-circle",
+        "label": {
+          "en": "Object",
+          "zh": "物体"
+        },
+        "options": [
+          {
+            "id": "none",
+            "label": {
+              "en": "Nothing",
+              "zh": "不放"
+            }
+          },
+          {
+            "id": "card-circle",
+            "label": {
+              "en": "Round card",
+              "zh": "圆形卡片"
+            }
+          },
+          {
+            "id": "card-square",
+            "label": {
+              "en": "Square card",
+              "zh": "正方形卡片"
+            }
+          },
+          {
+            "id": "card-triangle",
+            "label": {
+              "en": "Triangle card",
+              "zh": "三角形卡片"
+            }
+          },
+          {
+            "id": "card-circle-big",
+            "label": {
+              "en": "Big round card",
+              "zh": "大圆卡片"
+            }
+          },
+          {
+            "id": "tin",
+            "label": {
+              "en": "Tin",
+              "zh": "罐子"
+            }
+          },
+          {
+            "id": "cone",
+            "label": {
+              "en": "Paper cone",
+              "zh": "纸圆锥"
+            }
+          },
+          {
+            "id": "ball",
+            "label": {
+              "en": "Ball",
+              "zh": "球"
+            }
+          }
+        ],
+        "sets": {
+          "card-circle": {
+            "material": "none"
+          },
+          "card-square": {
+            "material": "none"
+          },
+          "card-triangle": {
+            "material": "none"
+          },
+          "card-circle-big": {
+            "material": "none"
+          },
+          "tin": {
+            "material": "none"
+          },
+          "cone": {
+            "material": "none"
+          },
+          "ball": {
+            "material": "none"
+          }
+        }
+      },
+      {
+        "id": "turn",
+        "kind": "step",
+        "values": [
+          0,
+          45,
+          90
+        ],
+        "default": 0,
+        "unit": "°",
+        "label": {
+          "en": "Turned",
+          "zh": "转过的角度"
+        }
+      },
+      {
+        "id": "material",
+        "kind": "choice",
+        "default": "none",
+        "label": {
+          "en": "Sheet in the holder",
+          "zh": "支架上的材料片"
+        },
+        "options": [
+          {
+            "id": "none",
+            "label": {
+              "en": "No sheet",
+              "zh": "不放"
+            }
+          },
+          {
+            "id": "clear-glass",
+            "label": {
+              "en": "Clear glass",
+              "zh": "透明玻璃"
+            }
+          },
+          {
+            "id": "frosted-glass",
+            "label": {
+              "en": "Frosted glass",
+              "zh": "磨砂玻璃"
+            }
+          },
+          {
+            "id": "tracing-paper",
+            "label": {
+              "en": "Tracing paper",
+              "zh": "描图纸"
+            }
+          },
+          {
+            "id": "cardboard",
+            "label": {
+              "en": "Cardboard",
+              "zh": "硬纸板"
+            }
+          }
+        ],
+        "sets": {
+          "clear-glass": {
+            "object": "none"
+          },
+          "frosted-glass": {
+            "object": "none"
+          },
+          "tracing-paper": {
+            "object": "none"
+          },
+          "cardboard": {
+            "object": "none"
+          }
+        }
+      },
+      {
+        "id": "middle",
+        "kind": "choice",
+        "default": "in-line",
+        "label": {
+          "en": "Middle card",
+          "zh": "中间那张卡片"
+        },
+        "options": [
+          {
+            "id": "in-line",
+            "label": {
+              "en": "In a line",
+              "zh": "排成一直线"
+            }
+          },
+          {
+            "id": "moved",
+            "label": {
+              "en": "Moved 2 cm",
+              "zh": "挪开 2 厘米"
+            }
+          }
+        ]
+      },
+      {
+        "id": "torch-on",
+        "kind": "toggle",
+        "default": true,
+        "label": {
+          "en": "Torch on",
+          "zh": "打开手电筒"
+        }
+      },
+      {
+        "id": "box-torch",
+        "kind": "toggle",
+        "default": true,
+        "label": {
+          "en": "Torch in the box on",
+          "zh": "打开箱里的手电筒"
+        }
+      },
+      {
+        "id": "in-box",
+        "kind": "choice",
+        "default": "ball",
+        "label": {
+          "en": "In the box",
+          "zh": "箱里放"
+        },
+        "options": [
+          {
+            "id": "ball",
+            "label": {
+              "en": "Ball",
+              "zh": "球"
+            }
+          },
+          {
+            "id": "mirror",
+            "label": {
+              "en": "Mirror",
+              "zh": "镜子"
+            }
+          }
+        ]
+      },
+      {
+        "id": "time",
+        "kind": "step",
+        "values": [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        "default": 10,
+        "unit": "h",
+        "format": "time",
+        "label": {
+          "en": "Time of day",
+          "zh": "时间"
+        }
+      },
+      {
+        "id": "date",
+        "kind": "choice",
+        "default": "oct-20",
+        "label": {
+          "en": "Date",
+          "zh": "日期"
+        },
+        "options": [
+          {
+            "id": "oct-20",
+            "label": {
+              "en": "20 Oct 2026",
+              "zh": "2026 年 10 月 20 日"
+            }
+          },
+          {
+            "id": "jun-21",
+            "label": {
+              "en": "21 Jun 2026",
+              "zh": "2026 年 6 月 21 日"
+            }
+          },
+          {
+            "id": "mar-24",
+            "label": {
+              "en": "24 Mar 2026",
+              "zh": "2026 年 3 月 24 日"
+            }
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "id": "shadow-height",
+        "from": "shadow:height",
+        "unit": "cm",
+        "decimals": 0,
+        "label": {
+          "en": "Shadow height",
+          "zh": "影子的高"
+        }
+      },
+      {
+        "id": "shadow-width",
+        "from": "shadow:width",
+        "unit": "cm",
+        "decimals": 0,
+        "label": {
+          "en": "Shadow width",
+          "zh": "影子的宽"
+        }
+      },
+      {
+        "id": "shadow-shape",
+        "kind": "state",
+        "from": "shadow:shape",
+        "label": {
+          "en": "Shadow shape",
+          "zh": "影子的形状"
+        },
+        "states": {
+          "none": {
+            "en": "No shadow",
+            "zh": "没有影子"
+          },
+          "circle": {
+            "en": "Circle",
+            "zh": "圆形"
+          },
+          "oval": {
+            "en": "Oval",
+            "zh": "椭圆形"
+          },
+          "square": {
+            "en": "Square",
+            "zh": "正方形"
+          },
+          "four-sided": {
+            "en": "Narrower four-sided shape",
+            "zh": "变窄的四边形"
+          },
+          "triangle": {
+            "en": "Triangle",
+            "zh": "三角形"
+          },
+          "thin-strip": {
+            "en": "Thin strip",
+            "zh": "细条"
+          },
+          "rectangle": {
+            "en": "Rectangle",
+            "zh": "长方形"
+          },
+          "round-ends": {
+            "en": "Rounded at both ends",
+            "zh": "两头圆的形状"
+          },
+          "round-end": {
+            "en": "Rounded at one end",
+            "zh": "一头圆的形状"
+          }
+        }
+      },
+      {
+        "id": "gap-torch",
+        "from": "control:d-torch",
+        "unit": "cm",
+        "decimals": 0,
+        "label": {
+          "en": "Torch to object",
+          "zh": "手电筒到物体"
+        }
+      },
+      {
+        "id": "gap-screen",
+        "from": "control:d-screen",
+        "unit": "cm",
+        "decimals": 0,
+        "label": {
+          "en": "Object to screen",
+          "zh": "物体到屏幕"
+        }
+      },
+      {
+        "id": "light-behind",
+        "from": "sheet:light",
+        "unit": "%",
+        "decimals": 0,
+        "label": {
+          "en": "Light on the screen",
+          "zh": "照到屏幕的光"
+        }
+      },
+      {
+        "id": "shadow-kind",
+        "kind": "state",
+        "from": "sheet:kind",
+        "label": {
+          "en": "Shadow",
+          "zh": "影子"
+        },
+        "states": {
+          "none": {
+            "en": "No sheet",
+            "zh": "没有材料片"
+          },
+          "hardly": {
+            "en": "Hardly any shadow",
+            "zh": "几乎没有影子"
+          },
+          "lighter": {
+            "en": "A lighter shadow",
+            "zh": "较淡的影子"
+          },
+          "dark": {
+            "en": "A dark shadow",
+            "zh": "很深的影子"
+          }
+        }
+      },
+      {
+        "id": "sheet-dark",
+        "from": "sheet:dark",
+        "label": {
+          "en": "Shadow darkness",
+          "zh": "影子的深浅"
+        }
+      },
+      {
+        "id": "dot",
+        "kind": "state",
+        "from": "holes:dot",
+        "label": {
+          "en": "Bright dot on the screen",
+          "zh": "屏幕上的亮点"
+        },
+        "states": {
+          "yes": {
+            "en": "A bright dot",
+            "zh": "有亮点"
+          },
+          "no": {
+            "en": "No dot",
+            "zh": "没有亮点"
+          }
+        }
+      },
+      {
+        "id": "eye",
+        "kind": "state",
+        "from": "seeing:eye",
+        "label": {
+          "en": "Light out of the hole",
+          "zh": "从小孔出来的光"
+        },
+        "states": {
+          "none": {
+            "en": "None: nothing to see",
+            "zh": "没有：什么也看不见"
+          },
+          "some": {
+            "en": "Some: you see the ball",
+            "zh": "有一些：看见球"
+          },
+          "bright": {
+            "en": "Bright: a bright patch",
+            "zh": "明亮：一片亮光"
+          }
+        }
+      },
+      {
+        "id": "box-dark",
+        "from": "seeing:dark",
+        "label": {
+          "en": "Dark inside the box",
+          "zh": "箱里黑暗"
+        }
+      },
+      {
+        "id": "torch-lit",
+        "from": "control:torch-on",
+        "label": {
+          "en": "Torch lit",
+          "zh": "手电筒亮着"
+        }
+      },
+      {
+        "id": "box-lit",
+        "from": "control:box-torch",
+        "label": {
+          "en": "Box torch lit",
+          "zh": "箱里的手电筒亮着"
+        }
+      },
+      {
+        "id": "sun-height",
+        "from": "sun:height",
+        "unit": "°",
+        "decimals": 0,
+        "label": {
+          "en": "Sun’s height",
+          "zh": "太阳高度"
+        }
+      },
+      {
+        "id": "shadow-length",
+        "from": "sun:length",
+        "unit": "m",
+        "decimals": 2,
+        "label": {
+          "en": "Shadow length",
+          "zh": "影长"
+        }
+      },
+      {
+        "id": "shadow-points",
+        "kind": "state",
+        "from": "sun:points",
+        "label": {
+          "en": "Shadow points",
+          "zh": "影子指向"
+        },
+        "states": {
+          "north": {
+            "en": "North",
+            "zh": "北"
+          },
+          "north-east": {
+            "en": "North-east",
+            "zh": "东北"
+          },
+          "east": {
+            "en": "East",
+            "zh": "东"
+          },
+          "south-east": {
+            "en": "South-east",
+            "zh": "东南"
+          },
+          "south": {
+            "en": "South",
+            "zh": "南"
+          },
+          "south-west": {
+            "en": "South-west",
+            "zh": "西南"
+          },
+          "west": {
+            "en": "West",
+            "zh": "西"
+          },
+          "north-west": {
+            "en": "North-west",
+            "zh": "西北"
+          }
+        }
+      },
+      {
+        "id": "noon",
+        "from": "sun:noon",
+        "unit": "h",
+        "format": "time",
+        "label": {
+          "en": "Sun highest at",
+          "zh": "太阳最高的时刻"
+        }
+      },
+      {
+        "id": "noon-length",
+        "from": "sun:noon-length",
+        "unit": "m",
+        "decimals": 2,
+        "label": {
+          "en": "Shortest shadow",
+          "zh": "最短的影子"
+        }
+      },
+      {
+        "id": "time-now",
+        "from": "control:time",
+        "unit": "h",
+        "format": "time",
+        "label": {
+          "en": "Time",
+          "zh": "时间"
+        }
+      },
+      {
+        "id": "sun-at",
+        "kind": "vector",
+        "from": "sun:at",
+        "label": {
+          "en": "Sun direction",
+          "zh": "太阳方向"
+        }
+      }
+    ],
+    "bind": [
+      {
+        "control": "d-torch",
+        "part": [
+          "torch",
+          "torch-stand"
+        ],
+        "offset": {
+          "axis": [
+            -1,
+            0,
+            0
+          ],
+          "per": 0.01,
+          "origin": 0
+        }
+      },
+      {
+        "control": "d-screen",
+        "part": [
+          "screen-board",
+          "screen-stand",
+          "light-sensor",
+          "datalogger"
+        ],
+        "offset": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "per": 0.01,
+          "origin": 0
+        }
+      },
+      {
+        "control": "object",
+        "part": "card-circle",
+        "visible": {
+          "eq": "card-circle"
+        }
+      },
+      {
+        "control": "object",
+        "part": "card-square",
+        "visible": {
+          "eq": "card-square"
+        }
+      },
+      {
+        "control": "object",
+        "part": "card-triangle",
+        "visible": {
+          "eq": "card-triangle"
+        }
+      },
+      {
+        "control": "object",
+        "part": "card-circle-big",
+        "visible": {
+          "eq": "card-circle-big"
+        }
+      },
+      {
+        "control": "object",
+        "part": "tin",
+        "visible": {
+          "eq": "tin"
+        }
+      },
+      {
+        "control": "object",
+        "part": "cone",
+        "visible": {
+          "eq": "cone"
+        }
+      },
+      {
+        "control": "object",
+        "part": "ball",
+        "visible": {
+          "eq": "ball"
+        }
+      },
+      {
+        "control": "turn",
+        "part": [
+          "card-circle",
+          "card-square",
+          "card-triangle",
+          "card-circle-big",
+          "tin",
+          "cone",
+          "ball"
+        ],
+        "rotate": {
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "per": 1,
+          "pivot": [
+            0,
+            1.05,
+            0.05
+          ]
+        }
+      },
+      {
+        "control": "material",
+        "part": "clear-glass",
+        "visible": {
+          "eq": "clear-glass"
+        }
+      },
+      {
+        "control": "material",
+        "part": "frosted-glass",
+        "visible": {
+          "eq": "frosted-glass"
+        }
+      },
+      {
+        "control": "material",
+        "part": "tracing-paper",
+        "visible": {
+          "eq": "tracing-paper"
+        }
+      },
+      {
+        "control": "material",
+        "part": "cardboard-sheet",
+        "visible": {
+          "eq": "cardboard"
+        }
+      },
+      {
+        "control": "middle",
+        "part": "hole-card-2",
+        "pose": {
+          "moved": "hole-moved"
+        }
+      },
+      {
+        "output": "torch-lit",
+        "part": "torch",
+        "glow": {
+          "color": "token:lamp",
+          "full": 1,
+          "curve": "linear"
+        }
+      },
+      {
+        "output": "box-lit",
+        "part": "box-torch",
+        "glow": {
+          "color": "token:lamp",
+          "full": 1,
+          "curve": "linear"
+        }
+      },
+      {
+        "control": "in-box",
+        "part": "box-ball",
+        "visible": {
+          "eq": "ball"
+        }
+      },
+      {
+        "control": "in-box",
+        "part": "box-mirror",
+        "visible": {
+          "eq": "mirror"
+        }
+      },
+      {
+        "output": "box-dark",
+        "part": "box-ball",
+        "tint": {
+          "color": "#0d0d0c",
+          "full": 1
+        }
+      },
+      {
+        "output": "box-dark",
+        "part": "box-inside",
+        "visible": true
+      },
+      {
+        "output": "eye",
+        "flow": "box-ball-light",
+        "visible": {
+          "eq": "some"
+        }
+      },
+      {
+        "output": "eye",
+        "flow": "box-mirror-light",
+        "visible": {
+          "eq": "bright"
+        }
+      },
+      {
+        "output": "sun-at",
+        "part": "sun",
+        "place": {
+          "centre": [
+            10,
+            0.05,
+            0
+          ],
+          "radius": 5.5
+        }
+      },
+      {
+        "control": "date",
+        "part": "sun-path-oct",
+        "visible": {
+          "eq": "oct-20"
+        }
+      },
+      {
+        "control": "date",
+        "part": "sun-path-jun",
+        "visible": {
+          "eq": "jun-21"
+        }
+      },
+      {
+        "control": "date",
+        "part": "sun-path-mar",
+        "visible": {
+          "eq": "mar-24"
+        }
+      }
+    ],
+    "overlays": [
+      {
+        "kind": "shadow-cast",
+        "source": {
+          "part": "torch",
+          "point": [
+            0,
+            1.05,
+            0.05
+          ],
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "beam": 40,
+          "when": {
+            "control": "torch-on"
+          }
+        },
+        "receiver": {
+          "part": "screen-board",
+          "normal": [
+            -1,
+            0,
+            0
+          ],
+          "size": [
+            0.6,
+            0.5
+          ]
+        },
+        "casters": [
+          {
+            "part": "object-holder"
+          },
+          {
+            "part": "card-circle"
+          },
+          {
+            "part": "card-square"
+          },
+          {
+            "part": "card-triangle"
+          },
+          {
+            "part": "card-circle-big"
+          },
+          {
+            "part": "tin"
+          },
+          {
+            "part": "cone"
+          },
+          {
+            "part": "ball"
+          },
+          {
+            "part": "clear-glass",
+            "dark": {
+              "output": "sheet-dark"
+            }
+          },
+          {
+            "part": "frosted-glass",
+            "dark": {
+              "output": "sheet-dark"
+            }
+          },
+          {
+            "part": "tracing-paper",
+            "dark": {
+              "output": "sheet-dark"
+            }
+          },
+          {
+            "part": "cardboard-sheet",
+            "dark": {
+              "output": "sheet-dark"
+            }
+          },
+          {
+            "part": "hole-card-1"
+          },
+          {
+            "part": "hole-card-2"
+          },
+          {
+            "part": "hole-card-3"
+          }
+        ],
+        "spot": {
+          "color": "token:en-light"
+        },
+        "rays": {
+          "group": "rays",
+          "edges": "vertical",
+          "through": "dark",
+          "extra": [
+            [
+              0,
+              0
+            ]
+          ]
+        }
+      },
+      {
+        "kind": "shadow-cast",
+        "source": {
+          "direction": {
+            "output": "sun-at"
+          }
+        },
+        "receiver": {
+          "part": "courtyard",
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "radius": 5.5
+        },
+        "casters": [
+          {
+            "part": "pole"
+          }
+        ],
+        "trail": {
+          "control": "time"
+        },
+        "rays": {
+          "group": "rays",
+          "edges": "tip",
+          "parallel": [
+            -0.4,
+            0.4
+          ]
+        }
+      }
+    ],
+    "light": {
+      "bench": {
+        "source": {
+          "part": "torch",
+          "point": [
+            0,
+            1.05,
+            0.05
+          ],
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "beam": 40
+        },
+        "power": "torch-on",
+        "gaps": {
+          "torch": "d-torch",
+          "screen": "d-screen"
+        },
+        "holder": [
+          0,
+          1.05,
+          0.05
+        ],
+        "screen": {
+          "part": "screen-board",
+          "size": [
+            60,
+            50
+          ]
+        },
+        "object": "object",
+        "turn": "turn",
+        "objects": {
+          "card-circle": {
+            "part": "card-circle",
+            "shape": {
+              "kind": "disc",
+              "d": 8,
+              "thick": 0.2
+            },
+            "names": {
+              "0": "circle",
+              "45": "oval",
+              "90": "thin-strip"
+            }
+          },
+          "card-square": {
+            "part": "card-square",
+            "shape": {
+              "kind": "polygon",
+              "points": [
+                [
+                  -4,
+                  -4
+                ],
+                [
+                  4,
+                  -4
+                ],
+                [
+                  4,
+                  4
+                ],
+                [
+                  -4,
+                  4
+                ]
+              ],
+              "thick": 0.2
+            },
+            "names": {
+              "0": "square",
+              "45": "four-sided",
+              "90": "thin-strip"
+            }
+          },
+          "card-triangle": {
+            "part": "card-triangle",
+            "shape": {
+              "kind": "polygon",
+              "points": [
+                [
+                  -4.6188,
+                  -4
+                ],
+                [
+                  4.6188,
+                  -4
+                ],
+                [
+                  0,
+                  4
+                ]
+              ],
+              "thick": 0.2
+            },
+            "names": {
+              "0": "triangle",
+              "45": "triangle",
+              "90": "thin-strip"
+            }
+          },
+          "card-circle-big": {
+            "part": "card-circle-big",
+            "shape": {
+              "kind": "disc",
+              "d": 12,
+              "thick": 0.2
+            },
+            "names": {
+              "0": "circle",
+              "45": "oval",
+              "90": "thin-strip"
+            }
+          },
+          "tin": {
+            "part": "tin",
+            "shape": {
+              "kind": "cylinder",
+              "d": 6.6,
+              "length": 12,
+              "axis": "z"
+            },
+            "names": {
+              "0": "rectangle",
+              "45": "round-ends",
+              "90": "circle"
+            }
+          },
+          "cone": {
+            "part": "cone",
+            "shape": {
+              "kind": "cone",
+              "d": 8,
+              "length": 10,
+              "axis": "z",
+              "apex": "+"
+            },
+            "names": {
+              "0": "triangle",
+              "45": "round-end",
+              "90": "circle"
+            }
+          },
+          "ball": {
+            "part": "ball",
+            "shape": {
+              "kind": "sphere",
+              "d": 6.5
+            },
+            "names": {
+              "0": "circle",
+              "45": "circle",
+              "90": "circle"
+            }
+          }
+        }
+      },
+      "sheets": {
+        "control": "material",
+        "size": [
+          10,
+          10
+        ],
+        "kinds": {
+          "hardly": 85,
+          "dark": 5
+        },
+        "materials": {
+          "clear-glass": {
+            "part": "clear-glass",
+            "straight": 0.91,
+            "scattered": 0
+          },
+          "frosted-glass": {
+            "part": "frosted-glass",
+            "straight": 0,
+            "scattered": 0.83
+          },
+          "tracing-paper": {
+            "part": "tracing-paper",
+            "straight": 0,
+            "scattered": 0.65
+          },
+          "cardboard": {
+            "part": "cardboard-sheet",
+            "straight": 0,
+            "scattered": 0
+          }
+        }
+      },
+      "holes": {
+        "control": "middle",
+        "hole": 1.2,
+        "cards": [
+          {
+            "part": "hole-card-1",
+            "at": -10
+          },
+          {
+            "part": "hole-card-2",
+            "at": 0,
+            "moved": 2
+          },
+          {
+            "part": "hole-card-3",
+            "at": 10
+          }
+        ]
+      },
+      "seeing": {
+        "torch": "box-torch",
+        "target": "in-box",
+        "reflects": {
+          "ball": "some",
+          "mirror": "bright"
+        }
+      },
+      "sun": {
+        "lat": 1.3,
+        "lon": 103.8,
+        "zone": 8,
+        "time": "time",
+        "date": "date",
+        "dates": {
+          "oct-20": "2026-10-20",
+          "jun-21": "2026-06-21",
+          "mar-24": "2026-03-24"
+        },
+        "pole": 1,
+        "north": [
+          0,
+          0,
+          -1
+        ]
+      }
+    }
+  }
+}

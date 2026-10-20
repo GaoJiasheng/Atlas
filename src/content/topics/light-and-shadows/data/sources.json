@@ -1,0 +1,187 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "Atlas design study for this topic (docs/35-light-and-shadows-content-spec.md §2–§4 and §9): a generic school light bench and a courtyard, not a specific product or school. DESIGN: classroom table 180 × 60 cm, top 75 cm high; aluminium track 150 cm, marked every 1 cm; the light's axis 30 cm above the table; LED torch drawn as a point of light at the centre of its lens, beam 40° each side of its axis; holder at the middle of the track; white screen 60 × 50 cm square to the track; cardboard shapes 2 mm thick: round card 8 cm across, square card 8 cm, equilateral triangle card 8 cm high, big round card 12 cm across; tin 6.6 cm across and 12 cm long and paper cone 8 cm across and 10 cm long, both lying on their sides across the track; ball 6.5 cm across; sheets 10 × 10 cm (glass 4 mm, cardboard 3 mm); three cards with holes 1.2 cm across, 10 cm apart, the middle one moved 2 cm to one side; torch 15, 20, 30, 40 or 60 cm in front of the object; screen 10, 20, 30 or 40 cm behind it; dark box 30 × 18 × 20 cm, black inside, viewing hole 1 cm; courtyard 11 m across with a pole 1.00 m high and 5 cm thick, 10 m from the bench. Model inputs: light transmission of clear glass 0.91 (S8), frosted glass 0.83 (S9), tracing paper 0.65 (S10), cardboard taken as 0. SIM: round card 8 cm, screen 30 cm behind: torch at 15 / 20 / 30 / 40 / 60 cm gives shadows 24 / 20 / 16 / 14 / 12 cm across; torch 20 cm in front: screen at 10 / 20 / 30 / 40 cm gives 12 / 16 / 20 / 24 cm. Torch 20 cm, screen 30 cm, height × width in cm, facing / turned 45° / edge-on: round card 20 × 20 circle, 20 × 15 oval, 20 × 1 thin strip; square card 20 × 20, 23 × 15, 25 × 1; triangle card 20 × 23, 22 × 17, 23 × 1; big round card 30 × 30, 31 × 23, 31 × 1; tin 17 × 36 rectangle, 21 × 33, 24 × 24 circle; cone 20 × 28 triangle, 25 × 24, 27 × 27 circle; ball 16 × 16 at every turn. Light sensor 10 cm behind the sheet, as a percentage of the empty holder: clear glass 91 %, frosted glass 45 %, tracing paper 35 %, cardboard 0 %; 30 cm behind: 91 / 18 / 14 / 0 %. Holes in line: a bright dot 2.0 cm across; middle card moved 2 cm: no dot. Sun for a pole 1.00 m high at 1.3° N, 103.8° E, UTC+8 (S12–S14), 20 October 2026: 8.00 am Sun 17° high, shadow 3.25 m pointing west; 9.00 am 32°, 1.62 m west; 10.00 am 46°, 0.96 m west; 11.00 am 60°, 0.57 m north-west; 12.00 pm 73°, 0.30 m north-west; 1.00 pm 78°, 0.21 m north; 2.00 pm 69°, 0.38 m north-east; 3.00 pm 56°, 0.69 m east; 4.00 pm 41°, 1.14 m east; 5.00 pm 27°, 1.99 m east; 6.00 pm 12°, 4.70 m east; Sun highest at about 12.50 pm (78.4°, shadow 0.21 m pointing north). 21 June 2026, 1.00 pm: 0.41 m pointing south (Sun highest at about 1.06 pm). 24 March 2026, 1.00 pm: 0.05 m pointing west (Sun highest at about 1.11 pm, 89.9°).",
+        "zh": "本主题的 Atlas 设计研究（docs/35-light-and-shadows-content-spec.md §2–§4、§9）：一张通用的学校光学实验台和一块空地，不对应任何具体产品或学校。设计值：教室桌 180 × 60 厘米，桌面高 75 厘米；铝轨道长 150 厘米，每 1 厘米一个刻度；光的路线在桌面上方 30 厘米；LED 手电筒画成镜片中心的一个光点，光束向中线两边各张开 40°；物体支架在轨道中点；白色屏幕 60 × 50 厘米，垂直于轨道；硬纸板形状厚 2 毫米：圆形卡片直径 8 厘米、正方形卡片边长 8 厘米、等边三角形卡片高 8 厘米、大圆卡片直径 12 厘米；罐子直径 6.6 厘米、长 12 厘米，纸圆锥底面直径 8 厘米、长 10 厘米，都横躺着、横过轨道；球直径 6.5 厘米；材料片 10 × 10 厘米（玻璃厚 4 毫米，硬纸板厚 3 毫米）；三张有孔卡片，孔径 1.2 厘米，相隔 10 厘米，中间那张可往旁边挪 2 厘米；手电筒在物体前 15、20、30、40 或 60 厘米；屏幕在物体后 10、20、30 或 40 厘米；暗箱 30 × 18 × 20 厘米，内壁黑色，观察孔直径 1 厘米；空地直径 11 米，立着一根高 1.00 米、粗 5 厘米的杆子，离实验台 10 米。模型输入：透光率透明玻璃 0.91（S8）、磨砂玻璃 0.83（S9）、描图纸 0.65（S10），硬纸板取 0。模拟结果：直径 8 厘米的圆卡片，屏幕在后面 30 厘米：手电筒在 15 / 20 / 30 / 40 / 60 厘米，影子直径 24 / 20 / 16 / 14 / 12 厘米；手电筒在前面 20 厘米：屏幕在 10 / 20 / 30 / 40 厘米，影子 12 / 16 / 20 / 24 厘米。手电筒 20 厘米、屏幕 30 厘米，影子高 × 宽（厘米），正对 / 转 45° / 侧对：圆形卡片 20 × 20 圆形、20 × 15 椭圆形、20 × 1 细条；正方形卡片 20 × 20、23 × 15、25 × 1；三角形卡片 20 × 23、22 × 17、23 × 1；大圆卡片 30 × 30、31 × 23、31 × 1；罐子 17 × 36 长方形、21 × 33、24 × 24 圆形；纸圆锥 20 × 28 三角形、25 × 24、27 × 27 圆形；球不论怎么转都是 16 × 16。光传感器在材料片后 10 厘米，读数是支架上什么都不放时的百分之几：透明玻璃 91%、磨砂玻璃 45%、描图纸 35%、硬纸板 0%；在后面 30 厘米：91% / 18% / 14% / 0%。三个小孔排成直线：屏上一个直径 2.0 厘米的亮点；中间那张挪开 2 厘米：没有亮点。太阳（杆高 1.00 米，北纬 1.3°、东经 103.8°，UTC+8，S12–S14），2026 年 10 月 20 日：上午 8.00 太阳高 17°，影长 3.25 米，指向西；上午 9.00 32°、1.62 米、西；上午 10.00 46°、0.96 米、西；上午 11.00 60°、0.57 米、西北；中午 12.00 73°、0.30 米、西北；下午 1.00 78°、0.21 米、北；下午 2.00 69°、0.38 米、东北；下午 3.00 56°、0.69 米、东；下午 4.00 41°、1.14 米、东；下午 5.00 27°、1.99 米、东；下午 6.00 12°、4.70 米、东；太阳最高约在下午 12.50（78.4°，影长 0.21 米，指向北）。2026 年 6 月 21 日下午 1.00：0.41 米，指向南（太阳最高约在下午 1.06）。2026 年 3 月 24 日下午 1.00：0.05 米，指向西（太阳最高约在下午 1.11，89.9°）。"
+      },
+      "note": {
+        "en": "Not a measurement. Shadow sizes are straight-line geometry from a point of light to the drawn objects; the model keeps the cards' 2 mm thickness, so its unrounded sizes are slightly larger than 8 × (a + b) ÷ a (by about 1 % with the torch 15 cm away, 0.5 % at 20 cm). Readings behind the frosted glass and tracing paper treat each sheet as spreading the light it lets through evenly in all directions (light on the screen = straight-through share + scattered share × r² ÷ (r² + b²) × ((a + b) ÷ a)², with r² = sheet area ÷ π, a the torch-to-sheet and b the sheet-to-screen distance): a deliberately simple picture, so these readings are illustrative, not predictions for a real classroom sheet. The transmission figures are published for particular products and one measured sample (S8–S10), not measured on this bench; cardboard's 0 is a choice for the model. The model gives the same number every time. Sun positions use NOAA's calculator method with its average refraction correction (S12); level ground, clear sky; shadow length = pole height ÷ tan(Sun's height). Clock times are rounded to the nearest minute.",
+        "zh": "不是实测值。影子大小是从一个光点到所画物体的直线几何；模型保留了卡片 2 毫米的厚度，所以未取整的大小比 8 × (a + b) ÷ a 略大（手电筒在 15 厘米时约大 1%，20 厘米时约 0.5%）。磨砂玻璃和描图纸后面的读数，把每张材料片看成把透过的光向各个方向均匀散开（屏幕上的光 = 直透部分 + 散射部分 × r² ÷ (r² + b²) × ((a + b) ÷ a)²，r² = 材料片面积 ÷ π，a 是手电筒到材料片、b 是材料片到屏幕的距离）：这是故意简化的图像，所以这些读数只是示意，不是对真实教室里某张材料片的预测。透光率是几种产品公开的数据和一份样品的实测（S8–S10），不是在这张实验台上量的；硬纸板取 0 是模型的取值。模型每次给出同一个数。太阳位置按 NOAA 计算器的方法，含它的平均大气折射修正（S12）；地面水平、天空无云；影长 = 杆高 ÷ tan（太阳高度）。时刻取整到分钟。"
+      }
+    },
+    {
+      "id": "S2",
+      "text": {
+        "en": "Ministry of Education Singapore, Curriculum Planning and Development Division, Science Teaching & Learning Syllabus, Primary Three to Six, Standard / Foundation (from the 2023 Primary Three cohort, updated January 2026). Printed p. 75, Energy Forms and Uses (Light): an object can be seen when it reflects light or when it is a source of light (the law of reflection is not required); light travels in straight lines, so a shadow forms when light is completely or partially blocked by an object; investigate the variables that affect shadows formed: shape, size and position of objects, and the distances between light source and object and between object and screen (the terms transparent, translucent and opaque are not required). Printed pp. 15–16: recognise a fair test (changed and unchanged variables); analyse data in tables and bar and line graphs to find patterns. Printed p. 40: the transparency of a material is whether it allows most, some or no light to pass through.",
+        "zh": "新加坡教育部课程规划与发展司《小学三至六年级科学教学大纲》（标准／基础，2023 年小三起实施，2026 年 1 月更新）。印刷页第 75 页“能量的形式与用途（光）”：物体反射光或自己是光源时，我们才看得见它（不要求反射定律）；光沿直线传播，所以物体完全或部分挡住光时就形成影子；探究影响影子的因素：物体的形状、大小、位置，光源到物体、物体到屏幕的距离（不要求透明、半透明、不透明这几个术语）。印刷页第 15–16 页：认出公平测试（改变的量与不变的量）；分析表格、条形图和折线图里的数据，找出规律。印刷页第 40 页：材料的“透明程度”指它让大部分、一部分还是完全不让光穿过。"
+      },
+      "url": "https://www.moe.gov.sg/api/media/ba3562d3-5b31-4459-8693-45cde7b97273/Primary-Science-Syllabus-2023_May24.pdf",
+      "note": {
+        "en": "Read 2026-10-20 from the official PDF; printed page numbers (PDF page = printed page + 1). The Sun's shadows in chapter 07 go beyond this page: it is taught as a change in the position of the light source.",
+        "zh": "2026-10-20 读取官方 PDF；页码为印刷页码（PDF 页 = 印刷页 + 1）。第 07 章太阳下的影子超出这一页的范围，按“光源的位置改变”来讲。"
+      }
+    },
+    {
+      "id": "S3",
+      "text": {
+        "en": "OpenStax (Rice University), University Physics Volume 3, §1.1 The Propagation of Light: in a uniform material such as air, the path of light can be modelled as a straight line called a ray.",
+        "zh": "OpenStax（莱斯大学）《大学物理》第 3 册 §1.1“光的传播”：在空气这样均匀的物质里，光的路径可以用一条直线来表示，叫作光线。"
+      },
+      "url": "https://openstax.org/books/university-physics-volume-3/pages/1-1-the-propagation-of-light"
+    },
+    {
+      "id": "S4",
+      "text": {
+        "en": "OpenStax (Rice University), University Physics Volume 3, §1.2 The Law of Reflection, the paragraph on rough surfaces: light striking a rough surface such as paper, clothes or a wall is reflected in many different directions (diffused), which is why such objects can be seen from many places.",
+        "zh": "OpenStax（莱斯大学）《大学物理》第 3 册 §1.2“反射定律”中讲粗糙表面的一段：光照到纸、衣服、墙这类粗糙表面，被反射向许多不同的方向（漫射），所以从许多地方都看得见这些东西。"
+      },
+      "url": "https://openstax.org/books/university-physics-volume-3/pages/1-2-the-law-of-reflection",
+      "note": {
+        "en": "Only the paragraph on rough surfaces is used; the law of reflection itself is not part of this topic (S2).",
+        "zh": "只用讲粗糙表面的一段；反射定律本身不在本主题的范围内（S2）。"
+      }
+    },
+    {
+      "id": "S5",
+      "text": {
+        "en": "Australian Academy of Science, Primary Connections, Light imitates art, Lesson 2: How does light help us see? Light from a source travels to an object and bounces off it before travelling to the eye.",
+        "zh": "澳大利亚科学院 Primary Connections《光模仿艺术》第 2 课“光怎样帮助我们看见”：光从光源照到物体上，被物体反射，再进入眼睛。"
+      },
+      "url": "https://primaryconnections.org.au/teaching-sequences/year-5/light-imitates-art/lesson-2-how-does-light-help-us-see",
+      "note": {
+        "en": "An Australian teaching sequence, used for the physics of seeing and the idea of a box with a viewing hole, not for year levels.",
+        "zh": "澳大利亚的教学单元，这里只用它讲“看见”的物理和带观察孔的盒子，不用它的年级划分。"
+      }
+    },
+    {
+      "id": "S6",
+      "text": {
+        "en": "Australian Academy of Science, Primary Connections, Light imitates art, Lesson 4: materials that let most light through, some light through or no light through; a shadow forms where light is blocked.",
+        "zh": "澳大利亚科学院 Primary Connections《光模仿艺术》第 4 课：让大部分光、一部分光穿过和不让光穿过的材料；光被挡住的地方形成影子。"
+      },
+      "url": "https://primaryconnections.org.au/teaching-sequences/year-5/light-imitates-art/lesson-4-what-happens-light-when-it-hits-non-reflective-surface",
+      "note": {
+        "en": "The lesson's title calls dull surfaces non-reflective; this topic does not use that wording, because dull surfaces reflect light in many directions (S4).",
+        "zh": "这一课的标题把哑光表面叫作“不反射光的表面”；本主题不用这个说法，因为哑光表面会把光向许多方向反射（S4）。"
+      }
+    },
+    {
+      "id": "S7",
+      "text": {
+        "en": "James Hedberg, How to see an umbra with an extended source, City College of New York Planetarium, 2 July 2021: a light source with some size gives a fully dark centre (umbra) and, around it, a region where only part of the light is blocked (penumbra).",
+        "zh": "James Hedberg，《用有大小的光源看本影》，纽约城市学院天文馆，2021 年 7 月 2 日：有一定大小的光源，影子中间完全黑暗的部分叫本影，四周只挡住一部分光的地带叫半影。"
+      },
+      "url": "https://ccnyplanetarium.org/posts/2021/07/02/extended-light-sources-and-umbras.html"
+    },
+    {
+      "id": "S8",
+      "text": {
+        "en": "Pilkington / NSG Group, Pilkington Botanical: Product range brochure, printed pp. 2 and 4: clear float glass 4 mm thick, light transmittance 91 % (the brochure's separate hemispherical transmission, 82 %, is a different measure).",
+        "zh": "Pilkington / NSG 集团《Pilkington Botanical 产品目录》印刷页第 2、4 页：4 毫米厚的透明浮法玻璃，可见光透射比 91%（目录里另有一栏“半球透射”82%，是另一种量法）。"
+      },
+      "url": "https://botanical.pilkington.com/en/-/media/7C51F46AAC1A427A966068B54E1C56BC.ashx",
+      "note": {
+        "en": "A maker's declared value for one product, used as a typical figure for clear glass; it is not a measurement of the sheet drawn here.",
+        "zh": "这是厂商对一种产品的声明值，这里当作透明玻璃的典型数字；不是对图中这块玻璃的实测。"
+      }
+    },
+    {
+      "id": "S9",
+      "text": {
+        "en": "Pilkington Group Limited / NSG Group, Pilkington Optifloat Opal: acid-etched glass, technical performance (June 2020), PDF p. 2: 4 mm and 6 mm acid-etched glass, light transmittance 83 %, light reflectance 8 % (the 78 % and 75 % in the same table are direct transmission of solar energy, not of light).",
+        "zh": "Pilkington 集团 / NSG 集团《Pilkington Optifloat Opal 酸蚀玻璃技术性能》（2020 年 6 月）PDF 第 2 页：4 毫米与 6 毫米酸蚀玻璃，可见光透射比 83%，可见光反射比 8%（同一表里的 78%、75% 是太阳能直接透射，不是可见光）。"
+      },
+      "url": "https://assetmanager-ws.pilkington.com/fileserver.aspx?cd=cd&cmd=get_file&ref=GL044",
+      "note": {
+        "en": "Declared for the product, not for every frosted glass. The maker does not give how the light is spread out after passing through; the model's even spreading is an assumption (S1).",
+        "zh": "这是该产品的声明值，不代表所有磨砂玻璃。厂商没有给出光穿过后怎样散开；模型的“均匀散开”是假设（S1）。"
+      }
+    },
+    {
+      "id": "S10",
+      "text": {
+        "en": "Julien Clauzon, Development of a transparent cellulose film: with high barrier properties for recyclable and compostable packaging, degree project, KTH Royal Institute of Technology, 2024. Optical properties measured with a haze meter (ASTM D1003), PDF p. 12; Fig. 16, PDF p. 26: tracing paper of 70 g per square metre, total transmittance about 65 % and haze close to 100 %; lighter tracing papers (30–60 g per square metre) about 70–78 %.",
+        "zh": "Julien Clauzon，《透明纤维素薄膜的研制》，瑞典皇家理工学院（KTH）学位论文，2024 年。光学性能用雾度计测量（ASTM D1003），PDF 第 12 页；PDF 第 26 页图 16：每平方米 70 克的描图纸，总透射比约 65%，雾度接近 100%；较轻的描图纸（每平方米 30–60 克）约 70–78%。"
+      },
+      "url": "https://kth.diva-portal.org/smash/get/diva2%3A1887134/FULLTEXT01.pdf",
+      "note": {
+        "en": "Values read from the plotted points of Fig. 16 (to about ±1 percentage point); the thesis gives no brand or thickness for the tracing papers. Replaces the earlier lead (a 2016 dissertation snippet) whose full text could not be read.",
+        "zh": "数值从图 16 的数据点读出（误差约 ±1 个百分点）；论文没有写描图纸的品牌和厚度。它代替了先前的线索（一篇 2016 年博士论文的片段，全文无法读到）。"
+      }
+    },
+    {
+      "id": "S11",
+      "text": {
+        "en": "Institute of Physics, IOPSpark, Transmitting light: a class practical with a light sensor; first record the reading with no sheet in place, then with one sheet, two sheets and so on, keeping everything else the same.",
+        "zh": "英国物理学会 IOPSpark《透光》：一个用光传感器的课堂实验；先在不放纸时记下读数，再放一张、两张……，其他条件都保持不变。"
+      },
+      "url": "https://spark.iop.org/transmitting-light"
+    },
+    {
+      "id": "S12",
+      "text": {
+        "en": "NOAA Global Monitoring Laboratory, NOAA Solar Calculator, Solar Calculation Details and its program main.js: the Sun's position from the equations in Jean Meeus, Astronomical Algorithms, with a correction for the bending of light in the atmosphere; the results are approximate and for education.",
+        "zh": "美国国家海洋和大气管理局（NOAA）全球监测实验室的太阳计算器、《太阳计算说明》与它的程序 main.js：按 Jean Meeus《天文算法》的公式计算太阳位置，并修正大气对光的折射；结果是近似的，供教育使用。"
+      },
+      "url": "https://gml.noaa.gov/grad/solcalc/calcdetails.html",
+      "note": {
+        "en": "The model ports main.js function by function (src/engines/space-scene/lib/sim/sun.ts) and is checked against the original program's output to 0.01°. A US government work in the public domain.",
+        "zh": "模型逐个函数移植 main.js（src/engines/space-scene/lib/sim/sun.ts），并与原程序的输出核对到 0.01°。美国政府作品，属公有领域。"
+      }
+    },
+    {
+      "id": "S13",
+      "text": {
+        "en": "Singapore Department of Statistics, Our Data Explained: Environment: Singapore lies between latitudes 1°09′ N and 1°29′ N and longitudes 103°36′ E and 104°25′ E.",
+        "zh": "新加坡统计局《数据说明：环境》：新加坡位于北纬 1°09′ 至 1°29′、东经 103°36′ 至 104°25′ 之间。"
+      },
+      "url": "https://www.singstat.gov.sg/find-data/explore-data-themes/society/environment/our-data-explained",
+      "note": {
+        "en": "The model's point, 1.3° N, 103.8° E, lies inside this range; it stands for Singapore, not for a particular school.",
+        "zh": "模型取的点北纬 1.3°、东经 103.8° 在这个范围之内；它代表新加坡，不对应某一所学校。"
+      }
+    },
+    {
+      "id": "S14",
+      "text": {
+        "en": "National University of Singapore, Department of Geography, NUS Weather Station, Station Information: local Singapore time is 8 hours ahead of UTC.",
+        "zh": "新加坡国立大学地理系气象站《站点信息》：新加坡当地时间比协调世界时（UTC）快 8 小时。"
+      },
+      "url": "https://inetapps.nus.edu.sg/fas/geog/stationInfo.aspx"
+    },
+    {
+      "id": "S15",
+      "text": {
+        "en": "National Archives of Singapore, Press release on time zone adjustment, 1981: clocks were moved forward at the end of 31 December 1981, placing Singapore eight hours ahead of GMT from 1 January 1982.",
+        "zh": "新加坡国家档案馆《关于调整时区的新闻稿》（1981 年）：1981 年 12 月 31 日夜里把时钟拨快，从 1982 年 1 月 1 日起，新加坡比格林尼治时间快 8 小时。"
+      },
+      "url": "https://corporate.nas.gov.sg/discover-archives/media/time-zone-adjustment/"
+    },
+    {
+      "id": "S16",
+      "text": {
+        "en": "NASA Science, Moonlight: the Moon does not make its own light; moonlight is sunlight reflected from the Moon.",
+        "zh": "美国国家航空航天局（NASA）科学网站《月光》：月亮自己不发光；月光是月亮反射的太阳光。"
+      },
+      "url": "https://science.nasa.gov/moon/moonlight/"
+    },
+    {
+      "id": "S17",
+      "text": {
+        "en": "NASA Goddard Space Flight Center, Sun Fact Sheet (David R. Williams, updated 9 May 2024): apparent diameter of the Sun from Earth 1919 seconds of arc, a little over half a degree.",
+        "zh": "NASA 戈达德太空飞行中心《太阳资料表》（David R. Williams，2024 年 5 月 9 日更新）：从地球上看，太阳的视直径是 1919 角秒，略大于半度。"
+      },
+      "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html"
+    },
+    {
+      "id": "S18",
+      "text": {
+        "en": "NASA Space Place, What causes the seasons?: the Earth spins around its axis, making one complete turn each day.",
+        "zh": "NASA Space Place《是什么造成了季节？》：地球绕着自己的轴自转，每天转一整圈。"
+      },
+      "url": "https://spaceplace.nasa.gov/seasons/en/"
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+---
+id: "shape-and-size"
+order: 4
+title: {"en": "Shape and size", "zh": "影子的形状与大小"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: true
+  cutaway: "none"
+  layers: ["source", "objects", "sheets", "screen", "rays"]
+  labels: ["card-circle", "screen-board"]
+  camera: {"position": [-1.25, 1.42, 0.62], "target": [0.12, 1.03, 0.05], "fov": 30}
+  summary: {"en": "A shadow has the outline of the object as seen from the light. Turning an object can change the shape of its shadow; a bigger object makes a bigger shadow.", "zh": "影子是从光源那边看过去物体的轮廓。转动物体，影子的形状可能改变；物体越大，影子越大。"}
+  sim:
+    set: {"object": "card-circle", "material": "none", "turn": 0, "d-torch": 20, "d-screen": 30}
+    try:
+      vary: "turn"
+      also: ["object"]
+      keep: ["d-torch", "d-screen", {"en": "Same place on the holder", "zh": "放在支架的同一个位置"}]
+      observe: ["shadow-shape", "shadow-height", "shadow-width"]
+      record: true
+      predict:
+        prompt: {"en": "The tin lies on its side. Turn it so that one end faces the torch. What shape will its shadow be?", "zh": "罐子横躺着。把它转到一头对着手电筒，影子会是什么形状？"}
+        start: {"object": "tin", "turn": 0}
+        change: {"turn": 90}
+        observe: "shadow-shape"
+        options:
+          - {"id": "circle", "label": {"en": "A circle", "zh": "圆形"}, "means": "circle"}
+          - {"id": "rectangle", "label": {"en": "A rectangle", "zh": "长方形"}, "means": "rectangle"}
+          - {"id": "triangle", "label": {"en": "A triangle", "zh": "三角形"}, "means": "triangle"}
+  beats:
+    - labels: ["card-circle", "screen-board"]
+      caption: {"en": "A round card makes a round shadow. The shadow is the card's outline as seen from the torch.", "zh": "圆形卡片的影子是圆形的。影子就是从手电筒那边看过去卡片的轮廓。"}
+    - sim: {"set": {"object": "card-triangle"}}
+      labels: ["card-triangle", "screen-board"]
+      caption: {"en": "A triangle of card makes a triangle-shaped shadow.", "zh": "三角形卡片的影子是三角形的。"}
+    - sim: {"set": {"object": "card-circle", "turn": 90}}
+      labels: ["card-circle", "screen-board"]
+      caption: {"en": "Turn the same round card edge-on to the torch, and its shadow becomes a thin strip.", "zh": "把同一张圆卡片转到侧对手电筒，它的影子就变成一条细条。"}
+    - sim: {"set": {"object": "tin", "turn": 0}}
+      labels: ["tin", "screen-board"]
+      caption: {"en": "A tin lying on its side makes a rectangle-shaped shadow.", "zh": "横躺的罐子，影子是长方形的。"}
+    - sim: {"set": {"object": "tin", "turn": 90}}
+      labels: ["tin", "screen-board"]
+      caption: {"en": "Turn the tin so that its end faces the torch, and the same tin makes a round shadow. One object can make shadows of different shapes.", "zh": "把罐子转到一头对着手电筒，同一个罐子的影子变成圆形。同一个物体，可以有不同形状的影子。"}
+    - sim: {"set": {"object": "card-circle-big", "turn": 0}}
+      labels: ["card-circle-big", "screen-board"]
+      caption: {"en": "A bigger card in the same place makes a bigger shadow: thirty centimetres across instead of twenty, in this model.", "zh": "大一些的卡片放在同一个位置，影子也大一些：在这个模型里，直径是三十厘米，不是二十厘米。"}
+  index: {"parts": ["card-circle", "card-square", "card-triangle", "card-circle-big", "tin", "cone", "ball", "object-holder"]}
+---
+
+<Lang en>
+
+The round card in the holder faces the torch, and its shadow is round. Change to the triangle card and the shadow is a triangle; the square card gives a square. A shadow has the outline of the object as seen from the light, nothing more: no colour, and no picture printed on the card.
+
+Keep the round card where it is and turn it. As it turns, its shadow gets narrower. Edge-on to the torch, only a thin strip of shadow is left. The card has not changed its shape or size; turning it has changed the outline it shows to the light. When you record this, note the width of the shadow as well as its height.
+
+Now try the tin, lying on its side across the light. Its shadow is a rectangle. Turn the tin so that one end faces the torch, and the same tin makes a round shadow. The paper cone does something similar: a triangle from the side, a circle when its round base faces the torch. One object can make shadows of different shapes.
+
+<Figure src="figures/light-and-shadows-same-object-two-shadows" alt={{"en": "Two small set-ups, one above the other, each with a torch, a tin on a stand and a white board. In the upper one the tin lies side-on to the torch and its shadow on the board is a wide rectangle; in the lower one the same tin faces the torch end-on and its shadow is a circle.", "zh": "上下两套小装置，各有一支手电筒、一个放在小架上的罐子和一块白板。上面那套，罐子侧对手电筒，白板上的影子是一个宽宽的长方形；下面那套，同一个罐子一头对着手电筒，影子是圆形。"}} caption={{"en": "The same tin, two shadows: side-on a rectangle, end-on a circle. Illustration for this topic.", "zh": "同一个罐子，两种影子：侧对是长方形，端对是圆形。为本主题画的示意图。"}} />
+
+It works the other way round too. The ball, the round card and the tin end-on all make round shadows, so a round shadow alone cannot tell you which object made it. To test turning fairly, keep the same object in the same place and leave the torch and the screen where they are.
+
+Size matters as well. In this model, with the torch and the screen in the same places, the round card <Num s="S1">8 cm</Num> across makes a shadow about <Num s="S1">20 cm</Num> across, and the big card <Num s="S1">12 cm</Num> across makes one about <Num s="S1">30 cm</Num> across. The bigger the object, the bigger its shadow. The thin line of shadow below is the holder's rod, which blocks light too.
+
+<More title={{"en": "Different objects, the same shadow", "zh": "不同的物体，同样的影子"}}>
+
+A ball, a round card, the end of a tin and the base of a cone all show a round outline to the torch. Their shadows may differ in size, but from the round shape alone you cannot tell which object made it. Turning the object and looking again tells you more: only the ball's shadow stays round whichever way it turns.
+
+</More>
+
+<More title={{"en": "The thin line below", "zh": "下面那条细线"}}>
+
+The holder is a thin steel rod, and it blocks light like everything else on the bench. Its shadow is the thin line running down from the main shadow. A real holder does the same. When you measure a shadow, measure the shadow of the object, not the rod's.
+
+</More>
+
+<More title={{"en": "Why the turned square is not a rectangle", "zh": "转过的正方形为什么不是长方形"}}>
+
+This goes beyond the syllabus. Turn the square card through <Num s="S1">45°</Num> and one side comes nearer the torch than the other. The nearer side's shadow is a little taller, so the shadow is a narrowed four-sided shape rather than a rectangle. In sunlight, whose rays are almost parallel, the same card would make a rectangle on a screen facing the Sun.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+支架上的圆卡片正对着手电筒，影子是圆形的。换成三角形卡片，影子是三角形；换成正方形卡片，影子是正方形。影子就是从光源那边看过去物体的轮廓，仅此而已：没有颜色，卡片上印着的图案也不会出现。
+
+圆卡片留在原处，把它转一转。转着转着，影子越来越窄；转到侧对手电筒时，只剩下一条细细的影子。卡片的形状和大小都没有变，变的是它对着光源的那个轮廓。记录这个实验时，影子的宽和高都要记下来。
+
+再试试罐子。罐子横躺着，横过光的路线，它的影子是长方形。把罐子转到一头对着手电筒，同一个罐子的影子就成了圆形。纸圆锥也差不多：从侧面照是三角形，圆圆的底对着手电筒时是圆形。同一个物体，可以有不同形状的影子。
+
+<Figure src="figures/light-and-shadows-same-object-two-shadows" alt={{"en": "Two small set-ups, one above the other, each with a torch, a tin on a stand and a white board. In the upper one the tin lies side-on to the torch and its shadow on the board is a wide rectangle; in the lower one the same tin faces the torch end-on and its shadow is a circle.", "zh": "上下两套小装置，各有一支手电筒、一个放在小架上的罐子和一块白板。上面那套，罐子侧对手电筒，白板上的影子是一个宽宽的长方形；下面那套，同一个罐子一头对着手电筒，影子是圆形。"}} caption={{"en": "The same tin, two shadows: side-on a rectangle, end-on a circle. Illustration for this topic.", "zh": "同一个罐子，两种影子：侧对是长方形，端对是圆形。为本主题画的示意图。"}} />
+
+反过来也一样。球、圆卡片、一头对着手电筒的罐子，影子都是圆形的，所以只看一个圆形的影子，说不出是哪个物体留下的。要公平地测试“转动”，就要用同一个物体、放在同一个位置，手电筒和屏幕也都不动。
+
+大小也有关系。在这个模型里，手电筒和屏幕都在同样的位置时，直径 <Num s="S1">8 厘米</Num>的圆卡片，影子直径约 <Num s="S1">20 厘米</Num>；直径 <Num s="S1">12 厘米</Num>的大卡片，影子直径约 <Num s="S1">30 厘米</Num>。物体越大，影子越大。下面那条细细的影子是支架的细杆留下的，它也会挡光。
+
+<More title={{"en": "Different objects, the same shadow", "zh": "不同的物体，同样的影子"}}>
+
+球、圆卡片、罐子的一头、圆锥的底面，对着手电筒时都是圆形的轮廓。它们的影子大小可能不同，但只凭圆形，说不出是哪个物体。把物体转一转再看，就能知道得更多：只有球的影子，不管怎么转都是圆的。
+
+</More>
+
+<More title={{"en": "The thin line below", "zh": "下面那条细线"}}>
+
+支架是一根细钢杆，它和台上的其他东西一样会挡光。主影子下面那条细线就是它的影子，真实的支架也会这样。量影子时，要量物体的影子，不要把细杆的影子也算进去。
+
+</More>
+
+<More title={{"en": "Why the turned square is not a rectangle", "zh": "转过的正方形为什么不是长方形"}}>
+
+这部分超出了课纲。把正方形卡片转 <Num s="S1">45°</Num>，一条边离手电筒近，另一条边远。近的那条边的影子高一点，所以影子是一个变窄的四边形，而不是长方形。在阳光下，光线几乎是平行的，同一张卡片在正对太阳的屏幕上，影子就会是长方形。
+
+</More>
+
+</Lang>

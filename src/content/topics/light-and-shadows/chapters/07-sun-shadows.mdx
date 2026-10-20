@@ -1,0 +1,133 @@
+---
+id: "sun-shadows"
+order: 7
+title: {"en": "Shadows in the sun", "zh": "太阳下的影子"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: true
+  cutaway: "none"
+  layers: ["outdoors", "rays"]
+  labels: ["pole", "sun", "north-arrow"]
+  camera: {"position": [12.0, 7.5, 15.5], "target": [11.4, 2.0, -0.5], "fov": 40}
+  summary: {"en": "Outdoors, a shadow points away from the Sun. In Singapore it is long in the morning, short around the middle of the day and long again in the afternoon, and it swings from west to east.", "zh": "在户外，影子背着太阳。在新加坡，影子早上长、中午前后短、下午又变长，方向从西转到东。"}
+  sim:
+    set: {"date": "oct-20", "time": 8}
+    try:
+      vary: "time"
+      keep: ["date", {"en": "Same 1 m pole, standing straight", "zh": "同一根 1 米长的杆子，竖直立着"}, {"en": "Same flat ground", "zh": "同样平的地面"}]
+      observe: ["sun-height", "shadow-length", "shadow-points"]
+      record: {"chart": {"y": "shadow-length"}}
+      predict:
+        prompt: {"en": "From 1.00 pm to 4.00 pm, will the pole's shadow get longer or shorter?", "zh": "从下午 1.00 到下午 4.00，杆子的影子会变长还是变短？"}
+        start: {"time": 13}
+        change: {"time": 16}
+        observe: "shadow-length"
+        options:
+          - {"id": "longer", "label": {"en": "Longer", "zh": "变长"}, "means": "more"}
+          - {"id": "shorter", "label": {"en": "Shorter", "zh": "变短"}, "means": "less"}
+          - {"id": "same", "label": {"en": "No change", "zh": "不变"}, "means": "same"}
+  beats:
+    - camera: {"position": [11.2, 3.3, 8.0], "target": [10.9, 1.3, -0.6], "fov": 40}
+      labels: ["pole", "sun", "north-arrow"]
+      caption: {"en": "On 20 October 2026, at eight in the morning, the Sun is low in the east. The pole's shadow is long, three point two five metres, and points west, away from the Sun.", "zh": "2026 年 10 月 20 日上午八点，太阳低低地挂在东边。杆子的影子很长，有三点二五米，指向西边，背着太阳。"}
+    - sim: {"set": {"time": 13}}
+      camera: {"position": [23.5, 4.2, 0.5], "target": [10.2, 2.8, -0.4], "fov": 40}
+      labels: ["pole", "sun"]
+      caption: {"en": "Around the middle of the day the Sun is high and the shadow is short: zero point two one metres at one in the afternoon. On this day the Sun is highest at about ten to one, not at twelve o'clock.", "zh": "中午前后太阳很高，影子很短：下午一点只有零点二一米。这一天太阳最高是在中午十二点五十分左右，不是十二点整。"}
+    - sim: {"set": {"time": 17}}
+      camera: {"position": [11.2, 3.3, 8.0], "target": [10.9, 1.3, -0.6], "fov": 40}
+      labels: ["pole", "sun"]
+      caption: {"en": "In the afternoon the Sun is in the west, so the shadow points east and grows long again: one point nine nine metres at five o'clock.", "zh": "下午太阳在西边，所以影子指向东边，又变长了：下午五点有一点九九米。"}
+    - sim: {"set": {"time": 18}}
+      camera: {"position": [10.4, 10.5, 0.4], "target": [10.4, 0.05, -0.4], "fov": 40}
+      labels: ["pole", "north-arrow"]
+      caption: {"en": "The chalk marks show where the tip of the shadow was each hour. From above you can see it swing from west, through north, to east.", "zh": "粉笔点记下了每个整点影子尖端的位置。从上往下看，影子从西边经过北边转到东边。"}
+    - sim: {"set": {"date": "jun-21", "time": 13}}
+      camera: {"position": [23.5, 4.2, 0.5], "target": [10.2, 2.8, -0.4], "fov": 40}
+      labels: ["pole", "sun", "sun-path-jun"]
+      caption: {"en": "On 21 June the Sun passes a little to the north of overhead, so the shadow at one in the afternoon points south instead: zero point four one metres long.", "zh": "6 月 21 日，太阳从头顶稍偏北的地方经过，所以下午一点的影子反而指向南边，长零点四一米。"}
+    - sim: {"set": {"date": "mar-24", "time": 13}}
+      camera: {"position": [12.0, 4.0, 13.5], "target": [10.6, 2.8, -0.3], "fov": 40}
+      labels: ["pole", "sun", "sun-path-mar"]
+      caption: {"en": "Around 24 March the Sun at midday is almost straight overhead. At one in the afternoon the pole's shadow is only about five centimetres long.", "zh": "3 月 24 日前后，中午的太阳几乎就在头顶上。下午一点，杆子的影子只有五厘米左右。"}
+  index: {"parts": ["pole", "sun", "north-arrow", "sun-path-oct", "sun-path-jun", "sun-path-mar", "courtyard"]}
+---
+
+<Lang en>
+
+Outdoors, the light source is the Sun. In an open courtyard a straight pole stands <Num s="S1">1 m</Num> high, and an arrow on the ground points north. The model follows the pole's shadow through one day, <Num s="S1">20 October 2026</Num>, at a place in Singapore. Like the torch and the card on the bench, the Sun and the pole make a shadow that points directly away from the light.
+
+At <Time t="08:00" /> the Sun is low in the east. In this model the shadow is about <Num s="S1">3.25 m</Num> long, more than three times the height of the pole, and it points west. Use the arrow to read its <Term id="compass-direction">compass direction</Term>. As the Sun climbs, the shadow gets shorter.
+
+Around the middle of the day the Sun is high and the shadow is short: about <Num s="S1">0.21 m</Num> at <Time t="13:00" />. On this day the Sun is highest at about <Num s="S1"><Time t="12:50" /></Num>, not at <Time t="12:00" />. In the afternoon the Sun is in the west, so the shadow points east and grows long again: about <Num s="S1">1.99 m</Num> at <Time t="17:00" />.
+
+<Figure src="figures/light-and-shadows-sun-day" alt={{"en": "A pole on a paved courtyard with trees behind. Three shadows run from its foot: a long one to the left, a very short one and a long one to the right, each ending in a chalk mark. Three small suns stand in the sky, each opposite its own shadow, with a dotted line from each sun past the top of the pole to the tip of that shadow. The lower the sun, the longer its shadow.", "zh": "铺着地砖的空地上立着一根杆子，后面是树。杆脚伸出三条影子：一条长长地伸向左边，一条很短，一条长长地伸向右边，末端各有一个粉笔点。天上有三个小太阳，各在自己那条影子的对面；一条虚线从每个太阳擦过杆顶，落到那条影子的尖端。太阳越低，影子越长。"}} caption={{"en": "One pole, three times of day: the lower the Sun, the longer the shadow, always on the side away from the Sun. Illustration for this topic.", "zh": "一根杆子，一天里的三个时刻：太阳越低，影子越长，总在背着太阳的一边。为本主题画的示意图。"}} />
+
+From above, the chalk marks show where the tip of the shadow was each hour. The tip swings from west, through north, to east. On the Try it card, change only the time, keep the date, the pole and the ground the same, and record the length: the line graph falls through the morning and rises again in the afternoon.
+
+Other days give other paths. On <Num s="S1">21 June 2026</Num> the shadow at <Time t="13:00" /> points south and is about <Num s="S1">0.41 m</Num> long. Around <Num s="S1">24 March 2026</Num> the Sun at midday is almost straight overhead, and at <Time t="13:00" /> the shadow is only about <Num s="S1">5 cm</Num> long. Keep different days in different tables.
+
+<More title={{"en": "Why the Sun seems to move", "zh": "太阳为什么看起来在动"}}>
+
+The Sun does not go round us. The Earth turns, once a day, and as it turns the Sun seems to rise in the east, cross the sky and set in the west. The Sun is also very far away, so its light reaches the courtyard in almost parallel lines. That is why the pole's shadow is about as wide as the pole, instead of spreading out the way the card's shadow does near a torch.
+
+</More>
+
+<More title={{"en": "Noon is not 12 o'clock here", "zh": "这里的正午不是十二点"}}>
+
+Singapore's clocks are set <Num s="S14">8 hours</Num> ahead of world time (UTC). For Singapore's longitude that puts the clock about an hour ahead of the Sun, so the Sun reaches its highest point later than <Time t="12:00" />. In this model it happens between about <Num s="S1"><Time t="12:48" /></Num> and <Num s="S1"><Time t="13:19" /></Num>, depending on the time of year. For how to write morning and afternoon times, see <TopicLink slug="telling-time" ch="am-and-pm">am and pm</TopicLink>.
+
+The midday shadow does not always point north either. From about late March to late September it points south. Around <Num s="S1">23–24 March</Num> and <Num s="S1">19–20 September 2026</Num> the Sun at midday passes almost straight overhead, and a pole has almost no shadow.
+
+</More>
+
+<More title={{"en": "How these numbers were worked out", "zh": "这些数字是怎样算出来的"}}>
+
+This goes beyond the syllabus. The Sun's height and direction come from NOAA's solar calculator. For an upright pole on flat ground, the length of the shadow is the height of the pole divided by the tangent of the Sun's height, a rule you will meet in secondary school mathematics. The Sun is not a point: it looks a little over <Num s="S17">0.5°</Num> across, so a real shadow's tip is slightly blurred. The model leaves that out and assumes a clear sky.
+
+Watch shadows outdoors with an adult, and never look straight at the Sun.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+到了户外，光源是太阳。空地上竖着一根 <Num s="S1">1 米</Num>高的直杆子，地上画着一个指向北方的箭头。模型跟着这根杆子的影子，看新加坡一个地点在 <Num s="S1">2026 年 10 月 20 日</Num>这一天的变化。和实验台上的手电筒、卡片一样，太阳和杆子形成的影子，也正好背着光源。
+
+<Time t="08:00" />，太阳低低地挂在东边。在这个模型里，影子约 <Num s="S1">3.25 米</Num>长，是杆子高度的三倍多，指向西边。用地上的箭头来看影子的<Term id="compass-direction">方位</Term>。太阳越升越高，影子就越来越短。
+
+中午前后太阳很高，影子很短：<Time t="13:00" />只有约 <Num s="S1">0.21 米</Num>。这一天太阳最高是在约 <Num s="S1"><Time t="12:50" /></Num>，不是 <Time t="12:00" />。到了下午，太阳在西边，影子指向东边，又变长了：<Time t="17:00" />约 <Num s="S1">1.99 米</Num>。
+
+<Figure src="figures/light-and-shadows-sun-day" alt={{"en": "A pole on a paved courtyard with trees behind. Three shadows run from its foot: a long one to the left, a very short one and a long one to the right, each ending in a chalk mark. Three small suns stand in the sky, each opposite its own shadow, with a dotted line from each sun past the top of the pole to the tip of that shadow. The lower the sun, the longer its shadow.", "zh": "铺着地砖的空地上立着一根杆子，后面是树。杆脚伸出三条影子：一条长长地伸向左边，一条很短，一条长长地伸向右边，末端各有一个粉笔点。天上有三个小太阳，各在自己那条影子的对面；一条虚线从每个太阳擦过杆顶，落到那条影子的尖端。太阳越低，影子越长。"}} caption={{"en": "One pole, three times of day: the lower the Sun, the longer the shadow, always on the side away from the Sun. Illustration for this topic.", "zh": "一根杆子，一天里的三个时刻：太阳越低，影子越长，总在背着太阳的一边。为本主题画的示意图。"}} />
+
+从上往下看，粉笔点记下了每个整点影子尖端的位置：影子的尖端从西边经过北边，转到东边。在“试一试”卡片上，只改变时间，日期、杆子和地面都保持不变，记下影子的长度：折线图在上午一路往下，到了下午又往上走。
+
+换一天，太阳走的路线也不同。<Num s="S1">2026 年 6 月 21 日</Num><Time t="13:00" />，影子指向南边，长约 <Num s="S1">0.41 米</Num>。<Num s="S1">2026 年 3 月 24 日</Num>前后，中午的太阳几乎就在头顶上，<Time t="13:00" />影子只有约 <Num s="S1">5 厘米</Num>。不同的日子要记在不同的表里。
+
+<More title={{"en": "Why the Sun seems to move", "zh": "太阳为什么看起来在动"}}>
+
+太阳并没有绕着我们转。是地球在转，每天转一圈；地球一转，太阳看起来就从东边升起，越过天空，在西边落下。太阳又非常远，它的光照到空地上时几乎是平行的，所以杆子的影子差不多和杆子一样粗，不会像手电筒前的卡片那样越照越大。
+
+</More>
+
+<More title={{"en": "Noon is not 12 o'clock here", "zh": "这里的正午不是十二点"}}>
+
+新加坡的时钟比世界标准时间（UTC）快 <Num s="S14">8 小时</Num>。按新加坡的经度，这让时钟比太阳快了大约一个小时，所以太阳到达最高点的时刻比 <Time t="12:00" /> 晚。在这个模型里，按一年里不同的时候，大约在 <Num s="S1"><Time t="12:48" /></Num> 到 <Num s="S1"><Time t="13:19" /></Num> 之间。上午、下午的时间怎样写，可以看<TopicLink slug="telling-time" ch="am-and-pm">上午和下午</TopicLink>。
+
+中午的影子也不总是指向北边。大约从 3 月下旬到 9 月下旬，它指向南边。在 <Num s="S1">3 月 23–24 日</Num>和 <Num s="S1">2026 年 9 月 19–20 日</Num>前后，中午的太阳几乎从头顶正上方经过，杆子几乎没有影子。
+
+</More>
+
+<More title={{"en": "How these numbers were worked out", "zh": "这些数字是怎样算出来的"}}>
+
+这部分超出了课纲。太阳的高度和方向来自 NOAA 的太阳计算器。竖直的杆子立在平地上时，影长 = 杆高 ÷ 太阳高度角的正切，这是中学数学才会学到的方法。太阳不是一个点，看上去略大于 <Num s="S17">0.5°</Num>，所以真实影子的尖端有点模糊。模型没有算这一点，并假设天空无云。
+
+和大人一起到户外观察影子，千万不要直视太阳。
+
+</More>
+
+</Lang>

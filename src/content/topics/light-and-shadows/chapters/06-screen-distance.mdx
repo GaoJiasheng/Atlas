@@ -1,0 +1,114 @@
+---
+id: "screen-distance"
+order: 6
+title: {"en": "Moving the screen", "zh": "移动屏幕"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: true
+  cutaway: "none"
+  layers: ["source", "objects", "sheets", "screen", "rays"]
+  labels: ["screen-board", "card-circle", "torch"]
+  camera: {"position": [-0.05, 1.08, 3.3], "target": [-0.05, 1.04, 0.05], "fov": 20}
+  summary: {"en": "The farther the screen is from an object, the bigger the object's shadow, as long as the torch and the object stay where they are.", "zh": "只要手电筒和物体不动，屏幕离物体越远，物体的影子越大。"}
+  sim:
+    set: {"object": "card-circle", "material": "none", "turn": 0, "d-torch": 20, "d-screen": 10}
+    try:
+      vary: "d-screen"
+      keep: ["d-torch", "object", "turn", {"en": "Same torch", "zh": "同一支手电筒"}]
+      observe: ["shadow-height"]
+      record: {"chart": true}
+      predict:
+        prompt: {"en": "Move the screen from 20 cm to 40 cm behind the card. Will the shadow get bigger or smaller?", "zh": "把屏幕从卡片后 20 厘米移到 40 厘米，影子会变大还是变小？"}
+        start: {"d-screen": 20}
+        change: {"d-screen": 40}
+        observe: "shadow-height"
+        options:
+          - {"id": "bigger", "label": {"en": "Bigger", "zh": "变大"}, "means": "more"}
+          - {"id": "smaller", "label": {"en": "Smaller", "zh": "变小"}, "means": "less"}
+          - {"id": "same", "label": {"en": "No change", "zh": "不变"}, "means": "same"}
+  beats:
+    - labels: ["screen-board", "card-circle", "torch"]
+      caption: {"en": "Now the torch stays twenty centimetres from the card, and the screen moves instead. With the screen ten centimetres behind the card, the shadow is twelve centimetres across.", "zh": "现在手电筒一直在卡片前二十厘米，改为移动屏幕。屏幕在卡片后十厘米时，影子直径十二厘米。"}
+    - sim: {"set": {"d-screen": 20}}
+      labels: ["screen-board", "card-circle"]
+      caption: {"en": "With the screen twenty centimetres behind, the shadow is sixteen centimetres across.", "zh": "屏幕在后面二十厘米时，影子直径十六厘米。"}
+    - sim: {"set": {"d-screen": 40}}
+      labels: ["screen-board", "screen-stand", "card-circle"]
+      caption: {"en": "At forty centimetres it is twenty-four centimetres across. The farther the screen, the bigger the shadow.", "zh": "到了四十厘米，影子直径二十四厘米。屏幕越远，影子越大。"}
+    - camera: {"position": [-1.25, 1.42, 0.62], "target": [0.12, 1.03, 0.05], "fov": 30}
+      sim: {"set": {"d-screen": 30}}
+      labels: ["card-circle", "screen-board"]
+      caption: {"en": "In this model the shadow grows by the same amount, four centimetres, for every ten centimetres the screen moves back.", "zh": "在这个模型里，屏幕每往后移十厘米，影子就大四厘米，每次一样多。"}
+    - camera: {"position": [-1.02, 1.52, 1.52], "target": [0.06, 1.0, 0.02], "fov": 30}
+      sim: {"set": {"d-screen": 30}}
+      labels: ["torch", "screen-board", "card-circle"]
+      caption: {"en": "Moving the torch and moving the screen both change the shadow, but they are two separate fair tests. Change one, and keep the other the same.", "zh": "移动手电筒和移动屏幕都会改变影子，但这是两个分开的公平测试：改变一个，另一个保持不变。"}
+  index: {"parts": ["screen-board", "screen-stand", "card-circle", "torch", "track"]}
+---
+
+<Lang en>
+
+This time the torch stays <Num s="S1">20 cm</Num> in front of the round card, and the card stays in the holder. Only the screen moves. In this model, with the screen <Num s="S1">10 cm</Num> behind the card, the shadow is about <Num s="S1">12 cm</Num> across.
+
+Move the screen to <Num s="S1">20 cm</Num> behind the card, and the shadow is about <Num s="S1">16 cm</Num> across. At <Num s="S1">40 cm</Num> it is about <Num s="S1">24 cm</Num>. The rays that just miss the edges of the card keep going in straight lines and keep spreading apart, so the farther away the screen is, the wider the shadow it catches. The card itself has not changed.
+
+Record a row for each distance and look at the line graph. In this model, every <Num s="S1">10 cm</Num> the screen moves back adds about <Num s="S1">4 cm</Num> to the shadow, so the points lie on a straight line. Compare it with the graph for the torch, which was a curve: there, each step made a bigger difference the nearer the torch came.
+
+This is a fair test of the screen's distance: the torch, the card, the way the card faces and the distance from torch to card all stay the same. Moving the torch and moving the screen can both make a shadow bigger, but they are two separate fair tests. In each one, change one distance and keep the other the same.
+
+A big shadow on its own cannot tell you what was moved to make it. That is why each table records the distances that were kept the same as well as the one that was changed.
+
+<More title={{"en": "A straight line and a curve", "zh": "一条直线和一条弯线"}}>
+
+With the torch fixed, equal steps of the screen give equal steps of the shadow: the graph is a straight line. With the screen fixed, equal steps of the torch do not give equal steps of the shadow: the graph is a curve, steepest where the torch is nearest the card. When you compare steps on a graph, check how far apart the distances are; on the torch graph they are not evenly spaced.
+
+</More>
+
+<More title={{"en": "An unfair test", "zh": "一个不公平的测试"}}>
+
+Suppose the torch and the screen stay where they are and you slide the card towards the torch. The shadow grows, but two distances changed at once: the card is nearer the torch and farther from the screen. This test cannot tell you which change made the shadow bigger. It is a fair test of something else, the card's place between a fixed torch and screen, but not of either distance on its own.
+
+</More>
+
+<More title={{"en": "Close to the screen", "zh": "贴近屏幕"}}>
+
+Bring the screen right up to the card and the shadow is almost the same size as the card. A real lamp has some size, so its shadow has a blurred edge, and as the screen moves farther away that blurred edge grows wider too. This goes beyond the syllabus; the torch in this model is a single point and gives sharp edges.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+这一次，手电筒一直在圆卡片前 <Num s="S1">20 厘米</Num>，卡片也留在支架上，只移动屏幕。在这个模型里，屏幕在卡片后 <Num s="S1">10 厘米</Num>时，影子直径约 <Num s="S1">12 厘米</Num>。
+
+把屏幕移到卡片后 <Num s="S1">20 厘米</Num>，影子直径约 <Num s="S1">16 厘米</Num>；到了 <Num s="S1">40 厘米</Num>，约 <Num s="S1">24 厘米</Num>。刚好擦过卡片边缘的光线一直沿直线前进，越走分得越开，所以屏幕离得越远，接住的影子越宽。卡片本身并没有变。
+
+每个距离记一行，再看折线图。在这个模型里，屏幕每往后移 <Num s="S1">10 厘米</Num>，影子就大约 <Num s="S1">4 厘米</Num>，所以这些点落在一条直线上。拿它和手电筒那张图比一比：那张图是弯的，手电筒越近，每一步的变化越大。
+
+这是测试“屏幕距离”的公平测试：手电筒、卡片、卡片的朝向，以及手电筒到卡片的距离都保持不变。移动手电筒和移动屏幕都能让影子变大，但它们是两个分开的公平测试。每次只改变一个距离，另一个保持不变。
+
+光看一个大影子，说不出是移动了什么才让它变大的。所以每张表除了记下改变的那个距离，也要记下保持不变的那些。
+
+<More title={{"en": "A straight line and a curve", "zh": "一条直线和一条弯线"}}>
+
+手电筒不动时，屏幕每移一样多，影子就大一样多：图上是一条直线。屏幕不动时，手电筒每移一样多，影子变的却不一样多：图上是一条弯线，手电筒离卡片越近，线越陡。在图上比较每一步时，要看看两个距离隔得多远；手电筒那张图上，距离并不是平均分布的。
+
+</More>
+
+<More title={{"en": "An unfair test", "zh": "一个不公平的测试"}}>
+
+假设手电筒和屏幕都不动，你把卡片往手电筒那边推。影子变大了，可是两个距离同时变了：卡片离手电筒近了，离屏幕也远了。这个测试说不清是哪一个改变让影子变大。它可以测试另一件事，也就是卡片放在固定的手电筒和屏幕之间的哪个位置，但测不了其中任何一个距离本身。
+
+</More>
+
+<More title={{"en": "Close to the screen", "zh": "贴近屏幕"}}>
+
+把屏幕移到紧贴卡片，影子就几乎和卡片一样大。真实的灯有一定大小，影子会有一圈模糊的边，屏幕移得越远，这圈模糊的边也越宽。这部分超出了课纲；这个模型里的手电筒是一个点，影子的边缘是清楚的。
+
+</More>
+
+</Lang>

@@ -1,0 +1,117 @@
+---
+id: "torch-distance"
+order: 5
+title: {"en": "Moving the torch", "zh": "移动手电筒"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: true
+  cutaway: "none"
+  layers: ["source", "objects", "sheets", "screen", "rays"]
+  labels: ["torch", "card-circle", "screen-board"]
+  camera: {"position": [-0.05, 1.08, 3.3], "target": [-0.05, 1.04, 0.05], "fov": 20}
+  summary: {"en": "The nearer the torch is to an object, the bigger the object's shadow, as long as the object and the screen stay where they are.", "zh": "只要物体和屏幕不动，手电筒离物体越近，物体的影子越大。"}
+  sim:
+    set: {"object": "card-circle", "material": "none", "turn": 0, "d-torch": 20, "d-screen": 30}
+    try:
+      vary: "d-torch"
+      keep: ["d-screen", "object", "turn", {"en": "Same torch", "zh": "同一支手电筒"}]
+      observe: ["shadow-height"]
+      record: {"chart": true}
+      predict:
+        prompt: {"en": "Move the torch from 20 cm to 40 cm away from the card. Will the shadow get bigger or smaller?", "zh": "把手电筒从离卡片 20 厘米移到 40 厘米，影子会变大还是变小？"}
+        start: {"d-torch": 20}
+        change: {"d-torch": 40}
+        observe: "shadow-height"
+        options:
+          - {"id": "bigger", "label": {"en": "Bigger", "zh": "变大"}, "means": "more"}
+          - {"id": "smaller", "label": {"en": "Smaller", "zh": "变小"}, "means": "less"}
+          - {"id": "same", "label": {"en": "No change", "zh": "不变"}, "means": "same"}
+  beats:
+    - labels: ["torch", "card-circle", "screen-board"]
+      caption: {"en": "The card is eight centimetres across, and the screen stays thirty centimetres behind it. With the torch twenty centimetres in front of the card, the shadow is twenty centimetres across, in this model.", "zh": "卡片直径八厘米，屏幕一直在它后面三十厘米。在这个模型里，手电筒在卡片前二十厘米时，影子直径二十厘米。"}
+    - sim: {"set": {"d-torch": 15}}
+      labels: ["torch", "card-circle", "screen-board"]
+      caption: {"en": "Move the torch closer, to fifteen centimetres. The lines past the edges of the card spread out more steeply, and the shadow grows to twenty-four centimetres.", "zh": "把手电筒移近到十五厘米。擦过卡片边缘的光线张得更开，影子变成二十四厘米。"}
+    - sim: {"set": {"d-torch": 60}}
+      labels: ["torch", "card-circle", "screen-board"]
+      caption: {"en": "Move it back to sixty centimetres. The shadow shrinks to twelve centimetres, but it is still bigger than the card.", "zh": "把它移远到六十厘米，影子缩小到十二厘米，但仍然比卡片大。"}
+    - camera: {"position": [-1.25, 1.42, 0.62], "target": [0.12, 1.03, 0.05], "fov": 30}
+      sim: {"set": {"d-torch": 30}}
+      labels: ["torch", "card-circle", "screen-board"]
+      caption: {"en": "Only the torch moved. The card, the screen and the distance between them stayed the same, so this is a fair test of one thing: how far away the torch is.", "zh": "只有手电筒在动。卡片、屏幕和它们之间的距离都没变，所以这是一个公平测试，只测一个因素：手电筒有多远。"}
+    - sim: {"set": {"d-torch": 40}}
+      labels: ["torch", "card-circle"]
+      caption: {"en": "From thirty to forty centimetres the shadow shrank by only two centimetres; from twenty to fifteen it grew by four. The nearer the torch, the more each step changes the shadow.", "zh": "从三十厘米到四十厘米，影子只小了两厘米；从二十厘米到十五厘米，却大了四厘米。手电筒越近，每移一步，影子变得越多。"}
+  index: {"parts": ["torch", "torch-stand", "track", "card-circle", "screen-board"]}
+---
+
+<Lang en>
+
+The round card is <Num s="S1">8 cm</Num> across, and the screen stays <Num s="S1">30 cm</Num> behind it the whole time. In this model, with the torch <Num s="S1">20 cm</Num> in front of the card, the shadow is about <Num s="S1">20 cm</Num> across. Measure across the dark shadow, not across the whole bright patch.
+
+Move the torch closer, to <Num s="S1">15 cm</Num>. The shadow grows to about <Num s="S1">24 cm</Num>. Follow the two rays that just miss the edges of the card: with the torch closer, they leave it more steeply and are farther apart by the time they reach the screen.
+
+<Figure src="figures/light-and-shadows-shadow-distance" alt={{"en": "Two identical set-ups seen from the side, one above the other: a torch at the left end of a wooden track, a white board at the right end and a disc on a rod between them. In the upper one the disc is close to the torch and its shadow on the board is large; in the lower one the disc is close to the board and its shadow is only a little bigger than the disc. Dotted lines from the torch just touch the top and bottom of each disc and run on to the edges of its shadow.", "zh": "从侧面看的上下两套相同装置：木轨道左端一支手电筒，右端一块白板，中间一根细杆上的圆片。上面那套，圆片离手电筒近，白板上的影子很大；下面那套，圆片离白板近，影子只比圆片大一点。从手电筒出发的虚线刚好擦过每个圆片的上下边缘，一直延伸到影子的边缘。"}} caption={{"en": "Closer to the torch, a bigger shadow: the rays past the edges of the disc spread further apart before they reach the board. Illustration for this topic.", "zh": "离手电筒越近，影子越大：擦过圆片边缘的光线，到达白板之前张得更开。为本主题画的示意图。"}} />
+
+Move the torch back to <Num s="S1">60 cm</Num>. The rays past the edges spread less, and the shadow shrinks to about <Num s="S1">12 cm</Num>. It is still bigger than the card: with a small torch like this one, the shadow is never smaller than the object.
+
+The distance from the torch to the card is the <Term id="variable">variable</Term> being changed. The card, the way it faces, the screen and the distance from card to screen are all kept the same, so this is a fair test of the torch's distance. If the screen moved as well, you could not tell which change made the difference.
+
+Record a row at each distance and look at the line graph. It slopes down: the farther the torch, the smaller the shadow. It is a curve, not a straight line. Moving the torch from <Num s="S1">20 cm</Num> to <Num s="S1">15 cm</Num> adds about <Num s="S1">4 cm</Num> to the shadow, but moving it from <Num s="S1">30 cm</Num> to <Num s="S1">40 cm</Num> takes away only about <Num s="S1">2 cm</Num>. The nearer the torch, the more each step changes the shadow.
+
+<More title={{"en": "Two triangles", "zh": "两个三角形"}}>
+
+This goes beyond the syllabus: it uses similar triangles, which you will meet in secondary school mathematics. For a flat card facing the screen, the shadow's height divided by the card's height equals the distance from torch to screen divided by the distance from torch to card. With the torch <Num s="S1">20 cm</Num> from the card and the screen <Num s="S1">30 cm</Num> behind it, 20 ÷ 8 = 50 ÷ 20. The model card is <Num s="S1">2 mm</Num> thick, so its exact shadow is very slightly bigger, but the whole-centimetre reading is the same.
+
+</More>
+
+<More title={{"en": "Never smaller than the card", "zh": "影子不会比卡片小"}}>
+
+With a small torch, the rays past the edges of the card always spread apart on their way to the screen, so the shadow is always bigger than the card. Bring the card close to the screen and the shadow gets close to the card's own size. A big lamp, or the Sun, can give a different pattern of dark and half-lit regions.
+
+</More>
+
+<More title={{"en": "Measuring a real shadow", "zh": "量真实的影子"}}>
+
+A real shadow's edge can be a little blurred. Before you start, agree where you will put the ruler at the edge, and measure the same way every time. Measuring each shadow <Num s="S1">3</Num> times and checking that the readings are close is good practice. The model gives the same number every time, so it needs no repeats.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+圆卡片直径 <Num s="S1">8 厘米</Num>，屏幕一直在它后面 <Num s="S1">30 厘米</Num>。在这个模型里，手电筒在卡片前 <Num s="S1">20 厘米</Num>时，影子直径约 <Num s="S1">20 厘米</Num>。量的是黑黑的影子，不是整片亮光。
+
+把手电筒移近到 <Num s="S1">15 厘米</Num>，影子变成约 <Num s="S1">24 厘米</Num>。看那两条刚好擦过卡片边缘的光线：手电筒近了，它们离开卡片时张得更开，到达屏幕时也就分得更远。
+
+<Figure src="figures/light-and-shadows-shadow-distance" alt={{"en": "Two identical set-ups seen from the side, one above the other: a torch at the left end of a wooden track, a white board at the right end and a disc on a rod between them. In the upper one the disc is close to the torch and its shadow on the board is large; in the lower one the disc is close to the board and its shadow is only a little bigger than the disc. Dotted lines from the torch just touch the top and bottom of each disc and run on to the edges of its shadow.", "zh": "从侧面看的上下两套相同装置：木轨道左端一支手电筒，右端一块白板，中间一根细杆上的圆片。上面那套，圆片离手电筒近，白板上的影子很大；下面那套，圆片离白板近，影子只比圆片大一点。从手电筒出发的虚线刚好擦过每个圆片的上下边缘，一直延伸到影子的边缘。"}} caption={{"en": "Closer to the torch, a bigger shadow: the rays past the edges of the disc spread further apart before they reach the board. Illustration for this topic.", "zh": "离手电筒越近，影子越大：擦过圆片边缘的光线，到达白板之前张得更开。为本主题画的示意图。"}} />
+
+把手电筒移远到 <Num s="S1">60 厘米</Num>。擦过边缘的光线张得没那么开，影子缩小到约 <Num s="S1">12 厘米</Num>，但仍然比卡片大：用这样的小手电筒，影子不会比物体小。
+
+手电筒到卡片的距离，是这里改变的<Term id="variable">变量</Term>。卡片、卡片的朝向、屏幕，以及卡片到屏幕的距离都保持不变，所以这是测试“手电筒距离”的公平测试。要是屏幕也跟着动，就说不清是哪一个改变造成的。
+
+每个距离记一行，再看折线图。线是往下走的：手电筒越远，影子越小。它是一条弯线，不是直线。手电筒从 <Num s="S1">20 厘米</Num>移到 <Num s="S1">15 厘米</Num>，影子大了约 <Num s="S1">4 厘米</Num>；从 <Num s="S1">30 厘米</Num>移到 <Num s="S1">40 厘米</Num>，影子只小了约 <Num s="S1">2 厘米</Num>。手电筒越近，每移一步，影子变得越多。
+
+<More title={{"en": "Two triangles", "zh": "两个三角形"}}>
+
+这部分超出了课纲，用到中学数学才学的“相似三角形”。卡片是平的、正对屏幕时，影子的高 ÷ 卡片的高 = 手电筒到屏幕的距离 ÷ 手电筒到卡片的距离。手电筒离卡片 <Num s="S1">20 厘米</Num>、屏幕在卡片后 <Num s="S1">30 厘米</Num>时，20 ÷ 8 = 50 ÷ 20。模型里的卡片厚 <Num s="S1">2 毫米</Num>，所以精确的影子还要大一点点，不过取整到厘米，读数是一样的。
+
+</More>
+
+<More title={{"en": "Never smaller than the card", "zh": "影子不会比卡片小"}}>
+
+用小手电筒时，擦过卡片边缘的光线在去屏幕的路上总是越张越开，所以影子总比卡片大。把卡片移到贴近屏幕，影子就接近卡片本身的大小。很大的灯或太阳，可能形成不同的明暗分布。
+
+</More>
+
+<More title={{"en": "Measuring a real shadow", "zh": "量真实的影子"}}>
+
+真实影子的边缘可能有点模糊。开始之前，先约定尺子放在边缘的哪里，每次都用同样的方法量。每个影子量 <Num s="S1">3</Num> 次，看看读数是否接近，是个好习惯。模型每次给出的数都一样，所以不必重复。
+
+</More>
+
+</Lang>

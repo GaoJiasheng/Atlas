@@ -1,0 +1,106 @@
+---
+id: "before-you-start"
+order: 0
+kind: background
+title: {"en": "Before you start", "zh": "开始之前"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: true
+  cutaway: "none"
+  layers: ["source", "objects", "sheets", "screen", "rays"]
+  labels: ["torch", "card-circle", "screen-board"]
+  camera: {"position": [-1.02, 1.52, 1.52], "target": [0.06, 1.0, 0.02], "fov": 30}
+  summary: {"en": "Light comes from light sources, travels in straight lines, and leaves a shadow where something blocks it. This topic tests what changes a shadow, one thing at a time.", "zh": "光从光源发出，沿直线传播，被东西挡住的地方就有影子。本主题一次只改变一样东西，看看什么会改变影子。"}
+  note: {"en": "This is a model. The shadows on the screen and on the ground are worked out from straight lines of light, and every size in centimetres is calculated by the model for the objects drawn here (marked SIM). The torch is drawn as a tiny point of light, so shadow edges are sharp; a real torch gives slightly blurred edges. How much light passes through each sheet comes from published figures for similar materials, not from this bench. The Sun's position comes from NOAA's solar calculator for Singapore (1.3° N, 103.8° E) on the dates shown, with a clear sky and level ground. The thin lines are drawn to show the paths of light; in a real room you cannot see them from the side.", "zh": "这是一个模型。屏幕上和地上的影子，都是按光沿直线传播算出来的；每个以厘米为单位的大小，都是模型为这里画的物体算出的（标 SIM）。手电筒画成一个很小的光点，所以影子的边缘是清楚的；真实的手电筒会让边缘有点模糊。每种材料片让多少光穿过，来自同类材料公开发表的数据，不是在这张实验台上量的。太阳的位置来自美国国家海洋和大气管理局（NOAA）的太阳计算器，地点是新加坡（北纬 1.3°、东经 103.8°），日期见各拍，假设天空无云、地面水平。细线是画出来表示光的路径的；在真实的房间里，从旁边是看不见光线的。"}
+  sim:
+    set: {"object": "card-circle", "turn": 0, "d-torch": 20, "d-screen": 30}
+  beats:
+    - labels: ["torch", "card-circle", "screen-board", "track"]
+      caption: {"en": "On this bench a torch shines along a track towards a white screen. A card in between blocks some of the light.", "zh": "这张实验台上，手电筒沿着轨道照向一块白色屏幕。中间的卡片挡住了一部分光。"}
+    - camera: {"position": [-0.05, 1.08, 3.3], "target": [-0.05, 1.04, 0.05], "fov": 20}
+      labels: ["torch", "card-circle", "screen-board"]
+      caption: {"en": "The thin lines show the paths the light takes. They are drawn in: in a real room you see only where the light lands.", "zh": "细线表示光走的路径，是画上去的；在真实的房间里，只看得到光照到的地方。"}
+    - view: "xray"
+      layers: ["dark-box", "rays"]
+      camera: {"position": [0.24, 1.08, 0.38], "target": [-0.42, 0.82, -0.13], "fov": 30}
+      sim: {"set": {"box-torch": true, "in-box": "ball"}}
+      labels: ["box", "box-torch", "box-ball"]
+      caption: {"en": "This closed box with a small hole is for testing what we need in order to see. Here it is drawn as if you could see through its sides.", "zh": "这只开了小孔的封闭盒子，用来测试我们要看见东西需要什么。这里把它画得像能看穿箱壁一样。"}
+    - layers: ["outdoors", "rays"]
+      camera: {"position": [11.2, 3.3, 8.0], "target": [10.9, 1.3, -0.6], "fov": 40}
+      sim: {"set": {"time": 10, "date": "oct-20"}}
+      labels: ["pole", "sun", "north-arrow"]
+      caption: {"en": "Outdoors, the light source is the Sun. The last chapter follows the shadow of a pole one metre high through one day in Singapore.", "zh": "到了户外，光源是太阳。最后一章跟着一根一米高的杆子的影子，看它在新加坡的一天里怎样变化。"}
+  index: {"parts": ["torch", "track", "object-holder", "card-circle", "screen-board", "light-sensor", "box", "pole"]}
+---
+
+<Lang en>
+
+A torch shines along the track towards a white <Term id="screen">screen</Term>. The torch is a <Term id="light-source">light source</Term>: it gives out its own light. Where the light lands, the screen has a bright patch. The card in the holder blocks part of the light and leaves a dark <Term id="shadow">shadow</Term> inside that patch.
+
+The thin lines beside the card are drawn in to show the paths the light takes. Each <Term id="light-ray">light ray</Term> is a straight line: follow the rays that just miss the card's edges and they lead to the edges of the shadow. In a real room you would not see these lines from the side; you see only where the light lands.
+
+On the screen there is a <Term id="light-sensor">light sensor</Term> that measures the light reaching it, and a <Term id="datalogger">datalogger</Term> that shows and records each reading. At the back of the table, a closed box with a small hole is for testing what you need in order to see. Outdoors, a pole stands in a courtyard so that you can follow its shadow through a day.
+
+Each chapter after this one has a Try it card. It says what you change, what you keep the same and what you observe. Changing only one thing and keeping everything else the same is a <Term id="fair-test">fair test</Term>: if the result changes, you know what caused it. Record a row for each setting and look for a pattern in the table and the graph. Readings marked SIM are worked out by the model, not measured.
+
+When you try this for real, never look straight at the Sun, and never shine a torch into anyone's eyes. Watch shadows outdoors with an adult.
+
+<More title={{"en": "How this model works", "zh": "这个模型是怎样算的"}}>
+
+The bench is a design study of school apparatus, not a particular product. The torch is drawn as a single point of light, <Num s="S1">30 cm</Num> above the table, so every shadow has a sharp edge; a real torch gives slightly blurred edges. The light through each sheet uses published figures for similar materials and a simple picture of how frosted sheets spread light, so those readings are only a guide. Cardboard is taken to let no light through.
+
+The box is drawn as if you could see through its walls, so that you can see what is inside. The courtyard stands for a place in Singapore at <Num s="S1,S13">1.3° N, 103.8° E</Num>; the Sun's position comes from NOAA's solar calculator, with a clear sky and level ground. The Sun is not drawn to scale. For the same settings the model always gives the same number.
+
+</More>
+
+<More title={{"en": "One thing at a time", "zh": "一次只改一样"}}>
+
+To tell whether a test is fair, ask three questions. What did I change? What did I measure? What did I keep the same? To compare two distances of the torch, keep the same card, turned the same way, and leave the screen where it is. If the screen moved as well, you could not tell which change made the shadow bigger.
+
+</More>
+
+<More title={{"en": "Light is energy", "zh": "光是一种能量"}}>
+
+Light is one form of energy. Sunlight helps plants make food, and solar panels change it into electrical energy: follow it in <TopicLink slug="energy-conversion" ch="energy-from-the-sun">Energy from the Sun</TopicLink>. This topic follows something simpler: where light goes, and what happens when something is in its way.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+手电筒沿着轨道照向一块白色的<Term id="screen">屏幕</Term>。手电筒是<Term id="light-source">光源</Term>，自己会发出光。光照到的地方，屏幕上亮了一片。支架上的卡片挡住了一部分光，在这片亮光中间留下一块暗暗的<Term id="shadow">影子</Term>。
+
+卡片旁边的细线是画上去的，表示光走的路径。每一条<Term id="light-ray">光线</Term>都是直线：顺着刚好擦过卡片边缘的光线往前看，它们正好落在影子的边缘上。在真实的房间里，从旁边是看不见这些线的，只看得到光照到的地方。
+
+屏幕上装着一个<Term id="light-sensor">光传感器</Term>，测量照到它的光；旁边的<Term id="datalogger">数据记录器</Term>显示并记下每一次读数。桌子后面有一只开了小孔的封闭盒子，用来测试我们要看见东西需要什么。到了户外，空地上立着一根杆子，可以跟着它的影子看一整天。
+
+从下一章起，每章都有一张“试一试”卡片，写着改变什么、保持什么不变、观察什么。只改变一样东西，其他都保持不变，这叫<Term id="fair-test">公平测试</Term>：结果变了，就知道是哪一样改变造成的。每种设置记一行，再从表格和图里找规律。标着 SIM 的读数是模型算出来的，不是实测值。
+
+自己动手做的时候，千万不要直视太阳，也不要用手电筒照别人的眼睛。到户外观察影子，要和大人一起。
+
+<More title={{"en": "How this model works", "zh": "这个模型是怎样算的"}}>
+
+这张实验台是学校器材的设计研究，不代表任何具体产品。手电筒画成一个光点，在桌面上方 <Num s="S1">30 厘米</Num>，所以每个影子的边缘都很清楚；真实的手电筒会让边缘有点模糊。各种材料片透过多少光，用的是同类材料公开发表的数据，再加上一个简化的“磨砂材料怎样把光散开”的算法，所以这些读数只能作参考。硬纸板当作完全不透光。
+
+暗箱画得像能看穿箱壁一样，让你看到里面有什么。空地代表新加坡的一个地点，<Num s="S1,S13">北纬 1.3°、东经 103.8°</Num>；太阳的位置来自 NOAA 的太阳计算器，假设天空无云、地面水平。太阳不是按比例画的。设置相同，模型每次给出的数都一样。
+
+</More>
+
+<More title={{"en": "One thing at a time", "zh": "一次只改一样"}}>
+
+要判断一个测试公平不公平，可以问三个问题：我改变了什么？我量了什么？哪些保持不变？比如要比较手电筒放在两个不同的距离，就要用同一张卡片、朝同一个方向，屏幕也不能动。要是屏幕也跟着动了，就说不清影子变大是哪一个改变造成的。
+
+</More>
+
+<More title={{"en": "Light is energy", "zh": "光是一种能量"}}>
+
+光是能量的一种形式。阳光帮助植物制造养料，太阳能板把阳光转换成电能，这些可以在<TopicLink slug="energy-conversion" ch="energy-from-the-sun">来自太阳的能量</TopicLink>里看到。本主题看的是更简单的事：光往哪里走，路上有东西挡着时又会怎样。
+
+</More>
+
+</Lang>

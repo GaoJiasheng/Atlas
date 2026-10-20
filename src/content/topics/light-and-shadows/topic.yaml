@@ -1,0 +1,16 @@
+# MOE P4 Energy Forms and Uses (Light); docs/35, decisions taken 2026-10-20.
+id: light-and-shadows
+title: { en: "Light and Shadows", zh: "光与影" }
+subtitle: { en: "How we see, why shadows form, and what changes their shape and size", zh: "我们怎样看见东西，影子怎样形成，什么会改变影子的形状和大小" }
+subject: science
+tags: [singapore, psle, p4, light, space]
+moe: ["MOE 2023 Science P4 Energy Forms and Uses (Light)", "MOE 2023 Science P3 Diversity of Materials (transparency)"]
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: published
+illustration: light-and-shadows
+shortTitle: { en: "Light", zh: "光与影" }
+note: { en: "Model study · a school light bench and a courtyard at 1.3° N · shadows worked out from straight lines of light · rays are drawn, not seen", zh: "示意模型 · 学校的光学实验台与北纬 1.3° 的一块空地 · 影子按光沿直线传播算出 · 光线是画出来的，实际看不见" }
