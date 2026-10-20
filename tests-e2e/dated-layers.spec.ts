@@ -18,6 +18,9 @@ for (const locale of ['en', 'zh']) {
   test(`dated fixture (${locale}): 10,000 GPU points, legend, toggles and both looks`, async ({ page }) => {
     const errors: string[] = [];
     page.on('pageerror', (error) => errors.push(error.message));
+    page.on('console', (message) => {
+      if (message.text().startsWith('[atlas] map:')) errors.push(message.text());
+    });
     await open(page, 'ch=full-set&t=2019', locale);
     await expect.poll(async () => (await dated(page))['sample-blocks']?.visible).toBe(10000);
     expect((await dated(page))['sample-blocks']).toMatchObject({ total: 11000, recent: 5000 });

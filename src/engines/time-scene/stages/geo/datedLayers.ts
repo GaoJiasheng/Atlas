@@ -26,7 +26,7 @@ export function datedLayerStyles(def: DatedLayerDef, tokens: ThemeTokens, color:
     const radius: ExpressionSpecification = ['interpolate', ['linear'], ['zoom'], 9, 1.2, 14, 3];
     return [
       { id: id('point'), source, type: 'circle', filter, paint: { 'circle-radius': radius, 'circle-color': color, 'circle-opacity': 0.85 } },
-      { id: id('recent'), source, type: 'circle', filter: datedLayerFilter(t, true), paint: { 'circle-radius': ['+', radius, 1], 'circle-color': color, 'circle-stroke-color': tokens.signal, 'circle-stroke-width': 0.8 } },
+      { id: id('recent'), source, type: 'circle', filter: datedLayerFilter(t, true), paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 9, 2.2, 14, 4], 'circle-color': color, 'circle-stroke-color': tokens.signal, 'circle-stroke-width': 0.8 } },
     ];
   }
   if (def.kind === 'line') return [

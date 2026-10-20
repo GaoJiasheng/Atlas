@@ -1,4 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
+import { validateStyleMin } from '@maplibre/maplibre-gl-style-spec';
 import type { FeatureCollection } from 'geojson';
 import type { Map as MlMap } from 'maplibre-gl';
 import type { DatedLayerDef } from '../../src/content/schema/topic';
@@ -72,6 +73,13 @@ describe('dated layer dates and counts', () => {
 });
 
 describe('dated GPU layers', () => {
+  it('all layer styles pass MapLibre expression and style validation', () => {
+    for (const kind of ['point', 'line', 'area'] as const) {
+      const layers = datedLayerStyles({ ...def, kind }, { ...tokens, signal: '#abcdef' }, '#123456', 1980);
+      const issues = validateStyleMin({ version: 8, sources: { 'ts-dated-blocks': { type: 'geojson', data: points([]) } }, layers });
+      expect(issues.map((issue) => issue.message)).toEqual([]);
+    }
+  });
   it('installs one static source below events and changes filters only across boundaries', () => {
     const map = mapMock();
     const data = points([{ f: 1959, u: 1960 }, { f: 1960 }]);
