@@ -38,14 +38,14 @@ test.describe('measuring (MathScene instruments)', () => {
   test('a beat tick shows what each small part stands for: the magnifier, the sentence and the beat line', async ({ page }) => {
     await open(page, '/en/topics/measuring/?ch=reading-scales');
     await expect(page.locator('.atlas-axis__tick[data-beat^="reading-scales."]')).toHaveCount(6);
-    await expect(page.locator('.atlas-axis__tick[data-beat="reading-scales.6"]')).toHaveAttribute('data-shape', 'square');
-    await page.locator('.atlas-axis__tick[data-beat="reading-scales.2"]').click();
-    await expect.poll(async () => (await state(page)).beat).toBe(2);
+    await expect(page.locator('.atlas-axis__tick[data-beat="reading-scales.5"]')).toHaveAttribute('data-shape', 'square');
+    await page.locator('.atlas-axis__tick[data-beat="reading-scales.1"]').click();
+    await expect.poll(async () => (await state(page)).beat).toBe(1);
     await expect(page.locator('.ms-inst__mag')).toBeVisible();
     await expect(page.locator('.ms-equation')).toHaveText('40 − 30 = 10 · 10 ÷ 2 = 5');
     await expect(page.locator('.ms-beatline')).toContainText('each small part stands for 5 cm');
     await page.keyboard.press(',');
-    await expect.poll(async () => (await state(page)).beat).toBe(1);
+    await expect.poll(async () => (await state(page)).beat).toBe(0);
     await expect(page.locator('.ms-beatline')).toContainText('Not every mark on this measuring tape has a number');
     await expect(page.locator('body')).not.toContainText(/\bP[1-6]\b|Primary [1-6]|Bridge/);
   });
@@ -151,7 +151,7 @@ test.describe('measuring (MathScene instruments)', () => {
     await open(page, '/zh/topics/measuring/?ch=weighing-scales&b=4');
     await expect(page.locator('.ms-beatline')).toContainText('二十二十地数');
     await expect(page.locator('.ms-equation')).toContainText('200 + 4 × 20 = 280');
-    await page.locator('.atlas-axis__tick[data-beat="weighing-scales.6"]').click();
+    await page.locator('.atlas-axis__tick[data-beat="weighing-scales.5"]').click();
     await expect(tray(page)).toBeVisible();
     await expect(tray(page).locator('[data-another]')).toHaveText('再来一道');
     await page.goto('/zh/topics/measuring/?ch=scales-in-decimals');
