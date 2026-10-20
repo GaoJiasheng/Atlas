@@ -18,6 +18,7 @@ import type { MagnetFrames } from './frame';
 import { solveForces } from './force';
 import { solveEnergy } from './energy';
 import { solveLifeCycle } from './lifecycle';
+import { solveLight } from './light';
 import { EMPTY_TIMELINE, type Timeline } from './timeline';
 
 /** An output's value: a number, a state id, numbers per id (a vector) or a run over time (a timeline). */
@@ -40,6 +41,7 @@ export function compassPoint(sim: SimData, values: SimValues): Vec3 | null {
 
 /** Every model quantity for these control values; `observe`: the outputs the chapter's try-it card observes. */
 export function simQuantities(sim: SimData, values: SimValues, observe: readonly string[] = [], frames?: MagnetFrames): Record<string, SimOutputValue> {
+  if (sim.kind === 'light' && sim.light) return solveLight(sim.light, values, sim.controls);
   if (sim.kind === 'circuit' && sim.circuit) return solveCircuit(sim.circuit, values).quantities;
   if (sim.kind === 'magnet' && sim.magnet) {
     const q: Record<string, SimOutputValue> = solveMagnets(sim.magnet, values, compassPoint(sim, values), frames);
@@ -72,7 +74,7 @@ export function evaluateSim(sim: SimData, values: SimValues, observe: readonly s
  * magnets or one animal's life cycle is one system: its first state (the
  * stage on the day on show) always describes the bench.
  */
-export const SEPARATE_EXPERIMENTS: Readonly<Record<SimKind, boolean>> = { circuit: false, magnet: false, force: true, energy: true, 'life-cycle': false };
+export const SEPARATE_EXPERIMENTS: Readonly<Record<SimKind, boolean>> = { circuit: false, magnet: false, force: true, energy: true, 'life-cycle': false, light: true };
 
 /** A number output's value (0 for states and vectors; NaN = not applicable here). */
 export const numberOf = (v: SimOutputValue | undefined): number => (typeof v === 'number' ? v : 0);

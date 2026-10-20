@@ -517,11 +517,12 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       stats: () => {
         const st = bridge.stats;
         const live = bridge.liveCamera();
-        const out: Partial<SceneStats> & { geometries: number; textures: number; camera?: OrbitCamera; footSlip?: number } = {
+        const out: Partial<SceneStats> & { geometries: number; textures: number; shadowMapUpdates: number; camera?: OrbitCamera; footSlip?: number } = {
           calls: st.calls,
           triangles: st.triangles,
           geometries: st.geometries,
           textures: st.textures,
+          shadowMapUpdates: st.shadowMapUpdates,
           fps: st.fps === undefined ? undefined : Math.round(st.fps * 10) / 10,
           gpu: st.gpu,
           // The live camera (tests: where the stage really is, not the stored target).
@@ -578,6 +579,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
             replays: ui.getState().simReplay.n,
           };
         },
+        shadows: () => Object.fromEntries(bridge.shadows),
         // Energy bars on the stage (docs/31 E-EN6): per timeline output, the three bars now (potential + kinetic + lost = 100) and whether they show.
         energyBars: () =>
           Object.fromEntries(

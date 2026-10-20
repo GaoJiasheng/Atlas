@@ -1,0 +1,141 @@
+---
+{
+  "id": "sun-shadows",
+  "order": 4,
+  "title": {
+    "en": "Sample sun",
+    "zh": "示例太阳"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "layers": [
+      "outdoors",
+      "rays"
+    ],
+    "camera": {
+      "position": [
+        24,
+        12,
+        16
+      ],
+      "target": [
+        10,
+        2,
+        0
+      ],
+      "fov": 40
+    },
+    "labels": [
+      "pole",
+      "sun",
+      "north-arrow"
+    ],
+    "summary": {
+      "en": "Sample sun: placeholder text for the light engine.",
+      "zh": "示例太阳：光模型引擎的占位文字。"
+    },
+    "sim": {
+      "set": {
+        "time": 8,
+        "date": "oct-20"
+      },
+      "try": {
+        "vary": "time",
+        "also": [
+          "date"
+        ],
+        "keep": [
+          {
+            "en": "Same one-metre pole and horizontal ground",
+            "zh": "同一根一米杆、水平地面"
+          }
+        ],
+        "observe": [
+          "time-now",
+          "sun-height",
+          "shadow-length",
+          "shadow-points"
+        ],
+        "record": {
+          "chart": {
+            "y": "shadow-length"
+          }
+        }
+      }
+    },
+    "beats": [
+      {
+        "caption": {
+          "en": "Sample: the morning Sun and a long shadow.",
+          "zh": "示例：早晨的太阳与长影子。"
+        }
+      },
+      {
+        "caption": {
+          "en": "Sample: the shadow is short near solar noon.",
+          "zh": "示例：接近太阳正午，影子变短。"
+        },
+        "sim": {
+          "set": {
+            "time": 13
+          }
+        }
+      },
+      {
+        "caption": {
+          "en": "Sample: the June path is different.",
+          "zh": "示例：六月的太阳路径不同。"
+        },
+        "sim": {
+          "set": {
+            "time": 13,
+            "date": "jun-21"
+          }
+        }
+      },
+      {
+        "caption": {
+          "en": "Sample: the March Sun is almost overhead.",
+          "zh": "示例：三月的太阳几乎在头顶。"
+        },
+        "sim": {
+          "set": {
+            "time": 13,
+            "date": "mar-24"
+          }
+        },
+        "camera": "sky-view",
+        "labels": [
+          "pole",
+          "north-arrow"
+        ]
+      }
+    ],
+    "index": {
+      "parts": [
+        "pole",
+        "sun",
+        "north-arrow",
+        "sun-path-oct",
+        "sun-path-jun",
+        "sun-path-mar"
+      ]
+    }
+  }
+}
+---
+
+<Lang en>
+
+Sample sun: placeholder text for testing the light engine.
+
+</Lang>
+
+<Lang zh>
+
+示例太阳：用来测试光模型引擎的占位文字。
+
+</Lang>

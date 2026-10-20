@@ -1,0 +1,241 @@
+---
+{
+  "id": "shapes",
+  "order": 2,
+  "title": {
+    "en": "Sample shapes",
+    "zh": "示例形状"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "layers": [
+      "source",
+      "objects",
+      "sheets",
+      "screen",
+      "rays"
+    ],
+    "camera": {
+      "position": [
+        -1.4,
+        1.27,
+        0.72
+      ],
+      "target": [
+        0.15,
+        1,
+        0.05
+      ],
+      "fov": 28
+    },
+    "labels": [
+      "card-circle",
+      "screen-board"
+    ],
+    "summary": {
+      "en": "Sample shapes: placeholder text for the light engine.",
+      "zh": "示例形状：光模型引擎的占位文字。"
+    },
+    "sim": {
+      "set": {
+        "object": "card-circle",
+        "material": "none",
+        "d-torch": 20,
+        "d-screen": 30,
+        "turn": 0,
+        "torch-on": true
+      },
+      "try": {
+        "vary": "object",
+        "also": [
+          "turn"
+        ],
+        "keep": [
+          "d-torch",
+          "d-screen"
+        ],
+        "observe": [
+          "shadow-height",
+          "shadow-width",
+          "shadow-shape"
+        ],
+        "record": true
+      }
+    },
+    "beats": [
+      {
+        "caption": {
+          "en": "Sample: the round card at the holder.",
+          "zh": "示例：支架上的圆卡片。"
+        },
+        "sim": {
+          "set": {
+            "object": "card-circle",
+            "turn": 0
+          }
+        },
+        "labels": [
+          "card-circle",
+          "screen-board"
+        ]
+      },
+      {
+        "caption": {
+          "en": "Sample: the square card at the holder.",
+          "zh": "示例：支架上的正方卡片。"
+        },
+        "sim": {
+          "set": {
+            "object": "card-square",
+            "turn": 0
+          }
+        },
+        "labels": [
+          "card-square",
+          "screen-board"
+        ]
+      },
+      {
+        "caption": {
+          "en": "Sample: the triangular card at the holder.",
+          "zh": "示例：支架上的三角卡片。"
+        },
+        "sim": {
+          "set": {
+            "object": "card-triangle",
+            "turn": 0
+          }
+        },
+        "labels": [
+          "card-triangle",
+          "screen-board"
+        ]
+      },
+      {
+        "caption": {
+          "en": "Sample: the large round card at the holder.",
+          "zh": "示例：支架上的大圆卡片。"
+        },
+        "sim": {
+          "set": {
+            "object": "card-circle-big",
+            "turn": 0
+          }
+        },
+        "labels": [
+          "card-circle-big",
+          "screen-board"
+        ]
+      },
+      {
+        "caption": {
+          "en": "Sample: the tin at the holder.",
+          "zh": "示例：支架上的罐子。"
+        },
+        "sim": {
+          "set": {
+            "object": "tin",
+            "turn": 0
+          }
+        },
+        "labels": [
+          "tin",
+          "screen-board"
+        ]
+      },
+      {
+        "caption": {
+          "en": "Sample: the cone at the holder.",
+          "zh": "示例：支架上的圆锥。"
+        },
+        "sim": {
+          "set": {
+            "object": "cone",
+            "turn": 0
+          }
+        },
+        "labels": [
+          "cone",
+          "screen-board"
+        ]
+      },
+      {
+        "caption": {
+          "en": "Sample: the ball at the holder.",
+          "zh": "示例：支架上的球。"
+        },
+        "sim": {
+          "set": {
+            "object": "ball",
+            "turn": 0
+          }
+        },
+        "labels": [
+          "ball",
+          "screen-board"
+        ]
+      },
+      {
+        "caption": {
+          "en": "Sample: a turned card becomes narrower.",
+          "zh": "示例：转过的卡片变窄。"
+        },
+        "sim": {
+          "set": {
+            "object": "card-circle",
+            "turn": 45
+          }
+        },
+        "labels": [
+          "card-circle",
+          "screen-board"
+        ]
+      },
+      {
+        "caption": {
+          "en": "Sample: a side-on card makes a thin strip.",
+          "zh": "示例：侧对光源的卡片投出细条。"
+        },
+        "sim": {
+          "set": {
+            "object": "card-circle",
+            "turn": 90
+          }
+        },
+        "labels": [
+          "card-circle",
+          "screen-board"
+        ]
+      }
+    ],
+    "index": {
+      "parts": [
+        "card-circle",
+        "card-square",
+        "card-triangle",
+        "card-circle-big",
+        "tin",
+        "cone",
+        "ball",
+        "screen-board",
+        "object-holder"
+      ]
+    }
+  }
+}
+---
+
+<Lang en>
+
+Sample shapes: placeholder text for testing the light engine.
+
+</Lang>
+
+<Lang zh>
+
+示例形状：用来测试光模型引擎的占位文字。
+
+</Lang>

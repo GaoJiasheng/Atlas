@@ -9,6 +9,9 @@
  * Build-time only (zod); the client imports the types.
  */
 import { z } from 'zod';
+import { benchShadow, lightQuantity, lightStates, shapeHalfDepth } from './lib/sim/light';
+import { sunPosition } from './lib/sim/sun';
+import { simQuantities } from './lib/sim';
 import { bilingual, colorRef, kebabId, vec3 } from '../../content/schema/common';
 import { fieldLines } from './lib/sim/field';
 import { FORCE_STATES, forceQuantity, forceTimelineChannels, springExtension, rollRun } from './lib/sim/force';
@@ -49,6 +52,7 @@ export const simControlSchema = z.discriminatedUnion('kind', [
       default: z.number(),
       /** Shown after the value (`cm`); empty for counts. */
       unit: z.string().trim().max(8).optional(),
+      format: z.literal('time').optional(),
     })
     .strict(),
   /**
@@ -86,6 +90,7 @@ export const simOutputSchema = z
     kind: z.enum(SIM_OUTPUT_KINDS).default('number'),
     from: z.string().min(1).max(64).optional(),
     unit: z.string().trim().max(8).optional(),
+      format: z.literal('time').optional(),
     decimals: z.number().int().min(0).max(3).optional(),
     states: z.record(stateId, bilingual).optional(),
   })
@@ -214,6 +219,8 @@ const partBind = z
      * control's default value, where the parts are drawn).
      */
     at: kebabId.optional(),
+    /** Place a part on a sphere along an xyz vector output; face aligns local +Y. */
+    place: z.object({ centre: vec3, radius: z.number().positive(), face: z.literal('centre').optional() }).strict().optional(),
     /** A field-state output picks the iron-filings layout of a `filings` part (`magnet.fields`). */
     state: z.literal(true).optional(),
   })
@@ -786,7 +793,44 @@ export const forceArrowSchema = z
   .strict();
 export type ForceArrow = z.output<typeof forceArrowSchema>;
 
+/** Geometric optics bench; dimensions inside shapes and sheet/holes data are centimetres. */
+export const lightShapeSchema = z.discriminatedUnion('kind', [
+  z.object({ kind: z.literal('disc'), d: pos, thick: pos }).strict(),
+  z.object({ kind: z.literal('polygon'), points: z.array(z.tuple([z.number(), z.number()])).min(3), thick: pos }).strict(),
+  z.object({ kind: z.literal('cylinder'), d: pos, length: pos, axis: z.literal('z') }).strict(),
+  z.object({ kind: z.literal('cone'), d: pos, length: pos, axis: z.literal('z'), apex: z.literal('+') }).strict(),
+  z.object({ kind: z.literal('sphere'), d: pos }).strict(),
+]);
+export type LightShape = z.output<typeof lightShapeSchema>;
+export const lightSchema = z.object({
+  bench: z.object({
+    source: z.object({ part: kebabId, point: vec3, axis: vec3, beam: z.number().positive().max(89) }).strict(),
+    power: kebabId, gaps: z.object({ torch: kebabId, screen: kebabId }).strict(), holder: vec3,
+    screen: z.object({ part: kebabId, size: z.tuple([pos, pos]) }).strict(), object: kebabId, turn: kebabId,
+    objects: z.record(kebabId, z.object({ part: kebabId, shape: lightShapeSchema, names: z.record(z.string(), stateId) }).strict()),
+  }).strict().optional(),
+  sheets: z.object({ control: kebabId, size: z.tuple([pos, pos]), kinds: z.object({ hardly: z.number().min(0).max(100), dark: z.number().min(0).max(100) }).strict(), materials: z.record(kebabId, z.object({ part: kebabId, straight: z.number().min(0).max(1), scattered: z.number().min(0).max(1) }).strict()) }).strict().optional(),
+  holes: z.object({ control: kebabId, hole: pos, cards: z.array(z.object({ part: kebabId, at: z.number(), moved: z.number().positive().optional() }).strict()).min(3) }).strict().optional(),
+  seeing: z.object({ torch: kebabId, target: kebabId, reflects: z.record(kebabId, stateId) }).strict().optional(),
+  sun: z.object({ lat: z.number().min(-66).max(66), lon: z.number().min(-180).max(180), zone: z.number().min(-12).max(14), time: kebabId, date: kebabId, dates: z.record(kebabId, z.string()), pole: pos, north: vec3 }).strict().optional(),
+}).strict();
+export type LightData = z.output<typeof lightSchema>;
+
+const shadowSource = z.union([
+  z.object({ part: kebabId, point: vec3, axis: vec3, beam: z.number().positive().max(89), when: z.object({ ...source, is: simCondition.default(true) }).strict().optional() }).strict(),
+  z.object({ direction: z.object({ output: kebabId }).strict(), when: z.object({ ...source, is: simCondition.default(true) }).strict().optional() }).strict(),
+]);
+export const shadowCastSchema = z.object({
+  kind: z.literal('shadow-cast'), source: shadowSource,
+  receiver: z.object({ part: kebabId, normal: vec3, size: z.tuple([pos, pos]).optional(), radius: pos.optional() }).strict(),
+  casters: z.array(z.object({ part: kebabId, dark: z.union([z.number().min(0).max(1), z.object({ output: kebabId }).strict()]).optional() }).strict()).min(1),
+  spot: z.object({ color: colorRef }).strict().optional(),
+  rays: z.object({ group: kebabId, edges: z.enum(['vertical', 'tip']), through: z.literal('dark').optional(), extra: z.array(z.tuple([z.number(), z.number()])).optional(), parallel: z.array(z.number()).optional() }).strict().optional(),
+  trail: z.object({ control: kebabId }).strict().optional(),
+}).strict();
+
 export const simOverlaySchema = z.discriminatedUnion('kind', [
+  shadowCastSchema,
   /**
    * Force arrows (docs/30 F3): `per` scene units per newton (default 0.03),
    * at most `max` long (0.25), faded below 0.05 N; all arrows one draw call;
@@ -841,8 +885,9 @@ export const simOverlaySchema = z.discriminatedUnion('kind', [
     .strict(),
 ]);
 export type SimOverlay = z.output<typeof simOverlaySchema>;
+export type ShadowCastOverlay = Extract<SimOverlay, { kind: 'shadow-cast' }>;
 
-export const SIM_KINDS = ['circuit', 'magnet', 'force', 'energy', 'life-cycle'] as const;
+export const SIM_KINDS = ['circuit', 'magnet', 'force', 'energy', 'life-cycle', 'light'] as const;
 export type SimKind = (typeof SIM_KINDS)[number];
 
 export const MAX_SIM_CONTROLS = 16;
@@ -861,6 +906,7 @@ export const simSchema = z
     force: forceSchema.optional(),
     energy: energySchema.optional(),
     lifeCycle: lifeCycleSchema.optional(),
+    light: lightSchema.optional(),
   })
   .strict();
 export type SimData = z.output<typeof simSchema>;
@@ -992,6 +1038,10 @@ const MAGNET_STATES: readonly string[] = ['facing', 'field-state'];
 /** The kind of a model quantity (an output's `from`), or null when the model (or the data it needs) has none of that name. */
 export function quantityKind(sim: SimData, from: string): SimOutput['kind'] | null {
   switch (sim.kind) {
+    case 'light': {
+      if (from.startsWith('control:')) return sim.controls.some((c) => c.id === from.slice(8) && c.kind !== 'choice') ? 'number' : null;
+      return sim.light ? lightQuantity(sim.light, from) : null;
+    }
     case 'circuit':
       if (!sim.circuit || !circuitQuantities(sim.circuit).includes(from)) return null;
       return from === 'edges' ? 'vector' : from.startsWith('status:') || from.startsWith('sound:') ? 'state' : 'number';
@@ -1044,11 +1094,20 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
   const issue = (path: (string | number)[], message: string) => out.push({ path, message });
   const controls = new Map(sim.controls.map((c) => [c.id, c]));
   const outputs = new Map(sim.outputs.map((o) => [o.id, o]));
+  const defaults = Object.fromEntries(sim.controls.map((c) => [c.id, c.default])) as SimValues;
+  let defaultQuantities: ReturnType<typeof simQuantities> | undefined;
+  const xyzOutput = (output: SimOutput | undefined): boolean => {
+    if (output?.kind !== 'vector') return false;
+    defaultQuantities ??= simQuantities(sim, defaults);
+    const vector = defaultQuantities[output.from ?? output.id];
+    return typeof vector === 'object' && vector !== null && Object.keys(vector).sort().join(',') === 'x,y,z' && Object.values(vector).every((v) => typeof v === 'number' && Number.isFinite(v));
+  };
   sim.controls.forEach((c, i) => {
     if (sim.controls.findIndex((x) => x.id === c.id) !== i) issue(['controls', i, 'id'], `duplicate control "${c.id}"`);
     if (outputs.has(c.id)) issue(['controls', i, 'id'], `"${c.id}" is also an output`);
     if (!legalValue(c, c.default)) issue(['controls', i, 'default'], `default ${JSON.stringify(c.default)} is not one of the control's values`);
     if (c.kind === 'step') {
+      if (c.format === 'time' && (c.unit !== 'h' || c.values.some((v) => v < 0 || v > 24))) issue(['controls', i, 'format'], 'time format needs unit h and values in 0–24');
       const up = c.values.every((v, j) => j === 0 || v > c.values[j - 1]!);
       const down = c.values.every((v, j) => j === 0 || v < c.values[j - 1]!);
       if (!up && !down) issue(['controls', i, 'values'], 'step values must ascend or descend (no repeats)');
@@ -1060,7 +1119,7 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
         for (const [id, v] of Object.entries(set)) {
           const t = controls.get(id);
           if (!t) issue(['controls', i, 'sets', opt, id], `unknown control "${id}"`);
-          else if (t.kind === 'choice' && t.sets) issue(['controls', i, 'sets', opt, id], `"${id}" has sets of its own (no chains)`);
+          else if (t.kind === 'choice' && t.sets && t.sets[String(v)] !== undefined) issue(['controls', i, 'sets', opt, id], `"${id}" has sets of its own (no chains)`);
           else if (!legalValue(t, v)) issue(['controls', i, 'sets', opt, id], `${JSON.stringify(v)} is not a value of "${id}"`);
         }
       }
@@ -1076,7 +1135,12 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
   sim.outputs.forEach((o, i) => {
     if (sim.outputs.findIndex((x) => x.id === o.id) !== i) issue(['outputs', i, 'id'], `duplicate output "${o.id}"`);
     const from = o.from ?? o.id;
+    if (o.format === 'time' && (o.kind !== 'number' || o.unit !== 'h' || (from.startsWith('control:') && (() => { const c = controls.get(from.slice(8)); return c?.kind !== 'step' || c.values.some((v) => v < 0 || v > 24); })()))) issue(['outputs', i, 'format'], 'time format needs a number output in hours, 0–24');
     const kind = quantityKind(sim, from);
+    if (o.format === 'time' && kind === 'number' && o.unit === 'h') {
+      const reads = from.startsWith('control:') ? sim.controls.filter((c) => c.id === from.slice(8)) : sim.kind === 'light' && sim.light?.sun && from.startsWith('sun:') ? sim.controls.filter((c) => [sim.light!.sun!.time, sim.light!.sun!.date].includes(c.id)) : sim.controls;
+      if (combinations(reads, defaults).some((values) => { const value = simQuantities(sim, values)[from]; return typeof value !== 'number' || !Number.isFinite(value) || value < 0 || value > 24; })) issue(['outputs', i, 'format'], 'time format output values must be finite hours in 0–24');
+    }
     if (kind === null) {
       const q = sim.kind === 'force' ? forceQuantity(from) : sim.kind === 'energy' ? energyQuantity(from) : null;
       const lq = sim.kind === 'life-cycle' ? lifeCycleQuantity(from) : null;
@@ -1084,7 +1148,7 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
       issue(['outputs', i, 'from'], needs ? `"${from}" needs the ${sim.kind} model's \`${needs}\` data` : `the ${sim.kind} model has no quantity "${from}"`);
     } else if (kind !== o.kind) issue(['outputs', i, 'kind'], `"${from}" is a ${kind}, not a ${o.kind}`);
     const states =
-      sim.kind === 'force'
+      sim.kind === 'light' && sim.light ? lightStates(sim.light, from, sim.controls) : sim.kind === 'force'
         ? FORCE_STATES[from]
         : sim.kind === 'energy' && from === 'chain-state' && sim.energy
           ? Object.keys(sim.energy.chains)
@@ -1094,6 +1158,10 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
               : EMPTYING_STATES[from]
             : undefined;
     if (states && o.kind === 'state') for (const st of states) if (!o.states?.[st]) issue(['outputs', i, 'states'], `"${from}" can be "${st}": give it a label`);
+    if (sim.kind === 'light' && sim.light && o.kind === 'state' && kind === 'state') {
+      const known = lightStates(sim.light, from, sim.controls) ?? [];
+      for (const st of Object.keys(o.states ?? {})) if (!known.includes(st)) issue(['outputs', i, 'states', st], `"${from}" is never "${st}" (${known.join(', ')})`);
+    }
     if (sim.kind === 'life-cycle' && sim.lifeCycle && o.kind === 'state' && kind === 'state') {
       const known = from === 'stage' ? sim.lifeCycle.stages.map((s) => s.id) : (EMPTYING_STATES[from] ?? []);
       for (const st of Object.keys(o.states ?? {})) if (!known.includes(st)) issue(['outputs', i, 'states', st], `"${from}" is never "${st}" (${known.join(', ')})`);
@@ -1103,6 +1171,8 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
   if (sim.kind === 'magnet' && !sim.magnet) issue(['magnet'], 'a magnet sim needs `magnet`');
   if (sim.kind === 'force' && !sim.force) issue(['force'], 'a force sim needs `force`');
   if (sim.kind === 'energy' && !sim.energy) issue(['energy'], 'an energy sim needs `energy`');
+  if (sim.kind === 'light' && !sim.light) issue(['light'], 'a light sim needs `light`');
+  if (sim.light) lightIssues(sim.light, controls, ctx).forEach((x) => issue(['light', ...x.path], x.message));
   if (sim.kind === 'life-cycle' && !sim.lifeCycle) issue(['lifeCycle'], 'a life-cycle sim needs `lifeCycle`');
   if (sim.lifeCycle) lifeCycleIssues(sim.lifeCycle, controls, ctx).forEach((x) => issue(['lifeCycle', ...x.path], x.message));
   if (sim.force) forceIssues(sim.force, controls, ctx).forEach((x) => issue(['force', ...x.path], x.message));
@@ -1129,8 +1199,12 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
       if (b.count) for (const id of ids) if (!ctx.countable.has(id)) issue(['bind', i, 'count'], `"${id}" needs a \`repeat\` and no \`extra\` to show a count of copies`);
       if ((b.glow || b.tint || b.count || b.offset || b.rotate) && outp && outp.kind !== 'number')
         issue(['bind', i], `glow / tint / count / offset / rotate need a number, "${src}" is a ${outp.kind}`);
-      if (outp?.kind === 'timeline' && ['visible', 'pose', 'glow', 'tint', 'count', 'offset', 'rotate', 'at', 'state'].some(has))
+      if (outp?.kind === 'timeline' && ['place', 'visible', 'pose', 'glow', 'tint', 'count', 'offset', 'rotate', 'at', 'state'].some(has))
         issue(['bind', i], `"${src}" is a timeline: bind it with \`play\` or a \`stretch\` with a \`channel\``);
+      if (b.place) {
+        if (!xyzOutput(outp)) issue(['bind', i, 'place'], 'place needs an xyz vector output with exactly three finite values');
+        if (b.offset || b.at || b.play) issue(['bind', i, 'place'], 'place cannot combine with offset, at or play');
+      }
       if (b.play) {
         const p = b.play;
         if (outp?.kind !== 'timeline') issue(['bind', i, 'play'], `play needs a timeline output${outp ? `, "${src}" is a ${outp.kind}` : ''}`);
@@ -1188,7 +1262,7 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
           stateBound.add(id);
         }
       }
-      const fields = ['visible', 'pose', 'glow', 'tint', 'count', 'offset', 'rotate', 'at', 'state', 'play', 'stretch'].filter(has);
+      const fields = ['place', 'visible', 'pose', 'glow', 'tint', 'count', 'offset', 'rotate', 'at', 'state', 'play', 'stretch'].filter(has);
       if (fields.length === 0) issue(['bind', i], 'a part binding needs visible, pose, glow, tint, count, offset, rotate, at, state, play or stretch');
     } else if ('flow' in b) {
       if (outp?.kind === 'timeline') issue(['bind', i, 'output'], `"${src}" is a timeline: it moves parts (\`play\`), not flows`);
@@ -1274,6 +1348,23 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
       whenIssues(at, o.when);
       return;
     }
+    if (o.kind === 'shadow-cast') {
+      const at = ['overlays', i];
+      const part = (path: (string | number)[], id: string) => { if (!ctx.parts.has(id)) issue(path, `unknown part "${id}"`); else if (ctx.contextParts?.has(id)) issue(path, `"${id}" is a context part`); };
+      part([...at, 'receiver', 'part'], o.receiver.part);
+      if ((o.receiver.size === undefined) === (o.receiver.radius === undefined)) issue([...at, 'receiver'], 'give exactly one rectangular size or circular radius');
+      if (Math.hypot(...o.receiver.normal) < 1e-9) issue([...at, 'receiver', 'normal'], 'the receiver normal must be non-zero');
+      if ('part' in o.source) { part([...at, 'source', 'part'], o.source.part); if (Math.hypot(...o.source.axis) < 1e-9) issue([...at, 'source', 'axis'], 'the light axis must be non-zero'); }
+      else { const v = outputs.get(o.source.direction.output); if (!xyzOutput(v)) issue([...at, 'source', 'direction'], 'direction needs a vector output with exactly three finite x, y, z values'); }
+      whenIssues([...at, 'source'], o.source.when);
+      for (const [k, caster] of o.casters.entries()) {
+        part([...at, 'casters', k, 'part'], caster.part);
+        if (typeof caster.dark === 'object') { const v = outputs.get(caster.dark.output); if (!v || v.kind !== 'number') issue([...at, 'casters', k, 'dark'], 'dark needs a number output'); }
+      }
+      if (o.rays && ctx.groups && !ctx.groups.has(o.rays.group)) issue([...at, 'rays', 'group'], `unknown group "${o.rays.group}"`);
+      if (o.trail) { if ('part' in o.source) issue([...at, 'trail'], 'a chalk trail needs parallel sunlight'); if (controls.get(o.trail.control)?.kind !== 'step') issue([...at, 'trail', 'control'], 'a trail needs a step control'); }
+      return;
+    }
     const [a, b] = o.between;
     for (const id of o.between) if (!ctx.parts.has(id)) issue(['overlays', i, 'between'], `unknown part "${id}"`);
     if (a === b) issue(['overlays', i, 'between'], 'two different parts');
@@ -1282,6 +1373,80 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
     else if (v.kind !== 'number') issue(['overlays', i, 'output'], `"${o.output}" is a ${v.kind}, not a number`);
     whenIssues(['overlays', i], o.when);
   });
+  return out;
+}
+
+/** Cross-references and complete geometric envelope for every authored bench combination. */
+function lightIssues(light: LightData, controls: ReadonlyMap<string, SimControl>, ctx: SimContext): { path: (string | number)[]; message: string }[] {
+  const out: { path: (string | number)[]; message: string }[] = [];
+  const issue = (path: (string | number)[], message: string) => out.push({ path, message });
+  function control<K extends SimControl['kind']>(path: (string | number)[], id: string, kind: K): Extract<SimControl, { kind: K }> | undefined {
+    const c = controls.get(id);
+    if (!c) issue(path, `unknown control "${id}"`);
+    else if (c.kind !== kind) issue(path, `"${id}" must be a ${kind} control`);
+    return c?.kind === kind ? c as Extract<SimControl, { kind: K }> : undefined;
+  }
+  const part = (path: (string | number)[], id: string) => {
+    if (!ctx.parts.has(id)) issue(path, `unknown part "${id}"`);
+    else if (ctx.contextParts?.has(id)) issue(path, `"${id}" is a context part`);
+  };
+  const covers = (path: (string | number)[], choice: Extract<SimControl, {kind: 'choice'}> | undefined, table: Record<string, unknown>, none = false) => {
+    if (!choice) return;
+    const wanted = choice.options.map((o) => o.id).filter((id) => !none || id !== 'none');
+    for (const id of wanted) if (!(id in table)) issue(path, `no data for option "${id}" of "${choice.id}"`);
+    for (const id of Object.keys(table)) if (!wanted.includes(id)) issue([...path, id], `"${id}" is not an option of "${choice.id}"`);
+  };
+  const bench = light.bench;
+  if ((light.sheets || light.holes) && !bench) issue(['bench'], 'sheets and holes need the bench source and gaps');
+  if (!Object.keys(light).length) issue([], 'give at least one light experiment');
+  if (bench) {
+    part(['bench', 'source', 'part'], bench.source.part); part(['bench', 'screen', 'part'], bench.screen.part);
+    if (Math.hypot(...bench.source.axis) < 1e-9) issue(['bench', 'source', 'axis'], 'the light axis must be non-zero');
+    control(['bench', 'power'], bench.power, 'toggle');
+    const a = control(['bench', 'gaps', 'torch'], bench.gaps.torch, 'step'), b = control(['bench', 'gaps', 'screen'], bench.gaps.screen, 'step');
+    const object = control(['bench', 'object'], bench.object, 'choice'), turn = control(['bench', 'turn'], bench.turn, 'step');
+    covers(['bench', 'objects'], object, bench.objects, true);
+    for (const [id, obj] of Object.entries(bench.objects)) {
+      part(['bench', 'objects', id, 'part'], obj.part);
+      for (const angle of turn?.values ?? []) if (!(String(angle) in obj.names)) issue(['bench', 'objects', id, 'names'], `no shape name for turn ${angle}°`);
+      for (const key of Object.keys(obj.names)) if (turn && !turn.values.includes(Number(key))) issue(['bench', 'objects', id, 'names', key], `turn ${key}° is not authored`);
+      if (a && b && turn) for (const angle of turn.values) {
+        const depth = shapeHalfDepth(obj.shape, angle);
+        for (const [key, gap] of [['torch', a], ['screen', b]] as const) if (gap.values.some((v) => v <= depth)) issue(['bench', 'gaps', key], `every gap must exceed ${depth.toFixed(3)} cm (${id} at ${angle}° half depth)`);
+        for (const torch of a.values) for (const screen of b.values) {
+          if (torch <= depth || screen <= depth) continue;
+          const shadow = benchShadow(bench, id, angle, torch, screen), [width, height] = bench.screen.size;
+          if (shadow.width > width + 1e-9 || shadow.height > height + 1e-9 || shadow.min[0] < -width / 2 || shadow.max[0] > width / 2 || shadow.min[1] < -height / 2 || shadow.max[1] > height / 2)
+            issue(['bench', 'screen', 'size'], `${id} at ${angle}°, gaps ${torch}/${screen} cm: ${shadow.width.toFixed(2)} × ${shadow.height.toFixed(2)} cm shadow exceeds the screen`);
+          const radius = (torch + screen) * Math.tan(bench.source.beam * Math.PI / 180), corner = Math.hypot(Math.max(Math.abs(shadow.min[0]), Math.abs(shadow.max[0])), Math.max(Math.abs(shadow.min[1]), Math.abs(shadow.max[1])));
+          if (corner > radius + 1e-9) issue(['bench', 'source', 'beam'], `${id} at ${angle}°, gaps ${torch}/${screen} cm: shadow is outside the light beam`);
+        }
+      }
+    }
+  }
+  if (light.sheets) {
+    const sheets = light.sheets, c = control(['sheets', 'control'], sheets.control, 'choice'); covers(['sheets', 'materials'], c, sheets.materials, true);
+    if (sheets.kinds.dark >= sheets.kinds.hardly) issue(['sheets', 'kinds'], 'dark must be below hardly');
+    for (const [id, m] of Object.entries(sheets.materials)) { part(['sheets', 'materials', id, 'part'], m.part); if (m.straight + m.scattered > 1 + 1e-12) issue(['sheets', 'materials', id], 'straight + scattered must be ≤ 1'); }
+  }
+  if (light.holes) {
+    const holes = light.holes; control(['holes', 'control'], holes.control, 'choice');
+    const c = controls.get(holes.control); if (c?.kind === 'choice' && (c.options.length !== 2 || !['in-line', 'moved'].every((id) => c.options.some((o) => o.id === id)))) issue(['holes', 'control'], 'hole alignment options must be in-line and moved');
+    if (new Set(holes.cards.map((c) => c.at)).size !== holes.cards.length) issue(['holes', 'cards'], 'card positions must be distinct');
+    if (holes.cards.filter((c) => c.moved !== undefined).length !== 1) issue(['holes', 'cards'], 'exactly one card has moved');
+    holes.cards.forEach((c, i) => { part(['holes', 'cards', i, 'part'], c.part); const gap = bench && controls.get(bench.gaps.torch); if (gap?.kind === 'step' && gap.values.some((v) => v + c.at <= 0)) issue(['holes', 'cards', i, 'at'], 'every card must be in front of the source at every torch gap'); });
+  }
+  if (light.seeing) { const seeing = light.seeing; control(['seeing', 'torch'], seeing.torch, 'toggle'); covers(['seeing', 'reflects'], control(['seeing', 'target'], seeing.target, 'choice'), seeing.reflects); }
+  if (light.sun) {
+    const sun = light.sun, date = control(['sun', 'date'], sun.date, 'choice'), time = control(['sun', 'time'], sun.time, 'step'); covers(['sun', 'dates'], date, sun.dates);
+    if (Math.abs(sun.north[1]) > 1e-9 || Math.abs(Math.hypot(...sun.north) - 1) > 1e-6) issue(['sun', 'north'], 'north must be a horizontal unit vector');
+    if (time?.values.some((v) => v < 0 || v > 24)) issue(['sun', 'time'], 'local hours must be in 0–24');
+    for (const [id, iso] of Object.entries(sun.dates)) {
+      const parsed = new Date(`${iso}T00:00:00Z`);
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(iso) || !Number.isFinite(parsed.getTime()) || parsed.toISOString().slice(0, 10) !== iso) { issue(['sun', 'dates', id], 'use a valid ISO date YYYY-MM-DD'); continue; }
+      for (const hour of time?.values ?? []) if (sunPosition(iso, hour, sun.lat, sun.lon, sun.zone).height < 5) issue(['sun', 'time'], `${iso} at ${hour} h: the Sun must be at least 5° above the horizon`);
+    }
+  }
   return out;
 }
 

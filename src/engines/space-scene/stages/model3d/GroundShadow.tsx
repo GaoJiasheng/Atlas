@@ -35,12 +35,14 @@ export function GroundShadow({
   radius,
   look,
   runtime,
+  shadows = 'auto',
 }: {
   /** Floor height assembled / fully exploded. */
   floor: [number, number];
   radius: number;
   look: StageLook;
   runtime: StageRuntime;
+  shadows?: 'auto' | 'contact' | 'none';
 }) {
   const group = useRef<Group>(null);
   const geometry = useMemo(() => new PlaneGeometry(1, 1), []);
@@ -83,7 +85,7 @@ export function GroundShadow({
     if (g.position.y !== y || g.position.x !== x || g.position.z !== z) g.position.set(x, y, z);
   });
   return (
-    <group ref={group} position={[0, floor[0], 0]}>
+    <group ref={group} position={[0, floor[0], 0]} visible={shadows !== 'none'}>
       <mesh
         geometry={geometry}
         material={blob}
@@ -96,6 +98,7 @@ export function GroundShadow({
       <mesh
         geometry={geometry}
         material={catcher}
+        visible={shadows === 'auto'}
         rotation={[-Math.PI / 2, 0, 0]}
         position={[0, 0.001, 0]}
         scale={[radius * 5, radius * 5, 1]}

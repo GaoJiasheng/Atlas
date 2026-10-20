@@ -69,7 +69,7 @@ import { skinnedRaycast } from './skinPick';
 import type { ShapePiece } from './geometry';
 import type { SimSettle } from '../../sim-schema';
 import { nearestTurn, SETTLE_EPS_LENGTH, stepSwing } from '../../lib/sim/settle';
-import { slotTint, type SimPlay, type SimStretch } from '../../lib/sim/bind';
+import { placeDirection, slotTint, type SimPlace, type SimPlay, type SimStretch } from '../../lib/sim/bind';
 import { channelValue } from '../../lib/sim/timeline';
 import { STRETCH_ATTRIBUTE, stretchPositions } from '../../lib/stretch';
 import { partPrimitives } from '../../lib/parts';
@@ -78,6 +78,7 @@ import type { BufferAttribute } from 'three';
 
 /** A try-it offset (scene units, eased or bouncing: `offsetSettle`) and turn about a unit axis through the part centre or `pivot` (eased or swinging: `settle`). */
 export interface SimMove {
+  place?: SimPlace | undefined;
   offset: Vec3;
   offsetSettle?: SimSettle | undefined;
   axis: Vec3;
@@ -179,6 +180,8 @@ export interface PartNodeProps {
   onHover(id: string | null): void;
 }
 
+const placeQuaternion = new Quaternion();
+const placeFacing = new Vector3();
 const noRaycast = () => {};
 const LONG_PRESS_MS = 400;
 /** X-RAY fade rate: ~0.3 s to settle (master-spec H). */
@@ -344,6 +347,10 @@ export function PartNode(props: PartNodeProps) {
     /** A bouncing offset's speed per axis (scene units per second). */
     moveV: [0, 0, 0] as Vec3,
     turn: 0,
+    placeFrom: [0, 1, 0] as Vec3,
+    placeNow: [0, 1, 0] as Vec3,
+    placeTarget: null as SimPlace | null,
+    placeStart: 0,
     /** A coil's stretch now (scene units) and its speed (a bounce); the stretch last written into the geometry. */
     stretch: 0,
     stretchV: 0,
@@ -692,6 +699,30 @@ export function PartNode(props: PartNodeProps) {
         aboutPivot(pr.matrix, tmpTurn.makeRotationAxis(tmpV.set(sm.axis[0], sm.axis[1], sm.axis[2]), m.turn * DEG2RAD), c);
       }
       pr.matrix.multiply(tmpPose);
+      const place = sm?.place;
+      if (place) {
+        if (m.placeTarget !== place) {
+          m.placeFrom[0] = m.placeNow[0];
+          m.placeFrom[1] = m.placeNow[1];
+          m.placeFrom[2] = m.placeNow[2];
+          m.placeStart = performance.now();
+          m.placeTarget = place;
+        }
+        const t = snap ? 1 : Math.min(1, (performance.now() - m.placeStart) / 500);
+        placeDirection(m.placeFrom, place.direction, smoothstep01(t), m.placeNow);
+        if (t < 1) moving = true;
+        // Absolute placement: the geometry is centred on shape.position inside this group.
+        tmpTurn.identity();
+        if (place.face === 'centre') {
+          placeQuaternion.setFromUnitVectors(tmpV.set(0, 1, 0), placeFacing.set(-m.placeNow[0], -m.placeNow[1], -m.placeNow[2]));
+          tmpTurn.makeRotationFromQuaternion(placeQuaternion);
+        }
+        pr.matrix.copy(tmpTurn).setPosition(
+          place.centre[0] + place.radius * m.placeNow[0] - shape.position[0],
+          place.centre[1] + place.radius * m.placeNow[1] - shape.position[1],
+          place.centre[2] + place.radius * m.placeNow[2] - shape.position[2],
+        );
+      }
       // Played timeline channels: moves along their axes, then turns about the pivot or where the part's centre now is.
       const play = props.play;
       if (play && play.length > 0) {

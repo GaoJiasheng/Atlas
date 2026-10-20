@@ -33,6 +33,7 @@ import type { PartDisplay } from '../../lib/visibility';
 import type { PartHandle } from './PartNode';
 import { keepAnimating, MAX_DT, useRuntime } from './runtime';
 import type { StageLook } from './look';
+import { ShadowCast } from './ShadowCast';
 
 /** Default arrow length at 100 % and lift above the parts (scene units). */
 export const ARROW_LENGTH = 0.04;
@@ -514,6 +515,7 @@ export function SimOverlays({
       )}
       {overlays.map((o, i) => {
         if (o.kind === 'energy-bars') return null;
+        if (o.kind === 'shadow-cast') return <ShadowCast key={i} overlay={o} index={i} sim={sim} values={resolved} outputs={outputs} handles={handles} displays={displays} layers={layers} exploded={exploded} look={look} snapKey={snapKey} bridge={bridge} />;
         if (o.kind === 'force-vectors')
           return (
             <ForceVectors

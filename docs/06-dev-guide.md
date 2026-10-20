@@ -767,6 +767,7 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
     "exploded":  { "camera": { ... } },     // 每个视图可选一个预设镜头
     "cutaway":   { "normal": [-1,0,0], "offset": 0 },   // 可选剖切面；默认切掉 x>0 一半
     "cover":     { "position": [2.6,1.6,3.4], "target": [0,0.3,0], "fov": 30 },   // 可选封面镜头（直接是镜头，不套 camera）：演示以外隐藏 HUD（H、hero-clean 截图）时用
+    "shadows": "auto",                       // auto（默认）：主光投影 + 地面；contact：只留柔和接触斑；none：都关
     "section":   { "plane": "xy" },         // 可选：PLATE 块立面与 REFERENCE 正视方向（xy 正面 / zy 侧面 / xz 俯视）
     "reference": { "camera": { ... } }      // 可选：自定 REFERENCE 镜头（默认按包围盒自动取长焦正视）
   },
@@ -1023,11 +1024,11 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
 
 ### SpaceScene · 试一试（sim）
 
-docs/22 §4.3（E-SIM 核心，磁铁与电路共用）+ docs/23 §4（电路模型与电路图卡）。一个 SpaceScene 主题可以在 `parts.json` 里加一段 `sim`：读者能改的几个量（控件）、一个纯函数模型、模型给出的量（输出），以及控件 / 输出到零件、流、动画的绑定。没有独立的 Simulation 引擎（docs/03 §C）。代码：`sim-schema.ts`（zod 与交叉校验）、`lib/sim/`（`controls.ts` 值的合成与 URL、`index.ts` 模型注册表、`circuit.ts`、`magnet.ts`、`force.ts`、`energy.ts`、`lifecycle.ts`、`bind.ts`、`trial.ts`、`diagram.ts`，全部纯函数、有单测 `tests/space-scene/sim.test.ts`）、`explorer/TryIt.tsx`（试一试卡片）、`hud/CircuitCard.tsx`（电路图卡）、`hud/sim.ts`（HUD 读写的入口）。
+docs/22 §4.3（E-SIM 核心，磁铁与电路共用）+ docs/23 §4（电路模型与电路图卡）。一个 SpaceScene 主题可以在 `parts.json` 里加一段 `sim`：读者能改的几个量（控件）、一个纯函数模型、模型给出的量（输出），以及控件 / 输出到零件、流、动画的绑定。没有独立的 Simulation 引擎（docs/03 §C）。代码：`sim-schema.ts`（zod 与交叉校验）、`lib/sim/`（`controls.ts` 值的合成与 URL、`index.ts` 模型注册表、`circuit.ts`、`magnet.ts`、`force.ts`、`energy.ts`、`lifecycle.ts`、`light.ts`、`sun.ts`、`bind.ts`、`trial.ts`、`diagram.ts`，全部纯函数、有单测 `tests/space-scene/sim.test.ts`）、`explorer/TryIt.tsx`（试一试卡片）、`hud/CircuitCard.tsx`（电路图卡）、`hud/sim.ts`（HUD 读写的入口）。
 
 ```jsonc
 "sim": {
-  "kind": "circuit",                                   // circuit | magnet | force | energy | life-cycle：lib/sim/<kind>.ts（life-cycle → lifecycle.ts）
+  "kind": "circuit",                                   // circuit | magnet | force | energy | life-cycle | light：lib/sim/<kind>.ts（life-cycle → lifecycle.ts）
   "controls": [                                        // ≤ 16，id 全主题的 sim 里唯一
     { "id": "main", "kind": "toggle", "default": true, "label": {en, zh} },
     { "id": "cells", "kind": "step", "values": [1, 2, 3], "default": 2, "label": {en, zh}, "unit"?: "cm" },
@@ -1054,11 +1055,12 @@ docs/22 §4.3（E-SIM 核心，磁铁与电路共用）+ docs/23 §4（电路模
 }
 ```
 
+- **时间格式**：单位为 `h` 的步进控件与数输出可写 `format: "time"`，值是当地小时（可带小数，0–24）。所有卡片、表、PLATE 与状态行复用 `rich-text.ts` 的 `{t:HH:MM}`：`8.00 am` / `上午 8.00`，读屏读时刻；图轴整点短写 `8 am` / `上午 8`，间隔仍读小时。URL 保留数值。
 - **控件**：`toggle`（开关）、`step`（有序的数，升序或降序，按写的顺序步进：间隙 6 → 3 → 1.5）、`choice`（选项 `{ id, label }`，id 不能是 `on` / `off` / 数字）。`choice.sets`：选这个选项同时设定别的控件（接法 → X / Y / Z）；读者手拨了被覆盖的控件时，选择移到 `sets` 正好成立的选项，否则移到第一个不带 `sets` 的选项（`free`，必须有一个），被覆盖的控件停在原处；`free` 本身一直是 `free`（`lib/sim/controls.ts setSimControl`，有单测）。默认值必须与默认选项的 `sets` 一致（validate 报）。
 - **值从哪里来**：store 字段 `sim` 只存"设过的值"（不累积：章 `state.sim.set`，拍 `sim.set` 叠在本章的上面，读者在卡片 / 键 / 电路图上改的）；显示的值 = 默认 ⊕ 各选择的 `sets` ⊕ 设过的值，无效值忽略（`resolveSimValues`）。换章回到那一章的 `set`；ESC 不清；URL `sim`（见「URL 参数」）；演示的保存 / 恢复带着它；拍的深链接 `b` 照常。
 - **模型**（`lib/sim/index.ts evaluateSim`，同步、< 1 ms，只在值变化时算）：`circuit` = 节点分析（docs/23 §4.2）：电池是诺顿等效（每节 `emf` 默认 1.5 V、`r` 每节内阻，`flip` 指定某节由开关翻转成 −EMF；`cells` 是数或步进控件），`switch`（合上 `closed` 默认 0.001 Ω，断开去掉），`wire`（`r`），`gap`（选择控件 → `materials` 的欧姆数，没列 = 绝缘、断开），`load`（固定 `load` 或选择控件；`present` 开关 = 装没装上；`loads` 的 `lamp`（`rated` W）/ `buzzer`（`on` A 以上响）/ `motor`（`at` V 时 `rpm` 的可视转速，∝ 电压））；每个连通块接地一个节点，高斯消元（部分主元），没有电池的块电流为 0。量名（输出的 `from`）：`current:<边>`、`volts:<边>`（电池 = 端电压）、`power:<边>`、`brightness:<边>`（灯功率 ÷ `reference.power` × 100）、`speed:<边>`、`sound:<边>`（`on` / `off`）、`status:<电池边>`（`open` < 1 mA、`short` > `short` A（默认 3）、`over-rating`：同一回路里有灯超过额定 × `over`（默认 1.5）、否则 `closed`）、`edges`（每条边的带号电流，from → to）。`magnet` = Gilbert 磁荷模型、场态、场线、铁屑、指南针、力箭头，见下面「SpaceScene · 试一试 · 磁铁」。validate 核对输出的 `from` 是这个模型的量、种类（数 / 状态 / 向量）对得上。
 - **输出种类**：`number`、`state`、`vector`、`timeline`（一段"跑一遍"的过程：见「时间线与回放」；只能被 `play`、带 `channel` 的 `stretch` 和力的箭头读，不进卡片的观察量、读数、glow 等）。
-- **绑定**（`lib/sim/bind.ts simEffects`，舞台叠在章节状态上）：零件 `visible`（条件：`true` = 真值 / 非零 / 不是第一个状态；或 `{ eq | ne | in | gte | lte }`）、`pose`（值 → `poses` 里的姿态，只动这些零件，压在章 / 拍的姿态之上；几条绑定动同一零件时非静止的那条胜出）、`glow`（值 ÷ `full`，`sqrt` 或 `linear`，0–2：从暗红渐到 `color`，过 1 更白；只点亮零件自己的材质，即槽 0：灯丝不带支撑丝和铜座）、`tint`（值 ÷ `full`，0–1，`linear` 或 `sqrt`：向 `color` 混色，强度上限同 signal 高亮；铁芯通电变磁铁；同 `glow` 只染零件自己的材质，即槽 0，其余槽照常跟章 / 拍的 `highlight`，`lib/sim/bind.ts slotTint`）、`count`（`repeat` 零件只显示前 k 份：`true` = k 取值本身，或 `{ per, minus }` = (值 − minus) ÷ per 取整、≥ 0：50 g 挂钩上的 50 g 槽码写 `{ per: 50, minus: 50 }`，两只 200 g 砝码写 `{ per: 200 }`（docs/30 F8；`per` 原先是乘数，没有主题用过）；该零件不能有 `extra`）、`offset` / `rotate`（(值 − origin) × per（rotate 的 per 默认 1），在姿态之后沿场景轴移 / 绕（姿态后的）零件中心或 `pivot` 场景点转，0.5 s 缓动；`settle: { period, damping }` = 阻尼摆动（rotate：转角走近路；offset：挂在弹簧下的挂钩跟着弹簧回弹几下停住，docs/30 F4）、`stretch`（弹簧伸缩）、`play`（播放时间线通道）——这两项见下面「弹簧伸缩」「时间线与回放」、`at`（命名位置环）、`state`（铁屑排哪个场态）——后三者见磁铁一节；流 `visible`、`state`（场线流）、`intensity`（向量输出按 `paths` 的 id：每条路径的粒子速度 ∝ |值| ÷ `full`（夹在 ±2），负值反向，< 1 % 的路径 0.3 s 淡出；相位逐帧积分，变速不跳；`mode: "density"` = 速度不变、**可见粒子的比例** = |值| ÷ `full`（≤ 1，0.3 s 缓动；粒子按路径上均匀散开的次序出现，不扎堆），能量主题用它表示"这一份多 / 少"；向量的键写成 `<流 id>:<路径 id>` 时，每条流只取以自己 id 开头的那些）、`stops`（状态 → 粒子色，如短路 `token:hot`）；动画 `rpm`（rotate 的转速 = 值 × per，角度积分）、`enabled`（条件不成立时 0.15 s 缓停）。运转（RUN / FLOW）只管"动起来"：灯亮不亮、零件在哪儿不受它影响。
+- **绑定**（`lib/sim/bind.ts simEffects`，舞台叠在章节状态上）：零件 `visible`（条件：`true` = 真值 / 非零 / 不是第一个状态；或 `{ eq | ne | in | gte | lte }`）、`pose`（值 → `poses` 里的姿态，只动这些零件，压在章 / 拍的姿态之上；几条绑定动同一零件时非静止的那条胜出）、`glow`（值 ÷ `full`，`sqrt` 或 `linear`，0–2：从暗红渐到 `color`，过 1 更白；只点亮零件自己的材质，即槽 0：灯丝不带支撑丝和铜座）、`tint`（值 ÷ `full`，0–1，`linear` 或 `sqrt`：向 `color` 混色，强度上限同 signal 高亮；铁芯通电变磁铁；同 `glow` 只染零件自己的材质，即槽 0，其余槽照常跟章 / 拍的 `highlight`，`lib/sim/bind.ts slotTint`）、`count`（`repeat` 零件只显示前 k 份：`true` = k 取值本身，或 `{ per, minus }` = (值 − minus) ÷ per 取整、≥ 0：50 g 挂钩上的 50 g 槽码写 `{ per: 50, minus: 50 }`，两只 200 g 砝码写 `{ per: 200 }`（docs/30 F8；`per` 原先是乘数，没有主题用过）；该零件不能有 `extra`）、`offset` / `rotate`（(值 − origin) × per（rotate 的 per 默认 1），在姿态之后沿场景轴移 / 绕（姿态后的）零件中心或 `pivot` 场景点转，0.5 s 缓动；`settle: { period, damping }` = 阻尼摆动（rotate：转角走近路；offset：挂在弹簧下的挂钩跟着弹簧回弹几下停住，docs/30 F4）、`place`（三维向量输出 `{ x, y, z }` → `centre + radius × 单位向量`；`{ centre: [x,y,z], radius, face?: "centre" }`，沿球面 0.5 s 缓动、深链接直接终值；`face: "centre"` 使局部 +Y 朝向 centre）、`stretch`（弹簧伸缩）、`play`（播放时间线通道）——这两项见下面「弹簧伸缩」「时间线与回放」、`at`（命名位置环）、`state`（铁屑排哪个场态）——后三者见磁铁一节；流 `visible`、`state`（场线流）、`intensity`（向量输出按 `paths` 的 id：每条路径的粒子速度 ∝ |值| ÷ `full`（夹在 ±2），负值反向，< 1 % 的路径 0.3 s 淡出；相位逐帧积分，变速不跳；`mode: "density"` = 速度不变、**可见粒子的比例** = |值| ÷ `full`（≤ 1，0.3 s 缓动；粒子按路径上均匀散开的次序出现，不扎堆），能量主题用它表示"这一份多 / 少"；向量的键写成 `<流 id>:<路径 id>` 时，每条流只取以自己 id 开头的那些）、`stops`（状态 → 粒子色，如短路 `token:hot`）；动画 `rpm`（rotate 的转速 = 值 × per，角度积分）、`enabled`（条件不成立时 0.15 s 缓停）。运转（RUN / FLOW）只管"动起来"：灯亮不亮、零件在哪儿不受它影响。
 - **多路径流**（`flows[].paths: [{ id, path }]`，≤ 16 条，代替 `path`）：一条流、一次绘制；粒子按路径长度分配（每条 ≥ 4），每条路径一行浮点纹理，shader 里每条路径一个相位 / 透明度 / 闭合标志（`flowMaterial.ts`）。电路主题每条边一条路径（与导线 sweep 同源，生成脚本写出两者）。不能 `bilateral`。
 - **读数**：`telemetry` 行写 `follow: "<数输出>"`（不写 `idle` / `run`）：跟随输出值、0.3 s 一阶滞后（`lag` 可改）、小数位取输出的；`follow` 写 2–3 个同单位的数输出 = 一行两值（`FALL TIME · L · R 0.45 · 0.45 s`）；`scope: "observe"` = 只显示本章卡片观察的那几个，本章一个都不观察时显示 `—`（一行"重量"在落体章读 `weight`、弹簧章读 `load-weight`，docs/30 F6）；本章 `try.observe` 里的输出在 PLATE 块加粗；块尾一行 `SIM <状态> · <本章试一试控件的值>`：状态 = 本章卡片观察的状态输出，否则先猜后看观察的，否则第一个会随卡片控件或本章 `set` 的控件变的；都没有时电路、磁铁照旧写模型的第一个状态，力的模型（几套互不相干的实验，`SEPARATE_EXPERIMENTS`）不写状态；短路 / 超额定用 hot 色。
 - **章节**：
@@ -1336,6 +1338,44 @@ docs/31 §4（E-EN1–EN8）。`sim.kind: "energy"`：同一个场景里跟着�
 - **token**（docs/08 §1）：`--en-light` 芥黄（纸底上最亮的一档）、`--en-electrical` 蓝、`--en-kinetic` 青绿、`--en-sound` 紫、`--en-heat` 橙红、`--en-potential` 橄榄褐；paper / cinema 各一套。单测 `energy-colors.test.ts` 从 `tokens.css` 读出来校验：每色对底色 ≥ 3:1；正常视觉与红色盲、绿色盲、蓝色盲模拟（Machado 2009，严重度 1，线性 RGB）下两两 ΔE*ab ≥ 10。
 - **测试与 QA**：`__atlas.engine.energyBars()` → `{ <时间线 id>: { potential, kinetic, lost, shown } }`（此刻画着的值）；`pnpm shoot --beats` 每拍检查画着的能量条加起来 = 100 ± 0.5（不等记为拍失败）；其余同「时间线与回放」（`simSeek`、`G`）。
 - **数字纪律**（docs/31 §0-10 与 2026-10-18 事实审计 `art/codex-forces-energy/energy-facts.md`）：链上的百分数、示意的子模型参数都是 SIM / 示意，卡片与试一试卡都写"在这个模型里"。审计改过的几处已体现在样板里：发电机上限取 imax = √(3 W ÷ 12 Ω) = 0.5 A（SIM-G-limit：原来的 0.55 A 会趋向 3.63 W）；同样亮的 LED 链从 25 % 起（`start`，SIM-H-same-light）；秋千的势能条按原始能量归一（SIM-D-bars）；发条的动能从发条里来、停下时为 0（SIM-E-bars）；落球高度量球底（ENG-MODEL-02）。
+
+### SpaceScene · 试一试 · 光（light）
+
+docs/35 §4，`sim.kind: "light"`。纯函数 `lib/sim/light.ts`（几何、散射、孔卡、暗箱）与 `sun.ts`（NOAA / Meeus，含折射）；注册走 `SIM_KINDS` → `simQuantities` → `quantityKind`，不提供 timeline 通道，`SEPARATE_EXPERIMENTS.light = true`。它描述静态控制值下的光路；移动用已有的 `offset` / `rotate` 和新的 `place` 缓动，记录、图、预测、拍、背景章、深链接照共用 sim 契约。完整作者模板：`tests/space-scene/fixtures/light-bench.ts`；草稿夹具 `sample-light`（背景章 + 距离、形状、材料、太阳四张卡）。
+
+`light` 的五个可选子模型（只引用写了的子模型的量）：
+
+| 子模型 | 数据 | 输出量 `from` |
+|---|---|---|
+| `bench` | `source: { part, point, axis, beam }`、`power` 开关、`gaps: { torch, screen }` cm 步进、`holder` 场景点、`screen: { part, size: [宽,高] }` cm、`object` 选择、`turn` 角度步进、`objects` 映射 | `shadow:height` / `width`（cm）、`shadow:shape`（状态）；`control:<控件>`（数或开关 1/0） |
+| `sheets` | 需要 bench；`control` 选择、`size` cm、`kinds: { hardly, dark }` 百分数阈值、`materials: { id: { part, straight, scattered } }` | `sheet:light`（%）、`sheet:dark`（0–1）、`sheet:kind`（none / hardly / lighter / dark） |
+| `holes` | 需要 bench；`control`（in-line / moved）、`hole` 直径 cm、至少三张 `cards: [{ part, at, moved? }]`（at / moved 为 cm，恰一张可移动） | `holes:dot`（yes / no） |
+| `seeing` | `torch` 开关、`target` 选择、`reflects: { 选项: 状态 }` | `seeing:eye`（none 或 reflects 的状态）、`seeing:dark`（关灯 1） |
+| `sun` | `lat`、`lon`、`zone`、`time` 小时步进、`date` 选择、`dates: { 选项: ISO日期 }`、`pole` m、`north` 水平单位向量 | `sun:height` / `bearing`（°）、`length`（m）、`points`（八方位状态）、`noon`（h）、`noon-length`（m）、`at`（xyz 单位向量） |
+
+`objects` 的每件是 `{ part, shape, names: { 角度: 状态名 } }`，中心 = holder：`disc { d, thick }`、`polygon { points: [[横,高],…], thick }` 在 yz 平面；`cylinder / cone { d, length, axis: "z", apex?: "+" | "-" }`；`sphere { d }`，尺寸全部 cm。模型按解析表面投影采样，球按切线锥；厚卡近表面会比零厚相似三角形略大。无物体或关灯时高宽 NaN（`—`），形状 none。材料光量 = `100 × (straight + scattered × r²/(r²+b²) × ((a+b)/a)²)`，`r² = 宽×高/π`，上限 100；这是明确标为 SIM 的朗伯散射模型。材质自身的 glass / enamel 画法与这个读数分开。
+
+校验严格覆盖控件种类、选择键、零件引用（模型物体不得 context）、状态标签、透光率与阈值、形状名、日期、north、全部日期×时间高度 ≥ 5°、全部物体×角度×距离不碰光源/屏幕且投影完全落在屏幕与光束内。**docs/35 原始全距离范围与 60×45 cm 屏幕不兼容**：12 cm 卡在 10/60 cm 时影高约 84 cm，数据会被拒绝。夹具采用安全距离子集；内容作者应缩窄控件范围、拆实验或扩大实际屏幕，同时保持模型和网格尺寸一致。
+
+### SpaceScene · 影子投射（shadow-cast）
+
+`sim.overlays` 的一支（`SimOverlays.tsx` → `ShadowCast.tsx`，纯数学 `lib/sim/shadow.ts`），从挡光物的**实际网格，含 extra** 投到接收面；不用阴影贴图。光学主题写 `views.shadows: "contact"`，避免主光再投一条不同方向的影子。
+
+```jsonc
+{ "kind": "shadow-cast",
+  "source": { "part": "torch", "point": [0,1,0.05], "axis": [1,0,0], "beam": 40,
+              "when": { "control": "torch-on" } },
+  "receiver": { "part": "screen-board", "normal": [-1,0,0], "size": [0.60,0.45] },
+  "casters": [{ "part": "card-circle" }, { "part": "frosted-glass", "dark": { "output": "sheet-dark" } }],
+  "spot": { "color": "token:en-light" },
+  "rays": { "group": "rays", "edges": "vertical", "through": "dark", "extra": [[0,0]] } }
+// 平行光：source = { direction: { output: "sun-at" } }；receiver = { part: "courtyard", normal: [0,1,0], radius: 5.5 }；
+// trail = { control: "time" }；rays = { group: "rays", edges: "tip", parallel: [-0.4,0.4] }
+```
+
+`source.point` 是零偏移时的世界坐标，跟零件当前矩阵走；receiver 的 normal 是局部法线，size / radius 是场景单位。投影矩阵 `M = (n·L)I − L nᵀ`（点光 w=1、平行光 w=0），影子平涂成接收面混 ink 的不透明颜色，三角形重叠和孔卡多张叠加不会重复加深。矩形 / 圆接收面与光束裁剪独立于 CUTAWAY。零件隐藏、图层关时不投；关灯 0.3 s 淡出，拆开整层淡出，REFERENCE 保留。光线归 rays.group，RUN 流动、减少动态静止；extra 的接收面坐标是 cm，遇不透光网格即停，through dark 允许透光片后继续。trail 按时间步进值留下 Ø4 cm 粉笔点，当前点空心，换日期重算。
+
+QA：`__atlas.engine.shadows()` 返回 `{ [叠加序号]: { casters: { [part]: { min: [u,v], max: [u,v] } }, spot?: { radius }, trail: [[u,v],…], rays } }`，接收面坐标与半径为 cm。用 max−min 对模型 `shadow-height / width`，误差必须 <0.2 cm；太阳 trail 与杆顶平行投影相同。状态不变时不更新几何或要求帧。每挡光物一次绘制，光斑、全部光线、全部粉笔点各一次；台面 ≤45 calls，户外 ≤20，<0.25 M 三角形。测试 `light.test.ts`、`sun.test.ts`、`shadow.test.ts`、`light-display.test.ts` 与 `tests-e2e/sample-light.spec.ts`。
 
 ### SpaceScene · 试一试 · 生活史（life-cycle）
 

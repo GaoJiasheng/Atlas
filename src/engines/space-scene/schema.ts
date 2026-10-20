@@ -895,6 +895,8 @@ export const MAX_CUTS = 4;
 export const viewsSchema = z
   .object({
     assembled: viewPreset.optional(),
+    /** Main-light shadows, contact shadow only, or neither. */
+    shadows: z.enum(['auto', 'contact', 'none']).optional(),
     xray: viewPreset.optional(),
     exploded: viewPreset.optional(),
     isolate: viewPreset.optional(),
