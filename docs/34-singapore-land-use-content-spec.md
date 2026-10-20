@@ -459,4 +459,12 @@ id 查重：实体（`housing`、`countryside`、`agriculture`、`industry`、`g
 
 ## 9. 实现记录与已知差距
 
-（施工后填写。）
+### 9.1 引擎（2026-10-20，`codex/timescene-dated-layers`）
+
+- **E1 已实现**：`topic.yaml.datedLayers` 的点 / 线 / 面，单文件单同名 TopoJSON 对象，数字 `f` / `u` 的 `[f, u)` 日期；复用 `lib/dated.ts`。每层一个静态 GPU source，日期索引二分求数，开始 / 结束边界分别缓存，等量替换也刷新、没有边界时不 `setFilter`。过去一年新增点大一号、signal 描边；近似面淡底 ×.7、边虚线。配色复用 holder / token，paper / cinema 均可；图例及 LAYERS 独立开关，章节和拍可引用；计数进左列可折叠 PLATE，关闭显示 0。
+- **E2 已支持并补测**：GeoJSON 空 FeatureCollection、TopoJSON 空 GeometryCollection 都有效；控制区名称、图例、面积、REFERENCE 可处理空帧，`K2→K3` 等状态序号不变。本轮只补空帧图例的显隐与测试，没有另造控制区格式。
+- **E3 已实现**：中性 `milestone`（Milestone / 里程碑），墨色点和环，独立图例及详情名称，无须 sides / result。
+- **E4 / E5 本轮未做**：不按楼层改变点大小，不新增作者自定义时序读数。`h` 仅保留为数值楼层元数据；不影响 E1–E3，也不影响正文 / 细看写数字。
+- **fixture**：`sample-dated-layers` 为 draft，仅合成占位数据。3 个正式章 + 背景、10 拍（含背景）、3 个 GPU 图层、2 个中性里程碑、1959 → 1966 空帧 → 2019 的控制区。11,000 个源点在 2019 同时显示 10,000 个；1980 年拆 1,000 / 建 1,000 验证同数量换集合。每个点都测试在真实新加坡本岛陆地内、避开水面孔洞；原有海岸文件未改。生成命令、形状和计数见 fixture `data/README.md` / `SOURCES.md`。
+- **作者契约**：docs/06「按年份出现的图层」给出 YAML、属性、关闭 / 缺载读数、几何计数语义与校验规则。文件 / 对象 / 几何 / 日期 / holder / token、图层命名与章节 / 拍引用均构建期校验。
+- **性能实测**：Apple M5 Max，Chromium ANGLE Metal（非 SwiftShader），1920×1080 drawing buffer，DPR 1。连续拖动中每套主题各取 300 个 rAF 帧，10,000 个活跃点 + 5,000 个新增描边：paper **59.84 fps**、cinema **60.17 fps**；同一窗口 `stats().fps = 60`。有 HUD 时（1520×1023 画布、1920×1080 视口）分别 59.86 / 60.05 fps。测试机测量，不代表所有设备；源与过滤器调用数的单测另有覆盖。

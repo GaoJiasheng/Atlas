@@ -415,6 +415,7 @@ pnpm shoot sample-time --shots mine.json hero    # 自定义截图表（{name: {
 ```
 
 - `--locale en|zh|all`、`--theme paper|cinema|all`（也接受逗号列表），默认 `en` + `paper`；`shots/` 已 gitignore。主题用 `__atlas.setTheme()` 切换。`--gpu` 改用真 GPU（macOS 走 Metal），默认软件 GL（SwiftShader，与 e2e 相同），fps 数字只在 `--gpu` 下有意义。
+- GPU 工作站可用 `ATLAS_E2E_GPU=1 CI=1 pnpm e2e` 跑同一套浏览器测试（macOS 使用 Metal）；没有该变量时仍用默认 SwiftShader。此开关不减少用例或放宽断言。
 - 默认截图：每章一张；首章上每个注册模式各一张（`presentation` 除外；默认开着的模式截"关"，文件名 `mode-<id>-off`）；非章节预设（`orbit` / `reference` / `world` / `theatre` / `presets.json` 里的）各一张；`hero-clean`（HUD 关；SpaceScene 这时是封面镜头，等 0.8 s 的飞行做完）。截图表里 `preset` 和 `modes` 同时写也落在预设镜头上（不用 `js` 延时）。每次截图前把模式、HUD、暂停恢复到加载时的状态（阅读面板、卡片、泳道这些宿主 / 引擎 UI 状态不复位，自定截图表里的 `js` 要自己摆好）。
 - `--keys`：对 `keymap()` 逐项按键：预设（`state().preset` + `[data-preset]` 的 `aria-pressed`）、模式（状态翻转 + `[data-mode]` 的 `aria-pressed`，再按一次恢复；按钮在控制面板里，面板收起也照样在 DOM 里；按钮被禁用则跳过）、SPACE、H（HUD 隐藏且"H 显示界面"可见）、ESC（HUD 隐藏后恢复）、← →、`,` / `.`（注册了 `beatStep` 的引擎：当前拍在拍表里前后移一格、不进演示、对应刻度 `data-filled`）；最后拖动舞台应变 FREE CAMERA（没有预设亮着），再按预设应收回。
 - `--layout`：3840×2160 / 2560×1440 / 1920×1080 / 1600×900 / 1280×720 / **1024×768** / 900×1200 / 390×844 × 每章 × 额外预设，用 `tests-e2e/hud-layout.ts` 的 `hudLayoutIssues()`（与 `pnpm e2e` 共用同一份逻辑）查 `[data-hud-panel]` 出屏 / 重叠（1 px 容差）/ 横向溢出 / 内容比面板宽，并存 `layout-WxH.png`；舞台带 `data-stage-free="w h"`（MathScene：模型的空间）时另查"舞台被挤"（宽 < 200 px（手机 150）或高 < 100 px）。每个尺寸再全页加载，**从链接打开**每一章（`?ch=<章>&b=2&theme=…`：分享出去的节拍链接，HUD 和阅读面板在加载时排版，不是换章后），同样查一遍，存 `layout-WxH-linked.png`（没有节拍的引擎忽略 `b`）。
@@ -558,7 +559,7 @@ datedLayers:
 ```
 
 - 文件必须是 **TopoJSON，且只有一个与 `file` 同名的对象**。`point` 对应 Point / MultiPoint，`line` 对应 LineString / MultiLineString，`area` 对应 Polygon / MultiPolygon。每个几何的 `properties` 至少 `{ f: 1960 }`；可选 `u: 1980`、`certainty: approximate`（缺省 `certain`）、`h: 12`（楼层元数据，本轮不按高度改点大小）。`f` / `u` 是**有限的十进制年数字**，预先转换 ISO 日期；`f < u`，无 `u` 表示一直保留。语义复用 `lib/dated.ts` 的 `[from, to)`：开始年出现、结束年消失。数组宜按 `f` 排序；引擎载入时只把日期索引排序一次，几何顺序不影响结果。
-- 章节及拍的 `layers` 直接写图层 `id`，比如 `[base, control, housing-blocks, dated-rail, battles]`；没列出即关闭。控制面板 LAYERS 每层一行，开关和章节共用 store（URL 状态同其它图层）。KEY 每个开启图层一行；点图层另有“过去一年新增”图例。
+- 章节及拍的 `layers` 直接写图层 `id`，比如 `[base, control, housing-blocks, dated-rail, battles]`；没列出即关闭。图层文件的年份不另行扩展时间轴范围，章节 / 拍或控制区关键帧应覆盖要展示的年代。控制面板 LAYERS 每层一行，开关和章节共用 store（URL 状态同其它图层）。KEY 每个开启图层一行；点图层另有“过去一年新增”图例。
 - 每层一个 GeoJSON source，载入后只 `setData` 一次。MapLibre GPU 过滤数字属性：`f <= T && (u ?? +∞) > T`；点半径随缩放为 1.2–3 px。过去一年新增点（`T-1 < f <= T`，且尚未消失）大一号、signal 色描边。线为 hairline；面淡底 .35、同色 .6 px 边，近似面淡底再 ×.7、边虚线。放在控制区之上、事件之下；颜色随 paper / cinema token 更新。
 - `lib/datedLayers.ts` 对开始、结束和新增窗口的结束边界各建有序索引，二分求当前计数。只在**可见集合变化**时重设过滤器（不是只比较计数：同年拆一栋又建一栋也要更新）；播放头在两次边界之间缓动不会逐帧 `setFilter`。新增窗口同样单独缓存。
 - `count: true` 的当前可见要素数出现在左列可收起的 PLATE 块，关闭图层读数为 0，尚未载入为 `—`；手机随 PLATE 隐藏。MultiPoint 按一个要素计数，要按楼栋计数请每栋写一个 Point。`stats().datedLayers[id]` 给出 `total / visible / recent / filterUpdates`，用于性能与边界回归检查；关闭时 `visible` 为 0。

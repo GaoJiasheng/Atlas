@@ -35,6 +35,11 @@ for (const locale of ['en', 'zh']) {
     const plate = page.locator('[data-hud-panel="plate"]');
     await expect(plate).toContainText('10,000');
     const toggle = page.locator('[data-layer="sample-blocks"]');
+    for (const target of [toggle, page.locator('[data-layer="sample-rail"]'), page.locator('[data-layer="sample-gardens"]'), plate.locator('button')]) {
+      const box = await target.boundingBox();
+      expect(box?.height).toBeGreaterThanOrEqual(44);
+      expect(box?.width).toBeGreaterThanOrEqual(44);
+    }
     for (const theme of ['paper', 'cinema'] as const) {
       await page.evaluate((value) => window.__atlas!.setTheme(value), theme);
       await expect(page.locator('html')).toHaveAttribute('data-theme', theme);

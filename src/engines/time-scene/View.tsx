@@ -445,7 +445,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       { kind: 'layer', id: 'battles', label: t('time.layer.battles') },
       { kind: 'layer', id: 'participation', label: t('time.layer.participation') },
       ...(model.sites.length > 0 ? [{ kind: 'layer' as const, id: 'sites', label: t('time.layer.sites') }] : []),
-      ...(topic.datedLayers ?? []).map((layer) => ({ kind: 'layer' as const, id: layer.id, label: layer.label, color: layer.color ?? entityCssColor(geo.entities.find((e) => e.id === layer.holder)) })),
+      ...(topic.datedLayers ?? []).map((layer) => ({ kind: 'layer' as const, id: layer.id, label: layer.label, color: layer.color ?? entityCssColor(geo.entities.find((e) => e.id === layer.holder)), minTarget: 44 as const })),
       { kind: 'mode', id: 'labels', label: t('time.layer.labels') },
     ],
     [model, locale, region, topic.datedLayers, geo.entities], // `t` is bound to `locale`

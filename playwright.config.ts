@@ -16,6 +16,8 @@ import { defineConfig, devices } from '@playwright/test';
 const ROOT = realpathSync(fileURLToPath(new URL('.', import.meta.url)));
 const PORT = Number(process.env.ATLAS_E2E_PORT) || 4400 + (createHash('sha1').update(ROOT).digest().readUInt32BE(0) % 1000);
 const REUSE = process.env.ATLAS_E2E_REUSE === '1' && !process.env.CI;
+/** Opt in on a GPU-equipped workstation; CI without this flag keeps software WebGL. */
+const GPU = process.env.ATLAS_E2E_GPU === '1';
 
 export default defineConfig({
   testDir: './tests-e2e',
@@ -35,8 +37,9 @@ export default defineConfig({
       use: {
         ...devices['Desktop Chrome'],
         viewport: { width: 1280, height: 800 },
-        // Headless GPUs are absent: software WebGL (SwiftShader) keeps MapLibre and three.js working.
-        launchOptions: { args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] },
+        launchOptions: { args: GPU
+          ? ['--enable-gpu', '--ignore-gpu-blocklist', ...(process.platform === 'darwin' ? ['--use-angle=metal'] : [])]
+          : ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] },
       },
     },
   ],
