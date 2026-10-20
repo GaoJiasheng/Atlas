@@ -10,14 +10,11 @@ import type { Scale } from '../../lib/instrument';
 import type { Rect } from '../layout';
 import { straightTrack, type Track } from './geometry';
 import { CountArcs, Marks } from './Scale';
-import { partsBetween } from '../../lib/instrument';
+import { magnifiedCounts, magnifierRing } from './magnifier-geometry';
 
-export function Magnifier({ s, sc, track, stretch, pointer, mag, counted }: { s: InstrumentSpec; sc: Scale; track: Track; stretch: { from: number; to: number }; pointer: number | null; mag: Rect; counted?: boolean }) {
-  const a = track.at(stretch.from);
-  const b = track.at(stretch.to);
-  const cx = (a.x + b.x) / 2;
-  const cy = (a.y + b.y) / 2;
-  const ring = Math.max(18, Math.hypot(b.x - a.x, b.y - a.y) / 2 + 12);
+export function Magnifier({ s, sc, track, stretch, pointer, mag, counted }: { s: InstrumentSpec; sc: Scale; track: Track; stretch: { from: number; to: number }; pointer: number | null; mag: Rect; counted?: number[] }) {
+  const { x: cx, y: cy, r: ring } = magnifierRing(s, sc, track, stretch);
+  const counts = magnifiedCounts(sc, stretch, counted);
   // The stretch alone, straight, as a scale of its own: the same small part, now wide.
   const sub: Scale = { ...sc, from: stretch.from, to: stretch.to, parts: Math.round((stretch.to - stretch.from) / sc.minor) };
   const spec: InstrumentSpec = { ...s, skip: undefined, highlight: undefined, labels: 'ends' };
@@ -38,7 +35,7 @@ export function Magnifier({ s, sc, track, stretch, pointer, mag, counted }: { s:
       <rect className="ms-inst__lens" x={mag.x} y={mag.y} width={mag.w} height={mag.h} />
       <line className="ms-inst__axis" x1={mag.x + pad} x2={mag.x + mag.w - pad} y1={mag.y + mag.h * 0.5} y2={mag.y + mag.h * 0.5} />
       <Marks s={spec} sc={sub} track={inner} only={[stretch.from, stretch.to]} />
-      {counted && <CountArcs sc={sub} track={inner} parts={partsBetween(sub, stretch.from, stretch.to)} />}
+      <CountArcs sc={sub} track={inner} parts={counts.parts} numbers={counts.numbers} />
       {inside && <path className="ms-inst__arrow" d={`M${inner.at(pointer!).x} ${mag.y + mag.h * 0.5 - 4}l-8 -15h16Z`} />}
     </g>
   );

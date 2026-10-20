@@ -2156,6 +2156,10 @@
             "zoom": {
               "from": 120,
               "to": 130
+            },
+            "count": {
+              "from": 120,
+              "to": 128
             }
           },
           "equation": "120 + 4 × 2 = {u:128 cm}",
@@ -4963,6 +4967,10 @@
             "minor": 20,
             "value": 0,
             "count": {
+              "from": 200,
+              "to": 300
+            },
+            "zoom": {
               "from": 200,
               "to": 300
             }
@@ -7995,8 +8003,8 @@
                 "value": 900,
                 "load": "rice",
                 "label": {
-                  "en": "Bag A",
-                  "zh": "A 袋"
+                  "en": "Bag A · {u:900 g}",
+                  "zh": "A 袋 · {u:900 g}"
                 }
               },
               {
@@ -8010,8 +8018,8 @@
                 "load": "rice",
                 "tone": "hot",
                 "label": {
-                  "en": "Bag B",
-                  "zh": "B 袋"
+                  "en": "Bag B · {u:1 kg}",
+                  "zh": "B 袋 · {u:1 kg}"
                 }
               }
             ]
@@ -8041,8 +8049,8 @@
                   "to": 85
                 },
                 "label": {
-                  "en": "String A",
-                  "zh": "绳子 A"
+                  "en": "String A · {u:85 cm}",
+                  "zh": "绳子 A · {u:85 cm}"
                 }
               },
               {
@@ -8059,8 +8067,8 @@
                   "to": 100
                 },
                 "label": {
-                  "en": "String B",
-                  "zh": "绳子 B"
+                  "en": "String B · {u:1 m}",
+                  "zh": "绳子 B · {u:1 m}"
                 }
               },
               {
@@ -8077,8 +8085,8 @@
                   "to": 120
                 },
                 "label": {
-                  "en": "String C",
-                  "zh": "绳子 C"
+                  "en": "String C · {u:120 cm}",
+                  "zh": "绳子 C · {u:120 cm}"
                 }
               }
             ]
@@ -10278,7 +10286,7 @@
             "pair": [
               {
                 "type": "tape",
-                "look": "tape",
+                "look": "height-chart",
                 "unit": "cm",
                 "sub": {
                   "unit": "m"
@@ -10287,15 +10295,16 @@
                 "to": 200,
                 "major": 10,
                 "minor": 5,
-                "arrow": 105,
                 "label": {
                   "en": "A",
                   "zh": "A"
-                }
+                },
+                "orient": "vertical",
+                "head": 105
               },
               {
                 "type": "tape",
-                "look": "tape",
+                "look": "height-chart",
                 "unit": "cm",
                 "sub": {
                   "unit": "m"
@@ -10304,12 +10313,13 @@
                 "to": 200,
                 "major": 10,
                 "minor": 5,
-                "arrow": 150,
                 "tone": "hot",
                 "label": {
                   "en": "B",
                   "zh": "B"
-                }
+                },
+                "orient": "vertical",
+                "head": 150
               }
             ]
           },
@@ -12414,6 +12424,10 @@
             "count": {
               "from": 1,
               "to": "1.4"
+            },
+            "zoom": {
+              "from": 1,
+              "to": 2
             }
           },
           "equation": "{u:1.4 kg} = {u:1 kg 400 g} = {u:1400 g}",

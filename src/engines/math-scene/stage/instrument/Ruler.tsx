@@ -9,7 +9,7 @@
  * of the small unit's totals along the other edge (`dual`), brackets, break
  * lines over a skipped stretch. The child's line end or arrow is a slider.
  */
-import { useId, type ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import type { Locale } from '../../../core/types';
 import type { InstrumentSpec } from '../../schema';
 import type { Scale } from '../../lib/instrument';
@@ -50,6 +50,15 @@ export function dualTrack(s: InstrumentSpec, sc: Scale, f: StraightFrame): Track
   return straightTrack(s, sc, { x: p0.x, y: f.body.y + f.body.h }, { x: 1, y: 0 }, len, { x: 0, y: -1 }, f.track.marks.major * 0.8);
 }
 
+/** Count on a vertical chart's free edge, clear of its person and both number columns. */
+export function countingTrack(f: StraightFrame): Track {
+  if (!f.vertical) return f.track;
+  return {
+    ...f.track,
+    at: (v) => ({ ...f.track.at(v), x: f.body.x + f.body.w + 2, nx: -1, ny: 0 }),
+  };
+}
+
 function Body({ s, f }: { s: InstrumentSpec; f: StraightFrame }) {
   const { x, y, w, h } = f.body;
   const look = s.look ?? (s.type === 'ruler' ? 'ruler' : 'tape');
@@ -80,7 +89,6 @@ function Body({ s, f }: { s: InstrumentSpec; f: StraightFrame }) {
 
 export function StraightInstrument(p: StraightProps) {
   const { s, sc, f } = p;
-  const clip = `ms-person${useId().replace(/[^a-z0-9]/gi, '')}`;
   const T = f.track;
   const at = (v: number) => T.at(v);
   const thing = s.object;
@@ -137,21 +145,19 @@ export function StraightInstrument(p: StraightProps) {
   if (p.arrow !== null && p.arrow !== undefined) out.push(arrow(p.arrow, 'ms-inst__arrow', 'arrow'));
   if (p.head !== null && p.head !== undefined) {
     const q = at(p.head);
-    const r = Math.min(34, (f.body.x - f.thing.x) * 0.2);
+    const r = f.personRadius;
     const hx = f.body.x - 26 - r;
     const top = q.y + 4;
-    // The person reaches down to the chart's lowest mark (the floor, or where a chart not from 0 cuts them off).
+    // A cropped chart cuts the torso below its lowest mark, after the whole
+    // head and shoulders. The full-height chart still meets its floor.
+    const cropped = sc.from > 0;
     const bottom = at(sc.from).y;
-    const feet = Math.max(bottom, top + r * 3.6);
+    const feet = cropped ? Math.max(bottom, top + r * 3.6) : bottom;
+    const hem = cropped ? `L${hx + r * 0.65} ${feet}l${-r * 0.35} -4l${-r * 0.6} 8l${-r * 0.35} -4H${hx - r * 1.9}` : '';
     out.push(
       <g key="head" className="ms-inst__head">
-        <clipPath id={clip}>
-          <rect x={f.thing.x - r * 4} y={top - r * 4} width={f.body.x - f.thing.x + r * 4} height={bottom - top + r * 4} />
-        </clipPath>
-        <g clipPath={`url(#${clip})`}>
-          <circle className="ms-inst__person" cx={hx} cy={top + r} r={r} />
-          <path className="ms-inst__person" d={`M${hx - r * 1.9} ${feet}V${top + r * 3.2}Q${hx - r * 1.8} ${top + r * 2.2} ${hx} ${top + r * 2.2}Q${hx + r * 1.8} ${top + r * 2.2} ${hx + r * 1.9} ${top + r * 3.2}V${feet}Z`} />
-        </g>
+        <circle className="ms-inst__person" cx={hx} cy={top + r} r={r} />
+        <path className="ms-inst__person" data-cropped={cropped || undefined} d={`M${hx - r * 1.9} ${feet}V${top + r * 3.2}Q${hx - r * 1.8} ${top + r * 2.2} ${hx} ${top + r * 2.2}Q${hx + r * 1.8} ${top + r * 2.2} ${hx + r * 1.9} ${top + r * 3.2}V${feet}${hem}Z`} />
         <rect className="ms-inst__board" x={hx - r - 8} y={q.y - 4} width={f.body.x - (hx - r - 8)} height={8} />
       </g>,
     );
@@ -171,9 +177,9 @@ export function StraightInstrument(p: StraightProps) {
       <Marks s={s} sc={sc} track={T} gap={6} />
       {s.dual && <Marks s={s} sc={sc} track={dualTrack(s, sc, f)} gap={4} totals className="ms-inst__marks ms-inst__marks--dual" />}
       <SkipBreaks s={s} track={T} depth={f.vertical ? f.body.w : f.body.h} />
-      {p.counted && <CountArcs sc={sc} track={T} parts={p.counted} stagger={p.stagger} />}
+      {p.counted && <CountArcs sc={sc} track={countingTrack(f)} parts={p.counted} stagger={p.stagger} />}
       {out}
-      <Brackets s={s} track={T} offset={f.vertical ? f.body.w + 18 : f.body.h + (s.dual ? 26 : 16)} defs={p.defs} locale={p.locale} />
+      <Brackets s={s} track={T} offset={f.vertical ? f.body.w + 18 + (p.counted ? 50 : 0) : f.body.h + (s.dual ? 26 : 16)} defs={p.defs} locale={p.locale} />
       {p.children}
       {p.handle && (
         <Handle
