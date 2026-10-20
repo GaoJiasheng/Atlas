@@ -1,0 +1,125 @@
+---
+id: eggs-and-larvae
+order: 3
+title: { en: "Eggs and larvae", zh: "卵与孑孓" }
+sensitive: false
+state:
+  view: xray
+  explode: 0
+  part: null
+  run: true
+  cutaway: none
+  layers: [water-stages, cycle, air, food]
+  labels: [eggs, larva-l1, larva-l4]
+  camera: { position: [3.2, 13.5, 14.5], target: [3.4, 0.9, -0.6], fov: 32 }
+  summary: { en: "Eggs laid just above the water hatch when the water rises to cover them. Each larva hangs below the surface to breathe, eats tiny bits in the water, and grows in four steps, shedding its skin between them.", zh: "产在水面上方的卵，水涨上来淹没它就孵化。孑孓倒挂在水面下呼吸，吃水里的微小颗粒，分四步长大，每两步之间蜕一次皮。" }
+  sim:
+    set: { temp: 28, day: 0 }
+    try:
+      vary: day
+      keep: [temp, { en: "Same food, same number of larvae", zh: "同样的食物、同样多的孑孓" }]
+      observe: [stage, days-left, head-width]
+      record: { chart: { y: head-width } }
+      predict:
+        prompt: { en: "From day 0 to day 1, does the larva's head get wider?", zh: "从第 0 天到第 1 天，孑孓的头会变宽吗？" }
+        start: { day: 0 }
+        change: { day: 1 }
+        observe: head-width
+        options:
+          - { id: wider, label: { en: "Wider", zh: "变宽" }, means: more }
+          - { id: same, label: { en: "The same", zh: "一样" }, means: same }
+  beats:
+    - camera: { position: [2.1, 3.7, 0.5], target: [-0.45, 1.98, -0.4], fov: 30 }
+      labels: [eggs]
+      caption: { en: "A female lays her eggs one by one on the damp wall just above the water. Each egg is less than a millimetre long. It is white when laid and turns black soon after.", zh: "雌蚊把卵一粒一粒产在水面上方潮湿的壁上。每粒卵不到一毫米长，刚产下是白色的，不久就变黑。" }
+    - camera: { position: [2.1, 3.7, 0.5], target: [-0.45, 1.98, -0.4], fov: 30 }
+      labels: [eggs]
+      caption: { en: "In one laboratory study at twenty-eight degrees, a larva took about sixty-two hours to form inside a new egg. Then the egg can wait, dry, for months. When rising water covers it, the larva hatches.", zh: "在一项实验室研究里，温度 28 °C 时，新产下的卵里，幼虫大约要六十二小时才成形。之后卵可以干着等上好几个月，等水涨上来淹没它，幼虫就孵出来。" }
+    - camera: { position: [5.95, 1.3, 3.7], target: [6.5, 1.05, -0.4], fov: 30 }
+      labels: [larva-l4]
+      caption: { en: "A larva is not a worm. It has a head, a thorax and an abdomen. It hangs head down and breathes air through a short tube at its tail, the siphon. The cool-coloured dots are air.", zh: "孑孓不是蠕虫，它有头、胸、腹三部分。它头朝下倒挂着，用尾端一根短短的呼吸管伸出水面吸气。冷色的小点就是空气。" }
+    - camera: { position: [5.35, 1.25, -0.55], target: [5.68, 1.1, -2.52], fov: 30 }
+      labels: [larva-l3]
+      caption: { en: "Brushes beside its mouth sweep tiny bits of food out of the water. The green dots are food. Larvae eat, and that is how they grow.", zh: "嘴边的口刷把水里微小的食物扫进嘴里。绿色的小点就是食物。孑孓要吃东西，才能长大。" }
+    - camera: { position: [3.9, 3.2, 5.6], target: [4.0, 1.25, -1.8], fov: 30 }
+      hide: [pupa, developing-adult, pupal-case, emerging-adult]
+      labels: [larva-l1, larva-l2, larva-l3, larva-l4, moult-skins]
+      caption: { en: "Its hard head cannot get bigger, so a larva grows in steps. It sheds its skin, and the new head is wider. The four sizes are called instars.", zh: "孑孓坚硬的头壳长不大，所以它一步一步地长：蜕掉旧皮，新的头壳就宽一些。这四种大小叫做四个龄期。" }
+    - sim: { set: { day: 4 } }
+      labels: [larva-l4]
+      caption: { en: "In this model, at twenty-eight degrees, the larva is in its fourth instar by day four after hatching. The orange ring marks where it is.", zh: "在这个模型里，水温 28 °C 时，孑孓到孵化后第四天已经是第四龄。橙色的圈标出它此刻在哪一站。" }
+  index:
+    parts: [eggs, dish-water, larva-l1, larva-l2, larva-l3, larva-l4, moult-skins]
+---
+
+<Lang en>
+
+Look just above the waterline. The female lays her eggs one by one on the damp wall of the container, not on the water. Each egg is less than <Num s="S22">1 mm</Num> long, and it turns black soon after it is laid. In a laboratory study at <Num s="S21">28 °C</Num>, a larva took about <Num s="S21">62 hours</Num> to form inside a freshly laid egg. After that the egg can wait, dry, for months; it hatches when rising water covers it.
+
+<Figure src="figures/mosquito-water-stages" alt={{ en: "A cut-away pot plate of still water: a band of small dark eggs on the wall above the waterline, larvae of different sizes hanging head down below the surface, and two comma-shaped pupae.", zh: "剖开的花盆底盘里有积水：水面上方的壁上有一圈深色的小卵，水面下倒挂着大小不一的孑孓，还有两只逗号形的蛹。" }} caption={{ en: "In a real container every stage is mixed together: eggs on the wall, larvae of all sizes and pupae in the same water.", zh: "真实的容器里，各个阶段混在一起：壁上有卵，同一处积水里有各种大小的孑孓和蛹。" }} />
+
+The young mosquito that hatches is a larva. It is not a worm: it has a head, a thorax and an abdomen, though no legs. It hangs head down below the surface and breathes through a short tube at its tail end, the <Term id="siphon">siphon</Term>, whose tip reaches the air. The cool-coloured dots are air going in.
+
+<Figure src="figures/mosquito-larva" alt={{ en: "A fourth-stage mosquito larva hanging head down from the water surface: a round head with mouth brushes, a broad thorax with tufts of hair, a slim abdomen of eight segments and a short dark siphon at the surface.", zh: "一只四龄孑孓头朝下倒挂在水面下：圆圆的头上有口刷，宽宽的胸两侧有毛丛，细长的腹部有八节，尾端短而深色的呼吸管伸到水面。" }} caption={{ en: "A larva in its fourth instar: head, thorax and abdomen, with the siphon at the surface.", zh: "一只四龄孑孓：头、胸、腹，呼吸管伸到水面。" }} />
+
+Brushes beside its mouth sweep tiny bits of food and microbes out of the water; the green dots are food. Larvae eat, and that is how they grow.
+
+Its hard head capsule cannot get bigger, so a larva grows in steps. It sheds its old skin in a <Term id="moult">moult</Term>, and the new head capsule is wider; the softer body grows between moults too. A larva passes through <Num s="S13">four</Num> stages, called <Term id="instar">instars</Term>, before it becomes a pupa, and the shed skins float beside it. A grasshopper also grows by moulting: see <TopicLink slug="grasshopper" ch="nerves-and-growing-up">Nerves, senses and growing up</TopicLink>.
+
+In the try-it card, change the day and keep the water at 28 °C. In this model the larva reaches its fourth instar on day <Num s="S1">4</Num> after hatching. Record its head width each day: the graph climbs in steps, one for each moult.
+
+<More title={{ en: "Eggs that wait", zh: "会等待的卵" }}>
+
+A freshly laid egg cannot yet survive drying out; it becomes able to as the larva forms inside it. After that, NEA says, eggs can survive dry for up to about <Num s="S4">nine months</Num>; CDC says up to <Num s="S19">8 months</Num>. So tipping out the water leaves the eggs on the wall: the wall has to be scrubbed as well. Some other mosquitoes, such as Culex, lay their eggs stuck together in a raft that floats on the water instead.
+
+</More>
+
+<More title={{ en: "Growing in steps", zh: "一步一步长大" }}>
+
+In one measured sample of larvae, the heads of the four instars were <Num s="S29">0.24 mm</Num>, <Num s="S29">0.39 mm</Num>, <Num s="S29">0.64 mm</Num> and <Num s="S29">0.99 mm</Num> wide on average, and the larvae <Num s="S29">1.7–7.2 mm</Num> long. The larvae in the dish are drawn to these sizes. They were a different sample from the timed larvae the day counts come from, so the try-it puts the two together as a model. A small adult mosquito is not a young one: once it has come out of the pupa, an adult does not grow.
+
+</More>
+
+<More title={{ en: "Where the days come from", zh: "天数从哪里来" }}>
+
+The days come from one laboratory study of male Aedes aegypti reared one to a well at <Num s="S16">28 °C</Num>: from hatching to adult took <Num s="S16">7.23 days</Num> on average. NEA says that in good conditions the larval stage lasts about <Num s="S4">four days</Num>, without giving a temperature. Real larvae vary: females are a little slower than males, and food and crowding matter too.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+看看水面稍上方。雌蚊把卵一粒一粒产在容器潮湿的内壁上，不是产在水里。每粒卵不到 <Num s="S22">1 毫米</Num>长，刚产下不久就变黑。在一项实验室研究里，温度 <Num s="S21">28 °C</Num> 时，刚产下的卵，里面的幼虫大约要 <Num s="S21">62 小时</Num>才成形。之后卵可以干着等上好几个月；水涨上来淹没它时，幼虫就孵出来。
+
+<Figure src="figures/mosquito-water-stages" alt={{ en: "A cut-away pot plate of still water: a band of small dark eggs on the wall above the waterline, larvae of different sizes hanging head down below the surface, and two comma-shaped pupae.", zh: "剖开的花盆底盘里有积水：水面上方的壁上有一圈深色的小卵，水面下倒挂着大小不一的孑孓，还有两只逗号形的蛹。" }} caption={{ en: "In a real container every stage is mixed together: eggs on the wall, larvae of all sizes and pupae in the same water.", zh: "真实的容器里，各个阶段混在一起：壁上有卵，同一处积水里有各种大小的孑孓和蛹。" }} />
+
+孵出来的小蚊子就是孑孓。它不是蠕虫：它有头、胸、腹，只是没有足。它头朝下倒挂在水面下，用尾端一根短短的<Term id="siphon">呼吸管</Term>吸气，管口伸出水面。冷色的小点就是吸进去的空气。
+
+<Figure src="figures/mosquito-larva" alt={{ en: "A fourth-stage mosquito larva hanging head down from the water surface: a round head with mouth brushes, a broad thorax with tufts of hair, a slim abdomen of eight segments and a short dark siphon at the surface.", zh: "一只四龄孑孓头朝下倒挂在水面下：圆圆的头上有口刷，宽宽的胸两侧有毛丛，细长的腹部有八节，尾端短而深色的呼吸管伸到水面。" }} caption={{ en: "A larva in its fourth instar: head, thorax and abdomen, with the siphon at the surface.", zh: "一只四龄孑孓：头、胸、腹，呼吸管伸到水面。" }} />
+
+嘴边的口刷把水里细小的食物颗粒和微生物扫进嘴里；绿色的小点就是食物。孑孓要吃东西，才能长大。
+
+孑孓坚硬的头壳长不大，所以它一步一步地长。它脱掉旧皮，这叫<Term id="moult">蜕皮</Term>，新的头壳就宽一些；在两次蜕皮之间，柔软的身体也会长。孑孓要经过 <Num s="S13">四</Num>个阶段，叫做四个<Term id="instar">龄期</Term>，才变成蛹；蜕下的皮就漂在它旁边。蝗虫也靠蜕皮长大，见<TopicLink slug="grasshopper" ch="nerves-and-growing-up">神经、感觉与成长</TopicLink>。
+
+在试一试卡片里改变天数，水温保持 28 °C。在这个模型里，孑孓到孵化后第 <Num s="S1">4</Num> 天就是第四龄了。每天记下它的头宽：图上的线一级一级往上走，每蜕一次皮升一级。
+
+<More title={{ en: "Eggs that wait", zh: "会等待的卵" }}>
+
+刚产下的卵还不耐干；里面的幼虫慢慢成形，卵才变得耐干。之后，据环境局说，卵能干着活长达约 <Num s="S4">九个月</Num>；美国疾病控制与预防中心说长达 <Num s="S19">8 个月</Num>。所以只把水倒掉，壁上的卵还在：壁也要刷干净。别的一些蚊子，比如库蚊，会把卵粘成一块，像小筏子一样浮在水面上。
+
+</More>
+
+<More title={{ en: "Growing in steps", zh: "一步一步长大" }}>
+
+在一份测量样本里，四个龄期的孑孓头宽平均是 <Num s="S29">0.24 毫米</Num>、<Num s="S29">0.39 毫米</Num>、<Num s="S29">0.64 毫米</Num>和 <Num s="S29">0.99 毫米</Num>，体长 <Num s="S29">1.7–7.2 毫米</Num>。皿里的孑孓就按这些大小画。这批孑孓和用来计算天数的那批不是同一批，所以试一试是把两者放在一起做的模型。小的成蚊并不是“小时候”的蚊子：从蛹里出来以后，成虫就不再长大了。
+
+</More>
+
+<More title={{ en: "Where the days come from", zh: "天数从哪里来" }}>
+
+天数来自一项实验室研究：雄性埃及伊蚊一只一格分开养，水温 <Num s="S16">28 °C</Num>，从孵化到成虫平均用了 <Num s="S16">7.23 天</Num>。环境局说，条件适宜时幼虫期约 <Num s="S4">四天</Num>，但没有说是什么水温。真实的孑孓有快有慢：雌的比雄的稍慢，食物和拥挤程度也有影响。
+
+</More>
+
+</Lang>

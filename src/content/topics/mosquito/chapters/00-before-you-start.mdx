@@ -1,0 +1,107 @@
+---
+id: before-you-start
+order: 0
+kind: background
+title: { en: "Before you start", zh: "开始之前" }
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: true
+  cutaway: none
+  layers: [head, thorax-wings, belly, male, water-stages, cycle]
+  hide: [soil-loosened, bti-granules]
+  labels: []
+  camera: { position: [-7.5, 6.5, 8.5], target: [0.3, 0.9, -0.8], fov: 30 }
+  summary: { en: "The Aedes mosquito is an insect that spends the first part of its life in water. This topic follows one round of its life cycle, and shows how removing still water breaks the cycle.", zh: "伊蚊是一种昆虫，一生的前半段在水里度过。本主题跟着它的生活史走一圈，并说明为什么清除积水能打断这一圈。" }
+  note:
+    en: "This is a model. The mosquitoes, eggs, larvae and pupa are drawn about 200 times life size, and the stages are set round one dish so that you can see them in order; in a real container there would be many of each, all mixed together. The corner of a home in the last chapter is drawn separately, at life size. The day counts come from one laboratory study of male mosquitoes at stated water temperatures; the numbers the model works out from them are marked SIM. Real containers vary."
+    zh: "这是一个模型。蚊子、卵、孑孓和蛹都放大了约 200 倍，各阶段绕着一只皿排成一圈，方便按顺序看；真实的容器里，每个阶段都有很多只，混在一起。最后一章的家居一角另外按实物大小画。天数来自一项写明水温的雄蚊实验室研究，模型由它推算出来的数都标着 SIM。真实的容器各不相同。"
+  sim:
+    set: { day: 8 }
+  beats:
+    - labels: [thorax, larva-l4, eggs]
+      caption: { en: "This model shows an Aedes mosquito about two hundred times life size, beside a dish of still water.", zh: "这个模型把一只伊蚊放大了约两百倍，旁边是一皿积水。" }
+    - camera: dish-view
+      labels: [eggs, larva-l1, larva-l4, pupa, emerging-adult]
+      caption: { en: "Round the dish are the stages of its life: eggs on the wall, larvae of four sizes, a pupa, and a new adult climbing out. The dark dots move round in the order the stages come.", zh: "皿里绕着一圈的，是它一生的各个阶段：壁上的卵、四种大小的孑孓、蛹，还有一只正在钻出来的成虫。深色的小点绕圈走的方向，就是这些阶段出现的顺序。" }
+    - camera: { position: [-3.9, 1.45, 2.9], target: [-2.4, 0.42, 0.1], fov: 30 }
+      layers: [head, thorax-wings, belly, water-stages, cycle]
+      labels: ["group:head", thorax, abdomen]
+      caption: { en: "Like every insect, the adult has three body parts and six legs. The grasshopper topic looks at these parts closely.", zh: "和所有昆虫一样，成虫的身体分三部分，有六条足。蝗虫主题仔细讲了这些部分。" }
+    - camera: home-corner
+      layers: [home]
+      labels: [pot-plate, pail, vase]
+      caption: { en: "In Singapore, Aedes mosquitoes breed in small pools of still water at home, such as flower pot plates and pails. This corner is drawn life size. The last chapter shows how to stop them.", zh: "在新加坡，伊蚊在家里的小片积水里滋生，比如花盆底盘和水桶。这个角落按实物大小画。最后一章讲怎样阻止它们。" }
+  index:
+    parts: [head-capsule, thorax, abdomen, eggs, larva-l4, pupa, emerging-adult, pot-plate]
+---
+
+<Lang en>
+
+An adult <Term id="aedes">Aedes mosquito</Term> stands on the bench beside a shallow dish of still water. The mosquitoes and their young are drawn about <Num s="S1">200 times</Num> life size, so that their small parts can be seen. Round the dish, in order, are the stages of its <Term id="life-cycle">life cycle</Term>: the stages an animal passes through as it grows up and has young of its own.
+
+There are four stages: egg, <Term id="larva">larva</Term>, <Term id="pupa">pupa</Term> and adult. The eggs stick to the wall just above the water. The larvae, which eat and grow, and the pupa, inside which the adult takes shape, live in the water. Singapore's primary science syllabus asks pupils to observe and compare the life cycles of <Num s="S2">seven</Num> animals, and the mosquito is one of them.
+
+Like every insect, the adult has a head, a thorax and an abdomen, with six legs joined to the thorax. The grasshopper topic looks at these parts closely in <TopicLink slug="grasshopper" ch="whole-animal">The whole animal</TopicLink>. This topic looks at what makes a mosquito different: its mouthparts, its wings and its life in water.
+
+How to read the model: the dark dots move round the dish in the order the stages come, then out to the adult and back to the eggs. Cool-coloured dots are air and green dots are food. The ring card at the top right draws the same cycle with the days each stage takes. From chapter 03 on, a try-it card lets you change the day, the water temperature and how often the water is tipped out.
+
+Singapore cares about this mosquito because an infected female can spread <Term id="dengue">dengue</Term>, an illness caused by a virus. The last chapter shows how removing still water at home breaks the cycle.
+
+<More title={{ en: "How this model is drawn", zh: "这个模型是怎样画的" }}>
+
+The stages are set round one dish so that they can be compared side by side. A real container would hold many eggs, larvae and pupae, all mixed together; the dish is only a way of showing them. The corner of a home in the last chapter is drawn at life size, apart from the enlarged mosquitoes, and the two are never shown together. Each part of the model has its own scale bar.
+
+</More>
+
+<More title={{ en: "Insects, again", zh: "再看看昆虫" }}>
+
+A hard outer skeleton, jointed legs and compound eyes are shared by all insects. <TopicLink slug="grasshopper" ch="armour-and-senses">Armour, eyes, mouth, legs and wings</TopicLink> shows how they are built. A mosquito has the same body plan, with one clear difference: it has only one pair of wings.
+
+</More>
+
+<More title={{ en: "Where the day counts come from", zh: "天数从哪里来" }}>
+
+The day counts come from one laboratory study. Male Aedes aegypti were reared one to a small well, with the same food every day, in water kept at four steady temperatures, and the days each stage took were measured. Females develop a little more slowly than males. The numbers the model works out from these measurements are marked SIM.
+
+NEA gives a rough timeline for good conditions: eggs hatch in less than <Num s="S4">a day</Num>, larvae become pupae in about <Num s="S4">four days</Num>, and adults come out about <Num s="S4">two days</Num> later. Neither is a timetable for every container in Singapore: temperature, food and crowding all change how fast the young grow.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+标本台上站着一只<Term id="aedes">伊蚊</Term>成虫，旁边是一只盛着积水的浅皿。蚊子和它的后代都放大了约 <Num s="S1">200 倍</Num>，细小的部分也看得清。浅皿里按顺序绕成一圈的，是它<Term id="life-cycle">生活史</Term>的各个阶段，也就是一种动物从出生、长大，到生下自己的后代所经历的各个阶段。
+
+蚊子的生活史有四个阶段：卵、<Term id="larva">幼虫（孑孓）</Term>、<Term id="pupa">蛹</Term>和成虫。卵粘在水面稍上方的壁上；会吃东西、会长大的孑孓，以及成虫在里面慢慢成形的蛹，都生活在水里。新加坡的小学科学课程要求学生观察和比较 <Num s="S2">七</Num>种动物的生活史，蚊子就是其中之一。
+
+和所有昆虫一样，成虫的身体分为头、胸、腹三部分，六条足都长在胸上。蝗虫主题的<TopicLink slug="grasshopper" ch="whole-animal">一整只蚱蜢</TopicLink>一章仔细讲了这些部分；这里只看蚊子不一样的地方：它的口器、它的翅，还有它在水里度过的日子。
+
+怎样看这个模型：深色的小点按各阶段出现的顺序绕着浅皿走，再出去到成虫那里，又回到卵。冷色的小点是空气，绿色的小点是食物。右上角的环卡把同一个生活史画成一个环，写着每个阶段要几天。从第 03 章起，试一试卡片让你改变天数、水温，以及多久倒一次水。
+
+新加坡关心这种蚊子，是因为受感染的雌蚊能传播<Term id="dengue">骨痛热症（登革热）</Term>，这是一种由病毒引起的病。最后一章讲怎样清除家里的积水，打断这一圈。
+
+<More title={{ en: "How this model is drawn", zh: "这个模型是怎样画的" }}>
+
+各个阶段绕着一只皿排开，方便并排比较。真实的容器里，会有许多卵、孑孓和蛹混在一起；这只皿只是用来展示它们。最后一章的家居一角按实物大小画，和放大的蚊子分开摆放，两者不会出现在同一个画面里。模型的每个部分都有自己的比例尺。
+
+</More>
+
+<More title={{ en: "Insects, again", zh: "再看看昆虫" }}>
+
+坚硬的外骨骼、分节的足和复眼，是所有昆虫都有的。<TopicLink slug="grasshopper" ch="armour-and-senses">外面：盔甲、眼睛、口、足和翅</TopicLink>一章讲了它们的构造。蚊子的身体结构也一样，只有一点明显不同：它只有一对翅。
+
+</More>
+
+<More title={{ en: "Where the day counts come from", zh: "天数从哪里来" }}>
+
+天数来自一项实验室研究：研究者把雄性埃及伊蚊一只一只分开养在小格里，每天喂同样的饲料，水温保持在四个不同的恒定温度，记录每个阶段用了几天。雌蚊发育得比雄蚊稍慢一些。模型由这些测量推算出来的数，都标着 SIM。
+
+环境局给出了条件适宜时的大约时间：卵不到 <Num s="S4">一天</Num>孵化，幼虫约 <Num s="S4">四天</Num>变成蛹，再过约 <Num s="S4">两天</Num>成虫钻出来。两者都不是新加坡每个容器的时间表：水温、食物多少和孑孓的拥挤程度，都会改变它们长得多快。
+
+</More>
+
+</Lang>

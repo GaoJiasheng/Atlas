@@ -1,0 +1,133 @@
+---
+id: round-the-cycle
+order: 5
+title: { en: "Round the cycle", zh: "绕一圈" }
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: true
+  cutaway: none
+  layers: [head, thorax-wings, belly, male, water-stages, cycle]
+  labels: [eggs, larva-l4, abdomen]
+  camera: { position: [-7.5, 6.5, 8.5], target: [0.3, 0.9, -0.8], fov: 30 }
+  summary: { en: "Egg, larva, pupa, adult, and back to eggs: the cycle repeats. In warm water an Aedes mosquito goes from hatching to adult in about a week; in cooler water it takes longer.", zh: "卵、幼虫、蛹、成虫，再回到卵：这一圈周而复始。在温暖的水里，伊蚊从孵化到成虫大约一周；水凉一些，就要更久。" }
+  sim:
+    set: { temp: 28, day: 8 }
+    try:
+      vary: temp
+      keep: [{ en: "Same food", zh: "同样的食物" }, { en: "One larva to each well of water", zh: "每格水里只养一只孑孓" }]
+      observe: [to-adult, larva-days, pupa-days]
+      record: { chart: { y: [larva-days, pupa-days, to-adult] } }
+      predict:
+        prompt: { en: "Warmer water, from 28 °C to 32 °C: will the young take more days or fewer to become adults?", zh: "水温从 28 °C 升到 32 °C，孑孓变成成虫要的天数会更多还是更少？" }
+        start: { temp: 28 }
+        change: { temp: 32 }
+        observe: to-adult
+        options:
+          - { id: more, label: { en: "More days", zh: "更多" }, means: more }
+          - { id: fewer, label: { en: "Fewer days", zh: "更少" }, means: less }
+          - { id: same, label: { en: "About the same", zh: "差不多" }, means: same }
+  beats:
+    - camera: dish-view
+      labels: [eggs, larva-l1, pupa, emerging-adult]
+      caption: { en: "Follow the dots round: egg, larva, pupa, adult, and back to eggs. In one laboratory study at twenty-eight degrees, the trip from hatching to adult took about seven days.", zh: "跟着小点绕一圈：卵、幼虫、蛹、成虫，再回到卵。在一项实验室研究里，水温 28 °C 时，从孵化到成虫大约七天。" }
+    - camera: dish-view
+      sim: { set: { temp: 20 } }
+      labels: [larva-l4]
+      caption: { en: "At twenty degrees, the same trip took about thirteen days. The dots move more slowly.", zh: "水温 20 °C 时，同样一圈大约要十三天，小点也走得慢些。" }
+    - camera: dish-view
+      sim: { set: { temp: 32 } }
+      labels: [larva-l4]
+      caption: { en: "At thirty-two degrees, it took six point four days. In these measurements, warmer water meant faster growth.", zh: "水温 32 °C 时，用了六点四天。在这些测量里，水越暖，长得越快。" }
+    - camera: { position: [-4.8, 2.6, 3.6], target: [-1.5, 0.95, -0.4], fov: 30 }
+      layers: [head, thorax-wings, belly, water-stages, cycle]
+      labels: [abdomen, eggs]
+      caption: { en: "An adult female lives about two weeks outdoors. In that time she can lay eggs about three times, so the cycle keeps turning.", zh: "雌蚊在野外大约活两周，这段时间里能产三次左右的卵，所以这一圈不停地转下去。" }
+    - sim: { set: { compare: true } }
+      labels: [pupa, larva-l4]
+      caption: { en: "A grasshopper's life cycle has three stages, egg, nymph and adult, and it takes months. A mosquito's has four, because it has a pupa.", zh: "蝗虫的生活史有三个阶段：卵、若虫、成虫，要好几个月。蚊子的有四个阶段，因为多了蛹。" }
+  index:
+    parts: [eggs, larva-l1, larva-l4, pupa, emerging-adult, abdomen]
+---
+
+<Lang en>
+
+Follow the dots round: egg, larva, pupa, adult, and back to eggs. NEA says an adult mosquito lives about <Num s="S4">two weeks</Num> in nature. In that time a female can lay eggs about <Num s="S4">three times</Num>, so the cycle keeps turning, and young of different ages are often found in the same water.
+
+In one laboratory study of male Aedes aegypti, the trip from hatching to adult took about <Num s="S16">7.2 days</Num> in water at <Num s="S16">28 °C</Num>. The clock starts at hatching: it leaves out the egg, which can wait for water for months, so the ring card marks the egg “waits for water” instead of giving it days.
+
+Now change only the water temperature. At <Num s="S16">20 °C</Num> the same trip took <Num s="S16">13.4 days</Num>; at <Num s="S16">32 °C</Num>, <Num s="S16">6.4 days</Num>. In the model the dots slow down or speed up to match. This is a fair test: only the temperature changes, while the food and the way the larvae are kept stay the same.
+
+Record the days at each temperature and look at the graph. Across these temperatures, warmer water meant faster growth. Singapore is warm all year round. In this model, at <Num s="S1">28 °C</Num>, still water left standing for about a week is long enough for new adults to come out of it.
+
+Different living things have different life cycles. A grasshopper has three stages, egg, nymph and adult, and its whole cycle takes months. A mosquito, like a butterfly, has four, because it has a pupa. Knowing how a cycle runs helps you predict what you will find, and when.
+
+<Figure src="figures/mosquito-three-life-cycles" alt={{ en: "Three life cycles drawn as rings: a mosquito's eggs, larva, pupa and adult; a butterfly's eggs, caterpillar, chrysalis and adult; and a grasshopper's egg pod, nymph and adult.", zh: "画成环的三种生活史：蚊子的卵、幼虫、蛹和成虫；蝴蝶的卵、毛毛虫、蛹和成虫；蝗虫的卵荚、若虫和成虫。" }} caption={{ en: "Mosquito and butterfly: four stages, with a pupa. Grasshopper: three stages, no pupa. The animals are not drawn to scale.", zh: "蚊子和蝴蝶：四个阶段，有蛹。蝗虫：三个阶段，没有蛹。图中动物不按比例。" }} />
+
+<More title={{ en: "A fair test", zh: "公平测试" }}>
+
+In the study, each larva was kept alone in a small well of water and given the same food every day, so that the water temperature was the only thing that changed. That matters, because food and crowding also change how fast larvae grow. The model scales each stage's measured average so that the stages add up to the study's measured total from hatching to adult; the stage on each day is worked out from that, not watched in one mosquito.
+
+</More>
+
+<More title={{ en: "Not warmer and warmer for ever", zh: "不是越热越好" }}>
+
+Warmer is faster only up to a point. In a separate laboratory study of eggs, about <Num s="S21">49 %</Num> hatched at <Num s="S21">35 °C</Num> and none hatched at <Num s="S21">36 °C</Num>, while most hatched between <Num s="S21">22 °C</Num> and <Num s="S21">31 °C</Num>.
+
+</More>
+
+<More title={{ en: "Singapore is warm all year", zh: "新加坡全年温暖" }}>
+
+The Meteorological Service Singapore gives a long-term average air temperature of <Num s="S36">27.8 °C</Num> at its Changi station for <Num s="S36">1991–2020</Num>, with high temperatures all year round. That is the air, not the water in a flower pot plate, which can be warmer or cooler.
+
+</More>
+
+<More title={{ en: "Other life cycles", zh: "别的生活史" }}>
+
+In a laboratory study at about <Num s="S55">28 °C</Num>, the Javanese grasshopper took <Num s="S55">6½–8½ months</Num> from egg to egg: <TopicLink slug="grasshopper" ch="nerves-and-growing-up">Nerves, senses and growing up</TopicLink>. Plants have life cycles too, from seed to young plant to adult plant: <TopicLink slug="plant" ch="seed-to-plant">From seed to plant</TopicLink>.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+跟着小点绕一圈：卵、幼虫、蛹、成虫，再回到卵。环境局说，成蚊在野外大约活 <Num s="S4">两周</Num>。这段时间里，雌蚊大约能产 <Num s="S4">三次</Num>卵，所以这一圈不停地转下去，同一处积水里常常能找到大小不一的孑孓。
+
+在一项雄性埃及伊蚊的实验室研究里，水温 <Num s="S16">28 °C</Num> 时，从孵化到成虫大约用了 <Num s="S16">7.2 天</Num>。这个钟从孵化开始算，没有把卵算进去，因为卵可以等水等上好几个月；所以环卡在卵那一段写的是“等水来”，不写天数。
+
+现在只改变水温。水温 <Num s="S16">20 °C</Num> 时，同样一圈用了 <Num s="S16">13.4 天</Num>；<Num s="S16">32 °C</Num> 时，用了 <Num s="S16">6.4 天</Num>。模型里的小点也跟着变慢或变快。这是一个公平测试：只改变水温，食物和养孑孓的方法都保持不变。
+
+把每个水温下的天数记下来，看看图。在这几个温度之间，水越暖，长得越快。新加坡全年温暖。在这个模型里，水温 <Num s="S1">28 °C</Num> 时，积水放上一个星期左右，就足够让新的成虫钻出来。
+
+不同的生物有不同的生活史。蝗虫有三个阶段：卵、若虫、成虫，整个生活史要好几个月。蚊子和蝴蝶一样有四个阶段，因为多了蛹。知道一个生活史怎样运转，就能预测会看到什么、什么时候看到。
+
+<Figure src="figures/mosquito-three-life-cycles" alt={{ en: "Three life cycles drawn as rings: a mosquito's eggs, larva, pupa and adult; a butterfly's eggs, caterpillar, chrysalis and adult; and a grasshopper's egg pod, nymph and adult.", zh: "画成环的三种生活史：蚊子的卵、幼虫、蛹和成虫；蝴蝶的卵、毛毛虫、蛹和成虫；蝗虫的卵荚、若虫和成虫。" }} caption={{ en: "Mosquito and butterfly: four stages, with a pupa. Grasshopper: three stages, no pupa. The animals are not drawn to scale.", zh: "蚊子和蝴蝶：四个阶段，有蛹。蝗虫：三个阶段，没有蛹。图中动物不按比例。" }} />
+
+<More title={{ en: "A fair test", zh: "公平测试" }}>
+
+在这项研究里，每只孑孓单独养在一小格水里，每天喂同样的饲料，所以唯一改变的是水温。这很重要，因为食物多少和拥挤程度也会改变孑孓长得多快。模型把每个阶段测得的平均天数按比例缩放，让各阶段加起来等于研究测得的孵化到成虫的总天数；每一天在哪个阶段，是这样算出来的，不是盯着某一只蚊子看出来的。
+
+</More>
+
+<More title={{ en: "Not warmer and warmer for ever", zh: "不是越热越好" }}>
+
+水越暖长得越快，只到一定程度为止。在另一项关于卵的实验室研究里，<Num s="S21">35 °C</Num> 时只有约 <Num s="S21">49 %</Num> 的卵孵化，<Num s="S21">36 °C</Num> 时一粒也没有孵化；而在 <Num s="S21">22 °C</Num> 到 <Num s="S21">31 °C</Num> 之间，大部分卵都能孵化。
+
+</More>
+
+<More title={{ en: "Singapore is warm all year", zh: "新加坡全年温暖" }}>
+
+新加坡气象局给出樟宜气候站 <Num s="S36">1991–2020</Num> 年的长期平均气温为 <Num s="S36">27.8 °C</Num>，全年气温都高。这是空气的温度，不是花盆底盘里积水的温度，积水可能更暖，也可能更凉。
+
+</More>
+
+<More title={{ en: "Other life cycles", zh: "别的生活史" }}>
+
+在一项约 <Num s="S55">28 °C</Num> 的实验室研究里，黑角瓦兰蝗从卵到下一代产卵用了 <Num s="S55">6½–8½ 个月</Num>，见<TopicLink slug="grasshopper" ch="nerves-and-growing-up">神经、感觉与成长</TopicLink>。植物也有生活史，从种子到幼苗再到成株，见<TopicLink slug="plant" ch="seed-to-plant">从种子到植物</TopicLink>。
+
+</More>
+
+</Lang>

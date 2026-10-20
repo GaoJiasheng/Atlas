@@ -1,0 +1,147 @@
+{
+  "terms": [
+    {
+      "id": "aedes",
+      "term": { "en": "Aedes mosquito", "zh": "伊蚊" },
+      "definition": {
+        "en": "A kind of mosquito, black with white markings, that bites mostly in the daytime. In Singapore dengue is spread mainly by one kind, Aedes aegypti.",
+        "zh": "一类黑底白斑、主要在白天叮人的蚊子。在新加坡，骨痛热症主要由其中的埃及伊蚊传播。"
+      },
+      "see": ["dengue", "life-cycle"]
+    },
+    {
+      "id": "life-cycle",
+      "term": { "en": "Life cycle", "zh": "生活史" },
+      "definition": {
+        "en": "The stages a living thing passes through as it grows up and has young of its own, which then go through the same stages again.",
+        "zh": "一种生物从出生、长大到生下后代所经历的各个阶段；后代又重新经历这些阶段，一圈接一圈。"
+      },
+      "see": ["complete-metamorphosis", "incomplete-metamorphosis"]
+    },
+    {
+      "id": "larva",
+      "term": { "en": "Larva", "zh": "幼虫（孑孓）" },
+      "definition": {
+        "en": "The young stage of an insect such as a mosquito, butterfly or beetle, which looks and lives quite differently from the adult. A mosquito larva lives in water, eats and grows.",
+        "zh": "蚊子、蝴蝶、甲虫这类昆虫的幼体，样子和生活方式都和成虫很不一样。蚊子的幼虫叫孑孓，生活在水里，会吃东西、会长大。"
+      },
+      "see": ["instar", "siphon", "pupa"]
+    },
+    {
+      "id": "pupa",
+      "term": { "en": "Pupa", "zh": "蛹" },
+      "definition": {
+        "en": "The stage between larva and adult. A pupa does not eat; inside it the body is rebuilt into an adult. A mosquito pupa lives in water and can swim.",
+        "zh": "幼虫和成虫之间的阶段。蛹不吃东西，身体在里面被改造成成虫。蚊子的蛹生活在水里，还会游动。"
+      },
+      "see": ["breathing-trumpet", "complete-metamorphosis"]
+    },
+    {
+      "id": "instar",
+      "term": { "en": "Instar", "zh": "龄" },
+      "definition": {
+        "en": "One stage of a young insect's life, between two moults. A mosquito larva has four instars; after the fourth moult it is a pupa.",
+        "zh": "幼虫或若虫在两次蜕皮之间的一个阶段。孑孓有四个龄期；第四次蜕皮后就变成蛹。"
+      },
+      "see": ["moult", "larva"]
+    },
+    {
+      "id": "moult",
+      "term": { "en": "Moult", "zh": "蜕皮" },
+      "definition": {
+        "en": "Shedding the old outer skin. The hard parts of an insect cannot stretch, so it grows in steps: a new, larger skin forms underneath, and the old one is left behind.",
+        "zh": "脱去旧的外皮。昆虫坚硬的部分撑不大，所以它一步一步地长：新的、更大的外皮先在里面长好，旧皮就被丢下。"
+      },
+      "see": ["instar"]
+    },
+    {
+      "id": "complete-metamorphosis",
+      "term": { "en": "Complete metamorphosis", "zh": "完全变态" },
+      "definition": {
+        "en": "A life cycle with four stages that look completely different: egg, larva, pupa and adult. Mosquitoes, butterflies and beetles grow up this way.",
+        "zh": "有卵、幼虫、蛹、成虫四个样子完全不同的阶段的生活史。蚊子、蝴蝶和甲虫都是这样长大的。"
+      },
+      "see": ["incomplete-metamorphosis", "pupa"]
+    },
+    {
+      "id": "incomplete-metamorphosis",
+      "term": { "en": "Incomplete metamorphosis", "zh": "不完全变态" },
+      "definition": {
+        "en": "A life cycle with three stages, egg, nymph and adult, and no pupa. The young look broadly like the adults and change a little at each moult, as in grasshoppers and cockroaches.",
+        "zh": "只有卵、若虫、成虫三个阶段、没有蛹的生活史。幼体大体上像成虫，每蜕一次皮就变化一点，蝗虫和蟑螂就是这样。"
+      },
+      "see": ["complete-metamorphosis"]
+    },
+    {
+      "id": "proboscis",
+      "term": { "en": "Proboscis", "zh": "喙" },
+      "definition": {
+        "en": "A mosquito's long mouthpart: a sheath with a bundle of fine stylets inside. Both sexes use it to drink plant juices; only females pierce skin with it.",
+        "zh": "蚊子细长的口器：外面是鞘，里面是一束细细的口针。雌蚊和雄蚊都用它吸植物汁液；只有雌蚊用它刺穿皮肤。"
+      },
+      "see": ["aedes"]
+    },
+    {
+      "id": "haltere",
+      "term": { "en": "Haltere", "zh": "平衡棒" },
+      "definition": {
+        "en": "One of a pair of small knobbed stalks behind the wings of a fly or mosquito. They help it keep its balance in flight; they are a changed second pair of wings.",
+        "zh": "蝇和蚊子翅后面的一对末端带小球的细柄，帮助它飞行时保持平衡；它们是第二对翅变来的。"
+      }
+    },
+    {
+      "id": "siphon",
+      "term": { "en": "Siphon", "zh": "呼吸管" },
+      "definition": {
+        "en": "The short breathing tube at the tail end of a mosquito larva. The larva hangs below the surface with the tip of the siphon in the air.",
+        "zh": "孑孓尾端短短的呼吸管。孑孓倒挂在水面下，让呼吸管的管口伸到空气里。"
+      },
+      "see": ["larva"]
+    },
+    {
+      "id": "breathing-trumpet",
+      "term": { "en": "Breathing trumpet", "zh": "呼吸角" },
+      "definition": {
+        "en": "One of the two short tubes on the back of a mosquito pupa. They touch the surface of the water and let the pupa breathe air.",
+        "zh": "蚊蛹背上两根短管中的一根。它们贴着水面，让蛹呼吸空气。"
+      },
+      "see": ["pupa"]
+    },
+    {
+      "id": "dengue",
+      "term": { "en": "Dengue", "zh": "骨痛热症（登革热）" },
+      "definition": {
+        "en": "An illness caused by a virus and spread mainly by the bites of infected female Aedes mosquitoes. It often brings a fever and aches; some people become very ill.",
+        "zh": "一种由病毒引起、主要通过受感染的雌性伊蚊叮咬传播的病。常见发烧和疼痛；有些人会病得很重。"
+      },
+      "see": ["aedes", "wolbachia"]
+    },
+    {
+      "id": "breeding-habitat",
+      "term": { "en": "Breeding habitat", "zh": "滋生处" },
+      "definition": {
+        "en": "A place with still water where mosquitoes lay eggs and their larvae and pupae live, such as a pail, a flower pot plate or a vase.",
+        "zh": "有积水、蚊子会在那里产卵，孑孓和蛹在那里生活的地方，比如水桶、花盆底盘和花瓶。"
+      },
+      "see": ["mozzie-wipeout"]
+    },
+    {
+      "id": "mozzie-wipeout",
+      "term": { "en": "Mozzie Wipeout", "zh": "灭蚊行动" },
+      "definition": {
+        "en": "NEA's five steps, B-L-O-C-K, for removing still water at home so that mosquitoes cannot breed there.",
+        "zh": "国家环境局提出的五个步骤 B-L-O-C-K，用来清除家里的积水，不让蚊子在那里滋生。"
+      },
+      "see": ["breeding-habitat"]
+    },
+    {
+      "id": "wolbachia",
+      "term": { "en": "Wolbachia", "zh": "沃尔巴克氏菌" },
+      "definition": {
+        "en": "A kind of bacteria that lives inside many insects. When male Aedes aegypti carrying it mate with females that do not, the eggs do not hatch.",
+        "zh": "一种生活在许多昆虫体内的细菌。带有这种细菌的雄性埃及伊蚊和不带它的雌蚊交配后，卵不会孵化。"
+      },
+      "see": ["dengue"]
+    }
+  ]
+}

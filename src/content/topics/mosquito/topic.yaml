@@ -1,0 +1,16 @@
+# MOE P3 Life Cycles (mosquito is one of the named animals), P3 Diversity (insects), PE P3 mosquito-borne diseases; docs/33, decisions taken 2026-10-19.
+id: mosquito
+title: { en: "A Mosquito's Life Cycle", zh: "一只蚊子与它的生活史" }
+subtitle: { en: "The Aedes mosquito: its body, its life in water, and how to stop it breeding", zh: "伊蚊：身体、水中的一生，以及怎样不让它滋生" }
+subject: biology
+tags: [singapore]
+moe: ["MOE 2023 Science P3 Cycles: life cycles of animals (mosquito is one of the named animals)", "MOE 2023 Science P3 Diversity: insects", "MOE 2024 PE P3: mosquito-borne diseases"]
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: published
+illustration: mosquito
+shortTitle: { en: "Mosquito", zh: "蚊子" }
+note: { en: "Model study · mosquito and young drawn about 200× life size · stages arranged round one dish for display · home corner drawn separately", zh: "示意模型 · 蚊子与各阶段约放大 200 倍 · 各阶段绕一只皿排成一圈以便观看 · 家居一角另按比例画" }

@@ -1,0 +1,105 @@
+---
+id: pupa-to-adult
+order: 4
+title: { en: "From pupa to adult", zh: "从蛹到成虫" }
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: true
+  cutaway: none
+  layers: [water-stages, cycle, air, head, thorax-wings, belly]
+  labels: [pupa, larva-l4]
+  camera: { position: [5.3, 1.6, 4.4], target: [5.5, 1.35, 1.6], fov: 30 }
+  summary: { en: "After its last moult the larva becomes a comma-shaped pupa. The pupa does not eat, but inside it the body is rebuilt into an adult, which then climbs out onto the water.", zh: "最后一次蜕皮后，孑孓变成逗号形的蛹。蛹不吃东西，但它的身体在里面被改造成成虫；成虫随后从蛹壳里钻到水面上。" }
+  sim:
+    set: { temp: 28, day: 5 }
+    try:
+      vary: day
+      keep: [temp]
+      observe: [stage, days-left]
+      record: true
+  beats:
+    - labels: [pupa]
+      caption: { en: "After its fourth moult the larva becomes a pupa, shaped like a comma. It breathes through two short trumpets on its back that touch the surface.", zh: "第四次蜕皮后，孑孓变成蛹，形状像一个逗号。它用背上两根短短的呼吸角贴着水面呼吸。" }
+    - pose: pupa-dive
+      labels: [pupa]
+      caption: { en: "A pupa does not eat. It is not asleep, though: when the water is disturbed it rolls and dives, then floats back up.", zh: "蛹不吃东西，但它不是在睡觉：水一被搅动，它就翻滚着潜下去，然后再浮上来。" }
+    - view: xray
+      labels: [pupa, developing-adult]
+      caption: { en: "Inside the pupa the body is being rebuilt into an adult: legs, wings and a long proboscis are forming under the skin. In this model, at twenty-eight degrees, this takes about two days.", zh: "在蛹里，身体正被改造成成虫：足、翅和长长的喙在皮下慢慢成形。在这个模型里，水温 28 °C 时，这大约要两天。" }
+    - camera: { position: [2.75, 3.2, 5.7], target: [3.25, 1.95, 2.45], fov: 30 }
+      labels: [pupal-case, emerging-adult]
+      caption: { en: "To come out, the adult takes in air. Its body swells and splits the pupal skin along the back, and the adult climbs out head first onto the water.", zh: "成虫要出来时先吞进空气，身体胀大，把蛹皮从背上撑裂，然后头先钻出来，站到水面上。" }
+    - camera: { position: [3.2, 13.5, 14.5], target: [3.4, 0.9, -0.6], fov: 32 }
+      sim: { set: { compare: true } }
+      labels: [eggs, larva-l4, pupa, emerging-adult]
+      caption: { en: "Egg, larva, pupa, adult: four stages that look completely different. This is called complete metamorphosis. A grasshopper has no pupa; its young already look like small adults.", zh: "卵、幼虫、蛹、成虫：四个样子完全不同的阶段，叫做完全变态。蝗虫没有蛹，它的若虫看起来已经像缩小的成虫。" }
+  index:
+    parts: [pupa, developing-adult, pupal-case, emerging-adult, larva-l4, eggs]
+---
+
+<Lang en>
+
+After its fourth moult the larva becomes a pupa, shaped like a comma: a rounded head-and-thorax, with the abdomen curled underneath and two paddles at its tip. It breathes through two short <Term id="breathing-trumpet">breathing trumpets</Term> on its back, which touch the surface; in one study they were about <Num s="S23">0.6 mm</Num> long.
+
+A pupa does not eat. It is not asleep, though: when the water is disturbed it rolls and dives, then floats back up, which is why mosquito pupae are sometimes called tumblers.
+
+Inside the pupa the body is being rebuilt. In the see-through view, the adult's legs, wings and mouthparts lie folded under the skin. In this model the pupa lasts about <Num s="S1">1.9 days</Num> at <Num s="S1">28 °C</Num>; NEA says about <Num s="S4">two days</Num>.
+
+To come out, the adult takes in air. Its body swells and splits the pupal skin along the back, and it climbs out head first onto the surface of the water, leaving the empty skin floating. The animation shows the order of these movements, not how long they really take.
+
+Egg, larva, pupa, adult: four stages that look completely different. This is called <Term id="complete-metamorphosis">complete metamorphosis</Term>. A grasshopper has no pupa. Its young, the nymphs, already look like small adults without wings, and they grow by moulting: that is <Term id="incomplete-metamorphosis">incomplete metamorphosis</Term>. Compare the two rings on the card, and see <TopicLink slug="grasshopper" ch="nerves-and-growing-up">Nerves, senses and growing up</TopicLink>.
+
+<More title={{ en: "A pupa that moves", zh: "会动的蛹" }}>
+
+A pupa cannot feed: it has no mouth brushes. It lives on what it stored as a larva while the adult forms inside. It still needs air, so it rests at the surface with its trumpets touching it, and comes back up after each dive.
+
+</More>
+
+<More title={{ en: "Coming out", zh: "钻出来" }}>
+
+Once out, a new adult can leave the water within minutes. Males develop a little faster than females, so they usually come out first. In the try-it card, keep moving the day on until the ring reaches the adult.
+
+</More>
+
+<More title={{ en: "Complete and incomplete", zh: "完全变态和不完全变态" }}>
+
+Butterflies and beetles also go through egg, larva, pupa and adult; grasshoppers and cockroaches go through egg, nymph and adult. “Incomplete” does not mean that the change is unfinished: it names a different way of growing up, in which the young look broadly like their parents and change a little at each moult.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+第四次蜕皮后，孑孓变成蛹，形状像一个逗号：圆圆的头胸部，腹部卷在下面，末端有两片游泳桨。它用背上两根短短的<Term id="breathing-trumpet">呼吸角</Term>贴着水面呼吸；一项研究测得呼吸角长约 <Num s="S23">0.6 毫米</Num>。
+
+蛹不吃东西，但它不是在睡觉：水一被搅动，它就翻滚着潜下去，然后再浮上来。所以有人把蚊子的蛹叫做“翻跟头的”。
+
+蛹的身体正在被改造。在透视图里，可以看到成虫的足、翅和口器折叠着藏在皮下。在这个模型里，水温 <Num s="S1">28 °C</Num> 时，蛹期约 <Num s="S1">1.9 天</Num>；环境局说约 <Num s="S4">两天</Num>。
+
+成虫要出来时先吞进空气，身体胀大，把蛹皮从背上撑裂，然后头先钻出来，站到水面上，留下空空的蛹壳漂在水面。动画只表示这些动作的先后，不表示真实要多久。
+
+卵、幼虫、蛹、成虫：四个样子完全不同的阶段，叫做<Term id="complete-metamorphosis">完全变态</Term>。蝗虫没有蛹。它的若虫看起来已经像没有翅的小成虫，靠蜕皮长大，这叫<Term id="incomplete-metamorphosis">不完全变态</Term>。比较一下卡片上的两个环，再看看<TopicLink slug="grasshopper" ch="nerves-and-growing-up">神经、感觉与成长</TopicLink>。
+
+<More title={{ en: "A pupa that moves", zh: "会动的蛹" }}>
+
+蛹没有口刷，不能吃东西；成虫在里面成形时，靠的是幼虫时期储存的养分。它仍然需要空气，所以平时浮在水面，呼吸角贴着水面，每次潜下去以后都会再浮上来。
+
+</More>
+
+<More title={{ en: "Coming out", zh: "钻出来" }}>
+
+新的成虫钻出来以后，几分钟内就能离开水面。雄蚊发育得比雌蚊快一点，所以通常先钻出来。在试一试卡片里继续往后调天数，直到环上的标记走到成虫。
+
+</More>
+
+<More title={{ en: "Complete and incomplete", zh: "完全变态和不完全变态" }}>
+
+蝴蝶和甲虫也经过卵、幼虫、蛹、成虫四个阶段；蝗虫和蟑螂则经过卵、若虫、成虫三个阶段。“不完全”并不是说变化没有完成，而是另一种长大的方式：幼体大体上像父母，每蜕一次皮就变化一点。
+
+</More>
+
+</Lang>

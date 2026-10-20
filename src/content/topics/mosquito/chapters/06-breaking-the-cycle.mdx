@@ -1,0 +1,194 @@
+---
+id: breaking-the-cycle
+order: 6
+title: { en: "Breaking the cycle at home", zh: "在家里打断这一圈" }
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  layers: [water-stages]
+  pose: drained
+  hide: [follow-marker, soil-loosened, bti-granules]
+  labels: [eggs, dish-water]
+  camera: { position: [3.2, 13.5, 14.5], target: [3.4, 0.9, -0.6], fov: 32 }
+  summary: { en: "Tip out still water, and the larvae and pupae in it die before they become adults. Scrub off the eggs too. This is how homes in Singapore help to stop dengue.", zh: "把积水倒掉，水里的孑孓和蛹就会在长成成虫之前死去；再把壁上的卵刷掉。新加坡的家庭就是这样帮助阻止骨痛热症的。" }
+  sim:
+    set: { temp: 28, every: 14, wipe: false, day: 8 }
+    try:
+      vary: every
+      also: [wipe]
+      keep: [temp, { en: "Same dish, refilled with water each time", zh: "同一只皿，每次倒完再装满水" }]
+      observe: [adults, eggs-left, to-adult]
+      record: true
+      predict:
+        prompt: { en: "If the water is tipped out every 10 days, will any adults fly away?", zh: "如果每隔 10 天才倒一次水，会有成虫飞走吗？" }
+        start: { every: 6 }
+        change: { every: 10 }
+        observe: adults
+        options:
+          - { id: none, label: { en: "No", zh: "没有" }, means: none }
+          - { id: some, label: { en: "Yes, some", zh: "有" }, means: some }
+  beats:
+    - labels: [dish-water, larva-l4, escaped-adults]
+      caption: { en: "Here the water has been tipped out. The larvae and pupae die, because they can only live in water. Before this, some had already become adults and flown away.", zh: "这里的积水已经倒掉了。孑孓和蛹都会死，因为它们只能在水里生活。不过在倒水之前，已经有一些长成成虫飞走了。" }
+    - sim: { set: { wipe: true } }
+      labels: [dish, dish-water]
+      caption: { en: "The eggs on the wall can survive dry for months, so tipping out the water is not enough. Scrubbing the wall gets rid of them too.", zh: "壁上的卵能干着活好几个月，所以只倒水还不够。把壁刷一刷，卵也除掉了。" }
+    - camera: home-corner
+      layers: [home]
+      labels: [pail, pot-plate, vase, soil-hardened, roof-gutter]
+      caption: { en: "In Singapore homes, Aedes larvae are found most often in pails, flower pot plates and vases. Hardened soil in pots and blocked roof gutters can hold water too.", zh: "在新加坡的住家里，最常发现孑孓的地方是水桶、花盆底盘和花瓶。花盆里干硬的泥土和堵塞的屋顶檐槽也会积水。" }
+    - camera: { position: [-9.75, 1.0, 0.85], target: [-10.4, 0.16, -0.62], fov: 30 }
+      layers: [home]
+      pose: home-bl
+      hide: [follow-marker, soil-hardened, plate-water, bti-granules]
+      labels: [soil-loosened, pot-plate]
+      caption: { en: "B: Break up hardened soil, so water sinks in instead of lying on top. L: Lift and empty flowerpot plates.", zh: "B：铲松干硬的泥土，让水渗下去，不积在表面。L：清除花盆底盘的积水。" }
+    - camera: { position: [-8.6, 1.35, 1.05], target: [-9.65, 0.42, -0.95], fov: 30 }
+      layers: [home]
+      pose: home-oc
+      hide: [follow-marker, soil-hardened, plate-water, pail-water, bti-granules]
+      highlight: { custom: { vase-water: "#bcd3d6" } }
+      labels: [pail, vase]
+      caption: { en: "O: Overturn pails and wipe their rims. C: Change water in vases.", zh: "O：倒置存放水桶并擦干水桶边缘。C：更换花瓶里的水。" }
+    - camera: { position: [-9.75, 3.4, -0.45], target: [-10.25, 2.32, -1.4], fov: 30 }
+      layers: [home]
+      pose: home-oc
+      hide: [follow-marker, soil-hardened, plate-water, pail-water, gutter-debris, gutter-water]
+      labels: [roof-gutter, bti-granules]
+      caption: { en: "K: Keep roof gutters clear and place BTI insecticide inside. Do these steps with an adult, and check your home regularly.", zh: "K：疏通阻塞的屋顶檐槽并放置BTI杀蚊药。和家里的大人一起做，并且定期检查。" }
+    - camera: heads
+      layers: [head, thorax-wings, belly, male, water-stages, cycle]
+      hide: [follow-marker]
+      labels: [male-antennae, male-body]
+      caption: { en: "Singapore also releases male mosquitoes that carry Wolbachia bacteria. Males do not bite. When they mate with wild females, the eggs do not hatch, so fewer Aedes mosquitoes grow up.", zh: "新加坡还释放带有沃尔巴克氏菌的雄蚊。雄蚊不叮人。它们和野外的雌蚊交配后，产下的卵不会孵化，长大的伊蚊就少了。" }
+  index:
+    parts: [dish-water, eggs, larva-l4, escaped-adults, pail, pot-plate, vase, soil-hardened, soil-loosened, roof-gutter, male-body]
+---
+
+<Lang en>
+
+Here the water has been tipped out of the dish. The larvae and pupae are left on the bottom; they can live only in water, so they die before they become adults. But in this model the dish was left for <Num s="S1">14 days</Num>, longer than the <Num s="S1">7.2 days</Num> the young need at <Num s="S1">28 °C</Num>, so some adults had already come out and flown away. The eggs on the wall survive dry, so tipping out the water is not enough: the wall has to be scrubbed as well. Use the try-it card to change how often the water is tipped out, and whether the wall is scrubbed.
+
+Dengue is spread mainly by infected female Aedes mosquitoes. Its signs include a fever, a bad headache, pain behind the eyes, pain in the muscles and joints, feeling sick or vomiting, and a rash. Many people have only a mild illness, but some become very ill. If you feel unwell, tell an adult; a doctor can check whether it is dengue.
+
+Places at home that hold still water are <Term id="breeding-habitat">breeding habitats</Term>. In 2025 the ones NEA found most often in homes were pails, flowerpot plates and vases. NEA's <Term id="mozzie-wipeout">Mozzie Wipeout</Term> has five steps, B-L-O-C-K:
+
+- **B**: Break up hardened soil
+- **L**: Lift and empty flowerpot plates
+- **O**: Overturn pails and wipe their rims
+- **C**: Change water in vases
+- **K**: Keep roof gutters clear and place BTI insecticide inside
+
+BTI is an insecticide that acts on mosquito larvae in water. Do these steps with an adult, and tell an adult whenever you see still water; climbing up to a gutter and handling insecticide are jobs for adults. NEA asks for the Mozzie Wipeout at least <Num s="S41">once a week</Num>.
+
+<Figure src="figures/mosquito-empty-saucer" alt={{ en: "An empty flower pot plate stood on its edge to dry beside a potted plant.", zh: "一个倒空的花盆底盘竖起来晾干，放在一盆植物旁边。" }} caption={{ en: "L: lift and empty flowerpot plates. A plate stood up to dry holds no water.", zh: "清除花盆底盘的积水。竖起来晾干的底盘，就不会积水。" }} />
+
+Singapore also releases male Aedes aegypti that carry <Term id="wolbachia">Wolbachia</Term> bacteria. Males do not bite. When they mate with females that do not carry the same Wolbachia, the eggs do not hatch, so fewer mosquitoes grow up. This works alongside clearing still water; it does not replace it.
+
+<More title={{ en: "Signs of dengue, and protecting yourself", zh: "骨痛热症的征兆和自我保护" }}>
+
+The signs listed above are the ones both the World Health Organization and Singapore's Ministry of Health give. Only a doctor can tell whether an illness is dengue.
+
+Alongside B-L-O-C-K, NEA asks people to protect themselves with S-A-W: Spray insecticide in dark corners around the house; Apply insect repellent regularly; Wear long-sleeve tops and long pants. Insecticide sprays are for adults to use.
+
+</More>
+
+<More title={{ en: "Dengue in Singapore", zh: "新加坡的骨痛热症" }}>
+
+Reported dengue cases change a lot from year to year:
+
+| Year | Reported cases |
+|---|---:|
+| 2019 | <Num s="S30">15,998</Num> |
+| 2020 | <Num s="S31">35,315</Num> |
+| 2021 | <Num s="S32">5,258</Num> |
+| 2022 | <Num s="S33">32,173</Num> |
+| 2023 | <Num s="S33">9,949</Num> |
+| 2024 | <Num s="S34">13,651</Num> |
+| 2025 | <Num s="S35">4,036</Num> |
+
+A later NEA report gives <Num s="S32">35,266</Num> for 2020, a little different from the earlier figure; both are shown. The 2025 figure adds up the four quarterly reports. In 2020, the year with the most cases, <Num s="S35">32</Num> people died of dengue caught in Singapore.
+
+</More>
+
+<More title={{ en: "Clean water counts too", zh: "干净的水也会滋生" }}>
+
+NEA says Aedes prefers to breed in clean, still water, so clear water in a vase or a plate needs as much care as dirty water. For flowerpot plates and vases, NEA's checklist asks for the water to be changed <Num s="S42">every other day</Num>, and the inside of the vase scrubbed to remove eggs.
+
+</More>
+
+<More title={{ en: "How Wolbachia works, and why “regularly”", zh: "沃尔巴克氏菌怎样起作用，为什么要“定期”" }}>
+
+In the areas where these males are released, NEA reports <Num s="S11">80–90 %</Num> fewer Aedes aegypti and a dengue risk over <Num s="S11">70 %</Num> lower. A large trial in Singapore found that the releases protected people against dengue by <Num s="S12">71–72 %</Num>. These results are for the release areas, not for every home in Singapore, and the method targets only Aedes aegypti.
+
+Why check often? In this model, at <Num s="S1">28 °C</Num>, a larva becomes an adult in about <Num s="S1">7.2 days</Num>, and at <Num s="S1">32 °C</Num> in <Num s="S1">6.4 days</Num>. Real mosquitoes vary: some grow a little faster than the average, so waiting until just before a week is up is cutting it fine.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+这里的积水已经从皿里倒掉了。孑孓和蛹留在皿底；它们只能在水里生活，所以在长成成虫之前就会死去。不过在这个模型里，这皿水放了 <Num s="S1">14 天</Num>，比水温 <Num s="S1">28 °C</Num> 时孑孓长成成虫需要的 <Num s="S1">7.2 天</Num>还久，所以已经有一些成虫钻出来飞走了。壁上的卵不怕干，所以只倒水还不够，壁也要刷干净。用试一试卡片改变多久倒一次水，以及有没有刷壁。
+
+骨痛热症主要由受感染的雌性伊蚊传播。它的征兆有：发烧、头痛得厉害、眼睛后面痛、肌肉和关节痛、恶心或呕吐，还有皮疹。许多人病得很轻，但也有人病得很重。觉得不舒服，要告诉大人；医生会检查是不是骨痛热症。
+
+家里会积水的地方，就是<Term id="breeding-habitat">滋生处</Term>。2025 年，环境局在住家里最常发现伊蚊滋生的地方，是水桶、花盆底盘和花瓶。环境局的<Term id="mozzie-wipeout">灭蚊行动</Term>有五个步骤，叫 B-L-O-C-K：
+
+- **B**：铲松干硬的泥土
+- **L**：清除花盆底盘的积水
+- **O**：倒置存放水桶并擦干水桶边缘
+- **C**：更换花瓶里的水
+- **K**：疏通阻塞的屋顶檐槽并放置BTI杀蚊药
+
+BTI 是一种对付水里孑孓的杀蚊药。和家里的大人一起做这些步骤，看到积水就告诉大人；爬高清理檐槽、使用杀虫药，都是大人做的事。环境局建议至少 <Num s="S41">每星期一次</Num>进行灭蚊行动。
+
+<Figure src="figures/mosquito-empty-saucer" alt={{ en: "An empty flower pot plate stood on its edge to dry beside a potted plant.", zh: "一个倒空的花盆底盘竖起来晾干，放在一盆植物旁边。" }} caption={{ en: "L: lift and empty flowerpot plates. A plate stood up to dry holds no water.", zh: "清除花盆底盘的积水。竖起来晾干的底盘，就不会积水。" }} />
+
+新加坡还释放带有<Term id="wolbachia">沃尔巴克氏菌</Term>的雄性埃及伊蚊。雄蚊不叮人。它们和不带同一种沃尔巴克氏菌的雌蚊交配后，产下的卵不会孵化，长大的蚊子就少了。这个办法要和清除积水一起用，不能代替它。
+
+<More title={{ en: "Signs of dengue, and protecting yourself", zh: "骨痛热症的征兆和自我保护" }}>
+
+上面列出的征兆，是世界卫生组织和新加坡卫生部都列出的。只有医生才能判断是不是骨痛热症。
+
+除了 B-L-O-C-K，环境局还提醒大家用 S-A-W 保护自己：喷杀虫剂（检查家中阴暗角落）；用驱蚊剂（定期防范）；穿长衣长裤（免蚊虫叮咬）。杀虫剂喷雾要由大人使用。
+
+</More>
+
+<More title={{ en: "Dengue in Singapore", zh: "新加坡的骨痛热症" }}>
+
+每年报告的骨痛热症病例相差很大：
+
+| 年份 | 报告病例 |
+|---|---:|
+| 2019 | <Num s="S30">15,998</Num> |
+| 2020 | <Num s="S31">35,315</Num> |
+| 2021 | <Num s="S32">5,258</Num> |
+| 2022 | <Num s="S33">32,173</Num> |
+| 2023 | <Num s="S33">9,949</Num> |
+| 2024 | <Num s="S34">13,651</Num> |
+| 2025 | <Num s="S35">4,036</Num> |
+
+环境局后来的一份报告把 2020 年写成 <Num s="S32">35,266</Num> 起，和较早的数字稍有不同，两个都列出来。2025 年的数字是四份季度报告加起来的。病例最多的 2020 年，有 <Num s="S35">32</Num> 人因在新加坡感染骨痛热症而去世。
+
+</More>
+
+<More title={{ en: "Clean water counts too", zh: "干净的水也会滋生" }}>
+
+环境局说，伊蚊喜欢在干净的积水里滋生，所以花瓶或底盘里清清的水，和脏水一样要处理。环境局的清单建议，花盆底盘和花瓶的水 <Num s="S42">隔天</Num>换一次，并刷洗花瓶内壁，把卵刷掉。
+
+</More>
+
+<More title={{ en: "How Wolbachia works, and why “regularly”", zh: "沃尔巴克氏菌怎样起作用，为什么要“定期”" }}>
+
+在释放这些雄蚊的地区，环境局报告埃及伊蚊减少了 <Num s="S11">80–90 %</Num>，骨痛热症的风险低了 <Num s="S11">70 %</Num> 以上。在新加坡进行的一项大型试验发现，释放雄蚊对骨痛热症的保护效力为 <Num s="S12">71–72 %</Num>。这些结果只说释放地区，不是新加坡每一户人家，而且这个办法只针对埃及伊蚊。
+
+为什么要常常检查？在这个模型里，水温 <Num s="S1">28 °C</Num> 时，孑孓大约 <Num s="S1">7.2 天</Num>长成成虫，<Num s="S1">32 °C</Num> 时只要 <Num s="S1">6.4 天</Num>。真实的蚊子有快有慢，有的比平均快一点，所以拖到快满一个星期才处理，就太迟了。
+
+</More>
+
+</Lang>
