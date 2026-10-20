@@ -1,0 +1,902 @@
+{
+  "1973": [
+    {
+      "id": "LM01_L1TP_134059_19731017_02_T2",
+      "scene_cloud": 2.0,
+      "island_cloud_shadow_pct": 1.4743043691376414
+    },
+    {
+      "id": "LM01_L1TP_134059_19720916_02_T2",
+      "scene_cloud": 45.0,
+      "island_cloud_shadow_pct": 86.85070883678432
+    }
+  ],
+  "1981": [
+    {
+      "id": "LM02_L1TP_134059_19791031_02_T2",
+      "scene_cloud": 20.0,
+      "island_cloud_shadow_pct": 7.008894366900963
+    }
+  ],
+  "1990": [
+    {
+      "id": "LT05_L2SP_125059_19920719_02_T1",
+      "scene_cloud": 7.0,
+      "island_cloud_shadow_pct": 0.18854771863208333
+    },
+    {
+      "id": "LT05_L2SP_125059_19910428_02_T1",
+      "scene_cloud": 11.0,
+      "island_cloud_shadow_pct": 4.0733444677601245
+    },
+    {
+      "id": "LT05_L2SP_125059_19880521_02_T1",
+      "scene_cloud": 33.0,
+      "island_cloud_shadow_pct": 7.0603685780765995
+    },
+    {
+      "id": "LT05_L2SP_125059_19900714_02_T1",
+      "scene_cloud": 30.0,
+      "island_cloud_shadow_pct": 8.110882712612831
+    },
+    {
+      "id": "LT05_L2SP_125059_19890524_02_T1",
+      "scene_cloud": 29.0,
+      "island_cloud_shadow_pct": 9.1440290446757
+    },
+    {
+      "id": "LT05_L2SP_125059_19900831_02_T1",
+      "scene_cloud": 9.0,
+      "island_cloud_shadow_pct": 11.54744740886662
+    },
+    {
+      "id": "LT05_L2SP_125059_19910311_02_T1",
+      "scene_cloud": 18.0,
+      "island_cloud_shadow_pct": 12.705023339471545
+    },
+    {
+      "id": "LT05_L2SP_125059_19890913_02_T1",
+      "scene_cloud": 18.0,
+      "island_cloud_shadow_pct": 12.966729952083899
+    },
+    {
+      "id": "LT05_L2SP_125059_19921226_02_T1",
+      "scene_cloud": 56.0,
+      "island_cloud_shadow_pct": 13.547718632083328
+    },
+    {
+      "id": "LT05_L2SP_125059_19910903_02_T1",
+      "scene_cloud": 26.0,
+      "island_cloud_shadow_pct": 14.547318934711337
+    },
+    {
+      "id": "LT05_L2SP_125059_19920921_02_T1",
+      "scene_cloud": 24.0,
+      "island_cloud_shadow_pct": 15.878929762703478
+    },
+    {
+      "id": "LT05_L2SP_125059_19890929_02_T1",
+      "scene_cloud": 12.0,
+      "island_cloud_shadow_pct": 29.11961895517204
+    },
+    {
+      "id": "LT05_L2SP_125059_19880809_02_T1",
+      "scene_cloud": 23.0,
+      "island_cloud_shadow_pct": 40.75033664986986
+    },
+    {
+      "id": "LT05_L2SP_125059_19890812_02_T1",
+      "scene_cloud": 32.0,
+      "island_cloud_shadow_pct": 43.43580336792619
+    },
+    {
+      "id": "LT05_L2SP_125059_19880318_02_T1",
+      "scene_cloud": 12.0,
+      "island_cloud_shadow_pct": 46.54154711432773
+    },
+    {
+      "id": "LT05_L2SP_125059_19901018_02_T1",
+      "scene_cloud": 35.0,
+      "island_cloud_shadow_pct": 49.985963008959885
+    },
+    {
+      "id": "LT05_L2SP_125059_19900527_02_T1",
+      "scene_cloud": 53.0,
+      "island_cloud_shadow_pct": 50.24100799870575
+    },
+    {
+      "id": "LT05_L2SP_125059_19920125_02_T1",
+      "scene_cloud": 54.0,
+      "island_cloud_shadow_pct": 51.03695297370086
+    },
+    {
+      "id": "LT05_L2SP_125059_19900103_02_T1",
+      "scene_cloud": 29.0,
+      "island_cloud_shadow_pct": 52.5134540990393
+    },
+    {
+      "id": "LT05_L2SP_125059_19910615_02_T1",
+      "scene_cloud": 9.0,
+      "island_cloud_shadow_pct": 55.23294267673523
+    },
+    {
+      "id": "LT05_L2SP_125059_19900511_02_T1",
+      "scene_cloud": 13.0,
+      "island_cloud_shadow_pct": 55.94288134222184
+    },
+    {
+      "id": "LT05_L2SP_125059_19900409_02_T1",
+      "scene_cloud": 26.0,
+      "island_cloud_shadow_pct": 57.396899490385856
+    },
+    {
+      "id": "LT05_L2SP_125059_19891015_02_T1",
+      "scene_cloud": 82.0,
+      "island_cloud_shadow_pct": 58.42528752040121
+    },
+    {
+      "id": "LT05_L2SP_125059_19890625_02_T1",
+      "scene_cloud": 82.0,
+      "island_cloud_shadow_pct": 59.144623832431634
+    },
+    {
+      "id": "LT05_L2SP_125059_19880910_02_T1",
+      "scene_cloud": 50.0,
+      "island_cloud_shadow_pct": 59.66446833112072
+    },
+    {
+      "id": "LT05_L2SP_125059_19910327_02_T1",
+      "scene_cloud": 21.0,
+      "island_cloud_shadow_pct": 60.20370291065337
+    },
+    {
+      "id": "LT05_L2SP_125059_19920313_02_T1",
+      "scene_cloud": 23.0,
+      "island_cloud_shadow_pct": 60.574136725051034
+    },
+    {
+      "id": "LT05_L2SP_125059_19890406_02_T1",
+      "scene_cloud": 24.0,
+      "island_cloud_shadow_pct": 64.68281158551382
+    },
+    {
+      "id": "LT05_L2SP_125059_19900628_02_T1",
+      "scene_cloud": 44.0,
+      "island_cloud_shadow_pct": 68.2576049562474
+    },
+    {
+      "id": "LT05_L2SP_125059_19900220_02_T1",
+      "scene_cloud": 74.0,
+      "island_cloud_shadow_pct": 71.49170390038019
+    },
+    {
+      "id": "LT05_L2SP_125059_19910412_02_T1",
+      "scene_cloud": 24.0,
+      "island_cloud_shadow_pct": 73.03030086743846
+    },
+    {
+      "id": "LT05_L2SP_125059_19880708_02_T1",
+      "scene_cloud": 79.0,
+      "island_cloud_shadow_pct": 73.43392383861743
+    },
+    {
+      "id": "LT05_L2SP_125059_19920210_02_T1",
+      "scene_cloud": 57.0,
+      "island_cloud_shadow_pct": 73.7114518055377
+    },
+    {
+      "id": "LT05_L2SP_125059_19890305_02_T2",
+      "scene_cloud": 81.0,
+      "island_cloud_shadow_pct": 78.59822800831752
+    },
+    {
+      "id": "LT05_L2SP_125059_19911021_02_T1",
+      "scene_cloud": 82.0,
+      "island_cloud_shadow_pct": 81.2860738773976
+    },
+    {
+      "id": "LT05_L2SP_125059_19880403_02_T1",
+      "scene_cloud": 38.0,
+      "island_cloud_shadow_pct": 82.11568383937876
+    },
+    {
+      "id": "LT05_L2SP_125059_19900916_02_T1",
+      "scene_cloud": 37.0,
+      "island_cloud_shadow_pct": 82.35264728134413
+    },
+    {
+      "id": "LT05_L2SP_125059_19920820_02_T1",
+      "scene_cloud": 78.0,
+      "island_cloud_shadow_pct": 82.35395581440719
+    },
+    {
+      "id": "LT05_L2SP_125059_19910530_02_T1",
+      "scene_cloud": 68.0,
+      "island_cloud_shadow_pct": 82.37405964055786
+    },
+    {
+      "id": "LT05_L2SP_125059_19880724_02_T2",
+      "scene_cloud": 48.0,
+      "island_cloud_shadow_pct": 82.91412692294881
+    },
+    {
+      "id": "LT05_L2SP_125059_19890828_02_T1",
+      "scene_cloud": 57.0,
+      "island_cloud_shadow_pct": 83.16869608248993
+    },
+    {
+      "id": "LT05_L2SP_125059_19911005_02_T1",
+      "scene_cloud": 39.0,
+      "island_cloud_shadow_pct": 83.89957127698551
+    },
+    {
+      "id": "LT05_L2SP_125059_19880215_02_T1",
+      "scene_cloud": 42.0,
+      "island_cloud_shadow_pct": 84.2036267778206
+    },
+    {
+      "id": "LT05_L2SP_125059_19881231_02_T1",
+      "scene_cloud": 84.0,
+      "island_cloud_shadow_pct": 84.74286135735323
+    },
+    {
+      "id": "LT05_L2SP_125059_19880302_02_T2",
+      "scene_cloud": 63.0,
+      "island_cloud_shadow_pct": 86.35568783635247
+    },
+    {
+      "id": "LT05_L2SP_125059_19900730_02_T1",
+      "scene_cloud": 53.0,
+      "island_cloud_shadow_pct": 87.47091487873467
+    },
+    {
+      "id": "LT05_L2SP_125059_19880622_02_T1",
+      "scene_cloud": 61.0,
+      "island_cloud_shadow_pct": 87.63400568141265
+    },
+    {
+      "id": "LT05_L2SP_125059_19890217_02_T1",
+      "scene_cloud": 61.0,
+      "island_cloud_shadow_pct": 89.6347527348341
+    },
+    {
+      "id": "LT05_L2SP_125059_19920703_02_T1",
+      "scene_cloud": 27.0,
+      "island_cloud_shadow_pct": 90.06609281543973
+    },
+    {
+      "id": "LT05_L2SP_125059_19910514_02_T2",
+      "scene_cloud": 44.0,
+      "island_cloud_shadow_pct": 95.88359289871002
+    },
+    {
+      "id": "LT05_L2SP_125059_19890508_02_T1",
+      "scene_cloud": 52.0,
+      "island_cloud_shadow_pct": 97.18094395196019
+    },
+    {
+      "id": "LT05_L2SP_125059_19921007_02_T1",
+      "scene_cloud": 58.0,
+      "island_cloud_shadow_pct": 97.49832269852826
+    },
+    {
+      "id": "LT05_L2SP_125059_19900308_02_T1",
+      "scene_cloud": 70.0,
+      "island_cloud_shadow_pct": 97.60467074928982
+    },
+    {
+      "id": "LT05_L2SP_125059_19901103_02_T1",
+      "scene_cloud": 83.0,
+      "island_cloud_shadow_pct": 99.13208570653647
+    },
+    {
+      "id": "LT05_L2SP_125059_19910818_02_T1",
+      "scene_cloud": 83.0,
+      "island_cloud_shadow_pct": 99.82418073934497
+    },
+    {
+      "id": "LT05_L2SP_125059_19900612_02_T1",
+      "scene_cloud": 79.0,
+      "island_cloud_shadow_pct": 99.84880495244077
+    },
+    {
+      "id": "LT05_L2SP_125059_19890609_02_T1",
+      "scene_cloud": 46.0,
+      "island_cloud_shadow_pct": 99.9914350563145
+    },
+    {
+      "id": "LT05_L2SP_125059_19921023_02_T1",
+      "scene_cloud": 76.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LT05_L2SP_125059_19900204_02_T2",
+      "scene_cloud": 77.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LT05_L2SP_125059_19891218_02_T2",
+      "scene_cloud": 79.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LT05_L2SP_125059_19891031_02_T1",
+      "scene_cloud": 89.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LT05_L2SP_125059_19890727_02_T1",
+      "scene_cloud": 89.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LT05_L2SP_125059_19890321_02_T2",
+      "scene_cloud": 91.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LT05_L2SP_125059_19910919_02_T1",
+      "scene_cloud": 92.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LT05_L2SP_125059_19900119_02_T2",
+      "scene_cloud": 93.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LT05_L2SP_125059_19891202_02_T2",
+      "scene_cloud": 94.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LT05_L2SP_125059_19890201_02_T1",
+      "scene_cloud": 94.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LT05_L2SP_125059_19881215_02_T2",
+      "scene_cloud": 95.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LT05_L2SP_125059_19881012_02_T1",
+      "scene_cloud": 95.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LT05_L2SP_125059_19881028_02_T1",
+      "scene_cloud": 96.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LT05_L2SP_125059_19880926_02_T1",
+      "scene_cloud": 96.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LT05_L2SP_125059_19880130_02_T2",
+      "scene_cloud": 97.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LT05_L2SP_125059_19911122_02_T2",
+      "scene_cloud": 100.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LT05_L2SP_125059_19911106_02_T2",
+      "scene_cloud": 100.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LT05_L2SP_125059_19881129_02_T2",
+      "scene_cloud": 100.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LT05_L2SP_125059_19880606_02_T1",
+      "scene_cloud": 100.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LT05_L2SP_125059_19880114_02_T2",
+      "scene_cloud": 100.0,
+      "island_cloud_shadow_pct": 100.0
+    }
+  ],
+  "2000": [
+    {
+      "id": "LE07_L2SP_125059_20021011_02_T1",
+      "scene_cloud": 54.0,
+      "island_cloud_shadow_pct": 4.796011591223788
+    },
+    {
+      "id": "LE07_L2SP_125059_20010501_02_T1",
+      "scene_cloud": 51.0,
+      "island_cloud_shadow_pct": 30.865321018847634
+    },
+    {
+      "id": "LE07_L2SP_125059_20000903_02_T1",
+      "scene_cloud": 16.0,
+      "island_cloud_shadow_pct": 33.42302732692866
+    },
+    {
+      "id": "LE07_L2SP_125059_20020909_02_T1",
+      "scene_cloud": 53.0,
+      "island_cloud_shadow_pct": 37.47924190731779
+    },
+    {
+      "id": "LE07_L2SP_125059_20020402_02_T1",
+      "scene_cloud": 17.0,
+      "island_cloud_shadow_pct": 42.352932779466975
+    },
+    {
+      "id": "LE07_L2SP_125059_20020605_02_T1",
+      "scene_cloud": 23.0,
+      "island_cloud_shadow_pct": 43.61007618041578
+    },
+    {
+      "id": "LE07_L2SP_125059_20020317_02_T1",
+      "scene_cloud": 16.0,
+      "island_cloud_shadow_pct": 44.66213676311745
+    },
+    {
+      "id": "LE07_L2SP_125059_20010415_02_T1",
+      "scene_cloud": 21.0,
+      "island_cloud_shadow_pct": 45.470096450782506
+    },
+    {
+      "id": "LE07_L2SP_125059_20000428_02_T1",
+      "scene_cloud": 10.0,
+      "island_cloud_shadow_pct": 46.29268791724361
+    },
+    {
+      "id": "LE07_L2SP_125059_20020128_02_T1",
+      "scene_cloud": 35.0,
+      "island_cloud_shadow_pct": 48.21813484076342
+    },
+    {
+      "id": "LE07_L2SP_125059_20020808_02_T1",
+      "scene_cloud": 50.0,
+      "island_cloud_shadow_pct": 59.78116568883559
+    },
+    {
+      "id": "LE07_L2SP_125059_20000530_02_T1",
+      "scene_cloud": 21.0,
+      "island_cloud_shadow_pct": 63.88698556806989
+    },
+    {
+      "id": "LE07_L2SP_125059_20010720_02_T1",
+      "scene_cloud": 21.0,
+      "island_cloud_shadow_pct": 65.71238919104107
+    },
+    {
+      "id": "LE07_L2SP_125059_20021214_02_T1",
+      "scene_cloud": 53.0,
+      "island_cloud_shadow_pct": 66.83653804976231
+    },
+    {
+      "id": "LE07_L2SP_125059_20020520_02_T1",
+      "scene_cloud": 20.0,
+      "island_cloud_shadow_pct": 68.83157514072678
+    },
+    {
+      "id": "LE07_L2SP_125059_20000717_02_T1",
+      "scene_cloud": 54.0,
+      "island_cloud_shadow_pct": 72.24529998715259
+    },
+    {
+      "id": "LE07_L2SP_125059_20010226_02_T1",
+      "scene_cloud": 41.0,
+      "island_cloud_shadow_pct": 73.29093686209013
+    },
+    {
+      "id": "LE07_L2SP_125059_20020723_02_T1",
+      "scene_cloud": 47.0,
+      "island_cloud_shadow_pct": 76.18255701635428
+    },
+    {
+      "id": "LE07_L2SP_125059_20010922_02_T1",
+      "scene_cloud": 50.0,
+      "island_cloud_shadow_pct": 77.66726621272466
+    },
+    {
+      "id": "LE07_L2SP_125059_20020112_02_T1",
+      "scene_cloud": 40.0,
+      "island_cloud_shadow_pct": 78.44370214932503
+    },
+    {
+      "id": "LE07_L2SP_125059_20020504_02_T1",
+      "scene_cloud": 58.0,
+      "island_cloud_shadow_pct": 80.51689435141964
+    },
+    {
+      "id": "LE07_L2SP_125059_20001106_02_T1",
+      "scene_cloud": 47.0,
+      "island_cloud_shadow_pct": 80.60861062338515
+    },
+    {
+      "id": "LE07_L2SP_125059_20010330_02_T1",
+      "scene_cloud": 36.0,
+      "island_cloud_shadow_pct": 82.68549050956656
+    },
+    {
+      "id": "LE07_L2SP_125059_19990901_02_T1",
+      "scene_cloud": 24.0,
+      "island_cloud_shadow_pct": 86.93584381349359
+    },
+    {
+      "id": "LE07_L2SP_125059_20020301_02_T1",
+      "scene_cloud": 67.0,
+      "island_cloud_shadow_pct": 89.68423907612807
+    },
+    {
+      "id": "LE07_L2SP_125059_20011125_02_T1",
+      "scene_cloud": 88.0,
+      "island_cloud_shadow_pct": 91.45468431045066
+    },
+    {
+      "id": "LE07_L2SP_125059_20020707_02_T1",
+      "scene_cloud": 88.0,
+      "island_cloud_shadow_pct": 94.43956718484576
+    },
+    {
+      "id": "LE07_L2SP_125059_20020824_02_T1",
+      "scene_cloud": 78.0,
+      "island_cloud_shadow_pct": 95.68838355721144
+    },
+    {
+      "id": "LE07_L2SP_125059_20001208_02_T1",
+      "scene_cloud": 58.0,
+      "island_cloud_shadow_pct": 98.82648375753597
+    },
+    {
+      "id": "LE07_L2SP_125059_20011024_02_T1",
+      "scene_cloud": 67.0,
+      "island_cloud_shadow_pct": 99.43780661308818
+    },
+    {
+      "id": "LE07_L2SP_125059_20021112_02_T1",
+      "scene_cloud": 68.0,
+      "island_cloud_shadow_pct": 99.8202551401558
+    },
+    {
+      "id": "LE07_L2SP_125059_20010906_02_T1",
+      "scene_cloud": 88.0,
+      "island_cloud_shadow_pct": 99.83441108874709
+    },
+    {
+      "id": "LE07_L2SP_125059_20020621_02_T1",
+      "scene_cloud": 71.0,
+      "island_cloud_shadow_pct": 99.86284194348089
+    },
+    {
+      "id": "LE07_L2SP_125059_20011109_02_T1",
+      "scene_cloud": 75.0,
+      "island_cloud_shadow_pct": 99.94849138033584
+    },
+    {
+      "id": "LE07_L2SP_125059_20020925_02_T1",
+      "scene_cloud": 90.0,
+      "island_cloud_shadow_pct": 99.988580075086
+    },
+    {
+      "id": "LE07_L2SP_125059_20010109_02_T1",
+      "scene_cloud": 84.0,
+      "island_cloud_shadow_pct": 99.99607440081081
+    },
+    {
+      "id": "LE07_L2SP_125059_20010517_02_T1",
+      "scene_cloud": 68.0,
+      "island_cloud_shadow_pct": 99.99928625469288
+    },
+    {
+      "id": "LE07_L2SP_125059_20021128_02_T2",
+      "scene_cloud": 92.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LE07_L2SP_125059_20010314_02_T1",
+      "scene_cloud": 98.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LE07_L2SP_125059_20021230_02_T1",
+      "scene_cloud": 99.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LE07_L2SP_125059_20021027_02_T1",
+      "scene_cloud": 99.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LE07_L2SP_125059_20020213_02_T2",
+      "scene_cloud": 99.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LE07_L2SP_125059_19991206_02_T2",
+      "scene_cloud": 99.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LE07_L2SP_125059_20011227_02_T2",
+      "scene_cloud": 100.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LE07_L2SP_125059_20010210_02_T2",
+      "scene_cloud": 100.0,
+      "island_cloud_shadow_pct": 100.0
+    }
+  ],
+  "2010": [
+    {
+      "id": "LT05_L2SP_125059_20090224_02_T2",
+      "scene_cloud": 37.0,
+      "island_cloud_shadow_pct": 7.857146255930034
+    },
+    {
+      "id": "LT05_L2SP_125059_20080222_02_T1",
+      "scene_cloud": 34.0,
+      "island_cloud_shadow_pct": 18.853225415042896
+    },
+    {
+      "id": "LT05_L2SP_125059_20110214_02_T1",
+      "scene_cloud": 26.0,
+      "island_cloud_shadow_pct": 22.551258808806665
+    },
+    {
+      "id": "LT05_L2SP_125059_20080629_02_T1",
+      "scene_cloud": 14.0,
+      "island_cloud_shadow_pct": 24.54344091854263
+    },
+    {
+      "id": "LT05_L2SP_125059_20080410_02_T1",
+      "scene_cloud": 13.0,
+      "island_cloud_shadow_pct": 30.409713597799758
+    },
+    {
+      "id": "LT05_L2SP_125059_20090531_02_T1",
+      "scene_cloud": 32.0,
+      "island_cloud_shadow_pct": 39.32225124786471
+    },
+    {
+      "id": "LT05_L2SP_125059_20080426_02_T1",
+      "scene_cloud": 24.0,
+      "island_cloud_shadow_pct": 41.5385493840378
+    },
+    {
+      "id": "LT05_L2SP_125059_20081104_02_T1",
+      "scene_cloud": 14.0,
+      "island_cloud_shadow_pct": 43.738193463044645
+    },
+    {
+      "id": "LT05_L2SP_125059_20090413_02_T1",
+      "scene_cloud": 72.0,
+      "island_cloud_shadow_pct": 47.293953625588244
+    },
+    {
+      "id": "LT05_L2SP_125059_20101009_02_T1",
+      "scene_cloud": 28.0,
+      "island_cloud_shadow_pct": 47.38329074653001
+    },
+    {
+      "id": "LT05_L2SP_125059_20090803_02_T1",
+      "scene_cloud": 36.0,
+      "island_cloud_shadow_pct": 50.15321732592941
+    },
+    {
+      "id": "LT05_L2SP_125059_20091107_02_T1",
+      "scene_cloud": 54.0,
+      "island_cloud_shadow_pct": 51.505407810276985
+    },
+    {
+      "id": "LT05_L2SP_125059_20111028_02_T1",
+      "scene_cloud": 42.0,
+      "island_cloud_shadow_pct": 51.94816781579661
+    },
+    {
+      "id": "LT05_L2SP_125059_20080512_02_T1",
+      "scene_cloud": 56.0,
+      "island_cloud_shadow_pct": 55.856875032713326
+    },
+    {
+      "id": "LT05_L2SP_125059_20080325_02_T1",
+      "scene_cloud": 47.0,
+      "island_cloud_shadow_pct": 56.04482796358947
+    },
+    {
+      "id": "LT05_L2SP_125059_20090208_02_T1",
+      "scene_cloud": 40.0,
+      "island_cloud_shadow_pct": 57.764954153759774
+    },
+    {
+      "id": "LT05_L2SP_125059_20090718_02_T2",
+      "scene_cloud": 48.0,
+      "island_cloud_shadow_pct": 61.56897872563154
+    },
+    {
+      "id": "LT05_L2SP_125059_20091209_02_T1",
+      "scene_cloud": 23.0,
+      "island_cloud_shadow_pct": 61.59669583505821
+    },
+    {
+      "id": "LT05_L2SP_125059_20081019_02_T1",
+      "scene_cloud": 25.0,
+      "island_cloud_shadow_pct": 61.727430183813205
+    },
+    {
+      "id": "LT05_L2SP_125059_20100806_02_T1",
+      "scene_cloud": 57.0,
+      "island_cloud_shadow_pct": 63.028349963598984
+    },
+    {
+      "id": "LT05_L2SP_125059_20090328_02_T1",
+      "scene_cloud": 22.0,
+      "island_cloud_shadow_pct": 66.79073939255517
+    },
+    {
+      "id": "LT05_L2SP_125059_20080528_02_T1",
+      "scene_cloud": 44.0,
+      "island_cloud_shadow_pct": 67.46392017472486
+    },
+    {
+      "id": "LT05_L2SP_125059_20080731_02_T1",
+      "scene_cloud": 22.0,
+      "island_cloud_shadow_pct": 68.33956670901556
+    },
+    {
+      "id": "LT05_L2SP_125059_20100126_02_T1",
+      "scene_cloud": 45.0,
+      "island_cloud_shadow_pct": 76.19837837066221
+    },
+    {
+      "id": "LT05_L2SP_125059_20090904_02_T1",
+      "scene_cloud": 50.0,
+      "island_cloud_shadow_pct": 79.35943737836591
+    },
+    {
+      "id": "LT05_L2SP_125059_20080816_02_T1",
+      "scene_cloud": 31.0,
+      "island_cloud_shadow_pct": 79.7995803177594
+    },
+    {
+      "id": "LT05_L2SP_125059_20090920_02_T1",
+      "scene_cloud": 76.0,
+      "island_cloud_shadow_pct": 80.35487416670234
+    },
+    {
+      "id": "LT05_L2SP_125059_20091022_02_T1",
+      "scene_cloud": 63.0,
+      "island_cloud_shadow_pct": 81.56265018390837
+    },
+    {
+      "id": "LT05_L2SP_125059_20090616_02_T2",
+      "scene_cloud": 76.0,
+      "island_cloud_shadow_pct": 85.59566804181596
+    },
+    {
+      "id": "LT05_L2SP_125059_20090312_02_T1",
+      "scene_cloud": 43.0,
+      "island_cloud_shadow_pct": 88.24437687655538
+    },
+    {
+      "id": "LT05_L2SP_125059_20080917_02_T1",
+      "scene_cloud": 58.0,
+      "island_cloud_shadow_pct": 92.75536617513407
+    },
+    {
+      "id": "LT05_L2SP_125059_20080309_02_T1",
+      "scene_cloud": 70.0,
+      "island_cloud_shadow_pct": 93.63624684167702
+    },
+    {
+      "id": "LT05_L2SP_125059_20111012_02_T2",
+      "scene_cloud": 69.0,
+      "island_cloud_shadow_pct": 96.19609438567942
+    },
+    {
+      "id": "LT05_L2SP_125059_20090123_02_T1",
+      "scene_cloud": 45.0,
+      "island_cloud_shadow_pct": 96.29494811071618
+    },
+    {
+      "id": "LT05_L2SP_125059_20081222_02_T1",
+      "scene_cloud": 79.0,
+      "island_cloud_shadow_pct": 97.74551648989575
+    },
+    {
+      "id": "LT05_L2SP_125059_20090429_02_T1",
+      "scene_cloud": 36.0,
+      "island_cloud_shadow_pct": 99.19382467560276
+    },
+    {
+      "id": "LT05_L2SP_125059_20080715_02_T1",
+      "scene_cloud": 87.0,
+      "island_cloud_shadow_pct": 99.20631521847744
+    },
+    {
+      "id": "LT05_L2SP_125059_20090515_02_T1",
+      "scene_cloud": 77.0,
+      "island_cloud_shadow_pct": 99.39046150771559
+    },
+    {
+      "id": "LT05_L2SP_125059_20090819_02_T1",
+      "scene_cloud": 79.0,
+      "island_cloud_shadow_pct": 99.40533120161402
+    },
+    {
+      "id": "LT05_L2SP_125059_20100211_02_T1",
+      "scene_cloud": 70.0,
+      "island_cloud_shadow_pct": 99.8769978920722
+    },
+    {
+      "id": "LT05_L2SP_125059_20110302_02_T1",
+      "scene_cloud": 89.0,
+      "island_cloud_shadow_pct": 99.99131609876332
+    },
+    {
+      "id": "LT05_L2SP_125059_20100705_02_T1",
+      "scene_cloud": 75.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LT05_L2SP_125059_20100331_02_T1",
+      "scene_cloud": 79.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LT05_L2SP_125059_20110113_02_T1",
+      "scene_cloud": 80.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LT05_L2SP_125059_20080901_02_T1",
+      "scene_cloud": 85.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LT05_L2SP_125059_20081120_02_T2",
+      "scene_cloud": 91.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LT05_L2SP_125059_20090107_02_T1",
+      "scene_cloud": 94.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LT05_L2SP_125059_20110318_02_T1",
+      "scene_cloud": 95.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LT05_L2SP_125059_20081206_02_T1",
+      "scene_cloud": 97.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LT05_L2SP_125059_20091006_02_T2",
+      "scene_cloud": 98.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LT05_L2SP_125059_20110129_02_T2",
+      "scene_cloud": 100.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LT05_L2SP_125059_20101228_02_T2",
+      "scene_cloud": 100.0,
+      "island_cloud_shadow_pct": 100.0
+    },
+    {
+      "id": "LT05_L2SP_125059_20091123_02_T2",
+      "scene_cloud": 100.0,
+      "island_cloud_shadow_pct": 100.0
+    }
+  ]
+}

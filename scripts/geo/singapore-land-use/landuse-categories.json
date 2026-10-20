@@ -1,0 +1,48 @@
+{
+  "housing": [
+    "RESIDENTIAL",
+    "RESIDENTIAL WITH COMMERCIAL AT 1ST STOREY",
+    "COMMERCIAL & RESIDENTIAL",
+    "RESIDENTIAL / INSTITUTION"
+  ],
+  "agriculture": [
+    "AGRICULTURE"
+  ],
+  "industry": [
+    "BUSINESS 1",
+    "BUSINESS 2",
+    "BUSINESS PARK",
+    "BUSINESS 1 - WHITE",
+    "BUSINESS 2 - WHITE",
+    "BUSINESS PARK - WHITE"
+  ],
+  "green": [
+    "PARK",
+    "OPEN SPACE",
+    "BEACH AREA",
+    "NATURE RESERVE"
+  ],
+  "transport": [
+    "PORT / AIRPORT",
+    "TRANSPORT FACILITIES",
+    "MASS RAPID TRANSIT",
+    "LIGHT RAPID TRANSIT"
+  ],
+  "defence-special": [
+    "SPECIAL USE"
+  ],
+  "town-and-services": [
+    "COMMERCIAL",
+    "COMMERCIAL / INSTITUTION",
+    "HOTEL",
+    "WHITE",
+    "EDUCATIONAL INSTITUTION",
+    "HEALTH & MEDICAL CARE",
+    "PLACE OF WORSHIP",
+    "UTILITY",
+    "CEMETERY",
+    "SPORTS & RECREATION",
+    "RESERVE SITE",
+    "CIVIC & COMMUNITY INSTITUTION"
+  ]
+}

@@ -1,0 +1,1286 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "Ministry of Education, 2020 Social Studies Primary Teaching and Learning Syllabus, updated January 2024, printed pp.23–27: locating places, conservation, and changes in housing, farming and transport.",
+        "zh": "【待译】Ministry of Education, 2020 Social Studies Primary Teaching and Learning Syllabus, updated January 2024, printed pp.23–27: locating places, conservation, and changes in housing, farming and transport."
+      },
+      "url": "https://www.moe.gov.sg/media/files/primary/d8ea4817-c1b3-4217-84d4-82838d39d75c.pdf",
+      "note": {
+        "en": "The July 2024 edition was unavailable; differences remain unverified. Original evidence ledger: E001, E002, E003. Original fact ids: syllabus-inquiry, syllabus-knowledge, syllabus-skills, syllabus-values, syllabus-conservation, syllabus-land, syllabus-food, syllabus-housing, syllabus-transport. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】The July 2024 edition was unavailable; differences remain unverified. Original evidence ledger: E001, E002, E003. Original fact ids: syllabus-inquiry, syllabus-knowledge, syllabus-skills, syllabus-values, syllabus-conservation, syllabus-land, syllabus-food, syllabus-housing, syllabus-transport. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S2",
+      "text": {
+        "en": "URA Master Plan 2019 Land Use. Contains information from URA Master Plan 2019 Land Use accessed on 20 October 2026 from data.gov.sg which is made available under the terms of the Singapore Open Data Licence version 1.0.",
+        "zh": "【待译】URA Master Plan 2019 Land Use. Contains information from URA Master Plan 2019 Land Use accessed on 20 October 2026 from data.gov.sg which is made available under the terms of the Singapore Open Data Licence version 1.0."
+      },
+      "url": "https://data.gov.sg/datasets/d_90d86daa5bfaa371668b84fa5f01424f/view",
+      "note": {
+        "en": "Original evidence ledger: E129. Original fact ids: . Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Original evidence ledger: E129. Original fact ids: . Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S3",
+      "text": {
+        "en": "URA Master Plan 2019 Planning Area Boundary (No Sea). Contains information from URA Master Plan 2019 Planning Area Boundary (No Sea) accessed on 20 October 2026 from data.gov.sg which is made available under the terms of the Singapore Open Data Licence version 1.0.",
+        "zh": "【待译】URA Master Plan 2019 Planning Area Boundary (No Sea). Contains information from URA Master Plan 2019 Planning Area Boundary (No Sea) accessed on 20 October 2026 from data.gov.sg which is made available under the terms of the Singapore Open Data Licence version 1.0."
+      },
+      "url": "https://data.gov.sg/datasets/d_4765db0e87b9c86336792efe8a1f7a66/view",
+      "note": {
+        "en": "Original evidence ledger: E136. Original fact ids: . Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Original evidence ledger: E136. Original fact ids: . Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S4",
+      "text": {
+        "en": "HDB Property Information. Contains information from HDB Property Information accessed on 20 October 2026 from data.gov.sg which is made available under the terms of the Singapore Open Data Licence version 1.0.",
+        "zh": "【待译】HDB Property Information. Contains information from HDB Property Information accessed on 20 October 2026 from data.gov.sg which is made available under the terms of the Singapore Open Data Licence version 1.0."
+      },
+      "url": "https://data.gov.sg/datasets/d_17f5382f26140b1fdae0ba2ef6239d2f/view",
+      "note": {
+        "en": "Original evidence ledger: E134. Original fact ids: . Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Original evidence ledger: E134. Original fact ids: . Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S5",
+      "text": {
+        "en": "HDB Existing Building. Contains information from HDB Existing Building accessed on 20 October 2026 from data.gov.sg which is made available under the terms of the Singapore Open Data Licence version 1.0.",
+        "zh": "【待译】HDB Existing Building. Contains information from HDB Existing Building accessed on 20 October 2026 from data.gov.sg which is made available under the terms of the Singapore Open Data Licence version 1.0."
+      },
+      "url": "https://data.gov.sg/datasets/d_16b157c52ed637edd6ba1232e026258d/view",
+      "note": {
+        "en": "Original evidence ledger: E135. Original fact ids: . Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Original evidence ledger: E135. Original fact ids: . Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S6",
+      "text": {
+        "en": "URA Master Plan 2019 Rail Line. Contains information from URA Master Plan 2019 Rail Line accessed on 20 October 2026 from data.gov.sg which is made available under the terms of the Singapore Open Data Licence version 1.0.",
+        "zh": "【待译】URA Master Plan 2019 Rail Line. Contains information from URA Master Plan 2019 Rail Line accessed on 20 October 2026 from data.gov.sg which is made available under the terms of the Singapore Open Data Licence version 1.0."
+      },
+      "url": "https://data.gov.sg/datasets/d_222bfc84eb86c7c11994d02f8939da8d/view",
+      "note": {
+        "en": "Original evidence ledger: E137, E138. Original fact ids: . Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Original evidence ledger: E137, E138. Original fact ids: . Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S7",
+      "text": {
+        "en": "NParks Parks and Nature Reserves. Contains information from NParks Parks and Nature Reserves accessed on 20 October 2026 from data.gov.sg which is made available under the terms of the Singapore Open Data Licence version 1.0.",
+        "zh": "【待译】NParks Parks and Nature Reserves. Contains information from NParks Parks and Nature Reserves accessed on 20 October 2026 from data.gov.sg which is made available under the terms of the Singapore Open Data Licence version 1.0."
+      },
+      "url": "https://data.gov.sg/datasets/d_77d7ec97be83d44f61b85454f844382f/view",
+      "note": {
+        "en": "Original evidence ledger: E158. Original fact ids: . Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Original evidence ledger: E158. Original fact ids: . Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S8",
+      "text": {
+        "en": "Singapore total population, annual. Contains information from Singapore total population, annual accessed on 20 October 2026 from data.gov.sg which is made available under the terms of the Singapore Open Data Licence version 1.0.",
+        "zh": "【待译】Singapore total population, annual. Contains information from Singapore total population, annual accessed on 20 October 2026 from data.gov.sg which is made available under the terms of the Singapore Open Data Licence version 1.0."
+      },
+      "url": "https://data.gov.sg/datasets/d_3d227e5d9fdec73f3bcadce671c333a6/view",
+      "note": {
+        "en": "Original evidence ledger: E025, E026, E027, E028, E029, E030, E031, E032, E033, E034, E035, E036, E037, E038, E039, E163. Original fact ids: total-population-1957, total-population-1970, resident-population-1970, total-population-1980, resident-population-1980, total-population-1990, resident-population-1990, total-population-2000, resident-population-2000, total-population-2010, resident-population-2010, total-population-2020, resident-population-2020, total-population-2024, resident-population-2024. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Original evidence ledger: E025, E026, E027, E028, E029, E030, E031, E032, E033, E034, E035, E036, E037, E038, E039, E163. Original fact ids: total-population-1957, total-population-1970, resident-population-1970, total-population-1980, resident-population-1980, total-population-1990, resident-population-1990, total-population-2000, resident-population-2000, total-population-2010, resident-population-2010, total-population-2020, resident-population-2020, total-population-2024, resident-population-2024. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S9",
+      "text": {
+        "en": "British Information Services, Map of Singapore from The State of Singapore (April 1959). Public-domain UK Government work, published before 1976.",
+        "zh": "【待译】British Information Services, Map of Singapore from The State of Singapore (April 1959). Public-domain UK Government work, published before 1976."
+      },
+      "url": "https://commons.wikimedia.org/wiki/File:Map_of_Singapore_from_The_State_of_Singapore_(BIS,_1959).jpg",
+      "note": {
+        "en": "City and Naval Base stippling traced; other land is a broad countryside category, not a surveyed map of farms. Original evidence ledger: E143. Original fact ids: . Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】City and Naval Base stippling traced; other land is a broad countryside category, not a surveyed map of farms. Original evidence ledger: E143. Original fact ids: . Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S10",
+      "text": {
+        "en": "USGS Landsat Collection 2; Microsoft Planetary Computer anonymous STAC/SAS access. Water indices distinguish land and water in dated satellite snapshots. Scene IDs, bands, thresholds, cleanup, cloud and tide limits, and comparisons are recorded in SOURCES-GEO.md.",
+        "zh": "【待译】USGS Landsat Collection 2; Microsoft Planetary Computer anonymous STAC/SAS access. Water indices distinguish land and water in dated satellite snapshots. Scene IDs, bands, thresholds, cleanup, cloud and tide limits, and comparisons are recorded in SOURCES-GEO.md."
+      },
+      "url": "https://planetarycomputer.microsoft.com/dataset/landsat-c2-l2",
+      "note": {
+        "en": "USGS Landsat data are public domain: https://www.usgs.gov/faqs/are-landsat-data-cloud-still-considered-be-within-public-domain . Access service terms are separate from the public-domain data licence. Per-scene sources S11–S15 are assigned by the coastal build.",
+        "zh": "【待译】USGS Landsat data are public domain: https://www.usgs.gov/faqs/are-landsat-data-cloud-still-considered-be-within-public-domain . Access service terms are separate from the public-domain data licence. Per-scene sources S11–S15 are assigned by the coastal build."
+      }
+    },
+    {
+      "id": "S11",
+      "text": {
+        "en": "USGS LM01_L1TP_134059_19731017_02_T2, 1973-10-17, landsat-1 mss; landsat-c2-l1; scene cloud cover 2%. NDWI bands B4/B7, 60 m output pixels. Anonymous Microsoft Planetary Computer STAC/SAS download; Landsat data public domain.",
+        "zh": "【待译】USGS LM01_L1TP_134059_19731017_02_T2, 1973-10-17, landsat-1 mss; landsat-c2-l1; scene cloud cover 2%. NDWI bands B4/B7, 60 m output pixels. Anonymous Microsoft Planetary Computer STAC/SAS download; Landsat data public domain."
+      },
+      "url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l1/items/LM01_L1TP_134059_19731017_02_T2",
+      "note": {
+        "en": "Whole-scene cloud cover is not the cloud fraction over Singapore. Final island cloud/shadow statistics, thresholds, conservative cleanup and error measurements are in SOURCES-GEO.md. Exact acquisition date sets the coast era; this is not a surveyed coastline or annual land-use map.",
+        "zh": "【待译】Whole-scene cloud cover is not the cloud fraction over Singapore. Final island cloud/shadow statistics, thresholds, conservative cleanup and error measurements are in SOURCES-GEO.md. Exact acquisition date sets the coast era; this is not a surveyed coastline or annual land-use map."
+      }
+    },
+    {
+      "id": "S12",
+      "text": {
+        "en": "USGS LM02_L1TP_134059_19791031_02_T2, 1979-10-31, landsat-2 mss; landsat-c2-l1; scene cloud cover 20%. NDWI bands B4/B7, 60 m output pixels. Anonymous Microsoft Planetary Computer STAC/SAS download; Landsat data public domain.",
+        "zh": "【待译】USGS LM02_L1TP_134059_19791031_02_T2, 1979-10-31, landsat-2 mss; landsat-c2-l1; scene cloud cover 20%. NDWI bands B4/B7, 60 m output pixels. Anonymous Microsoft Planetary Computer STAC/SAS download; Landsat data public domain."
+      },
+      "url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l1/items/LM02_L1TP_134059_19791031_02_T2",
+      "note": {
+        "en": "Whole-scene cloud cover is not the cloud fraction over Singapore. Final island cloud/shadow statistics, thresholds, conservative cleanup and error measurements are in SOURCES-GEO.md. Exact acquisition date sets the coast era; this is not a surveyed coastline or annual land-use map.",
+        "zh": "【待译】Whole-scene cloud cover is not the cloud fraction over Singapore. Final island cloud/shadow statistics, thresholds, conservative cleanup and error measurements are in SOURCES-GEO.md. Exact acquisition date sets the coast era; this is not a surveyed coastline or annual land-use map."
+      }
+    },
+    {
+      "id": "S13",
+      "text": {
+        "en": "USGS LT05_L2SP_125059_19910428_02_T1, 1991-04-28, landsat-5 tm; landsat-c2-l2; scene cloud cover 11%. MNDWI bands SR_B2/SR_B5, 30 m output pixels. Anonymous Microsoft Planetary Computer STAC/SAS download; Landsat data public domain.",
+        "zh": "【待译】USGS LT05_L2SP_125059_19910428_02_T1, 1991-04-28, landsat-5 tm; landsat-c2-l2; scene cloud cover 11%. MNDWI bands SR_B2/SR_B5, 30 m output pixels. Anonymous Microsoft Planetary Computer STAC/SAS download; Landsat data public domain."
+      },
+      "url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LT05_L2SP_125059_19910428_02_T1",
+      "note": {
+        "en": "Whole-scene cloud cover is not the cloud fraction over Singapore. Final island cloud/shadow statistics, thresholds, conservative cleanup and error measurements are in SOURCES-GEO.md. Exact acquisition date sets the coast era; this is not a surveyed coastline or annual land-use map.",
+        "zh": "【待译】Whole-scene cloud cover is not the cloud fraction over Singapore. Final island cloud/shadow statistics, thresholds, conservative cleanup and error measurements are in SOURCES-GEO.md. Exact acquisition date sets the coast era; this is not a surveyed coastline or annual land-use map."
+      }
+    },
+    {
+      "id": "S14",
+      "text": {
+        "en": "USGS LE07_L2SP_125059_20021011_02_T1, 2002-10-11, landsat-7 etm+; landsat-c2-l2; scene cloud cover 54%. MNDWI bands SR_B2/SR_B5, 30 m output pixels. Anonymous Microsoft Planetary Computer STAC/SAS download; Landsat data public domain.",
+        "zh": "【待译】USGS LE07_L2SP_125059_20021011_02_T1, 2002-10-11, landsat-7 etm+; landsat-c2-l2; scene cloud cover 54%. MNDWI bands SR_B2/SR_B5, 30 m output pixels. Anonymous Microsoft Planetary Computer STAC/SAS download; Landsat data public domain."
+      },
+      "url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LE07_L2SP_125059_20021011_02_T1",
+      "note": {
+        "en": "Whole-scene cloud cover is not the cloud fraction over Singapore. Final island cloud/shadow statistics, thresholds, conservative cleanup and error measurements are in SOURCES-GEO.md. Exact acquisition date sets the coast era; this is not a surveyed coastline or annual land-use map.",
+        "zh": "【待译】Whole-scene cloud cover is not the cloud fraction over Singapore. Final island cloud/shadow statistics, thresholds, conservative cleanup and error measurements are in SOURCES-GEO.md. Exact acquisition date sets the coast era; this is not a surveyed coastline or annual land-use map."
+      }
+    },
+    {
+      "id": "S15",
+      "text": {
+        "en": "USGS LT05_L2SP_125059_20110214_02_T1, 2011-02-14, landsat-5 tm; landsat-c2-l2; scene cloud cover 26%. MNDWI bands SR_B2/SR_B5, 30 m output pixels. Anonymous Microsoft Planetary Computer STAC/SAS download; Landsat data public domain.",
+        "zh": "【待译】USGS LT05_L2SP_125059_20110214_02_T1, 2011-02-14, landsat-5 tm; landsat-c2-l2; scene cloud cover 26%. MNDWI bands SR_B2/SR_B5, 30 m output pixels. Anonymous Microsoft Planetary Computer STAC/SAS download; Landsat data public domain."
+      },
+      "url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LT05_L2SP_125059_20110214_02_T1",
+      "note": {
+        "en": "Whole-scene cloud cover is not the cloud fraction over Singapore. Final island cloud/shadow statistics, thresholds, conservative cleanup and error measurements are in SOURCES-GEO.md. Exact acquisition date sets the coast era; this is not a surveyed coastline or annual land-use map.",
+        "zh": "【待译】Whole-scene cloud cover is not the cloud fraction over Singapore. Final island cloud/shadow statistics, thresholds, conservative cleanup and error measurements are in SOURCES-GEO.md. Exact acquisition date sets the coast era; this is not a surveyed coastline or annual land-use map."
+      }
+    },
+    {
+      "id": "S16",
+      "text": {
+        "en": "Contains information from URA Master Plan 2003 Land Use accessed on 20 October 2026 from data.gov.sg which is made available under the terms of the Singapore Open Data Licence version 1.0.",
+        "zh": "【待译】Contains information from URA Master Plan 2003 Land Use accessed on 20 October 2026 from data.gov.sg which is made available under the terms of the Singapore Open Data Licence version 1.0."
+      },
+      "url": "https://data.gov.sg/datasets/d_78c9a05019ea8594a657c192bddcd2d6/view",
+      "note": {
+        "en": "Used only to calculate agricultural planned-use area by edition; no historical map geometry is shown as observed land use. Original evidence ledger: E133. Original fact ids: . Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Used only to calculate agricultural planned-use area by edition; no historical map geometry is shown as observed land use. Original evidence ledger: E133. Original fact ids: . Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S17",
+      "text": {
+        "en": "Contains information from URA MP08 Land Use accessed on 20 October 2026 from data.gov.sg which is made available under the terms of the Singapore Open Data Licence version 1.0.",
+        "zh": "【待译】Contains information from URA MP08 Land Use accessed on 20 October 2026 from data.gov.sg which is made available under the terms of the Singapore Open Data Licence version 1.0."
+      },
+      "url": "https://data.gov.sg/datasets/d_7ea297b9bf38956bd553638e5db042cd/view",
+      "note": {
+        "en": "Used only to calculate agricultural planned-use area by edition; no historical map geometry is shown as observed land use. Original evidence ledger: E132. Original fact ids: . Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Used only to calculate agricultural planned-use area by edition; no historical map geometry is shown as observed land use. Original evidence ledger: E132. Original fact ids: . Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S18",
+      "text": {
+        "en": "Contains information from URA Master Plan 2014 Land Use accessed on 20 October 2026 from data.gov.sg which is made available under the terms of the Singapore Open Data Licence version 1.0.",
+        "zh": "【待译】Contains information from URA Master Plan 2014 Land Use accessed on 20 October 2026 from data.gov.sg which is made available under the terms of the Singapore Open Data Licence version 1.0."
+      },
+      "url": "https://data.gov.sg/datasets/d_6c3e60b98c170edc47024795330c1353/view",
+      "note": {
+        "en": "Used only to calculate agricultural planned-use area by edition; no historical map geometry is shown as observed land use. Original evidence ledger: E131. Original fact ids: . Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Used only to calculate agricultural planned-use area by edition; no historical map geometry is shown as observed land use. Original evidence ledger: E131. Original fact ids: . Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S19",
+      "text": {
+        "en": "Atlas land-sg-history.json eras L4 and L5, copied unchanged from the Singapore 1819–1965 topic; derived from the original published historical maps and present-day URA land, with the upstream source licences and methods.",
+        "zh": "【待译】Atlas land-sg-history.json eras L4 and L5, copied unchanged from the Singapore 1819–1965 topic; derived from the original published historical maps and present-day URA land, with the upstream source licences and methods."
+      },
+      "note": {
+        "en": "The upstream SOURCES-GEO.md explicitly classifies these as rejected research drafts with unresolved source-age, tracing and accuracy conditions. L4 uses a 1937-era source; L5’s chart was corrected through 1954 and is not established as an exact 1961 shore. Reuse does not certify those acceptance criteria. Shown as approximate historical estimates, not accepted surveys.",
+        "zh": "【待译】The upstream SOURCES-GEO.md explicitly classifies these as rejected research drafts with unresolved source-age, tracing and accuracy conditions. L4 uses a 1937-era source; L5’s chart was corrected through 1954 and is not established as an exact 1961 shore. Reuse does not certify those acceptance criteria. Shown as approximate historical estimates, not accepted surveys."
+      }
+    },
+    {
+      "id": "S20",
+      "text": {
+        "en": "PUB, Singapore's National Water Agency, Our Water Story: Local Catchment Water. Rain falling on two-thirds of Singapore's land is channelled to 17 reservoirs; the catchment grew from half to two-thirds of the land with Marina, Punggol and Serangoon Reservoirs; Singapore's land area is about 710 km².",
+        "zh": "新加坡公用事业局（PUB）《我们的水故事：本地集水》：落在新加坡三分之二土地上的雨水被引进 17 个蓄水池；随着滨海、榜鹅和实龙岗蓄水池建成，集水区从国土的一半扩大到三分之二；新加坡面积约 710 平方公里。"
+      },
+      "url": "https://www.pub.gov.sg/Public/WaterLoop/OurWaterStory/Local-Catchment-Water",
+      "note": {
+        "en": "Same source text as four-taps S1; reservoir names, dates and coordinates copied unchanged.",
+        "zh": "【待译】Same source text as four-taps S1; reservoir names, dates and coordinates copied unchanged."
+      }
+    },
+    {
+      "id": "S21",
+      "text": {
+        "en": "PUB, Annual Report 2023 (timeline \"From the first drop\"): MacRitchie Reservoir, completed in 1867, is Singapore's first reservoir and was named in 1922 after Municipal Engineer James MacRitchie, who designed and built it; the Kranji–Pandan Water Scheme was completed in 1975; Linggiu Reservoir was completed in 1993; Punggol and Serangoon Reservoirs were commissioned in 2011; six water treatment plants serve Singapore today.",
+        "zh": "PUB《2023 年年报》（时间线“从第一滴水开始”）：麦里芝蓄水池于 1867 年建成，是新加坡第一个蓄水池，1922 年以设计和兴建它的市政工程师麦里芝命名；克兰芝—班丹水源计划 1975 年完成；林木水库 1993 年建成；榜鹅和实龙岗蓄水池 2011 年启用；今天有 6 座水厂为新加坡供水。"
+      },
+      "url": "https://www.pub.gov.sg/-/media/PUB/Publications/Report/PDF/annualreport2023.pdf",
+      "note": {
+        "en": "Same source text as four-taps S2; reservoir names, dates and coordinates copied unchanged.",
+        "zh": "【待译】Same source text as four-taps S2; reservoir names, dates and coordinates copied unchanged."
+      }
+    },
+    {
+      "id": "S22",
+      "text": {
+        "en": "PUB, Annual Report 2013: Singapore is a small island that lacks large freshwater bodies such as big rivers and lakes; it receives some 2,400 mm of rain a year but has limited land to collect and store it; its first three reservoirs lie in protected catchments within the Central Nature Reserve; Upper Peirce Reservoir, Singapore's largest, created in 1975; the Seletar Reservoir enlarged in 1969; the Sungei Seletar–Bedok Water Scheme completed in 1986; by the 1980s estuarine reservoirs such as Kranji, Sarimbun, Murai, Poyan and Tengeh; the 1961 agreement allowed water from the Gunong Pulai catchment, the Tebrau and the Scudai for 50 years, the 1962 agreement up to 250 mgd from the Johor River for 99 years.",
+        "zh": "PUB《2013 年年报》：新加坡是一座小岛，没有大河大湖这样的大片淡水；一年雨量约 2400 毫米，却没有多少土地可用来收集和储存雨水；最早的三个蓄水池位于中央自然保护区内的受保护集水区；1975 年建成当时最大的贝雅士蓄水池上段；1969 年扩建实里达蓄水池；1986 年完成实里达河—勿洛水源计划；到 1980 年代已有克兰芝、莎琳汶、慕莱、波扬、登格等河口蓄水池；1961 年协议允许取用布莱山集水区、地不佬河与士姑来河的水 50 年，1962 年协议允许从柔佛河每日取水至多 250 百万加仑、为期 99 年。"
+      },
+      "url": "https://www.pub.gov.sg/-/media/PUB/Publications/Report/PDF/annualreport2013.pdf",
+      "note": {
+        "en": "Same source text as four-taps S3; reservoir names, dates and coordinates copied unchanged.",
+        "zh": "【待译】Same source text as four-taps S3; reservoir names, dates and coordinates copied unchanged."
+      }
+    },
+    {
+      "id": "S23",
+      "text": {
+        "en": "PUB, Development of local catchments: the first three reservoirs, MacRitchie, Peirce and Seletar, lie in protected catchments where major development is not allowed; a Water Planning Unit was set up under the Prime Minister's Office in 1971 and the Water Master Plan drawn up in 1972 as the long-term blueprint, covering unprotected catchments, water reuse and desalination; in unprotected catchments only homes and non-polluting industries are allowed, with stringent pollution control, and better treatment makes their water usable; Pandan, Bedok, Lower Seletar, Marina, Punggol and Serangoon have unprotected catchments.",
+        "zh": "PUB《本地集水区的发展》：最早的三个蓄水池麦里芝、贝雅士和实里达位于不允许大型开发的受保护集水区；1971 年总理公署设立水务规划组，1972 年制定水务总蓝图作为长远发展的依据，涵盖非保护集水区、循环用水和海水淡化；非保护集水区只允许住宅和无污染工业，并须严格管制污染，水处理技术的进步让这些水可以使用；班丹、勿洛、实里达下段、滨海、榜鹅和实龙岗的集水区都属于非保护集水区。"
+      },
+      "url": "https://www.pub.gov.sg/-/media/PUB/PDF/Development_of_local_catchments.pdf",
+      "note": {
+        "en": "Same source text as four-taps S4; reservoir names, dates and coordinates copied unchanged.",
+        "zh": "【待译】Same source text as four-taps S4; reservoir names, dates and coordinates copied unchanged."
+      }
+    },
+    {
+      "id": "S24",
+      "text": {
+        "en": "PUB, Self-guided ABC Waters learning trail, Lower Seletar Reservoir (guide for students), \"A Blast to the Past\": 1920, a third reservoir after MacRitchie and Peirce, Seletar Reservoir; expanded in 1940 and 1967; 1986, a dam across the mouth of the Seletar River forms Sungei Seletar Reservoir; 1992, the two are renamed Upper and Lower Seletar Reservoir.",
+        "zh": "PUB《活跃、美丽、洁净水域自学步道：实里达蓄水池下段（学生版）》“回到过去”：1920 年，继麦里芝和贝雅士之后建成第三个蓄水池——实里达蓄水池；1940 年和 1967 年两次扩建；1986 年在实里达河口筑坝，形成实里达河蓄水池；1992 年两者分别改名为实里达蓄水池上段和下段。"
+      },
+      "url": "https://www.pub.gov.sg/-/media/PUB/PDF/Self-guided-ABC-Waters-Learning-Trails/Guide-for-students/Student_Lower-Seletar-Reservoir.pdf",
+      "note": {
+        "en": "Same source text as four-taps S5; reservoir names, dates and coordinates copied unchanged. Original evidence ledger: E115. Original fact ids: reservoir-lowerseletar-1986. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Same source text as four-taps S5; reservoir names, dates and coordinates copied unchanged. Original evidence ledger: E115. Original fact ids: reservoir-lowerseletar-1986. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S25",
+      "text": {
+        "en": "PUB, Geographical investigation field study: Upper Peirce Reservoir. A higher dam was built upstream of the Peirce Reservoir dam in 1970; Upper Peirce Reservoir was completed in 1975 and opened on 27 February 1977.",
+        "zh": "PUB《地理考察：贝雅士蓄水池上段》：1970 年在贝雅士蓄水池原有水坝的上游筑起一道更高的坝；贝雅士蓄水池上段 1975 年建成，1977 年 2 月 27 日开幕。"
+      },
+      "url": "https://www.pub.gov.sg/-/media/PUB/Partnership/Schools/Geographical-Investigation-Field-Studies/Upper-Peirce-Reservoir.pdf",
+      "note": {
+        "en": "Same source text as four-taps S6; reservoir names, dates and coordinates copied unchanged. Original evidence ledger: E111. Original fact ids: reservoir-upperpeirce-1975. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Same source text as four-taps S6; reservoir names, dates and coordinates copied unchanged. Original evidence ledger: E111. Original fact ids: reservoir-upperpeirce-1975. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S26",
+      "text": {
+        "en": "PUB, Bedok Reservoir: a former sand quarry, turned into a reservoir from 1983 under the Sungei Seletar–Bedok Water Scheme and completed in 1986.",
+        "zh": "PUB《勿洛蓄水池》：原是采沙场，1983 年起按实里达河—勿洛水源计划改建为蓄水池，1986 年建成。"
+      },
+      "url": "https://www.pub.gov.sg/Public/Places-of-Interest/Our-Reservoirs-and-Waterways/Bedok-Reservoir",
+      "note": {
+        "en": "Same source text as four-taps S7; reservoir names, dates and coordinates copied unchanged.",
+        "zh": "【待译】Same source text as four-taps S7; reservoir names, dates and coordinates copied unchanged."
+      }
+    },
+    {
+      "id": "S27",
+      "text": {
+        "en": "National Heritage Board, Roots.sg, Lower Peirce Reservoir (historic site): Singapore's second impounding reservoir, first called Kallang River Reservoir, renamed Peirce Reservoir in 1922 and Lower Peirce Reservoir in 1975.",
+        "zh": "国家文物局 Roots.sg《贝雅士蓄水池下段》（历史地点）：新加坡第二个蓄水池，原名加冷河蓄水池，1922 年改名贝雅士蓄水池，1975 年再改名贝雅士蓄水池下段。"
+      },
+      "url": "https://www.roots.gov.sg/places/places-landing/Places/historic-sites/lower-peirce-reservoir",
+      "note": {
+        "en": "Same source text as four-taps S8; reservoir names, dates and coordinates copied unchanged.",
+        "zh": "【待译】Same source text as four-taps S8; reservoir names, dates and coordinates copied unchanged."
+      }
+    },
+    {
+      "id": "S28",
+      "text": {
+        "en": "National Heritage Board, Roots.sg, Jurong Heritage Trail: Pandan Reservoir, formed in 1974 by enclosing the swamps of the Sungei Pandan estuary with an earthen dyke.",
+        "zh": "国家文物局 Roots.sg《裕廊文物径：班丹蓄水池》：1974 年用土堤围住班丹河口的沼泽，形成班丹蓄水池。"
+      },
+      "url": "https://www.roots.gov.sg/places/places-landing/Places/landmarks/jurong-heritage-trail/pandan-reservoir",
+      "note": {
+        "en": "Same source text as four-taps S9; reservoir names, dates and coordinates copied unchanged. Original evidence ledger: E112. Original fact ids: reservoir-pandan-1974. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Same source text as four-taps S9; reservoir names, dates and coordinates copied unchanged. Original evidence ledger: E112. Original fact ids: reservoir-pandan-1974. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S29",
+      "text": {
+        "en": "National Heritage Board, Roots.sg, Jurong Heritage Trail: around the Jurong River. Jurong Lake was formed when the upper section of the Jurong River was dammed in 1971.",
+        "zh": "国家文物局 Roots.sg《裕廊文物径：裕廊河一带》：1971 年在裕廊河上游筑坝，形成裕廊湖。"
+      },
+      "url": "https://www.roots.gov.sg/places/places-landing/Places/landmarks/jurong-heritage-trail/around-the-jurong-river",
+      "note": {
+        "en": "Same source text as four-taps S10; reservoir names, dates and coordinates copied unchanged.",
+        "zh": "【待译】Same source text as four-taps S10; reservoir names, dates and coordinates copied unchanged."
+      }
+    },
+    {
+      "id": "S30",
+      "text": {
+        "en": "SG101 (Government of Singapore), Challenge accepted: Singapore's water catchment areas. From 1975 to 1981 the Kranji, Pandan, Murai, Poyan, Sarimbun and Tengeh rivers were dammed to create new reservoirs.",
+        "zh": "SG101（新加坡政府）《迎接挑战：新加坡的集水区》：1975 年至 1981 年间，克兰芝、班丹、慕莱、波扬、莎琳汶和登格几条河先后筑坝，形成新的蓄水池。"
+      },
+      "url": "https://www.sg101.gov.sg/resources/archives/challengeaccepted-singapore-water-catchment-areas/",
+      "note": {
+        "en": "Same source text as four-taps S11; reservoir names, dates and coordinates copied unchanged.",
+        "zh": "【待译】Same source text as four-taps S11; reservoir names, dates and coordinates copied unchanged."
+      }
+    },
+    {
+      "id": "S31",
+      "text": {
+        "en": "PUB, Marina Barrage: built across the mouth of the Marina Channel, it creates Singapore's 15th reservoir, the first in the heart of the city; officially opened on 31 October 2008; Marina Reservoir was commissioned as a freshwater reservoir on 20 November 2010; its catchment is 10,000 hectares, the island's largest and most urbanised.",
+        "zh": "PUB《滨海堤坝》：横跨滨海水道出海口，形成新加坡第 15 个蓄水池，也是第一个位于市中心的蓄水池；2008 年 10 月 31 日正式启用；2010 年 11 月 20 日滨海蓄水池作为淡水蓄水池启用；集水区 1 万公顷，是全岛最大、城市化程度最高的集水区。"
+      },
+      "url": "https://www.pub.gov.sg/public/places-of-interest/marina-barrage",
+      "note": {
+        "en": "Same source text as four-taps S12; reservoir names, dates and coordinates copied unchanged.",
+        "zh": "【待译】Same source text as four-taps S12; reservoir names, dates and coordinates copied unchanged."
+      }
+    },
+    {
+      "id": "S32",
+      "text": {
+        "en": "Promote Mandarin Council, Singaporean Mandarin Database, entries 蓄水池 (reservoir), 四大水喉 (Four National Taps) and 新生水 (NEWater): Singapore's standard Chinese terms, including 麦里芝蓄水池 and 登格蓄水池.",
+        "zh": "讲华语运动理事会《新加坡华语资料库》“蓄水池”“四大水喉”“新生水”条目：新加坡的规范华文用语，包括“麦里芝蓄水池”“登格蓄水池”。"
+      },
+      "url": "https://www.languagecouncils.sg/mandarin/en/learning-resources/singaporean-mandarin-database/terms/four-national-taps",
+      "note": {
+        "en": "Same source text as four-taps S28; reservoir names, dates and coordinates copied unchanged.",
+        "zh": "【待译】Same source text as four-taps S28; reservoir names, dates and coordinates copied unchanged."
+      }
+    },
+    {
+      "id": "S33",
+      "text": {
+        "en": "Ministry of Foreign Affairs, Singapore, Water Agreements: the 1961 agreement let Singapore draw raw water from the Tebrau and Scudai rivers, with treated water to Johor of 12 % of what was imported, and expired on 31 August 2011, when the Gunong Pulai and Scudai waterworks and the Pontian and Tebrau pump houses were handed to the Johor State government; the 1962 agreement entitles Singapore to draw 250 million gallons of raw water a day from the Johor River until 2061, with treated water to Johor up to 2 % (or 5 mgd) of the water supplied to Singapore; in 1990 PUB and the Johor State government signed an agreement to build Linggiu Reservoir; PUB treats the water at the Johor River Waterworks near Kota Tinggi; the Johor River Barrage has operated since August 2016.",
+        "zh": "新加坡外交部《水供协议》：1961 年协议让新加坡从地不佬河与士姑来河取原水，并按进口量的 12% 向柔佛供应处理过的水，于 2011 年 8 月 31 日到期，届时新加坡把布莱山与士姑来水厂以及笨珍、地不佬的抽水站交给柔佛州政府；1962 年协议让新加坡每日从柔佛河取原水 250 百万加仑，直到 2061 年，并向柔佛供应至多相当于新加坡供水量 2%（即 5 百万加仑）的处理过的水；1990 年 PUB 与柔佛州政府签约兴建林木水库；PUB 在哥打丁宜附近的柔佛河水厂处理河水；柔佛河拦河坝自 2016 年 8 月运作。"
+      },
+      "url": "https://www.mfa.gov.sg/about-mfa/key-issues/water-agreements/",
+      "note": {
+        "en": "Same source text as four-taps S13; Johor reservoir and dam sites copied unchanged.",
+        "zh": "【待译】Same source text as four-taps S13; Johor reservoir and dam sites copied unchanged."
+      }
+    },
+    {
+      "id": "S34",
+      "text": {
+        "en": "PUB, Our Water Story: Imported Water. Under the 1962 Water Agreement Singapore can draw up to 250 million gallons of water a day from the Johor River until 2061 and provides Johor with treated water up to 2 % of the water imported; Linggiu Reservoir was built by PUB under a 1990 agreement with Johor supplementary to the 1962 agreement; the Johor River Waterworks is owned and operated by PUB.",
+        "zh": "PUB《我们的水故事：进口水》：按照 1962 年水供协议，新加坡每日可从柔佛河取水至多 250 百万加仑，直到 2061 年，并须向柔佛供应至多相当于进口量 2% 的处理过的水；林木水库是 PUB 按 1990 年与柔佛签订、作为 1962 年协议补充的协议兴建的；柔佛河水厂由 PUB 拥有和运作。"
+      },
+      "url": "https://www.pub.gov.sg/Public/WaterLoop/OurWaterStory/ImportedWater",
+      "note": {
+        "en": "Same source text as four-taps S14; Johor reservoir and dam sites copied unchanged.",
+        "zh": "【待译】Same source text as four-taps S14; Johor reservoir and dam sites copied unchanged."
+      }
+    },
+    {
+      "id": "S35",
+      "text": {
+        "en": "Berita RTM (Radio Televisyen Malaysia), 13 October 2026 (Malay): the Linggiu Dam is managed and operated by PUB, in line with the 1962 Johor River Water Agreement and a supplementary agreement of 1990.",
+        "zh": "马来西亚广播电视台新闻（Berita RTM）2026 年 10 月 13 日（马来文）：林木水坝由 PUB 管理和运作，依据的是 1962 年柔佛河水供协议和 1990 年的补充协议。"
+      },
+      "url": "https://berita.rtm.gov.my/nasional/senarai-berita-nasional/senarai-artikel/empangan-linggiu-tidak-termasuk-dalam-pemantauan-pen/",
+      "note": {
+        "en": "Same source text as four-taps S20; Johor reservoir and dam sites copied unchanged.",
+        "zh": "【待译】Same source text as four-taps S20; Johor reservoir and dam sites copied unchanged."
+      }
+    },
+    {
+      "id": "S50",
+      "text": {
+        "en": "National Library Board, BiblioAsia, Public Housing, Private Lives. Building Fast and Furious: 1960–1965. HDB replaced SIT on 1 February 1960. SIT built 23, 019 units in 32 years. NLB reports HDB first-programme output of 53, 000 flats by end-1965, 3, 000 above its target (therefore target 50, 000). Early rental blocks varied from five to twelve storeys; some early emergency flats shared kitchens and toilets. A universal seven-storey description is unsupported.",
+        "zh": "【待译】National Library Board, BiblioAsia, Public Housing, Private Lives. Building Fast and Furious: 1960–1965. HDB replaced SIT on 1 February 1960. SIT built 23, 019 units in 32 years. NLB reports HDB first-programme output of 53, 000 flats by end-1965, 3, 000 above its target (therefore target 50, 000). Early rental blocks varied from five to twelve storeys; some early emergency flats shared kitchens and toilets. A universal seven-storey description is unsupported."
+      },
+      "url": "https://biblioasia.nlb.gov.sg/all-sections/vol-12-issue-3-oct-dec-2016-public-housing-private-lives/",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. source page read",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. source page read"
+      }
+    },
+    {
+      "id": "S51",
+      "text": {
+        "en": "Ministry of National Development / Centre for Liveable Cities, Groundbreaking: 60 Years of National Development in Singapore. Printed pp.30–31, Housing a People (PDF spread index 16). MND reports 54, 430 HDB units by mid-1965; SIT output 23, 019 in 1927–1959. Home Ownership for the People Scheme launched on 12 February 1964, offering low-income buyers 99-year-lease flats. Pinnacle@Duxton was completed in 2009 and has 50-storey blocks.",
+        "zh": "【待译】Ministry of National Development / Centre for Liveable Cities, Groundbreaking: 60 Years of National Development in Singapore. Printed pp.30–31, Housing a People (PDF spread index 16). MND reports 54, 430 HDB units by mid-1965; SIT output 23, 019 in 1927–1959. Home Ownership for the People Scheme launched on 12 February 1964, offering low-income buyers 99-year-lease flats. Pinnacle@Duxton was completed in 2009 and has 50-storey blocks."
+      },
+      "url": "https://www.clc.gov.sg/docs/default-source/books/groundbreaking-60-years-of-national-development-in-singapore.pdf",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. source page read",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. source page read"
+      }
+    },
+    {
+      "id": "S52",
+      "text": {
+        "en": "Ministry of Law / K Shanmugam, Speech at the Judicial Executive Programme 2022. 21 November 2022, paragraph 59. Public housing is generally built on State land on a 99-year lease.",
+        "zh": "【待译】Ministry of Law / K Shanmugam, Speech at the Judicial Executive Programme 2022. 21 November 2022, paragraph 59. Public housing is generally built on State land on a 99-year lease."
+      },
+      "url": "https://www.mlaw.gov.sg/news/speeches/2022-11-21-speech-k-shanmugam-judicial-executive-programme/",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. source page read",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. source page read"
+      }
+    },
+    {
+      "id": "S53",
+      "text": {
+        "en": "National Library Board, Singapore Infopedia, Land Acquisition Act 1966. Pressing needs for land, paragraph 3. Parliament approved the Bill on 26 October 1966; the Act took effect on 17 June 1967. Compensation disputes went to an Appeals Board.",
+        "zh": "【待译】National Library Board, Singapore Infopedia, Land Acquisition Act 1966. Pressing needs for land, paragraph 3. Parliament approved the Bill on 26 October 1966; the Act took effect on 17 June 1967. Compensation disputes went to an Appeals Board."
+      },
+      "url": "https://www.nlb.gov.sg/main/article-detail?cmsuuid=153040f3-9475-444a-ba5c-be2a56658c34",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. source page read",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. source page read"
+      }
+    },
+    {
+      "id": "S54",
+      "text": {
+        "en": "Centre for Liveable Cities, Land Acquisition and Resettlement: Securing Resources for Development. Printed pp.16–17 (PDF spread 18). The 1966 formula discounted market value through exclusions. From 1973–2007 it used current or statutory historical value, whichever lower; after 2007 current value became primary. Lee argued public-funded land gains should benefit the community. CLC records that historical valuations left some owners unable to afford suitable replacement property. Public-sector land, including statutory boards, increased from 44% in 1960 to over 85% in 2007.",
+        "zh": "【待译】Centre for Liveable Cities, Land Acquisition and Resettlement: Securing Resources for Development. Printed pp.16–17 (PDF spread 18). The 1966 formula discounted market value through exclusions. From 1973–2007 it used current or statutory historical value, whichever lower; after 2007 current value became primary. Lee argued public-funded land gains should benefit the community. CLC records that historical valuations left some owners unable to afford suitable replacement property. Public-sector land, including statutory boards, increased from 44% in 1960 to over 85% in 2007."
+      },
+      "url": "https://isomer-user-content.by.gov.sg/50/aac3af3c-1e66-411c-93eb-41c12cd6730f/uss-land-acquisition-and-resettlement.pdf",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. source page read",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. source page read"
+      }
+    },
+    {
+      "id": "S55",
+      "text": {
+        "en": "National Library Board, Singapore Infopedia, Bukit Ho Swee fire. Introduction; Relocation of affected families. 25 May 1961 fire:100 acres, about 16, 000 homeless, four deaths; cause unknown. Remaining families rehoused by February 1962. HDB built 12, 562 flats on fire/adjacent lands by 1967. Kampong Tiong Bahru fire on 13 February 1959 destroyed homes of around 12, 000 people.",
+        "zh": "【待译】National Library Board, Singapore Infopedia, Bukit Ho Swee fire. Introduction; Relocation of affected families. 25 May 1961 fire:100 acres, about 16, 000 homeless, four deaths; cause unknown. Remaining families rehoused by February 1962. HDB built 12, 562 flats on fire/adjacent lands by 1967. Kampong Tiong Bahru fire on 13 February 1959 destroyed homes of around 12, 000 people."
+      },
+      "url": "https://www.nlb.gov.sg/main/article-detail?cmsuuid=8a0ca033-7b44-47a1-b4cd-f841debdf6db",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. source page read Original evidence ledger: E090, E091, E092, E093, E094, E095. Original fact ids: living-bhs-date, living-bhs-area, living-bhs-people, living-bhs-cause, living-bhs-rehousing, living-bhs-flats. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. source page read Original evidence ledger: E090, E091, E092, E093, E094, E095. Original fact ids: living-bhs-date, living-bhs-area, living-bhs-people, living-bhs-cause, living-bhs-rehousing, living-bhs-flats. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S56",
+      "text": {
+        "en": "NUS Press, Squatters into Citizens: The 1961 Bukit Ho Swee Fire and the Making of Modern Singapore. Publisher description. Publisher describes a study of the fire, relocation, memory and everyday lives; it is not proof of any arson theory.",
+        "zh": "【待译】NUS Press, Squatters into Citizens: The 1961 Bukit Ho Swee Fire and the Making of Modern Singapore. Publisher description. Publisher describes a study of the fire, relocation, memory and everyday lives; it is not proof of any arson theory."
+      },
+      "url": "https://nuspress.nus.edu.sg/products/squatters-into-citizens",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. source page read",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. source page read"
+      }
+    },
+    {
+      "id": "S57",
+      "text": {
+        "en": "National Heritage Board, Void Decks. Printed p.2, A History of Void Decks in Singapore. NHB says many 1960s blocks had ground-floor homes/shops; open ground floors became common from 1970s, with an older 1963 example at Jalan Klinik.",
+        "zh": "【待译】National Heritage Board, Void Decks. Printed p.2, A History of Void Decks in Singapore. NHB says many 1960s blocks had ground-floor homes/shops; open ground floors became common from 1970s, with an older 1963 example at Jalan Klinik."
+      },
+      "url": "https://www.nhb.gov.sg/~/media/nhb/files/resources/publications/ebooks/nhb_ebook_void_decks.pdf",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. official indexed page text only",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. official indexed page text only"
+      }
+    },
+    {
+      "id": "S58",
+      "text": {
+        "en": "National Heritage Board, Woodlands Heritage Trail: Our Heritage. Housing section / caption; printed page not established. NHB describes first Marsiling HDB Blocks 1–5 under construction in 1972, a defensible early-building milestone rather than whole-town completion.",
+        "zh": "【待译】National Heritage Board, Woodlands Heritage Trail: Our Heritage. Housing section / caption; printed page not established. NHB describes first Marsiling HDB Blocks 1–5 under construction in 1972, a defensible early-building milestone rather than whole-town completion."
+      },
+      "url": "https://www.roots.gov.sg/-/media/Roots/Files/Woodlands-Heritage-Trail/NHB22_Woodlands_Trail-Booklet_web.pdf",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. official indexed excerpt only",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. official indexed excerpt only"
+      }
+    },
+    {
+      "id": "S59",
+      "text": {
+        "en": "National Archives of Singapore / MICA, Minister Mentor Lee Kuan Yew cutting the ribbon to open…. Covering Date and agency description. NAS catalogue records Pinnacle@Duxton key handover ceremony on 13 December 2009.",
+        "zh": "【待译】National Archives of Singapore / MICA, Minister Mentor Lee Kuan Yew cutting the ribbon to open…. Covering Date and agency description. NAS catalogue records Pinnacle@Duxton key handover ceremony on 13 December 2009."
+      },
+      "url": "https://www.nas.gov.sg/archivesonline/photographs/record-details/c85d5fb9-5801-11e7-83df-0050568939ad",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. source page read",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. source page read"
+      }
+    },
+    {
+      "id": "S60",
+      "text": {
+        "en": "Urban Redevelopment Authority, Paya Lebar Air Base. Peering down memory lane. Paya Lebar Airport officially opened 20 August 1955.",
+        "zh": "【待译】Urban Redevelopment Authority, Paya Lebar Air Base. Peering down memory lane. Paya Lebar Airport officially opened 20 August 1955."
+      },
+      "url": "https://www.ura.gov.sg/land-planning/master-plan/master-plan-2025/regional-plans/north-east/paya-lebar-air-base/",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. source page read",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. source page read"
+      }
+    },
+    {
+      "id": "S61",
+      "text": {
+        "en": "Urban Redevelopment Authority, Former Royal Air Force Seletar Conservation Area. The History. Seletar began operations in 1928; official opening 1 January 1930.",
+        "zh": "【待译】Urban Redevelopment Authority, Former Royal Air Force Seletar Conservation Area. The History. Seletar began operations in 1928; official opening 1 January 1930."
+      },
+      "url": "https://www.ura.gov.sg/conservation/find-a-building/conservation-portal/frafs/",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. source page read",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. source page read"
+      }
+    },
+    {
+      "id": "S62",
+      "text": {
+        "en": "Republic of Singapore Air Force, 1971/09 - Tengah Air Base. History body. RSAF dates building of RAF Tengah to 1939.",
+        "zh": "【待译】Republic of Singapore Air Force, 1971/09 - Tengah Air Base. History body. RSAF dates building of RAF Tengah to 1939."
+      },
+      "url": "https://www.rsaf.gov.sg/about-us/history/history-of-the-rsaf/1971-sep-tengah-air-base/",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. source page read",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. source page read"
+      }
+    },
+    {
+      "id": "S63",
+      "text": {
+        "en": "Singapore Department of Statistics, Indicators On Population, Annual. Total Population row, 1959 column. Official annual total-population series gives 1, 587, 200 in 1959; 1957 is 1, 445, 929.",
+        "zh": "【待译】Singapore Department of Statistics, Indicators On Population, Annual. Total Population row, 1959 column. Official annual total-population series gives 1, 587, 200 in 1959; 1957 is 1, 445, 929."
+      },
+      "url": "https://data.gov.sg/datasets/d_3d227e5d9fdec73f3bcadce671c333a6/view",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. source page read Original evidence ledger: E025, E026, E027, E028, E029, E030, E031, E032, E033, E034, E035, E036, E037, E038, E039, E163. Original fact ids: total-population-1957, total-population-1970, resident-population-1970, total-population-1980, resident-population-1980, total-population-1990, resident-population-1990, total-population-2000, resident-population-2000, total-population-2010, resident-population-2010, total-population-2020, resident-population-2020, total-population-2024, resident-population-2024. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. source page read Original evidence ledger: E025, E026, E027, E028, E029, E030, E031, E032, E033, E034, E035, E036, E037, E038, E039, E163. Original fact ids: total-population-1957, total-population-1970, resident-population-1970, total-population-1980, resident-population-1980, total-population-1990, resident-population-1990, total-population-2000, resident-population-2000, total-population-2010, resident-population-2010, total-population-2020, resident-population-2020, total-population-2024, resident-population-2024. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S64",
+      "text": {
+        "en": "National Library Board, BiblioAsia, Remembering Punggol’s Kampong Wak Sumang and the Man Who Made It Happen. Developing Punggol. Kampong Wak Sumang received piped water, electricity, paved roads and drainage during the 1960s.",
+        "zh": "【待译】National Library Board, BiblioAsia, Remembering Punggol’s Kampong Wak Sumang and the Man Who Made It Happen. Developing Punggol. Kampong Wak Sumang received piped water, electricity, paved roads and drainage during the 1960s."
+      },
+      "url": "https://biblioasia.nlb.gov.sg/all-sections/vol-19-issue-2-jul-sep-2023-kampong-wak-sumang-punggol/",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. existing evidence ledger reused Original evidence ledger: E013. Original fact ids: kampong-services-varied. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. existing evidence ledger reused Original evidence ledger: E013. Original fact ids: kampong-services-varied. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S65",
+      "text": {
+        "en": "Housing & Development Board, HDB Annual Report 2020/2021 — Key Statistics. printed p. 13 (PDF p. 7), Resident Population in HDB Flats chart and notes. HDB historical chart gives 9% of total population living in HDB flats in 1960. HDB historical chart gives 23% of total population living in HDB flats in 1965. HDB historical chart gives 35% of resident population living in HDB flats in 1970. HDB historical chart gives 67% of resident population living in HDB flats in 1980. HDB historical chart gives 87% of resident population living in HDB flats in 1990.",
+        "zh": "【待译】Housing & Development Board, HDB Annual Report 2020/2021 — Key Statistics. printed p. 13 (PDF p. 7), Resident Population in HDB Flats chart and notes. HDB historical chart gives 9% of total population living in HDB flats in 1960. HDB historical chart gives 23% of total population living in HDB flats in 1965. HDB historical chart gives 35% of resident population living in HDB flats in 1970. HDB historical chart gives 67% of resident population living in HDB flats in 1980. HDB historical chart gives 87% of resident population living in HDB flats in 1990."
+      },
+      "url": "https://assets.hdb.gov.sg/about-us/news-and-publications/annual-report/2021/assets/ebooks/key-statistics.pdf",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. existing evidence ledger reused Original evidence ledger: E041, E042, E043, E044, E045, E046, E047, E048, E049, E050, E051. Original fact ids: hdb-population-share-1960, hdb-population-share-1965, hdb-population-share-1970, hdb-population-share-1975, hdb-population-share-1980, hdb-population-share-1985, hdb-population-share-1990, hdb-population-share-1995, hdb-population-share-2000, hdb-population-share-2005, hdb-population-share-2010, hdb-population-share-2015, hdb-population-share-2021. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. existing evidence ledger reused Original evidence ledger: E041, E042, E043, E044, E045, E046, E047, E048, E049, E050, E051. Original fact ids: hdb-population-share-1960, hdb-population-share-1965, hdb-population-share-1970, hdb-population-share-1975, hdb-population-share-1980, hdb-population-share-1985, hdb-population-share-1990, hdb-population-share-1995, hdb-population-share-2000, hdb-population-share-2005, hdb-population-share-2010, hdb-population-share-2015, hdb-population-share-2021. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S66",
+      "text": {
+        "en": "Housing & Development Board, HDB Key Statistics 2024/2025. printed p. 07 (PDF p. 7), Statistical Highlights, FY 2024 column and footnote 1. At end-March 2025, 76.0% of Singapore resident population lived in HDB flats.",
+        "zh": "【待译】Housing & Development Board, HDB Key Statistics 2024/2025. printed p. 07 (PDF p. 7), Statistical Highlights, FY 2024 column and footnote 1. At end-March 2025, 76.0% of Singapore resident population lived in HDB flats."
+      },
+      "url": "https://www.hdb.gov.sg/-/media/hdb-pulse/reports/annual-reports-and-financial-statements/HDB_Key-Statistics-2025.pdf",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. existing evidence ledger reused Original evidence ledger: E052, E053. Original fact ids: hdb-resident-share-2024-03-31, hdb-resident-share-2025-03-31. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. existing evidence ledger reused Original evidence ledger: E052, E053. Original fact ids: hdb-resident-share-2024-03-31, hdb-resident-share-2025-03-31. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S67",
+      "text": {
+        "en": "National Heritage Board, with National Integration Council and Housing & Development Board, Who’s Your Neighbour?. Printed p.7, From urban slums to high-rise living (PDF p.5 spread). Around 1960, some families occupied small shophouse cubicles in buildings shared with other households. Thousands lived in informal settlements lacking household piped water, reliable electricity and adequate sanitation/waste disposal. Do not generalise this to every kampong. NHB records five HDB blocks completed in nine months to house families displaced by the Bukit Ho Swee fire. For some residents, moving from kampong houses or shophouses to high-rise flats initially involved difficult adjustments.",
+        "zh": "【待译】National Heritage Board, with National Integration Council and Housing & Development Board, Who’s Your Neighbour?. Printed p.7, From urban slums to high-rise living (PDF p.5 spread). Around 1960, some families occupied small shophouse cubicles in buildings shared with other households. Thousands lived in informal settlements lacking household piped water, reliable electricity and adequate sanitation/waste disposal. Do not generalise this to every kampong. NHB records five HDB blocks completed in nine months to house families displaced by the Bukit Ho Swee fire. For some residents, moving from kampong houses or shophouses to high-rise flats initially involved difficult adjustments."
+      },
+      "url": "https://isomer-user-content.by.gov.sg/98/86474f7e-5dec-4de7-8666-c54e80fedffe/NIC-whos-your-neighbour.pdf",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. existing original-document extract inspected locally Original evidence ledger: E096, E097, E098, E099, E100, E101. Original fact ids: living-shophouses, living-services, living-hdb-design, living-bhs-fast-blocks, living-hdb-amenities, living-adjustment. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. existing original-document extract inspected locally Original evidence ledger: E096, E097, E098, E099, E100, E101. Original fact ids: living-shophouses, living-services, living-hdb-design, living-bhs-fast-blocks, living-hdb-amenities, living-adjustment. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S68",
+      "text": {
+        "en": "National Heritage Board / National Museum of Singapore, ‘Kampong’ house. Collection description, accession 1995-01616. NHB describes traditional kampong houses with sloping roofs, often thatched with palm fronds, and raised floors that help ventilation and coping with wet ground.",
+        "zh": "【待译】National Heritage Board / National Museum of Singapore, ‘Kampong’ house. Collection description, accession 1995-01616. NHB describes traditional kampong houses with sloping roofs, often thatched with palm fronds, and raised floors that help ventilation and coping with wet ground."
+      },
+      "url": "https://www.roots.gov.sg/Collection-Landing/listing/1077823",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. existing evidence ledger reused Original evidence ledger: E102. Original fact ids: living-attap-material. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. existing evidence ledger reused Original evidence ledger: E102. Original fact ids: living-attap-material. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S69",
+      "text": {
+        "en": "Founders’ Memorial, National Heritage Board, 人民的家园. Au Seck Ngee and the HDB documents for his first flat. Au Seck Ngee’s family described leaving their familiar kampong for their first flat as a major life change. They needed HDB help explaining English contracts.",
+        "zh": "【待译】Founders’ Memorial, National Heritage Board, 人民的家园. Au Seck Ngee and the HDB documents for his first flat. Au Seck Ngee’s family described leaving their familiar kampong for their first flat as a major life change. They needed HDB help explaining English contracts."
+      },
+      "url": "https://www.foundersmemorial.gov.sg/shapeourmemorial/ch/onlineexhibition/detail/homes-for-the-people",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. existing evidence ledger reused Original evidence ledger: E103, E122. Original fact ids: living-resettlement-personal, term-newtown. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. existing evidence ledger reused Original evidence ledger: E103, E122. Original fact ids: living-resettlement-personal, term-newtown. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S70",
+      "text": {
+        "en": "Housing & Development Board, Queenstown Town Design Guide. Printed p.10, Historical Background. SIT planned Queenstown as Singapore’s first satellite town in 1953. This is a planning milestone, not a whole-town completion year.",
+        "zh": "【待译】Housing & Development Board, Queenstown Town Design Guide. Printed p.10, Historical Background. SIT planned Queenstown as Singapore’s first satellite town in 1953. This is a planning milestone, not a whole-town completion year."
+      },
+      "url": "https://www.hdb.gov.sg/-/media/about-us/our-role/plan-and-design-towns/town-design-guides/Queenstown-Town-Design-Guide.pdf",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. existing original-document extract inspected locally Original evidence ledger: E105. Original fact ids: town-queenstown-1953. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. existing original-document extract inspected locally Original evidence ledger: E105. Original fact ids: town-queenstown-1953. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S71",
+      "text": {
+        "en": "Housing & Development Board, Toa Payoh. History of Toa Payoh; Evolving through the years. Toa Payoh land preparation took place in 1964, ahead of HDB’s second five-year building programme in 1965; HDB calls it its first comprehensively planned town.",
+        "zh": "【待译】Housing & Development Board, Toa Payoh. History of Toa Payoh; Evolving through the years. Toa Payoh land preparation took place in 1964, ahead of HDB’s second five-year building programme in 1965; HDB calls it its first comprehensively planned town."
+      },
+      "url": "https://www.hdb.gov.sg/about-us/our-towns-and-estates/toa-payoh",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. existing evidence ledger reused Original evidence ledger: E106. Original fact ids: town-toapayoh-1964. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. existing evidence ledger reused Original evidence ledger: E106. Original fact ids: town-toapayoh-1964. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S72",
+      "text": {
+        "en": "Housing & Development Board, Ang Mo Kio Town Design Guide. Printed p.12, Evolution of Ang Mo Kio. Ang Mo Kio’s first slab blocks were built in 1973, within Neighbourhoods 2 and 3.",
+        "zh": "【待译】Housing & Development Board, Ang Mo Kio Town Design Guide. Printed p.12, Evolution of Ang Mo Kio. Ang Mo Kio’s first slab blocks were built in 1973, within Neighbourhoods 2 and 3."
+      },
+      "url": "https://www.hdb.gov.sg/-/media/about-us/our-role/plan-and-design-towns/town-design-guides/Ang-Mo-Kio-Town-Design-Guide.pdf",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. existing original-document extract inspected locally Original evidence ledger: E107. Original fact ids: town-amk-1973. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. existing original-document extract inspected locally Original evidence ledger: E107. Original fact ids: town-amk-1973. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S73",
+      "text": {
+        "en": "National Library Board, Curiocity, Tampines. Opening paragraph. Construction of Tampines New Town began in 1979.",
+        "zh": "【待译】National Library Board, Curiocity, Tampines. Opening paragraph. Construction of Tampines New Town began in 1979."
+      },
+      "url": "https://curiocity.nlb.gov.sg/resource-room/tampines/",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. existing evidence ledger reused Original evidence ledger: E108. Original fact ids: town-tampines-1979. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. existing evidence ledger reused Original evidence ledger: E108. Original fact ids: town-tampines-1979. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S74",
+      "text": {
+        "en": "Housing & Development Board, HDB Annual Report 2023/2024. Printed p.18, Tengah’s Progress Milestones at a Glance. The first Tengah residents collected keys at Plantation Acres and Plantation Grange in August 2023. All residential blocks at Tengah’s first two BTO projects, Plantation Acres and Plantation Grange, were completed in December 2023.",
+        "zh": "【待译】Housing & Development Board, HDB Annual Report 2023/2024. Printed p.18, Tengah’s Progress Milestones at a Glance. The first Tengah residents collected keys at Plantation Acres and Plantation Grange in August 2023. All residential blocks at Tengah’s first two BTO projects, Plantation Acres and Plantation Grange, were completed in December 2023."
+      },
+      "url": "https://www.hdb.gov.sg/-/media/hdb-pulse/reports/annual-reports-and-financial-statements/HDB-AR-FY23.pdf",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. existing original-document extract inspected locally Original evidence ledger: E109, E110. Original fact ids: town-tengah-keys-2023, town-tengah-projects-2023. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. existing original-document extract inspected locally Original evidence ledger: E109, E110. Original fact ids: town-tengah-keys-2023, town-tengah-projects-2023. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S75",
+      "text": {
+        "en": "Promote Mandarin Council / Speak Mandarin Campaign, Speak Mandarin Campaign celebrates its 40th anniversary (Chinese press release). Printed p.8, 组屋 entry. HDB flat / public housing flat: 组屋",
+        "zh": "【待译】Promote Mandarin Council / Speak Mandarin Campaign, Speak Mandarin Campaign celebrates its 40th anniversary (Chinese press release). Printed p.8, 组屋 entry. HDB flat / public housing flat: 组屋"
+      },
+      "url": "https://www.languagecouncils.sg/mandarin/en/-/media/smc/documents/2019/press-release---speak-mandarin-campaign-celebrates-its-40th-anniversary-chi.pdf",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. existing evidence ledger reused Original evidence ledger: E121. Original fact ids: term-hdb. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. existing evidence ledger reused Original evidence ledger: E121. Original fact ids: term-hdb. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S76",
+      "text": {
+        "en": "Singapore Mandarin Council, Singaporean Mandarin Database, 甘榜精神 / kampung spirit. 由来 / Etymology. kampong / kampung / village: 甘榜",
+        "zh": "【待译】Singapore Mandarin Council, Singaporean Mandarin Database, 甘榜精神 / kampung spirit. 由来 / Etymology. kampong / kampung / village: 甘榜"
+      },
+      "url": "https://www.languagecouncils.sg/mandarin/en/learning-resources/singaporean-mandarin-database/terms/kampung-spirit",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. existing evidence ledger reused Original evidence ledger: E104, E123. Original fact ids: living-kampong-community, term-kampong. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. existing evidence ledger reused Original evidence ledger: E104, E123. Original fact ids: living-kampong-community, term-kampong. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S79",
+      "text": {
+        "en": "National Heritage Board, The First HDB Blocks & the HDB Terraces: Blocks 45, 48 and 49 Stirling Road completed October 1960; residents received flats in 1961.",
+        "zh": "【待译】National Heritage Board, The First HDB Blocks & the HDB Terraces: Blocks 45, 48 and 49 Stirling Road completed October 1960; residents received flats in 1961."
+      },
+      "url": "https://www.roots.gov.sg/places/places-landing/Places/landmarks/my-queenstown-heritage-trail/the-first-hdb-blocks-the-hdb-terraces",
+      "note": {
+        "en": "Official page indexed text inspected 20 October 2026; direct open returned a bot challenge. October 1960 completion and 1961 handover distinguish milestones. Original page should be checked manually before publication.",
+        "zh": "【待译】Official page indexed text inspected 20 October 2026; direct open returned a bot challenge. October 1960 completion and 1961 handover distinguish milestones. Original page should be checked manually before publication."
+      }
+    },
+    {
+      "id": "S90",
+      "text": {
+        "en": "URA Master Plan 2019 Rail Line layer. Contains information from Master Plan 2019 Rail Line layer accessed on 20 October 2026 from data.gov.sg which is made available under the terms of the Singapore Open Data Licence version 1.0.",
+        "zh": "【待译】URA Master Plan 2019 Rail Line layer. Contains information from Master Plan 2019 Rail Line layer accessed on 20 October 2026 from data.gov.sg which is made available under the terms of the Singapore Open Data Licence version 1.0."
+      },
+      "url": "https://data.gov.sg/datasets/d_222bfc84eb86c7c11994d02f8939da8d/view",
+      "note": {
+        "en": "Original evidence ledger: E137, E138. Original fact ids: . Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Original evidence ledger: E137, E138. Original fact ids: . Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S91",
+      "text": {
+        "en": "URA Master Plan 2019 Rail Station layer. Contains information from Master Plan 2019 Rail Station layer accessed on 20 October 2026 from data.gov.sg which is made available under the terms of the Singapore Open Data Licence version 1.0.",
+        "zh": "【待译】URA Master Plan 2019 Rail Station layer. Contains information from Master Plan 2019 Rail Station layer accessed on 20 October 2026 from data.gov.sg which is made available under the terms of the Singapore Open Data Licence version 1.0."
+      },
+      "url": "https://data.gov.sg/datasets/d_8d886e3a83934d7447acdf5bc6959999/view"
+    },
+    {
+      "id": "S92",
+      "text": {
+        "en": "URA Master Plan 2019 Rail Station Name layer. Contains information from Master Plan 2019 Rail Station Name layer accessed on 20 October 2026 from data.gov.sg which is made available under the terms of the Singapore Open Data Licence version 1.0.",
+        "zh": "【待译】URA Master Plan 2019 Rail Station Name layer. Contains information from Master Plan 2019 Rail Station Name layer accessed on 20 October 2026 from data.gov.sg which is made available under the terms of the Singapore Open Data Licence version 1.0."
+      },
+      "url": "https://data.gov.sg/datasets/d_bd17bca97549a4ab0fb7b6ad102d640c/view"
+    },
+    {
+      "id": "S93",
+      "text": {
+        "en": "LTA, Circle Line Book, original-network history and stages 1–3 opening dates. The East-West Line reached Boon Lay on 6 July 1990; Circle Line stage 3 opened on 28 May 2009 and stages 1–2 on 17 April 2010. Accessed 20 October 2026.",
+        "zh": "【待译】LTA, Circle Line Book, original-network history and stages 1–3 opening dates. The East-West Line reached Boon Lay on 6 July 1990; Circle Line stage 3 opened on 28 May 2009 and stages 1–2 on 17 April 2010. Accessed 20 October 2026."
+      },
+      "url": "https://www.lta.gov.sg/content/dam/ltagov/who_we_are/statistics_and_publications/books/pdf/Circle_Line_Book.pdf",
+      "note": {
+        "en": "Original evidence ledger: E084. Original fact ids: ccl-first-stage-opening. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Original evidence ledger: E084. Original fact ids: ccl-first-stage-opening. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S94",
+      "text": {
+        "en": "LTA, Downtown Line, stage-opening dates: 22 December 2013, 27 December 2015 and 21 October 2017. Infill Hume opened later and does not delay through-track. Accessed 20 October 2026.",
+        "zh": "【待译】LTA, Downtown Line, stage-opening dates: 22 December 2013, 27 December 2015 and 21 October 2017. Infill Hume opened later and does not delay through-track. Accessed 20 October 2026."
+      },
+      "url": "https://www.lta.gov.sg/content/ltagov/en/getting_around/public_transport/rail_network/downtown_line.html",
+      "note": {
+        "en": "Original evidence ledger: E085, E086, E087. Original fact ids: dtl-stage-1-opening, dtl-stage-2-opening, dtl-stage-3-opening. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Original evidence ledger: E085, E086, E087. Original fact ids: dtl-stage-1-opening, dtl-stage-2-opening, dtl-stage-3-opening. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S95",
+      "text": {
+        "en": "LTA, Thomson-East Coast Line, passenger-opening record for stages 1–4; detailed dates and direct factsheet URLs are retained in rail-report.md. Accessed 20 October 2026.",
+        "zh": "【待译】LTA, Thomson-East Coast Line, passenger-opening record for stages 1–4; detailed dates and direct factsheet URLs are retained in rail-report.md. Accessed 20 October 2026."
+      },
+      "url": "https://www.lta.gov.sg/content/ltagov/en/getting_around/public_transport/rail_network/thomson_east_coast_line.html"
+    },
+    {
+      "id": "S96",
+      "text": {
+        "en": "NLB NewspaperSG, The Straits Times, 13 March 1988, p.2, Rolling into the 90s: passenger service extends to Clementi that day, distinct from the 12 March ceremony. Accessed 20 October 2026.",
+        "zh": "【待译】NLB NewspaperSG, The Straits Times, 13 March 1988, p.2, Rolling into the 90s: passenger service extends to Clementi that day, distinct from the 12 March ceremony. Accessed 20 October 2026."
+      },
+      "url": "https://eresources.nlb.gov.sg/newspapers/digitised/issue/straitstimes19880313-1"
+    },
+    {
+      "id": "S97",
+      "text": {
+        "en": "SBS Transit Annual Report 2003, Operations Review: North East Line passenger service began 20 June 2003 and Sengkang LRT East Loop began 18 January 2003. Accessed 20 October 2026.",
+        "zh": "【待译】SBS Transit Annual Report 2003, Operations Review: North East Line passenger service began 20 June 2003 and Sengkang LRT East Loop began 18 January 2003. Accessed 20 October 2026."
+      },
+      "url": "https://www.sbstransit.com.sg/Uploads/Investor_Relations/Annual_Report/sbst_annualreport03.pdf"
+    },
+    {
+      "id": "S98",
+      "text": {
+        "en": "SBS Transit Annual Report 2004, printed p.24: Punggol LRT and Sengkang LRT West Loop began revenue service on 29 January 2005. The 2005 archived release and later 2014/2016 Punggol operational details are recorded in rail-report.md. Accessed 20 October 2026.",
+        "zh": "【待译】SBS Transit Annual Report 2004, printed p.24: Punggol LRT and Sengkang LRT West Loop began revenue service on 29 January 2005. The 2005 archived release and later 2014/2016 Punggol operational details are recorded in rail-report.md. Accessed 20 October 2026."
+      },
+      "url": "https://www.sbstransit.com.sg/Uploads/Investor_Relations/Annual_Report/sbst_annualreport04.pdf"
+    },
+    {
+      "id": "S99",
+      "text": {
+        "en": "LTA Annual Report 2024/25, printed pp.14,16: TEL stage 4 opened 23 June 2024 and Punggol Coast opened 10 December 2024. Deferred station stops do not change the opening of already operating through-track. Accessed 20 October 2026.",
+        "zh": "【待译】LTA Annual Report 2024/25, printed pp.14,16: TEL stage 4 opened 23 June 2024 and Punggol Coast opened 10 December 2024. Deferred station stops do not change the opening of already operating through-track. Accessed 20 October 2026."
+      },
+      "url": "https://www.lta.gov.sg/content/dam/ltagov/who_we_are/statistics_and_publications/report/pdf/LTA%20AR2024_25%20PDFa%20%28web%29.pdf"
+    },
+    {
+      "id": "S100",
+      "text": {
+        "en": "Ministry of the Environment, 23 April 1985 / National Archives of Singapore, The Phasing Out of Pig Farms. printed p. 1, opening paragraph. Goh Keng Swee announced the phase-out policy in Parliament in March 1984. Government cited treatment cost, scarce land/water, smell and homes approaching farmland. Lim Chu Kang farms were to stop by June 1986.",
+        "zh": "【待译】Ministry of the Environment, 23 April 1985 / National Archives of Singapore, The Phasing Out of Pig Farms. printed p. 1, opening paragraph. Goh Keng Swee announced the phase-out policy in Parliament in March 1984. Government cited treatment cost, scarce land/water, smell and homes approaching farmland. Lim Chu Kang farms were to stop by June 1986."
+      },
+      "url": "https://www.nas.gov.sg/archivesonline/data/pdfdoc/19850423_0003.pdf",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. ",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. "
+      }
+    },
+    {
+      "id": "S101",
+      "text": {
+        "en": "Centre for Liveable Cities, Ministry of National Development; Elyssa Ludher and Thinesh Kumar s/o Paramasilvam (2018), Food and The City: Overcoming Challenges for Food Security. printed pp. 29–31; PDF pp. 23–24. Pig-farm runoff threatened Kranji catchment; relocation preceded the island-wide phase-out. CLC dates the last pig phase-out to 1989. Koh Lip Lin criticised the reversal after farmers invested in Punggol; some families entered retail. CLC describes loss of family ties and identity. CLC reports roughly 8,000 farms phased out in 1975–1984, about 7,900 remaining, and about 1,500 hectares by the 1980s.",
+        "zh": "【待译】Centre for Liveable Cities, Ministry of National Development; Elyssa Ludher and Thinesh Kumar s/o Paramasilvam (2018), Food and The City: Overcoming Challenges for Food Security. printed pp. 29–31; PDF pp. 23–24. Pig-farm runoff threatened Kranji catchment; relocation preceded the island-wide phase-out. CLC dates the last pig phase-out to 1989. Koh Lip Lin criticised the reversal after farmers invested in Punggol; some families entered retail. CLC describes loss of family ties and identity. CLC reports roughly 8,000 farms phased out in 1975–1984, about 7,900 remaining, and about 1,500 hectares by the 1980s."
+      },
+      "url": "https://www.clc.gov.sg/docs/default-source/urban-systems-studies/food-and-the-city-overcoming-challenges-for-food-security.pdf",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026.  Original evidence ledger: E057, E058, E059. Original fact ids: farmland-1980s-rounded, farm-phase-out-1975-84, agrotech-1986-land-reservation. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026.  Original evidence ledger: E057, E058, E059. Original fact ids: farmland-1980s-rounded, farm-phase-out-1975-84, agrotech-1986-land-reservation. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S102",
+      "text": {
+        "en": "Singapore Food Agency; Choo RuiZhi, 12 October 2022, Of Change & Challenges: Reminders from Singapore’s Past Agricultural Transformations. Evolution of Singapore’s Agri-food Industry. SFA gives 20,000 farms in 1959 and farmland shrinking from about 14,000 to 8,400 hectares as the 1970s began.",
+        "zh": "【待译】Singapore Food Agency; Choo RuiZhi, 12 October 2022, Of Change & Challenges: Reminders from Singapore’s Past Agricultural Transformations. Evolution of Singapore’s Agri-food Industry. SFA gives 20,000 farms in 1959 and farmland shrinking from about 14,000 to 8,400 hectares as the 1970s began."
+      },
+      "url": "https://www.sfa.gov.sg/food-for-thought/article/detail/of-change-challenges-reminders-from-singapore-s-past-agricultural-transformations",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026.  Original evidence ledger: E054, E055, E056. Original fact ids: farms-1959, farm-land-early-transition, agrotech-locations. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026.  Original evidence ledger: E054, E055, E056. Original fact ids: farms-1959, farm-land-early-transition, agrotech-locations. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S103",
+      "text": {
+        "en": "Singapore Government / Primary Production Department / NAS, Tendering of Land for Farming in Agrotechnology Parks. printed p. 1, paragraphs 1–3; inspected existing rendered scan. The September 1986 release scheduled first tenders for Sungei Tengah, Murai and Loyang for 5 September 1986; wider development was planned for 1986–1992.",
+        "zh": "【待译】Singapore Government / Primary Production Department / NAS, Tendering of Land for Farming in Agrotechnology Parks. printed p. 1, paragraphs 1–3; inspected existing rendered scan. The September 1986 release scheduled first tenders for Sungei Tengah, Murai and Loyang for 5 September 1986; wider development was planned for 1986–1992."
+      },
+      "url": "https://www.nas.gov.sg/archivesonline/data/pdfdoc/1181-1986-09-03.pdf",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026.  Original evidence ledger: E012, E161. Original fact ids: agrotech-programme-1986. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026.  Original evidence ledger: E012, E161. Original fact ids: agrotech-programme-1986. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S104",
+      "text": {
+        "en": "Singapore Food Agency, Champions of tomorrow - supporting local farmers. opening section, paragraph 3. SFA states that Singapore imports over 90% of its food.",
+        "zh": "【待译】Singapore Food Agency, Champions of tomorrow - supporting local farmers. opening section, paragraph 3. SFA states that Singapore imports over 90% of its food."
+      },
+      "url": "https://www.sfa.gov.sg/fromsgtosg/our-sg-food-story/champions-of-tomorrow-supporting-local-farmers",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. ",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. "
+      }
+    },
+    {
+      "id": "S105",
+      "text": {
+        "en": "Singapore Food Agency, Agriculture Technologies. Indoor agricultural farms. SFA dates Singapore’s first indoor farm to 2014. SFA distinguishes hydroponics from soil cultivation and describes nutrient-water systems.",
+        "zh": "【待译】Singapore Food Agency, Agriculture Technologies. Indoor agricultural farms. SFA dates Singapore’s first indoor farm to 2014. SFA distinguishes hydroponics from soil cultivation and describes nutrient-water systems."
+      },
+      "url": "https://www.sfa.gov.sg/food-science-and-technology/technology/agriculture-technologies",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026.  Original evidence ledger: E006, E007. Original fact ids: farm-types-and-tech, farm-indoor-2014. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026.  Original evidence ledger: E006, E007. Original fact ids: farm-types-and-tech, farm-indoor-2014. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S106",
+      "text": {
+        "en": "Panasonic Asia Pacific, 31 July 2014, Panasonic Contributes to Singapore’s Self-Sufficiency Level of Vegetables with First Indoor Vegetable Farm. opening paragraph; About Panasonic Factory Solutions Asia Pacific. Panasonic announced pilot commercial supply on 31 July 2014; its release says the facility was established in October 2013.",
+        "zh": "【待译】Panasonic Asia Pacific, 31 July 2014, Panasonic Contributes to Singapore’s Self-Sufficiency Level of Vegetables with First Indoor Vegetable Farm. opening paragraph; About Panasonic Factory Solutions Asia Pacific. Panasonic announced pilot commercial supply on 31 July 2014; its release says the facility was established in October 2013."
+      },
+      "url": "https://www.mynewsdesk.com/sg/panasonicapac/pressreleases/panasonic-contributes-to-singapore-s-self-sufficiency-level-of-vegetables-with-first-indoor-vegetable-farm-1104976",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. ",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. "
+      }
+    },
+    {
+      "id": "S120",
+      "text": {
+        "en": "Singapore Food Agency, Singapore Food Statistics 2024. printed p. 5, prior research verification. Reuse E014 (2000 park/farming-area distinction), E063–E068 (2024 farms/shares, former target, revised target and definitions).",
+        "zh": "【待译】Singapore Food Agency, Singapore Food Statistics 2024. printed p. 5, prior research verification. Reuse E014 (2000 park/farming-area distinction), E063–E068 (2024 farms/shares, former target, revised target and definitions)."
+      },
+      "url": "https://www.sfa.gov.sg/docs/default-source/publication/sg-food-statistics/singapore-food-statistics-2024.pdf",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026.  Original evidence ledger: E063, E064. Original fact ids: food-farms-2024, local-food-shares-2024. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026.  Original evidence ledger: E063, E064. Original fact ids: food-farms-2024, local-food-shares-2024. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S150",
+      "text": {
+        "en": "Land Transport Authority, The LTA Story. Bus companies consolidated in 1970 and merged to form Singapore Bus Service in 1973.",
+        "zh": "【待译】Land Transport Authority, The LTA Story. Bus companies consolidated in 1970 and merged to form Singapore Bus Service in 1973."
+      },
+      "url": "https://www.lta.gov.sg/content/ltagov/en/who_we_are/our_organisation/the_lta_story.html"
+    },
+    {
+      "id": "S151",
+      "text": {
+        "en": "Changi Airport Group, Building Changi from ground up (2021): Changi Airport began operations on 1 July 1981.",
+        "zh": "【待译】Changi Airport Group, Building Changi from ground up (2021): Changi Airport began operations on 1 July 1981."
+      },
+      "url": "https://www.changiairport.com/en/corporate/our-media-hub/publications/changi-journeys/2021/building-changi-from-ground-up-commemorating-changis-40th-anniversary.html"
+    },
+    {
+      "id": "S152",
+      "text": {
+        "en": "Land Transport Authority, Annual Report 2014/2015, pp.26–27: ERP launched on 1 April 1998, replacing earlier manual road pricing schemes in stages.",
+        "zh": "【待译】Land Transport Authority, Annual Report 2014/2015, pp.26–27: ERP launched on 1 April 1998, replacing earlier manual road pricing schemes in stages."
+      },
+      "url": "https://www.lta.gov.sg/content/dam/ltagov/who_we_are/statistics_and_publications/report/pdf/LTA_AR_14-15_RGB.pdf"
+    },
+    {
+      "id": "S153",
+      "text": {
+        "en": "Land Transport Authority, Roads: COEs control new vehicle registrations; ERP manages congestion.",
+        "zh": "【待译】Land Transport Authority, Roads: COEs control new vehicle registrations; ERP manages congestion."
+      },
+      "url": "https://www.lta.gov.sg/content/ltagov/en/who_we_are/our_work/road.html"
+    },
+    {
+      "id": "S154",
+      "text": {
+        "en": "Ministry of Transport, Decommissioning of 66 first-generation NSEWL trains, paragraph 14: first passenger service on 7 November 1987 between Toa Payoh and Yio Chu Kang.",
+        "zh": "【待译】Ministry of Transport, Decommissioning of 66 first-generation NSEWL trains, paragraph 14: first passenger service on 7 November 1987 between Toa Payoh and Yio Chu Kang."
+      },
+      "url": "https://www.mot.gov.sg/news-resources/newsroom/speech-by-minister-khaw-boon-wan-at-decommissioning-of-66-first-generation-nsewl-trains/",
+      "note": {
+        "en": "Original evidence ledger: E082. Original fact ids: mrt-first-service. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Original evidence ledger: E082. Original fact ids: mrt-first-service. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S155",
+      "text": {
+        "en": "National Heritage Board, The Mass Rapid Transit: stages of the original network and official opening on 12 March 1988.",
+        "zh": "【待译】National Heritage Board, The Mass Rapid Transit: stages of the original network and official opening on 12 March 1988."
+      },
+      "url": "https://www.roots.gov.sg/stories-landing/stories/the-mass-rapid-transit/story"
+    },
+    {
+      "id": "S156",
+      "text": {
+        "en": "Land Transport Authority, Rail length statistics: MRT route length 67 km in 1990 and 242.5 km in 2024; excludes LRT.",
+        "zh": "【待译】Land Transport Authority, Rail length statistics: MRT route length 67 km in 1990 and 242.5 km in 2024; excludes LRT."
+      },
+      "url": "https://data.gov.sg/datasets/d_ba615ec4cc5d9f5b7800ad82057f36f1/view",
+      "note": {
+        "en": "Singapore Department of Statistics / LTA, Public Transport Operation And Ridership, Annual (SODL v1.0), accessed 20 October 2026. Confirms historical MRT figures. LTA Rail_Length_2024.pdf independently separates MRT, LRT and all rail. MRT totals exclude LRT. Original evidence ledger: E069, E070, E071, E072, E073, E074, E075, E076, E077, E078, E079, E080, E081, E164. Original fact ids: mrt-network-length-1990, mrt-network-length-1996, mrt-network-length-2000, mrt-network-length-2003, mrt-network-length-2005, mrt-network-length-2010, mrt-network-length-2015, mrt-network-length-2017, mrt-network-length-2020, mrt-network-length-2021, mrt-network-length-2022, mrt-network-length-2023, mrt-network-length-2024. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Singapore Department of Statistics / LTA, Public Transport Operation And Ridership, Annual (SODL v1.0), accessed 20 October 2026. Confirms historical MRT figures. LTA Rail_Length_2024.pdf independently separates MRT, LRT and all rail. MRT totals exclude LRT. Original evidence ledger: E069, E070, E071, E072, E073, E074, E075, E076, E077, E078, E079, E080, E081, E164. Original fact ids: mrt-network-length-1990, mrt-network-length-1996, mrt-network-length-2000, mrt-network-length-2003, mrt-network-length-2005, mrt-network-length-2010, mrt-network-length-2015, mrt-network-length-2017, mrt-network-length-2020, mrt-network-length-2021, mrt-network-length-2022, mrt-network-length-2023, mrt-network-length-2024. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S157",
+      "text": {
+        "en": "National Library Board, Area Licensing Scheme: introduced on 2 June 1975 to reduce peak-hour traffic in the restricted city zone.",
+        "zh": "【待译】National Library Board, Area Licensing Scheme: introduced on 2 June 1975 to reduce peak-hour traffic in the restricted city zone."
+      },
+      "url": "https://www.nlb.gov.sg/main/article-detail?cmsuuid=072b1248-63b0-4b30-8a04-ba1742961351",
+      "note": {
+        "en": "Full NLB article read 20 October 2026: opening paragraph and Launch of the ALS section confirm 2 June 1975. Exceptions included buses, motorcycles and some car pools.",
+        "zh": "【待译】Full NLB article read 20 October 2026: opening paragraph and Launch of the ALS section confirm 2 June 1975. Exceptions included buses, motorcycles and some car pools."
+      }
+    },
+    {
+      "id": "S158",
+      "text": {
+        "en": "National Heritage Board / National Museum of Singapore, Certificate of entitlement (under the Vehicle quota system), accession 2015-02023: Vehicle Quota System implemented May 1990.",
+        "zh": "【待译】National Heritage Board / National Museum of Singapore, Certificate of entitlement (under the Vehicle quota system), accession 2015-02023: Vehicle Quota System implemented May 1990."
+      },
+      "url": "https://www.roots.gov.sg/Collection-Landing/listing/1321937",
+      "note": {
+        "en": "Official indexed collection text inspected 20 October 2026; direct page may require a bot check. Month precision retained.",
+        "zh": "【待译】Official indexed collection text inspected 20 October 2026; direct page may require a bot check. Month precision retained."
+      }
+    },
+    {
+      "id": "S200",
+      "text": {
+        "en": "Singapore Department of Statistics / Singapore Land Authority, Land Area (as at December): 581.5 km² in 1960; 617.8 in 1980; 682.7 in 2000; 735.7 in 2024.",
+        "zh": "【待译】Singapore Department of Statistics / Singapore Land Authority, Land Area (as at December): 581.5 km² in 1960; 617.8 in 1980; 682.7 in 2000; 735.7 in 2024."
+      },
+      "url": "https://data.gov.sg/datasets/d_0b2c034da121ef8efc71949af1694b4d/view",
+      "note": {
+        "en": "SODL v1.0, accessed 20 October 2026. Before 2002 based on approved land lots; from 2002 based on land owned parcels. Geometric map areas and statistical areas use different definitions. Original evidence ledger: E015, E016, E017, E018, E019, E020, E021, E022, E023, E024, E162. Original fact ids: land-area-dec-1960, land-area-dec-1965, land-area-dec-1970, land-area-dec-1980, land-area-dec-1990, land-area-dec-2000, land-area-dec-2010, land-area-dec-2020, land-area-dec-2024, land-area-method-break. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】SODL v1.0, accessed 20 October 2026. Before 2002 based on approved land lots; from 2002 based on land owned parcels. Geometric map areas and statistical areas use different definitions. Original evidence ledger: E015, E016, E017, E018, E019, E020, E021, E022, E023, E024, E162. Original fact ids: land-area-dec-1960, land-area-dec-1965, land-area-dec-1970, land-area-dec-1980, land-area-dec-1990, land-area-dec-2000, land-area-dec-2010, land-area-dec-2020, land-area-dec-2024, land-area-method-break. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S201",
+      "text": {
+        "en": "Ministry of Sustainability and the Environment, Oral Reply to Parliamentary Question on Revised Local Production Targets, 13 January 2026. Previous 30-by-30 target and revised 2035 targets with food-group definitions.",
+        "zh": "【待译】Ministry of Sustainability and the Environment, Oral Reply to Parliamentary Question on Revised Local Production Targets, 13 January 2026. Previous 30-by-30 target and revised 2035 targets with food-group definitions."
+      },
+      "url": "https://www.mse.gov.sg/latest-news/oral-reply-to-parliamentary-question-on-revised-local-production-targets/",
+      "note": {
+        "en": "A retrospective source after the topic end date; describes Singapore Food Story 2 announced in November 2025. Original evidence ledger: E065. Original fact ids: previous-30-by-30-target. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】A retrospective source after the topic end date; describes Singapore Food Story 2 announced in November 2025. Original evidence ledger: E065. Original fact ids: previous-30-by-30-target. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S202",
+      "text": {
+        "en": "Singapore Food Agency, Singapore Food Statistics 2024, p.5: 153 land-based and 72 sea-based food farms; eggs about 34%, vegetables about 3%, seafood about 6% of local consumption.",
+        "zh": "【待译】Singapore Food Agency, Singapore Food Statistics 2024, p.5: 153 land-based and 72 sea-based food farms; eggs about 34%, vegetables about 3%, seafood about 6% of local consumption."
+      },
+      "url": "https://www.sfa.gov.sg/docs/default-source/publication/sg-food-statistics/singapore-food-statistics-2024.pdf",
+      "note": {
+        "en": "Original evidence ledger: E063, E064. Original fact ids: food-farms-2024, local-food-shares-2024. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Original evidence ledger: E063, E064. Original fact ids: food-farms-2024, local-food-shares-2024. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S203",
+      "text": {
+        "en": "JTC Corporation, Dream Factories. Dream Factories introduction. JTC dates the estate’s conception to 1961.",
+        "zh": "【待译】JTC Corporation, Dream Factories. Dream Factories introduction. JTC dates the estate’s conception to 1961."
+      },
+      "url": "https://www.jtc.gov.sg/about-jtc/dream-factories",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026.  Original evidence ledger: E008. Original fact ids: jurong-industrial-1961. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026.  Original evidence ledger: E008. Original fact ids: jurong-industrial-1961. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S204",
+      "text": {
+        "en": "National Parks Board, History of Bukit Timah Nature Reserve. Important periods in the Reserve’s history. Bukit Timah was declared a Nature Reserve in 1990, according to NParks’ current history page. Central Catchment was declared a Nature Reserve in 1990, according to NParks’ current history page.",
+        "zh": "【待译】National Parks Board, History of Bukit Timah Nature Reserve. Important periods in the Reserve’s history. Bukit Timah was declared a Nature Reserve in 1990, according to NParks’ current history page. Central Catchment was declared a Nature Reserve in 1990, according to NParks’ current history page."
+      },
+      "url": "https://www.nparks.gov.sg/visit/parks/bukit-timah-nature-reserve/special-features/history",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. ",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. "
+      }
+    },
+    {
+      "id": "S205",
+      "text": {
+        "en": "G.W.H. Davison & P.T. Chew / Gardens’ Bulletin Singapore 71(Suppl. 1), NParks, 2019, Historical review of Bukit Timah Nature Reserve, Singapore. printed p. 19 abstract; compare current NParks history page. NParks’ public history gives forest-reserve establishment 1883 and Ordinance protection 1951; its research paper dates forest/nature declarations 1887/1951.",
+        "zh": "【待译】G.W.H. Davison & P.T. Chew / Gardens’ Bulletin Singapore 71(Suppl. 1), NParks, 2019, Historical review of Bukit Timah Nature Reserve, Singapore. printed p. 19 abstract; compare current NParks history page. NParks’ public history gives forest-reserve establishment 1883 and Ordinance protection 1951; its research paper dates forest/nature declarations 1887/1951."
+      },
+      "url": "https://www.nparks.gov.sg/sbg/research/publications/gardens-bulletin-singapore/-/media/sbg/gardens-bulletin/gbs_71_s1_y2019_v71_s1/71_s1_02_y2019_v71s1_gbs_pg19.pdf",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. ",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. "
+      }
+    },
+    {
+      "id": "S206",
+      "text": {
+        "en": "National Parks Board, History of Sungei Buloh Wetland Reserve. About Sungei Buloh Wetland Reserve’s history. Sungei Buloh opened as a Nature Park in 1993 and was gazetted a Nature Reserve in 2002.",
+        "zh": "【待译】National Parks Board, History of Sungei Buloh Wetland Reserve. About Sungei Buloh Wetland Reserve’s history. Sungei Buloh opened as a Nature Park in 1993 and was gazetted a Nature Reserve in 2002."
+      },
+      "url": "https://www.nparks.gov.sg/visit/parks/sungei-buloh-wetland-reserve/special-features",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. ",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. "
+      }
+    },
+    {
+      "id": "S207",
+      "text": {
+        "en": "Lim Tin Seng / National Library Board, BiblioAsia, 4 April 2017, Land From Sand: Singapore’s Reclamation Story. East Coast: The Great Reclamation. Official start 1966; seven phases over about thirty years. The spec’s 1985 overall endpoint is unsupported. Phases I–II: 1966–1971; III–IV: 1971–1975; V: 1974–1977. Marina Centre: 1974–1977; Marina East/South phases began 1979; bay-edge works: 1990–1992. Jurong reclamation: 1963; Jurong/Tuas expansion: 1970s; Tuas extension: late 1980s. NLB reports scheme beginning 1993 and completion 2003; JTC timeline gives completion 2009; opening 2000 is separate. Airport reclamation began 1975; later Changi East stages ran 1992–2004. Clementi west-coast reclamation: 1976–1978. Pasir Ris: 1979–1980; Punggol: 1983–1986; Pasir Ris–Seletar: 1985–2001. First Tekong reclamation: 1981–1985; additional scheme approved 2000. Foreshore works: 1972–1979; new-terminal first phases: 1993–1999. Containment dykes enclose fill; soil improvement accelerates settling.",
+        "zh": "【待译】Lim Tin Seng / National Library Board, BiblioAsia, 4 April 2017, Land From Sand: Singapore’s Reclamation Story. East Coast: The Great Reclamation. Official start 1966; seven phases over about thirty years. The spec’s 1985 overall endpoint is unsupported. Phases I–II: 1966–1971; III–IV: 1971–1975; V: 1974–1977. Marina Centre: 1974–1977; Marina East/South phases began 1979; bay-edge works: 1990–1992. Jurong reclamation: 1963; Jurong/Tuas expansion: 1970s; Tuas extension: late 1980s. NLB reports scheme beginning 1993 and completion 2003; JTC timeline gives completion 2009; opening 2000 is separate. Airport reclamation began 1975; later Changi East stages ran 1992–2004. Clementi west-coast reclamation: 1976–1978. Pasir Ris: 1979–1980; Punggol: 1983–1986; Pasir Ris–Seletar: 1985–2001. First Tekong reclamation: 1981–1985; additional scheme approved 2000. Foreshore works: 1972–1979; new-terminal first phases: 1993–1999. Containment dykes enclose fill; soil improvement accelerates settling."
+      },
+      "url": "https://biblioasia.nlb.gov.sg/all-sections/vol-13-issue-1-apr-jun-2017-land-from-sand/",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026.  Original evidence ledger: E155. Original fact ids: . Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026.  Original evidence ledger: E155. Original fact ids: . Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S208",
+      "text": {
+        "en": "Prime Minister’s Office / Singapore Government Media Release / NAS, Speech by Prime Minister Goh Chok Tong at the Official Opening of Jurong Island on Saturday, 14 October 2000, at 7.00 pm. title; opening paragraph. Official opening took place on 14 October 2000; speech describes joining seven islands.",
+        "zh": "【待译】Prime Minister’s Office / Singapore Government Media Release / NAS, Speech by Prime Minister Goh Chok Tong at the Official Opening of Jurong Island on Saturday, 14 October 2000, at 7.00 pm. title; opening paragraph. Official opening took place on 14 October 2000; speech describes joining seven islands."
+      },
+      "url": "https://www.nas.gov.sg/archivesonline/data/pdfdoc/2000101403.htm",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. ",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. "
+      }
+    },
+    {
+      "id": "S209",
+      "text": {
+        "en": "Ministry of Foreign Affairs, Transcript of Reply by Minister of Foreign Affairs George Yeo to Question in Parliament on sand and land reclamation, 12 February 2007. Reply, opening three paragraphs. MFA said Indonesian sea-sand imports stopped after the February 2003 ban; the 2007 land-sand ban concerned construction rather than reclamation.",
+        "zh": "【待译】Ministry of Foreign Affairs, Transcript of Reply by Minister of Foreign Affairs George Yeo to Question in Parliament on sand and land reclamation, 12 February 2007. Reply, opening three paragraphs. MFA said Indonesian sea-sand imports stopped after the February 2003 ban; the 2007 land-sand ban concerned construction rather than reclamation."
+      },
+      "url": "https://www.mfa.gov.sg/newsroom/press-statements-transcripts-and-photos/transcript-of-reply-by-minister-of-foreign-affairs-george-yeo-to-question-in-parliament-on-sand-and-12-feb-2007/",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. ",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. "
+      }
+    },
+    {
+      "id": "S210",
+      "text": {
+        "en": "Prime Minister’s Office Singapore, PM Lee Hsien Loong at the Official Opening of the Jurong Rock Caverns. date; opening paragraph; surface-land paragraph. Jurong Rock Caverns officially opened on 2 September 2014 for underground liquid hydrocarbon storage; PM said it freed 60 hectares of surface land.",
+        "zh": "【待译】Prime Minister’s Office Singapore, PM Lee Hsien Loong at the Official Opening of the Jurong Rock Caverns. date; opening paragraph; surface-land paragraph. Jurong Rock Caverns officially opened on 2 September 2014 for underground liquid hydrocarbon storage; PM said it freed 60 hectares of surface land."
+      },
+      "url": "https://www.pmo.gov.sg/newsroom/transcript-prime-minister-lee-hsien-loongs-speech-official-opening-jurong-rock-caverns/",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. ",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. "
+      }
+    },
+    {
+      "id": "S211",
+      "text": {
+        "en": "PUB, Singapore’s National Water Agency, 27 August 2021, 5 things you may not have known about NEWater. Deep Tunnel Sewerage System section. PUB describes gravity tunnels carrying used water to reclamation plants; Phase 1 completed in 2008.",
+        "zh": "【待译】PUB, Singapore’s National Water Agency, 27 August 2021, 5 things you may not have known about NEWater. Deep Tunnel Sewerage System section. PUB describes gravity tunnels carrying used water to reclamation plants; Phase 1 completed in 2008."
+      },
+      "url": "https://www.pub.gov.sg/Resources/News-Room/Featured-Stories/2021/5-things-about-NEWater",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. ",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. "
+      }
+    },
+    {
+      "id": "S212",
+      "text": {
+        "en": "Urban Redevelopment Authority, Master Plan. opening explanation. URA states that the statutory Master Plan is reviewed every five years and maps permissible land use and density.",
+        "zh": "【待译】Urban Redevelopment Authority, Master Plan. opening explanation. URA states that the statutory Master Plan is reviewed every five years and maps permissible land use and density."
+      },
+      "url": "https://www.ura.gov.sg/land-planning/master-plan/",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026.  Original evidence ledger: E005. Original fact ids: master-plan-meaning. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026.  Original evidence ledger: E005. Original fact ids: master-plan-meaning. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S213",
+      "text": {
+        "en": "Singapore Mandarin Council, Singaporean Mandarin Database, Buangkok / 万国. Etymology / 由来, second and third bullets. Singapore Mandarin Council attests 甘榜罗弄万国; its entry records resident households as of 2023 and unimplemented redevelopment plans.",
+        "zh": "【待译】Singapore Mandarin Council, Singaporean Mandarin Database, Buangkok / 万国. Etymology / 由来, second and third bullets. Singapore Mandarin Council attests 甘榜罗弄万国; its entry records resident households as of 2023 and unimplemented redevelopment plans."
+      },
+      "url": "https://www.languagecouncils.sg/mandarin/en/learning-resources/singaporean-mandarin-database/terms/buangkok",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. ",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. "
+      }
+    },
+    {
+      "id": "S214",
+      "text": {
+        "en": "王博涵 / 联合早报, 4 September 2026, 潮什么：不用花大钱！解锁本地宝藏景点. 到甘榜体验慢活. September 2026 reporting calls 罗弄万国村 a still-inhabited mainland kampong.",
+        "zh": "【待译】王博涵 / 联合早报, 4 September 2026, 潮什么：不用花大钱！解锁本地宝藏景点. 到甘榜体验慢活. September 2026 reporting calls 罗弄万国村 a still-inhabited mainland kampong."
+      },
+      "url": "https://www.zaobao.com.sg/lifestyle/campus/story20260904-9624249",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. ",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026. "
+      }
+    },
+    {
+      "id": "S215",
+      "text": {
+        "en": "Singapore Food Agency; Ministry of Defence; NParks; Singapore Land Authority, Government to implement land-use change in Lim Chu Kang. Benefits of Consolidating Land Uses; Supporting Affected Farms. Joint May 2026 release plans agriculture to the north and defence in the south; farms retain tenures until expiry and may bid for alternate sites.",
+        "zh": "【待译】Singapore Food Agency; Ministry of Defence; NParks; Singapore Land Authority, Government to implement land-use change in Lim Chu Kang. Benefits of Consolidating Land Uses; Supporting Affected Farms. Joint May 2026 release plans agriculture to the north and defence in the south; farms retain tenures until expiry and may bid for alternate sites."
+      },
+      "url": "https://www.sfa.gov.sg/news-publications/newsroom/government-to-implement-land-use-change-in-lim-chu-kang",
+      "note": {
+        "en": "Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026.  Original evidence ledger: E011, E159. Original fact ids: lim-chu-kang-2026. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json.",
+        "zh": "【待译】Evidence modes and exact quotations are recorded in RESEARCH.md; accessed 20 October 2026.  Original evidence ledger: E011, E159. Original fact ids: lim-chu-kang-2026. Read from the read-only main worktree on 20 October 2026; retained in research/original-facts.json."
+      }
+    },
+    {
+      "id": "S216",
+      "text": {
+        "en": "Roots.sg (National Heritage Board, Singapore), 'Sembawang Naval Base (King George VI Dock)': construction began in 1928; the base was officially opened on 14 February 1938 together with the King George VI Dock; it made Singapore an 'impregnable fortress', also called the 'Gibraltar of the East'.",
+        "zh": "Roots.sg（新加坡国家文物局）“三巴旺海军基地（乔治六世船坞）”：1928 年动工，1938 年 2 月 14 日与乔治六世船坞同时正式启用；它让新加坡被称为“坚不可摧的堡垒”“东方直布罗陀”。"
+      },
+      "url": "https://www.roots.gov.sg/places/places-landing/places/surveyed-sites/sembawang-naval-base-king-george-vi-dock",
+      "note": {
+        "en": "Same source text as singapore-1819-1965 S55. Naval-base event copied unchanged.",
+        "zh": "【待译】Same source text as singapore-1819-1965 S55. Naval-base event copied unchanged."
+      }
+    },
+    {
+      "id": "S217",
+      "text": {
+        "en": "Kirby, The War Against Japan, vol. I, pp. 18, 28: British planning assumed a fleet would reach Singapore within 70 days of the outbreak of war (the 'period before relief'); in September 1939 the Chiefs of Staff increased the period to 180 days.",
+        "zh": "Kirby《对日战争》第一卷第 18、28 页：英国的防务计划假定开战后 70 天内舰队可以开到新加坡（“待援期”）；1939 年 9 月参谋长委员会把这一期限延长到 180 天。"
+      },
+      "url": "https://archive.org/details/war-against-japan-vol-1",
+      "note": {
+        "en": "Same source text as singapore-1819-1965 S56. Naval-base event copied unchanged.",
+        "zh": "【待译】Same source text as singapore-1819-1965 S56. Naval-base event copied unchanged."
+      }
+    },
+    {
+      "id": "S218",
+      "text": {
+        "en": "Ng Lang, NParks Chief Executive, A City in a Garden, Civil Service College ETHOS (April 2008), Conserving our natural heritage: Sungei Buloh and Labrador Nature Reserves gazetted in January 2002.",
+        "zh": "【待译】Ng Lang, NParks Chief Executive, A City in a Garden, Civil Service College ETHOS (April 2008), Conserving our natural heritage: Sungei Buloh and Labrador Nature Reserves gazetted in January 2002."
+      },
+      "url": "https://knowledge.csc.gov.sg/world-cities-summit-issue/a-city-in-a-garden/",
+      "note": {
+        "en": "Full official article read 20 October 2026. Confirms month without relying on the unavailable NParks worksheet PDF. No figures reused.",
+        "zh": "【待译】Full official article read 20 October 2026. Confirms month without relying on the unavailable NParks worksheet PDF. No figures reused."
+      }
+    },
+    {
+      "id": "S219",
+      "text": {
+        "en": "Atlas calculations, 20 October 2026: Master Plan 2019 category areas dissolved and clipped to L11 land in SVY21 (EPSG:3414), shares excluding ROAD and WATERBODY; historical agricultural areas summed from original MP2003/2008/2014/2019 AGRICULTURE plots. HDB median max_floor_lvl grouped by completion decade from all current residential=Y Property Information rows.",
+        "zh": "【待译】Atlas calculations, 20 October 2026: Master Plan 2019 category areas dissolved and clipped to L11 land in SVY21 (EPSG:3414), shares excluding ROAD and WATERBODY; historical agricultural areas summed from original MP2003/2008/2014/2019 AGRICULTURE plots. HDB median max_floor_lvl grouped by completion decade from all current residential=Y Property Information rows."
+      },
+      "note": {
+        "en": "Inputs S2–S4 and S16–S18. Reproducible method and unrounded outputs: scripts/geo/singapore-land-use/layers-area-statistics.py and layers-area-statistics.md. These are calculated planned-use areas and present-day surviving-building medians, not historical observed land use or all buildings ever constructed. The 2020s group includes completion years through 2026 present in the current dataset.",
+        "zh": "【待译】Inputs S2–S4 and S16–S18. Reproducible method and unrounded outputs: scripts/geo/singapore-land-use/layers-area-statistics.py and layers-area-statistics.md. These are calculated planned-use areas and present-day surviving-building medians, not historical observed land use or all buildings ever constructed. The 2020s group includes completion years through 2026 present in the current dataset."
+      }
+    },
+    {
+      "id": "S220",
+      "text": {
+        "en": "Singapore Food Agency, Singapore Food Statistics 2025, 8 May 2026, Key Highlights paragraphs 2 and 5: refreshed local farm capability and capacity targets announced November 2025, for 2035.",
+        "zh": "【待译】Singapore Food Agency, Singapore Food Statistics 2025, 8 May 2026, Key Highlights paragraphs 2 and 5: refreshed local farm capability and capacity targets announced November 2025, for 2035."
+      },
+      "url": "https://www.sfa.gov.sg/news-publications/newsroom/singapore-food-statistics-2025",
+      "note": {
+        "en": "Original evidence E066–E067; fact ids food-story2-current-target and local-fibre-protein-2025. A retrospective source after the topic end date. The chapter cites the announced capacity targets, not achievement of those targets.",
+        "zh": "【待译】Original evidence E066–E067; fact ids food-story2-current-target and local-fibre-protein-2025. A retrospective source after the topic end date. The chapter cites the announced capacity targets, not achievement of those targets."
+      }
+    }
+  ]
+}

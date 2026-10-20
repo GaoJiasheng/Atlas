@@ -1,0 +1,54 @@
+{
+  "ura-landuse": {
+    "file": "ura-mp2019-landuse.geojson",
+    "bytes": 174276876,
+    "sha256": "916d45da449b8299162116f21d8f149d0da1f92d0188ff2946492ffc7ef42677",
+    "fetched": "2026-10-20T07:43:30.962Z",
+    "from": "data.gov.sg dataset d_90d86daa5bfaa371668b84fa5f01424f (poll-download)",
+    "license": "Singapore Open Data Licence v1.0; source attribution and link to current licence required.",
+    "dataset_id": "d_90d86daa5bfaa371668b84fa5f01424f",
+    "licence_text": "Free forever for personal or commercial use, under the Open Data Licence.",
+    "licence_url": "https://developers.data.gov.sg/open-data-licence",
+    "attribution": "Contains information from Master Plan 2019 Land Use layer accessed on 20 October 2026 from https://data.gov.sg/datasets/d_90d86daa5bfaa371668b84fa5f01424f/view which is made available under the terms of the Singapore Open Data Licence version 1.0.",
+    "licence_text_basis": "Existing research dataset catalogue/evidence E129–E136; no independent full licence-page download in this run."
+  },
+  "ura-planning-area": {
+    "file": "ura-mp2019-planning-area.geojson",
+    "bytes": 2092229,
+    "sha256": "f23856251b467089f788d0fff72ef5a38e753f21aa69b4352401d7ed50d380cc",
+    "fetched": "2026-10-20T07:43:35.061Z",
+    "from": "data.gov.sg dataset d_4765db0e87b9c86336792efe8a1f7a66 (poll-download)",
+    "license": "Singapore Open Data Licence v1.0; source attribution and link to current licence required.",
+    "dataset_id": "d_4765db0e87b9c86336792efe8a1f7a66",
+    "licence_text": "Free forever for personal or commercial use, under the Open Data Licence.",
+    "licence_url": "https://developers.data.gov.sg/open-data-licence",
+    "attribution": "Contains information from Master Plan 2019 Planning Area Boundary (No Sea) accessed on 20 October 2026 from https://data.gov.sg/datasets/d_4765db0e87b9c86336792efe8a1f7a66/view which is made available under the terms of the Singapore Open Data Licence version 1.0.",
+    "licence_text_basis": "Existing research dataset catalogue/evidence E129–E136; no independent full licence-page download in this run."
+  },
+  "hdb-properties": {
+    "file": "hdb-properties.csv",
+    "bytes": 948464,
+    "sha256": "d528ea2d6fc3f57ab4c8199ed15ea5eaac0109fe659e09ef91910dfe417af2eb",
+    "fetched": "2026-10-20T07:43:39.147Z",
+    "from": "data.gov.sg dataset d_17f5382f26140b1fdae0ba2ef6239d2f (poll-download)",
+    "license": "Singapore Open Data Licence v1.0; source attribution and link to current licence required.",
+    "dataset_id": "d_17f5382f26140b1fdae0ba2ef6239d2f",
+    "licence_text": "Free forever for personal or commercial use, under the Open Data Licence.",
+    "licence_url": "https://developers.data.gov.sg/open-data-licence",
+    "attribution": "Contains information from HDB Property Information accessed on 20 October 2026 from https://data.gov.sg/datasets/d_17f5382f26140b1fdae0ba2ef6239d2f/view which is made available under the terms of the Singapore Open Data Licence version 1.0.",
+    "licence_text_basis": "Existing research dataset catalogue/evidence E129–E136; no independent full licence-page download in this run."
+  },
+  "hdb-buildings": {
+    "file": "hdb-buildings.geojson",
+    "bytes": 57012074,
+    "sha256": "7c987511548de3a82da403cabca02702031e02ade8703a9e401417883dfeb702",
+    "fetched": "2026-10-20T07:43:42.158Z",
+    "from": "data.gov.sg dataset d_16b157c52ed637edd6ba1232e026258d (poll-download)",
+    "license": "Singapore Open Data Licence v1.0; source attribution and link to current licence required.",
+    "dataset_id": "d_16b157c52ed637edd6ba1232e026258d",
+    "licence_text": "Free forever for personal or commercial use, under the Open Data Licence.",
+    "licence_url": "https://developers.data.gov.sg/open-data-licence",
+    "attribution": "Contains information from HDB Existing Building accessed on 20 October 2026 from https://data.gov.sg/datasets/d_16b157c52ed637edd6ba1232e026258d/view which is made available under the terms of the Singapore Open Data Licence version 1.0.",
+    "licence_text_basis": "Existing research dataset catalogue/evidence E129–E136; no independent full licence-page download in this run."
+  }
+}

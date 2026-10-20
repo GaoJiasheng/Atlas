@@ -1,0 +1,54 @@
+# Authoring contract: docs/34-singapore-land-use-content-spec.md.
+id: singapore-land-use
+title: { en: "Homes, Food and Getting Around: Singapore's Land", zh: "新加坡的家、粮、路：土地利用的变化" }
+subtitle: { en: "How a small island changed its land, 1959–today", zh: "【待译】How a small island changed its land, 1959–today" }
+shortTitle: { en: "Singapore's land", zh: "【待译】Singapore's land" }
+subject: geography
+mode: time
+engine: time-scene
+stage: geo
+theme: paper
+sensitivity: open
+status: draft
+levels: [P3]
+tags: [singapore, geography, map]
+illustration: singapore-land-use
+basemap: { local: land-sg-modern, maxZoom: 14 }
+colorBy: entity
+blocLabels:
+  neutral: { en: "Land use", zh: "【待译】Land use" }
+strings:
+  joined: { en: "on the map from", zh: "【待译】on the map from" }
+  left: { en: "until", zh: "【待译】until" }
+  notYet: { en: "Not on the map yet", zh: "【待译】Not on the map yet" }
+note:
+  en: "1959 map traced from a British government map · 2019 map is URA Master Plan planned use · HDB dots are blocks standing today · coasts after 1961 from Landsat images (approximate)"
+  zh: "【待译】1959 map traced from a British government map · 2019 map is URA Master Plan planned use · HDB dots are blocks standing today · coasts after 1961 from Landsat images (approximate)"
+datedLayers:
+  - id: hdb-blocks
+    file: sg-hdb-blocks
+    kind: point
+    holder: housing
+    count: true
+    countLabel: { en: "HDB blocks", zh: "组屋" }
+    label: { en: "HDB blocks standing today, by year completed", zh: "【待译】HDB blocks standing today, by year completed" }
+  - id: estates
+    file: sg-estates
+    kind: area
+    holder: industry
+    label: { en: "Industrial estates (today's extent)", zh: "【待译】Industrial estates (today's extent)" }
+  - id: farm-parks
+    file: sg-farm-parks
+    kind: area
+    holder: agriculture
+    label: { en: "Agrotechnology parks (today's farmland)", zh: "【待译】Agrotechnology parks (today's farmland)" }
+  - id: reserves
+    file: sg-reserves
+    kind: area
+    holder: green
+    label: { en: "Nature reserves (today's extent)", zh: "【待译】Nature reserves (today's extent)" }
+  - id: reservoirs
+    file: sg-reservoirs
+    kind: area
+    color: "token:cold"
+    label: { en: "Reservoirs, by year completed", zh: "【待译】Reservoirs, by year completed" }

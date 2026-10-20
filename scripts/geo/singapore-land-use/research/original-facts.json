@@ -1,0 +1,3262 @@
+{
+  "schema_version": "1.0",
+  "topic": "singapore-land-use",
+  "access_date": "2026-10-20",
+  "description": "Source-linked research facts. Resolve each evidence_id to evidence, then source_id to sources. Quotes are representative short source excerpts; claims may paraphrase more of the cited page.",
+  "sources": [
+    {
+      "id": "S001",
+      "title": "2020 Social Studies Primary Teaching and Learning Syllabus (updated January 2024)",
+      "publisher": "Ministry of Education, Curriculum Planning and Development Division",
+      "url": "https://www.moe.gov.sg/media/files/primary/d8ea4817-c1b3-4217-84d4-82838d39d75c.pdf",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S002",
+      "title": "land-sg-history.json",
+      "publisher": "Atlas project (local implementation evidence)",
+      "url": "/Users/gavin/work/atlas/public/geo/land-sg-history.json",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S003",
+      "title": "Master Plan",
+      "publisher": "Urban Redevelopment Authority",
+      "url": "https://www.ura.gov.sg/land-planning/master-plan/",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S004",
+      "title": "Agriculture Technologies",
+      "publisher": "Singapore Food Agency",
+      "url": "https://www.sfa.gov.sg/food-science-and-technology/technology/agriculture-technologies",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S005",
+      "title": "Dream Factories",
+      "publisher": "JTC Corporation",
+      "url": "https://www.jtc.gov.sg/about-jtc/dream-factories",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S006",
+      "title": "Jurong Island celebrates 25 years with new focus on powering the future of low-carbon innovation in Energy and Chemicals",
+      "publisher": "JTC Corporation",
+      "url": "https://www.jtc.gov.sg/about-jtc/news-and-stories/press-releases/copy-of-jurong-island-celebrates-25-years_",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S007",
+      "title": "Mission and history",
+      "publisher": "National Parks Board",
+      "url": "https://www.nparks.gov.sg/who-we-are/mission-history",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S008",
+      "title": "Government to implement land-use change in Lim Chu Kang",
+      "publisher": "Singapore Food Agency; Ministry of Defence; NParks; Singapore Land Authority",
+      "url": "https://www.sfa.gov.sg/news-publications/newsroom/government-to-implement-land-use-change-in-lim-chu-kang",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S009",
+      "title": "Tendering of Land for Farming in Agrotechnology Parks",
+      "publisher": "Singapore Government, Information Division, Ministry of Communications & Information; Primary Production Department; archived by NAS",
+      "url": "https://www.nas.gov.sg/archivesonline/data/pdfdoc/1181-1986-09-03.pdf",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S010",
+      "title": "Remembering Punggol’s Kampong Wak Sumang and the Man Who Made It Happen",
+      "publisher": "National Library Board, BiblioAsia",
+      "url": "https://biblioasia.nlb.gov.sg/all-sections/vol-19-issue-2-jul-sep-2023-kampong-wak-sumang-punggol/",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S011",
+      "title": "AQUASTAT — Singapore",
+      "publisher": "Food and Agriculture Organization of the United Nations",
+      "url": "https://www.fao.org/aquastat/en/geospatial-information/global-maps-irrigated-areas/irrigation-by-country/country/SGP",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S012",
+      "title": "Land Area (As At December), Annual",
+      "publisher": "Singapore Department of Statistics; source: Singapore Land Authority",
+      "url": "https://data.gov.sg/datasets/d_0b2c034da121ef8efc71949af1694b4d/view",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S013",
+      "title": "Indicators On Population, Annual",
+      "publisher": "Singapore Department of Statistics",
+      "url": "https://data.gov.sg/datasets/d_3d227e5d9fdec73f3bcadce671c333a6/view",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S014",
+      "title": "Census of Population 2010: Advance Census Release — Key Population Indicators",
+      "publisher": "Singapore Department of Statistics",
+      "url": "https://www.singstat.gov.sg/-/media/files/publications/cop2010/census_2010_advance_census_release/key.pdf",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S015",
+      "title": "HDB Annual Report 2020/2021 — Key Statistics",
+      "publisher": "Housing & Development Board",
+      "url": "https://assets.hdb.gov.sg/about-us/news-and-publications/annual-report/2021/assets/ebooks/key-statistics.pdf",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S016",
+      "title": "HDB Key Statistics 2024/2025",
+      "publisher": "Housing & Development Board",
+      "url": "https://www.hdb.gov.sg/-/media/hdb-pulse/reports/annual-reports-and-financial-statements/HDB_Key-Statistics-2025.pdf",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S017",
+      "title": "Of Change & Challenges: Reminders from Singapore’s Past Agricultural Transformations",
+      "publisher": "Singapore Food Agency; Choo RuiZhi, 12 October 2022",
+      "url": "https://www.sfa.gov.sg/food-for-thought/article/detail/of-change-challenges-reminders-from-singapore-s-past-agricultural-transformations",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S018",
+      "title": "Food and The City: Overcoming Challenges for Food Security",
+      "publisher": "Centre for Liveable Cities, Ministry of National Development; Elyssa Ludher and Thinesh Kumar s/o Paramasilvam (2018)",
+      "url": "https://www.clc.gov.sg/docs/default-source/urban-systems-studies/food-and-the-city-overcoming-challenges-for-food-security.pdf",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S019",
+      "title": "Singapore Food Statistics 2023",
+      "publisher": "Singapore Food Agency",
+      "url": "https://www.sfa.gov.sg/docs/default-source/publication/sg-food-statistics/singapore-food-statistics-2023.pdf",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S020",
+      "title": "Singapore Food Statistics 2024",
+      "publisher": "Singapore Food Agency",
+      "url": "https://www.sfa.gov.sg/docs/default-source/publication/sg-food-statistics/singapore-food-statistics-2024.pdf",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S021",
+      "title": "Oral Reply to Parliamentary Question on Revised Local Production Targets",
+      "publisher": "Ministry of Sustainability and the Environment, 13 January 2026",
+      "url": "https://www.mse.gov.sg/latest-news/oral-reply-to-parliamentary-question-on-revised-local-production-targets/",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S022",
+      "title": "Singapore Food Statistics 2025",
+      "publisher": "Singapore Food Agency, 8 May 2026",
+      "url": "https://www.sfa.gov.sg/news-publications/newsroom/singapore-food-statistics-2025",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S023",
+      "title": "Speech by Ms Grace Fu at the Asia-Pacific Agri-Food Innovation Summit, Singapore International Agri-Food Week",
+      "publisher": "Singapore Food Agency",
+      "url": "https://www.sfa.gov.sg/news-publications/newsroom/2025/Asia-Pacific-Agri-Food-Innovation-Summit-Grace-Fu-Speech",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S024",
+      "title": "Public Transport Operation And Ridership, Annual",
+      "publisher": "Singapore Department of Statistics; source: Land Transport Authority",
+      "url": "https://data.gov.sg/datasets/d_ba615ec4cc5d9f5b7800ad82057f36f1/view",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S025",
+      "title": "Speech by Minister Khaw Boon Wan at Decommissioning of 66 First-Generation NSEWL Trains",
+      "publisher": "Ministry of Transport",
+      "url": "https://www.mot.gov.sg/news-resources/newsroom/speech-by-minister-khaw-boon-wan-at-decommissioning-of-66-first-generation-nsewl-trains/",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S026",
+      "title": "East-West Line",
+      "publisher": "Land Transport Authority",
+      "url": "https://www.lta.gov.sg/content/ltagov/en/getting_around/public_transport/rail_network/east_west_line.html",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S027",
+      "title": "Circle Line Book",
+      "publisher": "Land Transport Authority",
+      "url": "https://www.lta.gov.sg/content/dam/ltagov/who_we_are/statistics_and_publications/books/pdf/Circle_Line_Book.pdf",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S028",
+      "title": "Downtown Line",
+      "publisher": "Land Transport Authority",
+      "url": "https://www.lta.gov.sg/content/ltagov/en/getting_around/public_transport/rail_network/downtown_line.html",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S029",
+      "title": "Thomson-East Coast Line",
+      "publisher": "Land Transport Authority",
+      "url": "https://www.lta.gov.sg/content/ltagov/en/upcoming_projects/rail_expansion/thomson_east_coast_line.html/1000",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S030",
+      "title": "Rail Length (km) At End-of-Year",
+      "publisher": "Land Transport Authority",
+      "url": "https://data.gov.sg/datasets/d_d6e505b87580a4bae4aae0beb07d3de6/view",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S031",
+      "title": "Bukit Ho Swee fire",
+      "publisher": "National Library Board, Singapore Infopedia",
+      "url": "https://www.nlb.gov.sg/main/article-detail?cmsuuid=8a0ca033-7b44-47a1-b4cd-f841debdf6db",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S032",
+      "title": "Who’s Your Neighbour?",
+      "publisher": "National Heritage Board, with National Integration Council and Housing & Development Board",
+      "url": "https://isomer-user-content.by.gov.sg/98/86474f7e-5dec-4de7-8666-c54e80fedffe/NIC-whos-your-neighbour.pdf",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S033",
+      "title": "‘Kampong’ house",
+      "publisher": "National Heritage Board / National Museum of Singapore",
+      "url": "https://www.roots.gov.sg/Collection-Landing/listing/1077823",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S034",
+      "title": "人民的家园",
+      "publisher": "Founders’ Memorial, National Heritage Board",
+      "url": "https://www.foundersmemorial.gov.sg/shapeourmemorial/ch/onlineexhibition/detail/homes-for-the-people",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S035",
+      "title": "甘榜精神 / kampung spirit",
+      "publisher": "Singapore Mandarin Council, Singaporean Mandarin Database",
+      "url": "https://www.languagecouncils.sg/mandarin/en/learning-resources/singaporean-mandarin-database/terms/kampung-spirit",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S036",
+      "title": "Queenstown Town Design Guide",
+      "publisher": "Housing & Development Board",
+      "url": "https://www.hdb.gov.sg/-/media/about-us/our-role/plan-and-design-towns/town-design-guides/Queenstown-Town-Design-Guide.pdf",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S037",
+      "title": "Toa Payoh",
+      "publisher": "Housing & Development Board",
+      "url": "https://www.hdb.gov.sg/about-us/our-towns-and-estates/toa-payoh",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S038",
+      "title": "Ang Mo Kio Town Design Guide",
+      "publisher": "Housing & Development Board",
+      "url": "https://www.hdb.gov.sg/-/media/about-us/our-role/plan-and-design-towns/town-design-guides/Ang-Mo-Kio-Town-Design-Guide.pdf",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S039",
+      "title": "Tampines",
+      "publisher": "National Library Board, Curiocity",
+      "url": "https://curiocity.nlb.gov.sg/resource-room/tampines/",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S040",
+      "title": "HDB Annual Report 2023/2024",
+      "publisher": "Housing & Development Board",
+      "url": "https://www.hdb.gov.sg/-/media/hdb-pulse/reports/annual-reports-and-financial-statements/HDB-AR-FY23.pdf",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S041",
+      "title": "Upper Peirce Reservoir: Water Study Exercise Guidelines and Safety Brief",
+      "publisher": "PUB, Singapore’s National Water Agency",
+      "url": "https://www.pub.gov.sg/-/media/PUB/Partnership/Schools/Geographical-Investigation-Field-Studies/Upper-Peirce-Reservoir.pdf",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S042",
+      "title": "Pandan Reservoir",
+      "publisher": "National Heritage Board",
+      "url": "https://www.roots.gov.sg/places/places-landing/Places/landmarks/jurong-heritage-trail/pandan-reservoir",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S043",
+      "title": "Opening address by Mr Lim Chee Onn, Political Secretary, Ministry of Science and Technology, at the opening of the Water Conservation Campaign",
+      "publisher": "Ministry of Culture / National Archives of Singapore",
+      "url": "https://www.nas.gov.sg/archivesonline/data/pdfdoc/lco19790427001.pdf",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S044",
+      "title": "Our Water: The Flow of Progress — Annual Report 2014/2015",
+      "publisher": "PUB, Singapore’s National Water Agency",
+      "url": "https://www.pub.gov.sg/-/media/PUB/Publications/Report/PDF/annualreport2015.pdf",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S045",
+      "title": "Lower Seletar Reservoir: A Walk Down History, student learning trail",
+      "publisher": "PUB, Singapore’s National Water Agency",
+      "url": "https://www.pub.gov.sg/-/media/PUB/PDF/Self-guided-ABC-Waters-Learning-Trails/Guide-for-students/Student_Lower-Seletar-Reservoir.pdf",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S046",
+      "title": "The PUB Story, corporate brochure, July 2017",
+      "publisher": "PUB, Singapore’s National Water Agency",
+      "url": "https://www.pub.gov.sg/-/media/PUB/Publications/Brochure/PDF/corporatebrochure2017.pdf",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S047",
+      "title": "Budget 2025: Business Budget Booklet (Chinese)",
+      "publisher": "Ministry of Trade and Industry",
+      "url": "https://isomer-user-content.by.gov.sg/166/4384d39d-6f07-4c42-939f-8f9ec0414a51/MTI_Business_Budget_Booklet_2025_Chinese.pdf",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S048",
+      "title": "七地段土地用途拟更改 料建更多住宅",
+      "publisher": "SPH Media, Lianhe Zaobao",
+      "url": "https://www.zaobao.com.sg/news/singapore/story20231006-1440363",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S049",
+      "title": "Speak Mandarin Campaign celebrates its 40th anniversary (Chinese press release)",
+      "publisher": "Promote Mandarin Council / Speak Mandarin Campaign",
+      "url": "https://www.languagecouncils.sg/mandarin/en/-/media/smc/documents/2019/press-release---speak-mandarin-campaign-celebrates-its-40th-anniversary-chi.pdf",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S050",
+      "title": "德光岛 / Pulau Tekong",
+      "publisher": "Singapore Mandarin Council, Singaporean Mandarin Database",
+      "url": "https://www.languagecouncils.sg/mandarin/ch/learning-resources/singaporean-mandarin-database/terms/pulau-tekong",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S051",
+      "title": "Response to Motion on Securing Singapore’s Food Future — Ms Grace Fu",
+      "publisher": "Ministry of Sustainability and the Environment",
+      "url": "https://www.mse.gov.sg/latest-news/response-to-motion-on-securing-singapore-s-food-future---ms-grace-fu/",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S052",
+      "title": "System Map — Up to TEL3 (Chinese)",
+      "publisher": "Land Transport Authority",
+      "url": "https://www.lta.gov.sg/content/dam/ltagov/getting_around/public_transport/rail_network/pdf/tel3_sm-ch.pdf",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S053",
+      "title": "蓄水池 / reservoir",
+      "publisher": "Singapore Mandarin Council, Singaporean Mandarin Database",
+      "url": "https://www.languagecouncils.sg/mandarin/en/learning-resources/singaporean-mandarin-database/terms/reservoir",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S054",
+      "title": "Master Plan 2019 Land Use layer",
+      "publisher": "Urban Redevelopment Authority / data.gov.sg",
+      "url": "https://data.gov.sg/datasets/d_90d86daa5bfaa371668b84fa5f01424f/view",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S055",
+      "title": "Open data licence",
+      "publisher": "Open Government Products / data.gov.sg",
+      "url": "https://developers.data.gov.sg/open-data-licence",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S056",
+      "title": "Master Plan 2014 Land Use",
+      "publisher": "Urban Redevelopment Authority / data.gov.sg",
+      "url": "https://data.gov.sg/datasets/d_6c3e60b98c170edc47024795330c1353/view",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S057",
+      "title": "MP08 Land Use",
+      "publisher": "Urban Redevelopment Authority / data.gov.sg",
+      "url": "https://data.gov.sg/datasets/d_7ea297b9bf38956bd553638e5db042cd/view",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S058",
+      "title": "Master Plan 2003 Land Use",
+      "publisher": "Urban Redevelopment Authority / data.gov.sg",
+      "url": "https://data.gov.sg/datasets/d_78c9a05019ea8594a657c192bddcd2d6/view",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S059",
+      "title": "HDB Property Information",
+      "publisher": "Housing & Development Board / data.gov.sg",
+      "url": "https://data.gov.sg/datasets/d_17f5382f26140b1fdae0ba2ef6239d2f/view",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S060",
+      "title": "HDB Existing Building",
+      "publisher": "Housing & Development Board / data.gov.sg",
+      "url": "https://data.gov.sg/datasets/d_16b157c52ed637edd6ba1232e026258d/view",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S061",
+      "title": "Master Plan 2019 Planning Area Boundary (No Sea)",
+      "publisher": "Urban Redevelopment Authority / data.gov.sg",
+      "url": "https://data.gov.sg/datasets/d_4765db0e87b9c86336792efe8a1f7a66/view",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S062",
+      "title": "Master Plan 2019 Rail Line layer",
+      "publisher": "Urban Redevelopment Authority / data.gov.sg",
+      "url": "https://data.gov.sg/datasets/d_222bfc84eb86c7c11994d02f8939da8d/view",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S063",
+      "title": "SLA Cadastral Land Parcel",
+      "publisher": "Singapore Land Authority / data.gov.sg",
+      "url": "https://data.gov.sg/datasets/d_e7395d743076a2bcc487b0d12b9bf33b/view",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S064",
+      "title": "Search",
+      "publisher": "Singapore Land Authority / OneMap",
+      "url": "https://www.onemap.gov.sg/apidocs/search",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S065",
+      "title": "Verifying Search API Token Implementation",
+      "publisher": "Singapore Land Authority / OneMap",
+      "url": "https://www.onemap.gov.sg/apidocs/docs/verifyingsearchapitoken",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S066",
+      "title": "API Terms of Service",
+      "publisher": "Singapore Land Authority / OneMap",
+      "url": "https://www.onemap.gov.sg/legal/apitermsofservice.html",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S067",
+      "title": "Map of Singapore from The State of Singapore (BIS,1959)",
+      "publisher": "British Information Services; Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File:Map_of_Singapore_from_The_State_of_Singapore_(BIS,_1959).jpg",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S068",
+      "title": "Admiralty Chart No2014 Eastern Approaches to Selat Jurong,Published1966",
+      "publisher": "United Kingdom Hydrographic Office; Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File:Admiralty_Chart_No_2014_Eastern_Approaches_to_Selat_Jurong,_Published_1966.jpg",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S069",
+      "title": "Admiralty Chart No2587 Western Portion of Johore Strait,Published1966",
+      "publisher": "United Kingdom Hydrographic Office; Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File:Admiralty_Chart_No_2587_Western_Portion_of_Johore_Strait,_Published_1966.jpg",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S070",
+      "title": "TPC L-10C Indonesia;Malaysia;Singapore,compiled1984",
+      "publisher": "U.S.Defense Mapping Agency Aerospace Center; Wikimedia Commons / University of Texas",
+      "url": "https://commons.wikimedia.org/wiki/File:TPC_L-10C_Indonesia;_Malaysia;_Singapore_U.S._Defense_Mapping_Agency_Aerospace_Center,_compiled_1984_-_PCL_Map_Collection_-_txu-pclmaps-oclc-22834566_l-10c.jpg",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S071",
+      "title": "Map of Singapore City in1951",
+      "publisher": "Survey Department Federation of Malaya; Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File:Map_of_Singapore_City_in_1951.png",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S072",
+      "title": "Singapore And Johore Bahru (NAS SP001097)",
+      "publisher": "War Office,GSGS,London;NAS",
+      "url": "https://www.nas.gov.sg/archivesonline/maps_building_plans/record-details/f8d34cab-115c-11e3-83d5-0050568939ad",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S073",
+      "title": "1958 Master Plan:Town Map Sheet1/228/248 (NAS SP001199)",
+      "publisher": "Ministry of National Development;NAS",
+      "url": "https://www.nas.gov.sg/archivesonline/maps_building_plans/record-details/dd8a6529-115c-11e3-83d5-0050568939ad",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S074",
+      "title": "1980 Master Plan:Island Map Sheet4/6 (NAS SP000334)",
+      "publisher": "Planning Department,MND;NAS",
+      "url": "https://www.nas.gov.sg/archivesonline/maps_building_plans/record-details/f9167ecb-115c-11e3-83d5-0050568939ad",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S075",
+      "title": "Master Plan1985:Town Map46 (NAS SP000683)",
+      "publisher": "Chief Surveyor;Planning Department,MND;NAS",
+      "url": "https://www.nas.gov.sg/archivesonline/maps_building_plans/record-details/f8d158c9-115c-11e3-83d5-0050568939ad",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S076",
+      "title": "Singapore Topographical Map (NAS TM001081)",
+      "publisher": "Mapping Branch,Ministry of Defence;SLA;NAS",
+      "url": "https://www.nas.gov.sg/archivesonline/maps_building_plans/record-details/fb66894d-115c-11e3-83d5-0050568939ad",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S077",
+      "title": "Land reclamation in Singapore,Hong Kong and Macau",
+      "publisher": "GeoJournal / Springer",
+      "url": "https://link.springer.com/article/10.1007/BF00578258",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S078",
+      "title": "The Environmental Impact Assessment process in Singapore with particular respect to coastal environments and the role of NGOs",
+      "publisher": "Journal of Coastal Conservation / EUCC;Opulus Press",
+      "url": "https://databases.eucc-d.de/files/documents/00000447_C1.135-144.pdf",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S079",
+      "title": "Land From Sand:Singapore’s Reclamation Story",
+      "publisher": "Lim Tin Seng / National Library Board,BiblioAsia",
+      "url": "https://biblioasia.nlb.gov.sg/all-sections/vol-13-issue-1-apr-jun-2017-land-from-sand/",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S080",
+      "title": "Types of Farms in Singapore",
+      "publisher": "Singapore Food Agency",
+      "url": "https://www.sfa.gov.sg/farming/farm-land-sea-space/types-of-farms-in-singapore",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S081",
+      "title": "Land Available for Tender",
+      "publisher": "Singapore Food Agency",
+      "url": "https://www.sfa.gov.sg/farming/farm-land-sea-space/land-tenders-for-food-farming/2026-sas/land-available-for-tender",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S082",
+      "title": "NParks Parks and Nature Reserves",
+      "publisher": "National Parks Board / data.gov.sg",
+      "url": "https://data.gov.sg/datasets/d_77d7ec97be83d44f61b85454f844382f/view",
+      "access_date": "2026-10-20"
+    },
+    {
+      "id": "S083",
+      "title": "1975 — Singapore Topographical Maps (1:25,000)",
+      "publisher": "Mapping Unit, Ministry of Defence; digitised Department of Geography, National University of Singapore; NUS Libraries",
+      "url": "https://libmaps.nus.edu.sg/maps/1975/",
+      "access_date": "2026-10-20"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E001",
+      "source_id": "S001",
+      "page": "printed p. 23; PDF page 24",
+      "quotation": "What is Singapore’s environment like and how do we overcome the challenges we face?",
+      "verification": "Downloaded official PDF; extracted text and checked rendered page. Current MOE syllabus page links this file."
+    },
+    {
+      "id": "E002",
+      "source_id": "S001",
+      "page": "printed p. 24; PDF page 25",
+      "quotation": "Conservation efforts",
+      "verification": "Downloaded official PDF; extracted text and checked rendered page. Current MOE syllabus page links this file."
+    },
+    {
+      "id": "E003",
+      "source_id": "S001",
+      "page": "printed p. 25; PDF page 26",
+      "quotation": "Changes in land use to meet our needs",
+      "verification": "Downloaded official PDF; extracted text and checked rendered page. Current MOE syllabus page links this file."
+    },
+    {
+      "id": "E004",
+      "source_id": "S002",
+      "page": "objects.land-sg-history.geometries: kind=land, id=L5",
+      "quotation": "\"id\": \"L5\"",
+      "verification": "Read actual TopoJSON properties, not just the planning document."
+    },
+    {
+      "id": "E005",
+      "source_id": "S003",
+      "page": "Opening explanation",
+      "quotation": "The Master Plan shows the permissible land use and density for developments in Singapore."
+    },
+    {
+      "id": "E006",
+      "source_id": "S004",
+      "page": "Land-based / Indoor / Rooftop agricultural farms",
+      "quotation": "Land-based agricultural farms",
+      "verification": "Full HTML read using direct HTTP after web extraction timed out."
+    },
+    {
+      "id": "E007",
+      "source_id": "S004",
+      "page": "Indoor agricultural farms",
+      "quotation": "Singapore’s first indoor farm was established in 2014"
+    },
+    {
+      "id": "E008",
+      "source_id": "S005",
+      "page": "DREAM FACTORIES introduction",
+      "quotation": "Jurong Industrial Estate, conceptualised in 1961"
+    },
+    {
+      "id": "E009",
+      "source_id": "S006",
+      "page": "27 October 2025, opening paragraph",
+      "quotation": "combine seven small islands in the south of Singapore into a single 3,000 hectare landmass"
+    },
+    {
+      "id": "E010",
+      "source_id": "S007",
+      "page": "Our History, 1963 / 1967 / 1970",
+      "quotation": "1963"
+    },
+    {
+      "id": "E011",
+      "source_id": "S008",
+      "page": "paragraphs 1, 5; ANNEX",
+      "quotation": "Map of the affected farm plots and indicative areas for proposed agriculture areas"
+    },
+    {
+      "id": "E012",
+      "source_id": "S009",
+      "page": "first sheet, paragraphs 1–3; release no. 04-0/86/09/03",
+      "quotation": "From 1986 to 1992, 2,000 hectares will be developed into agrotechnology parks."
+    },
+    {
+      "id": "E013",
+      "source_id": "S010",
+      "page": "Developing Punggol",
+      "quotation": "In the 1960s, Kampong Wak Sumang welcomed piped water, electricity, paved roads and drainage systems."
+    },
+    {
+      "id": "E014",
+      "source_id": "S011",
+      "page": "Singapore; References [SG01]",
+      "quotation": "Of this total, 937 ha were used for farming in 2000"
+    },
+    {
+      "id": "E015",
+      "source_id": "S012",
+      "page": "Data explorer, Total Land Area row, 1960 column",
+      "quotation": "581.5",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E016",
+      "source_id": "S012",
+      "page": "Data explorer, Total Land Area row, 1965 column",
+      "quotation": "581.5",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E017",
+      "source_id": "S012",
+      "page": "Data explorer, Total Land Area row, 1970 column",
+      "quotation": "586.4",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E018",
+      "source_id": "S012",
+      "page": "Data explorer, Total Land Area row, 1980 column",
+      "quotation": "617.8",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E019",
+      "source_id": "S012",
+      "page": "Data explorer, Total Land Area row, 1990 column",
+      "quotation": "633",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E020",
+      "source_id": "S012",
+      "page": "Data explorer, Total Land Area row, 2000 column",
+      "quotation": "682.7",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E021",
+      "source_id": "S012",
+      "page": "Data explorer, Total Land Area row, 2010 column",
+      "quotation": "712.4",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E022",
+      "source_id": "S012",
+      "page": "Data explorer, Total Land Area row, 2020 column",
+      "quotation": "728.3",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E023",
+      "source_id": "S012",
+      "page": "Data explorer, Total Land Area row, 2024 column",
+      "quotation": "735.7",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E024",
+      "source_id": "S012",
+      "page": "Footnotes",
+      "quotation": "Prior to 2002, data are based on approved land lots. From 2002 onwards, data are based on land owned parcels.",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E025",
+      "source_id": "S013",
+      "page": "Data explorer, Total Population row, 1957 column",
+      "quotation": "1445929",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E026",
+      "source_id": "S013",
+      "page": "Data explorer, Total Population row, 1970 column",
+      "quotation": "2074507",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E027",
+      "source_id": "S013",
+      "page": "Data explorer, Resident Population row, 1970 column",
+      "quotation": "2013563",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E028",
+      "source_id": "S013",
+      "page": "Data explorer, Total Population row, 1980 column",
+      "quotation": "2413945",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E029",
+      "source_id": "S013",
+      "page": "Data explorer, Resident Population row, 1980 column",
+      "quotation": "2282125",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E030",
+      "source_id": "S013",
+      "page": "Data explorer, Total Population row, 1990 column",
+      "quotation": "3047132",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E031",
+      "source_id": "S013",
+      "page": "Data explorer, Resident Population row, 1990 column",
+      "quotation": "2735868",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E032",
+      "source_id": "S013",
+      "page": "Data explorer, Total Population row, 2000 column",
+      "quotation": "4027887",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E033",
+      "source_id": "S013",
+      "page": "Data explorer, Resident Population row, 2000 column",
+      "quotation": "3273363",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E034",
+      "source_id": "S013",
+      "page": "Data explorer, Total Population row, 2010 column",
+      "quotation": "5076732",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E035",
+      "source_id": "S013",
+      "page": "Data explorer, Resident Population row, 2010 column",
+      "quotation": "3771721",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E036",
+      "source_id": "S013",
+      "page": "Data explorer, Total Population row, 2020 column",
+      "quotation": "5685807",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E037",
+      "source_id": "S013",
+      "page": "Data explorer, Resident Population row, 2020 column",
+      "quotation": "4044210",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E038",
+      "source_id": "S013",
+      "page": "Data explorer, Total Population row, 2024 column",
+      "quotation": "6036860",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E039",
+      "source_id": "S013",
+      "page": "Data explorer, Resident Population row, 2024 column",
+      "quotation": "4180868",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E040",
+      "source_id": "S014",
+      "page": "printed p. v (PDF p. 1), Note",
+      "quotation": "resident population comprises Singapore citizens and permanent residents."
+    },
+    {
+      "id": "E041",
+      "source_id": "S015",
+      "page": "printed p. 13 (PDF p. 7), Resident Population in HDB Flats chart and notes",
+      "quotation": "9%"
+    },
+    {
+      "id": "E042",
+      "source_id": "S015",
+      "page": "printed p. 13 (PDF p. 7), Resident Population in HDB Flats chart and notes",
+      "quotation": "23%"
+    },
+    {
+      "id": "E043",
+      "source_id": "S015",
+      "page": "printed p. 13 (PDF p. 7), Resident Population in HDB Flats chart and notes",
+      "quotation": "35%"
+    },
+    {
+      "id": "E044",
+      "source_id": "S015",
+      "page": "printed p. 13 (PDF p. 7), Resident Population in HDB Flats chart and notes",
+      "quotation": "47%"
+    },
+    {
+      "id": "E045",
+      "source_id": "S015",
+      "page": "printed p. 13 (PDF p. 7), Resident Population in HDB Flats chart and notes",
+      "quotation": "67%"
+    },
+    {
+      "id": "E046",
+      "source_id": "S015",
+      "page": "printed p. 13 (PDF p. 7), Resident Population in HDB Flats chart and notes",
+      "quotation": "81%"
+    },
+    {
+      "id": "E047",
+      "source_id": "S015",
+      "page": "printed p. 13 (PDF p. 7), Resident Population in HDB Flats chart and notes",
+      "quotation": "87%"
+    },
+    {
+      "id": "E048",
+      "source_id": "S015",
+      "page": "printed p. 13 (PDF p. 7), Resident Population in HDB Flats chart and notes",
+      "quotation": "86%"
+    },
+    {
+      "id": "E049",
+      "source_id": "S015",
+      "page": "printed p. 13 (PDF p. 7), Resident Population in HDB Flats chart and notes",
+      "quotation": "83%"
+    },
+    {
+      "id": "E050",
+      "source_id": "S015",
+      "page": "printed p. 13 (PDF p. 7), Resident Population in HDB Flats chart and notes",
+      "quotation": "82%"
+    },
+    {
+      "id": "E051",
+      "source_id": "S015",
+      "page": "printed p. 13 (PDF p. 7), Resident Population in HDB Flats chart and notes",
+      "quotation": "80%"
+    },
+    {
+      "id": "E052",
+      "source_id": "S016",
+      "page": "printed p. 07 (PDF p. 7), Statistical Highlights, FY2023 column and footnote 1",
+      "quotation": "76.4"
+    },
+    {
+      "id": "E053",
+      "source_id": "S016",
+      "page": "printed p. 07 (PDF p. 7), Statistical Highlights, FY2024 column and footnote 1",
+      "quotation": "76.0"
+    },
+    {
+      "id": "E054",
+      "source_id": "S017",
+      "page": "Evolution of Singapore’s Agri-food Industry",
+      "quotation": "20,000 farms"
+    },
+    {
+      "id": "E055",
+      "source_id": "S017",
+      "page": "Evolution of Singapore’s Agri-food Industry",
+      "quotation": "from about 14,000 hectares to about 8,400 hectares"
+    },
+    {
+      "id": "E056",
+      "source_id": "S017",
+      "page": "Evolution of Singapore’s Agri-food Industry",
+      "quotation": "Agrotechnology parks were established in locations like Lim Chu Kang, Mandai, and Loyang."
+    },
+    {
+      "id": "E057",
+      "source_id": "S018",
+      "page": "printed p. 27 (PDF p. 22), Chapter 2",
+      "quotation": "about 1,500 hectares by 1980s."
+    },
+    {
+      "id": "E058",
+      "source_id": "S018",
+      "page": "printed p. 27 (PDF p. 22), Chapter 2",
+      "quotation": "approximately 8,000 farms were phased out, leaving around 7,900 farms."
+    },
+    {
+      "id": "E059",
+      "source_id": "S018",
+      "page": "printed p. 36 (PDF p. 27), Chapter 2",
+      "quotation": "3,555 ha"
+    },
+    {
+      "id": "E060",
+      "source_id": "S019",
+      "page": "printed p. 15 (PDF p. 15), Figure 2.3, year-specific bar labels",
+      "quotation": "110"
+    },
+    {
+      "id": "E061",
+      "source_id": "S019",
+      "page": "printed p. 15 (PDF p. 15), Figure 2.3, year-specific bar labels",
+      "quotation": "109"
+    },
+    {
+      "id": "E062",
+      "source_id": "S019",
+      "page": "printed p. 15 (PDF p. 15), Figure 2.3, year-specific bar labels",
+      "quotation": "98"
+    },
+    {
+      "id": "E063",
+      "source_id": "S020",
+      "page": "printed p. 5 (PDF p. 5), Building Capabilities and Capacity for Local Production",
+      "quotation": "There was a total of 153 land-based and 72 sea-based farms in 2024."
+    },
+    {
+      "id": "E064",
+      "source_id": "S020",
+      "page": "printed p. 5 (PDF p. 5), Building Capabilities and Capacity for Local Production",
+      "quotation": "34%, 3%, and 6%"
+    },
+    {
+      "id": "E065",
+      "source_id": "S021",
+      "page": "Answer, first paragraph",
+      "quotation": "The previous “30 by 30” strategy sought to develop local capability and capacity to produce 30% of our nutritional needs by 2030."
+    },
+    {
+      "id": "E066",
+      "source_id": "S022",
+      "page": "Key Highlights, paragraphs 2 and 5",
+      "quotation": "supply 20 per cent of fibre and 30 per cent of protein consumed locally"
+    },
+    {
+      "id": "E067",
+      "source_id": "S022",
+      "page": "Grow Local, paragraph 5, second bullet",
+      "quotation": "25 per cent of local protein"
+    },
+    {
+      "id": "E068",
+      "source_id": "S023",
+      "page": "paragraph 12",
+      "quotation": "fresh leafy and fruited vegetables, beansprouts and mushrooms"
+    },
+    {
+      "id": "E069",
+      "source_id": "S024",
+      "page": "Data explorer, Mass Rapid Transit (MRT) and Rail Length rows, 1990 column",
+      "quotation": "67",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E070",
+      "source_id": "S024",
+      "page": "Data explorer, Mass Rapid Transit (MRT) and Rail Length rows, 1996 column",
+      "quotation": "83",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E071",
+      "source_id": "S024",
+      "page": "Data explorer, Mass Rapid Transit (MRT) and Rail Length rows, 2000 column",
+      "quotation": "83",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E072",
+      "source_id": "S024",
+      "page": "Data explorer, Mass Rapid Transit (MRT) and Rail Length rows, 2003 column",
+      "quotation": "109.4",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E073",
+      "source_id": "S024",
+      "page": "Data explorer, Mass Rapid Transit (MRT) and Rail Length rows, 2005 column",
+      "quotation": "109.4",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E074",
+      "source_id": "S024",
+      "page": "Data explorer, Mass Rapid Transit (MRT) and Rail Length rows, 2010 column",
+      "quotation": "129.9",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E075",
+      "source_id": "S024",
+      "page": "Data explorer, Mass Rapid Transit (MRT) and Rail Length rows, 2015 column",
+      "quotation": "170.8",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E076",
+      "source_id": "S024",
+      "page": "Data explorer, Mass Rapid Transit (MRT) and Rail Length rows, 2017 column",
+      "quotation": "199.3",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E077",
+      "source_id": "S024",
+      "page": "Data explorer, Mass Rapid Transit (MRT) and Rail Length rows, 2020 column",
+      "quotation": "203.5",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E078",
+      "source_id": "S024",
+      "page": "Data explorer, Mass Rapid Transit (MRT) and Rail Length rows, 2021 column",
+      "quotation": "216.5",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E079",
+      "source_id": "S024",
+      "page": "Data explorer, Mass Rapid Transit (MRT) and Rail Length rows, 2022 column",
+      "quotation": "229.7",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E080",
+      "source_id": "S024",
+      "page": "Data explorer, Mass Rapid Transit (MRT) and Rail Length rows, 2023 column",
+      "quotation": "229.7",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E081",
+      "source_id": "S024",
+      "page": "Data explorer, Mass Rapid Transit (MRT) and Rail Length rows, 2024 column",
+      "quotation": "242.5",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E082",
+      "source_id": "S025",
+      "page": "paragraph 14",
+      "quotation": "When our MRT opened on 7 November 1987, we only had five stations, from Toa Payoh to Yio Chu Kang."
+    },
+    {
+      "id": "E083",
+      "source_id": "S026",
+      "page": "East-West Line: East meets west and beyond",
+      "quotation": "The ‘original’ line, ending at Boon Lay MRT station, was completed in 1990."
+    },
+    {
+      "id": "E084",
+      "source_id": "S027",
+      "page": "Over to You section",
+      "quotation": "By 28 May 2009, Stage 3 of the Circle Line, which runs from Bartley to Marymount, was opened."
+    },
+    {
+      "id": "E085",
+      "source_id": "S028",
+      "page": "Stage 1, Opening date",
+      "quotation": "22 December 2013"
+    },
+    {
+      "id": "E086",
+      "source_id": "S028",
+      "page": "Stage 2, Opening date",
+      "quotation": "27 December 2015"
+    },
+    {
+      "id": "E087",
+      "source_id": "S028",
+      "page": "Stage 3, Opening date",
+      "quotation": "21 October 2017"
+    },
+    {
+      "id": "E088",
+      "source_id": "S029",
+      "page": "Location of Stations, Stage 1",
+      "quotation": "Stage 1, 31 January 2020: Connecting Woodlands to NSL"
+    },
+    {
+      "id": "E089",
+      "source_id": "S030",
+      "page": "Dataset description, note on North East Line",
+      "quotation": "North East Line (NEL) and Sengkang LRT opened for service in 2003.",
+      "licence": "Singapore Open Data Licence"
+    },
+    {
+      "id": "E090",
+      "source_id": "S031",
+      "page": "Introduction",
+      "quotation": "25 May 1961"
+    },
+    {
+      "id": "E091",
+      "source_id": "S031",
+      "page": "Introduction; Aftermath of the fire",
+      "quotation": "100-acre"
+    },
+    {
+      "id": "E092",
+      "source_id": "S031",
+      "page": "Introduction",
+      "quotation": "16,000 kampong dwellers homeless and four fatalities"
+    },
+    {
+      "id": "E093",
+      "source_id": "S031",
+      "page": "Introduction",
+      "quotation": "The cause of the fire remains unknown."
+    },
+    {
+      "id": "E094",
+      "source_id": "S031",
+      "page": "Relocation of affected families",
+      "quotation": "By February 1962"
+    },
+    {
+      "id": "E095",
+      "source_id": "S031",
+      "page": "Relocation of affected families",
+      "quotation": "12,562 flats"
+    },
+    {
+      "id": "E096",
+      "source_id": "S032",
+      "page": "Printed p.7, From urban slums to high-rise living (PDF p.5 spread)",
+      "quotation": "shophouse cubicle"
+    },
+    {
+      "id": "E097",
+      "source_id": "S032",
+      "page": "Printed p.7, From urban slums to high-rise living (PDF p.5 spread)",
+      "quotation": "no piped water, unreliable electricity"
+    },
+    {
+      "id": "E098",
+      "source_id": "S032",
+      "page": "Printed p.7, From urban slums to high-rise living (PDF p.5 spread)",
+      "quotation": "high-rise approach"
+    },
+    {
+      "id": "E099",
+      "source_id": "S032",
+      "page": "Printed p.7, Did you know? (PDF p.5 spread)",
+      "quotation": "Five new HDB blocks were then completed in nine months"
+    },
+    {
+      "id": "E100",
+      "source_id": "S032",
+      "page": "Printed p.7, Estates of convenience (PDF p.5 spread)",
+      "quotation": "schools, clinics, libraries"
+    },
+    {
+      "id": "E101",
+      "source_id": "S032",
+      "page": "Printed p.9, Moving up! (PDF p.6 spread)",
+      "quotation": "initially difficult"
+    },
+    {
+      "id": "E102",
+      "source_id": "S033",
+      "page": "Collection description, accession 1995-01616",
+      "quotation": "The roof is covered with ‘attap’, which is made from palm fronds."
+    },
+    {
+      "id": "E103",
+      "source_id": "S034",
+      "page": "Au Seck Ngee and the HDB documents for his first flat",
+      "quotation": "人生中的重大改变"
+    },
+    {
+      "id": "E104",
+      "source_id": "S035",
+      "page": "Etymology, second bullet",
+      "quotation": "looking out and caring for one another"
+    },
+    {
+      "id": "E105",
+      "source_id": "S036",
+      "page": "Printed p.10, Historical Background",
+      "quotation": "In 1953, SIT planned Queenstown as the first satellite town"
+    },
+    {
+      "id": "E106",
+      "source_id": "S037",
+      "page": "History of Toa Payoh; Evolving through the years",
+      "quotation": "The land was then prepared in 1964"
+    },
+    {
+      "id": "E107",
+      "source_id": "S038",
+      "page": "Printed p.12, Evolution of Ang Mo Kio",
+      "quotation": "First slab blocks built in 1973"
+    },
+    {
+      "id": "E108",
+      "source_id": "S039",
+      "page": "Opening paragraph",
+      "quotation": "With its construction beginning in 1979"
+    },
+    {
+      "id": "E109",
+      "source_id": "S040",
+      "page": "Printed p.18, Tengah’s Progress Milestones at a Glance",
+      "quotation": "First Keys Delivered"
+    },
+    {
+      "id": "E110",
+      "source_id": "S040",
+      "page": "Printed p.18, Tengah’s Progress Milestones at a Glance",
+      "quotation": "All residential blocks at Plantation Acres and Plantation Grange completed"
+    },
+    {
+      "id": "E111",
+      "source_id": "S041",
+      "page": "Printed p.2, Site Introduction (PDF p.2)",
+      "quotation": "In 1975, Upper Peirce Reservoir was completed; on 27th February 1977."
+    },
+    {
+      "id": "E112",
+      "source_id": "S042",
+      "page": "Description",
+      "quotation": "In 1974, Pandan Reservoir was formed"
+    },
+    {
+      "id": "E113",
+      "source_id": "S043",
+      "page": "Printed p.2, paragraph 7",
+      "quotation": "part of the Kranji-Pandan Water Scheme completed in 1975"
+    },
+    {
+      "id": "E114",
+      "source_id": "S044",
+      "page": "Printed p.24, caption (PDF p.26)",
+      "quotation": "Bedok Reservoir was completed in 1986"
+    },
+    {
+      "id": "E115",
+      "source_id": "S045",
+      "page": "Printed p.7, chronology (PDF p.9)",
+      "quotation": "a dam was constructed across the mouth of Seletar River"
+    },
+    {
+      "id": "E116",
+      "source_id": "S046",
+      "page": "Printed pp.I–II timeline (PDF p.3 spread)",
+      "quotation": "Opening of Marina Barrage."
+    },
+    {
+      "id": "E117",
+      "source_id": "S046",
+      "page": "Printed pp.I–II timeline (PDF p.3 spread)",
+      "quotation": "Marina Reservoir commissioned."
+    },
+    {
+      "id": "E118",
+      "source_id": "S046",
+      "page": "Printed pp.I–II timeline (PDF p.3 spread)",
+      "quotation": "Punggol and Serangoon Reservoirs commissioned."
+    },
+    {
+      "id": "E119",
+      "source_id": "S047",
+      "page": "Printed p.7, 提高土地生产力",
+      "quotation": "强化土地利用"
+    },
+    {
+      "id": "E120",
+      "source_id": "S048",
+      "page": "Title",
+      "quotation": "土地用途拟更改"
+    },
+    {
+      "id": "E121",
+      "source_id": "S049",
+      "page": "Printed p.8, 组屋 entry",
+      "quotation": "由新加坡政府建造的居民住宅。"
+    },
+    {
+      "id": "E122",
+      "source_id": "S034",
+      "page": "1977 Bedok balloting card caption",
+      "quotation": "新镇组屋"
+    },
+    {
+      "id": "E123",
+      "source_id": "S035",
+      "page": "由来 / Etymology",
+      "quotation": "“甘榜”一词是马来语 kampung 的音译，泛指乡村。"
+    },
+    {
+      "id": "E124",
+      "source_id": "S050",
+      "page": "由来 / Etymology",
+      "quotation": "填海计划"
+    },
+    {
+      "id": "E125",
+      "source_id": "S051",
+      "page": "Paragraph 89",
+      "quotation": "本地农场"
+    },
+    {
+      "id": "E126",
+      "source_id": "S052",
+      "page": "Single-page map, legend",
+      "quotation": "MRT 地铁"
+    },
+    {
+      "id": "E127",
+      "source_id": "S052",
+      "page": "Single-page map, legend",
+      "quotation": "LRT 轻轨"
+    },
+    {
+      "id": "E128",
+      "source_id": "S053",
+      "page": "Heading; 释义 / Definition",
+      "quotation": "储存雨水的大型水池。"
+    },
+    {
+      "id": "E129",
+      "source_id": "S054",
+      "page": "unpaginated: description, coverage, download, attribute legend and About this dataset / Licence",
+      "quotation": "Indicative land use polygon layer."
+    },
+    {
+      "id": "E130",
+      "source_id": "S055",
+      "page": "unpaginated: Acceptance and grant of Licence",
+      "quotation": "The Agency grants you a worldwide, perpetual, royalty-free, non-exclusive licence to Use the datasets, subject to the terms of this Licence."
+    },
+    {
+      "id": "E131",
+      "source_id": "S056",
+      "page": "unpaginated: description, coverage, download, attribute legend and About this dataset / Licence",
+      "quotation": "Indicative polygon of each development land parcel"
+    },
+    {
+      "id": "E132",
+      "source_id": "S057",
+      "page": "unpaginated: description, coverage, download, attribute legend and About this dataset / Licence",
+      "quotation": "Indicative polygon of land use zoning boundary"
+    },
+    {
+      "id": "E133",
+      "source_id": "S058",
+      "page": "unpaginated: description, coverage, download, attribute legend and About this dataset / Licence",
+      "quotation": "Indicative polygon of each development land parcel"
+    },
+    {
+      "id": "E134",
+      "source_id": "S059",
+      "page": "unpaginated: description, coverage, download, attribute legend and About this dataset / Licence",
+      "quotation": "Year Completed"
+    },
+    {
+      "id": "E135",
+      "source_id": "S060",
+      "page": "unpaginated: description, coverage, download, attribute legend and About this dataset / Licence",
+      "quotation": "HDB Existing Buildings."
+    },
+    {
+      "id": "E136",
+      "source_id": "S061",
+      "page": "unpaginated: description, coverage, download, attribute legend and About this dataset / Licence",
+      "quotation": "Indicative polygon of planning area boundary."
+    },
+    {
+      "id": "E137",
+      "source_id": "S062",
+      "page": "unpaginated: description, coverage, download, attribute legend and About this dataset / Licence",
+      "quotation": "Indicative line of MRT, LRT and Railway network layer."
+    },
+    {
+      "id": "E138",
+      "source_id": "S062",
+      "page": "Description, attribute legend, Licence",
+      "quotation": "Indicative line of MRT, LRT and Railway network layer."
+    },
+    {
+      "id": "E139",
+      "source_id": "S063",
+      "page": "unpaginated: description, coverage, download, attribute legend and About this dataset / Licence",
+      "quotation": "It depicts the entire cadastral map of Singapore."
+    },
+    {
+      "id": "E140",
+      "source_id": "S064",
+      "page": "unpaginated: description and Sample Response",
+      "quotation": "It returns address information including both latitude, longitude, and x, y coordinates"
+    },
+    {
+      "id": "E141",
+      "source_id": "S065",
+      "page": "unpaginated: opening paragraph",
+      "quotation": "Search API requests must include a valid API token in the Authorization header."
+    },
+    {
+      "id": "E142",
+      "source_id": "S066",
+      "page": "unpaginated: Acceptance of API Terms of Service",
+      "quotation": "Use of the datasets is governed by the Singapore Open Data Licence."
+    },
+    {
+      "id": "E143",
+      "source_id": "S067",
+      "page": "unpaginated: Summary and Licensing (or NAS Conditions Governing Access)",
+      "quotation": "This work created by the United Kingdom Government is in the public domain."
+    },
+    {
+      "id": "E144",
+      "source_id": "S068",
+      "page": "unpaginated: Summary and Licensing (or NAS Conditions Governing Access)",
+      "quotation": "This work created by the United Kingdom Government is in the public domain."
+    },
+    {
+      "id": "E145",
+      "source_id": "S069",
+      "page": "unpaginated: Summary and Licensing (or NAS Conditions Governing Access)",
+      "quotation": "This work created by the United Kingdom Government is in the public domain."
+    },
+    {
+      "id": "E146",
+      "source_id": "S070",
+      "page": "unpaginated: Summary and Licensing (or NAS Conditions Governing Access)",
+      "quotation": "As a work of the U.S. federal government, the file is in the public domain in the United States."
+    },
+    {
+      "id": "E147",
+      "source_id": "S071",
+      "page": "unpaginated: Summary and Licensing (or NAS Conditions Governing Access)",
+      "quotation": "This work is in the public domain in its country of origin"
+    },
+    {
+      "id": "E148",
+      "source_id": "S072",
+      "page": "unpaginated: Summary and Licensing (or NAS Conditions Governing Access)",
+      "quotation": "Viewing permitted. Use and reproduction only with permission."
+    },
+    {
+      "id": "E149",
+      "source_id": "S073",
+      "page": "unpaginated: Summary and Licensing (or NAS Conditions Governing Access)",
+      "quotation": "Viewing permitted. Use and reproduction require written permission from copyright owner."
+    },
+    {
+      "id": "E150",
+      "source_id": "S074",
+      "page": "unpaginated: Summary and Licensing (or NAS Conditions Governing Access)",
+      "quotation": "Viewing permitted. Use and reproduction require written permission from copyright owner."
+    },
+    {
+      "id": "E151",
+      "source_id": "S075",
+      "page": "unpaginated: Summary and Licensing (or NAS Conditions Governing Access)",
+      "quotation": "Viewing permitted. Use and reproduction require written permission from copyright owner."
+    },
+    {
+      "id": "E152",
+      "source_id": "S076",
+      "page": "unpaginated: Summary and Licensing (or NAS Conditions Governing Access)",
+      "quotation": "Viewing permitted. Use and reproduction only with permission."
+    },
+    {
+      "id": "E153",
+      "source_id": "S077",
+      "page": "pp365–373;publisher abstract and Access this article",
+      "quotation": "Four phases of land reclamation are identified"
+    },
+    {
+      "id": "E154",
+      "source_id": "S078",
+      "page": "printed p136,Fig1;copyright p135",
+      "quotation": "A map of Singapore illustrating the major areas of foreshore reclamation (after Wong 1992)."
+    },
+    {
+      "id": "E155",
+      "source_id": "S079",
+      "page": "unpaginated:map caption following New Lands for Infrastructure and Recreation:MPA",
+      "quotation": "The areas in red show possible plans for future reclamation"
+    },
+    {
+      "id": "E156",
+      "source_id": "S080",
+      "page": "unpaginated:Where can I find a list of licensed farms in Singapore?",
+      "quotation": "You can download the lists of farms using the links below:"
+    },
+    {
+      "id": "E157",
+      "source_id": "S081",
+      "page": "unpaginated:opening paragraph and Location Map",
+      "quotation": "details of the land parcels and location plans"
+    },
+    {
+      "id": "E158",
+      "source_id": "S082",
+      "page": "Description; attribute legend; Licence",
+      "quotation": "Free forever for personal or commercial use, under the Open Data Licence."
+    },
+    {
+      "id": "E159",
+      "source_id": "S008",
+      "page": "ANNEX",
+      "quotation": "Map of the affected farm plots and indicative areas for proposed agriculture areas"
+    },
+    {
+      "id": "E160",
+      "source_id": "S083",
+      "page": "Year of Publication; Credits; Rights and Restrictions; Ground Control Points; Web Services",
+      "quotation": "No reproduction for commercial purposes."
+    },
+    {
+      "id": "E161",
+      "source_id": "S009",
+      "page": "Annex I, PDFp6; annexes II–IV, PDFpp7–9",
+      "quotation": "LOCATION OF AGRICULTURAL LANDS",
+      "verification": "Downloaded PDF; rendered and visually inspected all four map annexes."
+    },
+    {
+      "id": "E162",
+      "source_id": "S012",
+      "page": "About this dataset, Licence",
+      "quotation": "Free forever for personal or commercial use, under the Open Data Licence."
+    },
+    {
+      "id": "E163",
+      "source_id": "S013",
+      "page": "About this dataset, Licence",
+      "quotation": "Free forever for personal or commercial use, under the Open Data Licence."
+    },
+    {
+      "id": "E164",
+      "source_id": "S024",
+      "page": "About this dataset, Licence",
+      "quotation": "Free forever for personal or commercial use, under the Open Data Licence."
+    },
+    {
+      "id": "E165",
+      "source_id": "S030",
+      "page": "About this dataset, Licence",
+      "quotation": "Free forever for personal or commercial use, under the Open Data Licence."
+    }
+  ],
+  "facts": [
+    {
+      "id": "syllabus-inquiry",
+      "section": 1,
+      "claim": "P3 asks students to investigate Singapore’s environment and responses to its challenges.",
+      "verbatim": false,
+      "note": "The inquiry question is verbatim in the linked evidence record.",
+      "evidence_ids": [
+        "E001"
+      ]
+    },
+    {
+      "id": "syllabus-knowledge",
+      "section": 1,
+      "claim": "P3 knowledge outcomes cover recognising and mapping places; explaining environmental effects of actions; describing protection, challenges and adaptation to needs.",
+      "verbatim": false,
+      "note": "Paraphrase. The complete list is in the linked PDF, Knowledge Outcomes column.",
+      "evidence_ids": [
+        "E001"
+      ]
+    },
+    {
+      "id": "syllabus-skills",
+      "section": 1,
+      "claim": "P3 skills cover information gathering, guided observation and evaluation, scaffolded decisions, group communication, collaboration and presentation.",
+      "verbatim": false,
+      "evidence_ids": [
+        "E001"
+      ]
+    },
+    {
+      "id": "syllabus-values",
+      "section": 1,
+      "claim": "P3 values cover resource responsibility, recognising beliefs, considering ethical consequences, curiosity, community and environmental care, belonging, and responsible information use.",
+      "verbatim": false,
+      "evidence_ids": [
+        "E001"
+      ]
+    },
+    {
+      "id": "syllabus-conservation",
+      "section": 1,
+      "claim": "P3 content includes consequences for the environment, cleanliness and greenery, conservation, and responsible resource use at home, school and in the community.",
+      "verbatim": false,
+      "evidence_ids": [
+        "E002"
+      ]
+    },
+    {
+      "id": "syllabus-land",
+      "section": 1,
+      "claim": "P3 explicitly connects changing land use with meeting needs.",
+      "verbatim": false,
+      "evidence_ids": [
+        "E003"
+      ]
+    },
+    {
+      "id": "syllabus-food",
+      "section": 1,
+      "claim": "Food content addresses farming constraints in Singapore, changing kinds of farms, and advances in farming technology.",
+      "verbatim": false,
+      "evidence_ids": [
+        "E003"
+      ]
+    },
+    {
+      "id": "syllabus-housing",
+      "section": 1,
+      "claim": "Housing content addresses provision challenges, changing living conditions, and improvements to public housing estates as society’s needs change.",
+      "verbatim": false,
+      "evidence_ids": [
+        "E003"
+      ]
+    },
+    {
+      "id": "syllabus-transport",
+      "section": 1,
+      "claim": "Transport content addresses provision challenges and change in Singapore’s transport system.",
+      "verbatim": false,
+      "evidence_ids": [
+        "E003"
+      ]
+    },
+    {
+      "id": "local-map-eras",
+      "section": 2,
+      "claim": "The existing Atlas coast file contains L0–L5 dated land geometries and a separate present-day coast line; L5 starts on 1961-01-01 and has no end date.",
+      "note": "An open-ended implementation interval is not evidence that the coast stayed unchanged after 1961. New post-1961 coast frames need dated real map evidence.",
+      "evidence_ids": [
+        "E004"
+      ]
+    },
+    {
+      "id": "master-plan-meaning",
+      "section": 2,
+      "claim": "URA Master Plans map permissible land use and density; differences between editions are zoning changes, not direct measurements of observed use.",
+      "evidence_ids": [
+        "E005"
+      ]
+    },
+    {
+      "id": "farm-types-and-tech",
+      "section": 3,
+      "claim": "SFA describes soil-grown land farms in Lim Chu Kang and Sungei Tengah; indoor farms can stack crops, use artificial light and recirculate nutrient water; rooftops can support soil beds or hydroponics.",
+      "note": "These are current farm types, not historical parcel boundaries. Technology does not by itself establish a measured yield or energy saving.",
+      "evidence_ids": [
+        "E006"
+      ]
+    },
+    {
+      "id": "farm-indoor-2014",
+      "section": 3,
+      "claim": "SFA dates Singapore’s first indoor farm to 2014.",
+      "year": 2014,
+      "evidence_ids": [
+        "E007"
+      ]
+    },
+    {
+      "id": "jurong-industrial-1961",
+      "section": 2,
+      "claim": "JTC dates the conception of Jurong Industrial Estate to 1961.",
+      "year": 1961,
+      "evidence_ids": [
+        "E008"
+      ]
+    },
+    {
+      "id": "jurong-island-reclamation",
+      "section": 2,
+      "claim": "JTC describes Jurong Island as a project joining seven southern islands into one 3,000-hectare landmass for the energy and chemicals industry.",
+      "value": 3000,
+      "unit": "hectares",
+      "note": "The release reports the island as a whole; it does not provide decade-by-decade reclamation polygons.",
+      "evidence_ids": [
+        "E009"
+      ]
+    },
+    {
+      "id": "green-history",
+      "section": 2,
+      "claim": "NParks records a nationwide tree-planting campaign in 1963, creation of the Parks and Trees Unit in 1967, and the Garden City Action Committee in 1970.",
+      "note": "These institutional milestones cannot be used as dates for all mapped park polygons. Current park boundaries are a separate dataset.",
+      "evidence_ids": [
+        "E010"
+      ]
+    },
+    {
+      "id": "lim-chu-kang-2026",
+      "section": 2,
+      "claim": "A joint 25 May 2026 release describes proposed agriculture to the north of Lim Chu Kang and future defence uses in the south; its annex maps affected farm plots and indicative areas.",
+      "year": 2026,
+      "note": "Indicative future plan, not evidence of a completed land-use change or an open geospatial licence.",
+      "evidence_ids": [
+        "E011"
+      ]
+    },
+    {
+      "id": "agrotech-programme-1986",
+      "section": 3,
+      "claim": "A September 1986 government release proposed 2,000 hectares of agrotechnology parks for 1986–1992, mainly in the northwest including Lim Chu Kang/Neo Tiew. Its first tender covered 120 hectares at Sungei Tengah, Murai and Loyang.",
+      "year": 1986,
+      "value": 2000,
+      "unit": "hectares planned",
+      "note": "A programme target, not a measurement of land already developed. The NAS accession stamp says 29 September 1986; release code encodes 3 September 1986. Read scanned original visually.",
+      "evidence_ids": [
+        "E012"
+      ]
+    },
+    {
+      "id": "kampong-services-varied",
+      "section": 4,
+      "claim": "Kampong Wak Sumang received piped water, electricity, paved roads and drainage during the 1960s.",
+      "note": "A named counterexample to any claim that every kampong lacked services throughout the 1960s. Do not generalise one settlement’s experience to all.",
+      "evidence_ids": [
+        "E013"
+      ]
+    },
+    {
+      "id": "farm-area-2000-fao",
+      "section": 3,
+      "claim": "FAO reports 937 hectares used for farming in 2000 within agrotechnology parks covering about 1,465 hectares, citing AVA’s 2004 statistics.",
+      "year": 2000,
+      "value": 937,
+      "unit": "hectares used for farming",
+      "note": "Secondary quotation of AVA2004 statistics; original AVA page not recovered. Area of estate infrastructure differs from cultivated/occupied farming area.",
+      "evidence_ids": [
+        "E014"
+      ]
+    },
+    {
+      "id": "land-area-dec-1960",
+      "section": 3,
+      "claim": "Singapore total land area at end-December 1960 was 581.5 square kilometres.",
+      "year": 1960,
+      "value": 581.5,
+      "unit": "km²",
+      "caveats": "Before 2002: approved land lots; from 2002: land owned parcels. This is a statistical area series, not a map of reclamation footprints.",
+      "evidence_ids": [
+        "E015"
+      ]
+    },
+    {
+      "id": "land-area-dec-1965",
+      "section": 3,
+      "claim": "Singapore total land area at end-December 1965 was 581.5 square kilometres.",
+      "year": 1965,
+      "value": 581.5,
+      "unit": "km²",
+      "caveats": "Before 2002: approved land lots; from 2002: land owned parcels. This is a statistical area series, not a map of reclamation footprints.",
+      "evidence_ids": [
+        "E016"
+      ]
+    },
+    {
+      "id": "land-area-dec-1970",
+      "section": 3,
+      "claim": "Singapore total land area at end-December 1970 was 586.4 square kilometres.",
+      "year": 1970,
+      "value": 586.4,
+      "unit": "km²",
+      "caveats": "Before 2002: approved land lots; from 2002: land owned parcels. This is a statistical area series, not a map of reclamation footprints.",
+      "evidence_ids": [
+        "E017"
+      ]
+    },
+    {
+      "id": "land-area-dec-1980",
+      "section": 3,
+      "claim": "Singapore total land area at end-December 1980 was 617.8 square kilometres.",
+      "year": 1980,
+      "value": 617.8,
+      "unit": "km²",
+      "caveats": "Before 2002: approved land lots; from 2002: land owned parcels. This is a statistical area series, not a map of reclamation footprints.",
+      "evidence_ids": [
+        "E018"
+      ]
+    },
+    {
+      "id": "land-area-dec-1990",
+      "section": 3,
+      "claim": "Singapore total land area at end-December 1990 was 633 square kilometres.",
+      "year": 1990,
+      "value": 633.0,
+      "unit": "km²",
+      "caveats": "Before 2002: approved land lots; from 2002: land owned parcels. This is a statistical area series, not a map of reclamation footprints.",
+      "evidence_ids": [
+        "E019"
+      ]
+    },
+    {
+      "id": "land-area-dec-2000",
+      "section": 3,
+      "claim": "Singapore total land area at end-December 2000 was 682.7 square kilometres.",
+      "year": 2000,
+      "value": 682.7,
+      "unit": "km²",
+      "caveats": "Before 2002: approved land lots; from 2002: land owned parcels. This is a statistical area series, not a map of reclamation footprints.",
+      "evidence_ids": [
+        "E020"
+      ]
+    },
+    {
+      "id": "land-area-dec-2010",
+      "section": 3,
+      "claim": "Singapore total land area at end-December 2010 was 712.4 square kilometres.",
+      "year": 2010,
+      "value": 712.4,
+      "unit": "km²",
+      "caveats": "Before 2002: approved land lots; from 2002: land owned parcels. This is a statistical area series, not a map of reclamation footprints.",
+      "evidence_ids": [
+        "E021"
+      ]
+    },
+    {
+      "id": "land-area-dec-2020",
+      "section": 3,
+      "claim": "Singapore total land area at end-December 2020 was 728.3 square kilometres.",
+      "year": 2020,
+      "value": 728.3,
+      "unit": "km²",
+      "caveats": "Before 2002: approved land lots; from 2002: land owned parcels. This is a statistical area series, not a map of reclamation footprints.",
+      "evidence_ids": [
+        "E022"
+      ]
+    },
+    {
+      "id": "land-area-dec-2024",
+      "section": 3,
+      "claim": "Singapore total land area at end-December 2024 was 735.7 square kilometres.",
+      "year": 2024,
+      "value": 735.7,
+      "unit": "km²",
+      "caveats": "Before 2002: approved land lots; from 2002: land owned parcels. This is a statistical area series, not a map of reclamation footprints.",
+      "evidence_ids": [
+        "E023"
+      ]
+    },
+    {
+      "id": "land-area-method-break",
+      "section": 3,
+      "claim": "The official land-area series changes measurement basis in 2002.",
+      "year": 2002,
+      "value": null,
+      "unit": null,
+      "evidence_ids": [
+        "E024"
+      ]
+    },
+    {
+      "id": "total-population-1957",
+      "section": 3,
+      "claim": "Singapore total population in 1957 was 1,445,929.",
+      "year": 1957,
+      "value": 1445929,
+      "unit": "persons",
+      "caveats": "Values are annual official population-series values; census-year selections are not all necessarily census-enumeration-day counts. Total and resident populations must not be interchanged.",
+      "evidence_ids": [
+        "E025"
+      ]
+    },
+    {
+      "id": "total-population-1970",
+      "section": 3,
+      "claim": "Singapore total population in 1970 was 2,074,507.",
+      "year": 1970,
+      "value": 2074507,
+      "unit": "persons",
+      "caveats": "Values are annual official population-series values; census-year selections are not all necessarily census-enumeration-day counts. Total and resident populations must not be interchanged.",
+      "evidence_ids": [
+        "E026"
+      ]
+    },
+    {
+      "id": "resident-population-1970",
+      "section": 3,
+      "claim": "Singapore resident population in 1970 was 2,013,563.",
+      "year": 1970,
+      "value": 2013563,
+      "unit": "persons",
+      "caveats": "Values are annual official population-series values; census-year selections are not all necessarily census-enumeration-day counts. Total and resident populations must not be interchanged.",
+      "evidence_ids": [
+        "E027"
+      ]
+    },
+    {
+      "id": "total-population-1980",
+      "section": 3,
+      "claim": "Singapore total population in 1980 was 2,413,945.",
+      "year": 1980,
+      "value": 2413945,
+      "unit": "persons",
+      "caveats": "Values are annual official population-series values; census-year selections are not all necessarily census-enumeration-day counts. Total and resident populations must not be interchanged.",
+      "evidence_ids": [
+        "E028"
+      ]
+    },
+    {
+      "id": "resident-population-1980",
+      "section": 3,
+      "claim": "Singapore resident population in 1980 was 2,282,125.",
+      "year": 1980,
+      "value": 2282125,
+      "unit": "persons",
+      "caveats": "Values are annual official population-series values; census-year selections are not all necessarily census-enumeration-day counts. Total and resident populations must not be interchanged.",
+      "evidence_ids": [
+        "E029"
+      ]
+    },
+    {
+      "id": "total-population-1990",
+      "section": 3,
+      "claim": "Singapore total population in 1990 was 3,047,132.",
+      "year": 1990,
+      "value": 3047132,
+      "unit": "persons",
+      "caveats": "Values are annual official population-series values; census-year selections are not all necessarily census-enumeration-day counts. Total and resident populations must not be interchanged.",
+      "evidence_ids": [
+        "E030"
+      ]
+    },
+    {
+      "id": "resident-population-1990",
+      "section": 3,
+      "claim": "Singapore resident population in 1990 was 2,735,868.",
+      "year": 1990,
+      "value": 2735868,
+      "unit": "persons",
+      "caveats": "Values are annual official population-series values; census-year selections are not all necessarily census-enumeration-day counts. Total and resident populations must not be interchanged.",
+      "evidence_ids": [
+        "E031"
+      ]
+    },
+    {
+      "id": "total-population-2000",
+      "section": 3,
+      "claim": "Singapore total population in 2000 was 4,027,887.",
+      "year": 2000,
+      "value": 4027887,
+      "unit": "persons",
+      "caveats": "Values are annual official population-series values; census-year selections are not all necessarily census-enumeration-day counts. Total and resident populations must not be interchanged.",
+      "evidence_ids": [
+        "E032"
+      ]
+    },
+    {
+      "id": "resident-population-2000",
+      "section": 3,
+      "claim": "Singapore resident population in 2000 was 3,273,363.",
+      "year": 2000,
+      "value": 3273363,
+      "unit": "persons",
+      "caveats": "Values are annual official population-series values; census-year selections are not all necessarily census-enumeration-day counts. Total and resident populations must not be interchanged.",
+      "evidence_ids": [
+        "E033"
+      ]
+    },
+    {
+      "id": "total-population-2010",
+      "section": 3,
+      "claim": "Singapore total population in 2010 was 5,076,732.",
+      "year": 2010,
+      "value": 5076732,
+      "unit": "persons",
+      "caveats": "Values are annual official population-series values; census-year selections are not all necessarily census-enumeration-day counts. Total and resident populations must not be interchanged.",
+      "evidence_ids": [
+        "E034"
+      ]
+    },
+    {
+      "id": "resident-population-2010",
+      "section": 3,
+      "claim": "Singapore resident population in 2010 was 3,771,721.",
+      "year": 2010,
+      "value": 3771721,
+      "unit": "persons",
+      "caveats": "Values are annual official population-series values; census-year selections are not all necessarily census-enumeration-day counts. Total and resident populations must not be interchanged.",
+      "evidence_ids": [
+        "E035"
+      ]
+    },
+    {
+      "id": "total-population-2020",
+      "section": 3,
+      "claim": "Singapore total population in 2020 was 5,685,807.",
+      "year": 2020,
+      "value": 5685807,
+      "unit": "persons",
+      "caveats": "Values are annual official population-series values; census-year selections are not all necessarily census-enumeration-day counts. Total and resident populations must not be interchanged.",
+      "evidence_ids": [
+        "E036"
+      ]
+    },
+    {
+      "id": "resident-population-2020",
+      "section": 3,
+      "claim": "Singapore resident population in 2020 was 4,044,210.",
+      "year": 2020,
+      "value": 4044210,
+      "unit": "persons",
+      "caveats": "Values are annual official population-series values; census-year selections are not all necessarily census-enumeration-day counts. Total and resident populations must not be interchanged.",
+      "evidence_ids": [
+        "E037"
+      ]
+    },
+    {
+      "id": "total-population-2024",
+      "section": 3,
+      "claim": "Singapore total population in 2024 was 6,036,860.",
+      "year": 2024,
+      "value": 6036860,
+      "unit": "persons",
+      "caveats": "Values are annual official population-series values; census-year selections are not all necessarily census-enumeration-day counts. Total and resident populations must not be interchanged.",
+      "evidence_ids": [
+        "E038"
+      ]
+    },
+    {
+      "id": "resident-population-2024",
+      "section": 3,
+      "claim": "Singapore resident population in 2024 was 4,180,868.",
+      "year": 2024,
+      "value": 4180868,
+      "unit": "persons",
+      "caveats": "Values are annual official population-series values; census-year selections are not all necessarily census-enumeration-day counts. Total and resident populations must not be interchanged.",
+      "evidence_ids": [
+        "E039"
+      ]
+    },
+    {
+      "id": "resident-definition",
+      "section": 3,
+      "claim": "Singapore resident population comprises Singapore citizens and permanent residents.",
+      "year": null,
+      "value": null,
+      "unit": null,
+      "evidence_ids": [
+        "E040"
+      ]
+    },
+    {
+      "id": "hdb-population-share-1960",
+      "section": 3,
+      "claim": "HDB historical chart gives 9% of total population living in HDB flats in 1960.",
+      "year": 1960,
+      "value": 9,
+      "unit": "percent",
+      "caveats": "Historical chart estimate rounded to whole percent. Chart note: pre-1980 except 1970 uses total population; 1970 and 1980 onwards uses residents. 2021 point is March. From 2003 residents overseas for continuous 12 months or longer are excluded.",
+      "evidence_ids": [
+        "E041"
+      ]
+    },
+    {
+      "id": "hdb-population-share-1965",
+      "section": 3,
+      "claim": "HDB historical chart gives 23% of total population living in HDB flats in 1965.",
+      "year": 1965,
+      "value": 23,
+      "unit": "percent",
+      "caveats": "Historical chart estimate rounded to whole percent. Chart note: pre-1980 except 1970 uses total population; 1970 and 1980 onwards uses residents. 2021 point is March. From 2003 residents overseas for continuous 12 months or longer are excluded.",
+      "evidence_ids": [
+        "E042"
+      ]
+    },
+    {
+      "id": "hdb-population-share-1970",
+      "section": 3,
+      "claim": "HDB historical chart gives 35% of resident population living in HDB flats in 1970.",
+      "year": 1970,
+      "value": 35,
+      "unit": "percent",
+      "caveats": "Historical chart estimate rounded to whole percent. Chart note: pre-1980 except 1970 uses total population; 1970 and 1980 onwards uses residents. 2021 point is March. From 2003 residents overseas for continuous 12 months or longer are excluded.",
+      "evidence_ids": [
+        "E043"
+      ]
+    },
+    {
+      "id": "hdb-population-share-1975",
+      "section": 3,
+      "claim": "HDB historical chart gives 47% of total population living in HDB flats in 1975.",
+      "year": 1975,
+      "value": 47,
+      "unit": "percent",
+      "caveats": "Historical chart estimate rounded to whole percent. Chart note: pre-1980 except 1970 uses total population; 1970 and 1980 onwards uses residents. 2021 point is March. From 2003 residents overseas for continuous 12 months or longer are excluded.",
+      "evidence_ids": [
+        "E044"
+      ]
+    },
+    {
+      "id": "hdb-population-share-1980",
+      "section": 3,
+      "claim": "HDB historical chart gives 67% of resident population living in HDB flats in 1980.",
+      "year": 1980,
+      "value": 67,
+      "unit": "percent",
+      "caveats": "Historical chart estimate rounded to whole percent. Chart note: pre-1980 except 1970 uses total population; 1970 and 1980 onwards uses residents. 2021 point is March. From 2003 residents overseas for continuous 12 months or longer are excluded.",
+      "evidence_ids": [
+        "E045"
+      ]
+    },
+    {
+      "id": "hdb-population-share-1985",
+      "section": 3,
+      "claim": "HDB historical chart gives 81% of resident population living in HDB flats in 1985.",
+      "year": 1985,
+      "value": 81,
+      "unit": "percent",
+      "caveats": "Historical chart estimate rounded to whole percent. Chart note: pre-1980 except 1970 uses total population; 1970 and 1980 onwards uses residents. 2021 point is March. From 2003 residents overseas for continuous 12 months or longer are excluded.",
+      "evidence_ids": [
+        "E046"
+      ]
+    },
+    {
+      "id": "hdb-population-share-1990",
+      "section": 3,
+      "claim": "HDB historical chart gives 87% of resident population living in HDB flats in 1990.",
+      "year": 1990,
+      "value": 87,
+      "unit": "percent",
+      "caveats": "Historical chart estimate rounded to whole percent. Chart note: pre-1980 except 1970 uses total population; 1970 and 1980 onwards uses residents. 2021 point is March. From 2003 residents overseas for continuous 12 months or longer are excluded.",
+      "evidence_ids": [
+        "E047"
+      ]
+    },
+    {
+      "id": "hdb-population-share-1995",
+      "section": 3,
+      "claim": "HDB historical chart gives 86% of resident population living in HDB flats in 1995.",
+      "year": 1995,
+      "value": 86,
+      "unit": "percent",
+      "caveats": "Historical chart estimate rounded to whole percent. Chart note: pre-1980 except 1970 uses total population; 1970 and 1980 onwards uses residents. 2021 point is March. From 2003 residents overseas for continuous 12 months or longer are excluded.",
+      "evidence_ids": [
+        "E048"
+      ]
+    },
+    {
+      "id": "hdb-population-share-2000",
+      "section": 3,
+      "claim": "HDB historical chart gives 86% of resident population living in HDB flats in 2000.",
+      "year": 2000,
+      "value": 86,
+      "unit": "percent",
+      "caveats": "Historical chart estimate rounded to whole percent. Chart note: pre-1980 except 1970 uses total population; 1970 and 1980 onwards uses residents. 2021 point is March. From 2003 residents overseas for continuous 12 months or longer are excluded.",
+      "evidence_ids": [
+        "E048"
+      ]
+    },
+    {
+      "id": "hdb-population-share-2005",
+      "section": 3,
+      "claim": "HDB historical chart gives 83% of resident population living in HDB flats in 2005.",
+      "year": 2005,
+      "value": 83,
+      "unit": "percent",
+      "caveats": "Historical chart estimate rounded to whole percent. Chart note: pre-1980 except 1970 uses total population; 1970 and 1980 onwards uses residents. 2021 point is March. From 2003 residents overseas for continuous 12 months or longer are excluded.",
+      "evidence_ids": [
+        "E049"
+      ]
+    },
+    {
+      "id": "hdb-population-share-2010",
+      "section": 3,
+      "claim": "HDB historical chart gives 82% of resident population living in HDB flats in 2010.",
+      "year": 2010,
+      "value": 82,
+      "unit": "percent",
+      "caveats": "Historical chart estimate rounded to whole percent. Chart note: pre-1980 except 1970 uses total population; 1970 and 1980 onwards uses residents. 2021 point is March. From 2003 residents overseas for continuous 12 months or longer are excluded.",
+      "evidence_ids": [
+        "E050"
+      ]
+    },
+    {
+      "id": "hdb-population-share-2015",
+      "section": 3,
+      "claim": "HDB historical chart gives 82% of resident population living in HDB flats in 2015.",
+      "year": 2015,
+      "value": 82,
+      "unit": "percent",
+      "caveats": "Historical chart estimate rounded to whole percent. Chart note: pre-1980 except 1970 uses total population; 1970 and 1980 onwards uses residents. 2021 point is March. From 2003 residents overseas for continuous 12 months or longer are excluded.",
+      "evidence_ids": [
+        "E050"
+      ]
+    },
+    {
+      "id": "hdb-population-share-2021",
+      "section": 3,
+      "claim": "HDB historical chart gives 80% of resident population living in HDB flats in 2021.",
+      "year": 2021,
+      "value": 80,
+      "unit": "percent",
+      "caveats": "Historical chart estimate rounded to whole percent. Chart note: pre-1980 except 1970 uses total population; 1970 and 1980 onwards uses residents. 2021 point is March. From 2003 residents overseas for continuous 12 months or longer are excluded.",
+      "evidence_ids": [
+        "E051"
+      ]
+    },
+    {
+      "id": "hdb-resident-share-2024-03-31",
+      "section": 3,
+      "claim": "At end-March 2024, 76.4% of Singapore resident population lived in HDB flats.",
+      "year": "2024-03-31",
+      "value": 76.4,
+      "unit": "percent",
+      "caveats": "Denominator is resident persons, not resident households, total population, flat owners, or share of dwelling stock. FY2024 refers here to end-March 2025.",
+      "evidence_ids": [
+        "E052"
+      ]
+    },
+    {
+      "id": "hdb-resident-share-2025-03-31",
+      "section": 3,
+      "claim": "At end-March 2025, 76.0% of Singapore resident population lived in HDB flats.",
+      "year": "2025-03-31",
+      "value": 76.0,
+      "unit": "percent",
+      "caveats": "Denominator is resident persons, not resident households, total population, flat owners, or share of dwelling stock. FY2024 refers here to end-March 2025.",
+      "evidence_ids": [
+        "E053"
+      ]
+    },
+    {
+      "id": "farms-1959",
+      "section": 3,
+      "claim": "SFA reports 20,000 farms at Singapore’s attainment of self-government in 1959.",
+      "year": 1959,
+      "value": 20000,
+      "unit": "farms",
+      "caveats": "Historical total farms; not directly comparable with modern SFA licensed food-farm counts.",
+      "evidence_ids": [
+        "E054"
+      ]
+    },
+    {
+      "id": "farm-land-early-transition",
+      "section": 3,
+      "claim": "SFA describes farmland falling from about 14,000 hectares to about 8,400 hectares as the 1970s began.",
+      "year": "1960s–1970s",
+      "value": {
+        "earlier": 14000,
+        "later": 8400
+      },
+      "unit": "hectares",
+      "caveats": "Rounded historical periods, not an exact annual time series.",
+      "evidence_ids": [
+        "E055"
+      ]
+    },
+    {
+      "id": "agrotech-locations",
+      "section": 3,
+      "claim": "Agrotechnology parks were established in places including Lim Chu Kang, Mandai and Loyang.",
+      "year": "1980s",
+      "value": [
+        "Lim Chu Kang",
+        "Mandai",
+        "Loyang"
+      ],
+      "unit": null,
+      "evidence_ids": [
+        "E056"
+      ]
+    },
+    {
+      "id": "farmland-1980s-rounded",
+      "section": 3,
+      "claim": "CLC reports agricultural land of about 1,500 hectares by the 1980s.",
+      "year": "1980s",
+      "value": 1500,
+      "unit": "hectares",
+      "caveats": "Rounded decade figure; no precise year specified. It must not be plotted as 1980.",
+      "evidence_ids": [
+        "E057"
+      ]
+    },
+    {
+      "id": "farm-phase-out-1975-84",
+      "section": 4,
+      "claim": "CLC reports approximately 8,000 farms phased out between 1975 and 1984, leaving around 7,900 farms.",
+      "year": "1975–1984",
+      "value": {
+        "phased_out_approx": 8000,
+        "remaining_approx": 7900
+      },
+      "unit": "farms",
+      "caveats": "Historical counts and rounded totals; definitions differ from modern food-farm licensing.",
+      "evidence_ids": [
+        "E058"
+      ]
+    },
+    {
+      "id": "agrotech-1986-land-reservation",
+      "section": 2,
+      "claim": "CLC reports URA setting aside 3,555 hectares in 1986 for agrotechnology parks in six locations.",
+      "year": 1986,
+      "value": 3555,
+      "unit": "hectares",
+      "caveats": "Land reserved for parks is not the same as land occupied by farms. Locations: Lim Chu Kang, Murai, Sungai Tengah, Nee Soon, Loyang, Ah Ma Keng. Footnote 101 says reduction by 1999. Use for history, not a present boundary map.",
+      "evidence_ids": [
+        "E059"
+      ]
+    },
+    {
+      "id": "food-farm-categories-2021",
+      "section": 3,
+      "claim": "SFA licensed food-farm categories in 2021: sea-based seafood 110; land-based seafood 27; vegetables 113; hen shell eggs 3; others 7.",
+      "year": 2021,
+      "value": {
+        "sea_based_seafood": 110,
+        "land_based_seafood": 27,
+        "vegetables": 113,
+        "hen_shell_eggs": 3,
+        "others": 7,
+        "land_based_total_derived": 150,
+        "total_derived": 260
+      },
+      "unit": "licensed food farms",
+      "caveats": "Category bar labels visually checked. Others means cattle, goat and quail eggs. Land-based total and overall total are explicitly arithmetic sums, not directly printed totals.",
+      "evidence_ids": [
+        "E060"
+      ]
+    },
+    {
+      "id": "food-farm-categories-2022",
+      "section": 3,
+      "claim": "SFA licensed food-farm categories in 2022: sea-based seafood 109; land-based seafood 27; vegetables 111; hen shell eggs 3; others 7.",
+      "year": 2022,
+      "value": {
+        "sea_based_seafood": 109,
+        "land_based_seafood": 27,
+        "vegetables": 111,
+        "hen_shell_eggs": 3,
+        "others": 7,
+        "land_based_total_derived": 148,
+        "total_derived": 257
+      },
+      "unit": "licensed food farms",
+      "caveats": "Category bar labels visually checked. Others means cattle, goat and quail eggs. Land-based total and overall total are explicitly arithmetic sums, not directly printed totals.",
+      "evidence_ids": [
+        "E061"
+      ]
+    },
+    {
+      "id": "food-farm-categories-2023",
+      "section": 3,
+      "claim": "SFA licensed food-farm categories in 2023: sea-based seafood 98; land-based seafood 33; vegetables 115; hen shell eggs 3; others 5.",
+      "year": 2023,
+      "value": {
+        "sea_based_seafood": 98,
+        "land_based_seafood": 33,
+        "vegetables": 115,
+        "hen_shell_eggs": 3,
+        "others": 5,
+        "land_based_total_derived": 156,
+        "total_derived": 254
+      },
+      "unit": "licensed food farms",
+      "caveats": "Category bar labels visually checked. Others means cattle, goat and quail eggs. Land-based total and overall total are explicitly arithmetic sums, not directly printed totals.",
+      "evidence_ids": [
+        "E062"
+      ]
+    },
+    {
+      "id": "food-farms-2024",
+      "section": 3,
+      "claim": "In 2024 SFA reports 153 land-based food farms and 72 sea-based food farms.",
+      "year": 2024,
+      "value": {
+        "land_based": 153,
+        "sea_based": 72,
+        "total_derived": 225
+      },
+      "unit": "food farms",
+      "caveats": "225 is an arithmetic sum of the printed counts; excludes non-food farms. Not comparable without qualification to all-farms historical figures.",
+      "evidence_ids": [
+        "E063"
+      ]
+    },
+    {
+      "id": "local-food-shares-2024",
+      "section": 3,
+      "claim": "In 2024 local hen shell eggs, vegetables and seafood supplied around 34%, 3% and 6% of consumption of their respective food items.",
+      "year": 2024,
+      "value": {
+        "hen_shell_eggs": 34,
+        "vegetables": 3,
+        "seafood": 6
+      },
+      "unit": "percent of respective food-item consumption",
+      "caveats": "These are separate food-category shares, not percentages of all food and not a single overall self-sufficiency percentage.",
+      "evidence_ids": [
+        "E064"
+      ]
+    },
+    {
+      "id": "previous-30-by-30-target",
+      "section": 3,
+      "claim": "The previous “30 by 30” strategy sought capability and capacity to produce 30% of nutritional needs by 2030.",
+      "year": 2030,
+      "value": 30,
+      "unit": "percent of nutritional needs (former target)",
+      "caveats": "Historical target, superseded by Singapore Food Story 2. Do not present as current policy or as achieved output.",
+      "evidence_ids": [
+        "E065"
+      ]
+    },
+    {
+      "id": "food-story2-current-target",
+      "section": 3,
+      "claim": "Under the refreshed strategy announced in November 2025, Singapore targets local farm capability and capacity to supply 20% of fibre and 30% of protein consumed locally by 2035.",
+      "year": 2035,
+      "value": {
+        "fibre": 20,
+        "protein": 30
+      },
+      "unit": "percent of defined category consumption (target)",
+      "caveats": "The article specifies capability and capacity. These targets use narrower defined categories and a later horizon than former nutritional-needs 30by30 target.",
+      "evidence_ids": [
+        "E066"
+      ]
+    },
+    {
+      "id": "local-fibre-protein-2025",
+      "section": 3,
+      "claim": "In 2025 local production contributed about 8% of defined fibre consumption and 25% of defined protein consumption.",
+      "year": 2025,
+      "value": {
+        "fibre_approx": 8,
+        "protein": 25
+      },
+      "unit": "percent of defined category consumption",
+      "caveats": "Separate defined-category shares, not overall food self-sufficiency; protein here is eggs and seafood.",
+      "evidence_ids": [
+        "E067"
+      ]
+    },
+    {
+      "id": "food-story2-category-definitions",
+      "section": 3,
+      "claim": "For revised targets, fibre refers to fresh leafy and fruited vegetables, beansprouts and mushrooms; protein refers to eggs and seafood.",
+      "year": "2025",
+      "value": {
+        "fibre": [
+          "fresh leafy vegetables",
+          "fruited vegetables",
+          "beansprouts",
+          "mushrooms"
+        ],
+        "protein": [
+          "eggs",
+          "seafood"
+        ]
+      },
+      "unit": null,
+      "caveats": "Category names do not imply all nutritional fibre or all protein eaten; these are target definitions.",
+      "evidence_ids": [
+        "E068"
+      ]
+    },
+    {
+      "id": "mrt-network-length-1990",
+      "section": 3,
+      "claim": "At end-1990, the MRT network measured 67 km; all rail including LRT measured 67 km.",
+      "year": 1990,
+      "value": {
+        "mrt": 67.0,
+        "all_rail": 67.0,
+        "lrt": 0.0
+      },
+      "unit": "km",
+      "caveats": "Route/network length, not the train-kilometres operated metric. LRT is kept separate. LRT value here is a calculated difference, rounded to one decimal. End-year timing checked against LTA Rail Length 2024 table.",
+      "evidence_ids": [
+        "E069"
+      ]
+    },
+    {
+      "id": "mrt-network-length-1996",
+      "section": 3,
+      "claim": "At end-1996, the MRT network measured 83 km; all rail including LRT measured 83 km.",
+      "year": 1996,
+      "value": {
+        "mrt": 83.0,
+        "all_rail": 83.0,
+        "lrt": 0.0
+      },
+      "unit": "km",
+      "caveats": "Route/network length, not the train-kilometres operated metric. LRT is kept separate. LRT value here is a calculated difference, rounded to one decimal. End-year timing checked against LTA Rail Length 2024 table.",
+      "evidence_ids": [
+        "E070"
+      ]
+    },
+    {
+      "id": "mrt-network-length-2000",
+      "section": 3,
+      "claim": "At end-2000, the MRT network measured 83 km; all rail including LRT measured 90.8 km.",
+      "year": 2000,
+      "value": {
+        "mrt": 83.0,
+        "all_rail": 90.8,
+        "lrt": 7.8
+      },
+      "unit": "km",
+      "caveats": "Route/network length, not the train-kilometres operated metric. LRT is kept separate. LRT value here is a calculated difference, rounded to one decimal. End-year timing checked against LTA Rail Length 2024 table.",
+      "evidence_ids": [
+        "E071"
+      ]
+    },
+    {
+      "id": "mrt-network-length-2003",
+      "section": 3,
+      "claim": "At end-2003, the MRT network measured 109.4 km; all rail including LRT measured 127.9 km.",
+      "year": 2003,
+      "value": {
+        "mrt": 109.4,
+        "all_rail": 127.9,
+        "lrt": 18.5
+      },
+      "unit": "km",
+      "caveats": "Route/network length, not the train-kilometres operated metric. LRT is kept separate. LRT value here is a calculated difference, rounded to one decimal. End-year timing checked against LTA Rail Length 2024 table.",
+      "evidence_ids": [
+        "E072"
+      ]
+    },
+    {
+      "id": "mrt-network-length-2005",
+      "section": 3,
+      "claim": "At end-2005, the MRT network measured 109.4 km; all rail including LRT measured 138.2 km.",
+      "year": 2005,
+      "value": {
+        "mrt": 109.4,
+        "all_rail": 138.2,
+        "lrt": 28.8
+      },
+      "unit": "km",
+      "caveats": "Route/network length, not the train-kilometres operated metric. LRT is kept separate. LRT value here is a calculated difference, rounded to one decimal. End-year timing checked against LTA Rail Length 2024 table.",
+      "evidence_ids": [
+        "E073"
+      ]
+    },
+    {
+      "id": "mrt-network-length-2010",
+      "section": 3,
+      "claim": "At end-2010, the MRT network measured 129.9 km; all rail including LRT measured 158.7 km.",
+      "year": 2010,
+      "value": {
+        "mrt": 129.9,
+        "all_rail": 158.7,
+        "lrt": 28.8
+      },
+      "unit": "km",
+      "caveats": "Route/network length, not the train-kilometres operated metric. LRT is kept separate. LRT value here is a calculated difference, rounded to one decimal. End-year timing checked against LTA Rail Length 2024 table.",
+      "evidence_ids": [
+        "E074"
+      ]
+    },
+    {
+      "id": "mrt-network-length-2015",
+      "section": 3,
+      "claim": "At end-2015, the MRT network measured 170.8 km; all rail including LRT measured 199.6 km.",
+      "year": 2015,
+      "value": {
+        "mrt": 170.8,
+        "all_rail": 199.6,
+        "lrt": 28.8
+      },
+      "unit": "km",
+      "caveats": "Route/network length, not the train-kilometres operated metric. LRT is kept separate. LRT value here is a calculated difference, rounded to one decimal. End-year timing checked against LTA Rail Length 2024 table.",
+      "evidence_ids": [
+        "E075"
+      ]
+    },
+    {
+      "id": "mrt-network-length-2017",
+      "section": 3,
+      "claim": "At end-2017, the MRT network measured 199.3 km; all rail including LRT measured 228.1 km.",
+      "year": 2017,
+      "value": {
+        "mrt": 199.3,
+        "all_rail": 228.1,
+        "lrt": 28.8
+      },
+      "unit": "km",
+      "caveats": "Route/network length, not the train-kilometres operated metric. LRT is kept separate. LRT value here is a calculated difference, rounded to one decimal. End-year timing checked against LTA Rail Length 2024 table.",
+      "evidence_ids": [
+        "E076"
+      ]
+    },
+    {
+      "id": "mrt-network-length-2020",
+      "section": 3,
+      "claim": "At end-2020, the MRT network measured 203.5 km; all rail including LRT measured 232.3 km.",
+      "year": 2020,
+      "value": {
+        "mrt": 203.5,
+        "all_rail": 232.3,
+        "lrt": 28.8
+      },
+      "unit": "km",
+      "caveats": "Route/network length, not the train-kilometres operated metric. LRT is kept separate. LRT value here is a calculated difference, rounded to one decimal. End-year timing checked against LTA Rail Length 2024 table.",
+      "evidence_ids": [
+        "E077"
+      ]
+    },
+    {
+      "id": "mrt-network-length-2021",
+      "section": 3,
+      "claim": "At end-2021, the MRT network measured 216.5 km; all rail including LRT measured 245.3 km.",
+      "year": 2021,
+      "value": {
+        "mrt": 216.5,
+        "all_rail": 245.3,
+        "lrt": 28.8
+      },
+      "unit": "km",
+      "caveats": "Route/network length, not the train-kilometres operated metric. LRT is kept separate. LRT value here is a calculated difference, rounded to one decimal. End-year timing checked against LTA Rail Length 2024 table.",
+      "evidence_ids": [
+        "E078"
+      ]
+    },
+    {
+      "id": "mrt-network-length-2022",
+      "section": 3,
+      "claim": "At end-2022, the MRT network measured 229.7 km; all rail including LRT measured 258.5 km.",
+      "year": 2022,
+      "value": {
+        "mrt": 229.7,
+        "all_rail": 258.5,
+        "lrt": 28.8
+      },
+      "unit": "km",
+      "caveats": "Route/network length, not the train-kilometres operated metric. LRT is kept separate. LRT value here is a calculated difference, rounded to one decimal. End-year timing checked against LTA Rail Length 2024 table.",
+      "evidence_ids": [
+        "E079"
+      ]
+    },
+    {
+      "id": "mrt-network-length-2023",
+      "section": 3,
+      "claim": "At end-2023, the MRT network measured 229.7 km; all rail including LRT measured 258.5 km.",
+      "year": 2023,
+      "value": {
+        "mrt": 229.7,
+        "all_rail": 258.5,
+        "lrt": 28.8
+      },
+      "unit": "km",
+      "caveats": "Route/network length, not the train-kilometres operated metric. LRT is kept separate. LRT value here is a calculated difference, rounded to one decimal. End-year timing checked against LTA Rail Length 2024 table.",
+      "evidence_ids": [
+        "E080"
+      ]
+    },
+    {
+      "id": "mrt-network-length-2024",
+      "section": 3,
+      "claim": "At end-2024, the MRT network measured 242.5 km; all rail including LRT measured 271.3 km.",
+      "year": 2024,
+      "value": {
+        "mrt": 242.5,
+        "all_rail": 271.3,
+        "lrt": 28.8
+      },
+      "unit": "km",
+      "caveats": "Route/network length, not the train-kilometres operated metric. LRT is kept separate. LRT value here is a calculated difference, rounded to one decimal. End-year timing checked against LTA Rail Length 2024 table.",
+      "evidence_ids": [
+        "E081"
+      ]
+    },
+    {
+      "id": "mrt-first-service",
+      "section": 2,
+      "claim": "Singapore’s first MRT service began on 7 November 1987 between Toa Payoh and Yio Chu Kang.",
+      "year": "1987-11-07",
+      "value": 5,
+      "unit": "initial stations",
+      "caveats": "First passenger-service opening, distinct from official inauguration on 12 March 1988.",
+      "evidence_ids": [
+        "E082"
+      ]
+    },
+    {
+      "id": "ewl-original-complete",
+      "section": 2,
+      "claim": "The original East-West Line ending at Boon Lay was completed in 1990.",
+      "year": 1990,
+      "value": null,
+      "unit": null,
+      "caveats": "Completion of original line is not the first opening of any EWL station.",
+      "evidence_ids": [
+        "E083"
+      ]
+    },
+    {
+      "id": "ccl-first-stage-opening",
+      "section": 2,
+      "claim": "Circle Line Stage 3 from Bartley to Marymount opened on 28 May 2009.",
+      "year": "2009-05-28",
+      "value": null,
+      "unit": null,
+      "caveats": "First section opened was called Stage 3, not Stage 1.",
+      "evidence_ids": [
+        "E084"
+      ]
+    },
+    {
+      "id": "dtl-stage-1-opening",
+      "section": 2,
+      "claim": "Downtown Line Stage 1 opened on 22 December 2013.",
+      "year": "2013-12-22",
+      "value": null,
+      "unit": null,
+      "evidence_ids": [
+        "E085"
+      ]
+    },
+    {
+      "id": "dtl-stage-2-opening",
+      "section": 2,
+      "claim": "Downtown Line Stage 2 opened on 27 December 2015.",
+      "year": "2015-12-27",
+      "value": null,
+      "unit": null,
+      "evidence_ids": [
+        "E086"
+      ]
+    },
+    {
+      "id": "dtl-stage-3-opening",
+      "section": 2,
+      "claim": "Downtown Line Stage 3 opened on 21 October 2017.",
+      "year": "2017-10-21",
+      "value": null,
+      "unit": null,
+      "evidence_ids": [
+        "E087"
+      ]
+    },
+    {
+      "id": "tel-first-stage-opening",
+      "section": 2,
+      "claim": "Thomson-East Coast Line Stage 1 opened on 31 January 2020.",
+      "year": "2020-01-31",
+      "value": null,
+      "unit": null,
+      "evidence_ids": [
+        "E088"
+      ]
+    },
+    {
+      "id": "nel-opening-year",
+      "section": 2,
+      "claim": "North East Line opened for service in 2003.",
+      "year": 2003,
+      "value": null,
+      "unit": null,
+      "caveats": "Year verified here; do not invent exact date from this source.",
+      "evidence_ids": [
+        "E089"
+      ]
+    },
+    {
+      "id": "living-bhs-date",
+      "section": 4,
+      "claim": "The Bukit Ho Swee fire occurred on 25 May 1961.",
+      "evidence_ids": [
+        "E090"
+      ]
+    },
+    {
+      "id": "living-bhs-area",
+      "section": 4,
+      "claim": "The fire burned about 100 acres (0.4 square kilometres), including homes and workplaces.",
+      "evidence_ids": [
+        "E091"
+      ]
+    },
+    {
+      "id": "living-bhs-people",
+      "section": 4,
+      "claim": "About 16,000 people lost their homes and four people died.",
+      "evidence_ids": [
+        "E092"
+      ]
+    },
+    {
+      "id": "living-bhs-cause",
+      "section": 4,
+      "claim": "The cause of the fire remains unknown; do not assign a cause in the textbook.",
+      "evidence_ids": [
+        "E093"
+      ]
+    },
+    {
+      "id": "living-bhs-rehousing",
+      "section": 4,
+      "claim": "NLB records that all remaining affected families had been rehoused by February 1962.",
+      "evidence_ids": [
+        "E094"
+      ]
+    },
+    {
+      "id": "living-bhs-flats",
+      "section": 4,
+      "claim": "After acquisition of the fire site and adjacent land, HDB built 12,562 flats in the area by 1967, including one-room emergency flats.",
+      "evidence_ids": [
+        "E095"
+      ]
+    },
+    {
+      "id": "living-shophouses",
+      "section": 4,
+      "claim": "Around 1960, some families occupied small shophouse cubicles in buildings shared with other households.",
+      "evidence_ids": [
+        "E096"
+      ]
+    },
+    {
+      "id": "living-services",
+      "section": 4,
+      "claim": "Thousands lived in informal settlements lacking household piped water, reliable electricity and adequate sanitation/waste disposal. Do not generalise this to every kampong.",
+      "evidence_ids": [
+        "E097"
+      ]
+    },
+    {
+      "id": "living-hdb-design",
+      "section": 4,
+      "claim": "HDB responded to the housing shortage with high-rise construction, communal corridors and standardised layouts.",
+      "evidence_ids": [
+        "E098"
+      ]
+    },
+    {
+      "id": "living-bhs-fast-blocks",
+      "section": 4,
+      "claim": "NHB records five HDB blocks completed in nine months to house families displaced by the Bukit Ho Swee fire.",
+      "evidence_ids": [
+        "E099"
+      ]
+    },
+    {
+      "id": "living-hdb-amenities",
+      "section": 4,
+      "claim": "Housing estates incorporated neighbourhood amenities, including schools, clinics and libraries, alongside homes.",
+      "evidence_ids": [
+        "E100"
+      ]
+    },
+    {
+      "id": "living-adjustment",
+      "section": 4,
+      "claim": "For some residents, moving from kampong houses or shophouses to high-rise flats initially involved difficult adjustments.",
+      "evidence_ids": [
+        "E101"
+      ]
+    },
+    {
+      "id": "living-attap-material",
+      "section": 4,
+      "claim": "NHB describes traditional kampong houses with sloping roofs, often thatched with palm fronds, and raised floors that help ventilation and coping with wet ground.",
+      "evidence_ids": [
+        "E102"
+      ]
+    },
+    {
+      "id": "living-resettlement-personal",
+      "section": 4,
+      "claim": "Au Seck Ngee’s family described leaving their familiar kampong for their first flat as a major life change. They needed HDB help explaining English contracts.",
+      "evidence_type": "Named family testimony, not a statement about every resident",
+      "evidence_ids": [
+        "E103"
+      ]
+    },
+    {
+      "id": "living-kampong-community",
+      "section": 4,
+      "claim": "The Singapore Mandarin Database describes kampong neighbours as interacting frequently and caring for one another.",
+      "evidence_ids": [
+        "E104"
+      ]
+    },
+    {
+      "id": "town-queenstown-1953",
+      "section": 2,
+      "claim": "SIT planned Queenstown as Singapore’s first satellite town in 1953. This is a planning milestone, not a whole-town completion year.",
+      "event": "planned",
+      "year": 1953,
+      "evidence_ids": [
+        "E105"
+      ]
+    },
+    {
+      "id": "town-toapayoh-1964",
+      "section": 2,
+      "claim": "Toa Payoh land preparation took place in 1964, ahead of HDB’s second five-year building programme in 1965; HDB calls it its first comprehensively planned town.",
+      "event": "land preparation",
+      "year": 1964,
+      "evidence_ids": [
+        "E106"
+      ]
+    },
+    {
+      "id": "town-amk-1973",
+      "section": 2,
+      "claim": "Ang Mo Kio’s first slab blocks were built in 1973, within Neighbourhoods 2 and 3.",
+      "event": "first slab blocks built",
+      "year": 1973,
+      "evidence_ids": [
+        "E107"
+      ]
+    },
+    {
+      "id": "town-tampines-1979",
+      "section": 2,
+      "claim": "Construction of Tampines New Town began in 1979.",
+      "event": "construction began",
+      "year": 1979,
+      "evidence_ids": [
+        "E108"
+      ]
+    },
+    {
+      "id": "town-tengah-keys-2023",
+      "section": 2,
+      "claim": "The first Tengah residents collected keys at Plantation Acres and Plantation Grange in August 2023.",
+      "event": "first key collection",
+      "year": 2023,
+      "evidence_ids": [
+        "E109"
+      ]
+    },
+    {
+      "id": "town-tengah-projects-2023",
+      "section": 2,
+      "claim": "All residential blocks at Tengah’s first two BTO projects, Plantation Acres and Plantation Grange, were completed in December 2023.",
+      "event": "first two projects completed",
+      "year": 2023,
+      "evidence_ids": [
+        "E110"
+      ]
+    },
+    {
+      "id": "reservoir-upperpeirce-1975",
+      "section": 2,
+      "claim": "Upper Peirce Reservoir was completed in 1975 and officially opened on 27 February 1977.",
+      "event": "completion; official opening",
+      "years": [
+        1975,
+        1977
+      ],
+      "evidence_ids": [
+        "E111"
+      ]
+    },
+    {
+      "id": "reservoir-pandan-1974",
+      "section": 2,
+      "claim": "NHB dates formation of Pandan Reservoir by enclosing the estuary swamps with an earthen dyke to 1974. This differs from completion of the water scheme in 1975.",
+      "event": "reservoir formation",
+      "year": 1974,
+      "evidence_ids": [
+        "E112"
+      ]
+    },
+    {
+      "id": "reservoir-kranji-pandan-1975",
+      "section": 2,
+      "claim": "A 1979 ministerial speech identifies the Kranji–Pandan Water Scheme as completed in 1975. Use scheme completion rather than imposing a single reservoir construction year.",
+      "event": "water scheme completed",
+      "year": 1975,
+      "evidence_ids": [
+        "E113"
+      ]
+    },
+    {
+      "id": "reservoir-bedok-1986",
+      "section": 2,
+      "claim": "Bedok Reservoir was completed in 1986; its site had previously been a sand quarry. Reservoir conversion works began in 1983.",
+      "event": "completion",
+      "year": 1986,
+      "evidence_ids": [
+        "E114"
+      ]
+    },
+    {
+      "id": "reservoir-lowerseletar-1986",
+      "section": 2,
+      "claim": "PUB’s trail chronology dates the dam across the Seletar River mouth to 1986. The resulting Sungei Seletar Reservoir was renamed Lower Seletar Reservoir in 1992.",
+      "event": "dam construction; renaming",
+      "years": [
+        1986,
+        1992
+      ],
+      "evidence_ids": [
+        "E115"
+      ]
+    },
+    {
+      "id": "reservoir-marina-barrage-2008",
+      "section": 2,
+      "claim": "Marina Barrage opened in 2008.",
+      "event": "barrage opening",
+      "year": 2008,
+      "evidence_ids": [
+        "E116"
+      ]
+    },
+    {
+      "id": "reservoir-marina-2010",
+      "section": 2,
+      "claim": "Marina Reservoir was commissioned in 2010, distinct from the barrage’s opening in 2008.",
+      "event": "reservoir commissioning",
+      "year": 2010,
+      "evidence_ids": [
+        "E117"
+      ]
+    },
+    {
+      "id": "reservoir-punggol-serangoon-2011",
+      "section": 2,
+      "claim": "Punggol and Serangoon reservoirs were commissioned in 2011.",
+      "event": "reservoir commissioning",
+      "year": 2011,
+      "evidence_ids": [
+        "E118"
+      ]
+    },
+    {
+      "id": "term-landuse",
+      "section": 5,
+      "claim": "land use: 土地利用",
+      "english": "land use",
+      "chinese": "土地利用",
+      "note": "Source-attested Singapore usage; English gloss editorial where source is not an explicit bilingual entry",
+      "evidence_ids": [
+        "E119"
+      ]
+    },
+    {
+      "id": "term-landuse-zoning",
+      "section": 5,
+      "claim": "land use / land-use purpose: 土地用途",
+      "english": "land use / land-use purpose",
+      "chinese": "土地用途",
+      "note": "Singapore local Chinese attestation from news headline; retain distinction between use and zoning purpose in editorial translation",
+      "evidence_ids": [
+        "E120"
+      ]
+    },
+    {
+      "id": "term-hdb",
+      "section": 5,
+      "claim": "HDB flat / public housing flat: 组屋",
+      "english": "HDB flat / public housing flat",
+      "chinese": "组屋",
+      "note": "Official Singapore Mandarin entry; 组屋 denotes the flat, while HDB agency is 建屋发展局",
+      "evidence_ids": [
+        "E121"
+      ]
+    },
+    {
+      "id": "term-newtown",
+      "section": 5,
+      "claim": "new town: 新镇",
+      "english": "new town",
+      "chinese": "新镇",
+      "note": "Source-attested Singapore usage; English gloss editorial where source is not an explicit bilingual entry",
+      "evidence_ids": [
+        "E122"
+      ]
+    },
+    {
+      "id": "term-kampong",
+      "section": 5,
+      "claim": "kampong / kampung / village: 甘榜",
+      "english": "kampong / kampung / village",
+      "chinese": "甘榜",
+      "note": "Explicit official bilingual etymology; kampong is a village/community, not a synonym for poverty",
+      "evidence_ids": [
+        "E123"
+      ]
+    },
+    {
+      "id": "term-reclamation",
+      "section": 5,
+      "claim": "land reclamation: 填海",
+      "english": "land reclamation",
+      "chinese": "填海",
+      "note": "Source-attested Singapore usage; English gloss editorial where source is not an explicit bilingual entry",
+      "evidence_ids": [
+        "E124"
+      ]
+    },
+    {
+      "id": "term-farm",
+      "section": 5,
+      "claim": "farm: 农场",
+      "english": "farm",
+      "chinese": "农场",
+      "note": "Source-attested Singapore usage; English gloss editorial where source is not an explicit bilingual entry",
+      "evidence_ids": [
+        "E125"
+      ]
+    },
+    {
+      "id": "term-mrt",
+      "section": 5,
+      "claim": "Mass Rapid Transit (MRT): 地铁",
+      "english": "Mass Rapid Transit (MRT)",
+      "chinese": "地铁",
+      "note": "Explicit official bilingual legend; historical map is used only as terminology evidence",
+      "evidence_ids": [
+        "E126"
+      ]
+    },
+    {
+      "id": "term-lrt",
+      "section": 5,
+      "claim": "Light Rail Transit (LRT): 轻轨",
+      "english": "Light Rail Transit (LRT)",
+      "chinese": "轻轨",
+      "note": "Explicit official bilingual legend",
+      "evidence_ids": [
+        "E127"
+      ]
+    },
+    {
+      "id": "term-reservoir",
+      "section": 5,
+      "claim": "reservoir: 蓄水池",
+      "english": "reservoir",
+      "chinese": "蓄水池",
+      "note": "Official Singapore bilingual entry; use 蓄水池 in Singapore primary material, rather than automatically adopting regional 水库",
+      "evidence_ids": [
+        "E128"
+      ]
+    }
+  ],
+  "gaps": [
+    {
+      "id": "july-2024-syllabus",
+      "detail": "The current official MOE syllabus page links a PDF whose cover says January2024. The named July2024 URL is indexed but returned404 in direct download and a bot challenge in web access. July-specific wording and differences remain unverified.",
+      "url": "https://www.moe.gov.sg/-/media/files/syllabus/2020-social-studies-primary-teaching-and-learning-syllabus-updated-july-2024.pdf"
+    },
+    {
+      "id": "syllabus-verbatim-limit",
+      "detail": "Full verbatim outcome lists are not reproduced because quotations from one copyrighted source are limited. The inquiry question and two short syllabus extracts are verbatim; remaining outcomes/content are explicitly paraphrased with exact printed-page and PDF-page locators. The downloaded official PDF is retained in sources/moe-jan2024.pdf."
+    },
+    {
+      "id": "observed-historical-polygons",
+      "detail": "No complete licence-cleared observed land-use polygon series for1950s–1980s was verified. Master Plans are planning snapshots; archive access and academic publication do not establish open rights."
+    },
+    {
+      "id": "reclamation-decades",
+      "detail": "Published maps support selected dates/areas, not a complete verified decade-by-decade reclamation dataset. Glaser1991 full map pages were not accessible. Wong1992 is identified via Hesp1995; original chapter not inspected."
+    },
+    {
+      "id": "farm-boundaries",
+      "detail": "No open whole-island1960s kampong-farm boundary dataset was verified. The1986 government annexes locate agricultural land and proposed estate uses; their map reuse licence remains unverified."
+    },
+    {
+      "id": "farm-statistics",
+      "detail": "Historical farm area figures use rounded decades and different definitions. The2000 FAO value cites unrecovered AVA2004 statistics. Current food-farm licence counts exclude some non-food farming; no fully harmonised annual farm-area series was verified."
+    },
+    {
+      "id": "reservoir-inventory",
+      "detail": "Reservoir milestones here are selected verified examples, not a complete17-reservoir commissioning register. Western reservoir dates and earlier extension footprints need further primary-source checks. Current polygons must not be back-projected unchanged."
+    },
+    {
+      "id": "mrt-segment-register",
+      "detail": "First services and selected opening stages are verified; a complete station-to-station opening register including every extension to2026 is not assembled. A first line-opening date cannot activate all later segments."
+    },
+    {
+      "id": "town-completion",
+      "detail": "A whole new town does not have one defensible completion year. Use documented planning, first blocks, keys and project-completion events; current HDB stock also omits demolished buildings."
+    }
+  ]
+}

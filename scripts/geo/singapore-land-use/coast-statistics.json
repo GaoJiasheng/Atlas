@@ -1,0 +1,1517 @@
+[
+  {
+    "era": "L6",
+    "id": "LM01_L1TP_134059_19731017_02_T2",
+    "date": "1973-10-17",
+    "bands": "B4/B7 TOA reflectance",
+    "index": "NDWI",
+    "threshold": 0.014658153057098389,
+    "pixel_m": 60.0,
+    "scene_cloud_pct": 2.0,
+    "island_cloud_shadow_pct": 1.4743043691376414,
+    "unchanged_samples": 435,
+    "unchanged_p50_m": 42.46886971749604,
+    "unchanged_p95_m": 168.9414481823464,
+    "minus_km2": 153.54267474490675,
+    "plus_km2": 0.0,
+    "land_km2": 602.9867290149589,
+    "pieces": [
+      {
+        "kind": "minus",
+        "piece": 1,
+        "km2": 37.403,
+        "centroid": [
+          103.62925,
+          1.26742
+        ],
+        "project": "Candidate Tuas \u2014 [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 2,
+        "km2": 30.88,
+        "centroid": [
+          104.00213,
+          1.33989
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 3,
+        "km2": 24.9788,
+        "centroid": [
+          104.05831,
+          1.38059
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 4,
+        "km2": 19.3894,
+        "centroid": [
+          103.6777,
+          1.2591
+        ],
+        "project": "Candidate Jurong Island \u2014 [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 5,
+        "km2": 6.1306,
+        "centroid": [
+          104.02673,
+          1.42776
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 6,
+        "km2": 6.0915,
+        "centroid": [
+          103.86625,
+          1.28138
+        ],
+        "project": "Candidate Marina Bay \u2014 [URA Marina Bay, History and beginnings; 1971\u20131994 reclamation](https://www.ura.gov.sg/land-planning/shaping-our-city/marina-bay/); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 7,
+        "km2": 5.62,
+        "centroid": [
+          103.7728,
+          1.27533
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 8,
+        "km2": 3.3242,
+        "centroid": [
+          103.77098,
+          1.19901
+        ],
+        "project": "Candidate Semakau \u2014 [NEA, Celebrating20years, paragraph4 and AnnexA; 1999/2015](https://www.nea.gov.sg/media/news/news/index/celebrating-20-years-of-semakau-landfill); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 9,
+        "km2": 3.1062,
+        "centroid": [
+          103.88495,
+          1.42273
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 10,
+        "km2": 2.9344,
+        "centroid": [
+          103.92874,
+          1.39875
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 11,
+        "km2": 2.5544,
+        "centroid": [
+          103.71908,
+          1.27329
+        ],
+        "project": "Candidate Jurong Island \u2014 [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 12,
+        "km2": 2.1152,
+        "centroid": [
+          103.9937,
+          1.40926
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 13,
+        "km2": 1.8316,
+        "centroid": [
+          103.71867,
+          1.20728
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 14,
+        "km2": 1.1023,
+        "centroid": [
+          103.75147,
+          1.23283
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 15,
+        "km2": 0.9049,
+        "centroid": [
+          103.86653,
+          1.4429
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 16,
+        "km2": 0.8148,
+        "centroid": [
+          103.71812,
+          1.28968
+        ],
+        "project": "Candidate Jurong Island \u2014 [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 17,
+        "km2": 0.5377,
+        "centroid": [
+          103.8432,
+          1.24959
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 18,
+        "km2": 0.5057,
+        "centroid": [
+          103.74749,
+          1.44253
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 19,
+        "km2": 0.4689,
+        "centroid": [
+          103.85092,
+          1.24143
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 20,
+        "km2": 0.4056,
+        "centroid": [
+          103.76905,
+          1.23227
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 21,
+        "km2": 0.404,
+        "centroid": [
+          103.85266,
+          1.22996
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 22,
+        "km2": 0.2934,
+        "centroid": [
+          103.83818,
+          1.25998
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 23,
+        "km2": 0.2928,
+        "centroid": [
+          103.85395,
+          1.45558
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 24,
+        "km2": 0.2881,
+        "centroid": [
+          103.63718,
+          1.35017
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 25,
+        "km2": 0.2819,
+        "centroid": [
+          103.67695,
+          1.30033
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 26,
+        "km2": 0.2612,
+        "centroid": [
+          103.66984,
+          1.2931
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 27,
+        "km2": 0.1727,
+        "centroid": [
+          103.63631,
+          1.34116
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 28,
+        "km2": 0.1313,
+        "centroid": [
+          103.95464,
+          1.38115
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 29,
+        "km2": 0.109,
+        "centroid": [
+          103.79924,
+          1.20275
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 30,
+        "km2": 0.1063,
+        "centroid": [
+          103.65171,
+          1.30193
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 31,
+        "km2": 0.1026,
+        "centroid": [
+          103.838,
+          1.24042
+        ],
+        "project": "unmatched"
+      }
+    ]
+  },
+  {
+    "era": "L7",
+    "id": "LM02_L1TP_134059_19791031_02_T2",
+    "date": "1979-10-31",
+    "bands": "B4/B7 TOA reflectance",
+    "index": "NDWI",
+    "threshold": 0.17528599500656128,
+    "pixel_m": 60.0,
+    "scene_cloud_pct": 20.0,
+    "island_cloud_shadow_pct": 7.008894366900963,
+    "unchanged_samples": 477,
+    "unchanged_p50_m": 47.60169335233513,
+    "unchanged_p95_m": 214.3759148110022,
+    "minus_km2": 124.619976361926,
+    "plus_km2": 0.0,
+    "land_km2": 631.9094273979371,
+    "pieces": [
+      {
+        "kind": "minus",
+        "piece": 1,
+        "km2": 35.7391,
+        "centroid": [
+          103.62892,
+          1.26443
+        ],
+        "project": "Candidate Tuas \u2014 [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 2,
+        "km2": 21.9472,
+        "centroid": [
+          104.01032,
+          1.33744
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 3,
+        "km2": 21.0579,
+        "centroid": [
+          104.0547,
+          1.37771
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 4,
+        "km2": 18.9568,
+        "centroid": [
+          103.67744,
+          1.2584
+        ],
+        "project": "Candidate Jurong Island \u2014 [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 5,
+        "km2": 5.6019,
+        "centroid": [
+          104.02498,
+          1.42742
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 6,
+        "km2": 3.3417,
+        "centroid": [
+          103.7712,
+          1.19913
+        ],
+        "project": "Candidate Semakau \u2014 [NEA, Celebrating20years, paragraph4 and AnnexA; 1999/2015](https://www.nea.gov.sg/media/news/news/index/celebrating-20-years-of-semakau-landfill); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 7,
+        "km2": 2.7088,
+        "centroid": [
+          103.76611,
+          1.27812
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 8,
+        "km2": 2.6132,
+        "centroid": [
+          103.88398,
+          1.42296
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 9,
+        "km2": 2.4277,
+        "centroid": [
+          103.93065,
+          1.39553
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 10,
+        "km2": 2.0449,
+        "centroid": [
+          103.87068,
+          1.28267
+        ],
+        "project": "Candidate Marina Bay \u2014 [URA Marina Bay, History and beginnings; 1971\u20131994 reclamation](https://www.ura.gov.sg/land-planning/shaping-our-city/marina-bay/); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 11,
+        "km2": 1.7026,
+        "centroid": [
+          103.78657,
+          1.26439
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 12,
+        "km2": 1.2187,
+        "centroid": [
+          103.99759,
+          1.40933
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 13,
+        "km2": 1.0588,
+        "centroid": [
+          103.72441,
+          1.26916
+        ],
+        "project": "Candidate Jurong Island \u2014 [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 14,
+        "km2": 0.9981,
+        "centroid": [
+          103.75307,
+          1.23139
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 15,
+        "km2": 0.8638,
+        "centroid": [
+          103.86631,
+          1.4437
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 16,
+        "km2": 0.4815,
+        "centroid": [
+          104.00391,
+          1.37518
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 17,
+        "km2": 0.4689,
+        "centroid": [
+          103.85092,
+          1.24143
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 18,
+        "km2": 0.2713,
+        "centroid": [
+          103.71645,
+          1.29113
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 19,
+        "km2": 0.2705,
+        "centroid": [
+          103.84209,
+          1.26746
+        ],
+        "project": "Candidate Marina Bay \u2014 [URA Marina Bay, History and beginnings; 1971\u20131994 reclamation](https://www.ura.gov.sg/land-planning/shaping-our-city/marina-bay/); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 20,
+        "km2": 0.1629,
+        "centroid": [
+          103.84079,
+          1.2506
+        ],
+        "project": "Candidate Marina Bay \u2014 [URA Marina Bay, History and beginnings; 1971\u20131994 reclamation](https://www.ura.gov.sg/land-planning/shaping-our-city/marina-bay/); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 21,
+        "km2": 0.1244,
+        "centroid": [
+          103.69436,
+          1.28892
+        ],
+        "project": "Candidate Jurong Island \u2014 [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 22,
+        "km2": 0.1232,
+        "centroid": [
+          103.70263,
+          1.28696
+        ],
+        "project": "Candidate Jurong Island \u2014 [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 23,
+        "km2": 0.1231,
+        "centroid": [
+          103.74693,
+          1.44326
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 24,
+        "km2": 0.1087,
+        "centroid": [
+          103.83768,
+          1.24027
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 25,
+        "km2": 0.1022,
+        "centroid": [
+          103.75723,
+          1.44166
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 26,
+        "km2": 0.102,
+        "centroid": [
+          103.8562,
+          1.45507
+        ],
+        "project": "unmatched"
+      }
+    ]
+  },
+  {
+    "era": "L8",
+    "id": "LT05_L2SP_125059_19910428_02_T1",
+    "date": "1991-04-28",
+    "bands": "SR_B2/SR_B5 surface reflectance",
+    "index": "MNDWI",
+    "threshold": 0.22265625,
+    "pixel_m": 30.0,
+    "scene_cloud_pct": 11.0,
+    "island_cloud_shadow_pct": 4.0733444677601245,
+    "unchanged_samples": 412,
+    "unchanged_p50_m": 24.20282276070793,
+    "unchanged_p95_m": 157.5825183623089,
+    "minus_km2": 108.39494472351966,
+    "plus_km2": 0.0,
+    "land_km2": 648.1344590363439,
+    "pieces": [
+      {
+        "kind": "minus",
+        "piece": 1,
+        "km2": 23.7714,
+        "centroid": [
+          103.62714,
+          1.24881
+        ],
+        "project": "Candidate Tuas \u2014 [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 2,
+        "km2": 20.5248,
+        "centroid": [
+          104.05598,
+          1.37686
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 3,
+        "km2": 19.1302,
+        "centroid": [
+          104.01249,
+          1.33819
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 4,
+        "km2": 17.7318,
+        "centroid": [
+          103.67612,
+          1.25849
+        ],
+        "project": "Candidate Jurong Island \u2014 [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 5,
+        "km2": 7.1037,
+        "centroid": [
+          104.02748,
+          1.42723
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 6,
+        "km2": 3.9577,
+        "centroid": [
+          103.77382,
+          1.2724
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 7,
+        "km2": 3.5889,
+        "centroid": [
+          103.77112,
+          1.19948
+        ],
+        "project": "Candidate Semakau \u2014 [NEA, Celebrating20years, paragraph4 and AnnexA; 1999/2015](https://www.nea.gov.sg/media/news/news/index/celebrating-20-years-of-semakau-landfill); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 8,
+        "km2": 2.5348,
+        "centroid": [
+          103.71899,
+          1.2763
+        ],
+        "project": "Candidate Jurong Island \u2014 [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 9,
+        "km2": 2.1694,
+        "centroid": [
+          103.99345,
+          1.40935
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 10,
+        "km2": 2.0607,
+        "centroid": [
+          103.64138,
+          1.30278
+        ],
+        "project": "Candidate Tuas \u2014 [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 11,
+        "km2": 0.8054,
+        "centroid": [
+          103.86606,
+          1.4436
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 12,
+        "km2": 0.584,
+        "centroid": [
+          103.74709,
+          1.44251
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 13,
+        "km2": 0.5225,
+        "centroid": [
+          103.7563,
+          1.44155
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 14,
+        "km2": 0.4689,
+        "centroid": [
+          103.85092,
+          1.24143
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 15,
+        "km2": 0.3713,
+        "centroid": [
+          103.85312,
+          1.45571
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 16,
+        "km2": 0.3699,
+        "centroid": [
+          103.85585,
+          1.26845
+        ],
+        "project": "Candidate Marina Bay \u2014 [URA Marina Bay, History and beginnings; 1971\u20131994 reclamation](https://www.ura.gov.sg/land-planning/shaping-our-city/marina-bay/); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 17,
+        "km2": 0.3104,
+        "centroid": [
+          103.94037,
+          1.39199
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 18,
+        "km2": 0.3061,
+        "centroid": [
+          103.75226,
+          1.23111
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 19,
+        "km2": 0.2753,
+        "centroid": [
+          103.76471,
+          1.28977
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 20,
+        "km2": 0.2695,
+        "centroid": [
+          103.71264,
+          1.29729
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 21,
+        "km2": 0.2396,
+        "centroid": [
+          103.93533,
+          1.39824
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 22,
+        "km2": 0.1983,
+        "centroid": [
+          103.62927,
+          1.33084
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 23,
+        "km2": 0.1773,
+        "centroid": [
+          103.83696,
+          1.24043
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 24,
+        "km2": 0.1747,
+        "centroid": [
+          103.84478,
+          1.25098
+        ],
+        "project": "Candidate Marina Bay \u2014 [URA Marina Bay, History and beginnings; 1971\u20131994 reclamation](https://www.ura.gov.sg/land-planning/shaping-our-city/marina-bay/); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 25,
+        "km2": 0.1596,
+        "centroid": [
+          103.63569,
+          1.349
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 26,
+        "km2": 0.1418,
+        "centroid": [
+          103.6942,
+          1.28894
+        ],
+        "project": "Candidate Jurong Island \u2014 [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 27,
+        "km2": 0.1269,
+        "centroid": [
+          103.73676,
+          1.27161
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 28,
+        "km2": 0.1094,
+        "centroid": [
+          103.84414,
+          1.46109
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 29,
+        "km2": 0.1085,
+        "centroid": [
+          103.86334,
+          1.43207
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 30,
+        "km2": 0.1021,
+        "centroid": [
+          103.62232,
+          1.31618
+        ],
+        "project": "Candidate Tuas \u2014 [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      }
+    ]
+  },
+  {
+    "era": "L9",
+    "id": "LE07_L2SP_125059_20021011_02_T1",
+    "date": "2002-10-11",
+    "bands": "SR_B2/SR_B5 surface reflectance",
+    "index": "MNDWI",
+    "threshold": 0.1215713620185852,
+    "pixel_m": 30.0,
+    "scene_cloud_pct": 54.0,
+    "island_cloud_shadow_pct": 4.796011591223788,
+    "unchanged_samples": 422,
+    "unchanged_p50_m": 19.186407968227286,
+    "unchanged_p95_m": 113.63506256598563,
+    "minus_km2": 49.95702208283746,
+    "plus_km2": 0.0,
+    "land_km2": 706.5723816770295,
+    "pieces": [
+      {
+        "kind": "minus",
+        "piece": 1,
+        "km2": 17.6295,
+        "centroid": [
+          104.05522,
+          1.37579
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 2,
+        "km2": 4.362,
+        "centroid": [
+          104.03266,
+          1.43161
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 3,
+        "km2": 4.2671,
+        "centroid": [
+          103.63612,
+          1.21756
+        ],
+        "project": "Candidate Tuas \u2014 [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 4,
+        "km2": 2.5286,
+        "centroid": [
+          103.63103,
+          1.25004
+        ],
+        "project": "Candidate Tuas \u2014 [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 5,
+        "km2": 2.2556,
+        "centroid": [
+          103.99315,
+          1.40927
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 6,
+        "km2": 2.1083,
+        "centroid": [
+          103.61314,
+          1.26686
+        ],
+        "project": "Candidate Tuas \u2014 [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 7,
+        "km2": 2.0854,
+        "centroid": [
+          103.63961,
+          1.2337
+        ],
+        "project": "Candidate Tuas \u2014 [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 8,
+        "km2": 1.9057,
+        "centroid": [
+          103.67339,
+          1.24281
+        ],
+        "project": "Candidate Jurong Island \u2014 [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 9,
+        "km2": 1.6162,
+        "centroid": [
+          103.78608,
+          1.26413
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 10,
+        "km2": 1.0934,
+        "centroid": [
+          103.76766,
+          1.19559
+        ],
+        "project": "Candidate Semakau \u2014 [NEA, Celebrating20years, paragraph4 and AnnexA; 1999/2015](https://www.nea.gov.sg/media/news/news/index/celebrating-20-years-of-semakau-landfill); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 11,
+        "km2": 1.0486,
+        "centroid": [
+          103.63607,
+          1.26401
+        ],
+        "project": "Candidate Tuas \u2014 [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 12,
+        "km2": 1.0065,
+        "centroid": [
+          103.64248,
+          1.30689
+        ],
+        "project": "Candidate Tuas \u2014 [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 13,
+        "km2": 0.8712,
+        "centroid": [
+          103.866,
+          1.44368
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 14,
+        "km2": 0.761,
+        "centroid": [
+          103.62583,
+          1.3237
+        ],
+        "project": "Candidate Tuas \u2014 [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 15,
+        "km2": 0.7581,
+        "centroid": [
+          104.01887,
+          1.41199
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 16,
+        "km2": 0.5951,
+        "centroid": [
+          103.74723,
+          1.44242
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 17,
+        "km2": 0.5818,
+        "centroid": [
+          103.72875,
+          1.2658
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 18,
+        "km2": 0.5445,
+        "centroid": [
+          103.7563,
+          1.4416
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 19,
+        "km2": 0.4689,
+        "centroid": [
+          103.85092,
+          1.24143
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 20,
+        "km2": 0.4346,
+        "centroid": [
+          103.68652,
+          1.23913
+        ],
+        "project": "Candidate Jurong Island \u2014 [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 21,
+        "km2": 0.3994,
+        "centroid": [
+          103.70461,
+          1.28306
+        ],
+        "project": "Candidate Jurong Island \u2014 [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 22,
+        "km2": 0.3941,
+        "centroid": [
+          103.8559,
+          1.26844
+        ],
+        "project": "Candidate Marina Bay \u2014 [URA Marina Bay, History and beginnings; 1971\u20131994 reclamation](https://www.ura.gov.sg/land-planning/shaping-our-city/marina-bay/); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 23,
+        "km2": 0.3758,
+        "centroid": [
+          103.85311,
+          1.4557
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 24,
+        "km2": 0.3647,
+        "centroid": [
+          104.01156,
+          1.31208
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 25,
+        "km2": 0.3114,
+        "centroid": [
+          103.75227,
+          1.23116
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 26,
+        "km2": 0.2825,
+        "centroid": [
+          103.65635,
+          1.27272
+        ],
+        "project": "Candidate Jurong Island \u2014 [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 27,
+        "km2": 0.2772,
+        "centroid": [
+          103.69275,
+          1.25779
+        ],
+        "project": "Candidate Jurong Island \u2014 [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 28,
+        "km2": 0.258,
+        "centroid": [
+          103.94047,
+          1.39237
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 29,
+        "km2": 0.1373,
+        "centroid": [
+          103.84405,
+          1.46128
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 30,
+        "km2": 0.1186,
+        "centroid": [
+          103.60814,
+          1.22136
+        ],
+        "project": "Candidate Tuas \u2014 [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 31,
+        "km2": 0.116,
+        "centroid": [
+          103.86325,
+          1.43198
+        ],
+        "project": "unmatched"
+      }
+    ]
+  },
+  {
+    "era": "L10",
+    "id": "LT05_L2SP_125059_20110214_02_T1",
+    "date": "2011-02-14",
+    "bands": "SR_B2/SR_B5 surface reflectance",
+    "index": "MNDWI",
+    "threshold": 0.16941148042678833,
+    "pixel_m": 30.0,
+    "scene_cloud_pct": 26.0,
+    "island_cloud_shadow_pct": 22.551258808806665,
+    "unchanged_samples": 392,
+    "unchanged_p50_m": 26.53447586321272,
+    "unchanged_p95_m": 266.0375137492773,
+    "minus_km2": 27.08517701350613,
+    "plus_km2": 0.0,
+    "land_km2": 729.4442267463583,
+    "pieces": [
+      {
+        "kind": "minus",
+        "piece": 1,
+        "km2": 5.1781,
+        "centroid": [
+          104.06968,
+          1.36045
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 2,
+        "km2": 3.6132,
+        "centroid": [
+          103.63611,
+          1.21812
+        ],
+        "project": "Candidate Tuas \u2014 [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 3,
+        "km2": 2.9289,
+        "centroid": [
+          103.63414,
+          1.23365
+        ],
+        "project": "Candidate Tuas \u2014 [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 4,
+        "km2": 2.5461,
+        "centroid": [
+          103.63006,
+          1.24973
+        ],
+        "project": "Candidate Tuas \u2014 [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 5,
+        "km2": 2.5073,
+        "centroid": [
+          104.03351,
+          1.38926
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 6,
+        "km2": 1.9196,
+        "centroid": [
+          103.61044,
+          1.23104
+        ],
+        "project": "Candidate Tuas \u2014 [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 7,
+        "km2": 1.4846,
+        "centroid": [
+          103.65992,
+          1.25913
+        ],
+        "project": "Candidate Jurong Island \u2014 [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 8,
+        "km2": 0.886,
+        "centroid": [
+          103.64223,
+          1.30653
+        ],
+        "project": "Candidate Tuas \u2014 [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 9,
+        "km2": 0.7691,
+        "centroid": [
+          103.63674,
+          1.26362
+        ],
+        "project": "Candidate Tuas \u2014 [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 10,
+        "km2": 0.7528,
+        "centroid": [
+          103.62581,
+          1.32371
+        ],
+        "project": "Candidate Tuas \u2014 [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 11,
+        "km2": 0.6013,
+        "centroid": [
+          103.76622,
+          1.19583
+        ],
+        "project": "Candidate Semakau \u2014 [NEA, Celebrating20years, paragraph4 and AnnexA; 1999/2015](https://www.nea.gov.sg/media/news/news/index/celebrating-20-years-of-semakau-landfill); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 12,
+        "km2": 0.5358,
+        "centroid": [
+          103.74694,
+          1.44282
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 13,
+        "km2": 0.4499,
+        "centroid": [
+          103.7289,
+          1.26578
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 14,
+        "km2": 0.4358,
+        "centroid": [
+          103.78794,
+          1.26249
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 15,
+        "km2": 0.3978,
+        "centroid": [
+          103.61072,
+          1.26199
+        ],
+        "project": "Candidate Tuas \u2014 [JTC Dream Factories; broad development history](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 16,
+        "km2": 0.3509,
+        "centroid": [
+          103.99376,
+          1.41609
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 17,
+        "km2": 0.3221,
+        "centroid": [
+          103.84967,
+          1.24162
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 18,
+        "km2": 0.3219,
+        "centroid": [
+          103.86898,
+          1.43811
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 19,
+        "km2": 0.2798,
+        "centroid": [
+          103.70382,
+          1.28462
+        ],
+        "project": "Candidate Jurong Island \u2014 [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 20,
+        "km2": 0.2009,
+        "centroid": [
+          103.85445,
+          1.26875
+        ],
+        "project": "Candidate Marina Bay \u2014 [URA Marina Bay, History and beginnings; 1971\u20131994 reclamation](https://www.ura.gov.sg/land-planning/shaping-our-city/marina-bay/); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 21,
+        "km2": 0.1813,
+        "centroid": [
+          103.86105,
+          1.45076
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 22,
+        "km2": 0.1624,
+        "centroid": [
+          103.69341,
+          1.2551
+        ],
+        "project": "Candidate Jurong Island \u2014 [JTC Dream Factories; seven-island reclamation/opening](https://www.jtc.gov.sg/about-jtc/dream-factories); not a dated footprint match"
+      },
+      {
+        "kind": "minus",
+        "piece": 23,
+        "km2": 0.1482,
+        "centroid": [
+          103.85535,
+          1.45423
+        ],
+        "project": "unmatched"
+      },
+      {
+        "kind": "minus",
+        "piece": 24,
+        "km2": 0.1113,
+        "centroid": [
+          103.86332,
+          1.43203
+        ],
+        "project": "unmatched"
+      }
+    ]
+  }
+]

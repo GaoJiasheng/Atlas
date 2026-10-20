@@ -1,0 +1,874 @@
+[
+  {
+    "name": "Master Plan 2019 Land Use layer",
+    "url": "https://data.gov.sg/datasets/d_90d86daa5bfaa371668b84fa5f01424f/view",
+    "licence": "Singapore Open Data Licence v1.0; source attribution and link to current licence required.",
+    "licence_url": "https://developers.data.gov.sg/open-data-licence",
+    "licence_text": "Free forever for personal or commercial use, under the Open Data Licence.",
+    "format": "GeoJSON; polygon; download shown 166.1 MB",
+    "years": "MP2019; catalogue Data from Dec 2019",
+    "use": "Compare permissible zoning categories, including housing, industry, parks and waterbodies; source geometry for static Atlas build.",
+    "fields": [
+      "LU_DESC",
+      "LU_TEXT",
+      "GPR"
+    ],
+    "notes": "Plan approved 18 Nov 2019 per catalogue. Not a surveyed actual-use time series.",
+    "status": "open reuse with attribution",
+    "evidence": [
+      {
+        "title": "Master Plan 2019 Land Use layer",
+        "publisher": "Urban Redevelopment Authority / data.gov.sg",
+        "url": "https://data.gov.sg/datasets/d_90d86daa5bfaa371668b84fa5f01424f/view",
+        "page": "unpaginated: description, coverage, download, attribute legend and About this dataset / Licence",
+        "access_date": "2026-10-20",
+        "quotation": "Indicative land use polygon layer."
+      },
+      {
+        "title": "Open data licence",
+        "publisher": "Open Government Products / data.gov.sg",
+        "url": "https://developers.data.gov.sg/open-data-licence",
+        "page": "unpaginated: Acceptance and grant of Licence",
+        "access_date": "2026-10-20",
+        "quotation": "The Agency grants you a worldwide, perpetual, royalty-free, non-exclusive licence to Use the datasets, subject to the terms of this Licence."
+      }
+    ],
+    "id": "D01"
+  },
+  {
+    "name": "Master Plan 2014 Land Use",
+    "url": "https://data.gov.sg/datasets/d_6c3e60b98c170edc47024795330c1353/view",
+    "licence": "Singapore Open Data Licence v1.0; source attribution and link to current licence required.",
+    "licence_url": "https://developers.data.gov.sg/open-data-licence",
+    "licence_text": "Free forever for personal or commercial use, under the Open Data Licence.",
+    "format": "GeoJSON; polygon; download shown 150.2 MB",
+    "years": "MP2014; catalogue Data from Jun 2014",
+    "use": "Compare permissible zoning with MP2019, retaining edition label.",
+    "fields": [
+      "LU_DESC",
+      "LU_TEXT",
+      "GPR"
+    ],
+    "notes": "Do not infer that a zoned land parcel had already changed physical use.",
+    "status": "open reuse with attribution",
+    "evidence": [
+      {
+        "title": "Master Plan 2014 Land Use",
+        "publisher": "Urban Redevelopment Authority / data.gov.sg",
+        "url": "https://data.gov.sg/datasets/d_6c3e60b98c170edc47024795330c1353/view",
+        "page": "unpaginated: description, coverage, download, attribute legend and About this dataset / Licence",
+        "access_date": "2026-10-20",
+        "quotation": "Indicative polygon of each development land parcel"
+      },
+      {
+        "title": "Open data licence",
+        "publisher": "Open Government Products / data.gov.sg",
+        "url": "https://developers.data.gov.sg/open-data-licence",
+        "page": "unpaginated: Acceptance and grant of Licence",
+        "access_date": "2026-10-20",
+        "quotation": "The Agency grants you a worldwide, perpetual, royalty-free, non-exclusive licence to Use the datasets, subject to the terms of this Licence."
+      }
+    ],
+    "id": "D02"
+  },
+  {
+    "name": "MP08 Land Use",
+    "url": "https://data.gov.sg/datasets/d_7ea297b9bf38956bd553638e5db042cd/view",
+    "licence": "Singapore Open Data Licence v1.0; source attribution and link to current licence required.",
+    "licence_url": "https://developers.data.gov.sg/open-data-licence",
+    "licence_text": "Free forever for personal or commercial use, under the Open Data Licence.",
+    "format": "GeoJSON; polygon; download shown 135.8 MB",
+    "years": "MP2008; catalogue Data from Jun 2012",
+    "use": "Earlier land-use zoning geometry; explicitly label MP2008 edition / June2012 dataset coverage.",
+    "fields": [
+      "LU_DESC",
+      "LU_TEXT",
+      "GPR"
+    ],
+    "notes": "Legacy https://data.gov.sg/dataset/mp08-land-use redirects to collection1752 and returned Dataset not found; canonical dataset URL works. Coverage date is not 2008.",
+    "status": "open reuse with attribution",
+    "evidence": [
+      {
+        "title": "MP08 Land Use",
+        "publisher": "Urban Redevelopment Authority / data.gov.sg",
+        "url": "https://data.gov.sg/datasets/d_7ea297b9bf38956bd553638e5db042cd/view",
+        "page": "unpaginated: description, coverage, download, attribute legend and About this dataset / Licence",
+        "access_date": "2026-10-20",
+        "quotation": "Indicative polygon of land use zoning boundary"
+      },
+      {
+        "title": "Open data licence",
+        "publisher": "Open Government Products / data.gov.sg",
+        "url": "https://developers.data.gov.sg/open-data-licence",
+        "page": "unpaginated: Acceptance and grant of Licence",
+        "access_date": "2026-10-20",
+        "quotation": "The Agency grants you a worldwide, perpetual, royalty-free, non-exclusive licence to Use the datasets, subject to the terms of this Licence."
+      }
+    ],
+    "id": "D03"
+  },
+  {
+    "name": "Master Plan 2003 Land Use",
+    "url": "https://data.gov.sg/datasets/d_78c9a05019ea8594a657c192bddcd2d6/view",
+    "licence": "Singapore Open Data Licence v1.0; source attribution and link to current licence required.",
+    "licence_url": "https://developers.data.gov.sg/open-data-licence",
+    "licence_text": "Free forever for personal or commercial use, under the Open Data Licence.",
+    "format": "GeoJSON; polygon; download shown 126.8 MB",
+    "years": "MP2003; catalogue Data from Apr 2017",
+    "use": "Earlier planning layer; retain both edition and catalogue coverage date rather than silently assigning every polygon to 2003.",
+    "fields": [
+      "LU_DESC",
+      "LU_TEXT",
+      "GPR"
+    ],
+    "notes": "Catalogue coverage Apr2017 is inconsistent with a naive 2003 snapshot interpretation; validate lineage and amendments before animation.",
+    "status": "open reuse with attribution",
+    "evidence": [
+      {
+        "title": "Master Plan 2003 Land Use",
+        "publisher": "Urban Redevelopment Authority / data.gov.sg",
+        "url": "https://data.gov.sg/datasets/d_78c9a05019ea8594a657c192bddcd2d6/view",
+        "page": "unpaginated: description, coverage, download, attribute legend and About this dataset / Licence",
+        "access_date": "2026-10-20",
+        "quotation": "Indicative polygon of each development land parcel"
+      },
+      {
+        "title": "Open data licence",
+        "publisher": "Open Government Products / data.gov.sg",
+        "url": "https://developers.data.gov.sg/open-data-licence",
+        "page": "unpaginated: Acceptance and grant of Licence",
+        "access_date": "2026-10-20",
+        "quotation": "The Agency grants you a worldwide, perpetual, royalty-free, non-exclusive licence to Use the datasets, subject to the terms of this Licence."
+      }
+    ],
+    "id": "D04"
+  },
+  {
+    "name": "HDB Property Information",
+    "url": "https://data.gov.sg/datasets/d_17f5382f26140b1fdae0ba2ef6239d2f/view",
+    "licence": "Singapore Open Data Licence v1.0; source attribution and link to current licence required.",
+    "licence_url": "https://developers.data.gov.sg/open-data-licence",
+    "licence_text": "Free forever for personal or commercial use, under the Open Data Licence.",
+    "format": "CSV; 24 columns; catalogue approximately13.4K rows,939.3KB",
+    "years": "Catalogue Jan1937–Dec2025; updated8Oct2026",
+    "use": "Completion-year attribute for surviving/current-listed blocks; town grouping and unit counts.",
+    "fields": [
+      "blk_no",
+      "street",
+      "year_completed",
+      "bldg_contract_town",
+      "total_dwelling_units"
+    ],
+    "notes": "No coordinates or postal-code column in the24-column schema. Completion_year is per building, not a town completion date. Current stock cannot reconstruct demolished blocks.",
+    "status": "open reuse with attribution",
+    "evidence": [
+      {
+        "title": "HDB Property Information",
+        "publisher": "Housing & Development Board / data.gov.sg",
+        "url": "https://data.gov.sg/datasets/d_17f5382f26140b1fdae0ba2ef6239d2f/view",
+        "page": "unpaginated: description, coverage, download, attribute legend and About this dataset / Licence",
+        "access_date": "2026-10-20",
+        "quotation": "Year Completed"
+      },
+      {
+        "title": "Open data licence",
+        "publisher": "Open Government Products / data.gov.sg",
+        "url": "https://developers.data.gov.sg/open-data-licence",
+        "page": "unpaginated: Acceptance and grant of Licence",
+        "access_date": "2026-10-20",
+        "quotation": "The Agency grants you a worldwide, perpetual, royalty-free, non-exclusive licence to Use the datasets, subject to the terms of this Licence."
+      }
+    ],
+    "id": "D05"
+  },
+  {
+    "name": "HDB Existing Building",
+    "url": "https://data.gov.sg/datasets/d_16b157c52ed637edd6ba1232e026258d/view",
+    "licence": "Singapore Open Data Licence v1.0; source attribution and link to current licence required.",
+    "licence_url": "https://developers.data.gov.sg/open-data-licence",
+    "licence_text": "Free forever for personal or commercial use, under the Open Data Licence.",
+    "format": "GeoJSON; polygons;54.4MB",
+    "years": "Catalogue Data from Nov2025; updated21Jun2026",
+    "use": "Current HDB building footprints. Candidate join to Property Information via block plus validated street-code/address conversion.",
+    "fields": [
+      "BLK_NO",
+      "ST_COD",
+      "ENTITYID",
+      "POSTAL_COD"
+    ],
+    "notes": "Preview includes BLK_NO,ST_COD,ENTITYID,POSTAL_COD but no completion-year field. A block number alone is not a unique Singapore-wide join key.",
+    "status": "open reuse with attribution",
+    "evidence": [
+      {
+        "title": "HDB Existing Building",
+        "publisher": "Housing & Development Board / data.gov.sg",
+        "url": "https://data.gov.sg/datasets/d_16b157c52ed637edd6ba1232e026258d/view",
+        "page": "unpaginated: description, coverage, download, attribute legend and About this dataset / Licence",
+        "access_date": "2026-10-20",
+        "quotation": "HDB Existing Buildings."
+      },
+      {
+        "title": "Open data licence",
+        "publisher": "Open Government Products / data.gov.sg",
+        "url": "https://developers.data.gov.sg/open-data-licence",
+        "page": "unpaginated: Acceptance and grant of Licence",
+        "access_date": "2026-10-20",
+        "quotation": "The Agency grants you a worldwide, perpetual, royalty-free, non-exclusive licence to Use the datasets, subject to the terms of this Licence."
+      }
+    ],
+    "id": "D06"
+  },
+  {
+    "name": "Master Plan 2019 Planning Area Boundary (No Sea)",
+    "url": "https://data.gov.sg/datasets/d_4765db0e87b9c86336792efe8a1f7a66/view",
+    "licence": "Singapore Open Data Licence v1.0; source attribution and link to current licence required.",
+    "licence_url": "https://developers.data.gov.sg/open-data-licence",
+    "licence_text": "Free forever for personal or commercial use, under the Open Data Licence.",
+    "format": "GeoJSON; polygons;2MB",
+    "years": "MP2019; Data from Dec2019",
+    "use": "Planning-area labels and island-scale geometry already used by Atlas. Can aggregate building counts spatially; do not equate planning areas with HDB towns.",
+    "fields": [
+      "PLN_AREA_N",
+      "PLN_AREA_C",
+      "REGION_N"
+    ],
+    "notes": "Publisher says planning boundaries may not coincide with existing developments. This is a present baseline, not historic town boundaries.",
+    "status": "open reuse with attribution",
+    "evidence": [
+      {
+        "title": "Master Plan 2019 Planning Area Boundary (No Sea)",
+        "publisher": "Urban Redevelopment Authority / data.gov.sg",
+        "url": "https://data.gov.sg/datasets/d_4765db0e87b9c86336792efe8a1f7a66/view",
+        "page": "unpaginated: description, coverage, download, attribute legend and About this dataset / Licence",
+        "access_date": "2026-10-20",
+        "quotation": "Indicative polygon of planning area boundary."
+      },
+      {
+        "title": "Open data licence",
+        "publisher": "Open Government Products / data.gov.sg",
+        "url": "https://developers.data.gov.sg/open-data-licence",
+        "page": "unpaginated: Acceptance and grant of Licence",
+        "access_date": "2026-10-20",
+        "quotation": "The Agency grants you a worldwide, perpetual, royalty-free, non-exclusive licence to Use the datasets, subject to the terms of this Licence."
+      }
+    ],
+    "id": "D07"
+  },
+  {
+    "name": "Master Plan 2019 Rail Line layer",
+    "url": "https://data.gov.sg/datasets/d_222bfc84eb86c7c11994d02f8939da8d/view",
+    "licence": "Singapore Open Data Licence v1.0; source attribution and link to current licence required.",
+    "licence_url": "https://developers.data.gov.sg/open-data-licence",
+    "licence_text": "Free forever for personal or commercial use, under the Open Data Licence.",
+    "format": "GeoJSON;LineString;22.2MB",
+    "years": "MP2019;Data from Dec2019",
+    "use": "Real railway/MRT/LRT geometry; segment and join to independently sourced LTA opening dates for animation.",
+    "fields": [
+      "GRND_LEVEL",
+      "RAIL_TYPE"
+    ],
+    "notes": "No opening-date field in listed attributes. Planning layer may include future lines; do not show every feature as operating in2019.",
+    "status": "open reuse with attribution",
+    "evidence": [
+      {
+        "title": "Master Plan 2019 Rail Line layer",
+        "publisher": "Urban Redevelopment Authority / data.gov.sg",
+        "url": "https://data.gov.sg/datasets/d_222bfc84eb86c7c11994d02f8939da8d/view",
+        "page": "unpaginated: description, coverage, download, attribute legend and About this dataset / Licence",
+        "access_date": "2026-10-20",
+        "quotation": "Indicative line of MRT, LRT and Railway network layer."
+      },
+      {
+        "title": "Open data licence",
+        "publisher": "Open Government Products / data.gov.sg",
+        "url": "https://developers.data.gov.sg/open-data-licence",
+        "page": "unpaginated: Acceptance and grant of Licence",
+        "access_date": "2026-10-20",
+        "quotation": "The Agency grants you a worldwide, perpetual, royalty-free, non-exclusive licence to Use the datasets, subject to the terms of this Licence."
+      },
+      {
+        "title": "Master Plan 2019 Rail Line layer",
+        "publisher": "Urban Redevelopment Authority / data.gov.sg",
+        "url": "https://data.gov.sg/datasets/d_222bfc84eb86c7c11994d02f8939da8d/view",
+        "page": "Description, attribute legend, Licence",
+        "access_date": "2026-10-20",
+        "quotation": "Indicative line of MRT, LRT and Railway network layer."
+      }
+    ],
+    "additional_use_notes": "Indicative MRT/LRT/railway alignment; GRND_LEVEL and RAIL_TYPE. Does not contain segment opening dates or prove lines were operational in2019; join real segment opening evidence, and supplement post2019 alignments from later official datasets.",
+    "id": "D08"
+  },
+  {
+    "name": "SLA Cadastral Land Parcel",
+    "url": "https://data.gov.sg/datasets/d_e7395d743076a2bcc487b0d12b9bf33b/view",
+    "licence": "Singapore Open Data Licence v1.0; source attribution and link to current licence required.",
+    "licence_url": "https://developers.data.gov.sg/open-data-licence",
+    "licence_text": "Free forever for personal or commercial use, under the Open Data Licence.",
+    "format": "GeoJSON;polygons;138.1MB",
+    "years": "Data from Nov2025;updated19Oct2026;weekly",
+    "use": "Join official farm-tender lot identifiers to actual parcel geometry where precise lot matches exist.",
+    "fields": [
+      "LOT_KEY"
+    ],
+    "notes": "Present surveyed parcels; no historical occupation/farming dates. SFA lot IDs must match exactly and partial/adjoining lots need caution.",
+    "status": "open reuse with attribution",
+    "evidence": [
+      {
+        "title": "SLA Cadastral Land Parcel",
+        "publisher": "Singapore Land Authority / data.gov.sg",
+        "url": "https://data.gov.sg/datasets/d_e7395d743076a2bcc487b0d12b9bf33b/view",
+        "page": "unpaginated: description, coverage, download, attribute legend and About this dataset / Licence",
+        "access_date": "2026-10-20",
+        "quotation": "It depicts the entire cadastral map of Singapore."
+      },
+      {
+        "title": "Open data licence",
+        "publisher": "Open Government Products / data.gov.sg",
+        "url": "https://developers.data.gov.sg/open-data-licence",
+        "page": "unpaginated: Acceptance and grant of Licence",
+        "access_date": "2026-10-20",
+        "quotation": "The Agency grants you a worldwide, perpetual, royalty-free, non-exclusive licence to Use the datasets, subject to the terms of this Licence."
+      }
+    ],
+    "id": "D09"
+  },
+  {
+    "name": "SLA OneMap Search / address geocoding",
+    "url": "https://www.onemap.gov.sg/apidocs/search",
+    "licence": "OneMap datasets: Singapore Open Data Licence v1.0; API access separately subject to API Terms of Service.",
+    "licence_url": "https://www.onemap.gov.sg/legal/opendatalicence.html",
+    "licence_text": "Use of the datasets is governed by the Singapore Open Data Licence.",
+    "format": "REST API; JSON address results with latitude/longitude and X/Y",
+    "years": "Current/live address data; not a historical address gazetteer",
+    "use": "Build-time geocoding of HDB block+street addresses and control-point lookup. Freeze verified results for Atlas static assets.",
+    "notes": "Search now requires a valid API token in Authorization header. Follow API limits/credentials; no runtime Atlas requests. General terms do not establish that each third-party themed layer is automatically reusable.",
+    "status": "open dataset terms; authenticated API access",
+    "evidence": [
+      {
+        "title": "Search",
+        "publisher": "Singapore Land Authority / OneMap",
+        "url": "https://www.onemap.gov.sg/apidocs/search",
+        "page": "unpaginated: description and Sample Response",
+        "access_date": "2026-10-20",
+        "quotation": "It returns address information including both latitude, longitude, and x, y coordinates"
+      },
+      {
+        "title": "Verifying Search API Token Implementation",
+        "publisher": "Singapore Land Authority / OneMap",
+        "url": "https://www.onemap.gov.sg/apidocs/docs/verifyingsearchapitoken",
+        "page": "unpaginated: opening paragraph",
+        "access_date": "2026-10-20",
+        "quotation": "Search API requests must include a valid API token in the Authorization header."
+      },
+      {
+        "title": "API Terms of Service",
+        "publisher": "Singapore Land Authority / OneMap",
+        "url": "https://www.onemap.gov.sg/legal/apitermsofservice.html",
+        "page": "unpaginated: Acceptance of API Terms of Service",
+        "access_date": "2026-10-20",
+        "quotation": "Use of the datasets is governed by the Singapore Open Data Licence."
+      }
+    ],
+    "id": "D10"
+  },
+  {
+    "name": "Map of Singapore from The State of Singapore (BIS,1959)",
+    "url": "https://commons.wikimedia.org/wiki/File:Map_of_Singapore_from_The_State_of_Singapore_(BIS,_1959).jpg",
+    "licence": "Public domain: Commons PD-UKGov, publication before1976; stated expiry worldwide.",
+    "licence_text": "This work created by the United Kingdom Government is in the public domain.",
+    "format": "JPEG3176×1994",
+    "years": "Published April1959",
+    "use": "Whole-island historical shoreline/settlement reference; georeference actual map before tracing.",
+    "notes": "Composite of two printed pages, so inspect seam and scale before using for accurate geometry.",
+    "status": "public-domain declaration verified on file page",
+    "evidence": [
+      {
+        "title": "Map of Singapore from The State of Singapore (BIS,1959)",
+        "publisher": "British Information Services; Wikimedia Commons",
+        "url": "https://commons.wikimedia.org/wiki/File:Map_of_Singapore_from_The_State_of_Singapore_(BIS,_1959).jpg",
+        "page": "unpaginated: Summary and Licensing (or NAS Conditions Governing Access)",
+        "access_date": "2026-10-20",
+        "quotation": "This work created by the United Kingdom Government is in the public domain."
+      }
+    ],
+    "id": "D11"
+  },
+  {
+    "name": "Admiralty Chart No2014 Eastern Approaches to Selat Jurong,Published1966",
+    "url": "https://commons.wikimedia.org/wiki/File:Admiralty_Chart_No_2014_Eastern_Approaches_to_Selat_Jurong,_Published_1966.jpg",
+    "licence": "Public domain: Commons PD-UKGov, publication before1976; stated expiry worldwide.",
+    "licence_text": "This work created by the United Kingdom Government is in the public domain.",
+    "format": "JPEG8545×11143;1:12000",
+    "years": "Survey1961;published29Apr1966",
+    "use": "Detailed southwest/Jurong historical shoreline, matches existing L5 source family.",
+    "notes": "Survey year and publication year differ. Not whole-island land-use coverage.",
+    "status": "public-domain declaration verified on file page",
+    "evidence": [
+      {
+        "title": "Admiralty Chart No2014 Eastern Approaches to Selat Jurong,Published1966",
+        "publisher": "United Kingdom Hydrographic Office; Wikimedia Commons",
+        "url": "https://commons.wikimedia.org/wiki/File:Admiralty_Chart_No_2014_Eastern_Approaches_to_Selat_Jurong,_Published_1966.jpg",
+        "page": "unpaginated: Summary and Licensing (or NAS Conditions Governing Access)",
+        "access_date": "2026-10-20",
+        "quotation": "This work created by the United Kingdom Government is in the public domain."
+      }
+    ],
+    "id": "D12"
+  },
+  {
+    "name": "Admiralty Chart No2587 Western Portion of Johore Strait,Published1966",
+    "url": "https://commons.wikimedia.org/wiki/File:Admiralty_Chart_No_2587_Western_Portion_of_Johore_Strait,_Published_1966.jpg",
+    "licence": "Public domain: Commons PD-UKGov, publication before1976; stated expiry worldwide.",
+    "licence_text": "This work created by the United Kingdom Government is in the public domain.",
+    "format": "JPEG11171×16275;1:25000",
+    "years": "1922 survey; south of Tg.Karang surveyed1960–61;published29Apr1966",
+    "use": "Northwest/west historical coast; detailed confirmation of1960s pre-reclamation features.",
+    "notes": "Mixed survey dates need local annotation. Commons bounding-box N/S metadata appears inverted; derive georeferencing from map, not copy it blindly.",
+    "status": "public-domain declaration verified on file page",
+    "evidence": [
+      {
+        "title": "Admiralty Chart No2587 Western Portion of Johore Strait,Published1966",
+        "publisher": "United Kingdom Hydrographic Office; Wikimedia Commons",
+        "url": "https://commons.wikimedia.org/wiki/File:Admiralty_Chart_No_2587_Western_Portion_of_Johore_Strait,_Published_1966.jpg",
+        "page": "unpaginated: Summary and Licensing (or NAS Conditions Governing Access)",
+        "access_date": "2026-10-20",
+        "quotation": "This work created by the United Kingdom Government is in the public domain."
+      }
+    ],
+    "id": "D13"
+  },
+  {
+    "name": "TPC L-10C Indonesia;Malaysia;Singapore,compiled1984",
+    "url": "https://commons.wikimedia.org/wiki/File:TPC_L-10C_Indonesia;_Malaysia;_Singapore_U.S._Defense_Mapping_Agency_Aerospace_Center,_compiled_1984_-_PCL_Map_Collection_-_txu-pclmaps-oclc-22834566_l-10c.jpg",
+    "licence": "Public domain in United States: Commons PD-USGov-Military.",
+    "licence_text": "As a work of the U.S. federal government, the file is in the public domain in the United States.",
+    "format": "JPEG9076×6725;1:500000",
+    "years": "Compiled1984",
+    "use": "Regional/island historical coast cross-check for1980s; too coarse for individual farms or HDB blocks.",
+    "notes": "Actual published chart, not a modern reconstruction. Verify chart marginal compilation/revision dates when downloaded.",
+    "status": "public-domain declaration verified on file page",
+    "evidence": [
+      {
+        "title": "TPC L-10C Indonesia;Malaysia;Singapore,compiled1984",
+        "publisher": "U.S.Defense Mapping Agency Aerospace Center; Wikimedia Commons / University of Texas",
+        "url": "https://commons.wikimedia.org/wiki/File:TPC_L-10C_Indonesia;_Malaysia;_Singapore_U.S._Defense_Mapping_Agency_Aerospace_Center,_compiled_1984_-_PCL_Map_Collection_-_txu-pclmaps-oclc-22834566_l-10c.jpg",
+        "page": "unpaginated: Summary and Licensing (or NAS Conditions Governing Access)",
+        "access_date": "2026-10-20",
+        "quotation": "As a work of the U.S. federal government, the file is in the public domain in the United States."
+      }
+    ],
+    "id": "D14"
+  },
+  {
+    "name": "Map of Singapore City in1951",
+    "url": "https://commons.wikimedia.org/wiki/File:Map_of_Singapore_City_in_1951.png",
+    "licence": "Public domain claimed on Commons; uploader cites Malaysian government-work expiry. Singapore/worldwide status not independently resolved.",
+    "licence_text": "This work is in the public domain in its country of origin",
+    "format": "PNG2623×3603",
+    "years": "1951",
+    "use": "City street/settlement cross-check.",
+    "notes": "Weaker rights provenance than UKHO examples: generic PD-old tag plus uploader legal explanation. Treat as review candidate, not cleared Atlas geometry.",
+    "status": "review needed: uploader public-domain assertion; jurisdiction/provenance not independently resolved",
+    "evidence": [
+      {
+        "title": "Map of Singapore City in1951",
+        "publisher": "Survey Department Federation of Malaya; Wikimedia Commons",
+        "url": "https://commons.wikimedia.org/wiki/File:Map_of_Singapore_City_in_1951.png",
+        "page": "unpaginated: Summary and Licensing (or NAS Conditions Governing Access)",
+        "access_date": "2026-10-20",
+        "quotation": "This work is in the public domain in its country of origin"
+      }
+    ],
+    "id": "D15"
+  },
+  {
+    "name": "Singapore And Johore Bahru (NAS SP001097)",
+    "url": "https://www.nas.gov.sg/archivesonline/maps_building_plans/record-details/f8d34cab-115c-11e3-83d5-0050568939ad",
+    "licence": "NAS conditions: permission required; not an open licence.",
+    "licence_text": "Viewing permitted. Use and reproduction only with permission.",
+    "format": "Raster archive viewer / copy request;GSGS4203sheet3L/12fifth edition",
+    "years": "1950",
+    "use": "Detailed agricultural land-use record: rubber/coconut/oil-palm,pineapple,mixed cultivation,villages,reservoirs.",
+    "notes": "Do not infer open reuse merely because original government map is old; seek matching independently cleared scan or permission.",
+    "status": "permission required / reference only",
+    "evidence": [
+      {
+        "title": "Singapore And Johore Bahru (NAS SP001097)",
+        "publisher": "War Office,GSGS,London;NAS",
+        "url": "https://www.nas.gov.sg/archivesonline/maps_building_plans/record-details/f8d34cab-115c-11e3-83d5-0050568939ad",
+        "page": "unpaginated: Summary and Licensing (or NAS Conditions Governing Access)",
+        "access_date": "2026-10-20",
+        "quotation": "Viewing permitted. Use and reproduction only with permission."
+      }
+    ],
+    "id": "D16"
+  },
+  {
+    "name": "1958 Master Plan:Town Map Sheet1/228/248 (NAS SP001199)",
+    "url": "https://www.nas.gov.sg/archivesonline/maps_building_plans/record-details/dd8a6529-115c-11e3-83d5-0050568939ad",
+    "licence": "NAS conditions: URA permission required; not an open licence.",
+    "licence_text": "Viewing permitted. Use and reproduction require written permission from copyright owner.",
+    "format": "Raster archive viewer/copy request",
+    "years": "1Apr1958",
+    "use": "Pasir Panjang/Alexandra planned land uses,housing,industry,open space.",
+    "notes": "Record says seek URA permission. Part of71-map set SP001158–SP001212_1. Planning rather than observed-use map.",
+    "status": "permission required / reference only",
+    "evidence": [
+      {
+        "title": "1958 Master Plan:Town Map Sheet1/228/248 (NAS SP001199)",
+        "publisher": "Ministry of National Development;NAS",
+        "url": "https://www.nas.gov.sg/archivesonline/maps_building_plans/record-details/dd8a6529-115c-11e3-83d5-0050568939ad",
+        "page": "unpaginated: Summary and Licensing (or NAS Conditions Governing Access)",
+        "access_date": "2026-10-20",
+        "quotation": "Viewing permitted. Use and reproduction require written permission from copyright owner."
+      }
+    ],
+    "id": "D17"
+  },
+  {
+    "name": "1980 Master Plan:Island Map Sheet4/6 (NAS SP000334)",
+    "url": "https://www.nas.gov.sg/archivesonline/maps_building_plans/record-details/f9167ecb-115c-11e3-83d5-0050568939ad",
+    "licence": "NAS conditions: URA permission required; not an open licence.",
+    "licence_text": "Viewing permitted. Use and reproduction require written permission from copyright owner.",
+    "format": "Raster archive viewer/copy request",
+    "years": "1980",
+    "use": "Woodlands/Sembawang/PulauSeletar:rural zones,settlements,residential areas,roads.",
+    "notes": "Part of14-sheet set SP000328–SP000341. Useful evidence, not cleared published geometry.",
+    "status": "permission required / reference only",
+    "evidence": [
+      {
+        "title": "1980 Master Plan:Island Map Sheet4/6 (NAS SP000334)",
+        "publisher": "Planning Department,MND;NAS",
+        "url": "https://www.nas.gov.sg/archivesonline/maps_building_plans/record-details/f9167ecb-115c-11e3-83d5-0050568939ad",
+        "page": "unpaginated: Summary and Licensing (or NAS Conditions Governing Access)",
+        "access_date": "2026-10-20",
+        "quotation": "Viewing permitted. Use and reproduction require written permission from copyright owner."
+      }
+    ],
+    "id": "D18"
+  },
+  {
+    "name": "Master Plan1985:Town Map46 (NAS SP000683)",
+    "url": "https://www.nas.gov.sg/archivesonline/maps_building_plans/record-details/f8d158c9-115c-11e3-83d5-0050568939ad",
+    "licence": "NAS conditions: URA permission required; not an open licence.",
+    "licence_text": "Viewing permitted. Use and reproduction require written permission from copyright owner.",
+    "format": "Raster archive viewer/copy request",
+    "years": "1985",
+    "use": "Housing/industry/open-space zoning and MRT route/station planning.",
+    "notes": "Distinguish planned route from open service. Record says seek permission from URA.",
+    "status": "permission required / reference only",
+    "evidence": [
+      {
+        "title": "Master Plan1985:Town Map46 (NAS SP000683)",
+        "publisher": "Chief Surveyor;Planning Department,MND;NAS",
+        "url": "https://www.nas.gov.sg/archivesonline/maps_building_plans/record-details/f8d158c9-115c-11e3-83d5-0050568939ad",
+        "page": "unpaginated: Summary and Licensing (or NAS Conditions Governing Access)",
+        "access_date": "2026-10-20",
+        "quotation": "Viewing permitted. Use and reproduction require written permission from copyright owner."
+      }
+    ],
+    "id": "D19"
+  },
+  {
+    "name": "Singapore Topographical Map (NAS TM001081)",
+    "url": "https://www.nas.gov.sg/archivesonline/maps_building_plans/record-details/fb66894d-115c-11e3-83d5-0050568939ad",
+    "licence": "Government Copyright;NAS permission required.",
+    "licence_text": "Viewing permitted. Use and reproduction only with permission.",
+    "format": "Raster archive viewer/copy request;SMU075Edition4",
+    "years": "1987",
+    "use": "Island land use,new towns,catchments,reclaimed lands,MRT,reservoirs,areas under development.",
+    "notes": "Not verified open reuse. Strong factual cross-check for1980s.",
+    "status": "permission required / reference only",
+    "evidence": [
+      {
+        "title": "Singapore Topographical Map (NAS TM001081)",
+        "publisher": "Mapping Branch,Ministry of Defence;SLA;NAS",
+        "url": "https://www.nas.gov.sg/archivesonline/maps_building_plans/record-details/fb66894d-115c-11e3-83d5-0050568939ad",
+        "page": "unpaginated: Summary and Licensing (or NAS Conditions Governing Access)",
+        "access_date": "2026-10-20",
+        "quotation": "Viewing permitted. Use and reproduction only with permission."
+      }
+    ],
+    "id": "D20"
+  },
+  {
+    "name": "Land reclamation in Singapore,Hong Kong and Macau (Glaser,Haberzettl,Walsh1991)",
+    "url": "https://link.springer.com/article/10.1007/BF00578258",
+    "licence": "No open licence shown;subscription article with Reprints and permissions link.",
+    "licence_text": "This is a preview of subscription content, to check access.",
+    "format": "Journal article;PDF behind publisher purchase/institution access",
+    "years": "1991 study;abstract distinguishes pre1900,1900–45,1945–80,1980–1991",
+    "use": "Published source lead for reclamation chronology; do not trace map until full article, figure page and reuse rights obtained.",
+    "status": "bibliographic/abstract verified;full-map inspection unavailable",
+    "evidence": [
+      {
+        "title": "Land reclamation in Singapore,Hong Kong and Macau",
+        "publisher": "GeoJournal / Springer",
+        "url": "https://link.springer.com/article/10.1007/BF00578258",
+        "page": "pp365–373;publisher abstract and Access this article",
+        "access_date": "2026-10-20",
+        "quotation": "Four phases of land reclamation are identified"
+      }
+    ],
+    "notes": "Exact DOI10.1007/BF00578258. Publisher confirms authors and pages; this research did not inspect full article map or infer figure number.",
+    "id": "D21"
+  },
+  {
+    "name": "Hesp1995 foreshore reclamation map after Wong1992",
+    "url": "https://databases.eucc-d.de/files/documents/00000447_C1.135-144.pdf",
+    "licence": "Copyright EUCC;Opulus Press Uppsala. No open licence found.",
+    "licence_text": "© EUCC; Opulus Press Uppsala. Printed in Sweden",
+    "format": "10-page PDF;printed pp135–144;Fig1 on p136",
+    "years": "Historic reclamation periods to early1990s;Fig4 southern-island reclamation to1984",
+    "use": "Published map evidence for dating reclamation sites;Fig1 identifies agencies/time ranges, but future reclamation is separately marked. Reference/cross-check pending rights.",
+    "status": "readable published map;not verified open reuse",
+    "evidence": [
+      {
+        "title": "The Environmental Impact Assessment process in Singapore with particular respect to coastal environments and the role of NGOs",
+        "publisher": "Journal of Coastal Conservation / EUCC;Opulus Press",
+        "url": "https://databases.eucc-d.de/files/documents/00000447_C1.135-144.pdf",
+        "page": "printed p136,Fig1;copyright p135",
+        "access_date": "2026-10-20",
+        "quotation": "A map of Singapore illustrating the major areas of foreshore reclamation (after Wong 1992)."
+      }
+    ],
+    "notes": "Reference list p144 cites Wong,P.P.1992,'The newly reclaimed land',Physical Adjustments in a Changing Landscape,pp243–258,Singapore University Press. Original Wong chapter not directly inspected. Fig4 caption printed p141. Preserve future-versus-completed distinction.",
+    "id": "D22"
+  },
+  {
+    "name": "Land From Sand:Singapore’s Reclamation Story",
+    "url": "https://biblioasia.nlb.gov.sg/all-sections/vol-13-issue-1-apr-jun-2017-land-from-sand/",
+    "licence": "No open dataset/map licence shown. Embedded imagery has individual credits, including all-rights-reserved images.",
+    "licence_text": "No open reuse licence verified;check individual map/image rights before copying or tracing.",
+    "format": "HTML narrative and embedded raster map;BiblioAsia2017Vol13Issue1 pp16–23",
+    "years": "1822–2017 narrative;map includes possible future reclamation to2030",
+    "use": "Chronology for reclamation episodes and uses;historical-to-future map is an overview, not decade-separated GIS polygons.",
+    "status": "reference/cross-check;map rights not cleared",
+    "evidence": [
+      {
+        "title": "Land From Sand:Singapore’s Reclamation Story",
+        "publisher": "Lim Tin Seng / National Library Board,BiblioAsia",
+        "url": "https://biblioasia.nlb.gov.sg/all-sections/vol-13-issue-1-apr-jun-2017-land-from-sand/",
+        "page": "unpaginated:map caption following New Lands for Infrastructure and Recreation:MPA",
+        "access_date": "2026-10-20",
+        "quotation": "The areas in red show possible plans for future reclamation"
+      }
+    ],
+    "notes": "Map credits https://blogs.ntu.edu.sg/hp331-2014-10/?page_id=7. Do not portray red future plans as reclaimed land. Narrative dates and areas can support factual text after source-specific fact extraction.",
+    "id": "D23"
+  },
+  {
+    "name": "SFA Licensed Land Based Farms",
+    "url": "https://www.sfa.gov.sg/docs/default-source/food-farming/licensed-land-based-farms.pdf",
+    "licence": "No open data/reuse licence verified on PDF or linked SFA page.",
+    "licence_text": "Not stated in the inspected source;permission/reuse review required for wholesale republication.",
+    "format": "PDF;2pages",
+    "years": "Current list downloaded20Oct2026;inspect list date when freezing",
+    "use": "Current named farm/address list for geocoding selected factual locations. Not historical farm boundaries or exhaustive1960s farming extent.",
+    "status": "publicly readable;open reuse not established",
+    "evidence": [
+      {
+        "title": "Types of Farms in Singapore",
+        "publisher": "Singapore Food Agency",
+        "url": "https://www.sfa.gov.sg/farming/farm-land-sea-space/types-of-farms-in-singapore",
+        "page": "unpaginated:Where can I find a list of licensed farms in Singapore?",
+        "access_date": "2026-10-20",
+        "quotation": "You can download the lists of farms using the links below:"
+      }
+    ],
+    "notes": "Companion sea-farm PDF: https://www.sfa.gov.sg/docs/default-source/food-farming/licensed-sea-based-farms.pdf (1page). Land-use geometry must not be invented from a farm address.",
+    "id": "D24"
+  },
+  {
+    "name": "SFA2026Singapore Agri-Space Sales parcel maps",
+    "url": "https://www.sfa.gov.sg/farming/farm-land-sea-space/land-tenders-for-food-farming/2026-sas/land-available-for-tender",
+    "licence": "No open map/reuse licence verified on source page.",
+    "licence_text": "Not stated in inspected page;map reuse requires rights review.",
+    "format": "HTML parcel table and raster location maps",
+    "years": "SAS2026;last updated29May2026",
+    "use": "Locate actual agricultural tender parcels by LotNo and compare exact matches with SODL cadastral geometry;clearly proposed/tendered use rather than already operating farm.",
+    "status": "reference only unless rights resolved",
+    "evidence": [
+      {
+        "title": "Land Available for Tender",
+        "publisher": "Singapore Food Agency",
+        "url": "https://www.sfa.gov.sg/farming/farm-land-sea-space/land-tenders-for-food-farming/2026-sas/land-available-for-tender",
+        "page": "unpaginated:opening paragraph and Location Map",
+        "access_date": "2026-10-20",
+        "quotation": "details of the land parcels and location plans"
+      }
+    ],
+    "notes": "LCK218LotMK12-01815W;ST28ILotMK11-03745L with adjoiningMK11-80000P. These exact lot keys can be searched in cadastral dataset;a planning boundary cannot stand in for all farming area.",
+    "id": "D25"
+  },
+  {
+    "name": "NParks Parks and Nature Reserves",
+    "url": "https://data.gov.sg/datasets/d_77d7ec97be83d44f61b85454f844382f/view",
+    "licence": "Singapore Open Data Licence (linked by catalogue; attribution required)",
+    "format": "GeoJSON; Polygon/MultiPolygon; approximately 3 MB",
+    "years": "Catalogue: data from November 2025; downloaded version to be pinned; page updated 18 October 2026",
+    "use": "Present-day indicative NParks managed park and nature-reserve boundaries; N_RESERVE distinguishes reserves. Does not date park openings, map historical vegetation, or represent catchment boundaries.",
+    "licence_url": "https://data.gov.sg/open-data-licence",
+    "status": "open",
+    "evidence": [
+      {
+        "title": "NParks Parks and Nature Reserves",
+        "publisher": "National Parks Board / data.gov.sg",
+        "url": "https://data.gov.sg/datasets/d_77d7ec97be83d44f61b85454f844382f/view",
+        "page": "Description; attribute legend; Licence",
+        "access_date": "2026-10-20",
+        "quotation": "Free forever for personal or commercial use, under the Open Data Licence."
+      }
+    ],
+    "licence_text": "Singapore Open Data Licence (linked by catalogue; attribution required)",
+    "id": "D26"
+  },
+  {
+    "name": "Lim Chu Kang proposed land-use changes, annex map (2026)",
+    "url": "https://www.sfa.gov.sg/news-publications/newsroom/government-to-implement-land-use-change-in-lim-chu-kang",
+    "licence": "No open map licence verified; copyright notice on SFA site. Citation is not map-reuse permission.",
+    "format": "Web-page annex raster image",
+    "years": "25 May 2026 proposal",
+    "use": "Reference for affected current farm plots and indicative future agriculture/defence changes. Permission/rights verification needed before tracing or publishing.",
+    "status": "reference-only",
+    "evidence": [
+      {
+        "title": "Government to implement land-use change in Lim Chu Kang",
+        "publisher": "SFA; MINDEF; NParks; SLA",
+        "url": "https://www.sfa.gov.sg/news-publications/newsroom/government-to-implement-land-use-change-in-lim-chu-kang",
+        "page": "ANNEX",
+        "access_date": "2026-10-20",
+        "quotation": "Map of the affected farm plots and indicative areas for proposed agriculture areas"
+      }
+    ],
+    "licence_text": "No open map licence verified; copyright notice on SFA site. Citation is not map-reuse permission.",
+    "id": "D27"
+  },
+  {
+    "name": "NUS Historical Maps of Singapore: 1975 topographic mosaic",
+    "url": "https://libmaps.nus.edu.sg/maps/1975/",
+    "licence": "SLA copyright. No reproduction for commercial purposes; contact SLA for use, adaptation or reuse. NUS has permission for internet viewing, not a general open licence.",
+    "licence_text": "No reproduction for commercial purposes.",
+    "format": "Georeferenced mosaic of eight1:25,000 topographic sheets; WMTS/TMS PNG services; downloadable ground-control-point file",
+    "years": "1975; Series SMU025, Edition1SMU",
+    "use": "Detailed contemporary coastline, reservoirs, settlements, roads and industrial estate reference for1970s. Useful existing registration reference; publication/tracing rights must be resolved before Atlas reuse. Do not make runtime requests from Atlas.",
+    "status": "permission required / reference-only",
+    "evidence": [
+      {
+        "title": "1975 — Singapore Topographical Maps (1:25,000)",
+        "publisher": "Mapping Unit, Ministry of Defence; digitised Department of Geography, National University of Singapore; NUS Libraries",
+        "url": "https://libmaps.nus.edu.sg/maps/1975/",
+        "page": "Year of Publication; Credits; Rights and Restrictions; Ground Control Points; Web Services",
+        "access_date": "2026-10-20",
+        "quotation": "No reproduction for commercial purposes."
+      }
+    ],
+    "id": "D28"
+  },
+  {
+    "name": "1986 agrotechnology programme agricultural land and estate layout maps",
+    "url": "https://www.nas.gov.sg/archivesonline/data/pdfdoc/1181-1986-09-03.pdf",
+    "licence": "No explicit open licence verified. Government document in NAS; archive access does not establish tracing/republication rights.",
+    "format": "9-page scanned PDF; raster map annexes I–IV",
+    "years": "September 1986 tender/programme",
+    "use": "Annex I (PDFp6) locates agricultural land versus land for tender island-wide. Annex II (p7) Sungei Tengah parcel1, III (p8) Murai, IV (p9) Loyang parcel1 show farmland boundaries and planned farm categories. Georeference only after rights clearance, using matched roads/rivers; retain generalisation/scan limitations and planning status.",
+    "status": "reference-only",
+    "evidence": [
+      {
+        "title": "Tendering of Land for Farming in Agrotechnology Parks",
+        "publisher": "Singapore Government / Primary Production Department; NAS",
+        "url": "https://www.nas.gov.sg/archivesonline/data/pdfdoc/1181-1986-09-03.pdf",
+        "page": "Annex I, PDFp6; annexes II–IV, PDFpp7–9",
+        "access_date": "2026-10-20",
+        "quotation": "LOCATION OF AGRICULTURAL LANDS",
+        "verification": "Downloaded PDF; rendered and visually inspected all four map annexes."
+      }
+    ],
+    "licence_text": "No explicit open licence verified. Government document in NAS; archive access does not establish tracing/republication rights.",
+    "id": "D29"
+  },
+  {
+    "name": "Land Area (As At December), Annual",
+    "url": "https://data.gov.sg/datasets/d_0b2c034da121ef8efc71949af1694b4d/view",
+    "licence": "Singapore Open Data Licence",
+    "licence_url": "https://data.gov.sg/open-data-licence",
+    "licence_text": "Free forever for personal or commercial use, under the Open Data Licence.",
+    "format": "CSV; JSON API",
+    "years": "1960–2025",
+    "use": "National end-December land-area chart. Measurement basis changes in 2002; no spatial footprints.",
+    "evidence": [
+      {
+        "title": "Land Area (As At December), Annual",
+        "publisher": "Singapore Department of Statistics; source: Singapore Land Authority",
+        "url": "https://data.gov.sg/datasets/d_0b2c034da121ef8efc71949af1694b4d/view",
+        "page": "About this dataset, Licence",
+        "access_date": "2026-10-20",
+        "quotation": "Free forever for personal or commercial use, under the Open Data Licence."
+      }
+    ],
+    "id": "D30"
+  },
+  {
+    "name": "Indicators On Population, Annual",
+    "url": "https://data.gov.sg/datasets/d_3d227e5d9fdec73f3bcadce671c333a6/view",
+    "licence": "Singapore Open Data Licence",
+    "licence_url": "https://data.gov.sg/open-data-licence",
+    "licence_text": "Free forever for personal or commercial use, under the Open Data Licence.",
+    "format": "CSV; JSON API",
+    "years": "1950–2026; resident series has gaps before 1980",
+    "use": "Population growth contextual series. Distinguishes total, resident, citizens and permanent residents.",
+    "evidence": [
+      {
+        "title": "Indicators On Population, Annual",
+        "publisher": "Singapore Department of Statistics",
+        "url": "https://data.gov.sg/datasets/d_3d227e5d9fdec73f3bcadce671c333a6/view",
+        "page": "About this dataset, Licence",
+        "access_date": "2026-10-20",
+        "quotation": "Free forever for personal or commercial use, under the Open Data Licence."
+      }
+    ],
+    "id": "D31"
+  },
+  {
+    "name": "Public Transport Operation And Ridership, Annual",
+    "url": "https://data.gov.sg/datasets/d_ba615ec4cc5d9f5b7800ad82057f36f1/view",
+    "licence": "Singapore Open Data Licence",
+    "licence_url": "https://data.gov.sg/open-data-licence",
+    "licence_text": "Free forever for personal or commercial use, under the Open Data Licence.",
+    "format": "CSV; JSON API",
+    "years": "1990–2025",
+    "use": "Separate MRT/LRT annual network-length chart and ridership data; avoid confusing operated train-km with route length.",
+    "evidence": [
+      {
+        "title": "Public Transport Operation And Ridership, Annual",
+        "publisher": "Singapore Department of Statistics / Land Transport Authority",
+        "url": "https://data.gov.sg/datasets/d_ba615ec4cc5d9f5b7800ad82057f36f1/view",
+        "page": "About this dataset, Licence",
+        "access_date": "2026-10-20",
+        "quotation": "Free forever for personal or commercial use, under the Open Data Licence."
+      }
+    ],
+    "id": "D32"
+  },
+  {
+    "name": "Rail Length (km) At End-of-Year",
+    "url": "https://data.gov.sg/datasets/d_d6e505b87580a4bae4aae0beb07d3de6/view",
+    "licence": "Singapore Open Data Licence",
+    "licence_url": "https://data.gov.sg/open-data-licence",
+    "licence_text": "Free forever for personal or commercial use, under the Open Data Licence.",
+    "format": "CSV; JSON API",
+    "years": "2005–2017 (dataset description says to 2017; explorer shows 24 rows)",
+    "use": "Legacy tidy long-form MRT/LRT length CSV, plus opening-year notes. For2024 use LTA PDF / newer Singstat table.",
+    "evidence": [
+      {
+        "title": "Rail Length (km) At End-of-Year",
+        "publisher": "Singapore Department of Statistics / Land Transport Authority",
+        "url": "https://data.gov.sg/datasets/d_d6e505b87580a4bae4aae0beb07d3de6/view",
+        "page": "About this dataset, Licence",
+        "access_date": "2026-10-20",
+        "quotation": "Free forever for personal or commercial use, under the Open Data Licence."
+      }
+    ],
+    "id": "D33"
+  }
+]

@@ -1,0 +1,61 @@
+{
+  "accessed": "2026-10-20T07:46:11.779701+00:00",
+  "status": "blocked-required-tm-etm-level1-account-free-access",
+  "constraint": "docs/34 \u00a73.3 requires Collection 2 Level-1 L1TP; no Level-2 substitution authorized",
+  "checks": [
+    {
+      "route": "Planetary Computer STAC landsat-c2-l1",
+      "url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l1",
+      "http": 200,
+      "finding": "Collection description explicitly MSS on Landsat 1 through Landsat 5; no TM or ETM+ Level-1 collection found",
+      "response_file": "raw/mpc-l1-catalogue.json"
+    },
+    {
+      "route": "Planetary Computer MSS byte-range",
+      "url": "https://planetarycomputer.microsoft.com/api/sas/v1/token/landsat-c2-l1",
+      "http": 206,
+      "finding": "Anonymous SAS issuance HTTP200, signed MSS green band Range bytes=0-31 HTTP206 (32 bytes). SAS deliberately not persisted. Full scene NOT downloaded."
+    },
+    {
+      "route": "Planetary Computer guessed TM Level-1 object (diagnostic only)",
+      "http": 404,
+      "finding": "Level-1 TM band path derived from catalogue Level-2 asset returned BlobNotFound; not treated as exhaustive proof by itself."
+    },
+    {
+      "route": "USGS STAC Level-1 discovery",
+      "url": "https://landsatlook.usgs.gov/stac-server/search?collections=landsat-c2l1&bbox=103.55,1.15,104.1,1.48&datetime=1990-01-01T00:00:00Z/1990-12-31T23:59:59Z&limit=100",
+      "http": 200,
+      "response_file": "raw/usgs-l1-1990.json",
+      "finding": "Metadata available anonymously; lowest scene-wide-cloud candidate LT05_L1TP_125059_19900831_20200916_02_T1 (9%). Not selected by island cloud or tide."
+    },
+    {
+      "route": "USGS actual TM green band from STAC",
+      "url": "https://landsatlook.usgs.gov/data/collection02/level-1/standard/tm/1990/125/059/LT05_L1TP_125059_19900831_20200916_02_T1/LT05_L1TP_125059_19900831_20200916_02_T1_B2.TIF",
+      "http": 200,
+      "final_url": "https://ers.cr.usgs.gov/login",
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 33171,
+      "finding": "Anonymous Range request returned login HTML, not a GeoTIFF."
+    },
+    {
+      "route": "AWS usgs-landsat anonymous ListObjects",
+      "url": "https://usgs-landsat.s3.us-west-2.amazonaws.com/?list-type=2&prefix=collection02/level-1/standard/tm/1990/125/059/&max-keys=1",
+      "http": 403,
+      "response_file": "raw/aws-anonymous.json",
+      "finding": "Anonymous users cannot invoke requests against Requester Pays buckets. Please authenticate."
+    },
+    {
+      "route": "Google gee-public-data-landsat anonymous list",
+      "url": "https://storage.googleapis.com/storage/v1/b/gee-public-data-landsat/o?prefix=LT05/&maxResults=1",
+      "http": 400,
+      "response_file": "raw/gcs-anonymous.json",
+      "finding": "Bucket is a requester pays bucket but no user project provided."
+    }
+  ],
+  "not_done": [
+    "No new accounts, billing projects, authenticated USGS sessions or API registrations",
+    "No full Landsat scene download",
+    "No raster extraction, threshold, tide comparison, or coast geometry",
+    "No collection/version/processing-level substitution"
+  ]
+}

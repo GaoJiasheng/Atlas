@@ -1,0 +1,82 @@
+[
+  {
+    "id": "housing",
+    "name": {
+      "en": "Housing",
+      "zh": "【待译】Housing"
+    },
+    "bloc": "neutral",
+    "joined": "1960",
+    "color": "token:holder-3"
+  },
+  {
+    "id": "countryside",
+    "name": {
+      "en": "Kampongs, farms and estates",
+      "zh": "【待译】Kampongs, farms and estates"
+    },
+    "bloc": "neutral",
+    "joined": "1959-04-01",
+    "color": "token:holder-2"
+  },
+  {
+    "id": "agriculture",
+    "name": {
+      "en": "Farmland",
+      "zh": "【待译】Farmland"
+    },
+    "bloc": "neutral",
+    "joined": "1986",
+    "color": "token:holder-5"
+  },
+  {
+    "id": "industry",
+    "name": {
+      "en": "Industry",
+      "zh": "【待译】Industry"
+    },
+    "bloc": "neutral",
+    "joined": "1961",
+    "color": "token:holder-1"
+  },
+  {
+    "id": "green",
+    "name": {
+      "en": "Parks and nature reserves",
+      "zh": "【待译】Parks and nature reserves"
+    },
+    "bloc": "neutral",
+    "joined": "1959-04-01",
+    "color": "token:holder-8"
+  },
+  {
+    "id": "transport",
+    "name": {
+      "en": "Transport",
+      "zh": "【待译】Transport"
+    },
+    "bloc": "neutral",
+    "joined": "1959-04-01",
+    "color": "token:holder-6"
+  },
+  {
+    "id": "defence-special",
+    "name": {
+      "en": "Defence and special use",
+      "zh": "【待译】Defence and special use"
+    },
+    "bloc": "neutral",
+    "joined": "1959-04-01",
+    "color": "token:holder-7"
+  },
+  {
+    "id": "town-and-services",
+    "name": {
+      "en": "City, shops and services",
+      "zh": "【待译】City, shops and services"
+    },
+    "bloc": "neutral",
+    "joined": "1959-04-01",
+    "color": "token:holder-4"
+  }
+]

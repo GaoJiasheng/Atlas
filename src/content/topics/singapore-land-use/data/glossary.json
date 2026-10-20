@@ -1,0 +1,196 @@
+{
+  "terms": [
+    {
+      "id": "land-use",
+      "term": {
+        "en": "Land use",
+        "zh": "【待译】Land use"
+      },
+      "definition": {
+        "en": "What a piece of land is used for: homes, farms, factories, roads or green space. A Master Plan shows planned use.",
+        "zh": "【待译】What a piece of land is used for: homes, farms, factories, roads or green space. A Master Plan shows planned use."
+      },
+      "see": [
+        "master-plan"
+      ]
+    },
+    {
+      "id": "master-plan",
+      "term": {
+        "en": "Master Plan",
+        "zh": "【待译】Master Plan"
+      },
+      "definition": {
+        "en": "A legal land-use plan prepared by the Urban Redevelopment Authority. It shows permitted uses and building density and is reviewed every five years.",
+        "zh": "【待译】A legal land-use plan prepared by the Urban Redevelopment Authority. It shows permitted uses and building density and is reviewed every five years."
+      },
+      "see": [
+        "land-use"
+      ]
+    },
+    {
+      "id": "kampong",
+      "term": {
+        "en": "Kampong",
+        "zh": "【待译】Kampong"
+      },
+      "definition": {
+        "en": "The Malay word for village. Singapore kampongs included clusters of timber houses; services and living conditions varied from place to place.",
+        "zh": "【待译】The Malay word for village. Singapore kampongs included clusters of timber houses; services and living conditions varied from place to place."
+      },
+      "see": [
+        "attap-house"
+      ]
+    },
+    {
+      "id": "attap-house",
+      "term": {
+        "en": "Attap house",
+        "zh": "【待译】Attap house"
+      },
+      "definition": {
+        "en": "A timber house roofed with palm leaves. Raised floors help air circulate and keep the house above wet ground.",
+        "zh": "【待译】A timber house roofed with palm leaves. Raised floors help air circulate and keep the house above wet ground."
+      },
+      "see": [
+        "kampong"
+      ]
+    },
+    {
+      "id": "hdb-flat",
+      "term": {
+        "en": "HDB flat",
+        "zh": "【待译】HDB flat"
+      },
+      "definition": {
+        "en": "A public housing apartment built by the Housing and Development Board. Flats sold by HDB generally have a 99-year lease.",
+        "zh": "【待译】A public housing apartment built by the Housing and Development Board. Flats sold by HDB generally have a 99-year lease."
+      },
+      "see": [
+        "new-town"
+      ]
+    },
+    {
+      "id": "new-town",
+      "term": {
+        "en": "New town",
+        "zh": "【待译】New town"
+      },
+      "definition": {
+        "en": "A housing town planned with a centre, schools, shops, clinics and transport, as well as homes.",
+        "zh": "【待译】A housing town planned with a centre, schools, shops, clinics and transport, as well as homes."
+      },
+      "see": [
+        "hdb-flat"
+      ]
+    },
+    {
+      "id": "resettlement",
+      "term": {
+        "en": "Resettlement",
+        "zh": "【待译】Resettlement"
+      },
+      "definition": {
+        "en": "Moving residents or businesses to another place when land is needed for a new use. Compensation or housing assistance follows the rules in force at the time.",
+        "zh": "【待译】Moving residents or businesses to another place when land is needed for a new use. Compensation or housing assistance follows the rules in force at the time."
+      },
+      "see": [
+        "land-acquisition"
+      ]
+    },
+    {
+      "id": "land-acquisition",
+      "term": {
+        "en": "Land acquisition",
+        "zh": "【待译】Land acquisition"
+      },
+      "definition": {
+        "en": "The government taking private land under a law for public purposes, with compensation. Owners can dispute an award through the legal process.",
+        "zh": "【待译】The government taking private land under a law for public purposes, with compensation. Owners can dispute an award through the legal process."
+      },
+      "see": [
+        "resettlement"
+      ]
+    },
+    {
+      "id": "land-reclamation",
+      "term": {
+        "en": "Land reclamation",
+        "zh": "【待译】Land reclamation"
+      },
+      "definition": {
+        "en": "Making new land by enclosing shallow sea and filling it with sand or other material.",
+        "zh": "【待译】Making new land by enclosing shallow sea and filling it with sand or other material."
+      },
+      "see": []
+    },
+    {
+      "id": "agrotechnology-park",
+      "term": {
+        "en": "Agrotechnology park",
+        "zh": "【待译】Agrotechnology park"
+      },
+      "definition": {
+        "en": "Land set aside and leased to farms using technology to produce crops, animals or fish.",
+        "zh": "【待译】Land set aside and leased to farms using technology to produce crops, animals or fish."
+      },
+      "see": [
+        "hydroponics"
+      ]
+    },
+    {
+      "id": "hydroponics",
+      "term": {
+        "en": "Hydroponics",
+        "zh": "【待译】Hydroponics"
+      },
+      "definition": {
+        "en": "Growing plants without soil, with their roots supplied by water containing nutrients.",
+        "zh": "【待译】Growing plants without soil, with their roots supplied by water containing nutrients."
+      },
+      "see": [
+        "agrotechnology-park"
+      ]
+    },
+    {
+      "id": "industrial-estate",
+      "term": {
+        "en": "Industrial estate",
+        "zh": "【待译】Industrial estate"
+      },
+      "definition": {
+        "en": "An area planned for factories and related businesses, with shared roads, water and electricity.",
+        "zh": "【待译】An area planned for factories and related businesses, with shared roads, water and electricity."
+      },
+      "see": []
+    },
+    {
+      "id": "nature-reserve",
+      "term": {
+        "en": "Nature reserve",
+        "zh": "【待译】Nature reserve"
+      },
+      "definition": {
+        "en": "A place protected by law for its natural habitats, plants and animals. Development and activities are restricted.",
+        "zh": "【待译】A place protected by law for its natural habitats, plants and animals. Development and activities are restricted."
+      },
+      "see": [
+        "water-catchment"
+      ]
+    },
+    {
+      "id": "water-catchment",
+      "term": {
+        "en": "Water catchment",
+        "zh": "【待译】Water catchment"
+      },
+      "definition": {
+        "en": "Land where the rain that falls is collected and led by streams, drains and canals into the same reservoir.",
+        "zh": "一片土地上落下的雨水，经溪流、水沟和运河被引进同一个蓄水池，这片土地就是那个蓄水池的集水区。"
+      },
+      "see": [
+        "nature-reserve"
+      ]
+    }
+  ]
+}
