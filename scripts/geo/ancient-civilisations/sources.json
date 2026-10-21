@@ -6,9 +6,159 @@
       "url": "https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1",
       "file": "cliopatria-subset.geojson",
       "page": "https://zenodo.org/records/13363121",
-      "author": "Bennett, Turchin, Hoyer et al., Seshat Global History Databank (doi:10.1038/s41597-025-04516-9)",
+      "author": "Seshat Global History Databank (data paper doi:10.1038/s41597-025-04516-9)",
       "license": "CC BY 4.0",
       "role": "dated polity polygons for every control keyframe (written by inventory.ts from the release file; geometry unchanged)"
+    },
+    "C-K1": {
+      "ref": "G1",
+      "title": "Cliopatria v0.2.1: the raw records of K1 (check view only)",
+      "url": "https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1",
+      "file": "check-K1.geojson",
+      "page": "https://zenodo.org/records/13363121",
+      "author": "Seshat Global History Databank (data paper doi:10.1038/s41597-025-04516-9)",
+      "license": "CC BY 4.0",
+      "role": "check.ts comparison: the records of this frame as published, before coast clipping and simplification"
+    },
+    "C-K2": {
+      "ref": "G1",
+      "title": "Cliopatria v0.2.1: the raw records of K2 (check view only)",
+      "url": "https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1",
+      "file": "check-K2.geojson",
+      "page": "https://zenodo.org/records/13363121",
+      "author": "Seshat Global History Databank (data paper doi:10.1038/s41597-025-04516-9)",
+      "license": "CC BY 4.0",
+      "role": "check.ts comparison: the records of this frame as published, before coast clipping and simplification"
+    },
+    "C-K3": {
+      "ref": "G1",
+      "title": "Cliopatria v0.2.1: the raw records of K3 (check view only)",
+      "url": "https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1",
+      "file": "check-K3.geojson",
+      "page": "https://zenodo.org/records/13363121",
+      "author": "Seshat Global History Databank (data paper doi:10.1038/s41597-025-04516-9)",
+      "license": "CC BY 4.0",
+      "role": "check.ts comparison: the records of this frame as published, before coast clipping and simplification"
+    },
+    "C-K4": {
+      "ref": "G1",
+      "title": "Cliopatria v0.2.1: the raw records of K4 (check view only)",
+      "url": "https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1",
+      "file": "check-K4.geojson",
+      "page": "https://zenodo.org/records/13363121",
+      "author": "Seshat Global History Databank (data paper doi:10.1038/s41597-025-04516-9)",
+      "license": "CC BY 4.0",
+      "role": "check.ts comparison: the records of this frame as published, before coast clipping and simplification"
+    },
+    "C-K5": {
+      "ref": "G1",
+      "title": "Cliopatria v0.2.1: the raw records of K5 (check view only)",
+      "url": "https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1",
+      "file": "check-K5.geojson",
+      "page": "https://zenodo.org/records/13363121",
+      "author": "Seshat Global History Databank (data paper doi:10.1038/s41597-025-04516-9)",
+      "license": "CC BY 4.0",
+      "role": "check.ts comparison: the records of this frame as published, before coast clipping and simplification"
+    },
+    "C-K6": {
+      "ref": "G1",
+      "title": "Cliopatria v0.2.1: the raw records of K6 (check view only)",
+      "url": "https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1",
+      "file": "check-K6.geojson",
+      "page": "https://zenodo.org/records/13363121",
+      "author": "Seshat Global History Databank (data paper doi:10.1038/s41597-025-04516-9)",
+      "license": "CC BY 4.0",
+      "role": "check.ts comparison: the records of this frame as published, before coast clipping and simplification"
+    },
+    "C-K7": {
+      "ref": "G1",
+      "title": "Cliopatria v0.2.1: the raw records of K7 (check view only)",
+      "url": "https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1",
+      "file": "check-K7.geojson",
+      "page": "https://zenodo.org/records/13363121",
+      "author": "Seshat Global History Databank (data paper doi:10.1038/s41597-025-04516-9)",
+      "license": "CC BY 4.0",
+      "role": "check.ts comparison: the records of this frame as published, before coast clipping and simplification"
+    },
+    "C-K8": {
+      "ref": "G1",
+      "title": "Cliopatria v0.2.1: the raw records of K8 (check view only)",
+      "url": "https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1",
+      "file": "check-K8.geojson",
+      "page": "https://zenodo.org/records/13363121",
+      "author": "Seshat Global History Databank (data paper doi:10.1038/s41597-025-04516-9)",
+      "license": "CC BY 4.0",
+      "role": "check.ts comparison: the records of this frame as published, before coast clipping and simplification"
+    },
+    "C-K9": {
+      "ref": "G1",
+      "title": "Cliopatria v0.2.1: the raw records of K9 (check view only)",
+      "url": "https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1",
+      "file": "check-K9.geojson",
+      "page": "https://zenodo.org/records/13363121",
+      "author": "Seshat Global History Databank (data paper doi:10.1038/s41597-025-04516-9)",
+      "license": "CC BY 4.0",
+      "role": "check.ts comparison: the records of this frame as published, before coast clipping and simplification"
+    },
+    "C-K10": {
+      "ref": "G1",
+      "title": "Cliopatria v0.2.1: the raw records of K10 (check view only)",
+      "url": "https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1",
+      "file": "check-K10.geojson",
+      "page": "https://zenodo.org/records/13363121",
+      "author": "Seshat Global History Databank (data paper doi:10.1038/s41597-025-04516-9)",
+      "license": "CC BY 4.0",
+      "role": "check.ts comparison: the records of this frame as published, before coast clipping and simplification"
+    },
+    "C-K11": {
+      "ref": "G1",
+      "title": "Cliopatria v0.2.1: the raw records of K11 (check view only)",
+      "url": "https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1",
+      "file": "check-K11.geojson",
+      "page": "https://zenodo.org/records/13363121",
+      "author": "Seshat Global History Databank (data paper doi:10.1038/s41597-025-04516-9)",
+      "license": "CC BY 4.0",
+      "role": "check.ts comparison: the records of this frame as published, before coast clipping and simplification"
+    },
+    "C-K12": {
+      "ref": "G1",
+      "title": "Cliopatria v0.2.1: the raw records of K12 (check view only)",
+      "url": "https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1",
+      "file": "check-K12.geojson",
+      "page": "https://zenodo.org/records/13363121",
+      "author": "Seshat Global History Databank (data paper doi:10.1038/s41597-025-04516-9)",
+      "license": "CC BY 4.0",
+      "role": "check.ts comparison: the records of this frame as published, before coast clipping and simplification"
+    },
+    "C-K13": {
+      "ref": "G1",
+      "title": "Cliopatria v0.2.1: the raw records of K13 (check view only)",
+      "url": "https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1",
+      "file": "check-K13.geojson",
+      "page": "https://zenodo.org/records/13363121",
+      "author": "Seshat Global History Databank (data paper doi:10.1038/s41597-025-04516-9)",
+      "license": "CC BY 4.0",
+      "role": "check.ts comparison: the records of this frame as published, before coast clipping and simplification"
+    },
+    "C-K14": {
+      "ref": "G1",
+      "title": "Cliopatria v0.2.1: the raw records of K14 (check view only)",
+      "url": "https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1",
+      "file": "check-K14.geojson",
+      "page": "https://zenodo.org/records/13363121",
+      "author": "Seshat Global History Databank (data paper doi:10.1038/s41597-025-04516-9)",
+      "license": "CC BY 4.0",
+      "role": "check.ts comparison: the records of this frame as published, before coast clipping and simplification"
+    },
+    "C-K15": {
+      "ref": "G1",
+      "title": "Cliopatria v0.2.1: the raw records of K15 (check view only)",
+      "url": "https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1",
+      "file": "check-K15.geojson",
+      "page": "https://zenodo.org/records/13363121",
+      "author": "Seshat Global History Databank (data paper doi:10.1038/s41597-025-04516-9)",
+      "license": "CC BY 4.0",
+      "role": "check.ts comparison: the records of this frame as published, before coast clipping and simplification"
     }
   },
   "keyframes": [
@@ -36,7 +186,17 @@
           }
         }
       ],
-      "checks": []
+      "checks": [
+        {
+          "name": "all records of the frame",
+          "center": [
+            45.7,
+            31.8
+          ],
+          "zoom": 6,
+          "source": "C-K1"
+        }
+      ]
     },
     {
       "id": "K2",
@@ -80,7 +240,17 @@
           }
         }
       ],
-      "checks": []
+      "checks": [
+        {
+          "name": "all records of the frame",
+          "center": [
+            38.4,
+            28.7
+          ],
+          "zoom": 5.2,
+          "source": "C-K2"
+        }
+      ]
     },
     {
       "id": "K3",
@@ -124,7 +294,17 @@
           }
         }
       ],
-      "checks": []
+      "checks": [
+        {
+          "name": "all records of the frame",
+          "center": [
+            39.2,
+            28.7
+          ],
+          "zoom": 5.1,
+          "source": "C-K3"
+        }
+      ]
     },
     {
       "id": "K4",
@@ -168,7 +348,17 @@
           }
         }
       ],
-      "checks": []
+      "checks": [
+        {
+          "name": "all records of the frame",
+          "center": [
+            39.3,
+            30.9
+          ],
+          "zoom": 4.9,
+          "source": "C-K4"
+        }
+      ]
     },
     {
       "id": "K5",
@@ -230,7 +420,17 @@
           }
         }
       ],
-      "checks": []
+      "checks": [
+        {
+          "name": "all records of the frame",
+          "center": [
+            38.8,
+            27.8
+          ],
+          "zoom": 5.2,
+          "source": "C-K5"
+        }
+      ]
     },
     {
       "id": "K6",
@@ -274,7 +474,17 @@
           }
         }
       ],
-      "checks": []
+      "checks": [
+        {
+          "name": "all records of the frame",
+          "center": [
+            73.1,
+            28.5
+          ],
+          "zoom": 2.9,
+          "source": "C-K6"
+        }
+      ]
     },
     {
       "id": "K7",
@@ -354,7 +564,17 @@
           }
         }
       ],
-      "checks": []
+      "checks": [
+        {
+          "name": "all records of the frame",
+          "center": [
+            67.3,
+            34.4
+          ],
+          "zoom": 2.6,
+          "source": "C-K7"
+        }
+      ]
     },
     {
       "id": "K8",
@@ -434,7 +654,17 @@
           }
         }
       ],
-      "checks": []
+      "checks": [
+        {
+          "name": "all records of the frame",
+          "center": [
+            67.3,
+            31.4
+          ],
+          "zoom": 2.6,
+          "source": "C-K8"
+        }
+      ]
     },
     {
       "id": "K9",
@@ -514,7 +744,17 @@
           }
         }
       ],
-      "checks": []
+      "checks": [
+        {
+          "name": "all records of the frame",
+          "center": [
+            67.5,
+            27.3
+          ],
+          "zoom": 2.6,
+          "source": "C-K9"
+        }
+      ]
     },
     {
       "id": "K10",
@@ -594,7 +834,17 @@
           }
         }
       ],
-      "checks": []
+      "checks": [
+        {
+          "name": "all records of the frame",
+          "center": [
+            66.5,
+            32.7
+          ],
+          "zoom": 2.5,
+          "source": "C-K10"
+        }
+      ]
     },
     {
       "id": "K11",
@@ -638,7 +888,17 @@
           }
         }
       ],
-      "checks": []
+      "checks": [
+        {
+          "name": "all records of the frame",
+          "center": [
+            58.8,
+            34.5
+          ],
+          "zoom": 2.3,
+          "source": "C-K11"
+        }
+      ]
     },
     {
       "id": "K12",
@@ -682,7 +942,17 @@
           }
         }
       ],
-      "checks": []
+      "checks": [
+        {
+          "name": "all records of the frame",
+          "center": [
+            58.7,
+            36.1
+          ],
+          "zoom": 2.3,
+          "source": "C-K12"
+        }
+      ]
     },
     {
       "id": "K13",
@@ -708,7 +978,17 @@
           }
         }
       ],
-      "checks": []
+      "checks": [
+        {
+          "name": "all records of the frame",
+          "center": [
+            16.2,
+            39.4
+          ],
+          "zoom": 3.7,
+          "source": "C-K13"
+        }
+      ]
     },
     {
       "id": "K14",
@@ -752,7 +1032,17 @@
           }
         }
       ],
-      "checks": []
+      "checks": [
+        {
+          "name": "all records of the frame",
+          "center": [
+            41.6,
+            33.9
+          ],
+          "zoom": 2.7,
+          "source": "C-K14"
+        }
+      ]
     },
     {
       "id": "K15",
@@ -778,7 +1068,17 @@
           }
         }
       ],
-      "checks": []
+      "checks": [
+        {
+          "name": "all records of the frame",
+          "center": [
+            79.7,
+            25.6
+          ],
+          "zoom": 4.5,
+          "source": "C-K15"
+        }
+      ]
     }
   ],
   "pipeline": {

@@ -16,7 +16,8 @@
  * - work/inventory-table.md: the same as Markdown tables (copied into INVENTORY.md).
  * - raw/cliopatria-subset.geojson: one feature per matched record, tagged
  *   `{ frame, holder, src }` for compose.ts's `geojson` selector; geometry unchanged.
- * - raw/cliopatria-spheres.geojson: every record of the four sphere polities, unchanged.
+ * - raw/cliopatria-spheres.geojson: every record of the sphere polities, unchanged.
+ * - raw/check-K#.geojson: the raw records of one frame, drawn beside the product by check.ts.
  * A frame year outside every record of a holder falls back to the nearest
  * record within 50 years (`note` says which year it shows); none within 50
  * years leaves the holder out of that frame, and both are listed.
@@ -89,6 +90,8 @@ for (const l of listOnly) table.push(`| ${l.name} | ${l.records.map((r) => `${r.
 writeJson(`${DIR}/work/inventory.json`, { release: plan.release, records: recs.length, frames, spheres, listOnly }, true);
 writeFileSync(`${DIR}/work/inventory-table.md`, `${table.join('\n')}\n`);
 writeJson(`${DIR}/raw/cliopatria-subset.geojson`, { type: 'FeatureCollection', features: subset });
+// check.ts draws a .geojson dataset as is next to the product: one file per frame with that frame's raw records.
+for (const f of plan.frames) writeJson(`${DIR}/raw/check-${f.id}.geojson`, { type: 'FeatureCollection', features: subset.filter((x) => x.properties?.frame === f.id) });
 writeJson(`${DIR}/raw/cliopatria-spheres.geojson`, { type: 'FeatureCollection', features: sphereFeatures });
 console.log(`${recs.length} Cliopatria records; ${subset.length} frame features, ${sphereFeatures.length} sphere features`);
 console.log(table.join('\n'));

@@ -9,9 +9,10 @@
  * and the Sultanate of Malacca up to the year in keyframes.json `spheres`
  * becomes one geometry with `{ f: FromYear, u: ToYear + 1, certainty:
  * "approximate" }` (the README's years are inclusive; the engine's `[f, u)`
- * is not). Each is clipped to the plate's land (Natural Earth 1:10m, so the
- * tint stops at the one drawn coast), simplified (mapshaper DP 1 km,
- * keep-shapes; no -clean, which would merge records that overlap in place) and written as TopoJSON `public/geo/<file>.json` with
+ * is not). Each is simplified (mapshaper DP 1 km, keep-shapes; no -clean,
+ * which would merge records that overlap in place) and then clipped to the
+ * plate's land (Natural Earth 1:10m, after the simplification so the tint
+ * stops exactly at the one drawn coast) and written as TopoJSON `public/geo/<file>.json` with
  * one object named like the file. Records overlap in time only where
  * Cliopatria's own do not (they are consecutive); the layers overlap each
  * other freely (docs/43 §0-7).
@@ -34,7 +35,7 @@ const land: FeatureCollection = { type: 'FeatureCollection', features: plateFc.f
 for (const s of plan.spheres) {
   const fc: FeatureCollection = { type: 'FeatureCollection', features: all.features.filter((f) => f.properties?.file === s.file).map((f) => ({ ...f, properties: { f: f.properties!.f, u: f.properties!.u, certainty: 'approximate' } })) };
   const out = await ms.applyCommands(
-    `-i land.json spheres.json combine-files -rename-layers land,${s.file} -clip land target=${s.file} -simplify dp interval=1000 keep-shapes target=${s.file} -o ${s.file}.json format=topojson quantization=100000 target=${s.file}`,
+    `-i land.json spheres.json combine-files -rename-layers land,${s.file} -simplify dp interval=1000 keep-shapes target=${s.file} -clip land target=${s.file} -o ${s.file}.json format=topojson quantization=100000 target=${s.file}`,
     { 'land.json': land, 'spheres.json': fc },
   );
   const text = out[`${s.file}.json`]!.toString();

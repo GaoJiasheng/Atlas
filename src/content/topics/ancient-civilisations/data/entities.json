@@ -16,6 +16,6 @@
   {"id": "khmer", "name": {"en": "Khmer Empire", "zh": "高棉帝国"}, "bloc": "neutral", "joined": "0800", "left": "1540", "color": "token:holder-4"},
   {"id": "sukhothai", "name": {"en": "Sukhothai", "zh": "素可泰"}, "bloc": "neutral", "joined": "1238", "left": "1438", "color": "token:holder-5"},
   {"id": "majapahit", "name": {"en": "Majapahit", "zh": "满者伯夷"}, "bloc": "neutral", "joined": "1294", "left": "1519", "color": "token:holder-7"},
-  {"id": "melaka", "name": {"en": "Melaka", "zh": "马六甲"}, "bloc": "neutral", "joined": "1459", "left": "1512", "color": "token:holder-2"},
+  {"id": "melaka", "name": {"en": "Melaka", "zh": "马六甲"}, "bloc": "neutral", "joined": "1400", "left": "1511", "color": "token:holder-2"},
   {"id": "traders", "name": {"en": "Sea traders of many peoples", "zh": "各族海上商人"}, "bloc": "neutral", "joined": "-0200", "color": "token:holder-3"}
 ]

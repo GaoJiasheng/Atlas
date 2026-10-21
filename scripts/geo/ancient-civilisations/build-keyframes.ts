@@ -41,11 +41,25 @@ manifest.datasets = {
     url: 'https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1',
     file: 'cliopatria-subset.geojson',
     page: 'https://zenodo.org/records/13363121',
-    author: 'Bennett, Turchin, Hoyer et al., Seshat Global History Databank (doi:10.1038/s41597-025-04516-9)',
+    author: 'Seshat Global History Databank (data paper doi:10.1038/s41597-025-04516-9)',
     license: 'CC BY 4.0',
     role: 'dated polity polygons for every control keyframe (written by inventory.ts from the release file; geometry unchanged)',
   },
 };
+
+/** check.ts view of a frame: the box of its raw records, and a zoom that fits it in the 900 px check panel. */
+function checkView(frame: string): { center: [number, number]; zoom: number } {
+  let w = 180, s = 90, e = -180, n = -90;
+  const walk = (c: unknown): void => {
+    if (typeof (c as number[])[0] === 'number') {
+      const [x, y] = c as [number, number];
+      w = Math.min(w, x); e = Math.max(e, x); s = Math.min(s, y); n = Math.max(n, y);
+    } else (c as unknown[]).forEach(walk);
+  };
+  for (const f of subset.features) if (f.properties?.frame === frame) walk((f.geometry as { coordinates: unknown }).coordinates);
+  const span = Math.max(e - w, (n - s) * 1.6, 4);
+  return { center: [Math.round(((w + e) / 2) * 10) / 10, Math.round(((s + n) / 2) * 10) / 10], zoom: Math.round(Math.max(1.5, Math.min(6, Math.log2(360 / span) + 0.9)) * 10) / 10 };
+}
 
 const srcNote = (frame: string, holder: string) =>
   [...new Set(subset.features.filter((f) => f.properties?.frame === frame && f.properties?.holder === holder).map((f) => String(f.properties?.src)))].join('; ');
@@ -58,9 +72,11 @@ manifest.keyframes = plan.frames
       t: f.t,
       method: `Cliopatria ${plan.release} records valid in ${f.t.startsWith('-') ? `${Number(f.t.slice(1))} BCE` : `${Number(f.t)} CE`}, unchanged; coast of the plate (Natural Earth 1:10m)`,
       steps: f.holders.map((h) => ({ holder: h.holder, label: h.label, src: ['G1'], note: srcNote(f.id, h.holder), from: { geojson: 'G1', where: { frame: f.id, holder: h.holder } } })),
-      checks: [],
+      checks: [{ name: 'all records of the frame', ...checkView(f.id), source: `C-${f.id}` }],
     }),
   );
+for (const f of plan.frames.filter((x) => x.holders.length))
+  manifest.datasets[`C-${f.id}`] = { ...manifest.datasets.G1!, file: `check-${f.id}.geojson`, title: `Cliopatria ${plan.release}: the raw records of ${f.id} (check view only)`, role: 'check.ts comparison: the records of this frame as published, before coast clipping and simplification' };
 writeJson(manifestPath, manifest, true);
 
 // Overlap check.

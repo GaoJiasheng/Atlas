@@ -36,4 +36,3 @@ datedLayers:
   - { id: srivijaya-sphere, file: ac-srivijaya, kind: area, holder: srivijaya, label: { en: "Srivijaya (sphere, approximate)", zh: "室利佛逝（势力范围，示意）" } }
   - { id: khmer-sphere, file: ac-khmer, kind: area, holder: khmer, label: { en: "Khmer Empire (sphere, approximate)", zh: "高棉帝国（势力范围，示意）" } }
   - { id: majapahit-sphere, file: ac-majapahit, kind: area, holder: majapahit, label: { en: "Majapahit (sphere, approximate)", zh: "满者伯夷（势力范围，示意）" } }
-  - { id: melaka-sphere, file: ac-melaka, kind: area, holder: melaka, label: { en: "Melaka (sphere, approximate)", zh: "马六甲（势力范围，示意）" } }

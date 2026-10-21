@@ -2,79 +2,505 @@
   "_comment": "Machine version of docs/43 §3.3 after the G0 inventory (INVENTORY.md). Each holder takes the Cliopatria v0.2.1 records named here whose FromYear <= year <= ToYear (README: inclusive); `memberOf` takes every record with that MemberOf value (a union). Order = paint order in compose.ts (later wins where two overlap; overlaps are reported by build-keyframes.ts). Labels: the bracketed part is not shown on the map.",
   "release": "v0.2.1",
   "frames": [
-    { "id": "K1", "t": "-3200", "holders": [
-      { "holder": "sumer", "names": ["Sumerian City-States"], "label": { "en": "Sumerian city-states", "zh": "苏美尔城邦" } }
-    ] },
-    { "id": "K2", "t": "-3000", "holders": [
-      { "holder": "sumer", "names": ["Sumerian City-States"], "label": { "en": "Sumerian city-states", "zh": "苏美尔城邦" } },
-      { "holder": "egypt", "names": ["Early Dynastic Period of Egypt"], "label": { "en": "Egypt (Early Dynastic)", "zh": "埃及（早王朝）" } }
-    ] },
-    { "id": "K3", "t": "-2600", "holders": [
-      { "holder": "sumer", "names": ["Sumerian City-States"], "label": { "en": "Sumerian city-states", "zh": "苏美尔城邦" } },
-      { "holder": "egypt", "names": ["Early Dynastic Period of Egypt"], "label": { "en": "Egypt (Cliopatria record: Early Dynastic, to 2501 BCE)", "zh": "埃及（Cliopatria 记录：早王朝，至前2501年）" } }
-    ] },
-    { "id": "K4", "t": "-2300", "holders": [
-      { "holder": "egypt", "names": ["Old Kingdom of Egypt"], "label": { "en": "Egypt (Old Kingdom)", "zh": "埃及（古王国）" } },
-      { "holder": "akkad", "names": ["Akkadian Empire"], "label": { "en": "Akkadian Empire", "zh": "阿卡德帝国" } }
-    ] },
-    { "id": "K5", "t": "-2100", "holders": [
-      { "holder": "sumer", "names": ["Sumerian City-States"], "label": { "en": "Sumerian cities (Third Dynasty of Ur)", "zh": "苏美尔城邦（乌尔第三王朝时期）" } },
-      { "holder": "egypt", "names": ["Upper Egypt"], "label": { "en": "Upper Egypt (First Intermediate Period)", "zh": "上埃及（第一中间期）" } },
-      { "holder": "egypt", "names": ["Lower Egypt"], "label": { "en": "Lower Egypt (First Intermediate Period)", "zh": "下埃及（第一中间期）" } }
-    ] },
-    { "id": "K6", "t": "-1250", "holders": [
-      { "holder": "egypt", "names": ["New Kingdom of Egypt"], "label": { "en": "Egypt (New Kingdom)", "zh": "埃及（新王国）" } },
-      { "holder": "shang", "names": ["Shang Dynasty"], "label": { "en": "Shang", "zh": "商" } }
-    ] },
-    { "id": "K7", "t": "-0508", "holders": [
-      { "holder": "achaemenid", "names": ["Achaemenid Empire"], "label": { "en": "Persian Empire (Achaemenid)", "zh": "波斯帝国（阿契美尼德）" } },
-      { "holder": "rome", "names": ["Roman Kingdom"], "label": { "en": "Rome (Cliopatria record: Roman Kingdom, to 501 BCE)", "zh": "罗马（Cliopatria 记录：王政时期，至前501年）" } },
-      { "holder": "maurya", "names": ["Janapada of Magadha"], "label": { "en": "Magadha", "zh": "摩揭陀" } },
-      { "holder": "zhou-states", "memberOf": ["(Spring and Autumn States)"], "label": { "en": "Zhou-era states", "zh": "周代诸侯国" } }
-    ] },
-    { "id": "K8", "t": "-0323", "holders": [
-      { "holder": "macedon", "names": ["Macedonian Empire"], "memberOf": ["(Macedonian Empire)"], "label": { "en": "Alexander's empire", "zh": "亚历山大帝国" } },
-      { "holder": "rome", "names": ["Roman Republic"], "label": { "en": "Roman Republic", "zh": "罗马共和国" } },
-      { "holder": "maurya", "names": ["Nanda Empire"], "label": { "en": "Magadha (Nanda kings)", "zh": "摩揭陀（难陀王朝）" } },
-      { "holder": "zhou-states", "memberOf": ["(Warring States China)"], "label": { "en": "Zhou-era states", "zh": "周代诸侯国" } }
-    ] },
-    { "id": "K9", "t": "-0260", "holders": [
-      { "holder": "egypt", "names": ["Ptolemaic Kingdom"], "label": { "en": "Egypt (Ptolemaic kingdom)", "zh": "埃及（托勒密王朝）" } },
-      { "holder": "rome", "names": ["Roman Republic"], "label": { "en": "Roman Republic", "zh": "罗马共和国" } },
-      { "holder": "maurya", "names": ["Maurya Empire"], "label": { "en": "Maurya Empire", "zh": "孔雀王朝" } },
-      { "holder": "zhou-states", "memberOf": ["(Warring States China)"], "label": { "en": "Zhou-era states", "zh": "周代诸侯国" } }
-    ] },
-    { "id": "K10", "t": "-0221", "holders": [
-      { "holder": "egypt", "names": ["Ptolemaic Kingdom"], "label": { "en": "Egypt (Ptolemaic kingdom)", "zh": "埃及（托勒密王朝）" } },
-      { "holder": "rome", "names": ["Roman Republic"], "label": { "en": "Roman Republic", "zh": "罗马共和国" } },
-      { "holder": "maurya", "names": ["Maurya Empire"], "label": { "en": "Maurya Empire", "zh": "孔雀王朝" } },
-      { "holder": "qin", "names": ["Qin"], "label": { "en": "Qin", "zh": "秦" } }
-    ] },
-    { "id": "K11", "t": "-0027", "holders": [
-      { "holder": "rome", "names": ["Roman Empire"], "label": { "en": "Roman Empire (with Egypt)", "zh": "罗马帝国（含埃及）" } },
-      { "holder": "han", "names": ["Han Dynasty"], "label": { "en": "Han", "zh": "汉" } }
-    ] },
-    { "id": "K12", "t": "0117", "holders": [
-      { "holder": "rome", "names": ["Roman Empire"], "label": { "en": "Roman Empire", "zh": "罗马帝国" } },
-      { "holder": "han", "names": ["Han Dynasty"], "label": { "en": "Han", "zh": "汉" } }
-    ] },
-    { "id": "K13", "t": "0220", "holders": [
-      { "holder": "rome", "names": ["Roman Empire"], "label": { "en": "Roman Empire", "zh": "罗马帝国" } }
-    ] },
-    { "id": "K14", "t": "0400", "holders": [
-      { "holder": "rome", "names": ["Western Roman Empire"], "label": { "en": "Western Roman Empire", "zh": "西罗马帝国" } },
-      { "holder": "gupta", "names": ["Gupta Empire"], "label": { "en": "Gupta Empire", "zh": "笈多王朝" } }
-    ] },
-    { "id": "K15", "t": "0476", "holders": [
-      { "holder": "gupta", "names": ["Gupta Empire"], "label": { "en": "Gupta Empire", "zh": "笈多王朝" } }
-    ] },
-    { "id": "K16", "t": "0600", "holders": [] }
+    {
+      "id": "K1",
+      "t": "-3200",
+      "holders": [
+        {
+          "holder": "sumer",
+          "names": [
+            "Sumerian City-States"
+          ],
+          "label": {
+            "en": "Sumerian city-states",
+            "zh": "苏美尔城邦"
+          }
+        }
+      ]
+    },
+    {
+      "id": "K2",
+      "t": "-3000",
+      "holders": [
+        {
+          "holder": "sumer",
+          "names": [
+            "Sumerian City-States"
+          ],
+          "label": {
+            "en": "Sumerian city-states",
+            "zh": "苏美尔城邦"
+          }
+        },
+        {
+          "holder": "egypt",
+          "names": [
+            "Early Dynastic Period of Egypt"
+          ],
+          "label": {
+            "en": "Egypt (Early Dynastic)",
+            "zh": "埃及（早王朝）"
+          }
+        }
+      ]
+    },
+    {
+      "id": "K3",
+      "t": "-2600",
+      "holders": [
+        {
+          "holder": "sumer",
+          "names": [
+            "Sumerian City-States"
+          ],
+          "label": {
+            "en": "Sumerian city-states",
+            "zh": "苏美尔城邦"
+          }
+        },
+        {
+          "holder": "egypt",
+          "names": [
+            "Early Dynastic Period of Egypt"
+          ],
+          "label": {
+            "en": "Egypt (Cliopatria record: Early Dynastic, to 2501 BCE)",
+            "zh": "埃及（Cliopatria 记录：早王朝，至前2501年）"
+          }
+        }
+      ]
+    },
+    {
+      "id": "K4",
+      "t": "-2300",
+      "holders": [
+        {
+          "holder": "egypt",
+          "names": [
+            "Old Kingdom of Egypt"
+          ],
+          "label": {
+            "en": "Egypt (Old Kingdom)",
+            "zh": "埃及（古王国）"
+          }
+        },
+        {
+          "holder": "akkad",
+          "names": [
+            "Akkadian Empire"
+          ],
+          "label": {
+            "en": "Akkadian Empire",
+            "zh": "阿卡德帝国"
+          }
+        }
+      ]
+    },
+    {
+      "id": "K5",
+      "t": "-2100",
+      "holders": [
+        {
+          "holder": "sumer",
+          "names": [
+            "Sumerian City-States"
+          ],
+          "label": {
+            "en": "Sumerian cities (Third Dynasty of Ur)",
+            "zh": "苏美尔城邦（乌尔第三王朝时期）"
+          }
+        },
+        {
+          "holder": "egypt",
+          "names": [
+            "Upper Egypt"
+          ],
+          "label": {
+            "en": "Upper Egypt (First Intermediate Period)",
+            "zh": "上埃及（第一中间期）"
+          }
+        },
+        {
+          "holder": "egypt",
+          "names": [
+            "Lower Egypt"
+          ],
+          "label": {
+            "en": "Lower Egypt (First Intermediate Period)",
+            "zh": "下埃及（第一中间期）"
+          }
+        }
+      ]
+    },
+    {
+      "id": "K6",
+      "t": "-1250",
+      "holders": [
+        {
+          "holder": "egypt",
+          "names": [
+            "New Kingdom of Egypt"
+          ],
+          "label": {
+            "en": "Egypt (New Kingdom)",
+            "zh": "埃及（新王国）"
+          }
+        },
+        {
+          "holder": "shang",
+          "names": [
+            "Shang Dynasty"
+          ],
+          "label": {
+            "en": "Shang",
+            "zh": "商"
+          }
+        }
+      ]
+    },
+    {
+      "id": "K7",
+      "t": "-0508",
+      "holders": [
+        {
+          "holder": "achaemenid",
+          "names": [
+            "Achaemenid Empire"
+          ],
+          "label": {
+            "en": "Persian Empire (Achaemenid)",
+            "zh": "波斯帝国（阿契美尼德）"
+          }
+        },
+        {
+          "holder": "rome",
+          "names": [
+            "Roman Kingdom"
+          ],
+          "label": {
+            "en": "Rome (Cliopatria record: Roman Kingdom, to 501 BCE)",
+            "zh": "罗马（Cliopatria 记录：王政时期，至前501年）"
+          }
+        },
+        {
+          "holder": "maurya",
+          "names": [
+            "Janapada of Magadha"
+          ],
+          "label": {
+            "en": "Magadha",
+            "zh": "摩揭陀"
+          }
+        },
+        {
+          "holder": "zhou-states",
+          "memberOf": [
+            "(Spring and Autumn States)"
+          ],
+          "label": {
+            "en": "Zhou-era states",
+            "zh": "周代诸侯国"
+          }
+        }
+      ]
+    },
+    {
+      "id": "K8",
+      "t": "-0323",
+      "holders": [
+        {
+          "holder": "macedon",
+          "names": [
+            "Macedonian Empire"
+          ],
+          "memberOf": [
+            "(Macedonian Empire)"
+          ],
+          "label": {
+            "en": "Alexander's empire",
+            "zh": "亚历山大帝国"
+          }
+        },
+        {
+          "holder": "rome",
+          "names": [
+            "Roman Republic"
+          ],
+          "label": {
+            "en": "Roman Republic",
+            "zh": "罗马共和国"
+          }
+        },
+        {
+          "holder": "maurya",
+          "names": [
+            "Nanda Empire"
+          ],
+          "label": {
+            "en": "Magadha (Nanda kings)",
+            "zh": "摩揭陀（难陀王朝）"
+          }
+        },
+        {
+          "holder": "zhou-states",
+          "memberOf": [
+            "(Warring States China)"
+          ],
+          "label": {
+            "en": "Zhou-era states",
+            "zh": "周代诸侯国"
+          }
+        }
+      ]
+    },
+    {
+      "id": "K9",
+      "t": "-0260",
+      "holders": [
+        {
+          "holder": "egypt",
+          "names": [
+            "Ptolemaic Kingdom"
+          ],
+          "label": {
+            "en": "Egypt (Ptolemaic kingdom)",
+            "zh": "埃及（托勒密王朝）"
+          }
+        },
+        {
+          "holder": "rome",
+          "names": [
+            "Roman Republic"
+          ],
+          "label": {
+            "en": "Roman Republic",
+            "zh": "罗马共和国"
+          }
+        },
+        {
+          "holder": "maurya",
+          "names": [
+            "Maurya Empire"
+          ],
+          "label": {
+            "en": "Maurya Empire",
+            "zh": "孔雀王朝"
+          }
+        },
+        {
+          "holder": "zhou-states",
+          "memberOf": [
+            "(Warring States China)"
+          ],
+          "label": {
+            "en": "Zhou-era states",
+            "zh": "周代诸侯国"
+          }
+        }
+      ]
+    },
+    {
+      "id": "K10",
+      "t": "-0221",
+      "holders": [
+        {
+          "holder": "egypt",
+          "names": [
+            "Ptolemaic Kingdom"
+          ],
+          "label": {
+            "en": "Egypt (Ptolemaic kingdom)",
+            "zh": "埃及（托勒密王朝）"
+          }
+        },
+        {
+          "holder": "rome",
+          "names": [
+            "Roman Republic"
+          ],
+          "label": {
+            "en": "Roman Republic",
+            "zh": "罗马共和国"
+          }
+        },
+        {
+          "holder": "maurya",
+          "names": [
+            "Maurya Empire"
+          ],
+          "label": {
+            "en": "Maurya Empire",
+            "zh": "孔雀王朝"
+          }
+        },
+        {
+          "holder": "qin",
+          "names": [
+            "Qin"
+          ],
+          "label": {
+            "en": "Qin",
+            "zh": "秦"
+          }
+        }
+      ]
+    },
+    {
+      "id": "K11",
+      "t": "-0027",
+      "holders": [
+        {
+          "holder": "rome",
+          "names": [
+            "Roman Empire"
+          ],
+          "label": {
+            "en": "Roman Empire (with Egypt)",
+            "zh": "罗马帝国（含埃及）"
+          }
+        },
+        {
+          "holder": "han",
+          "names": [
+            "Han Dynasty"
+          ],
+          "label": {
+            "en": "Han",
+            "zh": "汉"
+          }
+        }
+      ]
+    },
+    {
+      "id": "K12",
+      "t": "0117",
+      "holders": [
+        {
+          "holder": "rome",
+          "names": [
+            "Roman Empire"
+          ],
+          "label": {
+            "en": "Roman Empire",
+            "zh": "罗马帝国"
+          }
+        },
+        {
+          "holder": "han",
+          "names": [
+            "Han Dynasty"
+          ],
+          "label": {
+            "en": "Han",
+            "zh": "汉"
+          }
+        }
+      ]
+    },
+    {
+      "id": "K13",
+      "t": "0220",
+      "holders": [
+        {
+          "holder": "rome",
+          "names": [
+            "Roman Empire"
+          ],
+          "label": {
+            "en": "Roman Empire",
+            "zh": "罗马帝国"
+          }
+        }
+      ]
+    },
+    {
+      "id": "K14",
+      "t": "0400",
+      "holders": [
+        {
+          "holder": "rome",
+          "names": [
+            "Western Roman Empire"
+          ],
+          "label": {
+            "en": "Western Roman Empire",
+            "zh": "西罗马帝国"
+          }
+        },
+        {
+          "holder": "gupta",
+          "names": [
+            "Gupta Empire"
+          ],
+          "label": {
+            "en": "Gupta Empire",
+            "zh": "笈多王朝"
+          }
+        }
+      ]
+    },
+    {
+      "id": "K15",
+      "t": "0476",
+      "holders": [
+        {
+          "holder": "gupta",
+          "names": [
+            "Gupta Empire"
+          ],
+          "label": {
+            "en": "Gupta Empire",
+            "zh": "笈多王朝"
+          }
+        }
+      ]
+    },
+    {
+      "id": "K16",
+      "t": "0600",
+      "holders": []
+    }
   ],
   "spheres": [
-    { "file": "ac-srivijaya", "names": ["Srivijaya"], "until": 1300 },
-    { "file": "ac-khmer", "names": ["Khmer Empire"], "until": 1539 },
-    { "file": "ac-majapahit", "names": ["Majapahit"], "until": 1520 },
-    { "file": "ac-melaka", "names": ["Sultanate of Malacca"], "until": 1511 }
+    {
+      "file": "ac-srivijaya",
+      "names": [
+        "Srivijaya"
+      ],
+      "until": 1300
+    },
+    {
+      "file": "ac-khmer",
+      "names": [
+        "Khmer Empire"
+      ],
+      "until": 1539
+    },
+    {
+      "file": "ac-majapahit",
+      "names": [
+        "Majapahit"
+      ],
+      "until": 1520
+    }
   ],
-  "listOnly": ["Indus Valley Civilization", "Funan", "Sukhothai Kingdom", "Chenla", "Ayutthaya Kingdom", "Athenian Coalition", "Second Athenian League", "Chola Empire", "Eastern Roman Empire", "Middle Kingdom of Egypt", "Zhou Dynasty", "Qin Dynasty", "Magadha - Haryanka dynasty", "Magadha - Shaishunaga dynasty", "Antigonid Macedonia", "Twenty-sixth Dynasty of Egypt"]
+  "listOnly": [
+    "Indus Valley Civilization",
+    "Funan",
+    "Sukhothai Kingdom",
+    "Chenla",
+    "Ayutthaya Kingdom",
+    "Athenian Coalition",
+    "Second Athenian League",
+    "Chola Empire",
+    "Eastern Roman Empire",
+    "Middle Kingdom of Egypt",
+    "Zhou Dynasty",
+    "Qin Dynasty",
+    "Magadha - Haryanka dynasty",
+    "Magadha - Shaishunaga dynasty",
+    "Antigonid Macedonia",
+    "Twenty-sixth Dynasty of Egypt",
+    "Sultanate of Malacca"
+  ]
 }
