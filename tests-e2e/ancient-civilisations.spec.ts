@@ -27,12 +27,10 @@ async function beat(page: Page, chapter: string, index: number) {
 test('plate files only, chapters in date order, BCE and CE on one axis', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
-  const geo: string[] = [];
-  page.on('request', (r) => {
-    const m = /\/geo\/([^/?]+\.json)/.exec(r.url());
-    if (m) geo.push(m[1]!);
-  });
   await open(page, '');
+  // Geo files the page has loaded (resource timing sees fetches from any context of the page).
+  await expect.poll(() => page.evaluate(() => performance.getEntriesByType('resource').some((e) => e.name.includes('/geo/ancient-world-plate.json')))).toBe(true);
+  const geo = await page.evaluate(() => performance.getEntriesByType('resource').map((e) => /\/geo\/([^/?]+\.json)/.exec(e.name)?.[1]).filter((n): n is string => Boolean(n)));
   expect(await page.evaluate(() => window.__atlas!.chapters())).toEqual([
     'background', 'sumerian-cities', 'ancient-egypt', 'indian-subcontinent', 'china', 'greece-and-rome',
     'southeast-asia-seas', 'southeast-asia-kingdoms', 'legacies',
