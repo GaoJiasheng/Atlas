@@ -68,6 +68,7 @@ describe('persist (a built line: pipelines, docs/24 C2-lite)', () => {
     expect(after.lingering).toBe(true);
     expect(after.progress).toBe(1);
     expect(after.opacity).toBe(PERSIST_OPACITY);
+    expect(after.opacity).toBeGreaterThanOrEqual(0.85);
     // Long after `to` (well past any linger fade) it is still there.
     expect(frameAt(model, t('2000-03-01') + model.span * 10).movements[0]!.opacity).toBe(PERSIST_OPACITY);
     expect(frameStats(model, frameAt(model, t('2000-04-01'))).activeMovements).toBe(0);

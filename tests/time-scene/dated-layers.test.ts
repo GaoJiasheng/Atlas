@@ -130,9 +130,9 @@ describe('dated GPU layers', () => {
     expect(layers[2]).toMatchObject({ filter: ['all', datedLayerFilter(1980), ['==', ['get', 'certainty'], 'approximate']], paint: { 'line-dasharray': [3, 2] } });
   });
 
-  it('lines stay one token-coloured hairline without a recent-point overlay', () => {
+  it('lines grow at island zoom with token colour and high opacity, without a recent-point overlay', () => {
     const layers = datedLayerStyles({ ...def, kind: 'line' }, tokens, 'rail-colour', 1980);
     expect(layers).toHaveLength(1);
-    expect(layers[0]).toMatchObject({ type: 'line', filter: datedLayerFilter(1980), paint: { 'line-color': 'rail-colour', 'line-width': 0.8 } });
+    expect(layers[0]).toMatchObject({ type: 'line', filter: datedLayerFilter(1980), paint: { 'line-color': 'rail-colour', 'line-width': ['interpolate', ['linear'], ['zoom'], 10, 1, 13, 2.5], 'line-opacity': 0.9 } });
   });
 });

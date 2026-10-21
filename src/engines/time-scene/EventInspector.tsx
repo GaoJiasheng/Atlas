@@ -15,7 +15,7 @@ import { SourceRefs } from '../widgets/SourcePopover';
 import { Icon } from '../widgets/icons';
 import type { SceneEvent } from './schema';
 import type { TimeModel } from './lib/model';
-import { counterPer, formatTime } from './lib/format';
+import { counterPer, formatTimeRange } from './lib/format';
 import { toNumber } from './lib/time';
 import { sideCssColor } from './colors';
 
@@ -83,7 +83,7 @@ export function EventInspector({ event, model, locale, onClose }: EventInspector
 
   const isSite = event.kind === 'site';
   const p = model.datePrecision;
-  const when = event.until ? `${formatTime(event.t, locale, p)} – ${formatTime(event.until, locale, p)}` : formatTime(event.t, locale, p);
+  const when = formatTimeRange(event.t, event.until, locale, p);
   const index = isSite
     ? `P-${String(model.sites.findIndex((e) => e.id === event.id) + 1).padStart(2, '0')}`
     : `E-${String(model.events.findIndex((e) => e.event.id === event.id) + 1).padStart(2, '0')}`;

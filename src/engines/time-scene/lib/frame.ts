@@ -52,7 +52,7 @@ export const LINGER_OPACITY = 0.4;
 /** Share of the timeline span over which a lingering line fades out once `linger` has passed. */
 export const LINGER_FADE_SHARE = 0.02;
 /** Opacity of a finished `persist` line (a pipeline that stays built). */
-export const PERSIST_OPACITY = 0.6;
+export const PERSIST_OPACITY = 0.9;
 
 export function frameAt(model: TimeModel, t: number, highlight: readonly string[] = []): Frame {
   const hl = new Set(highlight);

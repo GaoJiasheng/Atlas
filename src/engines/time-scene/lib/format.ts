@@ -69,6 +69,13 @@ export function formatTime(t: TimePoint, locale: Locale, precision?: DisplayPrec
   return s;
 }
 
+/** A single date when both ends read alike, otherwise an inclusive display range. */
+export function formatTimeRange(from: TimePoint, to: TimePoint | undefined, locale: Locale, precision?: DisplayPrecision): string {
+  const start = formatTime(from, locale, precision);
+  const end = to === undefined ? start : formatTime(to, locale, precision);
+  return start === end ? start : `${start} – ${end}`;
+}
+
 /** Short year for the bar's segment labels: `770 BCE` / `前770年`, `1914` / `1914年`. */
 export function yearLabel(year: number, locale: Locale): string {
   if (locale === 'zh') return year < 0 ? `前${-year}年` : `${year}年`;

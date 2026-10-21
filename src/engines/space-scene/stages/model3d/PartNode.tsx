@@ -57,6 +57,7 @@ import {
 import type { Part, PartAnimation } from '../../schema';
 import type { PartDisplay } from '../../lib/visibility';
 import type { Box3Like } from '../../lib/parts';
+import { isLabelGestureEvent } from '../../lib/label-gesture';
 import { animationAngle, animationScale3 } from '../../lib/animation';
 import { explodeOffset, stagedAmount } from '../../lib/explode';
 import { contractScale, STRIPE_OPACITY } from '../../lib/rig';
@@ -1017,7 +1018,7 @@ export function PartNode(props: PartNodeProps) {
     press.current.timer = null;
   };
   const onPointerDown = (e: ThreeEvent<PointerEvent>) => {
-    if (e.pointerType !== 'touch' || !pickable) return;
+    if (e.pointerType !== 'touch' || !pickable || isLabelGestureEvent(e.nativeEvent)) return;
     e.stopPropagation();
     cancelPress();
     press.current.x = e.nativeEvent.clientX;
