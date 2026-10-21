@@ -1165,3 +1165,23 @@ SpaceScene / Model3DStage，paper 默认、cinema 可切。原型：`archetypes.
 
 **验收**（§4.8）：单测全部（`sort.test.ts` 62 条：T1–T6 逐格、不变量、确定性 < 0.2 ms、URL 往返、validate 报错用例；`keycard.test.ts`、`shift.test.ts`、`surfaces-units.test.ts`）；`sample-sort` e2e 9 条（深链接即终值、`]` 拱形与错开、chain 逐步、同学的盘 ✗ 与放回、叶子选垫子、选中标本的路径、中文读屏、µm 比例尺、手机抽屉 44 px）；`pnpm shoot sample-sort --beats --keys --layout` 0 失败；mosquito、energy-conversion、states-of-matter、light-and-shadows、forces、magnets、circuits 的 `--beats --keys` 改前改后都 0 失败。`sample-space` / `grasshopper` / `plant` 的截图回归没有单跑（新材质族只在用到时生成贴图，旧数据不受影响）。
 
+
+### 9.2 内容（2026-10-22，Opus 内容代理，主题 `living-things` 发布）
+
+**做了什么**：`src/content/topics/living-things/`（topic.yaml、7 章 39 拍、`data/parts.json`、`sources.json` 65 条、`glossary.json` 17 个名词、`SOURCES.md`、`REVIEW.md`）；几何与数据脚本 `scripts/geo/living-things/`（`build-parts.ts` 总装并核对每件标本放得进一格、`kit.ts`、`specimens/{non-living,plants,fungi-bacteria,animals,lab}.ts`、`sort-data.ts`、`text.ts`、`tris.ts`）；单测 `tests/space-scene/living-things-topic.test.ts`（特征表 = 本 spec §3.4 / 引擎夹具、每条字幕里的件数 = 模型、六个先猜后看的揭晓值、第 06 章打勾表 = 特征表、每件标本在自己的格子里、措辞禁句）；e2e `tests-e2e/living-things.spec.ts`；首页图与两张配图（`art/planned/living-things/` 的三张已审草稿，`scripts/illustrate.ts` 处理）；`grasshopper`、`plant`、`mosquito` 三处回链（§1.7）。
+
+**与 §2–§7 的出入**（施工时的决定，`REVIEW.md` 列给 Gavin）：
+
+1. **分类盘缩小**：1.0 × 0.5 米（§3.2 是 1.32 × 0.58 米），组的格子收紧：两组 4 × 3、三组 4 × 4、六组 3 × 2、X 3 × 2（格距仍 8 / 7 厘米），垫子 = 格子外缘再出 3 厘米。原因：7 厘米的标本在 1.32 米的盘上，托盘镜头下只有二三十像素。每组的容量仍大于模型在所有问题下给出的最大件数（validate 枚举）。引擎夹具 `specimen-tray.ts` 不改。
+2. **标本自建**：蝗虫、辣椒幼苗没有从 `grasshopper`、`plant` 抄零件（那两个主题放大 25–50 倍、零件多），按本主题的积木重画，每件 2–3 个材质槽；8 件画大了一点，`build-parts.ts` 自动缩到格内（×0.86–0.99）。企鹅、果蝠转成正面朝观者。
+3. **球、胶囊用低面数 lathe**：引擎的 `sphere` 是 48 × 32 段（约 3,000 三角形）；没有翅脉的 `wing` 改成同轮廓的薄 `extrude`（`wing` 的膜会把细长轮廓细分到 256 倍）。全部 32 件在盒里：83 draw calls、约 0.17 M 三角形（SwiftShader，1920 × 1080）。翅脉只留在果蝠的指骨和一片鸟巢蕨的孢子囊线。
+4. **毡垫**用 `plastic`（灰绿、哑光），不用 `fabric`（斑点像水磨石）；显微镜台座深灰 `powder`，细胞才看得清。
+5. **组色**：§3.1 的 `food` 与 `holder-5`、`cut` 与 `holder-2` 几乎同色，改为 ink-2 / holder-8 / accent-3 / holder-7 / holder-5 / holder-1 / holder-3 / holder-6 / holder-4 / accent-1 / neutral / ink-3 / accent-2（顺序同 §3.1）。
+6. **显微镜下统一 ×2000**：酵母细胞画成直径 1.2–1.8 厘米（6–9 微米，S76：5–10 微米），杆菌长 4–6 毫米（2–3 微米，S76：0.5–5 微米）；组比例尺 `um`、×2000（E-LT5）。
+7. **参考图**：本轮没有下载参考照片（下载需 Gavin 许可），建模依据各详情引用的 NParks 文字描述；§3.3 的并排核对留作下一轮。
+8. **章节标注**：章的 `labels` 收到 3–5 个（带 HUD 时托盘左侧被左列遮住）；拍的 `labels` 照 §5。
+9. **来源编号**：沿用研究 S1–S74，S59 设计研究，S75–S82 新增；没用上的研究来源写在 `SOURCES.md`。
+
+**待核 F-90–F-103 的结论**（2026-10-22 读原文）：F-90 核到（LibreTexts 实验手册：菌落由一个细胞长成、成百万个、肉眼可见，S75）；F-91 核到（酿酒酵母 5–10 µm，维基，S76）；F-92 核到（细菌 0.5–5 µm，维基，S76）；F-93 部分：海豚有背鳍、两片胸鳍状肢、尾鳍上下摆动（维基 S76、Shiffman S77），"水平 / 竖直尾鳍"的字眼没有可靠来源，正文改写"上下 / 左右摆动"；`fins` 仍为真；F-94 部分：NOAA 写头部收尖如鹰、两眼间四片鳞（S78），前肢是鳍状肢（维基 S76）；"鳍状肢上有鳞"没核到，不写；`scales` 按头部的鳞为真，海龟留在动物盘上；F-95 没核，不写；F-96 核到（海洋保护协会：皮齿 / 盾鳞，S79）；F-97 核到（FFW 体长 13 cm，S12）；F-98 核到（澳大利亚博物馆《人是哺乳动物》，S80）；F-99 核到（企鹅几乎只在南半球，S42）；F-100 核到（FFW：雄花是小穗、雌花褐色小头状，果实聚成球果状，S47）：第 03 章第 4 拍照写"会开很小的花"，模型画三个小果；F-101 已有（S50、S51）；F-102 部分：前翅硬、用后翅飞（澳大利亚博物馆 S81），"大多数甲虫会飞"没核到，不写；`can-fly` 对甲虫照 §3.4 为真；F-103 核到（BiodiversitySG：下雨前和傍晚小叶合起；FFW 写法不同，SOURCES.md 记录），第 01 章细看保留；另核英格兰二年级"活的、死的、从来没活过"（S64）、苔藓没有真正的根（S76）、霉长成菌落才肉眼可见（S76）、蝙蝠翼膜（S76）。
+
+**验收数据**（2026-10-22）：`pnpm shoot living-things --beats --tasks --keys --layout --locale en,zh --theme paper,cinema` 四种组合 0 节拍失败（拍链接 39 / 39）、0 键位失败、0 布局问题、章节标注全部在画面内、console 干净；全部 32 件在盒里 83 draw calls、约 0.17 M 三角形（SwiftShader）；单测 `living-things-topic.test.ts` 61 条；e2e `living-things.spec.ts` 7 条；首页计数 28 → 29（smoke）。

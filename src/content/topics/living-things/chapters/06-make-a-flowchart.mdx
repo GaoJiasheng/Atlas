@@ -1,0 +1,139 @@
+---
+id: "make-a-flowchart"
+order: 6
+title: {"en": "Make your own flowchart", "zh": "自己做分类流程图"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: false
+  cutaway: "none"
+  layers: ["non-living", "plants", "fungi", "bacteria", "insects", "birds", "mammals", "fish", "amphibians", "reptiles", "other-animals", "tray"]
+  labels: ["pad-3b", "pad-3c", "plantain-squirrel"]
+  camera: {"position": [0.4, 1.1, 1.5], "target": [0.0, 0.0, 0.02], "fov": 30}
+  summary: {"en": "A flowchart sorts with one yes-or-no question at a time. The order of the questions matters: start with something only one group has, such as feathers. Questions such as “can it fly?” put different kinds of animals in the same group.", "zh": "分类流程图一次问一个“是 / 不是”的问题。问题的顺序要紧：先问只有一类才有的特征，比如羽毛。“会不会飞”这样的问题，会把不同类的动物放进同一组。"}
+  sim:
+    set: {"tray": "own-key", "first": "feathers", "second": "hair"}
+    try:
+      vary: "first"
+      also: ["second"]
+      keep: [{"en": "The same eighteen animals", "zh": "同样的 18 只动物"}]
+      observe: ["kinds-a", "kinds-b", "count-c"]
+      record: {"chart": {"y": "kinds-a"}}
+      predict:
+        prompt: {"en": "Change the first question from “has feathers?” to “can it fly?”. How many kinds of animal will group A hold?", "zh": "把第一个问题从“有羽毛吗”换成“会飞吗”，A 组里会有几类动物？"}
+        start: {"first": "feathers", "second": "hair"}
+        change: {"first": "can-fly"}
+        observe: "kinds-a"
+        options:
+          - {"id": "one", "label": {"en": "Still one kind", "zh": "还是一类"}, "means": "same"}
+          - {"id": "more", "label": {"en": "More than one kind", "zh": "不止一类"}, "means": "more"}
+  beats:
+    - labels: ["pad-3a", "pad-3b", "pad-3c"]
+      caption: {"en": "This flowchart asks two questions. “Has feathers?” sends the birds to group A; then “has hair or fur?” sends the squirrel and the bat to group B. The rest wait in group C.", "zh": "这张流程图问两个问题。“有羽毛吗？”把鸟送进 A 组；接着“有毛发吗？”把松鼠和果蝠送进 B 组。其余的在 C 组。"}
+    - sim: {"set": {"tray": "own-key", "first": "can-fly", "second": "hair"}}
+      labels: ["pad-3a", "fruit-bat", "beetle", "javan-myna"]
+      caption: {"en": "Asking “can it fly?” first puts a bird, a bat and two insects together in group A: three kinds of animal in one group.", "zh": "先问“会飞吗？”，A 组里就有一只鸟、一只蝙蝠和两只昆虫：三类动物混在一组。"}
+    - sim: {"set": {"tray": "own-key", "first": "scales", "second": "hair"}}
+      labels: ["pad-3a", "pangolin", "house-gecko", "snakehead"]
+      caption: {"en": "“Has scales?” first mixes fish, reptiles and the pangolin, which is a mammal.", "zh": "先问“有鳞片吗？”，鱼、爬行动物和属于哺乳动物的穿山甲就混在了一起。"}
+    - sim: {"set": {"tray": "own-key", "first": "six-legs", "second": "feathers"}}
+      labels: ["pad-3a", "pad-3b"]
+      caption: {"en": "“Six legs?”, then “has feathers?”: groups A and B each hold one kind of animal. A good first question picks out something only one group has.", "zh": "先问“六条腿吗？”，再问“有羽毛吗？”：A、B 两组各只有一类动物。好的第一个问题，问的是只有一类才有的特征。"}
+    - sim: {"set": {"tray": "own-key", "first": "six-legs", "second": "feathers"}}
+      camera: {"position": [0.55, 0.5, 0.75], "target": [0.3, 0.0, 0.18], "fov": 30}
+      labels: ["pad-3c"]
+      caption: {"en": "Group C still holds fourteen: thirteen animals of four kinds, and a spider. More questions, one at a time, would sort them too.", "zh": "C 组里还有十四只：四类动物共十三只，加一只蜘蛛。再一个一个地问下去，它们也能分开。"}
+  index: {"parts": ["pad-3a", "pad-3b", "pad-3c", "javan-myna", "fruit-bat", "beetle", "pangolin", "house-gecko", "snakehead"]}
+---
+
+<Lang en>
+
+A <Term id="flowchart">flowchart</Term> sorts things with one question at a time, and each question has only two answers: yes or no. Singapore practice questions often show a flowchart, or the same questions set out as a table of ticks.
+
+This flowchart asks two questions, so it makes three groups. Animals that answer yes to the first question go to group A. Of the rest, those that answer yes to the second go to group B. Everything else stays in group C.
+
+The order matters. A good first question picks out something only one group has: feathers, hair or six legs. A poor first question picks out something several groups share. “Can it fly?” puts a bird, a bat and insects together. “Has scales?” mixes fish, reptiles and the pangolin. “Has fins?” puts the dolphin with the fish.
+
+Here are the same questions as a table of ticks for ten of the animals. Each column is one question of a flowchart: read down a column to see which animals answer yes.
+
+| Animal | Six legs | Feathers | Hair or fur | Fins | Scales | Moist skin |
+|---|---|---|---|---|---|---|
+| Grasshopper | ✓ | – | – | – | – | – |
+| Spider | – | – | – | – | – | – |
+| Javan myna | – | ✓ | – | – | – | – |
+| Penguin | – | ✓ | – | – | – | – |
+| Plantain squirrel | – | – | ✓ | – | – | – |
+| Fruit bat | – | – | ✓ | – | – | – |
+| Dolphin | – | – | – | ✓ | – | – |
+| Snakehead | – | – | – | ✓ | ✓ | – |
+| Tree frog | – | – | – | – | – | ✓ |
+| House gecko | – | – | – | – | ✓ | – |
+
+The last step of classifying is to give each group a heading. The flowchart card does this for you: each group is named by the question that sent animals there. Now make a flowchart of your own in the Try it card, and try it on someone else.
+
+<More title={{"en": "Tables and flowcharts", "zh": "打勾表和流程图"}}>
+
+Practice questions in Singapore show both forms. One kind asks which animal goes to a group in a flowchart; another gives a table of ticks and asks you to choose suitable headings for two groups. The questions are the same; only the layout differs.
+
+</More>
+
+<More title={{"en": "What a key is", "zh": "什么是检索表"}}>
+
+In England, pupils in Year 4 learn to use classification keys, and a key is the same idea as a flowchart: questions with only two answers, often yes or no, set out as a branching diagram or a table. In Chinese a key is called 检索表: it splits a group of living things into two again and again, using features that are easy to see.
+
+</More>
+
+<More title={{"en": "Make one for someone else", "zh": "给别人做一张"}}>
+
+Choose four to six animals you can see near home or school. Write yes-or-no questions about what you can see, starting with one that only one group answers yes to. Draw the flowchart and let a friend use it to name each animal. When you look for animals outside, watch them, draw them or photograph them, and leave them where they are.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+<Term id="flowchart">分类流程图</Term>一次问一个问题来分组，每个问题只有两个答案：是，或不是。新加坡的练习题常常给一张流程图，或者把同样的问题写成一张打勾表。
+
+这张流程图问两个问题，所以分成三组。对第一个问题答“是”的动物去 A 组。剩下的，对第二个问题答“是”的去 B 组。其余的都留在 C 组。
+
+问题的顺序很要紧。好的第一个问题，挑出的是只有一类才有的特征：羽毛、毛发、六条腿。不好的第一个问题，挑出的是好几类共有的特征。“会飞吗”会把鸟、蝙蝠和昆虫放在一起；“有鳞片吗”会把鱼、爬行动物和穿山甲混在一起；“有鳍吗”会把海豚和鱼分在一起。
+
+下面把同样的问题写成打勾表，列出其中十只动物。每一列就是流程图里的一个问题：顺着一列往下看，就知道哪些动物答“是”。
+
+| 动物 | 六条腿 | 羽毛 | 毛发 | 鳍 | 鳞片 | 皮肤湿润 |
+|---|---|---|---|---|---|---|
+| 蝗虫 | ✓ | – | – | – | – | – |
+| 蜘蛛 | – | – | – | – | – | – |
+| 林八哥 | – | ✓ | – | – | – | – |
+| 企鹅 | – | ✓ | – | – | – | – |
+| 大蕉松鼠 | – | – | ✓ | – | – | – |
+| 果蝠 | – | – | ✓ | – | – | – |
+| 海豚 | – | – | – | ✓ | – | – |
+| 斑鱼 | – | – | – | ✓ | ✓ | – |
+| 树蛙 | – | – | – | – | – | ✓ |
+| 壁虎 | – | – | – | – | ✓ | – |
+
+分类的最后一步，是给每一组起一个标题。流程图卡已经替你做了：每一组的名字，就是把动物送到那里的那个问题。现在在“试一试”卡片里做一张你自己的流程图，再请别人来用一用。
+
+<More title={{"en": "Tables and flowcharts", "zh": "打勾表和流程图"}}>
+
+新加坡的练习题两种形式都有。有一种问：按流程图，某只动物会进哪一组；另一种给一张打勾表，要你给两组选出合适的标题。问题是一样的，只是排法不同。
+
+</More>
+
+<More title={{"en": "What a key is", "zh": "什么是检索表"}}>
+
+英格兰四年级的学生学用“检索表”（classification key），它和流程图是同一个想法：每个问题只有两个答案，常常是“是”或“不是”，可以画成分叉的图，也可以写成表。中文里叫“检索表”：用容易看到的特征，把一群生物一次又一次地一分为二。
+
+</More>
+
+<More title={{"en": "Make one for someone else", "zh": "给别人做一张"}}>
+
+挑四到六种你在家附近或学校里看得到的动物。针对看得见的特征写几个“是 / 不是”的问题，第一个问题要选只有一类才答“是”的。画出流程图，请朋友用它说出每种动物的名字。到户外找动物时，看一看、画下来、拍张照，然后让它们留在原处。
+
+</More>
+
+</Lang>

@@ -1,0 +1,134 @@
+---
+id: "flowering-or-not"
+order: 3
+title: {"en": "Flowering and non-flowering plants", "zh": "开花植物与不开花植物"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: false
+  cutaway: "none"
+  layers: ["non-living", "plants", "fungi", "bacteria", "insects", "birds", "mammals", "fish", "amphibians", "reptiles", "other-animals", "tray"]
+  labels: ["ixora", "chilli-seedling", "rhu-sapling", "birds-nest-fern"]
+  camera: {"position": [0.4, 1.1, 1.5], "target": [0.0, 0.0, 0.02], "fov": 30}
+  summary: {"en": "Plants are grouped by whether they bear flowers. Ferns and mosses never do, and they are green too. A young chilli plant has no flowers yet, and a rhu tree looks like a pine, but both are flowering plants.", "zh": "植物按会不会开花来分组。蕨和苔藓从来不开花，它们也是绿色的。辣椒幼苗还没开花，木麻黄长得像松树，但它们都是开花植物。"}
+  sim:
+    set: {"tray": "plants", "q-plant": "none"}
+    try:
+      vary: "q-plant"
+      keep: [{"en": "The same six plants", "zh": "同样的 6 株植物"}]
+      observe: ["count-a", "count-b", "where-chilli"]
+      record: true
+      predict:
+        prompt: {"en": "Sort by “flowers, buds or fruits on it now” instead of “bears flowers at some time”. Will the young chilli plant stay in group A?", "zh": "不按“某个时候会开花”，改按“现在有花、花苞或果实”来分，辣椒幼苗还会留在 A 组吗？"}
+        start: {"q-plant": "flowering"}
+        change: {"q-plant": "flowers-or-fruits"}
+        observe: "where-chilli"
+        options:
+          - {"id": "stays", "label": {"en": "Yes, it stays in group A", "zh": "会，留在 A 组"}, "means": "a"}
+          - {"id": "moves", "label": {"en": "No, it moves to group B", "zh": "不会，它去了 B 组"}, "means": "b"}
+  beats:
+    - labels: ["ixora", "chilli-seedling", "rhu-sapling", "birds-nest-fern", "staghorn-fern", "moss"]
+      caption: {"en": "Six plants. All of them are green and make their own food.", "zh": "六株植物，都是绿色的，都自己制造食物。"}
+    - sim: {"set": {"tray": "plants", "q-plant": "flowers-now"}}
+      labels: ["pad-2a", "ixora", "pad-2b"]
+      caption: {"en": "Sorted by “has flowers now”, only the ixora goes to group A.", "zh": "按“现在有花”来分，只有龙船花去了 A 组。"}
+    - sim: {"set": {"tray": "plants", "q-plant": "flowers-now"}}
+      labels: ["chilli-seedling", "ixora"]
+      caption: {"en": "The young chilli plant has no flowers yet. It will flower when it is older, so it is still a flowering plant.", "zh": "辣椒幼苗还没开花，长大了才开，所以它仍是开花植物。"}
+    - sim: {"set": {"tray": "plants", "q-plant": "needles"}}
+      labels: ["rhu-sapling", "pad-2a"]
+      caption: {"en": "The rhu tree has thin, needle-like shoots, like a pine. It bears tiny flowers, so it is a flowering plant.", "zh": "木麻黄长着细针一样的枝条，像松树；但它会开很小的花，是开花植物。"}
+    - sim: {"set": {"tray": "plants", "q-plant": "flowering"}}
+      labels: ["pad-2a", "pad-2b", "rhu-sapling", "moss"]
+      caption: {"en": "Grouped by whether they ever bear flowers: the ixora, the chilli and the rhu are flowering plants. The two ferns and the moss never flower.", "zh": "按会不会开花来分：龙船花、辣椒、木麻黄是开花植物；两种蕨和苔藓从来不开花。"}
+    - sim: {"set": {"tray": "plants", "q-plant": "green"}}
+      labels: ["birds-nest-fern", "staghorn-fern", "moss"]
+      caption: {"en": "Non-flowering plants are green too. These two ferns grow on trees in Singapore.", "zh": "不开花植物也是绿色的。这两种蕨在新加坡长在树上。"}
+  index: {"parts": ["ixora", "chilli-seedling", "rhu-sapling", "birds-nest-fern", "staghorn-fern", "moss", "pad-2a", "pad-2b"]}
+---
+
+<Lang en>
+
+Six plants stand beside the tray. All of them are green, and all of them make their own food. The question here is whether a plant bears flowers.
+
+A <Term id="flowering-plant">flowering plant</Term> is a plant that can bear flowers. Its flowers become fruits with seeds inside (<TopicLink slug="plant" ch="flowers-and-pollination">A Plant: flowers</TopicLink>). The ixora is in flower now: each small flower has exactly <Num s="S46">four</Num> petals in a cross, and the flowers grow in clusters.
+
+A flowering plant does not have flowers all the time. The young chilli plant has only leaves so far; when it is older it will flower and then make chillies (<TopicLink slug="plant" ch="seed-to-plant">A Plant: from seed to plant</TopicLink>). So “has flowers now” is the wrong question: it puts the chilli plant with the ferns.
+
+A <Term id="non-flowering-plant">non-flowering plant</Term> never bears flowers. Ferns and mosses are non-flowering plants, and they are green too. The bird’s nest fern and the staghorn fern are native to Singapore and grow on trees, high up on branches and trunks.
+
+<Figure src="figures/living-things-plant-fungus" alt={{"en": "Three pencil drawings side by side: a potted flowering plant with one open flower and several buds, a potted fern with a coiled young frond, and a mushroom growing from a piece of rotting wood.", "zh": "三幅并排的铅笔画：一盆开着一朵花、还有几个花苞的开花植物，一盆有一片卷曲嫩叶的蕨，一朵长在朽木上的蘑菇。"}} caption={{"en": "A flowering plant, a fern and a mushroom. Only the first two are plants. Illustration for this topic.", "zh": "一株开花植物、一丛蕨、一朵蘑菇。只有前两样是植物。为本主题画的示意图。"}} />
+
+Looks can mislead. The rhu tree has thin, drooping green shoots like a pine, but NParks notes that it is a flowering plant and not related to pines at all. Its flowers are tiny, and its fruits form small cone-like clusters.
+
+In the Try it card, sort by different questions and see which one puts the chilli plant with the ixora and the rhu.
+
+<More title={{"en": "Not in flower yet", "zh": "还没开花"}}>
+
+A flowering plant does not have flowers all the time: a young plant may not have flowered yet. A plant with no flowers today may still be a flowering plant. To decide, ask whether it ever bears flowers, not whether it has flowers now.
+
+</More>
+
+<More title={{"en": "Spores (Primary 5)", "zh": "孢子（小五）"}}>
+
+On the underside of a mature bird’s nest fern frond are brown, fuzzy-looking lines where the fern makes its spores; one frond of the model shows them. How plants reproduce, by spores or by seeds, is studied in Primary 5. A few non-flowering plants make seeds instead of spores: NParks calls cycads and pines “non-flowering seed plants”.
+
+</More>
+
+<More title={{"en": "Plants on plants", "zh": "长在植物上的植物"}}>
+
+The rain tree, a flowering plant, often carries large, rosette-shaped bird’s nest ferns on its branches: a non-flowering plant growing on a flowering one. The staghorn fern also grows on trees, without harming them.
+
+</More>
+
+<More title={{"en": "Mosses", "zh": "苔藓"}}>
+
+Mosses are small and low and grow in soft green cushions on stones, soil and bark. They have no true roots: thin threads called rhizoids hold them in place. So the rule “a plant has roots, stems and leaves” does not fit every plant.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+分类盘旁边站着六株植物。它们都是绿色的，都自己制造食物。这一章要问的是：它会不会开花。
+
+<Term id="flowering-plant">开花植物</Term>是会开花的植物。花会变成果实，里面有种子（见<TopicLink slug="plant" ch="flowers-and-pollination">“一株植物”的花一章</TopicLink>）。龙船花正在开花：每一朵小花正好有 <Num s="S46">4</Num> 片花瓣，排成十字，一簇一簇地开。
+
+开花植物不是一直都有花。辣椒幼苗现在只有叶子，长大以后才会开花、结辣椒（见<TopicLink slug="plant" ch="seed-to-plant">“一株植物”的从种子到植物一章</TopicLink>）。所以“现在有没有花”问得不对：它会把辣椒苗和蕨分在一起。
+
+<Term id="non-flowering-plant">不开花植物</Term>从来不开花。蕨和苔藓都是不开花植物，它们也是绿色的。鸟巢蕨和鹿角蕨是新加坡的本地植物，长在树上，高高地挂在树枝和树干上。
+
+<Figure src="figures/living-things-plant-fungus" alt={{"en": "Three pencil drawings side by side: a potted flowering plant with one open flower and several buds, a potted fern with a coiled young frond, and a mushroom growing from a piece of rotting wood.", "zh": "三幅并排的铅笔画：一盆开着一朵花、还有几个花苞的开花植物，一盆有一片卷曲嫩叶的蕨，一朵长在朽木上的蘑菇。"}} caption={{"en": "A flowering plant, a fern and a mushroom. Only the first two are plants. Illustration for this topic.", "zh": "一株开花植物、一丛蕨、一朵蘑菇。只有前两样是植物。为本主题画的示意图。"}} />
+
+样子会骗人。木麻黄长着细长、下垂的绿色枝条，像松树；国家公园局却指出，它是开花植物，和松树毫无关系。它的花很小，果实聚成像小球果一样的一团。
+
+在“试一试”卡片里换不同的问题来分，看哪一个问题会把辣椒苗和龙船花、木麻黄分在一起。
+
+<More title={{"en": "Not in flower yet", "zh": "还没开花"}}>
+
+开花植物不是一直都有花：年幼的植株可能还没开过花。今天没有花的植物，仍可能是开花植物。要判断，就问它“会不会开花”，而不是“现在有没有花”。
+
+</More>
+
+<More title={{"en": "Spores (Primary 5)", "zh": "孢子（小五）"}}>
+
+鸟巢蕨成熟的叶子背面，有一条条褐色、毛茸茸的线，蕨就在那里产生孢子；模型上有一片叶子画出了这些线。植物怎样繁殖——用孢子还是用种子——到小五才学。有少数不开花植物结种子而不产孢子：国家公园局把苏铁和松树叫做“不开花的种子植物”。
+
+</More>
+
+<More title={{"en": "Plants on plants", "zh": "长在植物上的植物"}}>
+
+雨树是开花植物，枝上常常长着大大的、莲座状的鸟巢蕨：一株不开花植物长在一株开花植物上。鹿角蕨也长在树上，对树没有伤害。
+
+</More>
+
+<More title={{"en": "Mosses", "zh": "苔藓"}}>
+
+苔藓又小又矮，在石头、泥土和树皮上长成一团团柔软的绿垫。它们没有真正的根，是叫“假根”的细丝把它们固定住。所以“植物都有根、茎、叶”这条规矩，并不适用于所有植物。
+
+</More>
+
+</Lang>

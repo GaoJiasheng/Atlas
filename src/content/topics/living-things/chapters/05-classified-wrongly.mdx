@@ -1,0 +1,136 @@
+---
+id: "classified-wrongly"
+order: 5
+title: {"en": "Classified wrongly", "zh": "分错了的动物"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: false
+  cutaway: "none"
+  layers: ["non-living", "plants", "fungi", "bacteria", "insects", "birds", "mammals", "fish", "amphibians", "reptiles", "other-animals", "tray"]
+  labels: ["fruit-bat", "spider", "pangolin", "asian-toad"]
+  camera: {"position": [0.4, 1.1, 1.5], "target": [0.0, 0.0, 0.02], "fov": 30}
+  summary: {"en": "Some animals look as if they belong to another group. A fruit bat flies but has fur, so it is a mammal. A dolphin has fins and lives in the sea, but it breathes air and is a mammal too. A penguin cannot fly but has feathers. A spider is not an insect.", "zh": "有的动物看起来像别的类群。果蝠会飞，但身上有毛，是哺乳动物。海豚有鳍、住在海里，但它呼吸空气，也是哺乳动物。企鹅不会飞，却有羽毛。蜘蛛不是昆虫。"}
+  sim:
+    set: {"tray": "classmate", "fix": false, "suspect": "fruit-bat"}
+    try:
+      vary: "suspect"
+      also: ["fix"]
+      keep: [{"en": "The classmate’s tray", "zh": "同学的分类盘"}]
+      observe: ["verdict", "belongs", "wrong"]
+      record: true
+      predict:
+        prompt: {"en": "Press “move to the right groups”. Where will the dolphin end up?", "zh": "按下“放回正确的组”，海豚最后会在哪一组？"}
+        start: {"fix": false}
+        change: {"fix": true}
+        observe: "where-dolphin"
+        options:
+          - {"id": "fish", "label": {"en": "Still in group D, the fish", "zh": "还在 D 组，鱼类"}, "means": "d"}
+          - {"id": "mammals", "label": {"en": "Group C, the mammals", "zh": "去 C 组，哺乳动物"}, "means": "c"}
+  beats:
+    - labels: ["pad-6a", "pad-6b", "pad-6c", "pad-6d", "pad-6e", "pad-6f"]
+      caption: {"en": "A classmate sorted the same animals under six headings: insects, birds, mammals, fish, reptiles and amphibians. Seven of them are in the wrong group.", "zh": "一位同学把这些动物分到六个标题下：昆虫、鸟类、哺乳动物、鱼类、爬行动物、两栖动物。其中七只放错了组。"}
+    - sim: {"set": {"tray": "classmate", "fix": false, "suspect": "fruit-bat"}}
+      part: "fruit-bat"
+      labels: ["fruit-bat", "penguin"]
+      caption: {"en": "The fruit bat is with the birds because it flies, but it has fur: it is a mammal. The penguin is with the fish because it swims, but it has feathers: it is a bird.", "zh": "果蝠会飞，被放进了鸟类，可它身上有毛，是哺乳动物。企鹅会游泳，被放进了鱼类，可它有羽毛，是鸟。"}
+    - sim: {"set": {"tray": "classmate", "fix": false, "suspect": "dolphin"}}
+      part: "dolphin"
+      labels: ["dolphin", "shark"]
+      caption: {"en": "The dolphin has fins and lives in the sea, like the shark. But a dolphin breathes air through a blowhole and has no gills. It is a mammal; the shark is a fish.", "zh": "海豚和鲨鱼一样有鳍、住在海里。但海豚用头顶的喷水孔呼吸空气，没有鳃。它是哺乳动物，鲨鱼才是鱼。"}
+    - sim: {"set": {"tray": "classmate", "fix": false, "suspect": "spider"}}
+      part: "spider"
+      labels: ["spider", "asian-toad"]
+      caption: {"en": "The spider has eight legs and two body parts, so it is not an insect. The toad’s skin is dry and bumpy, but a toad is a kind of frog: an amphibian.", "zh": "蜘蛛有八条腿、身体分两部分，不是昆虫。蟾蜍的皮肤干而多疙瘩，但蟾蜍是蛙的一种，是两栖动物。"}
+    - sim: {"set": {"tray": "classmate", "fix": false, "suspect": "pangolin"}}
+      part: "pangolin"
+      labels: ["pangolin", "mudskipper"]
+      caption: {"en": "The pangolin is covered in scales, but it is a mammal. The mudskipper spends time out of the water, but it is a fish.", "zh": "穿山甲全身是鳞片，却是哺乳动物。弹涂鱼常常离开水，却是鱼。"}
+    - sim: {"set": {"tray": "classmate", "fix": true, "suspect": "dolphin"}}
+      part: null
+      labels: ["pad-6c", "pad-6d", "pad-x", "spider"]
+      caption: {"en": "In the right groups, the mammals now include the bat, the dolphin and the pangolin, and the spider sits apart, in none of the six groups.", "zh": "放回正确的组以后，哺乳动物里多了果蝠、海豚和穿山甲；蜘蛛单独放在一边，不属于这六类。"}
+  index: {"parts": ["fruit-bat", "penguin", "dolphin", "shark", "spider", "asian-toad", "pangolin", "mudskipper", "pad-x"]}
+---
+
+<Lang en>
+
+A classmate has sorted the eighteen animals under six headings: insects, birds, mammals, fish, reptiles and amphibians. This is a common kind of question in Singapore: which animals are classified wrongly? Seven are. Most of the mistakes come from sorting by where an animal lives or how it moves instead of by its body.
+
+The fruit bat flies, so it was put with the birds, but its body is furry: bats are mammals, the only mammals that can truly fly. The penguin swims, so it was put with the fish, but it has feathers: it is a bird that cannot fly.
+
+The dolphin has fins and lives in the sea, like the shark. But dolphins are mammals and sharks are fish. A dolphin has lungs and comes up to breathe air through its blowhole; a shark breathes with gills. A dolphin also feeds its young on milk.
+
+The spider has <Num s="S40">eight</Num> legs and two body parts, so it is not an insect, and it belongs to none of the six groups. The toad’s skin is dry and bumpy, but all toads are frogs: it is an amphibian. The mudskipper spends much of its time on the mud, but it has fins, scales and gills: it is a fish. The pangolin is covered in scales, but it is a mammal.
+
+Scientists also look at things a model cannot show: whether an animal breathes with lungs or gills, and how it feeds its young. The dolphin and the pangolin need these to be placed correctly. You do not need to remember these facts about each animal.
+
+In Singapore the humpback dolphin, the pangolin and the hawksbill turtle are all critically endangered.
+
+<More title={{"en": "Dolphin or shark", "zh": "海豚还是鲨鱼"}}>
+
+The surest difference is breathing: sharks have gills, dolphins do not. The tail helps too: a shark swims by moving its tail from side to side, a dolphin moves its tail up and down. Giving birth does not tell them apart, because some sharks give birth to live young while others lay eggs.
+
+</More>
+
+<More title={{"en": "Flying and gliding", "zh": "飞和滑翔"}}>
+
+A bat’s wing is skin stretched between its arm, its long finger bones and the side of its body. The Sunda colugo, sometimes called a “flying lemur”, is neither a lemur nor able to fly: it glides from tree to tree.
+
+</More>
+
+<More title={{"en": "All toads are frogs", "zh": "蟾蜍也是蛙"}}>
+
+NParks puts it simply: all toads are frogs, but not all frogs are toads. The Asian toad is widespread and common in Singapore, but the sources disagree on whether it is native: NParks’ Flora & Fauna Web says native, NParks’ BiodiversitySG says non-native, and Singapore Biodiversity Online says it was introduced.
+
+</More>
+
+<More title={{"en": "Guppies and mosquitoes", "zh": "孔雀鱼与蚊子"}}>
+
+The guppy was brought to Singapore and is now common in drains and canals. Guppies have been released in many places to control mosquitoes, but it is debatable whether this made much difference. What does work at home is in <TopicLink slug="mosquito" ch="breaking-the-cycle">A Mosquito’s Life Cycle: breaking the cycle</TopicLink>.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+一位同学把十八只动物分到六个标题下：昆虫、鸟类、哺乳动物、鱼类、爬行动物、两栖动物。这是新加坡常见的一种题目：哪些动物分错了？一共七只。大多数错误，都是因为按动物住在哪里、怎样移动来分，而不是看它的身体。
+
+果蝠会飞，就被放进了鸟类，可它身上毛茸茸的：蝙蝠是哺乳动物，也是唯一真正会飞的哺乳动物。企鹅会游泳，就被放进了鱼类，可它有羽毛：它是不会飞的鸟。
+
+海豚和鲨鱼一样有鳍、住在海里。但海豚是哺乳动物，鲨鱼是鱼。海豚用肺呼吸，要浮上水面，用喷水孔吸进空气；鲨鱼用鳃呼吸。海豚还用奶喂养幼仔。
+
+蜘蛛有 <Num s="S40">8</Num> 条腿、两部分身体，不是昆虫，六个类群里哪一类都不是。蟾蜍的皮肤干而多疙瘩，但所有的蟾蜍都是蛙：它是两栖动物。弹涂鱼常常待在泥滩上，但它有鳍、有鳞片、有鳃：它是鱼。穿山甲全身是鳞片，却是哺乳动物。
+
+科学家还会看模型看不出来的东西：动物用肺还是用鳃呼吸，怎样喂养幼仔。海豚和穿山甲，要靠这些才放得对。每种动物的这些特征，不必背下来。
+
+在新加坡，驼背豚、穿山甲和玳瑁都是极危物种。
+
+<More title={{"en": "Dolphin or shark", "zh": "海豚还是鲨鱼"}}>
+
+最可靠的区别是呼吸：鲨鱼有鳃，海豚没有。尾巴也能帮忙分辨：鲨鱼游泳时尾巴左右摆，海豚的尾巴上下摆。看“是不是直接生小的”却分不出来，因为有的鲨鱼直接生出小鲨鱼，有的下蛋。
+
+</More>
+
+<More title={{"en": "Flying and gliding", "zh": "飞和滑翔"}}>
+
+蝙蝠的翅膀是一层皮，从手臂、长长的指骨一直连到身体两侧。鼯猴有时被叫做“飞狐猴”，其实它既不是狐猴，也不会飞：它在树与树之间滑翔。
+
+</More>
+
+<More title={{"en": "All toads are frogs", "zh": "蟾蜍也是蛙"}}>
+
+国家公园局说得很简单：所有的蟾蜍都是蛙，但不是所有的蛙都是蟾蜍。黑眶蟾蜍在新加坡分布广、很常见，但它是不是本地动物，各方说法不一：国家公园局的“动植物网”说是本地的，“新加坡生物多样性”网站说不是，“新加坡生物多样性在线”说是引进的。
+
+</More>
+
+<More title={{"en": "Guppies and mosquitoes", "zh": "孔雀鱼与蚊子"}}>
+
+孔雀鱼是被带进新加坡的，现在在水沟和水渠里很常见。很多地方放养孔雀鱼来控制蚊子，但效果有多大，还有争议。在家里真正有用的做法，见<TopicLink slug="mosquito" ch="breaking-the-cycle">“一只蚊子与它的生活史”的“在家里打断这一圈”</TopicLink>。
+
+</More>
+
+</Lang>

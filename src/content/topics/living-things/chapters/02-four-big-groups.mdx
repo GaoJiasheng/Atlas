@@ -1,0 +1,133 @@
+---
+id: "four-big-groups"
+order: 2
+title: {"en": "Plants, animals, fungi and bacteria", "zh": "植物、动物、真菌、细菌"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: false
+  cutaway: "none"
+  layers: ["non-living", "plants", "fungi", "bacteria", "insects", "birds", "mammals", "fish", "amphibians", "reptiles", "other-animals", "tray"]
+  labels: ["ixora", "mushroom", "bacteria-dish", "grasshopper"]
+  camera: {"position": [0.4, 1.1, 1.5], "target": [0.0, 0.0, 0.02], "fov": 30}
+  summary: {"en": "Living things can be sorted into big groups: plants, animals, fungi and bacteria. A mushroom is not a plant: it has no leaves and cannot make its own food. Mould and yeast are fungi too, and they are alive.", "zh": "生物可以分成几个大类：植物、动物、真菌、细菌。蘑菇不是植物：它没有叶子，也不能自己制造食物。霉菌和酵母也是真菌，也是生物。"}
+  sim:
+    set: {"tray": "big", "asked-big": 0}
+    try:
+      vary: "asked-big"
+      keep: [{"en": "The same thirteen living things", "zh": "同样的 13 件生物"}]
+      observe: ["count-a", "count-b", "count-c", "count-u"]
+      record: {"chart": {"y": "count-u"}}
+      predict:
+        prompt: {"en": "Ask the first question: green, and makes its own food. Will the mushroom go to group A with the plants?", "zh": "问第一个问题：绿色、自己制造食物。蘑菇会和植物一起去 A 组吗？"}
+        start: {"asked-big": 0}
+        change: {"asked-big": 1}
+        observe: "where-mushroom"
+        options:
+          - {"id": "with-plants", "label": {"en": "Yes, to group A with the plants", "zh": "会，和植物一起去 A 组"}, "means": "a"}
+          - {"id": "stays", "label": {"en": "No, it stays in the case", "zh": "不会，它留在盒里"}, "means": "u"}
+  beats:
+    - labels: ["ixora", "mushroom", "javan-myna", "bacteria-dish", "moss"]
+      caption: {"en": "Thirteen living things, still in the case: plants, animals, fungi and bacteria mixed together.", "zh": "十三件生物还在标本盒里：植物、动物、真菌、细菌混在一起。"}
+    - sim: {"set": {"tray": "big", "asked-big": 1}}
+      labels: ["pad-6a", "moss", "mushroom"]
+      caption: {"en": "First question: is it green, and does it make its own food? The four plants move to group A. The mushroom stays behind.", "zh": "第一个问题：它是不是绿色的、自己制造食物？四株植物移到 A 组，蘑菇留在原处。"}
+    - sim: {"set": {"tray": "big", "asked-big": 2}}
+      labels: ["pad-6b", "grasshopper", "snakehead"]
+      caption: {"en": "Next: does it take in food through a mouth? The four animals move to group B.", "zh": "下一个问题：它是不是用嘴吃进食物？四只动物移到 B 组。"}
+    - sim: {"set": {"tray": "big", "asked-big": 3}}
+      labels: ["mushroom", "bracket-fungus", "mouldy-bread", "yeast", "bacteria-dish"]
+      caption: {"en": "The mushroom, the bracket fungus, the mould and the yeast are fungi, in group C. They have no leaves and cannot make their own food. The bacteria are group D.", "zh": "蘑菇、多孔菌、霉和酵母是真菌，在 C 组。它们没有叶子，也不能自己制造食物。细菌是 D 组。"}
+    - sim: {"set": {"tray": "big", "asked-big": 3}}
+      camera: "lens-view"
+      layers: ["magnified"]
+      labels: ["yeast-cells", "bacteria-cells", "group:magnified"]
+      caption: {"en": "Under a microscope, yeast is a mass of tiny round cells. Bacteria are smaller still: one on its own is far too small to see.", "zh": "在显微镜下，酵母是一大团圆圆的小细胞。细菌还要小，单独一个根本看不见。"}
+    - sim: {"set": {"tray": "big", "asked-big": 3}}
+      camera: {"position": [0.05, 0.55, 0.85], "target": [0.0, 0.0, 0.2], "fov": 30}
+      labels: ["mouldy-bread", "bacteria-dish", "pad-6c", "pad-6d"]
+      caption: {"en": "Grown into a patch, mould on bread can be seen with the eyes alone, and so can a colony of bacteria in a dish.", "zh": "长成一片以后，面包上的霉用眼睛就看得见，培养皿里的一团细菌菌落也看得见。"}
+  index: {"parts": ["ixora", "chilli-seedling", "birds-nest-fern", "moss", "mushroom", "bracket-fungus", "mouldy-bread", "yeast", "bacteria-dish", "yeast-cells", "bacteria-cells", "grasshopper", "javan-myna", "plantain-squirrel", "snakehead"]}
+---
+
+<Lang en>
+
+Thirteen living things wait in the case, mixed together. Three questions sort them into four big groups.
+
+The first question picks out the plants: green, and able to make their own food. The ixora, the chilli plant, the fern and the moss move to group A. The second picks out the animals, which take in food through a mouth: the grasshopper, the myna, the squirrel and the snakehead move to group B.
+
+The mushroom stayed behind both times. It is a <Term id="fungus">fungus</Term>, and fungi are not plants: a fungus has no roots, stems or leaves, and it has no chlorophyll, so it cannot make its own food. Fungi are not all mushrooms. The bracket fungus on the dead wood, the <Term id="mould">mould</Term> on the bread and the <Term id="yeast">yeast</Term> in the dish are fungi too, and all of them are alive. Group C holds the four fungi.
+
+One mould cell is far too small to see, but on bread mould grows into fuzzy patches you can see. Yeast lives mostly as single cells. On the plinth beside the microscope, yeast cells are drawn <Num s="S59">2,000 times</Num> life size; a real one is about <Num s="S76">5 to 10 micrometres</Num> across.
+
+<Term id="bacteria">Bacteria</Term> are smaller still, about <Num s="S76">0.5 to 5 micrometres</Num> long. One bacterium is far too small to see, but grown on a dish, millions of them make a round colony you can see. The bacteria end up alone in group D.
+
+The syllabus asks you to recognise fungi and bacteria; sorting into smaller groups is only for plants and animals.
+
+<More title={{"en": "Fungi are not plants", "zh": "真菌不是植物"}}>
+
+In a small study of four fifth-grade students in Turkey, the students said before their lessons that fungi are plants, that “fungi” means mushrooms, and that mushrooms have roots and leaves. A fungus exhibition at the Singapore Botanic Gardens explained that fungi are neither plants nor animals. A mushroom is only the part of a fungus that makes spores; the spores form on the thin gills under the cap.
+
+</More>
+
+<More title={{"en": "Decomposers", "zh": "分解者"}}>
+
+Many fungi feed on dead plants and animals and break them down, so they are called decomposers. The bracket fungus is one. Some attack living trees as well: a study of <Num s="S56">134</Num> trees in Singapore by NParks, NTU and NUS scientists linked wood-rotting fungi with diseased trees.
+
+</More>
+
+<More title={{"en": "Helpful and harmful bacteria", "zh": "有益和有害的细菌"}}>
+
+Some bacteria are helpful, for example in helping us digest food; others are harmful. The rain tree has special bacteria in its roots that take nitrogen from the air and turn it into food for the tree. Bacteria in the gut are in <TopicLink slug="digestive-system" ch="large-intestine-chapter">The Digestive System: the large intestine</TopicLink>. The dish on this bench is a model: do not grow bacteria at home, and do not eat food with mould on it.
+
+</More>
+
+<More title={{"en": "Recognise, not classify", "zh": "认出，不必再分"}}>
+
+The syllabus uses two different verbs. Pupils recognise fungi (mould, mushroom, yeast) and bacteria: they know them when they see them. Pupils classify plants and animals: they sort them into smaller groups by what they can see. So this topic sorts plants (chapter 3) and animals (chapters 4 to 6) further, and stops at “fungi” and “bacteria”.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+十三件生物混在一起，放在标本盒里。三个问题，把它们分成四个大类。
+
+第一个问题挑出植物：绿色的、能自己制造食物。龙船花、辣椒苗、蕨和苔藓移到 A 组。第二个问题挑出动物：用嘴把食物吃进去。蝗虫、八哥、松鼠和斑鱼移到 B 组。
+
+两次蘑菇都留在原处。它是<Term id="fungus">真菌</Term>，真菌不是植物：它没有根、茎、叶，也没有叶绿素，不能自己制造食物。真菌也不只是蘑菇。长在朽木上的多孔菌、面包上的<Term id="mould">霉菌</Term>、碟子里的<Term id="yeast">酵母</Term>都是真菌，也都是生物。C 组就是这四种真菌。
+
+单独一个霉菌细胞小得看不见，但霉在面包上会长成一片片毛茸茸的斑，看得见。酵母大多是一个个单独的细胞。显微镜旁边的台座上，酵母细胞放大了 <Num s="S59">2,000 倍</Num>来画；真实的酵母细胞宽约 <Num s="S76">5 到 10 微米</Num>。
+
+<Term id="bacteria">细菌</Term>还要小，长约 <Num s="S76">0.5 到 5 微米</Num>。一个细菌小得根本看不见，但在培养皿里长出成百万个，就成了一团看得见的圆形菌落。最后，细菌单独留在 D 组。
+
+课纲要求认出真菌和细菌；再细分成小组，只要求植物和动物。
+
+<More title={{"en": "Fungi are not plants", "zh": "真菌不是植物"}}>
+
+土耳其一项只有四名五年级学生的小型研究里，学生上课前说：真菌是植物，真菌就是蘑菇，蘑菇有根和叶。新加坡植物园的一次真菌展览说明，真菌既不是植物，也不是动物。蘑菇只是真菌长孢子的那一部分；孢子长在菌盖下面一片片薄薄的菌褶上。
+
+</More>
+
+<More title={{"en": "Decomposers", "zh": "分解者"}}>
+
+许多真菌靠死去的植物和动物过活，把它们分解掉，所以叫分解者。多孔菌就是一种。有的真菌也侵害活着的树：国家公园局、南洋理工大学和新加坡国立大学的科学家研究了新加坡 <Num s="S56">134</Num> 棵树，发现腐朽木头的真菌和生病的树有关。
+
+</More>
+
+<More title={{"en": "Helpful and harmful bacteria", "zh": "有益和有害的细菌"}}>
+
+有的细菌对人有益，比如帮助我们消化食物；有的细菌有害。雨树的根里有特别的细菌，能把空气里的氮变成树的养分。肠道里的细菌，见<TopicLink slug="digestive-system" ch="large-intestine-chapter">“消化系统”主题的大肠一章</TopicLink>。桌上的培养皿只是模型：不要在家里培养细菌，发了霉的食物也不要吃。
+
+</More>
+
+<More title={{"en": "Recognise, not classify", "zh": "认出，不必再分"}}>
+
+课纲用了两个不同的动词。真菌（霉菌、蘑菇、酵母）和细菌，要求“认出”：看到了知道是什么。植物和动物，要求“分类”：按看得见的特征分成更小的组。所以本主题把植物（第 3 章）和动物（第 4 到 6 章）再往下分，真菌和细菌就停在“真菌”“细菌”这一层。
+
+</More>
+
+</Lang>

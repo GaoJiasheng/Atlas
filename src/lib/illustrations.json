@@ -239,6 +239,26 @@
       "0000000000000000"
     ]
   },
+  "living-things": {
+    "mask": [
+      "0000000000000000",
+      "0000140370000000",
+      "00145dabd1000000",
+      "0008eeffb1000000",
+      "006a6befa5000330",
+      "00be6acad4004a30",
+      "05dfcaa86213ab30",
+      "079edcbf9588bb40",
+      "03dfd9fdfecbdb40",
+      "017aacfffffffa70",
+      "007c9effffffea40",
+      "01bdefffffffea40",
+      "02effffffffffd20",
+      "007ffffffffff700",
+      "00069899999b6000",
+      "0000000000000000"
+    ]
+  },
   "magnets": {
     "mask": [
       "0000000000000000",

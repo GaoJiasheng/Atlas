@@ -1,0 +1,16 @@
+# MOE 2023 Science P3 Diversity of Living and Non-Living Things; docs/38, decisions taken 2026-10-21. Parts: pnpm tsx scripts/geo/living-things/build-parts.ts
+id: living-things
+title: { en: "Classifying Living Things", zh: "生物的分类" }
+subtitle: { en: "Living or not, and how living things are sorted into groups by what you can see", zh: "有没有生命，以及怎样按看得见的特征给生物分组" }
+subject: science
+tags: [singapore, psle, p3, space]
+moe: ["MOE 2023 Science P3 Diversity of Living and Non-Living Things"]
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: published
+illustration: living-things
+shortTitle: { en: "Living things", zh: "生物" }
+note: { en: "Model specimens on a sorting tray · not to scale · cells under the microscope drawn far larger than life", zh: "分类盘上的标本模型 · 彼此不按比例 · 显微镜下的细胞画得比实物大得多" }
