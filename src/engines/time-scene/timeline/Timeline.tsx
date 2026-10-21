@@ -73,7 +73,7 @@ const LANES = { k: [0, 12], m: [14, 34], e: [36, 48] } as const;
 const LANES_H = 48;
 
 export function formatNumber(t: number, model: TimeModel, locale: Locale): string {
-  return formatTime(fromNumber(t, model.scale, { precision: coarser(model.datePrecision, precisionFor(model.span)) }), locale);
+  return formatTime(fromNumber(t, model.scale, { precision: coarser(model.datePrecision, precisionFor(model.span)) }), locale, undefined, model.mixedEra);
 }
 
 /** Mono readout: upper-case in English (`15 FEB 1942`). */
@@ -90,7 +90,7 @@ export function formatReadout(t: number, model: TimeModel, locale: Locale): stri
 export function segmentDate(t: number, model: TimeModel, locale: Locale): string {
   if (model.scale === 'ma') return formatReadout(t, model, locale);
   const year = Math.floor(t);
-  if (year < 0 || model.span > 100 || model.datePrecision === 'year') return yearLabel(year, locale);
+  if (year < 0 || model.span > 100 || model.datePrecision === 'year') return yearLabel(year, locale, model.mixedEra);
   const p = fromNumber(t, 'date', { precision: 'month' });
   return typeof p === 'string' ? p : formatReadout(t, model, locale);
 }

@@ -10,6 +10,11 @@
  * `precision` (a topic's `datePrecision`) drops the finer parts: `'-0260-05'`
  * at `year` reads '260 BCE'. `yearLabel` is the short form of the bar's
  * segment labels: '770 BCE' / '前770年'.
+ *
+ * `ce` (the model's `mixedEra`: a topic whose time span crosses from BCE into
+ * CE, docs/43 E1) marks the years 1–999 CE, which would otherwise read like
+ * bare numbers next to '260 BCE': '150 CE' / '公元150年'. Years from 1000 on,
+ * BCE years and topics that stay on one side of 1 CE read exactly as before.
  */
 import type { Locale } from '../../../i18n';
 import { isGeoTime, type TimePoint } from '../../../lib/time';
@@ -48,7 +53,10 @@ function formatMa(ma: number, locale: Locale): string {
   return `${groupThousands(trim(ma, 2))} Ma`;
 }
 
-export function formatTime(t: TimePoint, locale: Locale, precision?: DisplayPrecision): string {
+/** True for a CE year that gets the era marker in a mixed-era topic. */
+const marksCe = (year: number, ce: boolean | undefined) => ce === true && year > 0 && year < 1000;
+
+export function formatTime(t: TimePoint, locale: Locale, precision?: DisplayPrecision, ce?: boolean): string {
   if (isGeoTime(t)) return formatMa(t.ma, locale);
   const m = DATE_RE.exec(t);
   if (!m) return t;
@@ -57,29 +65,31 @@ export function formatTime(t: TimePoint, locale: Locale, precision?: DisplayPrec
   const month = m[3] && precision !== 'year' ? Number(m[3]) : null;
   const day = m[4] && precision !== 'year' && precision !== 'month' ? Number(m[4]) : null;
 
+  const era = !bce && marksCe(year, ce);
   if (locale === 'zh') {
-    let s = `${bce ? '公元前' : ''}${year}年`;
+    let s = `${bce ? '公元前' : era ? '公元' : ''}${year}年`;
     if (month !== null) s += `${month}月`;
     if (day !== null) s += `${day}日`;
     return s;
   }
-  let s = `${year}${bce ? ' BCE' : ''}`;
+  let s = `${year}${bce ? ' BCE' : era ? ' CE' : ''}`;
   if (month !== null) s = `${MONTHS_EN[month - 1]} ${s}`;
   if (day !== null) s = `${day} ${s}`;
   return s;
 }
 
 /** A single date when both ends read alike, otherwise an inclusive display range. */
-export function formatTimeRange(from: TimePoint, to: TimePoint | undefined, locale: Locale, precision?: DisplayPrecision): string {
-  const start = formatTime(from, locale, precision);
-  const end = to === undefined ? start : formatTime(to, locale, precision);
+export function formatTimeRange(from: TimePoint, to: TimePoint | undefined, locale: Locale, precision?: DisplayPrecision, ce?: boolean): string {
+  const start = formatTime(from, locale, precision, ce);
+  const end = to === undefined ? start : formatTime(to, locale, precision, ce);
   return start === end ? start : `${start} – ${end}`;
 }
 
-/** Short year for the bar's segment labels: `770 BCE` / `前770年`, `1914` / `1914年`. */
-export function yearLabel(year: number, locale: Locale): string {
-  if (locale === 'zh') return year < 0 ? `前${-year}年` : `${year}年`;
-  return year < 0 ? `${-year} BCE` : String(year);
+/** Short year for the bar's segment labels: `770 BCE` / `前770年`, `1914` / `1914年`; with `ce`, `150 CE` / `公元150年`. */
+export function yearLabel(year: number, locale: Locale, ce?: boolean): string {
+  const era = marksCe(year, ce);
+  if (locale === 'zh') return year < 0 ? `前${-year}年` : era ? `公元${year}年` : `${year}年`;
+  return year < 0 ? `${-year} BCE` : era ? `${year} CE` : String(year);
 }
 
 /**

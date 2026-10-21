@@ -352,7 +352,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     (chapter: string, index: number) => {
       const b = presentation.beats.find((x) => x.chapter === chapter && x.index === index);
       const when = (b?.spec?.t as TimePoint | undefined) ?? store.getState().chapterTarget(chapter).t;
-      const date = when !== null && when !== undefined ? formatTime(when, locale, model.datePrecision) : '';
+      const date = when !== null && when !== undefined ? formatTime(when, locale, model.datePrecision, model.mixedEra) : '';
       return { caption: b ? tx(b.caption, locale) : '', date: locale === 'en' ? date.toLocaleUpperCase('en') : date };
     },
     [presentation.beats, locale, store, model],
@@ -482,7 +482,8 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   const movementsOn = layers.includes('movements');
   const bordersOn = layers.includes('borders');
   const statusParam = storeT !== null ? formatTimeParam(storeT) : '';
-  const statusT = storeT !== null && isBce(statusParam) ? formatReadout(toNumber(storeT), model, locale) : statusParam;
+  // BCE dates, and every date of a topic that crosses into CE (docs/43 E1), read as the readout: '221 BCE', '150 CE'.
+  const statusT = storeT !== null && (isBce(statusParam) || model.mixedEra) ? formatReadout(toNumber(storeT), model, locale) : statusParam;
   const specRows = useMemo<SpecRow[]>(
     () => [
       { id: 'entities', label: bi('time.spec.entities'), value: pad2(geo.entities.length), mono: true },
@@ -725,7 +726,7 @@ function ReferenceBanner({ model, playhead, locale }: { model: TimeModel; playhe
   if (!pair) return null;
   const name = (i: number) => {
     const k = model.keyframes[i]!;
-    const date = formatTime(k.keyframe.t, locale, model.datePrecision);
+    const date = formatTime(k.keyframe.t, locale, model.datePrecision, model.mixedEra);
     return `K${i + 1} ${locale === 'en' ? date.toLocaleUpperCase('en') : date}`;
   };
   return (

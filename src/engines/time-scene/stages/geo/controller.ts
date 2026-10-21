@@ -281,7 +281,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     const en = model.entities.get(id)?.entity;
     if (!en) return '';
     const status = warStatusAt(en, t);
-    const date = (p: Parameters<typeof formatTime>[0]) => formatTime(p, locale, model.datePrecision);
+    const date = (p: Parameters<typeof formatTime>[0]) => formatTime(p, locale, model.datePrecision, model.mixedEra);
     if (status === 'after') {
       const left = en.left !== undefined ? entityDated(options.strings, 'left', date(en.left), locale) : null;
       return left ?? `${blocLabel(options.blocLabels, 'out', locale)}${en.left !== undefined ? ` · ${date(en.left)}` : ''}`;
@@ -824,7 +824,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   };
 
   const dateText = (from: Parameters<typeof formatTime>[0], to?: Parameters<typeof formatTime>[0]) => {
-    const s = formatTimeRange(from, to, locale, model.datePrecision);
+    const s = formatTimeRange(from, to, locale, model.datePrecision, model.mixedEra);
     return locale === 'en' ? s.toLocaleUpperCase('en') : s;
   };
 
