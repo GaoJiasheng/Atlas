@@ -1,0 +1,48 @@
+---
+id: one-question
+order: 1
+title: { en: "Sample one question", zh: "示例一个问题" }
+state:
+  view: assembled
+  explode: 0
+  run: false
+  part: null
+  layers: [round, boxy, pointy, tray, scenery]
+  camera: {"position": [0.02, 0.66, 0.86], "target": [-0.07, 0.0, 0.02], "fov": 32}
+  labels: [sample-ball, sample-tile, sample-spike]
+  summary: { en: "Sample one question: a yes group and a no group.", zh: "示例一个问题：答“是”的一组，答“不是”的一组。" }
+  sim:
+    set: { tray: one, q-one: none }
+    try:
+      vary: q-one
+      keep: [{ en: "Same eight specimens", zh: "同样的八件标本" }]
+      observe: [count-a, count-b, where-ball]
+      record: { chart: true }
+      predict:
+        prompt: { en: "Sample prediction: sorted by shiny, where does the ball go?", zh: "示例猜想：按“亮闪闪的”分，球放到哪一组？" }
+        change: { q-one: shiny }
+        observe: where-ball
+        options:
+          - { id: yes-group, label: { en: "Group A", zh: "A 组" }, means: a }
+          - { id: no-group, label: { en: "Group B", zh: "B 组" }, means: b }
+  beats:
+    - caption: { en: "Sample beat one: no question yet, all in the case.", zh: "示例节拍一：还没有问题，全在盒里。" }
+    - sim: { set: { q-one: round } }
+      caption: { en: "Sample beat two: round ones to A, the rest to B.", zh: "示例节拍二：圆的进 A 组，其余进 B 组。" }
+    - sim: { set: { q-one: tall } }
+      caption: { en: "Sample beat three: another question, other groups.", zh: "示例节拍三：换一个问题，组就变了。" }
+  index:
+    parts: [sample-ball, sample-bead, sample-ring, sample-cube, sample-brick, sample-tile, sample-cone, sample-spike, pad-2a, pad-2b]
+---
+
+<Lang en>
+
+Sample one question: placeholder text for sorting by one yes or no question.
+
+</Lang>
+
+<Lang zh>
+
+示例一个问题：用一个“是 / 不是”的问题分组的占位文字。
+
+</Lang>

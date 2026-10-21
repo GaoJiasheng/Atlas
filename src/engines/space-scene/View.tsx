@@ -76,6 +76,7 @@ import { SitesOverlay } from './hud/SitesOverlay';
 import { CircuitCard } from './hud/CircuitCard';
 import { EnergyCard } from './hud/EnergyCard';
 import { CycleCard } from './hud/CycleCard';
+import { KeyCard } from './hud/KeyCard';
 import { EnergyBarLabels } from './hud/EnergyBarLabels';
 import { GroupScaleBars } from './hud/GroupScaleBars';
 import { TryIt } from './explorer/TryIt';
@@ -537,7 +538,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       },
       specRows: spaceSpecRows(file),
       status,
-      card: file.sim?.lifeCycle ? both('space.card.cycle') : file.sim?.energy ? both('space.card.energy') : file.sim?.circuit?.diagram ? both('space.card.circuit') : both('space.card.title'),
+      card: file.sim?.sort ? both('space.card.key') : file.sim?.lifeCycle ? both('space.card.cycle') : file.sim?.energy ? both('space.card.energy') : file.sim?.circuit?.diagram ? both('space.card.circuit') : both('space.card.title'),
       beats: beatControls,
       beatStep,
       // At a beat the URL leaves out what `?ch=<chapter>&b=<n>` brings back (the beat's scene), not the chapter's target.
@@ -591,6 +592,12 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         fill: (id: string) => {
           const f = bridge.fills.get(id);
           return f ? { ...f } : null;
+        },
+        // A shifted part now (docs/38 §4.3): its drawn offset, its target (scene units, to 0.1 mm), whether it is drawn and how long its move waited (s); null without a shift.
+        shift: (id: string) => {
+          const r = bridge.shifts.get(id);
+          const mm = (v: readonly number[]) => v.map((x) => Math.round(x * 1e4) / 1e4);
+          return r ? { offset: mm(r.offset), target: mm(r.target), shown: r.shown, delay: Math.round(r.delay * 1000) / 1000 } : null;
         },
         // Energy bars on the stage (docs/31 E-EN6): per timeline output, the three bars now (potential + kinetic + lost = 100) and whether they show.
         energyBars: () =>
@@ -735,7 +742,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         <GroupScaleBars file={file} bridge={bridge} />
         <EnergyBarLabels file={file} bridge={bridge} />
       </SceneSlot>
-      <SceneSlot name="card">{file.sim?.lifeCycle ? <CycleCard file={file} /> : file.sim?.energy ? <EnergyCard file={file} /> : file.sim?.circuit?.diagram ? <CircuitCard file={file} /> : <PartChainCard file={file} />}</SceneSlot>
+      <SceneSlot name="card">{file.sim?.sort ? <KeyCard file={file} /> : file.sim?.lifeCycle ? <CycleCard file={file} /> : file.sim?.energy ? <EnergyCard file={file} /> : file.sim?.circuit?.diagram ? <CircuitCard file={file} /> : <PartChainCard file={file} />}</SceneSlot>
       <SceneSlot name="plate">
         <PlateBlock file={file} ui={ui} bridge={bridge} />
       </SceneSlot>

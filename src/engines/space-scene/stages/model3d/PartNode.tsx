@@ -10,8 +10,9 @@
  * and terminal cover).
  *
  * Transform stack: position (rest centre + explode) → pose (matrix) → the
- * try-it offset / turn (eased) → the played timeline moves / turns →
- * animations (matrix) → the shape's own transform (glb meshes).
+ * try-it offset / turn (eased) → the played timeline moves / turns → the
+ * try-it shift (a lifted, staggered move to the model's slot) → animations
+ * (matrix) → the shape's own transform (glb meshes).
  *
  * Try-it bindings (lib/sim/bind.ts) also give a part a glow (`uGlow` on its
  * own material, slot 0; eased: a dull red at a trace warming to the lamp
@@ -71,6 +72,7 @@ import type { ShapePiece } from './geometry';
 import type { SimSettle } from '../../sim-schema';
 import { nearestTurn, SETTLE_EPS_LENGTH, stepSwing } from '../../lib/sim/settle';
 import { placeDirection, slotTint, type SimFill, type SimPlace, type SimPlay, type SimStretch } from '../../lib/sim/bind';
+import { shiftPoint } from '../../lib/sim/shift';
 import { channelValue } from '../../lib/sim/timeline';
 import { STRETCH_ATTRIBUTE, stretchPositions } from '../../lib/stretch';
 import { partPrimitives } from '../../lib/parts';
@@ -89,6 +91,20 @@ export interface SimMove {
   deg: number;
   settle?: SimSettle | undefined;
   pivot?: Vec3 | undefined;
+}
+
+/**
+ * A try-it shift (docs/38 §4.3): the offset to move to (scene units, applied
+ * last), whether the model shows the part (hidden: it stays where it is and
+ * fades), and the move: `delay` s before it starts (its place in the
+ * stagger), `ease` s long, `lift` high at the middle.
+ */
+export interface ShiftMove {
+  target: Vec3;
+  shown: boolean;
+  delay: number;
+  ease: number;
+  lift: number;
 }
 
 /** Geometry + rest transform of a part (from a primitive or a glb mesh). */
@@ -177,8 +193,12 @@ export interface PartNodeProps {
   /** Try-it stretch of the part's coil. */
   stretch?: SimStretch | null;
   fill?: SimFill | null;
+  /** The stage bridge (drawn fills and shifts for the test API). */
   fillBridge?: StageBridge;
+  /** REFERENCE: liquids and shifts go straight to their end values. */
   fillStill?: boolean;
+  /** Try-it shift to the model's slot (null: none). */
+  shift?: ShiftMove | null;
   /** Try-it tint: colour (sRGB hex) and level 0–1. */
   simTint?: { color: string; level: number } | null;
   /** Try-it: a filings card's needles for the field state on show (part frame; null: as built). */
@@ -238,6 +258,7 @@ const MOVE_RATE = 7;
 const swing = { x: 0, v: 0 };
 const tmpPlay = new Matrix4();
 const tmpC: Vec3 = [0, 0, 0];
+const ZERO3: Vec3 = [0, 0, 0];
 
 /** An animation that moves every copy of its part about the copy's own centre (schema `each`). */
 const isEach = (a: PartAnimation) => (a.kind === 'rotate' || a.kind === 'oscillate' || a.kind === 'pulse') && a.each === true;
@@ -331,7 +352,7 @@ export function PartNode(props: PartNodeProps) {
     fillMotion.current.drawn = NaN;
     return () => fillGeometry?.dispose();
   }, [fillGeometry]);
-  useEffect(() => () => { props.fillBridge?.fills.delete(part.id); }, [props.fillBridge, part.id]);
+  useEffect(() => () => { props.fillBridge?.fills.delete(part.id); props.fillBridge?.shifts.delete(part.id); }, [props.fillBridge, part.id]);
   useEffect(() => {
     if (!fillShape || !fillGeometry || !props.fillBridge || !props.fill) return;
     const binding = props.fill;
@@ -388,6 +409,15 @@ export function PartNode(props: PartNodeProps) {
     /** A bouncing offset's speed per axis (scene units per second). */
     moveV: [0, 0, 0] as Vec3,
     turn: 0,
+    /** Shift: from, to, now (scene units), start (performance.now ms, after its stagger delay), length (ms) and lift. */
+    shiftFrom: [0, 0, 0] as Vec3,
+    shiftTo: [0, 0, 0] as Vec3,
+    shiftNow: [0, 0, 0] as Vec3,
+    shiftT0: 0,
+    shiftMs: 0,
+    shiftLift: 0,
+    shiftDelay: 0,
+    shiftDone: true,
     placeFrom: [0, 1, 0] as Vec3,
     placeNow: [0, 1, 0] as Vec3,
     placeTarget: null as SimPlace | null,
@@ -827,6 +857,44 @@ export function PartNode(props: PartNodeProps) {
         if (key !== m.playKey) {
           m.playKey = key;
           moving = true;
+        }
+      }
+      // Shift (docs/38 §4.3): to the model's slot on a lifted arc after its stagger delay; a part the model hides stays where it is.
+      const sh = props.shift;
+      if (sh || !m.shiftDone || m.shiftNow[0] !== 0 || m.shiftNow[1] !== 0 || m.shiftNow[2] !== 0) {
+        const to = sh?.target ?? ZERO3;
+        const jump = snap || props.fillStill === true || prefersReducedMotion();
+        const changed = (sh?.shown ?? true) && (to[0] !== m.shiftTo[0] || to[1] !== m.shiftTo[1] || to[2] !== m.shiftTo[2]);
+        if (changed) {
+          // Out of sight (faded away) or a jump: straight there; else from where it is now, after its place in the stagger.
+          const still = jump || m.fade < 0.004 || (sh?.ease ?? 0) <= 0;
+          for (let a = 0; a < 3; a++) {
+            m.shiftFrom[a] = still ? to[a]! : m.shiftNow[a]!;
+            m.shiftTo[a] = to[a]!;
+          }
+          m.shiftDelay = still ? 0 : (sh?.delay ?? 0);
+          m.shiftT0 = performance.now() + m.shiftDelay * 1000;
+          m.shiftMs = still ? 0 : (sh?.ease ?? 0) * 1000;
+          m.shiftLift = sh?.lift ?? 0;
+          m.shiftDone = false;
+        } else if (jump && !m.shiftDone) m.shiftMs = 0;
+        if (!m.shiftDone) {
+          const k = m.shiftMs <= 0 ? 1 : (performance.now() - m.shiftT0) / m.shiftMs;
+          shiftPoint(m.shiftFrom, m.shiftTo, k, k >= 1 ? 0 : m.shiftLift, m.shiftNow);
+          if (k >= 1) m.shiftDone = true;
+          moving = true;
+        }
+        pr.matrix.premultiply(tmpT.makeTranslation(m.shiftNow[0], m.shiftNow[1], m.shiftNow[2]));
+        const reading = props.fillBridge?.shifts.get(part.id);
+        if (sh && props.fillBridge) {
+          if (reading) {
+            for (let a = 0; a < 3; a++) {
+              reading.offset[a] = m.shiftNow[a]!;
+              reading.target[a] = m.shiftTo[a]!;
+            }
+            reading.shown = handle.visible;
+            reading.delay = m.shiftDelay;
+          } else props.fillBridge.shifts.set(part.id, { offset: [...m.shiftNow], target: [...m.shiftTo], shown: handle.visible, delay: m.shiftDelay });
         }
       }
       pr.matrixWorldNeedsUpdate = true;

@@ -1,0 +1,18 @@
+# PLACEHOLDER topic: exercises the SpaceScene sort model (docs/38 §4, E-LT1–E-LT5) only: eight primitive
+# "specimens" with made-up features, a specimen case and a sorting tray with two pad layouts; one question,
+# two questions, a chain asked in turn and a classmate's arrangement (fix, suspect, wrong); the shift binding
+# (lifted, staggered moves; specimens off the tray hidden), the flowchart card, predict-only states, the
+# `scales` / `feathers` surfaces and a micrometre scale bar on a magnified cell.
+id: sample-sort
+title: { en: "Sample: Sorting tray", zh: "示例：分类盘" }
+subtitle: { en: "A placeholder topic for testing the sort model", zh: "用于测试分类模型的占位主题" }
+subject: science
+levels: [P3]
+moe: []
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: draft
+note: { en: "Placeholder topic · made-up specimens · counts are SIM", zh: "占位主题 · 虚构的标本 · 件数为模拟值" }

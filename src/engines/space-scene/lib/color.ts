@@ -69,9 +69,10 @@ export function rgbaToHex({ r, g, b }: Rgba): string {
  * Procedural surface map a finish uses (built once per stage, see stages/model3d/textures.ts):
  * roughness streaks (brushed), orange peel, fine grain, a wood-grain colour map, the bench
  * normal maps pile (carpet tufts) and sand (abrasive grit), and the organism normal maps
- * hex (compound-eye facets), fibres (muscle), rings (tracheal taenidia).
+ * hex (compound-eye facets), fibres (muscle), rings (tracheal taenidia), scales
+ * (overlapping rounded scales, with a grey colour map) and feathers (overlapping vanes).
  */
-export type SurfaceFinish = 'brushed' | 'brushed-axial' | 'peel' | 'grain' | 'hex' | 'fibres' | 'rings' | 'wood' | 'pile' | 'sand';
+export type SurfaceFinish = 'brushed' | 'brushed-axial' | 'peel' | 'grain' | 'hex' | 'fibres' | 'rings' | 'wood' | 'pile' | 'sand' | 'scales' | 'feathers';
 
 export interface MaterialLook {
   /** `#rrggbb` sRGB. */
@@ -143,6 +144,10 @@ export const MATERIAL_FAMILIES: Record<MaterialFamily, FamilySpec> = {
   trachea: { color: { paper: '#e4dfd2', cinema: '#d8d3c6' }, metalness: 0, roughness: 0.34, finish: 'rings', normal: 0.5, envIntensity: 0.9 },
   nerve: { color: { paper: '#dcc77e', cinema: '#d8c47e' }, metalness: 0, roughness: 0.4, finish: 'grain', glow: 0.06, envIntensity: 0.8 },
   eye: { color: { paper: '#2b2723', cinema: '#36302b' }, metalness: 0.1, roughness: 0.16, finish: 'hex', normal: 0.65, envIntensity: 1.5 },
+  // Scales (docs/38 E-LT4): semi-gloss rows of rounded scales, a dark seam at each free edge; tint it the species' colour.
+  scales: { color: { paper: '#8a8371', cinema: '#958e7b' }, metalness: 0, roughness: 0.45, finish: 'scales', normal: 0.8, envIntensity: 0.8 },
+  // Feathers: matte overlapping vanes, each with a shaft; tint it.
+  feathers: { color: { paper: '#77736b', cinema: '#85807a' }, metalness: 0, roughness: 0.8, finish: 'feathers', normal: 0.7, envIntensity: 0.5 },
 };
 
 /** Base colour of every preset per theme (aliases included). */

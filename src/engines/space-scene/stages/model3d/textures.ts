@@ -12,6 +12,9 @@
  *  - wood          long-grain streaks along U, a grey colour map the family colour tints
  *  - pile          dense short tufts, normal map and a grey colour map (carpet)
  *  - sand          packed rounded grains, normal map and a grey colour map (sandpaper, sand)
+ *  - scales        rows of overlapping rounded scales along U, normal map and a grey colour map
+ *                  with a dark seam at each free edge (fish, reptiles; 14 round a sweep)
+ *  - feathers      overlapping long vanes along U, each with a raised shaft, normal map (birds)
  */
 import { CanvasTexture, RepeatWrapping, SRGBColorSpace, type Texture } from 'three';
 import type { SurfaceFinish } from '../../lib/color';
@@ -250,17 +253,92 @@ function shadeCanvas(field: Float32Array, size: number, low: number): HTMLCanvas
   return c;
 }
 
+/**
+ * Overlapping rounded scales (height 0..1): 8 columns along U × 7 rows across
+ * V per tile, every other column half a row down; where discs overlap, the
+ * one of the earlier column lies on top (roof tiles), so each scale shows a
+ * crescent ending in its rounded free edge. High in the middle, 0 at the edge.
+ */
+function scaleField(size: number): Float32Array {
+  const cols = 8;
+  const rows = 7;
+  const dx = size / cols;
+  const dy = size / rows;
+  const r = dy * 0.78;
+  const field = new Float32Array(size * size);
+  for (let y = 0; y < size; y++)
+    for (let x = 0; x < size; x++) {
+      let h = 0;
+      // Columns from the earliest that can reach x: the first disc that covers the pixel is on top.
+      const c0 = Math.floor((x - r) / dx);
+      for (let c = c0; c <= c0 + Math.ceil((2 * r) / dx) + 1 && h === 0; c++) {
+        const cx = c * dx;
+        const shift = (((c % 2) + 2) % 2) * 0.5 * dy;
+        const j0 = Math.floor((y - shift) / dy);
+        for (let j = j0 - 1; j <= j0 + 1; j++) {
+          const d = Math.hypot(x - cx, y - (j * dy + shift)) / r;
+          if (d < 1 && x >= cx - r * 0.2) {
+            h = 0.25 + 0.75 * (1 - d * d);
+            break;
+          }
+        }
+      }
+      field[y * size + x] = h;
+    }
+  return field;
+}
+
+/**
+ * Overlapping vanes (height 0..1): 4 columns along U × 8 rows across V, each
+ * a long leaf shape pointing along U with a raised shaft down its middle;
+ * the earlier column's vane lies on top.
+ */
+function featherField(size: number): Float32Array {
+  const cols = 4;
+  const rows = 8;
+  const dx = size / cols;
+  const dy = size / rows;
+  const a = dx * 0.95;
+  const b = dy * 0.62;
+  const field = new Float32Array(size * size);
+  for (let y = 0; y < size; y++)
+    for (let x = 0; x < size; x++) {
+      let h = 0;
+      for (let c = Math.floor(x / dx) - 2; c <= Math.floor(x / dx) + 1 && h === 0; c++) {
+        const cx = c * dx + dx * 0.5;
+        const shift = (((c % 2) + 2) % 2) * 0.5 * dy;
+        const j0 = Math.floor((y - shift) / dy);
+        for (let j = j0 - 1; j <= j0 + 1; j++) {
+          // Leaf: wide behind the middle, narrowing to a tip at +U.
+          const u = (x - cx) / a;
+          if (u < -1 || u > 1) continue;
+          const half = b * Math.sqrt(Math.max(0, 1 - u * u)) * (u > 0 ? 1 - 0.45 * u : 1);
+          const v = y - (j * dy + shift);
+          if (Math.abs(v) >= half) continue;
+          const across = Math.abs(v) / half;
+          h = 0.3 + 0.55 * (1 - across * across) + 0.25 * Math.exp(-((v / (0.07 * b)) ** 2));
+          break;
+        }
+      }
+      field[y * size + x] = Math.min(1, h);
+    }
+  return field;
+}
+
 const BENCH_SIZE = 128;
 /** Tiles per UV unit: carpet tufts a few millimetres across, sandpaper grit finer. */
 const PILE_REPEAT = 8;
 const SAND_REPEAT = 10;
+/** Tiles per UV unit (a sweep's U and V: one round the section): 2 × 7 = 14 scales round a body. */
+const SCALE_REPEAT = 2;
+const FEATHER_REPEAT = 2;
 
 export interface TextureKit {
   /** Roughness map for a finish (every finish has one: one shader program for all parts). */
   roughness(finish: SurfaceFinish): Texture;
   /** Normal map for a finish (orange peel unless it has its own; strength is set per family). */
   normal(finish?: SurfaceFinish): Texture;
-  /** Colour map for a finish that has one (wood, pile, sand), else null. */
+  /** Colour map for a finish that has one (wood, pile, sand, scales), else null. */
   albedo(finish: SurfaceFinish): Texture | null;
   dispose(): void;
 }
@@ -279,10 +357,12 @@ export function createTextureKit(): TextureKit {
   // The pile and grit height fields, shared by each finish's normal and colour maps.
   let pileHeights: Float32Array | null = null;
   let sandHeights: Float32Array | null = null;
+  let scaleHeights: Float32Array | null = null;
   const pile = () => (pileHeights ??= pileField(BENCH_SIZE));
   const sand = () => (sandHeights ??= sandField(BENCH_SIZE));
+  const scale = () => (scaleHeights ??= scaleField(BENCH_SIZE));
   const own = (finish: SurfaceFinish): Texture | null => {
-    if (finish !== 'hex' && finish !== 'fibres' && finish !== 'rings' && finish !== 'pile' && finish !== 'sand') return null;
+    if (finish !== 'hex' && finish !== 'fibres' && finish !== 'rings' && finish !== 'pile' && finish !== 'sand' && finish !== 'scales' && finish !== 'feathers') return null;
     let t = extra.get(finish);
     if (!t) {
       t =
@@ -294,7 +374,11 @@ export function createTextureKit(): TextureKit {
               ? wrap(normalCanvas(BENCH_SIZE, (x, y) => pile()[y * BENCH_SIZE + x]!, 1.6), PILE_REPEAT)
               : finish === 'sand'
                 ? wrap(normalCanvas(BENCH_SIZE, (x, y) => sand()[y * BENCH_SIZE + x]!, 2.4), SAND_REPEAT)
-                : wrap(ringsCanvas(), 1);
+                : finish === 'scales'
+                  ? wrap(normalCanvas(BENCH_SIZE, (x, y) => scale()[y * BENCH_SIZE + x]!, 2.2), SCALE_REPEAT)
+                  : finish === 'feathers'
+                    ? wrap(normalCanvas(BENCH_SIZE, (() => { const f = featherField(BENCH_SIZE); return (x: number, y: number) => f[y * BENCH_SIZE + x]!; })(), 1.8), FEATHER_REPEAT)
+                    : wrap(ringsCanvas(), 1);
       if (finish === 'hex') t.repeat.set(6, 3);
       extra.set(finish, t);
     }
@@ -310,7 +394,7 @@ export function createTextureKit(): TextureKit {
       return (finish && own(finish)) || peel;
     },
     albedo(finish) {
-      if (finish !== 'wood' && finish !== 'pile' && finish !== 'sand') return null;
+      if (finish !== 'wood' && finish !== 'pile' && finish !== 'sand' && finish !== 'scales') return null;
       let t = colour.get(finish);
       if (!t) {
         t =
@@ -318,7 +402,9 @@ export function createTextureKit(): TextureKit {
             ? wrap(woodCanvas(), 1)
             : finish === 'pile'
               ? wrap(shadeCanvas(pile(), BENCH_SIZE, 0.55), PILE_REPEAT)
-              : wrap(shadeCanvas(sand(), BENCH_SIZE, 0.62), SAND_REPEAT);
+              : finish === 'scales'
+                ? wrap(shadeCanvas(scale(), BENCH_SIZE, 0.5), SCALE_REPEAT)
+                : wrap(shadeCanvas(sand(), BENCH_SIZE, 0.62), SAND_REPEAT);
         t.colorSpace = SRGBColorSpace;
         colour.set(finish, t);
       }

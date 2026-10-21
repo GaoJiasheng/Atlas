@@ -8,14 +8,15 @@
  */
 import { scaleStep } from './schematic';
 
-export type LengthUnit = 'mm' | 'cm' | 'm';
+/** `um` (micrometres) only for a magnified group's scale bar (docs/38 §4.6). */
+export type LengthUnit = 'um' | 'mm' | 'cm' | 'm';
 
 export interface ModelUnits {
   modelUnit: LengthUnit;
   scale: number;
 }
 
-const MM: Record<LengthUnit, number> = { mm: 1, cm: 10, m: 1000 };
+const MM: Record<LengthUnit, number> = { um: 0.001, mm: 1, cm: 10, m: 1000 };
 
 /** Millimetres in one scene unit (`null` without units). */
 export function mmPerUnit(units: ModelUnits | undefined): number | null {
@@ -27,8 +28,14 @@ const trim = (n: number) => {
   return s.includes('.') ? s.replace(/\.?0+$/, '') : s;
 };
 
-/** A real length in millimetres as text in the model's unit family: `8 MM`, `2.5 CM`, `1.2 M` (mm up to 100 mm, cm up to 1 m). */
+/**
+ * A real length in millimetres as text in the model's unit family: `8 MM`,
+ * `2.5 CM`, `1.2 M` (mm up to 100 mm, cm up to 1 m); under 0.1 mm (and in
+ * `um` up to 1 mm) micrometres, written `5 µm` (a lower-case µ and m: µM
+ * would be a different unit).
+ */
 export function formatLength(mm: number, unit: LengthUnit): string {
+  if ((unit === 'um' && mm < 1) || ((unit === 'um' || unit === 'mm') && mm < 0.1)) return `${trim(mm * 1000)} µm`;
   if (unit === 'm' || mm >= 1000) return `${trim(mm / 1000)} M`;
   if (unit === 'cm' || mm >= 100) return `${trim(mm / 10)} CM`;
   return `${trim(mm)} MM`;

@@ -14,6 +14,7 @@
  * place). Frames: lib/sim/frame.ts.
  */
 import type { Primitive } from '../../schema';
+import type { MatterPart } from '../../matter-schema';
 import type { SimData, SimValues } from '../../sim-schema';
 import { restTransform, toTransform, type TransformInput } from '../pose';
 import { simEffects } from './bind';
@@ -63,5 +64,7 @@ export function evaluateSimOnStage(
   observe: readonly string[] = [],
 ): { outputs: SimOutputs; frames: MagnetFrames } {
   const frames = sim.magnet ? magnetFrames(sim, source, values, pose) : NO_FRAMES;
-  return { outputs: evaluateSim(sim, values, observe, frames, sim.kind === 'matter' ? source.parts.map((p) => ({ id: p.id, ...(p.primitive && 'kind' in p.primitive ? { primitive: p.primitive } : {}) })) : []), frames };
+  // The matter model reads its liquids' primitives; the sort model its specimens' homes (the parts as they are: one list, cached).
+  const parts = sim.kind === 'matter' ? source.parts.map((p) => ({ id: p.id, ...(p.primitive && 'kind' in p.primitive ? { primitive: p.primitive } : {}) })) : sim.kind === 'sort' ? (source.parts as unknown as readonly MatterPart[]) : [];
+  return { outputs: evaluateSim(sim, values, observe, frames, parts), frames };
 }

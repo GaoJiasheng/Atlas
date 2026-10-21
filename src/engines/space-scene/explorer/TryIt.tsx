@@ -10,7 +10,7 @@
  * undoes it) and the data table ("record a row": one row per value of the
  * varied control, a yes / no column with `judge`; in memory only). Below
  * 1024 px, where the top-right card is hidden, the circuit diagram (the
- * energy chain, the life-cycle ring) folds in
+ * energy chain, the life-cycle ring, the flowchart) folds in
  * here. Buttons, `[` `]` / `T` and the diagram's switches write the same
  * store value (lib/sim/controls.ts), so the URL (`sim`) follows.
  */
@@ -33,6 +33,7 @@ import { setSim, useSimStore, useSimView } from '../hud/sim';
 import { CircuitDiagram } from '../hud/CircuitCard';
 import { EnergyDiagram } from '../hud/EnergyCard';
 import { CycleDiagram } from '../hud/CycleCard';
+import { KeyDiagram } from '../hud/KeyCard';
 import { TryChart } from './TryChart';
 
 function Control({ c, value, onSet, primary }: { c: SimControl; value: SimValue | undefined; onSet(v: SimValue): void; primary: boolean }) {
@@ -267,6 +268,16 @@ function LifeCycleFold({ file, sim }: { file: PartsFile; sim: SimData }) {
   );
 }
 
+function SortFold({ file, sim }: { file: PartsFile; sim: SimData }) {
+  const t = useT();
+  return (
+    <details className="space-try__diagram" open>
+      <summary>{t('space.try.key')}</summary>
+      <KeyDiagram file={file} sim={sim} />
+    </details>
+  );
+}
+
 export function TryIt({ file, ui }: { file: PartsFile; ui: SpaceUiStore }) {
   const t = useT();
   const { locale } = useSceneContext();
@@ -274,7 +285,7 @@ export function TryIt({ file, ui }: { file: PartsFile; ui: SpaceUiStore }) {
   const chapter = useScene<SpaceSceneExt, string | null>((s) => s.chapter);
   const view = useSimView(file);
   if (!view || !chapter) return null;
-  if (!view.card) return view.sim.lifeCycle ? <LifeCycleFold file={file} sim={view.sim} /> : null;
+  if (!view.card) return view.sim.lifeCycle ? <LifeCycleFold file={file} sim={view.sim} /> : view.sim.sort ? <SortFold file={file} sim={view.sim} /> : null;
   const { sim, card, values, outputs } = view;
   const controls = [card.vary, ...(card.also ?? [])].map((id) => sim.controls.find((c) => c.id === id)).filter((c): c is SimControl => c !== undefined);
   const keep = (card.keep ?? []).map((k) => {
@@ -338,6 +349,7 @@ export function TryIt({ file, ui }: { file: PartsFile; ui: SpaceUiStore }) {
         </details>
       )}
       {sim.lifeCycle && <LifeCycleFold file={file} sim={sim} />}
+      {sim.sort && <SortFold file={file} sim={sim} />}
     </section>
   );
 }

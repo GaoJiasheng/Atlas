@@ -1142,4 +1142,26 @@ SpaceScene / Model3DStage，paper 默认、cinema 可切。原型：`archetypes.
 
 ## 9. 施工记录 / 已知差距
 
-（空）
+### 9.1 引擎（E-LT1–E-LT5，2026-10-21，Opus 引擎代理，分支 `worktree-agent-af19fbfd20cc6946b`）
+
+**做了什么**：E-LT1 `sort` 模型（`lib/sim/sort.ts`、`sort-schema.ts`；注册 `SIM_KINDS`、`simQuantities`、`quantityKind`、`SEPARATE_EXPERIMENTS.sort = true`，无时间线）；E-LT2 `shift` 绑定（`lib/sim/bind.ts` `shiftEntry` / `shiftOrder`、`lib/sim/shift.ts` 拱形路径与错开、`PartNode.tsx`、`SceneRoot.tsx`、`__atlas.engine.shift`、`pnpm shoot --beats` 每拍与拍链接核对）；E-LT3 分类流程图卡（`hud/KeyCard.tsx`、`lib/sim/keycard.ts`，右上卡 / < 1024 px 收进试一试卡 / 背景章在阅读面板）；E-LT4 `scales`、`feathers` 两个材质族与程序化贴图（同一代理做完，没有另开代理）；E-LT5 组比例尺 `unit: "um"`（`5 µm · ×5000`）。草稿夹具 `sample-sort`（背景章 + 一个问题、两个问题、一个个问、同学的分类盘）；作者模板 `tests/space-scene/fixtures/specimen-tray.ts`（§4.2 全部 `sort` 数据、§3.4 特征表、§3.2 坐标）；单测 `sort`（§2.8 全表逐格）、`keycard`、`shift`、`surfaces-units`；e2e `sample-sort.spec.ts`；docs/06 三节（分类、移位、分类流程图卡）与材质族、比例尺两处。
+
+**与 §4 的出入**（内容代理照这些写数据）：
+
+1. **`slots` 向量的形状**：模型的向量输出只能是"每个键一个数"，所以 `slots` 写成扁平的 `{ "<零件>:x", "<零件>:y", "<零件>:z", "<零件>:shown" }`（`shown` 0 = 不在这只托盘上 → 隐藏），不是 `{ <零件>: [dx, dy, dz] | null }`。作者不写这个向量（模型算），只在 `bind` 里写 `{ "output": "slots", "part": [ … ], "shift": { … } }`。
+2. **`chain` 的 `else` 叶子名**：`else` 是组字母，不能当 `groups` 的键，所以 `chain` 键另加可选 `"elseHeading": "<真实类群>"`（T2 写 `"bacteria"`，T4 写 `"none"`）；不写时叶子读 "Neither / 都不是"。
+3. **托盘控件**：`sort.tray`（默认 `"tray"`）指明选托盘的选择控件。
+4. **组字母**：布局的组键只能是一个小写字母（`u` 留给标本盒）。
+5. **"格子不出分类盘"按垫子查**：X 垫在分类盘外面（标本盒右边），所以 validate 查的是每组的格子不出自己的 `pad` 的包围盒、同一布局的组的格子不重叠，不查 `sorting-tray`。
+6. **`where-*` 的标签要覆盖到得了的全部状态**（含 `off`）：§4.2 的例子不全。按 §2.8 的托盘：`where-toy-car` = u、a、b、off；`where-mushroom` = u、c、off（+ `predictOnly: ["a"]`）；`where-chilli` = u、a、b、off；`where-dolphin` = u、a、b、c、d、off（自己的流程图里海豚能进 A、B、C）。`belongs` 只能写嫌疑动物能到的类群（§4.2 的八个嫌疑 → bird、mammal、fish、amphibian、none；insect、reptile 到不了，要写就放进 `predictOnly`）。validate 逐条列出缺的和多的。模板里已按此写好。
+7. **组内顺序 = 标本编号**（§4.2 规则 3）：所以 T5 的 E 组是 穿山甲、蟾蜍（#29）、壁虎、蟒蛇、海龟，F 组是 弹涂鱼（#26）、树蛙；§2.8 表里的列举顺序不同，件数相同（单测按编号顺序钉住）。
+8. **`verdict` / `belongs`** 永远按写了 `suspect` 的那只托盘（同学的分类盘）算，不管此刻是哪只托盘；`fix` 开 = right。
+9. **两层 `ask` 的第二问选 `none`**：第一问答"不是"的留在盒里（与 `chain` 没问到的一致），卡片上第二个框画虚线。
+10. **中文量词**：流程图卡写"A 组，2 件"、"1 件放错"（引擎通用，§4.4 草稿写的是"只"）；"本该在：<类群>"照写。
+11. **`predictOnly`** 只给 sort 模型的状态输出（别的模型写了报错）。
+12. **PLATE 立面**不跟 `shift` 走（同 `offset`：立面画静止位置）；引线锚点、`anchor()` 跟着走。
+13. **流程图卡的 `data-kind`** 取 `ask` / `two` / `chain` / `arrangement` / `none`。
+14. 深链接要把托盘一起写进 `sim`（`?ch=…&sim=tray.animals~asked-animal.4`）：URL 的 `sim` 代替本章的 `set`（共用契约，不是本件新加的）。
+
+**验收**（§4.8）：单测全部（`sort.test.ts` 62 条：T1–T6 逐格、不变量、确定性 < 0.2 ms、URL 往返、validate 报错用例；`keycard.test.ts`、`shift.test.ts`、`surfaces-units.test.ts`）；`sample-sort` e2e 9 条（深链接即终值、`]` 拱形与错开、chain 逐步、同学的盘 ✗ 与放回、叶子选垫子、选中标本的路径、中文读屏、µm 比例尺、手机抽屉 44 px）；`pnpm shoot sample-sort --beats --keys --layout` 0 失败；mosquito、energy-conversion、states-of-matter、light-and-shadows、forces、magnets、circuits 的 `--beats --keys` 改前改后都 0 失败。`sample-space` / `grasshopper` / `plant` 的截图回归没有单跑（新材质族只在用到时生成贴图，旧数据不受影响）。
+

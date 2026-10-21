@@ -1,0 +1,40 @@
+---
+id: two-questions
+order: 2
+title: { en: "Sample two questions", zh: "示例两个问题" }
+state:
+  view: assembled
+  explode: 0
+  run: false
+  part: null
+  layers: [round, boxy, pointy, tray, scenery]
+  camera: {"position": [0.02, 0.66, 0.86], "target": [-0.07, 0.0, 0.02], "fov": 32}
+  labels: [sample-ring, sample-brick, sample-tile]
+  summary: { en: "Sample two questions: a second question for the no group.", zh: "示例两个问题：给答“不是”的再问一个问题。" }
+  sim:
+    set: { tray: two-step, first: round, second: tall }
+    try:
+      vary: first
+      also: [second]
+      keep: [{ en: "Same eight specimens", zh: "同样的八件标本" }]
+      observe: [count-a, count-b, count-c, kinds-a]
+      record: { chart: { y: kinds-a } }
+  beats:
+    - caption: { en: "Sample beat one: round first, then tall.", zh: "示例节拍一：先问圆不圆，再问高不高。" }
+    - sim: { set: { first: shiny, second: flat } }
+      caption: { en: "Sample beat two: shiny first mixes kinds in A.", zh: "示例节拍二：先问亮不亮，A 组里就混了几类。" }
+  index:
+    parts: [sample-ball, sample-bead, sample-ring, sample-cube, sample-brick, sample-tile, sample-cone, sample-spike, pad-3a, pad-3b, pad-3c]
+---
+
+<Lang en>
+
+Sample two questions: placeholder text for a flowchart with two questions.
+
+</Lang>
+
+<Lang zh>
+
+示例两个问题：两个问题的分类流程图的占位文字。
+
+</Lang>

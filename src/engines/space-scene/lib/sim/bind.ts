@@ -7,7 +7,9 @@
  * stretch, the timeline channels a part plays (moves and turns), the field
  * state a filings part lays out, an animation's speed or on / off, and per
  * flow its visibility, per-path intensity (speed or particle density),
- * colour and field state.
+ * colour and field state, and a shift (docs/38 §4.3: each part moved by the
+ * offset a vector output gives it, on a lifted arc; hidden where the vector
+ * says it is not shown).
  */
 import type { SimBind, SimCondition, SimData, SimSettle, SimValue, SimValues, STRETCH_ANCHORS } from '../../sim-schema';
 import type { SimOutputs, SimOutputValue } from './index';
@@ -77,6 +79,39 @@ export interface SimStretch {
   settle?: SimSettle;
 }
 
+/**
+ * A shift (docs/38 §4.3): the offset a vector output gives the part
+ * (`<part>:x|y|z`, scene units), applied last; `order` = the part's place in
+ * the vector (moves are staggered in that order); `ease` seconds on an arc
+ * `lift` high at the middle.
+ */
+export interface SimShift {
+  offset: Vec3;
+  order: number;
+  ease: number;
+  stagger: number;
+  lift: number;
+}
+
+/** A shift vector's entries for one part: the offset and whether it is shown, or null when the vector does not name it. */
+export function shiftEntry(v: Readonly<Record<string, number>>, id: string): { offset: Vec3; shown: boolean } | null {
+  const shown = v[`${id}:shown`];
+  const x = v[`${id}:x`];
+  if (shown === undefined && x === undefined) return null;
+  return { offset: [x ?? 0, v[`${id}:y`] ?? 0, v[`${id}:z`] ?? 0], shown: shown !== 0 };
+}
+
+/** The parts a shift vector names, in its order. */
+export function shiftOrder(v: Readonly<Record<string, number>>): Map<string, number> {
+  const out = new Map<string, number>();
+  for (const k of Object.keys(v)) {
+    const i = k.lastIndexOf(':');
+    const id = i > 0 ? k.slice(0, i) : k;
+    if (!out.has(id)) out.set(id, out.size);
+  }
+  return out;
+}
+
 /** A point on a sphere, with optional facing toward its centre. */
 export interface SimPlace {
   direction: Vec3;
@@ -132,6 +167,8 @@ export interface SimEffects {
   play: Map<string, SimPlay[]>;
   /** Turn about a unit axis through the part centre or a pivot, degrees. */
   rotate: Map<string, SimTurn>;
+  /** Moved by a vector output's offset (applied last; a part shown 0 is in `hidden`). */
+  shift: Map<string, SimShift>;
   /** The field state each filings part lays out. */
   states: Map<string, string>;
   /** Per animation id: rpm (a rotate's speed) and whether it plays. */
@@ -195,6 +232,7 @@ export function simEffects(sim: SimData, values: SimValues, outputs: SimOutputs)
     stretch: new Map(),
     play: new Map(),
     rotate: new Map(),
+    shift: new Map(),
     states: new Map(),
     animations: new Map(),
     flows: new Map(),
@@ -205,8 +243,17 @@ export function simEffects(sim: SimData, values: SimValues, outputs: SimOutputs)
     const first = b.output !== undefined ? firstState.get(b.output) : undefined;
     if ('part' in b) {
       const ids = Array.isArray(b.part) ? b.part : [b.part];
+      const vector = b.shift && v !== undefined && typeof v === 'object' && !isTimeline(v) ? v : null;
+      const order = vector ? shiftOrder(vector) : null;
       for (const id of ids) {
         if (b.visible !== undefined && !holds(b.visible, v, first)) out.hidden.add(id);
+        if (b.shift && vector && order) {
+          const e = shiftEntry(vector, id);
+          if (e) {
+            if (!e.shown) out.hidden.add(id);
+            out.shift.set(id, { offset: e.offset, order: order.get(id) ?? 0, ease: b.shift.ease, stagger: b.shift.stagger, lift: b.shift.lift });
+          }
+        }
         if (b.pose) {
           const name = b.pose[String(v)];
           // Unmapped values leave the chapter / beat pose intact; only explicit null requests rest.

@@ -78,8 +78,18 @@ export interface FillReading {
   shown: boolean;
 }
 
+/** A shifted part now (docs/38 §4.3): its drawn offset and target (scene units) and whether it is drawn. */
+export interface ShiftReading {
+  offset: [number, number, number];
+  target: [number, number, number];
+  shown: boolean;
+  /** Seconds the current move waited for its turn (the stagger; 0 for a jump). */
+  delay: number;
+}
+
 export interface StageBridge {
   fills: Map<string, FillReading>;
+  shifts: Map<string, ShiftReading>;
   fillBenchmarks: Map<string, () => number>;
   flowPaths: Map<string, Record<string, { visible: boolean }>>;
   /** Stage size in CSS pixels. */
@@ -147,6 +157,7 @@ export function createBridge(): StageBridge {
     modelRadius: 1,
     anchors: new Map(),
     fills: new Map(),
+    shifts: new Map(),
     fillBenchmarks: new Map(),
     flowPaths: new Map(),
     sites: new Map(),
