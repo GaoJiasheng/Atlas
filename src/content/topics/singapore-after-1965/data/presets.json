@@ -1,0 +1,60 @@
+{
+  "presets": [
+    {
+      "id": "island",
+      "label": {
+        "en": "Island",
+        "zh": "全岛"
+      },
+      "camera": {
+        "center": [
+          103.82,
+          1.36
+        ],
+        "zoom": 10.2
+      }
+    },
+    {
+      "id": "west",
+      "label": {
+        "en": "West",
+        "zh": "西部"
+      },
+      "camera": {
+        "center": [
+          103.71,
+          1.335
+        ],
+        "zoom": 11.2
+      }
+    },
+    {
+      "id": "civic",
+      "label": {
+        "en": "Civic District",
+        "zh": "市政区"
+      },
+      "camera": {
+        "center": [
+          103.852,
+          1.29
+        ],
+        "zoom": 13.8
+      }
+    },
+    {
+      "id": "region",
+      "label": {
+        "en": "Southeast Asia",
+        "zh": "东南亚"
+      },
+      "camera": {
+        "center": [
+          103.0,
+          3.0
+        ],
+        "zoom": 4.2
+      }
+    }
+  ]
+}

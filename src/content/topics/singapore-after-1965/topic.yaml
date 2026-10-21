@@ -1,0 +1,25 @@
+# Authoring contract: docs/42-singapore-after-1965-content-spec.md. Historian review: AUDIT.md; passages for Gavin: REVIEW.md.
+id: singapore-after-1965
+title: { en: "Singapore after 1965: Building a Nation", zh: "1965 年后的新加坡：建设一个国家" }
+subtitle: { en: "Defence, national symbols and living together", zh: "国防、国家象征与和谐共处" }
+shortTitle: { en: "After 1965", zh: "1965 年以后" }
+subject: history
+mode: time
+engine: time-scene
+stage: geo
+theme: paper
+sensitivity: open
+status: draft
+levels: [P5]
+tags: [singapore, history, map]
+illustration: singapore-after-1965
+basemap: { local: land-sg-modern, maxZoom: 14 }
+note:
+  en: "Places from Wikidata · laws marked at the Parliament building of the time, nationwide decisions at the island's centre · coasts after 1973 from Landsat images (approximate) · industrial estates in today's extent"
+  zh: "地点取自维基数据 · 法律标在当年的国会大厦，全国性的决定标在岛的中心 · 1973 年以后的海岸取自 Landsat 卫星影像（近似）· 工业区按今天的范围"
+datedLayers:
+  - id: industrial-estates
+    file: sg-estates
+    kind: area
+    color: "token:holder-1"
+    label: { en: "Industrial estates (today's extent)", zh: "工业区（今天的范围）" }
