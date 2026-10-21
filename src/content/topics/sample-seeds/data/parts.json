@@ -61,26 +61,7 @@
           0.035
         ],
         "bevel": 0.0015
-      },
-      "extra": [
-        {
-          "kind": "sphere",
-          "size": [
-            0.008
-          ],
-          "at": [
-            -0.755,
-            0.016,
-            0.05
-          ],
-          "color": "wood",
-          "scale": [
-            1.4,
-            0.8,
-            1
-          ]
-        }
-      ]
+      }
     },
     {
       "id": "float-fruit",
@@ -423,22 +404,6 @@
         ],
         "color": "glass"
       },
-      "extra": [
-        {
-          "kind": "cylinder",
-          "size": [
-            0.036,
-            0.036,
-            0.001
-          ],
-          "at": [
-            0.0,
-            0.0015,
-            0.09
-          ],
-          "color": "fabric"
-        }
-      ],
       "shell": true
     },
     {
