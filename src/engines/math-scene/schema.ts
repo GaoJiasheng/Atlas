@@ -19,6 +19,7 @@ import { glossaryFile } from '../../content/schema/glossary';
 import { parseFrac, type Frac } from './lib/fraction';
 import { ANSWER_UNITS, CLOCK12_NOTATIONS, CLOCK24_NOTATIONS, COMPOUND_PAIRS, DAY, DEFAULT_NOTATION, parseClock, parseDuration, parseQuantity, parseTagged, parseWhole, UNITS, WHOLE_MAX, type AnswerValue, type DecValue, type DurValue, type QtyValue } from './lib/value';
 import { DECIMAL_MAX_WHOLE, fromWhole, parseDecimal, wholePart, type Decimal } from './lib/decimal';
+import { CUBE_NET_NAMES } from './lib/net';
 
 /* ------------------------------------------------------------------ */
 /* Vocabulary                                                          */
@@ -143,6 +144,8 @@ export const MEASURE_READING_CODES = [
 ] as const;
 /** Codes registered elsewhere that reading instruments uses too (docs/32 D13), each with a rule of its own in lib/diagnose/measure-reading.ts. */
 export const MEASURE_READING_SHARED_CODES = ['tick-counting', 'interval-misread', 'unit-factor-wrong', 'decimal-as-subunit'] as const;
+/** Nets and solids (docs/39 §2.1; rules in lib/diagnose/nets.ts). `prism-pyramid`, `cube-cuboid` and `curved-unrolled` are diagnosed by `choose` options only. */
+export const NETS_CODES = ['prototype-only', 'overlap-unseen', 'adjacent-as-opposite', 'face-size', 'face-count', 'prism-pyramid', 'cube-cuboid', 'curved-unrolled'] as const;
 /** The domains, each with the codes its tasks may use (a task's codes come from one domain, validate). */
 export const MISCONCEPTION_DOMAINS = {
   fractions: FRACTION_CODES,
@@ -151,10 +154,11 @@ export const MISCONCEPTION_DOMAINS = {
   time: TIME_CODES,
   decimals: [...DECIMAL_CODES, ...DECIMAL_SHARED_CODES],
   'measure-reading': [...MEASURE_READING_CODES, ...MEASURE_READING_SHARED_CODES],
+  nets: NETS_CODES,
 } as const;
 export type MisconceptionDomain = keyof typeof MISCONCEPTION_DOMAINS;
 /** Misconceptions the feedback is designed around, each registered once in its home domain (docs/19 §3.0 G5); one flat list, every code unique. */
-export const MISCONCEPTIONS = [...FRACTION_CODES, ...MEASURE_CODES, ...WHOLE_OPS_CODES, ...TIME_CODES, ...DECIMAL_CODES, ...MEASURE_READING_CODES] as const;
+export const MISCONCEPTIONS = [...FRACTION_CODES, ...MEASURE_CODES, ...WHOLE_OPS_CODES, ...TIME_CODES, ...DECIMAL_CODES, ...MEASURE_READING_CODES, ...NETS_CODES] as const;
 export const misconception = z.enum(MISCONCEPTIONS);
 export type MisconceptionCode = (typeof MISCONCEPTIONS)[number];
 
@@ -190,6 +194,8 @@ export const TASK_KINDS = [
   'read-scale',
   'set-scale',
   'count-intervals',
+  'complete-net',
+  'tap-face',
 ] as const;
 /** Task kinds on the square grid (docs/21 §3.2). */
 export const GRID_KINDS = ['count-squares', 'trace-perimeter', 'draw-rectangle', 'split-figure'] as const;
@@ -201,13 +207,15 @@ export const BLOCKS_KINDS = ['regroup', 'share'] as const;
 export const TIME_KINDS = ['read-clock', 'set-clock', 'duration'] as const;
 /** Task kinds on an instrument (docs/32 §3.4). */
 export const MEASURE_KINDS = ['read-scale', 'set-scale', 'count-intervals'] as const;
+/** Task kinds on a net (docs/39 §3.5). */
+export const NET_KINDS = ['complete-net', 'tap-face'] as const;
 export type TaskKind = (typeof TASK_KINDS)[number];
 
 /**
  * Model views a step may switch between (the VIEW group). `clock` and `timeline` are the time lesson's (docs/20 §3, model A3); `decimal-grid`, `place-value` and `money` the decimals' (docs/29 A6; their number line is `numberline`);
- * `instrument` the measuring lesson's and `straight` its dial or jug drawn as the straight number line it is (docs/32 §3.7).
+ * `instrument` the measuring lesson's and `straight` its dial or jug drawn as the straight number line it is (docs/32 §3.7); `net` the nets lesson's (docs/39 §3.7).
  */
-export const MODEL_VIEWS = ['bar', 'circle', 'numberline', 'wall', 'barmodel', 'grid', 'array', 'blocks', 'clock', 'timeline', 'decimal-grid', 'place-value', 'money', 'instrument', 'straight'] as const;
+export const MODEL_VIEWS = ['bar', 'circle', 'numberline', 'wall', 'barmodel', 'grid', 'array', 'blocks', 'clock', 'timeline', 'decimal-grid', 'place-value', 'money', 'instrument', 'straight', 'net'] as const;
 export const modelView = z.enum(MODEL_VIEWS);
 export type ModelView = (typeof MODEL_VIEWS)[number];
 
@@ -843,6 +851,99 @@ const instrumentModel = instrumentSpec
 export type InstrumentSpec = z.output<typeof instrumentSpec>;
 export type InstrumentModelSpec = z.output<typeof instrumentModel>;
 
+/* Nets and solids (docs/39 §3.1–3.2, model A8): a solid folded up from a flat net, drawn in orthographic projection (top or isometric). */
+export const SOLID_TYPES = ['cuboid', 'prism', 'pyramid', 'cylinder', 'cone', 'sphere'] as const;
+/** The names a solid goes by (a cuboid with three equal lengths is a cube). */
+export const SOLID_CLASSES = ['cube', 'cuboid', 'prism', 'pyramid', 'cylinder', 'cone', 'sphere'] as const;
+export type SolidClass = (typeof SOLID_CLASSES)[number];
+const solidLength = z.number().positive().max(12);
+const solidSpec = z.discriminatedUnion('type', [
+  /** Length × breadth × height in grid squares; three equal lengths make a cube. */
+  z.object({ type: z.literal('cuboid'), size: z.tuple([solidLength, solidLength, solidLength]) }).strict(),
+  /** A regular base of `sides` sides of `edge`, `length` long. */
+  z.object({ type: z.literal('prism'), sides: z.number().int().min(3).max(6), edge: solidLength, length: solidLength }).strict(),
+  /** A regular base and an apex `height` above its centre; `regular` (three sides only): the regular tetrahedron. */
+  z.object({ type: z.literal('pyramid'), sides: z.number().int().min(3).max(6), edge: solidLength, height: solidLength.optional(), regular: z.boolean().optional() }).strict(),
+  z.object({ type: z.literal('cylinder'), radius: solidLength, height: solidLength }).strict(),
+  z.object({ type: z.literal('cone'), radius: solidLength, height: solidLength }).strict(),
+  z.object({ type: z.literal('sphere'), radius: solidLength }).strict(),
+]);
+export type SolidSpec = z.output<typeof solidSpec>;
+/** A face of a solid by its id (`bottom`, `side-2`, `end-a`, `base` …). */
+const faceId = z.string().regex(/^[a-z][a-z0-9-]*$/, 'a face id (bottom, top, front, back, left, right, end-a, end-b, side-1 …, base)');
+const netCell = z.tuple([z.number().int().min(0).max(30), z.number().int().min(0).max(30)]);
+const netRect = z.tuple([z.number().int().min(0).max(30), z.number().int().min(0).max(30), z.number().int().min(1).max(12), z.number().int().min(1).max(12)]);
+const netLayout = z.union([
+  /** One of the 11 nets of a cube by name (lib/net.ts CUBE_NETS). */
+  z.object({ cubeNet: z.enum(CUBE_NET_NAMES) }).strict(),
+  /** Unit squares on the grid, y up (a cube: 1 × 1 × 1). */
+  z.object({ cells: z.array(netCell).min(1).max(12) }).strict(),
+  /** Rectangles on the grid, `[x, y, w, h]` (a cuboid). */
+  z.object({ rects: z.array(netRect).min(1).max(12) }).strict(),
+  /** Faces and the face each hangs on (`null`: the one on the ground); a face twice is a piece too many. */
+  z.object({ tree: z.array(z.tuple([faceId, faceId.nullable()])).min(1).max(16) }).strict(),
+]);
+export type NetLayout = z.output<typeof netLayout>;
+const capSpec = z.union([z.number().min(0).max(1), z.object({ at: z.number().min(0).max(1), edge: z.enum(['top', 'bottom']) }).strict()]);
+const curvedNet = z
+  .object({
+    /** Cylinder: where the circles join the long edges (0–1 along each; the first the top edge, the second the bottom one) · cone: where its circle joins the curved edge. */
+    caps: z.array(capSpec).max(2).optional(),
+    /** The curved face's length as a share of the way round the circle (1: it closes). */
+    wrap: z.number().min(0.3).max(1.5).optional(),
+    /** A cone's curved face opened out: a sector (it folds) or a triangle (a wrong net, drawn flat only). */
+    lateral: z.enum(['sector', 'triangle']).optional(),
+  })
+  .strict();
+export type CurvedNetSpec = z.output<typeof curvedNet>;
+const netTone = z.enum(['cold', 'hot', 'signal']);
+const netSpec = z.object({
+  solid: solidSpec.optional(),
+  /** The flat net (a polyhedron's; none: a standard one). */
+  layout: netLayout.optional(),
+  /** A cylinder's or a cone's net. */
+  curved: curvedNet.optional(),
+  /** The face left on the ground: a cell `[x, y]`, a rectangle's index, a face id (default: the one with most neighbours, the tree's root). */
+  base: z.union([netCell, z.number().int().min(0), faceId]).optional(),
+  /** A face left out on purpose (a box with no lid): empty when folded, not a missing face. */
+  open: faceId.optional(),
+  /** 0 = flat, 1 = folded; or per face (`"[1,1]"`, `"2"`, `"side-2"`: folded step by step). Default: 1 without a layout, else 0. */
+  fold: z.union([z.number().min(0).max(1), z.record(z.string(), z.number().min(0).max(1))]).optional(),
+  /** Folded in layers: the bottom first, then the sides, then the top (default on). */
+  stagger: z.boolean().default(true),
+  /** `auto`: from the top while flat, isometric from a quarter folded; `top`; `iso`. */
+  view: z.enum(['auto', 'top', 'iso']).default('auto'),
+  /** Quarter turns about the upright axis. */
+  turn: z.number().int().min(0).max(3).default(0),
+  /** Opposite faces in pair colours with the marks ● ▲ ■ (a prism's two ends one colour). */
+  pairs: z.boolean().optional(),
+  /** One face's colour: by cell `"[1,1]"`, rectangle index `"2"` or face id. */
+  tone: z.record(z.string(), netTone).optional(),
+  /** The face given (cold), by the same keys. */
+  mark: z.string().optional(),
+  /** A–F on the faces in the layout's order. */
+  letters: z.boolean().optional(),
+  /** 1–6 on the faces in the layout's order. */
+  numbers: z.boolean().optional(),
+  /** The flat outline on the ground (dashed), squared paper, the lengths in squares. */
+  footprint: z.boolean().optional(),
+  grid: z.boolean().optional(),
+  dims: z.boolean().optional(),
+  /** Names on faces, by face id. */
+  labels: z.record(faceId, bilingual).optional(),
+  /** Under the drawing (a set's pictures). */
+  label: bilingual.optional(),
+});
+const netModel = netSpec
+  .extend({
+    kind: z.literal('net'),
+    /** 2–7 small pictures in a row, each with its label. */
+    set: z.array(netSpec.strict()).min(2).max(7).optional(),
+  })
+  .strict();
+export type NetSpec = z.output<typeof netSpec>;
+export type NetModelSpec = z.output<typeof netModel>;
+
 /* The clock face and the timeline (docs/20 §3.1–3.2, model A3): times in 24-hour time, the face shows their 12-hour position. */
 const clockFace = z.object({
   /** The time the hands show (default 12:00); am / pm follow from it. */
@@ -912,7 +1013,7 @@ const timelineModel = z
   .strict();
 export type TimelineSpec = z.output<typeof timelineModel>;
 
-const baseModels = z.discriminatedUnion('kind', [barModel, circleModel, numberLineModel, wallModel, barModelDiagram, gridModel, arrayModel, blocksModel, clockModel, timelineModel, decimalGridModel, placeValueModel, moneyModel, instrumentModel]);
+const baseModels = z.discriminatedUnion('kind', [barModel, circleModel, numberLineModel, wallModel, barModelDiagram, gridModel, arrayModel, blocksModel, clockModel, timelineModel, decimalGridModel, placeValueModel, moneyModel, instrumentModel, netModel]);
 const isDecimalLine = (v: unknown): boolean => !!v && typeof v === 'object' && (v as { kind?: unknown }).kind === 'numberline' && (v as { scale?: unknown }).scale === 'decimal';
 /** A model: by `kind`, the number line by `scale` too (a decimal line has decimal ends and a decimal step). */
 export const model = z.unknown().transform((v, ctx): z.output<typeof baseModels> | DecimalLineSpec => {
@@ -994,8 +1095,8 @@ export const inputSpec = z
     places: z.number().int().min(0).max(3).optional(),
     /** `decimal` (and a decimal written as a fraction): what is being worked out, for the diagnosis only (docs/29 §3.7); a quantity changed into other units (docs/32 §3.5). */
     work: z.union([decimalWork, measureWork]).optional(),
-    /** Grid: what the number is, measured on the figure (checked against its geometry; tells the diagnosis what to look for). */
-    ask: z.enum(['area', 'perimeter', 'length', 'breadth', 'side']).optional(),
+    /** Grid: what the number is, measured on the figure (checked against its geometry; tells the diagnosis what to look for). Net: `faces` (how many faces), `length` (an edge, in squares). */
+    ask: z.enum(['area', 'perimeter', 'length', 'breadth', 'side', 'faces']).optional(),
     /** Grid: the figure asked about (default: the first that is not a ghost). */
     figure: kebabId.optional(),
     /** Grid, a missing side: what the length is found from. */
@@ -1101,6 +1202,10 @@ const option = z
     correct: z.boolean(),
     /** Wrong option: the misconception choosing it shows. Right option: the one leaving it out shows. */
     misconception: misconception.optional(),
+    /** Nets (docs/39 §3.5): the solid this option names (its text when it has none), checked against the stage's net. */
+    solid: z.enum(SOLID_CLASSES).optional(),
+    /** Nets: the option says the stage's net folds up into the solid (`true`) or does not (`false`), checked by folding it. */
+    folds: z.boolean().optional(),
   })
   .strict();
 const chooseFields = z.object({ multi: z.boolean().optional(), options: z.array(option).min(2).max(6) });
@@ -1260,6 +1365,20 @@ const countIntervalsFields = z.object({
   then: inputSpec,
 });
 
+/* Net tasks (docs/39 §3.5) */
+const completeNetFields = z.object({
+  /** How many faces the child adds (1–5). */
+  add: z.number().int().min(1).max(5),
+  /** Where they may go: any empty square of the box (`free`), a square next to a face (`adjacent`), or these cells, rectangles or faces on faces. */
+  candidates: z.union([z.literal('free'), z.literal('adjacent'), z.array(z.union([netCell, netRect, z.tuple([faceId, faceId])])).min(1).max(8)]),
+  /** `free` / `adjacent`: the squared paper's size, columns × rows (≤ 12 × 10). */
+  box: z.tuple([z.number().int().min(2).max(12), z.number().int().min(2).max(10)]).optional(),
+});
+const tapFaceFields = z.object({
+  /** The face opposite the one marked, or the bottom of a box with no lid. */
+  ask: z.enum(['opposite', 'bottom']),
+});
+
 export const taskSchema = z.discriminatedUnion('kind', [
   base.extend({ kind: z.literal('shade') }).merge(shadeFields).strict(),
   base.extend({ kind: z.literal('cut') }).merge(cutFields).strict(),
@@ -1292,6 +1411,8 @@ export const taskSchema = z.discriminatedUnion('kind', [
   base.extend({ kind: z.literal('read-scale') }).merge(readScaleFields).strict(),
   base.extend({ kind: z.literal('set-scale') }).merge(setScaleFields).strict(),
   base.extend({ kind: z.literal('count-intervals') }).merge(countIntervalsFields).strict(),
+  base.extend({ kind: z.literal('complete-net') }).merge(completeNetFields).strict(),
+  base.extend({ kind: z.literal('tap-face') }).merge(tapFaceFields).strict(),
 ]);
 export type Task = z.output<typeof taskSchema>;
 export type TaskOf<K extends TaskKind> = Extract<Task, { kind: K }>;
@@ -1426,6 +1547,9 @@ export const stepLimits = z
     zoomDepth: z.number().int().min(0).max(2).optional(),
     /** Every span stays within one day (no crossing midnight). */
     sameDay: z.boolean().optional(),
+    /* Nets (docs/39 §3.8) */
+    /** The solids a step may show. */
+    solids: z.array(z.enum(SOLID_CLASSES)).min(1).optional(),
   })
   .strict();
 export type StepLimits = z.output<typeof stepLimits>;

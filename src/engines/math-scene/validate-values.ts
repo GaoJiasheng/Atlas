@@ -17,6 +17,7 @@ import { blockCount, canTrade, counts, matOf, regrouped, standard, total } from 
 import { opResult } from './lib/diagnose/whole-ops';
 import { isDecimalTask } from './lib/decimal-tasks';
 import { isMeasureTask } from './lib/measure-kind';
+import { isNetTask } from './lib/net-tasks';
 import { splitArrayCut } from './lib/solve';
 import { DAY, formatAnswer, formatClock, formatDuration, HOUR, isFracValue, MINUTE, WHOLE_MAX, type AnswerValue } from './lib/value';
 import { clockStart, facesOf, HALF_DAY } from './lib/clock';
@@ -33,8 +34,9 @@ const isTimeModel = (m: Model) => m.kind === 'clock' || m.kind === 'timeline';
 
 const modelsOf = (task: Task): Model[] => [task.model, ...(task.kind === 'choose' ? task.options.flatMap((o) => (o.model ? [o.model] : [])) : [])];
 
-/** The domain a task's misconceptions come from (docs/19 G5): grid → measure, instruments and quantities → measure-reading (docs/32), decimals → decimals, times → time, whole numbers → whole-ops, else fractions. */
+/** The domain a task's misconceptions come from (docs/19 G5): nets → nets (docs/39), grid → measure, instruments and quantities → measure-reading (docs/32), decimals → decimals, times → time, whole numbers → whole-ops, else fractions. */
 export function domainOf(task: Task): MisconceptionDomain {
+  if (isNetTask(task)) return 'nets';
   const models = modelsOf(task);
   if (models.some((m) => m.kind === 'grid') || ['count-squares', 'trace-perimeter', 'draw-rectangle', 'split-figure'].includes(task.kind)) return 'measure';
   if (isMeasureTask(task)) return 'measure-reading';

@@ -22,6 +22,7 @@ import { hopStart, hopsTo } from './timeline';
 import { isMeasureTask } from './measure-kind';
 import { measureBoxes, measureSample, measureSampleBoxes, measureSolveModel } from './measure-tasks';
 import { formatQty, isQty, parseQuantity } from './value';
+import { netSample, netSolveModel } from './net-tasks';
 
 const range = (from: number, count: number) => Array.from({ length: count }, (_, i) => from + i);
 
@@ -126,6 +127,8 @@ export function solve(task: Task): Action[] {
   if (decimalModel(task)) return withInput(task, decimalSolveModel(task) as Action[]);
   const measured = isMeasureTask(task) ? measureSolveModel(task) : null;
   if (measured) return withInput(task, measured as Action[]);
+  const net = netSolveModel(task);
+  if (net) return net as Action[];
   switch (task.kind) {
     case 'shade': {
       const free = range(0, start.parts * start.wholes).filter((i) => !start.given.includes(i));
@@ -213,6 +216,8 @@ export function solve(task: Task): Action[] {
     case 'shift-digits':
     case 'set-scale':
     case 'count-intervals':
+    case 'complete-net':
+    case 'tap-face':
       return [];
     case 'build-sum': {
       const out: Action[] = [];
@@ -326,6 +331,8 @@ export function sampleState(task: Task, sample: string): TaskState | null {
     return writeInput(apply(task, actions.slice(0, cut + 1)), sample.slice(1));
   }
   const start = initialState(task);
+  const net = netSample(task, start, sample, (from, moves) => apply(task, moves as Action[], from));
+  if (net !== undefined) return net;
   if (decimalModel(task) && task.kind !== 'compare') return decimalSample(task, start, sample, (from, moves) => apply(task, moves as Action[], from));
   if (isMeasureTask(task)) {
     const m = measureSample(task, start, sample, (from, moves) => apply(task, moves as Action[], from));
@@ -417,6 +424,8 @@ export function sampleState(task: Task, sample: string): TaskState | null {
     case 'shift-digits':
     case 'set-scale':
     case 'count-intervals':
+    case 'complete-net':
+    case 'tap-face':
       return null;
     case 'set-clock': {
       // `"3:50"` (the 12-hour position the hands are set to), `"3:50 pm"` with the am / pm plate.

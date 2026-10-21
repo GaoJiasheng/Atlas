@@ -19,6 +19,8 @@
  *                (energy flows, the energy-chain card, energy bars); potential is stored, never a stream
  *   --muscle-1/2/3  human muscle layers (surface → deep)   --bone  bone (ivory)
  *   --mannequin  the exercise-mode figure (matte, quieter than the muscles)
+ *   --face-1/2/3  a solid's opposite faces in pairs (docs/39 D10: MathScene nets), each with
+ *                its mark ● ▲ ■ so the pairs read without colour too
  *   --holder-1 … --holder-8  one state each on a many-state map (TimeScene
  *                `colorBy: entity`): neighbours never share one, the name is
  *                printed on the map; muted, after Paul Tol's colour-blind-safe
@@ -145,6 +147,10 @@
   --holder-6: #5b97b8;
   --holder-7: #7f3a5f;
   --holder-8: #3f7a3f;
+  /* Opposite faces (docs/39 D10): indigo, deep green, plum; apart from each other, --signal, --cold and --hot under the three colour-vision deficiencies (ΔE*ab ≥ 10, Machado 2009) and ≥ 3:1 on the paper. */
+  --face-1: #5a35c8;
+  --face-2: #2d5a34;
+  --face-3: #9443b0;
 
   /* Legacy names mapped onto the plate palette. */
   --bg: var(--paper);
@@ -249,6 +255,9 @@
   --holder-6: #86bfdc;
   --holder-7: #b5698f;
   --holder-8: #6fa66a;
+  --face-1: #aaa4ec;
+  --face-2: #6cd894;
+  --face-3: #c060d8;
 
   --bg: var(--paper);
   --surface: var(--panel-solid);

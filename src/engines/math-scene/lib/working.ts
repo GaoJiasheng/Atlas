@@ -29,6 +29,7 @@ import { decimalLines } from './decimal-working';
 import { formatDecimal } from './decimal';
 import { isMeasureTask } from './measure-kind';
 import { convertSentence, measureAnswerToken, measureLines } from './measure-working';
+import { netLines } from './net-description';
 
 const tok = (f: Frac) => `{${formatFrac(f)}}`;
 const SYM = { '<': '<', '=': '=', '>': '>' } as const;
@@ -242,6 +243,7 @@ function valueLines(task: Task, state: TaskState, locale: Locale, done: boolean,
 }
 
 export function workingLines(task: Task, state: TaskState, locale: Locale, done = false, notation: Notation = DEFAULT_NOTATION): string[] {
+  if (task.kind === 'complete-net' || task.kind === 'tap-face') return netLines(task, state, locale, done);
   if (isMeasureTask(task)) return measureLines(task, state, locale, done).filter(Boolean);
   if (task.model.kind === 'grid') return gridLines(task, state, locale, done).filter(Boolean);
   if (isDecimalTask(task)) return decimalLines(task, state, locale, done).filter(Boolean);

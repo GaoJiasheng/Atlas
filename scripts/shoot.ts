@@ -713,6 +713,8 @@ async function runTasks(s: Session, out: string, report: RunReport): Promise<voi
   mkdirSync(out, { recursive: true });
   const shot = async (name: string) => {
     await s.page.waitForTimeout(450);
+    // A check that plays on the stage (a net folding up, docs/39 §3.5) is shot once it has settled into its held pose.
+    await s.page.waitForFunction(() => !document.querySelector('[data-settling]'), null, { timeout: 4000 }).catch(() => undefined);
     await s.page.screenshot({ path: join(out, `${name}.png`) });
   };
   for (const r of rows.filter((x) => !x.practice)) {

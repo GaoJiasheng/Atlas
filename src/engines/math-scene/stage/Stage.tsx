@@ -52,6 +52,11 @@ import { InstrumentModel } from './Instrument';
 import type { InstrumentModelSpec } from '../schema';
 import { isQty, qtyText } from '../lib/value';
 import { qtyWords } from '../lib/words';
+import { NetModel, sharedUnit } from './NetModel';
+import type { NetHold } from './BeatModel';
+import type { NetModelSpec } from '../schema';
+import { netItems } from '../lib/net-view';
+import { describeNet } from '../lib/net-description';
 
 export interface DisplayModes {
   symbol: boolean;
@@ -78,6 +83,8 @@ export interface StageContentProps {
   beat?: Beat | null;
   /** Practice: the right answer drawn after a wrong one. */
   ctl?: Controller;
+  /** A net: the FOLD slider and the turns, the check's fold up, what it reports back (docs/39 §3.5). */
+  net?: NetHold;
 }
 
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
@@ -101,7 +108,7 @@ export function StageContent(p: StageContentProps) {
   const { box } = p;
   if (box.w < 40 || box.h < 40) return null;
   if (p.specimen) return <Specimen {...p} view={p.specimen} />;
-  if (p.beat) return <BeatModel beat={p.beat} box={box} defs={p.defs} modes={p.modes} locale={p.locale} />;
+  if (p.beat) return <BeatModel beat={p.beat} box={box} defs={p.defs} modes={p.modes} locale={p.locale} net={p.net} />;
   const task = p.task;
   const state = p.state;
   if (!task || !state) return null;
@@ -147,11 +154,15 @@ export const SPECIMEN_DIAL: InstrumentModelSpec = {
   tilt: 'auto',
 };
 
+/** The background chapter of a nets lesson (docs/39 §3.7): the cross-shaped cube net folded half way, isometric. */
+export const SPECIMEN_NET: NetModelSpec = { kind: 'net', solid: { type: 'cuboid', size: [1, 1, 1] }, layout: { cubeNet: '141-e' }, fold: 0.5, stagger: true, view: 'iso', turn: 0 };
+
 /** The background chapter of a lesson on decimals: a hundred grid with 0.35 shaded. */
 export const SPECIMEN_DECIMAL: DecimalGridModelSpec = { kind: 'decimal-grid', level: 100, given: { units: 350_000, dp: 2 } };
 
 function Specimen(p: StageContentProps & { view: ModelView }) {
   const { box, locale, defs } = p;
+  if (p.view === 'net') return <NetModel model={SPECIMEN_NET} box={box} defs={defs} locale={locale} label={t(locale, 'math.specimen.net')} fold={p.net?.fold ?? null} turn={p.net?.turn ?? null} maxH={p.net?.maxH} onShow={p.net?.onShow} />;
   if (p.view === 'instrument' || p.view === 'straight') return <InstrumentModel model={SPECIMEN_DIAL} box={box} defs={defs} locale={locale} label={t(locale, 'math.specimen.dial')} />;
   if (p.view === 'clock' || p.view === 'timeline') return <ClockModel defs={defs} box={box} model={SPECIMEN_CLOCK} locale={locale} label={t(locale, 'math.specimen.clock')} />;
   if (p.view === 'grid') return <GridModel defs={defs} box={box} model={SPECIMEN_GRID} locale={locale} label={t(locale, 'math.specimen.grid')} />;
@@ -219,6 +230,9 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
 
   /* the array, the blocks, the whole-number line: group, arrange, split, regroup, share, skip-count, or a picture to read */
   const pictures = task.kind === 'choose' && task.options.some((o) => o.model || o.value);
+
+  /* a net (docs/39 §3.5): complete it, tap a face, or a net or a solid to look at (a choice in words, a number to write) */
+  if (!pictures && m.kind === 'net') return <TaskNet {...p} task={task} state={state} box={area} />;
 
   /* an instrument (docs/32 §3.4): read it, set it, count its parts, or a picture beside the numbers compared, ordered, written */
   if (!pictures && m.kind === 'instrument') {
@@ -310,6 +324,33 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
         },
       }));
     if (cells.length === 0) return null;
+    // Nets as pictures: one scale for all (a short rectangle looks short), the stage's own net or solid beside them.
+    const netPics = task.options.flatMap((o) => (o.model?.kind === 'net' ? [o.model] : []));
+    if (netPics.length > 0) {
+      let unit: number | null = null;
+      const withNet = cells.map((c) => {
+        const o = task.options.find((x) => x.id === c.id)!;
+        if (o.model?.kind !== 'net') return c;
+        const model = o.model;
+        return {
+          ...c,
+          alt: netItems(model).map((s) => describeNet(s, locale, { hideName: true })).join(' '),
+          draw: (b: Rect) => {
+            unit ??= sharedUnit(netPics, b);
+            return <NetModel model={model} box={b} defs={defs} locale={locale} label="" mini unit={unit} />;
+          },
+        };
+      });
+      const side = m.kind === 'net' ? (area.w > area.h * 1.25 ? { x: area.x, y: area.y, w: area.w * 0.34, h: area.h } : { x: area.x, y: area.y, w: area.w, h: area.h * 0.36 }) : null;
+      const rest: Rect = side ? (side.w < area.w ? { x: area.x + side.w + 16, y: area.y, w: area.w - side.w - 16, h: area.h } : { x: area.x, y: area.y + side.h + 12, w: area.w, h: area.h - side.h - 12 }) : area;
+      const gh = Math.min(rest.h, withNet.length > 3 ? rest.h : clamp(rest.w / withNet.length, 150, 320));
+      return (
+        <g>
+          {side && <TaskNet {...p} task={task} state={state} box={side} />}
+          <OptionGrid x={rest.x} y={rest.y + (rest.h - gh) / 2} w={rest.w} h={gh} cells={withNet} multi={!!task.multi} chosen={state.chosen} onChoose={editable ? (id) => act({ do: 'choose', id }) : undefined} ghost={ghost ? task.options.filter((o) => o.correct).map((o) => o.id) : null} label={label} locale={locale} />
+        </g>
+      );
+    }
     // Arrays, blocks and number lines in the cards: the cards take the pictures' shape (lines and groups in a row stack in
     // one column) and up to about 60 % of a big box's height (all of a small one), so the things in them read like a beat's.
     const pictures = task.options.flatMap((o) => (o.model ? [o.model] : []));
@@ -590,10 +631,39 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
 /* Small drawings: picture options                                     */
 /* ------------------------------------------------------------------ */
 
+/** A check's net or solid: live for complete-net and tap-face, a picture otherwise (its fold the slider's once open). */
+function TaskNet(p: StageContentProps & { task: Task; state: TaskState; box: Rect }) {
+  const m = p.task.model;
+  if (m.kind !== 'net') return null;
+  const live = p.task.kind === 'complete-net' || p.task.kind === 'tap-face';
+  const asked = p.task.kind === 'choose' && p.task.options.some((o) => !!o.solid);
+  return (
+    <NetModel
+      model={m}
+      box={p.box}
+      defs={p.defs}
+      locale={p.locale}
+      label={plainText(tx(p.task.prompt, p.locale), p.locale)}
+      task={live ? p.task : null}
+      state={live ? p.state : null}
+      editable={!!p.editable && !!p.ctl}
+      act={(a) => p.ctl?.act(a)}
+      ghost={p.run?.revealed ?? false}
+      play={p.net?.play ?? null}
+      fold={p.net?.fold ?? null}
+      turn={p.net?.turn ?? null}
+      maxH={p.net?.maxH}
+      hideName={asked}
+      onShow={p.net?.onShow}
+    />
+  );
+}
+
 export function MiniModel({ defs, model, box, locale }: { defs: string; model: Task['model']; box: Rect; locale: Locale }) {
   const label = '';
   if (model.kind === 'grid') return <GridModel defs={defs} box={box} model={model} locale={locale} label={label} mini />;
   if (model.kind === 'instrument') return <InstrumentModel model={model} box={box} defs={defs} locale={locale} label={label} mini />;
+  if (model.kind === 'net') return <NetModel model={model} box={box} defs={defs} locale={locale} label={label} mini />;
   if (model.kind === 'array') return <ArrayModel defs={defs} box={box} model={model} locale={locale} label={label} mini />;
   if (model.kind === 'blocks') return <BlocksModel box={box} model={model} locale={locale} label={label} mini />;
   if (model.kind === 'clock') return <ClockModel defs={defs} box={box} model={model} locale={locale} label={label} mini />;

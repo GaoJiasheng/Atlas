@@ -37,6 +37,8 @@ import { decimalAnswerLine } from '../lib/decimal-working';
 import { DecimalModelControls, hasDecimalControls } from './DecimalControls';
 import { hasMeasureControls, MeasureModelControls } from './MeasureControls';
 import { isMeasureTask } from '../lib/measure-kind';
+import { NetModelControls } from './NetControls';
+import { optionText } from '../lib/net-description';
 
 export interface TrayProps {
   ctl: Controller;
@@ -177,6 +179,8 @@ function Controls(p: TrayProps & { phase: string; locked: boolean }) {
   const wholeKind = task.kind === 'group' || task.kind === 'arrange' || task.kind === 'skip-count' || task.kind === 'split-array' || task.kind === 'regroup' || task.kind === 'share';
   if (phase === 'model' && task.model.kind === 'grid' && task.kind !== 'choose') {
     parts.push(<GridModelControls key="grid" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
+  } else if (phase === 'model' && task.kind === 'complete-net') {
+    parts.push(<NetModelControls key="net" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
   } else if (phase === 'model' && hasMeasureControls(task, phase)) {
     parts.push(<MeasureModelControls key="measure" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
   } else if (phase === 'model' && hasDecimalControls(task)) {
@@ -248,7 +252,7 @@ function Controls(p: TrayProps & { phase: string; locked: boolean }) {
   } else if (task.kind === 'order') {
     parts.push(<OrderSlots key="order" task={task} state={s} ctl={ctl} locale={locale} locked={locked} ghost={run.revealed} />);
   } else if (task.kind === 'choose') {
-    const text = task.options.map((o, i) => ({ o, letter: 'ABCDEFG'[i]! })).filter(({ o }) => o.text && !o.model && !o.value);
+    const text = task.options.map((o, i) => ({ o, letter: 'ABCDEFG'[i]! })).filter(({ o }) => (o.text || o.solid || o.folds !== undefined) && !o.model && !o.value);
     if (text.length > 0) {
       parts.push(
         <div key="choose" className="ms-choices" role={task.multi ? 'group' : 'radiogroup'} aria-label={T('math.tray.choices')}>
@@ -264,7 +268,7 @@ function Controls(p: TrayProps & { phase: string; locked: boolean }) {
               disabled={locked}
               onClick={() => ctl.act({ do: 'choose', id: o.id })}
             >
-              <b>{letter}</b> {renderRich(tx(o.text!, locale), locale)}
+              <b>{letter}</b> {renderRich(o.text ? tx(o.text, locale) : optionText(o, locale), locale)}
             </button>
           ))}
         </div>,
