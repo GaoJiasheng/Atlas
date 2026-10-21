@@ -587,7 +587,11 @@ datedLayers:
 - 首页图的专用 alt 没有字段可放（首页卡片统一用主题标题作 alt）。
 - 《新加坡 1819–1965》第 11 章的“奥斯曼·渥”“尤索夫·伊萨”没有改（不属于本主题的文件），留给主会话统一（§0.1-1）。
 
-### 9.4 已知差距
+### 9.4 门槛（2026-10-21）
+
+`pnpm check` 0 错；`pnpm validate` 0 错 0 警告；`pnpm test` 3,357 项中只有 `tests/time-scene/territory.test.ts` 的 ww2 锚点用例在机器满载时超时（5 s），单独重跑通过；`pnpm build` 通过；`pnpm shoot singapore-after-1965 --beats --keys --layout --locale en,zh`：节拍 0 失败、未标注高亮 0、“chapter highlights”全在屏内、键位 0 失败、布局 0 问题、console 干净；回归 `pnpm shoot singapore-land-use --keys`、`pnpm shoot singapore-1819-1965 --keys` 均 OK；`CI=1 pnpm e2e` 240 项中 239 过，`time-label-drag`（cinema）在满载的全量运行里失败、`hud` 的演示语音用例重试后过，两者单独重跑都通过；本主题的 3 个 e2e 用例都过。
+
+### 9.5 已知差距
 
 - NewspaperSG 全文（1969、1971、1965、1997、1998 年的几篇）只读到版面目录；光谱行动的尚达曼 2001、黄锦西 1991、Turnbull 2009 没有读到，已按 §0.3 删去。
 - 1966 年回教法令、1968 年两部劳工法令的确切通过日没查到，事件只写到年 / 月。
