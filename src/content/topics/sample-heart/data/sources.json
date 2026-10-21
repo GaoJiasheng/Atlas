@@ -1,0 +1,17 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": { "en": "Sample source one: placeholder measured values for the test bench.", "zh": "示例来源一：测试桌面的占位测量值。" }
+    },
+    {
+      "id": "S2",
+      "text": { "en": "Sample design study: placeholder values chosen to show the model working.", "zh": "示例设计研究：为显示模型而取的占位数值。" },
+      "design": true
+    },
+    {
+      "id": "S3",
+      "text": { "en": "Sample source three: a second placeholder for the air breathed out.", "zh": "示例来源三：呼出气体的第二个占位来源。" }
+    }
+  ]
+}

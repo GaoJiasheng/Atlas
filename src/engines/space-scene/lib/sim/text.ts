@@ -46,5 +46,5 @@ export function outputText(o: SimOutput, v: SimOutputValue | undefined, locale: 
   if (o.kind === 'vector' || o.kind === 'timeline') return '';
   const n = numberOf(v);
   if (o.format === 'time') return timeText(n, locale);
-  return Number.isFinite(n) ? formatReading(n, outputDecimals(o)) : '—';
+  return Number.isFinite(n) ? formatReading(n, outputDecimals(o, n)) : '—';
 }

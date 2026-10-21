@@ -31,6 +31,12 @@ const entryFields = {
     .optional(),
   /** Range, disagreement between sources, or how the number was rounded. */
   note: bilingual.optional(),
+  /**
+   * The topic's own design study (docs/40 §4.2): the values a model sets for
+   * showing ("in this model", SIM), not measurements. A SpaceScene `table`
+   * row of SIM outputs cites one; a row of TYPICAL outputs cites another.
+   */
+  design: z.literal(true).optional(),
 };
 
 export const sourceEntry = z.object({ id: sourceId, ...entryFields }).strict();

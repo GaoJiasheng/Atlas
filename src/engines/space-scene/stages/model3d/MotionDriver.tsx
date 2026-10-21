@@ -59,6 +59,7 @@ import {
 import { contractionAt, contractionPlan, type ContractionPlan } from '../../lib/contraction';
 import { contactPlan, handsCorrection, hingeAngle, NO_CONTACT, type ContactPlan } from '../../lib/contact';
 import { keepAnimating, useRuntime } from './runtime';
+import { clockTime } from '../../lib/sim/hz';
 import type { GltfRig } from './GltfSource';
 import { gripPoint, type Grip } from './grip';
 import { defaultContacts, equipmentFloor, EQUIPMENT_INFO, heldReach, PRESS_SURFACES } from '../../lib/equipment';
@@ -524,7 +525,9 @@ export function MotionDriver({
         const always = !a.whenRun;
         if (!always && runtime.energy === 0) continue;
         running = true;
-        const c = contractLevel(a.amount, a.hz, always ? runtime.elapsed : runtime.phase, always ? 1 : runtime.energy);
+        // Paced by an `hz` binding (lib/sim/hz.ts): its own integrated phase.
+        const paced = runtime.clocks.get(a.id);
+        const c = contractLevel(a.amount, a.hz, paced?.paced ? clockTime(a, paced.cycles) : always ? runtime.elapsed : runtime.phase, always ? 1 : runtime.energy);
         frame.contract.set(a.target, Math.max(frame.contract.get(a.target) ?? 0, c));
       }
     }

@@ -4,7 +4,8 @@
  * with `state.sim.try`. Three rows of chips (change / keep the same /
  * observe), the controls (toggle = a switch button, step = ‹ value ›,
  * choice = a group of option buttons; all ≥ 44 px) for the varied control and
- * any `also`, the observed outputs in large type (SIM, "in this model"), then
+ * any `also`, the observed outputs in large type (SIM, "in this model"; a
+ * table model's `typical` outputs TYPICAL with their row's sources), then
  * optionally predict-then-observe (pick an outcome; the change is applied and
  * the card says what was observed, never right or wrong; "back to before"
  * undoes it) and the data table ("record a row": one row per value of the
@@ -35,6 +36,8 @@ import { EnergyDiagram } from '../hud/EnergyCard';
 import { CycleDiagram } from '../hud/CycleCard';
 import { KeyDiagram } from '../hud/KeyCard';
 import { TryChart } from './TryChart';
+import { SourceRefs } from '../../widgets/SourcePopover';
+import { tableSources } from '../lib/sim/table';
 
 function Control({ c, value, onSet, primary }: { c: SimControl; value: SimValue | undefined; onSet(v: SimValue): void; primary: boolean }) {
   const t = useT();
@@ -294,6 +297,12 @@ export function TryIt({ file, ui }: { file: PartsFile; ui: SpaceUiStore }) {
     return c ? `${tx(c.label, locale)}: ${valueText(c, values[k], locale)}` : k;
   });
   const observed = card.observe.map((id) => sim.outputs.find((o) => o.id === id)).filter((o): o is SimOutput => o !== undefined && o.kind !== 'vector' && o.kind !== 'timeline');
+  // A table's typical outputs (docs/40 §4.2): their own chip, with the sources of the rows they come from now.
+  const typical = observed.filter((o) => o.tag === 'typical');
+  const simmed = observed.filter((o) => o.tag !== 'typical');
+  const mixed = typical.length > 0 && simmed.length > 0;
+  const rowSources = sim.table && typical.length > 0 ? tableSources(sim.table, values) : {};
+  const typicalRefs = [...new Set(typical.flatMap((o) => rowSources[o.id] ?? []))];
   const runs = cardTimelines(sim, values, card);
   const slow = Math.max(1, ...runs.map((id) => {
     const run = outputs[id];
@@ -321,17 +330,28 @@ export function TryIt({ file, ui }: { file: PartsFile; ui: SpaceUiStore }) {
       </div>
       <dl className="space-try__readouts">
         {observed.map((o) => (
-          <div key={o.id} className="space-try__readout" data-sim-output={o.id} data-state={o.kind === 'state' ? String(outputs[o.id]) : undefined}>
-            <dt>{tx(o.label, locale)}</dt>
+          <div key={o.id} className="space-try__readout" data-sim-output={o.id} data-state={o.kind === 'state' ? String(outputs[o.id]) : undefined} data-tag={o.tag ?? 'sim'}>
+            <dt>
+              {tx(o.label, locale)}
+              {mixed && <small className="atlas-chip space-try__tag">{(o.tag === 'typical' ? t('source.typical') : t('source.simulated')).toUpperCase()}</small>}
+            </dt>
             <dd>
               <b aria-label={outputWords(o, outputs[o.id], locale)}>{outputText(o, outputs[o.id], locale)}</b>
               {o.kind === 'number' && o.unit && o.format !== 'time' && <small> {o.unit}</small>}
             </dd>
           </div>
         ))}
-        <p className="space-try__sim">
-          <span className="atlas-chip">{t('source.simulated').toUpperCase()}</span> {t('space.try.model')}
-        </p>
+        {(simmed.length > 0 || typical.length === 0) && (
+          <p className="space-try__sim" data-tag="sim">
+            <span className="atlas-chip">{t('source.simulated').toUpperCase()}</span> {t('space.try.model')}
+          </p>
+        )}
+        {typical.length > 0 && (
+          <p className="space-try__sim" data-tag="typical">
+            <span className="atlas-chip">{t('source.typical').toUpperCase()}</span> {t('space.try.typical')}
+            {typicalRefs.length > 0 && <SourceRefs ids={typicalRefs} locale={locale} />}
+          </p>
+        )}
       </dl>
       <Replay ids={runs} slow={slow} ui={ui} />
       {card.predict && <Predict file={file} sim={sim} card={card} ui={ui} chapter={chapter} />}

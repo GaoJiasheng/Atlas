@@ -14,6 +14,10 @@
  * A field-line flow (a `state` binding, lib/sim/field.ts) runs along the
  * lines of the magnet field state on show, drawn under the particles as
  * hairlines in the flow's colour (one more draw call); a new state fades in.
+ * A number output's `intensity` (docs/40 §4.3) runs every path at one pace.
+ * A tidal flow (docs/40 §4.4, lib/sim/tidal.ts) goes in and out with the
+ * phase of the animation it follows (or its own `hz`) and stops with it;
+ * with reduced motion its particles stay put.
  */
 import { useEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
@@ -25,7 +29,9 @@ import { resolveDataColor } from '../../lib/color';
 import { damp } from '../../lib/math';
 import type { SimFlowEffect } from '../../lib/sim/bind';
 import { createFlowMaterial, setFlowStops, styleFlowMaterial } from './flowMaterial';
-import { keepAnimating, MAX_DT, useRuntime } from './runtime';
+import { keepAnimating, MAX_DT, prefersReducedMotion, useRuntime } from './runtime';
+import { clockPhase } from '../../lib/sim/hz';
+import { tidalStep } from '../../lib/sim/tidal';
 import type { StageLook } from './look';
 
 /** Deterministic PRNG so every load looks the same (screenshots, tests). */
@@ -197,8 +203,8 @@ function FlowPaths({
       material,
       color ? [[0, hex(color)]] : flow.stops ? flow.stops.map((s) => [s.at, hex(s.color)] as const) : [[0, hex(flow.color)]],
     );
-    styleFlowMaterial(material, look.theme === 'cinema', flow.size);
-  }, [material, flow.color, flow.stops, flow.size, look, color]);
+    styleFlowMaterial(material, look.theme === 'cinema', flow.size, flow.flat === true);
+  }, [material, flow.color, flow.stops, flow.size, flow.flat, look, color]);
 
   useEffect(() => {
     material.clippingPlanes = flow.clip ? clipping : null;
@@ -210,7 +216,17 @@ function FlowPaths({
 
   const visible = effect?.visible ?? true;
   const speeds = effect?.paths ?? null;
+  const uniform = effect?.uniform;
   const density = effect?.mode === 'density';
+  const tidal = flow.tidal;
+  // QA (`flow(id).pace`): the pace a number intensity gives every path.
+  useEffect(() => {
+    if (uniform === undefined) return;
+    bridge?.flowPace.set(flow.id, uniform);
+    return () => { bridge?.flowPace.delete(flow.id); };
+  }, [bridge, flow.id, uniform]);
+  /** A tidal flow's own clock (`tidal.hz`), in cycles. */
+  const own = useRef(0);
   useFrame((st, delta) => {
     const dt = Math.min(delta, MAX_DT);
     const strength = layerOn && visible ? (flow.whenRun ? runtime.energy : 1) : 0;
@@ -219,17 +235,32 @@ function FlowPaths({
     const u = material.uniforms;
     u.uOpacity.value = Math.min(1, fade.current);
     const clock = flow.whenRun ? runtime.phase : runtime.elapsed;
+    const run = flow.whenRun ? runtime.energy : 1;
+    // Tidal: where the cycle is at the start of this frame, how far it moves and how many seconds of it play (0 while the animation stops).
+    let tide: { phase: number; cycles: number; seconds: number } | null = null;
+    if (tidal) {
+      if ('sync' in tidal) {
+        const c = runtime.clocks.get(tidal.sync);
+        tide = c ? { phase: clockPhase(c.cycles - c.advance), cycles: c.advance, seconds: c.seconds } : { phase: 0, cycles: 0, seconds: 0 };
+      } else {
+        const advance = dt * run * tidal.hz;
+        tide = { phase: clockPhase(own.current), cycles: advance, seconds: dt * run };
+        own.current += advance;
+      }
+      if (prefersReducedMotion()) tide.seconds = 0;
+    }
     let easing = false;
     paths.forEach((p, k) => {
       const s = state.current[k];
       if (!s) return;
       const len = Math.max(baked[k]!.length, 1e-4);
-      if (speeds) {
+      if (speeds || uniform !== undefined || tide) {
         // Bound: integrate this path's own speed (no jump when it changes); a path without current fades out.
-        const value = speeds[p.id] ?? 0;
+        const value = speeds ? (speeds[p.id] ?? 0) : (uniform ?? 1);
         // Density: the flow's own speed (its sign: the way along the path), the value is the share of particles on show.
         const factor = density ? Math.sign(value) : value;
-        s.phase += (dt * (flow.whenRun ? runtime.energy : 1) * flow.speed * factor) / len;
+        if (tide) s.phase += tidalStep(tide.phase, tide.cycles, tide.seconds, flow.speed, factor) / len;
+        else s.phase += (dt * run * flow.speed * factor) / len;
         const target = value === 0 ? 0 : 1;
         s.alpha = damp(s.alpha, target, PATH_FADE, dt);
         if (Math.abs(s.alpha - target) < 0.003) s.alpha = target;

@@ -1,0 +1,48 @@
+---
+id: sample-air
+order: 1
+title: { en: "Sample air", zh: "示例空气" }
+state:
+  view: assembled
+  explode: 0
+  run: false
+  part: null
+  layers: [air-sample, lungs]
+  camera: { "position": [0.5, 0.43, 0.6], "target": [0.47, 0.378, 0.02], "fov": 30 }
+  labels: [n2-balls, o2-balls, co2-balls, h2o-balls]
+  summary: { en: "Sample air: placeholder per cents of four gases, one ball each.", zh: "示例空气：四种气体的占位百分数，每个百分点一个球。" }
+  sim:
+    set: { sample: in }
+    try:
+      vary: sample
+      keep: [{ en: "Same sample jar", zh: "同一个示例瓶" }]
+      observe: [n2, o2, co2, h2o]
+      record: { chart: { y: [o2, co2, h2o] } }
+      predict:
+        prompt: { en: "Sample prediction: in the air breathed out, is there more oxygen or less?", zh: "示例猜想：呼出的气体里，氧气更多还是更少？" }
+        start: { sample: in }
+        change: { sample: out }
+        observe: o2
+        options:
+          - { id: more, label: { en: "More", zh: "更多" }, means: more }
+          - { id: less, label: { en: "Less", zh: "更少" }, means: less }
+          - { id: same, label: { en: "The same", zh: "一样" }, means: same }
+  beats:
+    - caption: { en: "Sample beat one: the air breathed in, placeholder per cents.", zh: "示例节拍一：吸入的空气，占位百分数。" }
+    - sim: { set: { sample: out } }
+      caption: { en: "Sample beat two: the air breathed out, fewer oxygen balls.", zh: "示例节拍二：呼出的气体，氧气球少了。" }
+  index:
+    parts: [air-jar, n2-balls, o2-balls, co2-balls, h2o-balls]
+---
+
+<Lang en>
+
+Sample air: placeholder text for the gases in a jar. The readings are TYPICAL, from the placeholder sources.
+
+</Lang>
+
+<Lang zh>
+
+示例空气：瓶里气体的占位文字。读数是典型值，出自占位来源。
+
+</Lang>

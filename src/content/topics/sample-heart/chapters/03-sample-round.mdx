@@ -1,0 +1,40 @@
+---
+id: sample-round
+order: 3
+title: { en: "Sample round", zh: "示例一圈" }
+state:
+  view: xray
+  explode: 0
+  run: true
+  part: null
+  layers: [lungs, heart-group, blood-poor, blood-rich, gases]
+  camera: { "position": [0.36, 0.42, 0.92], "target": [0.01, 0.29, -0.1], "fov": 30 }
+  labels: [heart, lung-vessels, lung-left]
+  summary: { en: "Sample round: placeholder segments of the blood's loop, one step at a time.", zh: "示例一圈：血液回路的占位分段，一步一步看。" }
+  sim:
+    set: { stop: 0 }
+    try:
+      vary: stop
+      keep: [{ en: "Same sample loop", zh: "同一条示例回路" }]
+      observe: [where, blood]
+  beats:
+    - caption: { en: "Sample beat one: the whole placeholder loop.", zh: "示例节拍一：整条占位回路。" }
+    - sim: { set: { stop: 1 } }
+      caption: { en: "Sample beat two: the first segment and the one before it.", zh: "示例节拍二：第一段和它前面的一段。" }
+    - sim: { set: { stop: 2 } }
+      caption: { en: "Sample beat three: in the lungs, the blood takes in oxygen.", zh: "示例节拍三：在肺里，血得到氧气。" }
+  index:
+    parts: [heart, great-vessels, lung-vessels, lung-right, lung-left]
+---
+
+<Lang en>
+
+Sample round: placeholder text for following the blood around one loop.
+
+</Lang>
+
+<Lang zh>
+
+示例一圈：跟着血绕一圈的占位文字。
+
+</Lang>

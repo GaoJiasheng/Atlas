@@ -9,11 +9,12 @@
  * `contract`, `root`, `bonesMoved` and `exercise` carry the MotionDriver's
  * output (rig, contraction, exercise position) to the parts, labels, sites,
  * equipment and ground; `play` where each try-it timeline is (its run's
- * model time).
+ * model time); `clocks` each animation's phase and frequency (lib/sim/hz.ts).
  */
 import { createContext, useContext } from 'react';
 import { Matrix4, Vector3 } from 'three';
 import type { Playback } from '../../lib/sim/timeline';
+import type { AnimClock } from '../../lib/sim/hz';
 
 /** Where the exercise puts the body (scene coordinates), for the free-standing equipment and the ground. */
 export interface ExercisePlacement {
@@ -52,10 +53,12 @@ export interface StageRuntime {
   exercise: ExercisePlacement | null;
   /** Try-it timelines by output id: where each run is (TimelineClock advances them; parts and force arrows read them). */
   play: Map<string, Playback>;
+  /** Per animation id: its clock (AnimClocks advances them first each frame; paced parts, tidal flows and the test API read them). */
+  clocks: Map<string, AnimClock>;
 }
 
 export function createRuntime(run: boolean, explode: number): StageRuntime {
-  return { energy: run ? 1 : 0, phase: 0, elapsed: 0, explode, shadowDirty: true, moved: 0, contract: new Map(), root: new Matrix4(), bonesMoved: 0, exercise: null, play: new Map() };
+  return { energy: run ? 1 : 0, phase: 0, elapsed: 0, explode, shadowDirty: true, moved: 0, contract: new Map(), root: new Matrix4(), bonesMoved: 0, exercise: null, play: new Map(), clocks: new Map() };
 }
 
 export const RuntimeContext = createContext<StageRuntime | null>(null);

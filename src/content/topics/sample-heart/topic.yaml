@@ -1,0 +1,18 @@
+# PLACEHOLDER topic: exercises the SpaceScene engine pieces of docs/40 §4 (E-HL1–E-HL4) only, on the real
+# heart-and-lungs glb: the `table` model (sourced rows, TYPICAL and SIM outputs, a cell's own decimals, a
+# design-study source), `count` balls from a table, the `hz` binding (breathing and heartbeat paced by the
+# model, several animations in one phase), number `intensity` on several flows (speed and density), tidal air
+# flows synced to the breathing, `visible` blood segments on a round and the five blood and gas tokens.
+id: sample-heart
+title: { en: "Sample: Heart and lungs bench", zh: "示例：心肺桌面" }
+subtitle: { en: "A placeholder topic for testing the table model", zh: "用于测试表模型的占位主题" }
+subject: science
+levels: [P5]
+moe: []
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: draft
+note: { en: "Placeholder topic · placeholder values · meshes Z-Anatomy, CC BY-SA 4.0", zh: "占位主题 · 占位数值 · 网格 Z-Anatomy，CC BY-SA 4.0" }

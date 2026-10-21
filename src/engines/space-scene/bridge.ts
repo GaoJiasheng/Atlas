@@ -97,12 +97,25 @@ export interface ShiftReading {
   delay: number;
 }
 
+/** An animation now (docs/40 §4.3): its frequency (Hz), cycle phase (0–1) and how far it is switched on. */
+export interface AnimationReading {
+  hz: number;
+  phase: number;
+  on: number;
+}
+
 export interface StageBridge {
   fills: Map<string, FillReading>;
+  /** Copies a `count` binding draws, per part (QA `copies(id)`). */
+  copies: Map<string, number>;
+  /** Per animation id (stages/model3d/AnimClocks.tsx; QA `animation(id)`). */
+  animations: Map<string, AnimationReading>;
   bends: Map<string, BendReading>;
   shifts: Map<string, ShiftReading>;
   fillBenchmarks: Map<string, () => number>;
   flowPaths: Map<string, Record<string, { visible: boolean }>>;
+  /** Flows a number `intensity` paces (docs/40 §4.3): the factor every path runs at (QA `flow(id).pace`). */
+  flowPace: Map<string, number>;
   /** Stage size in CSS pixels. */
   width: number;
   height: number;
@@ -168,10 +181,13 @@ export function createBridge(): StageBridge {
     modelRadius: 1,
     anchors: new Map(),
     fills: new Map(),
+    animations: new Map(),
+    copies: new Map(),
     bends: new Map(),
     shifts: new Map(),
     fillBenchmarks: new Map(),
     flowPaths: new Map(),
+    flowPace: new Map(),
     sites: new Map(),
     labelled: null,
     stats: { calls: 0, triangles: 0, geometries: 0, textures: 0, fps: undefined, gpu: undefined, buffer: [0, 0], lastFrame: 0, shadowMapUpdates: 0 },

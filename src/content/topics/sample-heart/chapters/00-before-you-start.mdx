@@ -1,0 +1,37 @@
+---
+id: before-you-start
+order: 0
+kind: background
+title: { en: "Sample background", zh: "示例背景" }
+state:
+  view: xray
+  explode: 0
+  run: true
+  part: null
+  layers: [airway, lungs, heart-group, air-sample]
+  camera: { "position": [0.36, 0.42, 0.92], "target": [0.01, 0.29, -0.1], "fov": 30 }
+  labels: [lung-right, heart, trachea]
+  summary: { en: "Sample background: a placeholder chest, beating and breathing at the default pace.", zh: "示例背景：一个占位胸腔，按默认快慢跳动和呼吸。" }
+  note:
+    en: "Sample reading note: every number on this placeholder bench comes from a table row with its own placeholder source."
+    zh: "示例阅读说明：这张占位桌面上的每个数都来自表里的一行，各有占位来源。"
+  beats:
+    - caption: { en: "Sample beat one: the heart beats and the lungs breathe at the default pace.", zh: "示例节拍一：心脏按默认快慢跳动，肺在呼吸。" }
+    - camera: bench
+      labels: [air-jar, o2-balls]
+      caption: { en: "Sample beat two: a placeholder jar with one ball for each per cent.", zh: "示例节拍二：一个占位的瓶，每个小球代表 1 %。" }
+  index:
+    parts: [trachea, bronchi, lung-right, lung-left, diaphragm, heart, great-vessels, lung-vessels, air-jar]
+---
+
+<Lang en>
+
+Sample background: placeholder text for the heart and lungs bench. Each chapter after this one tries one experiment of the table.
+
+</Lang>
+
+<Lang zh>
+
+示例背景：心肺桌面的占位文字。后面每一章试表里的一个实验。
+
+</Lang>

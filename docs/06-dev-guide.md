@@ -135,7 +135,7 @@ pnpm tsx scripts/new-topic.ts <slug> --engine space-scene --subject science|biol
 - MDX 正文要有 `<Lang en>` 和 `<Lang zh>`
 - 正文 `<TopicLink slug ch>`：主题目录存在，`ch` 是它的一章
 - TimeScene `basemap.local` 文件（`localLandIssues`）：TopoJSON、有同名对象、有 `kind: land`；`kind` 只能是 `mask` / `land` / `coast-today`，`coast-today` 是线；带日期的岛岸（见「Geo pipeline」的「岛尺度底图 · 按年代的海岸」）要么每个 `land` 都带 `from` / `to`、要么都不带，日期合法、`to` 晚于 `from`，各段不重叠、无空档、只有第一段可省 `from`、最后一段可省 `to`
-- `sources.json`：id 形如 `S1`、不重复；事件的 `sources` 和正文 `<Num s="…">` 引用的编号必须在 `sources.json` 里（没有这个文件却引用了也报错）
+- `sources.json`：id 形如 `S1`、不重复；事件的 `sources` 和正文 `<Num s="…">` 引用的编号必须在 `sources.json` 里（没有这个文件却引用了也报错）；可选 `design: true` 标出主题自己的设计研究；SpaceScene `table` 模型的行：每个 `S#` 都在、设定 SIM 数输出的行引设计研究、设定 TYPICAL 数输出的行引别的来源（`table-schema.ts tableSourceIssues`）
 - 正文 `<FlyTo preset="…">` 必须是本主题的命名预设（TimeScene `presets.json`，SpaceScene `parts.json` 的 `presets`）；`<More>` 必须带 `title`；预设 id 与章节等 id 一样全主题唯一，且不能叫 `world` / `theatre`（TimeScene）、`orbit` / `reference`（SpaceScene）
 - `glossary.json`：名词 id 唯一，`see` 必须指向已有名词且不能指向自己；正文 `<Term id="…">` 必须在名词表里（没有这个文件却用了也报错）
 - `topic.yaml` 的 `blocLabels` 只允许 `axis / allied / neutral / out` 四个键，每项都是 `{ en, zh }`
@@ -1061,11 +1061,11 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
 
 绑定的补充规则：`pose` 没有列出当前值时保留章 / 拍姿态，只有显式 `null` 强制回静止；几条绑定动同一零件时非静止的那条胜出。`tint.max`（0–1）指定实际混色上限，默认 0.55 保持既有外观，`max: 1` 可以完全染成目标深色；它仍只染零件自己的材质槽 0。
 
-docs/22 §4.3（E-SIM 核心，磁铁与电路共用）+ docs/23 §4（电路模型与电路图卡）。一个 SpaceScene 主题可以在 `parts.json` 里加一段 `sim`：读者能改的几个量（控件）、一个纯函数模型、模型给出的量（输出），以及控件 / 输出到零件、流、动画的绑定。没有独立的 Simulation 引擎（docs/03 §C）。代码：`sim-schema.ts`（zod 与交叉校验）、`lib/sim/`（`controls.ts` 值的合成与 URL、`index.ts` 模型注册表、`circuit.ts`、`magnet.ts`、`force.ts`、`energy.ts`、`lifecycle.ts`、`matter.ts`、`light.ts`、`sun.ts`、`shadow.ts`、`bind.ts`、`trial.ts`、`diagram.ts`、`sort.ts`、`shift.ts`、`keycard.ts`，全部纯函数、有单测 `tests/space-scene/sim.test.ts` 等）、`explorer/TryIt.tsx`（试一试卡片）、`hud/CircuitCard.tsx`（电路图卡）、`hud/KeyCard.tsx`（分类流程图卡）、`hud/sim.ts`（HUD 读写的入口）。
+docs/22 §4.3（E-SIM 核心，磁铁与电路共用）+ docs/23 §4（电路模型与电路图卡）。一个 SpaceScene 主题可以在 `parts.json` 里加一段 `sim`：读者能改的几个量（控件）、一个纯函数模型、模型给出的量（输出），以及控件 / 输出到零件、流、动画的绑定。没有独立的 Simulation 引擎（docs/03 §C）。代码：`sim-schema.ts`（zod 与交叉校验）、`lib/sim/`（`controls.ts` 值的合成与 URL、`index.ts` 模型注册表、`circuit.ts`、`magnet.ts`、`force.ts`、`energy.ts`、`lifecycle.ts`、`matter.ts`、`light.ts`、`sun.ts`、`shadow.ts`、`bind.ts`、`trial.ts`、`diagram.ts`、`sort.ts`、`shift.ts`、`keycard.ts`、`table.ts`、`hz.ts`、`tidal.ts`，全部纯函数、有单测 `tests/space-scene/sim.test.ts` 等）、`explorer/TryIt.tsx`（试一试卡片）、`hud/CircuitCard.tsx`（电路图卡）、`hud/KeyCard.tsx`（分类流程图卡）、`hud/sim.ts`（HUD 读写的入口）。
 
 ```jsonc
 "sim": {
-  "kind": "circuit",                                   // circuit | magnet | force | energy | life-cycle | matter | light | sort | materials：lib/sim/<kind>.ts（life-cycle → lifecycle.ts）
+  "kind": "circuit",                                   // circuit | magnet | force | energy | life-cycle | matter | light | sort | materials | table：lib/sim/<kind>.ts（life-cycle → lifecycle.ts）
   "controls": [                                        // ≤ 16，id 全主题的 sim 里唯一
     { "id": "main", "kind": "toggle", "default": true, "label": {en, zh} },
     { "id": "cells", "kind": "step", "values": [1, 2, 3], "default": 2, "label": {en, zh}, "unit"?: "cm" },
@@ -1097,7 +1097,7 @@ docs/22 §4.3（E-SIM 核心，磁铁与电路共用）+ docs/23 §4（电路模
 - **值从哪里来**：store 字段 `sim` 只存"设过的值"（不累积：章 `state.sim.set`，拍 `sim.set` 叠在本章的上面，读者在卡片 / 键 / 电路图上改的）；显示的值 = 默认 ⊕ 各选择的 `sets` ⊕ 设过的值，无效值忽略（`resolveSimValues`）。换章回到那一章的 `set`；ESC 不清；URL `sim`（见「URL 参数」）；演示的保存 / 恢复带着它；拍的深链接 `b` 照常。
 - **模型**（`lib/sim/index.ts evaluateSim`，同步、< 1 ms，只在值变化时算）：`circuit` = 节点分析（docs/23 §4.2）：电池是诺顿等效（每节 `emf` 默认 1.5 V、`r` 每节内阻，`flip` 指定某节由开关翻转成 −EMF；`cells` 是数或步进控件），`switch`（合上 `closed` 默认 0.001 Ω，断开去掉），`wire`（`r`），`gap`（选择控件 → `materials` 的欧姆数，没列 = 绝缘、断开），`load`（固定 `load` 或选择控件；`present` 开关 = 装没装上；`loads` 的 `lamp`（`rated` W）/ `buzzer`（`on` A 以上响）/ `motor`（`at` V 时 `rpm` 的可视转速，∝ 电压））；每个连通块接地一个节点，高斯消元（部分主元），没有电池的块电流为 0。量名（输出的 `from`）：`current:<边>`、`volts:<边>`（电池 = 端电压）、`power:<边>`、`brightness:<边>`（灯功率 ÷ `reference.power` × 100）、`speed:<边>`、`sound:<边>`（`on` / `off`）、`status:<电池边>`（`open` < 1 mA、`short` > `short` A（默认 3）、`over-rating`：同一回路里有灯超过额定 × `over`（默认 1.5）、否则 `closed`）、`edges`（每条边的带号电流，from → to）。`magnet` = Gilbert 磁荷模型、场态、场线、铁屑、指南针、力箭头，见下面「SpaceScene · 试一试 · 磁铁」。validate 核对输出的 `from` 是这个模型的量、种类（数 / 状态 / 向量）对得上。
 - **输出种类**：`number`、`state`、`vector`、`timeline`（一段"跑一遍"的过程：见「时间线与回放」；只能被 `play`、带 `channel` 的 `stretch` 和力的箭头读，不进卡片的观察量、读数、glow 等）。
-- **绑定**（`lib/sim/bind.ts simEffects`，舞台叠在章节状态上）：零件 `visible`（条件：`true` = 真值 / 非零 / 不是第一个状态；或 `{ eq | ne | in | gte | lte }`）、`pose`（值 → `poses` 里的姿态，只动这些零件，压在章 / 拍的姿态之上；几条绑定动同一零件时非静止的那条胜出）、`glow`（值 ÷ `full`，`sqrt` 或 `linear`，0–2：从暗红渐到 `color`，过 1 更白；只点亮零件自己的材质，即槽 0：灯丝不带支撑丝和铜座）、`tint`（值 ÷ `full`，0–1，`linear` 或 `sqrt`：向 `color` 混色，上限由 `max` 指定（默认 0.55，范围 0–1）；铁芯通电变磁铁；同 `glow` 只染零件自己的材质，即槽 0，其余槽照常跟章 / 拍的 `highlight`，`lib/sim/bind.ts slotTint`）、`count`（`repeat` 零件只显示前 k 份：`true` = k 取值本身，或 `{ per, minus }` = (值 − minus) ÷ per 取整、≥ 0：50 g 挂钩上的 50 g 槽码写 `{ per: 50, minus: 50 }`，两只 200 g 砝码写 `{ per: 200 }`（docs/30 F8；`per` 原先是乘数，没有主题用过）；该零件不能有 `extra`）、`offset` / `rotate`（(值 − origin) × per（rotate 的 per 默认 1），在姿态之后沿场景轴移 / 绕（姿态后的）零件中心或 `pivot` 场景点转，0.5 s 缓动；`settle: { period, damping }` = 阻尼摆动（rotate：转角走近路；offset：挂在弹簧下的挂钩跟着弹簧回弹几下停住，docs/30 F4）、`place`（三维向量输出 `{ x, y, z }` → `centre + radius × 单位向量`；`{ centre: [x,y,z], radius, face?: "centre" }`，沿球面 0.5 s 缓动、深链接直接终值；`face: "centre"` 使局部 +Y 朝向 centre）、`stretch`（弹簧伸缩）、`play`（播放时间线通道）——这两项见下面「弹簧伸缩」「时间线与回放」、`at`（命名位置环）、`state`（铁屑排哪个场态）——后三者见磁铁一节；零件 `fill`（按模型体积画液面，见「液面」）、`bend`（把一根条像尺子一样弯下，见「弯曲」）；零件 `shift`（按向量输出把零件挪到模型算出的位置，拱形、错开，见「移位」）；流 `visible`（可加 `paths: [id]` 只控制这些路径，独立于整条流与强度）、`state`（场线流）、`intensity`（向量输出按 `paths` 的 id：每条路径的粒子速度 ∝ |值| ÷ `full`（夹在 ±2），负值反向，< 1 % 的路径 0.3 s 淡出；相位逐帧积分，变速不跳；`mode: "density"` = 速度不变、**可见粒子的比例** = |值| ÷ `full`（≤ 1，0.3 s 缓动；粒子按路径上均匀散开的次序出现，不扎堆），能量主题用它表示"这一份多 / 少"；向量的键写成 `<流 id>:<路径 id>` 时，每条流只取以自己 id 开头的那些）、`stops`（状态 → 粒子色，如短路 `token:hot`）；动画 `rpm`（rotate 的转速 = 值 × per，角度积分）、`enabled`（条件不成立时 0.15 s 缓停）。运转（RUN / FLOW）只管"动起来"：灯亮不亮、零件在哪儿不受它影响。
+- **绑定**（`lib/sim/bind.ts simEffects`，舞台叠在章节状态上）：零件 `visible`（条件：`true` = 真值 / 非零 / 不是第一个状态；或 `{ eq | ne | in | gte | lte }`）、`pose`（值 → `poses` 里的姿态，只动这些零件，压在章 / 拍的姿态之上；几条绑定动同一零件时非静止的那条胜出）、`glow`（值 ÷ `full`，`sqrt` 或 `linear`，0–2：从暗红渐到 `color`，过 1 更白；只点亮零件自己的材质，即槽 0：灯丝不带支撑丝和铜座）、`tint`（值 ÷ `full`，0–1，`linear` 或 `sqrt`：向 `color` 混色，上限由 `max` 指定（默认 0.55，范围 0–1）；铁芯通电变磁铁；同 `glow` 只染零件自己的材质，即槽 0，其余槽照常跟章 / 拍的 `highlight`，`lib/sim/bind.ts slotTint`）、`count`（`repeat` 零件只显示前 k 份：`true` = k 取值本身，或 `{ per, minus }` = (值 − minus) ÷ per 取整、≥ 0：50 g 挂钩上的 50 g 槽码写 `{ per: 50, minus: 50 }`，两只 200 g 砝码写 `{ per: 200 }`（docs/30 F8；`per` 原先是乘数，没有主题用过）；该零件不能有 `extra`）、`offset` / `rotate`（(值 − origin) × per（rotate 的 per 默认 1），在姿态之后沿场景轴移 / 绕（姿态后的）零件中心或 `pivot` 场景点转，0.5 s 缓动；`settle: { period, damping }` = 阻尼摆动（rotate：转角走近路；offset：挂在弹簧下的挂钩跟着弹簧回弹几下停住，docs/30 F4）、`place`（三维向量输出 `{ x, y, z }` → `centre + radius × 单位向量`；`{ centre: [x,y,z], radius, face?: "centre" }`，沿球面 0.5 s 缓动、深链接直接终值；`face: "centre"` 使局部 +Y 朝向 centre）、`stretch`（弹簧伸缩）、`play`（播放时间线通道）——这两项见下面「弹簧伸缩」「时间线与回放」、`at`（命名位置环）、`state`（铁屑排哪个场态）——后三者见磁铁一节；零件 `fill`（按模型体积画液面，见「液面」）、`bend`（把一根条像尺子一样弯下，见「弯曲」）；零件 `shift`（按向量输出把零件挪到模型算出的位置，拱形、错开，见「移位」）；流 `visible`（可加 `paths: [id]` 只控制这些路径，独立于整条流与强度）、`state`（场线流）、`intensity`（向量输出按 `paths` 的 id：每条路径的粒子速度 ∝ |值| ÷ `full`（夹在 ±2），负值反向，< 1 % 的路径 0.3 s 淡出；相位逐帧积分，变速不跳；`mode: "density"` = 速度不变、**可见粒子的比例** = |值| ÷ `full`（≤ 1，0.3 s 缓动；粒子按路径上均匀散开的次序出现，不扎堆），能量主题用它表示"这一份多 / 少"；向量的键写成 `<流 id>:<路径 id>` 时，每条流只取以自己 id 开头的那些；**数输出**：整条流的每条路径同一倍数，见「动画频率与整条流的强度」）、`stops`（状态 → 粒子色，如短路 `token:hot`）；动画 `rpm`（rotate 的转速 = 值 × per，角度积分）、`hz`（数输出 → 频率，相位逐帧积分，见「动画频率与整条流的强度」）、`enabled`（条件不成立时 0.15 s 缓停）；`animation` 与 `flow` 都可写数组（一条绑定管几条）。运转（RUN / FLOW）只管"动起来"：灯亮不亮、零件在哪儿不受它影响。
 - **多路径流**（`flows[].paths: [{ id, path }]`，≤ 16 条，代替 `path`）：一条流、一次绘制；粒子按路径长度分配（每条 ≥ 4），每条路径一行浮点纹理，shader 里每条路径一个相位 / 透明度 / 闭合标志（`flowMaterial.ts`）。电路主题每条边一条路径（与导线 sweep 同源，生成脚本写出两者）。不能 `bilateral`。
 - **读数**：`telemetry` 行写 `follow: "<数输出>"`（不写 `idle` / `run`）：跟随输出值、0.3 s 一阶滞后（`lag` 可改）、小数位取输出的；`follow` 写 2–3 个同单位的数输出 = 一行两值（`FALL TIME · L · R 0.45 · 0.45 s`）；`scope: "observe"` = 只显示本章卡片观察的那几个，本章一个都不观察时显示 `—`（一行"重量"在落体章读 `weight`、弹簧章读 `load-weight`，docs/30 F6）；本章 `try.observe` 里的输出在 PLATE 块加粗；块尾一行 `SIM <状态> · <本章试一试控件的值>`：状态 = 本章卡片观察的状态输出，否则先猜后看观察的，否则第一个会随卡片控件或本章 `set` 的控件变的；都没有时电路、磁铁照旧写模型的第一个状态，力的模型（几套互不相干的实验，`SEPARATE_EXPERIMENTS`）不写状态；短路 / 超额定用 hot 色。
 - **章节**：
@@ -1129,7 +1129,7 @@ state:
 - **键**：`[` `]` = 本章 `vary` 的上一值 / 下一值（开关 = 关 / 开，选择 = 上 / 下一个选项），`T` = 本章卡片里第一个开关（`vary` 或 `also`），`G` = 再跑一次（卡片有 `replay` 时）；注册为命令 `sim-prev` / `sim-next` / `sim-toggle` / `sim-replay`（`SIM_KEYS`），和按钮、电路图、测试 API 写同一个 store 值（`G` 与「再跑一次」按钮写引擎 UI store 的同一个计数 `simReplay`）；状态行键位提示写 `[ ] T TRY IT`（有 `G` 时 `[ ] T G TRY IT`）。没有卡片的章不注册。
 - **电路图卡**（有 `circuit.diagram` 时代替右上零件链路卡，标题 CIRCUIT DIAGRAM / 电路图；< 1024 px 收进试一试卡片里可折叠的一节）：节点的 `d` 是图上坐标，边的 `via` 是直角拐点，符号放在最长的一段直线上（`at`，默认中点）：电池 = 每节一对长（+）短（−）线、翻转的那节反过来，灯 = 圆内叉（按亮度填 `--lamp`，拔掉时虚线），开关 = 两个接线点 + 刀片（断开时抬起），缺口 = 两个接线点 + 材料（导体实线、铅笔芯虚线、绝缘体空着），蜂鸣器、电机（M）；有电流的边用 `--current` 加粗并带方向箭头（从正极出发），短路时整张图 `--hot`；开关符号 = 拨真开关（`role="button"`、`aria-pressed`、44 px 命中区，Enter / Space），其他符号 = 选中边的 `part`，选中的零件对应符号描 signal；`diagram.labels` 是图上的小字（"手电筒"）。没有 `d` 的节点不画。
 - **测试与 QA**：`__atlas.engine.sim()` → `{ values, set, outputs, try, table, timeline, replays }`（`timeline`：每条时间线输出在舞台上的 `{ t, duration, playing, slow }`，模型秒；`replays`：再跑一次的计数），`__atlas.engine.setSim({ id: value })`（逐个走 `setSimControl`，有非法值返回 false），`__atlas.engine.simSeek(id, t)`（把时间线停在模型时刻 `t`，截过程中的一帧），`__atlas.engine.anchor(id)`（零件标注锚点此刻在舞台上的 `{ x, y, shown, onScreen }`，CSS px，跟着姿态、试一试 offset 和时间线走）；`__atlas.state().sim` = 设过的值。`pnpm shoot <slug> --keys` 测 `[` `]` `T` `G`（在第一个有卡片的章：`]` 前进一值、`[` 回来、URL 带 `sim`；`T` 翻转一个开关再翻回；`G`：计数加一、有时间线从头开始播放）；`--beats` 每拍照常截图（拍的 `sim.set` 随 `beatScene` 应用；时间线直接是终态），之后逐拍全页加载 `?ch=<章>&b=<n>`：场景字段（试一试值、视图、图层、镜头、hide …）与演示里的不同、或有时间线不在终态，记为拍失败。
-- **token**：`--lamp`（灯丝发光，暖白）、`--current`（电流粒子，暗金；短路用 `--hot`）、`--f-gravity` / `--f-friction` / `--f-elastic` / `--f-push`（力的箭头，见「力的箭头」）、`--en-light` / `--en-electrical` / `--en-kinetic` / `--en-sound` / `--en-heat` / `--en-potential`（能量形式，见「能量」）。
+- **token**：`--lamp`（灯丝发光，暖白）、`--current`（电流粒子，暗金；短路用 `--hot`）、`--f-gravity` / `--f-friction` / `--f-elastic` / `--f-push`（力的箭头，见「力的箭头」）、`--en-light` / `--en-electrical` / `--en-kinetic` / `--en-sound` / `--en-heat` / `--en-potential`（能量形式，见「能量」）、`--blood-rich` / `--blood-poor`（含氧多 / 少的血：都是红，明度差 L* ≥ 20，灰度可分）、`--oxygen`、`--carbon-dioxide`、`--air`（docs/40 E-HL4；`tests/theme/blood-gas-tokens.test.ts` 核两套主题的色差与对比度）。
 - **已知限制**：读者不能自己拖元件、连线、拖磁铁和指南针、推小车（docs/23 §4.5、docs/22 §4.5、docs/30 §4.6，v2：场线 / 时间线要在运行时重算）。
 
 ### SpaceScene · 试一试 · 磁铁（magnet）
@@ -1646,6 +1646,65 @@ docs/38 §4.4 E-LT3。`sim.kind = "sort"`（有 `sim.sort`）时代替右上的�
 - **交互**：叶子是按钮（命中方块 ≥ 54 viewBox 单位 = 卡片画到 82 % 时 44 CSS px；Enter / Space）：点 = 选中这一组的垫子零件（`pad`）。卡片不改控件（问题在试一试卡片里改，免得两处入口）。
 - **读屏**：`aria-label` = `keySummary`："Flowchart in this model: Six legs, three body parts? Yes: group A, 2. No: Has feathers? … No: group X, 0." / "这个模型里的分类流程图：六条腿、身体分三部分？是：A 组，2 件。不是：……"；`arrangement` = "group A, 3, Insects, 1 wrong; …"。件数与 ✗ 变化时 0.3 s 淡入（减少动态时不淡）。底下一行 `SIM` + "In this model / 在这个模型里"。
 - **i18n**：`space.card.key`、`space.try.key`、`space.key.*`。**测试**：`.space-key[data-kind]`（`ask` / `two` / `chain` / `arrangement` / `none`）、`[data-node][data-pending][data-on]`、`[data-line="yes-0"]`、`[data-leaf][data-count][data-on][data-pending][data-wrong]`、`.space-key__target`。
+
+### SpaceScene · 试一试 · 表（table）
+
+docs/40 §4.2 E-HL1。`sim.kind: "table"`：模型不算，只**按控件查有来源的值**——几个实验，每个实验读几个控件（`keys`），对这些控件的每一种取值组合恰好有一行，行里写它设定的输出和来源。注册走 `SIM_KINDS` → `simQuantities`（`lib/sim/table.ts solveTable`）→ `quantityKind`（`tableQuantity`：格子是状态 id 的输出是状态，否则是数），没有时间线，`SEPARATE_EXPERIMENTS.table = true`（PLATE 块尾只跟本章卡片观察的实验）。纯函数、同步、确定（< 0.05 ms，只在控件变化时算，有单测）。数据与交叉校验在 `table-schema.ts`（`tableSchema`、`tableIssues`、`tableSourceIssues`、`tablePredictIssues`）。完整作者模板：`tests/space-scene/fixtures/heart-lungs-table.ts`（docs/40 §4.2 的整段 `sim` 与 §2.9 全表）；草稿夹具 `sample-heart`（真实 glb；背景章 + 空气、运动、一圈三章）；单测 `tests/space-scene/{table,hz-binding,tidal}.test.ts`、`tests/theme/blood-gas-tokens.test.ts`；e2e `tests-e2e/sample-heart.spec.ts`。
+
+```jsonc
+"sim": {
+  "kind": "table",
+  "controls": [ { "id": "sample", "kind": "choice", "default": "in", "options": [ { "id": "in", … }, { "id": "out", … } ] }, { "id": "activity", … }, { "id": "stop", "kind": "step", "values": [0, 1, 2, 3, 4, 5, 6], "default": 0 } ],
+  "outputs": [
+    { "id": "o2", "label": {…}, "unit": "%", "decimals": 0, "tag": "typical" },      // tag：typical = 有来源的测量值；sim（默认）= 设计研究的值
+    { "id": "beats", "label": {…}, "unit": "/min", "tag": "sim" },
+    { "id": "where", "label": {…}, "kind": "state", "states": { "whole": {…}, "in-lungs": {…}, … } }   // 不写 from：表按输出 id 给值
+  ],
+  "table": {
+    "experiments": {
+      "air": { "keys": ["sample"], "rows": [
+        { "when": { "sample": "in" },  "set": { "n2": 78, "o2": 21, "co2": { "value": 0.04, "decimals": 2 }, "h2o": 1 }, "source": ["S3", "S4"] },
+        { "when": { "sample": "out" }, "set": { "n2": 78, "o2": 16, "co2": 4, "h2o": 6 }, "source": ["S5", "S6", "S8"] } ] },
+      "effort": { "keys": ["activity"], "rows": [ { "when": { "activity": "rest" }, "set": { "breaths": 20, "beats": 90, … }, "source": ["S37", "S9"] }, … ] }
+    }
+  }
+}
+```
+
+- **求值**：每个实验按 `keys` 取当前控件值找到唯一一行，`set` 里的值进对应输出；所有实验同时求值（没有卡片的章，心跳照样按 `activity` 的默认值跳）。没有任何实验设定的数输出 = NaN（显示 `—`）；状态输出必须有实验设定。
+- **格子**：数、状态 id，或 `{ "value", "decimals" }`——只覆盖这一格的显示小数位（吸入 CO₂ `0.04`、呼出 `4`，不写 `4.00`）；表、卡片、PLATE、条形图同用（解析时写进输出的 `decimalsAt`，作者不写；`lib/sim/index.ts outputDecimals(o, value)`）。
+- **芯片**：数输出 `tag: typical` 在卡片上带一行 TYPICAL / 典型值 + "Typical values, from the sources / 典型值，出自来源" + 本行 `source` 的上标（`SourceRefs`，点开来源弹层，同 detail 的 `[S#]`）；`tag: sim`（默认）照旧一行 SIM / 在这个模型里；卡片同时观察两种时两行都有，每个读数的名字后再带一枚小芯片。PLATE：跟随 typical 输出的读数后面跟 TYPICAL 芯片与上标；本章卡片只观察 typical 输出时块尾写 `TYPICAL · <控件值>`，否则照旧 `SIM …`（`lib/sim/table.ts outputTag`、`statusTag`）。状态输出不分 SIM / TYPICAL（`tag` 只给数输出）。
+- **validate**（`tableIssues`，parts 文件解析时）：`keys` 是控件、不重复；行的 `when` 恰好写全 `keys`、值合法；每个实验对 `keys` 的全部值组合**恰好一行**（列出缺的、重的）；`set` 的键是输出、种类对得上（数 / `{ value, decimals }` 给数输出，带标签的状态 id 给状态输出）；同一实验每行设定同一组输出；一个输出只属于一个实验；输出不写 `from`、只能是数或状态；`count` 绑定的零件 `repeat.count` ≥ 该输出在表里的最大份数（按 `count` 的取整），否则报"not enough balls"；先猜后看的 `change` 只改 `observe` 所在实验的 `keys`（`tablePredictIssues`，章节校验）。**来源**（`tableSourceIssues`，`pnpm validate` 对照 `data/sources.json`）：每个 `S#` 都在；设定 `sim` 数输出的行至少引一条 `design: true` 的来源（`sources.json` 新的可选字段：主题自己的设计研究；`SOURCES.md` 标注 design study），设定 `typical` 数输出的行至少引一条不是设计研究的来源；只设定状态的行引什么都行。
+- **测试 API**：`__atlas.engine.sim()` 照旧，表模型多一个 `sources`：`{ <typical 输出>: [S#…] }`（此刻那一行的来源）；`copies(partId)`：`count` 绑定此刻画出的份数。
+
+### SpaceScene · 动画频率（`hz`）与整条流的强度
+
+docs/40 §4.3 E-HL2。两条新绑定，任何模型都能用：
+
+```jsonc
+{ "output": "breaths", "animation": ["breathe", "breathe-left", "diaphragm-breathe", "ribs-breathe"], "hz": { "per": 0.0166667 } },   // 次 / 分 → Hz
+{ "output": "beats", "animation": "heartbeat", "hz": { "per": 0.0166667, "origin": 0 } },
+{ "output": "blood-pace", "flow": ["heart-right", "to-lungs", "from-lungs"], "intensity": { "full": 1 } },                        // 数输出 → 整条流
+{ "output": "muscle-need", "flow": ["oxygen-muscle", "co2-muscle"], "intensity": { "full": 1, "mode": "density" } }
+```
+
+- **`animation` / `flow` 可写数组**：一条绑定管几条动画 / 流（`enabled`、`rpm`、`hz`、`visible`、`stops`、数输出的 `intensity` 都可以）；`paths`、场线 `state`、向量 `intensity` 仍只写一条流。
+- **`hz`**：频率 = (值 − `origin`) × `per` Hz，夹在 0–4（`lib/sim/bind.ts animationHz`）。`pulse` / `oscillate` / `contract` 按这个频率播；`sequence`（要 `loop`）按"每秒几个循环"缩放时间轴，循环长度 = 最后一个 key 的 `t`。不能绑 `rotate`（用 `rpm`）、rig 关节的动画、控件或非数输出。**时钟**（`lib/sim/hz.ts`，`stages/model3d/AnimClocks.tsx`）：每条动画一个时钟，每帧在零件和流之前推进：被 `hz` 绑定的动画按缓动后的频率（约 0.5 s 到位）**逐帧积分相位**，换值不跳；舞台把相位换回动画自己的时间（`clockTime`），原有的采样（脉动、摆动、收缩、关键帧）照常；同一条绑定的几条动画步长相同，始终同相。没有 `hz` 绑定的动画照旧读共享的运转时钟（逐位不变）。深链接、拍的瞬切、截图、`prefers-reduced-motion` 直接到绑定的频率；`enabled` 绑定照旧缓停（时钟同时记它的 `on`，潮汐流跟着停）。
+- **数输出的 `intensity`**：这条流的每条路径同一倍数——`speed`：粒子速度 × 值 ÷ `full`（夹在 ±2，负值反向）；`density`：可见粒子比例 = 值 ÷ `full`（≤ 1）；< 1 % 淡出；相位逐帧积分、变速不跳（同向量强度，`lib/sim/bind.ts` `SimFlowEffect.uniform`）。一条流只能有数强度或向量强度之一（validate）。
+- **测试 API**：`__atlas.engine.animation(id)` → `{ hz, phase, on }`（此刻的频率、循环相位 0–1、开着的程度）；`flow(id)` 多一个 `pace`（数强度给这条流的倍数）。`pnpm shoot --beats` 每拍及每个拍链接核对：每条有 `hz` 绑定的动画此刻的 `hz` = 绑定值（± 1 %），不符记为拍失败。
+
+### SpaceScene · 潮汐流（tidal）
+
+docs/40 §4.4 E-HL3。流的可选字段：
+
+```jsonc
+{ "id": "air-right", "paths": [ … ], "speed": 0.12, "color": "token:air", "tidal": { "sync": "breathe" } }   // 或 "tidal": { "hz": 0.33 }
+```
+
+- 粒子不绕圈，一进一出：沿路径的速度 = `speed` × 强度 × sin(2π φ)，φ = 被同步的动画（`sync`）的循环相位（`sequence` 的 t ÷ 循环长度；被 `hz` 绑定时就是它积分的相位），或流自己的 `hz`。前半周期向路径终点（肺在胀），后半周期回来；一次呼吸的往返距离 = `speed` × 强度 ÷ (π × hz)（心肺：空气强度 = 呼吸 ÷ 20、频率 = 呼吸 ÷ 60，所以每种活动走的距离一样）。`lib/sim/tidal.ts` 纯函数；`Flows.tsx` 把位移积分进每条路径已有的相位 uniform，shader 不变。
+- 两端一律淡入淡出（`ends: fade`）；被同步的动画停了（RUN 关、`enabled` 绑定缓停）粒子跟着停；`prefers-reduced-motion`：粒子不动。可以和数 / 向量 `intensity`、`visible` 同用。
+- **validate**：`sync` 是存在的动画；不能有颜色 `stops`、不能 `ends: open`。**测试**：`tidal.test.ts`（相位 → 速度符号、一周期净位移 0、换频率不跳、随动画停、两端淡出）。
+- **`flat: true`**（任何流的可选字段，与 E-HL4 的两种红配套）：dark plate 上也不发光——普通混合、没有白芯，粒子保持自己的颜色（默认的 cinema 流是叠加混合 + 白芯，深酒红会被洗成粉白、和鲜红分不开）；paper 不变。心肺的血流都写 `flat: true`（`flowMaterial.ts styleFlowMaterial`）。
 
 ### 章节怎么写（`state`）
 

@@ -13,7 +13,7 @@
  *   pnpm shoot sample-space --perf --json out.json   # renderer numbers per shot
  *   pnpm shoot fractions --tasks                     # MathScene: every check-pool task (start, a planned wrong answer, solved) and every practice question + the summary
  *
- * `--beats` checks that the energy bars on show add up to 100 % (SpaceScene `energy-bars`), and shoots a looping exercise beat (SpaceScene exercise mode) again held at its start and end keys
+ * `--beats` checks that the energy bars on show add up to 100 % (SpaceScene `energy-bars`) and that every `hz`-paced animation plays at its bound frequency (SpaceScene, docs/40 §4.3), and shoots a looping exercise beat (SpaceScene exercise mode) again held at its start and end keys
  * (`beat-<chapter>-<n>-start.png` / `-end.png`); SpaceScene: it opens every beat again from its link (`?ch=<chapter>&b=<n>`, a page of its own) and fails a beat whose
  * scene (try-it values, view, layers, camera, hidden parts …) differs from the presentation's, or whose runs are not at their end; it also lists the ids each chapter's own state asks to label (TimeScene `highlight`, SpaceScene `labels`) that have no label on screen at the chapter camera (listed, not failed).
  * `--locale` and `--theme` take a value, a comma list, or `all` (default: en, paper).
@@ -35,7 +35,7 @@ import { chromium, type Browser, type Page } from '@playwright/test';
 import { hudLayoutIssues, LAYOUT_SIZES } from '../tests-e2e/hud-layout';
 import { capacity, fillBounds, fillShapeForPrimitive, levelForVolume } from '../src/engines/space-scene/lib/fill';
 import { bendAxisIndex, bendCurve } from '../src/engines/space-scene/lib/bend';
-import { shiftEntry } from '../src/engines/space-scene/lib/sim/bind';
+import { animationHz, shiftEntry } from '../src/engines/space-scene/lib/sim/bind';
 import type { PartsFile } from '../src/engines/space-scene/schema';
 import { dragVerdict, type DragSample, type DragVerdict } from './lib/drag-settle';
 
@@ -498,6 +498,40 @@ async function bendIssues(s: Session): Promise<string[]> {
 }
 
 /**
+ * Every animation an `hz` binding paces (docs/40 §4.3) plays at the bound
+ * frequency now: (output − origin) × per, within 1 % (beats and beat links
+ * jump to it; a stage that has not drawn the animation yet is not checked).
+ */
+async function hzIssues(s: Session): Promise<string[]> {
+  const path = join(ROOT, 'src/content/topics', s.topic, 'data/parts.json');
+  if (!existsSync(path)) return [];
+  const file = JSON.parse(readFileSync(path, 'utf8')) as PartsFile;
+  const binds = (file.sim?.bind ?? []).filter((b) => 'animation' in b && b.hz && b.output);
+  if (binds.length === 0) return [];
+  const ids = binds.flatMap((b) => ('animation' in b ? (typeof b.animation === 'string' ? [b.animation] : b.animation) : []));
+  const state = await s.page.evaluate((ids) => {
+    const e = window.__atlas!.engine as unknown as {
+      sim(): { outputs: Record<string, unknown> };
+      animation(id: string): { hz: number; phase: number; on: number } | null;
+    };
+    return { outputs: e.sim().outputs, animations: Object.fromEntries(ids.map((id) => [id, e.animation(id)])) };
+  }, ids);
+  const issues: string[] = [];
+  for (const b of binds) {
+    if (!('animation' in b) || !b.hz) continue;
+    const v = state.outputs[b.output!];
+    if (typeof v !== 'number') continue;
+    const want = animationHz(v, { per: b.hz.per, origin: b.hz.origin ?? 0 });
+    for (const id of typeof b.animation === 'string' ? [b.animation] : b.animation) {
+      const drawn = state.animations[id];
+      if (!drawn) continue;
+      if (Math.abs(drawn.hz - want) > Math.max(1e-4, want * 0.01)) issues.push(`${id}: plays at ${drawn.hz} Hz, the model's ${b.output} = ${v} asks for ${want.toFixed(4)} Hz`);
+    }
+  }
+  return issues;
+}
+
+/**
  * Every shifted part (docs/38 §4.3) where the model puts it: its drawn offset
  * equals the model's `slots` value (± 1 mm), and a part the model hides is
  * not drawn (one it shows is, unless its layer is off or the scene hides it).
@@ -573,6 +607,7 @@ async function runBeatLinks(s: Session, beats: { chapter: string; index: number 
     if (got && got.unfinished.length) diffs.push(`runs not at their end: ${got.unfinished.join(', ')}`);
     for (const issue of [...(await fillIssues(s)), ...(await bendIssues(s))]) report.beatFailures.push(`${name}: link: ${issue}`);
     for (const issue of await shiftIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
+    for (const issue of await hzIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     if (diffs.length) report.beatFailures.push(`${name}: opened from ${link}: ${diffs.join('; ')}`);
     else same++;
     if (diffs.length) console.log(`  ${`${name} (link)`.padEnd(36)} FAIL  ${diffs.join('; ').slice(0, 300)}`);
@@ -615,6 +650,7 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
       if (v.shown && Math.abs(v.potential + v.kinetic + v.lost - 100) > 0.5) report.beatFailures.push(`${name}: energy bars of ${id} add up to ${v.potential + v.kinetic + v.lost}`);
     for (const issue of [...(await fillIssues(s)), ...(await bendIssues(s))]) report.beatFailures.push(`${name}: ${issue}`);
     for (const issue of await shiftIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
+    for (const issue of await hzIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     await s.page.screenshot({ path: join(out, `${name}${o.suffix}.png`) });
     console.log(`  ${name.padEnd(36)} ${landed ? 'OK' : 'FAIL'}${missing.length ? `  (no label: ${missing.join(', ')})` : ''}`);
     // A looping exercise beat (SpaceScene exercise mode) also gets a still at its start and end keys.

@@ -61,6 +61,7 @@ import { fieldLines, ironFilings, type Filing } from '../../lib/sim/field';
 import { filingMatrices, filingsCard } from './geometry';
 import { SimOverlays } from './SimOverlays';
 import { TimelineClock } from './TimelineClock';
+import { AnimClocks } from './AnimClocks';
 import type { Matrix4 } from 'three';
 
 const GltfSource = lazy(() => import('./GltfSource'));
@@ -593,6 +594,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
   return (
     <RuntimeContext.Provider value={runtime}>
       <RunClock run={s.run} alwaysOn={alwaysOn} />
+      <AnimClocks animations={data.animations} effects={sim?.animations} bridge={bridge} snapKey={snap.current.key} />
       <ExplodeClock target={explodeTarget} snapKey={snap.current.key} />
       <Lighting look={look} center={bounds.center} radius={bounds.modelRadius} runtime={runtime} shadows={data.views.shadows} />
       <GroundShadow floor={bounds.floor} radius={bounds.radius} look={look} runtime={runtime} shadows={data.views.shadows} />

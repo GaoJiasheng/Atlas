@@ -84,6 +84,8 @@ import type { BufferAttribute } from 'three';
 import type { StageBridge } from '../../bridge';
 import { capacity, fillShapeForPrimitive, easeFillVolume } from '../../lib/fill';
 import { createFillGeometry, updateFillGeometry } from './fillGeometry';
+import type { SimAnimationEffect } from '../../lib/sim/bind';
+import { clockTime } from '../../lib/sim/hz';
 
 /** A try-it offset (scene units, eased or bouncing: `offsetSettle`) and turn about a unit axis through the part centre or `pivot` (eased or swinging: `settle`). */
 export interface SimMove {
@@ -209,7 +211,7 @@ export interface PartNodeProps {
   /** Try-it: a filings card's needles for the field state on show (part frame; null: as built). */
   filings?: readonly Matrix4[] | null;
   /** Try-it animation overrides by animation id: a rotate's rpm, and whether it plays. */
-  animSim?: ReadonlyMap<string, { rpm?: number; enabled: boolean }>;
+  animSim?: ReadonlyMap<string, SimAnimationEffect>;
   onSelect(id: string): void;
   onHover(id: string | null): void;
 }
@@ -359,7 +361,7 @@ export function PartNode(props: PartNodeProps) {
     fillMotion.current.drawn = NaN;
     return () => fillGeometry?.dispose();
   }, [fillGeometry]);
-  useEffect(() => () => { props.fillBridge?.fills.delete(part.id); props.fillBridge?.shifts.delete(part.id); }, [props.fillBridge, part.id]);
+  useEffect(() => () => { props.fillBridge?.fills.delete(part.id); props.fillBridge?.shifts.delete(part.id); props.fillBridge?.copies.delete(part.id); }, [props.fillBridge, part.id]);
   useEffect(() => {
     if (!fillShape || !fillGeometry || !props.fillBridge || !props.fill) return;
     const binding = props.fill;
@@ -602,6 +604,8 @@ export function PartNode(props: PartNodeProps) {
   const copies = part.repeat?.count ?? 1;
   const shownCopies = props.count ?? null;
   useLayoutEffect(() => {
+    // QA (`copies(id)`): how many copies of a counted part are drawn.
+    if (shownCopies !== null) props.fillBridge?.copies.set(part.id, Math.min(copies, shownCopies));
     for (const [piece, o] of pieces.current) {
       if (piece.filings) continue;
       if (o instanceof InstancedMesh) o.count = shownCopies === null ? (piece.matrices?.length ?? o.count) : Math.min(piece.matrices?.length ?? 0, Math.round(((piece.matrices?.length ?? 0) * shownCopies) / copies));
@@ -612,7 +616,7 @@ export function PartNode(props: PartNodeProps) {
       }
     }
     runtime.shadowDirty = true;
-  }, [shownCopies, copies, shape, runtime]);
+  }, [shownCopies, copies, shape, runtime, props.fillBridge, part.id]);
 
 
   // Hidden, faint and context parts do not take part in picking (clicks pass through).
@@ -1006,7 +1010,9 @@ export function PartNode(props: PartNodeProps) {
         else moving = true;
         const always = !a.whenRun;
         if ((!always && runtime.energy === 0) || m.on[i] === 0) return;
-        const t = always ? runtime.elapsed : runtime.phase;
+        // Paced by an `hz` binding (lib/sim/hz.ts): its own integrated phase, as the animation's own time.
+        const paced = runtime.clocks.get(a.id);
+        const t = paced?.paced ? clockTime(a, paced.cycles) : always ? runtime.elapsed : runtime.phase;
         const k = (always ? 1 : runtime.energy) * m.on[i]!;
         if (a.kind === 'rotate' && sim?.rpm !== undefined) {
           m.angle[i] = (m.angle[i]! + dt * k * (sim.rpm / 60) * 2 * Math.PI) % (2 * Math.PI);
@@ -1054,7 +1060,9 @@ export function PartNode(props: PartNodeProps) {
         if (!isEach(a)) return;
         const always = !a.whenRun;
         if (!always && runtime.energy === 0) return;
-        const t = always ? runtime.elapsed : runtime.phase;
+        // Paced by an `hz` binding (lib/sim/hz.ts): its own integrated phase, as the animation's own time.
+        const paced = runtime.clocks.get(a.id);
+        const t = paced?.paced ? clockTime(a, paced.cycles) : always ? runtime.elapsed : runtime.phase;
         const k = always ? 1 : runtime.energy;
         if (a.kind === 'pulse') {
           animationScale3(a, t, k, tmpS3);

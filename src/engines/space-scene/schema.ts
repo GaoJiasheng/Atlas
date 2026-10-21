@@ -747,6 +747,20 @@ export const flowSchema = z
     parts: z.array(kebabId).min(2).optional(),
     whenRun: z.boolean().default(true),
     /**
+     * In and out instead of round (docs/40 §4.4): the particles move at
+     * `speed` × sin(2π φ) along the path, φ the cycle phase of animation
+     * `sync` (the lungs' breathing: forward while they fill, back while they
+     * empty) or of the flow's own `hz`; they stop with it. Both ends fade; not
+     * with colour `stops` or `ends: open`.
+     */
+    tidal: z.union([z.object({ sync: kebabId }).strict(), z.object({ hz: z.number().positive().max(4) }).strict()]).optional(),
+    /**
+     * No glow on the dark plate (cinema): normal blending, no white core, so
+     * the flow's own colour carries the meaning — the blood's two reds stay
+     * apart in both themes (docs/40 §4.5). Paper is unchanged.
+     */
+    flat: z.literal(true).optional(),
+    /**
      * Also run the mirror image (id `<id>-r`, or `-l` with `side: right`):
      * path reflected like a bilateral part's, `parts` mapped to their twins.
      */
@@ -773,6 +787,8 @@ export const flowSchema = z
       if (f.paths!.findIndex((q) => q.id === p.id) !== i) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['paths', i, 'id'], message: `duplicate path "${p.id}"` });
     });
     if (f.paths && f.bilateral) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['bilateral'], message: 'a multi-path flow is not mirrored' });
+    if (f.tidal && f.stops) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['tidal'], message: 'a tidal flow goes in and out: one colour, no `stops`' });
+    if (f.tidal && f.ends === 'open') ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['tidal'], message: 'a tidal flow fades at both ends: no `ends: open`' });
   })
   // `path` is always there afterwards: a multi-path flow's is its first path's.
   .transform((f) => ({ ...f, path: f.path ?? f.paths?.[0]?.path ?? [] }));
@@ -1187,7 +1203,7 @@ export const partsFileBase = z
         parts: new Set(file.parts.map((p) => p.id)),
         partData: file.parts,
         flows: new Map(file.flows.map((f) => [f.id, { paths: f.paths, own: f.path.length > 0 }])),
-        animations: new Map(file.animations.map((a) => [a.id, { kind: a.kind, target: a.target }])),
+        animations: new Map(file.animations.map((a) => [a.id, { kind: a.kind, target: a.target, ...(a.kind === 'sequence' ? { loop: a.loop } : {}) }])),
         poses: new Set(Object.keys(file.poses ?? {})),
         countable,
         filings: new Set(file.parts.filter((p) => p.primitive?.kind === 'filings').map((p) => p.id)),
@@ -1210,6 +1226,8 @@ export const partsFileBase = z
       if (file.sim?.kind !== 'magnet') at(['primitive'], 'filings need a magnet `sim` (a `state` binding lays them out)');
     });
     file.flows.forEach((f, i) => {
+      if (f.tidal && 'sync' in f.tidal && !file.animations.some((a) => a.id === (f.tidal as { sync: string }).sync))
+        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['flows', i, 'tidal', 'sync'], message: `unknown animation "${f.tidal.sync}"` });
       if (f.path.length === 0 && file.sim?.kind !== 'magnet')
         ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['flows', i, 'path'], message: 'give `path` or `paths` (only a magnet sim\'s field-line flow has neither)' });
     });

@@ -85,6 +85,7 @@ import { replay } from './explorer/TryIt';
 import { cardTimelines } from './lib/sim/replay';
 import { isControlValue, resolveSimValues, stepValue } from './lib/sim/controls';
 import { evaluateSimOnStage } from './lib/sim/carrier';
+import { tableSources } from './lib/sim/table';
 import type { SimTry } from './sim-schema';
 import { SIM_KEYS } from '../core/controls';
 import './space-scene.css';
@@ -581,12 +582,23 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
             table: ui.getState().simTables[st.chapter ?? ''] ?? [],
             timeline,
             replays: ui.getState().simReplay.n,
+            // A table model (docs/40 §4.2): the sources of the row each typical output comes from now.
+            ...(sim.table ? { sources: Object.fromEntries(Object.entries(tableSources(sim.table, values)).filter(([id]) => sim.outputs.find((o) => o.id === id)?.tag === 'typical')) } : {}),
           };
         },
         shadows: () => Object.fromEntries(bridge.shadows),
+        // Copies of a counted `repeat` part drawn now (a `count` binding: the balls of a table's per cents); null without one.
+        copies: (id: string) => bridge.copies.get(id) ?? null,
+        // An animation now (docs/40 §4.3): its frequency (Hz, 4 decimals), cycle phase (0–1) and how far it is switched on; null before the stage draws it.
+        animation: (id: string) => {
+          const a = bridge.animations.get(id);
+          const r = (x: number) => Math.round(x * 1e4) / 1e4;
+          return a ? { hz: r(a.hz), phase: r(a.phase), on: r(a.on) } : null;
+        },
         flow: (id: string) => {
           const paths = bridge.flowPaths.get(id);
-          return paths ? { paths: Object.fromEntries(Object.entries(paths).map(([key, value]) => [key, { ...value }])) } : null;
+          const pace = bridge.flowPace.get(id);
+          return paths ? { paths: Object.fromEntries(Object.entries(paths).map(([key, value]) => [key, { ...value }])), ...(pace !== undefined ? { pace } : {}) } : null;
         },
         fillBenchmark: (id: string) => bridge.fillBenchmarks.get(id)?.() ?? null,
         fill: (id: string) => {
