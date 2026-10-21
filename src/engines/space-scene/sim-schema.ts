@@ -25,6 +25,8 @@ import { COMPUTED_TABLES, ENERGY_FORMS, chainFlow, chainOrder, energyNodes, ener
 import { EMPTYING_STATES, groupStages, lastStage, lifeCycleQuantity, timedStages } from './lib/sim/lifecycle';
 import { sortSchema, sortIssues, type SortCheckPart } from './sort-schema';
 import { sortQuantity } from './lib/sim/sort';
+import { OUTPUT_TAGS, tableCellDecimals, tableIssues, tablePredictIssues, tableSchema, type TableCheckPart, type TableCount } from './table-schema';
+import { tableQuantity, tableStates } from './lib/sim/table';
 
 /** A control value: a toggle's boolean, a step's number, a choice's option id. */
 export const simValue = z.union([z.boolean(), z.number(), kebabId]);
@@ -103,6 +105,10 @@ export const simOutputSchema = z
     states: z.record(stateId, bilingual).optional(),
     /** States labelled for predict-then-observe only: the model never gives them (the sort model's `where:<part>`, docs/38 §4.2). */
     predictOnly: z.array(stateId).min(1).optional(),
+    /** The table model's outputs (docs/40 §4.2): `sim` (default, "in this model") or `typical` (a sourced measured value: TYPICAL chip and its sources). */
+    tag: z.enum(OUTPUT_TAGS).optional(),
+    /** Never written: the table model's cells that carry their own decimals, by value (set when the file is read; lib/sim/text.ts reads them). */
+    decimalsAt: z.record(z.string(), z.number().int().min(0).max(3)).optional(),
   })
   .strict();
 export type SimOutput = z.output<typeof simOutputSchema>;
@@ -276,11 +282,14 @@ export const INTENSITY_MODES = ['speed', 'density'] as const;
 const flowBind = z
   .object({
     ...source,
-    flow: kebabId,
+    /** One flow or several (an `intensity` from a number output runs them all at one pace). */
+    flow: z.union([kebabId, z.array(kebabId).min(1)]),
     paths: z.array(kebabId).min(1).max(16).optional(),
     /** The flow runs only while the condition holds. */
     visible: simCondition.optional(),
     /**
+     * A number output: every path of the flow at that pace (speed × value ÷
+     * `full`, or with `density` that share of its particles; docs/40 §4.3).
      * A vector output by path id (a multi-path flow's `paths`): each path's
      * particles move at a speed ∝ |value| ÷ `full` (clamped), against the path
      * when negative, and vanish below 1 % of `full`. `mode: "density"` (docs/31
@@ -304,9 +313,17 @@ const flowBind = z
 const animationBind = z
   .object({
     ...source,
-    animation: kebabId,
+    /** One animation or several (bound together they keep one phase: the four breathing animations). */
+    animation: z.union([kebabId, z.array(kebabId).min(1)]),
     /** The value is the turning speed (rpm of a `rotate` animation, × `per`). */
     rpm: z.object({ per: z.number().positive().default(1) }).strict().optional(),
+    /**
+     * The value sets the animation's frequency: (value − `origin`) × `per` Hz
+     * (≤ 4; a `pulse` / `oscillate` / `contract` plays at it, a `sequence`
+     * that many cycles a second). The phase is integrated frame by frame and
+     * a new value eases in over 0.5 s, so nothing jumps (docs/40 §4.3).
+     */
+    hz: z.object({ per: z.number().positive(), origin: z.number().default(0) }).strict().optional(),
     /** The animation plays only while the condition holds. */
     enabled: simCondition.optional(),
   })
@@ -932,7 +949,7 @@ export const simOverlaySchema = z.discriminatedUnion('kind', [
 export type SimOverlay = z.output<typeof simOverlaySchema>;
 export type ShadowCastOverlay = Extract<SimOverlay, { kind: 'shadow-cast' }>;
 
-export const SIM_KINDS = ['circuit', 'magnet', 'force', 'energy', 'life-cycle', 'matter', 'light', 'sort', 'materials'] as const;
+export const SIM_KINDS = ['circuit', 'magnet', 'force', 'energy', 'life-cycle', 'matter', 'light', 'sort', 'materials', 'table'] as const;
 export type SimKind = (typeof SIM_KINDS)[number];
 
 export const MAX_SIM_CONTROLS = 16;
@@ -955,8 +972,15 @@ export const simSchema = z
     light: lightSchema.optional(),
     materials: materialsSchema.optional(),
     sort: sortSchema.optional(),
+    table: tableSchema.optional(),
   })
-  .strict();
+  .strict()
+  // A table's `{ value, decimals }` cells: their outputs show those values with those decimals (lib/sim/text.ts).
+  .transform((sim) => {
+    if (!sim.table) return sim;
+    const at = tableCellDecimals(sim.table);
+    return at.size ? { ...sim, outputs: sim.outputs.map((o) => (at.has(o.id) ? { ...o, decimalsAt: at.get(o.id)! } : o)) } : sim;
+  });
 export type SimData = z.output<typeof simSchema>;
 
 /* ------------------------------------------------------------------ */
@@ -1038,7 +1062,7 @@ interface SimContext {
   parts: ReadonlySet<string>;
   /** `own`: the flow has a `path` or `paths` of its own. */
   flows: ReadonlyMap<string, { paths?: readonly { id: string }[] | undefined; own?: boolean }>;
-  animations: ReadonlyMap<string, { kind: string; target: string }>;
+  animations: ReadonlyMap<string, { kind: string; target: string; loop?: boolean }>;
   poses: ReadonlySet<string>;
   /** Parts with a `repeat` and no `extra` (a `count` binding shows their first k copies). */
   countable: ReadonlySet<string>;
@@ -1093,6 +1117,8 @@ export function quantityKind(sim: SimData, from: string): SimOutput['kind'] | nu
       return sim.matter ? matterQuantity(sim.matter, from)?.kind ?? null : null;
     case 'materials':
       return sim.materials ? materialsQuantity(sim.materials, from, sim.controls) : null;
+    case 'table':
+      return sim.table && sim.outputs.some((o) => o.id === from) ? tableQuantity(sim.table, from) : null;
     case 'light': {
       if (from.startsWith('control:')) return sim.controls.some((c) => c.id === from.slice(8) && c.kind !== 'choice') ? 'number' : null;
       return sim.light ? lightQuantity(sim.light, from) : null;
@@ -1190,6 +1216,8 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
   sim.outputs.forEach((o, i) => {
     if (sim.outputs.findIndex((x) => x.id === o.id) !== i) issue(['outputs', i, 'id'], `duplicate output "${o.id}"`);
     if (o.predictOnly && sim.kind !== 'sort') issue(['outputs', i, 'predictOnly'], 'predictOnly belongs to a state output of the sort model');
+    if (o.tag !== undefined && sim.kind !== 'table') issue(['outputs', i, 'tag'], '`tag` belongs to an output of the table model');
+    if (o.decimalsAt !== undefined && sim.kind !== 'table') issue(['outputs', i, 'decimalsAt'], '`decimalsAt` is set by the table model from its `{ value, decimals }` cells (not written)');
     const from = o.from ?? o.id;
     if (o.format === 'time' && (o.kind !== 'number' || o.unit !== 'h' || (from.startsWith('control:') && (() => { const c = controls.get(from.slice(8)); return c?.kind !== 'step' || c.values.some((v) => v < 0 || v > 24); })()))) issue(['outputs', i, 'format'], 'time format needs a number output in hours, 0–24');
     const kind = quantityKind(sim, from);
@@ -1210,6 +1238,8 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
         ? matterQuantity(sim.matter, from)?.states
         : sim.kind === 'materials' && sim.materials
         ? materialsStates(sim.materials, from, sim.controls)
+        : sim.kind === 'table' && sim.table
+        ? tableStates(sim.table, from)
         : sim.kind === 'force'
         ? FORCE_STATES[from]
         : sim.kind === 'energy' && from === 'chain-state' && sim.energy
@@ -1237,6 +1267,8 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
   if (sim.sort) sortIssues(sim.sort, controls, (ctx.partData ?? []) as readonly SortCheckPart[], sim.outputs).forEach((x) => issue(x.path[0] === 'outputs' ? x.path : ['sort', ...x.path], x.message));
   if (sim.kind === 'matter' && !sim.matter) issue(['matter'], 'a matter sim needs `matter`');
   if (sim.kind === 'materials' && !sim.materials) issue(['materials'], 'a materials sim needs `materials`');
+  if (sim.kind === 'table' && !sim.table) issue(['table'], 'a table sim needs `table`');
+  if (sim.table) tableIssues(sim.table, controls, sim.outputs, (ctx.partData ?? []) as readonly TableCheckPart[], tableCounts(sim)).forEach((x) => issue(x.path, x.message));
   if (sim.materials) materialsIssues(sim.materials, controls).forEach((x) => issue(['materials', ...x.path], x.message));
   if (sim.matter) matterIssues(sim.matter, controls, ctx.partData ?? []).forEach((x) => issue(['matter', ...x.path], x.message));
   if (sim.kind === 'circuit' && !sim.circuit) issue(['circuit'], 'a circuit sim needs `circuit`');
@@ -1257,6 +1289,8 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
   const bent = new Set<string>();
   const stretched = new Set<string>();
   const shifted = new Set<string>();
+  const hzBound = new Set<string>();
+  const paced = { number: new Set<string>(), vector: new Set<string>() };
   const placed = new Set(sim.bind.flatMap((b) => ('part' in b && b.place ? (Array.isArray(b.part) ? b.part : [b.part]) : [])));
   sim.bind.forEach((b, i) => {
     const has = (k: string) => k in b && (b as Record<string, unknown>)[k] !== undefined;
@@ -1397,19 +1431,33 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
       if (fields.length === 0) issue(['bind', i], 'a part binding needs place, visible, pose, glow, tint, count, offset, rotate, at, state, play, stretch, fill, shift or bend');
     } else if ('flow' in b) {
       if (outp?.kind === 'timeline') issue(['bind', i, 'output'], `"${src}" is a timeline: it moves parts (\`play\`), not flows`);
-      const flow = ctx.flows.get(b.flow);
-      if (!flow) issue(['bind', i, 'flow'], `unknown flow "${b.flow}"`);
+      const flowIds = Array.isArray(b.flow) ? b.flow : [b.flow];
+      if (flowIds.length > 1 && (b.paths || b.state || (b.intensity && outp?.kind !== 'number'))) issue(['bind', i, 'flow'], 'several flows share a `visible`, `stops` or a number `intensity` (paths, field states and per-path values name one flow)');
+      for (const id of flowIds) if (!ctx.flows.has(id)) issue(['bind', i, 'flow'], `unknown flow "${id}"`);
+      if (b.intensity && outp?.kind === 'number')
+        for (const id of flowIds) {
+          if (paced.vector.has(id)) issue(['bind', i, 'intensity'], `flow "${id}" already takes a per-path (vector) intensity: one or the other`);
+          if (paced.number.has(id)) issue(['bind', i, 'intensity'], `flow "${id}" already takes a number intensity`);
+          paced.number.add(id);
+        }
+      else if (b.intensity && outp?.kind === 'vector')
+        for (const id of flowIds) {
+          if (paced.number.has(id)) issue(['bind', i, 'intensity'], `flow "${id}" already takes a number intensity: one or the other`);
+          paced.vector.add(id);
+        }
+      const flowId = flowIds[0]!;
+      const flow = ctx.flows.get(flowId);
       if (b.paths) {
         if (!b.visible) issue(['bind', i, 'paths'], 'paths belongs to a visible binding');
         if (new Set(b.paths).size !== b.paths.length) issue(['bind', i, 'paths'], 'duplicate path ids');
-        for (const path of b.paths) if (!flow?.paths?.some((p) => p.id === path)) issue(['bind', i, 'paths'], `unknown path "${path}" of flow "${b.flow}"`);
+        for (const path of b.paths) if (!flow?.paths?.some((p) => p.id === path)) issue(['bind', i, 'paths'], `unknown path "${path}" of flow "${flowId}"`);
       }
-      if (b.intensity) {
-        if (outp?.kind !== 'vector') issue(['bind', i, 'intensity'], 'intensity needs a vector output (a value per path id)');
-        if (flow && !flow.paths) issue(['bind', i, 'intensity'], `flow "${b.flow}" has no \`paths\``);
+      if (b.intensity && outp?.kind !== 'number') {
+        if (outp?.kind !== 'vector') issue(['bind', i, 'intensity'], 'intensity needs a number output (one pace for the whole flow) or a vector output (a value per path id)');
+        if (flow && !flow.paths) issue(['bind', i, 'intensity'], `flow "${flowId}" has no \`paths\``);
         else if (flow && sim.circuit && outp?.from === 'edges') {
           const edges = new Set(sim.circuit.edges.map((e) => e.id));
-          for (const p of flow.paths ?? []) if (!edges.has(p.id)) issue(['bind', i, 'intensity'], `path "${p.id}" of flow "${b.flow}" is not a circuit edge`);
+          for (const p of flow.paths ?? []) if (!edges.has(p.id)) issue(['bind', i, 'intensity'], `path "${p.id}" of flow "${flowId}" is not a circuit edge`);
         }
       }
       if (b.stops) {
@@ -1418,18 +1466,29 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
       }
       if (b.state) {
         if (!fieldStates(outp)) issue(['bind', i, 'state'], '`state` needs the magnet model\'s field-state output');
-        if (flow?.own) issue(['bind', i, 'state'], `flow "${b.flow}" runs along the field lines of the field state: drop its \`path\` / \`paths\``);
+        if (flow?.own) issue(['bind', i, 'state'], `flow "${flowId}" runs along the field lines of the field state: drop its \`path\` / \`paths\``);
         if (b.intensity) issue(['bind', i, 'intensity'], 'a field-line flow has no per-path intensity');
-        stateBound.add(`flow:${b.flow}`);
+        stateBound.add(`flow:${flowId}`);
       }
       if (!b.visible && !b.intensity && !b.stops && !b.state) issue(['bind', i], 'a flow binding needs visible, intensity, stops or state');
     } else {
       if (outp?.kind === 'timeline') issue(['bind', i, 'output'], `"${src}" is a timeline: it moves parts (\`play\`), not animations`);
-      const anim = ctx.animations.get(b.animation);
-      if (!anim) issue(['bind', i, 'animation'], `unknown animation "${b.animation}"`);
-      else if (b.rpm && anim.kind !== 'rotate') issue(['bind', i, 'rpm'], `"${b.animation}" is a ${anim.kind} animation (rpm turns a rotate)`);
+      for (const id of Array.isArray(b.animation) ? b.animation : [b.animation]) {
+        const anim = ctx.animations.get(id);
+        if (!anim) issue(['bind', i, 'animation'], `unknown animation "${id}"`);
+        else if (b.rpm && anim.kind !== 'rotate') issue(['bind', i, 'rpm'], `"${id}" is a ${anim.kind} animation (rpm turns a rotate)`);
+        else if (b.hz && anim.kind === 'rotate') issue(['bind', i, 'hz'], `"${id}" is a rotate animation: bind its speed with \`rpm\``);
+        else if (b.hz && anim.target.startsWith('joint:')) issue(['bind', i, 'hz'], `"${id}" turns a rig joint: \`hz\` paces part animations`);
+        else if (b.hz && anim.kind === 'sequence' && anim.loop === false) issue(['bind', i, 'hz'], `"${id}" plays once: \`hz\` paces a looping sequence`);
+        if (b.hz) {
+          if (hzBound.has(id)) issue(['bind', i, 'hz'], `"${id}" has an \`hz\` binding already`);
+          hzBound.add(id);
+        }
+      }
       if (b.rpm && outp && outp.kind !== 'number') issue(['bind', i, 'rpm'], 'rpm needs a number');
-      if (!b.rpm && !b.enabled) issue(['bind', i], 'an animation binding needs rpm or enabled');
+      if (b.hz && (!outp || outp.kind !== 'number')) issue(['bind', i, 'hz'], `hz needs a number output${ctl ? ' (bind the output the model gives, not a control)' : outp ? `, "${src}" is a ${outp.kind}` : ''}`);
+      if (b.rpm && b.hz) issue(['bind', i], 'give `rpm` or `hz`, not both');
+      if (!b.rpm && !b.hz && !b.enabled) issue(['bind', i], 'an animation binding needs rpm, hz or enabled');
     }
     if (ctl && 'pose' in b && b.pose) {
       const keys = ctl.kind === 'toggle' ? ['true', 'false'] : ctl.kind === 'step' ? ctl.values.map(String) : ctl.options.map((o) => o.id);
@@ -1588,6 +1647,15 @@ function lightIssues(light: LightData, controls: ReadonlyMap<string, SimControl>
 }
 
 /** Every combination of these controls' values (at most `cap`; the rest at `base`). */
+/** The `count` bindings of outputs (the table checks there are copies enough for the largest value). */
+function tableCounts(sim: SimData): TableCount[] {
+  return sim.bind.flatMap((b) =>
+    'part' in b && b.count && b.output !== undefined
+      ? [{ output: b.output, parts: Array.isArray(b.part) ? b.part : [b.part], per: b.count === true ? 1 : b.count.per, minus: b.count === true ? 0 : b.count.minus }]
+      : [],
+  );
+}
+
 function combinations(controls: readonly SimControl[], base: SimValues, cap = 512): SimValues[] {
   let out: SimValues[] = [{ ...base }];
   for (const c of controls) {
@@ -2102,6 +2170,7 @@ export function chapterSimIssues(where: string, s: { set?: SimValues | undefined
         for (const opt of t.predict.options)
           if (!(PREDICT_MEANS as readonly string[]).includes(opt.means)) out.push(`${where}sim.try.predict.options: "${opt.means}" is not an outcome (${PREDICT_MEANS.join(', ')})`);
       } else out.push(`${where}sim.try.predict.observe: "${o.id}" is a ${o.kind} (predict a number or a state)`);
+      if (o && sim.table) for (const m of tablePredictIssues(sim.table, o.id, t.predict.change)) out.push(`${where}sim.try.predict.change: ${m}`);
     }
   }
   return out;

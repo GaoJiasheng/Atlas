@@ -32,6 +32,22 @@ export interface SimFill {
   ease: number;
 }
 
+/** An animation's try-it overrides: a rotate's rpm, a frequency (`hz` binding, Hz), and whether it plays. */
+export interface SimAnimationEffect {
+  rpm?: number;
+  hz?: number;
+  enabled: boolean;
+}
+
+/** The fastest an `hz` binding plays an animation (Hz). */
+export const MAX_ANIMATION_HZ = 4;
+
+/** An `hz` binding's frequency for a value: (value − origin) × per, in 0 … 4 Hz (NaN: still). */
+export function animationHz(value: number, b: { per: number; origin: number }): number {
+  const hz = (value - b.origin) * b.per;
+  return Number.isFinite(hz) ? Math.max(0, Math.min(MAX_ANIMATION_HZ, hz)) : 0;
+}
+
 export interface SimFlowEffect {
   visibility?: Record<string, boolean>;
   /** `false`: a binding stops the flow. */
@@ -42,6 +58,12 @@ export interface SimFlowEffect {
    * on show (0–1; negative runs against the path). 0 = no particles on it.
    */
   paths: Record<string, number> | null;
+  /**
+   * A number output's pace for every path (docs/40 §4.3): signed speed factor
+   * (`speed`, ±2) or share of particles (`density`, ≤ 1); 0 = none. Undefined
+   * without one (a flow takes this or `paths`, not both).
+   */
+  uniform?: number;
   /** How `paths` reads (the intensity binding's `mode`). */
   mode: 'speed' | 'density';
   /** Particle colour ref while a state asks for one, else null (the flow's own). */
@@ -187,7 +209,7 @@ export interface SimEffects {
   /** The field state each filings part lays out. */
   states: Map<string, string>;
   /** Per animation id: rpm (a rotate's speed) and whether it plays. */
-  animations: Map<string, { rpm?: number; enabled: boolean }>;
+  animations: Map<string, SimAnimationEffect>;
   flows: Map<string, SimFlowEffect>;
 }
 
@@ -348,30 +370,42 @@ export function simEffects(sim: SimData, values: SimValues, outputs: SimOutputs)
         if (b.state && typeof v === 'string') out.states.set(id, v);
       }
     } else if ('flow' in b) {
-      const f: SimFlowEffect = out.flows.get(b.flow) ?? { visible: true, paths: null, mode: 'speed', color: null, state: null };
-      if (b.state && typeof v === 'string') f.state = v;
-      if (b.visible !== undefined) {
-        if (b.paths) {
-          f.visibility ??= {};
-          for (const path of b.paths) f.visibility[path] = (f.visibility[path] ?? true) && holds(b.visible, v, first);
-        } else if (!holds(b.visible, v, first)) f.visible = false;
+      for (const flowId of Array.isArray(b.flow) ? b.flow : [b.flow]) {
+        const f: SimFlowEffect = out.flows.get(flowId) ?? { visible: true, paths: null, mode: 'speed', color: null, state: null };
+        if (b.state && typeof v === 'string') f.state = v;
+        if (b.visible !== undefined) {
+          if (b.paths) {
+            f.visibility ??= {};
+            for (const path of b.paths) f.visibility[path] = (f.visibility[path] ?? true) && holds(b.visible, v, first);
+          } else if (!holds(b.visible, v, first)) f.visible = false;
+        }
+        if (b.intensity && v !== undefined && typeof v === 'object' && !isTimeline(v)) {
+          const { full, mode } = b.intensity;
+          const cap = mode === 'density' ? 1 : 2;
+          // A vector keyed `<flow>:<path>` (the energy model's `paths`) gives this flow the entries that start with its id.
+          const prefix = `${flowId}:`;
+          const own = Object.entries(v).flatMap(([id, x]): [string, number][] => (id.startsWith(prefix) ? [[id.slice(prefix.length), x]] : id.includes(':') ? [] : [[id, x]]));
+          f.paths = Object.fromEntries(own.map(([id, x]) => [id, Math.abs(x) < full * FLOW_FLOOR ? 0 : Math.max(-cap, Math.min(cap, x / full))]));
+          f.mode = mode;
+        }
+        if (b.intensity && typeof v === 'number') {
+          // A number output (docs/40 §4.3): one pace for every path of the flow.
+          const { full, mode } = b.intensity;
+          const cap = mode === 'density' ? 1 : 2;
+          f.uniform = Math.abs(v) < full * FLOW_FLOOR || !Number.isFinite(v) ? 0 : Math.max(-cap, Math.min(cap, v / full));
+          f.mode = mode;
+        }
+        if (b.stops && typeof v === 'string' && b.stops[v] !== undefined) f.color = b.stops[v]!;
+        out.flows.set(flowId, f);
       }
-      if (b.intensity && v !== undefined && typeof v === 'object' && !isTimeline(v)) {
-        const { full, mode } = b.intensity;
-        const cap = mode === 'density' ? 1 : 2;
-        // A vector keyed `<flow>:<path>` (the energy model's `paths`) gives this flow the entries that start with its id.
-        const prefix = `${b.flow}:`;
-        const own = Object.entries(v).flatMap(([id, x]): [string, number][] => (id.startsWith(prefix) ? [[id.slice(prefix.length), x]] : id.includes(':') ? [] : [[id, x]]));
-        f.paths = Object.fromEntries(own.map(([id, x]) => [id, Math.abs(x) < full * FLOW_FLOOR ? 0 : Math.max(-cap, Math.min(cap, x / full))]));
-        f.mode = mode;
-      }
-      if (b.stops && typeof v === 'string' && b.stops[v] !== undefined) f.color = b.stops[v]!;
-      out.flows.set(b.flow, f);
     } else {
-      const a = out.animations.get(b.animation) ?? { enabled: true };
-      if (b.rpm) a.rpm = num(v) * b.rpm.per;
-      if (b.enabled !== undefined && !holds(b.enabled, v, first)) a.enabled = false;
-      out.animations.set(b.animation, a);
+      for (const id of Array.isArray(b.animation) ? b.animation : [b.animation]) {
+        const a = out.animations.get(id) ?? { enabled: true };
+        if (b.rpm) a.rpm = num(v) * b.rpm.per;
+        if (b.hz) a.hz = animationHz(num(v), b.hz);
+        if (b.enabled !== undefined && !holds(b.enabled, v, first)) a.enabled = false;
+        out.animations.set(id, a);
+      }
     }
   }
   return out;

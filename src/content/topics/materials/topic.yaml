@@ -1,0 +1,16 @@
+# MOE P3 Diversity of Materials; docs/37, decisions taken 2026-10-21. Parts: pnpm tsx scripts/geo/materials/build-parts.ts
+id: materials
+title: { en: "Materials Around Us", zh: "身边的材料" }
+subtitle: { en: "Seven materials, five fair tests: strength, flexibility, floating, waterproof and letting light through", zh: "七种材料、五个公平测试：强度、柔韧、浮沉、防水、透光" }
+subject: science
+tags: [singapore, psle, p3, space]
+moe: ["MOE 2023 Science P3 Diversity of Materials"]
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: published
+illustration: materials
+shortTitle: { en: "Materials", zh: "材料" }
+note: { en: "Generic design study · a school materials bench and a kitchen corner, drawn life size · bends and float levels are worked out from published values and shown without numbers", zh: "通用设计研究 · 学校的材料实验台与一个厨房角落，按实物大小画 · 弯曲和浮起的高度按公开数据算出，只画不标数" }

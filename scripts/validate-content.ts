@@ -55,6 +55,7 @@ import { topicSchema, type TopicMeta } from '../src/content/schema/topic';
 import { chapterSchema } from '../src/content/schema/chapter';
 import { KEBAB_ID } from '../src/content/schema/common';
 import { sourceIds, type SourcesFile } from '../src/content/schema/sources';
+import { tableSourceIssues } from '../src/engines/space-scene/table-schema';
 import { glossaryIds, type GlossaryFile } from '../src/content/schema/glossary';
 import { engineSchemas, formatIssues } from '../src/engines/schemas';
 import { timeChapterLayerIssues, timeSceneTopicIssues, type TimeChapterState, type TimeSceneGeoData } from '../src/engines/time-scene/schema';
@@ -440,6 +441,10 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
       warn(join(dataDir, 'parts.json'), `views.exerciseBody "wire": model ${model} has no "skin-wire" node, so the engine decimates the skin outline at load (slower, rougher)`);
   }
   const matterFile = topic.engine === 'space-scene' && data ? (data as { parts?: PartsFile }).parts : undefined;
+  // A table model's rows (docs/40 §4.2): every source listed, SIM rows citing the design study, TYPICAL rows another source.
+  if (matterFile?.sim?.table)
+    for (const issue of tableSourceIssues(matterFile.sim.table, matterFile.sim.outputs, new Map((sourcesFile?.sources ?? []).map((x) => [x.id, x]))))
+      error(join(dataDir, 'parts.json'), `sim.${issue.path.join('.')}: ${issue.message}`);
   if (matterFile?.sim?.matter) for (const issue of matterWarnings(matterFile.sim.matter, new Map(matterFile.sim.controls.map((c) => [c.id, c])))) warn(join(dataDir, 'parts.json'), `sim.matter.${issue.path.join('.')}: ${issue.message}`);
   // The life-cycle ring card's second ring links to another topic (docs/33 §4.3): checked like `<TopicLink slug ch>`.
   const cycleLink = data !== undefined ? (data as { parts?: { sim?: { lifeCycle?: { card?: { compare?: { link?: { topic: string; chapter?: string } } } } } } }).parts?.sim?.lifeCycle?.card?.compare?.link : undefined;

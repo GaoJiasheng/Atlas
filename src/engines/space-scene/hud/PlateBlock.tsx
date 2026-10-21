@@ -37,6 +37,8 @@ import type { SimControl, SimValue } from '../sim-schema';
 import { useSimView } from './sim';
 import { timeText, valueWords } from '../lib/sim/text';
 import { cardStates } from '../lib/sim/replay';
+import { statusTag, tableSources } from '../lib/sim/table';
+import { SourceRefs } from '../../widgets/SourcePopover';
 import type { SpaceSceneExt } from '../index';
 import type { PartsFile, TelemetryRow } from '../schema';
 import type { SpaceUiStore } from '../ui';
@@ -191,7 +193,7 @@ function Telemetry({ rows, run, file }: { rows: readonly TelemetryRow[]; run: bo
     if (r.follow === undefined) return [{ id: null as string | null, lag: r.lag ?? FOLLOW_LAG, decimals: readingDecimals(r) }];
     const ids = Array.isArray(r.follow) ? r.follow : [r.follow];
     const shown = r.scope === 'observe' ? ids.filter((id) => observed.has(id)) : ids;
-    return shown.map((id) => ({ id, lag: r.lag ?? FOLLOW_LAG, decimals: r.decimals ?? outputDecimals(outputs.get(id) ?? {}) }));
+    return shown.map((id) => ({ id, lag: r.lag ?? FOLLOW_LAG, decimals: r.decimals ?? outputDecimals(outputs.get(id) ?? {}, numberOf(view?.outputs[id])) }));
   });
   const cells = rowCells.flat();
   // A followed output that does not apply here (NaN: the clips the card does not observe) reads `—`.
@@ -219,6 +221,9 @@ function Telemetry({ rows, run, file }: { rows: readonly TelemetryRow[]; run: bo
       (separate ? undefined : states[0]));
   const stateValue = state && view ? String(view.outputs[state.id] ?? '') : '';
   const tried = card && view ? [card.vary, ...(card.also ?? [])].map((id) => sim!.controls.find((c) => c.id === id)).filter((c): c is SimControl => c !== undefined) : [];
+  // A table's typical readings (docs/40 §4.2) carry TYPICAL and their row's sources; a card that observes only those says TYPICAL in the status line.
+  const rowSources = sim?.table && view ? tableSources(sim.table, view.values) : {};
+  const tag = statusTag(card?.observe ?? [], sim?.outputs ?? []);
   let at = 0;
   return (
     <>
@@ -244,13 +249,20 @@ function Telemetry({ rows, run, file }: { rows: readonly TelemetryRow[]; run: bo
             >
               {r.key.en.toUpperCase()} <b>{blank ? '—' : shown.map((j) => cells[j]!.id !== null && outputs.get(cells[j]!.id!)?.format === 'time' ? timeText(values[j]!, 'en').toUpperCase() : formatReading(values[j]!, cells[j]!.decimals)).join(' · ')}</b>
               {r.unit && !blank && !ids.some((id) => outputs.get(id)?.format === 'time') && <small> {r.unit}</small>}
+              {follows && !blank && ids.every((id) => outputs.get(id)?.tag === 'typical') && (
+                <>
+                  {' '}
+                  <span className="atlas-chip" data-tag="typical">{t('source.typical').toUpperCase()}</span>
+                  <SourceRefs ids={[...new Set(ids.flatMap((id) => rowSources[id] ?? []))]} locale={locale} />
+                </>
+              )}
             </span>
           );
         })}
       </p>
       {view && (state || tried.length > 0) && (
-        <p className="space-plate__simstate" data-state={stateValue} aria-label={['SIM', state ? tx(state.states?.[stateValue] ?? { en: stateValue, zh: stateValue }, locale) : '', ...tried.map((c) => valueWords(c, view.values[c.id], locale))].filter(Boolean).join(' · ')}>
-          SIM{state ? ` ${tx(state.states?.[stateValue] ?? { en: stateValue, zh: stateValue }, 'en').toUpperCase()}` : ''}
+        <p className="space-plate__simstate" data-state={stateValue} data-tag={tag.toLowerCase()} aria-label={[tag, state ? tx(state.states?.[stateValue] ?? { en: stateValue, zh: stateValue }, locale) : '', ...tried.map((c) => valueWords(c, view.values[c.id], locale))].filter(Boolean).join(' · ')}>
+          {tag}{state ? ` ${tx(state.states?.[stateValue] ?? { en: stateValue, zh: stateValue }, 'en').toUpperCase()}` : ''}
           {tried.map((c) => ` · ${controlStatus(c, view.values[c.id])}`).join('')}
         </p>
       )}

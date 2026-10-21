@@ -33,7 +33,7 @@ export const SHARED_END = '<!-- shared-sources:end -->';
 export function sourceLine(s: SourceEntry): string {
   const text = s.text.zh ? `${s.text.en} / ${s.text.zh}` : s.text.en;
   const note = s.note ? ` (${s.note.zh ? `${s.note.en} / ${s.note.zh}` : s.note.en})` : '';
-  return `- [${s.id}] ${text}${note}${s.url ? ` — ${s.url}` : ''}`;
+  return `- [${s.id}] ${text}${note}${s.design ? ' (design study / 设计研究)' : ''}${s.url ? ` — ${s.url}` : ''}`;
 }
 
 /** The generated block, markers included. */

@@ -1,0 +1,50 @@
+---
+id: sample-effort
+order: 2
+title: { en: "Sample effort", zh: "示例运动" }
+state:
+  view: xray
+  explode: 0
+  run: true
+  part: null
+  layers: [airway, lungs, heart-group, air, blood-poor, blood-rich, gases]
+  camera: { "position": [0.36, 0.42, 0.92], "target": [0.01, 0.29, -0.1], "fov": 30 }
+  labels: [heart, lung-right, diaphragm]
+  summary: { en: "Sample effort: a placeholder activity paces the heartbeat, the breathing and the flows.", zh: "示例运动：占位的活动改变心跳、呼吸和流的快慢。" }
+  sim:
+    set: { activity: rest }
+    try:
+      vary: activity
+      also: [phase]
+      keep: [{ en: "Same sample body", zh: "同一个示例身体" }]
+      observe: [breaths, beats, chest]
+      record: { chart: { y: [breaths, beats] } }
+      predict:
+        prompt: { en: "Sample prediction: running, does the heart beat faster?", zh: "示例猜想：跑步时，心跳更快吗？" }
+        start: { activity: rest }
+        change: { activity: run }
+        observe: beats
+        options:
+          - { id: faster, label: { en: "Faster", zh: "更快" }, means: more }
+          - { id: slower, label: { en: "Slower", zh: "更慢" }, means: less }
+  beats:
+    - caption: { en: "Sample beat one: at rest, the default pace.", zh: "示例节拍一：休息时，默认快慢。" }
+    - sim: { set: { activity: run } }
+      caption: { en: "Sample beat two: running, the heart and the breathing go faster.", zh: "示例节拍二：跑步时，心跳和呼吸都更快。" }
+    - sim: { set: { phase: in } }
+      caption: { en: "Sample beat three: the breath held in, the air stops.", zh: "示例节拍三：吸住气，空气停住。" }
+  index:
+    parts: [heart, lung-right, lung-left, diaphragm, trachea, bronchi]
+---
+
+<Lang en>
+
+Sample effort: placeholder text for how an activity paces the model. The readings are SIM, in this model.
+
+</Lang>
+
+<Lang zh>
+
+示例运动：活动怎样改变模型快慢的占位文字。读数是模拟值，在这个模型里。
+
+</Lang>

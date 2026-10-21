@@ -178,13 +178,19 @@ export function setFlowStops(material: FlowMaterial, stops: readonly (readonly [
   u.uStopCount.value = n;
 }
 
-/** Theme look; `size` multiplies the theme's particle size (flow `size`). */
-export function styleFlowMaterial(material: FlowMaterial, cinema: boolean, size = 1): void {
-  const blending = cinema ? AdditiveBlending : NormalBlending;
+/**
+ * Theme look; `size` multiplies the theme's particle size (flow `size`).
+ * `flat` (flow `flat`, docs/40 §4.5): no glow on the dark plate either —
+ * normal blending and no white core, so a dark colour stays dark (the two
+ * reds of the blood read apart in both themes).
+ */
+export function styleFlowMaterial(material: FlowMaterial, cinema: boolean, size = 1, flat = false): void {
+  const glow = cinema && !flat;
+  const blending = glow ? AdditiveBlending : NormalBlending;
   if (material.blending !== blending) {
     material.blending = blending;
     material.needsUpdate = true;
   }
-  material.uniforms.uCore.value = cinema ? 0.55 : 0;
+  material.uniforms.uCore.value = glow ? 0.55 : 0;
   material.uniforms.uSize.value = (cinema ? 0.03 : 0.024) * size;
 }

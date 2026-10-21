@@ -1067,3 +1067,26 @@ SpaceScene / Model3DStage，paper 默认、cinema 可切。原型：`archetypes.
 另：`digestive-system.glb` 至今不在 `THIRD-PARTY-NOTICES.md` 与 `LICENSE-CONTENT` 的例外里（它的署名在 glb 与主题 `SOURCES.md`），建议主会话一并补上。
 
 **留给内容 / 引擎的**：`scripts/geo/heart-and-lungs/build-flows.ts` 读 `routes.json` 写各流 `path` / `paths`（一条路径用 `path`）；姿态 pivot 取 `landmarks.json` 的 `hilum.r/l`、`thoracic-spine-front`、膈顶；镜头 target 取心、肺叶质心。鱼与植物的流是程序化零件，不在本管线。参考图（R1–R9）没下载（管线不需要）。
+
+### 9.2 引擎（E-HL1–E-HL4，2026-10-22，Opus 引擎代理，分支 `worktree-agent-a92cb04b234424a13`）
+
+**做了什么**：E-HL1 `table` 模型（`lib/sim/table.ts`、`table-schema.ts`；注册 `SIM_KINDS`、`simQuantities`、`quantityKind`、`SEPARATE_EXPERIMENTS.table = true`，无时间线；输出 `tag`、格子小数位、`tableSourceIssues` 进 `pnpm validate`；`sources.json` 加可选 `design: true`）；卡片与 PLATE 的 TYPICAL 芯片与来源上标（`explorer/TryIt.tsx`、`hud/PlateBlock.tsx`）；E-HL2 `hz` 绑定与数输出的 `intensity`（`lib/sim/bind.ts`、`lib/sim/hz.ts`、`stages/model3d/AnimClocks.tsx`、`PartNode.tsx` / `MotionDriver.tsx` 读时钟、`Flows.tsx`），`animation` / `flow` 可写数组；E-HL3 潮汐流 `tidal`（`schema.ts` 流字段与校验、`lib/sim/tidal.ts`、`Flows.tsx`，shader 不变）；E-HL4 五个 token（`tokens.css` 两套主题、`theme.ts TOKEN_NAMES`、docs/08 §1 功能色表）。测试 API `animation(id)`、`copies(id)`、`flow(id).pace`、`sim().sources`；`pnpm shoot --beats` 每拍与拍链接核对 `hz`。作者模板 `tests/space-scene/fixtures/heart-lungs-table.ts`（§4.2 整段 `sim` + §2.9 全表）；草稿夹具 `sample-heart`；单测 `table.test.ts`（55 条）、`hz-binding.test.ts`、`tidal.test.ts`、`tests/theme/blood-gas-tokens.test.ts`；e2e `tests-e2e/sample-heart.spec.ts`（8 条）；docs/06 三节（表、动画频率与整条流的强度、潮汐流）与绑定、token 两行。
+
+**与 §4 的出入**（内容代理照这些写数据）：
+
+1. **夹具**叫 `sample-heart`（不是 §4.7 的 `sample-table`），用真实 `heart-and-lungs.glb`（气管、支气管、两肺、膈、心、大血管、肺血管、皮肤轮廓）加程序化的瓶和四排小球；流取 `routes.json` 的 8 条（两条潮汐空气流、肺循环一圈 + 肺里的氧气）；背景章 + 空气（typical、`count`、条形图、先猜后看）、运动（sim、`hz`、数 `intensity`、`phase` 吸住）、一圈（`stop` + `visible`）三章；来源 S1、S3 占位测量值，S2 `design: true`。
+2. **SIM / TYPICAL 只给数输出**：状态（膈往下移、在肺里……）不带芯片；"`sim` 行引设计研究、`typical` 行引别的来源"的规则也只看数输出——否则 §4.2 自己的 `breath`、`route` 行（只引 S2）过不了校验。状态输出写 `tag` 报错。
+3. **没有实验设定的输出**：数输出 = NaN（`—`）；状态输出必须有实验设定（校验报）。另加一条：同一实验每行设定同一组输出。
+4. **格子小数位**：解析时写进输出的 `decimalsAt`（`{ "0.04": 2 }`，作者不写）；`outputDecimals(o, value)` 读它，表、卡片、PLATE、条形图同用。
+5. **小球取整**：`count` 绑定沿用引擎原有的四舍五入（不是 §2.9 写的向下取整）；§2.9 的值都是整数或 0.04，结果相同；"球不够"按同一取整查。
+6. **测试 API**：`sim().outputs` 的值仍是数；typical 输出的来源在另一个字段 `sim().sources`（`{ o2: ["S3", "S4"] }`）。另加 `copies(partId)`（`count` 此刻画出的份数）、`animation(id)` 多给 `on`、`flow(id).pace`。
+7. **`hz`** 只收数**输出**（不收控件）、不绑 `rotate`（用 `rpm`）与 rig 关节、`sequence` 要 `loop`；频率夹在 0–4 Hz；缓动是指数逼近（约 0.5 s 到 95 %，差 0.5 % 内到位）；深链接、瞬切、截图、减少动态直接到终值。几条动画写在同一条绑定里步长相同、始终同相（时钟各一个，按同样的输入推进）。
+8. **数组**：`animation`、`flow` 在所有动画 / 流绑定上都可写数组（§4.2 的 `enabled` 绑定也用了数组）；`paths`、场线 `state`、向量 `intensity` 仍只写一条流。一条流只能有数强度或向量强度之一。
+9. **潮汐流两端**：沿用现有的路径相位与 `fract`，粒子沿整条路径均匀撒；走出一端的粒子在那一端淡出、从另一端淡入（两端都在淡出区，看不到"跳"）。速度另乘被同步动画的 `on`（`enabled` 缓停时流跟着缓停）；`prefers-reduced-motion` 粒子不动。设计里空气强度 = 呼吸 ÷ 20、频率 = 呼吸 ÷ 60，所以一口气走的距离各活动相同（`speed` × 3 ÷ π ≈ 0.115 m，`speed` 0.12）。
+10. **双侧镜像**：`hz` 绑定的动画若目标是 `bilateral` 零件，镜像出的 `<id>-r` 动画不跟着变速（本主题没有：两肺是两个零件，`leg-muscles` 不动）。
+11. **PLATE 块尾**：卡片只观察 typical 输出时写 `TYPICAL · <控件值>`（沿用原有的 ` · ` 分隔，§3.9 写的是 `TYPICAL BREATHED OUT`）；跟随 typical 输出的读数后面跟 TYPICAL 芯片与来源上标。卡片同时观察两种时两行（SIM、TYPICAL）都有，每个读数名后再带一枚小芯片。
+12. **token 取值**（两套主题都过 §4.5 的全部约束，单测核）：paper `--blood-rich #C8222D`、`--blood-poor #5C151B`（L* 43.7 / 19.6，色相 31° / 25°）、`--oxygen #1A8F63`、`--carbon-dioxide #5E554E`、`--air #5F7A8C`（对纸底 3.56:1）；cinema `#FF5A5F`、`#A8343C`、`#46C48F`、`#8A786A`、`#8FA9BB`。
+13. **加了流字段 `flat: true`**（§4 没有）：cinema 的流默认是叠加混合 + 白芯，`sample-heart` 截图里深酒红被洗成和鲜红一样的粉白，§8.2 "两种主题下两种红都分得开"过不了；`flat` 让这条流在 dark plate 上也用普通混合、无白芯（paper 不变）。**心肺的八条血流（`heart-right` 到 `from-body`，含两条交换弧）都写 `flat: true`**；空气、气体、食物的流照常发光。
+14. **作者模板**里状态的标签（"一下一上""从心脏到肺"等）是引擎代理按 §2.9 写的，内容代理定稿时可改字，不改 id。
+
+**验收**（§4.8，合入 main `bde1d3d` 后重跑）：`pnpm check` 0 错、`pnpm validate` 50 个主题 0 错 0 警告、`pnpm test` 4019 条全过（含 `table` 55 条、`hz-binding` 15 条、`tidal` 7 条、`blood-gas-tokens` 12 条）、`pnpm build` 通过、`CI=1 pnpm e2e` 293 条全过（含 `sample-heart` 8 条）；`pnpm shoot sample-heart --beats --keys --layout` 0 拍失败、10/10 拍链接一致、0 键失败、0 版式问题、控制台干净（静止 16 次绘制、0.37 M 三角形）。回归：`digestive-system`、`mosquito`、`states-of-matter`、`sample-materials`、`sample-sort` 的 `--beats --keys` 改前改后都是 0 拍失败、0 键失败、拍链接全一致；逐拍截图像素差：后三者 ≤ 0.04 / 255，`digestive-system` ≤ 1.2，`mosquito` 最大 7（幼虫摆动、流粒子的动画相位：没有 `hz` 绑定的动画走的代码路径与改前逐位相同）。`sort.test.ts` 的 < 0.2 ms 计时在并行 shoot 的负载下失败一次，单跑通过（只是负载）。**已知差距**：`sample-heart` 背景章与运动章 `labels` 里有几个零件在章镜头下没有引线（夹具，不影响引擎）；`plant` 的氧气仍是 `--xray`（§4.10）。

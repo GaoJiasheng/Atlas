@@ -127,7 +127,7 @@ export function TryChart({ rows, vary, ys, current }: { rows: readonly TableRow[
                       height={f1(PAD.t + ph - y)}
                     />
                     <text className="space-chart__value" x={f1(x + barW / 2)} y={f1(y - 3)} textAnchor="middle">
-                      {formatReading(p.y, outputDecimals(s.output))}
+                      {formatReading(p.y, outputDecimals(s.output, p.y))}
                     </text>
                   </g>
                 );

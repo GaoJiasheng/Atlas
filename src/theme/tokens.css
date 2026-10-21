@@ -19,6 +19,9 @@
  *                (energy flows, the energy-chain card, energy bars); potential is stored, never a stream
  *   --muscle-1/2/3  human muscle layers (surface → deep)   --bone  bone (ivory)
  *   --mannequin  the exercise-mode figure (matte, quieter than the muscles)
+ *   --blood-rich / --blood-poor  blood with much / little oxygen (bright red / wine red; docs/40 E-HL4:
+ *                both red, apart in lightness by L* ≥ 20 so they read in grey too)
+ *   --oxygen  oxygen (clear green)   --carbon-dioxide  carbon dioxide (warm grey)   --air  air, the mixed gases (blue-grey)
  *   --face-1/2/3  a solid's opposite faces in pairs (docs/39 D10: MathScene nets), each with
  *                its mark ● ▲ ■ so the pairs read without colour too
  *   --holder-1 … --holder-8  one state each on a many-state map (TimeScene
@@ -151,6 +154,12 @@
   --face-1: #5a35c8;
   --face-2: #2d5a34;
   --face-3: #9443b0;
+  /* Breathing and the blood (docs/40 E-HL4): two reds L* ≥ 20 apart and ≤ 20° apart in hue, both ΔE*ab ≥ 15 from the muscle layers; oxygen apart from --xray; carbon dioxide apart from --air and --neutral; air ≥ 3:1 on the paper. */
+  --blood-rich: #c8222d;
+  --blood-poor: #5c151b;
+  --oxygen: #1a8f63;
+  --carbon-dioxide: #5e554e;
+  --air: #5f7a8c;
 
   /* Legacy names mapped onto the plate palette. */
   --bg: var(--paper);
@@ -258,6 +267,11 @@
   --face-1: #aaa4ec;
   --face-2: #6cd894;
   --face-3: #c060d8;
+  --blood-rich: #ff5a5f;
+  --blood-poor: #a8343c;
+  --oxygen: #46c48f;
+  --carbon-dioxide: #8a786a;
+  --air: #8fa9bb;
 
   --bg: var(--paper);
   --surface: var(--panel-solid);
