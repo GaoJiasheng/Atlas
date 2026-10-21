@@ -64,7 +64,7 @@ import { contractScale, STRIPE_OPACITY } from '../../lib/rig';
 import { damp, DEG2RAD, easeInOutCubic, normalize3, type Vec3 } from '../../lib/math';
 import { isRest, lerpTransform, restTransform, sampleSequence, sequenceLength, smoothstep01, type PartTransform } from '../../lib/pose';
 import { keepAnimating, MAX_DT, prefersReducedMotion, useRuntime } from './runtime';
-import { createPartMaterial, setPartClipping, stylePartMaterial, styleFibreGrain, type PartStyle } from './materials';
+import { createPartMaterial, clippingForPart, setPartClipping, stylePartMaterial, styleFibreGrain, type PartStyle } from './materials';
 import type { FibreMeasure } from './GltfSource';
 import { skinnedRaycast } from './skinPick';
 import type { ShapePiece } from './geometry';
@@ -115,6 +115,8 @@ export interface PartShape {
 
 /** What the label probe needs to know about a part (filled by PartNode). */
 export interface PartHandle {
+  /** Whether cutaway planes apply to this part and its label / site anchors. */
+  clip: boolean;
   object: Object3D;
   /** Bounds centre relative to the part centre (group boxes, the on-screen box). */
   offset: Vec3;
@@ -315,7 +317,8 @@ function Piece({
 }
 
 export function PartNode(props: PartNodeProps) {
-  const { part, display, clipping, styles } = props;
+  const { part, display, styles } = props;
+  const clipping = clippingForPart(part, props.clipping);
   // A filled liquid (docs/36 §4.3): its cavity primitive, redrawn in place up to the bound volume.
   const filled = !!props.fill;
   const fillShape = useMemo(() => (filled && part.primitive ? fillShapeForPrimitive(part.primitive) : null), [part, filled]);
@@ -489,6 +492,7 @@ export function PartNode(props: PartNodeProps) {
   // Handle for leader labels / occlusion (its anchor follows the pose).
   const handle = useMemo<PartHandle>(
     () => ({
+      clip: part.clip !== false,
       object: null as unknown as Object3D,
       offset: [...props.anchorOffset] as Vec3,
       point: [...props.anchorPoint] as Vec3,
@@ -503,7 +507,7 @@ export function PartNode(props: PartNodeProps) {
       skinned: null,
       skinRest: shape.pieces.find((p) => p.skin)?.skin?.boneRest ?? null,
     }),
-    [props.anchorOffset, props.anchorPoint, props.anchorRadius, props.anchorHalf, shape],
+    [props.anchorOffset, props.anchorPoint, props.anchorRadius, props.anchorHalf, shape, part.clip],
   );
   const skinSamples = useMemo(() => {
     const piece = shape.pieces.find((p) => p.skin);
@@ -681,7 +685,7 @@ export function PartNode(props: PartNodeProps) {
     const tintTarget = display.tint ? TINT * (props.tintLive ? TINT_REST + (1 - TINT_REST) * c : 1) : 0;
     m.tint = snap ? tintTarget : damp(m.tint, tintTarget, 8, dt);
     if (Math.abs(m.tint - tintTarget) < 0.003) m.tint = tintTarget;
-    const simTarget = st ? TINT * st.level : 0;
+    const simTarget = st ? st.level : 0;
     m.simTint = snap ? simTarget : damp(m.simTint, simTarget, 8, dt);
     if (Math.abs(m.simTint - simTarget) < 0.003) m.simTint = simTarget;
     const hiColor = display.tint === 'custom' && props.tintColor ? props.tintColor : display.tint === 'cold' ? style.cold : style.signal;

@@ -221,6 +221,10 @@
         "en": "Torch clamp",
         "zh": "手电筒夹座"
       },
+      "chainName": {
+        "en": "Clamp",
+        "zh": "夹座"
+      },
       "group": "source",
       "summary": {
         "en": "Holds the torch level, sliding along the track.",
@@ -570,6 +574,10 @@
         "en": "Round card",
         "zh": "圆形卡片"
       },
+      "chainName": {
+        "en": "Round",
+        "zh": "圆卡片"
+      },
       "group": "objects",
       "summary": {
         "en": "Blocks light; its shadow has its round outline.",
@@ -631,6 +639,10 @@
       "name": {
         "en": "Square card",
         "zh": "正方形卡片"
+      },
+      "chainName": {
+        "en": "Square",
+        "zh": "方卡片"
       },
       "group": "objects",
       "summary": {
@@ -694,6 +706,10 @@
         "en": "Triangle card",
         "zh": "三角形卡片"
       },
+      "chainName": {
+        "en": "Triangle",
+        "zh": "三角卡片"
+      },
       "group": "objects",
       "summary": {
         "en": "Blocks light; its shadow has its triangle outline.",
@@ -750,6 +766,10 @@
       "id": "card-circle-big",
       "name": {
         "en": "Big round card",
+        "zh": "大圆卡片"
+      },
+      "chainName": {
+        "en": "Big disc",
         "zh": "大圆卡片"
       },
       "group": "objects",
@@ -918,6 +938,10 @@
       "name": {
         "en": "Paper cone",
         "zh": "纸圆锥"
+      },
+      "chainName": {
+        "en": "Cone",
+        "zh": "圆锥"
       },
       "group": "objects",
       "summary": {
@@ -1411,6 +1435,10 @@
         "en": "Screen stand",
         "zh": "屏幕支架"
       },
+      "chainName": {
+        "en": "Stand",
+        "zh": "支架"
+      },
       "group": "screen",
       "summary": {
         "en": "Holds the screen upright, sliding along the track.",
@@ -1558,6 +1586,10 @@
         "en": "Light sensor",
         "zh": "光传感器"
       },
+      "chainName": {
+        "en": "Sensor",
+        "zh": "传感器"
+      },
       "group": "screen",
       "summary": {
         "en": "Measures how much light reaches the screen.",
@@ -1664,6 +1696,10 @@
       "name": {
         "en": "Datalogger",
         "zh": "数据记录器"
+      },
+      "chainName": {
+        "en": "Logger",
+        "zh": "记录器"
       },
       "group": "screen",
       "summary": {
@@ -2242,6 +2278,10 @@
         "en": "Small torch",
         "zh": "小手电筒"
       },
+      "chainName": {
+        "en": "Torch",
+        "zh": "手电筒"
+      },
       "group": "dark-box",
       "summary": {
         "en": "The only light source inside the box.",
@@ -2375,6 +2415,10 @@
       "name": {
         "en": "Ball in the box",
         "zh": "箱里的球"
+      },
+      "chainName": {
+        "en": "Ball",
+        "zh": "球"
       },
       "group": "dark-box",
       "summary": {
@@ -2662,6 +2706,10 @@
       "name": {
         "en": "Darkness in the box (drawn)",
         "zh": "箱里的黑暗（示意）"
+      },
+      "chainName": {
+        "en": "Darkness",
+        "zh": "黑暗"
       },
       "group": "dark-box",
       "summary": {

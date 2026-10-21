@@ -128,6 +128,16 @@ describe('magnets ride on their parts (docs/22 §11)', () => {
     expect(stage(rider, {}, 'b-up').frames.has('b')).toBe(false);
   });
 
+  it('an unmapped pose binding inherits the chapter pose, while explicit null forces rest', () => {
+    const inherited = stage(hanging, { hang: false }, 'tray').frames.get('a')!;
+    expect(near(applyFrame(inherited, [-0.16, 0.005, 0]), [0.08, 0.065, 0.1])).toBe(true);
+    const explicitRest = edit((r) => {
+      Object.assign(r, structuredClone(hanging));
+      r.bind.find((b: any) => b.control === 'hang' && b.pose).pose.false = null;
+    });
+    expect(stage(explicitRest, { hang: false }, 'tray').frames.has('a')).toBe(false);
+  });
+
   it('a hung magnet turns about its thread: north settles toward model north (−Z)', () => {
     const { frames } = stage(hanging, { hang: true });
     const [n, s] = magnetPoles(hanging.magnet!.magnets[0]!, values(hanging, { hang: true }), frames.get('a'));

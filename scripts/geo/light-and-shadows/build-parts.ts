@@ -13,7 +13,7 @@
 import { writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { sunPosition, sunVector } from '../../../src/engines/space-scene/lib/sim/sun';
-import { GROUP_TEXT, PART_TEXT } from './text';
+import { CHAIN_NAMES, GROUP_TEXT, PART_TEXT } from './text';
 
 type V3 = [number, number, number];
 type Prim = Record<string, unknown> & { kind: string; at: V3 };
@@ -548,7 +548,7 @@ const PARTS = [
   const text = PART_TEXT[p.id];
   if (!text) throw new Error(`no text for ${p.id}`);
   const { id, ...rest } = p as { id: string } & Record<string, unknown>;
-  return { id, name: text.name, ...('group' in rest ? { group: rest.group } : {}), summary: text.summary, detail: text.detail, castShadow: false, ...Object.fromEntries(Object.entries(rest).filter(([k]) => k !== 'group')) };
+  return { id, name: text.name, ...(CHAIN_NAMES[id] ? { chainName: CHAIN_NAMES[id] } : {}), ...('group' in rest ? { group: rest.group } : {}), summary: text.summary, detail: text.detail, castShadow: false, ...Object.fromEntries(Object.entries(rest).filter(([k]) => k !== 'group')) };
 });
 
 const groups = [

@@ -17,6 +17,7 @@ import { resolveSimValues } from '../../src/engines/space-scene/lib/sim/controls
 import { benchShadow, holeInterval } from '../../src/engines/space-scene/lib/sim/light';
 import { solarNoon } from '../../src/engines/space-scene/lib/sim/sun';
 import { simSchema, type SimData } from '../../src/engines/space-scene/sim-schema';
+import { chainName, partChain } from '../../src/engines/space-scene/lib/schematic';
 
 const DIR = join(import.meta.dirname, '../../src/content/topics/light-and-shadows');
 const parts = JSON.parse(readFileSync(join(DIR, 'data/parts.json'), 'utf8'));
@@ -288,5 +289,22 @@ describe('light-and-shadows topic: syllabus boundaries (docs/35 D2, §8.2)', () 
       expect(chapters.reduce((n, c) => n + (c.en.match(re)?.length ?? 0), 0), id).toBe(1);
       expect(chapters.reduce((n, c) => n + (c.zh.match(re)?.length ?? 0), 0), id).toBe(1);
     }
+  });
+});
+
+describe('light-and-shadows topic: compact chain labels', () => {
+  it('every visible chain node fits its column and keeps its full bilingual name', () => {
+    const layout = partChain(parts.parts, parts.groups, 330, { row: 23, compactRow: 16, compactAfter: 10, header: 18, gap: 10 });
+    const budget = Math.max(6, Math.floor(((layout.columns[0]?.w ?? 90) - 22) / (layout.compact ? 5.4 : 5.8)));
+    for (const node of layout.nodes) {
+      const p = part(node.id);
+      const label = chainName(p);
+      expect(label.en.length, node.id).toBeLessThanOrEqual(budget);
+      expect(label.zh.length, node.id).toBeGreaterThan(0);
+      expect(p.name.en.length, node.id).toBeGreaterThan(0);
+      expect(p.name.zh.length, node.id).toBeGreaterThan(0);
+    }
+    expect(part('box-torch')).toMatchObject({ name: { en: 'Small torch', zh: '小手电筒' }, chainName: { en: 'Torch', zh: '手电筒' } });
+    expect(part('box-inside').chainName).toEqual({ en: 'Darkness', zh: '黑暗' });
   });
 });
