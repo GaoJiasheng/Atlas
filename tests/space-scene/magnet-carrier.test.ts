@@ -133,7 +133,8 @@ describe('magnets ride on their parts (docs/22 §11)', () => {
     expect(near(applyFrame(inherited, [-0.16, 0.005, 0]), [0.08, 0.065, 0.1])).toBe(true);
     const explicitRest = edit((r) => {
       Object.assign(r, structuredClone(hanging));
-      r.bind.find((b: any) => b.control === 'hang' && b.pose).pose.false = null;
+      const binds = r.bind as { control?: string; pose?: Record<string, string | null> }[];
+      binds.find((b) => b.control === 'hang' && b.pose)!.pose!.false = null;
     });
     expect(stage(explicitRest, { hang: false }, 'tray').frames.has('a')).toBe(false);
   });
