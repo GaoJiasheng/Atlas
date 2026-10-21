@@ -748,7 +748,9 @@ const sim = {
 
 /* ------------------------------------------------------------ views, HUD */
 
-const BENCH_CAMERA = { position: [-1.02, 1.52, 1.52], target: [0.06, 1.0, 0.02], fov: 30 };
+// Torch-side three-quarter view: keep the screen face, both gaps and the
+// edge rays visible, including the torch at its farthest 60 cm setting.
+const BENCH_CAMERA = { position: [-1.6, 1.5, 1.25], target: [-0.13, 1.03, 0.05], fov: 30 };
 const data = {
   parts: PARTS,
   groups,
