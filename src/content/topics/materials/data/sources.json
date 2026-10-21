@@ -1,0 +1,330 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "Atlas design study for this topic (docs/37-materials-content-spec.md §2, §4 and §9): a generic school materials bench and a kitchen corner drawn life size, not a specific product, school or home. DESIGN: bench 2.4 × 0.7 m; samples of the same size in each test: strips 30 × 3 cm, 2 mm thick (strength and flexibility); blocks 6 × 6 × 3 cm, a big board of the same wood 24 × 10 × 6 cm, a capped empty 500 ml bottle 6.5 cm across and 20 cm long, folded cotton 6 × 6 × 1 cm (floating); squares 8 × 8 cm, 2 mm thick (waterproof and light). Strength: two wooden blocks 6 cm high, 20 cm apart, five 500 g masses added one at a time at the middle of the strip. Flexibility: strip clamped with 25 cm sticking out, the end pushed down 0, 0.5, 1, 1.5 or 2 cm. Tank 40 × 25 × 25 cm, fresh water 18 cm deep. Torch 20 cm in front of the sample, white screen 10 cm behind it. Samples and constants (E = stiffness, limit = stress at which the strip breaks, or for metal and plastic the yield stress the model never reaches): wood = teak, E 10.7 GPa, breaks at 100.7 MPa, 650 kg/m³ (an air-dry value chosen for drawing; S7, S35); metal = structural steel, E 200 GPa, yield 250 MPa, 7,820 kg/m³ (S8, S9); ceramic = glazed porcelain tile, E 70 GPa, breaks at 35 MPa, 2,400 kg/m³ (S8, S13, S24); rubber = pure-gum natural rubber, E 0.005 GPa, does not break in these tests, 920 kg/m³ (S8, S26); glass = clear window glass, E 70 GPa, breaks at 36 MPa at a cut edge, 2,500 kg/m³ (S8, S22, S23); plastic = high-density polyethylene (HDPE), bending stiffness 1.2 GPa, yield taken as 25 MPa, 955 kg/m³ (S6, S11, S25); fabric = cotton, limp, fibre 1,540 kg/m³ (S27); fresh water 1,000 kg/m³; the capped bottle averages about 40 kg/m³ (illustrative: about 20 g of plastic around 515 ml of air). Absorbs water: wood (unvarnished) and cotton; the rest do not. Light through: glass most; this plastic and thin cotton some; wood, steel, ceramic and rubber none. Rules: g = 9.8 N/kg; strip I = bh³ ÷ 12, Z = bh² ÷ 6, own weight w = density × g × b × h. Two supports: sag = PL³ ÷ 48EI + 5wL⁴ ÷ 384EI, stress = (PL ÷ 4 + wL² ÷ 8) ÷ Z; a strip that sags 6 cm rests on the bench, which then takes the rest of the load; a strip that breaks snaps when the stress passes its limit. Clamped: own-weight droop = wL⁴ ÷ 8EI (1 cm or more = droops by itself), stress at the clamp = 3Eh × push ÷ 2L². Tank: a block floats if its density is below the water's; depth under water = density ÷ 1,000 × height. SIM, sag at the middle in cm for 0, 1, 2, 3, 4, 5 masses: steel 0.00, 0.02, 0.04, 0.06, 0.08, 0.10 (holds); wood 0.00, 0.39, 0.77, 1.15, 1.53, 1.91 (holds); glass and ceramic 0.00, 0.06, 0.12, then snap at the third mass; plastic 0.05, 3.45, then on the bench from the second mass (stress when it touches the bench 21.6 MPa, below 25); rubber and cotton lie on the bench from the start. Clamped, end pushed down 0, 0.5, 1, 1.5, 2 cm: steel and wood bend without breaking (stress at 2 cm 192 MPa for steel, 10.3 MPa for wood); glass and ceramic bend at 0.5 and 1 cm (33.6 MPa) and snap at 1.5 cm (50.4 MPa); plastic droops 1.14 cm under its own weight (its end at 1.14, 1.14, 1.14, 1.50, 2.00 cm); rubber and cotton hang down. Tank, depth under water / height above water in cm: wood block 1.95 / 1.05; big board 3.90 / 2.10; rubber 2.76 / 0.24; plastic 2.87 / 0.14; capped bottle 0.26 / 6.24; steel, ceramic and glass sink to the floor; cotton sinks once it has soaked up water. Screen: the shadow is drawn 0.10 dark for most light (from glass's 90 %, S14), 0.60 for some (illustrative) and fully dark for none.",
+        "zh": "本主题的 Atlas 设计研究（docs/37-materials-content-spec.md §2、§4、§9）：按实物大小画的一张通用学校材料实验台和一个厨房角落，不对应任何具体产品、学校或住家。设计值：实验台 2.4 × 0.7 米；每个测试里的样品大小相同：材料条 30 × 3 厘米、2 毫米厚（强度与柔韧性）；方块 6 × 6 × 3 厘米，同一种木的大木板 24 × 10 × 6 厘米，盖好盖子的 500 毫升空瓶直径 6.5 厘米、长 20 厘米，叠好的棉布 6 × 6 × 1 厘米（浮沉）；样片 8 × 8 厘米、2 毫米厚（防水与透光）。强度：两块 6 厘米高的木块相距 20 厘米，五个 500 克槽码一个一个放在条的中间。柔韧性：条夹住、伸出 25 厘米，末端压下 0、0.5、1、1.5 或 2 厘米。水缸 40 × 25 × 25 厘米，清水 18 厘米深。手电筒在样片前 20 厘米，白屏在样片后 10 厘米。样品与常数（E = 硬挺程度；极限 = 条断开时的应力，金属和塑料则是模型永远达不到的屈服应力）：木 = 柚木，E 10.7 GPa，100.7 MPa 时断，每立方米 650 千克（为了画图取的风干值；S7、S35）；金属 = 结构钢，E 200 GPa，屈服 250 MPa，每立方米 7,820 千克（S8、S9）；陶瓷 = 上釉的瓷质砖，E 70 GPa，35 MPa 时断，每立方米 2,400 千克（S8、S13、S24）；橡胶 = 纯天然橡胶，E 0.005 GPa，在这些测试里不会断，每立方米 920 千克（S8、S26）；玻璃 = 透明窗玻璃，E 70 GPa，切割边在 36 MPa 时断，每立方米 2,500 千克（S8、S22、S23）；塑料 = 高密度聚乙烯（HDPE），弯曲时的硬挺程度 1.2 GPa，屈服取 25 MPa，每立方米 955 千克（S6、S11、S25）；布 = 棉布，软，纤维每立方米 1,540 千克（S27）；清水每立方米 1,000 千克；盖好的空瓶平均约每立方米 40 千克（示意：约 20 克塑料包着约 515 毫升空气）。吸水：没上漆的木和棉布；其余不吸水。透光：玻璃大部分；这种塑料和薄棉布一部分；木、钢、陶瓷、橡胶没有。算法：g = 每千克 9.8 牛；条的 I = bh³ ÷ 12，Z = bh² ÷ 6，自重 w = 密度 × g × b × h。两端架起：中点下垂 = PL³ ÷ 48EI + 5wL⁴ ÷ 384EI，应力 = (PL ÷ 4 + wL² ÷ 8) ÷ Z；下垂到 6 厘米的条搭在台面上，其余的重量由台面托住；会断的条，应力超过极限就断。一端夹住：自重下垂 = wL⁴ ÷ 8EI（1 厘米或以上 = 自己垂下来），夹口处应力 = 3Eh × 压下量 ÷ 2L²。水缸：方块的密度比水小就浮；浸在水里的深度 = 密度 ÷ 1,000 × 高。模拟值，0、1、2、3、4、5 个槽码时中点下垂（厘米）：钢 0.00、0.02、0.04、0.06、0.08、0.10（托住）；木 0.00、0.39、0.77、1.15、1.53、1.91（托住）；玻璃和陶瓷 0.00、0.06、0.12，第三个槽码时断；塑料 0.05、3.45，从第二个槽码起搭在台面上（碰到台面时应力 21.6 MPa，低于 25）；橡胶和棉布一开始就搭在台面上。一端夹住，末端压下 0、0.5、1、1.5、2 厘米：钢和木弯而不断（压下 2 厘米时应力：钢 192 MPa，木 10.3 MPa）；玻璃和陶瓷在 0.5、1 厘米时弯（33.6 MPa），1.5 厘米时断（50.4 MPa）；塑料在自重下垂下 1.14 厘米（末端在 1.14、1.14、1.14、1.50、2.00 厘米）；橡胶和棉布垂挂下来。水缸，浸在水里 / 露出水面（厘米）：木块 1.95 / 1.05；大木板 3.90 / 2.10；橡胶 2.76 / 0.24；塑料 2.87 / 0.14；盖好的空瓶 0.26 / 6.24；钢、陶瓷、玻璃沉到缸底；棉布吸了水以后沉下去。白屏：影子深浅按“大部分”画 0.10（来自玻璃约九成的透光，S14），“一部分”画 0.60（示意），“没有”画全黑。"
+      },
+      "note": {
+        "en": "Not a measurement. The bends use small-deflection textbook formulas (simply supported and cantilever beams) for a short push or load; real strips also depend on how they are clamped and cut, on uneven thickness, and, for plastic, on how long the load stays on (plastic slowly creeps, S25). A real test turns out a little differently each time, especially when glass or ceramic breaks: measured glass edges can be stronger than 36 MPa (S22), and the 35 MPa for tile is a standard's minimum (S13, S24), so the two are not ranked against each other. The values are chosen inside the ranges of S7–S9, S11, S13, S22–S27 and S35; teak's air-dry density and the bottle's average are illustrative; the 0.60 shadow for 'some light' is illustrative, because no published transmission was found for a 2 mm natural HDPE sheet (S29). The model gives the same result every time and is drawn, not written as numbers on the page.",
+        "zh": "不是实测值。弯曲用的是教科书里的小变形公式（两端架起的梁、一端夹住的悬臂），只算短时间的加载；真实的条还跟怎样夹、怎样切、厚薄是否均匀有关，塑料还跟重量压了多久有关（塑料会慢慢“蠕变”，S25）。真实的测试每次结果会有一点不同，玻璃、陶瓷什么时候断尤其如此：实测的玻璃切割边可以比 36 MPa 更强（S22），瓷砖的 35 MPa 是标准规定的最低值（S13、S24），所以这里不比两者谁先断。各数值取在 S7–S9、S11、S13、S22–S27、S35 的范围之内；柚木的风干密度和空瓶的平均值是示意；“一部分光”画成 0.60 的影子也是示意，因为没有找到 2 毫米本色 HDPE 片的透光数据（S29）。模型每次给出同一个结果；结果只画出来，页面上不写数字。"
+      }
+    },
+    {
+      "id": "S2",
+      "text": {
+        "en": "Ministry of Education, Singapore (CPDD), Science Teaching & Learning Syllabus, Primary Three to Six, Standard / Foundation (implementation from the 2023 Primary Three cohort; cover updated January 2026). Printed p. 39, Diversity of Materials (P3): relate the use of various types of materials (wood, metal, ceramic, rubber, glass, plastic, fabric) to their physical properties; compare strength, flexibility, ability to float or sink in water, waterproof and transparency; show objectivity by using data to check observations and explanations. Notes, pp. 39–40: the focus is on how properties are used; strength is the ability to take loads without breaking; flexibility is the ability to bend without breaking; floating means staying on or near the surface of water and not sinking (density is not required); a material is waterproof when it does not absorb water; transparency is whether a material lets most, some or no light through (the terms transparent, translucent and opaque are not required, repeated for P4 Light on p. 75). Pp. 15–17: recognise a fair test (changed and unchanged variables); gather, record and compare data; select options with reasons. P. 20: the topic is not underlined, so Foundation students learn it too.",
+        "zh": "新加坡教育部课程规划与发展司，《小学三至六年级科学教学大纲（标准 / 基础）》（2023 年小三学生起实施，封面 2026 年 1 月更新）。印刷页第 39 页“材料的多样性（小三）”：把各种材料（木、金属、陶瓷、橡胶、玻璃、塑料、布）的用途和它们的物理性质联系起来；比较强度、柔韧性、在水中的浮沉、防水、透光程度；用数据客观地检验观察和解释。第 39–40 页注释：重点是材料的性质怎样被用上；强度是材料受力而不断的本领；柔韧性是材料能弯而不断的本领；浮是停在水面上或接近水面、不沉下去（不要求密度的概念）；材料不吸水就是防水；透光程度指材料让大部分、一部分还是没有光穿过（不要求透明、半透明、不透明这几个词，小四“光”第 75 页再说一次）。第 15–17 页：认出公平测试（改变的与不变的变量）；收集、记录、比较数据；按标准选择并说出理由。第 20 页：本单元没有下划线，修读基础科学的学生也要学。"
+      },
+      "url": "https://www.moe.gov.sg/api/media/ba3562d3-5b31-4459-8693-45cde7b97273/Primary-Science-Syllabus-2023.pdf",
+      "note": {
+        "en": "Read 2026-10-21 from the official PDF; page numbers are those printed at the foot (PDF page = printed page + 1). Hardness, absorbency as a property of its own, elasticity, electrical conduction and magnetism are not among the five properties.",
+        "zh": "2026-10-21 读取官方 PDF；页码是页脚印的数字（PDF 页 = 印刷页 + 1）。硬度、单独作为性质的吸水性、弹性、导电、磁性都不在这五个性质之内。"
+      }
+    },
+    {
+      "id": "S3",
+      "text": {
+        "en": "Teacher's chapter 'The properties of materials and their everyday uses', primary science (printed pp. 11–19 and the end worksheet). Strength is the force needed to break a material; stiffness is the opposite of flexible; a material may be strong but brittle; hardness is resistance to scratching and pressure; everyday words and scientific words are easily confused (p. 11). Flexibility: strips of the same size bent by a light weight; a card tube is less flexible than the same card unrolled (p. 14). Strength by pulling: a sheet of A4 paper held 650 g before tearing; a length of cotton thread held 1,100 g, polyester and nylon much more; whether stretchy fabrics belong in the same test is itself a question of fairness (pp. 15–16). Water: drop water onto materials to see if it soaks in; count drops onto cloth stretched over a jar; weigh samples before and after soaking; hard materials such as wood and stone can absorb water (p. 18). Worksheet: a teapot is ceramic (rigid, waterproof, resists hot liquids); a sink is stainless steel (waterproof, strong, tough, easy to clean).",
+        "zh": "小学科学教师用书的一章《材料的性质及其日常用途》（印刷页第 11–19 页与章末工作纸）。强度是把材料弄断所需的力；不容易弯（硬挺）是柔韧的反面；材料可以强但脆；硬度是抗划痕、抗压痕的本领；日常用词和科学用词容易混淆（第 11 页）。柔韧性：同样大小的条挂上轻的重物看弯多少；卡纸卷成管，比同一张平放的卡纸难弯（第 14 页）。用拉的办法测强度：一张 A4 纸吊住 650 克才撕开；一段棉线吊住 1,100 克才断，涤纶线、尼龙线能吊住多得多；有弹性的布要不要放进同一个测试，本身就是公平不公平的问题（第 15–16 页）。水：往材料上滴水，看水吸不吸进去；把布绷在杯口上数滴数；泡水前后各称一次；木头、石头这种“硬”材料也会吸水（第 18 页）。工作纸：茶壶用陶瓷（硬挺、防水、耐热的液体）；水槽用不锈钢（防水、强、韧、容易清洁）。"
+      },
+      "url": "http://www.primaryresources.co.uk/science/pdfs/rsc_tc_nc1.pdf",
+      "note": {
+        "en": "Read 2026-10-21. The title page is not in the hosted file; the publisher is inferred from the acknowledgements (Royal Society of Chemistry project), so treat it as medium confidence. The 650 g and 1,100 g are single classroom results, not standards. The worksheet's page number is not printed in the extract.",
+        "zh": "2026-10-21 读取。这份文件没有书名页；出版者按致谢推断为英国皇家化学学会的项目，可信度中等。650 克、1,100 克是一次课堂结果，不是标准。章末工作纸的页码在提取的文本里没有印出。"
+      }
+    },
+    {
+      "id": "S4",
+      "text": {
+        "en": "Science Foundation Ireland, Discover Primary Science, 'Material for a Lifejacket' (activity sheet). P. 1: predict which materials float, then test; avoid using the word density with primary children; heavier things can be made to float in different ways. P. 2: make the test as fair as possible; most clothes and shoes absorb water and make you heavier, and you sink.",
+        "zh": "爱尔兰科学基金会 Discover Primary Science《救生衣用什么材料》活动单。第 1 页：先猜哪些材料会浮，再试；对小学生不要用“密度”这个词；较重的东西也可以用不同办法让它浮起来。第 2 页：尽量让测试公平；大多数衣服和鞋会吸水，让人变重、往下沉。"
+      },
+      "url": "https://www.sfi.ie/site-files/primary-science/media/pdfs/col/material_for_a_lifejacket.pdf",
+      "note": { "en": "Read 2026-10-21 (PDF text).", "zh": "2026-10-21 读取（PDF 文本）。" }
+    },
+    {
+      "id": "S5",
+      "text": {
+        "en": "Thorpe Park Academy (Leeds), Uses of Everyday Materials, Year 2 science unit. Glass is used to make windows because it is transparent; fabric is good for a mop because it is absorbent (lesson 5: water tested on foil, tissue paper, sponge and fabric); lesson 6: four materials and a torch to choose a material for a blind; thick, dark materials are good for making a blind because they stop the light coming through.",
+        "zh": "英国利兹 Thorpe Park Academy 小学二年级科学单元《日常材料的用途》。窗用玻璃，因为玻璃透明；布适合做拖把，因为布吸水（第 5 课：在铝箔、纸巾、海绵、布上试水）；第 6 课：用手电筒和四种材料，为百叶帘选材料；厚的、深色的材料适合做百叶帘，因为它们挡住光。"
+      },
+      "url": "https://thorpeparkacademy.org.uk/wp-content/uploads/2025/02/Uses-of-Everyday-Materials-Year-2.pdf",
+      "note": { "en": "Read 2026-10-21. A school's teaching unit: its statements are teaching statements, not measurements.", "zh": "2026-10-21 读取。这是一所学校的教学单元，里面是教学用的说法，不是测量结果。" }
+    },
+    {
+      "id": "S6",
+      "text": {
+        "en": "TeachEngineering (University of Auckland activity uoa-2458), Plastic Properties, background sheets. Densities of common plastics in grams per millilitre: PP 0.90–0.91, LDPE 0.92–0.94, HDPE 0.95–0.96 (lighter than fresh water, 1.00); PVC 1.16–1.45 and PET 1.38–1.39 (heavier; PET is used for soft-drink and water bottles); sea water 1.03. A plastic floats only if it is less dense than the water.",
+        "zh": "TeachEngineering（奥克兰大学活动 uoa-2458）《塑料的性质》背景资料。常见塑料每毫升的克数：PP 0.90–0.91、LDPE 0.92–0.94、HDPE 0.95–0.96（比清水的 1.00 轻）；PVC 1.16–1.45、PET 1.38–1.39（比水重；PET 用来做汽水瓶和饮用水瓶）；海水 1.03。塑料只有比水的密度小才会浮。"
+      },
+      "url": "https://www.teachengineering.org/content/uoa_/activities/uoa-2458-plastic-properties/uoa-2458-plastic-properties-background-sheets.pdf",
+      "note": { "en": "Read 2026-10-21; the table on p. 2 is adapted from the Monterey Bay Aquarium.", "zh": "2026-10-21 读取；第 2 页的表改编自蒙特雷湾水族馆。" }
+    },
+    {
+      "id": "S7",
+      "text": {
+        "en": "USDA Forest Service, Forest Products Laboratory, Wood Handbook: Wood as an Engineering Material (FPL-GTR-190, 2010), chapter 5. Table 5-5a, printed p. 5-21: teak, specific gravity 0.55 (green); at 12 % moisture, bending strength 100,700 kPa and modulus of elasticity 10,700 MPa. Printed p. 5-8: specific gravity is based on weight when oven-dry and volume when green or at 12 % moisture. Printed p. 5-19: lignum vitae, specific gravity 1.05 (green).",
+        "zh": "美国农业部林务局林产品实验室《木材手册：作为工程材料的木材》（FPL-GTR-190，2010 年）第 5 章。印刷页第 5-21 页表 5-5a：柚木，比重 0.55（生材）；含水率 12 % 时，抗弯强度 100,700 千帕，弹性模量 10,700 兆帕。印刷页第 5-8 页：比重按全干时的质量和生材（或含水率 12 %）时的体积计算。印刷页第 5-19 页：愈疮木，比重 1.05（生材）。"
+      },
+      "url": "https://www.fpl.fs.usda.gov/documnts/fplgtr/fplgtr190/chapter_05.pdf",
+      "note": {
+        "en": "The official host did not resolve on 2026-10-21; the values were read in the first research pass from a mirror copy whose content and page numbers match the 2010 edition. Teak cross-checked against S35. Because specific gravity mixes oven-dry mass with green volume, it does not say how high a wet block floats; the model's 650 kg/m³ is illustrative (S1).",
+        "zh": "官方网站 2026-10-21 无法连接；这些数值是第一轮研究时从一份镜像读到的，内容和页码与 2010 年版相同。柚木的数值另用 S35 核对。比重把全干的质量和生材的体积放在一起算，说明不了湿木块浮起多高；模型取的每立方米 650 千克是示意（S1）。"
+      }
+    },
+    {
+      "id": "S8",
+      "text": {
+        "en": "Engineering ToolBox, Solids – Densities (table in 10³ kg/m³): steel 7.82; glass, common 2.4–2.8; porcelain 2.3–2.5; rubber, pure gum 0.91–0.93; rubber, soft commercial 1.1; rubber, hard 1.2.",
+        "zh": "Engineering ToolBox《固体的密度》（表中单位为每立方米千克的 1,000 倍）：钢 7.82；普通玻璃 2.4–2.8；瓷 2.3–2.5；纯胶橡胶 0.91–0.93；一般软橡胶制品 1.1；硬橡胶 1.2。"
+      },
+      "url": "https://www.engineeringtoolbox.com/density-solids-d_1265.html",
+      "note": { "en": "First read through a summarising fetch (2026-10-21), then re-read row by row in the second fact check; the rows quoted here match. Its 'cotton' row is loose bulk cotton and is not used.", "zh": "先经摘要读取（2026-10-21），第二轮事实核查时逐行复读，这里引的几行一致。表里“棉花”一行是松散的棉花堆，不用。" }
+    },
+    {
+      "id": "S9",
+      "text": {
+        "en": "Engineering ToolBox, Young's Modulus – Tensile Modulus: structural steel ASTM A36, Young's modulus 200 GPa, ultimate strength 400 MPa, yield 250 MPa; rubber (small strain) 0.01–0.1 GPa; glass 50–90 GPa.",
+        "zh": "Engineering ToolBox《杨氏模量》：结构钢 ASTM A36，杨氏模量 200 GPa，极限强度 400 MPa，屈服 250 MPa；橡胶（小变形）0.01–0.1 GPa；玻璃 50–90 GPa。"
+      },
+      "url": "https://www.engineeringtoolbox.com/young-modulus-d_417.html",
+      "note": { "en": "Read 2026-10-21, re-read in the second fact check. The rubber range covers firmer compounds; the soft pure-gum rubber in the model is taken softer than this range, from S26.", "zh": "2026-10-21 读取，第二轮事实核查复读。表里的橡胶范围对应较硬的配方；模型里的软纯胶橡胶按 S26 取得比这个范围更软。" }
+    },
+    {
+      "id": "S10",
+      "text": {
+        "en": "University of Washington, Materials Science and Engineering education resources, Ceramic Properties: ceramics are hard, wear-resistant and brittle; generally speaking, metals are ductile and ceramics are brittle.",
+        "zh": "华盛顿大学材料科学与工程系教学资料《陶瓷的性质》：陶瓷硬、耐磨、脆；一般来说，金属有延展性，陶瓷是脆的。"
+      },
+      "url": "https://depts.washington.edu/matseed/mse_resources/Webpage/Ceramics/ceramicproperty.htm",
+      "note": { "en": "Read 2026-10-21; publisher inferred from the site path.", "zh": "2026-10-21 读取；出版者按网址推断。" }
+    },
+    {
+      "id": "S11",
+      "text": {
+        "en": "Proto Labs, HDPE material data sheet (CNC machining, 2026): flexural modulus (ASTM D790) 174,000–185,000 psi (about 1.20–1.28 GPa); tensile modulus 200,000–255,000 psi; tensile strength at yield more than 4,000 psi (about 27.6 MPa); elongation at break more than 400 %; water absorption (ASTM D570) less than 0.10 %; density 0.955 g/cm³.",
+        "zh": "Proto Labs《HDPE 材料数据表》（数控加工，2026 年）：弯曲模量（ASTM D790）174,000–185,000 磅每平方英寸（约 1.20–1.28 GPa）；拉伸模量 200,000–255,000 磅每平方英寸；屈服拉伸强度大于 4,000 磅每平方英寸（约 27.6 MPa）；断裂伸长率大于 400 %；吸水率（ASTM D570）小于 0.10 %；密度每立方厘米 0.955 克。"
+      },
+      "url": "https://www.protolabs.com/media/rkzn2wud/2026-026-cnc-material-data-sheet_hdpe.pdf",
+      "note": { "en": "A maker's data sheet, used as typical values for HDPE. Converted with 1 psi = 6.895 kPa.", "zh": "厂商的数据表，作为 HDPE 的典型值。按 1 磅每平方英寸 = 6.895 千帕换算。" }
+    },
+    {
+      "id": "S12",
+      "text": {
+        "en": "Wikipedia, Yarn conditioning, table of moisture regain (sourced there to Kadolph, Textiles, 1998): cotton 7–11 %, wool 13–18 %, polyester 0.4–0.8 % — the moisture a dried fibre takes back from the air.",
+        "zh": "维基百科《纱线调湿》中的回潮率表（表的出处为 Kadolph《纺织品》，1998 年）：棉 7–11 %，羊毛 13–18 %，涤纶 0.4–0.8 %，即烘干的纤维从空气中重新吸回的水分。"
+      },
+      "url": "https://en.wikipedia.org/wiki/Yarn_conditioning",
+      "note": { "en": "Read 2026-10-21. This is water taken up from damp air, not from soaking. The research's first pass cited the table to Mather and Wardman (2015); the second pass found that the table's own source is Kadolph.", "zh": "2026-10-21 读取。这是从潮湿空气里吸回的水，不是泡在水里吸的水。第一轮研究把这张表的出处写成 Mather 与 Wardman（2015），第二轮核查发现表的出处是 Kadolph。" }
+    },
+    {
+      "id": "S13",
+      "text": {
+        "en": "STILE (tile maker), Technical characteristics, quoting ISO 10545 test results and ISO limits: water absorption (ISO 10545-3) for porcelain tiles (group BIa) less than 0.5 %, vitrified (BIIa) 3–6 %, ceramic (BIII) more than 10 %; modulus of rupture (ISO 10545-4) for porcelain, average of 7 tiles above 35 N/mm²; for ceramic (BIII) wall tiles 15 N/mm².",
+        "zh": "STILE（瓷砖厂商）《技术特性》，引 ISO 10545 的测试结果与 ISO 的限值：吸水率（ISO 10545-3）瓷质砖（BIa 类）小于 0.5 %，半瓷质（BIIa）3–6 %，陶质砖（BIII）大于 10 %；断裂模数（ISO 10545-4）瓷质砖 7 块的平均值大于每平方毫米 35 牛；陶质（BIII）墙砖每平方毫米 15 牛。"
+      },
+      "url": "https://www.stile.com.pk/technical-characteristics/",
+      "note": { "en": "A maker's page restating the standard's classes; ISO 13006 and ISO 10545 themselves were not read (paywalled).", "zh": "厂商网页转述标准的分类；ISO 13006、ISO 10545 原文要付费，没有读。" }
+    },
+    {
+      "id": "S14",
+      "text": {
+        "en": "AGC Glass Europe, Oversized glass – Technical specifications (December 2021): clear float glass (Planibel Clearlite) 3, 4, 5, 6, 8, 10 and 12 mm thick lets 91, 90, 90, 89, 89, 88 and 87 % of the light through, calculated according to EN 410.",
+        "zh": "AGC Glass Europe《超大尺寸玻璃技术规格》（2021 年 12 月）：透明浮法玻璃（Planibel Clearlite）厚 3、4、5、6、8、10、12 毫米时，透光率分别是 91 %、90 %、90 %、89 %、89 %、88 %、87 %，按 EN 410 计算。"
+      },
+      "url": "https://www.agc-yourglass.com/sites/default/files/2021-12/Oversized-glass-2021-EN.pdf",
+      "note": { "en": "A maker's declared values for its product, used as a typical figure for clear window glass.", "zh": "厂商对自己产品的声明值，这里当作透明窗玻璃的典型数字。" }
+    },
+    {
+      "id": "S15",
+      "text": {
+        "en": "Wikipedia, Natural rubber: in most of its useful forms it has a large stretch ratio and high resilience, and it is buoyant and waterproof.",
+        "zh": "维基百科《天然橡胶》：天然橡胶的大多数实用形式都能拉得很长、回弹性好，而且能浮、防水。"
+      },
+      "url": "https://en.wikipedia.org/wiki/Natural_rubber",
+      "note": { "en": "Read 2026-10-21 through a summarising fetch; an encyclopaedia, used only for these general properties.", "zh": "2026-10-21 经摘要读取；百科全书，只用来说明这些一般性质。" }
+    },
+    {
+      "id": "S16",
+      "text": {
+        "en": "Building and Construction Authority and Housing & Development Board, joint media release '35 cases of fallen windows in the first 11 months of 2023' (12 December 2023). There were 35 cases of fallen windows in January to November 2023, 19 of them casement windows. The main causes include corrosion and weakening of aluminium rivets in casement windows. Since 2004, BCA has required home owners to replace all aluminium rivets in casement windows with stainless steel ones. The Commissioner of Building Control: glass shards, falling from height, can cause serious injuries.",
+        "zh": "新加坡建设局与建屋发展局联合文告《2023 年头 11 个月有 35 起窗户掉落》（2023 年 12 月 12 日）。2023 年 1 月至 11 月有 35 起窗户掉落，其中 19 起是外开窗。主要原因包括外开窗的铝铆钉锈蚀、变弱。自 2004 年起，建设局规定屋主把外开窗的铝铆钉全部换成不锈钢铆钉。建筑管制专员：玻璃碎片从高处掉下会造成重伤。"
+      },
+      "url": "https://isomer-user-content.by.gov.sg/338/6c4d195b-9638-4373-82fc-e32c9109730f/35-cases-of-fallen-windows-in-the-first-11-months-of-2023.pdf",
+      "note": { "en": "Read 2026-10-21 (PDF text, pp. 1–2). The release spells the metal both 'aluminum' and 'aluminium'.", "zh": "2026-10-21 读取（PDF 文本第 1–2 页）。文告里“铝”的英文两种拼法都有。" }
+    },
+    {
+      "id": "S17",
+      "text": {
+        "en": "National Environment Agency, Recycling FAQs. Q4: Singapore collects recyclables together: paper, metal, plastic and glass can all go into the blue recycling bin. Q7: the numbers on plastic items are Resin Identification Codes used by manufacturers and recyclers; they do not tell consumers whether the item can be recycled. Q12: all MOE schools are provided with blue recycling bins.",
+        "zh": "新加坡国家环境局《回收常见问题》。问 4：新加坡把可回收物混在一起收集：纸、金属、塑料、玻璃都可以投进蓝色回收桶。问 7：塑料制品上的数字是树脂识别码，供厂商和回收商使用，不是告诉消费者这件东西能不能回收。问 12：所有教育部学校都设有蓝色回收桶。"
+      },
+      "url": "https://www.nea.gov.sg/docs/default-source/our-services/waste-management/recycling-faqs.pdf",
+      "note": { "en": "Read 2026-10-21 (undated PDF).", "zh": "2026-10-21 读取（文件未注明日期）。" }
+    },
+    {
+      "id": "S18",
+      "text": {
+        "en": "Yin, Y., Tomita, M. K. and Shavelson, R. J. (2008), 'Diagnosing and dealing with student misconceptions: Floating and sinking', Science Scope 31(8): 34–39. From the literature and a study of 1,002 students in grades 6 and 7 in the United States, ten ideas about floating and sinking, with ways to test them: big or heavy things do not always sink, and big and small balls of the same clay both sink; things with air inside do not always float (a sealed container of rocks sinks even with foam inside); flattening clay does not make it float; hard things can float; more water does not make a sinking thing float.",
+        "zh": "Yin, Y.、Tomita, M. K.、Shavelson, R. J.（2008），《诊断与处理学生的误解：浮与沉》，Science Scope 第 31 卷第 8 期第 34–39 页。根据文献和对美国 1,002 名六、七年级学生的研究，列出关于浮沉的十种想法和检验办法：又大又重的东西不一定沉，同一种黏土做的大球、小球都沉；里面有空气的东西不一定浮（装着石头的密封罐塞了泡沫也沉）；黏土压扁了也不会浮；硬的东西也可能浮；水多一点，会沉的东西也不会因此浮起来。"
+      },
+      "url": "https://michellesclassroom.wordpress.com/wp-content/uploads/2012/09/diagnosing-and-dealing-with-student-misconceptions.pdf",
+      "note": { "en": "Read 2026-10-21 from a teacher's repost of the article; the NSTA listing (Science Scope, April/May 2008) confirms the title and issue. The students were in the United States, not Singapore Primary 3; this topic uses the article for which ideas to test, not for how common they are.", "zh": "2026-10-21 从一位教师转载的文章读取；美国科学教师协会的目录（Science Scope，2008 年 4/5 月号）核对了题目和期号。研究对象是美国学生，不是新加坡小三学生；本主题只用它来决定要检验哪些想法，不说这些想法有多普遍。" }
+    },
+    {
+      "id": "S19",
+      "text": {
+        "en": "Education Bureau, Hong Kong, English-Chinese Glossary of Terms Commonly Used in the Teaching of Science (S1–3), 2017: metal 金屬 (p. 34); strength 強度 (p. 52); physical property 物理性質 (p. 42); load 負荷 (p. 32); glass tube 玻璃管 (p. 22); rubber tubing 橡膠管 (p. 47); translucent 半透明的 and opaque 不透明的 (pp. 54, 39).",
+        "zh": "香港教育局《科学科常用英汉词汇（中一至中三）》，2017 年：metal 金屬（第 34 页）；strength 強度（第 52 页）；physical property 物理性質（第 42 页）；load 負荷（第 32 页）；glass tube 玻璃管（第 22 页）；rubber tubing 橡膠管（第 47 页）；translucent 半透明的、opaque 不透明的（第 54、39 页）。"
+      },
+      "url": "https://www.edb.gov.hk/attachment/en/curriculum-development/kla/science-edu/ref-and-resources/SciGlossary_2017.pdf",
+      "note": { "en": "Traditional characters; the simplified forms used here are an editorial conversion. No Singapore MOE English–Chinese science glossary was found.", "zh": "原文为繁体字，这里的简体是编辑上的转换。没有找到新加坡教育部的英汉科学词表。" }
+    },
+    {
+      "id": "S20",
+      "text": {
+        "en": "Speak Mandarin Campaign / Singapore Mandarin Council, Singaporean Mandarin Database, entry 塑胶 (plastic): listed as the Singapore term, with 塑料 marked as the Mainland China term; example from Lianhe Zaobao, 20 March 2019: 塑胶滑梯.",
+        "zh": "讲华语运动 / 新加坡华文理事会《新加坡华语资料库》词条“塑胶”：列为新加坡用词，“塑料”标为中国大陆用词；例句出自《联合早报》2019 年 3 月 20 日：“塑胶滑梯”。"
+      },
+      "url": "https://www.mandarin.languagecouncils.sg/en/learning-resources/singaporean-mandarin-database/terms/plastic",
+      "note": { "en": "This topic writes 塑料, as every other Atlas topic does; the glossary notes that 塑胶 is also common in Singapore.", "zh": "本主题和 Atlas 其他主题一样写“塑料”；名词表注明新加坡也常说“塑胶”。" }
+    },
+    {
+      "id": "S21",
+      "text": {
+        "en": "Wiktionary entries for 材料 (material), 木材 (wood), 陶瓷 (ceramics), 橡胶 (rubber), 布料 (cloth), 塑料 (plastic), 柔韧 (pliable and tough), 浮 and 沉 (float, sink), 防水 (waterproof) and 透光 (to let light pass through).",
+        "zh": "维基词典词条：材料、木材、陶瓷、橡胶、布料、塑料、柔韧（“柔软而坚韧”）、浮与沉、防水、透光（“让光穿过”）。"
+      },
+      "url": "https://en.wiktionary.org/wiki/%E6%9D%90%E6%96%99",
+      "note": { "en": "Read 2026-10-21; the link is the entry for 材料, the other entries are at the same site.", "zh": "2026-10-21 读取；链接是“材料”词条，其他词条在同一网站。" }
+    },
+    {
+      "id": "S22",
+      "text": {
+        "en": "Seel, M., Müller-Braun, S., Hof, P., Schneider, F., Schneider, J. and Oechsner, M., 'Edge strength of annealed float glass: identification and optimisation of cutting process parameters', Glass Performance Days 2023. The edge strength of annealed glass is taken as 80 % of its surface strength; the normative value for annealed cut glass (as cut) is 36 N/mm²; well-controlled cutting reached characteristic edge strengths of at least 60 N/mm² (p. 193).",
+        "zh": "Seel, M. 等，《退火浮法玻璃的边部强度：切割工艺参数的识别与优化》，Glass Performance Days 2023。退火玻璃的边部强度按表面强度的 80 % 计；退火切割玻璃（切后未加工）的规范值是每平方毫米 36 牛；切割控制得好时，边部强度的特征值至少可达每平方毫米 60 牛（第 193 页）。"
+      },
+      "url": "https://gpd.fi/wp-content/uploads/2023/01/30-Matthias-Seel-Edge-strength-of-annealed-float-glass.pdf",
+      "note": { "en": "Read 2026-10-21 (PDF text). A bent strip breaks at its cut edges, so the model uses the 36 N/mm² (36 MPa) as-cut value; the often-quoted 45 MPa is a surface design value.", "zh": "2026-10-21 读取（PDF 文本）。弯曲的玻璃条从切割边断开，所以模型用切后未加工的 36 牛每平方毫米（36 MPa）；常被引用的 45 MPa 是表面的设计值。" }
+    },
+    {
+      "id": "S23",
+      "text": {
+        "en": "Vasglass (glass maker), Constituent materials attributes, standard glass: elastic modulus (Young's modulus) E = 70,000 N/mm² (70 GPa); density 2,500 kg/m³.",
+        "zh": "Vasglass（玻璃厂商）《标准玻璃的材料特性》：弹性模量（杨氏模量）E = 每平方毫米 70,000 牛（70 GPa）；密度每立方米 2,500 千克。"
+      },
+      "url": "https://vasglass.gr/en/products/standard-glass/constituent-materials-attributes/",
+      "note": { "en": "Read 2026-10-21.", "zh": "2026-10-21 读取。" }
+    },
+    {
+      "id": "S24",
+      "text": {
+        "en": "Biasini, V. et al., 'Mechanical properties of porcelain stoneware tiles: the effect of glass-ceramic systems', 7th Conference of the European Ceramic Society, Brugge, 2001: industrial porcelain stoneware tile bodies, flexural strength 30–40 MPa, Young's modulus 63–71 GPa.",
+        "zh": "Biasini, V. 等，《瓷质砖的力学性质：玻璃陶瓷体系的影响》，第七届欧洲陶瓷学会会议，布鲁日，2001 年：工业瓷质砖坯体，抗弯强度 30–40 MPa，杨氏模量 63–71 GPa。"
+      },
+      "url": "https://data.cnr.it/data/http://www.cnr.it/ontology/cnr/individuo/prodotto/ID223313",
+      "note": { "en": "Abstract read 2026-10-21 (Italian research council record). The tiles were unglazed and much thicker than 2 mm; no source was found for a 2 mm glazed strip, so the strip is a design choice (S1).", "zh": "2026-10-21 读到摘要（意大利国家研究委员会的记录）。测的是没上釉、比 2 毫米厚得多的瓷砖；没有找到 2 毫米上釉瓷条的资料，所以这根条是设计取值（S1）。" }
+    },
+    {
+      "id": "S25",
+      "text": {
+        "en": "Direct Plastics (Sheffield), HDPE Natural PE300 material data sheet: modulus of elasticity in flexure 1,000–1,400 MPa; tensile strength at yield 25 MPa; time yield limit for 1 % elongation after 1,000 hours 3 MPa.",
+        "zh": "Direct Plastics（谢菲尔德）《本色 HDPE PE300 材料数据表》：弯曲弹性模量 1,000–1,400 MPa；屈服拉伸强度 25 MPa；1,000 小时后伸长 1 % 的长期屈服极限 3 MPa。"
+      },
+      "url": "https://www.directplastics.co.uk/pub/pdf/datasheets/HDPE%20Data%20Sheet.pdf",
+      "note": { "en": "A supplier's data sheet. The model uses the short-term values; the long-term figure shows that plastic under a load for days slowly bends further (creep), which the model does not show.", "zh": "供应商的数据表。模型用短时间的数值；长期数值说明塑料受力好几天会慢慢弯得更多（蠕变），模型不画这一点。" }
+    },
+    {
+      "id": "S26",
+      "text": {
+        "en": "Hertz, D. L. and Farinella, A. C., 'Shore A durometer and engineering properties', New York Rubber Group, 24 September 1998: a rubber compound of hardness 70 IRHD has a nominal stiffness of about 750 psi (about 5 MPa).",
+        "zh": "Hertz, D. L.、Farinella, A. C.，《邵氏 A 硬度与工程性质》，纽约橡胶协会，1998 年 9 月 24 日：硬度 70 IRHD 的橡胶配方，名义刚度约 750 磅每平方英寸（约 5 MPa）。"
+      },
+      "url": "https://www.sealseastern.com/PDF/Shore-A%20Durometer%20and%20Engineering%20Properties.pdf",
+      "note": { "en": "Read 2026-10-21 (PDF text, hosted by a seal maker). A single source for soft rubber's stiffness, so low confidence; any stiffness below about 9 MPa gives the same result in the strength test (the strip lies on the bench).", "zh": "2026-10-21 读取（PDF 文本，由一家密封件厂商托管）。软橡胶的刚度只有这一个来源，可信度低；刚度只要低于约 9 MPa，强度测试的结果都一样（条搭在台面上）。" }
+    },
+    {
+      "id": "S27",
+      "text": {
+        "en": "Zimniewska, M. and Kicińska-Jakubowska, A., Vegetable fibers fact sheet (Institute of Natural Fibres & Medicinal Plants, Poland, for the Discover Natural Fibres Initiative): cotton fibre density 1.52–1.56 g/cm³.",
+        "zh": "Zimniewska, M.、Kicińska-Jakubowska, A.，《植物纤维资料表》（波兰天然纤维与药用植物研究所，为“发现天然纤维倡议”编写）：棉纤维的密度每立方厘米 1.52–1.56 克。"
+      },
+      "url": "https://dnfi.org/wp-content/uploads/2012/01/fact-sheet-plant-fibers.pdf",
+      "note": { "en": "Read 2026-10-21 (PDF text). The fibre is heavier than water; dry cloth floats for a while only because of the air between its fibres.", "zh": "2026-10-21 读取（PDF 文本）。纤维本身比水重；干布能浮一会儿，只是因为纤维之间有空气。" }
+    },
+    {
+      "id": "S28",
+      "text": {
+        "en": "Dubrovski, P. D., Fakin, D. and Ojstršek, A., 'Cotton woven fabrics as protective polymer materials against solar radiation in the range of 210–1200 nm', Polymers 15(5): 1310 (2023): even the densest raw satin-woven cotton fabrics let through up to about 28 % of visible light; plain-woven fabrics let through more than twill and satin.",
+        "zh": "Dubrovski, P. D.、Fakin, D.、Ojstršek, A.，《棉机织物作为抵挡 210–1200 纳米太阳辐射的高分子防护材料》，Polymers 第 15 卷第 5 期 1310（2023）：即使是最密的未处理缎纹棉布，也让最多约 28 % 的可见光穿过；平纹布透过的光比斜纹和缎纹多。"
+      },
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10007099/fullTextXML",
+      "note": { "en": "Read 2026-10-21 through Europe PMC (the publisher's site refused automatic access). Supports 'some light' for a thin single layer of cotton.", "zh": "2026-10-21 经 Europe PMC 读取（出版社网站拒绝自动访问）。用来支持“一层薄棉布让一部分光穿过”。" }
+    },
+    {
+      "id": "S29",
+      "text": {
+        "en": "Baoding Lida Plastic Industry (supplier), 'Natural HDPE sheet': natural HDPE is uncoloured, providing a translucent appearance.",
+        "zh": "保定立达塑料（供应商）《本色 HDPE 板》：本色 HDPE 不加颜色，看起来半透明。"
+      },
+      "url": "https://www.lidaplastic.com/news/naturalhdpesheet-18168.html",
+      "note": { "en": "Supplier wording, low confidence. No measured light transmission was found for a 2 mm natural HDPE sheet; two search snippets that could not be opened suggested it may let through very little. The model's 'some light' for this plastic should be checked with a real sheet.", "zh": "供应商的说法，可信度低。没有找到 2 毫米本色 HDPE 片的透光测量；两条打不开的搜索摘要暗示它透过的光可能很少。模型里这种塑料“让一部分光穿过”，应该用真的塑料片核对。" }
+    },
+    {
+      "id": "S30",
+      "text": {
+        "en": "Elephango, 'Transparent, Translucent, and Opaque' (lesson): examples of opaque objects include brick, wood, steel and bone.",
+        "zh": "Elephango《透明、半透明与不透明》课文：不透明的东西有砖、木、钢、骨头等。"
+      },
+      "url": "https://www.elephango.com/index.cfm/pg/k12learning/lcid/11505/Transparent,_Translucent,_and_Opaque",
+      "note": { "en": "Read 2026-10-21; a teaching page.", "zh": "2026-10-21 读取；教学网页。" }
+    },
+    {
+      "id": "S31",
+      "text": {
+        "en": "Vedantu, 'Transparent, translucent and opaque objects': milky plastic and a thin curtain are examples that let some light through; wood, stone, a metal sheet, a book and a wall let no light through.",
+        "zh": "Vedantu《透明、半透明和不透明的物体》：乳白色的塑料、薄窗帘是让一部分光穿过的例子；木头、石头、金属片、书和墙不让光穿过。"
+      },
+      "url": "https://www.vedantu.com/physics/transparent-translucent-and-opaque-objects",
+      "note": { "en": "Read 2026-10-21; a teaching page. No source found names glazed tile or a 2 mm rubber sheet as letting no light through; for them the topic relies on S5's teaching statement that thick, dark materials stop light.", "zh": "2026-10-21 读取；教学网页。没有找到来源点名上釉瓷砖或 2 毫米橡胶片不透光；这两样按 S5 的教学说法“厚的、深色的材料挡光”处理。" }
+    },
+    {
+      "id": "S32",
+      "text": {
+        "en": "Barwood, M. J. et al., ‘Float First’: trapped air between clothing layers significantly improves buoyancy on water after immersion, International Journal of Aquatic Research and Education 5(2), 2011: air trapped between clothing layers increases buoyancy, and it is lost as the person moves.",
+        "zh": "Barwood, M. J. 等，《先浮起来：衣服层间的空气显著增加落水后的浮力》，International Journal of Aquatic Research and Education 第 5 卷第 2 期，2011 年：衣服层与层之间困住的空气增加浮力，人一动，空气就慢慢跑掉。"
+      },
+      "url": "https://pure.port.ac.uk/ws/portalfiles/portal/22777018/Float_First_Trapped_Air_Between_Clothing_Layers.pdf",
+      "note": { "en": "Read 2026-10-21 (PDF text, abstract). How long a folded cloth takes to sink was not found.", "zh": "2026-10-21 读取（PDF 文本，摘要）。没有找到叠好的布要多久才沉下去。" }
+    },
+    {
+      "id": "S33",
+      "text": {
+        "en": "STAEDTLER, product data sheet, Mars plastic eraser 526 50 (2024): elastomer polyvinyl chloride; filler natural calcium carbonate (chalk).",
+        "zh": "STAEDTLER《产品数据表：Mars plastic 橡皮擦 526 50》（2024）：弹性体为聚氯乙烯；填料为天然碳酸钙（白垩）。"
+      },
+      "url": "https://ik.imagekit.io/pimberly/595e406f0f15f30010780448/aae5775c/668d346049b5440013df51a3/ST36417_TECH.pdf",
+      "note": { "en": "Read 2026-10-21. Used only as an example of what a common school eraser is made of; PVC is heavier than water (S6), so an eraser like this sinks. That is reasoned from what it is made of; no float test of an eraser was found.", "zh": "2026-10-21 读取。只用来举例说明一种常见的学校橡皮擦是什么做的；PVC 比水重（S6），所以这样的橡皮擦会沉。这是从材料推出来的，没有找到橡皮擦的浮沉测试。" }
+    },
+    {
+      "id": "S34",
+      "text": {
+        "en": "Wikipedia, Lignum vitae: the densest wood traded (average dried density about 1,260 kg/m³); it sinks easily in water.",
+        "zh": "维基百科《愈疮木》：市面上最重的木材（风干后平均每立方米约 1,260 千克），在水里很容易沉下去。"
+      },
+      "url": "https://en.wikipedia.org/wiki/Lignum_vitae",
+      "note": { "en": "Read 2026-10-21. Agrees with S7's specific gravity of 1.05 for green lignum vitae.", "zh": "2026-10-21 读取。与 S7 给生材愈疮木的比重 1.05 一致。" }
+    },
+    {
+      "id": "S35",
+      "text": {
+        "en": "The Wood Database, Teak (Tectona grandis): average dried weight 655 kg/m³; modulus of rupture 97.1 MPa; elastic modulus 12.28 GPa.",
+        "zh": "The Wood Database《柚木》：风干后平均每立方米 655 千克；断裂模数 97.1 MPa；弹性模量 12.28 GPa。"
+      },
+      "url": "https://www.wood-database.com/teak/",
+      "note": { "en": "Read 2026-10-21; used to cross-check S7, whose official host could not be reached. The page does not say which table its figures come from.", "zh": "2026-10-21 读取；用来核对官方网站连不上的 S7。网页没有说明数字出自哪张表。" }
+    }
+  ]
+}

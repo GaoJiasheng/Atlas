@@ -1,0 +1,145 @@
+---
+id: "choosing-materials"
+order: 6
+title: {"en": "Choosing materials", "zh": "选材料"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: false
+  cutaway: "none"
+  layers: ["corner-wood", "corner-metal", "corner-ceramic", "corner-rubber", "corner-glass", "corner-plastic", "corner-fabric", "strength-rig", "bend-rig", "float-tank", "drop-tray", "light-bench"]
+  labels: ["window-pane", "window-rivets", "food-box"]
+  camera: {"position": [-2.2, 1.15, 3.1], "target": [-1.75, 0.5, -0.2], "fov": 30}
+  summary: {"en": "Each object is made of a material whose properties suit its job. Putting the five tests together gives each material its own set of properties, and that is how we choose a material and give reasons for it.", "zh": "每样东西用的材料，性质都适合它要做的事。把五个测试放在一起，每种材料都有一组自己的性质；我们就是这样选材料、说出理由的。"}
+  sim:
+    set: {"pick": "wood", "strip": "wood", "masses": 5, "push": 2, "block": "wood", "square": "wood"}
+    try:
+      vary: "pick"
+      keep: [{"en": "The same five tests as chapters 1 to 5", "zh": "和第 1 到第 5 章同样的五个测试"}, {"en": "All five masses; pushed down 2 cm", "zh": "加满五个槽码；压下 2 厘米"}]
+      observe: ["p-strength", "p-flex", "p-float", "p-water", "p-light"]
+      record: true
+      predict:
+        prompt: {"en": "A window must let light through. Swap the wood for the glass: how much light gets through?", "zh": "窗要让光透进来。把木头换成玻璃，会有多少光穿过？"}
+        start: {"pick": "wood"}
+        change: {"pick": "glass"}
+        observe: "p-light"
+        options:
+          - {"id": "most", "label": {"en": "Most", "zh": "大部分"}, "means": "most"}
+          - {"id": "some", "label": {"en": "Some", "zh": "一部分"}, "means": "some"}
+          - {"id": "none", "label": {"en": "None", "zh": "没有"}, "means": "none"}
+  beats:
+    - layers: ["corner-wood", "corner-metal", "corner-ceramic", "corner-rubber", "corner-glass", "corner-plastic", "corner-fabric"]
+      labels: ["wall-cabinet", "saucepan", "bowl", "tumbler", "food-box", "tea-towel"]
+      caption: {"en": "Each thing in this kitchen is made of a material with the right properties for its job.", "zh": "这个厨房里的每样东西，用的材料都有适合它那份工作的性质。"}
+    - camera: {"position": [-2.2, 1.1, 1.55], "target": [-2.05, 0.9, -0.4], "fov": 30}
+      layers: ["corner-wood", "corner-metal", "corner-ceramic", "corner-rubber", "corner-glass", "corner-plastic", "corner-fabric"]
+      ghost: ["wall-cabinet", "cabinet-hinges", "saucepan", "bowl", "wall-tiles", "tumbler", "food-box", "box-seal", "tea-towel"]
+      labels: ["window-pane", "window-frame"]
+      caption: {"en": "The window pane is glass: it lets most light through and is waterproof. The frame is metal.", "zh": "窗玻璃让大部分光穿过，也防水。窗框是金属的。"}
+    - camera: {"position": [-2.0, 0.95, 0.55], "target": [-2.2, 0.55, -0.42], "fov": 30}
+      layers: ["corner-wood", "corner-metal", "corner-ceramic", "corner-rubber", "corner-glass", "corner-plastic", "corner-fabric"]
+      ghost: ["wall-cabinet", "cabinet-hinges", "saucepan", "bowl", "wall-tiles", "tumbler", "food-box", "box-seal", "tea-towel"]
+      labels: ["window-rivets"]
+      caption: {"en": "Small rivets fix the arms that hold the window. Since 2004, home owners in Singapore have had to replace aluminium rivets in these windows with stainless steel ones, because aluminium rivets can corrode and weaken.", "zh": "几颗小铆钉固定着撑住窗扇的支臂。从 2004 年起，新加坡的屋主必须把这种窗的铝铆钉换成不锈钢铆钉，因为铝铆钉会锈蚀、变弱。"}
+    - camera: {"position": [-1.66, 0.88, 0.62], "target": [-1.56, 0.64, -0.19], "fov": 30}
+      layers: ["corner-wood", "corner-metal", "corner-ceramic", "corner-rubber", "corner-glass", "corner-plastic", "corner-fabric"]
+      ghost: ["saucepan", "bowl", "tumbler", "tea-towel", "window-frame", "window-pane", "window-rivets", "wall-tiles", "cabinet-hinges"]
+      labels: ["food-box", "box-seal"]
+      caption: {"en": "The food box is plastic, which is waterproof and does not snap. Its seal is rubber, which bends to fit the lid and does not absorb water.", "zh": "保鲜盒是塑料的：防水，也不会一压就断。它的密封圈是橡胶的：能弯着贴紧盒盖，也不吸水。"}
+    - camera: {"position": [-0.3, 1.9, 5.2], "target": [-0.72, 0.3, -0.1], "fov": 30}
+      layers: ["strength-rig", "bend-rig", "float-tank", "drop-tray", "light-bench"]
+      sim: {"set": {"strip": "glass", "masses": 5, "push": 2, "block": "glass", "square": "glass", "pick": "glass"}}
+      labels: ["bridge-glass-snapped", "bend-glass-snapped", "float-glass", "sheet-glass"]
+      caption: {"en": "Put the five tests together and each material has its own set of properties. Glass lets most light through and is waterproof, but it is brittle and it sinks.", "zh": "把五个测试放在一起，每种材料都有一组自己的性质。玻璃让大部分光穿过、防水，但它脆，而且会沉。"}
+  index: {"parts": ["window-pane", "window-frame", "window-rivets", "food-box", "box-seal", "saucepan", "bowl", "wall-tiles", "tumbler", "tea-towel", "wall-cabinet", "cabinet-hinges"]}
+---
+
+<Lang en>
+
+The syllabus puts the focus on how the properties of materials are used. To choose a material, say what the object has to do, then which properties it needs, then which material has them, and give your reasons.
+
+The Try it card puts the five tests together. Pick a material and the card shows its result in every test at once: the strength test with all five masses on, the flexibility test with the end pushed down <Num s="S1">2 cm</Num>, a block of it in the tank, a drop of water on it and the torch shining through it. Record a row for each of the seven materials and you have a table of their properties, made from your own observations.
+
+A window has to let light in and keep rain out, so its pane is glass: it lets most light through and is waterproof. Glass is also brittle, so the pane sits in a metal frame. The window's arms are fixed with small rivets, and these must stay strong for many years. Since 2004, the Building and Construction Authority has required home owners to replace the aluminium rivets in casement windows with stainless steel ones, because corroded, weakened aluminium rivets are a main cause of falling windows.
+
+The food box is plastic: it is waterproof and it did not snap in the strength test. Its seal is rubber, which bends to fit the lid and does not absorb water. The saucepan is metal, which is waterproof and strong. The bowl and the wall tiles are glazed ceramic, which does not absorb water. The tea towel is cotton, which soaks water up. The wall cabinet is wood, strong enough in this drawing to hold the dishes.
+
+When things are worn out, many of these materials can be recycled.
+
+<More title={{"en": "Rivets and windows", "zh": "铆钉和窗"}}>
+
+In the first eleven months of 2023 there were <Num s="S16">35</Num> cases of windows falling from homes in Singapore, <Num s="S16">19</Num> of them casement windows, the kind that swings open on hinges. The authorities named corroded, weakened aluminium rivets as one of the main causes, and warned that glass falling from a height can cause serious injuries.
+
+</More>
+
+<More title={{"en": "The blue bin", "zh": "蓝色回收桶"}}>
+
+In Singapore, paper, metal, plastic and glass can all go into the same blue recycling bin, and every MOE school has blue bins. The number marked on a plastic item tells manufacturers and recyclers what kind of plastic it is; it does not tell you whether the item can be recycled.
+
+</More>
+
+<More title={{"en": "Choosing with reasons", "zh": "说出理由来选"}}>
+
+Start from the job, not the material. A tea towel has to soak up water, so it needs a material that absorbs water: fabric. A saucepan has to hold water and take knocks, so it needs a material that is waterproof and strong: metal. A stainless steel sink is chosen for the same reasons, and because it is easy to clean.
+
+</More>
+
+<More title={{"en": "Other properties", "zh": "其他性质"}}>
+
+Materials have other properties too. Whether a material lets electricity through is in <TopicLink slug="circuits" ch="conductors-and-insulators">Circuits: what lets current through</TopicLink>, and whether a magnet attracts it is in <TopicLink slug="magnets" ch="magnetic-or-not">Magnets: magnetic or not</TopicLink>. They are not among the five properties in this topic.
+
+</More>
+
+<More title={{"en": "One material, many forms", "zh": "同一种材料，不同的样子"}}>
+
+How a material is made and shaped can change its properties. A thin metal strip bends, but a thick metal bar does not (chapter 2). A glazed porcelain tile hardly absorbs water, but some softer ceramic tiles do (chapter 4). A solid lump of bottle plastic sinks, but a capped bottle full of air floats (chapter 3).
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+课纲的重点，是材料的性质怎样被用上。选材料时，先说这样东西要做什么，再说它需要哪些性质，然后看哪种材料有这些性质，并说出理由。
+
+“试一试”卡片把五个测试放在一起。选一种材料，卡片就一下子列出它在每个测试里的结果：强度测试加满五个槽码，柔韧测试把末端压下 <Num s="S1">2 厘米</Num>，一块放进水缸，滴一滴水，再用手电筒照一照。七种材料各记一行，就得到一张材料性质表，是用你自己的观察做出来的。
+
+窗要让光进来、把雨挡在外面，所以窗扇用玻璃：玻璃让大部分光穿过，又防水。玻璃也脆，所以装在金属框里。撑住窗扇的支臂用几颗小铆钉固定，这些铆钉要多年都结实。从 2004 年起，新加坡建设局规定屋主把外开窗的铝铆钉换成不锈钢铆钉，因为锈蚀、变弱的铝铆钉是窗户掉落的主要原因之一。
+
+保鲜盒是塑料的：防水，在强度测试里也没有断。它的密封圈是橡胶的：能弯着贴紧盒盖，也不吸水。锅是金属的，防水又结实。碗和墙砖是上了釉的陶瓷，不吸水。毛巾是棉布，会吸水。壁柜是木头的，在这幅图里够强，托得住碗碟。
+
+东西用旧了，其中许多材料可以回收。
+
+<More title={{"en": "Rivets and windows", "zh": "铆钉和窗"}}>
+
+2023 年头十一个月，新加坡住家共有 <Num s="S16">35</Num> 起窗户掉落，其中 <Num s="S16">19</Num> 起是外开窗，也就是靠铰链往外推开的窗。当局指出，锈蚀、变弱的铝铆钉是主要原因之一，并提醒：玻璃从高处掉下会造成重伤。
+
+</More>
+
+<More title={{"en": "The blue bin", "zh": "蓝色回收桶"}}>
+
+在新加坡，纸、金属、塑料、玻璃都可以投进同一个蓝色回收桶；每所教育部学校都有蓝色回收桶。塑料制品上标的数字，是告诉厂商和回收商这是哪一种塑料，不是告诉你它能不能回收。
+
+</More>
+
+<More title={{"en": "Choosing with reasons", "zh": "说出理由来选"}}>
+
+从东西要做的事出发，不从材料出发。毛巾要把水吸干，需要会吸水的材料：布。锅要盛水、经得起碰撞，需要防水又强的材料：金属。不锈钢水槽也是因为这些理由被选中，而且它容易清洁。
+
+</More>
+
+<More title={{"en": "Other properties", "zh": "其他性质"}}>
+
+材料还有别的性质。导不导电，见<TopicLink slug="circuits" ch="conductors-and-insulators">“电路”主题的“导体与绝缘体”</TopicLink>；会不会被磁铁吸引，见<TopicLink slug="magnets" ch="magnetic-or-not">“磁”主题的“磁性材料与非磁性材料”</TopicLink>。它们不在本主题的五个性质之内。
+
+</More>
+
+<More title={{"en": "One material, many forms", "zh": "同一种材料，不同的样子"}}>
+
+材料怎样做、做成什么形状，会改变它的性质。薄的金属条能弯，粗的金属棒却弯不动（第 2 章）。上了釉的瓷质砖几乎不吸水，有些较松的陶质砖却会吸水（第 4 章）。瓶子的塑料做成实心的一块会沉，盖好盖子、装满空气的瓶子却会浮（第 3 章）。
+
+</More>
+
+</Lang>

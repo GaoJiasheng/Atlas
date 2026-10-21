@@ -1,0 +1,137 @@
+---
+id: "light-through"
+order: 5
+title: {"en": "Letting light through", "zh": "透光"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: false
+  cutaway: "none"
+  layers: ["light-bench"]
+  labels: ["torch", "sheet-glass", "screen"]
+  camera: {"position": [0.38, 0.32, 0.56], "target": [0.84, 0.1, 0], "fov": 32}
+  summary: {"en": "Materials let most, some or no light pass through. With the same torch and screen, glass lets most of the light through, this plastic and thin fabric let some through, and wood, metal, ceramic and rubber let none through.", "zh": "材料让大部分、一部分或没有光穿过。用同一支手电筒、同一块屏：玻璃让大部分光穿过；这种塑料和薄布让一部分光穿过；木、金属、陶瓷、橡胶不让光穿过。"}
+  sim:
+    set: {"square": "glass"}
+    try:
+      vary: "square"
+      keep: [{"en": "The same torch", "zh": "同一支手电筒"}, {"en": "The same distances to the sample and the screen", "zh": "到样片、到屏的距离一样"}, {"en": "Samples of the same size", "zh": "样片大小一样"}]
+      observe: ["light-result"]
+      record: true
+      predict:
+        prompt: {"en": "Clear glass lets most light through. Swap it for the fabric: how much light will get through?", "zh": "透明玻璃让大部分光穿过。换成布，会有多少光穿过？"}
+        start: {"square": "glass"}
+        change: {"square": "fabric"}
+        observe: "light-result"
+        options:
+          - {"id": "most", "label": {"en": "Most", "zh": "大部分"}, "means": "most"}
+          - {"id": "some", "label": {"en": "Some", "zh": "一部分"}, "means": "some"}
+          - {"id": "none", "label": {"en": "None", "zh": "没有"}, "means": "none"}
+  beats:
+    - labels: ["torch", "sheet-holder", "screen"]
+      caption: {"en": "The same torch shines through each sample onto the same white screen, from the same distances.", "zh": "同一支手电筒，从同样的距离，透过每块样片照在同一块白屏上。"}
+    - sim: {"set": {"square": "glass"}}
+      labels: ["sheet-glass", "screen"]
+      caption: {"en": "Clear glass lets most of the light through. Its shadow on the screen is so faint that it is hard to see.", "zh": "透明玻璃让大部分光穿过。它在屏上的影子很淡，几乎看不出来。"}
+    - sim: {"set": {"square": "plastic"}}
+      labels: ["sheet-plastic", "screen"]
+      caption: {"en": "This cloudy plastic lets some light through. The screen behind it is dimmer, and you cannot see clearly through it. Thin fabric is like this too.", "zh": "这种乳白的塑料让一部分光穿过。它后面的屏暗了一些，透过它也看不清后面。薄布也是这样。"}
+    - sim: {"set": {"square": "wood"}}
+      labels: ["sheet-wood", "screen"]
+      caption: {"en": "Wood lets no light through, and leaves a dark shadow. So do metal, ceramic and rubber.", "zh": "木头不让光穿过，留下一块黑影。金属、陶瓷、橡胶也一样。"}
+    - camera: "corner-view"
+      layers: ["corner-wood", "corner-metal", "corner-ceramic", "corner-rubber", "corner-glass", "corner-plastic", "corner-fabric"]
+      labels: ["window-pane", "tumbler"]
+      caption: {"en": "A window pane is glass so that light can come in. A drinking glass lets you see what is inside.", "zh": "窗用玻璃，让光照进来。玻璃杯让人看得见杯里有什么。"}
+  index: {"parts": ["torch", "sheet-holder", "screen", "sheet-glass", "sheet-plastic", "sheet-fabric", "sheet-wood", "sheet-metal", "sheet-ceramic", "sheet-rubber", "window-pane", "tumbler"]}
+---
+
+<Lang en>
+
+The syllabus describes how much light a material lets through in three steps: most, some or none. To compare materials fairly, the same torch shines through each <Num s="S1">8 × 8 cm</Num> sample onto the same white screen. The torch is <Num s="S1">20 cm</Num> in front of the sample and the screen <Num s="S1">10 cm</Num> behind it every time.
+
+With clear glass in the holder, the screen is nearly as bright as it is with no sample at all. The shadow of the glass is so faint that it is hard to see, and you can see clearly through the glass. Glass lets most of the light through.
+
+With this cloudy, milky plastic, the screen behind it is dimmer, and you cannot see clearly through the plastic. A single layer of thin cotton does the same. They let some light through.
+
+Wood, steel, the ceramic tile and the rubber leave a dark shadow on the screen. They let no light through.
+
+How much light a material lets through decides some of its uses. Windows are made of glass so that light can come in, and a drinking glass lets you see the drink inside. A blind to keep out the light needs a thick, dark material.
+
+Light and shadows have a topic of their own: <TopicLink slug="light-and-shadows" ch="through-or-blocked">Light and Shadows: through, partly, or not at all</TopicLink> measures the light behind clear glass, frosted glass, tracing paper and cardboard.
+
+At home, a torch, a white wall and a few safe things such as a plastic lid, a handkerchief and a piece of cardboard are enough for this test; ask an adult to help, and never shine a torch into anyone's eyes.
+
+Use the Try it card to put each sample in the holder. Predict first, then record whether most, some or no light gets through.
+
+<More title={{"en": "Three words you may hear", "zh": "可能会听到的三个词"}}>
+
+Some books use three words for these three steps: transparent (most light through, and you can see clearly through it), translucent (some light through, but you cannot see clearly) and opaque (no light through). The syllabus says these words are not required at Primary 3 or Primary 4; "most, some or none" says the same thing.
+
+</More>
+
+<More title={{"en": "Nine tenths", "zh": "十分之九"}}>
+
+Even clear glass does not let all the light through. A glass maker gives about <Num s="S14">90 %</Num> for clear window glass <Num s="S14">4 mm</Num> thick, and a little less for thicker glass. In the model, the faint shadow of the glass comes from that missing tenth.
+
+</More>
+
+<More title={{"en": "Thick and dark", "zh": "又厚又深"}}>
+
+Thick, dark materials stop the light, so they are good for blinds and curtains. A thin, pale cotton cloth lets some light through; a thicker, more tightly woven cloth lets through less.
+
+</More>
+
+<More title={{"en": "About this plastic", "zh": "关于这种塑料"}}>
+
+The plastic in the model is a natural, uncoloured sheet of HDPE, a kind of polyethylene. A supplier describes its look as milky, letting some light through, but no measurement of how much light passes through a sheet this thick was found. So "some" here is a description, not a measurement, and a real sheet may let through less. Other plastics are made clear or coloured, and they let through more or less light.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+课纲把材料让多少光穿过分成三档：大部分、一部分、没有。为了公平地比较，用同一支手电筒，透过每块 <Num s="S1">8 × 8 厘米</Num>的样片，照在同一块白屏上。每次手电筒都在样片前 <Num s="S1">20 厘米</Num>，屏都在样片后 <Num s="S1">10 厘米</Num>。
+
+样片夹上放透明玻璃，屏几乎和什么都不放时一样亮。玻璃的影子淡得几乎看不出来，隔着玻璃也看得清清楚楚。玻璃让大部分光穿过。
+
+换成这种乳白、发雾的塑料，它后面的屏暗了一些，透过塑料也看不清后面。一层薄棉布也一样。它们让一部分光穿过。
+
+木头、钢、瓷砖和橡胶在屏上留下一块黑影。它们不让光穿过。
+
+材料让多少光穿过，决定了它的一些用途。窗用玻璃，让光照进来；玻璃杯让人看得见杯里的饮料。要挡光的百叶帘，就要用又厚又深色的材料。
+
+光和影子另有一个主题：<TopicLink slug="light-and-shadows" ch="through-or-blocked">“光与影”主题的“光能不能穿过”</TopicLink>量了透明玻璃、磨砂玻璃、描图纸和硬纸板后面有多少光。
+
+在家里，一支手电筒、一面白墙，加上塑料盖子、手帕、硬纸板这类安全的东西，就能做这个测试；请大人在旁边帮忙，不要用手电筒照别人的眼睛。
+
+用“试一试”卡片把每块样片轮流夹上去。先猜一猜，再记下有大部分、一部分还是没有光穿过。
+
+<More title={{"en": "Three words you may hear", "zh": "可能会听到的三个词"}}>
+
+有些书用三个词说这三档：透明（大部分光穿过，隔着它看得清楚）、半透明（一部分光穿过，但看不清楚）、不透明（没有光穿过）。课纲说小三、小四都不要求用这三个词；说“大部分、一部分、没有”，意思一样。
+
+</More>
+
+<More title={{"en": "Nine tenths", "zh": "十分之九"}}>
+
+即使是透明玻璃，也不会让全部的光穿过。玻璃厂商给出 <Num s="S14">4 毫米</Num>厚的透明窗玻璃，透光约 <Num s="S14">90%</Num>，玻璃越厚，透光稍少一点。模型里玻璃那淡淡的影子，就是少掉的那十分之一。
+
+</More>
+
+<More title={{"en": "Thick and dark", "zh": "又厚又深"}}>
+
+又厚又深色的材料挡光，适合做百叶帘和窗帘。薄的浅色棉布让一部分光穿过；更厚、织得更密的布，透过的光就少了。
+
+</More>
+
+<More title={{"en": "About this plastic", "zh": "关于这种塑料"}}>
+
+模型里的塑料是一块不加颜色的本色 HDPE 片（一种聚乙烯）。供应商说它看起来乳白、让一部分光穿过，但没有找到这么厚的塑料片透过多少光的测量。所以这里的“一部分”是描述，不是测量结果，真实的塑料片透过的光可能更少。别的塑料可以做成无色清亮的或有颜色的，透过的光会更多或更少。
+
+</More>
+
+</Lang>
