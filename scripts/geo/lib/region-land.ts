@@ -14,6 +14,13 @@
  * edge). When the file is over budget the tolerance grows by half until it
  * fits. Prints the size, polygon / vertex counts, the tolerance used and the
  * ring check (`rings: N, zero-area 0, self-crossing 0`) for SOURCES-GEO.md.
+ *
+ * `regionLand.mapshaper: true` (opt-in; docs/43 G1, a plate spanning a
+ * continent): the land is first clipped to the padded plate and simplified by
+ * mapshaper (`-simplify dp interval=<simplifyKm> keep-shapes`, then `-clean`,
+ * which repairs the self-crossings a per-ring Douglas–Peucker leaves in long
+ * coasts), and the plate is then cut without a second simplification. Plates
+ * without the knob are built exactly as before.
  */
 import { existsSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
@@ -23,7 +30,7 @@ import { parse as parseYaml } from 'yaml';
 import { feature as topoFeature } from 'topojson-client';
 import type { FeatureCollection, Position } from 'geojson';
 import { topicSchema } from '../../../src/content/schema/topic';
-import { GEO, ROOT, log, readJson, warn } from './common';
+import { GEO, ROOT, log, mapshaper, readJson, warn } from './common';
 import type { RegionLand } from './manifest';
 import { ringIssues } from './rings';
 import { KM_PER_DEG, regionTopology, type Box } from './region';
@@ -62,8 +69,13 @@ const midLat = ((s + n) / 2) * (Math.PI / 180);
 const km2PerDeg2 = KM_PER_DEG * KM_PER_DEG * Math.cos(midLat);
 const file = join(ROOT, 'public/geo', `${region.land}.json`);
 
+/** The opt-in mapshaper pass: clip to the padded plate, simplify keeping shapes, repair crossings. */
+const preSimplified = async (km: number): Promise<FeatureCollection> =>
+  mapshaper(`-i land.json -clip bbox=${box.join(',')} -simplify dp interval=${Math.round(km * 1000)} keep-shapes -clean`, { land });
+
 for (let attempt = 0; ; attempt++) {
-  const built = regionTopology(land, box, region.land, { tolerance: simplifyKm / KM_PER_DEG, minAreaDeg2: minIslandKm2 / km2PerDeg2, quantization });
+  const source = knobs.mapshaper ? await preSimplified(simplifyKm) : land;
+  const built = regionTopology(source, box, region.land, { tolerance: knobs.mapshaper ? 0 : simplifyKm / KM_PER_DEG, minAreaDeg2: minIslandKm2 / km2PerDeg2, quantization });
   const text = JSON.stringify(built.topology);
   const kb = Buffer.byteLength(text) / 1024;
   if (kb > budgetKB && attempt < 8) {

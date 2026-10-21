@@ -1,0 +1,607 @@
+{
+  "source": "Wikidata (CC0), property P625",
+  "retrieved": "2026-10-21",
+  "places": {
+    "uruk": {
+      "qid": "Q168518",
+      "at": [
+        45.6374,
+        31.3259
+      ],
+      "en": "Uruk",
+      "zh": "乌鲁克"
+    },
+    "ur": {
+      "qid": "Q5699",
+      "at": [
+        46.10444,
+        30.96222
+      ],
+      "en": "Ur",
+      "zh": "乌尔"
+    },
+    "eridu": {
+      "qid": "Q210065",
+      "at": [
+        45.99463,
+        30.82604
+      ],
+      "en": "Eridu",
+      "zh": "埃里都"
+    },
+    "nippur": {
+      "qid": "Q188395",
+      "at": [
+        45.23083,
+        32.12611
+      ],
+      "en": "Nippur",
+      "zh": "尼普尔"
+    },
+    "lagash": {
+      "qid": "Q207330",
+      "at": [
+        46.40722,
+        31.41139
+      ],
+      "en": "Lagash",
+      "zh": "拉格什"
+    },
+    "kish": {
+      "qid": "Q132272",
+      "at": [
+        44.60472,
+        32.54028
+      ],
+      "en": "Kish",
+      "zh": "基什"
+    },
+    "babylon": {
+      "qid": "Q5684",
+      "at": [
+        44.42111,
+        32.5425
+      ],
+      "en": "Babylon",
+      "zh": "巴比倫"
+    },
+    "memphis": {
+      "qid": "Q5715",
+      "at": [
+        31.25092,
+        29.84467
+      ],
+      "en": "Memphis",
+      "zh": "孟菲斯"
+    },
+    "giza": {
+      "qid": "Q12508",
+      "at": [
+        31.13278,
+        29.97611
+      ],
+      "en": "Giza pyramid complex",
+      "zh": "吉薩金字塔群"
+    },
+    "thebes": {
+      "qid": "Q101583",
+      "at": [
+        32.61028,
+        25.72056
+      ],
+      "en": "Thebes",
+      "zh": "底比斯",
+      "note": "Wikidata point in the town of Luxor"
+    },
+    "alexandria": {
+      "qid": "Q87",
+      "at": [
+        29.8925,
+        31.1975
+      ],
+      "en": "Alexandria",
+      "zh": "亚历山大"
+    },
+    "athens": {
+      "qid": "Q1524",
+      "at": [
+        23.72806,
+        37.98417
+      ],
+      "en": "Athens",
+      "zh": "雅典"
+    },
+    "sparta": {
+      "qid": "Q5690",
+      "at": [
+        22.42361,
+        37.08194
+      ],
+      "en": "Sparta",
+      "zh": "斯巴达"
+    },
+    "delphi": {
+      "qid": "Q75459",
+      "at": [
+        22.5,
+        38.48333
+      ],
+      "en": "Delphi",
+      "zh": "德尔斐"
+    },
+    "olympia": {
+      "qid": "Q38888",
+      "at": [
+        21.63,
+        37.63833
+      ],
+      "en": "Olympia",
+      "zh": "奥林匹亚考古遗址"
+    },
+    "corinth": {
+      "qid": "Q103011",
+      "at": [
+        22.92722,
+        37.93861
+      ],
+      "en": "Corinth",
+      "zh": "科林斯"
+    },
+    "rome": {
+      "qid": "Q220",
+      "at": [
+        12.48278,
+        41.89306
+      ],
+      "en": "Rome",
+      "zh": "罗马"
+    },
+    "pantheon": {
+      "qid": "Q99309",
+      "at": [
+        12.47694,
+        41.89861
+      ],
+      "en": "Pantheon",
+      "zh": "万神庙"
+    },
+    "pont-du-gard": {
+      "qid": "Q189764",
+      "at": [
+        4.5355,
+        43.9473
+      ],
+      "en": "Pont du Gard",
+      "zh": "加尔桥"
+    },
+    "capua": {
+      "qid": "Q58477",
+      "at": [
+        14.21389,
+        41.10556
+      ],
+      "en": "Capua",
+      "zh": "卡普阿",
+      "note": "today’s Capua; ancient Capua lay at Santa Maria Capua Vetere, about 4 km south-east"
+    },
+    "mohenjo-daro": {
+      "qid": "Q5725",
+      "at": [
+        68.13889,
+        27.32917
+      ],
+      "en": "Mohenjo-daro",
+      "zh": "摩亨佐-達羅"
+    },
+    "harappa": {
+      "qid": "Q185562",
+      "at": [
+        72.86667,
+        30.63333
+      ],
+      "en": "Harappa",
+      "zh": "哈拉帕"
+    },
+    "dholavira": {
+      "qid": "Q9468",
+      "at": [
+        70.21667,
+        23.88611
+      ],
+      "en": "Dholavira",
+      "zh": "多拉維臘"
+    },
+    "pataliputra": {
+      "qid": "Q389755",
+      "at": [
+        85.144,
+        25.611
+      ],
+      "en": "Pataliputra",
+      "zh": "巴連弗邑"
+    },
+    "dhauli": {
+      "qid": "Q3498218",
+      "at": [
+        85.83333,
+        20.18333
+      ],
+      "en": "Dhauli",
+      "zh": ""
+    },
+    "jaugada": {
+      "qid": "Q11927218",
+      "at": [
+        84.81225,
+        19.52256
+      ],
+      "en": "Jaugada",
+      "zh": ""
+    },
+    "kalinga": {
+      "qid": "Q1150706",
+      "at": [
+        85.5,
+        20.15
+      ],
+      "en": "Kalinga",
+      "zh": "羯陵伽",
+      "note": "representative point of the historical region, not a battlefield"
+    },
+    "taxila": {
+      "qid": "Q156093",
+      "at": [
+        72.7875,
+        33.74583
+      ],
+      "en": "Taxila",
+      "zh": "塔克西拉"
+    },
+    "nalanda": {
+      "qid": "Q216243",
+      "at": [
+        85.44383,
+        25.1368
+      ],
+      "en": "Nalanda Mahavihara",
+      "zh": "那烂陀寺"
+    },
+    "sanchi": {
+      "qid": "Q181123",
+      "at": [
+        77.73972,
+        23.47944
+      ],
+      "en": "Sanchi",
+      "zh": "桑吉"
+    },
+    "gwalior-chaturbhuj": {
+      "qid": "Q44545847",
+      "at": [
+        78.16993,
+        26.23088
+      ],
+      "en": "Chaturbhuj Temple",
+      "zh": ""
+    },
+    "erlitou": {
+      "qid": "Q2692927",
+      "at": [
+        112.69,
+        34.6925
+      ],
+      "en": "Erlitou",
+      "zh": "二里头遗址"
+    },
+    "yinxu": {
+      "qid": "Q464904",
+      "at": [
+        114.31861,
+        36.1225
+      ],
+      "en": "Yinxu",
+      "zh": "殷墟"
+    },
+    "xianyang": {
+      "qid": "Q497341",
+      "at": [
+        108.70917,
+        34.32972
+      ],
+      "en": "Xianyang",
+      "zh": "咸阳市"
+    },
+    "qin-mausoleum": {
+      "qid": "Q47672",
+      "at": [
+        109.27306,
+        34.385
+      ],
+      "en": "Terracotta Army",
+      "zh": "秦始皇兵马俑"
+    },
+    "changan": {
+      "qid": "Q6501000",
+      "at": [
+        108.85833,
+        34.30833
+      ],
+      "en": "Chang'an",
+      "zh": "长安"
+    },
+    "luoyang": {
+      "qid": "Q187136",
+      "at": [
+        112.42447,
+        34.65867
+      ],
+      "en": "Luoyang",
+      "zh": "洛阳市"
+    },
+    "mogao": {
+      "qid": "Q43286",
+      "at": [
+        94.80417,
+        40.03722
+      ],
+      "en": "Mogao Caves",
+      "zh": "莫高窟",
+      "note": "the Mogao Caves near Dunhuang, where the Library Cave is"
+    },
+    "oc-eo": {
+      "qid": "Q2344822",
+      "at": [
+        105.16299,
+        10.23294
+      ],
+      "en": "Óc Eo",
+      "zh": "澳盖文化"
+    },
+    "angkor-borei": {
+      "qid": "Q986338",
+      "at": [
+        104.98876,
+        10.96425
+      ],
+      "en": "Angkor Borei and Phnom Da",
+      "zh": "吳哥博瑞與達山"
+    },
+    "palembang": {
+      "qid": "Q8131",
+      "at": [
+        104.76444,
+        -2.98333
+      ],
+      "en": "Palembang",
+      "zh": "巨港"
+    },
+    "muaro-jambi": {
+      "qid": "Q2725535",
+      "at": [
+        103.63417,
+        -1.47694
+      ],
+      "en": "Muaro Jambi Temple Compounds",
+      "zh": "占碑遗迹"
+    },
+    "belitung-wreck": {
+      "qid": "Q3589078",
+      "at": [
+        107.59518,
+        -2.76083
+      ],
+      "en": "Belitung shipwreck",
+      "zh": "黑石号沉船"
+    },
+    "phnom-kulen": {
+      "qid": "Q956515",
+      "at": [
+        104.1125,
+        13.61278
+      ],
+      "en": "Phnom Kulen",
+      "zh": "荔枝山"
+    },
+    "angkor-wat": {
+      "qid": "Q43473",
+      "at": [
+        103.86667,
+        13.4125
+      ],
+      "en": "Angkor Wat",
+      "zh": "吴哥窟"
+    },
+    "angkor": {
+      "qid": "Q163607",
+      "at": [
+        103.83333,
+        13.43333
+      ],
+      "en": "Angkor",
+      "zh": "吴哥古迹"
+    },
+    "vijaya": {
+      "qid": "Q10841882",
+      "at": [
+        109.07083,
+        13.92639
+      ],
+      "en": "Đồ Bàn",
+      "zh": "闍槃遺址",
+      "note": "Đồ Bàn citadel, the site of the Cham capital Vijaya"
+    },
+    "sambor-prei-kuk": {
+      "qid": "Q1818746",
+      "at": [
+        105.04003,
+        12.86728
+      ],
+      "en": "Sambor Prei Kuk",
+      "zh": "三博波雷古寺"
+    },
+    "trowulan": {
+      "qid": "Q962410",
+      "at": [
+        112.36667,
+        -7.55
+      ],
+      "en": "Trowulan Temple",
+      "zh": "多烏蘭"
+    },
+    "sukhothai": {
+      "qid": "Q423654",
+      "at": [
+        99.70361,
+        17.02111
+      ],
+      "en": "Sukhothai Historical Park",
+      "zh": "素可泰历史文化公园"
+    },
+    "melaka": {
+      "qid": "Q61089",
+      "at": [
+        102.25111,
+        2.18889
+      ],
+      "en": "Malacca",
+      "zh": "马六甲市"
+    },
+    "fort-canning": {
+      "qid": "Q1438470",
+      "at": [
+        103.847,
+        1.29444
+      ],
+      "en": "Fort Canning Hill",
+      "zh": "福康寧"
+    },
+    "borobudur": {
+      "qid": "Q42798",
+      "at": [
+        110.20384,
+        -7.60793
+      ],
+      "en": "Borobudur Temple",
+      "zh": "婆羅浮屠"
+    },
+    "prambanan": {
+      "qid": "Q84403674",
+      "at": [
+        110.49167,
+        -7.75222
+      ],
+      "en": "Prambanan Temple Compounds",
+      "zh": "普兰巴南寺院群"
+    },
+    "bagan": {
+      "qid": "Q29317",
+      "at": [
+        94.86,
+        21.1725
+      ],
+      "en": "Bagan",
+      "zh": "蒲甘"
+    },
+    "ban-chiang": {
+      "qid": "Q584125",
+      "at": [
+        103.35833,
+        17.54861
+      ],
+      "en": "Ban Chiang",
+      "zh": "班清"
+    },
+    "my-son": {
+      "qid": "Q391406",
+      "at": [
+        108.12445,
+        15.76324
+      ],
+      "en": "Mỹ Sơn",
+      "zh": "美山圣地"
+    },
+    "ayutthaya": {
+      "qid": "Q1025100",
+      "at": [
+        100.55751,
+        14.35163
+      ],
+      "en": "Ayutthaya Historical Park",
+      "zh": "阿瑜陀耶古城"
+    },
+    "vat-phou": {
+      "qid": "Q579860",
+      "at": [
+        105.81572,
+        14.84892
+      ],
+      "en": "Vat Phou",
+      "zh": "瓦普寺"
+    },
+    "guangzhou": {
+      "qid": "Q16572",
+      "at": [
+        113.26,
+        23.13
+      ],
+      "en": "Guangzhou",
+      "zh": "广州市"
+    },
+    "muziris": {
+      "qid": "Q2974112",
+      "at": [
+        76.2,
+        10.15
+      ],
+      "en": "Muziris",
+      "zh": "穆济里斯"
+    },
+    "arikamedu": {
+      "qid": "Q2861278",
+      "at": [
+        79.81993,
+        11.90267
+      ],
+      "en": "Arikamedu",
+      "zh": "阿里卡梅杜"
+    },
+    "sg-botanic-gardens": {
+      "qid": "Q3046409",
+      "at": [
+        103.8162,
+        1.3151
+      ],
+      "en": "Singapore Botanic Gardens",
+      "zh": "新加坡植物园"
+    },
+    "acm": {
+      "qid": "Q633033",
+      "at": [
+        103.85139,
+        1.2875
+      ],
+      "en": "Asian Civilisations Museum",
+      "zh": "亚洲文明博物馆"
+    },
+    "nagapattinam": {
+      "qid": "Q695585",
+      "at": [
+        79.83333,
+        10.76667
+      ],
+      "en": "Nagapattinam",
+      "zh": "纳加帕蒂南",
+      "note": "Chola port; that the 1025 fleet sailed from here is not recorded"
+    },
+    "sambor": {
+      "qid": "Q4929336",
+      "at": [
+        106.09257,
+        12.98255
+      ],
+      "en": "Sambour District",
+      "zh": "三博县",
+      "note": "Sambour district, Kratie, where inscription K-127 was found in 1891 (Aczel); the exact find-spot is not given"
+    }
+  }
+}

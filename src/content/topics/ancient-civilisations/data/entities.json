@@ -1,0 +1,21 @@
+[
+  {"id": "sumer", "name": {"en": "Sumerian city-states", "zh": "苏美尔城邦"}, "bloc": "neutral", "joined": "-3200", "left": "-1250", "color": "token:holder-3"},
+  {"id": "egypt", "name": {"en": "Egypt", "zh": "埃及"}, "bloc": "neutral", "joined": "-3000", "left": "-0027", "color": "token:holder-2"},
+  {"id": "akkad", "name": {"en": "Akkadian Empire", "zh": "阿卡德帝国"}, "bloc": "neutral", "joined": "-2300", "left": "-2100", "color": "token:holder-4"},
+  {"id": "shang", "name": {"en": "Shang", "zh": "商"}, "bloc": "neutral", "joined": "-1250", "left": "-0508", "color": "token:holder-5"},
+  {"id": "achaemenid", "name": {"en": "Persian Empire", "zh": "波斯帝国"}, "bloc": "neutral", "joined": "-0508", "left": "-0323", "color": "token:holder-5"},
+  {"id": "zhou-states", "name": {"en": "Zhou-era states", "zh": "周代诸侯国"}, "bloc": "neutral", "joined": "-0508", "left": "-0221", "color": "token:holder-4"},
+  {"id": "rome", "name": {"en": "Rome", "zh": "罗马"}, "bloc": "neutral", "joined": "-0508", "left": "0476", "color": "token:holder-1"},
+  {"id": "maurya", "name": {"en": "Magadha and the Maurya Empire", "zh": "摩揭陀与孔雀王朝"}, "bloc": "neutral", "joined": "-0508", "left": "-0027", "color": "token:holder-6"},
+  {"id": "macedon", "name": {"en": "Alexander's empire", "zh": "亚历山大帝国"}, "bloc": "neutral", "joined": "-0323", "left": "-0260", "color": "token:holder-7"},
+  {"id": "qin", "name": {"en": "Qin", "zh": "秦"}, "bloc": "neutral", "joined": "-0221", "left": "-0027", "color": "token:holder-8"},
+  {"id": "han", "name": {"en": "Han", "zh": "汉"}, "bloc": "neutral", "joined": "-0027", "left": "0220", "color": "token:holder-3"},
+  {"id": "gupta", "name": {"en": "Gupta Empire", "zh": "笈多王朝"}, "bloc": "neutral", "joined": "0400", "left": "0600", "color": "token:holder-7"},
+  {"id": "funan", "name": {"en": "Funan", "zh": "扶南"}, "bloc": "neutral", "joined": "0150", "left": "0640", "color": "token:holder-8"},
+  {"id": "srivijaya", "name": {"en": "Srivijaya", "zh": "室利佛逝"}, "bloc": "neutral", "joined": "0674", "left": "1294", "color": "token:holder-6"},
+  {"id": "khmer", "name": {"en": "Khmer Empire", "zh": "高棉帝国"}, "bloc": "neutral", "joined": "0800", "left": "1540", "color": "token:holder-4"},
+  {"id": "sukhothai", "name": {"en": "Sukhothai", "zh": "素可泰"}, "bloc": "neutral", "joined": "1238", "left": "1438", "color": "token:holder-5"},
+  {"id": "majapahit", "name": {"en": "Majapahit", "zh": "满者伯夷"}, "bloc": "neutral", "joined": "1294", "left": "1519", "color": "token:holder-7"},
+  {"id": "melaka", "name": {"en": "Melaka", "zh": "马六甲"}, "bloc": "neutral", "joined": "1459", "left": "1512", "color": "token:holder-2"},
+  {"id": "traders", "name": {"en": "Sea traders of many peoples", "zh": "各族海上商人"}, "bloc": "neutral", "joined": "-0200", "color": "token:holder-3"}
+]

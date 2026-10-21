@@ -1,0 +1,11 @@
+{
+  "presets": [
+    { "id": "mesopotamia", "label": { "en": "Mesopotamia", "zh": "两河流域" }, "camera": { "center": [45.8, 31.6], "zoom": 6.4 } },
+    { "id": "nile-valley", "label": { "en": "Nile", "zh": "尼罗河" }, "camera": { "center": [31.3, 27.5], "zoom": 5.2 } },
+    { "id": "indus-valley", "label": { "en": "Indus", "zh": "印度河" }, "camera": { "center": [70.5, 27.5], "zoom": 5.0 } },
+    { "id": "china-plain", "label": { "en": "China", "zh": "黄河与长江" }, "camera": { "center": [113.0, 34.0], "zoom": 5.0 } },
+    { "id": "mediterranean", "label": { "en": "Mediterranean", "zh": "地中海" }, "camera": { "center": [20.0, 39.0], "zoom": 4.3 } },
+    { "id": "southeast-asia", "label": { "en": "Southeast Asia", "zh": "东南亚" }, "camera": { "center": [107.0, 4.0], "zoom": 4.4 } },
+    { "id": "straits", "label": { "en": "The Straits", "zh": "海峡" }, "camera": { "center": [102.5, 1.8], "zoom": 6.6 } }
+  ]
+}
