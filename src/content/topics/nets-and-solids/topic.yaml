@@ -1,0 +1,18 @@
+# Nets and solids: faces, nets of a cube, cuboid, prism and pyramid, and recognising the nets of a cylinder and a cone (MathScene lesson).
+# Spec: docs/39-nets-and-solids-content-spec.md.
+id: nets-and-solids
+title: { en: "Nets and solids", zh: "展开图与立体" }
+subtitle: { en: "Open a solid out flat, and fold a flat shape back into a solid", zh: "把立体摊平，再把平面图形折回立体" }
+subject: math
+levels: [P2, P4]
+tags: [geometry, singapore]
+moe: ["MOE 2021 P2 Geometry 2 (3D Shapes)", "MOE 2021 P4 Geometry 4 (Nets)"]
+mode: lesson
+engine: math-scene
+stage: svg
+theme: paper
+sensitivity: open
+note: { en: "Interactive lesson · aligned to the MOE 2021 syllabus", zh: "交互课 · 对照 MOE 2021 课纲" }
+status: published
+illustration: nets-and-solids
+shortTitle: { en: "Nets & solids", zh: "展开图与立体" }

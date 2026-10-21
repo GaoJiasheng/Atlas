@@ -1,0 +1,148 @@
+{
+  "terms": [
+    {
+      "id": "solid",
+      "term": { "en": "solid (3D shape)", "zh": "立体图形（立体）" },
+      "definition": {
+        "en": "A shape that takes up space, which you can hold and turn round. A cube and a cylinder are solids.",
+        "zh": "占着空间、可以拿在手里转着看的形状。正方体、圆柱都是立体图形。本课简称“立体”。"
+      },
+      "see": ["face", "net"]
+    },
+    {
+      "id": "face",
+      "term": { "en": "face", "zh": "面" },
+      "definition": {
+        "en": "A flat or curved side of a solid. A cube has 6 faces.",
+        "zh": "立体上平的或弯的一块。正方体有 6 个面。"
+      },
+      "see": ["flat-face", "curved-face", "edge"]
+    },
+    {
+      "id": "flat-face",
+      "term": { "en": "flat face", "zh": "平的面" },
+      "definition": {
+        "en": "A face that is flat, so it can lie flat on a table. A cylinder has 2 flat faces, and both are circles.",
+        "zh": "平平的面，可以平放在桌上。圆柱有 2 个平的面，都是圆形。"
+      },
+      "see": ["face", "curved-face"]
+    },
+    {
+      "id": "curved-face",
+      "term": { "en": "curved face", "zh": "曲面" },
+      "definition": {
+        "en": "A face that bends, so the solid can roll on it. A sphere has only a curved face. In this lesson the curved part of a cylinder, and of a cone, counts as 1 curved face.",
+        "zh": "弯的面，立体放在它上面会滚。球只有一个曲面。本课把圆柱、圆锥弯的那部分各算作 1 个曲面。"
+      },
+      "see": ["face", "flat-face", "cylinder", "cone"]
+    },
+    {
+      "id": "edge",
+      "term": { "en": "edge", "zh": "棱" },
+      "definition": {
+        "en": "The line where two faces of a solid meet. A net folds up along the edges.",
+        "zh": "立体上两个面相接的那条线。展开图就是沿着棱折起来的。"
+      },
+      "see": ["face", "net"]
+    },
+    {
+      "id": "vertex",
+      "term": { "en": "vertex (corner)", "zh": "顶点" },
+      "definition": {
+        "en": "A point where edges of a solid meet. The triangles of a pyramid meet at one vertex at the top. This lesson does not count vertices.",
+        "zh": "立体上几条棱碰在一起的点。棱锥的三角形尖碰在顶上的一个顶点。本课不数顶点。"
+      },
+      "see": ["edge", "pyramid"]
+    },
+    {
+      "id": "net",
+      "term": { "en": "net", "zh": "展开图" },
+      "definition": {
+        "en": "A flat shape that folds up into a solid. A net of a cube is 6 squares joined edge to edge; a cube has 11 different nets.",
+        "zh": "能折成立体的平面图形。正方体的展开图是 6 个边挨着边的正方形，一共有 11 种。"
+      },
+      "see": ["solid", "edge", "cube"]
+    },
+    {
+      "id": "cube",
+      "term": { "en": "cube", "zh": "正方体" },
+      "definition": {
+        "en": "A solid whose 6 faces are all squares of the same size. A dice is shaped like a cube.",
+        "zh": "6 个面都是一样大的正方形的立体。骰子就是正方体的形状。"
+      },
+      "see": ["cuboid", "net"]
+    },
+    {
+      "id": "cuboid",
+      "term": { "en": "cuboid", "zh": "长方体" },
+      "definition": {
+        "en": "A solid with 6 rectangle faces in 3 pairs; one pair may be squares. Many paper boxes are cuboids.",
+        "zh": "有 6 个长方形的面、面成 3 对的立体，其中一对也可以是正方形。很多纸盒是长方体。"
+      },
+      "see": ["cube", "opposite-faces"]
+    },
+    {
+      "id": "prism",
+      "term": { "en": "prism", "zh": "棱柱" },
+      "definition": {
+        "en": "A solid with two ends of the same shape and size, joined by rectangles. A triangular prism has triangles at its ends.",
+        "zh": "两个形状、大小都一样的底，用长方形连起来的立体。三棱柱的两个底是三角形。"
+      },
+      "see": ["pyramid", "base"]
+    },
+    {
+      "id": "pyramid",
+      "term": { "en": "pyramid", "zh": "棱锥" },
+      "definition": {
+        "en": "A solid with one base and triangles whose tips meet at one point. A square pyramid has a square base and 4 triangles.",
+        "zh": "一个底，加上尖碰在一个点上的三角形。四棱锥的底是正方形，侧面是 4 个三角形。"
+      },
+      "see": ["prism", "vertex", "base"]
+    },
+    {
+      "id": "cylinder",
+      "term": { "en": "cylinder", "zh": "圆柱" },
+      "definition": {
+        "en": "A solid with two equal circles joined by a curved face, like a tin. Its net is a rectangle and two circles.",
+        "zh": "两个一样大的圆，用一个曲面连起来，像罐头的形状。它的展开图是一个长方形和两个圆。"
+      },
+      "see": ["cone", "curved-face"]
+    },
+    {
+      "id": "cone",
+      "term": { "en": "cone", "zh": "圆锥" },
+      "definition": {
+        "en": "A solid with one circle and a curved face that narrows to a point, like an ice-cream cone. Its net is a circle and a shape like an open fan, called a sector.",
+        "zh": "一个圆和一个越往上越窄、收到尖上的曲面，像冰淇淋蛋筒。它的展开图是一个圆和一个像打开的扇子的形状，叫作扇形。"
+      },
+      "see": ["cylinder", "curved-face", "pyramid"]
+    },
+    {
+      "id": "sphere",
+      "term": { "en": "sphere", "zh": "球" },
+      "definition": {
+        "en": "A solid with only one curved face, like a ball. It has no net: no flat shape folds up into it.",
+        "zh": "只有一个曲面的立体，像皮球。它没有展开图：没有哪个平面图形能折成球。"
+      },
+      "see": ["curved-face"]
+    },
+    {
+      "id": "opposite-faces",
+      "term": { "en": "opposite faces", "zh": "相对的面" },
+      "definition": {
+        "en": "Two faces of a solid that face away from each other and never touch. The top and bottom of a cube are opposite faces.",
+        "zh": "立体上正对着、互不相挨的两个面。正方体的上面和下面是相对的面。"
+      },
+      "see": ["cube", "cuboid"]
+    },
+    {
+      "id": "base",
+      "term": { "en": "base (bottom)", "zh": "底面（底）" },
+      "definition": {
+        "en": "The face a solid stands on. A prism has two bases, its two ends; a pyramid has one.",
+        "zh": "立体放在桌上时贴着桌面的那个面。棱柱有两个底，就是它的两端；棱锥有一个底。"
+      },
+      "see": ["prism", "pyramid"]
+    }
+  ]
+}
