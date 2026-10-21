@@ -4,6 +4,31 @@ Offline native Blender pipeline for all six topics in `docs/16-muscles-content-s
 
 Round 9 acceptance, hashes, axis tables and pose links: [report.md](report.md).
 
+## Heart and lungs region (docs/40 §4.9)
+
+`heart-lungs` publishes `public/models/heart-and-lungs.glb` (25 nodes: airway, two
+lungs, bronchi, diaphragm, ribcage, merged heart, great / lung / out / back vessels,
+low-poly digestive context, leg muscles, skeleton, skin) on the static path, in the
+digestive topic's body frame. [heart-lungs/manifest.py](heart-lungs/manifest.py) checks
+every source name against the inventory and carries the `landmarks` and `routes`
+sections. Multi-segment tubes get one centreline per source segment, extracted before
+merging (`static_region.segment_centrelines`); `_U` is the station on each vertex's own
+segment. [heart-lungs/routes.py](heart-lungs/routes.py) chains them into the flow paths
+(`routes.json`, schematic legs and bridges flagged), with unit tests in
+`heart-lungs/test_routes.py` that `run.py` runs first.
+
+```sh
+python3 scripts/anatomy/manifests.py --topic heart-lungs
+python3 scripts/anatomy/run.py --topic heart-lungs      # tests, build, optimize, routes, audit, previews
+python3 scripts/anatomy/contact.py --topic heart-lungs
+python3 -m unittest discover -s scripts/anatomy/heart-lungs -p 'test_*.py'
+```
+
+`optimize_static.ts` writes each static model's attribution from its manifest's
+`changes` (and optional `attribution` lines); the digestive manifest carries the
+sentence its published model already had, so its bytes do not change. Results:
+[heart-lungs/report.md](heart-lungs/report.md), [preview-review.md](heart-lungs/preview-review.md).
+
 ## Round 10 digestive region
 
 `digestive` publishes `public/models/digestive-system.glb`. Its inventory-validated

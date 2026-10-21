@@ -9,7 +9,7 @@ from rig_rules import attachment_joint, joint_path, parents
 from skin_weights import inspect
 
 ROOT = Path(__file__).resolve().parent
-TOPICS = ('chest','back','shoulders','arms','legs','core','digestive')
+TOPICS = ('chest','back','shoulders','arms','legs','core','digestive','heart-lungs')
 
 
 def markdown(result):
@@ -42,7 +42,7 @@ def markdown(result):
 
 
 def append_report(topic, result):
-    if topic=='digestive': return  # native static audit already writes its full report
+    if topic in ('digestive','heart-lungs'): return  # native static audit already writes its full report
     path = ROOT/topic/'report.md'
     content = path.read_text().split('## Published skin-weight audit')[0].rstrip()
     path.write_text(content+'\n\n'+markdown(result))

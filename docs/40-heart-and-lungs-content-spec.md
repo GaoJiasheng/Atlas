@@ -1039,4 +1039,31 @@ SpaceScene / Model3DStage，paper 默认、cinema 可切。原型：`archetypes.
 
 ## 9. 施工记录 / 已知差距
 
-（空）
+### 9.1 网格管线 P1–P6（2026-10-21，Opus 代理，本机 native Blender 5.1.2）
+
+**产出**：`public/models/heart-and-lungs.glb`，1,952,300 字节、213,380 三角形、25 个节点、25 次绘制（软上限 4 MB / 350 k 以内）；`scripts/anatomy/heart-lungs/`：`manifest.py`（生成 `manifest.json` + `MANIFEST-READY`）、`centrelines.json`（131 段源中心线）、`landmarks.json`（32 个地标）、`organs.json`（坐标系，与 `digestive` 同一个脐中心、同一变换）、`routes.py` + `routes.json`（16 条流 81 条路径）、`test_routes.py`（19 个单测）、`report.md`（审计，PASS）、`preview-review.md`（逐图观察）。重跑：`python3 scripts/anatomy/manifests.py --topic heart-lungs && python3 scripts/anatomy/run.py --topic heart-lungs`（先跑单测，再 build → optimize → routes → 审计 → 预览 → 拼图；从清空的缓存跑通过，连跑两次 glb 字节相同：SHA-256 `a4e67065…81ff903a`）。另有 `tests/anatomy/heart-lungs-routes.test.ts`（`pnpm test` 里核 `routes.json` 的路径数、8 mm 步长、包含检查、血流环首尾相接）。
+
+**P1 注册**：`run.py`、`optimize.ts`、`common.py`、`audit.py`、`manifests.py`、`contact.py` 加 `heart-lungs`；`manifests.py` 改为先分派静态主题（以前没有 `drafts/` 就跑不了 `--topic digestive`）。`optimize_static.ts` 的版权文字改由 manifest 的 `changes` 字段（可选 `attribution` 附加行，留给 BP3D 退路）拼出；`digestive/manifest.py` 只加 `changes`（原句照抄）。**`digestive-system.glb` 的 SHA-256 不变**：`24ecf044…22263c95`，两次核对——用缓存的 digestive 原始 glb 重新编码，和用改过的共享代码（`static_region.py`、`centrelines.py`、`audit_static.py`、`preview_static.py`）从 FBX 完整重跑 `run.py --topic digestive`，字节都与已发布的相同，`digestive/` 下的 `centrelines.json`、`organs.json`、`report.md` 也无差异。
+
+**P2 manifest**：§3.4 每个源名都对 `inventory.json` 核到（缺件即报错，0 缺件），524 个源对象。节点 25 个 = §3.5 的 22 个网格零件（`leg-muscles` 是 `.l` / `.r` 两个真实节点）+ `skin-outline` + `skin-wire`。支气管按名字取到正好 28 段（正则要不分大小写：`Intermediate bronchus.r`）。`landmarks` 段：四个心腔与五个肺叶的面积加权质心（**合并前**量）、两个瓣口（`tricuspid`、`mitral`：两腔相对的开口环中点，心内示意路线用）、肺门（主支气管远端）、左右鼻孔（鼻腔黏膜最前端与皮肤 Nasal region 之间）、鼻道、后鼻孔、鼻咽、口咽、喉口、喉、左右膈顶、胸椎前缘（T5–T8）、肝门与肝中心、大腿（股直肌）与小腿（腓肠肌内侧头）。`routes` 段写每条路径的对象顺序与示意段种子点。
+
+**P3 build**：多段管（咽、气管、支气管、大血管、肺血管、出 / 回心脏的血管）**合并前**逐段抽中心线（`static_region.segment_centrelines`，3 mm 步长，按血流方向：气道从喉起、动脉从心起、静脉到心止）：81 段用表面测地环心，27 段用拓扑环（支气管），12 段用主轴截面，10 段由几块不相连的管拼成（肺动脉分叉、三条肺静脉、脾动静脉、肠系膜上动脉、大隐静脉 ×2、肝静脉），取最长的一块、其余留给路线（`<源名>#2`…），1 段（肠系膜上静脉）环到环的路径会折回，改用"从端环到封闭端的测地行走 + 局部截面质心"。降主动脉、腹腔干、肝静脉单凭到心脏的距离分不清两端，manifest 按上下游邻段定向。咽的三块是**封闭实体**，截面质心不是管腔，标 `schematic`（空气路线在咽里走地标）。管节点的 `_U` = 每个顶点在**自己那段**中心线上的位置（0 = 上游），逐段归一；审计用"最近源段表面"独立重算，0 个超差（咽 2 个，在三块交界）。胃照 `digestive` 补展示窗。骨骼预算从 30 k 提到 40 k（30 k 时采样误差 3.5 mm 超过 system 的 85 % 安全线，重试后反而 77 k；40 k 时为 46,298、3.39 mm < 4 mm），总数仍 ≈ 213 k。
+
+**P4 路线**（`routes.py`，仿 `food_route.py`；纯函数有单测）：16 条流 81 条路径——空气右 10 / 左 9（每条一个带 B 编号的段支气管：右 10、左 9，左肺"前内基底段"是 BVII / BVIII 的共干，不单算）、heart-right 2、to-lungs 5、exchange-lungs 5、from-lungs 5、heart-left 1、to-body 7、from-body 7、exchange-body 7、oxygen-lungs 5、co2-lungs 5、oxygen-muscle 4、co2-muscle 4（倒放）、food-in 4、food-route 1。每 8 mm 一点。
+- **示意段（`routes.json` 每条路径的 `schematic` 列表）**：鼻孔 → 鼻道 → 后鼻孔 → 咽后壁前 7 mm 的四点 → 喉口 → 喉 → 气管（源里鼻咽与口咽之间约 1 cm 空隙）；心内（腔静脉口 → 右心房 → 三尖瓣口 → 右心室 → 肺动脉干起点；左心房 → 二尖瓣口 → 左心室 → 升主动脉起点）；肺内（肺动脉末端 → 支气管旁 10 mm → 叶内交换点，叶质心两侧各 12 mm）；肝内（门静脉 → 肝门 → 肝中心 → 肝静脉）；交换弧（肺 5 条、全身 7 条，腕处只弓 4 mm）；肌肉里的氧 / 二氧化碳（从大腿 / 小腿动脉离肌肉最近处到肌腹）；小肠表面 → 肠系膜上静脉；以及下面的桥。
+- **桥（> 5 mm 的接口，直线、标示意）**：主动脉弓到头臂干 / 左颈总 / 左锁骨下的开口（5.5 / 13.9 / 8.1 mm，即主动脉半径）；胫后静脉止于腘静脉下 39 mm（源缺段，两腿）；四个段支气管的源网格离所属叶支气管 3–6 cm（右尖段、左尖后段、舌段两支、左上段），按解剖指定父段（Gray 1918；OpenStax A&P 2e 22.2），共 5 条路径。肺动脉分叉的第二块（`#2`，向右）接上后，到右肺的三条路线不再有桥。
+- **包含检查**：每点向路径法向发 6 条射线。追踪段（沿源中心线）要 6 条里 5 条打到自己的管：**2,362 点 0 个在外**；示意段要 4 / 6 打到所在器官（它们穿过真实开口）：**1,102 点 0 个在外**。15 个追踪点在 3–4 mm 细血管的急弯处偏出简化后的发布网格，已移到发布管截面中心（≤ 2.2 mm，`recentred` 逐点列出）。开口端点在管内 3 mm 处探测。
+- **血流环首尾相接**：heart-right → to-lungs → exchange-lungs → from-lungs → heart-left → to-body → exchange-body → from-body → heart-right，每条路径的终点到下一条流某条路径起点的最大间距 0.0 mm。
+- **与 §3.6 的出入**（均为几何上的必要选择，内容代理可改 manifest 重跑）：from-body 的臂路从桡静脉起（不是肱静脉），交换弧才落在手腕；腿的交换弧在踝（to-body 到踝），氧气进肌肉改从股动脉 / 胫后动脉离肌腹最近处出发；from-body 止于上、下腔静脉的入房口，heart-right 从那里起（两者相接）。
+
+**P5 优化与审计**（`audit_static.py` → `audit_organs.py`）：PASS。各节点三角形：nasal-cavity 3,987、pharynx 3,500、epiglottis 1,000、larynx 2,500、trachea 3,500、bronchi 12,000、lung-right 9,999、lung-left 8,000、diaphragm 5,000、ribcage 13,986、heart 10,000、great-vessels 3,186、lung-vessels 3,279、vessels-out 12,000、vessels-back 11,998、oesophagus 2,000、stomach 5,000、small-intestine 10,000、large-intestine 8,000、liver 5,000、leg-muscles.l 5,996、leg-muscles.r 5,998、skeleton 46,298、skin-outline 17,843、skin-wire 3,310。表面采样误差全在预算内；左右节点、命名、`asset.copyright`（含 Z-Anatomy、CC BY-SA 4.0、`changes` 原句、文件名）都核过；包围盒在 `cache/heart-lungs-static-audit.json`。**复核提示**（不影响路线）：肺动脉干、两条髂总动脉、肺动脉分叉的源中心线在分叉口那一端出管 4–7 mm（环心落在分叉的胯部），路线在这些地方都通过了包含检查。
+
+**P6 预览与人审**（`preview_organs.py`，逐图观察见 `preview-review.md`）：正面右肺三叶、左肺两叶带心切迹，心在两肺之间尖朝左下，膈右高左低，血管到双腕双踝连续，路线都在血管里。**心脏外壳结论：保留 Z-Anatomy 四腔合并，不需要 D2 的 BodyParts3D 4.0 退路。** 发布的心脏有 804 条开放边、29 个开口，但在建议的封面镜头（胸部近景，`position [0.36, 0.42, 0.92]`、`target [0.01, 0.29, -0.10]`、`fov 30`）和 INSIDE 预设距离（约 0.5 m）下单面渲染、亮底，**看不到任何透底的洞**：开口只是腔静脉、肺动脉干、肺静脉的接口（组装后被血管节点盖住），四腔之间的接缝重合、看起来是细缝而非空隙。封面距离上肋骨挡住大半个心，封面要 X-RAY 或肋骨 ghost（内容决定）。
+
+**署名（照肌肉系列的做法）**：glb 的 `asset.copyright` 已带；`THIRD-PARTY-NOTICES.md` 的 3D anatomy models 表加了本 glb，并加一节本 glb 的署名原文与"glb 及其导出几何（`centrelines.json`、`landmarks.json`、`routes.json`、写进 `parts.json` 的流路径、pivot、镜头 target）为 CC BY-SA 4.0"。**`LICENSE-CONTENT` 建议加的例外（未改，交主会话）**：
+
+> Exception — heart and lungs (topic `heart-and-lungs`): the 3D model (`public/models/heart-and-lungs.glb`), the geometry derived from it (`scripts/anatomy/heart-lungs/centrelines.json`, `landmarks.json`, `routes.json`, and the flow paths, pivots and camera targets taken from them into `src/content/topics/heart-and-lungs/data/parts.json`) and the screenshots under `docs/screenshots/heart-and-lungs/` are derived from Z-Anatomy (CC BY-SA 4.0) and are licensed CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/), with the attribution given in `THIRD-PARTY-NOTICES.md`. The texts of that topic (`src/content/topics/heart-and-lungs/chapters/**` and the other data files) stay under CC BY-NC-SA 4.0 as above.
+
+另：`digestive-system.glb` 至今不在 `THIRD-PARTY-NOTICES.md` 与 `LICENSE-CONTENT` 的例外里（它的署名在 glb 与主题 `SOURCES.md`），建议主会话一并补上。
+
+**留给内容 / 引擎的**：`scripts/geo/heart-and-lungs/build-flows.ts` 读 `routes.json` 写各流 `path` / `paths`（一条路径用 `path`）；姿态 pivot 取 `landmarks.json` 的 `hilum.r/l`、`thoracic-spine-front`、膈顶；镜头 target 取心、肺叶质心。鱼与植物的流是程序化零件，不在本管线。参考图（R1–R9）没下载（管线不需要）。

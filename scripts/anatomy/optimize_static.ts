@@ -11,10 +11,28 @@ import { z } from 'zod';
 const manifestSchema = z.object({
   expectedNodes: z.array(z.string()),
   output: z.string(),
+  /** The "Changes for Atlas" sentence of this model's attribution (one per manifest). */
+  changes: z.string().min(1),
+  /** Extra source lines, e.g. a BodyParts3D 4.0 replacement mesh, each naming its licence. */
+  attribution: z.array(z.string()).optional(),
   budgets: z.object({ total: z.object({
     maxBytes: z.number(), maxTriangles: z.number(), targetBytes: z.number(), targetTriangles: z.number(),
   }) }),
 });
+
+/** Z-Anatomy attribution (CC BY-SA 4.0, share-alike), the manifest's changes and the model's own licence. */
+export function staticCopyright(manifest: { output: string; changes: string; attribution?: string[] }): string {
+  return [
+    'Z-Anatomy — The open source atlas of anatomy, CC BY-SA 4.0',
+    '(https://github.com/LluisV/Z-Anatomy), derived from BodyParts3D, © The Database Center',
+    'for Life Science (CC BY-SA 2.1 Japan as stated by Z-Anatomy; BodyParts3D is now',
+    'CC BY 4.0, https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html).',
+    ...(manifest.attribution ?? []),
+    `Changes for Atlas: ${manifest.changes}`,
+    `Static meshes; no rig, weights, fibres or attachment sites. ${manifest.output} is licensed`,
+    'CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).',
+  ].join('\n');
+}
 const frameSchema = z.object({ floorY: z.number(), statureM: z.number() });
 
 interface Cloud {
@@ -88,7 +106,7 @@ export async function optimizeStatic(
     pattern: /^(POSITION|NORMAL)$/, quantizePosition: 16, quantizeNormal: 12,
   }), prune({ keepLeaves: true, keepAttributes: true }));
   document.createExtension(compression).setRequired(true).setEncoderOptions({ method: compression.EncoderMethod.QUANTIZE });
-  document.getRoot().getAsset().copyright = `Z-Anatomy — The open source atlas of anatomy, CC BY-SA 4.0\n(https://github.com/LluisV/Z-Anatomy), derived from BodyParts3D, © The Database Center\nfor Life Science (CC BY-SA 2.1 Japan as stated by Z-Anatomy; BodyParts3D is now\nCC BY 4.0, https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html).\nChanges for Atlas: structures selected for the digestive region and four other systems, simplified, renamed, centreline _U baked.\nStatic meshes; no rig, weights, fibres or attachment sites. digestive-system.glb is licensed\nCC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).`;
+  document.getRoot().getAsset().copyright = staticCopyright(manifest);
   const bytes = await io.writeBinary(document);
   const decoded = await io.readBinary(bytes);
   verify(decoded);

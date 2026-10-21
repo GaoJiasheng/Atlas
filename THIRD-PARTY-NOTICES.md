@@ -18,7 +18,7 @@ Atlas code is MIT (see `LICENSE`); Atlas content is CC BY-NC-SA 4.0 (see
 
 | Work | Use | Licence |
 |---|---|---|
-| Z-Anatomy — The open source atlas of anatomy (Gauthier Kervyn et al.; app by Lluís Vinent Juanico), https://github.com/LluisV/Z-Anatomy | muscle, bone and body-region meshes of the human muscle series (`public/models/muscles-*.glb`) | CC BY-SA 4.0 |
+| Z-Anatomy — The open source atlas of anatomy (Gauthier Kervyn et al.; app by Lluís Vinent Juanico), https://github.com/LluisV/Z-Anatomy | muscle, bone and body-region meshes of the human muscle series (`public/models/muscles-*.glb`); organ, airway and blood-vessel meshes of the heart-and-lungs topic (`public/models/heart-and-lungs.glb`) | CC BY-SA 4.0 |
 | BodyParts3D, © The Database Center for Life Science, https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html | the source Z-Anatomy derives from; FMA ids and cross-checks | CC BY 4.0 (Z-Anatomy states CC BY-SA 2.1 Japan for the version it used) |
 
 Attribution carried in each model's `asset.copyright`, in the topic's
@@ -39,6 +39,26 @@ The glb files, the geometry derived from them (`scripts/anatomy/<topic>/rig.json
 plates redrawn from model renders and the screenshots of the series are
 CC BY-SA 4.0, not CC BY-NC-SA (see the exception in `LICENSE-CONTENT`). The
 texts, muscle and exercise sheets remain under `LICENSE-CONTENT`.
+
+### Heart and lungs (`public/models/heart-and-lungs.glb`)
+
+The airway, lung, heart, blood-vessel, diaphragm, rib, digestive-context, leg-muscle,
+skeleton and skin meshes of the heart-and-lungs topic come from the same Z-Anatomy
+source (CC BY-SA 4.0). Attribution carried in the model's `asset.copyright`:
+
+```
+Z-Anatomy — The open source atlas of anatomy, CC BY-SA 4.0
+(https://github.com/LluisV/Z-Anatomy), derived from BodyParts3D, © The Database Center
+for Life Science (CC BY-SA 2.1 Japan as stated by Z-Anatomy; BodyParts3D is now
+CC BY 4.0, https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html).
+Changes for Atlas: structures selected for the respiratory and circulatory systems with digestive and skeletal context, simplified, renamed, centrelines and route landmarks baked.
+Static meshes; no rig, weights, fibres or attachment sites. heart-and-lungs.glb is licensed
+CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).
+```
+
+The glb and the geometry derived from it (`scripts/anatomy/heart-lungs/centrelines.json`,
+`landmarks.json`, `routes.json`, and the flow paths, pivots and camera targets taken
+from them into the topic's `parts.json`) are CC BY-SA 4.0.
 
 ## Fonts and libraries
 

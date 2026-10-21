@@ -7,6 +7,9 @@ from common import CACHE,ROOT,save_json
 
 
 def run(api):
+    if json.loads((ROOT/api.TOPIC_NAME/'manifest.json').read_text()).get('segmentCentrelines'):
+        from preview_organs import run as organs
+        return organs(api)
     scene,meshes,camera=api.setup()
     paths=json.loads((ROOT/api.TOPIC_NAME/'centrelines.json').read_text())['tubes']
     palette={'mouth':'B77F71','gullet-stomach':'C28B82','small-intestine':'CA9D83','large-intestine':'A99080','helpers':'9B8F62','body-systems':'8C9B90','context':'C2B6A0'}

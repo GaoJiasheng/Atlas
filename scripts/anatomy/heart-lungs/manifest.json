@@ -1,0 +1,3065 @@
+{
+  "topic": "heart-lungs",
+  "output": "heart-and-lungs.glb",
+  "rig": false,
+  "license": "CC BY-SA 4.0",
+  "changes": "structures selected for the respiratory and circulatory systems with digestive and skeletal context, simplified, renamed, centrelines and route landmarks baked.",
+  "coordinates": {
+    "unit": "m",
+    "up": "+Y",
+    "front": "+Z",
+    "left": "+X",
+    "centre": "umbilicus midline; same source centre and transform as the digestive topic (organs.json)"
+  },
+  "budgets": {
+    "tube": {
+      "maxDeviationM": 0.0015,
+      "triangleTargetRange": [
+        1000,
+        12000
+      ]
+    },
+    "organ": {
+      "maxDeviationM": 0.0015,
+      "triangleTargetRange": [
+        1000,
+        10000
+      ]
+    },
+    "system": {
+      "maxDeviationM": 0.004,
+      "triangleTargetRange": [
+        4000,
+        30000
+      ]
+    },
+    "skin": {
+      "maxDeviationM": 0.035,
+      "triangleTargetRange": [
+        3000,
+        18000
+      ]
+    },
+    "total": {
+      "targetBytes": 4000000,
+      "maxBytes": 8000000,
+      "targetTriangles": 350000,
+      "maxTriangles": 500000
+    }
+  },
+  "parts": [
+    {
+      "id": "nasal-cavity",
+      "objects": [
+        "Mucosa of nasal cavity"
+      ],
+      "system": "visceral",
+      "bodySystem": "respiratory",
+      "role": "organ",
+      "layer": "airway",
+      "sides": "unsided",
+      "triangleBudget": 4000,
+      "sourceNames": [
+        "Mucosa of nasal cavity"
+      ],
+      "minimumObjects": 1,
+      "sourceClosed": false,
+      "closed": false
+    },
+    {
+      "id": "pharynx",
+      "objects": [
+        "Laryngopharynx",
+        "Nasopharynx",
+        "Oropharynx"
+      ],
+      "system": "visceral",
+      "bodySystem": "respiratory",
+      "role": "tube",
+      "layer": "airway",
+      "sides": "unsided",
+      "triangleBudget": 3500,
+      "sourceNames": [
+        "Laryngopharynx",
+        "Nasopharynx",
+        "Oropharynx"
+      ],
+      "minimumObjects": 3,
+      "sourceClosed": true,
+      "closed": false,
+      "segmentCentrelines": {
+        "flow": "away",
+        "reference": [
+          "Mucosa of nasal cavity"
+        ],
+        "schematic": true
+      }
+    },
+    {
+      "id": "epiglottis",
+      "objects": [
+        "Epiglottis"
+      ],
+      "system": "visceral",
+      "bodySystem": "respiratory",
+      "role": "organ",
+      "layer": "airway",
+      "sides": "unsided",
+      "triangleBudget": 1000,
+      "sourceNames": [
+        "Epiglottis"
+      ],
+      "minimumObjects": 1,
+      "sourceClosed": true,
+      "closed": true
+    },
+    {
+      "id": "larynx",
+      "objects": [
+        "Cricoid cartilage",
+        "Thyroid cartilage"
+      ],
+      "system": "skeleton",
+      "bodySystem": "respiratory",
+      "role": "organ",
+      "layer": "airway",
+      "sides": "unsided",
+      "triangleBudget": 2500,
+      "sourceNames": [
+        "Cricoid cartilage",
+        "Thyroid cartilage"
+      ],
+      "minimumObjects": 2,
+      "sourceClosed": false,
+      "closed": false
+    },
+    {
+      "id": "trachea",
+      "objects": [
+        "Trachea"
+      ],
+      "system": "visceral",
+      "bodySystem": "respiratory",
+      "role": "tube",
+      "layer": "airway",
+      "sides": "unsided",
+      "triangleBudget": 3500,
+      "sourceNames": [
+        "Trachea"
+      ],
+      "minimumObjects": 1,
+      "sourceClosed": false,
+      "closed": false,
+      "segmentCentrelines": {
+        "flow": "away",
+        "reference": [
+          "Thyroid cartilage",
+          "Cricoid cartilage"
+        ]
+      }
+    },
+    {
+      "id": "bronchi",
+      "objects": [
+        "(Anteromedial basal segmental bronchus of left lung)",
+        "Anterior basal segmental bronchus of left lung (BVIII)",
+        "Anterior basal segmental bronchus of right lung (BVIII)",
+        "Anterior segmental bronchus of left lung (BIII)",
+        "Anterior segmental bronchus of right lung (BIII)",
+        "Apical segmental bronchus of right lung (BI)",
+        "Apicoposterior segmental bronchus of left lung (BI+BII)",
+        "Inferior lingular segmental bronchus of left lung (BV)",
+        "Intermediate bronchus",
+        "Lateral basal segmental bronchus of left lung (BIX)",
+        "Lateral basal segmental bronchus of right lung (BIX)",
+        "Lateral segmental bronchus of right lung (BIV)",
+        "Left inferior lobar bronchus",
+        "Left main bronchus",
+        "Left superior lobar bronchus",
+        "Medial basal segmental bronchus of left lung (BVII)",
+        "Medial basal segmental bronchus of right lung (BVII)",
+        "Medial segmental bronchus of right lung (BV)",
+        "Middle lobar bronchus",
+        "Posterior basal segmental bronchus of left lung (BX)",
+        "Posterior basal segmental bronchus of right lung (BX)",
+        "Posterior segmental bronchus of right lung (BII)",
+        "Right inferior lobar bronchus",
+        "Right main bronchus",
+        "Right superior lobar bronchus",
+        "Superior lingular segmental bronchus of left lung (BIV)",
+        "Superior segmental bronchus of left lung (BVI)",
+        "Superior segmental bronchus of right lung (BVI)"
+      ],
+      "system": "visceral",
+      "bodySystem": "respiratory",
+      "role": "tube",
+      "layer": "air-tubes",
+      "sides": "unsided",
+      "triangleBudget": 12000,
+      "sourceNames": [
+        "(Anteromedial basal segmental bronchus of left lung)",
+        "Anterior basal segmental bronchus of left lung (BVIII)",
+        "Anterior basal segmental bronchus of right lung (BVIII)",
+        "Anterior segmental bronchus of left lung (BIII)",
+        "Anterior segmental bronchus of right lung (BIII)",
+        "Apical segmental bronchus of right lung (BI)",
+        "Apicoposterior segmental bronchus of left lung (BI+BII)",
+        "Inferior lingular segmental bronchus of left lung (BV)",
+        "Intermediate bronchus.r",
+        "Lateral basal segmental bronchus of left lung (BIX)",
+        "Lateral basal segmental bronchus of right lung (BIX)",
+        "Lateral segmental bronchus of right lung (BIV)",
+        "Left inferior lobar bronchus",
+        "Left main bronchus",
+        "Left superior lobar bronchus",
+        "Medial basal segmental bronchus of left lung (BVII)",
+        "Medial basal segmental bronchus of right lung (BVII)",
+        "Medial segmental bronchus of right lung (BV)",
+        "Middle lobar bronchus.r",
+        "Posterior basal segmental bronchus of left lung (BX)",
+        "Posterior basal segmental bronchus of right lung (BX)",
+        "Posterior segmental bronchus of right lung (BII)",
+        "Right inferior lobar bronchus",
+        "Right main bronchus",
+        "Right superior lobar bronchus",
+        "Superior lingular segmental bronchus of left lung (BIV)",
+        "Superior segmental bronchus of left lung (BVI)",
+        "Superior segmental bronchus of right lung (BVI)"
+      ],
+      "minimumObjects": 28,
+      "sourceClosed": false,
+      "closed": false,
+      "segmentCentrelines": {
+        "flow": "away",
+        "reference": [
+          "Thyroid cartilage",
+          "Cricoid cartilage"
+        ]
+      }
+    },
+    {
+      "id": "lung-right",
+      "objects": [
+        "Inferior lobe of right lung",
+        "Middle lobe of right lung",
+        "Superior lobe of right lung"
+      ],
+      "system": "visceral",
+      "bodySystem": "respiratory",
+      "role": "organ",
+      "layer": "lung-pair",
+      "sides": "unsided",
+      "triangleBudget": 10000,
+      "sourceNames": [
+        "Inferior lobe of right lung",
+        "Middle lobe of right lung",
+        "Superior lobe of right lung"
+      ],
+      "minimumObjects": 3,
+      "sourceClosed": false,
+      "closed": false
+    },
+    {
+      "id": "lung-left",
+      "objects": [
+        "Inferior lobe of left lung",
+        "Superior lobe of left lung"
+      ],
+      "system": "visceral",
+      "bodySystem": "respiratory",
+      "role": "organ",
+      "layer": "lung-pair",
+      "sides": "unsided",
+      "triangleBudget": 8000,
+      "sourceNames": [
+        "Inferior lobe of left lung",
+        "Superior lobe of left lung"
+      ],
+      "minimumObjects": 2,
+      "sourceClosed": false,
+      "closed": false
+    },
+    {
+      "id": "diaphragm",
+      "objects": [
+        "Diaphragm"
+      ],
+      "system": "muscles",
+      "bodySystem": "muscular",
+      "role": "organ",
+      "layer": "breathing-movers",
+      "sides": "unsided",
+      "triangleBudget": 5000,
+      "sourceNames": [
+        "Diaphragm"
+      ],
+      "minimumObjects": 1,
+      "sourceClosed": true,
+      "closed": true
+    },
+    {
+      "id": "ribcage",
+      "objects": [
+        "Body of sternum",
+        "Costal cartilage of eighth rib",
+        "Costal cartilage of fifth rib",
+        "Costal cartilage of first rib",
+        "Costal cartilage of fourth rib",
+        "Costal cartilage of ninth rib",
+        "Costal cartilage of second rib",
+        "Costal cartilage of seventh rib",
+        "Costal cartilage of sixth rib",
+        "Costal cartilage of tenth rib",
+        "Costal cartilage of third rib",
+        "Eighth rib",
+        "Eleventh rib",
+        "Fifth rib",
+        "First rib",
+        "Fourth rib",
+        "Manubrium of sternum",
+        "Ninth rib",
+        "Second rib",
+        "Seventh rib",
+        "Sixth rib",
+        "Tenth rib",
+        "Third rib",
+        "Twelfth rib",
+        "Xiphoid process"
+      ],
+      "system": "skeleton",
+      "bodySystem": "skeletal",
+      "role": "system",
+      "layer": "breathing-movers",
+      "sides": "unsided",
+      "triangleBudget": 14000,
+      "sourceNames": [
+        "Body of sternum",
+        "Costal cartilage of eighth rib.l",
+        "Costal cartilage of eighth rib.r",
+        "Costal cartilage of fifth rib.l",
+        "Costal cartilage of fifth rib.r",
+        "Costal cartilage of first rib.l",
+        "Costal cartilage of first rib.r",
+        "Costal cartilage of fourth rib.l",
+        "Costal cartilage of fourth rib.r",
+        "Costal cartilage of ninth rib.l",
+        "Costal cartilage of ninth rib.r",
+        "Costal cartilage of second rib.l",
+        "Costal cartilage of second rib.r",
+        "Costal cartilage of seventh rib.l",
+        "Costal cartilage of seventh rib.r",
+        "Costal cartilage of sixth rib.l",
+        "Costal cartilage of sixth rib.r",
+        "Costal cartilage of tenth rib.l",
+        "Costal cartilage of tenth rib.r",
+        "Costal cartilage of third rib.l",
+        "Costal cartilage of third rib.r",
+        "Eighth rib.l",
+        "Eighth rib.r",
+        "Eleventh rib.l",
+        "Eleventh rib.r",
+        "Fifth rib.l",
+        "Fifth rib.r",
+        "First rib.l",
+        "First rib.r",
+        "Fourth rib.l",
+        "Fourth rib.r",
+        "Manubrium of sternum",
+        "Ninth rib.l",
+        "Ninth rib.r",
+        "Second rib.l",
+        "Second rib.r",
+        "Seventh rib.l",
+        "Seventh rib.r",
+        "Sixth rib.l",
+        "Sixth rib.r",
+        "Tenth rib.l",
+        "Tenth rib.r",
+        "Third rib.l",
+        "Third rib.r",
+        "Twelfth rib.l",
+        "Twelfth rib.r",
+        "Xiphoid process"
+      ],
+      "minimumObjects": 47,
+      "sourceClosed": false,
+      "closed": false
+    },
+    {
+      "id": "heart",
+      "objects": [
+        "Left atrium",
+        "Left ventricle",
+        "Right atrium",
+        "Right ventricle"
+      ],
+      "system": "cardiovascular",
+      "bodySystem": "circulatory",
+      "role": "organ",
+      "layer": "heart-group",
+      "sides": "unsided",
+      "triangleBudget": 10000,
+      "sourceNames": [
+        "Left atrium",
+        "Left ventricle",
+        "Right atrium",
+        "Right ventricle"
+      ],
+      "minimumObjects": 4,
+      "sourceClosed": false,
+      "closed": false
+    },
+    {
+      "id": "great-vessels",
+      "objects": [
+        "Abdominal aorta",
+        "Aortic arch",
+        "Ascending aorta",
+        "Brachiocephalic trunk",
+        "Inferior vena cava (abdominal part)",
+        "Inferior vena cava (thoracic part)",
+        "Left brachiocephalic vein",
+        "Right brachiocephalic vein",
+        "Superior vena cava",
+        "Thoracic aorta"
+      ],
+      "system": "cardiovascular",
+      "bodySystem": "circulatory",
+      "role": "tube",
+      "layer": "heart-group",
+      "sides": "unsided",
+      "triangleBudget": 5000,
+      "sourceNames": [
+        "Abdominal aorta",
+        "Aortic arch",
+        "Ascending aorta",
+        "Brachiocephalic trunk",
+        "Inferior vena cava (abdominal part)",
+        "Inferior vena cava (thoracic part)",
+        "Left brachiocephalic vein",
+        "Right brachiocephalic vein",
+        "Superior vena cava",
+        "Thoracic aorta"
+      ],
+      "minimumObjects": 10,
+      "sourceClosed": false,
+      "closed": false,
+      "segmentCentrelines": {
+        "flow": "by-name",
+        "reference": [
+          "Left atrium",
+          "Right atrium",
+          "Left ventricle",
+          "Right ventricle"
+        ],
+        "upstreamBySource": {
+          "Thoracic aorta": [
+            "Aortic arch"
+          ]
+        },
+        "flowBySource": {
+          "Abdominal aorta": "away",
+          "Aortic arch": "away",
+          "Ascending aorta": "away",
+          "Brachiocephalic trunk": "away",
+          "Inferior vena cava (abdominal part)": "toward",
+          "Inferior vena cava (thoracic part)": "toward",
+          "Left brachiocephalic vein": "toward",
+          "Right brachiocephalic vein": "toward",
+          "Superior vena cava": "toward",
+          "Thoracic aorta": "away"
+        }
+      }
+    },
+    {
+      "id": "lung-vessels",
+      "objects": [
+        "Bifurcation of pulmonary trunk",
+        "Left inferior pulmonary vein",
+        "Left pulmonary artery",
+        "Left superior pulmonary vein",
+        "Pulmonary trunk",
+        "Right inferior pulmonary vein",
+        "Right pulmonary artery",
+        "Right superior pulmonary vein"
+      ],
+      "system": "cardiovascular",
+      "bodySystem": "circulatory",
+      "role": "tube",
+      "layer": "heart-group",
+      "sides": "unsided",
+      "triangleBudget": 4000,
+      "sourceNames": [
+        "Bifurcation of pulmonary trunk",
+        "Left inferior pulmonary vein",
+        "Left pulmonary artery",
+        "Left superior pulmonary vein",
+        "Pulmonary trunk",
+        "Right inferior pulmonary vein",
+        "Right pulmonary artery",
+        "Right superior pulmonary vein"
+      ],
+      "minimumObjects": 8,
+      "sourceClosed": false,
+      "closed": false,
+      "segmentCentrelines": {
+        "flow": "by-name",
+        "reference": [
+          "Left atrium",
+          "Right atrium",
+          "Left ventricle",
+          "Right ventricle"
+        ],
+        "flowBySource": {
+          "Bifurcation of pulmonary trunk": "away",
+          "Left inferior pulmonary vein": "toward",
+          "Left pulmonary artery": "away",
+          "Left superior pulmonary vein": "toward",
+          "Pulmonary trunk": "away",
+          "Right inferior pulmonary vein": "toward",
+          "Right pulmonary artery": "away",
+          "Right superior pulmonary vein": "toward"
+        }
+      }
+    },
+    {
+      "id": "vessels-out",
+      "objects": [
+        "Anterior tibial artery",
+        "Axillary artery",
+        "Brachial artery",
+        "Coeliac trunk",
+        "Common hepatic artery",
+        "Common iliac artery",
+        "Deep femoral artery",
+        "Dorsalis pedis artery",
+        "External carotid artery",
+        "External iliac artery",
+        "Femoral artery",
+        "Internal carotid artery",
+        "Internal iliac artery",
+        "Left common carotid artery",
+        "Left subclavian artery",
+        "Popliteal artery",
+        "Posterior tibial artery",
+        "Proper hepatic artery",
+        "Radial artery",
+        "Right common carotid artery",
+        "Right subclavian artery",
+        "Splenic artery",
+        "Superior mesenteric artery",
+        "Ulnar artery"
+      ],
+      "system": "cardiovascular",
+      "bodySystem": "circulatory",
+      "role": "tube",
+      "layer": "body-vessels",
+      "sides": "unsided",
+      "triangleBudget": 12000,
+      "sourceNames": [
+        "Anterior tibial artery.l",
+        "Anterior tibial artery.r",
+        "Axillary artery.l",
+        "Axillary artery.r",
+        "Brachial artery.l",
+        "Brachial artery.r",
+        "Coeliac trunk",
+        "Common hepatic artery",
+        "Common iliac artery.l",
+        "Common iliac artery.r",
+        "Deep femoral artery.l",
+        "Deep femoral artery.r",
+        "Dorsalis pedis artery.l",
+        "Dorsalis pedis artery.r",
+        "External carotid artery.l",
+        "External carotid artery.r",
+        "External iliac artery.l",
+        "External iliac artery.r",
+        "Femoral artery.l",
+        "Femoral artery.r",
+        "Internal carotid artery.l",
+        "Internal carotid artery.r",
+        "Internal iliac artery.l",
+        "Internal iliac artery.r",
+        "Left common carotid artery",
+        "Left subclavian artery",
+        "Popliteal artery.l",
+        "Popliteal artery.r",
+        "Posterior tibial artery.l",
+        "Posterior tibial artery.r",
+        "Proper hepatic artery",
+        "Radial artery.l",
+        "Radial artery.r",
+        "Right common carotid artery",
+        "Right subclavian artery",
+        "Splenic artery",
+        "Superior mesenteric artery",
+        "Ulnar artery.l",
+        "Ulnar artery.r"
+      ],
+      "minimumObjects": 39,
+      "sourceClosed": false,
+      "closed": false,
+      "segmentCentrelines": {
+        "flow": "away",
+        "reference": [
+          "Left atrium",
+          "Right atrium",
+          "Left ventricle",
+          "Right ventricle"
+        ],
+        "upstreamBySource": {
+          "Coeliac trunk": [
+            "Abdominal aorta"
+          ]
+        }
+      }
+    },
+    {
+      "id": "vessels-back",
+      "objects": [
+        "Anterior tibial veins",
+        "Axillary vein",
+        "Basilic vein",
+        "Brachial veins",
+        "Cephalic vein",
+        "Common iliac vein",
+        "Deep femoral vein",
+        "External iliac vein",
+        "External jugular vein",
+        "Femoral vein",
+        "Great saphenous vein",
+        "Hepatic portal vein",
+        "Hepatic veins",
+        "Internal iliac vein",
+        "Internal jugular vein",
+        "Left subclavian vein",
+        "Popliteal vein",
+        "Posterior tibial veins",
+        "Radial veins",
+        "Right subclavian vein",
+        "Small saphenous vein",
+        "Splenic vein",
+        "Superior mesenteric vein",
+        "Ulnar veins"
+      ],
+      "system": "cardiovascular",
+      "bodySystem": "circulatory",
+      "role": "tube",
+      "layer": "body-vessels",
+      "sides": "unsided",
+      "triangleBudget": 12000,
+      "sourceNames": [
+        "Anterior tibial veins.l",
+        "Anterior tibial veins.r",
+        "Axillary vein.l",
+        "Axillary vein.r",
+        "Basilic vein.l",
+        "Basilic vein.r",
+        "Brachial veins.l",
+        "Brachial veins.r",
+        "Cephalic vein.l",
+        "Cephalic vein.r",
+        "Common iliac vein.l",
+        "Common iliac vein.r",
+        "Deep femoral vein.l",
+        "Deep femoral vein.r",
+        "External iliac vein.l",
+        "External iliac vein.r",
+        "External jugular vein.l",
+        "External jugular vein.r",
+        "Femoral vein.l",
+        "Femoral vein.r",
+        "Great saphenous vein.l",
+        "Great saphenous vein.r",
+        "Hepatic portal vein",
+        "Hepatic veins",
+        "Internal iliac vein.l",
+        "Internal iliac vein.r",
+        "Internal jugular vein.l",
+        "Internal jugular vein.r",
+        "Left subclavian vein",
+        "Popliteal vein.l",
+        "Popliteal vein.r",
+        "Posterior tibial veins.l",
+        "Posterior tibial veins.r",
+        "Radial veins.l",
+        "Radial veins.r",
+        "Right subclavian vein",
+        "Small saphenous vein.l",
+        "Small saphenous vein.r",
+        "Splenic vein",
+        "Superior mesenteric vein",
+        "Ulnar veins.l",
+        "Ulnar veins.r"
+      ],
+      "minimumObjects": 42,
+      "sourceClosed": false,
+      "closed": false,
+      "segmentCentrelines": {
+        "flow": "toward",
+        "reference": [
+          "Left atrium",
+          "Right atrium",
+          "Left ventricle",
+          "Right ventricle"
+        ],
+        "downstreamBySource": {
+          "Hepatic veins": [
+            "Inferior vena cava (thoracic part)"
+          ]
+        }
+      }
+    },
+    {
+      "id": "oesophagus",
+      "objects": [
+        "Oesophagus"
+      ],
+      "system": "visceral",
+      "bodySystem": "digestive",
+      "role": "organ",
+      "layer": "digestion",
+      "sides": "unsided",
+      "triangleBudget": 2000,
+      "sourceNames": [
+        "Oesophagus"
+      ],
+      "minimumObjects": 1,
+      "sourceClosed": true,
+      "closed": true
+    },
+    {
+      "id": "stomach",
+      "objects": [
+        "Stomach"
+      ],
+      "system": "visceral",
+      "bodySystem": "digestive",
+      "role": "organ",
+      "layer": "digestion",
+      "sides": "unsided",
+      "triangleBudget": 5000,
+      "sourceNames": [
+        "Stomach"
+      ],
+      "minimumObjects": 1,
+      "sourceClosed": false,
+      "closed": false,
+      "fillOpenings": [
+        {
+          "near": [
+            0.06,
+            0.135,
+            -0.034
+          ],
+          "maxRadiusM": 0.04,
+          "reason": "display window in the anterior wall of the source stomach"
+        }
+      ]
+    },
+    {
+      "id": "small-intestine",
+      "objects": [
+        "Duodenum",
+        "Jejunum"
+      ],
+      "system": "visceral",
+      "bodySystem": "digestive",
+      "role": "organ",
+      "layer": "digestion",
+      "sides": "unsided",
+      "triangleBudget": 10000,
+      "sourceNames": [
+        "Duodenum",
+        "Jejunum"
+      ],
+      "minimumObjects": 2,
+      "sourceClosed": false,
+      "closed": false
+    },
+    {
+      "id": "large-intestine",
+      "objects": [
+        "Ascending colon",
+        "Descending colon",
+        "Sigmoid colon",
+        "Transverse colon",
+        "Vermiform appendix"
+      ],
+      "system": "visceral",
+      "bodySystem": "digestive",
+      "role": "organ",
+      "layer": "digestion",
+      "sides": "unsided",
+      "triangleBudget": 8000,
+      "sourceNames": [
+        "Ascending colon",
+        "Descending colon",
+        "Sigmoid colon",
+        "Transverse colon",
+        "Vermiform appendix"
+      ],
+      "minimumObjects": 5,
+      "sourceClosed": true,
+      "closed": true
+    },
+    {
+      "id": "liver",
+      "objects": [
+        "Liver"
+      ],
+      "system": "visceral",
+      "bodySystem": "digestive",
+      "role": "organ",
+      "layer": "digestion",
+      "sides": "unsided",
+      "triangleBudget": 5000,
+      "sourceNames": [
+        "Liver"
+      ],
+      "minimumObjects": 1,
+      "sourceClosed": false,
+      "closed": false
+    },
+    {
+      "id": "leg-muscles",
+      "objects": [
+        "Lateral head of gastrocnemius",
+        "Medial head of gastrocnemius",
+        "Rectus femoris muscle",
+        "Vastus lateralis muscle",
+        "Vastus medialis muscle"
+      ],
+      "system": "muscles",
+      "bodySystem": "muscular",
+      "role": "organ",
+      "layer": "leg-muscle-group",
+      "sides": "bilateral",
+      "triangleBudget": 6000,
+      "sourceNames": [
+        "Lateral head of gastrocnemius.l",
+        "Lateral head of gastrocnemius.r",
+        "Medial head of gastrocnemius.l",
+        "Medial head of gastrocnemius.r",
+        "Rectus femoris muscle.l",
+        "Rectus femoris muscle.r",
+        "Vastus lateralis muscle.l",
+        "Vastus lateralis muscle.r",
+        "Vastus medialis muscle.l",
+        "Vastus medialis muscle.r"
+      ],
+      "minimumObjects": 5,
+      "sourceClosed": false,
+      "closed": false
+    },
+    {
+      "id": "skeleton",
+      "objects": [
+        "Atlas (C1)",
+        "Axis (C2)",
+        "Calcaneus",
+        "Clavicle",
+        "Coccyx",
+        "Ethmoid bone",
+        "Femur",
+        "Fibula",
+        "Frontal bone",
+        "Hip bone",
+        "Humerus",
+        "Lacrimal bone",
+        "Mandible",
+        "Maxilla",
+        "Nasal bone",
+        "Occipital bone",
+        "Palatine bone",
+        "Parietal bone",
+        "Patella",
+        "Radius",
+        "Sacrum",
+        "Scapula",
+        "Sphenoid bone",
+        "Talus",
+        "Temporal bone",
+        "Tibia",
+        "Ulna",
+        "Vertebra C3",
+        "Vertebra C4",
+        "Vertebra C5",
+        "Vertebra C6",
+        "Vertebra C7",
+        "Vertebra L1",
+        "Vertebra L2",
+        "Vertebra L3",
+        "Vertebra L4",
+        "Vertebra L5",
+        "Vertebra T1",
+        "Vertebra T10",
+        "Vertebra T11",
+        "Vertebra T12",
+        "Vertebra T2",
+        "Vertebra T3",
+        "Vertebra T4",
+        "Vertebra T5",
+        "Vertebra T6",
+        "Vertebra T7",
+        "Vertebra T8",
+        "Vertebra T9",
+        "Vomer",
+        "Zygomatic bone"
+      ],
+      "system": "skeleton",
+      "bodySystem": "skeletal",
+      "role": "system",
+      "layer": "skeleton-context",
+      "sides": "unsided",
+      "triangleBudget": 40000,
+      "sourceNames": [
+        "Atlas (C1)",
+        "Axis (C2)",
+        "Calcaneus.l",
+        "Calcaneus.r",
+        "Clavicle.l",
+        "Clavicle.r",
+        "Coccyx",
+        "Ethmoid bone",
+        "Femur.l",
+        "Femur.r",
+        "Fibula.l",
+        "Fibula.r",
+        "Frontal bone",
+        "Hip bone.l",
+        "Hip bone.r",
+        "Humerus.l",
+        "Humerus.r",
+        "Lacrimal bone.l",
+        "Lacrimal bone.r",
+        "Mandible",
+        "Maxilla.l",
+        "Maxilla.r",
+        "Nasal bone.l",
+        "Nasal bone.r",
+        "Occipital bone",
+        "Palatine bone.l",
+        "Palatine bone.r",
+        "Parietal bone.l",
+        "Parietal bone.r",
+        "Patella.l",
+        "Patella.r",
+        "Radius.l",
+        "Radius.r",
+        "Sacrum",
+        "Scapula.l",
+        "Scapula.r",
+        "Sphenoid bone",
+        "Talus.l",
+        "Talus.r",
+        "Temporal bone.l",
+        "Temporal bone.r",
+        "Tibia.l",
+        "Tibia.r",
+        "Ulna.l",
+        "Ulna.r",
+        "Vertebra C3",
+        "Vertebra C4",
+        "Vertebra C5",
+        "Vertebra C6",
+        "Vertebra C7",
+        "Vertebra L1",
+        "Vertebra L2",
+        "Vertebra L3",
+        "Vertebra L4",
+        "Vertebra L5",
+        "Vertebra T1",
+        "Vertebra T10",
+        "Vertebra T11",
+        "Vertebra T12",
+        "Vertebra T2",
+        "Vertebra T3",
+        "Vertebra T4",
+        "Vertebra T5",
+        "Vertebra T6",
+        "Vertebra T7",
+        "Vertebra T8",
+        "Vertebra T9",
+        "Vomer",
+        "Zygomatic bone.l",
+        "Zygomatic bone.r"
+      ],
+      "minimumObjects": 70,
+      "sourceClosed": false,
+      "closed": false
+    },
+    {
+      "id": "skin-outline",
+      "objects": [
+        "Anal region",
+        "Angle of mouth",
+        "Anterior notch of auricle",
+        "Anterior region of ankle",
+        "Anterior region of arm",
+        "Anterior region of elbow",
+        "Anterior region of forearm",
+        "Anterior region of knee",
+        "Anterior region of leg",
+        "Anterior region of thigh",
+        "Anterior region of wrist",
+        "Antihelix",
+        "Antitragus",
+        "Apex of auricle",
+        "Auricular region",
+        "Auricular tubercle",
+        "Buccal region",
+        "Carotid triangle",
+        "Cavity of concha",
+        "Concha of auricle",
+        "Crura of antihelix",
+        "Cubital fossa",
+        "Cymba conchae",
+        "Deltoid region",
+        "Deltopectoral triangle",
+        "Distal transverse arch of foot",
+        "Dorsal surfaces of digits of foot",
+        "Dorsal surfaces of digits of hand",
+        "Dorsum of foot",
+        "Dorsum of hand",
+        "Eminentia conchae",
+        "Eminentia fossae triangularis",
+        "Eminentia scaphae",
+        "Epigastric region",
+        "Eyebrow",
+        "Femoral triangle",
+        "Fossa antihelica",
+        "Frontal region",
+        "Gluteal fold",
+        "Gluteal region",
+        "Greater supraclavicular fossa",
+        "Hallucial eminence",
+        "Heel region",
+        "Helix",
+        "Hip region",
+        "Hypochondriac region",
+        "Hypogastric region",
+        "Infra-orbital region",
+        "Infraclavicular fossa",
+        "Inframammary region",
+        "Infrascapular region",
+        "Inguinal region",
+        "Interscapular region",
+        "Intertragic incisure",
+        "Labial commissure",
+        "Lateral bicipital groove",
+        "Lateral border of foot",
+        "Lateral border of forearm",
+        "Lateral malleolus",
+        "Lateral part of longitudinal arch of foot",
+        "Lateral region of abdomen",
+        "Lateral region of neck",
+        "Lateral region of thorax",
+        "Lateral retromalleolar region",
+        "Lesser supraclavicular fossa",
+        "Lobule of auricle",
+        "Lumbar region",
+        "Mammary region",
+        "Mastoid region",
+        "Medial bicipital groove",
+        "Medial border of foot",
+        "Medial border of forearm",
+        "Medial malleolus",
+        "Medial part of longitudinal arch of foot",
+        "Medial retromalleolar region",
+        "Mental region",
+        "Mentolabial sulcus",
+        "Metatarsal region",
+        "Muscular triangle",
+        "Nasal region",
+        "Nasolabial sulcus",
+        "Occipital region",
+        "Oral region",
+        "Orbital region",
+        "Palm",
+        "Palmar surfaces of digits of hand",
+        "Parietal region",
+        "Parotideomasseteric region",
+        "Pectoral region",
+        "Philtrum",
+        "Plantar surfaces of digits of foot",
+        "Popliteal fossa",
+        "Posterior auricular groove",
+        "Posterior region of arm",
+        "Posterior region of elbow",
+        "Posterior region of forearm",
+        "Posterior region of knee",
+        "Posterior region of leg",
+        "Posterior region of neck",
+        "Posterior region of thigh",
+        "Posterior region of wrist",
+        "Presternal region",
+        "Proximal transverse arch of foot",
+        "Radial foveola",
+        "Sacral region",
+        "Scapha",
+        "Scapular region",
+        "Sole",
+        "Sternocleidomastoid region",
+        "Submandibular triangle",
+        "Submental triangle",
+        "Temporal region",
+        "Tragus",
+        "Triangle of auscultation",
+        "Triangular fossa",
+        "Tubercle of upper lip",
+        "Umbilical region",
+        "Umbilicus",
+        "Urogenital region",
+        "Vertebral region",
+        "Zygomatic region"
+      ],
+      "system": "regions",
+      "bodySystem": "integumentary",
+      "role": "skin",
+      "layer": "context",
+      "sides": "unsided",
+      "triangleBudget": 18000,
+      "sourceNames": [
+        "Anal region.l",
+        "Anal region.r",
+        "Angle of mouth.l",
+        "Angle of mouth.r",
+        "Anterior notch of auricle.l",
+        "Anterior notch of auricle.r",
+        "Anterior region of ankle.l",
+        "Anterior region of ankle.r",
+        "Anterior region of arm.l",
+        "Anterior region of arm.r",
+        "Anterior region of elbow.l",
+        "Anterior region of elbow.r",
+        "Anterior region of forearm.l",
+        "Anterior region of forearm.r",
+        "Anterior region of knee.l",
+        "Anterior region of knee.r",
+        "Anterior region of leg.l",
+        "Anterior region of leg.r",
+        "Anterior region of thigh.l",
+        "Anterior region of thigh.r",
+        "Anterior region of wrist.l",
+        "Anterior region of wrist.r",
+        "Antihelix.l",
+        "Antihelix.r",
+        "Antitragus.l",
+        "Antitragus.r",
+        "Apex of auricle.l",
+        "Apex of auricle.r",
+        "Auricular region.l",
+        "Auricular region.r",
+        "Auricular tubercle.l",
+        "Auricular tubercle.r",
+        "Buccal region.l",
+        "Buccal region.r",
+        "Carotid triangle.l",
+        "Carotid triangle.r",
+        "Cavity of concha.l",
+        "Cavity of concha.r",
+        "Concha of auricle.l",
+        "Concha of auricle.r",
+        "Crura of antihelix.l",
+        "Crura of antihelix.r",
+        "Cubital fossa.l",
+        "Cubital fossa.r",
+        "Cymba conchae.l",
+        "Cymba conchae.r",
+        "Deltoid region.l",
+        "Deltoid region.r",
+        "Deltopectoral triangle.l",
+        "Deltopectoral triangle.r",
+        "Distal transverse arch of foot.l",
+        "Distal transverse arch of foot.r",
+        "Dorsal surfaces of digits of foot.l",
+        "Dorsal surfaces of digits of foot.r",
+        "Dorsal surfaces of digits of hand.l",
+        "Dorsal surfaces of digits of hand.r",
+        "Dorsum of foot.l",
+        "Dorsum of foot.r",
+        "Dorsum of hand.l",
+        "Dorsum of hand.r",
+        "Eminentia conchae.l",
+        "Eminentia conchae.r",
+        "Eminentia fossae triangularis.l",
+        "Eminentia fossae triangularis.r",
+        "Eminentia scaphae.l",
+        "Eminentia scaphae.r",
+        "Epigastric region.l",
+        "Epigastric region.r",
+        "Eyebrow.l",
+        "Eyebrow.r",
+        "Femoral triangle.l",
+        "Femoral triangle.r",
+        "Fossa antihelica.l",
+        "Fossa antihelica.r",
+        "Frontal region.l",
+        "Frontal region.r",
+        "Gluteal fold.l",
+        "Gluteal fold.r",
+        "Gluteal region.l",
+        "Gluteal region.r",
+        "Greater supraclavicular fossa.l",
+        "Greater supraclavicular fossa.r",
+        "Hallucial eminence.l",
+        "Hallucial eminence.r",
+        "Heel region.l",
+        "Heel region.r",
+        "Helix.l",
+        "Helix.r",
+        "Hip region.l",
+        "Hip region.r",
+        "Hypochondriac region.l",
+        "Hypochondriac region.r",
+        "Hypogastric region.l",
+        "Hypogastric region.r",
+        "Infra-orbital region.l",
+        "Infra-orbital region.r",
+        "Infraclavicular fossa.l",
+        "Infraclavicular fossa.r",
+        "Inframammary region.l",
+        "Inframammary region.r",
+        "Infrascapular region.l",
+        "Infrascapular region.r",
+        "Inguinal region.l",
+        "Inguinal region.r",
+        "Interscapular region.l",
+        "Interscapular region.r",
+        "Intertragic incisure.l",
+        "Intertragic incisure.r",
+        "Labial commissure.l",
+        "Labial commissure.r",
+        "Lateral bicipital groove.l",
+        "Lateral bicipital groove.r",
+        "Lateral border of foot.l",
+        "Lateral border of foot.r",
+        "Lateral border of forearm.l",
+        "Lateral border of forearm.r",
+        "Lateral malleolus.l",
+        "Lateral malleolus.r",
+        "Lateral part of longitudinal arch of foot.l",
+        "Lateral part of longitudinal arch of foot.r",
+        "Lateral region of abdomen.l",
+        "Lateral region of abdomen.r",
+        "Lateral region of neck.l",
+        "Lateral region of neck.r",
+        "Lateral region of thorax.l",
+        "Lateral region of thorax.r",
+        "Lateral retromalleolar region.l",
+        "Lateral retromalleolar region.r",
+        "Lesser supraclavicular fossa.l",
+        "Lesser supraclavicular fossa.r",
+        "Lobule of auricle.l",
+        "Lobule of auricle.r",
+        "Lumbar region.l",
+        "Lumbar region.r",
+        "Mammary region.l",
+        "Mammary region.r",
+        "Mastoid region.l",
+        "Mastoid region.r",
+        "Medial bicipital groove.l",
+        "Medial bicipital groove.r",
+        "Medial border of foot.l",
+        "Medial border of foot.r",
+        "Medial border of forearm.l",
+        "Medial border of forearm.r",
+        "Medial malleolus.l",
+        "Medial malleolus.r",
+        "Medial part of longitudinal arch of foot.l",
+        "Medial part of longitudinal arch of foot.r",
+        "Medial retromalleolar region.l",
+        "Medial retromalleolar region.r",
+        "Mental region.l",
+        "Mental region.r",
+        "Mentolabial sulcus.l",
+        "Mentolabial sulcus.r",
+        "Metatarsal region.l",
+        "Metatarsal region.r",
+        "Muscular triangle.l",
+        "Muscular triangle.r",
+        "Nasal region.l",
+        "Nasal region.r",
+        "Nasolabial sulcus.l",
+        "Nasolabial sulcus.r",
+        "Occipital region.l",
+        "Occipital region.r",
+        "Oral region.l",
+        "Oral region.r",
+        "Orbital region.l",
+        "Orbital region.r",
+        "Palm.l",
+        "Palm.r",
+        "Palmar surfaces of digits of hand.l",
+        "Palmar surfaces of digits of hand.r",
+        "Parietal region.l",
+        "Parietal region.r",
+        "Parotideomasseteric region.l",
+        "Parotideomasseteric region.r",
+        "Pectoral region.l",
+        "Pectoral region.r",
+        "Philtrum.l",
+        "Philtrum.r",
+        "Plantar surfaces of digits of foot.l",
+        "Plantar surfaces of digits of foot.r",
+        "Popliteal fossa.l",
+        "Popliteal fossa.r",
+        "Posterior auricular groove.l",
+        "Posterior auricular groove.r",
+        "Posterior region of arm.l",
+        "Posterior region of arm.r",
+        "Posterior region of elbow.l",
+        "Posterior region of elbow.r",
+        "Posterior region of forearm.l",
+        "Posterior region of forearm.r",
+        "Posterior region of knee.l",
+        "Posterior region of knee.r",
+        "Posterior region of leg.l",
+        "Posterior region of leg.r",
+        "Posterior region of neck.l",
+        "Posterior region of neck.r",
+        "Posterior region of thigh.l",
+        "Posterior region of thigh.r",
+        "Posterior region of wrist.l",
+        "Posterior region of wrist.r",
+        "Presternal region.l",
+        "Presternal region.r",
+        "Proximal transverse arch of foot.l",
+        "Proximal transverse arch of foot.r",
+        "Radial foveola.l",
+        "Radial foveola.r",
+        "Sacral region.l",
+        "Sacral region.r",
+        "Scapha.l",
+        "Scapha.r",
+        "Scapular region.l",
+        "Scapular region.r",
+        "Sole.l",
+        "Sole.r",
+        "Sternocleidomastoid region.l",
+        "Sternocleidomastoid region.r",
+        "Submandibular triangle.l",
+        "Submandibular triangle.r",
+        "Submental triangle.l",
+        "Submental triangle.r",
+        "Temporal region.l",
+        "Temporal region.r",
+        "Tragus.l",
+        "Tragus.r",
+        "Triangle of auscultation.l",
+        "Triangle of auscultation.r",
+        "Triangular fossa.l",
+        "Triangular fossa.r",
+        "Tubercle of upper lip.l",
+        "Tubercle of upper lip.r",
+        "Umbilical region.l",
+        "Umbilical region.r",
+        "Umbilicus.l",
+        "Umbilicus.r",
+        "Urogenital region.l",
+        "Urogenital region.r",
+        "Vertebral region.l",
+        "Vertebral region.r",
+        "Zygomatic region.l",
+        "Zygomatic region.r"
+      ],
+      "minimumObjects": 242,
+      "sourceClosed": false,
+      "closed": false
+    },
+    {
+      "id": "skin-wire",
+      "objects": [
+        "Anal region",
+        "Angle of mouth",
+        "Anterior notch of auricle",
+        "Anterior region of ankle",
+        "Anterior region of arm",
+        "Anterior region of elbow",
+        "Anterior region of forearm",
+        "Anterior region of knee",
+        "Anterior region of leg",
+        "Anterior region of thigh",
+        "Anterior region of wrist",
+        "Antihelix",
+        "Antitragus",
+        "Apex of auricle",
+        "Auricular region",
+        "Auricular tubercle",
+        "Buccal region",
+        "Carotid triangle",
+        "Cavity of concha",
+        "Concha of auricle",
+        "Crura of antihelix",
+        "Cubital fossa",
+        "Cymba conchae",
+        "Deltoid region",
+        "Deltopectoral triangle",
+        "Distal transverse arch of foot",
+        "Dorsal surfaces of digits of foot",
+        "Dorsal surfaces of digits of hand",
+        "Dorsum of foot",
+        "Dorsum of hand",
+        "Eminentia conchae",
+        "Eminentia fossae triangularis",
+        "Eminentia scaphae",
+        "Epigastric region",
+        "Eyebrow",
+        "Femoral triangle",
+        "Fossa antihelica",
+        "Frontal region",
+        "Gluteal fold",
+        "Gluteal region",
+        "Greater supraclavicular fossa",
+        "Hallucial eminence",
+        "Heel region",
+        "Helix",
+        "Hip region",
+        "Hypochondriac region",
+        "Hypogastric region",
+        "Infra-orbital region",
+        "Infraclavicular fossa",
+        "Inframammary region",
+        "Infrascapular region",
+        "Inguinal region",
+        "Interscapular region",
+        "Intertragic incisure",
+        "Labial commissure",
+        "Lateral bicipital groove",
+        "Lateral border of foot",
+        "Lateral border of forearm",
+        "Lateral malleolus",
+        "Lateral part of longitudinal arch of foot",
+        "Lateral region of abdomen",
+        "Lateral region of neck",
+        "Lateral region of thorax",
+        "Lateral retromalleolar region",
+        "Lesser supraclavicular fossa",
+        "Lobule of auricle",
+        "Lumbar region",
+        "Mammary region",
+        "Mastoid region",
+        "Medial bicipital groove",
+        "Medial border of foot",
+        "Medial border of forearm",
+        "Medial malleolus",
+        "Medial part of longitudinal arch of foot",
+        "Medial retromalleolar region",
+        "Mental region",
+        "Mentolabial sulcus",
+        "Metatarsal region",
+        "Muscular triangle",
+        "Nasal region",
+        "Nasolabial sulcus",
+        "Occipital region",
+        "Oral region",
+        "Orbital region",
+        "Palm",
+        "Palmar surfaces of digits of hand",
+        "Parietal region",
+        "Parotideomasseteric region",
+        "Pectoral region",
+        "Philtrum",
+        "Plantar surfaces of digits of foot",
+        "Popliteal fossa",
+        "Posterior auricular groove",
+        "Posterior region of arm",
+        "Posterior region of elbow",
+        "Posterior region of forearm",
+        "Posterior region of knee",
+        "Posterior region of leg",
+        "Posterior region of neck",
+        "Posterior region of thigh",
+        "Posterior region of wrist",
+        "Presternal region",
+        "Proximal transverse arch of foot",
+        "Radial foveola",
+        "Sacral region",
+        "Scapha",
+        "Scapular region",
+        "Sole",
+        "Sternocleidomastoid region",
+        "Submandibular triangle",
+        "Submental triangle",
+        "Temporal region",
+        "Tragus",
+        "Triangle of auscultation",
+        "Triangular fossa",
+        "Tubercle of upper lip",
+        "Umbilical region",
+        "Umbilicus",
+        "Urogenital region",
+        "Vertebral region",
+        "Zygomatic region"
+      ],
+      "system": "regions",
+      "bodySystem": "integumentary",
+      "role": "skin",
+      "layer": "context",
+      "sides": "unsided",
+      "triangleBudget": 4000,
+      "sourceNames": [
+        "Anal region.l",
+        "Anal region.r",
+        "Angle of mouth.l",
+        "Angle of mouth.r",
+        "Anterior notch of auricle.l",
+        "Anterior notch of auricle.r",
+        "Anterior region of ankle.l",
+        "Anterior region of ankle.r",
+        "Anterior region of arm.l",
+        "Anterior region of arm.r",
+        "Anterior region of elbow.l",
+        "Anterior region of elbow.r",
+        "Anterior region of forearm.l",
+        "Anterior region of forearm.r",
+        "Anterior region of knee.l",
+        "Anterior region of knee.r",
+        "Anterior region of leg.l",
+        "Anterior region of leg.r",
+        "Anterior region of thigh.l",
+        "Anterior region of thigh.r",
+        "Anterior region of wrist.l",
+        "Anterior region of wrist.r",
+        "Antihelix.l",
+        "Antihelix.r",
+        "Antitragus.l",
+        "Antitragus.r",
+        "Apex of auricle.l",
+        "Apex of auricle.r",
+        "Auricular region.l",
+        "Auricular region.r",
+        "Auricular tubercle.l",
+        "Auricular tubercle.r",
+        "Buccal region.l",
+        "Buccal region.r",
+        "Carotid triangle.l",
+        "Carotid triangle.r",
+        "Cavity of concha.l",
+        "Cavity of concha.r",
+        "Concha of auricle.l",
+        "Concha of auricle.r",
+        "Crura of antihelix.l",
+        "Crura of antihelix.r",
+        "Cubital fossa.l",
+        "Cubital fossa.r",
+        "Cymba conchae.l",
+        "Cymba conchae.r",
+        "Deltoid region.l",
+        "Deltoid region.r",
+        "Deltopectoral triangle.l",
+        "Deltopectoral triangle.r",
+        "Distal transverse arch of foot.l",
+        "Distal transverse arch of foot.r",
+        "Dorsal surfaces of digits of foot.l",
+        "Dorsal surfaces of digits of foot.r",
+        "Dorsal surfaces of digits of hand.l",
+        "Dorsal surfaces of digits of hand.r",
+        "Dorsum of foot.l",
+        "Dorsum of foot.r",
+        "Dorsum of hand.l",
+        "Dorsum of hand.r",
+        "Eminentia conchae.l",
+        "Eminentia conchae.r",
+        "Eminentia fossae triangularis.l",
+        "Eminentia fossae triangularis.r",
+        "Eminentia scaphae.l",
+        "Eminentia scaphae.r",
+        "Epigastric region.l",
+        "Epigastric region.r",
+        "Eyebrow.l",
+        "Eyebrow.r",
+        "Femoral triangle.l",
+        "Femoral triangle.r",
+        "Fossa antihelica.l",
+        "Fossa antihelica.r",
+        "Frontal region.l",
+        "Frontal region.r",
+        "Gluteal fold.l",
+        "Gluteal fold.r",
+        "Gluteal region.l",
+        "Gluteal region.r",
+        "Greater supraclavicular fossa.l",
+        "Greater supraclavicular fossa.r",
+        "Hallucial eminence.l",
+        "Hallucial eminence.r",
+        "Heel region.l",
+        "Heel region.r",
+        "Helix.l",
+        "Helix.r",
+        "Hip region.l",
+        "Hip region.r",
+        "Hypochondriac region.l",
+        "Hypochondriac region.r",
+        "Hypogastric region.l",
+        "Hypogastric region.r",
+        "Infra-orbital region.l",
+        "Infra-orbital region.r",
+        "Infraclavicular fossa.l",
+        "Infraclavicular fossa.r",
+        "Inframammary region.l",
+        "Inframammary region.r",
+        "Infrascapular region.l",
+        "Infrascapular region.r",
+        "Inguinal region.l",
+        "Inguinal region.r",
+        "Interscapular region.l",
+        "Interscapular region.r",
+        "Intertragic incisure.l",
+        "Intertragic incisure.r",
+        "Labial commissure.l",
+        "Labial commissure.r",
+        "Lateral bicipital groove.l",
+        "Lateral bicipital groove.r",
+        "Lateral border of foot.l",
+        "Lateral border of foot.r",
+        "Lateral border of forearm.l",
+        "Lateral border of forearm.r",
+        "Lateral malleolus.l",
+        "Lateral malleolus.r",
+        "Lateral part of longitudinal arch of foot.l",
+        "Lateral part of longitudinal arch of foot.r",
+        "Lateral region of abdomen.l",
+        "Lateral region of abdomen.r",
+        "Lateral region of neck.l",
+        "Lateral region of neck.r",
+        "Lateral region of thorax.l",
+        "Lateral region of thorax.r",
+        "Lateral retromalleolar region.l",
+        "Lateral retromalleolar region.r",
+        "Lesser supraclavicular fossa.l",
+        "Lesser supraclavicular fossa.r",
+        "Lobule of auricle.l",
+        "Lobule of auricle.r",
+        "Lumbar region.l",
+        "Lumbar region.r",
+        "Mammary region.l",
+        "Mammary region.r",
+        "Mastoid region.l",
+        "Mastoid region.r",
+        "Medial bicipital groove.l",
+        "Medial bicipital groove.r",
+        "Medial border of foot.l",
+        "Medial border of foot.r",
+        "Medial border of forearm.l",
+        "Medial border of forearm.r",
+        "Medial malleolus.l",
+        "Medial malleolus.r",
+        "Medial part of longitudinal arch of foot.l",
+        "Medial part of longitudinal arch of foot.r",
+        "Medial retromalleolar region.l",
+        "Medial retromalleolar region.r",
+        "Mental region.l",
+        "Mental region.r",
+        "Mentolabial sulcus.l",
+        "Mentolabial sulcus.r",
+        "Metatarsal region.l",
+        "Metatarsal region.r",
+        "Muscular triangle.l",
+        "Muscular triangle.r",
+        "Nasal region.l",
+        "Nasal region.r",
+        "Nasolabial sulcus.l",
+        "Nasolabial sulcus.r",
+        "Occipital region.l",
+        "Occipital region.r",
+        "Oral region.l",
+        "Oral region.r",
+        "Orbital region.l",
+        "Orbital region.r",
+        "Palm.l",
+        "Palm.r",
+        "Palmar surfaces of digits of hand.l",
+        "Palmar surfaces of digits of hand.r",
+        "Parietal region.l",
+        "Parietal region.r",
+        "Parotideomasseteric region.l",
+        "Parotideomasseteric region.r",
+        "Pectoral region.l",
+        "Pectoral region.r",
+        "Philtrum.l",
+        "Philtrum.r",
+        "Plantar surfaces of digits of foot.l",
+        "Plantar surfaces of digits of foot.r",
+        "Popliteal fossa.l",
+        "Popliteal fossa.r",
+        "Posterior auricular groove.l",
+        "Posterior auricular groove.r",
+        "Posterior region of arm.l",
+        "Posterior region of arm.r",
+        "Posterior region of elbow.l",
+        "Posterior region of elbow.r",
+        "Posterior region of forearm.l",
+        "Posterior region of forearm.r",
+        "Posterior region of knee.l",
+        "Posterior region of knee.r",
+        "Posterior region of leg.l",
+        "Posterior region of leg.r",
+        "Posterior region of neck.l",
+        "Posterior region of neck.r",
+        "Posterior region of thigh.l",
+        "Posterior region of thigh.r",
+        "Posterior region of wrist.l",
+        "Posterior region of wrist.r",
+        "Presternal region.l",
+        "Presternal region.r",
+        "Proximal transverse arch of foot.l",
+        "Proximal transverse arch of foot.r",
+        "Radial foveola.l",
+        "Radial foveola.r",
+        "Sacral region.l",
+        "Sacral region.r",
+        "Scapha.l",
+        "Scapha.r",
+        "Scapular region.l",
+        "Scapular region.r",
+        "Sole.l",
+        "Sole.r",
+        "Sternocleidomastoid region.l",
+        "Sternocleidomastoid region.r",
+        "Submandibular triangle.l",
+        "Submandibular triangle.r",
+        "Submental triangle.l",
+        "Submental triangle.r",
+        "Temporal region.l",
+        "Temporal region.r",
+        "Tragus.l",
+        "Tragus.r",
+        "Triangle of auscultation.l",
+        "Triangle of auscultation.r",
+        "Triangular fossa.l",
+        "Triangular fossa.r",
+        "Tubercle of upper lip.l",
+        "Tubercle of upper lip.r",
+        "Umbilical region.l",
+        "Umbilical region.r",
+        "Umbilicus.l",
+        "Umbilicus.r",
+        "Urogenital region.l",
+        "Urogenital region.r",
+        "Vertebral region.l",
+        "Vertebral region.r",
+        "Zygomatic region.l",
+        "Zygomatic region.r"
+      ],
+      "minimumObjects": 242,
+      "sourceClosed": false,
+      "closed": false,
+      "triangleCap": 5000
+    }
+  ],
+  "segmentCentrelines": true,
+  "expectedNodes": [
+    "nasal-cavity",
+    "pharynx",
+    "epiglottis",
+    "larynx",
+    "trachea",
+    "bronchi",
+    "lung-right",
+    "lung-left",
+    "diaphragm",
+    "ribcage",
+    "heart",
+    "great-vessels",
+    "lung-vessels",
+    "vessels-out",
+    "vessels-back",
+    "oesophagus",
+    "stomach",
+    "small-intestine",
+    "large-intestine",
+    "liver",
+    "leg-muscles.l",
+    "leg-muscles.r",
+    "skeleton",
+    "skin-outline",
+    "skin-wire"
+  ],
+  "skinNodes": [
+    "skin-outline",
+    "skin-wire"
+  ],
+  "missingOrgans": [],
+  "landmarks": {
+    "right-atrium": {
+      "kind": "centroid",
+      "sources": [
+        "Right atrium"
+      ]
+    },
+    "right-ventricle": {
+      "kind": "centroid",
+      "sources": [
+        "Right ventricle"
+      ]
+    },
+    "left-atrium": {
+      "kind": "centroid",
+      "sources": [
+        "Left atrium"
+      ]
+    },
+    "left-ventricle": {
+      "kind": "centroid",
+      "sources": [
+        "Left ventricle"
+      ]
+    },
+    "heart": {
+      "kind": "centroid",
+      "sources": [
+        "Left atrium",
+        "Right atrium",
+        "Left ventricle",
+        "Right ventricle"
+      ]
+    },
+    "tricuspid": {
+      "kind": "opening",
+      "sources": [
+        "Right atrium"
+      ],
+      "to": [
+        "Right ventricle"
+      ]
+    },
+    "mitral": {
+      "kind": "opening",
+      "sources": [
+        "Left atrium"
+      ],
+      "to": [
+        "Left ventricle"
+      ]
+    },
+    "diaphragm-dome.r": {
+      "kind": "top",
+      "sources": [
+        "Diaphragm"
+      ],
+      "side": "r"
+    },
+    "diaphragm-dome.l": {
+      "kind": "top",
+      "sources": [
+        "Diaphragm"
+      ],
+      "side": "l"
+    },
+    "thoracic-spine-front": {
+      "kind": "front",
+      "sources": [
+        "Vertebra T5",
+        "Vertebra T6",
+        "Vertebra T7",
+        "Vertebra T8"
+      ]
+    },
+    "hilum.r": {
+      "kind": "end",
+      "sources": [
+        "Right main bronchus"
+      ]
+    },
+    "hilum.l": {
+      "kind": "end",
+      "sources": [
+        "Left main bronchus"
+      ]
+    },
+    "larynx": {
+      "kind": "centroid",
+      "sources": [
+        "Thyroid cartilage",
+        "Cricoid cartilage"
+      ]
+    },
+    "nasopharynx": {
+      "kind": "centroid",
+      "sources": [
+        "Nasopharynx"
+      ]
+    },
+    "oropharynx": {
+      "kind": "centroid",
+      "sources": [
+        "Oropharynx"
+      ]
+    },
+    "laryngeal-inlet": {
+      "kind": "between",
+      "sources": [
+        "Epiglottis"
+      ],
+      "to": [
+        "Cricoid cartilage",
+        "Thyroid cartilage"
+      ],
+      "at": 0.35
+    },
+    "liver-core": {
+      "kind": "centroid",
+      "sources": [
+        "Liver"
+      ]
+    },
+    "liver-hilum": {
+      "kind": "end",
+      "sources": [
+        "Hepatic portal vein"
+      ]
+    },
+    "choana": {
+      "kind": "back",
+      "sources": [
+        "Mucosa of nasal cavity"
+      ]
+    },
+    "nostril.l": {
+      "kind": "nostril",
+      "sources": [
+        "Mucosa of nasal cavity"
+      ],
+      "skin": "Nasal region",
+      "side": "l"
+    },
+    "nasal-passage.l": {
+      "kind": "passage",
+      "sources": [
+        "Mucosa of nasal cavity"
+      ],
+      "side": "l"
+    },
+    "thigh.l": {
+      "kind": "centroid",
+      "sources": [
+        "Rectus femoris muscle.l"
+      ]
+    },
+    "calf.l": {
+      "kind": "centroid",
+      "sources": [
+        "Medial head of gastrocnemius.l"
+      ]
+    },
+    "nostril.r": {
+      "kind": "nostril",
+      "sources": [
+        "Mucosa of nasal cavity"
+      ],
+      "skin": "Nasal region",
+      "side": "r"
+    },
+    "nasal-passage.r": {
+      "kind": "passage",
+      "sources": [
+        "Mucosa of nasal cavity"
+      ],
+      "side": "r"
+    },
+    "thigh.r": {
+      "kind": "centroid",
+      "sources": [
+        "Rectus femoris muscle.r"
+      ]
+    },
+    "calf.r": {
+      "kind": "centroid",
+      "sources": [
+        "Medial head of gastrocnemius.r"
+      ]
+    },
+    "superior-lobe-right": {
+      "kind": "centroid",
+      "sources": [
+        "Superior lobe of right lung"
+      ]
+    },
+    "middle-lobe-right": {
+      "kind": "centroid",
+      "sources": [
+        "Middle lobe of right lung"
+      ]
+    },
+    "inferior-lobe-right": {
+      "kind": "centroid",
+      "sources": [
+        "Inferior lobe of right lung"
+      ]
+    },
+    "superior-lobe-left": {
+      "kind": "centroid",
+      "sources": [
+        "Superior lobe of left lung"
+      ]
+    },
+    "inferior-lobe-left": {
+      "kind": "centroid",
+      "sources": [
+        "Inferior lobe of left lung"
+      ]
+    }
+  },
+  "routes": {
+    "order": [
+      "air-right",
+      "air-left",
+      "heart-right",
+      "to-lungs",
+      "exchange-lungs",
+      "from-lungs",
+      "heart-left",
+      "to-body",
+      "from-body",
+      "exchange-body",
+      "oxygen-lungs",
+      "co2-lungs",
+      "oxygen-muscle",
+      "co2-muscle",
+      "food-in",
+      "food-route"
+    ],
+    "cycle": [
+      "heart-right",
+      "to-lungs",
+      "exchange-lungs",
+      "from-lungs",
+      "heart-left",
+      "to-body",
+      "exchange-body",
+      "from-body"
+    ],
+    "stepM": 0.008,
+    "joinToleranceM": 0.005,
+    "flows": {
+      "air-right": {
+        "group": "air",
+        "tree": {
+          "side": "r",
+          "root": "Trachea",
+          "parents": {
+            "Apical segmental bronchus of right lung (BI)": "Right superior lobar bronchus",
+            "Apicoposterior segmental bronchus of left lung (BI+BII)": "Left superior lobar bronchus",
+            "Superior lingular segmental bronchus of left lung (BIV)": "Left superior lobar bronchus",
+            "Superior segmental bronchus of left lung (BVI)": "Left inferior lobar bronchus"
+          },
+          "bridgeWithin": [
+            "lung-right",
+            "lung-left"
+          ],
+          "leafPattern": "\\(B[IVX]+(?:\\+B[IVX]+)?\\)$"
+        },
+        "head": [
+          {
+            "via": [
+              "lm:nostril.r",
+              "lm:nasal-passage.r",
+              "lm:choana",
+              "lm:nasopharynx",
+              "posterior:pharynx",
+              "lm:laryngeal-inlet",
+              "lm:larynx",
+              "start:Trachea"
+            ],
+            "within": [
+              "nasal-cavity",
+              "pharynx",
+              "larynx",
+              "epiglottis",
+              "trachea"
+            ]
+          }
+        ]
+      },
+      "air-left": {
+        "group": "air",
+        "tree": {
+          "side": "l",
+          "root": "Trachea",
+          "parents": {
+            "Apical segmental bronchus of right lung (BI)": "Right superior lobar bronchus",
+            "Apicoposterior segmental bronchus of left lung (BI+BII)": "Left superior lobar bronchus",
+            "Superior lingular segmental bronchus of left lung (BIV)": "Left superior lobar bronchus",
+            "Superior segmental bronchus of left lung (BVI)": "Left inferior lobar bronchus"
+          },
+          "bridgeWithin": [
+            "lung-right",
+            "lung-left"
+          ],
+          "leafPattern": "\\(B[IVX]+(?:\\+B[IVX]+)?\\)$"
+        },
+        "head": [
+          {
+            "via": [
+              "lm:nostril.l",
+              "lm:nasal-passage.l",
+              "lm:choana",
+              "lm:nasopharynx",
+              "posterior:pharynx",
+              "lm:laryngeal-inlet",
+              "lm:larynx",
+              "start:Trachea"
+            ],
+            "within": [
+              "nasal-cavity",
+              "pharynx",
+              "larynx",
+              "epiglottis",
+              "trachea"
+            ]
+          }
+        ]
+      },
+      "heart-right": {
+        "group": "blood-poor",
+        "paths": {
+          "from-svc": [
+            {
+              "via": [
+                "end:Superior vena cava",
+                "lm:right-atrium",
+                "lm:tricuspid",
+                "lm:right-ventricle",
+                "start:Pulmonary trunk"
+              ],
+              "within": [
+                "heart",
+                "great-vessels",
+                "lung-vessels"
+              ]
+            }
+          ],
+          "from-ivc": [
+            {
+              "via": [
+                "end:Inferior vena cava (thoracic part)",
+                "lm:right-atrium",
+                "lm:tricuspid",
+                "lm:right-ventricle",
+                "start:Pulmonary trunk"
+              ],
+              "within": [
+                "heart",
+                "great-vessels",
+                "lung-vessels"
+              ]
+            }
+          ]
+        }
+      },
+      "to-lungs": {
+        "group": "blood-poor",
+        "paths": {
+          "superior-lobe-right": [
+            {
+              "chain": [
+                "Pulmonary trunk",
+                "Bifurcation of pulmonary trunk",
+                "Bifurcation of pulmonary trunk#2~",
+                "Right pulmonary artery"
+              ],
+              "alsoWithin": [
+                "heart"
+              ]
+            },
+            {
+              "via": [
+                "beside:Right superior lobar bronchus",
+                "lm:superior-lobe-right.artery-site"
+              ],
+              "within": [
+                "lung-right",
+                "lung-vessels",
+                "bronchi"
+              ]
+            }
+          ],
+          "middle-lobe-right": [
+            {
+              "chain": [
+                "Pulmonary trunk",
+                "Bifurcation of pulmonary trunk",
+                "Bifurcation of pulmonary trunk#2~",
+                "Right pulmonary artery"
+              ],
+              "alsoWithin": [
+                "heart"
+              ]
+            },
+            {
+              "via": [
+                "beside:Middle lobar bronchus.r",
+                "lm:middle-lobe-right.artery-site"
+              ],
+              "within": [
+                "lung-right",
+                "lung-vessels",
+                "bronchi"
+              ]
+            }
+          ],
+          "inferior-lobe-right": [
+            {
+              "chain": [
+                "Pulmonary trunk",
+                "Bifurcation of pulmonary trunk",
+                "Bifurcation of pulmonary trunk#2~",
+                "Right pulmonary artery"
+              ],
+              "alsoWithin": [
+                "heart"
+              ]
+            },
+            {
+              "via": [
+                "beside:Right inferior lobar bronchus",
+                "lm:inferior-lobe-right.artery-site"
+              ],
+              "within": [
+                "lung-right",
+                "lung-vessels",
+                "bronchi"
+              ]
+            }
+          ],
+          "superior-lobe-left": [
+            {
+              "chain": [
+                "Pulmonary trunk",
+                "Bifurcation of pulmonary trunk",
+                "Left pulmonary artery"
+              ],
+              "alsoWithin": [
+                "heart"
+              ]
+            },
+            {
+              "via": [
+                "beside:Left superior lobar bronchus",
+                "lm:superior-lobe-left.artery-site"
+              ],
+              "within": [
+                "lung-left",
+                "lung-vessels",
+                "bronchi"
+              ]
+            }
+          ],
+          "inferior-lobe-left": [
+            {
+              "chain": [
+                "Pulmonary trunk",
+                "Bifurcation of pulmonary trunk",
+                "Left pulmonary artery"
+              ],
+              "alsoWithin": [
+                "heart"
+              ]
+            },
+            {
+              "via": [
+                "beside:Left inferior lobar bronchus",
+                "lm:inferior-lobe-left.artery-site"
+              ],
+              "within": [
+                "lung-left",
+                "lung-vessels",
+                "bronchi"
+              ]
+            }
+          ]
+        }
+      },
+      "exchange-lungs": {
+        "group": "blood-poor",
+        "paths": {
+          "superior-lobe-right": [
+            {
+              "arc": [
+                "end:to-lungs/superior-lobe-right",
+                "lm:superior-lobe-right.vein-site"
+              ],
+              "bulge": 0.012,
+              "away": "lm:hilum.r",
+              "within": [
+                "lung-right"
+              ]
+            }
+          ],
+          "middle-lobe-right": [
+            {
+              "arc": [
+                "end:to-lungs/middle-lobe-right",
+                "lm:middle-lobe-right.vein-site"
+              ],
+              "bulge": 0.012,
+              "away": "lm:hilum.r",
+              "within": [
+                "lung-right"
+              ]
+            }
+          ],
+          "inferior-lobe-right": [
+            {
+              "arc": [
+                "end:to-lungs/inferior-lobe-right",
+                "lm:inferior-lobe-right.vein-site"
+              ],
+              "bulge": 0.012,
+              "away": "lm:hilum.r",
+              "within": [
+                "lung-right"
+              ]
+            }
+          ],
+          "superior-lobe-left": [
+            {
+              "arc": [
+                "end:to-lungs/superior-lobe-left",
+                "lm:superior-lobe-left.vein-site"
+              ],
+              "bulge": 0.012,
+              "away": "lm:hilum.l",
+              "within": [
+                "lung-left"
+              ]
+            }
+          ],
+          "inferior-lobe-left": [
+            {
+              "arc": [
+                "end:to-lungs/inferior-lobe-left",
+                "lm:inferior-lobe-left.vein-site"
+              ],
+              "bulge": 0.012,
+              "away": "lm:hilum.l",
+              "within": [
+                "lung-left"
+              ]
+            }
+          ]
+        }
+      },
+      "from-lungs": {
+        "group": "blood-rich",
+        "paths": {
+          "superior-lobe-right": [
+            {
+              "via": [
+                "lm:superior-lobe-right.vein-site"
+              ],
+              "within": [
+                "lung-right",
+                "lung-vessels"
+              ]
+            },
+            {
+              "chain": [
+                "Right superior pulmonary vein"
+              ],
+              "alsoWithin": [
+                "heart"
+              ]
+            },
+            {
+              "via": [
+                "lm:left-atrium"
+              ],
+              "within": [
+                "heart",
+                "lung-vessels"
+              ]
+            }
+          ],
+          "middle-lobe-right": [
+            {
+              "via": [
+                "lm:middle-lobe-right.vein-site"
+              ],
+              "within": [
+                "lung-right",
+                "lung-vessels"
+              ]
+            },
+            {
+              "chain": [
+                "Right superior pulmonary vein"
+              ],
+              "alsoWithin": [
+                "heart"
+              ]
+            },
+            {
+              "via": [
+                "lm:left-atrium"
+              ],
+              "within": [
+                "heart",
+                "lung-vessels"
+              ]
+            }
+          ],
+          "inferior-lobe-right": [
+            {
+              "via": [
+                "lm:inferior-lobe-right.vein-site"
+              ],
+              "within": [
+                "lung-right",
+                "lung-vessels"
+              ]
+            },
+            {
+              "chain": [
+                "Right inferior pulmonary vein"
+              ],
+              "alsoWithin": [
+                "heart"
+              ]
+            },
+            {
+              "via": [
+                "lm:left-atrium"
+              ],
+              "within": [
+                "heart",
+                "lung-vessels"
+              ]
+            }
+          ],
+          "superior-lobe-left": [
+            {
+              "via": [
+                "lm:superior-lobe-left.vein-site"
+              ],
+              "within": [
+                "lung-left",
+                "lung-vessels"
+              ]
+            },
+            {
+              "chain": [
+                "Left superior pulmonary vein"
+              ],
+              "alsoWithin": [
+                "heart"
+              ]
+            },
+            {
+              "via": [
+                "lm:left-atrium"
+              ],
+              "within": [
+                "heart",
+                "lung-vessels"
+              ]
+            }
+          ],
+          "inferior-lobe-left": [
+            {
+              "via": [
+                "lm:inferior-lobe-left.vein-site"
+              ],
+              "within": [
+                "lung-left",
+                "lung-vessels"
+              ]
+            },
+            {
+              "chain": [
+                "Left inferior pulmonary vein"
+              ],
+              "alsoWithin": [
+                "heart"
+              ]
+            },
+            {
+              "via": [
+                "lm:left-atrium"
+              ],
+              "within": [
+                "heart",
+                "lung-vessels"
+              ]
+            }
+          ]
+        }
+      },
+      "heart-left": {
+        "group": "blood-rich",
+        "paths": {
+          "main": [
+            {
+              "via": [
+                "lm:left-atrium",
+                "lm:mitral",
+                "lm:left-ventricle",
+                "start:Ascending aorta"
+              ],
+              "within": [
+                "heart",
+                "great-vessels",
+                "lung-vessels"
+              ]
+            }
+          ]
+        }
+      },
+      "to-body": {
+        "group": "blood-rich",
+        "paths": {
+          "head-right": [
+            {
+              "chain": [
+                "Ascending aorta",
+                "Aortic arch",
+                "Brachiocephalic trunk",
+                "Right common carotid artery",
+                "Internal carotid artery.r"
+              ],
+              "alsoWithin": [
+                "heart"
+              ]
+            }
+          ],
+          "head-left": [
+            {
+              "chain": [
+                "Ascending aorta",
+                "Aortic arch",
+                "Left common carotid artery",
+                "Internal carotid artery.l"
+              ],
+              "alsoWithin": [
+                "heart"
+              ]
+            }
+          ],
+          "arm-right": [
+            {
+              "chain": [
+                "Ascending aorta",
+                "Aortic arch",
+                "Brachiocephalic trunk",
+                "Right subclavian artery",
+                "Axillary artery.r",
+                "Brachial artery.r",
+                "Radial artery.r"
+              ],
+              "alsoWithin": [
+                "heart"
+              ]
+            }
+          ],
+          "arm-left": [
+            {
+              "chain": [
+                "Ascending aorta",
+                "Aortic arch",
+                "Left subclavian artery",
+                "Axillary artery.l",
+                "Brachial artery.l",
+                "Radial artery.l"
+              ],
+              "alsoWithin": [
+                "heart"
+              ]
+            }
+          ],
+          "gut": [
+            {
+              "chain": [
+                "Ascending aorta",
+                "Aortic arch",
+                "Thoracic aorta",
+                "Abdominal aorta",
+                "Superior mesenteric artery"
+              ],
+              "alsoWithin": [
+                "heart"
+              ]
+            }
+          ],
+          "leg-right": [
+            {
+              "chain": [
+                "Ascending aorta",
+                "Aortic arch",
+                "Thoracic aorta",
+                "Abdominal aorta",
+                "Common iliac artery.r",
+                "External iliac artery.r",
+                "Femoral artery.r",
+                "Popliteal artery.r",
+                "Posterior tibial artery.r"
+              ],
+              "alsoWithin": [
+                "heart"
+              ]
+            }
+          ],
+          "leg-left": [
+            {
+              "chain": [
+                "Ascending aorta",
+                "Aortic arch",
+                "Thoracic aorta",
+                "Abdominal aorta",
+                "Common iliac artery.l",
+                "External iliac artery.l",
+                "Femoral artery.l",
+                "Popliteal artery.l",
+                "Posterior tibial artery.l"
+              ],
+              "alsoWithin": [
+                "heart"
+              ]
+            }
+          ]
+        }
+      },
+      "exchange-body": {
+        "group": "blood-rich",
+        "paths": {
+          "head-right": [
+            {
+              "arc": [
+                "end:to-body/head-right",
+                "start:Internal jugular vein.r"
+              ],
+              "bulge": 0.015,
+              "within": [
+                "skin-outline"
+              ],
+              "tissue": true
+            }
+          ],
+          "head-left": [
+            {
+              "arc": [
+                "end:to-body/head-left",
+                "start:Internal jugular vein.l"
+              ],
+              "bulge": 0.015,
+              "within": [
+                "skin-outline"
+              ],
+              "tissue": true
+            }
+          ],
+          "arm-right": [
+            {
+              "arc": [
+                "end:to-body/arm-right",
+                "start:Radial veins.r"
+              ],
+              "bulge": 0.004,
+              "within": [
+                "skin-outline"
+              ],
+              "tissue": true
+            }
+          ],
+          "arm-left": [
+            {
+              "arc": [
+                "end:to-body/arm-left",
+                "start:Radial veins.l"
+              ],
+              "bulge": 0.004,
+              "within": [
+                "skin-outline"
+              ],
+              "tissue": true
+            }
+          ],
+          "gut": [
+            {
+              "arc": [
+                "end:to-body/gut",
+                "start:Superior mesenteric vein"
+              ],
+              "bulge": 0.015,
+              "within": [
+                "skin-outline"
+              ],
+              "tissue": true
+            }
+          ],
+          "leg-right": [
+            {
+              "arc": [
+                "end:to-body/leg-right",
+                "start:Posterior tibial veins.r"
+              ],
+              "bulge": 0.015,
+              "within": [
+                "skin-outline"
+              ],
+              "tissue": true
+            }
+          ],
+          "leg-left": [
+            {
+              "arc": [
+                "end:to-body/leg-left",
+                "start:Posterior tibial veins.l"
+              ],
+              "bulge": 0.015,
+              "within": [
+                "skin-outline"
+              ],
+              "tissue": true
+            }
+          ]
+        }
+      },
+      "from-body": {
+        "group": "blood-poor",
+        "paths": {
+          "head-right": [
+            {
+              "chain": [
+                "Internal jugular vein.r",
+                "Right brachiocephalic vein",
+                "Superior vena cava"
+              ]
+            }
+          ],
+          "head-left": [
+            {
+              "chain": [
+                "Internal jugular vein.l",
+                "Left brachiocephalic vein",
+                "Superior vena cava"
+              ]
+            }
+          ],
+          "arm-right": [
+            {
+              "chain": [
+                "Radial veins.r",
+                "Brachial veins.r",
+                "Axillary vein.r",
+                "Right subclavian vein",
+                "Right brachiocephalic vein",
+                "Superior vena cava"
+              ]
+            }
+          ],
+          "arm-left": [
+            {
+              "chain": [
+                "Radial veins.l",
+                "Brachial veins.l",
+                "Axillary vein.l",
+                "Left subclavian vein",
+                "Left brachiocephalic vein",
+                "Superior vena cava"
+              ]
+            }
+          ],
+          "gut": [
+            {
+              "chain": [
+                "Superior mesenteric vein",
+                "Hepatic portal vein"
+              ]
+            },
+            {
+              "via": [
+                "lm:liver-hilum",
+                "lm:liver-core"
+              ],
+              "within": [
+                "liver",
+                "vessels-back"
+              ]
+            },
+            {
+              "chain": [
+                "Hepatic veins",
+                "Inferior vena cava (thoracic part)"
+              ]
+            }
+          ],
+          "leg-right": [
+            {
+              "chain": [
+                "Posterior tibial veins.r",
+                "Popliteal vein.r",
+                "Femoral vein.r",
+                "External iliac vein.r",
+                "Common iliac vein.r",
+                "Inferior vena cava (abdominal part)",
+                "Inferior vena cava (thoracic part)"
+              ]
+            }
+          ],
+          "leg-left": [
+            {
+              "chain": [
+                "Posterior tibial veins.l",
+                "Popliteal vein.l",
+                "Femoral vein.l",
+                "External iliac vein.l",
+                "Common iliac vein.l",
+                "Inferior vena cava (abdominal part)",
+                "Inferior vena cava (thoracic part)"
+              ]
+            }
+          ]
+        }
+      },
+      "oxygen-lungs": {
+        "group": "gases",
+        "paths": {
+          "superior-lobe-right": [
+            {
+              "via": [
+                "airend:superior-lobe-right",
+                "mid:exchange-lungs/superior-lobe-right"
+              ],
+              "within": [
+                "lung-right"
+              ]
+            }
+          ],
+          "middle-lobe-right": [
+            {
+              "via": [
+                "airend:middle-lobe-right",
+                "mid:exchange-lungs/middle-lobe-right"
+              ],
+              "within": [
+                "lung-right"
+              ]
+            }
+          ],
+          "inferior-lobe-right": [
+            {
+              "via": [
+                "airend:inferior-lobe-right",
+                "mid:exchange-lungs/inferior-lobe-right"
+              ],
+              "within": [
+                "lung-right"
+              ]
+            }
+          ],
+          "superior-lobe-left": [
+            {
+              "via": [
+                "airend:superior-lobe-left",
+                "mid:exchange-lungs/superior-lobe-left"
+              ],
+              "within": [
+                "lung-left"
+              ]
+            }
+          ],
+          "inferior-lobe-left": [
+            {
+              "via": [
+                "airend:inferior-lobe-left",
+                "mid:exchange-lungs/inferior-lobe-left"
+              ],
+              "within": [
+                "lung-left"
+              ]
+            }
+          ]
+        }
+      },
+      "co2-lungs": {
+        "group": "gases",
+        "paths": {
+          "superior-lobe-right": [
+            {
+              "via": [
+                "mid:exchange-lungs/superior-lobe-right",
+                "airend:superior-lobe-right"
+              ],
+              "within": [
+                "lung-right"
+              ]
+            }
+          ],
+          "middle-lobe-right": [
+            {
+              "via": [
+                "mid:exchange-lungs/middle-lobe-right",
+                "airend:middle-lobe-right"
+              ],
+              "within": [
+                "lung-right"
+              ]
+            }
+          ],
+          "inferior-lobe-right": [
+            {
+              "via": [
+                "mid:exchange-lungs/inferior-lobe-right",
+                "airend:inferior-lobe-right"
+              ],
+              "within": [
+                "lung-right"
+              ]
+            }
+          ],
+          "superior-lobe-left": [
+            {
+              "via": [
+                "mid:exchange-lungs/superior-lobe-left",
+                "airend:superior-lobe-left"
+              ],
+              "within": [
+                "lung-left"
+              ]
+            }
+          ],
+          "inferior-lobe-left": [
+            {
+              "via": [
+                "mid:exchange-lungs/inferior-lobe-left",
+                "airend:inferior-lobe-left"
+              ],
+              "within": [
+                "lung-left"
+              ]
+            }
+          ]
+        }
+      },
+      "oxygen-muscle": {
+        "group": "gases",
+        "paths": {
+          "thigh-right": [
+            {
+              "via": [
+                "near:to-body/leg-right@thigh.r",
+                "lm:thigh.r"
+              ],
+              "within": [
+                "skin-outline"
+              ],
+              "endWithin": [
+                "leg-muscles.r"
+              ],
+              "tissue": true
+            }
+          ],
+          "calf-right": [
+            {
+              "via": [
+                "near:to-body/leg-right@calf.r",
+                "lm:calf.r"
+              ],
+              "within": [
+                "skin-outline"
+              ],
+              "endWithin": [
+                "leg-muscles.r"
+              ],
+              "tissue": true
+            }
+          ],
+          "thigh-left": [
+            {
+              "via": [
+                "near:to-body/leg-left@thigh.l",
+                "lm:thigh.l"
+              ],
+              "within": [
+                "skin-outline"
+              ],
+              "endWithin": [
+                "leg-muscles.l"
+              ],
+              "tissue": true
+            }
+          ],
+          "calf-left": [
+            {
+              "via": [
+                "near:to-body/leg-left@calf.l",
+                "lm:calf.l"
+              ],
+              "within": [
+                "skin-outline"
+              ],
+              "endWithin": [
+                "leg-muscles.l"
+              ],
+              "tissue": true
+            }
+          ]
+        }
+      },
+      "co2-muscle": {
+        "group": "gases",
+        "reverse": "oxygen-muscle",
+        "paths": {}
+      },
+      "food-in": {
+        "group": "digested-food",
+        "spray": {
+          "node": "small-intestine",
+          "count": 4,
+          "to": "start:Superior mesenteric vein",
+          "radiusM": [
+            0.03,
+            0.1
+          ],
+          "within": [
+            "skin-outline"
+          ]
+        },
+        "paths": {}
+      },
+      "food-route": {
+        "group": "digested-food",
+        "paths": {
+          "main": [
+            {
+              "concat": [
+                "from-body/gut",
+                "heart-right/from-ivc",
+                "to-lungs/inferior-lobe-right",
+                "exchange-lungs/inferior-lobe-right",
+                "from-lungs/inferior-lobe-right",
+                "heart-left/main",
+                "to-body/leg-left"
+              ],
+              "until": "lm:thigh.l"
+            },
+            {
+              "via": [
+                "lm:thigh.l"
+              ],
+              "within": [
+                "skin-outline"
+              ],
+              "endWithin": [
+                "leg-muscles.l"
+              ],
+              "tissue": true
+            }
+          ]
+        }
+      }
+    }
+  },
+  "notes": [
+    "No rig, skin weights, fibres or attachment sites. Breathing and heartbeat are whole-node animations in the engine.",
+    "Tube nodes merge several source segments. _U is the station along each source segment's own centreline (0 = upstream in the flow direction), normalised per segment.",
+    "Each source segment's centreline is extracted before merging (heart-lungs/centrelines.json); landmarks are measured on the source objects before merging (heart-lungs/landmarks.json).",
+    "The heart merges the four Z-Anatomy chamber surfaces (open); there is no single Heart mesh in the source (Heart.g is an empty group).",
+    "Vessel meshes keep one neutral tissue colour; the meaning of red is carried by the flows (docs/40 D4).",
+    "Not taken: digital vessels of hands and feet, coronary vessels, kidneys and renal vessels, brain, pleura, valves and papillary muscles, the vertebral artery (source has only .l).",
+    "Routes inside the heart, lungs and liver and the exchange arcs at the ends are schematic (routes.json flags them)."
+  ]
+}
