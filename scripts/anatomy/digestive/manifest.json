@@ -3,6 +3,7 @@
   "output": "digestive-system.glb",
   "rig": false,
   "license": "CC BY-SA 4.0",
+  "changes": "structures selected for the digestive region and four other systems, simplified, renamed, centreline _U baked.",
   "coordinates": {
     "unit": "m",
     "up": "+Y",

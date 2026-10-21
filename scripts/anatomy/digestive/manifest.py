@@ -62,6 +62,7 @@ def generate():
     part('skin-wire',skin['objects'],'regions','skin',4000,body='integumentary',layer='context')['triangleCap']=5000
     missing=[dict(id=id,status='missing',reason='No named mesh or parent exists in the cached source inventory; no substitute invented.') for id in ['ileum','caecum','rectum','anal-canal']]
     manifest=dict(topic='digestive',output='digestive-system.glb',rig=False,license='CC BY-SA 4.0',
+        changes='structures selected for the digestive region and four other systems, simplified, renamed, centreline _U baked.',
         coordinates=dict(unit='m',up='+Y',front='+Z',left='+X',centre='umbilicus midline; source floor and transform in organs.json'),
         budgets={role:dict(maxDeviationM=dev,triangleTargetRange=rng) for role,dev,rng in [('tube',.0015,[3000,26000]),('organ',.0015,[2000,15000]),('system',.004,[4000,40000]),('skin',.035,[3000,18000])]},parts=parts,
         expectedNodes=[p['id']+('.'+s if s else '') for p in parts for s in (['l','r'] if p['sides']=='bilateral' else [None])],

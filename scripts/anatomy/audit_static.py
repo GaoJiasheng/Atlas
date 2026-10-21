@@ -95,7 +95,11 @@ def containment(points,faces,path):
 
 
 def audit(topic='digestive',write_report=True):
-    manifest=json.loads((ROOT/topic/'manifest.json').read_text());summary=json.loads((CACHE/f'{topic}-optimize-stats.json').read_text())
+    manifest=json.loads((ROOT/topic/'manifest.json').read_text())
+    if manifest.get('segmentCentrelines'):
+        from audit_organs import audit as organs
+        return organs(topic)
+    summary=json.loads((CACHE/f'{topic}-optimize-stats.json').read_text())
     paths=json.loads((ROOT/topic/'centrelines.json').read_text());clouds=json.loads((CACHE/f'{topic}-decoded.json').read_text())
     final_path=ROOT.parents[1]/'public/models'/manifest['output']
     if hashlib.sha256(final_path.read_bytes()).hexdigest()!=summary['sha256']:raise RuntimeError('Decoded audit is stale')

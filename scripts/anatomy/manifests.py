@@ -9,6 +9,14 @@ from rig_rules import complete_manifest, FIBRE_OVERRIDES
 
 ROOT = Path(__file__).resolve().parent
 TOPICS = ('back', 'shoulders', 'arms', 'legs', 'core')
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--topic',choices=('all','chest','digestive','heart-lungs')+TOPICS,default='all')
+args=parser.parse_args()
+# Static organ regions have their own generators and need none of the muscle drafts below.
+if args.topic in ('digestive','heart-lungs'):
+    import runpy
+    runpy.run_path(str(ROOT/args.topic/'manifest.py'),run_name='__main__')
+    raise SystemExit(0)
 chest = json.loads((ROOT/'chest/manifest.json').read_text())
 inventory = json.loads((ROOT/'cache/inventory.json').read_text())['objects']
 
@@ -85,13 +93,6 @@ def exact_sources(p):
     return [e for e in inventory if e['system']==p['system'] and e['type']=='MESH' and 'attachment' not in e and
             (base(e['name']) in p['objects'] or any(re.fullmatch(x,base(e['name'])) for x in p.get('patterns',[])))]
 
-parser = argparse.ArgumentParser(description=__doc__)
-parser.add_argument('--topic',choices=('all','chest','digestive')+TOPICS,default='all')
-args=parser.parse_args()
-if args.topic=='digestive':
-    import runpy
-    runpy.run_path(str(ROOT/'digestive/manifest.py'),run_name='__main__')
-    raise SystemExit(0)
 if args.topic in ('all','chest'):
     chest['referenceParts'] = list(bones.values())
     chest['budgets']['total'].update(maxBytes=4000000,maxTriangles=350000)

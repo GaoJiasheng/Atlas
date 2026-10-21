@@ -46,7 +46,7 @@ const root = dirname(fileURLToPath(import.meta.url));
 const cache = resolve(root, 'cache');
 const topicIndex = process.argv.indexOf('--topic');
 const topic = topicIndex < 0 ? 'chest' : process.argv[topicIndex + 1];
-if (!topic || !['chest','back','shoulders','arms','legs','core','digestive'].includes(topic)) throw new Error('Invalid --topic');
+if (!topic || !['chest','back','shoulders','arms','legs','core','digestive','heart-lungs'].includes(topic)) throw new Error('Invalid --topic');
 const output = resolve(root, `../../public/models/muscles-${topic}.glb`);
 const manifest: Manifest = JSON.parse(await readFile(resolve(root, `${topic}/manifest.json`), 'utf8'));
 await Promise.all([MeshoptEncoder.ready, MeshoptDecoder.ready]);

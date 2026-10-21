@@ -139,7 +139,7 @@ def mobile_skin_region(name, topic="chest"):
     return bool(re.search(r'arm|elbow|wrist|hand|bicipital|cubital|carpal|palmar|palm|radial foveola|deltoid region|scapular region|pectoral|mammary region|presternal region|infraclavicular fossa|deltopectoral triangle|lateral region of thorax|triangle of auscultation|supraclavicular fossa', name.lower()))
 
 
-TOPICS = ('chest', 'back', 'shoulders', 'arms', 'legs', 'core', 'digestive')
+TOPICS = ('chest', 'back', 'shoulders', 'arms', 'legs', 'core', 'digestive', 'heart-lungs')
 
 def topic_argument():
     """Blender arguments follow --; ordinary Python scripts use argv directly."""
