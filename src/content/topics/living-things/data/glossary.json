@@ -1,0 +1,157 @@
+{
+ "terms": [
+  {
+   "id": "living-thing",
+   "term": { "en": "Living thing", "zh": "生物" },
+   "definition": {
+    "en": "Something that is alive, also called an organism. Living things need water, food and air to survive, and they grow, respond to changes around them and reproduce.",
+    "zh": "有生命的东西，也叫有机体。生物需要水、食物和空气才能活下去，会生长、会对周围的变化作出反应、会繁殖。"
+   },
+   "see": ["characteristic", "non-living-thing"]
+  },
+  {
+   "id": "non-living-thing",
+   "term": { "en": "Non-living thing", "zh": "非生物" },
+   "definition": {
+    "en": "Something that is not alive, such as a pebble or a toy car. It does not reproduce. Some non-living things move or even respond to changes, so those two signs alone cannot tell them apart from living things.",
+    "zh": "没有生命的东西，比如石头、玩具车。它不会繁殖。有的非生物会动，甚至会对变化作出反应，所以只看这两点分不出它和生物。"
+   },
+   "see": ["living-thing"]
+  },
+  {
+   "id": "characteristic",
+   "term": { "en": "Characteristic", "zh": "特征" },
+   "definition": {
+    "en": "A feature that a group of things share. The characteristics of living things are needing water, food and air, growing, responding and reproducing. Animals are grouped by characteristics you can see, such as feathers or six legs.",
+    "zh": "一类东西共同具有的样子或本领。生物的特征是：需要水、食物和空气，会生长、会反应、会繁殖。给动物分组，看的是看得见的特征，比如羽毛、六条腿。"
+   },
+   "see": ["classify", "living-thing"]
+  },
+  {
+   "id": "classify",
+   "term": { "en": "Classify", "zh": "分类" },
+   "definition": {
+    "en": "To group things by the characteristics they have in common. In class this is done in three steps: look for what is the same and what is different, put similar things together, and give each group a heading.",
+    "zh": "按共同的特征把东西分组。课堂上分三步：找出相同和不同的地方，把相似的放在一起，再给每一组起一个标题。"
+   },
+   "see": ["characteristic", "flowchart"]
+  },
+  {
+   "id": "flowering-plant",
+   "term": { "en": "Flowering plant", "zh": "开花植物" },
+   "definition": {
+    "en": "A plant that can bear flowers, such as ixora, chilli or the rhu tree. It does not have flowers all the time: a young plant may not have flowered yet.",
+    "zh": "会开花的植物，比如龙船花、辣椒、木麻黄。它不是一直都有花：年幼的植株可能还没开过花。"
+   },
+   "see": ["non-flowering-plant"]
+  },
+  {
+   "id": "non-flowering-plant",
+   "term": { "en": "Non-flowering plant", "zh": "不开花植物" },
+   "definition": {
+    "en": "A plant that never bears flowers, such as a fern or a moss. Non-flowering plants are green and make their own food too.",
+    "zh": "从来不开花的植物，比如蕨和苔藓。不开花植物也是绿色的，也自己制造食物。"
+   },
+   "see": ["flowering-plant"]
+  },
+  {
+   "id": "fungus",
+   "term": { "en": "Fungus (plural fungi)", "zh": "真菌" },
+   "definition": {
+    "en": "A living thing such as a mushroom, a mould or yeast. A fungus is not a plant: it has no roots, stems or leaves and cannot make its own food. Many fungi break down dead things.",
+    "zh": "蘑菇、霉菌、酵母这一类生物。真菌不是植物：它没有根、茎、叶，不能自己制造食物。许多真菌会分解死去的东西。"
+   },
+   "see": ["mould", "yeast"]
+  },
+  {
+   "id": "mould",
+   "term": { "en": "Mould", "zh": "霉菌" },
+   "definition": {
+    "en": "A fungus that grows as a fuzzy patch, for example on old bread. One mould cell is too small to see, but a patch of mould can be seen. “Mould” is an everyday name, not a scientific group.",
+    "zh": "长成毛茸茸一片的真菌，比如旧面包上的霉。单个霉菌细胞小得看不见，长成一片就看得见了。“霉菌”是日常的叫法，不是科学上的一个类群。"
+   },
+   "see": ["fungus"]
+  },
+  {
+   "id": "yeast",
+   "term": { "en": "Yeast", "zh": "酵母" },
+   "definition": {
+    "en": "A fungus that lives mostly as single cells, far too small to see one at a time. A yeast cell reproduces by budding: a small new cell grows out of its side.",
+    "zh": "大多以单个细胞生活的真菌，一个一个小得看不见。酵母细胞靠出芽繁殖：旁边长出一个新的小细胞。"
+   },
+   "see": ["fungus"]
+  },
+  {
+   "id": "bacteria",
+   "term": { "en": "Bacteria (one bacterium)", "zh": "细菌" },
+   "definition": {
+    "en": "Living things that are mostly a single cell, far too small to see one at a time. Grown on a dish, millions of them form a colony that can be seen. Some bacteria are helpful and some are harmful.",
+    "zh": "大多只有一个细胞的生物，一个一个小得看不见。在培养皿里长成成百万个，就成了看得见的菌落。有的细菌有益，有的有害。"
+   },
+   "see": ["living-thing"]
+  },
+  {
+   "id": "insect",
+   "term": { "en": "Insect", "zh": "昆虫" },
+   "definition": {
+    "en": "An animal with three body parts, six legs and two feelers, and a hard outer covering. Some insects have wings and some do not. A spider, with eight legs, is not an insect.",
+    "zh": "身体分三部分、有六条腿和两根触角、外面有硬壳的动物。有的昆虫有翅膀，有的没有。蜘蛛有八条腿，不是昆虫。"
+   },
+   "see": ["classify"]
+  },
+  {
+   "id": "bird",
+   "term": { "en": "Bird", "zh": "鸟类" },
+   "definition": {
+    "en": "An animal with feathers, a beak, a pair of wings and a pair of legs. Birds lay eggs with hard shells. Some birds, such as penguins, cannot fly.",
+    "zh": "有羽毛、喙、一对翅膀和一对腿的动物。鸟下硬壳蛋。有些鸟不会飞，比如企鹅。"
+   },
+   "see": ["mammal"]
+  },
+  {
+   "id": "mammal",
+   "term": { "en": "Mammal", "zh": "哺乳动物" },
+   "definition": {
+    "en": "An animal with hair or fur that feeds its young on milk and breathes with lungs. Most mammals give birth to live young. People, squirrels, bats and dolphins are mammals.",
+    "zh": "有毛发、用奶喂养幼仔、用肺呼吸的动物。大多数哺乳动物是胎生的。人、松鼠、蝙蝠、海豚都是哺乳动物。"
+   },
+   "see": ["bird", "fish"]
+  },
+  {
+   "id": "fish",
+   "term": { "en": "Fish", "zh": "鱼类" },
+   "definition": {
+    "en": "An animal with fins, a tail and usually scales, which breathes through gills. Most fish lay eggs in water.",
+    "zh": "有鳍、有尾巴、通常有鳞片、用鳃呼吸的动物。大多数鱼在水里下蛋。"
+   },
+   "see": ["mammal"]
+  },
+  {
+   "id": "reptile",
+   "term": { "en": "Reptile", "zh": "爬行动物" },
+   "definition": {
+    "en": "An animal with dry skin covered in scales, which breathes with lungs, such as a lizard, a snake or a turtle. Most reptiles lay eggs on land.",
+    "zh": "皮肤干燥、长着鳞片、用肺呼吸的动物，比如蜥蜴、蛇、龟。大多数爬行动物在陆地上下蛋。"
+   },
+   "see": ["amphibian"]
+  },
+  {
+   "id": "amphibian",
+   "term": { "en": "Amphibian", "zh": "两栖动物" },
+   "definition": {
+    "en": "An animal such as a frog or a toad. Most amphibians have moist skin without scales; a toad's skin is dry and bumpy, but a toad is still an amphibian.",
+    "zh": "蛙、蟾蜍这一类动物。大多数两栖动物皮肤湿润、没有鳞片；蟾蜍的皮肤干而多疙瘩，但它仍是两栖动物。"
+   },
+   "see": ["reptile"]
+  },
+  {
+   "id": "flowchart",
+   "term": { "en": "Flowchart", "zh": "分类流程图" },
+   "definition": {
+    "en": "A chart that sorts things with one yes-or-no question at a time. Each answer leads to the next question or to a group. The same questions can be set out as a table of ticks. In England it is called a classification key, in Chinese 检索表.",
+    "zh": "一次问一个“是 / 不是”的问题来分组的图。每个答案通到下一个问题，或者通到一个组。同样的问题也可以写成打勾表。英格兰叫它 classification key，中文也叫“检索表”。"
+   },
+   "see": ["classify"]
+  }
+ ]
+}
