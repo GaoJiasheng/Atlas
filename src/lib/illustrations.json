@@ -219,6 +219,26 @@
       "0000000000000000"
     ]
   },
+  "heart-and-lungs": {
+    "mask": [
+      "0000000110000000",
+      "0000000780000000",
+      "0000020790210000",
+      "00006e9893da1000",
+      "0005ffeeceff9000",
+      "002dfffedffff500",
+      "007ffffffffffc00",
+      "01dfffffffffff40",
+      "05ffffffffffff80",
+      "08ffffffffffffb0",
+      "0bfffffdefffffd1",
+      "1dfffff85effffd1",
+      "1dffffd204efffd1",
+      "1dfda8300038dfd1",
+      "08510000000016a0",
+      "0000000000000010"
+    ]
+  },
   "light-and-shadows": {
     "mask": [
       "0000000000000000",

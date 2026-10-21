@@ -1,0 +1,164 @@
+---
+id: nose-windpipe-lungs
+order: 1
+title: { en: "Nose, windpipe and lungs", zh: "鼻、气管和肺" }
+sensitive: false
+state:
+  view: assembled
+  run: true
+  cutaway: midline
+  pose: null
+  layers: [airway, lung-pair, breathing-movers, skeleton-context, skin-context, air]
+  ghost: [skeleton-context]
+  labels: [nasal-cavity, pharynx, trachea]
+  camera: { position: [0.36, 0.52, 0.38], target: [0, 0.47, -0.07], fov: 30 }
+  summary:
+    en: "Air comes in through the nose, goes down the windpipe and into the two lungs. Breathing in makes the chest bigger, and air flows in."
+    zh: "空气从鼻子进来，沿着气管往下，进入两个肺。吸气时胸腔变大，空气就流进来。"
+  sim:
+    set: { phase: auto }
+    try:
+      vary: phase
+      keep: [{ en: "Same person, sitting still", zh: "同一个人，坐着不动" }]
+      observe: [diaphragm, chest, airflow]
+      predict:
+        prompt:
+          en: "The muscle under the lungs moves down and the ribs move out. What does the air do?"
+          zh: "肺下面的肌肉往下移，肋骨往外移。空气会怎样？"
+        start: { phase: out }
+        change: { phase: in }
+        observe: airflow
+        options:
+          - { id: flows-in, label: { en: "Flows in", zh: "流进来" }, means: in }
+          - { id: flows-out, label: { en: "Flows out", zh: "流出去" }, means: out }
+  beats:
+    - labels: [nasal-cavity, pharynx]
+      caption:
+        en: "Air comes in through the nostrils. Inside the nose it is warmed and moistened, and dust is caught."
+        zh: "空气从鼻孔进来。在鼻子里，空气被加温、变湿，灰尘被挡住。"
+    - layers: [airway, lung-pair, breathing-movers, digestion, skeleton-context, skin-context, air]
+      camera: { position: [0.44, 0.44, 0.44], target: [0, 0.4, -0.08], fov: 30 }
+      ghost: [skeleton-context, stomach, small-intestine, large-intestine, liver]
+      labels: [pharynx, trachea, oesophagus]
+      caption:
+        en: "From the throat, air goes down the windpipe, which lies in front of the gullet. Food goes down the gullet; air goes down the windpipe."
+        zh: "空气经过喉咙进入气管。气管在食道前面：食物走食道，空气走气管。"
+    - camera: chest
+      view: xray
+      cutaway: none
+      layers: [airway, lung-pair, air-tubes, breathing-movers, skeleton-context, skin-context, air]
+      ghost: [skeleton-context, lung-pair]
+      labels: [trachea, bronchi]
+      caption:
+        en: "Rings of cartilage keep the windpipe open. At the bottom it divides into two tubes, one to each lung."
+        zh: "一圈圈软骨让气管一直张开。气管下端分成两条管，分别通到两个肺。"
+    - camera: chest
+      view: xray
+      cutaway: none
+      layers: [airway, lung-pair, heart-group, breathing-movers, skeleton-context, skin-context, air]
+      labels: [lung-right, lung-left, heart, ribcage]
+      caption:
+        en: "The lungs are large. They fill most of the chest on both sides of the heart, inside the ribs."
+        zh: "肺很大，占满了胸腔里心脏两边的大部分空间，外面有肋骨护着。"
+    - camera: { position: [0.62, 0.36, 0.62], target: [0.0, 0.26, -0.1], fov: 30 }
+      view: xray
+      cutaway: none
+      labels: [diaphragm, ribcage, lung-right]
+      caption:
+        en: "To breathe in, the dome-shaped muscle under the lungs moves down and the ribs move up and out. The chest gets bigger and air flows in. The lungs do not move by themselves."
+        zh: "吸气时，肺下面那块圆顶形的肌肉往下移，肋骨往上、往外移。胸腔变大，空气就流进来。肺自己不会动。"
+  index:
+    parts: [nasal-cavity, pharynx, trachea, oesophagus, lung-right, lung-left, diaphragm, ribcage, bronchi]
+---
+
+<Lang en>
+
+The stage is cut down the middle of the head and neck, so you can see the way the air goes. <Term id="breathing">Breathing</Term> in draws air through the two nostrils into the nose. Inside, the nose warms and moistens the air and catches dust and germs before they go further. <FlyTo preset="head-neck">Look at the nose and throat</FlyTo>
+
+Behind the nose and the mouth is the throat, a passage that air and food share. Lower down, the two routes divide. Food goes down the gullet; air goes down the <Term id="windpipe">windpipe</Term>, which lies in front of the gullet. So the respiratory system is the nose, the windpipe and the lungs; the gullet belongs to the digestive system.
+
+The windpipe is kept open by rings of cartilage, about <Num s="S2">16 to 20</Num> of them in an adult. At its lower end it divides into two tubes, one going into each lung.
+
+<Figure src="figures/heart-and-lungs-airway-tree" alt={{ en: "A pencil drawing of the airway: the inside of the nose and mouth, the throat, a ringed windpipe dividing into two tubes that branch many times inside two see-through lungs, and a dome of muscle below the lungs.", zh: "气道的铅笔画：鼻腔和口腔的内部、咽、有环的气管分成两条管，在两个透明的肺里分了很多次，肺下面是一片圆顶形的肌肉。" }} caption={{ en: "Air goes from the nose down the windpipe, which divides into two tubes, one to each lung. Inside the lungs the tubes branch many times (beyond the syllabus). An illustration made for this topic.", zh: "空气从鼻子进入气管，气管分成两条管，分别通到两个肺；在肺里，这些管又分了很多次（超出课纲）。为本主题绘制的示意图。" }} />
+
+The two <Term id="lungs">lungs</Term> are large. They fill most of the chest, one on each side of the heart, inside the ribs. The right lung is a little bigger than the left, which leaves room for the heart.
+
+The lungs cannot move by themselves. To breathe in, the dome-shaped muscle under the lungs moves down and the ribs move up and out. The chest gets bigger, the lungs swell with it, and air flows in. To breathe out, the muscle moves up and the ribs move back down and in; the chest gets smaller and air flows out. The lungs never empty completely. Try it on the card: stop the breath halfway and see what moves.
+
+<More title={{ en: "Rings in the windpipe", zh: "气管里的环" }}>
+
+The rings are C-shaped pieces of cartilage, about <Num s="S2">16 to 20</Num> of them, stacked one above another. The open side of the C faces backwards, towards the gullet. In an adult the windpipe is about <Num s="S40">10 to 12 cm</Num> long; in this model it measures about <Num s="S37">10.5 cm</Num>.
+
+</More>
+
+<More title={{ en: "Air and food share the throat", zh: "空气和食物共用喉咙" }}>
+
+When you swallow, a small flap at the top of the windpipe swings down and closes it, so food goes into the gullet. The flap is the epiglottis, a word beyond the syllabus. Swallowing is followed step by step in <TopicLink slug="digestive-system" ch="mouth-and-gullet-chapter">Mouth and gullet</TopicLink>.
+
+</More>
+
+<More title={{ en: "Names for the parts that move · further", zh: "会动的部分叫什么 · 再进一步" }}>
+
+The dome-shaped muscle is the <Term id="diaphragm">diaphragm</Term>. The muscles between the ribs are the intercostal muscles; you can see them in <TopicLink slug="muscles-chest" ch="under-the-pecs">Under the pecs</TopicLink>. The syllabus does not ask for these names. In this model the lungs swell, the diaphragm moves and the ribs widen more than they do in quiet breathing, so that you can see it.
+
+</More>
+
+<More title={{ en: "Air tubes · further", zh: "支气管 · 再进一步" }}>
+
+Each of the two tubes at the bottom of the windpipe branches again and again inside its lung, into smaller and smaller <Term id="air-tubes">air tubes</Term>. Switch on the air tubes in LAYERS and use X-RAY to see the first few branches; the finest ones are too small to draw.
+
+</More>
+
+<More title={{ en: "The lungs never empty", zh: "肺从来不会完全排空" }}>
+
+Even after you breathe out as hard as you can, some air stays in the lungs. This helps keep the smallest air spaces inside them from collapsing.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+舞台从头和脖子的正中剖开，可以看到空气走的路。<Term id="breathing">呼吸</Term>时，吸气把空气经过两个鼻孔吸进鼻子。在鼻子里，空气被加温、加湿，灰尘和病菌也被挡住，不再往里走。<FlyTo preset="head-neck">看看鼻子和咽</FlyTo>
+
+鼻子和口的后面是咽，是空气和食物共用的通道。再往下，两条路分开：食物走食道，空气走<Term id="windpipe">气管</Term>，气管在食道前面。所以呼吸系统是鼻、气管和肺；食道属于消化系统。
+
+一圈圈软骨让气管一直张开，成年人大约有 <Num s="S2">16 到 20</Num> 圈。气管下端分成两条管，各通进一个肺。
+
+<Figure src="figures/heart-and-lungs-airway-tree" alt={{ en: "A pencil drawing of the airway: the inside of the nose and mouth, the throat, a ringed windpipe dividing into two tubes that branch many times inside two see-through lungs, and a dome of muscle below the lungs.", zh: "气道的铅笔画：鼻腔和口腔的内部、咽、有环的气管分成两条管，在两个透明的肺里分了很多次，肺下面是一片圆顶形的肌肉。" }} caption={{ en: "Air goes from the nose down the windpipe, which divides into two tubes, one to each lung. Inside the lungs the tubes branch many times (beyond the syllabus). An illustration made for this topic.", zh: "空气从鼻子进入气管，气管分成两条管，分别通到两个肺；在肺里，这些管又分了很多次（超出课纲）。为本主题绘制的示意图。" }} />
+
+两个<Term id="lungs">肺</Term>很大，占满了胸腔的大部分，心脏两边各一个，外面有肋骨护着。右肺比左肺大一点，左肺给心脏留出了位置。
+
+肺自己不会动。吸气时，肺下面那块圆顶形的肌肉往下移，肋骨往上、往外移。胸腔变大，肺跟着胀开，空气就流进来。呼气时，那块肌肉往上移，肋骨往下、往里回；胸腔变小，空气就流出去。肺从来不会完全排空。在卡片上试一试：让呼吸停在一半，看看什么在动。
+
+<More title={{ en: "Rings in the windpipe", zh: "气管里的环" }}>
+
+这些环是 C 形的软骨，大约 <Num s="S2">16 到 20</Num> 块，一块叠一块。C 的开口朝后，对着食道。成年人的气管长约 <Num s="S40">10 到 12 厘米</Num>；这个模型里量得约 <Num s="S37">10.5 厘米</Num>。
+
+</More>
+
+<More title={{ en: "Air and food share the throat", zh: "空气和食物共用喉咙" }}>
+
+吞咽时，气管顶上的一小片会往下盖，关住气管，食物就进入食道。这一小片叫会厌，这个词超出课纲。吞咽的过程在<TopicLink slug="digestive-system" ch="mouth-and-gullet-chapter">口与食道</TopicLink>里一步步讲。
+
+</More>
+
+<More title={{ en: "Names for the parts that move · further", zh: "会动的部分叫什么 · 再进一步" }}>
+
+那块圆顶形的肌肉叫<Term id="diaphragm">膈</Term>。肋骨之间的肌肉叫肋间肌，可以在<TopicLink slug="muscles-chest" ch="under-the-pecs">胸大肌下面</TopicLink>里看到。课纲不要求这些名称。在这个模型里，肺的胀缩、膈的移动和肋骨的外扩都比平静呼吸时明显，好让你看得出来。
+
+</More>
+
+<More title={{ en: "Air tubes · further", zh: "支气管 · 再进一步" }}>
+
+气管下端的两条管，进入肺以后又一次次分支，变成越来越细的<Term id="air-tubes">支气管</Term>。在图层里打开支气管，再用 X 光模式，就能看到最初的几级分支；最细的太小，画不出来。
+
+</More>
+
+<More title={{ en: "The lungs never empty", zh: "肺从来不会完全排空" }}>
+
+就算用尽力气呼气，肺里也总留着一些空气。这样，肺里最小的气腔就不会塌下去。
+
+</More>
+
+</Lang>

@@ -1,0 +1,140 @@
+---
+id: plants-fish-humans
+order: 6
+title: { en: "Plants, fish and humans", zh: "植物、鱼和人" }
+sensitive: false
+state:
+  view: xray
+  run: true
+  cutaway: none
+  pose: null
+  layers: [airway, lung-pair, skeleton-context, skin-context, bench, compare, air, gases]
+  ghost: [skeleton-context]
+  labels: [trachea, lung-right, lung-left]
+  camera: { position: [0.34, 0.44, 1.0], target: [0.01, 0.28, -0.1], fov: 30 }
+  summary:
+    en: "Humans take in oxygen from air with their lungs; fish take in oxygen dissolved in water with their gills; plants take it in through tiny openings, mostly on their leaves. Plants move water and food in tubes; humans move digested food, oxygen and carbon dioxide in blood vessels."
+    zh: "人用肺从空气中吸进氧气；鱼用鳃吸收溶在水里的氧气；植物主要通过叶上的小孔吸进氧气。植物用管子运水和食物；人用血管运送消化后的食物、氧气和二氧化碳。"
+  beats:
+    - labels: [trachea, lung-right]
+      caption:
+        en: "Humans take in oxygen from the air through the nose, windpipe and lungs, and give out carbon dioxide the same way."
+        zh: "人通过鼻、气管和肺从空气中吸进氧气，也从同一条路呼出二氧化碳。"
+    - camera: { position: [1.13, 0.27, 0.3], target: [1.05, 0.2, -0.06], fov: 30 }
+      view: assembled
+      pose: gills-open
+      layers: [bench, compare, fish-water]
+      labels: [fish-body, gills, gill-cover]
+      caption:
+        en: "A fish takes in oxygen that is dissolved in water. Water comes in through the mouth, passes over the gills and flows out from under the gill covers."
+        zh: "鱼吸收溶解在水里的氧气。水从口进入，流过鳃，再从鳃盖下面流出去。"
+    - camera: { position: [1.06, 0.23, 0.13], target: [1.017, 0.2, -0.045], fov: 30 }
+      view: assembled
+      pose: gills-open
+      layers: [bench, compare, fish-water]
+      labels: [gills, gill-cover]
+      caption:
+        en: "In the gills, oxygen passes from the water into the blood, and carbon dioxide passes from the blood into the water."
+        zh: "在鳃里，氧气从水进入血液，二氧化碳从血液进入水中。"
+    - camera: { position: [1.36, 0.36, 0.4], target: [1.29, 0.29, -0.07], fov: 30 }
+      view: assembled
+      layers: [bench, compare, plant-gases]
+      labels: [plant-specimen]
+      caption:
+        en: "A plant has no lungs or gills. It takes in oxygen and gives out carbon dioxide through tiny openings, mostly on its leaves, by day and by night. In light, its leaves also take in carbon dioxide and give out oxygen to make food."
+        zh: "植物没有肺，也没有鳃。它主要通过叶上的小孔吸进氧气、放出二氧化碳，白天黑夜都这样。有光时，叶子另外吸进二氧化碳、放出氧气来制造食物。"
+    - camera: { position: [1.05, 0.5, 2.2], target: [0.62, 0.05, -0.08], fov: 30 }
+      layers: [airway, lung-pair, heart-group, body-vessels, skeleton-context, skin-context, bench, compare, plant-flow, blood-rich, blood-poor]
+      labels: [plant-specimen, vessels-out, heart]
+      caption:
+        en: "To move substances around, a plant has tubes that carry water and food. A human has blood vessels that carry digested food, oxygen and carbon dioxide."
+        zh: "运送物质时，植物用管子运水和食物；人用血管运送消化后的食物、氧气和二氧化碳。"
+  index:
+    parts: [fish-body, gills, gill-cover, plant-specimen, lung-right, trachea, vessels-out]
+---
+
+<Lang en>
+
+The syllabus asks you to compare how three kinds of living things take in oxygen and give out carbon dioxide. Humans do it with the respiratory system: air comes in through the nose and down the windpipe into the lungs, where oxygen passes into the blood and carbon dioxide leaves it, and the used air goes out the same way.
+
+A fish lives in water, and it takes in the oxygen that is dissolved in the water. It does this with its <Term id="gills">gills</Term>, which lie in a chamber on each side of the head under a flap, the gill cover. Water comes in through the mouth, passes over the gills and flows out from under the gill covers. The gills are thin and folded, with tiny blood vessels inside: oxygen passes from the water into the blood, and carbon dioxide passes from the blood into the water. <FlyTo preset="side-bench">Look at the fish and the plant</FlyTo>
+
+A plant has no lungs and no gills. Gases go in and out through tiny openings, most of them on the underside of the leaves. A plant takes in oxygen and gives out carbon dioxide by day and by night. In light, its leaves also take in carbon dioxide and give out oxygen as they make food, as in <TopicLink slug="plant" ch="leaves-make-food">Leaves make food</TopicLink>; you will learn more about that in P6.
+
+Plants and humans both move substances around inside them. A plant has tubes: one kind carries water up from the roots, another carries food made in the leaves to the other parts, as in <TopicLink slug="plant" ch="the-stem">The stem carries water and food</TopicLink>. A human has blood vessels, which carry digested food, oxygen and carbon dioxide.
+
+| | Humans | Fish | Plants |
+|---|---|---|---|
+| Oxygen comes from | air | water | air |
+| Taken in through | nose, windpipe, lungs | gills | tiny openings, mostly on the leaves |
+| Carbon dioxide goes out through | lungs, windpipe, nose | gills | tiny openings |
+| Substances carried in | blood vessels: digested food, oxygen, carbon dioxide | (not compared in the syllabus) | tubes: water, food |
+
+<More title={{ en: "Tiny openings have a name", zh: "叶上的小孔有名字" }}>
+
+Scientists call the tiny openings on leaves stomata. The P5 syllabus does not ask for the word.
+
+</More>
+
+<More title={{ en: "Insects do it differently", zh: "昆虫的办法不一样" }}>
+
+A grasshopper has neither lungs nor gills: air reaches its body through tubes that open along its sides. See <TopicLink slug="grasshopper" ch="breathing-and-blood">Breathing and blood</TopicLink>.
+
+</More>
+
+<More title={{ en: "Gills up close", zh: "细看鳃" }}>
+
+Each gill is made of thin filaments, branched and folded many times, so that a large surface meets the water. Tiny blood vessels run through them, close to the water flowing past.
+
+</More>
+
+<More title={{ en: "The fish and the plant are models", zh: "鱼和植物是模型" }}>
+
+The fish is a general bony fish, not a particular kind, with its left gill cover lifted to show four gill arches. The plant is a young chilli plant. Neither is to scale with the body or with each other.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+课纲要求比较三类生物怎样吸进氧气、放出二氧化碳。人用呼吸系统：空气从鼻子进来，沿着气管进入肺；在肺里，氧气进入血液，二氧化碳离开血液，用过的空气再从同一条路出去。
+
+鱼生活在水里，吸收的是溶在水里的氧气。它用<Term id="gills">鳃</Term>来做这件事；鳃在头部两侧的腔里，外面盖着一片鳃盖。水从口进入，流过鳃，再从鳃盖下面流出去。鳃又薄又多褶，里面有细小的血管：氧气从水进入血液，二氧化碳从血液进入水中。<FlyTo preset="side-bench">看看鱼和植物</FlyTo>
+
+植物没有肺，也没有鳃。气体经过小孔进出，这些小孔大多在叶背。植物白天黑夜都吸进氧气、放出二氧化碳。有光时，叶子另外吸进二氧化碳、放出氧气来制造食物，就像<TopicLink slug="plant" ch="leaves-make-food">叶子造食物</TopicLink>里讲的那样；小六会学得更多。
+
+植物和人体内都在运送物质。植物有管子：一种把水从根往上运，另一种把叶子制造的食物运到其他部分，见<TopicLink slug="plant" ch="the-stem">茎：支撑与运输</TopicLink>。人有血管，运送消化后的食物、氧气和二氧化碳。
+
+| | 人 | 鱼 | 植物 |
+|---|---|---|---|
+| 氧气从哪里来 | 空气 | 水 | 空气 |
+| 从哪里吸进 | 鼻、气管、肺 | 鳃 | 小孔，主要在叶上 |
+| 二氧化碳从哪里出去 | 肺、气管、鼻 | 鳃 | 小孔 |
+| 用什么运送物质 | 血管：消化后的食物、氧气、二氧化碳 | （课纲不比较） | 管子：水、食物 |
+
+<More title={{ en: "Tiny openings have a name", zh: "叶上的小孔有名字" }}>
+
+科学家把叶上的小孔叫作气孔。小五课纲不要求这个词。
+
+</More>
+
+<More title={{ en: "Insects do it differently", zh: "昆虫的办法不一样" }}>
+
+蚱蜢既没有肺，也没有鳃：空气经过身体两侧开口的管子进入身体。见<TopicLink slug="grasshopper" ch="breathing-and-blood">呼吸与血液</TopicLink>。
+
+</More>
+
+<More title={{ en: "Gills up close", zh: "细看鳃" }}>
+
+每片鳃都由很薄的细丝构成，分支多、褶皱多，所以有很大的表面和水接触。细小的血管从里面穿过，离流过的水很近。
+
+</More>
+
+<More title={{ en: "The fish and the plant are models", zh: "鱼和植物是模型" }}>
+
+这条鱼是一般的硬骨鱼，不代表某一种鱼；左边的鳃盖掀开，露出四道鳃弓。植物是一棵小辣椒苗。它们和身体、彼此之间都不按比例。
+
+</More>
+
+</Lang>

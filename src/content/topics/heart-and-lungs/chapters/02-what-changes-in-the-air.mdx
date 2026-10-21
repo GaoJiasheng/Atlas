@@ -1,0 +1,144 @@
+---
+id: what-changes-in-the-air
+order: 2
+title: { en: "What changes in the air", zh: "空气有什么变化" }
+sensitive: false
+state:
+  view: assembled
+  run: false
+  cutaway: none
+  pose: null
+  layers: [bench, air-sample, airway, lung-pair, heart-group, skeleton-context, skin-context]
+  labels: [air-jar, n2-balls, o2-balls]
+  camera: { position: [0.77, 0.4, 0.8], target: [0.68, 0.19, -0.08], fov: 30 }
+  summary:
+    en: "Air is a mixture of gases. The air you breathe out still has most of its oxygen, but about a hundred times more carbon dioxide and more water vapour."
+    zh: "空气是几种气体的混合。呼出的气体里，大部分氧气还在，但二氧化碳多了大约一百倍，水蒸气也更多。"
+  sim:
+    set: { sample: in }
+    try:
+      vary: sample
+      keep: [{ en: "Same person, at rest", zh: "同一个人，休息时" }]
+      observe: [o2, co2, n2, h2o]
+      record: { chart: { y: [o2, co2, h2o] } }
+      predict:
+        prompt:
+          en: "Compared with the air breathed in, the oxygen in breathed-out air is…"
+          zh: "和吸入的空气比，呼出的气体里的氧气……"
+        start: { sample: in }
+        change: { sample: out }
+        observe: o2
+        options:
+          - { id: all-gone, label: { en: "All gone", zh: "全没了" }, means: zero }
+          - { id: less, label: { en: "Less", zh: "少了一些" }, means: less }
+          - { id: same, label: { en: "The same", zh: "一样多" }, means: same }
+  beats:
+    - labels: [air-jar, n2-balls, o2-balls]
+      caption:
+        en: "Air is a mixture of gases. Here each ball stands for one part in a hundred: about 78 are nitrogen and 21 are oxygen."
+        zh: "空气是几种气体混合在一起的。这里每个小球代表百分之一：大约 78 个是氮气，21 个是氧气。"
+    - labels: [co2-balls, h2o-balls, o2-balls]
+      caption:
+        en: "Carbon dioxide is only about 0.04 per cent of air, less than one ball. How much water vapour there is depends on the weather."
+        zh: "二氧化碳只占空气的大约 0.04%，连一个球都不到。水蒸气有多少，要看天气。"
+    - sim: { set: { sample: out } }
+      labels: [o2-balls, co2-balls, h2o-balls]
+      caption:
+        en: "Breathed-out air still has about 16 parts oxygen in a hundred. Carbon dioxide rises to about 4, a hundred times more, and there is more water vapour."
+        zh: "呼出的气体里，每一百份仍有大约 16 份是氧气。二氧化碳增加到大约 4 份，是原来的一百倍；水蒸气也更多了。"
+    - camera: chest
+      view: xray
+      run: true
+      layers: [airway, lung-pair, heart-group, skeleton-context, skin-context, gases, blood-poor, blood-rich]
+      ghost: [lung-pair, skeleton-context]
+      labels: [lung-vessels, trachea]
+      caption:
+        en: "The missing oxygen has gone into the blood in the lungs. The extra carbon dioxide has come out of the blood. Green dots are oxygen; grey dots are carbon dioxide."
+        zh: "少了的氧气在肺里进了血液，多出来的二氧化碳是从血液里出来的。绿点是氧气，灰点是二氧化碳。"
+  index:
+    parts: [air-jar, n2-balls, o2-balls, co2-balls, h2o-balls, lung-right, lung-vessels]
+---
+
+<Lang en>
+
+Air is matter, as you saw in <TopicLink slug="states-of-matter" ch="air-is-matter">Air is matter</TopicLink>, and it is a mixture of several gases. The rack beside the jar shows the air in it, one ball for each per cent. About <Num s="S3">78 %</Num> is <Term id="nitrogen">nitrogen</Term> and about <Num s="S3">21 %</Num> is <Term id="oxygen">oxygen</Term>. <Term id="carbon-dioxide">Carbon dioxide</Term> is only about <Num s="S3,S4">0.04 %</Num>, less than one ball. The amount of <Term id="water-vapour">water vapour</Term> changes with the weather; about <Num s="S3">1 %</Num> is typical. <FlyTo preset="side-bench">Look at the jar</FlyTo>
+
+Switch the jar to the air you breathe out. Oxygen falls to about <Num s="S5,S6">16 %</Num>. Carbon dioxide rises to about <Num s="S5,S6">4 %</Num>, about a hundred times as much as in the air. There is more water vapour too, about <Num s="S8">6 %</Num>, because breath is warm and moist. The body neither uses nor makes nitrogen, so textbooks give about <Num s="S5,S6">78 %</Num> for breathed-out air as well.
+
+So you do not breathe in only oxygen, and you do not breathe out only carbon dioxide. Both are mixtures, and most of the oxygen comes back out: only about a quarter of it is taken in, and about three quarters is breathed out again (16 ÷ 21 ≈ <Num s="S7">0.76</Num>).
+
+The oxygen that is missing has gone into the blood in the lungs, and the extra carbon dioxide has come out of the blood there. Chapter 4 follows the blood that carries them. Use the card to compare the two samples and record both in the table.
+
+<More title={{ en: "Why the balls don't add up to 100", zh: "为什么小球加起来不是 100 个" }}>
+
+The values are rounded to whole balls. Air also holds about <Num s="S3">0.9 %</Num> argon and tiny amounts of other gases, which are not drawn. For breathed-out air, 78 + 16 + 4 + 6 comes to 104: the textbook value for nitrogen is a little too high, as the next box explains.
+
+</More>
+
+<More title={{ en: "Nitrogen is really about 75 % in breath", zh: "呼出气体里的氮气其实约 75%" }}>
+
+Breathed-out air has more water vapour and carbon dioxide, and they take up part of the space. Nitrogen then makes up a smaller share, about <Num s="S8">75 %</Num> in a measured breath, although the amount of nitrogen is the same as before. Many textbooks write 78 % for both, as the card does.
+
+</More>
+
+<More title={{ en: "Deep in the lungs is different again", zh: "肺的深处又不一样" }}>
+
+The air deep in the lungs has even less oxygen, about <Num s="S2">13.7 %</Num>, and more carbon dioxide, about <Num s="S2">5.2 %</Num>. When you breathe out, it mixes with fresher air from the windpipe and the air tubes, so your breath has more oxygen than that. The tiny air spaces deep in the lungs are called alveoli, a word the syllabus does not ask for.
+
+</More>
+
+<More title={{ en: "Misty breath", zh: "呵气成雾" }}>
+
+Breathe on a cold mirror and it mists over. The water vapour in your breath cools on the glass and condenses into tiny drops, as in <TopicLink slug="water" ch="the-water-cycle">The Sun drives the water cycle</TopicLink>. Singapore's air is often humid already, so the difference between the air you breathe in and out is probably smaller there than these values suggest.
+
+</More>
+
+<More title={{ en: "Air changes slowly", zh: "空气也在慢慢变化" }}>
+
+Carbon dioxide in the air was measured at about <Num s="S4">426</Num> parts in a million in September 2026, which rounds to 0.04 %. It has been rising slowly year by year.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+在<TopicLink slug="states-of-matter" ch="air-is-matter">空气也是物质</TopicLink>里你看到，空气是物质；它是几种气体的混合。瓶前的托架显示瓶里的空气，每个小球代表百分之一。大约 <Num s="S3">78%</Num> 是<Term id="nitrogen">氮气</Term>，大约 <Num s="S3">21%</Num> 是<Term id="oxygen">氧气</Term>。<Term id="carbon-dioxide">二氧化碳</Term>只有大约 <Num s="S3,S4">0.04%</Num>，连一个球都不到。<Term id="water-vapour">水蒸气</Term>有多少随天气变化，典型值约 <Num s="S3">1%</Num>。<FlyTo preset="side-bench">看看空气瓶</FlyTo>
+
+把瓶里换成呼出的气体。氧气降到大约 <Num s="S5,S6">16%</Num>。二氧化碳升到大约 <Num s="S5,S6">4%</Num>，是空气里的一百倍左右。水蒸气也更多，大约 <Num s="S8">6%</Num>，因为呼出的气又暖又湿。身体既不用氮气，也不制造氮气，所以课本里呼出的气体也写约 <Num s="S5,S6">78%</Num>。
+
+所以，吸进的不只是氧气，呼出的也不只是二氧化碳。两者都是混合气体，而且大部分氧气又出来了：只有大约四分之一被吸收，大约四分之三又被呼了出来（16 ÷ 21 ≈ <Num s="S7">0.76</Num>）。
+
+少了的那些氧气，在肺里进入了血液；多出来的二氧化碳，是在肺里从血液出来的。第 4 章跟着运送它们的血液走。用卡片比较两种样本，把两种都记在表里。
+
+<More title={{ en: "Why the balls don't add up to 100", zh: "为什么小球加起来不是 100 个" }}>
+
+这些数取到了整个的小球。空气里还有约 <Num s="S3">0.9%</Num> 的氩和极少量的其他气体，没有画。呼出的气体是 78 + 16 + 4 + 6，加起来是 104：课本里氮气的数稍微偏高，下一个细看会解释。
+
+</More>
+
+<More title={{ en: "Nitrogen is really about 75 % in breath", zh: "呼出气体里的氮气其实约 75%" }}>
+
+呼出的气体里水蒸气和二氧化碳多了，它们占去一部分位置。于是氮气所占的比例就小了，实际测量的呼出气体里约 <Num s="S8">75%</Num>，虽然氮气的量和原来一样。很多课本两边都写 78%，卡片也这样写。
+
+</More>
+
+<More title={{ en: "Deep in the lungs is different again", zh: "肺的深处又不一样" }}>
+
+肺深处的空气里，氧气更少，约 <Num s="S2">13.7%</Num>，二氧化碳更多，约 <Num s="S2">5.2%</Num>。呼气时，它和气管、支气管里比较新鲜的空气混在一起，所以呼出的气体里氧气比这个多。肺深处那些极小的气腔叫肺泡，课纲不要求这个词。
+
+</More>
+
+<More title={{ en: "Misty breath", zh: "呵气成雾" }}>
+
+对着一面冷镜子呵气，镜子会蒙上一层雾。呼出的水蒸气在玻璃上变冷，凝结成很小的水珠，就像<TopicLink slug="water" ch="the-water-cycle">太阳推动水循环</TopicLink>里讲的那样。新加坡的空气本来就常常很潮湿，所以在那里，吸入和呼出的气体差别大概没有这些数那么大。
+
+</More>
+
+<More title={{ en: "Air changes slowly", zh: "空气也在慢慢变化" }}>
+
+2026 年 9 月测得空气里的二氧化碳约为百万分之 <Num s="S4">426</Num>，取整就是 0.04%。它一年一年地慢慢上升。
+
+</More>
+
+</Lang>

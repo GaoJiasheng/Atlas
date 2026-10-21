@@ -1,0 +1,126 @@
+---
+id: the-blood-route
+order: 4
+title: { en: "Through the lungs, then round the body", zh: "先到肺，再到全身" }
+sensitive: false
+state:
+  view: xray
+  run: true
+  cutaway: none
+  pose: lungs-aside
+  layers: [airway, lung-pair, heart-group, body-vessels, leg-muscle-group, skeleton-context, skin-context, gases, blood-rich, blood-poor]
+  ghost: [lung-pair, body-vessels, airway]
+  labels: [heart, lung-vessels, great-vessels]
+  camera: { position: [0.34, 0.44, 1.0], target: [0.01, 0.28, -0.1], fov: 30 }
+  summary:
+    en: "On each round, blood goes from the heart to the lungs, back to the heart, out to the body and back to the heart again. It turns bright red in the lungs and dark red in the body."
+    zh: "血液每绕一圈，都是从心脏到肺、回心脏、再到全身、再回心脏。它在肺里变成鲜红，在身体各处变回暗红。"
+  sim:
+    set: { stop: 0 }
+    try:
+      vary: stop
+      keep: []
+      observe: [where, blood]
+      predict:
+        prompt:
+          en: "The blood has just picked up oxygen in the lungs. Where does it go next?"
+          zh: "血刚在肺里吸收了氧气。接下来它去哪里？"
+        start: { stop: 2 }
+        change: { stop: 3 }
+        observe: where
+        options:
+          - { id: back-to-heart, label: { en: "Back to the heart", zh: "回到心脏" }, means: lungs-to-heart }
+          - { id: to-body, label: { en: "Straight to the body", zh: "直接到身体各处" }, means: in-body }
+  beats:
+    - sim: { set: { stop: 1 } }
+      labels: [heart, lung-vessels]
+      caption:
+        en: "Blood coming back from the body is dark red. The heart sends it first to the lungs."
+        zh: "从身体回来的血是暗红色的。心脏先把它送到肺。"
+    - sim: { set: { stop: 2 } }
+      labels: [lung-vessels, heart]
+      caption:
+        en: "In the lungs the blood takes in oxygen from the air and gives out carbon dioxide. It turns bright red."
+        zh: "在肺里，血液从空气中吸收氧气，放出二氧化碳，变成鲜红色。"
+    - sim: { set: { stop: 3 } }
+      labels: [lung-vessels, heart]
+      caption:
+        en: "The bright red blood goes back to the heart, not straight to the body. The tubes between the lungs and the heart are blood vessels, not air tubes."
+        zh: "鲜红的血先回到心脏，而不是直接流到身体各处。连接肺和心脏的是血管，不是气管。"
+    - camera: { position: [0.5, 0.05, 2.3], target: [0, -0.1, -0.09], fov: 30 }
+      pose: null
+      sim: { set: { stop: 5 } }
+      labels: [leg-muscles, heart]
+      caption:
+        en: "The heart pumps it out to every part of the body. There the blood gives oxygen to the body parts and takes in carbon dioxide, and turns dark red."
+        zh: "心脏再把它泵到身体各处。在那里，血液把氧气交给身体各部分，带走二氧化碳，又变成暗红色。"
+    - camera: whole-body
+      pose: null
+      sim: { set: { stop: 0 } }
+      labels: [heart, lung-vessels, great-vessels]
+      caption:
+        en: "So on every round the blood passes through the heart twice: heart, lungs, heart, body, heart. At rest, one round takes about a minute in an adult."
+        zh: "所以血液每绕一圈都经过心脏两次：心脏、肺、心脏、身体、心脏。成人休息时，绕一圈大约要一分钟。"
+  index:
+    parts: [heart, lung-vessels, lung-right, lung-left, great-vessels, vessels-out, vessels-back, leg-muscles]
+---
+
+<Lang en>
+
+Follow one round of the blood, step by step, on the card. Blood that comes back from the body is dark red: it has given much of its oxygen away. The heart does not send it straight back out to the body. It sends it first to the lungs, through the blood vessels of the lungs. <FlyTo preset="chest">Look at the heart and lungs</FlyTo>
+
+In the lungs the blood is close to the air. Oxygen passes from the air into the blood, and carbon dioxide passes from the blood into the air, to be breathed out. The blood turns bright red.
+
+Next the bright red blood goes back to the heart, not straight to the body. The tubes that join the lungs and the heart are blood vessels; the air tubes stay in the lungs. Then the heart pumps the blood out through the blood vessels to every part of the body. There the blood gives oxygen to the body parts and takes in carbon dioxide, and it turns dark red again. It comes back to the heart, and the round starts again.
+
+So the blood passes through the heart twice on every round: heart, lungs, heart, body, heart. At rest one round takes about <Num s="S2,S19">1 minute</Num> in an adult. Both kinds of blood are red; only the shade changes.
+
+<More title={{ en: "Two loops", zh: "两个回路" }}>
+
+The round is really two loops that meet in the heart: a short loop to the lungs and back, and a long loop to the body and back. The right side of the heart pumps blood round the lung loop; the left side pumps it round the body loop. The four spaces inside the heart, which the syllabus does not ask for, are in chapter 3.
+
+</More>
+
+<More title={{ en: "Tiny blood vessels · further", zh: "极细的血管 · 再进一步" }}>
+
+Oxygen and carbon dioxide pass in and out through the walls of very fine blood vessels, called capillaries, which wrap round the tiny air spaces of the lungs, the alveoli, and run through every part of the body. The syllabus does not ask for these words. They are too fine to draw, so in this model the dots follow a short drawn path where the blood changes colour.
+
+</More>
+
+<More title={{ en: "About a minute", zh: "大约一分钟" }}>
+
+An adult has about <Num s="S2">5 to 6 litres</Num> of blood, and at rest the heart pumps about <Num s="S2">5.25 litres</Num> a minute. Dividing one by the other gives about a minute for the whole amount to go round. A scientist answering pupils' questions gives the same answer. We found no value for children.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+在卡片上一步一步跟着血绕一圈。从身体回来的血是暗红色的：它已经送出了不少氧气。心脏不会马上把它送回身体，而是先经过往返肺的血管，把它送到肺。<FlyTo preset="chest">看看心和肺</FlyTo>
+
+在肺里，血和空气离得很近。氧气从空气进入血液，二氧化碳从血液进入空气，再被呼出去。血变成鲜红色。
+
+接着，鲜红的血先回到心脏，而不是直接流到身体各处。连接肺和心脏的管子是血管；支气管只在肺里。然后，心脏把血经过血管泵到身体的每个部分。在那里，血液把氧气交给身体各部分，带走二氧化碳，又变回暗红色。它回到心脏，新的一圈又开始了。
+
+所以，血液每绕一圈都经过心脏两次：心脏、肺、心脏、身体、心脏。成人休息时，绕一圈大约要 <Num s="S2,S19">1 分钟</Num>。两种血都是红的，只是深浅不同。
+
+<More title={{ en: "Two loops", zh: "两个回路" }}>
+
+这一圈其实是在心脏会合的两个回路：一个短回路到肺再回来，一个长回路到全身再回来。心脏右边把血泵进肺的回路，左边把血泵进全身的回路。心脏里的四个空腔在第 3 章，课纲不要求。
+
+</More>
+
+<More title={{ en: "Tiny blood vessels · further", zh: "极细的血管 · 再进一步" }}>
+
+氧气和二氧化碳是穿过极细的血管的管壁进出的。这些血管叫毛细血管，包在肺里极小的气腔（肺泡）外面，也遍布身体的每个部分。课纲不要求这些词。它们细得画不出来，所以在这个模型里，血变色的地方，点沿着一小段画出来的路线走。
+
+</More>
+
+<More title={{ en: "About a minute", zh: "大约一分钟" }}>
+
+成年人约有 <Num s="S2">5 到 6 升</Num>血，休息时心脏每分钟约泵出 <Num s="S2">5.25 升</Num>。两者相除，全身的血绕一圈大约要一分钟。一位回答学生提问的科学家也给出同样的答案。没有找到孩子的值。
+
+</More>
+
+</Lang>

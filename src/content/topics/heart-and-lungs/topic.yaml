@@ -1,0 +1,18 @@
+id: heart-and-lungs
+title: { en: "The Heart and Lungs", zh: "心与肺" }
+subtitle: { en: "Breathing and the blood: how oxygen and digested food reach every part of the body", zh: "呼吸与血液：氧气和消化后的食物怎样送到全身" }
+shortTitle: { en: "Heart & lungs", zh: "心肺" }
+subject: biology
+tags: [biology, psle, p5, space]
+levels: [P5]
+moe:
+  - "MOE 2023 Science P5 Human System (Respiratory and circulatory systems): air, nose, windpipe, lungs, heart, blood, blood vessels, integration with digestion"
+  - "MOE 2023 Science P5: compare how plants, fish and humans take in oxygen and give out carbon dioxide; compare transport in plants and humans"
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: published
+illustration: heart-and-lungs
+note: { en: "Male reference anatomy · meshes Z-Anatomy / BodyParts3D, CC BY-SA 4.0 · organs simplified · main blood vessels only · jar, fish and plant are models, not to scale", zh: "男性参考解剖 · 网格 Z-Anatomy / BodyParts3D，CC BY-SA 4.0 · 器官已简化 · 只画主要血管 · 空气瓶、鱼和植物是模型，不按比例" }
