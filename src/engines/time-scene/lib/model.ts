@@ -65,6 +65,8 @@ export interface TimeModel {
   bounds: [number, number, number, number] | null;
   /** The topic's `datePrecision`: the finest date part shown (and written back to the URL). */
   datePrecision?: DatePrecision;
+  /** The span crosses from BCE into CE (dates, min < 0 < max): years 1–999 CE are written '150 CE' / '公元150年' (lib/format.ts, docs/43 E1). */
+  mixedEra: boolean;
 }
 
 export interface TimeModelOptions {
@@ -159,6 +161,7 @@ export function buildTimeModel(
     chapterNodes,
     maxStrength: Math.max(1, ...data.movements.map((m) => m.strength ?? 0)),
     bounds: dataBounds(data, keyframes, movements),
+    mixedEra: scale === 'date' && min < 0 && max > 0,
     ...(options.datePrecision ? { datePrecision: options.datePrecision } : {}),
   };
 }

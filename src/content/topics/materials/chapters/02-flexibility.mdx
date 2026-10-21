@@ -1,0 +1,135 @@
+---
+id: "flexibility"
+order: 2
+title: {"en": "Flexibility", "zh": "柔韧性"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: false
+  cutaway: "none"
+  layers: ["bend-rig"]
+  labels: ["bend-clamp", "bend-plastic", "push-peg"]
+  camera: {"position": [-0.35, 0.25, 1.14], "target": [-0.35, 0.1, 0.05], "fov": 30}
+  summary: {"en": "Flexibility is a material's ability to bend without breaking. The same strips are clamped and pushed down at the end: wood, metal, plastic, rubber and fabric bend without breaking; glass and ceramic snap.", "zh": "柔韧性是材料能弯而不断的本领。把同一套条夹住、压下末端：木、金属、塑料、橡胶、布都能弯而不断；玻璃和陶瓷断了。"}
+  sim:
+    set: {"strip": "plastic", "push": 0}
+    try:
+      vary: "strip"
+      also: ["push"]
+      keep: [{"en": "The same strips, 25 cm sticking out", "zh": "同一套条，都伸出 25 厘米"}, {"en": "Pushed down the same distance", "zh": "压下同样的距离"}, {"en": "A fresh strip each time", "zh": "每次换一根新的"}]
+      observe: ["flex-result"]
+      record: true
+      predict:
+        prompt: {"en": "The wooden strip bent without breaking. Swap it for the ceramic strip and push it down 2 cm: what will happen?", "zh": "木条弯了，没有断。换成陶瓷条，也压下 2 厘米，会怎样？"}
+        start: {"strip": "wood", "push": 2}
+        change: {"strip": "ceramic"}
+        observe: "flex-result"
+        options:
+          - {"id": "bends", "label": {"en": "It bends", "zh": "会弯"}, "means": "bends"}
+          - {"id": "snapped", "label": {"en": "It snaps", "zh": "会断"}, "means": "snapped"}
+          - {"id": "droops", "label": {"en": "It droops by itself", "zh": "自己垂下来"}, "means": "droops"}
+  beats:
+    - sim: {"set": {"strip": "wood", "push": 0}}
+      labels: ["bend-clamp", "bend-wood", "push-peg"]
+      caption: {"en": "Each strip is clamped with 25 centimetres sticking out. The peg pushes the free end down by the same distance each time.", "zh": "每根条都夹住，伸出 25 厘米。推杆每次把伸出的一端压下同样的距离。"}
+    - sim: {"set": {"strip": "wood", "push": 2}}
+      labels: ["bend-wood", "push-peg"]
+      caption: {"en": "Pushed down 2 centimetres, the wooden strip bends without breaking.", "zh": "压下 2 厘米，木条弯了，没有断。"}
+    - sim: {"set": {"strip": "glass", "push": 2}}
+      labels: ["bend-glass-snapped", "push-peg"]
+      caption: {"en": "The glass strip snaps before the peg has pushed it down very far. Glass is not flexible, and neither is ceramic.", "zh": "推杆还没压下多少，玻璃条就断了。玻璃不柔韧，陶瓷也不柔韧。"}
+    - sim: {"set": {"strip": "rubber", "push": 0}}
+      labels: ["bend-rubber", "bend-clamp"]
+      caption: {"en": "A rubber strip droops under its own weight. Plastic and fabric strips droop too. They bend very easily without breaking.", "zh": "橡胶条在自己的重量下就垂下来。塑料条、布条也垂着。它们很容易弯，而且不断。"}
+    - camera: "corner-view"
+      layers: ["corner-wood", "corner-metal", "corner-ceramic", "corner-rubber", "corner-glass", "corner-plastic", "corner-fabric"]
+      labels: ["box-seal", "food-box", "tea-towel"]
+      caption: {"en": "The seal in a food box lid has to bend to fit, so it is made of a flexible material, rubber.", "zh": "保鲜盒盖子里的密封圈要弯着贴紧盒盖，所以用柔韧的材料：橡胶。"}
+  index: {"parts": ["bend-clamp", "push-peg", "push-stand", "bend-wood", "bend-metal", "bend-glass", "bend-glass-snapped", "bend-ceramic", "bend-ceramic-snapped", "bend-rubber", "bend-plastic", "bend-fabric"]}
+---
+
+<Lang en>
+
+The syllabus says that the flexibility of a material is its ability to bend without breaking. Here the same seven strips are tested again. Each one is clamped with <Num s="S1">25 cm</Num> sticking out, and a peg on a stand pushes the free end down by the same distance, up to <Num s="S1">2 cm</Num>. Each test uses a fresh strip.
+
+Pushed down <Num s="S1">2 cm</Num>, the wooden strip bends without breaking, and so does the steel strip. Lift the peg and they spring back to where they were. Wood and metal are flexible.
+
+<Figure src="figures/materials-flexible-ruler" alt={{"en": "A clear plastic ruler resting on two wooden blocks, bent into a curve by a pebble lying on its middle; the ruler is unbroken and its ends tilt up off the blocks.", "zh": "一把清亮的塑料尺架在两块木块上，中间压着一块卵石，尺子弯成弧形，没有断，两端从木块上微微翘起。"}} caption={{"en": "A plastic ruler bends under a stone without breaking: it is flexible. Illustration for this topic.", "zh": "塑料尺压着一块石头，弯了却没有断：它柔韧。为本主题画的示意图。"}} />
+
+The glass strip snaps before the peg has pushed it down very far, and the ceramic strip snaps at the same point. They bend a tiny amount and then break, so glass and ceramic are not flexible.
+
+The plastic, rubber and fabric strips droop under their own weight before the peg even touches them. They bend very easily and do not break, so they are flexible too. Being flexible and being strong are different: chapter 1 showed that the plastic strip also took a load without breaking, while the stiff glass strip broke.
+
+Flexibility is useful whenever a thing has to bend in use. The seal inside a food box lid is rubber: it bends to fit tightly against the box.
+
+Use the Try it card to swap the strips and push each one down. Predict first, then record a row.
+
+<More title={{"en": "Another fair test", "zh": "另一种公平测试"}}>
+
+Another way to compare flexibility is to clamp strips of the same size and hang the same light weight on each end, then measure how far each end bends down. A light weight is chosen on purpose, so the samples do not break. That test measures how easily a material bends; this chapter's test, following the syllabus, looks at whether it bends without breaking.
+
+</More>
+
+<More title={{"en": "Thin and thick", "zh": "薄和厚"}}>
+
+Shape matters as much as material. A thin strip of metal bends; a thick metal bar of the same metal does not bend by hand. A sheet of card rolled into a tube is less flexible than the same card lying flat. That is why the samples in a fair test must be the same size and shape.
+
+</More>
+
+<More title={{"en": "Springing back", "zh": "弹回来"}}>
+
+When the peg lifts, the wooden and steel strips spring back to their first shape. Springing back is called elasticity. It is not one of the five properties in the syllabus, but you can read about it in <TopicLink slug="forces" ch="elastic-spring-force">Forces: elastic spring force</TopicLink>.
+
+</More>
+
+<More title={{"en": "Careful", "zh": "小心"}}>
+
+Glass and ceramic have sharp edges when they break, so bend them only in the model. A plastic ruler is a safe material to bend at home.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+课纲说，材料的柔韧性是它能弯而不断的本领。这里再测一次同一套七根条。每根条都夹住，伸出 <Num s="S1">25 厘米</Num>，架子上的推杆把伸出的一端往下压，每次压同样的距离，最多 <Num s="S1">2 厘米</Num>。每次测试都换一根新的条。
+
+压下 <Num s="S1">2 厘米</Num>，木条弯了，没有断；钢条也一样。推杆一抬起，它们就弹回原来的位置。木和金属都是柔韧的。
+
+<Figure src="figures/materials-flexible-ruler" alt={{"en": "A clear plastic ruler resting on two wooden blocks, bent into a curve by a pebble lying on its middle; the ruler is unbroken and its ends tilt up off the blocks.", "zh": "一把清亮的塑料尺架在两块木块上，中间压着一块卵石，尺子弯成弧形，没有断，两端从木块上微微翘起。"}} caption={{"en": "A plastic ruler bends under a stone without breaking: it is flexible. Illustration for this topic.", "zh": "塑料尺压着一块石头，弯了却没有断：它柔韧。为本主题画的示意图。"}} />
+
+推杆还没压下多少，玻璃条就断了；陶瓷条也在同一个地方断开。它们只弯了一丁点儿就断，所以玻璃和陶瓷不柔韧。
+
+塑料条、橡胶条和布条，推杆还没碰到，就在自己的重量下垂了下来。它们很容易弯，又不会断，所以也是柔韧的。柔韧和强是两回事：第 1 章里，塑料条也受得住重量而不断，硬挺的玻璃条反而断了。
+
+东西用的时候要弯，柔韧性就派上用场。保鲜盒盒盖里的密封圈是橡胶做的：它能弯，贴紧盒子。
+
+用“试一试”卡片换不同的条，把每根都压一压。先猜一猜，再记一行。
+
+<More title={{"en": "Another fair test", "zh": "另一种公平测试"}}>
+
+比较柔韧性还有一种办法：把同样大小的条夹住，末端挂同样轻的重物，量每根条的末端往下弯了多少。故意挂轻的重物，是为了不把样品弄断。那个测试量的是材料有多容易弯；本章按课纲的意思，看的是材料能不能弯而不断。
+
+</More>
+
+<More title={{"en": "Thin and thick", "zh": "薄和厚"}}>
+
+形状和材料一样重要。薄的金属条能弯；同一种金属做成粗的金属棒，用手就弯不动。一张卡纸卷成管子，比平放的同一张卡纸难弯。所以公平测试里，样品的大小和形状必须一样。
+
+</More>
+
+<More title={{"en": "Springing back", "zh": "弹回来"}}>
+
+推杆抬起时，木条和钢条弹回原来的形状。这种弹回来的本领叫弹性。它不在课纲的五个性质之内，可以在<TopicLink slug="forces" ch="elastic-spring-force">“力”主题的“弹簧的弹力”</TopicLink>里读到。
+
+</More>
+
+<More title={{"en": "Careful", "zh": "小心"}}>
+
+玻璃和陶瓷断开的边很锋利，只在模型里弯它们。塑料尺是在家里可以放心弯的材料。
+
+</More>
+
+</Lang>

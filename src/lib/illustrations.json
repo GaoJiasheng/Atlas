@@ -19,6 +19,26 @@
       "0000000000000000"
     ]
   },
+  "ancient-civilisations": {
+    "mask": [
+      "0000000000000000",
+      "0000000000000000",
+      "0000000000000000",
+      "00000018a6000000",
+      "0000039ffea30000",
+      "00014dfffffcb500",
+      "003cfffffffffb20",
+      "019fffffffffff90",
+      "07ffffffffffffc0",
+      "0affffffffffffd1",
+      "1cffffffffffffc1",
+      "045ceeffcee98a80",
+      "0002259924500000",
+      "0000000000000000",
+      "0000000000000000",
+      "0000000000000000"
+    ]
+  },
   "area-perimeter": {
     "mask": [
       "0000000000000000",
@@ -296,6 +316,26 @@
       "01369ceffffa0310",
       "000000248be80000",
       "0000000000210000",
+      "0000000000000000"
+    ]
+  },
+  "materials": {
+    "mask": [
+      "0000000000000010",
+      "0011111111114b80",
+      "07eeeeeeeeeeff80",
+      "08ffffffffffff80",
+      "08ffffffffffff80",
+      "08ffffffffffff80",
+      "08ffffffffffff80",
+      "08ffffffffffff80",
+      "08ffffffffffff80",
+      "08ffffffffffff80",
+      "08fffeeeeeeeff80",
+      "02efe31111115e80",
+      "04ffd10000000340",
+      "03df800000000000",
+      "005c400000000000",
       "0000000000000000"
     ]
   },

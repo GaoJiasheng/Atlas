@@ -1,0 +1,38 @@
+# Authoring contract: docs/43-ancient-civilisations-content-spec.md. Historian review: AUDIT.md; passages for Gavin: REVIEW.md.
+# Map provenance: scripts/geo/ancient-civilisations/SOURCES-GEO.md (Cliopatria inventory: INVENTORY.md there).
+id: ancient-civilisations
+title: { en: "Ancient Civilisations", zh: "古文明" }
+subtitle: { en: "From Sumer to Melaka, c. 3200 BCE – 1511 CE", zh: "从苏美尔到马六甲（约公元前3200年—公元1511年）" }
+shortTitle: { en: "Ancient civilisations", zh: "古文明" }
+subject: history
+mode: time
+engine: time-scene
+stage: geo
+theme: paper
+sensitivity: open
+status: draft
+levels: [P6]
+tags: [history, map]
+illustration: ancient-civilisations
+basemap:
+  region:
+    bounds: [-12, -12, 135, 58]
+    land: ancient-world-plate
+    rivers: ancient-rivers
+  maxZoom: 9
+colorBy: entity
+datePrecision: year
+blocLabels:
+  neutral: { en: "States drawn on this map", zh: "地图上画出的国家" }
+  out: { en: "No longer drawn", zh: "已不在图上" }
+strings:
+  joined: { en: "On the map from", zh: "地图上始见" }
+  left: { en: "On the map until", zh: "地图上止于" }
+  notYet: { en: "Not yet on the map", zh: "尚未见于地图" }
+note:
+  en: "Approximate extents from Cliopatria · Southeast Asian kingdoms as overlapping spheres · today's land and rivers, two old Yellow River courses dashed · schematic sea routes"
+  zh: "范围取自 Cliopatria，为示意 · 东南亚王国画成可重叠的势力范围 · 陆地与河流按今天，黄河两条古河道为虚线 · 海路为示意"
+datedLayers:
+  - { id: srivijaya-sphere, file: ac-srivijaya, kind: area, holder: srivijaya, label: { en: "Srivijaya (sphere, approximate)", zh: "室利佛逝（势力范围，示意）" } }
+  - { id: khmer-sphere, file: ac-khmer, kind: area, holder: khmer, label: { en: "Khmer Empire (sphere, approximate)", zh: "高棉帝国（势力范围，示意）" } }
+  - { id: majapahit-sphere, file: ac-majapahit, kind: area, holder: majapahit, label: { en: "Majapahit (sphere, approximate)", zh: "满者伯夷（势力范围，示意）" } }

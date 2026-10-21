@@ -1,0 +1,107 @@
+---
+id: "before-you-start"
+order: 0
+kind: background
+title: {"en": "Before you start", "zh": "开始之前"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: false
+  cutaway: "none"
+  layers: ["strength-rig", "bend-rig", "float-tank", "drop-tray", "light-bench", "corner-wood", "corner-metal", "corner-ceramic", "corner-rubber", "corner-glass", "corner-plastic", "corner-fabric"]
+  labels: ["bend-clamp", "tank", "drop-stand"]
+  camera: {"position": [-0.3, 1.9, 5.2], "target": [-0.72, 0.3, -0.1], "fov": 30}
+  summary: {"en": "Everything is made of materials. This topic tests seven of them, wood, metal, ceramic, rubber, glass, plastic and fabric, in five fair tests, and then asks why each object around us is made of the material it is.", "zh": "东西都是用材料做的。本主题用五个公平测试，比较七种材料：木、金属、陶瓷、橡胶、玻璃、塑料、布；再看身边的每样东西，为什么用这种材料做。"}
+  note: {"en": "This is a model of a school materials bench and a kitchen corner, drawn life size. The bends, the breaks and the float levels are worked out by the model from published values for each material and from the sizes of the samples; they are drawn, not written as numbers. A real test can turn out a little differently each time, especially when glass or ceramic breaks.", "zh": "这是一张学校的材料实验台和一个厨房角落，按实物大小画。条弯多少、什么时候断、东西浮起多高，是模型按每种材料的公开数据和样品的尺寸算出来的，只画出来，不写数字。真实的测试每次结果会有一点不同，玻璃、陶瓷什么时候断尤其如此。"}
+  sim:
+    set: {}
+  beats:
+    - labels: ["bridge-blocks", "bend-clamp", "tank", "drop-stand", "screen"]
+      caption: {"en": "This bench has five stations. Each one tests a different property of materials, using samples of the same size.", "zh": "这张实验台有五个工位。每个工位用同样大小的样品，测试材料的一种性质。"}
+    - camera: "corner-view"
+      layers: ["corner-wood", "corner-metal", "corner-ceramic", "corner-rubber", "corner-glass", "corner-plastic", "corner-fabric"]
+      labels: ["wall-cabinet", "saucepan", "bowl", "tumbler", "food-box", "tea-towel"]
+      caption: {"en": "A saucepan is an object; the metal it is made of is a material. This kitchen corner holds things made of seven materials.", "zh": "锅是一个物体，做锅的金属是一种材料。这个厨房角落里的东西，用了七种材料。"}
+    - camera: "corner-view"
+      layers: ["corner-wood", "corner-metal", "corner-ceramic", "corner-rubber", "corner-glass", "corner-plastic", "corner-fabric"]
+      ghost: ["wall-cabinet", "cabinet-hinges", "saucepan", "bowl", "wall-tiles", "tumbler", "tea-towel"]
+      labels: ["food-box", "box-seal", "window-pane", "window-frame"]
+      caption: {"en": "One object can use more than one material. The food box is plastic with a rubber seal; the window is glass in a metal frame.", "zh": "一样东西可以用不止一种材料。保鲜盒是塑料的，配一圈橡胶密封圈；窗是玻璃，装在金属框里。"}
+    - labels: ["bridge-hanger", "push-peg", "tank-water", "water-bead", "torch"]
+      caption: {"en": "Every test is a fair test: only the material changes. The masses, the water, the dropper and the torch stay the same.", "zh": "每个测试都是公平测试：只改变材料。砝码、水、滴管、手电筒都保持不变。"}
+  index: {"parts": ["bridge-blocks", "bend-clamp", "tank", "drop-stand", "torch", "screen", "saucepan", "food-box", "window-pane"]}
+---
+
+<Lang en>
+
+Everything around you is made of <Term id="material">materials</Term>. A saucepan is an <Term id="object">object</Term>; the metal it is made of is a material. The primary syllabus asks you to link the uses of seven materials to their physical <Term id="property">properties</Term>: wood, metal, <Term id="ceramic">ceramic</Term>, <Term id="rubber">rubber</Term>, glass, <Term id="plastic">plastic</Term> and <Term id="fabric">fabric</Term>. One object can use more than one material. In the kitchen corner, the food box is plastic with a rubber seal, and the window is glass in a metal frame.
+
+The syllabus names five properties and says what each one means. <Term id="strength">Strength</Term> is the ability to take a load without breaking. <Term id="flexible">Flexibility</Term> is the ability to bend without breaking. A material can <Term id="float">float</Term> if a piece of it stays on or near the surface of water and does not <Term id="sink">sink</Term>. A material is <Term id="waterproof">waterproof</Term> when it does not <Term id="absorb">absorb</Term> water. <Term id="transparency">Letting light through</Term> means letting most, some or no light pass.
+
+The bench has one station for each property: two blocks and a set of masses, a clamp and a push peg, a tank of fresh water, a dropper, and a torch with a white screen. In each test the samples are the same size; every strip is <Num s="S1">30 cm</Num> long, <Num s="S1">3 cm</Num> wide and <Num s="S1">2 mm</Num> thick.
+
+From chapter 1 on, each chapter has a Try it card for a <Term id="fair-test">fair test</Term>. It asks three questions: what do you change, what do you keep the same, and what do you observe? Here you change only the material. Predict first, then record a row for each material. In chapter 6 the rows from all five tests make one table.
+
+<More title={{"en": "How this model works", "zh": "这个模型怎样算"}}>
+
+The bench and its samples are drawn life size. How far a strip bends, when it breaks and how high a block floats are worked out from published values for each material and from the sizes of the samples, using the formulas in textbooks for bending beams and floating blocks. The results are drawn, not written as numbers: the syllabus asks you to compare materials, not to calculate. For the same settings the model always gives the same result. A real strip of glass or ceramic can break a little earlier or later each time, and a real test should be repeated.
+
+</More>
+
+<More title={{"en": "What the samples are", "zh": "这些样品是什么"}}>
+
+Each material is one particular kind. The wood is teak, the metal is steel, the ceramic is a glazed tile, the rubber is pure natural rubber, the glass is clear window glass, the plastic is HDPE, a kind of polyethylene used for boxes and bottle caps, and the fabric is cotton. A different kind of wood, plastic or rubber can give a different result, especially in the floating test.
+
+</More>
+
+<More title={{"en": "Object or material", "zh": "物体还是材料"}}>
+
+An object is a thing; a material is what it is made of. A spoon is an object, and it can be made of metal, plastic or wood. Fabric is one material among many: wood, metal, ceramic, rubber, glass and plastic are all materials too.
+
+</More>
+
+<More title={{"en": "Words for properties", "zh": "说性质的词"}}>
+
+In everyday speech, "strong", "hard" and "stiff" are often used for the same thing. In science they mean different things, and chapter 1 tells them apart. Hardness, how well a material conducts electricity and whether a magnet attracts it are properties too, but they are not among the five in this topic.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+身边的东西都是用<Term id="material">材料</Term>做的。锅是一个<Term id="object">物体</Term>，做锅的金属是一种材料。小学课纲要我们把七种材料的用途和它们的物理<Term id="property">性质</Term>联系起来：木、金属、<Term id="ceramic">陶瓷</Term>、<Term id="rubber">橡胶</Term>、玻璃、<Term id="plastic">塑料</Term>、<Term id="fabric">布</Term>。一样东西可以用不止一种材料。在厨房角落里，保鲜盒是塑料的，盒盖里有一圈橡胶密封圈；窗是玻璃，装在金属框里。
+
+课纲列出五个性质，也说明了每一个是什么意思。<Term id="strength">强度</Term>是材料受力而不断的本领。<Term id="flexible">柔韧性</Term>是材料能弯而不断的本领。一块材料放进水里，停在水面上或接近水面、不<Term id="sink">沉</Term>下去，就是<Term id="float">浮</Term>。材料不<Term id="absorb">吸水</Term>，就是<Term id="waterproof">防水</Term>。<Term id="transparency">透光</Term>说的是材料让大部分、一部分，还是没有光穿过。
+
+实验台上每个性质有一个工位：两块木块和一套槽码，一个夹座和一支推杆，一缸清水，一支滴管，还有手电筒和一块白屏。同一个测试里的样品大小都一样；每根材料条长 <Num s="S1">30 厘米</Num>、宽 <Num s="S1">3 厘米</Num>、厚 <Num s="S1">2 毫米</Num>。
+
+从第 1 章起，每章都有一张“试一试”卡片，做一个<Term id="fair-test">公平测试</Term>。卡片问三个问题：改变什么？什么保持不变？观察什么？这里只改变材料。先猜一猜，再每种材料记一行。到了第 6 章，五个测试记下的行，拼成一张表。
+
+<More title={{"en": "How this model works", "zh": "这个模型怎样算"}}>
+
+实验台和样品都按实物大小画。条弯多少、什么时候断、方块浮起多高，是模型按每种材料的公开数据和样品的尺寸，用教科书里梁的弯曲和物体浮起的公式算出来的。结果只画出来，不写成数字：课纲要我们比较材料，不要求计算。设置一样，模型每次给出同样的结果。真实的玻璃条、陶瓷条，每次断的时候会早一点或晚一点，真做实验要多做几次。
+
+</More>
+
+<More title={{"en": "What the samples are", "zh": "这些样品是什么"}}>
+
+每种材料都取了具体的一种。木是柚木，金属是钢，陶瓷是上了釉的瓷砖，橡胶是纯天然橡胶，玻璃是透明窗玻璃，塑料是 HDPE（一种聚乙烯，常用来做盒子、瓶盖），布是棉布。换一种木、一种塑料或一种橡胶，结果可能不一样，浮沉测试尤其如此。
+
+</More>
+
+<More title={{"en": "Object or material", "zh": "物体还是材料"}}>
+
+物体是一样东西，材料是做这样东西用的料。汤匙是物体，可以用金属、塑料或木头做。布只是许多材料中的一种：木、金属、陶瓷、橡胶、玻璃、塑料也都是材料。
+
+</More>
+
+<More title={{"en": "Words for properties", "zh": "说性质的词"}}>
+
+日常说话里，“强”“硬”“不容易弯”常常混着用。在科学里，它们意思不同，第 1 章会把它们分开。硬度、导不导电、会不会被磁铁吸引，也都是材料的性质，但不在本主题的五个性质之内。
+
+</More>
+
+</Lang>

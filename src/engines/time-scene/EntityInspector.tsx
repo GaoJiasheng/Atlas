@@ -41,7 +41,7 @@ export function EntityInspector({ entity, model, playhead, locale, onClose }: En
   const other = locale === 'zh' ? entity.name.en : entity.name.zh;
   const spans = typeof entity.bloc === 'string' ? [{ bloc: entity.bloc, from: undefined, to: undefined }] : entity.bloc;
   const area = areaAt(model, areas, entity.id, now);
-  const date = (p: Parameters<typeof formatTime>[0]) => formatTime(p, locale, model.datePrecision);
+  const date = (p: Parameters<typeof formatTime>[0]) => formatTime(p, locale, model.datePrecision, model.mixedEra);
 
   return (
     <article ref={ref} className="ts-event ts-entity" aria-labelledby={`ts-entity-${entity.id}`}>

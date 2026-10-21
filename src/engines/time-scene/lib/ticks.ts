@@ -76,8 +76,10 @@ function at(year: number, month = 1, day = 1): number {
   return toNumber(iso(y, m, day));
 }
 
-function yearLabel(year: number, locale: Locale): string {
+/** Tick year: '770 BCE' / '前770'; with `ce` (a mixed-era topic) years 1–999 CE read '150 CE' / '公元150'. */
+function yearLabel(year: number, locale: Locale, ce = false): string {
   if (year < 0) return locale === 'zh' ? `前${-year}` : `${-year} BCE`;
+  if (ce && year > 0 && year < 1000) return locale === 'zh' ? `公元${year}` : `${year} CE`;
   return String(year);
 }
 
@@ -86,7 +88,7 @@ function monthLabel(year: number, month: number, locale: Locale): string {
   return locale === 'zh' ? `${month}月` : MONTHS_EN[month - 1]!;
 }
 
-function dateTicks(min: number, max: number, rung: DateRung, locale: Locale): Ticks {
+function dateTicks(min: number, max: number, rung: DateRung, locale: Locale, ce = false): Ticks {
   const major: Tick[] = [];
   const minor: number[] = [];
   const y0 = Math.floor(min) - 1;
@@ -108,7 +110,7 @@ function dateTicks(min: number, max: number, rung: DateRung, locale: Locale): Ti
     const step = rung.years;
     for (let y = Math.floor(y0 / step) * step; y <= y1; y += step) {
       const t = at(y);
-      if (inside(t)) major.push({ t, label: yearLabel(y, locale) });
+      if (inside(t)) major.push({ t, label: yearLabel(y, locale, ce) });
     }
     if (rung.minorYears > 0) {
       for (let y = Math.floor(y0 / rung.minorYears) * rung.minorYears; y <= y1; y += rung.minorYears) {
@@ -148,9 +150,10 @@ function maTicks(min: number, max: number, majorMa: number, minorMa: number, loc
 
 /**
  * Ticks for `[min, max]` with at most `maxMajors` major ticks (falls back to
- * the coarsest rung). `maxMajors` is usually `width / ~70 px`.
+ * the coarsest rung). `maxMajors` is usually `width / ~70 px`. `ce` = the
+ * model's `mixedEra` (year labels 1–999 CE get the era marker).
  */
-export function ruleTicks(min: number, max: number, scale: TimeScale, maxMajors: number, locale: Locale = 'en'): Ticks {
+export function ruleTicks(min: number, max: number, scale: TimeScale, maxMajors: number, locale: Locale = 'en', ce = false): Ticks {
   const limit = Math.max(2, Math.floor(maxMajors));
   if (!(max > min)) return { major: [], minor: [], unit: '' };
   if (scale === 'ma') {
@@ -162,7 +165,7 @@ export function ruleTicks(min: number, max: number, scale: TimeScale, maxMajors:
   const rung =
     DATE_LADDER.find((r) => span / (r.major === 'month' ? r.months / 12 : r.years) <= limit) ??
     DATE_LADDER[DATE_LADDER.length - 1]!;
-  return dateTicks(min, max, rung, locale);
+  return dateTicks(min, max, rung, locale, ce);
 }
 
 /**

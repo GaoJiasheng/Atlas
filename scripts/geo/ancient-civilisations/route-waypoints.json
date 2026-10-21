@@ -1,0 +1,263 @@
+{
+  "_comment": "docs/43 §3.5 / G6. Each route is a list of stops: a port (`place`, an id in places.json: Wikidata P625) or a sea waypoint (`at`, written only to keep the line at sea; NOT a recorded track: reason 'keep the line at sea'). Legs that must cross land to reach a river port say so in `note`; routes.ts prints the length of every leg over the plate's land.",
+  "routes": {
+    "monsoon-routes": [
+      {
+        "place": "muziris"
+      },
+      {
+        "at": [
+          75.9,
+          9.6
+        ],
+        "reason": "keep the line at sea"
+      },
+      {
+        "at": [
+          77.3,
+          7.6
+        ],
+        "reason": "keep the line at sea"
+      },
+      {
+        "at": [
+          80.5,
+          5.6
+        ],
+        "reason": "keep the line at sea"
+      },
+      {
+        "at": [
+          82.2,
+          6.3
+        ],
+        "reason": "keep the line at sea"
+      },
+      {
+        "at": [
+          82.4,
+          8.5
+        ],
+        "reason": "keep the line at sea"
+      },
+      {
+        "at": [
+          80.6,
+          11.6
+        ],
+        "reason": "keep the line at sea"
+      },
+      {
+        "place": "arikamedu"
+      },
+      {
+        "at": [
+          84.5,
+          11.0
+        ],
+        "reason": "keep the line at sea"
+      },
+      {
+        "at": [
+          92.6,
+          10.0
+        ],
+        "reason": "keep the line at sea"
+      },
+      {
+        "at": [
+          96.4,
+          6.6
+        ],
+        "reason": "keep the line at sea"
+      },
+      {
+        "at": [
+          99.6,
+          3.9
+        ],
+        "reason": "keep the line at sea"
+      },
+      {
+        "at": [
+          101.6,
+          2.3
+        ],
+        "reason": "keep the line at sea"
+      },
+      {
+        "at": [
+          103.4,
+          1.15
+        ],
+        "reason": "keep the line at sea"
+      },
+      {
+        "at": [
+          104.4,
+          1.25
+        ],
+        "reason": "keep the line at sea"
+      },
+      {
+        "at": [
+          105.5,
+          3.5
+        ],
+        "reason": "keep the line at sea"
+      },
+      {
+        "at": [
+          104.7,
+          8.0
+        ],
+        "reason": "keep the line at sea"
+      },
+      {
+        "at": [
+          104.4,
+          9.7
+        ],
+        "reason": "keep the line at sea",
+        "note": "the last leg to Óc Eo crosses the delta, where canals linked the port to the sea; the canals are not drawn"
+      },
+      {
+        "place": "oc-eo"
+      },
+      {
+        "at": [
+          104.4,
+          9.7
+        ],
+        "reason": "keep the line at sea",
+        "note": "the first leg back from Óc Eo crosses the delta, where canals linked the port to the sea; the canals are not drawn"
+      },
+      {
+        "at": [
+          104.7,
+          8.0
+        ],
+        "reason": "keep the line at sea"
+      },
+      {
+        "at": [
+          107.2,
+          9.0
+        ],
+        "reason": "keep the line at sea"
+      },
+      {
+        "at": [
+          109.6,
+          12.0
+        ],
+        "reason": "keep the line at sea"
+      },
+      {
+        "at": [
+          110.2,
+          17.3
+        ],
+        "reason": "keep the line at sea"
+      },
+      {
+        "at": [
+          112.0,
+          20.6
+        ],
+        "reason": "keep the line at sea"
+      },
+      {
+        "at": [
+          113.7,
+          22.2
+        ],
+        "reason": "keep the line at sea"
+      },
+      {
+        "at": [
+          113.65,
+          22.7
+        ],
+        "reason": "keep the line at sea",
+        "note": "the last leg to Guangzhou follows the Pearl River, which is not drawn"
+      },
+      {
+        "place": "guangzhou"
+      }
+    ],
+    "yijing-voyage-671": [
+      {
+        "place": "guangzhou"
+      },
+      {
+        "at": [
+          113.65,
+          22.7
+        ],
+        "reason": "keep the line at sea",
+        "note": "the first leg follows the Pearl River, which is not drawn"
+      },
+      {
+        "at": [
+          113.7,
+          22.2
+        ],
+        "reason": "keep the line at sea"
+      },
+      {
+        "at": [
+          112.0,
+          20.6
+        ],
+        "reason": "keep the line at sea"
+      },
+      {
+        "at": [
+          110.2,
+          17.3
+        ],
+        "reason": "keep the line at sea"
+      },
+      {
+        "at": [
+          109.6,
+          12.0
+        ],
+        "reason": "keep the line at sea"
+      },
+      {
+        "at": [
+          107.0,
+          6.0
+        ],
+        "reason": "keep the line at sea"
+      },
+      {
+        "at": [
+          105.6,
+          2.0
+        ],
+        "reason": "keep the line at sea"
+      },
+      {
+        "at": [
+          105.0,
+          -1.0
+        ],
+        "reason": "keep the line at sea"
+      },
+      {
+        "at": [
+          104.95,
+          -2.2
+        ],
+        "reason": "keep the line at sea",
+        "note": "the last leg follows the Musi river up to Palembang; the Musi is not drawn"
+      },
+      {
+        "place": "palembang"
+      }
+    ]
+  }
+}

@@ -83,7 +83,7 @@ export function EventInspector({ event, model, locale, onClose }: EventInspector
 
   const isSite = event.kind === 'site';
   const p = model.datePrecision;
-  const when = formatTimeRange(event.t, event.until, locale, p);
+  const when = formatTimeRange(event.t, event.until, locale, p, model.mixedEra);
   const index = isSite
     ? `P-${String(model.sites.findIndex((e) => e.id === event.id) + 1).padStart(2, '0')}`
     : `E-${String(model.events.findIndex((e) => e.event.id === event.id) + 1).padStart(2, '0')}`;

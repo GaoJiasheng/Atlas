@@ -1,0 +1,8478 @@
+{
+ "parts": [
+  {
+   "id": "bridge-blocks",
+   "name": {
+    "en": "Support blocks",
+    "zh": "支撑木块"
+   },
+   "group": "strength-rig",
+   "summary": {
+    "en": "Hold each strip up with the same gap.",
+    "zh": "用同样的间距把每根条架起来。"
+   },
+   "detail": {
+    "en": "Two wooden blocks 6 cm high. Their inner edges are 20 cm apart, and every strip rests across the same gap [S1]. Keeping the blocks and the gap the same, and changing only the strip, is what makes the test fair [S3].\n\nThe strip rests on the blocks’ inner edges. When it bends, its ends lift off the tops of the blocks, as a ruler does when you press on its middle.",
+    "zh": "两块 6 厘米高的木块，内侧的边相距 20 厘米，每根条都架在同样的间距上 [S1]。木块和间距都不变、只换材料条，测试才公平 [S3]。\n\n条搭在木块内侧的边上。条一弯，两端就离开木块的顶面翘起来，像压尺子中间时一样。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.06,
+     0.06,
+     0.06
+    ],
+    "bevel": 0.002,
+    "color": "wood",
+    "tint": "#d1ad78",
+    "at": [
+     -1.03,
+     0.03,
+     0.05
+    ]
+   },
+   "extra": [
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.06,
+      0.06,
+      0.06
+     ],
+     "bevel": 0.002,
+     "color": "wood",
+     "tint": "#d1ad78",
+     "at": [
+      -0.77,
+      0.03,
+      0.05
+     ]
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   }
+  },
+  {
+   "id": "bridge-wood",
+   "name": {
+    "en": "Wooden strip",
+    "zh": "木条"
+   },
+   "group": "strength-rig",
+   "summary": {
+    "en": "Wooden strip, 30 × 3 cm, 2 mm thick.",
+    "zh": "木条，30 × 3 厘米，2 毫米厚。"
+   },
+   "detail": {
+    "en": "The wood is teak, a hardwood, left unvarnished [S7]. Across the 20 cm gap it bends a little under all five masses and holds them [S1].\n\nEvery sample in a test is the same size, so only the material changes [S1, S3]. The bend and the result are worked out by the model from published values; they are drawn, not written as numbers [S1].",
+    "zh": "木样品是柚木，一种硬木，没有上漆 [S7]。架在 20 厘米的间距上，五个槽码全放上去，它弯一点，全都托住 [S1]。\n\n同一个测试里样品大小都一样，只改变材料 [S1, S3]。弯多少、结果怎样，是模型按公开数据算出来的，只画出来，不写数字 [S1]。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.3,
+     0.002,
+     0.03
+    ],
+    "color": "wood",
+    "tint": "#9a6a3e",
+    "at": [
+     -0.9,
+     0.061,
+     0.05
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   },
+   "connects": [
+    "bridge-blocks",
+    "bridge-hanger"
+   ]
+  },
+  {
+   "id": "bridge-metal",
+   "name": {
+    "en": "Steel strip",
+    "zh": "钢条"
+   },
+   "group": "strength-rig",
+   "summary": {
+    "en": "Steel strip, 30 × 3 cm, 2 mm thick.",
+    "zh": "钢条，30 × 3 厘米，2 毫米厚。"
+   },
+   "detail": {
+    "en": "The metal is steel [S9]. It hardly bends under all five masses and holds them [S1].\n\nEvery sample in a test is the same size, so only the material changes [S1, S3]. The bend and the result are worked out by the model from published values; they are drawn, not written as numbers [S1].",
+    "zh": "金属样品是钢 [S9]。五个槽码全放上去，它几乎不弯，全都托住 [S1]。\n\n同一个测试里样品大小都一样，只改变材料 [S1, S3]。弯多少、结果怎样，是模型按公开数据算出来的，只画出来，不写数字 [S1]。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.3,
+     0.002,
+     0.03
+    ],
+    "color": "steel",
+    "at": [
+     -0.9,
+     0.061,
+     0.05
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   },
+   "connects": [
+    "bridge-blocks",
+    "bridge-hanger"
+   ]
+  },
+  {
+   "id": "bridge-ceramic",
+   "name": {
+    "en": "Ceramic strip",
+    "zh": "陶瓷条"
+   },
+   "group": "strength-rig",
+   "summary": {
+    "en": "Ceramic strip, 30 × 3 cm, 2 mm thick.",
+    "zh": "陶瓷条，30 × 3 厘米，2 毫米厚。"
+   },
+   "detail": {
+    "en": "The ceramic is cut from a glazed porcelain tile [S13]. It hardly bends, then snaps before all five masses are on. A glazed tile is brittle: it breaks instead of bending [S1, S10].\n\nEvery sample in a test is the same size, so only the material changes [S1, S3]. The bend and the result are worked out by the model from published values; they are drawn, not written as numbers [S1].",
+    "zh": "陶瓷样品切自上了釉的瓷砖 [S13]。它几乎不弯，五个槽码还没放完就断了。上了釉的瓷砖是脆的：它不弯，而是断开 [S1, S10]。\n\n同一个测试里样品大小都一样，只改变材料 [S1, S3]。弯多少、结果怎样，是模型按公开数据算出来的，只画出来，不写数字 [S1]。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.3,
+     0.002,
+     0.03
+    ],
+    "color": "enamel",
+    "tint": "#f2efe7",
+    "at": [
+     -0.9,
+     0.061,
+     0.05
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   },
+   "connects": [
+    "bridge-blocks",
+    "bridge-hanger"
+   ]
+  },
+  {
+   "id": "bridge-rubber",
+   "name": {
+    "en": "Rubber strip",
+    "zh": "橡胶条"
+   },
+   "group": "strength-rig",
+   "summary": {
+    "en": "Rubber strip, 30 × 3 cm, 2 mm thick.",
+    "zh": "橡胶条，30 × 3 厘米，2 毫米厚。"
+   },
+   "detail": {
+    "en": "The rubber is natural rubber with nothing mixed in, called pure gum [S8]. This soft rubber cannot hold itself up across the gap: it sags onto the bench before any mass goes on, so this test cannot measure its strength [S1, S26].\n\nEvery sample in a test is the same size, so only the material changes [S1, S3]. The bend and the result are worked out by the model from published values; they are drawn, not written as numbers [S1].",
+    "zh": "橡胶样品是什么都没掺的天然橡胶，叫“纯胶” [S8]。这种软橡胶连自己都撑不起来，一个槽码都还没放，就垂到台面上了，所以这个测试测不出它的强度 [S1, S26]。\n\n同一个测试里样品大小都一样，只改变材料 [S1, S3]。弯多少、结果怎样，是模型按公开数据算出来的，只画出来，不写数字 [S1]。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.3,
+     0.002,
+     0.03
+    ],
+    "color": "rubber",
+    "tint": "#3b3936",
+    "at": [
+     -0.9,
+     0.061,
+     0.05
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   },
+   "connects": [
+    "bridge-blocks",
+    "bridge-hanger"
+   ]
+  },
+  {
+   "id": "bridge-glass",
+   "name": {
+    "en": "Glass strip",
+    "zh": "玻璃条"
+   },
+   "group": "strength-rig",
+   "summary": {
+    "en": "Glass strip, 30 × 3 cm, 2 mm thick.",
+    "zh": "玻璃条，30 × 3 厘米，2 毫米厚。"
+   },
+   "detail": {
+    "en": "The glass is clear window glass [S14]. It hardly bends, then snaps before all five masses are on. Glass is brittle, and a cut edge is where it is weakest [S1, S22].\n\nEvery sample in a test is the same size, so only the material changes [S1, S3]. The bend and the result are worked out by the model from published values; they are drawn, not written as numbers [S1].",
+    "zh": "玻璃样品是透明的窗玻璃 [S14]。它几乎不弯，五个槽码还没放完就断了。玻璃是脆的，切开的边是它最弱的地方 [S1, S22]。\n\n同一个测试里样品大小都一样，只改变材料 [S1, S3]。弯多少、结果怎样，是模型按公开数据算出来的，只画出来，不写数字 [S1]。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.3,
+     0.002,
+     0.03
+    ],
+    "color": "membrane",
+    "tint": "#5f9a8e",
+    "at": [
+     -0.9,
+     0.061,
+     0.05
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   },
+   "connects": [
+    "bridge-blocks",
+    "bridge-hanger"
+   ],
+   "shell": true
+  },
+  {
+   "id": "bridge-plastic",
+   "name": {
+    "en": "Plastic strip",
+    "zh": "塑料条"
+   },
+   "group": "strength-rig",
+   "summary": {
+    "en": "Plastic strip, 30 × 3 cm, 2 mm thick.",
+    "zh": "塑料条，30 × 3 厘米，2 毫米厚。"
+   },
+   "detail": {
+    "en": "The plastic is HDPE, a milky kind of polyethylene [S11]. One mass bends it a lot; from two masses on it rests on the bench, but it does not break [S1, S11].\n\nEvery sample in a test is the same size, so only the material changes [S1, S3]. The bend and the result are worked out by the model from published values; they are drawn, not written as numbers [S1].",
+    "zh": "塑料样品是 HDPE，一种乳白色的聚乙烯 [S11]。放一个槽码，它就弯得很厉害；放到两个，它搭到了台面上，可是没有断 [S1, S11]。\n\n同一个测试里样品大小都一样，只改变材料 [S1, S3]。弯多少、结果怎样，是模型按公开数据算出来的，只画出来，不写数字 [S1]。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.3,
+     0.002,
+     0.03
+    ],
+    "color": "membrane",
+    "tint": "#ece9e0",
+    "at": [
+     -0.9,
+     0.061,
+     0.05
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   },
+   "connects": [
+    "bridge-blocks",
+    "bridge-hanger"
+   ],
+   "shell": true
+  },
+  {
+   "id": "bridge-fabric",
+   "name": {
+    "en": "Cotton strip",
+    "zh": "布条"
+   },
+   "group": "strength-rig",
+   "summary": {
+    "en": "Cotton strip, 30 × 3 cm, 2 mm thick.",
+    "zh": "布条，30 × 3 厘米，2 毫米厚。"
+   },
+   "detail": {
+    "en": "The fabric is plain woven cotton [S1]. A cotton strip hangs down onto the bench by itself. Fabric is tested for strength by pulling it, not by loading it like this [S1, S3].\n\nEvery sample in a test is the same size, so only the material changes [S1, S3]. The bend and the result are worked out by the model from published values; they are drawn, not written as numbers [S1].",
+    "zh": "布样品是平纹棉布 [S1]。棉布条自己就垂到了台面上。布的强度要用拉的办法来测，不能像这样压 [S1, S3]。\n\n同一个测试里样品大小都一样，只改变材料 [S1, S3]。弯多少、结果怎样，是模型按公开数据算出来的，只画出来，不写数字 [S1]。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.3,
+     0.002,
+     0.03
+    ],
+    "color": "fabric",
+    "tint": "#e6dfcd",
+    "at": [
+     -0.9,
+     0.061,
+     0.05
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   },
+   "connects": [
+    "bridge-blocks",
+    "bridge-hanger"
+   ]
+  },
+  {
+   "id": "bridge-glass-snapped",
+   "name": {
+    "en": "Snapped glass strip",
+    "zh": "断开的玻璃条"
+   },
+   "group": "strength-rig",
+   "summary": {
+    "en": "Snapped: brittle, it hardly bent first.",
+    "zh": "断了：它脆，断之前几乎没弯。"
+   },
+   "detail": {
+    "en": "The glass strip bends so little that you can hardly see it, then breaks suddenly into two pieces, and the masses drop onto the bench [S1]. Glass is weakest at its cut edges [S22].\n\nThe pieces are drawn simply; real glass and ceramic can break into sharp splinters. Glass shards falling from height can cause serious injuries, Singapore’s Commissioner of Building Control has warned [S16]. This test is done only in the model.",
+    "zh": "玻璃条弯得少到几乎看不出来，接着突然断成两段，槽码掉到台面上 [S1]。玻璃切开的边是它最弱的地方 [S22]。\n\n断开的样子是示意；真实的玻璃和陶瓷会碎出很利的碎片。新加坡的建筑管制专员提醒过：玻璃碎片从高处掉下，会造成严重的伤害 [S16]。这个测试只在模型里做。"
+   },
+   "primitive": {
+    "kind": "extrude",
+    "shape": [
+     [
+      -0.075,
+      -0.015
+     ],
+     [
+      -0.075,
+      0.015
+     ],
+     [
+      0.075,
+      0.015
+     ],
+     [
+      0.072,
+      0.01071
+     ],
+     [
+      0.069,
+      0.00643
+     ],
+     [
+      0.071,
+      0.00214
+     ],
+     [
+      0.076,
+      -0.00214
+     ],
+     [
+      0.079,
+      -0.00643
+     ],
+     [
+      0.078,
+      -0.01071
+     ],
+     [
+      0.073,
+      -0.015
+     ]
+    ],
+    "depth": 0.002,
+    "color": "membrane",
+    "rotation": [
+     -90,
+     33.05573115085401,
+     0
+    ],
+    "tint": "#5f9a8e",
+    "at": [
+     -0.97012,
+     0.04175,
+     0.05
+    ]
+   },
+   "extra": [
+    {
+     "kind": "extrude",
+     "shape": [
+      [
+       -0.073,
+       -0.015
+      ],
+      [
+       -0.078,
+       -0.01071
+      ],
+      [
+       -0.079,
+       -0.00643
+      ],
+      [
+       -0.076,
+       -0.00214
+      ],
+      [
+       -0.071,
+       0.00214
+      ],
+      [
+       -0.069,
+       0.00643
+      ],
+      [
+       -0.072,
+       0.01071
+      ],
+      [
+       -0.075,
+       0.015
+      ],
+      [
+       0.075,
+       0.015
+      ],
+      [
+       0.075,
+       -0.015
+      ]
+     ],
+     "depth": 0.002,
+     "color": "membrane",
+     "rotation": [
+      -90,
+      -33.05573115085401,
+      0
+     ],
+     "tint": "#5f9a8e",
+     "at": [
+      -0.82988,
+      0.04175,
+      0.05
+     ]
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   },
+   "shell": true,
+   "connects": [
+    "bridge-blocks",
+    "bridge-hanger"
+   ]
+  },
+  {
+   "id": "bridge-ceramic-snapped",
+   "name": {
+    "en": "Snapped ceramic strip",
+    "zh": "断开的陶瓷条"
+   },
+   "group": "strength-rig",
+   "summary": {
+    "en": "Snapped: brittle, it hardly bent first.",
+    "zh": "断了：它脆，断之前几乎没弯。"
+   },
+   "detail": {
+    "en": "The ceramic strip hardly bends, then breaks suddenly into two pieces [S1]. Ceramics are hard and wear well, but they are brittle [S10]. The broken faces show the pale fired clay under the glaze.\n\nThe pieces are drawn simply; real glass and ceramic can break into sharp splinters. Glass shards falling from height can cause serious injuries, Singapore’s Commissioner of Building Control has warned [S16]. This test is done only in the model.",
+    "zh": "陶瓷条几乎不弯，接着突然断成两段 [S1]。陶瓷硬、耐磨，但是脆 [S10]。断面露出釉下面浅色的烧结陶土。\n\n断开的样子是示意；真实的玻璃和陶瓷会碎出很利的碎片。新加坡的建筑管制专员提醒过：玻璃碎片从高处掉下，会造成严重的伤害 [S16]。这个测试只在模型里做。"
+   },
+   "primitive": {
+    "kind": "extrude",
+    "shape": [
+     [
+      -0.075,
+      -0.015
+     ],
+     [
+      -0.075,
+      0.015
+     ],
+     [
+      0.075,
+      0.015
+     ],
+     [
+      0.077,
+      0.01125
+     ],
+     [
+      0.074,
+      0.0075
+     ],
+     [
+      0.0775,
+      0.00375
+     ],
+     [
+      0.073,
+      0
+     ],
+     [
+      0.076,
+      -0.00375
+     ],
+     [
+      0.0735,
+      -0.0075
+     ],
+     [
+      0.077,
+      -0.01125
+     ],
+     [
+      0.075,
+      -0.015
+     ]
+    ],
+    "depth": 0.002,
+    "color": "enamel",
+    "rotation": [
+     -90,
+     33.05573115085401,
+     0
+    ],
+    "tint": "#f2efe7",
+    "at": [
+     -0.97012,
+     0.04175,
+     0.05
+    ]
+   },
+   "extra": [
+    {
+     "kind": "box",
+     "size": [
+      0.0012,
+      0.0021,
+      0.029
+     ],
+     "color": "abrasive",
+     "tint": "#b9ad98",
+     "rotation": [
+      0,
+      0,
+      -33.05573115085401
+     ],
+     "at": [
+      -0.9082,
+      0.0012,
+      0.05
+     ]
+    },
+    {
+     "kind": "extrude",
+     "shape": [
+      [
+       -0.075,
+       -0.015
+      ],
+      [
+       -0.077,
+       -0.01125
+      ],
+      [
+       -0.0735,
+       -0.0075
+      ],
+      [
+       -0.076,
+       -0.00375
+      ],
+      [
+       -0.073,
+       0
+      ],
+      [
+       -0.0775,
+       0.00375
+      ],
+      [
+       -0.074,
+       0.0075
+      ],
+      [
+       -0.077,
+       0.01125
+      ],
+      [
+       -0.075,
+       0.015
+      ],
+      [
+       0.075,
+       0.015
+      ],
+      [
+       0.075,
+       -0.015
+      ]
+     ],
+     "depth": 0.002,
+     "color": "enamel",
+     "rotation": [
+      -90,
+      -33.05573115085401,
+      0
+     ],
+     "tint": "#f2efe7",
+     "at": [
+      -0.82988,
+      0.04175,
+      0.05
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.0012,
+      0.0021,
+      0.029
+     ],
+     "color": "abrasive",
+     "tint": "#b9ad98",
+     "rotation": [
+      0,
+      0,
+      33.05573115085401
+     ],
+     "at": [
+      -0.8918,
+      0.0012,
+      0.05
+     ]
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   },
+   "connects": [
+    "bridge-blocks",
+    "bridge-hanger"
+   ]
+  },
+  {
+   "id": "bridge-hanger",
+   "name": {
+    "en": "Mass carrier",
+    "zh": "砝码托"
+   },
+   "group": "strength-rig",
+   "summary": {
+    "en": "Carries the masses at the middle of the strip.",
+    "zh": "在条的中点托住槽码。"
+   },
+   "detail": {
+    "en": "A steel disc with a rod, sitting at the middle of the strip; the slotted masses slide down the rod one at a time [S1]. The carrier’s own mass is left out of the model.\n\nWhen a strip snaps, the carrier and its masses fall onto the bench.",
+    "zh": "一块带竖杆的钢盘，放在条的正中；开槽的槽码一个一个套到杆上 [S1]。模型不计托盘本身的质量。\n\n条一断，砝码托和槽码就掉到台面上。"
+   },
+   "primitive": {
+    "kind": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.03,
+      0
+     ],
+     [
+      0.03,
+      0.0035
+     ],
+     [
+      0.0045,
+      0.0045
+     ],
+     [
+      0.0032,
+      0.005
+     ],
+     [
+      0.0032,
+      0.093
+     ],
+     [
+      0.0022,
+      0.095
+     ],
+     [
+      0,
+      0.095
+     ]
+    ],
+    "segments": 48,
+    "color": "steel",
+    "at": [
+     -0.9,
+     0.062,
+     0.05
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.06
+   },
+   "connects": [
+    "bridge-masses"
+   ]
+  },
+  {
+   "id": "bridge-masses",
+   "name": {
+    "en": "Masses",
+    "zh": "槽码"
+   },
+   "group": "strength-rig",
+   "summary": {
+    "en": "500 g masses, added one at a time.",
+    "zh": "500 克的槽码，一个一个加。"
+   },
+   "detail": {
+    "en": "Up to five brass slotted masses of 500 g each, so the load goes up in equal steps [S1]. The slot lets each one slide onto the carrier’s rod. Each test uses a fresh strip [S1].",
+    "zh": "最多五个黄铜槽码，每个 500 克，载荷一级一级同样地增加 [S1]。槽口让槽码能套到托杆上。每次测试都用一根新的条 [S1]。"
+   },
+   "primitive": {
+    "kind": "extrude",
+    "shape": [
+     [
+      0.004,
+      -0.03477
+     ],
+     [
+      0.00773,
+      -0.03414
+     ],
+     [
+      0.01137,
+      -0.0331
+     ],
+     [
+      0.01487,
+      -0.03168
+     ],
+     [
+      0.0182,
+      -0.02989
+     ],
+     [
+      0.02132,
+      -0.02775
+     ],
+     [
+      0.02419,
+      -0.02529
+     ],
+     [
+      0.02678,
+      -0.02253
+     ],
+     [
+      0.02906,
+      -0.01951
+     ],
+     [
+      0.03099,
+      -0.01626
+     ],
+     [
+      0.03257,
+      -0.01283
+     ],
+     [
+      0.03376,
+      -0.00924
+     ],
+     [
+      0.03456,
+      -0.00554
+     ],
+     [
+      0.03495,
+      -0.00178
+     ],
+     [
+      0.03494,
+      0.002
+     ],
+     [
+      0.03452,
+      0.00576
+     ],
+     [
+      0.0337,
+      0.00945
+     ],
+     [
+      0.03248,
+      0.01303
+     ],
+     [
+      0.03089,
+      0.01646
+     ],
+     [
+      0.02893,
+      0.0197
+     ],
+     [
+      0.02664,
+      0.02271
+     ],
+     [
+      0.02403,
+      0.02545
+     ],
+     [
+      0.02114,
+      0.02789
+     ],
+     [
+      0.01801,
+      0.03001
+     ],
+     [
+      0.01467,
+      0.03178
+     ],
+     [
+      0.01115,
+      0.03318
+     ],
+     [
+      0.00751,
+      0.03419
+     ],
+     [
+      0.00378,
+      0.0348
+     ],
+     [
+      0,
+      0.035
+     ],
+     [
+      -0.00378,
+      0.0348
+     ],
+     [
+      -0.00751,
+      0.03419
+     ],
+     [
+      -0.01115,
+      0.03318
+     ],
+     [
+      -0.01467,
+      0.03178
+     ],
+     [
+      -0.01801,
+      0.03001
+     ],
+     [
+      -0.02114,
+      0.02789
+     ],
+     [
+      -0.02403,
+      0.02545
+     ],
+     [
+      -0.02664,
+      0.02271
+     ],
+     [
+      -0.02893,
+      0.0197
+     ],
+     [
+      -0.03089,
+      0.01646
+     ],
+     [
+      -0.03248,
+      0.01303
+     ],
+     [
+      -0.0337,
+      0.00945
+     ],
+     [
+      -0.03452,
+      0.00576
+     ],
+     [
+      -0.03494,
+      0.002
+     ],
+     [
+      -0.03495,
+      -0.00178
+     ],
+     [
+      -0.03456,
+      -0.00554
+     ],
+     [
+      -0.03376,
+      -0.00924
+     ],
+     [
+      -0.03257,
+      -0.01283
+     ],
+     [
+      -0.03099,
+      -0.01626
+     ],
+     [
+      -0.02906,
+      -0.01951
+     ],
+     [
+      -0.02678,
+      -0.02253
+     ],
+     [
+      -0.02419,
+      -0.02529
+     ],
+     [
+      -0.02132,
+      -0.02775
+     ],
+     [
+      -0.0182,
+      -0.02989
+     ],
+     [
+      -0.01487,
+      -0.03168
+     ],
+     [
+      -0.01137,
+      -0.0331
+     ],
+     [
+      -0.00773,
+      -0.03414
+     ],
+     [
+      -0.004,
+      -0.03477
+     ],
+     [
+      -0.004,
+      -0.00377
+     ],
+     [
+      -0.00491,
+      -0.00247
+     ],
+     [
+      -0.00542,
+      -0.00096
+     ],
+     [
+      -0.00546,
+      0.00064
+     ],
+     [
+      -0.00505,
+      0.00218
+     ],
+     [
+      -0.00421,
+      0.00354
+     ],
+     [
+      -0.00302,
+      0.0046
+     ],
+     [
+      -0.00158,
+      0.00527
+     ],
+     [
+      0,
+      0.0055
+     ],
+     [
+      0.00158,
+      0.00527
+     ],
+     [
+      0.00302,
+      0.0046
+     ],
+     [
+      0.00421,
+      0.00354
+     ],
+     [
+      0.00505,
+      0.00218
+     ],
+     [
+      0.00546,
+      0.00064
+     ],
+     [
+      0.00542,
+      -0.00096
+     ],
+     [
+      0.00491,
+      -0.00247
+     ],
+     [
+      0.004,
+      -0.00377
+     ]
+    ],
+    "depth": 0.0146,
+    "color": "brass",
+    "rotation": [
+     -90,
+     0,
+     0
+    ],
+    "bevel": 0.0008,
+    "at": [
+     -0.9,
+     0.0732,
+     0.05
+    ]
+   },
+   "repeat": {
+    "count": 5,
+    "axis": [
+     0,
+     1,
+     0
+    ],
+    "spacing": 0.015
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.08
+   },
+   "connects": [
+    "bridge-hanger"
+   ]
+  },
+  {
+   "id": "bend-clamp",
+   "name": {
+    "en": "Clamp block",
+    "zh": "夹座"
+   },
+   "group": "bend-rig",
+   "summary": {
+    "en": "Holds one end; 25 cm sticks out.",
+    "zh": "夹住一端，伸出 25 厘米。"
+   },
+   "detail": {
+    "en": "A wooden block 15 cm high. A steel plate, tightened by two wing screws, presses the first 5 cm of the strip onto it, and the other 25 cm sticks out [S1]. Every strip is clamped the same way, which keeps the test fair [S3].\n\nA brittle strip breaks right at the edge of the clamp, where the bend is sharpest [S1].",
+    "zh": "一块 15 厘米高的木块。两颗蝶形螺丝拧紧一块钢压板，把条的前 5 厘米压在木块上，其余 25 厘米伸出去 [S1]。每根条都这样夹，测试才公平 [S3]。\n\n脆的条正好在夹口的边上断开，那里弯得最急 [S1]。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.08,
+     0.15,
+     0.08
+    ],
+    "bevel": 0.003,
+    "color": "wood",
+    "tint": "#d1ad78",
+    "at": [
+     -0.55,
+     0.075,
+     0.05
+    ]
+   },
+   "extra": [
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.064,
+      0.008,
+      0.07
+     ],
+     "bevel": 0.0015,
+     "color": "steel",
+     "at": [
+      -0.545,
+      0.156,
+      0.05
+     ]
+    },
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0,
+       0
+      ],
+      [
+       0.0032,
+       0
+      ],
+      [
+       0.0032,
+       0.012
+      ],
+      [
+       0.006,
+       0.013
+      ],
+      [
+       0.006,
+       0.018
+      ],
+      [
+       0,
+       0.018
+      ]
+     ],
+     "segments": 6,
+     "color": "steel",
+     "at": [
+      -0.545,
+      0.16,
+      0.024
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.026,
+      0.008,
+      0.004
+     ],
+     "bevel": 0.0015,
+     "color": "steel",
+     "at": [
+      -0.545,
+      0.176,
+      0.024
+     ]
+    },
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0,
+       0
+      ],
+      [
+       0.0032,
+       0
+      ],
+      [
+       0.0032,
+       0.012
+      ],
+      [
+       0.006,
+       0.013
+      ],
+      [
+       0.006,
+       0.018
+      ],
+      [
+       0,
+       0.018
+      ]
+     ],
+     "segments": 6,
+     "color": "steel",
+     "at": [
+      -0.545,
+      0.16,
+      0.076
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.026,
+      0.008,
+      0.004
+     ],
+     "bevel": 0.0015,
+     "color": "steel",
+     "at": [
+      -0.545,
+      0.176,
+      0.076
+     ]
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   }
+  },
+  {
+   "id": "bend-wood",
+   "name": {
+    "en": "Wooden strip",
+    "zh": "木条"
+   },
+   "group": "bend-rig",
+   "summary": {
+    "en": "Same strips as the strength test.",
+    "zh": "和强度测试是同一套条。"
+   },
+   "detail": {
+    "en": "The wood is teak, a hardwood, left unvarnished [S7]. Clamped with 25 cm sticking out and pushed down 2 cm, it bends without breaking [S1].\n\nEvery sample in a test is the same size, so only the material changes [S1, S3]. The bend and the result are worked out by the model from published values; they are drawn, not written as numbers [S1].",
+    "zh": "木样品是柚木，一种硬木，没有上漆 [S7]。夹住、伸出 25 厘米，末端压下 2 厘米，它弯了，没有断 [S1]。\n\n同一个测试里样品大小都一样，只改变材料 [S1, S3]。弯多少、结果怎样，是模型按公开数据算出来的，只画出来，不写数字 [S1]。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.3,
+     0.002,
+     0.03
+    ],
+    "color": "wood",
+    "tint": "#9a6a3e",
+    "at": [
+     -0.41,
+     0.151,
+     0.05
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   },
+   "connects": [
+    "bend-clamp",
+    "push-peg"
+   ]
+  },
+  {
+   "id": "bend-metal",
+   "name": {
+    "en": "Steel strip",
+    "zh": "钢条"
+   },
+   "group": "bend-rig",
+   "summary": {
+    "en": "Same strips as the strength test.",
+    "zh": "和强度测试是同一套条。"
+   },
+   "detail": {
+    "en": "The metal is steel [S9]. Clamped with 25 cm sticking out and pushed down 2 cm, it bends without breaking [S1].\n\nEvery sample in a test is the same size, so only the material changes [S1, S3]. The bend and the result are worked out by the model from published values; they are drawn, not written as numbers [S1].",
+    "zh": "金属样品是钢 [S9]。夹住、伸出 25 厘米，末端压下 2 厘米，它弯了，没有断 [S1]。\n\n同一个测试里样品大小都一样，只改变材料 [S1, S3]。弯多少、结果怎样，是模型按公开数据算出来的，只画出来，不写数字 [S1]。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.3,
+     0.002,
+     0.03
+    ],
+    "color": "steel",
+    "at": [
+     -0.41,
+     0.151,
+     0.05
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   },
+   "connects": [
+    "bend-clamp",
+    "push-peg"
+   ]
+  },
+  {
+   "id": "bend-ceramic",
+   "name": {
+    "en": "Ceramic strip",
+    "zh": "陶瓷条"
+   },
+   "group": "bend-rig",
+   "summary": {
+    "en": "Same strips as the strength test.",
+    "zh": "和强度测试是同一套条。"
+   },
+   "detail": {
+    "en": "The ceramic is cut from a glazed porcelain tile [S13]. It snaps at the clamp before the peg has pushed it down 2 cm: ceramic is not flexible [S1, S10].\n\nEvery sample in a test is the same size, so only the material changes [S1, S3]. The bend and the result are worked out by the model from published values; they are drawn, not written as numbers [S1].",
+    "zh": "陶瓷样品切自上了釉的瓷砖 [S13]。推杆还没压下 2 厘米，它就在夹口处断了：陶瓷不柔韧 [S1, S10]。\n\n同一个测试里样品大小都一样，只改变材料 [S1, S3]。弯多少、结果怎样，是模型按公开数据算出来的，只画出来，不写数字 [S1]。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.3,
+     0.002,
+     0.03
+    ],
+    "color": "enamel",
+    "tint": "#f2efe7",
+    "at": [
+     -0.41,
+     0.151,
+     0.05
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   },
+   "connects": [
+    "bend-clamp",
+    "push-peg"
+   ]
+  },
+  {
+   "id": "bend-rubber",
+   "name": {
+    "en": "Rubber strip",
+    "zh": "橡胶条"
+   },
+   "group": "bend-rig",
+   "summary": {
+    "en": "Same strips as the strength test.",
+    "zh": "和强度测试是同一套条。"
+   },
+   "detail": {
+    "en": "The rubber is natural rubber with nothing mixed in, called pure gum [S8]. It droops under its own weight before the peg reaches it, and bends any amount without breaking [S1, S26].\n\nEvery sample in a test is the same size, so only the material changes [S1, S3]. The bend and the result are worked out by the model from published values; they are drawn, not written as numbers [S1].",
+    "zh": "橡胶样品是什么都没掺的天然橡胶，叫“纯胶” [S8]。推杆还没碰到，它就在自己的重量下垂了下来；怎么弯都不断 [S1, S26]。\n\n同一个测试里样品大小都一样，只改变材料 [S1, S3]。弯多少、结果怎样，是模型按公开数据算出来的，只画出来，不写数字 [S1]。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.3,
+     0.002,
+     0.03
+    ],
+    "color": "rubber",
+    "tint": "#3b3936",
+    "at": [
+     -0.41,
+     0.151,
+     0.05
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   },
+   "connects": [
+    "bend-clamp",
+    "push-peg"
+   ]
+  },
+  {
+   "id": "bend-glass",
+   "name": {
+    "en": "Glass strip",
+    "zh": "玻璃条"
+   },
+   "group": "bend-rig",
+   "summary": {
+    "en": "Same strips as the strength test.",
+    "zh": "和强度测试是同一套条。"
+   },
+   "detail": {
+    "en": "The glass is clear window glass [S14]. It snaps at the clamp before the peg has pushed it down 2 cm: glass is not flexible [S1, S22].\n\nEvery sample in a test is the same size, so only the material changes [S1, S3]. The bend and the result are worked out by the model from published values; they are drawn, not written as numbers [S1].",
+    "zh": "玻璃样品是透明的窗玻璃 [S14]。推杆还没压下 2 厘米，它就在夹口处断了：玻璃不柔韧 [S1, S22]。\n\n同一个测试里样品大小都一样，只改变材料 [S1, S3]。弯多少、结果怎样，是模型按公开数据算出来的，只画出来，不写数字 [S1]。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.3,
+     0.002,
+     0.03
+    ],
+    "color": "membrane",
+    "tint": "#5f9a8e",
+    "at": [
+     -0.41,
+     0.151,
+     0.05
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   },
+   "connects": [
+    "bend-clamp",
+    "push-peg"
+   ],
+   "shell": true
+  },
+  {
+   "id": "bend-plastic",
+   "name": {
+    "en": "Plastic strip",
+    "zh": "塑料条"
+   },
+   "group": "bend-rig",
+   "summary": {
+    "en": "Same strips as the strength test.",
+    "zh": "和强度测试是同一套条。"
+   },
+   "detail": {
+    "en": "The plastic is HDPE, a milky kind of polyethylene [S11]. It droops a little under its own weight, and the peg bends it further without breaking it [S1, S11].\n\nEvery sample in a test is the same size, so only the material changes [S1, S3]. The bend and the result are worked out by the model from published values; they are drawn, not written as numbers [S1].",
+    "zh": "塑料样品是 HDPE，一种乳白色的聚乙烯 [S11]。它在自己的重量下先垂下一点，推杆再往下压，它弯得更多，也没有断 [S1, S11]。\n\n同一个测试里样品大小都一样，只改变材料 [S1, S3]。弯多少、结果怎样，是模型按公开数据算出来的，只画出来，不写数字 [S1]。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.3,
+     0.002,
+     0.03
+    ],
+    "color": "membrane",
+    "tint": "#ece9e0",
+    "at": [
+     -0.41,
+     0.151,
+     0.05
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   },
+   "connects": [
+    "bend-clamp",
+    "push-peg"
+   ],
+   "shell": true
+  },
+  {
+   "id": "bend-fabric",
+   "name": {
+    "en": "Cotton strip",
+    "zh": "布条"
+   },
+   "group": "bend-rig",
+   "summary": {
+    "en": "Same strips as the strength test.",
+    "zh": "和强度测试是同一套条。"
+   },
+   "detail": {
+    "en": "The fabric is plain woven cotton [S1]. It hangs down from the clamp: cloth bends any way without breaking [S1].\n\nEvery sample in a test is the same size, so only the material changes [S1, S3]. The bend and the result are worked out by the model from published values; they are drawn, not written as numbers [S1].",
+    "zh": "布样品是平纹棉布 [S1]。它从夹口垂下来：布怎么弯都不断 [S1]。\n\n同一个测试里样品大小都一样，只改变材料 [S1, S3]。弯多少、结果怎样，是模型按公开数据算出来的，只画出来，不写数字 [S1]。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.3,
+     0.002,
+     0.03
+    ],
+    "color": "fabric",
+    "tint": "#e6dfcd",
+    "at": [
+     -0.41,
+     0.151,
+     0.05
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   },
+   "connects": [
+    "bend-clamp",
+    "push-peg"
+   ]
+  },
+  {
+   "id": "bend-glass-snapped",
+   "name": {
+    "en": "Snapped glass strip",
+    "zh": "断开的玻璃条"
+   },
+   "group": "bend-rig",
+   "summary": {
+    "en": "Snapped at the clamp: glass is not flexible.",
+    "zh": "在夹口断了：玻璃不柔韧。"
+   },
+   "detail": {
+    "en": "Pushed down, the glass strip snaps at the edge of the clamp: a short stub stays in the clamp and the rest falls onto the bench [S1].\n\nThe pieces are drawn simply; real glass and ceramic can break into sharp splinters. Glass shards falling from height can cause serious injuries, Singapore’s Commissioner of Building Control has warned [S16]. This test is done only in the model.",
+    "zh": "往下一压，玻璃条在夹口的边上断开：一小截留在夹座里，其余的掉到台面上 [S1]。\n\n断开的样子是示意；真实的玻璃和陶瓷会碎出很利的碎片。新加坡的建筑管制专员提醒过：玻璃碎片从高处掉下，会造成严重的伤害 [S16]。这个测试只在模型里做。"
+   },
+   "primitive": {
+    "kind": "extrude",
+    "shape": [
+     [
+      -0.025,
+      -0.015
+     ],
+     [
+      -0.025,
+      0.015
+     ],
+     [
+      0.025,
+      0.015
+     ],
+     [
+      0.0232,
+      0.01071
+     ],
+     [
+      0.0214,
+      0.00643
+     ],
+     [
+      0.0226,
+      0.00214
+     ],
+     [
+      0.0256,
+      -0.00214
+     ],
+     [
+      0.0274,
+      -0.00643
+     ],
+     [
+      0.0268,
+      -0.01071
+     ],
+     [
+      0.0238,
+      -0.015
+     ]
+    ],
+    "depth": 0.002,
+    "color": "membrane",
+    "rotation": [
+     -90,
+     0,
+     0
+    ],
+    "tint": "#5f9a8e",
+    "at": [
+     -0.535,
+     0.151,
+     0.05
+    ]
+   },
+   "extra": [
+    {
+     "kind": "extrude",
+     "shape": [
+      [
+       -0.123,
+       -0.015
+      ],
+      [
+       -0.128,
+       -0.01071
+      ],
+      [
+       -0.129,
+       -0.00643
+      ],
+      [
+       -0.126,
+       -0.00214
+      ],
+      [
+       -0.121,
+       0.00214
+      ],
+      [
+       -0.119,
+       0.00643
+      ],
+      [
+       -0.122,
+       0.01071
+      ],
+      [
+       -0.125,
+       0.015
+      ],
+      [
+       0.125,
+       0.015
+      ],
+      [
+       0.125,
+       -0.015
+      ]
+     ],
+     "depth": 0.002,
+     "color": "membrane",
+     "rotation": [
+      -90,
+      0,
+      7
+     ],
+     "tint": "#5f9a8e",
+     "at": [
+      -0.38,
+      0.001,
+      0.08
+     ]
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   },
+   "shell": true,
+   "connects": [
+    "bend-clamp",
+    "push-peg"
+   ]
+  },
+  {
+   "id": "bend-ceramic-snapped",
+   "name": {
+    "en": "Snapped ceramic strip",
+    "zh": "断开的陶瓷条"
+   },
+   "group": "bend-rig",
+   "summary": {
+    "en": "Snapped at the clamp: ceramic is not flexible.",
+    "zh": "在夹口断了：陶瓷不柔韧。"
+   },
+   "detail": {
+    "en": "Pushed down, the ceramic strip snaps at the edge of the clamp before the peg has gone far [S1]. Ceramics are brittle [S10].\n\nThe pieces are drawn simply; real glass and ceramic can break into sharp splinters. Glass shards falling from height can cause serious injuries, Singapore’s Commissioner of Building Control has warned [S16]. This test is done only in the model.",
+    "zh": "推杆还没压下多少，陶瓷条就在夹口的边上断开了 [S1]。陶瓷是脆的 [S10]。\n\n断开的样子是示意；真实的玻璃和陶瓷会碎出很利的碎片。新加坡的建筑管制专员提醒过：玻璃碎片从高处掉下，会造成严重的伤害 [S16]。这个测试只在模型里做。"
+   },
+   "primitive": {
+    "kind": "extrude",
+    "shape": [
+     [
+      -0.025,
+      -0.015
+     ],
+     [
+      -0.025,
+      0.015
+     ],
+     [
+      0.025,
+      0.015
+     ],
+     [
+      0.0262,
+      0.01125
+     ],
+     [
+      0.0244,
+      0.0075
+     ],
+     [
+      0.0265,
+      0.00375
+     ],
+     [
+      0.0238,
+      0
+     ],
+     [
+      0.0256,
+      -0.00375
+     ],
+     [
+      0.0241,
+      -0.0075
+     ],
+     [
+      0.0262,
+      -0.01125
+     ],
+     [
+      0.025,
+      -0.015
+     ]
+    ],
+    "depth": 0.002,
+    "color": "enamel",
+    "rotation": [
+     -90,
+     0,
+     0
+    ],
+    "tint": "#f2efe7",
+    "at": [
+     -0.535,
+     0.151,
+     0.05
+    ]
+   },
+   "extra": [
+    {
+     "kind": "extrude",
+     "shape": [
+      [
+       -0.125,
+       -0.015
+      ],
+      [
+       -0.127,
+       -0.01125
+      ],
+      [
+       -0.1235,
+       -0.0075
+      ],
+      [
+       -0.126,
+       -0.00375
+      ],
+      [
+       -0.123,
+       0
+      ],
+      [
+       -0.1275,
+       0.00375
+      ],
+      [
+       -0.124,
+       0.0075
+      ],
+      [
+       -0.127,
+       0.01125
+      ],
+      [
+       -0.125,
+       0.015
+      ],
+      [
+       0.125,
+       0.015
+      ],
+      [
+       0.125,
+       -0.015
+      ]
+     ],
+     "depth": 0.002,
+     "color": "enamel",
+     "rotation": [
+      -90,
+      0,
+      7
+     ],
+     "tint": "#f2efe7",
+     "at": [
+      -0.38,
+      0.001,
+      0.08
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.0012,
+      0.0021,
+      0.029
+     ],
+     "color": "abrasive",
+     "tint": "#b9ad98",
+     "rotation": [
+      0,
+      0,
+      0
+     ],
+     "at": [
+      -0.5106,
+      0.151,
+      0.05
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.0012,
+      0.0021,
+      0.029
+     ],
+     "color": "abrasive",
+     "tint": "#b9ad98",
+     "rotation": [
+      0,
+      7,
+      0
+     ],
+     "at": [
+      -0.50347,
+      0.001,
+      0.09523
+     ]
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   },
+   "connects": [
+    "bend-clamp",
+    "push-peg"
+   ]
+  },
+  {
+   "id": "push-stand",
+   "name": {
+    "en": "Push stand",
+    "zh": "推杆架"
+   },
+   "group": "bend-rig",
+   "summary": {
+    "en": "Holds the peg, with a line every 0.5 cm.",
+    "zh": "架住推杆，每 0.5 厘米一条刻度。"
+   },
+   "detail": {
+    "en": "A steel rod on a heavy base, just behind the strip’s free end. A small white scale beside it has a line every 0.5 cm and no numbers; the peg’s pointer shows how far the end has been pushed [S1].",
+    "zh": "一根竖在重底座上的钢杆，就在条伸出那一端的后面。旁边一块小白板上每 0.5 厘米一条刻度线，不写数字；推杆的指针指出末端压下了多少 [S1]。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.06,
+     0.012,
+     0.05
+    ],
+    "bevel": 0.003,
+    "color": "powder",
+    "tint": "#3d4245",
+    "at": [
+     -0.265,
+     0.006,
+     -0.01
+    ]
+   },
+   "extra": [
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0,
+       0
+      ],
+      [
+       0.0045,
+       0
+      ],
+      [
+       0.0045,
+       0.2
+      ],
+      [
+       0.003,
+       0.203
+      ],
+      [
+       0,
+       0.203
+      ]
+     ],
+     "segments": 24,
+     "color": "steel",
+     "at": [
+      -0.265,
+      0.012,
+      -0.01
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.016,
+      0.04,
+      0.002
+     ],
+     "bevel": 0.0006,
+     "color": "enamel",
+     "tint": "#f1eee6",
+     "at": [
+      -0.247,
+      0.159,
+      -0.006
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.012,
+      0.004,
+      0.004
+     ],
+     "color": "steel",
+     "at": [
+      -0.257,
+      0.14,
+      -0.008
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.01,
+      0.0006,
+      0.0005
+     ],
+     "color": "powder",
+     "at": [
+      -0.2475,
+      0.17,
+      -0.0048
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.006,
+      0.0006,
+      0.0005
+     ],
+     "color": "powder",
+     "at": [
+      -0.2495,
+      0.165,
+      -0.0048
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.01,
+      0.0006,
+      0.0005
+     ],
+     "color": "powder",
+     "at": [
+      -0.2475,
+      0.16,
+      -0.0048
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.006,
+      0.0006,
+      0.0005
+     ],
+     "color": "powder",
+     "at": [
+      -0.2495,
+      0.155,
+      -0.0048
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.01,
+      0.0006,
+      0.0005
+     ],
+     "color": "powder",
+     "at": [
+      -0.2475,
+      0.15,
+      -0.0048
+     ]
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   }
+  },
+  {
+   "id": "push-peg",
+   "name": {
+    "en": "Push peg",
+    "zh": "推杆头"
+   },
+   "group": "bend-rig",
+   "summary": {
+    "en": "Pushes the free end down.",
+    "zh": "把伸出的一端往下压。"
+   },
+   "detail": {
+    "en": "The peg slides down the rod in steps of 0.5 cm, up to 2 cm, and its rubber foot presses across the end of the strip [S1]. Every strip is pushed down by the same distance; how hard the peg has to push is not shown.\n\nAnother fair test hangs the same light weight on the end of each strip and measures how far it bends [S3].",
+    "zh": "推杆沿着竖杆往下滑，每档 0.5 厘米，最多 2 厘米，橡胶脚压在条的末端上 [S1]。每根条都压下同样的距离；推杆要用多大的力，这里不显示。\n\n另一种公平测试是在每根条的末端挂同样轻的重物，量它弯下多少 [S3]。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.016,
+     0.024,
+     0.016
+    ],
+    "bevel": 0.002,
+    "color": "plastic",
+    "tint": "#46505a",
+    "at": [
+     -0.265,
+     0.17,
+     -0.01
+    ]
+   },
+   "extra": [
+    {
+     "kind": "box",
+     "size": [
+      0.008,
+      0.008,
+      0.066
+     ],
+     "color": "plastic",
+     "tint": "#46505a",
+     "at": [
+      -0.265,
+      0.165,
+      0.024
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.008,
+      0.005,
+      0.006
+     ],
+     "color": "plastic",
+     "tint": "#46505a",
+     "at": [
+      -0.265,
+      0.1675,
+      -0.001
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.004,
+      0.004,
+      0.036
+     ],
+     "color": "rubber",
+     "rotation": [
+      90,
+      0,
+      0
+     ],
+     "tint": "#2c2b29",
+     "at": [
+      -0.265,
+      0.156,
+      0.05
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.004,
+      0.006,
+      0.004
+     ],
+     "color": "steel",
+     "at": [
+      -0.265,
+      0.1605,
+      0.05
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.008,
+      0.0012,
+      0.002
+     ],
+     "color": "brass",
+     "at": [
+      -0.254,
+      0.17,
+      -0.007
+     ]
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.04
+   }
+  },
+  {
+   "id": "tank",
+   "name": {
+    "en": "Water tank",
+    "zh": "水缸"
+   },
+   "group": "float-tank",
+   "summary": {
+    "en": "Holds fresh water, 18 cm deep, for every test.",
+    "zh": "装着清水，18 厘米深，每次都一样。"
+   },
+   "detail": {
+    "en": "A glass tank 40 cm long, 25 cm wide and 25 cm high, with plastic trim on its edges [S1]. Each thing is put in gently, one at a time, as in a class test [S4].\n\nUse X-RAY to see through the glass to anything that has sunk to the bottom.",
+    "zh": "一只长 40 厘米、宽 25 厘米、高 25 厘米的玻璃缸，四边有塑料包边 [S1]。东西一样一样轻轻放进去，和课堂上的测试一样 [S4]。\n\n用 X-RAY 透过玻璃，可以看到沉到缸底的东西。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.4,
+     0.25,
+     0.005
+    ],
+    "color": "glass",
+    "at": [
+     0,
+     0.125,
+     0.1025
+    ]
+   },
+   "extra": [
+    {
+     "kind": "box",
+     "size": [
+      0.4,
+      0.25,
+      0.005
+     ],
+     "color": "glass",
+     "at": [
+      0,
+      0.125,
+      -0.1425
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.005,
+      0.25,
+      0.24
+     ],
+     "color": "glass",
+     "at": [
+      -0.1975,
+      0.125,
+      -0.02
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.005,
+      0.25,
+      0.24
+     ],
+     "color": "glass",
+     "at": [
+      0.1975,
+      0.125,
+      -0.02
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.39,
+      0.005,
+      0.24
+     ],
+     "color": "glass",
+     "at": [
+      0,
+      0.0025,
+      -0.02
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.404,
+      0.009,
+      0.004
+     ],
+     "color": "powder",
+     "tint": "#384043",
+     "at": [
+      0,
+      0.2455,
+      0.105
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.404,
+      0.009,
+      0.004
+     ],
+     "color": "powder",
+     "tint": "#384043",
+     "at": [
+      0,
+      0.2455,
+      -0.145
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.004,
+      0.009,
+      0.254
+     ],
+     "color": "powder",
+     "tint": "#384043",
+     "at": [
+      -0.2,
+      0.2455,
+      -0.02
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.004,
+      0.009,
+      0.254
+     ],
+     "color": "powder",
+     "tint": "#384043",
+     "at": [
+      0.2,
+      0.2455,
+      -0.02
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.404,
+      0.009,
+      0.004
+     ],
+     "color": "powder",
+     "tint": "#384043",
+     "at": [
+      0,
+      0.0045,
+      0.105
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.404,
+      0.009,
+      0.004
+     ],
+     "color": "powder",
+     "tint": "#384043",
+     "at": [
+      0,
+      0.0045,
+      -0.145
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.004,
+      0.009,
+      0.254
+     ],
+     "color": "powder",
+     "tint": "#384043",
+     "at": [
+      -0.2,
+      0.0045,
+      -0.02
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.004,
+      0.009,
+      0.254
+     ],
+     "color": "powder",
+     "tint": "#384043",
+     "at": [
+      0.2,
+      0.0045,
+      -0.02
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.006,
+      0.25,
+      0.006
+     ],
+     "color": "powder",
+     "tint": "#384043",
+     "at": [
+      -0.2,
+      0.125,
+      -0.145
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.006,
+      0.25,
+      0.006
+     ],
+     "color": "powder",
+     "tint": "#384043",
+     "at": [
+      -0.2,
+      0.125,
+      0.105
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.006,
+      0.25,
+      0.006
+     ],
+     "color": "powder",
+     "tint": "#384043",
+     "at": [
+      0.2,
+      0.125,
+      -0.145
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.006,
+      0.25,
+      0.006
+     ],
+     "color": "powder",
+     "tint": "#384043",
+     "at": [
+      0.2,
+      0.125,
+      0.105
+     ]
+    }
+   ],
+   "shell": true,
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   }
+  },
+  {
+   "id": "tank-water",
+   "name": {
+    "en": "Water",
+    "zh": "水"
+   },
+   "group": "float-tank",
+   "summary": {
+    "en": "Fresh water, 18 cm deep: the same for every test.",
+    "zh": "清水，18 厘米深：每次测试都一样。"
+   },
+   "detail": {
+    "en": "Something floats if it stays on or near the surface of the water, and sinks if it goes to the bottom [S2]. The same tank of fresh water is used for every block, so only the thing put in changes [S1].",
+    "zh": "东西停在水面上或接近水面，就是浮；沉到缸底，就是沉 [S2]。每一样都放进同一缸清水，只改变放进去的东西 [S1]。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.389,
+     0.18,
+     0.239
+    ],
+    "color": "membrane",
+    "tint": "#6c919a",
+    "at": [
+     0,
+     0.095,
+     -0.02
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   }
+  },
+  {
+   "id": "float-wood",
+   "name": {
+    "en": "Wooden block",
+    "zh": "木块"
+   },
+   "group": "float-tank",
+   "summary": {
+    "en": "This wood floats, most of it under the water.",
+    "zh": "这种木头浮着，大部分在水里。"
+   },
+   "detail": {
+    "en": "A 6 × 6 × 3 cm block of teak [S1]. It floats, with most of the block below the surface [S1, S7]. Most woods float; a few very heavy woods, such as lignum vitae, sink [S34].",
+    "zh": "一块 6 × 6 × 3 厘米的柚木 [S1]。它浮着，大部分在水面下 [S1, S7]。大多数木头都浮；也有很重的木头会沉，比如愈疮木 [S34]。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.06,
+     0.03,
+     0.06
+    ],
+    "bevel": 0.0015,
+    "color": "wood",
+    "tint": "#9a6a3e",
+    "at": [
+     0,
+     0.02,
+     -0.02
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   }
+  },
+  {
+   "id": "float-wood-big",
+   "name": {
+    "en": "Big wooden board",
+    "zh": "大木板"
+   },
+   "group": "float-tank",
+   "summary": {
+    "en": "Much bigger, same wood: still floats.",
+    "zh": "大得多，同一种木：照样浮。"
+   },
+   "detail": {
+    "en": "A board of the same teak, 24 × 10 × 6 cm: many times the size of the small block [S1]. It floats just as the small block does. A big, heavy thing does not always sink [S1, S18].",
+    "zh": "同一种柚木做的木板，24 × 10 × 6 厘米，比小木块大好多倍 [S1]。它和小木块一样浮着。又大又重的东西，不一定沉 [S1, S18]。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.24,
+     0.06,
+     0.1
+    ],
+    "bevel": 0.002,
+    "color": "wood",
+    "tint": "#9a6a3e",
+    "at": [
+     0,
+     0.035,
+     -0.02
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   }
+  },
+  {
+   "id": "float-metal",
+   "name": {
+    "en": "Steel block",
+    "zh": "钢块"
+   },
+   "group": "float-tank",
+   "summary": {
+    "en": "Sinks to the bottom.",
+    "zh": "沉到缸底。"
+   },
+   "detail": {
+    "en": "A 6 × 6 × 3 cm block of steel [S1]. It sinks to the bottom of the tank [S1, S8]. Steel is hard and so is the wooden block, yet one sinks and the other floats: being hard does not decide it.",
+    "zh": "一块 6 × 6 × 3 厘米的钢 [S1]。它沉到缸底 [S1, S8]。钢硬，木块也硬，可是一个沉、一个浮：硬不硬，不决定浮沉。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.06,
+     0.03,
+     0.06
+    ],
+    "bevel": 0.0015,
+    "color": "steel",
+    "at": [
+     0,
+     0.02,
+     -0.02
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   }
+  },
+  {
+   "id": "float-ceramic",
+   "name": {
+    "en": "Ceramic block",
+    "zh": "陶瓷块"
+   },
+   "group": "float-tank",
+   "summary": {
+    "en": "Sinks to the bottom.",
+    "zh": "沉到缸底。"
+   },
+   "detail": {
+    "en": "A 6 × 6 × 3 cm block of porcelain [S1]. It sinks to the bottom [S1, S8].",
+    "zh": "一块 6 × 6 × 3 厘米的瓷 [S1]。它沉到缸底 [S1, S8]。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.06,
+     0.03,
+     0.06
+    ],
+    "bevel": 0.0015,
+    "color": "enamel",
+    "tint": "#f2efe7",
+    "at": [
+     0,
+     0.02,
+     -0.02
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   }
+  },
+  {
+   "id": "float-rubber",
+   "name": {
+    "en": "Rubber block",
+    "zh": "橡胶块"
+   },
+   "group": "float-tank",
+   "summary": {
+    "en": "This rubber floats, low in the water.",
+    "zh": "这种橡胶浮着，大部分在水里。"
+   },
+   "detail": {
+    "en": "A 6 × 6 × 3 cm block of pure gum natural rubber [S1]. It floats with only a thin layer above the water, which still counts as floating [S1, S8, S2].\n\nNot every rubber floats. Hard rubber and most rubber goods have other things mixed in and sink [S8]. Many school erasers are made of PVC with chalk mixed in, so they are very likely to sink too; that comes from what they are made of, not from a float test [S33, S6].",
+    "zh": "一块 6 × 6 × 3 厘米的纯天然橡胶 [S1]。它浮着，只露出水面薄薄一层；这也算浮 [S1, S8, S2]。\n\n不是每种橡胶都浮。硬橡胶和大多数橡胶制品掺了别的东西，会沉 [S8]。很多学校用的橡皮擦是 PVC 掺了白垩做的，所以多半也会沉；这是从它们的成分推出来的，不是放进水里试过的结果 [S33, S6]。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.06,
+     0.03,
+     0.06
+    ],
+    "bevel": 0.0015,
+    "color": "rubber",
+    "tint": "#3b3936",
+    "at": [
+     0,
+     0.02,
+     -0.02
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   }
+  },
+  {
+   "id": "float-glass",
+   "name": {
+    "en": "Glass block",
+    "zh": "玻璃块"
+   },
+   "group": "float-tank",
+   "summary": {
+    "en": "Sinks to the bottom.",
+    "zh": "沉到缸底。"
+   },
+   "detail": {
+    "en": "A 6 × 6 × 3 cm block of glass [S1]. It sinks to the bottom [S1, S8].",
+    "zh": "一块 6 × 6 × 3 厘米的玻璃 [S1]。它沉到缸底 [S1, S8]。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.06,
+     0.03,
+     0.06
+    ],
+    "bevel": 0.0015,
+    "color": "membrane",
+    "tint": "#5f9a8e",
+    "at": [
+     0,
+     0.02,
+     -0.02
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   },
+   "shell": true
+  },
+  {
+   "id": "float-plastic",
+   "name": {
+    "en": "Plastic block",
+    "zh": "塑料块"
+   },
+   "group": "float-tank",
+   "summary": {
+    "en": "This plastic floats, only just.",
+    "zh": "这种塑料浮着，只露出一点点。"
+   },
+   "detail": {
+    "en": "A 6 × 6 × 3 cm block of HDPE [S1]. It floats with only a sliver above the water [S1, S6].\n\nPlastics differ: polypropylene and polyethylene float, while PET and PVC sink [S6].",
+    "zh": "一块 6 × 6 × 3 厘米的 HDPE [S1]。它浮着，只露出水面薄薄一层 [S1, S6]。\n\n塑料不都一样：聚丙烯、聚乙烯浮；PET、PVC 沉 [S6]。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.06,
+     0.03,
+     0.06
+    ],
+    "bevel": 0.0015,
+    "color": "plastic",
+    "tint": "#ece9e0",
+    "at": [
+     0,
+     0.02,
+     -0.02
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   }
+  },
+  {
+   "id": "float-bottle",
+   "name": {
+    "en": "Capped empty bottle",
+    "zh": "盖好的空瓶"
+   },
+   "group": "float-tank",
+   "summary": {
+    "en": "Capped and empty: it floats high.",
+    "zh": "盖好的空瓶：浮得很高。"
+   },
+   "detail": {
+    "en": "A 500 ml drinks bottle, 6.5 cm across and 20 cm long, empty with its cap on [S1]. Drinks bottles are usually PET, a plastic that sinks when it is a solid lump [S6]. The capped bottle floats high because it holds so much air [S1].\n\nHaving air inside does not always make a thing float: a sealed jar packed with stones still sinks [S18].",
+    "zh": "一只 500 毫升的饮料瓶，直径 6.5 厘米、长 20 厘米，空的，盖好了盖子 [S1]。饮料瓶多半是 PET 做的；PET 做成实心的一块会沉 [S6]。盖好的空瓶浮得很高，是因为里面有很多空气 [S1]。\n\n里面有空气，不一定就会浮：装满石头的密封罐照样沉 [S18]。"
+   },
+   "primitive": {
+    "kind": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.0265,
+      0.001
+     ],
+     [
+      0.0315,
+      0.005
+     ],
+     [
+      0.0325,
+      0.012
+     ],
+     [
+      0.0325,
+      0.044
+     ],
+     [
+      0.03,
+      0.047
+     ],
+     [
+      0.03,
+      0.053
+     ],
+     [
+      0.0325,
+      0.056
+     ],
+     [
+      0.0325,
+      0.069
+     ],
+     [
+      0.03,
+      0.072
+     ],
+     [
+      0.03,
+      0.078
+     ],
+     [
+      0.0325,
+      0.081
+     ],
+     [
+      0.0325,
+      0.094
+     ],
+     [
+      0.03,
+      0.097
+     ],
+     [
+      0.03,
+      0.103
+     ],
+     [
+      0.0325,
+      0.106
+     ],
+     [
+      0.0325,
+      0.13
+     ],
+     [
+      0.0285,
+      0.142
+     ],
+     [
+      0.021,
+      0.158
+     ],
+     [
+      0.0135,
+      0.168
+     ],
+     [
+      0.0135,
+      0.176
+     ],
+     [
+      0,
+      0.176
+     ]
+    ],
+    "segments": 48,
+    "color": "membrane",
+    "rotation": [
+     0,
+     0,
+     -90
+    ],
+    "tint": "#d3e4e8",
+    "at": [
+     -0.1,
+     0.0375,
+     -0.02
+    ]
+   },
+   "extra": [
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0,
+       0
+      ],
+      [
+       0.0152,
+       0
+      ],
+      [
+       0.0152,
+       0.022
+      ],
+      [
+       0.014,
+       0.024
+      ],
+      [
+       0,
+       0.024
+      ]
+     ],
+     "segments": 32,
+     "color": "plastic",
+     "rotation": [
+      0,
+      0,
+      -90
+     ],
+     "tint": "#4f7591",
+     "at": [
+      0.076,
+      0.0375,
+      -0.02
+     ]
+    },
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0.0135,
+       0
+      ],
+      [
+       0.019,
+       0
+      ],
+      [
+       0.019,
+       0.0018
+      ],
+      [
+       0.0135,
+       0.0018
+      ]
+     ],
+     "segments": 32,
+     "color": "plastic",
+     "rotation": [
+      0,
+      0,
+      -90
+     ],
+     "tint": "#4f7591",
+     "at": [
+      0.073,
+      0.0375,
+      -0.02
+     ]
+    }
+   ],
+   "shell": true,
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   }
+  },
+  {
+   "id": "float-fabric",
+   "name": {
+    "en": "Folded cotton",
+    "zh": "叠好的棉布"
+   },
+   "group": "float-tank",
+   "summary": {
+    "en": "Soaks up water, then sinks.",
+    "zh": "吸了水，就沉下去。"
+   },
+   "detail": {
+    "en": "A cotton cloth folded to 6 × 6 cm, about 1 cm thick [S1]. At first it floats on the air trapped in it [S32]. Cotton fibre itself is heavier than water for its size, so once the cloth has soaked up water it sinks; the model shows this end [S27, S4].",
+    "zh": "一块叠成 6 × 6 厘米、约 1 厘米厚的棉布 [S1]。刚放进去时，布里夹着的空气让它浮一会儿 [S32]。棉纤维本身比同样大小的水重，布吸饱了水就沉下去；模型画的是这个结果 [S27, S4]。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.06,
+     0.009,
+     0.06
+    ],
+    "bevel": 0.003,
+    "color": "fabric",
+    "tint": "#e6dfcd",
+    "at": [
+     0,
+     0.01,
+     -0.02
+    ]
+   },
+   "extra": [
+    {
+     "kind": "extrude",
+     "shape": [
+      [
+       -0.012,
+       0.012
+      ],
+      [
+       0.012,
+       0.012
+      ],
+      [
+       0.012,
+       -0.012
+      ]
+     ],
+     "depth": 0.0014,
+     "color": "fabric",
+     "rotation": [
+      -90,
+      0,
+      0
+     ],
+     "tint": "#ddd5c1",
+     "at": [
+      0.018,
+      0.0148,
+      -0.002
+     ]
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   }
+  },
+  {
+   "id": "drop-stand",
+   "name": {
+    "en": "Dropper stand",
+    "zh": "滴管架"
+   },
+   "group": "drop-tray",
+   "summary": {
+    "en": "Same dropper, same drop, same height.",
+    "zh": "同一支滴管、同样一滴、同样高度。"
+   },
+   "detail": {
+    "en": "A wooden base for the sample and a stand that holds a glass dropper with a rubber bulb, its tip 5 cm above the sample [S1]. Every sample gets one drop from the same height, and then you look at where the water is [S3].",
+    "zh": "一块放样片的木座，和一个夹住玻璃滴管的架子，滴管上有橡胶头，管尖在样片上方 5 厘米 [S1]。每块样片都从同样的高度滴一滴水，再看水在哪里 [S3]。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.12,
+     0.02,
+     0.12
+    ],
+    "bevel": 0.003,
+    "color": "wood",
+    "tint": "#d1ad78",
+    "at": [
+     0.45,
+     0.01,
+     0.08
+    ]
+   },
+   "extra": [
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.06,
+      0.01,
+      0.04
+     ],
+     "bevel": 0.002,
+     "color": "powder",
+     "tint": "#3d4245",
+     "at": [
+      0.45,
+      0.005,
+      -0.005
+     ]
+    },
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0,
+       0
+      ],
+      [
+       0.004,
+       0
+      ],
+      [
+       0.004,
+       0.17
+      ],
+      [
+       0,
+       0.17
+      ]
+     ],
+     "segments": 24,
+     "color": "steel",
+     "at": [
+      0.45,
+      0.01,
+      -0.005
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.016,
+      0.016,
+      0.016
+     ],
+     "bevel": 0.002,
+     "color": "steel",
+     "at": [
+      0.45,
+      0.13,
+      -0.005
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.003,
+      0.003,
+      0.085
+     ],
+     "color": "steel",
+     "rotation": [
+      90,
+      0,
+      0
+     ],
+     "at": [
+      0.45,
+      0.13,
+      0.0375
+     ]
+    },
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0.0052,
+       0
+      ],
+      [
+       0.008,
+       0
+      ],
+      [
+       0.008,
+       0.014
+      ],
+      [
+       0.0052,
+       0.014
+      ]
+     ],
+     "segments": 24,
+     "color": "steel",
+     "at": [
+      0.45,
+      0.123,
+      0.08
+     ]
+    },
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0,
+       0
+      ],
+      [
+       0.0011,
+       0
+      ],
+      [
+       0.0016,
+       0.012
+      ],
+      [
+       0.0042,
+       0.03
+      ],
+      [
+       0.0042,
+       0.085
+      ],
+      [
+       0,
+       0.085
+      ]
+     ],
+     "segments": 24,
+     "color": "glass",
+     "tint": "#b7cfd0",
+     "at": [
+      0.45,
+      0.072,
+      0.08
+     ]
+    },
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0,
+       0
+      ],
+      [
+       0.0055,
+       0
+      ],
+      [
+       0.0062,
+       0.006
+      ],
+      [
+       0.0072,
+       0.016
+      ],
+      [
+       0.0066,
+       0.028
+      ],
+      [
+       0.004,
+       0.034
+      ],
+      [
+       0,
+       0.035
+      ]
+     ],
+     "segments": 24,
+     "color": "rubber",
+     "tint": "#7d3a2e",
+     "at": [
+      0.45,
+      0.155,
+      0.08
+     ]
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   },
+   "connects": [
+    "water-bead"
+   ]
+  },
+  {
+   "id": "square-wood",
+   "name": {
+    "en": "Wood sample",
+    "zh": "木样片"
+   },
+   "group": "drop-tray",
+   "summary": {
+    "en": "Wood sample, 8 × 8 cm.",
+    "zh": "木样片，8 × 8 厘米。"
+   },
+   "detail": {
+    "en": "The wood is teak, a hardwood, left unvarnished [S7]. The drop slowly soaks in and leaves a damp patch: unvarnished wood absorbs water [S3].\n\nEvery sample in a test is the same size, so only the material changes [S1, S3]. The bend and the result are worked out by the model from published values; they are drawn, not written as numbers [S1].",
+    "zh": "木样品是柚木，一种硬木，没有上漆 [S7]。水慢慢吸了进去，留下一片湿印：没上漆的木头会吸水 [S3]。\n\n同一个测试里样品大小都一样，只改变材料 [S1, S3]。弯多少、结果怎样，是模型按公开数据算出来的，只画出来，不写数字 [S1]。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.08,
+     0.002,
+     0.08
+    ],
+    "color": "wood",
+    "tint": "#9a6a3e",
+    "at": [
+     0.45,
+     0.021,
+     0.08
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   }
+  },
+  {
+   "id": "square-metal",
+   "name": {
+    "en": "Metal sample",
+    "zh": "钢样片"
+   },
+   "group": "drop-tray",
+   "summary": {
+    "en": "Metal sample, 8 × 8 cm.",
+    "zh": "钢样片，8 × 8 厘米。"
+   },
+   "detail": {
+    "en": "The metal is steel [S9]. The drop stays on top: steel does not absorb water [S3].\n\nEvery sample in a test is the same size, so only the material changes [S1, S3]. The bend and the result are worked out by the model from published values; they are drawn, not written as numbers [S1].",
+    "zh": "金属样品是钢 [S9]。水停在上面：钢不吸水 [S3]。\n\n同一个测试里样品大小都一样，只改变材料 [S1, S3]。弯多少、结果怎样，是模型按公开数据算出来的，只画出来，不写数字 [S1]。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.08,
+     0.002,
+     0.08
+    ],
+    "color": "steel",
+    "at": [
+     0.45,
+     0.021,
+     0.08
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   }
+  },
+  {
+   "id": "square-ceramic",
+   "name": {
+    "en": "Ceramic sample",
+    "zh": "陶瓷样片"
+   },
+   "group": "drop-tray",
+   "summary": {
+    "en": "Ceramic sample, 8 × 8 cm.",
+    "zh": "陶瓷样片，8 × 8 厘米。"
+   },
+   "detail": {
+    "en": "The ceramic is cut from a glazed porcelain tile [S13]. The drop stays on top: a glazed porcelain tile hardly absorbs any water [S13].\n\nEvery sample in a test is the same size, so only the material changes [S1, S3]. The bend and the result are worked out by the model from published values; they are drawn, not written as numbers [S1].",
+    "zh": "陶瓷样品切自上了釉的瓷砖 [S13]。水停在上面：上了釉的瓷砖几乎不吸水 [S13]。\n\n同一个测试里样品大小都一样，只改变材料 [S1, S3]。弯多少、结果怎样，是模型按公开数据算出来的，只画出来，不写数字 [S1]。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.08,
+     0.002,
+     0.08
+    ],
+    "color": "enamel",
+    "tint": "#f2efe7",
+    "at": [
+     0.45,
+     0.021,
+     0.08
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   }
+  },
+  {
+   "id": "square-rubber",
+   "name": {
+    "en": "Rubber sample",
+    "zh": "橡胶样片"
+   },
+   "group": "drop-tray",
+   "summary": {
+    "en": "Rubber sample, 8 × 8 cm.",
+    "zh": "橡胶样片，8 × 8 厘米。"
+   },
+   "detail": {
+    "en": "The rubber is natural rubber with nothing mixed in, called pure gum [S8]. The drop stays on top: rubber does not absorb water [S15].\n\nEvery sample in a test is the same size, so only the material changes [S1, S3]. The bend and the result are worked out by the model from published values; they are drawn, not written as numbers [S1].",
+    "zh": "橡胶样品是什么都没掺的天然橡胶，叫“纯胶” [S8]。水停在上面：橡胶不吸水 [S15]。\n\n同一个测试里样品大小都一样，只改变材料 [S1, S3]。弯多少、结果怎样，是模型按公开数据算出来的，只画出来，不写数字 [S1]。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.08,
+     0.002,
+     0.08
+    ],
+    "color": "rubber",
+    "tint": "#3b3936",
+    "at": [
+     0.45,
+     0.021,
+     0.08
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   }
+  },
+  {
+   "id": "square-glass",
+   "name": {
+    "en": "Glass sample",
+    "zh": "玻璃样片"
+   },
+   "group": "drop-tray",
+   "summary": {
+    "en": "Glass sample, 8 × 8 cm.",
+    "zh": "玻璃样片，8 × 8 厘米。"
+   },
+   "detail": {
+    "en": "The glass is clear window glass [S14]. The drop stays on top: glass does not absorb water [S1].\n\nEvery sample in a test is the same size, so only the material changes [S1, S3]. The bend and the result are worked out by the model from published values; they are drawn, not written as numbers [S1].",
+    "zh": "玻璃样品是透明的窗玻璃 [S14]。水停在上面：玻璃不吸水 [S1]。\n\n同一个测试里样品大小都一样，只改变材料 [S1, S3]。弯多少、结果怎样，是模型按公开数据算出来的，只画出来，不写数字 [S1]。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.08,
+     0.002,
+     0.08
+    ],
+    "color": "membrane",
+    "tint": "#5f9a8e",
+    "at": [
+     0.45,
+     0.021,
+     0.08
+    ]
+   },
+   "extra": [
+    {
+     "kind": "box",
+     "size": [
+      0.08,
+      0.002,
+      0.0012
+     ],
+     "color": "plastic",
+     "tint": "#5e8f86",
+     "at": [
+      0.45,
+      0.021,
+      0.1194
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.08,
+      0.002,
+      0.0012
+     ],
+     "color": "plastic",
+     "tint": "#5e8f86",
+     "at": [
+      0.45,
+      0.021,
+      0.0406
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.0012,
+      0.002,
+      0.0776
+     ],
+     "color": "plastic",
+     "tint": "#5e8f86",
+     "at": [
+      0.4894,
+      0.021,
+      0.08
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.0012,
+      0.002,
+      0.0776
+     ],
+     "color": "plastic",
+     "tint": "#5e8f86",
+     "at": [
+      0.4106,
+      0.021,
+      0.08
+     ]
+    }
+   ],
+   "shell": true,
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   }
+  },
+  {
+   "id": "square-plastic",
+   "name": {
+    "en": "Plastic sample",
+    "zh": "塑料样片"
+   },
+   "group": "drop-tray",
+   "summary": {
+    "en": "Plastic sample, 8 × 8 cm.",
+    "zh": "塑料样片，8 × 8 厘米。"
+   },
+   "detail": {
+    "en": "The plastic is HDPE, a milky kind of polyethylene [S11]. The drop stays on top: HDPE absorbs almost no water [S11].\n\nEvery sample in a test is the same size, so only the material changes [S1, S3]. The bend and the result are worked out by the model from published values; they are drawn, not written as numbers [S1].",
+    "zh": "塑料样品是 HDPE，一种乳白色的聚乙烯 [S11]。水停在上面：HDPE 几乎不吸水 [S11]。\n\n同一个测试里样品大小都一样，只改变材料 [S1, S3]。弯多少、结果怎样，是模型按公开数据算出来的，只画出来，不写数字 [S1]。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.08,
+     0.002,
+     0.08
+    ],
+    "color": "plastic",
+    "tint": "#ece9e0",
+    "at": [
+     0.45,
+     0.021,
+     0.08
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   }
+  },
+  {
+   "id": "square-fabric",
+   "name": {
+    "en": "Fabric sample",
+    "zh": "布样片"
+   },
+   "group": "drop-tray",
+   "summary": {
+    "en": "Fabric sample, 8 × 8 cm.",
+    "zh": "布样片，8 × 8 厘米。"
+   },
+   "detail": {
+    "en": "The fabric is plain woven cotton [S1]. The drop soaks straight in and leaves a damp patch: cotton absorbs water [S3, S12].\n\nEvery sample in a test is the same size, so only the material changes [S1, S3]. The bend and the result are worked out by the model from published values; they are drawn, not written as numbers [S1].",
+    "zh": "布样品是平纹棉布 [S1]。水一下子就吸了进去，留下一片湿印：棉布会吸水 [S3, S12]。\n\n同一个测试里样品大小都一样，只改变材料 [S1, S3]。弯多少、结果怎样，是模型按公开数据算出来的，只画出来，不写数字 [S1]。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.08,
+     0.002,
+     0.08
+    ],
+    "color": "fabric",
+    "tint": "#e6dfcd",
+    "at": [
+     0.45,
+     0.021,
+     0.08
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   }
+  },
+  {
+   "id": "water-bead",
+   "name": {
+    "en": "Water drop",
+    "zh": "水珠"
+   },
+   "group": "drop-tray",
+   "summary": {
+    "en": "Stays on top: not absorbed.",
+    "zh": "停在上面：没有被吸进去。"
+   },
+   "detail": {
+    "en": "The drop sits on the sample as a round bead [S1]. The surface is wet, but no water has gone into the material; a material that does not absorb water is waterproof [S2].",
+    "zh": "水在样片上聚成一颗圆圆的水珠 [S1]。样片的表面湿了，可是水没有进到材料里面；不吸水的材料就是防水的 [S2]。"
+   },
+   "primitive": {
+    "kind": "sphere",
+    "size": [
+     0.0055
+    ],
+    "color": "glass",
+    "scale": [
+     1,
+     0.55,
+     1
+    ],
+    "tint": "#8fbcc6",
+    "at": [
+     0.45,
+     0.022,
+     0.08
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   },
+   "connects": [
+    "drop-stand"
+   ]
+  },
+  {
+   "id": "wet-patch",
+   "name": {
+    "en": "Damp patch",
+    "zh": "湿印"
+   },
+   "group": "drop-tray",
+   "summary": {
+    "en": "Soaked in: the material absorbs water.",
+    "zh": "吸进去了：这种材料吸水。"
+   },
+   "detail": {
+    "en": "The drop has gone into the material and left a darker, damp patch [S1]. Cotton and unvarnished wood absorb water, so they are not waterproof [S3, S2].",
+    "zh": "水进到材料里面，留下一片颜色深一些的湿印 [S1]。棉布和没上漆的木头会吸水，所以不防水 [S3, S2]。"
+   },
+   "primitive": {
+    "kind": "extrude",
+    "shape": [
+     [
+      0.01998,
+      0
+     ],
+     [
+      0.02061,
+      0.00326
+     ],
+     [
+      0.01876,
+      0.0061
+     ],
+     [
+      0.01567,
+      0.00798
+     ],
+     [
+      0.01327,
+      0.00964
+     ],
+     [
+      0.0119,
+      0.0119
+     ],
+     [
+      0.01031,
+      0.01419
+     ],
+     [
+      0.00772,
+      0.01515
+     ],
+     [
+      0.00475,
+      0.01463
+     ],
+     [
+      0.00222,
+      0.01399
+     ],
+     [
+      0,
+      0.01426
+     ],
+     [
+      -0.00237,
+      0.01495
+     ],
+     [
+      -0.00494,
+      0.01519
+     ],
+     [
+      -0.00771,
+      0.01514
+     ],
+     [
+      -0.01107,
+      0.01524
+     ],
+     [
+      -0.01488,
+      0.01488
+     ],
+     [
+      -0.01769,
+      0.01285
+     ],
+     [
+      -0.01795,
+      0.00915
+     ],
+     [
+      -0.01609,
+      0.00523
+     ],
+     [
+      -0.01429,
+      0.00226
+     ],
+     [
+      -0.01402,
+      0
+     ],
+     [
+      -0.01457,
+      -0.00231
+     ],
+     [
+      -0.01453,
+      -0.00472
+     ],
+     [
+      -0.01374,
+      -0.007
+     ],
+     [
+      -0.01293,
+      -0.00939
+     ],
+     [
+      -0.01214,
+      -0.01214
+     ],
+     [
+      -0.01063,
+      -0.01463
+     ],
+     [
+      -0.00817,
+      -0.01603
+     ],
+     [
+      -0.00544,
+      -0.01675
+     ],
+     [
+      -0.00285,
+      -0.01799
+     ],
+     [
+      0,
+      -0.01974
+     ],
+     [
+      0.0032,
+      -0.02023
+     ],
+     [
+      0.00588,
+      -0.01809
+     ],
+     [
+      0.00727,
+      -0.01426
+     ],
+     [
+      0.00796,
+      -0.01096
+     ],
+     [
+      0.00916,
+      -0.00916
+     ],
+     [
+      0.01112,
+      -0.00808
+     ],
+     [
+      0.01323,
+      -0.00674
+     ],
+     [
+      0.01529,
+      -0.00497
+     ],
+     [
+      0.01769,
+      -0.0028
+     ]
+    ],
+    "depth": 0.0003,
+    "color": "membrane",
+    "rotation": [
+     -90,
+     0,
+     0
+    ],
+    "tint": "#4b3e31",
+    "at": [
+     0.452,
+     0.02215,
+     0.078
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   }
+  },
+  {
+   "id": "torch",
+   "name": {
+    "en": "Torch",
+    "zh": "手电筒"
+   },
+   "group": "light-bench",
+   "summary": {
+    "en": "Same torch, same distances, every time.",
+    "zh": "同一支手电筒、同样的距离。"
+   },
+   "detail": {
+    "en": "A torch on a stand, 20 cm in front of the sample, with the white screen 10 cm behind the sample [S1]: the same distances as the light bench in Light and Shadows. Only the sample changes.",
+    "zh": "架在支架上的手电筒，离样片 20 厘米；白屏在样片后面 10 厘米 [S1]，和“光与影”主题里的光学实验台一样。只换样片。"
+   },
+   "primitive": {
+    "kind": "lathe",
+    "profile": [
+     [
+      0,
+      -0.0007
+     ],
+     [
+      0.0172,
+      -0.0007
+     ],
+     [
+      0.0172,
+      0.0007
+     ],
+     [
+      0,
+      0.0007
+     ]
+    ],
+    "segments": 48,
+    "color": "glass",
+    "rotation": [
+     0,
+     0,
+     90
+    ],
+    "at": [
+     0.6993,
+     0.1,
+     0
+    ]
+   },
+   "extra": [
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0,
+       0.004
+      ],
+      [
+       0.0172,
+       0.004
+      ],
+      [
+       0.0172,
+       0.0006
+      ],
+      [
+       0.0215,
+       0.0006
+      ],
+      [
+       0.0222,
+       0.002
+      ],
+      [
+       0.0222,
+       0.028
+      ],
+      [
+       0.0158,
+       0.05
+      ],
+      [
+       0.0148,
+       0.054
+      ],
+      [
+       0.0148,
+       0.132
+      ],
+      [
+       0.0157,
+       0.134
+      ],
+      [
+       0.0157,
+       0.152
+      ],
+      [
+       0.0125,
+       0.158
+      ],
+      [
+       0,
+       0.158
+      ]
+     ],
+     "segments": 48,
+     "color": "powder",
+     "rotation": [
+      0,
+      0,
+      90
+     ],
+     "tint": "#3e4246",
+     "at": [
+      0.7,
+      0.1,
+      0
+     ]
+    },
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0.006,
+       0.0035
+      ],
+      [
+       0.0168,
+       0.0016
+      ],
+      [
+       0.0168,
+       0.0022
+      ],
+      [
+       0.006,
+       0.0041
+      ]
+     ],
+     "segments": 48,
+     "color": "stainless",
+     "rotation": [
+      0,
+      0,
+      90
+     ],
+     "at": [
+      0.7,
+      0.1,
+      0
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.014,
+      0.005,
+      0.009
+     ],
+     "bevel": 0.002,
+     "color": "rubber",
+     "at": [
+      0.625,
+      0.1158,
+      0
+     ]
+    },
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0.0149,
+       -0.012
+      ],
+      [
+       0.0154,
+       -0.012
+      ],
+      [
+       0.0154,
+       0.012
+      ],
+      [
+       0.0149,
+       0.012
+      ]
+     ],
+     "segments": 48,
+     "color": "rubber",
+     "rotation": [
+      0,
+      0,
+      90
+     ],
+     "at": [
+      0.588,
+      0.1,
+      0
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.05,
+      0.01,
+      0.05
+     ],
+     "bevel": 0.002,
+     "color": "powder",
+     "tint": "#3d4245",
+     "at": [
+      0.615,
+      0.005,
+      0
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.004,
+      0.004,
+      0.0715
+     ],
+     "color": "steel",
+     "at": [
+      0.615,
+      0.04575,
+      0
+     ]
+    },
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0.0149,
+       -0.007
+      ],
+      [
+       0.0185,
+       -0.007
+      ],
+      [
+       0.0185,
+       0.007
+      ],
+      [
+       0.0149,
+       0.007
+      ]
+     ],
+     "segments": 48,
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      90
+     ],
+     "at": [
+      0.615,
+      0.1,
+      0
+     ]
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.06
+   },
+   "connects": [
+    "sheet-holder"
+   ]
+  },
+  {
+   "id": "sheet-holder",
+   "name": {
+    "en": "Sample holder",
+    "zh": "样片夹"
+   },
+   "group": "light-bench",
+   "summary": {
+    "en": "Holds each sample square to the light.",
+    "zh": "把每块样片正对着光夹好。"
+   },
+   "detail": {
+    "en": "A wooden base with two steel posts and clips that hold an 8 × 8 cm sample upright, facing the torch [S1].",
+    "zh": "一块木底座，两根钢柱和夹子把 8 × 8 厘米的样片竖着夹住，正对手电筒 [S1]。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.03,
+     0.015,
+     0.12
+    ],
+    "bevel": 0.002,
+    "color": "wood",
+    "tint": "#d1ad78",
+    "at": [
+     0.9,
+     0.0075,
+     0
+    ]
+   },
+   "extra": [
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0025,
+      0.0025,
+      0.11
+     ],
+     "color": "steel",
+     "at": [
+      0.9,
+      0.07,
+      -0.0445
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.008,
+      0.012,
+      0.007
+     ],
+     "bevel": 0.0015,
+     "color": "steel",
+     "at": [
+      0.9,
+      0.1,
+      -0.0425
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0025,
+      0.0025,
+      0.11
+     ],
+     "color": "steel",
+     "at": [
+      0.9,
+      0.07,
+      0.0445
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.008,
+      0.012,
+      0.007
+     ],
+     "bevel": 0.0015,
+     "color": "steel",
+     "at": [
+      0.9,
+      0.1,
+      0.0425
+     ]
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   },
+   "connects": [
+    "torch",
+    "screen"
+   ]
+  },
+  {
+   "id": "sheet-wood",
+   "name": {
+    "en": "Wood sample",
+    "zh": "木样片"
+   },
+   "group": "light-bench",
+   "summary": {
+    "en": "Wood sample, 8 × 8 cm.",
+    "zh": "木样片，8 × 8 厘米。"
+   },
+   "detail": {
+    "en": "The wood is teak, a hardwood, left unvarnished [S7]. No light gets through: wood leaves a dark shadow on the screen [S30].\n\nEvery sample in a test is the same size, so only the material changes [S1, S3]. The bend and the result are worked out by the model from published values; they are drawn, not written as numbers [S1].",
+    "zh": "木样品是柚木，一种硬木，没有上漆 [S7]。光穿不过去：木头在屏上留下一块黑影 [S30]。\n\n同一个测试里样品大小都一样，只改变材料 [S1, S3]。弯多少、结果怎样，是模型按公开数据算出来的，只画出来，不写数字 [S1]。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.002,
+     0.08,
+     0.08
+    ],
+    "color": "wood",
+    "tint": "#9a6a3e",
+    "at": [
+     0.9,
+     0.1,
+     0
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   },
+   "connects": [
+    "sheet-holder"
+   ]
+  },
+  {
+   "id": "sheet-metal",
+   "name": {
+    "en": "Metal sample",
+    "zh": "钢样片"
+   },
+   "group": "light-bench",
+   "summary": {
+    "en": "Metal sample, 8 × 8 cm.",
+    "zh": "钢样片，8 × 8 厘米。"
+   },
+   "detail": {
+    "en": "The metal is steel [S9]. No light gets through: a metal sheet leaves a dark shadow [S30, S31].\n\nEvery sample in a test is the same size, so only the material changes [S1, S3]. The bend and the result are worked out by the model from published values; they are drawn, not written as numbers [S1].",
+    "zh": "金属样品是钢 [S9]。光穿不过去：金属片留下一块黑影 [S30, S31]。\n\n同一个测试里样品大小都一样，只改变材料 [S1, S3]。弯多少、结果怎样，是模型按公开数据算出来的，只画出来，不写数字 [S1]。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.002,
+     0.08,
+     0.08
+    ],
+    "color": "steel",
+    "at": [
+     0.9,
+     0.1,
+     0
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   },
+   "connects": [
+    "sheet-holder"
+   ]
+  },
+  {
+   "id": "sheet-ceramic",
+   "name": {
+    "en": "Ceramic sample",
+    "zh": "陶瓷样片"
+   },
+   "group": "light-bench",
+   "summary": {
+    "en": "Ceramic sample, 8 × 8 cm.",
+    "zh": "陶瓷样片，8 × 8 厘米。"
+   },
+   "detail": {
+    "en": "The ceramic is cut from a glazed porcelain tile [S13]. No light gets through this thick, glazed tile; teaching sources describe thick materials as blocking light [S5].\n\nEvery sample in a test is the same size, so only the material changes [S1, S3]. The bend and the result are worked out by the model from published values; they are drawn, not written as numbers [S1].",
+    "zh": "陶瓷样品切自上了釉的瓷砖 [S13]。光穿不过这块厚厚的釉面瓷砖；教学资料说厚的材料挡光 [S5]。\n\n同一个测试里样品大小都一样，只改变材料 [S1, S3]。弯多少、结果怎样，是模型按公开数据算出来的，只画出来，不写数字 [S1]。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.002,
+     0.08,
+     0.08
+    ],
+    "color": "enamel",
+    "tint": "#f2efe7",
+    "at": [
+     0.9,
+     0.1,
+     0
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   },
+   "connects": [
+    "sheet-holder"
+   ]
+  },
+  {
+   "id": "sheet-rubber",
+   "name": {
+    "en": "Rubber sample",
+    "zh": "橡胶样片"
+   },
+   "group": "light-bench",
+   "summary": {
+    "en": "Rubber sample, 8 × 8 cm.",
+    "zh": "橡胶样片，8 × 8 厘米。"
+   },
+   "detail": {
+    "en": "The rubber is natural rubber with nothing mixed in, called pure gum [S8]. No light gets through this dark rubber; teaching sources describe thick, dark materials as blocking light [S5].\n\nEvery sample in a test is the same size, so only the material changes [S1, S3]. The bend and the result are worked out by the model from published values; they are drawn, not written as numbers [S1].",
+    "zh": "橡胶样品是什么都没掺的天然橡胶，叫“纯胶” [S8]。光穿不过这块深色的橡胶；教学资料说厚的、深色的材料挡光 [S5]。\n\n同一个测试里样品大小都一样，只改变材料 [S1, S3]。弯多少、结果怎样，是模型按公开数据算出来的，只画出来，不写数字 [S1]。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.002,
+     0.08,
+     0.08
+    ],
+    "color": "rubber",
+    "tint": "#3b3936",
+    "at": [
+     0.9,
+     0.1,
+     0
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   },
+   "connects": [
+    "sheet-holder"
+   ]
+  },
+  {
+   "id": "sheet-glass",
+   "name": {
+    "en": "Glass sample",
+    "zh": "玻璃样片"
+   },
+   "group": "light-bench",
+   "summary": {
+    "en": "Glass sample, 8 × 8 cm.",
+    "zh": "玻璃样片，8 × 8 厘米。"
+   },
+   "detail": {
+    "en": "The glass is clear window glass [S14]. Most of the light gets through: the shadow on the screen is faint [S14].\n\nEvery sample in a test is the same size, so only the material changes [S1, S3]. The bend and the result are worked out by the model from published values; they are drawn, not written as numbers [S1].",
+    "zh": "玻璃样品是透明的窗玻璃 [S14]。大部分光穿了过去：屏上的影子很淡 [S14]。\n\n同一个测试里样品大小都一样，只改变材料 [S1, S3]。弯多少、结果怎样，是模型按公开数据算出来的，只画出来，不写数字 [S1]。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.002,
+     0.08,
+     0.08
+    ],
+    "color": "membrane",
+    "tint": "#5f9a8e",
+    "at": [
+     0.9,
+     0.1,
+     0
+    ]
+   },
+   "extra": [
+    {
+     "kind": "box",
+     "size": [
+      0.002,
+      0.0012,
+      0.08
+     ],
+     "color": "plastic",
+     "tint": "#5e8f86",
+     "at": [
+      0.9,
+      0.1394,
+      0
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.002,
+      0.0012,
+      0.08
+     ],
+     "color": "plastic",
+     "tint": "#5e8f86",
+     "at": [
+      0.9,
+      0.0606,
+      0
+     ]
+    }
+   ],
+   "shell": true,
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   },
+   "connects": [
+    "sheet-holder"
+   ]
+  },
+  {
+   "id": "sheet-plastic",
+   "name": {
+    "en": "Plastic sample",
+    "zh": "塑料样片"
+   },
+   "group": "light-bench",
+   "summary": {
+    "en": "Plastic sample, 8 × 8 cm.",
+    "zh": "塑料样片，8 × 8 厘米。"
+   },
+   "detail": {
+    "en": "The plastic is HDPE, a milky kind of polyethylene [S11]. Some light gets through: the screen behind it is dimmer, and you cannot see clearly through it. Natural HDPE is sold as translucent [S29, S31].\n\nEvery sample in a test is the same size, so only the material changes [S1, S3]. The bend and the result are worked out by the model from published values; they are drawn, not written as numbers [S1].",
+    "zh": "塑料样品是 HDPE，一种乳白色的聚乙烯 [S11]。一部分光穿了过去：它后面的屏暗了一些，透过它也看不清后面。不加颜色的 HDPE 板，厂商说它是半透明的 [S29, S31]。\n\n同一个测试里样品大小都一样，只改变材料 [S1, S3]。弯多少、结果怎样，是模型按公开数据算出来的，只画出来，不写数字 [S1]。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.002,
+     0.08,
+     0.08
+    ],
+    "color": "plastic",
+    "tint": "#ece9e0",
+    "at": [
+     0.9,
+     0.1,
+     0
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   },
+   "connects": [
+    "sheet-holder"
+   ]
+  },
+  {
+   "id": "sheet-fabric",
+   "name": {
+    "en": "Fabric sample",
+    "zh": "布样片"
+   },
+   "group": "light-bench",
+   "summary": {
+    "en": "Fabric sample, 8 × 8 cm.",
+    "zh": "布样片，8 × 8 厘米。"
+   },
+   "detail": {
+    "en": "The fabric is plain woven cotton [S1]. Some light gets through a single thin layer of cotton [S28].\n\nEvery sample in a test is the same size, so only the material changes [S1, S3]. The bend and the result are worked out by the model from published values; they are drawn, not written as numbers [S1].",
+    "zh": "布样品是平纹棉布 [S1]。单层薄棉布让一部分光穿过 [S28]。\n\n同一个测试里样品大小都一样，只改变材料 [S1, S3]。弯多少、结果怎样，是模型按公开数据算出来的，只画出来，不写数字 [S1]。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.002,
+     0.08,
+     0.08
+    ],
+    "color": "fabric",
+    "tint": "#e6dfcd",
+    "at": [
+     0.9,
+     0.1,
+     0
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   },
+   "connects": [
+    "sheet-holder"
+   ]
+  },
+  {
+   "id": "screen",
+   "name": {
+    "en": "White screen",
+    "zh": "白屏"
+   },
+   "group": "light-bench",
+   "summary": {
+    "en": "Shows how much light got through.",
+    "zh": "显示有多少光穿过去。"
+   },
+   "detail": {
+    "en": "A white board 30 cm wide and 22 cm high [S1]. The torch makes a bright spot on it; the sample’s shadow sits in the spot. The less light a sample lets through, the darker its shadow.\n\nThe darkness of each shadow is drawn from three levels: most, some or no light through. The darkness for “some” is a choice for the drawing [S1].",
+    "zh": "一块宽 30 厘米、高 22 厘米的白板 [S1]。手电筒在屏上照出一块光斑，样片的影子就在光斑里。样片让穿过的光越少，影子越深。\n\n影子的深浅按三档画：大部分、一部分、没有光穿过。“一部分”画多深，是画图时取的值 [S1]。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.005,
+     0.22,
+     0.3
+    ],
+    "bevel": 0.0012,
+    "color": "enamel",
+    "tint": "#f3f1ea",
+    "at": [
+     1.0025,
+     0.12,
+     0
+    ]
+   },
+   "extra": [
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.05,
+      0.01,
+      0.03
+     ],
+     "bevel": 0.002,
+     "color": "powder",
+     "tint": "#3d4245",
+     "at": [
+      1.004,
+      0.005,
+      -0.12
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.05,
+      0.01,
+      0.03
+     ],
+     "bevel": 0.002,
+     "color": "powder",
+     "tint": "#3d4245",
+     "at": [
+      1.004,
+      0.005,
+      0.12
+     ]
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0
+   },
+   "connects": [
+    "sheet-holder"
+   ]
+  },
+  {
+   "id": "wall-cabinet",
+   "name": {
+    "en": "Wall cabinet",
+    "zh": "壁柜"
+   },
+   "group": "corner-wood",
+   "summary": {
+    "en": "Wood: strong enough to hold the dishes.",
+    "zh": "木：够强，托得住碗碟。"
+   },
+   "detail": {
+    "en": "A wooden wall cabinet with one shelf, its door open. It is drawn as a common kind of kitchen cabinet, not the fittings of any particular flat [S1].\n\nIn the strength test the wooden strip held all five masses [S1]; the cabinet’s boards are much thicker than that strip. Choosing wood for the shelves is reasoned from that result.",
+    "zh": "一只木壁柜，中间一层隔板，柜门开着。它照常见的厨房壁柜画，不代表哪一种组屋的配件 [S1]。\n\n在强度测试里，木条托住了全部五个槽码 [S1]；柜子的木板比那根条厚得多。隔板用木头，是从这个结果推出来的。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.5,
+     0.55,
+     0.01
+    ],
+    "bevel": 0.002,
+    "color": "wood",
+    "tint": "#c9a678",
+    "at": [
+     -1.65,
+     0.825,
+     -0.345
+    ]
+   },
+   "extra": [
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.016,
+      0.55,
+      0.3
+     ],
+     "bevel": 0.002,
+     "color": "wood",
+     "tint": "#c9a678",
+     "at": [
+      -1.892,
+      0.825,
+      -0.2
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.016,
+      0.55,
+      0.3
+     ],
+     "bevel": 0.002,
+     "color": "wood",
+     "tint": "#c9a678",
+     "at": [
+      -1.408,
+      0.825,
+      -0.2
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.468,
+      0.016,
+      0.3
+     ],
+     "bevel": 0.002,
+     "color": "wood",
+     "tint": "#c9a678",
+     "at": [
+      -1.65,
+      1.092,
+      -0.2
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.468,
+      0.016,
+      0.3
+     ],
+     "bevel": 0.002,
+     "color": "wood",
+     "tint": "#c9a678",
+     "at": [
+      -1.65,
+      0.558,
+      -0.2
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.468,
+      0.016,
+      0.27
+     ],
+     "bevel": 0.002,
+     "color": "wood",
+     "tint": "#c9a678",
+     "at": [
+      -1.65,
+      0.82,
+      -0.19
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.5,
+      0.55,
+      0.018
+     ],
+     "bevel": 0.003,
+     "color": "wood",
+     "tint": "#c9a678",
+     "rotation": [
+      0,
+      100,
+      0
+     ],
+     "at": [
+      -1.35259,
+      0.825,
+      0.2002
+     ]
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.05
+   },
+   "connects": [
+    "cabinet-hinges"
+   ]
+  },
+  {
+   "id": "cabinet-hinges",
+   "name": {
+    "en": "Hinges",
+    "zh": "铰链"
+   },
+   "group": "corner-metal",
+   "summary": {
+    "en": "Metal hinges let the door swing.",
+    "zh": "金属铰链让柜门能开关。"
+   },
+   "detail": {
+    "en": "Two steel cup hinges join the door to the side of the cabinet [S1]. They have to bend at a joint every day without wearing out, which is a job for metal.",
+    "zh": "两只钢做的杯形铰链把柜门连在柜身侧板上 [S1]。它们每天都要开合，不能磨坏，这件事交给金属。"
+   },
+   "primitive": {
+    "kind": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.0175,
+      0
+     ],
+     [
+      0.0175,
+      0.012
+     ],
+     [
+      0,
+      0.012
+     ]
+    ],
+    "segments": 24,
+    "color": "stainless",
+    "rotation": [
+     0,
+     0,
+     -90
+    ],
+    "at": [
+     -1.3965,
+     0.63,
+     -0.038
+    ]
+   },
+   "extra": [
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0,
+       0
+      ],
+      [
+       0.0175,
+       0
+      ],
+      [
+       0.0175,
+       0.012
+      ],
+      [
+       0,
+       0.012
+      ]
+     ],
+     "segments": 24,
+     "color": "stainless",
+     "rotation": [
+      0,
+      0,
+      -90
+     ],
+     "at": [
+      -1.3965,
+      1.02,
+      -0.038
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.008,
+      0.03,
+      0.05
+     ],
+     "bevel": 0.0015,
+     "color": "stainless",
+     "at": [
+      -1.42,
+      0.63,
+      -0.08
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.012,
+      0.012,
+      0.03
+     ],
+     "bevel": 0.0015,
+     "color": "stainless",
+     "at": [
+      -1.404,
+      0.63,
+      -0.056
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.008,
+      0.03,
+      0.05
+     ],
+     "bevel": 0.0015,
+     "color": "stainless",
+     "at": [
+      -1.42,
+      1.02,
+      -0.08
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.012,
+      0.012,
+      0.03
+     ],
+     "bevel": 0.0015,
+     "color": "stainless",
+     "at": [
+      -1.404,
+      1.02,
+      -0.056
+     ]
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.05
+   },
+   "connects": [
+    "wall-cabinet"
+   ]
+  },
+  {
+   "id": "saucepan",
+   "name": {
+    "en": "Saucepan",
+    "zh": "锅"
+   },
+   "group": "corner-metal",
+   "summary": {
+    "en": "Metal: waterproof and strong.",
+    "zh": "金属：防水、结实。"
+   },
+   "detail": {
+    "en": "A stainless steel saucepan with a lid and a long handle [S1]. Metal does not absorb water and does not break when it is knocked: a teaching worksheet lists a stainless steel sink as waterproof, strong and easy to clean [S3].",
+    "zh": "一只带盖、带长柄的不锈钢锅 [S1]。金属不吸水，碰撞也不会断开：一份教学工作纸说不锈钢水槽防水、结实、容易清洗 [S3]。"
+   },
+   "primitive": {
+    "kind": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.064,
+      0
+     ],
+     [
+      0.07,
+      0.006
+     ],
+     [
+      0.07,
+      0.085
+     ],
+     [
+      0.0685,
+      0.085
+     ],
+     [
+      0.0685,
+      0.007
+     ],
+     [
+      0.063,
+      0.0015
+     ],
+     [
+      0,
+      0.0015
+     ]
+    ],
+    "segments": 48,
+    "color": "stainless",
+    "at": [
+     -1.805,
+     0.828,
+     -0.2
+    ]
+   },
+   "extra": [
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0,
+       0.012
+      ],
+      [
+       0.03,
+       0.01
+      ],
+      [
+       0.067,
+       0.002
+      ],
+      [
+       0.072,
+       0
+      ],
+      [
+       0.072,
+       0.003
+      ],
+      [
+       0.067,
+       0.005
+      ],
+      [
+       0.03,
+       0.013
+      ],
+      [
+       0,
+       0.015
+      ]
+     ],
+     "segments": 48,
+     "color": "stainless",
+     "at": [
+      -1.805,
+      0.909,
+      -0.2
+     ]
+    },
+    {
+     "kind": "tube",
+     "path": [
+      [
+       0,
+       0,
+       0
+      ],
+      [
+       0.003,
+       0.015,
+       0
+      ],
+      [
+       0.037,
+       0.015,
+       0
+      ],
+      [
+       0.04,
+       0,
+       0
+      ]
+     ],
+     "radius": 0.0025,
+     "color": "stainless",
+     "at": [
+      -1.825,
+      0.924,
+      -0.2
+     ]
+    },
+    {
+     "kind": "tube",
+     "path": [
+      [
+       -0.002,
+       -0.002,
+       0
+      ],
+      [
+       0.025,
+       0.008,
+       0.004
+      ],
+      [
+       0.115,
+       0.032,
+       0.022
+      ]
+     ],
+     "radius": 0.0045,
+     "color": "stainless",
+     "at": [
+      -1.735,
+      0.893,
+      -0.2
+     ]
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.06
+   }
+  },
+  {
+   "id": "bowl",
+   "name": {
+    "en": "Bowl",
+    "zh": "碗"
+   },
+   "group": "corner-ceramic",
+   "summary": {
+    "en": "Glazed ceramic: does not absorb water.",
+    "zh": "上釉的陶瓷：不吸水。"
+   },
+   "detail": {
+    "en": "A glazed ceramic bowl [S1]. The glaze keeps water and food out of the bowl; glazed porcelain hardly absorbs any water [S13]. A teaching worksheet lists a ceramic teapot as rigid, waterproof and able to take hot liquids [S3].",
+    "zh": "一只上了釉的陶瓷碗 [S1]。釉让水和食物渗不进碗里；上了釉的瓷几乎不吸水 [S13]。一份教学工作纸说陶瓷茶壶硬、防水、耐得住热的液体 [S3]。"
+   },
+   "primitive": {
+    "kind": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.026,
+      0
+     ],
+     [
+      0.027,
+      0.006
+     ],
+     [
+      0.034,
+      0.008
+     ],
+     [
+      0.058,
+      0.03
+     ],
+     [
+      0.07,
+      0.062
+     ],
+     [
+      0.067,
+      0.064
+     ],
+     [
+      0.055,
+      0.034
+     ],
+     [
+      0.032,
+      0.012
+     ],
+     [
+      0,
+      0.011
+     ]
+    ],
+    "segments": 48,
+    "color": "enamel",
+    "tint": "#f4f1ea",
+    "at": [
+     -1.53,
+     0.828,
+     -0.205
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.06
+   }
+  },
+  {
+   "id": "tumbler",
+   "name": {
+    "en": "Drinking glass",
+    "zh": "玻璃杯"
+   },
+   "group": "corner-glass",
+   "summary": {
+    "en": "Glass: you can see the drink inside.",
+    "zh": "玻璃：看得见杯里的饮料。"
+   },
+   "detail": {
+    "en": "An eight-sided drinking glass with a thick base [S1]. Glass lets most light through, so you can see what is in it, and it does not absorb the drink [S14, S1].",
+    "zh": "一只八角形、底很厚的玻璃杯 [S1]。玻璃让大部分光穿过，看得见里面装着什么，也不吸饮料 [S14, S1]。"
+   },
+   "primitive": {
+    "kind": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.03,
+      0
+     ],
+     [
+      0.034,
+      0.1
+     ],
+     [
+      0.0315,
+      0.1
+     ],
+     [
+      0.028,
+      0.012
+     ],
+     [
+      0,
+      0.012
+     ]
+    ],
+    "segments": 8,
+    "color": "glass",
+    "tint": "#cfe3e1",
+    "at": [
+     -1.815,
+     0.566,
+     -0.19
+    ]
+   },
+   "extra": [
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0,
+       0
+      ],
+      [
+       0.0296,
+       0
+      ],
+      [
+       0.0296,
+       0.011
+      ],
+      [
+       0,
+       0.011
+      ]
+     ],
+     "segments": 8,
+     "color": "glass",
+     "tint": "#a9c9c5",
+     "at": [
+      -1.815,
+      0.566,
+      -0.19
+     ]
+    }
+   ],
+   "shell": true,
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.06
+   }
+  },
+  {
+   "id": "food-box",
+   "name": {
+    "en": "Food box",
+    "zh": "保鲜盒"
+   },
+   "group": "corner-plastic",
+   "summary": {
+    "en": "Plastic: waterproof, and it does not shatter.",
+    "zh": "塑料：防水，摔了也不碎。"
+   },
+   "detail": {
+    "en": "A milky plastic food box with a clip-on lid [S1]. In the tests, plastic did not absorb water and bent without breaking [S1, S11]. That it does not shatter when it is dropped is reasoned from those results, not tested here.",
+    "zh": "一只乳白色的塑料保鲜盒，盖子有四个扣 [S1]。在测试里，塑料不吸水，弯了也不断 [S1, S11]。说它摔了不会碎，是从这些结果推出来的，这里没有测。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.18,
+     0.075,
+     0.12
+    ],
+    "bevel": 0.012,
+    "color": "membrane",
+    "tint": "#e6ece9",
+    "at": [
+     -1.6,
+     0.6035,
+     -0.19
+    ]
+   },
+   "extra": [
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.188,
+      0.01,
+      0.128
+     ],
+     "bevel": 0.004,
+     "color": "plastic",
+     "tint": "#dfe5e2",
+     "at": [
+      -1.6,
+      0.65,
+      -0.19
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.05,
+      0.026,
+      0.003
+     ],
+     "bevel": 0.001,
+     "color": "plastic",
+     "tint": "#d7dedb",
+     "at": [
+      -1.6,
+      0.637,
+      -0.124
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.05,
+      0.026,
+      0.003
+     ],
+     "bevel": 0.001,
+     "color": "plastic",
+     "tint": "#d7dedb",
+     "at": [
+      -1.6,
+      0.637,
+      -0.256
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.003,
+      0.026,
+      0.04
+     ],
+     "bevel": 0.001,
+     "color": "plastic",
+     "tint": "#d7dedb",
+     "at": [
+      -1.504,
+      0.637,
+      -0.19
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.003,
+      0.026,
+      0.04
+     ],
+     "bevel": 0.001,
+     "color": "plastic",
+     "tint": "#d7dedb",
+     "at": [
+      -1.696,
+      0.637,
+      -0.19
+     ]
+    }
+   ],
+   "shell": true,
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.08
+   },
+   "connects": [
+    "box-seal"
+   ]
+  },
+  {
+   "id": "box-seal",
+   "name": {
+    "en": "Rubber seal",
+    "zh": "密封圈"
+   },
+   "group": "corner-rubber",
+   "summary": {
+    "en": "Rubber seal: it bends to fit the lid.",
+    "zh": "橡胶圈：能弯，贴紧盒盖。"
+   },
+   "detail": {
+    "en": "A ring of rubber in the food box’s lid [S1]. Rubber bends easily without breaking and does not absorb water [S1, S15], so it can press into the gap between box and lid. That it seals the box is reasoned from those two properties, not tested here.",
+    "zh": "保鲜盒盖子里的一圈橡胶 [S1]。橡胶很容易弯，不会断，也不吸水 [S1, S15]，所以能压进盒子和盖子之间的缝里。说它能封住盒子，是从这两个性质推出来的，这里没有测。"
+   },
+   "primitive": {
+    "kind": "sweep",
+    "path": [
+     [
+      0.087,
+      0,
+      0.045
+     ],
+     [
+      0.08609,
+      0,
+      0.04959
+     ],
+     [
+      0.08349,
+      0,
+      0.05349
+     ],
+     [
+      0.07959,
+      0,
+      0.05609
+     ],
+     [
+      0.075,
+      0,
+      0.057
+     ],
+     [
+      -0.075,
+      0,
+      0.057
+     ],
+     [
+      -0.07959,
+      0,
+      0.05609
+     ],
+     [
+      -0.08349,
+      0,
+      0.05349
+     ],
+     [
+      -0.08609,
+      0,
+      0.04959
+     ],
+     [
+      -0.087,
+      0,
+      0.045
+     ],
+     [
+      -0.087,
+      0,
+      -0.045
+     ],
+     [
+      -0.08609,
+      0,
+      -0.04959
+     ],
+     [
+      -0.08349,
+      0,
+      -0.05349
+     ],
+     [
+      -0.07959,
+      0,
+      -0.05609
+     ],
+     [
+      -0.075,
+      0,
+      -0.057
+     ],
+     [
+      0.075,
+      0,
+      -0.057
+     ],
+     [
+      0.07959,
+      0,
+      -0.05609
+     ],
+     [
+      0.08349,
+      0,
+      -0.05349
+     ],
+     [
+      0.08609,
+      0,
+      -0.04959
+     ],
+     [
+      0.087,
+      0,
+      -0.045
+     ]
+    ],
+    "radius": 0.0028,
+    "closed": true,
+    "color": "rubber",
+    "tint": "#33302d",
+    "at": [
+     -1.6,
+     0.644,
+     -0.19
+    ]
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.1
+   },
+   "connects": [
+    "food-box"
+   ]
+  },
+  {
+   "id": "window-frame",
+   "name": {
+    "en": "Window frame",
+    "zh": "窗框"
+   },
+   "group": "corner-metal",
+   "summary": {
+    "en": "A light metal frame holds the glass.",
+    "zh": "轻的金属框夹住玻璃。"
+   },
+   "detail": {
+    "en": "An aluminium frame with a casement window: the window is hinged at the side and opens outwards, and a friction stay along the bottom holds it open [S1, S16]. The frame is metal so it stays rigid and does not absorb rain.",
+    "zh": "铝做的窗框，配一扇外开窗：窗扇在侧边装铰链，往外开，下面一根摩擦撑杆把它撑住 [S1, S16]。窗框用金属，不变形，也不吸雨水。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.48,
+     0.035,
+     0.06
+    ],
+    "color": "casing",
+    "at": [
+     -2.19,
+     1.3325,
+     -0.4
+    ]
+   },
+   "extra": [
+    {
+     "kind": "box",
+     "size": [
+      0.48,
+      0.035,
+      0.06
+     ],
+     "color": "casing",
+     "at": [
+      -2.19,
+      0.4675,
+      -0.4
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.035,
+      0.83,
+      0.06
+     ],
+     "color": "casing",
+     "at": [
+      -2.4125,
+      0.9,
+      -0.4
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.035,
+      0.83,
+      0.06
+     ],
+     "color": "casing",
+     "at": [
+      -1.9675,
+      0.9,
+      -0.4
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.54,
+      0.024,
+      0.05
+     ],
+     "bevel": 0.003,
+     "color": "enamel",
+     "tint": "#e2ded5",
+     "at": [
+      -2.19,
+      0.438,
+      -0.335
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.406,
+      0.028,
+      0.022
+     ],
+     "color": "casing",
+     "rotation": [
+      0,
+      35,
+      0
+     ],
+     "at": [
+      -2.22871,
+      1.299,
+      -0.53444
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.406,
+      0.028,
+      0.022
+     ],
+     "color": "casing",
+     "rotation": [
+      0,
+      35,
+      0
+     ],
+     "at": [
+      -2.22871,
+      0.501,
+      -0.53444
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.028,
+      0.77,
+      0.022
+     ],
+     "color": "casing",
+     "rotation": [
+      0,
+      35,
+      0
+     ],
+     "at": [
+      -2.38353,
+      0.9,
+      -0.42603
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.028,
+      0.77,
+      0.022
+     ],
+     "color": "casing",
+     "rotation": [
+      0,
+      35,
+      0
+     ],
+     "at": [
+      -2.07389,
+      0.9,
+      -0.64284
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.12991,
+      0.003,
+      0.014
+     ],
+     "color": "stainless",
+     "rotation": [
+      0,
+      141.52349046346913,
+      0
+     ],
+     "at": [
+      -2.24585,
+      0.489,
+      -0.44641
+     ]
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     0,
+     1
+    ],
+    "dist": 0.04
+   },
+   "connects": [
+    "window-pane",
+    "window-rivets"
+   ]
+  },
+  {
+   "id": "window-pane",
+   "name": {
+    "en": "Window glass",
+    "zh": "窗玻璃"
+   },
+   "group": "corner-glass",
+   "summary": {
+    "en": "Lets most light in; keeps rain out.",
+    "zh": "让大部分光进来，挡住雨水。"
+   },
+   "detail": {
+    "en": "Glass is used for windows because you can see through it [S5]: clear glass lets most of the light through [S14], and it does not absorb rain [S1].\n\nGlass is brittle. Glass shards falling from height can cause serious injuries [S16].",
+    "zh": "窗用玻璃，是因为它透光，看得见外面 [S5]：透明玻璃让大部分光穿过 [S14]，也不吸雨水 [S1]。\n\n玻璃是脆的。玻璃碎片从高处掉下，会造成严重的伤害 [S16]。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.356,
+     0.776,
+     0.005
+    ],
+    "color": "glass",
+    "rotation": [
+     0,
+     35,
+     0
+    ],
+    "tint": "#86aeab",
+    "at": [
+     -2.22871,
+     0.9,
+     -0.53444
+    ]
+   },
+   "shell": true,
+   "explode": {
+    "dir": [
+     0,
+     0,
+     1
+    ],
+    "dist": 0.04
+   },
+   "connects": [
+    "window-frame"
+   ]
+  },
+  {
+   "id": "window-rivets",
+   "name": {
+    "en": "Rivets",
+    "zh": "铆钉"
+   },
+   "group": "corner-metal",
+   "summary": {
+    "en": "Stainless steel: stays strong for years.",
+    "zh": "不锈钢：多年都结实。"
+   },
+   "detail": {
+    "en": "Small rivets fix the window’s stay and hinges to the frame and the window. Since 2004, Singapore’s Building and Construction Authority has required home owners to replace all aluminium rivets in casement windows with stainless steel ones: aluminium rivets that corrode and weaken are a main cause of casement windows falling [S16].\n\nIn the first 11 months of 2023 there were 35 cases of fallen windows in Singapore, 19 of them casement windows [S16].",
+    "zh": "几颗小铆钉把窗的撑杆和铰链固定在窗框和窗扇上。从 2004 年起，新加坡建设局要求屋主把外开窗上所有的铝铆钉换成不锈钢铆钉：铝铆钉锈蚀、变弱，是外开窗掉落的主要原因 [S16]。\n\n2023 年头 11 个月，新加坡有 35 起窗户掉落，其中 19 起是外开窗 [S16]。"
+   },
+   "primitive": {
+    "kind": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.0042,
+      0
+     ],
+     [
+      0.004,
+      0.0012
+     ],
+     [
+      0.003,
+      0.0024
+     ],
+     [
+      0,
+      0.003
+     ]
+    ],
+    "segments": 16,
+    "color": "stainless",
+    "at": [
+     -2.19813,
+     0.4905,
+     -0.40849
+    ]
+   },
+   "extra": [
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0,
+       0
+      ],
+      [
+       0.0042,
+       0
+      ],
+      [
+       0.004,
+       0.0012
+      ],
+      [
+       0.003,
+       0.0024
+      ],
+      [
+       0,
+       0.003
+      ]
+     ],
+     "segments": 16,
+     "color": "stainless",
+     "at": [
+      -2.20909,
+      0.4905,
+      -0.4172
+     ]
+    },
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0,
+       0
+      ],
+      [
+       0.0042,
+       0
+      ],
+      [
+       0.004,
+       0.0012
+      ],
+      [
+       0.003,
+       0.0024
+      ],
+      [
+       0,
+       0.003
+      ]
+     ],
+     "segments": 16,
+     "color": "stainless",
+     "at": [
+      -2.29357,
+      0.4905,
+      -0.48434
+     ]
+    },
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0,
+       0
+      ],
+      [
+       0.0042,
+       0
+      ],
+      [
+       0.004,
+       0.0012
+      ],
+      [
+       0.003,
+       0.0024
+      ],
+      [
+       0,
+       0.003
+      ]
+     ],
+     "segments": 16,
+     "color": "stainless",
+     "at": [
+      -2.28261,
+      0.4905,
+      -0.47563
+     ]
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     0,
+     1
+    ],
+    "dist": 0.04
+   },
+   "connects": [
+    "window-frame"
+   ]
+  },
+  {
+   "id": "wall-tiles",
+   "name": {
+    "en": "Wall tiles",
+    "zh": "墙砖"
+   },
+   "group": "corner-ceramic",
+   "summary": {
+    "en": "Glazed tiles keep water off the wall.",
+    "zh": "上釉的瓷砖让水沾不上墙。"
+   },
+   "detail": {
+    "en": "Glazed ceramic tiles behind the counter, drawn 10 cm square [S1]. Splashes stay on the surface and wipe off, because glazed tiles hardly absorb water [S13]. Different kinds of tile absorb different amounts of water; the tiles on a kitchen wall are often a different kind from floor tiles [S13].",
+    "zh": "台面后面的墙上贴着上了釉的瓷砖，画成 10 厘米见方 [S1]。溅上的水停在表面，一擦就掉，因为上了釉的瓷砖几乎不吸水 [S13]。不同种类的瓷砖吸水多少不一样；厨房墙上的砖和地砖常常不是同一种 [S13]。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     1.2,
+     0.425,
+     0.004
+    ],
+    "color": "enamel",
+    "tint": "#e4ecea",
+    "at": [
+     -1.95,
+     0.2125,
+     -0.348
+    ]
+   },
+   "extra": [
+    {
+     "kind": "box",
+     "size": [
+      1.2,
+      0.0025,
+      0.0008
+     ],
+     "color": "powder",
+     "tint": "#a9a397",
+     "at": [
+      -1.95,
+      0.1,
+      -0.3454
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      1.2,
+      0.0025,
+      0.0008
+     ],
+     "color": "powder",
+     "tint": "#a9a397",
+     "at": [
+      -1.95,
+      0.2,
+      -0.3454
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      1.2,
+      0.0025,
+      0.0008
+     ],
+     "color": "powder",
+     "tint": "#a9a397",
+     "at": [
+      -1.95,
+      0.3,
+      -0.3454
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      1.2,
+      0.0025,
+      0.0008
+     ],
+     "color": "powder",
+     "tint": "#a9a397",
+     "at": [
+      -1.95,
+      0.4,
+      -0.3454
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.0025,
+      0.425,
+      0.0008
+     ],
+     "color": "powder",
+     "tint": "#a9a397",
+     "at": [
+      -2.45,
+      0.2125,
+      -0.3454
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.0025,
+      0.425,
+      0.0008
+     ],
+     "color": "powder",
+     "tint": "#a9a397",
+     "at": [
+      -2.35,
+      0.2125,
+      -0.3454
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.0025,
+      0.425,
+      0.0008
+     ],
+     "color": "powder",
+     "tint": "#a9a397",
+     "at": [
+      -2.25,
+      0.2125,
+      -0.3454
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.0025,
+      0.425,
+      0.0008
+     ],
+     "color": "powder",
+     "tint": "#a9a397",
+     "at": [
+      -2.15,
+      0.2125,
+      -0.3454
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.0025,
+      0.425,
+      0.0008
+     ],
+     "color": "powder",
+     "tint": "#a9a397",
+     "at": [
+      -2.05,
+      0.2125,
+      -0.3454
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.0025,
+      0.425,
+      0.0008
+     ],
+     "color": "powder",
+     "tint": "#a9a397",
+     "at": [
+      -1.95,
+      0.2125,
+      -0.3454
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.0025,
+      0.425,
+      0.0008
+     ],
+     "color": "powder",
+     "tint": "#a9a397",
+     "at": [
+      -1.85,
+      0.2125,
+      -0.3454
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.0025,
+      0.425,
+      0.0008
+     ],
+     "color": "powder",
+     "tint": "#a9a397",
+     "at": [
+      -1.75,
+      0.2125,
+      -0.3454
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.0025,
+      0.425,
+      0.0008
+     ],
+     "color": "powder",
+     "tint": "#a9a397",
+     "at": [
+      -1.65,
+      0.2125,
+      -0.3454
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.0025,
+      0.425,
+      0.0008
+     ],
+     "color": "powder",
+     "tint": "#a9a397",
+     "at": [
+      -1.55,
+      0.2125,
+      -0.3454
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.0025,
+      0.425,
+      0.0008
+     ],
+     "color": "powder",
+     "tint": "#a9a397",
+     "at": [
+      -1.45,
+      0.2125,
+      -0.3454
+     ]
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     0,
+     1
+    ],
+    "dist": 0.03
+   }
+  },
+  {
+   "id": "tea-towel",
+   "name": {
+    "en": "Tea towel",
+    "zh": "毛巾"
+   },
+   "group": "corner-fabric",
+   "summary": {
+    "en": "Cotton fabric: soaks up water.",
+    "zh": "棉布：吸水。"
+   },
+   "detail": {
+    "en": "A striped cotton tea towel over the edge of the cabinet’s bottom board [S1]. A towel has to soak up water, so it is made of a material that absorbs water: fabric is good for a mop because it is absorbent [S5]. Cotton takes up more moisture than polyester [S12].",
+    "zh": "一条搭在壁柜底板边上、带条纹的棉毛巾 [S1]。毛巾要吸水，所以用会吸水的材料：布适合做拖把，因为它吸水 [S5]。棉比涤纶吸得多 [S12]。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.16,
+     0.003,
+     0.08
+    ],
+    "bevel": 0.0012,
+    "color": "fabric",
+    "tint": "#ece7da",
+    "at": [
+     -1.79,
+     0.5675,
+     -0.09
+    ]
+   },
+   "extra": [
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0055,
+      0.0055,
+      0.16
+     ],
+     "color": "fabric",
+     "rotation": [
+      0,
+      0,
+      90
+     ],
+     "tint": "#ece7da",
+     "at": [
+      -1.79,
+      0.563,
+      -0.047
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.16,
+      0.26,
+      0.003
+     ],
+     "bevel": 0.0012,
+     "color": "fabric",
+     "tint": "#ece7da",
+     "at": [
+      -1.79,
+      0.429,
+      -0.042
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.158,
+      0.012,
+      0.0006
+     ],
+     "color": "fabric",
+     "tint": "#8f8d86",
+     "at": [
+      -1.79,
+      0.336,
+      -0.0402
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.158,
+      0.006,
+      0.0006
+     ],
+     "color": "fabric",
+     "tint": "#8f8d86",
+     "at": [
+      -1.79,
+      0.356,
+      -0.0402
+     ]
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.04
+   }
+  },
+  {
+   "id": "bench",
+   "name": {
+    "en": "Science bench",
+    "zh": "实验台"
+   },
+   "summary": {
+    "en": "A school bench, drawn life size.",
+    "zh": "一张学校实验台，按实物大小画。"
+   },
+   "detail": {
+    "en": "A wooden school bench 2.4 m long and 0.7 m deep; the five test stations stand on it [S1]. It is drawn as a common kind of science bench, not a particular school’s.",
+    "zh": "一张 2.4 米长、0.7 米深的木实验台，五个测试工位都在上面 [S1]。它照常见的科学实验台画，不对应哪一所学校。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     2.4,
+     0.04,
+     0.7
+    ],
+    "bevel": 0.006,
+    "color": "wood",
+    "tint": "#d3b58b",
+    "at": [
+     0,
+     -0.02,
+     0
+    ]
+   },
+   "extra": [
+    {
+     "kind": "box",
+     "size": [
+      0.045,
+      0.74,
+      0.045
+     ],
+     "color": "wood",
+     "tint": "#c7a77c",
+     "at": [
+      -1.12,
+      -0.41,
+      -0.3
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.045,
+      0.74,
+      0.045
+     ],
+     "color": "wood",
+     "tint": "#c7a77c",
+     "at": [
+      1.12,
+      -0.41,
+      -0.3
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.045,
+      0.74,
+      0.045
+     ],
+     "color": "wood",
+     "tint": "#c7a77c",
+     "at": [
+      -1.12,
+      -0.41,
+      0.3
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.045,
+      0.74,
+      0.045
+     ],
+     "color": "wood",
+     "tint": "#c7a77c",
+     "at": [
+      1.12,
+      -0.41,
+      0.3
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      2.24,
+      0.03,
+      0.03
+     ],
+     "color": "wood",
+     "tint": "#c7a77c",
+     "at": [
+      0,
+      -0.68,
+      0
+     ]
+    }
+   ],
+   "clip": false,
+   "context": true,
+   "castShadow": true
+  },
+  {
+   "id": "counter",
+   "name": {
+    "en": "Kitchen counter",
+    "zh": "厨房台面"
+   },
+   "summary": {
+    "en": "A counter with cupboards below.",
+    "zh": "台面，下面是柜子。"
+   },
+   "detail": {
+    "en": "A kitchen counter at the same height as the bench, with cupboards below [S1]. It is drawn as a common kitchen, not the fittings of any particular flat.",
+    "zh": "和实验台一样高的厨房台面，下面是柜子 [S1]。它照常见的厨房画，不代表哪一种组屋的配件。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     1.12,
+     0.03,
+     0.62
+    ],
+    "bevel": 0.004,
+    "color": "enamel",
+    "tint": "#cfccc4",
+    "at": [
+     -1.95,
+     -0.015,
+     -0.04
+    ]
+   },
+   "extra": [
+    {
+     "kind": "box",
+     "size": [
+      1.1,
+      0.65,
+      0.56
+     ],
+     "color": "wood",
+     "tint": "#e3dccd",
+     "at": [
+      -1.95,
+      -0.355,
+      -0.07
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      1.1,
+      0.1,
+      0.48
+     ],
+     "color": "powder",
+     "tint": "#4a4e50",
+     "at": [
+      -1.95,
+      -0.73,
+      -0.11
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.36067,
+      0.639,
+      0.018
+     ],
+     "bevel": 0.003,
+     "color": "wood",
+     "tint": "#ebe5d8",
+     "at": [
+      -2.31667,
+      -0.3575,
+      0.22
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.36067,
+      0.639,
+      0.018
+     ],
+     "bevel": 0.003,
+     "color": "wood",
+     "tint": "#ebe5d8",
+     "at": [
+      -1.95,
+      -0.3575,
+      0.22
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.36067,
+      0.639,
+      0.018
+     ],
+     "bevel": 0.003,
+     "color": "wood",
+     "tint": "#ebe5d8",
+     "at": [
+      -1.58333,
+      -0.3575,
+      0.22
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.12,
+      0.012,
+      0.012
+     ],
+     "bevel": 0.003,
+     "color": "stainless",
+     "at": [
+      -2.31667,
+      -0.07,
+      0.233
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.12,
+      0.012,
+      0.012
+     ],
+     "bevel": 0.003,
+     "color": "stainless",
+     "at": [
+      -1.95,
+      -0.07,
+      0.233
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.12,
+      0.012,
+      0.012
+     ],
+     "bevel": 0.003,
+     "color": "stainless",
+     "at": [
+      -1.58333,
+      -0.07,
+      0.233
+     ]
+    }
+   ],
+   "clip": false,
+   "context": true,
+   "castShadow": true
+  },
+  {
+   "id": "corner-wall",
+   "name": {
+    "en": "Wall",
+    "zh": "墙"
+   },
+   "summary": {
+    "en": "The kitchen wall, with the window opening.",
+    "zh": "厨房的墙，开着窗洞。"
+   },
+   "detail": {
+    "en": "A plain wall 10 cm thick with an opening for the window [S1]. It sets the kitchen things in place; it is not part of any test.",
+    "zh": "一面 10 厘米厚的墙，开一个窗洞 [S1]。它让厨房里的东西各就各位，不属于任何测试。"
+   },
+   "primitive": {
+    "kind": "extrude",
+    "shape": [
+     [
+      -0.6,
+      -1.2
+     ],
+     [
+      0.6,
+      -1.2
+     ],
+     [
+      0.6,
+      1.2
+     ],
+     [
+      -0.6,
+      1.2
+     ]
+    ],
+    "depth": 0.1,
+    "color": "enamel",
+    "holes": [
+     [
+      [
+       -0.4800000000000004,
+       0.02999999999999997
+      ],
+      [
+       -0.4800000000000004,
+       0.93
+      ],
+      [
+       -2.220446049250313e-16,
+       0.93
+      ],
+      [
+       -2.220446049250313e-16,
+       0.02999999999999997
+      ]
+     ]
+    ],
+    "tint": "#cdc6b6",
+    "at": [
+     -1.95,
+     0.42,
+     -0.4
+    ]
+   },
+   "clip": false,
+   "context": true
+  }
+ ],
+ "groups": [
+  {
+   "id": "strength-rig",
+   "name": {
+    "en": "Strength",
+    "zh": "强度"
+   },
+   "color": "token:ink-2",
+   "scale": {
+    "unit": "cm",
+    "magnification": 1
+   }
+  },
+  {
+   "id": "bend-rig",
+   "name": {
+    "en": "Flexibility",
+    "zh": "柔韧性"
+   },
+   "color": "token:accent-2",
+   "scale": {
+    "unit": "cm",
+    "magnification": 1
+   }
+  },
+  {
+   "id": "float-tank",
+   "name": {
+    "en": "Float or sink",
+    "zh": "浮沉"
+   },
+   "color": "token:cold",
+   "scale": {
+    "unit": "cm",
+    "magnification": 1
+   },
+   "card": false
+  },
+  {
+   "id": "drop-tray",
+   "name": {
+    "en": "Waterproof",
+    "zh": "防水"
+   },
+   "color": "token:ink-3",
+   "scale": {
+    "unit": "cm",
+    "magnification": 1
+   },
+   "card": false
+  },
+  {
+   "id": "light-bench",
+   "name": {
+    "en": "Light through",
+    "zh": "透光"
+   },
+   "color": "token:en-light",
+   "scale": {
+    "unit": "cm",
+    "magnification": 1
+   }
+  },
+  {
+   "id": "corner-wood",
+   "name": {
+    "en": "Wood",
+    "zh": "木"
+   },
+   "color": "token:loop",
+   "scale": {
+    "unit": "cm",
+    "magnification": 1
+   },
+   "card": false
+  },
+  {
+   "id": "corner-metal",
+   "name": {
+    "en": "Metal",
+    "zh": "金属"
+   },
+   "color": "token:loop",
+   "scale": {
+    "unit": "cm",
+    "magnification": 1
+   },
+   "card": false
+  },
+  {
+   "id": "corner-ceramic",
+   "name": {
+    "en": "Ceramic",
+    "zh": "陶瓷"
+   },
+   "color": "token:loop",
+   "scale": {
+    "unit": "cm",
+    "magnification": 1
+   },
+   "card": false
+  },
+  {
+   "id": "corner-rubber",
+   "name": {
+    "en": "Rubber",
+    "zh": "橡胶"
+   },
+   "color": "token:loop",
+   "scale": {
+    "unit": "cm",
+    "magnification": 1
+   },
+   "card": false
+  },
+  {
+   "id": "corner-glass",
+   "name": {
+    "en": "Glass",
+    "zh": "玻璃"
+   },
+   "color": "token:loop",
+   "scale": {
+    "unit": "cm",
+    "magnification": 1
+   },
+   "card": false
+  },
+  {
+   "id": "corner-plastic",
+   "name": {
+    "en": "Plastic",
+    "zh": "塑料"
+   },
+   "color": "token:loop",
+   "scale": {
+    "unit": "cm",
+    "magnification": 1
+   },
+   "card": false
+  },
+  {
+   "id": "corner-fabric",
+   "name": {
+    "en": "Fabric",
+    "zh": "布"
+   },
+   "color": "token:loop",
+   "scale": {
+    "unit": "cm",
+    "magnification": 1
+   },
+   "card": false
+  }
+ ],
+ "views": {
+  "assembled": {
+   "camera": {
+    "position": [
+     -0.3,
+     1.9,
+     5.2
+    ],
+    "target": [
+     -0.72,
+     0.3,
+     -0.1
+    ],
+    "fov": 30
+   }
+  },
+  "exploded": {
+   "camera": {
+    "position": [
+     -0.3,
+     2.05,
+     5.5
+    ],
+    "target": [
+     -0.72,
+     0.35,
+     -0.1
+    ],
+    "fov": 30
+   }
+  },
+  "section": {
+   "plane": "xy"
+  },
+  "shadows": "contact",
+  "cover": {
+   "position": [
+    0.8,
+    1.05,
+    2.7
+   ],
+   "target": [
+    -0.12,
+    0.08,
+    -0.02
+   ],
+   "fov": 30
+  }
+ },
+ "units": {
+  "modelUnit": "cm",
+  "scale": 100
+ },
+ "presets": [
+  {
+   "id": "strength-view",
+   "label": {
+    "en": "Strength",
+    "zh": "强度"
+   },
+   "camera": {
+    "position": [
+     -0.8,
+     0.25,
+     1.15
+    ],
+    "target": [
+     -0.84,
+     0.07,
+     0.05
+    ],
+    "fov": 30
+   }
+  },
+  {
+   "id": "bend-view",
+   "label": {
+    "en": "Bend",
+    "zh": "弯曲"
+   },
+   "camera": {
+    "position": [
+     -0.35,
+     0.25,
+     1.14
+    ],
+    "target": [
+     -0.35,
+     0.1,
+     0.05
+    ],
+    "fov": 30
+   }
+  },
+  {
+   "id": "tank-view",
+   "label": {
+    "en": "Tank",
+    "zh": "水缸"
+   },
+   "camera": {
+    "position": [
+     0.27,
+     0.4,
+     1.29
+    ],
+    "target": [
+     0.09,
+     0.12,
+     -0.02
+    ],
+    "fov": 30
+   }
+  },
+  {
+   "id": "drops-view",
+   "label": {
+    "en": "Drops",
+    "zh": "滴水"
+   },
+   "camera": {
+    "position": [
+     0.79,
+     0.35,
+     0.71
+    ],
+    "target": [
+     0.5,
+     0.07,
+     0.08
+    ],
+    "fov": 30
+   }
+  },
+  {
+   "id": "light-view",
+   "label": {
+    "en": "Light",
+    "zh": "透光"
+   },
+   "camera": {
+    "position": [
+     0.38,
+     0.32,
+     0.56
+    ],
+    "target": [
+     0.84,
+     0.1,
+     0
+    ],
+    "fov": 32
+   }
+  },
+  {
+   "id": "corner-view",
+   "label": {
+    "en": "Kitchen",
+    "zh": "厨房"
+   },
+   "camera": {
+    "position": [
+     -2.2,
+     1.15,
+     3.1
+    ],
+    "target": [
+     -1.75,
+     0.5,
+     -0.2
+    ],
+    "fov": 30
+   }
+  }
+ ],
+ "spec": [
+  {
+   "key": {
+    "en": "Samples",
+    "zh": "样品"
+   },
+   "value": {
+    "en": "7 MATERIALS · SAME SIZE IN EACH TEST",
+    "zh": "7 种材料 · 每个测试大小相同"
+   },
+   "tag": "design"
+  },
+  {
+   "key": {
+    "en": "Strips",
+    "zh": "材料条"
+   },
+   "value": {
+    "en": "30 × 3 CM · 2 MM THICK",
+    "zh": "30 × 3 厘米 · 2 毫米厚"
+   },
+   "tag": "design"
+  },
+  {
+   "key": {
+    "en": "Masses",
+    "zh": "砝码"
+   },
+   "value": {
+    "en": "5 × 500 G",
+    "zh": "5 个 500 克"
+   },
+   "tag": "design"
+  },
+  {
+   "key": {
+    "en": "Tank",
+    "zh": "水缸"
+   },
+   "value": {
+    "en": "FRESH WATER · 18 CM DEEP",
+    "zh": "清水 · 18 厘米深"
+   },
+   "tag": "design"
+  }
+ ],
+ "telemetry": [
+  {
+   "key": {
+    "en": "Masses on the strip",
+    "zh": "条上的砝码"
+   },
+   "unit": "kg",
+   "follow": "masses-on"
+  },
+  {
+   "key": {
+    "en": "End pushed down",
+    "zh": "末端压下"
+   },
+   "unit": "cm",
+   "follow": "push-down"
+  }
+ ],
+ "poses": {
+  "masses-fallen": {
+   "bridge-hanger": {
+    "pivot": [
+     -0.93,
+     0.062,
+     0.05
+    ],
+    "rotation": [
+     0,
+     0,
+     6
+    ],
+    "offset": [
+     0,
+     -0.0588,
+     -0.055
+    ]
+   },
+   "bridge-masses": {
+    "pivot": [
+     -0.93,
+     0.062,
+     0.05
+    ],
+    "rotation": [
+     0,
+     0,
+     6
+    ],
+    "offset": [
+     0,
+     -0.0588,
+     -0.055
+    ]
+   },
+   "duration": 0.5
+  }
+ },
+ "sim": {
+  "kind": "materials",
+  "controls": [
+   {
+    "id": "strip",
+    "kind": "choice",
+    "default": "wood",
+    "label": {
+     "en": "Strip",
+     "zh": "材料条"
+    },
+    "options": [
+     {
+      "id": "wood",
+      "label": {
+       "en": "Wood",
+       "zh": "木"
+      }
+     },
+     {
+      "id": "metal",
+      "label": {
+       "en": "Metal",
+       "zh": "金属"
+      }
+     },
+     {
+      "id": "ceramic",
+      "label": {
+       "en": "Ceramic",
+       "zh": "陶瓷"
+      }
+     },
+     {
+      "id": "rubber",
+      "label": {
+       "en": "Rubber",
+       "zh": "橡胶"
+      }
+     },
+     {
+      "id": "glass",
+      "label": {
+       "en": "Glass",
+       "zh": "玻璃"
+      }
+     },
+     {
+      "id": "plastic",
+      "label": {
+       "en": "Plastic",
+       "zh": "塑料"
+      }
+     },
+     {
+      "id": "fabric",
+      "label": {
+       "en": "Fabric",
+       "zh": "布"
+      }
+     }
+    ]
+   },
+   {
+    "id": "masses",
+    "kind": "step",
+    "values": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "default": 0,
+    "label": {
+     "en": "500 g masses on the strip",
+     "zh": "条上的 500 克槽码"
+    }
+   },
+   {
+    "id": "push",
+    "kind": "step",
+    "values": [
+     0,
+     0.5,
+     1,
+     1.5,
+     2
+    ],
+    "default": 0,
+    "unit": "cm",
+    "label": {
+     "en": "End pushed down",
+     "zh": "末端压下"
+    }
+   },
+   {
+    "id": "block",
+    "kind": "choice",
+    "default": "wood",
+    "label": {
+     "en": "Put into the water",
+     "zh": "放进水里的"
+    },
+    "options": [
+     {
+      "id": "wood",
+      "label": {
+       "en": "Wooden block",
+       "zh": "木块"
+      }
+     },
+     {
+      "id": "wood-big",
+      "label": {
+       "en": "Big wooden board",
+       "zh": "大木板"
+      }
+     },
+     {
+      "id": "metal",
+      "label": {
+       "en": "Steel block",
+       "zh": "钢块"
+      }
+     },
+     {
+      "id": "ceramic",
+      "label": {
+       "en": "Ceramic block",
+       "zh": "陶瓷块"
+      }
+     },
+     {
+      "id": "rubber",
+      "label": {
+       "en": "Rubber block",
+       "zh": "橡胶块"
+      }
+     },
+     {
+      "id": "glass",
+      "label": {
+       "en": "Glass block",
+       "zh": "玻璃块"
+      }
+     },
+     {
+      "id": "plastic",
+      "label": {
+       "en": "Plastic block",
+       "zh": "塑料块"
+      }
+     },
+     {
+      "id": "bottle",
+      "label": {
+       "en": "Capped empty bottle",
+       "zh": "盖好的空瓶"
+      }
+     },
+     {
+      "id": "fabric",
+      "label": {
+       "en": "Folded cotton",
+       "zh": "叠好的棉布"
+      }
+     }
+    ]
+   },
+   {
+    "id": "square",
+    "kind": "choice",
+    "default": "plastic",
+    "label": {
+     "en": "Sample",
+     "zh": "样片"
+    },
+    "options": [
+     {
+      "id": "wood",
+      "label": {
+       "en": "Wood",
+       "zh": "木"
+      }
+     },
+     {
+      "id": "metal",
+      "label": {
+       "en": "Metal",
+       "zh": "金属"
+      }
+     },
+     {
+      "id": "ceramic",
+      "label": {
+       "en": "Ceramic",
+       "zh": "陶瓷"
+      }
+     },
+     {
+      "id": "rubber",
+      "label": {
+       "en": "Rubber",
+       "zh": "橡胶"
+      }
+     },
+     {
+      "id": "glass",
+      "label": {
+       "en": "Glass",
+       "zh": "玻璃"
+      }
+     },
+     {
+      "id": "plastic",
+      "label": {
+       "en": "Plastic",
+       "zh": "塑料"
+      }
+     },
+     {
+      "id": "fabric",
+      "label": {
+       "en": "Fabric",
+       "zh": "布"
+      }
+     }
+    ]
+   },
+   {
+    "id": "pick",
+    "kind": "choice",
+    "default": "wood",
+    "label": {
+     "en": "Material",
+     "zh": "材料"
+    },
+    "options": [
+     {
+      "id": "wood",
+      "label": {
+       "en": "Wood",
+       "zh": "木"
+      }
+     },
+     {
+      "id": "metal",
+      "label": {
+       "en": "Metal",
+       "zh": "金属"
+      }
+     },
+     {
+      "id": "ceramic",
+      "label": {
+       "en": "Ceramic",
+       "zh": "陶瓷"
+      }
+     },
+     {
+      "id": "rubber",
+      "label": {
+       "en": "Rubber",
+       "zh": "橡胶"
+      }
+     },
+     {
+      "id": "glass",
+      "label": {
+       "en": "Glass",
+       "zh": "玻璃"
+      }
+     },
+     {
+      "id": "plastic",
+      "label": {
+       "en": "Plastic",
+       "zh": "塑料"
+      }
+     },
+     {
+      "id": "fabric",
+      "label": {
+       "en": "Fabric",
+       "zh": "布"
+      }
+     }
+    ]
+   }
+  ],
+  "outputs": [
+   {
+    "id": "strength-result",
+    "label": {
+     "en": "Strength test",
+     "zh": "强度测试"
+    },
+    "kind": "state",
+    "from": "bridge:result",
+    "states": {
+     "holds": {
+      "en": "Holds them",
+      "zh": "托得住"
+     },
+     "on-bench": {
+      "en": "Bends onto the bench",
+      "zh": "弯到台面上"
+     },
+     "snapped": {
+      "en": "Snaps",
+      "zh": "断了"
+     }
+    }
+   },
+   {
+    "id": "strength-bend",
+    "label": {
+     "en": "How much it bends",
+     "zh": "弯得多少"
+    },
+    "kind": "state",
+    "from": "bridge:bend",
+    "states": {
+     "hardly": {
+      "en": "Hardly bends",
+      "zh": "几乎不弯"
+     },
+     "a-little": {
+      "en": "Bends a little",
+      "zh": "弯一点"
+     },
+     "a-lot": {
+      "en": "Bends a lot",
+      "zh": "弯很多"
+     },
+     "none": {
+      "en": "Snapped",
+      "zh": "断了"
+     }
+    }
+   },
+   {
+    "id": "bridge-view",
+    "label": {
+     "en": "On the supports",
+     "zh": "架上的条"
+    },
+    "kind": "state",
+    "from": "bridge:view",
+    "states": {
+     "wood": {
+      "en": "Wood",
+      "zh": "木"
+     },
+     "metal": {
+      "en": "Metal",
+      "zh": "金属"
+     },
+     "ceramic": {
+      "en": "Ceramic",
+      "zh": "陶瓷"
+     },
+     "rubber": {
+      "en": "Rubber",
+      "zh": "橡胶"
+     },
+     "glass": {
+      "en": "Glass",
+      "zh": "玻璃"
+     },
+     "plastic": {
+      "en": "Plastic",
+      "zh": "塑料"
+     },
+     "fabric": {
+      "en": "Fabric",
+      "zh": "布"
+     },
+     "glass-snapped": {
+      "en": "Glass, snapped",
+      "zh": "玻璃，断了"
+     },
+     "ceramic-snapped": {
+      "en": "Ceramic, snapped",
+      "zh": "陶瓷，断了"
+     }
+    }
+   },
+   {
+    "id": "bridge-sag",
+    "label": {
+     "en": "Sag (drawn)",
+     "zh": "下垂（画面）"
+    },
+    "from": "bridge:sag",
+    "unit": "m"
+   },
+   {
+    "id": "masses-on",
+    "label": {
+     "en": "Masses on the strip",
+     "zh": "条上的砝码"
+    },
+    "from": "control:masses-kg",
+    "unit": "kg",
+    "decimals": 1
+   },
+   {
+    "id": "flex-result",
+    "label": {
+     "en": "Flexibility test",
+     "zh": "柔韧测试"
+    },
+    "kind": "state",
+    "from": "cantilever:result",
+    "states": {
+     "not-pushed": {
+      "en": "Not pushed yet",
+      "zh": "还没压"
+     },
+     "bends": {
+      "en": "Bends without breaking",
+      "zh": "弯而不断"
+     },
+     "droops": {
+      "en": "Droops by itself",
+      "zh": "自己垂下来"
+     },
+     "snapped": {
+      "en": "Snaps",
+      "zh": "断了"
+     }
+    }
+   },
+   {
+    "id": "bend-view",
+    "label": {
+     "en": "In the clamp",
+     "zh": "夹着的条"
+    },
+    "kind": "state",
+    "from": "cantilever:view",
+    "states": {
+     "wood": {
+      "en": "Wood",
+      "zh": "木"
+     },
+     "metal": {
+      "en": "Metal",
+      "zh": "金属"
+     },
+     "ceramic": {
+      "en": "Ceramic",
+      "zh": "陶瓷"
+     },
+     "rubber": {
+      "en": "Rubber",
+      "zh": "橡胶"
+     },
+     "glass": {
+      "en": "Glass",
+      "zh": "玻璃"
+     },
+     "plastic": {
+      "en": "Plastic",
+      "zh": "塑料"
+     },
+     "fabric": {
+      "en": "Fabric",
+      "zh": "布"
+     },
+     "glass-snapped": {
+      "en": "Glass, snapped",
+      "zh": "玻璃，断了"
+     },
+     "ceramic-snapped": {
+      "en": "Ceramic, snapped",
+      "zh": "陶瓷，断了"
+     }
+    }
+   },
+   {
+    "id": "flex-tip",
+    "label": {
+     "en": "End drop (drawn)",
+     "zh": "末端下垂（画面）"
+    },
+    "from": "cantilever:tip",
+    "unit": "m"
+   },
+   {
+    "id": "push-down",
+    "label": {
+     "en": "End pushed down",
+     "zh": "末端压下"
+    },
+    "from": "control:push",
+    "unit": "cm",
+    "decimals": 1
+   },
+   {
+    "id": "float-result",
+    "label": {
+     "en": "In the water",
+     "zh": "放进水里"
+    },
+    "kind": "state",
+    "from": "tank:result",
+    "states": {
+     "floats": {
+      "en": "Floats",
+      "zh": "浮"
+     },
+     "sinks": {
+      "en": "Sinks",
+      "zh": "沉"
+     }
+    }
+   },
+   {
+    "id": "float-rise",
+    "label": {
+     "en": "Underside above the floor (drawn)",
+     "zh": "底面离缸底（画面）"
+    },
+    "from": "tank:rise",
+    "unit": "cm"
+   },
+   {
+    "id": "drop-result",
+    "label": {
+     "en": "The drop of water",
+     "zh": "那滴水"
+    },
+    "kind": "state",
+    "from": "drops:result",
+    "states": {
+     "stays-on-top": {
+      "en": "Stays on top",
+      "zh": "停在上面"
+     },
+     "soaks-in": {
+      "en": "Soaks in",
+      "zh": "吸进去"
+     }
+    }
+   },
+   {
+    "id": "light-result",
+    "label": {
+     "en": "Light through",
+     "zh": "透过的光"
+    },
+    "kind": "state",
+    "from": "light:result",
+    "states": {
+     "most": {
+      "en": "Most",
+      "zh": "大部分"
+     },
+     "some": {
+      "en": "Some",
+      "zh": "一部分"
+     },
+     "none": {
+      "en": "None",
+      "zh": "没有"
+     }
+    }
+   },
+   {
+    "id": "light-dark",
+    "label": {
+     "en": "Shadow darkness (drawn)",
+     "zh": "影子深浅（画面）"
+    },
+    "from": "light:dark"
+   },
+   {
+    "id": "p-strength",
+    "label": {
+     "en": "Strength",
+     "zh": "强度"
+    },
+    "kind": "state",
+    "from": "profile:strength",
+    "states": {
+     "holds": {
+      "en": "Holds them",
+      "zh": "托得住"
+     },
+     "on-bench": {
+      "en": "Bends onto the bench",
+      "zh": "弯到台面上"
+     },
+     "snapped": {
+      "en": "Snaps",
+      "zh": "断了"
+     }
+    }
+   },
+   {
+    "id": "p-flex",
+    "label": {
+     "en": "Flexibility",
+     "zh": "柔韧性"
+    },
+    "kind": "state",
+    "from": "profile:flex",
+    "states": {
+     "bends": {
+      "en": "Bends without breaking",
+      "zh": "弯而不断"
+     },
+     "droops": {
+      "en": "Droops by itself",
+      "zh": "自己垂下来"
+     },
+     "snapped": {
+      "en": "Snaps",
+      "zh": "断了"
+     }
+    }
+   },
+   {
+    "id": "p-float",
+    "label": {
+     "en": "Float or sink",
+     "zh": "浮沉"
+    },
+    "kind": "state",
+    "from": "profile:float",
+    "states": {
+     "floats": {
+      "en": "Floats",
+      "zh": "浮"
+     },
+     "sinks": {
+      "en": "Sinks",
+      "zh": "沉"
+     }
+    }
+   },
+   {
+    "id": "p-water",
+    "label": {
+     "en": "Waterproof",
+     "zh": "防水"
+    },
+    "kind": "state",
+    "from": "profile:water",
+    "states": {
+     "stays-on-top": {
+      "en": "Stays on top",
+      "zh": "停在上面"
+     },
+     "soaks-in": {
+      "en": "Soaks in",
+      "zh": "吸进去"
+     }
+    }
+   },
+   {
+    "id": "p-light",
+    "label": {
+     "en": "Light through",
+     "zh": "透光"
+    },
+    "kind": "state",
+    "from": "profile:light",
+    "states": {
+     "most": {
+      "en": "Most",
+      "zh": "大部分"
+     },
+     "some": {
+      "en": "Some",
+      "zh": "一部分"
+     },
+     "none": {
+      "en": "None",
+      "zh": "没有"
+     }
+    }
+   }
+  ],
+  "bind": [
+   {
+    "output": "bridge-view",
+    "part": "bridge-wood",
+    "visible": {
+     "eq": "wood"
+    }
+   },
+   {
+    "output": "bridge-view",
+    "part": "bridge-metal",
+    "visible": {
+     "eq": "metal"
+    }
+   },
+   {
+    "output": "bridge-view",
+    "part": "bridge-ceramic",
+    "visible": {
+     "eq": "ceramic"
+    }
+   },
+   {
+    "output": "bridge-view",
+    "part": "bridge-rubber",
+    "visible": {
+     "eq": "rubber"
+    }
+   },
+   {
+    "output": "bridge-view",
+    "part": "bridge-glass",
+    "visible": {
+     "eq": "glass"
+    }
+   },
+   {
+    "output": "bridge-view",
+    "part": "bridge-plastic",
+    "visible": {
+     "eq": "plastic"
+    }
+   },
+   {
+    "output": "bridge-view",
+    "part": "bridge-fabric",
+    "visible": {
+     "eq": "fabric"
+    }
+   },
+   {
+    "output": "bridge-view",
+    "part": "bridge-glass-snapped",
+    "visible": {
+     "eq": "glass-snapped"
+    }
+   },
+   {
+    "output": "bridge-view",
+    "part": "bridge-ceramic-snapped",
+    "visible": {
+     "eq": "ceramic-snapped"
+    }
+   },
+   {
+    "output": "bridge-sag",
+    "part": [
+     "bridge-wood",
+     "bridge-metal",
+     "bridge-ceramic",
+     "bridge-rubber",
+     "bridge-glass",
+     "bridge-plastic",
+     "bridge-fabric"
+    ],
+    "bend": {
+     "mode": "bridge",
+     "axis": [
+      1,
+      0,
+      0
+     ],
+     "span": 0.2,
+     "per": 1,
+     "ease": 0.5
+    }
+   },
+   {
+    "control": "masses",
+    "part": "bridge-masses",
+    "count": {
+     "per": 1
+    }
+   },
+   {
+    "output": "bridge-sag",
+    "part": [
+     "bridge-hanger",
+     "bridge-masses"
+    ],
+    "offset": {
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "per": 1,
+     "origin": 0
+    }
+   },
+   {
+    "output": "bridge-view",
+    "part": [
+     "bridge-hanger",
+     "bridge-masses"
+    ],
+    "pose": {
+     "glass-snapped": "masses-fallen",
+     "ceramic-snapped": "masses-fallen"
+    }
+   },
+   {
+    "output": "bend-view",
+    "part": "bend-wood",
+    "visible": {
+     "eq": "wood"
+    }
+   },
+   {
+    "output": "bend-view",
+    "part": "bend-metal",
+    "visible": {
+     "eq": "metal"
+    }
+   },
+   {
+    "output": "bend-view",
+    "part": "bend-ceramic",
+    "visible": {
+     "eq": "ceramic"
+    }
+   },
+   {
+    "output": "bend-view",
+    "part": "bend-rubber",
+    "visible": {
+     "eq": "rubber"
+    }
+   },
+   {
+    "output": "bend-view",
+    "part": "bend-glass",
+    "visible": {
+     "eq": "glass"
+    }
+   },
+   {
+    "output": "bend-view",
+    "part": "bend-plastic",
+    "visible": {
+     "eq": "plastic"
+    }
+   },
+   {
+    "output": "bend-view",
+    "part": "bend-fabric",
+    "visible": {
+     "eq": "fabric"
+    }
+   },
+   {
+    "output": "bend-view",
+    "part": "bend-glass-snapped",
+    "visible": {
+     "eq": "glass-snapped"
+    }
+   },
+   {
+    "output": "bend-view",
+    "part": "bend-ceramic-snapped",
+    "visible": {
+     "eq": "ceramic-snapped"
+    }
+   },
+   {
+    "output": "flex-tip",
+    "part": [
+     "bend-wood",
+     "bend-metal",
+     "bend-ceramic",
+     "bend-rubber",
+     "bend-glass",
+     "bend-plastic",
+     "bend-fabric"
+    ],
+    "bend": {
+     "mode": "cantilever",
+     "axis": [
+      1,
+      0,
+      0
+     ],
+     "clamp": -0.1,
+     "reach": 0.25,
+     "per": 1,
+     "ease": 0.5
+    }
+   },
+   {
+    "control": "push",
+    "part": "push-peg",
+    "offset": {
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "per": 0.01,
+     "origin": 0
+    }
+   },
+   {
+    "control": "block",
+    "part": "float-wood",
+    "visible": {
+     "eq": "wood"
+    }
+   },
+   {
+    "control": "block",
+    "part": "float-wood-big",
+    "visible": {
+     "eq": "wood-big"
+    }
+   },
+   {
+    "control": "block",
+    "part": "float-metal",
+    "visible": {
+     "eq": "metal"
+    }
+   },
+   {
+    "control": "block",
+    "part": "float-ceramic",
+    "visible": {
+     "eq": "ceramic"
+    }
+   },
+   {
+    "control": "block",
+    "part": "float-rubber",
+    "visible": {
+     "eq": "rubber"
+    }
+   },
+   {
+    "control": "block",
+    "part": "float-glass",
+    "visible": {
+     "eq": "glass"
+    }
+   },
+   {
+    "control": "block",
+    "part": "float-plastic",
+    "visible": {
+     "eq": "plastic"
+    }
+   },
+   {
+    "control": "block",
+    "part": "float-bottle",
+    "visible": {
+     "eq": "bottle"
+    }
+   },
+   {
+    "control": "block",
+    "part": "float-fabric",
+    "visible": {
+     "eq": "fabric"
+    }
+   },
+   {
+    "output": "float-rise",
+    "part": [
+     "float-wood",
+     "float-wood-big",
+     "float-metal",
+     "float-ceramic",
+     "float-rubber",
+     "float-glass",
+     "float-plastic",
+     "float-bottle",
+     "float-fabric"
+    ],
+    "offset": {
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "per": 0.01,
+     "origin": 0
+    }
+   },
+   {
+    "control": "square",
+    "part": "square-wood",
+    "visible": {
+     "eq": "wood"
+    }
+   },
+   {
+    "control": "square",
+    "part": "square-metal",
+    "visible": {
+     "eq": "metal"
+    }
+   },
+   {
+    "control": "square",
+    "part": "square-ceramic",
+    "visible": {
+     "eq": "ceramic"
+    }
+   },
+   {
+    "control": "square",
+    "part": "square-rubber",
+    "visible": {
+     "eq": "rubber"
+    }
+   },
+   {
+    "control": "square",
+    "part": "square-glass",
+    "visible": {
+     "eq": "glass"
+    }
+   },
+   {
+    "control": "square",
+    "part": "square-plastic",
+    "visible": {
+     "eq": "plastic"
+    }
+   },
+   {
+    "control": "square",
+    "part": "square-fabric",
+    "visible": {
+     "eq": "fabric"
+    }
+   },
+   {
+    "output": "drop-result",
+    "part": "water-bead",
+    "visible": {
+     "eq": "stays-on-top"
+    }
+   },
+   {
+    "output": "drop-result",
+    "part": "wet-patch",
+    "visible": {
+     "eq": "soaks-in"
+    }
+   },
+   {
+    "control": "square",
+    "part": "sheet-wood",
+    "visible": {
+     "eq": "wood"
+    }
+   },
+   {
+    "control": "square",
+    "part": "sheet-metal",
+    "visible": {
+     "eq": "metal"
+    }
+   },
+   {
+    "control": "square",
+    "part": "sheet-ceramic",
+    "visible": {
+     "eq": "ceramic"
+    }
+   },
+   {
+    "control": "square",
+    "part": "sheet-rubber",
+    "visible": {
+     "eq": "rubber"
+    }
+   },
+   {
+    "control": "square",
+    "part": "sheet-glass",
+    "visible": {
+     "eq": "glass"
+    }
+   },
+   {
+    "control": "square",
+    "part": "sheet-plastic",
+    "visible": {
+     "eq": "plastic"
+    }
+   },
+   {
+    "control": "square",
+    "part": "sheet-fabric",
+    "visible": {
+     "eq": "fabric"
+    }
+   }
+  ],
+  "overlays": [
+   {
+    "kind": "shadow-cast",
+    "source": {
+     "part": "torch",
+     "point": [
+      0.7,
+      0.1,
+      0
+     ],
+     "axis": [
+      1,
+      0,
+      0
+     ],
+     "beam": 20
+    },
+    "receiver": {
+     "part": "screen",
+     "normal": [
+      -1,
+      0,
+      0
+     ],
+     "size": [
+      0.3,
+      0.22
+     ]
+    },
+    "casters": [
+     {
+      "part": "sheet-holder"
+     },
+     {
+      "part": "sheet-wood",
+      "dark": {
+       "output": "light-dark"
+      }
+     },
+     {
+      "part": "sheet-metal",
+      "dark": {
+       "output": "light-dark"
+      }
+     },
+     {
+      "part": "sheet-ceramic",
+      "dark": {
+       "output": "light-dark"
+      }
+     },
+     {
+      "part": "sheet-rubber",
+      "dark": {
+       "output": "light-dark"
+      }
+     },
+     {
+      "part": "sheet-glass",
+      "dark": {
+       "output": "light-dark"
+      }
+     },
+     {
+      "part": "sheet-plastic",
+      "dark": {
+       "output": "light-dark"
+      }
+     },
+     {
+      "part": "sheet-fabric",
+      "dark": {
+       "output": "light-dark"
+      }
+     }
+    ],
+    "spot": {
+     "color": "token:en-light"
+    }
+   }
+  ],
+  "materials": {
+   "g": 9.8,
+   "samples": {
+    "wood": {
+     "E": 10.7,
+     "limit": 100.7,
+     "fails": "snaps",
+     "density": 650,
+     "absorbs": true,
+     "light": "none"
+    },
+    "metal": {
+     "E": 200,
+     "limit": 250,
+     "fails": "bends",
+     "density": 7820,
+     "absorbs": false,
+     "light": "none"
+    },
+    "ceramic": {
+     "E": 70,
+     "limit": 35,
+     "fails": "snaps",
+     "density": 2400,
+     "absorbs": false,
+     "light": "none"
+    },
+    "rubber": {
+     "E": 0.005,
+     "fails": "never",
+     "density": 920,
+     "absorbs": false,
+     "light": "none"
+    },
+    "glass": {
+     "E": 70,
+     "limit": 36,
+     "fails": "snaps",
+     "density": 2500,
+     "absorbs": false,
+     "light": "most"
+    },
+    "plastic": {
+     "E": 1.2,
+     "limit": 25,
+     "fails": "bends",
+     "density": 955,
+     "absorbs": false,
+     "light": "some"
+    },
+    "fabric": {
+     "limp": true,
+     "fails": "never",
+     "density": 1540,
+     "absorbs": true,
+     "light": "some"
+    }
+   },
+   "strip": {
+    "width": 0.03,
+    "thick": 0.002
+   },
+   "bridge": {
+    "strip": "strip",
+    "masses": "masses",
+    "mass": 0.5,
+    "span": 0.2,
+    "clearance": 0.06,
+    "bend": {
+     "little": 0.005,
+     "lot": 0.03
+    }
+   },
+   "cantilever": {
+    "strip": "strip",
+    "push": "push",
+    "reach": 0.25,
+    "droop": 0.01,
+    "hang": 0.8
+   },
+   "tank": {
+    "block": "block",
+    "water": 18,
+    "density": 1000,
+    "height": 25,
+    "blocks": {
+     "wood": {
+      "sample": "wood",
+      "height": 3
+     },
+     "wood-big": {
+      "sample": "wood",
+      "height": 6
+     },
+     "metal": {
+      "sample": "metal",
+      "height": 3
+     },
+     "ceramic": {
+      "sample": "ceramic",
+      "height": 3
+     },
+     "rubber": {
+      "sample": "rubber",
+      "height": 3
+     },
+     "glass": {
+      "sample": "glass",
+      "height": 3
+     },
+     "plastic": {
+      "sample": "plastic",
+      "height": 3
+     },
+     "bottle": {
+      "density": 40,
+      "height": 6.5
+     },
+     "fabric": {
+      "sample": "fabric",
+      "height": 1
+     }
+    }
+   },
+   "drops": {
+    "square": "square"
+   },
+   "light": {
+    "square": "square",
+    "dark": {
+     "most": 0.1,
+     "some": 0.6,
+     "none": 1
+    }
+   },
+   "profile": {
+    "pick": "pick",
+    "masses": 5,
+    "push": 2,
+    "block": "same",
+    "square": "same"
+   }
+  }
+ }
+}
