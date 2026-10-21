@@ -11,6 +11,7 @@ import { describe, expect, it } from 'vitest';
 import { parse as parseYaml } from 'yaml';
 import { evaluateSim } from '../../src/engines/space-scene/lib/sim';
 import { resolveSimValues } from '../../src/engines/space-scene/lib/sim/controls';
+import { simEffects } from '../../src/engines/space-scene/lib/sim/bind';
 import { endValue, isTimeline, type Timeline } from '../../src/engines/space-scene/lib/sim/timeline';
 import { simSchema, type SimData } from '../../src/engines/space-scene/sim-schema';
 
@@ -104,6 +105,18 @@ describe('forces topic: captions say what the model gives', () => {
 
   it.each(BEAT_STATES)('%s beat %i: %s is %s', (ch, beat, output, state) => {
     expect(outputsAt(ch, beat)[output]).toBe(state);
+  });
+
+  it('static friction holds the block while the next beat lets it slide', () => {
+    const c = chapter('friction-starting');
+    for (const [beat, held] of [[2, true], [3, false]] as const) {
+      const values = resolveSimValues(sim, { ...c.set, ...c.beats[beat - 1]!.sim?.set });
+      const effects = simEffects(sim, values, evaluateSim(sim, values));
+      const displacement = effects.play.get('wooden-block')?.filter((p) => p.output === 'pull-run' && p.channel === 'x') ?? [];
+      expect(displacement.length).toBe(held ? 0 : 1);
+      // Holding still changes the drawing, not the measured friction experiment.
+      expect(endValue(evaluateSim(sim, values)['pull-run'] as Timeline, 'x')).toBeGreaterThan(0);
+    }
   });
 
   it('the side push turns the car fifteen degrees and it stays on the runway', () => {

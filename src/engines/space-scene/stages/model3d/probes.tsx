@@ -27,6 +27,7 @@ import {
   type BufferAttribute,
   type Camera,
   type Intersection,
+  type Mesh,
   type Object3D,
   type PerspectiveCamera,
   type Plane,
@@ -175,7 +176,7 @@ export function LabelProbe({
       const o = h.object.position;
       _p.set(o.x + h.point[0], o.y + h.point[1], o.z + h.point[2]);
       if (rooted) _p.applyMatrix4(runtime.root);
-      a.shown = h.visible && !clipped(_p);
+      a.shown = h.visible && (!h.clip || !clipped(_p));
       a.depth = _p.distanceTo(camera.position);
       a.r = a.depth > 0 ? (h.radius / a.depth) * focal : 0;
       _p.project(camera);
@@ -255,7 +256,11 @@ export function LabelProbe({
         st.raycaster.far = Math.max(0, dist - 0.02);
         _hits.length = 0;
         st.raycaster.intersectObjects(st.occluders, false, _hits);
-        seen = !_hits.some((hit) => !clipped(hit.point));
+        seen = !_hits.some((hit) => {
+          const materials = (hit.object as Mesh).material;
+          const material = Array.isArray(materials) ? materials[0] : materials;
+          return !material?.clippingPlanes?.length || !clipped(hit.point);
+        });
       }
       a.occluded = !seen;
     }
@@ -369,10 +374,10 @@ export function SitesProbe({
     if (active.length === 0) return;
     const W = state.size.width;
     const H = state.size.height;
-    const put = (key: string, v: Vector3) => {
+    const put = (key: string, v: Vector3, clip: boolean) => {
       let pt = bridge.sites.get(key);
       if (!pt) bridge.sites.set(key, (pt = { x: 0, y: 0, shown: false }));
-      const cut = clipping !== null && clipping.some((pl) => pl.distanceToPoint(v) < 0);
+      const cut = clip && clipping !== null && clipping.some((pl) => pl.distanceToPoint(v) < 0);
       v.project(state.camera);
       pt.x = (v.x * 0.5 + 0.5) * W;
       pt.y = (-v.y * 0.5 + 0.5) * H;
@@ -382,8 +387,8 @@ export function SitesProbe({
       const site = sites[i]!;
       const h = handles.get(site.bone);
       if (!h) continue;
-      site.points.forEach((p, j) => put(siteKey(i, j), sitePoint(p, h, cache, siteKey(i, j), _p)));
-      put(siteKey(i, 'c'), sitePoint(siteCentroid(site.points), h, cache, siteKey(i, 'c'), _p));
+      site.points.forEach((p, j) => put(siteKey(i, j), sitePoint(p, h, cache, siteKey(i, j), _p), h.clip));
+      put(siteKey(i, 'c'), sitePoint(siteCentroid(site.points), h, cache, siteKey(i, 'c'), _p), h.clip);
     }
   });
   return null;

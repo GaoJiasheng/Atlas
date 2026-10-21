@@ -31,6 +31,22 @@ const CARD_SHAPE = t(
   '从 2 毫米厚的灰褐色硬纸板上剪下的形状，竖着夹在支架上，正对手电筒 [S1]。在这个模型里，硬纸板不让光穿过，照到卡片的光全被挡住，后面的屏幕上就留下它的轮廓。\n\n转动卡片，影子会变窄；侧对手电筒时，只剩一条细细的影子。影子是从手电筒那边看过去卡片的轮廓，不会有卡片的颜色，也不会有印在上面的图案。',
 );
 
+/** Compact names for the four-column part chain; full names remain on the model and in the inspector. */
+export const CHAIN_NAMES: Record<string, T> = {
+  'torch-stand': t('Clamp', '夹座'),
+  'card-circle': t('Round', '圆卡片'),
+  'card-square': t('Square', '方卡片'),
+  'card-triangle': t('Triangle', '三角卡片'),
+  'card-circle-big': t('Big disc', '大圆卡片'),
+  cone: t('Cone', '圆锥'),
+  'screen-stand': t('Stand', '支架'),
+  'light-sensor': t('Sensor', '传感器'),
+  datalogger: t('Logger', '记录器'),
+  'box-torch': t('Torch', '手电筒'),
+  'box-ball': t('Ball', '球'),
+  'box-inside': t('Darkness', '黑暗'),
+};
+
 export const PART_TEXT: Record<string, PartText> = {
   torch: part(
     t('Torch', '手电筒'),

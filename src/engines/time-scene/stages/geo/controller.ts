@@ -39,7 +39,7 @@ import type { Playhead } from '../../lib/playhead';
 import { frameAt, type Frame } from '../../lib/frame';
 import { areaLabelPoint, metresPerPixel, pickWorldCopy, pointAlong, projectNearCentre, scaleBar, type LngLat } from '../../lib/geo';
 import { referencePair } from '../../lib/stats';
-import { formatTime } from '../../lib/format';
+import { formatTime, formatTimeRange } from '../../lib/format';
 import { aspectBounds, regionGraticule, regionMaxBounds } from '../../lib/region';
 import { parseRivers, riverCollection, riversAt, type RiverN } from '../../lib/rivers';
 import { decodeLocalLand, localEraAt, localLandFilter, parseLocalLand, type LocalEra } from '../../lib/localLand';
@@ -505,7 +505,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
         return {
           type: 'Feature',
           geometry: { type: 'LineString', coordinates: mv.coords },
-          properties: { id, color: sideColor(mv.m.movement.holder, mv.m.start), width: hl.has(id) ? base + 0.8 : base, op: mv.opacity },
+          properties: { id, color: sideColor(mv.m.movement.holder, mv.m.start), width: hl.has(id) ? base + 0.8 : base, op: mv.opacity, persist: mv.persisting },
         };
       });
     setIfChanged(
@@ -824,8 +824,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   };
 
   const dateText = (from: Parameters<typeof formatTime>[0], to?: Parameters<typeof formatTime>[0]) => {
-    const a = formatTime(from, locale, model.datePrecision);
-    const s = to !== undefined ? `${a} – ${formatTime(to, locale, model.datePrecision)}` : a;
+    const s = formatTimeRange(from, to, locale, model.datePrecision);
     return locale === 'en' ? s.toLocaleUpperCase('en') : s;
   };
 

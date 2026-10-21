@@ -491,7 +491,7 @@ colors.ts  time-scene.css
 |---|---|
 | `entities.json` | `id, name, bloc, joined, left?, color?`。`bloc` 是 `axis/allied/neutral` 之一（引擎只有这三个值，**显示名按主题改**：`topic.yaml` 可选 `blocLabels: { axis?, allied?, neutral?, out? }`，每项 `{ en, zh }`，`out` = 图例的“已退出战争”；图例、实体详情、实体引线说明都先读它，缺省回退全站 `time.bloc.*`，解析在 `lib/blocLabels.ts` 的 `blocLabel()`；一战：`allied` = 协约国、`axis` = 同盟国；实体不能随时间改名，要换名写在控制区 `label` 里），或**换阵营**时按时间排的数组 `[{ "bloc": "axis", "from": "1940-06-10", "to": "1943-10-13" }, { "bloc": "allied", "from": "1943-10-13" }]`（`[from, to)`，只有最后一段可省 `to`，段不能重叠；第一段之前按第一段算，空档里按刚结束的那段算，`sideAt(entity, t)` 在 `lib/bloc.ts`）。**`joined` 之前和 `left` 之后一律按 `neutral`（`blocAt`）**：地图填充、participation、地名、右上卡面积带、图例的“已退出战争”项（`time.bloc.out`）都用它；事件 / 行动的阵营色仍用 `sideAt`；右上卡行数多时只画 `t` 时在战的实体（有面积的在前，按 `t` 时面积；其余按 `joined`），不在战的进“+N others”。颜色默认取 `t` 时所在阵营的 token：地图控制区、participation、地名、实体引线说明、右上卡的面积带都跟 `t` 走，卡上的参与线按段分色；行动和事件用它们开始时的阵营色；图例对换阵营的实体每个阵营列一行。`color: "token:accent-3"` 或 `#hex` 覆盖（不随阵营变）；列国地图用 `token:holder-N`（见「按国配色」）。`joined` 驱动 participation 图层"点亮"和右上卡的参与线。 |
 | `control.json` | `keyframes[]`，按时间严格升序，`properties.holder` = 实体 id，同一实体可有多个面（或 MultiPolygon）。**两种写法任选**：① GeoJSON：`{ "keyframes": [{ "t", "features": FeatureCollection }] }`（小主题、手写，如 sample-time）；② TopoJSON：`{ "topology": Topology, "keyframes": [{ "t", "object": "<topology.objects 里的名字>" }] }`——所有关键帧共用一份拓扑（不变的海岸、边界只存一次，量化 + 差分编码），大主题（ww2 的 12 帧）用它。拓扑只做宽松校验（`type: "Topology"`、`arcs` 数组、`objects` 记录、`transform` 可选），解码后每个要素按普通控制区要素再校验（`holder` 存在于 entities、环闭合、经纬度范围）。引擎在建 `TimeModel` 时用 `topojson-client` 的 `feature()` 把每帧解成 FeatureCollection（`lib/control.ts` 的 `decodeControl`，顺手把环改回 RFC 7946 绕向，MapLibre 靠绕向分外环和洞），之后的帧、面积、渲染全都不知道有两种写法。ww2 的 `control.json` 由管线生成（见「Geo pipeline」），不手写。面积（右上卡）在客户端按球面公式算，不用写。 |
-| `movements.json` | `from/to` 时间区间 + LineString `path`（从起点画到终点）。`strength`（可选，0 或缺省 = 未知，不显示“N 人”）决定线宽（1–3 px，相对全主题最大值）。**过日界线**：schema 把经度限在 -180..180，作者照实写跳变即可（`… [179.5, 38], [-175, 33] …`）；建 `TimeModel` 时 `unwrapPathCentred`（`lib/geo.ts`，思路同 `unwrapRing`）把相邻点经度差超过 180° 的后续点整体 ±360°，让线走近路（MapLibre 会把 >180 的经度画进邻近世界副本），再把整条路径平移 ∓360° 使其中心落在 -180..180。之后切线（`sliceLine`）、箭头头部、引线锚点、剧场镜头的包围盒（`model.bounds`）全部用 `MovementN.path`（展开后的坐标），不要再读 `movement.path.coordinates`。珍珠港航线（147.7°E 44.9°N → 158°W 23°N）展开后经度 147.7 → 202，长约 5,800 km，不是绕地球一圈的 30,000 km。可选 `linger`（`timePoint`，须晚于 `to`、同一时间标尺）：默认 `to` 之后整条线立刻消失；写了 `linger`，`to` 到 `linger` 之间画完成的整条线（40% 不透明，箭头停在终点），过了 `linger` 在约 2% 时间跨度内淡出。lingering 的线不计入状态串的 MOVEMENTS。可选 `persist: true`（docs/24 C2-lite：输水管、铁路这类**建成后一直在**的线，不能与 `linger` 同用）：`from`→`to` 照常画出，`to` 之后整条线以 `PERSIST_OPACITY`（60%）一直保留到时间轴末尾、不画箭头头部（`MovementFrame.persisting`）；`from` 可等于 `to`（建成那天整条出现）。同样不计入 MOVEMENTS。 |
+| `movements.json` | `from/to` 时间区间 + LineString `path`（从起点画到终点）。`strength`（可选，0 或缺省 = 未知，不显示“N 人”）决定线宽（1–3 px，相对全主题最大值）。**过日界线**：schema 把经度限在 -180..180，作者照实写跳变即可（`… [179.5, 38], [-175, 33] …`）；建 `TimeModel` 时 `unwrapPathCentred`（`lib/geo.ts`，思路同 `unwrapRing`）把相邻点经度差超过 180° 的后续点整体 ±360°，让线走近路（MapLibre 会把 >180 的经度画进邻近世界副本），再把整条路径平移 ∓360° 使其中心落在 -180..180。之后切线（`sliceLine`）、箭头头部、引线锚点、剧场镜头的包围盒（`model.bounds`）全部用 `MovementN.path`（展开后的坐标），不要再读 `movement.path.coordinates`。珍珠港航线（147.7°E 44.9°N → 158°W 23°N）展开后经度 147.7 → 202，长约 5,800 km，不是绕地球一圈的 30,000 km。可选 `linger`（`timePoint`，须晚于 `to`、同一时间标尺）：默认 `to` 之后整条线立刻消失；写了 `linger`，`to` 到 `linger` 之间画完成的整条线（40% 不透明，箭头停在终点），过了 `linger` 在约 2% 时间跨度内淡出。lingering 的线不计入状态串的 MOVEMENTS。可选 `persist: true`（docs/24 C2-lite：输水管、铁路这类**建成后一直在**的线，不能与 `linger` 同用）：`from`→`to` 照常画出，`to` 之后整条线以 `PERSIST_OPACITY`（90%），实线底与虚线同样清晰、线宽在 zoom 10→13 从原宽增至 2.5 倍（普通行动与 `linger` 不变），一直保留到时间轴末尾、不画箭头头部（`MovementFrame.persisting`）；`from` 可等于 `to`（建成那天整条出现）。同样不计入 MOVEMENTS。 |
 | `events.json` | `t`、可选 `until`、`at`、`kind`、`importance`（**3 最重要 = 点最大**，1 最小）、`sides/forces/casualties/result`。`kind`：`battle`、`landing`（这两种必须有 `sides` + `result`）、`bombing`（必须有 `sides`）、`surrender`、`political`、`massacre`、`siege`、`evacuation`、`liberation`、`atrocity`、`disaster`（流感、饥荒、击沉客轮；不分阵营）、`site`（`bombing` 以外新增的各种 `sides`/`result` 都可选）。可选 `detail: { en, zh }`（inspector 里默认收起的"细看 / More"）与 `sources: ["S1", "S7"]`（`sources.json` 的编号，inspector 摘要后显示 mono 上标，点开来源弹层）。`sensitive` 只是可选元数据，不影响显示。 |
 | `presets.json`（可选） | `{ "presets": [{ "id": "singapore-island", "label": { "en": "Singapore", "zh": "新加坡" }, "camera": { "center": [103.82, 1.35], "zoom": 9.2 } }] }`。注册成镜头预设，排在 `world` / `theatre` 之后（`world` = 1、`theatre` = 2，这些从 3 起编号，第 10 个是 0，再往后只有按钮）；`label` 是按钮文字（一两个词）；正文 `<FlyTo preset>` 用这些 id。VIEW 组只放地理预设，章节不是预设。 |
 | `sources.json`（可选） | 见上文"加一个主题"第 4 步。 |
@@ -561,7 +561,7 @@ datedLayers:
 
 - 文件必须是 **TopoJSON，且只有一个与 `file` 同名的对象**。`point` 对应 Point / MultiPoint，`line` 对应 LineString / MultiLineString，`area` 对应 Polygon / MultiPolygon。可以量化（带 `transform`，管线 `quantization=100000` 的输出照用）。每个几何的 `properties` 至少 `{ f: 1960 }`；可选 `u: 1980`、`certainty: approximate`（缺省 `certain`）、`h: 12`（楼层元数据，本轮不按高度改点大小）。`f` / `u` 是**有限的十进制年数字**，预先转换 ISO 日期；`f < u`，无 `u` 表示一直保留。语义复用 `lib/dated.ts` 的 `[from, to)`：开始年出现、结束年消失。数组宜按 `f` 排序；引擎载入时只把日期索引排序一次，几何顺序不影响结果。
 - 章节及拍的 `layers` 直接写图层 `id`，比如 `[base, control, housing-blocks, dated-rail, battles]`；没列出即关闭。图层文件的年份不另行扩展时间轴范围，章节日期或控制区关键帧（不是拍的日期）应覆盖要展示的年代。控制面板 LAYERS 每层一行，开关和章节共用 store（URL 状态同其它图层）。KEY 每个开启图层一行；点图层另有“过去一年新增”图例。
-- 每层一个 GeoJSON source，载入后只 `setData` 一次。MapLibre GPU 过滤数字属性：`f <= T && (u ?? +∞) > T`；点半径随缩放为 1.2–3 px。过去一年新增点（`T-1 < f <= T`，且尚未消失）大一号、signal 色描边。线为 hairline；面淡底 .35、同色 .6 px 边，近似面淡底再 ×.7、边虚线。放在控制区之上、事件之下；颜色随 paper / cinema token 更新。
+- 每层一个 GeoJSON source，载入后只 `setData` 一次。MapLibre GPU 过滤数字属性：`f <= T && (u ?? +∞) > T`；点半径随缩放为 1.2–3 px。过去一年新增点（`T-1 < f <= T`，且尚未消失）大一号、signal 色描边。线宽从 zoom 10 的 1 px 线性增至 zoom 13 的 2.5 px，不透明度 .9；面淡底 .35、同色 .6 px 边，近似面淡底再 ×.7、边虚线。放在控制区之上、事件之下；颜色随 paper / cinema token 更新。
 - `lib/datedLayers.ts` 对开始、结束和新增窗口的结束边界各建有序索引，二分求当前计数。只在**可见集合变化**时重设过滤器（不是只比较计数：同年拆一栋又建一栋也要更新）；播放头在两次边界之间缓动不会逐帧 `setFilter`。新增窗口同样单独缓存。
 - `count: true` 的当前可见要素数出现在左列可收起的 PLATE 块，关闭图层读数为 0，尚未载入为 `—`；手机随 PLATE 隐藏。MultiPoint 按一个要素计数，要按楼栋计数请每栋写一个 Point。`stats().datedLayers[id]` 给出 `total / visible / recent / filterUpdates`，用于性能与边界回归检查；关闭时 `visible` 为 0。
 - `pnpm validate` 检查文件、对象、几何、日期区间、holder、token、双语以及章节 / 拍的图层引用；图层 id 与其它主题对象共用唯一命名空间，不能占用内置图层名。
@@ -655,6 +655,7 @@ end_i   = start_{i+1}；本章最后一拍更晚就取最后一拍（最后一�
 
 - ← → 换章（核心处理；焦点在标尺上时由 Timeline 自己转发）；Shift+← → 按一步微调时间。
 - 地图容器 `data-keys="own"`；点地图不会抢键盘焦点（canvas 被点击聚焦后立即 blur），Tab 进入地图仍可用方向键平移。
+- 引线和锚点不接收指针；拖动从标注开始或在标注上松手仍平移地图，原地点按事件标注才选中（键盘 Enter / 空格照常）。标注的日期区间两端显示相同时只写一次。
 - 用户平移/缩放 `moveend` 后 250 ms 防抖 `setCamera()`；章节切换 `flyTo`（2.2 s），首次加载/深链接 `jumpTo`；`prefers-reduced-motion` 时不飞、不脉冲、虚线不流动、REFERENCE 不渐变。
 - 主题切换：观察 `<html data-theme>`，重读 token、`setPaintProperty`、重画斜线图，不重建地图。
 
@@ -763,6 +764,7 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
   "model": "/models/aircon.glb",          // 可选；有 mesh 零件时必填，放 public/models/，引擎自动加 base
   "parts": [{
     "id": "compressor", "name": {en, zh}, "group": "refrigerant",
+    "chainName": {en, zh},                // 可选：只用于右上零件链的短名；引线 / 索引 / 详情仍用 short / name
     "summary": {en, zh}, "detail": {en, zh},   // summary 也是引线标注的一行说明；detail 在详情卡「了解更多」后
     "primitive": { "kind": "cylinder", "size": [0.3, 0.3, 0.5], "at": [1, 0, 0], "rotation": [0, 0, 90], "color": "steel" },
     "repeat": { "count": 4, "axis": [1, 0, 0], "spacing": 0.76 },   // 可选：实例化重复（一次绘制）
@@ -771,6 +773,7 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
     "connects": ["condenser"],             // 详情卡芯片 + 右上零件链路的连线
     "shell": true,                         // 可选：外壳。主题里有 shell 零件时，X-RAY 只把 shell 变透明，其余保持实心
     "castShadow": false,                   // 可选：覆盖自动投影判断（默认 ≥ 模型半径 28% 的零件投影）
+    "clip": false,                         // 可选：默认 true；false 不受默认或命名剖切影响，也不填剖面
     "level": "P5"                          // 可选，规划用，不渲染
   }, {
     "id": "wall-section", "name": {en, zh}, "summary": {en, zh}, "detail": {en, zh},
@@ -1055,6 +1058,8 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
 
 ### SpaceScene · 试一试（sim）
 
+绑定的补充规则：`pose` 没有列出当前值时保留章 / 拍姿态，只有显式 `null` 强制回静止；几条绑定动同一零件时非静止的那条胜出。`tint.max`（0–1）指定实际混色上限，默认 0.55 保持既有外观，`max: 1` 可以完全染成目标深色；它仍只染零件自己的材质槽 0。
+
 docs/22 §4.3（E-SIM 核心，磁铁与电路共用）+ docs/23 §4（电路模型与电路图卡）。一个 SpaceScene 主题可以在 `parts.json` 里加一段 `sim`：读者能改的几个量（控件）、一个纯函数模型、模型给出的量（输出），以及控件 / 输出到零件、流、动画的绑定。没有独立的 Simulation 引擎（docs/03 §C）。代码：`sim-schema.ts`（zod 与交叉校验）、`lib/sim/`（`controls.ts` 值的合成与 URL、`index.ts` 模型注册表、`circuit.ts`、`magnet.ts`、`force.ts`、`energy.ts`、`lifecycle.ts`、`matter.ts`、`light.ts`、`sun.ts`、`shadow.ts`、`bind.ts`、`trial.ts`、`diagram.ts`，全部纯函数、有单测 `tests/space-scene/sim.test.ts`）、`explorer/TryIt.tsx`（试一试卡片）、`hud/CircuitCard.tsx`（电路图卡）、`hud/sim.ts`（HUD 读写的入口）。
 
 ```jsonc
@@ -1091,7 +1096,7 @@ docs/22 §4.3（E-SIM 核心，磁铁与电路共用）+ docs/23 §4（电路模
 - **值从哪里来**：store 字段 `sim` 只存"设过的值"（不累积：章 `state.sim.set`，拍 `sim.set` 叠在本章的上面，读者在卡片 / 键 / 电路图上改的）；显示的值 = 默认 ⊕ 各选择的 `sets` ⊕ 设过的值，无效值忽略（`resolveSimValues`）。换章回到那一章的 `set`；ESC 不清；URL `sim`（见「URL 参数」）；演示的保存 / 恢复带着它；拍的深链接 `b` 照常。
 - **模型**（`lib/sim/index.ts evaluateSim`，同步、< 1 ms，只在值变化时算）：`circuit` = 节点分析（docs/23 §4.2）：电池是诺顿等效（每节 `emf` 默认 1.5 V、`r` 每节内阻，`flip` 指定某节由开关翻转成 −EMF；`cells` 是数或步进控件），`switch`（合上 `closed` 默认 0.001 Ω，断开去掉），`wire`（`r`），`gap`（选择控件 → `materials` 的欧姆数，没列 = 绝缘、断开），`load`（固定 `load` 或选择控件；`present` 开关 = 装没装上；`loads` 的 `lamp`（`rated` W）/ `buzzer`（`on` A 以上响）/ `motor`（`at` V 时 `rpm` 的可视转速，∝ 电压））；每个连通块接地一个节点，高斯消元（部分主元），没有电池的块电流为 0。量名（输出的 `from`）：`current:<边>`、`volts:<边>`（电池 = 端电压）、`power:<边>`、`brightness:<边>`（灯功率 ÷ `reference.power` × 100）、`speed:<边>`、`sound:<边>`（`on` / `off`）、`status:<电池边>`（`open` < 1 mA、`short` > `short` A（默认 3）、`over-rating`：同一回路里有灯超过额定 × `over`（默认 1.5）、否则 `closed`）、`edges`（每条边的带号电流，from → to）。`magnet` = Gilbert 磁荷模型、场态、场线、铁屑、指南针、力箭头，见下面「SpaceScene · 试一试 · 磁铁」。validate 核对输出的 `from` 是这个模型的量、种类（数 / 状态 / 向量）对得上。
 - **输出种类**：`number`、`state`、`vector`、`timeline`（一段"跑一遍"的过程：见「时间线与回放」；只能被 `play`、带 `channel` 的 `stretch` 和力的箭头读，不进卡片的观察量、读数、glow 等）。
-- **绑定**（`lib/sim/bind.ts simEffects`，舞台叠在章节状态上）：零件 `visible`（条件：`true` = 真值 / 非零 / 不是第一个状态；或 `{ eq | ne | in | gte | lte }`）、`pose`（值 → `poses` 里的姿态，只动这些零件，压在章 / 拍的姿态之上；几条绑定动同一零件时非静止的那条胜出）、`glow`（值 ÷ `full`，`sqrt` 或 `linear`，0–2：从暗红渐到 `color`，过 1 更白；只点亮零件自己的材质，即槽 0：灯丝不带支撑丝和铜座）、`tint`（值 ÷ `full`，0–1，`linear` 或 `sqrt`：向 `color` 混色，强度上限同 signal 高亮；铁芯通电变磁铁；同 `glow` 只染零件自己的材质，即槽 0，其余槽照常跟章 / 拍的 `highlight`，`lib/sim/bind.ts slotTint`）、`count`（`repeat` 零件只显示前 k 份：`true` = k 取值本身，或 `{ per, minus }` = (值 − minus) ÷ per 取整、≥ 0：50 g 挂钩上的 50 g 槽码写 `{ per: 50, minus: 50 }`，两只 200 g 砝码写 `{ per: 200 }`（docs/30 F8；`per` 原先是乘数，没有主题用过）；该零件不能有 `extra`）、`offset` / `rotate`（(值 − origin) × per（rotate 的 per 默认 1），在姿态之后沿场景轴移 / 绕（姿态后的）零件中心或 `pivot` 场景点转，0.5 s 缓动；`settle: { period, damping }` = 阻尼摆动（rotate：转角走近路；offset：挂在弹簧下的挂钩跟着弹簧回弹几下停住，docs/30 F4）、`place`（三维向量输出 `{ x, y, z }` → `centre + radius × 单位向量`；`{ centre: [x,y,z], radius, face?: "centre" }`，沿球面 0.5 s 缓动、深链接直接终值；`face: "centre"` 使局部 +Y 朝向 centre）、`stretch`（弹簧伸缩）、`play`（播放时间线通道）——这两项见下面「弹簧伸缩」「时间线与回放」、`at`（命名位置环）、`state`（铁屑排哪个场态）——后三者见磁铁一节；零件 `fill`（按模型体积画液面，见「液面」）；流 `visible`（可加 `paths: [id]` 只控制这些路径，独立于整条流与强度）、`state`（场线流）、`intensity`（向量输出按 `paths` 的 id：每条路径的粒子速度 ∝ |值| ÷ `full`（夹在 ±2），负值反向，< 1 % 的路径 0.3 s 淡出；相位逐帧积分，变速不跳；`mode: "density"` = 速度不变、**可见粒子的比例** = |值| ÷ `full`（≤ 1，0.3 s 缓动；粒子按路径上均匀散开的次序出现，不扎堆），能量主题用它表示"这一份多 / 少"；向量的键写成 `<流 id>:<路径 id>` 时，每条流只取以自己 id 开头的那些）、`stops`（状态 → 粒子色，如短路 `token:hot`）；动画 `rpm`（rotate 的转速 = 值 × per，角度积分）、`enabled`（条件不成立时 0.15 s 缓停）。运转（RUN / FLOW）只管"动起来"：灯亮不亮、零件在哪儿不受它影响。
+- **绑定**（`lib/sim/bind.ts simEffects`，舞台叠在章节状态上）：零件 `visible`（条件：`true` = 真值 / 非零 / 不是第一个状态；或 `{ eq | ne | in | gte | lte }`）、`pose`（值 → `poses` 里的姿态，只动这些零件，压在章 / 拍的姿态之上；几条绑定动同一零件时非静止的那条胜出）、`glow`（值 ÷ `full`，`sqrt` 或 `linear`，0–2：从暗红渐到 `color`，过 1 更白；只点亮零件自己的材质，即槽 0：灯丝不带支撑丝和铜座）、`tint`（值 ÷ `full`，0–1，`linear` 或 `sqrt`：向 `color` 混色，上限由 `max` 指定（默认 0.55，范围 0–1）；铁芯通电变磁铁；同 `glow` 只染零件自己的材质，即槽 0，其余槽照常跟章 / 拍的 `highlight`，`lib/sim/bind.ts slotTint`）、`count`（`repeat` 零件只显示前 k 份：`true` = k 取值本身，或 `{ per, minus }` = (值 − minus) ÷ per 取整、≥ 0：50 g 挂钩上的 50 g 槽码写 `{ per: 50, minus: 50 }`，两只 200 g 砝码写 `{ per: 200 }`（docs/30 F8；`per` 原先是乘数，没有主题用过）；该零件不能有 `extra`）、`offset` / `rotate`（(值 − origin) × per（rotate 的 per 默认 1），在姿态之后沿场景轴移 / 绕（姿态后的）零件中心或 `pivot` 场景点转，0.5 s 缓动；`settle: { period, damping }` = 阻尼摆动（rotate：转角走近路；offset：挂在弹簧下的挂钩跟着弹簧回弹几下停住，docs/30 F4）、`place`（三维向量输出 `{ x, y, z }` → `centre + radius × 单位向量`；`{ centre: [x,y,z], radius, face?: "centre" }`，沿球面 0.5 s 缓动、深链接直接终值；`face: "centre"` 使局部 +Y 朝向 centre）、`stretch`（弹簧伸缩）、`play`（播放时间线通道）——这两项见下面「弹簧伸缩」「时间线与回放」、`at`（命名位置环）、`state`（铁屑排哪个场态）——后三者见磁铁一节；零件 `fill`（按模型体积画液面，见「液面」）；流 `visible`（可加 `paths: [id]` 只控制这些路径，独立于整条流与强度）、`state`（场线流）、`intensity`（向量输出按 `paths` 的 id：每条路径的粒子速度 ∝ |值| ÷ `full`（夹在 ±2），负值反向，< 1 % 的路径 0.3 s 淡出；相位逐帧积分，变速不跳；`mode: "density"` = 速度不变、**可见粒子的比例** = |值| ÷ `full`（≤ 1，0.3 s 缓动；粒子按路径上均匀散开的次序出现，不扎堆），能量主题用它表示"这一份多 / 少"；向量的键写成 `<流 id>:<路径 id>` 时，每条流只取以自己 id 开头的那些）、`stops`（状态 → 粒子色，如短路 `token:hot`）；动画 `rpm`（rotate 的转速 = 值 × per，角度积分）、`enabled`（条件不成立时 0.15 s 缓停）。运转（RUN / FLOW）只管"动起来"：灯亮不亮、零件在哪儿不受它影响。
 - **多路径流**（`flows[].paths: [{ id, path }]`，≤ 16 条，代替 `path`）：一条流、一次绘制；粒子按路径长度分配（每条 ≥ 4），每条路径一行浮点纹理，shader 里每条路径一个相位 / 透明度 / 闭合标志（`flowMaterial.ts`）。电路主题每条边一条路径（与导线 sweep 同源，生成脚本写出两者）。不能 `bilateral`。
 - **读数**：`telemetry` 行写 `follow: "<数输出>"`（不写 `idle` / `run`）：跟随输出值、0.3 s 一阶滞后（`lag` 可改）、小数位取输出的；`follow` 写 2–3 个同单位的数输出 = 一行两值（`FALL TIME · L · R 0.45 · 0.45 s`）；`scope: "observe"` = 只显示本章卡片观察的那几个，本章一个都不观察时显示 `—`（一行"重量"在落体章读 `weight`、弹簧章读 `load-weight`，docs/30 F6）；本章 `try.observe` 里的输出在 PLATE 块加粗；块尾一行 `SIM <状态> · <本章试一试控件的值>`：状态 = 本章卡片观察的状态输出，否则先猜后看观察的，否则第一个会随卡片控件或本章 `set` 的控件变的；都没有时电路、磁铁照旧写模型的第一个状态，力的模型（几套互不相干的实验，`SEPARATE_EXPERIMENTS`）不写状态；短路 / 超额定用 hot 色。
 - **章节**：
@@ -1491,6 +1496,8 @@ docs/36 §4 E-MA1。`kind: "matter"` 注册于 `SIM_KINDS`、`simQuantities`、`
 
 ### SpaceScene · 液面（`fill`）
 
+剖切的材质约定：`fill` 绑定的封闭液体保留自身颜色的剖面填充，不加金色剖面线。静态 `membrane` 液体目前只裁表面、不补剖面：该材质也用于真实开放的翅膜 / 气囊，不能安全地按材质把背面都当封闭液体的切面；静态液体要有可靠剖面应改用有封闭填充几何的 `fill` 绑定。`states-of-matter` 的盆水 / 杯水已有 `fill` 绑定与水色剖面；静态的针筒水柱、水碟与罐中饮料保留透明表面的现有读法，未为了加剖面而改变体积模型。零件 `clip: false` 始终完整显示，不参与默认或命名剖切，也不填剖面，适用于实验台 / 边桌等背景。
+
 docs/36 §4 E-MA2。数输出或步进控件可绑定：
 
 ```jsonc
@@ -1598,6 +1605,7 @@ core 演示系统（字幕卡、两级进度条、自动播放、语音、拍键
 ### 交互（舞台）
 
 - 点零件选中（拖动结束在零件上不算点击）；点空白处取消；拖动（OrbitControls，带阻尼）旋转，停手 400 ms 后 `setCamera()` 回写 URL（→ FREE CAMERA）。
+- 零件引线标注的 ≥44 px 文字热区原地点按选中，拖动仍交给舞台旋转；引线、锚点和整组标注不接收指针，从它们上面拖动或松手不会挡住镜头。
 - 缩放下限默认是模型半径（非 context 零件）的 0.9 倍；章、拍、预设或封面镜头比它更近时，下限降到那个镜头距离的 70 %（`CameraRig` `relax`），放大的子模型、小展品的近景不会被推远；下一个更远的作者镜头恢复默认。上限仍是默认下限的 20 倍。
 - 悬停零件：signal 色弱边缘；触摸长按 ≥ 400 ms 选中。选中：signal 色菲涅尔边缘 + 极淡染色（paper 边缘清晰；dark plate 边缘发光 ≤ .35，不脉动）。
 - 视图：`xray` 未选中零件透明 .15；`isolate` 只显示选中零件和同组零件；图层开关对所有视图生效（包括选中的零件）。可见性规则在 `lib/visibility.ts`，有单测。

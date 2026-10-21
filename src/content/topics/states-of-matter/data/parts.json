@@ -10814,6 +10814,7 @@
      ]
     }
    ],
+   "clip": false,
    "context": true,
    "castShadow": true
   },
@@ -10910,6 +10911,7 @@
      ]
     }
    ],
+   "clip": false,
    "context": true,
    "castShadow": true
   },
@@ -12136,24 +12138,6 @@
      "en": "Water poured onto the sand",
      "zh": "倒进沙里的水"
     }
-   },
-   {
-    "id": "beam",
-    "kind": "toggle",
-    "default": false,
-    "label": {
-     "en": "Stone and sponge on the beam balance",
-     "zh": "石头和海绵放上天平"
-    }
-   },
-   {
-    "id": "squeeze",
-    "kind": "toggle",
-    "default": false,
-    "label": {
-     "en": "Squeeze the sponge",
-     "zh": "捏海绵"
-    }
    }
   ],
   "outputs": [
@@ -12524,18 +12508,36 @@
   "bind": [
    {
     "control": "weigh-object",
-    "part": [
-     "stone",
-     "sponge",
-     "marble",
-     "clay-ball",
-     "water-beaker"
-    ],
+    "part": "stone",
     "pose": {
-     "stone": "pan-stone",
-     "sponge": "pan-sponge",
-     "marble": "pan-marble",
-     "clay": "pan-clay",
+     "stone": "pan-stone"
+    }
+   },
+   {
+    "control": "weigh-object",
+    "part": "sponge",
+    "pose": {
+     "sponge": "pan-sponge"
+    }
+   },
+   {
+    "control": "weigh-object",
+    "part": "marble",
+    "pose": {
+     "marble": "pan-marble"
+    }
+   },
+   {
+    "control": "weigh-object",
+    "part": "clay-ball",
+    "pose": {
+     "clay": "pan-clay"
+    }
+   },
+   {
+    "control": "weigh-object",
+    "part": "water-beaker",
+    "pose": {
      "water": "pan-water"
     }
    },
@@ -12632,24 +12634,6 @@
     "part": "jug-water",
     "fill": {
      "per": 0.000001
-    }
-   },
-   {
-    "control": "beam",
-    "part": [
-     "beam-balance",
-     "stone",
-     "sponge"
-    ],
-    "pose": {
-     "true": "beam-tilt"
-    }
-   },
-   {
-    "control": "squeeze",
-    "part": "sponge",
-    "pose": {
-     "true": "sponge-squeezed"
     }
    },
    {

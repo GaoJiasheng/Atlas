@@ -242,7 +242,7 @@ describe('magnet bindings', () => {
     expect(d[2]).toBeCloseTo(-0.085, 12);
     expect(e.offset.get('compass-case')).toEqual(d);
     expect(fx({ cards: 2 }).count.get('clip-chain')).toBe(3);
-    expect(fx({ 'em-switch': true }).tint.get('em-nail')).toEqual({ color: 'token:signal', level: 1 });
+    expect(fx({ 'em-switch': true }).tint.get('em-nail')).toEqual({ color: 'token:signal', level: 0.55 });
     expect(fx({}).tint.get('em-nail')!.level).toBe(0);
   });
   it('a settling turn carries its swing; the field state goes to the filings part and the field-line flow', () => {

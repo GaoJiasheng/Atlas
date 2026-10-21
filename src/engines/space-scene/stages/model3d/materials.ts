@@ -324,7 +324,12 @@ export function styleFibreGrain({ material, uniforms }: PartMaterial, fibre: Fib
   uniforms.uGrain.value = strength * GRAIN_STRENGTH;
 }
 
-/** Clip by the cutaway plane; closed parts fill their cut face (double-sided membranes never: their back is a face, not a section). */
+/** A part can opt out of all cutaway planes, including named cuts. */
+export function clippingForPart(part: { clip?: boolean }, clipping: Plane[] | null): Plane[] | null {
+  return part.clip === false ? null : clipping;
+}
+
+/** Clip by the cutaway plane; the caller marks solids and filled liquids closed, leaving open membrane backs unfilled. */
 export function setPartClipping({ material, uniforms }: PartMaterial, clipping: Plane[] | null, closed: boolean, twoSided: boolean): void {
   material.clippingPlanes = clipping;
   const side = clipping || twoSided ? DoubleSide : FrontSide;

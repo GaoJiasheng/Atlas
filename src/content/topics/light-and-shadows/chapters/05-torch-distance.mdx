@@ -11,7 +11,7 @@ state:
   cutaway: "none"
   layers: ["source", "objects", "sheets", "screen", "rays"]
   labels: ["torch", "card-circle", "screen-board"]
-  camera: {"position": [-0.05, 1.08, 3.3], "target": [-0.05, 1.04, 0.05], "fov": 20}
+  camera: {"position": [-1.6, 1.5, 1.25], "target": [-0.13, 1.03, 0.05], "fov": 30}
   summary: {"en": "The nearer the torch is to an object, the bigger the object's shadow, as long as the object and the screen stay where they are.", "zh": "只要物体和屏幕不动，手电筒离物体越近，物体的影子越大。"}
   sim:
     set: {"object": "card-circle", "material": "none", "turn": 0, "d-torch": 20, "d-screen": 30}
@@ -38,7 +38,7 @@ state:
     - sim: {"set": {"d-torch": 60}}
       labels: ["torch", "card-circle", "screen-board"]
       caption: {"en": "Move it back to sixty centimetres. The shadow shrinks to twelve centimetres, but it is still bigger than the card.", "zh": "把它移远到六十厘米，影子缩小到十二厘米，但仍然比卡片大。"}
-    - camera: {"position": [-1.25, 1.42, 0.62], "target": [0.12, 1.03, 0.05], "fov": 30}
+    - camera: {"position": [-1.6, 1.5, 1.25], "target": [-0.13, 1.03, 0.05], "fov": 30}
       sim: {"set": {"d-torch": 30}}
       labels: ["torch", "card-circle", "screen-board"]
       caption: {"en": "Only the torch moved. The card, the screen and the distance between them stayed the same, so this is a fair test of one thing: how far away the torch is.", "zh": "只有手电筒在动。卡片、屏幕和它们之间的距离都没变，所以这是一个公平测试，只测一个因素：手电筒有多远。"}

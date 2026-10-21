@@ -540,6 +540,8 @@ export const partSchema = z
     name: bilingual,
     /** Card and leader-label name when `name` is long (default: the linked muscle's `short`, else `name`). */
     short: bilingual.optional(),
+    /** Compact name for the top-right part chain only; other labels retain `short` / `name`. */
+    chainName: bilingual.optional(),
     /** Required, except for `context` parts (which may stand outside every group). */
     group: kebabId.optional(),
     /** Required, except for parts that link a `muscle` (then the muscle sheet's). */
@@ -589,6 +591,8 @@ export const partSchema = z
     context: z.boolean().optional(),
     /** Override the automatic shadow choice (only parts ≥ 28 % of the model radius cast). */
     castShadow: z.boolean().optional(),
+    /** Keep this part whole in every cutaway (scenery such as benches and tables). */
+    clip: z.boolean().default(true),
     /**
      * One side of a symmetric pair (lib/bilateral.ts): the engine adds the mirror
      * twin `<id>-r` (`<id>-l` when `side: right`), reflected in the plane through

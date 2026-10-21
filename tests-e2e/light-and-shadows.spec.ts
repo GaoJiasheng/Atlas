@@ -102,6 +102,18 @@ test.describe('light-and-shadows', () => {
     await expect.poll(async () => (await sim(page)).outputs.eye).toBe('bright');
   });
 
+  test('the part chain fits short names while retaining complete bilingual titles', async ({ page }) => {
+    await open(page, '?ch=seeing-light');
+    const chain = page.locator('.space-chain');
+    const torch = chain.locator('.space-chain__node').filter({ has: page.locator('title', { hasText: /^Small torch ·/ }) });
+    const darkness = chain.locator('.space-chain__node').filter({ has: page.locator('title', { hasText: /^Darkness in the box \(drawn\) ·/ }) });
+    await expect(torch.locator('.space-chain__name')).toHaveText('TORCH');
+    await expect(torch.locator('title')).toHaveText('Small torch · 小手电筒');
+    await expect(darkness.locator('.space-chain__name')).toHaveText('DARKNESS');
+    await expect(darkness.locator('title')).toHaveText('Darkness in the box (drawn) · 箱里的黑暗（示意）');
+    expect((await chain.locator('.space-chain__name').allTextContents()).join(' ')).not.toContain('…');
+  });
+
   test('the Sun: clock times, hourly chalk marks and a line graph that falls and rises', async ({ page }) => {
     await open(page, '?ch=sun-shadows');
     await expect(card(page).locator('[data-sim-control="time"]')).toContainText('8.00 am');

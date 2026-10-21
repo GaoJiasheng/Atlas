@@ -118,6 +118,20 @@ export function createLeaders(options: {
   panelFilter?(panel: Element): boolean;
 }): LeaderSystem {
   const { map, container, labelRoot } = options;
+  // MapLibre listens for pan / pinch on its canvas container. Keeping the
+  // placards inside it lets native gestures start and finish on a label,
+  // including the mouseup that ends a drag begun on the bare map.
+  const labelParent = labelRoot.parentNode;
+  const labelNext = labelRoot.nextSibling;
+  const canvasContainer = map.getCanvasContainer();
+  canvasContainer.appendChild(labelRoot);
+  // A drag suppresses click, so release pointer focus here as well. Keyboard
+  // focus stays on the placard until a pointer is used (Enter / Space still select).
+  const releasePointerFocus = () => {
+    const focused = document.activeElement;
+    if (focused instanceof HTMLElement && labelRoot.contains(focused)) focused.blur();
+  };
+  canvasContainer.addEventListener('pointerup', releasePointerFocus);
   const entries = new Map<string, Entry>();
   let svg: SVGSVGElement | null = null;
   let group: SVGGElement | null = null;
@@ -148,8 +162,12 @@ export function createLeaders(options: {
     if (item.clickable) {
       (el as HTMLButtonElement).type = 'button';
       el.addEventListener('click', (ev) => {
+        // A label selects its own event, rather than a map feature beneath it.
+        // Down / move / up still bubble so MapLibre can pan and suppress clicks
+        // after a drag, using the same threshold as the rest of the map.
+        ev.stopPropagation();
         options.onSelect(item.id);
-        // Keep keys working after a pointer click (the stage is a `data-keys="own"` region).
+        // Touch compatibility mouse events may focus after pointerup.
         if ((ev as MouseEvent).detail > 0) el.blur();
       });
     }
@@ -437,6 +455,8 @@ export function createLeaders(options: {
       for (const e of entries.values()) e.el.remove();
       group?.remove();
       entries.clear();
+      canvasContainer.removeEventListener('pointerup', releasePointerFocus);
+      if (labelParent) labelParent.insertBefore(labelRoot, labelNext);
     },
   };
 }

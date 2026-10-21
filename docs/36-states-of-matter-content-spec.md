@@ -1025,3 +1025,9 @@ SpaceScene / Model3DStage，paper 默认、cinema 可切。原型：`archetypes.
 4. （流程）共享 scratchpad：并行代理的 `shoot` 日志若用同名文件会互相覆盖（本轮遇到一次），日志要放各自的子目录。
 
 **门槛**（合并 main f3624a9 之后）：`pnpm check` 0 error / 0 warning；`pnpm validate` 42 topics、0 error / 0 warning；`pnpm test` 124 files / 3,267 tests；`pnpm build` 通过；`CI=1 pnpm e2e` 212 passed（31.7 min）；上面的截图验收四种组合 0 失败。`status: published`。
+
+### 9.3 SpaceScene polish（Codex，2026-10-21）
+
+修正未映射的 sim `pose` 不再强制回静止之后，删除 `beam`、`squeeze` 两个场景开关及其绑定和显示文字。第 01 章第 3 拍直接写 `pose: beam-tilt`，仍保留 `weigh-object: water`；第 02 章第 4 拍直接写 `pose: sponge-squeezed`。称量绑定按五件物体分开，每个只映射自己的选项：例如选着水时，不再把没有石头/海绵变换的 `pan-water` 姿态也绑定给石头/海绵，从而让拍姿态接手。原有姿态数据、倾斜角、缩放和镜头均保留。回归测试核对两拍的零件不再被 sim 姿态遮盖，五个称量选项只接管所选物体。
+
+实验台 `bench` 和小桌 `side-table` 明确写 `clip: false`，水盆命名剖面继续切开实验器材，支撑台面不再出现底部金色剖面条。绑定 `fill` 的液体已有独立的填充网格与同水色的剖面填充，仍按模型体积计算液面。没有 `fill` 绑定的静态 `membrane` 液体保留透明切面，不额外填充：不能给所有 `membrane` 材质统一加金色实体剖面：同一材质也画薄翼和开放膜面，没有封闭体积。保留 `trapped-air` 的开口轮廓，它表示杯中关住的空气，不能仅靠水的剖面填色代替。液体体积、容器轮廓和空气可见条件均不变。

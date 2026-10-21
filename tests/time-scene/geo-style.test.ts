@@ -6,6 +6,7 @@
  */
 import { describe, expect, it } from 'vitest';
 import type { FeatureCollection } from 'geojson';
+import { createExpression, validateStyleMin } from '@maplibre/maplibre-gl-style-spec';
 import { BASE_LAYER_IDS } from '../../src/theme/map-style';
 import { buildGeoStyle, graticule, GROUPS, HI, LAYER, LOCAL, REGION, riverFilter, SRC } from '../../src/engines/time-scene/stages/geo/style';
 import type { ThemeTokens } from '../../src/theme/theme';
@@ -14,6 +15,28 @@ const tokens = { land: '#e1dbcc', water: '#dde2df', paper: '#e9e4d8', ink: '#2a2
 const base = { tokens, landUrl: '/geo/land-50m.json', graticule: graticule() };
 
 describe('GeoStage style', () => {
+  it('scales only completed persist routes and keeps their solid trail at 90% opacity', () => {
+    const style = buildGeoStyle(base);
+    expect(validateStyleMin({ version: 8, sources: style.sources, layers: style.layers }).map((issue) => issue.message)).toEqual([]);
+    const line = style.layers.find((l) => l.id === LAYER.moveLine)!;
+    const trail = style.layers.find((l) => l.id === LAYER.moveTrail)!;
+    if (line.type !== 'line' || trail.type !== 'line') throw new Error('Movement layers must be lines');
+    const width = createExpression(line.paint!['line-width'], 'line-width');
+    const opacity = createExpression(trail.paint!['line-opacity'], 'line-opacity');
+    if (width.result !== 'success' || opacity.result !== 'success') throw new Error('Invalid movement expressions');
+    for (const zoom of [1, 10, 11.5, 13, 15]) {
+      // Historical marches, shipping routes and lingering movements keep their strength-based width.
+      for (const original of [1, 1.8, 3]) {
+        const feature = { type: 2 as const, properties: { width: original, persist: false, op: 0.4 } };
+        expect(width.value.evaluate({ zoom }, feature)).toBe(original);
+        expect(opacity.value.evaluate({ zoom }, feature)).toBeCloseTo(0.12);
+      }
+      const feature = { type: 2 as const, properties: { width: 1, persist: true, op: 0.9 } };
+      expect(width.value.evaluate({ zoom }, feature)).toBe(zoom <= 10 ? 1 : zoom >= 13 ? 2.5 : 1.75);
+      expect(opacity.value.evaluate({ zoom }, feature)).toBe(0.9);
+    }
+  });
+
   it('world map: land-50m, the Southeast Asia overlay, data layers; no plate sources', () => {
     const style = buildGeoStyle(base);
     expect((style.sources.land as { data: unknown }).data).toBe('/geo/land-50m.json');

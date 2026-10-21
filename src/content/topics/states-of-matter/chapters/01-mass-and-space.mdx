@@ -36,7 +36,8 @@ state:
     - sim: {"set": {"weigh-object": "sponge"}}
       labels: ["sponge", "balance-a", "stone"]
       caption: {"en": "The sponge takes up about fifteen times as much space as the stone, but in this model it reads only eleven point five grams.", "zh": "海绵占据的空间差不多是石头的十五倍，可是在这个模型里，它只读十一点五克。"}
-    - sim: {"set": {"weigh-object": "water", "beam": true}}
+    - pose: "beam-tilt"
+      sim: {"set": {"weigh-object": "water"}}
       camera: {"position": [-0.48, 0.3, 0.42], "target": [-0.62, 0.1, -0.17], "fov": 30}
       labels: ["beam-balance", "sponge", "stone"]
       caption: {"en": "On the beam balance, the side with the small stone goes down. A bigger thing is not always heavier.", "zh": "放在天平上，小石头那一边沉了下去。大的东西不一定更重。"}

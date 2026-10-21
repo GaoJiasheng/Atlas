@@ -17,6 +17,11 @@ import { partBounds } from './parts';
 /* Part chain (card)                                                   */
 /* ------------------------------------------------------------------ */
 
+/** Compact chain text only; leader labels and the inspector retain their own names. */
+export function chainName(part: Pick<Part, 'chainName' | 'short' | 'name'>): Part['name'] {
+  return part.chainName ?? part.short ?? part.name;
+}
+
 export interface ChainNode {
   id: string;
   group: string;
