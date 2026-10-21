@@ -1,0 +1,2673 @@
+{
+  "parts": [
+    {
+      "id": "bench",
+      "name": {
+        "en": "Test bench",
+        "zh": "测试台"
+      },
+      "summary": {
+        "en": "Sample test bench: engine fixture.",
+        "zh": "示例测试台：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the seeds engine.",
+        "zh": "种子引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          0.05,
+          -0.02,
+          0
+        ],
+        "color": "wood",
+        "size": [
+          1.9,
+          0.04,
+          0.7
+        ]
+      },
+      "context": true,
+      "clip": false
+    },
+    {
+      "id": "wing-fruit",
+      "name": {
+        "en": "Winged fruit",
+        "zh": "带翅的果"
+      },
+      "group": "fruits",
+      "summary": {
+        "en": "Sample winged fruit: engine fixture.",
+        "zh": "示例带翅的果：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the seeds engine.",
+        "zh": "种子引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "at": [
+          -0.74,
+          0.012,
+          0.05
+        ],
+        "color": "tissue",
+        "tint": "token:food",
+        "size": [
+          0.07,
+          0.004,
+          0.035
+        ],
+        "bevel": 0.0015
+      },
+      "extra": [
+        {
+          "kind": "sphere",
+          "size": [
+            0.008
+          ],
+          "at": [
+            -0.755,
+            0.016,
+            0.05
+          ],
+          "color": "wood",
+          "scale": [
+            1.4,
+            0.8,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "id": "float-fruit",
+      "name": {
+        "en": "Floating fruit",
+        "zh": "会浮的果"
+      },
+      "group": "fruits",
+      "summary": {
+        "en": "Sample floating fruit: engine fixture.",
+        "zh": "示例会浮的果：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the seeds engine.",
+        "zh": "种子引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.026
+        ],
+        "at": [
+          -0.6,
+          0.05,
+          -0.12
+        ],
+        "color": "wood",
+        "scale": [
+          1.25,
+          0.8,
+          1
+        ]
+      }
+    },
+    {
+      "id": "burst-fruit",
+      "name": {
+        "en": "Three-part fruit",
+        "zh": "三瓣的果"
+      },
+      "group": "fruits",
+      "summary": {
+        "en": "Sample three-part fruit: engine fixture.",
+        "zh": "示例三瓣的果：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the seeds engine.",
+        "zh": "种子引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.017
+        ],
+        "at": [
+          -0.47,
+          0.022,
+          0.05
+        ],
+        "color": "tissue",
+        "tint": "token:cut"
+      },
+      "extra": [
+        {
+          "kind": "sphere",
+          "size": [
+            0.017
+          ],
+          "at": [
+            -0.458,
+            0.022,
+            0.07
+          ],
+          "color": "tissue",
+          "tint": "token:cut"
+        },
+        {
+          "kind": "sphere",
+          "size": [
+            0.017
+          ],
+          "at": [
+            -0.482,
+            0.022,
+            0.07
+          ],
+          "color": "tissue",
+          "tint": "token:cut"
+        }
+      ]
+    },
+    {
+      "id": "burst-seeds",
+      "name": {
+        "en": "Seeds of the three-part fruit",
+        "zh": "三瓣果的种子"
+      },
+      "group": "fruits",
+      "summary": {
+        "en": "Sample seeds of the three-part fruit: engine fixture.",
+        "zh": "示例三瓣果的种子：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the seeds engine.",
+        "zh": "种子引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.006
+        ],
+        "at": [
+          -0.47,
+          0.024,
+          0.062
+        ],
+        "color": "tissue",
+        "scale": [
+          1.3,
+          0.9,
+          1
+        ]
+      },
+      "repeat": {
+        "count": 3,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.009
+      }
+    },
+    {
+      "id": "water-strip",
+      "name": {
+        "en": "Water strip",
+        "zh": "水条"
+      },
+      "summary": {
+        "en": "Sample water strip: engine fixture.",
+        "zh": "示例水条：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the seeds engine.",
+        "zh": "种子引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          -0.6,
+          0.004,
+          -0.12
+        ],
+        "color": "membrane",
+        "tint": "token:cold",
+        "size": [
+          0.5,
+          0.008,
+          0.1
+        ]
+      },
+      "context": true
+    },
+    {
+      "id": "day-strip",
+      "name": {
+        "en": "Day strip",
+        "zh": "天数卡"
+      },
+      "group": "day-card",
+      "summary": {
+        "en": "Sample day strip: engine fixture.",
+        "zh": "示例天数卡：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the seeds engine.",
+        "zh": "种子引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          0.0050000000000000044,
+          0.002,
+          0
+        ],
+        "color": "enamel",
+        "size": [
+          0.14,
+          0.004,
+          0.022
+        ]
+      }
+    },
+    {
+      "id": "day-ticks",
+      "name": {
+        "en": "Day ticks",
+        "zh": "天数刻度"
+      },
+      "group": "day-card",
+      "summary": {
+        "en": "Sample day ticks: engine fixture.",
+        "zh": "示例天数刻度：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the seeds engine.",
+        "zh": "种子引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          0.0,
+          0.0045,
+          -0.006
+        ],
+        "color": "token:ink-2",
+        "size": [
+          0.0008,
+          0.001,
+          0.008
+        ]
+      },
+      "repeat": {
+        "count": 13,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.01
+      }
+    },
+    {
+      "id": "day-marker",
+      "name": {
+        "en": "Today",
+        "zh": "今天"
+      },
+      "group": "day-card",
+      "summary": {
+        "en": "Sample today: engine fixture.",
+        "zh": "示例今天：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the seeds engine.",
+        "zh": "种子引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "cone",
+        "size": [
+          0.004,
+          0.008
+        ],
+        "at": [
+          -0.06,
+          0.014,
+          -0.006
+        ],
+        "rotation": [
+          180,
+          0,
+          0
+        ],
+        "color": "token:signal"
+      }
+    },
+    {
+      "id": "half-flag",
+      "name": {
+        "en": "Half germinated",
+        "zh": "一半发芽"
+      },
+      "group": "day-card",
+      "summary": {
+        "en": "Sample half germinated: engine fixture.",
+        "zh": "示例一半发芽：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the seeds engine.",
+        "zh": "种子引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.0008,
+          0.0008,
+          0.03
+        ],
+        "at": [
+          -0.06,
+          0.019,
+          0.006
+        ],
+        "color": "token:ink-2"
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "size": [
+            0.012,
+            0.008,
+            0.001
+          ],
+          "at": [
+            -0.054,
+            0.03,
+            0.006
+          ],
+          "color": "token:cold"
+        }
+      ]
+    },
+    {
+      "id": "towel-dish",
+      "name": {
+        "en": "Seeds on a damp paper towel",
+        "zh": "湿纸巾上的种子"
+      },
+      "group": "day-card",
+      "summary": {
+        "en": "Sample seeds on a damp paper towel: engine fixture.",
+        "zh": "示例湿纸巾上的种子：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the seeds engine.",
+        "zh": "种子引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.04,
+          0.04,
+          0.008
+        ],
+        "at": [
+          0.0,
+          0.004,
+          0.09
+        ],
+        "color": "glass"
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "size": [
+            0.036,
+            0.036,
+            0.001
+          ],
+          "at": [
+            0.0,
+            0.0015,
+            0.09
+          ],
+          "color": "fabric"
+        }
+      ],
+      "shell": true
+    },
+    {
+      "id": "windowsill",
+      "name": {
+        "en": "Windowsill",
+        "zh": "窗台"
+      },
+      "summary": {
+        "en": "Sample windowsill: engine fixture.",
+        "zh": "示例窗台：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the seeds engine.",
+        "zh": "种子引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          0.395,
+          0.006,
+          0
+        ],
+        "color": "enamel",
+        "size": [
+          0.24,
+          0.012,
+          0.12
+        ]
+      },
+      "context": true
+    },
+    {
+      "id": "cupboard",
+      "name": {
+        "en": "Cupboard",
+        "zh": "柜子"
+      },
+      "summary": {
+        "en": "Sample cupboard: engine fixture.",
+        "zh": "示例柜子：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the seeds engine.",
+        "zh": "种子引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          0.6,
+          0.006,
+          0
+        ],
+        "color": "wood",
+        "size": [
+          0.12,
+          0.012,
+          0.12
+        ]
+      },
+      "context": true,
+      "shell": true,
+      "extra": [
+        {
+          "kind": "box",
+          "at": [
+            0.6,
+            0.075,
+            -0.058
+          ],
+          "color": "wood",
+          "size": [
+            0.12,
+            0.15,
+            0.004
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            0.6,
+            0.152,
+            0
+          ],
+          "color": "wood",
+          "size": [
+            0.12,
+            0.004,
+            0.12
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            0.542,
+            0.075,
+            0
+          ],
+          "color": "wood",
+          "size": [
+            0.004,
+            0.15,
+            0.12
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            0.658,
+            0.075,
+            0
+          ],
+          "color": "wood",
+          "size": [
+            0.004,
+            0.15,
+            0.12
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fridge",
+      "name": {
+        "en": "Fridge",
+        "zh": "冰箱"
+      },
+      "summary": {
+        "en": "Sample fridge: engine fixture.",
+        "zh": "示例冰箱：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the seeds engine.",
+        "zh": "种子引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          0.76,
+          0.006,
+          0
+        ],
+        "color": "enamel",
+        "size": [
+          0.12,
+          0.012,
+          0.12
+        ]
+      },
+      "context": true,
+      "shell": true,
+      "extra": [
+        {
+          "kind": "box",
+          "at": [
+            0.76,
+            0.075,
+            -0.058
+          ],
+          "color": "enamel",
+          "size": [
+            0.12,
+            0.15,
+            0.004
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            0.76,
+            0.152,
+            0
+          ],
+          "color": "enamel",
+          "size": [
+            0.12,
+            0.004,
+            0.12
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            0.702,
+            0.075,
+            0
+          ],
+          "color": "enamel",
+          "size": [
+            0.004,
+            0.15,
+            0.12
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            0.818,
+            0.075,
+            0
+          ],
+          "color": "enamel",
+          "size": [
+            0.004,
+            0.15,
+            0.12
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cup-a",
+      "name": {
+        "en": "Cup A",
+        "zh": "A 杯"
+      },
+      "group": "germination",
+      "summary": {
+        "en": "Sample cup a: engine fixture.",
+        "zh": "示例A 杯：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the seeds engine.",
+        "zh": "种子引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.028,
+            0
+          ],
+          [
+            0.034,
+            0.085
+          ],
+          [
+            0.0325,
+            0.085
+          ],
+          [
+            0.0265,
+            0.0015
+          ],
+          [
+            0,
+            0.0015
+          ]
+        ],
+        "segments": 40,
+        "at": [
+          0.34,
+          0.012,
+          0
+        ],
+        "color": "glass"
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "size": [
+            0.026,
+            0.027,
+            0.008
+          ],
+          "at": [
+            0.34,
+            0.0175,
+            0
+          ],
+          "color": "fabric"
+        }
+      ],
+      "shell": true
+    },
+    {
+      "id": "seeds-a",
+      "name": {
+        "en": "Seeds in cup A",
+        "zh": "A 杯里的种子"
+      },
+      "group": "germination",
+      "summary": {
+        "en": "Sample seeds in cup a: engine fixture.",
+        "zh": "示例A 杯里的种子：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the seeds engine.",
+        "zh": "种子引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.0035
+        ],
+        "at": [
+          0.34,
+          0.024,
+          0
+        ],
+        "color": "tissue",
+        "tint": "token:seedling",
+        "scale": [
+          1.35,
+          0.9,
+          0.95
+        ]
+      },
+      "repeat": {
+        "count": 5,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.0085
+      }
+    },
+    {
+      "id": "seedlings-a",
+      "name": {
+        "en": "Seedlings in cup A",
+        "zh": "A 杯里的幼苗"
+      },
+      "group": "germination",
+      "summary": {
+        "en": "Sample seedlings in cup a: engine fixture.",
+        "zh": "示例A 杯里的幼苗：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the seeds engine.",
+        "zh": "种子引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "sweep",
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.002,
+            0.025,
+            0.001
+          ],
+          [
+            0,
+            0.05,
+            0
+          ]
+        ],
+        "radius": 0.0016,
+        "segments": 12,
+        "radial": 6,
+        "at": [
+          0.34,
+          0.022,
+          0
+        ],
+        "color": "tissue",
+        "tint": "token:seedling"
+      },
+      "extra": [
+        {
+          "kind": "sphere",
+          "size": [
+            0.0042
+          ],
+          "at": [
+            0.336,
+            0.073,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:seedling",
+          "scale": [
+            1.4,
+            0.5,
+            0.9
+          ]
+        },
+        {
+          "kind": "sphere",
+          "size": [
+            0.0042
+          ],
+          "at": [
+            0.34400000000000003,
+            0.073,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:seedling",
+          "scale": [
+            1.4,
+            0.5,
+            0.9
+          ]
+        }
+      ],
+      "repeat": {
+        "count": 5,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.0085
+      }
+    },
+    {
+      "id": "cup-b",
+      "name": {
+        "en": "Cup B",
+        "zh": "B 杯"
+      },
+      "group": "germination",
+      "summary": {
+        "en": "Sample cup b: engine fixture.",
+        "zh": "示例B 杯：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the seeds engine.",
+        "zh": "种子引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.028,
+            0
+          ],
+          [
+            0.034,
+            0.085
+          ],
+          [
+            0.0325,
+            0.085
+          ],
+          [
+            0.0265,
+            0.0015
+          ],
+          [
+            0,
+            0.0015
+          ]
+        ],
+        "segments": 40,
+        "at": [
+          0.45,
+          0.012,
+          0
+        ],
+        "color": "glass"
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "size": [
+            0.026,
+            0.027,
+            0.008
+          ],
+          "at": [
+            0.45,
+            0.0175,
+            0
+          ],
+          "color": "fabric"
+        }
+      ],
+      "shell": true
+    },
+    {
+      "id": "seeds-b",
+      "name": {
+        "en": "Seeds in cup B",
+        "zh": "B 杯里的种子"
+      },
+      "group": "germination",
+      "summary": {
+        "en": "Sample seeds in cup b: engine fixture.",
+        "zh": "示例B 杯里的种子：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the seeds engine.",
+        "zh": "种子引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.0035
+        ],
+        "at": [
+          0.45,
+          0.024,
+          0
+        ],
+        "color": "tissue",
+        "tint": "token:seedling",
+        "scale": [
+          1.35,
+          0.9,
+          0.95
+        ]
+      },
+      "repeat": {
+        "count": 5,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.0085
+      }
+    },
+    {
+      "id": "seedlings-b",
+      "name": {
+        "en": "Seedlings in cup B",
+        "zh": "B 杯里的幼苗"
+      },
+      "group": "germination",
+      "summary": {
+        "en": "Sample seedlings in cup b: engine fixture.",
+        "zh": "示例B 杯里的幼苗：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the seeds engine.",
+        "zh": "种子引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "sweep",
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.002,
+            0.025,
+            0.001
+          ],
+          [
+            0,
+            0.05,
+            0
+          ]
+        ],
+        "radius": 0.0016,
+        "segments": 12,
+        "radial": 6,
+        "at": [
+          0.45,
+          0.022,
+          0
+        ],
+        "color": "tissue",
+        "tint": "token:seedling"
+      },
+      "extra": [
+        {
+          "kind": "sphere",
+          "size": [
+            0.0042
+          ],
+          "at": [
+            0.446,
+            0.073,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:seedling",
+          "scale": [
+            1.4,
+            0.5,
+            0.9
+          ]
+        },
+        {
+          "kind": "sphere",
+          "size": [
+            0.0042
+          ],
+          "at": [
+            0.454,
+            0.073,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:seedling",
+          "scale": [
+            1.4,
+            0.5,
+            0.9
+          ]
+        }
+      ],
+      "repeat": {
+        "count": 5,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.0085
+      }
+    },
+    {
+      "id": "cup-d",
+      "name": {
+        "en": "Cup D",
+        "zh": "D 杯"
+      },
+      "group": "germination",
+      "summary": {
+        "en": "Sample cup d: engine fixture.",
+        "zh": "示例D 杯：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the seeds engine.",
+        "zh": "种子引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.028,
+            0
+          ],
+          [
+            0.034,
+            0.085
+          ],
+          [
+            0.0325,
+            0.085
+          ],
+          [
+            0.0265,
+            0.0015
+          ],
+          [
+            0,
+            0.0015
+          ]
+        ],
+        "segments": 40,
+        "at": [
+          0.6,
+          0.012,
+          0
+        ],
+        "color": "glass"
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "size": [
+            0.026,
+            0.027,
+            0.008
+          ],
+          "at": [
+            0.6,
+            0.0175,
+            0
+          ],
+          "color": "fabric"
+        }
+      ],
+      "shell": true
+    },
+    {
+      "id": "seeds-d",
+      "name": {
+        "en": "Seeds in cup D",
+        "zh": "D 杯里的种子"
+      },
+      "group": "germination",
+      "summary": {
+        "en": "Sample seeds in cup d: engine fixture.",
+        "zh": "示例D 杯里的种子：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the seeds engine.",
+        "zh": "种子引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.0035
+        ],
+        "at": [
+          0.6,
+          0.024,
+          0
+        ],
+        "color": "tissue",
+        "tint": "token:seedling",
+        "scale": [
+          1.35,
+          0.9,
+          0.95
+        ]
+      },
+      "repeat": {
+        "count": 5,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.0085
+      }
+    },
+    {
+      "id": "seedlings-d",
+      "name": {
+        "en": "Seedlings in cup D",
+        "zh": "D 杯里的幼苗"
+      },
+      "group": "germination",
+      "summary": {
+        "en": "Sample seedlings in cup d: engine fixture.",
+        "zh": "示例D 杯里的幼苗：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the seeds engine.",
+        "zh": "种子引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "sweep",
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.002,
+            0.025,
+            0.001
+          ],
+          [
+            0,
+            0.05,
+            0
+          ]
+        ],
+        "radius": 0.0016,
+        "segments": 12,
+        "radial": 6,
+        "at": [
+          0.6,
+          0.022,
+          0
+        ],
+        "color": "tissue",
+        "tint": "token:seedling"
+      },
+      "extra": [
+        {
+          "kind": "sphere",
+          "size": [
+            0.0042
+          ],
+          "at": [
+            0.596,
+            0.073,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:seedling",
+          "scale": [
+            1.4,
+            0.5,
+            0.9
+          ]
+        },
+        {
+          "kind": "sphere",
+          "size": [
+            0.0042
+          ],
+          "at": [
+            0.604,
+            0.073,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:seedling",
+          "scale": [
+            1.4,
+            0.5,
+            0.9
+          ]
+        }
+      ],
+      "repeat": {
+        "count": 5,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.0085
+      }
+    },
+    {
+      "id": "cup-e",
+      "name": {
+        "en": "Cup E",
+        "zh": "E 杯"
+      },
+      "group": "germination",
+      "summary": {
+        "en": "Sample cup e: engine fixture.",
+        "zh": "示例E 杯：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the seeds engine.",
+        "zh": "种子引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.028,
+            0
+          ],
+          [
+            0.034,
+            0.085
+          ],
+          [
+            0.0325,
+            0.085
+          ],
+          [
+            0.0265,
+            0.0015
+          ],
+          [
+            0,
+            0.0015
+          ]
+        ],
+        "segments": 40,
+        "at": [
+          0.76,
+          0.012,
+          0
+        ],
+        "color": "glass"
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "size": [
+            0.026,
+            0.027,
+            0.008
+          ],
+          "at": [
+            0.76,
+            0.0175,
+            0
+          ],
+          "color": "fabric"
+        }
+      ],
+      "shell": true
+    },
+    {
+      "id": "seeds-e",
+      "name": {
+        "en": "Seeds in cup E",
+        "zh": "E 杯里的种子"
+      },
+      "group": "germination",
+      "summary": {
+        "en": "Sample seeds in cup e: engine fixture.",
+        "zh": "示例E 杯里的种子：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the seeds engine.",
+        "zh": "种子引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.0035
+        ],
+        "at": [
+          0.76,
+          0.024,
+          0
+        ],
+        "color": "tissue",
+        "tint": "token:seedling",
+        "scale": [
+          1.35,
+          0.9,
+          0.95
+        ]
+      },
+      "repeat": {
+        "count": 5,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.0085
+      }
+    },
+    {
+      "id": "seedlings-e",
+      "name": {
+        "en": "Seedlings in cup E",
+        "zh": "E 杯里的幼苗"
+      },
+      "group": "germination",
+      "summary": {
+        "en": "Sample seedlings in cup e: engine fixture.",
+        "zh": "示例E 杯里的幼苗：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the seeds engine.",
+        "zh": "种子引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "sweep",
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.002,
+            0.025,
+            0.001
+          ],
+          [
+            0,
+            0.05,
+            0
+          ]
+        ],
+        "radius": 0.0016,
+        "segments": 12,
+        "radial": 6,
+        "at": [
+          0.76,
+          0.022,
+          0
+        ],
+        "color": "tissue",
+        "tint": "token:seedling"
+      },
+      "extra": [
+        {
+          "kind": "sphere",
+          "size": [
+            0.0042
+          ],
+          "at": [
+            0.756,
+            0.073,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:seedling",
+          "scale": [
+            1.4,
+            0.5,
+            0.9
+          ]
+        },
+        {
+          "kind": "sphere",
+          "size": [
+            0.0042
+          ],
+          "at": [
+            0.764,
+            0.073,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:seedling",
+          "scale": [
+            1.4,
+            0.5,
+            0.9
+          ]
+        }
+      ],
+      "repeat": {
+        "count": 5,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.0085
+      }
+    },
+    {
+      "id": "pick-ring",
+      "name": {
+        "en": "Looking at",
+        "zh": "正在看"
+      },
+      "group": "germination",
+      "summary": {
+        "en": "Sample looking at: engine fixture.",
+        "zh": "示例正在看：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the seeds engine.",
+        "zh": "种子引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "torus",
+        "size": [
+          0.042,
+          0.0016
+        ],
+        "at": [
+          0.34,
+          0.014,
+          0
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "color": "token:signal"
+      }
+    },
+    {
+      "id": "ref-ring",
+      "name": {
+        "en": "Compared with",
+        "zh": "拿来比的"
+      },
+      "group": "germination",
+      "summary": {
+        "en": "Sample compared with: engine fixture.",
+        "zh": "示例拿来比的：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the seeds engine.",
+        "zh": "种子引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "torus",
+        "size": [
+          0.047,
+          0.0012
+        ],
+        "at": [
+          0.34,
+          0.014,
+          0
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "color": "token:cold"
+      }
+    }
+  ],
+  "groups": [
+    {
+      "id": "fruits",
+      "name": {
+        "en": "Fruits",
+        "zh": "果实"
+      },
+      "color": "token:food",
+      "scale": {
+        "unit": "cm",
+        "magnification": 1
+      }
+    },
+    {
+      "id": "day-card",
+      "name": {
+        "en": "Day strip",
+        "zh": "天数卡"
+      },
+      "color": "token:cold",
+      "scale": {
+        "unit": "cm",
+        "magnification": 1
+      }
+    },
+    {
+      "id": "germination",
+      "name": {
+        "en": "Seed test",
+        "zh": "种子测试"
+      },
+      "color": "token:seedling",
+      "scale": {
+        "unit": "cm",
+        "magnification": 1
+      }
+    }
+  ],
+  "flows": [
+    {
+      "id": "wind-drift",
+      "group": "fruits",
+      "color": "token:neutral",
+      "speed": 0.25,
+      "count": 40,
+      "size": 0.15,
+      "spread": 0.004,
+      "whenRun": false,
+      "path": [
+        [
+          -0.74,
+          0.04,
+          0.17
+        ],
+        [
+          -0.7,
+          0.12,
+          0.12
+        ],
+        [
+          -0.6,
+          0.2,
+          0.02
+        ],
+        [
+          -0.48,
+          0.26,
+          -0.06
+        ]
+      ]
+    },
+    {
+      "id": "water-drift",
+      "group": "fruits",
+      "color": "token:cold",
+      "speed": 0.08,
+      "count": 40,
+      "size": 0.15,
+      "spread": 0.004,
+      "whenRun": false,
+      "path": [
+        [
+          -0.6,
+          0.03,
+          -0.02
+        ],
+        [
+          -0.7,
+          0.03,
+          -0.1
+        ],
+        [
+          -0.82,
+          0.03,
+          -0.14
+        ]
+      ]
+    },
+    {
+      "id": "seed-burst",
+      "group": "fruits",
+      "color": "token:ink-2",
+      "speed": 0.4,
+      "count": 36,
+      "size": 0.15,
+      "spread": 0.004,
+      "whenRun": false,
+      "paths": [
+        {
+          "id": "left",
+          "path": [
+            [
+              -0.47,
+              0.04,
+              0.15
+            ],
+            [
+              -0.52,
+              0.1,
+              0.2
+            ],
+            [
+              -0.57,
+              0.02,
+              0.25
+            ]
+          ]
+        },
+        {
+          "id": "front",
+          "path": [
+            [
+              -0.47,
+              0.04,
+              0.15
+            ],
+            [
+              -0.47,
+              0.12,
+              0.23
+            ],
+            [
+              -0.47,
+              0.02,
+              0.31
+            ]
+          ]
+        },
+        {
+          "id": "right",
+          "path": [
+            [
+              -0.47,
+              0.04,
+              0.15
+            ],
+            [
+              -0.42,
+              0.1,
+              0.2
+            ],
+            [
+              -0.37,
+              0.02,
+              0.25
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "poses": {
+    "wing-front": {
+      "wing-fruit": {
+        "offset": [
+          0,
+          0.03,
+          0.12
+        ]
+      },
+      "duration": 0.6
+    },
+    "float-front": {
+      "float-fruit": {
+        "offset": [
+          0,
+          0,
+          0.1
+        ]
+      },
+      "duration": 0.6
+    },
+    "burst-open": {
+      "burst-fruit": {
+        "offset": [
+          0,
+          0.01,
+          0.1
+        ],
+        "scale": [
+          1.2,
+          0.85,
+          1.2
+        ]
+      },
+      "burst-seeds": {
+        "offset": [
+          0.03,
+          0.03,
+          0.16
+        ]
+      },
+      "duration": 0.5
+    },
+    "pick-a": {
+      "pick-ring": {
+        "offset": [
+          0.0,
+          0,
+          0
+        ]
+      },
+      "duration": 0.4
+    },
+    "ref-a": {
+      "ref-ring": {
+        "offset": [
+          0.0,
+          0,
+          0
+        ]
+      },
+      "duration": 0.4
+    },
+    "pick-b": {
+      "pick-ring": {
+        "offset": [
+          0.11,
+          0,
+          0
+        ]
+      },
+      "duration": 0.4
+    },
+    "ref-b": {
+      "ref-ring": {
+        "offset": [
+          0.11,
+          0,
+          0
+        ]
+      },
+      "duration": 0.4
+    },
+    "pick-d": {
+      "pick-ring": {
+        "offset": [
+          0.26,
+          0,
+          0
+        ]
+      },
+      "duration": 0.4
+    },
+    "ref-d": {
+      "ref-ring": {
+        "offset": [
+          0.26,
+          0,
+          0
+        ]
+      },
+      "duration": 0.4
+    },
+    "pick-e": {
+      "pick-ring": {
+        "offset": [
+          0.42,
+          0,
+          0
+        ]
+      },
+      "duration": 0.4
+    },
+    "ref-e": {
+      "ref-ring": {
+        "offset": [
+          0.42,
+          0,
+          0
+        ]
+      },
+      "duration": 0.4
+    }
+  },
+  "views": {
+    "assembled": {
+      "camera": {
+        "position": [
+          0.05,
+          0.75,
+          1.25
+        ],
+        "target": [
+          0.02,
+          0.03,
+          0.0
+        ],
+        "fov": 36
+      }
+    },
+    "cover": {
+      "position": [
+        0.05,
+        0.75,
+        1.25
+      ],
+      "target": [
+        0.02,
+        0.03,
+        0.0
+      ],
+      "fov": 36
+    },
+    "section": {
+      "plane": "xz"
+    },
+    "shadows": "contact"
+  },
+  "presets": [
+    {
+      "id": "fruits-view",
+      "label": {
+        "en": "Fruits",
+        "zh": "果实"
+      },
+      "camera": {
+        "position": [
+          -0.6,
+          0.32,
+          0.62
+        ],
+        "target": [
+          -0.6,
+          0.04,
+          0.05
+        ],
+        "fov": 34
+      }
+    },
+    {
+      "id": "timing-view",
+      "label": {
+        "en": "Day strip",
+        "zh": "天数卡"
+      },
+      "camera": {
+        "position": [
+          0.0,
+          0.2,
+          0.3
+        ],
+        "target": [
+          0.0,
+          0.01,
+          0.03
+        ],
+        "fov": 34
+      }
+    },
+    {
+      "id": "cups-view",
+      "label": {
+        "en": "Cups",
+        "zh": "杯子"
+      },
+      "camera": {
+        "position": [
+          0.55,
+          0.22,
+          0.6
+        ],
+        "target": [
+          0.55,
+          0.05,
+          0.0
+        ],
+        "fov": 34
+      }
+    }
+  ],
+  "spec": [
+    {
+      "key": {
+        "en": "Fruits",
+        "zh": "果实"
+      },
+      "value": {
+        "en": "3 PLACEHOLDER FRUITS",
+        "zh": "3 个占位果实"
+      },
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Seed test",
+        "zh": "种子测试"
+      },
+      "value": {
+        "en": "4 CUPS × 5 SEEDS · CHECKED ON DAY 7",
+        "zh": "4 杯 × 5 粒 · 第 7 天看"
+      },
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Germination needs",
+        "zh": "萌发需要"
+      },
+      "value": {
+        "en": "WATER · AIR · WARMTH",
+        "zh": "水 · 空气 · 适宜的温度"
+      },
+      "tag": "design"
+    }
+  ],
+  "telemetry": [
+    {
+      "key": {
+        "en": "Seed test day",
+        "zh": "种子测试第几天"
+      },
+      "unit": "d",
+      "follow": "day-now",
+      "scope": "observe"
+    },
+    {
+      "key": {
+        "en": "Lab temperature",
+        "zh": "实验室温度"
+      },
+      "unit": "°C",
+      "follow": "temp-now",
+      "scope": "observe"
+    },
+    {
+      "key": {
+        "en": "Half germinated by",
+        "zh": "一半发芽"
+      },
+      "unit": "d",
+      "follow": "half-day",
+      "scope": "observe"
+    }
+  ],
+  "sim": {
+    "kind": "seeds",
+    "controls": [
+      {
+        "id": "fruit",
+        "kind": "choice",
+        "default": "wing",
+        "label": {
+          "en": "Fruit",
+          "zh": "果实"
+        },
+        "options": [
+          {
+            "id": "wing",
+            "label": {
+              "en": "Winged",
+              "zh": "带翅"
+            }
+          },
+          {
+            "id": "float",
+            "label": {
+              "en": "Floating",
+              "zh": "会浮"
+            }
+          },
+          {
+            "id": "burst",
+            "label": {
+              "en": "Three-part",
+              "zh": "三瓣"
+            }
+          }
+        ]
+      },
+      {
+        "id": "temp",
+        "kind": "step",
+        "values": [
+          14,
+          17,
+          20
+        ],
+        "default": 20,
+        "unit": "°C",
+        "label": {
+          "en": "Temperature",
+          "zh": "温度"
+        }
+      },
+      {
+        "id": "count-day",
+        "kind": "step",
+        "values": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "default": 0,
+        "unit": "d",
+        "label": {
+          "en": "Day",
+          "zh": "第几天"
+        }
+      },
+      {
+        "id": "cup",
+        "kind": "choice",
+        "default": "a",
+        "label": {
+          "en": "Cup to look at",
+          "zh": "看哪一杯"
+        },
+        "options": [
+          {
+            "id": "a",
+            "label": {
+              "en": "Cup A",
+              "zh": "A 杯"
+            }
+          },
+          {
+            "id": "b",
+            "label": {
+              "en": "Cup B",
+              "zh": "B 杯"
+            }
+          },
+          {
+            "id": "d",
+            "label": {
+              "en": "Cup D",
+              "zh": "D 杯"
+            }
+          },
+          {
+            "id": "e",
+            "label": {
+              "en": "Cup E",
+              "zh": "E 杯"
+            }
+          }
+        ]
+      },
+      {
+        "id": "against",
+        "kind": "choice",
+        "default": "a",
+        "label": {
+          "en": "Compared with",
+          "zh": "和哪一杯比"
+        },
+        "options": [
+          {
+            "id": "a",
+            "label": {
+              "en": "Cup A",
+              "zh": "A 杯"
+            }
+          },
+          {
+            "id": "b",
+            "label": {
+              "en": "Cup B",
+              "zh": "B 杯"
+            }
+          },
+          {
+            "id": "d",
+            "label": {
+              "en": "Cup D",
+              "zh": "D 杯"
+            }
+          },
+          {
+            "id": "e",
+            "label": {
+              "en": "Cup E",
+              "zh": "E 杯"
+            }
+          }
+        ]
+      },
+      {
+        "id": "day",
+        "kind": "step",
+        "values": [
+          0,
+          7
+        ],
+        "default": 0,
+        "unit": "d",
+        "label": {
+          "en": "Day",
+          "zh": "第几天"
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "id": "method",
+        "kind": "state",
+        "from": "dispersal:method",
+        "label": {
+          "en": "How the seeds travel",
+          "zh": "种子怎样传播"
+        },
+        "states": {
+          "wind": {
+            "en": "By the wind",
+            "zh": "靠风"
+          },
+          "water": {
+            "en": "By water",
+            "zh": "靠水"
+          },
+          "splitting": {
+            "en": "The fruit bursts open",
+            "zh": "果实爆开"
+          }
+        }
+      },
+      {
+        "id": "feature",
+        "kind": "state",
+        "from": "dispersal:feature",
+        "label": {
+          "en": "What helps",
+          "zh": "帮了忙的结构"
+        },
+        "states": {
+          "wing": {
+            "en": "A wing",
+            "zh": "翅"
+          },
+          "floats": {
+            "en": "It floats",
+            "zh": "能浮"
+          },
+          "bursts": {
+            "en": "It bursts",
+            "zh": "会爆开"
+          }
+        }
+      },
+      {
+        "id": "half-day",
+        "from": "timing:median",
+        "label": {
+          "en": "Half by day",
+          "zh": "一半发芽在第几天"
+        },
+        "unit": "d",
+        "decimals": 1
+      },
+      {
+        "id": "half",
+        "kind": "state",
+        "from": "timing:half",
+        "label": {
+          "en": "By this day",
+          "zh": "到这一天"
+        },
+        "states": {
+          "fewer": {
+            "en": "Fewer than half",
+            "zh": "不到一半"
+          },
+          "half-or-more": {
+            "en": "Half or more",
+            "zh": "一半或更多"
+          }
+        }
+      },
+      {
+        "id": "temp-now",
+        "from": "control:temp",
+        "label": {
+          "en": "Temperature",
+          "zh": "温度"
+        },
+        "unit": "°C",
+        "decimals": 0
+      },
+      {
+        "id": "cup-result",
+        "kind": "state",
+        "from": "cups:result",
+        "label": {
+          "en": "This cup",
+          "zh": "这一杯"
+        },
+        "states": {
+          "waiting": {
+            "en": "Just set up",
+            "zh": "刚放好"
+          },
+          "germinated": {
+            "en": "Germinated",
+            "zh": "发芽了"
+          },
+          "not-germinated": {
+            "en": "Not germinated",
+            "zh": "没有发芽"
+          }
+        }
+      },
+      {
+        "id": "against-result",
+        "kind": "state",
+        "from": "cups:against-result",
+        "label": {
+          "en": "Compared cup",
+          "zh": "拿来比的一杯"
+        },
+        "states": {
+          "waiting": {
+            "en": "Just set up",
+            "zh": "刚放好"
+          },
+          "germinated": {
+            "en": "Germinated",
+            "zh": "发芽了"
+          },
+          "not-germinated": {
+            "en": "Not germinated",
+            "zh": "没有发芽"
+          }
+        }
+      },
+      {
+        "id": "changed",
+        "kind": "state",
+        "from": "cups:changed",
+        "label": {
+          "en": "What is different",
+          "zh": "改了什么"
+        },
+        "states": {
+          "same-cup": {
+            "en": "The same cup",
+            "zh": "同一杯"
+          },
+          "water": {
+            "en": "Only the water",
+            "zh": "只改了水"
+          },
+          "warmth": {
+            "en": "Only the warmth",
+            "zh": "只改了温度"
+          },
+          "light": {
+            "en": "Only the light",
+            "zh": "只改了光"
+          },
+          "more-than-one": {
+            "en": "More than one thing",
+            "zh": "不止一样"
+          }
+        }
+      },
+      {
+        "id": "seedlings",
+        "kind": "state",
+        "from": "cups:seedlings",
+        "label": {
+          "en": "Seedlings",
+          "zh": "幼苗"
+        },
+        "states": {
+          "none": {
+            "en": "None yet",
+            "zh": "还没有"
+          },
+          "green": {
+            "en": "Green",
+            "zh": "绿色"
+          },
+          "pale": {
+            "en": "Pale",
+            "zh": "发白"
+          }
+        }
+      },
+      {
+        "id": "day-now",
+        "from": "control:day",
+        "label": {
+          "en": "Day",
+          "zh": "第几天"
+        },
+        "unit": "d",
+        "decimals": 0
+      },
+      {
+        "id": "grown-a",
+        "from": "cup:a:grown",
+        "label": {
+          "en": "Seedlings in cup A",
+          "zh": "A 杯的幼苗"
+        }
+      },
+      {
+        "id": "grown-b",
+        "from": "cup:b:grown",
+        "label": {
+          "en": "Seedlings in cup B",
+          "zh": "B 杯的幼苗"
+        }
+      },
+      {
+        "id": "grown-d",
+        "from": "cup:d:grown",
+        "label": {
+          "en": "Seedlings in cup D",
+          "zh": "D 杯的幼苗"
+        }
+      },
+      {
+        "id": "grown-e",
+        "from": "cup:e:grown",
+        "label": {
+          "en": "Seedlings in cup E",
+          "zh": "E 杯的幼苗"
+        }
+      },
+      {
+        "id": "pale-a",
+        "from": "cup:a:pale",
+        "label": {
+          "en": "Pale seedlings in cup A",
+          "zh": "A 杯的幼苗发白"
+        }
+      },
+      {
+        "id": "pale-b",
+        "from": "cup:b:pale",
+        "label": {
+          "en": "Pale seedlings in cup B",
+          "zh": "B 杯的幼苗发白"
+        }
+      },
+      {
+        "id": "pale-d",
+        "from": "cup:d:pale",
+        "label": {
+          "en": "Pale seedlings in cup D",
+          "zh": "D 杯的幼苗发白"
+        }
+      },
+      {
+        "id": "pale-e",
+        "from": "cup:e:pale",
+        "label": {
+          "en": "Pale seedlings in cup E",
+          "zh": "E 杯的幼苗发白"
+        }
+      }
+    ],
+    "bind": [
+      {
+        "control": "fruit",
+        "part": "wing-fruit",
+        "pose": {
+          "wing": "wing-front"
+        }
+      },
+      {
+        "control": "fruit",
+        "part": "float-fruit",
+        "pose": {
+          "float": "float-front"
+        }
+      },
+      {
+        "control": "fruit",
+        "part": [
+          "burst-fruit",
+          "burst-seeds"
+        ],
+        "pose": {
+          "burst": "burst-open"
+        }
+      },
+      {
+        "output": "method",
+        "flow": "wind-drift",
+        "visible": {
+          "eq": "wind"
+        }
+      },
+      {
+        "output": "method",
+        "flow": "water-drift",
+        "visible": {
+          "eq": "water"
+        }
+      },
+      {
+        "output": "method",
+        "flow": "seed-burst",
+        "visible": {
+          "eq": "splitting"
+        }
+      },
+      {
+        "control": "count-day",
+        "part": "day-marker",
+        "offset": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "per": 0.01,
+          "origin": 0
+        }
+      },
+      {
+        "output": "half-day",
+        "part": "half-flag",
+        "offset": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "per": 0.01,
+          "origin": 0
+        }
+      },
+      {
+        "output": "grown-a",
+        "part": "seeds-a",
+        "visible": {
+          "eq": 0
+        }
+      },
+      {
+        "output": "grown-a",
+        "part": "seedlings-a",
+        "visible": true
+      },
+      {
+        "output": "pale-a",
+        "part": "seedlings-a",
+        "tint": {
+          "color": "token:seedling-pale",
+          "full": 1,
+          "max": 0.85
+        }
+      },
+      {
+        "output": "grown-b",
+        "part": "seeds-b",
+        "visible": {
+          "eq": 0
+        }
+      },
+      {
+        "output": "grown-b",
+        "part": "seedlings-b",
+        "visible": true
+      },
+      {
+        "output": "pale-b",
+        "part": "seedlings-b",
+        "tint": {
+          "color": "token:seedling-pale",
+          "full": 1,
+          "max": 0.85
+        }
+      },
+      {
+        "output": "grown-d",
+        "part": "seeds-d",
+        "visible": {
+          "eq": 0
+        }
+      },
+      {
+        "output": "grown-d",
+        "part": "seedlings-d",
+        "visible": true
+      },
+      {
+        "output": "pale-d",
+        "part": "seedlings-d",
+        "tint": {
+          "color": "token:seedling-pale",
+          "full": 1,
+          "max": 0.85
+        }
+      },
+      {
+        "output": "grown-e",
+        "part": "seeds-e",
+        "visible": {
+          "eq": 0
+        }
+      },
+      {
+        "output": "grown-e",
+        "part": "seedlings-e",
+        "visible": true
+      },
+      {
+        "output": "pale-e",
+        "part": "seedlings-e",
+        "tint": {
+          "color": "token:seedling-pale",
+          "full": 1,
+          "max": 0.85
+        }
+      },
+      {
+        "control": "cup",
+        "part": "pick-ring",
+        "pose": {
+          "a": "pick-a",
+          "b": "pick-b",
+          "d": "pick-d",
+          "e": "pick-e"
+        }
+      },
+      {
+        "control": "against",
+        "part": "ref-ring",
+        "pose": {
+          "a": "ref-a",
+          "b": "ref-b",
+          "d": "ref-d",
+          "e": "ref-e"
+        }
+      }
+    ],
+    "seeds": {
+      "dispersal": {
+        "fruit": "fruit",
+        "fruits": {
+          "wing": {
+            "method": "wind",
+            "feature": "wing"
+          },
+          "float": {
+            "method": "water",
+            "feature": "floats"
+          },
+          "burst": {
+            "method": "splitting",
+            "feature": "bursts"
+          }
+        }
+      },
+      "timing": {
+        "temp": "temp",
+        "day": "count-day",
+        "medians": {
+          "14": 9.4,
+          "17": 6.5,
+          "20": 4.3
+        }
+      },
+      "cups": {
+        "cup": "cup",
+        "against": "against",
+        "day": "day",
+        "after": 7,
+        "places": {
+          "windowsill": {
+            "warm": true,
+            "light": true
+          },
+          "cupboard": {
+            "warm": true,
+            "light": false
+          },
+          "fridge": {
+            "warm": false,
+            "light": false
+          }
+        },
+        "set": {
+          "a": {
+            "water": true,
+            "air": true,
+            "place": "windowsill"
+          },
+          "b": {
+            "water": false,
+            "air": true,
+            "place": "windowsill"
+          },
+          "d": {
+            "water": true,
+            "air": true,
+            "place": "cupboard"
+          },
+          "e": {
+            "water": true,
+            "air": true,
+            "place": "fridge"
+          }
+        }
+      }
+    }
+  }
+}

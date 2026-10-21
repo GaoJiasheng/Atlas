@@ -13,7 +13,7 @@
  *   pnpm shoot sample-space --perf --json out.json   # renderer numbers per shot
  *   pnpm shoot fractions --tasks                     # MathScene: every check-pool task (start, a planned wrong answer, solved) and every practice question + the summary
  *
- * `--beats` checks that the energy bars on show add up to 100 % (SpaceScene `energy-bars`) and that every `hz`-paced animation plays at its bound frequency (SpaceScene, docs/40 §4.3), and shoots a looping exercise beat (SpaceScene exercise mode) again held at its start and end keys
+ * `--beats` checks that the energy bars on show add up to 100 % (SpaceScene `energy-bars`), that every `hz`-paced animation plays at its bound frequency (SpaceScene, docs/40 §4.3) and that every try-it `tint` is drawn at its bound blend (SpaceScene, docs/41 E-S1), and shoots a looping exercise beat (SpaceScene exercise mode) again held at its start and end keys
  * (`beat-<chapter>-<n>-start.png` / `-end.png`); SpaceScene: it opens every beat again from its link (`?ch=<chapter>&b=<n>`, a page of its own) and fails a beat whose
  * scene (try-it values, view, layers, camera, hidden parts …) differs from the presentation's, or whose runs are not at their end; it also lists the ids each chapter's own state asks to label (TimeScene `highlight`, SpaceScene `labels`) that have no label on screen at the chapter camera (listed, not failed).
  * `--locale` and `--theme` take a value, a comma list, or `all` (default: en, paper).
@@ -35,7 +35,7 @@ import { chromium, type Browser, type Page } from '@playwright/test';
 import { hudLayoutIssues, LAYOUT_SIZES } from '../tests-e2e/hud-layout';
 import { capacity, fillBounds, fillShapeForPrimitive, levelForVolume } from '../src/engines/space-scene/lib/fill';
 import { bendAxisIndex, bendCurve } from '../src/engines/space-scene/lib/bend';
-import { animationHz, shiftEntry } from '../src/engines/space-scene/lib/sim/bind';
+import { animationHz, shiftEntry, tintLevel } from '../src/engines/space-scene/lib/sim/bind';
 import type { PartsFile } from '../src/engines/space-scene/schema';
 import { dragVerdict, type DragSample, type DragVerdict } from './lib/drag-settle';
 
@@ -532,6 +532,43 @@ async function hzIssues(s: Session): Promise<string[]> {
 }
 
 /**
+ * Every part a try-it `tint` binding colours (docs/41 E-S1: a cup's pale
+ * seedlings) is drawn at the bound blend now — (value ÷ full, through its
+ * curve) × max, within 0.01 — the last binding on a part winning, as on the
+ * stage (beats and beat links jump to it; a part not on stage is not checked).
+ */
+async function tintIssues(s: Session): Promise<string[]> {
+  const path = join(ROOT, 'src/content/topics', s.topic, 'data/parts.json');
+  if (!existsSync(path)) return [];
+  const file = JSON.parse(readFileSync(path, 'utf8')) as PartsFile;
+  const binds = (file.sim?.bind ?? []).filter((b) => 'part' in b && b.tint);
+  if (binds.length === 0) return [];
+  const ids = [...new Set(binds.flatMap((b) => ('part' in b ? (typeof b.part === 'string' ? [b.part] : b.part) : [])))];
+  const state = await s.page.evaluate((ids) => {
+    const e = window.__atlas!.engine as unknown as {
+      sim(): { values: Record<string, unknown>; outputs: Record<string, unknown> };
+      tint(id: string): { color: string; level: number } | null;
+    };
+    return { sim: e.sim(), tints: Object.fromEntries(ids.map((id) => [id, e.tint(id)])) };
+  }, ids);
+  const want = new Map<string, { level: number; from: string }>();
+  for (const b of binds) {
+    if (!('part' in b) || !b.tint) continue;
+    const v = b.control ? state.sim.values[b.control] : state.sim.outputs[b.output!];
+    const n = typeof v === 'number' ? v : typeof v === 'boolean' ? (v ? 1 : 0) : 0;
+    const level = tintLevel(n, { full: b.tint.full, curve: b.tint.curve ?? 'linear', max: b.tint.max ?? 0.55 });
+    for (const id of typeof b.part === 'string' ? [b.part] : b.part) want.set(id, { level, from: `${b.control ?? b.output} = ${JSON.stringify(v)}` });
+  }
+  const issues: string[] = [];
+  for (const [id, w] of want) {
+    const drawn = state.tints[id];
+    if (!drawn) continue;
+    if (Math.abs(drawn.level - w.level) > 0.01) issues.push(`${id}: tinted ${drawn.level}, the binding (${w.from}) asks for ${w.level.toFixed(3)}`);
+  }
+  return issues;
+}
+
+/**
  * Every shifted part (docs/38 §4.3) where the model puts it: its drawn offset
  * equals the model's `slots` value (± 1 mm), and a part the model hides is
  * not drawn (one it shows is, unless its layer is off or the scene hides it).
@@ -608,6 +645,7 @@ async function runBeatLinks(s: Session, beats: { chapter: string; index: number 
     for (const issue of [...(await fillIssues(s)), ...(await bendIssues(s))]) report.beatFailures.push(`${name}: link: ${issue}`);
     for (const issue of await shiftIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     for (const issue of await hzIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
+    for (const issue of await tintIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     if (diffs.length) report.beatFailures.push(`${name}: opened from ${link}: ${diffs.join('; ')}`);
     else same++;
     if (diffs.length) console.log(`  ${`${name} (link)`.padEnd(36)} FAIL  ${diffs.join('; ').slice(0, 300)}`);
@@ -651,6 +689,7 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
     for (const issue of [...(await fillIssues(s)), ...(await bendIssues(s))]) report.beatFailures.push(`${name}: ${issue}`);
     for (const issue of await shiftIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     for (const issue of await hzIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
+    for (const issue of await tintIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     await s.page.screenshot({ path: join(out, `${name}${o.suffix}.png`) });
     console.log(`  ${name.padEnd(36)} ${landed ? 'OK' : 'FAIL'}${missing.length ? `  (no label: ${missing.join(', ')})` : ''}`);
     // A looping exercise beat (SpaceScene exercise mode) also gets a still at its start and end keys.

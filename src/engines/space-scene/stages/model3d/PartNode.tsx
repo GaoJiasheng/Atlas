@@ -361,7 +361,7 @@ export function PartNode(props: PartNodeProps) {
     fillMotion.current.drawn = NaN;
     return () => fillGeometry?.dispose();
   }, [fillGeometry]);
-  useEffect(() => () => { props.fillBridge?.fills.delete(part.id); props.fillBridge?.shifts.delete(part.id); props.fillBridge?.copies.delete(part.id); }, [props.fillBridge, part.id]);
+  useEffect(() => () => { props.fillBridge?.fills.delete(part.id); props.fillBridge?.shifts.delete(part.id); props.fillBridge?.copies.delete(part.id); props.fillBridge?.tints.delete(part.id); }, [props.fillBridge, part.id]);
   useEffect(() => {
     if (!fillShape || !fillGeometry || !props.fillBridge || !props.fill) return;
     const binding = props.fill;
@@ -754,6 +754,9 @@ export function PartNode(props: PartNodeProps) {
     const simTarget = st ? st.level : 0;
     m.simTint = snap ? simTarget : damp(m.simTint, simTarget, 8, dt);
     if (Math.abs(m.simTint - simTarget) < 0.003) m.simTint = simTarget;
+    // QA (`tint(id)`): the try-it tint drawn now.
+    if (st) props.fillBridge?.tints.set(part.id, { color: st.color, level: m.simTint });
+    else props.fillBridge?.tints.delete(part.id);
     const hiColor = display.tint === 'custom' && props.tintColor ? props.tintColor : display.tint === 'cold' ? style.cold : style.signal;
     pms.forEach((pm, i) => {
       pm.uniforms.uHi.value = slotTint(i, m.tint, st ? m.simTint : null);

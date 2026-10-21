@@ -48,6 +48,12 @@ export function animationHz(value: number, b: { per: number; origin: number }): 
   return Number.isFinite(hz) ? Math.max(0, Math.min(MAX_ANIMATION_HZ, hz)) : 0;
 }
 
+/** A `tint` binding's blend for a value: value ÷ `full` (clamped to 0–1, through `curve`) × `max` (docs/41 E-S1: QA compares the drawn tint with it). */
+export function tintLevel(value: number, t: { full: number; curve: 'sqrt' | 'linear'; max: number }): number {
+  const x = Math.min(1, Math.max(0, (Number.isFinite(value) ? value : 0) / t.full));
+  return (t.curve === 'sqrt' ? Math.sqrt(x) : x) * t.max;
+}
+
 export interface SimFlowEffect {
   visibility?: Record<string, boolean>;
   /** `false`: a binding stops the flow. */
@@ -303,10 +309,7 @@ export function simEffects(sim: SimData, values: SimValues, outputs: SimOutputs)
           const x = Math.min(MAX_GLOW, Math.max(0, num(v) / b.glow.full));
           out.glow.set(id, { color: b.glow.color, level: b.glow.curve === 'sqrt' ? Math.sqrt(x) : x });
         }
-        if (b.tint) {
-          const x = Math.min(1, Math.max(0, num(v) / b.tint.full));
-          out.tint.set(id, { color: b.tint.color, level: (b.tint.curve === 'sqrt' ? Math.sqrt(x) : x) * b.tint.max });
-        }
+        if (b.tint) out.tint.set(id, { color: b.tint.color, level: tintLevel(num(v), b.tint) });
         if (b.fill) out.fill.set(id, { volume: Math.max(0, num(v) * b.fill.per), below: b.fill.below * b.fill.per, meniscus: b.fill.meniscus, ease: b.fill.ease });
         if (b.count) out.count.set(id, Math.max(0, Math.round(b.count === true ? num(v) : (num(v) - b.count.minus) / b.count.per)));
         if (b.offset) {

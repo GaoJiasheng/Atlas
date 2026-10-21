@@ -589,6 +589,11 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         shadows: () => Object.fromEntries(bridge.shadows),
         // Copies of a counted `repeat` part drawn now (a `count` binding: the balls of a table's per cents); null without one.
         copies: (id: string) => bridge.copies.get(id) ?? null,
+        // A try-it tint drawn now (docs/41 E-S1: a cup's pale seedlings): the colour it blends toward and how far (0–1, 3 decimals); null without a tint binding.
+        tint: (id: string) => {
+          const t = bridge.tints.get(id);
+          return t ? { color: t.color, level: Math.round(t.level * 1000) / 1000 } : null;
+        },
         // An animation now (docs/40 §4.3): its frequency (Hz, 4 decimals), cycle phase (0–1) and how far it is switched on; null before the stage draws it.
         animation: (id: string) => {
           const a = bridge.animations.get(id);

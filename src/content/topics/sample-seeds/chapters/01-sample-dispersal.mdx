@@ -1,0 +1,162 @@
+---
+{
+  "id": "sample-dispersal",
+  "order": 1,
+  "title": {
+    "en": "Sample dispersal",
+    "zh": "示例传播"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": true,
+    "part": null,
+    "layers": [
+      "fruits"
+    ],
+    "labels": [
+      "wing-fruit"
+    ],
+    "camera": {
+      "position": [
+        -0.6,
+        0.32,
+        0.62
+      ],
+      "target": [
+        -0.6,
+        0.04,
+        0.05
+      ],
+      "fov": 34
+    },
+    "summary": {
+      "en": "Sample dispersal: how each fruit travels.",
+      "zh": "示例传播：每种果实怎样传播。"
+    },
+    "index": {
+      "parts": [
+        "wing-fruit",
+        "float-fruit",
+        "burst-fruit",
+        "burst-seeds"
+      ]
+    },
+    "sim": {
+      "set": {
+        "fruit": "wing"
+      },
+      "try": {
+        "vary": "fruit",
+        "keep": [
+          {
+            "en": "Ripe fruits",
+            "zh": "成熟的果实"
+          }
+        ],
+        "observe": [
+          "method",
+          "feature"
+        ],
+        "record": true,
+        "predict": {
+          "prompt": {
+            "en": "Sample prediction: the three-part fruit has no wing. How do its seeds travel?",
+            "zh": "示例猜想：三瓣的果没有翅。它的种子怎样传播？"
+          },
+          "start": {
+            "fruit": "wing"
+          },
+          "change": {
+            "fruit": "burst"
+          },
+          "observe": "method",
+          "options": [
+            {
+              "id": "wind",
+              "label": {
+                "en": "By the wind",
+                "zh": "靠风"
+              },
+              "means": "wind"
+            },
+            {
+              "id": "water",
+              "label": {
+                "en": "By water",
+                "zh": "靠水"
+              },
+              "means": "water"
+            },
+            {
+              "id": "splitting",
+              "label": {
+                "en": "It bursts open",
+                "zh": "爆开"
+              },
+              "means": "splitting"
+            }
+          ]
+        }
+      }
+    },
+    "beats": [
+      {
+        "sim": {
+          "set": {
+            "fruit": "wing"
+          }
+        },
+        "labels": [
+          "wing-fruit"
+        ],
+        "caption": {
+          "en": "Sample: the winged fruit rides the wind.",
+          "zh": "示例：带翅的果随风飞走。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "fruit": "float"
+          }
+        },
+        "labels": [
+          "float-fruit"
+        ],
+        "caption": {
+          "en": "Sample: the floating fruit drifts on the water.",
+          "zh": "示例：会浮的果在水上漂。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "fruit": "burst"
+          }
+        },
+        "labels": [
+          "burst-fruit",
+          "burst-seeds"
+        ],
+        "caption": {
+          "en": "Sample: the three-part fruit bursts and throws its seeds.",
+          "zh": "示例：三瓣的果爆开，把种子弹出去。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Sample dispersal: a draft engine fixture.
+
+</Lang>
+
+<Lang zh>
+
+示例传播：引擎测试草稿。
+
+</Lang>
