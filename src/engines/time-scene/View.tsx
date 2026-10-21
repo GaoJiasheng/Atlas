@@ -561,8 +561,8 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       specRows,
       status: [statusT],
       time: { now: () => playhead.get() },
-      card: bi('time.card.title'),
-      cardToggle: { expanded: cardExpanded, set: setCardExpanded },
+      // No participants (a single-country story): no participation card, not an empty frame.
+      ...(geo.entities.length > 0 ? { card: bi('time.card.title'), cardToggle: { expanded: cardExpanded, set: setCardExpanded } } : {}),
       beats: beatControls,
       escape: () => {
         if (isPresenting()) {
@@ -658,21 +658,23 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
         </details>
       </SceneSlot>
 
-      <SceneSlot name="card">
-        <BandCard
-          model={model}
-          playhead={playhead}
-          locale={locale}
-          highlight={highlight}
-          segments={segments}
-          anchor={anchor}
-          current={currentSegment}
-          expanded={cardExpanded}
-          selected={selectedEntity}
-          onSelect={selectEntity}
-          onExpand={() => setCardExpanded(true)}
-        />
-      </SceneSlot>
+      {geo.entities.length > 0 && (
+        <SceneSlot name="card">
+          <BandCard
+            model={model}
+            playhead={playhead}
+            locale={locale}
+            highlight={highlight}
+            segments={segments}
+            anchor={anchor}
+            current={currentSegment}
+            expanded={cardExpanded}
+            selected={selectedEntity}
+            onSelect={selectEntity}
+            onExpand={() => setCardExpanded(true)}
+          />
+        </SceneSlot>
+      )}
       <SceneSlot name="perf">
         <PerfReadout read={readStats} />
       </SceneSlot>

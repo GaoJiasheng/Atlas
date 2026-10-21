@@ -10,7 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 CACHE = ROOT/'cache'
 WORKSPACE = ROOT.parents[1]
-TOPICS = ('chest','back','shoulders','arms','legs','core','digestive')
+TOPICS = ('chest','back','shoulders','arms','legs','core','digestive','heart-lungs')
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--topic', choices=TOPICS, default='chest')
 parser.add_argument('--refresh-inventory', action='store_true', help='re-scan cached FBX systems')
@@ -19,7 +19,7 @@ topic=args.topic
 for executable in ['pnpm','blender']:
     if not shutil.which(executable): raise SystemExit(f'Missing requirement: {executable}')
 for source in (['MuscularSystem100.fbx','SkeletalSystem100.fbx','Regions of human body100.fbx'] +
-               (['VisceralSystem100.fbx','CardioVascular41.fbx'] if topic=='digestive' else [])):
+               (['VisceralSystem100.fbx','CardioVascular41.fbx'] if topic in ('digestive','heart-lungs') else [])):
     if not (CACHE/source).exists(): raise SystemExit(f'Missing offline input: {source}; downloads are disabled')
 if not (ROOT/topic/'manifest.json').exists(): raise SystemExit(f'Write {topic}/manifest.json first')
 
@@ -33,8 +33,26 @@ def blender(file):
 chest=WORKSPACE/'public/models/muscles-chest.glb'
 before=hashlib.sha256(chest.read_bytes()).hexdigest() if chest.exists() else None
 if args.refresh_inventory or not (CACHE/'inventory.json').exists(): blender('inventory.py')
+if topic=='heart-lungs':
+    # Pure route functions first: a failing unit test stops before any mesh work.
+    run([sys.executable,'-m','unittest','discover','-s',str(ROOT/topic),'-p','test_*.py'])
 blender('build.py')
 run(['pnpm','exec','node','--import','tsx',str(ROOT/'optimize.ts'),'--topic',topic])
+if topic=='heart-lungs':
+    run([sys.executable,str(ROOT/topic/'routes.py')])
+    # The audit exits non-zero on a flag; previews are still wanted to look at it.
+    subprocess.run(['blender','-b','--python-exit-code','1','-P',str(ROOT/'report.py'),'--','--topic',topic],cwd=WORKSPACE)
+    blender('preview.py')
+    run([sys.executable,str(ROOT/'contact.py'),'--topic',topic])
+    summary=json.loads((CACHE/f'{topic}-optimize-stats.json').read_text())
+    print(f"FINAL {topic}: {summary['bytes']:,} bytes, {summary['triangles']:,} triangles, {summary['nodeCount']} nodes; SHA256 {summary['sha256']}",flush=True)
+    for n in summary['nodes']:print(f"NODE {n['node']}: {n['triangles']:,} triangles",flush=True)
+    routes=json.loads((ROOT/topic/'routes.json').read_text())
+    for fid,f in routes['flows'].items():print(f"ROUTE {fid}: {len(f['paths'])} paths, schematic legs {sum(len(p['schematic']) for p in f['paths'])}, bridges {sum(len(p['bridges']) for p in f['paths'])}",flush=True)
+    audit=json.loads((CACHE/f'{topic}-static-audit.json').read_text())
+    for flag in audit['flags']:print('AUDIT FLAG: '+flag,flush=True)
+    for path in json.loads((CACHE/f'{topic}-preview-backend.json').read_text())['paths']:print('PREVIEW: '+path,flush=True)
+    raise SystemExit(bool(audit['flags']))
 if topic=='digestive':
     blender('report.py')
     blender('preview.py')

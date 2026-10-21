@@ -104,6 +104,10 @@ beforeAll(() => {
       ),
     );
   });
+  topic('topic-links-json', (root) => {
+    writeFileSync(join(root, 'chapters/09-json.mdx'), chapterFile(['{', '  "id": "json-look",', '  "order": 9,', '  "title": { "en": "JSON", "zh": "JSON" }', '}']));
+    writeFileSync(join(root, 'chapters/10-links.mdx'), chapterFile(['id: links', 'order: 10', 'title: { en: "Links", zh: "链接" }'], 'See <TopicLink slug="topic-links-json" ch="json-look">this</TopicLink>.'));
+  });
   topic('term-without-glossary', (root) => {
     writeFileSync(join(root, 'chapters/09-term.mdx'), chapterFile(['id: term', 'order: 9', 'title: { en: "Term", zh: "词" }'], 'A <Term id="front">front</Term>.'));
   });
@@ -206,7 +210,7 @@ afterAll(() => {
 describe('validate-content', () => {
   it('fails the run when any topic has errors', () => {
     expect(status).toBe(1);
-    expect(output).toMatch(/20 topic\(s\)/);
+    expect(output).toMatch(/21 topic\(s\)/);
   });
 
   it('passes an unmodified copy', () => {
@@ -241,6 +245,10 @@ describe('validate-content', () => {
     const errors = linesFor('topic-links').filter((l) => l.startsWith('error'));
     expect(errors).toHaveLength(1);
     expect(errors[0]).toContain('<TopicLink slug="clean" ch="nowhere">: topic "clean" has no chapter "nowhere"');
+  });
+
+  it('reads the chapter id of a JSON frontmatter for <TopicLink ch>', () => {
+    expect(linesFor('topic-links-json').filter((l) => l.startsWith('error'))).toEqual([]);
   });
 
   it('checks a life-cycle comparison link topic and chapter', () => {

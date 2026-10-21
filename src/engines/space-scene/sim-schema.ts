@@ -23,6 +23,8 @@ import { fieldLines } from './lib/sim/field';
 import { FORCE_STATES, forceQuantity, forceTimelineChannels, springExtension, rollRun } from './lib/sim/force';
 import { COMPUTED_TABLES, ENERGY_FORMS, chainFlow, chainOrder, energyNodes, energyQuantity, energyTimelineChannels, shareTables } from './lib/sim/energy';
 import { EMPTYING_STATES, groupStages, lastStage, lifeCycleQuantity, timedStages } from './lib/sim/lifecycle';
+import { sortSchema, sortIssues, type SortCheckPart } from './sort-schema';
+import { sortQuantity } from './lib/sim/sort';
 
 /** A control value: a toggle's boolean, a step's number, a choice's option id. */
 export const simValue = z.union([z.boolean(), z.number(), kebabId]);
@@ -99,6 +101,8 @@ export const simOutputSchema = z
     format: z.literal('time').optional(),
     decimals: z.number().int().min(0).max(3).optional(),
     states: z.record(stateId, bilingual).optional(),
+    /** States labelled for predict-then-observe only: the model never gives them (the sort model's `where:<part>`, docs/38 §4.2). */
+    predictOnly: z.array(stateId).min(1).optional(),
   })
   .strict();
 export type SimOutput = z.output<typeof simOutputSchema>;
@@ -252,6 +256,17 @@ const partBind = z
     place: z.object({ centre: vec3, radius: z.number().positive(), face: z.literal('centre').optional() }).strict().optional(),
     /** A field-state output picks the iron-filings layout of a `filings` part (`magnet.fields`). */
     state: z.literal(true).optional(),
+    /**
+     * Move each part by the offset a vector output gives it (`<part>:x|y|z`,
+     * scene units; `<part>:shown` 0 hides it, fading in place; a part the
+     * vector does not name stays put): last in the transform stack, on a
+     * lifted arc (`lift` at the middle) over `ease` s, each part that moves
+     * `stagger` s after the one before it in the vector (docs/38 §4.3).
+     */
+    shift: z
+      .object({ ease: z.number().min(0).max(5).default(0.8), stagger: z.number().min(0).max(1).default(0.03), lift: z.number().min(0).max(1).default(0.04) })
+      .strict()
+      .optional(),
   })
   .strict();
 
@@ -917,7 +932,7 @@ export const simOverlaySchema = z.discriminatedUnion('kind', [
 export type SimOverlay = z.output<typeof simOverlaySchema>;
 export type ShadowCastOverlay = Extract<SimOverlay, { kind: 'shadow-cast' }>;
 
-export const SIM_KINDS = ['circuit', 'magnet', 'force', 'energy', 'life-cycle', 'matter', 'light', 'materials'] as const;
+export const SIM_KINDS = ['circuit', 'magnet', 'force', 'energy', 'life-cycle', 'matter', 'light', 'sort', 'materials'] as const;
 export type SimKind = (typeof SIM_KINDS)[number];
 
 export const MAX_SIM_CONTROLS = 16;
@@ -939,6 +954,7 @@ export const simSchema = z
     matter: matterSchema.optional(),
     light: lightSchema.optional(),
     materials: materialsSchema.optional(),
+    sort: sortSchema.optional(),
   })
   .strict();
 export type SimData = z.output<typeof simSchema>;
@@ -1071,6 +1087,8 @@ const MAGNET_STATES: readonly string[] = ['facing', 'field-state'];
 /** The kind of a model quantity (an output's `from`), or null when the model (or the data it needs) has none of that name. */
 export function quantityKind(sim: SimData, from: string): SimOutput['kind'] | null {
   switch (sim.kind) {
+    case 'sort':
+      return sim.sort ? sortQuantity(sim.sort, from) : null;
     case 'matter':
       return sim.matter ? matterQuantity(sim.matter, from)?.kind ?? null : null;
     case 'materials':
@@ -1171,6 +1189,7 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
   });
   sim.outputs.forEach((o, i) => {
     if (sim.outputs.findIndex((x) => x.id === o.id) !== i) issue(['outputs', i, 'id'], `duplicate output "${o.id}"`);
+    if (o.predictOnly && sim.kind !== 'sort') issue(['outputs', i, 'predictOnly'], 'predictOnly belongs to a state output of the sort model');
     const from = o.from ?? o.id;
     if (o.format === 'time' && (o.kind !== 'number' || o.unit !== 'h' || (from.startsWith('control:') && (() => { const c = controls.get(from.slice(8)); return c?.kind !== 'step' || c.values.some((v) => v < 0 || v > 24); })()))) issue(['outputs', i, 'format'], 'time format needs a number output in hours, 0–24');
     const kind = quantityKind(sim, from);
@@ -1214,6 +1233,8 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
       for (const st of Object.keys(o.states ?? {})) if (!known.includes(st)) issue(['outputs', i, 'states', st], `"${from}" is never "${st}" (${known.join(', ')})`);
     }
   });
+  if (sim.kind === 'sort' && !sim.sort) issue(['sort'], 'a sort sim needs `sort`');
+  if (sim.sort) sortIssues(sim.sort, controls, (ctx.partData ?? []) as readonly SortCheckPart[], sim.outputs).forEach((x) => issue(x.path[0] === 'outputs' ? x.path : ['sort', ...x.path], x.message));
   if (sim.kind === 'matter' && !sim.matter) issue(['matter'], 'a matter sim needs `matter`');
   if (sim.kind === 'materials' && !sim.materials) issue(['materials'], 'a materials sim needs `materials`');
   if (sim.materials) materialsIssues(sim.materials, controls).forEach((x) => issue(['materials', ...x.path], x.message));
@@ -1235,6 +1256,8 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
   const filled = new Set<string>();
   const bent = new Set<string>();
   const stretched = new Set<string>();
+  const shifted = new Set<string>();
+  const placed = new Set(sim.bind.flatMap((b) => ('part' in b && b.place ? (Array.isArray(b.part) ? b.part : [b.part]) : [])));
   sim.bind.forEach((b, i) => {
     const has = (k: string) => k in b && (b as Record<string, unknown>)[k] !== undefined;
     if (has('control') === has('output')) {
@@ -1271,7 +1294,16 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
       if (b.count) for (const id of ids) if (!ctx.countable.has(id)) issue(['bind', i, 'count'], `"${id}" needs a \`repeat\` and no \`extra\` to show a count of copies`);
       if ((b.glow || b.tint || b.count || b.offset || b.rotate || b.fill) && outp && outp.kind !== 'number')
         issue(['bind', i], `glow / tint / count / offset / rotate / fill need a number, "${src}" is a ${outp.kind}`);
-      if (outp?.kind === 'timeline' && ['place', 'visible', 'pose', 'glow', 'tint', 'count', 'offset', 'rotate', 'at', 'state', 'bend'].some(has))
+      if (b.shift) {
+        if (!outp || outp.kind !== 'vector') issue(['bind', i, 'shift'], `shift needs a vector output (an offset per part)${outp ? `, "${src}" is a ${outp.kind}` : ''}`);
+        for (const id of ids) {
+          if (ctx.contextParts?.has(id)) issue(['bind', i, 'shift'], `"${id}" is a context part (never moved)`);
+          if (shifted.has(id)) issue(['bind', i, 'shift'], `"${id}" has a shift already`);
+          if (placed.has(id)) issue(['bind', i, 'shift'], `"${id}" is placed on a sphere (\`place\`): no shift`);
+          shifted.add(id);
+        }
+      }
+      if (outp?.kind === 'timeline' && ['place', 'visible', 'pose', 'glow', 'tint', 'count', 'offset', 'rotate', 'at', 'state', 'shift', 'bend'].some(has))
         issue(['bind', i], `"${src}" is a timeline: bind it with \`play\` or a \`stretch\` with a \`channel\``);
       if (b.place) {
         if (!xyzOutput(outp)) issue(['bind', i, 'place'], 'place needs an xyz vector output with exactly three finite values');
@@ -1361,8 +1393,8 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
           stateBound.add(id);
         }
       }
-      const fields = ['place', 'visible', 'pose', 'glow', 'tint', 'count', 'offset', 'rotate', 'at', 'state', 'play', 'stretch', 'fill', 'bend'].filter(has);
-      if (fields.length === 0) issue(['bind', i], 'a part binding needs place, visible, pose, glow, tint, count, offset, rotate, at, state, play, stretch, fill or bend');
+      const fields = ['place', 'visible', 'pose', 'glow', 'tint', 'count', 'offset', 'rotate', 'at', 'state', 'play', 'stretch', 'fill', 'shift', 'bend'].filter(has);
+      if (fields.length === 0) issue(['bind', i], 'a part binding needs place, visible, pose, glow, tint, count, offset, rotate, at, state, play, stretch, fill, shift or bend');
     } else if ('flow' in b) {
       if (outp?.kind === 'timeline') issue(['bind', i, 'output'], `"${src}" is a timeline: it moves parts (\`play\`), not flows`);
       const flow = ctx.flows.get(b.flow);

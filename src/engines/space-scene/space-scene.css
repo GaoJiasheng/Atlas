@@ -1938,6 +1938,159 @@ button.space-plate__sel:focus-visible {
   color: var(--signal);
 }
 
+/* ------------------------------------------------------------------ */
+/* Card: the flowchart (docs/38 E-LT3)                                 */
+/* ------------------------------------------------------------------ */
+
+.space-key-card {
+  padding: calc(4 * var(--u)) calc(8 * var(--u)) calc(8 * var(--u));
+}
+.space-key {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 64vh;
+  overflow: visible;
+}
+.space-key__box {
+  fill: var(--panel-solid);
+  stroke: var(--ink-2);
+  stroke-width: 1;
+}
+.space-key__node[data-pending] .space-key__box {
+  stroke: var(--ink-3);
+  stroke-dasharray: 3 3;
+}
+.space-key__node[data-on] .space-key__box {
+  stroke: var(--signal);
+  stroke-width: 1.6;
+}
+.space-key__q {
+  font: 500 12px / 1 var(--font-hud);
+  fill: var(--ink);
+}
+.space-key__node[data-pending] .space-key__q {
+  fill: var(--ink-faint);
+}
+.space-key__line {
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 1;
+}
+.space-key__link[data-pending] .space-key__line {
+  stroke: var(--ink-3);
+  stroke-dasharray: 3 3;
+}
+.space-key__link[data-on] .space-key__line {
+  stroke: var(--signal);
+  stroke-width: 1.8;
+}
+.space-key__answer {
+  font: 600 9.5px / 1 var(--font-hud);
+  letter-spacing: 0.1em;
+  fill: var(--ink-3);
+}
+.space-key__link[data-pending] .space-key__answer {
+  fill: var(--ink-faint);
+}
+.space-key__link[data-on] .space-key__answer {
+  font-weight: 800;
+  fill: var(--signal);
+}
+.space-key__target {
+  fill: transparent;
+  stroke: none;
+}
+.space-key__card {
+  fill: var(--panel-solid);
+  stroke: var(--ink-3);
+  stroke-width: 0.8;
+}
+.space-key__leaf[data-pending] .space-key__card {
+  stroke-dasharray: 3 3;
+}
+.space-key__leaf[data-on] .space-key__card {
+  fill: var(--signal);
+  stroke: var(--signal);
+}
+.space-key__letter {
+  font: 700 12.5px / 1 var(--font-mono);
+  fill: var(--ink);
+}
+.space-key__count {
+  font: 600 12.5px / 1 var(--font-mono);
+  fill: var(--ink);
+}
+.space-key__name {
+  font: 500 11px / 1 var(--font-hud);
+  fill: var(--ink-2);
+}
+.space-key__leaf[data-pending] .space-key__name,
+.space-key__leaf[data-pending] .space-key__letter,
+.space-key__leaf[data-pending] .space-key__count {
+  fill: var(--ink-faint);
+}
+.space-key__wrong {
+  font: 600 11px / 1 var(--font-hud);
+  fill: var(--hot);
+}
+.space-key__belongs {
+  font: italic 500 11px / 1 var(--font-hud);
+  fill: var(--ink);
+}
+.space-key__leaf[data-on] .space-key__letter,
+.space-key__leaf[data-on] .space-key__count,
+.space-key__leaf[data-on] .space-key__name,
+.space-key__leaf[data-on] .space-key__wrong,
+.space-key__leaf[data-on] .space-key__belongs {
+  fill: var(--panel-solid);
+}
+.space-key__case {
+  font: 500 12px / 1 var(--font-hud);
+  fill: var(--ink-2);
+}
+.space-key__count,
+.space-key__wrong,
+.space-key__incase {
+  animation: space-cy-in 300ms ease both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .space-key__count,
+  .space-key__wrong,
+  .space-key__incase {
+    animation: none;
+  }
+}
+.space-key__incase {
+  font: 600 10.5px / 1 var(--font-mono);
+  letter-spacing: 0.06em;
+  fill: var(--ink-3);
+}
+.space-key__sim {
+  font: 500 12.5px / 1 var(--font-hud);
+  fill: var(--ink-3);
+}
+.space-key__chip {
+  font: 600 12.5px / 1 var(--font-mono);
+  letter-spacing: 0.08em;
+  fill: var(--ink-2);
+}
+.space-key__leaf[role="button"] {
+  cursor: pointer;
+}
+.space-key__leaf[role="button"]:focus-visible {
+  outline: none;
+}
+.space-key__leaf[role="button"]:focus-visible .space-key__target {
+  stroke: var(--signal);
+  stroke-width: 1;
+}
+@media (hover: hover) {
+  .space-key__leaf[role="button"]:hover .space-key__target {
+    fill: var(--hair);
+  }
+}
+
 /* Energy bars' labels on the stage (docs/31 E-EN6): one small block under each set of bars. */
 .space-ebars [data-bars] {
   transition: opacity 0.2s ease;

@@ -479,6 +479,26 @@
       "0000000000000000"
     ]
   },
+  "singapore-after-1965": {
+    "mask": [
+      "0000000000000000",
+      "0000000000000000",
+      "0055000000000000",
+      "05ffb51000000000",
+      "1cffffc610000000",
+      "0bffffffd8200000",
+      "0bffffffffe30000",
+      "0bfffffffff40000",
+      "0bfffffffff40000",
+      "0bfffffffffa4300",
+      "0bfffffffffffe60",
+      "0bffefffffffffc1",
+      "19deadffffffffc1",
+      "0355356666777620",
+      "0000000000000000",
+      "0000000000000000"
+    ]
+  },
   "singapore-land-use": {
     "mask": [
       "0000000000000000",

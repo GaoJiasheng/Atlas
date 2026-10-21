@@ -40,3 +40,16 @@ therefore licensed CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/
 with the attribution given in `src/content/topics/warring-states/data/SOURCES.md`
 and `scripts/geo/warring-states/SOURCES-GEO.md`. The texts, events, entities,
 routes and glossary of that topic stay under CC BY-NC-SA 4.0 as above.
+
+Exception — digestive system and heart and lungs (topics `digestive-system`
+and `heart-and-lungs`): the 3D models (`public/models/digestive-system.glb`,
+`public/models/heart-and-lungs.glb`), the geometry derived from them
+(`scripts/anatomy/digestive/centrelines.json`, `food-route.json`;
+`scripts/anatomy/heart-lungs/centrelines.json`, `landmarks.json`, `routes.json`;
+and the flow paths, pivots and camera targets taken from them into each topic's
+`data/parts.json`) and the screenshots under `docs/screenshots/digestive-system/`
+and `docs/screenshots/heart-and-lungs/` are derived from Z-Anatomy
+(CC BY-SA 4.0) and are licensed CC BY-SA 4.0
+(https://creativecommons.org/licenses/by-sa/4.0/), with the attribution given in
+`THIRD-PARTY-NOTICES.md`. The texts and the other data files of these topics stay
+under CC BY-NC-SA 4.0 as above.

@@ -1,0 +1,366 @@
+{
+  "units": "m",
+  "frame": "topic-local; matches exported GLB world coordinates",
+  "note": "Measured on the source objects before merging (static_region.landmarks); see manifest.landmarks for each definition.",
+  "landmarks": {
+    "right-atrium": {
+      "kind": "centroid",
+      "sources": [
+        "Right atrium"
+      ],
+      "point": [
+        -0.017090310469641018,
+        0.28024347223097357,
+        -0.09337949557153767
+      ]
+    },
+    "right-ventricle": {
+      "kind": "centroid",
+      "sources": [
+        "Right ventricle"
+      ],
+      "point": [
+        0.02122283438178473,
+        0.2619719957889014,
+        -0.0588233661952806
+      ]
+    },
+    "left-atrium": {
+      "kind": "centroid",
+      "sources": [
+        "Left atrium"
+      ],
+      "point": [
+        0.020215591260571524,
+        0.29074656396646936,
+        -0.11870920459968975
+      ]
+    },
+    "left-ventricle": {
+      "kind": "centroid",
+      "sources": [
+        "Left ventricle"
+      ],
+      "point": [
+        0.05102125905139657,
+        0.25719344509372044,
+        -0.08989799833209794
+      ]
+    },
+    "heart": {
+      "kind": "centroid",
+      "sources": [
+        "Left atrium",
+        "Right atrium",
+        "Left ventricle",
+        "Right ventricle"
+      ],
+      "point": [
+        0.01897861295105617,
+        0.2720831554004384,
+        -0.08956142202077357
+      ]
+    },
+    "tricuspid": {
+      "kind": "opening",
+      "sources": [
+        "Right atrium"
+      ],
+      "point": [
+        -0.006035144916451462,
+        0.267943147763814,
+        -0.08185839846338991
+      ]
+    },
+    "mitral": {
+      "kind": "opening",
+      "sources": [
+        "Left atrium"
+      ],
+      "point": [
+        0.021529767104318975,
+        0.27198830980157096,
+        -0.11633801958449777
+      ]
+    },
+    "diaphragm-dome.r": {
+      "kind": "top",
+      "sources": [
+        "Diaphragm"
+      ],
+      "point": [
+        -0.06292912136978472,
+        0.2416615544119142,
+        -0.08606709642930234
+      ]
+    },
+    "diaphragm-dome.l": {
+      "kind": "top",
+      "sources": [
+        "Diaphragm"
+      ],
+      "point": [
+        0.05480152656973311,
+        0.22206130027770996,
+        -0.09459040233808937
+      ]
+    },
+    "thoracic-spine-front": {
+      "kind": "front",
+      "sources": [
+        "Vertebra T5",
+        "Vertebra T6",
+        "Vertebra T7",
+        "Vertebra T8"
+      ],
+      "point": [
+        0.0,
+        0.2890453078511774,
+        -0.14574430510401726
+      ]
+    },
+    "hilum.r": {
+      "kind": "end",
+      "sources": [
+        "Right main bronchus"
+      ],
+      "point": [
+        -0.013813215346696476,
+        0.3301582435766856,
+        -0.13167791378994784
+      ]
+    },
+    "hilum.l": {
+      "kind": "end",
+      "sources": [
+        "Left main bronchus"
+      ],
+      "point": [
+        0.043620193687578045,
+        0.30269036690394086,
+        -0.13582550610105196
+      ]
+    },
+    "larynx": {
+      "kind": "centroid",
+      "sources": [
+        "Thyroid cartilage",
+        "Cricoid cartilage"
+      ],
+      "point": [
+        4.2677732884831293e-07,
+        0.4566490331620243,
+        -0.10126166077695886
+      ]
+    },
+    "nasopharynx": {
+      "kind": "centroid",
+      "sources": [
+        "Nasopharynx"
+      ],
+      "point": [
+        3.6043866951021904e-08,
+        0.5502457153408262,
+        -0.08577322869692076
+      ]
+    },
+    "oropharynx": {
+      "kind": "centroid",
+      "sources": [
+        "Oropharynx"
+      ],
+      "point": [
+        7.037782936027657e-08,
+        0.5149809926533601,
+        -0.08176487166540063
+      ]
+    },
+    "laryngeal-inlet": {
+      "kind": "between",
+      "sources": [
+        "Epiglottis"
+      ],
+      "point": [
+        1.4937206460648167e-07,
+        0.47142926947079894,
+        -0.0955210668095279
+      ]
+    },
+    "liver-core": {
+      "kind": "centroid",
+      "sources": [
+        "Liver"
+      ],
+      "point": [
+        -0.0355074243698356,
+        0.17299931115513753,
+        -0.0803282379541683
+      ]
+    },
+    "liver-hilum": {
+      "kind": "end",
+      "sources": [
+        "Hepatic portal vein"
+      ],
+      "point": [
+        -0.007412521168589592,
+        0.18071845173835754,
+        -0.08410179801285267
+      ]
+    },
+    "choana": {
+      "kind": "back",
+      "sources": [
+        "Mucosa of nasal cavity"
+      ],
+      "point": [
+        1.3160978915629448e-08,
+        0.5514741152911992,
+        -0.0693772595085494
+      ]
+    },
+    "nostril.l": {
+      "kind": "nostril",
+      "sources": [
+        "Mucosa of nasal cavity"
+      ],
+      "point": [
+        0.004601317171448887,
+        0.5379855504910427,
+        -0.008124006918557376
+      ]
+    },
+    "nasal-passage.l": {
+      "kind": "passage",
+      "sources": [
+        "Mucosa of nasal cavity"
+      ],
+      "point": [
+        0.006883711841381559,
+        0.5465467967393197,
+        -0.0325851006381059
+      ]
+    },
+    "thigh.l": {
+      "kind": "centroid",
+      "sources": [
+        "Rectus femoris muscle.l"
+      ],
+      "point": [
+        0.10770697280017541,
+        -0.3397428517618235,
+        -0.08515947621105396
+      ]
+    },
+    "calf.l": {
+      "kind": "centroid",
+      "sources": [
+        "Medial head of gastrocnemius.l"
+      ],
+      "point": [
+        0.05948411997205129,
+        -0.6703083370406465,
+        -0.1849107682947689
+      ]
+    },
+    "nostril.r": {
+      "kind": "nostril",
+      "sources": [
+        "Mucosa of nasal cavity"
+      ],
+      "point": [
+        -0.004601304021754196,
+        0.5379855504910427,
+        -0.008124006918557376
+      ]
+    },
+    "nasal-passage.r": {
+      "kind": "passage",
+      "sources": [
+        "Mucosa of nasal cavity"
+      ],
+      "point": [
+        -0.006883685680769238,
+        0.5465467967393197,
+        -0.0325851006381059
+      ]
+    },
+    "thigh.r": {
+      "kind": "centroid",
+      "sources": [
+        "Rectus femoris muscle.r"
+      ],
+      "point": [
+        -0.10770691251910967,
+        -0.3397428674026269,
+        -0.08515948281833076
+      ]
+    },
+    "calf.r": {
+      "kind": "centroid",
+      "sources": [
+        "Medial head of gastrocnemius.r"
+      ],
+      "point": [
+        -0.05948404627642142,
+        -0.6703083878873299,
+        -0.18491075221570297
+      ]
+    },
+    "superior-lobe-right": {
+      "kind": "centroid",
+      "sources": [
+        "Superior lobe of right lung"
+      ],
+      "point": [
+        -0.05696879868419623,
+        0.3296197217931626,
+        -0.11117316639947547
+      ]
+    },
+    "middle-lobe-right": {
+      "kind": "centroid",
+      "sources": [
+        "Middle lobe of right lung"
+      ],
+      "point": [
+        -0.06642749546883912,
+        0.25985558328293734,
+        -0.07713962306819258
+      ]
+    },
+    "inferior-lobe-right": {
+      "kind": "centroid",
+      "sources": [
+        "Inferior lobe of right lung"
+      ],
+      "point": [
+        -0.07757798798541651,
+        0.22998891415390374,
+        -0.1401943372825877
+      ]
+    },
+    "superior-lobe-left": {
+      "kind": "centroid",
+      "sources": [
+        "Superior lobe of left lung"
+      ],
+      "point": [
+        0.06540896232082777,
+        0.31031210132256354,
+        -0.09630956105168102
+      ]
+    },
+    "inferior-lobe-left": {
+      "kind": "centroid",
+      "sources": [
+        "Inferior lobe of left lung"
+      ],
+      "point": [
+        0.08141592558653575,
+        0.22801706689267495,
+        -0.13297651126150714
+      ]
+    }
+  }
+}

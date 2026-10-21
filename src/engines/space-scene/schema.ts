@@ -164,7 +164,9 @@ const PRIMITIVE_ARITY: Record<(typeof PRIMITIVE_KINDS)[number], number> = {
  * (semi-gloss cuticle, tint it the species' colour), `membrane` (translucent,
  * double-sided: wings, tympana, air sacs), `tissue` (matte soft tissue with a
  * soft-lit look), `muscle` (fibre normal map), `trachea` (white, ringed),
- * `nerve` (pale yellow), `eye` (dark gloss with hexagonal facets).
+ * `nerve` (pale yellow), `eye` (dark gloss with hexagonal facets), `scales`
+ * (semi-gloss overlapping rounded scales: fish, reptiles, a pangolin; tint it)
+ * and `feathers` (matte overlapping vanes with a shaft; tint it).
  */
 export const MATERIAL_PRESETS = [
   'casing',
@@ -187,6 +189,8 @@ export const MATERIAL_PRESETS = [
   'trachea',
   'nerve',
   'eye',
+  'scales',
+  'feathers',
   'metal',
   'matte',
 ] as const;
@@ -675,10 +679,11 @@ export const groupSchema = z
     /**
      * A scale bar under the group while it is the focus (a part of it selected,
      * soloed, or `group:<id>` among the labels on show): a round real length in
-     * `unit`, for a sub-model drawn `magnification` × life size (default 1),
-     * reading the model's `units` (default 1 scene unit = 1 m).
+     * `unit` (`um`: micrometres, cells under a microscope), for a sub-model
+     * drawn `magnification` × life size (default 1), reading the model's
+     * `units` (default 1 scene unit = 1 m).
      */
-    scale: z.object({ unit: z.enum(['mm', 'cm', 'm']), magnification: z.number().positive().default(1) }).strict().optional(),
+    scale: z.object({ unit: z.enum(['um', 'mm', 'cm', 'm']), magnification: z.number().positive().default(1) }).strict().optional(),
   })
   .strict();
 export type PartGroup = z.output<typeof groupSchema>;

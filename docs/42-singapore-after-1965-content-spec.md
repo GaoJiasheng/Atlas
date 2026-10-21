@@ -554,4 +554,46 @@ datedLayers:
 
 ## 9. 实现记录与已知差距
 
-（施工后填写。）
+### 9.1 施工（2026-10-21，Opus，一个代理一次做完；没有 Codex，没有用 Sonnet 子代理）
+
+| 步 | 结果 |
+|---|---|
+| 0 脚手架 | `new-topic.ts`；`topic.yaml` 照 §2.3；`entities.json`、`movements.json` 为 `[]`；`control.json` 两个空帧（K1 1965-08-09、K2 2023-08-09）。脚手架生成的 `scripts/geo/singapore-after-1965/` 已删（本主题不跑地图管线，地图来源记在 `data/SOURCES.md`） |
+| V 引擎核对 | 见 9.2 |
+| D 数据 | 事件 34 个（新建 27、复制 7，逐字节相同，单测比对）；milestone 16、political 11、site 7；来源 87 条（S401–S475 新编，12 个继承编号原样复制）；名词 15；预设 4（island、west、civic、region） |
+| E / Z 正文 | 背景 + 6 章，英文与中文各自写成；英文 213–300 词、中文 344–446 字，每章 4 段、2–4 个细看（共 22 个）；30 拍 |
+| T 史学复核 | `AUDIT.md`（逐条核对表、§0.3 十一条如何落地、中文写法核对、没读到的原文）；`REVIEW.md`（13 处待读段落，中文在前，带段落号） |
+| I 图像 | 首页图 `public/illustrations/singapore-after-1965(.webp,@2x.webp)` + `src/lib/illustrations.json` 掩膜；章节图 `figures/singapore-after-1965-national-service`（第 01 章细看“9,000 人还是 900 人？”之后）、`figures/singapore-after-1965-factory-work`（第 04 章细看“裕廊的头几年”之后，123 KB，略超 120 KB 的目标）。三张都看过：无人、无字、无旗徽、无武器 |
+| 回链 | 《新加坡 1819–1965》第 11 章末段、《土地利用》第 02 章裕廊一段，各加一句 `<TopicLink>`（英、中） |
+| 测试 | `tests/singapore-after-1965.test.ts`（复制事件与来源逐字节相同、`konfrontasi` 一致、坐标在新加坡、巴西拉峇 [103.672, 1.334]、零实体零路线两空帧、每章 3–5 拍、无 `borders`、巴西拉峇附近镜头 ≤ 11.5、无“我们 / 敌人 / we / our / enemy”（引文除外）、无年级、无【待译】、无“奥斯曼·渥”“兰花”）；`tests-e2e/singapore-after-1965.spec.ts`（章节顺序、各章事件的引线、第 04 章工业区图层、中文） |
+
+### 9.2 引擎核对 V1–V4
+
+| # | 结论 |
+|---|---|
+| V1 零实体 + 全空控制区 | `pnpm validate` 0 错 0 警告；`--keys`、`--layout` 全过；状态串“00 / 00 · K1→K2”、REFERENCE 横幅（实线 K1、虚线 K2，没有轮廓可画）、领土名称、KEY 都不报错。**唯一的问题**：右上“参与与控制面积”卡在零实体时仍画出一个只有时间刻度的空图框。按本节规定没有改引擎，也没有造假实体；最小改动建议：`src/engines/time-scene/View.tsx` 在 `geo.entities.length === 0` 时不注册 `card` / `cardToggle`、不渲染 `<SceneSlot name="card">`，补一条单测与 docs/06 一句（交主会话或引擎代理） |
+| V2 复用别的主题的图层文件 | 通过：`datedLayers.file: sg-estates` 直接读 `public/geo/sg-estates.json`，`color: token:holder-1` 校验通过；第 04 章第 3、5 拍工业区出现（e2e 断言 1968 年可见 1 块），KEY 与 LAYERS 各一行 |
+| V3 巴西拉峇只出一个点 | 通过：事件只有一个点 [103.672, 1.334]，没有任何几何；含它的镜头最大 zoom 11.2–11.4（单测检查 ≤ 11.5）；读者放大到 14 也只是一个点 |
+| V4 引线与拖动检查 | 通过：背景章不写章节级高亮（同 land-use 的处理），四拍各自保留；`--keys` 的“drag frees the camera”en、zh 都 OK |
+
+另：`scripts/validate-content.ts` 读其他主题章节 id 的正则只认 YAML `id:`，《新加坡 1819–1965》用 JSON frontmatter，`<TopicLink slug="singapore-1819-1965" ch="separation">` 因此误报“没有这一章”。已把正则改为同时认 `"id": "…"`，`tests/validate-content.test.ts` 加一个 JSON frontmatter 的用例（校验工具，不是引擎）。
+
+### 9.3 与本 spec 不同的地方
+
+- 第 01 章章节镜头与第 1 拍改为 [103.78, 1.35] 11.2（原 [103.70, 1.335]）：巴西拉峇落在画面左三分之一，引线不再横穿全岛。
+- 第 03 章正文：签署东盟宣言的不全是外交部长（马来西亚是副首相），写“五位代表”。
+- 第 05 章细看“1969 年：只有一份记录”改名“1969 年：短暂的冲突”（§0.3-5 之后已不止一个来源）。
+- 1968 年劳工法令：草稿里“把升职、调职等交给雇主”一类的具体条目没有读到的来源，删去；只用 NLB 的“把管理权还给雇主”。
+- 首页图的专用 alt 没有字段可放（首页卡片统一用主题标题作 alt）。
+- 《新加坡 1819–1965》第 11 章的“奥斯曼·渥”“尤索夫·伊萨”没有改（不属于本主题的文件），留给主会话统一（§0.1-1）。
+
+### 9.4 门槛（2026-10-21）
+
+`pnpm check` 0 错；`pnpm validate` 0 错 0 警告；`pnpm test` 3,357 项中只有 `tests/time-scene/territory.test.ts` 的 ww2 锚点用例在机器满载时超时（5 s），单独重跑通过；`pnpm build` 通过；`pnpm shoot singapore-after-1965 --beats --keys --layout --locale en,zh`：节拍 0 失败、未标注高亮 0、“chapter highlights”全在屏内、键位 0 失败、布局 0 问题、console 干净；回归 `pnpm shoot singapore-land-use --keys`、`pnpm shoot singapore-1819-1965 --keys` 均 OK；`CI=1 pnpm e2e` 240 项中 239 过，`time-label-drag`（cinema）在满载的全量运行里失败、`hud` 的演示语音用例重试后过，两者单独重跑都通过；本主题的 3 个 e2e 用例都过。
+
+### 9.5 已知差距
+
+- NewspaperSG 全文（1969、1971、1965、1997、1998 年的几篇）只读到版面目录；光谱行动的尚达曼 2001、黄锦西 1991、Turnbull 2009 没有读到，已按 §0.3 删去。
+- 1966 年回教法令、1968 年两部劳工法令的确切通过日没查到，事件只写到年 / 月。
+- 中文名未在新加坡华文来源核到的，列在 AUDIT.md“Chinese forms”和 REVIEW.md 二。
+- 右上卡的空框（V1）。

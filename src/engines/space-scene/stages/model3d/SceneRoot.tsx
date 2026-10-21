@@ -26,7 +26,7 @@ import { resolveDataColor, resolveMaterialLook } from '../../lib/color';
 import { damp, easeInOutCubic, normalize3, type Vec3 } from '../../lib/math';
 import { POSE_DURATION, restTransform, toTransform, type PartTransform } from '../../lib/pose';
 import { createRuntime, keepAnimating, MAX_DT, RuntimeContext, useRuntime, type StageRuntime } from './runtime';
-import { PartNode, type PartHandle, type PartShape, type SimMove } from './PartNode';
+import { PartNode, type PartHandle, type PartShape, type ShiftMove, type SimMove } from './PartNode';
 import { Flows } from './Flows';
 import { CameraRig } from './CameraRig';
 import { Lighting } from './Lighting';
@@ -56,6 +56,7 @@ import type { SimOutputs } from '../../lib/sim';
 import { evaluateSimOnStage } from '../../lib/sim/carrier';
 import { frameKey, type MagnetFrames } from '../../lib/sim/frame';
 import { simEffects, type SimEffects } from '../../lib/sim/bind';
+import { shiftDelays } from '../../lib/sim/shift';
 import { fieldLines, ironFilings, type Filing } from '../../lib/sim/field';
 import { filingMatrices, filingsCard } from './geometry';
 import { SimOverlays } from './SimOverlays';
@@ -517,6 +518,18 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
     return out;
   }, [sim]);
   const referenceOn = useStore(ui, (u) => u.reference !== null);
+  // Shifts (docs/38 §4.3): the parts whose slot changed move one after another in the vector's order; hidden ones (now or just before) stay out of the queue.
+  const shiftLast = useRef<{ fx: SimEffects | null; moves: Map<string, ShiftMove>; targets: Map<string, Vec3>; hidden: Set<string> }>({ fx: null, moves: new Map(), targets: new Map(), hidden: new Set() });
+  const shiftMoves = useMemo(() => {
+    const last = shiftLast.current;
+    if (!sim || sim.shift.size === 0) return last.moves.size === 0 ? last.moves : new Map<string, ShiftMove>();
+    if (last.fx === sim) return last.moves;
+    const delays = shiftDelays(last.targets, sim.shift, new Set([...sim.hidden, ...last.hidden]));
+    const moves = new Map<string, ShiftMove>();
+    for (const [id, sh] of sim.shift) moves.set(id, { target: sh.offset, shown: !sim.hidden.has(id), delay: delays.get(id) ?? 0, ease: sh.ease, lift: sh.lift });
+    shiftLast.current = { fx: sim, moves, targets: new Map([...sim.shift].map(([id, sh]) => [id, sh.offset])), hidden: new Set([...sim.shift.keys()].filter((id) => sim.hidden.has(id))) };
+    return moves;
+  }, [sim]);
   const simTints = useMemo(() => {
     const out = new Map<string, { color: string; level: number }>();
     sim?.tint.forEach((g, id) => out.set(id, { color: resolveDataColor(g.color, look.tokens, look.theme, '#cc6328'), level: g.level }));
@@ -642,6 +655,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
             fill={sim?.fill.get(part.id) ?? null}
             fillBridge={bridge}
             fillStill={referenceOn}
+            shift={shiftMoves.get(part.id) ?? null}
             simTint={simTints.get(part.id) ?? null}
             filings={filingSets.get(part.id) ?? null}
             animSim={sim?.animations}

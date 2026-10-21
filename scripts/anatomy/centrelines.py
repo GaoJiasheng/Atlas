@@ -54,7 +54,35 @@ def resample(path, step=.008):
     return np.stack([np.interp(at,station,path[:,a]) for a in range(3)],axis=1)
 
 
-def extract(points,faces,upstream=None,downstream=None):
+def axis_sections(p,f,upstream=None,step=.008):
+    """Length-weighted triangle-section centroids along the principal axis (welded points/faces)."""
+    p=np.asarray(p,dtype=float);f=np.asarray(f)
+    _,_,axes=np.linalg.svd(p-p.mean(0),full_matrices=False)
+    axis=axes[0];station=(p-p.mean(0))@axis;tri=p[f];td=(tri-p.mean(0))@axis
+    lo,hi=float(station.min()),float(station.max())
+    path=[]
+    for level in np.linspace(lo+.0005,hi-.0005,max(8,int((hi-lo)/.002))):
+        ds=td-level;mask=(ds.min(1)<0)&(ds.max(1)>0);tt=tri[mask];dd=ds[mask]
+        sections=[[] for _ in tt]
+        for aa,bb in [(0,1),(1,2),(2,0)]:
+            ix=np.flatnonzero(dd[:,aa]*dd[:,bb]<0);t=dd[ix,aa]/(dd[ix,aa]-dd[ix,bb])
+            q=tt[ix,aa]+t[:,None]*(tt[ix,bb]-tt[ix,aa])
+            for i,v in zip(ix,q):sections[int(i)].append(v)
+        sections=np.asarray([s for s in sections if len(s)==2])
+        if not len(sections):continue
+        weights=np.linalg.norm(sections[:,1]-sections[:,0],axis=1)
+        path.append(np.average(sections.mean(1),axis=0,weights=weights))
+    path=np.asarray(path)
+    trim=max(2,int(len(path)*.03))
+    path=path[trim:-trim]
+    if upstream is not None:
+        cloud=np.asarray(upstream).reshape(-1,3)
+        if np.linalg.norm(path[-1]-cloud,axis=1).min()<np.linalg.norm(path[0]-cloud,axis=1).min():path=path[::-1]
+    for _ in range(2):path[1:-1]=(path[:-2]+2*path[1:-1]+path[2:])/4
+    return resample(path,step)
+
+
+def extract(points,faces,upstream=None,downstream=None,step=.008):
     p,f,adj,loops,inverse=graph_geometry(points,faces)
     # Most distant boundary rings, so a torn seam doesn't masquerade as a tube end.
     # A tube end is a ring of real width: a pinhole (the duodenal papilla's
@@ -79,29 +107,7 @@ def extract(points,faces,upstream=None,downstream=None):
         # Capped/double-wall source tubes have no topological boundary. Slice
         # their principal axis and use length-weighted section centroids. The
         # coiled open jejunum never takes this branch.
-        _,_,axes=np.linalg.svd(p-p.mean(0),full_matrices=False)
-        axis=axes[0];station=(p-p.mean(0))@axis;tri=p[f];td=(tri-p.mean(0))@axis
-        lo,hi=float(station.min()),float(station.max())
-        path=[]
-        for level in np.linspace(lo+.0005,hi-.0005,max(8,int((hi-lo)/.002))):
-            ds=td-level;mask=(ds.min(1)<0)&(ds.max(1)>0);tt=tri[mask];dd=ds[mask]
-            sections=[[] for _ in tt]
-            for aa,bb in [(0,1),(1,2),(2,0)]:
-                ix=np.flatnonzero(dd[:,aa]*dd[:,bb]<0);t=dd[ix,aa]/(dd[ix,aa]-dd[ix,bb])
-                q=tt[ix,aa]+t[:,None]*(tt[ix,bb]-tt[ix,aa])
-                for i,v in zip(ix,q):sections[int(i)].append(v)
-            sections=np.asarray([s for s in sections if len(s)==2])
-            if not len(sections):continue
-            weights=np.linalg.norm(sections[:,1]-sections[:,0],axis=1)
-            path.append(np.average(sections.mean(1),axis=0,weights=weights))
-        path=np.asarray(path)
-        trim=max(2,int(len(path)*.03))
-        path=path[trim:-trim]
-        if upstream is not None:
-            cloud=np.asarray(upstream).reshape(-1,3)
-            if np.linalg.norm(path[-1]-cloud,axis=1).min()<np.linalg.norm(path[0]-cloud,axis=1).min():path=path[::-1]
-        for _ in range(2):path[1:-1]=(path[:-2]+2*path[1:-1]+path[2:])/4
-        path=resample(path)
+        path=axis_sections(p,f,upstream,step)
         return path,dict(method='principal-axis triangle-section perimeter centroids',boundaryRings=len(loops),connectedFraction=1.,schematic=False)
     ca=p[a].mean(0);cb=p[b].mean(0)
     if upstream is not None:
@@ -139,9 +145,60 @@ def extract(points,faces,upstream=None,downstream=None):
         if mask.sum()>=3: path.append(p[mask].mean(0))
     path.append(cb);path=np.asarray(path)
     for _ in range(3): path[1:-1]=(path[:-2]+2*path[1:-1]+path[2:])/4
-    path=resample(path)
+    path=resample(path,step)
     return path,dict(method=method,boundaryRings=len(loops),boundaryRingVertices=[len(v) for v in loops],
         connectedFraction=float(valid.mean()),surfaceGeodesicLengthM=surface_length,schematic=False)
+
+
+def geodesic_tube(points,faces,reference,step=.008):
+    """Axis of a tube from its open ring nearest `reference` to its geodesically farthest point.
+
+    For a tube with one real end ring, a capped far end and a side opening part-way
+    along (a tributary mouth), where ring-to-ring paths double back and principal-axis
+    sections cut across both limbs: walk the shortest surface path from the ring to the
+    far end and, at each step, average the vertices at the same geodesic distance that
+    lie within 2.5 ring radii of the walk (the other limb is further away).
+    """
+    p,f,adj,loops,_=graph_geometry(points,faces)
+    ref=np.asarray(reference,dtype=float).reshape(-1,3)
+    rings=[l for l in loops if len(l)>=5]
+    ring=min(rings,key=lambda l:float(np.min(np.linalg.norm(ref-p[l].mean(0),axis=1))))
+    radius=float(np.linalg.norm(p[ring]-p[ring].mean(0),axis=1).mean())
+    d=np.full(len(p),np.inf);prev=np.full(len(p),-1);queue=[]
+    for i in ring:d[i]=0;heapq.heappush(queue,(0.,int(i)))
+    while queue:
+        value,i=heapq.heappop(queue)
+        if value>d[i]+1e-12:continue
+        for j,w in adj[i].items():
+            if value+w<d[j]:d[j]=value+w;prev[j]=i;heapq.heappush(queue,(value+w,j))
+    far=int(np.argmax(np.where(np.isfinite(d),d,-1)));walk=[far]
+    while prev[walk[-1]]>=0:walk.append(int(prev[walk[-1]]))
+    walk=walk[::-1];path=[p[ring].mean(0)];last=0.
+    for v in walk[1:]:
+        if d[v]-last<.002:continue
+        band=(np.abs(d-d[v])<.0015)&(np.linalg.norm(p-p[v],axis=1)<2.5*radius)
+        if band.sum()>=3:path.append(p[band].mean(0));last=d[v]
+    path=np.asarray(path)
+    for _ in range(2):path[1:-1]=(path[:-2]+2*path[1:-1]+path[2:])/4
+    return resample(path[::-1],step)
+
+
+def dehook(path,returns=.01):
+    """Trim a centreline that starts or ends part-way along its tube and doubles back.
+
+    When a tube's open ring sits part-way along it (a tributary mouth) and its far end
+    is capped, the ring-to-ring path runs out to the cap and back past its own start.
+    Such a path is cut at its point farthest from the other end, so it runs cap to ring.
+    Returns the path and the trimmed length (0 when nothing was trimmed).
+    """
+    path=np.asarray(path,dtype=float)
+    for flip in (False,True):
+        p=path[::-1] if flip else path
+        far=int(np.argmax(np.linalg.norm(p-p[-1],axis=1)))
+        if far>2 and np.min(np.linalg.norm(p[far+3:]-p[0],axis=1),initial=np.inf)<returns:
+            q=p[far:];trimmed=float(np.linalg.norm(np.diff(p[:far+1],axis=0),axis=1).sum())
+            return (q[::-1] if flip else q),trimmed
+    return path,0.
 
 
 def project(points,path):

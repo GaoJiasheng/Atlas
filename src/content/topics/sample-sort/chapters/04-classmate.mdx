@@ -1,0 +1,48 @@
+---
+id: classmate
+order: 4
+title: { en: "Sample classmate's tray", zh: "示例同学的分类盘" }
+state:
+  view: assembled
+  explode: 0
+  run: false
+  part: null
+  layers: [round, boxy, pointy, tray, scenery]
+  camera: {"position": [0.02, 0.66, 0.86], "target": [-0.07, 0.0, 0.02], "fov": 32}
+  labels: [sample-ring, sample-cone, sample-tile]
+  summary: { en: "Sample classmate's tray: three are in the wrong group.", zh: "示例同学的分类盘：有三件放错了组。" }
+  sim:
+    set: { tray: classmate, fix: false, suspect: sample-ring }
+    try:
+      vary: suspect
+      also: [fix]
+      keep: [{ en: "Same groups", zh: "同样的组" }]
+      observe: [verdict, belongs, wrong]
+      predict:
+        prompt: { en: "Sample prediction: moved to the right groups, how many are wrong?", zh: "示例猜想：放回正确的组以后，还有几件放错？" }
+        start: { fix: false }
+        change: { fix: true }
+        observe: wrong
+        options:
+          - { id: none-left, label: { en: "None", zh: "一件也没有" }, means: zero }
+          - { id: fewer, label: { en: "Fewer", zh: "少一些" }, means: less }
+          - { id: same, label: { en: "The same", zh: "一样多" }, means: same }
+  beats:
+    - caption: { en: "Sample beat one: the classmate's groups.", zh: "示例节拍一：同学分的组。" }
+    - sim: { set: { fix: true } }
+      caption: { en: "Sample beat two: each one moved to its right group.", zh: "示例节拍二：每件放回正确的组。" }
+  index:
+    parts: [sample-ball, sample-bead, sample-ring, sample-cube, sample-brick, sample-tile, sample-cone, sample-spike, pad-3a, pad-3b, pad-3c]
+---
+
+<Lang en>
+
+Sample classmate's tray: placeholder text for checking which ones were put in the wrong group.
+
+</Lang>
+
+<Lang zh>
+
+示例同学的分类盘：检查哪几件放错了组的占位文字。
+
+</Lang>

@@ -1,0 +1,205 @@
+{
+  "terms": [
+    {
+      "id": "national-service",
+      "term": {
+        "en": "National Service",
+        "zh": "国民服役"
+      },
+      "definition": {
+        "en": "Service in the armed forces, police or civil defence that the law requires of young men; it began in 1967. After full-time service they become NSmen.",
+        "zh": "法律规定男青年在武装部队、警察部队或民防部队服役；1967 年开始。全职服役完毕后成为战备军人。"
+      },
+      "see": [
+        "nsman",
+        "saf"
+      ]
+    },
+    {
+      "id": "nsman",
+      "term": {
+        "en": "NSman",
+        "zh": "战备军人"
+      },
+      "definition": {
+        "en": "A man who has finished full-time National Service and is called back for training from time to time, ready to be mobilised.",
+        "zh": "完成全职国民服役后，按规定定期回营训练、随时可以动员的人。"
+      },
+      "see": [
+        "national-service"
+      ]
+    },
+    {
+      "id": "saf",
+      "term": {
+        "en": "Singapore Armed Forces (SAF)",
+        "zh": "新加坡武装部队"
+      },
+      "definition": {
+        "en": "Singapore's army, navy and air force, built up after independence in 1965.",
+        "zh": "新加坡的陆军、海军和空军，1965 年独立后建立。"
+      }
+    },
+    {
+      "id": "safti",
+      "term": {
+        "en": "SAFTI",
+        "zh": "新加坡武装部队军训学院"
+      },
+      "definition": {
+        "en": "The Singapore Armed Forces Training Institute, set up in 1966 at Pasir Laba Camp to train officers and instructors; it moved to a new campus in 1995.",
+        "zh": "1966 年在巴西拉峇军营成立、训练军官和教官的学校；1995 年迁往新校园。"
+      },
+      "see": [
+        "saf"
+      ]
+    },
+    {
+      "id": "national-symbols",
+      "term": {
+        "en": "National symbols",
+        "zh": "国家象征"
+      },
+      "definition": {
+        "en": "The seven symbols named in the National Symbols Act 2022: the flag, anthem, Pledge, coat of arms, Public Seal, Lion Head symbol and national flower.",
+        "zh": "《2022 年国家象征法令》列明的七个象征：国旗、国歌、信约、国徽、公共印章、狮头标志和国花。"
+      },
+      "see": [
+        "national-pledge",
+        "public-seal"
+      ]
+    },
+    {
+      "id": "national-pledge",
+      "term": {
+        "en": "National Pledge",
+        "zh": "信约"
+      },
+      "definition": {
+        "en": "A promise of loyalty to Singapore, recited by pupils every school day since 1966; it has official texts in English, Chinese, Malay and Tamil.",
+        "zh": "向新加坡宣誓效忠的誓词，1966 年起学生每个上课日诵读；有英文、华文、马来文和泰米尔文四种官方文本。"
+      },
+      "see": [
+        "national-symbols"
+      ]
+    },
+    {
+      "id": "public-seal",
+      "term": {
+        "en": "Public Seal",
+        "zh": "公共印章"
+      },
+      "definition": {
+        "en": "The national coat of arms with the words “Republic of Singapore” around it, kept by the President and used on important state documents.",
+        "zh": "外面环绕着“新加坡共和国”字样的国徽印，由总统保管，盖在重要的国家文件上。"
+      },
+      "see": [
+        "national-symbols"
+      ]
+    },
+    {
+      "id": "orchid",
+      "term": {
+        "en": "Orchid",
+        "zh": "胡姬"
+      },
+      "definition": {
+        "en": "A large family of flowering plants; 胡姬 is the Singapore and Malaysia word. The national flower, Vanda Miss Joaquim, is a hybrid orchid.",
+        "zh": "一大类开花植物，新加坡和马来西亚叫“胡姬”。国花卓锦万代兰是一种杂交胡姬。"
+      }
+    },
+    {
+      "id": "bilingual-policy",
+      "term": {
+        "en": "Bilingual education policy",
+        "zh": "双语教育政策"
+      },
+      "definition": {
+        "en": "Pupils learn English and a second language, usually their community's language: Chinese, Malay or Tamil.",
+        "zh": "学生学英文，再学一种第二语文，通常是自己族群的语文：华文、马来文或泰米尔文。"
+      },
+      "see": [
+        "speak-mandarin-campaign"
+      ]
+    },
+    {
+      "id": "speak-mandarin-campaign",
+      "term": {
+        "en": "Speak Mandarin Campaign",
+        "zh": "讲华语运动"
+      },
+      "definition": {
+        "en": "A campaign begun in 1979 that asks Chinese Singaporeans to use Mandarin, rather than dialects such as Hokkien, Teochew and Cantonese, at home and in public.",
+        "zh": "1979 年起的运动，鼓励新加坡华人在家里和公共场合讲华语，少讲福建话、潮州话、广东话等方言。"
+      },
+      "see": [
+        "bilingual-policy"
+      ]
+    },
+    {
+      "id": "racial-harmony-day",
+      "term": {
+        "en": "Racial Harmony Day",
+        "zh": "种族和谐日"
+      },
+      "definition": {
+        "en": "21 July, the day the riots of 1964 began. Schools mark it by learning about each other's cultures.",
+        "zh": "7 月 21 日，1964 年骚乱开始的日子。学校在这一天让学生认识彼此的文化。"
+      },
+      "see": [
+        "national-education"
+      ]
+    },
+    {
+      "id": "national-education",
+      "term": {
+        "en": "National Education",
+        "zh": "国民教育"
+      },
+      "definition": {
+        "en": "Lessons and activities in schools since 1997, including four commemorative days: Total Defence Day, International Friendship Day, Racial Harmony Day and National Day.",
+        "zh": "1997 年起学校的一套课程和活动，包括四个纪念日：全面防卫日、国际友谊日、种族和谐日和国庆日。"
+      },
+      "see": [
+        "racial-harmony-day",
+        "total-defence"
+      ]
+    },
+    {
+      "id": "total-defence",
+      "term": {
+        "en": "Total Defence",
+        "zh": "全面防卫"
+      },
+      "definition": {
+        "en": "The idea, introduced in 1984, that defence depends on everyone, not only the armed forces: military, civil, economic, social and psychological defence, and digital defence since 2019.",
+        "zh": "1984 年提出的观念：防卫不只靠军队，而是靠每一个人，包括军事、民事、经济、社会和心理防卫，2019 年起加上数码防卫。"
+      },
+      "see": [
+        "national-education"
+      ]
+    },
+    {
+      "id": "konfrontasi",
+      "term": {
+        "en": "Confrontation (Konfrontasi)",
+        "zh": "对抗（Konfrontasi）"
+      },
+      "definition": {
+        "en": "Indonesia’s political and armed campaign against the new Malaysia, from 1963 to 1966, including raids in Borneo and bombs in Singapore.",
+        "zh": "印度尼西亚在 1963 年至 1966 年间反对马来西亚成立的政治与武装行动，包括在婆罗洲的越境袭击和在新加坡的爆炸。"
+      }
+    },
+    {
+      "id": "internal-security-act",
+      "term": {
+        "en": "Internal Security Act",
+        "zh": "内部安全法令"
+      },
+      "definition": {
+        "en": "A law that allows the government to detain without trial people it considers a threat to national security.",
+        "zh": "允许政府不经审判拘留它认为威胁国家安全的人的法律。"
+      }
+    }
+  ]
+}

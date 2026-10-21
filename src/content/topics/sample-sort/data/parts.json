@@ -1,0 +1,1640 @@
+{
+  "parts": [
+    {
+      "id": "sample-ball",
+      "name": {
+        "en": "Ball",
+        "zh": "球"
+      },
+      "group": "round",
+      "summary": {
+        "en": "Sample ball: placeholder summary.",
+        "zh": "示例球：占位概述。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample ball.",
+        "zh": "占位说明：示例球。"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.024
+        ],
+        "at": [
+          -0.135,
+          0.039,
+          -0.32
+        ],
+        "color": "plastic",
+        "tint": "token:accent-1"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.03
+      }
+    },
+    {
+      "id": "sample-bead",
+      "name": {
+        "en": "Bead",
+        "zh": "珠子"
+      },
+      "group": "round",
+      "summary": {
+        "en": "Sample bead: placeholder summary.",
+        "zh": "示例珠子：占位概述。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample bead.",
+        "zh": "占位说明：示例珠子。"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.016
+        ],
+        "at": [
+          -0.045,
+          0.031,
+          -0.32
+        ],
+        "color": "glass"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.03
+      }
+    },
+    {
+      "id": "sample-ring",
+      "name": {
+        "en": "Ring",
+        "zh": "圆环"
+      },
+      "group": "round",
+      "summary": {
+        "en": "Sample ring: placeholder summary.",
+        "zh": "示例圆环：占位概述。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample ring.",
+        "zh": "占位说明：示例圆环。"
+      },
+      "primitive": {
+        "kind": "torus",
+        "size": [
+          0.02,
+          0.006
+        ],
+        "at": [
+          0.045,
+          0.020999999999999998,
+          -0.32
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "color": "brass"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.03
+      }
+    },
+    {
+      "id": "sample-cube",
+      "name": {
+        "en": "Cube",
+        "zh": "方块"
+      },
+      "group": "boxy",
+      "summary": {
+        "en": "Sample cube: placeholder summary.",
+        "zh": "示例方块：占位概述。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample cube.",
+        "zh": "占位说明：示例方块。"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.042,
+          0.042,
+          0.042
+        ],
+        "at": [
+          0.135,
+          0.036000000000000004,
+          -0.32
+        ],
+        "color": "scales",
+        "tint": "token:holder-4"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.03
+      }
+    },
+    {
+      "id": "sample-brick",
+      "name": {
+        "en": "Brick",
+        "zh": "砖块"
+      },
+      "group": "boxy",
+      "summary": {
+        "en": "Sample brick: placeholder summary.",
+        "zh": "示例砖块：占位概述。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample brick.",
+        "zh": "占位说明：示例砖块。"
+      },
+      "primitive": {
+        "kind": "capsule",
+        "size": [
+          0.016,
+          0.03
+        ],
+        "at": [
+          -0.135,
+          0.046,
+          -0.23
+        ],
+        "color": "feathers",
+        "tint": "token:holder-2"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.03
+      }
+    },
+    {
+      "id": "sample-tile",
+      "name": {
+        "en": "Tile",
+        "zh": "瓷片"
+      },
+      "group": "boxy",
+      "summary": {
+        "en": "Sample tile: placeholder summary.",
+        "zh": "示例瓷片：占位概述。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample tile.",
+        "zh": "占位说明：示例瓷片。"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.05,
+          0.008,
+          0.05
+        ],
+        "at": [
+          -0.045,
+          0.019,
+          -0.23
+        ],
+        "color": "enamel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.03
+      }
+    },
+    {
+      "id": "sample-cone",
+      "name": {
+        "en": "Cone",
+        "zh": "圆锥"
+      },
+      "group": "pointy",
+      "summary": {
+        "en": "Sample cone: placeholder summary.",
+        "zh": "示例圆锥：占位概述。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample cone.",
+        "zh": "占位说明：示例圆锥。"
+      },
+      "primitive": {
+        "kind": "cone",
+        "size": [
+          0.022,
+          0.05
+        ],
+        "at": [
+          0.045,
+          0.04,
+          -0.23
+        ],
+        "color": "wood"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.03
+      }
+    },
+    {
+      "id": "sample-spike",
+      "name": {
+        "en": "Spike",
+        "zh": "尖刺"
+      },
+      "group": "pointy",
+      "summary": {
+        "en": "Sample spike: placeholder summary.",
+        "zh": "示例尖刺：占位概述。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample spike.",
+        "zh": "占位说明：示例尖刺。"
+      },
+      "primitive": {
+        "kind": "cone",
+        "size": [
+          0.01,
+          0.055
+        ],
+        "at": [
+          0.135,
+          0.042499999999999996,
+          -0.23
+        ],
+        "color": "steel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.03
+      }
+    },
+    {
+      "id": "pad-2a",
+      "name": {
+        "en": "Group A",
+        "zh": "A 组"
+      },
+      "group": "tray",
+      "summary": {
+        "en": "Sample group a: placeholder summary.",
+        "zh": "示例A 组：占位概述。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample group a.",
+        "zh": "占位说明：示例A 组。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.336,
+          0.003,
+          0.176
+        ],
+        "bevel": 0.001,
+        "at": [
+          -0.2,
+          0.0095,
+          0.1
+        ],
+        "color": "fabric",
+        "tint": "token:neutral"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      }
+    },
+    {
+      "id": "pad-2b",
+      "name": {
+        "en": "Group B",
+        "zh": "B 组"
+      },
+      "group": "tray",
+      "summary": {
+        "en": "Sample group b: placeholder summary.",
+        "zh": "示例B 组：占位概述。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample group b.",
+        "zh": "占位说明：示例B 组。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.336,
+          0.003,
+          0.176
+        ],
+        "bevel": 0.001,
+        "at": [
+          0.2,
+          0.0095,
+          0.1
+        ],
+        "color": "fabric",
+        "tint": "token:neutral"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      }
+    },
+    {
+      "id": "pad-3a",
+      "name": {
+        "en": "Group A",
+        "zh": "A 组"
+      },
+      "group": "tray",
+      "summary": {
+        "en": "Sample group a: placeholder summary.",
+        "zh": "示例A 组：占位概述。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample group a.",
+        "zh": "占位说明：示例A 组。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.276,
+          0.003,
+          0.146
+        ],
+        "bevel": 0.001,
+        "at": [
+          -0.29,
+          0.0095,
+          0.1
+        ],
+        "color": "fabric",
+        "tint": "token:neutral"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      }
+    },
+    {
+      "id": "pad-3b",
+      "name": {
+        "en": "Group B",
+        "zh": "B 组"
+      },
+      "group": "tray",
+      "summary": {
+        "en": "Sample group b: placeholder summary.",
+        "zh": "示例B 组：占位概述。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample group b.",
+        "zh": "占位说明：示例B 组。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.276,
+          0.003,
+          0.146
+        ],
+        "bevel": 0.001,
+        "at": [
+          0,
+          0.0095,
+          0.1
+        ],
+        "color": "fabric",
+        "tint": "token:neutral"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      }
+    },
+    {
+      "id": "pad-3c",
+      "name": {
+        "en": "Group C",
+        "zh": "C 组"
+      },
+      "group": "tray",
+      "summary": {
+        "en": "Sample group c: placeholder summary.",
+        "zh": "示例C 组：占位概述。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample group c.",
+        "zh": "占位说明：示例C 组。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.276,
+          0.003,
+          0.146
+        ],
+        "bevel": 0.001,
+        "at": [
+          0.29,
+          0.0095,
+          0.1
+        ],
+        "color": "fabric",
+        "tint": "token:neutral"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      }
+    },
+    {
+      "id": "sample-cell",
+      "name": {
+        "en": "Cell",
+        "zh": "细胞"
+      },
+      "group": "magnified",
+      "summary": {
+        "en": "Sample cell: placeholder summary.",
+        "zh": "示例细胞：占位概述。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample cell.",
+        "zh": "占位说明：示例细胞。"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.02
+        ],
+        "scale": [
+          1,
+          0.8,
+          1
+        ],
+        "at": [
+          0.36,
+          0.035,
+          -0.3
+        ],
+        "color": "tissue"
+      }
+    },
+    {
+      "id": "cell-plinth",
+      "name": {
+        "en": "Plinth",
+        "zh": "台座"
+      },
+      "group": "magnified",
+      "context": true,
+      "clip": false,
+      "summary": {
+        "en": "Sample plinth: placeholder summary.",
+        "zh": "示例台座：占位概述。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample plinth.",
+        "zh": "占位说明：示例台座。"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.1,
+          0.012,
+          0.1
+        ],
+        "at": [
+          0.36,
+          0.006,
+          -0.3
+        ],
+        "color": "enamel"
+      }
+    },
+    {
+      "id": "bench",
+      "name": {
+        "en": "Bench",
+        "zh": "长桌"
+      },
+      "group": "scenery",
+      "context": true,
+      "clip": false,
+      "summary": {
+        "en": "Sample bench: placeholder summary.",
+        "zh": "示例长桌：占位概述。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample bench.",
+        "zh": "占位说明：示例长桌。"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          1.1,
+          0.04,
+          0.8
+        ],
+        "at": [
+          0,
+          -0.02,
+          -0.02
+        ],
+        "color": "wood"
+      }
+    },
+    {
+      "id": "specimen-case",
+      "name": {
+        "en": "Specimen case",
+        "zh": "标本盒"
+      },
+      "group": "scenery",
+      "context": true,
+      "clip": false,
+      "summary": {
+        "en": "Sample specimen case: placeholder summary.",
+        "zh": "示例标本盒：占位概述。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample specimen case.",
+        "zh": "占位说明：示例标本盒。"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.4,
+          0.015,
+          0.21
+        ],
+        "at": [
+          0,
+          0.0075,
+          -0.275
+        ],
+        "color": "wood",
+        "tint": "token:neutral"
+      }
+    },
+    {
+      "id": "sorting-tray",
+      "name": {
+        "en": "Sorting tray",
+        "zh": "分类盘"
+      },
+      "group": "scenery",
+      "context": true,
+      "clip": false,
+      "summary": {
+        "en": "Sample sorting tray: placeholder summary.",
+        "zh": "示例分类盘：占位概述。"
+      },
+      "detail": {
+        "en": "Placeholder detail for the sample sorting tray.",
+        "zh": "占位说明：示例分类盘。"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.9,
+          0.008,
+          0.3
+        ],
+        "at": [
+          0,
+          0.004,
+          0.1
+        ],
+        "color": "wood",
+        "tint": "token:neutral"
+      }
+    }
+  ],
+  "groups": [
+    {
+      "id": "round",
+      "name": {
+        "en": "Round things",
+        "zh": "圆的东西"
+      },
+      "color": "token:holder-1"
+    },
+    {
+      "id": "boxy",
+      "name": {
+        "en": "Boxy things",
+        "zh": "方的东西"
+      },
+      "color": "token:holder-4"
+    },
+    {
+      "id": "pointy",
+      "name": {
+        "en": "Pointy things",
+        "zh": "尖的东西"
+      },
+      "color": "token:holder-6"
+    },
+    {
+      "id": "tray",
+      "name": {
+        "en": "Sorting tray",
+        "zh": "分类盘"
+      },
+      "color": "token:ink-2"
+    },
+    {
+      "id": "magnified",
+      "name": {
+        "en": "Under the microscope",
+        "zh": "显微镜下"
+      },
+      "color": "token:accent-2",
+      "scale": {
+        "unit": "um",
+        "magnification": 5000
+      }
+    },
+    {
+      "id": "scenery",
+      "name": {
+        "en": "Bench and case",
+        "zh": "桌面与标本盒"
+      },
+      "color": "token:neutral"
+    }
+  ],
+  "views": {
+    "assembled": {
+      "camera": {
+        "position": [
+          0.62,
+          0.62,
+          0.92
+        ],
+        "target": [
+          0,
+          0.02,
+          0
+        ],
+        "fov": 32
+      }
+    },
+    "cover": {
+      "position": [
+        0.58,
+        0.56,
+        0.84
+      ],
+      "target": [
+        0,
+        0.02,
+        0
+      ],
+      "fov": 32
+    },
+    "section": {
+      "plane": "xz"
+    }
+  },
+  "spec": [
+    {
+      "key": {
+        "en": "Specimens",
+        "zh": "标本"
+      },
+      "value": {
+        "en": "8 PLACEHOLDERS",
+        "zh": "8 件占位"
+      },
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Model",
+        "zh": "模型"
+      },
+      "value": {
+        "en": "Placeholder bench",
+        "zh": "占位桌面"
+      },
+      "tag": "design"
+    }
+  ],
+  "telemetry": [
+    {
+      "key": {
+        "en": "On the tray",
+        "zh": "托盘上"
+      },
+      "unit": "",
+      "follow": "on-tray"
+    },
+    {
+      "key": {
+        "en": "Groups A · B · C",
+        "zh": "A · B · C 组"
+      },
+      "unit": "",
+      "follow": [
+        "count-a",
+        "count-b",
+        "count-c"
+      ]
+    },
+    {
+      "key": {
+        "en": "In the case",
+        "zh": "盒里"
+      },
+      "unit": "",
+      "follow": "count-u"
+    },
+    {
+      "key": {
+        "en": "Wrongly placed",
+        "zh": "放错的"
+      },
+      "unit": "",
+      "follow": "wrong",
+      "scope": "observe"
+    }
+  ],
+  "presets": [
+    {
+      "id": "case-view",
+      "label": {
+        "en": "Case",
+        "zh": "标本盒"
+      },
+      "camera": {
+        "position": [
+          0.05,
+          0.42,
+          0.18
+        ],
+        "target": [
+          0,
+          0.02,
+          -0.27
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "tray-view",
+      "label": {
+        "en": "Tray",
+        "zh": "分类盘"
+      },
+      "camera": {
+        "position": [
+          0.1,
+          0.55,
+          0.7
+        ],
+        "target": [
+          0,
+          0.02,
+          0.02
+        ],
+        "fov": 32
+      }
+    },
+    {
+      "id": "cell-view",
+      "label": {
+        "en": "Cell",
+        "zh": "细胞"
+      },
+      "camera": {
+        "position": [
+          0.42,
+          0.2,
+          -0.12
+        ],
+        "target": [
+          0.36,
+          0.03,
+          -0.3
+        ],
+        "fov": 28
+      }
+    }
+  ],
+  "sim": {
+    "kind": "sort",
+    "controls": [
+      {
+        "id": "tray",
+        "kind": "choice",
+        "default": "all",
+        "label": {
+          "en": "On the tray",
+          "zh": "托盘上"
+        },
+        "options": [
+          {
+            "id": "all",
+            "label": {
+              "en": "The whole case",
+              "zh": "整盒"
+            }
+          },
+          {
+            "id": "one",
+            "label": {
+              "en": "One question",
+              "zh": "一个问题"
+            }
+          },
+          {
+            "id": "two-step",
+            "label": {
+              "en": "Two questions",
+              "zh": "两个问题"
+            }
+          },
+          {
+            "id": "chain",
+            "label": {
+              "en": "Questions in turn",
+              "zh": "一个个问"
+            }
+          },
+          {
+            "id": "classmate",
+            "label": {
+              "en": "A classmate's tray",
+              "zh": "同学的分类盘"
+            }
+          }
+        ]
+      },
+      {
+        "id": "q-one",
+        "kind": "choice",
+        "default": "none",
+        "label": {
+          "en": "Sort by",
+          "zh": "按什么分"
+        },
+        "options": [
+          {
+            "id": "none",
+            "label": {
+              "en": "Not sorted yet",
+              "zh": "还没分"
+            }
+          },
+          {
+            "id": "round",
+            "label": {
+              "en": "Round all over",
+              "zh": "整个是圆的"
+            }
+          },
+          {
+            "id": "tall",
+            "label": {
+              "en": "Taller than wide",
+              "zh": "比宽还高"
+            }
+          },
+          {
+            "id": "shiny",
+            "label": {
+              "en": "Shiny",
+              "zh": "亮闪闪的"
+            }
+          },
+          {
+            "id": "flat",
+            "label": {
+              "en": "Flat",
+              "zh": "扁平的"
+            }
+          }
+        ]
+      },
+      {
+        "id": "first",
+        "kind": "choice",
+        "default": "round",
+        "label": {
+          "en": "First question",
+          "zh": "第一个问题"
+        },
+        "options": [
+          {
+            "id": "round",
+            "label": {
+              "en": "Round all over",
+              "zh": "整个是圆的"
+            }
+          },
+          {
+            "id": "tall",
+            "label": {
+              "en": "Taller than wide",
+              "zh": "比宽还高"
+            }
+          },
+          {
+            "id": "shiny",
+            "label": {
+              "en": "Shiny",
+              "zh": "亮闪闪的"
+            }
+          },
+          {
+            "id": "flat",
+            "label": {
+              "en": "Flat",
+              "zh": "扁平的"
+            }
+          }
+        ]
+      },
+      {
+        "id": "second",
+        "kind": "choice",
+        "default": "tall",
+        "label": {
+          "en": "Second question",
+          "zh": "第二个问题"
+        },
+        "options": [
+          {
+            "id": "none",
+            "label": {
+              "en": "Not sorted yet",
+              "zh": "还没分"
+            }
+          },
+          {
+            "id": "round",
+            "label": {
+              "en": "Round all over",
+              "zh": "整个是圆的"
+            }
+          },
+          {
+            "id": "tall",
+            "label": {
+              "en": "Taller than wide",
+              "zh": "比宽还高"
+            }
+          },
+          {
+            "id": "shiny",
+            "label": {
+              "en": "Shiny",
+              "zh": "亮闪闪的"
+            }
+          },
+          {
+            "id": "flat",
+            "label": {
+              "en": "Flat",
+              "zh": "扁平的"
+            }
+          }
+        ]
+      },
+      {
+        "id": "asked",
+        "kind": "step",
+        "values": [
+          0,
+          1,
+          2
+        ],
+        "default": 0,
+        "label": {
+          "en": "Questions asked",
+          "zh": "问了几个问题"
+        }
+      },
+      {
+        "id": "suspect",
+        "kind": "choice",
+        "default": "sample-ring",
+        "label": {
+          "en": "Check this one",
+          "zh": "检查这一件"
+        },
+        "options": [
+          {
+            "id": "sample-ring",
+            "label": {
+              "en": "Ring",
+              "zh": "圆环"
+            }
+          },
+          {
+            "id": "sample-cone",
+            "label": {
+              "en": "Cone",
+              "zh": "圆锥"
+            }
+          },
+          {
+            "id": "sample-tile",
+            "label": {
+              "en": "Tile",
+              "zh": "瓷片"
+            }
+          }
+        ]
+      },
+      {
+        "id": "fix",
+        "kind": "toggle",
+        "default": false,
+        "label": {
+          "en": "Move to the right groups",
+          "zh": "放回正确的组"
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "id": "slots",
+        "kind": "vector",
+        "from": "slots",
+        "label": {
+          "en": "Where each one goes",
+          "zh": "每件放在哪里"
+        }
+      },
+      {
+        "id": "layout",
+        "kind": "state",
+        "from": "layout",
+        "label": {
+          "en": "Groups on the tray",
+          "zh": "盘上的组"
+        },
+        "states": {
+          "none": {
+            "en": "None",
+            "zh": "没有"
+          },
+          "two": {
+            "en": "Two groups",
+            "zh": "两组"
+          },
+          "three": {
+            "en": "Three groups",
+            "zh": "三组"
+          }
+        }
+      },
+      {
+        "id": "on-tray",
+        "from": "count:tray",
+        "label": {
+          "en": "On the tray",
+          "zh": "托盘上"
+        }
+      },
+      {
+        "id": "count-u",
+        "from": "count:u",
+        "label": {
+          "en": "In the case",
+          "zh": "盒里"
+        }
+      },
+      {
+        "id": "count-a",
+        "from": "count:a",
+        "label": {
+          "en": "Group A",
+          "zh": "A 组"
+        }
+      },
+      {
+        "id": "count-b",
+        "from": "count:b",
+        "label": {
+          "en": "Group B",
+          "zh": "B 组"
+        }
+      },
+      {
+        "id": "count-c",
+        "from": "count:c",
+        "label": {
+          "en": "Group C",
+          "zh": "C 组"
+        }
+      },
+      {
+        "id": "kinds-a",
+        "from": "kinds:a",
+        "label": {
+          "en": "Kinds in A",
+          "zh": "A 组里的类数"
+        }
+      },
+      {
+        "id": "wrong",
+        "from": "wrong",
+        "label": {
+          "en": "Wrongly placed",
+          "zh": "放错的"
+        }
+      },
+      {
+        "id": "verdict",
+        "kind": "state",
+        "from": "verdict",
+        "label": {
+          "en": "Placed",
+          "zh": "放得"
+        },
+        "states": {
+          "right": {
+            "en": "Right",
+            "zh": "对"
+          },
+          "wrong": {
+            "en": "Wrong",
+            "zh": "错"
+          }
+        }
+      },
+      {
+        "id": "belongs",
+        "kind": "state",
+        "from": "belongs",
+        "label": {
+          "en": "Belongs in",
+          "zh": "本该在"
+        },
+        "states": {
+          "round": {
+            "en": "Round things",
+            "zh": "圆的东西"
+          },
+          "boxy": {
+            "en": "Boxy things",
+            "zh": "方的东西"
+          },
+          "pointy": {
+            "en": "Pointy things",
+            "zh": "尖的东西"
+          }
+        }
+      },
+      {
+        "id": "where-ball",
+        "kind": "state",
+        "from": "where:sample-ball",
+        "label": {
+          "en": "The ball is in",
+          "zh": "球在"
+        },
+        "states": {
+          "u": {
+            "en": "In the case",
+            "zh": "在标本盒里"
+          },
+          "a": {
+            "en": "Group A",
+            "zh": "A 组"
+          },
+          "b": {
+            "en": "Group B",
+            "zh": "B 组"
+          },
+          "c": {
+            "en": "Group C",
+            "zh": "C 组"
+          }
+        }
+      },
+      {
+        "id": "where-ring",
+        "kind": "state",
+        "from": "where:sample-ring",
+        "label": {
+          "en": "The ring is in",
+          "zh": "圆环在"
+        },
+        "states": {
+          "u": {
+            "en": "In the case",
+            "zh": "在标本盒里"
+          },
+          "a": {
+            "en": "Group A",
+            "zh": "A 组"
+          },
+          "b": {
+            "en": "Group B",
+            "zh": "B 组"
+          },
+          "c": {
+            "en": "Group C",
+            "zh": "C 组"
+          },
+          "off": {
+            "en": "Not on this tray",
+            "zh": "不在这个托盘上"
+          }
+        },
+        "predictOnly": [
+          "off"
+        ]
+      }
+    ],
+    "bind": [
+      {
+        "output": "slots",
+        "part": [
+          "sample-ball",
+          "sample-bead",
+          "sample-ring",
+          "sample-cube",
+          "sample-brick",
+          "sample-tile",
+          "sample-cone",
+          "sample-spike"
+        ],
+        "shift": {
+          "ease": 0.8,
+          "stagger": 0.03,
+          "lift": 0.04
+        }
+      },
+      {
+        "output": "layout",
+        "part": [
+          "pad-2a",
+          "pad-2b"
+        ],
+        "visible": {
+          "eq": "two"
+        }
+      },
+      {
+        "output": "layout",
+        "part": [
+          "pad-3a",
+          "pad-3b",
+          "pad-3c"
+        ],
+        "visible": {
+          "eq": "three"
+        }
+      }
+    ],
+    "sort": {
+      "groups": {
+        "round": {
+          "label": {
+            "en": "Round things",
+            "zh": "圆的东西"
+          }
+        },
+        "boxy": {
+          "label": {
+            "en": "Boxy things",
+            "zh": "方的东西"
+          }
+        },
+        "pointy": {
+          "label": {
+            "en": "Pointy things",
+            "zh": "尖的东西"
+          }
+        }
+      },
+      "questions": {
+        "round": {
+          "label": {
+            "en": "Round all over",
+            "zh": "整个是圆的"
+          }
+        },
+        "tall": {
+          "label": {
+            "en": "Taller than wide",
+            "zh": "比宽还高"
+          }
+        },
+        "shiny": {
+          "label": {
+            "en": "Shiny",
+            "zh": "亮闪闪的"
+          }
+        },
+        "flat": {
+          "label": {
+            "en": "Flat",
+            "zh": "扁平的"
+          }
+        }
+      },
+      "specimens": {
+        "sample-ball": {
+          "group": "round",
+          "traits": {
+            "round": true,
+            "tall": false,
+            "shiny": true,
+            "flat": false
+          }
+        },
+        "sample-bead": {
+          "group": "round",
+          "traits": {
+            "round": true,
+            "tall": false,
+            "shiny": false,
+            "flat": false
+          }
+        },
+        "sample-ring": {
+          "group": "round",
+          "traits": {
+            "round": true,
+            "tall": false,
+            "shiny": true,
+            "flat": true
+          }
+        },
+        "sample-cube": {
+          "group": "boxy",
+          "traits": {
+            "round": false,
+            "tall": false,
+            "shiny": false,
+            "flat": false
+          }
+        },
+        "sample-brick": {
+          "group": "boxy",
+          "traits": {
+            "round": false,
+            "tall": true,
+            "shiny": false,
+            "flat": false
+          }
+        },
+        "sample-tile": {
+          "group": "boxy",
+          "traits": {
+            "round": false,
+            "tall": false,
+            "shiny": true,
+            "flat": true
+          }
+        },
+        "sample-cone": {
+          "group": "pointy",
+          "traits": {
+            "round": false,
+            "tall": true,
+            "shiny": false,
+            "flat": false
+          }
+        },
+        "sample-spike": {
+          "group": "pointy",
+          "traits": {
+            "round": false,
+            "tall": true,
+            "shiny": true,
+            "flat": false
+          }
+        }
+      },
+      "layouts": {
+        "two": {
+          "a": {
+            "at": [
+              -0.2,
+              0.011,
+              0.1
+            ],
+            "cols": 4,
+            "rows": 2,
+            "pitch": 0.08,
+            "pad": "pad-2a"
+          },
+          "b": {
+            "at": [
+              0.2,
+              0.011,
+              0.1
+            ],
+            "cols": 4,
+            "rows": 2,
+            "pitch": 0.08,
+            "pad": "pad-2b"
+          }
+        },
+        "three": {
+          "a": {
+            "at": [
+              -0.29,
+              0.011,
+              0.1
+            ],
+            "cols": 4,
+            "rows": 2,
+            "pitch": 0.065,
+            "pad": "pad-3a"
+          },
+          "b": {
+            "at": [
+              0,
+              0.011,
+              0.1
+            ],
+            "cols": 4,
+            "rows": 2,
+            "pitch": 0.065,
+            "pad": "pad-3b"
+          },
+          "c": {
+            "at": [
+              0.29,
+              0.011,
+              0.1
+            ],
+            "cols": 4,
+            "rows": 2,
+            "pitch": 0.065,
+            "pad": "pad-3c"
+          }
+        }
+      },
+      "trays": {
+        "all": {
+          "specimens": "*"
+        },
+        "one": {
+          "specimens": [
+            "sample-ball",
+            "sample-bead",
+            "sample-ring",
+            "sample-cube",
+            "sample-brick",
+            "sample-tile",
+            "sample-cone",
+            "sample-spike"
+          ],
+          "layout": "two",
+          "key": {
+            "ask": "q-one"
+          }
+        },
+        "two-step": {
+          "specimens": [
+            "sample-ball",
+            "sample-bead",
+            "sample-ring",
+            "sample-cube",
+            "sample-brick",
+            "sample-tile",
+            "sample-cone",
+            "sample-spike"
+          ],
+          "layout": "three",
+          "key": {
+            "ask": "first",
+            "no": {
+              "ask": "second"
+            }
+          }
+        },
+        "chain": {
+          "specimens": [
+            "sample-ball",
+            "sample-ring",
+            "sample-cube",
+            "sample-brick",
+            "sample-tile",
+            "sample-cone",
+            "sample-spike"
+          ],
+          "layout": "three",
+          "key": {
+            "chain": [
+              "round",
+              "tall"
+            ],
+            "else": "c",
+            "asked": "asked",
+            "elseHeading": "boxy"
+          }
+        },
+        "classmate": {
+          "specimens": [
+            "sample-ball",
+            "sample-bead",
+            "sample-ring",
+            "sample-cube",
+            "sample-brick",
+            "sample-tile",
+            "sample-cone",
+            "sample-spike"
+          ],
+          "layout": "three",
+          "key": {
+            "arrangement": {
+              "a": {
+                "heading": "round",
+                "members": [
+                  "sample-ball",
+                  "sample-bead",
+                  "sample-cone"
+                ]
+              },
+              "b": {
+                "heading": "boxy",
+                "members": [
+                  "sample-ring",
+                  "sample-cube",
+                  "sample-brick"
+                ]
+              },
+              "c": {
+                "heading": "pointy",
+                "members": [
+                  "sample-tile",
+                  "sample-spike"
+                ]
+              }
+            },
+            "fix": "fix",
+            "suspect": "suspect"
+          }
+        }
+      }
+    }
+  }
+}

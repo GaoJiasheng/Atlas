@@ -7,7 +7,7 @@ import numpy as np
 import bpy
 from mathutils import Vector
 from common import CACHE, ROOT, clear_scene, import_system, object_info, matches, centroid, save_json, topology, surface_deviation
-from centrelines import extract, project
+from centrelines import extract, project, dehook, geodesic_tube, resample, graph_geometry
 
 
 def build(api):
@@ -31,15 +31,176 @@ def build(api):
         for side in ['l','r'] if part['sides']=='bilateral' else [None]:
             records=[r for r in api.SOURCE.values() if matches(part,r['info'],side)]
             if len(records)<part['minimumObjects']: raise RuntimeError(f"Missing {part['id']}.{side}")
+            # Multi-segment tubes: each source segment's centreline before merging.
+            segments=segment_centrelines(api,part,records) if part.get('segmentCentrelines') else None
             points,faces=api.merge_records(records)
             name=part['id']+('.'+side if side else '')
             filled=[]
             if part.get('fillOpenings'):points,faces,filled=fill_openings(points,faces,part['fillOpenings'])
             selected[name]=dict(part=part,side=side,points=points,faces=faces,sourceNames=[r['info']['name'] for r in records],filledOpenings=filled)
+            if segments is not None:selected[name]['segments']=segments
+    if manifest.get('landmarks'):api.LANDMARKS=landmarks(api,manifest['landmarks'])
     # Keep the wire target independent from opaque context, with the same source.
     wire=selected.pop('skin-wire',None)
     api.simplify_selection()
     finish(api,wire,centre,floor,top)
+
+
+def _topic(v):
+    """Source (x, -front, up) -> topic/GLB (x, up, front)."""
+    return [float(v[0]),float(v[2]),float(-v[1])]
+
+
+def _base(name):
+    import re
+    return re.sub(r'(?:\.[lr])?(?:\.\d+)?$','',name)
+
+
+def _records(api,names):
+    """Source records by exact name, or by base name when the wanted name has no side suffix."""
+    out=[r for r in api.SOURCE.values() if r['info']['name'] in names or (_base(r['info']['name']) in names)]
+    if not out:raise RuntimeError(f'No source records for {names}')
+    return out
+
+
+def _surface_centroid(records):
+    """Area-weighted centroid of the source surfaces (independent of triangulation density)."""
+    total=np.zeros(3);area=0.
+    for r in records:
+        p=np.asarray([tuple(v) for v in r['points']]);f=np.asarray(r['faces'])
+        a,b,c=p[f[:,0]],p[f[:,1]],p[f[:,2]]
+        w=np.linalg.norm(np.cross(b-a,c-a),axis=1)/2
+        total+=((a+b+c)/3*w[:,None]).sum(0);area+=w.sum()
+    return total/area
+
+
+def _components(points,faces,minimum=60):
+    """Connected pieces (welded positions) as (points, faces) pairs, largest first."""
+    p=np.asarray(points,dtype=float)
+    _,first,inverse=np.unique(np.round(p,7),axis=0,return_index=True,return_inverse=True)
+    inverse=inverse.ravel();f=inverse[np.asarray(faces)];parent=np.arange(len(first))
+    def root(i):
+        while parent[i]!=i:parent[i]=parent[parent[i]];i=parent[i]
+        return i
+    for a,b,c in f:
+        for x,y in ((a,b),(b,c)):
+            rx,ry=root(x),root(y)
+            if rx!=ry:parent[rx]=ry
+    roots=np.asarray([root(i) for i in range(len(first))]);out=[]
+    for r in np.unique(roots):
+        keep=np.flatnonzero(roots==r)
+        if len(keep)<minimum:continue
+        remap=-np.ones(len(first),dtype=int);remap[keep]=np.arange(len(keep))
+        ff=[tuple(remap[x] for x in face) for face in f if remap[face[0]]>=0]
+        out.append(([tuple(v) for v in p[first][keep]],ff))
+    return sorted(out,key=lambda c:-len(c[0]))
+
+
+SEGMENT_STEP=.003  # fine enough to follow a 1.5 mm vessel round its bends; routes resample to 8 mm
+
+
+def segment_centrelines(api,part,records):
+    """Centreline of every source segment of a multi-segment tube, before merging.
+
+    Each segment is oriented by the part's flow reference: `away` starts at the end
+    nearer the reference (vessels leaving the heart, airways leaving the larynx),
+    `toward` ends there (vessels returning to the heart). A ring-to-ring path that
+    doubles back is replaced by a geodesic walk to the capped end; a segment made of
+    unconnected pieces is traced piece by piece; one with no traceable piece falls back
+    to its principal axis and is marked schematic.
+    """
+    spec=part['segmentCentrelines']
+    heart=_surface_centroid(_records(api,spec['reference']))[None,:]
+    out=[];offset=0
+    for r in records:
+        name=r['info']['name'];flow=spec.get('flowBySource',{}).get(name,spec['flow'])
+        # Where distance to the heart cannot tell the ends apart (the descending aorta
+        # starts and ends about equally far from it), the upstream neighbour does.
+        upstream=spec.get('upstreamBySource',{}).get(name);downstream=spec.get('downstreamBySource',{}).get(name)
+        neighbour=upstream or downstream
+        ref=np.asarray([tuple(v) for q in _records(api,neighbour) for v in q['points']]) if neighbour else heart
+        if neighbour:flow='away' if upstream else 'toward'
+        pts=[tuple(v) for v in r['points']]
+        kwargs={'upstream':ref,'step':SEGMENT_STEP} if flow=='away' else {'downstream':ref,'step':SEGMENT_STEP}
+        path,meta=extract(pts,r['faces'],**kwargs)
+        if path is not None and dehook(np.asarray(path))[1]>.01:
+            # The ring-to-ring path doubled back (an open tributary mouth part-way along a
+            # tube with a capped end): follow the tube from its end ring to the cap instead.
+            path=geodesic_tube(pts,r['faces'],ref,SEGMENT_STEP)
+            meta=dict(method='geodesic walk from the end ring to the capped end, local section centroids (ring-to-ring path doubled back)',
+                      boundaryRings=meta.get('boundaryRings'),connectedFraction=1.,schematic=False)
+        others=[]
+        if path is None:
+            # A segment made of several unconnected tube pieces (a trunk and its
+            # branches modelled apart): trace each piece; the longest carries `_U`,
+            # the others are kept for routes (`<source>#2`, `#3`, ... longest first).
+            pieces=[]
+            for cp,cf in _components(pts,r['faces']):
+                pp,pm=extract(cp,cf,**kwargs)
+                if pp is not None:pieces.append((float(np.linalg.norm(np.diff(pp,axis=0),axis=1).sum()),np.asarray(pp),pm))
+            if pieces:
+                pieces.sort(key=lambda x:-x[0])
+                _,path,piece=pieces[0];others=[pp for _,pp,_ in pieces[1:]]
+                meta=dict(piece,method='longest connected piece: '+piece['method'],pieces=len(pieces),wholeSegmentConnectedFraction=meta.get('connectedFraction'))
+        if path is None:
+            cloud=np.asarray(pts);c=cloud.mean(0);_,_,axes=np.linalg.svd(cloud-c,full_matrices=False)
+            s=(cloud-c)@axes[0];a,b=c+axes[0]*np.percentile(s,2),c+axes[0]*np.percentile(s,98)
+            path=resample(np.stack([a,b]),SEGMENT_STEP);meta=dict(meta,method='principal axis of the segment (fallback)',schematic=True)
+        path=np.asarray(path);meta.pop('_vertexU',None)
+        # Orientation by the flow reference, whichever extraction branch was taken.
+        near=lambda q:float(np.min(np.linalg.norm(ref-q,axis=1)))
+        orient=lambda q:q[::-1] if (near(q[0])>near(q[-1]))==(flow=='away') else q
+        path=orient(path)
+        if spec.get('schematic'):
+            # Closed solids (the pharynx parts): sections of the wall, not a traced lumen.
+            meta=dict(meta,schematic=True,method=meta['method']+' (closed solid: not a lumen)')
+        out.append(dict(source=name,flow=flow,offset=offset,count=len(pts),path=path,meta=meta,others=[orient(q) for q in others]))
+        print('SEGMENT CENTRELINE',part['id'],name,json.dumps({k:v for k,v in meta.items() if k in ('method','connectedFraction','schematic','boundaryRings')}),flush=True)
+        offset+=len(pts)
+    return out
+
+
+def landmarks(api,specs):
+    """Topic-coordinate landmarks measured on the source objects before merging (docs/40 §4.9 P2)."""
+    segments={s['source']:s for r in api.SELECTED.values() for s in r.get('segments',[])}
+    out={}
+    def cloud(names):return np.asarray([tuple(v) for r in _records(api,names) for v in r['points']])
+    for id,spec in specs.items():
+        kind=spec['kind'];src=spec['sources']
+        if kind=='centroid':p=_surface_centroid(_records(api,src))
+        elif kind=='top':
+            # Each dome: the highest band lateral to the midline (the central tendon sits lower, in between).
+            c=cloud(src);c=c[(c[:,0]>.03) if spec['side']=='l' else (c[:,0]<-.03)];p=c[c[:,2]>c[:,2].max()-.005].mean(0)
+        elif kind=='front':
+            ps=[]
+            for r in _records(api,src):
+                c=np.asarray([tuple(v) for v in r['points']]);q=_surface_centroid([r]);q[0]=0;q[1]=c[:,1].min();ps.append(q)
+            p=np.mean(ps,0)
+        elif kind=='end':p=segments[src[0]]['path'][-1]
+        elif kind=='opening':
+            # A valve orifice: the open boundary ring of each chamber that faces the other one.
+            ends=[]
+            for a,b in ((src,spec['to']),(spec['to'],src)):
+                ra=_records(api,a);pts=[tuple(v) for r in ra for v in r['points']];off=0;faces=[]
+                for r in ra:faces+=[tuple(i+off for i in f) for f in r['faces']];off+=len(r['points'])
+                p,_,_,loops,_=graph_geometry(pts,faces);other=cloud(b)
+                ring=min((l for l in loops if len(l)>=6),key=lambda l:np.min(np.linalg.norm(other-p[l].mean(0),axis=1)))
+                ends.append(p[ring].mean(0))
+            p=np.mean(ends,0)
+        elif kind=='between':
+            a=_surface_centroid(_records(api,src));b=_surface_centroid(_records(api,spec['to']));p=a+(b-a)*spec['at']
+        elif kind=='back':
+            c=cloud(src);c=c[np.abs(c[:,0])<.012];p=c[c[:,1]>c[:,1].max()-.006].mean(0)
+        elif kind in ('nostril','passage'):
+            c=cloud(src);c=c[(c[:,0]>.002) if spec['side']=='l' else (c[:,0]<-.002)]
+            if kind=='passage':p=c.mean(0)
+            else:
+                front=c[c[:,1]<c[:,1].min()+.004].mean(0)
+                skin=np.asarray([tuple(v) for r in _records(api,[spec['skin']+'.'+spec['side']]) for v in r['points']])
+                p=(front+skin[np.argmin(np.linalg.norm(skin-front,axis=1))])/2
+        else:raise RuntimeError(f'Unknown landmark kind {kind}')
+        out[id]=dict(kind=kind,sources=src,point=_topic(p))
+    return out
 
 
 def _ordered_loops(faces):
@@ -138,6 +299,20 @@ def fill_openings(points,faces,specs):
     return [Vector(v) for v in pts],tris,report
 
 
+def segment_stations(r,vertices):
+    """Per-vertex `_U` of a multi-segment tube: station along the vertex's own source
+    segment centreline (0 upstream), normalised over that segment's kept vertices."""
+    used=np.asarray(r['sourceVertexIndices']);verts=np.asarray(vertices,dtype=float)
+    starts=np.asarray([s['offset'] for s in r['segments']]);owner=np.searchsorted(starts,used,side='right')-1
+    u=np.zeros(len(used))
+    for i,s in enumerate(r['segments']):
+        mask=owner==i
+        if not mask.any():raise RuntimeError(f"Segment {s['source']} lost all vertices in simplification")
+        raw=project(verts[mask],s['path']);lo,hi=float(raw.min()),float(raw.max())
+        u[mask]=(raw-lo)/max(hi-lo,1e-9);s['uRange']=[lo,hi]
+    return u
+
+
 def finish(api,wire,centre,floor,top):
     manifest=api.MANIFEST;selected=api.SELECTED
     if wire:
@@ -157,10 +332,18 @@ def finish(api,wire,centre,floor,top):
         wire.update(ob=ob,original=original,simplifierErrorM=None,sampleDeviationM=surface_deviation(wire['points'],wire['faces'],[v.co.copy() for v in ob.data.vertices],[tuple(f.vertices) for f in ob.data.polygons]))
         if not 3000<=len(ob.data.polygons)<=5000:raise RuntimeError('skin-wire triangle range')
         selected['skin-wire']=wire
-    paths={};stats=[]
+    paths={};stats=[];segments_out={}
     for name,r in selected.items():
         p=r['part'];ob=r['ob']
-        if p['role']=='tube':
+        if p['role']=='tube' and 'segments' in r:
+            u=segment_stations(r,[v.co[:] for v in ob.data.vertices])
+            attr=ob.data.attributes.new('_U','FLOAT','POINT');attr.data.foreach_set('value',u.astype(np.float32))
+            for s in r['segments']:
+                path=s['path'];steps=np.linalg.norm(np.diff(path,axis=0),axis=1)
+                segments_out[s['source']]=dict(node=name,flow=s['flow'],sourceVertexRange=[s['offset'],s['offset']+s['count']],**{k:v for k,v in s['meta'].items() if k!='boundaryRingVertices'},
+                    points=[[round(c,5) for c in _topic(v)] for v in path],lengthM=float(steps.sum()),sampleCount=len(path),maxStepM=float(steps.max()),surfaceURange=s['uRange'],
+                    **({'otherPieces':[[[round(c,5) for c in _topic(v)] for v in q] for q in s['others']]} if s['others'] else {}))
+        elif p['role']=='tube':
             spec=p['centreline']
             def ref(id):return selected[id]['points'] if id in selected else None
             path,meta=extract(r['points'],r['faces'],ref(spec.get('from')),ref(spec.get('to')))
@@ -189,6 +372,15 @@ def finish(api,wire,centre,floor,top):
         transform='(x,y,z) -> (x-centre.x, z-centre.z, -(y-centre.y)); apply -floorY only when grounding',groundOffsetM=centre.z-floor,
         rig=False,sourceMissing=manifest['missingOrgans'])
     save_json(api.TOPIC/'organs.json',frame)
+    if manifest.get('segmentCentrelines'):
+        save_json(api.TOPIC/'centrelines.json',dict(units='m',up='+Y',front='+Z',left='+X',frame='topic-local; matches exported GLB world coordinates; add groundOffsetM to Y only when grounding',
+            groundOffsetM=frame['groundOffsetM'],maxSampleSpacingM=SEGMENT_STEP,
+            note='One centreline per source segment, extracted before merging; points run in the flow direction (airways from the larynx, arteries from the heart, veins to the heart). schematic=true: not a traced lumen (sections of a closed solid, or a principal-axis fallback). otherPieces: further unconnected tube pieces of the same source object, longest first (routes call them <source>#2, #3, ...); sourceVertexRange: the vertex range of the segment in the merged source mesh.',
+            nodes={n:[s['source'] for s in r['segments']] for n,r in selected.items() if 'segments' in r},segments=segments_out))
+        save_json(api.TOPIC/'landmarks.json',dict(units='m',frame='topic-local; matches exported GLB world coordinates',
+            note='Measured on the source objects before merging (static_region.landmarks); see manifest.landmarks for each definition.',landmarks=api.LANDMARKS))
+        export_glb(api,stats)
+        return
     connections=[]
     available=[name for name in manifest['centrelineOrder'] if name in paths]
     for a,b in zip(available,available[1:]):
@@ -196,6 +388,11 @@ def finish(api,wire,centre,floor,top):
         missing=['ileum','caecum'] if a=='jejunum' and b=='ascending-colon' else []
         connections.append(dict(fromTube=a,toTube=b,fromPoint=start,toPoint=end,gapM=gap,missingBetween=missing,continuous=not missing and gap<=.008,requiresReview=bool(missing) or gap>.008))
     save_json(api.TOPIC/'centrelines.json',dict(units='m',up='+Y',front='+Z',left='+X',frame='topic-local; matches exported GLB world coordinates; add groundOffsetM to Y only when grounding',groundOffsetM=frame['groundOffsetM'],maxSampleSpacingM=.008,centrelineOrder=manifest['centrelineOrder'],connections=connections,foodRoute=[['pharynx','oesophagus','stomach','duodenum','jejunum'],dict(missing=['ileum','caecum']),['ascending-colon','transverse-colon','descending-colon','sigmoid-colon'],dict(missing=['rectum','anal-canal'])],missingOrgans=manifest['missingOrgans'],tubes=paths))
+    export_glb(api,stats)
+
+
+def export_glb(api,stats):
+    selected=api.SELECTED
     save_json(CACHE/f'{api.TOPIC_NAME}-build-stats.json',stats)
     bpy.ops.object.select_all(action='DESELECT')
     for r in selected.values():r['ob'].select_set(True)

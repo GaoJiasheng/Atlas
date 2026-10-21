@@ -643,7 +643,7 @@ end_i   = start_{i+1}；本章最后一拍更晚就取最后一拍（最后一�
 - **REFERENCE（R）**：版图对照用"叠加"实现（不分屏）：当前主导关键帧照常，相邻关键帧（前一帧；当前是第一帧时取后一帧）的边界以墨色虚线叠上，2 s 淡入（`instant` 时直接到位）；舞台顶部横幅写"实线 K2 … · 虚线 K1 …"。再按恢复。少于两个关键帧时禁用；演示中禁用。
 - **PRESENTATION（P）**：core 演示系统（见「演示系统（core）」），TimeScene 的适配器在 `View.tsx`：`beatsOf` = 章的 `state.beats`；一拍 = 本章累积目标 ⊕ 拍里的 `t` / `camera` / `layers` / `highlight`，用 `applyState` 飞镜头（2.2 s）、缓动 `t`（1.6 s）——底部条点刻度、换章落第一拍用的是同一个函数（`applyBeatState`）；`saveState` / `restoreState` = store 快照 / `applyState` 恢复（章节、镜头、`t`、图层、高亮）；`onEnter` 退出 REFERENCE、清选中的事件 / 实体、收起参与卡；字幕卡表头的 `readout` = 播放头日期（同时间轴读数）；没有 `afterCameraSettle`（固定 2.3 s，等于镜头飞行加字幕淡入）。演示中 REFERENCE 禁用；顶栏 PRESENT 按钮 = P。拍落定后地图可拖动 / 缩放（见「翻页与自由查看」），演示中点地图上的事件不选中；用户平移 / 缩放（含滚轮）250 ms 后写回 `camera`，过渡开始时丢弃还没写回的那次。**引线标注**：HUD 隐藏时地图上仍画这拍 `highlight`（没写就是本章的）里的事件 / 行动 / 实体的引线标注（上限 6 个，字号比平时大 20%，遵守 L 开关；要对应图层开着），**只有这些**——别的事件标注、地名、实体名在演示里都不画（控制器 `setPresentation(true)`，样式挂在 `.ts-stage[data-presenting]`）；领土名称照常显示。字幕卡和标题块算引线栏的障碍，标注让开它们；演示中引线栏**只**把这两块当障碍（HUD 面板淡出时 `visibility` 还留着，不能算），并且进入演示、换拍（字幕卡出现 / 变高，`refreshLabels`）和镜头落定（`moveend`）时立刻重新量一次，不等 1 s 的兜底定时器。
 - 插槽内容（`hud/HudPanels.tsx`，SVG 按卡片实际像素画，字号走 `--u`）：
-  - `card` PARTICIPATION AND AREA（横坐标用标尺的映射）：每个实体一条带——参与线（joined → left，起点小空心圆），关键帧间线性插值的近似控制面积（球面面积，斜线 + 淡底），行首写 EN 名 / 中文 / 当前 `≈面积 KM²`；当前章节窗口淡 signal 底，`t` 一条 signal 竖线，底部自适应刻度。**行数规则**（`lib/bandRows.ts` 的 `planBandRows`，有单测）：每行至少 25 设计 px（EN 名 + 中文两行不互相压）；全部放得下就按数据顺序全画（实体再多也画）；放不下就最多画 12 行（还要给"其余"那一行留 15 px，所以小卡片只有 4–6 行），挑法是 ①有控制区面积的实体在前，按各关键帧的最大面积从大到小，②其余按 `joined` 从早到晚，同值按数据顺序；剩下的合并成一行弱色小字 `+N OTHERS / 另 N 方 ▾`（贴在时间轴上方）。**展开**：点卡片表头（宿主按 `cardToggle` 画成按钮）或「另 N 方」那一行，卡片原地变长（≤ 右列 60%），列出全部实体（在战的按面积 / 加入时间排在前，其余按加入时间），行高 30 设计 px，卡片内滚动、时间轴吸底；再点表头或 ESC 收起。**点一行**（展开与否都可以，键盘 Enter / 空格）= 选中这个实体：`highlight = [id]`（地图上它的控制区淡底加深）+ inspector 插槽出实体详情（`EntityInspector`：EN / 中文名、阵营时段、加入 / 退出日期、当前近似面积）；再点同一行取消，恢复本章高亮。画出的行保持阵营分色（参与线按段分色，面积带按 `t` 时阵营）。已验证：ww2（34 个实体）在 1920×1080 / 1280×720 / 2560×1440 下 EN 与中文标签、行与行之间没有重叠；`pnpm shoot <topic> --layout` 只查面板之间的重叠，卡片内部标签要另量（量 `.ts-card text` 的包围盒）。
+  - `card` PARTICIPATION AND AREA（横坐标用标尺的映射；`geo.entities` 为空的主题——只讲一个国家的，如 singapore-after-1965——不注册卡片，右上不画空框）：每个实体一条带——参与线（joined → left，起点小空心圆），关键帧间线性插值的近似控制面积（球面面积，斜线 + 淡底），行首写 EN 名 / 中文 / 当前 `≈面积 KM²`；当前章节窗口淡 signal 底，`t` 一条 signal 竖线，底部自适应刻度。**行数规则**（`lib/bandRows.ts` 的 `planBandRows`，有单测）：每行至少 25 设计 px（EN 名 + 中文两行不互相压）；全部放得下就按数据顺序全画（实体再多也画）；放不下就最多画 12 行（还要给"其余"那一行留 15 px，所以小卡片只有 4–6 行），挑法是 ①有控制区面积的实体在前，按各关键帧的最大面积从大到小，②其余按 `joined` 从早到晚，同值按数据顺序；剩下的合并成一行弱色小字 `+N OTHERS / 另 N 方 ▾`（贴在时间轴上方）。**展开**：点卡片表头（宿主按 `cardToggle` 画成按钮）或「另 N 方」那一行，卡片原地变长（≤ 右列 60%），列出全部实体（在战的按面积 / 加入时间排在前，其余按加入时间），行高 30 设计 px，卡片内滚动、时间轴吸底；再点表头或 ESC 收起。**点一行**（展开与否都可以，键盘 Enter / 空格）= 选中这个实体：`highlight = [id]`（地图上它的控制区淡底加深）+ inspector 插槽出实体详情（`EntityInspector`：EN / 中文名、阵营时段、加入 / 退出日期、当前近似面积）；再点同一行取消，恢复本章高亮。画出的行保持阵营分色（参与线按段分色，面积带按 `t` 时阵营）。已验证：ww2（34 个实体）在 1920×1080 / 1280×720 / 2560×1440 下 EN 与中文标签、行与行之间没有重叠；`pnpm shoot <topic> --layout` 只查面板之间的重叠，卡片内部标签要另量（量 `.ts-card text` 的包围盒）。
   - 原 `panel01`（时间标尺 + 泳道）、`panel03`（状态）并进底部条；原 `panel02`（问题 / 概述）由阅读面板头部的 `summary` 一句代替。
   - `perf`：`FEATURES 63 · ZOOM 5.5 · 60 FPS`（500 ms 更新）。
   - `inspector`（实体）：`N-03 · PARTICIPANT` 眉题，阵营色块 + 名称、另一语言小字，SIDE（每段阵营 + 起止日期）/ JOINED / LEFT / AREA NOW。
@@ -886,6 +886,7 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
 { "id": "leaf-section", "name": {en, zh}, "color": "token:accent-2", "scale": { "unit": "mm", "magnification": 20 } }
 // scale：这一组是焦点时（选中了组里的零件、单显这一组、或当前拍 / 本章的 labels 里有 `group:<id>`），组的屏幕框下方画一条发丝比例尺：
 // 约 100 px 的整数长度（1 / 2 / 5 × 10ⁿ），标签按 unit 写，放大画的子模型带倍数（`5 MM · ×20`）；实长按 parts.json `units`（没写 = 1 场景单位 1 m）÷ magnification
+// unit 可写 um（显微镜下的细胞）：小于 0.1 mm（um 下小于 1 mm）写 µm，保留小写（`10 µm · ×5000`，不写成 µM；docs/38 E-LT5）
 // （`hud/GroupScaleBars.tsx`、`lib/units.ts groupScaleBar`，有单测）
 // context 零件可以写 group：受图层开关、ghost、solo 控制（仍不标注、不可选）
 
@@ -910,7 +911,7 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
 "units": { "modelUnit": "mm", "scale": 25 }
 ```
 
-- **材质族（生物）**：`chitin`（半光泽角质，用 `tint` 给物种本色，带极淡橘皮法线）、`membrane`（半透明 .55、双面、不写深度、不填剖面；后翅、鼓膜、气囊）、`tissue`（哑光软组织，自身颜色的微弱自发光模拟透光）、`muscle`（纵向纤维法线）、`trachea`（白、螺旋环纹法线）、`nerve`（淡黄）、`eye`（深色高光 + 六边形小眼法线）。法线贴图按需生成（机器主题不生成）。sweep 的 UV：u = 弧长 / 平均周长，v = 绕截面一圈，所以纤维 / 环纹密度跟管径走。
+- **材质族（生物）**：`chitin`（半光泽角质，用 `tint` 给物种本色，带极淡橘皮法线）、`membrane`（半透明 .55、双面、不写深度、不填剖面；后翅、鼓膜、气囊）、`tissue`（哑光软组织，自身颜色的微弱自发光模拟透光）、`muscle`（纵向纤维法线）、`trachea`（白、螺旋环纹法线）、`nerve`（淡黄）、`eye`（深色高光 + 六边形小眼法线）、`scales`（半光泽 roughness .45：一排排互相错开的半圆鳞，每片中间高、边缘一道暗缝，法线 + 灰度颜色贴图；绕 sweep 截面一圈 14 片，鳞的大小随零件粗细走；`tint` 给物种本色，docs/38 E-LT4）、`feathers`（哑光 roughness .8：沿 u 一排排细长叶形羽片，上下重叠、中间一道羽轴，法线贴图；`tint`）。法线贴图按需生成（机器主题不生成）。sweep 的 UV：u = 弧长 / 平均周长，v = 绕截面一圈，所以纤维 / 环纹密度跟管径走。
 - **token**：`token:food`（赭绿，食物）、`token:haemolymph`（灰青，血淋巴），两套主题都有。
 - **姿态与动画的叠加**：零件变换 = 位置（静止中心 + 拆开 / 移开）→ 姿态（缓动矩阵）→ 动画（绕各自 pivot）→ 形状。姿态跟拆开、X-RAY、剖切都兼容；引线锚点跟着姿态走（不跟动画走）。REFERENCE 不重置姿态。
 - **淡显**：章 / 拍 `ghost: [组或零件]`（不累积）与控制面板 LAYERS 每行末尾的 `⊙`（单显这一组、其余淡显；再点或 ESC 取消；存 store 的 `solo`，换章清掉，不进 URL）。淡显 = .12 透明、不写深度、不可点、不标注、不遮挡标注；选中的零件不淡显；被单显的组即使图层关着也显示。
@@ -1060,11 +1061,11 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
 
 绑定的补充规则：`pose` 没有列出当前值时保留章 / 拍姿态，只有显式 `null` 强制回静止；几条绑定动同一零件时非静止的那条胜出。`tint.max`（0–1）指定实际混色上限，默认 0.55 保持既有外观，`max: 1` 可以完全染成目标深色；它仍只染零件自己的材质槽 0。
 
-docs/22 §4.3（E-SIM 核心，磁铁与电路共用）+ docs/23 §4（电路模型与电路图卡）。一个 SpaceScene 主题可以在 `parts.json` 里加一段 `sim`：读者能改的几个量（控件）、一个纯函数模型、模型给出的量（输出），以及控件 / 输出到零件、流、动画的绑定。没有独立的 Simulation 引擎（docs/03 §C）。代码：`sim-schema.ts`（zod 与交叉校验）、`lib/sim/`（`controls.ts` 值的合成与 URL、`index.ts` 模型注册表、`circuit.ts`、`magnet.ts`、`force.ts`、`energy.ts`、`lifecycle.ts`、`matter.ts`、`light.ts`、`materials.ts`、`sun.ts`、`shadow.ts`、`bind.ts`、`trial.ts`、`diagram.ts`，全部纯函数、有单测 `tests/space-scene/sim.test.ts`）、`explorer/TryIt.tsx`（试一试卡片）、`hud/CircuitCard.tsx`（电路图卡）、`hud/sim.ts`（HUD 读写的入口）。
+docs/22 §4.3（E-SIM 核心，磁铁与电路共用）+ docs/23 §4（电路模型与电路图卡）。一个 SpaceScene 主题可以在 `parts.json` 里加一段 `sim`：读者能改的几个量（控件）、一个纯函数模型、模型给出的量（输出），以及控件 / 输出到零件、流、动画的绑定。没有独立的 Simulation 引擎（docs/03 §C）。代码：`sim-schema.ts`（zod 与交叉校验）、`lib/sim/`（`controls.ts` 值的合成与 URL、`index.ts` 模型注册表、`circuit.ts`、`magnet.ts`、`force.ts`、`energy.ts`、`lifecycle.ts`、`matter.ts`、`light.ts`、`sun.ts`、`shadow.ts`、`bind.ts`、`trial.ts`、`diagram.ts`、`sort.ts`、`shift.ts`、`keycard.ts`，全部纯函数、有单测 `tests/space-scene/sim.test.ts` 等）、`explorer/TryIt.tsx`（试一试卡片）、`hud/CircuitCard.tsx`（电路图卡）、`hud/KeyCard.tsx`（分类流程图卡）、`hud/sim.ts`（HUD 读写的入口）。
 
 ```jsonc
 "sim": {
-  "kind": "circuit",                                   // circuit | magnet | force | energy | life-cycle | matter | light | materials：lib/sim/<kind>.ts（life-cycle → lifecycle.ts）
+  "kind": "circuit",                                   // circuit | magnet | force | energy | life-cycle | matter | light | sort | materials：lib/sim/<kind>.ts（life-cycle → lifecycle.ts）
   "controls": [                                        // ≤ 16，id 全主题的 sim 里唯一
     { "id": "main", "kind": "toggle", "default": true, "label": {en, zh} },
     { "id": "cells", "kind": "step", "values": [1, 2, 3], "default": 2, "label": {en, zh}, "unit"?: "cm" },
@@ -1096,7 +1097,7 @@ docs/22 §4.3（E-SIM 核心，磁铁与电路共用）+ docs/23 §4（电路模
 - **值从哪里来**：store 字段 `sim` 只存"设过的值"（不累积：章 `state.sim.set`，拍 `sim.set` 叠在本章的上面，读者在卡片 / 键 / 电路图上改的）；显示的值 = 默认 ⊕ 各选择的 `sets` ⊕ 设过的值，无效值忽略（`resolveSimValues`）。换章回到那一章的 `set`；ESC 不清；URL `sim`（见「URL 参数」）；演示的保存 / 恢复带着它；拍的深链接 `b` 照常。
 - **模型**（`lib/sim/index.ts evaluateSim`，同步、< 1 ms，只在值变化时算）：`circuit` = 节点分析（docs/23 §4.2）：电池是诺顿等效（每节 `emf` 默认 1.5 V、`r` 每节内阻，`flip` 指定某节由开关翻转成 −EMF；`cells` 是数或步进控件），`switch`（合上 `closed` 默认 0.001 Ω，断开去掉），`wire`（`r`），`gap`（选择控件 → `materials` 的欧姆数，没列 = 绝缘、断开），`load`（固定 `load` 或选择控件；`present` 开关 = 装没装上；`loads` 的 `lamp`（`rated` W）/ `buzzer`（`on` A 以上响）/ `motor`（`at` V 时 `rpm` 的可视转速，∝ 电压））；每个连通块接地一个节点，高斯消元（部分主元），没有电池的块电流为 0。量名（输出的 `from`）：`current:<边>`、`volts:<边>`（电池 = 端电压）、`power:<边>`、`brightness:<边>`（灯功率 ÷ `reference.power` × 100）、`speed:<边>`、`sound:<边>`（`on` / `off`）、`status:<电池边>`（`open` < 1 mA、`short` > `short` A（默认 3）、`over-rating`：同一回路里有灯超过额定 × `over`（默认 1.5）、否则 `closed`）、`edges`（每条边的带号电流，from → to）。`magnet` = Gilbert 磁荷模型、场态、场线、铁屑、指南针、力箭头，见下面「SpaceScene · 试一试 · 磁铁」。validate 核对输出的 `from` 是这个模型的量、种类（数 / 状态 / 向量）对得上。
 - **输出种类**：`number`、`state`、`vector`、`timeline`（一段"跑一遍"的过程：见「时间线与回放」；只能被 `play`、带 `channel` 的 `stretch` 和力的箭头读，不进卡片的观察量、读数、glow 等）。
-- **绑定**（`lib/sim/bind.ts simEffects`，舞台叠在章节状态上）：零件 `visible`（条件：`true` = 真值 / 非零 / 不是第一个状态；或 `{ eq | ne | in | gte | lte }`）、`pose`（值 → `poses` 里的姿态，只动这些零件，压在章 / 拍的姿态之上；几条绑定动同一零件时非静止的那条胜出）、`glow`（值 ÷ `full`，`sqrt` 或 `linear`，0–2：从暗红渐到 `color`，过 1 更白；只点亮零件自己的材质，即槽 0：灯丝不带支撑丝和铜座）、`tint`（值 ÷ `full`，0–1，`linear` 或 `sqrt`：向 `color` 混色，上限由 `max` 指定（默认 0.55，范围 0–1）；铁芯通电变磁铁；同 `glow` 只染零件自己的材质，即槽 0，其余槽照常跟章 / 拍的 `highlight`，`lib/sim/bind.ts slotTint`）、`count`（`repeat` 零件只显示前 k 份：`true` = k 取值本身，或 `{ per, minus }` = (值 − minus) ÷ per 取整、≥ 0：50 g 挂钩上的 50 g 槽码写 `{ per: 50, minus: 50 }`，两只 200 g 砝码写 `{ per: 200 }`（docs/30 F8；`per` 原先是乘数，没有主题用过）；该零件不能有 `extra`）、`offset` / `rotate`（(值 − origin) × per（rotate 的 per 默认 1），在姿态之后沿场景轴移 / 绕（姿态后的）零件中心或 `pivot` 场景点转，0.5 s 缓动；`settle: { period, damping }` = 阻尼摆动（rotate：转角走近路；offset：挂在弹簧下的挂钩跟着弹簧回弹几下停住，docs/30 F4）、`place`（三维向量输出 `{ x, y, z }` → `centre + radius × 单位向量`；`{ centre: [x,y,z], radius, face?: "centre" }`，沿球面 0.5 s 缓动、深链接直接终值；`face: "centre"` 使局部 +Y 朝向 centre）、`stretch`（弹簧伸缩）、`play`（播放时间线通道）——这两项见下面「弹簧伸缩」「时间线与回放」、`at`（命名位置环）、`state`（铁屑排哪个场态）——后三者见磁铁一节；零件 `fill`（按模型体积画液面，见「液面」）、`bend`（把一根条像尺子一样弯下，见「弯曲」）；流 `visible`（可加 `paths: [id]` 只控制这些路径，独立于整条流与强度）、`state`（场线流）、`intensity`（向量输出按 `paths` 的 id：每条路径的粒子速度 ∝ |值| ÷ `full`（夹在 ±2），负值反向，< 1 % 的路径 0.3 s 淡出；相位逐帧积分，变速不跳；`mode: "density"` = 速度不变、**可见粒子的比例** = |值| ÷ `full`（≤ 1，0.3 s 缓动；粒子按路径上均匀散开的次序出现，不扎堆），能量主题用它表示"这一份多 / 少"；向量的键写成 `<流 id>:<路径 id>` 时，每条流只取以自己 id 开头的那些）、`stops`（状态 → 粒子色，如短路 `token:hot`）；动画 `rpm`（rotate 的转速 = 值 × per，角度积分）、`enabled`（条件不成立时 0.15 s 缓停）。运转（RUN / FLOW）只管"动起来"：灯亮不亮、零件在哪儿不受它影响。
+- **绑定**（`lib/sim/bind.ts simEffects`，舞台叠在章节状态上）：零件 `visible`（条件：`true` = 真值 / 非零 / 不是第一个状态；或 `{ eq | ne | in | gte | lte }`）、`pose`（值 → `poses` 里的姿态，只动这些零件，压在章 / 拍的姿态之上；几条绑定动同一零件时非静止的那条胜出）、`glow`（值 ÷ `full`，`sqrt` 或 `linear`，0–2：从暗红渐到 `color`，过 1 更白；只点亮零件自己的材质，即槽 0：灯丝不带支撑丝和铜座）、`tint`（值 ÷ `full`，0–1，`linear` 或 `sqrt`：向 `color` 混色，上限由 `max` 指定（默认 0.55，范围 0–1）；铁芯通电变磁铁；同 `glow` 只染零件自己的材质，即槽 0，其余槽照常跟章 / 拍的 `highlight`，`lib/sim/bind.ts slotTint`）、`count`（`repeat` 零件只显示前 k 份：`true` = k 取值本身，或 `{ per, minus }` = (值 − minus) ÷ per 取整、≥ 0：50 g 挂钩上的 50 g 槽码写 `{ per: 50, minus: 50 }`，两只 200 g 砝码写 `{ per: 200 }`（docs/30 F8；`per` 原先是乘数，没有主题用过）；该零件不能有 `extra`）、`offset` / `rotate`（(值 − origin) × per（rotate 的 per 默认 1），在姿态之后沿场景轴移 / 绕（姿态后的）零件中心或 `pivot` 场景点转，0.5 s 缓动；`settle: { period, damping }` = 阻尼摆动（rotate：转角走近路；offset：挂在弹簧下的挂钩跟着弹簧回弹几下停住，docs/30 F4）、`place`（三维向量输出 `{ x, y, z }` → `centre + radius × 单位向量`；`{ centre: [x,y,z], radius, face?: "centre" }`，沿球面 0.5 s 缓动、深链接直接终值；`face: "centre"` 使局部 +Y 朝向 centre）、`stretch`（弹簧伸缩）、`play`（播放时间线通道）——这两项见下面「弹簧伸缩」「时间线与回放」、`at`（命名位置环）、`state`（铁屑排哪个场态）——后三者见磁铁一节；零件 `fill`（按模型体积画液面，见「液面」）、`bend`（把一根条像尺子一样弯下，见「弯曲」）；零件 `shift`（按向量输出把零件挪到模型算出的位置，拱形、错开，见「移位」）；流 `visible`（可加 `paths: [id]` 只控制这些路径，独立于整条流与强度）、`state`（场线流）、`intensity`（向量输出按 `paths` 的 id：每条路径的粒子速度 ∝ |值| ÷ `full`（夹在 ±2），负值反向，< 1 % 的路径 0.3 s 淡出；相位逐帧积分，变速不跳；`mode: "density"` = 速度不变、**可见粒子的比例** = |值| ÷ `full`（≤ 1，0.3 s 缓动；粒子按路径上均匀散开的次序出现，不扎堆），能量主题用它表示"这一份多 / 少"；向量的键写成 `<流 id>:<路径 id>` 时，每条流只取以自己 id 开头的那些）、`stops`（状态 → 粒子色，如短路 `token:hot`）；动画 `rpm`（rotate 的转速 = 值 × per，角度积分）、`enabled`（条件不成立时 0.15 s 缓停）。运转（RUN / FLOW）只管"动起来"：灯亮不亮、零件在哪儿不受它影响。
 - **多路径流**（`flows[].paths: [{ id, path }]`，≤ 16 条，代替 `path`）：一条流、一次绘制；粒子按路径长度分配（每条 ≥ 4），每条路径一行浮点纹理，shader 里每条路径一个相位 / 透明度 / 闭合标志（`flowMaterial.ts`）。电路主题每条边一条路径（与导线 sweep 同源，生成脚本写出两者）。不能 `bilateral`。
 - **读数**：`telemetry` 行写 `follow: "<数输出>"`（不写 `idle` / `run`）：跟随输出值、0.3 s 一阶滞后（`lag` 可改）、小数位取输出的；`follow` 写 2–3 个同单位的数输出 = 一行两值（`FALL TIME · L · R 0.45 · 0.45 s`）；`scope: "observe"` = 只显示本章卡片观察的那几个，本章一个都不观察时显示 `—`（一行"重量"在落体章读 `weight`、弹簧章读 `load-weight`，docs/30 F6）；本章 `try.observe` 里的输出在 PLATE 块加粗；块尾一行 `SIM <状态> · <本章试一试控件的值>`：状态 = 本章卡片观察的状态输出，否则先猜后看观察的，否则第一个会随卡片控件或本章 `set` 的控件变的；都没有时电路、磁铁照旧写模型的第一个状态，力的模型（几套互不相干的实验，`SEPARATE_EXPERIMENTS`）不写状态；短路 / 超额定用 hot 色。
 - **章节**：
@@ -1570,6 +1571,81 @@ docs/37 §4.5（E-MT2）。把一根条像尺子一样往下弯（−Y），**�
 - **一起走的零件**：中点上的砝码托、槽码用同一个输出的 `offset`（`axis: [0, -1, 0]`、`per` 同 bend）；推杆用压下的步进控件的 `offset`（`per: 0.01`），压下大于自垂时推杆脚正好落在条末端的上表面。断开的条另做一件（两段），用 `visible` 换。
 - **validate**：零件存在、主 primitive 是 box / bevelBox（三个尺寸）、不 repeat、不转、不缩放；`axis` 是 ±X / ±Z；`bridge` 写 `span`（不写 clamp / reach）且 `span` < 条长；`cantilever` 写 `clamp` 与 `reach`（不写 span），夹口在条上、`clamp + reach` ≤ 条的末端；源是数输出或步进控件；同一零件只有一条 `bend`，不能既 `bend` 又 `stretch`。
 - **QA**：`__atlas.engine.bend(partId)` → `{ value, mid: [x,y,z], tip: [x,y,z], length, shown }`（此刻画出的下垂 m；条中心与末端的模型坐标——悬臂的末端是 `clamp + reach`，桥是 +axis 端；中轴线长度；是否可见）。`pnpm shoot --beats` 每拍与每个拍链接核对：可见的条 `value` = 模型输出 × per（同样夹到 0.8）± 0.5 mm、`length` = 原长 ± 0.5 %。单测 `tests/space-scene/bend.test.ts`，交互 `tests-e2e/sample-materials.spec.ts`。
+
+### SpaceScene · 试一试 · 分类（sort）
+
+docs/38 §4.2 E-LT1。`sim.kind: "sort"`：一盒标本、几只托盘、一个"是 / 不是"的分类键，模型算出每件标本落进哪一组、组里的哪一格。注册走 `SIM_KINDS` → `simQuantities`（`lib/sim/sort.ts solveSort`）→ `quantityKind`（`sortQuantity`），没有时间线（`simTimelineChannels` 返回 null），`SEPARATE_EXPERIMENTS.sort = true`（每章一只托盘，PLATE 块尾只跟本章）。纯函数、同步、确定（32 件 × 6 问 < 0.2 ms，有单测）。数据与交叉校验在 `sort-schema.ts`（`sortSchema`、`sortIssues`，同 `matter-schema.ts` 的做法）。完整作者模板：`tests/space-scene/fixtures/specimen-tray.ts`（docs/38 §4.2 的全部 `sort` 数据与 §3.4 特征表、三种布局与 §3.2 坐标、七只托盘）；草稿夹具 `sample-sort`（背景章 + 一个问题、两个问题、一个个问、同学的分类盘四章）；单测 `tests/space-scene/{sort,keycard,shift,surfaces-units}.test.ts`；e2e `tests-e2e/sample-sort.spec.ts`。
+
+```jsonc
+"sim": {
+  "kind": "sort",
+  "controls": [
+    { "id": "tray", "kind": "choice", "default": "all", "options": [ "all", "alive", … ] },      // 选托盘（选项 = sort.trays 的键）
+    { "id": "q-alive", "kind": "choice", "default": "none", "options": [ "none", "moves", … ] },  // ask：选项 = questions 的键（+ none）
+    { "id": "asked-animal", "kind": "step", "values": [0, 1, 2, 3, 4, 5, 6], "default": 0 },      // chain：问了几个
+    { "id": "fix", "kind": "toggle", "default": false }, { "id": "suspect", "kind": "choice", … }   // arrangement
+  ],
+  "outputs": [
+    { "id": "slots", "kind": "vector", "from": "slots" },                                  // 给 shift 绑定
+    { "id": "layout", "kind": "state", "from": "layout", "states": { "none": {…}, "two": {…}, … } },
+    { "id": "count-a", "from": "count:a" }, { "id": "count-u", "from": "count:u" }, { "id": "on-tray", "from": "count:tray" },
+    { "id": "kinds-a", "from": "kinds:a" }, { "id": "wrong", "from": "wrong" },
+    { "id": "verdict", "kind": "state", "states": { "right": {…}, "wrong": {…} } }, { "id": "belongs", "kind": "state", "states": { "mammal": {…}, … } },
+    { "id": "where-dolphin", "kind": "state", "from": "where:dolphin", "states": { "u": {…}, "a": {…}, …, "off": {…} }, "predictOnly"?: ["…"] }
+  ],
+  "bind": [
+    { "output": "slots", "part": [ /* 全部标本 */ ], "shift": { "ease": 0.8, "stagger": 0.03, "lift": 0.04 } },
+    { "output": "layout", "part": ["pad-2a", "pad-2b"], "visible": { "eq": "two" } }
+  ],
+  "sort": {
+    "tray"?: "tray",                                        // 选托盘的控件（默认 tray）
+    "groups": { "mammal": { "label": {…}, "big"?: "animal" }, …, "none": { "label": {…} } },          // 真实类群
+    "questions": { "six-legs": { "label": { "en": "Six legs, three body parts", "zh": "六条腿、身体分三部分" } }, … },
+    "specimens": { "toy-car": { "group": "non-living", "traits": { "moves": true, "responds": true, "grows": false, … } }, … },  // 键 = 零件 id，顺序 = 组内顺序
+    "layouts": { "two": { "a": { "at": [-0.32, 0.011, 0.23], "cols": 7, "rows": 6, "pitch": 0.08, "pad": "pad-2a" }, "b": … }, … },
+    "trays": {
+      "all":       { "specimens": "*" },                                                        // 全部在盒里，layout none，卡片一行字
+      "alive":     { "specimens": [ … ], "layout": "two", "key": { "ask": "q-alive" } },
+      "own-key":   { "specimens": [ … ], "layout": "three", "key": { "ask": "first", "no": { "ask": "second" } } },
+      "animals":   { "specimens": [ … ], "layout": "six", "key": { "chain": ["six-legs", …, "moist-skin"], "else": "x", "asked": "asked-animal", "elseHeading"?: "none" } },
+      "classmate": { "specimens": [ … ], "layout": "six", "key": { "arrangement": { "a": { "heading": "insect", "members": [ … ] }, …, "x": { "heading": "none", "members": [] } }, "fix": "fix", "suspect"?: "suspect" } }
+    }
+  }
+}
+```
+
+- **组**：每个布局的键是一个小写字母（A–F、X……；`u` 留给标本盒），值是这一组的格子：`at`（格子中心：x、z 在盘上，y = 垫面，标本底面落在这里）、`cols` × `rows`、`pitch`（格距）、`pad`（垫子零件：流程图卡的叶子选中它）。
+- **键**（只读特征，不读真实类群；`arrangement` 的 fix 除外）：`ask` 控件是 `none` → 全部留在盒里（`u`）；特征真 → A，假 → B。`ask` + `no.ask`：第一问真 → A；否则第二问真 → B；否则 C（第二问 `none` → 其余留在盒里）。`chain` + `asked`（步进 k）：依次问前 k 个，第 i 个第一次为真 → 第 i 个字母；k 个都假：k < n → `u`，k = n → `else`；`elseHeading`：`else` 叶子在流程图卡上按这个真实类群起名（不写 = "Neither / 都不是"）。`arrangement` + `fix`：关 = 数据写的组；开 = 组名（`heading`）等于它真实类群的那一组，没有这样的组 → `heading: "none"` 的组。
+- **格子**：组内按 `specimens` 的顺序（标本盒的顺序，不是托盘列表的顺序），第 k 件在列 k mod cols、行 ⌊k ÷ cols⌋（行从后往前），格心 = `at` + ((列 − (cols − 1)/2) × pitch, 0, (行 − (rows − 1)/2) × pitch)。偏移 = 格心 − 家；家 = 零件主 primitive 的 `at` 的 x、z 与零件静止包围盒的底（y），所以标本站在垫子上。模型从 `evaluateSimOnStage` 的零件表读家（`lib/sim/carrier.ts` 对 sort 传零件原表，结果按零件表缓存）。
+- **量**（输出的 `from`）：`slots`（向量 `<零件>:x|y|z|shown`：偏移，场景单位；`shown` 0 = 不在这只托盘上）、`layout`（`none` / 布局名）、`count:<组 | u | tray>`、`kinds:<组>`（组里混了几个真实类群）、`wrong`（只对 `arrangement`：所在组的组名 ≠ 真实类群的件数；其他键 NaN，显示 `—`）、`verdict`（`right` / `wrong`：`suspect` 那件在同学的盘上此刻放得对不对；fix 开 = right）、`belongs`（suspect 的真实类群）、`where:<零件>`（`u` / 组字母 / `off`）。`verdict`、`belongs` 只在某只托盘写了 `suspect` 时有，`wrong` 只在有 `arrangement` 时有。
+- **先猜后看的"到不了"的状态**：状态输出可写 `"predictOnly": [<状态>]`：这些状态有标签、可作 `predict.options[].means`，模型不会给（"蘑菇进植物组"）；只限 sort 模型。
+- **validate**（`sortIssues`）：`trays` 的键 = 托盘控件的选项；`specimens` 的键是带 primitive、不是 context 的零件，`group` 是 `groups` 的键，`traits` 的键是问题；托盘的标本是标本、不重复；**键会问到的特征，托盘上每件都要写**（列出标本与特征）；`ask` / `no.ask` 是选择控件、选项 = 问题（+ `none`），布局有 A、B（两层还有 C）；`chain` 的问题存在、不重复、第 i 个字母在布局里，`else` 在布局里且不是问题的字母，`asked` 是 0 … n 的步进；`arrangement` 的组在布局里、`heading` 是真实类群、成员恰好覆盖托盘各一次，有人的真实类群没有组时要有 `heading: "none"` 的组，`fix` 是开关，`suspect` 是选择、选项都在这只托盘上；有键就要有布局，有布局就要有键，`"*"` 不写布局和键；**容量**：对每只托盘把键读的控件的所有值组合枚举一遍，任何一组件数 > cols × rows 报错（列出组合）；布局：`pad` 是零件、格子不出自己的垫子（垫子的包围盒）、同一布局的组的格子不重叠；状态输出（`layout`、`verdict`、`belongs`、`where:*`）的标签恰好覆盖模型在所有托盘、所有键控件值下能给的状态，`predictOnly` 的状态要有标签、模型确实给不出。
+- **示例**：`sample-sort` 的 `parts.json` 由八个积木"标本"（球、珠子、圆环、方块、砖块、瓷片、圆锥、尖刺；虚构特征 round / tall / shiny / flat）、两种布局的毡垫和一个放大的细胞组成；方块用 `scales`、砖块用 `feathers` 表面，细胞组 `scale: { unit: "um", magnification: 5000 }`。
+
+### SpaceScene · 移位（`shift`）
+
+docs/38 §4.3 E-LT2。零件绑定：
+
+```jsonc
+{ "output": "slots", "part": ["toy-car", …], "shift": { "ease"?: 0.8, "stagger"?: 0.03, "lift"?: 0.04 } }
+```
+
+- **值**：向量输出，键 `<零件>:x`、`<零件>:y`、`<零件>:z`（偏移，场景单位）与 `<零件>:shown`（0 = 隐藏）。`part` 列出的零件里向量没写的 → 不动、照常显示；`shown` 0 → 隐藏，与 `visible` 绑定同一套（不画、不投影、不可点、不标注、本章索引不算"可见"），原地淡出 0.3 s（不沿 explode 方向移出）。sort 模型的 `slots` 就是这种向量，别的模型以后要"把零件挪到模型算出的位置"也照这个形状给（`lib/sim/bind.ts shiftEntry` / `shiftOrder`）。
+- **变换顺序**：位置 → 姿态 → `offset` / `rotate` → `play` → **`shift`**（加在最后，与 `offset` 叠加）→ 动画。引线锚点、`__atlas.engine.anchor` 跟着走（同 `offset`；PLATE 立面同 `offset` 一样画静止位置）。
+- **过渡**（`lib/sim/shift.ts`，纯函数、有单测）：偏移变化时从此刻的位置出发，`ease` 秒三次缓入缓出，路径是一条拱：y 额外 + `lift` × sin(π × 缓动后的 t)（中点比直线高 `lift`：拿起来、放下）；同一次变化里要动的零件按它们在向量里的顺序依次晚 `stagger` 秒开始（`shiftDelays`；隐藏的、刚从隐藏里出来的不占位次）。隐藏的零件留在原地淡出；再出现时（已经淡没了）直接到新位置淡入。深链接、拍的瞬切、截图、`prefers-reduced-motion`、REFERENCE = 直接终值。
+- **测试 API**：`__atlas.engine.shift(partId)` → `{ offset: [x, y, z], target: [x, y, z], shown, delay }`（此刻画出的偏移、目标、是否画着、这一次移动等了几秒；0.1 mm 取整；没有 shift 的零件 null）。`pnpm shoot --beats` 每拍及每个拍链接核对：每件有 shift 的零件此刻的偏移 = 模型向量的值（± 1 mm），模型隐藏的不画，模型显示的（图层开着、没被 hide）画着；不符记为拍失败。
+- **validate**：输出是向量（不能是控件）；不是 context 零件；同一零件只有一条 `shift`；不能与 `place` 用在同一零件；时间线不能绑 `shift`。
+
+### SpaceScene · 分类流程图卡
+
+docs/38 §4.4 E-LT3。`sim.kind = "sort"`（有 `sim.sort`）时代替右上的零件链路卡（`hud/KeyCard.tsx`；版式、文字、读屏在 `lib/sim/keycard.ts`：`keyModel`、`keyLayout`、`keySummary`，纯函数、有单测）；标题 FLOWCHART / 分类流程图；< 1024 px 收进试一试卡片里可折叠的一节（同电路图卡、能量链卡、生活史环卡），没有试一试卡的章（背景章）在阅读面板里单独放这一节；手机同其他右上卡隐藏，试一试卡里照常有。
+
+- **版式**（viewBox 宽 280）：一个问题、两个问题、`chain` 画法相同：问题框沿左边竖排（圆角发丝框，字 = 问题的 `label` + "？"），每个框右边一条 YES / 是 线到它的叶子（A、B……），框与框之间一条 NO / 不是 线向下，最后一个 NO 向下到最后一个叶子（一个问题 = B、两个 = C、`chain` = `else`）。还没问到的（`chain` 的序号 > `asked`、选择控件在 `none`："No question asked yet / 还没有问问题"）框和线画虚线、字用 `ink-faint`，叶子照画（件数 0）；`else` 叶子在问完之前也是虚线。`arrangement`：没有问题框，每组一行（字母、组名 = `heading` 的类群标签、件数），有放错件的组下一行 hot 色"✗ 1 wrong / 1 件放错"（**不只靠颜色**），`fix` 开后消失。`tray` 是 `"*"`（没有键）：一行字"32 specimens in the case. Pick a chapter to sort them. / 标本盒里有 32 件标本。选一章来分一分。"有问题的键底部右侧写"IN THE CASE · n / 标本盒里 · n"。
+- **叶子**：字母 + 名字 + 件数（`count:<组>`，与 PLATE 同数）。名字：一个问题 A = "Yes: <问题>"、B = "No"；两个问题 A、B = "Yes: <问题>"、C = "Neither"；`chain` 第 i 个 = 第 i 个问题的 `label`，`else` = `elseHeading` 的类群标签（不写 = "Neither"）——新加坡讲义"给组起标题"那一步。
+- **选中的标本**（store `part` 是这只托盘上的标本）：它走过的问题框和走过的线描 signal、答案（YES / NO）加粗，落到的叶子实心 signal（`aria-current="true"`）；`arrangement` 下它所在的叶子实心，放错时叶子里另一行"Belongs in: <类群> / 本该在：<类群>"。
+- **交互**：叶子是按钮（命中方块 ≥ 54 viewBox 单位 = 卡片画到 82 % 时 44 CSS px；Enter / Space）：点 = 选中这一组的垫子零件（`pad`）。卡片不改控件（问题在试一试卡片里改，免得两处入口）。
+- **读屏**：`aria-label` = `keySummary`："Flowchart in this model: Six legs, three body parts? Yes: group A, 2. No: Has feathers? … No: group X, 0." / "这个模型里的分类流程图：六条腿、身体分三部分？是：A 组，2 件。不是：……"；`arrangement` = "group A, 3, Insects, 1 wrong; …"。件数与 ✗ 变化时 0.3 s 淡入（减少动态时不淡）。底下一行 `SIM` + "In this model / 在这个模型里"。
+- **i18n**：`space.card.key`、`space.try.key`、`space.key.*`。**测试**：`.space-key[data-kind]`（`ask` / `two` / `chain` / `arrangement` / `none`）、`[data-node][data-pending][data-on]`、`[data-line="yes-0"]`、`[data-leaf][data-count][data-on][data-pending][data-wrong]`、`.space-key__target`。
 
 ### 章节怎么写（`state`）
 
