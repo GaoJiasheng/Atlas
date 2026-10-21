@@ -53,6 +53,8 @@ import { latheProfileClosed } from '../../lib/shaped';
 import { FanDeform, sweepClosed, sweepGeometry, wingMembrane, wingVeins } from './organic';
 import { layFilings, type Filing, type FilingsCard } from '../../lib/sim/field';
 import { placeAlong, STRETCH_ATTRIBUTE } from '../../lib/stretch';
+import { BEND_ATTRIBUTE, BEND_SLICES } from '../../lib/bend';
+import { sliceAlong } from './shaped';
 
 export interface ShapePiece {
   geometry: BufferGeometry;
@@ -481,8 +483,11 @@ const MERGE_BUDGET = 400_000;
  * relative to the main `at`), repeated with the part. All pieces that share a
  * material slot are baked into one merged geometry (one draw call per
  * material); a slot that would exceed the vertex budget stays instanced.
+ * `bend`: a try-it bend (lib/bend.ts) bends the main primitive along this
+ * axis (0 = X, 2 = Z): it is cut into BEND_SLICES slabs along it and its
+ * vertices marked (BEND_ATTRIBUTE 1; the `extra` pieces 0).
  */
-export function partPieces(part: Pick<Part, 'primitive' | 'repeat'> & { extra?: Part['extra'] }): ShapePiece[] {
+export function partPieces(part: Pick<Part, 'primitive' | 'repeat'> & { extra?: Part['extra'] }, bend?: 0 | 2): ShapePiece[] {
   const main = part.primitive;
   if (!main) return [];
   const slots = partMaterialSlots(part);
@@ -503,6 +508,15 @@ export function partPieces(part: Pick<Part, 'primitive' | 'repeat'> & { extra?: 
       : null;
     for (const piece of basePieces(p)) {
       if (along !== null) piece.geometry.setAttribute(STRETCH_ATTRIBUTE, new BufferAttribute(new Float32Array(piece.geometry.getAttribute('position').count).fill(along), 1));
+      if (bend !== undefined && !piece.lines && !piece.wing && !piece.filings) {
+        const half = p === main && 'size' in p ? (p.size?.[bend] ?? 0) / 2 : 0;
+        if (p === main && p.kind === 'box') {
+          // A plain box: segments along the axis straight from the builder.
+          piece.geometry.dispose();
+          piece.geometry = new BoxGeometry(p.size[0]!, p.size[1]!, p.size[2]!, bend === 0 ? BEND_SLICES : 1, 1, bend === 2 ? BEND_SLICES : 1);
+        } else if (p === main) piece.geometry = sliceAlong(piece.geometry, bend, -half, half, BEND_SLICES);
+        piece.geometry.setAttribute(BEND_ATTRIBUTE, new BufferAttribute(new Float32Array(piece.geometry.getAttribute('position').count).fill(p === main ? 1 : 0), 1));
+      }
       const slot = keys.indexOf(materialSlotKey(piece.color ?? p.color, piece.color ? undefined : p.tint));
       const matrices = reps.flatMap((r) => piece.instances.map((m) => r.clone().multiply(place).multiply(m)));
       // Folding wings and vein lines stay their own pieces.
@@ -525,6 +539,12 @@ export function partPieces(part: Pick<Part, 'primitive' | 'repeat'> & { extra?: 
   const merged: ShapePiece[] = [];
   for (const [slot, list] of [...bySlot.entries()].sort((a, b) => a[0] - b[0])) {
     const verts = list.reduce((n, l) => n + l.geometry.getAttribute('position').count * l.matrices.length, 0);
+    // A bent strip alone in its slot keeps its indexed vertices (a third as many to rewrite as it bends).
+    if (bend !== undefined && list.length === 1 && list[0]!.matrices.length === 1 && list[0]!.geometry.index) {
+      list[0]!.geometry.applyMatrix4(list[0]!.matrices[0]!);
+      merged.push({ geometry: list[0]!.geometry, matrices: null, slot });
+      continue;
+    }
     if (verts <= MERGE_BUDGET || list.some((l) => l.matrices.some((m) => m.determinant() < 0))) {
       merged.push({ geometry: mergeBaked(list), matrices: null, slot });
       continue;
@@ -626,6 +646,7 @@ export function mergeBaked(list: { geometry: BufferGeometry; matrices: Matrix4[]
   const sectioned = flat.some((f) => f.g.getAttribute('atlasSection') !== undefined);
   const sec = sectioned ? new Float32Array(total) : null;
   const along = flat.some((f) => f.g.getAttribute(STRETCH_ATTRIBUTE) !== undefined) ? new Float32Array(total) : null;
+  const bent = flat.some((f) => f.g.getAttribute(BEND_ATTRIBUTE) !== undefined) ? new Float32Array(total) : null;
   const v = new Vector3();
   const nm = new Matrix3();
   let o = 0;
@@ -635,6 +656,7 @@ export function mergeBaked(list: { geometry: BufferGeometry; matrices: Matrix4[]
     const U = g.getAttribute('uv');
     const S = g.getAttribute('atlasSection');
     const T = g.getAttribute(STRETCH_ATTRIBUTE);
+    const B = g.getAttribute(BEND_ATTRIBUTE);
     for (const m of matrices) {
       nm.getNormalMatrix(m);
       const flip = m.determinant() < 0;
@@ -648,6 +670,7 @@ export function mergeBaked(list: { geometry: BufferGeometry; matrices: Matrix4[]
         if (U) uv.set([U.getX(j), U.getY(j)], (o + i) * 2);
         if (sec && S) sec[o + i] = S.getX(j);
         if (along && T) along[o + i] = T.getX(j);
+        if (bent && B) bent[o + i] = B.getX(j);
       }
       o += P.count;
     }
@@ -660,6 +683,7 @@ export function mergeBaked(list: { geometry: BufferGeometry; matrices: Matrix4[]
   out.setAttribute('uv', new BufferAttribute(uv, 2));
   if (sec) out.setAttribute('atlasSection', new BufferAttribute(sec, 1));
   if (along) out.setAttribute(STRETCH_ATTRIBUTE, new BufferAttribute(along, 1));
+  if (bent) out.setAttribute(BEND_ATTRIBUTE, new BufferAttribute(bent, 1));
   out.computeBoundingSphere();
   out.computeBoundingBox();
   return out;

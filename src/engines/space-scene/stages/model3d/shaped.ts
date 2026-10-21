@@ -484,3 +484,76 @@ export function shapedPieces(p: Kind<'lathe' | 'coil' | 'extrude' | 'curvedPanel
   }
 }
 
+/**
+ * Cut a geometry into `slices` equal slabs along one axis (0 = X, 2 = Z)
+ * between `from` and `to` (a bent strip, lib/bend.ts: a box's long faces are
+ * one quad end to end, a bevelBox's too between its rounded ends). Every
+ * triangle crossing a cut is clipped into the slabs it spans and fanned
+ * again; positions, normals (renormalised) and uvs are interpolated along
+ * the cut; the winding is kept. Returns a new non-indexed geometry and
+ * disposes the input.
+ */
+export function sliceAlong(g: BufferGeometry, axis: 0 | 2, from: number, to: number, slices: number): BufferGeometry {
+  const src = g.index ? g.toNonIndexed() : g;
+  if (!src.getAttribute('normal')) src.computeVertexNormals();
+  const P = src.getAttribute('position');
+  const N = src.getAttribute('normal');
+  const U = src.getAttribute('uv');
+  const cuts = Array.from({ length: slices - 1 }, (_, i) => from + ((to - from) * (i + 1)) / slices);
+  const pos: number[] = [];
+  const nor: number[] = [];
+  const uv: number[] = [];
+  /** A clip vertex: position, normal, uv (8 numbers). */
+  type V = number[];
+  const at = (i: number): V => [P.getX(i), P.getY(i), P.getZ(i), N.getX(i), N.getY(i), N.getZ(i), U ? U.getX(i) : 0, U ? U.getY(i) : 0];
+  const mix = (a: V, b: V, t: number): V => a.map((x, k) => x + (b[k]! - x) * t);
+  // Sutherland–Hodgman against one side of a plane: keep `t ≥ c` (dir 1) or `t ≤ c` (dir −1).
+  const clip = (poly: V[], c: number, dir: 1 | -1): V[] => {
+    const out: V[] = [];
+    for (let i = 0; i < poly.length; i++) {
+      const a = poly[i]!;
+      const b = poly[(i + 1) % poly.length]!;
+      const da = (a[axis]! - c) * dir;
+      const db = (b[axis]! - c) * dir;
+      if (da >= 0) out.push(a);
+      if ((da >= 0) !== (db >= 0)) out.push(mix(a, b, da / (da - db)));
+    }
+    return out;
+  };
+  const emit = (v: V) => {
+    const l = Math.hypot(v[3]!, v[4]!, v[5]!) || 1;
+    pos.push(v[0]!, v[1]!, v[2]!);
+    nor.push(v[3]! / l, v[4]! / l, v[5]! / l);
+    uv.push(v[6]!, v[7]!);
+  };
+  for (let i = 0; i + 2 < P.count; i += 3) {
+    const tri = [at(i), at(i + 1), at(i + 2)];
+    const lo = Math.min(tri[0]![axis]!, tri[1]![axis]!, tri[2]![axis]!);
+    const hi = Math.max(tri[0]![axis]!, tri[1]![axis]!, tri[2]![axis]!);
+    const inside = cuts.filter((c) => c > lo + 1e-12 && c < hi - 1e-12);
+    if (inside.length === 0) {
+      tri.forEach(emit);
+      continue;
+    }
+    const bounds = [-Infinity, ...inside, Infinity];
+    for (let k = 0; k + 1 < bounds.length; k++) {
+      let poly = tri;
+      if (Number.isFinite(bounds[k]!)) poly = clip(poly, bounds[k]!, 1);
+      if (Number.isFinite(bounds[k + 1]!)) poly = clip(poly, bounds[k + 1]!, -1);
+      for (let j = 1; j + 1 < poly.length; j++) {
+        emit(poly[0]!);
+        emit(poly[j]!);
+        emit(poly[j + 1]!);
+      }
+    }
+  }
+  if (src !== g) src.dispose();
+  g.dispose();
+  const out = new BufferGeometry();
+  out.setAttribute('position', new BufferAttribute(new Float32Array(pos), 3));
+  out.setAttribute('normal', new BufferAttribute(new Float32Array(nor), 3));
+  out.setAttribute('uv', new BufferAttribute(new Float32Array(uv), 2));
+  out.computeBoundingSphere();
+  return out;
+}
+

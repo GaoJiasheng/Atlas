@@ -1,0 +1,2605 @@
+{
+  "parts": [
+    {
+      "id": "bench",
+      "name": {
+        "en": "Test bench",
+        "zh": "测试台"
+      },
+      "summary": {
+        "en": "Sample test bench: engine fixture.",
+        "zh": "示例测试台：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the materials engine.",
+        "zh": "材料引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          0,
+          -0.02,
+          0
+        ],
+        "color": "wood",
+        "size": [
+          2.4,
+          0.04,
+          0.7
+        ],
+        "tint": "#c9b48e"
+      },
+      "context": true,
+      "clip": false
+    },
+    {
+      "id": "bridge-blocks",
+      "name": {
+        "en": "Support blocks",
+        "zh": "支撑木块"
+      },
+      "group": "strength-rig",
+      "summary": {
+        "en": "Sample support blocks: engine fixture.",
+        "zh": "示例支撑木块：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the materials engine.",
+        "zh": "材料引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "at": [
+          -1.0,
+          0.03,
+          0.05
+        ],
+        "color": "wood",
+        "size": [
+          0.016,
+          0.06,
+          0.06
+        ],
+        "bevel": 0.003
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "at": [
+            -0.8,
+            0.03,
+            0.05
+          ],
+          "color": "wood",
+          "size": [
+            0.016,
+            0.06,
+            0.06
+          ],
+          "bevel": 0.003
+        }
+      ]
+    },
+    {
+      "id": "bridge-wood",
+      "name": {
+        "en": "Wood strip",
+        "zh": "木条"
+      },
+      "group": "strength-rig",
+      "summary": {
+        "en": "Sample wood strip: engine fixture.",
+        "zh": "示例木条：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the materials engine.",
+        "zh": "材料引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          -0.9,
+          0.061,
+          0.05
+        ],
+        "color": "wood",
+        "size": [
+          0.3,
+          0.002,
+          0.03
+        ]
+      }
+    },
+    {
+      "id": "bridge-glass",
+      "name": {
+        "en": "Glass strip",
+        "zh": "玻璃条"
+      },
+      "group": "strength-rig",
+      "summary": {
+        "en": "Sample glass strip: engine fixture.",
+        "zh": "示例玻璃条：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the materials engine.",
+        "zh": "材料引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          -0.9,
+          0.061,
+          0.05
+        ],
+        "color": "plastic",
+        "size": [
+          0.3,
+          0.002,
+          0.03
+        ],
+        "tint": "#9cc9bd"
+      }
+    },
+    {
+      "id": "bridge-plastic",
+      "name": {
+        "en": "Plastic strip",
+        "zh": "塑料条"
+      },
+      "group": "strength-rig",
+      "summary": {
+        "en": "Sample plastic strip: engine fixture.",
+        "zh": "示例塑料条：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the materials engine.",
+        "zh": "材料引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          -0.9,
+          0.061,
+          0.05
+        ],
+        "color": "plastic",
+        "size": [
+          0.3,
+          0.002,
+          0.03
+        ],
+        "tint": "#e8e4da"
+      }
+    },
+    {
+      "id": "bridge-glass-snapped",
+      "name": {
+        "en": "Snapped glass strip",
+        "zh": "断开的玻璃条"
+      },
+      "group": "strength-rig",
+      "summary": {
+        "en": "Sample snapped glass strip: engine fixture.",
+        "zh": "示例断开的玻璃条：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the materials engine.",
+        "zh": "材料引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          -0.9315,
+          0.031,
+          0.05
+        ],
+        "color": "plastic",
+        "size": [
+          0.15,
+          0.002,
+          0.03
+        ],
+        "rotation": [
+          0,
+          0,
+          -23.6
+        ],
+        "tint": "#9cc9bd"
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "at": [
+            -0.87,
+            0.001,
+            0.07
+          ],
+          "color": "plastic",
+          "size": [
+            0.15,
+            0.002,
+            0.03
+          ],
+          "rotation": [
+            0,
+            12,
+            0
+          ],
+          "tint": "#9cc9bd"
+        }
+      ]
+    },
+    {
+      "id": "bridge-hanger",
+      "name": {
+        "en": "Mass carrier",
+        "zh": "砝码托"
+      },
+      "group": "strength-rig",
+      "summary": {
+        "en": "Sample mass carrier: engine fixture.",
+        "zh": "示例砝码托：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the materials engine.",
+        "zh": "材料引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "at": [
+          -0.9,
+          0.0635,
+          0.05
+        ],
+        "color": "steel",
+        "size": [
+          0.02,
+          0.02,
+          0.003
+        ]
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "at": [
+            -0.9,
+            0.0985,
+            0.05
+          ],
+          "color": "steel",
+          "size": [
+            0.003,
+            0.003,
+            0.07
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bridge-masses",
+      "name": {
+        "en": "Masses",
+        "zh": "槽码"
+      },
+      "group": "strength-rig",
+      "summary": {
+        "en": "Sample masses: engine fixture.",
+        "zh": "示例槽码：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the materials engine.",
+        "zh": "材料引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "at": [
+          -0.9,
+          0.0945,
+          0.05
+        ],
+        "color": "brass",
+        "size": [
+          0.018,
+          0.018,
+          0.011
+        ]
+      },
+      "repeat": {
+        "count": 5,
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "spacing": 0.012
+      }
+    },
+    {
+      "id": "bend-clamp",
+      "name": {
+        "en": "Clamp block",
+        "zh": "夹座"
+      },
+      "group": "bend-rig",
+      "summary": {
+        "en": "Sample clamp block: engine fixture.",
+        "zh": "示例夹座：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the materials engine.",
+        "zh": "材料引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "at": [
+          -0.55,
+          0.075,
+          0.05
+        ],
+        "color": "wood",
+        "size": [
+          0.08,
+          0.15,
+          0.08
+        ],
+        "bevel": 0.003
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "at": [
+            -0.55,
+            0.158,
+            0.05
+          ],
+          "color": "steel",
+          "size": [
+            0.08,
+            0.012,
+            0.05
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bend-wood",
+      "name": {
+        "en": "Wood strip",
+        "zh": "木条"
+      },
+      "group": "bend-rig",
+      "summary": {
+        "en": "Sample wood strip: engine fixture.",
+        "zh": "示例木条：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the materials engine.",
+        "zh": "材料引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          -0.41,
+          0.151,
+          0.05
+        ],
+        "color": "wood",
+        "size": [
+          0.3,
+          0.002,
+          0.03
+        ]
+      }
+    },
+    {
+      "id": "bend-glass",
+      "name": {
+        "en": "Glass strip",
+        "zh": "玻璃条"
+      },
+      "group": "bend-rig",
+      "summary": {
+        "en": "Sample glass strip: engine fixture.",
+        "zh": "示例玻璃条：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the materials engine.",
+        "zh": "材料引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          -0.41,
+          0.151,
+          0.05
+        ],
+        "color": "plastic",
+        "size": [
+          0.3,
+          0.002,
+          0.03
+        ],
+        "tint": "#9cc9bd"
+      }
+    },
+    {
+      "id": "bend-plastic",
+      "name": {
+        "en": "Plastic strip",
+        "zh": "塑料条"
+      },
+      "group": "bend-rig",
+      "summary": {
+        "en": "Sample plastic strip: engine fixture.",
+        "zh": "示例塑料条：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the materials engine.",
+        "zh": "材料引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          -0.41,
+          0.151,
+          0.05
+        ],
+        "color": "plastic",
+        "size": [
+          0.3,
+          0.002,
+          0.03
+        ],
+        "tint": "#e8e4da"
+      }
+    },
+    {
+      "id": "bend-glass-snapped",
+      "name": {
+        "en": "Snapped glass strip",
+        "zh": "断开的玻璃条"
+      },
+      "group": "bend-rig",
+      "summary": {
+        "en": "Sample snapped glass strip: engine fixture.",
+        "zh": "示例断开的玻璃条：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the materials engine.",
+        "zh": "材料引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          -0.535,
+          0.151,
+          0.05
+        ],
+        "color": "plastic",
+        "size": [
+          0.05,
+          0.002,
+          0.03
+        ],
+        "tint": "#9cc9bd"
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "at": [
+            -0.38,
+            0.001,
+            0.07
+          ],
+          "color": "plastic",
+          "size": [
+            0.25,
+            0.002,
+            0.03
+          ],
+          "rotation": [
+            0,
+            8,
+            0
+          ],
+          "tint": "#9cc9bd"
+        }
+      ]
+    },
+    {
+      "id": "push-stand",
+      "name": {
+        "en": "Push stand",
+        "zh": "推杆架"
+      },
+      "group": "bend-rig",
+      "summary": {
+        "en": "Sample push stand: engine fixture.",
+        "zh": "示例推杆架：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the materials engine.",
+        "zh": "材料引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "at": [
+          -0.22,
+          0.005,
+          0.05
+        ],
+        "color": "powder",
+        "size": [
+          0.05,
+          0.01,
+          0.05
+        ],
+        "bevel": 0.002
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "at": [
+            -0.22,
+            0.1,
+            0.05
+          ],
+          "color": "steel",
+          "size": [
+            0.004,
+            0.004,
+            0.18
+          ]
+        }
+      ]
+    },
+    {
+      "id": "push-peg",
+      "name": {
+        "en": "Push peg",
+        "zh": "推杆头"
+      },
+      "group": "bend-rig",
+      "summary": {
+        "en": "Sample push peg: engine fixture.",
+        "zh": "示例推杆头：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the materials engine.",
+        "zh": "材料引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          -0.264,
+          0.167,
+          0.05
+        ],
+        "color": "plastic",
+        "size": [
+          0.008,
+          0.03,
+          0.012
+        ],
+        "tint": "#3b4a5c"
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "at": [
+            -0.24,
+            0.177,
+            0.05
+          ],
+          "color": "plastic",
+          "size": [
+            0.04,
+            0.01,
+            0.012
+          ],
+          "tint": "#3b4a5c"
+        }
+      ]
+    },
+    {
+      "id": "tank",
+      "name": {
+        "en": "Water tank",
+        "zh": "水缸"
+      },
+      "group": "float-tank",
+      "summary": {
+        "en": "Sample water tank: engine fixture.",
+        "zh": "示例水缸：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the materials engine.",
+        "zh": "材料引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          0.0,
+          0.125,
+          -0.145
+        ],
+        "color": "glass",
+        "size": [
+          0.4,
+          0.25,
+          0.005
+        ]
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "at": [
+            0.0,
+            0.125,
+            0.105
+          ],
+          "color": "glass",
+          "size": [
+            0.4,
+            0.25,
+            0.005
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            -0.2,
+            0.125,
+            -0.02
+          ],
+          "color": "glass",
+          "size": [
+            0.005,
+            0.25,
+            0.25
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            0.2,
+            0.125,
+            -0.02
+          ],
+          "color": "glass",
+          "size": [
+            0.005,
+            0.25,
+            0.25
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            0.0,
+            0.0025,
+            -0.02
+          ],
+          "color": "glass",
+          "size": [
+            0.4,
+            0.005,
+            0.25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tank-water",
+      "name": {
+        "en": "Water",
+        "zh": "水"
+      },
+      "group": "float-tank",
+      "summary": {
+        "en": "Sample water: engine fixture.",
+        "zh": "示例水：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the materials engine.",
+        "zh": "材料引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          0.0,
+          0.095,
+          -0.02
+        ],
+        "color": "membrane",
+        "size": [
+          0.39,
+          0.18,
+          0.24
+        ],
+        "tint": "#6c919a"
+      }
+    },
+    {
+      "id": "float-wood",
+      "name": {
+        "en": "Wood block",
+        "zh": "木块"
+      },
+      "group": "float-tank",
+      "summary": {
+        "en": "Sample wood block: engine fixture.",
+        "zh": "示例木块：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the materials engine.",
+        "zh": "材料引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "at": [
+          0.0,
+          0.02,
+          -0.02
+        ],
+        "color": "wood",
+        "size": [
+          0.06,
+          0.03,
+          0.06
+        ],
+        "bevel": 0.002
+      }
+    },
+    {
+      "id": "float-glass",
+      "name": {
+        "en": "Glass block",
+        "zh": "玻璃块"
+      },
+      "group": "float-tank",
+      "summary": {
+        "en": "Sample glass block: engine fixture.",
+        "zh": "示例玻璃块：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the materials engine.",
+        "zh": "材料引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "at": [
+          0.0,
+          0.02,
+          -0.02
+        ],
+        "color": "plastic",
+        "size": [
+          0.06,
+          0.03,
+          0.06
+        ],
+        "bevel": 0.002,
+        "tint": "#9cc9bd"
+      }
+    },
+    {
+      "id": "float-plastic",
+      "name": {
+        "en": "Plastic block",
+        "zh": "塑料块"
+      },
+      "group": "float-tank",
+      "summary": {
+        "en": "Sample plastic block: engine fixture.",
+        "zh": "示例塑料块：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the materials engine.",
+        "zh": "材料引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "at": [
+          0.0,
+          0.02,
+          -0.02
+        ],
+        "color": "plastic",
+        "size": [
+          0.06,
+          0.03,
+          0.06
+        ],
+        "bevel": 0.002,
+        "tint": "#e8e4da"
+      }
+    },
+    {
+      "id": "float-bottle",
+      "name": {
+        "en": "Capped bottle",
+        "zh": "盖好的空瓶"
+      },
+      "group": "float-tank",
+      "summary": {
+        "en": "Sample capped bottle: engine fixture.",
+        "zh": "示例盖好的空瓶：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the materials engine.",
+        "zh": "材料引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "at": [
+          0.0,
+          0.0375,
+          -0.02
+        ],
+        "color": "plastic",
+        "size": [
+          0.0325,
+          0.0325,
+          0.17
+        ],
+        "rotation": [
+          0,
+          0,
+          90
+        ],
+        "tint": "#cfe0e6"
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "at": [
+            0.1,
+            0.0375,
+            -0.02
+          ],
+          "color": "plastic",
+          "size": [
+            0.014,
+            0.014,
+            0.03
+          ],
+          "rotation": [
+            0,
+            0,
+            90
+          ],
+          "tint": "#3d6fa3"
+        }
+      ]
+    },
+    {
+      "id": "drop-stand",
+      "name": {
+        "en": "Dropper stand",
+        "zh": "滴管架"
+      },
+      "group": "drop-tray",
+      "summary": {
+        "en": "Sample dropper stand: engine fixture.",
+        "zh": "示例滴管架：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the materials engine.",
+        "zh": "材料引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "at": [
+          0.45,
+          0.01,
+          0.08
+        ],
+        "color": "wood",
+        "size": [
+          0.12,
+          0.02,
+          0.12
+        ],
+        "bevel": 0.003
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "at": [
+            0.53,
+            0.075,
+            0.08
+          ],
+          "color": "steel",
+          "size": [
+            0.003,
+            0.003,
+            0.15
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            0.49,
+            0.145,
+            0.08
+          ],
+          "color": "steel",
+          "size": [
+            0.08,
+            0.006,
+            0.006
+          ]
+        },
+        {
+          "kind": "cylinder",
+          "at": [
+            0.45,
+            0.105,
+            0.08
+          ],
+          "color": "glass",
+          "size": [
+            0.004,
+            0.0015,
+            0.06
+          ]
+        },
+        {
+          "kind": "sphere",
+          "at": [
+            0.45,
+            0.142,
+            0.08
+          ],
+          "color": "rubber",
+          "size": [
+            0.009
+          ]
+        }
+      ]
+    },
+    {
+      "id": "square-wood",
+      "name": {
+        "en": "Wood sample",
+        "zh": "木样片"
+      },
+      "group": "drop-tray",
+      "summary": {
+        "en": "Sample wood sample: engine fixture.",
+        "zh": "示例木样片：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the materials engine.",
+        "zh": "材料引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          0.45,
+          0.021,
+          0.08
+        ],
+        "color": "wood",
+        "size": [
+          0.08,
+          0.002,
+          0.08
+        ]
+      }
+    },
+    {
+      "id": "square-glass",
+      "name": {
+        "en": "Glass sample",
+        "zh": "玻璃样片"
+      },
+      "group": "drop-tray",
+      "summary": {
+        "en": "Sample glass sample: engine fixture.",
+        "zh": "示例玻璃样片：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the materials engine.",
+        "zh": "材料引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          0.45,
+          0.021,
+          0.08
+        ],
+        "color": "plastic",
+        "size": [
+          0.08,
+          0.002,
+          0.08
+        ],
+        "tint": "#9cc9bd"
+      }
+    },
+    {
+      "id": "square-plastic",
+      "name": {
+        "en": "Plastic sample",
+        "zh": "塑料样片"
+      },
+      "group": "drop-tray",
+      "summary": {
+        "en": "Sample plastic sample: engine fixture.",
+        "zh": "示例塑料样片：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the materials engine.",
+        "zh": "材料引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          0.45,
+          0.021,
+          0.08
+        ],
+        "color": "plastic",
+        "size": [
+          0.08,
+          0.002,
+          0.08
+        ],
+        "tint": "#e8e4da"
+      }
+    },
+    {
+      "id": "water-bead",
+      "name": {
+        "en": "Water drop",
+        "zh": "水珠"
+      },
+      "group": "drop-tray",
+      "summary": {
+        "en": "Sample water drop: engine fixture.",
+        "zh": "示例水珠：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the materials engine.",
+        "zh": "材料引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          0.45,
+          0.022,
+          0.08
+        ],
+        "color": "glass",
+        "size": [
+          0.004
+        ],
+        "scale": [
+          1,
+          0.6,
+          1
+        ],
+        "tint": "#9cc3cc"
+      }
+    },
+    {
+      "id": "wet-patch",
+      "name": {
+        "en": "Damp patch",
+        "zh": "湿印"
+      },
+      "group": "drop-tray",
+      "summary": {
+        "en": "Sample damp patch: engine fixture.",
+        "zh": "示例湿印：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the materials engine.",
+        "zh": "材料引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "at": [
+          0.45,
+          0.02215,
+          0.08
+        ],
+        "color": "#7a5c3a",
+        "size": [
+          0.015,
+          0.015,
+          0.0003
+        ]
+      }
+    },
+    {
+      "id": "torch",
+      "name": {
+        "en": "Torch",
+        "zh": "手电筒"
+      },
+      "group": "light-bench",
+      "summary": {
+        "en": "Sample torch: engine fixture.",
+        "zh": "示例手电筒：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the materials engine.",
+        "zh": "材料引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "at": [
+          0.68,
+          0.1,
+          0.0
+        ],
+        "color": "powder",
+        "size": [
+          0.018,
+          0.018,
+          0.08
+        ],
+        "rotation": [
+          0,
+          0,
+          90
+        ]
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "at": [
+            0.715,
+            0.1,
+            0.0
+          ],
+          "color": "glass",
+          "size": [
+            0.022,
+            0.022,
+            0.01
+          ],
+          "rotation": [
+            0,
+            0,
+            90
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            0.68,
+            0.041,
+            0.0
+          ],
+          "color": "powder",
+          "size": [
+            0.02,
+            0.082,
+            0.02
+          ]
+        }
+      ],
+      "castShadow": false
+    },
+    {
+      "id": "sheet-holder",
+      "name": {
+        "en": "Sample holder",
+        "zh": "样片夹"
+      },
+      "group": "light-bench",
+      "summary": {
+        "en": "Sample sample holder: engine fixture.",
+        "zh": "示例样片夹：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the materials engine.",
+        "zh": "材料引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          0.9,
+          0.0075,
+          0.0
+        ],
+        "color": "wood",
+        "size": [
+          0.03,
+          0.015,
+          0.1
+        ]
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "at": [
+            0.9,
+            0.035,
+            0.045
+          ],
+          "color": "steel",
+          "size": [
+            0.006,
+            0.04,
+            0.006
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            0.9,
+            0.035,
+            -0.045
+          ],
+          "color": "steel",
+          "size": [
+            0.006,
+            0.04,
+            0.006
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sheet-wood",
+      "name": {
+        "en": "Wood sample",
+        "zh": "木样片"
+      },
+      "group": "light-bench",
+      "summary": {
+        "en": "Sample wood sample: engine fixture.",
+        "zh": "示例木样片：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the materials engine.",
+        "zh": "材料引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          0.9,
+          0.1,
+          0.0
+        ],
+        "color": "wood",
+        "size": [
+          0.002,
+          0.08,
+          0.08
+        ]
+      }
+    },
+    {
+      "id": "sheet-glass",
+      "name": {
+        "en": "Glass sample",
+        "zh": "玻璃样片"
+      },
+      "group": "light-bench",
+      "summary": {
+        "en": "Sample glass sample: engine fixture.",
+        "zh": "示例玻璃样片：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the materials engine.",
+        "zh": "材料引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          0.9,
+          0.1,
+          0.0
+        ],
+        "color": "plastic",
+        "size": [
+          0.002,
+          0.08,
+          0.08
+        ],
+        "tint": "#9cc9bd"
+      }
+    },
+    {
+      "id": "sheet-plastic",
+      "name": {
+        "en": "Plastic sample",
+        "zh": "塑料样片"
+      },
+      "group": "light-bench",
+      "summary": {
+        "en": "Sample plastic sample: engine fixture.",
+        "zh": "示例塑料样片：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the materials engine.",
+        "zh": "材料引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          0.9,
+          0.1,
+          0.0
+        ],
+        "color": "plastic",
+        "size": [
+          0.002,
+          0.08,
+          0.08
+        ],
+        "tint": "#e8e4da"
+      }
+    },
+    {
+      "id": "screen",
+      "name": {
+        "en": "White screen",
+        "zh": "白屏"
+      },
+      "group": "light-bench",
+      "summary": {
+        "en": "Sample white screen: engine fixture.",
+        "zh": "示例白屏：引擎测试。"
+      },
+      "detail": {
+        "en": "Primitive study for the materials engine.",
+        "zh": "材料引擎的基础几何测试。"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          1.0,
+          0.1,
+          0.0
+        ],
+        "color": "enamel",
+        "size": [
+          0.005,
+          0.22,
+          0.3
+        ]
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "at": [
+            1.0,
+            0.004,
+            0.0
+          ],
+          "color": "powder",
+          "size": [
+            0.05,
+            0.008,
+            0.2
+          ]
+        }
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "id": "strength-rig",
+      "name": {
+        "en": "Strength",
+        "zh": "强度"
+      },
+      "color": "token:ink-2",
+      "scale": {
+        "unit": "cm",
+        "magnification": 1
+      }
+    },
+    {
+      "id": "bend-rig",
+      "name": {
+        "en": "Flexibility",
+        "zh": "柔韧性"
+      },
+      "color": "token:accent-2",
+      "scale": {
+        "unit": "cm",
+        "magnification": 1
+      }
+    },
+    {
+      "id": "float-tank",
+      "name": {
+        "en": "Float or sink",
+        "zh": "浮沉"
+      },
+      "color": "token:cold",
+      "scale": {
+        "unit": "cm",
+        "magnification": 1
+      }
+    },
+    {
+      "id": "drop-tray",
+      "name": {
+        "en": "Waterproof",
+        "zh": "防水"
+      },
+      "color": "token:ink-3",
+      "scale": {
+        "unit": "cm",
+        "magnification": 1
+      }
+    },
+    {
+      "id": "light-bench",
+      "name": {
+        "en": "Light through",
+        "zh": "透光"
+      },
+      "color": "token:en-light",
+      "scale": {
+        "unit": "cm",
+        "magnification": 1
+      }
+    }
+  ],
+  "views": {
+    "assembled": {
+      "camera": {
+        "position": [
+          0.35,
+          0.95,
+          1.9
+        ],
+        "target": [
+          0.0,
+          0.06,
+          0.0
+        ],
+        "fov": 34
+      }
+    },
+    "cover": {
+      "position": [
+        0.35,
+        0.95,
+        1.9
+      ],
+      "target": [
+        0.0,
+        0.06,
+        0.0
+      ],
+      "fov": 34
+    },
+    "section": {
+      "plane": "xy"
+    },
+    "shadows": "contact"
+  },
+  "presets": [
+    {
+      "id": "strength-view",
+      "label": {
+        "en": "Strength",
+        "zh": "示例镜头"
+      },
+      "camera": {
+        "position": [
+          -0.84,
+          0.2,
+          0.62
+        ],
+        "target": [
+          -0.9,
+          0.04,
+          0.05
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "bend-view",
+      "label": {
+        "en": "Bend",
+        "zh": "示例镜头"
+      },
+      "camera": {
+        "position": [
+          -0.36,
+          0.2,
+          0.75
+        ],
+        "target": [
+          -0.4,
+          0.08,
+          0.05
+        ],
+        "fov": 32
+      }
+    },
+    {
+      "id": "tank-view",
+      "label": {
+        "en": "Tank",
+        "zh": "示例镜头"
+      },
+      "camera": {
+        "position": [
+          0.05,
+          0.28,
+          0.95
+        ],
+        "target": [
+          0.0,
+          0.1,
+          -0.02
+        ],
+        "fov": 32
+      }
+    },
+    {
+      "id": "drops-view",
+      "label": {
+        "en": "Drops",
+        "zh": "示例镜头"
+      },
+      "camera": {
+        "position": [
+          0.52,
+          0.2,
+          0.45
+        ],
+        "target": [
+          0.45,
+          0.04,
+          0.08
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "light-view",
+      "label": {
+        "en": "Light",
+        "zh": "示例镜头"
+      },
+      "camera": {
+        "position": [
+          0.62,
+          0.3,
+          0.6
+        ],
+        "target": [
+          0.9,
+          0.09,
+          0.0
+        ],
+        "fov": 34
+      }
+    }
+  ],
+  "poses": {
+    "masses-fallen": {
+      "bridge-hanger": {
+        "offset": [
+          0.03,
+          -0.062,
+          0.02
+        ],
+        "rotation": [
+          0,
+          0,
+          8
+        ]
+      },
+      "bridge-masses": {
+        "offset": [
+          0.03,
+          -0.062,
+          0.02
+        ],
+        "rotation": [
+          0,
+          0,
+          8
+        ]
+      },
+      "duration": 0.5
+    }
+  },
+  "units": {
+    "modelUnit": "cm",
+    "scale": 100
+  },
+  "spec": [
+    {
+      "key": {
+        "en": "Samples",
+        "zh": "样品"
+      },
+      "value": {
+        "en": "3 materials · same size in each test",
+        "zh": "3 种材料 · 每个测试大小相同"
+      },
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Strips",
+        "zh": "材料条"
+      },
+      "value": {
+        "en": "30 × 3 CM · 2 MM THICK",
+        "zh": "30 × 3 厘米 · 2 毫米厚"
+      },
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Masses",
+        "zh": "砝码"
+      },
+      "value": {
+        "en": "5 × 500 G",
+        "zh": "5 个 500 克"
+      },
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Tank",
+        "zh": "水缸"
+      },
+      "value": {
+        "en": "FRESH WATER · 18 CM DEEP",
+        "zh": "清水 · 18 厘米深"
+      },
+      "tag": "design"
+    }
+  ],
+  "telemetry": [
+    {
+      "key": {
+        "en": "Masses on the strip",
+        "zh": "条上的砝码"
+      },
+      "unit": "kg",
+      "follow": "masses-on"
+    },
+    {
+      "key": {
+        "en": "End pushed down",
+        "zh": "末端压下"
+      },
+      "unit": "cm",
+      "follow": "push-down"
+    }
+  ],
+  "sim": {
+    "kind": "materials",
+    "controls": [
+      {
+        "id": "strip",
+        "kind": "choice",
+        "default": "wood",
+        "label": {
+          "en": "Strip",
+          "zh": "材料条"
+        },
+        "options": [
+          {
+            "id": "wood",
+            "label": {
+              "en": "Wood",
+              "zh": "木"
+            }
+          },
+          {
+            "id": "glass",
+            "label": {
+              "en": "Glass",
+              "zh": "玻璃"
+            }
+          },
+          {
+            "id": "plastic",
+            "label": {
+              "en": "Plastic",
+              "zh": "塑料"
+            }
+          }
+        ]
+      },
+      {
+        "id": "masses",
+        "kind": "step",
+        "values": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "default": 0,
+        "label": {
+          "en": "500 g masses on the strip",
+          "zh": "条上的 500 克槽码"
+        }
+      },
+      {
+        "id": "push",
+        "kind": "step",
+        "values": [
+          0,
+          0.5,
+          1,
+          1.5,
+          2
+        ],
+        "default": 0,
+        "unit": "cm",
+        "label": {
+          "en": "End pushed down",
+          "zh": "末端压下"
+        }
+      },
+      {
+        "id": "block",
+        "kind": "choice",
+        "default": "wood",
+        "label": {
+          "en": "Put into the water",
+          "zh": "放进水里的"
+        },
+        "options": [
+          {
+            "id": "wood",
+            "label": {
+              "en": "Wooden block",
+              "zh": "木块"
+            }
+          },
+          {
+            "id": "glass",
+            "label": {
+              "en": "Glass block",
+              "zh": "玻璃块"
+            }
+          },
+          {
+            "id": "plastic",
+            "label": {
+              "en": "Plastic block",
+              "zh": "塑料块"
+            }
+          },
+          {
+            "id": "bottle",
+            "label": {
+              "en": "Capped empty bottle",
+              "zh": "盖好的空瓶"
+            }
+          }
+        ]
+      },
+      {
+        "id": "square",
+        "kind": "choice",
+        "default": "plastic",
+        "label": {
+          "en": "Sample",
+          "zh": "样片"
+        },
+        "options": [
+          {
+            "id": "wood",
+            "label": {
+              "en": "Wood",
+              "zh": "木"
+            }
+          },
+          {
+            "id": "glass",
+            "label": {
+              "en": "Glass",
+              "zh": "玻璃"
+            }
+          },
+          {
+            "id": "plastic",
+            "label": {
+              "en": "Plastic",
+              "zh": "塑料"
+            }
+          }
+        ]
+      },
+      {
+        "id": "pick",
+        "kind": "choice",
+        "default": "wood",
+        "label": {
+          "en": "Material",
+          "zh": "材料"
+        },
+        "options": [
+          {
+            "id": "wood",
+            "label": {
+              "en": "Wood",
+              "zh": "木"
+            }
+          },
+          {
+            "id": "glass",
+            "label": {
+              "en": "Glass",
+              "zh": "玻璃"
+            }
+          },
+          {
+            "id": "plastic",
+            "label": {
+              "en": "Plastic",
+              "zh": "塑料"
+            }
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "id": "strength-result",
+        "kind": "state",
+        "from": "bridge:result",
+        "label": {
+          "en": "Strength test",
+          "zh": "强度测试"
+        },
+        "states": {
+          "holds": {
+            "en": "Holds them",
+            "zh": "托得住"
+          },
+          "on-bench": {
+            "en": "Bends onto the bench",
+            "zh": "弯到台面上"
+          },
+          "snapped": {
+            "en": "Snaps",
+            "zh": "断了"
+          }
+        }
+      },
+      {
+        "id": "strength-bend",
+        "kind": "state",
+        "from": "bridge:bend",
+        "label": {
+          "en": "How much it bends",
+          "zh": "弯得多少"
+        },
+        "states": {
+          "hardly": {
+            "en": "Hardly bends",
+            "zh": "几乎不弯"
+          },
+          "a-little": {
+            "en": "Bends a little",
+            "zh": "弯一点"
+          },
+          "a-lot": {
+            "en": "Bends a lot",
+            "zh": "弯很多"
+          },
+          "none": {
+            "en": "Snapped",
+            "zh": "断了"
+          }
+        }
+      },
+      {
+        "id": "bridge-view",
+        "kind": "state",
+        "from": "bridge:view",
+        "label": {
+          "en": "On the supports",
+          "zh": "架上的条"
+        },
+        "states": {
+          "wood": {
+            "en": "Wood",
+            "zh": "木"
+          },
+          "glass": {
+            "en": "Glass",
+            "zh": "玻璃"
+          },
+          "plastic": {
+            "en": "Plastic",
+            "zh": "塑料"
+          },
+          "glass-snapped": {
+            "en": "Glass, snapped",
+            "zh": "玻璃，断了"
+          }
+        }
+      },
+      {
+        "id": "bridge-sag",
+        "from": "bridge:sag",
+        "unit": "m",
+        "label": {
+          "en": "Sag (drawn)",
+          "zh": "下垂（画面）"
+        }
+      },
+      {
+        "id": "masses-on",
+        "from": "control:masses-kg",
+        "unit": "kg",
+        "decimals": 1,
+        "label": {
+          "en": "Masses on the strip",
+          "zh": "条上的砝码"
+        }
+      },
+      {
+        "id": "flex-result",
+        "kind": "state",
+        "from": "cantilever:result",
+        "label": {
+          "en": "Flexibility test",
+          "zh": "柔韧测试"
+        },
+        "states": {
+          "not-pushed": {
+            "en": "Not pushed yet",
+            "zh": "还没压"
+          },
+          "bends": {
+            "en": "Bends without breaking",
+            "zh": "弯而不断"
+          },
+          "droops": {
+            "en": "Droops by itself",
+            "zh": "自己垂下来"
+          },
+          "snapped": {
+            "en": "Snaps",
+            "zh": "断了"
+          }
+        }
+      },
+      {
+        "id": "bend-view",
+        "kind": "state",
+        "from": "cantilever:view",
+        "label": {
+          "en": "In the clamp",
+          "zh": "夹着的条"
+        },
+        "states": {
+          "wood": {
+            "en": "Wood",
+            "zh": "木"
+          },
+          "glass": {
+            "en": "Glass",
+            "zh": "玻璃"
+          },
+          "plastic": {
+            "en": "Plastic",
+            "zh": "塑料"
+          },
+          "glass-snapped": {
+            "en": "Glass, snapped",
+            "zh": "玻璃，断了"
+          }
+        }
+      },
+      {
+        "id": "flex-tip",
+        "from": "cantilever:tip",
+        "unit": "m",
+        "label": {
+          "en": "End drop (drawn)",
+          "zh": "末端下垂（画面）"
+        }
+      },
+      {
+        "id": "push-down",
+        "from": "control:push",
+        "unit": "cm",
+        "decimals": 1,
+        "label": {
+          "en": "End pushed down",
+          "zh": "末端压下"
+        }
+      },
+      {
+        "id": "float-result",
+        "kind": "state",
+        "from": "tank:result",
+        "label": {
+          "en": "In the water",
+          "zh": "放进水里"
+        },
+        "states": {
+          "floats": {
+            "en": "Floats",
+            "zh": "浮"
+          },
+          "sinks": {
+            "en": "Sinks",
+            "zh": "沉"
+          }
+        }
+      },
+      {
+        "id": "float-rise",
+        "from": "tank:rise",
+        "unit": "cm",
+        "label": {
+          "en": "Underside above the floor (drawn)",
+          "zh": "底面离缸底（画面）"
+        }
+      },
+      {
+        "id": "drop-result",
+        "kind": "state",
+        "from": "drops:result",
+        "label": {
+          "en": "The drop of water",
+          "zh": "那滴水"
+        },
+        "states": {
+          "stays-on-top": {
+            "en": "Stays on top",
+            "zh": "停在上面"
+          },
+          "soaks-in": {
+            "en": "Soaks in",
+            "zh": "吸进去"
+          }
+        }
+      },
+      {
+        "id": "light-result",
+        "kind": "state",
+        "from": "light:result",
+        "label": {
+          "en": "Light through",
+          "zh": "透过的光"
+        },
+        "states": {
+          "most": {
+            "en": "Most",
+            "zh": "大部分"
+          },
+          "some": {
+            "en": "Some",
+            "zh": "一部分"
+          },
+          "none": {
+            "en": "None",
+            "zh": "没有"
+          }
+        }
+      },
+      {
+        "id": "light-dark",
+        "from": "light:dark",
+        "label": {
+          "en": "Shadow darkness (drawn)",
+          "zh": "影子深浅（画面）"
+        }
+      },
+      {
+        "id": "p-strength",
+        "kind": "state",
+        "from": "profile:strength",
+        "label": {
+          "en": "Strength",
+          "zh": "强度"
+        },
+        "states": {
+          "holds": {
+            "en": "Holds them",
+            "zh": "托得住"
+          },
+          "on-bench": {
+            "en": "Bends onto the bench",
+            "zh": "弯到台面上"
+          },
+          "snapped": {
+            "en": "Snaps",
+            "zh": "断了"
+          }
+        }
+      },
+      {
+        "id": "p-flex",
+        "kind": "state",
+        "from": "profile:flex",
+        "label": {
+          "en": "Flexibility",
+          "zh": "柔韧性"
+        },
+        "states": {
+          "bends": {
+            "en": "Bends without breaking",
+            "zh": "弯而不断"
+          },
+          "droops": {
+            "en": "Droops by itself",
+            "zh": "自己垂下来"
+          },
+          "snapped": {
+            "en": "Snaps",
+            "zh": "断了"
+          }
+        }
+      },
+      {
+        "id": "p-float",
+        "kind": "state",
+        "from": "profile:float",
+        "label": {
+          "en": "Float or sink",
+          "zh": "浮沉"
+        },
+        "states": {
+          "floats": {
+            "en": "Floats",
+            "zh": "浮"
+          },
+          "sinks": {
+            "en": "Sinks",
+            "zh": "沉"
+          }
+        }
+      },
+      {
+        "id": "p-water",
+        "kind": "state",
+        "from": "profile:water",
+        "label": {
+          "en": "Waterproof",
+          "zh": "防水"
+        },
+        "states": {
+          "stays-on-top": {
+            "en": "Stays on top",
+            "zh": "停在上面"
+          },
+          "soaks-in": {
+            "en": "Soaks in",
+            "zh": "吸进去"
+          }
+        }
+      },
+      {
+        "id": "p-light",
+        "kind": "state",
+        "from": "profile:light",
+        "label": {
+          "en": "Light through",
+          "zh": "透光"
+        },
+        "states": {
+          "most": {
+            "en": "Most",
+            "zh": "大部分"
+          },
+          "some": {
+            "en": "Some",
+            "zh": "一部分"
+          },
+          "none": {
+            "en": "None",
+            "zh": "没有"
+          }
+        }
+      }
+    ],
+    "bind": [
+      {
+        "output": "bridge-view",
+        "part": "bridge-wood",
+        "visible": {
+          "eq": "wood"
+        }
+      },
+      {
+        "output": "bridge-view",
+        "part": "bridge-glass",
+        "visible": {
+          "eq": "glass"
+        }
+      },
+      {
+        "output": "bridge-view",
+        "part": "bridge-plastic",
+        "visible": {
+          "eq": "plastic"
+        }
+      },
+      {
+        "output": "bridge-view",
+        "part": "bridge-glass-snapped",
+        "visible": {
+          "eq": "glass-snapped"
+        }
+      },
+      {
+        "output": "bridge-sag",
+        "part": [
+          "bridge-wood",
+          "bridge-glass",
+          "bridge-plastic"
+        ],
+        "bend": {
+          "mode": "bridge",
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "span": 0.2,
+          "per": 1
+        }
+      },
+      {
+        "control": "masses",
+        "part": "bridge-masses",
+        "count": {
+          "per": 1
+        }
+      },
+      {
+        "output": "bridge-sag",
+        "part": [
+          "bridge-hanger",
+          "bridge-masses"
+        ],
+        "offset": {
+          "axis": [
+            0,
+            -1,
+            0
+          ],
+          "per": 1
+        }
+      },
+      {
+        "output": "bridge-view",
+        "part": [
+          "bridge-hanger",
+          "bridge-masses"
+        ],
+        "pose": {
+          "glass-snapped": "masses-fallen"
+        }
+      },
+      {
+        "output": "bend-view",
+        "part": "bend-wood",
+        "visible": {
+          "eq": "wood"
+        }
+      },
+      {
+        "output": "bend-view",
+        "part": "bend-glass",
+        "visible": {
+          "eq": "glass"
+        }
+      },
+      {
+        "output": "bend-view",
+        "part": "bend-plastic",
+        "visible": {
+          "eq": "plastic"
+        }
+      },
+      {
+        "output": "bend-view",
+        "part": "bend-glass-snapped",
+        "visible": {
+          "eq": "glass-snapped"
+        }
+      },
+      {
+        "output": "flex-tip",
+        "part": [
+          "bend-wood",
+          "bend-glass",
+          "bend-plastic"
+        ],
+        "bend": {
+          "mode": "cantilever",
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "clamp": -0.1,
+          "reach": 0.25,
+          "per": 1
+        }
+      },
+      {
+        "control": "push",
+        "part": "push-peg",
+        "offset": {
+          "axis": [
+            0,
+            -1,
+            0
+          ],
+          "per": 0.01
+        }
+      },
+      {
+        "control": "block",
+        "part": "float-wood",
+        "visible": {
+          "eq": "wood"
+        }
+      },
+      {
+        "control": "block",
+        "part": "float-glass",
+        "visible": {
+          "eq": "glass"
+        }
+      },
+      {
+        "control": "block",
+        "part": "float-plastic",
+        "visible": {
+          "eq": "plastic"
+        }
+      },
+      {
+        "control": "block",
+        "part": "float-bottle",
+        "visible": {
+          "eq": "bottle"
+        }
+      },
+      {
+        "output": "float-rise",
+        "part": [
+          "float-wood",
+          "float-glass",
+          "float-plastic",
+          "float-bottle"
+        ],
+        "offset": {
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "per": 0.01
+        }
+      },
+      {
+        "control": "square",
+        "part": "square-wood",
+        "visible": {
+          "eq": "wood"
+        }
+      },
+      {
+        "control": "square",
+        "part": "square-glass",
+        "visible": {
+          "eq": "glass"
+        }
+      },
+      {
+        "control": "square",
+        "part": "square-plastic",
+        "visible": {
+          "eq": "plastic"
+        }
+      },
+      {
+        "output": "drop-result",
+        "part": "water-bead",
+        "visible": {
+          "eq": "stays-on-top"
+        }
+      },
+      {
+        "output": "drop-result",
+        "part": "wet-patch",
+        "visible": {
+          "eq": "soaks-in"
+        }
+      },
+      {
+        "control": "square",
+        "part": "sheet-wood",
+        "visible": {
+          "eq": "wood"
+        }
+      },
+      {
+        "control": "square",
+        "part": "sheet-glass",
+        "visible": {
+          "eq": "glass"
+        }
+      },
+      {
+        "control": "square",
+        "part": "sheet-plastic",
+        "visible": {
+          "eq": "plastic"
+        }
+      }
+    ],
+    "overlays": [
+      {
+        "kind": "shadow-cast",
+        "source": {
+          "part": "torch",
+          "point": [
+            0.72,
+            0.1,
+            0.0
+          ],
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "beam": 30
+        },
+        "receiver": {
+          "part": "screen",
+          "normal": [
+            -1,
+            0,
+            0
+          ],
+          "size": [
+            0.3,
+            0.22
+          ]
+        },
+        "casters": [
+          {
+            "part": "sheet-holder"
+          },
+          {
+            "part": "sheet-wood",
+            "dark": {
+              "output": "light-dark"
+            }
+          },
+          {
+            "part": "sheet-glass",
+            "dark": {
+              "output": "light-dark"
+            }
+          },
+          {
+            "part": "sheet-plastic",
+            "dark": {
+              "output": "light-dark"
+            }
+          }
+        ],
+        "spot": {
+          "color": "token:en-light"
+        }
+      }
+    ],
+    "materials": {
+      "g": 9.8,
+      "samples": {
+        "wood": {
+          "E": 10.7,
+          "limit": 100.7,
+          "fails": "snaps",
+          "density": 650,
+          "absorbs": true,
+          "light": "none"
+        },
+        "glass": {
+          "E": 70,
+          "limit": 36,
+          "fails": "snaps",
+          "density": 2500,
+          "absorbs": false,
+          "light": "most"
+        },
+        "plastic": {
+          "E": 1.2,
+          "limit": 25,
+          "fails": "bends",
+          "density": 955,
+          "absorbs": false,
+          "light": "some"
+        }
+      },
+      "strip": {
+        "width": 0.03,
+        "thick": 0.002
+      },
+      "bridge": {
+        "strip": "strip",
+        "masses": "masses",
+        "mass": 0.5,
+        "span": 0.2,
+        "clearance": 0.06,
+        "bend": {
+          "little": 0.005,
+          "lot": 0.03
+        }
+      },
+      "cantilever": {
+        "strip": "strip",
+        "push": "push",
+        "reach": 0.25,
+        "droop": 0.01,
+        "hang": 0.8
+      },
+      "tank": {
+        "block": "block",
+        "water": 18,
+        "density": 1000,
+        "height": 25,
+        "blocks": {
+          "wood": {
+            "sample": "wood",
+            "height": 3
+          },
+          "glass": {
+            "sample": "glass",
+            "height": 3
+          },
+          "plastic": {
+            "sample": "plastic",
+            "height": 3
+          },
+          "bottle": {
+            "density": 40,
+            "height": 6.5
+          }
+        }
+      },
+      "drops": {
+        "square": "square"
+      },
+      "light": {
+        "square": "square",
+        "dark": {
+          "most": 0.1,
+          "some": 0.6,
+          "none": 1
+        }
+      },
+      "profile": {
+        "pick": "pick",
+        "masses": 5,
+        "push": 2,
+        "block": "same",
+        "square": "same"
+      }
+    }
+  }
+}

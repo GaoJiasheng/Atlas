@@ -1,0 +1,162 @@
+---
+{
+  "id": "float-or-sink",
+  "order": 3,
+  "title": {
+    "en": "Sample float or sink",
+    "zh": "示例浮沉"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "layers": [
+      "float-tank"
+    ],
+    "labels": [
+      "tank",
+      "float-wood"
+    ],
+    "camera": {
+      "position": [
+        0.05,
+        0.28,
+        0.95
+      ],
+      "target": [
+        0.0,
+        0.1,
+        -0.02
+      ],
+      "fov": 32
+    },
+    "summary": {
+      "en": "Sample float or sink: outcomes from the model.",
+      "zh": "示例浮沉：模型算出的结果。"
+    },
+    "index": {
+      "parts": [
+        "tank",
+        "tank-water",
+        "float-wood",
+        "float-glass",
+        "float-plastic",
+        "float-bottle"
+      ]
+    },
+    "sim": {
+      "set": {
+        "block": "wood"
+      },
+      "try": {
+        "vary": "block",
+        "keep": [
+          {
+            "en": "The same tank of fresh water",
+            "zh": "同一缸清水"
+          }
+        ],
+        "observe": [
+          "float-result"
+        ],
+        "record": true,
+        "predict": {
+          "prompt": {
+            "en": "Sample prediction: put in the glass block.",
+            "zh": "示例猜想：放进玻璃块。"
+          },
+          "change": {
+            "block": "glass"
+          },
+          "observe": "float-result",
+          "options": [
+            {
+              "id": "floats",
+              "label": {
+                "en": "Float",
+                "zh": "浮"
+              },
+              "means": "floats"
+            },
+            {
+              "id": "sinks",
+              "label": {
+                "en": "Sink",
+                "zh": "沉"
+              },
+              "means": "sinks"
+            }
+          ]
+        }
+      }
+    },
+    "beats": [
+      {
+        "labels": [
+          "float-wood",
+          "tank-water"
+        ],
+        "caption": {
+          "en": "Sample: the wooden block floats.",
+          "zh": "示例：木块浮着。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "block": "glass"
+          }
+        },
+        "labels": [
+          "float-glass"
+        ],
+        "caption": {
+          "en": "Sample: the glass block sinks.",
+          "zh": "示例：玻璃块沉下去。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "block": "plastic"
+          }
+        },
+        "labels": [
+          "float-plastic"
+        ],
+        "caption": {
+          "en": "Sample: the plastic block floats near the surface.",
+          "zh": "示例：塑料块浮在接近水面的地方。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "block": "bottle"
+          }
+        },
+        "labels": [
+          "float-bottle"
+        ],
+        "caption": {
+          "en": "Sample: the capped bottle floats high.",
+          "zh": "示例：盖好的空瓶浮得很高。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Sample float or sink: a draft engine fixture.
+
+</Lang>
+
+<Lang zh>
+
+示例浮沉：引擎测试草稿。
+
+</Lang>

@@ -1060,11 +1060,11 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
 
 绑定的补充规则：`pose` 没有列出当前值时保留章 / 拍姿态，只有显式 `null` 强制回静止；几条绑定动同一零件时非静止的那条胜出。`tint.max`（0–1）指定实际混色上限，默认 0.55 保持既有外观，`max: 1` 可以完全染成目标深色；它仍只染零件自己的材质槽 0。
 
-docs/22 §4.3（E-SIM 核心，磁铁与电路共用）+ docs/23 §4（电路模型与电路图卡）。一个 SpaceScene 主题可以在 `parts.json` 里加一段 `sim`：读者能改的几个量（控件）、一个纯函数模型、模型给出的量（输出），以及控件 / 输出到零件、流、动画的绑定。没有独立的 Simulation 引擎（docs/03 §C）。代码：`sim-schema.ts`（zod 与交叉校验）、`lib/sim/`（`controls.ts` 值的合成与 URL、`index.ts` 模型注册表、`circuit.ts`、`magnet.ts`、`force.ts`、`energy.ts`、`lifecycle.ts`、`matter.ts`、`light.ts`、`sun.ts`、`shadow.ts`、`bind.ts`、`trial.ts`、`diagram.ts`，全部纯函数、有单测 `tests/space-scene/sim.test.ts`）、`explorer/TryIt.tsx`（试一试卡片）、`hud/CircuitCard.tsx`（电路图卡）、`hud/sim.ts`（HUD 读写的入口）。
+docs/22 §4.3（E-SIM 核心，磁铁与电路共用）+ docs/23 §4（电路模型与电路图卡）。一个 SpaceScene 主题可以在 `parts.json` 里加一段 `sim`：读者能改的几个量（控件）、一个纯函数模型、模型给出的量（输出），以及控件 / 输出到零件、流、动画的绑定。没有独立的 Simulation 引擎（docs/03 §C）。代码：`sim-schema.ts`（zod 与交叉校验）、`lib/sim/`（`controls.ts` 值的合成与 URL、`index.ts` 模型注册表、`circuit.ts`、`magnet.ts`、`force.ts`、`energy.ts`、`lifecycle.ts`、`matter.ts`、`light.ts`、`materials.ts`、`sun.ts`、`shadow.ts`、`bind.ts`、`trial.ts`、`diagram.ts`，全部纯函数、有单测 `tests/space-scene/sim.test.ts`）、`explorer/TryIt.tsx`（试一试卡片）、`hud/CircuitCard.tsx`（电路图卡）、`hud/sim.ts`（HUD 读写的入口）。
 
 ```jsonc
 "sim": {
-  "kind": "circuit",                                   // circuit | magnet | force | energy | life-cycle | matter | light：lib/sim/<kind>.ts（life-cycle → lifecycle.ts）
+  "kind": "circuit",                                   // circuit | magnet | force | energy | life-cycle | matter | light | materials：lib/sim/<kind>.ts（life-cycle → lifecycle.ts）
   "controls": [                                        // ≤ 16，id 全主题的 sim 里唯一
     { "id": "main", "kind": "toggle", "default": true, "label": {en, zh} },
     { "id": "cells", "kind": "step", "values": [1, 2, 3], "default": 2, "label": {en, zh}, "unit"?: "cm" },
@@ -1096,7 +1096,7 @@ docs/22 §4.3（E-SIM 核心，磁铁与电路共用）+ docs/23 §4（电路模
 - **值从哪里来**：store 字段 `sim` 只存"设过的值"（不累积：章 `state.sim.set`，拍 `sim.set` 叠在本章的上面，读者在卡片 / 键 / 电路图上改的）；显示的值 = 默认 ⊕ 各选择的 `sets` ⊕ 设过的值，无效值忽略（`resolveSimValues`）。换章回到那一章的 `set`；ESC 不清；URL `sim`（见「URL 参数」）；演示的保存 / 恢复带着它；拍的深链接 `b` 照常。
 - **模型**（`lib/sim/index.ts evaluateSim`，同步、< 1 ms，只在值变化时算）：`circuit` = 节点分析（docs/23 §4.2）：电池是诺顿等效（每节 `emf` 默认 1.5 V、`r` 每节内阻，`flip` 指定某节由开关翻转成 −EMF；`cells` 是数或步进控件），`switch`（合上 `closed` 默认 0.001 Ω，断开去掉），`wire`（`r`），`gap`（选择控件 → `materials` 的欧姆数，没列 = 绝缘、断开），`load`（固定 `load` 或选择控件；`present` 开关 = 装没装上；`loads` 的 `lamp`（`rated` W）/ `buzzer`（`on` A 以上响）/ `motor`（`at` V 时 `rpm` 的可视转速，∝ 电压））；每个连通块接地一个节点，高斯消元（部分主元），没有电池的块电流为 0。量名（输出的 `from`）：`current:<边>`、`volts:<边>`（电池 = 端电压）、`power:<边>`、`brightness:<边>`（灯功率 ÷ `reference.power` × 100）、`speed:<边>`、`sound:<边>`（`on` / `off`）、`status:<电池边>`（`open` < 1 mA、`short` > `short` A（默认 3）、`over-rating`：同一回路里有灯超过额定 × `over`（默认 1.5）、否则 `closed`）、`edges`（每条边的带号电流，from → to）。`magnet` = Gilbert 磁荷模型、场态、场线、铁屑、指南针、力箭头，见下面「SpaceScene · 试一试 · 磁铁」。validate 核对输出的 `from` 是这个模型的量、种类（数 / 状态 / 向量）对得上。
 - **输出种类**：`number`、`state`、`vector`、`timeline`（一段"跑一遍"的过程：见「时间线与回放」；只能被 `play`、带 `channel` 的 `stretch` 和力的箭头读，不进卡片的观察量、读数、glow 等）。
-- **绑定**（`lib/sim/bind.ts simEffects`，舞台叠在章节状态上）：零件 `visible`（条件：`true` = 真值 / 非零 / 不是第一个状态；或 `{ eq | ne | in | gte | lte }`）、`pose`（值 → `poses` 里的姿态，只动这些零件，压在章 / 拍的姿态之上；几条绑定动同一零件时非静止的那条胜出）、`glow`（值 ÷ `full`，`sqrt` 或 `linear`，0–2：从暗红渐到 `color`，过 1 更白；只点亮零件自己的材质，即槽 0：灯丝不带支撑丝和铜座）、`tint`（值 ÷ `full`，0–1，`linear` 或 `sqrt`：向 `color` 混色，上限由 `max` 指定（默认 0.55，范围 0–1）；铁芯通电变磁铁；同 `glow` 只染零件自己的材质，即槽 0，其余槽照常跟章 / 拍的 `highlight`，`lib/sim/bind.ts slotTint`）、`count`（`repeat` 零件只显示前 k 份：`true` = k 取值本身，或 `{ per, minus }` = (值 − minus) ÷ per 取整、≥ 0：50 g 挂钩上的 50 g 槽码写 `{ per: 50, minus: 50 }`，两只 200 g 砝码写 `{ per: 200 }`（docs/30 F8；`per` 原先是乘数，没有主题用过）；该零件不能有 `extra`）、`offset` / `rotate`（(值 − origin) × per（rotate 的 per 默认 1），在姿态之后沿场景轴移 / 绕（姿态后的）零件中心或 `pivot` 场景点转，0.5 s 缓动；`settle: { period, damping }` = 阻尼摆动（rotate：转角走近路；offset：挂在弹簧下的挂钩跟着弹簧回弹几下停住，docs/30 F4）、`place`（三维向量输出 `{ x, y, z }` → `centre + radius × 单位向量`；`{ centre: [x,y,z], radius, face?: "centre" }`，沿球面 0.5 s 缓动、深链接直接终值；`face: "centre"` 使局部 +Y 朝向 centre）、`stretch`（弹簧伸缩）、`play`（播放时间线通道）——这两项见下面「弹簧伸缩」「时间线与回放」、`at`（命名位置环）、`state`（铁屑排哪个场态）——后三者见磁铁一节；零件 `fill`（按模型体积画液面，见「液面」）；流 `visible`（可加 `paths: [id]` 只控制这些路径，独立于整条流与强度）、`state`（场线流）、`intensity`（向量输出按 `paths` 的 id：每条路径的粒子速度 ∝ |值| ÷ `full`（夹在 ±2），负值反向，< 1 % 的路径 0.3 s 淡出；相位逐帧积分，变速不跳；`mode: "density"` = 速度不变、**可见粒子的比例** = |值| ÷ `full`（≤ 1，0.3 s 缓动；粒子按路径上均匀散开的次序出现，不扎堆），能量主题用它表示"这一份多 / 少"；向量的键写成 `<流 id>:<路径 id>` 时，每条流只取以自己 id 开头的那些）、`stops`（状态 → 粒子色，如短路 `token:hot`）；动画 `rpm`（rotate 的转速 = 值 × per，角度积分）、`enabled`（条件不成立时 0.15 s 缓停）。运转（RUN / FLOW）只管"动起来"：灯亮不亮、零件在哪儿不受它影响。
+- **绑定**（`lib/sim/bind.ts simEffects`，舞台叠在章节状态上）：零件 `visible`（条件：`true` = 真值 / 非零 / 不是第一个状态；或 `{ eq | ne | in | gte | lte }`）、`pose`（值 → `poses` 里的姿态，只动这些零件，压在章 / 拍的姿态之上；几条绑定动同一零件时非静止的那条胜出）、`glow`（值 ÷ `full`，`sqrt` 或 `linear`，0–2：从暗红渐到 `color`，过 1 更白；只点亮零件自己的材质，即槽 0：灯丝不带支撑丝和铜座）、`tint`（值 ÷ `full`，0–1，`linear` 或 `sqrt`：向 `color` 混色，上限由 `max` 指定（默认 0.55，范围 0–1）；铁芯通电变磁铁；同 `glow` 只染零件自己的材质，即槽 0，其余槽照常跟章 / 拍的 `highlight`，`lib/sim/bind.ts slotTint`）、`count`（`repeat` 零件只显示前 k 份：`true` = k 取值本身，或 `{ per, minus }` = (值 − minus) ÷ per 取整、≥ 0：50 g 挂钩上的 50 g 槽码写 `{ per: 50, minus: 50 }`，两只 200 g 砝码写 `{ per: 200 }`（docs/30 F8；`per` 原先是乘数，没有主题用过）；该零件不能有 `extra`）、`offset` / `rotate`（(值 − origin) × per（rotate 的 per 默认 1），在姿态之后沿场景轴移 / 绕（姿态后的）零件中心或 `pivot` 场景点转，0.5 s 缓动；`settle: { period, damping }` = 阻尼摆动（rotate：转角走近路；offset：挂在弹簧下的挂钩跟着弹簧回弹几下停住，docs/30 F4）、`place`（三维向量输出 `{ x, y, z }` → `centre + radius × 单位向量`；`{ centre: [x,y,z], radius, face?: "centre" }`，沿球面 0.5 s 缓动、深链接直接终值；`face: "centre"` 使局部 +Y 朝向 centre）、`stretch`（弹簧伸缩）、`play`（播放时间线通道）——这两项见下面「弹簧伸缩」「时间线与回放」、`at`（命名位置环）、`state`（铁屑排哪个场态）——后三者见磁铁一节；零件 `fill`（按模型体积画液面，见「液面」）、`bend`（把一根条像尺子一样弯下，见「弯曲」）；流 `visible`（可加 `paths: [id]` 只控制这些路径，独立于整条流与强度）、`state`（场线流）、`intensity`（向量输出按 `paths` 的 id：每条路径的粒子速度 ∝ |值| ÷ `full`（夹在 ±2），负值反向，< 1 % 的路径 0.3 s 淡出；相位逐帧积分，变速不跳；`mode: "density"` = 速度不变、**可见粒子的比例** = |值| ÷ `full`（≤ 1，0.3 s 缓动；粒子按路径上均匀散开的次序出现，不扎堆），能量主题用它表示"这一份多 / 少"；向量的键写成 `<流 id>:<路径 id>` 时，每条流只取以自己 id 开头的那些）、`stops`（状态 → 粒子色，如短路 `token:hot`）；动画 `rpm`（rotate 的转速 = 值 × per，角度积分）、`enabled`（条件不成立时 0.15 s 缓停）。运转（RUN / FLOW）只管"动起来"：灯亮不亮、零件在哪儿不受它影响。
 - **多路径流**（`flows[].paths: [{ id, path }]`，≤ 16 条，代替 `path`）：一条流、一次绘制；粒子按路径长度分配（每条 ≥ 4），每条路径一行浮点纹理，shader 里每条路径一个相位 / 透明度 / 闭合标志（`flowMaterial.ts`）。电路主题每条边一条路径（与导线 sweep 同源，生成脚本写出两者）。不能 `bilateral`。
 - **读数**：`telemetry` 行写 `follow: "<数输出>"`（不写 `idle` / `run`）：跟随输出值、0.3 s 一阶滞后（`lag` 可改）、小数位取输出的；`follow` 写 2–3 个同单位的数输出 = 一行两值（`FALL TIME · L · R 0.45 · 0.45 s`）；`scope: "observe"` = 只显示本章卡片观察的那几个，本章一个都不观察时显示 `—`（一行"重量"在落体章读 `weight`、弹簧章读 `load-weight`，docs/30 F6）；本章 `try.observe` 里的输出在 PLATE 块加粗；块尾一行 `SIM <状态> · <本章试一试控件的值>`：状态 = 本章卡片观察的状态输出，否则先猜后看观察的，否则第一个会随卡片控件或本章 `set` 的控件变的；都没有时电路、磁铁照旧写模型的第一个状态，力的模型（几套互不相干的实验，`SEPARATE_EXPERIMENTS`）不写状态；短路 / 超额定用 hot 色。
 - **章节**：
@@ -1109,7 +1109,7 @@ state:
       vary: arrangement                        # 改变的量（signal 芯片；[ ] 键）
       also: [bulb-a-in]                        # 卡片上再给的控件（≤ 4）
       keep: [cells, { en: "Same bulbs", zh: "同样的灯泡" }]   # 不变的量：控件（显示当前值）或一句话
-      observe: [i-cells, bright-a, bright-b]   # 观察的输出（大号读数，PLATE 块加粗）
+      observe: [i-cells, bright-a, bright-b]   # 观察的输出（≤ 5；大号读数，PLATE 块加粗）
       record: true                             # 「记一行」+ 数据表；或 { judge: { output, gt, label } } 加一列是 / 否；{ chart: true | { y } } 表下画小图（见「数据表下的小图」）
       replay: true                             # 「再跑一次」按钮与键 G（见「时间线与回放」）；或时间线输出 id 的列表
       predict:                                 # 先猜后看（可选，不判对错）
@@ -1411,7 +1411,7 @@ docs/35 §4，`sim.kind: "light"`。纯函数 `lib/sim/light.ts`（几何、散�
 
 `source.point` 是零偏移时的世界坐标，跟零件当前矩阵走；receiver 的 normal 是局部法线，size / radius 是场景单位。投影矩阵 `M = (n·L)I − L nᵀ`（点光 w=1、平行光 w=0），影子平涂成接收面混 ink 的不透明颜色，三角形重叠和孔卡多张叠加不会重复加深。矩形 / 圆接收面与光束裁剪独立于 CUTAWAY。零件隐藏、图层关时不投；关灯 0.3 s 淡出，拆开整层淡出，REFERENCE 保留。光线归 rays.group，RUN 流动、减少动态静止；extra 的接收面坐标是 cm，对挡光物的世界三角形求交（`lib/sim/shadow.ts segmentMesh`：包围盒先筛，再 Möller–Trumbore，不分配内存），遇不透光网格即停（`edges: vertical` 的边缘光线同理：光源与被擦过的边之间有另一个不透光挡光物——近 1 mm 以上——就不画），through dark 允许透光片后继续。trail 按时间步进值留下 Ø4 cm 粉笔点，当前点空心，换日期重算。
 
-QA：`__atlas.engine.shadows()` 返回 `{ [叠加序号]: { casters: { [part]: { min: [u,v], max: [u,v] } }, spot?: { radius }, trail: [[u,v],…], rays } }`，接收面坐标与半径为 cm。用 max−min 对模型 `shadow-height / width`，误差必须 <0.2 cm；太阳 trail 与杆顶平行投影相同。状态不变时不更新几何或要求帧。每挡光物一次绘制，光斑、全部光线、全部粉笔点各一次；台面 ≤45 calls，户外 ≤20，<0.25 M 三角形。测试 `light.test.ts`、`sun.test.ts`、`shadow.test.ts`、`light-display.test.ts` 与 `tests-e2e/sample-light.spec.ts`。
+QA：`__atlas.engine.shadows()` 返回 `{ [叠加序号]: { casters: { [part]: { min: [u,v], max: [u,v], dark } }, spot?: { radius }, trail: [[u,v],…], rays } }`（`dark`：这一挡光物此刻的深浅，1 = 不透光），接收面坐标与半径为 cm。用 max−min 对模型 `shadow-height / width`，误差必须 <0.2 cm；太阳 trail 与杆顶平行投影相同。状态不变时不更新几何或要求帧。每挡光物一次绘制，光斑、全部光线、全部粉笔点各一次；台面 ≤45 calls，户外 ≤20，<0.25 M 三角形。测试 `light.test.ts`、`sun.test.ts`、`shadow.test.ts`、`light-display.test.ts` 与 `tests-e2e/sample-light.spec.ts`。
 
 两个实验相距很远时，可写 `views.reference: { fit: "layers" }`：REFERENCE 仍是 section 平面的长焦正视图，但只按当前图层中未隐藏、非 context 的零件取景，避免隐藏的空地把实验台缩成一点。显式 `reference.camera` 优先；不写 fit 时保持全模型取景。这只改变镜头，不切图层或实验状态。夹具的暗箱流用 `whenRun: true`，对应拍开启 RUN；always-on 流会让已有 RunClock 在流图层隐藏时仍持续要帧。
 
@@ -1511,6 +1511,65 @@ docs/36 §4 E-MA2。数输出或步进控件可绑定：
 流的 `visible` 可加 `paths: ["cup-hole"]`；多条绑定可独立控制同一条流的不同路径，和强度、密度、整条流的开关相乘，不增加绘制次数。路径必须属于该流；不写 paths 保持原行为。
 
 QA：`__atlas.engine.fill(partId)` → `{ volume, level, shown }`（当前绘出的 m³、primitive 局部液面 Y、是否可见）；`__atlas.engine.flow(flowId)` → `{ paths: { id: { visible } } }`（当前路径透明度）；`fillBenchmark(partId)` 给出暖机后 100 次几何重建的 CPU 毫秒数（五组中位数，并恢复原几何）。`pnpm shoot --beats` 在每拍及拍链接检查每件液体的模型体积、液面及 pour 的 cm 读数，容差 0.5 mm。单测见 `matter.test.ts`、`fill.test.ts`，交互 / 双语 / 手机见 `sample-matter.spec.ts`。
+
+### SpaceScene · 试一试 · 材料（materials）
+
+docs/37 §4.2–§4.4（E-MT1）。`sim.kind: "materials"`：一张实验台上五个公平测试共用同一套样品——强度（条架在两块木块上，中点加槽码）、柔韧性（条夹住一端，推杆压下末端）、浮沉（一缸清水）、防水（滴一滴水）、透光（手电筒、样片、白屏）——加 `profile`（一种材料的五个结果一起读）。注册走 `SIM_KINDS` → `simQuantities` / `evaluateSim` → `quantityKind`（状态表 `materialsStates`：按这个测试读的控件穷举出会出现的状态）；没有时间线（`simTimelineChannels` 为 null），`SEPARATE_EXPERIMENTS.materials = true`（PLATE 块尾只写本章卡片的状态）。纯函数 `lib/sim/materials.ts`（`bridgeSolve` / `cantileverSolve` / `tankSolve` / `solveMaterials`，同步、确定，一次求值约 0.01 ms），严格数据与交叉校验 `materials-schema.ts`（`materialsSchema`、`materialsIssues`）。完整作者模板 `tests/space-scene/fixtures/materials-bench.ts`（docs/37 §2.2 的七种样品，常数按事实核查第二轮改过）；草稿夹具 `sample-materials`（背景章 + 五个测试各一张卡 + 五个一起，三种材料：木、玻璃、塑料）。
+
+**数字纪律（docs/37 D9，validate 守）**：常数全部在主题数据里（S1 写来源），引擎不写任何材料的数。模型的数输出（`bridge:sag`、`cantilever:tip`、`tank:rise`、`light:dark`）**只给绑定**；`kind: materials` 的卡片 `observe` / `predict.observe` 只能是状态输出或 `control:` 读数（器材的量），`telemetry.follow` 只能是 `control:` 读数——写了模型自己的数，`pnpm validate` 报错。
+
+```jsonc
+"materials": {
+  "g": 9.8,                                                   // N/kg
+  "samples": {                                                // 键 = 材料 id = strip / square / pick 的选项（多了、少了都报）
+    "wood":    { "E": 10.7, "limit": 100.7, "fails": "snaps", "density": 650,  "absorbs": true,  "light": "none" },
+    "metal":   { "E": 200,  "limit": 250,   "fails": "bends", "density": 7820, "absorbs": false, "light": "none" },
+    "glass":   { "E": 70,   "limit": 36,    "fails": "snaps", "density": 2500, "absorbs": false, "light": "most" },
+    "plastic": { "E": 1.2,  "limit": 25,    "fails": "bends", "density": 955,  "absorbs": false, "light": "some" },
+    "rubber":  { "E": 0.005,                "fails": "never", "density": 920,  "absorbs": false, "light": "none" },
+    "fabric":  { "limp": true,              "fails": "never", "density": 1540, "absorbs": true,  "light": "some" }
+  },                                                          // E GPa；limit MPa（snaps = 断的应力，bends = 屈服，never 不写）；density kg/m³
+  "strip":      { "width": 0.03, "thick": 0.002 },            // m
+  "bridge":     { "strip": "strip", "masses": "masses", "mass": 0.5, "span": 0.20, "clearance": 0.06, "bend": { "little": 0.005, "lot": 0.03 } },
+  "cantilever": { "strip": "strip", "push": "push", "reach": 0.25, "droop": 0.01, "hang": 0.8 },
+  "tank":       { "block": "block", "water": 18, "density": 1000, "height": 25,             // cm，kg/m³
+                  "blocks": { "wood": { "sample": "wood", "height": 3 }, "bottle": { "density": 40, "height": 6.5 }, … } },
+  "drops":      { "square": "square" },
+  "light":      { "square": "square", "dark": { "most": 0.10, "some": 0.60, "none": 1 } },
+  "profile":    { "pick": "pick", "masses": 5, "push": 2, "block": "same", "square": "same" }   // same：选项 id = 材料 id
+}
+```
+
+| 子模型 | 读的控件 | 量（`from`） | 规则 |
+|---|---|---|---|
+| `bridge` | `strip` 选择、`masses` 步进（个数） | `bridge:result`（`holds` / `on-bench` / `snapped`）、`bridge:bend`（`hardly` / `a-little` / `a-lot` / `none`）、`bridge:view`（材料 id，或 `<id>-snapped`）、`bridge:sag`（m，只给绑定）、`control:masses-kg` | P = 个数 × mass × g；δ = PL³ ÷ 48EI + 5wL⁴ ÷ 384EI，σ = (PL ÷ 4 + wL² ÷ 8) ÷ Z（I = bh³ ÷ 12，Z = bh² ÷ 6，w = 密度 × g × b × h）。δ ≥ clearance = 弯到台面上，台面托住其余的重量（应力停在碰到台面那一刻）；`snaps` 且 σ > limit = 断（sag 0、bend none、view `<id>-snapped`）；`limp` = 一开始就垂在台面上 |
+| `cantilever` | `strip` 选择、`push` 步进（cm） | `cantilever:result`（`not-pushed` / `bends` / `droops` / `snapped`）、`cantilever:view`、`cantilever:tip`（m） | δ₀ = wL⁴ ÷ 8EI（`limp` = ∞）；tip = min(max(压下, δ₀), hang × reach)；σ = 3Eh × 压下 ÷ 2L²；`snaps` 且 σ > limit = 断（tip 0）；否则 δ₀ ≥ droop = 自己垂下；压下 0 = 还没压；否则弯而不断 |
+| `tank` | `block` 选择 | `tank:result`（`floats` / `sinks`）、`tank:rise`（cm：底面离缸底） | 密度 < 水的密度 = 浮，浸入 = 密度 ÷ 水 × 高，rise = 水深 − 浸入；否则沉到底（0） |
+| `drops` | `square` 选择 | `drops:result`（`stays-on-top` / `soaks-in`） | 样品的 `absorbs` |
+| `light` | `square` 选择 | `light:result`（`most` / `some` / `none`）、`light:dark`（0–1，给 `shadow-cast` 的 `dark`） | 样品的 `light`；dark = `light.dark[结果]` |
+| `profile` | `pick` 选择 | `profile:strength` / `flex` / `float` / `water` / `light` | 上面五个，砝码取 `profile.masses`、压下取 `profile.push`、放进水里的 = 同 id 的方块、样片 = 同 id |
+
+- 另有 `control:<步进或开关>`（PLATE 回显器材的量：压下的 cm）与 `control:masses-kg`（条上的 kg）。
+- **validate**（`materials-schema.ts materialsIssues` + `sim-schema.ts`）：控件存在且种类对（strip / block / square / pick 选择，masses 整数步进 ≥ 0，push 步进 ≥ 0）；strip / square / pick 的选项 = `samples` 的键；`block` 的每个选项在 `tank.blocks`、没有多余的、`sample` 存在、`sample` 与 `density` 二选一；样品：`limp` 与 `E` 二选一、`limp` 只能 `fails: never`、`snaps` 要 `limit`、`never` 不写 `limit`；`light.dark` 的 most < some < none；`bridge.bend.little` < `lot`、`droop` < hang × reach；**设计守门**：`fails: bends` 的材料在每个 `masses` / `push` 取值下 σ < limit（"永久弯"不画，所以不许发生）；浮着的东西不碰缸底（浸入 ≤ 水深）、水深 < `tank.height`；`profile` 要五个测试都在、`masses` / `push` 是控件的值、每种材料都有同 id 的方块；输出 `from` 是本模型的量、种类对、每个会出现的状态都有标签、**不写永远不会出现的状态**（木不会断，就不能写 `wood-snapped`）。
+- 读者看到的只有状态与器材的量。玻璃、陶瓷在第几个砝码断由常数决定（事实核查第二轮后两者都在第 3 个、都在压下 1.5 cm 时断），字幕不说第几个、不比谁先断。
+- 卡片 `observe` 至多 5 个（T6 一次读五个结果，记一行就是表的一行）。
+
+### SpaceScene · 弯曲（`bend`）
+
+docs/37 §4.5（E-MT2）。把一根条像尺子一样往下弯（−Y），**保持条的长度**：
+
+```jsonc
+{ "output": "bridge-sag", "part": ["bridge-wood", "bridge-glass"], "bend": { "mode": "bridge", "axis": [1, 0, 0], "span": 0.20, "per": 1, "ease"?: 0.5 } }
+{ "output": "flex-tip",   "part": ["bend-wood", "bend-glass"],     "bend": { "mode": "cantilever", "axis": [1, 0, 0], "clamp": -0.10, "reach": 0.25, "per": 1 } }
+```
+
+- **零件**：主 primitive 是 `box` 或 `bevelBox`（三个尺寸），沿零件的 `axis`（±X 或 ±Z）放、中心在零件中心（`at`），不转、不缩放、不 `repeat`；`extra` 可以有，只弯主 primitive（extra 留在原处）。`bridge`：两个支点在中心两侧 ±span ÷ 2（条的中心放在两块木块的正中）；`cantilever`：`clamp`（沿 axis，离中心）以内夹住不动，之外 `reach` 伸出，`clamp + reach` ≤ 条的末端。引擎把主 primitive 沿 axis 切成 64 段（box 由构建器直接分段并保留索引；bevelBox 由 `shaped.ts sliceAlong` 把跨段的三角形裁开），顶点带 `atlasBend` = 1。
+- **值**：数输出或步进控件 × `per` = 弯的大小（场景单位）：`bridge` = 中点下垂、`cantilever` = 末端下垂；≤ 0 直；至多 0.8 × span / reach（布、橡胶的垂挂）；条太短、架在支点上下垂不到那么多时，弯到它能到的地方。
+- **形状**（`lib/bend.ts bendCurve`，纯函数）：小挠度的教科书形状只取斜率——简支梁中点集中力 f(a) = a(3L² − 4a²) ÷ L³（a 从支点量起），支点外的悬挑段沿支点处的切线直出（两端翘起）；悬臂端部集中力 g(x) = x²(3L − x) ÷ 2L³——每一段按斜率转一个角，沿弧长首尾相接（大挠度不会把条"拉长"），再解形状的大小（从上一帧的解出发的割线法，退路是 Illinois 夹逼），使画出的中点 / 末端下垂正好等于值（误差 < 1e-9 m）。桥：条始终搭在两个支点上（弯得越多，条从两边滑进来）；悬臂：夹口以内不动。截面跟着转（法线一起转）。
+- **画**：载入时存每个顶点在中轴线上的位置与离中轴线的高度，运行时只改写位置与法线缓冲（不新建几何、不新建材质；缓动停下时重算一次包围球，缓动中不做视锥剔除）；值变化时三次缓入缓出、`ease` 秒（默认 0.5）；深链接、截图、拍的瞬切、`prefers-reduced-motion`、REFERENCE = 直接终值。零件的标注锚点跟着中轴线走。一根 30 cm 的 box 条 528 个顶点，一次更新（中轴线 + 顶点）约 0.01 ms（单测：100 次 < 2 ms）。
+- **一起走的零件**：中点上的砝码托、槽码用同一个输出的 `offset`（`axis: [0, -1, 0]`、`per` 同 bend）；推杆用压下的步进控件的 `offset`（`per: 0.01`），压下大于自垂时推杆脚正好落在条末端的上表面。断开的条另做一件（两段），用 `visible` 换。
+- **validate**：零件存在、主 primitive 是 box / bevelBox（三个尺寸）、不 repeat、不转、不缩放；`axis` 是 ±X / ±Z；`bridge` 写 `span`（不写 clamp / reach）且 `span` < 条长；`cantilever` 写 `clamp` 与 `reach`（不写 span），夹口在条上、`clamp + reach` ≤ 条的末端；源是数输出或步进控件；同一零件只有一条 `bend`，不能既 `bend` 又 `stretch`。
+- **QA**：`__atlas.engine.bend(partId)` → `{ value, mid: [x,y,z], tip: [x,y,z], length, shown }`（此刻画出的下垂 m；条中心与末端的模型坐标——悬臂的末端是 `clamp + reach`，桥是 +axis 端；中轴线长度；是否可见）。`pnpm shoot --beats` 每拍与每个拍链接核对：可见的条 `value` = 模型输出 × per（同样夹到 0.8）± 0.5 mm、`length` = 原长 ± 0.5 %。单测 `tests/space-scene/bend.test.ts`，交互 `tests-e2e/sample-materials.spec.ts`。
 
 ### 章节怎么写（`state`）
 

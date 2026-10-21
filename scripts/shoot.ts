@@ -34,6 +34,7 @@ import { gzipSync } from 'node:zlib';
 import { chromium, type Browser, type Page } from '@playwright/test';
 import { hudLayoutIssues, LAYOUT_SIZES } from '../tests-e2e/hud-layout';
 import { capacity, fillBounds, fillShapeForPrimitive, levelForVolume } from '../src/engines/space-scene/lib/fill';
+import { bendAxisIndex, bendCurve } from '../src/engines/space-scene/lib/bend';
 import type { PartsFile } from '../src/engines/space-scene/schema';
 import { dragVerdict, type DragSample, type DragVerdict } from './lib/drag-settle';
 
@@ -458,6 +459,43 @@ async function fillIssues(s: Session): Promise<string[]> {
   return issues;
 }
 
+/** Every bent strip on show draws the model's sag / drop (as lib/bend.ts lays it) and keeps its length. */
+async function bendIssues(s: Session): Promise<string[]> {
+  const path = join(ROOT, 'src/content/topics', s.topic, 'data/parts.json');
+  if (!existsSync(path)) return [];
+  const file = JSON.parse(readFileSync(path, 'utf8')) as PartsFile;
+  const binds = (file.sim?.bind ?? []).filter((b) => 'part' in b && b.bend);
+  if (binds.length === 0) return [];
+  const ids = binds.flatMap((b) => ('part' in b ? (typeof b.part === 'string' ? [b.part] : b.part) : []));
+  const state = await s.page.evaluate((ids) => {
+    const e = window.__atlas!.engine as unknown as {
+      sim(): { values: Record<string, unknown>; outputs: Record<string, unknown> };
+      bend(id: string): { value: number; length: number; shown: boolean } | null;
+    };
+    return { sim: e.sim(), bends: Object.fromEntries(ids.map((id) => [id, e.bend(id)])) };
+  }, ids);
+  const issues: string[] = [];
+  for (const b of binds) {
+    if (!('part' in b) || !b.bend) continue;
+    const bd = b.bend;
+    const value = b.control ? state.sim.values[b.control] : state.sim.outputs[b.output!];
+    const axis = bendAxisIndex(bd.axis);
+    if (typeof value !== 'number' || !axis) continue;
+    for (const id of typeof b.part === 'string' ? [b.part] : b.part) {
+      const drawn = state.bends[id];
+      const p = file.parts.find((x) => x.id === id)?.primitive;
+      const length = p && 'size' in p ? (p.size?.[axis.index] ?? 0) : 0;
+      if (!drawn) { issues.push(`${id}: no bent strip on stage`); continue; }
+      if (!drawn.shown) continue;
+      const shape = { mode: bd.mode, length, ...(bd.span !== undefined ? { span: bd.span } : {}), ...(bd.clamp !== undefined ? { clamp: bd.clamp } : {}), ...(bd.reach !== undefined ? { reach: bd.reach } : {}) };
+      const want = bendCurve(shape, value * (bd.per ?? 1)).value;
+      if (Math.abs(drawn.value - want) > 0.0005) issues.push(`${id}: drawn bend ${drawn.value.toFixed(4)} m differs from the model ${want.toFixed(4)} m`);
+      if (Math.abs(drawn.length - length) > length * 0.005) issues.push(`${id}: bent length ${drawn.length.toFixed(4)} m, not ${length} m`);
+    }
+  }
+  return issues;
+}
+
 /**
  * Every beat opened from its link (`?ch=<chapter>&b=<n>`) in a fresh document of its own, against the scene the presentation
  * showed: a field that differs, or a run not at its end (links jump to the end), is a beat failure.
@@ -487,7 +525,7 @@ async function runBeatLinks(s: Session, beats: { chapter: string; index: number 
       if (a !== e) diffs.push(`${key} ${a} (presentation ${e})`);
     }
     if (got && got.unfinished.length) diffs.push(`runs not at their end: ${got.unfinished.join(', ')}`);
-    for (const issue of await fillIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
+    for (const issue of [...(await fillIssues(s)), ...(await bendIssues(s))]) report.beatFailures.push(`${name}: link: ${issue}`);
     if (diffs.length) report.beatFailures.push(`${name}: opened from ${link}: ${diffs.join('; ')}`);
     else same++;
     if (diffs.length) console.log(`  ${`${name} (link)`.padEnd(36)} FAIL  ${diffs.join('; ').slice(0, 300)}`);
@@ -528,7 +566,7 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
     );
     for (const [id, v] of Object.entries(bars))
       if (v.shown && Math.abs(v.potential + v.kinetic + v.lost - 100) > 0.5) report.beatFailures.push(`${name}: energy bars of ${id} add up to ${v.potential + v.kinetic + v.lost}`);
-    for (const issue of await fillIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
+    for (const issue of [...(await fillIssues(s)), ...(await bendIssues(s))]) report.beatFailures.push(`${name}: ${issue}`);
     await s.page.screenshot({ path: join(out, `${name}${o.suffix}.png`) });
     console.log(`  ${name.padEnd(36)} ${landed ? 'OK' : 'FAIL'}${missing.length ? `  (no label: ${missing.join(', ')})` : ''}`);
     // A looping exercise beat (SpaceScene exercise mode) also gets a still at its start and end keys.

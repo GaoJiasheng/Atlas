@@ -592,6 +592,11 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
           const f = bridge.fills.get(id);
           return f ? { ...f } : null;
         },
+        // A bent strip (docs/37 §4.5): the drawn sag / drop (m), its middle and free end now (model coordinates), its centre line's length.
+        bend: (id: string) => {
+          const b = bridge.bends.get(id);
+          return b ? { value: b.value, mid: [...b.mid], tip: [...b.tip], length: b.length, shown: b.shown } : null;
+        },
         // Energy bars on the stage (docs/31 E-EN6): per timeline output, the three bars now (potential + kinetic + lost = 100) and whether they show.
         energyBars: () =>
           Object.fromEntries(

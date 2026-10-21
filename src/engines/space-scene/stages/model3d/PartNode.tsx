@@ -21,7 +21,9 @@
  * a turn that swings and settles (`settle`: a compass needle) about the part
  * centre or a pivot, an offset that bounces and settles (a hanger on its
  * spring), a coil stretched along its axis (the rings slide apart, the wire
- * keeps its thickness: lib/stretch.ts), the timeline channels it plays (moves
+ * keeps its thickness: lib/stretch.ts), a strip bent like a ruler on two
+ * supports or clamped at one end, keeping its length (lib/bend.ts: the
+ * vertices rewritten in place, eased over the binding's `ease`), the timeline channels it plays (moves
  * and turns after the offset, a car's wheels each about its own centre;
  * read from `runtime.play` every frame), a filings card's needles laid out
  * for the field state on show, and per animation a speed (a rotate's rpm,
@@ -70,7 +72,8 @@ import { skinnedRaycast } from './skinPick';
 import type { ShapePiece } from './geometry';
 import type { SimSettle } from '../../sim-schema';
 import { nearestTurn, SETTLE_EPS_LENGTH, stepSwing } from '../../lib/sim/settle';
-import { placeDirection, slotTint, type SimFill, type SimPlace, type SimPlay, type SimStretch } from '../../lib/sim/bind';
+import { placeDirection, slotTint, type SimBend, type SimFill, type SimPlace, type SimPlay, type SimStretch } from '../../lib/sim/bind';
+import { BEND_ATTRIBUTE, bendAxisIndex, bendCurve, bendFrame, bendLimit, bendVertices, curveLength, curvePoint, newBendCurve, type BendShape } from '../../lib/bend';
 import { channelValue } from '../../lib/sim/timeline';
 import { STRETCH_ATTRIBUTE, stretchPositions } from '../../lib/stretch';
 import { partPrimitives } from '../../lib/parts';
@@ -176,7 +179,10 @@ export interface PartNodeProps {
   play?: readonly SimPlay[] | null;
   /** Try-it stretch of the part's coil. */
   stretch?: SimStretch | null;
+  /** Try-it bend of the part's strip (its main primitive, cut into slabs along the axis: shapes.ts). */
+  bend?: SimBend | null;
   fill?: SimFill | null;
+  /** The stage bridge: fill and bend readings for the QA API. */
   fillBridge?: StageBridge;
   fillStill?: boolean;
   /** Try-it tint: colour (sRGB hex) and level 0–1. */
@@ -238,6 +244,8 @@ const MOVE_RATE = 7;
 const swing = { x: 0, v: 0 };
 const tmpPlay = new Matrix4();
 const tmpC: Vec3 = [0, 0, 0];
+const tmpBend: Vec3 = [0, 0, 0];
+const tmpBent: Vec3 = [0, 0, 0];
 
 /** An animation that moves every copy of its part about the copy's own centre (schema `each`). */
 const isEach = (a: PartAnimation) => (a.kind === 'rotate' || a.kind === 'oscillate' || a.kind === 'pulse') && a.each === true;
@@ -396,6 +404,13 @@ export function PartNode(props: PartNodeProps) {
     stretch: 0,
     stretchV: 0,
     stretchShown: 0,
+    /** A strip's bend: eased from → to since `bendStart` (clock s), now, the value last written into the geometry, its centre line's length. */
+    bendFrom: 0,
+    bendTo: 0,
+    bendNow: 0,
+    bendStart: 0,
+    bendShown: NaN,
+    bendLength: 0,
     /** The played moves and turns last frame (a change asks the labels and shadows to look again). */
     playKey: '',
     /** Turning speed of a swinging (`settle`) turn, degrees per second. */
@@ -430,6 +445,24 @@ export function PartNode(props: PartNodeProps) {
     // Only whether the part stretches matters here, not the value.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shape, part, props.stretch !== null && props.stretch !== undefined]);
+  // A bent strip: the pieces carrying its marked vertices, their rest positions and normals, each vertex's place along the strip.
+  const bendAxis = props.bend ? (bendAxisIndex(props.bend.axis)?.index ?? null) : null;
+  const bendSign = props.bend ? (bendAxisIndex(props.bend.axis)?.sign ?? 1) : 1;
+  const bendable = useMemo(() => {
+    const main = part.primitive;
+    if (bendAxis === null || !main || !('size' in main)) return null;
+    const axis = { index: bendAxis, sign: bendSign };
+    const length = main.size?.[bendAxis] ?? 0;
+    const pieces = shape.pieces
+      .filter((p) => !p.matrices && p.geometry.getAttribute(BEND_ATTRIBUTE))
+      .map((p) => {
+        const base = Float32Array.from((p.geometry.getAttribute('position') as BufferAttribute).array as Float32Array);
+        const normal = Float32Array.from((p.geometry.getAttribute('normal') as BufferAttribute).array as Float32Array);
+        return { piece: p, base, normal, mask: (p.geometry.getAttribute(BEND_ATTRIBUTE) as BufferAttribute).array as Float32Array, frame: bendFrame(base, axis, length) };
+      });
+    return pieces.length > 0 ? { axis, length, pieces, curve: newBendCurve() } : null;
+  }, [shape, part, bendAxis, bendSign]);
+  useEffect(() => () => { props.fillBridge?.bends.delete(part.id); }, [props.fillBridge, part.id]);
   // Per-frame maths without allocation: explode vector and unit animation axes, once. Context parts stay put.
   const push = useMemo(() => (part.context ? ([0, 0, 0] as Vec3) : explodeOffset(part.explode, 1)), [part.explode, part.context]);
   const axes = useMemo(
@@ -710,6 +743,39 @@ export function PartNode(props: PartNodeProps) {
     }
     if (contractChanged && props.castShadow) runtime.shadowDirty = true;
 
+    // A bent strip: the bend eases to its value (cubic, over the binding's `ease`), the slices laid along the arc (lib/bend.ts).
+    const bd = props.bend;
+    const bendShape: BendShape | null = bendable && bd ? { mode: bd.mode, length: bendable.length, ...(bd.span !== undefined ? { span: bd.span } : {}), ...(bd.clamp !== undefined ? { clamp: bd.clamp } : {}), ...(bd.reach !== undefined ? { reach: bd.reach } : {}) } : null;
+    if (bendable && bendShape && bd) {
+      const clock = state.clock.elapsedTime;
+      const to = bendLimit(bendShape, bd.target);
+      if (m.bendTo !== to) {
+        m.bendFrom = m.bendNow;
+        m.bendTo = to;
+        m.bendStart = clock;
+      }
+      if (snap || props.fillStill || prefersReducedMotion() || bd.ease === 0) m.bendFrom = m.bendNow = to;
+      else m.bendNow = m.bendFrom + (to - m.bendFrom) * easeInOutCubic(Math.min(1, (clock - m.bendStart) / bd.ease));
+      if (m.bendNow !== m.bendTo) moving = true;
+      if (m.bendNow !== m.bendShown || snap) {
+        bendCurve(bendShape, m.bendNow, bendable.curve);
+        m.bendShown = m.bendNow;
+        m.bendLength = curveLength(bendable.curve);
+        for (const b of bendable.pieces) {
+          const pos = b.piece.geometry.getAttribute('position') as BufferAttribute;
+          const nor = b.piece.geometry.getAttribute('normal') as BufferAttribute;
+          bendVertices(bendable.curve, bendable.axis, b.frame, b.mask, b.base, b.normal, pos.array as Float32Array, nor.array as Float32Array);
+          pos.needsUpdate = true;
+          nor.needsUpdate = true;
+          // Settled: picking tests the bent bounds; while it eases the strip is never culled.
+          if (m.bendNow === m.bendTo) b.piece.geometry.computeBoundingSphere();
+          const o = pieces.current.get(b.piece);
+          if (o) o.frustumCulled = false;
+        }
+        if (props.castShadow) runtime.shadowDirty = true;
+      }
+    }
+
     // Pose: ease from where the part was to the target (instant transitions jump).
     if (snap || m.poseMs <= 0) {
       // A jump still moves the part: the label probes must re-check what it hides (an instant beat change).
@@ -837,10 +903,20 @@ export function PartNode(props: PartNodeProps) {
         out[1] = tmpV.y;
         out[2] = tmpV.z;
       };
+      // A bent strip's anchor rides on its centre line.
+      const bentAnchor = (rest: Vec3): readonly number[] => {
+        if (!bendable) return rest;
+        curvePoint(bendable.curve, bendable.axis, rest[bendable.axis.index]! * bendable.axis.sign, tmpBend);
+        tmpBent[0] = rest[0];
+        tmpBent[2] = rest[2];
+        tmpBent[bendable.axis.index] = tmpBend[bendable.axis.index]!;
+        tmpBent[1] = rest[1] + tmpBend[1];
+        return tmpBent;
+      };
       // (A skinned part measures its anchor from the skinned bounds below.)
       if (!handle.skinned) {
-        move(props.anchorPoint, handle.point);
-        move(props.anchorOffset, handle.offset);
+        move(bentAnchor(props.anchorPoint), handle.point);
+        move(bentAnchor(props.anchorOffset), handle.offset);
       }
     }
 
@@ -971,6 +1047,23 @@ export function PartNode(props: PartNodeProps) {
       }
     }
     for (const f of fans) if (f.fan!.apply(fan) && props.castShadow) runtime.shadowDirty = true;
+    // QA (`__atlas.engine.bend`): the strip's middle and free end now, in model coordinates.
+    if (bendable && bendShape && props.fillBridge && g && pr && anim) {
+      const at = (s: number, out: [number, number, number]) => {
+        curvePoint(bendable.curve, bendable.axis, s, tmpBend);
+        tmpV.set(tmpBend[0], tmpBend[1], tmpBend[2]).applyMatrix4(anim.matrix).applyMatrix4(pr.matrix).add(g.position);
+        out[0] = tmpV.x;
+        out[1] = tmpV.y;
+        out[2] = tmpV.z;
+      };
+      const reading = props.fillBridge.bends.get(part.id) ?? { value: 0, mid: [0, 0, 0], tip: [0, 0, 0], length: 0, shown: false };
+      reading.value = bendable.curve.value;
+      reading.length = m.bendLength;
+      reading.shown = handle.visible;
+      at(0, reading.mid);
+      at(bendShape.mode === 'cantilever' ? bendShape.clamp! + bendShape.reach! : bendable.length / 2, reading.tip);
+      props.fillBridge.bends.set(part.id, reading);
+    }
     if (moving) {
       runtime.moved++;
       if (props.castShadow) runtime.shadowDirty = true;

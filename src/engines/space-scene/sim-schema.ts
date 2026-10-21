@@ -14,6 +14,9 @@ import { sunPosition } from './lib/sim/sun';
 import { simQuantities } from './lib/sim';
 import { matterSchema, matterIssues, type MatterPart } from './matter-schema';
 import { matterQuantity, matterQuantityRange, matterLiquidShapes } from './lib/sim/matter';
+import { materialsSchema, materialsIssues } from './materials-schema';
+import { materialsQuantity, materialsShowable, materialsStates } from './lib/sim/materials';
+import { BEND_MODES, bendAxisIndex } from './lib/bend';
 import { capacity, fillShapeForPrimitive, validateFillProfile } from './lib/fill';
 import { bilingual, colorRef, kebabId, vec3 } from '../../content/schema/common';
 import { fieldLines } from './lib/sim/field';
@@ -182,6 +185,28 @@ const partBind = z
      */
     stretch: z
       .object({ per: z.number(), channel: z.string().min(1).max(40).optional(), anchor: z.enum(STRETCH_ANCHORS).default('top'), settle: settleSchema.optional() })
+      .strict()
+      .optional(),
+    /**
+     * Bend a strip downward like a ruler, keeping its length (lib/bend.ts,
+     * docs/37 §4.5): the part's main `box` / `bevelBox` lies along `axis`
+     * (±X or ±Z of the part, centred on the part). `bridge`: it rests on two
+     * supports `span` apart about its centre and the value × `per` is the sag
+     * of its middle; `cantilever`: it is held up to `clamp` (along `axis` from
+     * its centre), `reach` sticks out beyond and the value × `per` is the drop
+     * of its free end. Eased over `ease` s; ≤ 0 straight. A number output or
+     * a step control.
+     */
+    bend: z
+      .object({
+        mode: z.enum(BEND_MODES),
+        axis: vec3,
+        span: z.number().positive().optional(),
+        clamp: z.number().optional(),
+        reach: z.number().positive().optional(),
+        per: z.number().positive().default(1),
+        ease: z.number().nonnegative().max(10).default(0.5),
+      })
       .strict()
       .optional(),
     /**
@@ -892,7 +917,7 @@ export const simOverlaySchema = z.discriminatedUnion('kind', [
 export type SimOverlay = z.output<typeof simOverlaySchema>;
 export type ShadowCastOverlay = Extract<SimOverlay, { kind: 'shadow-cast' }>;
 
-export const SIM_KINDS = ['circuit', 'magnet', 'force', 'energy', 'life-cycle', 'matter', 'light'] as const;
+export const SIM_KINDS = ['circuit', 'magnet', 'force', 'energy', 'life-cycle', 'matter', 'light', 'materials'] as const;
 export type SimKind = (typeof SIM_KINDS)[number];
 
 export const MAX_SIM_CONTROLS = 16;
@@ -913,6 +938,7 @@ export const simSchema = z
     lifeCycle: lifeCycleSchema.optional(),
     matter: matterSchema.optional(),
     light: lightSchema.optional(),
+    materials: materialsSchema.optional(),
   })
   .strict();
 export type SimData = z.output<typeof simSchema>;
@@ -939,7 +965,7 @@ export const simTrySchema = z
     vary: kebabId,
     also: z.array(kebabId).max(4).optional(),
     keep: z.array(keepItem).max(5).optional(),
-    observe: z.array(kebabId).min(1).max(4),
+    observe: z.array(kebabId).min(1).max(5),
     record: z
       .union([
         z.literal(true),
@@ -1047,6 +1073,8 @@ export function quantityKind(sim: SimData, from: string): SimOutput['kind'] | nu
   switch (sim.kind) {
     case 'matter':
       return sim.matter ? matterQuantity(sim.matter, from)?.kind ?? null : null;
+    case 'materials':
+      return sim.materials ? materialsQuantity(sim.materials, from, sim.controls) : null;
     case 'light': {
       if (from.startsWith('control:')) return sim.controls.some((c) => c.id === from.slice(8) && c.kind !== 'choice') ? 'number' : null;
       return sim.light ? lightQuantity(sim.light, from) : null;
@@ -1161,6 +1189,8 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
         ? lightStates(sim.light, from, sim.controls)
         : sim.kind === 'matter' && sim.matter
         ? matterQuantity(sim.matter, from)?.states
+        : sim.kind === 'materials' && sim.materials
+        ? materialsStates(sim.materials, from, sim.controls)
         : sim.kind === 'force'
         ? FORCE_STATES[from]
         : sim.kind === 'energy' && from === 'chain-state' && sim.energy
@@ -1175,12 +1205,18 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
       const known = lightStates(sim.light, from, sim.controls) ?? [];
       for (const st of Object.keys(o.states ?? {})) if (!known.includes(st)) issue(['outputs', i, 'states', st], `"${from}" is never "${st}" (${known.join(', ')})`);
     }
+    if (sim.kind === 'materials' && sim.materials && o.kind === 'state' && kind === 'state') {
+      const known = states ?? [];
+      for (const st of Object.keys(o.states ?? {})) if (!known.includes(st)) issue(['outputs', i, 'states', st], `"${from}" is never "${st}" (${known.join(', ')})`);
+    }
     if (sim.kind === 'life-cycle' && sim.lifeCycle && o.kind === 'state' && kind === 'state') {
       const known = from === 'stage' ? sim.lifeCycle.stages.map((s) => s.id) : (EMPTYING_STATES[from] ?? []);
       for (const st of Object.keys(o.states ?? {})) if (!known.includes(st)) issue(['outputs', i, 'states', st], `"${from}" is never "${st}" (${known.join(', ')})`);
     }
   });
   if (sim.kind === 'matter' && !sim.matter) issue(['matter'], 'a matter sim needs `matter`');
+  if (sim.kind === 'materials' && !sim.materials) issue(['materials'], 'a materials sim needs `materials`');
+  if (sim.materials) materialsIssues(sim.materials, controls).forEach((x) => issue(['materials', ...x.path], x.message));
   if (sim.matter) matterIssues(sim.matter, controls, ctx.partData ?? []).forEach((x) => issue(['matter', ...x.path], x.message));
   if (sim.kind === 'circuit' && !sim.circuit) issue(['circuit'], 'a circuit sim needs `circuit`');
   if (sim.kind === 'magnet' && !sim.magnet) issue(['magnet'], 'a magnet sim needs `magnet`');
@@ -1197,6 +1233,8 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
   const fieldStates = (o: SimOutput | undefined) => o?.kind === 'state' && (o.from ?? o.id) === 'field-state' && sim.kind === 'magnet';
   const stateBound = new Set<string>();
   const filled = new Set<string>();
+  const bent = new Set<string>();
+  const stretched = new Set<string>();
   sim.bind.forEach((b, i) => {
     const has = (k: string) => k in b && (b as Record<string, unknown>)[k] !== undefined;
     if (has('control') === has('output')) {
@@ -1233,7 +1271,7 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
       if (b.count) for (const id of ids) if (!ctx.countable.has(id)) issue(['bind', i, 'count'], `"${id}" needs a \`repeat\` and no \`extra\` to show a count of copies`);
       if ((b.glow || b.tint || b.count || b.offset || b.rotate || b.fill) && outp && outp.kind !== 'number')
         issue(['bind', i], `glow / tint / count / offset / rotate / fill need a number, "${src}" is a ${outp.kind}`);
-      if (outp?.kind === 'timeline' && ['place', 'visible', 'pose', 'glow', 'tint', 'count', 'offset', 'rotate', 'at', 'state'].some(has))
+      if (outp?.kind === 'timeline' && ['place', 'visible', 'pose', 'glow', 'tint', 'count', 'offset', 'rotate', 'at', 'state', 'bend'].some(has))
         issue(['bind', i], `"${src}" is a timeline: bind it with \`play\` or a \`stretch\` with a \`channel\``);
       if (b.place) {
         if (!xyzOutput(outp)) issue(['bind', i, 'place'], 'place needs an xyz vector output with exactly three finite values');
@@ -1274,6 +1312,33 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
         } else if (outp && outp.kind !== 'number') issue(['bind', i, 'stretch'], `stretch needs a number (or a timeline with \`channel\`), "${src}" is a ${outp.kind}`);
         else if (ctl && ctl.kind === 'choice') issue(['bind', i, 'stretch'], `"${src}" is a choice: stretch by a number`);
       }
+      if (b.bend) {
+        const bd = b.bend;
+        if (outp && outp.kind !== 'number' || ctl && ctl.kind !== 'step') issue(['bind', i, 'bend'], `bend needs a number output or a step control, "${src}" is a ${outp?.kind ?? ctl?.kind}`);
+        const axis = bendAxisIndex(bd.axis);
+        if (!axis) issue(['bind', i, 'bend', 'axis'], 'a strip lies along ±X or ±Z of its part');
+        if (bd.mode === 'bridge' && (bd.span === undefined || bd.clamp !== undefined || bd.reach !== undefined)) issue(['bind', i, 'bend'], 'a bridge gives `span` (no clamp or reach)');
+        if (bd.mode === 'cantilever' && (bd.clamp === undefined || bd.reach === undefined || bd.span !== undefined)) issue(['bind', i, 'bend'], 'a cantilever gives `clamp` and `reach` (no span)');
+        for (const id of ids) {
+          if (bent.has(id)) issue(['bind', i, 'bend'], `"${id}" already bends (one bend per part)`);
+          bent.add(id);
+          const p = ctx.partData?.find((x) => x.id === id);
+          if (!p) continue;
+          const prim = p.primitive;
+          if (!prim || (prim.kind !== 'box' && prim.kind !== 'bevelBox') || prim.size.length !== 3) { issue(['bind', i, 'bend'], `"${id}" needs a box or bevelBox (three sizes) to bend`); continue; }
+          if (p.repeat !== undefined) issue(['bind', i, 'bend'], `"${id}" is repeated: a bent strip is one copy`);
+          if (prim.scale?.some((k) => k !== 1)) issue(['bind', i, 'bend'], `"${id}": a bent strip is not scaled (give its size)`);
+          if (prim.rotation?.some((r) => r !== 0)) issue(['bind', i, 'bend'], `"${id}": a bent strip is not turned (lay it along \`axis\` with its size)`);
+          if (!axis) continue;
+          const length = prim.size[axis.index]!;
+          if (bd.mode === 'bridge' && bd.span !== undefined && bd.span >= length) issue(['bind', i, 'bend', 'span'], `the supports (${bd.span}) must be closer than "${id}" is long (${length})`);
+          if (bd.mode === 'cantilever' && bd.clamp !== undefined && bd.reach !== undefined) {
+            if (Math.abs(bd.clamp) >= length / 2) issue(['bind', i, 'bend', 'clamp'], `the clamp must be on "${id}" (within ±${length / 2})`);
+            if (bd.clamp + bd.reach > length / 2 + 1e-9) issue(['bind', i, 'bend', 'reach'], `clamp + reach (${bd.clamp + bd.reach}) runs past the end of "${id}" (${length / 2})`);
+          }
+        }
+      }
+      if (b.stretch) for (const id of ids) stretched.add(id);
       if (b.rotate && outp && (outp.from ?? outp.id) === 'needle-bearing' && sim.kind === 'magnet') {
         // A bearing turns clockwise seen from above: about −Y (a positive turn about +Y is anticlockwise).
         const a = b.rotate.axis;
@@ -1296,8 +1361,8 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
           stateBound.add(id);
         }
       }
-      const fields = ['place', 'visible', 'pose', 'glow', 'tint', 'count', 'offset', 'rotate', 'at', 'state', 'play', 'stretch', 'fill'].filter(has);
-      if (fields.length === 0) issue(['bind', i], 'a part binding needs place, visible, pose, glow, tint, count, offset, rotate, at, state, play, stretch or fill');
+      const fields = ['place', 'visible', 'pose', 'glow', 'tint', 'count', 'offset', 'rotate', 'at', 'state', 'play', 'stretch', 'fill', 'bend'].filter(has);
+      if (fields.length === 0) issue(['bind', i], 'a part binding needs place, visible, pose, glow, tint, count, offset, rotate, at, state, play, stretch, fill or bend');
     } else if ('flow' in b) {
       if (outp?.kind === 'timeline') issue(['bind', i, 'output'], `"${src}" is a timeline: it moves parts (\`play\`), not flows`);
       const flow = ctx.flows.get(b.flow);
@@ -1340,6 +1405,7 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
     }
   });
   for (const id of ctx.filings ?? []) if (!stateBound.has(id)) issue(['bind'], `filings part "${id}" needs a \`state\` binding to the field-state output`);
+  for (const id of bent) if (stretched.has(id)) issue(['bind'], `"${id}" both bends and stretches: one or the other`);
   for (const [id, f] of ctx.flows) if (f.own === false && !stateBound.has(`flow:${id}`)) issue(['bind'], `flow "${id}" has no path: give it one, or a \`state\` binding to the field-state output`);
   // Parts turned by a play binding: rolling (or spinning) parts take no frictional-force arrow (docs/30 D3: not in the syllabus).
   const turned = new Set(sim.bind.flatMap((b) => ('part' in b && b.play?.turn ? (Array.isArray(b.part) ? b.part : [b.part]) : [])));
@@ -1968,6 +2034,14 @@ export function chapterSimIssues(where: string, s: { set?: SimValues | undefined
     for (const id of t.observe) {
       if (!outputs.has(id)) out.push(`${where}sim.try.observe: unknown output "${id}"`);
       else if (byId.get(id)!.kind === 'timeline') out.push(`${where}sim.try.observe: "${id}" is a timeline (it plays on the stage; observe its numbers)`);
+    }
+    if (sim.kind === 'materials') {
+      // docs/37 D9: outcomes and the apparatus only, never a material's own numbers.
+      const shown = [...t.observe, ...(t.predict ? [t.predict.observe] : [])];
+      for (const id of shown) {
+        const o = byId.get(id);
+        if (o && !materialsShowable(o)) out.push(`${where}sim.try: "${id}" is one of the model's own numbers: a materials card shows outcomes (states) and the apparatus (control readings)`);
+      }
     }
     const rec = t.record && t.record !== true ? t.record : null;
     if (rec?.judge && !outputs.has(rec.judge.output)) out.push(`${where}sim.try.record.judge: unknown output "${rec.judge.output}"`);

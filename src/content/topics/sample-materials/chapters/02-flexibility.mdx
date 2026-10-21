@@ -1,0 +1,179 @@
+---
+{
+  "id": "flexibility",
+  "order": 2,
+  "title": {
+    "en": "Sample flexibility",
+    "zh": "示例柔韧性"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "layers": [
+      "bend-rig"
+    ],
+    "labels": [
+      "bend-clamp",
+      "bend-wood",
+      "push-peg"
+    ],
+    "camera": {
+      "position": [
+        -0.36,
+        0.2,
+        0.75
+      ],
+      "target": [
+        -0.4,
+        0.08,
+        0.05
+      ],
+      "fov": 32
+    },
+    "summary": {
+      "en": "Sample flexibility: outcomes from the model.",
+      "zh": "示例柔韧性：模型算出的结果。"
+    },
+    "index": {
+      "parts": [
+        "bend-clamp",
+        "push-peg",
+        "push-stand",
+        "bend-wood",
+        "bend-glass",
+        "bend-glass-snapped",
+        "bend-plastic"
+      ]
+    },
+    "sim": {
+      "set": {
+        "strip": "wood",
+        "push": 0
+      },
+      "try": {
+        "vary": "strip",
+        "also": [
+          "push"
+        ],
+        "keep": [
+          {
+            "en": "The same strips, 25 cm sticking out",
+            "zh": "同一套条，都伸出 25 厘米"
+          }
+        ],
+        "observe": [
+          "flex-result"
+        ],
+        "record": true,
+        "predict": {
+          "prompt": {
+            "en": "Sample prediction: push the glass strip down 2 cm.",
+            "zh": "示例猜想：把玻璃条压下 2 厘米。"
+          },
+          "change": {
+            "strip": "glass"
+          },
+          "observe": "flex-result",
+          "options": [
+            {
+              "id": "bends",
+              "label": {
+                "en": "It bends",
+                "zh": "会弯"
+              },
+              "means": "bends"
+            },
+            {
+              "id": "snapped",
+              "label": {
+                "en": "It snaps",
+                "zh": "会断"
+              },
+              "means": "snapped"
+            },
+            {
+              "id": "droops",
+              "label": {
+                "en": "It droops by itself",
+                "zh": "自己垂下来"
+              },
+              "means": "droops"
+            }
+          ],
+          "start": {
+            "strip": "wood",
+            "push": 2
+          }
+        }
+      }
+    },
+    "beats": [
+      {
+        "caption": {
+          "en": "Sample: a wooden strip in the clamp.",
+          "zh": "示例：夹座夹着木条。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "push": 2
+          }
+        },
+        "labels": [
+          "bend-wood",
+          "push-peg"
+        ],
+        "caption": {
+          "en": "Sample: the peg pushes the end down 2 cm.",
+          "zh": "示例：推杆把末端压下 2 厘米。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "strip": "glass",
+            "push": 2
+          }
+        },
+        "labels": [
+          "bend-glass-snapped"
+        ],
+        "caption": {
+          "en": "Sample: the glass strip snaps.",
+          "zh": "示例：玻璃条断了。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "strip": "plastic",
+            "push": 0
+          }
+        },
+        "labels": [
+          "bend-plastic"
+        ],
+        "caption": {
+          "en": "Sample: the plastic strip droops by itself.",
+          "zh": "示例：塑料条自己垂下来。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Sample flexibility: a draft engine fixture.
+
+</Lang>
+
+<Lang zh>
+
+示例柔韧性：引擎测试草稿。
+
+</Lang>

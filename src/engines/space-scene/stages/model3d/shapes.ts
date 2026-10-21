@@ -14,11 +14,15 @@ import { restFan } from '../../lib/wing';
 import { latheProfileClosed } from '../../lib/shaped';
 import type { PartShape } from './PartNode';
 
-/** `each`: an `each` animation targets the part, so its copies are drawn instanced and move one by one. */
-export function primitiveShape(part: Part, each = false): PartShape | null {
+/**
+ * `each`: an `each` animation targets the part, so its copies are drawn
+ * instanced and move one by one; `bend`: a try-it bend bends it along this
+ * axis (0 = X, 2 = Z), so its main primitive is cut into slabs along it.
+ */
+export function primitiveShape(part: Part, each = false, bend?: 0 | 2): PartShape | null {
   const p = part.primitive;
   if (!p) return null;
-  const pieces = each ? eachPieces(part) : partPieces(part);
+  const pieces = each ? eachPieces(part) : partPieces(part, bend);
   const b = partBounds(part)!;
   const radius = Math.hypot(b.max[0] - b.min[0], b.max[1] - b.min[1], b.max[2] - b.min[2]) / 2;
   return {

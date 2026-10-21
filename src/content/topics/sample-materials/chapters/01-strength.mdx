@@ -1,0 +1,185 @@
+---
+{
+  "id": "strength",
+  "order": 1,
+  "title": {
+    "en": "Sample strength",
+    "zh": "示例强度"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "layers": [
+      "strength-rig"
+    ],
+    "labels": [
+      "bridge-blocks",
+      "bridge-wood",
+      "bridge-hanger"
+    ],
+    "camera": {
+      "position": [
+        -0.84,
+        0.2,
+        0.62
+      ],
+      "target": [
+        -0.9,
+        0.04,
+        0.05
+      ],
+      "fov": 30
+    },
+    "summary": {
+      "en": "Sample strength: outcomes from the model.",
+      "zh": "示例强度：模型算出的结果。"
+    },
+    "index": {
+      "parts": [
+        "bridge-blocks",
+        "bridge-hanger",
+        "bridge-masses",
+        "bridge-wood",
+        "bridge-glass",
+        "bridge-glass-snapped",
+        "bridge-plastic"
+      ]
+    },
+    "sim": {
+      "set": {
+        "strip": "wood",
+        "masses": 0
+      },
+      "try": {
+        "vary": "strip",
+        "also": [
+          "masses"
+        ],
+        "keep": [
+          {
+            "en": "Strips of the same size",
+            "zh": "同样大小的条"
+          },
+          {
+            "en": "The same blocks and gap",
+            "zh": "同样的木块和间距"
+          }
+        ],
+        "observe": [
+          "strength-result",
+          "strength-bend"
+        ],
+        "record": true,
+        "predict": {
+          "prompt": {
+            "en": "Sample prediction: swap the steel for glass.",
+            "zh": "示例猜想：换成玻璃条。"
+          },
+          "change": {
+            "strip": "glass"
+          },
+          "observe": "strength-result",
+          "options": [
+            {
+              "id": "holds",
+              "label": {
+                "en": "It holds them",
+                "zh": "托得住"
+              },
+              "means": "holds"
+            },
+            {
+              "id": "on-bench",
+              "label": {
+                "en": "It bends onto the bench",
+                "zh": "弯到台面上"
+              },
+              "means": "on-bench"
+            },
+            {
+              "id": "snapped",
+              "label": {
+                "en": "It snaps",
+                "zh": "会断"
+              },
+              "means": "snapped"
+            }
+          ],
+          "start": {
+            "strip": "wood",
+            "masses": 5
+          }
+        }
+      }
+    },
+    "beats": [
+      {
+        "caption": {
+          "en": "Sample: a wooden strip on two blocks.",
+          "zh": "示例：木条架在两块木块上。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "masses": 5
+          }
+        },
+        "labels": [
+          "bridge-wood",
+          "bridge-masses"
+        ],
+        "caption": {
+          "en": "Sample: five masses on the wooden strip.",
+          "zh": "示例：木条上放五个槽码。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "strip": "glass",
+            "masses": 5
+          }
+        },
+        "labels": [
+          "bridge-glass-snapped",
+          "bridge-masses"
+        ],
+        "caption": {
+          "en": "Sample: the glass strip snaps.",
+          "zh": "示例：玻璃条断了。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "strip": "plastic",
+            "masses": 5
+          }
+        },
+        "labels": [
+          "bridge-plastic"
+        ],
+        "caption": {
+          "en": "Sample: the plastic strip bends onto the bench.",
+          "zh": "示例：塑料条弯到台面上。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Sample strength: a draft engine fixture.
+
+</Lang>
+
+<Lang zh>
+
+示例强度：引擎测试草稿。
+
+</Lang>

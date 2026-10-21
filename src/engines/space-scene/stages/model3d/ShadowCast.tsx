@@ -499,12 +499,12 @@ export function ShadowCast({
             lowAt = original;
           }
         }
-        metadata.casters[def.part] = shadowBounds(c.projected, f);
+        const dark = casterDark(def, outputs);
+        metadata.casters[def.part] = { ...shadowBounds(c.projected, f), dark };
         const m = c.mesh.material as ShaderMaterial;
         setFrame(m, f, o, source, axis, point);
         m.uniforms.uObject!.value.copy(c.world);
         m.uniforms.uProjection!.value.copy(projection);
-        const dark = casterDark(def, outputs);
         darkOf.set(c, dark);
         m.uniforms.uBase!.value.copy(lit);
         m.uniforms.uFade!.value = s.fade;

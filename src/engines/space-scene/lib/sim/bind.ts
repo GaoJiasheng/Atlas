@@ -4,7 +4,7 @@
  * part (on top of the chapter / beat pose), glow, tint, a count of `repeat`
  * copies, an offset (along an axis or to a ring position, eased or with a
  * damped bounce) or turn (with a damped swing, about a pivot), a coil's
- * stretch, the timeline channels a part plays (moves and turns), the field
+ * stretch, a strip's bend, the timeline channels a part plays (moves and turns), the field
  * state a filings part lays out, an animation's speed or on / off, and per
  * flow its visibility, per-path intensity (speed or particle density),
  * colour and field state.
@@ -14,6 +14,7 @@ import type { SimOutputs, SimOutputValue } from './index';
 import { isTimeline } from './timeline';
 import { ringPoint } from './magnet';
 import { normalize3, type Vec3 } from '../math';
+import type { BendMode } from '../bend';
 
 export interface SimGlow {
   /** The binding's colour ref (`token:lamp`). */
@@ -77,6 +78,18 @@ export interface SimStretch {
   settle?: SimSettle;
 }
 
+/** A strip bent like a ruler (lib/bend.ts): the sag / drop to draw (scene units) and the shape it bends in. */
+export interface SimBend {
+  target: number;
+  mode: BendMode;
+  axis: Vec3;
+  span?: number;
+  clamp?: number;
+  reach?: number;
+  /** Seconds the ease to a new value takes. */
+  ease: number;
+}
+
 /** A point on a sphere, with optional facing toward its centre. */
 export interface SimPlace {
   direction: Vec3;
@@ -128,6 +141,8 @@ export interface SimEffects {
   offsetSettle: Map<string, SimSettle>;
   /** A coil's stretch per part. */
   stretch: Map<string, SimStretch>;
+  /** A strip's bend per part. */
+  bend: Map<string, SimBend>;
   /** Timeline channels each part plays (they add up). */
   play: Map<string, SimPlay[]>;
   /** Turn about a unit axis through the part centre or a pivot, degrees. */
@@ -193,6 +208,7 @@ export function simEffects(sim: SimData, values: SimValues, outputs: SimOutputs)
     place: new Map(),
     offsetSettle: new Map(),
     stretch: new Map(),
+    bend: new Map(),
     play: new Map(),
     rotate: new Map(),
     states: new Map(),
@@ -243,6 +259,18 @@ export function simEffects(sim: SimData, values: SimValues, outputs: SimOutputs)
           }
           if (st.settle) e.settle = st.settle;
           out.stretch.set(id, e);
+        }
+        if (b.bend) {
+          const bd = b.bend;
+          out.bend.set(id, {
+            target: num(v) * bd.per,
+            mode: bd.mode,
+            axis: bd.axis,
+            ease: bd.ease,
+            ...(bd.span !== undefined ? { span: bd.span } : {}),
+            ...(bd.clamp !== undefined ? { clamp: bd.clamp } : {}),
+            ...(bd.reach !== undefined ? { reach: bd.reach } : {}),
+          });
         }
         const pw = b.play?.when;
         const playing = !pw || holds(pw.is, pw.control !== undefined ? values[pw.control] : outputs[pw.output!], pw.output !== undefined ? firstState.get(pw.output) : undefined);

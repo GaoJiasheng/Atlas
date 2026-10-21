@@ -43,6 +43,7 @@ import { canMove, jointCandidates, DEFAULT_BULGE, DEFAULT_DEMO_ANGLE, JOINT_PREF
 import { MAX_EXPLODE_STAGE } from './lib/explode';
 import { MAX_FLOW_PATHS } from './lib/flow-curve';
 import { beatSimSchema, chapterSimIssues, chapterSimSchema, simIssues, simSchema } from './sim-schema';
+import { materialsShowable } from './lib/sim/materials';
 
 /* ------------------------------------------------------------------ */
 /* Parts                                                               */
@@ -1215,6 +1216,8 @@ export const partsFileBase = z
         const o = outputs.get(id);
         if (!o) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['telemetry', i, 'follow'], message: file.sim ? `unknown sim output "${id}"` : 'parts.json has no `sim`' });
         else if (o.kind !== 'number') ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['telemetry', i, 'follow'], message: `"${id}" is a ${o.kind}, not a number` });
+        else if (file.sim?.kind === 'materials' && !materialsShowable(o))
+          ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['telemetry', i, 'follow'], message: `"${id}" is one of the materials model's own numbers: the PLATE reads only the apparatus (\`control:\` outputs, docs/37 D9)` });
       }
       if (new Set(ids.map((id) => outputs.get(id)?.unit ?? '')).size > 1)
         ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['telemetry', i, 'follow'], message: 'one reading, one unit' });

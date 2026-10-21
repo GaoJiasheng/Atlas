@@ -1,0 +1,159 @@
+---
+{
+  "id": "light-through",
+  "order": 5,
+  "title": {
+    "en": "Sample light through",
+    "zh": "示例透光"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "layers": [
+      "light-bench"
+    ],
+    "labels": [
+      "sheet-glass",
+      "screen"
+    ],
+    "camera": {
+      "position": [
+        0.62,
+        0.3,
+        0.6
+      ],
+      "target": [
+        0.9,
+        0.09,
+        0.0
+      ],
+      "fov": 34
+    },
+    "summary": {
+      "en": "Sample light through: outcomes from the model.",
+      "zh": "示例透光：模型算出的结果。"
+    },
+    "index": {
+      "parts": [
+        "torch",
+        "sheet-holder",
+        "screen",
+        "sheet-glass",
+        "sheet-plastic",
+        "sheet-wood"
+      ]
+    },
+    "sim": {
+      "set": {
+        "square": "glass"
+      },
+      "try": {
+        "vary": "square",
+        "keep": [
+          {
+            "en": "The same torch and distances",
+            "zh": "同一支手电筒，同样的距离"
+          }
+        ],
+        "observe": [
+          "light-result"
+        ],
+        "record": true,
+        "predict": {
+          "prompt": {
+            "en": "Sample prediction: swap the glass for wood.",
+            "zh": "示例猜想：换成木头样片。"
+          },
+          "change": {
+            "square": "wood"
+          },
+          "observe": "light-result",
+          "options": [
+            {
+              "id": "most",
+              "label": {
+                "en": "Most",
+                "zh": "大部分"
+              },
+              "means": "most"
+            },
+            {
+              "id": "some",
+              "label": {
+                "en": "Some",
+                "zh": "一部分"
+              },
+              "means": "some"
+            },
+            {
+              "id": "none",
+              "label": {
+                "en": "None",
+                "zh": "没有"
+              },
+              "means": "none"
+            }
+          ],
+          "start": {
+            "square": "glass"
+          }
+        }
+      }
+    },
+    "beats": [
+      {
+        "labels": [
+          "sheet-glass",
+          "screen"
+        ],
+        "caption": {
+          "en": "Sample: glass lets most light through.",
+          "zh": "示例：玻璃让大部分光穿过。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "square": "plastic"
+          }
+        },
+        "labels": [
+          "sheet-plastic"
+        ],
+        "caption": {
+          "en": "Sample: this plastic lets some light through.",
+          "zh": "示例：这种塑料让一部分光穿过。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "square": "wood"
+          }
+        },
+        "labels": [
+          "sheet-wood"
+        ],
+        "caption": {
+          "en": "Sample: wood lets no light through.",
+          "zh": "示例：木头不让光穿过。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Sample light through: a draft engine fixture.
+
+</Lang>
+
+<Lang zh>
+
+示例透光：引擎测试草稿。
+
+</Lang>

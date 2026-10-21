@@ -1,0 +1,164 @@
+---
+{
+  "id": "all-five",
+  "order": 6,
+  "title": {
+    "en": "Sample all five tests",
+    "zh": "示例五个测试"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "layers": [
+      "strength-rig",
+      "bend-rig",
+      "float-tank",
+      "drop-tray",
+      "light-bench"
+    ],
+    "labels": [
+      "bend-wood",
+      "float-wood",
+      "square-wood"
+    ],
+    "camera": {
+      "position": [
+        0.35,
+        0.95,
+        1.9
+      ],
+      "target": [
+        0.0,
+        0.06,
+        0.0
+      ],
+      "fov": 34
+    },
+    "summary": {
+      "en": "Sample all five tests: outcomes from the model.",
+      "zh": "示例五个测试：模型算出的结果。"
+    },
+    "index": {
+      "parts": [
+        "bridge-wood",
+        "bend-wood",
+        "float-wood",
+        "square-wood",
+        "sheet-wood"
+      ]
+    },
+    "sim": {
+      "set": {
+        "pick": "wood",
+        "strip": "wood",
+        "masses": 5,
+        "push": 2,
+        "block": "wood",
+        "square": "wood"
+      },
+      "try": {
+        "vary": "pick",
+        "keep": [
+          {
+            "en": "The same five tests",
+            "zh": "同样的五个测试"
+          },
+          {
+            "en": "All five masses; pushed down 2 cm",
+            "zh": "加满五个槽码；压下 2 厘米"
+          }
+        ],
+        "observe": [
+          "p-strength",
+          "p-flex",
+          "p-float",
+          "p-water",
+          "p-light"
+        ],
+        "record": true,
+        "predict": {
+          "prompt": {
+            "en": "Sample prediction: swap the wood for glass.",
+            "zh": "示例猜想：把木头换成玻璃。"
+          },
+          "change": {
+            "pick": "glass"
+          },
+          "observe": "p-light",
+          "options": [
+            {
+              "id": "most",
+              "label": {
+                "en": "Most",
+                "zh": "大部分"
+              },
+              "means": "most"
+            },
+            {
+              "id": "some",
+              "label": {
+                "en": "Some",
+                "zh": "一部分"
+              },
+              "means": "some"
+            },
+            {
+              "id": "none",
+              "label": {
+                "en": "None",
+                "zh": "没有"
+              },
+              "means": "none"
+            }
+          ],
+          "start": {
+            "pick": "wood"
+          }
+        }
+      }
+    },
+    "beats": [
+      {
+        "caption": {
+          "en": "Sample: wood in all five tests.",
+          "zh": "示例：木头的五个测试。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "pick": "glass",
+            "strip": "glass",
+            "block": "glass",
+            "square": "glass"
+          }
+        },
+        "labels": [
+          "bridge-glass-snapped",
+          "bend-glass-snapped",
+          "float-glass",
+          "sheet-glass"
+        ],
+        "caption": {
+          "en": "Sample: glass in all five tests.",
+          "zh": "示例：玻璃的五个测试。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Sample all five tests: a draft engine fixture.
+
+</Lang>
+
+<Lang zh>
+
+示例五个测试：引擎测试草稿。
+
+</Lang>

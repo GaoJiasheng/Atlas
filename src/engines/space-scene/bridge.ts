@@ -65,7 +65,8 @@ export interface StageStats {
 }
 
 export interface ShadowOnScreen {
-  casters: Record<string, { min: [number, number]; max: [number, number] }>;
+  /** Each caster's shadow on the receiver and its darkness (1 opaque; a transmitting sheet less). */
+  casters: Record<string, { min: [number, number]; max: [number, number]; dark: number }>;
   spot?: { radius: number };
   trail: [number, number][];
   rays: number;
@@ -78,8 +79,18 @@ export interface FillReading {
   shown: boolean;
 }
 
+/** A bent strip on the stage now (lib/bend.ts): the drawn sag / drop, its middle and free end (model coordinates) and its centre line's length. */
+export interface BendReading {
+  value: number;
+  mid: [number, number, number];
+  tip: [number, number, number];
+  length: number;
+  shown: boolean;
+}
+
 export interface StageBridge {
   fills: Map<string, FillReading>;
+  bends: Map<string, BendReading>;
   fillBenchmarks: Map<string, () => number>;
   flowPaths: Map<string, Record<string, { visible: boolean }>>;
   /** Stage size in CSS pixels. */
@@ -147,6 +158,7 @@ export function createBridge(): StageBridge {
     modelRadius: 1,
     anchors: new Map(),
     fills: new Map(),
+    bends: new Map(),
     fillBenchmarks: new Map(),
     flowPaths: new Map(),
     sites: new Map(),

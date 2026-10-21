@@ -1,0 +1,150 @@
+---
+{
+  "id": "waterproof",
+  "order": 4,
+  "title": {
+    "en": "Sample waterproof",
+    "zh": "示例防水"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "layers": [
+      "drop-tray"
+    ],
+    "labels": [
+      "drop-stand",
+      "square-plastic",
+      "water-bead"
+    ],
+    "camera": {
+      "position": [
+        0.52,
+        0.2,
+        0.45
+      ],
+      "target": [
+        0.45,
+        0.04,
+        0.08
+      ],
+      "fov": 30
+    },
+    "summary": {
+      "en": "Sample waterproof: outcomes from the model.",
+      "zh": "示例防水：模型算出的结果。"
+    },
+    "index": {
+      "parts": [
+        "drop-stand",
+        "water-bead",
+        "wet-patch",
+        "square-plastic",
+        "square-wood",
+        "square-glass"
+      ]
+    },
+    "sim": {
+      "set": {
+        "square": "plastic"
+      },
+      "try": {
+        "vary": "square",
+        "keep": [
+          {
+            "en": "The same dropper and drop",
+            "zh": "同一支滴管，同样一滴"
+          }
+        ],
+        "observe": [
+          "drop-result"
+        ],
+        "record": true,
+        "predict": {
+          "prompt": {
+            "en": "Sample prediction: swap the plastic for wood.",
+            "zh": "示例猜想：换成木头样片。"
+          },
+          "change": {
+            "square": "wood"
+          },
+          "observe": "drop-result",
+          "options": [
+            {
+              "id": "stays-on-top",
+              "label": {
+                "en": "Stays on top",
+                "zh": "停在上面"
+              },
+              "means": "stays-on-top"
+            },
+            {
+              "id": "soaks-in",
+              "label": {
+                "en": "Soaks in",
+                "zh": "吸进去"
+              },
+              "means": "soaks-in"
+            }
+          ],
+          "start": {
+            "square": "plastic"
+          }
+        }
+      }
+    },
+    "beats": [
+      {
+        "caption": {
+          "en": "Sample: the drop stays on the plastic.",
+          "zh": "示例：水珠停在塑料上。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "square": "wood"
+          }
+        },
+        "labels": [
+          "square-wood",
+          "wet-patch"
+        ],
+        "caption": {
+          "en": "Sample: the drop soaks into the wood.",
+          "zh": "示例：水吸进木头里。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "square": "glass"
+          }
+        },
+        "labels": [
+          "square-glass",
+          "water-bead"
+        ],
+        "caption": {
+          "en": "Sample: the drop stays on the glass.",
+          "zh": "示例：水珠停在玻璃上。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Sample waterproof: a draft engine fixture.
+
+</Lang>
+
+<Lang zh>
+
+示例防水：引擎测试草稿。
+
+</Lang>

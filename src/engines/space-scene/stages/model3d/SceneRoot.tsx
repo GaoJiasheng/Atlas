@@ -18,6 +18,7 @@ import type { SpaceUiStore } from '../../ui';
 import type { StageBridge } from '../../bridge';
 import { resolveAllPartDisplays } from '../../lib/visibility';
 import { explodeStages, targetExplodeAmount } from '../../lib/explode';
+import { bendAxisIndex } from '../../lib/bend';
 import { jointOf, musclePartIds } from '../../lib/rig';
 import { activeSites } from '../../lib/sites';
 import { animationsByPart } from '../../lib/animation';
@@ -212,8 +213,15 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
       ...data.animations.filter((a) => 'each' in a && a.each).map((a) => a.target),
       ...(data.sim?.bind ?? []).flatMap((b) => ('part' in b && b.play?.each ? (Array.isArray(b.part) ? b.part : [b.part]) : [])),
     ]);
+    // Strips a try-it `bend` bends: their main primitive is cut into slabs along the axis they bend about (lib/bend.ts).
+    const bent = new Map<string, 0 | 2>();
+    for (const b of data.sim?.bind ?? []) {
+      if (!('part' in b) || !b.bend) continue;
+      const axis = bendAxisIndex(b.bend.axis);
+      if (axis) for (const id of Array.isArray(b.part) ? b.part : [b.part]) bent.set(id, axis.index);
+    }
     for (const part of data.parts) {
-      const shape = primitiveShape(part, each.has(part.id));
+      const shape = primitiveShape(part, each.has(part.id), bent.get(part.id));
       if (shape) out.set(part.id, shape);
     }
     return out;
@@ -630,6 +638,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
             simMove={simMoves.get(part.id) ?? null}
             play={sim?.play.get(part.id) ?? null}
             stretch={sim?.stretch.get(part.id) ?? null}
+            bend={sim?.bend.get(part.id) ?? null}
             fill={sim?.fill.get(part.id) ?? null}
             fillBridge={bridge}
             fillStill={referenceOn}

@@ -1,0 +1,14 @@
+# Engine fixture; deliberately schematic captions and primitives.
+id: sample-materials
+title: { en: "Sample: Materials bench", zh: "示例：材料实验台" }
+subtitle: { en: "A draft fixture for the materials engine", zh: "材料引擎的草稿测试主题" }
+subject: science
+levels: [P3]
+moe: []
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: draft
+note: { en: "Engine fixture · schematic primitives · outcomes from the model, no material numbers shown", zh: "引擎测试 · 基础几何示意 · 结果由模型算出，不显示材料的数值" }
