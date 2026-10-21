@@ -40,6 +40,26 @@ plates redrawn from model renders and the screenshots of the series are
 CC BY-SA 4.0, not CC BY-NC-SA (see the exception in `LICENSE-CONTENT`). The
 texts, muscle and exercise sheets remain under `LICENSE-CONTENT`.
 
+### Digestive system (`public/models/digestive-system.glb`)
+
+The digestive-tract, liver, pancreas, heart, lung, diaphragm, skeleton and skin
+meshes of the digestive-system topic come from the same Z-Anatomy source
+(CC BY-SA 4.0). Attribution carried in the model's `asset.copyright`:
+
+```
+Z-Anatomy — The open source atlas of anatomy, CC BY-SA 4.0
+(https://github.com/LluisV/Z-Anatomy), derived from BodyParts3D, © The Database Center
+for Life Science (CC BY-SA 2.1 Japan as stated by Z-Anatomy; BodyParts3D is now
+CC BY 4.0, https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html).
+Changes for Atlas: structures selected for the digestive region and four other systems, simplified, renamed, centreline _U baked.
+digestive-system.glb is licensed CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).
+```
+
+The glb and the geometry derived from it (`scripts/anatomy/digestive/centrelines.json`,
+`food-route.json`, and the flow paths and camera targets taken from them into
+`src/content/topics/digestive-system/data/parts.json`) are CC BY-SA 4.0 (see the
+exception in `LICENSE-CONTENT`).
+
 ### Heart and lungs (`public/models/heart-and-lungs.glb`)
 
 The airway, lung, heart, blood-vessel, diaphragm, rib, digestive-context, leg-muscle,
