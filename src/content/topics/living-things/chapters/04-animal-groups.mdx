@@ -1,0 +1,145 @@
+---
+id: "animal-groups"
+order: 4
+title: {"en": "Six groups of animals", "zh": "动物的六个类群"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: false
+  cutaway: "none"
+  layers: ["non-living", "plants", "fungi", "bacteria", "insects", "birds", "mammals", "fish", "amphibians", "reptiles", "other-animals", "tray"]
+  labels: ["plantain-squirrel", "snakehead", "tree-frog", "house-gecko", "grasshopper"]
+  camera: {"position": [0.4, 1.1, 1.5], "target": [0.0, 0.0, 0.02], "fov": 30}
+  summary: {"en": "Animals are sorted into six groups by what can be seen on their bodies: insects have six legs, birds have feathers, mammals have hair, fish have fins, reptiles have dry, scaly skin and amphibians have moist skin. People are mammals too.", "zh": "动物按身上看得见的特征分成六类：昆虫有六条腿，鸟类有羽毛，哺乳动物有毛发，鱼类有鳍，爬行动物皮肤干、有鳞片，两栖动物皮肤湿润。人也是哺乳动物。"}
+  sim:
+    set: {"tray": "animals", "asked-animal": 0}
+    try:
+      vary: "asked-animal"
+      keep: [{"en": "The same eighteen animals", "zh": "同样的 18 只动物"}, {"en": "Questions asked in the same order", "zh": "问题的顺序不变"}]
+      observe: ["count-u", "count-x", "where-dolphin"]
+      record: {"chart": {"y": "count-u"}}
+      predict:
+        prompt: {"en": "Ask the fourth question: does it have fins? Where will the dolphin go?", "zh": "问第四个问题：它有鳍吗？海豚会去哪里？"}
+        start: {"asked-animal": 3}
+        change: {"asked-animal": 4}
+        observe: "where-dolphin"
+        options:
+          - {"id": "case", "label": {"en": "It stays in the case", "zh": "留在盒里"}, "means": "u"}
+          - {"id": "fish", "label": {"en": "Group D, with the fish", "zh": "去 D 组，和鱼在一起"}, "means": "d"}
+          - {"id": "mammals", "label": {"en": "Group C, with the mammals", "zh": "去 C 组，和哺乳动物在一起"}, "means": "c"}
+  beats:
+    - labels: ["plantain-squirrel", "javan-myna", "snakehead", "tree-frog", "house-gecko", "grasshopper"]
+      caption: {"en": "Eighteen model animals: at least one from each of the six groups, and a spider.", "zh": "十八只动物模型：六个类群每类至少一只，还有一只蜘蛛。"}
+    - sim: {"set": {"tray": "animals", "asked-animal": 1}}
+      camera: "back-row"
+      labels: ["grasshopper", "beetle", "spider"]
+      caption: {"en": "Six legs and three body parts: the grasshopper and the beetle are insects, in group A. The spider has eight legs, so it stays in the case.", "zh": "六条腿、身体分三部分：蝗虫和甲虫是昆虫，进了 A 组。蜘蛛有八条腿，留在盒里。"}
+    - sim: {"set": {"tray": "animals", "asked-animal": 2}}
+      camera: "back-row"
+      labels: ["javan-myna", "penguin"]
+      caption: {"en": "Feathers: the myna and the penguin are birds, in group B. A penguin cannot fly, but it has feathers.", "zh": "有羽毛：八哥和企鹅是鸟类，进了 B 组。企鹅不会飞，但它有羽毛。"}
+    - sim: {"set": {"tray": "animals", "asked-animal": 3}}
+      camera: "back-row"
+      labels: ["plantain-squirrel", "fruit-bat"]
+      caption: {"en": "Hair or fur: the squirrel and the fruit bat are mammals, in group C. A bat can fly, but it has fur.", "zh": "有毛发：松鼠和果蝠是哺乳动物，进了 C 组。蝙蝠会飞，但身上有毛。"}
+    - sim: {"set": {"tray": "animals", "asked-animal": 4}}
+      camera: "front-row"
+      labels: ["snakehead", "mudskipper", "shark", "dolphin"]
+      caption: {"en": "Fins: the snakehead, the guppy, the mudskipper and the shark go to group D, the fish. In this sort the dolphin goes there too. Chapter 5 checks it.", "zh": "有鳍：斑鱼、孔雀鱼、弹涂鱼和鲨鱼进了 D 组，鱼类。按这样分，海豚也进了 D 组，第 5 章再来核对。"}
+    - sim: {"set": {"tray": "animals", "asked-animal": 6}}
+      labels: ["pangolin", "house-gecko", "tree-frog", "asian-toad", "spider"]
+      caption: {"en": "Scales: the gecko, the python, the turtle and the pangolin go to group E. Moist skin: the tree frog goes to group F. The toad and the spider are left over.", "zh": "有鳞片：壁虎、蟒蛇、海龟和穿山甲进了 E 组。皮肤湿润：树蛙进了 F 组。剩下蟾蜍和蜘蛛。"}
+  index: {"parts": ["grasshopper", "beetle", "spider", "javan-myna", "penguin", "plantain-squirrel", "fruit-bat", "dolphin", "pangolin", "snakehead", "guppy", "mudskipper", "shark", "tree-frog", "asian-toad", "house-gecko", "python", "hawksbill-turtle"]}
+---
+
+<Lang en>
+
+Eighteen animals wait in the case. The syllabus names six groups of animals, and each group has something you can see on the body:
+
+- An <Term id="insect">insect</Term> has six legs, three body parts and two feelers.
+- A <Term id="bird">bird</Term> has feathers, a beak, two wings and two legs.
+- A <Term id="mammal">mammal</Term> has hair or fur. Mammals feed their young on milk, and most give birth to live young.
+- A <Term id="fish">fish</Term> has fins and a tail, and most fish have scales. Fish breathe through gills, and most lay eggs in water.
+- A <Term id="reptile">reptile</Term> has dry skin covered in scales.
+- An <Term id="amphibian">amphibian</Term>, such as a frog, usually has moist skin with no scales.
+
+<Figure src="figures/living-things-animal-groups" alt={{"en": "Pencil drawings of a spotted frog sitting, a fish with scales and spiny fins, and a butterfly with large patterned wings, seen from the side.", "zh": "三幅铅笔画：一只蹲坐的带斑点的蛙，一条长着鳞片和带刺鳍的鱼，一只翅膀上有大块花纹的蝴蝶，都从侧面画。"}} caption={{"en": "A frog, a fish and a butterfly: an amphibian, a fish and an insect. Illustration for this topic.", "zh": "一只蛙、一条鱼、一只蝴蝶：两栖动物、鱼类、昆虫。为本主题画的示意图。"}} />
+
+Good questions ask about things every animal shows: legs, feathers, hair, fins, scales, skin. Ask first about what only one group has. Six legs, feathers and hair each belong to one group, so the flowchart asks about them first. Scales, fins and wings turn up in several groups (fish and reptiles both have scales; birds, bats and many insects have wings), so those questions come later or not at all.
+
+People are animals too. People have hair and feed their babies on milk: by these characteristics, people are mammals.
+
+This flowchart puts some animals in the wrong group: the dolphin lands with the fish, the pangolin with the reptiles, and the toad in none of the six. Chapter 5 finds out why. How an insect’s body is built is in <TopicLink slug="grasshopper" ch="whole-animal">Inside a Grasshopper</TopicLink>.
+
+<More title={{"en": "Most, not all", "zh": "是“大多数”，不是“全部”"}}>
+
+Rules about how animals have their young have exceptions, and the syllabus does not ask you to remember them. Most reptiles lay eggs, but the many-lined sun skink, a lizard found in Singapore, gives birth to live young. Most fish lay eggs, but female guppies give birth to live young, and in the seagrass pipefish the father carries the eggs in a pouch until the young are born. Most mammals give birth to live young, but the platypus and the echidnas lay eggs. The greenhouse frog lays its eggs on land, and its young hatch as tiny frogs, skipping the tadpole stage.
+
+</More>
+
+<More title={{"en": "Why ask about six legs first", "zh": "为什么先问六条腿"}}>
+
+If the first question were “has scales?”, fish, reptiles and the pangolin would land together. “Can it fly?” would mix birds, bats and insects, and “does it live in water?” has no clear answer for a mudskipper or a sea turtle. This order of questions is a design for this model, not a rule from MOE; other orders work if each question has a clear yes or no.
+
+</More>
+
+<More title={{"en": "People are animals", "zh": "人也是动物"}}>
+
+In a study of ninth-grade students in Turkey, many students sorting animals put people in a group of their own. Biologists count people as animals, and as mammals.
+
+</More>
+
+<More title={{"en": "Insects up close", "zh": "细看昆虫"}}>
+
+The grasshopper and the beetle here are simplified models. For an insect’s whole body, inside and out, see <TopicLink slug="grasshopper" ch="whole-animal">Inside a Grasshopper</TopicLink> and <TopicLink slug="mosquito" ch="the-adult">A Mosquito’s Life Cycle: the adult</TopicLink>. The Primary 3 life cycles topic names the frog, the beetle, the butterfly, the grasshopper and the mosquito among its animals; see <TopicLink slug="mosquito" ch="before-you-start">A Mosquito’s Life Cycle</TopicLink>.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+标本盒里有十八只动物。课纲列出动物的六个类群，每一类身上都有看得见的特征：
+
+- <Term id="insect">昆虫</Term>有六条腿、三部分身体、两根触角。
+- <Term id="bird">鸟类</Term>有羽毛、喙、两只翅膀、两条腿。
+- <Term id="mammal">哺乳动物</Term>有毛发。哺乳动物用奶喂养幼仔，大多数是胎生的。
+- <Term id="fish">鱼类</Term>有鳍和尾巴，大多数鱼有鳞片。鱼用鳃呼吸，大多数在水里下蛋。
+- <Term id="reptile">爬行动物</Term>的皮肤干燥，盖着鳞片。
+- <Term id="amphibian">两栖动物</Term>（比如蛙）的皮肤通常湿润，没有鳞片。
+
+<Figure src="figures/living-things-animal-groups" alt={{"en": "Pencil drawings of a spotted frog sitting, a fish with scales and spiny fins, and a butterfly with large patterned wings, seen from the side.", "zh": "三幅铅笔画：一只蹲坐的带斑点的蛙，一条长着鳞片和带刺鳍的鱼，一只翅膀上有大块花纹的蝴蝶，都从侧面画。"}} caption={{"en": "A frog, a fish and a butterfly: an amphibian, a fish and an insect. Illustration for this topic.", "zh": "一只蛙、一条鱼、一只蝴蝶：两栖动物、鱼类、昆虫。为本主题画的示意图。"}} />
+
+好的问题，问的是每只动物身上都看得到的东西：腿、羽毛、毛发、鳍、鳞片、皮肤。先问只有一类才有的特征。六条腿、羽毛、毛发各自只属于一类，所以流程图先问它们。鳞片、鳍、翅膀会出现在好几类动物身上（鱼和爬行动物都有鳞片；鸟、蝙蝠和许多昆虫都有翅膀），所以这些问题要放在后面，或者干脆不问。
+
+人也是动物。人有毛发，用奶喂养婴儿：按这些特征，人是哺乳动物。
+
+这张流程图会把几只动物分错：海豚落到鱼类，穿山甲落到爬行动物，蟾蜍哪一类都进不去。第 5 章再来看为什么。昆虫的身体是怎样构成的，见<TopicLink slug="grasshopper" ch="whole-animal">“一只蝗虫的身体”</TopicLink>。
+
+<More title={{"en": "Most, not all", "zh": "是“大多数”，不是“全部”"}}>
+
+动物怎样生育后代，规矩里有例外，课纲也不要求记住。大多数爬行动物下蛋，新加坡的多纹南蜥却直接生出小蜥蜴。大多数鱼下蛋，雌孔雀鱼却直接生出小鱼；海草海龙的爸爸把卵放在育儿袋里，直到小鱼生出来。大多数哺乳动物是胎生的，鸭嘴兽和针鼹却下蛋。温室蛙在陆地上产卵，孵出来就是小蛙，跳过了蝌蚪阶段。
+
+</More>
+
+<More title={{"en": "Why ask about six legs first", "zh": "为什么先问六条腿"}}>
+
+如果第一个问题是“有鳞片吗”，鱼、爬行动物和穿山甲就会落在一起。“会飞吗”会把鸟、蝙蝠和昆虫混在一起；“住在水里吗”，弹涂鱼和海龟都很难答。这个问题顺序是为这个模型设计的，不是教育部的规定；只要每个问题都能清楚地答“是”或“不是”，换个顺序也行。
+
+</More>
+
+<More title={{"en": "People are animals", "zh": "人也是动物"}}>
+
+土耳其的一项研究里，许多九年级学生给动物分组时，把人单独放成一组。生物学家把人算作动物，而且是哺乳动物。
+
+</More>
+
+<More title={{"en": "Insects up close", "zh": "细看昆虫"}}>
+
+这里的蝗虫和甲虫是简化的模型。要看昆虫完整的身体，从外到里，见<TopicLink slug="grasshopper" ch="whole-animal">“一只蝗虫的身体”</TopicLink>和<TopicLink slug="mosquito" ch="the-adult">“一只蚊子与它的生活史”的成蚊一章</TopicLink>。小三“生活周期”一课点名的动物里，有蛙、甲虫、蝴蝶、蝗虫和蚊子；见<TopicLink slug="mosquito" ch="before-you-start">“一只蚊子与它的生活史”</TopicLink>。
+
+</More>
+
+</Lang>

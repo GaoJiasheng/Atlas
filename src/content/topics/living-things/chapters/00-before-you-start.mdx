@@ -1,0 +1,99 @@
+---
+id: "before-you-start"
+order: 0
+kind: background
+title: {"en": "Before you start", "zh": "开始之前"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: false
+  cutaway: "none"
+  layers: ["non-living", "plants", "fungi", "bacteria", "insects", "birds", "mammals", "fish", "amphibians", "reptiles", "other-animals", "tray"]
+  labels: ["plantain-squirrel", "ixora", "mushroom", "toy-car", "bacteria-dish"]
+  summary: {"en": "Living things are all around us. This bench holds model specimens of animals, plants, fungi and bacteria, and three things that are not alive. Each chapter sorts some of them into groups by what you can see.", "zh": "生物就在我们身边。这张桌上有动物、植物、真菌、细菌的标本模型，还有三样不是生物的东西。每一章按看得见的特征，把其中一些分成组。"}
+  note: {"en": "These are models, not real specimens, and they are not drawn to scale: in the specimen case, a dolphin and a guppy fill the same space. Where a source gives one, each specimen's details give its real size. The cells under the microscope are drawn far larger than life. How many specimens land in each group is worked out by the model from what each specimen looks like (marked SIM).", "zh": "这些是模型，不是真的标本，彼此也不按比例：在标本盒里，一只海豚和一条孔雀鱼占一样大的格子。有来源的，每件标本的详情里写了实物多大。显微镜下的细胞画得比实物大得多。每组有几件，是模型按每件标本的样子算出来的（标 SIM）。"}
+  sim:
+    set: {"tray": "all"}
+  beats:
+    - labels: ["plantain-squirrel", "ixora", "mushroom", "toy-car", "bacteria-dish"]
+      caption: {"en": "This case holds thirty-two model specimens. Most are living things; three are not.", "zh": "这个标本盒里有三十二件标本模型，大多数是生物，有三件不是。"}
+    - camera: "tray-view"
+      sim: {"set": {"tray": "big", "asked-big": 3}}
+      labels: ["pad-6a", "pad-6b", "pad-6c", "pad-6d"]
+      caption: {"en": "In front of the case is a sorting tray. Specimens move from the case into groups, one question at a time.", "zh": "标本盒前面是一只分类盘。每问一个问题，就有标本从盒里移到盘上的组里。"}
+    - camera: "tray-view"
+      sim: {"set": {"tray": "big", "asked-big": 3}}
+      labels: ["mushroom", "javan-myna", "pad-6c", "pad-6b"]
+      caption: {"en": "Classifying means grouping things by what they have in common. The flowchart lists the questions that were asked.", "zh": "分类，就是按共同的特征把东西分组。流程图列出了问过的问题。"}
+    - camera: "lens-view"
+      layers: ["magnified"]
+      labels: ["yeast-cells", "bacteria-cells", "group:magnified"]
+      caption: {"en": "Some living things are too small to see one at a time. Here yeast cells and bacteria are drawn two thousand times larger than life.", "zh": "有的生物一个一个是看不见的。这里的酵母细胞和细菌，放大了两千倍来画。"}
+  index: {"parts": ["plantain-squirrel", "ixora", "mushroom", "toy-car", "bacteria-dish", "yeast-cells", "microscope"]}
+---
+
+<Lang en>
+
+This bench holds a specimen case of thirty-two models: animals, plants, fungi, bacteria and three things that are not alive. In front of it is a sorting tray. Each chapter takes some specimens out of the case and sorts them on the tray, one yes-or-no question at a time. The Primary 3 syllabus asks you to describe what all <Term id="living-thing">living things</Term> have in common, to recognise the big groups of living things, and to sort plants and animals into groups by features you can see.
+
+To <Term id="classify">classify</Term> is to group things by what they have in common. Singapore lessons do it in three steps: look for what is the same and what is different, put similar things together, and give each group a heading. The flowchart card at the top right does the same: it shows each question, where the specimens went and how many landed in each group.
+
+From chapter 1 on, each chapter has a Try it card. It names what you change, what you keep the same and what you observe. Make a prediction first, then change the question and watch the specimens move. Counts marked SIM come from this model: they depend on which features each model shows.
+
+In the back corner, a plinth beside a microscope holds yeast cells and bacteria, drawn far larger than life. You meet them again in chapter 2.
+
+<More title={{"en": "About these models", "zh": "关于这些模型"}}>
+
+Each specimen is drawn to fit one compartment of the case, about <Num s="S59">7 cm</Num> across, so a dolphin is drawn the same size as a guppy. Each specimen's details give its real size where a source gives one; the common house gecko, for example, is about <Num s="S12">13 cm</Num> long. The yeast cells and bacteria on the plinth are drawn <Num s="S59">2,000 times</Num> life size, all at the same scale, and kept apart from the specimens.
+
+</More>
+
+<More title={{"en": "Names you do not need to learn", "zh": "不必背的名字"}}>
+
+Each specimen's details give its full name, such as the plantain squirrel, so that you know exactly what the model shows. The syllabus says that you do not need to recall the names of particular living things, such as the guppy, or facts about them, such as giving birth to live young (syllabus, page 38). What matters is what you can see and how you use it to group living things.
+
+</More>
+
+<More title={{"en": "Look, don't catch", "zh": "看一看，不要捉"}}>
+
+The syllabus asks you to care for living things. When you look for animals and plants outside, watch them, draw them or take photographs, and leave them where they are. If you turn over a stone or a log to look underneath, put it back the way it was.
+
+Insects and flowering plants have their own topics in this atlas: <TopicLink slug="grasshopper" ch="whole-animal">Inside a Grasshopper</TopicLink> and <TopicLink slug="plant" ch="the-whole-plant">A Plant</TopicLink>.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+这张桌上有一只标本盒，里面有三十二件模型：动物、植物、真菌、细菌，还有三样不是生物的东西。标本盒前面是一只分类盘。每一章从盒里拿出一些标本，在盘上一次问一个“是 / 不是”的问题，把它们分成组。小三课纲要求你说出所有<Term id="living-thing">生物</Term>的共同之处，认出生物的几个大类，并按看得见的特征给植物和动物分组。
+
+<Term id="classify">分类</Term>，就是按共同的特征把东西分组。新加坡的课堂分三步：找出相同和不同的地方，把相似的放在一起，再给每一组起一个标题。右上角的流程图卡也是这样：它列出每个问题、标本去了哪里、每组有几件。
+
+从第 1 章起，每章都有一张“试一试”卡片，写明改变什么、保持什么不变、观察什么。先猜一猜，再换一个问题，看标本怎样移动。标 SIM 的件数是这个模型算出来的：它取决于每件模型画出了哪些特征。
+
+桌子后面的角落里，显微镜旁边有一块台座，上面是画得比实物大得多的酵母细胞和细菌。第 2 章会再看到它们。
+
+<More title={{"en": "About these models", "zh": "关于这些模型"}}>
+
+每件标本都按标本盒里一格的大小来画，宽约 <Num s="S59">7 cm</Num>，所以海豚和孔雀鱼画得一样大。有来源的，每件标本的详情里写了实物多大；比如疣尾蜥虎，长约 <Num s="S12">13 cm</Num>。台座上的酵母细胞和细菌放大了 <Num s="S59">2,000 倍</Num>，全部按同一个比例画，和标本分开放。
+
+</More>
+
+<More title={{"en": "Names you do not need to learn", "zh": "不必背的名字"}}>
+
+每件标本的详情里都写了全名，比如大蕉松鼠，让你确切知道模型画的是什么。课纲说，不要求记住具体生物的名字（比如孔雀鱼），也不要求记住它们的特征（比如胎生）（课纲第 38 页）。要紧的是看得见什么，以及怎样用看得见的特征给生物分组。
+
+</More>
+
+<More title={{"en": "Look, don't catch", "zh": "看一看，不要捉"}}>
+
+课纲要求我们爱护生物。到户外找动物和植物时，看一看、画下来、拍张照，然后让它们留在原处。翻开石头或木头看下面，看完要照原样放回去。
+
+昆虫和开花植物在这本图册里各有自己的主题：<TopicLink slug="grasshopper" ch="whole-animal">“一只蝗虫的身体”</TopicLink>和<TopicLink slug="plant" ch="the-whole-plant">“一株植物”</TopicLink>。
+
+</More>
+
+</Lang>

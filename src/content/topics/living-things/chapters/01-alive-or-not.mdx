@@ -1,0 +1,130 @@
+---
+id: "alive-or-not"
+order: 1
+title: {"en": "Living and non-living", "zh": "生物与非生物"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: false
+  cutaway: "none"
+  layers: ["non-living", "plants", "fungi", "bacteria", "insects", "birds", "mammals", "fish", "amphibians", "reptiles", "other-animals", "tray"]
+  labels: ["toy-car", "pebble", "plastic-flower", "chilli-seedling", "plantain-squirrel"]
+  camera: {"position": [0.4, 1.1, 1.5], "target": [0.0, 0.0, 0.02], "fov": 30}
+  summary: {"en": "Living things need water, food and air, and they grow, respond to changes and reproduce. A toy car can move and even respond, but it cannot grow or reproduce, so it is not alive.", "zh": "生物需要水、食物和空气，会生长、会对变化作出反应、会繁殖。玩具车会动，甚至会“反应”，但它不会生长、不会繁殖，所以不是生物。"}
+  sim:
+    set: {"tray": "alive", "q-alive": "none"}
+    try:
+      vary: "q-alive"
+      keep: [{"en": "The same seven things", "zh": "同样的 7 样东西"}]
+      observe: ["count-a", "count-b", "where-toy-car"]
+      record: true
+      predict:
+        prompt: {"en": "Sort by “responds to changes” instead of “grows”. Where will the toy car go?", "zh": "不按“会生长”，改按“对变化有反应”来分，玩具车会去哪一组？"}
+        start: {"q-alive": "grows"}
+        change: {"q-alive": "responds"}
+        observe: "where-toy-car"
+        options:
+          - {"id": "stays", "label": {"en": "It stays in group B, with the pebble", "zh": "留在 B 组，和石头一起"}, "means": "b"}
+          - {"id": "moves", "label": {"en": "It moves to group A, with the living things", "zh": "去 A 组，和生物在一起"}, "means": "a"}
+  beats:
+    - labels: ["toy-car", "pebble", "plastic-flower", "chilli-seedling", "plantain-squirrel"]
+      caption: {"en": "Seven things from the case. Four are living things: a squirrel, a grasshopper, a guppy and a young chilli plant.", "zh": "盒里拿出七样东西。其中四样是生物：一只松鼠、一只蝗虫、一条孔雀鱼、一株辣椒幼苗。"}
+    - sim: {"set": {"tray": "alive", "q-alive": "moves"}}
+      labels: ["toy-car", "chilli-seedling", "pad-2a"]
+      caption: {"en": "Sorted by “moves about by itself”, the toy car joins the animals and the chilli plant stays with the pebble. Moving is not one of the signs of life.", "zh": "按“能自己走动”来分，玩具车和动物分到一组，辣椒苗却和石头在一起。会动并不是生物的特征。"}
+    - sim: {"set": {"tray": "alive", "q-alive": "responds"}}
+      labels: ["toy-car", "chilli-seedling", "pad-2a"]
+      caption: {"en": "Living things respond to changes around them. A toy car can respond too, so this question alone cannot tell them apart.", "zh": "生物会对周围的变化作出反应。玩具车也会有反应，所以只问这一条还分不出来。"}
+    - sim: {"set": {"tray": "alive", "q-alive": "grows"}}
+      labels: ["toy-car", "plastic-flower", "pad-2b"]
+      caption: {"en": "Living things grow. The toy car, the pebble and the plastic flower never do.", "zh": "生物会生长。玩具车、石头和塑料花都不会长大。"}
+    - sim: {"set": {"tray": "alive", "q-alive": "reproduces"}}
+      labels: ["plantain-squirrel", "chilli-seedling", "toy-car"]
+      caption: {"en": "Living things reproduce. A squirrel has young, and a chilli plant makes seeds. A toy car cannot make more toy cars.", "zh": "生物会繁殖：松鼠会生小松鼠，辣椒会结种子。玩具车变不出更多的玩具车。"}
+    - sim: {"set": {"tray": "alive", "q-alive": "needs"}}
+      labels: ["chilli-seedling", "plantain-squirrel", "pad-2a"]
+      caption: {"en": "Living things need water, food and air to survive. A plant needs food too; it makes its own.", "zh": "生物要有水、食物和空气才能活下去。植物也要食物，只是它自己制造。"}
+  index: {"parts": ["toy-car", "pebble", "plastic-flower", "chilli-seedling", "grasshopper", "plantain-squirrel", "guppy", "pad-2a", "pad-2b"]}
+---
+
+<Lang en>
+
+Seven things from the case wait beside the tray: a toy car, a pebble, a plastic flower, a young chilli plant, a grasshopper, a squirrel and a guppy. Four of them are living things. The syllabus lists what every living thing has in common: it needs water, food and air to survive, and it grows, responds and reproduces. These are the <Term id="characteristic">characteristics</Term> of living things.
+
+A plant needs food too. It makes its own food, while animals have to take in theirs.
+
+Moving about is not on the list. The chilli plant never walks anywhere, but it is alive. The toy car moves, but it is a <Term id="non-living-thing">non-living thing</Term>. Sort the seven things by “moves about by itself” and the toy car lands with the animals while the chilli plant stays with the pebble.
+
+Living things respond to changes around them: a plant on a sunny window sill grows towards the sun. But some toy cars respond to changes too, so “responds” alone cannot tell living from non-living.
+
+Growing and reproducing do tell them apart. A plantain squirrel usually has <Num s="S14">two or three</Num> young at a time, and a chilli plant’s flowers become chillies full of seeds (<TopicLink slug="plant" ch="fruits-and-seeds">A Plant: fruits and seeds</TopicLink>). The toy car, the pebble and the plastic flower never grow and cannot make more of themselves.
+
+In the Try it card, change the question and watch where the toy car goes.
+
+<More title={{"en": "Moving is not on the list", "zh": "单子上没有“会动”"}}>
+
+An activity plan for schools in Wales lists seven life processes, remembered as MRS GREN: movement, respiration, sensitivity, growth, reproduction, excretion and nutrition. The Singapore list is shorter and does not include moving. In a study of <Num s="S66">191</Num> ninth-grade students in Turkey, the idea most often linked with life was motion, and none of the first living things the students named was a plant. Studies of young children and adults find the same pull: moving things seem alive, and plants are forgotten.
+
+</More>
+
+<More title={{"en": "Is a flame alive?", "zh": "火焰是活的吗？"}}>
+
+England’s science curriculum suggests this question, and another: is a tree that has lost its leaves dead in winter? Try the list on them. Does a flame need water and food? Does it grow? Does it respond? Can it reproduce? Working through each characteristic is more useful than a quick yes or no.
+
+</More>
+
+<More title={{"en": "Once alive", "zh": "曾经活过的东西"}}>
+
+England also asks pupils to compare things that are living, things that are dead and things that have never been alive. A wooden spoon and a dry leaf were once part of living things; the pebble never was. The Singapore syllabus sorts things into living and non-living only.
+
+</More>
+
+<More title={{"en": "Plants respond too", "zh": "植物也会反应"}}>
+
+Responding is not only running and jumping. The rain tree, brought to Singapore from the Americas, folds its small leaflets tightly together just before it rains and in the late afternoon. That is a plant responding to changes around it.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+分类盘旁边放着从盒里拿出来的七样东西：一辆玩具车、一块石头、一朵塑料花、一株辣椒幼苗、一只蝗虫、一只松鼠、一条孔雀鱼。其中四样是生物。课纲列出了所有生物的共同之处：需要水、食物和空气才能活下去，会生长、会反应、会繁殖。这些就是生物的<Term id="characteristic">特征</Term>。
+
+植物也需要食物。它自己制造食物，动物却要把食物吃进去。
+
+“会动”不在这张单子上。辣椒苗哪儿也不去，却是生物；玩具车会动，却是<Term id="non-living-thing">非生物</Term>。按“能自己走动”给这七样东西分组，玩具车会和动物分到一起，辣椒苗却留在石头旁边。
+
+生物会对周围的变化作出反应：放在向阳窗台上的植物，会朝着太阳生长。可是有的玩具车也会对变化作出反应，所以只看“有没有反应”，分不出生物和非生物。
+
+生长和繁殖才分得开。大蕉松鼠一胎通常生 <Num s="S14">两三</Num> 只；辣椒开的花会变成装满种子的辣椒（见<TopicLink slug="plant" ch="fruits-and-seeds">“一株植物”的果实与种子一章</TopicLink>）。玩具车、石头和塑料花永远不会长大，也变不出新的自己。
+
+在“试一试”卡片里换一个问题，看看玩具车去了哪里。
+
+<More title={{"en": "Moving is not on the list", "zh": "单子上没有“会动”"}}>
+
+威尔士学校用的一份活动计划列出七种生命过程，用 MRS GREN 来记：运动、呼吸、感应、生长、繁殖、排泄、营养。新加坡的单子短一些，里面没有“会动”。土耳其一项以 <Num s="S66">191</Num> 名九年级学生为对象的研究发现，学生最常把“生命”和“运动”联系在一起；学生最先说出的生物里，一种植物也没有。对幼儿和成年人的研究也发现同样的倾向：会动的东西好像是活的，植物却容易被忘记。
+
+</More>
+
+<More title={{"en": "Is a flame alive?", "zh": "火焰是活的吗？"}}>
+
+英格兰的科学课程建议讨论这个问题，还有另一个：叶子掉光的树，冬天是死的吗？拿这张单子一条一条核一核：火焰需要水和食物吗？会生长吗？会反应吗？会繁殖吗？一条条地想，比马上回答“是”或“不是”更有用。
+
+</More>
+
+<More title={{"en": "Once alive", "zh": "曾经活过的东西"}}>
+
+英格兰还让学生比较三类东西：活着的、死了的、从来没有活过的。木汤匙、干树叶曾经是生物的一部分；石头却从来没有活过。新加坡的课纲只分生物和非生物两类。
+
+</More>
+
+<More title={{"en": "Plants respond too", "zh": "植物也会反应"}}>
+
+反应不只是跑和跳。雨树原产美洲，后来引进新加坡。快下雨的时候和傍晚，它的小叶会紧紧合起来。这就是植物对周围变化作出的反应。
+
+</More>
+
+</Lang>
