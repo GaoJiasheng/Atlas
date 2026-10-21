@@ -1,0 +1,1118 @@
+{
+  "datasets": {
+    "G1": {
+      "ref": "G1",
+      "title": "Cliopatria v0.2.1 (Seshat Global History Databank), extract of the records used by this topic",
+      "url": "https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1",
+      "file": "cliopatria-subset.geojson",
+      "page": "https://zenodo.org/records/13363121",
+      "author": "Seshat Global History Databank (data paper doi:10.1038/s41597-025-04516-9)",
+      "license": "CC BY 4.0",
+      "role": "dated polity polygons for every control keyframe (written by inventory.ts from the release file; geometry unchanged)"
+    },
+    "C-K1": {
+      "ref": "G1",
+      "title": "Cliopatria v0.2.1: the raw records of K1 (check view only)",
+      "url": "https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1",
+      "file": "check-K1.geojson",
+      "page": "https://zenodo.org/records/13363121",
+      "author": "Seshat Global History Databank (data paper doi:10.1038/s41597-025-04516-9)",
+      "license": "CC BY 4.0",
+      "role": "check.ts comparison: the records of this frame as published, before coast clipping and simplification"
+    },
+    "C-K2": {
+      "ref": "G1",
+      "title": "Cliopatria v0.2.1: the raw records of K2 (check view only)",
+      "url": "https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1",
+      "file": "check-K2.geojson",
+      "page": "https://zenodo.org/records/13363121",
+      "author": "Seshat Global History Databank (data paper doi:10.1038/s41597-025-04516-9)",
+      "license": "CC BY 4.0",
+      "role": "check.ts comparison: the records of this frame as published, before coast clipping and simplification"
+    },
+    "C-K3": {
+      "ref": "G1",
+      "title": "Cliopatria v0.2.1: the raw records of K3 (check view only)",
+      "url": "https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1",
+      "file": "check-K3.geojson",
+      "page": "https://zenodo.org/records/13363121",
+      "author": "Seshat Global History Databank (data paper doi:10.1038/s41597-025-04516-9)",
+      "license": "CC BY 4.0",
+      "role": "check.ts comparison: the records of this frame as published, before coast clipping and simplification"
+    },
+    "C-K4": {
+      "ref": "G1",
+      "title": "Cliopatria v0.2.1: the raw records of K4 (check view only)",
+      "url": "https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1",
+      "file": "check-K4.geojson",
+      "page": "https://zenodo.org/records/13363121",
+      "author": "Seshat Global History Databank (data paper doi:10.1038/s41597-025-04516-9)",
+      "license": "CC BY 4.0",
+      "role": "check.ts comparison: the records of this frame as published, before coast clipping and simplification"
+    },
+    "C-K5": {
+      "ref": "G1",
+      "title": "Cliopatria v0.2.1: the raw records of K5 (check view only)",
+      "url": "https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1",
+      "file": "check-K5.geojson",
+      "page": "https://zenodo.org/records/13363121",
+      "author": "Seshat Global History Databank (data paper doi:10.1038/s41597-025-04516-9)",
+      "license": "CC BY 4.0",
+      "role": "check.ts comparison: the records of this frame as published, before coast clipping and simplification"
+    },
+    "C-K6": {
+      "ref": "G1",
+      "title": "Cliopatria v0.2.1: the raw records of K6 (check view only)",
+      "url": "https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1",
+      "file": "check-K6.geojson",
+      "page": "https://zenodo.org/records/13363121",
+      "author": "Seshat Global History Databank (data paper doi:10.1038/s41597-025-04516-9)",
+      "license": "CC BY 4.0",
+      "role": "check.ts comparison: the records of this frame as published, before coast clipping and simplification"
+    },
+    "C-K7": {
+      "ref": "G1",
+      "title": "Cliopatria v0.2.1: the raw records of K7 (check view only)",
+      "url": "https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1",
+      "file": "check-K7.geojson",
+      "page": "https://zenodo.org/records/13363121",
+      "author": "Seshat Global History Databank (data paper doi:10.1038/s41597-025-04516-9)",
+      "license": "CC BY 4.0",
+      "role": "check.ts comparison: the records of this frame as published, before coast clipping and simplification"
+    },
+    "C-K8": {
+      "ref": "G1",
+      "title": "Cliopatria v0.2.1: the raw records of K8 (check view only)",
+      "url": "https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1",
+      "file": "check-K8.geojson",
+      "page": "https://zenodo.org/records/13363121",
+      "author": "Seshat Global History Databank (data paper doi:10.1038/s41597-025-04516-9)",
+      "license": "CC BY 4.0",
+      "role": "check.ts comparison: the records of this frame as published, before coast clipping and simplification"
+    },
+    "C-K9": {
+      "ref": "G1",
+      "title": "Cliopatria v0.2.1: the raw records of K9 (check view only)",
+      "url": "https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1",
+      "file": "check-K9.geojson",
+      "page": "https://zenodo.org/records/13363121",
+      "author": "Seshat Global History Databank (data paper doi:10.1038/s41597-025-04516-9)",
+      "license": "CC BY 4.0",
+      "role": "check.ts comparison: the records of this frame as published, before coast clipping and simplification"
+    },
+    "C-K10": {
+      "ref": "G1",
+      "title": "Cliopatria v0.2.1: the raw records of K10 (check view only)",
+      "url": "https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1",
+      "file": "check-K10.geojson",
+      "page": "https://zenodo.org/records/13363121",
+      "author": "Seshat Global History Databank (data paper doi:10.1038/s41597-025-04516-9)",
+      "license": "CC BY 4.0",
+      "role": "check.ts comparison: the records of this frame as published, before coast clipping and simplification"
+    },
+    "C-K11": {
+      "ref": "G1",
+      "title": "Cliopatria v0.2.1: the raw records of K11 (check view only)",
+      "url": "https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1",
+      "file": "check-K11.geojson",
+      "page": "https://zenodo.org/records/13363121",
+      "author": "Seshat Global History Databank (data paper doi:10.1038/s41597-025-04516-9)",
+      "license": "CC BY 4.0",
+      "role": "check.ts comparison: the records of this frame as published, before coast clipping and simplification"
+    },
+    "C-K12": {
+      "ref": "G1",
+      "title": "Cliopatria v0.2.1: the raw records of K12 (check view only)",
+      "url": "https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1",
+      "file": "check-K12.geojson",
+      "page": "https://zenodo.org/records/13363121",
+      "author": "Seshat Global History Databank (data paper doi:10.1038/s41597-025-04516-9)",
+      "license": "CC BY 4.0",
+      "role": "check.ts comparison: the records of this frame as published, before coast clipping and simplification"
+    },
+    "C-K13": {
+      "ref": "G1",
+      "title": "Cliopatria v0.2.1: the raw records of K13 (check view only)",
+      "url": "https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1",
+      "file": "check-K13.geojson",
+      "page": "https://zenodo.org/records/13363121",
+      "author": "Seshat Global History Databank (data paper doi:10.1038/s41597-025-04516-9)",
+      "license": "CC BY 4.0",
+      "role": "check.ts comparison: the records of this frame as published, before coast clipping and simplification"
+    },
+    "C-K14": {
+      "ref": "G1",
+      "title": "Cliopatria v0.2.1: the raw records of K14 (check view only)",
+      "url": "https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1",
+      "file": "check-K14.geojson",
+      "page": "https://zenodo.org/records/13363121",
+      "author": "Seshat Global History Databank (data paper doi:10.1038/s41597-025-04516-9)",
+      "license": "CC BY 4.0",
+      "role": "check.ts comparison: the records of this frame as published, before coast clipping and simplification"
+    },
+    "C-K15": {
+      "ref": "G1",
+      "title": "Cliopatria v0.2.1: the raw records of K15 (check view only)",
+      "url": "https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1",
+      "file": "check-K15.geojson",
+      "page": "https://zenodo.org/records/13363121",
+      "author": "Seshat Global History Databank (data paper doi:10.1038/s41597-025-04516-9)",
+      "license": "CC BY 4.0",
+      "role": "check.ts comparison: the records of this frame as published, before coast clipping and simplification"
+    }
+  },
+  "keyframes": [
+    {
+      "id": "K1",
+      "t": "-3200",
+      "method": "Cliopatria v0.2.1 records valid in 3200 BCE, unchanged; coast of the plate (Natural Earth 1:10m)",
+      "steps": [
+        {
+          "holder": "sumer",
+          "label": {
+            "en": "Sumerian city-states",
+            "zh": "苏美尔城邦"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Sumerian City-States -3200–-3001",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K1",
+              "holder": "sumer"
+            }
+          }
+        }
+      ],
+      "checks": [
+        {
+          "name": "all records of the frame",
+          "center": [
+            45.7,
+            31.8
+          ],
+          "zoom": 6,
+          "source": "C-K1"
+        }
+      ]
+    },
+    {
+      "id": "K2",
+      "t": "-3000",
+      "method": "Cliopatria v0.2.1 records valid in 3000 BCE, unchanged; coast of the plate (Natural Earth 1:10m)",
+      "steps": [
+        {
+          "holder": "sumer",
+          "label": {
+            "en": "Sumerian city-states",
+            "zh": "苏美尔城邦"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Sumerian City-States -3000–-2701",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K2",
+              "holder": "sumer"
+            }
+          }
+        },
+        {
+          "holder": "egypt",
+          "label": {
+            "en": "Egypt (Early Dynastic)",
+            "zh": "埃及（早王朝）"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Early Dynastic Period of Egypt -3000–-2701",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K2",
+              "holder": "egypt"
+            }
+          }
+        }
+      ],
+      "checks": [
+        {
+          "name": "all records of the frame",
+          "center": [
+            38.4,
+            28.7
+          ],
+          "zoom": 5.2,
+          "source": "C-K2"
+        }
+      ]
+    },
+    {
+      "id": "K3",
+      "t": "-2600",
+      "method": "Cliopatria v0.2.1 records valid in 2600 BCE, unchanged; coast of the plate (Natural Earth 1:10m)",
+      "steps": [
+        {
+          "holder": "sumer",
+          "label": {
+            "en": "Sumerian city-states",
+            "zh": "苏美尔城邦"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Sumerian City-States -2700–-2501",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K3",
+              "holder": "sumer"
+            }
+          }
+        },
+        {
+          "holder": "egypt",
+          "label": {
+            "en": "Egypt (Cliopatria record: Early Dynastic, to 2501 BCE)",
+            "zh": "埃及（Cliopatria 记录：早王朝，至前2501年）"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Early Dynastic Period of Egypt -2700–-2501",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K3",
+              "holder": "egypt"
+            }
+          }
+        }
+      ],
+      "checks": [
+        {
+          "name": "all records of the frame",
+          "center": [
+            39.2,
+            28.7
+          ],
+          "zoom": 5.1,
+          "source": "C-K3"
+        }
+      ]
+    },
+    {
+      "id": "K4",
+      "t": "-2300",
+      "method": "Cliopatria v0.2.1 records valid in 2300 BCE, unchanged; coast of the plate (Natural Earth 1:10m)",
+      "steps": [
+        {
+          "holder": "egypt",
+          "label": {
+            "en": "Egypt (Old Kingdom)",
+            "zh": "埃及（古王国）"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Old Kingdom of Egypt -2300–-2251",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K4",
+              "holder": "egypt"
+            }
+          }
+        },
+        {
+          "holder": "akkad",
+          "label": {
+            "en": "Akkadian Empire",
+            "zh": "阿卡德帝国"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Akkadian Empire -2300–-2251",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K4",
+              "holder": "akkad"
+            }
+          }
+        }
+      ],
+      "checks": [
+        {
+          "name": "all records of the frame",
+          "center": [
+            39.3,
+            30.9
+          ],
+          "zoom": 4.9,
+          "source": "C-K4"
+        }
+      ]
+    },
+    {
+      "id": "K5",
+      "t": "-2100",
+      "method": "Cliopatria v0.2.1 records valid in 2100 BCE, unchanged; coast of the plate (Natural Earth 1:10m)",
+      "steps": [
+        {
+          "holder": "sumer",
+          "label": {
+            "en": "Sumerian cities (Third Dynasty of Ur)",
+            "zh": "苏美尔城邦（乌尔第三王朝时期）"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Sumerian City-States -2100–-2001",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K5",
+              "holder": "sumer"
+            }
+          }
+        },
+        {
+          "holder": "egypt",
+          "label": {
+            "en": "Upper Egypt (First Intermediate Period)",
+            "zh": "上埃及（第一中间期）"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Upper Egypt -2100–-2001; Cliopatria v0.2.1: Lower Egypt -2100–-2001",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K5",
+              "holder": "egypt"
+            }
+          }
+        },
+        {
+          "holder": "egypt",
+          "label": {
+            "en": "Lower Egypt (First Intermediate Period)",
+            "zh": "下埃及（第一中间期）"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Upper Egypt -2100–-2001; Cliopatria v0.2.1: Lower Egypt -2100–-2001",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K5",
+              "holder": "egypt"
+            }
+          }
+        }
+      ],
+      "checks": [
+        {
+          "name": "all records of the frame",
+          "center": [
+            38.8,
+            27.8
+          ],
+          "zoom": 5.2,
+          "source": "C-K5"
+        }
+      ]
+    },
+    {
+      "id": "K6",
+      "t": "-1250",
+      "method": "Cliopatria v0.2.1 records valid in 1250 BCE, unchanged; coast of the plate (Natural Earth 1:10m)",
+      "steps": [
+        {
+          "holder": "egypt",
+          "label": {
+            "en": "Egypt (New Kingdom)",
+            "zh": "埃及（新王国）"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: New Kingdom of Egypt -1300–-1241",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K6",
+              "holder": "egypt"
+            }
+          }
+        },
+        {
+          "holder": "shang",
+          "label": {
+            "en": "Shang",
+            "zh": "商"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Shang Dynasty -1600–-1241",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K6",
+              "holder": "shang"
+            }
+          }
+        }
+      ],
+      "checks": [
+        {
+          "name": "all records of the frame",
+          "center": [
+            73.1,
+            28.5
+          ],
+          "zoom": 2.9,
+          "source": "C-K6"
+        }
+      ]
+    },
+    {
+      "id": "K7",
+      "t": "-0508",
+      "method": "Cliopatria v0.2.1 records valid in 508 BCE, unchanged; coast of the plate (Natural Earth 1:10m)",
+      "steps": [
+        {
+          "holder": "achaemenid",
+          "label": {
+            "en": "Persian Empire (Achaemenid)",
+            "zh": "波斯帝国（阿契美尼德）"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Achaemenid Empire -530–-501",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K7",
+              "holder": "achaemenid"
+            }
+          }
+        },
+        {
+          "holder": "rome",
+          "label": {
+            "en": "Rome (Cliopatria record: Roman Kingdom, to 501 BCE)",
+            "zh": "罗马（Cliopatria 记录：王政时期，至前501年）"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Roman Kingdom -700–-501",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K7",
+              "holder": "rome"
+            }
+          }
+        },
+        {
+          "holder": "maurya",
+          "label": {
+            "en": "Magadha",
+            "zh": "摩揭陀"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Janapada of Magadha -530–-501",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K7",
+              "holder": "maurya"
+            }
+          }
+        },
+        {
+          "holder": "zhou-states",
+          "label": {
+            "en": "Zhou-era states",
+            "zh": "周代诸侯国"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Qin -750–-451; Cliopatria v0.2.1: Song -750–-481; Cliopatria v0.2.1: Teng -750–-481; Cliopatria v0.2.1: Chen -750–-481; Cliopatria v0.2.1: Cao -750–-481; Cliopatria v0.2.1: Lu -750–-481; Cliopatria v0.2.1: Zheng -750–-451; Cliopatria v0.2.1: Cai -750–-481; Cliopatria v0.2.1: Zhu -750–-451; Cliopatria v0.2.1: Yan -750–-405; Cliopatria v0.2.1: Later Zhou -750–-451; Cliopatria v0.2.1: Xu -750–-451; Cliopatria v0.2.1: Chu -700–-481; Cliopatria v0.2.1: Wu -550–-481; Cliopatria v0.2.1: Wey -550–-451; Cliopatria v0.2.1: Qi -550–-481; Cliopatria v0.2.1: Jin -550–-451",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K7",
+              "holder": "zhou-states"
+            }
+          }
+        }
+      ],
+      "checks": [
+        {
+          "name": "all records of the frame",
+          "center": [
+            67.3,
+            34.4
+          ],
+          "zoom": 2.6,
+          "source": "C-K7"
+        }
+      ]
+    },
+    {
+      "id": "K8",
+      "t": "-0323",
+      "method": "Cliopatria v0.2.1 records valid in 323 BCE, unchanged; coast of the plate (Natural Earth 1:10m)",
+      "steps": [
+        {
+          "holder": "macedon",
+          "label": {
+            "en": "Alexander's empire",
+            "zh": "亚历山大帝国"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Laomedon -323–-319; Cliopatria v0.2.1: Perdiccas -323–-319; Cliopatria v0.2.1: Macedonian Empire -323–-319",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K8",
+              "holder": "macedon"
+            }
+          }
+        },
+        {
+          "holder": "rome",
+          "label": {
+            "en": "Roman Republic",
+            "zh": "罗马共和国"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Roman Republic -323–-319",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K8",
+              "holder": "rome"
+            }
+          }
+        },
+        {
+          "holder": "maurya",
+          "label": {
+            "en": "Magadha (Nanda kings)",
+            "zh": "摩揭陀（难陀王朝）"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Nanda Empire -323–-319",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K8",
+              "holder": "maurya"
+            }
+          }
+        },
+        {
+          "holder": "zhou-states",
+          "label": {
+            "en": "Zhou-era states",
+            "zh": "周代诸侯国"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Xu -404–-292; Cliopatria v0.2.1: Yan -404–-292; Cliopatria v0.2.1: Lu -404–-285; Cliopatria v0.2.1: Zhongshan -366–-302; Cliopatria v0.2.1: Later Zhou -350–-257; Cliopatria v0.2.1: Wey -350–-285; Cliopatria v0.2.1: Song -350–-292; Cliopatria v0.2.1: Qi -350–-292; Cliopatria v0.2.1: Han -337–-257; Cliopatria v0.2.1: Zhao -337–-257; Cliopatria v0.2.1: Chu -333–-316; Cliopatria v0.2.1: Qin -326–-316; Cliopatria v0.2.1: Wei -326–-292",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K8",
+              "holder": "zhou-states"
+            }
+          }
+        }
+      ],
+      "checks": [
+        {
+          "name": "all records of the frame",
+          "center": [
+            67.3,
+            31.4
+          ],
+          "zoom": 2.6,
+          "source": "C-K8"
+        }
+      ]
+    },
+    {
+      "id": "K9",
+      "t": "-0260",
+      "method": "Cliopatria v0.2.1 records valid in 260 BCE, unchanged; coast of the plate (Natural Earth 1:10m)",
+      "steps": [
+        {
+          "holder": "egypt",
+          "label": {
+            "en": "Egypt (Ptolemaic kingdom)",
+            "zh": "埃及（托勒密王朝）"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Ptolemaic Kingdom -264–-257",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K9",
+              "holder": "egypt"
+            }
+          }
+        },
+        {
+          "holder": "rome",
+          "label": {
+            "en": "Roman Republic",
+            "zh": "罗马共和国"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Roman Republic -264–-257",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K9",
+              "holder": "rome"
+            }
+          }
+        },
+        {
+          "holder": "maurya",
+          "label": {
+            "en": "Maurya Empire",
+            "zh": "孔雀王朝"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Maurya Empire -291–-257",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K9",
+              "holder": "maurya"
+            }
+          }
+        },
+        {
+          "holder": "zhou-states",
+          "label": {
+            "en": "Zhou-era states",
+            "zh": "周代诸侯国"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Later Zhou -350–-257; Cliopatria v0.2.1: Han -337–-257; Cliopatria v0.2.1: Zhao -337–-257; Cliopatria v0.2.1: Wei -291–-226; Cliopatria v0.2.1: Yan -291–-223; Cliopatria v0.2.1: Lu -284–-257; Cliopatria v0.2.1: Wey -284–-257; Cliopatria v0.2.1: Qi -284–-248; Cliopatria v0.2.1: Chu -277–-248; Cliopatria v0.2.1: Qin -277–-231",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K9",
+              "holder": "zhou-states"
+            }
+          }
+        }
+      ],
+      "checks": [
+        {
+          "name": "all records of the frame",
+          "center": [
+            67.5,
+            27.3
+          ],
+          "zoom": 2.6,
+          "source": "C-K9"
+        }
+      ]
+    },
+    {
+      "id": "K10",
+      "t": "-0221",
+      "method": "Cliopatria v0.2.1 records valid in 221 BCE, unchanged; coast of the plate (Natural Earth 1:10m)",
+      "steps": [
+        {
+          "holder": "egypt",
+          "label": {
+            "en": "Egypt (Ptolemaic kingdom)",
+            "zh": "埃及（托勒密王朝）"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Ptolemaic Kingdom -239–-219",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K10",
+              "holder": "egypt"
+            }
+          }
+        },
+        {
+          "holder": "rome",
+          "label": {
+            "en": "Roman Republic",
+            "zh": "罗马共和国"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Roman Republic -222–-219",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K10",
+              "holder": "rome"
+            }
+          }
+        },
+        {
+          "holder": "maurya",
+          "label": {
+            "en": "Maurya Empire",
+            "zh": "孔雀王朝"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Maurya Empire -225–-189",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K10",
+              "holder": "maurya"
+            }
+          }
+        },
+        {
+          "holder": "qin",
+          "label": {
+            "en": "Qin",
+            "zh": "秦"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Qin -222–-219",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K10",
+              "holder": "qin"
+            }
+          }
+        }
+      ],
+      "checks": [
+        {
+          "name": "all records of the frame",
+          "center": [
+            66.5,
+            32.7
+          ],
+          "zoom": 2.5,
+          "source": "C-K10"
+        }
+      ]
+    },
+    {
+      "id": "K11",
+      "t": "-0027",
+      "method": "Cliopatria v0.2.1 records valid in 27 BCE, unchanged; coast of the plate (Natural Earth 1:10m)",
+      "steps": [
+        {
+          "holder": "rome",
+          "label": {
+            "en": "Roman Empire (with Egypt)",
+            "zh": "罗马帝国（含埃及）"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Roman Empire -27–-26",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K11",
+              "holder": "rome"
+            }
+          }
+        },
+        {
+          "holder": "han",
+          "label": {
+            "en": "Han",
+            "zh": "汉"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Han Dynasty -36–5",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K11",
+              "holder": "han"
+            }
+          }
+        }
+      ],
+      "checks": [
+        {
+          "name": "all records of the frame",
+          "center": [
+            58.8,
+            34.5
+          ],
+          "zoom": 2.3,
+          "source": "C-K11"
+        }
+      ]
+    },
+    {
+      "id": "K12",
+      "t": "0117",
+      "method": "Cliopatria v0.2.1 records valid in 117 CE, unchanged; coast of the plate (Natural Earth 1:10m)",
+      "steps": [
+        {
+          "holder": "rome",
+          "label": {
+            "en": "Roman Empire",
+            "zh": "罗马帝国"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Roman Empire 117–126",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K12",
+              "holder": "rome"
+            }
+          }
+        },
+        {
+          "holder": "han",
+          "label": {
+            "en": "Han",
+            "zh": "汉"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Han Dynasty 117–153",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K12",
+              "holder": "han"
+            }
+          }
+        }
+      ],
+      "checks": [
+        {
+          "name": "all records of the frame",
+          "center": [
+            58.7,
+            36.1
+          ],
+          "zoom": 2.3,
+          "source": "C-K12"
+        }
+      ]
+    },
+    {
+      "id": "K13",
+      "t": "0220",
+      "method": "Cliopatria v0.2.1 records valid in 220 CE, unchanged; coast of the plate (Natural Earth 1:10m)",
+      "steps": [
+        {
+          "holder": "rome",
+          "label": {
+            "en": "Roman Empire",
+            "zh": "罗马帝国"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Roman Empire 215–237",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K13",
+              "holder": "rome"
+            }
+          }
+        }
+      ],
+      "checks": [
+        {
+          "name": "all records of the frame",
+          "center": [
+            16.2,
+            39.4
+          ],
+          "zoom": 3.7,
+          "source": "C-K13"
+        }
+      ]
+    },
+    {
+      "id": "K14",
+      "t": "0400",
+      "method": "Cliopatria v0.2.1 records valid in 400 CE, unchanged; coast of the plate (Natural Earth 1:10m)",
+      "steps": [
+        {
+          "holder": "rome",
+          "label": {
+            "en": "Western Roman Empire",
+            "zh": "西罗马帝国"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Western Roman Empire 396–401",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K14",
+              "holder": "rome"
+            }
+          }
+        },
+        {
+          "holder": "gupta",
+          "label": {
+            "en": "Gupta Empire",
+            "zh": "笈多王朝"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Gupta Empire 387–409",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K14",
+              "holder": "gupta"
+            }
+          }
+        }
+      ],
+      "checks": [
+        {
+          "name": "all records of the frame",
+          "center": [
+            41.6,
+            33.9
+          ],
+          "zoom": 2.7,
+          "source": "C-K14"
+        }
+      ]
+    },
+    {
+      "id": "K15",
+      "t": "0476",
+      "method": "Cliopatria v0.2.1 records valid in 476 CE, unchanged; coast of the plate (Natural Earth 1:10m)",
+      "steps": [
+        {
+          "holder": "gupta",
+          "label": {
+            "en": "Gupta Empire",
+            "zh": "笈多王朝"
+          },
+          "src": [
+            "G1"
+          ],
+          "note": "Cliopatria v0.2.1: Gupta Empire 476–489",
+          "from": {
+            "geojson": "G1",
+            "where": {
+              "frame": "K15",
+              "holder": "gupta"
+            }
+          }
+        }
+      ],
+      "checks": [
+        {
+          "name": "all records of the frame",
+          "center": [
+            79.7,
+            25.6
+          ],
+          "zoom": 4.5,
+          "source": "C-K15"
+        }
+      ]
+    }
+  ],
+  "pipeline": {
+    "plannedKeyframes": 16,
+    "budgetMB": 2,
+    "focus": [
+      [
+        -12,
+        -12,
+        135,
+        58
+      ]
+    ],
+    "regionLand": {
+      "padDeg": 0.25,
+      "simplifyKm": 2,
+      "minIslandKm2": 20,
+      "quantization": 1000000,
+      "budgetKB": 450,
+      "mapshaper": true
+    },
+    "coast": {
+      "enabled": true,
+      "land": "public/geo/ancient-world-plate.json",
+      "detailBox": null,
+      "detailLand": null,
+      "worldBox": [
+        -12,
+        -12,
+        135,
+        58
+      ],
+      "gapKm": 6
+    },
+    "shots": "docs/screenshots/ancient-civilisations"
+  }
+}

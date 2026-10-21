@@ -1042,4 +1042,15 @@ LICENSE-CONTENT 要加的一段（主会话写，照 warring-states 的格式）
 
 ## 9. 实现记录与已知差距
 
-（施工后填写。）
+**2026-10-22 草稿施工**（一个 Opus 施工代理 + 四个内容分支；`status: draft`）。审读清单 `src/content/topics/ancient-civilisations/REVIEW.md`，核查台账 `AUDIT.md`，地图 `scripts/geo/ancient-civilisations/SOURCES-GEO.md` 与 `INVENTORY.md`。
+
+| 项 | 结果 |
+|---|---|
+| 规模 | 背景 + 8 章、41 拍；事件 77（milestone 20、political 21、atrocity 5、site 31）；航线 2；实体 19；名词 15；来源 S1–S3、S101–S136、S200–S239、S300–S333、S400–S442、S500–S523 |
+| 地图 | Cliopatria v0.2.1（CC BY 4.0）16 帧（K16 空），35 个要素全部 approximate，control.json 311 KB，环 0 / 0；势力范围 3 层（室利佛逝、高棉、满者伯夷）；旧大陆图版 261 KB（region-land.ts 新增可选 `mapshaper: true`，其他图版不变）；河流 21 条 134 KB；Wikidata 点 66 个 |
+| 引擎 E1 | `mixedEra`：公元 1–999 年标 CE / 公元（读数、状态行、段标签、参与卡刻度、事件 / 实体 / 引线日期）；单测 `tests/time-scene/mixed-era.test.ts`；docs/06「时间」一句 |
+| V1–V9 | V1 图版、经纬网、河名正常；V2 段标签 3200 BCE…150 CE…2021；V3 19 个实体；V4 dated 图层在 region 模式正常；V5 K16 之后无领土名称；V6 site 菱形可读；V7 `--keys` 照 docs/27 处理；V8 季风海路一直显示；V9 河流的公元前 / 公元年份过 schema |
+
+**与本文的偏离（都写进了 REVIEW.md 第二节）**：①Cliopatria 实际有印度河、扶南、素可泰的轮廓——仍只画点，正文不再说"没有范围图"；②马六甲势力范围不画（Cliopatria 1459 年才有，且轮廓不含马六甲城）；③K11 由前 30 年改前 27 年；④朱罗航线不画、实体 `chola` 删除，MOVEMENTS 2；⑤章节 id `sumer` / `egypt` 与实体同名，改为 `sumerian-cities` / `ancient-egypt`；⑥伊斯干达沙按 1819–1965 的写法；⑦K14 只画西罗马；⑧若干字幕按来源收窄（二里头"公元前 2 千纪早期"、殷墟"约前 1300 年起"、阿耶波多"约 500 年"、字母的埃及起源"一种说法"、"新加坡唯一的世界遗产"改写）。
+
+**已知差距**：F35（印度化的学术史）、F60（曼荼罗与 Wolters）未读；印度、东南亚的奴隶与强迫劳动没有找到非维基来源；UNESCO 桑吉、塔克西拉、那烂陀、秦陵、丝路的列入年份只经研究阶段读过，奥林匹亚的列入年份没写；Commons 核对图 C1–C8 没有逐图对照；黄河前 602 年至公元 11 年在濮阳以下、以及 11 年以后的下游没有数据，不画；Musi、Brantas 不在 Natural Earth，不画；反向链接没加（1819–1965、warring-states 按 §8 只读）。

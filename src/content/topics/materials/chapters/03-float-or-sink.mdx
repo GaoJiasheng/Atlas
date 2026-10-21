@@ -1,0 +1,159 @@
+---
+id: "float-or-sink"
+order: 3
+title: {"en": "Float or sink", "zh": "浮还是沉"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: false
+  cutaway: "none"
+  layers: ["float-tank"]
+  labels: ["tank", "tank-water", "float-wood"]
+  camera: {"position": [0.27, 0.4, 1.29], "target": [0.09, 0.12, -0.02], "fov": 30}
+  summary: {"en": "A material floats if a piece of it stays on or near the surface of water. Wood, this rubber and this plastic float; metal, ceramic and glass sink. Big things do not always sink, and a capped bottle floats because of the air inside it.", "zh": "一块材料能停在水面上或接近水面，就是浮。木、这种橡胶、这种塑料浮；金属、陶瓷、玻璃沉。大的东西不一定沉；盖好盖子的空瓶浮，是因为里面有空气。"}
+  sim:
+    set: {"block": "wood"}
+    try:
+      vary: "block"
+      keep: [{"en": "The same tank of fresh water", "zh": "同一缸清水"}, {"en": "Blocks of the same size (except the big one)", "zh": "方块大小一样（大木板除外）"}, {"en": "Put in gently", "zh": "轻轻放进去"}]
+      observe: ["float-result"]
+      record: true
+      predict:
+        prompt: {"en": "The small wooden block floats. Will a much bigger block of the same wood float or sink?", "zh": "小木块浮着。同一种木、大得多的一块，会浮还是会沉？"}
+        start: {"block": "wood"}
+        change: {"block": "wood-big"}
+        observe: "float-result"
+        options:
+          - {"id": "floats", "label": {"en": "Float", "zh": "浮"}, "means": "floats"}
+          - {"id": "sinks", "label": {"en": "Sink", "zh": "沉"}, "means": "sinks"}
+  beats:
+    - labels: ["float-wood", "tank-water", "tank"]
+      caption: {"en": "Each block is the same size and is put gently into the same tank of fresh water. The wooden block floats.", "zh": "每个方块大小一样，轻轻放进同一缸清水里。木块浮着。"}
+    - sim: {"set": {"block": "metal"}}
+      labels: ["float-metal", "tank-water"]
+      caption: {"en": "The steel block sinks to the bottom. A hard material can float, like wood, or sink, like steel.", "zh": "钢块沉到缸底。硬的材料有的浮，比如木；有的沉，比如钢。"}
+    - sim: {"set": {"block": "wood-big"}}
+      labels: ["float-wood-big", "tank-water"]
+      caption: {"en": "A much bigger piece of the same wood still floats. A big, heavy thing does not always sink.", "zh": "同一种木，大得多的一块照样浮。又大又重的东西，不一定沉。"}
+    - sim: {"set": {"block": "plastic"}}
+      labels: ["float-plastic", "tank-water"]
+      caption: {"en": "This plastic floats with only a sliver above the water. It still counts as floating: it stays near the surface.", "zh": "这种塑料浮着，只露出水面薄薄一层。这也算浮：它停在接近水面的地方。"}
+    - sim: {"set": {"block": "bottle"}}
+      labels: ["float-bottle", "tank-water"]
+      caption: {"en": "A capped, empty plastic bottle floats high, because it holds so much air. A solid lump of the same plastic would sink.", "zh": "盖好盖子的空塑料瓶浮得很高，因为里面有很多空气。同一种塑料做成实心的一块，就会沉。"}
+  index: {"parts": ["tank", "tank-water", "float-wood", "float-wood-big", "float-metal", "float-ceramic", "float-glass", "float-rubber", "float-plastic", "float-bottle", "float-fabric"]}
+---
+
+<Lang en>
+
+The syllabus says a thing floats if it stays on or near the surface of water and does not sink. Floating does not mean riding high: a block that has only a sliver above the water is floating too. To compare materials, blocks of the same size, <Num s="S1">6 × 6 × 3 cm</Num>, are put gently into the same tank of fresh water, <Num s="S1">18 cm</Num> deep. Predict first, then test.
+
+The wooden block floats. The steel block sinks straight to the bottom. Both are hard, so being hard does not decide whether a thing floats. Ceramic and glass sink too.
+
+A board of the same wood, many times bigger and heavier than the block, still floats. A big, heavy thing does not always sink; what matters is the material, not the size.
+
+The blocks of rubber and plastic float low in the water, with only a sliver showing above the surface. They still float.
+
+A capped, empty plastic bottle floats high. The whole bottle, with all the air sealed inside it, is very light for its size. Its plastic is a different kind from the plastic block, and a solid lump of the bottle's plastic would sink.
+
+A folded piece of cotton floats for a while, because air is trapped between its threads. As it soaks up water the air is pushed out, and once it has soaked it sinks. Most clothes and shoes absorb water and make a swimmer heavier.
+
+Floating materials are useful in water: a lifejacket or a float must stay at the surface.
+
+Use the Try it card to put each thing in the tank. Predict first, then record whether it floats or sinks.
+
+<More title={{"en": "A word for later", "zh": "以后会学的一个词"}}>
+
+Scientists compare how heavy a material is for its size with how heavy water is for the same size, and call this idea density. The syllabus says that density is not required at Primary 3; you will learn it in secondary school. For now, watch what each material does. A big thing can be light for its size, as <TopicLink slug="states-of-matter" ch="mass-and-space">States of Matter: mass and space</TopicLink> shows with a sponge and a stone.
+
+</More>
+
+<More title={{"en": "Plastics differ", "zh": "塑料不只一种"}}>
+
+There are many kinds of plastic. Polypropylene and polyethylene, the kinds used for many tubs and bottle caps, float in fresh water. PET, used for drink and water bottles, and PVC sink. The number marked on a plastic item names its kind of plastic; it does not say whether the item can be recycled (chapter 6).
+
+</More>
+
+<More title={{"en": "Rubber differs", "zh": "橡胶也不只一种"}}>
+
+The rubber in this model is pure natural rubber, which floats. Rubber that has other materials mixed in, such as chalk, is heavier, and hard rubber sinks. Many school erasers are made of PVC with chalk in it, so they sink. That is worked out from what they are made of; no float test of an eraser was found. If you test an eraser at home, it may well sink.
+
+</More>
+
+<More title={{"en": "Wood that sinks", "zh": "会沉的木头"}}>
+
+Most wood floats, but not all. Lignum vitae, one of the heaviest woods traded, sinks easily in water.
+
+</More>
+
+<More title={{"en": "Air inside, more water", "zh": "里面有空气，或者水多一点"}}>
+
+Having air inside does not always make a thing float: a sealed jar full of stones sinks, even with foam packed in it. The capped bottle floats because it is mostly air with only a thin skin of plastic. More water does not help either: a block that sinks in this tank also sinks in a bigger one.
+
+</More>
+
+<More title={{"en": "How this model draws it", "zh": "模型怎样画"}}>
+
+The model draws how deep each floating block sits in the water from published values for each material. For wood those values are measured on dried wood, so a real block may sit a little higher or lower, especially once it is wet. Whether it floats does not change.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+课纲说，东西停在水面上或接近水面、不沉下去，就是浮。浮不一定要浮得高：只露出水面薄薄一层的方块，也是浮着的。为了比较材料，把同样大小的方块（<Num s="S1">6 × 6 × 3 厘米</Num>）轻轻放进同一缸清水，水深 <Num s="S1">18 厘米</Num>。先猜，再试。
+
+木块浮着。钢块一下子沉到缸底。两样都是硬的，可见硬不硬，决定不了东西会不会浮。陶瓷和玻璃也沉。
+
+同一种木做的大木板，比木块大好多倍、重好多倍，照样浮着。又大又重的东西，不一定沉；要看的是材料，不是大小。
+
+橡胶块和塑料块浮得很低，只有薄薄一层露出水面。它们仍然是浮着的。
+
+盖好盖子的空塑料瓶浮得很高。整只瓶连同封在里面的空气，按它的大小来说非常轻。瓶子用的塑料和塑料块不是同一种；用瓶子的塑料做成实心的一块，会沉下去。
+
+叠好的一块棉布，刚放进去时会浮一会儿，因为纱线之间困着空气。它慢慢吸进水，空气被挤出来，吸饱了水就沉下去。大多数衣服和鞋子会吸水，让游泳的人变重。
+
+会浮的材料在水里很有用：救生衣、浮板都要停在水面上。
+
+用“试一试”卡片把每样东西轮流放进水缸。先猜一猜，再记下它浮还是沉。
+
+<More title={{"en": "A word for later", "zh": "以后会学的一个词"}}>
+
+科学家把一种材料“按大小来说有多重”和同样大小的水比较，这个概念叫密度。课纲明说小三不要求学密度，中学会学。现在只要看每种材料怎样表现。大的东西也可以“按大小来说很轻”，<TopicLink slug="states-of-matter" ch="mass-and-space">“物质的三态”主题的“质量与空间”</TopicLink>用海绵和石头说明了这一点。
+
+</More>
+
+<More title={{"en": "Plastics differ", "zh": "塑料不只一种"}}>
+
+塑料有很多种。聚丙烯和聚乙烯常用来做盒子和瓶盖，它们在清水里会浮。做饮料瓶、饮用水瓶的 PET，还有 PVC，会沉。塑料制品上标的数字，说的是塑料的种类，不说明它能不能回收（第 6 章）。
+
+</More>
+
+<More title={{"en": "Rubber differs", "zh": "橡胶也不只一种"}}>
+
+模型里的橡胶是纯天然橡胶，会浮。掺了白垩之类其他材料的橡胶比较重，硬橡胶会沉。很多学校用的橡皮擦是 PVC 掺白垩做的，所以会沉。这是从它们的成分推出来的，没有找到橡皮擦的浮沉测试。你在家里试橡皮擦，它很可能会沉。
+
+</More>
+
+<More title={{"en": "Wood that sinks", "zh": "会沉的木头"}}>
+
+大多数木头会浮，但不是全部。愈疮木是市面上最重的木材之一，放进水里很容易沉下去。
+
+</More>
+
+<More title={{"en": "Air inside, more water", "zh": "里面有空气，或者水多一点"}}>
+
+里面有空气，不一定就会浮：装满石头的密封罐，即使塞了泡沫也会沉。盖好的空瓶会浮，是因为它大部分是空气，外面只有薄薄一层塑料。水多一点也没有用：在这缸水里沉的方块，换一个更大的缸照样沉。
+
+</More>
+
+<More title={{"en": "How this model draws it", "zh": "模型怎样画"}}>
+
+每个浮着的方块浸在水里多深，是模型按每种材料的公开数据画的。木头的数据是在干木头上量的，所以真实的木块可能浮得高一点或低一点，湿了以后尤其如此。会不会浮，不会因此改变。
+
+</More>
+
+</Lang>

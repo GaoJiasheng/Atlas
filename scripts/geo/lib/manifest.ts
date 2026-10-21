@@ -225,6 +225,8 @@ export interface RegionLand {
   quantization?: number;
   /** File size budget (KB). Default 200. */
   budgetKB?: number;
+  /** Simplify with mapshaper (keep-shapes + clean) before cutting the plate, instead of per-ring Douglas–Peucker. Default false. */
+  mapshaper?: boolean;
 }
 
 /**

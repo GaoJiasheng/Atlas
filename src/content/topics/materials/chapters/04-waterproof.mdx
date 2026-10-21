@@ -1,0 +1,136 @@
+---
+id: "waterproof"
+order: 4
+title: {"en": "Waterproof", "zh": "防水"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: false
+  cutaway: "none"
+  layers: ["drop-tray"]
+  labels: ["drop-stand", "square-plastic", "water-bead"]
+  camera: {"position": [0.79, 0.35, 0.71], "target": [0.5, 0.07, 0.08], "fov": 30}
+  summary: {"en": "A material is waterproof when it does not absorb water. A drop of water stays on top of metal, glazed ceramic, rubber, glass and plastic, but soaks into fabric and into unvarnished wood.", "zh": "材料不吸水，就是防水。一滴水落在金属、上釉的陶瓷、橡胶、玻璃、塑料上，会停在上面；落在布和没上漆的木上，会吸进去。"}
+  sim:
+    set: {"square": "plastic"}
+    try:
+      vary: "square"
+      keep: [{"en": "The same dropper and the same size of drop", "zh": "同一支滴管，同样大的一滴"}, {"en": "Dropped from the same height", "zh": "从同样的高度滴下"}, {"en": "Samples of the same size", "zh": "样片大小一样"}]
+      observe: ["drop-result"]
+      record: true
+      predict:
+        prompt: {"en": "The drop stayed on top of the plastic. Swap the plastic for the wood: will the drop stay on top or soak in?", "zh": "水珠停在塑料上。换成木头样片，水会停在上面，还是吸进去？"}
+        start: {"square": "plastic"}
+        change: {"square": "wood"}
+        observe: "drop-result"
+        options:
+          - {"id": "stays-on-top", "label": {"en": "Stays on top", "zh": "停在上面"}, "means": "stays-on-top"}
+          - {"id": "soaks-in", "label": {"en": "Soaks in", "zh": "吸进去"}, "means": "soaks-in"}
+  beats:
+    - labels: ["drop-stand", "square-plastic", "water-bead"]
+      caption: {"en": "The same dropper lets one drop fall from the same height onto each sample. On plastic, the drop stays on top in a round bead.", "zh": "同一支滴管，从同样的高度，往每块样片上滴一滴水。在塑料上，水停在上面，成一颗圆圆的水珠。"}
+    - sim: {"set": {"square": "fabric"}}
+      labels: ["square-fabric", "wet-patch"]
+      caption: {"en": "On cotton fabric, the drop soaks in and leaves a damp patch. Fabric absorbs water, so it is not waterproof.", "zh": "在棉布上，水吸了进去，留下一片湿印。布会吸水，所以不防水。"}
+    - sim: {"set": {"square": "wood"}}
+      labels: ["square-wood", "wet-patch"]
+      caption: {"en": "Hard materials can absorb water too. This unvarnished wood slowly soaks the drop up.", "zh": "硬的材料也会吸水。这块没上漆的木头，慢慢把水吸了进去。"}
+    - sim: {"set": {"square": "ceramic"}}
+      labels: ["square-ceramic", "water-bead"]
+      caption: {"en": "On a glazed ceramic tile, the drop stays on top. Metal, rubber and glass are waterproof too.", "zh": "在上了釉的瓷砖上，水停在上面。金属、橡胶、玻璃也防水。"}
+    - camera: "corner-view"
+      layers: ["corner-wood", "corner-metal", "corner-ceramic", "corner-rubber", "corner-glass", "corner-plastic", "corner-fabric"]
+      labels: ["tea-towel", "bowl", "wall-tiles"]
+      caption: {"en": "A tea towel is fabric because it should soak up water. A bowl and the wall tiles are glazed ceramic because they should not.", "zh": "毛巾用布，因为它要吸水。碗和墙砖用上了釉的陶瓷，因为它们不能吸水。"}
+  index: {"parts": ["drop-stand", "water-bead", "wet-patch", "square-plastic", "square-fabric", "square-wood", "square-ceramic", "square-metal", "square-glass", "square-rubber", "tea-towel", "bowl", "wall-tiles"]}
+---
+
+<Lang en>
+
+The syllabus says that a material is waterproof when it does not absorb water. What matters is whether the water goes into the material, not whether its surface gets wet. To compare materials, the same dropper lets one drop of the same size fall from the same height onto each <Num s="S1">8 × 8 cm</Num> sample, and you look at where the water is a little later.
+
+On plastic, the drop stays on top as a round bead. The same happens on glass, on steel, on rubber and on a glazed ceramic tile. The surface is wet, but no water has gone into the material, so these materials are waterproof.
+
+On cotton fabric, the drop soaks in and leaves a damp patch that spreads through the threads. Fabric absorbs water, so it is not waterproof.
+
+<Figure src="figures/materials-waterproof-test" alt={{"en": "A square of cotton cloth with frayed edges and a dark, irregular damp patch soaked into it, beside a smooth plastic sheet with one corner curled up and round drops of water standing on its surface.", "zh": "一块毛边的棉布，布里吸进了一片不规则的深色湿印；旁边一张光滑、一角卷起的塑料片，表面上停着一颗颗圆水珠。"}} caption={{"en": "Water soaks into the cotton cloth but stays in drops on the plastic sheet. Illustration for this topic.", "zh": "水吸进了棉布，在塑料片上却聚成水珠。为本主题画的示意图。"}} />
+
+Wood is hard, but unvarnished wood absorbs water too: the drop slowly soaks into it. A material does not have to be soft to absorb water.
+
+Each of these properties has its uses. A tea towel is fabric because it should soak up water, and a mop is fabric for the same reason. A bowl, a teapot and the wall tiles are glazed ceramic because they should not.
+
+You can try this test at home with safe materials, such as a cloth, a paper towel, a plastic lid and a metal spoon; ask an adult to help.
+
+Use the Try it card to put a drop on each sample. Predict first, then record whether the drop stays on top or soaks in.
+
+<More title={{"en": "Wet is not the same as absorbing", "zh": "湿，不等于吸水"}}>
+
+A bead of water on plastic makes the plastic wet, but the water stays on the outside: wipe it off and the plastic is dry. On cotton the water goes in between the threads and stays there. Steel is waterproof because the material itself does not take in water, not because it is shiny.
+
+</More>
+
+<More title={{"en": "One material, different tiles", "zh": "同是陶瓷，砖不一样"}}>
+
+How a ceramic is made changes how much water it takes in. Porcelain tiles absorb less than <Num s="S13">0.5 %</Num> of their weight in water, while some softer ceramic wall tiles absorb more than <Num s="S13">10 %</Num>. The tile in this model is glazed porcelain, and the drop stays on top of it.
+
+</More>
+
+<More title={{"en": "Count the drops, or weigh it", "zh": "数滴数，或者称一称"}}>
+
+Two other fair tests compare how much water a material takes in. Stretch each fabric tightly over a jar and count how many drops fall on it before water starts to come through. Or weigh samples of the same size, soak them in water for the same time, and weigh them again: the ones that absorb water get heavier. Ask an adult before you try these at home.
+
+</More>
+
+<More title={{"en": "Cotton and polyester", "zh": "棉和涤纶"}}>
+
+Fabrics differ too. Cotton takes up much more moisture from damp air than polyester does.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+课纲说，材料不吸水，就是防水。要看的是水有没有进到材料里面，不是材料表面湿不湿。为了比较，用同一支滴管、同样大的一滴水，从同样的高度滴在每块 <Num s="S1">8 × 8 厘米</Num>的样片上，过一会儿再看水在哪里。
+
+在塑料上，水停在上面，成一颗圆圆的水珠。玻璃、钢、橡胶和上了釉的瓷砖也一样。表面湿了，但没有水进到材料里面，所以这些材料防水。
+
+在棉布上，水吸了进去，在纱线之间散开，留下一片湿印。布会吸水，所以不防水。
+
+<Figure src="figures/materials-waterproof-test" alt={{"en": "A square of cotton cloth with frayed edges and a dark, irregular damp patch soaked into it, beside a smooth plastic sheet with one corner curled up and round drops of water standing on its surface.", "zh": "一块毛边的棉布，布里吸进了一片不规则的深色湿印；旁边一张光滑、一角卷起的塑料片，表面上停着一颗颗圆水珠。"}} caption={{"en": "Water soaks into the cotton cloth but stays in drops on the plastic sheet. Illustration for this topic.", "zh": "水吸进了棉布，在塑料片上却聚成水珠。为本主题画的示意图。"}} />
+
+木头很硬，可是没上漆的木头也会吸水：水珠慢慢渗了进去。材料不一定要软才会吸水。
+
+每种性质都有它的用处。毛巾用布，因为毛巾要吸水；拖把用布，也是同样的道理。碗、茶壶和墙砖用上了釉的陶瓷，因为它们不能吸水。
+
+这个测试可以在家里用安全的材料试一试，例如一块布、一张纸巾、一个塑料盖子、一把金属汤匙；请大人在旁边帮忙。
+
+用“试一试”卡片在每块样片上滴一滴水。先猜一猜，再记下水是停在上面还是吸了进去。
+
+<More title={{"en": "Wet is not the same as absorbing", "zh": "湿，不等于吸水"}}>
+
+塑料上的水珠让塑料湿了，但水留在外面：擦掉它，塑料就是干的。在棉布上，水钻进纱线之间，留在里面。钢防水，是因为钢这种材料本身不吸水，不是因为它亮晶晶的。
+
+</More>
+
+<More title={{"en": "One material, different tiles", "zh": "同是陶瓷，砖不一样"}}>
+
+陶瓷怎样做，会改变它吸多少水。瓷质砖吸的水不到自身重量的 <Num s="S13">0.5%</Num>，有些较松的陶质墙砖却吸超过 <Num s="S13">10%</Num>。模型里的瓷砖是上了釉的瓷质砖，水珠停在它上面。
+
+</More>
+
+<More title={{"en": "Count the drops, or weigh it", "zh": "数滴数，或者称一称"}}>
+
+另外两种公平测试，比较材料吸进多少水。把每种布绷紧在杯口上，数一数滴到第几滴，水开始透过来。或者把同样大小的样品先称一称，在水里泡同样长的时间，再称一次：会吸水的样品变重了。在家里试之前，先问问大人。
+
+</More>
+
+<More title={{"en": "Cotton and polyester", "zh": "棉和涤纶"}}>
+
+布和布也不一样。棉从潮湿空气里吸进的水分，比涤纶多得多。
+
+</More>
+
+</Lang>

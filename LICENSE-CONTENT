@@ -41,6 +41,16 @@ with the attribution given in `src/content/topics/warring-states/data/SOURCES.md
 and `scripts/geo/warring-states/SOURCES-GEO.md`. The texts, events, entities,
 routes and glossary of that topic stay under CC BY-NC-SA 4.0 as above.
 
+Exception — Ancient Civilisations (topic `ancient-civilisations`): the river
+courses in `public/geo/ancient-rivers.json` include two reconstructed courses of
+the Yellow River taken from `public/geo/warring-states-rivers.json` (traced from
+a Wikimedia Commons map licensed CC BY-SA 4.0) and are therefore licensed
+CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/), with the
+attribution given in `src/content/topics/ancient-civilisations/data/SOURCES.md`
+and `scripts/geo/ancient-civilisations/SOURCES-GEO.md`. The control areas and
+spheres of that topic are derived from Cliopatria (CC BY 4.0) and stay under
+CC BY-NC-SA 4.0 as above, with attribution.
+
 Exception — digestive system and heart and lungs (topics `digestive-system`
 and `heart-and-lungs`): the 3D models (`public/models/digestive-system.glb`,
 `public/models/heart-and-lungs.glb`), the geometry derived from them

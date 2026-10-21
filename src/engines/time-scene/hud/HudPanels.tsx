@@ -102,7 +102,7 @@ export function BandCard({ model, playhead, locale, highlight, segments, anchor,
   );
   const x = (n: number) => x0 + scale.x(n);
   const ticks = useMemo(() => {
-    const raw = ruleTicks(model.min, model.max, model.scale, Math.max(2, (x1 - x0) / (64 * u)), locale);
+    const raw = ruleTicks(model.min, model.max, model.scale, Math.max(2, (x1 - x0) / (64 * u)), locale, model.mixedEra);
     return thinTicks(raw.major, raw.minor, (n) => x0 + scale.x(n), 34 * u);
   }, [model, x0, x1, u, locale, scale]);
   const win = scale.segments[current];

@@ -1,0 +1,133 @@
+{
+  "terms": [
+    {
+      "id": "civilisation",
+      "term": { "en": "Civilisation", "zh": "文明" },
+      "definition": {
+        "en": "In this topic, a society that has the five features textbooks use to compare societies: a government, writing, cities with public buildings, the arts, crafts and sciences, and economic activities. It is a checklist for comparing, not a way of ranking peoples.",
+        "zh": "在这个主题里，指具备课本用来比较各个社会的五个特征的社会：政府、文字、有公共建筑的城市、艺术工艺与科学、经济活动。它是用来比较的检查表，不是给人分高下的标准。"
+      },
+      "see": ["legacy"]
+    },
+    {
+      "id": "legacy",
+      "term": { "en": "Legacy", "zh": "遗产（流传下来的影响）" },
+      "definition": {
+        "en": "Something left by people of the past that still shapes life today, such as writing, ways of counting or written laws. It is not the same as a World Heritage Site, which is a protected place.",
+        "zh": "过去的人留下、今天仍影响我们生活的东西，例如文字、计数的方法、成文的法律。它和“世界遗产”不同：世界遗产指的是受到保护的地方。"
+      },
+      "see": ["world-heritage-site"]
+    },
+    {
+      "id": "city-state",
+      "term": { "en": "City-state", "zh": "城邦" },
+      "definition": {
+        "en": "A city and the farmland around it ruled as a state of its own, with its own ruler or government. Sumer and ancient Greece were made up of many city-states.",
+        "zh": "一座城市和周围的田地自成一国，有自己的统治者或政府。苏美尔和古希腊都由许多城邦组成。"
+      }
+    },
+    {
+      "id": "cuneiform",
+      "term": { "en": "Cuneiform", "zh": "楔形文字" },
+      "definition": {
+        "en": "Writing made by pressing a cut reed into wet clay, which leaves wedge-shaped marks. It is the earliest known writing system and was first used to write the Sumerian language.",
+        "zh": "用削尖的芦苇笔在湿泥板上压出楔形笔画的文字。它是已知最早的文字体系，最初用来写苏美尔语。"
+      },
+      "see": ["civilisation"]
+    },
+    {
+      "id": "ziggurat",
+      "term": { "en": "Ziggurat", "zh": "金字形神塔（塔庙）" },
+      "definition": {
+        "en": "A tall platform built of mud brick in stepped layers in Mesopotamia, with a temple on top.",
+        "zh": "美索不达米亚人用泥砖一层层垒起的高台，顶上建有神庙。"
+      }
+    },
+    {
+      "id": "world-heritage-site",
+      "term": { "en": "World Heritage Site", "zh": "世界遗产" },
+      "definition": {
+        "en": "A place on UNESCO's World Heritage List, which the country it is in has agreed to protect because of its value to all people.",
+        "zh": "列入联合国教科文组织《世界遗产名录》的地方。所在国家承诺保护它，因为它对全人类都有价值。"
+      },
+      "see": ["legacy"]
+    },
+    {
+      "id": "pharaoh",
+      "term": { "en": "Pharaoh", "zh": "法老" },
+      "definition": {
+        "en": "The name now used for the kings of ancient Egypt.",
+        "zh": "今天对古埃及国王的称呼。"
+      }
+    },
+    {
+      "id": "hieroglyphs",
+      "term": { "en": "Egyptian hieroglyphs", "zh": "古埃及象形文字" },
+      "definition": {
+        "en": "The writing of ancient Egypt. Some signs stand for words or ideas and others for sounds.",
+        "zh": "古埃及的文字，学名圣书体。有的符号代表词或意思，有的代表读音。"
+      },
+      "see": ["cuneiform"]
+    },
+    {
+      "id": "indus-script",
+      "term": { "en": "Indus script", "zh": "印度河文字" },
+      "definition": {
+        "en": "The signs left on seals and objects in the cities of the Indus valley. No one has read them yet, and scholars disagree about whether they write a language at all.",
+        "zh": "印度河流域城市在印章和器物上留下的符号。至今没有人读懂，学者对它是不是在记录一种语言也意见不一。"
+      }
+    },
+    {
+      "id": "monsoon",
+      "term": { "en": "Monsoon", "zh": "季风" },
+      "definition": {
+        "en": "A wind that changes direction with the seasons and brings a rainy season. In this topic it feeds rivers and rice fields, and it set the times when ships sailed and returned.",
+        "zh": "随季节改变方向、带来雨季的风。在这个主题里，它为河流和稻田带来雨水，也决定了船什么时候出航、什么时候回航。"
+      },
+      "see": ["maritime-silk-road"]
+    },
+    {
+      "id": "oracle-bones",
+      "term": { "en": "Oracle bones", "zh": "甲骨文" },
+      "definition": {
+        "en": "Records of divination carved on turtle shells and animal bones at the late Shang capital. They are the earliest known Chinese writing.",
+        "zh": "晚商都城刻在龟甲和兽骨上的占卜记录，是已知最早的汉字。"
+      }
+    },
+    {
+      "id": "democracy",
+      "term": { "en": "Democracy", "zh": "民主" },
+      "definition": {
+        "en": "Rule by the people. In ancient Athens the citizens' assembly decided directly, but only free adult men whose parents were both citizens could take part.",
+        "zh": "由人民治理。古代雅典由公民大会直接决定事情，但只有父母都是公民的自由成年男子才能参加。"
+      },
+      "see": ["republic"]
+    },
+    {
+      "id": "republic",
+      "term": { "en": "Republic", "zh": "共和国" },
+      "definition": {
+        "en": "A state with no king, governed by people who are chosen for a fixed time. The word comes from the Latin res publica, 'the public thing'.",
+        "zh": "没有国王、由选出的人在一定任期内治理的国家。这个词来自拉丁文 res publica，意思是“公共的事”。"
+      },
+      "see": ["democracy"]
+    },
+    {
+      "id": "maritime-silk-road",
+      "term": { "en": "Maritime Silk Road", "zh": "海上丝绸之路" },
+      "definition": {
+        "en": "The sea trade routes that linked Southeast Asia with East Asia, South Asia, Arabia and East Africa. Ships carried much more than silk, and the name was given in modern times.",
+        "zh": "把东南亚和东亚、南亚、阿拉伯、东非连在一起的海上贸易路线。船上运的远不止丝绸；这个名字是近代才起的。"
+      },
+      "see": ["monsoon"]
+    },
+    {
+      "id": "mandala",
+      "term": { "en": "Mandala (political)", "zh": "曼荼罗体系" },
+      "definition": {
+        "en": "A way historians describe early Southeast Asian kingdoms: power spread out from a ruler's centre and faded with distance, and the areas of different rulers could overlap, so there were no fixed borders. This topic draws such kingdoms as spheres of influence.",
+        "zh": "史家描述东南亚古国的一种说法：权力从统治者所在的中心向外扩散，离得越远越弱；不同统治者的范围可以互相重叠，没有固定的国界。本主题把这类王国画成势力范围。"
+      }
+    }
+  ]
+}
