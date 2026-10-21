@@ -1,0 +1,141 @@
+---
+id: "strength"
+order: 1
+title: {"en": "Strength", "zh": "强度"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: false
+  cutaway: "none"
+  layers: ["strength-rig"]
+  labels: ["bridge-blocks", "bridge-wood", "bridge-hanger"]
+  camera: {"position": [-0.8, 0.25, 1.15], "target": [-0.84, 0.07, 0.05], "fov": 30}
+  summary: {"en": "Strength is a material's ability to take a load without breaking. Strips of the same size are loaded with the same masses: some hold them all, some bend down onto the bench, and glass and ceramic snap.", "zh": "强度是材料受力而不断的本领。同样大小的条，压上同样的砝码：有的全都托住，有的弯到台面上，玻璃和陶瓷断了。"}
+  sim:
+    set: {"strip": "wood", "masses": 0}
+    try:
+      vary: "strip"
+      also: ["masses"]
+      keep: [{"en": "Strips of the same size, a fresh one each time", "zh": "同样大小的条，每次换一根新的"}, {"en": "The same blocks and gap", "zh": "同样的木块和间距"}, {"en": "500 g masses, added one at a time", "zh": "500 克槽码，一个一个加"}]
+      observe: ["strength-result", "strength-bend"]
+      record: true
+      predict:
+        prompt: {"en": "The steel strip held all five masses. Swap it for the glass strip: what will happen?", "zh": "钢条托住了五个槽码。换成玻璃条，会怎样？"}
+        start: {"strip": "metal", "masses": 5}
+        change: {"strip": "glass"}
+        observe: "strength-result"
+        options:
+          - {"id": "holds", "label": {"en": "It holds them", "zh": "托得住"}, "means": "holds"}
+          - {"id": "on-bench", "label": {"en": "It bends onto the bench", "zh": "弯到台面上"}, "means": "on-bench"}
+          - {"id": "snapped", "label": {"en": "It snaps", "zh": "会断"}, "means": "snapped"}
+  beats:
+    - labels: ["bridge-wood", "bridge-blocks", "bridge-hanger"]
+      caption: {"en": "Each strip is 30 centimetres long and 2 millimetres thick, and rests on two blocks with the same gap. Masses are added one at a time.", "zh": "每根条长 30 厘米、厚 2 毫米，架在间距相同的两块木块上。槽码一个一个往上加。"}
+    - sim: {"set": {"strip": "wood", "masses": 5}}
+      labels: ["bridge-wood", "bridge-masses"]
+      caption: {"en": "With all five masses on, the wooden strip bends a little and holds them all.", "zh": "五个槽码都放上去，木条弯了一点，全都托住了。"}
+    - sim: {"set": {"strip": "glass", "masses": 5}}
+      labels: ["bridge-glass-snapped", "bridge-masses"]
+      caption: {"en": "The glass strip hardly bends, then snaps. Glass and ceramic are brittle: they break suddenly instead of bending first.", "zh": "玻璃条几乎没弯，就断了。玻璃和陶瓷是脆的：它们不先弯一弯，而是突然断开。"}
+    - sim: {"set": {"strip": "plastic", "masses": 5}}
+      labels: ["bridge-plastic", "bridge-masses"]
+      caption: {"en": "The plastic strip bends so much that it rests on the bench, but it does not break. Bending easily is not the same as being weak.", "zh": "塑料条弯得很厉害，搭到了台面上，但没有断。容易弯，不等于不强。"}
+    - sim: {"set": {"strip": "fabric", "masses": 0}}
+      labels: ["bridge-fabric", "bridge-blocks"]
+      caption: {"en": "A fabric strip cannot even hold itself up across the gap, and neither can a rubber strip, so this test cannot measure their strength. They are tested by pulling instead.", "zh": "布条连自己都撑不起来，架不住这个间距，橡胶条也一样，所以这个测试测不出它们的强度。它们要用拉的办法来测。"}
+  index: {"parts": ["bridge-blocks", "bridge-hanger", "bridge-masses", "bridge-wood", "bridge-metal", "bridge-glass", "bridge-glass-snapped", "bridge-ceramic", "bridge-ceramic-snapped", "bridge-plastic", "bridge-rubber", "bridge-fabric"]}
+---
+
+<Lang en>
+
+The syllabus says that the strength of a material is its ability to take a load without breaking. To compare strengths fairly, each strip is the same size, <Num s="S1">30 cm</Num> long and <Num s="S1">2 mm</Num> thick, and rests on the same two wooden blocks, <Num s="S1">20 cm</Num> apart. Masses of <Num s="S1">500 g</Num> go on the middle one at a time, and each test uses a fresh strip.
+
+Start with wood. With all five masses on, the wooden strip bends a little and holds them. The steel strip hardly bends at all and holds them too.
+
+Now try glass. The glass strip hardly bends, and then it snaps into two pieces and the masses drop onto the bench. The ceramic strip does the same. Glass and ceramic are <Term id="brittle">brittle</Term>: they break suddenly instead of bending first.
+
+The plastic strip is different. With one mass it bends a lot; with two it rests on the bench, and it still has not broken. Rubber and fabric strips are so floppy that they lie on the bench before any mass goes on. Bending easily is not the same as being weak: the plastic strip bends much more than the glass one, yet it is the glass that breaks. This test cannot show how strong fabric or rubber is; those materials are tested by pulling.
+
+Strength matters when a thing has to carry a load. A shelf must hold up the dishes on it, and the small rivets in a window must hold the window for many years, which chapter 6 comes back to.
+
+Use the Try it card to load each strip in turn. Predict first, then record a row for each material.
+
+<More title={{"en": "Strong, stiff and hard", "zh": "强、不容易弯、硬"}}>
+
+These three words mean different things. A strong material needs a large force to break it. A stiff material is hard to bend; stiff is the opposite of flexible. A material can be stiff and strong but brittle, like glass. Hardness is different again: it is how well a material resists being scratched or dented. Hardness is not one of the five properties in the syllabus.
+
+</More>
+
+<More title={{"en": "Brittle", "zh": "脆"}}>
+
+Ceramics are hard and wear well, but they are brittle; metals bend first and break much later. In this model the glass and ceramic strips break when the bending pulls too hard on their underside. Real glass is weakest at its cut edges, so two strips of the same glass can break at different loads. The model draws a break as two pieces; real glass and ceramic often break into sharp splinters.
+
+</More>
+
+<More title={{"en": "Pull, do not bend", "zh": "用拉的，不用压的"}}>
+
+Fabric and thread are tested for strength by hanging masses from them until they tear or snap. In one classroom test, a length of cotton thread held <Num s="S3">1,100 g</Num> before it broke, and polyester and nylon threads held much more. That is a single result, not a standard. A test has to suit the material: a stretchy fabric may stretch a long way before it tears, so whether to test it alongside cotton is itself a question about fairness.
+
+</More>
+
+<More title={{"en": "Do not try this with glass", "zh": "不要拿玻璃来试"}}>
+
+Broken glass and ceramic have sharp edges. This test is done only in the model. The Building and Construction Authority warns that glass shards falling from a height can cause serious injuries. To try a strength test at home, ask an adult and use paper or thread.
+
+</More>
+
+<More title={{"en": "Why the same size", "zh": "为什么大小要一样"}}>
+
+A thicker strip is much harder to bend. In the formula the model uses, a strip twice as thick is <Num s="S1">8 times</Num> as hard to bend. If the strips were different sizes, you could not tell whether the material or the size made the difference, so every strip is cut the same. Chapter 2 shows how shape changes flexibility too.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+课纲说，材料的强度是它受力而不断的本领。为了公平地比较，每根条大小一样，长 <Num s="S1">30 厘米</Num>、厚 <Num s="S1">2 毫米</Num>，架在同样的两块木块上，两块木块相距 <Num s="S1">20 厘米</Num>。<Num s="S1">500 克</Num>的槽码一个一个放在条的正中间；每次测试都换一根新的条。
+
+先看木条。五个槽码都放上去，木条弯了一点，全都托住了。钢条几乎不弯，也托住了五个槽码。
+
+再试玻璃。玻璃条几乎没有弯，就突然断成两段，槽码掉到台面上。陶瓷条也一样。玻璃和陶瓷是<Term id="brittle">脆</Term>的：它们不先弯一弯，而是一下子断开。
+
+塑料条不一样。放一个槽码，它就弯得很厉害；放两个，它已经搭到台面上，却还没有断。橡胶条和布条软得连自己都撑不住，一个槽码都没放，就垂到台面上了。容易弯，不等于不强：塑料条比玻璃条弯得多，断的却是玻璃。这个测试测不出布和橡胶有多强，它们要用拉的办法来测。
+
+东西要承受重量的时候，强度就很要紧。碗柜的隔板要托得住上面的碗碟；窗上那几颗小铆钉，要多年都撑得住整扇窗，第 6 章会再讲。
+
+用“试一试”卡片，把每根条轮流架上去、加槽码。先猜一猜，再每种材料记一行。
+
+<More title={{"en": "Strong, stiff and hard", "zh": "强、不容易弯、硬"}}>
+
+这三个说法意思不同。强的材料，要很大的力才弄得断。不容易弯的材料，硬挺，是“柔韧”的反面。一种材料可以硬挺、也强，却很脆，玻璃就是这样。“硬”又是另一回事：它说的是材料抗不抗得住划痕和压痕。硬度不在课纲的五个性质之内。
+
+</More>
+
+<More title={{"en": "Brittle", "zh": "脆"}}>
+
+陶瓷硬、耐磨，但是脆；金属会先弯，要过很久才断。在这个模型里，玻璃条和陶瓷条是在弯曲把条的下表面拉得太厉害时断开的。真实的玻璃在切割边最弱，所以同一种玻璃的两根条，可能在不同的重量下断。模型把断开画成两段；真实的玻璃和陶瓷断开时，常常碎成锋利的碎片。
+
+</More>
+
+<More title={{"en": "Pull, do not bend", "zh": "用拉的，不用压的"}}>
+
+布和线的强度，是挂上槽码，一直挂到它撕开或断掉来测的。有一次课堂测试，一段棉线吊住了 <Num s="S3">1,100 克</Num>才断，涤纶线、尼龙线吊得住多得多。这只是一次结果，不是标准。测试要适合被测的材料：有弹性的布在撕开之前会拉得很长，要不要把它和棉布放在同一个测试里比，本身就是公平不公平的问题。
+
+</More>
+
+<More title={{"en": "Do not try this with glass", "zh": "不要拿玻璃来试"}}>
+
+玻璃和陶瓷断开的边很锋利，这个测试只在模型里做。新加坡建设局提醒：玻璃碎片从高处掉下会造成重伤。想在家里试强度测试，请大人在场，用纸或线来试。
+
+</More>
+
+<More title={{"en": "Why the same size", "zh": "为什么大小要一样"}}>
+
+条越厚，越难弯。按模型用的公式，厚一倍的条，难弯 <Num s="S1">8 倍</Num>。如果条的大小不一样，就分不出结果的不同是材料造成的还是大小造成的，所以每根条都切成一样大。第 2 章还会讲形状怎样改变柔韧性。
+
+</More>
+
+</Lang>

@@ -259,6 +259,26 @@
       "0000000000000000"
     ]
   },
+  "materials": {
+    "mask": [
+      "0000000000000010",
+      "0011111111114b80",
+      "07eeeeeeeeeeff80",
+      "08ffffffffffff80",
+      "08ffffffffffff80",
+      "08ffffffffffff80",
+      "08ffffffffffff80",
+      "08ffffffffffff80",
+      "08ffffffffffff80",
+      "08ffffffffffff80",
+      "08fffeeeeeeeff80",
+      "02efe31111115e80",
+      "04ffd10000000340",
+      "03df800000000000",
+      "005c400000000000",
+      "0000000000000000"
+    ]
+  },
   "measuring": {
     "mask": [
       "0000011111100000",

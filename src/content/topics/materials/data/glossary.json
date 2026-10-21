@@ -1,0 +1,148 @@
+{
+ "terms": [
+  {
+   "id": "material",
+   "term": { "en": "Material", "zh": "材料" },
+   "definition": {
+    "en": "What a thing is made of. Wood, metal, ceramic, rubber, glass, plastic and fabric are seven common materials.",
+    "zh": "做东西用的料。木、金属、陶瓷、橡胶、玻璃、塑料、布是七种常见的材料。"
+   },
+   "see": ["object", "property"]
+  },
+  {
+   "id": "object",
+   "term": { "en": "Object", "zh": "物体" },
+   "definition": {
+    "en": "A thing made of one or more materials, such as a saucepan (metal) or a window (glass in a metal frame).",
+    "zh": "用一种或几种材料做成的东西，例如锅（金属）、窗（玻璃装在金属框里）。"
+   },
+   "see": ["material"]
+  },
+  {
+   "id": "property",
+   "term": { "en": "Property", "zh": "性质" },
+   "definition": {
+    "en": "What a material is like or what it does, such as whether it bends or lets water through. This topic compares five physical properties.",
+    "zh": "材料是什么样的、会怎样，例如能不能弯、吸不吸水。本主题比较五种物理性质。"
+   },
+   "see": ["material", "strength", "flexible", "float", "waterproof", "transparency"]
+  },
+  {
+   "id": "fair-test",
+   "term": { "en": "Fair test", "zh": "公平测试" },
+   "definition": {
+    "en": "An experiment in which only one thing is changed at a time and everything else is kept the same, so that any change in the result comes from that one thing.",
+    "zh": "一次只改变一样东西、其余都保持不变的实验。这样结果有变化，就知道是那一样东西造成的。"
+   },
+   "see": ["property"]
+  },
+  {
+   "id": "strength",
+   "term": { "en": "Strength", "zh": "强度" },
+   "definition": {
+    "en": "A material's ability to take a load, such as a heavy mass, without breaking. Strong is not the same as hard to bend.",
+    "zh": "材料受力（例如压上重物）而不断的本领。强，不等于不容易弯。"
+   },
+   "see": ["brittle", "flexible"]
+  },
+  {
+   "id": "brittle",
+   "term": { "en": "Brittle", "zh": "脆" },
+   "definition": {
+    "en": "Breaking suddenly with hardly any bending first, like glass and ceramic. A word beyond the primary syllabus.",
+    "zh": "几乎不先弯一弯，就突然断开，像玻璃和陶瓷那样。这个词超出小学课纲。"
+   },
+   "see": ["strength", "flexible"]
+  },
+  {
+   "id": "flexible",
+   "term": { "en": "Flexible (flexibility)", "zh": "柔韧（柔韧性）" },
+   "definition": {
+    "en": "Able to bend without breaking. Flexibility is this ability of a material.",
+    "zh": "能弯而不断。柔韧性就是材料的这种本领。"
+   },
+   "see": ["strength", "brittle"]
+  },
+  {
+   "id": "float",
+   "term": { "en": "Float", "zh": "浮" },
+   "definition": {
+    "en": "To stay on or near the surface of water and not sink. A thing that floats with only a sliver above the water still floats.",
+    "zh": "停在水面上或接近水面，不沉下去。只露出水面薄薄一层，也算浮。"
+   },
+   "see": ["sink"]
+  },
+  {
+   "id": "sink",
+   "term": { "en": "Sink", "zh": "沉" },
+   "definition": {
+    "en": "To go down through the water to the bottom.",
+    "zh": "穿过水往下，落到水底。"
+   },
+   "see": ["float"]
+  },
+  {
+   "id": "waterproof",
+   "term": { "en": "Waterproof", "zh": "防水" },
+   "definition": {
+    "en": "Not absorbing water. A waterproof surface can be wet on top, but the water does not go into the material.",
+    "zh": "不吸水。防水的材料表面可以是湿的，但水进不到材料里面去。"
+   },
+   "see": ["absorb"]
+  },
+  {
+   "id": "absorb",
+   "term": { "en": "Absorb", "zh": "吸水" },
+   "definition": {
+    "en": "To take water into the material, as cotton and unvarnished wood do. A material that absorbs water is not waterproof.",
+    "zh": "把水吸进材料里面，像棉布、没上漆的木头那样。会吸水的材料不防水。"
+   },
+   "see": ["waterproof"]
+  },
+  {
+   "id": "transparency",
+   "term": { "en": "Letting light through (transparency)", "zh": "透光" },
+   "definition": {
+    "en": "Whether a material lets most, some or no light pass through. Some books call these transparent, translucent and opaque; the primary syllabus does not require these words.",
+    "zh": "材料让大部分、一部分还是没有光穿过。有些书把这三种叫作透明、半透明、不透明；小学课纲不要求用这三个词。"
+   },
+   "see": ["property"]
+  },
+  {
+   "id": "ceramic",
+   "term": { "en": "Ceramic", "zh": "陶瓷" },
+   "definition": {
+    "en": "A hard material made by firing clay, used for bowls, cups and tiles. Glazed porcelain hardly absorbs water; some softer ceramics absorb more.",
+    "zh": "用黏土烧成的硬材料，用来做碗、杯、瓷砖。上了釉的瓷几乎不吸水；有些较松的陶瓷吸水多一些。"
+   },
+   "see": ["brittle", "waterproof"]
+  },
+  {
+   "id": "rubber",
+   "term": { "en": "Rubber", "zh": "橡胶" },
+   "definition": {
+    "en": "A soft material that stretches and bends easily and does not absorb water. Different kinds of rubber can float or sink.",
+    "zh": "能拉长、很容易弯、不吸水的软材料。不同种类的橡胶，有的浮，有的沉。"
+   },
+   "see": ["flexible", "float"]
+  },
+  {
+   "id": "plastic",
+   "term": { "en": "Plastic", "zh": "塑料" },
+   "definition": {
+    "en": "A material made in many kinds, for boxes, bottles and bags. This topic's plastic is HDPE, a kind of polyethylene. In Singapore Mandarin it is also often called 塑胶.",
+    "zh": "种类很多的材料，用来做盒子、瓶子、袋子。本主题用的是 HDPE（一种聚乙烯）。新加坡也常说“塑胶”。"
+   },
+   "see": ["waterproof", "float"]
+  },
+  {
+   "id": "fabric",
+   "term": { "en": "Fabric", "zh": "布" },
+   "definition": {
+    "en": "A material made by weaving or knitting threads, such as cotton cloth. Cotton absorbs water.",
+    "zh": "用纱线织成的材料，例如棉布。棉布吸水。"
+   },
+   "see": ["absorb"]
+  }
+ ]
+}
