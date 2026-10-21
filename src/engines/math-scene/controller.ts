@@ -36,6 +36,7 @@ import { instrumentOf, setValue } from './lib/measure-tasks';
 import { weightText } from './lib/instrument';
 import { instrumentText } from './lib/measure-working';
 import { isMeasureTask } from './lib/measure-kind';
+import { tappedLabel } from './lib/net-description';
 
 export interface Current {
   chapter: string | null;
@@ -130,6 +131,10 @@ function describe(task: Task, action: Action, s: TaskState): string {
       return `PARTS ${s.mparts.length}`;
     case 'mtool':
       return action.tool === 'zoom' ? (s.mzoom ? 'ZOOM IN' : 'ZOOM OUT') : s.mcount ? 'COUNT' : 'COUNT OFF';
+    case 'nplace':
+      return `PLACED ${s.nplaced.length}${task.kind === 'complete-net' ? `/${task.add}` : ''}`;
+    case 'ntap':
+      return s.ntapped === null ? 'TAP' : `TAP ${tappedLabel(task, s.ntapped)}`;
     case 'input': {
       const spec = inputSpecOf(task);
       if (spec && isMeasureTask(task)) {
@@ -253,6 +258,10 @@ export function answerLabel(task: Task, s: TaskState): string {
       return task.mode === 'weights' ? describe(task, { do: 'weigh', w: 0 }, s) : describe(task, { do: 'mset', to: 0 }, s);
     case 'count-intervals':
       return describe(task, { do: 'mpart', part: 0 }, s);
+    case 'complete-net':
+      return describe(task, { do: 'nplace', key: '' }, s);
+    case 'tap-face':
+      return describe(task, { do: 'ntap', node: 0 }, s);
   }
 }
 
@@ -285,6 +294,9 @@ export function createController(lesson: Lesson, scene: SceneStore<MathSceneExt>
   const setRun = (task: Task, run: TaskRun) => ui.setState((u) => ({ runs: { ...u.runs, [task.id]: run } }));
 
   const drawnTask = (step: Step): Task => step.pool[Math.min(ui.getState().drawn[step.id] ?? 0, step.pool.length - 1)]!;
+  /** Fold a net task's net up on the stage (once more each time). */
+  const playNet = (task: Task, stay: boolean) =>
+    ui.setState((u) => ({ netPlay: { id: task.id, n: (u.netPlay?.id === task.id ? u.netPlay.n : 0) + 1, stay } }));
 
   const current = (): Current => {
     const { chapter, beat } = scene.getState();
@@ -315,7 +327,7 @@ export function createController(lesson: Lesson, scene: SceneStore<MathSceneExt>
     const pick = forced.get(step.id) ?? drawIndex(seed, step.id, count, step.pool.length, prev ?? null);
     forced.delete(step.id);
     const task = step.pool[pick]!;
-    ui.setState((u) => ({ drawn: { ...u.drawn, [step.id]: pick }, runs: { ...u.runs, [task.id]: freshRun(task) } }));
+    ui.setState((u) => ({ drawn: { ...u.drawn, [step.id]: pick }, runs: { ...u.runs, [task.id]: freshRun(task) }, netPlay: null }));
   };
 
   const api = {
@@ -371,7 +383,7 @@ export function createController(lesson: Lesson, scene: SceneStore<MathSceneExt>
       const pick = Math.min(Math.max(0, pool), step.pool.length - 1);
       if (scene.getState().chapter === stepId) {
         const task = step.pool[pick]!;
-        ui.setState((u) => ({ drawn: { ...u.drawn, [step.id]: pick }, runs: { ...u.runs, [task.id]: freshRun(task) } }));
+        ui.setState((u) => ({ drawn: { ...u.drawn, [step.id]: pick }, runs: { ...u.runs, [task.id]: freshRun(task) }, netPlay: null }));
       } else forced.set(stepId, pick);
       api.goToBeat(stepId, step.beats.length, instant);
     },
@@ -419,6 +431,8 @@ export function createController(lesson: Lesson, scene: SceneStore<MathSceneExt>
       const r = check(task, run.state);
       const phases = phasesOf(task);
       const last = run.state.phase >= phases.length - 1;
+      // A completed net is checked by folding it up (it stays up when it closes); a face found folds the net up to show the pair.
+      if (task.kind === 'complete-net' || (task.kind === 'tap-face' && r.ok)) playNet(task, r.ok || practice);
       if (r.ok && !last) {
         setRun(task, { ...run, state: { ...run.state, phase: run.state.phase + 1 }, attempts: attempt(task, run, 'phase'), feedback: { tone: 'phase', text: phaseText(task, phases[run.state.phase + 1]!) } });
         ui.setState((u) => ({ pulse: u.pulse + 1 }));
@@ -469,6 +483,8 @@ export function createController(lesson: Lesson, scene: SceneStore<MathSceneExt>
       const { task, run, practice } = current();
       if (!task || !run || practice || run.done || run.tries < 2) return false;
       setRun(task, { ...run, revealed: true, feedback: { tone: 'reveal', text: task.feedback.reveal } });
+      // "Show me" on a net folds the answer up.
+      if (task.kind === 'complete-net' || task.kind === 'tap-face') playNet(task, true);
       return true;
     },
 
@@ -509,6 +525,7 @@ export function createController(lesson: Lesson, scene: SceneStore<MathSceneExt>
       ui.setState((u) => ({
         practice: {},
         summary: false,
+        netPlay: null,
         runs: Object.fromEntries(Object.entries(u.runs).filter(([id]) => !ids.has(id))),
       }));
       scene.getState().patch({ beat: 0, model: null });
@@ -517,6 +534,7 @@ export function createController(lesson: Lesson, scene: SceneStore<MathSceneExt>
     /** Reset the task on show to its start (a presentation check beat). */
     reset(task: Task) {
       setRun(task, freshRun(task));
+      ui.setState({ netPlay: null });
     },
 
     /** The chapter's beats on the axis. */

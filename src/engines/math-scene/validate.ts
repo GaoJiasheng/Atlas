@@ -22,6 +22,8 @@ import { decimalModelIssues, decimalTaskIssues } from './validate-decimals';
 import { asFrac } from './lib/check';
 import { isDecimalModel } from './lib/decimal-tasks';
 import { bareQuantities, instrumentModelIssues, measureTaskIssues } from './validate-measure';
+import { netModelIssues, netTaskIssues } from './validate-nets';
+import { isNetTask, netWay } from './lib/net-tasks';
 
 export interface LessonIssue {
   level: 'error' | 'warn';
@@ -117,7 +119,7 @@ function feedbackIssues(task: Task): string[] {
       // A grid choice may offer a wrong option no catalogued misconception explains (m² for a stamp): its feedback is the fallback.
       if (!o.correct && !o.misconception && task.model.kind !== 'grid') out.push(`option "${o.id}" is wrong but names no misconception`);
       if (o.misconception && !codes.includes(o.misconception)) out.push(`option "${o.id}" shows "${o.misconception}" but feedback.wrong has no line for it`);
-      if (!o.value && !o.model && !o.text) out.push(`option "${o.id}" needs a value, a model or a text`);
+      if (!o.value && !o.model && !o.text && !o.solid && o.folds === undefined) out.push(`option "${o.id}" needs a value, a model, a text, a solid or folds`);
     }
   }
   return out;
@@ -139,7 +141,10 @@ function beatIssues(beat: Beat, limits?: StepLimits): string[] {
     if (count(beat.crossed).some((i) => !given.includes(i))) out.push('crossed parts must be given parts');
     if (m.kind === 'bar' && m.rows && beat.crossed) out.push('crossed is for a single bar');
   } else if (beat.crossed) out.push('crossed is for a bar or a circle');
-  if (m.kind === 'instrument') {
+  if (m.kind === 'net') {
+    out.push(...netModelIssues(m, limits));
+    if (beat.under) out.push('a net beat has no model under it (side by side: set)');
+  } else if (m.kind === 'instrument') {
     out.push(...instrumentModelIssues(m, { nearest: !!limits?.nearest }));
     if (beat.under) out.push('an instrument beat has no model under it (side by side: pair or set)');
   } else if (m.kind === 'array' || m.kind === 'blocks' || m.kind === 'clock' || m.kind === 'timeline' || (m.kind === 'numberline' && m.scale === 'whole')) out.push(...valueModelIssues(m));
@@ -314,12 +319,16 @@ export function taskIssues(task: Task, where: string, opts: { bridge: boolean; p
   const grid = task.model.kind === 'grid' || modelsOf(task).some((m) => m.kind === 'grid') || (GRID_KINDS as readonly string[]).includes(task.kind);
   const domain = domainOf(task);
   const fractions = domain === 'fractions';
-  if (grid) for (const m of gridTaskIssues(task, opts.limits)) error(m);
+  if (domain === 'nets') {
+    const r = netTaskIssues(task, opts.limits);
+    for (const m of r.errors) error(m);
+    for (const m of r.warns) warn(m);
+  } else if (grid) for (const m of gridTaskIssues(task, opts.limits)) error(m);
   else if (domain === 'measure-reading') for (const m of measureTaskIssues(task, opts.limits)) error(m);
   else if (domain === 'decimals') for (const m of decimalTaskIssues(task, opts.limits)) error(m);
   else if (!fractions) for (const m of valueTaskIssues(task, opts.limits)) error(m);
   // Every code from the task's own domain (docs/19 G5).
-  if (!grid) for (const c of task.feedback.wrong.map((w) => w.when)) if (!(MISCONCEPTION_DOMAINS[domain] as readonly string[]).includes(c)) error(`"${c}" is a ${domainOfCode(c)} code, not one for ${domain}`);
+  if (!grid || domain === 'nets') for (const c of [...task.feedback.wrong.map((w) => w.when), ...(task.kind === 'choose' && domain === 'nets' ? task.options.flatMap((o) => (o.misconception ? [o.misconception] : [])) : [])]) if (!(MISCONCEPTION_DOMAINS[domain] as readonly string[]).includes(c)) error(`"${c}" is a ${domainOfCode(c)} code, not one for ${domain}`);
   for (const m of fractions ? modelsOf(task) : []) if (m.kind === 'numberline') for (const x of valueModelIssues(m)) error(x);
   for (const f of fractions ? fractionsOf(task) : []) if (toImproper(f).d > 12 || f.d < 1) error(`denominator ${f.d} is out of range (1–12)`);
   if (!opts.bridge && fractions) {
@@ -333,7 +342,7 @@ export function taskIssues(task: Task, where: string, opts: { bridge: boolean; p
       if (s.a.d !== s.b.d && !related(s.a, s.b)) error(`${s.a.n}/${s.a.d} and ${s.b.n}/${s.b.d} are not related fractions`);
     }
   }
-  for (const m of domain === 'decimals' || domain === 'measure-reading' ? [] : targetIssues(task)) error(m);
+  for (const m of domain === 'decimals' || domain === 'measure-reading' || domain === 'nets' ? [] : targetIssues(task)) error(m);
   for (const m of feedbackIssues(task)) error(m);
   if (opts.practice && task.hints.length > 1) error('practice questions have at most one hint');
   if (textLength(task.prompt.en) > PROMPT_EN) warn(`prompt is ${textLength(task.prompt.en)} characters (EN ≤ ${PROMPT_EN})`);
@@ -421,7 +430,8 @@ export function lessonIssues(data: MathSceneData, chapters: readonly ChapterInfo
   /* 9. practice */
   if (lesson.practice.length > 0) {
     if (lesson.practice.length < 6 || lesson.practice.length > 10) error(`practice has ${lesson.practice.length} questions (6–10)`);
-    const kinds = new Set(lesson.practice.map((q) => q.task.kind));
+    // A nets question counts by the way it asks (docs/39 §2.3): complete-net and tap-face each ask two or three ways.
+    const kinds = new Set(lesson.practice.map((q) => (isNetTask(q.task) ? netWay(q.task) : q.task.kind)));
     if (kinds.size < 5) error(`practice uses ${kinds.size} kinds of task (at least 5)`);
     for (const q of lesson.practice) {
       if (q.task.id !== q.id) error(`practice "${q.id}": task.id must equal the question id`);

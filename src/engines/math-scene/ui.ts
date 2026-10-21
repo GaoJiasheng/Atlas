@@ -64,6 +64,10 @@ export interface MathUiState {
   presenting: boolean;
   /** Bumped on every right answer (one signal pulse on the model). */
   pulse: number;
+  /** The FOLD slider and the turn buttons on a net (docs/39 §3.5): for the beat or check `at`, back to the spec's anywhere else. */
+  net: { at: string; fold: number | null; turn: number | null };
+  /** A net check folding up (Check on a completed net, a face found, "Show me"): bumped per play; `stay` keeps it folded. */
+  netPlay: { id: string; n: number; stay: boolean } | null;
 }
 
 export type MathUiStore = StoreApi<MathUiState>;
@@ -78,5 +82,7 @@ export function createMathUi(): MathUiStore {
     summary: false,
     presenting: false,
     pulse: 0,
+    net: { at: '', fold: null, turn: null },
+    netPlay: null,
   }));
 }

@@ -1,0 +1,2593 @@
+{
+  "syllabus": [
+    {
+      "id": "placeholder",
+      "level": "P4",
+      "ref": "Placeholder",
+      "source": "S1",
+      "text": {
+        "en": "Placeholder: no syllabus anchor.",
+        "zh": "占位：没有课纲条目。"
+      }
+    }
+  ],
+  "steps": [
+    {
+      "id": "cubes-and-hexominoes",
+      "lo": [
+        "placeholder"
+      ],
+      "views": [
+        "net"
+      ],
+      "limits": {
+        "solids": [
+          "cube",
+          "sphere"
+        ]
+      },
+      "beats": [
+        {
+          "model": {
+            "kind": "net",
+            "solid": {
+              "type": "cuboid",
+              "size": [
+                1,
+                1,
+                1
+              ]
+            },
+            "fold": 1,
+            "view": "iso"
+          },
+          "caption": {
+            "en": "Placeholder beat: a cube, folded.",
+            "zh": "占位节拍：折好的正方体。"
+          },
+          "words": {
+            "en": "6 faces",
+            "zh": "6 个面"
+          }
+        },
+        {
+          "model": {
+            "kind": "net",
+            "solid": {
+              "type": "cuboid",
+              "size": [
+                1,
+                1,
+                1
+              ]
+            },
+            "fold": 1,
+            "view": "iso",
+            "pairs": true
+          },
+          "caption": {
+            "en": "Placeholder beat: opposite faces in pairs.",
+            "zh": "占位节拍：相对的面配成对。"
+          },
+          "move": "shade",
+          "words": {
+            "en": "3 pairs",
+            "zh": "3 对"
+          }
+        },
+        {
+          "model": {
+            "kind": "net",
+            "solid": {
+              "type": "cuboid",
+              "size": [
+                1,
+                1,
+                1
+              ]
+            },
+            "fold": 1,
+            "view": "iso",
+            "pairs": true,
+            "turn": 1
+          },
+          "caption": {
+            "en": "Placeholder beat: the cube turned a quarter.",
+            "zh": "占位节拍：正方体转了四分之一圈。"
+          },
+          "move": "rotate"
+        },
+        {
+          "model": {
+            "kind": "net",
+            "solid": {
+              "type": "cuboid",
+              "size": [
+                1,
+                1,
+                1
+              ]
+            },
+            "fold": 0.5,
+            "view": "auto",
+            "pairs": true,
+            "turn": 1,
+            "footprint": true
+          },
+          "caption": {
+            "en": "Placeholder beat: half unfolded over its outline.",
+            "zh": "占位节拍：展开一半，下面是摊平的轮廓。"
+          },
+          "move": "fold"
+        },
+        {
+          "model": {
+            "kind": "net",
+            "set": [
+              {
+                "solid": {
+                  "type": "cuboid",
+                  "size": [
+                    1,
+                    1,
+                    1
+                  ]
+                },
+                "layout": {
+                  "cubeNet": "141-b"
+                },
+                "fold": 0,
+                "label": {
+                  "en": "141-b",
+                  "zh": "141-b"
+                }
+              },
+              {
+                "solid": {
+                  "type": "cuboid",
+                  "size": [
+                    1,
+                    1,
+                    1
+                  ]
+                },
+                "layout": {
+                  "cubeNet": "222"
+                },
+                "fold": 0,
+                "label": {
+                  "en": "222",
+                  "zh": "222"
+                }
+              },
+              {
+                "solid": {
+                  "type": "cuboid",
+                  "size": [
+                    1,
+                    1,
+                    1
+                  ]
+                },
+                "layout": {
+                  "cells": [
+                    [
+                      0,
+                      0
+                    ],
+                    [
+                      0,
+                      1
+                    ],
+                    [
+                      0,
+                      2
+                    ],
+                    [
+                      1,
+                      2
+                    ],
+                    [
+                      1,
+                      3
+                    ],
+                    [
+                      2,
+                      2
+                    ]
+                  ]
+                },
+                "fold": 0,
+                "label": {
+                  "en": "?",
+                  "zh": "?"
+                }
+              },
+              {
+                "solid": {
+                  "type": "sphere",
+                  "radius": 1
+                },
+                "label": {
+                  "en": "sphere",
+                  "zh": "球"
+                }
+              }
+            ]
+          },
+          "caption": {
+            "en": "Placeholder beat: a row of pictures.",
+            "zh": "占位节拍：一排小图。"
+          },
+          "move": "morph",
+          "words": {
+            "en": "fold to be sure",
+            "zh": "折一折才确定"
+          }
+        }
+      ],
+      "pool": [
+        {
+          "id": "cn-adjacent",
+          "kind": "complete-net",
+          "model": {
+            "kind": "net",
+            "solid": {
+              "type": "cuboid",
+              "size": [
+                1,
+                1,
+                1
+              ]
+            },
+            "layout": {
+              "cells": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  1
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ]
+              ]
+            },
+            "fold": 0
+          },
+          "prompt": {
+            "en": "Placeholder: cn-adjacent.",
+            "zh": "占位：cn-adjacent。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the net, then answer.",
+            "zh": "占位提示：先看展开图，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint 1.",
+              "zh": "占位提示 1。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder: any one of the right answers is right.",
+              "zh": "对。占位：任何一个对的答案都算对。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: fold it and look.",
+              "zh": "还不对。占位：折一折，看一看。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer folds up on the stage.",
+              "zh": "占位：答案在舞台上折起来。"
+            },
+            "wrong": [
+              {
+                "when": "overlap-unseen",
+                "say": {
+                  "en": "Placeholder feedback for overlap-unseen.",
+                  "zh": "占位反馈：overlap-unseen。"
+                },
+                "sample": "cells:2,2"
+              }
+            ]
+          },
+          "add": 1,
+          "candidates": "adjacent",
+          "box": [
+            6,
+            5
+          ]
+        },
+        {
+          "id": "cn-free",
+          "kind": "complete-net",
+          "model": {
+            "kind": "net",
+            "solid": {
+              "type": "cuboid",
+              "size": [
+                1,
+                1,
+                1
+              ]
+            },
+            "layout": {
+              "cells": [
+                [
+                  2,
+                  2
+                ]
+              ]
+            },
+            "fold": 0
+          },
+          "prompt": {
+            "en": "Placeholder: cn-free.",
+            "zh": "占位：cn-free。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the net, then answer.",
+            "zh": "占位提示：先看展开图，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint 1.",
+              "zh": "占位提示 1。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder: any one of the right answers is right.",
+              "zh": "对。占位：任何一个对的答案都算对。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: fold it and look.",
+              "zh": "还不对。占位：折一折，看一看。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer folds up on the stage.",
+              "zh": "占位：答案在舞台上折起来。"
+            },
+            "wrong": [
+              {
+                "when": "overlap-unseen",
+                "say": {
+                  "en": "Placeholder feedback for overlap-unseen.",
+                  "zh": "占位反馈：overlap-unseen。"
+                },
+                "sample": "cells:3,2;2,1;3,1;1,2;0,2"
+              }
+            ]
+          },
+          "add": 5,
+          "candidates": "free",
+          "box": [
+            6,
+            5
+          ]
+        },
+        {
+          "id": "cn-list",
+          "kind": "complete-net",
+          "model": {
+            "kind": "net",
+            "solid": {
+              "type": "cuboid",
+              "size": [
+                1,
+                1,
+                1
+              ]
+            },
+            "layout": {
+              "cells": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  1
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  1,
+                  0
+                ]
+              ]
+            },
+            "fold": 0
+          },
+          "prompt": {
+            "en": "Placeholder: cn-list.",
+            "zh": "占位：cn-list。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the net, then answer.",
+            "zh": "占位提示：先看展开图，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint 1.",
+              "zh": "占位提示 1。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder: any one of the right answers is right.",
+              "zh": "对。占位：任何一个对的答案都算对。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: fold it and look.",
+              "zh": "还不对。占位：折一折，看一看。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer folds up on the stage.",
+              "zh": "占位：答案在舞台上折起来。"
+            },
+            "wrong": [
+              {
+                "when": "overlap-unseen",
+                "say": {
+                  "en": "Placeholder feedback for overlap-unseen.",
+                  "zh": "占位反馈：overlap-unseen。"
+                },
+                "sample": "cells:0,0"
+              }
+            ]
+          },
+          "add": 1,
+          "candidates": [
+            [
+              1,
+              2
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4,
+              1
+            ]
+          ]
+        },
+        {
+          "id": "tf-opposite",
+          "kind": "tap-face",
+          "model": {
+            "kind": "net",
+            "solid": {
+              "type": "cuboid",
+              "size": [
+                1,
+                1,
+                1
+              ]
+            },
+            "layout": {
+              "cubeNet": "141-d"
+            },
+            "fold": 0,
+            "mark": "[1,1]"
+          },
+          "prompt": {
+            "en": "Placeholder: tf-opposite.",
+            "zh": "占位：tf-opposite。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the net, then answer.",
+            "zh": "占位提示：先看展开图，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint 1.",
+              "zh": "占位提示 1。"
+            },
+            {
+              "en": "Placeholder hint 2.",
+              "zh": "占位提示 2。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder: any one of the right answers is right.",
+              "zh": "对。占位：任何一个对的答案都算对。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: fold it and look.",
+              "zh": "还不对。占位：折一折，看一看。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer folds up on the stage.",
+              "zh": "占位：答案在舞台上折起来。"
+            },
+            "wrong": [
+              {
+                "when": "adjacent-as-opposite",
+                "say": {
+                  "en": "Placeholder feedback for adjacent-as-opposite.",
+                  "zh": "占位反馈：adjacent-as-opposite。"
+                },
+                "sample": "face:2,1"
+              }
+            ]
+          },
+          "ask": "opposite"
+        },
+        {
+          "id": "tf-bottom",
+          "kind": "tap-face",
+          "model": {
+            "kind": "net",
+            "solid": {
+              "type": "cuboid",
+              "size": [
+                1,
+                1,
+                1
+              ]
+            },
+            "layout": {
+              "cells": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  1
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  0,
+                  0
+                ]
+              ]
+            },
+            "base": [
+              0,
+              0
+            ],
+            "open": "top",
+            "fold": 0
+          },
+          "prompt": {
+            "en": "Placeholder: tf-bottom.",
+            "zh": "占位：tf-bottom。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the net, then answer.",
+            "zh": "占位提示：先看展开图，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint 1.",
+              "zh": "占位提示 1。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder: any one of the right answers is right.",
+              "zh": "对。占位：任何一个对的答案都算对。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: fold it and look.",
+              "zh": "还不对。占位：折一折，看一看。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer folds up on the stage.",
+              "zh": "占位：答案在舞台上折起来。"
+            },
+            "wrong": []
+          },
+          "ask": "bottom"
+        },
+        {
+          "id": "ch-folds",
+          "kind": "choose",
+          "model": {
+            "kind": "net",
+            "solid": {
+              "type": "cuboid",
+              "size": [
+                1,
+                1,
+                1
+              ]
+            },
+            "layout": {
+              "cubeNet": "231-c"
+            },
+            "fold": 0
+          },
+          "prompt": {
+            "en": "Placeholder: ch-folds.",
+            "zh": "占位：ch-folds。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the net, then answer.",
+            "zh": "占位提示：先看展开图，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint 1.",
+              "zh": "占位提示 1。"
+            },
+            {
+              "en": "Placeholder hint 2.",
+              "zh": "占位提示 2。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder: any one of the right answers is right.",
+              "zh": "对。占位：任何一个对的答案都算对。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: fold it and look.",
+              "zh": "还不对。占位：折一折，看一看。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer folds up on the stage.",
+              "zh": "占位：答案在舞台上折起来。"
+            },
+            "wrong": [
+              {
+                "when": "prototype-only",
+                "say": {
+                  "en": "Placeholder feedback for prototype-only.",
+                  "zh": "占位反馈：prototype-only。"
+                },
+                "sample": "no"
+              }
+            ]
+          },
+          "options": [
+            {
+              "id": "yes",
+              "correct": true,
+              "folds": true
+            },
+            {
+              "id": "no",
+              "correct": false,
+              "folds": false,
+              "misconception": "prototype-only"
+            }
+          ]
+        },
+        {
+          "id": "ch-multi",
+          "kind": "choose",
+          "model": {
+            "kind": "net",
+            "solid": {
+              "type": "cuboid",
+              "size": [
+                1,
+                1,
+                1
+              ]
+            },
+            "fold": 1,
+            "view": "iso"
+          },
+          "prompt": {
+            "en": "Placeholder: ch-multi.",
+            "zh": "占位：ch-multi。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the net, then answer.",
+            "zh": "占位提示：先看展开图，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint 1.",
+              "zh": "占位提示 1。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder: any one of the right answers is right.",
+              "zh": "对。占位：任何一个对的答案都算对。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: fold it and look.",
+              "zh": "还不对。占位：折一折，看一看。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer folds up on the stage.",
+              "zh": "占位：答案在舞台上折起来。"
+            },
+            "wrong": [
+              {
+                "when": "prototype-only",
+                "say": {
+                  "en": "Placeholder feedback for prototype-only.",
+                  "zh": "占位反馈：prototype-only。"
+                },
+                "sample": "a"
+              },
+              {
+                "when": "overlap-unseen",
+                "say": {
+                  "en": "Placeholder feedback for overlap-unseen.",
+                  "zh": "占位反馈：overlap-unseen。"
+                },
+                "sample": "c"
+              },
+              {
+                "when": "face-count",
+                "say": {
+                  "en": "Placeholder feedback for face-count.",
+                  "zh": "占位反馈：face-count。"
+                },
+                "sample": "d"
+              }
+            ]
+          },
+          "multi": true,
+          "options": [
+            {
+              "id": "a",
+              "correct": true,
+              "model": {
+                "kind": "net",
+                "solid": {
+                  "type": "cuboid",
+                  "size": [
+                    1,
+                    1,
+                    1
+                  ]
+                },
+                "layout": {
+                  "cubeNet": "141-f"
+                },
+                "fold": 0
+              }
+            },
+            {
+              "id": "b",
+              "correct": true,
+              "model": {
+                "kind": "net",
+                "solid": {
+                  "type": "cuboid",
+                  "size": [
+                    1,
+                    1,
+                    1
+                  ]
+                },
+                "layout": {
+                  "cubeNet": "222"
+                },
+                "fold": 0
+              },
+              "misconception": "prototype-only"
+            },
+            {
+              "id": "c",
+              "correct": false,
+              "model": {
+                "kind": "net",
+                "solid": {
+                  "type": "cuboid",
+                  "size": [
+                    1,
+                    1,
+                    1
+                  ]
+                },
+                "layout": {
+                  "cells": [
+                    [
+                      0,
+                      0
+                    ],
+                    [
+                      1,
+                      0
+                    ],
+                    [
+                      0,
+                      1
+                    ],
+                    [
+                      1,
+                      1
+                    ],
+                    [
+                      2,
+                      1
+                    ],
+                    [
+                      3,
+                      1
+                    ]
+                  ]
+                },
+                "fold": 0
+              },
+              "misconception": "overlap-unseen"
+            },
+            {
+              "id": "d",
+              "correct": false,
+              "model": {
+                "kind": "net",
+                "solid": {
+                  "type": "cuboid",
+                  "size": [
+                    1,
+                    1,
+                    1
+                  ]
+                },
+                "layout": {
+                  "cells": [
+                    [
+                      0,
+                      1
+                    ],
+                    [
+                      1,
+                      1
+                    ],
+                    [
+                      2,
+                      1
+                    ],
+                    [
+                      3,
+                      1
+                    ],
+                    [
+                      1,
+                      2
+                    ]
+                  ]
+                },
+                "fold": 0
+              },
+              "misconception": "face-count"
+            }
+          ]
+        },
+        {
+          "id": "ch-letters",
+          "kind": "choose",
+          "model": {
+            "kind": "net",
+            "solid": {
+              "type": "cuboid",
+              "size": [
+                1,
+                1,
+                1
+              ]
+            },
+            "layout": {
+              "cubeNet": "141-e"
+            },
+            "fold": 0,
+            "letters": true
+          },
+          "prompt": {
+            "en": "Placeholder: ch-letters.",
+            "zh": "占位：ch-letters。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the net, then answer.",
+            "zh": "占位提示：先看展开图，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint 1.",
+              "zh": "占位提示 1。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder: any one of the right answers is right.",
+              "zh": "对。占位：任何一个对的答案都算对。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: fold it and look.",
+              "zh": "还不对。占位：折一折，看一看。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer folds up on the stage.",
+              "zh": "占位：答案在舞台上折起来。"
+            },
+            "wrong": [
+              {
+                "when": "adjacent-as-opposite",
+                "say": {
+                  "en": "Placeholder feedback for adjacent-as-opposite.",
+                  "zh": "占位反馈：adjacent-as-opposite。"
+                },
+                "sample": "b"
+              }
+            ]
+          },
+          "options": [
+            {
+              "id": "c",
+              "correct": true,
+              "text": {
+                "en": "C",
+                "zh": "C"
+              }
+            },
+            {
+              "id": "b",
+              "correct": false,
+              "text": {
+                "en": "B",
+                "zh": "B"
+              },
+              "misconception": "adjacent-as-opposite"
+            },
+            {
+              "id": "e",
+              "correct": false,
+              "text": {
+                "en": "E",
+                "zh": "E"
+              },
+              "misconception": "adjacent-as-opposite"
+            }
+          ]
+        }
+      ],
+      "keyFacts": [
+        {
+          "en": "Placeholder: a net folds up into a solid.",
+          "zh": "占位：展开图能折成立体。"
+        },
+        {
+          "en": "Placeholder: fold it and look.",
+          "zh": "占位：折一折，看一看。"
+        }
+      ]
+    },
+    {
+      "id": "cuboids-prisms-and-curves",
+      "lo": [
+        "placeholder"
+      ],
+      "views": [
+        "net"
+      ],
+      "limits": {
+        "solids": [
+          "cuboid",
+          "prism",
+          "pyramid",
+          "cylinder",
+          "cone"
+        ]
+      },
+      "beats": [
+        {
+          "model": {
+            "kind": "net",
+            "solid": {
+              "type": "cuboid",
+              "size": [
+                3,
+                2,
+                1
+              ]
+            },
+            "layout": {
+              "rects": [
+                [
+                  1,
+                  1,
+                  3,
+                  2
+                ],
+                [
+                  1,
+                  0,
+                  3,
+                  1
+                ],
+                [
+                  1,
+                  3,
+                  3,
+                  1
+                ],
+                [
+                  1,
+                  4,
+                  3,
+                  2
+                ],
+                [
+                  0,
+                  1,
+                  1,
+                  2
+                ],
+                [
+                  4,
+                  1,
+                  1,
+                  2
+                ]
+              ]
+            },
+            "fold": 0,
+            "grid": true,
+            "dims": true,
+            "pairs": true
+          },
+          "caption": {
+            "en": "Placeholder beat: a cuboid's net on squared paper.",
+            "zh": "占位节拍：方格纸上的长方体展开图。"
+          },
+          "words": {
+            "en": "6 rectangles = 3 pairs",
+            "zh": "6 个长方形 = 3 对"
+          }
+        },
+        {
+          "model": {
+            "kind": "net",
+            "solid": {
+              "type": "prism",
+              "sides": 3,
+              "edge": 2,
+              "length": 3
+            },
+            "layout": {
+              "tree": [
+                [
+                  "side-2",
+                  null
+                ],
+                [
+                  "side-1",
+                  "side-2"
+                ],
+                [
+                  "side-3",
+                  "side-2"
+                ],
+                [
+                  "end-a",
+                  "side-2"
+                ],
+                [
+                  "end-b",
+                  "side-2"
+                ]
+              ]
+            },
+            "fold": 1,
+            "view": "auto",
+            "pairs": true
+          },
+          "caption": {
+            "en": "Placeholder beat: a triangular prism folds up.",
+            "zh": "占位节拍：三棱柱折起来。"
+          },
+          "move": "fold",
+          "words": {
+            "en": "2 triangles + 3 rectangles = 5 faces",
+            "zh": "2 个三角形 + 3 个长方形 = 5 个面"
+          }
+        },
+        {
+          "model": {
+            "kind": "net",
+            "solid": {
+              "type": "pyramid",
+              "sides": 4,
+              "edge": 2,
+              "height": 1.6
+            },
+            "fold": 0,
+            "footprint": true,
+            "tone": {
+              "base": "cold"
+            }
+          },
+          "caption": {
+            "en": "Placeholder beat: a square pyramid's net.",
+            "zh": "占位节拍：四棱锥的展开图。"
+          },
+          "move": "shade"
+        },
+        {
+          "model": {
+            "kind": "net",
+            "solid": {
+              "type": "cylinder",
+              "radius": 1,
+              "height": 2
+            },
+            "curved": {
+              "caps": [
+                0.5,
+                0.5
+              ]
+            },
+            "fold": 0,
+            "dims": true,
+            "tone": {
+              "side": "hot",
+              "bottom": "cold",
+              "top": "cold"
+            }
+          },
+          "caption": {
+            "en": "Placeholder beat: a cylinder opened out.",
+            "zh": "占位节拍：摊开的圆柱。"
+          },
+          "move": "morph",
+          "words": {
+            "en": "long side = once round the circle",
+            "zh": "长边 = 绕圆一圈"
+          }
+        },
+        {
+          "model": {
+            "kind": "net",
+            "solid": {
+              "type": "cone",
+              "radius": 1,
+              "height": 2
+            },
+            "curved": {
+              "caps": [
+                0.5
+              ]
+            },
+            "fold": 1,
+            "footprint": true,
+            "tone": {
+              "side": "hot",
+              "base": "cold"
+            }
+          },
+          "caption": {
+            "en": "Placeholder beat: a cone rolls up.",
+            "zh": "占位节拍：圆锥卷起来。"
+          },
+          "move": "fold",
+          "words": {
+            "en": "1 circle + 1 fan shape",
+            "zh": "1 个圆 + 1 个扇形"
+          }
+        }
+      ],
+      "pool": [
+        {
+          "id": "cn-rects",
+          "kind": "complete-net",
+          "model": {
+            "kind": "net",
+            "solid": {
+              "type": "cuboid",
+              "size": [
+                2,
+                2,
+                3
+              ]
+            },
+            "layout": {
+              "rects": [
+                [
+                  0,
+                  2,
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  2,
+                  2,
+                  3
+                ],
+                [
+                  4,
+                  2,
+                  2,
+                  3
+                ],
+                [
+                  6,
+                  2,
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  0,
+                  2,
+                  2
+                ]
+              ]
+            },
+            "fold": 0,
+            "grid": true
+          },
+          "prompt": {
+            "en": "Placeholder: cn-rects.",
+            "zh": "占位：cn-rects。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the net, then answer.",
+            "zh": "占位提示：先看展开图，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint 1.",
+              "zh": "占位提示 1。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder: any one of the right answers is right.",
+              "zh": "对。占位：任何一个对的答案都算对。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: fold it and look.",
+              "zh": "还不对。占位：折一折，看一看。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer folds up on the stage.",
+              "zh": "占位：答案在舞台上折起来。"
+            },
+            "wrong": [
+              {
+                "when": "face-size",
+                "say": {
+                  "en": "Placeholder feedback for face-size.",
+                  "zh": "占位反馈：face-size。"
+                },
+                "sample": "rects:1"
+              },
+              {
+                "when": "overlap-unseen",
+                "say": {
+                  "en": "Placeholder feedback for overlap-unseen.",
+                  "zh": "占位反馈：overlap-unseen。"
+                },
+                "sample": "rects:2"
+              }
+            ]
+          },
+          "add": 1,
+          "candidates": [
+            [
+              4,
+              5,
+              2,
+              2
+            ],
+            [
+              6,
+              5,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              2,
+              2
+            ]
+          ]
+        },
+        {
+          "id": "cn-tree",
+          "kind": "complete-net",
+          "model": {
+            "kind": "net",
+            "solid": {
+              "type": "prism",
+              "sides": 3,
+              "edge": 2,
+              "length": 3
+            },
+            "layout": {
+              "tree": [
+                [
+                  "side-2",
+                  null
+                ],
+                [
+                  "side-1",
+                  "side-2"
+                ],
+                [
+                  "side-3",
+                  "side-2"
+                ],
+                [
+                  "end-a",
+                  "side-2"
+                ]
+              ]
+            },
+            "fold": 0
+          },
+          "prompt": {
+            "en": "Placeholder: cn-tree.",
+            "zh": "占位：cn-tree。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the net, then answer.",
+            "zh": "占位提示：先看展开图，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint 1.",
+              "zh": "占位提示 1。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder: any one of the right answers is right.",
+              "zh": "对。占位：任何一个对的答案都算对。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: fold it and look.",
+              "zh": "还不对。占位：折一折，看一看。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer folds up on the stage.",
+              "zh": "占位：答案在舞台上折起来。"
+            },
+            "wrong": [
+              {
+                "when": "overlap-unseen",
+                "say": {
+                  "en": "Placeholder feedback for overlap-unseen.",
+                  "zh": "占位反馈：overlap-unseen。"
+                },
+                "sample": "faces:1"
+              }
+            ]
+          },
+          "add": 1,
+          "candidates": [
+            [
+              "end-b",
+              "side-2"
+            ],
+            [
+              "end-a",
+              "side-3"
+            ]
+          ]
+        },
+        {
+          "id": "ch-name-prism",
+          "kind": "choose",
+          "model": {
+            "kind": "net",
+            "solid": {
+              "type": "prism",
+              "sides": 3,
+              "edge": 2,
+              "length": 3
+            },
+            "layout": {
+              "tree": [
+                [
+                  "side-2",
+                  null
+                ],
+                [
+                  "side-1",
+                  "side-2"
+                ],
+                [
+                  "side-3",
+                  "side-2"
+                ],
+                [
+                  "end-a",
+                  "side-2"
+                ],
+                [
+                  "end-b",
+                  "side-2"
+                ]
+              ]
+            },
+            "fold": 0
+          },
+          "prompt": {
+            "en": "Placeholder: ch-name-prism.",
+            "zh": "占位：ch-name-prism。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the net, then answer.",
+            "zh": "占位提示：先看展开图，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint 1.",
+              "zh": "占位提示 1。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder: any one of the right answers is right.",
+              "zh": "对。占位：任何一个对的答案都算对。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: fold it and look.",
+              "zh": "还不对。占位：折一折，看一看。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer folds up on the stage.",
+              "zh": "占位：答案在舞台上折起来。"
+            },
+            "wrong": [
+              {
+                "when": "prism-pyramid",
+                "say": {
+                  "en": "Placeholder feedback for prism-pyramid.",
+                  "zh": "占位反馈：prism-pyramid。"
+                },
+                "sample": "pyramid"
+              }
+            ]
+          },
+          "options": [
+            {
+              "id": "prism",
+              "correct": true,
+              "solid": "prism"
+            },
+            {
+              "id": "pyramid",
+              "correct": false,
+              "solid": "pyramid",
+              "misconception": "prism-pyramid"
+            }
+          ]
+        },
+        {
+          "id": "ch-name-cuboid",
+          "kind": "choose",
+          "model": {
+            "kind": "net",
+            "solid": {
+              "type": "cuboid",
+              "size": [
+                2,
+                2,
+                3
+              ]
+            },
+            "fold": 1,
+            "view": "iso"
+          },
+          "prompt": {
+            "en": "Placeholder: ch-name-cuboid.",
+            "zh": "占位：ch-name-cuboid。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the net, then answer.",
+            "zh": "占位提示：先看展开图，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint 1.",
+              "zh": "占位提示 1。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder: any one of the right answers is right.",
+              "zh": "对。占位：任何一个对的答案都算对。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: fold it and look.",
+              "zh": "还不对。占位：折一折，看一看。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer folds up on the stage.",
+              "zh": "占位：答案在舞台上折起来。"
+            },
+            "wrong": [
+              {
+                "when": "cube-cuboid",
+                "say": {
+                  "en": "Placeholder feedback for cube-cuboid.",
+                  "zh": "占位反馈：cube-cuboid。"
+                },
+                "sample": "cube"
+              }
+            ]
+          },
+          "options": [
+            {
+              "id": "cuboid",
+              "correct": true,
+              "solid": "cuboid"
+            },
+            {
+              "id": "cube",
+              "correct": false,
+              "solid": "cube",
+              "misconception": "cube-cuboid"
+            }
+          ]
+        },
+        {
+          "id": "ch-cylinder",
+          "kind": "choose",
+          "model": {
+            "kind": "net",
+            "solid": {
+              "type": "cylinder",
+              "radius": 1,
+              "height": 2
+            }
+          },
+          "prompt": {
+            "en": "Placeholder: ch-cylinder.",
+            "zh": "占位：ch-cylinder。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the net, then answer.",
+            "zh": "占位提示：先看展开图，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint 1.",
+              "zh": "占位提示 1。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder: any one of the right answers is right.",
+              "zh": "对。占位：任何一个对的答案都算对。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: fold it and look.",
+              "zh": "还不对。占位：折一折，看一看。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer folds up on the stage.",
+              "zh": "占位：答案在舞台上折起来。"
+            },
+            "wrong": [
+              {
+                "when": "curved-unrolled",
+                "say": {
+                  "en": "Placeholder feedback for curved-unrolled.",
+                  "zh": "占位反馈：curved-unrolled。"
+                },
+                "sample": "b"
+              },
+              {
+                "when": "overlap-unseen",
+                "say": {
+                  "en": "Placeholder feedback for overlap-unseen.",
+                  "zh": "占位反馈：overlap-unseen。"
+                },
+                "sample": "c"
+              },
+              {
+                "when": "face-count",
+                "say": {
+                  "en": "Placeholder feedback for face-count.",
+                  "zh": "占位反馈：face-count。"
+                },
+                "sample": "d"
+              }
+            ]
+          },
+          "options": [
+            {
+              "id": "a",
+              "correct": true,
+              "model": {
+                "kind": "net",
+                "solid": {
+                  "type": "cylinder",
+                  "radius": 1,
+                  "height": 2
+                },
+                "curved": {
+                  "caps": [
+                    0.5,
+                    0.5
+                  ]
+                },
+                "fold": 0
+              }
+            },
+            {
+              "id": "b",
+              "correct": false,
+              "model": {
+                "kind": "net",
+                "solid": {
+                  "type": "cylinder",
+                  "radius": 1,
+                  "height": 2
+                },
+                "curved": {
+                  "caps": [
+                    0.5,
+                    0.5
+                  ],
+                  "wrap": 0.7
+                },
+                "fold": 0
+              },
+              "misconception": "curved-unrolled"
+            },
+            {
+              "id": "c",
+              "correct": false,
+              "model": {
+                "kind": "net",
+                "solid": {
+                  "type": "cylinder",
+                  "radius": 1,
+                  "height": 2
+                },
+                "curved": {
+                  "caps": [
+                    {
+                      "at": 0.25,
+                      "edge": "top"
+                    },
+                    {
+                      "at": 0.75,
+                      "edge": "top"
+                    }
+                  ]
+                },
+                "fold": 0
+              },
+              "misconception": "overlap-unseen"
+            },
+            {
+              "id": "d",
+              "correct": false,
+              "model": {
+                "kind": "net",
+                "solid": {
+                  "type": "cylinder",
+                  "radius": 1,
+                  "height": 2
+                },
+                "curved": {
+                  "caps": [
+                    {
+                      "at": 0.5,
+                      "edge": "bottom"
+                    }
+                  ]
+                },
+                "fold": 0
+              },
+              "misconception": "face-count"
+            }
+          ]
+        },
+        {
+          "id": "ch-cone",
+          "kind": "choose",
+          "model": {
+            "kind": "net",
+            "solid": {
+              "type": "cone",
+              "radius": 1,
+              "height": 2
+            }
+          },
+          "prompt": {
+            "en": "Placeholder: ch-cone.",
+            "zh": "占位：ch-cone。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the net, then answer.",
+            "zh": "占位提示：先看展开图，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint 1.",
+              "zh": "占位提示 1。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder: any one of the right answers is right.",
+              "zh": "对。占位：任何一个对的答案都算对。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: fold it and look.",
+              "zh": "还不对。占位：折一折，看一看。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer folds up on the stage.",
+              "zh": "占位：答案在舞台上折起来。"
+            },
+            "wrong": [
+              {
+                "when": "curved-unrolled",
+                "say": {
+                  "en": "Placeholder feedback for curved-unrolled.",
+                  "zh": "占位反馈：curved-unrolled。"
+                },
+                "sample": "b"
+              },
+              {
+                "when": "face-count",
+                "say": {
+                  "en": "Placeholder feedback for face-count.",
+                  "zh": "占位反馈：face-count。"
+                },
+                "sample": "c"
+              }
+            ]
+          },
+          "options": [
+            {
+              "id": "a",
+              "correct": true,
+              "model": {
+                "kind": "net",
+                "solid": {
+                  "type": "cone",
+                  "radius": 1,
+                  "height": 2
+                },
+                "curved": {
+                  "caps": [
+                    0.5
+                  ]
+                },
+                "fold": 0
+              }
+            },
+            {
+              "id": "b",
+              "correct": false,
+              "model": {
+                "kind": "net",
+                "solid": {
+                  "type": "cone",
+                  "radius": 1,
+                  "height": 2
+                },
+                "curved": {
+                  "caps": [
+                    0.5
+                  ],
+                  "lateral": "triangle"
+                },
+                "fold": 0
+              },
+              "misconception": "curved-unrolled"
+            },
+            {
+              "id": "c",
+              "correct": false,
+              "model": {
+                "kind": "net",
+                "solid": {
+                  "type": "cone",
+                  "radius": 1,
+                  "height": 2
+                },
+                "curved": {
+                  "caps": [
+                    0.5,
+                    0.15
+                  ]
+                },
+                "fold": 0
+              },
+              "misconception": "face-count"
+            }
+          ]
+        },
+        {
+          "id": "in-faces",
+          "kind": "input",
+          "model": {
+            "kind": "net",
+            "solid": {
+              "type": "prism",
+              "sides": 3,
+              "edge": 2,
+              "length": 3
+            },
+            "layout": {
+              "tree": [
+                [
+                  "side-2",
+                  null
+                ],
+                [
+                  "side-1",
+                  "side-2"
+                ],
+                [
+                  "side-3",
+                  "side-2"
+                ],
+                [
+                  "end-a",
+                  "side-2"
+                ],
+                [
+                  "end-b",
+                  "side-2"
+                ]
+              ]
+            },
+            "fold": 0
+          },
+          "prompt": {
+            "en": "Placeholder: in-faces.",
+            "zh": "占位：in-faces。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the net, then answer.",
+            "zh": "占位提示：先看展开图，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint 1.",
+              "zh": "占位提示 1。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder: any one of the right answers is right.",
+              "zh": "对。占位：任何一个对的答案都算对。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: fold it and look.",
+              "zh": "还不对。占位：折一折，看一看。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer folds up on the stage.",
+              "zh": "占位：答案在舞台上折起来。"
+            },
+            "wrong": [
+              {
+                "when": "face-count",
+                "say": {
+                  "en": "Placeholder feedback for face-count.",
+                  "zh": "占位反馈：face-count。"
+                },
+                "sample": "2"
+              }
+            ]
+          },
+          "form": "whole",
+          "ask": "faces",
+          "answer": 5
+        },
+        {
+          "id": "in-length",
+          "kind": "input",
+          "model": {
+            "kind": "net",
+            "solid": {
+              "type": "cuboid",
+              "size": [
+                3,
+                2,
+                1
+              ]
+            },
+            "layout": {
+              "rects": [
+                [
+                  1,
+                  1,
+                  3,
+                  2
+                ],
+                [
+                  1,
+                  0,
+                  3,
+                  1
+                ],
+                [
+                  1,
+                  3,
+                  3,
+                  1
+                ],
+                [
+                  0,
+                  1,
+                  1,
+                  2
+                ],
+                [
+                  4,
+                  1,
+                  1,
+                  2
+                ]
+              ]
+            },
+            "fold": 0,
+            "grid": true
+          },
+          "prompt": {
+            "en": "Placeholder: in-length.",
+            "zh": "占位：in-length。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the net, then answer.",
+            "zh": "占位提示：先看展开图，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint 1.",
+              "zh": "占位提示 1。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder: any one of the right answers is right.",
+              "zh": "对。占位：任何一个对的答案都算对。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: fold it and look.",
+              "zh": "还不对。占位：折一折，看一看。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer folds up on the stage.",
+              "zh": "占位：答案在舞台上折起来。"
+            },
+            "wrong": [
+              {
+                "when": "face-size",
+                "say": {
+                  "en": "Placeholder feedback for face-size.",
+                  "zh": "占位反馈：face-size。"
+                },
+                "sample": "2"
+              }
+            ]
+          },
+          "form": "whole",
+          "ask": "length",
+          "answer": 3
+        },
+        {
+          "id": "ch-name-cone",
+          "kind": "choose",
+          "model": {
+            "kind": "net",
+            "solid": {
+              "type": "cone",
+              "radius": 1,
+              "height": 2
+            },
+            "curved": {
+              "caps": [
+                0.5
+              ]
+            },
+            "fold": 0
+          },
+          "prompt": {
+            "en": "Placeholder: ch-name-cone.",
+            "zh": "占位：ch-name-cone。"
+          },
+          "guide": {
+            "en": "Placeholder guide: look at the net, then answer.",
+            "zh": "占位提示：先看展开图，再作答。"
+          },
+          "hints": [
+            {
+              "en": "Placeholder hint 1.",
+              "zh": "占位提示 1。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Placeholder: any one of the right answers is right.",
+              "zh": "对。占位：任何一个对的答案都算对。"
+            },
+            "fallback": {
+              "en": "Not yet. Placeholder: fold it and look.",
+              "zh": "还不对。占位：折一折，看一看。"
+            },
+            "reveal": {
+              "en": "Placeholder: the answer folds up on the stage.",
+              "zh": "占位：答案在舞台上折起来。"
+            },
+            "wrong": [
+              {
+                "when": "curved-unrolled",
+                "say": {
+                  "en": "Placeholder feedback for curved-unrolled.",
+                  "zh": "占位反馈：curved-unrolled。"
+                },
+                "sample": "pyramid"
+              }
+            ]
+          },
+          "options": [
+            {
+              "id": "cone",
+              "correct": true,
+              "solid": "cone"
+            },
+            {
+              "id": "pyramid",
+              "correct": false,
+              "solid": "pyramid",
+              "misconception": "curved-unrolled"
+            }
+          ]
+        }
+      ],
+      "keyFacts": [
+        {
+          "en": "Placeholder: rectangles in pairs.",
+          "zh": "占位：长方形成对。"
+        },
+        {
+          "en": "Placeholder: a curved face wraps once round.",
+          "zh": "占位：曲面正好绕一圈。"
+        }
+      ]
+    }
+  ],
+  "practice": [
+    {
+      "id": "q1-name",
+      "revisit": [
+        "cuboids-prisms-and-curves"
+      ],
+      "task": {
+        "id": "q1-name",
+        "kind": "choose",
+        "model": {
+          "kind": "net",
+          "solid": {
+            "type": "prism",
+            "sides": 3,
+            "edge": 2,
+            "length": 3
+          },
+          "layout": {
+            "tree": [
+              [
+                "side-2",
+                null
+              ],
+              [
+                "side-1",
+                "side-2"
+              ],
+              [
+                "side-3",
+                "side-2"
+              ],
+              [
+                "end-a",
+                "side-2"
+              ],
+              [
+                "end-b",
+                "side-2"
+              ]
+            ]
+          },
+          "fold": 0
+        },
+        "prompt": {
+          "en": "Placeholder: q1-name.",
+          "zh": "占位：q1-name。"
+        },
+        "guide": {
+          "en": "Placeholder guide: look at the net, then answer.",
+          "zh": "占位提示：先看展开图，再作答。"
+        },
+        "hints": [
+          {
+            "en": "Placeholder hint 1.",
+            "zh": "占位提示 1。"
+          }
+        ],
+        "feedback": {
+          "correct": {
+            "en": "Yes. Placeholder: any one of the right answers is right.",
+            "zh": "对。占位：任何一个对的答案都算对。"
+          },
+          "fallback": {
+            "en": "Not yet. Placeholder: fold it and look.",
+            "zh": "还不对。占位：折一折，看一看。"
+          },
+          "reveal": {
+            "en": "Placeholder: the answer folds up on the stage.",
+            "zh": "占位：答案在舞台上折起来。"
+          },
+          "wrong": [
+            {
+              "when": "prism-pyramid",
+              "say": {
+                "en": "Placeholder feedback for prism-pyramid.",
+                "zh": "占位反馈：prism-pyramid。"
+              },
+              "sample": "pyramid"
+            }
+          ]
+        },
+        "options": [
+          {
+            "id": "prism",
+            "correct": true,
+            "solid": "prism"
+          },
+          {
+            "id": "pyramid",
+            "correct": false,
+            "solid": "pyramid",
+            "misconception": "prism-pyramid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "q2-folds",
+      "revisit": [
+        "cubes-and-hexominoes"
+      ],
+      "task": {
+        "id": "q2-folds",
+        "kind": "choose",
+        "model": {
+          "kind": "net",
+          "solid": {
+            "type": "cuboid",
+            "size": [
+              1,
+              1,
+              1
+            ]
+          },
+          "layout": {
+            "cubeNet": "231-b"
+          },
+          "fold": 0
+        },
+        "prompt": {
+          "en": "Placeholder: q2-folds.",
+          "zh": "占位：q2-folds。"
+        },
+        "guide": {
+          "en": "Placeholder guide: look at the net, then answer.",
+          "zh": "占位提示：先看展开图，再作答。"
+        },
+        "hints": [
+          {
+            "en": "Placeholder hint 1.",
+            "zh": "占位提示 1。"
+          }
+        ],
+        "feedback": {
+          "correct": {
+            "en": "Yes. Placeholder: any one of the right answers is right.",
+            "zh": "对。占位：任何一个对的答案都算对。"
+          },
+          "fallback": {
+            "en": "Not yet. Placeholder: fold it and look.",
+            "zh": "还不对。占位：折一折，看一看。"
+          },
+          "reveal": {
+            "en": "Placeholder: the answer folds up on the stage.",
+            "zh": "占位：答案在舞台上折起来。"
+          },
+          "wrong": [
+            {
+              "when": "prototype-only",
+              "say": {
+                "en": "Placeholder feedback for prototype-only.",
+                "zh": "占位反馈：prototype-only。"
+              },
+              "sample": "no"
+            }
+          ]
+        },
+        "options": [
+          {
+            "id": "yes",
+            "correct": true,
+            "folds": true
+          },
+          {
+            "id": "no",
+            "correct": false,
+            "folds": false,
+            "misconception": "prototype-only"
+          }
+        ]
+      }
+    },
+    {
+      "id": "q3-draw",
+      "revisit": [
+        "cubes-and-hexominoes"
+      ],
+      "task": {
+        "id": "q3-draw",
+        "kind": "complete-net",
+        "model": {
+          "kind": "net",
+          "solid": {
+            "type": "cuboid",
+            "size": [
+              1,
+              1,
+              1
+            ]
+          },
+          "layout": {
+            "cells": [
+              [
+                1,
+                2
+              ]
+            ]
+          },
+          "fold": 0
+        },
+        "prompt": {
+          "en": "Placeholder: q3-draw.",
+          "zh": "占位：q3-draw。"
+        },
+        "guide": {
+          "en": "Placeholder guide: look at the net, then answer.",
+          "zh": "占位提示：先看展开图，再作答。"
+        },
+        "hints": [
+          {
+            "en": "Placeholder hint 1.",
+            "zh": "占位提示 1。"
+          }
+        ],
+        "feedback": {
+          "correct": {
+            "en": "Yes. Placeholder: any one of the right answers is right.",
+            "zh": "对。占位：任何一个对的答案都算对。"
+          },
+          "fallback": {
+            "en": "Not yet. Placeholder: fold it and look.",
+            "zh": "还不对。占位：折一折，看一看。"
+          },
+          "reveal": {
+            "en": "Placeholder: the answer folds up on the stage.",
+            "zh": "占位：答案在舞台上折起来。"
+          },
+          "wrong": [
+            {
+              "when": "overlap-unseen",
+              "say": {
+                "en": "Placeholder feedback for overlap-unseen.",
+                "zh": "占位反馈：overlap-unseen。"
+              },
+              "sample": "cells:2,2;1,1;2,1;0,2;3,2"
+            }
+          ]
+        },
+        "add": 5,
+        "candidates": "free",
+        "box": [
+          6,
+          5
+        ]
+      }
+    },
+    {
+      "id": "q4-opposite",
+      "revisit": [
+        "cubes-and-hexominoes"
+      ],
+      "task": {
+        "id": "q4-opposite",
+        "kind": "tap-face",
+        "model": {
+          "kind": "net",
+          "solid": {
+            "type": "cuboid",
+            "size": [
+              1,
+              1,
+              1
+            ]
+          },
+          "layout": {
+            "cubeNet": "141-d"
+          },
+          "fold": 0,
+          "mark": "[1,1]"
+        },
+        "prompt": {
+          "en": "Placeholder: q4-opposite.",
+          "zh": "占位：q4-opposite。"
+        },
+        "guide": {
+          "en": "Placeholder guide: look at the net, then answer.",
+          "zh": "占位提示：先看展开图，再作答。"
+        },
+        "hints": [
+          {
+            "en": "Placeholder hint 1.",
+            "zh": "占位提示 1。"
+          }
+        ],
+        "feedback": {
+          "correct": {
+            "en": "Yes. Placeholder: any one of the right answers is right.",
+            "zh": "对。占位：任何一个对的答案都算对。"
+          },
+          "fallback": {
+            "en": "Not yet. Placeholder: fold it and look.",
+            "zh": "还不对。占位：折一折，看一看。"
+          },
+          "reveal": {
+            "en": "Placeholder: the answer folds up on the stage.",
+            "zh": "占位：答案在舞台上折起来。"
+          },
+          "wrong": [
+            {
+              "when": "adjacent-as-opposite",
+              "say": {
+                "en": "Placeholder feedback for adjacent-as-opposite.",
+                "zh": "占位反馈：adjacent-as-opposite。"
+              },
+              "sample": "face:0,1"
+            }
+          ]
+        },
+        "ask": "opposite"
+      }
+    },
+    {
+      "id": "q5-bottom",
+      "revisit": [
+        "cubes-and-hexominoes"
+      ],
+      "task": {
+        "id": "q5-bottom",
+        "kind": "tap-face",
+        "model": {
+          "kind": "net",
+          "solid": {
+            "type": "cuboid",
+            "size": [
+              1,
+              1,
+              1
+            ]
+          },
+          "layout": {
+            "cells": [
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                2,
+                1
+              ],
+              [
+                3,
+                1
+              ],
+              [
+                0,
+                0
+              ]
+            ]
+          },
+          "base": [
+            0,
+            0
+          ],
+          "open": "top",
+          "fold": 0
+        },
+        "prompt": {
+          "en": "Placeholder: q5-bottom.",
+          "zh": "占位：q5-bottom。"
+        },
+        "guide": {
+          "en": "Placeholder guide: look at the net, then answer.",
+          "zh": "占位提示：先看展开图，再作答。"
+        },
+        "hints": [
+          {
+            "en": "Placeholder hint 1.",
+            "zh": "占位提示 1。"
+          }
+        ],
+        "feedback": {
+          "correct": {
+            "en": "Yes. Placeholder: any one of the right answers is right.",
+            "zh": "对。占位：任何一个对的答案都算对。"
+          },
+          "fallback": {
+            "en": "Not yet. Placeholder: fold it and look.",
+            "zh": "还不对。占位：折一折，看一看。"
+          },
+          "reveal": {
+            "en": "Placeholder: the answer folds up on the stage.",
+            "zh": "占位：答案在舞台上折起来。"
+          },
+          "wrong": []
+        },
+        "ask": "bottom"
+      }
+    },
+    {
+      "id": "q6-rect",
+      "revisit": [
+        "cuboids-prisms-and-curves"
+      ],
+      "task": {
+        "id": "q6-rect",
+        "kind": "complete-net",
+        "model": {
+          "kind": "net",
+          "solid": {
+            "type": "cuboid",
+            "size": [
+              2,
+              2,
+              3
+            ]
+          },
+          "layout": {
+            "rects": [
+              [
+                0,
+                2,
+                2,
+                3
+              ],
+              [
+                2,
+                2,
+                2,
+                3
+              ],
+              [
+                4,
+                2,
+                2,
+                3
+              ],
+              [
+                6,
+                2,
+                2,
+                3
+              ],
+              [
+                2,
+                0,
+                2,
+                2
+              ]
+            ]
+          },
+          "fold": 0,
+          "grid": true
+        },
+        "prompt": {
+          "en": "Placeholder: q6-rect.",
+          "zh": "占位：q6-rect。"
+        },
+        "guide": {
+          "en": "Placeholder guide: look at the net, then answer.",
+          "zh": "占位提示：先看展开图，再作答。"
+        },
+        "hints": [
+          {
+            "en": "Placeholder hint 1.",
+            "zh": "占位提示 1。"
+          }
+        ],
+        "feedback": {
+          "correct": {
+            "en": "Yes. Placeholder: any one of the right answers is right.",
+            "zh": "对。占位：任何一个对的答案都算对。"
+          },
+          "fallback": {
+            "en": "Not yet. Placeholder: fold it and look.",
+            "zh": "还不对。占位：折一折，看一看。"
+          },
+          "reveal": {
+            "en": "Placeholder: the answer folds up on the stage.",
+            "zh": "占位：答案在舞台上折起来。"
+          },
+          "wrong": [
+            {
+              "when": "face-size",
+              "say": {
+                "en": "Placeholder feedback for face-size.",
+                "zh": "占位反馈：face-size。"
+              },
+              "sample": "rects:1"
+            }
+          ]
+        },
+        "add": 1,
+        "candidates": [
+          [
+            4,
+            5,
+            2,
+            2
+          ],
+          [
+            6,
+            5,
+            2,
+            1
+          ],
+          [
+            0,
+            0,
+            2,
+            2
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -34,6 +34,8 @@ export function measured(ctx: Pick<AskContext, 'ask' | 'facts'>): number | null 
       return f.box.w;
     case 'breadth':
       return f.box.h;
+    case 'faces':
+      return null;
   }
 }
 

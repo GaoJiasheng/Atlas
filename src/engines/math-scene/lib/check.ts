@@ -24,6 +24,7 @@ import { checkDecimalInput, checkDecimalModel, decimalAnswered, decimalLine, isD
 import { isQty, qtyBase, type DecValue, type QtyValue } from './value';
 import { decimalWorkOf, isMeasureTask } from './measure-kind';
 import { checkMeasureInput, checkMeasureModel, measureAnswered, measureInputAnswered } from './measure-tasks';
+import { checkNetInput, checkNetModel, isNetTask, netAnswered } from './net-tasks';
 
 /** A fraction, or a decimal (or a quantity, in its family's smallest unit) as the fraction it is (the fraction checks read decimals this way). */
 export const asFrac = (v: Frac | DecValue | QtyValue): Frac => (isQty(v) ? toFraction(qtyBase(v)) : isDec(v) ? toFraction(v) : v);
@@ -552,6 +553,13 @@ function checkSetClock(task: TaskOf<'set-clock'>, state: TaskState): CheckResult
 
 /** Check one phase of a task. */
 export function checkPhase(task: Task, state: TaskState, phase: Phase): CheckResult {
+  // Nets (docs/39 §3.5–3.6): a net completed is folded, a face tapped found where it lands, a number about a net read against it; a choice is the generic one.
+  if (isNetTask(task)) {
+    const spec = inputSpecOf(task);
+    if (phase === 'input' && spec) return checkNetInput(task, spec, state.input, declaredCodes(task));
+    const r = checkNetModel(task, state, declaredCodes(task));
+    if (r) return r;
+  }
   // Reading instruments and quantities in units (docs/32 §3.4–3.6): their own checks, a choice the generic one.
   if (isMeasureTask(task)) {
     if (phase === 'input') {
@@ -620,6 +628,8 @@ export function diagnose(task: Task, state: TaskState): MisconceptionCode | null
 /** Enough is done to press Check (a box empty, nothing marked, nothing chosen … = not yet). */
 export function answered(task: Task, state: TaskState): boolean {
   const phase = phasesOf(task)[state.phase] ?? 'model';
+  const net = netAnswered(task, state);
+  if (net !== null) return net;
   if (isMeasureTask(task)) {
     const spec = inputSpecOf(task);
     if (phase === 'input') return !!spec && measureInputAnswered(task, spec, state.input);
