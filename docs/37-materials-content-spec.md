@@ -957,4 +957,45 @@ pnpm tsx scripts/illustrate.ts figure  art/planned/materials/materials-waterproo
 
 ## 9. 施工记录 / 已知差距
 
-（空。施工后照 docs/36 §9 补：引擎 E-MT1 / E-MT2 的实现记录与验收数据；主题施工与本 spec 的差异表；F 步事实核查的结论（F-6、F-10、F-11b、F-18、F-19 与 §0.1 的退路是否触发）；参考图；性能；截图验收；引擎与流程问题。）
+### 9.1 引擎 E-MT1 + E-MT2（Claude Opus，2026-10-21）
+
+本轮只施工引擎与 `sample-materials` draft 夹具，没有建 `materials/` 主题目录，没有改 `package.json`。分支 `worktree-agent-a141650106007d58f`；期间两次合并 main（living-things 的 `sort` 引擎、MathScene 的 nets 引擎），`SIM_KINDS`、`simSchema`、`SEPARATE_EXPERIMENTS`、绑定校验、`bridge.ts`、`View.tsx`、`shoot.ts` 的拍检查都两套并存（`bend` 与 `shift`）。
+
+**E-MT1 模型 `materials`**：`lib/sim/materials.ts`（纯函数 `bridgeSolve` / `cantileverSolve` / `tankSolve` / `dropResult` / `lightResult` / `solveMaterials`）+ `materials-schema.ts`（`materialsSchema`、`materialsIssues`，照 `matter-schema.ts` 的拆法；共享文件只加注册）。注册：`SIM_KINDS`、`simSchema.materials`、`simQuantities` / `evaluateSim`、`quantityKind`（`materialsQuantity`）、状态表（`materialsStates`：按每个子模型读的控件穷举，所以"每个会出现的状态要有标签、不写永远不出现的状态"是精确的）、`SEPARATE_EXPERIMENTS.materials = true`；没有时间线（`simTimelineChannels` 照旧 null）；`SimOverlays` 不需要新分支（`shadow-cast` 的 `dark` 读 `light:dark` 数输出）。量名与规则照 §4.2，一处按 §2.5 的文字落实：**台面托住以后应力不再增加**——`bridge` 先看下垂有没有到台面，到了就只按"刚碰到台面的那个力"算应力，再判断断不断（§4.2 规则 2 的字面顺序是先用全部砝码的应力判断断；本数据下两种写法结果相同，只有"会断的条先碰到台面"时才不同，现在的写法是物理上对的那一个）。
+
+**D9 由 validate 守**：`kind: materials` 的卡片 `observe` / `predict.observe` 只能是状态输出或 `control:` 读数，`telemetry.follow` 只能是 `control:` 读数；写了模型自己的数（`bridge-sag`、`light-dark` …）报错。模型的数输出只给绑定。
+
+**设计守门**（§4.3）：`fails: bends` 的材料在每个 `masses`、`push` 取值下 σ < limit；浮着的东西浸入 ≤ 水深（不碰缸底）；水深 < `tank.height`（新加的可选字段，§4.2 的数据里没有缸高，没法守"水深 < 缸高"）；`profile` 的 `masses` / `push` 是控件的值，且五个测试都在、每种材料都有同 id 的方块。另加：`limp` 只能 `fails: never`；`tank.density`（水的密度，默认 1000，数据里写明）——引擎不写任何材料常数。
+
+**卡片 `observe` 上限 4 → 5**（`sim-schema.ts`）：T6 一次读五个结果（§4.2、§5.7），原上限 4 放不下；卡片是逐行列出的，5 行在 1600 × 900 和 390 × 844 抽屉里都放得下（e2e、layout 截图）。
+
+**E-MT2 绑定 `bend`**：`lib/bend.ts`（纯函数：小挠度形状 → 斜率 → 沿弧长首尾相接、解形状大小使画出的下垂 = 值、顶点改写）+ `bind.ts`（`SimEffects.bend`）+ `sim-schema.ts`（schema 与校验）+ `PartNode.tsx`（缓动、改写位置与法线缓冲、标注锚点跟中轴线走、QA 读数）+ `geometry.ts` / `shapes.ts` / `SceneRoot.tsx`（有 `bend` 的零件：box 由构建器沿长轴分 64 段并**保留索引**，bevelBox 由新的 `shaped.ts sliceAlong` 把跨段三角形裁开；顶点带 `atlasBend`，extra 不弯）+ `View.tsx`（`__atlas.engine.bend(id)`）+ `scripts/shoot.ts`（每拍与每个拍链接核对可见的条 `value` = 模型 ± 0.5 mm、`length` = 原长 ± 0.5 %）。曲线达标，**§4.5 的"两段刚性半条"退路没有用**。与 §4.5 的细节差异：`mid` / `tip` 用模型坐标（场景坐标去掉根组变换；非肌肉主题两者相同）；读数多一个 `shown`；校验多两条（不缩放、不转）——形状按零件坐标的 ±X / ±Z 算。另给 `shadows()` 的每个挡光物加了 `dark`（此刻的深浅），e2e 用它核对透光三档。
+
+**事实核查第二轮**（`art/research/materials/facts-pass2.md`，Sonnet，2026-10-21）改了四个常数，作者模板 `tests/space-scene/fixtures/materials-bench.ts` 与夹具已用新值，单测钉的是改后的结果：玻璃 limit 45 → **36 MPa**（切割边的规范值）；HDPE E 0.8 → **1.2 GPa**（弯曲模量）、守门用的屈服 27.6 → **25 MPa**；天然橡胶 E 0.05 → **0.005 GPa**（低置信度，单一来源）。§2.5 因此变的格子：
+
+| 格 | §2.5 原写 | 现在（单测钉死） |
+|---|---|---|
+| T1 玻璃 | 第 4 个砝码断 | **第 3 个砝码断**（σ 37.1 > 36），和陶瓷（35）同一个——**模型不比谁先断**，字幕本来就不说第几个 |
+| T1 塑料 0 / 1 个砝码 | 0.07 / 5.17 cm | 0.05 / **3.45 cm**（仍是"弯很多"，离 3 cm 门槛 0.45 cm） |
+| T1 塑料碰到台面 | P 5.7 N、σ 14.4 MPa | P **8.6 N**、σ **21.6 MPa** < 25 |
+| T1 橡胶 0 个砝码 | 托住、1.13 cm、弯一点 | **一开始就弯到台面上** |
+| T2 塑料 | 自垂 1.71 cm；末端 1.71 / 1.71 / 1.71 / 1.71 / 2.00 | 自垂 **1.14 cm**；末端 1.14 / 1.14 / 1.14 / **1.50** / 2.00（仍"自己垂下"，E > 1.37 GPa 才会变） |
+| T2 玻璃、陶瓷 | 都在 1.5 cm 断 | 不变 |
+| T3、T4、T6 | — | 不变；布"沉"是吸了水以后的终态，正文与字幕要写成"吸了水以后"（核查结论） |
+| T5 塑料"一部分"、橡胶"没有" | — | 仍待核（V10、V09），模型照数据给 |
+
+内容施工时 §2.2 的 F-12、F-13、F-11 与 §2.5 的表照上面改（本轮没改 §2.2 / §2.5 的正文，只在这里记）。
+
+**夹具 `sample-materials`**（draft，占位文字，只用程序化积木）：33 个零件（1 个 context）、5 组、5 个预设、1 个姿态（`masses-fallen`）、27 条绑定、1 个 `shadow-cast` 叠加；7 章：背景章 + 强度 / 柔韧 / 浮沉 / 防水 / 透光各一张卡（记一行、先猜后看）+ 五个一起（`profile`，观察五个状态）；22 拍。三种材料：木、玻璃、塑料（中文用"塑料"，同站内）；水缸里四样（木、玻璃、塑料、盖好的空瓶——`profile` 要每种材料一块同 id 的方块，再加空瓶测"只写密度"的条目，所以是四样不是三样）。夹具里的玻璃件用 `plastic` 材质族加浅绿 tint：2 mm 的 `glass` 族在 paper 上几乎看不见（断开的玻璃条、水缸里的玻璃块都找不到），**正式主题要给玻璃件一个看得见的边（§3.3 写的"边缘发绿"）**。支撑木块做成 1.6 cm 宽：`bend` 的支点是 ±span ÷ 2 的两条线，6 cm 宽的木块会让弯下的条插进木块内侧的上角——**正式主题的支撑木块要窄，或者把顶面做成圆棱 / 三角，中线在 ±10 cm**（§3.4 01 写的是 6 cm 立方，需要改）。
+
+**测试**：`tests/space-scene/materials.test.ts`（§2.5 T1 7 × 6、T2 7 × 5、T3 九行、T4、T5、T6 7 × 5 全表与应力、不变量、注册、URL `sim=strip.glass~masses.5` 往返、绑定效果、D9、§4.4 全部报错用例）、`tests/space-scene/bend.test.ts`（小值与解析挠度差 < 1 %、任何值长度 ± 0.1 %、支点与夹口、悬挑沿切线、0.8 上限、条太短、切片保面积与绕向、顶点改写同一缓冲、法线、负轴、100 次更新 < 2 ms）、`tests-e2e/sample-materials.spec.ts`（11 项：背景章、深链接断开的玻璃条与落到台面的槽码、`]` 加砝码时木条平滑下弯到模型值且长度不变、压下 2 cm 推杆脚落在条末端上表面（< 1 mm）、塑料自垂、水缸里浮 / 沉、湿印 / 水珠、透光 `shadows()` 的 `dark` = 1 / 0.1、`profile` 记三行五列都是中英状态标签且无性质的数、先猜后看、中文 cinema + 减少动态直接终值、手机 390 × 844 抽屉 44 px）。
+
+**性能**：模型一次求值 ≈ 0.01 ms（单测 < 0.05 ms）；`bend` 一次更新（中轴线 + 528 个顶点）≈ 0.009 ms（Node，100 次 ≈ 0.85 ms，单测 < 2 ms）。
+
+**性能与截图**：夹具全景 31 calls / 12,136 三角形，各章 5–31 calls（`pnpm shoot sample-materials --perf`，headless SwiftShader，fps 不作 GPU 性能）；页面 JS 493.9 KB gzip / 11 files。`pnpm shoot sample-materials --beats --keys --layout`：22 拍、22 个拍链接、key 检查、8 个布局尺寸全部通过，console 干净；每拍的 `bend` 核对 0 失败；逐张看过 22 拍（条按模型弯、碰到台面的条从支点两边滑进来、悬挑沿切线翘起，断开的玻璃条与落到台面的槽码，推杆压在末端，浮起的高度，湿印与水珠，透光三档的影子）。
+
+**回归**：改动前在本分支起点 `pnpm build` 后，`pnpm shoot <t> --beats --keys` 跑了 `states-of-matter`、`light-and-shadows`、`forces`、`energy-conversion`、`mosquito`、`magnets`、`circuits`（全部 0 失败）；改动后（两次合并 main 之后）同一命令全部 0 key / 0 拍失败、拍链接全开、console 干净，另加 `sample-sort`（合并进来的 sort 夹具）同样全过。逐像素对比：`states-of-matter` / `light-and-shadows` / `forces` 与改动前一致（最差 0.4 %）；`energy-conversion` / `mosquito` / `magnets` / `circuits` 有几拍差到 9–16 %——同一份新代码连跑两次之间也差这么多（镜头取景在拍之间的微小差别），不是本轮改动带来的。`mosquito` 原有的 3 条拍标注 note 不变。
+
+**门槛**（第二次合并 main 之后）：`pnpm check` 0 error / 0 warning（3 条原有 hint）；`pnpm validate` 47 topics、0 error / 0 warning；`pnpm test` 143 files / 3,778 tests 全过（第一次合并前有一次全量里 `tests/time-scene/territory.test.ts` 5 s 超时，main 随后把它改成 30 s，已不再出现）；`pnpm build` 97 pages；`CI=1 pnpm e2e` 268 项中 266 过：`sample-materials` 的"缓动中看到中间值"一项在满负载下没在轮询窗口里抓到 0.5 s 的缓动（改成在页面里逐帧采样后单独重跑通过），`singapore-land-use` 的 farmland 一项（TimeScene，与本轮无关）满负载下失败、单独重跑通过；`sample-materials` + `singapore-land-use` 单独重跑 14 / 14 过。
+
+**本轮未做 / 已知差距**：§4.9 的 v2 项全部未做；正式主题的零件、参考图、厨房角落不在本轮；夹具的玻璃件用塑料材质族示意（见上）；支撑木块的宽度要按 `bend` 的支点改（见上）。

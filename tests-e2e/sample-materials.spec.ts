@@ -58,11 +58,20 @@ test.describe('sample-materials (materials model and bend)', () => {
     await open(page, 'ch=strength&sim=strip.wood~masses.4');
     const before = (await bend(page, 'bridge-wood'))!;
     expect(before.value).toBeCloseTo(Number((await sim(page)).outputs['bridge-sag']), 4);
-    await set(page, { strip: 'wood', masses: 5 });
-    await expect.poll(async () => {
-      const v = (await bend(page, 'bridge-wood'))!.value;
-      return v > before.value + 1e-5 && v < Number((await sim(page)).outputs['bridge-sag']) - 1e-5;
-    }, { intervals: [16, 16, 32] }).toBe(true);
+    // Set the fifth mass and watch the drawn sag frame by frame in the page (no round trips): it passes through values in between.
+    const between = await page.evaluate(async (start) => {
+      const e = window.__atlas!.engine as unknown as Engine;
+      e.setSim({ strip: 'wood', masses: 5 });
+      const end = Number(e.sim().outputs['bridge-sag']);
+      const t0 = performance.now();
+      while (performance.now() - t0 < 3000) {
+        const v = e.bend('bridge-wood')!.value;
+        if (v > start + 1e-5 && v < end - 1e-5) return true;
+        await new Promise((r) => requestAnimationFrame(r));
+      }
+      return false;
+    }, before.value);
+    expect(between).toBe(true);
     const sag = Number((await sim(page)).outputs['bridge-sag']);
     // Settled: the ease ends exactly on the model value.
     await expect.poll(async () => Math.abs((await bend(page, 'bridge-wood'))!.value - sag)).toBeLessThan(1e-6);
