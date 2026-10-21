@@ -29,6 +29,10 @@ Published (`status: published`): a Primary 5 science topic built on the signed-o
 - **Images**: the cover and the two chapter figures are the three drafts already reviewed in `art/planned/heart-and-lungs/`, processed with `scripts/illustrate.ts`; no new images were made.
 - **Back-links** (one sentence each): `digestive-system` chapters `five-systems` and `small-intestine-chapter`, and `plant` chapter `the-stem`.
 
+## Engine-side change (one token)
+
+- **Cinema `--blood-poor`** changed from `#A8343C` to `#82242D` in `src/theme/tokens.css` (docs/08 §1 updated; `tests/theme/blood-gas-tokens.test.ts` adds a lightness gap of at least 30 on the dark plate). On the dark plate the old wine red rendered almost as bright as the oxygen-rich red, so the paired vessels in the legs could not be told apart. Paper is unchanged.
+
 ## Known gaps
 
 - The LAYERS list is long (22 rows: 14 part layers, 8 flow layers).
