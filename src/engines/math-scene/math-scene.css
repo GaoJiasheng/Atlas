@@ -3772,3 +3772,252 @@ path.ms-glyph--cord {
   white-space: normal;
   text-align: center;
 }
+
+/* ------------------------------------------------------------------ */
+/* Nets and solids (docs/39 §3.2–3.7, model A8)                        */
+/* ------------------------------------------------------------------ */
+
+/* Faces: paper with a 1 px ink edge; the inside of the card a lighter fill (a half-folded net reads inside from outside). */
+.ms-net__fill {
+  fill: var(--paper);
+  stroke: none;
+}
+.ms-net__face[data-side="in"] .ms-net__fill {
+  fill-opacity: 0.6;
+}
+.ms-net__edge {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.ms-net__tint {
+  stroke: none;
+}
+/* Colours mean whose: given cold, the child's signal, a tone as written, opposite faces in their pair colour. */
+.ms-net__face[data-tone="cold"] .ms-net__tint,
+.ms-net__face[data-tone="given"] .ms-net__tint {
+  fill: color-mix(in srgb, var(--cold) 38%, transparent);
+}
+.ms-net__face[data-tone="hot"] .ms-net__tint {
+  fill: color-mix(in srgb, var(--hot) 34%, transparent);
+}
+.ms-net__face[data-tone="signal"] .ms-net__tint,
+.ms-net__face[data-tone="placed"] .ms-net__tint {
+  fill: color-mix(in srgb, var(--signal) 46%, transparent);
+}
+.ms-net__face[data-tone="pair-1"] .ms-net__tint {
+  fill: color-mix(in srgb, var(--face-1) 25%, transparent);
+}
+.ms-net__face[data-tone="pair-2"] .ms-net__tint {
+  fill: color-mix(in srgb, var(--face-2) 25%, transparent);
+}
+.ms-net__face[data-tone="pair-3"] .ms-net__tint {
+  fill: color-mix(in srgb, var(--face-3) 25%, transparent);
+}
+/* A curved face is cut into strips: opaque fills, each edged in its own colour, so no seams show between them. */
+.ms-net__face[data-curved] .ms-net__fill {
+  fill-opacity: 1;
+  stroke: var(--paper);
+  stroke-width: 0.5;
+}
+.ms-net__face[data-curved][data-tone="cold"] .ms-net__tint {
+  fill: color-mix(in srgb, var(--cold) 38%, var(--paper));
+  stroke: color-mix(in srgb, var(--cold) 38%, var(--paper));
+  stroke-width: 0.5;
+}
+.ms-net__face[data-curved][data-tone="hot"] .ms-net__tint {
+  fill: color-mix(in srgb, var(--hot) 34%, var(--paper));
+  stroke: color-mix(in srgb, var(--hot) 34%, var(--paper));
+  stroke-width: 0.5;
+}
+.ms-net__face[data-curved][data-tone="signal"] .ms-net__tint {
+  fill: color-mix(in srgb, var(--signal) 46%, var(--paper));
+  stroke: color-mix(in srgb, var(--signal) 46%, var(--paper));
+  stroke-width: 0.5;
+}
+.ms-net__mark {
+  fill: var(--ink);
+  font-family: var(--font-hud);
+  font-weight: 600;
+  pointer-events: none;
+}
+.ms-net__face[data-tone="pair-1"] .ms-net__mark {
+  fill: var(--face-1);
+}
+.ms-net__face[data-tone="pair-2"] .ms-net__mark {
+  fill: var(--face-2);
+}
+.ms-net__face[data-tone="pair-3"] .ms-net__mark {
+  fill: var(--face-3);
+}
+/* "Show me": the answer's faces dashed in ink. */
+.ms-net__face[data-ghost] .ms-net__edge {
+  stroke-width: 2;
+  stroke-dasharray: 6 4;
+}
+/* On the ground: squared paper, the flat outline; an open face, a gap. */
+.ms-net__paper {
+  fill: none;
+  stroke: color-mix(in srgb, var(--ink) 18%, transparent);
+  stroke-width: 1;
+  transition: opacity 200ms var(--ease-out);
+}
+/* The sheet a net lies on fades while it folds up. */
+.ms-net__paper--away {
+  opacity: 0;
+}
+.ms-net__foot,
+.ms-net__dashed {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1;
+  stroke-dasharray: 5 4;
+}
+.ms-net__foot {
+  stroke: var(--ink-2);
+}
+/* Notes: a dot, a hairline leader, the words beside the drawing. */
+.ms-net__note text {
+  fill: var(--ink);
+  font: 500 13px / 1 var(--font-hud);
+  paint-order: stroke;
+  stroke: var(--paper);
+  stroke-width: 3px;
+}
+.ms-net__note-dot {
+  fill: var(--ink);
+}
+.ms-net__leader {
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 1;
+}
+/* Lengths where faces meet: the hinge bold, the squares counted on each side; "once round the circle". */
+.ms-net__hinge {
+  stroke: var(--ink);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+.ms-net__dim {
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 1;
+}
+.ms-net__dimtext {
+  fill: var(--ink-2);
+  font: 600 13px / 1 var(--font-mono);
+  paint-order: stroke;
+  stroke: var(--paper);
+  stroke-width: 3px;
+}
+.ms-net__label {
+  fill: var(--ink-2);
+  font: 500 13px / 1 var(--font-hud);
+}
+/* The child's layer: places a face may go (dashed, a +), faces to tap; each a button of at least 44 px. */
+.ms-net__hit {
+  fill: transparent;
+  cursor: pointer;
+}
+.ms-net__cand,
+.ms-net__tap {
+  outline: none;
+}
+.ms-net__slot {
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 1;
+  stroke-dasharray: 4 3;
+}
+.ms-net__plus {
+  fill: var(--ink-2);
+  font: 500 18px / 1 var(--font-mono);
+  pointer-events: none;
+}
+.ms-net__cand:focus-visible .ms-net__hit,
+.ms-net__tap:focus-visible .ms-net__hit {
+  stroke: var(--signal);
+  stroke-width: 3;
+  stroke-dasharray: 5 3;
+}
+.ms-net__tap[aria-disabled] .ms-net__hit {
+  cursor: default;
+}
+@media (hover: hover) {
+  .ms-net__cand:hover .ms-net__hit,
+  .ms-net__tap:not([aria-disabled]):hover .ms-net__hit {
+    fill: color-mix(in srgb, var(--signal) 14%, transparent);
+  }
+}
+/* A net between beats keeps its drawing (it folds, turns, its colours come in): a new one only fades in. */
+.ms-beat[data-model="net"][data-move="fold"],
+.ms-beat[data-model="net"][data-move="rotate"],
+.ms-beat[data-model="net"][data-move="shade"] {
+  animation: ms-fade-in 320ms var(--ease-out) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ms-beat[data-model="net"] {
+    animation: none;
+  }
+}
+
+/* The fold-it tool at the stage's bottom right: FOLD slider, quarter turns. */
+.ms-net-tools {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 6px;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--panel-solid) 88%, transparent);
+}
+.ms-net-tools__fold {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: var(--hit);
+  padding-right: 4px;
+}
+.ms-net-tools__fold[data-locked] {
+  opacity: 0.55;
+}
+.ms-net-tools__name {
+  display: inline-flex;
+  flex-direction: column;
+  color: var(--ink-2);
+  font: 600 11px / 1.1 var(--font-mono);
+  letter-spacing: 0.08em;
+}
+.ms-net-tools__name small {
+  font: 500 10px / 1.1 var(--font-hud);
+  letter-spacing: 0;
+}
+.ms-net-tools input[type="range"] {
+  width: clamp(96px, 12vw, 180px);
+  height: var(--hit);
+  margin: 0;
+  accent-color: var(--signal);
+  cursor: pointer;
+}
+.ms-net-tools input[type="range"]:disabled {
+  cursor: not-allowed;
+}
+.ms-net-tools input[type="range"]:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 2px;
+}
+.ms-net-tools__pct {
+  min-width: 3.4em;
+  color: var(--ink);
+  font: 500 12px / 1 var(--font-mono);
+  text-align: right;
+}
+.ms-net-tools[data-compact] input[type="range"] {
+  width: 96px;
+}
+.ms-net-tools[data-compact] .ms-net-tools__pct,
+.ms-net-tools[data-compact] .ms-net-tools__name {
+  display: none;
+}

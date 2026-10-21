@@ -26,6 +26,11 @@ import { beamTilt, panMass, partsOf, readingOf, scaleOf, tiltOf, unitOf, weightT
 import { isInstrument } from '../lib/measure-kind';
 import { instrumentOf, setValue } from '../lib/measure-tasks';
 import { instrumentText, stepText } from '../lib/measure-working';
+import { isNetModel, taskNetSpec } from '../lib/net-tasks';
+import { foldOf, netItems } from '../lib/net-view';
+import { autoIso } from '../lib/project';
+import { faceIds, solidClass } from '../lib/solid';
+import { asksName } from './cards/SolidCard';
 
 const dash = '—';
 
@@ -219,6 +224,32 @@ const grams = (g: number) => weightText(g).toLocaleUpperCase('en');
  * tape, NEEDLE on a dial, LEVEL on a jug); a balance LEFT · RIGHT · BEAM. On a check the reading is `?` until done, the small
  * part `—` until the parts are counted; a set-scale shows the child's own value.
  */
+/**
+ * Rows for a net (docs/39 §3.7): MODEL NET · SOLID · FACES · FOLD · VIEW (TOP, ISO, ISO ↻90 …); completing a net adds
+ * PLACED `3 / 5`; a check that asks the name keeps SOLID `?`. `fold` and `turn` are the slider's and the turns' when moved.
+ */
+export function netPlateRows(m: Model, task: Task | null, state: TaskState | null, done: boolean, fold: number | null, turn: number | null): PlateRow[] | null {
+  if (!isNetModel(m)) return null;
+  const spec = (task && taskNetSpec(task)) ?? netItems(m)[0];
+  const rows: PlateRow[] = [{ key: 'math.plate.model', value: 'NET' }];
+  if (!spec) return rows;
+  if (m.set && !task) {
+    rows.push({ key: 'math.plate.solids', value: String(netItems(m).length), on: true });
+    return rows;
+  }
+  const f = fold ?? foldOf(spec);
+  const tr = turn ?? spec.turn;
+  const asked = !!task && asksName(task) && !done;
+  rows.push({ key: 'math.plate.solid', value: asked ? '?' : solidClass(spec.solid).toLocaleUpperCase('en') });
+  rows.push({ key: 'math.plate.faces', value: task?.kind === 'input' && !done ? '?' : String(faceIds(spec.solid).length - (spec.open ? 1 : 0)) });
+  if (spec.solid.type !== 'sphere') rows.push({ key: 'math.plate.folding', value: `${Math.round(f * 100)} %`, on: !task });
+  const iso = spec.solid.type === 'sphere' || spec.view === 'iso' || (spec.view === 'auto' && autoIso(f) >= 0.5);
+  const q = ((tr % 4) + 4) % 4;
+  rows.push({ key: 'math.plate.view', value: `${iso ? 'ISO' : 'TOP'}${q ? ` ↻${q * 90}` : ''}` });
+  if (task?.kind === 'complete-net' && state) rows.push({ key: 'math.plate.placed', value: `${state.nplaced.length} / ${task.add}`, on: true });
+  return rows;
+}
+
 export function measurePlateRows(m: Model, task: Task | null, state: TaskState | null, done: boolean): PlateRow[] | null {
   if (!isInstrument(m)) return null;
   const s = (task && instrumentOf(task)) ?? partsOf(m)[0]!;

@@ -41,13 +41,17 @@ import { cardValue, workingLines } from './lib/working';
 import { formatFrac } from './lib/fraction';
 import { clockText } from './lib/value';
 import { Defs } from './stage/svg';
-import { SPECIMEN_ARRAY, SPECIMEN_CLOCK, SPECIMEN_DECIMAL, SPECIMEN_DIAL, SPECIMEN_GRID, StageContent } from './stage/Stage';
+import { SPECIMEN_ARRAY, SPECIMEN_CLOCK, SPECIMEN_DECIMAL, SPECIMEN_DIAL, SPECIMEN_GRID, SPECIMEN_NET, StageContent } from './stage/Stage';
+import type { NetShown } from './stage/NetModel';
+import { NetTools } from './tray/NetControls';
+import { foldOf, lessonSolids, netItems } from './lib/net-view';
+import { solidName } from './lib/net-description';
 import { isDecimalModel } from './lib/decimal-tasks';
 import { beatCounts, beatFraction, beatPair, beatShape, beatTime } from './stage/BeatModel';
 import { spanAt, useStageLayout, type LayoutMode, type Rect } from './stage/layout';
 import { Tray, partsAreNarrow } from './tray/Tray';
 import { Card, CARD_TITLE, cardKindOf, type CardKind } from './hud/cards';
-import { decimalPlateRows, measurePlateRows, valuePlateRows } from './hud/plate';
+import { decimalPlateRows, measurePlateRows, netPlateRows, valuePlateRows } from './hud/plate';
 import { lessonUnits } from './lib/measure-working';
 import { factsOf, figureOf } from './lib/grid';
 import type { GridModelSpec, Model } from './schema';
@@ -77,6 +81,7 @@ const VIEW_KEY: Record<ModelView, Parameters<typeof t>[1]> = {
   money: 'math.view.money',
   instrument: 'math.view.instrument',
   straight: 'math.view.straight',
+  net: 'math.view.net',
 };
 const SPECIMEN_VIEWS: ModelView[] = ['bar', 'circle', 'numberline', 'wall'];
 
@@ -101,6 +106,8 @@ const BEAT_SETTLE_MS = 650;
 const NARROW_STAGE = 860;
 /** Height of the number-sentence line under the model. */
 const EQUATION_H = 58;
+/** Height of a net's FOLD slider and turn buttons at the stage's bottom right (docs/39 §3.5). */
+const NET_TOOLS_H = 56;
 /** The sentence's side padding (math-scene.css), and how far its type may shrink before it wraps. */
 const EQUATION_PAD = 12;
 const EQUATION_MIN_SCALE = 0.72;
@@ -149,10 +156,12 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
   const decimalLesson = useMemo(() => lesson.steps.some((x) => x.beats.some((b) => isDecimalModel(b.model))), [lesson]);
   // A lesson on reading instruments (docs/32): its background shows the dial at 0, its spec table the units.
   const measureLesson = useMemo(() => lesson.steps.some((x) => x.beats.some((b) => b.model.kind === 'instrument')), [lesson]);
+  // A lesson on nets and solids (docs/39 §3.7): its background shows a cube net folded half way, its spec table the solids.
+  const netLesson = useMemo(() => lesson.steps.some((x) => x.beats.some((b) => b.model.kind === 'net')), [lesson]);
   // The fraction assists (S / E / N, labels) and specimen belong to a lesson on fractions; another lesson's background shows its first model.
   const fractionLesson = useMemo(() => !decimalLesson && lesson.steps.some((x) => x.beats.some((b) => isFractionModel(b.model))), [lesson, decimalLesson]);
   const firstKind = lesson.steps[0]?.beats[0]?.model.kind ?? 'bar';
-  const specimenModel: Model | null = fractionLesson ? null : measureLesson ? SPECIMEN_DIAL : decimalLesson ? SPECIMEN_DECIMAL : firstKind === 'grid' ? SPECIMEN_GRID : firstKind === 'array' || firstKind === 'blocks' || firstKind === 'numberline' ? SPECIMEN_ARRAY : firstKind === 'clock' || firstKind === 'timeline' ? SPECIMEN_CLOCK : null;
+  const specimenModel: Model | null = fractionLesson ? null : netLesson ? SPECIMEN_NET : measureLesson ? SPECIMEN_DIAL : decimalLesson ? SPECIMEN_DECIMAL : firstKind === 'grid' ? SPECIMEN_GRID : firstKind === 'array' || firstKind === 'blocks' || firstKind === 'numberline' ? SPECIMEN_ARRAY : firstKind === 'clock' || firstKind === 'timeline' ? SPECIMEN_CLOCK : null;
   const lessonCard: CardKind = fractionLesson ? 'fraction' : cardKindOf(specimenModel, null, 'fraction');
   const assists = fractionLesson;
   const explain = slot.kind === 'explain' ? slot.beat : null;
@@ -300,13 +309,42 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
   // the height for the instrument instead of repeating that quantity below it.
   const phoneReading = sheet && L.w < 760 && task?.kind === 'read-scale';
   const equation = phoneReading ? null : explain ? (explain.equation ?? (explain.words ? tx(explain.words, locale) : null)) : task && run && !practice ? (workingLines(task, run.state, locale, run.done, lesson.notation).at(-1) ?? null) : null;
-  const modelBox: Rect = equation ? { ...L.free, h: Math.max(0, L.free.h - EQUATION_H) } : L.free;
+
+  /* ---------- a net's FOLD slider and turns (docs/39 §3.5): this beat's or this check's, gone on the next ---------- */
+  const netAt = `${s.chapter}|${cur.beat}|${task?.id ?? ''}`;
+  const netHeld = u.net.at === netAt ? u.net : null;
+  const netModel: Model | null = task ? task.model : explain ? explain.model : background ? specimenModel : null;
+  const netSpec = netModel?.kind === 'net' && !netModel.set ? (netItems(netModel)[0] ?? null) : null;
+  // A check's fold opens after its first check or the second hint, never in the practice; a net to complete folds on Check.
+  const netLocked = !!task && !!run && (practice || (!run.done && !(run.attempts.length > 0 || run.hints >= 2)));
+  const netFoldable = !!netSpec && netSpec.solid.type !== 'sphere' && task?.kind !== 'complete-net';
+  const netTools = !!netSpec && !presenting && hudOn && !(practice && u.summary);
+  const netFold = netLocked ? null : (netHeld?.fold ?? null);
+  // What the card and the plate report: a check folded up to stay (right, or shown) is folded.
+  const netShownFold = task && u.netPlay?.id === task.id && u.netPlay.stay ? 1 : netFold;
+  const netTurn = netHeld?.turn ?? null;
+  const netShown = useRef<NetShown | null>(null);
+  // Another beat or check: the slider and the turns go back to its own (never kept, never in the URL).
+  useEffect(() => ui.setState({ net: { at: netAt, fold: null, turn: null } }), [netAt, ui]);
+  const netHold = {
+    fold: netFold,
+    turn: netTurn,
+    // About half the stage's height at most (docs/39 §3.2: 40–55 % on a large screen).
+    maxH: Math.max(260, L.h * 0.5),
+    play: task && u.netPlay?.id === task.id ? { n: u.netPlay.n, stay: u.netPlay.stay } : null,
+    onShow: (info: NetShown) => {
+      netShown.current = info;
+    },
+  };
+  const toolsH = netTools ? NET_TOOLS_H : 0;
+  const modelBox: Rect = { ...L.free, h: Math.max(0, L.free.h - (equation ? EQUATION_H : 0) - toolsH) };
   // The sentence sits right under the drawing (its bounding box), not at the foot of the free rectangle.
   const drawingRef = useRef<SVGGElement>(null);
   const [equationTop, setEquationTop] = useState(0);
   useLayoutEffect(() => {
     const g = drawingRef.current;
-    if (!g || !equation) return;
+    // A net's sentence stays at the foot (its drawing moves as it folds): no measuring every frame.
+    if (!g || !equation || netModel?.kind === 'net') return;
     const bb = g.getBBox();
     const top = Math.round(Math.min(modelBox.y + modelBox.h, Math.max(modelBox.y, bb.y + bb.height + 10)));
     if (top !== equationTop) setEquationTop(top);
@@ -327,7 +365,8 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
     fonts?.addEventListener('loadingdone', again);
     return () => fonts?.removeEventListener('loadingdone', again);
   }, []);
-  const eqTop = equationTop || modelBox.y + modelBox.h;
+  // A net's sentence sits at the foot of its box: the drawing folds, turns and settles, the sentence stays put.
+  const eqTop = netModel?.kind === 'net' ? modelBox.y + modelBox.h : equationTop || modelBox.y + modelBox.h;
   const eqCentre = L.free.x + L.free.w / 2;
   const eqSpan = spanAt(L, eqTop, EQUATION_H, eqCentre);
   const eqNeed = equationW + 2 * EQUATION_PAD;
@@ -356,7 +395,7 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
       ? [UP(t('en', 'math.check.title')), ...(value ? [`${UP(t('en', 'math.status.value'))} ${formatFrac(value)}`] : []), ...(run.done ? [UP(t('en', 'math.status.done'))] : [])]
       : explain
         ? [`${UP(t('en', 'math.beat.label'))} ${cur.beat + 1}/${count - 1}`, ...(value ? [`${UP(t('en', 'math.status.value'))} ${formatFrac(value)}`] : [])]
-        : [`${UP(t('en', 'math.status.specimen'))} ${fractionLesson ? '3/4' : measureLesson ? '0 G' : decimalLesson ? '0.35' : gridLesson && firstKind === 'grid' ? '4 × 3' : specimenModel?.kind === 'clock' ? clockText(specimenModel.time, 'face', lesson.notation) : '3 × 4'}`];
+        : [`${UP(t('en', 'math.status.specimen'))} ${fractionLesson ? '3/4' : netLesson ? 'CUBE NET · FOLD 50 %' : measureLesson ? '0 G' : decimalLesson ? '0.35' : gridLesson && firstKind === 'grid' ? '4 × 3' : specimenModel?.kind === 'clock' ? clockText(specimenModel.time, 'face', lesson.notation) : '3 × 4'}`];
   const [cardExpanded, setCardExpanded] = useState(false);
   const specRows = useMemo<SpecRow[]>(
     () => [
@@ -366,6 +405,8 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
       { id: 'practice', label: both('math.spec.practice'), value: String(lesson.practice.length), mono: true },
       ...(fractionLesson
         ? [{ id: 'denominators', label: both('math.spec.denominators'), value: '≤ 12', mono: true, source: 'ref' as const }]
+        : netLesson
+          ? [{ id: 'solids', label: both('math.spec.solids'), value: lessonSolids(lesson).map((c) => solidName(c, 'en')).join(' · '), mono: true, source: 'ref' as const }]
         : measureLesson
           ? [{ id: 'units', label: both('math.spec.units'), value: lessonUnits(lesson), mono: true, source: 'ref' as const }]
         : decimalLesson
@@ -376,7 +417,7 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
             ? [{ id: 'numbers', label: both('math.spec.numbers'), value: `≤ ${maxNumber(lesson)}`, mono: true, source: 'ref' as const }]
             : []),
     ],
-    [lesson, gridLesson, fractionLesson, decimalLesson, measureLesson, firstKind],
+    [lesson, gridLesson, fractionLesson, decimalLesson, measureLesson, netLesson, firstKind],
   );
 
   const controls = useMemo<SceneControls>(() => {
@@ -442,6 +483,9 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
         answer: (code: MisconceptionCode | 'correct') => ctl.answer(code),
         act: (action: Action) => ctl.act(action),
         practice: () => ctl.practiceInfo(),
+        // A net on show (docs/39 §3.7): what it shows, and a fold to hold it at (a frame of the folding).
+        net: () => netShown.current,
+        setFold: (fold: number) => ui.setState({ net: { at: netAt, fold, turn: netTurn } }),
       },
     };
     // `commands`, `status` and the modes are rebuilt from state every render; the deps below cover what they read.
@@ -481,6 +525,8 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
         { key: 'math.state.answered', value: `${Object.keys(u.practice).length}/${lesson.practice.length}` },
         { key: 'math.state.assists', value: UP(t('en', 'math.state.off')) },
       ]
+    : modelOnShow && netPlateRows(modelOnShow, task, run?.state ?? null, !!run?.done, netShownFold, netTurn)
+      ? netPlateRows(modelOnShow, task, run?.state ?? null, !!run?.done, netShownFold, netTurn)!
     : gridOnShow
       ? gridRows(gridOnShow, task && run && task.kind !== 'choose' && task.kind !== 'input' ? run.state : null)
       : modelOnShow && measurePlateRows(modelOnShow, task, run?.state ?? null, !!run?.done)
@@ -508,14 +554,14 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
         <Defs id={defs} />
         {!showSummary &&
           (background ? (
-            <StageContent defs={defs} box={modelBox} locale={locale} modes={modes} specimen={fractionLesson || specimenModel ? view : undefined} />
+            <StageContent defs={defs} box={modelBox} locale={locale} modes={modes} specimen={fractionLesson || specimenModel ? view : undefined} net={netHold} />
           ) : explain ? (
             <g ref={drawingRef} key={`${s.chapter}|${beatShape(explain)}${reduced ? `|${cur.beat}` : ''}`} className="ms-beat" data-move={explain.move ?? 'none'} data-model={explain.model.kind}>
-              <StageContent defs={defs} box={modelBox} locale={locale} modes={modes} beat={explain} />
+              <StageContent defs={defs} box={modelBox} locale={locale} modes={modes} beat={explain} net={netHold} />
             </g>
           ) : (
             <g ref={drawingRef} key={task?.id ?? 'none'} className="ms-beat" data-move="morph">
-              <StageContent defs={defs} box={modelBox} locale={locale} modes={modes} task={task} state={run?.state ?? null} run={run} view={view} editable={!practiceLocked && !!run && !run.done} ctl={ctl} />
+              <StageContent defs={defs} box={modelBox} locale={locale} modes={modes} task={task} state={run?.state ?? null} run={run} view={view} editable={!practiceLocked && !!run && !run.done} ctl={ctl} net={netHold} />
             </g>
           ))}
         {u.pulse > 0 && !showSummary && !explain && <rect key={u.pulse} className="ms-pulse" x={L.free.x - 6} y={L.free.y - 6} width={L.free.w + 12} height={L.free.h + 12} />}
@@ -535,6 +581,17 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
         <div className="ms-equation-measure" aria-hidden="true">
           <span ref={measureRef}>{renderRich(equation, locale, { line: true })}</span>
         </div>
+      )}
+      {netTools && netSpec && L.free.w > 0 && (
+        <NetTools
+          fold={Math.round((netShownFold ?? foldOf(netSpec)) * 100)}
+          onFold={netLocked ? null : (pct) => ui.setState({ net: { at: netAt, fold: pct / 100, turn: netTurn } })}
+          foldable={netFoldable}
+          onTurn={(by) => ui.setState({ net: { at: netAt, fold: netHeld?.fold ?? null, turn: (netTurn ?? netSpec.turn) + by } })}
+          compact={L.free.w < 400}
+          style={{ right: Math.max(8, L.w - (L.free.x + L.free.w)), top: L.free.y + L.free.h - NET_TOOLS_H + 6, maxWidth: L.free.w }}
+          locale={locale}
+        />
       )}
       {docked && task && run && (
         <div ref={trayRef} className="ms-tray-dock" style={{ bottom: L.dock }}>
@@ -556,6 +613,7 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
           pair={explain ? beatPair(explain) : null}
           time={explain ? beatTime(explain) : background && specimenModel?.kind === 'clock' ? { at: specimenModel.time, mode: 'face' } : null}
           expanded={cardExpanded}
+          netFold={netShownFold}
           locale={locale}
         />
       </SceneSlot>

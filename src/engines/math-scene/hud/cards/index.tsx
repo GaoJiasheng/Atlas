@@ -25,8 +25,10 @@ import { DecimalCard } from './DecimalCard';
 import { isDecimalTask } from '../../lib/decimal-tasks';
 import { MeasureCard } from './MeasureCard';
 import { isMeasureTask } from '../../lib/measure-kind';
+import { SolidCard } from './SolidCard';
+import { isNetTask } from '../../lib/net-tasks';
 
-export type CardKind = 'fraction' | 'area' | 'product' | 'placeValue' | 'time' | 'decimal' | 'measure';
+export type CardKind = 'fraction' | 'area' | 'product' | 'placeValue' | 'time' | 'decimal' | 'measure' | 'solid';
 
 /** Card by model kind (the time lesson's `clock` and `timeline` show the TIME card). */
 export const CARD_BY_MODEL: Record<string, CardKind> = {
@@ -44,6 +46,7 @@ export const CARD_BY_MODEL: Record<string, CardKind> = {
   'place-value': 'decimal',
   money: 'decimal',
   instrument: 'measure',
+  net: 'solid',
 };
 
 export const CARD_TITLE: Record<CardKind, UiKey> = {
@@ -54,12 +57,14 @@ export const CARD_TITLE: Record<CardKind, UiKey> = {
   time: 'math.card.timeTitle',
   decimal: 'math.card.decimal',
   measure: 'math.card.measure',
+  solid: 'math.card.solid',
 };
 
 /** The card for a model (and the check on show: a time or a duration written is the TIME card's). */
 export function cardKindOf(model: Model | null, task: Task | null, fallback: CardKind): CardKind {
   const spec = task ? inputSpecOf(task) : null;
   if (spec && (isTimeForm(spec.form) || spec.span || spec.convert)) return 'time';
+  if (task && isNetTask(task)) return 'solid';
   if (task && isMeasureTask(task)) return 'measure';
   if (task && isDecimalTask(task)) return 'decimal';
   if (!model) return fallback;
@@ -82,6 +87,8 @@ export interface CardProps {
   /** TIME: what a beat's (or the specimen's) clock or timeline shows. */
   time?: TimeShown | null;
   expanded: boolean;
+  /** SOLID: the fold on show (the slider's), `null`: the beat's own. */
+  netFold?: number | null;
   locale: Locale;
 }
 
@@ -97,6 +104,8 @@ export function Card(p: CardProps) {
       return <TimeCard task={p.task} state={p.state} done={p.done} time={p.time} locale={p.locale} />;
     case 'measure':
       return <MeasureCard model={p.model} task={p.task} state={p.state} done={p.done} locale={p.locale} />;
+    case 'solid':
+      return <SolidCard model={p.model} task={p.task} state={p.state} done={p.done} fold={p.netFold ?? null} locale={p.locale} />;
     case 'decimal':
       return <DecimalCard model={p.model} beat={p.beat} task={p.task} state={p.state} done={p.done} expanded={p.expanded} locale={p.locale} />;
     default:

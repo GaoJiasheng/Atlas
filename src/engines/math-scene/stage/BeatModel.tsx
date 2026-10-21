@@ -42,6 +42,8 @@ import type { TimeShown } from '../hud/cards/TimeCard';
 import { naturalUnits } from '../lib/value';
 import { InstrumentModel } from './Instrument';
 import { partsOf } from '../lib/instrument';
+import { NetModel, type NetPlay, type NetShown } from './NetModel';
+import { netItems } from '../lib/net-view';
 
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
 const indices = (set: number | number[] | undefined): number[] => (set === undefined ? [] : Array.isArray(set) ? [...set] : Array.from({ length: set }, (_, i) => i));
@@ -84,6 +86,9 @@ export function beatShape(beat: Beat): string {
       return `instrument|${partsOf(m)
         .map((x) => [x.type, x.unit, x.from && formatDecimal(x.from), x.to && formatDecimal(x.to), x.major && formatDecimal(x.major), x.minor && formatDecimal(x.minor), x.look, x.orient, x.shape, x.scale, x.broken, x.inset && formatDecimal(x.inset), x.sub?.unit, x.dual, x.skip && formatDecimal(x.skip.from)].join(','))
         .join('|')}`;
+    case 'net':
+      // The same net keeps its drawing (it folds, unfolds, turns, its colours come in); another solid, another layout or a set remounts.
+      return `net|${m.set ? 'set|' : ''}${JSON.stringify(netItems(m).map((x) => [x.solid, x.layout, x.curved, x.base, x.open]))}`;
     case 'clock':
     case 'timeline': {
       // The same face keeps its drawing (the hands sweep to the new time, a lens comes and goes; new jumps are drawn on); another face or ruler remounts.
@@ -103,7 +108,17 @@ function beatValue(beat: Beat): Frac | null {
   return count > 0 ? { n: count, d: m.parts! } : null;
 }
 
-export function BeatModel({ beat, box, defs, modes, locale }: { beat: Beat; box: Rect; defs: string; modes: DisplayModes; locale: Locale }) {
+/** The net tools' hold on a net beat (the FOLD slider, the turns) and what the drawing reports back. */
+export interface NetHold {
+  fold: number | null;
+  turn: number | null;
+  /** The drawing at most this high (about half the stage). */
+  maxH?: number;
+  play?: NetPlay | null;
+  onShow?(info: NetShown): void;
+}
+
+export function BeatModel({ beat, box, defs, modes, locale, net }: { beat: Beat; box: Rect; defs: string; modes: DisplayModes; locale: Locale; net?: NetHold }) {
   const m = beat.model;
   const o = beat.overlay ?? {};
   const labels = !!o.labels || modes.labels;
@@ -120,6 +135,7 @@ export function BeatModel({ beat, box, defs, modes, locale }: { beat: Beat; box:
   };
 
   if (m.kind === 'grid') return <GridModel defs={defs} box={box} model={m} locale={locale} label={label} />;
+  if (m.kind === 'net') return <NetModel model={m} box={box} defs={defs} locale={locale} label={label} move={beat.move ?? null} fold={net?.fold ?? null} turn={net?.turn ?? null} maxH={net?.maxH} onShow={net?.onShow} />;
   if (m.kind === 'instrument') return <InstrumentModel model={m} box={box} defs={defs} locale={locale} label={label} move={beat.move ?? null} />;
   if (isDecimalModel(m)) {
     if (m.kind === 'decimal-grid' && beat.under) {

@@ -1,0 +1,19 @@
+# PLACEHOLDER topic: exercises the MathScene nets engine only (docs/06 "MathScene" · 展开图与立体, docs/39 §3):
+# model A8 `net` (a cube, a cuboid, a prism, a pyramid, a cylinder, a cone, a sphere; squares, rectangles and trees of
+# faces; folding, turning, pairs, squared paper, lengths, the flat outline, a set of pictures, the notes on a net that
+# does not close), the two new task kinds (complete-net with free, adjacent and listed places; tap-face for the
+# opposite face and the bottom of a box), choices with net pictures, solid names and "it folds / it does not", numbers
+# about a net and every `nets` misconception. The numbers and wording are placeholders, not a lesson.
+id: sample-lesson-net
+title: { en: "Sample: Nets lesson", zh: "示例：展开图课" }
+subtitle: { en: "A placeholder topic for testing the lesson engine's nets and solids", zh: "用于测试课引擎展开图与立体的占位主题" }
+subject: math
+tags: [beyond-syllabus]
+moe:
+  - "Placeholder: no syllabus anchor"
+mode: lesson
+engine: math-scene
+stage: svg
+theme: paper
+sensitivity: open
+status: draft
