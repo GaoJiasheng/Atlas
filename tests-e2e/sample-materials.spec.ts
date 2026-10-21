@@ -64,7 +64,8 @@ test.describe('sample-materials (materials model and bend)', () => {
       return v > before.value + 1e-5 && v < Number((await sim(page)).outputs['bridge-sag']) - 1e-5;
     }, { intervals: [16, 16, 32] }).toBe(true);
     const sag = Number((await sim(page)).outputs['bridge-sag']);
-    await expect.poll(async () => Math.abs((await bend(page, 'bridge-wood'))!.value - sag)).toBeLessThan(0.0005);
+    // Settled: the ease ends exactly on the model value.
+    await expect.poll(async () => Math.abs((await bend(page, 'bridge-wood'))!.value - sag)).toBeLessThan(1e-6);
     const now = (await bend(page, 'bridge-wood'))!;
     expect(now.mid[1]).toBeCloseTo(STRIP_Y - sag, 4);
     expect(Math.abs(now.length - 0.3) / 0.3).toBeLessThan(0.005);
