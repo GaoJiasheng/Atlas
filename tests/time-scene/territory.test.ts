@@ -117,7 +117,7 @@ describe('labelGeometry', () => {
       }
     }
     expect(checked).toBeGreaterThan(100);
-  });
+  }, 30_000); // whole ww2 dataset; slow when the machine is busy
 });
 
 describe('labelText', () => {
