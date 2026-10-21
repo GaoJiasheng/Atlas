@@ -189,7 +189,8 @@ function chapterIdsOf(slug: string): Set<string> {
   if (isDir(dir))
     for (const name of readdirSync(dir).filter((f) => f.endsWith('.mdx'))) {
       const front = /^---\r?\n([\s\S]*?)\r?\n---/.exec(readFileSync(join(dir, name), 'utf8'))?.[1] ?? '';
-      const id = /^id:\s*["']?([^"'\s#]+)/m.exec(front)?.[1];
+      // YAML (`id: x`) or JSON frontmatter (`"id": "x"`, as in singapore-1819-1965).
+      const id = /^(?:id|\s*"id")\s*:\s*["']?([^"'\s#,]+)/m.exec(front)?.[1];
       if (id) ids.add(id);
     }
   chapterIds.set(slug, ids);

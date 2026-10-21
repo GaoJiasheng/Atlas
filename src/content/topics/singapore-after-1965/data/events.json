@@ -1,0 +1,886 @@
+[
+  {
+    "id": "separation-1965",
+    "t": "1965-08-09",
+    "at": [
+      103.8516667,
+      1.2905556
+    ],
+    "kind": "political",
+    "importance": 3,
+    "title": {
+      "en": "Singapore becomes independent",
+      "zh": "新加坡独立"
+    },
+    "summary": {
+      "en": "On 9 August 1965 the Proclamation of Singapore was broadcast at 10 a.m., and Malaysia's Parliament voted 126 to none, with one abstention, to let Singapore go.",
+      "zh": "1965 年 8 月 9 日上午 10 时广播新加坡独立宣言；马来西亚国会以 126 票对 0 票、1 票弃权，通过让新加坡退出。"
+    },
+    "detail": {
+      "en": "In Parliament the Tunku said the only other course was “repressive measures” against Singapore's government. At a press conference that afternoon Lee Kuan Yew called it “a moment of anguish”. The marker is City Hall, where the Prime Minister's office was.",
+      "zh": "东姑在国会说，另一条路只能是对新加坡政府采取“镇压手段”。当天下午，李光耀在记者会上称之为“痛苦的时刻”。标记放在总理办公室所在的政府大厦。"
+    },
+    "sources": [
+      "S160",
+      "S320",
+      "S271",
+      "S219",
+      "S342"
+    ]
+  },
+  {
+    "id": "singapore-naval-base",
+    "t": "1938-02-14",
+    "at": [
+      103.82,
+      1.46
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Singapore Naval Base",
+      "zh": "新加坡海军基地"
+    },
+    "summary": {
+      "en": "Britain's naval base at Sembawang, begun in 1928, is officially opened with the King George VI Dock; it is called the 'Gibraltar of the East'.",
+      "zh": "英国在三巴旺修建的海军基地 1928 年动工，与乔治六世船坞一同正式启用，被称为“东方直布罗陀”。"
+    },
+    "detail": {
+      "en": "The base was built to receive a British fleet sent from Europe in an emergency; no large fleet was stationed there. Planning assumed the fleet could arrive within 70 days of war breaking out; in September 1939, with war in Europe, the Chiefs of Staff extended this 'period before relief' to 180 days.",
+      "zh": "基地是为了在紧急时接纳从欧洲派来的英国舰队而修的，平时并没有大舰队驻扎。计划假定开战后 70 天内舰队可以赶到；1939 年 9 月欧洲开战后，参谋长委员会把这一“待援期”延长到 180 天。"
+    },
+    "sources": [
+      "S216",
+      "S217"
+    ]
+  },
+  {
+    "id": "site-seletar-airbase",
+    "t": "1928",
+    "at": [
+      103.867,
+      1.416
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Seletar airfield",
+      "zh": "实里达机场"
+    },
+    "summary": {
+      "en": "A Royal Air Force airfield: flying began in 1928 and it was officially opened on 1 January 1930.",
+      "zh": "英国皇家空军的机场：1928 年开始起降，1930 年 1 月 1 日正式启用。"
+    },
+    "sources": [
+      "S61"
+    ]
+  },
+  {
+    "id": "site-tengah-airbase",
+    "t": "1939",
+    "at": [
+      103.708,
+      1.387
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Tengah airfield",
+      "zh": "登加机场"
+    },
+    "summary": {
+      "en": "A Royal Air Force airfield built in 1939 in the west of the island.",
+      "zh": "英国皇家空军 1939 年在岛的西部建造的机场。"
+    },
+    "sources": [
+      "S62"
+    ]
+  },
+  {
+    "id": "site-sembawang-airbase",
+    "t": "1959-04-01",
+    "at": [
+      103.813,
+      1.425
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Sembawang airfield",
+      "zh": "三巴旺机场"
+    },
+    "summary": {
+      "en": "A military airfield marked on the 1959 map, near the naval base.",
+      "zh": "1959 年地图上标出的军用机场，靠近海军基地。"
+    },
+    "sources": [
+      "S9"
+    ],
+    "detail": {
+      "en": "The date is that of the 1959 map, not the airfield's opening, which was not confirmed for this topic.",
+      "zh": "日期是 1959 年地图的日期，不是机场的启用日期；本主题没能核实启用日期。"
+    }
+  },
+  {
+    "id": "site-changi-airbase",
+    "t": "1959-04-01",
+    "at": [
+      103.974,
+      1.394
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Changi airfield",
+      "zh": "樟宜机场（空军）"
+    },
+    "summary": {
+      "en": "A military airfield at the eastern tip, marked on the 1959 map. The civil Changi Airport opened beside it in 1981.",
+      "zh": "岛东端的军用机场，1959 年地图上已有标出。1981 年，民用的樟宜机场在它旁边启用。"
+    },
+    "sources": [
+      "S9"
+    ],
+    "detail": {
+      "en": "The date is that of the 1959 map, not the airfield's opening, which was not confirmed for this topic.",
+      "zh": "日期是 1959 年地图的日期，不是机场的启用日期；本主题没能核实启用日期。"
+    }
+  },
+  {
+    "id": "jtc-founded",
+    "t": "1968-06-01",
+    "at": [
+      103.71,
+      1.32
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "Jurong Town Corporation is set up",
+      "zh": "裕廊镇管理局成立"
+    },
+    "summary": {
+      "en": "On 1 June 1968 a statutory board is set up to develop and run Jurong and Singapore's other industrial estates, a job first given to the Economic Development Board in 1961.",
+      "zh": "1968 年 6 月 1 日，政府成立法定机构，负责发展和管理裕廊以及新加坡其他工业区；这项工作原先在 1961 年交给经济发展局。"
+    },
+    "sources": [
+      "S230",
+      "S203"
+    ]
+  },
+  {
+    "id": "site-city-hall",
+    "t": "1959-12-03",
+    "at": [
+      103.8516667,
+      1.2905556
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "City Hall",
+      "zh": "政府大厦"
+    },
+    "summary": {
+      "en": "On 3 December 1959 the state flag, crest and anthem were first used here, at the installation of Yusof Ishak as head of state; in 1966 the first National Day march-past set off from here.",
+      "zh": "1959 年 12 月 3 日，尤索夫伊萨就任元首的典礼在这里举行，邦旗、邦徽、邦歌第一次启用；1966 年，第一次国庆游行从这里出发。"
+    },
+    "detail": {
+      "en": "The date is that of the 1959 ceremony, not of the building, which is older. Today the building is part of the National Gallery Singapore.",
+      "zh": "日期是 1959 年那场典礼的日期，不是建筑落成的日期，建筑比这更早。今天这座建筑是新加坡国家美术馆的一部分。"
+    },
+    "sources": [
+      "S403",
+      "S404",
+      "S417",
+      "S472"
+    ]
+  },
+  {
+    "id": "site-victoria-theatre",
+    "t": "1958",
+    "at": [
+      103.852,
+      1.28825
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Victoria Theatre",
+      "zh": "维多利亚剧院"
+    },
+    "summary": {
+      "en": "Zubir Said wrote “Majulah Singapura” in 1958 for the City Council, for the reopening of this theatre; on 19 July 1964 the PAP met Malay organisations here, two days before the riots.",
+      "zh": "1958 年，朱比赛为市议会写了《前进吧，新加坡！》，在这座剧院重新开放时演出；1964 年 7 月 19 日，行动党在这里与马来团体开会，两天后发生骚乱。"
+    },
+    "detail": {
+      "en": "Today the building is the Victoria Theatre and Concert Hall. The 1964 meeting is told in Singapore, 1819–1965, chapter 11.",
+      "zh": "今天这座建筑是维多利亚剧院及音乐会堂。1964 年的会议见《新加坡 1819–1965》第 11 章。"
+    },
+    "sources": [
+      "S406",
+      "S443",
+      "S472"
+    ]
+  },
+  {
+    "id": "safti-founded-1966",
+    "t": "1966-02-14",
+    "at": [
+      103.672,
+      1.334
+    ],
+    "kind": "milestone",
+    "importance": 3,
+    "title": {
+      "en": "SAFTI at Pasir Laba Camp, 1966–1995",
+      "zh": "巴西拉峇军营的军训学院（1966–1995）"
+    },
+    "summary": {
+      "en": "On 14 February 1966 the Singapore Armed Forces Training Institute opened its first course, for 60 officers and NCOs who would train others; it moved to a new campus in 1995.",
+      "zh": "1966 年 2 月 14 日，新加坡武装部队军训学院开办第一期课程，学员是 60 名将来要训练别人的军官和士官；1995 年迁往新校园。"
+    },
+    "detail": {
+      "en": "Goh Keng Swee opened the school on 18 June 1966. The first 150 section commanders finished their course on 18 November 1966, and the first 117 officer cadets were commissioned on 16 July 1967. Pasir Laba Camp is still in use, so the map shows it only as one point.",
+      "zh": "吴庆瑞 1966 年 6 月 18 日主持开幕。首批 150 名班长 1966 年 11 月 18 日结业，首批 117 名军官学员 1967 年 7 月 16 日授衔。巴西拉峇军营今天仍在使用，所以地图上只画一个点。"
+    },
+    "sources": [
+      "S422",
+      "S472"
+    ]
+  },
+  {
+    "id": "ns-act-1967",
+    "t": "1967-03-14",
+    "at": [
+      103.8511111,
+      1.2886111
+    ],
+    "kind": "milestone",
+    "importance": 3,
+    "title": {
+      "en": "The National Service (Amendment) Act",
+      "zh": "《国民服役（修正）法令》"
+    },
+    "summary": {
+      "en": "Parliament passed the law that began National Service on 14 March 1967; young men born from 1 January to 30 June 1949 had to register.",
+      "zh": "国会 1967 年 3 月 14 日通过这项法令，开始实行国民服役；1949 年 1 月 1 日至 6 月 30 日出生的男青年必须登记。"
+    },
+    "detail": {
+      "en": "The Bill was first read on 27 February. MINDEF, SG101 and NHB give 14 March as the day it was passed; BiblioAsia gives 17 March. The Enlistment Act, which made National Service permanent, is a separate law of 1970. The marker is the old Parliament House, where Parliament met until 1999; it stands for the law, not for one event in the building.",
+      "zh": "法案 2 月 27 日一读。国防部、SG101 和国家文物局都写 3 月 14 日通过，《BiblioAsia》写 3 月 17 日。让国民服役固定下来的《征兵法令》是 1970 年的另一部法律。标记放在旧国会大厦，国会到 1999 年都在这里开会；它代表这项法律，不表示楼里发生的某一件事。"
+    },
+    "sources": [
+      "S421",
+      "S418",
+      "S420",
+      "S424",
+      "S423",
+      "S469"
+    ]
+  },
+  {
+    "id": "first-ns-intake-1967",
+    "t": "1967-08-17",
+    "at": [
+      103.718536,
+      1.33716
+    ],
+    "kind": "milestone",
+    "importance": 3,
+    "title": {
+      "en": "The first National Service intake",
+      "zh": "第一批国民服役人员入伍"
+    },
+    "summary": {
+      "en": "On 17 August 1967 about 900 young men began two years of full-time service at Taman Jurong Camp, 450 in each of two new battalions; the rest of some 9,000 who registered served part-time.",
+      "zh": "1967 年 8 月 17 日，约 900 名男青年在 Taman Jurong 军营开始两年全职服役，两个新营各 450 人；登记的约 9,000 人中，其余的人部分时间服役。"
+    },
+    "detail": {
+      "en": "Formal training began on 11 September 1967. The camp's barracks were blocks of one-room flats built by the Jurong Town Corporation. The site is now a neighbourhood park, Taman Jurong Greens, where a heritage marker was placed on 6 August 2017; the marker is that park.",
+      "zh": "正式训练 1967 年 9 月 11 日开始。营房是裕廊镇管理局建的一房式组屋。原址今天是邻里公园 Taman Jurong Greens，2017 年 8 月 6 日在这里立了文物标记；地图上的标记就是这个公园。"
+    },
+    "sources": [
+      "S421",
+      "S425",
+      "S426",
+      "S473"
+    ]
+  },
+  {
+    "id": "armed-forces-day-1969",
+    "t": "1969-07-01",
+    "at": [
+      103.860347,
+      1.310016
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "The first Armed Forces Day",
+      "zh": "第一个武装部队日"
+    },
+    "summary": {
+      "en": "On 1 July 1969 about 1,500 servicemen took part in the first Armed Forces Day at Jalan Besar Stadium; from 1972 it was called SAF Day.",
+      "zh": "1969 年 7 月 1 日，约 1,500 名军人在惹兰勿刹体育场参加第一个武装部队日；1972 年起改称新加坡武装部队日。"
+    },
+    "sources": [
+      "S427",
+      "S472"
+    ]
+  },
+  {
+    "id": "ndp-1969",
+    "t": "1969-08-09",
+    "at": [
+      103.8530556,
+      1.2905556
+    ],
+    "kind": "milestone",
+    "importance": 1,
+    "title": {
+      "en": "National Day 1969: armour on parade",
+      "zh": "1969 年国庆：装甲车参加检阅"
+    },
+    "summary": {
+      "en": "At the National Day Parade of 1969 tanks and armoured vehicles of the new armed forces passed the Padang for the first time.",
+      "zh": "1969 年的国庆检阅，新武装部队的坦克和装甲车第一次在大草场前列队通过。"
+    },
+    "sources": [
+      "S419",
+      "S472"
+    ]
+  },
+  {
+    "id": "first-national-day-1966",
+    "t": "1966-08-09",
+    "at": [
+      103.8530556,
+      1.2905556
+    ],
+    "kind": "milestone",
+    "importance": 3,
+    "title": {
+      "en": "The first National Day Parade",
+      "zh": "第一次国庆检阅"
+    },
+    "summary": {
+      "en": "On 9 August 1966 President Yusof Ishak took the salute on the Padang; some 23,000 people marched from City Hall through Chinatown to Tanjong Pagar.",
+      "zh": "1966 年 8 月 9 日，尤索夫伊萨总统在大草场检阅；约 23,000 人从政府大厦出发，经牛车水游行到丹戎巴葛。"
+    },
+    "detail": {
+      "en": "National Day parades were later held in other places; this topic has checked the place of the 1966 parade only.",
+      "zh": "后来的国庆检阅在别的地方也办过；本主题只核对了 1966 年检阅的地点。"
+    },
+    "sources": [
+      "S417",
+      "S472"
+    ]
+  },
+  {
+    "id": "pledge-first-recited-1966",
+    "t": "1966-08-24",
+    "at": [
+      103.8198,
+      1.3521
+    ],
+    "kind": "milestone",
+    "importance": 3,
+    "title": {
+      "en": "The Pledge is recited for the first time",
+      "zh": "第一次诵读信约"
+    },
+    "summary": {
+      "en": "On 24 August 1966 about 500,000 pupils in 529 schools began the school day by reciting the new National Pledge.",
+      "zh": "1966 年 8 月 24 日，529 所学校约 50 万名学生以诵读新的信约开始一天的课。"
+    },
+    "detail": {
+      "en": "The Pledge was drafted between October 1965 and early 1966; the drafts are described in chapter 02. The marker stands at the centre of the island and means “the whole country”; it is not the place where the decision was made.",
+      "zh": "信约在 1965 年 10 月至 1966 年初起草，起草经过见第 02 章。标记放在岛的中心，表示“全国”，不是作出决定的地点。"
+    },
+    "sources": [
+      "S413",
+      "S407",
+      "S415"
+    ]
+  },
+  {
+    "id": "national-flower-1981",
+    "t": "1981-04-15",
+    "at": [
+      103.8198,
+      1.3521
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "Vanda Miss Joaquim, the national flower",
+      "zh": "国花卓锦万代兰"
+    },
+    "summary": {
+      "en": "On 15 April 1981 the Minister for Culture, S. Dhanabalan, announced the orchid Vanda Miss Joaquim as the national flower, chosen from 40 flowers, 30 of them orchids.",
+      "zh": "1981 年 4 月 15 日，文化部长丹那巴南宣布胡姬花卓锦万代兰为国花；它是从 40 种花中选出的，其中 30 种是胡姬。"
+    },
+    "detail": {
+      "en": "The hybrid was bred by Agnes Joaquim in 1893. The marker stands at the centre of the island and means “the whole country”; it is not the place where the decision was made.",
+      "zh": "这个杂交种由艾妮丝·卓锦在 1893 年培育。标记放在岛的中心，表示“全国”，不是作出决定的地点。"
+    },
+    "sources": [
+      "S409",
+      "S475"
+    ]
+  },
+  {
+    "id": "lion-head-1986",
+    "t": "1986",
+    "at": [
+      103.8198,
+      1.3521
+    ],
+    "kind": "milestone",
+    "importance": 1,
+    "title": {
+      "en": "The Lion Head symbol",
+      "zh": "狮头标志"
+    },
+    "summary": {
+      "en": "In 1986 the Ministry of Communications and Information introduced the Lion Head symbol, which people and companies may use freely; its designer, Michael Lee, gave it to the nation.",
+      "zh": "1986 年，通讯及新闻部推出人民和企业都可以自由使用的狮头标志；设计者 Michael Lee 把它送给国家。"
+    },
+    "detail": {
+      "en": "Only the year is known. The marker stands at the centre of the island and means “the whole country”; it is not the place where the decision was made.",
+      "zh": "只知道年份。标记放在岛的中心，表示“全国”，不是作出决定的地点。"
+    },
+    "sources": [
+      "S408"
+    ]
+  },
+  {
+    "id": "symbols-act-2023",
+    "t": "2023-08-01",
+    "at": [
+      103.85,
+      1.28922
+    ],
+    "kind": "milestone",
+    "importance": 3,
+    "title": {
+      "en": "The National Symbols Act comes into force",
+      "zh": "《国家象征法令》生效"
+    },
+    "summary": {
+      "en": "On 1 August 2023 the National Symbols Act 2022 came into force. It names seven national symbols: the flag, anthem, Pledge, coat of arms, Public Seal, Lion Head symbol and national flower.",
+      "zh": "2023 年 8 月 1 日，《2022 年国家象征法令》生效。法令列明七个国家象征：国旗、国歌、信约、国徽、公共印章、狮头标志和国花。"
+    },
+    "detail": {
+      "en": "The Bill was read for the first time on 2 August 2022 and became Act No. 29 of 2022, replacing the law of 1959. The marker is today's Parliament House, in use since 1999.",
+      "zh": "法案 2022 年 8 月 2 日一读，通过后为 2022 年第 29 号法令，取代 1959 年的法律。标记放在 1999 年启用的现在的国会大厦。"
+    },
+    "sources": [
+      "S411",
+      "S404",
+      "S403",
+      "S469"
+    ]
+  },
+  {
+    "id": "konfrontasi-ends-1966",
+    "t": "1966-08-12",
+    "at": [
+      106.8269444,
+      -6.1752778
+    ],
+    "kind": "political",
+    "importance": 3,
+    "title": {
+      "en": "Confrontation ends",
+      "zh": "对抗结束"
+    },
+    "summary": {
+      "en": "In Jakarta, Malaysia's Tun Abdul Razak and Indonesia's Adam Malik ratified the agreement that ended Indonesia's Confrontation against Malaysia.",
+      "zh": "马来西亚的敦阿都拉萨和印度尼西亚的亚当·马立克在雅加达批准协议，结束了印度尼西亚针对马来西亚的对抗。"
+    },
+    "detail": {
+      "en": "NLB gives the ratification as 12 August 1966; a United States intelligence note dated 12 August says the accord was signed in Jakarta on 11 August. Both dates are in Jakarta. The marker is the city of Jakarta.",
+      "zh": "新加坡国家图书馆管理局写 1966 年 8 月 12 日批准；美国一份 8 月 12 日的情报备忘录说协议 8 月 11 日在雅加达签署。两个日期都在雅加达。标记是雅加达市。"
+    },
+    "sources": [
+      "S449",
+      "S450",
+      "S472"
+    ]
+  },
+  {
+    "id": "asean-founded-1967",
+    "t": "1967-08-08",
+    "at": [
+      100.5166667,
+      13.75
+    ],
+    "kind": "political",
+    "importance": 3,
+    "title": {
+      "en": "ASEAN is founded",
+      "zh": "东盟成立"
+    },
+    "summary": {
+      "en": "On 8 August 1967 Indonesia, Malaysia, the Philippines, Singapore and Thailand founded the Association of Southeast Asian Nations in Bangkok; S. Rajaratnam signed for Singapore.",
+      "zh": "1967 年 8 月 8 日，印度尼西亚、马来西亚、菲律宾、新加坡和泰国在曼谷成立东南亚国家联盟（东盟）；拉惹勒南代表新加坡签署。"
+    },
+    "detail": {
+      "en": "Brunei joined in 1984, Vietnam in 1995, Laos and Myanmar in 1997 and Cambodia in 1999. The marker is the city of Bangkok.",
+      "zh": "文莱 1984 年、越南 1995 年、老挝和缅甸 1997 年、柬埔寨 1999 年加入。标记是曼谷市。"
+    },
+    "sources": [
+      "S452",
+      "S451",
+      "S447",
+      "S472"
+    ]
+  },
+  {
+    "id": "indonesia-relations-1967",
+    "t": "1967-09-07",
+    "at": [
+      106.8269444,
+      -6.1752778
+    ],
+    "kind": "political",
+    "importance": 1,
+    "title": {
+      "en": "Singapore and Indonesia establish relations",
+      "zh": "新加坡与印度尼西亚建交"
+    },
+    "summary": {
+      "en": "On 7 September 1967 Singapore and Indonesia established formal diplomatic relations.",
+      "zh": "1967 年 9 月 7 日，新加坡与印度尼西亚正式建立外交关系。"
+    },
+    "detail": {
+      "en": "The marker is the city of Jakarta.",
+      "zh": "标记是雅加达市。"
+    },
+    "sources": [
+      "S449"
+    ]
+  },
+  {
+    "id": "total-defence-1984",
+    "t": "1984-01-22",
+    "at": [
+      103.8198,
+      1.3521
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "Total Defence",
+      "zh": "全面防卫"
+    },
+    "summary": {
+      "en": "On 22 January 1984 Total Defence was introduced: defence by everyone, in five parts, military, civil, economic, social and psychological. Digital defence was added in 2019.",
+      "zh": "1984 年 1 月 22 日提出全面防卫：人人都参与防卫，分五个方面，即军事、民事、经济、社会和心理防卫。2019 年加上数码防卫。"
+    },
+    "detail": {
+      "en": "The marker stands at the centre of the island and means “the whole country”; it is not the place where the decision was made.",
+      "zh": "标记放在岛的中心，表示“全国”，不是作出决定的地点。"
+    },
+    "sources": [
+      "S453",
+      "S454",
+      "S456",
+      "S455",
+      "S457",
+      "S458"
+    ]
+  },
+  {
+    "id": "british-withdrawal-announced-1967",
+    "t": "1967-07-18",
+    "at": [
+      103.82,
+      1.46
+    ],
+    "kind": "political",
+    "importance": 3,
+    "title": {
+      "en": "Britain announces it will leave",
+      "zh": "英国宣布撤军"
+    },
+    "summary": {
+      "en": "On 18 July 1967 Britain announced that it would withdraw its forces from Singapore by the mid-1970s. The bases produced over a fifth of Singapore's national income.",
+      "zh": "1967 年 7 月 18 日，英国宣布在 1970 年代中期以前从新加坡撤军。这些基地占新加坡国民生产总值的两成以上。"
+    },
+    "detail": {
+      "en": "The decision was announced in London. The marker stands on the naval base, the largest of the British bases in Singapore.",
+      "zh": "这个决定是在伦敦宣布的。标记放在海军基地，那是英军在新加坡最大的基地。"
+    },
+    "sources": [
+      "S430"
+    ]
+  },
+  {
+    "id": "withdrawal-brought-forward-1968",
+    "t": "1968-01-16",
+    "at": [
+      103.82,
+      1.46
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "The date is brought forward to 1971",
+      "zh": "撤军提前到 1971 年"
+    },
+    "summary": {
+      "en": "On 16 January 1968 Britain announced that it would withdraw all its forces by 1971.",
+      "zh": "1968 年 1 月 16 日，英国宣布在 1971 年以前撤走全部军队。"
+    },
+    "detail": {
+      "en": "Newspapers reported it on 17 January. The decision was announced in London. The marker stands on the naval base, the largest of the British bases in Singapore.",
+      "zh": "报纸在 1 月 17 日报道。这个决定是在伦敦宣布的。标记放在海军基地，那是英军在新加坡最大的基地。"
+    },
+    "sources": [
+      "S430"
+    ]
+  },
+  {
+    "id": "labour-laws-1968",
+    "t": "1968-08",
+    "at": [
+      103.8511111,
+      1.2886111
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "The labour laws of 1968",
+      "zh": "1968 年的劳工法令"
+    },
+    "summary": {
+      "en": "In July and August 1968 Parliament passed the Employment Act and the Industrial Relations (Amendment) Act. The government said they would return management rights to employers and bring investment; two union leaders in Parliament raised concerns.",
+      "zh": "1968 年 7 月和 8 月，国会通过《雇佣法令》和《劳资关系（修正）法令》。政府说这能把管理权还给雇主、吸引投资；两名工会领袖出身的议员在国会提出疑虑。"
+    },
+    "detail": {
+      "en": "Only the months are known; the exact days of the readings were not found. Both sides of the debate are in chapter 04. The marker is the old Parliament House, where Parliament met until 1999; it stands for the law, not for one event in the building.",
+      "zh": "只知道月份，没有查到三读的确切日期。双方的说法见第 04 章。标记放在旧国会大厦，国会到 1999 年都在这里开会；它代表这项法律，不表示楼里发生的某一件事。"
+    },
+    "sources": [
+      "S435",
+      "S469"
+    ]
+  },
+  {
+    "id": "british-forces-leave-1971",
+    "t": "1971-10",
+    "at": [
+      103.82,
+      1.46
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "Most British forces have left",
+      "zh": "大部分英军撤离"
+    },
+    "summary": {
+      "en": "By October 1971 most British troops had left Singapore; that year the air bases were handed to Singapore's air defence command. The last British soldier left in March 1976.",
+      "zh": "到 1971 年 10 月，大部分英军已经撤离新加坡；这一年，空军基地交给新加坡的空防司令部。最后一名英军 1976 年 3 月离开。"
+    },
+    "detail": {
+      "en": "The withdrawal was extended from March to December 1971. The decision was announced in London. The marker stands on the naval base, the largest of the British bases in Singapore.",
+      "zh": "撤军期限从 1971 年 3 月延到 12 月。这个决定是在伦敦宣布的。标记放在海军基地，那是英军在新加坡最大的基地。"
+    },
+    "sources": [
+      "S430",
+      "S421"
+    ]
+  },
+  {
+    "id": "muslim-law-act-1966",
+    "t": "1966",
+    "at": [
+      103.8511111,
+      1.2886111
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "The Administration of Muslim Law Act",
+      "zh": "《回教法执行法令》"
+    },
+    "summary": {
+      "en": "In 1966, with Othman Wok as Minister for Social Affairs, Parliament passed a law on the running of Muslim affairs; under it the Islamic Religious Council of Singapore (MUIS) was set up in 1968.",
+      "zh": "1966 年，奥斯曼渥任社会事务部长期间，国会通过管理伊斯兰教事务的法令；1968 年依这项法令成立新加坡伊斯兰教理事会。"
+    },
+    "detail": {
+      "en": "Only the year is known; the day it was passed was not found. The marker is the old Parliament House, where Parliament met until 1999; it stands for the law, not for one event in the building.",
+      "zh": "只知道年份，没有查到通过的日期。标记放在旧国会大厦，国会到 1999 年都在这里开会；它代表这项法律，不表示楼里发生的某一件事。"
+    },
+    "sources": [
+      "S446",
+      "S469"
+    ]
+  },
+  {
+    "id": "speak-mandarin-1979",
+    "t": "1979-09-07",
+    "at": [
+      103.8198,
+      1.3521
+    ],
+    "kind": "milestone",
+    "importance": 2,
+    "title": {
+      "en": "The Speak Mandarin Campaign",
+      "zh": "讲华语运动"
+    },
+    "summary": {
+      "en": "On 7 September 1979 Prime Minister Lee Kuan Yew launched the Speak Mandarin Campaign, asking Chinese Singaporeans to speak Mandarin instead of dialects.",
+      "zh": "1979 年 9 月 7 日，李光耀总理发起讲华语运动，鼓励新加坡华人多讲华语、少讲方言。"
+    },
+    "detail": {
+      "en": "Households that mainly spoke dialects fell from 76 per cent in 1980 to 48 per cent in 1990. The marker stands at the centre of the island and means “the whole country”; it is not the place where the decision was made.",
+      "zh": "主要讲方言的家庭，从 1980 年的 76 % 降到 1990 年的 48 %。标记放在岛的中心，表示“全国”，不是作出决定的地点。"
+    },
+    "sources": [
+      "S438",
+      "S439"
+    ]
+  },
+  {
+    "id": "english-first-language-1987",
+    "t": "1987",
+    "at": [
+      103.8198,
+      1.3521
+    ],
+    "kind": "milestone",
+    "importance": 1,
+    "title": {
+      "en": "English as the first language in schools",
+      "zh": "学校以英文为第一语文"
+    },
+    "summary": {
+      "en": "By 1987 English was the first language in all schools, except the Special Assistance Plan schools, and pupils learned a mother tongue as their second language.",
+      "zh": "到 1987 年，除特选学校外，所有学校都以英文为第一语文，学生把母语当作第二语文来学。"
+    },
+    "detail": {
+      "en": "Only the year is known. The marker stands at the centre of the island and means “the whole country”; it is not the place where the decision was made.",
+      "zh": "只知道年份。标记放在岛的中心，表示“全国”，不是作出决定的地点。"
+    },
+    "sources": [
+      "S437",
+      "S475"
+    ]
+  },
+  {
+    "id": "racial-harmony-day-1997",
+    "t": "1997-07-21",
+    "at": [
+      103.8198,
+      1.3521
+    ],
+    "kind": "milestone",
+    "importance": 3,
+    "title": {
+      "en": "Racial Harmony Day",
+      "zh": "种族和谐日"
+    },
+    "summary": {
+      "en": "On 21 July 1997 schools marked Racial Harmony Day, on the date the riots of 1964 began, as part of National Education.",
+      "zh": "1997 年 7 月 21 日，学校举行种族和谐日活动；1964 年的骚乱就是在这一天开始的。这是国民教育的一部分。"
+    },
+    "detail": {
+      "en": "National Education was launched on 17 May 1997. NLB and the Straits Times of 22 July 1997 date the first Racial Harmony Day to 1997; a Ministry of Education press release of 2012 says it began in 1998. The marker stands at the centre of the island and means “the whole country”; it is not the place where the decision was made.",
+      "zh": "国民教育 1997 年 5 月 17 日推出。新加坡国家图书馆管理局和 1997 年 7 月 22 日的《海峡时报》把第一个种族和谐日定在 1997 年；教育部 2012 年的新闻稿说从 1998 年开始。标记放在岛的中心，表示“全国”，不是作出决定的地点。"
+    },
+    "sources": [
+      "S440",
+      "S441",
+      "S442"
+    ]
+  },
+  {
+    "id": "press-detentions-1971",
+    "t": "1971-05-02",
+    "at": [
+      103.8198,
+      1.3521
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "Nanyang Siang Pau executives detained",
+      "zh": "《南洋商报》高层被拘留"
+    },
+    "summary": {
+      "en": "On 2 May 1971 four senior staff of the Chinese newspaper Nanyang Siang Pau were detained without trial under the Internal Security Act. The government said the paper glamorised communism and stirred up communal feeling; in June the four denied this in sworn statements.",
+      "zh": "1971 年 5 月 2 日，华文报《南洋商报》四名高层依《内部安全法令》被拘留，未经审判。政府说该报美化共产主义、煽动种族情绪；6 月，四人发誓章否认。"
+    },
+    "detail": {
+      "en": "On 28 May 1971 the government also revoked the printing licence of the English paper Singapore Herald. Both are told in chapter 06. The marker stands at the centre of the island and means “the whole country”; it is not the place where the decision was made.",
+      "zh": "1971 年 5 月 28 日，政府又吊销英文报《新加坡先驱报》的印刷执照。两件事都写在第 06 章。标记放在岛的中心，表示“全国”，不是作出决定的地点。"
+    },
+    "sources": [
+      "S465",
+      "S466"
+    ]
+  },
+  {
+    "id": "press-law-1974",
+    "t": "1974-08-28",
+    "at": [
+      103.8511111,
+      1.2886111
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "The Newspaper and Printing Presses Act",
+      "zh": "《报章与印刷新闻业法令》"
+    },
+    "summary": {
+      "en": "On 28 August 1974 Parliament passed the Newspaper and Printing Presses Act, which came into force on 1 January 1975.",
+      "zh": "1974 年 8 月 28 日，国会通过《报章与印刷新闻业法令》，1975 年 1 月 1 日生效。"
+    },
+    "detail": {
+      "en": "An amendment of 1986 allowed the government to restrict foreign publications. The marker is the old Parliament House, where Parliament met until 1999; it stands for the law, not for one event in the building.",
+      "zh": "1986 年的修正让政府可以限制外国刊物。标记放在旧国会大厦，国会到 1999 年都在这里开会；它代表这项法律，不表示楼里发生的某一件事。"
+    },
+    "sources": [
+      "S467",
+      "S468",
+      "S469"
+    ]
+  },
+  {
+    "id": "operation-spectrum-1987",
+    "t": "1987-05-21",
+    "until": "1987-06-20",
+    "at": [
+      103.8198,
+      1.3521
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "Operation Spectrum",
+      "zh": "光谱行动"
+    },
+    "summary": {
+      "en": "On 21 May 1987 sixteen people were detained without trial under the Internal Security Act, and six more on 20 June. The government said they were part of a Marxist conspiracy; nine of them later denied it.",
+      "zh": "1987 年 5 月 21 日，16 人依《内部安全法令》被拘留，未经审判；6 月 20 日又有 6 人被拘留。政府说他们参与马克思主义阴谋；其中九人后来否认。"
+    },
+    "detail": {
+      "en": "Both accounts, and what followed in 1988 and 1989, are in chapter 06. The marker stands at the centre of the island and means “the whole country”; it is not the place where the decision was made.",
+      "zh": "双方的说法以及 1988、1989 年的后续，见第 06 章。标记放在岛的中心，表示“全国”，不是作出决定的地点。"
+    },
+    "sources": [
+      "S459",
+      "S460",
+      "S461",
+      "S462",
+      "S464"
+    ]
+  }
+]
