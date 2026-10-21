@@ -37,6 +37,8 @@ test('chapters run in date order and each chapter labels its event', async ({ pa
     await expect(page.locator(`.ts-co[data-id="${event}"]`)).toBeVisible();
     await expect(page.locator('[data-hud-panel="reader"]')).toContainText(title);
   }
+  // No participants in this topic: no participation card, not an empty frame (docs/06).
+  await expect(page.locator('#atlas-card')).toHaveCount(0);
   // Every beat of the topic: 4 + 4 + 5 + 4 + 5 + 4 + 4.
   expect((await page.evaluate(() => window.__atlas!.beats())).length).toBe(30);
   expect(errors).toEqual([]);
