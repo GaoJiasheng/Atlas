@@ -73,8 +73,9 @@ test.describe('sample-heart (SpaceScene table model, hz, tidal)', () => {
     await expect.poll(async () => (await animation(page, 'heartbeat'))?.hz).toBeCloseTo(165 / 60, 3);
     for (const id of BREATHING) expect((await animation(page, id))!.hz).toBeCloseTo(40 / 60, 3);
     // Bound together: one phase.
-    const phases = await Promise.all(BREATHING.map((id) => animation(page, id)));
-    expect(new Set(phases.map((a) => a!.phase)).size).toBe(1);
+    // Read all three in one call, so no frame passes between the readings.
+    const phases = await page.evaluate((ids) => ids.map((x) => (window.__atlas!.engine as unknown as Engine).animation(x)!.phase), BREATHING);
+    expect(new Set(phases).size).toBe(1);
     expect((await flow(page, 'to-lungs'))?.pace).toBeCloseTo(1.83, 6);
     expect((await flow(page, 'air-right'))?.pace).toBeCloseTo(2, 6);
     await expect(readout(page, 'beats')).toHaveText('165');

@@ -27,6 +27,8 @@ import { sortSchema, sortIssues, type SortCheckPart } from './sort-schema';
 import { sortQuantity } from './lib/sim/sort';
 import { OUTPUT_TAGS, tableCellDecimals, tableIssues, tablePredictIssues, tableSchema, type TableCheckPart, type TableCount } from './table-schema';
 import { tableQuantity, tableStates } from './lib/sim/table';
+import { seedsIssues, seedsSchema } from './seeds-schema';
+import { seedsQuantity, seedsStates } from './lib/sim/seeds';
 
 /** A control value: a toggle's boolean, a step's number, a choice's option id. */
 export const simValue = z.union([z.boolean(), z.number(), kebabId]);
@@ -949,7 +951,7 @@ export const simOverlaySchema = z.discriminatedUnion('kind', [
 export type SimOverlay = z.output<typeof simOverlaySchema>;
 export type ShadowCastOverlay = Extract<SimOverlay, { kind: 'shadow-cast' }>;
 
-export const SIM_KINDS = ['circuit', 'magnet', 'force', 'energy', 'life-cycle', 'matter', 'light', 'sort', 'materials', 'table'] as const;
+export const SIM_KINDS = ['circuit', 'magnet', 'force', 'energy', 'life-cycle', 'matter', 'light', 'sort', 'materials', 'table', 'seeds'] as const;
 export type SimKind = (typeof SIM_KINDS)[number];
 
 export const MAX_SIM_CONTROLS = 16;
@@ -973,6 +975,7 @@ export const simSchema = z
     materials: materialsSchema.optional(),
     sort: sortSchema.optional(),
     table: tableSchema.optional(),
+    seeds: seedsSchema.optional(),
   })
   .strict()
   // A table's `{ value, decimals }` cells: their outputs show those values with those decimals (lib/sim/text.ts).
@@ -1119,6 +1122,8 @@ export function quantityKind(sim: SimData, from: string): SimOutput['kind'] | nu
       return sim.materials ? materialsQuantity(sim.materials, from, sim.controls) : null;
     case 'table':
       return sim.table && sim.outputs.some((o) => o.id === from) ? tableQuantity(sim.table, from) : null;
+    case 'seeds':
+      return sim.seeds ? seedsQuantity(sim.seeds, from, sim.controls) : null;
     case 'light': {
       if (from.startsWith('control:')) return sim.controls.some((c) => c.id === from.slice(8) && c.kind !== 'choice') ? 'number' : null;
       return sim.light ? lightQuantity(sim.light, from) : null;
@@ -1240,6 +1245,8 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
         ? materialsStates(sim.materials, from, sim.controls)
         : sim.kind === 'table' && sim.table
         ? tableStates(sim.table, from)
+        : sim.kind === 'seeds' && sim.seeds
+        ? seedsStates(sim.seeds, from, sim.controls)
         : sim.kind === 'force'
         ? FORCE_STATES[from]
         : sim.kind === 'energy' && from === 'chain-state' && sim.energy
@@ -1258,6 +1265,8 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
       const known = states ?? [];
       for (const st of Object.keys(o.states ?? {})) if (!known.includes(st)) issue(['outputs', i, 'states', st], `"${from}" is never "${st}" (${known.join(', ')})`);
     }
+    if (sim.kind === 'seeds' && sim.seeds && o.kind === 'state' && kind === 'state')
+      for (const st of Object.keys(o.states ?? {})) if (!(states ?? []).includes(st)) issue(['outputs', i, 'states', st], `"${from}" is never "${st}" (${(states ?? []).join(', ')})`);
     if (sim.kind === 'life-cycle' && sim.lifeCycle && o.kind === 'state' && kind === 'state') {
       const known = from === 'stage' ? sim.lifeCycle.stages.map((s) => s.id) : (EMPTYING_STATES[from] ?? []);
       for (const st of Object.keys(o.states ?? {})) if (!known.includes(st)) issue(['outputs', i, 'states', st], `"${from}" is never "${st}" (${known.join(', ')})`);
@@ -1269,6 +1278,8 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
   if (sim.kind === 'materials' && !sim.materials) issue(['materials'], 'a materials sim needs `materials`');
   if (sim.kind === 'table' && !sim.table) issue(['table'], 'a table sim needs `table`');
   if (sim.table) tableIssues(sim.table, controls, sim.outputs, (ctx.partData ?? []) as readonly TableCheckPart[], tableCounts(sim)).forEach((x) => issue(x.path, x.message));
+  if (sim.kind === 'seeds' && !sim.seeds) issue(['seeds'], 'a seeds sim needs `seeds`');
+  if (sim.seeds) seedsIssues(sim.seeds, controls).forEach((x) => issue(['seeds', ...x.path], x.message));
   if (sim.materials) materialsIssues(sim.materials, controls).forEach((x) => issue(['materials', ...x.path], x.message));
   if (sim.matter) matterIssues(sim.matter, controls, ctx.partData ?? []).forEach((x) => issue(['matter', ...x.path], x.message));
   if (sim.kind === 'circuit' && !sim.circuit) issue(['circuit'], 'a circuit sim needs `circuit`');

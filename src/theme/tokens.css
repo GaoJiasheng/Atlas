@@ -22,6 +22,8 @@
  *   --blood-rich / --blood-poor  blood with much / little oxygen (bright red / wine red; docs/40 E-HL4:
  *                both red, apart in lightness by L* ≥ 20 so they read in grey too)
  *   --oxygen  oxygen (clear green)   --carbon-dioxide  carbon dioxide (warm grey)   --air  air, the mixed gases (blue-grey)
+ *   --seedling / --seedling-pale  a seedling grown in the light (leaf green) / in the dark (pale yellow; docs/41 E-S1:
+ *                the try-it tint of a cup kept from the light; apart in lightness so they read in grey too)
  *   --face-1/2/3  a solid's opposite faces in pairs (docs/39 D10: MathScene nets), each with
  *                its mark ● ▲ ■ so the pairs read without colour too
  *   --holder-1 … --holder-8  one state each on a many-state map (TimeScene
@@ -160,6 +162,9 @@
   --oxygen: #1a8f63;
   --carbon-dioxide: #5e554e;
   --air: #5f7a8c;
+  /* Germination (docs/41 E-S1): a seedling in the light (leaf green) and one grown in the dark (pale yellow, L* ≥ 80, chroma 20–40), L* ≥ 20 apart; pale apart from --bone and --food. */
+  --seedling: #6b8e3a;
+  --seedling-pale: #e4dba2;
 
   /* Legacy names mapped onto the plate palette. */
   --bg: var(--paper);
@@ -272,6 +277,8 @@
   --oxygen: #46c48f;
   --carbon-dioxide: #8a786a;
   --air: #8fa9bb;
+  --seedling: #86ab52;
+  --seedling-pale: #ebe2a6;
 
   --bg: var(--paper);
   --surface: var(--panel-solid);

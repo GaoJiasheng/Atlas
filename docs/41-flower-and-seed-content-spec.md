@@ -1126,4 +1126,24 @@ pnpm tsx scripts/illustrate.ts figure  art/planned/flower-and-seed/flower-and-se
 
 ## 9. 施工记录 / 已知差距
 
-（空。施工后照 docs/36、37 §9 补：引擎 E-S1 的实现记录与验收数据；主题施工与本 spec 的差异表；F 步事实核查的结论（F-6、F-25、F-35、F-45–F-48、§2.7 尺寸、中文名与 §0.1 的退路是否触发）；复用 `plant` 几何的换算记录；参考图；性能；截图验收；引擎与流程问题。）
+（主题施工后照 docs/36、37 §9 补：主题施工与本 spec 的差异表；F 步事实核查的结论（F-6、F-25、F-35、F-45–F-48、§2.7 尺寸、中文名与 §0.1 的退路是否触发）；复用 `plant` 几何的换算记录；参考图；性能；截图验收；引擎与流程问题。）
+
+### 9.1 引擎（E-S1，2026-10-22，Opus 引擎代理，分支 `worktree-agent-a6decabca2d78e05c`）
+
+**做了什么**：E-S1 `seeds` 模型（`lib/sim/seeds.ts`：`solveSeeds`、`seedsQuantity`、`seedsStates`、`cupConditions`、`cupResult`、`cupSeedlings`、`cupChange`、`halfState`；`seeds-schema.ts`：`seedsSchema`、`seedsIssues`）。注册只动了列表的末尾：`sim-schema.ts`（`SIM_KINDS` 加 `'seeds'`、`seeds: seedsSchema.optional()`、`quantityKind` 一支、状态表一支、"永远不会出现的状态"一句、`seedsIssues` 两行）、`lib/sim/index.ts`（`simQuantities` 一行、`SEPARATE_EXPERIMENTS.seeds = true`）；没有时间线。另加两个 token、一个测试 API 读数与对应的 `pnpm shoot --beats` 核对（见下）。作者模板 `tests/space-scene/fixtures/seeds-bench.ts`（§4.2 整段 `sim`，按 §0.3 改；另有 §2.6 初稿五杯的 `FIVE_CUPS`）；草稿夹具 `sample-seeds`（背景章 + 传播、温度与天数、四只杯三章，12 拍）；单测 `seeds.test.ts`、`tests/theme/seedling-token.test.ts`；e2e `tests-e2e/sample-seeds.spec.ts`（9 条）；docs/06 新节「SpaceScene · 试一试 · 种子（seeds）」与模型种类、token 两行；docs/08 §1 功能色表加一行。
+
+**与 §4 的出入**（内容代理照这些写数据）：
+
+1. **四杯**（§0.3-1）：模板与夹具都是 A、B、D、E 四杯，选项 id 保留字母 `a` `b` `d` `e`（字幕里的"E 杯"不用改名）；`grown-*` / `pale-*` 各 4 个、绑定 12 条（不是 15）。四杯里没有哪两杯只差"空气"，所以 `changed` **不写 `air` 标签**（写了 validate 报"never"）；引擎仍支持五杯（`FIVE_CUPS` 单测复现 §2.6 初稿的整张 5 × 5 表）。
+2. **淡黄色是 token**，不是 §3.4 / §4.2 的 `#e4dba2`：新加 `--seedling`（有光的幼苗，叶绿）与 `--seedling-pale`（暗处长出的幼苗，淡黄；`tint` 绑定写 `"color": "token:seedling-pale"`）。paper `#6B8E3A` / `#E4DBA2`（L* 54.8 / 86.9），cinema `#86AB52` / `#EBE2A6`；单测核两者明度差 ≥ 20、淡黄 L* ≥ 80、彩度 20–40、色相 85–110°、与 `--bone`、`--food` 分开。§4.4 说"不需要新 token"，但颜色只用 token 的规矩优先。
+3. **一个零件一次只取一个姿态**（同一轮绑定里后写的胜出）：§4.2 同时给 `rubber-capsule` 写了 `rubber-front` 与 `capsule-burst`、给 `balsam-pod` 写了 `balsam-front` 与 `pod-split`，两条会互相覆盖。模板只留 `capsule-burst`、`pod-split`，**这两个姿态里要把"移到台前、抬高"也写进去**（复用 `plant` 的 `pod-split` 时加上同样的 offset）；`sea-almond`、`sea-almond-cut` 共用一条绑定。绑定共 26 条（≤ 64）。
+4. **`tint` 只染零件自己的材质（槽 0）**：幼苗的茎、子叶要同一种材质（含 tint 色），才会一起变淡黄；`seedlings-*` 用 `repeat` ×5，不写不同材质的 `extra`。
+5. **validate 比 §4.3 多三条**：至少写一个子模型；`cup` 与 `against` 必须是两个控件；**两杯条件完全相同报错**（拿它们比什么也没改，`changed` 会说"同一杯"）。天数步进（`count-day`、`day`）的值都要 ≥ 0。
+6. **`changed` 的因素名**：杯子数据写 `places[*].warm`，状态叫 `warmth`（§4.2 原样）；`same-cup` 也用于"两杯条件相同"，但第 5 条已经不让这种数据通过，所以实际只在 c = r 时出现。
+7. **`timing:half`**：day ≥ 中位数算"一半或更多"（中位数那天本身算到了）；20 °C 第 4 天 `fewer`、第 5 天 `half-or-more`，与 §2.6 一致。标签按 §0.3-3 写成"发芽的种子里有一半"（模板草稿：Fewer than half of those that germinate / 发芽的种子里还不到一半）；`half-day` 的标签同理。
+8. **`method` / `feature` 的取值集写死在引擎里**（课纲 P5 的四种方式、P6 的结构适应），作者只能从里面选；`dispersal:*` 的状态按 `fruits` 实际用到的穷举，夹具只有三种果实（风、水、爆开），所以它的 `method` 不写 `animals`。
+9. **测试 API 与 QA**（§4.4 没有）：`__atlas.engine.tint(partId)` → `{ color, level }`（此刻画出的 `tint` 目标色与混色程度）；`pnpm shoot --beats` 每拍与拍链接核对每件有 `tint` 绑定的零件画出的程度 = 绑定值（± 0.01）。`lib/sim/bind.ts` 抽出 `tintLevel`（舞台与 shoot 同用；值是 NaN 时取 0，原来会得 NaN）。没有新绑定。
+10. **夹具**：三个占位果实（翅片 = 风、浮球 = 水、三瓣球 + 三粒种子 = 爆开，`burst-open` 姿态把果移到台前并弹出种子）、一条天数卡（13 道刻度、`day-marker`、`half-flag`）、窗台 / 柜子 / 冰箱（`shell`）上的四只杯与两个环；三条流 `whenRun: false`（不按 RUN 也随 `method` 显隐）、颗粒 `size` 0.15（台面尺度小，0.5 会盖住果实）。颜色全用材质族与 token。
+11. **模板标签**（结果、幼苗"发白"、改了什么……）是引擎代理写的草稿，内容代理定稿时可改字，不改 id。
+
+**验收**（§4.6，合入 main `245beae` 后重跑）：`pnpm check` 0 错 0 警告、`pnpm validate` 53 个主题 0 错 0 警告、`pnpm test` 4146 条全过（含 `seeds` 48 条、`seedling-token` 10 条）、`pnpm build` 通过、`CI=1 pnpm e2e` 318 条中 317 条过（含 `sample-seeds` 9 条）；唯一失败 `singapore-land-use` "farmland, reserves and reservoirs appear in their own years"（TimeScene，与本改动无关：拿到 reserves 的 poll 后立刻读 reservoirs），单跑 3/3 通过。`pnpm shoot sample-seeds --beats --keys --layout` 0 拍失败、12/12 拍链接一致（含新的 tint 核对）、0 键失败、0 版式问题、控制台干净；zh / cinema 拍同样 0 失败；全景静止 30 次绘制、0.09 M 三角形（`--perf`）；单测里模型一次求值 < 0.05 ms。回归：`plant`、`mosquito`、`sample-heart`、`sample-materials`、`sample-sort` 的 `--beats --keys` 改前改后都是 0 拍失败、0 键失败、拍链接全一致；逐拍截图平均像素差：`sample-materials`、`sample-sort` 0（最大单像素 2），`plant` ≤ 0.47 / 255，`sample-heart` ≤ 0.83，`mosquito` ≤ 8.5——`mosquito` 改后自己重拍一次与改后第一次的差同样到 8.5（截图时刻的动画 / 镜头相位），不是改动带来的。**已知差距**：夹具背景章与四只杯章各有一个 `labels` 零件在章镜头下没有引线（夹具，不影响引擎）。

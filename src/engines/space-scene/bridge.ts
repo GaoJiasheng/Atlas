@@ -108,6 +108,8 @@ export interface StageBridge {
   fills: Map<string, FillReading>;
   /** Copies a `count` binding draws, per part (QA `copies(id)`). */
   copies: Map<string, number>;
+  /** A try-it `tint` binding's colour (sRGB hex) and the blend drawn now, per part (QA `tint(id)`, docs/41 E-S1). */
+  tints: Map<string, { color: string; level: number }>;
   /** Per animation id (stages/model3d/AnimClocks.tsx; QA `animation(id)`). */
   animations: Map<string, AnimationReading>;
   bends: Map<string, BendReading>;
@@ -183,6 +185,7 @@ export function createBridge(): StageBridge {
     fills: new Map(),
     animations: new Map(),
     copies: new Map(),
+    tints: new Map(),
     bends: new Map(),
     shifts: new Map(),
     fillBenchmarks: new Map(),

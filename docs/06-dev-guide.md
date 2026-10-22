@@ -1062,11 +1062,11 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
 
 绑定的补充规则：`pose` 没有列出当前值时保留章 / 拍姿态，只有显式 `null` 强制回静止；几条绑定动同一零件时非静止的那条胜出。`tint.max`（0–1）指定实际混色上限，默认 0.55 保持既有外观，`max: 1` 可以完全染成目标深色；它仍只染零件自己的材质槽 0。
 
-docs/22 §4.3（E-SIM 核心，磁铁与电路共用）+ docs/23 §4（电路模型与电路图卡）。一个 SpaceScene 主题可以在 `parts.json` 里加一段 `sim`：读者能改的几个量（控件）、一个纯函数模型、模型给出的量（输出），以及控件 / 输出到零件、流、动画的绑定。没有独立的 Simulation 引擎（docs/03 §C）。代码：`sim-schema.ts`（zod 与交叉校验）、`lib/sim/`（`controls.ts` 值的合成与 URL、`index.ts` 模型注册表、`circuit.ts`、`magnet.ts`、`force.ts`、`energy.ts`、`lifecycle.ts`、`matter.ts`、`light.ts`、`sun.ts`、`shadow.ts`、`bind.ts`、`trial.ts`、`diagram.ts`、`sort.ts`、`shift.ts`、`keycard.ts`、`table.ts`、`hz.ts`、`tidal.ts`，全部纯函数、有单测 `tests/space-scene/sim.test.ts` 等）、`explorer/TryIt.tsx`（试一试卡片）、`hud/CircuitCard.tsx`（电路图卡）、`hud/KeyCard.tsx`（分类流程图卡）、`hud/sim.ts`（HUD 读写的入口）。
+docs/22 §4.3（E-SIM 核心，磁铁与电路共用）+ docs/23 §4（电路模型与电路图卡）。一个 SpaceScene 主题可以在 `parts.json` 里加一段 `sim`：读者能改的几个量（控件）、一个纯函数模型、模型给出的量（输出），以及控件 / 输出到零件、流、动画的绑定。没有独立的 Simulation 引擎（docs/03 §C）。代码：`sim-schema.ts`（zod 与交叉校验）、`lib/sim/`（`controls.ts` 值的合成与 URL、`index.ts` 模型注册表、`circuit.ts`、`magnet.ts`、`force.ts`、`energy.ts`、`lifecycle.ts`、`matter.ts`、`light.ts`、`sun.ts`、`shadow.ts`、`bind.ts`、`trial.ts`、`diagram.ts`、`sort.ts`、`shift.ts`、`keycard.ts`、`table.ts`、`hz.ts`、`tidal.ts`、`seeds.ts`，全部纯函数、有单测 `tests/space-scene/sim.test.ts` 等）、`explorer/TryIt.tsx`（试一试卡片）、`hud/CircuitCard.tsx`（电路图卡）、`hud/KeyCard.tsx`（分类流程图卡）、`hud/sim.ts`（HUD 读写的入口）。
 
 ```jsonc
 "sim": {
-  "kind": "circuit",                                   // circuit | magnet | force | energy | life-cycle | matter | light | sort | materials | table：lib/sim/<kind>.ts（life-cycle → lifecycle.ts）
+  "kind": "circuit",                                   // circuit | magnet | force | energy | life-cycle | matter | light | sort | materials | table | seeds：lib/sim/<kind>.ts（life-cycle → lifecycle.ts）
   "controls": [                                        // ≤ 16，id 全主题的 sim 里唯一
     { "id": "main", "kind": "toggle", "default": true, "label": {en, zh} },
     { "id": "cells", "kind": "step", "values": [1, 2, 3], "default": 2, "label": {en, zh}, "unit"?: "cm" },
@@ -1130,7 +1130,7 @@ state:
 - **键**：`[` `]` = 本章 `vary` 的上一值 / 下一值（开关 = 关 / 开，选择 = 上 / 下一个选项），`T` = 本章卡片里第一个开关（`vary` 或 `also`），`G` = 再跑一次（卡片有 `replay` 时）；注册为命令 `sim-prev` / `sim-next` / `sim-toggle` / `sim-replay`（`SIM_KEYS`），和按钮、电路图、测试 API 写同一个 store 值（`G` 与「再跑一次」按钮写引擎 UI store 的同一个计数 `simReplay`）；状态行键位提示写 `[ ] T TRY IT`（有 `G` 时 `[ ] T G TRY IT`）。没有卡片的章不注册。
 - **电路图卡**（有 `circuit.diagram` 时代替右上零件链路卡，标题 CIRCUIT DIAGRAM / 电路图；< 1024 px 收进试一试卡片里可折叠的一节）：节点的 `d` 是图上坐标，边的 `via` 是直角拐点，符号放在最长的一段直线上（`at`，默认中点）：电池 = 每节一对长（+）短（−）线、翻转的那节反过来，灯 = 圆内叉（按亮度填 `--lamp`，拔掉时虚线），开关 = 两个接线点 + 刀片（断开时抬起），缺口 = 两个接线点 + 材料（导体实线、铅笔芯虚线、绝缘体空着），蜂鸣器、电机（M）；有电流的边用 `--current` 加粗并带方向箭头（从正极出发），短路时整张图 `--hot`；开关符号 = 拨真开关（`role="button"`、`aria-pressed`、44 px 命中区，Enter / Space），其他符号 = 选中边的 `part`，选中的零件对应符号描 signal；`diagram.labels` 是图上的小字（"手电筒"）。没有 `d` 的节点不画。
 - **测试与 QA**：`__atlas.engine.sim()` → `{ values, set, outputs, try, table, timeline, replays }`（`timeline`：每条时间线输出在舞台上的 `{ t, duration, playing, slow }`，模型秒；`replays`：再跑一次的计数），`__atlas.engine.setSim({ id: value })`（逐个走 `setSimControl`，有非法值返回 false），`__atlas.engine.simSeek(id, t)`（把时间线停在模型时刻 `t`，截过程中的一帧），`__atlas.engine.anchor(id)`（零件标注锚点此刻在舞台上的 `{ x, y, shown, onScreen }`，CSS px，跟着姿态、试一试 offset 和时间线走）；`__atlas.state().sim` = 设过的值。`pnpm shoot <slug> --keys` 测 `[` `]` `T` `G`（在第一个有卡片的章：`]` 前进一值、`[` 回来、URL 带 `sim`；`T` 翻转一个开关再翻回；`G`：计数加一、有时间线从头开始播放）；`--beats` 每拍照常截图（拍的 `sim.set` 随 `beatScene` 应用；时间线直接是终态），之后逐拍全页加载 `?ch=<章>&b=<n>`：场景字段（试一试值、视图、图层、镜头、hide …）与演示里的不同、或有时间线不在终态，记为拍失败。
-- **token**：`--lamp`（灯丝发光，暖白）、`--current`（电流粒子，暗金；短路用 `--hot`）、`--f-gravity` / `--f-friction` / `--f-elastic` / `--f-push`（力的箭头，见「力的箭头」）、`--en-light` / `--en-electrical` / `--en-kinetic` / `--en-sound` / `--en-heat` / `--en-potential`（能量形式，见「能量」）、`--blood-rich` / `--blood-poor`（含氧多 / 少的血：都是红，明度差 L* ≥ 20，灰度可分）、`--oxygen`、`--carbon-dioxide`、`--air`（docs/40 E-HL4；`tests/theme/blood-gas-tokens.test.ts` 核两套主题的色差与对比度）。
+- **token**：`--lamp`（灯丝发光，暖白）、`--current`（电流粒子，暗金；短路用 `--hot`）、`--f-gravity` / `--f-friction` / `--f-elastic` / `--f-push`（力的箭头，见「力的箭头」）、`--en-light` / `--en-electrical` / `--en-kinetic` / `--en-sound` / `--en-heat` / `--en-potential`（能量形式，见「能量」）、`--blood-rich` / `--blood-poor`（含氧多 / 少的血：都是红，明度差 L* ≥ 20，灰度可分）、`--oxygen`、`--carbon-dioxide`、`--air`（docs/40 E-HL4；`tests/theme/blood-gas-tokens.test.ts` 核两套主题的色差与对比度）、`--seedling` / `--seedling-pale`（有光 / 暗处长出的幼苗：叶绿 / 淡黄，明度差 L* ≥ 20；docs/41 E-S1，`tests/theme/seedling-token.test.ts`）。
 - **已知限制**：读者不能自己拖元件、连线、拖磁铁和指南针、推小车（docs/23 §4.5、docs/22 §4.5、docs/30 §4.6，v2：场线 / 时间线要在运行时重算）。
 
 ### SpaceScene · 试一试 · 磁铁（magnet）
@@ -1706,6 +1706,56 @@ docs/40 §4.4 E-HL3。流的可选字段：
 - 两端一律淡入淡出（`ends: fade`）；被同步的动画停了（RUN 关、`enabled` 绑定缓停）粒子跟着停；`prefers-reduced-motion`：粒子不动。可以和数 / 向量 `intensity`、`visible` 同用。
 - **validate**：`sync` 是存在的动画；不能有颜色 `stops`、不能 `ends: open`。**测试**：`tidal.test.ts`（相位 → 速度符号、一周期净位移 0、换频率不跳、随动画停、两端淡出）。
 - **`flat: true`**（任何流的可选字段，与 E-HL4 的两种红配套）：dark plate 上也不发光——普通混合、没有白芯，粒子保持自己的颜色（默认的 cinema 流是叠加混合 + 白芯，深酒红会被洗成粉白、和鲜红分不开）；paper 不变。心肺的血流都写 `flat: true`（`flowMaterial.ts styleFlowMaterial`）。
+
+### SpaceScene · 试一试 · 种子（seeds）
+
+docs/41 §4.2–§4.3 E-S1。`sim.kind: "seeds"`：开花植物的种子三件事，三个子模型各自可选（数据里没写的不提供它的量）——`dispersal`（选一个果实 → 它靠什么传播、哪个结构帮了忙）、`timing`（实验室的一个温度 → 一半发芽的中位天数；第 d 天到了没有）、`cups`（萌发测试：几杯种子各在什么条件下 → 查看那天发没发芽、幼苗什么颜色、两杯之间改了几样）。模型只把**有来源的事实按规则组合**（docs/41 D8–D9：哪些条件下发芽、实测的中位天数、NParks 写的传播方式），不编数字。注册走 `SIM_KINDS` → `simQuantities`（`lib/sim/seeds.ts solveSeeds`）→ `quantityKind`（`seedsQuantity`；状态表 `seedsStates`：按子模型读的控件穷举出会出现的状态），没有时间线（`simTimelineChannels` 为 null），`SEPARATE_EXPERIMENTS.seeds = true`（三套互不相干：PLATE 块尾只写本章卡片观察的状态）。纯函数、同步、确定（一次求值 < 0.05 ms，有单测）。严格数据与交叉校验 `seeds-schema.ts`（`seedsSchema`、`seedsIssues`）。完整作者模板：`tests/space-scene/fixtures/seeds-bench.ts`（docs/41 §4.2 的整段 `sim`，按 §0.3 改成四杯 A、B、D、E；另有 §2.6 初稿的五杯 `FIVE_CUPS`）；草稿夹具 `sample-seeds`（背景章 + 传播、温度与天数、四只杯三章）；单测 `tests/space-scene/seeds.test.ts`、`tests/theme/seedling-token.test.ts`；e2e `tests-e2e/sample-seeds.spec.ts`。
+
+```jsonc
+"sim": {
+  "kind": "seeds",
+  "controls": [
+    { "id": "fruit", "kind": "choice", "default": "angsana", "options": [ { "id": "angsana", … }, … ] },   // = dispersal.fruits 的键
+    { "id": "temp", "kind": "step", "values": [14, 17, 20], "default": 20, "unit": "°C" },          // = timing.medians 的键
+    { "id": "count-day", "kind": "step", "values": [0, 1, …, 12], "default": 0, "unit": "d" },
+    { "id": "cup", "kind": "choice", "default": "a", "options": [ "a", "b", "d", "e" ] },           // = cups.set 的键
+    { "id": "against", "kind": "choice", "default": "a", "options": [ "a", "b", "d", "e" ] },       // 同上，另一个控件
+    { "id": "day", "kind": "step", "values": [0, 7], "default": 0, "unit": "d" }                    // 含 cups.after
+  ],
+  "outputs": [
+    { "id": "method", "kind": "state", "from": "dispersal:method", "states": { "wind": {…}, "water": {…}, "animals": {…}, "splitting": {…} } },
+    { "id": "half-day", "from": "timing:median", "unit": "d", "decimals": 1 },
+    { "id": "changed", "kind": "state", "from": "cups:changed", "states": { "same-cup": {…}, "water": {…}, "warmth": {…}, "light": {…}, "more-than-one": {…} } },
+    { "id": "grown-d", "from": "cup:d:grown" }, { "id": "pale-d", "from": "cup:d:pale" }, …
+  ],
+  "bind": [
+    { "output": "grown-d", "part": "seeds-d", "visible": { "eq": 0 } },
+    { "output": "grown-d", "part": "seedlings-d", "visible": true },
+    { "output": "pale-d", "part": "seedlings-d", "tint": { "color": "token:seedling-pale", "full": 1, "max": 0.85 } },
+    { "output": "method", "flow": "seed-burst", "visible": { "eq": "splitting" } },
+    { "control": "fruit", "part": ["rubber-capsule", "rubber-seeds"], "pose": { "rubber": "capsule-burst" } },
+    { "output": "half-day", "part": "half-flag", "offset": { "axis": [1, 0, 0], "per": 0.01, "origin": 0 } }
+  ],
+  "seeds": {
+    "dispersal": { "fruit": "fruit", "fruits": { "angsana": { "method": "wind", "feature": "wing" }, … } },
+    "timing": { "temp": "temp", "day": "count-day", "medians": { "14": 9.4, "17": 6.5, "20": 4.3 } },
+    "cups": { "cup": "cup", "against": "against", "day": "day", "after": 7,
+              "places": { "windowsill": { "warm": true, "light": true }, "cupboard": { "warm": true, "light": false }, "fridge": { "warm": false, "light": false } },
+              "set": { "a": { "water": true, "air": true, "place": "windowsill" }, "b": { "water": false, … }, "d": { …, "place": "cupboard" }, "e": { …, "place": "fridge" } } }
+  }
+}
+```
+
+| 子模型 | 读的控件 | 量（`from`） | 规则 |
+|---|---|---|---|
+| `dispersal` | `fruit` 选择 | `dispersal:method`（`wind` / `water` / `animals` / `splitting`）、`dispersal:feature`（`wing` / `floats` / `eaten` / `bursts`） | 所选果实那一行（两个取值集是固定的：课纲 P5 的四种传播方式、P6 的结构适应） |
+| `timing` | `temp`、`day` 步进 | `timing:median`（天）、`timing:half`（`fewer` / `half-or-more`） | m = `medians[temp]`；half = day ≥ m（中位数那天本身算到了）。Silwal 的中位数是"最终发芽的种子里有一半"的天数（docs/41 §0.3-3），标签照这个写 |
+| `cups` | `cup`、`against` 选择，`day` 步进 | `cups:result`（`waiting` / `germinated` / `not-germinated`）、`cups:against-result`、`cups:seedlings`（`none` / `green` / `pale`）、`cups:changed`（`same-cup` / `water` / `air` / `warmth` / `light` / `more-than-one`）、`cup:<杯>:grown`、`cup:<杯>:pale`（1 / 0） | 一杯发芽 = 有水 ∧ 有空气 ∧ 所在处温暖（**光不在规则里**）；day < `after` 一律 `waiting`；发芽的杯在有光处 `green`、否则 `pale`；`changed` 比较所选杯与 `against` 杯的水、空气、温度、光：都同 → `same-cup`，恰一样不同 → 那一样，≥ 2 样 → `more-than-one`（不是公平测试） |
+
+- 另有 `control:<步进或开关>`（PLATE 回显：`day-now`、`temp-now`），telemetry 写 `scope: "observe"` 时只在观察它的那一章有数。
+- **validate**（`seedsIssues` + `sim-schema.ts`）：至少写一个子模型；控件存在且种类对（`fruit` / `cup` / `against` 选择，`temp` / `day` 步进，`cup` ≠ `against`）；`fruit` 的选项 = `fruits` 的键、`cup` 和 `against` 的选项 = `set` 的键（多、少都报）；`method` / `feature` 只能是上表的值；`medians` 的键 = `temp` 的每个值（写成控件的数：`14`，不是 `14.0`），值 > 0；天数步进的值 ≥ 0；`after` 是 `day` 的一个值；每杯的 `place` 在 `places` 里；**两杯条件完全相同报错**（拿它们比什么也没改，`changed` 会把两只杯说成"同一杯"）；输出 `from` 是本模型的量（没写的子模型、不存在的杯都报）、种类对；状态输出给每个**会出现**的状态写标签，**不写永远不会出现的状态**（四杯里没有哪两杯只差空气，写了 `air` 报错）。
+- **绑定**全部复用：`visible`（数与状态的 `eq`）、`tint`（`max`）、`offset`（`origin`）、`pose`（只映射自己的选项）、流的 `visible`。一个零件一次只取一个姿态（几条 `pose` 绑定动同一零件时后写的那条胜出）：橡胶树果的 `capsule-burst`、凤仙果荚的 `pod-split` 要把"移到台前"也写进去，不要再给同一零件另写 `rubber-front`。`tint` 只染零件自己的材质（槽 0）：幼苗的茎和子叶用同一种材质，才会一起变淡黄。
+- **测试 API**：`__atlas.engine.tint(partId)` → `{ color, level }`（试一试 `tint` 绑定此刻画出的目标色 sRGB hex 与混色程度 0–1，三位小数；没有 tint 绑定 null）。`pnpm shoot --beats` 每拍及每个拍链接核对：每件有 `tint` 绑定的零件此刻画出的程度 = 绑定值（± 0.01），不符记为拍失败。
 
 ### 章节怎么写（`state`）
 

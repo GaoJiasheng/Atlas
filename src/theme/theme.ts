@@ -73,6 +73,8 @@ export const TOKEN_NAMES = [
   'oxygen',
   'carbon-dioxide',
   'air',
+  'seedling',
+  'seedling-pale',
   'holder-1',
   'holder-2',
   'holder-3',

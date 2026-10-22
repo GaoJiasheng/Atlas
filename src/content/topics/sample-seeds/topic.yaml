@@ -1,0 +1,14 @@
+# Engine fixture; deliberately schematic captions and primitives.
+id: sample-seeds
+title: { en: "Sample: Seeds bench", zh: "示例：种子实验台" }
+subtitle: { en: "A draft fixture for the seeds engine", zh: "种子引擎的草稿测试主题" }
+subject: science
+levels: [P5]
+moe: []
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: draft
+note: { en: "Engine fixture · schematic primitives · results from the model, which combines sourced facts by rule", zh: "引擎测试 · 基础几何示意 · 结果由模型按有来源的事实组合给出" }

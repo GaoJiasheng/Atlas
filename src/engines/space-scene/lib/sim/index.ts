@@ -3,7 +3,7 @@
  * a millisecond): `evaluateSim(sim, values)` runs the topic's model
  * (`circuit` → lib/sim/circuit.ts, `magnet` → lib/sim/magnet.ts, `force` →
  * lib/sim/force.ts, `energy` → lib/sim/energy.ts, `life-cycle` →
- * lib/sim/lifecycle.ts, `sort` → lib/sim/sort.ts, `materials` → lib/sim/materials.ts, `table` → lib/sim/table.ts) and maps its quantities onto the declared outputs
+ * lib/sim/lifecycle.ts, `sort` → lib/sim/sort.ts, `materials` → lib/sim/materials.ts, `table` → lib/sim/table.ts, `seeds` → lib/sim/seeds.ts) and maps its quantities onto the declared outputs
  * (`from`, default the output's id). A timeline output's value is a
  * `Timeline` (lib/sim/timeline.ts).
  * The magnet model's `clips` is the clip count the chapter's try-it card
@@ -24,6 +24,7 @@ import { solveLight } from './light';
 import { solveMaterials } from './materials';
 import { solveSort, type SortPart } from './sort';
 import { solveTable } from './table';
+import { solveSeeds } from './seeds';
 import { EMPTY_TIMELINE, type Timeline } from './timeline';
 
 /** An output's value: a number, a state id, numbers per id (a vector) or a run over time (a timeline). */
@@ -51,6 +52,7 @@ export function simQuantities(sim: SimData, values: SimValues, observe: readonly
   if (sim.kind === 'matter' && sim.matter) return solveMatter(sim.matter, values, matterLiquidShapes(parts));
   if (sim.kind === 'materials' && sim.materials) return solveMaterials(sim.materials, values, sim.controls);
   if (sim.kind === 'table' && sim.table) return solveTable(sim.table, values, sim.outputs);
+  if (sim.kind === 'seeds' && sim.seeds) return solveSeeds(sim.seeds, values, sim.controls);
   if (sim.kind === 'circuit' && sim.circuit) return solveCircuit(sim.circuit, values).quantities;
   if (sim.kind === 'magnet' && sim.magnet) {
     const q: Record<string, SimOutputValue> = solveMagnets(sim.magnet, values, compassPoint(sim, values), frames);
@@ -83,7 +85,7 @@ export function evaluateSim(sim: SimData, values: SimValues, observe: readonly s
  * magnets or one animal's life cycle is one system: its first state (the
  * stage on the day on show) always describes the bench.
  */
-export const SEPARATE_EXPERIMENTS: Readonly<Record<SimKind, boolean>> = { circuit: false, magnet: false, force: true, energy: true, 'life-cycle': false, matter: true, light: true, sort: true, materials: true, table: true };
+export const SEPARATE_EXPERIMENTS: Readonly<Record<SimKind, boolean>> = { circuit: false, magnet: false, force: true, energy: true, 'life-cycle': false, matter: true, light: true, sort: true, materials: true, table: true, seeds: true };
 
 /** A number output's value (0 for states and vectors; NaN = not applicable here). */
 export const numberOf = (v: SimOutputValue | undefined): number => (typeof v === 'number' ? v : 0);

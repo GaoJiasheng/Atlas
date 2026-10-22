@@ -1,0 +1,212 @@
+---
+{
+  "id": "sample-cups",
+  "order": 3,
+  "title": {
+    "en": "Sample four cups",
+    "zh": "示例四只杯"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "layers": [
+      "germination"
+    ],
+    "labels": [
+      "cup-a",
+      "cup-d"
+    ],
+    "camera": {
+      "position": [
+        0.55,
+        0.22,
+        0.6
+      ],
+      "target": [
+        0.55,
+        0.05,
+        0.0
+      ],
+      "fov": 34
+    },
+    "summary": {
+      "en": "Sample four cups: what each needs, and which two make a fair test.",
+      "zh": "示例四只杯：各需要什么，哪两杯是公平测试。"
+    },
+    "index": {
+      "parts": [
+        "cup-a",
+        "cup-b",
+        "cup-d",
+        "cup-e",
+        "seeds-b",
+        "seeds-e",
+        "seedlings-a",
+        "seedlings-d",
+        "pick-ring",
+        "ref-ring"
+      ]
+    },
+    "sim": {
+      "set": {
+        "day": 0,
+        "cup": "a",
+        "against": "a"
+      },
+      "try": {
+        "vary": "cup",
+        "also": [
+          "against",
+          "day"
+        ],
+        "keep": [
+          {
+            "en": "Five seeds in each cup",
+            "zh": "每杯五粒种子"
+          },
+          {
+            "en": "Checked on the same day",
+            "zh": "同一天看结果"
+          }
+        ],
+        "observe": [
+          "cup-result",
+          "changed",
+          "seedlings",
+          "day-now"
+        ],
+        "record": true,
+        "predict": {
+          "prompt": {
+            "en": "Sample prediction: cup D is in the dark. Will its seeds germinate?",
+            "zh": "示例猜想：D 杯在暗处。它的种子会发芽吗？"
+          },
+          "start": {
+            "cup": "d",
+            "against": "a",
+            "day": 0
+          },
+          "change": {
+            "day": 7
+          },
+          "observe": "cup-result",
+          "options": [
+            {
+              "id": "yes",
+              "label": {
+                "en": "Yes, they germinate",
+                "zh": "会发芽"
+              },
+              "means": "germinated"
+            },
+            {
+              "id": "no",
+              "label": {
+                "en": "No, they need light",
+                "zh": "不会，要有光"
+              },
+              "means": "not-germinated"
+            }
+          ]
+        }
+      }
+    },
+    "beats": [
+      {
+        "labels": [
+          "cup-a",
+          "cup-b",
+          "cup-d",
+          "cup-e"
+        ],
+        "caption": {
+          "en": "Sample: four cups, set up on day 0.",
+          "zh": "示例：第 0 天放好的四只杯。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "day": 7,
+            "cup": "b",
+            "against": "a"
+          }
+        },
+        "labels": [
+          "seedlings-a",
+          "seeds-b"
+        ],
+        "caption": {
+          "en": "Sample: dry cup B has not germinated.",
+          "zh": "示例：干的 B 杯没有发芽。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "day": 7,
+            "cup": "d",
+            "against": "a"
+          }
+        },
+        "labels": [
+          "seedlings-d",
+          "seedlings-a"
+        ],
+        "caption": {
+          "en": "Sample: cup D germinates in the dark; its seedlings are pale.",
+          "zh": "示例：D 杯在暗处也发芽，幼苗发白。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "day": 7,
+            "cup": "e",
+            "against": "a"
+          }
+        },
+        "labels": [
+          "cup-e",
+          "seeds-e"
+        ],
+        "caption": {
+          "en": "Sample: cup E against A changes two things.",
+          "zh": "示例：E 杯和 A 杯比，改了两样。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "day": 7,
+            "cup": "e",
+            "against": "d"
+          }
+        },
+        "labels": [
+          "cup-e",
+          "cup-d"
+        ],
+        "caption": {
+          "en": "Sample: cup E against D changes only the warmth.",
+          "zh": "示例：E 杯和 D 杯比，只改了温度。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Sample four cups: a draft engine fixture.
+
+</Lang>
+
+<Lang zh>
+
+示例四只杯：引擎测试草稿。
+
+</Lang>

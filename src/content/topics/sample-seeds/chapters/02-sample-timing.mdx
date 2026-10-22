@@ -1,0 +1,163 @@
+---
+{
+  "id": "sample-timing",
+  "order": 2,
+  "title": {
+    "en": "Sample temperature and days",
+    "zh": "示例温度与天数"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "layers": [
+      "day-card"
+    ],
+    "labels": [
+      "day-strip",
+      "half-flag"
+    ],
+    "camera": {
+      "position": [
+        0.0,
+        0.2,
+        0.3
+      ],
+      "target": [
+        0.0,
+        0.01,
+        0.03
+      ],
+      "fov": 34
+    },
+    "summary": {
+      "en": "Sample temperature and days: half of them by the flag.",
+      "zh": "示例温度与天数：小旗处一半发芽。"
+    },
+    "index": {
+      "parts": [
+        "day-strip",
+        "day-marker",
+        "half-flag",
+        "towel-dish"
+      ]
+    },
+    "sim": {
+      "set": {
+        "temp": 20,
+        "count-day": 0
+      },
+      "try": {
+        "vary": "temp",
+        "also": [
+          "count-day"
+        ],
+        "keep": [
+          {
+            "en": "The same kind of seed",
+            "zh": "同一种种子"
+          },
+          {
+            "en": "On damp paper towels",
+            "zh": "放在湿纸巾上"
+          }
+        ],
+        "observe": [
+          "half-day",
+          "half"
+        ],
+        "record": {
+          "chart": {
+            "y": "half-day"
+          }
+        },
+        "predict": {
+          "prompt": {
+            "en": "Sample prediction: at 14 °C, more days or fewer?",
+            "zh": "示例猜想：14 °C 时，天数更多还是更少？"
+          },
+          "start": {
+            "temp": 20
+          },
+          "change": {
+            "temp": 14
+          },
+          "observe": "half-day",
+          "options": [
+            {
+              "id": "less",
+              "label": {
+                "en": "Fewer days",
+                "zh": "更少"
+              },
+              "means": "less"
+            },
+            {
+              "id": "same",
+              "label": {
+                "en": "About the same",
+                "zh": "差不多"
+              },
+              "means": "same"
+            },
+            {
+              "id": "more",
+              "label": {
+                "en": "More days",
+                "zh": "更多"
+              },
+              "means": "more"
+            }
+          ]
+        }
+      }
+    },
+    "beats": [
+      {
+        "sim": {
+          "set": {
+            "temp": 20,
+            "count-day": 5
+          }
+        },
+        "labels": [
+          "half-flag",
+          "day-marker"
+        ],
+        "caption": {
+          "en": "Sample: at 20 °C, half by about day 4.3.",
+          "zh": "示例：20 °C 时，大约第 4.3 天一半发芽。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "temp": 14,
+            "count-day": 5
+          }
+        },
+        "labels": [
+          "half-flag"
+        ],
+        "caption": {
+          "en": "Sample: at 14 °C, about day 9.4.",
+          "zh": "示例：14 °C 时，大约第 9.4 天。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Sample temperature and days: a draft engine fixture.
+
+</Lang>
+
+<Lang zh>
+
+示例温度与天数：引擎测试草稿。
+
+</Lang>
