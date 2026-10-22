@@ -674,7 +674,8 @@ test('territory names: on by default, N toggles them (mode `territory`), they fo
 
 /**
  * A fake `speechSynthesis` like Chrome's: `speak` starts an utterance on the next tick (`onstart`), it ends `endMs` later, or 20 ms per character if that is longer (a believable speed; `onend`);
- * `cancel()` fails the one in progress with `error: 'interrupted'`. Every utterance is recorded in `window.__spoken`.
+ * `cancel()` fails the one in progress with `error: 'interrupted'`. Every utterance is recorded in `window.__spoken`, and
+ * handed to `window.__onSpeak` if a test set one (to read the stage at the moment it is spoken).
  */
 const FAKE_SPEECH = (voices: { name: string; lang: string; localService: boolean }[], endMs = 2000, msPerChar = 20) => `
   class U { constructor(text) { this.text = text; this.lang = ''; this.voice = null; this.rate = 1; this.pitch = 1; this.volume = 1; this.onstart = null; this.onend = null; this.onerror = null; } }
@@ -686,6 +687,7 @@ const FAKE_SPEECH = (voices: { name: string; lang: string; localService: boolean
     speak(u) {
       cur = u;
       window.__spoken.push({ text: u.text, lang: u.lang, voice: u.voice && u.voice.name, rate: u.rate, pitch: u.pitch, at: performance.now() });
+      if (window.__onSpeak) window.__onSpeak(u);
       setTimeout(() => { if (cur === u) { u.onstart && u.onstart({}); u.__t = setTimeout(() => { if (cur === u) { cur = null; u.onend && u.onend({}); } }, Math.max(${endMs}, u.text.length * ${msPerChar})); } }, 0);
     },
     cancel() { if (cur) { const u = cur; cur = null; clearTimeout(u.__t); u.onerror && u.onerror({ error: 'interrupted' }); } },
@@ -713,7 +715,6 @@ for (const [locale, lang, voice] of [['en', 'en-GB', 'Daniel'], ['zh', 'zh-CN', 
 
     await page.keyboard.press('p');
     await expect.poll(async () => (await api()).modes.presentation).toBe(true);
-    expect(await page.evaluate(() => window.__atlas!.setAutoplay(true))).toBe(true);
     const box = page.locator('.atlas-present__voice input');
     await expect(box).toBeEnabled();
     await expect(box).not.toBeChecked();
@@ -722,6 +723,8 @@ for (const [locale, lang, voice] of [['en', 'en-GB', 'Daniel'], ['zh', 'zh-CN', 
     await expect(box).toBeChecked();
     await expect.poll(async () => (await api()).presentation?.voice).toBe(true);
     expect(await page.evaluate(() => sessionStorage.getItem('atlas:voice'))).toBe('1');
+    // Auto-play once Voice is on: switched on first, its silent dwell (6 s) could run out while a loaded machine is still clicking the box.
+    expect(await page.evaluate(() => window.__atlas!.setAutoplay(true))).toBe(true);
 
     // A chapter's first beat: number, title, then the whole caption of the page language (no header, no other language), the page locale's lang, that language's voice.
     const caption1 = await captionText();
@@ -1078,11 +1081,27 @@ test('sample-space PRESENTATION voice: a beat is spoken once its camera has sett
   const log = () => page.evaluate(() => window.__atlas!.voiceLog());
   const captions = async () => (await log()).filter((e) => e.part === 'caption');
 
+  // Entering the presentation re-lays the stage out; a loaded machine can hold the page for several seconds doing it.
   await page.keyboard.press('p');
-  await expect.poll(async () => (await api()).presentation).toEqual({ chapter: 'switch-on', beat: 0, autoplay: false, voice: false });
-  expect(await page.evaluate(() => window.__atlas!.setAutoplay(true))).toBe(true);
+  await expect.poll(async () => (await api()).presentation, { timeout: 15_000 }).toEqual({ chapter: 'switch-on', beat: 0, autoplay: false, voice: false });
   await page.locator('.atlas-present__voice input').click();
   await expect.poll(async () => (await api()).presentation?.voice).toBe(true);
+  // Watch the flight in the page: the drawn camera every animation frame, and where it was when each utterance was handed to speech.
+  type Flight = { frames: { at: number; camera: string }[]; spoken: { text: string; at: number; camera: string }[]; stop: boolean };
+  await page.evaluate(() => {
+    const w = window as unknown as { __flight: Flight; __onSpeak: (u: { text: string }) => void };
+    const camera = () => JSON.stringify((window.__atlas!.stats() as { camera?: unknown }).camera ?? null);
+    const flight: Flight = { frames: [], spoken: [], stop: false };
+    w.__flight = flight;
+    w.__onSpeak = (u) => flight.spoken.push({ text: u.text, at: performance.now(), camera: camera() });
+    const frame = () => {
+      flight.frames.push({ at: performance.now(), camera: camera() });
+      if (!flight.stop) requestAnimationFrame(frame);
+    };
+    requestAnimationFrame(frame);
+  });
+  // Auto-play once Voice is on: switched on first, its silent dwell (6 s) could run out while a loaded machine is still clicking the box.
+  expect(await page.evaluate(() => window.__atlas!.setAutoplay(true))).toBe(true);
 
   // The chapter's first beat: number, title, caption (en voice).
   await expect.poll(async () => (await captions()).length, { timeout: 15_000 }).toBe(1);
@@ -1097,10 +1116,25 @@ test('sample-space PRESENTATION voice: a beat is spoken once its camera has sett
   await expect.poll(async () => (await captions())[1]!.started).not.toBeNull();
   const [first, second] = await captions();
   expect(second!.text).toMatch(/Sample beat two/);
-  // 0.6 s breath + the camera move; the 2.3 s fixed wait or the 4 s fallback would be later.
-  const gap = second!.started! - first!.ended!;
-  expect(gap).toBeGreaterThanOrEqual(1900);
-  expect(gap).toBeLessThan(2800);
+  // 0.6 s breath + the 1.4 s camera move at the least (timers never fire early).
+  expect(second!.started! - first!.ended!).toBeGreaterThanOrEqual(1900);
+  // Spoken once the camera has settled, not on a clock: handed to speech with the camera already at the end of its flight,
+  // and right after it got there (speech starts on the next frame; the 2.3 s fixed wait or the 4 s fallback would be 0.9 s
+  // or 2.6 s later). Measured from the frame the camera arrived in, not from the end of the last caption, as a loaded
+  // machine can stall for seconds anywhere along the way: within two frames of it, or half a second where frames are short.
+  const flight = await page.evaluate(() => {
+    const f = (window as unknown as { __flight: Flight }).__flight;
+    f.stop = true;
+    return f;
+  });
+  const said = flight.spoken.find((u) => u.text === second!.text)!;
+  expect(said.camera).toBe(flight.frames.at(-1)!.camera);
+  const left = flight.frames.findIndex((f) => f.camera !== flight.frames[0]!.camera);
+  expect(left).toBeGreaterThan(0);
+  const arrived = flight.frames.findIndex((f, i) => i >= left && f.camera === said.camera);
+  const framesAfter = flight.frames.filter((f, i) => i > arrived && f.at < said.at).length;
+  const msAfter = said.at - flight.frames[arrived]!.at;
+  expect(framesAfter <= 2 || msAfter < 500, `spoken ${framesAfter} frames, ${Math.round(msAfter)} ms after the camera arrived`).toBe(true);
   // Auto-play goes on into the next chapter's first beat.
   await expect.poll(async () => (await api()).presentation, { timeout: 15_000 }).toMatchObject({ chapter: 'inside-look', beat: 0 });
 });
@@ -1407,11 +1441,14 @@ test('collapsed reader strip: the chapter title is centred in the strip, the num
   await page.locator('.atlas-reader__handle').click();
   const strip = page.locator('.atlas-reader__strip');
   await expect(strip).toBeVisible();
-  const s = (await strip.boundingBox())!;
+  // All four boxes from one layout, once the fonts are in (a late font resizes the title between separate reads).
+  const { s, span, num, chev } = await strip.evaluate(async (el) => {
+    await document.fonts.ready;
+    await new Promise((resolve) => requestAnimationFrame(resolve));
+    const box = (e: Element) => e.getBoundingClientRect().toJSON() as { x: number; y: number; width: number; height: number };
+    return { s: box(el), span: box(el.querySelector('span')!), num: box(el.querySelector('b')!), chev: box(el.querySelector('i')!) };
+  });
   const mid = s.y + s.height / 2;
-  const span = (await strip.locator('span').boundingBox())!;
-  const num = (await strip.locator('b').boundingBox())!;
-  const chev = (await strip.locator('i').boundingBox())!;
   expect(Math.abs(span.y + span.height / 2 - mid)).toBeLessThanOrEqual(2);
   expect(num.y + num.height).toBeLessThanOrEqual(span.y);
   expect(chev.y).toBeGreaterThanOrEqual(span.y + span.height);

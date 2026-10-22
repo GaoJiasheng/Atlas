@@ -16,6 +16,7 @@ import { cupChange, cupConditions, cupResult, cupSeedlings, germinates, halfStat
 import { seedsSchema, type SeedsCups } from '../../src/engines/space-scene/seeds-schema';
 import { chapterSimIssues, quantityKind, simIssues, simSchema, simTimelineChannels, type SimData, type SimValues } from '../../src/engines/space-scene/sim-schema';
 import { FIVE_CUPS, SEED_CUPS, SEED_FRUITS, SEEDS_BENCH_FLOWS, SEEDS_BENCH_PARTS, SEEDS_BENCH_POSES, SEEDS_BENCH_SIM } from './fixtures/seeds-bench';
+import { msPerCall } from '../timing';
 
 const sim: SimData = simSchema.parse(SEEDS_BENCH_SIM);
 const seeds = sim.seeds!;
@@ -215,9 +216,7 @@ describe('the model', () => {
   it('is deterministic and fast (< 0.05 ms)', () => {
     const v = resolveSimValues(sim, { fruit: 'rubber', temp: 14, 'count-day': 9, cup: 'e', against: 'd', day: 7 });
     expect(solveSeeds(seeds, v, sim.controls)).toEqual(solveSeeds(seeds, v, sim.controls));
-    const t0 = performance.now();
-    for (let i = 0; i < 2000; i++) evaluateSim(sim, v);
-    expect((performance.now() - t0) / 2000).toBeLessThan(0.05);
+    expect(msPerCall(() => evaluateSim(sim, v), 50)).toBeLessThan(0.05);
   });
   it('round-trips the URL (sim=cup.e~against.d~day.7)', () => {
     const set = { cup: 'e', against: 'd', day: 7 };

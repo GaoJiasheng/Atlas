@@ -16,6 +16,7 @@ import { simEffects } from '../../src/engines/space-scene/lib/sim/bind';
 import { quantityKind, simIssues, simSchema, type SimValues } from '../../src/engines/space-scene/sim-schema';
 import { partBounds } from '../../src/engines/space-scene/lib/parts';
 import { ANIMAL_TRAY, SPECIMEN_IDS, SPECIMEN_PARTS, caseCell, specimenTrayContext, specimenTrayInput, specimenTraySim } from './fixtures/specimen-tray';
+import { msPerCall } from '../timing';
 
 const sim = specimenTraySim;
 const sort = sim.sort!;
@@ -281,9 +282,7 @@ describe('the model', () => {
   it('is deterministic and fast', () => {
     const set = values({ tray: 'own-key', first: 'scales', second: 'fins' });
     expect(solveSort(sort, set, SPECIMEN_PARTS)).toEqual(solveSort(sort, set, SPECIMEN_PARTS));
-    const t0 = performance.now();
-    for (let i = 0; i < 200; i++) solveSort(sort, set, SPECIMEN_PARTS);
-    expect((performance.now() - t0) / 200).toBeLessThan(0.2);
+    expect(msPerCall(() => solveSort(sort, set, SPECIMEN_PARTS), 10)).toBeLessThan(0.2);
   });
   it('the URL round trip: sim=tray.animals~asked-animal.4', () => {
     const v = decodeSimParam('tray.animals~asked-animal.4');

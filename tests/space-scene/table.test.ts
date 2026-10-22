@@ -18,6 +18,7 @@ import { tableSourceIssues } from '../../src/engines/space-scene/table-schema';
 import { chapterSimIssues, quantityKind, simIssues, simSchema, type SimData, type SimValues } from '../../src/engines/space-scene/sim-schema';
 import { partsFile as partsFileSchema } from '../../src/engines/space-scene/schema';
 import { HEART_LUNGS_ANIMATIONS, HEART_LUNGS_FLOWS, HEART_LUNGS_PARTS, HEART_LUNGS_SIM, HEART_LUNGS_SOURCES } from './fixtures/heart-lungs-table';
+import { msPerCall } from '../timing';
 
 const sim: SimData = simSchema.parse(HEART_LUNGS_SIM);
 const table = sim.table!;
@@ -180,9 +181,7 @@ describe('rows and combinations', () => {
   it('is deterministic and fast (< 0.05 ms)', () => {
     const v = resolveSimValues(sim, { sample: 'out', activity: 'walk', stop: 5 });
     expect(solveTable(table, v, sim.outputs)).toEqual(solveTable(table, v, sim.outputs));
-    const t0 = performance.now();
-    for (let i = 0; i < 2000; i++) solveTable(table, v, sim.outputs);
-    expect((performance.now() - t0) / 2000).toBeLessThan(0.05);
+    expect(msPerCall(() => solveTable(table, v, sim.outputs), 50)).toBeLessThan(0.05);
   });
   it('round-trips the URL (sim=sample.out~activity.run)', () => {
     const set = { sample: 'out', activity: 'run' };

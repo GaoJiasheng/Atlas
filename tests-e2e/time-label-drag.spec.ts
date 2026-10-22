@@ -3,6 +3,31 @@ import { expect, test, type Locator, type Page } from '@playwright/test';
 const labelSelector = 'button.ts-co[data-id="hdb-founded"][data-hidden="false"]';
 const camera = (page: Page) => page.evaluate(() => window.__atlas!.state().camera);
 
+/**
+ * The map at rest: the leader anchors (re-projected on every map render) and the placard keep the same place over five
+ * animation frames in a row. The placard alone is not enough: it sits in a column and can hold still while the map
+ * still flies under it. Waited for before reading where to press or move, since on a loaded machine a flight runs late
+ * and a drag step is drawn only some frames after the mouse moved.
+ */
+async function atRest(page: Page) {
+  expect(await page.evaluate((selector) => new Promise<boolean>((resolve) => {
+    let last = '';
+    let same = 0;
+    const t0 = performance.now();
+    const frame = () => {
+      const r = document.querySelector(selector)?.getBoundingClientRect();
+      const dots = [...document.querySelectorAll('.ts-leader__dot')].map((d) => `${d.getAttribute('cx')},${d.getAttribute('cy')}`);
+      const now = r ? [r.x, r.y, r.width, r.height, ...dots].join(' ') : '';
+      same = now !== '' && now === last ? same + 1 : 0;
+      last = now;
+      if (same >= 4) resolve(true);
+      else if (performance.now() - t0 > 20_000) resolve(false);
+      else requestAnimationFrame(frame);
+    };
+    requestAnimationFrame(frame);
+  }), labelSelector)).toBe(true);
+}
+
 async function centre(label: Locator) {
   const box = await label.boundingBox();
   expect(box).not.toBeNull();
@@ -39,7 +64,9 @@ for (const theme of ['paper', 'cinema'] as const) {
     }, theme);
     await expect.poll(() => page.evaluate(() => window.__atlas!.state().preset)).toBe('world');
     const label = page.locator(labelSelector);
-    await expect(label).toBeVisible();
+    // Placed once the leaders re-measure for the new theme and camera (a 1 s interval, late on a loaded machine).
+    await expect(label).toBeVisible({ timeout: 15_000 });
+    await atRest(page);
     expect((await label.boundingBox())!.width).toBeGreaterThanOrEqual(44);
     expect((await label.boundingBox())!.height).toBeGreaterThanOrEqual(44);
     for (const selector of ['.ts-leader', '.ts-leader__dot']) {
@@ -56,19 +83,21 @@ for (const theme of ['paper', 'cinema'] as const) {
     await page.mouse.up();
     await expectPanned(page, before);
 
+    // Back to the world preset: a 2.2 s flight, over before the next drag starts.
     await page.keyboard.press('1');
     await expect.poll(() => page.evaluate(() => window.__atlas!.state().preset)).toBe('world');
-    await expect(label).toBeVisible();
+    await expect(label).toBeVisible({ timeout: 15_000 });
+    await atRest(page);
     before = await camera(page);
     point = await bareMapPoint(page, label);
     await page.mouse.move(point.x, point.y);
     await page.mouse.down();
-    // Leaders follow the moving map; finish over the current button position.
+    // Leaders follow the moving map; finish over the current button position (read once the drag so far is drawn).
     let overLabel = false;
     for (let i = 0; i < 8 && !overLabel; i++) {
       point = await centre(label);
       await page.mouse.move(point.x, point.y, { steps: i === 0 ? 8 : 1 });
-      await page.waitForTimeout(80);
+      await atRest(page);
       overLabel = await page.evaluate(({ x, y }) => Boolean(document.elementFromPoint(x, y)?.closest('button.ts-co')), point);
     }
     expect(overLabel).toBe(true);
@@ -80,6 +109,7 @@ for (const theme of ['paper', 'cinema'] as const) {
     await expectPanned(page, before);
     await page.keyboard.press('1');
     await expect.poll(() => page.evaluate(() => window.__atlas!.state().preset)).toBe('world');
+    await atRest(page);
 
     // A click still selects the label's own event, without selecting the map below.
     await label.click();

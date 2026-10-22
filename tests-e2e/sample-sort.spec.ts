@@ -19,6 +19,8 @@ type Engine = {
   anchor(id: string): { shown: boolean } | null;
   apply(patch: Record<string, unknown>): boolean;
 };
+/** The cube's move watched in the page: highest drawn y so far, whether it has landed on its new slot, and handing the page clock back. */
+type Arc = { top: number; landed: boolean; release(): void };
 const SPECIMENS = ['sample-ball', 'sample-bead', 'sample-ring', 'sample-cube', 'sample-brick', 'sample-tile', 'sample-cone', 'sample-spike'];
 
 async function open(page: Page, query: string, locale = 'en') {
@@ -69,15 +71,41 @@ test.describe('sample-sort (SpaceScene sort model)', () => {
     await open(page, 'ch=one-question');
     await expect.poll(() => inSlots(page), { timeout: 10_000 }).toEqual([]);
     await page.evaluate(() => (document.activeElement as HTMLElement | null)?.blur());
+    // Lifted: the cube goes from its case cell (y 0) to the pad (just below 0); somewhere on the way it is well above both.
+    // Watched in the page, frame by frame, with the page clock held to 60 ms a frame: the 0.8 s move is drawn over ~15
+    // frames however slowly a loaded machine paints them (in real time one frame can outlast the whole move).
+    await page.evaluate(() => {
+      const e = window.__atlas!.engine as unknown as Engine;
+      const real = performance.now.bind(performance);
+      let now = real();
+      let held = true;
+      performance.now = () => now;
+      const from = e.shift('sample-cube')!.target.join();
+      const arc: Arc = { top: -Infinity, landed: false, release: () => {
+        held = false;
+        const offset = real() - now;
+        performance.now = () => real() - offset;
+      } };
+      (window as unknown as { __arc: Arc }).__arc = arc;
+      const frame = () => {
+        if (!held) return;
+        now += 60;
+        const s = e.shift('sample-cube')!;
+        arc.top = Math.max(arc.top, s.offset[1]!);
+        arc.landed = s.target.join() !== from && s.offset.join() === s.target.join();
+        if (!arc.landed) requestAnimationFrame(frame);
+      };
+      requestAnimationFrame(frame);
+    });
     await page.keyboard.press(']');
     await expect.poll(async () => (await sim(page)).values['q-one']).toBe('round');
     await expect(page).toHaveURL(/sim=q-one\.round/);
-    // Lifted: the cube goes from its case cell (y 0) to the pad (just below 0); somewhere on the way it is well above both.
-    let top = -Infinity;
-    for (let i = 0; i < 60 && top < 0.02; i++) {
-      top = Math.max(top, (await shift(page, 'sample-cube'))!.offset[1]!);
-      await page.waitForTimeout(20);
-    }
+    await page.waitForFunction(() => (window as unknown as { __arc: Arc }).__arc.landed, null, { timeout: 30_000 });
+    const top = await page.evaluate(() => {
+      const arc = (window as unknown as { __arc: Arc }).__arc;
+      arc.release();
+      return arc.top;
+    });
     expect(top).toBeGreaterThan(0.02);
     // Staggered in the vector's order: the k-th to move waits k × 0.03 s.
     const delays = await Promise.all(SPECIMENS.map(async (id) => (await shift(page, id))!.delay));

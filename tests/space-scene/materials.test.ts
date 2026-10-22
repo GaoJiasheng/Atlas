@@ -11,6 +11,7 @@ import { decodeSimParam, encodeSimParam, resolveSimValues } from '../../src/engi
 import { simEffects } from '../../src/engines/space-scene/lib/sim/bind';
 import { chapterSimIssues, quantityKind, simIssues, simSchema, type SimControl, type SimValues } from '../../src/engines/space-scene/sim-schema';
 import { MATERIAL_IDS, MATERIALS_CONTROLS, MATERIALS_OUTPUTS, materialsBench as m, materialsSim } from './fixtures/materials-bench';
+import { msPerCall } from '../timing';
 
 const sim = materialsSim();
 const controls = new Map(sim.controls.map((c) => [c.id, c]));
@@ -216,10 +217,7 @@ describe('registration and outputs', () => {
   it('is deterministic and quick (< 0.05 ms an evaluation)', () => {
     const values = resolveSimValues(sim, { strip: 'plastic', masses: 3, push: 1.5, block: 'bottle', square: 'fabric', pick: 'glass' });
     expect(evaluateSim(sim, values)).toEqual(evaluateSim(sim, values));
-    for (let i = 0; i < 200; i++) evaluateSim(sim, values);
-    const t0 = performance.now();
-    for (let i = 0; i < 2000; i++) evaluateSim(sim, values);
-    expect((performance.now() - t0) / 2000).toBeLessThan(0.05);
+    expect(msPerCall(() => evaluateSim(sim, values), 50)).toBeLessThan(0.05);
   });
   it('round-trips the URL sim=strip.glass~masses.5', () => {
     const decoded = decodeSimParam('strip.glass~masses.5');
