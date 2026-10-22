@@ -1,0 +1,148 @@
+{
+  "terms": [
+    {
+      "id": "respiratory-system",
+      "term": { "en": "Respiratory system", "zh": "呼吸系统" },
+      "definition": {
+        "en": "The nose, the windpipe and the lungs: the parts of the body that take in oxygen from the air and give out carbon dioxide.",
+        "zh": "鼻、气管和肺：身体里从空气中吸进氧气、放出二氧化碳的那些部分。"
+      },
+      "see": ["breathing", "lungs"]
+    },
+    {
+      "id": "circulatory-system",
+      "term": { "en": "Circulatory system", "zh": "循环系统" },
+      "definition": {
+        "en": "The heart, the blood and the blood vessels: they carry digested food, oxygen and carbon dioxide to and from every part of the body.",
+        "zh": "心脏、血液和血管：把消化后的食物、氧气和二氧化碳运到身体各处，再运回来。"
+      },
+      "see": ["heart", "blood-vessel"]
+    },
+    {
+      "id": "breathing",
+      "term": { "en": "Breathing", "zh": "呼吸" },
+      "definition": {
+        "en": "Breathing in and breathing out. When the chest gets bigger, air flows into the lungs; when it gets smaller, air flows out.",
+        "zh": "吸气和呼气。胸腔变大时，空气流进肺里；胸腔变小时，空气流出去。"
+      },
+      "see": ["respiratory-system"]
+    },
+    {
+      "id": "windpipe",
+      "term": { "en": "Windpipe", "zh": "气管" },
+      "definition": {
+        "en": "The tube that carries air from the throat down to the lungs. Rings of cartilage keep it open. Also called the trachea.",
+        "zh": "把空气从咽送到肺的管子，一圈圈软骨让它保持张开。英文也叫 trachea。"
+      },
+      "see": ["lungs"]
+    },
+    {
+      "id": "lungs",
+      "term": { "en": "Lungs", "zh": "肺" },
+      "definition": {
+        "en": "The two large organs in the chest, one on each side of the heart. In the lungs, oxygen from the air goes into the blood and carbon dioxide comes out.",
+        "zh": "胸腔里的两个大器官，心脏两边各一个。在肺里，空气中的氧气进入血液，二氧化碳从血液出来。"
+      },
+      "see": ["windpipe"]
+    },
+    {
+      "id": "heart",
+      "term": { "en": "Heart", "zh": "心脏" },
+      "definition": {
+        "en": "A pump made of muscle, in the middle of the chest. Each beat pushes blood into the blood vessels.",
+        "zh": "在胸腔正中、由肌肉构成的泵。每跳一下，就把血挤进血管。"
+      },
+      "see": ["blood"]
+    },
+    {
+      "id": "blood",
+      "term": { "en": "Blood", "zh": "血液" },
+      "definition": {
+        "en": "The liquid that flows round the body in the blood vessels, carrying digested food, oxygen and carbon dioxide. It is always red: bright red with much oxygen, dark red with little.",
+        "zh": "在血管里流遍全身的液体，运送消化后的食物、氧气和二氧化碳。它总是红色的：含氧多时鲜红，含氧少时暗红。"
+      },
+      "see": ["blood-vessel"]
+    },
+    {
+      "id": "blood-vessel",
+      "term": { "en": "Blood vessel", "zh": "血管" },
+      "definition": {
+        "en": "A tube that carries blood. Some carry blood away from the heart and some bring it back. The names artery, vein and capillary are beyond the syllabus.",
+        "zh": "运送血液的管子。有的把血从心脏运出去，有的把血运回心脏。动脉、静脉、毛细血管这些名称超出课纲。"
+      },
+      "see": ["heart"]
+    },
+    {
+      "id": "oxygen",
+      "term": { "en": "Oxygen", "zh": "氧气" },
+      "definition": {
+        "en": "A gas that makes up about 21 per cent of air. The body takes some of it into the blood in the lungs.",
+        "zh": "约占空气 21% 的一种气体。身体在肺里把其中一部分吸收进血液。"
+      },
+      "see": ["carbon-dioxide"]
+    },
+    {
+      "id": "carbon-dioxide",
+      "term": { "en": "Carbon dioxide", "zh": "二氧化碳" },
+      "definition": {
+        "en": "A gas that makes up about 0.04 per cent of air and about 4 per cent of breathed-out air. Body parts give it out, and the blood carries it to the lungs.",
+        "zh": "约占空气 0.04%、呼出气体 4% 的一种气体。身体各部分放出它，血液把它带到肺。"
+      },
+      "see": ["oxygen"]
+    },
+    {
+      "id": "nitrogen",
+      "term": { "en": "Nitrogen", "zh": "氮气" },
+      "definition": {
+        "en": "The gas that makes up most of the air, about 78 per cent. The body breathes it in and out without using it.",
+        "zh": "空气里最多的气体，约占 78%。身体把它吸进、呼出，但不使用它。"
+      },
+      "see": ["oxygen"]
+    },
+    {
+      "id": "water-vapour",
+      "term": { "en": "Water vapour", "zh": "水蒸气" },
+      "definition": {
+        "en": "Water in the form of a gas. How much air holds depends on the weather; breathed-out air has more.",
+        "zh": "气态的水。空气里有多少，要看天气；呼出的气体里更多。"
+      },
+      "see": ["nitrogen"]
+    },
+    {
+      "id": "life-processes",
+      "term": { "en": "Life processes", "zh": "生命过程" },
+      "definition": {
+        "en": "The things a living thing does to stay alive, such as growing, moving and responding. Body parts use digested food and oxygen to carry them out.",
+        "zh": "生物为了活着所做的事，例如生长、运动、作出反应。身体各部分用消化后的食物和氧气进行这些过程。"
+      },
+      "see": ["circulatory-system"]
+    },
+    {
+      "id": "gills",
+      "term": { "en": "Gills", "zh": "鳃" },
+      "definition": {
+        "en": "The thin, folded parts on each side of a fish's head that take in oxygen dissolved in water and give out carbon dioxide.",
+        "zh": "鱼头两侧很薄、多褶的部分，吸收溶在水里的氧气，放出二氧化碳。"
+      },
+      "see": ["oxygen"]
+    },
+    {
+      "id": "air-tubes",
+      "term": { "en": "Air tubes (bronchi) · further", "zh": "支气管 · 再进一步" },
+      "definition": {
+        "en": "The tubes that branch from the bottom of the windpipe into the lungs, getting smaller and smaller. The syllabus does not ask for the name.",
+        "zh": "从气管下端分出、通进肺里、越分越细的管子。课纲不要求这个名称。"
+      },
+      "see": ["windpipe"]
+    },
+    {
+      "id": "diaphragm",
+      "term": { "en": "Diaphragm · further", "zh": "膈 · 再进一步" },
+      "definition": {
+        "en": "The dome-shaped muscle under the lungs. It moves down when you breathe in, making the chest bigger. The syllabus does not ask for the name.",
+        "zh": "肺下面圆顶形的肌肉。吸气时它往下移，让胸腔变大。课纲不要求这个名称。"
+      },
+      "see": ["breathing"]
+    }
+  ]
+}

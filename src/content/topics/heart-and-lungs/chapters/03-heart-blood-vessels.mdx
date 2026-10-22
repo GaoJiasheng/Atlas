@@ -1,0 +1,143 @@
+---
+id: heart-blood-vessels
+order: 3
+title: { en: "Heart, blood and blood vessels", zh: "心脏、血液和血管" }
+sensitive: false
+state:
+  view: xray
+  run: true
+  cutaway: none
+  pose: lungs-aside
+  layers: [airway, lung-pair, heart-group, body-vessels, skeleton-context, skin-context]
+  ghost: [airway]
+  labels: [heart, lung-right, lung-left]
+  camera: { position: [0.16, 0.37, 0.76], target: [0.02, 0.27, -0.09], fov: 30 }
+  summary:
+    en: "The heart is a pump made of muscle. With each beat it pushes blood into blood vessels, which reach every part of the body and bring the blood back."
+    zh: "心脏是由肌肉构成的泵。每跳一下，就把血挤进血管；血管通到身体每个部分，再把血运回来。"
+  sim:
+    set: { activity: rest }
+  beats:
+    - labels: [heart, lung-right, lung-left]
+      caption:
+        en: "The heart sits between the lungs, in the middle of the chest, with its tip turned to the left. It is about the size of its owner's fist."
+        zh: "心脏在两个肺之间、胸腔正中，尖端偏向左边。它大约有主人的拳头那么大。"
+    - labels: [heart, great-vessels, lung-vessels]
+      caption:
+        en: "The heart is a pump made of muscle. Each beat squeezes blood out into the blood vessels."
+        zh: "心脏是一个由肌肉构成的泵。每跳一下，就把血挤进血管。"
+    - camera: whole-body
+      pose: null
+      labels: [vessels-out, vessels-back, great-vessels]
+      caption:
+        en: "Blood vessels are tubes that reach every part of the body. Some carry blood away from the heart; others bring it back."
+        zh: "血管是通到身体每个部分的管子。有的把血从心脏运出去，有的把血运回心脏。"
+    - camera: whole-body
+      pose: null
+      layers: [airway, lung-pair, heart-group, body-vessels, skeleton-context, skin-context, blood-rich, blood-poor]
+      labels: [vessels-out, vessels-back, heart]
+      caption:
+        en: "Blood carries oxygen and digested food to every part of the body and takes carbon dioxide away."
+        zh: "血液把氧气和消化后的食物送到身体各处，并把二氧化碳带走。"
+    - camera: whole-body
+      pose: null
+      layers: [airway, lung-pair, heart-group, body-vessels, skeleton-context, skin-context, blood-rich, blood-poor]
+      labels: [heart, vessels-out]
+      caption:
+        en: "An adult man has about 5 to 6 litres of blood. For a typical ten-year-old, a rough estimate is 2.2 to 2.4 litres."
+        zh: "成年男子大约有 5 到 6 升血。一个十岁的孩子，粗略估算大约 2.2 到 2.4 升。"
+  index:
+    parts: [heart, great-vessels, lung-vessels, vessels-out, vessels-back, lung-right, lung-left]
+---
+
+<Lang en>
+
+The lungs are pushed aside on the stage to show the <Term id="heart">heart</Term> between them. It sits in the middle of the chest, with its tip turned to the left, just left of the breastbone. It is about the size of its owner's fist; an adult heart is about <Num s="S2">12 cm</Num> long.
+
+The heart is a pump made of muscle. Each time the muscle squeezes, it pushes blood out into the large blood vessels at its top; that is a heartbeat. The heart does not make blood and does not clean it: it keeps the blood moving. At rest an adult heart pumps about <Num s="S2">5.25 litres</Num> of blood a minute.
+
+<Figure src="figures/heart-and-lungs-heart-vessels" alt={{ en: "A pencil drawing of the outside of a heart, its tip pointing down to the right, with the large blood vessels at its top and fine branching vessels on its surface.", zh: "心脏外面的铅笔画：尖端朝右下，顶上是几条大血管，表面有分叉的细血管。" }} caption={{ en: "The outside of a heart, with the large blood vessels at the top. The fine vessels on its surface carry blood to the heart muscle itself. An illustration made for this topic.", zh: "心脏的外面，顶上是几条大血管。表面那些细细的血管，把血送给心脏自己的肌肉。为本主题绘制的示意图。" }} />
+
+<Term id="blood-vessel">Blood vessels</Term> are tubes that reach every part of the body. Some carry blood away from the heart and branch again and again; others join up to bring the blood back. The model shows the main ones to the head, the arms, the belly and the legs. <FlyTo preset="whole-body">See the whole body</FlyTo>
+
+<Term id="blood">Blood</Term> is what moves inside them. It carries oxygen and digested food to every part of the body and takes carbon dioxide away. The heart does not pump only oxygen: it pumps blood, and the blood carries all three. An adult man has about <Num s="S2">5 to 6 litres</Num> of blood and an adult woman about <Num s="S2">4 to 5 litres</Num>. A ten-year-old has less: a rough estimate is <Num s="S16,S18">2.2 to 2.4 litres</Num>.
+
+At rest, a child aged 6 to 11 has a heartbeat of about <Num s="S9">75 to 118</Num> a minute; the box below explains why such ranges are only a guide.
+
+<More title={{ en: "Why veins look blue", zh: "为什么血管看起来发蓝" }}>
+
+Blood is always red: bright red when it carries much oxygen, dark red when it has given much away. Yet the blood vessels you see under the skin of your wrist look bluish. That comes from the way skin scatters and takes in light of different colours, from how deep and how wide the vessel is, and from how our eyes judge colour, as a study of light in skin explains. The blood inside is still red.
+
+</More>
+
+<More title={{ en: "Three kinds of blood vessel · further", zh: "三种血管 · 再进一步" }}>
+
+Scientists call the blood vessels that carry blood away from the heart arteries, the ones that bring it back veins, and the very fine ones between them capillaries. The P5 syllabus says these words are not required; this topic says "blood vessels from the heart" and "blood vessels to the heart" instead.
+
+</More>
+
+<More title={{ en: "Four spaces inside · further", zh: "心脏里的四个空腔 · 再进一步" }}>
+
+Inside, the heart has four spaces. The two on the right send blood to the lungs; the two on the left send blood to the rest of the body. The syllabus does not ask for these. To look inside, <FlyTo preset="heart-inside">fly to the heart</FlyTo> and press C (CUTAWAY) to cut it open.
+
+</More>
+
+<More title={{ en: "How fast a heart beats at rest", zh: "休息时心跳有多快" }}>
+
+Guidelines give <Num s="S9">75 to 118</Num> beats a minute for children aged 6 to 11 who are awake and resting, and <Num s="S9">58 to 90</Num> when asleep. A large review of studies of healthy children found that such ranges come from textbooks with no stated sources, and that one common cut-off would call about <Num s="S11">40 %</Num> of healthy 10-year-olds' heartbeats abnormal. Healthy children differ a lot.
+
+</More>
+
+<More title={{ en: "Where the estimate comes from", zh: "估算是怎么来的" }}>
+
+A child has about <Num s="S16">70 to 75 mL</Num> of blood for each kilogram of body weight. The middle weight of 10-year-olds in the World Health Organization's reference is about <Num s="S18">31 to 32 kg</Num>. Multiplying gives about 2.2 to 2.4 litres. That is our own rough estimate, and the reference children are not from Singapore.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+舞台上把两个肺拨开，露出它们中间的<Term id="heart">心脏</Term>。心脏在胸腔正中，尖端偏向左边，就在胸骨左边一点。它大约有主人的拳头那么大；成年人的心脏约 <Num s="S2">12 厘米</Num>长。
+
+心脏是一个由肌肉构成的泵。肌肉每挤压一次，就把血推进顶上的大血管，这就是一次心跳。心脏不造血，也不“洗”血：它让血一直流动。成年人休息时，心脏每分钟约泵出 <Num s="S2">5.25 升</Num>血。
+
+<Figure src="figures/heart-and-lungs-heart-vessels" alt={{ en: "A pencil drawing of the outside of a heart, its tip pointing down to the right, with the large blood vessels at its top and fine branching vessels on its surface.", zh: "心脏外面的铅笔画：尖端朝右下，顶上是几条大血管，表面有分叉的细血管。" }} caption={{ en: "The outside of a heart, with the large blood vessels at the top. The fine vessels on its surface carry blood to the heart muscle itself. An illustration made for this topic.", zh: "心脏的外面，顶上是几条大血管。表面那些细细的血管，把血送给心脏自己的肌肉。为本主题绘制的示意图。" }} />
+
+<Term id="blood-vessel">血管</Term>是通到身体每个部分的管子。有的把血从心脏运出去，一次次分支；有的汇合起来，把血运回心脏。模型画了通到头、手臂、腹部和腿的主要血管。<FlyTo preset="whole-body">看看整个身体</FlyTo>
+
+在血管里流动的是<Term id="blood">血液</Term>。它把氧气和消化后的食物送到身体各处，并把二氧化碳带走。心脏泵的不只是氧气：它泵的是血，三样东西都由血运送。成年男子约有 <Num s="S2">5 到 6 升</Num>血，成年女子约 <Num s="S2">4 到 5 升</Num>。十岁的孩子少一些，粗略估算约 <Num s="S16,S18">2.2 到 2.4 升</Num>。
+
+6 到 11 岁的孩子休息时，每分钟心跳约 <Num s="S9">75 到 118</Num> 次；下面的细看说明为什么这样的范围只能作参考。
+
+<More title={{ en: "Why veins look blue", zh: "为什么血管看起来发蓝" }}>
+
+血总是红的：含氧多时鲜红，送出不少氧气后暗红。可是手腕皮肤下的血管看起来发蓝。这是因为皮肤对不同颜色的光散射、吸收的程度不同，也和血管有多深、多粗，以及我们的眼睛怎样判断颜色有关；一项研究光在皮肤里怎样传播的论文解释了这一点。血管里的血仍然是红的。
+
+</More>
+
+<More title={{ en: "Three kinds of blood vessel · further", zh: "三种血管 · 再进一步" }}>
+
+科学家把从心脏运出血液的血管叫动脉，把血运回心脏的叫静脉，两者之间极细的叫毛细血管。小五课纲写明不要求这些词；这个主题改说“从心脏出去的血管”和“回心脏的血管”。
+
+</More>
+
+<More title={{ en: "Four spaces inside · further", zh: "心脏里的四个空腔 · 再进一步" }}>
+
+心脏里面有四个空腔。右边两个把血送到肺，左边两个把血送到身体其他部分。课纲不要求这些。想看里面，<FlyTo preset="heart-inside">飞到心脏</FlyTo>，再按 C（剖切）把它剖开。
+
+</More>
+
+<More title={{ en: "How fast a heart beats at rest", zh: "休息时心跳有多快" }}>
+
+指南给出 6 到 11 岁的孩子醒着休息时每分钟心跳 <Num s="S9">75 到 118</Num> 次，睡着时 <Num s="S9">58 到 90</Num> 次。一项汇总许多健康儿童研究的大型综述发现，这些范围出自没有注明来源的教科书；按其中一种常用的界线，约 <Num s="S11">40%</Num> 健康十岁孩子的心跳会被判为不正常。健康的孩子之间差别很大。
+
+</More>
+
+<More title={{ en: "Where the estimate comes from", zh: "估算是怎么来的" }}>
+
+孩子每千克体重约有 <Num s="S16">70 到 75 毫升</Num>血。世界卫生组织参考数据里，十岁孩子体重的中位数约 <Num s="S18">31 到 32 千克</Num>。两者相乘，约 2.2 到 2.4 升。这是我们自己的粗略估算，参考数据里的孩子也不是新加坡的。
+
+</More>
+
+</Lang>

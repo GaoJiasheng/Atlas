@@ -1,0 +1,139 @@
+---
+id: three-systems
+order: 5
+title: { en: "Three systems working together", zh: "三个系统一起工作" }
+sensitive: false
+state:
+  view: xray
+  run: true
+  cutaway: none
+  pose: null
+  layers: [digestion, airway, lung-pair, heart-group, body-vessels, leg-muscle-group, skeleton-context, skin-context, air, gases, blood-rich, blood-poor, digested-food]
+  ghost: [lung-pair, body-vessels, digestion]
+  labels: [heart, leg-muscles, trachea]
+  camera: { position: [0.65, 0.2, 3.5], target: [0, -0.15, -0.09], fov: 30 }
+  summary:
+    en: "Digested food and oxygen both enter the blood, which carries them to every part of the body. When you run, your muscles need more, so you breathe faster and your heart beats faster."
+    zh: "消化后的食物和氧气都进入血液，由血液运到身体各处。跑步时肌肉需要更多，所以呼吸变快、心跳也变快。"
+  sim:
+    set: { activity: rest }
+    try:
+      vary: activity
+      keep: [{ en: "Same person, same model", zh: "同一个人，同一个模型" }]
+      observe: [breaths, beats, muscles]
+      record: { chart: { y: [breaths, beats] } }
+      predict:
+        prompt:
+          en: "You stop resting and start running. Your heartbeat…"
+          zh: "从休息变成跑步，你的心跳……"
+        start: { activity: rest }
+        change: { activity: run }
+        observe: beats
+        options:
+          - { id: faster, label: { en: "Gets faster", zh: "变快" }, means: more }
+          - { id: slower, label: { en: "Gets slower", zh: "变慢" }, means: less }
+          - { id: same, label: { en: "Stays the same", zh: "不变" }, means: same }
+  beats:
+    - camera: { position: [0.3, 0.14, 0.92], target: [0, 0.02, -0.08], fov: 30 }
+      layers: [digestion, heart-group, body-vessels, skeleton-context, skin-context, digested-food, blood-poor]
+      ghost: [stomach, large-intestine, liver, body-vessels, skeleton-context]
+      labels: [small-intestine, oesophagus]
+      caption:
+        en: "Digested food passes from the small intestine into the blood."
+        zh: "消化后的食物从小肠进入血液。"
+    - labels: [heart, great-vessels, leg-muscles]
+      caption:
+        en: "The blood carries it, along with oxygen from the lungs, through the heart to every part of the body."
+        zh: "血液带着它，还有从肺里得到的氧气，经过心脏送到身体各处。"
+    - camera: legs
+      labels: [leg-muscles]
+      caption:
+        en: "Body parts, such as these leg muscles, use digested food and oxygen to carry out life processes. They give out carbon dioxide, which the blood takes to the lungs."
+        zh: "身体各部分，比如这些腿部肌肉，用消化后的食物和氧气进行生命过程。它们放出二氧化碳，由血液带到肺。"
+    - sim: { set: { activity: run } }
+      labels: [heart, trachea, leg-muscles]
+      caption:
+        en: "When you run, your leg muscles work harder. They need more oxygen and digested food and make more carbon dioxide, so you breathe faster and your heart beats faster."
+        zh: "跑步时，腿部肌肉更用力，需要更多氧气和消化后的食物，也产生更多二氧化碳，所以呼吸变快，心跳也变快。"
+    - camera: whole-body
+      sim: { set: { activity: rest } }
+      ghost: [lung-pair, body-vessels, stomach, large-intestine, liver]
+      labels: [small-intestine, trachea, heart]
+      caption:
+        en: "Three systems, one body: the digestive system takes in food, the respiratory system takes in oxygen and gives out carbon dioxide, and the circulatory system carries them all."
+        zh: "三个系统，一个身体：消化系统吸收食物，呼吸系统吸进氧气、呼出二氧化碳，循环系统把它们运到各处。"
+  index:
+    parts: [small-intestine, liver, heart, lung-right, vessels-out, vessels-back, leg-muscles, trachea]
+---
+
+<Lang en>
+
+The digestive organs are back on the stage. In the small intestine, food that has been digested into simpler substances passes into the blood, as in <TopicLink slug="digestive-system" ch="small-intestine-chapter">The small intestine</TopicLink>. On the way back to the heart, that blood passes through the liver first.
+
+In the lungs, as chapters 2 and 4 showed, oxygen passes into the blood and carbon dioxide leaves it. The circulatory system then carries the digested food and the oxygen together, through the heart, to every part of the body. So three systems, digestive, respiratory and circulatory, work as one: a system is a group of parts working together, and these three systems work together too.
+
+Every part of the body, such as the leg muscles, uses digested food and oxygen to carry out <Term id="life-processes">life processes</Term>, such as moving and growing. It gives out carbon dioxide, which the blood carries back to the lungs to be breathed out. <FlyTo preset="legs">Look at the leg muscles</FlyTo>
+
+When you run, the leg muscles work harder. They use more oxygen and digested food and give out more carbon dioxide. The body detects the extra carbon dioxide and the drop in oxygen in the blood, and you breathe faster and deeper and your heart beats faster. Use the card to compare resting, walking and running in this model: at rest it breathes <Num s="S37">20</Num> times and its heart beats <Num s="S37">90</Num> times a minute; running, <Num s="S37">40</Num> and <Num s="S37">165</Num>.
+
+<More title={{ en: "These numbers are a model", zh: "这些数是模型的" }}>
+
+The resting values sit inside the guideline ranges for children aged 6 to 11: <Num s="S9">18 to 25</Num> breaths and <Num s="S9">75 to 118</Num> heartbeats a minute. We found no source that gives the breathing and heartbeat of 10- to 12-year-olds just after walking or running, so the walking and running values here are chosen to show the change; they are not measurements. The running heartbeat stays below the average highest heartbeat of active children, which is in the <Num s="S10">mid-190s</Num>. Everyone is different.
+
+</More>
+
+<More title={{ en: "Count your own", zh: "数一数你自己的" }}>
+
+Sit still and count your breaths for 30 seconds, then multiply by 2. Then jog gently on the spot for a minute and count again. You can also count your heartbeat by feeling the pulse at your wrist or the side of your neck. Write your numbers in a table, like the one on the card. If you feel unwell, do not do the jogging part.
+
+</More>
+
+<More title={{ en: "Through the liver first · further", zh: "先经过肝 · 再进一步" }}>
+
+Blood from the stomach and intestines does not go straight back to the heart. It flows first through the liver, then on to the heart. In this model that part of the path is drawn, not traced in the blood vessels.
+
+</More>
+
+<More title={{ en: "Not the whole story", zh: "模型没画的" }}>
+
+Blood also flows through the brain, the kidneys and every other organ. This model shows only the main paths to the head, the arms, the gut and the legs.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+消化器官又回到了舞台上。在小肠里，被消化成更简单物质的食物进入血液，就像<TopicLink slug="digestive-system" ch="small-intestine-chapter">小肠</TopicLink>里讲的那样。这些血在回心脏的路上，先经过肝。
+
+在肺里，就像第 2 章和第 4 章看到的，氧气进入血液，二氧化碳离开血液。然后，循环系统把消化后的食物和氧气一起，经过心脏，运到身体的每个部分。所以消化、呼吸、循环三个系统像一个整体一样工作：系统是一起工作的一组部分，这三个系统之间也一起工作。
+
+身体的每个部分，比如腿部肌肉，都用消化后的食物和氧气进行<Term id="life-processes">生命过程</Term>，例如运动和生长。它们放出二氧化碳，由血液带回肺，再呼出去。<FlyTo preset="legs">看看腿部肌肉</FlyTo>
+
+跑步时，腿部肌肉更用力，用掉更多氧气和消化后的食物，也放出更多二氧化碳。身体察觉到血里二氧化碳增多、氧气减少，于是呼吸变快、变深，心跳也变快。用卡片比较这个模型里休息、走路和跑步的情况：休息时它每分钟呼吸 <Num s="S37">20</Num> 次、心跳 <Num s="S37">90</Num> 次；跑步时是 <Num s="S37">40</Num> 次和 <Num s="S37">165</Num> 次。
+
+<More title={{ en: "These numbers are a model", zh: "这些数是模型的" }}>
+
+休息时的值落在 6 到 11 岁孩子的指南范围里：每分钟呼吸 <Num s="S9">18 到 25</Num> 次，心跳 <Num s="S9">75 到 118</Num> 次。我们没有找到给出 10 到 12 岁孩子刚走完路或跑完步时呼吸和心跳次数的来源，所以这里走路、跑步的值是为了显示变化而取的，不是测量。跑步时的心跳低于好动的孩子平均最大心跳，那大约是每分钟 <Num s="S10">190 多</Num>次。每个人都不一样。
+
+</More>
+
+<More title={{ en: "Count your own", zh: "数一数你自己的" }}>
+
+坐着不动，数 30 秒内呼吸几次，再乘以 2。然后原地轻轻跑一分钟，再数一次。也可以在手腕或脖子侧面摸到脉搏，数一数心跳。把你的数写进一张表，就像卡片上那样。如果身体不舒服，就不要做原地跑那一步。
+
+</More>
+
+<More title={{ en: "Through the liver first · further", zh: "先经过肝 · 再进一步" }}>
+
+从胃和肠回来的血，不是直接回到心脏，而是先流过肝，再到心脏。在这个模型里，这一段路线是画出来的，不是沿着血管描出来的。
+
+</More>
+
+<More title={{ en: "Not the whole story", zh: "模型没画的" }}>
+
+血也流过脑、肾和其他每一个器官。这个模型只画了通到头、手臂、肠和腿的几条主要路线。
+
+</More>
+
+</Lang>

@@ -82,3 +82,7 @@ it('the dark plate lifts every one of them', () => {
 it('the engine can read every one of them', () => {
   for (const n of NAMES) expect(TOKEN_NAMES).toContain(n);
 });
+
+it('on the dark plate the two reds stay at least 30 apart in lightness (the heart-and-lungs screenshots read them as one red at 21)', () => {
+  expect(lab(cinema['blood-rich']!)[0] - lab(cinema['blood-poor']!)[0]).toBeGreaterThanOrEqual(30);
+});

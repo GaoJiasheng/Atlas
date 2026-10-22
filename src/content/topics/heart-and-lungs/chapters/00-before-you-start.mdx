@@ -1,0 +1,108 @@
+---
+id: before-you-start
+order: 0
+kind: background
+title: { en: "Before you start", zh: "开始之前" }
+sensitive: false
+state:
+  view: xray
+  explode: 0
+  part: null
+  run: true
+  cutaway: none
+  pose: null
+  layers: [airway, lung-pair, heart-group, body-vessels, digestion, skeleton-context, skin-context, air, blood-rich, blood-poor]
+  ghost: [digestion]
+  labels: [trachea, lung-right, heart, great-vessels]
+  camera: { position: [0.62, 0.55, 1.35], target: [0, 0.33, -0.09], fov: 30 }
+  summary:
+    en: "You breathe in air and your heart pumps blood without stopping. This topic follows the air into the lungs and the blood round the body, and shows how they work with the digestive system."
+    zh: "你不停地吸进空气，心脏不停地泵血。这个主题跟着空气走进肺，跟着血液走遍全身，看它们怎样和消化系统一起工作。"
+  note:
+    en: "The body on the stage is one adult man's anatomy, simplified; a pupil's organs are smaller. Only the main blood vessels are drawn. Bright and dark red dots show blood with more or less oxygen: blood is always red. Numbers marked TYPICAL come from the sources listed; numbers marked SIM are this model's, not measurements. Parts marked 'further' go beyond the P5 syllabus."
+    zh: "台上的身体是一位成年男子的解剖，已经简化；学生的器官比它小。只画了主要的血管。鲜红和暗红的点表示含氧多和含氧少的血：血总是红的。标“典型值”的数来自列出的来源；标“模拟”的数是这个模型的，不是测量。标“再进一步”的部分超出小五课纲。"
+  beats:
+    - labels: [trachea, lung-right, heart, great-vessels]
+      caption:
+        en: "Inside this adult body are the parts we breathe with and the parts that carry blood: the windpipe, the lungs, the heart and the blood vessels."
+        zh: "这个成年人的身体里，有用来呼吸的部分，也有运送血液的部分：气管、肺、心脏和血管。"
+    - camera: whole-body
+      ghost: []
+      labels: [oesophagus, stomach, small-intestine]
+      caption:
+        en: "The digestive system is drawn faintly. It has a topic of its own; here it shows where digested food enters the blood."
+        zh: "消化系统画得很淡，它在另一个主题里讲；这里用它来看消化后的食物从哪里进入血液。"
+    - camera: whole-body
+      labels: [vessels-out, vessels-back, heart]
+      caption:
+        en: "Bright red dots are blood carrying a lot of oxygen. Dark red dots are blood that has given much of its oxygen away. Blood is red in both."
+        zh: "鲜红的点是含氧多的血，暗红的点是已经送出不少氧气的血。两种血都是红色的。"
+    - camera: side-bench
+      layers: [airway, lung-pair, heart-group, body-vessels, digestion, skeleton-context, skin-context, bench, air-sample, compare]
+      labels: [air-jar, fish-body, plant-specimen]
+      caption:
+        en: "On the small table are a jar of air, a fish and a potted plant for later chapters. They are models, not drawn to scale."
+        zh: "小桌上放着一瓶空气、一条鱼和一盆植物，后面几章会用到。它们是模型，彼此不按比例。"
+  index:
+    parts: [trachea, lung-right, lung-left, heart, vessels-out, vessels-back, small-intestine, air-jar]
+---
+
+<Lang en>
+
+In P4 you met five systems in the body, in <TopicLink slug="digestive-system" ch="five-systems">Five systems in one body</TopicLink>. This topic is about two of them. The <Term id="respiratory-system">respiratory system</Term>, the nose, the windpipe and the lungs, takes in oxygen from the air and gives out carbon dioxide. The <Term id="circulatory-system">circulatory system</Term>, the heart, the blood and the blood vessels, carries substances to and from every part of the body.
+
+The P5 syllabus asks for four things: to know that air is a mixture of gases; to name these parts and say what each does; to see how the digestive, respiratory and circulatory systems work together; and to compare how people, fish and plants take in oxygen and move substances around. The chapters follow that order.
+
+The body on the stage is one adult man's anatomy, simplified, with see-through skin. A pupil's organs are smaller. Only the main blood vessels are drawn, and the digestive organs are faint, for comparison. Every blood vessel has the same neutral colour; the dots inside tell you about the blood. Bright red dots are blood with much oxygen, dark red dots blood with little. Blood is red in both: it is never blue.
+
+Numbers come in two kinds. Those marked TYPICAL come from the sources listed, usually as a range. Those marked SIM belong to this model and say "in this model"; they are not measurements. Parts and boxes marked "further" go beyond the syllabus. On the small table beside the body are a jar of air, a fish and a potted plant, used in chapters 2 and 6.
+
+<More title={{ en: "Where the model comes from", zh: "模型从哪里来" }}>
+
+The organs are real anatomical meshes from Z-Anatomy, which is built on BodyParts3D, shared under <Num s="S33,S34">CC BY-SA 4.0</Num>. They come from one adult male reference body, the same one as in the topics on the digestive system and the muscles. For this topic the airway, the lungs, the heart and the main blood vessels were selected, simplified and renamed. The paths of the air and blood dots were drawn along the centre lines of the tubes; inside the nose, the heart, the lungs and the liver, and at the far ends of the blood vessels, they are drawn by hand.
+
+</More>
+
+<More title={{ en: "Breathing is not the P6 word respiration", zh: "这里的“呼吸”和小六要学的不一样" }}>
+
+In P6 you will learn how living things get energy from food. This topic does not cover that. Here, breathing means air moving in and out of the lungs, and the respiratory system means the nose, the windpipe and the lungs.
+
+</More>
+
+<More title={{ en: "Standard and Foundation", zh: "标准课程与基础课程" }}>
+
+The comparison with fish, the comparison of how plants and humans move substances, and the three systems working together are in the P5 Standard syllabus. The Foundation syllabus compares only plants and humans taking in oxygen.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+小四时，你在<TopicLink slug="digestive-system" ch="five-systems">一个身体里的五个系统</TopicLink>里认识了身体的五个系统。这个主题讲其中两个。<Term id="respiratory-system">呼吸系统</Term>由鼻、气管和肺组成，从空气中吸进氧气，放出二氧化碳。<Term id="circulatory-system">循环系统</Term>由心脏、血液和血管组成，把各种物质运到身体各处，再运回来。
+
+小五课纲要求四件事：知道空气是几种气体的混合；认出这些部分，说出它们的功能；看到消化、呼吸、循环三个系统怎样一起工作；比较人、鱼和植物怎样吸进氧气、怎样运送物质。各章按这个顺序讲。
+
+台上的身体是一位成年男子的解剖，已经简化，皮肤画成透明的。学生的器官比它小。只画了主要的血管，消化器官画得很淡，作对照。所有血管都是同一种中性的颜色，血管里的点才告诉你血的情况：鲜红的点是含氧多的血，暗红的点是含氧少的血。两种血都是红的，从来不是蓝的。
+
+数分两种。标“典型值”的来自列出的来源，通常是一个范围；标“模拟”的属于这个模型，写着“在这个模型里”，不是测量。标“再进一步”的零件和细看超出课纲。身体旁边的小桌上放着一瓶空气、一条鱼和一盆植物，第 2 章和第 6 章会用到。
+
+<More title={{ en: "Where the model comes from", zh: "模型从哪里来" }}>
+
+这些器官是真实的解剖网格，来自以 BodyParts3D 为基础的 Z-Anatomy，按 <Num s="S33,S34">CC BY-SA 4.0</Num> 许可使用。它们取自同一个成年男性参考身体，和消化系统、肌肉那几个主题用的是同一个身体。为这个主题，选取了气道、肺、心脏和主要血管，做了简化和改名。空气和血的点，沿着管子的中线描出路线；在鼻腔、心脏、肺、肝里，以及血管末端，路线是手工画的。
+
+</More>
+
+<More title={{ en: "Breathing is not the P6 word respiration", zh: "这里的“呼吸”和小六要学的不一样" }}>
+
+小六会学生物怎样从食物中得到能量。这个主题不讲这些。这里的“呼吸”，是指空气进出肺；“呼吸系统”，是指鼻、气管和肺。
+
+</More>
+
+<More title={{ en: "Standard and Foundation", zh: "标准课程与基础课程" }}>
+
+和鱼比较、比较植物和人怎样运送物质、三个系统一起工作，这些属于小五标准课程。基础课程只比较植物和人怎样吸进氧气。
+
+</More>
+
+</Lang>
