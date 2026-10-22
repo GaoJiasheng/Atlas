@@ -77,7 +77,7 @@ export const mid = (a: readonly number[], b: readonly number[]): V3 => r3([(a[0]
 /** The six named views (VIEW buttons; chapter and beat cameras use them too). */
 export const PRESET_CAMERAS: Record<string, Camera> = {
   'spores-view': frame(SIDE, [0.03, 0.07, -0.02], 1.3, 30, 62),
-  'flower-view': frame(FLOWER, [0.0, 0.12, 0.03], 1.35, 16, 24),
+  'flower-view': frame(FLOWER, [0.0, 0.12, 0.03], 1.3, 30, 34),
   'visitors-view': frame(VISIT, [-0.02, 0.17, -0.03], 1.6, 12, 0),
   'fruits-view': frame(FRUITS, [0.04, 0.02, 0.0], 1.4, 42, 0),
   'seed-view': frame(SEED, [0.01, 0.02, 0.025], 0.95, 34, 0),
