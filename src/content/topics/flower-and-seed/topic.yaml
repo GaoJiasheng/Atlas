@@ -1,0 +1,17 @@
+# MOE P5 Cycles in Plants and Animals (Reproduction); docs/41, decisions taken 2026-10-21.
+# Parts: pnpm tsx scripts/geo/flower-and-seed/build-parts.ts; chapter frontmatter: pnpm tsx scripts/geo/flower-and-seed/build-chapters.ts
+id: flower-and-seed
+title: { en: "Flowers and Seeds", zh: "花与种子" }
+subtitle: { en: "How plants make new plants: spores and seeds, pollination, fertilisation, seed dispersal and germination", zh: "植物怎样繁殖：孢子与种子，传粉、受精、种子传播与萌发" }
+shortTitle: { en: "Flowers & seeds", zh: "花与种子" }
+subject: biology
+tags: [singapore, psle, p5, plants, space]
+moe: ["MOE 2023 Science P5 Cycles in Plants and Animals (Reproduction): spores and seeds; pollination, fertilisation, seed dispersal, germination; fertilisation in humans"]
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: published
+illustration: flower-and-seed
+note: { en: "Model study · a specimen table arranged as a cycle · each station has its own scale bar · reproductive cells are diagrams, not to scale · seed-test results combine published classroom and laboratory findings; cup E’s result is this model’s inference", zh: "模型研究 · 标本台按循环排成一圈 · 每个工位各有比例尺 · 生殖细胞是示意图，不按比例 · 种子测试的结果按公开的课堂与实验室研究组合给出；E 杯的结果是本模型的推断" }

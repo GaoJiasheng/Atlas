@@ -1,0 +1,234 @@
+{
+  "before-you-start": {
+    "summary": {
+      "en": "Plants make new plants in two ways: ferns and mosses release spores, and flowering plants make seeds. A flowering plant's seeds come from four steps: pollination, fertilisation, seed dispersal and germination.",
+      "zh": "植物有两种繁殖方式：蕨和苔藓放出孢子，开花植物产生种子。开花植物的种子要经过四步：传粉、受精、种子传播、萌发。"
+    },
+    "note": {
+      "en": "This is a model study laid out on one round table, in the order of a flowering plant's life: flower, pollination, fertilisation, fruits and seed dispersal, germination, and back to the flower. A bird's nest fern and a moss sit on a small table to one side, because they reproduce by spores instead. Each station has its own scale bar; the reproductive cells are diagrams, not to scale, and the moss and the fig are drawn larger with no scale. The four-cup seed test combines published classroom and laboratory findings; the model shows what they found, does not invent day counts, and marks the one result it infers, the fridge cup, as “in this model”.",
+      "zh": "这是一张按开花植物一生的顺序排成一圈的标本台：花、传粉、受精、果实与种子传播、萌发，再回到花。巢蕨和苔藓放在旁边的小台上，因为它们靠孢子繁殖。每个工位各有比例尺；生殖细胞是示意图，不按比例；苔藓和榕果画得较大，没有比例尺。四杯种子测试按公开的课堂与实验室研究组合而成；模型只照着画出研究的结果，不编天数，唯一一个推断的结果——冰箱那一杯——标明“在这个模型里”。"
+    },
+    "beats": [
+      {
+        "en": "Around this table, a flowering plant's life goes in a circle: flower, pollination, fertilisation, fruits and seeds, germination, and back to a flower.",
+        "zh": "沿着这张圆台，开花植物的一生绕成一圈：花、传粉、受精、果实与种子、萌发，再回到花。"
+      },
+      {
+        "en": "Ferns and mosses do not flower. They reproduce by spores instead of seeds.",
+        "zh": "蕨和苔藓不开花。它们不靠种子，而是靠孢子繁殖。"
+      },
+      {
+        "en": "In a flowering plant, pollen first has to reach the stigma. This is pollination.",
+        "zh": "开花植物要先让花粉落到柱头上，这叫传粉。"
+      },
+      {
+        "en": "After fertilisation, the flower makes seeds. A seed in a suitable place germinates and grows into a new plant: green in the light, pale in the dark.",
+        "zh": "受精以后，花产生种子。种子在合适的地方萌发，长成新的植株：有光的幼苗是绿的，暗处的发白。"
+      }
+    ]
+  },
+  "spores-and-seeds": {
+    "summary": {
+      "en": "Not every plant grows from a seed. Ferns and mosses have no flowers; they release tiny spores into the air. A seed is different: it holds a tiny plant and a store of food inside a protective coat.",
+      "zh": "不是每种植物都从种子长出来。蕨和苔藓不开花，它们把细小的孢子放到空气里。种子不一样：种皮里面包着一个小小的胚和储存的养分。"
+    },
+    "beats": [
+      {
+        "en": "This bird's nest fern, drawn at a quarter of its real size, has no flowers and makes no seeds. Ferns reproduce by spores.",
+        "zh": "这株巢蕨缩小到真实大小的四分之一。它不开花，也不结种子。蕨类植物靠孢子繁殖。"
+      },
+      {
+        "en": "Turn a frond over: the brown lines along its veins are where the spores are made.",
+        "zh": "把叶片翻过来：沿着叶脉的一条条褐色线，就是产生孢子的地方。"
+      },
+      {
+        "en": "Drawn much larger here, and not to scale, each line is a group of tiny spore cases. The spores are released from them into the air.",
+        "zh": "这里画得比实物大得多，不按比例：每条线是一群细小的孢子囊。孢子从里面放出来，散到空气中。"
+      },
+      {
+        "en": "Mosses reproduce by spores too. Each small capsule on a thin stalk releases spores.",
+        "zh": "苔藓也靠孢子繁殖。细柄顶端的每个小囊会放出孢子。"
+      },
+      {
+        "en": "A seed is different. This green bean, drawn ten times life size, holds a tiny plant and a store of food inside its coat. A plant spore is usually a single cell, with no tiny plant inside.",
+        "zh": "种子不一样。这粒绿豆放大十倍，种皮里面有一个小小的胚和储存的养分。植物的孢子通常只是一个细胞，里面没有小小的胚。"
+      }
+    ]
+  },
+  "flowers-and-pollination": {
+    "summary": {
+      "en": "A flower is the part of a flowering plant that makes seeds. Its stamens make pollen, and its pistil has a stigma that receives pollen. Pollination is the moving of pollen from an anther to a stigma; in chilli flowers, bees often carry it.",
+      "zh": "花是开花植物产生种子的部分。雄蕊产生花粉，雌蕊顶端的柱头接住花粉。传粉就是花粉从花药落到柱头上；辣椒花常靠蜜蜂传粉。"
+    },
+    "beats": [
+      {
+        "en": "A chilli flower, drawn 20 times life size. A flower is not just for show: it is the part of the plant that makes seeds.",
+        "zh": "一朵辣椒花，放大 20 倍。花不只是好看，它是植物产生种子的部分。"
+      },
+      {
+        "en": "Cut in half, it shows a ring of stamens around one pistil in the middle.",
+        "zh": "剖开来看：一圈雄蕊围着中间的一个雌蕊。"
+      },
+      {
+        "en": "The anthers at the tips of the stamens make pollen. The pistil has a stigma on top, which receives pollen, and an ovary at the bottom, which holds the ovules.",
+        "zh": "雄蕊顶端的花药产生花粉。雌蕊顶端是接住花粉的柱头，底部是子房，子房里有胚珠。"
+      },
+      {
+        "en": "Pollination is the moving of pollen from an anther to a stigma. A bee's hairy body picks up pollen and carries it to the next flower.",
+        "zh": "花粉从花药落到柱头上，就是传粉。蜜蜂毛茸茸的身体沾上花粉，带到下一朵花。"
+      },
+      {
+        "en": "The pollen can come from the same flower or from another flower. Both are pollination.",
+        "zh": "落到柱头上的花粉，可以来自同一朵花，也可以来自另一朵花，都叫传粉。"
+      }
+    ]
+  },
+  "who-carries-pollen": {
+    "summary": {
+      "en": "Bees are not the only animals that carry pollen. In Singapore, sunbirds visit flowers by day, cave nectar bats visit durian flowers at night, and fig trees can be pollinated only by tiny fig wasps. Some plants, such as grasses, are pollinated by the wind.",
+      "zh": "搬花粉的不只蜜蜂。在新加坡，太阳鸟白天访花，洞穴花蜜蝠夜里访榴莲花，榕树只能靠细小的榕小蜂传粉。草这类植物靠风传粉。"
+    },
+    "beats": [
+      {
+        "en": "A sunbird, drawn life size, feeds at flowers by day. Its thin, downward-curving beak reaches the nectar.",
+        "zh": "太阳鸟按实物大小画。它白天在花间取食，细长、向下弯的喙能伸到花蜜。"
+      },
+      {
+        "en": "Feeding from the front of a flower, its beak gets dusted with pollen, and some rubs off on the stigma of the next flower.",
+        "zh": "它从花口取食时，喙上沾了花粉，到下一朵花时，一部分就蹭到柱头上。"
+      },
+      {
+        "en": "Durian flowers open at night and have a strong smell. Bats, such as the cave nectar bat, are their main pollinators.",
+        "zh": "榴莲花在夜里开，气味很浓。蝙蝠是它们主要的传粉者，洞穴花蜜蝠就是其中一种。"
+      },
+      {
+        "en": "As a bat feeds on nectar, its face and head get covered with pollen, which it carries to the next flower. The yellow dots stand for that pollen.",
+        "zh": "蝙蝠吃花蜜时，脸和头上沾满花粉，又带到下一朵花。黄色的点就表示这些花粉。"
+      },
+      {
+        "en": "A fig's tiny flowers are inside the fig, drawn here larger and not to scale. Only fig wasps, which enter the fig, can pollinate them.",
+        "zh": "榕树细小的花长在榕果里面，这里画得较大，不按比例。只有钻进榕果的榕小蜂，才能给它们传粉。"
+      }
+    ]
+  },
+  "fertilisation": {
+    "summary": {
+      "en": "After pollination comes fertilisation: a male reproductive cell from the pollen fuses with a female reproductive cell. Then each ovule develops into a seed and the ovary develops into a fruit. Fertilisation in humans is similar: a sperm fuses with an egg.",
+      "zh": "传粉之后是受精：花粉带来的雄性生殖细胞与雌性生殖细胞融合。之后每个胚珠发育成一粒种子，子房发育成果实。人的受精也相似：精子与卵子融合。"
+    },
+    "beats": [
+      {
+        "en": "Pollination only brings pollen to the stigma. Fertilisation is the next step: a male reproductive cell from the pollen fuses with a female reproductive cell.",
+        "zh": "传粉只是把花粉送到柱头上。下一步是受精：花粉带来的雄性生殖细胞与雌性生殖细胞融合。"
+      },
+      {
+        "en": "The two cells fuse into one. This is a diagram, not to scale.",
+        "zh": "两个细胞融合成一个。这是示意图，不按比例。"
+      },
+      {
+        "en": "After fertilisation, each ovule develops into a seed, and the ovary around the ovules develops into the fruit.",
+        "zh": "受精以后，每个胚珠发育成一粒种子，包着胚珠的子房发育成果实。"
+      },
+      {
+        "en": "So a chilli is a fruit: it grew from the ovary of a flower, and its seeds grew from the ovules.",
+        "zh": "所以辣椒是果实：它由花的子房长成，里面的种子由胚珠长成。"
+      },
+      {
+        "en": "Fertilisation in humans is similar. A sperm, made in the testes, fuses with an egg, made in the ovaries. The fertilised egg develops in the womb.",
+        "zh": "人的受精也相似。睾丸产生的精子与卵巢产生的卵子融合，受精卵在子宫里发育。"
+      },
+      {
+        "en": "In flowering plants and in humans, fertilisation is the same idea: one male reproductive cell fuses with one female reproductive cell.",
+        "zh": "开花植物和人的受精是同一个道理：一个雄性生殖细胞与一个雌性生殖细胞融合。"
+      }
+    ]
+  },
+  "seed-dispersal": {
+    "summary": {
+      "en": "Seeds are carried away from the parent plant by the wind, by water, by animals, or when the fruit bursts or splits open. The shape of a fruit shows how it travels: a wing for the wind, air spaces for floating, juicy flesh that animals eat, a dry pod that bursts.",
+      "zh": "种子靠风、水、动物，或果实爆开、裂开，被带离母株。果实的样子透露它怎样传播：借风的翅、能浮的空隙、动物爱吃的多汁果肉、会爆开的干果荚。"
+    },
+    "beats": [
+      {
+        "en": "These fruits are drawn life size. An angsana fruit is a flat pod with a thin wing all round. The wind carries it away from the tree.",
+        "zh": "这些果实按实物大小画。青龙木的果实是扁扁的荚，四周一圈薄翅。风把它带离大树。"
+      },
+      {
+        "en": "A sea almond fruit has a corky layer full of tiny air spaces, so it floats, and the sea can carry it to a new shore.",
+        "zh": "榄仁树的果实外层像软木，布满细小的空隙，所以能浮在水上，被海水带到新的岸边。"
+      },
+      {
+        "en": "A coconut floats too. Its thick, fibrous husk helps, and so, one paper proposes, does the cavity inside the nut.",
+        "zh": "椰子也会漂浮。厚厚的纤维外皮帮它浮起来；有论文认为，果核里的腔也有帮助。"
+      },
+      {
+        "en": "Birds eat ripe chillies. The seeds pass through them whole and can still germinate where they land.",
+        "zh": "鸟吃成熟的辣椒，种子完好地随粪便排出，落地后还能萌发。"
+      },
+      {
+        "en": "When a rubber tree's fruit dries, it bursts with a loud bang and throws its seeds more than 20 metres.",
+        "zh": "橡胶树的果实干了以后，会“啪”地一声爆开，把种子弹到 20 米以外。"
+      },
+      {
+        "en": "A garden balsam pod splits open easily and scatters its small seeds.",
+        "zh": "凤仙花的果荚很容易裂开，把小小的种子撒出去。"
+      }
+    ]
+  },
+  "inside-a-seed": {
+    "summary": {
+      "en": "Germination is when a seed starts to grow into a young plant. Inside a green bean are a tiny plant and two seed leaves full of stored food. The seed takes in water, swells and splits its coat, and a root grows out. In one laboratory study, mung beans germinated faster when it was warmer.",
+      "zh": "萌发是种子开始长成幼苗的过程。绿豆里面有一个小小的胚和两片储满养分的子叶。种子吸水、胀大、撑破种皮，长出根来。一项实验室研究发现，温度高一些，绿豆萌发得快一些。"
+    },
+    "beats": [
+      {
+        "en": "A green bean, or mung bean, drawn 10 times life size. Its hard coat protects what is inside.",
+        "zh": "一粒绿豆，放大 10 倍。硬硬的种皮保护着里面的部分。"
+      },
+      {
+        "en": "Inside are two seed leaves full of stored food and a tiny plant with a root tip and a shoot tip. The seed is alive.",
+        "zh": "里面是两片储满养分的子叶，还有一个带着根尖和芽尖的小小的胚。种子是活的。"
+      },
+      {
+        "en": "Germination starts when the seed takes in water. It swells, its coat splits, and a root grows downwards.",
+        "zh": "萌发从吸水开始。种子胀大，种皮裂开，根向下长出来。"
+      },
+      {
+        "en": "In one laboratory study, mung beans on damp paper towels were kept at different temperatures. At 20 °C, half of the seeds that went on to germinate had done so by about day 4.3.",
+        "zh": "一项实验室研究把湿纸巾上的绿豆放在不同温度下。20 °C 时，大约到第 4.3 天，最终发芽的种子里有一半已经发芽。"
+      },
+      {
+        "en": "At 14 °C it took about 9.4 days, and fewer seeds germinated in the end. When it is cooler, seeds germinate more slowly.",
+        "zh": "14 °C 时要大约 9.4 天，最后发芽的种子也更少。温度低，种子萌发得慢。"
+      }
+    ]
+  },
+  "a-fair-test-with-seeds": {
+    "summary": {
+      "en": "A seed needs water, air and warmth to germinate. In this test, seeds kept dry do not germinate in a week, and in this model nor do seeds in a fridge; but seeds in a dark cupboard do: like most seeds, green beans do not need light to germinate. Their seedlings, though, need light to grow green.",
+      "zh": "种子萌发需要水、空气和适宜的温度。在这个测试里，放在干棉花上的种子一星期也没发芽；在这个模型里，放进冰箱的也没有；放在黑暗柜子里的却发芽了：绿豆和多数种子一样，萌发不需要光。不过，幼苗要有光才长得绿。"
+    },
+    "beats": [
+      {
+        "en": "Four cups, each with five green beans. Cup A has damp cotton wool and sits on a warm, bright windowsill. The other cups change the conditions.",
+        "zh": "四个杯子，每杯五粒绿豆。A 杯放湿棉花，在温暖明亮的窗台上。其余几杯改变了条件。"
+      },
+      {
+        "en": "A week later, the seeds in cup A have germinated. In cup B, on dry cotton wool, they have not: a seed needs water.",
+        "zh": "一星期后，A 杯的种子发芽了。B 杯放的是干棉花，种子没有发芽：种子需要水。"
+      },
+      {
+        "en": "Cup D is kept in a closed, dark cupboard, yet its seeds germinate: green beans, like most seeds, do not need light to germinate. But its seedlings are pale, while those in cup A are green.",
+        "zh": "D 杯放在关着门的黑暗柜子里，种子照样发芽：绿豆和多数种子一样，萌发不需要光。不过 D 杯的幼苗发白，A 杯的是绿的。"
+      },
+      {
+        "en": "Cup E is in a fridge. In this model, its seeds have not germinated after a week. But comparing E with A is not a fair test: inside a fridge it is cold and also dark.",
+        "zh": "E 杯放在冰箱里。在这个模型里，一星期后它的种子没有发芽。不过拿 E 和 A 比不是公平测试：冰箱里又冷又暗。"
+      },
+      {
+        "en": "Compare cup E with cup D instead: both are dark, so only the warmth is different. A seed needs warmth to germinate.",
+        "zh": "改拿 E 和 D 比：两杯都在暗处，只有温度不同。种子萌发需要适宜的温度。"
+      }
+    ]
+  }
+}

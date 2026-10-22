@@ -1,0 +1,366 @@
+---
+{
+  "id": "a-fair-test-with-seeds",
+  "order": 7,
+  "title": {
+    "en": "A fair test with seeds",
+    "zh": "种子的公平测试"
+  },
+  "sensitive": false,
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "part": null,
+    "cutaway": "none",
+    "run": false,
+    "layers": [
+      "germination",
+      "cycle"
+    ],
+    "labels": [
+      "cup-a",
+      "cup-b",
+      "cup-d",
+      "cup-e"
+    ],
+    "camera": {
+      "position": [
+        1.76198,
+        1.1207,
+        0.11379
+      ],
+      "target": [
+        -0.62064,
+        0.12,
+        -0.17212
+      ],
+      "fov": 30
+    },
+    "sim": {
+      "set": {
+        "cup": "a",
+        "against": "a",
+        "day": 0
+      },
+      "try": {
+        "vary": "cup",
+        "also": [
+          "against",
+          "day"
+        ],
+        "keep": [
+          {
+            "en": "Five green beans in each cup",
+            "zh": "每杯五粒绿豆"
+          },
+          {
+            "en": "The same cups and cotton wool",
+            "zh": "同样的杯子和棉花"
+          },
+          {
+            "en": "Checked on the same day",
+            "zh": "同一天看结果"
+          }
+        ],
+        "observe": [
+          "cup-result",
+          "changed",
+          "seedlings",
+          "day-now"
+        ],
+        "record": true,
+        "predict": {
+          "prompt": {
+            "en": "Cup D is in a dark cupboard; everything else is the same as cup A. After a week, will its seeds have germinated?",
+            "zh": "D 杯放在黑暗的柜子里，其他都和 A 杯一样。一星期后，它的种子会发芽吗？"
+          },
+          "start": {
+            "cup": "d",
+            "against": "a",
+            "day": 0
+          },
+          "change": {
+            "day": 7
+          },
+          "observe": "cup-result",
+          "options": [
+            {
+              "id": "yes",
+              "label": {
+                "en": "Yes, they germinate",
+                "zh": "会发芽"
+              },
+              "means": "germinated"
+            },
+            {
+              "id": "no",
+              "label": {
+                "en": "No, they need light",
+                "zh": "不会，要有光"
+              },
+              "means": "not-germinated"
+            }
+          ]
+        }
+      }
+    },
+    "index": {
+      "parts": [
+        "cup-a",
+        "cup-b",
+        "cup-d",
+        "cup-e",
+        "seeds-b",
+        "seeds-e",
+        "seedlings-a",
+        "seedlings-d",
+        "pick-ring",
+        "ref-ring"
+      ]
+    },
+    "summary": {
+      "en": "A seed needs water, air and warmth to germinate. In this test, seeds kept dry do not germinate in a week, and in this model nor do seeds in a fridge; but seeds in a dark cupboard do: like most seeds, green beans do not need light to germinate. Their seedlings, though, need light to grow green.",
+      "zh": "种子萌发需要水、空气和适宜的温度。在这个测试里，放在干棉花上的种子一星期也没发芽；在这个模型里，放进冰箱的也没有；放在黑暗柜子里的却发芽了：绿豆和多数种子一样，萌发不需要光。不过，幼苗要有光才长得绿。"
+    },
+    "beats": [
+      {
+        "labels": [
+          "cup-a",
+          "cup-b",
+          "cup-d",
+          "cup-e"
+        ],
+        "caption": {
+          "en": "Four cups, each with five green beans. Cup A has damp cotton wool and sits on a warm, bright windowsill. The other cups change the conditions.",
+          "zh": "四个杯子，每杯五粒绿豆。A 杯放湿棉花，在温暖明亮的窗台上。其余几杯改变了条件。"
+        }
+      },
+      {
+        "camera": {
+          "position": [
+            0.16835,
+            0.42357,
+            -0.04197
+          ],
+          "target": [
+            -0.70832,
+            0.13,
+            0.1766
+          ],
+          "fov": 30
+        },
+        "sim": {
+          "set": {
+            "day": 7,
+            "cup": "b",
+            "against": "a"
+          }
+        },
+        "labels": [
+          "seedlings-a",
+          "seeds-b"
+        ],
+        "caption": {
+          "en": "A week later, the seeds in cup A have germinated. In cup B, on dry cotton wool, they have not: a seed needs water.",
+          "zh": "一星期后，A 杯的种子发芽了。B 杯放的是干棉花，种子没有发芽：种子需要水。"
+        }
+      },
+      {
+        "camera": {
+          "position": [
+            0.70706,
+            0.60977,
+            0.37696
+          ],
+          "target": [
+            -0.70788,
+            0.09,
+            0.01601
+          ],
+          "fov": 30
+        },
+        "sim": {
+          "set": {
+            "day": 7,
+            "cup": "d",
+            "against": "a"
+          }
+        },
+        "labels": [
+          "seedlings-d",
+          "seedlings-a"
+        ],
+        "caption": {
+          "en": "Cup D is kept in a closed, dark cupboard, yet its seeds germinate: green beans, like most seeds, do not need light to germinate. But its seedlings are pale, while those in cup A are green.",
+          "zh": "D 杯放在关着门的黑暗柜子里，种子照样发芽：绿豆和多数种子一样，萌发不需要光。不过 D 杯的幼苗发白，A 杯的是绿的。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "day": 7,
+            "cup": "e",
+            "against": "a"
+          }
+        },
+        "labels": [
+          "cup-e",
+          "seeds-e",
+          "cup-a"
+        ],
+        "caption": {
+          "en": "Cup E is in a fridge. In this model, its seeds have not germinated after a week. But comparing E with A is not a fair test: inside a fridge it is cold and also dark.",
+          "zh": "E 杯放在冰箱里。在这个模型里，一星期后它的种子没有发芽。不过拿 E 和 A 比不是公平测试：冰箱里又冷又暗。"
+        }
+      },
+      {
+        "camera": {
+          "position": [
+            0.71124,
+            0.67253,
+            -0.56911
+          ],
+          "target": [
+            -0.61796,
+            0.13,
+            -0.36566
+          ],
+          "fov": 30
+        },
+        "run": true,
+        "sim": {
+          "set": {
+            "day": 7,
+            "cup": "e",
+            "against": "d"
+          }
+        },
+        "labels": [
+          "cup-e",
+          "cup-d"
+        ],
+        "caption": {
+          "en": "Compare cup E with cup D instead: both are dark, so only the warmth is different. A seed needs warmth to germinate.",
+          "zh": "改拿 E 和 D 比：两杯都在暗处，只有温度不同。种子萌发需要适宜的温度。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Four things in its surroundings affect whether a seed germinates: water, oxygen in the air, light and temperature. To find out which of them a seed needs, change one at a time. This is a <Term id="fair-test">fair test</Term>: only one thing is changed, and everything else is kept the same.
+
+The stage has four clear cups, each with <Num s="S1">5</Num> green beans on cotton wool. Cup A has damp cotton wool and stands on a warm, bright windowsill; the other cups are compared with it. Cup B is the same but its cotton wool is dry. Cup D has damp cotton wool but is shut in a dark cupboard. Cup E has damp cotton wool and is kept in a small fridge, about <Num s="S67">4 °C</Num> or colder. The cups are looked at on day <Num s="S1">7</Num>. <FlyTo preset="cups-view">Look at the cups</FlyTo>
+
+By then the seeds in cup A have germinated and those in cup B have not: the first step in germination is taking in water. A seed needs air as well; if its oxygen supply is cut down, germination can be badly slowed or stopped.
+
+Cup D shows that green beans, like most seeds, do not need light to germinate: its seeds germinate in the dark, using their own food store. But its seedlings are pale, while those in cup A are green. What a seed needs to germinate and what a seedling needs to grow are two different questions.
+
+In this model the seeds in cup E have not germinated after a week, because mung beans are estimated to need more than about <Num s="S44">9–10 °C</Num>. But comparing E with A is not a fair test: inside a fridge it is cold and also dark. Compare E with D instead. Both are dark, so only the warmth is different, and a seed needs warmth to germinate. The P4 syllabus asks you to recognise a fair test like this one, and the P6 syllabus to design one.
+
+Cup A's green seedlings can grow into plants that flower, and the cycle starts again: see <TopicLink slug="plant" ch="seed-to-plant">A Plant: from seed to plant</TopicLink>.
+
+<More title={{ en: "Seed or seedling", zh: "种子还是幼苗" }}>
+
+A seed's food store provides the energy to form a root and a stem, even without light. Once the store runs low, a seedling needs light. In a study of sprouts grown under different kinds of light, the ones grown in darkness had the least green and yellow pigment, and mung beans had the least of all. That is why cup D's seedlings are pale.
+
+</More>
+
+<More title={{ en: "A fridge is dark too", zh: "冰箱里也是黑的" }}>
+
+Change only one thing at a time. Cup E differs from cup A in two ways, the cold and the dark, so if its seeds do not germinate you cannot tell which one mattered. Cup D is dark as well, so E against D changes only the warmth. In this model the fridge result is an inference: no test of mung beans at fridge temperature was found.
+
+</More>
+
+<More title={{ en: "A light and warmth test", zh: "光和温度的测试" }}>
+
+A UK teaching pack has pupils grow peas in four groups: in the light or in the dark, each kept cool or warm. The two cool groups are kept together and the two warm groups together, so that the test is fair. The seedlings are measured after five to seven days. Peas germinate in light or dark as long as they are warm enough and have enough water.
+
+</More>
+
+<More title={{ en: "Some seeds do need light", zh: "有些种子确实要光" }}>
+
+Light makes some kinds of seed germinate and stops others. Those seeds need light, or darkness, to start. That is why this topic says that most seeds, and green beans, do not need light, rather than every seed.
+
+</More>
+
+<More title={{ en: "Why there is no cup under water", zh: "为什么没有泡水的杯子" }}>
+
+Some school tests keep a cup of seeds under water, with a layer of oil on top, to test air. This model leaves it out, because no source was found for what green beans fully under water do over a week. Gardens by the Bay soaks mung beans in water for <Num s="S42">12</Num> hours as the first step in sprouting them.
+
+</More>
+
+<More title={{ en: "Real cups vary", zh: "真的杯子会有差别" }}>
+
+In real cups a seed or two may not germinate, or may be slow. In the laboratory study at <Num s="S44">20 °C</Num>, about <Num s="S44">94 %</Num> of the seeds had germinated by day <Num s="S44">21</Num>, not all of them. Count the seeds in every cup before you decide.
+
+</More>
+
+<More title={{ en: "Try it at home", zh: "在家试一试" }}>
+
+With an adult, set up cups A, B and D with green beans and cotton wool, and check them every day for a week. For a seedling that will go on growing, NParks advises a warm, semi-shaded place. Use clean cups, wash your hands, and throw the beans away when you finish: do not eat them.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+周围环境里有四样东西影响种子能不能萌发：水、空气里的氧、光和温度。要知道种子需要哪一样，就一次只改变一样。这叫<Term id="fair-test">公平测试</Term>：只改变一样东西，其余都保持不变。
+
+舞台上有四只透明杯，每只杯里的棉花上放着 <Num s="S1">5</Num> 粒绿豆。A 杯放湿棉花，在温暖明亮的窗台上；其他几杯都拿来和它比。B 杯一样，只是棉花是干的。D 杯放湿棉花，但关在黑暗的柜子里。E 杯放湿棉花，放进小冰箱，温度约 <Num s="S67">4 °C</Num> 或更低。到第 <Num s="S1">7</Num> 天看结果。<FlyTo preset="cups-view">看看这几只杯子</FlyTo>
+
+到那时，A 杯的种子发芽了，B 杯的没有：萌发的第一步是吸水。种子也需要空气：如果氧气供应减少，萌发会大大变慢，甚至停下来。
+
+D 杯说明，绿豆和多数种子一样，萌发不需要光：它的种子在黑暗中照样发芽，靠的是自己储存的养分。不过 D 杯的幼苗发白，A 杯的是绿的。种子萌发要什么，幼苗生长要什么，是两个不同的问题。
+
+在这个模型里，E 杯的种子一星期后还没有发芽，因为据估计，绿豆要在大约 <Num s="S44">9–10 °C</Num> 以上才会萌发。不过拿 E 和 A 比不是公平测试：冰箱里又冷又暗。要改拿 E 和 D 比：两杯都在暗处，只有温度不同；种子萌发需要适宜的温度。小四课纲要求认出这样的公平测试，小六要求自己设计。
+
+A 杯绿色的幼苗能长成会开花的植株，循环又开始了，见<TopicLink slug="plant" ch="seed-to-plant">“一株植物”的“从种子到植物”</TopicLink>。
+
+<More title={{ en: "Seed or seedling", zh: "种子还是幼苗" }}>
+
+种子储存的养分，在没有光的时候也能供它长出根和茎。养分快用完时，幼苗就需要光了。一项研究让几种芽菜在不同的光下生长：在黑暗中长的，绿色和黄色的色素最少，绿豆芽又是其中最少的。所以 D 杯的幼苗发白。
+
+</More>
+
+<More title={{ en: "A fridge is dark too", zh: "冰箱里也是黑的" }}>
+
+一次只改变一样。E 杯和 A 杯差了两样：冷和暗，如果 E 杯的种子没发芽，就说不清是哪一样起了作用。D 杯也在暗处，所以 E 杯和 D 杯比，只改了温度。冰箱这一杯的结果是模型的推断：没有找到在冰箱温度下测试绿豆的研究。
+
+</More>
+
+<More title={{ en: "A light and warmth test", zh: "光和温度的测试" }}>
+
+英国的一份教学资料让学生把豌豆分成四组：放在亮处或暗处，再各分凉、暖两种。两个凉组放在一起，两个暖组放在一起，好让测试公平。五到七天后量幼苗。只要够暖、有足够的水，豌豆在亮处或暗处都会萌发。
+
+</More>
+
+<More title={{ en: "Some seeds do need light", zh: "有些种子确实要光" }}>
+
+光会让有些种子萌发，也会让另一些种子不萌发。这些种子要有光，或者要在暗处，才会开始萌发。所以本主题说的是绿豆和多数种子萌发不需要光，而不是所有种子。
+
+</More>
+
+<More title={{ en: "Why there is no cup under water", zh: "为什么没有泡水的杯子" }}>
+
+有些学校的测试会把一杯种子泡在水里，水面再加一层油，用来测试空气。这个模型没有这一杯，因为没有找到来源说明绿豆整个泡在水里一星期会怎样。滨海湾花园培育豆芽的第一步，就是把绿豆泡在水里 <Num s="S42">12</Num> 小时。
+
+</More>
+
+<More title={{ en: "Real cups vary", zh: "真的杯子会有差别" }}>
+
+真的杯子里，总会有一两粒种子不发芽或发得慢。在那项实验室研究里，<Num s="S44">20 °C</Num> 下到第 <Num s="S44">21</Num> 天，约 <Num s="S44">94 %</Num> 的种子发了芽，并不是全部。下结论之前，先把每一杯的种子数清楚。
+
+</More>
+
+<More title={{ en: "Try it at home", zh: "在家试一试" }}>
+
+和大人一起，用绿豆和棉花做 A、B、D 三杯，一星期里每天看一次。想让幼苗继续长，NParks 建议放在温暖、半荫的地方。用干净的杯子，做完洗手，把豆子扔掉，不要吃。
+
+</More>
+
+</Lang>

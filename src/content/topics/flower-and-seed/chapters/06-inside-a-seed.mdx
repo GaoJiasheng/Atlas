@@ -1,0 +1,306 @@
+---
+{
+  "id": "inside-a-seed",
+  "order": 6,
+  "title": {
+    "en": "Inside a seed",
+    "zh": "种子的里面"
+  },
+  "sensitive": false,
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "part": null,
+    "cutaway": "none",
+    "run": false,
+    "layers": [
+      "seed-inside",
+      "germination"
+    ],
+    "labels": [
+      "bean-whole",
+      "bean-cut"
+    ],
+    "camera": {
+      "position": [
+        0.03595,
+        0.55123,
+        -0.12801
+      ],
+      "target": [
+        -0.23342,
+        0.02,
+        0.61208
+      ],
+      "fov": 30
+    },
+    "sim": {
+      "set": {
+        "temp": 20,
+        "count-day": 0
+      },
+      "try": {
+        "vary": "temp",
+        "also": [
+          "count-day"
+        ],
+        "keep": [
+          {
+            "en": "The same kind of seed: mung beans",
+            "zh": "同一种种子：绿豆"
+          },
+          {
+            "en": "On damp paper towels",
+            "zh": "放在湿纸巾上"
+          },
+          {
+            "en": "Counted every day",
+            "zh": "每天数一次"
+          }
+        ],
+        "observe": [
+          "half-day",
+          "half"
+        ],
+        "record": {
+          "chart": {
+            "y": "half-day"
+          }
+        },
+        "predict": {
+          "prompt": {
+            "en": "At 20 °C, half of the seeds that went on to germinate had done so by about day 4.3. At 14 °C, will it take fewer days, about the same, or more days?",
+            "zh": "20 °C 时，最终发芽的种子里，大约到第 4.3 天已有一半发芽。14 °C 时，天数会更少、差不多，还是更多？"
+          },
+          "start": {
+            "temp": 20
+          },
+          "change": {
+            "temp": 14
+          },
+          "observe": "half-day",
+          "options": [
+            {
+              "id": "less",
+              "label": {
+                "en": "Fewer days",
+                "zh": "更少"
+              },
+              "means": "less"
+            },
+            {
+              "id": "same",
+              "label": {
+                "en": "About the same",
+                "zh": "差不多"
+              },
+              "means": "same"
+            },
+            {
+              "id": "more",
+              "label": {
+                "en": "More days",
+                "zh": "更多"
+              },
+              "means": "more"
+            }
+          ]
+        }
+      }
+    },
+    "index": {
+      "parts": [
+        "bean-whole",
+        "bean-cut",
+        "bean-sprout",
+        "towel-dish",
+        "day-strip",
+        "day-marker",
+        "half-flag",
+        "bean-seedling-close"
+      ]
+    },
+    "summary": {
+      "en": "Germination is when a seed starts to grow into a young plant. Inside a green bean are a tiny plant and two seed leaves full of stored food. The seed takes in water, swells and splits its coat, and a root grows out. In one laboratory study, mung beans germinated faster when it was warmer.",
+      "zh": "萌发是种子开始长成幼苗的过程。绿豆里面有一个小小的胚和两片储满养分的子叶。种子吸水、胀大、撑破种皮，长出根来。一项实验室研究发现，温度高一些，绿豆萌发得快一些。"
+    },
+    "beats": [
+      {
+        "labels": [
+          "bean-whole"
+        ],
+        "caption": {
+          "en": "A green bean, or mung bean, drawn 10 times life size. Its hard coat protects what is inside.",
+          "zh": "一粒绿豆，放大 10 倍。硬硬的种皮保护着里面的部分。"
+        }
+      },
+      {
+        "labels": [
+          "bean-cut"
+        ],
+        "caption": {
+          "en": "Inside are two seed leaves full of stored food and a tiny plant with a root tip and a shoot tip. The seed is alive.",
+          "zh": "里面是两片储满养分的子叶，还有一个带着根尖和芽尖的小小的胚。种子是活的。"
+        }
+      },
+      {
+        "labels": [
+          "bean-sprout",
+          "bean-seedling-close"
+        ],
+        "caption": {
+          "en": "Germination starts when the seed takes in water. It swells, its coat splits, and a root grows downwards.",
+          "zh": "萌发从吸水开始。种子胀大，种皮裂开，根向下长出来。"
+        }
+      },
+      {
+        "camera": {
+          "position": [
+            -0.40794,
+            0.46963,
+            0.13336
+          ],
+          "target": [
+            -0.46161,
+            0.01,
+            0.51528
+          ],
+          "fov": 30
+        },
+        "sim": {
+          "set": {
+            "temp": 20,
+            "count-day": 5
+          }
+        },
+        "labels": [
+          "half-flag",
+          "day-marker",
+          "towel-dish"
+        ],
+        "caption": {
+          "en": "In one laboratory study, mung beans on damp paper towels were kept at different temperatures. At 20 °C, half of the seeds that went on to germinate had done so by about day 4.3.",
+          "zh": "一项实验室研究把湿纸巾上的绿豆放在不同温度下。20 °C 时，大约到第 4.3 天，最终发芽的种子里有一半已经发芽。"
+        }
+      },
+      {
+        "camera": {
+          "position": [
+            -0.40794,
+            0.46963,
+            0.13336
+          ],
+          "target": [
+            -0.46161,
+            0.01,
+            0.51528
+          ],
+          "fov": 30
+        },
+        "sim": {
+          "set": {
+            "temp": 14,
+            "count-day": 5
+          }
+        },
+        "labels": [
+          "half-flag",
+          "day-marker"
+        ],
+        "caption": {
+          "en": "At 14 °C it took about 9.4 days, and fewer seeds germinated in the end. When it is cooler, seeds germinate more slowly.",
+          "zh": "14 °C 时要大约 9.4 天，最后发芽的种子也更少。温度低，种子萌发得慢。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+The green bean, also called the mung bean, is a seed about <Num s="S71">4.3–5.1 mm</Num> long. On the stage it is drawn <Num s="S1">10 times</Num> life size: whole, split open and sprouting. <FlyTo preset="seed-view">Look at the seed</FlyTo>
+
+Its hard outer coat protects the seed. Inside are two thick <Term id="seed-leaves">seed leaves</Term> and a tiny plant, the embryo, with a root tip and a shoot tip. In a bean the seed's food store is in the seed leaves. The seed is alive: respiration takes place in every living seed.
+
+Germination begins when the seed takes in water. The seed swells, its coat splits, and in beans the root is the first part to come out. The root grows down and the shoot grows up, and a mung bean lifts its seed leaves and stem up out of the soil. Until then the young plant lives on its food store, which gives it the energy to form a root and a stem even without light.
+
+<Figure src="figures/flower-and-seed-seed-germination" alt={{ en: "Pencil drawing of a germinating green bean: the seed coat has split open, two thick seed leaves show, a shoot curves upwards with a folded leaf bud, and a main root with a few thin side roots grows down at a slant.", zh: "铅笔画：一粒正在萌发的绿豆：种皮已经裂开，露出两片肥厚的子叶；一段芽向上弯，带着还没展开的叶芽；一条主根带着几条细侧根斜着向下长。" }} caption={{ en: "A germinating green bean: the seed coat has split, a root grows down and a shoot grows up. Illustration; not to scale and not timed.", zh: "一粒正在萌发的绿豆：种皮裂开，根向下长，芽向上长。示意插图，不按比例，也不对应具体天数。" }} />
+
+How fast a seed germinates depends on the temperature. In a laboratory study in Victoria, Australia, mung beans of <Num s="S44">32</Num> kinds were kept on damp paper towels at three temperatures. At <Num s="S44">20 °C</Num>, half of the seeds that went on to germinate had done so by about day <Num s="S44">4.3</Num>; at <Num s="S44">17 °C</Num> it took about <Num s="S44">6.5</Num> days, and at <Num s="S44">14 °C</Num> about <Num s="S44">9.4</Num> days. At the coolest temperature fewer seeds germinated in the end, too: about <Num s="S44">61 %</Num> by day <Num s="S44">21</Num>, against about <Num s="S44">94 %</Num> at <Num s="S44">20 °C</Num>. The try-it card lets you step through the days at each temperature.
+
+<More title={{ en: "A seed is alive", zh: "种子是活的" }}>
+
+A dry bean in a packet looks like a store of food, and it is one; but it also holds a living embryo. Respiration takes place in all living seeds, even before they germinate.
+
+</More>
+
+<More title={{ en: "Food for the first days", zh: "最初几天的养分" }}>
+
+A germinating seed does not take food from the soil. It uses the food stored in its seed leaves. Once its own leaves are open, the plant makes its own food in the light: see <TopicLink slug="plant" ch="leaves-make-food">A Plant: leaves make food</TopicLink>.
+
+</More>
+
+<More title={{ en: "What “half” means", zh: "“一半”是什么意思" }}>
+
+The study's number is the median germination time: the day by which half of the seeds that finally germinated had germinated. It is not half of all the seeds. The study counted a seed as germinated once its root was at least <Num s="S44">3 mm</Num> long, tested only <Num s="S44">14</Num>, <Num s="S44">17</Num> and <Num s="S44">20 °C</Num>, and gave the seeds <Num s="S44">10</Num> hours of light a day. Mung beans are estimated to need a temperature above about <Num s="S44">9–10 °C</Num> to germinate.
+
+</More>
+
+<More title={{ en: "How long in Singapore", zh: "在新加坡要几天" }}>
+
+Singapore is warmer than any of those three temperatures: from 2009 to 2018 its mean temperature was <Num s="S29">27.89 °C</Num>. Gardens by the Bay says mung bean sprouts can be grown in just <Num s="S42">3–4</Num> days, after soaking the beans for <Num s="S42">12</Num> hours and keeping them in a dark cupboard. An extension leaflet from North Carolina gives <Num s="S43">3 to 7</Num> days for full-sized sprouts, depending on the temperature. No source gives the day on which the root first appears, so this topic does not give one.
+
+</More>
+
+<More title={{ en: "Green bean or mung bean", zh: "绿豆还是 mung bean" }}>
+
+NParks lists the plant Vigna radiata as mung bean, green gram or green bean; in Chinese it is 绿豆.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+绿豆，英文叫 green bean 或 mung bean，是一粒长约 <Num s="S71">4.3–5.1 毫米</Num>的种子。舞台上的绿豆放大 <Num s="S1">10 倍</Num>：一粒整的、一粒剖开的、一粒正在发芽的。<FlyTo preset="seed-view">看看这粒种子</FlyTo>
+
+硬硬的种皮保护着种子。里面是两片厚厚的<Term id="seed-leaves">子叶</Term>，还有一个带着根尖和芽尖的小小的胚。豆类种子的养分储存在子叶里。种子是活的：每一粒活的种子都在呼吸。
+
+萌发从种子吸水开始。种子胀大，种皮裂开；豆类种子最先长出来的是根。根向下长，芽向上长，绿豆还会把子叶和茎一起举出土面。在这之前，幼小的植株靠储存的养分生活，没有光也能长出根和茎。
+
+<Figure src="figures/flower-and-seed-seed-germination" alt={{ en: "Pencil drawing of a germinating green bean: the seed coat has split open, two thick seed leaves show, a shoot curves upwards with a folded leaf bud, and a main root with a few thin side roots grows down at a slant.", zh: "铅笔画：一粒正在萌发的绿豆：种皮已经裂开，露出两片肥厚的子叶；一段芽向上弯，带着还没展开的叶芽；一条主根带着几条细侧根斜着向下长。" }} caption={{ en: "A germinating green bean: the seed coat has split, a root grows down and a shoot grows up. Illustration; not to scale and not timed.", zh: "一粒正在萌发的绿豆：种皮裂开，根向下长，芽向上长。示意插图，不按比例，也不对应具体天数。" }} />
+
+种子萌发的快慢和温度有关。澳大利亚维多利亚州的一项实验室研究，把 <Num s="S44">32</Num> 个品种的绿豆放在湿纸巾上，分别放在三个温度下。<Num s="S44">20 °C</Num> 时，大约到第 <Num s="S44">4.3</Num> 天，最终发芽的种子里有一半已经发芽；<Num s="S44">17 °C</Num> 时约 <Num s="S44">6.5</Num> 天，<Num s="S44">14 °C</Num> 时约 <Num s="S44">9.4</Num> 天。温度最低时，最后发芽的种子也少：到第 <Num s="S44">21</Num> 天约 <Num s="S44">61 %</Num>，而 <Num s="S44">20 °C</Num> 时约 <Num s="S44">94 %</Num>。在试一试卡片里，可以在每个温度下一天天往后看。
+
+<More title={{ en: "A seed is alive", zh: "种子是活的" }}>
+
+袋子里的干绿豆看起来是食物，它也确实储存着养分；但里面还有一个活的胚。所有活的种子都在呼吸，发芽之前也是这样。
+
+</More>
+
+<More title={{ en: "Food for the first days", zh: "最初几天的养分" }}>
+
+萌发中的种子不是从土里“吃”东西，它用的是子叶里储存的养分。等自己的叶子张开，植物就在光下自己制造食物，见<TopicLink slug="plant" ch="leaves-make-food">“一株植物”的“叶子造食物”</TopicLink>。
+
+</More>
+
+<More title={{ en: "What “half” means", zh: "“一半”是什么意思" }}>
+
+研究给出的是中位萌发时间：最终发芽的种子里有一半已经发芽的那一天。它不是全部种子的一半。这项研究在根长到 <Num s="S44">3 毫米</Num>以上时才算发芽，只测了 <Num s="S44">14</Num>、<Num s="S44">17</Num>、<Num s="S44">20 °C</Num> 三个温度，每天照光 <Num s="S44">10</Num> 小时。据估计，绿豆要在大约 <Num s="S44">9–10 °C</Num> 以上才会萌发。
+
+</More>
+
+<More title={{ en: "How long in Singapore", zh: "在新加坡要几天" }}>
+
+新加坡比这三个温度都暖：2009 到 2018 年，新加坡的平均气温是 <Num s="S29">27.89 °C</Num>。滨海湾花园说，绿豆先泡 <Num s="S42">12</Num> 小时，再放进暗柜，只要 <Num s="S42">3–4</Num> 天就能长成豆芽。美国北卡罗来纳州的一份推广资料说，按温度不同，<Num s="S43">3 到 7</Num> 天长成豆芽。没有来源说根在第几天最先长出来，所以本主题不给这个天数。
+
+</More>
+
+<More title={{ en: "Green bean or mung bean", zh: "绿豆还是 mung bean" }}>
+
+NParks 把 Vigna radiata 这种植物记作 mung bean、green gram 或 green bean，中文叫绿豆。
+
+</More>
+
+</Lang>

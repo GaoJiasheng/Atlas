@@ -1147,3 +1147,18 @@ pnpm tsx scripts/illustrate.ts figure  art/planned/flower-and-seed/flower-and-se
 11. **模板标签**（结果、幼苗"发白"、改了什么……）是引擎代理写的草稿，内容代理定稿时可改字，不改 id。
 
 **验收**（§4.6，合入 main `245beae` 后重跑）：`pnpm check` 0 错 0 警告、`pnpm validate` 53 个主题 0 错 0 警告、`pnpm test` 4146 条全过（含 `seeds` 48 条、`seedling-token` 10 条）、`pnpm build` 通过、`CI=1 pnpm e2e` 318 条中 317 条过（含 `sample-seeds` 9 条）；唯一失败 `singapore-land-use` "farmland, reserves and reservoirs appear in their own years"（TimeScene，与本改动无关：拿到 reserves 的 poll 后立刻读 reservoirs），单跑 3/3 通过。`pnpm shoot sample-seeds --beats --keys --layout` 0 拍失败、12/12 拍链接一致（含新的 tint 核对）、0 键失败、0 版式问题、控制台干净；zh / cinema 拍同样 0 失败；全景静止 30 次绘制、0.09 M 三角形（`--perf`）；单测里模型一次求值 < 0.05 ms。回归：`plant`、`mosquito`、`sample-heart`、`sample-materials`、`sample-sort` 的 `--beats --keys` 改前改后都是 0 拍失败、0 键失败、拍链接全一致；逐拍截图平均像素差：`sample-materials`、`sample-sort` 0（最大单像素 2），`plant` ≤ 0.47 / 255，`sample-heart` ≤ 0.83，`mosquito` ≤ 8.5——`mosquito` 改后自己重拍一次与改后第一次的差同样到 8.5（截图时刻的动画 / 镜头相位），不是改动带来的。**已知差距**：夹具背景章与四只杯章各有一个 `labels` 零件在章镜头下没有引线（夹具，不影响引擎）。
+
+### 9.2 内容施工（2026-10-22，Opus 内容代理，分支 `worktree-agent-ad26cdb3063ebf23f`）
+
+**做了什么**：`src/content/topics/flower-and-seed/`（`status: published`）：背景章 + 七章、41 拍（07 章五拍：C 杯拿掉）、三张试一试卡（T1 传播、T2 温度与天数、T3 四杯，全部先猜后看）、名词表 18 条、来源 66 条（S1 设计研究 + S2–S63 按 P# 编号、S64–S77 第二轮核查新增）、`REVIEW.md`。生成脚本 `scripts/geo/flower-and-seed/`：`build-parts.ts`（零件、组、流、动画、姿态、`sim`）、`build-chapters.ts`（章节 frontmatter；正文在 mdx 里手改、脚本保留）、`layout.ts`（台面布局与镜头）、`models.ts`（新建标本）、`reuse.ts`（`plant` 几何换算）、`text.ts`、`captions.json`、`tris.ts`（每件三角形与绘制数）。三张已审草稿入库（封面 + 02、06 章配图）。`plant` 第 05–07 章各加一句回链。单测 `tests/space-scene/flower-and-seed-reuse.test.ts`，e2e `tests-e2e/flower-and-seed.spec.ts`，首页计数 +1。
+
+**与本 spec 的出入**（逐条见主题 `REVIEW.md`）：
+
+1. 台面直径 1.9 m（§3.2 是 3 m），工位都朝向台心（读者站在台心）；巢蕨小台在冰箱后面、环外。
+2. D13 复用只做了一部分：整朵辣椒花、花粉粒、青 / 红辣椒、青龙木翅果、剖开与发芽的绿豆按 §3.2 换算复用；剖开的花、蜜蜂、椰子、凤仙果荚、杯中幼苗与土块幼苗为本台新建（`plant` 的这几件尺寸与本台不一致或在放大后太草）。
+3. 一个零件一次一个姿态：爆开的橡胶树果、裂开的凤仙果荚是独立零件 `rubber-valves`、`balsam-valves`，由 `visible` 绑定替换闭合的果；`rubber-seeds` 用 `capsule-burst` 整体抛出。
+4. id 冲突：组 `flower` → `flower-parts`；流 `spore-drift` → `spores-out`、`cycle` → `cycle-loop`；新组 `pollen-close`（花粉粒，不画比例尺）。`fern` 组 `card: false`（零件链路卡 4 列）。
+5. 按 §3.4 删减顺序删了 `spore-pinch`；榴莲花 3 朵；蝙蝠不扇翅（动画作用于整个零件），改为悬停的慢摆 `bat-hover`。
+6. 只有 A、D 两杯有幼苗零件（`seedlings-a`、`seedlings-d`）；B、E 在模型里永远不发芽，不建永远看不见的零件。
+
+**性能**（`look`，SwiftShader，1600×900）：全景（背景章，运转）99 次绘制、0.12 M 三角形（目标 80、上限 100）；各章工位 7–30 次。超目标原因：55 个零件中约 20 件有两三种本色（蜜蜂、蝙蝠、剖开的果实），再并就得丢颜色。

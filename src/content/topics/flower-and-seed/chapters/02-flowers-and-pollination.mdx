@@ -1,0 +1,217 @@
+---
+{
+  "id": "flowers-and-pollination",
+  "order": 2,
+  "title": {
+    "en": "Flowers and pollination",
+    "zh": "花与传粉"
+  },
+  "sensitive": false,
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "part": null,
+    "cutaway": "none",
+    "run": false,
+    "layers": [
+      "flower-parts",
+      "pollen-close",
+      "pollination"
+    ],
+    "labels": [
+      "flower",
+      "stamens",
+      "pistil"
+    ],
+    "camera": {
+      "position": [
+        0.52783,
+        0.49211,
+        0.55551
+      ],
+      "target": [
+        0,
+        0.12,
+        -0.63
+      ],
+      "fov": 30
+    },
+    "index": {
+      "parts": [
+        "flower",
+        "sepals",
+        "stamens",
+        "pistil",
+        "flower-section",
+        "ovules",
+        "pollen-grains",
+        "bee"
+      ]
+    },
+    "summary": {
+      "en": "A flower is the part of a flowering plant that makes seeds. Its stamens make pollen, and its pistil has a stigma that receives pollen. Pollination is the moving of pollen from an anther to a stigma; in chilli flowers, bees often carry it.",
+      "zh": "花是开花植物产生种子的部分。雄蕊产生花粉，雌蕊顶端的柱头接住花粉。传粉就是花粉从花药落到柱头上；辣椒花常靠蜜蜂传粉。"
+    },
+    "beats": [
+      {
+        "labels": [
+          "flower",
+          "sepals"
+        ],
+        "caption": {
+          "en": "A chilli flower, drawn 20 times life size. A flower is not just for show: it is the part of the plant that makes seeds.",
+          "zh": "一朵辣椒花，放大 20 倍。花不只是好看，它是植物产生种子的部分。"
+        }
+      },
+      {
+        "pose": "flower-open",
+        "labels": [
+          "stamens",
+          "pistil",
+          "flower-section"
+        ],
+        "caption": {
+          "en": "Cut in half, it shows a ring of stamens around one pistil in the middle.",
+          "zh": "剖开来看：一圈雄蕊围着中间的一个雌蕊。"
+        }
+      },
+      {
+        "pose": "flower-open",
+        "labels": [
+          "stamens",
+          "pollen-grains",
+          "ovules"
+        ],
+        "caption": {
+          "en": "The anthers at the tips of the stamens make pollen. The pistil has a stigma on top, which receives pollen, and an ovary at the bottom, which holds the ovules.",
+          "zh": "雄蕊顶端的花药产生花粉。雌蕊顶端是接住花粉的柱头，底部是子房，子房里有胚珠。"
+        }
+      },
+      {
+        "run": true,
+        "labels": [
+          "bee",
+          "pistil"
+        ],
+        "caption": {
+          "en": "Pollination is the moving of pollen from an anther to a stigma. A bee's hairy body picks up pollen and carries it to the next flower.",
+          "zh": "花粉从花药落到柱头上，就是传粉。蜜蜂毛茸茸的身体沾上花粉，带到下一朵花。"
+        }
+      },
+      {
+        "run": true,
+        "labels": [
+          "flower",
+          "bee"
+        ],
+        "caption": {
+          "en": "The pollen can come from the same flower or from another flower. Both are pollination.",
+          "zh": "落到柱头上的花粉，可以来自同一朵花，也可以来自另一朵花，都叫传粉。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+A flower is not just for show. It is the part of a flowering plant that makes seeds. A chilli flower is white and about <Num s="S26">1 cm</Num> across, with purple anthers; on the stage it is drawn <Num s="S1">20 times</Num> life size, beside the same flower cut in half. <FlyTo preset="flower-view">Look at the flower</FlyTo>
+
+Round the outside are the white petals and, at their base, the green sepals. Inside stands a ring of <Term id="stamen">stamens</Term>. Each stamen is a thin stalk, the filament, topped by an anther, where pollen forms. In the middle is the <Term id="pistil">pistil</Term>: a stigma at the top that receives pollen, a stalk called the style, and at the bottom the <Term id="ovary">ovary</Term>, which holds one or more <Term id="ovule">ovules</Term>.
+
+Pollination is the moving of pollen from an anther to a stigma. The pollen can come from the same flower or from another flower; both are pollination. A chilli flower can pollinate itself, but in a greenhouse study of sweet pepper, flowers visited by bees gave heavier fruit with more seeds.
+
+Bees often carry it. As a bee visits a flower, the hairs on its body pick up pollen, and some rubs off on the stigma of the next flower it visits. NParks lists bees as the chilli's pollinators and notes that the plant gives the most fruit when bees are around.
+
+<Figure src="figures/flower-and-seed-bee-pollination" alt={{ en: "Pencil drawing of a chilli twig with two buds, a few smooth-edged leaves and one open five-petalled white flower. A honeybee clings to the flower, its front legs touching the anthers, pollen grains on its hairy body and a ball of pollen on a hind leg.", zh: "铅笔画：一枝辣椒，有两个花蕾、几片边缘平滑的叶子和一朵开着的五瓣白花。一只蜜蜂伏在花上，前足碰着花药，毛茸茸的身上沾着花粉粒，后足上带着一团花粉。" }} caption={{ en: "A honeybee on a chilli flower: its hairy body brushes the anthers and picks up pollen. Illustration for this topic.", zh: "蜜蜂停在辣椒花上，毛茸茸的身体擦过花药，沾上花粉。为本主题画的插图。" }} />
+
+Bees are not the only animals that carry pollen. The next chapter meets three others.
+
+<More title={{ en: "Parts of a flower", zh: "花的各部分" }}>
+
+| Part | What it does |
+|---|---|
+| Petals | The coloured part round the outside (white in a chilli) |
+| Sepals | The green cup at the base |
+| Stamen: anther and filament | The anther makes pollen; the filament holds it up |
+| Pistil: stigma, style and ovary | The stigma receives pollen; the ovary holds the ovules |
+
+</More>
+
+<More title={{ en: "Pistil or carpel", zh: "雌蕊还是心皮" }}>
+
+Some books, such as the OpenStax biology textbook, call the female part of a flower the carpel and describe it as stigma, style and ovary. This site calls it the pistil, as the plant topic does.
+
+</More>
+
+<More title={{ en: "Bees and food crops", zh: "蜜蜂与粮食作物" }}>
+
+NParks calls bees the main pollinator for many food crops today. Garden balsam, which appears in chapter 05, is pollinated by bees too.
+
+</More>
+
+<More title={{ en: "More on this flower", zh: "这朵花的更多内容" }}>
+
+The chilli flower appears on a whole plant in <TopicLink slug="plant" ch="flowers-and-pollination">A Plant: flowers, pollination and fertilisation</TopicLink>, where the flowers and fruit sit on the branches of one chilli plant.
+
+</More>
+
+<More title={{ en: "Try it", zh: "试一试" }}>
+
+One morning, find a plant in flower and watch it quietly for five minutes. Count the animals that visit and note where on the flower each one lands. Do not touch the flowers or the animals.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+花不只是好看，它是开花植物产生种子的部分。辣椒花是白色的，宽约 <Num s="S26">1 厘米</Num>，花药紫色；舞台上的花放大 <Num s="S1">20 倍</Num>，旁边是剖开的同一种花。<FlyTo preset="flower-view">看看这朵花</FlyTo>
+
+最外面是白色的花瓣，花瓣基部是绿色的萼片。里面立着一圈<Term id="stamen">雄蕊</Term>。每枚雄蕊是一根细细的花丝，顶端是花药，花粉就在花药里形成。正中间是<Term id="pistil">雌蕊</Term>：顶端是接住花粉的柱头，中间是花柱，底部是<Term id="ovary">子房</Term>，里面有一个或多个<Term id="ovule">胚珠</Term>。
+
+花粉从花药落到柱头上，就是传粉。落到柱头上的花粉，可以来自同一朵花，也可以来自另一朵花，都叫传粉。辣椒花自己就能完成传粉；不过一项温室甜椒研究发现，有蜜蜂来访的花，结的果更重，种子也更多。
+
+搬花粉的常常是蜜蜂。蜜蜂访花时，身上的毛沾上花粉，到下一朵花时，一部分就蹭到柱头上。NParks 写明辣椒靠蜜蜂传粉，还说有蜜蜂的时候辣椒结果最多。
+
+<Figure src="figures/flower-and-seed-bee-pollination" alt={{ en: "Pencil drawing of a chilli twig with two buds, a few smooth-edged leaves and one open five-petalled white flower. A honeybee clings to the flower, its front legs touching the anthers, pollen grains on its hairy body and a ball of pollen on a hind leg.", zh: "铅笔画：一枝辣椒，有两个花蕾、几片边缘平滑的叶子和一朵开着的五瓣白花。一只蜜蜂伏在花上，前足碰着花药，毛茸茸的身上沾着花粉粒，后足上带着一团花粉。" }} caption={{ en: "A honeybee on a chilli flower: its hairy body brushes the anthers and picks up pollen. Illustration for this topic.", zh: "蜜蜂停在辣椒花上，毛茸茸的身体擦过花药，沾上花粉。为本主题画的插图。" }} />
+
+搬运花粉的不只是蜜蜂。下一章再看另外三种动物。
+
+<More title={{ en: "Parts of a flower", zh: "花的各部分" }}>
+
+| 部分 | 作用 |
+|---|---|
+| 花瓣 | 最外面有颜色的部分（辣椒花是白色的） |
+| 萼片 | 基部绿色的小杯 |
+| 雄蕊：花药与花丝 | 花药产生花粉，花丝把花药托起 |
+| 雌蕊：柱头、花柱与子房 | 柱头接住花粉，子房里有胚珠 |
+
+</More>
+
+<More title={{ en: "Pistil or carpel", zh: "雌蕊还是心皮" }}>
+
+有些书，比如 OpenStax 的生物课本，把花的雌性部分叫作心皮，由柱头、花柱和子房组成。本站和“一株植物”主题一样，叫它雌蕊。
+
+</More>
+
+<More title={{ en: "Bees and food crops", zh: "蜜蜂与粮食作物" }}>
+
+NParks 说，蜜蜂是今天许多粮食作物的主要传粉者。第 05 章出现的凤仙花，也靠蜜蜂传粉。
+
+</More>
+
+<More title={{ en: "More on this flower", zh: "这朵花的更多内容" }}>
+
+在<TopicLink slug="plant" ch="flowers-and-pollination">“一株植物”的“花、传粉与受精”</TopicLink>一章，辣椒花开在整株辣椒的枝上，和果实长在一起。
+
+</More>
+
+<More title={{ en: "Try it", zh: "试一试" }}>
+
+找一个早上，找一株正在开花的植物，静静地看五分钟。数一数有几只动物来访，记下每只停在花的哪里。不要碰花，也不要碰动物。
+
+</More>
+
+</Lang>

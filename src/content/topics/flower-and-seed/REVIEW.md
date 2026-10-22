@@ -1,0 +1,27 @@
+# Flowers and Seeds: review status (22 October 2026)
+
+Published (`status: published`) on the spec's decisions (docs/41 §0, with the §0.3 fact-check revisions and the §9.1 engine record). The build record is docs/41 §9.2; the sources and the claims that were cut are in [data/SOURCES.md](data/SOURCES.md). Nothing below blocks publication. Each item is a choice made the usual way that you may want to change.
+
+Parts are generated: `pnpm tsx scripts/geo/flower-and-seed/build-parts.ts` (texts in `text.ts`, shapes in `models.ts`, the plant topic's reused shapes in `reuse.ts`, layout and cameras in `layout.ts`); chapter frontmatter: `pnpm tsx scripts/geo/flower-and-seed/build-chapters.ts` (captions in `captions.json`; the chapter bodies are edited in the `.mdx` files and kept).
+
+## For Gavin
+
+1. **Four cups, not five** (§0.3-1). Cup C under boiled, cooled water is dropped; chapter 07 says once, hedged, that a seed needs air (S39) and has a More box on why there is no cup under water. Restoring C needs an oil layer and the result "no seedlings by day 7".
+2. **Cup E (fridge) is "in this model"** everywhere its result is stated. It is inferred from mung beans' base temperature of about 9–10 °C (S44) and a food chiller at 0–4 °C (S67, an SFA advisory to food businesses, not a home-fridge measurement). No test of mung beans at fridge temperature was found.
+3. **Where fertilisation happens is never said** (§0.1-1, default "both"): not in the flower, not in the body. The cells are diagrams floating over the table.
+4. **Human fertilisation is two diagram cells** (§0.1-4), a sperm and an egg, no body and no organs.
+5. **Sunbird** (§0.1-2): the main line says "sunbird"; the chapter 03 More box gives both NParks names (Olive-backed in the 2025 article, Ornate on Flora & Fauna Web). The female's colours follow the article. Its length (10–11 cm) is from Wikipedia only (S69).
+6. **洞穴花蜜蝠 is an editorial translation** (§0.1-3); 长舌果蝠 is not used. 榕小蜂 comes from Chinese ecology literature (S73); 橡胶树 and "Scarlet Spiral Flag" have no NParks Chinese name.
+7. **Silwal's medians** (4.3 / 6.5 / 9.4 days) are written as "half of the seeds that went on to germinate", with the 10-hour light period and the lower final germination at 14 °C (§0.3-3).
+8. **Tertiary sources** carry a few sizes and two definitions: Wikipedia Spore (S65, "usually a single cell"), Germination (S70), Moss (S75), Etiolation (S76), Apis cerana (S74), Ornate sunbird (S69). The mung-bean length (S71) was read only as a tool extraction of an abstract.
+9. **The table is smaller than the spec** (1.9 m across, not 3 m), so that each chapter's station fills the view between the HUD panels; the stations keep the spec's order and clock positions roughly, and all face the table's centre, where the reader stands. The fern's small table is behind the fridge, outside the ring.
+10. **Reuse of the plant topic's shapes (D13) is partial.** Reused and rescaled: the whole chilli flower, the pollen grains, the green and the cut chilli, the angsana pod, the split and the sprouting bean (`tests/space-scene/flower-and-seed-reuse.test.ts` checks the boxes and that the plant file is untouched). Drawn new: the flower cut in half (the plant draws it at another size from its flower), the bee (a 1 cm sketch there, 22 cm here), the coconut, the garden balsam pod (the plant's pod is a generic bean pod 9 cm long), the cup seedlings and the soil-block seedling (one material, so they go pale together).
+11. **Bursting fruits are their own parts.** A part takes one pose, so the burst rubber fruit (`rubber-valves`) and the split balsam pod (`balsam-valves`) replace the closed fruits by a `visible` binding when the card chooses them; the rubber seeds are thrown forward as one piece.
+12. **Cut for the draw-call budget**: the slide with a pinch of fern spores (spec's first cut); chapter 01 beat 5 shows the bean only. The durian branch has three flowers, not four.
+13. **Draw calls**: the whole table (background chapter, running) is 99 calls (spec target 80, ceiling 100), 118 k triangles; every chapter's station is 7–30 calls. Merging further would mean dropping colours from the bee, bat or cut fruits.
+14. **The bat does not flap**: an animation moves a whole part, so the bat hovers with a slow tilt instead (spec `bat-flap`). The chilli flower is shown turned up towards the reader on a straight stalk; real chilli flowers nod (the sepals detail says so).
+15. **Id clashes in the spec**: the group `flower` is `flower-parts` (a part is called `flower`), and the flows are `spores-out` and `cycle-loop` (groups `spore-drift`, `cycle`). A `pollen-close` group (no scale bar) holds the pollen grains, so the flower's ×20 bar never labels them.
+16. **Furniture is schematic**: windowsill 40 cm wide, cupboard 26 × 24 × 20 cm with its door drawn open, small fridge 30 × 36 × 28 cm with its front cut away.
+17. **Figures**: the cover and the two approved drafts (bee on a chilli flower, ch 02; germinating bean, ch 06). The bee figure is 150 KB, over the 120 KB figure target. No other images were made.
+18. **Chapter 07's body is about 340 words** (guide 200–300) because it carries the four-cup reasoning.
+19. **The plant topic links here** from its chapters 05, 06 and 07 (one sentence each in an existing More box).

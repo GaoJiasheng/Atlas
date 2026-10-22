@@ -1,0 +1,277 @@
+---
+{
+  "id": "fertilisation",
+  "order": 4,
+  "title": {
+    "en": "Fertilisation",
+    "zh": "受精"
+  },
+  "sensitive": false,
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "part": null,
+    "cutaway": "none",
+    "run": false,
+    "layers": [
+      "cells",
+      "flower-parts",
+      "fruits"
+    ],
+    "labels": [
+      "male-cell",
+      "female-cell"
+    ],
+    "camera": {
+      "position": [
+        -0.23007,
+        0.33221,
+        -0.12284
+      ],
+      "target": [
+        0.60815,
+        0.2,
+        0.30425
+      ],
+      "fov": 30
+    },
+    "index": {
+      "parts": [
+        "male-cell",
+        "female-cell",
+        "ovules",
+        "pistil",
+        "chilli-young",
+        "chilli-cut",
+        "sperm",
+        "egg"
+      ]
+    },
+    "summary": {
+      "en": "After pollination comes fertilisation: a male reproductive cell from the pollen fuses with a female reproductive cell. Then each ovule develops into a seed and the ovary develops into a fruit. Fertilisation in humans is similar: a sperm fuses with an egg.",
+      "zh": "传粉之后是受精：花粉带来的雄性生殖细胞与雌性生殖细胞融合。之后每个胚珠发育成一粒种子，子房发育成果实。人的受精也相似：精子与卵子融合。"
+    },
+    "beats": [
+      {
+        "camera": {
+          "position": [
+            0.2173,
+            0.25226,
+            -0.02396
+          ],
+          "target": [
+            0.66036,
+            0.2,
+            0.20179
+          ],
+          "fov": 30
+        },
+        "labels": [
+          "male-cell",
+          "female-cell"
+        ],
+        "caption": {
+          "en": "Pollination only brings pollen to the stigma. Fertilisation is the next step: a male reproductive cell from the pollen fuses with a female reproductive cell.",
+          "zh": "传粉只是把花粉送到柱头上。下一步是受精：花粉带来的雄性生殖细胞与雌性生殖细胞融合。"
+        }
+      },
+      {
+        "camera": {
+          "position": [
+            0.2173,
+            0.25226,
+            -0.02396
+          ],
+          "target": [
+            0.66036,
+            0.2,
+            0.20179
+          ],
+          "fov": 30
+        },
+        "pose": "cells-fused",
+        "labels": [
+          "female-cell"
+        ],
+        "caption": {
+          "en": "The two cells fuse into one. This is a diagram, not to scale.",
+          "zh": "两个细胞融合成一个。这是示意图，不按比例。"
+        }
+      },
+      {
+        "camera": "flower-view",
+        "pose": "flower-open",
+        "labels": [
+          "ovules",
+          "pistil"
+        ],
+        "caption": {
+          "en": "After fertilisation, each ovule develops into a seed, and the ovary around the ovules develops into the fruit.",
+          "zh": "受精以后，每个胚珠发育成一粒种子，包着胚珠的子房发育成果实。"
+        }
+      },
+      {
+        "camera": {
+          "position": [
+            -0.12344,
+            0.43902,
+            0.38695
+          ],
+          "target": [
+            0.05726,
+            0.015,
+            0.58073
+          ],
+          "fov": 30
+        },
+        "labels": [
+          "chilli-young",
+          "chilli-cut"
+        ],
+        "caption": {
+          "en": "So a chilli is a fruit: it grew from the ovary of a flower, and its seeds grew from the ovules.",
+          "zh": "所以辣椒是果实：它由花的子房长成，里面的种子由胚珠长成。"
+        }
+      },
+      {
+        "camera": {
+          "position": [
+            0.07311,
+            0.25749,
+            0.14948
+          ],
+          "target": [
+            0.56048,
+            0.2,
+            0.39781
+          ],
+          "fov": 30
+        },
+        "pose": "cells-fused",
+        "labels": [
+          "sperm",
+          "egg"
+        ],
+        "caption": {
+          "en": "Fertilisation in humans is similar. A sperm, made in the testes, fuses with an egg, made in the ovaries. The fertilised egg develops in the womb.",
+          "zh": "人的受精也相似。睾丸产生的精子与卵巢产生的卵子融合，受精卵在子宫里发育。"
+        }
+      },
+      {
+        "camera": {
+          "position": [
+            -0.23007,
+            0.33221,
+            -0.12284
+          ],
+          "target": [
+            0.60815,
+            0.2,
+            0.30425
+          ],
+          "fov": 30
+        },
+        "pose": "cells-fused",
+        "labels": [
+          "male-cell",
+          "female-cell",
+          "sperm",
+          "egg"
+        ],
+        "caption": {
+          "en": "In flowering plants and in humans, fertilisation is the same idea: one male reproductive cell fuses with one female reproductive cell.",
+          "zh": "开花植物和人的受精是同一个道理：一个雄性生殖细胞与一个雌性生殖细胞融合。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Pollination only brings pollen to the stigma. The next process is fertilisation. The syllabus describes it in two ways, and both are true: fertilisation occurs when a male reproductive cell fuses with a female reproductive cell; and fertilisation is the process that leads to the development of fruits and seeds. The pollen brings the male reproductive cell. On the stage the two cells float above the table as a diagram, not to scale.
+
+Pollination and fertilisation are two different steps. Pollination moves pollen; fertilisation is the fusing of two cells, and it comes after pollination.
+
+After fertilisation, each ovule develops into a seed, and the ovary around the ovules develops into the fruit, which usually encloses the seeds. So a chilli is a fruit: it grew from the ovary of a chilli flower, and every seed inside it grew from an ovule. <FlyTo preset="flower-view">Look at the ovules</FlyTo>
+
+Fertilisation in humans is similar. A <Term id="sperm">sperm</Term> fuses with an <Term id="egg">egg</Term>. Sperms are produced in the testes and eggs in the ovaries, and the fertilised egg develops in the womb. The stage shows a sperm and an egg as a second diagram, with no body around them.
+
+In a flowering plant and in a human, fertilisation is the same idea: one male reproductive cell fuses with one female reproductive cell. Through reproduction, many characteristics are passed on from parents to their offspring.
+
+<More title={{ en: "Pollination is not fertilisation", zh: "传粉不是受精" }}>
+
+Pollination comes first: pollen lands on a stigma. Fertilisation comes after it: two reproductive cells fuse. In Chinese, pollination is also called 授粉. Its first character sounds the same as the first character of 受精, fertilisation, but the two words mean different things.
+
+</More>
+
+<More title={{ en: "What P5 leaves out", zh: "小五不讲的内容" }}>
+
+The P5 syllabus does not ask how the male reproductive cell reaches the female one, where exactly fertilisation happens, or how a baby develops before birth. This topic leaves those out too.
+
+</More>
+
+<More title={{ en: "Fruit or vegetable", zh: "果实还是蔬菜" }}>
+
+In the kitchen a chilli is often called a vegetable. In science, the part of a plant that grows from the ovary of a flower is a fruit, so a chilli is a fruit. So are a pod of beans and a sea almond.
+
+</More>
+
+<More title={{ en: "Ovary: one word, two meanings", zh: "ovary：一个英文词，两个意思" }}>
+
+In English the word ovary names two different things: the ovary of a flower, which becomes the fruit, and a woman's ovaries, which produce eggs. Chinese has two words for them.
+
+</More>
+
+<More title={{ en: "Try it", zh: "试一试" }}>
+
+With an adult, cut a ripe chilli open and count its seeds. Each seed grew from one ovule. Wash your hands afterwards and do not touch your eyes: chillies sting.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+传粉只是把花粉送到柱头上。接下来的过程是受精。课纲用两种说法描述受精，两种都对：雄性生殖细胞与雌性生殖细胞融合，就是受精；受精是让果实和种子形成的过程。雄性生殖细胞由花粉带来。舞台上，这两个细胞画成示意图，悬在台面上方，不按比例。
+
+传粉和受精是两个不同的步骤。传粉是搬运花粉；受精是两个细胞融合，在传粉之后发生。
+
+受精以后，每个胚珠发育成一粒种子，包着胚珠的子房发育成果实，果实通常把种子包在里面。所以辣椒是果实：它由辣椒花的子房长成，里面的每一粒种子都由一个胚珠长成。<FlyTo preset="flower-view">看看胚珠</FlyTo>
+
+人的受精也相似：<Term id="sperm">精子</Term>与<Term id="egg">卵子</Term>融合。精子由睾丸产生，卵子由卵巢产生，受精卵在子宫里发育。舞台上的精子和卵子是第二幅示意图，周围不画身体。
+
+开花植物和人的受精是同一个道理：一个雄性生殖细胞与一个雌性生殖细胞融合。通过繁殖，亲代的许多特征传给了后代。
+
+<More title={{ en: "Pollination is not fertilisation", zh: "传粉不是受精" }}>
+
+传粉又叫授粉，是花粉落到柱头上；受精是两个生殖细胞融合，在传粉之后。“授粉”的“授”是“给”，“受精”的“受”是“接受”，两个字读音相同，意思不同，不要混淆。
+
+</More>
+
+<More title={{ en: "What P5 leaves out", zh: "小五不讲的内容" }}>
+
+小五课纲不要求知道雄性生殖细胞怎样到达雌性生殖细胞、受精具体在哪里发生，也不要求知道宝宝出生前怎样长大。本主题同样不讲这些。
+
+</More>
+
+<More title={{ en: "Fruit or vegetable", zh: "果实还是蔬菜" }}>
+
+在厨房里，辣椒常被当作蔬菜。在科学里，由花的子房长成的部分叫果实，所以辣椒是果实。一个豆荚、一个榄仁树果也是果实。
+
+</More>
+
+<More title={{ en: "Ovary: one word, two meanings", zh: "ovary：一个英文词，两个意思" }}>
+
+英文 ovary 一词指两样不同的东西：花的子房，以后发育成果实；人的卵巢，产生卵子。中文用两个词把它们分开：子房和卵巢。
+
+</More>
+
+<More title={{ en: "Try it", zh: "试一试" }}>
+
+和大人一起剖开一只成熟的辣椒，数一数里面有几粒种子。每一粒种子都由一个胚珠长成。剖完要洗手，不要碰眼睛：辣椒会刺痛眼睛。
+
+</More>
+
+</Lang>
