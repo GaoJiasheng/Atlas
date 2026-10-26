@@ -222,4 +222,6 @@
 
 ## 已处理
 
+- **数据许可（2026-10-26）**：Gavin 定，CC BY-NC-SA 等非商业许可的数据可以用（Atlas 内容本身就是 CC BY-NC-SA、非商业）；但同一份派生数据里不能混 CC BY-SA 和 CC BY-NC-SA。规则写在 docs/next-batch.md §三。ww2 的混用问题（§六）仍待处理。
+
 （空）
