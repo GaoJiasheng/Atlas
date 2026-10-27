@@ -1678,6 +1678,20 @@ docs/40 §4.2 E-HL1。`sim.kind: "table"`：模型不算，只**按控件查有�
 - **validate**（`tableIssues`，parts 文件解析时）：`keys` 是控件、不重复；行的 `when` 恰好写全 `keys`、值合法；每个实验对 `keys` 的全部值组合**恰好一行**（列出缺的、重的）；`set` 的键是输出、种类对得上（数 / `{ value, decimals }` 给数输出，带标签的状态 id 给状态输出）；同一实验每行设定同一组输出；一个输出只属于一个实验；输出不写 `from`、只能是数或状态；`count` 绑定的零件 `repeat.count` ≥ 该输出在表里的最大份数（按 `count` 的取整），否则报"not enough balls"；先猜后看的 `change` 只改 `observe` 所在实验的 `keys`（`tablePredictIssues`，章节校验）。**来源**（`tableSourceIssues`，`pnpm validate` 对照 `data/sources.json`）：每个 `S#` 都在；设定 `sim` 数输出的行至少引一条 `design: true` 的来源（`sources.json` 新的可选字段：主题自己的设计研究；`SOURCES.md` 标注 design study），设定 `typical` 数输出的行至少引一条不是设计研究的来源；只设定状态的行引什么都行。
 - **测试 API**：`__atlas.engine.sim()` 照旧，表模型多一个 `sources`：`{ <typical 输出>: [S#…] }`（此刻那一行的来源）；`copies(partId)`：`count` 绑定此刻画出的份数。
 
+### SpaceScene · 数字到骨架关节（joint binding）
+
+docs/57 §4 E-BJ2；可运行草稿 `sample-joint` 复用 `muscles-arms.glb` 和19关节rig，数字来自24行 `table`，不加sim kind。`sim.bind`另一个互斥target：
+
+```json
+{ "output": "angle", "joint": "elbow.l", "movement": "flexion", "angle": { "per": 1, "origin": 0 }, "when": { "control": "mode", "is": { "eq": "lever" } } }
+```
+
+- `control`数值step或`output`数输出恰写一个；`joint`是 `rig.joints` 对象的确切key，`movement`必须直接声明在该关节的`axes`里。无动作按钮的关节回退、无自动镜像。右侧需显式另写绑定。
+- 角度 `(value-origin)*per`；`per`默认1且有限非零，`origin`默认0且有限。step全部选项、table全部对应数格校验有限且在[-180,180]°；其它solver的运行值同样检查。NaN、无穷、越界或非数值不产生override，不把无效值当0°。当前rig无单独的角度边界字段；这不是临床ROM。
+- 可选`when`同`play.when`：`control`或`output`恰写一个，`is`为`true`或`eq/ne/in/gte/lte`条件。条件不成立即撤销override，恢复章/拍pose。table仍在内部求值；是否展示卡片由章节控制。相同joint+movement重复绑定报错，即使guard不同；一个joint可分别覆盖不同movement。相同joint已有sequence动画时拒绝再加数字绑定，避免两个驱动争用。
+- `simEffects.joints`按movement覆盖章/拍pose或exercise的相应字段，保留其它movement、其它joint和contraction。共用MotionDriver、父链、local axis与蒙皮；不对part再转一次。普通控件变更或撤销override用0.5秒缓动；URL初载与reduced-motion瞬到目标。章节清空上章sim.set，作者应给普通章`mode: explore`基线。
+- `spaceChapterIssues`检查章/拍中active绑定与exercise key是否争用同一joint；该组合报错。测试：`tests/space-scene/joint-binding.test.ts`；浏览器声明 `tests-e2e/sample-joint.spec.ts`。QA `__atlas.engine.joint(name)`读实际骨架的 `{ angles, position, quaternion }`（world origin/world quaternion），不存在的关节返回null；用于比较命名pose与数字绑定的深链末端，不是仅返回控件值。
+
 ### SpaceScene · 平面横梁机构（`mechanisms`，beam-steam）
 
 docs/52 §4 E-ST1/E-ST2；完整可运行作者例子在 `src/content/topics/sample-mechanism/data/parts.json`，生成器 `src/content/topics/sample-mechanism/generate.mjs`（`node` 直接运行；包括齿廓采样检查）。这是可选的根字段 `mechanisms`（缺省 `[]`，最多一项），**不增加 sim 种类**：压力、三档静态调速器和归一化能量账仍用 `sim.kind: "table"`。不增加 URL 字段、HUD、键位、齿轮 primitive 或通用物理引擎。

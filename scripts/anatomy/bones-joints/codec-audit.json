@@ -1,0 +1,184 @@
+{
+  "status": "automated gates passed; native/medical review still pending",
+  "meshNodes": 44,
+  "rigJoints": 19,
+  "maxCodecBBoxErrorM": 0.000002653060639123961,
+  "parts": [
+    {
+      "part": "skull",
+      "codecBBoxErrorM": 2.9537669406221045e-7
+    },
+    {
+      "part": "mandible",
+      "codecBBoxErrorM": 6.557193704542774e-7
+    },
+    {
+      "part": "cervical-spine",
+      "codecBBoxErrorM": 7.014793138374054e-7
+    },
+    {
+      "part": "thoracic-spine",
+      "codecBBoxErrorM": 7.252177550501337e-7
+    },
+    {
+      "part": "lumbar-spine",
+      "codecBBoxErrorM": 5.140848715265434e-7
+    },
+    {
+      "part": "sacrum",
+      "codecBBoxErrorM": 9.039288209264362e-8
+    },
+    {
+      "part": "coccyx",
+      "codecBBoxErrorM": 1.752380955274968e-7
+    },
+    {
+      "part": "sternum",
+      "codecBBoxErrorM": 6.608078883217627e-7
+    },
+    {
+      "part": "ribs-l",
+      "codecBBoxErrorM": 0.0000012338792896304795
+    },
+    {
+      "part": "ribs-r",
+      "codecBBoxErrorM": 0.0000015434825424431864
+    },
+    {
+      "part": "clavicle-l",
+      "codecBBoxErrorM": 6.08781225847066e-8
+    },
+    {
+      "part": "clavicle-r",
+      "codecBBoxErrorM": 6.100380824797247e-8
+    },
+    {
+      "part": "scapula-l",
+      "codecBBoxErrorM": 0.0000011978177098942444
+    },
+    {
+      "part": "scapula-r",
+      "codecBBoxErrorM": 9.224759630332979e-7
+    },
+    {
+      "part": "humerus-l",
+      "codecBBoxErrorM": 0.0000022310914061692
+    },
+    {
+      "part": "humerus-r",
+      "codecBBoxErrorM": 0.0000022270493963659488
+    },
+    {
+      "part": "radius-l",
+      "codecBBoxErrorM": 0.0000012657664570647764
+    },
+    {
+      "part": "radius-r",
+      "codecBBoxErrorM": 0.0000012695840261311986
+    },
+    {
+      "part": "ulna-l",
+      "codecBBoxErrorM": 0.0000011322861714624377
+    },
+    {
+      "part": "ulna-r",
+      "codecBBoxErrorM": 0.0000011364501374053204
+    },
+    {
+      "part": "hand-l",
+      "codecBBoxErrorM": 3.00143115333773e-7
+    },
+    {
+      "part": "hand-r",
+      "codecBBoxErrorM": 3.213492440479193e-7
+    },
+    {
+      "part": "hip-bone-l",
+      "codecBBoxErrorM": 0.0000011120946912523966
+    },
+    {
+      "part": "hip-bone-r",
+      "codecBBoxErrorM": 0.000001113505327304809
+    },
+    {
+      "part": "femur-l",
+      "codecBBoxErrorM": 0.000001240748686404114
+    },
+    {
+      "part": "femur-r",
+      "codecBBoxErrorM": 0.000001238911819578803
+    },
+    {
+      "part": "patella-l",
+      "codecBBoxErrorM": 2.703024271077936e-7
+    },
+    {
+      "part": "patella-r",
+      "codecBBoxErrorM": 2.6660606633477357e-7
+    },
+    {
+      "part": "tibia-l",
+      "codecBBoxErrorM": 0.0000018779629775422801
+    },
+    {
+      "part": "tibia-r",
+      "codecBBoxErrorM": 0.0000018785466385506933
+    },
+    {
+      "part": "fibula-l",
+      "codecBBoxErrorM": 0.000002044446406737621
+    },
+    {
+      "part": "fibula-r",
+      "codecBBoxErrorM": 0.0000020461573397440036
+    },
+    {
+      "part": "foot-l",
+      "codecBBoxErrorM": 2.8517561245777756e-7
+    },
+    {
+      "part": "foot-r",
+      "codecBBoxErrorM": 2.852854805723837e-7
+    },
+    {
+      "part": "carpal-scaphoid",
+      "codecBBoxErrorM": 8.863492213968815e-8
+    },
+    {
+      "part": "carpal-lunate",
+      "codecBBoxErrorM": 1.2988379904238512e-7
+    },
+    {
+      "part": "carpal-capitate",
+      "codecBBoxErrorM": 2.405178491926563e-7
+    },
+    {
+      "part": "mcp-metacarpal",
+      "codecBBoxErrorM": 3.1315166193479627e-7
+    },
+    {
+      "part": "mcp-phalanx",
+      "codecBBoxErrorM": 2.264676954855105e-7
+    },
+    {
+      "part": "thumb-trapezium",
+      "codecBBoxErrorM": 3.723694841362146e-8
+    },
+    {
+      "part": "thumb-metacarpal",
+      "codecBBoxErrorM": 1.7195303688571917e-7
+    },
+    {
+      "part": "biceps-l",
+      "codecBBoxErrorM": 0.0000018343037473111945
+    },
+    {
+      "part": "triceps-l",
+      "codecBBoxErrorM": 0.0000015607928358085665
+    },
+    {
+      "part": "skin-outline",
+      "codecBBoxErrorM": 0.000002653060639123961
+    }
+  ]
+}

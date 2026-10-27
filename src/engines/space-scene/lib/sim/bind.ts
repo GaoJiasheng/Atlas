@@ -14,6 +14,7 @@
 import type { SimBind, SimCondition, SimData, SimSettle, SimValue, SimValues, STRETCH_ANCHORS } from '../../sim-schema';
 import type { SimOutputs, SimOutputValue } from './index';
 import { isTimeline } from './timeline';
+import type { Angles } from '../rig';
 import { ringPoint } from './magnet';
 import { normalize3, type Vec3 } from '../math';
 import type { BendMode } from '../bend';
@@ -187,6 +188,8 @@ export function placeDirection(from: Vec3, to: Vec3, t: number, out: Vec3): void
 }
 
 export interface SimEffects {
+  /** Numeric overrides by exact rig joint and movement, never mirrored. */
+  joints: Map<string, Angles>;
   /** Parts a `visible` binding hides. */
   hidden: Set<string>;
   /** Parts a `pose` binding moves: the pose name (null: rest). */
@@ -263,6 +266,7 @@ export function slotTint<T>(slot: number, highlight: T, sim: T | null): T {
 
 export function simEffects(sim: SimData, values: SimValues, outputs: SimOutputs): SimEffects {
   const out: SimEffects = {
+    joints: new Map(),
     hidden: new Set(),
     poses: new Map(),
     glow: new Map(),
@@ -285,7 +289,13 @@ export function simEffects(sim: SimData, values: SimValues, outputs: SimOutputs)
   for (const b of sim.bind as SimBind[]) {
     const v = b.control !== undefined ? values[b.control] : outputs[b.output!];
     const first = b.output !== undefined ? firstState.get(b.output) : undefined;
-    if ('part' in b) {
+    if ('joint' in b) {
+      const w = b.when;
+      const active = !w || holds(w.is, w.control !== undefined ? values[w.control] : outputs[w.output!], w.output !== undefined ? firstState.get(w.output) : undefined);
+      const deg = typeof v === 'number' ? (v - b.angle.origin) * b.angle.per : NaN;
+      if (active && Number.isFinite(deg) && Math.abs(deg) <= 180)
+        out.joints.set(b.joint, { ...(out.joints.get(b.joint) ?? {}), [b.movement]: deg });
+    } else if ('part' in b) {
       const ids = Array.isArray(b.part) ? b.part : [b.part];
       const vector = b.shift && v !== undefined && typeof v === 'object' && !isTimeline(v) ? v : null;
       const order = vector ? shiftOrder(vector) : null;

@@ -1,0 +1,19 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "Atlas numeric joint binding design study: docs/57 §4; ideal static model r=0.04 m, no forearm weight.",
+        "zh": "Atlas数字关节绑定设计研究：docs/57第4节；理想静力模型r=0.04米，不含前臂自重。"
+      },
+      "design": true
+    },
+    {
+      "id": "S2",
+      "text": {
+        "en": "Z-Anatomy / BodyParts3D arm geometry, reused from muscles-arms, CC BY-SA 4.0. See scripts/anatomy/README.md.",
+        "zh": "Z-Anatomy / BodyParts3D手臂网格，复用muscles-arms，CC BY-SA 4.0。见scripts/anatomy/README.md。"
+      }
+    }
+  ]
+}

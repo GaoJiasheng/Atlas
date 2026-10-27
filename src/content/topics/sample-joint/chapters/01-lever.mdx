@@ -1,0 +1,31 @@
+---
+id: lever
+order: 1
+title: { en: "Change one elbow", zh: "改变一侧肘角" }
+state:
+  view: assembled
+  run: false
+  pose: baseline
+  layers: [skeleton]
+  summary: { en: "The lookup table controls only left elbow flexion.", zh: "查值表只控制左肘屈曲。" }
+  sim:
+    set: { mode: lever }
+    try:
+      vary: elbow-angle
+      also: [load-force, load-distance, mode]
+      observe: [angle, load-arm, muscle-force]
+      record: true
+  index: { parts: [humerus, radius, ulna, hand, humerus-r, radius-r, ulna-r, hand-r] }
+---
+
+<Lang en>
+
+These are ideal static SIM readings, with a fixed 0.04 m muscle moment arm. The right elbow and left forearm pronation keep their reference values. The anatomy moves through its existing bone hierarchy.
+
+</Lang>
+
+<Lang zh>
+
+这些是理想静力模型读数，肌肉力臂固定为0.04米。右肘和左前臂旋前保持参考值。解剖模型通过既有骨架父链活动。
+
+</Lang>

@@ -84,6 +84,38 @@ The glb and the geometry derived from it (`scripts/anatomy/heart-lungs/centrelin
 `landmarks.json`, `routes.json`, and the flow paths, pivots and camera targets taken
 from them into the topic's `parts.json`) are CC BY-SA 4.0.
 
+### Bones and joints (`public/models/bones-and-joints.glb`)
+
+The adult skeleton, seven hand-bone detail specimens, two arm-muscle groups and
+body outline derive from the cached Z-Anatomy / BodyParts3D anatomy sources.
+The GLB carries the upstream attribution:
+
+```
+BodyParts3D - The Database Center for Life Science - CC-BY-SA 2.1 Japan
+Z-Anatomy - The open source atlas of anatomy - CC-BY-SA 4.0
+```
+
+Source: https://github.com/LluisV/Z-Anatomy. BodyParts3D's current distribution
+is CC BY 4.0 (https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html); that
+does not replace the CC BY-SA 4.0 terms of the selected Z-Anatomy derivative.
+Changes for Atlas: source structures selected and grouped, simplified within
+sampled surface tolerances, renamed and rigidly assigned to existing joints;
+existing muscle skinning retained; joint-detail specimens repositioned and
+original teaching sections and an ideal lever added. The topic-local export
+path and its limitations are recorded in `scripts/anatomy/bones-joints/`.
+
+The GLB, the entire topic `data/parts.json`, derived rig/manifest/audit/previews
+and model screenshots are CC BY-SA 4.0. Atlas's original geometry, labels and
+mathematical configuration in that packet are offered under the same licence.
+OpenStax teaching prose is kept in separate NC-SA chapters/glossary; no
+OpenStax image, diagram or prose is baked into the BY-SA geometry packet.
+The independent graphite illustrations retain CC BY-NC-SA 4.0 and are not
+model-render derivatives. See `LICENSE-CONTENT` and the topic's
+`data/SOURCES.md` for the file boundaries.
+
+The draft `sample-joint` fixture reuses `muscles-arms.glb` and its rig. Its
+`data/parts.json` is also CC BY-SA 4.0 with the same upstream attribution.
+
 ## Fonts and libraries
 
 | Work | Licence |

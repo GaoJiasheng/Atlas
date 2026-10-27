@@ -590,6 +590,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
             ...(sim.table ? { sources: Object.fromEntries(Object.entries(tableSources(sim.table, values)).filter(([id]) => sim.outputs.find((o) => o.id === id)?.tag === 'typical')) } : {}),
           };
         },
+        joint: (id: string) => { const j = bridge.joints.get(id); return j ? structuredClone(j) : null; },
         shadows: () => Object.fromEntries(bridge.shadows),
         mechanism: (id: string) => {
           const m = bridge.mechanisms.get(id);

@@ -124,6 +124,8 @@ export interface MechanismReading {
 export type MechanismSave = Record<string, { thetaRad: number; qaHold: boolean }>;
 
 export interface StageBridge {
+  /** Actual rig rotations and world origins after skinning motion (QA only). */
+  joints: Map<string, { angles: Record<string, number>; position: number[]; quaternion: number[] }>;
   mechanisms: Map<string, MechanismReading>;
   seekMechanism(id: string, deg: number): boolean;
   resetMechanisms(): void;
@@ -214,6 +216,7 @@ export function createBridge(): StageBridge {
     fills: new Map(),
     animations: new Map(),
     copies: new Map(),
+    joints: new Map(),
     tints: new Map(),
     bends: new Map(),
     shifts: new Map(),

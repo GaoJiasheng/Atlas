@@ -1,0 +1,3934 @@
+{
+  "model": "/models/bones-and-joints.glb",
+  "parts": [
+    {
+      "id": "skull",
+      "name": {
+        "en": "Skull",
+        "zh": "颅骨组"
+      },
+      "group": "axial",
+      "mesh": "skull",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Surrounds and protects the brain.",
+        "zh": "围护脑。"
+      },
+      "detail": {
+        "en": "Surrounds and protects the brain. This selectable region contains several named source structures. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "围护脑。 此可选区域合并多项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": [
+        "mandible",
+        "cervical-spine"
+      ]
+    },
+    {
+      "id": "mandible",
+      "name": {
+        "en": "Mandible",
+        "zh": "下颌骨"
+      },
+      "group": "axial",
+      "mesh": "mandible",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Carries the lower teeth and moves at the jaw.",
+        "zh": "承托下牙，并在颌关节活动。"
+      },
+      "detail": {
+        "en": "Carries the lower teeth and moves at the jaw. This selectable region contains one named source structure. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "承托下牙，并在颌关节活动。 此可选区域对应一项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": []
+    },
+    {
+      "id": "cervical-spine",
+      "name": {
+        "en": "Cervical spine",
+        "zh": "颈椎组"
+      },
+      "group": "axial",
+      "mesh": "cervical-spine",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Supports the head above the trunk.",
+        "zh": "在躯干上方支撑头部。"
+      },
+      "detail": {
+        "en": "Supports the head above the trunk. This selectable region contains several named source structures. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "在躯干上方支撑头部。 此可选区域合并多项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": [
+        "thoracic-spine"
+      ]
+    },
+    {
+      "id": "thoracic-spine",
+      "name": {
+        "en": "Thoracic spine",
+        "zh": "胸椎组"
+      },
+      "group": "axial",
+      "mesh": "thoracic-spine",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Supports the ribs along the back.",
+        "zh": "在背部承托肋骨。"
+      },
+      "detail": {
+        "en": "Supports the ribs along the back. This selectable region contains several named source structures. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "在背部承托肋骨。 此可选区域合并多项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": [
+        "lumbar-spine",
+        "ribs-l",
+        "ribs-r"
+      ]
+    },
+    {
+      "id": "lumbar-spine",
+      "name": {
+        "en": "Lumbar spine",
+        "zh": "腰椎组"
+      },
+      "group": "axial",
+      "mesh": "lumbar-spine",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Transfers trunk load towards the pelvis.",
+        "zh": "把躯干负重传向骨盆。"
+      },
+      "detail": {
+        "en": "Transfers trunk load towards the pelvis. This selectable region contains several named source structures. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "把躯干负重传向骨盆。 此可选区域合并多项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": [
+        "sacrum"
+      ]
+    },
+    {
+      "id": "sacrum",
+      "name": {
+        "en": "Sacrum",
+        "zh": "骶骨"
+      },
+      "group": "axial",
+      "mesh": "sacrum",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Links the spine with the pelvic ring.",
+        "zh": "连接脊柱与骨盆环。"
+      },
+      "detail": {
+        "en": "Links the spine with the pelvic ring. This selectable region contains one named source structure. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "连接脊柱与骨盆环。 此可选区域对应一项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": [
+        "coccyx",
+        "hip-bone-l",
+        "hip-bone-r"
+      ]
+    },
+    {
+      "id": "coccyx",
+      "name": {
+        "en": "Coccyx",
+        "zh": "尾骨"
+      },
+      "group": "axial",
+      "mesh": "coccyx",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Forms the small lower end of the spine.",
+        "zh": "构成脊柱下端的小骨段。"
+      },
+      "detail": {
+        "en": "Forms the small lower end of the spine. This selectable region contains one named source structure. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "构成脊柱下端的小骨段。 此可选区域对应一项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": []
+    },
+    {
+      "id": "sternum",
+      "name": {
+        "en": "Sternum",
+        "zh": "胸骨"
+      },
+      "group": "axial",
+      "mesh": "sternum",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Supports the front of the ribcage.",
+        "zh": "支撑胸廓前方。"
+      },
+      "detail": {
+        "en": "Supports the front of the ribcage. This selectable region contains several named source structures. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "支撑胸廓前方。 此可选区域合并多项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": [
+        "clavicle-l",
+        "clavicle-r"
+      ]
+    },
+    {
+      "id": "ribs-l",
+      "name": {
+        "en": "Ribs and costal cartilage · left",
+        "zh": "肋骨与肋软骨·左"
+      },
+      "group": "axial",
+      "mesh": "ribs-l",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Curve around the heart and lungs.",
+        "zh": "弯绕在心脏和肺的外侧。"
+      },
+      "detail": {
+        "en": "Curve around the heart and lungs. This selectable region contains several named source structures. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "弯绕在心脏和肺的外侧。 此可选区域合并多项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": [
+        "sternum"
+      ]
+    },
+    {
+      "id": "ribs-r",
+      "name": {
+        "en": "Ribs and costal cartilage · right",
+        "zh": "肋骨与肋软骨·右"
+      },
+      "group": "axial",
+      "mesh": "ribs-r",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Curve around the heart and lungs.",
+        "zh": "弯绕在心脏和肺的外侧。"
+      },
+      "detail": {
+        "en": "Curve around the heart and lungs. This selectable region contains several named source structures. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "弯绕在心脏和肺的外侧。 此可选区域合并多项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": [
+        "sternum"
+      ]
+    },
+    {
+      "id": "clavicle-l",
+      "name": {
+        "en": "Clavicle · left",
+        "zh": "锁骨·左"
+      },
+      "group": "appendicular",
+      "mesh": "clavicle-l",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Holds the shoulder away from the chest.",
+        "zh": "把肩部撑在胸廓外侧。"
+      },
+      "detail": {
+        "en": "Holds the shoulder away from the chest. This selectable region contains one named source structure. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "把肩部撑在胸廓外侧。 此可选区域对应一项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": [
+        "scapula-l"
+      ]
+    },
+    {
+      "id": "clavicle-r",
+      "name": {
+        "en": "Clavicle · right",
+        "zh": "锁骨·右"
+      },
+      "group": "appendicular",
+      "mesh": "clavicle-r",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Holds the shoulder away from the chest.",
+        "zh": "把肩部撑在胸廓外侧。"
+      },
+      "detail": {
+        "en": "Holds the shoulder away from the chest. This selectable region contains one named source structure. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "把肩部撑在胸廓外侧。 此可选区域对应一项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": [
+        "scapula-r"
+      ]
+    },
+    {
+      "id": "scapula-l",
+      "name": {
+        "en": "Scapula · left",
+        "zh": "肩胛骨·左"
+      },
+      "group": "appendicular",
+      "mesh": "scapula-l",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Provides the socket for the upper arm.",
+        "zh": "为上臂提供关节窝。"
+      },
+      "detail": {
+        "en": "Provides the socket for the upper arm. This selectable region contains one named source structure. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "为上臂提供关节窝。 此可选区域对应一项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": [
+        "humerus-l"
+      ]
+    },
+    {
+      "id": "scapula-r",
+      "name": {
+        "en": "Scapula · right",
+        "zh": "肩胛骨·右"
+      },
+      "group": "appendicular",
+      "mesh": "scapula-r",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Provides the socket for the upper arm.",
+        "zh": "为上臂提供关节窝。"
+      },
+      "detail": {
+        "en": "Provides the socket for the upper arm. This selectable region contains one named source structure. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "为上臂提供关节窝。 此可选区域对应一项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": [
+        "humerus-r"
+      ]
+    },
+    {
+      "id": "humerus-l",
+      "name": {
+        "en": "Humerus · left",
+        "zh": "肱骨·左"
+      },
+      "group": "appendicular",
+      "mesh": "humerus-l",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Acts as the upper arm’s bony lever.",
+        "zh": "构成上臂的骨性杠杆。"
+      },
+      "detail": {
+        "en": "Acts as the upper arm’s bony lever. This selectable region contains one named source structure. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "构成上臂的骨性杠杆。 此可选区域对应一项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": [
+        "radius-l",
+        "ulna-l"
+      ]
+    },
+    {
+      "id": "humerus-r",
+      "name": {
+        "en": "Humerus · right",
+        "zh": "肱骨·右"
+      },
+      "group": "appendicular",
+      "mesh": "humerus-r",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Acts as the upper arm’s bony lever.",
+        "zh": "构成上臂的骨性杠杆。"
+      },
+      "detail": {
+        "en": "Acts as the upper arm’s bony lever. This selectable region contains one named source structure. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "构成上臂的骨性杠杆。 此可选区域对应一项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": [
+        "radius-r",
+        "ulna-r"
+      ]
+    },
+    {
+      "id": "radius-l",
+      "name": {
+        "en": "Radius · left",
+        "zh": "桡骨·左"
+      },
+      "group": "appendicular",
+      "mesh": "radius-l",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Turns with the hand around the ulna.",
+        "zh": "随手绕尺骨转动。"
+      },
+      "detail": {
+        "en": "Turns with the hand around the ulna. This selectable region contains one named source structure. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "随手绕尺骨转动。 此可选区域对应一项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": [
+        "hand-l"
+      ]
+    },
+    {
+      "id": "radius-r",
+      "name": {
+        "en": "Radius · right",
+        "zh": "桡骨·右"
+      },
+      "group": "appendicular",
+      "mesh": "radius-r",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Turns with the hand around the ulna.",
+        "zh": "随手绕尺骨转动。"
+      },
+      "detail": {
+        "en": "Turns with the hand around the ulna. This selectable region contains one named source structure. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "随手绕尺骨转动。 此可选区域对应一项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": [
+        "hand-r"
+      ]
+    },
+    {
+      "id": "ulna-l",
+      "name": {
+        "en": "Ulna · left",
+        "zh": "尺骨·左"
+      },
+      "group": "appendicular",
+      "mesh": "ulna-l",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Forms the main hinge at the elbow.",
+        "zh": "构成肘部主要的铰链结构。"
+      },
+      "detail": {
+        "en": "Forms the main hinge at the elbow. This selectable region contains one named source structure. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "构成肘部主要的铰链结构。 此可选区域对应一项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": [
+        "hand-l"
+      ]
+    },
+    {
+      "id": "ulna-r",
+      "name": {
+        "en": "Ulna · right",
+        "zh": "尺骨·右"
+      },
+      "group": "appendicular",
+      "mesh": "ulna-r",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Forms the main hinge at the elbow.",
+        "zh": "构成肘部主要的铰链结构。"
+      },
+      "detail": {
+        "en": "Forms the main hinge at the elbow. This selectable region contains one named source structure. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "构成肘部主要的铰链结构。 此可选区域对应一项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": [
+        "hand-r"
+      ]
+    },
+    {
+      "id": "hand-l",
+      "name": {
+        "en": "Hand bones · left",
+        "zh": "手骨组·左"
+      },
+      "group": "appendicular",
+      "mesh": "hand-l",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Support the palm and fingers as a linked group.",
+        "zh": "共同支撑手掌与手指。"
+      },
+      "detail": {
+        "en": "Support the palm and fingers as a linked group. This selectable region contains several named source structures. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "共同支撑手掌与手指。 此可选区域合并多项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": []
+    },
+    {
+      "id": "hand-r",
+      "name": {
+        "en": "Hand bones · right",
+        "zh": "手骨组·右"
+      },
+      "group": "appendicular",
+      "mesh": "hand-r",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Support the palm and fingers as a linked group.",
+        "zh": "共同支撑手掌与手指。"
+      },
+      "detail": {
+        "en": "Support the palm and fingers as a linked group. This selectable region contains several named source structures. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "共同支撑手掌与手指。 此可选区域合并多项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": []
+    },
+    {
+      "id": "hip-bone-l",
+      "name": {
+        "en": "Hip bone · left",
+        "zh": "髋骨·左"
+      },
+      "group": "appendicular",
+      "mesh": "hip-bone-l",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Transfers weight and holds the hip socket.",
+        "zh": "传递负重，并构成髋关节窝。"
+      },
+      "detail": {
+        "en": "Transfers weight and holds the hip socket. This selectable region contains one named source structure. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "传递负重，并构成髋关节窝。 此可选区域对应一项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": [
+        "femur-l"
+      ]
+    },
+    {
+      "id": "hip-bone-r",
+      "name": {
+        "en": "Hip bone · right",
+        "zh": "髋骨·右"
+      },
+      "group": "appendicular",
+      "mesh": "hip-bone-r",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Transfers weight and holds the hip socket.",
+        "zh": "传递负重，并构成髋关节窝。"
+      },
+      "detail": {
+        "en": "Transfers weight and holds the hip socket. This selectable region contains one named source structure. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "传递负重，并构成髋关节窝。 此可选区域对应一项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": [
+        "femur-r"
+      ]
+    },
+    {
+      "id": "femur-l",
+      "name": {
+        "en": "Femur · left",
+        "zh": "股骨·左"
+      },
+      "group": "appendicular",
+      "mesh": "femur-l",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Carries load along the thigh.",
+        "zh": "沿大腿传递负重。"
+      },
+      "detail": {
+        "en": "Carries load along the thigh. This selectable region contains one named source structure. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "沿大腿传递负重。 此可选区域对应一项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": [
+        "patella-l",
+        "tibia-l"
+      ]
+    },
+    {
+      "id": "femur-r",
+      "name": {
+        "en": "Femur · right",
+        "zh": "股骨·右"
+      },
+      "group": "appendicular",
+      "mesh": "femur-r",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Carries load along the thigh.",
+        "zh": "沿大腿传递负重。"
+      },
+      "detail": {
+        "en": "Carries load along the thigh. This selectable region contains one named source structure. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "沿大腿传递负重。 此可选区域对应一项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": [
+        "patella-r",
+        "tibia-r"
+      ]
+    },
+    {
+      "id": "patella-l",
+      "name": {
+        "en": "Patella · left",
+        "zh": "髌骨·左"
+      },
+      "group": "appendicular",
+      "mesh": "patella-l",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Redirects the front thigh tendon at the knee.",
+        "zh": "在膝前改变大腿前侧肌腱的走向。"
+      },
+      "detail": {
+        "en": "Redirects the front thigh tendon at the knee. This selectable region contains one named source structure. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "在膝前改变大腿前侧肌腱的走向。 此可选区域对应一项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": []
+    },
+    {
+      "id": "patella-r",
+      "name": {
+        "en": "Patella · right",
+        "zh": "髌骨·右"
+      },
+      "group": "appendicular",
+      "mesh": "patella-r",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Redirects the front thigh tendon at the knee.",
+        "zh": "在膝前改变大腿前侧肌腱的走向。"
+      },
+      "detail": {
+        "en": "Redirects the front thigh tendon at the knee. This selectable region contains one named source structure. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "在膝前改变大腿前侧肌腱的走向。 此可选区域对应一项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": []
+    },
+    {
+      "id": "tibia-l",
+      "name": {
+        "en": "Tibia · left",
+        "zh": "胫骨·左"
+      },
+      "group": "appendicular",
+      "mesh": "tibia-l",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Carries most lower-leg weight towards the ankle.",
+        "zh": "把小腿大部分负重传向踝部。"
+      },
+      "detail": {
+        "en": "Carries most lower-leg weight towards the ankle. This selectable region contains one named source structure. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "把小腿大部分负重传向踝部。 此可选区域对应一项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": [
+        "foot-l"
+      ]
+    },
+    {
+      "id": "tibia-r",
+      "name": {
+        "en": "Tibia · right",
+        "zh": "胫骨·右"
+      },
+      "group": "appendicular",
+      "mesh": "tibia-r",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Carries most lower-leg weight towards the ankle.",
+        "zh": "把小腿大部分负重传向踝部。"
+      },
+      "detail": {
+        "en": "Carries most lower-leg weight towards the ankle. This selectable region contains one named source structure. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "把小腿大部分负重传向踝部。 此可选区域对应一项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": [
+        "foot-r"
+      ]
+    },
+    {
+      "id": "fibula-l",
+      "name": {
+        "en": "Fibula · left",
+        "zh": "腓骨·左"
+      },
+      "group": "appendicular",
+      "mesh": "fibula-l",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Supports the outer side of the ankle.",
+        "zh": "支撑踝关节外侧。"
+      },
+      "detail": {
+        "en": "Supports the outer side of the ankle. This selectable region contains one named source structure. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "支撑踝关节外侧。 此可选区域对应一项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": [
+        "tibia-l",
+        "foot-l"
+      ]
+    },
+    {
+      "id": "fibula-r",
+      "name": {
+        "en": "Fibula · right",
+        "zh": "腓骨·右"
+      },
+      "group": "appendicular",
+      "mesh": "fibula-r",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Supports the outer side of the ankle.",
+        "zh": "支撑踝关节外侧。"
+      },
+      "detail": {
+        "en": "Supports the outer side of the ankle. This selectable region contains one named source structure. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "支撑踝关节外侧。 此可选区域对应一项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": [
+        "tibia-r",
+        "foot-r"
+      ]
+    },
+    {
+      "id": "foot-l",
+      "name": {
+        "en": "Foot bones · left",
+        "zh": "足骨组·左"
+      },
+      "group": "appendicular",
+      "mesh": "foot-l",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Share load through the heel, arches and toes.",
+        "zh": "经足跟、足弓和足趾分担负重。"
+      },
+      "detail": {
+        "en": "Share load through the heel, arches and toes. This selectable region contains several named source structures. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "经足跟、足弓和足趾分担负重。 此可选区域合并多项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": []
+    },
+    {
+      "id": "foot-r",
+      "name": {
+        "en": "Foot bones · right",
+        "zh": "足骨组·右"
+      },
+      "group": "appendicular",
+      "mesh": "foot-r",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Share load through the heel, arches and toes.",
+        "zh": "经足跟、足弓和足趾分担负重。"
+      },
+      "detail": {
+        "en": "Share load through the heel, arches and toes. This selectable region contains several named source structures. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. [S30]",
+        "zh": "经足跟、足弓和足趾分担负重。 此可选区域合并多项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。[S30]"
+      },
+      "connects": []
+    },
+    {
+      "id": "carpal-scaphoid",
+      "name": {
+        "en": "Scaphoid",
+        "zh": "舟骨"
+      },
+      "group": "joint-detail",
+      "mesh": "carpal-scaphoid",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Meets neighbouring wrist bones.",
+        "zh": "与相邻腕骨相接。"
+      },
+      "detail": {
+        "en": "Meets neighbouring wrist bones. This selectable region contains one named source structure. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. This is a translated close-up from the left hand; the same scale and relative source positions are retained. [S30]",
+        "zh": "与相邻腕骨相接。 此可选区域对应一项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。这是从左手平移出的近景，保留原尺度和相对位置。[S30]"
+      },
+      "connects": [
+        "carpal-lunate",
+        "carpal-capitate"
+      ]
+    },
+    {
+      "id": "carpal-lunate",
+      "name": {
+        "en": "Lunate",
+        "zh": "月骨"
+      },
+      "group": "joint-detail",
+      "mesh": "carpal-lunate",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Shares the curved wrist contact region.",
+        "zh": "参与腕部弧形接触区。"
+      },
+      "detail": {
+        "en": "Shares the curved wrist contact region. This selectable region contains one named source structure. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. This is a translated close-up from the left hand; the same scale and relative source positions are retained. [S30]",
+        "zh": "参与腕部弧形接触区。 此可选区域对应一项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。这是从左手平移出的近景，保留原尺度和相对位置。[S30]"
+      },
+      "connects": [
+        "carpal-capitate"
+      ]
+    },
+    {
+      "id": "carpal-capitate",
+      "name": {
+        "en": "Capitate",
+        "zh": "头状骨"
+      },
+      "group": "joint-detail",
+      "mesh": "carpal-capitate",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Sits centrally among the wrist bones.",
+        "zh": "位于腕骨中央。"
+      },
+      "detail": {
+        "en": "Sits centrally among the wrist bones. This selectable region contains one named source structure. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. This is a translated close-up from the left hand; the same scale and relative source positions are retained. [S30]",
+        "zh": "位于腕骨中央。 此可选区域对应一项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。这是从左手平移出的近景，保留原尺度和相对位置。[S30]"
+      },
+      "connects": []
+    },
+    {
+      "id": "mcp-metacarpal",
+      "name": {
+        "en": "Index metacarpal",
+        "zh": "第二掌骨"
+      },
+      "group": "joint-detail",
+      "mesh": "mcp-metacarpal",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Forms the palm side of the index knuckle.",
+        "zh": "构成食指指根靠手掌的一侧。"
+      },
+      "detail": {
+        "en": "Forms the palm side of the index knuckle. This selectable region contains one named source structure. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. This is a translated close-up from the left hand; the same scale and relative source positions are retained. [S30]",
+        "zh": "构成食指指根靠手掌的一侧。 此可选区域对应一项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。这是从左手平移出的近景，保留原尺度和相对位置。[S30]"
+      },
+      "connects": [
+        "mcp-phalanx"
+      ]
+    },
+    {
+      "id": "mcp-phalanx",
+      "name": {
+        "en": "Index proximal phalanx",
+        "zh": "食指近节指骨"
+      },
+      "group": "joint-detail",
+      "mesh": "mcp-phalanx",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Moves on the index metacarpal head.",
+        "zh": "在第二掌骨头上活动。"
+      },
+      "detail": {
+        "en": "Moves on the index metacarpal head. This selectable region contains one named source structure. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. This is a translated close-up from the left hand; the same scale and relative source positions are retained. [S30]",
+        "zh": "在第二掌骨头上活动。 此可选区域对应一项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。这是从左手平移出的近景，保留原尺度和相对位置。[S30]"
+      },
+      "connects": []
+    },
+    {
+      "id": "thumb-trapezium",
+      "name": {
+        "en": "Trapezium",
+        "zh": "大多角骨"
+      },
+      "group": "joint-detail",
+      "mesh": "thumb-trapezium",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Provides the base surface for the thumb.",
+        "zh": "为拇指基部提供关节面。"
+      },
+      "detail": {
+        "en": "Provides the base surface for the thumb. This selectable region contains one named source structure. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. This is a translated close-up from the left hand; the same scale and relative source positions are retained. [S30]",
+        "zh": "为拇指基部提供关节面。 此可选区域对应一项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。这是从左手平移出的近景，保留原尺度和相对位置。[S30]"
+      },
+      "connects": [
+        "thumb-metacarpal"
+      ]
+    },
+    {
+      "id": "thumb-metacarpal",
+      "name": {
+        "en": "Thumb metacarpal",
+        "zh": "第一掌骨"
+      },
+      "group": "joint-detail",
+      "mesh": "thumb-metacarpal",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Moves over the trapezium at the thumb base.",
+        "zh": "在拇指基部的大多角骨上活动。"
+      },
+      "detail": {
+        "en": "Moves over the trapezium at the thumb base. This selectable region contains one named source structure. The source shape is retained at adult reference scale; the model selection count is not a count of individual bones. This is a translated close-up from the left hand; the same scale and relative source positions are retained. [S30]",
+        "zh": "在拇指基部的大多角骨上活动。 此可选区域对应一项命名源结构。模型保留成人参考比例，点选部件的数量不等于单块骨的数量。这是从左手平移出的近景，保留原尺度和相对位置。[S30]"
+      },
+      "connects": []
+    },
+    {
+      "id": "joint-cartilage-a",
+      "name": {
+        "en": "Upper cartilage face",
+        "zh": "上方软骨面"
+      },
+      "summary": {
+        "en": "Covers one side of the joint contact.",
+        "zh": "覆盖关节接触的一侧。"
+      },
+      "detail": {
+        "en": "Original qualitative teaching geometry. Proportions and separation are enlarged for reading; this is not a scanned specimen or a measurement [S34].",
+        "zh": "原创定性教学示意。比例和间距为便于观察而放大，不是扫描标本或测量结果 [S34]。"
+      },
+      "group": "joint-detail",
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.066
+        ],
+        "at": [
+          -2,
+          0.022,
+          0
+        ],
+        "color": "tissue",
+        "tint": "token:cold",
+        "scale": [
+          1,
+          0.13,
+          1
+        ]
+      },
+      "extra": [
+        {
+          "kind": "capsule",
+          "size": [
+            0.052,
+            0.11
+          ],
+          "at": [
+            -2,
+            0.129,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:bone"
+        }
+      ]
+    },
+    {
+      "id": "joint-cartilage-b",
+      "name": {
+        "en": "Lower cartilage face",
+        "zh": "下方软骨面"
+      },
+      "summary": {
+        "en": "Covers the opposing joint contact.",
+        "zh": "覆盖相对的关节接触面。"
+      },
+      "detail": {
+        "en": "Original qualitative teaching geometry. Proportions and separation are enlarged for reading; this is not a scanned specimen or a measurement [S34].",
+        "zh": "原创定性教学示意。比例和间距为便于观察而放大，不是扫描标本或测量结果 [S34]。"
+      },
+      "group": "joint-detail",
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.066
+        ],
+        "at": [
+          -2,
+          -0.022,
+          0
+        ],
+        "color": "tissue",
+        "tint": "token:cold",
+        "scale": [
+          1,
+          0.13,
+          1
+        ]
+      },
+      "extra": [
+        {
+          "kind": "capsule",
+          "size": [
+            0.052,
+            0.11
+          ],
+          "at": [
+            -2,
+            -0.129,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:bone"
+        }
+      ]
+    },
+    {
+      "id": "joint-capsule",
+      "name": {
+        "en": "Joint capsule",
+        "zh": "关节囊"
+      },
+      "summary": {
+        "en": "Encloses the joint cavity.",
+        "zh": "包围关节腔。"
+      },
+      "detail": {
+        "en": "Original qualitative teaching geometry. Proportions and separation are enlarged for reading; this is not a scanned specimen or a measurement [S34].",
+        "zh": "原创定性教学示意。比例和间距为便于观察而放大，不是扫描标本或测量结果 [S34]。"
+      },
+      "group": "joint-detail",
+      "primitive": {
+        "kind": "capsule",
+        "size": [
+          0.078,
+          0.1
+        ],
+        "at": [
+          -2,
+          0,
+          0
+        ],
+        "color": "membrane",
+        "tint": "token:neutral"
+      }
+    },
+    {
+      "id": "joint-ligament",
+      "name": {
+        "en": "Ligament bands",
+        "zh": "韧带示意带"
+      },
+      "summary": {
+        "en": "Connect bone to bone across the joint.",
+        "zh": "跨过关节连接骨与骨。"
+      },
+      "detail": {
+        "en": "Original qualitative teaching geometry. Proportions and separation are enlarged for reading; this is not a scanned specimen or a measurement [S34].",
+        "zh": "原创定性教学示意。比例和间距为便于观察而放大，不是扫描标本或测量结果 [S34]。"
+      },
+      "group": "joint-detail",
+      "primitive": {
+        "kind": "capsule",
+        "size": [
+          0.009,
+          0.17
+        ],
+        "at": [
+          -2.063,
+          0,
+          0.02
+        ],
+        "color": "tissue",
+        "tint": "token:cut"
+      },
+      "extra": [
+        {
+          "kind": "capsule",
+          "size": [
+            0.009,
+            0.17
+          ],
+          "at": [
+            -1.937,
+            0,
+            0.02
+          ],
+          "color": "tissue",
+          "tint": "token:cut"
+        }
+      ]
+    },
+    {
+      "id": "bone-cortex",
+      "name": {
+        "en": "Compact bone wall",
+        "zh": "骨密质壁"
+      },
+      "summary": {
+        "en": "Forms the dense outer wall of the specimen.",
+        "zh": "构成标本致密的外壁。"
+      },
+      "detail": {
+        "en": "Original qualitative teaching geometry. Proportions and separation are enlarged for reading; this is not a scanned specimen or a measurement [S34].",
+        "zh": "原创定性教学示意。比例和间距为便于观察而放大，不是扫描标本或测量结果 [S34]。"
+      },
+      "group": "bone-section",
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0.075,
+            -0.26
+          ],
+          [
+            0.082,
+            -0.23
+          ],
+          [
+            0.073,
+            -0.19
+          ],
+          [
+            0.045,
+            -0.13
+          ],
+          [
+            0.035,
+            -0.04
+          ],
+          [
+            0.037,
+            0.12
+          ],
+          [
+            0.068,
+            0.2
+          ],
+          [
+            0.075,
+            0.25
+          ],
+          [
+            0.047,
+            0.25
+          ],
+          [
+            0.043,
+            0.2
+          ],
+          [
+            0.022,
+            0.12
+          ],
+          [
+            0.021,
+            -0.04
+          ],
+          [
+            0.028,
+            -0.13
+          ],
+          [
+            0.048,
+            -0.19
+          ],
+          [
+            0.055,
+            -0.23
+          ],
+          [
+            0.05,
+            -0.26
+          ]
+        ],
+        "segments": 48,
+        "arc": 235,
+        "at": [
+          2,
+          0,
+          0
+        ],
+        "color": "tissue",
+        "tint": "token:bone"
+      }
+    },
+    {
+      "id": "bone-lattice",
+      "name": {
+        "en": "Spongy bone framework",
+        "zh": "骨松质网架"
+      },
+      "summary": {
+        "en": "Supports the ends with a hard branching framework.",
+        "zh": "以坚硬分支网架支撑骨端。"
+      },
+      "detail": {
+        "en": "Original qualitative teaching geometry. Proportions and separation are enlarged for reading; this is not a scanned specimen or a measurement [S34].",
+        "zh": "原创定性教学示意。比例和间距为便于观察而放大，不是扫描标本或测量结果 [S34]。"
+      },
+      "group": "bone-section",
+      "primitive": {
+        "kind": "tube",
+        "path": [
+          [
+            0.044,
+            -0.23299999999999998,
+            0
+          ],
+          [
+            -0.02057248383023656,
+            -0.197,
+            0.028315594803123165
+          ]
+        ],
+        "radius": 0.003,
+        "at": [
+          2,
+          0,
+          0
+        ],
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "extra": [
+        {
+          "kind": "tube",
+          "path": [
+            [
+              0.031112698372208092,
+              -0.23299999999999998,
+              0.031112698372208085
+            ],
+            [
+              -0.03456909192082982,
+              -0.197,
+              0.005475206276408085
+            ]
+          ],
+          "radius": 0.003,
+          "at": [
+            2,
+            0,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:bone"
+        },
+        {
+          "kind": "tube",
+          "path": [
+            [
+              2.694222958124177e-18,
+              -0.23299999999999998,
+              0.044
+            ],
+            [
+              -0.028315594803123165,
+              -0.197,
+              -0.02057248383023656
+            ]
+          ],
+          "radius": 0.003,
+          "at": [
+            2,
+            0,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:bone"
+        },
+        {
+          "kind": "tube",
+          "path": [
+            [
+              -0.031112698372208085,
+              -0.23299999999999998,
+              0.031112698372208092
+            ],
+            [
+              -0.005475206276408086,
+              -0.197,
+              -0.03456909192082982
+            ]
+          ],
+          "radius": 0.003,
+          "at": [
+            2,
+            0,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:bone"
+        },
+        {
+          "kind": "tube",
+          "path": [
+            [
+              -0.044,
+              -0.23299999999999998,
+              5.388445916248354e-18
+            ],
+            [
+              0.020572483830236556,
+              -0.197,
+              -0.028315594803123168
+            ]
+          ],
+          "radius": 0.003,
+          "at": [
+            2,
+            0,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:bone"
+        },
+        {
+          "kind": "tube",
+          "path": [
+            [
+              -0.031112698372208095,
+              -0.23299999999999998,
+              -0.031112698372208085
+            ],
+            [
+              0.03456909192082982,
+              -0.197,
+              -0.00547520627640809
+            ]
+          ],
+          "radius": 0.003,
+          "at": [
+            2,
+            0,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:bone"
+        },
+        {
+          "kind": "tube",
+          "path": [
+            [
+              -8.08266887437253e-18,
+              -0.23299999999999998,
+              -0.044
+            ],
+            [
+              0.028315594803123168,
+              -0.197,
+              0.020572483830236556
+            ]
+          ],
+          "radius": 0.003,
+          "at": [
+            2,
+            0,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:bone"
+        },
+        {
+          "kind": "tube",
+          "path": [
+            [
+              0.03111269837220808,
+              -0.23299999999999998,
+              -0.031112698372208095
+            ],
+            [
+              0.0054752062764080916,
+              -0.197,
+              0.03456909192082982
+            ]
+          ],
+          "radius": 0.003,
+          "at": [
+            2,
+            0,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:bone"
+        },
+        {
+          "kind": "tube",
+          "path": [
+            [
+              0.044,
+              0.17700000000000002,
+              0
+            ],
+            [
+              -0.02057248383023656,
+              0.213,
+              0.028315594803123165
+            ]
+          ],
+          "radius": 0.003,
+          "at": [
+            2,
+            0,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:bone"
+        },
+        {
+          "kind": "tube",
+          "path": [
+            [
+              0.031112698372208092,
+              0.17700000000000002,
+              0.031112698372208085
+            ],
+            [
+              -0.03456909192082982,
+              0.213,
+              0.005475206276408085
+            ]
+          ],
+          "radius": 0.003,
+          "at": [
+            2,
+            0,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:bone"
+        },
+        {
+          "kind": "tube",
+          "path": [
+            [
+              2.694222958124177e-18,
+              0.17700000000000002,
+              0.044
+            ],
+            [
+              -0.028315594803123165,
+              0.213,
+              -0.02057248383023656
+            ]
+          ],
+          "radius": 0.003,
+          "at": [
+            2,
+            0,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:bone"
+        },
+        {
+          "kind": "tube",
+          "path": [
+            [
+              -0.031112698372208085,
+              0.17700000000000002,
+              0.031112698372208092
+            ],
+            [
+              -0.005475206276408086,
+              0.213,
+              -0.03456909192082982
+            ]
+          ],
+          "radius": 0.003,
+          "at": [
+            2,
+            0,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:bone"
+        },
+        {
+          "kind": "tube",
+          "path": [
+            [
+              -0.044,
+              0.17700000000000002,
+              5.388445916248354e-18
+            ],
+            [
+              0.020572483830236556,
+              0.213,
+              -0.028315594803123168
+            ]
+          ],
+          "radius": 0.003,
+          "at": [
+            2,
+            0,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:bone"
+        },
+        {
+          "kind": "tube",
+          "path": [
+            [
+              -0.031112698372208095,
+              0.17700000000000002,
+              -0.031112698372208085
+            ],
+            [
+              0.03456909192082982,
+              0.213,
+              -0.00547520627640809
+            ]
+          ],
+          "radius": 0.003,
+          "at": [
+            2,
+            0,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:bone"
+        },
+        {
+          "kind": "tube",
+          "path": [
+            [
+              -8.08266887437253e-18,
+              0.17700000000000002,
+              -0.044
+            ],
+            [
+              0.028315594803123168,
+              0.213,
+              0.020572483830236556
+            ]
+          ],
+          "radius": 0.003,
+          "at": [
+            2,
+            0,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:bone"
+        },
+        {
+          "kind": "tube",
+          "path": [
+            [
+              0.03111269837220808,
+              0.17700000000000002,
+              -0.031112698372208095
+            ],
+            [
+              0.0054752062764080916,
+              0.213,
+              0.03456909192082982
+            ]
+          ],
+          "radius": 0.003,
+          "at": [
+            2,
+            0,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:bone"
+        }
+      ]
+    },
+    {
+      "id": "bone-marrow",
+      "name": {
+        "en": "Bone marrow",
+        "zh": "骨髓"
+      },
+      "summary": {
+        "en": "Occupies spaces inside the bone.",
+        "zh": "位于骨内的间隙。"
+      },
+      "detail": {
+        "en": "Original qualitative teaching geometry. Proportions and separation are enlarged for reading; this is not a scanned specimen or a measurement [S34].",
+        "zh": "原创定性教学示意。比例和间距为便于观察而放大，不是扫描标本或测量结果 [S34]。"
+      },
+      "group": "bone-section",
+      "primitive": {
+        "kind": "capsule",
+        "size": [
+          0.018,
+          0.29
+        ],
+        "at": [
+          2,
+          0,
+          0
+        ],
+        "color": "tissue",
+        "tint": "token:cut"
+      }
+    },
+    {
+      "id": "bone-vessel",
+      "name": {
+        "en": "Bone blood vessel",
+        "zh": "骨内血管"
+      },
+      "summary": {
+        "en": "Carries blood into the living bone.",
+        "zh": "把血液输送进活骨。"
+      },
+      "detail": {
+        "en": "Original qualitative teaching geometry. Proportions and separation are enlarged for reading; this is not a scanned specimen or a measurement [S34].",
+        "zh": "原创定性教学示意。比例和间距为便于观察而放大，不是扫描标本或测量结果 [S34]。"
+      },
+      "group": "bone-section",
+      "primitive": {
+        "kind": "tube",
+        "path": [
+          [
+            -0.11,
+            -0.03,
+            0.03
+          ],
+          [
+            -0.04,
+            -0.03,
+            0.03
+          ],
+          [
+            0,
+            -0.02,
+            0.02
+          ],
+          [
+            0,
+            0.14,
+            0.02
+          ]
+        ],
+        "radius": 0.0045,
+        "at": [
+          2,
+          0,
+          0
+        ],
+        "color": "tissue",
+        "tint": "token:blood-rich"
+      }
+    },
+    {
+      "id": "growth-plate",
+      "name": {
+        "en": "Growth plate",
+        "zh": "生长板示意"
+      },
+      "summary": {
+        "en": "Marks a growing bone’s cartilage region.",
+        "zh": "标示生长中骨的软骨区域。"
+      },
+      "detail": {
+        "en": "Original qualitative teaching geometry. Proportions and separation are enlarged for reading; this is not a scanned specimen or a measurement [S34].",
+        "zh": "原创定性教学示意。比例和间距为便于观察而放大，不是扫描标本或测量结果 [S34]。"
+      },
+      "group": "bone-section",
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.063,
+          0.063,
+          0.009
+        ],
+        "at": [
+          2,
+          0.179,
+          0
+        ],
+        "color": "tissue",
+        "tint": "token:cold"
+      }
+    },
+    {
+      "id": "remodel-patch",
+      "name": {
+        "en": "Remodelling patch",
+        "zh": "重塑示意区"
+      },
+      "summary": {
+        "en": "Marks a surface being renewed.",
+        "zh": "标示正在更新的骨表面。"
+      },
+      "detail": {
+        "en": "Original qualitative teaching geometry. Proportions and separation are enlarged for reading; this is not a scanned specimen or a measurement [S34].",
+        "zh": "原创定性教学示意。比例和间距为便于观察而放大，不是扫描标本或测量结果 [S34]。"
+      },
+      "group": "bone-section",
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.022
+        ],
+        "at": [
+          2.026,
+          0.02,
+          0.025
+        ],
+        "color": "tissue",
+        "tint": "token:cut",
+        "scale": [
+          0.3,
+          2.3,
+          1
+        ]
+      }
+    },
+    {
+      "id": "repair-stage-clot",
+      "name": {
+        "en": "Early clot specimen",
+        "zh": "血肿阶段标本"
+      },
+      "summary": {
+        "en": "Shows the early gap and clot.",
+        "zh": "显示早期断隙与血肿。"
+      },
+      "detail": {
+        "en": "Original qualitative teaching geometry. Proportions and separation are enlarged for reading; this is not a scanned specimen or a measurement [S34].",
+        "zh": "原创定性教学示意。比例和间距为便于观察而放大，不是扫描标本或测量结果 [S34]。"
+      },
+      "group": "bone-section",
+      "primitive": {
+        "kind": "capsule",
+        "size": [
+          0.032,
+          0.115
+        ],
+        "at": [
+          1.46,
+          -0.102,
+          0
+        ],
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "extra": [
+        {
+          "kind": "capsule",
+          "size": [
+            0.032,
+            0.115
+          ],
+          "at": [
+            1.46,
+            0.102,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:bone"
+        },
+        {
+          "kind": "sphere",
+          "size": [
+            0.05
+          ],
+          "at": [
+            1.46,
+            0,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:muscle-3",
+          "scale": [
+            1,
+            1.45,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "id": "repair-stage-soft",
+      "name": {
+        "en": "Soft bridge specimen",
+        "zh": "软骨痂阶段标本"
+      },
+      "summary": {
+        "en": "Shows a soft bridge around the break.",
+        "zh": "显示断处周围的软性桥接。"
+      },
+      "detail": {
+        "en": "Original qualitative teaching geometry. Proportions and separation are enlarged for reading; this is not a scanned specimen or a measurement [S34].",
+        "zh": "原创定性教学示意。比例和间距为便于观察而放大，不是扫描标本或测量结果 [S34]。"
+      },
+      "group": "bone-section",
+      "primitive": {
+        "kind": "capsule",
+        "size": [
+          0.032,
+          0.115
+        ],
+        "at": [
+          1.82,
+          -0.102,
+          0
+        ],
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "extra": [
+        {
+          "kind": "capsule",
+          "size": [
+            0.032,
+            0.115
+          ],
+          "at": [
+            1.82,
+            0.102,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:bone"
+        },
+        {
+          "kind": "sphere",
+          "size": [
+            0.05
+          ],
+          "at": [
+            1.82,
+            0,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:cold",
+          "scale": [
+            1,
+            1.45,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "id": "repair-stage-hard",
+      "name": {
+        "en": "Hard bridge specimen",
+        "zh": "硬骨痂阶段标本"
+      },
+      "summary": {
+        "en": "Shows a hard bony bridge.",
+        "zh": "显示硬的骨性桥接。"
+      },
+      "detail": {
+        "en": "Original qualitative teaching geometry. Proportions and separation are enlarged for reading; this is not a scanned specimen or a measurement [S34].",
+        "zh": "原创定性教学示意。比例和间距为便于观察而放大，不是扫描标本或测量结果 [S34]。"
+      },
+      "group": "bone-section",
+      "primitive": {
+        "kind": "capsule",
+        "size": [
+          0.032,
+          0.115
+        ],
+        "at": [
+          2.18,
+          -0.102,
+          0
+        ],
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "extra": [
+        {
+          "kind": "capsule",
+          "size": [
+            0.032,
+            0.115
+          ],
+          "at": [
+            2.18,
+            0.102,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:bone"
+        },
+        {
+          "kind": "sphere",
+          "size": [
+            0.05
+          ],
+          "at": [
+            2.18,
+            0,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:bone",
+          "scale": [
+            1,
+            1.45,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "id": "repair-stage-remodelled",
+      "name": {
+        "en": "Remodelled specimen",
+        "zh": "重塑阶段标本"
+      },
+      "summary": {
+        "en": "Shows the reshaped bone outline.",
+        "zh": "显示重新塑形的骨外形。"
+      },
+      "detail": {
+        "en": "Original qualitative teaching geometry. Proportions and separation are enlarged for reading; this is not a scanned specimen or a measurement [S34].",
+        "zh": "原创定性教学示意。比例和间距为便于观察而放大，不是扫描标本或测量结果 [S34]。"
+      },
+      "group": "bone-section",
+      "primitive": {
+        "kind": "capsule",
+        "size": [
+          0.032,
+          0.115
+        ],
+        "at": [
+          2.54,
+          -0.102,
+          0
+        ],
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "extra": [
+        {
+          "kind": "capsule",
+          "size": [
+            0.032,
+            0.115
+          ],
+          "at": [
+            2.54,
+            0.102,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:bone"
+        },
+        {
+          "kind": "sphere",
+          "size": [
+            0.033
+          ],
+          "at": [
+            2.54,
+            0,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:bone",
+          "scale": [
+            1,
+            1.2,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "id": "biceps-l",
+      "name": {
+        "en": "Biceps brachii · left",
+        "zh": "肱二头肌·左"
+      },
+      "summary": {
+        "en": "Pulls the radius to help bend the elbow.",
+        "zh": "拉动桡骨，协助屈肘。"
+      },
+      "detail": {
+        "en": "Real left-side source muscle heads are grouped here. The original source rig, weights and fibre fields are retained. Movement and tension displays are qualitative; attachment-face medical review remains pending [S30].",
+        "zh": "这里合并真实左侧源肌肉的各头，保留原有关节链、蒙皮权重和肌纤维字段。动作与张力显示为定性示意，附着骨面的专业解剖审查尚待完成 [S30]。"
+      },
+      "group": "pull-and-lever",
+      "mesh": "biceps-l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "connects": [
+        "scapula-l",
+        "radius-l"
+      ]
+    },
+    {
+      "id": "triceps-l",
+      "name": {
+        "en": "Triceps brachii · left",
+        "zh": "肱三头肌·左"
+      },
+      "summary": {
+        "en": "Pulls the ulna to help straighten the elbow.",
+        "zh": "拉动尺骨，协助伸肘。"
+      },
+      "detail": {
+        "en": "Real left-side source muscle heads are grouped here. The original source rig, weights and fibre fields are retained. Movement and tension displays are qualitative; attachment-face medical review remains pending [S30].",
+        "zh": "这里合并真实左侧源肌肉的各头，保留原有关节链、蒙皮权重和肌纤维字段。动作与张力显示为定性示意，附着骨面的专业解剖审查尚待完成 [S30]。"
+      },
+      "group": "pull-and-lever",
+      "mesh": "triceps-l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-2"
+      },
+      "connects": [
+        "scapula-l",
+        "humerus-l",
+        "ulna-l"
+      ]
+    },
+    {
+      "id": "flexor-tendon",
+      "name": {
+        "en": "Flexor tendon segment",
+        "zh": "屈肌腱段示意"
+      },
+      "summary": {
+        "en": "Transmits a pull towards the radius.",
+        "zh": "向桡骨传递拉力。"
+      },
+      "detail": {
+        "en": "Enlarged schematic tendon segment guided by the inherited source attachment candidate. It is not an isolated scanned tendon. The named attachment face remains pending review; no surface-accuracy approval is claimed [S30, S34].",
+        "zh": "依照继承的源附着候选位置放大的肌腱段示意，并非单独扫描的肌腱。命名附着骨面的审查尚待完成，不声称已通过骨面精度审查 [S30, S34]。"
+      },
+      "group": "pull-and-lever",
+      "primitive": {
+        "kind": "tube",
+        "path": [
+          [
+            0.2253011051416397,
+            -0.119674933552742,
+            0.023230873875319958
+          ],
+          [
+            0.2343011051416397,
+            -0.184674933552742,
+            0.011230873875319958
+          ]
+        ],
+        "radius": 0.004,
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "tissue",
+        "tint": "token:bone"
+      }
+    },
+    {
+      "id": "extensor-tendon",
+      "name": {
+        "en": "Extensor tendon segment",
+        "zh": "伸肌腱段示意"
+      },
+      "summary": {
+        "en": "Transmits a pull towards the ulna.",
+        "zh": "向尺骨传递拉力。"
+      },
+      "detail": {
+        "en": "Enlarged schematic tendon segment guided by the inherited source attachment candidate. It is not an isolated scanned tendon. The named attachment face remains pending review; no surface-accuracy approval is claimed [S30, S34].",
+        "zh": "依照继承的源附着候选位置放大的肌腱段示意，并非单独扫描的肌腱。命名附着骨面的审查尚待完成，不声称已通过骨面精度审查 [S30, S34]。"
+      },
+      "group": "pull-and-lever",
+      "primitive": {
+        "kind": "tube",
+        "path": [
+          [
+            0.2023610336780548,
+            -0.08415845882892609,
+            -0.03109981733560562
+          ],
+          [
+            0.2103610336780548,
+            -0.1471584588289261,
+            -0.02309981733560562
+          ]
+        ],
+        "radius": 0.004,
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "tissue",
+        "tint": "token:bone"
+      }
+    },
+    {
+      "id": "lever-beam",
+      "name": {
+        "en": "Ideal lever beam",
+        "zh": "理想杠杆梁"
+      },
+      "summary": {
+        "en": "Carries the load around a fixed pivot.",
+        "zh": "绕固定支点承托负载。"
+      },
+      "detail": {
+        "en": "A massless beam in an ideal planar balance. Its displayed length is 0.30 m. The load can be placed at 0.15 or 0.30 m from the pivot. The equivalent perpendicular pull acts 0.04 m from that pivot; it is not a diagram of the actual biceps line of pull [S34].",
+        "zh": "理想平面平衡中的无质量梁，显示长度为0.30 m。负载可放在距支点0.15或0.30 m处。等效垂直拉力作用在距支点0.04 m处，不代表真实肱二头肌的拉力方向 [S34]。"
+      },
+      "group": "pull-and-lever",
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.014,
+          0.3,
+          0.024
+        ],
+        "at": [
+          4,
+          -0.15,
+          0
+        ],
+        "color": "powder",
+        "tint": "token:ink-2",
+        "bevel": 0.003
+      }
+    },
+    {
+      "id": "lever-load",
+      "name": {
+        "en": "External load",
+        "zh": "外加负载"
+      },
+      "summary": {
+        "en": "Applies a vertical downward force.",
+        "zh": "施加竖直向下的力。"
+      },
+      "detail": {
+        "en": "An abstract point load. The force value is chosen in newtons, not inferred from this block’s size or material. Zero removes the external load force, not all real forces in a human arm [S34].",
+        "zh": "抽象点负载。力值用牛顿选择，不由方块的大小或材料推算。零表示无外加负载力，并不表示真实手臂上所有力都消失 [S34]。"
+      },
+      "group": "pull-and-lever",
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.042,
+          0.042,
+          0.042
+        ],
+        "at": [
+          4,
+          0,
+          0
+        ],
+        "color": "powder",
+        "tint": "token:cut",
+        "bevel": 0.004
+      }
+    },
+    {
+      "id": "skin-outline",
+      "name": {
+        "en": "Body outline",
+        "zh": "体表轮廓"
+      },
+      "summary": {
+        "en": "Locates the skeleton within the adult reference body.",
+        "zh": "在成人参考身体中定位骨架。"
+      },
+      "detail": {
+        "en": "Inherited source body surface, including the source hand pieces, retained as context [S30].",
+        "zh": "继承的源体表包含源手部表面，仅用于定位 [S30]。"
+      },
+      "mesh": "skin-outline",
+      "material": {
+        "color": "membrane",
+        "tint": "token:ink-3"
+      },
+      "context": true,
+      "shell": true
+    }
+  ],
+  "groups": [
+    {
+      "id": "axial",
+      "name": {
+        "en": "Axial skeleton",
+        "zh": "中轴骨架"
+      },
+      "color": "token:bone"
+    },
+    {
+      "id": "appendicular",
+      "name": {
+        "en": "Limbs and girdles",
+        "zh": "四肢与带骨"
+      },
+      "color": "token:bone"
+    },
+    {
+      "id": "joint-detail",
+      "name": {
+        "en": "Joint close-ups",
+        "zh": "关节近景"
+      },
+      "color": "token:cold"
+    },
+    {
+      "id": "bone-section",
+      "name": {
+        "en": "Inside living bone",
+        "zh": "活骨内部"
+      },
+      "color": "token:cut",
+      "card": false
+    },
+    {
+      "id": "pull-and-lever",
+      "name": {
+        "en": "Muscle pull and lever",
+        "zh": "肌肉拉力与杠杆"
+      },
+      "color": "token:muscle-1"
+    },
+    {
+      "id": "force-overlay",
+      "name": {
+        "en": "Equivalent forces",
+        "zh": "等效力"
+      },
+      "color": "token:f-push",
+      "card": false
+    }
+  ],
+  "flows": [],
+  "animations": [],
+  "rig": {
+    "joints": {
+      "trunk": {
+        "node": "joint.trunk",
+        "axes": {
+          "flexion": [
+            1,
+            0,
+            0
+          ],
+          "lateral-flexion": [
+            0,
+            0,
+            1
+          ],
+          "rotation": [
+            0,
+            1,
+            0
+          ]
+        }
+      },
+      "clavicle.l": {
+        "node": "joint.clavicle.l",
+        "axes": {
+          "protraction": [
+            0,
+            -1,
+            0
+          ],
+          "elevation": [
+            0,
+            0,
+            1
+          ]
+        }
+      },
+      "scapula.l": {
+        "node": "joint.scapula.l",
+        "axes": {
+          "protraction": [
+            0,
+            -1,
+            0
+          ],
+          "upward-rotation": [
+            0,
+            0,
+            1
+          ],
+          "elevation": [
+            0,
+            0,
+            1
+          ]
+        }
+      },
+      "shoulder.l": {
+        "node": "joint.shoulder.l",
+        "axes": {
+          "horizontal-adduction": [
+            0,
+            -1,
+            0
+          ],
+          "flexion": [
+            -1,
+            0,
+            0
+          ],
+          "abduction": [
+            0,
+            0,
+            1
+          ],
+          "internal-rotation": [
+            0.1801,
+            -0.9823,
+            -0.0505
+          ]
+        }
+      },
+      "elbow.l": {
+        "node": "joint.elbow.l",
+        "axes": {
+          "flexion": [
+            -1,
+            0,
+            0
+          ]
+        }
+      },
+      "forearm.l": {
+        "node": "joint.forearm.l",
+        "axes": {
+          "pronation": [
+            0.0751,
+            -0.9787,
+            0.191
+          ]
+        }
+      },
+      "hand.l": {
+        "node": "joint.hand.l",
+        "axes": {
+          "flexion": [
+            -1,
+            0,
+            0
+          ],
+          "abduction": [
+            0,
+            0,
+            1
+          ]
+        },
+        "offset": 0.08
+      },
+      "hip.l": {
+        "node": "joint.hip.l",
+        "axes": {
+          "flexion": [
+            -1,
+            0,
+            0
+          ],
+          "abduction": [
+            0,
+            0,
+            1
+          ],
+          "internal-rotation": [
+            -0.0219,
+            -0.9988,
+            -0.0436
+          ]
+        }
+      },
+      "knee.l": {
+        "node": "joint.knee.l",
+        "axes": {
+          "flexion": [
+            1,
+            0,
+            0
+          ],
+          "internal-rotation": [
+            0.0149,
+            -0.9995,
+            -0.0275
+          ]
+        }
+      },
+      "ankle.l": {
+        "node": "joint.ankle.l",
+        "axes": {
+          "dorsiflexion": [
+            -1,
+            0,
+            0
+          ],
+          "inversion": [
+            0,
+            0,
+            -1
+          ]
+        }
+      },
+      "clavicle.r": {
+        "node": "joint.clavicle.r",
+        "axes": {
+          "protraction": [
+            0,
+            1,
+            0
+          ],
+          "elevation": [
+            0,
+            0,
+            -1
+          ]
+        }
+      },
+      "scapula.r": {
+        "node": "joint.scapula.r",
+        "axes": {
+          "protraction": [
+            0,
+            1,
+            0
+          ],
+          "upward-rotation": [
+            0,
+            0,
+            -1
+          ],
+          "elevation": [
+            0,
+            0,
+            -1
+          ]
+        }
+      },
+      "shoulder.r": {
+        "node": "joint.shoulder.r",
+        "axes": {
+          "horizontal-adduction": [
+            0,
+            1,
+            0
+          ],
+          "flexion": [
+            -1,
+            0,
+            0
+          ],
+          "abduction": [
+            0,
+            0,
+            -1
+          ],
+          "internal-rotation": [
+            0.1801,
+            0.9823,
+            0.0505
+          ]
+        }
+      },
+      "elbow.r": {
+        "node": "joint.elbow.r",
+        "axes": {
+          "flexion": [
+            -1,
+            0,
+            0
+          ]
+        }
+      },
+      "forearm.r": {
+        "node": "joint.forearm.r",
+        "axes": {
+          "pronation": [
+            0.0751,
+            0.9787,
+            -0.191
+          ]
+        }
+      },
+      "hand.r": {
+        "node": "joint.hand.r",
+        "axes": {
+          "flexion": [
+            -1,
+            0,
+            0
+          ],
+          "abduction": [
+            0,
+            0,
+            -1
+          ]
+        },
+        "offset": 0.08
+      },
+      "hip.r": {
+        "node": "joint.hip.r",
+        "axes": {
+          "flexion": [
+            -1,
+            0,
+            0
+          ],
+          "abduction": [
+            0,
+            0,
+            -1
+          ],
+          "internal-rotation": [
+            -0.0219,
+            0.9988,
+            0.0436
+          ]
+        }
+      },
+      "knee.r": {
+        "node": "joint.knee.r",
+        "axes": {
+          "flexion": [
+            1,
+            0,
+            0
+          ],
+          "internal-rotation": [
+            0.0149,
+            0.9995,
+            0.0275
+          ]
+        }
+      },
+      "ankle.r": {
+        "node": "joint.ankle.r",
+        "axes": {
+          "dorsiflexion": [
+            -1,
+            0,
+            0
+          ],
+          "inversion": [
+            0,
+            0,
+            1
+          ]
+        }
+      }
+    },
+    "demo": {
+      "elbow": {
+        "flexion": 85
+      },
+      "forearm": {
+        "pronation": 90
+      },
+      "hip": {
+        "flexion": 25,
+        "abduction": 15,
+        "internal-rotation": 10
+      }
+    }
+  },
+  "poses": {
+    "elbow-flexed": {
+      "joint:elbow.l": {
+        "flexion": 85
+      },
+      "flexor-tendon": {
+        "pivot": [
+          0.22318556904792786,
+          -0.1376439332962036,
+          -0.009220653213560581
+        ],
+        "rotation": [
+          -85,
+          0,
+          0
+        ]
+      },
+      "extensor-tendon": {
+        "pivot": [
+          0.22318556904792786,
+          -0.1376439332962036,
+          -0.009220653213560581
+        ],
+        "rotation": [
+          -85,
+          0,
+          0
+        ]
+      },
+      "duration": 1
+    },
+    "elbow-extended": {
+      "joint:elbow.l": {
+        "flexion": 5
+      },
+      "flexor-tendon": {
+        "pivot": [
+          0.22318556904792786,
+          -0.1376439332962036,
+          -0.009220653213560581
+        ],
+        "rotation": [
+          -5,
+          0,
+          0
+        ]
+      },
+      "extensor-tendon": {
+        "pivot": [
+          0.22318556904792786,
+          -0.1376439332962036,
+          -0.009220653213560581
+        ],
+        "rotation": [
+          -5,
+          0,
+          0
+        ]
+      },
+      "duration": 1
+    },
+    "forearm-pronated": {
+      "joint:elbow.l": {
+        "flexion": 75
+      },
+      "joint:forearm.l": {
+        "pronation": 150
+      },
+      "flexor-tendon": {
+        "pivot": [
+          0.22318556904792786,
+          -0.1376439332962036,
+          -0.009220653213560581
+        ],
+        "rotation": [
+          -75,
+          0,
+          0
+        ]
+      },
+      "extensor-tendon": {
+        "pivot": [
+          0.22318556904792786,
+          -0.1376439332962036,
+          -0.009220653213560581
+        ],
+        "rotation": [
+          -75,
+          0,
+          0
+        ]
+      },
+      "duration": 1
+    },
+    "plane-glide": {
+      "carpal-scaphoid": {
+        "offset": [
+          0.0015,
+          0,
+          0
+        ]
+      },
+      "carpal-lunate": {
+        "offset": [
+          -0.0015,
+          0,
+          0
+        ]
+      },
+      "duration": 1
+    },
+    "mcp-two-axes": {
+      "mcp-phalanx": {
+        "pivot": [
+          -1.9751125089659256,
+          -0.08925891024525058,
+          0.04034711402441637
+        ],
+        "rotation": [
+          25,
+          0,
+          12
+        ]
+      },
+      "duration": 1
+    },
+    "thumb-cmc": {
+      "thumb-metacarpal": {
+        "pivot": [
+          -1.9815405868441702,
+          -0.013808783193040873,
+          0.029889048577700122
+        ],
+        "rotation": [
+          18,
+          0,
+          18
+        ]
+      },
+      "duration": 1
+    },
+    "hip-three-axes": {
+      "joint:hip.l": {
+        "flexion": 25,
+        "abduction": 15,
+        "internal-rotation": 10
+      },
+      "duration": 1
+    },
+    "comfortable-walk": {
+      "joint:hip.l": {
+        "flexion": 15
+      },
+      "joint:hip.r": {
+        "extension": 15
+      },
+      "joint:knee.r": {
+        "flexion": 15
+      },
+      "duration": 1
+    }
+  },
+  "units": {
+    "modelUnit": "m",
+    "scale": 1
+  },
+  "presets": [
+    {
+      "id": "hero",
+      "label": {
+        "en": "Whole skeleton",
+        "zh": "完整骨架"
+      },
+      "camera": {
+        "position": [
+          3.2,
+          1.2,
+          4.3
+        ],
+        "target": [
+          0,
+          -0.35,
+          0
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "front",
+      "label": {
+        "en": "Front",
+        "zh": "正面"
+      },
+      "camera": {
+        "position": [
+          0,
+          0.3,
+          4.8
+        ],
+        "target": [
+          0,
+          -0.35,
+          0
+        ],
+        "fov": 28
+      }
+    },
+    {
+      "id": "chest",
+      "label": {
+        "en": "Chest",
+        "zh": "胸部"
+      },
+      "camera": {
+        "position": [
+          0.8,
+          0.4,
+          1.6
+        ],
+        "target": [
+          0,
+          0.05,
+          0
+        ],
+        "fov": 28
+      }
+    },
+    {
+      "id": "elbow",
+      "label": {
+        "en": "Elbow",
+        "zh": "肘部"
+      },
+      "camera": {
+        "position": [
+          1.1,
+          -0.15,
+          1.25
+        ],
+        "target": [
+          0.3,
+          -0.15,
+          0
+        ],
+        "fov": 28
+      }
+    },
+    {
+      "id": "hip",
+      "label": {
+        "en": "Hip",
+        "zh": "髋部"
+      },
+      "camera": {
+        "position": [
+          1,
+          -0.6,
+          1.8
+        ],
+        "target": [
+          0,
+          -0.6,
+          0
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "bone-closeup",
+      "label": {
+        "en": "Bone section",
+        "zh": "骨截面"
+      },
+      "camera": {
+        "position": [
+          3.1,
+          0.6,
+          2
+        ],
+        "target": [
+          2,
+          0,
+          0
+        ],
+        "fov": 30
+      }
+    }
+  ],
+  "views": {
+    "assembled": {
+      "camera": {
+        "position": [
+          3.2,
+          1.2,
+          4.3
+        ],
+        "target": [
+          0,
+          -0.35,
+          0
+        ],
+        "fov": 30
+      }
+    },
+    "reference": {
+      "camera": {
+        "position": [
+          0,
+          0.3,
+          4.8
+        ],
+        "target": [
+          0,
+          -0.35,
+          0
+        ],
+        "fov": 28
+      }
+    },
+    "cover": {
+      "position": [
+        3.2,
+        1.2,
+        4.3
+      ],
+      "target": [
+        0,
+        -0.35,
+        0
+      ],
+      "fov": 30
+    },
+    "section": {
+      "plane": "xy"
+    }
+  },
+  "spec": [
+    {
+      "key": {
+        "en": "Anatomy",
+        "zh": "解剖"
+      },
+      "value": {
+        "en": "Adult male reference",
+        "zh": "成人男性参考"
+      },
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Adult bones",
+        "zh": "成人骨数"
+      },
+      "value": "206",
+      "tag": "typical"
+    },
+    {
+      "key": {
+        "en": "Synovial types",
+        "zh": "滑膜关节类型"
+      },
+      "value": "6",
+      "tag": "typical"
+    },
+    {
+      "key": {
+        "en": "Lever model",
+        "zh": "杠杆模型"
+      },
+      "value": {
+        "en": "Ideal static balance",
+        "zh": "理想静力平衡"
+      },
+      "tag": "sim"
+    }
+  ],
+  "sim": {
+    "kind": "table",
+    "controls": [
+      {
+        "id": "mode",
+        "kind": "choice",
+        "label": {
+          "en": "Display mode",
+          "zh": "显示模式"
+        },
+        "default": "explore",
+        "options": [
+          {
+            "id": "explore",
+            "label": {
+              "en": "Explore anatomy",
+              "zh": "观察解剖"
+            }
+          },
+          {
+            "id": "lever",
+            "label": {
+              "en": "Ideal lever",
+              "zh": "理想杠杆"
+            }
+          }
+        ]
+      },
+      {
+        "id": "elbow-angle",
+        "kind": "step",
+        "label": {
+          "en": "Angle from vertical down",
+          "zh": "由竖直向下转过的角度"
+        },
+        "values": [
+          30,
+          60,
+          90,
+          120
+        ],
+        "default": 90,
+        "unit": "°"
+      },
+      {
+        "id": "load-force",
+        "kind": "step",
+        "label": {
+          "en": "External force",
+          "zh": "外加力"
+        },
+        "values": [
+          0,
+          10,
+          20
+        ],
+        "default": 20,
+        "unit": "N"
+      },
+      {
+        "id": "load-distance",
+        "kind": "step",
+        "label": {
+          "en": "Load distance",
+          "zh": "负载距离"
+        },
+        "values": [
+          0.15,
+          0.3
+        ],
+        "default": 0.3,
+        "unit": "m"
+      }
+    ],
+    "outputs": [
+      {
+        "id": "angle",
+        "kind": "number",
+        "label": {
+          "en": "Angle",
+          "zh": "角度"
+        },
+        "unit": "°",
+        "decimals": 0,
+        "tag": "sim"
+      },
+      {
+        "id": "load",
+        "kind": "number",
+        "label": {
+          "en": "External force",
+          "zh": "外加力"
+        },
+        "unit": "N",
+        "decimals": 0,
+        "tag": "sim"
+      },
+      {
+        "id": "distance",
+        "kind": "number",
+        "label": {
+          "en": "Load distance",
+          "zh": "负载距离"
+        },
+        "unit": "m",
+        "decimals": 2,
+        "tag": "sim"
+      },
+      {
+        "id": "load-arm",
+        "kind": "number",
+        "label": {
+          "en": "Load moment arm",
+          "zh": "负载力臂"
+        },
+        "unit": "m",
+        "decimals": 3,
+        "tag": "sim"
+      },
+      {
+        "id": "load-torque",
+        "kind": "number",
+        "label": {
+          "en": "Load moment",
+          "zh": "负载力矩"
+        },
+        "unit": "N·m",
+        "decimals": 2,
+        "tag": "sim"
+      },
+      {
+        "id": "muscle-force",
+        "kind": "number",
+        "label": {
+          "en": "Equivalent pull",
+          "zh": "等效拉力"
+        },
+        "unit": "N",
+        "decimals": 1,
+        "tag": "sim"
+      },
+      {
+        "id": "residual",
+        "kind": "number",
+        "label": {
+          "en": "Balance residual",
+          "zh": "平衡残差"
+        },
+        "unit": "N·m",
+        "decimals": 3,
+        "tag": "sim"
+      },
+      {
+        "id": "tip-x",
+        "kind": "number",
+        "label": {
+          "en": "Load horizontal offset",
+          "zh": "负载水平位移"
+        },
+        "unit": "m",
+        "decimals": 3,
+        "tag": "sim"
+      },
+      {
+        "id": "tip-y",
+        "kind": "number",
+        "label": {
+          "en": "Load vertical offset",
+          "zh": "负载竖直位移"
+        },
+        "unit": "m",
+        "decimals": 3,
+        "tag": "sim"
+      }
+    ],
+    "table": {
+      "experiments": {
+        "lever": {
+          "keys": [
+            "elbow-angle",
+            "load-force",
+            "load-distance"
+          ],
+          "rows": [
+            {
+              "when": {
+                "elbow-angle": 30,
+                "load-force": 0,
+                "load-distance": 0.15
+              },
+              "set": {
+                "angle": 30,
+                "load": 0,
+                "distance": 0.15,
+                "load-arm": 0.07499999999999998,
+                "load-torque": 0,
+                "muscle-force": 0,
+                "residual": 0,
+                "tip-x": 0.07499999999999998,
+                "tip-y": -0.1299038105676658
+              },
+              "source": [
+                "S34"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 30,
+                "load-force": 0,
+                "load-distance": 0.3
+              },
+              "set": {
+                "angle": 30,
+                "load": 0,
+                "distance": 0.3,
+                "load-arm": 0.14999999999999997,
+                "load-torque": 0,
+                "muscle-force": 0,
+                "residual": 0,
+                "tip-x": 0.14999999999999997,
+                "tip-y": -0.2598076211353316
+              },
+              "source": [
+                "S34"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 30,
+                "load-force": 10,
+                "load-distance": 0.15
+              },
+              "set": {
+                "angle": 30,
+                "load": 10,
+                "distance": 0.15,
+                "load-arm": 0.07499999999999998,
+                "load-torque": 0.7499999999999998,
+                "muscle-force": 18.749999999999993,
+                "residual": 0,
+                "tip-x": 0.07499999999999998,
+                "tip-y": -0.1299038105676658
+              },
+              "source": [
+                "S34"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 30,
+                "load-force": 10,
+                "load-distance": 0.3
+              },
+              "set": {
+                "angle": 30,
+                "load": 10,
+                "distance": 0.3,
+                "load-arm": 0.14999999999999997,
+                "load-torque": 1.4999999999999996,
+                "muscle-force": 37.499999999999986,
+                "residual": 0,
+                "tip-x": 0.14999999999999997,
+                "tip-y": -0.2598076211353316
+              },
+              "source": [
+                "S34"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 30,
+                "load-force": 20,
+                "load-distance": 0.15
+              },
+              "set": {
+                "angle": 30,
+                "load": 20,
+                "distance": 0.15,
+                "load-arm": 0.07499999999999998,
+                "load-torque": 1.4999999999999996,
+                "muscle-force": 37.499999999999986,
+                "residual": 0,
+                "tip-x": 0.07499999999999998,
+                "tip-y": -0.1299038105676658
+              },
+              "source": [
+                "S34"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 30,
+                "load-force": 20,
+                "load-distance": 0.3
+              },
+              "set": {
+                "angle": 30,
+                "load": 20,
+                "distance": 0.3,
+                "load-arm": 0.14999999999999997,
+                "load-torque": 2.999999999999999,
+                "muscle-force": 74.99999999999997,
+                "residual": 0,
+                "tip-x": 0.14999999999999997,
+                "tip-y": -0.2598076211353316
+              },
+              "source": [
+                "S34"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 60,
+                "load-force": 0,
+                "load-distance": 0.15
+              },
+              "set": {
+                "angle": 60,
+                "load": 0,
+                "distance": 0.15,
+                "load-arm": 0.12990381056766578,
+                "load-torque": 0,
+                "muscle-force": 0,
+                "residual": 0,
+                "tip-x": 0.12990381056766578,
+                "tip-y": -0.07500000000000001
+              },
+              "source": [
+                "S34"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 60,
+                "load-force": 0,
+                "load-distance": 0.3
+              },
+              "set": {
+                "angle": 60,
+                "load": 0,
+                "distance": 0.3,
+                "load-arm": 0.25980762113533157,
+                "load-torque": 0,
+                "muscle-force": 0,
+                "residual": 0,
+                "tip-x": 0.25980762113533157,
+                "tip-y": -0.15000000000000002
+              },
+              "source": [
+                "S34"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 60,
+                "load-force": 10,
+                "load-distance": 0.15
+              },
+              "set": {
+                "angle": 60,
+                "load": 10,
+                "distance": 0.15,
+                "load-arm": 0.12990381056766578,
+                "load-torque": 1.2990381056766578,
+                "muscle-force": 32.47595264191644,
+                "residual": 0,
+                "tip-x": 0.12990381056766578,
+                "tip-y": -0.07500000000000001
+              },
+              "source": [
+                "S34"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 60,
+                "load-force": 10,
+                "load-distance": 0.3
+              },
+              "set": {
+                "angle": 60,
+                "load": 10,
+                "distance": 0.3,
+                "load-arm": 0.25980762113533157,
+                "load-torque": 2.5980762113533156,
+                "muscle-force": 64.95190528383289,
+                "residual": 0,
+                "tip-x": 0.25980762113533157,
+                "tip-y": -0.15000000000000002
+              },
+              "source": [
+                "S34"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 60,
+                "load-force": 20,
+                "load-distance": 0.15
+              },
+              "set": {
+                "angle": 60,
+                "load": 20,
+                "distance": 0.15,
+                "load-arm": 0.12990381056766578,
+                "load-torque": 2.5980762113533156,
+                "muscle-force": 64.95190528383289,
+                "residual": 0,
+                "tip-x": 0.12990381056766578,
+                "tip-y": -0.07500000000000001
+              },
+              "source": [
+                "S34"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 60,
+                "load-force": 20,
+                "load-distance": 0.3
+              },
+              "set": {
+                "angle": 60,
+                "load": 20,
+                "distance": 0.3,
+                "load-arm": 0.25980762113533157,
+                "load-torque": 5.196152422706631,
+                "muscle-force": 129.90381056766577,
+                "residual": 0,
+                "tip-x": 0.25980762113533157,
+                "tip-y": -0.15000000000000002
+              },
+              "source": [
+                "S34"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 90,
+                "load-force": 0,
+                "load-distance": 0.15
+              },
+              "set": {
+                "angle": 90,
+                "load": 0,
+                "distance": 0.15,
+                "load-arm": 0.15,
+                "load-torque": 0,
+                "muscle-force": 0,
+                "residual": 0,
+                "tip-x": 0.15,
+                "tip-y": -9.184850993605149e-18
+              },
+              "source": [
+                "S34"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 90,
+                "load-force": 0,
+                "load-distance": 0.3
+              },
+              "set": {
+                "angle": 90,
+                "load": 0,
+                "distance": 0.3,
+                "load-arm": 0.3,
+                "load-torque": 0,
+                "muscle-force": 0,
+                "residual": 0,
+                "tip-x": 0.3,
+                "tip-y": -1.8369701987210297e-17
+              },
+              "source": [
+                "S34"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 90,
+                "load-force": 10,
+                "load-distance": 0.15
+              },
+              "set": {
+                "angle": 90,
+                "load": 10,
+                "distance": 0.15,
+                "load-arm": 0.15,
+                "load-torque": 1.5,
+                "muscle-force": 37.5,
+                "residual": 0,
+                "tip-x": 0.15,
+                "tip-y": -9.184850993605149e-18
+              },
+              "source": [
+                "S34"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 90,
+                "load-force": 10,
+                "load-distance": 0.3
+              },
+              "set": {
+                "angle": 90,
+                "load": 10,
+                "distance": 0.3,
+                "load-arm": 0.3,
+                "load-torque": 3,
+                "muscle-force": 75,
+                "residual": 0,
+                "tip-x": 0.3,
+                "tip-y": -1.8369701987210297e-17
+              },
+              "source": [
+                "S34"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 90,
+                "load-force": 20,
+                "load-distance": 0.15
+              },
+              "set": {
+                "angle": 90,
+                "load": 20,
+                "distance": 0.15,
+                "load-arm": 0.15,
+                "load-torque": 3,
+                "muscle-force": 75,
+                "residual": 0,
+                "tip-x": 0.15,
+                "tip-y": -9.184850993605149e-18
+              },
+              "source": [
+                "S34"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 90,
+                "load-force": 20,
+                "load-distance": 0.3
+              },
+              "set": {
+                "angle": 90,
+                "load": 20,
+                "distance": 0.3,
+                "load-arm": 0.3,
+                "load-torque": 6,
+                "muscle-force": 150,
+                "residual": 0,
+                "tip-x": 0.3,
+                "tip-y": -1.8369701987210297e-17
+              },
+              "source": [
+                "S34"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 120,
+                "load-force": 0,
+                "load-distance": 0.15
+              },
+              "set": {
+                "angle": 120,
+                "load": 0,
+                "distance": 0.15,
+                "load-arm": 0.1299038105676658,
+                "load-torque": 0,
+                "muscle-force": 0,
+                "residual": 0,
+                "tip-x": 0.1299038105676658,
+                "tip-y": 0.07499999999999997
+              },
+              "source": [
+                "S34"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 120,
+                "load-force": 0,
+                "load-distance": 0.3
+              },
+              "set": {
+                "angle": 120,
+                "load": 0,
+                "distance": 0.3,
+                "load-arm": 0.2598076211353316,
+                "load-torque": 0,
+                "muscle-force": 0,
+                "residual": 0,
+                "tip-x": 0.2598076211353316,
+                "tip-y": 0.14999999999999994
+              },
+              "source": [
+                "S34"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 120,
+                "load-force": 10,
+                "load-distance": 0.15
+              },
+              "set": {
+                "angle": 120,
+                "load": 10,
+                "distance": 0.15,
+                "load-arm": 0.1299038105676658,
+                "load-torque": 1.299038105676658,
+                "muscle-force": 32.47595264191645,
+                "residual": 0,
+                "tip-x": 0.1299038105676658,
+                "tip-y": 0.07499999999999997
+              },
+              "source": [
+                "S34"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 120,
+                "load-force": 10,
+                "load-distance": 0.3
+              },
+              "set": {
+                "angle": 120,
+                "load": 10,
+                "distance": 0.3,
+                "load-arm": 0.2598076211353316,
+                "load-torque": 2.598076211353316,
+                "muscle-force": 64.9519052838329,
+                "residual": 0,
+                "tip-x": 0.2598076211353316,
+                "tip-y": 0.14999999999999994
+              },
+              "source": [
+                "S34"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 120,
+                "load-force": 20,
+                "load-distance": 0.15
+              },
+              "set": {
+                "angle": 120,
+                "load": 20,
+                "distance": 0.15,
+                "load-arm": 0.1299038105676658,
+                "load-torque": 2.598076211353316,
+                "muscle-force": 64.9519052838329,
+                "residual": 0,
+                "tip-x": 0.1299038105676658,
+                "tip-y": 0.07499999999999997
+              },
+              "source": [
+                "S34"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 120,
+                "load-force": 20,
+                "load-distance": 0.3
+              },
+              "set": {
+                "angle": 120,
+                "load": 20,
+                "distance": 0.3,
+                "load-arm": 0.2598076211353316,
+                "load-torque": 5.196152422706632,
+                "muscle-force": 129.9038105676658,
+                "residual": 0,
+                "tip-x": 0.2598076211353316,
+                "tip-y": 0.14999999999999994
+              },
+              "source": [
+                "S34"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "bind": [
+      {
+        "output": "angle",
+        "joint": "elbow.l",
+        "movement": "flexion",
+        "angle": {
+          "per": 1,
+          "origin": 0
+        },
+        "when": {
+          "control": "mode",
+          "is": {
+            "eq": "lever"
+          }
+        }
+      },
+      {
+        "control": "mode",
+        "part": [
+          "lever-beam",
+          "lever-load"
+        ],
+        "visible": {
+          "eq": "lever"
+        }
+      },
+      {
+        "output": "angle",
+        "part": "lever-beam",
+        "rotate": {
+          "axis": [
+            0,
+            0,
+            1
+          ],
+          "pivot": [
+            4,
+            0,
+            0
+          ],
+          "per": 1,
+          "origin": 0
+        }
+      },
+      {
+        "output": "tip-x",
+        "part": "lever-load",
+        "offset": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "per": 1
+        }
+      },
+      {
+        "output": "tip-y",
+        "part": "lever-load",
+        "offset": {
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "per": 1
+        }
+      }
+    ],
+    "overlays": [
+      {
+        "kind": "force-vectors",
+        "group": "force-overlay",
+        "per": 0.001,
+        "max": 0.2,
+        "arrows": [
+          {
+            "part": "lever-load",
+            "force": "gravity",
+            "dir": [
+              0,
+              -1,
+              0
+            ],
+            "value": {
+              "output": "load"
+            },
+            "when": {
+              "control": "mode",
+              "is": {
+                "eq": "lever"
+              }
+            }
+          },
+          {
+            "part": "lever-beam",
+            "force": "push",
+            "dir": [
+              0.8660254037844387,
+              0.49999999999999994,
+              0
+            ],
+            "value": {
+              "output": "muscle-force"
+            },
+            "offset": [
+              -0.05499999999999999,
+              0.09526279441628825,
+              0.015
+            ],
+            "when": {
+              "control": "elbow-angle",
+              "is": {
+                "eq": 30
+              }
+            }
+          },
+          {
+            "part": "lever-beam",
+            "force": "push",
+            "dir": [
+              0.5000000000000001,
+              0.8660254037844386,
+              0
+            ],
+            "value": {
+              "output": "muscle-force"
+            },
+            "offset": [
+              -0.09526279441628825,
+              0.055000000000000014,
+              0.015
+            ],
+            "when": {
+              "control": "elbow-angle",
+              "is": {
+                "eq": 60
+              }
+            }
+          },
+          {
+            "part": "lever-beam",
+            "force": "push",
+            "dir": [
+              6.123233995736766e-17,
+              1,
+              0
+            ],
+            "value": {
+              "output": "muscle-force"
+            },
+            "offset": [
+              -0.11,
+              6.735557395310442e-18,
+              0.015
+            ],
+            "when": {
+              "control": "elbow-angle",
+              "is": {
+                "eq": 90
+              }
+            }
+          },
+          {
+            "part": "lever-beam",
+            "force": "push",
+            "dir": [
+              -0.4999999999999998,
+              0.8660254037844387,
+              0
+            ],
+            "value": {
+              "output": "muscle-force"
+            },
+            "offset": [
+              -0.09526279441628825,
+              -0.05499999999999997,
+              0.015
+            ],
+            "when": {
+              "control": "elbow-angle",
+              "is": {
+                "eq": 120
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "telemetry": [
+    {
+      "key": {
+        "en": "External force",
+        "zh": "外加力"
+      },
+      "follow": "load",
+      "unit": "N",
+      "decimals": 0,
+      "scope": "observe"
+    },
+    {
+      "key": {
+        "en": "Load moment arm",
+        "zh": "负载力臂"
+      },
+      "follow": "load-arm",
+      "unit": "m",
+      "decimals": 2,
+      "scope": "observe"
+    },
+    {
+      "key": {
+        "en": "Equivalent pull",
+        "zh": "等效拉力"
+      },
+      "follow": "muscle-force",
+      "unit": "N",
+      "decimals": 0,
+      "scope": "observe"
+    },
+    {
+      "key": {
+        "en": "Angle",
+        "zh": "角度"
+      },
+      "follow": "angle",
+      "unit": "°",
+      "decimals": 0,
+      "scope": "observe"
+    }
+  ]
+}
