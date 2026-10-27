@@ -1,0 +1,7 @@
+{"type":"FeatureCollection", "features": [
+{"type":"Feature","geometry":{"type":"Point","coordinates":[97.15157514116032,-3.952529434945602]},"properties":{"id":"indian-ocean","name":"INDIAN OCEAN","name_zh":"印度洋","source":"ne-10m-geography-marine-polys","notNavigational":true}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[110.88147989812263,7.318222241862678]},"properties":{"id":"south-china-sea","name":"South China Sea","name_zh":"南海","source":"ne-10m-geography-marine-polys","notNavigational":true}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[96.24728723198442,10.989481391305329]},"properties":{"id":"andaman-sea","name":"Andaman Sea","name_zh":"安达曼海","source":"ne-10m-geography-marine-polys","notNavigational":true}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[99.03787507904286,5.585974799412513]},"properties":{"id":"strait-of-malacca","name":"Strait of Malacca","name_zh":"马六甲海峡","source":"ne-10m-geography-marine-polys","notNavigational":true}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[103.68007916569613,1.1925350405366815]},"properties":{"id":"strait-of-singapore","name":"Strait of Singapore","name_zh":"新加坡海峡","source":"ne-10m-geography-marine-polys","notNavigational":true}}
+]}

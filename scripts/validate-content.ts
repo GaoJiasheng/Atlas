@@ -1,3 +1,4 @@
+import { portSourceIssues } from '../src/engines/space-scene/port-schema';
 /**
  * Content validator: `pnpm validate` (also runs before `pnpm build`).
  *
@@ -441,6 +442,7 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
       warn(join(dataDir, 'parts.json'), `views.exerciseBody "wire": model ${model} has no "skin-wire" node, so the engine decimates the skin outline at load (slower, rougher)`);
   }
   const matterFile = topic.engine === 'space-scene' && data ? (data as { parts?: PartsFile }).parts : undefined;
+  if (matterFile?.sim?.port) for (const issue of portSourceIssues(matterFile.sim.port, new Map((sourcesFile?.sources ?? []).map((x) => [x.id, x])))) error(join(dataDir, 'parts.json'), `sim.port.${issue.path.join('.')}: ${issue.message}`);
   // A table model's rows (docs/40 §4.2): every source listed, SIM rows citing the design study, TYPICAL rows another source.
   if (matterFile?.sim?.table)
     for (const issue of tableSourceIssues(matterFile.sim.table, matterFile.sim.outputs, new Map((sourcesFile?.sources ?? []).map((x) => [x.id, x]))))

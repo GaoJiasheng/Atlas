@@ -283,6 +283,7 @@ export function simEffects(sim: SimData, values: SimValues, outputs: SimOutputs)
   };
   const firstState = new Map(sim.outputs.map((o) => [o.id, Object.keys(o.states ?? {})[0]]));
   for (const b of sim.bind as SimBind[]) {
+    if ('part' in b && b.span) continue; // geometry-only, resolved after all part transforms
     const v = b.control !== undefined ? values[b.control] : outputs[b.output!];
     const first = b.output !== undefined ? firstState.get(b.output) : undefined;
     if ('part' in b) {

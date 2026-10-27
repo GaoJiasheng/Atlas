@@ -195,7 +195,7 @@ export function LabelProbe({
       for (const m of g.members) {
         const h = handles.get(m.id);
         if (!h || !h.visible) continue;
-        if (runtime.mechanismParts.has(m.id)) m.box.half = h.half;
+        if (runtime.mechanismParts.has(m.id) || bridge.spans.has(m.id)) m.box.half = h.half;
         m.box.center[0] = h.object.position.x + h.offset[0];
         m.box.center[1] = h.object.position.y + h.offset[1];
         m.box.center[2] = h.object.position.z + h.offset[2];

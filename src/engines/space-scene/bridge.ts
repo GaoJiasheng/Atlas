@@ -97,6 +97,16 @@ export interface ShiftReading {
   delay: number;
 }
 
+/** A span's drawn endpoints and centre in model metres, plus cylinder-local → model matrix. */
+export interface SpanReading {
+  from: [number, number, number];
+  to: [number, number, number];
+  centre: [number, number, number];
+  length: number;
+  shown: boolean;
+  matrix: number[];
+}
+
 /** An animation now (docs/40 §4.3): its frequency (Hz), cycle phase (0–1) and how far it is switched on. */
 export interface AnimationReading {
   hz: number;
@@ -124,6 +134,7 @@ export interface MechanismReading {
 export type MechanismSave = Record<string, { thetaRad: number; qaHold: boolean }>;
 
 export interface StageBridge {
+  spans: Map<string, SpanReading>;
   mechanisms: Map<string, MechanismReading>;
   seekMechanism(id: string, deg: number): boolean;
   resetMechanisms(): void;
@@ -199,6 +210,7 @@ export function cameraSettled(bridge: StageBridge, id: number, timeoutMs: number
 
 export function createBridge(): StageBridge {
   return {
+    spans: new Map(),
     mechanisms: new Map(),
     seekMechanism: () => false,
     resetMechanisms: () => {},

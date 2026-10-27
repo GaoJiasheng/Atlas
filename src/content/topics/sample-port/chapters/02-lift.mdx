@@ -1,0 +1,18 @@
+---
+id: lift
+order: 2
+title: {"en": "Lift timeline", "zh": "示例：Lift timeline"}
+state: {"view": "assembled", "explode": 0, "run": true, "layers": ["port"], "camera": {"position": [110, 85, 115], "target": [0, 20, 10], "fov": 38}, "labels": ["working-box", "spreader", "trolley"], "summary": {"en": "Lift timeline", "zh": "示例：Lift timeline"}, "sim": {"set": {"lift-live": true}, "try": {"vary": "lock-confirmed", "observe": ["lift-status"], "replay": ["lift-run"]}}, "index": {"parts": ["trolley", "spreader", "twistlocks", "working-box", "yard-target", "yard-blocker-a", "yard-blocker-b", "sample-20", "sample-40", "rope-a", "rope-b", "rope-c", "rope-d", "diagonal-top", "diagonal-bottom", "diagonal-rope"]}, "beats": [{"caption": {"en": "Engine fixture: change the controls and inspect the model.", "zh": "引擎测试：改变控件并查看模型。"}}, {"pose": "lift-raised", "sim": {"set": {"lift-live": false}}, "caption": {"en": "Snapshot: raised cargo.", "zh": "快照：箱子升高。"}}, {"pose": null, "sim": {"set": {"lift-live": true}}, "caption": {"en": "Replay and end state.", "zh": "重放与终态。"}}]}
+---
+
+<Lang en>
+
+Draft engine fixture. All geometry, timings and rates are schematic. <Num s="S1">32</Num> model seconds.
+
+</Lang>
+
+<Lang zh>
+
+引擎草稿测试。所有几何、时间和处理能力均为示意。<Num s="S1">32</Num> model seconds.
+
+</Lang>

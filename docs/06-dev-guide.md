@@ -1066,7 +1066,7 @@ docs/22 §4.3（E-SIM 核心，磁铁与电路共用）+ docs/23 §4（电路模
 
 ```jsonc
 "sim": {
-  "kind": "circuit",                                   // circuit | magnet | force | energy | life-cycle | matter | light | sort | materials | table | seeds：lib/sim/<kind>.ts（life-cycle → lifecycle.ts）
+  "kind": "circuit",                                   // circuit | magnet | force | energy | life-cycle | matter | light | sort | materials | table | seeds | port：lib/sim/<kind>.ts（life-cycle → lifecycle.ts）
   "controls": [                                        // ≤ 16，id 全主题的 sim 里唯一
     { "id": "main", "kind": "toggle", "default": true, "label": {en, zh} },
     { "id": "cells", "kind": "step", "values": [1, 2, 3], "default": 2, "label": {en, zh}, "unit"?: "cm" },
@@ -2214,3 +2214,55 @@ pnpm tsx scripts/geo/lib/check.ts --topic ww2         # MapLibre（Playwright）
 - **按年代裁过的要素不再沿底图海岸**（docs/28 P2，`simplify.ts`）：`pipeline.coast.excludeBox: [w, s, e, n]`（缺省 `null`）：这个框里不做海岸一步。底图陆地和水都挖掉这个框，于是框里的要素不被擦水、框外的 holder 也不会补缝长进来；框里的要素保持 compose 给它的海岸（新加坡要素已按时代 `intersect` 到 `work/coast-L#.geojson`）；柔佛、廖内等框里的邻国要素也就不再裁到 10m 海岸，需要的话在 compose 里 `intersect` 到 10m 陆地。偏差统计在框里不跳过"海里"的点。
 - **分框细度**（docs/28 P3，`simplify.ts`）：`pipeline.focus` 的一项可以写成 `{ "box": [w, s, e, n], "fineKm": 0.005 }`，这个框用自己的固定间隔（岛尺度要几米，区域框照旧 1 km 上下）：先从普通焦点框里挖出来，单独简化，用自己那份陆地沿海岸（与 inside / outside 两半同一做法）；排在前面的框在重叠处优先。自动预算搜索只调普通焦点框的间隔。没有这种项、没有 `excludeBox` 时产物与以前逐字节相同（ww1、ww2、warring-states、four-taps 的 simplify 改前改后各跑一次比对过）。
 - 东南亚近景底图：`scripts/build-geo.ts` 另出 `public/geo/land-10m-sea.json`（Natural Earth 1:10m 陆地，裁到 95°E–125°E、9°S–22°N，TopoJSON，约 234 KB）。GeoStage 在镜头 zoom ≥ 6.5 且视野与该框相交时才 fetch；zoom 7 起绘制、到 8 完全显现：框内先铺一层水色遮住 50m 陆地（不透明度 7→8 渐入），10m 陆地和海岸线叠在上面，颜色同为 `--land` / `--land-edge` / `--water` token。其他主题不加载它。
+
+### SpaceScene · 两锚点直绳 `span`（docs/62 E-CP2）
+
+`sim.bind` 中独立的几何分支，不给 `control` / `output`。用于一个 Y 轴、原高 1 的 cylinder，圆柱半径保留，端点之间变长；不求垂缆、张力、碰撞或滑轮倍率。
+
+```json
+{ "part": "rope-a", "span": {
+  "from": { "part": "trolley", "point": [-2.6, 0, -1] },
+  "to": { "part": "spreader", "point": [-2.6, 0.3, -1] },
+  "minLength": 0.001
+} }
+```
+
+`point` 是相对被引用零件主 `primitive.at` 的未变换局部坐标。PartNode 帧结束写 `attachmentMatrix`（pose → offset/rotate → play → shift → animation）；全部零件完成后，SpanDriver 同帧读取两端矩阵，将单位圆柱的局部 −Y/+Y 端放到 from/to，更新中心、朝向、Y 长度和引线/组包围盒。目标绳不再叠自己的 pose、play、shift 或 explode。端点因 hide / group 不可见，或间距不足 `minLength` 时绳隐藏；恢复显示与 REFERENCE、reduced-motion、静止终态仍走相同的无时钟几何通道。
+
+校验在 `span-schema.ts` 的 `spanIssues` 和 `partsFile` 边界：全题 ≤16、每目标一条；单目标非 context 圆柱，无 extra、repeat、bilateral、旋转/缩放/镜像；高度恰为 1。引用必须存在并有主 primitive，不能自引用、依赖另一个 span（因此不能成环）或指向 repeat；目标不得有其它绑定、动画、命名 pose 或 mechanism 驱动。`minLength` 必须为有限正数，默认 0.001；锚点必须有限。
+
+纯几何 `lib/span.ts`、渲染 `stages/model3d/{SpanDriver,spanRuntime}`；不增加 primitive、动画钟或 UI。QA：`__atlas.engine.span(id)` 返回 `{ from, to, centre, length, shown, matrix }`（米；matrix 为圆柱局部 → 模型坐标，列主序），无此绑定返回 null；`anchor(id)` 跟随新中心。单测 `tests/space-scene/span.test.ts` 覆盖 3-4-5 斜绳、端点方向/半径、36.809/21.809/44.809 m、零长隐藏、同帧变换与可见性传播、动态包围盒和内容拒绝。草稿 `sample-port` 与正式 `container-port` 共用此绑定。
+
+### SpaceScene · 试一试 · 港口（port）
+
+`docs/62 §4.2–4.3`（E-CP1）。`sim.kind: "port"` 是四个相互独立的教学实验：箱数/TEU、一次有限吊运、目标箱上方阻挡箱的移开，以及连续流工序能力。注册 `SIM_KINDS` → `simQuantities` / `evaluateSim` → `quantityKind`；`SEPARATE_EXPERIMENTS.port = true`，PLATE 块尾只写本章观察的状态。纯函数 `lib/sim/port.ts`，严格数据与交叉校验 `port-schema.ts`；`scripts/validate-content.ts` 另做 `portSourceIssues`，引用中至少一条必须是 `design:true`。没有真实排队、吊摆、碰撞、港口遥测或质量模型。完整可复制模板是 `src/content/topics/sample-port/data/parts.json`，单测 `tests/space-scene/port.test.ts`，浏览器契约 `tests-e2e/sample-port.spec.ts`。
+
+```json
+"port": {
+  "count": { "n20": "n20", "n40": "n40" },
+  "lift": {
+    "enabled": "lock-confirmed",
+    "workingPart": "working-box", "spreaderPart": "spreader", "trolleyPart": "trolley",
+    "source": [0,11.2955,-18], "destination": [0,3.2955,10],
+    "boxHeight": 2.591, "spreaderDepth": 0.6, "clearBottomY": 25,
+    "knots": { "lock":4, "raised":12, "crossed":20, "landed":28, "released":30, "finished":32 }, "slow":1
+  },
+  "yard": {
+    "above":"above", "state":"yard-state", "target":"yard-target",
+    "blockers":["yard-blocker-a","yard-blocker-b"], "pitch":2.591,
+    "park":[[28,1.2955,40],[38,1.2955,40]], "retrieved":[18,1.2955,50]
+  },
+  "capacity": {
+    "cranes":"cranes", "carriers":"carriers", "yards":"yards", "arrivals":"arrivals", "hours":"hours",
+    "rate":{"crane":30,"carrier":24,"yard":18}
+  },
+  "source":["S1"]
+}
+```
+
+- **控件（11）**：`n20,n40` 为非负整数 step，模板 `[0,1,2,3,4]`；`lock-confirmed` 为 toggle；`above` 为 0–2 整数 step；`yard-state` 的 choice 选项恰为 `original|cleared|retrieved`；`cranes,carriers,yards` 为≥1整数 step；`arrivals` 为非负 step（箱/小时）；`hours` 为正 step；`lift-live` 是只给 play 的条件开关，不参与模型。模板默认 2/1 箱、锁确认 true、above2、original、1/1/1资源、到达24、2小时、live true。
+- **输出（15）**：`boxes=n20+n40`、`teu=n20+2*n40`；`lift-status` 状态恰为 `lock-not-confirmed|ready`；`lift-run` 为 timeline；`yard-slots` 为向量；`rehandles=above`、`retrieval-lifts=above+1`；`crane-rate,carrier-rate,yard-rate`=资源数×相应 rate；`capacity-rate`=三工序最小值；`completed=min(arrivals,capacity-rate)*hours`；`queue-growth=max(0,arrivals-capacity-rate)`；`queued=queue-growth*hours`；`bottleneck` 状态恰为 `crane|carrier|yard|tied`，多个工序同时最小时 tied。数量单位分别 boxes/TEU/moves/boxes/h；混箱计数不参与工序能力。
+- **吊运**：`simTimelineChannels` 只登记 `lift-run` 的 `trolley-dz,spreader-dy,cargo-dy,cargo-dz,lock-deg`。按 knots 线性采样，每通道7点、包含0和finished；未锁确认时 duration0、每通道只有 `[0,0]`。几何与 enabled 构成 `port-lift:<enabled>:<hash>` key，计数/能力/live不会重启过程。source和destination须同X（这里只有Y/Z通道），source等于工作箱主primitive.at；起点吊具中心应为 sourceY+boxHeight/2+spreaderDepth/2。终点箱落稳、解锁后，只有吊具再次升高；状态 `ready` 不表示播放进度。
+- **快照与回放**：命名 pose 自行写所有相关零件的位移，快照拍 `sim.set.lift-live:false`；重放拍清 pose、设true。所有 lift play 绑定都带 `when:{control:"lift-live",is:true}`，避免 pose与timeline叠加。`try.replay:["lift-run"]`、G、URL、减少动态和初始终态沿用共用机制，不加动画时钟或seek拍字段。QA用 `engine.simSeek("lift-run",t)`；`engine.sim().timeline`读实际播放头。
+- **堆场**：求值须传已有 `evaluateSim` 的 parts 参数；`evaluateSimOnStage` 已如此传入。`yard-slots` 的键为 `<part>:x/y/z/shown`，相对各主primitive.at；原状保持静止，cleared/retrieved把存在的阻挡箱移到park，retrieved另把target移到retrieved。超出above的阻挡箱shown0，目标始终为底层。绑定 `{output:"yard-slots",part:[...],shift:{ease:0,lift:0}}`；不把直线位移当作安全吊运路径。QA继续读 `engine.shift(id)`。
+- **校验**：严格字段/有限数/正尺寸与slow≥1；控件类型、合法默认值与范围；目标/阻挡箱互异、非context primitive；clearBottomY清过起终点箱顶、trolley原点高于最高吊具顶、knots严格递增；lift起终点位于模型静止包络。输出只允许上述15种，kind与全部状态标签须准确；count的repeat数量须覆盖该控制值。现有绑定/pose引用校验保留。source id沿用现有 `S1` 格式（prep文献 `S01` 映射 `S1`）。

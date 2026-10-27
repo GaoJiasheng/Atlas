@@ -1,0 +1,22 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "singapore",
+        "name": "Singapore",
+        "name_zh": "新加坡",
+        "notNavigational": true,
+        "source": "S31"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          103.82,
+          1.36
+        ]
+      }
+    }
+  ]
+}

@@ -1,3 +1,7 @@
+import { portSchema, portIssues } from './port-schema';
+import { PORT_CHANNELS, PORT_STATES, portQuantity } from './lib/sim/port';
+import { spanSchema, spanIssues } from './span-schema';
+export type { SimSpan } from './span-schema';
 /**
  * The `sim` section of parts.json (docs/22 §4.3 E-SIM, docs/23 §4): reader-operable
  * variables ("try it"), a pure model of the topic's kind that turns them into
@@ -156,6 +160,7 @@ export type SimSettle = z.output<typeof settleSchema>;
 const partBind = z
   .object({
     ...source,
+    span: spanSchema.optional(),
     /** One part or several. */
     part: z.union([kebabId, z.array(kebabId).min(1)]),
     /** Shown while the condition holds (else it fades out and is not pickable). */
@@ -951,7 +956,7 @@ export const simOverlaySchema = z.discriminatedUnion('kind', [
 export type SimOverlay = z.output<typeof simOverlaySchema>;
 export type ShadowCastOverlay = Extract<SimOverlay, { kind: 'shadow-cast' }>;
 
-export const SIM_KINDS = ['circuit', 'magnet', 'force', 'energy', 'life-cycle', 'matter', 'light', 'sort', 'materials', 'table', 'seeds'] as const;
+export const SIM_KINDS = ['circuit', 'magnet', 'force', 'energy', 'life-cycle', 'matter', 'light', 'sort', 'materials', 'table', 'seeds', 'port'] as const;
 export type SimKind = (typeof SIM_KINDS)[number];
 
 export const MAX_SIM_CONTROLS = 16;
@@ -972,6 +977,7 @@ export const simSchema = z
     lifeCycle: lifeCycleSchema.optional(),
     matter: matterSchema.optional(),
     light: lightSchema.optional(),
+    port: portSchema.optional(),
     materials: materialsSchema.optional(),
     sort: sortSchema.optional(),
     table: tableSchema.optional(),
@@ -1114,6 +1120,8 @@ const MAGNET_STATES: readonly string[] = ['facing', 'field-state'];
 /** The kind of a model quantity (an output's `from`), or null when the model (or the data it needs) has none of that name. */
 export function quantityKind(sim: SimData, from: string): SimOutput['kind'] | null {
   switch (sim.kind) {
+    case 'port':
+      return sim.port ? portQuantity(from) : null;
     case 'sort':
       return sim.sort ? sortQuantity(sim.sort, from) : null;
     case 'matter':
@@ -1164,6 +1172,7 @@ export function quantityKind(sim: SimData, from: string): SimOutput['kind'] | nu
 
 /** The channels of a timeline quantity of this sim's model (null: not a timeline it knows). */
 export function simTimelineChannels(sim: SimData, from: string): string[] | null {
+  if (sim.kind === 'port' && sim.port && from === 'lift-run') return [...PORT_CHANNELS];
   if (sim.kind === 'force' && sim.force) return forceTimelineChannels(sim.force, from);
   if (sim.kind === 'energy' && sim.energy) return energyTimelineChannels(from);
   return null;
@@ -1237,7 +1246,9 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
       issue(['outputs', i, 'from'], needs ? `"${from}" needs the ${sim.kind} model's \`${needs}\` data` : `the ${sim.kind} model has no quantity "${from}"`);
     } else if (kind !== o.kind) issue(['outputs', i, 'kind'], `"${from}" is a ${kind}, not a ${o.kind}`);
     const states =
-      sim.kind === 'light' && sim.light
+      sim.kind === 'port' && sim.port
+        ? PORT_STATES[from]
+        : sim.kind === 'light' && sim.light
         ? lightStates(sim.light, from, sim.controls)
         : sim.kind === 'matter' && sim.matter
         ? matterQuantity(sim.matter, from)?.states
@@ -1265,6 +1276,8 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
       const known = states ?? [];
       for (const st of Object.keys(o.states ?? {})) if (!known.includes(st)) issue(['outputs', i, 'states', st], `"${from}" is never "${st}" (${known.join(', ')})`);
     }
+    if (sim.kind === 'port' && sim.port && o.kind === 'state' && kind === 'state')
+      for (const st of Object.keys(o.states ?? {})) if (!(states ?? []).includes(st)) issue(['outputs', i, 'states', st], `unknown port state "${st}"`);
     if (sim.kind === 'seeds' && sim.seeds && o.kind === 'state' && kind === 'state')
       for (const st of Object.keys(o.states ?? {})) if (!(states ?? []).includes(st)) issue(['outputs', i, 'states', st], `"${from}" is never "${st}" (${(states ?? []).join(', ')})`);
     if (sim.kind === 'life-cycle' && sim.lifeCycle && o.kind === 'state' && kind === 'state') {
@@ -1272,6 +1285,8 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
       for (const st of Object.keys(o.states ?? {})) if (!known.includes(st)) issue(['outputs', i, 'states', st], `"${from}" is never "${st}" (${known.join(', ')})`);
     }
   });
+  if (sim.kind === 'port' && !sim.port) issue(['port'], 'a port sim needs `port`');
+  if (sim.port) portIssues(sim.port, controls, ctx.partData ?? []).forEach((x) => issue(['port', ...x.path], x.message));
   if (sim.kind === 'sort' && !sim.sort) issue(['sort'], 'a sort sim needs `sort`');
   if (sim.sort) sortIssues(sim.sort, controls, (ctx.partData ?? []) as readonly SortCheckPart[], sim.outputs).forEach((x) => issue(x.path[0] === 'outputs' ? x.path : ['sort', ...x.path], x.message));
   if (sim.kind === 'matter' && !sim.matter) issue(['matter'], 'a matter sim needs `matter`');
@@ -1303,7 +1318,9 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
   const hzBound = new Set<string>();
   const paced = { number: new Set<string>(), vector: new Set<string>() };
   const placed = new Set(sim.bind.flatMap((b) => ('part' in b && b.place ? (Array.isArray(b.part) ? b.part : [b.part]) : [])));
+  spanIssues(sim.bind, ctx).forEach((x) => issue(x.path, x.message));
   sim.bind.forEach((b, i) => {
+    if ('part' in b && b.span) return;
     const has = (k: string) => k in b && (b as Record<string, unknown>)[k] !== undefined;
     if (has('control') === has('output')) {
       issue(['bind', i], 'a binding names exactly one `control` or `output`');
@@ -1337,6 +1354,11 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
         }
       }
       if (b.count) for (const id of ids) if (!ctx.countable.has(id)) issue(['bind', i, 'count'], `"${id}" needs a \`repeat\` and no \`extra\` to show a count of copies`);
+      if (sim.kind === 'port' && b.count && ctl?.kind === 'step') for (const id of ids) {
+        const copies = (ctx.partData?.find((p) => p.id === id)?.repeat as { count?: number } | undefined)?.count ?? 0;
+        const count = b.count === true ? { per: 1, minus: 0 } : b.count;
+        if (copies < Math.max(sim.port && [sim.port.count.n20, sim.port.count.n40].includes(ctl.id) ? 4 : 0, ...ctl.values.map((v) => Math.max(0, Math.round((v - count.minus) / count.per))))) issue(['bind', i, 'count'], `"${id}" has too few repeat copies for the port count control`);
+      }
       if ((b.glow || b.tint || b.count || b.offset || b.rotate || b.fill) && outp && outp.kind !== 'number')
         issue(['bind', i], `glow / tint / count / offset / rotate / fill need a number, "${src}" is a ${outp.kind}`);
       if (b.shift) {
