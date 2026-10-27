@@ -1,0 +1,179 @@
+---
+id: inside-a-volcano
+order: 3
+title:
+  en: Inside a volcano
+  zh: 火山的里面
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  cutaway: none
+  run: false
+  part: null
+  pose: null
+  hide: []
+  ghost: []
+  layers:
+  - volcano-system
+  labels: &id001
+  - volcano-host
+  - volcano-storage
+  camera:
+    position:
+    - 3
+    - 2.1
+    - 4.8
+    target:
+    - 0
+    - 0.4
+    - 0
+    fov: 34
+  summary:
+    en: Follow a local storage region through a conduit to a vent.
+    zh: 从局部储存区沿通道走到喷发口。
+  sim:
+    set:
+      wave-kind: p
+      wave-step: 0
+      water-depth: 4000
+      sea-step: 0
+      sea-uplift: true
+      flow-mode: none
+  beats:
+  - pose: null
+    labels: *id001
+    sim:
+      set:
+        wave-kind: p
+        wave-step: 0
+        water-depth: 4000
+        sea-step: 0
+        sea-uplift: true
+        flow-mode: none
+    caption:
+      en: Melt and crystals occupy this local storage region, surrounded by solid rock.
+      zh: 熔体和晶体占据这片局部储存区，周围是固态岩石。
+  - pose: magma-rising
+    labels:
+    - volcano-storage
+    - volcano-conduit
+    - volcano-vent
+    sim:
+      set:
+        wave-kind: p
+        wave-step: 0
+        water-depth: 4000
+        sea-step: 0
+        sea-uplift: true
+        flow-mode: none
+    caption:
+      en: The conduit leads towards the vent, the opening onto the surface.
+      zh: 通道通向喷发口，也就是通到地表的开口。
+  - pose: null
+    run: true
+    labels:
+    - volcano-conduit
+    - volcano-vent
+    - volcano-lava
+    sim:
+      set:
+        wave-kind: p
+        wave-step: 0
+        water-depth: 4000
+        sea-step: 0
+        sea-uplift: true
+        flow-mode: up
+    caption:
+      en: Below the surface it is magma; erupted onto the surface it is lava.
+      zh: 地表下叫岩浆，喷出到地表后叫熔岩。
+  - pose: magma-gas
+    run: false
+    labels:
+    - volcano-bubbles
+    - volcano-conduit
+    sim:
+      set:
+        wave-kind: p
+        wave-step: 0
+        water-depth: 4000
+        sea-step: 0
+        sea-uplift: true
+        flow-mode: none
+    caption:
+      en: Falling pressure can release dissolved gas into expanding bubbles that help drive an eruption.
+      zh: 压力下降能使溶解气体析出，形成膨胀的气泡，推动喷发。
+  index:
+    parts:
+    - volcano-cone
+    - volcano-host
+    - volcano-storage
+    - volcano-conduit
+    - volcano-vent
+    - volcano-bubbles
+    - volcano-lava
+---
+
+<Lang en>
+
+The cutaway shows solid surrounding rock and a local region where melt and crystals are stored. Underground molten rock material is called <Term id="magma">magma</Term>. It can contain dissolved gas as well as crystals. The storage region is therefore drawn as material within rock, rather than an empty underground cave or a liquid layer stretching around Earth.
+
+Follow the narrow passage upwards. This conduit is a route through which magma moves towards a <Term id="vent">volcanic vent</Term>, an opening where volcanic material reaches the surface or atmosphere. The cone is the surrounding surface form; the vent is the opening. This model connects its storage region, conduit and vent so that the route can be followed without suggesting a pipe running down to the core.
+
+<Figure src="figures/inside-the-earth-magma-cutaway" alt={{"en": "A volcano with local magma storage, conduit and vent.", "zh": "带局部岩浆储存区、通道与喷发口的火山。"}} caption={{"en": "One schematic storage region connects to a vent through a conduit. Real magma systems can be more complex.", "zh": "这个示意储存区通过通道连接喷发口；真实岩浆系统可以更复杂。"}} />
+
+Once magma erupts onto the surface, it is called <Term id="lava">lava</Term>. The sample on the slope lets you compare the position of lava with the material below ground. The moving dots illustrate a possible upward route. Their spacing and speed were chosen to make that route readable; they do not measure the real rate of an eruption.
+
+As magma rises, the pressure around it can fall. Some dissolved gas then separates into bubbles. The bubbles can grow and help drive an eruption. In the bubble pose, compare the bubbles with the conduit around them. Falling pressure and gas release explain a process; the model does not calculate when a real volcano will erupt.
+
+<More title={{"en": "One simplified route", "zh": "一条简化路线"}}>
+
+Real magma systems can contain more complicated storage and transport arrangements. This section uses one local storage region and a single visible route to the vent; its shape is a teaching choice.
+
+</More>
+
+<More title={{"en": "Mostly solid and partly molten", "zh": "主体固态与局部熔融"}}>
+
+Partial melting leaves solid material alongside melt. Local magma and crystals can coexist while most surrounding rock and most mantle remain solid.
+
+</More>
+
+<More title={{"en": "No supply from the core", "zh": "供浆不来自地核"}}>
+
+NPS explicitly distinguishes volcanic magma from the core. The local storage and route shown here stay in a rock section; the globe and volcano are independent models.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+剖面里，固态围岩包着一片局部储存区，里面既有熔体，也有晶体。地下的熔融岩石物质叫<Term id="magma">岩浆</Term>，还可能含有溶解气体。因此储存区画成岩石中的物质，不是空洞，也不是绕地球一圈的液态层。
+
+沿着狭窄的岩浆通道向上看。它通向<Term id="vent">喷发口</Term>，也就是火山物质到达地表或大气的开口。火山锥是周围的地表形态，喷发口则是开口。本模型把储存区、通道与开口连接起来，便于跟踪路线；这条路并不通向地核。
+
+<Figure src="figures/inside-the-earth-magma-cutaway" alt={{"en": "A volcano with local magma storage, conduit and vent.", "zh": "带局部岩浆储存区、通道与喷发口的火山。"}} caption={{"en": "One schematic storage region connects to a vent through a conduit. Real magma systems can be more complex.", "zh": "这个示意储存区通过通道连接喷发口；真实岩浆系统可以更复杂。"}} />
+
+岩浆喷到地表后，叫<Term id="lava">熔岩</Term>。坡上的熔岩样本可以与地下物质的位置比较。移动的点只画出可能的上升路线，点的疏密与速度为方便阅读而定，不是实际喷发速率。选中围岩与通道，可以逐段核对它们的位置。
+
+岩浆上升时，周围压力可能下降，使部分溶解气体析出，形成气泡。气泡膨胀，能够推动喷发。切换到气泡姿态后，比较气泡与周围通道的位置变化。这里解释的是降压和析气过程；并没有计算真实火山何时喷发，也没有给出喷发压力门槛。储存区与通道都能从索引点选，逐件核对各自作用。
+
+<More title={{"en": "One simplified route", "zh": "一条简化路线"}}>
+
+真实岩浆系统的储存与输送结构可能更复杂。这个剖面只采用一片局部储存区，以及一条通到喷发口的可见路线；形态属于教学设计。
+
+</More>
+
+<More title={{"en": "Mostly solid and partly molten", "zh": "主体固态与局部熔融"}}>
+
+部分熔融表示仍有固体与熔体并存。局部岩浆和晶体可以同时存在，周围岩石与大部分地幔仍然保持固态。
+
+</More>
+
+<More title={{"en": "No supply from the core", "zh": "供浆不来自地核"}}>
+
+美国国家公园管理局明确指出，火山岩浆不来自地核。这里的储存区和通道都位于局部岩石剖面中；地球与火山采用各自独立的模型。
+
+</More>
+
+</Lang>

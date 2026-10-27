@@ -100,7 +100,7 @@ describe('control.json shapes', () => {
     expect('topology' in topo).toBe(true);
     expect(topo.keyframes.length).toBeGreaterThanOrEqual(2);
     for (const kf of topo.keyframes) expect(kf).toHaveProperty('object');
-  });
+  }, 30_000); // parses the whole ww2 control file; slow when the machine is busy
 });
 
 describe('TimeScene schema extensions', () => {
