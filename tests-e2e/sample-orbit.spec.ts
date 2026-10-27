@@ -54,11 +54,15 @@ async function open(p: Page, q = '', locale = 'en') {
   await settled(p);
 }
 async function settled(p: Page) {
+  // The stage draws on demand: under load (swiftshader, other suites) the first frame after a change can take seconds.
   await expect
-    .poll(async () => {
-      const o = await orbit(p);
-      return o.rendered?.snapshotId === o.snapshotId;
-    })
+    .poll(
+      async () => {
+        const o = await orbit(p);
+        return o.rendered?.snapshotId === o.snapshotId;
+      },
+      { timeout: 20_000 },
+    )
     .toBe(true);
 }
 async function matrices(p: Page) {
@@ -82,7 +86,7 @@ test.beforeEach(async ({ page }) => {
   await page.setViewportSize({ width: 1600, height: 900 });
 });
 test('day deep link, orb-t validation and actual transforms', async ({ page }) => {
-  await open(page, '?ch=a-turning-earth&sim=obliquity.0~spin-angle.0&orb-t=21600');
+  await open(page, '?ch=a-turning-earth&sim=lab.day~obliquity.0~spin-angle.0&orb-t=21600');
   expect((await orbit(page)).timeSeconds).toBe(21600);
   expect((await orbit(page)).running).toBe(false);
   expect((await sim(page)).outputs['observer-day']).toBe('boundary');
@@ -151,7 +155,8 @@ test('phase north-up ignores main camera orbit; eclipse remains separate', async
   await matrices(page);
 });
 test('39 chapter+beat links reproduce presentation instant states and actual rendered bindings', async ({ page }) => {
-  test.setTimeout(240000);
+  // 39 page loads plus 39 instant beats: about 4 min on an idle machine with software WebGL.
+  test.setTimeout(600_000);
   await open(page);
   const beats = await page.evaluate(() => window.__atlas!.beats());
   expect(beats).toHaveLength(39);
