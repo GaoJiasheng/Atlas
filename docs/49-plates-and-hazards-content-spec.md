@@ -741,6 +741,11 @@ S05/S09/S46/S52不作为本题必要来源：未成功再次直取的部分分�
    - 读取几 MB 数据的就绪等待放宽到 30 s；
    - 合成 fixture 的拦截路由在 service worker 缓存之后会失效，所以 fixture spec 阻止 service worker。
 
+- 第六次合并（main a2345d4：space-race、TimeScene polish、beatState、geography）解决了 4 个冲突。目录层和参考层仍作为 `timeLayerRows({ dated })` 的行。合并后：
+  - check 0 错误，validate 85 主题 0 错；
+  - test 218 个文件、5,424 项全部通过；build 通过；
+  - `pnpm shoot <t> --beats --keys --gpu`（en/paper）：plates-and-hazards、sample-science-layers、singapore-land-use、ww2、space-race、dinosaur-earth、southeast-asia 都是 0 失败。
+
 **载入与预算**
 - 发布几何 1.45 MB，目录 4.98 MB。
 - 每层在首次开启时才载入，深链到某章只取该章的图层；`data.json` 为 46 KB。
