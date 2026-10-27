@@ -697,6 +697,13 @@ S05/S09/S46/S52不作为本题必要来源：未成功再次直取的部分分�
   - 两套 test hook 合并；
   - 两个主题的许可说明都保留。
 - 第三次合并后发现一个回归：main 的 defaults 去掉了 `pick: null`，而 store 只把 defaults 里有的键写进 URL，结果 `pick` 不再写入 URL，刷新后选中丢失。e2e 抓到了这个问题；现已补回 `pick: null`，并加了单测。
+- 第四次合并带进 southeast-asia 的地理语境（`gc` / `at`）、sun-earth-moon、container-port 和 bones，解决了 4 个冲突：
+  - `pick` 与 `gc`、`at` 并存；
+  - 校验同时检查 geography 图层与目录索引；
+  - docs/06 两节都保留。
+- 第四次合并后：
+  - check 0 错误；validate 79 主题 0 错 0 警告；test 206 个文件、5,220 项全部通过；
+  - 本题与两个 fixture 的 e2e 17/17 通过，smoke 14/14 通过；`pnpm shoot plates-and-hazards --beats --keys` 0 失败。
 
 **看到的问题与已修复**
 
