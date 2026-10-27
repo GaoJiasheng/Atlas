@@ -788,3 +788,25 @@ Chromium 本机可跑（机器负载 90–140，多代理同时跑浏览器）�
 **e2e**（`CI=1 ATLAS_E2E_PORT=5422`；负载平均 120–250，主会话要求不跑全量，全量由合并时执行）：`sun-earth-moon.spec.ts` 13/13 通过；`smoke.spec.ts` 14/14；`sample-orbit.spec.ts` 除 39 直链一项外 6/6。默认 60 s 超时在这台机器上对三个 spec 都有大量超时（含无关的 `sample-space`），加 `--timeout` 单独重跑后通过；39 直链测试自带 600 s 上限，本机负载下需要 23.6 min，临时抬高上限（已还原）单跑通过。唯一真失败是测试本身：`published content` 四项用 `.atlas-figure img` 计数得 2，因为中英文正文各有一份 `<Figure>` 同在 DOM（一份被 CSS 隐藏），改成 `img:visible` 后四项通过。
 
 **剩余**：`FIXES.md` 五项（地轴无标签、1280 及以下窄屏满月拍被卡遮住、近景导引线过粗、影图条近乎空白、几处小标注），交 Codex 返工后复验；§8 清单中“截图保存到 `docs/screenshots/sun-earth-moon/`”未做（截图只在验收者本机 `shots/`，不进 git）。
+
+### 9.5 F1–F5 返工（Codex，2026-10-27）
+
+按主会话的明确指示处理 `src/content/topics/sun-earth-moon/FIXES.md`，不运行浏览器 gates、shoot、GPU，也不打开或驱动用户浏览器/桌面。无 git 写入，无 package.json / lockfile / review queue 改动。以下是实现与解析验证记录，不替代 §8 或主会话的浏览器复验。
+
+- **F1**：增加可选 `bodyTransform.labelPoint`，局部锚点随同一四元数/显示半径变换，保持包围盒中心不变；本题地轴指向 `[0,1.35,0]` 轴端，近侧圆片指向外表面。本题 `orbit-guides.labelAnchors: "strokes"` 把平面标签放在法线端、年轨道标签放在真实轨道采样点；未启用的既有主题保留 bounds 中心。逐拍解析检查 observer-marker / near-side-mark 的相机方向超过球面透视切线阈值；地轴与法线锚点在两种尺度下都在球外，轴向与共享快照一致。
+- **F2**：通用可选 `views.hudFrame.parts` 只在本题列三天体，默认关闭，既有主题包括 1600×900 保持原相机行为。Model3DStage 在布局变化时量取实际可见 HUD 块（overlay 按卡片实宽），得到留 12 px 间隔的舞台自由矩形。CameraRig 保留已有窄舞台宽高比后拉，再按可见主体包围盒每个点的深度求可行平移区间与最小后拉；fov/视线方向不变，已合适的镜头不变。作者镜头完全排除的对象不强行拉回近景，避免地球特写被远处太阳撑成全景。每次从作者镜头重算，支持 resize、卡片折叠、抽屉、HUD/演示变化、共享快照与尺度切换；拖拽交还自由相机。没有按 1280 或 1024 设一套额外镜头数值。
+- **F3**：新增可选 orbit-guides `radius`（地球显示半径的比例），本题取 0.006，即原管半径的一半；未写仍用 0.012。法线和倾角弧保留几何、同一可选对象与 token；地轴本体不变。最终细线可读性留给目视复验。
+- **F4**：保持真实同尺度有限太阳影图；新增可选 `orbitRotation.panel.shadowNote`，本题卡内显示 “At one scale, the shadow cones are too thin to see clearly.” / “同一比例下，影锥太细，难以看清。” 不放大影锥或改物理计算。保留影图的编辑决定待 Gavin 后续审读，已写 REVIEW.md；其他主题没有新说明文字。
+- **F5 四项**：01.5 的 Earth track 引线不再指向太阳中心；02.5 的 Orbital plane 引线指向法线端，避开地球/赤道；04.5 改镜头使太阳出画、06.5 将镜头与目标向太阳侧移，使太阳在图中右移；04.5 保持 α90 / synchronous=false，用新方位同时看见圆片标记和受光远侧区域。单测确认选定远侧表面法向同时朝向太阳、背离地球且朝向相机，字幕不改。
+
+**实现/测试**：纯函数 `lib/hud-framing.ts`（无 DOM/Three.js 依赖）；8 个单测用 Three.js 实际透视投影回算验证两种窄桌面自由带、非验收中间尺寸、手机、不同深度、非对称上下/左右留白、画外太阳、已合适镜头不变和无有效布局的回退；内容测试另加 4 项，验证旧 sample-orbit 的所有新字段缺省、两尺度锚点、全部观察点/近侧标记可见半球以及 04.5 受光远侧。文档契约同步 docs/06，逐项处理同步 FIXES.md。
+
+| Gate | 最终结果 |
+|---|---|
+| `pnpm check` | 0 errors / 0 warnings，3 个仓库既有 unused hints。 |
+| `pnpm validate` | 58 topics，0 errors / 0 warnings。 |
+| `pnpm test` | 161 files / **4289 tests passed**。首轮与 check/validate 同时运行时，既有 `schemas.test.ts` 的 WW2 TopoJSON 用例超过原 5 s 超时；不改测试/超时，之后单独重跑整个 suite 全绿。 |
+| `pnpm build` | 119 pages，静态构建成功。 |
+| shoot / 浏览器 e2e / GPU | 按本轮用户明确指示跳过，未调用浏览器或桌面工具。 |
+
+**主会话复验重点**：1280×720 / 1024×768 的 04.3、05.3、07.3、07.5 主体是否都在自由区；1600×900 与中间尺寸 resize / 卡片折叠 / 尺度切换 / 自由相机；双语双主题的轴、平面、观察点、近侧标记标签；01.5/02.5 的锚点，04.5/06.5 的太阳与 04.5 的受光远侧；近景法线/倾角弧细线及 F4 新说明后的卡片高度。§8 不据静态结果勾选。

@@ -706,6 +706,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
       {orbitSession && <OrbitDriver orbit={orbitSession} data={data} handles={handles} bridge={bridge} />}
       <Flows bridge={bridge} flows={data.flows} layers={s.view === 'exploded' ? NO_LAYERS : s.layers} look={look} clipping={clipping} effects={sim?.flows} fieldLines={linesOf} />
       <CameraRig
+        handles={handles}
         orbitSession={orbitSession}
         store={store}
         ui={ui}

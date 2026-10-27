@@ -7,7 +7,9 @@ import solar from '../../src/content/topics/sun-earth-moon/data/singapore-sun-20
 import { simSchema } from '../../src/engines/space-scene/sim-schema';
 import { resolveSimValues } from '../../src/engines/space-scene/lib/sim/controls';
 import { orbitSnapshot } from '../../src/engines/space-scene/lib/sim/orbit-rotation';
-import { orbitDisplay, orbitalTiltGuide } from '../../src/engines/space-scene/lib/sim/orbit-projection';
+import { orbitDisplay, orbitalTiltGuide, bodyPlacement, orbitGuideLabelPoint } from '../../src/engines/space-scene/lib/sim/orbit-projection';
+import { dot, unit, sub, rotate, add, type V3 } from '../../src/engines/space-scene/lib/sim/orbit-rotation';
+import { isOrbitCamera } from '../../src/engines/core/camera';
 import type { SpaceChapterState } from '../../src/engines/space-scene/schema';
 const root = resolve('src/content/topics/sun-earth-moon');
 const chapters = readdirSync(`${root}/chapters`).sort().map((file) => {
@@ -114,6 +116,60 @@ describe('sun-earth-moon · published content and scientific captions', () => {
       for(let i=0;i<3;i++) expect(end[i]!/(d.radii.earth*1.55)).toBeCloseTo(s.axis[i]!,12);
       if(tilt===0) expect(arc[0]).toEqual(end);
     }
+  });
+  it('opts only this topic into the new framing, guide weight, stroke anchors and shadow note', () => {
+    const fixture=JSON.parse(readFileSync(resolve('src/content/topics/sample-orbit/data/parts.json'),'utf8'));
+    const old=simSchema.parse(fixture.sim);
+    expect(fixture.views.hudFrame).toBeUndefined();
+    expect(old.orbitRotation?.panel.shadowNote).toBeUndefined();
+    const oldGuide=old.overlays.find(o => o.kind === 'orbit-guides');
+    if (oldGuide?.kind !== 'orbit-guides') throw new Error('fixture guide missing');
+    expect(oldGuide.radius).toBeUndefined(); expect(oldGuide.labelAnchors).toBeUndefined();
+    expect(raw.views.hudFrame.parts).toEqual(['sun-body','earth-body','moon-body']);
+    const guide=sim.overlays.find(o => o.kind === 'orbit-guides');
+    if (guide?.kind !== 'orbit-guides') throw new Error('guide missing');
+    expect(guide.radius).toBe(.006); expect(guide.labelAnchors).toBe('strokes');
+    expect(cfg.panel.shadowNote?.en).toContain('too thin'); expect(cfg.panel.shadowNote?.zh).toContain('太细');
+  });
+  it('axis and plane labels point beyond Earth’s surface, and the yearly track anchor lies on the track', () => {
+    const b = sim.bind.find(b => 'part' in b && b.part === 'earth-axis')!;
+    if (!('bodyTransform' in b) || !b.bodyTransform) throw new Error('axis binding missing');
+    for (const scale of ['schematic','true-scale']) for (const beat of [0,1,2,3,4]) {
+      const s=snapshot(2,beat), d=orbitDisplay(cfg,s,scale);
+      const t=bodyPlacement(s,d,b.bodyTransform);
+      expect(t.labelOffset).toBeDefined();
+      expect(Math.hypot(...t.labelOffset!)).toBeCloseTo(d.radii.earth*1.35,12);
+      expect(dot(unit(t.labelOffset!),s.axis)).toBeCloseTo(1,12);
+      const plane=orbitGuideLabelPoint('plane',d)!;
+      expect(plane).toEqual(orbitalTiltGuide(d.centres.earth,s.axis,d.radii.earth,.84)[7]);
+      const track=orbitGuideLabelPoint('earthTrack',d)!;
+      expect(Math.hypot(...sub(track,d.centres.sun))).toBeCloseTo(Math.hypot(...sub(d.centres.earth,d.centres.sun)),10);
+      expect(Math.hypot(...sub(track,d.centres.earth))).toBeGreaterThan(d.radii.earth*2);
+    }
+  });
+  it('observer and near-side label anchors are on the visible hemisphere in every authored labelled beat', () => {
+    chapters.forEach((c,ci) => c.state.beats?.forEach((b,bi) => {
+      const cam=b.camera ?? c.state.camera;
+      if (!cam || typeof cam === 'string' || !isOrbitCamera(cam)) throw new Error('authored camera missing');
+      const s=snapshot(ci,bi), d=orbitDisplay(cfg,s,'schematic');
+      for (const id of b.labels ?? c.state.labels ?? []) {
+        if (id !== 'observer-marker' && id !== 'near-side-mark') continue;
+        const body=id === 'observer-marker' ? 'earth' : 'moon';
+        const n=id === 'observer-marker' ? unit(sub(s.bodies.observer.position,s.bodies.earth.position)) : rotate(s.bodies.moon.quaternion,[1,0,0]);
+        const toCam=sub(cam.position as V3,d.centres[body]);
+        // Perspective tangent: a positive dot alone is insufficient near a sphere’s limb.
+        expect(dot(n,unit(toCam)),`${c.id}.${bi+1} ${id}`).toBeGreaterThan(d.radii[body]/Math.hypot(...toCam));
+      }
+    }));
+  });
+  it('04.5 exposes a sunlit patch on the lunar far hemisphere while keeping the orientation mark visible', () => {
+    const s=snapshot(4,4), d=orbitDisplay(cfg,s,'schematic'), cam=chapters[4]!.state.beats![4]!.camera!;
+    if (typeof cam === 'string' || !isOrbitCamera(cam)) throw new Error('camera missing');
+    const far=unit(sub(s.bodies.moon.position,s.bodies.earth.position));
+    const patch=unit(add(far,s.solarDirections.moon));
+    expect(dot(patch,far)).toBeGreaterThan(.5);
+    expect(dot(patch,s.solarDirections.moon)).toBeGreaterThan(.5);
+    expect(dot(patch,unit(sub(cam.position as V3,d.centres.moon)))).toBeGreaterThan(.3);
   });
   it('calendar beats retain continuous phases without imposing a full Moon on day fifteen', () => {
     expect(chapters[7]!.state.sim?.set?.['lunar-tilt']).toBe(5.145);

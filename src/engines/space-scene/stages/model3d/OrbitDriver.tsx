@@ -6,7 +6,7 @@ import type { PartsFile } from '../../schema';
 import type { PartHandle } from './PartNode';
 import type { StageBridge } from '../../bridge';
 import type { OrbitSession } from '../../lib/sim/orbit-session';
-import { bodyPlacement, orbitalTiltGuide } from '../../lib/sim/orbit-projection';
+import { bodyPlacement, orbitalTiltGuide, orbitGuideLabelPoint } from '../../lib/sim/orbit-projection';
 import { add, mul, sub, unit, cross, rotate, qm, qy, qx, type V3 } from '../../lib/sim/orbit-rotation';
 import { holds } from '../../lib/sim/bind';
 import { keepAnimating, useRuntime } from './runtime';
@@ -214,9 +214,12 @@ export function OrbitDriver({ orbit, data, handles, bridge }: { orbit: OrbitSess
       tmp.box.setFromObject(o);
       if (h.visible) tmp.bounds.union(tmp.box);
       tmp.box.getCenter(tmp.v);
-      h.point[0] = h.offset[0] = tmp.v.x - o.position.x;
-      h.point[1] = h.offset[1] = tmp.v.y - o.position.y;
-      h.point[2] = h.offset[2] = tmp.v.z - o.position.z;
+      h.offset[0] = tmp.v.x - o.position.x;
+      h.offset[1] = tmp.v.y - o.position.y;
+      h.offset[2] = tmp.v.z - o.position.z;
+      if (t.labelOffset) tmp.v.fromArray(t.labelOffset);
+      else tmp.v.set(...h.offset);
+      tmp.v.toArray(h.point);
       tmp.box.getSize(tmp.scale).multiplyScalar(0.5);
       h.half[0] = tmp.scale.x;
       h.half[1] = tmp.scale.y;
@@ -256,7 +259,7 @@ export function OrbitDriver({ orbit, data, handles, bridge }: { orbit: OrbitSess
         const h = handles.get(id),
           g = geometries.get(id);
         if (!h?.object || !g) continue;
-        if (tmp.last !== orbit.id) writeSegments(g, guidePoints(key, orbit), Math.max(d.radii.earth * 0.012, 1e-7));
+        if (tmp.last !== orbit.id) writeSegments(g, guidePoints(key, orbit), Math.max(d.radii.earth * (overlay.radius ?? 0.012), 1e-7));
         for (const mesh of h.meshes) if (mesh instanceof Mesh && mesh.geometry !== g) mesh.geometry = g;
         const enabled =
           when &&
@@ -276,9 +279,11 @@ export function OrbitDriver({ orbit, data, handles, bridge }: { orbit: OrbitSess
         h.object.updateWorldMatrix(true, true);
         if (g.boundingBox) {
           g.boundingBox.getCenter(tmp.v);
-          h.point[0] = h.offset[0] = tmp.v.x;
-          h.point[1] = h.offset[1] = tmp.v.y;
-          h.point[2] = h.offset[2] = tmp.v.z;
+          tmp.v.toArray(h.offset);
+          // Anchor the name on a visible stroke, never the empty centre of a guide.
+          const anchor = overlay.labelAnchors === 'strokes' ? orbitGuideLabelPoint(key, d) : null;
+          if (anchor) tmp.v.fromArray(anchor);
+          tmp.v.toArray(h.point);
           g.boundingBox.getSize(tmp.scale).multiplyScalar(0.5);
           h.half[0] = tmp.scale.x;
           h.half[1] = tmp.scale.y;

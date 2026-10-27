@@ -71,14 +71,16 @@ export function bodyPlacement(
     localDirection?: V3 | undefined;
     surfaceFactor?: number | undefined;
     scaleWithRadius: boolean;
+    labelPoint?: V3 | undefined;
   },
-): { position: V3; quaternion: Q4; scale: number } {
+): { position: V3; quaternion: Q4; scale: number; labelOffset: V3 | undefined } {
   const q = s.bodies[b.body].quaternion;
   return {
     position:
       b.attachment === 'surface'
         ? add(d.centres[b.body], mul(rotate(q, unit(b.localDirection!)), d.radii[b.body] * (b.surfaceFactor ?? 1)))
         : d.centres[b.body],
+    labelOffset: b.labelPoint ? mul(rotate(q, b.labelPoint), b.scaleWithRadius ? d.radii[b.body] : 1) : undefined,
     quaternion: q,
     scale: b.scaleWithRadius ? d.radii[b.body] : 1,
   };
@@ -101,4 +103,15 @@ export function orbitalTiltGuide(earth: V3, axis: V3, earthRadius: number, plane
       return lift([direction[0] * Math.sin(a) * arcRadius, Math.cos(a) * arcRadius, direction[2] * Math.sin(a) * arcRadius]);
     }),
   ];
+}
+
+/** Label real guide strokes rather than the centre of their mostly empty bounds. */
+export function orbitGuideLabelPoint(key: string, d: OrbitDisplay): V3 | null {
+  if (key === 'plane') return add(d.centres.earth, [0, d.radii.earth * 1.7, 0]);
+  if (key === 'earthTrack') {
+    const rel = sub(d.centres.earth, d.centres.sun), radius = Math.hypot(...rel), step = Math.PI * 2 / 128;
+    const a = (Math.round(Math.atan2(-rel[2], rel[0]) / step) + 4) * step;
+    return add(d.centres.sun, [radius * Math.cos(a), 0, -radius * Math.sin(a)]);
+  }
+  return null;
 }

@@ -497,6 +497,13 @@
     },
     "section": {
       "plane": "xz"
+    },
+    "hudFrame": {
+      "parts": [
+        "sun-body",
+        "earth-body",
+        "moon-body"
+      ]
     }
   },
   "sim": {
@@ -1514,7 +1521,12 @@
             0,
             0
           ],
-          "surfaceFactor": 1.006
+          "surfaceFactor": 1.006,
+          "labelPoint": [
+            0.006,
+            0,
+            0
+          ]
         }
       },
       {
@@ -1522,7 +1534,12 @@
         "part": "earth-axis",
         "bodyTransform": {
           "body": "earth",
-          "attachment": "centre"
+          "attachment": "centre",
+          "labelPoint": [
+            0,
+            1.35,
+            0
+          ]
         }
       },
       {
@@ -1550,7 +1567,9 @@
         "tracks": true,
         "nodes": true,
         "incidence": true,
-        "terminators": true
+        "terminators": true,
+        "radius": 0.006,
+        "labelAnchors": "strokes"
       },
       {
         "kind": "orbit-eclipse-shadow",
@@ -1652,7 +1671,11 @@
           "eclipse": "apparent-discs",
           "local-year": "solar-year"
         },
-        "north": "earth-axis"
+        "north": "earth-axis",
+        "shadowNote": {
+          "en": "At one scale, the shadow cones are too thin to see clearly.",
+          "zh": "同一比例下，影锥太细，难以看清。"
+        }
       },
       "sources": [
         "S8",

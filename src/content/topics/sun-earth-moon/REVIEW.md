@@ -35,3 +35,9 @@ X-RAY、CUTAWAY、EXPLODED 由既有 orbit 引擎禁用，背景细看说明理�
 ## 本轮静态 gates
 
 `pnpm check`：0 errors / 0 warnings，三个既有 unused hints。`pnpm validate`：58 topics，0 errors / 0 warnings。`pnpm test`：160 files / 4277 tests passed，其中新增内容/倾角导引检查 10 项。`pnpm build`：119 pages。新 e2e 文件静态收集 13 项；浏览器执行、截图、八尺寸、双主题/双语言运行时与 GPU 数据均未执行。
+
+## 返工后补记 · 2026-10-27
+
+F1–F5 的实现与验收交接见 [FIXES.md](FIXES.md) 和 docs/44 §9.5。本轮只做静态与解析验证，按用户要求未启动浏览器、桌面或 GPU；窄屏实际卡片遮挡、标签落定和细线可读性仍交主会话复验。
+
+**F4 请 Gavin 后续定稿**：保留 “Finite Sun · one scale” 真实同尺度影图条；卡内已补英文 “At one scale, the shadow cones are too thin to see clearly.” / 中文“同一比例下，影锥太细，难以看清。”没有为可见性夸大影锥或改动物理计算。影图是否值得继续占用卡片空间，留待 Gavin 看过新版后决定；本轮按指示保留。

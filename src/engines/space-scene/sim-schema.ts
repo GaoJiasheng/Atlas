@@ -904,6 +904,10 @@ export const simOverlaySchema = z.discriminatedUnion('kind', [
     .object({
       kind: z.literal('orbit-guides'),
       group: kebabId,
+      /** Tube radius as a share of Earth’s display radius; absent keeps the original weight. */
+      radius: z.number().finite().positive().max(0.1).optional(),
+      /** Put plane/track labels on visible strokes instead of the bounds centre. */
+      labelAnchors: z.literal('strokes').optional(),
       parts: z.object({ earthTrack: kebabId, lunarTrack: kebabId, plane: kebabId, nodes: kebabId, rays: kebabId, ruler: kebabId }).strict(),
       axes: z.boolean(),
       tracks: z.boolean(),
