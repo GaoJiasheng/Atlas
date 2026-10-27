@@ -33,6 +33,7 @@
  *   engine view on the client (engines may touch window / WebGL freely; the
  *   server renders a stage placeholder). `__atlas.ready` waits for both.
  */
+import { geographyUrlBaseline, geographyUrlPatch } from '../time-scene/lib/geography';
 import { monthlyUrlBaseline, monthlyUrlPatch } from '../time-scene/lib/climatology-state';
 import type { TimeSceneExt } from '../time-scene';
 import type { SceneStore } from './store';
@@ -233,27 +234,32 @@ export default function SceneHost(props: SceneHostProps) {
     if (!dataReady) return;
     const hydrate = () => {
       const decoded = decodeSceneState(window.location.search);
-      const { t: time, month, beat, highlight, part, view, explode, run, cutaway, pose, task, model, sim, ...common } = decoded;
-      const engineFields: UrlEngineFields = { t: time, month, beat, highlight, part, view, explode, run, cutaway, pose, task, model, sim };
+      const { t: time, month, geoContext, beat, highlight, part, view, explode, run, cutaway, pose, task, model, sim, orbitTime, inset, insetVisible, fossilMode, ...common } = decoded;
+      const engineFields: UrlEngineFields = {
+        t: time, month, geoContext, beat, highlight, part, view, explode, run, cutaway, pose, task, model, sim, orbitTime,
+        // The modern-inset fields belong to reconstruction topics only (docs/47 E-DE3).
+        ...(topic.modernInset ? { inset, insetVisible, fossilMode } : {}),
+      };
       const patch = { ...common, ...engine.fromUrl(engineFields, topic) };
-      if (topic.temporalMode === 'climatology') store.getState().hydrate(monthlyUrlPatch(store as SceneStore<TimeSceneExt>, chapters, patch));
+      if (topic.temporalMode === 'geography') store.getState().hydrate(geographyUrlPatch(store as SceneStore<TimeSceneExt>, chapters, patch, topic));
+      else if (topic.temporalMode === 'climatology') store.getState().hydrate(monthlyUrlPatch(store as SceneStore<TimeSceneExt>, chapters, patch));
       else if (Object.keys(patch).length > 0) store.getState().hydrate(patch);
     };
     hydrate();
-    if (topic.temporalMode === 'climatology') window.addEventListener('popstate', hydrate);
+    if (topic.temporalMode === 'climatology' || topic.temporalMode === 'geography') window.addEventListener('popstate', hydrate);
     const stopSync = startUrlSync({
       read: () => store.getState().snapshot() as UrlState,
       // A monthly topic's baseline is known before its view loads, so the first canonical write is already right.
       baseline: (state) =>
         (hud.getState().controls.urlBaseline?.(state as SceneSnapshot) ??
-          (topic.temporalMode === 'climatology'
+          (topic.temporalMode === 'geography' ? geographyUrlBaseline(store as SceneStore<TimeSceneExt>, chapters, state as SceneSnapshot<TimeSceneExt>) : topic.temporalMode === 'climatology'
             ? monthlyUrlBaseline(store as SceneStore<TimeSceneExt>, chapters, state as SceneSnapshot<TimeSceneExt>)
             : store.getState().chapterTarget(state.chapter ?? null))) as UrlState,
       subscribe: (listener) => store.subscribe(listener),
     });
     // Canonicalize invalid monthly b/m/t even when the author state needs no change.
-    if (topic.temporalMode === 'climatology') store.getState().patch({});
-    return () => { stopSync(); if (topic.temporalMode === 'climatology') window.removeEventListener('popstate', hydrate); };
+    if (topic.temporalMode === 'climatology' || topic.temporalMode === 'geography') store.getState().patch({});
+    return () => { stopSync(); if (topic.temporalMode === 'climatology' || topic.temporalMode === 'geography') window.removeEventListener('popstate', hydrate); };
   }, [store, hud, engine, dataReady, topic, chapters]);
 
   // Theme: user override > scene (URL / chapter) > topic default.
@@ -358,10 +364,7 @@ export default function SceneHost(props: SceneHostProps) {
   } as CSSProperties;
 
   const [sheetOpen, setSheetOpen] = useState(false);
-  const revealReader = useCallback(() => {
-    hud.setState({ reader: true });
-    setSheetOpen(true);
-  }, [hud]);
+  const [readerReveal, setReaderReveal] = useState(0);
 
   /* ---------------- chapter-body controls (static HTML, delegated) ---------------- */
   const sceneRef = useRef<HTMLDivElement>(null);
@@ -435,9 +438,22 @@ export default function SceneHost(props: SceneHostProps) {
     };
   }, []);
 
+  const revealReader = useCallback(() => {
+    // The phone sheet is temporary; opening it must not overwrite the dock's
+    // persisted collapse preference (scene.css switches at 1024 CSS px).
+    if (window.matchMedia('(min-width: 1024px)').matches) hud.setState({ reader: true });
+    setSheetOpen(true);
+    setReaderReveal((revision) => revision + 1);
+  }, [hud]);
+  // Wait for the existing drawer/reader to render open. Re-selecting the same
+  // event must also return to the top, even if its inspector did not remount.
+  useLayoutEffect(() => {
+    if (readerReveal > 0) sceneRef.current?.querySelector('.atlas-panel__scroll')?.scrollTo({ top: 0 });
+  }, [readerReveal]);
+
   const context = useMemo<SceneContextValue>(
-    () => ({ store, hud, actions, topic, chapters, locale, slots, revealReader }),
-    [store, hud, actions, topic, chapters, locale, slots, revealReader],
+    () => ({ store, hud, actions, revealReader, topic, chapters, locale, slots }),
+    [store, hud, actions, revealReader, topic, chapters, locale, slots],
   );
 
   /* ---------------- window.__atlas ---------------- */

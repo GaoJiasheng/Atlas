@@ -1,0 +1,36 @@
+# Authoring contract: docs/51; review notes: REVIEW.md; data provenance: data/SOURCES.md.
+id: industrial-revolution
+title: { en: The Industrial Revolution, zh: 工业革命 }
+subtitle: { en: 'Britain and an unevenly connected world, c.1760–1914', zh: '英国与不均衡地相连的世界，约 1760—1914 年' }
+shortTitle: { en: Industrial Revolution, zh: 工业革命 }
+subject: history
+mode: time
+engine: time-scene
+stage: geo
+theme: paper
+status: draft
+datePrecision: year
+sensitivity: open
+tags: [history, map]
+illustration: industrial-revolution
+blocLabels:
+  axis: { en: Comparative group A, zh: 比较组甲 }
+  allied: { en: Comparative group B, zh: 比较组乙 }
+  neutral: { en: Reference, zh: 参照 }
+  out: { en: Outside this view, zh: 本视图之外 }
+note:
+  en: 'Modern city references and geology · recorded continental railways since 1834 · gaps are limits of these data'
+  zh: '现代城市与地质参照 · 自1834年起有记录的大陆铁路 · 空白表示本数据的局限'
+datedLayers:
+  - id: rail-rshapes
+    file: industrial-rail-rshapes
+    kind: line
+    color: token:ink
+    label: { en: Recorded continental railways, zh: 资料记录的大陆铁路 }
+    count: false
+  - id: coal-strata
+    file: industrial-coal-strata
+    kind: area
+    color: token:neutral
+    label: { en: 'Coal-bearing strata (modern reference)', zh: '含煤地层（现代参照）' }
+    count: false

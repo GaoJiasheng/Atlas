@@ -519,7 +519,7 @@ S90：本spec §3.0–3.7、simulation-table.json，Atlas teaching model design 
 
 看了什么：`pnpm shoot saturn-v --beats --layout --keys` EN/ZH × paper/cinema，35拍×4套截图、8个视口含1024×768与390×844、封面PNG、章图渲染、模式截图；另用单拍复现核对每条“no label”提示。
 
-- **引擎小修（带测试）**：渲染器远裁剪面固定200，而整栈远景相机离目标230m，运行时整枚火箭被裁掉（只剩标签）。`lib/camera.ts` 新增 `cameraFar(minDistance, radius)`（小模型仍为200，大模型取缩放上限+半径），`CameraRig` 在模型加载后设置；`tests/space-scene/camera.test.ts` 加1例。只对模型半径大于约10.5m（缩放上限+半径超过200）的主题有影响：本题，以及 steam-engine / energy-conversion 等约12m的模型，其远裁剪面由200增到约250，没有可见变化（steam-engine、energy-conversion、aircon 已跑 `--beats --keys` 回归）。
+- **引擎（无改动）**：渲染器远裁剪面固定200，而整栈远景相机离目标230m，运行时整枚火箭被裁掉（只剩标签）。验收时在本分支加了一个小修；合并 main 时发现 container-port 已落地同一问题的修法（`farPlane(radius)`，`CameraRig` 加载后设置，带单测），故丢弃本分支的重复修改，以 main 为准。本题无引擎改动。
 - **镜头/数据修正**：整栈镜头（hero/stages及各章引用）目标下移到y=45、拉远，使整栈落在底部字幕条上方；tank镜头拉远，两个储箱和各自标签同时在屏；docking第1拍拉远降低，使折叠支腿可见；orientation第3拍拉远，露出逃逸塔并加标签；orientation第2拍与stages第1拍改 xray（S-II 壳的标签在非 xray 下被自身储箱遮挡而淡出，且字幕谈的是各级发动机）。
 - **索引补洞**：orientation正文与第1拍字幕提到逃逸系统，但`les-tower`不在本章index；已加入（同时是第1、3拍标签）。05章正文提到“逃逸塔与对接探杆已不存在”，它们在该章任何一拍都不可见，故不入索引（按设计，见REVIEW）。
 - **测试修正**：`tests-e2e/saturn-v.spec.ts` 的读数断言改为匹配千分位（界面显示 `3,295.84`）；试一试是步进按钮（上一值/下一值），不是按值的按钮，改为点步进按钮；刷新后等 `ready`。

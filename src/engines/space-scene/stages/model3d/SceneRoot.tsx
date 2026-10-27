@@ -63,7 +63,10 @@ import { SimOverlays } from './SimOverlays';
 import { TimelineClock } from './TimelineClock';
 import { AnimClocks } from './AnimClocks';
 import { MechanismDriver } from './MechanismDriver';
+import { SpanDriver } from './SpanDriver';
 import type { Matrix4 } from 'three';
+import { getOrbitSession } from '../../lib/sim/orbit-session';
+import { OrbitClockDriver, OrbitDriver } from './OrbitDriver';
 
 const GltfSource = lazy(() => import('./GltfSource'));
 
@@ -192,6 +195,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
       instant: st.transition.instant,
     })),
   );
+  const orbitSession = data.sim?.orbitRotation ? getOrbitSession(store, data.sim) : null;
   const invalidate = useThree((st) => st.invalidate);
   const gl = useThree((st) => st.gl);
   const dpr = useThree((st) => st.viewport.dpr);
@@ -379,7 +383,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
   const simRun = useMemo<{ effects: SimEffects; outputs: SimOutputs; frames: MagnetFrames } | null>(() => {
     if (!data.sim) return null;
     const values = resolveSimValues(data.sim, s.sim);
-    const { outputs, frames } = evaluateSimOnStage(data.sim, data, values, s.pose);
+    const { outputs, frames } = orbitSession ? { outputs: orbitSession.outputs, frames: new Map() } : evaluateSimOnStage(data.sim, data, values, s.pose);
     return { effects: simEffects(data.sim, values, outputs), outputs, frames };
   }, [data, s.sim, s.pose]);
   const sim = simRun?.effects ?? null;
@@ -595,7 +599,8 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
   return (
     <RuntimeContext.Provider value={runtime}>
       {data.mechanisms.length > 0 && <MechanismDriver data={data} store={store} ui={ui} bridge={bridge} />}
-      <RunClock run={s.run} alwaysOn={alwaysOn} />
+      {orbitSession && <OrbitClockDriver orbit={orbitSession} />}
+      {!orbitSession && <RunClock run={s.run} alwaysOn={alwaysOn} />}
       <AnimClocks animations={data.animations} effects={sim?.animations} bridge={bridge} snapKey={snap.current.key} />
       <ExplodeClock target={explodeTarget} snapKey={snap.current.key} />
       <Lighting look={look} center={bounds.center} radius={bounds.modelRadius} runtime={runtime} shadows={data.views.shadows} />
@@ -605,7 +610,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
           data={data}
           fitness={fitness}
           rig={rig}
-          input={{ pose: s.pose, exercise: s.exercise, demo: s.demo }}
+          input={{ pose: s.pose, exercise: s.exercise, demo: s.demo, joints: sim?.joints }}
           playable={playable}
           rootRef={rootRef}
           center={bounds.fit.center}
@@ -622,7 +627,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
       {equipment.length > 0 && (
         <Equipment specs={equipment} held={false} grips={grips} footing={footing} trunk={trunkBone} style={equipmentStyle} solid={mannequin} thin={body === 'wire'} />
       )}
-      {simRun && <TimelineClock outputs={simRun.outputs} ui={ui} bridge={bridge} snapKey={snap.current.key} still={s.view === 'exploded' || referenceOn} />}
+      {simRun && !orbitSession && <TimelineClock outputs={simRun.outputs} ui={ui} bridge={bridge} snapKey={snap.current.key} still={s.view === 'exploded' || referenceOn} />}
       <group ref={rootRef} matrixAutoUpdate={false}>
       {equipment.length > 0 && <Equipment specs={equipment} held grips={grips} footing={footing} trunk={trunkBone} style={equipmentStyle} solid={mannequin} thin={body === 'wire'} />}
       {skinShape && skinned && <Mannequin shape={skinShape} color={mannequinColor} on={body === 'mannequin'} hands={handBones} />}
@@ -653,6 +658,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
             tintColor={display.tintRef ? resolveDataColor(display.tintRef, look.tokens, look.theme) : null}
             count={sim?.count.get(part.id) ?? null}
             simMove={simMoves.get(part.id) ?? null}
+            airfoilSnap={!!data.sim?.airfoil && [data.sim.airfoil.section.part, 'chord-marker'].includes(part.id)}
             play={sim?.play.get(part.id) ?? null}
             stretch={sim?.stretch.get(part.id) ?? null}
             bend={sim?.bend.get(part.id) ?? null}
@@ -682,6 +688,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
           />
         );
       })}
+      {data.sim && <SpanDriver data={data} bridge={bridge} handles={handles} />}
       {data.sim && data.sim.overlays.length > 0 && simRun && (
         <SimOverlays
           overlays={data.sim.overlays}
@@ -699,8 +706,11 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
       )}
       </group>
       {/* Flow paths do not follow the parts apart: no particles while exploded (docs/12 §7.5, G16). */}
-      <Flows bridge={bridge} flows={data.flows} layers={s.view === 'exploded' ? NO_LAYERS : s.layers} look={look} clipping={clipping} effects={sim?.flows} fieldLines={linesOf} />
+      {orbitSession && <OrbitDriver orbit={orbitSession} data={data} handles={handles} bridge={bridge} />}
+      <Flows airfoil={data.sim?.airfoil ? {file:data,ui,values:resolveSimValues(data.sim,s.sim),on:s.view !== 'exploded' && displays.get(data.sim.airfoil.section.part)?.visible === true,run:s.run && !referenceOn} : undefined} bridge={bridge} flows={data.flows} layers={s.view === 'exploded' ? NO_LAYERS : s.layers} look={look} clipping={clipping} effects={sim?.flows} fieldLines={linesOf} />
       <CameraRig
+        handles={handles}
+        orbitSession={orbitSession}
         store={store}
         ui={ui}
         bridge={bridge}

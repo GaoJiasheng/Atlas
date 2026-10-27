@@ -1,0 +1,172 @@
+---
+{
+  "id": "an-onward-connection",
+  "order": 4,
+  "title": {
+    "en": "An onward connection",
+    "zh": "接着乘下一条船"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "cutaway": "none",
+    "run": false,
+    "pose": "port-source",
+    "camera": {
+      "position": [
+        105,
+        95,
+        115
+      ],
+      "target": [
+        0,
+        12,
+        8
+      ],
+      "fov": 36
+    },
+    "layers": [
+      "vessel",
+      "quay-crane",
+      "transfer",
+      "yard",
+      "trace"
+    ],
+    "hide": [
+      "sample-20",
+      "sample-40",
+      "yard-target",
+      "yard-blocker-a",
+      "yard-blocker-b",
+      "control-room"
+    ],
+    "part": "working-box",
+    "labels": [
+      "working-box",
+      "ship-hull",
+      "onward-ship",
+      "destination-box"
+    ],
+    "question": {
+      "en": "Is all cargo unloaded here delivered into Singapore?",
+      "zh": "卸在这里的货物都要送进新加坡吗？"
+    },
+    "summary": {
+      "en": "A transhipment box can pass through the yard and join a ship for another destination.",
+      "zh": "转运箱可以经过堆场，再装上去另一个目的地的船。"
+    },
+    "index": {
+      "parts": [
+        "working-box",
+        "ship-hull",
+        "agv-body",
+        "yard-gantry",
+        "onward-ship",
+        "destination-box"
+      ]
+    },
+    "sim": {
+      "set": {
+        "n20": 2,
+        "n40": 1,
+        "lock-confirmed": true,
+        "above": 2,
+        "yard-state": "original",
+        "cranes": 1,
+        "carriers": 1,
+        "yards": 1,
+        "arrivals": 24,
+        "hours": 2,
+        "lift-live": false
+      }
+    },
+    "beats": [
+      {
+        "pose": "transfer-on-carrier",
+        "caption": {
+          "en": "After unloading from the first ship, this box enters the landside transfer.",
+          "zh": "这只箱从第一条船卸下后，进入岸上运输环节。"
+        }
+      },
+      {
+        "pose": "transfer-at-yard",
+        "caption": {
+          "en": "The same box waits in the yard for its next connection.",
+          "zh": "同一只箱暂放堆场，等待下一段运输。"
+        }
+      },
+      {
+        "pose": "transfer-onward",
+        "part": "onward-ship",
+        "caption": {
+          "en": "The box joins an onward ship for another destination; this is a transhipment transfer.",
+          "zh": "箱子装上接续船继续去别处；这是一种转运过程。"
+        }
+      },
+      {
+        "pose": "transfer-onward",
+        "part": "destination-box",
+        "highlight": {
+          "signal": [
+            "destination-box"
+          ],
+          "cold": [
+            "working-box"
+          ]
+        },
+        "caption": {
+          "en": "Other cargo is delivered locally; both paths should not be called local imports.",
+          "zh": "另一些货物会在本地交付；两条去向不能都叫本地进口。"
+        }
+      }
+    ]
+  }
+}
+---
+<Lang en>
+
+Return to the working box from the ship. In the first view it has reached the carrier. In the next it waits in the yard. Its position changes, but it is still the same selected object. The model does not create a second copy when the box moves to a new stage.
+
+Now look towards the onward vessel. The same box joins that ship for another destination. This illustrates one common transhipment journey: arrival by sea, a landside transfer and departure by sea. The port is an intermediate connection in the cargo’s journey. Unloading here therefore does not mean that the cargo’s final destination is here.
+
+The separate local-delivery box represents another destination for cargo. It is a different box, so it does not replace the identity of the one being traced. Comparing the two makes the distinction visible: some cargo continues overseas, while other cargo is delivered into the local economy. This is a diagram of possible journeys, not a statement about their shares of port traffic.
+
+A yard can provide a place to wait between these stages. The arrival and departure of the vessels need not happen together. The model advances through named positions so that each connection can be inspected. It does not use an actual vessel schedule, predict waiting times or show a geographic route. Use the index to return to the working box after selecting the onward ship, and check that its location matches the current step.
+
+<More title={{ en: "The same box and a statistical count", zh: "同一只箱与统计计数" }}>
+
+Following an object tells us about its identity and journey. It does not establish how a port’s statistical system counts throughput. Do not turn the model’s two ship-side lifts into a formula for the MPA annual total. That total has its own published scope and unit.
+
+</More>
+
+<More title={{ en: "A logistics example", zh: "物流例子" }}>
+
+Singapore Customs describes storage pending transhipment and the requirements applying to goods. Our ship–yard–ship example explains physical movement only. It does not cover every transhipment arrangement, customs classification, inspection or possible change to a shipment.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+回到刚才从船上卸下的工作箱。先看它到了运输车上，再看它在堆场等待。位置变了，选中的仍是同一只箱子。模型不会在进入下一个环节时，另外复制一只来代替它；你可以沿同一个对象继续追踪。
+
+接着看接续船。同一只工作箱装上这条船，前往另一个目的地。这说明一种常见的转运过程：海上到达，经过岸上搬运，再从海上离开。港口是旅程中的中间连接点。因此，在这里卸货，不代表这里就是货物最终要去的地方。
+
+另一个本地交付箱代表不同去向。它是另一只箱，不取代我们一直追踪的工作箱。把两者放在一起比较，就能看清：有的货继续出海，有的货交付本地。这只是可能旅程的对照，没有表示两种去向各占港口货量的多少，也不能按模型里箱子的数量推算比例。
+
+堆场能在这些环节之间提供暂存位置。前后两条船不一定同时到达，所以箱子可能需要等待。模型用几个具名位置逐步展示连接关系，不采用真实船期，不预测等待多久，也没有把示意位移当作地理航线。选过接续船后，可从索引回到工作箱，核对这一拍它在哪里。
+
+<More title={{ en: "The same box and a statistical count", zh: "同一只箱与统计计数" }}>
+
+追踪对象说明它的身份和旅程，却不能决定港口统计怎样计吞吐量。不要从模型里两次船边起吊，推导 MPA 年度数字的计数公式。真实统计有自己公布的范围和单位。
+
+</More>
+
+<More title={{ en: "A logistics example", zh: "物流例子" }}>
+
+新加坡关税局说明了等待转运时的存放和货物要求。这里的船—堆场—船只是搬运例子，没有覆盖全部转运安排、报关分类、检查或货物可能发生的变化。
+
+</More>
+
+</Lang>

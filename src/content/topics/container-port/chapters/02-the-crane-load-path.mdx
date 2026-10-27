@@ -1,0 +1,267 @@
+---
+{
+  "id": "the-crane-load-path",
+  "order": 2,
+  "title": {
+    "en": "The crane’s load path",
+    "zh": "岸桥的起吊链"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "cutaway": "none",
+    "run": false,
+    "pose": "lift-locked",
+    "camera": {
+      "position": [
+        35,
+        38,
+        45
+      ],
+      "target": [
+        0,
+        23,
+        -3
+      ],
+      "fov": 32
+    },
+    "layers": [
+      "vessel",
+      "quay-crane",
+      "transfer",
+      "trace"
+    ],
+    "hide": [
+      "sample-20",
+      "sample-40",
+      "onward-ship",
+      "destination-box",
+      "ship-cargo"
+    ],
+    "part": "spreader",
+    "labels": [
+      "corner-fittings",
+      "twistlocks",
+      "spreader",
+      "trolley",
+      "rope-a"
+    ],
+    "question": {
+      "en": "Which parts of the box does the crane hold?",
+      "zh": "岸桥抓住箱子的什么地方？"
+    },
+    "summary": {
+      "en": "The spreader connects to four upper corners; the hoist and trolley change height and horizontal position.",
+      "zh": "吊具接上四个上角件，起升机构和小车分别改变高度与横向位置。"
+    },
+    "index": {
+      "parts": [
+        "working-box",
+        "corner-fittings",
+        "twistlocks",
+        "spreader",
+        "trolley",
+        "rope-a",
+        "crane-boom",
+        "portal"
+      ]
+    },
+    "sim": {
+      "set": {
+        "n20": 2,
+        "n40": 1,
+        "lock-confirmed": true,
+        "above": 2,
+        "yard-state": "original",
+        "cranes": 1,
+        "carriers": 1,
+        "yards": 1,
+        "arrivals": 24,
+        "hours": 2,
+        "lift-live": false
+      },
+      "try": {
+        "vary": "lock-confirmed",
+        "observe": [
+          "lift-status"
+        ],
+        "replay": [
+          "lift-run"
+        ]
+      }
+    },
+    "beats": [
+      {
+        "pose": "port-source",
+        "view": "xray",
+        "part": "working-box",
+        "labels": [
+          "corner-fittings"
+        ],
+        "camera": {
+          "position": [
+            12,
+            19,
+            -5
+          ],
+          "target": [
+            0,
+            12,
+            -18
+          ],
+          "fov": 32
+        },
+        "hide": [
+          "sample-20",
+          "sample-40",
+          "onward-ship",
+          "destination-box",
+          "ship-cargo",
+          "ship-hull",
+          "ship-deck",
+          "ship-bridge",
+          "portal",
+          "rail-bogies",
+          "crane-rails",
+          "crane-boom",
+          "agv-body",
+          "agv-wheels",
+          "control-room"
+        ],
+        "caption": {
+          "en": "Find the four upper corner fittings; the lifting connections are not at the centre of the thin roof.",
+          "zh": "先找箱顶的四个角件；起吊连接点不在薄屋顶的中央。"
+        }
+      },
+      {
+        "pose": "lift-locked",
+        "view": "xray",
+        "part": "twistlocks",
+        "caption": {
+          "en": "The spreader’s twistlocks engage the corners; this model confirms the connection before lifting.",
+          "zh": "吊具的旋锁接上四角；本模型先确认连接，再开始抬升。"
+        }
+      },
+      {
+        "pose": "lift-raised",
+        "part": "rope-a",
+        "camera": {
+          "position": [
+            41,
+            49,
+            42
+          ],
+          "target": [
+            0,
+            34,
+            -18
+          ],
+          "fov": 32
+        },
+        "caption": {
+          "en": "The hoist raises the box; in this step the trolley has not yet crossed.",
+          "zh": "起升机构把箱子抬高；这一拍小车尚未横移。"
+        }
+      },
+      {
+        "pose": "lift-crossed",
+        "part": "trolley",
+        "camera": {
+          "position": [
+            41,
+            49,
+            56
+          ],
+          "target": [
+            0,
+            34,
+            -4
+          ],
+          "fov": 32
+        },
+        "caption": {
+          "en": "With the box raised, the trolley moves it along the boom towards the quay.",
+          "zh": "箱子保持抬高，小车沿臂架把它移向岸边。"
+        }
+      },
+      {
+        "pose": null,
+        "run": true,
+        "camera": {
+          "position": [
+            75,
+            38,
+            98
+          ],
+          "target": [
+            0,
+            20,
+            0
+          ],
+          "fov": 32
+        },
+        "sim": {
+          "set": {
+            "lift-live": true
+          }
+        },
+        "caption": {
+          "en": "In this schematic sequence, the box is supported before release; the empty spreader rises while the box stays on the carrier.",
+          "zh": "在这段示意过程里，箱子先落稳再解锁；空吊具升起，箱子留在车上。"
+        }
+      }
+    ]
+  }
+}
+---
+<Lang en>
+
+Start at the top of the working box. The <Term id="corner-fitting">corner fittings</Term> are connection structures at the corners, used in handling, stacking and securing. For the selected top-lift method, the <Term id="spreader">spreader</Term> engages the <Num s="S10">four upper corner fittings</Num>. The connection is at the corners, rather than a hook pulling on the middle of the roof.
+
+The spreader is an open frame above the box. Its <Term id="twistlock">twistlocks</Term> connect it to the fittings. Look at the locked snapshot before the raised one. This teaching sequence requires a confirmation before lifting. Switch that confirmation off in Try it: the model keeps the box at the starting position. This illustrates the importance of the connection, without teaching an actual operator’s checking procedure.
+
+The <Term id="hoist">hoist</Term> changes the height of the suspended load. In the raised snapshot the box is higher, but the <Term id="trolley">trolley</Term> has not crossed. Next, the trolley moves along the boom with the box still raised. These are different motions, even though real equipment can coordinate them.
+
+Finally the box is lowered onto the carrier. After the box has support, the illustrative locks release and the empty spreader rises. The box stays on the carrier. Use the replay step to watch the whole sequence, then return to the snapshots to compare individual positions. The straight ropes follow both moving ends; they do not model the crane’s complete pulley arrangement.
+
+<Figure src="figures/container-port-spreader-corners" alt={{ en: "One open rectangular spreader seated at a container’s four upper corners.", zh: "一个开放长方形吊具框架，接在一只集装箱的四个上角。" }} caption={{ en: "An original illustration of the corner connection. Lock internals and operational reeving are not shown.", zh: "为本主题绘制的角部连接示意；不展示锁具内部或实际穿绳方式。" }} />
+
+<More title={{ en: "Teaching time and lock display", zh: "教学时间与锁具画法" }}>
+
+The replay lasts <Num s="S1">32 model seconds</Num>. The displayed lock turn is <Num s="S1">90 degrees</Num> in this design. Neither value is a measured operating cycle or a required real-world checking time. It is one selected single-box, top-lift example; other equipment and lifting arrangements exist.
+
+</More>
+
+<More title={{ en: "A path for the load", zh: "受力的连接链" }}>
+
+Trace from the box’s corner fittings through the spreader and lifting ropes to the trolley, boom and portal. The portal’s feet stand on the quay. The model shows those connections, without calculating stress, permissible loads, rope tension or wind effects. Revisit weight and gravity in <TopicLink slug="forces">Forces</TopicLink>.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+先看工作箱的顶部。<Term id="corner-fitting">角件</Term>是箱角的连接结构，与搬运、堆放和固定有关。在本例的顶部起吊方式中，<Term id="spreader">集装箱吊具</Term>接入<Num s="S10">四个上角件</Num>。起吊连接在角部，不是用一个钩子拉住薄箱顶的正中央。
+
+吊具是箱子上方留空的框架，靠<Term id="twistlock">旋锁</Term>与角件连接。先看锁住的快照，再看抬高的快照。本教学过程要先确认连接，才开始抬升；在“试一试”里关闭确认，模型中的箱子就留在起点。这说明连接的重要，但不代表实际操作员只需做这个开关动作，也不是现场检查步骤。
+
+<Term id="hoist">起升机构</Term>改变悬吊物的高度。箱子抬高的快照里，<Term id="trolley">小车</Term>还没有横移。接着，小车沿臂架行走，让已抬起的箱子移向岸边。升降和小车行走是不同动作；真实设备可以协调它们，模型把它们分开，方便看清。
+
+最后，箱子落在运输车上，有了承托，示意旋锁才松开。空吊具升起，箱子仍留在车上。在重放那一拍看完整过程，再回到快照比较位置。直绳的两端跟着小车和吊具移动，但这幅画没有复现岸桥完整的滑轮与穿绳系统。
+
+<Figure src="figures/container-port-spreader-corners" alt={{ en: "One open rectangular spreader seated at a container’s four upper corners.", zh: "一个开放长方形吊具框架，接在一只集装箱的四个上角。" }} caption={{ en: "An original illustration of the corner connection. Lock internals and operational reeving are not shown.", zh: "为本主题绘制的角部连接示意；不展示锁具内部或实际穿绳方式。" }} />
+
+<More title={{ en: "Teaching time and lock display", zh: "教学时间与锁具画法" }}>
+
+重放共 <Num s="S1">32 模型秒</Num>，本设计把锁具转角画成 <Num s="S1">90 度</Num>。这都不是实测作业周期，也不是实际检查所需时间。本主题只选单箱顶部起吊一例，不代表所有设备与吊运方式。
+
+</More>
+
+<More title={{ en: "A path for the load", zh: "受力的连接链" }}>
+
+从箱角沿吊具、起升绳往上，找到小车、臂架和门架。门架的支腿落在岸上。模型画出连接关系，不计算应力、允许载荷、绳张力或风的作用。可到<TopicLink slug="forces">力</TopicLink>重看重量与重力。
+
+</More>
+
+</Lang>

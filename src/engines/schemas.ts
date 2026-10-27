@@ -1,3 +1,5 @@
+import { geographyData, geographyChapterState, type GeographyData, type GeographyChapterState } from './time-scene/geography-schema';
+import { geographyObjects, climateCell } from './time-scene/lib/geography';
 /**
  * Build-time registry of engine schemas. Used by the topic page (to parse
  * `data/*.json` before handing it to the client) and by the content validator.
@@ -9,6 +11,7 @@ import {
   climatologyGeoData, climatologyChapterState,
   type ClimatologyGeoData, type ClimatologyChapterState,
   timeChapterRefs,
+  timeChapterIndexIssues,
   timeChapterState,
   timeSceneDiagramData,
   timeSceneGeoData,
@@ -51,9 +54,16 @@ export interface EngineSchemaSet {
   topicIssues?(chapters: readonly ChapterInfo[], data: unknown): LessonIssue[];
 }
 
-export function engineSchemas(engine: EngineId, stage: string, temporalMode?: 'chronological' | 'climatology'): EngineSchemaSet {
+export function engineSchemas(engine: EngineId, stage: string, temporalMode?: 'chronological' | 'climatology' | 'geography'): EngineSchemaSet {
   switch (engine) {
     case 'time-scene':
+      if (temporalMode === 'geography') return {
+        data:geographyData,chapterState:geographyChapterState,requiredFiles:['geography'],
+        ids:(raw)=>{const d=raw as GeographyData;return [...geographyObjects(d.geography).map(o=>({kind:'geography object',id:o.id})),...d.geography.layers.map(l=>({kind:'geography layer',id:l.id})),...(d.presets?.presets??[]).map(p=>({kind:'preset',id:p.id}))]},
+        chapterRefs:(raw)=>{const s=raw as GeographyChapterState;return [...(s.index??[]),...(s.highlight??[]),s.selection,...s.beats.flatMap(b=>[...(b.highlight??[]),b.selection])].filter((id):id is string=>!!id&&!climateCell(id))},
+        chapterIssues:(raw,d)=>{const s=raw as GeographyChapterState;const ids=new Set(geographyObjects((d as GeographyData).geography).map(o=>o.id));return [...new Set([...(s.highlight??[]),s.selection,...s.beats.flatMap(b=>[...(b.highlight??[]),b.selection])])].filter((id):id is string=>!!id&&ids.has(id)&&!s.index.includes(id)).map(id=>`geography object ${id} must appear in state.index`)},
+        presetIds:(raw)=>((raw as GeographyData).presets?.presets??[]).map(p=>p.id),
+      };
       if (temporalMode === 'climatology') return {
         data: climatologyGeoData, chapterState: climatologyChapterState,
         requiredFiles: ['entities', 'control', 'movements', 'events'],
@@ -78,6 +88,7 @@ export function engineSchemas(engine: EngineId, stage: string, temporalMode?: 'c
         requiredFiles: ['entities', 'control', 'movements', 'events'],
         ids: (d) => timeSceneIds(d as TimeSceneGeoData),
         chapterRefs: (s) => timeChapterRefs(s as TimeChapterState),
+        chapterIssues: (s, d) => timeChapterIndexIssues(s as TimeChapterState, d as TimeSceneGeoData),
         presetIds: (d) => timeScenePresetIds(d as TimeSceneGeoData),
       };
     case 'space-scene':
@@ -125,7 +136,7 @@ export function formatIssues(error: z.ZodError, prefix = ''): string[] {
  * Parse raw engine data at build time. Throws with a readable message so
  * `astro build` fails loudly on bad content.
  */
-export function parseEngineData(engine: EngineId, stage: string, raw: Record<string, unknown>, label: string, temporalMode?: 'chronological' | 'climatology'): unknown {
+export function parseEngineData(engine: EngineId, stage: string, raw: Record<string, unknown>, label: string, temporalMode?: 'chronological' | 'climatology' | 'geography'): unknown {
   const result = engineSchemas(engine, stage, temporalMode).data.safeParse(raw);
   if (!result.success) {
     throw new Error(`Invalid engine data for ${label}:\n  ${formatIssues(result.error).join('\n  ')}`);
@@ -134,7 +145,7 @@ export function parseEngineData(engine: EngineId, stage: string, raw: Record<str
 }
 
 /** The page and CLI validator select the same topic-aware chapter branch. */
-export function validateEngineChapterState(engine: EngineId, stage: string, raw: unknown, label: string, temporalMode?: 'chronological' | 'climatology'): void {
+export function validateEngineChapterState(engine: EngineId, stage: string, raw: unknown, label: string, temporalMode?: 'chronological' | 'climatology' | 'geography'): void {
   const result = engineSchemas(engine, stage, temporalMode).chapterState.safeParse(raw);
   if (!result.success) throw new Error(`Invalid engine chapter state for ${label}:\n  ${formatIssues(result.error).join('\n  ')}`);
 }

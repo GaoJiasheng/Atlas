@@ -1,0 +1,94 @@
+{
+  "keyframes": [
+    {
+      "t": {
+        "ma": 250
+      },
+      "features": {
+        "type": "FeatureCollection",
+        "features": []
+      }
+    },
+    {
+      "t": {
+        "ma": 230
+      },
+      "features": {
+        "type": "FeatureCollection",
+        "features": []
+      }
+    },
+    {
+      "t": {
+        "ma": 200
+      },
+      "features": {
+        "type": "FeatureCollection",
+        "features": []
+      }
+    },
+    {
+      "t": {
+        "ma": 170
+      },
+      "features": {
+        "type": "FeatureCollection",
+        "features": []
+      }
+    },
+    {
+      "t": {
+        "ma": 150
+      },
+      "features": {
+        "type": "FeatureCollection",
+        "features": []
+      }
+    },
+    {
+      "t": {
+        "ma": 130
+      },
+      "features": {
+        "type": "FeatureCollection",
+        "features": []
+      }
+    },
+    {
+      "t": {
+        "ma": 100
+      },
+      "features": {
+        "type": "FeatureCollection",
+        "features": []
+      }
+    },
+    {
+      "t": {
+        "ma": 70
+      },
+      "features": {
+        "type": "FeatureCollection",
+        "features": []
+      }
+    },
+    {
+      "t": {
+        "ma": 65
+      },
+      "features": {
+        "type": "FeatureCollection",
+        "features": []
+      }
+    },
+    {
+      "t": {
+        "ma": 0
+      },
+      "features": {
+        "type": "FeatureCollection",
+        "features": []
+      }
+    }
+  ]
+}

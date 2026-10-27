@@ -1,0 +1,230 @@
+{
+  "terms": [
+    {
+      "id": "container",
+      "term": {
+        "en": "Container",
+        "zh": "集装箱"
+      },
+      "definition": {
+        "en": "A freight box that can pass between transport stages.",
+        "zh": "可在不同运输环节之间搬运的货物箱。"
+      },
+      "see": [
+        "teu"
+      ]
+    },
+    {
+      "id": "teu",
+      "term": {
+        "en": "Twenty-foot equivalent unit",
+        "zh": "二十英尺当量单位"
+      },
+      "definition": {
+        "en": "A common counting unit: a 20-foot box is one, a 40-foot box two. It does not measure mass.",
+        "zh": "共同的计数单位：20英尺箱记一份，40英尺箱记两份，不衡量质量。"
+      },
+      "see": [
+        "container"
+      ]
+    },
+    {
+      "id": "quay",
+      "term": {
+        "en": "Quay",
+        "zh": "码头岸壁"
+      },
+      "definition": {
+        "en": "The built edge where a moored vessel meets landside handling.",
+        "zh": "船靠泊、岸上装卸相接的岸边设施。"
+      },
+      "see": [
+        "quay-crane"
+      ]
+    },
+    {
+      "id": "quay-crane",
+      "term": {
+        "en": "Quay crane",
+        "zh": "岸桥"
+      },
+      "definition": {
+        "en": "A crane that transfers containers between ship and quay.",
+        "zh": "在船与岸之间搬运集装箱的起重机。"
+      },
+      "see": [
+        "spreader",
+        "trolley"
+      ]
+    },
+    {
+      "id": "spreader",
+      "term": {
+        "en": "Spreader",
+        "zh": "集装箱吊具"
+      },
+      "definition": {
+        "en": "A frame that connects a container’s upper corner fittings to the hoist.",
+        "zh": "把集装箱上角件与起升机构连接的框架。"
+      },
+      "see": [
+        "corner-fitting",
+        "twistlock"
+      ]
+    },
+    {
+      "id": "corner-fitting",
+      "term": {
+        "en": "Corner fitting",
+        "zh": "角件"
+      },
+      "definition": {
+        "en": "A connection structure at a container corner, used in handling, stacking and securing.",
+        "zh": "箱角的连接结构，用于搬运、堆放与固定。"
+      },
+      "see": [
+        "twistlock"
+      ]
+    },
+    {
+      "id": "twistlock",
+      "term": {
+        "en": "Twistlock",
+        "zh": "旋锁"
+      },
+      "definition": {
+        "en": "A rotating lock that connects this spreader to the upper corner fittings.",
+        "zh": "本例中把吊具接入上角件的旋转锁具。"
+      },
+      "see": [
+        "spreader"
+      ]
+    },
+    {
+      "id": "trolley",
+      "term": {
+        "en": "Trolley",
+        "zh": "小车"
+      },
+      "definition": {
+        "en": "The carriage that travels along the crane boom.",
+        "zh": "沿起重机臂架行走的承载装置。"
+      },
+      "see": [
+        "hoist"
+      ]
+    },
+    {
+      "id": "hoist",
+      "term": {
+        "en": "Hoist",
+        "zh": "起升机构"
+      },
+      "definition": {
+        "en": "The mechanism that changes the height of a suspended load.",
+        "zh": "改变悬吊物高度的机构。"
+      },
+      "see": [
+        "trolley"
+      ]
+    },
+    {
+      "id": "agv",
+      "term": {
+        "en": "Automated guided vehicle",
+        "zh": "自动导引车"
+      },
+      "definition": {
+        "en": "A vehicle guided automatically to move loads horizontally.",
+        "zh": "在自动导引下水平运送货物的车辆。"
+      },
+      "see": [
+        "yard"
+      ]
+    },
+    {
+      "id": "yard",
+      "term": {
+        "en": "Yard",
+        "zh": "堆场"
+      },
+      "definition": {
+        "en": "An area where containers can wait between handling stages.",
+        "zh": "集装箱在搬运环节之间暂存的区域。"
+      },
+      "see": [
+        "rehandle"
+      ]
+    },
+    {
+      "id": "rehandle",
+      "term": {
+        "en": "Rehandle",
+        "zh": "翻箱"
+      },
+      "definition": {
+        "en": "In this model, moving a blocking box before retrieving the target; replacement moves are excluded.",
+        "zh": "本模型中取目标箱前先移开阻挡箱；不计移回的次数。"
+      },
+      "see": [
+        "yard"
+      ]
+    },
+    {
+      "id": "transhipment",
+      "term": {
+        "en": "Transhipment",
+        "zh": "转运"
+      },
+      "definition": {
+        "en": "Moving cargo through an intermediate port towards another destination.",
+        "zh": "货物经中间港口换接后续运输，前往另一目的地。"
+      },
+      "see": [
+        "hub"
+      ]
+    },
+    {
+      "id": "hub",
+      "term": {
+        "en": "Hub",
+        "zh": "枢纽"
+      },
+      "definition": {
+        "en": "A place where transport connections and supporting services meet.",
+        "zh": "多条运输联系与配套服务接合的节点。"
+      },
+      "see": [
+        "transhipment"
+      ]
+    },
+    {
+      "id": "throughput",
+      "term": {
+        "en": "Throughput",
+        "zh": "吞吐量"
+      },
+      "definition": {
+        "en": "The amount actually handled within a stated period and scope.",
+        "zh": "在说明的时段与口径内实际处理的数量。"
+      },
+      "see": [
+        "capacity"
+      ]
+    },
+    {
+      "id": "capacity",
+      "term": {
+        "en": "Capacity",
+        "zh": "处理能力"
+      },
+      "definition": {
+        "en": "The amount that could be handled under stated conditions; a plan is different from an observed result.",
+        "zh": "在说明的条件下可处理的数量；规划能力与实际结果口径不同。"
+      },
+      "see": [
+        "throughput"
+      ]
+    }
+  ]
+}

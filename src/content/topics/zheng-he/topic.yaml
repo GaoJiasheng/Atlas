@@ -1,0 +1,31 @@
+# Contract: docs/59; historical limits and review: AUDIT.md / REVIEW.md.
+id: zheng-he
+title: { en: "Zheng He and the Maritime Silk Routes", zh: "郑和下西洋与海上丝路" }
+shortTitle: { en: "Zheng He", zh: "郑和下西洋" }
+subtitle: { en: "Fleets, ports and people across the Indian Ocean, 1405–1433", zh: "印度洋上的船队、港口与人（1405—1433）" }
+subject: history
+mode: time
+engine: time-scene
+stage: geo
+theme: paper
+sensitivity: open
+status: draft
+tags: [beyond-syllabus]
+illustration: zheng-he
+basemap:
+  region:
+    bounds: [35, -15, 125, 37]
+    land: zheng-he-land
+  maxZoom: 8
+colorBy: entity
+datePrecision: year
+blocLabels:
+  neutral: { en: "People and ports", zh: "人与港口" }
+  out: { en: "Outside this view", zh: "不在当前范围" }
+strings:
+  joined: { en: "shown from", zh: "本图起见于" }
+  left: { en: "shown until", zh: "本图止于" }
+  notYet: { en: "Not yet shown", zh: "尚未显示" }
+note:
+  en: "Modern coastlines and geographic locators · no measured ship tracks · reported deaths identified · ports include regional and context points"
+  zh: "现代海岸与地理定位点 · 不绘测得航迹 · 标明死亡报告 · 港口点含区域与背景参照"

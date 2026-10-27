@@ -1,0 +1,952 @@
+{
+  "method": "Bidirectional deterministic vertex/face-centre samples; exact distance to 64 nearest-centroid candidate triangles; conservative sampled ceiling, not Hausdorff guarantee",
+  "toleranceM": 0.001,
+  "maxSampledErrorM": 0.000945331684201157,
+  "failed": [],
+  "sources": [
+    {
+      "source": "Anterior cells of ethmoid bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Anterior cells of ethmoid bone.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Ethmoid bone",
+      "sampledSurfaceErrorM": 0.0007783615608299991
+    },
+    {
+      "source": "Frontal bone",
+      "sampledSurfaceErrorM": 0.000945331684201157
+    },
+    {
+      "source": "Inferior nasal concha bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Inferior nasal concha bone.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Lacrimal bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Lacrimal bone.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Maxilla.l",
+      "sampledSurfaceErrorM": 0.0003083560618086689
+    },
+    {
+      "source": "Maxilla.r",
+      "sampledSurfaceErrorM": 0.0003069077352984911
+    },
+    {
+      "source": "Middle cells of ethmoid bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Middle cells of ethmoid bone.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Nasal bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Nasal bone.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Occipital bone",
+      "sampledSurfaceErrorM": 0.0003990855113880326
+    },
+    {
+      "source": "Palatine bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Palatine bone.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Parietal bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Parietal bone.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Posterior cells of ethmoid bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Posterior cells of ethmoid bone.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Sphenoid bone",
+      "sampledSurfaceErrorM": 0.0009139392785693335
+    },
+    {
+      "source": "Temporal bone.l",
+      "sampledSurfaceErrorM": 0.00044608768167858864
+    },
+    {
+      "source": "Temporal bone.r",
+      "sampledSurfaceErrorM": 0.0006884802305495266
+    },
+    {
+      "source": "Vomer",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Zygomatic bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Zygomatic bone.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Mandible",
+      "sampledSurfaceErrorM": 0.00030690298912181767
+    },
+    {
+      "source": "Atlas (C1)",
+      "sampledSurfaceErrorM": 8.743538096646053e-05
+    },
+    {
+      "source": "Axis (C2)",
+      "sampledSurfaceErrorM": 0.00010765052891098851
+    },
+    {
+      "source": "Vertebra C3",
+      "sampledSurfaceErrorM": 0.00012982924701469202
+    },
+    {
+      "source": "Vertebra C4",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Vertebra C5",
+      "sampledSurfaceErrorM": 0.00011861452044991849
+    },
+    {
+      "source": "Vertebra C6",
+      "sampledSurfaceErrorM": 0.00011998181406800568
+    },
+    {
+      "source": "Vertebra C7",
+      "sampledSurfaceErrorM": 8.247397624761842e-05
+    },
+    {
+      "source": "Vertebra T1",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Vertebra T10",
+      "sampledSurfaceErrorM": 0.00024104572065388334
+    },
+    {
+      "source": "Vertebra T11",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Vertebra T12",
+      "sampledSurfaceErrorM": 0.00020919744298565765
+    },
+    {
+      "source": "Vertebra T2",
+      "sampledSurfaceErrorM": 0.00010066113423335939
+    },
+    {
+      "source": "Vertebra T3",
+      "sampledSurfaceErrorM": 0.00012408530794811546
+    },
+    {
+      "source": "Vertebra T4",
+      "sampledSurfaceErrorM": 7.912221627657879e-05
+    },
+    {
+      "source": "Vertebra T5",
+      "sampledSurfaceErrorM": 4.100805719830988e-05
+    },
+    {
+      "source": "Vertebra T6",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Vertebra T7",
+      "sampledSurfaceErrorM": 0.00019355818919150435
+    },
+    {
+      "source": "Vertebra T8",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Vertebra T9",
+      "sampledSurfaceErrorM": 0.00019995172248219608
+    },
+    {
+      "source": "Vertebra L1",
+      "sampledSurfaceErrorM": 0.00032087591919900243
+    },
+    {
+      "source": "Vertebra L2",
+      "sampledSurfaceErrorM": 0.0002213308717821907
+    },
+    {
+      "source": "Vertebra L3",
+      "sampledSurfaceErrorM": 0.0002685719175394302
+    },
+    {
+      "source": "Vertebra L4",
+      "sampledSurfaceErrorM": 0.00034870850100848376
+    },
+    {
+      "source": "Vertebra L5",
+      "sampledSurfaceErrorM": 0.00035808101707194407
+    },
+    {
+      "source": "Sacrum",
+      "sampledSurfaceErrorM": 0.0006380483745151234
+    },
+    {
+      "source": "Coccyx",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Manubrium of sternum",
+      "sampledSurfaceErrorM": 0.00017990551868202927
+    },
+    {
+      "source": "Body of sternum",
+      "sampledSurfaceErrorM": 0.0003336268548918345
+    },
+    {
+      "source": "Xiphoid process",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "First rib.l",
+      "sampledSurfaceErrorM": 0.00023952002325254123
+    },
+    {
+      "source": "Second rib.l",
+      "sampledSurfaceErrorM": 0.00032070185635702604
+    },
+    {
+      "source": "Third rib.l",
+      "sampledSurfaceErrorM": 0.0004729460622582821
+    },
+    {
+      "source": "Fourth rib.l",
+      "sampledSurfaceErrorM": 0.0004127990557399853
+    },
+    {
+      "source": "Fifth rib.l",
+      "sampledSurfaceErrorM": 0.0004939789813830302
+    },
+    {
+      "source": "Sixth rib.l",
+      "sampledSurfaceErrorM": 0.0004720003451437766
+    },
+    {
+      "source": "Seventh rib.l",
+      "sampledSurfaceErrorM": 0.0004817069771851654
+    },
+    {
+      "source": "Eighth rib.l",
+      "sampledSurfaceErrorM": 0.00039900080790338714
+    },
+    {
+      "source": "Ninth rib.l",
+      "sampledSurfaceErrorM": 0.00041332674511370744
+    },
+    {
+      "source": "Tenth rib.l",
+      "sampledSurfaceErrorM": 0.0003016438479690459
+    },
+    {
+      "source": "Eleventh rib.l",
+      "sampledSurfaceErrorM": 0.00036466824517514187
+    },
+    {
+      "source": "Twelfth rib.l",
+      "sampledSurfaceErrorM": 0.00023777000029047332
+    },
+    {
+      "source": "Costal cartilage of first rib.l",
+      "sampledSurfaceErrorM": 0.000527742516351073
+    },
+    {
+      "source": "Costal cartilage of second rib.l",
+      "sampledSurfaceErrorM": 0.0002432665646318769
+    },
+    {
+      "source": "Costal cartilage of third rib.l",
+      "sampledSurfaceErrorM": 0.00015050994222057598
+    },
+    {
+      "source": "Costal cartilage of fourth rib.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Costal cartilage of fifth rib.l",
+      "sampledSurfaceErrorM": 0.000123885924114527
+    },
+    {
+      "source": "Costal cartilage of sixth rib.l",
+      "sampledSurfaceErrorM": 0.00017060216014320247
+    },
+    {
+      "source": "Costal cartilage of seventh rib.l",
+      "sampledSurfaceErrorM": 0.00030105260761796674
+    },
+    {
+      "source": "Costal cartilage of eighth rib.l",
+      "sampledSurfaceErrorM": 0.00014509587425401665
+    },
+    {
+      "source": "Costal cartilage of ninth rib.l",
+      "sampledSurfaceErrorM": 0.0006799886213963213
+    },
+    {
+      "source": "Costal cartilage of tenth rib.l",
+      "sampledSurfaceErrorM": 6.665765345078431e-05
+    },
+    {
+      "source": "First rib.r",
+      "sampledSurfaceErrorM": 0.00022913129681826808
+    },
+    {
+      "source": "Second rib.r",
+      "sampledSurfaceErrorM": 0.0003513886216951527
+    },
+    {
+      "source": "Third rib.r",
+      "sampledSurfaceErrorM": 0.0004402929708430763
+    },
+    {
+      "source": "Fourth rib.r",
+      "sampledSurfaceErrorM": 0.0004094023886896013
+    },
+    {
+      "source": "Fifth rib.r",
+      "sampledSurfaceErrorM": 0.000405375222553401
+    },
+    {
+      "source": "Sixth rib.r",
+      "sampledSurfaceErrorM": 0.0004163856863479125
+    },
+    {
+      "source": "Seventh rib.r",
+      "sampledSurfaceErrorM": 0.0003872511823252945
+    },
+    {
+      "source": "Eighth rib.r",
+      "sampledSurfaceErrorM": 0.0004286528171202945
+    },
+    {
+      "source": "Ninth rib.r",
+      "sampledSurfaceErrorM": 0.0005209627207051124
+    },
+    {
+      "source": "Tenth rib.r",
+      "sampledSurfaceErrorM": 0.00030325857070691276
+    },
+    {
+      "source": "Eleventh rib.r",
+      "sampledSurfaceErrorM": 0.0002825049613218246
+    },
+    {
+      "source": "Twelfth rib.r",
+      "sampledSurfaceErrorM": 0.00025435250918863674
+    },
+    {
+      "source": "Costal cartilage of first rib.r",
+      "sampledSurfaceErrorM": 0.0004958512431703976
+    },
+    {
+      "source": "Costal cartilage of second rib.r",
+      "sampledSurfaceErrorM": 8.695617336849186e-05
+    },
+    {
+      "source": "Costal cartilage of third rib.r",
+      "sampledSurfaceErrorM": 0.00010052006653640787
+    },
+    {
+      "source": "Costal cartilage of fourth rib.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Costal cartilage of fifth rib.r",
+      "sampledSurfaceErrorM": 0.0001349125090448126
+    },
+    {
+      "source": "Costal cartilage of sixth rib.r",
+      "sampledSurfaceErrorM": 0.0008745768888716585
+    },
+    {
+      "source": "Costal cartilage of seventh rib.r",
+      "sampledSurfaceErrorM": 0.0002694858631776224
+    },
+    {
+      "source": "Costal cartilage of eighth rib.r",
+      "sampledSurfaceErrorM": 0.00015438973305777543
+    },
+    {
+      "source": "Costal cartilage of ninth rib.r",
+      "sampledSurfaceErrorM": 0.0006799886213962824
+    },
+    {
+      "source": "Costal cartilage of tenth rib.r",
+      "sampledSurfaceErrorM": 6.665765345077657e-05
+    },
+    {
+      "source": "Clavicle.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Clavicle.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Scapula.l",
+      "sampledSurfaceErrorM": 0.00020007217611624724
+    },
+    {
+      "source": "Scapula.r",
+      "sampledSurfaceErrorM": 0.00021547025490717612
+    },
+    {
+      "source": "Humerus.l",
+      "sampledSurfaceErrorM": 0.0004520535378976103
+    },
+    {
+      "source": "Humerus.r",
+      "sampledSurfaceErrorM": 0.00038539235871014554
+    },
+    {
+      "source": "Radius.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Radius.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Ulna.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Ulna.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Capitate bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Distal phalanx of fifth finger of hand.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Distal phalanx of first finger of hand.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Distal phalanx of fourth finger of hand.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Distal phalanx of second finger of hand.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Distal phalanx of third finger of hand.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Fifth metacarpal bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "First metacarpal bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Fourth metacarpal bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Hamate bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Lunate bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Middle phalanx of fifth finger of hand.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Middle phalanx of fourth finger of hand.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Middle phalanx of second finger of hand.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Middle phalanx of third finger of hand.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Pisiform bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Proximal phalanx of fifth finger of hand.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Proximal phalanx of first finger of hand.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Proximal phalanx of fourth finger of hand.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Proximal phalanx of second finger of hand.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Proximal phalanx of third finger of hand.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Scaphoid bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Second metacarpal bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Third metacarpal bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Trapezium bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Trapezoid bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Triquetrum bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Capitate bone.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Distal phalanx of fifth finger of hand.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Distal phalanx of first finger of hand.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Distal phalanx of fourth finger of hand.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Distal phalanx of second finger of hand.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Distal phalanx of third finger of hand.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Fifth metacarpal bone.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "First metacarpal bone.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Fourth metacarpal bone.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Hamate bone.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Lunate bone.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Middle phalanx of fifth finger of hand.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Middle phalanx of fourth finger of hand.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Middle phalanx of second finger of hand.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Middle phalanx of third finger of hand.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Pisiform bone.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Proximal phalanx of fifth finger of hand.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Proximal phalanx of first finger of hand.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Proximal phalanx of fourth finger of hand.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Proximal phalanx of second finger of hand.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Proximal phalanx of third finger of hand.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Scaphoid bone.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Second metacarpal bone.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Third metacarpal bone.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Trapezium bone.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Trapezoid bone.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Triquetrum bone.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Hip bone.l",
+      "sampledSurfaceErrorM": 1.952863397926704e-05
+    },
+    {
+      "source": "Hip bone.r",
+      "sampledSurfaceErrorM": 2.4332186572964418e-05
+    },
+    {
+      "source": "Femur.l",
+      "sampledSurfaceErrorM": 0.000538523995656379
+    },
+    {
+      "source": "Femur.r",
+      "sampledSurfaceErrorM": 0.0006828323214947222
+    },
+    {
+      "source": "Patella.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Patella.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Tibia.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Tibia.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Fibula.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Fibula.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Calcaneus.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Cuboid bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Distal phalanx of fifth finger of foot.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Distal phalanx of first finger of foot.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Distal phalanx of fourth finger of foot.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Distal phalanx of second finger of foot.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Distal phalanx of third finger of foot.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Fifth metatarsal bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "First metatarsal bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Fourth metatarsal bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Intermediate cuneiform bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Lateral cuneiform bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Medial cuneiform bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Middle phalanx of fifth finger of foot.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Middle phalanx of fourth finger of foot.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Middle phalanx of second finger of foot.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Middle phalanx of third finger of foot.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Navicular bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Proximal phalanx of fifth finger of foot.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Proximal phalanx of first finger of foot.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Proximal phalanx of fourth finger of foot.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Proximal phalanx of second finger of foot.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Proximal phalanx of third finger of foot.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Second metatarsal bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Sesamoid bones of foot.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Talus.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Third metatarsal bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Calcaneus.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Cuboid bone.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Distal phalanx of fifth finger of foot.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Distal phalanx of first finger of foot.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Distal phalanx of fourth finger of foot.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Distal phalanx of second finger of foot.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Distal phalanx of third finger of foot.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Fifth metatarsal bone.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "First metatarsal bone.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Fourth metatarsal bone.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Intermediate cuneiform bone.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Lateral cuneiform bone.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Medial cuneiform bone.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Middle phalanx of fifth finger of foot.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Middle phalanx of fourth finger of foot.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Middle phalanx of second finger of foot.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Middle phalanx of third finger of foot.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Navicular bone.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Proximal phalanx of fifth finger of foot.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Proximal phalanx of first finger of foot.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Proximal phalanx of fourth finger of foot.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Proximal phalanx of second finger of foot.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Proximal phalanx of third finger of foot.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Second metatarsal bone.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Sesamoid bones of foot.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Talus.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Third metatarsal bone.r",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Scaphoid bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Lunate bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Capitate bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Second metacarpal bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Proximal phalanx of second finger of hand.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "Trapezium bone.l",
+      "sampledSurfaceErrorM": 0.0
+    },
+    {
+      "source": "First metacarpal bone.l",
+      "sampledSurfaceErrorM": 0.0
+    }
+  ]
+}

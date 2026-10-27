@@ -1,0 +1,1424 @@
+{
+  "parts": [
+    {
+      "id": "trolley",
+      "name": {
+        "en": "trolley",
+        "zh": "示例：trolley"
+      },
+      "group": "port",
+      "summary": {
+        "en": "Engine fixture part.",
+        "zh": "引擎测试零件。"
+      },
+      "detail": {
+        "en": "Schematic test geometry, not an operational terminal. [S1]",
+        "zh": "示意测试几何，非实际码头。[S1]"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          6,
+          0.8,
+          3
+        ],
+        "at": [
+          0,
+          50,
+          -18
+        ],
+        "color": "token:ink-2"
+      }
+    },
+    {
+      "id": "spreader",
+      "name": {
+        "en": "spreader",
+        "zh": "示例：spreader"
+      },
+      "group": "port",
+      "summary": {
+        "en": "Engine fixture part.",
+        "zh": "引擎测试零件。"
+      },
+      "detail": {
+        "en": "Schematic test geometry, not an operational terminal. [S1]",
+        "zh": "示意测试几何，非实际码头。[S1]"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          6.058,
+          0.6,
+          2.438
+        ],
+        "at": [
+          0,
+          12.891,
+          -18
+        ],
+        "color": "token:ink-2"
+      }
+    },
+    {
+      "id": "twistlocks",
+      "name": {
+        "en": "twistlocks",
+        "zh": "示例：twistlocks"
+      },
+      "group": "port",
+      "summary": {
+        "en": "Engine fixture part.",
+        "zh": "引擎测试零件。"
+      },
+      "detail": {
+        "en": "Schematic test geometry, not an operational terminal. [S1]",
+        "zh": "示意测试几何，非实际码头。[S1]"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.15,
+          0.4,
+          0.15
+        ],
+        "at": [
+          0,
+          12.591,
+          -18
+        ],
+        "color": "token:ink-2"
+      },
+      "repeat": {
+        "count": 4,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 1.5
+      }
+    },
+    {
+      "id": "working-box",
+      "name": {
+        "en": "working-box",
+        "zh": "示例：working-box"
+      },
+      "group": "port",
+      "summary": {
+        "en": "Engine fixture part.",
+        "zh": "引擎测试零件。"
+      },
+      "detail": {
+        "en": "Schematic test geometry, not an operational terminal. [S1]",
+        "zh": "示意测试几何，非实际码头。[S1]"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          6.058,
+          2.591,
+          2.438
+        ],
+        "at": [
+          0,
+          11.2955,
+          -18
+        ],
+        "color": "token:ink-2"
+      }
+    },
+    {
+      "id": "yard-target",
+      "name": {
+        "en": "yard-target",
+        "zh": "示例：yard-target"
+      },
+      "group": "port",
+      "summary": {
+        "en": "Engine fixture part.",
+        "zh": "引擎测试零件。"
+      },
+      "detail": {
+        "en": "Schematic test geometry, not an operational terminal. [S1]",
+        "zh": "示意测试几何，非实际码头。[S1]"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          6.058,
+          2.591,
+          2.438
+        ],
+        "at": [
+          18,
+          1.2955,
+          40
+        ],
+        "color": "token:ink-2"
+      }
+    },
+    {
+      "id": "yard-blocker-a",
+      "name": {
+        "en": "yard-blocker-a",
+        "zh": "示例：yard-blocker-a"
+      },
+      "group": "port",
+      "summary": {
+        "en": "Engine fixture part.",
+        "zh": "引擎测试零件。"
+      },
+      "detail": {
+        "en": "Schematic test geometry, not an operational terminal. [S1]",
+        "zh": "示意测试几何，非实际码头。[S1]"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          6.058,
+          2.591,
+          2.438
+        ],
+        "at": [
+          18,
+          3.8865,
+          40
+        ],
+        "color": "token:ink-2"
+      }
+    },
+    {
+      "id": "yard-blocker-b",
+      "name": {
+        "en": "yard-blocker-b",
+        "zh": "示例：yard-blocker-b"
+      },
+      "group": "port",
+      "summary": {
+        "en": "Engine fixture part.",
+        "zh": "引擎测试零件。"
+      },
+      "detail": {
+        "en": "Schematic test geometry, not an operational terminal. [S1]",
+        "zh": "示意测试几何，非实际码头。[S1]"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          6.058,
+          2.591,
+          2.438
+        ],
+        "at": [
+          18,
+          6.4775,
+          40
+        ],
+        "color": "token:ink-2"
+      }
+    },
+    {
+      "id": "sample-20",
+      "name": {
+        "en": "sample-20",
+        "zh": "示例：sample-20"
+      },
+      "group": "port",
+      "summary": {
+        "en": "Engine fixture part.",
+        "zh": "引擎测试零件。"
+      },
+      "detail": {
+        "en": "Schematic test geometry, not an operational terminal. [S1]",
+        "zh": "示意测试几何，非实际码头。[S1]"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          6.058,
+          2.591,
+          2.438
+        ],
+        "at": [
+          -25,
+          1.2955,
+          0
+        ],
+        "color": "token:ink-2"
+      },
+      "repeat": {
+        "count": 4,
+        "axis": [
+          0,
+          0,
+          1
+        ],
+        "spacing": 4
+      }
+    },
+    {
+      "id": "sample-40",
+      "name": {
+        "en": "sample-40",
+        "zh": "示例：sample-40"
+      },
+      "group": "port",
+      "summary": {
+        "en": "Engine fixture part.",
+        "zh": "引擎测试零件。"
+      },
+      "detail": {
+        "en": "Schematic test geometry, not an operational terminal. [S1]",
+        "zh": "示意测试几何，非实际码头。[S1]"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          12.192,
+          2.591,
+          2.438
+        ],
+        "at": [
+          -40,
+          1.2955,
+          0
+        ],
+        "color": "token:ink-2"
+      },
+      "repeat": {
+        "count": 4,
+        "axis": [
+          0,
+          0,
+          1
+        ],
+        "spacing": 4
+      }
+    },
+    {
+      "id": "rope-a",
+      "name": {
+        "en": "rope-a",
+        "zh": "示例：rope-a"
+      },
+      "group": "port",
+      "summary": {
+        "en": "Engine fixture part.",
+        "zh": "引擎测试零件。"
+      },
+      "detail": {
+        "en": "Schematic test geometry, not an operational terminal. [S1]",
+        "zh": "示意测试几何，非实际码头。[S1]"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.055,
+          0.055,
+          1
+        ],
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "token:ink-2"
+      }
+    },
+    {
+      "id": "rope-b",
+      "name": {
+        "en": "rope-b",
+        "zh": "示例：rope-b"
+      },
+      "group": "port",
+      "summary": {
+        "en": "Engine fixture part.",
+        "zh": "引擎测试零件。"
+      },
+      "detail": {
+        "en": "Schematic test geometry, not an operational terminal. [S1]",
+        "zh": "示意测试几何，非实际码头。[S1]"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.055,
+          0.055,
+          1
+        ],
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "token:ink-2"
+      }
+    },
+    {
+      "id": "rope-c",
+      "name": {
+        "en": "rope-c",
+        "zh": "示例：rope-c"
+      },
+      "group": "port",
+      "summary": {
+        "en": "Engine fixture part.",
+        "zh": "引擎测试零件。"
+      },
+      "detail": {
+        "en": "Schematic test geometry, not an operational terminal. [S1]",
+        "zh": "示意测试几何，非实际码头。[S1]"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.055,
+          0.055,
+          1
+        ],
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "token:ink-2"
+      }
+    },
+    {
+      "id": "rope-d",
+      "name": {
+        "en": "rope-d",
+        "zh": "示例：rope-d"
+      },
+      "group": "port",
+      "summary": {
+        "en": "Engine fixture part.",
+        "zh": "引擎测试零件。"
+      },
+      "detail": {
+        "en": "Schematic test geometry, not an operational terminal. [S1]",
+        "zh": "示意测试几何，非实际码头。[S1]"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.055,
+          0.055,
+          1
+        ],
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "token:ink-2"
+      }
+    },
+    {
+      "id": "diagonal-top",
+      "name": {
+        "en": "diagonal-top",
+        "zh": "示例：diagonal-top"
+      },
+      "group": "port",
+      "summary": {
+        "en": "Engine fixture part.",
+        "zh": "引擎测试零件。"
+      },
+      "detail": {
+        "en": "Schematic test geometry, not an operational terminal. [S1]",
+        "zh": "示意测试几何，非实际码头。[S1]"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.3,
+          0.3,
+          0.3
+        ],
+        "at": [
+          48,
+          3,
+          0
+        ],
+        "color": "token:ink-2"
+      }
+    },
+    {
+      "id": "diagonal-bottom",
+      "name": {
+        "en": "diagonal-bottom",
+        "zh": "示例：diagonal-bottom"
+      },
+      "group": "port",
+      "summary": {
+        "en": "Engine fixture part.",
+        "zh": "引擎测试零件。"
+      },
+      "detail": {
+        "en": "Schematic test geometry, not an operational terminal. [S1]",
+        "zh": "示意测试几何，非实际码头。[S1]"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.3,
+          0.3,
+          0.3
+        ],
+        "at": [
+          48,
+          0,
+          4
+        ],
+        "color": "token:ink-2"
+      }
+    },
+    {
+      "id": "diagonal-rope",
+      "name": {
+        "en": "diagonal-rope",
+        "zh": "示例：diagonal-rope"
+      },
+      "group": "port",
+      "summary": {
+        "en": "Engine fixture part.",
+        "zh": "引擎测试零件。"
+      },
+      "detail": {
+        "en": "Schematic test geometry, not an operational terminal. [S1]",
+        "zh": "示意测试几何，非实际码头。[S1]"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.055,
+          0.055,
+          1
+        ],
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "token:ink-2"
+      }
+    }
+  ],
+  "groups": [
+    {
+      "id": "port",
+      "name": {
+        "en": "Port fixture",
+        "zh": "港口测试"
+      },
+      "color": "token:ink-2"
+    }
+  ],
+  "views": {
+    "assembled": {
+      "camera": {
+        "position": [
+          110,
+          85,
+          115
+        ],
+        "target": [
+          0,
+          20,
+          10
+        ],
+        "fov": 38
+      }
+    },
+    "cover": {
+      "position": [
+        110,
+        85,
+        115
+      ],
+      "target": [
+        0,
+        20,
+        10
+      ],
+      "fov": 38
+    },
+    "shadows": "contact"
+  },
+  "presets": [
+    {
+      "id": "hero",
+      "label": {
+        "en": "Fixture",
+        "zh": "测试"
+      },
+      "camera": {
+        "position": [
+          110,
+          85,
+          115
+        ],
+        "target": [
+          0,
+          20,
+          10
+        ],
+        "fov": 38
+      }
+    }
+  ],
+  "poses": {
+    "port-source": {
+      "trolley": {
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "spreader": {
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "twistlocks": {
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "working-box": {
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "duration": 0
+    },
+    "lift-locked": {
+      "trolley": {
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "spreader": {
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "twistlocks": {
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          90,
+          0
+        ]
+      },
+      "working-box": {
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "duration": 0
+    },
+    "lift-raised": {
+      "trolley": {
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "spreader": {
+        "offset": [
+          0,
+          15,
+          0
+        ]
+      },
+      "twistlocks": {
+        "offset": [
+          0,
+          15,
+          0
+        ],
+        "rotation": [
+          0,
+          90,
+          0
+        ]
+      },
+      "working-box": {
+        "offset": [
+          0,
+          15,
+          0
+        ]
+      },
+      "duration": 0
+    },
+    "lift-crossed": {
+      "trolley": {
+        "offset": [
+          0,
+          0,
+          28
+        ]
+      },
+      "spreader": {
+        "offset": [
+          0,
+          15,
+          28
+        ]
+      },
+      "twistlocks": {
+        "offset": [
+          0,
+          15,
+          28
+        ],
+        "rotation": [
+          0,
+          90,
+          0
+        ]
+      },
+      "working-box": {
+        "offset": [
+          0,
+          15,
+          28
+        ]
+      },
+      "duration": 0
+    },
+    "lift-landed": {
+      "trolley": {
+        "offset": [
+          0,
+          0,
+          28
+        ]
+      },
+      "spreader": {
+        "offset": [
+          0,
+          -8,
+          28
+        ]
+      },
+      "twistlocks": {
+        "offset": [
+          0,
+          -8,
+          28
+        ],
+        "rotation": [
+          0,
+          90,
+          0
+        ]
+      },
+      "working-box": {
+        "offset": [
+          0,
+          -8,
+          28
+        ]
+      },
+      "duration": 0
+    },
+    "lift-released": {
+      "trolley": {
+        "offset": [
+          0,
+          0,
+          28
+        ]
+      },
+      "spreader": {
+        "offset": [
+          0,
+          15,
+          28
+        ]
+      },
+      "twistlocks": {
+        "offset": [
+          0,
+          15,
+          28
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "working-box": {
+        "offset": [
+          0,
+          -8,
+          28
+        ]
+      },
+      "duration": 0
+    }
+  },
+  "sim": {
+    "kind": "port",
+    "controls": [
+      {
+        "id": "n20",
+        "label": {
+          "en": "n20",
+          "zh": "示例：n20"
+        },
+        "kind": "step",
+        "values": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "default": 2
+      },
+      {
+        "id": "n40",
+        "label": {
+          "en": "n40",
+          "zh": "示例：n40"
+        },
+        "kind": "step",
+        "values": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "default": 1
+      },
+      {
+        "id": "above",
+        "label": {
+          "en": "above",
+          "zh": "示例：above"
+        },
+        "kind": "step",
+        "values": [
+          0,
+          1,
+          2
+        ],
+        "default": 2
+      },
+      {
+        "id": "cranes",
+        "label": {
+          "en": "cranes",
+          "zh": "示例：cranes"
+        },
+        "kind": "step",
+        "values": [
+          1,
+          2
+        ],
+        "default": 1
+      },
+      {
+        "id": "carriers",
+        "label": {
+          "en": "carriers",
+          "zh": "示例：carriers"
+        },
+        "kind": "step",
+        "values": [
+          1,
+          2
+        ],
+        "default": 1
+      },
+      {
+        "id": "yards",
+        "label": {
+          "en": "yards",
+          "zh": "示例：yards"
+        },
+        "kind": "step",
+        "values": [
+          1,
+          2
+        ],
+        "default": 1
+      },
+      {
+        "id": "arrivals",
+        "label": {
+          "en": "arrivals",
+          "zh": "示例：arrivals"
+        },
+        "kind": "step",
+        "values": [
+          0,
+          12,
+          24,
+          36,
+          48
+        ],
+        "default": 24
+      },
+      {
+        "id": "hours",
+        "label": {
+          "en": "hours",
+          "zh": "示例：hours"
+        },
+        "kind": "step",
+        "values": [
+          1,
+          2
+        ],
+        "default": 2
+      },
+      {
+        "id": "lock-confirmed",
+        "label": {
+          "en": "lock-confirmed",
+          "zh": "示例：lock-confirmed"
+        },
+        "kind": "toggle",
+        "default": true
+      },
+      {
+        "id": "lift-live",
+        "label": {
+          "en": "lift-live",
+          "zh": "示例：lift-live"
+        },
+        "kind": "toggle",
+        "default": true
+      },
+      {
+        "id": "yard-state",
+        "label": {
+          "en": "Yard state",
+          "zh": "堆场状态"
+        },
+        "kind": "choice",
+        "default": "original",
+        "options": [
+          {
+            "id": "original",
+            "label": {
+              "en": "original",
+              "zh": "示例：original"
+            }
+          },
+          {
+            "id": "cleared",
+            "label": {
+              "en": "cleared",
+              "zh": "示例：cleared"
+            }
+          },
+          {
+            "id": "retrieved",
+            "label": {
+              "en": "retrieved",
+              "zh": "示例：retrieved"
+            }
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "id": "boxes",
+        "label": {
+          "en": "boxes",
+          "zh": "示例：boxes"
+        },
+        "unit": "boxes"
+      },
+      {
+        "id": "teu",
+        "label": {
+          "en": "teu",
+          "zh": "示例：teu"
+        },
+        "unit": "TEU"
+      },
+      {
+        "id": "rehandles",
+        "label": {
+          "en": "rehandles",
+          "zh": "示例：rehandles"
+        },
+        "unit": "moves"
+      },
+      {
+        "id": "retrieval-lifts",
+        "label": {
+          "en": "retrieval-lifts",
+          "zh": "示例：retrieval-lifts"
+        },
+        "unit": "moves"
+      },
+      {
+        "id": "crane-rate",
+        "label": {
+          "en": "crane-rate",
+          "zh": "示例：crane-rate"
+        },
+        "unit": "boxes/h"
+      },
+      {
+        "id": "carrier-rate",
+        "label": {
+          "en": "carrier-rate",
+          "zh": "示例：carrier-rate"
+        },
+        "unit": "boxes/h"
+      },
+      {
+        "id": "yard-rate",
+        "label": {
+          "en": "yard-rate",
+          "zh": "示例：yard-rate"
+        },
+        "unit": "boxes/h"
+      },
+      {
+        "id": "capacity-rate",
+        "label": {
+          "en": "capacity-rate",
+          "zh": "示例：capacity-rate"
+        },
+        "unit": "boxes/h"
+      },
+      {
+        "id": "completed",
+        "label": {
+          "en": "completed",
+          "zh": "示例：completed"
+        },
+        "unit": "boxes"
+      },
+      {
+        "id": "queue-growth",
+        "label": {
+          "en": "queue-growth",
+          "zh": "示例：queue-growth"
+        },
+        "unit": "boxes/h"
+      },
+      {
+        "id": "queued",
+        "label": {
+          "en": "queued",
+          "zh": "示例：queued"
+        },
+        "unit": "boxes"
+      },
+      {
+        "id": "lift-status",
+        "label": {
+          "en": "lift-status",
+          "zh": "示例：lift-status"
+        },
+        "kind": "state",
+        "states": {
+          "lock-not-confirmed": {
+            "en": "lock-not-confirmed",
+            "zh": "示例：lock-not-confirmed"
+          },
+          "ready": {
+            "en": "ready",
+            "zh": "示例：ready"
+          }
+        }
+      },
+      {
+        "id": "bottleneck",
+        "label": {
+          "en": "bottleneck",
+          "zh": "示例：bottleneck"
+        },
+        "kind": "state",
+        "states": {
+          "crane": {
+            "en": "crane",
+            "zh": "示例：crane"
+          },
+          "carrier": {
+            "en": "carrier",
+            "zh": "示例：carrier"
+          },
+          "yard": {
+            "en": "yard",
+            "zh": "示例：yard"
+          },
+          "tied": {
+            "en": "tied",
+            "zh": "示例：tied"
+          }
+        }
+      },
+      {
+        "id": "lift-run",
+        "label": {
+          "en": "Lift run",
+          "zh": "吊运过程"
+        },
+        "kind": "timeline"
+      },
+      {
+        "id": "yard-slots",
+        "label": {
+          "en": "Yard slots",
+          "zh": "堆场位置"
+        },
+        "kind": "vector"
+      }
+    ],
+    "bind": [
+      {
+        "control": "n20",
+        "part": "sample-20",
+        "count": true
+      },
+      {
+        "control": "n40",
+        "part": "sample-40",
+        "count": true
+      },
+      {
+        "output": "yard-slots",
+        "part": [
+          "yard-target",
+          "yard-blocker-a",
+          "yard-blocker-b"
+        ],
+        "shift": {
+          "ease": 0,
+          "lift": 0
+        }
+      },
+      {
+        "output": "lift-run",
+        "part": "trolley",
+        "play": {
+          "channel": "trolley-dz",
+          "when": {
+            "control": "lift-live",
+            "is": true
+          },
+          "axis": [
+            0,
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "output": "lift-run",
+        "part": [
+          "spreader",
+          "twistlocks"
+        ],
+        "play": {
+          "channel": "spreader-dy",
+          "when": {
+            "control": "lift-live",
+            "is": true
+          },
+          "axis": [
+            0,
+            1,
+            0
+          ]
+        }
+      },
+      {
+        "output": "lift-run",
+        "part": [
+          "spreader",
+          "twistlocks"
+        ],
+        "play": {
+          "channel": "trolley-dz",
+          "when": {
+            "control": "lift-live",
+            "is": true
+          },
+          "axis": [
+            0,
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "output": "lift-run",
+        "part": "working-box",
+        "play": {
+          "channel": "cargo-dy",
+          "when": {
+            "control": "lift-live",
+            "is": true
+          },
+          "axis": [
+            0,
+            1,
+            0
+          ]
+        }
+      },
+      {
+        "output": "lift-run",
+        "part": "working-box",
+        "play": {
+          "channel": "cargo-dz",
+          "when": {
+            "control": "lift-live",
+            "is": true
+          },
+          "axis": [
+            0,
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "output": "lift-run",
+        "part": "twistlocks",
+        "play": {
+          "channel": "lock-deg",
+          "when": {
+            "control": "lift-live",
+            "is": true
+          },
+          "turn": [
+            0,
+            1,
+            0
+          ],
+          "each": true
+        }
+      },
+      {
+        "part": "rope-a",
+        "span": {
+          "from": {
+            "part": "trolley",
+            "point": [
+              -2.6,
+              0,
+              -1
+            ]
+          },
+          "to": {
+            "part": "spreader",
+            "point": [
+              -2.6,
+              0.3,
+              -1
+            ]
+          },
+          "minLength": 0.001
+        }
+      },
+      {
+        "part": "rope-b",
+        "span": {
+          "from": {
+            "part": "trolley",
+            "point": [
+              2.6,
+              0,
+              -1
+            ]
+          },
+          "to": {
+            "part": "spreader",
+            "point": [
+              2.6,
+              0.3,
+              -1
+            ]
+          },
+          "minLength": 0.001
+        }
+      },
+      {
+        "part": "rope-c",
+        "span": {
+          "from": {
+            "part": "trolley",
+            "point": [
+              -2.6,
+              0,
+              1
+            ]
+          },
+          "to": {
+            "part": "spreader",
+            "point": [
+              -2.6,
+              0.3,
+              1
+            ]
+          },
+          "minLength": 0.001
+        }
+      },
+      {
+        "part": "rope-d",
+        "span": {
+          "from": {
+            "part": "trolley",
+            "point": [
+              2.6,
+              0,
+              1
+            ]
+          },
+          "to": {
+            "part": "spreader",
+            "point": [
+              2.6,
+              0.3,
+              1
+            ]
+          },
+          "minLength": 0.001
+        }
+      },
+      {
+        "part": "diagonal-rope",
+        "span": {
+          "from": {
+            "part": "diagonal-top",
+            "point": [
+              0,
+              0,
+              0
+            ]
+          },
+          "to": {
+            "part": "diagonal-bottom",
+            "point": [
+              0,
+              0,
+              0
+            ]
+          },
+          "minLength": 0.001
+        }
+      }
+    ],
+    "port": {
+      "count": {
+        "n20": "n20",
+        "n40": "n40"
+      },
+      "lift": {
+        "enabled": "lock-confirmed",
+        "workingPart": "working-box",
+        "spreaderPart": "spreader",
+        "trolleyPart": "trolley",
+        "source": [
+          0,
+          11.2955,
+          -18
+        ],
+        "destination": [
+          0,
+          3.2955,
+          10
+        ],
+        "boxHeight": 2.591,
+        "spreaderDepth": 0.6,
+        "clearBottomY": 25,
+        "knots": {
+          "lock": 4,
+          "raised": 12,
+          "crossed": 20,
+          "landed": 28,
+          "released": 30,
+          "finished": 32
+        },
+        "slow": 1
+      },
+      "yard": {
+        "above": "above",
+        "state": "yard-state",
+        "target": "yard-target",
+        "blockers": [
+          "yard-blocker-a",
+          "yard-blocker-b"
+        ],
+        "pitch": 2.591,
+        "park": [
+          [
+            28,
+            1.2955,
+            40
+          ],
+          [
+            38,
+            1.2955,
+            40
+          ]
+        ],
+        "retrieved": [
+          18,
+          1.2955,
+          50
+        ]
+      },
+      "capacity": {
+        "cranes": "cranes",
+        "carriers": "carriers",
+        "yards": "yards",
+        "arrivals": "arrivals",
+        "hours": "hours",
+        "rate": {
+          "crane": 30,
+          "carrier": 24,
+          "yard": 18
+        }
+      },
+      "source": [
+        "S1"
+      ]
+    }
+  }
+}

@@ -36,6 +36,8 @@ import { chromium, type Browser, type Page } from '@playwright/test';
 import { hudLayoutIssues, LAYOUT_SIZES } from '../tests-e2e/hud-layout';
 import { capacity, fillBounds, fillShapeForPrimitive, levelForVolume } from '../src/engines/space-scene/lib/fill';
 import { bendAxisIndex, bendCurve } from '../src/engines/space-scene/lib/bend';
+import { solveAirfoil } from '../src/engines/space-scene/lib/sim/airfoil';
+import { airfoilInputKey } from '../src/engines/space-scene/lib/sim/airfoil-cache';
 import { animationHz, shiftEntry, tintLevel } from '../src/engines/space-scene/lib/sim/bind';
 import type { PartsFile } from '../src/engines/space-scene/schema';
 import type { MechanismReading } from '../src/engines/space-scene/bridge';
@@ -244,12 +246,18 @@ class Session {
    */
   async load(path: string, what: string): Promise<void> {
     const { page } = this;
-    await page.goto(`${this.origin}${path}`);
-    await page.waitForFunction(() => window.__atlas !== undefined, null, { timeout: 60_000 });
-    const ready = await page.evaluate(() =>
-      Promise.race([window.__atlas!.ready, new Promise<boolean>((resolve) => window.setTimeout(() => resolve(false), 60_000))]),
-    );
-    if (!ready) throw new Error(`${what}: stage never became ready`);
+    // `__atlas.ready` gives up after 20 s; software WebGL on a heavily loaded machine can need longer
+    // for a first paint, so a stage that is not ready is loaded afresh twice more before it fails.
+    for (let attempt = 1; ; attempt++) {
+      await page.goto(`${this.origin}${path}`);
+      await page.waitForFunction(() => window.__atlas !== undefined, null, { timeout: 60_000 });
+      const ready = await page.evaluate(() =>
+        Promise.race([window.__atlas!.ready, new Promise<boolean>((resolve) => window.setTimeout(() => resolve(false), 60_000))]),
+      );
+      if (ready) return;
+      if (attempt === 3) throw new Error(`${what}: stage never became ready`);
+      console.log(`  ${what}: stage not ready, loading again (${attempt + 1}/3)`);
+    }
   }
 
   /** The topic page as the session opened it (after link checks have navigated the tab away): loaded, in the session's theme. */
@@ -390,6 +398,9 @@ function unlabelled(s: Session): Promise<string[]> {
     const shown = new Set(
       [...document.querySelectorAll<HTMLElement>('.ts-co')].filter((e) => e.dataset.hidden === 'false' && e.style.opacity === '1').map((e) => e.dataset.id),
     );
+    for (const el of document.querySelectorAll<HTMLElement>('.ts-modern-label[data-id], .ts-evidence-card[data-id]')) {
+      const r = el.getBoundingClientRect(); if (r.width > 0 && r.height > 0 && el.checkVisibility()) shown.add(el.dataset.id);
+    }
     const highlight = (window.__atlas!.state() as { highlight?: string[] }).highlight ?? [];
     return highlight.filter((id) => !shown.has(id));
   });
@@ -397,9 +408,24 @@ function unlabelled(s: Session): Promise<string[]> {
 
 /** The authored beat's rendered scene, including discrete monthly maps. */
 type BeatScene = Record<string, unknown> & { unfinished: string[] };
-function beatSceneOf(page: Page): Promise<BeatScene | null> {
+async function beatSceneOf(page: Page): Promise<BeatScene | null> {
+  // A reconstruction map (docs/47 E-DE1): compare the sample actually drawn, so let the frame settle first.
+  await page
+    .waitForFunction(() => {
+      const g = (window.__atlas!.engine as unknown as { geology?(): { reconstruction: { status: string } | null } }).geology?.();
+      return !g || (g.reconstruction !== null && g.reconstruction.status !== 'loading');
+    }, null, { timeout: 30_000 })
+    .catch(() => undefined);
   return page.evaluate(() => {
+    const geology = (window.__atlas!.engine as unknown as { geology?(): { reconstruction: Record<string, unknown> | null; inset: Record<string, unknown> } }).geology?.();
+    if (geology) {
+      const st = window.__atlas!.state() as unknown as Record<string, unknown>;
+      const { geometryUpdates: _updates, ...reconstruction } = geology.reconstruction ?? {};
+      return { ...Object.fromEntries(['chapter', 't', 'highlight', 'layers', 'camera', 'inset', 'insetVisible', 'fossilMode'].map((k) => [k, st[k] ?? null])), reconstruction, inset: geology.inset, unfinished: [] };
+    }
     const st = window.__atlas!.state() as unknown as Record<string, unknown>;
+    const geography=(window.__atlas!.engine as unknown as {geography?():{context:{kind:string;month?:number};geometryHash:string;memberIds:string[];memberCount:number;selection:string|null;climatology:null|{renderedMonth:number;layers:Record<string,{status:string}>}}}).geography?.();
+    if(geography){const c=geography.climatology;const shown=new Set(Array.isArray(st.layers)?st.layers as string[]:[]);return {...Object.fromEntries(['chapter','beat','geoContext','geoSelection','layers','highlight','camera'].map(k=>[k,st[k]??null])),geometryHash:geography.geometryHash,memberIds:geography.memberIds,memberCount:geography.memberCount,...(c?{month:geography.context.month,authoredMonth:geography.context.month,renderedMonth:c.renderedMonth,notReady:Object.entries(c.layers).filter(([id,l])=>shown.has(id)&&l.status!=='ready').map(([id,l])=>`${id}:${l.status}`)}:{}),unfinished:[]};}
     const climate = (window.__atlas!.engine as unknown as {
       climatology?(): { month: number; renderedMonth: number; authoredMonth: number; periodId: string; layers?: Record<string, { status: string }> };
     }).climatology?.();
@@ -419,6 +445,23 @@ function beatSceneOf(page: Page): Promise<BeatScene | null> {
     return {
       ...Object.fromEntries(keys.map((k) => [k, st[k] ?? null])),
       sim: sim?.values ?? null,
+      // Orbit sims (docs/44): the shared snapshot and its outputs, rounded to 1e-6. Snapshot ids differ between loads, and what the
+      // stage drew (`rendered`, fades included) is per frame: orbitIssues checks it against the snapshot once the frame lands.
+      ...(() => {
+        const e = window.__atlas!.engine as unknown as { orbit?(): Record<string, unknown> | null; sim?(): unknown };
+        const orbit = e.orbit?.();
+        if (!orbit) return {};
+        const normalize = (v: unknown): unknown =>
+          typeof v === 'number'
+            ? Math.round(v * 1e6) / 1e6
+            : Array.isArray(v)
+              ? v.map(normalize)
+              : v && typeof v === 'object'
+                ? Object.fromEntries(Object.entries(v).filter(([k]) => k !== 'snapshotId' && k !== 'rendered').map(([k, x]) => [k, normalize(x)]))
+                : v;
+        return { orbit: normalize(orbit), orbitOutputs: normalize(e.sim?.()) };
+      })(),
+      airfoil: (()=>{const a=(window.__atlas!.engine as unknown as {airfoil?():{inputKey:string;mode:string;cl:number;lift:number;plot:unknown}}).airfoil?.();return a?{inputKey:a.inputKey,mode:a.mode,cl:a.cl,lift:a.lift,plot:a.plot}:null;})(),
       unfinished: Object.entries(sim?.timeline ?? {})
         .filter(([, r]) => r.playing || r.t !== r.duration)
         .map(([id]) => id),
@@ -509,6 +552,55 @@ async function bendIssues(s: Session): Promise<string[]> {
       if (Math.abs(drawn.length - length) > length * 0.005) issues.push(`${id}: bent length ${drawn.length.toFixed(4)} m, not ${length} m`);
     }
   }
+  return issues;
+}
+
+/** Orbit bindings: compare the actual world matrix / illumination uniform with the shared physical snapshot. */
+async function orbitIssues(s: Session): Promise<string[]> {
+  const path = join(ROOT, 'src/content/topics', s.topic, 'data/parts.json');
+  if (!existsSync(path)) return [];
+  const file = JSON.parse(readFileSync(path, 'utf8')) as PartsFile;
+  if (!file.sim?.orbitRotation) return [];
+  await s.page.waitForFunction(() => {
+    const o = (window.__atlas!.engine as unknown as { orbit(): any }).orbit();
+    return !!o?.rendered && o.snapshotId === o.rendered.snapshotId;
+  });
+  const o = await s.page.evaluate(() => (window.__atlas!.engine as unknown as { orbit(): any }).orbit());
+  const issues: string[] = [];
+  const cfg = file.sim.orbitRotation;
+  for (const b of file.sim.bind) {
+    if (!('part' in b)) continue;
+    for (const id of Array.isArray(b.part) ? b.part : [b.part]) {
+      const got = o.rendered.parts[id];
+      if (!got) {
+        issues.push(`${id}: no actual rendered matrix`);
+        continue;
+      }
+      if (b.bodyTransform?.attachment === 'centre') {
+        const body = b.bodyTransform.body;
+        if (got.position.some((v: number, j: number) => Math.abs(v - o.display.centres[body][j]) > 1e-6))
+          issues.push(`${id}: rendered position differs from display snapshot`);
+        const q = o.physical.bodies[body].quaternion;
+        if (Math.abs(Math.abs(got.quaternion.reduce((v: number, x: number, j: number) => v + x * q[j], 0)) - 1) > 1e-6)
+          issues.push(`${id}: rendered quaternion differs`);
+        if (b.bodyTransform.scaleWithRadius !== false && got.scale.some((v: number) => Math.abs(v - o.display.radii[body]) > 1e-8))
+          issues.push(`${id}: rendered radius differs`);
+      }
+      if (b.solarIllumination) {
+        const body = b.solarIllumination.body;
+        if (o.rendered.solarDirections[body]?.some((v: number, j: number) => Math.abs(v - o.physical.solarDirections[body][j]) > 1e-9))
+          issues.push(`${id}: solar uniform differs`);
+      }
+    }
+  }
+  if (o.scale === 'true-scale' && Math.abs(o.display.radii.earth - cfg.bodies[1].radiusKm * cfg.display.trueScaleMPerKm) > 1e-10)
+    issues.push('true scale radius differs');
+  if (o.panel.kind === 'phase' && !o.panel.northUp) issues.push('phase window is not north-up');
+  if (
+    o.panel.shadowFrame &&
+    Math.abs(o.panel.shadowFrame.radii.moon / o.panel.shadowFrame.radii.earth - cfg.bodies[2].radiusKm / cfg.bodies[1].radiusKm) > 1e-10
+  )
+    issues.push('shadow frame does not use one scale');
   return issues;
 }
 
@@ -681,6 +773,24 @@ async function mechanismDrawIssues(s: Session): Promise<string[]> {
   return issues;
 }
 
+/** Airfoil beats and their links must agree with the resolved scalar snapshot and current field. */
+async function airfoilIssues(s:Session):Promise<string[]> {
+  const path=join(ROOT,'src/content/topics',s.topic,'data/parts.json');
+  if(!existsSync(path))return [];
+  const file=JSON.parse(readFileSync(path,'utf8')) as PartsFile;
+  const d=file?.sim?.airfoil;if(!d)return [];
+  await s.page.waitForFunction(()=>{const e=window.__atlas!.engine as unknown as {airfoil():{fieldReady:boolean}};return e.airfoil()?.fieldReady;},null,{timeout:30000});
+  const reading=await s.page.evaluate(()=>{const e=window.__atlas!.engine as unknown as {sim():{values:Record<string,number|string|boolean>};airfoil():{inputKey:string;mode:string;cl:number;lift:number;pathCount:number;pressureCount:number;pathStatuses:{status:string}[];plot:{current:{x:number;y:number}}}};return {a:e.airfoil(),v:e.sim().values};});
+  const want=solveAirfoil(d,reading.v),a=reading.a,out:string[]=[];
+  if(a.inputKey!==airfoilInputKey(d,reading.v))out.push('airfoil field inputKey is stale');
+  if(a.mode!==want.mode||Math.abs(a.cl-want.cl)>1e-8||Math.abs(a.lift-want.lift)>1e-5)out.push('airfoil mode/Cl/lift differs from resolved inputs');
+  if(want.mode==='ideal-attached'&&(a.pathCount!==16||a.pressureCount!==64||a.pathStatuses.some(p=>p.status!=='complete')))out.push('attached airfoil field incomplete');
+  if(want.mode!=='ideal-attached'&&(a.pathCount||a.pressureCount))out.push('still/stall retains attached paths or pressure');
+  const output=file!.sim!.outputs.find(o=>o.id===d.plot.y),y=output?.from==='lift-n'?want.lift:want.cl;
+  if(a.plot.current.x!==want.angle||Math.abs(a.plot.current.y-y)>1e-8)out.push('airfoil plot current point is stale');
+  return out;
+}
+
 /**
  * Every beat opened from its link (`?ch=<chapter>&b=<n>`) in a fresh document of its own, against the scene the presentation
  * showed: a field that differs, or a run not at its end (links jump to the end), is a beat failure.
@@ -715,10 +825,26 @@ async function runBeatLinks(s: Session, beats: { chapter: string; index: number 
     for (const issue of await shiftIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     for (const issue of await hzIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     for (const issue of await tintIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
+    for (const issue of await orbitIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     for (const issue of await mechanismDrawIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
+    for (const issue of await airfoilIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     if (diffs.length) report.beatFailures.push(`${name}: opened from ${link}: ${diffs.join('; ')}`);
     else same++;
     if (diffs.length) console.log(`  ${`${name} (link)`.padEnd(36)} FAIL  ${diffs.join('; ').slice(0, 300)}`);
+  }
+  // Orbit sims: a link with `orb-t` opens on the same snapshot as seeking the clock there.
+  const orbitFile = join(ROOT, 'src/content/topics', s.topic, 'data/parts.json');
+  if (beats.length && existsSync(orbitFile) && (JSON.parse(readFileSync(orbitFile, 'utf8')) as PartsFile).sim?.orbitRotation) {
+    const b = beats[0]!;
+    const link = `?ch=${encodeURIComponent(b.chapter)}&b=${b.index + 1}`;
+    await s.load(`${path}${link}`, 'orbit seek');
+    await s.page.evaluate(() => (window.__atlas!.engine as unknown as { orbitSeek(t: number): boolean }).orbitSeek(21600));
+    await orbitIssues(s);
+    const want = await beatSceneOf(s.page);
+    await s.load(`${path}${link}&orb-t=21600`, 'orbit time link');
+    await orbitIssues(s);
+    const got = await beatSceneOf(s.page);
+    if (JSON.stringify(want?.orbit) !== JSON.stringify(got?.orbit)) report.beatFailures.push('orb-t=21600 differs from orbitSeek(21600)');
   }
   await s.reopen();
   console.log(`  beat links: ${same} of ${shown.size} open on the presentation's scene`);
@@ -765,7 +891,9 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
     for (const issue of await shiftIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     for (const issue of await hzIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     for (const issue of await tintIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
+    for (const issue of await orbitIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     for (const issue of await mechanismDrawIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
+    for (const issue of await airfoilIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     await s.page.screenshot({ path: join(out, `${name}${o.suffix}.png`) });
     console.log(`  ${name.padEnd(36)} ${landed ? 'OK' : 'FAIL'}${missing.length ? `  (no label: ${missing.join(', ')})` : ''}`);
     // A looping exercise beat (SpaceScene exercise mode) also gets a still at its start and end keys.
@@ -800,7 +928,8 @@ function settleClimate(page: Page): Promise<unknown> {
   return page
     .waitForFunction(
       () => {
-        const c = (window.__atlas!.engine as unknown as { climatology?(): { month: number; renderedMonth: number } }).climatology?.();
+        const e=window.__atlas!.engine as unknown as {climatology?():{month:number;renderedMonth:number};geography?():{climatology:null|{month:number;renderedMonth:number}}};
+        const c=e.climatology?.()??e.geography?.().climatology;
         return !c || c.renderedMonth === c.month;
       },
       null,
@@ -1197,8 +1326,12 @@ async function runKeys(s: Session, o: Options, report: RunReport): Promise<void>
         const st = (await s.state()) as unknown as { chapter: string | null; beat?: number | null; presentation: unknown; hud: boolean };
         return { st, i: beats.findIndex((b) => b.chapter === st.chapter && b.index === (st.beat ?? 0)) };
       };
+      // A chapter with no segment on the axis (TimeScene's background chapter has no place in time) has no ticks to fill.
       const filled = (chapter: string | null, beat: number | null | undefined) =>
-        page.evaluate(([c, b]) => document.querySelector(`[data-beat="${c}.${b}"]`)?.hasAttribute('data-filled') ?? false, [chapter, beat] as const);
+        page.evaluate(
+          ([c, b]) => (document.querySelector(`[data-beat^="${c}."]`) ? document.querySelector(`[data-beat="${c}.${b}"]`)?.hasAttribute('data-filled') ?? false : true),
+          [chapter, beat] as const,
+        );
       if (beats.length < 3) {
         record({ ...base, ok: true, note: 'fewer than three beats (skipped)' });
         continue;

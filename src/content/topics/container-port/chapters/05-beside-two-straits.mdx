@@ -1,0 +1,178 @@
+---
+{
+  "id": "beside-two-straits",
+  "order": 5,
+  "title": {
+    "en": "Beside two straits",
+    "zh": "两条海峡旁的枢纽"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "cutaway": "none",
+    "run": false,
+    "pose": "port-source",
+    "camera": {
+      "position": [
+        105,
+        95,
+        115
+      ],
+      "target": [
+        0,
+        12,
+        8
+      ],
+      "fov": 36
+    },
+    "layers": [
+      "vessel",
+      "quay-crane",
+      "transfer"
+    ],
+    "hide": [
+      "onward-ship",
+      "destination-box"
+    ],
+    "part": "ship-hull",
+    "labels": [
+      "ship-hull",
+      "portal",
+      "control-room"
+    ],
+    "question": {
+      "en": "Why do many ships connect here?",
+      "zh": "为什么许多船在这里接上下一段运输？"
+    },
+    "summary": {
+      "en": "The two straits matter, alongside port connections and services.",
+      "zh": "两条海峡的位置很重要，港口联系和服务也重要。"
+    },
+    "index": {
+      "parts": [
+        "ship-hull",
+        "portal",
+        "control-room"
+      ]
+    },
+    "sim": {
+      "set": {
+        "n20": 2,
+        "n40": 1,
+        "lock-confirmed": true,
+        "above": 2,
+        "yard-state": "original",
+        "cranes": 1,
+        "carriers": 1,
+        "yards": 1,
+        "arrivals": 24,
+        "hours": 2,
+        "lift-live": false
+      }
+    },
+    "beats": [
+      {
+        "part": "ship-hull",
+        "caption": {
+          "en": "Use the real coastline map to locate the Malay Peninsula, Sumatra and the Singapore region.",
+          "zh": "在真实海岸图上找马来半岛、苏门答腊和新加坡所在的区域。"
+        }
+      },
+      {
+        "caption": {
+          "en": "The Malacca and Singapore straits link sea passages in this region; this map adds no invented vessel tracks.",
+          "zh": "马六甲海峡与新加坡海峡连接这一带的海上通道；图中没有虚构的船只轨迹。"
+        }
+      },
+      {
+        "part": "control-room",
+        "labels": [
+          "portal",
+          "control-room"
+        ],
+        "caption": {
+          "en": "Beyond location, shipping connections and maritime services support the hub.",
+          "zh": "位置之外，班轮联系和多种海事服务一起支持枢纽运作。"
+        }
+      },
+      {
+        "camera": {
+          "position": [
+            105,
+            85,
+            115
+          ],
+          "target": [
+            0,
+            15,
+            5
+          ],
+          "fov": 34
+        },
+        "part": "ship-hull",
+        "caption": {
+          "en": "The coastline map explains where; the port model explains how boxes are handled.",
+          "zh": "海岸图解释“在哪里”；刚才的港口模型解释“怎样搬运”。"
+        }
+      }
+    ]
+  }
+}
+---
+import StraitsMap from '../assets/StraitsMap.astro';
+
+<Lang en>
+
+The port model explains handling; the map explains location. Look for the Malay Peninsula, Sumatra and the Singapore region on the regional plate below. The land shapes come from Natural Earth geographical data. They are separate from the compressed layout of the model, which must not be used to measure real terminal distances.
+
+Follow the water between the Malay Peninsula and Sumatra towards the Singapore region. The Strait of Malacca and the Strait of Singapore connect sea passages here. Singapore’s position along East–West trade routes is part of the explanation for its port connections. The dots on these plates anchor names; they are not ships or ports joined by invented tracks.
+
+<StraitsMap view="regional" />
+
+<StraitsMap view="straits" />
+
+A <Term id="hub">hub</Term> brings transport connections together. A useful location alone cannot load a box, organise its next vessel or keep equipment working. The cranes, carriers, yard operations and planning illustrated in the model are also needed to make connections work. Ship services such as pilotage, towage and supplies support the wider port system.
+
+The connection is broader than the machines drawn here. Maritime services also include finance, insurance and legal services. These activities help explain why a hub is more than a narrow place on a coastline. Compare the real map with the generic model once more: one shows geographical relationships; the other makes selected handling relationships easier to inspect. Neither view supplies a live traffic count or a forecast of when a particular vessel will arrive.
+
+<More title={{ en: "A dated connectivity statement", zh: "有日期的联系数字" }}>
+
+The Ministry of Transport’s page, updated in August 2026, describes connections to more than <Num s="S28">600 ports</Num>. This is a dated source statement, not a route list encoded in our map. No connecting lines are drawn because the selected geographical inputs contain no vessel tracks.
+
+</More>
+
+<More title={{ en: "The coastline has limits", zh: "海岸图的尺度限制" }}>
+
+Natural Earth provides generalised cartography. The plate is an undated snapshot and is not a navigation chart. It is too coarse to identify current Tuas berths or the boundaries of future reclamation. The label for Singapore is a country-label position, not a terminal coordinate.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+港口模型解释怎样搬运；地图解释在什么地方。在下面的区域图上找马来半岛、苏门答腊和新加坡所在的区域。陆地形状来自 Natural Earth 的真实地理数据，和压缩摆放的港口模型是两回事，不能用模型中的距离量实际码头。
+
+沿马来半岛与苏门答腊之间的水道，向新加坡一带看。马六甲海峡和新加坡海峡把这里的海上通道接起来。新加坡位于东西向贸易联系经过的区域，这是港口联系的一部分原因。图上的点用来放水体或地点名称，不是实时船位，也没有用虚构线条把港口连接起来。
+
+<StraitsMap view="regional" />
+
+<StraitsMap view="straits" />
+
+<Term id="hub">枢纽</Term>把多条运输联系接起来。位置合适，本身却不会把箱子装船、安排下一班船或维修设备。模型里看到的岸桥、运输车、堆场作业和背后的计划，都参与让连接成为实际运输。引航、拖轮和船舶补给等服务，也支持整个港口系统。
+
+联系还包括画面以外的活动，例如航运金融、保险和法律服务。由此可见，枢纽不只是地图上一段较窄的海面。再比较真实海岸图和通用模型：前者说明地理关系，后者把部分搬运关系画得容易看清。两者都不提供实时船流数量，也不预报某条船几点到达。
+
+<More title={{ en: "A dated connectivity statement", zh: "有日期的联系数字" }}>
+
+交通部在 2026 年 8 月更新的页面说明，新加坡联系 <Num s="S28">600 多个港口</Num>。这是有日期的来源表述，不是地图所载的航线清单。所选数据没有船只轨迹，因此图中不画连接线。
+
+</More>
+
+<More title={{ en: "The coastline has limits", zh: "海岸图的尺度限制" }}>
+
+Natural Earth 是概括化制图。图版是无日期快照，不是航海图，不能放大来判断大士现有泊位或未来填海边界。“新加坡”点是国家标签位置，不是码头坐标。
+
+</More>
+
+</Lang>

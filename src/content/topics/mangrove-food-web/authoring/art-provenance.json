@@ -1,0 +1,62 @@
+{
+  "assets": [
+    {
+      "input": "mangrove-food-web.png",
+      "inputSha256": "878a0834e6221f48368067a5182c93f039784bcc1f3208a874fd94704cdcb73d",
+      "reusedFrom": "art/planned/environment/environment.png",
+      "kind": "cover",
+      "provenance": "Internal imagegen art; original art/planned/manifest.jsonl; not a derivative of external reference photographs.",
+      "licenceFamily": "CC BY-NC-SA",
+      "generatedThisBuild": false,
+      "method": "scripts/illustrate.ts process",
+      "outputs": [
+        {
+          "file": "public/illustrations/mangrove-food-web.webp",
+          "bytes": 56752,
+          "sha256": "95cd2dea124c3beaeac510f7b599883da5fcd9119b2f41c2b112aab5a3a6703b"
+        },
+        {
+          "file": "public/illustrations/mangrove-food-web@2x.webp",
+          "bytes": 263800,
+          "sha256": "45627ad10b53bf0257e9657a05e3d770a45dadba86d824f534adec995214d666"
+        }
+      ]
+    },
+    {
+      "input": "mangrove-food-web-breathing-roots.png",
+      "inputSha256": "c1c2615f3b6cc01c7cc4ae65732da51416452de5cba983435d0b72ee1bddbdb6",
+      "reusedFrom": "art/planned/environment/environment-breathing-roots.png",
+      "kind": "figure",
+      "provenance": "Internal imagegen art; original art/planned/manifest.jsonl; not a derivative of external reference photographs.",
+      "licenceFamily": "CC BY-NC-SA",
+      "generatedThisBuild": false,
+      "method": "scripts/illustrate.ts figure",
+      "outputs": [
+        {
+          "file": "public/illustrations/figures/mangrove-food-web-breathing-roots.webp",
+          "bytes": 185910,
+          "sha256": "e44bed0e6fee6ade2af1245d868cd4fb44ed3f3fbf794a7125fc5f0c92786bcd"
+        }
+      ]
+    },
+    {
+      "input": "mangrove-food-web-predator-prey.png",
+      "inputSha256": "1724555a7f12470fd5b64c3f185b3086c002493100cb003a90236df020056f6d",
+      "reusedFrom": "art/planned/environment/environment-predator-prey.png",
+      "kind": "figure",
+      "provenance": "Internal imagegen art; original art/planned/manifest.jsonl; not a derivative of external reference photographs.",
+      "licenceFamily": "CC BY-NC-SA",
+      "generatedThisBuild": false,
+      "method": "scripts/illustrate.ts figure",
+      "outputs": [
+        {
+          "file": "public/illustrations/figures/mangrove-food-web-predator-prey.webp",
+          "bytes": 185420,
+          "sha256": "bf4a2bee22a4d7073960fcbe5e611020f3e1dee1104708f99a6a06c12cde6c32"
+        }
+      ]
+    }
+  ],
+  "note": "Original internal art reused without external assets; no third-party share-alike derivative.",
+  "coverPostprocess": "Canonical small cover re-encoded at WebP q40/alpha50 (q34/alpha30 fallback), unchanged 800×800 framing; retained transparency with quantized alpha, to meet hard 90KiB target. No image generation."
+}

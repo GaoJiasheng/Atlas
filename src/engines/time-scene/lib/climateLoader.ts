@@ -1,6 +1,7 @@
 import { withBase } from '../../../i18n';
 import {
   packClimate,
+  remapClimateSources,
   validateClimateResource,
   type ClimateData,
   type ClimateLoadState,
@@ -23,7 +24,7 @@ export class ClimateLoader {
   ) {}
   load(layer: MonthlyLayer, retry = false): void {
     if (this.disposed || (!retry && this.states.has(layer.id))) return;
-    const key = `${layer.file}:1:${layer.periodId}`;
+    const key = `${layer.file}:1:${layer.periodId}:${JSON.stringify(layer.sourceMap??{})}`;
     if (retry) this.cache.delete(key);
     const version = (this.versions.get(layer.id) ?? 0) + 1;
     this.versions.set(layer.id, version);
@@ -35,7 +36,7 @@ export class ClimateLoader {
       promise = this.fetcher(withBase(`/geo/${layer.file}.json`)).then(async (r) => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         return packClimate(
-          validateClimateResource(await r.json(), {
+          validateClimateResource(remapClimateSources(await r.json(),layer.sourceMap), {
             ...this.context,
             quantity: layer.quantity,
           }),

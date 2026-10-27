@@ -1,0 +1,168 @@
+---
+id: fossil-atlas
+order: 4
+title:
+  en: Finds are a record, not a census
+  zh: 发现记录不是动物普查
+state:
+  time:
+    ma: 70
+  camera:
+    center:
+      - 0
+      - 10
+    zoom: 1.1
+  layers:
+    - base
+    - fossils-modern
+  highlight: []
+  inset: mexico
+  insetVisible: true
+  fossilMode: age-window
+  index:
+    - pbdb-col-24178
+  summary:
+    en: A dot opens collections, occurrences and sources.
+    zh: 一个点打开采集、记录与来源。
+  beats:
+    - t:
+        ma: 100
+      camera:
+        center:
+          - 0
+          - 10
+        zoom: 1.1
+      layers:
+        - base
+        - fossils-modern
+      highlight: []
+      insetVisible: true
+      fossilMode: age-window
+      caption:
+        en: "100 million years ago: the inset filters records whose published age ranges overlap the selected window.
+          The dots use modern find coordinates."
+        zh: 1 亿年前：小图筛出发表年龄范围与所选时间窗重叠的记录，点位采用现代发现坐标。
+      inset: world
+    - t:
+        ma: 100
+      camera:
+        center:
+          - 0
+          - 10
+        zoom: 1.1
+      layers:
+        - base
+        - fossils-modern
+      highlight:
+        - pbdb-col-24178
+      insetVisible: true
+      fossilMode: age-window
+      caption:
+        en: "100 million years ago: Several fossil records can share one collection location. Open a marker to see the
+          records and their references."
+        zh: 1 亿年前：多条化石记录可能共用一个采集地点。打开标记，可以查看记录和文献。
+      inset: world
+    - t:
+        ma: 70
+      camera:
+        center:
+          - 0
+          - 10
+        zoom: 1.1
+      layers:
+        - base
+        - fossils-modern
+      highlight: []
+      insetVisible: true
+      fossilMode: age-window
+      caption:
+        en: "70 million years ago: the filter changes with age. A dot appears because its age range overlaps the
+          window, not because a death date is known."
+        zh: 7000 万年前：筛选随年代改变。点出现是因为年龄范围重叠，不是因为知道了死亡日期。
+      inset: world
+    - t:
+        ma: 70
+      camera:
+        center:
+          - 0
+          - 10
+        zoom: 1.1
+      layers:
+        - base
+        - fossils-modern
+      highlight: []
+      insetVisible: true
+      fossilMode: age-window
+      caption:
+        en: "70 million years ago: Dense clusters show recorded finds. Preservation and research affect where fossils
+          enter the database."
+        zh: 7000 万年前：密集的点群表示已记录的发现。保存条件和研究工作，都会影响哪些化石进入数据库。
+      inset: southeast-asia
+    - t:
+        ma: 70
+      camera:
+        center:
+          - 0
+          - 10
+        zoom: 1.1
+      layers:
+        - base
+        - fossils-modern
+      highlight: []
+      insetVisible: true
+      fossilMode: age-window
+      caption:
+        en: "70 million years ago: A blank patch is a gap in this selected record. It is not a measured boundary of
+          dinosaur habitat."
+        zh: 7000 万年前：一片空白只是所选记录中的空缺，不是测量得到的恐龙栖息地边界。
+      inset: mexico
+---
+
+<Lang en>
+
+A fossil dot is an entrance to a record, not a count of animals. The Paleobiology Database, or PBDB, organizes published evidence into a <Term id="term-collection">collection</Term>, a group of geographically related fossil information. A collection may contain several <Term id="term-occurrence">occurrences</Term>: records of particular fossil taxa. The small map draws a symbol for each selected collection while keeping the occurrences separate in its details. <sup><button type="button" className="atlas-src" data-source="S24" aria-label="Source S24">S24</button></sup>
+
+Choose a time and the inset looks for published age ranges that overlap the browsing window. A <Term id="term-age-range">range</Term> preserves an older and a younger bound. It does not supply a precise death date. Separate occurrence intervals remain separate, so a gap between them is not silently filled. The window is a way to browse the evidence, not an extra measurement of uncertainty. <sup><button type="button" className="atlas-src" data-source="S65" aria-label="Source S65">S65</button><button type="button" className="atlas-src" data-source="S67" aria-label="Source S67">S67</button></sup>
+
+These dots come from fixed, selected snapshots. The global query was bounded and sorted by age span; a regional query added evidence from Thailand, Laos and Malaysia. Malaysian fossil locations are suppressed before publication. The resulting public selection contains <Num s="S65,S66">1,274</Num> collections. That number describes this selection, not the number of dinosaurs, species or places where dinosaurs ever lived. <sup><button type="button" className="atlas-src" data-source="S65" aria-label="Source S65">S65</button><button type="button" className="atlas-src" data-source="S66" aria-label="Source S66">S66</button></sup>
+
+Clusters and blank patches need the same care. Burial, preservation, exposure, research and database selection affect which fossils become visible as records. Dense dots cannot rank countries by dinosaur abundance, and empty map space cannot establish an ancient habitat boundary. Open a marker to read its individual ages and references before drawing a conclusion from its position. <sup><button type="button" className="atlas-src" data-source="S2" aria-label="Source S2">S2</button><button type="button" className="atlas-src" data-source="S24" aria-label="Source S24">S24</button></sup>
+
+<More title={{"en": "One marker, separate records", "zh": "一个标记，逐条记录"}}>
+
+Collection 24178 contains <Num s="S65">3</Num> occurrence records in this snapshot. Each retains the published bounds <Num s="S65">121.4</Num> to <Num s="S65">100.5</Num> Ma. The inset's window extends <Num s="S67">5</Num> Ma on either side of the selected age; this width is an interface choice. The collection's records are visible when an interval overlaps that window, including its endpoints.
+
+</More>
+
+<More title={{"en": "A selected snapshot and its licence", "zh": "所选快照与许可"}}>
+
+The raw global snapshot contains <Num s="S65">2,000</Num> occurrences; it is not a global census. Both saved queries declare CC0. References and the snapshot date remain credited. Preservation bias is explored further in <TopicLink slug="fossils-and-skeletons" ch="buried-to-exposed">buried to exposed</TopicLink>.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+化石点是进入资料的入口，不是动物数量。古生物数据库 PBDB 把有地理联系的化石资料组成一个<Term id="term-collection">采集记录组</Term>。一个组可以包含多条<Term id="term-occurrence">化石出现记录</Term>，分别记述某类化石。小图按采集记录组画符号，详情仍逐条保留记录，不能把点数当作恐龙只数。 <sup><button type="button" className="atlas-src" data-source="S24" aria-label="来源 S24">S24</button></sup>
+
+选择年代后，小图筛出年龄范围与浏览窗相交的资料。<Term id="term-age-range">年龄范围</Term>保留较老与较年轻的界限，不提供精确死亡日期。同组记录之间若有空档，筛选不会擅自填满。浏览窗只是查看方式，并非新测出的年代误差。 <sup><button type="button" className="atlas-src" data-source="S65" aria-label="来源 S65">S65</button><button type="button" className="atlas-src" data-source="S67" aria-label="来源 S67">S67</button></sup>
+
+本题使用固定快照。全球查询有数量上限，并按年龄跨度排序；区域查询补入泰国、老挝与马来西亚资料。发布前抑制所有马来西亚化石精确位置，公开选择留下 <Num s="S65,S66">1274</Num> 个采集记录组。这是本次资料的规模，不是恐龙、物种或全部发现地点的总数。 <sup><button type="button" className="atlas-src" data-source="S65" aria-label="来源 S65">S65</button><button type="button" className="atlas-src" data-source="S66" aria-label="来源 S66">S66</button></sup>
+
+密集点群与空白都要谨慎解释。埋藏、保存、露出地表、研究工作及资料选择，都会影响哪些发现进入数据库。不能按点群给国家的恐龙数量排名，也不能把空白当作远古栖息地边界。先打开点，读各条年龄与文献，再解释位置。 <sup><button type="button" className="atlas-src" data-source="S2" aria-label="来源 S2">S2</button><button type="button" className="atlas-src" data-source="S24" aria-label="来源 S24">S24</button></sup>
+
+<More title={{"en": "One marker, separate records", "zh": "一个标记，逐条记录"}}>
+
+本快照中，采集记录组 24178 有 <Num s="S65">3</Num> 条化石出现记录，各自保留 <Num s="S65">121.4</Num> 至 <Num s="S65">100.5</Num> 百万年前的文献界限。小图浏览窗在所选年代两侧各扩展 <Num s="S67">5</Num> 百万年，这是界面选择。任一区间与浏览窗相交，包括刚好碰到端点时，该组便可显示。
+
+</More>
+
+<More title={{"en": "A selected snapshot and its licence", "zh": "所选快照与许可"}}>
+
+原始全球快照含 <Num s="S65">2000</Num> 条化石出现记录，并非全球普查。保存的两份查询都声明 CC0，展示仍保留文献与快照日期。保存偏差可继续读<TopicLink slug="fossils-and-skeletons" ch="buried-to-exposed">从埋藏到露出</TopicLink>。
+
+</More>
+
+</Lang>
+

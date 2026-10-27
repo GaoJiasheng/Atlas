@@ -1,0 +1,15 @@
+id: container-port
+title: { en: "Container Ports and Quay Cranes", zh: "集装箱港口与岸桥" }
+subtitle: { en: "Follow one box from ship to quay, yard and onward connection", zh: "沿一只箱子看船、岸桥、堆场与下一段运输" }
+subject: geography
+tags: [singapore, beyond-syllabus, space]
+moe: []
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: published
+illustration: container-port
+shortTitle: { en: "Container Port", zh: "集装箱港口" }
+note: { en: "Generic port study · schematic layout · simulated times and capacities · not a terminal plan", zh: "通用港口研究 · 布局示意 · 时间和处理能力为模拟 · 非码头平面图" }

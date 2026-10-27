@@ -50,15 +50,14 @@ import type { SpaceUiStore } from '../../ui';
 import type { StageBridge } from '../../bridge';
 import {
   CAMERA_TWEEN_MS,
-  cameraFar,
   COVER_TWEEN_MS,
   DEFAULT_FOV,
   fitCameraToAspect,
   fitSphereCamera,
   exerciseFraming,
   fitExerciseCamera,
+  farPlane,
   fitSpan,
-  MAX_DISTANCE_SHARE,
   ORBIT_PERIOD_S,
   roundCamera,
   transitionCamera,
@@ -66,6 +65,9 @@ import {
   viewDirection,
 } from '../../lib/camera';
 import { keepAnimating, MAX_DT, prefersReducedMotion } from './runtime';
+import { fitCameraToHud, type FrameBox } from '../../lib/hud-framing';
+import type { PartHandle } from './PartNode';
+import type { OrbitSession } from '../../lib/sim/orbit-session';
 
 type Controls = ComponentRef<typeof OrbitControls>;
 
@@ -92,7 +94,11 @@ export function CameraRig({
   minDistance,
   span,
   exerciseView,
+  orbitSession,
+  handles,
 }: {
+  handles: Map<string, PartHandle>;
+  orbitSession?: OrbitSession | null;
   store: SceneStore<SpaceSceneExt>;
   ui: SpaceUiStore;
   bridge: StageBridge;
@@ -113,6 +119,14 @@ export function CameraRig({
   const stageSize = useRef(size);
   stageSize.current = size;
   const orbit = useStore(ui, (s) => s.orbit);
+  // Orbit sims: the display scale and frame sizes the camera was last framed for (a scale change remaps the camera about the frame's centre).
+  const orbitFrame = useRef({
+    scale: orbitSession?.values[orbitSession.config.display.scale],
+    radius: orbitSession?.display.radii.earth ?? 1,
+    earthMoon: orbitSession ? Math.hypot(...orbitSession.display.centres.moon.map((v, i) => v - orbitSession.display.centres.earth[i]!)) : 1,
+    earthSun: orbitSession ? Math.hypot(...orbitSession.display.origin) || orbitSession.config.display.schematic.earthOrbitM : 1,
+    transition: store.getState().transition.id,
+  });
   // Latest props for the store subscriptions.
   const props = useRef({ chapters, views, sphere, span, exerciseView });
   props.current = { chapters, views, sphere, span, exerciseView };
@@ -129,6 +143,17 @@ export function CameraRig({
   const coverSave = useRef<{ camera: OrbitCamera; transition: number } | null>(null);
   const user = useRef({ active: false, dragging: false, timer: null as ReturnType<typeof setTimeout> | null });
   const spin = useRef(0);
+  // Always re-fit from the authored camera, never from the last adjusted pose.
+  const hudCamera = useRef<OrbitCamera | null>(null);
+  const fitHud = (cam: OrbitCamera): OrbitCamera => {
+    if (!views.hudFrame || !bridge.freeStage || ui.getState().cover || user.current.active) return cam;
+    cam = fitCameraToAspect(cam, stageSize.current.width / stageSize.current.height);
+    const boxes: FrameBox[] = views.hudFrame.parts.flatMap(id => {
+      const h = handles.get(id);
+      return h?.visible ? [{ center: [h.object.position.x + h.offset[0], h.object.position.y + h.offset[1], h.object.position.z + h.offset[2]] as [number,number,number], half: h.half }] : [];
+    });
+    return fitCameraToHud(cam, boxes, stageSize.current.width, stageSize.current.height, bridge.freeStage);
+  };
 
   const current = (): OrbitCamera => {
     const c = controls.current;
@@ -136,15 +161,14 @@ export function CameraRig({
     return { position: [camera.position.x, camera.position.y, camera.position.z], target: [t.x, t.y, t.z], fov: camera.fov };
   };
 
-  // A large model (111 m) must not be clipped by the default far plane at its farthest zoom.
   useEffect(() => {
-    const far = cameraFar(minDistance, sphere.radius);
+    const far = farPlane(minDistance / 0.9);
     if (camera.far !== far) {
       camera.far = far;
       camera.updateProjectionMatrix();
       invalidate();
     }
-  }, [camera, invalidate, minDistance, sphere.radius]);
+  }, [camera, invalidate, minDistance]);
 
   useEffect(() => {
     bridge.liveCamera = current;
@@ -191,6 +215,8 @@ export function CameraRig({
   };
 
   const moveTo = (target: OrbitCamera, instant: boolean, id: number) => {
+    hudCamera.current = views.hudFrame ? target : null;
+    target = fitHud(target);
     relax(target);
     const hint = ui.getState().nextTweenMs;
     if (hint !== null) ui.setState({ nextTweenMs: null });
@@ -257,7 +283,7 @@ export function CameraRig({
       view: state.view,
       views: presets,
     });
-    const fitted = target ? fitCameraToAspect(withFov(target), camera.aspect) : null;
+    const fitted = target ? (views.hudFrame ? withFov(target) : fitCameraToAspect(withFov(target), camera.aspect)) : null;
     // The exercise camera: an exercise came on show, or a beat without its own camera shows one.
     // (Also when the exercise camera framed this exercise and the stored camera has not changed since: a phase change, a selection.)
     const kept = exercise !== null && framed.current?.exercise === exercise && framed.current.stored === state.camera;
@@ -382,6 +408,12 @@ export function CameraRig({
   }, [orbit, invalidate]);
 
   useFrame((state, delta) => {
+    // Part writers have now applied this snapshot, including the first frame of a direct link.
+    if (hudCamera.current && !ui.getState().cover && !user.current.active && !orbit) {
+      const fitted = fitHud(hudCamera.current);
+      if (tween.current && !tween.current.cover) tween.current.to = fitted;
+      else if (!tween.current) apply(fitted);
+    }
     const wait = pending.current;
     if (wait) {
       const cam = exerciseCamera(wait.exercise);
@@ -416,6 +448,45 @@ export function CameraRig({
       }
       keepAnimating(state.invalidate);
     }
+    if (orbitSession) {
+      const frame = orbitFrame.current,
+        scale = orbitSession.values[orbitSession.config.display.scale],
+        id = store.getState().transition.id;
+      const earthMoon = Math.hypot(...orbitSession.display.centres.moon.map((v, i) => v - orbitSession.display.centres.earth[i]!));
+      const earthSun = Math.hypot(...orbitSession.display.centres.sun.map((v, i) => v - orbitSession.display.centres.earth[i]!));
+      if (frame.scale !== scale && frame.transition === id) {
+        const lab = orbitSession.snapshot.lab,
+          ratio =
+            lab === 'day' || lab === 'local-year'
+              ? orbitSession.display.radii.earth / frame.radius
+              : lab === 'coupled' || lab === 'year'
+                ? earthSun / frame.earthSun
+                : earthMoon / frame.earthMoon;
+        const cam = hudCamera.current ?? current();
+        const centre = lab === 'coupled' || lab === 'year' ? orbitSession.display.centres.sun : orbitSession.display.centres.earth;
+        const mapped: OrbitCamera = {
+          ...cam,
+          position: cam.position.map((v, i) => centre[i]! + (v - centre[i]!) * ratio) as [number, number, number],
+          target: cam.target.map((v, i) => centre[i]! + (v - centre[i]!) * ratio) as [number, number, number],
+        };
+        relax(mapped);
+        if (controls.current) controls.current.maxDistance = Math.max(minDistance * 20, Math.hypot(...mapped.position) * 4);
+        apply(hudCamera.current ? fitHud(mapped) : mapped);
+        if (hudCamera.current) hudCamera.current = mapped;
+      }
+      frame.scale = scale;
+      frame.radius = orbitSession.display.radii.earth;
+      frame.earthMoon = earthMoon;
+      frame.earthSun = earthSun;
+      frame.transition = id;
+      const near = Math.min(0.01, orbitSession.display.radii.earth * 0.02),
+        far = Math.max(1000, earthSun * 4);
+      if (camera.near !== near || camera.far !== far) {
+        camera.near = near;
+        camera.far = far;
+        camera.updateProjectionMatrix();
+      }
+    }
     const t = controls.current?.target;
     if (t) bridge.cameraDistance = camera.position.distanceTo(t);
   });
@@ -441,13 +512,14 @@ export function CameraRig({
       enableDamping
       dampingFactor={0.09}
       minDistance={floor}
-      maxDistance={minDistance * MAX_DISTANCE_SHARE}
+      maxDistance={orbitSession ? 1000 : minDistance * 20}
       zoomSpeed={0.8}
       maxPolarAngle={Math.PI * 0.82}
       onStart={() => {
         if (tween.current) settle(tween.current.id);
         tween.current = null;
         coverSave.current = null;
+        hudCamera.current = null;
         if (ui.getState().orbit) ui.setState({ orbit: false });
         user.current.active = true;
         user.current.dragging = true;

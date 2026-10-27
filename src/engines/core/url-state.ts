@@ -16,12 +16,13 @@ import type { CameraState, SceneState, UrlEngineFields } from './types';
 import { decodeCamera, encodeCamera } from './camera';
 import { formatTimeParam, parseTimeParam, type TimePoint } from '../../lib/time';
 import { isTheme } from '../../theme/theme';
+import { decodeOrbitTime } from '../space-scene/lib/sim/orbit-clock';
 import { decodeSimParam, encodeSimParam } from '../space-scene/lib/sim/controls';
 
 export type UrlState = Partial<SceneState & UrlEngineFields>;
 
 /** Order in which keys are written (most meaningful first). */
-export const URL_KEY_ORDER = ['ch', 'b', 'task', 'model', 't', 'm', 'hl', 'part', 'view', 'explode', 'run', 'cut', 'pose', 'sim', 'layers', 'cam', 'theme'] as const;
+export const URL_KEY_ORDER = ['ch', 'b', 'task', 'model', 't', 'gc', 'm', 'at', 'inset', 'inset-visible', 'fossil-mode', 'hl', 'part', 'view', 'explode', 'run', 'cut', 'pose', 'sim', 'orb-t', 'layers', 'cam', 'theme'] as const;
 export type UrlKey = (typeof URL_KEY_ORDER)[number];
 
 const ID_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -51,8 +52,14 @@ function encodeField(key: UrlKey, state: UrlState): string | null {
       return state.theme ?? null;
     case 't':
       return state.t === undefined ? null : state.t === null ? '' : formatTimeParam(state.t);
+    case 'gc': return state.geoContext ? ({present:'p',climatology:'c',membership:'a'} as const)[state.geoContext.kind] : null;
+    case 'at': return state.geoContext?.kind==='membership' ? state.geoContext.date : null;
     case 'm':
+      if(state.geoContext)return state.geoContext.kind==='climatology'?String(state.geoContext.month):null;
       return state.month === undefined ? null : String(state.month);
+    case 'inset': return state.inset ?? null;
+    case 'inset-visible': return state.insetVisible === undefined ? null : state.insetVisible ? '1' : '0';
+    case 'fossil-mode': return state.fossilMode ?? null;
     case 'hl':
       return state.highlight === undefined ? null : state.highlight.join(',');
     case 'part':
@@ -67,6 +74,7 @@ function encodeField(key: UrlKey, state: UrlState): string | null {
       return state.cutaway ?? null;
     case 'pose':
       return state.pose === undefined ? null : (state.pose ?? '');
+    case 'orb-t': return state.orbitTime == null ? null : roundTo(state.orbitTime, 6);
     case 'sim':
       return state.sim === undefined ? null : encodeSimParam(state.sim);
     case 'task':
@@ -132,6 +140,17 @@ export function decodeSceneState(input: string | URLSearchParams): UrlState {
 
   const m = params.get('m');
   if (m !== null && /^(?:[1-9]|1[0-2])$/.test(m)) out.month = Number(m);
+  const inset = params.get('inset');
+  if (inset === 'world' || inset === 'southeast-asia' || inset === 'mexico') out.inset = inset;
+  const visible = params.get('inset-visible');
+  if (visible === '0' || visible === '1') out.insetVisible = visible === '1';
+  const fossilMode = params.get('fossil-mode');
+  if (fossilMode === 'age-window' || fossilMode === 'all-mesozoic') out.fossilMode = fossilMode;
+
+  const gc = params.get('gc');
+  if(gc==='p')out.geoContext={kind:'present'};
+  else if(gc==='c' && out.month!==undefined)out.geoContext={kind:'climatology',month:out.month};
+  else if(gc==='a') {const date=params.get('at');if(date && /^\d{4}-\d{2}-\d{2}$/.test(date) && parseTimeParam(date))out.geoContext={kind:'membership',date};}
 
   const hl = params.get('hl');
   if (hl !== null) out.highlight = hl === '' ? [] : hl.split(',').filter((id) => ID_RE.test(id));
@@ -167,6 +186,8 @@ export function decodeSceneState(input: string | URLSearchParams): UrlState {
   const sim = params.get('sim');
   if (sim !== null) out.sim = decodeSimParam(sim);
 
+  const orbT = decodeOrbitTime(params.get('orb-t'));
+  if (orbT !== null) out.orbitTime = orbT;
   const task = params.get('task');
   if (task !== null && /^[1-9]\d{0,2}$/.test(task)) out.task = Number(task);
 

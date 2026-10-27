@@ -1,0 +1,337 @@
+{
+  "license": "CC BY-SA 4.0",
+  "review": "pending; inherited source candidates, not approved named bone faces",
+  "sites": [
+    {
+      "muscle": "biceps-brachii-long.l",
+      "kind": "origin",
+      "bone": "scapula",
+      "points": [
+        [
+          0.14425252377986908,
+          0.1477745622396469,
+          -0.0027212738059461117
+        ],
+        [
+          0.14478015899658203,
+          0.14718182384967804,
+          -0.005087611265480518
+        ],
+        [
+          0.14494331181049347,
+          0.1463596671819687,
+          -0.00849843304604292
+        ]
+      ],
+      "centroid": [
+        0.144659161567688,
+        0.1471041440963745,
+        -0.005440788809210062
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Long head of biceps brachii.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00012454541865736246,
+      "muscleDistanceM": 0.0007766698254272342,
+      "review": "pending"
+    },
+    {
+      "muscle": "biceps-brachii-long.l",
+      "kind": "insertion",
+      "bone": "radius",
+      "points": [
+        [
+          0.23355969786643982,
+          -0.19280919432640076,
+          0.012473986484110355
+        ],
+        [
+          0.23478910326957703,
+          -0.18434952199459076,
+          0.011922725476324558
+        ],
+        [
+          0.23454423248767853,
+          -0.17698046565055847,
+          0.009313419461250305
+        ]
+      ],
+      "centroid": [
+        0.2343011051416397,
+        -0.184674933552742,
+        0.011230873875319958
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Biceps brachii muscle.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0001692339137662202,
+      "muscleDistanceM": 0.001759977894835174,
+      "review": "pending"
+    },
+    {
+      "muscle": "biceps-brachii-short.l",
+      "kind": "origin",
+      "bone": "scapula",
+      "points": [
+        [
+          0.14080975949764252,
+          0.14567293226718903,
+          0.025468703359365463
+        ]
+      ],
+      "centroid": [
+        0.14080975949764252,
+        0.14567293226718903,
+        0.025468703359365463
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 38,
+      "review": "pending"
+    },
+    {
+      "muscle": "biceps-brachii-short.l",
+      "kind": "insertion",
+      "bone": "radius",
+      "points": [
+        [
+          0.2151343822479248,
+          -0.12371170520782471,
+          0.012649270705878735
+        ]
+      ],
+      "centroid": [
+        0.2151343822479248,
+        -0.12371170520782471,
+        0.012649270705878735
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "withinThreshold": false,
+      "nearestDistanceM": 0.03726053237915039,
+      "review": "REQUIRED: no vertices within 2 mm"
+    },
+    {
+      "muscle": "triceps-brachii-long.l",
+      "kind": "origin",
+      "bone": "scapula",
+      "points": [
+        [
+          0.1524142026901245,
+          0.11157488822937012,
+          -0.009566890075802803
+        ],
+        [
+          0.15190580487251282,
+          0.11077453941106796,
+          -0.012157159857451916
+        ],
+        [
+          0.15146879851818085,
+          0.1104462742805481,
+          -0.014683655463159084
+        ]
+      ],
+      "centroid": [
+        0.15192900598049164,
+        0.11093126237392426,
+        -0.012139308266341686
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Long head of triceps brachii.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00015983529738150537,
+      "muscleDistanceM": 0.0025865575298666954,
+      "review": "pending"
+    },
+    {
+      "muscle": "triceps-brachii-long.l",
+      "kind": "insertion",
+      "bone": "ulna",
+      "points": [
+        [
+          0.20398148894309998,
+          -0.1495414823293686,
+          -0.020011669024825096
+        ],
+        [
+          0.20688582956790924,
+          -0.1456276774406433,
+          -0.023085689172148705
+        ],
+        [
+          0.22015130519866943,
+          -0.14631162583827972,
+          -0.026181655004620552
+        ]
+      ],
+      "centroid": [
+        0.2103610336780548,
+        -0.1471584588289261,
+        -0.02309981733560562
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Triceps brachii muscle.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0026111353654414415,
+      "muscleDistanceM": 0.002490674378350377,
+      "review": "pending"
+    },
+    {
+      "muscle": "triceps-brachii-lateral.l",
+      "kind": "origin",
+      "bone": "humerus",
+      "points": [
+        [
+          0.20476645231246948,
+          0.009276754222810268,
+          -0.012087455950677395
+        ],
+        [
+          0.19704383611679077,
+          0.050471190363168716,
+          -0.008715424686670303
+        ],
+        [
+          0.1881052404642105,
+          0.09767559915781021,
+          -0.005382766015827656
+        ]
+      ],
+      "centroid": [
+        0.19662439823150635,
+        0.05254923924803734,
+        -0.008722735568881035
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Lateral head of triceps brachii.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.000646082975436002,
+      "muscleDistanceM": 0.0012758048251271248,
+      "review": "pending"
+    },
+    {
+      "muscle": "triceps-brachii-lateral.l",
+      "kind": "insertion",
+      "bone": "ulna",
+      "points": [
+        [
+          0.20398148894309998,
+          -0.1495414823293686,
+          -0.020011669024825096
+        ],
+        [
+          0.20688582956790924,
+          -0.1456276774406433,
+          -0.023085689172148705
+        ],
+        [
+          0.22015130519866943,
+          -0.14631162583827972,
+          -0.026181655004620552
+        ]
+      ],
+      "centroid": [
+        0.2103610336780548,
+        -0.1471584588289261,
+        -0.02309981733560562
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Triceps brachii muscle.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0026111353654414415,
+      "muscleDistanceM": 0.006339338608086109,
+      "review": "pending"
+    },
+    {
+      "muscle": "triceps-brachii-medial.l",
+      "kind": "origin",
+      "bone": "humerus",
+      "points": [
+        [
+          0.21852098405361176,
+          -0.10387104749679565,
+          -0.01866755448281765
+        ],
+        [
+          0.20654091238975525,
+          -0.04906799644231796,
+          -0.016113055869936943
+        ],
+        [
+          0.18960921466350555,
+          0.03265674039721489,
+          -0.00701345456764102
+        ]
+      ],
+      "centroid": [
+        0.2048705667257309,
+        -0.039999887347221375,
+        -0.013922389596700668
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Medial head of triceps brachii.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0025747488252818584,
+      "muscleDistanceM": 0.0021443485748022795,
+      "review": "pending"
+    },
+    {
+      "muscle": "triceps-brachii-medial.l",
+      "kind": "insertion",
+      "bone": "ulna",
+      "points": [
+        [
+          0.20398148894309998,
+          -0.1495414823293686,
+          -0.020011669024825096
+        ],
+        [
+          0.20688582956790924,
+          -0.1456276774406433,
+          -0.023085689172148705
+        ],
+        [
+          0.22015130519866943,
+          -0.14631162583827972,
+          -0.026181655004620552
+        ]
+      ],
+      "centroid": [
+        0.2103610336780548,
+        -0.1471584588289261,
+        -0.02309981733560562
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Triceps brachii muscle.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0026111353654414415,
+      "muscleDistanceM": 0.0014059258392080665,
+      "review": "pending"
+    }
+  ]
+}

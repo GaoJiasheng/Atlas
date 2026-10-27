@@ -1,0 +1,217 @@
+{
+  "terms": [
+    {
+      "id": "term-weather",
+      "term": {
+        "en": "Weather",
+        "zh": "天气"
+      },
+      "definition": {
+        "en": "The state of the air at one place over a short time: rain or sun, wind, heat, cloud.",
+        "zh": "某个地方短时间内的大气状况：晴或雨、风、冷热、云。"
+      },
+      "see": [
+        "term-climate"
+      ]
+    },
+    {
+      "id": "term-climate",
+      "term": {
+        "en": "Climate",
+        "zh": "气候"
+      },
+      "definition": {
+        "en": "The pattern of weather in a place over many years, described with averages and other statistics.",
+        "zh": "一个地方许多年的天气规律，用平均值和其他统计来描述。"
+      },
+      "see": [
+        "term-weather",
+        "term-climatology"
+      ]
+    },
+    {
+      "id": "term-climatology",
+      "term": {
+        "en": "Monthly climatology",
+        "zh": "月气候平均"
+      },
+      "definition": {
+        "en": "An average for each calendar month over a long period: every January from 1991 to 2020 averaged together, every February, and so on.",
+        "zh": "把一段长时期里同一个月份的资料分别求平均：1991–2020 年的所有 1 月一起平均，所有 2 月一起平均，依此类推。"
+      },
+      "see": [
+        "term-climate"
+      ]
+    },
+    {
+      "id": "term-monsoon",
+      "term": {
+        "en": "Monsoon",
+        "zh": "季风"
+      },
+      "definition": {
+        "en": "A large-scale circulation of the air whose winds change with the seasons.",
+        "zh": "随季节转变风向的大范围空气环流。"
+      },
+      "see": [
+        "term-inter-monsoon",
+        "term-sea-breeze"
+      ]
+    },
+    {
+      "id": "term-inter-monsoon",
+      "term": {
+        "en": "Inter-monsoon",
+        "zh": "季风过渡期"
+      },
+      "definition": {
+        "en": "The time between two monsoons, when Singapore's surface winds are light and change direction.",
+        "zh": "两段季风之间的时期，这时新加坡的地面风轻而多变。"
+      },
+      "see": [
+        "term-monsoon"
+      ]
+    },
+    {
+      "id": "term-sea-breeze",
+      "term": {
+        "en": "Sea breeze",
+        "zh": "海风"
+      },
+      "definition": {
+        "en": "Air moving from the sea towards the land in the daytime, because the land heats up faster than the sea.",
+        "zh": "白天陆地比海面热得快，空气从海面吹向陆地，这就是海风。"
+      },
+      "see": [
+        "term-monsoon"
+      ]
+    },
+    {
+      "id": "term-wind-vector",
+      "term": {
+        "en": "Wind vector",
+        "zh": "风矢量"
+      },
+      "definition": {
+        "en": "Wind described by two parts together: how fast the air moves east or west, and how fast it moves north or south.",
+        "zh": "用两个分量一起描述风：空气向东或向西移动多快，向北或向南移动多快。"
+      },
+      "see": [
+        "term-reanalysis"
+      ]
+    },
+    {
+      "id": "term-reanalysis",
+      "term": {
+        "en": "Reanalysis",
+        "zh": "再分析"
+      },
+      "definition": {
+        "en": "A reconstruction of past weather made by putting many observations into a computer weather model. The winds here are a coarse regional field from one.",
+        "zh": "把大量观测资料放进电脑天气模式，重建过去的大气状况。这里的风是由它得到的较粗的区域风场。"
+      },
+      "see": [
+        "term-wind-vector"
+      ]
+    },
+    {
+      "id": "term-rain-belt",
+      "term": {
+        "en": "Tropical rain belt",
+        "zh": "热带雨带"
+      },
+      "definition": {
+        "en": "A broad, rainy region in the tropics that moves north and south through the year.",
+        "zh": "热带里一大片多雨的区域，一年里会南北移动。"
+      },
+      "see": [
+        "term-monsoon"
+      ]
+    },
+    {
+      "id": "term-condensation",
+      "term": {
+        "en": "Condensation",
+        "zh": "凝结"
+      },
+      "definition": {
+        "en": "The change of water vapour back into liquid water when it is cooled. Clouds are made of droplets formed this way.",
+        "zh": "水蒸气遇冷变回液态水的过程。云就是由这样形成的小水滴组成的。"
+      },
+      "see": [
+        "term-cumulonimbus"
+      ]
+    },
+    {
+      "id": "term-cumulonimbus",
+      "term": {
+        "en": "Cumulonimbus",
+        "zh": "积雨云"
+      },
+      "definition": {
+        "en": "A very deep cloud that can grow an icy, flat-topped anvil and bring heavy showers, thunder and lightning.",
+        "zh": "很深厚的云，顶部可展开成冰质的砧状，带来大阵雨、雷电。"
+      },
+      "see": [
+        "term-updraft",
+        "term-condensation"
+      ]
+    },
+    {
+      "id": "term-updraft",
+      "term": {
+        "en": "Updraft",
+        "zh": "上升气流"
+      },
+      "definition": {
+        "en": "Air moving upwards. Updrafts feed a growing storm cloud with warm, moist air.",
+        "zh": "向上移动的空气。上升气流把温暖潮湿的空气送进正在长大的雷雨云。"
+      },
+      "see": [
+        "term-cumulonimbus"
+      ]
+    },
+    {
+      "id": "term-sumatra-squall",
+      "term": {
+        "en": "Sumatra squall",
+        "zh": "苏门答腊飑线"
+      },
+      "definition": {
+        "en": "An organised line of thunderstorms that forms over Sumatra or the Strait of Malacca and usually moves east.",
+        "zh": "在苏门答腊或马六甲海峡上空形成、通常向东移动的一列有组织的雷雨。"
+      },
+      "see": [
+        "term-cumulonimbus"
+      ]
+    },
+    {
+      "id": "term-monsoon-surge",
+      "term": {
+        "en": "Monsoon surge",
+        "zh": "季风涌"
+      },
+      "definition": {
+        "en": "A strengthening of the Northeast Monsoon winds over the South China Sea that can bring long spells of rain.",
+        "zh": "东北季风在南中国海上空增强，可带来长时间的降雨。"
+      },
+      "see": [
+        "term-monsoon"
+      ]
+    },
+    {
+      "id": "term-haze",
+      "term": {
+        "en": "Smoke haze",
+        "zh": "烟霾"
+      },
+      "definition": {
+        "en": "Smoke from fires, carried by the wind, that can spread across a whole region.",
+        "zh": "火灾产生、随风输送、可扩散到整个区域的烟雾。"
+      },
+      "see": [
+        "term-monsoon"
+      ]
+    }
+  ]
+}

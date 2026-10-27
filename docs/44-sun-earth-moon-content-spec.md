@@ -692,3 +692,136 @@ T01–T28 的 unit tests 逐项编写；数字容差见 §4.9，clock 用注入 
 - [ ] `data/SOURCES.md`、LICENSE-CONTENT、THIRD-PARTY-NOTICES 的 CC0 / NC-SA provenance 与例外齐全，没有 BY-SA/NC-SA 混合派生文件；最终 `status: published`，记录截图 `hero-paper`、`hero-clean`、`hero-dark`、`hero-zh`、`phone-390` 与关键科学状态到 `docs/screenshots/sun-earth-moon/`。
 
 ## 9. 引擎记录（施工后填写）
+
+### 9.1 E-SEM1–E-SEM3 引擎施工记录（Codex，2026-10-27）
+
+**范围与状态**：只施工引擎与 `sample-orbit` draft 夹具，没有创建正式 `sun-earth-moon` 内容、图像或星历。§8 不打勾：数值、schema、类型与构建已通过，浏览器启动被当前执行环境拒绝，尚未完成视觉 / e2e / GPU 验收。未修改依赖、lockfile 或 review queue，未执行 git 写操作。
+
+**实现文件**：
+
+- E-SEM1：`orbit-rotation-schema.ts`；`lib/sim/orbit-{constants,rotation,clock,session}.ts`。注册 SIM_KINDS / simSchema / quantityKind / 状态表 / simQuantities / evaluateSim / SEPARATE_EXPERIMENTS；原五参数后追加 context，不改变旧参数含义；无 timeline channels。13控件、23输出、共享可恢复t、受限365日期例外、有限视盘与影锥法向距离、计算年表读取。`core/url-state.ts` / `types.ts` / `SceneHost.tsx` 与 SpaceScene 的 beat / presentation 保存 `orb-t`；暂停、尺度切换、控件重置、REFERENCE 与演示恢复读同一个会话。
+- E-SEM2：`lib/sim/orbit-projection.ts`、`stages/model3d/OrbitDriver.tsx`，接入 SceneRoot / PartNode / materials / CameraRig / bridge。沿既有可选 part 节点写绝对位置、四元数和半径；表面附件用父体半径；解析明暗覆盖棚灯输出，无新色 token。实际 world matrix 与太阳 uniform 从舞台反读到 `engine.orbit()`；`engine.orbitSeek()` 通过同一会话定位，等 rendered.snapshotId 后比较。PLATE 跟随 orbit 输出不作独立缓动。
+- E-SEM3：`hud/OrbitCard.tsx` 与现有 card / readerTop 槽。地心北朝上球面射线月相、模型观察点同角尺视盘、365日计算曲线；影图独立同尺度，含本影 / 半影 / 伪本影，月食遮暗与几何亮部百分比分开。`orbit-guides` 更新六个真实 guide 节点的几何，不另画不可选副本；零倾角隐藏交线。全年图指针 / 前后日与 TryIt 共用 setSim，来源复用 SourceRefs，没有新 selection kind 或底条。
+- 夹具：`src/content/topics/sample-orbit/`，8章 / 39拍，13 parts、4 groups、13 controls、23 outputs、9 binds、2 overlays、5张 TryIt；两种尺度、三种观察窗、离节点 / 偏食 / 环食 / 全月食均有状态。背景、06、07也有尺度按钮；X-RAY / CUTAWAY / EXPLODED 禁用并写双语原因。年表为独立 CC0 文件，365行数值不变，只删旧 MSS cross_check 并改 precision；来源与哈希见夹具 SOURCES.md（验收时撤回了 LICENSE-CONTENT / THIRD-PARTY-NOTICES 的夹具条目：夹具不发行第三方素材；正式主题按 §3.6 再定）。
+- 验证：`tests/space-scene/orbit-rotation.test.ts`（30 tests，覆盖 T01–T28、365日期异常、旧24项上限、39拍、URL / context / clock / restoration）；CC0 `tests/space-scene/fixtures/orbit-oracles.json`；`tests-e2e/sample-orbit.spec.ts`（9项，含39直链、矩阵 / uniform、手机、REFERENCE / presentation / reduce-motion、注入30/60/120fps与后台时间）。`scripts/shoot.ts` 扩展原 --beats / runBeatLinks：收 snapshot 与实际变换，比较拍与直链，并比较 orb-t 与 orbitSeek；旧模型不进入分支。作者完整 JSON 与注册说明见 docs/06 新节。
+
+**相对 §4 的差异与理由**：
+
+1. 现有 source id 规则为 `S[1-9]…`，不允许 S08 / S09。作者数据使用 **S8 / S9**，其余 S10 / S33 / S36 原号不变；oracle 原文件不改。没有为一个主题放宽全站来源规则。
+2. `solarYear.table` 是构建链接本地 file 后的内部字段；浏览器随主题 data.json 一次取得它，作者模板只写 file。没有新的太阳表网络请求或运行时路径解析。
+3. 绝对天体写者集中在 **OrbitDriver**，在既有 PartNode 动画之后、CameraRig / LabelProbe 之前应用，并更新实际 bounds / picking mesh / bridge；没有把天文绝对坐标混进通用 offset/rotate 的缓动栈。实际可选节点与光照仍是原舞台对象。
+4. 物理 snapshot 使用每次求值返回的独立普通数值记录，**不是 §4.3 所要求的全预分配物理结果缓冲**；显示尺度切换保持 snapshot 实例，纯求解实测约0.019ms，渲染侧几何、材质与 THREE 临时向量预分配。运行时长时间GC / 真机帧率尚未取得，不能把算术速度视作该项性能验收通过。
+5. 数值T01–T28无变更；名义90°弦月仍约50.1284773403%，并未改成精确50%。影锥仍用真实物理半径 / 距离；图中球体没有为可读性单独放大。观察窗使用原槽位和一个共享会话，没新增卡片对象或第二模型。
+
+**已执行 gates 与限制**：
+
+| Gate | 本轮结果 |
+|---|---|
+| `pnpm check` | 0 errors、0 warnings，3个仓库既有 unused 提示；包含最终新增 e2e 的类型复核。 |
+| `pnpm validate` | 56 topics，0 errors、0 warnings。 |
+| `pnpm test` | 156 files / **4209 tests passed**（orbit 30 tests）。 |
+| `pnpm build` | **115 pages built**，静态构建成功。 |
+| `pnpm shoot sample-orbit --beats --keys --layout` | 浏览器创建阶段失败，0页面执行，未生成可审截图。 |
+| 四个回归 topic 的 `--beats --keys` | light-and-shadows / sample-light / energy-conversion / sample-heart 在修改前和修改后均因相同 Chromium MachPort 权限错误而无法启动。没有可比较的功能结果，**不能声称0新增回归**。 |
+| `CI=1 ATLAS_E2E_PORT=5401 pnpm e2e` | 343 tests 均失败于 browser fixture 启动，页面断言未执行；新增第9项后另单跑 sample-orbit，结果见下补记。 |
+
+浏览器错误为 `bootstrap_check_in … MachPortRendezvousServer … Permission denied (1100)`。computer-use 工具另返回 “Computer Use was not approved to use Google Chrome”；未操作授权、验证或条款页面，没有尝试绕过限制。
+
+**性能实测边界**：Apple M5 Max / macOS arm64；预热1000次后10000次纯 snapshot 求值平均 **0.0188ms**；本地太阳 JSON **90248 bytes**（≤100KB）。构建日志相对施工前，SpaceScene View gzip约+9.1KB、Model3DStage约+2.6KB、公共小块约+0.3KB，合计约12KB，低于新增15KB目标；这不是浏览器首屏网络采样。未取得实际 draw calls / triangles / GPU fps / 长时间GC、首屏≤300KB、两主题 / 八尺寸布局、截图目视、网络与console运行时审计；这些都是尚未通过的验收项，没有静默放宽预算。已授权可继续的工作以恢复浏览器执行后的这些 gates 为界。
+
+**浏览器补记**：最终独立执行 `CI=1 ATLAS_E2E_PORT=5401 pnpm e2e tests-e2e/sample-orbit.spec.ts`，9/9同样在 Chromium 启动时被拒绝（未执行页面断言）；`pnpm shoot sample-orbit --perf --gpu` 也在启动阶段被相同 MachPort 权限拒绝，未取得GPU测量或截图。
+
+### 9.2 验收（Claude，2026-10-27）
+
+浏览器 gate 在本机可跑，补齐 §9.1 缺的截图 / e2e。审查后保留 Codex 的结构（一个 sim kind、会话 + OrbitDriver、两个 overlay、OrbitCard 占原 card 槽），只改了看得见的错和多余的东西：
+
+- **月相窗颜色反了**：paper 上亮部画成 `--ink`（深色），暗部是底色，孩子会把暗的半边读成亮的。改为两套主题都取较亮的 token 画亮部、较暗的画暗部；颜色从 canvas `fillStyle` 读，不再 `getImageData`（原来每拍一条 console 警告）。
+- **观察卡太高**：1280×720 / 1024×768 下 03–07 章卡片出屏、压住章节轴（36 条 layout 问题）。卡头改为 Observation / 观察窗（原来显示“零件链路”）；图与读数并排，影图只裁到天体所在的细条；删掉卡里重复的 Earth / Moon 选择按钮（选择走本章索引，铁律）。现在 0 条。
+- **视盘窗**：月球画成两套主题都暗的剪影；月球在太阳一侧时影图把地球放右边，两者都在框内。
+- **夹具月球 tint**：`ink-2` 在 paper 上是深灰，亮面和暗面分不出 → 改 `neutral`（两套主题都是中灰）。正式主题定稿时 §3.5 的 token 表照此改。
+- 去掉未使用的 store 字段 `orbitClock`、重复的 24 项上限检查；撤回 LICENSE-CONTENT / THIRD-PARTY-NOTICES 的夹具条目（不发行第三方素材）。
+- e2e：day 直链只写了两个 sim 值，URL 的 sim 是整套值，章节的 `lab: day` 被替换成默认 coupled → 测试链接补 `lab.day`（引擎行为与其他 sim 一致，不改）。
+
+| Gate | 结果 |
+|---|---|
+| check / validate / test / build | 0 errors；56 topics 0 errors；156 files / 4210 tests；115 pages |
+| `shoot sample-orbit --beats --keys --layout --theme paper,cinema` | 39 拍 × 2 主题 0 failures，39/39 直链同景，orb-t = orbitSeek，layout 0（八个尺寸），console clean |
+| 回归 `--beats --keys` | light-and-shadows、sample-light、energy-conversion、sample-heart、materials、flower-and-seed、fractions、sample-time：均 0 failures、console clean |
+
+| `CI=1 pnpm e2e`（全量，合并 main 前的构建） | 333 passed / 11 failed：heart-and-lungs、sample-heart（屏气后呼吸动画未归零）、singapore-after-1965、singapore-land-use、sample-space smoke、sample-forces、space-label-drag 均为超时或帧率阈值；同一负载下在 main 的构建上逐个重跑，失败相同（机器负载 100–160） |
+| 合并 main（蒸汽机构引擎、inside-the-earth）后 | check 0 errors；4308 tests；58 topics；119 pages；`shoot sample-orbit --beats`（两主题）39/39、0 failures；`shoot sample-mechanism --beats --keys --layout` 16/16、0 failures、console clean；e2e sample-orbit 8/9 + sample-mechanism 10/11 单独重跑（失败均为高负载下超时 / 0.4 rad 帧步阈值） |
+
+e2e 的直链测试原来逐个打开 39 拍（负载下 7–10 分钟），改为每章第一拍 + BG.3 真尺度共 9 拍；全部 39 拍的对照由 `shoot --beats` 做。shoot 的拍 / 直链对照不再比较 `rendered`（逐帧绘制状态，含淡入），这一项由 orbitIssues 在帧落地后对照快照检查——高负载下直链 400 ms 时首帧可能还没画，造成 2/39 的偶发差异。
+
+看过的截图：地轴在 02 章两极值拍方向不变（观察点相对地心偏移逐位相同）；01/04 章明暗界线朝向太阳（相机在夜侧时整球暗，是对的）；04 章上弦月北朝上右亮 50.13 %；05/06 章日全食 / 环食 / 月全食的视盘与影图；BG.3 真尺度标签；手机 390 宽。
+
+仍留给内容施工：03 章观察点、04/05 章月球在章初镜头下没有可见标签（夹具镜头，shoot 只记不判）；轨道导引管在近景里偏粗（半径 = 地球显示半径 × 0.012）；`simEffects` 的普通绑定读的是进入章节时的 orbit 输出，运行中不会刷新——目前夹具没有这类绑定，正式主题若要按 orbit 输出显隐零件需先补。
+
+### 9.3 正式内容施工记录（Codex，2026-10-27）
+
+**交付**：`src/content/topics/sun-earth-moon/`，按本次用户明确指示设为 `published`。背景 + 7 正章、39 条定稿双语字幕、5 张试一试、13 个可选对象、4 groups、13 controls / 23 outputs / 9 bindings / 2 overlays。21 个来源（19 个外部一手正文重读 + S33 + S36），16 个 §5 名词，43 条事实处置保持 33 verified / 2 changed / 8 cut。每正章 EN 200–300 词、ZH 350–500 字，3–5 段与 2–3 细看；无测验、配音、纹理、地图、外部数据请求或新依赖。
+
+**资产与许可**：三张已批准 PNG 逐一目视及 SHA-256 校核后，以既有 illustrate.ts 管线导出封面 800/1600 px、两正文图 1200/2400 px；原图和 manifest 未改。太阳表 365 行保持原值，沿夹具已清理元数据的 CC0 派生版，90248 bytes / SHA-256 `186965767b83756043d320a4c4e8991f991d5420a76a563fa7141f90ba263a23`。LICENSE-CONTENT / THIRD-PARTY-NOTICES 补 CC0 例外及 NC-SA 来源边界；不发行源网页或外部图表。详细出处、公式、精度及每拍事实来源见主题 AUDIT.md / data/SOURCES.md。
+
+**相对设计与最小修复**：当前实际相机坐标按 lab 决定原点，不按预设名决定 frame，因此使用显式章/拍数字相机，没有注册六个会跨 lab 失去天体参照的命名预设。02 采用保持惯性轴向的顺序地球近景；所有拍写全 13 个控件，不继承前拍。解析投影与表面法向检查修正 02.4/02.5、04.5、06.4、07.2/07.4 的 marker-facing 镜头；07 恢复 5.145° / Ω90。唯一引擎补丁是在同一 `orbital-plane` 可选 guide 中补法线和地轴倾角弧（原来只有平面线框，不能支撑 02 的量角说明），同快照 axis 驱动；单测验证零倾角、弧半径和轴向端点。不新增 schema、对象、颜色或钟，不使用运行时普通输出显隐绑定。
+
+| Gate | 本轮结果 |
+|---|---|
+| `pnpm check` | 0 errors / 0 warnings，3 个仓库既有 unused hints；含新 e2e 类型与最小引擎补丁。 |
+| `pnpm validate` | 58 topics，0 errors / 0 warnings。 |
+| `pnpm test` | 160 files / 4277 tests passed；新内容文件 10 tests，包括全部 39 字幕逐字比对及对应模型结果。 |
+| `pnpm build` | 119 pages，静态构建成功。 |
+| e2e 静态收集 | 新主题 13 scenarios 收集成功，未启动浏览器。 |
+| `pnpm shoot` / `pnpm e2e` / GPU | **按本次 BRIEF-CONTENT 的明确沙箱规则跳过**，交主会话执行；e2e 使用 `ATLAS_E2E_PORT=5422`。没有尝试控制用户浏览器/桌面，没有生成或借用舞台截图。 |
+
+§8 浏览器、所有尺寸/语言/主题、标签漏标、运行时网络/console、相机运行跟随、截图目视、实际 calls/triangles/GPU fps 与首屏预算均没有在本轮验收；原清单不据此勾选。发布状态来自用户指示，不能读成“全部浏览器 gates 已绿”。给 Gavin 的逐段审读、代定项和主会话命令见主题 REVIEW.md。没有 git 写操作、package/lockfile 或 review queue 修改。
+
+### 9.4 浏览器验收（Claude，2026-10-27）
+
+Chromium 本机可跑（机器负载 90–140，多代理同时跑浏览器）。审了 Codex 的未提交改动后分两个提交：Codex 内容 + 本节的小修。
+
+**审 diff**：`orbitalTiltGuide`（`orbit-projection.ts`）+ `OrbitDriver` 只改 `plane` 导引的点序，有单测（零倾角 / 弧半径 / 端点与物理轴一致）；`sample-orbit` 的 beats、keys 回归 0 失败。`LICENSE-CONTENT` / `THIRD-PARTY-NOTICES.md` 的新条目已撤回：太阳表和三张插画是原创内容，没有第三方或 share-alike 素材（同夹具时的处理）；`data/SOURCES.md` 末句相应改为“原创，仓库许可声明不设本题条目”。smoke 计数（34 题、68 徽章、science 11、图版 34）由 `smoke.spec.ts` 实跑确认。
+
+**gates**：`pnpm check` 0 errors；`pnpm validate` 58 topics 0 errors；`pnpm test` 160 files / 4277 passed（首次一个超时用例是高负载，立即重跑全过）；`pnpm build` 119 pages。
+
+**shoot** `sun-earth-moon --beats --tasks --keys --layout`，en/zh × paper/cinema 四组：39 拍 × 4 全部落地，39/39 直链同景（en-paper 最终构建首跑有 ch03 两条直链差异，仅负载下出现，空载单独重跑 39/39，另用 400 ms / 6 s 两次读取比对 `engine.orbit()` 无差异）；keys 0 失败，layout 八个尺寸 0 问题，console clean；页面 JS 511.5 KB gz / 11 文件（既有 SpaceScene 共享包基线 467–485 KB，超 docs/02 的 300 KB 是已知遗留；`sample-orbit` 同为 511.5 KB，即本题内容没有增加页面 JS）。逐张目视：背景与 7 章、两主题、两语言；1600×900 HUD 态看了 03–07 的观察卡；390×844、1024×768、1280×720 抽查。科学内容：四个月相拍亮部朝太阳、与观察窗北朝上月相一致（上弦右亮 50.13 %、满月、下弦）；明暗界线朝向太阳；02 章两个至点的轴向屏幕角度相同、受光半球互换；观察窗给出日全食 / 日环食 / 偏食视盘、月全食、安全拍文字；BG.3 真尺度读数 10 mm / 302 mm；两张正文图与封面图均渲染。
+
+**GPU**（`--perf --gpu`，Apple M5 Max / ANGLE Metal，1920×1080，drawing buffer 1520×1023）：各章 2–11 draw calls、5,952–20,712 三角形、60–62 fps，远低于 <50 calls / <0.1 M 三角形的静止目标。
+
+**小修**：04.3、05.3、07.3、07.5 的满月拍月球在 1600×900 HUD 下落在观察卡 / 图层面板后面 → 目标与相机 x 改到 0.3、fov 46；04.2 首个上弦月被演示字幕盖住 → 相机与目标 z 各加 0.2（1.8 / 0.2）。
+
+**e2e**（`CI=1 ATLAS_E2E_PORT=5422`；负载平均 120–250，主会话要求不跑全量，全量由合并时执行）：`sun-earth-moon.spec.ts` 13/13 通过；`smoke.spec.ts` 14/14；`sample-orbit.spec.ts` 除 39 直链一项外 6/6。默认 60 s 超时在这台机器上对三个 spec 都有大量超时（含无关的 `sample-space`），加 `--timeout` 单独重跑后通过；39 直链测试自带 600 s 上限，本机负载下需要 23.6 min，临时抬高上限（已还原）单跑通过。唯一真失败是测试本身：`published content` 四项用 `.atlas-figure img` 计数得 2，因为中英文正文各有一份 `<Figure>` 同在 DOM（一份被 CSS 隐藏），改成 `img:visible` 后四项通过。
+
+**剩余**：`FIXES.md` 五项（地轴无标签、1280 及以下窄屏满月拍被卡遮住、近景导引线过粗、影图条近乎空白、几处小标注），交 Codex 返工后复验；§8 清单中“截图保存到 `docs/screenshots/sun-earth-moon/`”未做（截图只在验收者本机 `shots/`，不进 git）。
+
+### 9.5 F1–F5 返工（Codex，2026-10-27）
+
+按主会话的明确指示处理 `src/content/topics/sun-earth-moon/FIXES.md`，不运行浏览器 gates、shoot、GPU，也不打开或驱动用户浏览器/桌面。无 git 写入，无 package.json / lockfile / review queue 改动。以下是实现与解析验证记录，不替代 §8 或主会话的浏览器复验。
+
+- **F1**：增加可选 `bodyTransform.labelPoint`，局部锚点随同一四元数/显示半径变换，保持包围盒中心不变；本题地轴指向 `[0,1.35,0]` 轴端，近侧圆片指向外表面。本题 `orbit-guides.labelAnchors: "strokes"` 把平面标签放在法线端、年轨道标签放在真实轨道采样点；未启用的既有主题保留 bounds 中心。逐拍解析检查 observer-marker / near-side-mark 的相机方向超过球面透视切线阈值；地轴与法线锚点在两种尺度下都在球外，轴向与共享快照一致。
+- **F2**：通用可选 `views.hudFrame.parts` 只在本题列三天体，默认关闭，既有主题包括 1600×900 保持原相机行为。Model3DStage 在布局变化时量取实际可见 HUD 块（overlay 按卡片实宽），得到留 12 px 间隔的舞台自由矩形。CameraRig 保留已有窄舞台宽高比后拉，再按可见主体包围盒每个点的深度求可行平移区间与最小后拉；fov/视线方向不变，已合适的镜头不变。作者镜头完全排除的对象不强行拉回近景，避免地球特写被远处太阳撑成全景。每次从作者镜头重算，支持 resize、卡片折叠、抽屉、HUD/演示变化、共享快照与尺度切换；拖拽交还自由相机。没有按 1280 或 1024 设一套额外镜头数值。
+- **F3**：新增可选 orbit-guides `radius`（地球显示半径的比例），本题取 0.006，即原管半径的一半；未写仍用 0.012。法线和倾角弧保留几何、同一可选对象与 token；地轴本体不变。最终细线可读性留给目视复验。
+- **F4**：保持真实同尺度有限太阳影图；新增可选 `orbitRotation.panel.shadowNote`，本题卡内显示 “At one scale, the shadow cones are too thin to see clearly.” / “同一比例下，影锥太细，难以看清。” 不放大影锥或改物理计算。保留影图的编辑决定待 Gavin 后续审读，已写 REVIEW.md；其他主题没有新说明文字。
+- **F5 四项**：01.5 的 Earth track 引线不再指向太阳中心；02.5 的 Orbital plane 引线指向法线端，避开地球/赤道；04.5 改镜头使太阳出画、06.5 将镜头与目标向太阳侧移，使太阳在图中右移；04.5 保持 α90 / synchronous=false，用新方位同时看见圆片标记和受光远侧区域。单测确认选定远侧表面法向同时朝向太阳、背离地球且朝向相机，字幕不改。
+
+**实现/测试**：纯函数 `lib/hud-framing.ts`（无 DOM/Three.js 依赖）；8 个单测用 Three.js 实际透视投影回算验证两种窄桌面自由带、非验收中间尺寸、手机、不同深度、非对称上下/左右留白、画外太阳、已合适镜头不变和无有效布局的回退；内容测试另加 4 项，验证旧 sample-orbit 的所有新字段缺省、两尺度锚点、全部观察点/近侧标记可见半球以及 04.5 受光远侧。文档契约同步 docs/06，逐项处理同步 FIXES.md。
+
+| Gate | 最终结果 |
+|---|---|
+| `pnpm check` | 0 errors / 0 warnings，3 个仓库既有 unused hints。 |
+| `pnpm validate` | 58 topics，0 errors / 0 warnings。 |
+| `pnpm test` | 161 files / **4289 tests passed**。首轮与 check/validate 同时运行时，既有 `schemas.test.ts` 的 WW2 TopoJSON 用例超过原 5 s 超时；不改测试/超时，之后单独重跑整个 suite 全绿。 |
+| `pnpm build` | 119 pages，静态构建成功。 |
+| shoot / 浏览器 e2e / GPU | 按本轮用户明确指示跳过，未调用浏览器或桌面工具。 |
+
+**主会话复验重点**：1280×720 / 1024×768 的 04.3、05.3、07.3、07.5 主体是否都在自由区；1600×900 与中间尺寸 resize / 卡片折叠 / 尺度切换 / 自由相机；双语双主题的轴、平面、观察点、近侧标记标签；01.5/02.5 的锚点，04.5/06.5 的太阳与 04.5 的受光远侧；近景法线/倾角弧细线及 F4 新说明后的卡片高度。§8 不据静态结果勾选。
+
+### 9.6 返工复验（Claude，2026-10-27）
+
+复验 §9.5（F1–F5 与 `views.hudFrame`）。逐项状态写在 `FIXES.md` 末尾表。
+
+- **F1 / F3 / F4 / F5**：地轴、轨道平面标签出现并指向轴端 / 法线端；导引管半径减半后仍可读；观察卡有“影锥太细”的说明；01.5 / 02.5 / 06.5 标签与镜头已修，04.5 太阳移出画面（远侧仍主要靠字幕）。BG.2 与偶尔 02.4 仍报 `no label: earth-axis`，章镜头也有若干章级提示，不是失败。
+- **F2**：1280×720 的 04.3 / 05.3 / 07.3 / 07.5 月球清楚地落在观察卡左侧；1600×900 不变。**1024×768 未完成**：月球、地球都在画内，但地球缩到约 14 px，拉远后太阳盘压在左栏文字上，留在 FIXES.md。
+- **引擎是否真的可选**：`hudFrame` 缺省时 `CameraRig.fitHud` 直接返回原相机，`Model3DStage` 的测量 effect 也直接返回；1600×900 的 aircon、heart-and-lungs 与未改前外观一致（目视）。
+- **shoot**：sun-earth-moon en/zh × paper/cinema `--beats --keys --layout`：console clean，layout 8 个尺寸 0 问题，keys 与 beat links 在无负载抖动时 39/39。负载 150–250 下每轮会出现 1–2 个随机项：`beat-… (link)` 的 orbit 不同（400 ms 内页面还没出第一帧，`engine.orbit()` 为空；5 s 后与演示逐位相同，`sample-orbit` 同样出现）、`key "h"` 的恢复按钮 5 s 内没淡入（未改动的 aircon 同样失败；单独打开三个主题均 <0.6 s 出现）。回归：aircon beat links 24/24、keys 除 `h`；sample-orbit 同。heart-and-lungs、sample-heart 的 shoot 在 30 s screenshot 超时中止（机器负载，未得结果）。
+- **e2e**（`--workers=2`，`test.setTimeout` 与 `--timeout` 临时抬高，已还原）：sun-earth-moon、sample-orbit、smoke 三个 spec 36/36 通过，用时 45 min。

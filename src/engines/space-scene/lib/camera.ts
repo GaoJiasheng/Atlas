@@ -8,6 +8,17 @@ import { easeInOutCubic, lerp, lerp3, type Vec3 } from './math';
 
 export const DEFAULT_CAMERA: OrbitCamera = { position: [3.2, 2.2, 4.2], target: [0, 0, 0], fov: 40 };
 export const DEFAULT_FOV = 40;
+/** The stage camera's far plane for small exhibits (metres). */
+export const BASE_FAR = 200;
+/**
+ * Far plane that still reaches the model from the farthest the orbit controls
+ * let the camera go (`minDistance * 20`, `minDistance` = 0.9 × the model radius)
+ * plus the model's own depth: a site-sized model (a quay crane) would otherwise
+ * vanish when the camera backs off to fit a narrow stage. Small exhibits keep 200.
+ */
+export function farPlane(radius: number): number {
+  return Math.max(BASE_FAR, Math.ceil(radius * 0.9 * 20 + radius * 2));
+}
 /** Chapter and preset moves (docs/08 §3: 1.4–1.8 s easeInOut). */
 export const CAMERA_TWEEN_MS = 1600;
 /** REFERENCE in and out (master-spec H: ~2 s). */
@@ -16,21 +27,6 @@ export const REFERENCE_TWEEN_MS = 2000;
 export const REFERENCE_FOV = 16;
 /** ORBIT turntable: one turn per 40 s. */
 export const ORBIT_PERIOD_S = 40;
-/** The renderer's default far plane (scene units); small models never need more. */
-export const DEFAULT_FAR = 200;
-/** The orbit zoom-out limit, in minimum distances (OrbitControls `maxDistance`). */
-export const MAX_DISTANCE_SHARE = 20;
-
-/**
- * Far plane that keeps the whole model drawn from the farthest the camera can
- * go (`MAX_DISTANCE_SHARE` × `minDistance`) plus the model's radius; never
- * below `DEFAULT_FAR`, so a small model keeps the usual depth range and a
- * 111 m rocket seen from 230 m is not clipped away.
- */
-export function cameraFar(minDistance: number, radius: number): number {
-  return Math.max(DEFAULT_FAR, minDistance * MAX_DISTANCE_SHARE + radius);
-}
-
 /** Cover camera in and out (HUD hidden / shown). */
 export const COVER_TWEEN_MS = 800;
 /** Share of the stage width the model's bounding sphere fills in the default cover camera. */

@@ -1,10 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import {
-  cameraFar,
   COVER_FILL,
   COVER_FILL_HEIGHT,
   COVER_MAX_HEIGHT,
+  BASE_FAR,
   DEFAULT_CAMERA,
+  farPlane,
   fitCameraToAspect,
   fitSphereCamera,
   referenceCamera,
@@ -150,12 +151,11 @@ describe('fitSphereCamera (default cover camera)', () => {
   });
 });
 
-describe('cameraFar', () => {
-  it('keeps the usual 200 for small models and grows with the zoom-out limit of a large one', () => {
-    expect(cameraFar(0.9, 1)).toBe(200);
-    expect(cameraFar(9, 10)).toBe(200);
-    // A 111 m stack (radius ~60, zoom floor 0.9 r): the 230 m hero camera and the whole zoom range stay inside.
-    expect(cameraFar(54, 60)).toBeGreaterThan(230 + 60);
-    expect(cameraFar(54, 60)).toBe(54 * 20 + 60);
+describe('farPlane', () => {
+  it('keeps 200 m for exhibit-sized models and reaches a site-sized one from its farthest orbit distance', () => {
+    expect(farPlane(1.5)).toBe(BASE_FAR);
+    expect(farPlane(9)).toBe(BASE_FAR);
+    const radius = 60;
+    expect(farPlane(radius)).toBeGreaterThan(radius * 0.9 * 20 + radius);
   });
 });
