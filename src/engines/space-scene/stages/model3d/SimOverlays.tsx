@@ -230,7 +230,8 @@ function ForceVectors({
   }, [snapKey]);
   const readings = useMemo(() => overlay.arrows.map(a => ({force:a.force,dir:[0,0,0] as Vec3,shown:false,scaled:false})),[overlay]);
   useEffect(()=>{if(sim.airfoil)readings.forEach((r,i)=>bridge.airfoilArrows.set(`${sim.overlays.indexOf(overlay)}:${i}`,r));return()=>{readings.forEach((_,i)=>bridge.airfoilArrows.delete(`${sim.overlays.indexOf(overlay)}:${i}`));};},[sim,overlay,bridge,readings]);
-  const full = vectorScale(overlay.per, overlay.max);
+  // Thickness: the overlay's own `width`, else scaled from `per` with a floor from `max`.
+  const full = overlay.width ?? vectorScale(overlay.per, overlay.max);
 
   useFrame((state, delta) => {
     const dt = Math.min(delta, MAX_DT);

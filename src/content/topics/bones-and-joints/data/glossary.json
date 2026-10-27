@@ -1,0 +1,291 @@
+{
+  "terms": [
+    {
+      "id": "skeleton",
+      "term": {
+        "en": "Skeleton",
+        "zh": "骨骼"
+      },
+      "definition": {
+        "en": "The connected framework formed by the bones of the body.",
+        "zh": "由身体各骨组成的相连框架。"
+      },
+      "see": [
+        "joint"
+      ]
+    },
+    {
+      "id": "joint",
+      "term": {
+        "en": "Joint",
+        "zh": "关节"
+      },
+      "definition": {
+        "en": "A connection where bones meet; joints allow different amounts of movement, including very little.",
+        "zh": "骨相接的地方；不同关节的活动程度不同，有的几乎不动。"
+      },
+      "see": [
+        "cartilage",
+        "ligament"
+      ]
+    },
+    {
+      "id": "cartilage",
+      "term": {
+        "en": "Cartilage",
+        "zh": "软骨"
+      },
+      "definition": {
+        "en": "A resilient connective tissue; articular cartilage covers facing bone surfaces in a synovial joint.",
+        "zh": "一种有弹性的结缔组织；关节软骨覆盖滑膜关节相对的骨面。"
+      },
+      "see": [
+        "synovial-fluid"
+      ]
+    },
+    {
+      "id": "compact-bone",
+      "term": {
+        "en": "Compact bone",
+        "zh": "骨密质"
+      },
+      "definition": {
+        "en": "Dense bone tissue, including the hard wall of a long-bone shaft.",
+        "zh": "密实的骨组织，包括长骨骨干的坚硬外壁。"
+      },
+      "see": [
+        "spongy-bone"
+      ]
+    },
+    {
+      "id": "spongy-bone",
+      "term": {
+        "en": "Spongy bone",
+        "zh": "骨松质"
+      },
+      "definition": {
+        "en": "Hard bone tissue arranged as a lattice with spaces between the struts.",
+        "zh": "形成网架的坚硬骨组织，骨小梁之间有空隙。"
+      },
+      "see": [
+        "marrow",
+        "compact-bone"
+      ]
+    },
+    {
+      "id": "marrow",
+      "term": {
+        "en": "Bone marrow",
+        "zh": "骨髓"
+      },
+      "definition": {
+        "en": "Soft tissue inside bones; red marrow produces blood cells, while yellow marrow contains much fat.",
+        "zh": "骨内的软组织；红骨髓制造血细胞，黄骨髓含较多脂肪。"
+      },
+      "see": [
+        "spongy-bone"
+      ]
+    },
+    {
+      "id": "periosteum",
+      "term": {
+        "en": "Periosteum",
+        "zh": "骨膜"
+      },
+      "definition": {
+        "en": "The tissue covering most of a bone’s outside, carrying vessels and nerves.",
+        "zh": "覆盖多数骨外表面的组织膜，内有血管与神经。"
+      },
+      "see": [
+        "compact-bone"
+      ]
+    },
+    {
+      "id": "ligament",
+      "term": {
+        "en": "Ligament",
+        "zh": "韧带"
+      },
+      "definition": {
+        "en": "Strong tissue that supports a connection between bones and helps limit excess movement.",
+        "zh": "支持骨之间连接的坚韧组织，有助限制过度活动。"
+      },
+      "see": [
+        "tendon",
+        "joint"
+      ]
+    },
+    {
+      "id": "tendon",
+      "term": {
+        "en": "Tendon",
+        "zh": "肌腱"
+      },
+      "definition": {
+        "en": "Strong tissue that transmits a muscle’s pull to bone.",
+        "zh": "把肌肉拉力传到骨的坚韧组织。"
+      },
+      "see": [
+        "ligament",
+        "lever"
+      ]
+    },
+    {
+      "id": "synovial-fluid",
+      "term": {
+        "en": "Synovial fluid",
+        "zh": "滑液"
+      },
+      "definition": {
+        "en": "Fluid in a synovial-joint cavity that helps lubricate the facing surfaces.",
+        "zh": "滑膜关节腔里的液体，有助润滑相对表面。"
+      },
+      "see": [
+        "cartilage",
+        "joint"
+      ]
+    },
+    {
+      "id": "hinge",
+      "term": {
+        "en": "Hinge joint",
+        "zh": "铰链关节"
+      },
+      "definition": {
+        "en": "A synovial type allowing mainly bending and straightening around one main axis.",
+        "zh": "主要绕一条轴屈伸的滑膜关节类型。"
+      },
+      "see": [
+        "pivot"
+      ]
+    },
+    {
+      "id": "pivot",
+      "term": {
+        "en": "Pivot joint",
+        "zh": "车轴关节"
+      },
+      "definition": {
+        "en": "A synovial type allowing rotation around a main axis.",
+        "zh": "主要绕一条轴旋转的滑膜关节类型。"
+      },
+      "see": [
+        "hinge"
+      ]
+    },
+    {
+      "id": "ball-socket",
+      "term": {
+        "en": "Ball-and-socket joint",
+        "zh": "球窝关节"
+      },
+      "definition": {
+        "en": "A rounded head meets a socket and allows movement around several axes.",
+        "zh": "圆头与窝相接，可绕多个轴活动。"
+      },
+      "see": [
+        "condyloid",
+        "saddle"
+      ]
+    },
+    {
+      "id": "condyloid",
+      "term": {
+        "en": "Condyloid joint",
+        "zh": "椭圆关节"
+      },
+      "definition": {
+        "en": "A synovial type with movement around two main axes, as at a finger knuckle.",
+        "zh": "可沿两个主要轴活动的滑膜关节类型，指根关节是例子。"
+      },
+      "see": [
+        "saddle"
+      ]
+    },
+    {
+      "id": "saddle",
+      "term": {
+        "en": "Saddle joint",
+        "zh": "鞍状关节"
+      },
+      "definition": {
+        "en": "The facing surfaces are each curved inward in one direction and outward in the other; the thumb base is an example.",
+        "zh": "每个相对表面沿一个方向凹、另一方向凸，拇指根部是例子。"
+      },
+      "see": [
+        "condyloid"
+      ]
+    },
+    {
+      "id": "plane",
+      "term": {
+        "en": "Plane joint",
+        "zh": "平面关节"
+      },
+      "definition": {
+        "en": "A synovial type with relatively flat surfaces and usually small constrained glides.",
+        "zh": "表面较平，通常只有受限制的小幅滑动。"
+      },
+      "see": [
+        "joint"
+      ]
+    },
+    {
+      "id": "lever",
+      "term": {
+        "en": "Lever",
+        "zh": "杠杆"
+      },
+      "definition": {
+        "en": "A rigid structure that can turn about a pivot under applied forces.",
+        "zh": "可受力绕支点转动的刚性构件。"
+      },
+      "see": [
+        "moment-arm"
+      ]
+    },
+    {
+      "id": "moment-arm",
+      "term": {
+        "en": "Moment arm",
+        "zh": "力臂"
+      },
+      "definition": {
+        "en": "The perpendicular distance from the pivot to the line along which a force acts.",
+        "zh": "支点至力作用线的垂直距离。"
+      },
+      "see": [
+        "lever"
+      ]
+    },
+    {
+      "id": "growth-plate",
+      "term": {
+        "en": "Growth plate",
+        "zh": "生长板"
+      },
+      "definition": {
+        "en": "A region of cartilage near a young long bone’s end where length growth occurs.",
+        "zh": "幼年长骨靠近端部、参与纵向增长的软骨区域。"
+      },
+      "see": [
+        "remodelling",
+        "cartilage"
+      ]
+    },
+    {
+      "id": "remodelling",
+      "term": {
+        "en": "Remodelling",
+        "zh": "重塑"
+      },
+      "definition": {
+        "en": "Removal of old bone tissue and formation of new bone tissue, continuing beyond height growth.",
+        "zh": "去除旧骨组织并形成新骨组织；身高停止增长后仍会继续。"
+      },
+      "see": [
+        "growth-plate"
+      ]
+    }
+  ]
+}

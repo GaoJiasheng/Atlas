@@ -1348,7 +1348,7 @@ interface Timeline {
 ```
 
 - `force` ∈ `gravity` / `friction` / `elastic` / `push` / `magnetic` → token `--f-gravity` / `--f-friction` / `--f-elastic` / `--f-push` / `--pole-n`（docs/08 §1）；KEY 名称"Gravitational force / 重力""Frictional force / 摩擦力""Elastic spring force / 弹簧的弹力""Push or pull / 推力或拉力""Magnetic force / 磁力"（`lib/sim/arrows.ts`）。
-- `value`：一个数、一个数输出（缓动）、或时间线输出的 `channel`（跟着播放走）；负值反向。长度 = `per`（默认 0.03 m / N）× 牛顿，≤ `max`（默认 0.25）；粗细与箭头按 `per` 缩放；< 0.05 N 淡出。起点 = 零件包围盒的中心 / 顶 / 底（`at`）+ `offset`，跟着零件的姿态、offset、`play` 走（读标注锚点）。方向随选项变时写几支带 `when` 的箭头（推的方向）。
+- `value`：一个数、一个数输出（缓动）、或时间线输出的 `channel`（跟着播放走）；负值反向。长度 = `per`（默认 0.03 m / N）× 牛顿，≤ `max`（默认 0.25）；粗细与箭头按 `per` 缩放（不小于 `max` 的 0.16，`vectorScale`），可选 `width`（场景单位）直接给粗细尺度（bones-and-joints 用 0.06，配 0.001 m / N）；< 0.05 N 淡出。起点 = 零件包围盒的中心 / 顶 / 底（`at`）+ `offset`，跟着零件的姿态、offset、`play` 走（读标注锚点）。方向随选项变时写几支带 `when` 的箭头（推的方向）。
 - 一个叠加的全部箭头 = 一个网格（顶点色带透明度），**一次绘制**；零件不在场、`when` 不成立、`group` 的图层关着、EXPLODED 时淡出。`group`：一个没有零件的组（LAYERS 一行"Forces / 力"，章 / 拍的 `layers` 照常控制它）。
 - **KEY**：控制面板的图例自动加上此刻画着的力（箭头的零件在场、`when` 成立、图层开着、时间线在整段里有一处 ≥ 0.05 N 或数 ≥ 0.05 N；`forcesOnShow`）。
 - validate：零件存在、方向非零、数输出 / 时间线通道存在、`when` 的控件或输出存在、`group` 存在；**被 `play` 转动的零件（车轮）不能画摩擦力箭头**（课纲 Note：滚动物体的摩擦方向不要求，docs/30 D3）。
@@ -1728,6 +1728,20 @@ docs/40 §4.2 E-HL1。`sim.kind: "table"`：模型不算，只**按控件查有�
 - **芯片**：数输出 `tag: typical` 在卡片上带一行 TYPICAL / 典型值 + "Typical values, from the sources / 典型值，出自来源" + 本行 `source` 的上标（`SourceRefs`，点开来源弹层，同 detail 的 `[S#]`）；`tag: sim`（默认）照旧一行 SIM / 在这个模型里；卡片同时观察两种时两行都有，每个读数的名字后再带一枚小芯片。PLATE：跟随 typical 输出的读数后面跟 TYPICAL 芯片与上标；本章卡片只观察 typical 输出时块尾写 `TYPICAL · <控件值>`，否则照旧 `SIM …`（`lib/sim/table.ts outputTag`、`statusTag`）。状态输出不分 SIM / TYPICAL（`tag` 只给数输出）。
 - **validate**（`tableIssues`，parts 文件解析时）：`keys` 是控件、不重复；行的 `when` 恰好写全 `keys`、值合法；每个实验对 `keys` 的全部值组合**恰好一行**（列出缺的、重的）；`set` 的键是输出、种类对得上（数 / `{ value, decimals }` 给数输出，带标签的状态 id 给状态输出）；同一实验每行设定同一组输出；一个输出只属于一个实验；输出不写 `from`、只能是数或状态；`count` 绑定的零件 `repeat.count` ≥ 该输出在表里的最大份数（按 `count` 的取整），否则报"not enough balls"；先猜后看的 `change` 只改 `observe` 所在实验的 `keys`（`tablePredictIssues`，章节校验）。**来源**（`tableSourceIssues`，`pnpm validate` 对照 `data/sources.json`）：每个 `S#` 都在；设定 `sim` 数输出的行至少引一条 `design: true` 的来源（`sources.json` 新的可选字段：主题自己的设计研究；`SOURCES.md` 标注 design study），设定 `typical` 数输出的行至少引一条不是设计研究的来源；只设定状态的行引什么都行。
 - **测试 API**：`__atlas.engine.sim()` 照旧，表模型多一个 `sources`：`{ <typical 输出>: [S#…] }`（此刻那一行的来源）；`copies(partId)`：`count` 绑定此刻画出的份数。
+
+### SpaceScene · 数字到骨架关节（joint binding）
+
+docs/57 §4 E-BJ2；可运行草稿 `sample-joint` 复用 `muscles-arms.glb` 和19关节rig，数字来自24行 `table`，不加sim kind。`sim.bind`另一个互斥target：
+
+```json
+{ "output": "angle", "joint": "elbow.l", "movement": "flexion", "angle": { "per": 1, "origin": 0 }, "when": { "control": "mode", "is": { "eq": "lever" } } }
+```
+
+- `control`数值step或`output`数输出恰写一个；`joint`是 `rig.joints` 对象的确切key，`movement`必须直接声明在该关节的`axes`里。无动作按钮的关节回退、无自动镜像。右侧需显式另写绑定。
+- 角度 `(value-origin)*per`；`per`默认1且有限非零，`origin`默认0且有限。step全部选项、table全部对应数格校验有限且在[-180,180]°；其它solver的运行值同样检查。NaN、无穷、越界或非数值不产生override，不把无效值当0°。当前rig无单独的角度边界字段；这不是临床ROM。
+- 可选`when`同`play.when`：`control`或`output`恰写一个，`is`为`true`或`eq/ne/in/gte/lte`条件。条件不成立即撤销override，恢复章/拍pose。table仍在内部求值；是否展示卡片由章节控制。相同joint+movement重复绑定报错，即使guard不同；一个joint可分别覆盖不同movement。相同joint已有sequence动画时拒绝再加数字绑定，避免两个驱动争用。
+- `simEffects.joints`按movement覆盖章/拍pose或exercise的相应字段，保留其它movement、其它joint和contraction。共用MotionDriver、父链、local axis与蒙皮；不对part再转一次。普通控件变更或撤销override用0.5秒缓动；URL初载与reduced-motion瞬到目标。章节清空上章sim.set，作者应给普通章`mode: explore`基线。
+- `spaceChapterIssues`检查章/拍中active绑定与exercise key是否争用同一joint；该组合报错。测试：`tests/space-scene/joint-binding.test.ts`；浏览器声明 `tests-e2e/sample-joint.spec.ts`。QA `__atlas.engine.joint(name)`读实际骨架的 `{ angles, position, quaternion }`（world origin/world quaternion），不存在的关节返回null；用于比较命名pose与数字绑定的深链末端，不是仅返回控件值。
 
 ### SpaceScene · 可选食物网卡（sim.foodWeb，E-MW2）
 

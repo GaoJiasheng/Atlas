@@ -609,7 +609,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
           data={data}
           fitness={fitness}
           rig={rig}
-          input={{ pose: s.pose, exercise: s.exercise, demo: s.demo }}
+          input={{ pose: s.pose, exercise: s.exercise, demo: s.demo, joints: sim?.joints }}
           playable={playable}
           rootRef={rootRef}
           center={bounds.fit.center}

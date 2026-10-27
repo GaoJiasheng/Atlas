@@ -1,0 +1,1140 @@
+{
+  "model": "/models/muscles-arms.glb",
+  "parts": [
+    {
+      "id": "humerus",
+      "name": {
+        "en": "Humerus",
+        "zh": "肱骨"
+      },
+      "group": "skeleton",
+      "mesh": "humerus.l",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "humerus.r"
+      },
+      "summary": {
+        "en": "Links the shoulder and elbow.",
+        "zh": "连接肩与肘。"
+      },
+      "detail": {
+        "en": "Engine fixture using the existing Z-Anatomy / BodyParts3D arm meshes, CC BY-SA 4.0. This is an adult reference, not a clinical movement limit. [S2]",
+        "zh": "引擎测试沿用Z-Anatomy / BodyParts3D手臂网格，CC BY-SA 4.0。这是成人参考，不代表临床活动极限。[S2]"
+      },
+      "short": {
+        "en": "Humerus",
+        "zh": "肱骨"
+      },
+      "connects": []
+    },
+    {
+      "id": "radius",
+      "name": {
+        "en": "Radius",
+        "zh": "桡骨"
+      },
+      "group": "skeleton",
+      "mesh": "radius.l",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "radius.r"
+      },
+      "short": {
+        "en": "Radius",
+        "zh": "桡骨"
+      },
+      "summary": {
+        "en": "Turns with the hand during forearm rotation.",
+        "zh": "前臂旋转时随手一起转动。"
+      },
+      "detail": {
+        "en": "Engine fixture using the existing Z-Anatomy / BodyParts3D arm meshes, CC BY-SA 4.0. This is an adult reference, not a clinical movement limit. [S2]",
+        "zh": "引擎测试沿用Z-Anatomy / BodyParts3D手臂网格，CC BY-SA 4.0。这是成人参考，不代表临床活动极限。[S2]"
+      },
+      "connects": []
+    },
+    {
+      "id": "ulna",
+      "name": {
+        "en": "Ulna",
+        "zh": "尺骨"
+      },
+      "group": "skeleton",
+      "mesh": "ulna.l",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "ulna.r"
+      },
+      "short": {
+        "en": "Ulna",
+        "zh": "尺骨"
+      },
+      "summary": {
+        "en": "Receives the triceps pull at the elbow.",
+        "zh": "在肘部承接肱三头肌拉力。"
+      },
+      "detail": {
+        "en": "Engine fixture using the existing Z-Anatomy / BodyParts3D arm meshes, CC BY-SA 4.0. This is an adult reference, not a clinical movement limit. [S2]",
+        "zh": "引擎测试沿用Z-Anatomy / BodyParts3D手臂网格，CC BY-SA 4.0。这是成人参考，不代表临床活动极限。[S2]"
+      },
+      "connects": []
+    },
+    {
+      "id": "hand",
+      "name": {
+        "en": "Hand bones",
+        "zh": "手骨"
+      },
+      "group": "skeleton",
+      "mesh": "hand.l",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "hand.r"
+      },
+      "short": {
+        "en": "Hand",
+        "zh": "手骨"
+      },
+      "summary": {
+        "en": "Shows the wrist and finger attachment landmarks.",
+        "zh": "显示腕与手指的附着标志。"
+      },
+      "detail": {
+        "en": "Engine fixture using the existing Z-Anatomy / BodyParts3D arm meshes, CC BY-SA 4.0. This is an adult reference, not a clinical movement limit. [S2]",
+        "zh": "引擎测试沿用Z-Anatomy / BodyParts3D手臂网格，CC BY-SA 4.0。这是成人参考，不代表临床活动极限。[S2]"
+      },
+      "connects": []
+    }
+  ],
+  "groups": [
+    {
+      "id": "skeleton",
+      "name": {
+        "en": "Arm bones",
+        "zh": "手臂骨骼"
+      },
+      "color": "token:bone"
+    }
+  ],
+  "flows": [],
+  "animations": [],
+  "views": {
+    "assembled": {
+      "camera": {
+        "position": [
+          0.45,
+          0.04,
+          2.2
+        ],
+        "target": [
+          0,
+          -0.15,
+          0.02
+        ],
+        "fov": 30
+      }
+    },
+    "exploded": {
+      "camera": {
+        "position": [
+          0.7,
+          0.12,
+          2.2
+        ],
+        "target": [
+          0,
+          -0.18,
+          0
+        ],
+        "fov": 30
+      }
+    }
+  },
+  "units": {
+    "modelUnit": "m",
+    "scale": 1
+  },
+  "rig": {
+    "joints": {
+      "trunk": {
+        "node": "joint.trunk",
+        "axes": {
+          "flexion": [
+            1,
+            0,
+            0
+          ],
+          "lateral-flexion": [
+            0,
+            0,
+            1
+          ],
+          "rotation": [
+            0,
+            1,
+            0
+          ]
+        }
+      },
+      "clavicle.l": {
+        "node": "joint.clavicle.l",
+        "axes": {
+          "protraction": [
+            0,
+            -1,
+            0
+          ],
+          "elevation": [
+            0,
+            0,
+            1
+          ]
+        }
+      },
+      "scapula.l": {
+        "node": "joint.scapula.l",
+        "axes": {
+          "protraction": [
+            0,
+            -1,
+            0
+          ],
+          "upward-rotation": [
+            0,
+            0,
+            1
+          ],
+          "elevation": [
+            0,
+            0,
+            1
+          ]
+        }
+      },
+      "shoulder.l": {
+        "node": "joint.shoulder.l",
+        "axes": {
+          "horizontal-adduction": [
+            0,
+            -1,
+            0
+          ],
+          "flexion": [
+            -1,
+            0,
+            0
+          ],
+          "abduction": [
+            0,
+            0,
+            1
+          ],
+          "internal-rotation": [
+            0.1801,
+            -0.9823,
+            -0.0505
+          ]
+        }
+      },
+      "elbow.l": {
+        "node": "joint.elbow.l",
+        "axes": {
+          "flexion": [
+            -1,
+            0,
+            0
+          ]
+        }
+      },
+      "forearm.l": {
+        "node": "joint.forearm.l",
+        "axes": {
+          "pronation": [
+            0.0751,
+            -0.9787,
+            0.191
+          ]
+        }
+      },
+      "hand.l": {
+        "node": "joint.hand.l",
+        "axes": {
+          "flexion": [
+            -1,
+            0,
+            0
+          ],
+          "abduction": [
+            0,
+            0,
+            1
+          ]
+        },
+        "offset": 0.08
+      },
+      "hip.l": {
+        "node": "joint.hip.l",
+        "axes": {
+          "flexion": [
+            -1,
+            0,
+            0
+          ],
+          "abduction": [
+            0,
+            0,
+            1
+          ],
+          "internal-rotation": [
+            -0.0219,
+            -0.9988,
+            -0.0436
+          ]
+        }
+      },
+      "knee.l": {
+        "node": "joint.knee.l",
+        "axes": {
+          "flexion": [
+            1,
+            0,
+            0
+          ],
+          "internal-rotation": [
+            0.0149,
+            -0.9995,
+            -0.0275
+          ]
+        }
+      },
+      "ankle.l": {
+        "node": "joint.ankle.l",
+        "axes": {
+          "dorsiflexion": [
+            -1,
+            0,
+            0
+          ],
+          "inversion": [
+            0,
+            0,
+            -1
+          ]
+        }
+      },
+      "clavicle.r": {
+        "node": "joint.clavicle.r",
+        "axes": {
+          "protraction": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "elevation": [
+            0.0,
+            0.0,
+            -1.0
+          ]
+        }
+      },
+      "scapula.r": {
+        "node": "joint.scapula.r",
+        "axes": {
+          "protraction": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "upward-rotation": [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          "elevation": [
+            0.0,
+            0.0,
+            -1.0
+          ]
+        }
+      },
+      "shoulder.r": {
+        "node": "joint.shoulder.r",
+        "axes": {
+          "horizontal-adduction": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "flexion": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "abduction": [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          "internal-rotation": [
+            0.1801,
+            0.9823,
+            0.0505
+          ]
+        }
+      },
+      "elbow.r": {
+        "node": "joint.elbow.r",
+        "axes": {
+          "flexion": [
+            -1.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "forearm.r": {
+        "node": "joint.forearm.r",
+        "axes": {
+          "pronation": [
+            0.0751,
+            0.9787,
+            -0.191
+          ]
+        }
+      },
+      "hand.r": {
+        "node": "joint.hand.r",
+        "axes": {
+          "flexion": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "abduction": [
+            0.0,
+            0.0,
+            -1.0
+          ]
+        },
+        "offset": 0.08
+      },
+      "hip.r": {
+        "node": "joint.hip.r",
+        "axes": {
+          "flexion": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "abduction": [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          "internal-rotation": [
+            -0.0219,
+            0.9988,
+            0.0436
+          ]
+        }
+      },
+      "knee.r": {
+        "node": "joint.knee.r",
+        "axes": {
+          "flexion": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "internal-rotation": [
+            0.0149,
+            0.9995,
+            0.0275
+          ]
+        }
+      },
+      "ankle.r": {
+        "node": "joint.ankle.r",
+        "axes": {
+          "dorsiflexion": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "inversion": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "demo": {
+      "shoulder": {
+        "flexion": 65,
+        "extension": 25,
+        "adduction": 15,
+        "abduction": 65,
+        "horizontal-adduction": 35,
+        "internal-rotation": 40,
+        "horizontal-abduction": 35,
+        "external-rotation": 40
+      },
+      "elbow": {
+        "flexion": 90,
+        "extension": 60
+      },
+      "forearm": {
+        "pronation": 150,
+        "supination": 20
+      },
+      "scapula": {
+        "protraction": 12,
+        "retraction": 12,
+        "upward-rotation": 20,
+        "elevation": 8
+      }
+    }
+  },
+  "poses": {
+    "baseline": {
+      "joint:elbow.l": {
+        "flexion": 30
+      },
+      "joint:elbow.r": {
+        "flexion": 25
+      },
+      "joint:forearm.l": {
+        "pronation": 20
+      },
+      "duration": 0.5
+    },
+    "named-ninety": {
+      "joint:elbow.l": {
+        "flexion": 90
+      },
+      "joint:elbow.r": {
+        "flexion": 25
+      },
+      "joint:forearm.l": {
+        "pronation": 20
+      },
+      "duration": 0.5
+    }
+  },
+  "sim": {
+    "kind": "table",
+    "controls": [
+      {
+        "id": "mode",
+        "kind": "choice",
+        "label": {
+          "en": "Mode",
+          "zh": "模式"
+        },
+        "default": "explore",
+        "options": [
+          {
+            "id": "explore",
+            "label": {
+              "en": "Explore",
+              "zh": "观察"
+            }
+          },
+          {
+            "id": "lever",
+            "label": {
+              "en": "Lever",
+              "zh": "杠杆"
+            }
+          }
+        ]
+      },
+      {
+        "id": "elbow-angle",
+        "kind": "step",
+        "label": {
+          "en": "Angle",
+          "zh": "角度"
+        },
+        "unit": "°",
+        "values": [
+          30,
+          60,
+          90,
+          120
+        ],
+        "default": 90
+      },
+      {
+        "id": "load-force",
+        "kind": "step",
+        "label": {
+          "en": "Load",
+          "zh": "外加力"
+        },
+        "unit": "N",
+        "values": [
+          0,
+          10,
+          20
+        ],
+        "default": 20
+      },
+      {
+        "id": "load-distance",
+        "kind": "step",
+        "label": {
+          "en": "Load distance",
+          "zh": "负载距离"
+        },
+        "unit": "m",
+        "values": [
+          0.15,
+          0.3
+        ],
+        "default": 0.3
+      }
+    ],
+    "outputs": [
+      {
+        "id": "angle",
+        "label": {
+          "en": "Angle",
+          "zh": "角度"
+        },
+        "unit": "°",
+        "decimals": 0,
+        "tag": "sim"
+      },
+      {
+        "id": "load",
+        "label": {
+          "en": "Load",
+          "zh": "外加力"
+        },
+        "unit": "N",
+        "decimals": 0,
+        "tag": "sim"
+      },
+      {
+        "id": "load-arm",
+        "label": {
+          "en": "Perpendicular arm",
+          "zh": "垂直力臂"
+        },
+        "unit": "m",
+        "decimals": 2,
+        "tag": "sim"
+      },
+      {
+        "id": "load-torque",
+        "label": {
+          "en": "Torque",
+          "zh": "力矩"
+        },
+        "unit": "N·m",
+        "decimals": 2,
+        "tag": "sim"
+      },
+      {
+        "id": "muscle-force",
+        "label": {
+          "en": "Model muscle force",
+          "zh": "模型肌肉力"
+        },
+        "unit": "N",
+        "decimals": 0,
+        "tag": "sim"
+      },
+      {
+        "id": "residual",
+        "label": {
+          "en": "Residual",
+          "zh": "残差"
+        },
+        "unit": "N·m",
+        "decimals": 3,
+        "tag": "sim"
+      }
+    ],
+    "bind": [
+      {
+        "output": "angle",
+        "joint": "elbow.l",
+        "movement": "flexion",
+        "angle": {
+          "per": 1,
+          "origin": 0
+        },
+        "when": {
+          "control": "mode",
+          "is": {
+            "eq": "lever"
+          }
+        }
+      }
+    ],
+    "table": {
+      "experiments": {
+        "lever": {
+          "keys": [
+            "elbow-angle",
+            "load-force",
+            "load-distance"
+          ],
+          "rows": [
+            {
+              "when": {
+                "elbow-angle": 30,
+                "load-force": 0,
+                "load-distance": 0.15
+              },
+              "set": {
+                "angle": 30,
+                "load": 0,
+                "load-arm": 0.07499999999999998,
+                "load-torque": 0.0,
+                "muscle-force": 0.0,
+                "residual": 0.0
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 30,
+                "load-force": 0,
+                "load-distance": 0.3
+              },
+              "set": {
+                "angle": 30,
+                "load": 0,
+                "load-arm": 0.14999999999999997,
+                "load-torque": 0.0,
+                "muscle-force": 0.0,
+                "residual": 0.0
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 30,
+                "load-force": 10,
+                "load-distance": 0.15
+              },
+              "set": {
+                "angle": 30,
+                "load": 10,
+                "load-arm": 0.07499999999999998,
+                "load-torque": 0.7499999999999998,
+                "muscle-force": 18.749999999999993,
+                "residual": 0.0
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 30,
+                "load-force": 10,
+                "load-distance": 0.3
+              },
+              "set": {
+                "angle": 30,
+                "load": 10,
+                "load-arm": 0.14999999999999997,
+                "load-torque": 1.4999999999999996,
+                "muscle-force": 37.499999999999986,
+                "residual": 0.0
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 30,
+                "load-force": 20,
+                "load-distance": 0.15
+              },
+              "set": {
+                "angle": 30,
+                "load": 20,
+                "load-arm": 0.07499999999999998,
+                "load-torque": 1.4999999999999996,
+                "muscle-force": 37.499999999999986,
+                "residual": 0.0
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 30,
+                "load-force": 20,
+                "load-distance": 0.3
+              },
+              "set": {
+                "angle": 30,
+                "load": 20,
+                "load-arm": 0.14999999999999997,
+                "load-torque": 2.999999999999999,
+                "muscle-force": 74.99999999999997,
+                "residual": 0.0
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 60,
+                "load-force": 0,
+                "load-distance": 0.15
+              },
+              "set": {
+                "angle": 60,
+                "load": 0,
+                "load-arm": 0.12990381056766578,
+                "load-torque": 0.0,
+                "muscle-force": 0.0,
+                "residual": 0.0
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 60,
+                "load-force": 0,
+                "load-distance": 0.3
+              },
+              "set": {
+                "angle": 60,
+                "load": 0,
+                "load-arm": 0.25980762113533157,
+                "load-torque": 0.0,
+                "muscle-force": 0.0,
+                "residual": 0.0
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 60,
+                "load-force": 10,
+                "load-distance": 0.15
+              },
+              "set": {
+                "angle": 60,
+                "load": 10,
+                "load-arm": 0.12990381056766578,
+                "load-torque": 1.2990381056766578,
+                "muscle-force": 32.47595264191644,
+                "residual": 0.0
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 60,
+                "load-force": 10,
+                "load-distance": 0.3
+              },
+              "set": {
+                "angle": 60,
+                "load": 10,
+                "load-arm": 0.25980762113533157,
+                "load-torque": 2.5980762113533156,
+                "muscle-force": 64.95190528383289,
+                "residual": 0.0
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 60,
+                "load-force": 20,
+                "load-distance": 0.15
+              },
+              "set": {
+                "angle": 60,
+                "load": 20,
+                "load-arm": 0.12990381056766578,
+                "load-torque": 2.5980762113533156,
+                "muscle-force": 64.95190528383289,
+                "residual": 0.0
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 60,
+                "load-force": 20,
+                "load-distance": 0.3
+              },
+              "set": {
+                "angle": 60,
+                "load": 20,
+                "load-arm": 0.25980762113533157,
+                "load-torque": 5.196152422706631,
+                "muscle-force": 129.90381056766577,
+                "residual": 0.0
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 90,
+                "load-force": 0,
+                "load-distance": 0.15
+              },
+              "set": {
+                "angle": 90,
+                "load": 0,
+                "load-arm": 0.15,
+                "load-torque": 0.0,
+                "muscle-force": 0.0,
+                "residual": 0.0
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 90,
+                "load-force": 0,
+                "load-distance": 0.3
+              },
+              "set": {
+                "angle": 90,
+                "load": 0,
+                "load-arm": 0.3,
+                "load-torque": 0.0,
+                "muscle-force": 0.0,
+                "residual": 0.0
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 90,
+                "load-force": 10,
+                "load-distance": 0.15
+              },
+              "set": {
+                "angle": 90,
+                "load": 10,
+                "load-arm": 0.15,
+                "load-torque": 1.5,
+                "muscle-force": 37.5,
+                "residual": 0.0
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 90,
+                "load-force": 10,
+                "load-distance": 0.3
+              },
+              "set": {
+                "angle": 90,
+                "load": 10,
+                "load-arm": 0.3,
+                "load-torque": 3.0,
+                "muscle-force": 75.0,
+                "residual": 0.0
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 90,
+                "load-force": 20,
+                "load-distance": 0.15
+              },
+              "set": {
+                "angle": 90,
+                "load": 20,
+                "load-arm": 0.15,
+                "load-torque": 3.0,
+                "muscle-force": 75.0,
+                "residual": 0.0
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 90,
+                "load-force": 20,
+                "load-distance": 0.3
+              },
+              "set": {
+                "angle": 90,
+                "load": 20,
+                "load-arm": 0.3,
+                "load-torque": 6.0,
+                "muscle-force": 150.0,
+                "residual": 0.0
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 120,
+                "load-force": 0,
+                "load-distance": 0.15
+              },
+              "set": {
+                "angle": 120,
+                "load": 0,
+                "load-arm": 0.1299038105676658,
+                "load-torque": 0.0,
+                "muscle-force": 0.0,
+                "residual": 0.0
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 120,
+                "load-force": 0,
+                "load-distance": 0.3
+              },
+              "set": {
+                "angle": 120,
+                "load": 0,
+                "load-arm": 0.2598076211353316,
+                "load-torque": 0.0,
+                "muscle-force": 0.0,
+                "residual": 0.0
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 120,
+                "load-force": 10,
+                "load-distance": 0.15
+              },
+              "set": {
+                "angle": 120,
+                "load": 10,
+                "load-arm": 0.1299038105676658,
+                "load-torque": 1.299038105676658,
+                "muscle-force": 32.47595264191645,
+                "residual": 0.0
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 120,
+                "load-force": 10,
+                "load-distance": 0.3
+              },
+              "set": {
+                "angle": 120,
+                "load": 10,
+                "load-arm": 0.2598076211353316,
+                "load-torque": 2.598076211353316,
+                "muscle-force": 64.9519052838329,
+                "residual": 0.0
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 120,
+                "load-force": 20,
+                "load-distance": 0.15
+              },
+              "set": {
+                "angle": 120,
+                "load": 20,
+                "load-arm": 0.1299038105676658,
+                "load-torque": 2.598076211353316,
+                "muscle-force": 64.9519052838329,
+                "residual": 0.0
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "elbow-angle": 120,
+                "load-force": 20,
+                "load-distance": 0.3
+              },
+              "set": {
+                "angle": 120,
+                "load": 20,
+                "load-arm": 0.2598076211353316,
+                "load-torque": 5.196152422706632,
+                "muscle-force": 129.9038105676658,
+                "residual": 0.0
+              },
+              "source": [
+                "S1"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

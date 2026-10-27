@@ -124,6 +124,8 @@ export interface MechanismReading {
 export type MechanismSave = Record<string, { thetaRad: number; qaHold: boolean }>;
 
 export interface StageBridge {
+  /** Actual rig rotations and world origins after skinning motion (QA only). */
+  joints: Map<string, { angles: Record<string, number>; position: number[]; quaternion: number[] }>;
   /** Orbit sims (docs/44 §4.10): what OrbitDriver really drew for the snapshot `snapshotId` (world position / quaternion / scale, Sun uniforms). */
   orbitRendered?: { snapshotId: number; parts: Record<string, { position: number[]; quaternion: number[]; scale: number[]; visible: boolean }>; solarDirections: Record<string, number[]> };
   mechanisms: Map<string, MechanismReading>;
@@ -219,6 +221,7 @@ export function createBridge(): StageBridge {
     fills: new Map(),
     animations: new Map(),
     copies: new Map(),
+    joints: new Map(),
     tints: new Map(),
     bends: new Map(),
     shifts: new Map(),

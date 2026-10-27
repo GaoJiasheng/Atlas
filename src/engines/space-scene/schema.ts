@@ -40,11 +40,14 @@ import {
   type Side,
 } from './lib/bilateral';
 import { MAX_POSES, POSE_DURATION } from './lib/pose';
-import { canMove, jointCandidates, DEFAULT_BULGE, DEFAULT_DEMO_ANGLE, JOINT_PREFIX, jointOf, MIN_DEMO_ANGLE, musclePartIds } from './lib/rig';
+import { bothSides, canMove, jointCandidates, DEFAULT_BULGE, DEFAULT_DEMO_ANGLE, JOINT_PREFIX, jointOf, MIN_DEMO_ANGLE, musclePartIds } from './lib/rig';
 import { MAX_EXPLODE_STAGE } from './lib/explode';
 import { MAX_FLOW_PATHS } from './lib/flow-curve';
 import { beatSimSchema, chapterSimIssues, chapterSimSchema, simIssues, simSchema } from './sim-schema';
 import { materialsShowable } from './lib/sim/materials';
+import { simEffects } from './lib/sim/bind';
+import { resolveSimValues } from './lib/sim/controls';
+import { evaluateSim } from './lib/sim';
 import { linkOrbitTable, orbitTableIssues } from './orbit-rotation-schema';
 import { mechanismIssues, mechanismSchema } from './mechanism-schema';
 export { mechanismIssues } from './mechanism-schema';
@@ -1211,6 +1214,7 @@ export const partsFileBase = z
         flows: new Map(file.flows.map((f) => [f.id, { paths: f.paths, own: f.path.length > 0 }])),
         animations: new Map(file.animations.map((a) => [a.id, { kind: a.kind, target: a.target, ...(a.kind === 'sequence' ? { loop: a.loop } : {}) }])),
         poses: new Set(Object.keys(file.poses ?? {})),
+        joints: file.rig?.joints,
         countable,
         filings: new Set(file.parts.filter((p) => p.primitive?.kind === 'filings').map((p) => p.id)),
         primitives: new Set(file.parts.filter((p) => p.primitive !== undefined).map((p) => p.id)),
@@ -1805,6 +1809,21 @@ export function spaceChapterIssues(state: SpaceChapterState, data: SpaceSceneDat
   state.beats?.forEach((b, i) => check(`state.beats.${i}.`, b));
   out.push(...chapterSimIssues('state.', state.sim, f.sim));
   state.beats?.forEach((b, i) => out.push(...chapterSimIssues(`state.beats.${i}.`, b.sim, f.sim)));
+  // Exercise keys and active numeric overrides cannot both own one joint.
+  if (f.sim) {
+    const sim = f.sim;
+    const checkJointConflict = (where: string, exercise: typeof state.exercise, set: typeof state.sim, beat?: SpaceBeat) => {
+      if (!exercise) return;
+      const sheet = data.fitness?.exercises.find((e) => e.id === exercise.id);
+      const rigJoints = new Set(Object.keys(f.rig?.joints ?? {}));
+      const owned = new Set(sheet?.motion?.keys.flatMap((k) => Object.keys(bothSides(k.joints, rigJoints))) ?? []);
+      const values = resolveSimValues(sim, { ...set?.set, ...beat?.sim?.set });
+      const effects = simEffects(sim, values, evaluateSim(sim, values));
+      for (const joint of effects.joints.keys()) if (owned.has(joint)) out.push(`${where}exercise: active sim binding also drives joint "${joint}"`);
+    };
+    checkJointConflict('state.', state.exercise, state.sim);
+    state.beats?.forEach((b, i) => checkJointConflict(`state.beats.${i}.`, b.exercise === undefined ? state.exercise : b.exercise, state.sim, b));
+  }
   for (const id of state.index?.parts ?? []) {
     const p = parts.get(id);
     if (!p) out.push(`state.index.parts: unknown part "${id}"`);
