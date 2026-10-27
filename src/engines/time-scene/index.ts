@@ -36,7 +36,7 @@ export const timeSceneEngine = defineEngine<TimeSceneExt, TimeSceneGeoData>({
   defaults(topic, data) {
     if (topic.temporalMode === 'climatology') return { t: null, month: topic.climatology!.initialMonth, beat: 0, highlight: [], layers: ['base', 'sites'] };
     const first = data && 'control' in data ? data.control.keyframes[0]?.t : undefined;
-    return { t: first ?? null, beat: null, highlight: [], layers: topic.basemap?.reconstruction ? ['base', 'fossils-modern'] : ['base', 'control', 'movements', 'battles'], ...(topic.modernInset ? { inset: topic.modernInset.defaultView, insetVisible: topic.modernInset.defaultVisible, fossilMode: 'age-window' as const } : {}) };
+    return { pick: null, t: first ?? null, beat: null, highlight: [], layers: topic.basemap?.reconstruction ? ['base', 'fossils-modern'] : ['base', 'control', 'movements', 'battles'], ...(topic.modernInset ? { inset: topic.modernInset.defaultView, insetVisible: topic.modernInset.defaultVisible, fossilMode: 'age-window' as const } : {}) };
   },
   fromChapterState(state: ChapterState) {
     if (typeof state.month === 'number') return monthlyChapterFields(state);

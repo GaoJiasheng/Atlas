@@ -58,3 +58,11 @@ it('exact screen hits reject polygon corners outside 22px and respect interior h
  expect(catalogueHitDistance(polygon,{x:50,y:50},project)).toBe(30);
  expect(catalogueHitDistance({type:'LineString',coordinates:[[0,0],[100,0]]},{x:50,y:22},project)).toBe(22);
 });
+
+describe('pick is a store field of dated TimeScene topics', () => {
+ it('is in the engine defaults, so the store snapshot (and so the URL) carries it', async () => {
+  const { timeSceneEngine } = await import('../../src/engines/time-scene/index');
+  const defaults = timeSceneEngine.defaults({} as Parameters<typeof timeSceneEngine.defaults>[0], undefined) as Record<string, unknown>;
+  expect(defaults).toHaveProperty('pick', null);
+ });
+});

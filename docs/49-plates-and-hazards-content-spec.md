@@ -690,6 +690,13 @@ S05/S09/S46/S52不作为本题必要来源：未成功再次直取的部分分�
   - 恢复高亮改用 main 的“当前拍”实现，去掉 Codex 的 `beatHighlight`；
   - 两个 test hook 对象合为一个；
   - `readerEnd` 里先放 E-IR1 的章索引，再放目录索引。
+- 第三次合并带进 dinosaur-earth 的深时引擎、monsoon、frog、mangrove 和 airfoil，解决了 13 个冲突：
+  - `pick` 与 `inset`、`inset-visible`、`fossil-mode` 并存于 URL 编码；
+  - basemap 允许 local / region / reconstruction 恰好一个，或只写 `maxZoom`；
+  - GeoStage 同时接收重建参数和目录回调；
+  - 两套 test hook 合并；
+  - 两个主题的许可说明都保留。
+- 第三次合并后发现一个回归：main 的 defaults 去掉了 `pick: null`，而 store 只把 defaults 里有的键写进 URL，结果 `pick` 不再写入 URL，刷新后选中丢失。e2e 抓到了这个问题；现已补回 `pick: null`，并加了单测。
 
 **看到的问题与已修复**
 
@@ -733,6 +740,10 @@ S05/S09/S46/S52不作为本题必要来源：未成功再次直取的部分分�
 - 页面 JS 457 KB gz，分 10 个文件；超出 docs/02 预算的旧债仍在。
 
 **门槛结果**（满载 load 110–220，约 10 个代理同时开浏览器）
+- **最终构建**（第三次合并后，load 降到约 80 时复验）：
+  - `pnpm check` 0 错误 0 警告；`pnpm validate` 72 主题 0 错 0 警告；`pnpm test` 193 个文件、5,051 项全部通过。
+  - e2e：plates-and-hazards 8/8，sample-science-layers 7/7，sample-science-impacts 2/2，smoke 14/14，dated-layers 4/4，singapore-land-use 3/3。
+  - `pnpm shoot <t> --beats --keys`：plates-and-hazards、ww2、singapore-after-1965、ancient-civilisations、singapore-land-use 的节拍和键检查都是 0 失败。负载降下来后，此前的 h / drag 失败和截图超时没有再出现。
 - **全量 shoot**：`pnpm shoot plates-and-hazards --beats --tasks --keys --layout --locale en,zh --theme paper,cinema`，用修复后的构建跑。
   - 4 个组合 × 38 拍，0 失败；目录选中检查 8 章 × 4，0 失败；console 干净，无外部请求。
   - “chapter highlights” 的无标注清单（只列出、不算失败）各轮结果不一。
