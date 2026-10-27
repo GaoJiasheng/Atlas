@@ -1,4 +1,3 @@
-import { loadDeepTime } from '../src/engines/time-scene/deep-time-build';
 /**
  * Content validator: `pnpm validate` (also runs before `pnpm build`).
  *
@@ -60,6 +59,7 @@ import { tableSourceIssues } from '../src/engines/space-scene/table-schema';
 import { glossaryIds, type GlossaryFile } from '../src/content/schema/glossary';
 import { engineSchemas, formatIssues } from '../src/engines/schemas';
 import { timeChapterLayerIssues, timeSceneTopicIssues, type TimeChapterState, type TimeSceneGeoData } from '../src/engines/time-scene/schema';
+import { loadDeepTime } from '../src/engines/time-scene/deep-time-build';
 import {
   exercisesFile,
   musclesFile,

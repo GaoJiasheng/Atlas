@@ -24,7 +24,7 @@
  * segment); segments are buttons; the current segment's ticks are tab stops
  * too (the others are reached by pointer, or after picking their segment).
  */
-import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type KeyboardEvent, type PointerEvent, type RefObject } from 'react';
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type KeyboardEvent, type PointerEvent, type ReactNode, type RefObject } from 'react';
 import type { Chapter, Locale } from '../../core/types';
 import { t as translate, tx, type BilingualText, type UiKey } from '../../../i18n';
 import { useT } from '../../core/context';
@@ -57,6 +57,8 @@ export interface TimelineProps {
   onNudge(direction: 1 | -1, big?: boolean): void;
   onChapter(id: string): void;
   onBeat(id: string, index: number): void;
+  /** Replaces the state cluster (a reconstruction topic shows its selected age against the map sample, docs/47). */
+  state?: ReactNode;
 }
 
 /** Rule geometry (px inside the rail). */
@@ -354,7 +356,7 @@ export function Timeline(props: TimelineProps) {
           </div>
         </div>
 
-        <StateCluster model={model} t={t} highlight={props.highlight} locale={locale} />
+        {props.state ?? <StateCluster model={model} t={t} highlight={props.highlight} locale={locale} />}
 
         {lanesOpen && (
           <>

@@ -34,7 +34,7 @@
  * layer); clicking the map selects nothing and does not advance; the next
  * beat flies from wherever the reader left the camera.
  */
-import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
 import type { EngineViewProps, GeoCamera, SceneSnapshot } from '../core/types';
 import { SceneSlot, useScene, useSceneContext, useSceneControls, useSceneStore, useT } from '../core/context';
 import { storyChapters } from '../core/chapters';
@@ -49,9 +49,6 @@ import type { TimeSceneExt } from './index';
 import type { TimeBeat, TimeChapterState, TimeSceneGeoData } from './schema';
 import { timeBeatState, linkedTimeBeatState } from './lib/beatState';
 import { filterModernPoints, nextModernSelection } from './lib/deepTime';
-import { ModernInset, ModernInspector, ModernIndex, ModernEvidence } from './ModernInset';
-import { loadModernEvidence } from './deep-time-transport';
-import { SourceRefs } from '../widgets/SourcePopover';
 import type { ReconstructionStats } from './lib/reconstruction';
 import './geology.css';
 import { buildTimeModel, type TimeModel } from './lib/model';
@@ -96,6 +93,15 @@ function boundsCamera(model: TimeModel): GeoCamera {
   return { center: [(w + e) / 2, (s + n) / 2], zoom: Math.max(1, Math.min(8, Math.log2(360 / span))) };
 }
 
+/* Deep-time topics only (docs/47): their HUD and modern-evidence loader stay out of the View chunk. */
+const deepTimeUi = () => import('./ModernInset');
+const ModernInset = lazy(() => deepTimeUi().then((m) => ({ default: m.ModernInset })));
+const ModernInspector = lazy(() => deepTimeUi().then((m) => ({ default: m.ModernInspector })));
+const ModernIndex = lazy(() => deepTimeUi().then((m) => ({ default: m.ModernIndex })));
+const ModernEvidence = lazy(() => deepTimeUi().then((m) => ({ default: m.ModernEvidence })));
+const ReconstructionReadout = lazy(() => deepTimeUi().then((m) => ({ default: m.ReconstructionReadout })));
+const GeologyPlate = lazy(() => deepTimeUi().then((m) => ({ default: m.GeologyPlate })));
+
 export default function TimeSceneView(props: EngineViewProps) {
   const source = props.data as TimeSceneGeoData;
   const [loaded, setLoaded] = useState<TimeSceneGeoData | null>(() => !props.topic.modernInset || source.deepTime?.land ? source : null);
@@ -103,7 +109,10 @@ export default function TimeSceneView(props: EngineViewProps) {
   useEffect(() => {
     if (!props.topic.modernInset || !source.deepTime) { setLoaded(source); return; }
     let cancelled = false;
-    loadModernEvidence(source.deepTime, props.topic.modernInset).then(
+    const deepTime = source.deepTime;
+    const config = props.topic.modernInset;
+    // The UI chunk loads alongside the local evidence files, so the scene mounts without a second wait.
+    Promise.all([import('./deep-time-transport'), deepTimeUi()]).then(([{ loadModernEvidence }]) => loadModernEvidence(deepTime, config)).then(
       (bundle) => { if (!cancelled) setLoaded({ ...source, deepTime: bundle }); },
       () => { if (!cancelled) setFailed(true); },
     );
@@ -121,10 +130,10 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
   const deepTime = geo.deepTime;
   const reconstructed = !!topic.basemap?.reconstruction;
   const [narrowInset, setNarrowInset] = useState(false);
-  const narrowInsetRef = useRef(false);
   useEffect(() => {
-    const query = window.matchMedia('(max-width: 1023px)');
-    const update = () => { narrowInsetRef.current = query.matches; setNarrowInset(query.matches); if (query.matches && reconstructed) openReader?.(); };
+    // Phones (the host hides the card below 760 px): the find map moves into the reader, which opens on a picked find.
+    const query = window.matchMedia('(max-width: 759px)');
+    const update = () => setNarrowInset(query.matches);
     update(); query.addEventListener('change', update); return () => query.removeEventListener('change', update);
   }, []);
   const [reconstructionStats, setReconstructionStats] = useState<ReconstructionStats | null>(null);
@@ -354,7 +363,6 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
     const spec = b.spec;
     pendingBeat.current = { chapter: b.chapter, index: b.index };
     s.applyState(timeBeatState(s.chapterTarget(b.chapter), spec, b.index), { instant });
-    if (reconstructed && narrowInsetRef.current && !presentation.isPresenting()) openReader?.();
     // A beat's camera is authored, not the reader's: the status line keeps "CHAPTER NN VIEW".
     hud.setState({ cameraFree: false });
   };
@@ -409,10 +417,12 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
       if (!b) { st.patch({ beat: null }); return; }
       pendingBeat.current = { chapter: b.chapter, index: b.index };
       st.applyState(linkedTimeBeatState(timeBeatState(st.chapterTarget(b.chapter), b.spec, b.index), st.transition.fields ?? []), { instant: true });
+      // As `applyBeatState`: the beat's camera is authored (the status line keeps "CHAPTER NN VIEW") unless the link sets its own.
+      if (!(st.transition.fields ?? []).includes('camera')) hud.setState({ cameraFree: false });
     };
     settle();
     return store.subscribe((st, prev) => { if (st.transition.id !== prev.transition.id && st.transition.reason === 'url') queueMicrotask(settle); });
-  }, [store]);
+  }, [store, hud]);
   useEffect(() => { outsideSelection.current = null; }, [selectedMa, fossilMode]);
   // Clamp and quantize geological URL inputs, and discard layers/ids from the other coordinate space.
   useEffect(() => {
@@ -653,7 +663,8 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
           }
         },
       },
-      labels: true,
+      // A reconstruction map has no place-name or leader labels of its own (the inset labels its evidence), so no `L`.
+      labels: !reconstructed,
       stats: () => {
         const s = readStats();
         return s ?? {};
@@ -664,12 +675,13 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
       // No participants (a single-country story): no participation card, not an empty frame.
       ...(topic.modernInset ? { card: topic.modernInset.label, cardToggle: { expanded: cardExpanded, set: setCardExpanded } } : geo.entities.length > 0 ? { card: bi('time.card.title'), cardToggle: { expanded: cardExpanded, set: setCardExpanded } } : {}),
       beats: beatControls,
-      beatStep: (dir) => {
+      // `,` / `.` and the reader's beat line: reconstruction topics only, so the dated maps keep their keys.
+      ...(reconstructed ? { beatStep: (dir: 1 | -1) => {
         const st = store.getState();
         const i = beatsRef.current.findIndex((b) => b.chapter === st.chapter && b.index === (st.beat ?? 0));
         const next = beatsRef.current[i + dir];
         if (next) applyBeatState(next, false);
-      },
+      } } : {}),
       urlBaseline: (state) => {
         const st = state as SceneSnapshot<TimeSceneExt>;
         const b = st.beat === null ? undefined : beatsRef.current.find((b) => b.chapter === st.chapter && b.index === st.beat);
@@ -746,6 +758,11 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
   const selectedEvent = selected ? geo.events.find((e) => e.id === selected) ?? null : null;
   const pickedEntity = selectedEntity ? geo.entities.find((e) => e.id === selectedEntity) ?? null : null;
 
+  const geologyProps = deepTime ? {
+    bundle: deepTime, locale, selectedMa, stats: reconstructionStats, fossilMode, counts: modernCounts,
+    recordSources: ['S65', 'S66'].filter((id) => geo.sources?.sources.some((s) => s.id === id)),
+  } : null;
+
   return (
     <div className="ts-stage" ref={stageRef} data-reference={reference || undefined} data-presenting={presenting || undefined} data-region-plate={region ? '' : undefined} data-reconstruction={reconstructed ? '' : undefined}>
       <GeoStage
@@ -766,21 +783,15 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
       </div>
 
       {reconstructed && <SceneSlot name="readerTop"><TimeBeatLine chapter={chapters.find((c) => c.id === currentChapter)} beat={activeBeat} locale={locale} onStep={(dir) => controls.beatStep?.(dir)} /></SceneSlot>}
-      {deepTime && topic.modernInset && <>
-        <div className="ts-recon-readout" data-hud-panel="reconstruction-age" role="status">
-          <span>{locale === 'zh' ? '所选' : 'SELECTED'} {selectedMa} Ma</span> · <span>{locale === 'zh' ? '地图样本' : 'MAP SAMPLE'} {reconstructionStats?.frameMa ?? '—'} Ma</span> · Δ {reconstructionStats?.deltaMa ?? '—'} Ma · RECON
-          <SourceRefs ids={deepTime.reconstruction.sources} locale={locale} />
-          <small>{locale === 'zh' ? '墨卡托极区裁去；离散样本，不表示连续漂移' : 'Mercator polar crop · discrete samples, not continuous drift'}</small>
-          {reconstructionStats?.status !== 'ready' && <strong>{locale === 'zh' ? (reconstructionStats?.status === 'unavailable' ? '地图样本不可用' : '地图样本加载中') : (reconstructionStats?.status === 'unavailable' ? 'Map sample unavailable' : 'Loading map sample')}</strong>}
-          {(reconstructionStats?.deltaMa ?? 0) > 0 && <small>{locale === 'zh' ? '此区间未提供中间样本' : 'No intermediate sample is supplied in this interval'}</small>}
-        </div>
+      {deepTime && topic.modernInset && geologyProps && <Suspense fallback={null}>
+        <ReconstructionReadout {...geologyProps} />
         {!presenting && !narrowInset && <SceneSlot name="card"><ModernInset bundle={deepTime} config={topic.modernInset} locale={locale} selectedMa={selectedMa} view={inset} insetVisible={insetVisible} fossilMode={fossilMode} fossilsEnabled={layers.includes('fossils-modern')} highlight={highlight} selectedObjectId={selectedObjectId} onSelect={selectModern} onPatch={modernPatch} /></SceneSlot>}
-        {!presenting && narrowInset && <SceneSlot name="readerTop"><div className="ts-modern-mobile"><ModernInset bundle={deepTime} config={topic.modernInset} locale={locale} selectedMa={selectedMa} view={inset} insetVisible={insetVisible} fossilMode={fossilMode} fossilsEnabled={layers.includes('fossils-modern')} highlight={highlight} selectedObjectId={selectedObjectId} onSelect={selectModern} onPatch={modernPatch} /></div></SceneSlot>}
+        {!presenting && narrowInset && <SceneSlot name="readerTop"><div className="ts-modern-mobile"><ModernInset embedded bundle={deepTime} config={topic.modernInset} locale={locale} selectedMa={selectedMa} view={inset} insetVisible={insetVisible} fossilMode={fossilMode} fossilsEnabled={layers.includes('fossils-modern')} highlight={highlight} selectedObjectId={selectedObjectId} onSelect={selectModern} onPatch={modernPatch} /></div></SceneSlot>}
         <SceneSlot name="readerEnd"><ModernIndex ids={(chapters.find((c) => c.id === currentChapter)?.state as TimeChapterState)?.index ?? []} bundle={deepTime} locale={locale} onSelect={selectModern} /></SceneSlot>
         {selectedObjectId && modernObjects.has(selectedObjectId) && <SceneSlot name="readerTop"><ModernInspector references={deepTime.references} object={modernObjects.get(selectedObjectId)!} locale={locale} outsideWindow={modernObjects.get(selectedObjectId)?.kind === 'fossil-collection' && !modernCounts?.visiblePoints.some((p) => p.id === selectedObjectId)} showAll={() => modernPatch({ fossilMode: 'all-mesozoic' })} onClose={() => { setSelectedObjectId(null); store.getState().patch({ highlight: [] }); }} /></SceneSlot>}
         {presenting && <ModernEvidence bundle={deepTime} config={topic.modernInset} locale={locale} selectedMa={selectedMa} view={inset} insetVisible={insetVisible} fossilMode={fossilMode} fossilsEnabled={layers.includes('fossils-modern')} highlight={highlight} selectedObjectId={selectedObjectId} onSelect={selectModern} onPatch={modernPatch} />}
-        <SceneSlot name="plate"><div className="ts-geology-plate" data-hud-panel="geology-plate"><b>RECON · {tx(deepTime.reconstruction.modelLabel, locale)}</b><p role="status">{reconstructionStats?.status === 'ready' ? (locale === 'zh' ? '本地地图样本已就绪' : 'Local map sample ready') : reconstructionStats?.status === 'unavailable' ? (locale === 'zh' ? '地图样本不可用' : 'Map sample unavailable') : (locale === 'zh' ? '地图样本加载中' : 'Loading map sample')}</p><p>{locale === 'zh' ? '所选年代' : 'SELECTED'} {selectedMa} Ma</p><p>{locale === 'zh' ? '地图样本' : 'MAP SAMPLE'} {reconstructionStats?.frameMa ?? '—'} Ma · Δ {reconstructionStats?.deltaMa ?? '—'} Ma<SourceRefs ids={deepTime.reconstruction.sources} locale={locale} /></p><p>{locale === 'zh' ? '墨卡托极区裁去；离散样本' : 'Mercator polar crop · discrete samples'}</p><p>{locale === 'zh' ? '现代小图' : 'Modern inset'}: {fossilMode === 'all-mesozoic' ? (locale === 'zh' ? '跨中生代，不同年代' : 'across the Mesozoic, different ages') : (locale === 'zh' ? '年龄浏览窗' : 'age window')}</p><p>{locale === 'zh' ? '年龄交集' : 'Age overlap'}: {modernCounts?.ageOverlapCount}</p><p>{locale === 'zh' ? '所选采集记录' : 'Selected collections'}: {modernCounts?.fossilsVisible} / {modernCounts?.fossilsTotal}<SourceRefs ids={['S65', 'S66'].filter((id) => geo.sources?.sources.some((s) => s.id === id))} locale={locale} /></p><p>{locale === 'zh' ? '抑制精确位置' : 'Precise locations suppressed'}: {deepTime.inset?.suppression.collections ?? 0} {locale === 'zh' ? '个采集记录组' : 'collections'} / {deepTime.inset?.suppression.occurrences ?? 0} {locale === 'zh' ? '条出现记录' : 'occurrences'}</p></div></SceneSlot>
-      </>}
+        <SceneSlot name="plate"><GeologyPlate {...geologyProps} /></SceneSlot>
+      </Suspense>}
       {presentation.element}
 
       <SceneSlot name="stageOverlay">
@@ -833,6 +844,7 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
           currentChapter={currentChapter}
           highlight={highlight}
           anchor={activeBeat !== null && currentSegment >= 0 ? { segment: currentSegment, tick: activeBeat } : anchor}
+          state={deepTime ? <ReconstructionState selectedMa={selectedMa} stats={reconstructionStats} locale={locale} /> : undefined}
           onScrub={scrub}
           onScrubStart={scrubStart}
           onNudge={nudge}
@@ -892,4 +904,16 @@ function TimeBeatLine({ chapter, beat, locale, onStep }: { chapter: EngineViewPr
   useEffect(() => { ref.current?.closest('.atlas-panel__scroll')?.scrollTo({ top: 0 }); }, [chapter?.id, beat]);
   if (!beats.length) return null;
   return <div ref={ref} className="ts-beatline"><p><b>{locale === 'zh' ? '节拍' : 'BEAT'} {beat === null ? '—' : beat + 1}/{beats.length}</b> {beat !== null && beats[beat] && tx(beats[beat]!.caption, locale)}</p><span><button type="button" onClick={() => onStep(-1)} aria-label={locale === 'zh' ? '上一拍' : 'Previous beat'}>‹</button><button type="button" onClick={() => onStep(1)} aria-label={locale === 'zh' ? '下一拍' : 'Next beat'}>›</button></span></div>;
+}
+
+/** A reconstruction topic's bar readout (docs/47 E-DE1): the selected age against the map sample actually drawn. */
+function ReconstructionState({ selectedMa, stats, locale }: { selectedMa: number; stats: ReconstructionStats | null; locale: EngineViewProps['locale'] }) {
+  const zh = locale === 'zh';
+  const sample = stats?.status === 'ready' ? `${stats.frameMa} Ma · Δ ${stats.deltaMa} Ma` : stats?.status === 'unavailable' ? (zh ? '不可用' : 'UNAVAILABLE') : (zh ? '加载中' : 'LOADING');
+  return (
+    <p className="ts-state" data-reconstruction-state="" role="status">
+      <span data-stat="selected">{zh ? '所选' : 'SELECTED'} {selectedMa} Ma</span>
+      <span data-stat="sample"><i aria-hidden="true">·</i>{zh ? '地图样本' : 'MAP SAMPLE'} {sample}</span>
+    </p>
+  );
 }

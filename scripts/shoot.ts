@@ -399,12 +399,19 @@ function unlabelled(s: Session): Promise<string[]> {
 
 /** A SpaceScene beat's scene: the fields a beat sets, the try-it values on show and the runs not at their end; `null` for other engines. */
 type BeatScene = Record<string, unknown> & { unfinished: string[] };
-function beatSceneOf(page: Page): Promise<BeatScene | null> {
+async function beatSceneOf(page: Page): Promise<BeatScene | null> {
+  // A reconstruction map (docs/47 E-DE1): compare the sample actually drawn, so let the frame settle first.
+  await page
+    .waitForFunction(() => {
+      const g = (window.__atlas!.engine as unknown as { geology?(): { reconstruction: { status: string } | null } }).geology?.();
+      return !g || (g.reconstruction !== null && g.reconstruction.status !== 'loading');
+    }, null, { timeout: 30_000 })
+    .catch(() => undefined);
   return page.evaluate(() => {
-    const geology = (window.__atlas!.engine as unknown as { geology?(): { reconstruction: Record<string, unknown>; inset: Record<string, unknown> } }).geology?.();
+    const geology = (window.__atlas!.engine as unknown as { geology?(): { reconstruction: Record<string, unknown> | null; inset: Record<string, unknown> } }).geology?.();
     if (geology) {
       const st = window.__atlas!.state() as unknown as Record<string, unknown>;
-      const { geometryUpdates: _updates, ...reconstruction } = geology.reconstruction;
+      const { geometryUpdates: _updates, ...reconstruction } = geology.reconstruction ?? {};
       return { ...Object.fromEntries(['chapter', 't', 'highlight', 'layers', 'camera', 'inset', 'insetVisible', 'fossilMode'].map((k) => [k, st[k] ?? null])), reconstruction, inset: geology.inset, unfinished: [] };
     }
     if (!document.querySelector('.atlas-scene[data-engine="space-scene"]')) return null;
@@ -1124,8 +1131,12 @@ async function runKeys(s: Session, o: Options, report: RunReport): Promise<void>
         const st = (await s.state()) as unknown as { chapter: string | null; beat?: number | null; presentation: unknown; hud: boolean };
         return { st, i: beats.findIndex((b) => b.chapter === st.chapter && b.index === (st.beat ?? 0)) };
       };
+      // A chapter with no segment on the axis (TimeScene's background chapter has no place in time) has no ticks to fill.
       const filled = (chapter: string | null, beat: number | null | undefined) =>
-        page.evaluate(([c, b]) => document.querySelector(`[data-beat="${c}.${b}"]`)?.hasAttribute('data-filled') ?? false, [chapter, beat] as const);
+        page.evaluate(
+          ([c, b]) => (document.querySelector(`[data-beat^="${c}."]`) ? document.querySelector(`[data-beat="${c}.${b}"]`)?.hasAttribute('data-filled') ?? false : true),
+          [chapter, beat] as const,
+        );
       if (beats.length < 3) {
         record({ ...base, ok: true, note: 'fewer than three beats (skipped)' });
         continue;

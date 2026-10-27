@@ -12,12 +12,14 @@ async function open(page: Page, locale: string, query = '') {
   await page.goto(`/${locale}/topics/dinosaur-earth/?${query}`);
   await page.waitForFunction(() => !!window.__atlas);
   expect(await page.evaluate(() => window.__atlas!.ready)).toBe(true);
-  await expect.poll(async () => (await geology(page)).reconstruction?.status).toBe('ready');
+  // The deep-time HUD mounts after its local evidence files; the frame is ready once its tiles are drawn (slow under software GL).
+  await page.waitForFunction(() => typeof window.__atlas?.engine.geology === 'function', null, { timeout: 60_000 });
+  await expect.poll(async () => (await geology(page)).reconstruction?.status, { timeout: 30_000 }).toBe('ready');
 }
 async function pickBeat(page: Page, chapter: string, index: number) {
   const i = await page.evaluate(({ chapter, index }) => window.__atlas!.beats().findIndex((b) => b.chapter === chapter && b.index === index), { chapter, index });
   await page.evaluate((i) => window.__atlas!.goToBeat(i, { instant: true }), i);
-  await expect.poll(async () => (await geology(page)).reconstruction.status).toBe('ready');
+  await expect.poll(async () => (await geology(page)).reconstruction.status, { timeout: 30_000 }).toBe('ready');
 }
 for (const locale of ['en', 'zh']) for (const theme of ['paper', 'cinema']) {
   test(`all 35 beats and full-document b links (${locale}/${theme})`, async ({ page }) => {
@@ -35,7 +37,7 @@ for (const locale of ['en', 'zh']) for (const theme of ['paper', 'cinema']) {
     for (let i = 0; i < beats.length; i++) {
       const b = beats[i]!;
       await page.evaluate((i) => window.__atlas!.goToBeat(i, { instant: true }), i);
-      await expect.poll(async () => (await geology(page)).reconstruction.status).toBe('ready');
+      await expect.poll(async () => (await geology(page)).reconstruction.status, { timeout: 30_000 }).toBe('ready');
       const shown = await geology(page);
       const state = await page.evaluate(() => window.__atlas!.state());
       expect(shown.inset).toMatchObject({ coordinateSpace: 'modern', fossilsTotal: 1274, referencePointsTotal: 2, referenceCardsTotal: 4, suppressedCollections: 3, suppressedOccurrences: 3 });
@@ -98,11 +100,11 @@ test('view/hide/reload, explicit outside-window index selection, keyboard list a
   await page.evaluate(() => window.__atlas!.setMode('inset-visible', false));
   await page.waitForTimeout(300); await page.reload();
   await page.waitForFunction(() => !!window.__atlas);
-  await expect.poll(async () => (await geology(page)).inset.insetVisible).toBe(false);
+  await expect.poll(async () => (await geology(page)).inset.insetVisible, { timeout: 30_000 }).toBe(false);
   const saved = await geology(page);
   await page.evaluate(() => window.__atlas!.setMode('presentation', true, { instant: true }));
   await page.keyboard.press('Escape');
-  await expect.poll(async () => (await geology(page)).inset.insetVisible).toBe(saved.inset.insetVisible);
+  await expect.poll(async () => (await geology(page)).inset.insetVisible, { timeout: 30_000 }).toBe(saved.inset.insetVisible);
   expect((await geology(page)).inset.view).toBe(saved.inset.view);
 });
 
@@ -110,7 +112,7 @@ test('narrow presentation retains current evidence; all assets load with externa
   await page.setViewportSize({ width: 390, height: 844 });
   await page.route('**/*', (route) => new URL(route.request().url()).hostname === '127.0.0.1' ? route.continue() : route.abort());
   await open(page, 'zh', 'ch=southeast-asian-finds&b=4');
-  await expect(page.locator('.ts-recon-readout')).toBeVisible();
+  await expect(page.locator('[data-reconstruction-state]')).toContainText('地图样本');
   await pickBeat(page, 'southeast-asian-finds', 3);
   await expect(page.locator('.ts-modern-evidence .ts-evidence-card')).toBeVisible();
   await expect(page.locator('.ts-modern-evidence')).toContainText('今天');
@@ -124,11 +126,11 @@ test('visited deep-time frames and modern evidence reload without a network conn
   await page.evaluate(() => navigator.serviceWorker.ready.then(() => true));
   await page.reload();
   await page.waitForFunction(() => !!navigator.serviceWorker.controller && !!window.__atlas);
-  await expect.poll(async () => (await geology(page)).reconstruction?.status).toBe('ready');
+  await expect.poll(async () => (await geology(page)).reconstruction?.status, { timeout: 30_000 }).toBe('ready');
   const beats = await page.evaluate(() => window.__atlas!.beats());
   for (let i = 0; i < beats.length; i++) {
     await page.evaluate((i) => window.__atlas!.goToBeat(i, { instant: true }), i);
-    await expect.poll(async () => (await geology(page)).reconstruction.status).toBe('ready');
+    await expect.poll(async () => (await geology(page)).reconstruction.status, { timeout: 30_000 }).toBe('ready');
   }
   await context.setOffline(true);
   await open(page, 'en', 'ch=impact-boundary&b=2');

@@ -13,7 +13,6 @@ import { buildReconstructionStyle, RECONSTRUCTION_GRATICULE, RECONSTRUCTION_SOUR
 
 /** The only zoom ceiling for reconstructed main maps; no island-scale modern overlay. */
 export const RECONSTRUCTION_MAX_ZOOM = 3.6;
-export const RECONSTRUCTION_LATITUDE = 85.051129;
 
 export function createReconstructionMap(options: GeoControllerOptions, manifest: ReconstructionManifest): GeoController {
   const { store, playhead } = options;
@@ -25,7 +24,19 @@ export function createReconstructionMap(options: GeoControllerOptions, manifest:
   let graticuleOn = true;
   let features = 0;
   let sourceGeneration = 0;
-  const geometryLayers = ['ts-reconstruction-land', 'ts-reconstruction-coast', 'ts-reconstruction-unavailable'];
+  // Hidden by opacity, not `visibility: none`: a source whose layers are all hidden is unused, so MapLibre would keep
+  // its old tiles until the layers return and show the previous sample's land in the meantime.
+  const geometryLayers = [['ts-reconstruction-land', 'fill-opacity'], ['ts-reconstruction-coast', 'line-opacity'], ['ts-reconstruction-unavailable', 'fill-opacity']] as const;
+  const showGeometry = (on: boolean) => { for (const [id, key] of geometryLayers) map.setPaintProperty(id, key, on ? 1 : 0); };
+  /** Resolves once every tile of the reconstruction source holds the data just set. */
+  const sourceSettled = () => new Promise<void>((resolve) => {
+    const check = () => {
+      if (destroyed || map.isSourceLoaded(RECONSTRUCTION_SOURCE)) { map.off('sourcedata', check); map.off('idle', check); resolve(); }
+    };
+    map.on('sourcedata', check);
+    map.on('idle', check);
+    map.triggerRepaint();
+  });
   let gesture = false;
   let cameraTimer: ReturnType<typeof setTimeout> | null = null;
   const map = new MlMap({
@@ -34,11 +45,23 @@ export function createReconstructionMap(options: GeoControllerOptions, manifest:
     center: camera.center, zoom: Math.min(RECONSTRUCTION_MAX_ZOOM, camera.zoom),
     bearing: camera.bearing ?? 0, pitch: camera.pitch ?? 0,
     minZoom: 0, maxZoom: RECONSTRUCTION_MAX_ZOOM,
+    // Web Mercator itself stops at ±85.051129°. No `maxBounds`: a full 360° box makes MapLibre 5.24's view matrix singular.
     renderWorldCopies: false,
-    maxBounds: [[-180, -RECONSTRUCTION_LATITUDE], [180, RECONSTRUCTION_LATITUDE]],
     attributionControl: false,
+    dragRotate: false,
+    pitchWithRotate: false,
+    touchPitch: false,
     fadeDuration: 0,
   });
+  map.touchZoomRotate.disableRotation();
+  map.on('error', (e) => console.warn('[atlas] map:', e.error?.message ?? e));
+  // As the historical map: clicking the map must not steal keyboard focus (the stage is `data-keys="own"`).
+  const canvas = map.getCanvas();
+  let pointerAt = 0;
+  const onPointerDown = () => (pointerAt = performance.now());
+  const onCanvasFocus = () => { if (performance.now() - pointerAt < 600) canvas.blur(); };
+  options.container.addEventListener('pointerdown', onPointerDown, true);
+  canvas.addEventListener('focus', onCanvasFocus);
   // A modern scale bar implies measured ground distance; reconstructed geometry has no such claim.
   options.scaleRoot.hidden = true;
   const frames = createReconstructionFrames({
@@ -61,13 +84,15 @@ export function createReconstructionMap(options: GeoControllerOptions, manifest:
       if (destroyed || !loaded) return;
       const current = ++sourceGeneration;
       // Source worker updates are asynchronous: hide old geometry immediately.
-      for (const id of geometryLayers) map.setLayoutProperty(id, 'visibility', 'none');
+      showGeometry(false);
       features = 0;
       const source = map.getSource(RECONSTRUCTION_SOURCE) as GeoJSONSource;
       if (!collection.features.length) { source.setData(collection); return; }
       await source.setData(collection, true);
       if (destroyed || current !== sourceGeneration) return;
-      for (const id of geometryLayers) map.setLayoutProperty(id, 'visibility', 'visible');
+      await sourceSettled();
+      if (destroyed || current !== sourceGeneration) return;
+      showGeometry(true);
       features = collection.features.length;
     },
     onChange(stats) {
@@ -142,6 +167,8 @@ export function createReconstructionMap(options: GeoControllerOptions, manifest:
       sourceGeneration++;
       frames.destroy();
       unStore(); unPlayhead(); observer.disconnect(); resizeObserver.disconnect();
+      options.container.removeEventListener('pointerdown', onPointerDown, true);
+      canvas.removeEventListener('focus', onCanvasFocus);
       if (cameraTimer) clearTimeout(cameraTimer);
       options.scaleRoot.hidden = false;
       map.remove();

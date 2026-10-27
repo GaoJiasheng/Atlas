@@ -1,14 +1,16 @@
 /** Modern evidence stays in its own coordinate space, never on the ancient main map. */
-import { useId, useMemo, useState, useEffect, useRef } from 'react';
+import { useId, useMemo, useState, useEffect, useRef, type ReactNode } from 'react';
 import type { Feature, Geometry, Position } from 'geojson';
 import type { Locale } from '../core/types';
-import { tx } from '../../i18n';
+import { t, tx } from '../../i18n';
+import { getPlateExpanded, setPlateExpanded } from '../../lib/prefs';
 import { SourceRefs } from '../widgets/SourcePopover';
 import {
   filterModernPoints, snapshotReferenceId, type DeepTimeBundle, type ModernInsetConfig, type InsetView,
   type FossilMode, type ModernPoint, type ReferenceCard,
 } from './lib/deepTime';
 import { mercY } from './lib/territory';
+import type { ReconstructionStats } from './lib/reconstruction';
 import './deep-time.css';
 
 export interface ModernInsetProps {
@@ -24,6 +26,8 @@ export interface ModernInsetProps {
   selectedObjectId: string | null;
   onSelect(id: string): void;
   onPatch(patch: { inset?: InsetView; insetVisible?: boolean; fossilMode?: FossilMode }): void;
+  /** Inside the scrolling reader (phones): reader content, not a HUD panel of its own. */
+  embedded?: boolean;
 }
 const words = (locale: Locale, en: string, zh: string) => locale === 'zh' ? zh : en;
 const ma = (n: number) => String(Number(n.toFixed(3)));
@@ -39,8 +43,9 @@ function polygonPath(g: Geometry, project: Project): string {
 }
 function featureId(f: Feature): string { return String(f.id ?? f.properties?.id ?? f.properties?.ADM0_A3 ?? f.properties?.ISO_A3 ?? ''); }
 
+/** Part of the inset panel (it scrolls with it), not a HUD panel of its own. */
 function EvidenceCard({ card, locale, onSelect }: { card: ReferenceCard; locale: Locale; onSelect(id: string): void }) {
-  return <article className="ts-evidence-card" data-id={card.id} data-hud-panel="modern-evidence">
+  return <article className="ts-evidence-card" data-id={card.id}>
     <button className="ts-modern__card-title" onClick={() => onSelect(card.id)} type="button">{tx(card.title, locale)}</button>
     <p className="ts-modern__precision">{tx(card.regionLabel, locale)} · {cardPrecision(card.precision, locale)}</p>
     <p>{tx(card.summary, locale)}<SourceRefs ids={card.sources} locale={locale} /></p>
@@ -48,7 +53,7 @@ function EvidenceCard({ card, locale, onSelect }: { card: ReferenceCard; locale:
 }
 
 export function ModernInset(props: ModernInsetProps) {
-  const { bundle, config, locale, selectedMa, view, insetVisible, fossilMode, fossilsEnabled, highlight, selectedObjectId, onSelect, onPatch } = props;
+  const { bundle, config, locale, selectedMa, view, insetVisible, fossilMode, fossilsEnabled, highlight, selectedObjectId, onSelect, onPatch, embedded } = props;
   const svgRef = useRef<SVGSVGElement>(null);
   const [hitRadius, setHitRadius] = useState(22);
   useEffect(() => {
@@ -80,7 +85,7 @@ export function ModernInset(props: ModernInsetProps) {
     return { project, land, countries };
   }, [bundle.land, bundle.countries, bounds]);
   if (!insetVisible) return null;
-  return <section className="ts-modern" data-hud-panel="modern-inset" aria-label={tx(config.label, locale)}>
+  return <section className="ts-modern" data-hud-panel={embedded ? undefined : 'modern-inset'} aria-label={tx(config.label, locale)}>
     <header className="ts-modern__header"><strong>{words(locale, 'TODAY · Modern find locations', '今天 · 现代发现地点')}</strong>
       <button className="ts-modern__icon-button" type="button" onClick={() => onPatch({ insetVisible: false })} aria-label={words(locale, 'Hide modern map', '隐藏现代小图')}>×</button>
     </header>
@@ -173,4 +178,66 @@ export function ModernIndex({ ids, bundle, locale, onSelect }: { ids: readonly s
 /** Presentation evidence uses the same filtered picture and named cards as the reader. */
 export function ModernEvidence(props: ModernInsetProps) {
   return <aside className="ts-modern-evidence" data-hud-panel="present-evidence"><ModernInset {...props} /></aside>;
+}
+
+export interface GeologyReadoutProps {
+  bundle: DeepTimeBundle;
+  locale: Locale;
+  selectedMa: number;
+  stats: ReconstructionStats | null;
+  fossilMode: FossilMode;
+  counts: { ageOverlapCount: number; fossilsVisible: number; fossilsTotal: number } | null;
+  /** The PBDB snapshot source ids this topic cites. */
+  recordSources: string[];
+}
+
+const statusText = (stats: ReconstructionStats | null, locale: Locale, ready: [string, string]) =>
+  stats?.status === 'ready' ? words(locale, ...ready) : stats?.status === 'unavailable' ? words(locale, 'Map sample unavailable', '地图样本不可用') : words(locale, 'Loading map sample', '地图样本加载中');
+
+/** The selected age against the map sample actually drawn (docs/47 E-DE1): its own readout on the stage. */
+export function ReconstructionReadout({ bundle, locale, selectedMa, stats }: GeologyReadoutProps) {
+  return (
+    <div className="ts-recon-readout" data-hud-panel="reconstruction-age" role="status">
+      <span>{words(locale, 'SELECTED', '所选')} {selectedMa} Ma</span> · <span>{words(locale, 'MAP SAMPLE', '地图样本')} {stats?.frameMa ?? '—'} Ma</span> · Δ {stats?.deltaMa ?? '—'} Ma · RECON
+      <SourceRefs ids={bundle.reconstruction.sources} locale={locale} />
+      <small>{words(locale, 'Mercator polar crop · discrete samples, not continuous drift', '墨卡托极区裁去；离散样本，不表示连续漂移')}</small>
+      {stats?.status !== 'ready' && <strong>{statusText(stats, locale, ['', ''])}</strong>}
+      {(stats?.deltaMa ?? 0) > 0 && <small>{words(locale, 'No intermediate sample is supplied in this interval', '此区间未提供中间样本')}</small>}
+    </div>
+  );
+}
+
+/** The left PLATE block of a reconstruction topic (docs/08 §2): model, sample against the selected age, age window and record counts. */
+export function GeologyPlate({ bundle, locale, selectedMa, stats, fossilMode, counts, recordSources }: GeologyReadoutProps) {
+  const [open, setOpen] = useState(true);
+  useEffect(() => setOpen(getPlateExpanded()), []);
+  const fold = t(locale, open ? 'time.plate.fold' : 'time.plate.unfold');
+  const sample = stats?.status === 'ready' ? `${ma(stats.frameMa ?? 0)} Ma · Δ ${ma(stats.deltaMa ?? 0)}` : statusText(stats, locale, ['', '']);
+  const rows: [string, string, ReactNode][] = [
+    ['model', words(locale, 'Model', '模型'), <>{tx(bundle.reconstruction.modelLabel, locale)}<SourceRefs ids={bundle.reconstruction.sources} locale={locale} /></>],
+    ['selected', words(locale, 'Selected age', '所选年代'), `${ma(selectedMa)} Ma`],
+    ['sample', words(locale, 'Map sample', '地图样本'), sample],
+    ['window', words(locale, 'Find map', '发现图'), fossilMode === 'all-mesozoic' ? words(locale, 'Across the Mesozoic', '跨中生代') : words(locale, 'Age window ±5 Ma', '年龄窗 ±5 Ma')],
+    ['overlap', words(locale, 'Age overlap', '年龄交集'), String(counts?.ageOverlapCount ?? '—')],
+    ['collections', words(locale, 'Collections shown', '显示的采集记录'), <>{counts ? `${counts.fossilsVisible} / ${counts.fossilsTotal}` : '—'}<SourceRefs ids={recordSources} locale={locale} /></>],
+    ['withheld', words(locale, 'Withheld (MY)', '未公开（马来西亚）'), words(locale, `${bundle.inset?.suppression.collections ?? 0} coll. · ${bundle.inset?.suppression.occurrences ?? 0} occ.`, `${bundle.inset?.suppression.collections ?? 0} 组 · ${bundle.inset?.suppression.occurrences ?? 0} 条`)],
+  ];
+  return (
+    <section className="ts-plate ts-geology-plate" data-hud-panel="geology-plate" data-folded={!open || undefined}>
+      <button type="button" className="ts-plate__head" aria-expanded={open} aria-label={fold} title={fold} onClick={(event) => {
+        setOpen(!open);
+        setPlateExpanded(!open);
+        if (event.detail > 0) event.currentTarget.blur();
+      }}>
+        <span>{t('en', 'hud.plate').toLocaleUpperCase('en')} <small lang="zh-Hans">{t('zh', 'hud.plate')}</small></span>
+        <span aria-hidden="true">{open ? '⌄' : '⌃'}</span>
+      </button>
+      {open && <>
+        <dl className="ts-plate__rows" role="status">
+          {rows.map(([id, label, value]) => <div key={id} className="ts-plate__row" data-geology={id}><dt>{label}</dt><dd>{value}</dd></div>)}
+        </dl>
+        <p className="ts-geology-plate__note">{words(locale, 'Discrete model samples, not continuous drift · Mercator, poles cropped', '离散模型样本，不是连续漂移 · 墨卡托投影，极区裁去')}</p>
+      </>}
+    </section>
+  );
 }

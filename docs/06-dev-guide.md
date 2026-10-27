@@ -2220,9 +2220,9 @@ pnpm tsx scripts/geo/lib/check.ts --topic ww2         # MapLibre（Playwright）
 
 `topic.basemap.reconstruction: { file, selection: hold-older }` 选择独立的重建主图分支，与 `local` / `region` 互斥。`file` 指向 `public/geo/<stem>.json` 的严格清单，帧按 Ma 从大到小排列，每帧为单对象 TopoJSON（对象名等于 stem）。`land` / `unavailable` 是面，`coast` 是线；属性明确 `modelId` 和 `frameMa`。构建加载器 `deep-time-build.ts` 实读并校验清单、每帧、sources、空 control 帧和现代子文件，将元数据 / 现代证据组成 `geo.deepTime`；古地图几何仍按需本地加载。客户端仅 `import type` 引用构建 schema，纯筛选函数在 `lib/deepTime.ts`。
 
-`GeoStage` 接收 `reconstruction={geo.deepTime?.reconstruction}`；controller 在构建历史 style 之前分流到 `reconstruction-map.ts`。样式只有空重建 source 和程序化经纬网，没有现代陆地 / 国界 / 国名 / 河流 / glyph / tiles。主图固定 maxZoom 3.6、`renderWorldCopies:false`、纬度范围 ±85.051129°。`reconstruction-style.ts` 只对 `kind:coast` 描边，不把不可用区的图框边画成海岸。换主题只重设 paint，不重传几何；重建主图隐藏不适用的现代实测比例尺。
+`GeoStage` 接收 `reconstruction={geo.deepTime?.reconstruction}`，有清单时懒加载 `reconstruction-map.ts`（历史 `controller` 不静态引用它；误收到清单时在建 style 之前直接报错，不回退现代底图）。样式只有空重建 source 和程序化经纬网，没有现代陆地 / 国界 / 国名 / 河流 / glyph / tiles。主图固定 maxZoom 3.6、`renderWorldCopies:false`，纬度由 Web Mercator 自身限在 ±85.051129°；不设 `maxBounds`（MapLibre 5.24 下 360° 宽的 `maxBounds` 让视图矩阵奇异，地图起不来）。点地图不抢键盘焦点（同历史 controller），不可旋转 / 倾斜。`reconstruction-style.ts` 只对 `kind:coast` 描边，不把不可用区的图框边画成海岸。换主题只重设 paint，不重传几何；重建主图隐藏不适用的现代实测比例尺。
 
-离散选择复用 `lib/deepTime.ts` 的 `frameAt`：query 先 clamp 到清单范围，再取最接近且不年轻于所选年代的帧；如 66→70、65→65、32.5→65。`lib/reconstruction.ts` 管理 generation / AbortSignal、最多当前与最近相邻两帧的已解码缓存和真实 source 状态。新帧未就绪先隐藏 / 清空旧陆地，等待 `setData(data,true)` 的 worker 完成后才显示 / ready；迟到请求不解码 / 不覆盖新帧，失败保持空白。相同 frameId 内拖动仅更新年代 / Δ，不重复 fetch / decode / `setData`。`geometryUpdates` 只计有效帧几何替换，不计清空或 paint 更新。`GeoController.reconstructionStats()` 与 `onReconstruction` 返回所选年代、实际已提交 sample / Δ、状态和计数；loading / unavailable 时 sample 字段为 null。
+离散选择复用 `lib/deepTime.ts` 的 `frameAt`：query 先 clamp 到清单范围，再取最接近且不年轻于所选年代的帧；如 66→70、65→65、32.5→65。`lib/reconstruction.ts` 管理 generation / AbortSignal、最多当前与最近相邻两帧的已解码缓存和真实 source 状态。新帧未就绪先把几何图层不透明度置 0（不用 `visibility:none`：图层全隐藏时 source 不被使用，瓦片不重载，再显示时会先露出旧样本），等待 `setData(data,true)` 的 worker 完成且 source 瓦片全部载入后才显示 / ready；迟到请求不解码 / 不覆盖新帧，失败保持空白。相同 frameId 内拖动仅更新年代 / Δ，不重复 fetch / decode / `setData`。`geometryUpdates` 只计有效帧几何替换，不计清空或 paint 更新。`GeoController.reconstructionStats()` 与 `onReconstruction` 返回所选年代、实际已提交 sample / Δ、状态和计数；loading / unavailable 时 sample 字段为 null。
 
 现代图配置 `modernInset` 与重建分支配套，含独立 land / countries 和三种具名 bounds。point/card 文件保留 `coordinateSpace:modern`；每条 occurrence 独立闭区间相交，不合并年龄空档。cards 严格无坐标。MY 化石位置在聚合前抑制，只公开汇总抑制数与区域卡。`fossils-modern` 只控制化石符号，参考点 / 卡不计化石数。隐藏 inset 保留 view / mode 与内部计数。对象选择接既有 inspector，章 `state.index` 与 beat `highlight` 引用本题 point/card；现代图源不进入古主图。
 
@@ -2238,6 +2238,6 @@ pnpm tsx scripts/geo/lib/check.ts --topic ww2         # MapLibre（Playwright）
 {"t":{"ma":66},"inset":"mexico","insetVisible":true,"fossilMode":"age-window","layers":["base","fossils-modern"],"highlight":["site-chicxulub-modern"],"caption":{"en":"Event age 66 Ma; map sample 70 Ma.","zh":"事件为6600万年前；地图样本为7000万年前。"}}
 ```
 
-`openReader()` 是宿主context的可选小钩子，选择详情在桌面打开阅读列，在窄屏展开同一个阅读抽屉；不另加详情HUD。重建主题的年代立即切换离散样本，镜头仍可缓动，避免缓动年代时下载路过的所有样本、或让化石筛选/所选读数与主图暂时不一致。普通日期主题保留原时间缓动与底图行为。
+`openReader()` 是宿主context的可选小钩子，选中现代证据时在桌面打开阅读列，在窄屏展开同一个阅读抽屉；不另加详情HUD。手机（≤759 px，宿主在此隐藏卡片）现代小图移入阅读面板顶部，阅读抽屉与其他 TimeScene 题一样默认收起，不在载入 / 点拍时自动展开；底栏状态行换成「所选 / 地图样本 / Δ」读数（`Timeline` 的可选 `state`），左列 PLATE 用标准可折叠 `ts-plate` 行；悬浮读数只在演示中显示。深时专用 UI（`ModernInset.tsx`、`deep-time-transport.ts`）由 View 懒加载，不进其他 TimeScene 题的 View chunk；`,` / `.` 拍键只为重建题注册。重建主题的年代立即切换离散样本，镜头仍可缓动，避免缓动年代时下载路过的所有样本、或让化石筛选/所选读数与主图暂时不一致。普通日期主题保留原时间缓动与底图行为。
 
 现代清单的可选 `referenceFile` 指向本地原始书目表，例如 `{"version":1,"references":{"6837":"Original PBDB primary_reference string"}}`。构建要求每条occurrence的PBDB文献号可解析，inspector按号显示完整原文书目，双语解释不改写原始题名；书目同样由本地缓存支持离线，不重复进入topic payload。

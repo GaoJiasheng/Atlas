@@ -36,7 +36,7 @@
 .ts-modern__ages li { margin: 8px 0; }
 .ts-modern__ages p { margin: 2px 0; }
 .ts-modern-mobile { display: none; }
-.atlas-card .ts-modern { max-height: min(72vh, 640px); overflow-y: auto; }
+.atlas-card .ts-modern { max-height: min(50vh, 600px); overflow-y: auto; }
 .ts-modern-evidence { position: absolute; z-index: 4; top: 62px; right: 16px; width: min(350px, 34vw); max-height: calc(100% - 220px); overflow-y: auto; background: var(--paper); border: 1px solid var(--line); pointer-events: auto; }
 .ts-modern-evidence .ts-modern__list { display: none; }
 @media (max-width: 1023px) {

@@ -21,7 +21,6 @@
  * Loaded lazily (dynamic import) so MapLibre stays out of the View chunk.
  */
 import { Map as MlMap, Marker, type GeoJSONSource } from 'maplibre-gl';
-import { createReconstructionMap } from '../../reconstruction-map';
 import type { ReconstructionManifest } from '../../deep-time';
 import type { ReconstructionStats } from '../../lib/reconstruction';
 import 'maplibre-gl/dist/maplibre-gl.css';
@@ -172,9 +171,8 @@ function hatchImage(color: string, pixelRatio: number): ImageData | null {
 /* ------------------------------------------------------------------ */
 
 export function createGeoController(options: GeoControllerOptions): GeoController {
-  // Select before constructing the historical style or fetching any modern source.
-  if (options.reconstruction) return createReconstructionMap(options, options.reconstruction);
-  if (options.basemap?.reconstruction) throw new Error('Reconstruction manifest was not loaded');
+  // GeoStage loads `reconstruction-map` for these topics; never build the modern style or fetch a modern source for one.
+  if (options.reconstruction || options.basemap?.reconstruction) throw new Error('A reconstruction topic needs reconstruction-map, not the historical controller');
   const { container, store, playhead, model } = options;
   let locale = options.locale;
   let tokens = readThemeTokens();

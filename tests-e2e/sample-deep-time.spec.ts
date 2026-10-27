@@ -13,7 +13,9 @@ async function open(page: Page, query: string, locale = 'en') {
   await page.goto(`/${locale}/topics/sample-deep-time/?${query}`);
   await page.waitForFunction(() => Boolean(window.__atlas));
   expect(await page.evaluate(() => window.__atlas!.ready)).toBe(true);
-  await expect.poll(async () => (await geology(page)).reconstruction?.status).toBe('ready');
+  // The deep-time HUD mounts after its local evidence files; the frame is ready once its tiles are drawn (slow under software GL).
+  await page.waitForFunction(() => typeof window.__atlas?.engine.geology === 'function', null, { timeout: 60_000 });
+  await expect.poll(async () => (await geology(page)).reconstruction?.status, { timeout: 30_000 }).toBe('ready');
 }
 async function beat(page: Page, chapter: string, localIndex: number) {
   const globalIndex = await page.evaluate(({ chapter, localIndex }) => window.__atlas!.beats().findIndex((b) => b.chapter === chapter && b.index === localIndex), { chapter, localIndex });
@@ -32,7 +34,7 @@ for (const locale of ['en', 'zh']) {
     expect((await page.evaluate(() => window.__atlas!.state())) as { beat?: number }).toMatchObject({ beat: 1 });
     await page.reload();
     await page.waitForFunction(() => Boolean(window.__atlas));
-    await expect.poll(async () => (await geology(page)).reconstruction?.status).toBe('ready');
+    await expect.poll(async () => (await geology(page)).reconstruction?.status, { timeout: 30_000 }).toBe('ready');
     expect((await geology(page)).reconstruction).toMatchObject({ selectedMa: 66, frameMa: 70, deltaMa: 4 });
     for (const theme of ['paper', 'cinema'] as const) {
       const before = (await geology(page)).reconstruction.geometryUpdates;
@@ -40,12 +42,12 @@ for (const locale of ['en', 'zh']) {
       await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
       expect((await geology(page)).reconstruction.geometryUpdates).toBe(before);
       await beat(page, 'impact-samples', 2);
-      await expect.poll(async () => (await geology(page)).reconstruction.frameMa).toBe(65);
+      await expect.poll(async () => (await geology(page)).reconstruction.frameMa, { timeout: 30_000 }).toBe(65);
       const frame65 = (await geology(page)).reconstruction.geometryUpdates;
       await beat(page, 'impact-samples', 3);
       expect((await geology(page)).reconstruction).toMatchObject({ selectedMa: 32.5, frameMa: 65, deltaMa: 32.5, geometryUpdates: frame65 });
       await beat(page, 'impact-samples', 1);
-      await expect.poll(async () => (await geology(page)).reconstruction.frameMa).toBe(70);
+      await expect.poll(async () => (await geology(page)).reconstruction.frameMa, { timeout: 30_000 }).toBe(70);
     }
     expect(requests.filter((path) => /\/(land-50m|land-10m-sea|countries-50m|borders-50m)\.json$/.test(path))).toEqual([]);
   });
@@ -56,7 +58,7 @@ test('independent occurrence windows, layer visibility and inset restoration', a
   expect((await geology(page)).inset).toMatchObject({ fossilsTotal: 4, fossilsVisible: 2, ageOverlapCount: 2 });
   for (const [localIndex, count] of [[1, 2], [2, 0], [3, 1], [4, 1]]) {
     await beat(page, 'fossil-windows', localIndex!);
-    await expect.poll(async () => (await geology(page)).inset.fossilsVisible).toBe(count);
+    await expect.poll(async () => (await geology(page)).inset.fossilsVisible, { timeout: 30_000 }).toBe(count);
   }
   await page.evaluate(() => window.__atlas!.setMode('presentation', false, { instant: true }));
   await page.evaluate(() => window.__atlas!.setMode('inset-mexico', true));
@@ -67,7 +69,7 @@ test('independent occurrence windows, layer visibility and inset restoration', a
   expect((await geology(page)).inset).toMatchObject({ insetVisible: false, view: 'southeast-asia', fossilsTotal: 4 });
   await page.reload();
   await page.waitForFunction(() => Boolean(window.__atlas));
-  await expect.poll(async () => (await geology(page)).reconstruction?.status).toBe('ready');
+  await expect.poll(async () => (await geology(page)).reconstruction?.status, { timeout: 30_000 }).toBe('ready');
   expect((await geology(page)).inset).toMatchObject({ insetVisible: false, view: 'southeast-asia' });
   await page.evaluate(() => window.__atlas!.setMode('inset-visible', true));
   await page.evaluate(() => window.__atlas!.setMode('fossil-all', true));
@@ -86,10 +88,10 @@ test('missing younger sample stays blank and late older work cannot overwrite it
   });
   await open(page, 'ch=fossil-windows&t=100ma');
   await beat(page, 'impact-samples', 1);
-  await expect.poll(async () => (await geology(page)).reconstruction.status).toBe('loading');
+  await expect.poll(async () => (await geology(page)).reconstruction.status, { timeout: 30_000 }).toBe('loading');
   expect((await geology(page)).reconstruction.frameMa).toBeNull();
   await beat(page, 'impact-samples', 2);
-  await expect.poll(async () => (await geology(page)).reconstruction.status).toBe('unavailable');
+  await expect.poll(async () => (await geology(page)).reconstruction.status, { timeout: 30_000 }).toBe('unavailable');
   release();
   expect((await geology(page)).reconstruction).toMatchObject({ selectedMa: 65, frameId: null, frameMa: null, deltaMa: null, status: 'unavailable' });
 });
