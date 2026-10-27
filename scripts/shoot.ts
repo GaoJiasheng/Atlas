@@ -679,6 +679,18 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
     await s.page.evaluate((n) => window.__atlas!.goToBeat(n, { instant: true }), i);
     // The camera snaps; the map needs a few frames for tiles, leader placards and the caption.
     await s.page.waitForTimeout(o.perf ? 2400 : 1500);
+    // A monthly map commits its month once GL has painted it; with software WebGL on a busy
+    // machine that can take seconds, so wait for the commit (a stuck month still fails below).
+    await s.page
+      .waitForFunction(
+        () => {
+          const c = (window.__atlas!.engine as unknown as { climatology?(): { month: number; renderedMonth: number } }).climatology?.();
+          return !c || c.month === c.renderedMonth;
+        },
+        null,
+        { timeout: 30_000 },
+      )
+      .catch(() => {});
     const st = await s.state();
     const landed = st.presentation?.chapter === b.chapter && st.presentation.beat === b.index && st.hud === false;
     if (!landed) report.beatFailures.push(`${name}: state.presentation=${JSON.stringify(st.presentation)} hud=${st.hud}`);

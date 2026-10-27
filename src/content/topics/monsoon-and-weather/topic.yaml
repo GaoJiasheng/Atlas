@@ -1,0 +1,41 @@
+# Monsoons and weather (docs/50): background + chapters 01–08, 36 beats, monthly climatology (docs/50 §4, docs/06 「月气候模式」).
+# Wind: NCEP/NCAR Reanalysis 1, 850 hPa; rain: GPCP V2.3; both 1991–2020 monthly means on their native 2.5° grids,
+# derived by scripts/geo/monsoon-and-weather/derive.ts. Fact audit: AUDIT.md; choices for Gavin: REVIEW.md.
+id: monsoon-and-weather
+title: { en: "Monsoons and weather", zh: "季风与天气" }
+subtitle: { en: "Read the winds and rain across Southeast Asia", zh: "读懂东南亚的风与雨" }
+shortTitle: { en: "Monsoons", zh: "季风" }
+subject: geography
+tags: [climate, southeast-asia, water-cycle]
+mode: time
+engine: time-scene
+stage: geo
+theme: paper
+sensitivity: open
+status: published
+illustration: monsoon-and-weather
+note:
+  en: "Monthly means for 1991–2020 · wind from NCEP/NCAR Reanalysis 1 at 850 hPa, rain from GPCP V2.3, both on their 2.5° grids · not a forecast"
+  zh: "1991–2020 年各月平均 · 风取自 NCEP/NCAR 再分析 1 的 850 hPa 层，雨取自 GPCP V2.3，均为 2.5° 原始格网 · 不是预报"
+temporalMode: climatology
+climatology:
+  periodId: clim-1991-2020
+  startYear: 1991
+  endYear: 2020
+  initialMonth: 1
+  keySources: [S199]
+monthlyLayers:
+  - id: clim-wind
+    type: monthly-climatology
+    quantity: wind
+    file: monsoon-and-weather-wind-850-1991-2020
+    label: { en: "Regional wind · 850 hPa", zh: "区域风 · 850 hPa" }
+    periodId: clim-1991-2020
+    sources: [S22, S25, S101]
+  - id: clim-rain
+    type: monthly-climatology
+    quantity: rain
+    file: monsoon-and-weather-rain-gpcp-1991-2020
+    label: { en: "Mean rain rate", zh: "平均降水率" }
+    periodId: clim-1991-2020
+    sources: [S32, S25, S102]

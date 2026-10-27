@@ -608,3 +608,11 @@ PRESENT 的字幕自足；图只在普通阅读出现。退出演示沿用恢复
 7. **KEY 来源。** 引擎原在每层来源芯片后硬编码追加 `S199`（本题专有 id）；改为作者字段 `climatology.keySources: ["S199"]`（可选，validate 检查 id 在 sources.json）。正式主题照此写。
 
 仍未达标/留给正文：月页静态 JS 约 447 KB gzip（>400 KB 目标，主要是既有 MapLibre 与 React，未在本轮重构）；iPad 真机切月 p95 未测。
+
+### 9.3 内容施工（2026-10-27，Claude；`monsoon-and-weather` 已发布）
+
+**交付。** 背景 + 8 章、36 拍（拍表 `scripts/geo/monsoon-and-weather/chapters.ts` → `build-chapters.ts` 生成 frontmatter）；15 个名词、25 条来源（S1–S14、S22、S24、S25、S30–S32、S101–S104、S199）、6 个城市点、8 个镜头；封面与两幅正文图（`storm-life` 第 03 章、`cloud-cutaway` 第 06 章）。风雨数据由 `derive.ts` 从研究缓存的 NOAA OPeNDAP ASCII 重新派生（核对输入 SHA-256、气候期、850 hPa、u/v 同格网；R1 纬度反转为南→北），数值与缓存及 `sample-climate` 逐值相同；`--check` 可复核。两份文件 115,499 + 55,669 bytes，经引擎按需加载。来源、许可、M01–M12 记录见主题 `data/SOURCES.md` 与 `scripts/geo/monsoon-and-weather/SOURCES-GEO.md`；事实核对见主题 `AUDIT.md`，给 Gavin 的项见 `REVIEW.md`。
+
+**相对 §2 的出入。** 背景第 1 拍不开月层，字幕改为“月平均图层还没有打开”；字幕里的“MSS”改“新加坡气象局”，“《水》”改《新加坡的水》。正文中的地图读数按数据核正：1 月南中国海风来自东、东北，7 月赤道以南 850 hPa 为东风（不是东南风）。没有做图的章末锚点（`Figure` 无 id）。《新加坡的水》第 02 章加一句回链。
+
+**引擎小修。** 雨层装上后 1:50m 海岸被移到 1:10m 遮罩之上，新加坡近景出现两条海岸线；改为在雨格上另画一层随 zoom 7→8 淡出的 1:50m 海岸（`climateStyle.ts` `coastOverClimate`），原海岸留在遮罩下；单测 `tests/time-scene/climate-coast.test.ts`。另外 `scripts/shoot.ts --beats` 在取每拍快照前等月份提交（`renderedMonth === month`，最多 30 秒）：负载高时软件 WebGL 画一个新月份要 2–8 秒，原来固定等 1.5 秒会误报。
