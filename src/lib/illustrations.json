@@ -279,6 +279,26 @@
       "0000000000000010"
     ]
   },
+  "inside-the-earth": {
+    "mask": [
+      "0000000111000000",
+      "000017beec820000",
+      "0004dffffffd5000",
+      "004effffffffe500",
+      "02dffffffffffd20",
+      "07ffffffffffff70",
+      "0cffffffffffffb0",
+      "1effffffffffffd1",
+      "1effffffffffffd2",
+      "1cffffffffffffc1",
+      "08ffffffffffff90",
+      "02dffffffffffe30",
+      "005efffffffff600",
+      "0005dffffffe6000",
+      "000028cddc930000",
+      "0000000221000000"
+    ]
+  },
   "light-and-shadows": {
     "mask": [
       "0000000000000000",

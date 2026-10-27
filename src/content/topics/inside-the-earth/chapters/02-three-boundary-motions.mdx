@@ -1,0 +1,193 @@
+---
+id: three-boundary-motions
+order: 2
+title:
+  en: Three boundary motions
+  zh: 边界的三种运动
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  cutaway: none
+  run: false
+  part: null
+  pose: null
+  hide: []
+  ghost: []
+  layers:
+  - boundary-blocks
+  labels: &id001
+  - edge-div-left
+  - edge-div-right
+  camera:
+    position:
+    - 3.8
+    - 3
+    - 5.8
+    target:
+    - 0
+    - 0
+    - 0
+    fov: 34
+  summary:
+    en: Plates separate, converge or slide past each other.
+    zh: 板块能分开、靠近或互相错过。
+  sim:
+    set:
+      wave-kind: p
+      wave-step: 0
+      water-depth: 4000
+      sea-step: 0
+      sea-uplift: true
+      flow-mode: none
+  beats:
+  - pose: null
+    labels: *id001
+    sim:
+      set:
+        wave-kind: p
+        wave-step: 0
+        water-depth: 4000
+        sea-step: 0
+        sea-uplift: true
+        flow-mode: none
+    caption:
+      en: Each block includes crust and rigid uppermost mantle. Its layers move together.
+      zh: 每块都包括地壳和刚性的最上部地幔；这些层一起移动。
+  - pose: edge-open
+    labels:
+    - edge-div-left
+    - edge-div-right
+    sim:
+      set:
+        wave-kind: p
+        wave-step: 0
+        water-depth: 4000
+        sea-step: 0
+        sea-uplift: true
+        flow-mode: none
+    caption:
+      en: Separating plates allow magma to rise and form new oceanic crust. This movement is greatly accelerated.
+      zh: 板块分开时，岩浆可上升并形成新的海洋地壳；这里的运动大大加速了。
+  - pose: null
+    labels:
+    - edge-sub-left
+    - edge-slab
+    - edge-melt
+    - edge-sub-right
+    sim:
+      set:
+        wave-kind: p
+        wave-step: 0
+        water-depth: 4000
+        sea-step: 0
+        sea-uplift: true
+        flow-mode: none
+    caption:
+      en: This oceanic slab descends. Water released from it helps rock above it melt partly.
+      zh: 这块海洋板片向下俯冲；它释放的水有助于上方岩石部分熔融。
+  - part: collision-fold
+    labels:
+    - collision-fold
+    sim:
+      set:
+        wave-kind: p
+        wave-step: 0
+        water-depth: 4000
+        sea-step: 0
+        sea-uplift: true
+        flow-mode: none
+    caption:
+      en: Continental collision is another kind of convergence. It can build mountains without this subduction model's volcanic arrangement.
+      zh: 大陆碰撞是另一种汇聚，能形成山脉，却不一定形成俯冲模型那样的火山排列。
+  - pose: edge-slide
+    labels:
+    - edge-trans-left
+    - edge-trans-right
+    sim:
+      set:
+        wave-kind: p
+        wave-step: 0
+        water-depth: 4000
+        sea-step: 0
+        sea-uplift: true
+        flow-mode: none
+    caption:
+      en: Transform motion is mainly sideways. It does not systematically create or consume crust.
+      zh: 转换运动主要沿水平方向，不会持续产生或消耗地壳。
+  index:
+    parts:
+    - edge-div-left
+    - edge-div-right
+    - edge-sub-left
+    - edge-sub-right
+    - edge-slab
+    - edge-melt
+    - collision-fold
+    - edge-trans-left
+    - edge-trans-right
+---
+
+<Lang en>
+
+The blocks stay on the stage together so that their motions can be compared. Each plate block includes crust and rigid uppermost mantle; those layers move as a unit. A boundary describes movement relative to the neighbouring plate. Separating, approaching and sliding past are the basic directions illustrated here.
+
+At the spreading sample, neighbouring blocks move apart. Magma can rise into the opening and form new oceanic crust. At the converging sample, an oceanic slab bends down beneath another plate. This descent is <Term id="subduction">subduction</Term>. Water carried down with the slab helps rock above it melt partly. Follow the continuous slab before looking at the small melt region above it: the whole mantle has not melted.
+
+<Figure src="figures/inside-the-earth-boundary-models" alt={{"en": "Three schematic plate-boundary blocks.", "zh": "三件板块边界示意方块。"}} caption={{"en": "Spreading, subduction and sideways motion. Thickness and displacement are enlarged; continental collision is another convergent case.", "zh": "扩张、俯冲与水平错动。层厚和位移已放大；大陆碰撞是汇聚的另一种情况。"}} />
+
+The folded continental sample shows another convergent case. Continents can collide and build mountains. It is shown separately because continental collision should not be read as the same arrangement as the neighbouring subduction example. At the transform sample, the blocks move mainly sideways. Surface marks acquire a horizontal offset; this motion does not systematically create or consume crust.
+
+The motion is greatly accelerated, and the layers and offsets are enlarged for reading. Real relative plate movements are typically a few centimetres each year and vary between places. Select each sample from the index to compare its direction with its structure. The stage is a set of process diagrams, rather than a map showing where these boundaries are located.
+
+<More title={{"en": "Volcanoes within plates", "zh": "板块内部的火山"}}>
+
+USGS describes hotspot volcanoes inside plates as well as volcanism near boundaries. These samples therefore do not mean that every volcano sits on a plate edge.
+
+</More>
+
+<More title={{"en": "Accelerated motion", "zh": "加速显示的运动"}}>
+
+BGS describes typical relative motion as a few centimetres per year. The moving blocks illustrate the direction, with no clock claiming the displayed motion happens at the real rate.
+
+</More>
+
+<More title={{"en": "Blocks are not a map", "zh": "方块不是地图"}}>
+
+The samples have no geographical coordinates and share no global scale. Named plate locations and regional hazard histories require a separate geographical account. Here each sample explains a local motion.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+台上的小样一直并排可见，方便比较运动方向。每块板块都包括地壳和刚性的最上部地幔，两层一起动。边界运动说的是相邻板块之间的相对运动；这里比较分开、靠近和互相错过几个基本方向。
+
+扩张小样的板块向两旁分开，岩浆可上升，形成新的海洋地壳。汇聚小样中，海洋板片弯向另一板块下方，这种下降叫<Term id="subduction">俯冲</Term>。板片带下去的水有助于上方岩石部分熔融。先沿着连续的板片看，再找它上方的小片熔融区；不是整个地幔都熔化了。
+
+<Figure src="figures/inside-the-earth-boundary-models" alt={{"en": "Three schematic plate-boundary blocks.", "zh": "三件板块边界示意方块。"}} caption={{"en": "Spreading, subduction and sideways motion. Thickness and displacement are enlarged; continental collision is another convergent case.", "zh": "扩张、俯冲与水平错动。层厚和位移已放大；大陆碰撞是汇聚的另一种情况。"}} />
+
+旁边起褶皱的大陆小样表示另一种汇聚。大陆碰撞能够形成山脉，却不能直接当作邻近俯冲示例那样的火山排列。转换小样则主要沿水平方向错动，地表标记留下水平错距；这种运动不会持续产生或消耗地壳。
+
+真实板块的典型相对运动每年只有几厘米，而且各处不同。这里大大加速了运动，并放大层厚与错距，方便辨认。可以从索引逐件选择，比较方向与结构。台上展示的是过程小样，不表示它们在真实地图上的位置。看懂方向之后，还要说清哪一部分下降、哪一部分可能熔融。
+
+<More title={{"en": "Volcanoes within plates", "zh": "板块内部的火山"}}>
+
+美国地质调查局也介绍板块内部的热点火山。因此，这些边界小样不能推出“每座火山都在板块边缘”。
+
+</More>
+
+<More title={{"en": "Accelerated motion", "zh": "加速显示的运动"}}>
+
+英国地质调查局将典型相对运动描述为每年几厘米。方块主要表达方向；画面不提供声称与真实运动速率相同的时钟。
+
+</More>
+
+<More title={{"en": "Blocks are not a map", "zh": "方块不是地图"}}>
+
+这些小样没有地理坐标，也不采用全球统一比例。具体板块位置和地区灾害历史需要另作地理说明；这里每件小样只解释局部运动。
+
+</More>
+
+</Lang>

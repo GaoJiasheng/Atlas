@@ -1,0 +1,148 @@
+---
+id: before-you-start
+order: 0
+title:
+  en: Before you start
+  zh: 开始之前
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  cutaway: none
+  run: false
+  part: null
+  pose: null
+  hide:
+  - plate-crust
+  - plate-rigid-mantle
+  - plate-deep-mantle
+  ghost: []
+  layers:
+  - planet-shells
+  labels: &id001
+  - earth-crust
+  - earth-mantle
+  - earth-outer-core
+  - earth-inner-core
+  camera:
+    position:
+    - 0.4
+    - 0.35
+    - 4.8
+    target:
+    - 0
+    - -0.25
+    - 0
+    fov: 32
+  summary:
+    en: Read a cutaway, then compare local models at their own scales.
+    zh: 先读地球剖面，再比较各自采用独立尺度的局部模型。
+  sim:
+    set:
+      wave-kind: p
+      wave-step: 0
+      water-depth: 4000
+      sea-step: 0
+      sea-uplift: true
+      flow-mode: none
+  beats:
+  - labels: *id001
+    sim:
+      set:
+        wave-kind: p
+        wave-step: 0
+        water-depth: 4000
+        sea-step: 0
+        sea-uplift: true
+        flow-mode: none
+    caption:
+      en: This cutaway labels the crust, mantle, outer core and inner core.
+      zh: 这个剖面标出地壳、地幔、外核和内核。
+  - part: earth-mantle
+    labels:
+    - earth-mantle
+    sim:
+      set:
+        wave-kind: p
+        wave-step: 0
+        water-depth: 4000
+        sea-step: 0
+        sea-uplift: true
+        flow-mode: none
+    caption:
+      en: Most of the mantle is solid rock. This cut face is a model, not a photograph of Earth's interior.
+      zh: 地幔大部分是固态岩石。这个切面是模型，不是地球内部的照片。
+  - part: null
+    labels:
+    - earth-crust
+    sim:
+      set:
+        wave-kind: p
+        wave-step: 0
+        water-depth: 4000
+        sea-step: 0
+        sea-uplift: true
+        flow-mode: none
+    caption:
+      en: The globe uses approximate radial proportions. The later sections enlarge thin layers and small movements.
+      zh: 地球采用近似半径比例；后面的剖面会放大薄层和微小位移。
+  index:
+    parts: *id001
+kind: background
+---
+
+<Lang en>
+
+The cutaway starts at the rocky outside of Earth and looks towards its centre. The thin <Term id="crust">crust</Term> surrounds the <Term id="mantle">mantle</Term>, a much thicker region made mostly of solid rock. The labels also mark the outer core and inner core. A cut face lets us compare places that cannot all be seen from the surface.
+
+Each later chapter changes to a local model: plate blocks, a volcano, a fault, wave markers, seawater or a structure. These samples have independent scales. A thin layer or a small movement is enlarged so that its role is visible. Their positions on the stage do not place them together on a real map.
+
+Published dimensions describe Earth; DESIGN values describe choices in this teaching model. SIM readings are calculated model results. Neither a moving marker nor a bending frame is a field measurement. For a reminder about solid and liquid, visit <TopicLink slug="states-of-matter">States of Matter</TopicLink>. This topic extends that vocabulary to Earth processes.
+
+<More title={{"en": "Evidence for the interior", "zh": "内部结构的证据"}}>
+
+Seismic waves carry information about the materials they pass through. BGS explains how changes in their paths and travel times help scientists infer Earth's layers. The cutaway is a drawing of that interpretation, not an interior photograph.
+
+</More>
+
+<More title={{"en": "Independent scales", "zh": "独立尺度"}}>
+
+The globe compares approximate radii. Local sections enlarge layers, displacements and the passage of time. Do not use the globe as a ruler for the volcano or wave bench.
+
+</More>
+
+<More title={{"en": "Processes and places", "zh": "过程与地点"}}>
+
+Here the task is to follow what moves, what changes shape and what carries a disturbance. Maps of named plates, hazard histories and regional comparisons belong to a separate map topic; no geographical map is implied by these blocks.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+剖面从地球外面的岩石一直画到中心。很薄的<Term id="crust">地壳</Term>包着厚得多的<Term id="mantle">地幔</Term>，地幔大部分是固态岩石。再向里是外核与内核。这个切面让我们比较从地表无法同时看见的内部区域。
+
+后面的章节会换成板块、火山、断层、波动、海水和建筑的小模型。各自采用独立尺度，薄层与微小运动会放大，方便看出作用。它们在台上的位置，不代表真实地图上的相邻地点。
+
+公开资料的尺寸用来描述地球；“设计值”说明模型采用的选择；“模拟”读数是模型计算，不是实测。移动的标记和弯曲的框架都不能当成现场记录。<TopicLink slug="states-of-matter">物质的状态</TopicLink>能帮助你复习固态与液态；这里把这些词用到地球过程中。
+
+<More title={{"en": "Evidence for the interior", "zh": "内部结构的证据"}}>
+
+地震波经过不同材料时，路径和传播时间会改变。英国地质调查局说明，科学家利用这些信息推断内部的分层。剖面表达的是根据证据建立的模型，不是地球内部的照片。
+
+</More>
+
+<More title={{"en": "Independent scales", "zh": "独立尺度"}}>
+
+地球模型比较近似的半径比例；局部剖面则放大层厚、位移，压缩过程所需时间。地球上的尺度不能拿来量旁边的火山或波台。
+
+</More>
+
+<More title={{"en": "Processes and places", "zh": "过程与地点"}}>
+
+这里重点看什么在移动、什么在变形、什么把扰动传到远处。具体板块地图、灾害历史和地区比较另属地图主题；台上的方块不是地理地图。
+
+</More>
+
+</Lang>
