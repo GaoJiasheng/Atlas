@@ -1,0 +1,177 @@
+---
+id: eruption-styles
+order: 4
+title:
+  en: Eruption styles
+  zh: 喷发的不同方式
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  cutaway: none
+  run: false
+  part: null
+  pose: null
+  hide: []
+  ghost: []
+  layers:
+  - volcano-system
+  labels: &id001
+  - volcano-vent
+  - volcano-lava
+  camera:
+    position:
+    - 3
+    - 2.1
+    - 4.8
+    target:
+    - 0
+    - 0.4
+    - 0
+    fov: 34
+  summary:
+    en: Compare flowing lava and explosive fragmentation.
+    zh: 比较熔岩流出与爆炸破碎。
+  sim:
+    set:
+      wave-kind: p
+      wave-step: 0
+      water-depth: 4000
+      sea-step: 0
+      sea-uplift: true
+      flow-mode: none
+  beats:
+  - run: true
+    highlight:
+      signal:
+      - volcano-lava
+    labels: *id001
+    sim:
+      set:
+        wave-kind: p
+        wave-step: 0
+        water-depth: 4000
+        sea-step: 0
+        sea-uplift: true
+        flow-mode: surface
+    caption:
+      en: Effusive activity lets lava flow from a vent.
+      zh: 溢流式活动使熔岩从喷发口流出。
+  - run: false
+    highlight:
+      signal:
+      - volcano-ash
+    labels:
+    - volcano-vent
+    - volcano-ash
+    sim:
+      set:
+        wave-kind: p
+        wave-step: 0
+        water-depth: 4000
+        sea-step: 0
+        sea-uplift: true
+        flow-mode: none
+    caption:
+      en: Expanding gas can fragment magma and throw fragments into the air.
+      zh: 膨胀气体能把岩浆破碎，将碎屑抛入空中。
+  - pose: magma-gas
+    labels:
+    - volcano-storage
+    - volcano-bubbles
+    - volcano-conduit
+    sim:
+      set:
+        wave-kind: p
+        wave-step: 0
+        water-depth: 4000
+        sea-step: 0
+        sea-uplift: true
+        flow-mode: none
+    caption:
+      en: More viscous, gas-rich magma tends to erupt more explosively. This model cannot forecast an eruption.
+      zh: 黏度高、含气多的岩浆往往更易爆炸式喷发；这个模型不能预报喷发。
+  - part: volcano-ash
+    labels:
+    - volcano-ash
+    - volcano-lava
+    sim:
+      set:
+        wave-kind: p
+        wave-step: 0
+        water-depth: 4000
+        sea-step: 0
+        sea-uplift: true
+        flow-mode: none
+    caption:
+      en: Ash contains fragments of rock, minerals and glass. It is not soft ash from a fire.
+      zh: 火山灰含岩石、矿物和玻璃碎屑，不是火烧后留下的松软灰烬。
+  index:
+    parts:
+    - volcano-storage
+    - volcano-conduit
+    - volcano-vent
+    - volcano-bubbles
+    - volcano-lava
+    - volcano-ash
+---
+
+<Lang en>
+
+Compare the lava on the slope with the fragments above the vent. These are product samples kept side by side on the stage. Effusive activity means lava flows out of a vent. Explosive activity involves fragmentation, with expanding gas able to break magma apart and throw fragments into the air. Real eruptions show varied behaviour; the samples are useful contrasting processes, not a forecast with mutually exclusive outcomes.
+
+Viscosity means resistance to flowing. More viscous magma resists flow more strongly. Gas content also matters. As rising magma loses pressure, dissolved gas can form expanding bubbles. Gas can escape more readily from less viscous material; more viscous, gas-rich magma tends to erupt more explosively. Keep the words “tends to”: these properties do not determine every eruption by themselves.
+
+The way magma rises and the conditions along its route affect what happens too. Select the storage region, bubbles and conduit in turn. The model changes their pose to make the relationship visible, but it has no pressure gauge, threshold calculation or eruption timer. A moving lava illustration describes the route taken by material, not a measured flow rate.
+
+Finally select the ash. Volcanic ash consists of fragments of rock, minerals and glass. It is not the soft combustion ash left after a fire. The drawn fragments are enlarged so that this material can be selected and compared with lava. The ash sample and lava sample remain available while the beat highlights one process at a time.
+
+<More title={{"en": "The size of ash", "zh": "火山灰的大小"}}>
+
+The NPS definition used here gives volcanic ash a diameter below <Num s="S65">2 mm</Num>. The model enlarges its particles; they cannot be measured from the screen, and the definition is not a boundary-value quiz.
+
+</More>
+
+<More title={{"en": "Gas and resistance to flow", "zh": "气体与流动阻力"}}>
+
+NPS explains that both viscosity and gas content influence explosivity. The storage, bubbles and product samples let you follow that account qualitatively; they do not specify a pressure at which every volcano erupts.
+
+</More>
+
+<More title={{"en": "A process comparison", "zh": "比较过程"}}>
+
+Real activity can vary during an eruption. Keeping both product samples visible lets you compare flowing material with fragmented material without labelling the model as a predictor.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+先比较坡上的熔岩与喷发口上方的碎屑。它们是并列保留的产物样本。溢流式活动指熔岩从喷发口流出；爆炸式活动则有破碎过程，膨胀气体能把岩浆破碎，将碎屑抛到空中。真实喷发的表现很多样，这里比较过程，并不是只能二选一的预测器。
+
+黏度是抵抗流动的程度。岩浆黏度越高，就越不容易流动。含气量也很重要：上升降压时，溶解气体可能析出，形成膨胀气泡。气体较容易从黏度低的物质中逸出；黏度高、含气多的岩浆往往更易爆炸式喷发。“往往”不能省略，因为这些性质不能单独决定每次喷发。
+
+岩浆怎样上升、沿途通道条件怎样，也会影响过程。依次选择储存区、气泡与通道，比较它们的关系。模型用姿态变化帮助辨认，并没有压力表、喷发门槛或倒计时。熔岩流动示意也只表示物质经过的路线，不是实测流速。
+
+最后选择火山灰。它含岩石、矿物和玻璃碎屑，并非燃烧留下的松软灰烬。模型把颗粒放大，便于点选，并与熔岩比较。讲某种产物时，只突出相应的样本，两种样本都保留在台上，方便来回核对。
+
+<More title={{"en": "The size of ash", "zh": "火山灰的大小"}}>
+
+这里按美国国家公园管理局的定义，火山灰直径小于 <Num s="S65">2 毫米</Num>。模型颗粒已经放大，不能用屏幕量真实大小，也不围绕这个界值出题。
+
+</More>
+
+<More title={{"en": "Gas and resistance to flow", "zh": "气体与流动阻力"}}>
+
+美国国家公园管理局说明，黏度与含气量都会影响爆炸性。储存区、气泡和产物样本帮助定性理解这种关系，并不规定所有火山共同的喷发压力。
+
+</More>
+
+<More title={{"en": "A process comparison", "zh": "比较过程"}}>
+
+一次喷发期间的活动也可以变化。保留两种产物样本，是为了比较流动物质与破碎物质，而不是把模型当成喷发预报。
+
+</More>
+
+</Lang>

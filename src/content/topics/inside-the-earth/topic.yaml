@@ -1,0 +1,26 @@
+id: inside-the-earth
+title:
+  en: Inside the Earth
+  zh: 地球内部与火山剖面
+subtitle:
+  en: Earth layers, plate motion, magma, seismic waves and moving water
+  zh: 地球分层、板块运动、岩浆、地震波与海水位移
+shortTitle:
+  en: Inside the Earth
+  zh: 地球内部
+subject: geography
+tags:
+- singapore
+- enrichment
+- space
+moe: []
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: draft
+illustration: inside-the-earth
+note:
+  en: Independent teaching models · approximate Earth radii · local sections schematic
+  zh: 独立教学模型 · 地球采用近似半径比例 · 局部剖面示意
