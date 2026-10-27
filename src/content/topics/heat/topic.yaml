@@ -1,0 +1,16 @@
+id: heat
+title: { en: "Heat and Temperature", zh: "热与温度" }
+subtitle: { en: "Measure temperature, follow heat and compare model curves on a laboratory bench", zh: "在实验台上测温、看传热，比较模型曲线" }
+shortTitle: { en: "Heat", zh: "热" }
+subject: science
+tags: [singapore, psle, p4, heat, space]
+levels: [P4]
+moe: ["MOE 2023 Primary Science P4 Energy Forms and Uses: Heat, pp. 76–77"]
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: published
+illustration: heat
+note: { en: "Generic heat bench · model results, not measurements · externally maintained bath · liquid levels schematic · separate endpoint indicator enlarged 500 times", zh: "通用热实验台 · 数值为模型非实测 · 温浴由外部维持恒温 · 液位示意 · 独立端点指示位移放大 500 倍" }

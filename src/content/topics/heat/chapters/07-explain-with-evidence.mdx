@@ -1,0 +1,161 @@
+---
+id: explain-with-evidence
+order: 7
+title:
+  en: Explain with Evidence
+  zh: 用证据解释
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  layers:
+  - transfer
+  - curves
+  - expansion
+  - heat-paths
+  labels:
+  - metal-spoon
+  - plastic-spoon
+  camera:
+    position:
+    - 2.6
+    - 2.2
+    - 3.25
+    target:
+    - 0
+    - 0.55
+    - 0
+    fov: 30
+  summary:
+    en: Name the change, cite the observation, and explain the transfer.
+    zh: 说出改变、引用观察，再解释传热。
+  sim:
+    set:
+      elapsed-s: 0
+  beats:
+  - camera: view-spoons
+    layers:
+    - transfer
+    - heat-paths
+    labels:
+    - metal-spoon
+    - plastic-spoon
+    sim:
+      set:
+        bath-c: 85
+        elapsed-s: 60
+    caption:
+      en: Compare at equal time, bath temperature and starting temperature. Changing several conditions weakens
+        the conclusion.
+      zh: 在相同时间、温浴温度与初温下比较。同时改几个条件会削弱结论。
+  - camera: view-cooler
+    layers:
+    - curves
+    labels:
+    - wrap
+    - cooling-water
+    sim:
+      set:
+        cool-start-c: 85
+        cover: wrapped
+        elapsed-s: 120
+      reveal: true
+    caption:
+      en: The wrapped model stays warmer because energy leaves more slowly under these conditions. Insulation supplies
+        no energy.
+      zh: 这些条件下，包覆模型因失去能量较慢而保持较暖。隔热不会供能。
+  - camera: view-probe
+    layers:
+    - transfer
+    - heat-paths
+    labels:
+    - probe
+    sim:
+      set:
+        bath-c: 25
+        elapsed-s: 0
+      reveal: true
+    caption:
+      en: Climate data describe outdoor air; a hot-spring value describes one location. Neither measures this model
+        cup.
+      zh: 气候资料描述室外空气，温泉数值描述特定地点，都不是这杯模拟水的实测。
+  - camera: view-hero
+    layers:
+    - transfer
+    - curves
+    - expansion
+    - heat-paths
+    labels:
+    - probe
+    - metal-spoon
+    - plastic-spoon
+    - rod
+    sim:
+      set: {}
+      reveal: true
+    caption:
+      en: Follow the links for air-conditioning, energy conversion, states of matter and other material properties.
+      zh: 跟随链接继续看空调、能量转换、物质三态及材料其他性质。
+  index:
+    parts:
+    - metal-spoon
+    - plastic-spoon
+    - cooling-beaker
+    - wrap
+    - rod
+    - probe
+    - cooling-water
+---
+
+{/* Fact/source audit: H03,H07,H08,H10,H29,H30,D02,D03,D08; S3,S4,S14,S15,S21,S27. */}
+
+<Lang en>
+
+Return to the spoon tips and compare them at the same elapsed time. A useful explanation begins with what changed and what stayed the same. In a <Term id="fair-test">fair test</Term>, relevant conditions are held the same so that the effect of the chosen change can be compared. Here that includes starting temperatures, bath temperature, immersion depth and comparable spoon shapes.
+
+Next name the observation. The metal path warms its tip more quickly in the hot-bath model. Then explain the transfer: energy passes from the warmer bath toward the cooler tip, more readily along that path under the chosen conditions. If several conditions change together, the reading alone cannot show which change caused the difference.
+
+The wrapped cup provides another explanation. With starting temperature, water amount, surroundings and time held the same, the wrapped model remains warmer. This supports slower energy loss under those conditions. The wrapper supplies no energy. Record the conditions as carefully as the reading, and keep observations from different experiments separate.
+
+Published local values need context too. Singapore climate information describes outdoor air over a stated period; a hot-spring temperature describes a particular collection point. Neither is a measurement of this simulated cup. Our room setting is a design choice. End with a sentence linking the change, observation and explanation. You can revise it after seeing another comparison. Continue with <TopicLink slug="aircon" ch="switch-on">air-conditioning</TopicLink>, <TopicLink slug="energy-conversion" ch="electrical-energy-at-home">energy conversion</TopicLink>, <TopicLink slug="states-of-matter" ch="mass-and-space">states of matter</TopicLink> and <TopicLink slug="materials" ch="choosing-materials">material choices</TopicLink> to connect these ideas to other processes.
+
+<More title={{"en":"An evidence sentence","zh":"用证据写一句话"}}>
+
+“With the starting temperature and time held the same, the wrapped model cooled less. This supports slower transfer out under these conditions.” This is an explanation frame for learning, not a published examination marking rule.
+
+</More>
+
+<More title={{"en":"Limits of the conclusion","zh":"结论的边界"}}>
+
+The model's chosen settings cannot rank all metals or plastics. Real objects differ in shape, heat capacity, contact and surroundings. The strongest conclusion names the conditions for which the evidence was obtained.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+回到勺子远端，在相同时刻比较读数。解释先交代改了什么、保持了什么。<Term id="fair-test">公平测试</Term>要把相关条件保持相同，才能比较所选改变的影响。这里包括初温、浴温、浸入深度和可比的勺形；只写材料名称，还不足以说明比较条件。
+
+接着说出观察：热浴模型中，金属通路使远端升温较快。再说明传递过程：能量从较暖温浴传向较冷远端，在给定条件下较容易沿这条通路通过。如果同时改变多个条件，单凭末温就不能分辨差别由哪项改变造成。
+
+包覆杯也能连成这样的解释。保持初温、水量、环境和时间相同，包覆模型仍较暖；这支持这些条件下能量损失较慢，并不是包覆层供能。记录读数时，也要同样认真地交代条件，把不同实验的观察分开。
+
+本地资料中的温度同样有条件。新加坡气候资料描述一段时期的室外空气，温泉值则属于特定取水处；两者都不是这杯模拟水的实测，模型室温只是设计选择。把改变、观察和解释连成句，看到新的对照后也可以修改。继续看<TopicLink slug="aircon" ch="switch-on">空调</TopicLink>、<TopicLink slug="energy-conversion" ch="electrical-energy-at-home">能量转换</TopicLink>、<TopicLink slug="states-of-matter" ch="mass-and-space">物质三态</TopicLink>和<TopicLink slug="materials" ch="choosing-materials">材料选择</TopicLink>，把证据用到其他过程。
+
+<More title={{"en":"An evidence sentence","zh":"用证据写一句话"}}>
+
+“保持初温和时间相同时，包覆模型降温较少。这支持这些条件下向外传热较慢。”这是一种学习解释的句架，不是已核实的考试评分规则。
+
+</More>
+
+<More title={{"en":"Limits of the conclusion","zh":"结论的边界"}}>
+
+模型所选参数不能排出所有金属或塑料的名次。真实物体还受形状、热容量、接触与环境影响。结论写清证据来自哪些条件，才不会超出观察能支持的范围。
+
+</More>
+
+</Lang>

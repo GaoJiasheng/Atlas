@@ -1,0 +1,161 @@
+---
+id: before-you-start
+order: 0
+kind: background
+title:
+  en: Before You Start
+  zh: 开始之前
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  layers:
+  - transfer
+  - curves
+  - expansion
+  - heat-paths
+  labels:
+  - bath-beaker
+  - probe
+  - rod
+  camera:
+    position:
+    - 2.6
+    - 2.2
+    - 3.25
+    target:
+    - 0
+    - 0.55
+    - 0
+    fov: 30
+  summary:
+    en: Read temperature, follow heat, and compare one condition at a time.
+    zh: 读温度、看传热，每次比较一个改变。
+  sim:
+    set:
+      elapsed-s: 0
+  beats:
+  - camera: view-hero
+    layers:
+    - transfer
+    - curves
+    - expansion
+    - heat-paths
+    labels:
+    - bath-beaker
+    - probe
+    - rod
+    sim:
+      set: {}
+    caption:
+      en: The bench brings measurement, heat transfer and expansion into one view.
+      zh: 实验台把测温、传热和膨胀放在同一个画面里。
+  - camera: view-heater
+    layers:
+    - curves
+    labels:
+    - heater
+    - heater-beaker
+    sim:
+      set:
+        heater-w: 100
+        elapsed-s: 0
+      reveal: true
+    caption:
+      en: The heater supplies energy to the water. Its input is separate from the temperature reading.
+      zh: 加热器向水供能。供能与温度读数分开显示。
+  - camera: view-probe
+    layers:
+    - transfer
+    - heat-paths
+    labels:
+    - probe
+    - probe-marker
+    sim:
+      set:
+        bath-c: 25
+        elapsed-s: 0
+      reveal: true
+    caption:
+      en: The probe reports temperature. It does not measure an amount of heat.
+      zh: 探头报告温度，不是物体里有多少热。
+  - camera: view-hero
+    layers:
+    - transfer
+    - curves
+    - expansion
+    - heat-paths
+    labels:
+    - bath-water
+    - cooling-water
+    sim:
+      set: {}
+      reveal: true
+    caption:
+      en: SIM marks a model result. Compare conditions without handling hot apparatus.
+      zh: SIM表示模型结果。你可以比较条件，不必操作热器材。
+  index:
+    parts:
+    - bath-beaker
+    - bath-water
+    - metal-spoon
+    - plastic-spoon
+    - probe
+    - heater
+    - cooling-beaker
+    - wrap
+    - rod
+    - rod-end-marker
+    - heater-beaker
+    - probe-marker
+    - cooling-water
+---
+
+{/* Fact/source audit: H02,H05,H21,H24,D01–D04,D08; S2,S3,S21,S27. */}
+
+<Lang en>
+
+The bench holds cups, spoons, a heater and a rod. A <Term id="thermometer">thermometer</Term> measures <Term id="temperature">temperature</Term>, a quantity used to describe how hot or cold something is. Follow the probe into the water: its sensing end is immersed, away from the bottom and sides. The stand holds it in place.
+
+The heater supplies energy. The spoon handles show a different process: energy passing along a material. The rod lets us examine a change in size. These are separate experiments arranged on a shared bench. Placing them beside each other does not join their energy transfers.
+
+SIM means a result calculated by this model. The time control starts at <Num s="S27">0 s</Num>. Advance it to inspect another instant; simply waiting does not advance the experiment. The views and decorative flow help you inspect an instant without changing its time. All hot apparatus stays on the screen.
+
+<More title={{"en":"Where the energy comes from","zh":"能量从哪里来"}}>
+
+The Sun can transfer energy without touching an object. An electric heater uses an electrical supply. Follow these different routes in <TopicLink slug="energy-conversion" ch="energy-from-the-sun">Energy conversion</TopicLink>.
+
+</More>
+
+<More title={{"en":"A model bench","zh":"模型实验台"}}>
+
+These generic objects illustrate processes. Their dimensions, thermal response and initial conditions are design choices. No thermometer on this page measures your room, and the calculated readings are not measurements of the illustrated spoons.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+实验台上有杯子、勺子、加热器和一根杆。<Term id="thermometer">温度计</Term>测量<Term id="temperature">温度</Term>，用读数描述冷热程度。沿着探头往下看，感温端浸在水中，没有碰到杯底或杯壁；支架把它固定在适当位置。
+
+加热器向水供能；勺柄显示能量沿材料传递；杆则用来观察尺寸变化。这几组实验共用一个台面，却各自独立。器材摆在旁边，不表示它们互相传热。
+
+SIM 表示模型算出的结果。时间控制从 <Num s="S27">0 s</Num> 开始，调到另一个时刻才会改变实验读数。等一会儿、转动视角或查看装饰流，都不会推进实验时间。这里的热器材只在屏幕中操作。
+
+<More title={{"en":"Where the energy comes from","zh":"能量从哪里来"}}>
+
+太阳不用接触物体，也能向物体传递能量。电热器则使用电源。到<TopicLink slug="energy-conversion" ch="energy-from-the-sun">“能量转换”</TopicLink>继续看这些不同的能量路径。
+
+</More>
+
+<More title={{"en":"A model bench","zh":"模型实验台"}}>
+
+这些通用器材用来说明过程。尺寸、热响应和起始条件都是设计选择。页面上的探头没有测量你所在房间的温度；图中勺子的计算读数，也不是对真实勺子进行实测所得。
+
+</More>
+
+</Lang>

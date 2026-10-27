@@ -29,6 +29,8 @@ import { OUTPUT_TAGS, tableCellDecimals, tableIssues, tablePredictIssues, tableS
 import { tableQuantity, tableStates } from './lib/sim/table';
 import { seedsIssues, seedsSchema } from './seeds-schema';
 import { seedsQuantity, seedsStates } from './lib/sim/seeds';
+import { heatIssues, heatSchema } from './heat-schema';
+import { heatQuantity, heatStates, heatUnit } from './lib/sim/heat';
 
 /** A control value: a toggle's boolean, a step's number, a choice's option id. */
 export const simValue = z.union([z.boolean(), z.number(), kebabId]);
@@ -951,7 +953,7 @@ export const simOverlaySchema = z.discriminatedUnion('kind', [
 export type SimOverlay = z.output<typeof simOverlaySchema>;
 export type ShadowCastOverlay = Extract<SimOverlay, { kind: 'shadow-cast' }>;
 
-export const SIM_KINDS = ['circuit', 'magnet', 'force', 'energy', 'life-cycle', 'matter', 'light', 'sort', 'materials', 'table', 'seeds'] as const;
+export const SIM_KINDS = ['circuit', 'magnet', 'force', 'energy', 'life-cycle', 'matter', 'light', 'sort', 'materials', 'table', 'seeds', 'heat'] as const;
 export type SimKind = (typeof SIM_KINDS)[number];
 
 export const MAX_SIM_CONTROLS = 16;
@@ -976,6 +978,7 @@ export const simSchema = z
     sort: sortSchema.optional(),
     table: tableSchema.optional(),
     seeds: seedsSchema.optional(),
+    heat: heatSchema.optional(),
   })
   .strict()
   // A table's `{ value, decimals }` cells: their outputs show those values with those decimals (lib/sim/text.ts).
@@ -1006,6 +1009,7 @@ export const PREDICT_MEANS = ['more', 'less', 'same', 'zero', 'positive', 'negat
 export const simTrySchema = z
   .object({
     vary: kebabId,
+    curve: z.object({ x: kebabId, y: z.array(kebabId).min(1).max(3), samples: z.number().finite().int().min(33).max(201).default(101) }).strict().optional(),
     also: z.array(kebabId).max(4).optional(),
     keep: z.array(keepItem).max(5).optional(),
     observe: z.array(kebabId).min(1).max(5),
@@ -1051,10 +1055,10 @@ export const simTrySchema = z
 export type SimTry = z.output<typeof simTrySchema>;
 
 /** `state.sim` of a chapter: the control values it starts from (not cumulative) and its try-it card. */
-export const chapterSimSchema = z.object({ set: simValues.optional(), try: simTrySchema.optional() }).strict();
+export const chapterSimSchema = z.object({ set: simValues.optional(), try: simTrySchema.optional(), reveal: z.boolean().optional() }).strict();
 export type ChapterSim = z.output<typeof chapterSimSchema>;
 /** `sim` of a beat: control values on top of the chapter's `set`. */
-export const beatSimSchema = z.object({ set: simValues }).strict();
+export const beatSimSchema = z.object({ set: simValues, reveal: z.boolean().optional() }).strict();
 
 /* ------------------------------------------------------------------ */
 /* Cross-checks                                                        */
@@ -1122,6 +1126,8 @@ export function quantityKind(sim: SimData, from: string): SimOutput['kind'] | nu
       return sim.materials ? materialsQuantity(sim.materials, from, sim.controls) : null;
     case 'table':
       return sim.table && sim.outputs.some((o) => o.id === from) ? tableQuantity(sim.table, from) : null;
+    case 'heat':
+      return sim.heat ? heatQuantity(sim.heat, from) : null;
     case 'seeds':
       return sim.seeds ? seedsQuantity(sim.seeds, from, sim.controls) : null;
     case 'light': {
@@ -1245,6 +1251,8 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
         ? materialsStates(sim.materials, from, sim.controls)
         : sim.kind === 'table' && sim.table
         ? tableStates(sim.table, from)
+        : sim.kind === 'heat' && sim.heat
+        ? heatStates(from)
         : sim.kind === 'seeds' && sim.seeds
         ? seedsStates(sim.seeds, from, sim.controls)
         : sim.kind === 'force'
@@ -1265,6 +1273,12 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
       const known = states ?? [];
       for (const st of Object.keys(o.states ?? {})) if (!known.includes(st)) issue(['outputs', i, 'states', st], `"${from}" is never "${st}" (${known.join(', ')})`);
     }
+    if (sim.kind === 'heat' && kind !== null) {
+      if (o.unit !== heatUnit(from)) issue(['outputs', i, 'unit'], `"${from}" needs unit ${heatUnit(from) ?? '(none)'}`);
+      if (o.format !== undefined) issue(['outputs', i, 'format'], 'heat outputs do not use clock time format');
+      if (o.kind === 'number' && o.states !== undefined) issue(['outputs', i, 'states'], 'number outputs do not have states');
+      if (o.kind === 'state') for (const st of Object.keys(o.states ?? {})) if (!(states ?? []).includes(st)) issue(['outputs', i, 'states', st], `unknown heat state "${st}"`);
+    }
     if (sim.kind === 'seeds' && sim.seeds && o.kind === 'state' && kind === 'state')
       for (const st of Object.keys(o.states ?? {})) if (!(states ?? []).includes(st)) issue(['outputs', i, 'states', st], `"${from}" is never "${st}" (${(states ?? []).join(', ')})`);
     if (sim.kind === 'life-cycle' && sim.lifeCycle && o.kind === 'state' && kind === 'state') {
@@ -1278,6 +1292,8 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
   if (sim.kind === 'materials' && !sim.materials) issue(['materials'], 'a materials sim needs `materials`');
   if (sim.kind === 'table' && !sim.table) issue(['table'], 'a table sim needs `table`');
   if (sim.table) tableIssues(sim.table, controls, sim.outputs, (ctx.partData ?? []) as readonly TableCheckPart[], tableCounts(sim)).forEach((x) => issue(x.path, x.message));
+  if (sim.kind === 'heat' && !sim.heat) issue(['heat'], 'a heat sim needs `heat`');
+  if (sim.heat) heatIssues(sim.heat, controls).forEach((x) => issue(['heat', ...x.path], x.message));
   if (sim.kind === 'seeds' && !sim.seeds) issue(['seeds'], 'a seeds sim needs `seeds`');
   if (sim.seeds) seedsIssues(sim.seeds, controls).forEach((x) => issue(['seeds', ...x.path], x.message));
   if (sim.materials) materialsIssues(sim.materials, controls).forEach((x) => issue(['materials', ...x.path], x.message));
@@ -2123,7 +2139,7 @@ function circuitIssues(c: CircuitData, controls: ReadonlyMap<string, SimControl>
 }
 
 /** What a chapter's (or beat's) sim names that the topic's sim does not have. */
-export function chapterSimIssues(where: string, s: { set?: SimValues | undefined; try?: SimTry | undefined } | undefined, sim: SimData | undefined): string[] {
+export function chapterSimIssues(where: string, s: { set?: SimValues | undefined; try?: SimTry | undefined; reveal?: boolean | undefined } | undefined, sim: SimData | undefined): string[] {
   if (!s) return [];
   if (!sim) return [`${where}sim: parts.json has no \`sim\``];
   const out: string[] = [];
@@ -2166,6 +2182,17 @@ export function chapterSimIssues(where: string, s: { set?: SimValues | undefined
       }
       const units = new Set(ys.map((id) => byId.get(id)?.unit ?? ''));
       if (units.size > 1) out.push(`${where}sim.try.record.chart.y: one graph, one unit (${[...units].join(', ')})`);
+    }
+    if (t.curve) {
+      const curve = t.curve;
+      const x = controls.get(curve.x);
+      if (sim.kind !== 'heat' || !sim.heat || curve.x !== sim.heat.time || x?.kind !== 'step') out.push(`${where}sim.try.curve.x: heat curves require the model's elapsed-time step control`);
+      if (new Set(curve.y).size !== curve.y.length) out.push(`${where}sim.try.curve.y: duplicate series`);
+      for (const id of curve.y) {
+        const o = byId.get(id);
+        if (!o) out.push(`${where}sim.try.curve.y: unknown output "${id}"`);
+        else if (o.kind !== 'number' || o.unit !== '°C' || !(o.from ?? o.id).startsWith('temperature:')) out.push(`${where}sim.try.curve.y: "${id}" must be a time-dependent temperature output in °C`);
+      }
     }
     if (Array.isArray(t.replay))
       for (const id of t.replay) if (byId.get(id)?.kind !== 'timeline') out.push(`${where}sim.try.replay: "${id}" is not a timeline output`);

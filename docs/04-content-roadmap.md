@@ -19,6 +19,7 @@
 | 新加坡的水（水循环 + 四大水喉的处理链；一块示意的新加坡切片） | science | space | SpaceScene/Model3D | Sci P5 Cycles in Matter and Water（Water）；SS P3 资源；详见 docs/24 | 2026（提前） | published（2026-10-14），7 章 33 拍 |
 | 新加坡的四大水喉（1867 年至今，蓄水池、厂址、柔佛河输水管） | geography | time | TimeScene/Geo（岛尺度底图，docs/17 C1） | SS P3 资源；详见 docs/24 §15 | 2026（提前） | published（2026-10-14），背景 + 5 章 23 拍 |
 | 光与影（光学实验台 + 暗箱 + 户外杆影；看见、直线传播、影子的形状与大小、太阳下的影子） | science | space + sim | SpaceScene/Model3D + 试一试（`sim`，kind light） | Sci P4 Energy Forms and Uses（Light）；详见 docs/35 | 2026（提前） | published（2026-10-20）：背景 + 7 章 41 拍 |
+| 热与温度（测温、勺柄传热、隔热、加热/冷却曲线、热胀冷缩） | science | space + sim | SpaceScene/Model3D + 试一试（`sim`，kind heat） | Sci P4 Energy Forms and Uses（Heat）；详见 docs/55 | 2026（提前） | published（2026-10-27）：背景 + 7章、37拍、34件；浏览器验收由主会话补跑 |
 | 大陆漂移与板块 | geography | time | TimeScene/Geo+morph | 课外拓展（地理） | 2028–2029 |
 | 地球内部与火山剖面 | geography | space + sim | SpaceScene/Model3D + 既有table试一试 | 地理拓展（非新增PSLE必考单元）；详见 docs/48 | 2026（提前） | published（2026-10-27）：背景 + 7章、36拍、91件 |
 | 电路是怎么工作的（手电筒 + 电路板） | science | space + sim | SpaceScene/Model3D + 试一试（`sim`，kind circuit） | Sci P5 Electrical System；详见 docs/23 | 2026 提前（与植物并行） | published（2026-10-14）：6 章 31 拍，「试一试」扩展（`sim`）随本主题上线 |

@@ -1095,5 +1095,15 @@
   "math.specimen.net": "A cube net, folded half way",
   "math.grid.faces": "faces",
   "math.net.work.oppositeDone": "● opposite ●",
-  "math.net.work.bottomDone": "found: the bottom"
+  "math.net.work.bottomDone": "found: the bottom",
+  "space.try.curve": "Model curve",
+  "space.try.elapsed": "Elapsed time (s)",
+  "space.try.zero": "Back to 0 s",
+  "space.try.modelTable": "Model value table",
+  "space.try.conditionsChanged": "Conditions changed; start a new record.",
+  "space.try.comparedConditions": "Compared conditions",
+  "space.try.conditions": "Conditions",
+  "space.try.before": "Before",
+  "space.try.after": "After",
+  "space.try.showCurrent": "Show current result"
 }

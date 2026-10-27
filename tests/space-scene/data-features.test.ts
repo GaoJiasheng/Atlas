@@ -59,6 +59,10 @@ describe('telemetry (G6)', () => {
     expect(lagValue(0, 100, 5, 5)).toBeCloseTo(100 * (1 - Math.exp(-1)));
     expect(lagValue(1.93, 1.01, 1e6, 10)).toBeCloseTo(1.01);
   });
+  it('zero-lag model readings are exact immediately, including at zero elapsed transition time', () => {
+    expect(lagValue(25, 39.285714285714285, 0, 0)).toBe(39.285714285714285);
+    expect(lagValue(85, 70.08863758451716, 0.01, 0)).toBe(70.08863758451716);
+  });
   it('formats with the decimals the data is written with', () => {
     expect(readingDecimals({ idle: 1.93, run: 3 })).toBe(2);
     expect(readingDecimals({ idle: 0, run: 3600 })).toBe(0);

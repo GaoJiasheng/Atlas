@@ -86,6 +86,8 @@ import { cardTimelines } from './lib/sim/replay';
 import { isControlValue, resolveSimValues, stepValue } from './lib/sim/controls';
 import { evaluateSimOnStage } from './lib/sim/carrier';
 import { tableSources } from './lib/sim/table';
+import { curveDiagnostics } from './lib/sim/curve';
+import { trialContextPatch } from './lib/sim/session';
 import type { SimTry } from './sim-schema';
 import { SIM_KEYS } from '../core/controls';
 import './space-scene.css';
@@ -384,16 +386,21 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
     });
   }, [store, isPresenting]);
 
-  // A predict-then-observe answer belongs to the scene it was given in: a chapter, a beat or a link resets it.
-  useEffect(
-    () =>
-      store.subscribe((st, prev) => {
-        if (st.transition.id === prev.transition.id) return;
-        const { reason } = st.transition;
-        if (reason === 'chapter' || reason === 'state' || reason === 'url') ui.setState({ simPredict: null });
-      }),
-    [store, ui],
-  );
+  // Reconcile every control route, including keyboard, deep links, beat changes and test API.
+  useEffect(() => {
+    const reconcile = (st: ReturnType<typeof store.getState>, prev?: ReturnType<typeof store.getState>) => {
+      const sim = file.sim;
+      if (!sim || !st.chapter) return;
+      if (prev && st.sim === prev.sim && st.chapter === prev.chapter && st.transition.id === prev.transition.id) return;
+      const state = chapters.find((c) => c.id === st.chapter)?.state as SpaceChapterState | undefined;
+      const transition = prev !== undefined && st.transition.id !== prev.transition.id;
+      const reset = transition && ['chapter', 'state', 'url'].includes(st.transition.reason);
+      const patch = trialContextPatch(ui.getState(), st.chapter, resolveSimValues(sim, st.sim), state?.sim?.try?.vary, reset);
+      if (Object.keys(patch).length > 0) ui.setState(patch);
+    };
+    reconcile(store.getState());
+    return store.subscribe(reconcile);
+  }, [store, ui, file, chapters]);
 
   /* ---------- TRY IT: `[` `]` step the varied control, `T` flips the card's first switch ---------- */
   const simCard = useScene<SpaceSceneExt, SimTry | null>((st) => {
@@ -584,6 +591,10 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
             outputs: evaluateSimOnStage(sim, file, values, st.pose, card?.observe).outputs,
             try: card,
             table: ui.getState().simTables[st.chapter ?? ''] ?? [],
+            ...(card?.curve ? { curve: curveDiagnostics(sim, values, card.curve) } : {}),
+            tableContext: ui.getState().simTableContexts[st.chapter ?? ''] ?? null,
+            prediction: ui.getState().simPredict,
+            reveal: ui.getState().simReveal,
             timeline,
             replays: ui.getState().simReplay.n,
             // A table model (docs/40 §4.2): the sources of the row each typical output comes from now.

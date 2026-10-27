@@ -1,0 +1,224 @@
+---
+id: heat-along-spoons
+order: 2
+title:
+  en: Heat Along a Spoon
+  zh: 勺柄上的传热
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  layers:
+  - transfer
+  - heat-paths
+  labels:
+  - metal-spoon
+  - plastic-spoon
+  - bath-water
+  camera:
+    position:
+    - -0.2
+    - 1.25
+    - 0.8
+    target:
+    - -0.55
+    - 0.86
+    - 0.08
+    fov: 30
+  summary:
+    en: Follow energy from a hotter bath toward a cooler tip.
+    zh: 看能量从较热温浴传向较冷远端。
+  sim:
+    set:
+      elapsed-s: 0
+      bath-c: 85
+    try:
+      vary: elapsed-s
+      also:
+      - bath-c
+      keep:
+      - en: Same spoon shapes and immersion depth
+        zh: 相同勺形与浸入深度
+      - en: Same starting tip temperature and effective tip capacities
+        zh: 相同远端初温与有效热容量
+      observe:
+      - metal-c
+      - plastic-c
+      - tip-comparison
+      curve:
+        x: elapsed-s
+        y:
+        - metal-c
+        - plastic-c
+        samples: 101
+      record: true
+      predict:
+        prompt:
+          en: The tips start at 25 °C in an 85 °C bath. At the later model time, which tip will be warmer?
+          zh: 两个远端从 25 °C 开始，温浴维持 85 °C。推进模拟时间后，哪个远端较暖？
+        start:
+          elapsed-s: 0
+          bath-c: 85
+        change:
+          elapsed-s: 60
+        observe: tip-comparison
+        options:
+        - id: metal
+          label:
+            en: Metal path warmer
+            zh: 金属通路较暖
+          means: first-warmer
+        - id: same
+          label:
+            en: Same temperature
+            zh: 温度相同
+          means: same
+        - id: plastic
+          label:
+            en: Plastic path warmer
+            zh: 塑料通路较暖
+          means: second-warmer
+  beats:
+  - camera: view-spoons
+    layers:
+    - transfer
+    - heat-paths
+    labels:
+    - metal-spoon
+    - plastic-spoon
+    - bath-water
+    sim:
+      set:
+        bath-c: 85
+        elapsed-s: 0
+    caption:
+      en: The tips start together. The bath is held hotter than both tips.
+      zh: 两个远端从相同温度开始，温浴维持在比它们更高的温度。
+  - camera: view-spoons
+    layers:
+    - transfer
+    - heat-paths
+    labels:
+    - metal-spoon
+    - metal-tip-marker
+    - plastic-tip-marker
+    sim:
+      set:
+        bath-c: 85
+        elapsed-s: 60
+      reveal: true
+    caption:
+      en: At the same model time, the metal-path tip is warmer. Energy travels more readily along that path.
+      zh: 同一模拟时刻，金属通路远端较暖，能量较容易沿这条通路传过去。
+  - camera: view-spoons
+    layers:
+    - transfer
+    - heat-paths
+    labels:
+    - metal-tip-marker
+    - plastic-tip-marker
+    sim:
+      set:
+        bath-c: 85
+        elapsed-s: 120
+      reveal: true
+    caption:
+      en: Both tips warm toward the bath temperature. The poorer conducting path still transfers energy.
+      zh: 两个远端都向温浴温度靠近。不良导热通路仍会传递能量。
+  - camera: view-spoons
+    layers:
+    - transfer
+    - heat-paths
+    labels:
+    - bath-water
+    - metal-tip-marker
+    - plastic-tip-marker
+    sim:
+      set:
+        bath-c: 5
+        elapsed-s: 60
+      reveal: true
+    caption:
+      en: In the colder bath, the metal-path tip cools faster in this model. Heat still goes from hotter to colder.
+      zh: 较冷的温浴中，金属通路远端在模型里降温较快。热仍从较热处传向较冷处。
+  - camera: view-spoons
+    layers:
+    - transfer
+    - heat-paths
+    labels:
+    - metal-tip-marker
+    - plastic-tip-marker
+    sim:
+      set:
+        bath-c: 25
+        elapsed-s: 300
+      reveal: true
+    caption:
+      en: When bath and tips start at equal temperature, no net transfer changes either tip reading.
+      zh: 温浴与远端从同温开始，没有改变远端读数的净传热。
+  index:
+    parts:
+    - bath-beaker
+    - bath-water
+    - metal-spoon
+    - metal-tip-marker
+    - plastic-spoon
+    - plastic-tip-marker
+---
+
+{/* Fact/source audit: H03,H04,H06,H07,H10,H11,H23,D03,D07; S1,S3,S4,S21,S27. */}
+
+<Lang en>
+
+The spoon bowls sit in the same bath, with comparable shapes and immersion depths. Their distant tips begin at the same temperature. The bath is maintained by an external source, so it stays at its chosen temperature while energy passes between the bath and the spoons. It is a fixed condition of this model.
+
+<Term id="heat-transfer">Heat transfer</Term> is the passing of energy because of a temperature difference. Here the warmer bath transfers energy toward the cooler tips. Metal is generally a <Term id="good-conductor">good conductor of heat</Term>: under comparable conditions, energy passes through it readily. At the same model time, its tip has warmed more than the plastic tip. Both tips warm; the slower path still carries energy.
+
+<Figure src="figures/heat-spoons" alt={{"en":"A metal spoon and a plastic spoon with continuous handles and shallow bowls immersed in the same beaker of water.","zh":"金属勺与塑料勺的浅凹勺碗浸在同一杯水中，两支勺子都有连续完整的柄。"}} caption={{"en":"Comparable spoon shapes in the same bath. Illustration; no measured temperatures are implied.","zh":"相同温浴中两支形状可比的勺子。示意图不代表实测温度。"}} />
+
+Change to a bath colder than the starting tips. The direction reverses: energy leaves each tip toward the colder bath. The metal path now cools its tip faster in this model. Conducting readily does not mean a material must always become warmer. The temperature difference determines the direction.
+
+When bath and tips start at the same temperature, there is no net transfer between them. This condition is <Term id="thermal-equilibrium">thermal equilibrium</Term>. Use the time control to compare the tips at a matching instant. Then change the bath condition and make a fresh comparison. If you turn on the decorative flow, its moving marks represent energy transfer, not water or metal moving along the handle.
+
+<More title={{"en":"Effective spoon tips","zh":"有效远端模型"}}>
+
+Each model tip has an effective heat capacity of <Num s="S27">20 J/K</Num>. The different paths are design choices, not measured material conductivities. Real spoon temperatures vary along their length and also depend on shape, heat capacity and losses to air.
+
+</More>
+
+<More title={{"en":"The bath stays fixed","zh":"温浴保持恒温"}}>
+
+An external source maintains the bath. We do not calculate a closed energy balance for a finite cup and its spoons. Equal temperature means no net transfer; it does not mean microscopic energy exchanges cease.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+两个勺碗浸在同一温浴里，形状和浸入深度可比，远端从相同温度开始。温浴由外部维持恒温；即使它与勺子之间传递能量，设定的浴温也不变。这是模型的固定条件。
+
+<Term id="heat-transfer">热传递</Term>是温差造成的能量传递。这里，较暖温浴把能量传向较冷远端。金属通常是<Term id="good-conductor">热的良导体</Term>，在可比条件下较容易传热。同一模拟时刻，金属通路的远端升温较多，塑料通路也在升温，只是较慢。
+
+<Figure src="figures/heat-spoons" alt={{"en":"A metal spoon and a plastic spoon with continuous handles and shallow bowls immersed in the same beaker of water.","zh":"金属勺与塑料勺的浅凹勺碗浸在同一杯水中，两支勺子都有连续完整的柄。"}} caption={{"en":"Comparable spoon shapes in the same bath. Illustration; no measured temperatures are implied.","zh":"相同温浴中两支形状可比的勺子。示意图不代表实测温度。"}} />
+
+把浴温改得比远端初温低，传递方向就反过来：能量从远端传向较冷温浴。这个模型里，金属通路使远端冷却得更快。容易导热，不表示总会升温；方向取决于哪一处较热。
+
+温浴和远端从同温开始时，两者之间没有净传热，这种状态叫<Term id="thermal-equilibrium">热平衡</Term>。先选相同时刻比较，再改变浴温另作对照。开启装饰流时，移动标记表示能量传递，并不是水或金属沿勺柄移动。比较远端读数时，先仔细确认浴温和经过时间一致。换成冷浴后，要把它看作从相同初温重新开始的对照，不能把热浴中已经变暖的远端状态偷偷带进新实验。
+
+<More title={{"en":"Effective spoon tips","zh":"有效远端模型"}}>
+
+模型给每个远端相同的有效热容量 <Num s="S27">20 J/K</Num>，两条通路的快慢是设计选择，不是实测材料导热率。真实勺子沿长度有温差，响应还与形状、热容量和向空气散热有关。
+
+</More>
+
+<More title={{"en":"The bath stays fixed","zh":"温浴保持恒温"}}>
+
+外部来源维持浴温，模型没有计算有限杯水与勺子的封闭能量账。同温表示没有净传热，不表示微观能量交换全部停止。
+
+</More>
+
+</Lang>
