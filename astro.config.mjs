@@ -75,6 +75,13 @@ export default defineConfig({
         cleanupOutdatedCaches: true,
         runtimeCaching: [
           {
+            // A deep-time topic has ten lazy frames plus independent modern evidence files.
+            // Keep its visited local assets together, apart from the eight-entry historical map cache.
+            urlPattern: /\/geo\/(?:de-|sample-de-)[^/]+\.json$/,
+            handler: 'CacheFirst',
+            options: { cacheName: 'atlas-deep-time-geo', expiration: { maxEntries: 32, maxAgeSeconds: 60 * 60 * 24 * 30 }, cacheableResponse: { statuses: [200] } },
+          },
+          {
             urlPattern: /\/geo\/[^/]+\.json$/,
             handler: 'CacheFirst',
             options: {

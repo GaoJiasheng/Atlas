@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "coordinateSpace": "modern",
+  "cards": [
+    {
+      "id": "sample-de-card-thailand",
+      "kind": "reference-card",
+      "role": "regional-find",
+      "coordinateSpace": "modern",
+      "title": {
+        "en": "TEST card: thailand",
+        "zh": "测试卡：thailand"
+      },
+      "summary": {
+        "en": "Synthetic evidence card without a map coordinate.",
+        "zh": "不带地图坐标的合成证据卡。"
+      },
+      "detail": {
+        "en": "TEST/DESIGN: no excavation location is implied.",
+        "zh": "测试／设计：不暗示挖掘位置。"
+      },
+      "sources": [
+        "S1"
+      ],
+      "regionLabel": {
+        "en": "TEST region TH",
+        "zh": "测试区域 TH"
+      },
+      "countryCode": "TH",
+      "precision": "region-only",
+      "linkedCountryFeatureId": "sample-de-country-th"
+    },
+    {
+      "id": "sample-de-card-laos",
+      "kind": "reference-card",
+      "role": "regional-find",
+      "coordinateSpace": "modern",
+      "title": {
+        "en": "TEST card: laos",
+        "zh": "测试卡：laos"
+      },
+      "summary": {
+        "en": "Synthetic evidence card without a map coordinate.",
+        "zh": "不带地图坐标的合成证据卡。"
+      },
+      "detail": {
+        "en": "TEST/DESIGN: no excavation location is implied.",
+        "zh": "测试／设计：不暗示挖掘位置。"
+      },
+      "sources": [
+        "S1"
+      ],
+      "regionLabel": {
+        "en": "TEST region LA",
+        "zh": "测试区域 LA"
+      },
+      "countryCode": "LA",
+      "precision": "country-only"
+    },
+    {
+      "id": "sample-de-card-pahang",
+      "kind": "reference-card",
+      "role": "regional-find",
+      "coordinateSpace": "modern",
+      "title": {
+        "en": "TEST card: pahang",
+        "zh": "测试卡：pahang"
+      },
+      "summary": {
+        "en": "Synthetic evidence card without a map coordinate.",
+        "zh": "不带地图坐标的合成证据卡。"
+      },
+      "detail": {
+        "en": "TEST/DESIGN: no excavation location is implied.",
+        "zh": "测试／设计：不暗示挖掘位置。"
+      },
+      "sources": [
+        "S1"
+      ],
+      "regionLabel": {
+        "en": "TEST region MY",
+        "zh": "测试区域 MY"
+      },
+      "countryCode": "MY",
+      "precision": "region-only"
+    },
+    {
+      "id": "sample-de-card-museum",
+      "kind": "reference-card",
+      "role": "museum-origin",
+      "coordinateSpace": "modern",
+      "title": {
+        "en": "TEST card: museum",
+        "zh": "测试卡：museum"
+      },
+      "summary": {
+        "en": "Synthetic evidence card without a map coordinate.",
+        "zh": "不带地图坐标的合成证据卡。"
+      },
+      "detail": {
+        "en": "TEST/DESIGN: no excavation location is implied.",
+        "zh": "测试／设计：不暗示挖掘位置。"
+      },
+      "sources": [
+        "S1"
+      ],
+      "regionLabel": {
+        "en": "TEST region US",
+        "zh": "测试区域 US"
+      },
+      "countryCode": "US",
+      "precision": "region-only"
+    }
+  ]
+}

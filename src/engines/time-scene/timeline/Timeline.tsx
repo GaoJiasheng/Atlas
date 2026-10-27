@@ -73,7 +73,7 @@ const LANES = { k: [0, 12], m: [14, 34], e: [36, 48] } as const;
 const LANES_H = 48;
 
 export function formatNumber(t: number, model: TimeModel, locale: Locale): string {
-  return formatTime(fromNumber(t, model.scale, { precision: coarser(model.datePrecision, precisionFor(model.span)) }), locale, undefined, model.mixedEra);
+  return formatTime(fromNumber(t, model.scale, { maDigits: model.maDigits, precision: coarser(model.datePrecision, precisionFor(model.span)) }), locale, undefined, model.mixedEra, model.maDigits);
 }
 
 /** Mono readout: upper-case in English (`15 FEB 1942`). */

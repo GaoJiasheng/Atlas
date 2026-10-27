@@ -559,3 +559,46 @@ UI绑定：modernInset存在时注册现成card/cardToggle（不受零实体参�
 - [ ] 最终记录源/派生数据、章节/拍数、实际E-DE实现、全部测试及任何偏离到§9；没有把未测项写为通过。§8全绿后直接published。
 
 ## 9. 引擎记录（施工后填写）
+
+
+### 9.1 引擎实现记录 · 2026-10-27
+
+E-DE1 已新增独立 `reconstruction-map.ts` / `reconstruction-style.ts`，GeoStage/controller 以传入清单在任何普通现代 style/source 构造之前分流。初始 source 为空；从本地 stem 加载一帧 TopoJSON 后一次提交，不形变、不叠加旧海岸；失败清空、不回退现代数据。maxZoom=3.6、world copies 关闭、±85.051129°限制。generation 与 AbortSignal 取消过期工作；MapLibre worker 完成 source 处理前隐藏几何并保持 loading；解码缓存最多当前及最近两个相邻帧。换 theme 只改 paint，同 frameId 拖动不重传几何；地图实际提交状态经 `reconstructionStats` / `onReconstruction` 供 PLATE 与 geology API 使用。
+
+E-DE2 / E-DE3 构建 schema、实际文件读取 / source-ID / 坐标空间校验、独立 occurrence 区间筛选及 MY 先抑制后聚合、现代 inset / 无坐标卡 / inspector / index 接线、Ma 精度与现有 b / 新 inset URL 字段均以本节对应实现文件为施工范围；最终集成检查与内容数值另记，不以夹具数字替代真实资料。固定 base 可出现在章 / 拍 layers，界面不为重建内置不可用图层注册开关。
+
+新增 draft `sample-deep-time`（TEST/DESIGN，七帧、四 collections / 五 occurrences、两个参照点、四 cards、合成抑制 2 collections / 3 occurrences），其几何仅测试引擎，明确不是地球复原。fixture 的来源 / 抑制说明在其 `data/SOURCES.md`，不混入本题事实。
+
+目前本子任务已运行 `pnpm test -- tests/time-scene/reconstruction-map.test.ts tests/time-scene/sample-deep-time.test.ts`：2 files / 10 tests 通过。新增 Playwright fixture 文件尚未执行，最终 check / validate / full test / build / e2e / shoot 由主施工验收记录补齐。真 GPU / iPad p95、首屏 gzip / 地图总字节及离线检查尚未记录；不能把此阶段单测通过当作 §8 发布验收。
+
+### 9.2 内容与集成 · 2026-10-27
+
+本 worktree 完成 `dinosaur-earth`：背景加七章、35拍，双语正文每章四段及2–3个细看、15条名词、26条来源（含S67设计说明）、十张独立PaleoDEM帧、两个现代参照点、四张无坐标证据卡及1274个collection/2103条occurrence。主题按本次用户指定保留 `published`；这不是未执行发布验收的替代证明。首页smoke计数同步到34个published主题、68个badge、geography两题及WW2图版34。
+
+数据输入与算法见 `scripts/geo/dinosaur-earth/{build.py,SOURCES-GEO.md,build-report.json,verify.ts}`。每帧从固定CSV的z>0最近样本格元导出，保留采样空白和接缝差，裁边不当海岸；独立解码2317个环，zero-area=0、self-crossing=0。公开数据排除MY精确位置，3collections/3occurrences的聚合抑制数可追溯；24178的三条121.4–100.5Ma区间逐条保留。原料、原始MY识别字段及完整ZIP没有部署。
+
+`deep-time-transport.ts` 在构建校验完整数据之后，令静态topic响应仅携带清单、普通control/source/glossary，现代文件由本地 `/geo/` 一次加载；避免在data.json和public/geo重复部署同一组现代矢量与记录。GeoStage直接懒载重建模块，仍保留controller最前面的防御分流；不构造普通现代主图。独立磁盘缓存 `atlas-deep-time-geo` 的32个条目容纳本题及sample已访问的帧/现代文件，避免旧8条geo缓存驱逐其完整访问集；解码内存缓存依然最多三帧。离线行为已写e2e，尚未运行。
+
+共享core改动限于三项URL字段的类型/编解码/转交，以及可选 `openReader()` 用原阅读列/窄屏抽屉显示证据。没有改store、keys、registry或 `[slug].astro`；静态data响应只加一层按需投影。TimeScene schema新增清单、index及现代绑定；b复用原参数。重建年代不缓动，镜头可缓动，避免经过中间帧时读数和筛选不一致；日期主题仍沿用原时间缓动。选择跟随当前可见高亮，窗外索引只打开明确提示和“全部所选记录”操作，不暗切筛选。相同量化年代的自由拖动也清b。
+
+三张既有批准图均经现成illustrate管线及只改变编码质量的优化，逐张看过成品。800/1600封面65,226/255,548 bytes；地层与小行星图118,092/94,556 bytes。caption限制其为通用/概念图，不能据图测量或指认物种。CC BY输入的地形改编文件按本规格为Atlas CC BY-NC-SA；PBDB点保持CC0、NE保持公有领域，文字/图另族。LICENSE-CONTENT、THIRD-PARTY-NOTICES.md、AUDIT.md与中文优先REVIEW.md已补齐。
+
+### 9.3 与§4的出入、关卡及未验收项
+
+| 项目 | 实际决定与原因 |
+|---|---|
+| SVG投影依赖 | 仓库和已装依赖没有规格假设的d3-geo；复用既有mercY和SVG裁切，不加依赖、不加第二个MapLibre。 |
+| 现代几何文件 | NE两个文件为保留稳定ISO A2 id的FeatureCollection，构建加载器也支持命名TopoJSON；清单/逐条记录仍按§4严格schema，全部子文件实读校验。 |
+| 离线原始书目 | 现代清单新增可选 `referenceFile` 指向 `{version:1,references:{"<PBDB reference_no>":"<original primary_reference>"}}`。815条原始书目只部署一份，构建逐条核实2103个occurrence的引用；inspector离线显示原文书目及双语说明。此字段补足原规格只列文献号、未安排完整书目传输的问题。 |
+| 来源编号 | 现有全站sources只接受S#；S01归S1，DE-S01/02/04/05/06归S61/62/64/65/66，DE-S03/07为S29别名；映射留在SOURCES，不扩大共享source语法。 |
+| 夹具规模 | draft `sample-deep-time`用七张合成帧、四collection/五occurrence、二reference、四card；十帧真实资料只进正式题。synthetic抑制2/3明确标TEST/DESIGN。 |
+| 地图数据预算 | 18个public资源1,924,316 bytes，加28,388-byte静态topic响应合计1,952,704 bytes，低于2,000,000；详见bundle-report.json。现代数据没有重复打包。 |
+| 首次JS预算 | 壳层约129KB gzip；包含地图就绪路径458,408 bytes gzip，**高于400,000 bytes**，未通过该项。已隔离历史controller；没有扩大预算、降低真实几何或用壳层数字冒充地图完整加载量。精确依赖图、压缩方法及排除项见bundle-report.json。进一步压缩共享MapLibre/React/HUD需要独立体积工作，不在本次跨分支小改core的范围内。 |
+| 浏览器与真实设备 | 按两个BRIEF明确禁止在本沙箱运行shoot/e2e；没有使用个人浏览器/桌面规避。布局/键盘/深链截图、真实网络隔离及断网、iPad筛选p95≤16ms和缓存切帧p95≤50ms均**未测**。未报SwiftShader数字。 |
+| 姊妹题 | 按本次用户要求只写六个规定目标，并保留在REVIEW。目标分支未合入使14次EN/ZH TopicLink校验失败；未造占位题、未改验证器豁免。 |
+
+最终非浏览器关卡（本worktree）：`pnpm check` 776 files、0 errors / 0 warnings（3条既有unused提示）；`pnpm test` 164 files、4312 tests全过，其中新增六个TimeScene测试文件76条。`pnpm validate` 58 topics、14 errors / 0 warnings，全部是上述缺失姊妹题；`pnpm build`因此在验证阶段失败。另直接运行 `pnpm exec astro build` 校验静态生成，119 pages成功；它不是标准build门槛通过，也不证明跨题链接有效。`verify.ts`通过实际部署文件的十帧/环/记录/字节检查；`git diff --check`通过。
+
+新增 `tests-e2e/{sample-deep-time,dinosaur-earth}.spec.ts`，含双语双theme、35拍完整重载、逐occurrence/MY、视图不改主camera、隐藏刷新、来源/ESC、列表键盘、演示恢复、窄屏证据、缺帧/迟响应、离线缓存。shoot的TimeScene高亮检查现纳入现代引线/具名卡data-id；现代题才开启整页b链接对照，旧题行为保持。以上代码存在不表示已运行。
+
+主会话待跑（端口固定5423）：sample-deep-time与dinosaur-earth的 `shoot --beats --keys --layout`（正式题两语言/两theme），sample-time、ww1、ww2、singapore-land-use等旧地图的前后视觉回归，以及 `CI=1 ATLAS_E2E_PORT=5423 pnpm e2e`；另做真iPad/GPU预算。§8未整体打勾，发布验收仍有以上明确差距。

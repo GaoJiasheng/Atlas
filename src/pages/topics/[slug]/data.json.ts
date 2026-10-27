@@ -6,6 +6,7 @@
  * independent: text is bilingual inside. SceneHost fetches it on the client instead of
  * receiving it as island props (which would embed it, roughly doubled, in every page).
  */
+import { compactDeepTimeData } from '../../../engines/time-scene/deep-time-transport';
 import type { APIRoute } from 'astro';
 import { getTopics, topicEngineData, type TopicEntry } from '../../../lib/content';
 
@@ -15,6 +16,6 @@ export async function getStaticPaths() {
 }
 
 export const GET: APIRoute<{ topic: TopicEntry }> = ({ props }) =>
-  new Response(JSON.stringify(topicEngineData(props.topic)), {
+  new Response(JSON.stringify(compactDeepTimeData(topicEngineData(props.topic))), {
     headers: { 'Content-Type': 'application/json; charset=utf-8' },
   });

@@ -50,6 +50,8 @@ export interface SceneContextValue {
   hud: HudStore;
   /** The actions behind the HUD buttons and keys (modes, presets, HUD, reader). */
   actions: HudActions;
+  /** Show selection details in the docked reader or expand the narrow-screen sheet. */
+  openReader?(): void;
   topic: TopicMeta;
   chapters: readonly Chapter[];
   locale: Locale;

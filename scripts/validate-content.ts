@@ -1,3 +1,4 @@
+import { loadDeepTime } from '../src/engines/time-scene/deep-time-build';
 /**
  * Content validator: `pnpm validate` (also runs before `pnpm build`).
  *
@@ -386,6 +387,7 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
 
   const ids = new IdRegistry(topicFile);
   ids.add(topic.id, 'topic');
+  if (topic.basemap?.reconstruction) for (const id of ['base', 'fossils-modern']) ids.add(id, 'reconstruction layer');
   for (const layer of topic.datedLayers ?? []) ids.add(layer.id, 'dated layer');
   const schemas = engineSchemas(topic.engine, topic.stage);
 
@@ -410,6 +412,11 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
   }
 
   let data: unknown;
+  if (topic.basemap?.reconstruction) {
+    try { Object.assign(raw, loadDeepTime(topic, raw, (stem) => { const f = join(PUBLIC_DIR, 'geo', `${stem}.json`); return existsSync(f) ? readJson(f) : undefined; })); }
+    catch (e) { error(topicFile, String(e)); return; }
+  }
+  if (topic.maDigits !== undefined && (typeof (raw.control as { keyframes?: { t?: unknown }[] } | undefined)?.keyframes?.[0]?.t !== 'object')) error(topicFile, 'maDigits requires geological Ma control frames');
   const parsedData = schemas.data.safeParse(withSharedFitness(raw, shared));
   if (parsedData.success) {
     data = parsedData.data;
@@ -507,6 +514,16 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
     const chapter = parsed.data;
     chapterInfos.push({ id: chapter.id, order: chapter.order, kind: chapter.kind, state: chapter.state });
     ids.add(chapter.id, 'chapter', file);
+    if (topic.basemap?.reconstruction || topic.maDigits !== undefined) {
+      const st = chapter.state as TimeChapterState;
+      for (const when of [st.time, ...(st.beats ?? []).map((b) => b.t)])
+        if (when !== undefined && typeof when !== 'object') error(file, 'geological TimeScene requires Ma in every chapter and beat');
+      if (topic.basemap?.reconstruction) {
+        const objects = new Set([...(data as TimeSceneGeoData).deepTime?.points ?? [], ...(data as TimeSceneGeoData).deepTime?.cards ?? []].map((p) => p.id));
+        for (const id of [...st.index ?? [], ...st.highlight ?? [], ...(st.beats ?? []).flatMap((b) => b.highlight ?? [])]) if (!objects.has(id)) error(file, `deep-time object reference not found: ${id}`);
+        for (const layer of [...st.layers ?? [], ...(st.beats ?? []).flatMap((b) => b.layers ?? [])]) if (layer !== 'fossils-modern' && layer !== 'base') error(file, `reconstruction has no layer ${layer}`);
+      }
+    }
 
     const prev = orders.get(chapter.order);
     if (prev) error(file, `order ${chapter.order} duplicates ${prev}`);

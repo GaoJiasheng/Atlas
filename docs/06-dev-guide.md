@@ -2214,3 +2214,30 @@ pnpm tsx scripts/geo/lib/check.ts --topic ww2         # MapLibre（Playwright）
 - **按年代裁过的要素不再沿底图海岸**（docs/28 P2，`simplify.ts`）：`pipeline.coast.excludeBox: [w, s, e, n]`（缺省 `null`）：这个框里不做海岸一步。底图陆地和水都挖掉这个框，于是框里的要素不被擦水、框外的 holder 也不会补缝长进来；框里的要素保持 compose 给它的海岸（新加坡要素已按时代 `intersect` 到 `work/coast-L#.geojson`）；柔佛、廖内等框里的邻国要素也就不再裁到 10m 海岸，需要的话在 compose 里 `intersect` 到 10m 陆地。偏差统计在框里不跳过"海里"的点。
 - **分框细度**（docs/28 P3，`simplify.ts`）：`pipeline.focus` 的一项可以写成 `{ "box": [w, s, e, n], "fineKm": 0.005 }`，这个框用自己的固定间隔（岛尺度要几米，区域框照旧 1 km 上下）：先从普通焦点框里挖出来，单独简化，用自己那份陆地沿海岸（与 inside / outside 两半同一做法）；排在前面的框在重叠处优先。自动预算搜索只调普通焦点框的间隔。没有这种项、没有 `excludeBox` 时产物与以前逐字节相同（ww1、ww2、warring-states、four-taps 的 simplify 改前改后各跑一次比对过）。
 - 东南亚近景底图：`scripts/build-geo.ts` 另出 `public/geo/land-10m-sea.json`（Natural Earth 1:10m 陆地，裁到 95°E–125°E、9°S–22°N，TopoJSON，约 234 KB）。GeoStage 在镜头 zoom ≥ 6.5 且视野与该框相交时才 fetch；zoom 7 起绘制、到 8 完全显现：框内先铺一层水色遮住 50m 陆地（不透明度 7→8 渐入），10m 陆地和海岸线叠在上面，颜色同为 `--land` / `--land-edge` / `--water` token。其他主题不加载它。
+
+
+### TimeScene · 深时重建与现代证据（E-DE1–E-DE3）
+
+`topic.basemap.reconstruction: { file, selection: hold-older }` 选择独立的重建主图分支，与 `local` / `region` 互斥。`file` 指向 `public/geo/<stem>.json` 的严格清单，帧按 Ma 从大到小排列，每帧为单对象 TopoJSON（对象名等于 stem）。`land` / `unavailable` 是面，`coast` 是线；属性明确 `modelId` 和 `frameMa`。构建加载器 `deep-time-build.ts` 实读并校验清单、每帧、sources、空 control 帧和现代子文件，将元数据 / 现代证据组成 `geo.deepTime`；古地图几何仍按需本地加载。客户端仅 `import type` 引用构建 schema，纯筛选函数在 `lib/deepTime.ts`。
+
+`GeoStage` 接收 `reconstruction={geo.deepTime?.reconstruction}`；controller 在构建历史 style 之前分流到 `reconstruction-map.ts`。样式只有空重建 source 和程序化经纬网，没有现代陆地 / 国界 / 国名 / 河流 / glyph / tiles。主图固定 maxZoom 3.6、`renderWorldCopies:false`、纬度范围 ±85.051129°。`reconstruction-style.ts` 只对 `kind:coast` 描边，不把不可用区的图框边画成海岸。换主题只重设 paint，不重传几何；重建主图隐藏不适用的现代实测比例尺。
+
+离散选择复用 `lib/deepTime.ts` 的 `frameAt`：query 先 clamp 到清单范围，再取最接近且不年轻于所选年代的帧；如 66→70、65→65、32.5→65。`lib/reconstruction.ts` 管理 generation / AbortSignal、最多当前与最近相邻两帧的已解码缓存和真实 source 状态。新帧未就绪先隐藏 / 清空旧陆地，等待 `setData(data,true)` 的 worker 完成后才显示 / ready；迟到请求不解码 / 不覆盖新帧，失败保持空白。相同 frameId 内拖动仅更新年代 / Δ，不重复 fetch / decode / `setData`。`geometryUpdates` 只计有效帧几何替换，不计清空或 paint 更新。`GeoController.reconstructionStats()` 与 `onReconstruction` 返回所选年代、实际已提交 sample / Δ、状态和计数；loading / unavailable 时 sample 字段为 null。
+
+现代图配置 `modernInset` 与重建分支配套，含独立 land / countries 和三种具名 bounds。point/card 文件保留 `coordinateSpace:modern`；每条 occurrence 独立闭区间相交，不合并年龄空档。cards 严格无坐标。MY 化石位置在聚合前抑制，只公开汇总抑制数与区域卡。`fossils-modern` 只控制化石符号，参考点 / 卡不计化石数。隐藏 inset 保留 view / mode 与内部计数。对象选择接既有 inspector，章 `state.index` 与 beat `highlight` 引用本题 point/card；现代图源不进入古主图。
+
+`maDigits:0|1|2|3` 接既有 Ma 转换 / 格式化 / URL；未写仍默认 2。TimeScene 的 `beat` 复用宿主 `b` 参数，`inset`、`inset-visible`、`fossil-mode` 使用差异基线，显式 URL 字段覆盖章 / 拍。自由拖动清空拍绑定。测试读实际结果用 `__atlas.engine.geology()`，其 reconstruction 部分来自 map controller，inset 部分区分 total / overlap / visible / in-view 与 reference / suppression 计数。
+
+可复用草稿 `sample-deep-time` 明确标 TEST/DESIGN：七张合成图形帧、四个 collection（含有空档的两条 occurrence）、两个 reference points、四张无坐标卡及 synthetic MY 抑制 2 collections / 3 occurrences。它不是科学地图或化石资料。单测 `reconstruction-map.test.ts` 覆盖源隔离、离散选择、缓存、晚响应 / 失败、同帧上传计数与销毁；`sample-deep-time.test.ts` 经过真实构建加载器；`tests-e2e/sample-deep-time.spec.ts` 覆盖双语 / 双 theme、b 深链、66/70 与 65、浏览窗、隐藏刷新、缺帧和现代主图请求隔离。浏览器测试与真机性能验收以本次交付记录为准，文件存在不代表已经通过。
+
+现代文件在构建时完整校验，`/topics/<slug>/data.json` 经 `compactDeepTimeData` 仅保留重建/现代清单及普通来源/名词/空control。`loadModernEvidence` 只从本地 `/geo/<stem>.json` 读取现代land、countries、points、cards与可选referenceFile，合并后才挂载场景；同一组并发/重挂载请求复用Promise，失败允许重载重试。这样现代矢量与PBDB记录只部署一份，不在topic payload重复。旧引擎数据响应原样保留。
+
+绑定示例（拍中的其他必填字段如caption依旧保留）：
+
+```json
+{"t":{"ma":66},"inset":"mexico","insetVisible":true,"fossilMode":"age-window","layers":["base","fossils-modern"],"highlight":["site-chicxulub-modern"],"caption":{"en":"Event age 66 Ma; map sample 70 Ma.","zh":"事件为6600万年前；地图样本为7000万年前。"}}
+```
+
+`openReader()` 是宿主context的可选小钩子，选择详情在桌面打开阅读列，在窄屏展开同一个阅读抽屉；不另加详情HUD。重建主题的年代立即切换离散样本，镜头仍可缓动，避免缓动年代时下载路过的所有样本、或让化石筛选/所选读数与主图暂时不一致。普通日期主题保留原时间缓动与底图行为。
+
+现代清单的可选 `referenceFile` 指向本地原始书目表，例如 `{"version":1,"references":{"6837":"Original PBDB primary_reference string"}}`。构建要求每条occurrence的PBDB文献号可解析，inspector按号显示完整原文书目，双语解释不改写原始题名；书目同样由本地缓存支持离线，不重复进入topic payload。

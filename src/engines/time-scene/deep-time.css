@@ -1,0 +1,50 @@
+.ts-modern { padding: 10px 12px; color: var(--ink); font-size: .76rem; line-height: 1.45; }
+.ts-modern__header, .ts-modern__pages { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+.ts-modern__header strong { letter-spacing: .04em; font-size: .68rem; }
+.ts-modern button, .ts-modern-index button, .ts-modern-inspector button { color: inherit; font: inherit; cursor: pointer; }
+.ts-modern__views, .ts-modern__modes { display: flex; gap: 4px; margin: 4px 0; }
+.ts-modern__views button, .ts-modern__modes button, .ts-modern__pages button, .ts-modern-index button, .ts-modern__outside button { min-height: 44px; padding: 5px 8px; border: 1px solid var(--line); border-radius: 3px; background: transparent; flex: 1; }
+.ts-modern [aria-pressed="true"], .ts-modern-index button:hover { border-color: var(--accent-1); background: color-mix(in srgb, var(--accent-1) 10%, transparent); }
+.ts-modern button:focus-visible, .ts-modern-index button:focus-visible, .ts-modern-inspector button:focus-visible { outline: 2px solid var(--accent-1); outline-offset: 2px; }
+.ts-modern__icon-button { min-width: 44px; min-height: 44px; border: 0; background: transparent; font-size: 1.2rem !important; }
+.ts-modern__mode { min-height: 2.7em; margin: 4px 0 8px; }
+.ts-modern__map { width: 100%; height: auto; display: block; border: 1px solid var(--line); }
+.ts-modern__water { fill: var(--paper); }
+.ts-modern__land { fill: color-mix(in srgb, var(--ink) 12%, var(--paper)); stroke: var(--ink-muted); stroke-width: .35; }
+.ts-modern__country { fill: transparent; stroke: var(--ink-muted); stroke-width: .35; }
+.ts-modern__country.is-highlighted { fill: color-mix(in srgb, var(--accent-1) 24%, transparent); stroke: var(--accent-1); stroke-width: 1.2; }
+.ts-modern__dot { fill: var(--ink); opacity: .65; }
+.ts-modern__point.is-reference .ts-modern__dot { fill: var(--accent-1); opacity: 1; }
+.ts-modern__point.is-highlighted .ts-modern__dot { fill: var(--accent-1); opacity: 1; stroke: var(--paper); stroke-width: 1.4; }
+.ts-modern__hit { fill: transparent; cursor: pointer; }
+.ts-modern__leader { fill: none; stroke: var(--accent-1); stroke-width: 1; pointer-events: none; }
+.ts-modern__label { fill: var(--ink); stroke: var(--paper); stroke-width: 3px; paint-order: stroke; font-size: 10px; font-weight: 600; cursor: pointer; }
+.ts-modern__counts, .ts-modern__precision, .ts-modern__note { margin: 6px 0; color: var(--ink-muted); font-size: .7rem; }
+.ts-modern__list { margin-top: 8px; border-top: 1px solid var(--line); }
+.ts-modern__list summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; }
+.ts-modern__list ul { list-style: none; padding: 0; margin: 0; max-height: 240px; overflow: auto; }
+.ts-modern__list li button { width: 100%; text-align: start; min-height: 44px; padding: 6px 8px; border: 0; border-bottom: 1px solid var(--line); background: transparent; }
+.ts-modern__list li small { display: block; color: var(--ink-muted); }
+.ts-evidence-card { margin: 8px 0 0; padding: 9px; border: 1px solid var(--accent-1); background: color-mix(in srgb, var(--paper) 96%, var(--accent-1)); }
+.ts-evidence-card p { margin: 3px 0; }
+.ts-modern__card-title { text-align: start; border: 0; background: transparent; min-height: 44px; font-weight: 600 !important; }
+.ts-modern-index { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 16px; }
+.ts-modern-index button { flex: 0 1 auto; }
+.ts-modern__outside { padding: 10px; border: 1px solid var(--accent-1); }
+.ts-modern__outside button { display: block; width: 100%; margin-top: 7px; }
+.ts-modern__ages { padding-inline-start: 20px; }
+.ts-modern__ages li { margin: 8px 0; }
+.ts-modern__ages p { margin: 2px 0; }
+.ts-modern-mobile { display: none; }
+.atlas-card .ts-modern { max-height: min(72vh, 640px); overflow-y: auto; }
+.ts-modern-evidence { position: absolute; z-index: 4; top: 62px; right: 16px; width: min(350px, 34vw); max-height: calc(100% - 220px); overflow-y: auto; background: var(--paper); border: 1px solid var(--line); pointer-events: auto; }
+.ts-modern-evidence .ts-modern__list { display: none; }
+@media (max-width: 1023px) {
+  .ts-modern-mobile { display: block; }
+}
+@media (max-width: 700px) {
+  .ts-modern { padding: 8px; font-size: .8rem; }
+  .ts-modern-evidence { width: min(300px, 67vw); max-height: 45vh; }
+  .ts-modern-evidence .ts-modern__views, .ts-modern-evidence .ts-modern__modes, .ts-modern-evidence .ts-modern__counts { display: none; }
+  .ts-modern-evidence .ts-modern__mode { font-size: .7rem; }
+}

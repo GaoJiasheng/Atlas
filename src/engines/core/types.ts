@@ -30,6 +30,10 @@ export interface SceneState {
 
 /** Keys every engine may add on top of `SceneState`, with their URL keys. */
 export interface UrlEngineFields {
+  /** TimeScene modern reference inset (only for reconstruction topics). */
+  inset?: 'world' | 'southeast-asia' | 'mexico';
+  insetVisible?: boolean;
+  fossilMode?: 'age-window' | 'all-mesozoic';
   /** TimeScene: current time. URL `t`. */
   t?: TimePoint | null;
   /** SpaceScene: beat of the current chapter on show (0-based; `null` = the chapter's own state). URL `b`, 1-based. */

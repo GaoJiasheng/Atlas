@@ -3,6 +3,9 @@
  * import.meta.glob). Never import from client components.
  */
 import { getCollection, type CollectionEntry } from 'astro:content';
+import { readFileSync, existsSync } from 'node:fs';
+import { join } from 'node:path';
+import { loadDeepTime } from '../engines/time-scene/deep-time-build';
 import { parseEngineData } from '../engines/schemas';
 import { withSharedFitness, type SharedFitnessRaw } from '../content/schema/fitness';
 import { resolveChapterTargets } from '../engines/core/store';
@@ -79,7 +82,7 @@ export function rawTopicData(slug: string): Record<string, unknown> {
 
 /** Parsed engine data for a topic (throws on invalid data, failing the build). */
 export function topicEngineData(topic: TopicEntry): unknown {
-  return parseEngineData(topic.data.engine, topic.data.stage, rawTopicData(topic.id), `topic "${topic.id}"`);
+  return parseEngineData(topic.data.engine, topic.data.stage, loadDeepTime(topic.data, rawTopicData(topic.id), (stem) => { const file = join(process.cwd(), 'public/geo', `${stem}.json`); return existsSync(file) ? JSON.parse(readFileSync(file, 'utf8')) : undefined; }), `topic "${topic.id}"`);
 }
 
 /**

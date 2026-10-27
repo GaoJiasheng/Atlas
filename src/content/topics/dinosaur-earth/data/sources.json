@@ -1,0 +1,316 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "International Chronostratigraphic Chart 2026/06 · International Commission on Stratigraphy",
+        "zh": "2026/06国际地层表 · 国际地层委员会"
+      },
+      "url": "https://stratigraphy.org/ICSchart/ChronostratChart2026-06.pdf",
+      "note": {
+        "en": "Mesozoic columns and footnotes: 251.902±0.024, 201.4±0.2, 143.1±0.6 and66.00Ma. Numerical ages can be revised; only facts transcribed. Source-review date recorded in the spec:27October2026; fixed data snapshots26October2026 where stated.",
+        "zh": "中生代栏及图下注；采用251.902±0.024、201.4±0.2、143.1±0.6及66.00Ma。数值年龄可以修订，只转录事实。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。"
+      }
+    },
+    {
+      "id": "S2",
+      "text": {
+        "en": "How Fossils Form · US National Park Service",
+        "zh": "化石如何形成 · 美国国家公园管理局"
+      },
+      "url": "https://www.nps.gov/subjects/fossils/how-fossils-form.htm",
+      "note": {
+        "en": "Introduction / Odds of Becoming a Fossil: body remains, activity traces and preservation bias. Source-review date recorded in the spec:27October2026; fixed data snapshots26October2026 where stated.",
+        "zh": "Introduction / Odds of Becoming a Fossil：身体遗存、活动痕迹和保存偏差。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。"
+      }
+    },
+    {
+      "id": "S5",
+      "text": {
+        "en": "How do we know how long ago dinosaurs lived? · American Museum of Natural History",
+        "zh": "如何知道恐龙生活在多久以前？ · 美国自然历史博物馆"
+      },
+      "url": "https://www.amnh.org/explore/videos/dinosaurs-and-fossils/how-do-we-know-how-long-ago-dinosaurs-lived",
+      "note": {
+        "en": "Relative stratigraphic ages; the full isotope-method explanation belongs to the sibling topic. Source-review date recorded in the spec:27October2026; fixed data snapshots26October2026 where stated.",
+        "zh": "采用相对地层年龄部分；完整同位素方法交由姊妹主题。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。"
+      }
+    },
+    {
+      "id": "S58",
+      "text": {
+        "en": "Rock Dating · Utah Geological Survey",
+        "zh": "岩石定年 · 犹他州地质调查局"
+      },
+      "url": "https://geology.utah.gov/map-pub/survey-notes/rock-dating/",
+      "note": {
+        "en": "Superposition; undisturbed, unreversed sedimentary sequence. Layer thickness does not establish elapsed years. Source-review date recorded in the spec:27October2026; fixed data snapshots26October2026 where stated.",
+        "zh": "叠覆律；限定未扰动、未倒转的沉积序列。不以层厚推算年数。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。"
+      }
+    },
+    {
+      "id": "S7",
+      "text": {
+        "en": "Dinosaur evidence and reconstruction · Natural History Museum, London",
+        "zh": "恐龙证据与重建 · 伦敦自然历史博物馆"
+      },
+      "url": "https://www.nhm.ac.uk/discover/what-can-scientists-learn-about-dinosaurs-and-how.html",
+      "note": {
+        "en": "Bone, footprint and soft-tissue evidence answer different questions; reconstruction has limits. Source-review date recorded in the spec:27October2026; fixed data snapshots26October2026 where stated.",
+        "zh": "骨骼、足迹和软组织证据回答不同问题；重建存在限制。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。"
+      }
+    },
+    {
+      "id": "S8",
+      "text": {
+        "en": "Ask a Scientist About Dinosaurs · American Museum of Natural History",
+        "zh": "向科学家问恐龙 · 美国自然历史博物馆"
+      },
+      "url": "https://www.amnh.org/explore/ology/paleontology/ask-a-scientist-about-dinosaurs",
+      "note": {
+        "en": "Question9: birds belong within theropod dinosaurs. Other old numbers on this page are not adopted. Source-review date recorded in the spec:27October2026; fixed data snapshots26October2026 where stated.",
+        "zh": "问题9：鸟属于兽脚类恐龙。不采用该页其他旧数字。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。"
+      }
+    },
+    {
+      "id": "S11",
+      "text": {
+        "en": "How an asteroid ended the age of the dinosaurs · Natural History Museum, London",
+        "zh": "小行星如何终结恐龙时代 · 伦敦自然历史博物馆"
+      },
+      "url": "https://www.nhm.ac.uk/discover/how-an-asteroid-caused-extinction-of-dinosaurs.html",
+      "note": {
+        "en": "Opening / What survived: about66Ma, extinction of non-avian dinosaurs and surviving bird lineages. Crater size here is not adopted. Source-review date recorded in the spec:27October2026; fixed data snapshots26October2026 where stated.",
+        "zh": "开篇 / What survived：约66Ma、非鸟类恐龙灭绝与鸟类支系存活。不采用该页坑径。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。"
+      }
+    },
+    {
+      "id": "S12",
+      "text": {
+        "en": "Schulte et al. (2010), Science · The Chicxulub asteroid impact and mass extinction at the Cretaceous-Paleogene boundary",
+        "zh": "Schulte等（2010），Science · 希克苏鲁伯撞击与白垩纪—古近纪界线的大灭绝"
+      },
+      "url": "https://pubmed.ncbi.nlm.nih.gov/20203042/",
+      "note": {
+        "en": "Original abstract obtained through Europe PMC REST core: global ejecta and extinction patterns. Abstract only, not a claim to reading the whole paper; old65.5Ma not adopted. Source-review date recorded in the spec:27October2026; fixed data snapshots26October2026 where stated.",
+        "zh": "经Europe PMC REST core取得原摘要：全球喷出物与灭绝对应。只读原摘要，不声称取得全文；旧65.5Ma不采用。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。"
+      }
+    },
+    {
+      "id": "S13",
+      "text": {
+        "en": "Chiarenza et al. (2020), PNAS · Asteroid impact, not volcanism, caused the end-Cretaceous dinosaur extinction",
+        "zh": "Chiarenza等（2020），PNAS · 白垩纪末恐龙灭绝的撞击与火山模型研究"
+      },
+      "url": "https://doi.org/10.1073/pnas.2006087117",
+      "note": {
+        "en": "Original full-text XML obtained from Europe PMC PMC7382232. Introduction: impactor about10km, crater about180–200km. Significance/model results are conditional findings attributed to the authors, not direct ancient-temperature observations. Source-review date recorded in the spec:27October2026; fixed data snapshots26October2026 where stated.",
+        "zh": "经Europe PMC PMC7382232取得原始全文XML。引言：撞击体约10km、坑约180–200km。Significance及模型结果归作者，属于条件性结论，不作直接古温度观测。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。"
+      }
+    },
+    {
+      "id": "S15",
+      "text": {
+        "en": "Schoene et al. (2019), Science · U-Pb constraints on pulsed eruption of the Deccan Traps across the end-Cretaceous mass extinction",
+        "zh": "Schoene等（2019），Science · 德干暗色岩喷发年代约束"
+      },
+      "url": "https://timslab.princeton.edu/sites/g/files/toruqf2276/files/schoene-2019-science.pdf",
+      "note": {
+        "en": "Author-institution public PDF, abstract/discussion: Deccan eruptions cross the boundary; temporal association and volatile causation are distinct. No precise eruption-pulse numbers reproduced. Source-review date recorded in the spec:27October2026; fixed data snapshots26October2026 where stated.",
+        "zh": "作者机构公开PDF，摘要及讨论：德干喷发跨越界线；时间关联与挥发物因果应分开。不搬精确喷发脉冲数值。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。"
+      }
+    },
+    {
+      "id": "S51",
+      "text": {
+        "en": "Sprain et al. (2019), Science · The eruptive tempo of Deccan volcanism in relation to the Cretaceous-Paleogene boundary",
+        "zh": "Sprain等（2019），Science · 德干火山活动节奏与白垩纪—古近纪界线"
+      },
+      "url": "https://pubmed.ncbi.nlm.nih.gov/30792301/",
+      "note": {
+        "en": "Original abstract, final sentence: climate-active gas release need not coincide directly with erupted rock volume. Distinct dating results are not fused into one exact pulse. Source-review date recorded in the spec:27October2026; fixed data snapshots26October2026 where stated.",
+        "zh": "原摘要末句：影响气候的气体释放与喷发岩量未必直接同步。不把不同测年结果拼成一个精确脉冲。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。"
+      }
+    },
+    {
+      "id": "S17",
+      "text": {
+        "en": "Biodiversity Gallery · Lee Kong Chian Natural History Museum, NUS",
+        "zh": "生物多样性展厅 · 新加坡国立大学李光前自然历史博物馆"
+      },
+      "url": "https://lkcnhm.nus.edu.sg/exhibition/biodiversity-gallery/",
+      "note": {
+        "en": "Highlights: Dinosaurs; displayed diplodocid sauropods. Facts rewritten; no museum photograph copied, no completeness percentages or family narrative. Source-review date recorded in the spec:27October2026; fixed data snapshots26October2026 where stated.",
+        "zh": "Highlights: Dinosaurs；展出的梁龙科蜥脚类化石。事实改写，不复制馆方照片，不采用完整率或家庭关系支线。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。"
+      }
+    },
+    {
+      "id": "S57",
+      "text": {
+        "en": "Interview with evolutionary palaeobiologist Emanuel Tschopp · Lee Kong Chian Natural History Museum, NUS",
+        "zh": "演化古生物学家Emanuel Tschopp访谈 · 李光前自然历史博物馆"
+      },
+      "url": "https://lkcnhm.nus.edu.sg/interview-with-an-evolutionary-paleobiologist-dr-emanuel-tschopp/",
+      "note": {
+        "en": "Research work in LKCNHM: Dana Quarry near Ten Sleep, Wyoming; Jurassic Morrison Formation. Readable HTML replaces the oversized annual report. Source-review date recorded in the spec:27October2026; fixed data snapshots26October2026 where stated.",
+        "zh": "Research work in LKCNHM：怀俄明州Ten Sleep附近Dana Quarry、侏罗纪莫里森组。可读HTML替代过大年报。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。"
+      }
+    },
+    {
+      "id": "S20",
+      "text": {
+        "en": "Shibata et al. (2015), PLOS ONE · Sirindhorna khoratensis original description",
+        "zh": "Shibata等（2015），PLOS ONE · 诗琳通龙Sirindhorna khoratensis原始描述"
+      },
+      "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0145904",
+      "note": {
+        "en": "Abstract / Geological setting / Locality and horizon: Nakhon Ratchasima, Khok Kruat Formation, Early Cretaceous/Aptian. Not assigned the130Ma map sample as an exact fossil age. Source-review date recorded in the spec:27October2026; fixed data snapshots26October2026 where stated.",
+        "zh": "摘要 / Geological setting / Locality and horizon：呵叻府、Khok Kruat组、早白垩世阿普特期。不把130Ma地图样本当作化石精确年龄。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。"
+      }
+    },
+    {
+      "id": "S21",
+      "text": {
+        "en": "Allain et al. (2012) · Ichthyovenator original abstract",
+        "zh": "Allain等（2012）· 鱼猎龙Ichthyovenator原始摘要"
+      },
+      "url": "https://pubmed.ncbi.nlm.nih.gov/22528021/",
+      "note": {
+        "en": "Early Cretaceous Laos; partially associated postcranial skeleton. No complete skull reconstructed. Source-review date recorded in the spec:27October2026; fixed data snapshots26October2026 where stated.",
+        "zh": "早白垩世老挝；部分相连的头后骨骼。不补画完整头骨。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。"
+      }
+    },
+    {
+      "id": "S22",
+      "text": {
+        "en": "Dinosaur Di Malaysia? · Masatoshi Sone / Department of Museums Malaysia",
+        "zh": "Dinosaur Di Malaysia? · Masatoshi Sone / 马来西亚博物馆局"
+      },
+      "url": "https://www.jmm.gov.my/ms/syarahan-umum-dinosaur-di-malaysia",
+      "note": {
+        "en": "Researcher lecture abstract: dinosaur teeth in Pahang; locality withheld for protection. Event date is not fossil age. No coordinates or invented radius published. Source-review date recorded in the spec:27October2026; fixed data snapshots26October2026 where stated.",
+        "zh": "研究者讲座摘要：彭亨的恐龙牙齿，地点为保护而保密。网页活动日期不当作化石年龄；不发布坐标或虚构半径。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。"
+      }
+    },
+    {
+      "id": "S24",
+      "text": {
+        "en": "Peters & McClennen (2016), Paleobiology · The Paleobiology Database application programming interface",
+        "zh": "Peters与McClennen（2016），Paleobiology · 古生物数据库API论文"
+      },
+      "url": "https://www.cambridge.org/core/journals/paleobiology/article/the-paleobiology-database-application-programming-interface/4D20F5CAFA1B0AC7033975418668D82B",
+      "note": {
+        "en": "Abstract / PBDB Data Model. DOI10.1017/pab.2015.39. Collection/occurrence distinction; snapshot licences come from S65/S66 metadata. Source-review date recorded in the spec:27October2026; fixed data snapshots26October2026 where stated.",
+        "zh": "摘要 / PBDB Data Model；DOI10.1017/pab.2015.39。区分collection与occurrence；本题快照许可另据S65/S66元数据。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。"
+      }
+    },
+    {
+      "id": "S29",
+      "text": {
+        "en": "Scotese & Wright (2018) · PALEOMAP PaleoDEMs v2 · Zenodo record5460860",
+        "zh": "Scotese与Wright（2018）· PALEOMAP PaleoDEMs v2 · Zenodo记录5460860"
+      },
+      "url": "https://zenodo.org/records/5460860",
+      "note": {
+        "en": "Publisher description and official metadata: model elevation/bathymetry in metres,1°grid,540–0Ma, nominal5Myr spacing, CC BY4.0. Actual ten numeric CSV ages/CRC/SHA are in SOURCES-GEO; no66Ma frame. Source says117models; downloaded nc archive contains109members. Adaptations: z>0 nearest-sample cells, explicit dateline/polar cuts, no modern coast substitution. Source-review date recorded in the spec:27October2026; fixed data snapshots26October2026 where stated.",
+        "zh": "发布说明及官方元数据：米制模型高程/水深、1°网格、540–0Ma、名义5Myr间隔、CC BY4.0。实际十份CSV年龄/CRC/SHA见SOURCES-GEO；没有66Ma帧。说明称117模型，所获nc归档实为109成员。改编为z>0最近样本格元，显式日界线/极区裁切，不以现代海岸替换。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。"
+      }
+    },
+    {
+      "id": "S31",
+      "text": {
+        "en": "Terms of Use · Natural Earth",
+        "zh": "使用条款 · Natural Earth"
+      },
+      "url": "https://www.naturalearthdata.com/about/terms-of-use/",
+      "note": {
+        "en": "Public-domain declaration. Modern reference geometry only; no Natural Earth land is used in ancient main-map frames. Source-review date recorded in the spec:27October2026; fixed data snapshots26October2026 where stated.",
+        "zh": "公有领域声明。仅用于现代参照；古代主图帧不使用Natural Earth陆地。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。"
+      }
+    },
+    {
+      "id": "S52",
+      "text": {
+        "en": "150 Million Years of Dinosaur Evolution · American Museum of Natural History",
+        "zh": "恐龙演化的一亿五千万年 · 美国自然历史博物馆"
+      },
+      "url": "https://www.amnh.org/explore/videos/dinosaurs-and-fossils/150-million-years-of-dinosaur-evolution",
+      "note": {
+        "en": "Original video transcript: established dinosaur record by about230Ma in the Late Triassic. Does not rule out every older candidate. Source-review date recorded in the spec:27October2026; fixed data snapshots26October2026 where stated.",
+        "zh": "原视频文字稿：晚三叠世约230Ma已有确立恐龙记录。不宣称所有更早候选均被排除。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。"
+      }
+    },
+    {
+      "id": "S61",
+      "text": {
+        "en": "Chicxulub locator · Lunar and Planetary Institute / USRA",
+        "zh": "希克苏鲁伯定位 · 月球与行星研究所 / USRA"
+      },
+      "url": "https://www.lpi.usra.edu/science/kring/epo_web/impact_cratering/World_Craters_web/northamericacraters/Chicxulub.html",
+      "note": {
+        "en": "Spec alias DE-S01. Latitude/Longitude only:21°20′N/89°30′W → [-89.5,21.333333]. Approximate modern locator, not crater outline. Old64.98Ma and170km not adopted. Source-review date recorded in the spec:27October2026; fixed data snapshots26October2026 where stated.",
+        "zh": "规格别名DE-S01。仅用Latitude/Longitude：21°20′N/89°30′W换算[-89.5,21.333333]。现代近似定位，不是坑轮廓。不采用旧64.98Ma和170km。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。"
+      }
+    },
+    {
+      "id": "S62",
+      "text": {
+        "en": "What was Pangea? · US Geological Survey",
+        "zh": "什么是盘古大陆？ · 美国地质调查局"
+      },
+      "url": "https://www.usgs.gov/faqs/what-was-pangea",
+      "note": {
+        "en": "Spec alias DE-S02. Opening explanation of connected continents and later separation; concrete land boundaries derive solely from S29. Source-review date recorded in the spec:27October2026; fixed data snapshots26October2026 where stated.",
+        "zh": "规格别名DE-S02。开篇解释大陆相连与后来分离；具体陆地边界只来自S29。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。"
+      }
+    },
+    {
+      "id": "S64",
+      "text": {
+        "en": "Natural Earth110m land v4.1.0 /50m countries v5.1.1 · Natural Earth contributors",
+        "zh": "Natural Earth110m陆地v4.1.0 /50m国家v5.1.1 · Natural Earth贡献者"
+      },
+      "url": "https://naturalearth.s3.amazonaws.com/50m_cultural/ne_50m_admin_0_countries.zip",
+      "note": {
+        "en": "Spec alias DE-S04. Fixed public-domain ZIP DBF LABEL_X/LABEL_Y for SGP gives [103.816925,1.366587], a modern label anchor, not museum/find coordinates. Land fixed ZIP: https://naturalearth.s3.amazonaws.com/110m_physical/ne_110m_land.zip. Modern inset only; six-decimal rounding. Source-review date recorded in the spec:27October2026; fixed data snapshots26October2026 where stated.",
+        "zh": "规格别名DE-S04。固定公有领域ZIP的SGP DBF LABEL_X/LABEL_Y为[103.816925,1.366587]，是现代制图标注点，不是馆址或化石位置。陆地固定ZIP：https://naturalearth.s3.amazonaws.com/110m_physical/ne_110m_land.zip。仅现代小图使用；坐标取六位小数。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。"
+      }
+    },
+    {
+      "id": "S65",
+      "text": {
+        "en": "PBDB contributors · API1.2 bounded global snapshot,26October2026",
+        "zh": "PBDB贡献者 · API1.2有界全球快照，2026年10月26日"
+      },
+      "url": "https://paleobiodb.org/data1.2/occs/list.csv?datainfo&rowcount&base_name=Dinosauria%5EAves&interval=Triassic,Jurassic,Cretaceous&timerule=overlap&show=coords,loc,strat,ref&limit=2000&order=agespan",
+      "note": {
+        "en": "Spec alias DE-S05. Original CSV metadata explicitly CC0;2000of21720 matching occurrences,1224collections, sorted by agespan; bounded, non-random and not a census. Coordinates modern. Full query and source hash in data/SOURCES.md; retained publication references in pipeline bibliography. Source-review date recorded in the spec:27October2026; fixed data snapshots26October2026 where stated.",
+        "zh": "规格别名DE-S05。原CSV元数据明示CC0；匹配21720条中取2000条、1224组，按agespan排序；有界、非随机，不是普查。坐标为现代位置。完整查询、源哈希见data/SOURCES.md；保留文献详见管线书目。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。"
+      }
+    },
+    {
+      "id": "S66",
+      "text": {
+        "en": "PBDB contributors · API1.2 TH/LA/MY regional snapshot,26October2026",
+        "zh": "PBDB贡献者 · API1.2泰老马区域快照，2026年10月26日"
+      },
+      "url": "https://paleobiodb.org/data1.2/occs/list.csv?datainfo&rowcount&base_name=Dinosauria%5EAves&interval=Triassic,Jurassic,Cretaceous&timerule=overlap&cc=TH,LA,MY&show=coords,loc,strat,ref&limit=5000",
+      "note": {
+        "en": "Spec alias DE-S06. Original CSV explicitly CC0;167occurrences/90collections. Union2106occurrences; suppress3MY occurrences/3collections before grouping; publish2103occurrences/1274collections/61countries. Collection24178 has3occurrences, each121.4–100.5Ma. No raw MY locations published. Source-review date recorded in the spec:27October2026; fixed data snapshots26October2026 where stated.",
+        "zh": "规格别名DE-S06。原CSV明示CC0；167条出现记录/90组。并集2106条；先抑制MY的3条/3组，再公开2103条/1274组/61国。24178组有3条记录，各为121.4–100.5Ma。不发布马来西亚原始位置。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。"
+      }
+    },
+    {
+      "id": "S67",
+      "text": {
+        "en": "Atlas editorial and illustration design choices",
+        "zh": "Atlas编辑与插画设计取值"
+      },
+      "note": {
+        "en": "DS01–DS03: z>0 threshold, view/camera bounds, zoom3.6, ±5Ma browse window, categorical-cell choice and diagram counts. These are design values, not scientific measurements. Original approved generated illustrations reused without changing composition.",
+        "zh": "DS01–DS03：z>0阈值、视图/镜头范围、zoom3.6、±5Ma浏览窗、分类格元选择和画面计数。这些是设计值，不是科学测量。复用已审生成插画，不改变构图。"
+      },
+      "design": true
+    }
+  ]
+}

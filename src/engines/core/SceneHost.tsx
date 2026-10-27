@@ -229,8 +229,8 @@ export default function SceneHost(props: SceneHostProps) {
   useEffect(() => {
     if (!dataReady) return;
     const decoded = decodeSceneState(window.location.search);
-    const { t: time, beat, highlight, part, view, explode, run, cutaway, pose, task, model, sim, ...common } = decoded;
-    const engineFields: UrlEngineFields = { t: time, beat, highlight, part, view, explode, run, cutaway, pose, task, model, sim };
+    const { t: time, beat, highlight, part, view, explode, run, cutaway, pose, task, model, sim, inset, insetVisible, fossilMode, ...common } = decoded;
+    const engineFields: UrlEngineFields = { t: time, beat, highlight, part, view, explode, run, cutaway, pose, task, model, sim, inset: topic.modernInset ? inset : undefined, insetVisible: topic.modernInset ? insetVisible : undefined, fossilMode: topic.modernInset ? fossilMode : undefined };
     const patch = { ...common, ...engine.fromUrl(engineFields) };
     if (Object.keys(patch).length > 0) store.getState().hydrate(patch);
     return startUrlSync({
@@ -238,7 +238,7 @@ export default function SceneHost(props: SceneHostProps) {
       baseline: (state) => (hud.getState().controls.urlBaseline?.(state as SceneSnapshot) ?? store.getState().chapterTarget(state.chapter ?? null)) as UrlState,
       subscribe: (listener) => store.subscribe(listener),
     });
-  }, [store, hud, engine, dataReady]);
+  }, [store, hud, engine, dataReady, topic.modernInset]);
 
   // Theme: user override > scene (URL / chapter) > topic default.
   const sceneTheme = useStore(store, (s) => s.theme);
@@ -342,6 +342,7 @@ export default function SceneHost(props: SceneHostProps) {
   } as CSSProperties;
 
   const [sheetOpen, setSheetOpen] = useState(false);
+  const openReader = useCallback(() => { actions.setReader(true); setSheetOpen(true); }, [actions]);
 
   /* ---------------- chapter-body controls (static HTML, delegated) ---------------- */
   const sceneRef = useRef<HTMLDivElement>(null);
@@ -416,8 +417,8 @@ export default function SceneHost(props: SceneHostProps) {
   }, []);
 
   const context = useMemo<SceneContextValue>(
-    () => ({ store, hud, actions, topic, chapters, locale, slots }),
-    [store, hud, actions, topic, chapters, locale, slots],
+    () => ({ store, hud, actions, openReader, topic, chapters, locale, slots }),
+    [store, hud, actions, openReader, topic, chapters, locale, slots],
   );
 
   /* ---------------- window.__atlas ---------------- */

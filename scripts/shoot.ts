@@ -389,6 +389,9 @@ function unlabelled(s: Session): Promise<string[]> {
     const shown = new Set(
       [...document.querySelectorAll<HTMLElement>('.ts-co')].filter((e) => e.dataset.hidden === 'false' && e.style.opacity === '1').map((e) => e.dataset.id),
     );
+    for (const el of document.querySelectorAll<HTMLElement>('.ts-modern-label[data-id], .ts-evidence-card[data-id]')) {
+      const r = el.getBoundingClientRect(); if (r.width > 0 && r.height > 0 && el.checkVisibility()) shown.add(el.dataset.id);
+    }
     const highlight = (window.__atlas!.state() as { highlight?: string[] }).highlight ?? [];
     return highlight.filter((id) => !shown.has(id));
   });
@@ -398,6 +401,12 @@ function unlabelled(s: Session): Promise<string[]> {
 type BeatScene = Record<string, unknown> & { unfinished: string[] };
 function beatSceneOf(page: Page): Promise<BeatScene | null> {
   return page.evaluate(() => {
+    const geology = (window.__atlas!.engine as unknown as { geology?(): { reconstruction: Record<string, unknown>; inset: Record<string, unknown> } }).geology?.();
+    if (geology) {
+      const st = window.__atlas!.state() as unknown as Record<string, unknown>;
+      const { geometryUpdates: _updates, ...reconstruction } = geology.reconstruction;
+      return { ...Object.fromEntries(['chapter', 't', 'highlight', 'layers', 'camera', 'inset', 'insetVisible', 'fossilMode'].map((k) => [k, st[k] ?? null])), reconstruction, inset: geology.inset, unfinished: [] };
+    }
     if (!document.querySelector('.atlas-scene[data-engine="space-scene"]')) return null;
     const st = window.__atlas!.state() as unknown as Record<string, unknown>;
     const keys = ['chapter', 'view', 'part', 'explode', 'run', 'cutaway', 'pose', 'hidden', 'ghosted', 'layers', 'exercise', 'tints', 'sites', 'camera'];

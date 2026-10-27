@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { bilingual, kebabId, level, theme } from './common';
+import { modernInsetConfigSchema } from '../../engines/time-scene/deep-time';
 import { TOKEN_NAMES } from '../../theme/theme';
 
 /** The six fixed top-level categories, in display order. */
@@ -84,9 +85,11 @@ export const basemapOptions = z
     local: kebabId.optional(),
     region: regionBasemap.optional(),
     maxZoom: z.number().min(6).max(16).optional(),
+    reconstruction: z.object({ file: kebabId, selection: z.literal('hold-older') }).strict().optional(),
   })
   .strict()
-  .refine((b) => (b.local === undefined) !== (b.region === undefined), 'basemap needs exactly one of `local` or `region`');
+  .refine((b) => [b.local, b.region, b.reconstruction].filter((v) => v !== undefined).length === 1, 'basemap needs exactly one of `local`, `region` or `reconstruction`')
+  .refine((b) => !b.reconstruction || b.maxZoom === undefined, 'reconstruction fixes maxZoom at 3.6');
 export type BasemapOptions = z.output<typeof basemapOptions>;
 
 /**
@@ -175,6 +178,8 @@ export const topicSchema = z
     blocLabels: blocLabels.optional(),
     /** TimeScene: island- / city-scale basemap (`{ local: land-sg, maxZoom: 13 }`) or a regional plate (`{ region: { bounds, land, rivers } }`). */
     basemap: basemapOptions.optional(),
+    modernInset: modernInsetConfigSchema.optional(),
+    maDigits: z.union([z.literal(0), z.literal(1), z.literal(2), z.literal(3)]).optional(),
     /** TimeScene GeoStage: dated GPU overlays from public/geo/<file>.json. */
     datedLayers: datedLayers.optional(),
     /**
@@ -201,6 +206,12 @@ export const topicSchema = z
   .superRefine((topic, ctx) => {
     if (topic.datedLayers !== undefined && (topic.engine !== 'time-scene' || topic.stage !== 'geo'))
       ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['datedLayers'], message: '`datedLayers` requires time-scene with stage: geo' });
+    if (topic.basemap?.reconstruction && (topic.engine !== 'time-scene' || topic.stage !== 'geo' || topic.datedLayers !== undefined))
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['basemap'], message: 'reconstruction requires time-scene/geo without datedLayers' });
+    if (topic.modernInset && !topic.basemap?.reconstruction)
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['modernInset'], message: 'modernInset requires reconstruction' });
+    if (topic.maDigits !== undefined && topic.engine !== 'time-scene')
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['maDigits'], message: 'maDigits requires a geological TimeScene' });
     const stages: readonly string[] = ENGINE_STAGES[topic.engine];
     if (!stages.includes(topic.stage)) {
       ctx.addIssue({
