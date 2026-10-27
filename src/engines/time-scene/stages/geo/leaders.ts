@@ -30,6 +30,7 @@ export interface LeaderItem {
   /** Data id passed to `onSelect`. */
   id: string;
   kind: 'event' | 'movement' | 'entity';
+  badge?: string;
   en: string;
   zh: string;
   /** One-line note (summary); `date` is shown before it in mono. */
@@ -186,8 +187,14 @@ export function createLeaders(options: {
     el.dataset.kind = item.kind;
     el.dataset.id = item.id;
     el.dataset.pinned = String(item.pinned);
-    el.setAttribute('aria-label', `${item.en}${item.zh ? ` · ${item.zh}` : ''}`);
+    el.setAttribute('aria-label', `${item.badge ? `${item.badge} · ` : ''}${item.en}${item.zh ? ` · ${item.zh}` : ''}`);
     el.replaceChildren();
+    if (item.badge) {
+      const badge = document.createElement('span');
+      badge.className = 'ts-co__badge';
+      badge.textContent = item.badge;
+      el.appendChild(badge);
+    }
     const en = document.createElement('b');
     en.className = 'ts-co__en';
     en.lang = 'en';
@@ -212,7 +219,7 @@ export function createLeaders(options: {
     e.path.dataset.pinned = String(item.pinned);
   };
 
-  const signature = (i: LeaderItem) => `${i.en}|${i.zh}|${i.note}|${i.date ?? ''}|${i.pinned}|${i.clickable}`;
+  const signature = (i: LeaderItem) => `${i.badge ?? ''}|${i.en}|${i.zh}|${i.note}|${i.date ?? ''}|${i.pinned}|${i.clickable}`;
   const sigs = new Map<string, string>();
 
   function setItems(items: LeaderItem[]) {

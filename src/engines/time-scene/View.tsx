@@ -47,12 +47,14 @@ import { t as translate, tx, type BilingualText, type UiKey } from '../../i18n';
 import { formatTimeParam } from '../../lib/time';
 import type { TimeSceneExt } from './index';
 import type { TimeBeat, TimeChapterState, TimeSceneGeoData } from './schema';
+import { timeBeatScene, timeLinkedBeatPatch } from './lib/beatScene';
 import { buildTimeModel, type TimeModel } from './lib/model';
 import { createPlayhead, type Playhead } from './lib/playhead';
 import type { Anchor, SegmentSpec } from './lib/segmentScale';
 import { clamp, fromNumber, keyframeWindow, stepFor, toNumber, type TimePoint } from './lib/time';
 import { frameAt } from './lib/frame';
-import { controlAreas, referencePair } from './lib/stats';
+import { missionContext, hasMapAnchor, missionChapterIndex } from './lib/missions';
+import { controlAreas, frameStats, referencePair } from './lib/stats';
 import { withEntityColours } from './lib/holders';
 import { formatTime } from './lib/format';
 import { GeoStage } from './stages/geo/GeoStage';
@@ -61,6 +63,7 @@ import { Timeline, formatReadout } from './timeline/Timeline';
 import { EventInspector } from './EventInspector';
 import { EntityInspector } from './EntityInspector';
 import { BandCard, PerfReadout, useFps } from './hud/HudPanels';
+import { MissionBeatLine } from './hud/MissionBeatLine';
 import { DatedLayerPlate } from './hud/DatedLayerPlate';
 import type { DatedLayerIndex } from './lib/datedLayers';
 import { BLOC_CSS, entityCssColor } from './colors';
@@ -100,6 +103,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   const layers = useScene<TimeSceneExt, string[]>((s) => s.layers);
   const highlight = useScene<TimeSceneExt, string[]>((s) => s.highlight);
   const storeT = useScene<TimeSceneExt, TimePoint | null>((s) => s.t);
+  const currentBeat = useScene<TimeSceneExt, number | null>((s) => s.beat ?? null);
 
   /* ---------- model + playhead ---------- */
   /** Chapters with a place on the timeline (the background chapter has none). */
@@ -109,9 +113,9 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       buildTimeModel(
         geo,
         story.map((c) => ({ id: c.id, t: store.getState().chapterTarget(c.id).t })),
-        { datePrecision: topic.datePrecision },
+        { datePrecision: topic.datePrecision, timePresentation: topic.timePresentation },
       ),
-    [geo, story, store, topic.datePrecision],
+    [geo, story, store, topic.datePrecision, topic.timePresentation],
   );
   const [playhead] = useState(() => {
     const t0 = store.getState().t;
@@ -132,7 +136,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       const key = formatTimeParam(tp);
       if (key !== lastWritten.current) {
         lastWritten.current = key;
-        store.getState().patch({ t: tp });
+        store.getState().patch({ t: tp, ...(model.timePresentation ? { beat: null } : {}) });
       }
     },
     [playhead, model, store],
@@ -162,8 +166,10 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   const [cardExpanded, setCardExpanded] = useState(false);
   const restoreHighlight = useCallback(() => {
     const s = store.getState();
-    s.patch({ highlight: s.chapterTarget(s.chapter).highlight });
-  }, [store]);
+    const target = s.chapterTarget(s.chapter);
+    const beat = model.timePresentation ? beatsRef.current.find((item) => item.chapter === s.chapter && item.index === s.beat) : undefined;
+    s.patch({ highlight: beat ? timeBeatScene(target, beat, true).highlight : target.highlight });
+  }, [store, model.timePresentation]);
   const selectEvent = useCallback(
     (id: string) => {
       // The presentation's map is for looking around: the caption says what the beat is about.
@@ -303,18 +309,8 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   /** Put the scene in a beat's state: the chapter's target plus the beat's `t` / `camera` / `layers` / `highlight`. */
   const applyBeatState = (b: Beat<TimeBeat>, instant: boolean) => {
     const s = store.getState();
-    const spec = b.spec;
     pendingBeat.current = { chapter: b.chapter, index: b.index };
-    s.applyState(
-      {
-        ...s.chapterTarget(b.chapter),
-        ...(spec?.t !== undefined ? { t: spec.t as TimePoint } : {}),
-        ...(spec?.camera ? { camera: spec.camera } : {}),
-        ...(spec?.layers ? { layers: [...spec.layers] } : {}),
-        ...(spec?.highlight ? { highlight: [...spec.highlight] } : {}),
-      },
-      { instant },
-    );
+    s.applyState(timeBeatScene(s.chapterTarget(b.chapter), b, model.timePresentation !== undefined), { instant });
     // A beat's camera is authored, not the reader's: the status line keeps "CHAPTER NN VIEW".
     hud.setState({ cameraFree: false });
   };
@@ -347,6 +343,29 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
   );
+  // Core already understands b. TimeScene fills the mission beat fields the link did not override.
+  const urlBeatDone = useRef(false);
+  useEffect(() => {
+    if (!model.timePresentation) return;
+    const settle = () => {
+      const st = store.getState();
+      if (urlBeatDone.current || st.transition.reason !== 'url') return;
+      urlBeatDone.current = true;
+      if (st.beat === null || st.beat === undefined) return;
+      const beat = beatsRef.current.find((candidate) => candidate.chapter === st.chapter && candidate.index === st.beat);
+      if (!beat) { st.patch({ beat: null }); return; }
+      const scene = timeBeatScene(st.chapterTarget(beat.chapter), beat, true);
+      const fields = st.transition.fields ?? [];
+      pendingBeat.current = { chapter: beat.chapter, index: beat.index };
+      st.applyState(timeLinkedBeatPatch(scene, fields), { instant: true });
+      hud.setState({ cameraFree: fields.includes('camera') });
+    };
+    settle();
+    return store.subscribe((st, prev) => {
+      if (st.transition.id !== prev.transition.id && st.transition.reason === 'url') queueMicrotask(settle);
+    });
+  }, [model.timePresentation, store, hud]);
+
   /** A tick's caption and date as written (a beat dated to the month reads as that month). */
   const beatLabel = useCallback(
     (chapter: string, index: number) => {
@@ -419,9 +438,10 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     if (layers.includes('movements') && geo.movements.length)
       items.push({ id: 'movement', label: t('time.movement'), color: 'var(--ink-muted)', kind: 'arrow' });
     if (layers.includes('battles')) {
-      const kinds = new Set(model.events.map((e) => e.event.kind));
-      if ([...kinds].some((k) => k !== 'milestone' && !SQUARE_KINDS.has(k) && !TRIANGLE_KINDS.has(k)))
+      const kinds = new Set(model.events.filter((e) => hasMapAnchor(e.event)).map((e) => e.event.kind));
+      if ([...kinds].some((k) => k !== 'milestone' && k !== 'mission' && !SQUARE_KINDS.has(k) && !TRIANGLE_KINDS.has(k)))
         items.push({ id: 'event', label: t('time.event'), color: 'var(--ink-muted)', kind: 'point' });
+      if (kinds.has('mission')) items.push({ id: 'mission', label: topic.timePresentation?.eventsLabel ?? bi('time.kind.mission'), color: 'var(--ink)', kind: 'ring' });
       if (kinds.has('milestone')) items.push({ id: 'milestone', label: bi('time.kind.milestone'), color: 'var(--ink)', kind: 'ring' });
       if (kinds.has('siege')) items.push({ id: 'siege', label: t('time.legend.siege'), color: 'var(--ink-muted)', kind: 'ring-dashed' });
       if ([...kinds].some((k) => SQUARE_KINDS.has(k)))
@@ -432,7 +452,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     if (layers.includes('sites') && model.sites.length)
       items.push({ id: 'site', label: t('time.legend.site'), color: 'var(--ink)', kind: 'site' });
     return items;
-  }, [geo, model, layers, locale, topic.blocLabels, topic.datedLayers, byEntity, areas, legendKeyframe, approximate, region, coastToday, territoryOn]); // `t` is bound to `locale`
+  }, [geo, model, layers, locale, topic.blocLabels, topic.datedLayers, topic.timePresentation, byEntity, areas, legendKeyframe, approximate, region, coastToday, territoryOn]); // `t` is bound to `locale`
 
   /* ---------- control panel: LAYERS (store layers + drawing modes) and TOOLS ---------- */
   const panelLayers = useMemo<ControlRow[]>(
@@ -442,14 +462,14 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       // A regional plate has no modern borders.
       ...(region ? [] : [{ kind: 'mode' as const, id: 'borders', label: t('time.layer.borders') }]),
       { kind: 'mode', id: 'graticule', label: t('time.layer.graticule') },
-      { kind: 'mode', id: 'flow', label: t('time.layer.movements') },
-      { kind: 'layer', id: 'battles', label: t('time.layer.battles') },
-      { kind: 'layer', id: 'participation', label: t('time.layer.participation') },
+      ...(!model.timePresentation || geo.movements.length > 0 ? [{ kind: 'mode' as const, id: 'flow', label: t('time.layer.movements') }] : []),
+      { kind: 'layer', id: 'battles', label: topic.timePresentation?.eventsLabel ?? t('time.layer.battles') },
+      { kind: 'layer', id: 'participation', label: topic.timePresentation?.entityLabel ?? t('time.layer.participation') },
       ...(model.sites.length > 0 ? [{ kind: 'layer' as const, id: 'sites', label: t('time.layer.sites') }] : []),
       ...(topic.datedLayers ?? []).map((layer) => ({ kind: 'layer' as const, id: layer.id, label: layer.label, color: layer.color ?? entityCssColor(geo.entities.find((e) => e.id === layer.holder))})),
       { kind: 'mode', id: 'labels', label: t('time.layer.labels') },
     ],
-    [model, locale, region, topic.datedLayers, geo.entities], // `t` is bound to `locale`
+    [model, locale, region, topic.datedLayers, topic.timePresentation, geo.entities], // `t` is bound to `locale`
   );
   const hasGlossary = (geo.glossary?.terms.length ?? 0) > 0;
   const panelTools = useMemo<ControlRow[]>(
@@ -475,8 +495,8 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   controllerRef.current = controller;
   const readStats = useCallback(() => {
     const s = controllerRef.current?.stats();
-    return s ? { ...s, fps: fps.current } : null;
-  }, [fps]);
+    return s ? { ...s, ...frameStats(model, frameAt(model, playhead.get())), fps: fps.current } : null;
+  }, [fps, model, playhead]);
 
   /* ---------- HUD controls (docs/08 §3) ---------- */
   const movementsOn = layers.includes('movements');
@@ -486,12 +506,12 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   const statusT = storeT !== null && (isBce(statusParam) || model.mixedEra) ? formatReadout(toNumber(storeT), model, locale) : statusParam;
   const specRows = useMemo<SpecRow[]>(
     () => [
-      { id: 'entities', label: bi('time.spec.entities'), value: pad2(geo.entities.length), mono: true },
-      { id: 'keyframes', label: bi('time.spec.keyframes'), value: pad2(model.keyframes.length), mono: true },
-      { id: 'events', label: bi('time.spec.events'), value: pad2(geo.events.length), mono: true },
-      { id: 'movements', label: bi('time.spec.movements'), value: pad2(geo.movements.length), mono: true },
+      { id: 'entities', label: topic.timePresentation?.entityLabel ?? bi('time.spec.entities'), value: pad2(geo.entities.length), mono: true },
+      ...(!model.timePresentation ? [{ id: 'keyframes', label: bi('time.spec.keyframes'), value: pad2(model.keyframes.length), mono: true }] : []),
+      { id: 'events', label: topic.timePresentation?.eventsLabel ?? bi('time.spec.events'), value: pad2(model.timePresentation ? model.events.length : geo.events.length), mono: true },
+      ...(!model.timePresentation ? [{ id: 'movements', label: bi('time.spec.movements'), value: pad2(geo.movements.length), mono: true }] : []),
     ],
-    [geo, model],
+    [geo, model, topic.timePresentation],
   );
   const controls = useMemo<SceneControls>(() => {
     // Geographic presets only (chapters have the rail, the rule and ← →): world, the whole area, then presets.json.
@@ -519,7 +539,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       },
       modes: {
         items: [
-          { id: 'flow', key: 'f', label: t('time.mode.flow'), on: movementsOn, tone: 'hot', status: 'FLOW' },
+          ...(!model.timePresentation || geo.movements.length > 0 ? [{ id: 'flow', key: 'f', label: t('time.mode.flow'), on: movementsOn, tone: 'hot' as const, status: 'FLOW' }] : []),
           ...(region ? [] : [{ id: 'borders', key: 'b', label: t('time.mode.borders'), on: bordersOn }]),
           { id: 'graticule', key: 'g', label: t('time.mode.graticule'), on: graticuleOn, phone: false },
           { id: 'territory', key: 'n', label: t('time.mode.territory'), on: territoryOn },
@@ -549,7 +569,11 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
           else if (id === 'territory') setTerritoryOn(on);
           else if (id === 'reference') setReferenceMode(on, instant);
           else if (id === 'presentation') {
-            if (on) startPresentation(null, instant);
+            if (on) {
+              const st = store.getState();
+              const at = model.timePresentation ? beatsRef.current.findIndex((beat) => beat.chapter === st.chapter && beat.index === (st.beat ?? 0)) : -1;
+              startPresentation(at >= 0 ? at : null, instant);
+            }
             else stopPresentation(true);
           }
         },
@@ -559,11 +583,20 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
         const s = readStats();
         return s ?? {};
       },
+      ...(model.timePresentation ? { urlBaseline: (state: SceneSnapshot) => {
+        const st = state as SceneSnapshot<TimeSceneExt>;
+        if (st.beat === null || st.beat === undefined) return null;
+        const beat = beatsRef.current.find((item) => item.chapter === st.chapter && item.index === st.beat);
+        if (!beat) return null;
+        const target = store.getState().chapterTarget(beat.chapter);
+        return { ...timeBeatScene(target, beat, true), beat: target.beat };
+      } } : {}),
+      test: { missionContext: (id: string) => missionContext(model, id) },
       specRows,
       status: [statusT],
       time: { now: () => playhead.get() },
       // No participants (a single-country story): no participation card, not an empty frame.
-      ...(geo.entities.length > 0 ? { card: bi('time.card.title'), cardToggle: { expanded: cardExpanded, set: setCardExpanded } } : {}),
+      ...(geo.entities.length > 0 ? { card: topic.timePresentation?.entityLabel ?? bi('time.card.title'), cardToggle: { expanded: cardExpanded, set: setCardExpanded } } : {}),
       beats: beatControls,
       escape: () => {
         if (isPresenting()) {
@@ -620,12 +653,15 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     closeEvent,
     closeEntity,
     region,
+    topic.timePresentation,
     locale, // `t` is bound to `locale`
   ]);
   useSceneControls(controls);
 
   const selectedEvent = selected ? geo.events.find((e) => e.id === selected) ?? null : null;
   const pickedEntity = selectedEntity ? geo.entities.find((e) => e.id === selectedEntity) ?? null : null;
+
+  const chapterIndex = useMemo(() => model.timePresentation ? missionChapterIndex(geo.events, chapters.find((chapter) => chapter.id === currentChapter)?.state as TimeChapterState | undefined) : [], [model, geo.events, chapters, currentChapter]);
 
   return (
     <div className="ts-stage" ref={stageRef} data-reference={reference || undefined} data-presenting={presenting || undefined} data-region-plate={region ? '' : undefined}>
@@ -704,16 +740,22 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
         />
       </SceneSlot>
 
-      {selectedEvent && (
-        <SceneSlot name="inspector">
-          <EventInspector event={selectedEvent} model={model} locale={locale} onClose={closeEvent} />
-        </SceneSlot>
-      )}
-      {pickedEntity && (
-        <SceneSlot name="inspector">
-          <EntityInspector entity={pickedEntity} model={model} playhead={playhead} locale={locale} onClose={closeEntity} />
-        </SceneSlot>
-      )}
+      {chapterIndex.length > 0 && <SceneSlot name="readerEnd">
+        <section className="ts-index" aria-labelledby="ts-index-title">
+          <h3 id="ts-index-title">{t('time.mission.index')}</h3>
+          <ul>{chapterIndex.map((event) => <li key={event.id}>
+            <button type="button" className="ts-index__row" data-event={event.id} data-map-visibility={event.mapVisibility ?? 'anchor'} aria-pressed={selected === event.id} onClick={() => selectEvent(event.id)}>
+              <span>{tx(event.title, locale)}</span>
+              <small>{tx(event.summary, locale)}</small>
+            </button>
+          </li>)}</ul>
+        </section>
+      </SceneSlot>}
+      <SceneSlot name={model.timePresentation ? 'readerTop' : 'inspector'}>
+        {model.timePresentation && <MissionBeatLine captions={presentation.beats.filter((beat) => beat.chapter === currentChapter && beat.spec).map((beat) => tx(beat.caption, locale))} beat={currentBeat} focus={`${currentChapter}|${selected ?? ''}|${selectedEntity ?? ''}`} onBeat={(index) => { if (currentChapter) goToBeatFromBar(currentChapter, index); }} />}
+        {selectedEvent && <EventInspector event={selectedEvent} model={model} locale={locale} onClose={closeEvent} />}
+        {pickedEntity && <EntityInspector entity={pickedEntity} model={model} playhead={playhead} locale={locale} onClose={closeEntity} />}
+      </SceneSlot>
     </div>
   );
 }

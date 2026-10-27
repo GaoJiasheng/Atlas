@@ -105,6 +105,15 @@ export const entityStrings = z
   .strict();
 export type EntityStrings = z.output<typeof entityStrings>;
 
+/** Opt-in mission vocabulary and story-range participation lines. */
+export const timePresentation = z.object({
+  mode: z.literal('missions'),
+  showArea: z.literal(false),
+  eventsLabel: bilingual.refine((text) => text.zh.trim().length > 0, 'Chinese text is required'),
+  entityLabel: bilingual.refine((text) => text.zh.trim().length > 0, 'Chinese text is required'),
+}).strict();
+export type TimePresentation = z.output<typeof timePresentation>;
+
 /** Built-in GeoStage layer ids; topic-defined layers share this namespace. */
 export const BUILTIN_TIME_LAYER_IDS = ['base', 'control', 'borders', 'movements', 'battles', 'participation', 'labels', 'sites'] as const;
 
@@ -190,6 +199,7 @@ export const topicSchema = z
     datePrecision: z.enum(['day', 'month', 'year']).optional(),
     /** TimeScene: wording overrides for the entity card and entity leader notes (`joined`, `left`, `notYet`). */
     strings: entityStrings.optional(),
+    timePresentation: timePresentation.optional(),
     /**
      * Title-block disclaimer line (any engine), replacing the site-wide
      * "Educational visualization", e.g. "Generic design study · not a specific
@@ -199,6 +209,8 @@ export const topicSchema = z
   })
   .strict()
   .superRefine((topic, ctx) => {
+    if (topic.timePresentation !== undefined && (topic.engine !== 'time-scene' || topic.stage !== 'geo'))
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['timePresentation'], message: '`timePresentation` requires time-scene with stage: geo' });
     if (topic.datedLayers !== undefined && (topic.engine !== 'time-scene' || topic.stage !== 'geo'))
       ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['datedLayers'], message: '`datedLayers` requires time-scene with stage: geo' });
     const stages: readonly string[] = ENGINE_STAGES[topic.engine];

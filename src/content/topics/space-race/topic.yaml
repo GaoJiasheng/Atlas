@@ -1,0 +1,30 @@
+id: space-race
+title: { en: "The Space Race", zh: "太空竞赛" }
+subtitle: { en: "Signals, people, robots and connections · 1957–1975", zh: "信号、人、机器人与连接 · 1957–1975年" }
+shortTitle: { en: "Space Race", zh: "太空竞赛" }
+subject: history
+tags: [beyond-syllabus]
+mode: time
+engine: time-scene
+stage: geo
+theme: paper
+sensitivity: open
+status: draft
+illustration: space-race
+blocLabels:
+  axis: { en: "USSR", zh: "苏联项目" }
+  allied: { en: "US", zh: "美国项目" }
+  neutral: { en: "Context", zh: "背景" }
+  out: { en: "Outside this story", zh: "本段以外" }
+strings:
+  joined: { en: "Story begins", zh: "本段故事开始" }
+  left: { en: "Story ends", zh: "本段故事结束" }
+  notYet: { en: "Outside this story", zh: "本段以外" }
+timePresentation:
+  mode: missions
+  showArea: false
+  eventsLabel: { en: "Events", zh: "事件" }
+  entityLabel: { en: "Programmes", zh: "项目" }
+note:
+  en: "Earth map · modern Natural Earth coastlines · Wikidata launch-centre reference points, not orbital or lunar locations · no flight trajectories · dates use UTC where stated"
+  zh: "地球地图 · Natural Earth现代海岸 · 维基数据发射中心参照点，不是轨道或月面位置 · 不画飞行轨迹 · 注明时使用UTC日期"

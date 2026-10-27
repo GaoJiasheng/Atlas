@@ -31,11 +31,11 @@ export function EntityInspector({ entity, model, playhead, locale, onClose }: En
   const { topic } = useSceneContext();
   const ref = useRef<HTMLElement>(null);
   const now = usePlayheadT(playhead);
-  const areas = useMemo(() => controlAreas(model), [model]);
+  const areas = useMemo(() => model.timePresentation ? new Map<string, number[]>() : controlAreas(model), [model]);
 
   useEffect(() => {
-    ref.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-  }, [entity.id]);
+    if (!model.timePresentation) ref.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  }, [entity.id, model.timePresentation]);
 
   const index = `N-${String([...model.entities.keys()].indexOf(entity.id) + 1).padStart(2, '0')}`;
   const other = locale === 'zh' ? entity.name.en : entity.name.zh;
@@ -48,7 +48,7 @@ export function EntityInspector({ entity, model, playhead, locale, onClose }: En
       <header className="ts-event__header">
         <p className="ts-event__eyebrow">
           <span>{index}</span>
-          <span className="ts-event__kind">{t('time.entity.kind')}</span>
+          <span className="ts-event__kind">{model.timePresentation ? tx(model.timePresentation.entityLabel, locale) : t('time.entity.kind')}</span>
         </p>
         <button type="button" className="atlas-control atlas-control--ghost atlas-control--icon" aria-label={t('time.close')} onClick={onClose}>
           <Icon name="close" />
@@ -82,9 +82,10 @@ export function EntityInspector({ entity, model, playhead, locale, onClose }: En
             <dd>{date(entity.left)}</dd>
           </>
         )}
-        <dt>{t('time.entity.area')}</dt>
-        <dd className="ts-entity__area">{area > 0 ? fmtArea(area) : '—'}</dd>
+        {!model.timePresentation && <><dt>{t('time.entity.area')}</dt>
+        <dd className="ts-entity__area">{area > 0 ? fmtArea(area) : '—'}</dd></>}
       </dl>
+      {model.timePresentation && <p className="ts-event__summary">{t('time.mission.storyRange')}</p>}
     </article>
   );
 }

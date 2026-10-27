@@ -1,0 +1,1154 @@
+[
+  {
+    "id": "ev-background-world",
+    "t": "1957-01-01",
+    "kind": "political",
+    "mapVisibility": "timeline-only",
+    "importance": 2,
+    "title": {
+      "en": "Earth reference points",
+      "zh": "地球上的参照点"
+    },
+    "summary": {
+      "en": "The map shows Earth. Its points mark launch centres, not the Moon.",
+      "zh": "图上是地球。点代表发射中心，不代表月球。"
+    },
+    "sources": [
+      "S3",
+      "S36",
+      "S47"
+    ],
+    "detail": {
+      "en": "The three reference facilities are static sites. Their visibility is not a claim about their foundation dates. Modern coastlines locate the story; no modern national border is shown.",
+      "zh": "三个设施点是静态参照；它们可见，并不表示在本章日期成立。现代海岸只用来定位，不显示今天的国界。"
+    }
+  },
+  {
+    "id": "ev-background-rivalry",
+    "t": "1957-01-01",
+    "kind": "political",
+    "mapVisibility": "timeline-only",
+    "importance": 2,
+    "title": {
+      "en": "Two programmes in the Cold War",
+      "zh": "冷战中的两个项目"
+    },
+    "summary": {
+      "en": "The United States and Soviet Union invest in rockets during the Cold War.",
+      "zh": "冷战时期，美国和苏联都投入火箭技术。"
+    },
+    "sources": [
+      "S14",
+      "S3"
+    ]
+  },
+  {
+    "id": "ev-background-mittelwerk",
+    "t": "1957-01-01",
+    "kind": "political",
+    "mapVisibility": "timeline-only",
+    "importance": 2,
+    "title": {
+      "en": "V-2 production and forced labour",
+      "zh": "V-2 生产与强迫劳动"
+    },
+    "summary": {
+      "en": "The V-2 story includes forced labour at Mittelwerk, alongside its engineers.",
+      "zh": "V-2 的历史包括工程师，也包括米特尔工厂的强迫劳动。"
+    },
+    "sources": [
+      "S28"
+    ],
+    "detail": {
+      "en": "Von Braun’s V-2 work must be read alongside Mittelwerk production using forced labour. This is a background record, not an event at a launch-centre map point.",
+      "zh": "冯·布劳恩的 V-2 工作，须与米特尔工厂使用强迫劳动的生产史一起读。这是背景证据，不是发生在发射中心地图点的事件。"
+    }
+  },
+  {
+    "id": "ev-background-korolev",
+    "t": "1957-01-01",
+    "kind": "political",
+    "mapVisibility": "timeline-only",
+    "importance": 2,
+    "title": {
+      "en": "Korolev and imprisonment",
+      "zh": "科罗廖夫与监禁"
+    },
+    "summary": {
+      "en": "Korolev’s earlier imprisonment belongs in the history of Soviet engineering.",
+      "zh": "科罗廖夫早年被囚的经历，也是苏联工程史的一部分。"
+    },
+    "sources": [
+      "S29"
+    ],
+    "detail": {
+      "en": "Korolev was imprisoned during Stalin’s purges and worked within the Soviet prison system before his later space leadership. Engineering achievement does not erase persecution.",
+      "zh": "科罗廖夫在斯大林时期的清洗中被囚，曾在苏联监狱体系工作，后来才领导航天发展。工程成果不能抹去迫害。"
+    }
+  },
+  {
+    "id": "ev-background-evidence",
+    "t": "1957-01-01",
+    "kind": "political",
+    "mapVisibility": "timeline-only",
+    "importance": 2,
+    "title": {
+      "en": "Reading different kinds of evidence",
+      "zh": "辨读不同的证据"
+    },
+    "summary": {
+      "en": "A plan, a flight record and a later memory answer different questions.",
+      "zh": "计划书、飞行记录与后来回忆，回答的是不同问题。"
+    },
+    "sources": [
+      "S24",
+      "S20",
+      "S18"
+    ]
+  },
+  {
+    "id": "ev-sputnik-orbit",
+    "t": "1957-10-04",
+    "kind": "mission",
+    "importance": 2,
+    "title": {
+      "en": "Sputnik 1 in orbit",
+      "zh": "斯普特尼克1号入轨"
+    },
+    "summary": {
+      "en": "Sputnik 1 becomes the first artificial satellite to orbit Earth.",
+      "zh": "斯普特尼克1号成为第一颗环绕地球的人造卫星。"
+    },
+    "sources": [
+      "S3",
+      "S5"
+    ],
+    "at": [
+      63.30511111111111,
+      45.96480555555556
+    ],
+    "missionContext": {
+      "programme": "ussr",
+      "setting": "earth-orbit",
+      "anchorRole": "associated-launch-centre",
+      "anchorSite": "site-baikonur"
+    }
+  },
+  {
+    "id": "ev-laika-flight",
+    "t": "1957-11-03",
+    "kind": "mission",
+    "importance": 2,
+    "title": {
+      "en": "Laika aboard Sputnik 2",
+      "zh": "斯普特尼克2号上的莱卡"
+    },
+    "summary": {
+      "en": "Sputnik 2 carries Laika without a return system. She does not survive.",
+      "zh": "斯普特尼克2号带着莱卡飞行，没有返回系统；她未能生还。"
+    },
+    "sources": [
+      "S6"
+    ],
+    "at": [
+      63.30511111111111,
+      45.96480555555556
+    ],
+    "missionContext": {
+      "programme": "ussr",
+      "setting": "earth-orbit",
+      "anchorRole": "associated-launch-centre",
+      "anchorSite": "site-baikonur"
+    }
+  },
+  {
+    "id": "ev-explorer-orbit",
+    "t": "1958-02-01",
+    "kind": "mission",
+    "importance": 2,
+    "title": {
+      "en": "Explorer 1 in orbit",
+      "zh": "探险者1号入轨"
+    },
+    "summary": {
+      "en": "Explorer 1 is the first US satellite; Florida’s launch date is 31 January.",
+      "zh": "探险者1号是美国第一颗卫星；佛罗里达当地发射日是1月31日。"
+    },
+    "sources": [
+      "S4",
+      "S42"
+    ],
+    "at": [
+      -80.57777777777777,
+      28.48888888888889
+    ],
+    "missionContext": {
+      "programme": "us",
+      "setting": "earth-orbit",
+      "anchorRole": "associated-launch-centre",
+      "anchorSite": "site-cape"
+    },
+    "detail": {
+      "en": "The launch was 31 January 1958 in Florida and 1 February in UTC. Its detector contributed to discovering Earth’s radiation belts. This centre marker is not an orbital position.",
+      "zh": "佛罗里达当地发射日为1958年1月31日，UTC 已是2月1日。探测器的观测帮助发现地球辐射带。中心点不是卫星的轨道位置。"
+    }
+  },
+  {
+    "id": "ev-nasa-operations",
+    "t": "1958-10-01",
+    "kind": "political",
+    "mapVisibility": "timeline-only",
+    "importance": 2,
+    "title": {
+      "en": "NASA begins operations",
+      "zh": "NASA 开始运作"
+    },
+    "summary": {
+      "en": "NASA begins operations after Explorer 1 has already flown.",
+      "zh": "NASA 开始运作时，探险者1号已经飞行。"
+    },
+    "sources": [
+      "S3"
+    ]
+  },
+  {
+    "id": "ev-luna-early",
+    "t": "1959-10-07",
+    "kind": "political",
+    "mapVisibility": "timeline-only",
+    "importance": 2,
+    "title": {
+      "en": "Three early Luna outcomes",
+      "zh": "早期月球号的三种成果"
+    },
+    "summary": {
+      "en": "The 1959 Luna probes fly past, impact, and photograph the Moon. These are different results.",
+      "zh": "1959年的月球号探测器分别飞越、撞击与拍摄月球，成果各不相同。"
+    },
+    "sources": [
+      "S13"
+    ],
+    "detail": {
+      "en": "This 7 October 1959 record looks back over the year: Luna 1 flew past, Luna 2 impacted and Luna 3 photographed the far side. The three results did not occur on one day.",
+      "zh": "本条以1959年10月7日回顾当年任务：月球1号飞越、2号撞击、3号拍摄背面。三个成果不是同一天发生。"
+    }
+  },
+  {
+    "id": "ev-gagarin-orbit",
+    "t": "1961-04-12",
+    "kind": "mission",
+    "importance": 2,
+    "title": {
+      "en": "Gagarin in Vostok 1",
+      "zh": "东方1号上的加加林"
+    },
+    "summary": {
+      "en": "Gagarin orbits Earth in Vostok 1, the first human spaceflight.",
+      "zh": "加加林乘东方1号绕地球飞行，完成人类首次太空飞行。"
+    },
+    "sources": [
+      "S7"
+    ],
+    "at": [
+      63.30511111111111,
+      45.96480555555556
+    ],
+    "missionContext": {
+      "programme": "ussr",
+      "setting": "earth-orbit",
+      "anchorRole": "associated-launch-centre",
+      "anchorSite": "site-baikonur"
+    }
+  },
+  {
+    "id": "ev-shepard-flight",
+    "t": "1961-05-05",
+    "kind": "mission",
+    "importance": 2,
+    "title": {
+      "en": "Shepard’s suborbital flight",
+      "zh": "谢泼德的亚轨道飞行"
+    },
+    "summary": {
+      "en": "Shepard reaches space on a suborbital flight; he does not circle Earth.",
+      "zh": "谢泼德完成亚轨道太空飞行，没有绕地球一周。"
+    },
+    "sources": [
+      "S7"
+    ],
+    "at": [
+      -80.57777777777777,
+      28.48888888888889
+    ],
+    "missionContext": {
+      "programme": "us",
+      "setting": "suborbital",
+      "anchorRole": "associated-launch-centre",
+      "anchorSite": "site-cape"
+    }
+  },
+  {
+    "id": "ev-moon-goal",
+    "t": "1961-05-25",
+    "kind": "political",
+    "mapVisibility": "timeline-only",
+    "importance": 2,
+    "title": {
+      "en": "A Moon landing and a safe return",
+      "zh": "登月与安全返回的目标"
+    },
+    "summary": {
+      "en": "Kennedy proposes landing a person on the Moon and bringing that person safely back.",
+      "zh": "肯尼迪提出让人登月，并把人安全带回地球的目标。"
+    },
+    "sources": [
+      "S14"
+    ]
+  },
+  {
+    "id": "ev-glenn-tereshkova",
+    "t": "1963-06-16",
+    "kind": "political",
+    "mapVisibility": "timeline-only",
+    "importance": 2,
+    "title": {
+      "en": "Glenn and Tereshkova in orbit",
+      "zh": "格伦与捷列什科娃的轨道飞行"
+    },
+    "summary": {
+      "en": "After Glenn’s US orbital flight, Tereshkova becomes the first woman in space.",
+      "zh": "格伦完成美国首次载人轨道飞行之后，捷列什科娃成为首位进入太空的女性。"
+    },
+    "sources": [
+      "S7",
+      "S8"
+    ],
+    "detail": {
+      "en": "John Glenn first orbited Earth for the United States on 20 February 1962. Valentina Tereshkova flew Vostok 6 on 16 June 1963 as the first woman in space. This is a retrospective comparison.",
+      "zh": "约翰·格伦在1962年2月20日完成美国首次载人轨道飞行。瓦莲京娜·捷列什科娃于1963年6月16日乘东方6号飞行，成为首位进入太空的女性。本条是回顾比较。"
+    }
+  },
+  {
+    "id": "ev-voskhod-spacewalk",
+    "t": "1965-03-18",
+    "kind": "mission",
+    "importance": 2,
+    "title": {
+      "en": "Leonov’s spacewalk",
+      "zh": "列昂诺夫的太空行走"
+    },
+    "summary": {
+      "en": "Voskhod expands crew flight; Leonov then makes the first spacewalk.",
+      "zh": "上升号扩展了多人飞行；随后列昂诺夫完成首次太空行走。"
+    },
+    "sources": [
+      "S9"
+    ],
+    "at": [
+      63.30511111111111,
+      45.96480555555556
+    ],
+    "missionContext": {
+      "programme": "ussr",
+      "setting": "earth-orbit",
+      "anchorRole": "associated-launch-centre",
+      "anchorSite": "site-baikonur"
+    }
+  },
+  {
+    "id": "ev-gemini-rendezvous",
+    "t": "1965-12-15",
+    "kind": "mission",
+    "importance": 2,
+    "title": {
+      "en": "Gemini rendezvous",
+      "zh": "双子座的交会"
+    },
+    "summary": {
+      "en": "Gemini VI-A and VII meet in orbit without docking.",
+      "zh": "双子座 VI-A 与 VII 在轨道上交会，没有对接。"
+    },
+    "sources": [
+      "S42",
+      "S11"
+    ],
+    "at": [
+      -80.57777777777777,
+      28.48888888888889
+    ],
+    "missionContext": {
+      "programme": "us",
+      "setting": "earth-orbit",
+      "anchorRole": "associated-launch-centre",
+      "anchorSite": "site-cape"
+    }
+  },
+  {
+    "id": "ev-luna-nine",
+    "t": "1966-02-03",
+    "kind": "mission",
+    "importance": 2,
+    "title": {
+      "en": "Luna 9 soft landing",
+      "zh": "月球9号软着陆"
+    },
+    "summary": {
+      "en": "Luna 9 makes the first successful soft landing on the Moon.",
+      "zh": "月球9号完成首次成功的月球软着陆。"
+    },
+    "sources": [
+      "S12"
+    ],
+    "at": [
+      63.30511111111111,
+      45.96480555555556
+    ],
+    "missionContext": {
+      "programme": "ussr",
+      "setting": "moon-surface",
+      "anchorRole": "associated-launch-centre",
+      "anchorSite": "site-baikonur"
+    }
+  },
+  {
+    "id": "ev-gemini-docking",
+    "t": "1966-03-16",
+    "kind": "mission",
+    "importance": 2,
+    "title": {
+      "en": "Gemini VIII docking and emergency",
+      "zh": "双子座8号对接与险情"
+    },
+    "summary": {
+      "en": "Gemini VIII docks with a target vehicle, then faces a thruster emergency.",
+      "zh": "双子座 VIII 与目标飞行器对接，随后遇上推进器故障。"
+    },
+    "sources": [
+      "S11"
+    ],
+    "at": [
+      -80.57777777777777,
+      28.48888888888889
+    ],
+    "missionContext": {
+      "programme": "us",
+      "setting": "earth-orbit",
+      "anchorRole": "associated-launch-centre",
+      "anchorSite": "site-cape"
+    }
+  },
+  {
+    "id": "ev-luna-ten",
+    "t": "1966-04-03",
+    "kind": "mission",
+    "importance": 2,
+    "title": {
+      "en": "Luna 10 lunar orbit",
+      "zh": "月球10号进入月球轨道"
+    },
+    "summary": {
+      "en": "Luna 10 becomes a lunar orbiter. Orbiting and landing are separate tasks.",
+      "zh": "月球10号成为月球轨道器。绕月和着陆是不同任务。"
+    },
+    "sources": [
+      "S12"
+    ],
+    "at": [
+      63.30511111111111,
+      45.96480555555556
+    ],
+    "missionContext": {
+      "programme": "ussr",
+      "setting": "lunar-orbit",
+      "anchorRole": "associated-launch-centre",
+      "anchorSite": "site-baikonur"
+    }
+  },
+  {
+    "id": "ev-us-lunar-surveys",
+    "t": "1966-08-10",
+    "kind": "political",
+    "mapVisibility": "timeline-only",
+    "importance": 2,
+    "title": {
+      "en": "US robotic lunar surveys",
+      "zh": "美国机器人的月球勘测"
+    },
+    "summary": {
+      "en": "Ranger, Surveyor and Lunar Orbiter investigate the Moon before crewed landings.",
+      "zh": "徘徊者、勘测者与月球轨道器在载人着陆前调查月球。"
+    },
+    "sources": [
+      "S12"
+    ]
+  },
+  {
+    "id": "ev-apollo-one-fire",
+    "t": "1967-01-27",
+    "kind": "mission",
+    "importance": 2,
+    "title": {
+      "en": "Apollo 1 ground-test fire",
+      "zh": "阿波罗1号地面测试火灾"
+    },
+    "summary": {
+      "en": "Grissom, White and Chaffee die in the Apollo 1 ground-test fire. Three people are lost.",
+      "zh": "格里森、怀特与查菲在阿波罗1号地面测试火灾中遇难，共3人。"
+    },
+    "sources": [
+      "S15"
+    ],
+    "at": [
+      -80.57777777777777,
+      28.48888888888889
+    ],
+    "missionContext": {
+      "programme": "us",
+      "setting": "earth-surface",
+      "anchorRole": "associated-launch-centre",
+      "anchorSite": "site-cape"
+    },
+    "detail": {
+      "en": "Gus Grissom, Ed White and Roger Chaffee died on 27 January 1967 during a ground test. The cabin fire was not a launch accident.",
+      "zh": "格斯·格里森、爱德华·怀特和罗杰·查菲于1967年1月27日在地面测试中遇难。舱内火灾不是发射事故。"
+    },
+    "casualties": {
+      "us": 3
+    }
+  },
+  {
+    "id": "ev-soyuz-one-loss",
+    "t": "1967-04-24",
+    "kind": "mission",
+    "importance": 2,
+    "title": {
+      "en": "Soyuz 1 return loss",
+      "zh": "联盟1号返回事故"
+    },
+    "summary": {
+      "en": "Komarov dies when Soyuz 1’s return parachute system fails. One person is lost.",
+      "zh": "联盟1号返回伞系统失效，科马罗夫遇难，共1人。"
+    },
+    "sources": [
+      "S16"
+    ],
+    "at": [
+      63.30511111111111,
+      45.96480555555556
+    ],
+    "missionContext": {
+      "programme": "ussr",
+      "setting": "earth-surface",
+      "anchorRole": "associated-launch-centre",
+      "anchorSite": "site-baikonur"
+    },
+    "detail": {
+      "en": "Vladimir Komarov died during the Soyuz 1 return on 24 April 1967 after parachute-system failure. The associated Baikonur point is not the accident location.",
+      "zh": "弗拉基米尔·科马罗夫于1967年4月24日在联盟1号返回时，因降落伞系统失效遇难。关联的拜科努尔点不是事故地点。"
+    },
+    "casualties": {
+      "ussr": 1
+    }
+  },
+  {
+    "id": "ev-zond-five-return",
+    "t": "1968-09-21",
+    "kind": "mission",
+    "importance": 2,
+    "title": {
+      "en": "Zond 5 returns",
+      "zh": "探测器5号返回"
+    },
+    "summary": {
+      "en": "Uncrewed Zond 5 returns from a journey around the Moon; it has not entered lunar orbit.",
+      "zh": "无人驾驶的探测器5号绕月后返回；它并未进入月球环绕轨道。"
+    },
+    "sources": [
+      "S18"
+    ],
+    "at": [
+      63.30511111111111,
+      45.96480555555556
+    ],
+    "missionContext": {
+      "programme": "ussr",
+      "setting": "earth-surface",
+      "anchorRole": "associated-launch-centre",
+      "anchorSite": "site-baikonur"
+    },
+    "detail": {
+      "en": "Zond 5 circled the Moon and returned biological specimens without a human crew. Circling around the Moon on a return trajectory is not the same as entering lunar orbit.",
+      "zh": "探测器5号没有载人，绕过月球后把生物标本带回地球。绕过月球并返回的轨迹，不等于进入月球轨道。"
+    }
+  },
+  {
+    "id": "ev-apollo-eight-orbit",
+    "t": "1968-12-24",
+    "kind": "mission",
+    "importance": 2,
+    "title": {
+      "en": "Apollo 8 lunar orbit",
+      "zh": "阿波罗8号进入月球轨道"
+    },
+    "summary": {
+      "en": "Apollo 8 carries people into lunar orbit without a lunar module.",
+      "zh": "阿波罗8号把人送入月球轨道，没有携带登月舱。"
+    },
+    "sources": [
+      "S24"
+    ],
+    "at": [
+      -80.64861111111112,
+      28.52472222222222
+    ],
+    "missionContext": {
+      "programme": "us",
+      "setting": "lunar-orbit",
+      "anchorRole": "associated-launch-centre",
+      "anchorSite": "site-kennedy"
+    }
+  },
+  {
+    "id": "ev-lunar-tests",
+    "t": "1969-05-22",
+    "kind": "political",
+    "mapVisibility": "timeline-only",
+    "importance": 2,
+    "title": {
+      "en": "N1 and Apollo rehearsals",
+      "zh": "N1 与阿波罗的验证试飞"
+    },
+    "summary": {
+      "en": "The first N1 test has failed; Apollo 9 and 10 test the lander before a landing attempt.",
+      "zh": "N1首次测试已经失败；阿波罗9号与10号在着陆尝试前验证登月舱。"
+    },
+    "sources": [
+      "S18",
+      "S24"
+    ]
+  },
+  {
+    "id": "ev-apollo-eleven-launch",
+    "t": "1969-07-16",
+    "kind": "mission",
+    "importance": 2,
+    "title": {
+      "en": "Apollo 11 launches",
+      "zh": "阿波罗11号发射"
+    },
+    "summary": {
+      "en": "Apollo 11 launches with Armstrong, Collins and Aldrin aboard.",
+      "zh": "阿波罗11号载着阿姆斯特朗、柯林斯与奥尔德林发射。"
+    },
+    "sources": [
+      "S21",
+      "S24"
+    ],
+    "at": [
+      -80.64861111111112,
+      28.52472222222222
+    ],
+    "missionContext": {
+      "programme": "us",
+      "setting": "earth-surface",
+      "anchorRole": "associated-launch-centre",
+      "anchorSite": "site-kennedy"
+    }
+  },
+  {
+    "id": "ev-apollo-transfer",
+    "t": "1969-07-16",
+    "kind": "mission",
+    "importance": 2,
+    "title": {
+      "en": "Docking and extracting the lander",
+      "zh": "对接并取出登月舱"
+    },
+    "summary": {
+      "en": "The command and service modules turn, dock and extract the lunar module.",
+      "zh": "指令舱与服务舱转身，对接并抽出登月舱。"
+    },
+    "sources": [
+      "S21"
+    ],
+    "at": [
+      -80.64861111111112,
+      28.52472222222222
+    ],
+    "missionContext": {
+      "programme": "us",
+      "setting": "cislunar",
+      "anchorRole": "associated-launch-centre",
+      "anchorSite": "site-kennedy"
+    }
+  },
+  {
+    "id": "ev-eagle-touchdown",
+    "t": "1969-07-20",
+    "kind": "mission",
+    "importance": 2,
+    "title": {
+      "en": "Eagle touches down",
+      "zh": "鹰号着陆"
+    },
+    "summary": {
+      "en": "Eagle lands at 20:17 UTC. Collins remains in lunar orbit.",
+      "zh": "鹰号于 UTC 20:17 着陆；柯林斯留在月球轨道。"
+    },
+    "sources": [
+      "S21",
+      "S20",
+      "S41"
+    ],
+    "at": [
+      -80.64861111111112,
+      28.52472222222222
+    ],
+    "missionContext": {
+      "programme": "us",
+      "setting": "moon-surface",
+      "anchorRole": "associated-launch-centre",
+      "anchorSite": "site-kennedy",
+      "occurredAt": "1969-07-20T20:17:39Z"
+    },
+    "detail": {
+      "en": "The mission summary records touchdown at 20:17:39 UTC on 20 July 1969. Singapore then used UTC+07:30: about 03:47 on 21 July. Collins stayed in lunar orbit; Armstrong and Aldrin landed.",
+      "zh": "任务汇总记录着陆时刻为1969年7月20日20:17:39 UTC。新加坡当时用 UTC+07:30，即7月21日约03:47。柯林斯留在月球轨道，阿姆斯特朗与奥尔德林着陆。"
+    }
+  },
+  {
+    "id": "ev-moon-step-and-probe",
+    "t": "1969-07-21",
+    "kind": "political",
+    "mapVisibility": "timeline-only",
+    "importance": 2,
+    "title": {
+      "en": "First step and Luna 15",
+      "zh": "首次踏足与月球15号"
+    },
+    "summary": {
+      "en": "The first step is at 02:56 UTC. The crew collects samples; Luna 15 crashes that day.",
+      "zh": "首次踏足是 UTC 02:56。乘员采集标本；月球15号当天坠毁。"
+    },
+    "sources": [
+      "S20",
+      "S22",
+      "S41"
+    ],
+    "detail": {
+      "en": "Armstrong’s first step was about 02:56 UTC on 21 July, about 10:26 in Singapore at UTC+07:30. Luna 15 crashed that day while attempting robotic sample return. Flight-path information had been exchanged. Read each separate mission record for its own setting.",
+      "zh": "阿姆斯特朗首次踏足月面的时间约为7月21日02:56 UTC，按新加坡当时 UTC+07:30，约为10:26。同日月球15号在尝试无人采样返回时坠毁。双方曾交换飞行路线资料。各任务的实际环境见独立记录。"
+    }
+  },
+  {
+    "id": "ev-apollo-eleven-return",
+    "t": "1969-07-24",
+    "kind": "mission",
+    "importance": 2,
+    "title": {
+      "en": "Apollo 11 returns",
+      "zh": "阿波罗11号返回"
+    },
+    "summary": {
+      "en": "All three return to Earth in the command module, carrying about 22 kg of lunar samples.",
+      "zh": "三人乘指令舱返回地球，带回约22千克月球标本。"
+    },
+    "sources": [
+      "S21",
+      "S20"
+    ],
+    "at": [
+      -80.64861111111112,
+      28.52472222222222
+    ],
+    "missionContext": {
+      "programme": "us",
+      "setting": "earth-surface",
+      "anchorRole": "associated-launch-centre",
+      "anchorSite": "site-kennedy"
+    },
+    "detail": {
+      "en": "Apollo 11 returned 21.55 kg of lunar material, rounded here to about 22 kg. The surface stay was about 21 hours 36 minutes; that is not the duration of the moonwalk. Only the command module re-entered with the crew. A coarser rounding would be 20 kg; this topic uses 21.55 kg from the mission summary and about 22 kg in the main text.",
+      "zh": "阿波罗11号带回21.55千克月球物质，正文取整为约22千克。月面停留约21小时36分钟，并不是太空行走时长。只有指令舱载着乘员重返大气层。更粗略取整可得20千克；本题采用任务汇总的21.55千克，正文写约22千克。"
+    }
+  },
+  {
+    "id": "ev-apollo-thirteen-return",
+    "t": "1970-04-17",
+    "kind": "mission",
+    "importance": 2,
+    "title": {
+      "en": "Apollo 13 returns alive",
+      "zh": "阿波罗13号乘员生还"
+    },
+    "summary": {
+      "en": "Apollo 13 does not land on the Moon; its crew returns alive.",
+      "zh": "阿波罗13号没有登月，乘组生还返回。"
+    },
+    "sources": [
+      "S12"
+    ],
+    "at": [
+      -80.64861111111112,
+      28.52472222222222
+    ],
+    "missionContext": {
+      "programme": "us",
+      "setting": "earth-surface",
+      "anchorRole": "associated-launch-centre",
+      "anchorSite": "site-kennedy"
+    }
+  },
+  {
+    "id": "ev-luna-sixteen-return",
+    "t": "1970-09-24",
+    "kind": "mission",
+    "importance": 2,
+    "title": {
+      "en": "Luna 16 robotic sample return",
+      "zh": "月球16号无人采样返回"
+    },
+    "summary": {
+      "en": "Luna 16 brings lunar samples back without a human crew.",
+      "zh": "月球16号在没有载人乘组的情况下带回月球标本。"
+    },
+    "sources": [
+      "S12"
+    ],
+    "at": [
+      63.30511111111111,
+      45.96480555555556
+    ],
+    "missionContext": {
+      "programme": "ussr",
+      "setting": "earth-surface",
+      "anchorRole": "associated-launch-centre",
+      "anchorSite": "site-baikonur"
+    }
+  },
+  {
+    "id": "ev-lunokhod-rover",
+    "t": "1970-11-17",
+    "kind": "mission",
+    "importance": 2,
+    "title": {
+      "en": "Lunokhod 1 on the Moon",
+      "zh": "月面上的月球车1号"
+    },
+    "summary": {
+      "en": "Lunokhod 1 explores on eight wheels, controlled from Earth.",
+      "zh": "月球车1号用八个车轮探测月面，由地球遥控。"
+    },
+    "sources": [
+      "S12",
+      "S35"
+    ],
+    "at": [
+      63.30511111111111,
+      45.96480555555556
+    ],
+    "missionContext": {
+      "programme": "ussr",
+      "setting": "moon-surface",
+      "anchorRole": "associated-launch-centre",
+      "anchorSite": "site-baikonur"
+    }
+  },
+  {
+    "id": "ev-soyuz-eleven-loss",
+    "t": "1971-06-30",
+    "kind": "mission",
+    "importance": 2,
+    "title": {
+      "en": "Soyuz 11 return loss",
+      "zh": "联盟11号返回事故"
+    },
+    "summary": {
+      "en": "After working on Salyut 1, Dobrovolski, Volkov and Patsayev die when Soyuz 11 loses cabin pressure.",
+      "zh": "多布罗沃尔斯基、沃尔科夫与帕察耶夫在礼炮1号工作后，因联盟11号失压遇难。"
+    },
+    "sources": [
+      "S17"
+    ],
+    "at": [
+      63.30511111111111,
+      45.96480555555556
+    ],
+    "missionContext": {
+      "programme": "ussr",
+      "setting": "earth-orbit",
+      "anchorRole": "associated-launch-centre",
+      "anchorSite": "site-baikonur"
+    },
+    "detail": {
+      "en": "Georgi Dobrovolski, Vladislav Volkov and Viktor Patsayev died following Soyuz 11 cabin depressurisation on 30 June 1971, after living on Salyut 1. The depressurisation occurred in space during return, not at the launch centre.",
+      "zh": "格奥尔基·多布罗沃尔斯基、弗拉季斯拉夫·沃尔科夫和维克托·帕察耶夫在礼炮1号生活后，于1971年6月30日因联盟11号座舱失压遇难。失压发生于返回途中的太空，不是在发射中心。"
+    },
+    "casualties": {
+      "ussr": 3
+    }
+  },
+  {
+    "id": "ev-apollo-era-close",
+    "t": "1972-12-19",
+    "kind": "political",
+    "mapVisibility": "timeline-only",
+    "importance": 2,
+    "title": {
+      "en": "The lunar programmes by 1972",
+      "zh": "截至1972年的登月项目"
+    },
+    "summary": {
+      "en": "Six Apollo missions have landed people on the Moon. Four N1 tests have failed without crews aboard.",
+      "zh": "六次阿波罗任务把人送上月面；N1四次无人测试均未成功。"
+    },
+    "sources": [
+      "S18",
+      "S12"
+    ]
+  },
+  {
+    "id": "ev-n-one-costs",
+    "t": "1973-01-01",
+    "kind": "political",
+    "mapVisibility": "timeline-only",
+    "importance": 2,
+    "title": {
+      "en": "N1-L3 cost account",
+      "zh": "N1-L3 支出账目"
+    },
+    "summary": {
+      "en": "The N1-L3 account reaches 3.6 billion rubles by this date; it is not all Soviet space spending.",
+      "zh": "截至这一天，N1-L3账目为36亿卢布；它不是苏联全部航天支出。"
+    },
+    "sources": [
+      "S18"
+    ],
+    "detail": {
+      "en": "Siddiqi reports 3.6 billion rubles for N1-L3 by 1 January 1973, with later rough totals of 4.0–4.5 billion rubles. This is not all Soviet space spending. No exchange-rate or purchasing-power comparison with Apollo is drawn.",
+      "zh": "西迪基记载，截至1973年1月1日，N1-L3支出为36亿卢布，后来粗略总计为40亿至45亿卢布。这不是苏联全部太空支出。本题不据汇率或购买力与阿波罗直接比较。"
+    }
+  },
+  {
+    "id": "ev-apollo-costs",
+    "t": "1973",
+    "kind": "political",
+    "mapVisibility": "timeline-only",
+    "importance": 2,
+    "title": {
+      "en": "Apollo cost account",
+      "zh": "阿波罗支出账目"
+    },
+    "summary": {
+      "en": "The historical Apollo account is about US$25.4 billion. Currency, years and scope stay beside the number.",
+      "zh": "阿波罗的历史项目账约为254亿美元。币种、年代和范围始终伴随数字。"
+    },
+    "sources": [
+      "S42",
+      "S45"
+    ],
+    "detail": {
+      "en": "NASA’s historical account reports US$25.4 billion in 1973. A later reconstructed account is near US$25.8 billion because its accounting scope differs; these are historical dollars, not an inflation range. Only year precision is supported by this account.",
+      "zh": "NASA历史记述在1973年报告254亿美元。后来的重建账目接近258亿美元，原因是会计范围不同；这些都是历史美元，不是通胀区间。本账目只支持年份精度。"
+    }
+  },
+  {
+    "id": "ev-stations-follow",
+    "t": "1973-05-14",
+    "kind": "political",
+    "mapVisibility": "timeline-only",
+    "importance": 2,
+    "title": {
+      "en": "Salyut and Skylab",
+      "zh": "礼炮号与天空实验室"
+    },
+    "summary": {
+      "en": "Salyut and Skylab continue orbital research after the first Moon landing.",
+      "zh": "首次登月之后，礼炮号与天空实验室继续在轨道开展研究。"
+    },
+    "sources": [
+      "S17",
+      "S42"
+    ]
+  },
+  {
+    "id": "ev-costs-human",
+    "t": "1975-07-15",
+    "kind": "political",
+    "mapVisibility": "timeline-only",
+    "importance": 2,
+    "title": {
+      "en": "Seven deaths in three named accidents",
+      "zh": "三起指定事故中的七名死者"
+    },
+    "summary": {
+      "en": "The three named crew accidents killed seven people altogether; this is a specified subtotal, not a space-age total.",
+      "zh": "上述三起乘组事故合计造成7人死亡；这只是指定小计，不是太空时代总数。"
+    },
+    "sources": [
+      "S15",
+      "S16",
+      "S17"
+    ],
+    "detail": {
+      "en": "Apollo 1: 3; Soyuz 1: 1; Soyuz 11: 3. The subtotal is seven people in those three named accidents. It is not a count of every death connected with spaceflight, nor a new accident on this review date.",
+      "zh": "阿波罗1号3人，联盟1号1人，联盟11号3人。合计7人，仅限这三起指定事故；不是所有航天相关死亡总数，也不是回顾日期又发生事故。"
+    }
+  },
+  {
+    "id": "ev-apollo-soyuz-dock",
+    "t": "1975-07-17",
+    "kind": "mission",
+    "importance": 2,
+    "title": {
+      "en": "Apollo–Soyuz docking",
+      "zh": "阿波罗—联盟号对接"
+    },
+    "summary": {
+      "en": "Apollo and Soyuz dock using a connecting module. The Apollo launch vehicle was a Saturn IB.",
+      "zh": "阿波罗与联盟号通过连接舱对接；阿波罗使用的运载火箭是土星IB。"
+    },
+    "sources": [
+      "S23"
+    ],
+    "at": [
+      -80.57777777777777,
+      28.48888888888889
+    ],
+    "missionContext": {
+      "programme": "us",
+      "setting": "earth-orbit",
+      "anchorRole": "associated-launch-centre",
+      "anchorSite": "site-cape",
+      "relatedSites": [
+        "site-baikonur"
+      ]
+    },
+    "detail": {
+      "en": "Apollo and Soyuz docked on 17 July 1975 in Earth orbit through a connecting docking module. The Apollo vehicle launched on Saturn IB, not Saturn V. Cape Canaveral and Baikonur are associated centres, not the docking location.",
+      "zh": "阿波罗与联盟号于1975年7月17日在地球轨道通过对接舱连接。阿波罗的运载火箭是土星IB，不是土星V。卡纳维拉尔角与拜科努尔是关联中心，并非对接地点。"
+    }
+  },
+  {
+    "id": "ev-armstrong-step",
+    "t": "1969-07-21",
+    "at": [
+      -80.64861111111112,
+      28.52472222222222
+    ],
+    "kind": "mission",
+    "importance": 3,
+    "title": {
+      "en": "Armstrong’s first step",
+      "zh": "阿姆斯特朗首次踏足"
+    },
+    "summary": {
+      "en": "21 July 1969, about 02:56 UTC: Armstrong first steps onto the Moon; Singapore’s time was about 10:26 at UTC+07:30.",
+      "zh": "1969年7月21日约02:56 UTC，阿姆斯特朗首次踏足月面；按新加坡当时UTC+07:30，约为10:26。"
+    },
+    "missionContext": {
+      "programme": "us",
+      "setting": "moon-surface",
+      "anchorRole": "associated-launch-centre",
+      "anchorSite": "site-kennedy",
+      "occurredAt": "1969-07-21T02:56:15Z"
+    },
+    "sources": [
+      "S20",
+      "S41"
+    ]
+  },
+  {
+    "id": "ev-luna-fifteen-crash",
+    "t": "1969-07-21",
+    "at": [
+      63.30511111111111,
+      45.96480555555556
+    ],
+    "kind": "mission",
+    "importance": 3,
+    "title": {
+      "en": "Luna 15 crashes",
+      "zh": "月球15号坠毁"
+    },
+    "summary": {
+      "en": "21 July 1969: Luna 15 crashes during a robotic lunar sample-return attempt. The Baikonur map point is its associated launch centre.",
+      "zh": "1969年7月21日：月球15号在无人月球采样返回尝试中坠毁。地图上的拜科努尔是其关联发射中心。"
+    },
+    "missionContext": {
+      "programme": "ussr",
+      "setting": "moon-surface",
+      "anchorRole": "associated-launch-centre",
+      "anchorSite": "site-baikonur"
+    },
+    "sources": [
+      "S22"
+    ]
+  },
+  {
+    "id": "site-baikonur",
+    "t": "1957-01-01",
+    "at": [
+      63.30511111111111,
+      45.96480555555556
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Baikonur Cosmodrome",
+      "zh": "拜科努尔航天发射场"
+    },
+    "summary": {
+      "en": "Facility reference point from Wikidata P625. This is a centre, not an individual pad or an orbital position; static visibility does not give a founding date.",
+      "zh": "取自维基数据P625的设施参照点，代表中心，不代表某个发射台或轨道位置；静态可见不表示成立日期。"
+    },
+    "sources": [
+      "S37",
+      "S47"
+    ]
+  },
+  {
+    "id": "site-kennedy",
+    "t": "1957-01-01",
+    "at": [
+      -80.64861111111112,
+      28.52472222222222
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Kennedy Space Center",
+      "zh": "肯尼迪航天中心"
+    },
+    "summary": {
+      "en": "Facility reference point from Wikidata P625. This is a centre, not an individual pad or an orbital position; static visibility does not give a founding date.",
+      "zh": "取自维基数据P625的设施参照点，代表中心，不代表某个发射台或轨道位置；静态可见不表示成立日期。"
+    },
+    "sources": [
+      "S37",
+      "S47"
+    ]
+  },
+  {
+    "id": "site-cape",
+    "t": "1957-01-01",
+    "at": [
+      -80.57777777777777,
+      28.48888888888889
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Cape Canaveral launch area",
+      "zh": "卡纳维拉尔角发射区"
+    },
+    "summary": {
+      "en": "Facility reference point from Wikidata P625. This is a centre, not an individual pad or an orbital position; static visibility does not give a founding date.",
+      "zh": "取自维基数据P625的设施参照点，代表中心，不代表某个发射台或轨道位置；静态可见不表示成立日期。"
+    },
+    "sources": [
+      "S37",
+      "S47"
+    ]
+  }
+]

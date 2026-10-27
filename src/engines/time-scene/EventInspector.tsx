@@ -15,6 +15,7 @@ import { SourceRefs } from '../widgets/SourcePopover';
 import { Icon } from '../widgets/icons';
 import type { SceneEvent } from './schema';
 import type { TimeModel } from './lib/model';
+import { missionSetting } from './lib/missions';
 import { counterPer, formatTimeRange } from './lib/format';
 import { toNumber } from './lib/time';
 import { sideCssColor } from './colors';
@@ -78,8 +79,8 @@ export function EventInspector({ event, model, locale, onClose }: EventInspector
   const colorOf = (id: string) => sideCssColor(model.entities.get(id)?.entity, at);
 
   useEffect(() => {
-    ref.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-  }, [event.id]);
+    if (!model.timePresentation) ref.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  }, [event.id, model.timePresentation]);
 
   const isSite = event.kind === 'site';
   const p = model.datePrecision;
@@ -94,7 +95,7 @@ export function EventInspector({ event, model, locale, onClose }: EventInspector
       <header className="ts-event__header">
         <p className="ts-event__eyebrow">
           <span>{index}</span>
-          <span className="ts-event__kind">{t(`time.kind.${event.kind}`)}</span>
+          <span className="ts-event__kind">{model.timePresentation && !isSite ? tx(model.timePresentation.eventsLabel, locale) : t(`time.kind.${event.kind}`)}</span>
           {!isSite && <span>{when}</span>}
         </p>
         <button
@@ -110,6 +111,11 @@ export function EventInspector({ event, model, locale, onClose }: EventInspector
         {tx(event.title, locale)}
         {other && other !== tx(event.title, locale) && <small lang={locale === 'zh' ? 'en' : 'zh-Hans'}>{other}</small>}
       </h3>
+      {event.missionContext && <div className="ts-event__mission" data-mission-context={event.id}>
+        <p>{missionSetting(event, locale)}{event.missionContext.occurredAt && <> · <time dateTime={event.missionContext.occurredAt}>{event.missionContext.occurredAt}</time></>}</p>
+        <p>{t('time.mission.mapPoint')} — {tx(model.sites.find((site) => site.id === event.missionContext!.anchorSite)?.title ?? event.missionContext.anchorSite, locale)}</p>
+        {(event.missionContext.relatedSites?.length ?? 0) > 0 && <p>{t('time.mission.relatedSites')}: {event.missionContext.relatedSites!.map((id) => tx(model.sites.find((site) => site.id === id)?.title ?? id, locale)).join(locale === 'zh' ? '、' : ', ')}</p>}
+      </div>}
       <p className="ts-event__summary">
         {tx(event.summary, locale)}
         {event.sources && event.sources.length > 0 && <SourceRefs ids={event.sources} locale={locale} />}

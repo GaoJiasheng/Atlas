@@ -12,6 +12,8 @@ import { isGeoTime } from '../../lib/time';
 export interface TimeSceneExt {
   /** Current time on the axis. */
   t: TimePoint | null;
+  /** Missions opt-in: 0-based beat, using the existing URL b key; null after free time scrubbing. */
+  beat?: number | null;
   /** Ids (events, movements, entities) the current chapter emphasises. */
   highlight: string[];
 }
@@ -24,9 +26,9 @@ function asTimePoint(value: unknown): TimePoint | null {
 
 export const timeSceneEngine = defineEngine<TimeSceneExt, TimeSceneGeoData>({
   id: 'time-scene',
-  defaults(_topic, data) {
+  defaults(topic, data) {
     const first = data && 'control' in data ? data.control.keyframes[0]?.t : undefined;
-    return { t: first ?? null, highlight: [], layers: ['base', 'control', 'movements', 'battles'] };
+    return { ...(topic.timePresentation ? { beat: 0 } : {}), t: first ?? null, highlight: [], layers: ['base', 'control', 'movements', 'battles'] };
   },
   fromChapterState(state: ChapterState) {
     const out: Partial<TimeSceneExt> = {};
@@ -38,6 +40,7 @@ export const timeSceneEngine = defineEngine<TimeSceneExt, TimeSceneGeoData>({
   fromUrl(fields) {
     const out: Partial<TimeSceneExt> = {};
     if (fields.t !== undefined) out.t = fields.t;
+    if (fields.beat === null || (typeof fields.beat === 'number' && Number.isInteger(fields.beat) && fields.beat >= 0)) out.beat = fields.beat;
     if (fields.highlight !== undefined) out.highlight = fields.highlight;
     return out;
   },

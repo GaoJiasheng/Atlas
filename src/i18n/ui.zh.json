@@ -1,4 +1,9 @@
 {
+  "time.mission.relatedSites": "其他关联发射中心",
+  "time.mission.index": "本章证据与地点",
+  "time.kind.mission": "任务",
+  "time.mission.mapPoint": "地图点：关联发射中心",
+  "time.mission.storyRange": "年份线是本段故事范围，不是国家成立日期。",
   "site.name": "Atlas",
   "site.tagline": "会动的课本",
   "site.description": "给好奇的小学生的双语互动场景。",

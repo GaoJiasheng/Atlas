@@ -27,7 +27,7 @@ import { areaGeometry, feature, featureCollection, lineString, position } from '
 import { geoCamera } from '../../content/schema/camera';
 import { sourceId, sourceIds, sourcesFile } from '../../content/schema/sources';
 import { glossaryFile } from '../../content/schema/glossary';
-import { compareTime } from '../../lib/time';
+import { compareTime, isIsoDate } from '../../lib/time';
 import { decodeControl, decodeTopologyObject } from './lib/control';
 import { colourConflicts, holderAdjacency } from './lib/holders';
 import { riverFeatures } from './lib/rivers';
@@ -306,6 +306,8 @@ export const EVENT_KINDS = [
   'political',
   /** A neutral dated change: no sides or result required. */
   'milestone',
+  /** A mission outcome anchored to its associated Earth launch centre. */
+  'mission',
   'massacre',
   'siege',
   'evacuation',
@@ -321,12 +323,28 @@ export const EVENT_RESULTS = ['attacker', 'defender', 'draw', 'inconclusive'] as
 
 const forceTable = z.record(kebabId, z.number().nonnegative());
 
+export const MISSION_SETTINGS = ['earth-surface', 'earth-orbit', 'lunar-orbit', 'moon-surface', 'cislunar', 'suborbital'] as const;
+export const missionContextSchema = z.object({
+  programme: kebabId,
+  setting: z.enum(MISSION_SETTINGS),
+  anchorRole: z.literal('associated-launch-centre'),
+  anchorSite: kebabId,
+  relatedSites: z.array(kebabId).max(3).optional(),
+  occurredAt: z.string().refine((value) => /^\d{4}-\d{2}-\d{2}T(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\dZ$/.test(value) && isIsoDate(value.slice(0, 10)), 'must be a valid UTC timestamp YYYY-MM-DDTHH:mm:ssZ').optional(),
+}).strict().superRefine((m, ctx) => {
+  if (m.relatedSites && (new Set(m.relatedSites).size !== m.relatedSites.length || m.relatedSites.includes(m.anchorSite)))
+    ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['relatedSites'], message: 'related sites must be distinct and must not include anchorSite' });
+});
+export type MissionContext = z.output<typeof missionContextSchema>;
+
 export const eventSchema = z
   .object({
     id: kebabId,
     t: timePoint,
     until: timePoint.optional(),
-    at: lngLat,
+    at: lngLat.optional(),
+    mapVisibility: z.enum(['anchor', 'timeline-only']).optional(),
+    missionContext: missionContextSchema.optional(),
     kind: z.enum(EVENT_KINDS),
     /** Required for battle / landing / bombing; optional for the others (`disaster` too). */
     sides: z.object({ attacker: kebabId, defender: kebabId }).strict().optional(),
@@ -346,6 +364,18 @@ export const eventSchema = z
   })
   .strict()
   .superRefine((e, ctx) => {
+    if (e.mapVisibility === 'timeline-only' && ['mission', 'site', 'battle', 'landing', 'bombing'].includes(e.kind))
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['mapVisibility'], message: `${e.kind} events require a map anchor` });
+    if (e.mapVisibility !== 'timeline-only' && !e.at)
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['at'], message: 'map events need coordinates; use timeline-only for unlocated evidence' });
+    if (e.kind === 'mission') {
+      if (!e.sources?.length) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['sources'], message: 'mission events need at least one source' });
+      if (!e.missionContext) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['missionContext'], message: 'mission events need missionContext' });
+      if (typeof e.t !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(e.t))
+        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['t'], message: 'mission dates must use YYYY-MM-DD' });
+      if (e.missionContext?.occurredAt && e.missionContext.occurredAt.slice(0, 10) !== e.t)
+        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['missionContext', 'occurredAt'], message: 'UTC timestamp date must equal event.t' });
+    } else if (e.missionContext) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['missionContext'], message: 'missionContext is only allowed on mission events' });
     if ((e.kind === 'battle' || e.kind === 'landing' || e.kind === 'bombing') && !e.sides) {
       ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['sides'], message: `${e.kind} events need sides` });
     }
@@ -468,6 +498,17 @@ export const timeSceneGeoData = z
     );
     data.movements.forEach((m, i) => check(m.holder, ['movements', i, 'holder']));
     data.events.forEach((e, i) => {
+      if (e.missionContext) {
+        const m = e.missionContext;
+        check(m.programme, ['events', i, 'missionContext', 'programme']);
+        for (const [id, path] of [[m.anchorSite, ['anchorSite']], ...(m.relatedSites ?? []).map((id, j) => [id, ['relatedSites', j]])] as [string, (string | number)[]][]) {
+          const site = data.events.find((candidate) => candidate.id === id);
+          if (!site || site.kind !== 'site') ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['events', i, 'missionContext', ...path], message: `"${id}" must reference a site event` });
+        }
+        const anchor = data.events.find((candidate) => candidate.id === m.anchorSite && candidate.kind === 'site');
+        if (e.at && anchor?.at && e.at.some((coordinate, j) => Math.abs(coordinate - anchor.at![j]!) > 1e-5))
+          ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['events', i, 'at'], message: 'mission coordinates must match anchorSite within 1e-5 degrees' });
+      }
       if (e.sides) {
         check(e.sides.attacker, ['events', i, 'sides', 'attacker']);
         check(e.sides.defender, ['events', i, 'sides', 'defender']);

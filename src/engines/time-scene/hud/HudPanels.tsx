@@ -68,7 +68,8 @@ export function BandCard({ model, playhead, locale, highlight, segments, anchor,
   const t = usePlayheadT(playhead);
   const [ref, { w, h }] = useSize<HTMLDivElement>();
   const u = useUnit(ref, w);
-  const areas = useMemo(() => controlAreas(model), [model]);
+  const missions = model.timePresentation !== undefined;
+  const areas = useMemo(() => missions ? new Map<string, number[]>() : controlAreas(model), [model, missions]);
   const maxArea = useMemo(() => Math.max(1, ...[...areas.values()].flat()), [areas]);
   const all = useMemo(() => [...model.entities.values()], [model]);
 
@@ -76,13 +77,13 @@ export function BandCard({ model, playhead, locale, highlight, segments, anchor,
   const x0 = 104 * u;
   const x1 = Math.max(x0 + 1, w - pad);
   const axisH = 20 * u;
-  const top = 6 * u;
+  const top = (missions ? 42 : 6) * u;
   const areaNow = useMemo(() => new Map(all.map((e) => [e.entity.id, areaAt(model, areas, e.entity.id, t)])), [all, model, areas, t]);
 
   // Collapsed: the most relevant at `t` (largest area, then earliest) that fit, the rest folded into one muted row.
   const planRef = useRef<BandRowPlan | null>(null);
   const plan = useMemo(() => {
-    const next: BandRowPlan = expanded
+    const next: BandRowPlan = missions ? { rows: all, hidden: 0 } : expanded
       ? { rows: fullOrder(all, t, areaNow), hidden: 0 }
       : planBandRows({ entities: all, t, areaNow, availableHeight: h - axisH - top, minRowHeight: BAND_MIN_ROW * u, collapsedHeight: BAND_REST_ROW * u });
     // Keep the previous object while the same rows stay in the same order, so the band paths are not rebuilt every playhead tick.
@@ -90,7 +91,7 @@ export function BandCard({ model, playhead, locale, highlight, segments, anchor,
     const same = prev && prev.hidden === next.hidden && prev.rows.length === next.rows.length && prev.rows.every((r, i) => r === next.rows[i]);
     planRef.current = same ? prev : next;
     return planRef.current;
-  }, [expanded, all, t, areaNow, h, axisH, top, u]);
+  }, [missions, expanded, all, t, areaNow, h, axisH, top, u]);
   const entities = plan.rows;
   const restH = plan.hidden > 0 ? BAND_REST_ROW * u : 0;
   const rowH = expanded ? BAND_EXPANDED_ROW * u : entities.length ? (h - axisH - top - restH) / entities.length : 0;
@@ -142,6 +143,7 @@ export function BandCard({ model, playhead, locale, highlight, segments, anchor,
   const rowsH = expanded ? rowsBottom + 4 * u : h - axisH;
   return (
     <div ref={ref as RefObject<HTMLDivElement>} className="ts-card" data-expanded={expanded || undefined}>
+      {missions && <p className="ts-card__scope">{tr('time.mission.storyRange')}</p>}
       <svg width={w} height={rowsH} className="ts-svg ts-card__rows">
         <HatchDefs model={model} prefix="ts-card-hatch" />
         {win && <rect className="ts-svg__window" x={x0 + win.x0} y={top} width={Math.max(1, win.x1 - win.x0)} height={rowsH - top} />}
@@ -181,13 +183,13 @@ export function BandCard({ model, playhead, locale, highlight, segments, anchor,
                   {entity.name.zh}
                 </text>
               )}
-              {rowH > 42 * u && (
+              {!missions && rowH > 42 * u && (
                 <text className="ts-svg__mono" x={pad} y={base - rowH + 38 * u}>
                   {fmtArea(areaAt(model, areas, entity.id, t))}
                 </text>
               )}
-              {d && <path d={d} fill={`url(#ts-card-hatch-${colorKey(entity, t)})`} />}
-              {d && <path d={d} className="ts-svg__band" style={{ fill: color, stroke: color }} />}
+              {!missions && d && <path d={d} fill={`url(#ts-card-hatch-${colorKey(entity, t)})`} />}
+              {!missions && d && <path d={d} className="ts-svg__band" style={{ fill: color, stroke: color }} />}
               {segments.map((sp) => (
                 <line key={sp.from} className="ts-svg__part" x1={x(sp.from)} x2={x(sp.to)} y1={base} y2={base} style={{ stroke: sp.color }} />
               ))}

@@ -1206,3 +1206,43 @@ button.ts-co:focus-visible {
   font: 500 calc(12 * var(--u)) / 1.5 var(--font-mono);
 }
 .ts-plate__row[data-enabled="false"] dd { color: var(--ink-3); }
+
+/* Mission location is readable before selection, and repeated beneath the inspector title. */
+.ts-co__badge {
+  display: block;
+  color: var(--ink-2);
+  font-size: calc(10 * var(--u));
+  line-height: 1.35;
+  white-space: normal;
+}
+.ts-event__mission { font-size: calc(12 * var(--u)); line-height: 1.5; }
+.ts-event__mission p { margin: 0 0 calc(4 * var(--u)); }
+.ts-event__mission time { overflow-wrap: anywhere; }
+.ts-card__scope {
+  position: absolute;
+  inset: 0 0 auto;
+  margin: calc(3 * var(--u)) calc(10 * var(--u));
+  font-size: calc(10 * var(--u));
+  line-height: 1.3;
+  color: var(--ink-2);
+}
+
+.ts-index { border-top: 1px solid var(--line); padding-top: 12px; }
+.ts-index h3 { font: 600 11px / 1.3 var(--font-hud); text-transform: uppercase; letter-spacing: .1em; }
+.ts-index ul { list-style: none; margin: 0; padding: 0; }
+.ts-index__row {
+  width: 100%; min-height: 44px; padding: 8px 4px; border: 0; border-bottom: 1px solid var(--line);
+  background: transparent; color: var(--ink); text-align: left; cursor: pointer;
+}
+.ts-index__row span, .ts-index__row small { display: block; }
+.ts-index__row small { color: var(--ink-2); line-height: 1.4; }
+.ts-index__row[aria-pressed="true"] { box-shadow: inset 2px 0 var(--signal); }
+.ts-index__row:focus-visible { outline: 2px solid var(--signal); outline-offset: -2px; }
+
+.ts-beatline { display: flex; gap: 8px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.ts-beatline__text { flex: 1; min-width: 0; margin: 0; font-size: 12px; line-height: 1.5; }
+.ts-beatline__text b { display: block; font: 600 11px / 1.5 var(--font-hud); text-transform: uppercase; letter-spacing: .1em; }
+.ts-beatline__nav { display: flex; flex: none; }
+.ts-beatline__nav button { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; }
+.ts-beatline__nav button:disabled { opacity: .35; cursor: default; }
+.ts-beatline__nav button:focus-visible { outline: 2px solid var(--signal); outline-offset: -2px; }

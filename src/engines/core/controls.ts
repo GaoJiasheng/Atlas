@@ -77,6 +77,10 @@ export interface SceneStats {
   /** Map stages: rendered features and zoom. */
   features?: number;
   zoom?: number;
+  /** TimeScene: exact dated non-site evidence counts, including timeline-only records. */
+  eventMarkers?: number;
+  activeEvents?: number;
+  recordedEvents?: number;
   gpu?: string;
 }
 

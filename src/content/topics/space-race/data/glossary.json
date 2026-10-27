@@ -1,0 +1,215 @@
+{
+  "terms": [
+    {
+      "id": "term-space-race",
+      "term": {
+        "en": "Space race",
+        "zh": "太空竞赛"
+      },
+      "definition": {
+        "en": "Cold War competition in space technology between the Soviet Union and United States; different programmes pursued different goals.",
+        "zh": "冷战中苏联与美国之间的太空技术竞争；不同项目追求的目标并不相同。"
+      },
+      "see": [
+        "term-programme-cost"
+      ]
+    },
+    {
+      "id": "term-satellite",
+      "term": {
+        "en": "Artificial satellite",
+        "zh": "人造卫星"
+      },
+      "definition": {
+        "en": "An object made by people that travels in orbit around a celestial body.",
+        "zh": "人制造并绕天体运行的物体。"
+      },
+      "see": [
+        "term-orbit"
+      ]
+    },
+    {
+      "id": "term-orbit",
+      "term": {
+        "en": "Orbit",
+        "zh": "轨道"
+      },
+      "definition": {
+        "en": "A path around a celestial body under gravity. Being in orbit does not mean gravity has disappeared.",
+        "zh": "在引力作用下绕天体运动的路径；进入轨道不表示引力消失。"
+      },
+      "see": [
+        "term-suborbital"
+      ]
+    },
+    {
+      "id": "term-suborbital",
+      "term": {
+        "en": "Suborbital",
+        "zh": "亚轨道"
+      },
+      "definition": {
+        "en": "A flight that reaches space without completing an orbit around Earth.",
+        "zh": "到达太空、却没有形成完整绕地球轨道的飞行。"
+      },
+      "see": [
+        "term-orbit"
+      ]
+    },
+    {
+      "id": "term-probe",
+      "term": {
+        "en": "Space probe",
+        "zh": "空间探测器"
+      },
+      "definition": {
+        "en": "An uncrewed spacecraft used for scientific investigation. It may fly past, orbit or land.",
+        "zh": "用于科学探测的无人航天器，可以飞越、绕行或着陆。"
+      },
+      "see": [
+        "term-flyby",
+        "term-soft-landing"
+      ]
+    },
+    {
+      "id": "term-flyby",
+      "term": {
+        "en": "Flyby",
+        "zh": "飞越"
+      },
+      "definition": {
+        "en": "A passage near a celestial body, without staying in orbit around it or landing there.",
+        "zh": "从天体附近经过，不停留在环绕它的轨道，也不在那里着陆。"
+      },
+      "see": [
+        "term-orbit"
+      ]
+    },
+    {
+      "id": "term-soft-landing",
+      "term": {
+        "en": "Soft landing",
+        "zh": "软着陆"
+      },
+      "definition": {
+        "en": "A controlled arrival at a surface with speed low enough for the intended equipment to keep working.",
+        "zh": "控制速度到达表面，使预定设备仍能工作的着陆方式。"
+      },
+      "see": [
+        "term-probe"
+      ]
+    },
+    {
+      "id": "term-rendezvous",
+      "term": {
+        "en": "Rendezvous",
+        "zh": "交会"
+      },
+      "definition": {
+        "en": "Spacecraft approach each other and match their motion in orbit; they need not connect.",
+        "zh": "航天器在轨道上靠近并匹配运动，不一定连接。"
+      },
+      "see": [
+        "term-docking"
+      ]
+    },
+    {
+      "id": "term-docking",
+      "term": {
+        "en": "Docking",
+        "zh": "对接"
+      },
+      "definition": {
+        "en": "A mechanical connection between two spacecraft; coming close alone is rendezvous.",
+        "zh": "两艘航天器机械连接；只是靠近属于交会。"
+      },
+      "see": [
+        "term-rendezvous"
+      ]
+    },
+    {
+      "id": "term-spacewalk",
+      "term": {
+        "en": "Spacewalk",
+        "zh": "太空行走"
+      },
+      "definition": {
+        "en": "A person works outside a spacecraft while using equipment for life support and protection.",
+        "zh": "人在航天器外借助维生与防护设备工作。"
+      },
+      "see": [
+        "term-orbit"
+      ]
+    },
+    {
+      "id": "term-sample-return",
+      "term": {
+        "en": "Sample return",
+        "zh": "采样返回"
+      },
+      "definition": {
+        "en": "Bringing collected material back to Earth; either people or robots can do it.",
+        "zh": "把采集的物质带回地球，可以由人或机器人完成。"
+      },
+      "see": [
+        "term-probe"
+      ]
+    },
+    {
+      "id": "term-cm",
+      "term": {
+        "en": "Command module",
+        "zh": "指令舱"
+      },
+      "definition": {
+        "en": "Apollo’s crew compartment that returned through Earth’s atmosphere; the service module was discarded.",
+        "zh": "阿波罗载人重返地球大气层的舱段；服务舱在此前丢弃。"
+      },
+      "see": [
+        "term-lm"
+      ]
+    },
+    {
+      "id": "term-lm",
+      "term": {
+        "en": "Lunar module",
+        "zh": "登月舱"
+      },
+      "definition": {
+        "en": "Apollo spacecraft for two people to travel between lunar orbit and the Moon’s surface.",
+        "zh": "阿波罗供两人在月球轨道与月面之间往返的航天器。"
+      },
+      "see": [
+        "term-cm"
+      ]
+    },
+    {
+      "id": "term-space-station",
+      "term": {
+        "en": "Space station",
+        "zh": "空间站"
+      },
+      "definition": {
+        "en": "An orbital facility where people can live and conduct research.",
+        "zh": "供人在轨道上生活与研究的设施。"
+      },
+      "see": [
+        "term-orbit"
+      ]
+    },
+    {
+      "id": "term-programme-cost",
+      "term": {
+        "en": "Programme cost",
+        "zh": "项目支出"
+      },
+      "definition": {
+        "en": "An account of spending that must specify currency, time period and what is included; unlike currencies cannot be compared as a simple bar chart.",
+        "zh": "必须交代币种、年代和所含范围的支出账目；不能把不同币种直接画成可比较的条形图。"
+      },
+      "see": [
+        "term-space-race"
+      ]
+    }
+  ]
+}

@@ -3,10 +3,12 @@
  * turned into a number once (lib/time.ts), the timeline span is derived, and
  * lookups are indexed. Pure; built once per scene in the View.
  */
-import type { Bloc, Entity, Movement, SceneEvent, TimeSceneGeoData } from '../schema';
+import type { Bloc, Entity, MissionContext, Movement, SceneEvent, TimeSceneGeoData } from '../schema';
 import { periodEnd, toNumber, type DatePrecision, type TimePoint, type TimeScale } from './time';
 import { unwrapPathCentred, type LngLat } from './geo';
 import { blocAtSpans, blocSpansN } from './bloc';
+import type { TimePresentation } from '../../../content/schema/topic';
+import { hasMapAnchor } from './missions';
 import { decodeControl, type DecodedKeyframe } from './control';
 
 export interface KeyframeN {
@@ -17,6 +19,9 @@ export interface KeyframeN {
 export interface EventN {
   event: SceneEvent;
   start: number;
+  missionContext?: MissionContext;
+  /** Exact source date window, independent of the legacy visual linger window. */
+  activeUntil: number;
   /** End of the active window (>= start; at least `minWindow` long). */
   end: number;
 }
@@ -47,6 +52,7 @@ export interface ChapterNode {
 }
 
 export interface TimeModel {
+  timePresentation?: TimePresentation;
   scale: TimeScale;
   min: number;
   max: number;
@@ -70,6 +76,7 @@ export interface TimeModel {
 }
 
 export interface TimeModelOptions {
+  timePresentation?: TimePresentation;
   datePrecision?: DatePrecision;
 }
 
@@ -115,7 +122,7 @@ export function buildTimeModel(
     const end = event.until !== undefined ? periodEnd(event.until) : periodEnd(event.t);
     points.push(start);
     if (event.until !== undefined) points.push(toNumber(event.until));
-    return { event, start, end };
+    return { event, start, end, activeUntil: end, ...(event.missionContext ? { missionContext: event.missionContext } : {}) };
   });
   const chapterNodes: ChapterNode[] = [];
   for (const c of chapterTimes) {
@@ -139,7 +146,7 @@ export function buildTimeModel(
   const minWindow = span * 0.01;
   const events = rawEvents
     .filter((e) => finite(e.start))
-    .map((e) => ({ ...e, end: Math.max(finite(e.end) ? e.end : e.start, e.start + minWindow) }));
+    .map((e) => ({ ...e, end: e.event.kind === 'mission' || options.timePresentation ? e.end : Math.max(finite(e.end) ? e.end : e.start, e.start + minWindow) }));
 
   const entities = new Map<string, EntityN>();
   for (const entity of data.entities) {
@@ -149,6 +156,7 @@ export function buildTimeModel(
   }
 
   return {
+    ...(options.timePresentation ? { timePresentation: options.timePresentation } : {}),
     scale,
     min,
     max,
@@ -190,6 +198,6 @@ function dataBounds(data: TimeSceneGeoData, keyframes: readonly KeyframeN[], mov
       for (const poly of polys) for (const ring of poly) ring.forEach(add);
     }
   for (const m of movements) m.path.forEach(add);
-  for (const ev of data.events) add(ev.at);
+  for (const ev of data.events) if (hasMapAnchor(ev)) add(ev.at);
   return Number.isFinite(w) ? [w, s, e, n] : null;
 }

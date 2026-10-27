@@ -1,0 +1,22 @@
+[
+  {
+    "id": "ussr",
+    "name": {
+      "en": "Soviet space programme",
+      "zh": "苏联太空项目"
+    },
+    "bloc": "axis",
+    "joined": "1957-01-01",
+    "color": "token:holder-1"
+  },
+  {
+    "id": "us",
+    "name": {
+      "en": "US space programme",
+      "zh": "美国太空项目"
+    },
+    "bloc": "allied",
+    "joined": "1957-01-01",
+    "color": "token:holder-2"
+  }
+]
