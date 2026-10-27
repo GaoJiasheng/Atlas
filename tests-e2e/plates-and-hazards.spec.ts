@@ -61,6 +61,7 @@ test('catalogues retain exact ids across refresh and clear when hidden or before
 });
 
 test('observation groups are separate and reference versions remain visible', async ({ page }) => {
+  test.setTimeout(180_000); // four page loads of reference layers and catalogues
   for (const [chapter, layer, count] of [['krakatau-1883','ph-observations-1883',99],['indian-ocean-2004','ph-observations-2004',2155],['anak-krakatau-2018','ph-observations-2018',410]] as const) {
     await open(page, `ch=${chapter}&b=2`);
     await expect.poll(async () => (await catalogue(page)).layers[layer]?.visible).toBe(count);
@@ -76,8 +77,9 @@ for (const locale of ['en', 'zh']) test(`phone catalogue controls and impact def
   await open(page, 'ch=indian-ocean-2004', locale);
   // Phone hides map labels (docs/08 §2); the label button is still the selection action a map tap reaches.
   await page.locator('button.ts-label[data-id="event-sumatra-2004"]').dispatchEvent('click');
-  await page.locator('.atlas-panel__toggle').click();
   const impact = page.locator('[data-impact="impact-indian-ocean"]');
+  // Selecting opens the reading drawer (revealReader); open it by hand only if it stayed shut.
+  if (!(await impact.waitFor({ state: 'visible', timeout: 5_000 }).then(() => true, () => false))) await page.locator('.atlas-panel__toggle').click();
   await expect(impact).toBeVisible();
   expect(await page.locator('.atlas-panel').evaluate((e) => e.scrollWidth <= e.clientWidth + 1)).toBe(true);
   await expect(impact).toContainText('2024-10');

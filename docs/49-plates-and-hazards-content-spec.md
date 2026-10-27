@@ -679,7 +679,17 @@ S05/S09/S46/S52不作为本题必要来源：未成功再次直取的部分分�
 
 ### 9.4 浏览器验收（主会话，2026-10-27）
 
-在 worktree `codex/plates` 上，由 Playwright 驱动构建后的 dist 完成；机器满载（load 80–140）。Codex 原样交付的内容单独提交为 a0a2c0e。随后合入 main（`inside-the-earth` 已在其中），本节的修复再单独提交一次。
+在 worktree `codex/plates` 上，由 Playwright 驱动构建后的 dist 完成；机器满载（load 80–220）。
+- Codex 原样交付的内容单独提交为 a0a2c0e。
+- 随后合入 main（`inside-the-earth` 已在其中），本节的修复再单独提交一次。
+- 之后 main 又合入了 industrial-revolution（E-IR1 阅读面板）、climatology 月模式和 sem 轨道，第二次合并时解决了 8 个冲突：
+  - `pick` 与 `m`、`orb-t` 并存于 URL 编码；
+  - `TimeSceneExt.pick` 改为可选，月模式的 snapshot 不需要它；
+  - `catalogueScreen` 改为可选的控制器方法；
+  - 事件 schema 采用 main 的 `eventFields` 写法，并保留 impacts 互斥校验；
+  - 恢复高亮改用 main 的“当前拍”实现，去掉 Codex 的 `beatHighlight`；
+  - 两个 test hook 对象合为一个；
+  - `readerEnd` 里先放 E-IR1 的章索引，再放目录索引。
 
 **看到的问题与已修复**
 
@@ -691,7 +701,7 @@ S05/S09/S46/S52不作为本题必要来源：未成功再次直取的部分分�
    - 修复：REF. · 版本 · 说明合成一行小字。若干层的版本和说明完全相同（PB2002 的四类），只在第一层写一次。
 3. **目录详情排在正文和索引之后**（TimeScene 的 `inspector` 槽位于面板末尾），违反 HUD 铁律 c。shoot 的目录检查在 8 章全都失败；第一轮报告只给计数，现在改为逐条打印。
    - 修复：`CatalogueInspector` 与图层载入失败提示改用 `readerTop`（章头正下方），并在选中时滚到可见处。
-   - 未改：旧的事件 / 实体详情仍在原槽位。这个问题由并行的 docs/50 E-MW3 和 docs/51 E-IR1 处理，本分支不动，避免冲突。
+   - 第二次合入 main 时，docs/51 E-IR1 已把事件 / 实体详情也移到 `readerTop`，三种详情现在位置一致。目录选中同样会调用 E-IR1 的 `revealReader`。
 4. **其他小修**
    - 目录索引行加上稳定 id（2004 年观测有 332 条同名的 “ACEH, SUMATRA”）。
    - 中文影响记录改用全角冒号。
@@ -725,19 +735,23 @@ S05/S09/S46/S52不作为本题必要来源：未成功再次直取的部分分�
 **门槛结果**（满载 load 110–220，约 10 个代理同时开浏览器）
 - **全量 shoot**：`pnpm shoot plates-and-hazards --beats --tasks --keys --layout --locale en,zh --theme paper,cinema`，用修复后的构建跑。
   - 4 个组合 × 38 拍，0 失败；目录选中检查 8 章 × 4，0 失败；console 干净，无外部请求。
-  - 偶发：en-cinema 的 drag 键检查失败 1 次（帧率 1–4 fps，没能进入自由镜头）。
-  - 偶发：4 次 `content wider than panel: bar`，出现在缩放到不同尺寸的瞬间；在 2560×1440 直接载入后测量为 1463 = 1463，没有溢出。
   - “chapter highlights” 的无标注清单（只列出、不算失败）各轮结果不一。
-  - 合并并恢复旧图层的预载之后，又跑了一遍 `--beats`（zh/cinema）：38 拍 0 失败，目录检查 8 章全部通过。
+- **第二次合并后的复验**：`--beats --keys --layout`（en/paper）。
+  - 38 拍 0 失败，目录检查通过。
+- **只与满载有关的检查**：
+  - 键 `h`（HUD 恢复按钮淡入）和 `drag`（进入自由镜头）在各主题、各轮之间时好时坏。shoot 的注释本来就说明，主线程被占时这两项会超时。
+  - `content wider than panel: bar` 只出现在布局检查把视口从 1920 改到 2560 或 3840 之后的瞬间。用同样尺寸直接载入，测得 1463 = 1463、1943 = 1943，没有溢出。底栏不在本分支的改动范围内。
 - **`--perf --gpu`**：8 章与全部模式、预设都是 60 fps，要素 7,092–10,837 个。
-- **TimeScene 回归 `--beats --keys`**：
-  - ww2、singapore-after-1965、ancient-civilisations、singapore-land-use 的节拍都是 0 失败。
-  - 键检查里，`h`（HUD 恢复按钮淡入）和 `drag` 在不同主题、不同轮次之间时好时坏。shoot 里本来就有说明：主线程被占时这两项会超时；本题自己的 `h` 在 4 个组合都通过。
-  - 恢复预载之后，singapore-land-use 重跑两次都卡在 `page.screenshot` 30 s 超时（机器满载），没能跑完。
-- **`pnpm check`** 0 错误 0 警告；**`pnpm validate`** 59 主题 0 错 0 警告；**`pnpm test`** 165 个文件、4,327 项全部通过。
-- **e2e**：协调方要求不跑全量，只跑相关 spec（`--workers=2`，端口 5491）。
-  - 本题、两个合成 fixture spec 与 smoke 的 deep-link 用例全部通过：plates-and-hazards 8/8，sample-science-layers 7/7，sample-science-impacts 2/2。
-  - singapore-land-use（3）、dated-layers（2）与 smoke 的 sample-space（2）在同样的负载下，用 main 的导出构建同样失败，属于负载造成，不是本分支的回归。
+- **TimeScene 回归 `--beats --keys`**（第二次合并后的构建）：
+  - ww2、singapore-after-1965、ancient-civilisations 的节拍都是 0 失败；键检查只有上面那类负载失败。
+  - singapore-land-use 在满载下多次卡在 `page.screenshot` 30 s 超时，没能跑完。第一次合并后的构建上，它的节拍是 0 失败。
+- **`pnpm check`**：0 错误 0 警告。
+- **`pnpm validate`**：65 主题，0 错 0 警告。
+- **`pnpm test`**：177 个文件、4,502 项。满载时有 6 项超时，单独重跑全部通过：industrial-revolution 的大数据检查、math-scene 的投影、本题的 10k 目录搜索 p95 计时。
+- **e2e**：协调方要求不跑全量，只跑相关 spec（`--workers=2`）。
+  - 通过：plates-and-hazards 8/8，sample-science-layers 7/7，sample-science-impacts 2/2；smoke 的 sample-time 与 deep-link 用例单独重跑通过。
+  - singapore-land-use（3）、dated-layers（2）、smoke 的 sample-space（2）在同样负载下，用 main 的导出构建同样失败，属于负载造成，不是本分支的回归。
+  - 第二次合并后，本题 spec 里两个用例需要连开 3–4 个页面，给了 150–180 s 的用例时限；手机用例改为选中后先等阅读抽屉自动打开（main 的 `revealReader`），没打开才手动点开。
 
 **留给 Codex（FIXES.md）**
 - F1：目录文字改为用到才取；

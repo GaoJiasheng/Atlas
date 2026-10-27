@@ -3,6 +3,7 @@ import type { ImpactRecord } from '../src/engines/time-scene/impactSchema';
 
 for (const locale of ['en', 'zh']) {
   test(`source-defined impact estimates (${locale}) stay qualified and static in both looks`, async ({ page }) => {
+    test.setTimeout(150_000); // three page loads with catalogue layers
     await page.goto(`/${locale}/topics/sample-science-layers/?ch=catalogue&t=2004-12-26&hl=sample-estimates`);
     expect(await page.evaluate(async () => {
       for (let i = 0; i < 200 && !window.__atlas; i++) await new Promise((resolve) => setTimeout(resolve, 50));
