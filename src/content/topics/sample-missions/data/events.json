@@ -1,0 +1,97 @@
+[
+  {
+    "t": "1969-07-20",
+    "at": [
+      -80.64861111111112,
+      28.52472222222222
+    ],
+    "importance": 2,
+    "sources": [
+      "S1"
+    ],
+    "id": "site-fixture-centre",
+    "kind": "site",
+    "title": {
+      "en": "Reference launch centre",
+      "zh": "参考发射中心"
+    },
+    "summary": {
+      "en": "A real Earth location reused as a test anchor; mission records are synthetic.",
+      "zh": "真实地球地点用作测试关联点；任务记录是合成数据。"
+    }
+  },
+  {
+    "t": "1969-07-20",
+    "at": [
+      -80.64861111111112,
+      28.52472222222222
+    ],
+    "importance": 2,
+    "sources": [
+      "S1"
+    ],
+    "id": "fixture-lunar-outcome",
+    "kind": "mission",
+    "title": {
+      "en": "Synthetic lunar outcome",
+      "zh": "合成月面结果"
+    },
+    "summary": {
+      "en": "This synthetic outcome occurs on the Moon; its Earth point identifies an associated launch centre.",
+      "zh": "这个合成结果发生在月面；地球点代表关联发射中心。"
+    },
+    "missionContext": {
+      "programme": "programme-a",
+      "setting": "moon-surface",
+      "anchorRole": "associated-launch-centre",
+      "anchorSite": "site-fixture-centre",
+      "occurredAt": "1969-07-20T20:17:39Z"
+    }
+  },
+  {
+    "t": "1969-07-20",
+    "at": [
+      -80.64861111111112,
+      28.52472222222222
+    ],
+    "importance": 2,
+    "sources": [
+      "S1"
+    ],
+    "id": "fixture-orbit-outcome",
+    "kind": "mission",
+    "title": {
+      "en": "Synthetic orbit outcome",
+      "zh": "合成轨道结果"
+    },
+    "summary": {
+      "en": "An independent outcome shares the launch-centre anchor.",
+      "zh": "独立结果共用发射中心关联点。"
+    },
+    "missionContext": {
+      "programme": "programme-b",
+      "setting": "earth-orbit",
+      "anchorRole": "associated-launch-centre",
+      "anchorSite": "site-fixture-centre",
+      "occurredAt": "1969-07-20T22:00:00Z"
+    }
+  },
+  {
+    "id": "fixture-retrospective",
+    "kind": "political",
+    "mapVisibility": "timeline-only",
+    "t": "1969-07-21",
+    "importance": 1,
+    "sources": [
+      "S1"
+    ],
+    "title": {
+      "en": "Synthetic retrospective",
+      "zh": "合成回顾"
+    },
+    "summary": {
+      "en": "An evidence review has no map position and is not another mission.",
+      "zh": "证据回顾没有地图位置，也不是另一次任务。"
+    }
+  }
+]

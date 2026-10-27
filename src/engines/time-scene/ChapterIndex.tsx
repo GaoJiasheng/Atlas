@@ -26,7 +26,7 @@ export function ChapterIndex({ ids, events, selected, locale, disabled, onSelect
       <ul className="ts-index__list">
         {rows.map((event) => (
           <li key={event.id}>
-            <button type="button" className="ts-index__row" data-time-target={event.id} aria-pressed={selected === event.id} disabled={disabled} onClick={() => onSelect(event.id)}>
+            <button type="button" className="ts-index__row" data-time-target={event.id} data-map-visibility={event.mapVisibility === 'timeline-only' ? 'timeline-only' : undefined} aria-pressed={selected === event.id} disabled={disabled} onClick={() => onSelect(event.id)}>
               {tx(event.title, locale)}
             </button>
           </li>

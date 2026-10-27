@@ -1,0 +1,93 @@
+{
+  "id": "sample-geography",
+  "title": {
+    "en": "Sample: Geography engine fixture",
+    "zh": "示例：地理引擎测试"
+  },
+  "subtitle": {
+    "en": "Real-source geography; fixture text only",
+    "zh": "真实来源地理；仅测试文字"
+  },
+  "subject": "geography",
+  "levels": [
+    "P5"
+  ],
+  "tags": [
+    "engine-fixture",
+    "geography"
+  ],
+  "moe": [
+    "SS P5 Part 2: Southeast Asia, physical environment and cooperation; selected examples"
+  ],
+  "mode": "time",
+  "engine": "time-scene",
+  "stage": "geo",
+  "theme": "paper",
+  "sensitivity": "open",
+  "status": "draft",
+  "temporalMode": "geography",
+  "geography": {
+    "asOf": "2026-10-27",
+    "geometryEpoch": "Present-day Natural Earth cartographic snapshot acquired 2026-10-27",
+    "dateRange": [
+      "1967-08-07",
+      "2026-10-27"
+    ],
+    "initialContext": {
+      "kind": "present"
+    }
+  },
+  "climatology": {
+    "periodId": "clim-1991-2020",
+    "startYear": 1991,
+    "endYear": 2020,
+    "initialMonth": 1,
+    "keySources": [
+      "S205"
+    ]
+  },
+  "monthlyLayers": [
+    {
+      "id": "clim-wind",
+      "type": "monthly-climatology",
+      "quantity": "wind",
+      "file": "sample-climate-wind-850-1991-2020",
+      "label": {
+        "en": "Regional wind · 850 hPa",
+        "zh": "区域风 · 850 hPa"
+      },
+      "periodId": "clim-1991-2020",
+      "sources": [
+        "S201",
+        "S20",
+        "S203"
+      ],
+      "sourceMap": {
+        "S22": "S201",
+        "S25": "S20",
+        "S101": "S203"
+      }
+    },
+    {
+      "id": "clim-rain",
+      "type": "monthly-climatology",
+      "quantity": "rain",
+      "file": "sample-climate-rain-gpcp-1991-2020",
+      "label": {
+        "en": "Mean rain rate",
+        "zh": "平均降水率"
+      },
+      "periodId": "clim-1991-2020",
+      "sources": [
+        "S202",
+        "S20",
+        "S204"
+      ],
+      "sourceMap": {
+        "S32": "S202",
+        "S25": "S20",
+        "S102": "S204"
+      }
+    }
+  ]
+}

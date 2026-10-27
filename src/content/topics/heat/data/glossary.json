@@ -1,0 +1,180 @@
+{
+  "terms": [
+    {
+      "id": "heat",
+      "term": {
+        "en": "Heat",
+        "zh": "热"
+      },
+      "definition": {
+        "en": "Energy transferred because of a temperature difference.",
+        "zh": "因温差而传递的能量。"
+      }
+    },
+    {
+      "id": "temperature",
+      "term": {
+        "en": "Temperature",
+        "zh": "温度"
+      },
+      "definition": {
+        "en": "A quantity measured by a thermometer that tells how hot or cold something is.",
+        "zh": "由温度计测量，表示物体冷热程度的量。"
+      }
+    },
+    {
+      "id": "thermometer",
+      "term": {
+        "en": "Thermometer",
+        "zh": "温度计"
+      },
+      "definition": {
+        "en": "An instrument that measures temperature rather than an amount of heat.",
+        "zh": "测量温度的仪器，不是测量物体含有多少热。"
+      }
+    },
+    {
+      "id": "heat-transfer",
+      "term": {
+        "en": "Heat transfer",
+        "zh": "热传递"
+      },
+      "definition": {
+        "en": "Net transfer of energy from a hotter region toward a colder region because of their temperature difference.",
+        "zh": "因温差而使能量从较热处向较冷处净传递。"
+      }
+    },
+    {
+      "id": "good-conductor",
+      "term": {
+        "en": "Good conductor of heat",
+        "zh": "热的良导体"
+      },
+      "definition": {
+        "en": "A material through which heat transfers comparatively easily under comparable conditions. Metals are generally good conductors.",
+        "zh": "在可比条件下，较容易传热的材料。金属通常是热的良导体。"
+      }
+    },
+    {
+      "id": "poor-conductor",
+      "term": {
+        "en": "Poor conductor of heat",
+        "zh": "热的不良导体"
+      },
+      "definition": {
+        "en": "A material through which heat transfers comparatively slowly under comparable conditions. It still transfers heat.",
+        "zh": "在可比条件下，传热较慢的材料。它仍然会传热。"
+      }
+    },
+    {
+      "id": "thermal-equilibrium",
+      "term": {
+        "en": "Thermal equilibrium",
+        "zh": "热平衡"
+      },
+      "definition": {
+        "en": "The state in which bodies have the same temperature and no net heat transfer between them.",
+        "zh": "物体温度相同，彼此之间没有净传热的状态。"
+      }
+    },
+    {
+      "id": "insulation",
+      "term": {
+        "en": "Insulation",
+        "zh": "隔热"
+      },
+      "definition": {
+        "en": "Reducing heat transfer into or out of an object. Insulation supplies no energy and does not make cold.",
+        "zh": "减慢能量以热的形式进出物体。隔热不供能，也不制造冷。"
+      }
+    },
+    {
+      "id": "heating-curve",
+      "term": {
+        "en": "Heating curve",
+        "zh": "加热曲线"
+      },
+      "definition": {
+        "en": "In this lesson, a model graph of water temperature against elapsed heating time. Its points are predictions, not measurements.",
+        "zh": "本课中表示水温随加热时间变化的模型图。图上各点是模型预计值，不是实测。"
+      }
+    },
+    {
+      "id": "cooling-curve",
+      "term": {
+        "en": "Cooling curve",
+        "zh": "冷却曲线"
+      },
+      "definition": {
+        "en": "In this lesson, a model graph of temperature against elapsed cooling time with the surroundings held constant.",
+        "zh": "本课中，周围环境保持不变时，表示温度随冷却时间变化的模型图。"
+      }
+    },
+    {
+      "id": "mass",
+      "term": {
+        "en": "Mass",
+        "zh": "质量"
+      },
+      "definition": {
+        "en": "A quantity describing how much matter is in an object. This model controls the water mass in grams.",
+        "zh": "表示物体含有多少物质的量。模型用克控制水的质量。"
+      }
+    },
+    {
+      "id": "power",
+      "term": {
+        "en": "Power",
+        "zh": "功率"
+      },
+      "definition": {
+        "en": "The rate at which energy is transferred. A heater of greater power supplies more energy in the same time.",
+        "zh": "单位时间内传递能量的多少。功率较大的加热器在相同时间内供给更多能量。"
+      }
+    },
+    {
+      "id": "expansion",
+      "term": {
+        "en": "Expansion",
+        "zh": "膨胀"
+      },
+      "definition": {
+        "en": "An increase in size. Most substances expand when warmed under ordinary conditions if free to change size.",
+        "zh": "尺寸增加。在通常条件下，大多数物质温度升高且可自由变形时会膨胀。"
+      }
+    },
+    {
+      "id": "contraction",
+      "term": {
+        "en": "Contraction",
+        "zh": "收缩"
+      },
+      "definition": {
+        "en": "A decrease in size. Most substances contract when cooled under ordinary conditions if free to change size.",
+        "zh": "尺寸减小。在通常条件下，大多数物质温度降低且可自由变形时会收缩。"
+      }
+    },
+    {
+      "id": "fair-test",
+      "term": {
+        "en": "Fair test",
+        "zh": "公平测试"
+      },
+      "definition": {
+        "en": "A comparison that changes one relevant condition while holding the other relevant conditions the same.",
+        "zh": "只改变一个相关条件，其余相关条件保持相同的比较。"
+      }
+    },
+    {
+      "id": "temperature-difference",
+      "term": {
+        "en": "Temperature difference",
+        "zh": "温差"
+      },
+      "definition": {
+        "en": "The difference between two temperatures. A smaller difference from the surroundings gives slower temperature change in this cooling model.",
+        "zh": "两个温度之间的差。在这个冷却模型中，与环境的温差较小时，温度变化较慢。"
+      }
+    }
+  ]
+}

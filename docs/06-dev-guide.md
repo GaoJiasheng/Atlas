@@ -101,7 +101,7 @@ pnpm tsx scripts/new-topic.ts <slug> --engine space-scene --subject science|biol
      | `<More>` | `<More title={{ en: "The numbers", zh: "数字" }}>`（里面空行再写 Markdown）`</More>` | 细看折叠块：hairline 标题行 + 小三角，默认收起；原生 `<details>`，无 JS 也能用 |
      | `<Figure>` | `<Figure src="figures/b200-rack" alt={{ en: "…", zh: "…" }} caption={{ en: "…", zh: "…" }} />` | 章节里的一张石墨插图（`public/illustrations/<src>.webp` + `@2x`，4:3，`scripts/illustrate.ts figure`）：paper 下正片叠底，dark plate 反相成粉笔（同首页插图 `.atlas-drawing`）；占位宽高预留；validate 检查文件存在、alt 与 caption 都写了 |
      | `<Num>` | `<Num s="S3">about 70,000</Num>`；多个来源 `s="S3,S7"` | 数字后跟 mono 上标来源号，点开来源弹层（文本、说明、链接，不联网） |
-     | `<FlyTo>` | `<FlyTo preset="singapore-island">Singapore island</FlyTo>` | 正文里的 hairline 按钮，镜头飞到命名预设（TimeScene `presets.json`，SpaceScene `parts.json` 的 `presets`；与 VIEW 按钮同一动作；手机上顺便收起阅读面板） |
+     | `<FlyTo>` | `<FlyTo preset="singapore-island">Singapore island</FlyTo>`；TimeScene 对象索引可加 `event="event-id"` | 正文里的 hairline 按钮，镜头飞到命名预设（TimeScene `presets.json`，SpaceScene `parts.json` 的 `presets`；与 VIEW 按钮同一动作）。普通取景在手机收起阅读面板；带 `event` 则选中本题事件/地点，详情显示在章头下并保留阅读面板展开与预设取景。validate 校验 preset 与 event 引用 |
      | `<TopicLink>` | `<TopicLink slug="four-taps">Singapore's Four Taps</TopicLink>`；链到某一章：`<TopicLink slug="ww2" ch="fall-of-singapore">…</TopicLink>` | 正文里链到另一个主题的页面：按读者语言和站点 base 生成地址（`localeHref`），不要手写 `/en/topics/…`；可选 `ch` 加 `?ch=<章 id>`（见「URL 参数」）；`pnpm validate` 检查主题存在、`ch` 是那个主题的章节 id（读目标主题各章 frontmatter 的 `id`） |
      | `<Term>` | `<Term id="blitzkrieg">闪电战</Term>` | 名词：点状下划线的 `span`（`role="button"`，Enter / 空格也能开），点开在阅读面板 inspector 区显示 `glossary.json` 里的定义和相关词（见「名词表」）；只包全主题第一次出现处 |
      | `<Frac>` | `<Frac n={3} d={4} />`、`<Frac w={1} n={3} d={4} />` | 静态竖排分数（与数据文本里的 `{3/4}` 同一套标记），读屏读文字（"three quarters" /「四分之三」）；校验 n、d 是整数、d ≥ 1 |
@@ -274,7 +274,7 @@ store.getState().chapterTarget(id);                                // 某章的�
 | `bottomBar` | 底部最下 | 时间轴 / Explorer 控件（44px 触控，不随 HUD 缩小，4K 时放大） |
 | `stageOverlay` | 右列，示意卡下 | 控制面板 `ControlPanel`：LAYERS（图层 + 绘制类模式）、TOOLS（其余模式 + 隐藏 HUD）、KEY（图例） |
 | `inspector` | InfoPanel 内，正文之后 | 遗留扩展插槽；选中对象用 readerTop |
-| `readerTop` | InfoPanel 滚动区最上，章头正下方、正文之前 | TimeScene：选中事件 / 实体；SpaceScene：节拍行 + 选中零件 / 当前动作卡（docs/08 §2 铁律 c、d）；MathScene：节拍行 + 小测托盘 |
+| `readerTop` | InfoPanel 滚动区最上，章头正下方、正文之前 | TimeScene：选中事件 / 实体（`timePresentation: missions` 的主题前面加节拍行）；SpaceScene：节拍行 + 选中零件 / 当前动作卡（docs/08 §2 铁律 c、d）；MathScene：节拍行 + 小测托盘 |
 | `readerEnd` | InfoPanel 内，正文之后 | TimeScene：本章事件索引；SpaceScene：本章索引（`state.index`）；MathScene：要点 + 课纲对照 |
 | `plate` | 左列底部，章节轨之下 | 次级读数的紧凑块（SpaceScene：PLATE 图版块；MathScene：模型 · 份数 · 标记 · 分数）；手机隐藏 |
 | `card` | 右列顶 | 示意 SVG 卡的**内容**；标题由 `controls.card` 注册，宿主画框和 `A NAME 中文` 表头；注册了 `cardToggle` 时表头是展开按钮（`aria-expanded`），框带 `data-expanded`，展开后高 ≤ 右列 60%，内容自己滚动 |
@@ -528,6 +528,28 @@ URL `b` 从 1 起，store beat 从 0 起；`m` 只接受整数 1…12。优先�
 
 可运行夹具：`sample-climate`（draft、12拍），数据来源/变换哈希见其 `data/SOURCES.md`。人工2×2是测试数据，不能用于正文天气地图。
 
+### 现今地理上下文（E-SEA1–2，docs/54 §4）
+
+`temporalMode: geography` 仅用于 `time-scene / geo`：今天的国形、自然地理对象与按加入日期筛选的成员。复用 `ClimatologyStage` / controller、ClimateLoader、雨格、风箭头、原生采样、KEY、ChapterAxis 与 PRESENT；不创建历史 time model / playhead，`t=null`。`four-taps` 的控制帧/永久路线、`singapore-land-use` 的数值 f/u 层仍属于年代模式，不能拿假日期套静态地理。
+
+```json
+{"temporalMode":"geography","geography":{"asOf":"2026-10-27","geometryEpoch":"Present-day Natural Earth cartographic snapshot","dateRange":["1967-08-07","2026-10-27"],"initialContext":{"kind":"present"}}}
+```
+
+`data/geography.json` 是单份 inline 数据：`countries` 为 Polygon/MultiPolygon FeatureCollection（properties：`id,a3,name:{en,zh},sources,summary?,detail?`）；`layers:[{id,kind:'point'|'line'|'area',label:{en,zh},color:'token:…',features:FeatureCollection}]`，feature properties 为 `id,name,sources,summary?,detail?`；`anchors:[{id,name,at:[lon,lat],sources}]`；`members:[{id,a3,joined:'YYYY-MM-DD',sources}]`；`referenceItems:[{id,label,summary,detail?,sourceIds,locationRef,locationScope:'country',figure?}]`。最后者不能有 `at`，只高亮 country `locationRef`。`figure` 是本章已存在的 HTML id；仅目标在当前阅读正文中可见时显示按钮。国家/成员 id 与 A3 唯一、一一对应，日期真实且不晚于 asOf，坐标/几何、非空双语、source ids、locationRef 均验证。地理数据之外 `presets/sources/glossary` 仍用既有文件；旧 entities/control/movements/events 可省略或显式空，不接受假事件日期。
+
+图层 `geo-countries` 与 `geo-membership` 是内置的，`geo-anchors` 从有来源的 anchor 生成点（已有 point/line feature id 不再生成第二个点）；其余来自 inline `layers`。Mekong 的两条源 feature 可以共用同一 id，索引只列一次、选择时两线同亮。国形装载一次，成员日期只改 GPU filter；成员色为同一 signal token，选择描边与成员填色区分，不计算参与面积/阵营。成员谓词 `joined <= date`（ISO 日），计数按唯一国家；关成员层仍保留真实语义 count，并在 PLATE 显示“图层已关闭”。
+
+章节和每拍用 `geoContext:{kind:'present'} | {kind:'climatology',month:1…12} | {kind:'membership',date:'YYYY-MM-DD'}`，每拍显式 `selection:string|null`，章节 `index:string[]`。其余 `camera/layers/highlight/caption` 沿用。首拍是章节目标，拍按作者顺序走章轴；原子应用 context、camera、layers、highlight、selection。index 可引用国家、线/点、阅读个案、`cell-105-0` 气候格点；全部按钮 ≥44px。P/A 不显示残留月样本，C 不显示成员色；月真值只在 geoContext.month，没有第二个 month store。没有月元数据时拒绝 C 上下文。
+
+URL 保留 `ch,b,cam,layers,theme`；`gc=p|c|a` 必写合法当前 context；C 完整写 `m=1…12`，A 写 `at=YYYY-MM-DD`，P 无 m/at。先选择 ch/b baseline，再整体套有效 context override；无效/缺月或日期恢复该拍 baseline，canonical 删除 t 及冲突参数，写完整合法 context。无 gc 时忽略 m/at。跨 kind 不积累旧字段和旧气候选择；popstate/语言切换沿既有 URL 同步。
+
+月文件可按原 stem 引用已有资源，原字节与数组不复制、不改写。若本主题编号来源与原资源不同，monthlyLayers 可加 `sourceMap:{"S22":"S201","S25":"S20","S101":"S203"}`。共享 loader 和 build validator 只在解析时映射来源元数据，格网/数值原样；map 键必须在资源 sources 中，映射后的来源须与 layer.sources 一致且存在本题书目。无 sourceMap 的月主题行为不变。
+
+UI：左 PLATE 显示现今国形、上下文/日期/成员数，C 显示基准期、850 hPa/原生格距/mm/day（从实际资源元数据读取）；右 TOOLS 旁放月或日期控件，手机阅读中同功能。readerTop 为节拍→选中详情，readerEnd 为本章索引；底部只有章轴。小国家位置标记不放大国土。地图/索引/键盘/API 共享动作；C 的地图点击采样气候，国家仍可从索引选。
+
+测试 API：`engine.geography()` → `{context,geometryHash,countryCount,memberIds,memberCount,selection,visibleLayerIds,climateSample,climatology}`；geometryHash 为固定国形 JSON 的 FNV-1a 稳定校验值（原始来源 SHA-256 另在 provenance），memberIds 按 A3 排序。`setGeoContext(ctx)`、`selectGeography(id|null)`、`goToGeographyBeat(ch,index)`、`toggleGeographyLayer(id,on)` 与 `sampleClimate(lon,lat,month?)` 复用 UI；非 C 的 sampleClimate 返回 null。`ready` 等待 inline 地图 source worker 与开启月层完成。`shoot --beats` 同时记录 context/selection/geometryHash/成员集合、检查月渲染一致与 URL 重开一致。draft 夹具 `sample-geography` 有三国真实数据、8拍，明确不是全区域成员地图。
+
 ### 作者怎么写数据
 
 四个文件放 `data/`（schema 见 docs/03 §A 与 `schema.ts`）：
@@ -542,6 +564,46 @@ URL `b` 从 1 起，store beat 从 0 起；`m` 只接受整数 1…12。优先�
 | `sources.json`（可选） | 见上文"加一个主题"第 4 步。 |
 | `glossary.json`（可选） | 名词表，见「名词表」。 |
 
+**同址事件的显示偏移**：`events.json` 可选 `displayOffset: [x, y]`（CSS px，右／下为正，每轴 −96…96）。它只移动事件／地点标记、脉冲、引线锚点及 44 px 点击目标，偏移后的圆点画一条 hairline 腿连回原坐标（`displayLeg`，离锚点留 6 px），读者看得出它属于哪个地点；`at`、地理包围盒和镜头取景仍使用原始来源坐标。只用于拆开重叠点，并在主题 `data/SOURCES.md` 记录确定性排布规则；显示偏移不声称事件发生在另一地理位置。引擎选择偏移后最近的标记，未配置时位置不变。单测见 `tests/time-scene/event-display.test.ts`。
+### 任务地点与非战争呈现（missions）
+
+默认主题保持原有地图、统计、参与卡行为。可在 `topic.yaml` opt-in：
+
+```yaml
+timePresentation:
+  mode: missions
+  showArea: false
+  eventsLabel: { en: Events, zh: 事件 }
+  entityLabel: { en: Programmes, zh: 项目 }
+```
+
+对象严格校验，`showArea` 只能 `false`，两个标签都必须有非空 EN/ZH，限 `time-scene` / `geo`。内部图层 id 仍是 `battles`；按钮、KEY、事件眉题、状态串、读屏与图版读主题词。状态串只显示全部项目数和已记录证据数；参与卡按 `entities` 输入顺序显示全部年份线，隐藏面积带、KM² 与面积排行；实体详情同样隐藏面积。卡片与详情明确“年份线是本段故事范围，不是国家成立日期”。无行动数据时省略行动开关与 FLOW 快捷键。
+
+`events.json` 新增 `kind: "mission"`，复用中性 milestone 的 GL 圆环、44px 点击命中、现有高亮/选择/URL/演示路径。mission 必须给至少一个可解析来源与严格的 `missionContext`，其他 kind 禁止该字段：
+
+```json
+{
+  "id": "example-lunar-outcome", "kind": "mission", "t": "1969-07-20",
+  "at": [-80.64861111111112, 28.52472222222222], "importance": 2,
+  "title": { "en": "Example lunar outcome", "zh": "示例月面结果" },
+  "summary": { "en": "Read the actual setting separately from the Earth anchor.", "zh": "分别读清真实环境与地球关联点。" },
+  "sources": ["S1"],
+  "missionContext": {
+    "programme": "programme-a", "setting": "moon-surface",
+    "anchorRole": "associated-launch-centre", "anchorSite": "site-kennedy",
+    "relatedSites": [], "occurredAt": "1969-07-20T20:17:39Z"
+  }
+}
+```
+
+`programme` 必须存在于 entities，`anchorSite` / 可选的最多3个 `relatedSites` 必须指向 `kind: site` 的事件。relatedSites 不重复、不含 anchorSite；mission 的 at 各坐标必须与 anchorSite 相差≤1e-5 degrees。`setting` 必填，只接受 `earth-surface / earth-orbit / lunar-orbit / moon-surface / cislunar / suborbital`；suborbital 用于未形成完整轨道的飞行，避免误写成地表或轨道。mission 的 t 只接受 YYYY-MM-DD；可选 occurredAt 必须是有效的 UTC YYYY-MM-DDTHH:mm:ssZ，其日期须等于 t，错误落在 `missionContext.occurredAt`。UTC原时刻只展示，播放头仍是日级。
+
+任务引线第一行固定显示实际环境与“关联发射中心”；详情标题下先显示环境和原 UTC 时刻，再说明地图点为关联发射中心并列出实际名称及所有相关中心名称。历史 mission 圆环保留；只有 t 已到的 mission 能进入 frame，即使被提前高亮也不提前出现。`EventN.missionContext` 保留语义；`__atlas.engine.missionContext(id)` 只读返回 `{ setting, anchorRole, anchorSite, relatedSites, occurredAt, at }`，未知/非mission 返回 null，缺省 relatedSites=[]、occurredAt=null，数组是独立副本。
+
+无地图位置的证据写 `mapVisibility: "timeline-only"`（缺省 `"anchor"`）；可省略 at。禁止用于 mission/site/battle/landing/bombing；政治回顾可用。它仍进日期泳道、索引与详情，永不进 GL 点/脉冲/引线/地图 bounds；即使作者写了 at 也忽略其地图几何。missions 模式与 reconstruction 主题共用 View 内的 `TimeBeatLine`（readerTop，详情之前）和 `,` / `.`（`beatStep`）；拍状态只有一套：`lib/beatState`（`timeBeatState` / `linkedTimeBeatState`），章轴刻度、P、`b` 链接与 URL 基线都走它。章末索引沿用 E-IR1 的 `ChapterIndex`（作者写的 `state.index`）；timeline-only 条目在索引行带 `data-map-visibility="timeline-only"`，供 shoot 的漏标审计跳过，选中时只跳日期、不移镜头。b链接保留显式t/cam/hl等覆盖值，其余从该拍恢复；URL基线按该拍省略相同字段，b保持。自由时间拖动清空拍号（beat:null）；P从当前拍进入。静态站点仍不计事件数量。
+
+`frameStats` 与 `__atlas.stats()` 增加 `activeEvents`（非site，发生日期至until含当日；未写until只当天）与 `recordedEvents`（发生日期≤播放头，含timeline-only）。`activeBattles` 定义不变；`eventMarkers` 是此刻 GL 事件 source 的点数（battles关闭时0），不含site。统计复用现有 frame；API不维护独立状态。纯函数在 `lib/missions.ts`，测试 `tests/time-scene/missions.test.ts`，草稿夹具 `sample-missions`，浏览器测试 `tests-e2e/sample-missions.spec.ts`。视觉验收：`pnpm shoot sample-missions --beats --keys --layout`（包含拍链接与双主题）。
+
 **`site` 事件**是静态点位（监狱、纪念碑、建筑）：`t` 照写但不参与时间——不进时间轴范围、不进泳道和统计、不脉冲；只在 `sites` 图层打开时显示（小空心菱形 + 中心点），点击同样打开 inspector（眉题 `P-01`），高亮时出引线标注。
 
 章节 `state`：`time`（ISO 三种精度或 `{ ma }`）、`camera`、`layers`、`highlight`（实体/行动/事件 id）、`theme`、`note`（只在背景章：阅读说明）、`summary`（`{ en, zh }`，阅读面板标题下的一句话，也是默认演示字幕）、`question` / `answer`（`{ en, zh }`；没有 `summary` 时阅读面板头部显示 `question`；`answer` 必须配 `question`，目前不渲染），以及可选的 `beats`（演示节拍，见下）。底部条上每章一段，段从本章 `time`（第一拍更早就取第一拍的 `t`）开始，段里每拍一个刻度——**拍就是时间轴的结构**；**章节顺序必须等于时间顺序**（`tests/schemas.test.ts` 对 ww2 有检查）。
@@ -551,6 +613,8 @@ URL `b` 从 1 起，store beat 从 0 起；`m` 只接受整数 1…12。优先�
 `ChapterIndex.tsx` 放在 `readerEnd`（标题 `time.index.title`，样式同 SpaceScene 的 `.space-index`），按钮使用事件的双语 title，带 `data-time-target`、`aria-pressed`，命中高度至少 44 CSS px。索引选地点开 `sites`、保持日期；选非地点开 `battles`、跳到事件的原始日期（保留日精度），不换章或启动演示；镜头只改 center，保留 zoom / pitch / bearing。非法 id 或演示中返回 false、无副作用。原地图 / 引线选择继续复用唯一的 EventInspector，事件和实体详情移到 `readerTop`；未选择不画空框。宿主 `revealReader()` 打开已有阅读面板 / 手机抽屉并在展开后回到顶部；小于 1024 CSS px 只展开临时抽屉，不覆盖 `sessionStorage['atlas:reader']` 的 dock 折叠偏好，桌面显式选中会沿用原来的 reader 持久化路径打开列。关详情恢复底部条当前所停拍（anchor 的刻度）的高亮；拖时间、跳日期或换章后没有所停拍，恢复章默认。索引与选中 id 不新增 URL 字段。此项不包含阅读节拍行或 `b` 参数适配（E-IR2）。
 
 测试 API：`__atlas.engine.selectEvent(id): boolean` 走索引路径；`__atlas.engine.reader()` 返回 `{ indexIds: string[], selectedId: string | null, detailCount: number }`（详情数量 0 或 1）。纯函数 `lib/reader.ts` 和 schema 有 `tests/time-scene/reader.test.ts` 单测；真实 draft 主题 `industrial-revolution` 作为内容验收样本，不另建占位夹具。
+
+手写正文索引表也可用 `<FlyTo preset="view-china" event="evt-first-voyage">…</FlyTo>`：宿主原生 click 委托调用 `controls.selectEvent`（与自动索引和测试 API 同一路径），先选中事件/地点、应用日期/图层并打开阅读详情，再走原 VIEW 预设动作。因此保留原表的取景范围，不会被事件坐标改成另一个中心；手机也保留详情抽屉。演示中或无效事件不改状态；未带 `event` 的普通 FlyTo 行为不变。`tests/flyto.test.ts` 覆盖真实 store 的选择/预设转换顺序、地点日期不变、事件日精度、手机与拒绝路径。
 
 演示节拍（`state.beats`，可选，加法）：
 
@@ -565,6 +629,8 @@ beats:
 ```
 
 每拍 = 本章累积目标 ⊕ 拍里写的字段。没写 `beats` 的章 = 一拍（本章状态，字幕 = `summary`，没有就 `question`，再没有就章名）。ww2 的第 07 章（哥打巴鲁 → 半岛南下 → 渡柔佛海峡 → 投降）和第 11 章（广岛 → 满洲 → 东京湾 → 新加坡受降）各写了四拍。
+
+TimeScene missions的章索引行带`data-map-visibility`；shoot逐拍/逐章的unlabelled审计只豁免明确timeline-only的记录，不豁免有地图锚点的任务。
 
 ### 图层（`layers` 里的 id）与地图语法（docs/08 §5）
 
@@ -657,7 +723,7 @@ TimeScene 不注册 `panel01–03`，宿主因此不画底部三面板带；原�
 
 - 左：泳道开关（小 chevron，`aria-expanded`）。PRESENT / 演示按钮已移到顶栏 VIEW 组右端（两个引擎共用，docs/08 §2；这里不再放第二个）。原来的播放 / 暂停和 ×1 ×2 ×4 已去掉（Gavin 2026-10-09），时间轴不再自己跑。
 - 中：**分段标尺**（Gavin 2026-10-10："外面的大时间轴做成跟演示模式类似，分几段，只标年月"）：每个正式章节一段，等宽（段间 6 px），段左界下方两行 mono 标签：章号 `07`、起始年月 `1941-12`（段宽 < 44 px 只写章号；地质时间写读数；公元前、跨度超过 100 年或 `datePrecision: year` 时只写年：`770 BCE` / `前770年`，`segmentDate` 用 `yearLabel`）。每段一条 2 px hairline 轨：已过的章墨色，当前章 signal 色、填到播放头。段里每个演示拍一个刻度（7 px 空心圆，坐在轨上），位置按拍的 `t` 在本段跨度里线性排、再推开到彼此 ≥ 10 px（段太窄时均分）；当前章的当前拍刻度实心 signal（刚套用的那拍；拖动后 = 播放头之前最近的一拍）。没写 `beats` 的章一个刻度（章节时间）。关键帧小空心菱形坐在轨上（同一映射）；没有年 / 月刻度。**点段**（`.ts-seg__btn`，44 px 高，`aria-label`「第 2 章：开战前的世界，自 1938-01」）= 换到那一章并落在第一拍（见「时间」）；**点刻度**（`.ts-seg__tick`，`data-beat="<章>.<拍>"`，命中区伸到与相邻刻度的中点，10–28 px 宽、24 px 高，压在段按钮上面——段在标签那一行点）= 套用那一拍；悬停 / 聚焦刻度出一张 hairline 小卡（`.ts-tip`）：拍的日期（mono signal）+ 字幕开头几个词（en 约 56 字符断在词边界，zh 22 字）。当前段的刻度是 Tab 停靠点，其余段的刻度只给指针（选了那段就能 Tab 进去）。手机宽度（条 < 560 px，容器查询）只画段、不画刻度。播放头：12 px 空心 signal 圆点（中间透出当前拍的实心刻度）加 hairline 竖线，日期写在线上方；44 px 命中区（`.ts-rule__grab`，`role="slider"`，`touch-action: none`）压在刻度上面——不拖动地点它 = 点了 22 px 内最近的刻度，没有就点了所在的段。**拖动**：在标尺上任何地方按下并移动 > 3 px 就开始拖（指针捕获），松手不再算点击；抓住播放头保持抓取偏移，从别处起拖则播放头跳到指针。鼠标和触屏都走 pointer events。
-- 右：状态串（mono）：参战方 `已加入 / 总数` · 进行中的战斗 · 进行中的行动 · 控制区关键帧 `K8→K9 23 %`；每段的 `title` 写双语全称（Participants / 参与方 …）。都是数据统计，不标 SIM。条窄于 860 px（容器查询）时状态串换到标尺下面一行。
+- 右：状态串（mono）：参与方 `已加入 / 总数` · 进行中的战斗 · 进行中的行动 · 控制区关键帧 `K8→K9 23 %`；只在全题有相应数据时出现（战斗按 battle/landing/bombing/siege；非战斗事件仍保留 Events 图层）。没有实体、路线或非空控制几何时分别省略参与方、行动或关键帧读数；当前日期暂时为 0 的读数保留。`lib/hud.ts` 按全题数据决定，不随时间或图层开关跳变；`tests/time-scene/hud.test.ts` 核查全部 TimeScene 主题和双语状态 HTML。每段的 `title` 写双语全称。都是数据统计，不标 SIM。条窄于 860 px（容器查询）时状态串换到标尺下面一行。
 - 泳道（默认收起）：KEYFRAMES（菱形）、MOVEMENTS（起止条，重叠自动分行）、EVENTS（点 + 进行窗口），当前章那一段淡 signal 底，播放头一条 signal 竖线；横坐标与标尺完全一致。
 - 行为：拖动 = 连续时间不换章；点段 = 换章并落在第一拍（不展开阅读面板，见「阅读面板收起」）；点刻度 = 那一拍；Shift+← → 全局微调；焦点在播放头上时 ← → ↑ ↓ 微调一格、PageUp/PageDown 十格、Home/End 跳到播放头所在段的两端。
 
@@ -693,6 +759,8 @@ end_i   = start_{i+1}；本章最后一拍更晚就取最后一拍（最后一�
 | `cardToggle` | 参与卡展开 / 收起 |
 | `beats` | `usePresentation` 的 `controls`（节拍列表与跳转、自动播放、语音、voiceLog） |
 | `escape` | 依次：退出 PRESENTATION → 退出 REFERENCE → 收起展开的参与卡（连同选中的实体）→ 取消选中实体 → 关闭事件详情 → 清空 highlight（来源弹层开着时 ESC 先关弹层，由弹层自己处理） |
+
+LAYERS 按全题是否有数据省略空行：控制区须有非空几何；何时加入须有实体及可着色的控制区几何（仅叙事实体时不出空图层，参与方读数与卡片仍保留）；路线（连同 F 模式）须有 movements；事件须有非 site 事件；地点须有 sites。领土名称（连同 N 键）在有控制区、区域河名或今日岸线时保留，三者都没有就不出行也不注册 N。datedLayers 的作者图层原样保留；不能因为题目没有战斗就隐藏 milestones、政治事件、输水管或铁路。
 
 - **REFERENCE（R）**：版图对照用"叠加"实现（不分屏）：当前主导关键帧照常，相邻关键帧（前一帧；当前是第一帧时取后一帧）的边界以墨色虚线叠上，2 s 淡入（`instant` 时直接到位）；舞台顶部横幅写"实线 K2 … · 虚线 K1 …"。再按恢复。少于两个关键帧时禁用；演示中禁用。
 - **PRESENTATION（P）**：core 演示系统（见「演示系统（core）」），TimeScene 的适配器在 `View.tsx`：`beatsOf` = 章的 `state.beats`；一拍 = 本章累积目标 ⊕ 拍里的 `t` / `camera` / `layers` / `highlight`，用 `applyState` 飞镜头（2.2 s）、缓动 `t`（1.6 s）——底部条点刻度、换章落第一拍用的是同一个函数（`applyBeatState`）；`saveState` / `restoreState` = store 快照 / `applyState` 恢复（章节、镜头、`t`、图层、高亮）；`onEnter` 退出 REFERENCE、清选中的事件 / 实体、收起参与卡；字幕卡表头的 `readout` = 播放头日期（同时间轴读数）；没有 `afterCameraSettle`（固定 2.3 s，等于镜头飞行加字幕淡入）。演示中 REFERENCE 禁用；顶栏 PRESENT 按钮 = P。拍落定后地图可拖动 / 缩放（见「翻页与自由查看」），演示中点地图上的事件不选中；用户平移 / 缩放（含滚轮）250 ms 后写回 `camera`，过渡开始时丢弃还没写回的那次。**引线标注**：HUD 隐藏时地图上仍画这拍 `highlight`（没写就是本章的）里的事件 / 行动 / 实体的引线标注（上限 6 个，字号比平时大 20%，遵守 L 开关；要对应图层开着），**只有这些**——别的事件标注、地名、实体名在演示里都不画（控制器 `setPresentation(true)`，样式挂在 `.ts-stage[data-presenting]`）；领土名称照常显示。字幕卡和标题块算引线栏的障碍，标注让开它们；演示中引线栏**只**把这两块当障碍（HUD 面板淡出时 `visibility` 还留着，不能算），并且进入演示、换拍（字幕卡出现 / 变高，`refreshLabels`）和镜头落定（`moveend`）时立刻重新量一次，不等 1 s 的兜底定时器。
@@ -2298,7 +2366,7 @@ scripts/math/check-pool.ts   题库草稿自证：pnpm tsx scripts/math/check-po
 | key | 含义 | 取值 | 引擎 | 例 |
 |---|---|---|---|---|
 | `ch` | 当前章节 | 章节 id | 通用 | `ch=power-on` |
-| `b` | 本章的当前拍（章节轴） | 1 起的整数；月模式不写 = 首拍；其他引擎不写 = 本章自身状态（SpaceScene：打开 = 章节轴上的这一拍，含拍的 `sim.set` 与镜头，URL 里写了的字段优先；MathScene：= 1 时不写；讲解拍之后的一拍是小测，练习章第 k 拍是第 k 题） | SpaceScene、MathScene、TimeScene climatology | `ch=training-the-chest&b=2` |
+| `b` | 本章的当前拍（章节轴） | 1 起的整数；月模式与 missions 不写 = 首拍；其他引擎不写 = 本章自身状态（SpaceScene：打开 = 章节轴上的这一拍，含拍的 `sim.set` 与镜头，URL 里写了的字段优先；MathScene：= 1 时不写；讲解拍之后的一拍是小测，练习章第 k 拍是第 k 题） | SpaceScene、MathScene、TimeScene climatology、TimeScene missions | `ch=training-the-chest&b=2` |
 | `layers` | 打开的图层 / 组 | 逗号分隔 id；空值 = 全关 | 通用 | `layers=control,battles` |
 | `cam` | 镜头 | 地图 `lng,lat,zoom[,pitch[,bearing]]`；3D `px,py,pz,tx,ty,tz`；空值 = 无 | 通用 | `cam=103.8,1.35,7.5` |
 | `theme` | 场景主题 | `paper` \| `cinema` | 通用 | `theme=cinema` |
@@ -2510,3 +2578,65 @@ QA：`engine.airfoil()` 提供当前标量、fieldReady/version/inputKey、路�
 - **堆场**：求值须传已有 `evaluateSim` 的 parts 参数；`evaluateSimOnStage` 已如此传入。`yard-slots` 的键为 `<part>:x/y/z/shown`，相对各主primitive.at；原状保持静止，cleared/retrieved把存在的阻挡箱移到park，retrieved另把target移到retrieved。超出above的阻挡箱shown0，目标始终为底层。绑定 `{output:"yard-slots",part:[...],shift:{ease:0,lift:0}}`；不把直线位移当作安全吊运路径。QA继续读 `engine.shift(id)`。
 - **校验**：严格字段/有限数/正尺寸与slow≥1；控件类型、合法默认值与范围；目标/阻挡箱互异、非context primitive；clearBottomY清过起终点箱顶、trolley原点高于最高吊具顶、knots严格递增；lift起终点位于模型静止包络。输出只允许上述15种，kind与全部状态标签须准确；count的repeat数量须覆盖该控制值。现有绑定/pose引用校验保留。source id沿用现有 `S1` 格式（prep文献 `S01` 映射 `S1`）。
 - **镜头远平面**：舞台相机 far 默认 200 m；模型半径大到轨道最远距离超过它时（港口约 100 m 的岸桥），`CameraRig` 按 `farPlane(radius)`（`lib/camera.ts`：`max(200, 20 × 0.9R + 2R)`）抬高，否则窄屏 / 竖屏下相机退远后整座模型被裁掉。展品尺度的主题仍是 200，不受影响。
+### SpaceScene · 试一试 · 热（heat）
+
+`sim.kind: "heat"`（docs/55 §4 E-H1）为互不耦合的均温物体求解显式时刻温度。`heat-schema.ts` 验证作者数据，`lib/sim/heat.ts` 的 `solveHeatAt(heat, resolvedValues, seconds)` 返回 quantity 字典；常规 `solveHeat` 从 `heat.time` 读取秒数。共用 `evaluateSim`、offset、signed flow，不接入 Timeline 播放时钟；`simTimelineChannels` 返回 null，`SEPARATE_EXPERIMENTS.heat = true`。完整七控件/二十四输出模板见 `tests/space-scene/fixtures/heat-bench.ts`；草稿 `sample-heat` 的六张卡覆盖同温、温浴、包覆、加热、冷却和固体膨胀。所有示例数值均为 DESIGN / SIM，并非真实器材测量。
+
+```json
+{
+  "kind": "heat",
+  "controls": [
+    { "id": "elapsed-s", "kind": "step", "label": { "en": "Elapsed time", "zh": "经过时间" }, "values": [0, 60, 120, 180, 240, 300], "default": 0, "unit": "s" },
+    { "id": "power-w", "kind": "step", "label": { "en": "Power", "zh": "功率" }, "values": [0, 50, 100], "default": 100, "unit": "W" }
+  ],
+  "outputs": [
+    { "id": "heated-c", "from": "temperature:water", "label": { "en": "Water temperature", "zh": "水温" }, "unit": "°C", "decimals": 1 }
+  ],
+  "heat": {
+    "time": "elapsed-s",
+    "lumps": { "water": { "initial": 25, "capacity": 840, "power": { "control": "power-w" } } }
+  }
+}
+```
+
+- `time` 必须引用 step：秒单位 `s`、不写 `format:"time"`、从0严格递增、至少两个值、所有值0–600 s。其合法步值用于 store / URL，连续曲线内部可在步值之间调用同一解析函数。时间不能同时被用作 `initial` / `power` / `capacity` / reservoir 参数，否则不再是固定参数的单调模型。
+- NumericSource 是有限数、`{"control":"step-id"}`，或 `{"control":"choice-id","values":{"bare":2,"wrapped":0.5}}`。choice映射必须完整且无多余键，toggle不能作为数值源。step引用必须带对应物理单位（温度°C、质量g、功率W、conductance W/K），不接受时刻格式。`capacity` 是正J/K数值，或 `{"mass":{"control":"water-g"},"specific":4.2}`，mass单位g、specific单位J/(g·K)，所有允许质量均>0。`power` 默认0，必须≥0 W；reservoir可省，写时是 `{"temperature":25,"conductance":2}`，conductance必须>0 W/K。
+- `lumps` 1–6个；`expansions`、`compare` 各0–4个，三张表的对象id不重名。`expansions.rod` 是 `{"temperature":{"control":"rod-c"},"reference":25,"length":0.1,"alpha":0.000012}`（m、K⁻¹）；length>0、alpha≥0。`compare.tips` 是 `{"first":"metal-tip","second":"plastic-tip","epsilon":0.01}`，两端是不同且存在的lump，epsilon≥0 °C。
+- 无reservoir：`T=T₀+Pt/C`；有reservoir：`T∞=Tₐ+P/U`，`T=T∞+(T₀−T∞)exp(−Ut/C)`。`q=P−U(T−Tₐ)`，`E=C(T−T₀)`，`Ein=Pt`，`Eout=Ein−E`。每个实验仅遍历它所读控件的全部允许值，检查0和最大时间：完整轨迹必须0–95 °C且数值有限。越界构建报错，不截断成沸腾平台。所有能量和温差保留符号；恒温热库由外部维持，不能称为有限杯水的封闭能量账。
+
+| quantity `from` | kind / unit | 内容 |
+|---|---|---|
+| `temperature:<lump>` | number / °C | 温度 |
+| `change:<lump>` | number / K | 相对初温的变化 |
+| `rate:<lump>` | number / W | 净传入功率 |
+| `energy:<lump>` | number / J | 净传入能量 |
+| `supplied:<lump>` | number / J | 定功率累计供能 |
+| `reservoir-energy:<lump>` | number / J | 净传至热库能量 |
+| `direction:<lump>` | state / 无单位 | warming / steady / cooling（q的±1e−9 W） |
+| `compare:<pair>` | state / 无单位 | first-warmer / same / second-warmer（epsilon比较带） |
+| `delta-mm:<rod>`、`length-mm:<rod>` | number / mm | 伸长量 / 长度 |
+
+每个输出必须声明准确的kind和unit；state必须给上表全部状态写双语标签，不能加入其他状态。不存在的quantity或对象报错。杆输出为真实模型毫米，`offset:{"axis":[1,0,0],"per":0.5,"origin":0}` 只将独立marker位移放大500倍（0.072mm → 0.036m）；静止杆本身不缩放。温度计示意marker可用Y向offset；温度不是体积，不能接fill。
+
+`state.sim.try.curve`（E-H2）与已有记录图 `record.chart` 分开：
+
+```json
+{
+  "set": { "elapsed-s": 0 },
+  "try": {
+    "vary": "elapsed-s",
+    "also": ["power-w"],
+    "observe": ["heated-c"],
+    "record": true,
+    "curve": { "x": "elapsed-s", "y": ["heated-c"], "samples": 101 }
+  }
+}
+```
+
+curve.x只允许heat.time，y为1–3个温度number输出（°C），samples整数33–201、默认101。横域取时间控件首末值，纵轴0–100 °C；同一个solver采样、端点包含、分段直线，无拟合与积分。模型曲线/展开值表为模型预计，记录按钮才会把当前显式时刻加入学生记录表。`vary`可以是cover，curve.x仍是elapsed-s；不把类别控件变成时间轴。曲线缓存包含模型、其余控制量、series和采样配置，排除游标elapsed；改变游标只重新求一个时刻。
+
+带predict的自由卡默认遮蔽当前卡答案、曲线与关联PLATE；讲解章/拍可写 `sim.reveal:true`，不隐藏既定教材知识。预测选择保留before/after条件，之后任意条件或时间改变即使预测失效。记录context为当前章+除vary外全部resolved controls：非vary改变清表并提示“Conditions changed; start a new record. / 条件已改变，请开始新记录。”；只变vary保留其他行，同值覆盖，最多12行，无本地持久化。普通URL仍通过 `sim=elapsed-s.120~power-w.100` 进入同一时刻；等待、RUN、REFERENCE和reduced motion均不改变实验时间。`__atlas.engine.sim()` 的values/outputs/table及只读curve数值诊断可核对游标、PLATE和记录行一致。
+
+曲线只读诊断精确形状为 `sim().curve = { x, domain: [min,max], series: [{ id, points: [{ x,y }] }], cursor: { x, values: { "heated-c": 39.285714285714285 } } }`。`points` 是采样数值，`cursor.values` 是当前时刻同solver直接求值，测试接口不返回SVG。未揭示预测同时隐藏手动记录表；before/after快照用于当前条件解释与恢复。`sim.reveal:true`仅在当前resolved controls等于该章/拍的原始输入时生效，手动改条件会使这次教材揭示失效。
+
+热实验卡隐藏当前读数时，提供显式操作 **Show current result / 显示当前结果**（`data-sim-reveal`）。该操作仅在临时UI里记录当前章与全部resolved controls的context，不改时间、质量、功率等输入，也不应用预测的固定start/change情景；可直接查看并手动记录任意合法时刻。之后改任意条件或时间、换章或拍，显式揭示失效，旧预测before/after说明也不沿用；再次点击才能显示新条件。此遮蔽机制只对heat开启，已有其他sim主题保留其读数/PLATE默认可见行为；通用记录条件隔离与预测失效仍共享。只读诊断`sim().reveal`给出当前显式揭示context或null。

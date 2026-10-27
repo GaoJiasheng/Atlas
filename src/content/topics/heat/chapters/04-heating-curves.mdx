@@ -1,0 +1,216 @@
+---
+id: heating-curves
+order: 4
+title:
+  en: Heating Curves
+  zh: 加热曲线
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  layers:
+  - curves
+  labels:
+  - heater-water
+  - heater-probe-marker
+  camera:
+    position:
+    - 0.65
+    - 1.25
+    - 0.75
+    target:
+    - 0.15
+    - 0.9
+    - 0.1
+    fov: 30
+  summary:
+    en: Read time and temperature together, then change one condition.
+    zh: 把时间与温度一起读，再改变一个条件。
+  sim:
+    set:
+      elapsed-s: 0
+      water-g: 200
+      heater-w: 100
+    try:
+      vary: elapsed-s
+      also:
+      - water-g
+      - heater-w
+      keep:
+      - en: Water starts at 25 °C
+        zh: 水从 25 °C 开始
+      - en: 'Ideal heating: no heat loss or container heat capacity'
+        zh: 理想加热：忽略散热与容器热容量
+      observe:
+      - heated-c
+      - heated-j
+      curve:
+        x: elapsed-s
+        y:
+        - heated-c
+        samples: 101
+      record: true
+      predict:
+        prompt:
+          en: Keep input power and elapsed time the same, but double the water mass. How will the final temperature
+            compare?
+          zh: 保持供能功率与经过时间相同，水量加倍，末温会怎样？
+        start:
+          water-g: 200
+          heater-w: 100
+          elapsed-s: 120
+        change:
+          water-g: 400
+        observe: heated-c
+        options:
+        - id: more
+          label:
+            en: Higher
+            zh: 较高
+          means: more
+        - id: less
+          label:
+            en: Lower
+            zh: 较低
+          means: less
+        - id: same
+          label:
+            en: The same
+            zh: 相同
+          means: same
+  beats:
+  - camera: view-heater
+    layers:
+    - curves
+    labels:
+    - heater-water
+    - heater-probe-marker
+    sim:
+      set:
+        water-g: 200
+        heater-w: 100
+        elapsed-s: 0
+    caption:
+      en: The horizontal axis is elapsed time in seconds. The vertical axis is water temperature in degrees Celsius.
+      zh: 横轴是经过时间，单位秒；纵轴是水温，单位摄氏度。
+  - camera: view-heater
+    layers:
+    - curves
+    labels:
+    - heater
+    - heater-probe-marker
+    sim:
+      set:
+        water-g: 200
+        heater-w: 100
+        elapsed-s: 120
+      reveal: true
+    caption:
+      en: At 120 seconds, cursor and probe agree at about 39.3 degrees Celsius in this model.
+      zh: 一百二十秒时，游标和探头在这个模型里都读约三十九点三摄氏度。
+  - camera: view-heater
+    layers:
+    - curves
+    labels:
+    - heater-water
+    - heater-probe-marker
+    sim:
+      set:
+        water-g: 400
+        heater-w: 100
+        elapsed-s: 120
+      reveal: true
+    caption:
+      en: With twice the water mass, equal input gives half the temperature rise in this ideal model.
+      zh: 理想模型中，水量加倍、供能相同，升温幅度变为一半。
+  - camera: view-heater
+    layers:
+    - curves
+    labels:
+    - heater
+    - heater-probe-marker
+    sim:
+      set:
+        water-g: 200
+        heater-w: 50
+        elapsed-s: 120
+      reveal: true
+    caption:
+      en: At fixed water mass, lower power makes the model heating line less steep.
+      zh: 水量不变时，功率较低使模拟加热线较平缓。
+  - camera: view-heater
+    layers:
+    - curves
+    labels:
+    - heater
+    - heater-probe-marker
+    sim:
+      set:
+        water-g: 200
+        heater-w: 0
+        elapsed-s: 300
+      reveal: true
+    caption:
+      en: With no input and no heat loss in this ideal heating model, temperature stays unchanged.
+      zh: 理想加热模型没有输入、也没有散热时，温度不变。
+  index:
+    parts:
+    - heater
+    - heater-beaker
+    - heater-water
+    - heater-probe-marker
+    - heater-probe
+---
+
+{/* Fact/source audit: H18,H25,D01,D05; S6,S27. */}
+
+<Lang en>
+
+The probe and the graph describe the same model water. A <Term id="heating-curve">heating curve</Term> shows how its temperature changes with elapsed time. Read time along the horizontal axis and temperature along the vertical axis. Moving the time control places the cursor at another instant and updates the probe reading to match.
+
+The water's <Term id="mass">mass</Term> is the amount controlled in grams. <Term id="power">Power</Term> is energy supplied per unit time. At this simulated operating point, <Num s="S27">100 W</Num> heats <Num s="S27">200 g</Num> of water from <Num s="S27">25 °C</Num>. After <Num s="S27">120 s</Num>, its temperature is about <Num s="S27">39.3 °C</Num>. The rising straight line belongs to an ideal model with constant input and no heat loss.
+
+Hold power and time the same, then double the water mass. The same energy is spread through more water, and the temperature rise is halved in this model. Next restore the original water mass and reduce power. Less energy arrives in each equal time interval, so the line rises more gently. These comparisons change different conditions; record them as separate experiments.
+
+Turning input off makes this ideal heating line horizontal. There is no input and no loss, so the temperature stays unchanged. A real cup can still exchange energy with its surroundings after a heater is switched off. Use the card to predict, reveal and record a chosen instant. The complete model line shows calculated values between instants; those values are not automatically added to your observation table.
+
+<More title={{"en":"The calculation behind the line","zh":"直线背后的计算"}}>
+
+For approximately constant specific heat without a phase change, energy change equals mass × specific heat × temperature change. Atlas uses a rounded design value of <Num s="S27">4.2 J/(g·K)</Num> for water and omits the container's heat capacity. The equation is a model explanation, not a required primary calculation.
+
+</More>
+
+<More title={{"en":"Water level is illustrative","zh":"液位只是示意"}}>
+
+Read mass from the control. The water level is fixed and illustrative, not a volume measurement. This heating model also excludes boiling and other phase changes; it does not manufacture a flat boiling segment by clipping high temperatures.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+探头和图线描述同一份模拟水。<Term id="heating-curve">加热曲线</Term>显示温度随经过时间怎样改变：横轴读时间，纵轴读温度。调节时间，游标移到相应时刻，探头也显示同一时刻的水温。
+
+这里用克控制水的<Term id="mass">质量</Term>。<Term id="power">功率</Term>表示单位时间供给多少能量。这个模拟运行点中，以 <Num s="S27">100 W</Num> 加热 <Num s="S27">200 g</Num> 水，初温 <Num s="S27">25 °C</Num>；经过 <Num s="S27">120 s</Num>，水温约为 <Num s="S27">39.3 °C</Num>。图线是直线，因为理想模型保持供能不变，并忽略散热。
+
+保持功率与时间相同，把水量加倍，相同能量分给更多水，模型升温幅度便减半。再恢复原水量、降低功率，每段相同时间输入的能量减少，加热线也较平缓。这些比较改变的条件不同，应分别记录，不能把不同条件的行混成同一实验。
+
+关闭输入，理想加热线便水平：既无输入，也无损失，所以温度不变。真实杯水在关掉加热器后，仍可能与环境交换能量。用卡片预测、揭示，再主动记录选定时刻。整条图线来自计算，不会自动变成你记录的观察行。读图时先沿横轴找到所选时刻，再向上看曲线的温度；同一个点对应同一个探头读数。比较升温多少时，还要从末温扣除初温，避免把温度值与温度变化混为一谈。
+
+<More title={{"en":"The calculation behind the line","zh":"直线背后的计算"}}>
+
+没有相变、比热近似不变时，能量变化等于质量、比热与温度变化的乘积。本设计把水的比热取整为 <Num s="S27">4.2 J/(g·K)</Num>，忽略容器热容量。公式用于解释模型，不是小学必须掌握的计算要求。
+
+</More>
+
+<More title={{"en":"Water level is illustrative","zh":"液位只是示意"}}>
+
+水量应从质量控件读取。画面液位固定，只作示意，不是体积测量。加热模型也没有求解沸腾等物态变化，不会把高温数值硬夹住，制造假的沸腾平台。
+
+</More>
+
+</Lang>

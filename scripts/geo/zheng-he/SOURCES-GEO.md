@@ -46,3 +46,8 @@ pnpm tsx scripts/geo/zheng-he/build-land.ts --source <ne-10m-land.geojson>
 ## 许可家族
 
 地理底层为 PD + CC BY；Atlas 原创选择、中文及说明为 CC BY-NC-SA 4.0。UNESCO 等描述只作事实参考，无复制段落或图像。没有新增 BY-SA／ODbL／ODC-BY 派生文件或第三方图像，因此不新增 LICENSE-CONTENT carve-out 或 THIRD-PARTY-NOTICES 条目。三张图为原准备批准的原创 AI 石墨插画，非史料扫描。
+
+
+## 2026-10-27 follow-up: symbol offsets
+
+The 17 source anchors and all 30 `at` values are unchanged. Nine dated Nanjing records now use a documented 96 CSS px display ring, keeping `site-nanjing` stationary. Exact slot order, offsets and rationale are recorded in `src/content/topics/zheng-he/data/SOURCES.md` under “Nanjing display offsets”. This rendering convention is independent of zoom and is not geographic evidence. S1 was re-read to confirm that the second expedition belongs at the Calicut destination anchor; no port was moved.

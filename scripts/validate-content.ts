@@ -224,6 +224,7 @@ function checkBodyComponents(
   tasks: Set<string> | null,
   beats: number | null,
   measuring = false,
+  events: Set<string> | null = null,
 ): void {
   for (const { raw, attrs } of tagAttrs(body, 'Num')) {
     const ids = (attrs.s ?? '').split(/[\s,]+/).filter(Boolean);
@@ -240,6 +241,8 @@ function checkBodyComponents(
     const id = attrs.preset;
     if (!id) error(file, `<FlyTo> needs a preset, e.g. <FlyTo preset="singapore-island">: ${raw}`);
     else if (!presets.has(id)) error(file, `<FlyTo preset="${id}">: unknown preset (not a named camera preset of this topic)`);
+    if (attrs.event !== undefined && !events?.has(attrs.event))
+      error(file, `<FlyTo event="${attrs.event}">: unknown event (not in this TimeScene topic's data/events.json)`);
   }
   for (const { raw, attrs } of tagAttrs(body, 'TopicLink')) {
     const slug = attrs.slug;
@@ -482,10 +485,16 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
       const file = issue.file.startsWith('public/') ? join(ROOT, issue.file) : join(dir, issue.file);
       (issue.level === 'error' ? error : warn)(file, issue.message);
     }
+    if(topic.temporalMode==='geography' && topic.geography){
+      for(const m of (data as {geography:{members:{id:string;joined:string}[]}}).geography.members)if(m.joined>topic.geography.asOf)error(join(dataDir,'geography.json'),`${m.id}: joined after geography.asOf`);
+    }
     for (const issue of monthlyResourceIssues(topic, sources ?? new Set(), readGeo))
       error(issue.file.startsWith('public/') ? join(ROOT, issue.file) : join(dir, issue.file), issue.message);
   }
   const presets = new Set(data !== undefined ? schemas.presetIds(data) : []);
+  const eventIds = data !== undefined && topic.engine === 'time-scene'
+    ? new Set((data as { events: { id: string }[] }).events.map((event) => event.id))
+    : null;
   const glossaryFile = data !== undefined ? (data as { glossary?: GlossaryFile }).glossary : undefined;
   const terms = glossaryFile ? glossaryIds(glossaryFile) : 'glossary' in raw ? new Set<string>() : null;
   const tasks = data !== undefined && schemas.taskIds ? new Set(schemas.taskIds(data)) : null;
@@ -518,7 +527,7 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
     checkBilingual(file, front);
     checkLangBlocks(file, match[2] ?? '');
     // Only when the data parsed: otherwise the data errors already explain missing ids.
-    if (data !== undefined) checkBodyComponents(file, match[2] ?? '', sources, presets, terms, tasks, lessonBeats(data, (front as { id?: unknown }).id), drawsInstruments(data));
+    if (data !== undefined) checkBodyComponents(file, match[2] ?? '', sources, presets, terms, tasks, lessonBeats(data, (front as { id?: unknown }).id), drawsInstruments(data), eventIds);
 
     const parsed = chapterSchema.safeParse(front);
     if (!parsed.success) {
@@ -558,12 +567,13 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
     if (!state.success) {
       reportZod(file, state.error, 'state.');
     } else if (data !== undefined) {
+      if(topic.temporalMode==='geography' && topic.geography){const gs=state.data as {geoContext:{kind:string;date?:string};beats:{geoContext:{kind:string;date?:string}}[]};for(const ctx of [gs.geoContext,...gs.beats.map(b=>b.geoContext)]){if(ctx.kind==='climatology'&&(!topic.climatology||!topic.monthlyLayers?.length))error(file,'climatology context requires monthly layers and metadata');if(ctx.kind==='membership'&&(ctx.date!<topic.geography.dateRange[0]||ctx.date!>topic.geography.dateRange[1]))error(file,'geoContext membership date outside geography.dateRange');}}
       for (const ref of schemas.chapterRefs(state.data)) {
         if (!ids.has(ref)) error(file, `state references unknown id "${ref}"`);
       }
       for (const issue of schemas.chapterIssues?.(state.data, data) ?? []) error(file, issue);
       if (topic.engine === 'time-scene' && topic.stage === 'geo')
-        for (const issue of timeChapterLayerIssues(state.data as TimeChapterState, [...(topic.datedLayers ?? []), ...(topic.monthlyLayers ?? [])])) error(file, issue);
+        for (const issue of timeChapterLayerIssues(state.data as TimeChapterState, [...(topic.datedLayers ?? []), ...(topic.monthlyLayers ?? []), ...((data as {geography?: {layers:{id:string}[]}})?.geography?.layers ?? []), ...(topic.temporalMode==='geography'?[{id:'geo-countries'},{id:'geo-membership'},{id:'geo-anchors'}]:[])])) error(file, issue);
     }
   }
   if (data !== undefined) {

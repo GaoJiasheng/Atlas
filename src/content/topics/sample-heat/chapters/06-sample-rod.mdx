@@ -1,0 +1,105 @@
+---
+{
+  "id": "sample-rod",
+  "order": 6,
+  "title": {
+    "en": "Rod endpoint",
+    "zh": "杆端"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": true,
+    "part": null,
+    "layers": [
+      "transfer",
+      "curves",
+      "expansion"
+    ],
+    "labels": [],
+    "camera": {
+      "position": [
+        0.2,
+        0.65,
+        1.25
+      ],
+      "target": [
+        0,
+        0.04,
+        0
+      ],
+      "fov": 36
+    },
+    "summary": {
+      "en": "Draft engine fixture: explicit model inputs and results.",
+      "zh": "引擎测试草稿：显式模型输入与结果。"
+    },
+    "index": {
+      "parts": [
+        "heater-block",
+        "thermometer-marker",
+        "cool-block",
+        "wrap",
+        "metal-tip",
+        "plastic-tip",
+        "rod",
+        "rod-end-marker"
+      ]
+    },
+    "sim": {
+      "set": {
+        "rod-c": 25
+      },
+      "try": {
+        "vary": "rod-c",
+        "observe": [
+          "rod-delta-mm",
+          "rod-length-mm"
+        ],
+        "record": {
+          "chart": {
+            "y": "rod-delta-mm"
+          }
+        }
+      }
+    },
+    "beats": [
+      {
+        "sim": {
+          "set": {
+            "rod-c": 25
+          }
+        },
+        "caption": {
+          "en": "Schematic model: the selected inputs determine this explicit instant.",
+          "zh": "示意模型：所选输入决定这一显式时刻。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "rod-c": 85
+          },
+          "reveal": true
+        },
+        "caption": {
+          "en": "A second explicit input state; no experiment clock runs in the background.",
+          "zh": "第二组显式输入状态，没有后台实验时钟。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Draft engine fixture. Values are model results, not measurements.
+
+</Lang>
+
+<Lang zh>
+
+引擎测试草稿。数值为模型结果，并非实测。
+
+</Lang>

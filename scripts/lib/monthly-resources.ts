@@ -1,6 +1,6 @@
 /** Build-time checks of local climate resources, shared with validator tests. */
 import type { TopicMeta } from '../../src/content/schema/topic';
-import { validateClimateResource } from '../../src/engines/time-scene/lib/climate';
+import { validateClimateResource, remapClimateSources } from '../../src/engines/time-scene/lib/climate';
 
 export interface MonthlyResourceIssue {
   file: string;
@@ -13,7 +13,7 @@ export function monthlyResourceIssues(
   readGeo: (stem: string) => unknown,
 ): MonthlyResourceIssue[] {
   const issues: MonthlyResourceIssue[] = [];
-  if (topic.temporalMode !== 'climatology' || !topic.climatology) return issues;
+  if ((topic.temporalMode !== 'climatology' && topic.temporalMode !== 'geography') || !topic.climatology) return issues;
   const basemaps = [topic.basemap?.local, topic.basemap?.region?.land, topic.basemap?.region?.rivers].filter((file): file is string =>
     Boolean(file),
   );
@@ -62,7 +62,7 @@ export function monthlyResourceIssues(
       continue;
     }
     try {
-      const data = validateClimateResource(raw, {
+      const data = validateClimateResource(remapClimateSources(raw,layer.sourceMap), {
         quantity: layer.quantity,
         periodId: period.periodId,
         startYear: period.startYear,

@@ -1037,7 +1037,7 @@ export const telemetrySchema = z
     idle: z.number().optional(),
     run: z.number().optional(),
     /** Time constant, seconds (with `follow`, default 0.3). */
-    lag: z.number().positive().max(120).optional(),
+    lag: z.number().nonnegative().max(120).optional(),
     /** Decimal places (default: as many as `idle` / `run` are written with, at most 3; with `follow`, the output's). */
     decimals: z.number().int().min(0).max(3).optional(),
     /**

@@ -1,0 +1,132 @@
+{
+  "presets": [
+    {
+      "id": "view-world",
+      "label": {
+        "en": "World",
+        "zh": "世界"
+      },
+      "camera": {
+        "center": [
+          105.0,
+          8.0
+        ],
+        "zoom": 1.2,
+        "pitch": 0,
+        "bearing": 0
+      }
+    },
+    {
+      "id": "view-region",
+      "label": {
+        "en": "Southeast Asia",
+        "zh": "东南亚"
+      },
+      "camera": {
+        "center": [
+          116.0,
+          8.0
+        ],
+        "zoom": 3.0,
+        "pitch": 0,
+        "bearing": 0
+      }
+    },
+    {
+      "id": "view-singapore",
+      "label": {
+        "en": "Singapore",
+        "zh": "新加坡"
+      },
+      "camera": {
+        "center": [
+          103.84,
+          1.35
+        ],
+        "zoom": 8.2,
+        "pitch": 0,
+        "bearing": 0
+      }
+    },
+    {
+      "id": "view-mainland",
+      "label": {
+        "en": "Mainland",
+        "zh": "大陆一侧"
+      },
+      "camera": {
+        "center": [
+          102.0,
+          20.0
+        ],
+        "zoom": 4.0,
+        "pitch": 0,
+        "bearing": 0
+      }
+    },
+    {
+      "id": "view-straits",
+      "label": {
+        "en": "Straits",
+        "zh": "海峡"
+      },
+      "camera": {
+        "center": [
+          104.0,
+          3.0
+        ],
+        "zoom": 4.6,
+        "pitch": 0,
+        "bearing": 0
+      }
+    },
+    {
+      "id": "view-rivers",
+      "label": {
+        "en": "River systems",
+        "zh": "水系"
+      },
+      "camera": {
+        "center": [
+          102.0,
+          20.0
+        ],
+        "zoom": 3.7,
+        "pitch": 0,
+        "bearing": 0
+      }
+    },
+    {
+      "id": "view-borneo",
+      "label": {
+        "en": "Borneo",
+        "zh": "婆罗洲"
+      },
+      "camera": {
+        "center": [
+          115.0,
+          4.0
+        ],
+        "zoom": 4.4,
+        "pitch": 0,
+        "bearing": 0
+      }
+    },
+    {
+      "id": "view-luzon",
+      "label": {
+        "en": "Northern Philippines",
+        "zh": "菲律宾北部"
+      },
+      "camera": {
+        "center": [
+          121.0,
+          17.0
+        ],
+        "zoom": 5.0,
+        "pitch": 0,
+        "bearing": 0
+      }
+    }
+  ]
+}

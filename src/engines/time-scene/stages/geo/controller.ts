@@ -34,12 +34,14 @@ import { t as translate, tx, withBase } from '../../../../i18n';
 import type { TimeSceneExt } from '../../index';
 import { entityBlocAt, type TimeModel } from '../../lib/model';
 import type { SceneEvent } from '../../schema';
+import { displayLeg, eventAtDisplayPoint, type DisplayOffset } from '../../lib/event-display';
 import { sideAt, warStatusAt } from '../../lib/bloc';
 import { blocLabel, entityDated, entityWord } from '../../lib/blocLabels';
 import type { BasemapOptions, BlocLabels, DatedLayerDef, EntityStrings } from '../../../../content/schema/topic';
 import type { Playhead } from '../../lib/playhead';
 import { frameAt, type Frame } from '../../lib/frame';
 import { areaLabelPoint, metresPerPixel, pickWorldCopy, pointAlong, projectNearCentre, scaleBar, type LngLat } from '../../lib/geo';
+import { hasMapAnchor, missionBadge } from '../../lib/missions';
 import { referencePair } from '../../lib/stats';
 import { formatTime, formatTimeRange } from '../../lib/format';
 import { aspectBounds, regionGraticule, regionMaxBounds } from '../../lib/region';
@@ -101,7 +103,7 @@ export interface GeoController {
   fitCamera(): GeoCamera | null;
   /** Regional plate: the camera that shows the whole plate (the first preset); null on the world map. */
   plateCamera(): GeoCamera | null;
-  stats(): { features: number; zoom: number; datedLayers: Record<string, DatedLayerStats>; reconstruction?: ReconstructionStats };
+  stats(): { features: number; eventMarkers?: number; zoom: number; datedLayers: Record<string, DatedLayerStats>; reconstruction?: ReconstructionStats };
   reconstructionStats?(): ReconstructionStats;
   destroy(): void;
 }
@@ -137,7 +139,6 @@ const PLACE_MIN_ZOOM = 5;
 const PLACE_CLEAR_PX = 60;
 /** Leader labels shown for a presentation beat (its highlighted ids). */
 const PRESENTATION_MAX_LABELS = 6;
-const HIT_RADIUS = 22; // 44px hit box around events
 const PULSE_MS = 900;
 const FLY_MS = 2200;
 const CAMERA_WRITE_DEBOUNCE = 250;
@@ -523,12 +524,13 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     updateArrowheads(frame, on.has('movements'));
 
     /* events: hollow ring (hairline) + dot sized by importance; squares and siege rings are HTML (updateMarks) */
-    const eventFeatures: Feature[] = frame.events.map((ef) => {
+    const eventFeatures: Feature[] = frame.events.flatMap((ef): Feature[] => {
       const en = model.events.find((x) => x.event.id === ef.id)!;
       const e = en.event;
+      if (!hasMapAnchor(e)) return [];
       const isHl = hl.has(e.id);
       const color = eventColor(e, en.start);
-      return {
+      return [{
         type: 'Feature',
         geometry: { type: 'Point', coordinates: e.at },
         properties: {
@@ -538,9 +540,9 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
           color,
           stroke: isHl ? tokens.signal : ef.active ? color : tokens['ink-2'],
           sw: isHl ? 1.6 : 1,
-          o: SQUARE_KINDS.has(e.kind) || TRIANGLE_KINDS.has(e.kind) ? 0 : ef.active || isHl ? 1 : 0.6,
+          o: e.displayOffset || SQUARE_KINDS.has(e.kind) || TRIANGLE_KINDS.has(e.kind) ? 0 : ef.active || isHl ? 1 : 0.6,
         },
-      };
+      }];
     });
     setIfChanged(
       SRC.events,
@@ -549,7 +551,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     );
 
     /* one-shot pulse when an event becomes active */
-    const nowActive = new Set(frame.events.filter((e) => e.active).map((e) => e.id));
+    const nowActive = new Set(frame.events.filter((e) => e.active && hasMapAnchor(model.events.find((item) => item.event.id === e.id)!.event)).map((e) => e.id));
     if (activeEvents && on.has('battles') && !reducedMotion) {
       for (const id of nowActive) if (!activeEvents.has(id)) pulse(id);
     }
@@ -560,7 +562,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       on.has('sites')
         ? {
             type: 'FeatureCollection',
-            features: model.sites.map((e) => ({ type: 'Feature', geometry: { type: 'Point', coordinates: e.at }, properties: { id: e.id } })),
+            features: model.sites.filter(hasMapAnchor).map((e) => ({ type: 'Feature', geometry: { type: 'Point', coordinates: e.at }, properties: { id: e.id } })),
           }
         : EMPTY,
     );
@@ -658,7 +660,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
 
   /** Mark colour: cold tone for evacuations / liberations, else the attacker at the event's start, else ink. */
   const eventColor = (e: SceneEvent, start: number): string => {
-    if (e.kind === 'milestone') return tokens.ink;
+    if (e.kind === 'milestone' || e.kind === 'mission') return tokens.ink;
     if (COLD_KINDS.has(e.kind)) return tokens.cold || tokens.ink;
     return e.sides ? sideColor(e.sides.attacker, start) : tokens.ink;
   };
@@ -669,16 +671,22 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   const updateMarks = (frame: Frame, on: Set<string>, hl: Set<string>, hlSig: string) => {
     const battles = on.has('battles');
     const sitesOn = on.has('sites');
-    const sig = `${battles ? frame.events.map((e) => `${e.id}:${e.active ? 1 : 0}`).join(',') : '-'}|${sitesOn}|${hlSig}`;
+    const sig = `${battles ? frame.events.map((e) => `${e.id}:${e.active ? 1 : 0}`).join(',') : '-'}|${sitesOn}|${hlSig}|${tokens.ink}|${tokens.signal}|${tokens.paper}`;
     if (sig === marksSig) return;
     marksSig = sig;
-    const want = new Map<string, { at: LngLat; className: string; size: number; active: boolean; hl: boolean; color?: string }>();
+    const want = new Map<string, { at: LngLat; className: string; size: number; active: boolean; hl: boolean; color?: string; displayOffset?: DisplayOffset; ring?: { r: number; dot: number; stroke: string; fill: string; width: number; opacity: number } }>();
     if (battles) {
       for (const ef of frame.events) {
         const en = model.events.find((x) => x.event.id === ef.id)!;
         const e = en.event;
+        if (!hasMapAnchor(e)) continue;
         const isHl = hl.has(e.id);
         const r = eventRadius(e, ef.active, isHl);
+        if (e.displayOffset && !SQUARE_KINDS.has(e.kind) && !TRIANGLE_KINDS.has(e.kind)) {
+          const color = eventColor(e, en.start);
+          want.set(`ring:${e.id}`, { at: e.at, displayOffset: e.displayOffset, className: 'ts-mark', size: 2 * (r + 2), active: ef.active, hl: isHl,
+            ring: { r, dot: 0.8 + 0.7 * e.importance, stroke: isHl ? tokens.signal : ef.active ? color : tokens['ink-2'], fill: color, width: isHl ? 1.6 : 1, opacity: ef.active || isHl ? 1 : 0.6 } });
+        }
         if (SQUARE_KINDS.has(e.kind)) {
           want.set(`square:${e.id}`, { at: e.at, className: 'ts-mark ts-mark--square', size: Math.round(r * 1.8), active: ef.active, hl: isHl });
         } else if (TRIANGLE_KINDS.has(e.kind)) {
@@ -696,7 +704,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       }
     }
     if (sitesOn) {
-      for (const e of model.sites) want.set(`site:${e.id}`, { at: e.at, className: 'ts-mark ts-mark--site', size: 9, active: true, hl: hl.has(e.id) });
+      for (const e of model.sites.filter(hasMapAnchor)) want.set(`site:${e.id}`, { at: e.at, className: 'ts-mark ts-mark--site', size: 9, active: true, hl: hl.has(e.id) });
     }
     for (const [key, marker] of marks) {
       if (!want.has(key)) {
@@ -705,6 +713,9 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       }
     }
     for (const [key, m] of want) {
+      const id = key.slice(key.indexOf(':') + 1);
+      const event = model.events.find((entry) => entry.event.id === id)?.event ?? model.sites.find((entry) => entry.id === id);
+      m.displayOffset = event?.displayOffset;
       let marker = marks.get(key);
       if (!marker) {
         const el = document.createElement('div');
@@ -712,10 +723,18 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
         const body = document.createElement('span');
         if (m.className.includes('--triangle')) body.innerHTML = TRIANGLE_SVG;
         el.appendChild(body);
-        marker = new Marker({ element: el, anchor: 'center' }).setLngLat(m.at).addTo(map);
+        marker = new Marker({ element: el, anchor: 'center', offset: m.displayOffset ? [...m.displayOffset] : [0, 0] }).setLngLat(m.at).addTo(map);
         marks.set(key, marker);
       }
       const el = marker.getElement();
+      if (m.ring) {
+        const { r, dot, stroke, fill, width, opacity } = m.ring;
+        const centre = m.size / 2;
+        // A hairline leg back to the source anchor: the shift is a display spacing, not another place.
+        const leg = m.displayOffset ? displayLeg(m.displayOffset, r) : null;
+        const legSvg = leg ? `<line x1="${centre + leg.x1}" y1="${centre + leg.y1}" x2="${centre + leg.x2}" y2="${centre + leg.y2}" stroke="${tokens['ink-2']}" stroke-width="0.75" stroke-opacity="0.6"/>` : '';
+        el.firstElementChild!.innerHTML = `<svg width="${m.size}" height="${m.size}" viewBox="0 0 ${m.size} ${m.size}" aria-hidden="true" style="opacity:${opacity};overflow:visible">${legSvg}<circle cx="${centre}" cy="${centre}" r="${r}" fill="${tokens.paper}" fill-opacity="0.55" stroke="${stroke}" stroke-width="${width}"/><circle cx="${centre}" cy="${centre}" r="${dot}" fill="${fill}"/></svg>`;
+      }
       el.style.setProperty('--ts-size', `${m.size}px`);
       if (m.color) el.style.setProperty('--ts-color', m.color);
       el.dataset.active = String(m.active);
@@ -729,11 +748,12 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     const en = model.events.find((x) => x.event.id === id);
     if (!en) return;
     const e = en.event;
+    if (!hasMapAnchor(e)) return;
     const el = document.createElement('div');
     el.className = SQUARE_KINDS.has(e.kind) ? 'ts-pulse ts-pulse--square' : 'ts-pulse';
     el.style.setProperty('--ts-color', eventColor(e, en.start));
     el.style.setProperty('--ts-size', `${(3 + 2 * e.importance) * 2}px`);
-    const marker = new Marker({ element: el }).setLngLat(e.at).addTo(map);
+    const marker = new Marker({ element: el, offset: e.displayOffset ? [...e.displayOffset] : [0, 0] }).setLngLat(e.at).addTo(map);
     const timer = setTimeout(() => {
       marker.remove();
       pulseTimers.delete(timer);
@@ -844,31 +864,36 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
         if (!ef.active && !hl.has(ef.id)) continue;
         if (presenting && !hl.has(ef.id)) continue;
         const e = model.events.find((x) => x.event.id === ef.id)!.event;
+        if (!hasMapAnchor(e)) continue;
         items.push({
           key: `event:${e.id}`,
           id: e.id,
           kind: 'event',
+          badge: missionBadge(e, locale) ?? undefined,
           en: e.title.en,
           zh: e.title.zh,
           note: tx(e.summary, locale),
           date: dateText(e.t, e.until),
           at: e.at,
+          displayOffset: e.displayOffset,
           pinned: hl.has(e.id),
           clickable: true,
         });
       }
     }
     if (on.has('sites')) {
-      for (const e of model.sites) {
+      for (const e of model.sites.filter(hasMapAnchor)) {
         if (!hl.has(e.id)) continue;
         items.push({
           key: `event:${e.id}`,
           id: e.id,
           kind: 'event',
+          badge: missionBadge(e, locale) ?? undefined,
           en: e.title.en,
           zh: e.title.zh,
           note: tx(e.summary, locale),
           at: e.at,
+          displayOffset: e.displayOffset,
           pinned: true,
           clickable: true,
         });
@@ -1037,27 +1062,15 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   /* ---------- clicks on events (44px hit box) ---------- */
   map.on('click', (e) => {
     const on = layersOn();
-    const targets = [...(on.has('battles') ? [LAYER.eventRing] : []), ...(on.has('sites') ? [LAYER.siteHit] : [])];
-    if (targets.length === 0) return;
-    const { x, y } = e.point;
-    const hits = map.queryRenderedFeatures(
-      [
-        [x - HIT_RADIUS, y - HIT_RADIUS],
-        [x + HIT_RADIUS, y + HIT_RADIUS],
-      ],
-      { layers: targets },
-    );
-    let best: { id: string; d: number } | null = null;
-    for (const f of hits) {
-      const id = (f.properties as { id?: string }).id;
-      const g = f.geometry;
-      if (!id || g.type !== 'Point') continue;
-      // Tile geometry sits in the main world copy; compare in the copy under the click.
-      const p = projectNearCentre((q) => map.project(q), g.coordinates as LngLat, x);
-      const d = Math.hypot(p.x - x, p.y - y);
-      if (!best || d < best.d) best = { id, d };
-    }
-    if (best) options.onSelectEvent(best.id);
+    if (!lastFrame) return;
+    const events = [
+      ...(on.has('battles') ? lastFrame.events.map((ef) => model.events.find((entry) => entry.event.id === ef.id)!.event) : []),
+      ...(on.has('sites') ? model.sites : []),
+    ];
+    // Coordinate-free records (docs/60) have no marker to hit.
+    const placed = events.filter((ev): ev is typeof ev & { at: LngLat } => ev.at !== undefined);
+    const id = eventAtDisplayPoint(placed, (at) => map.project(at), e.point);
+    if (id) options.onSelectEvent(id);
   });
 
   /* ---------- regional 1:10m land (lazy: zoomed in over Southeast Asia) ---------- */
@@ -1371,7 +1384,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       if (region) features += riverSig ? riverSig.split('|')[0]!.split(',').filter(Boolean).length : 0;
       const dated = Object.fromEntries(datedLayers.map((layer) => [layer.id, layer.stats()]));
       for (const layer of datedLayers) if (on.has(layer.id)) features += dated[layer.id]!.visible;
-      return { features, zoom: Math.round(map.getZoom() * 10) / 10, datedLayers: dated };
+      return { features, eventMarkers: on.has('battles') ? featureCounts[SRC.events] ?? 0 : 0, zoom: Math.round(map.getZoom() * 10) / 10, datedLayers: dated };
     },
     destroy() {
       destroyed = true;

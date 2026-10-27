@@ -28,8 +28,9 @@ for (const locale of LOCALES) {
     const errors = collectConsoleErrors(page);
     await page.goto(`/${locale}/`);
     // Draft sample topics are reachable by URL but not listed.
-    await expect(page.locator('[data-topic]')).toHaveCount(43);
+    await expect(page.locator('[data-topic]')).toHaveCount(47);
     await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/ww1/"]`)).toHaveCount(1);
+    await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/southeast-asia/"]`)).toHaveCount(1);
     for (const region of ['chest', 'back', 'shoulders', 'arms', 'legs', 'core'])
       await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/muscles-${region}/"]`)).toHaveCount(1);
     await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/ww2/"]`)).toHaveCount(1);
@@ -63,11 +64,14 @@ for (const locale of LOCALES) {
     await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/states-of-matter/"]`)).toHaveCount(1);
     await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/living-things/"]`)).toHaveCount(1);
     await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/materials/"]`)).toHaveCount(1);
+    await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/heat/"]`)).toHaveCount(1);
     await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/four-taps/"]`)).toHaveCount(1);
     await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/flower-and-seed/"]`)).toHaveCount(1);
     await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/inside-the-earth/"]`)).toHaveCount(1);
     await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/steam-engine/"]`)).toHaveCount(1);
+    await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/how-planes-fly/"]`)).toHaveCount(1);
     await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/fossils-and-skeletons/"]`)).toHaveCount(1);
+    await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/saturn-v/"]`)).toHaveCount(1);
     await expect(page.locator('[data-filter="subject"]:not([data-value=""])')).toHaveCount(6);
     await expect(page.locator('[data-filter="subject"][data-value="science"]')).toBeEnabled();
     await expect(page.locator('[data-filter="subject"][data-value="biology"]')).toBeEnabled();
@@ -77,16 +81,16 @@ for (const locale of LOCALES) {
     // Past nine topics the catalogue is one section per subject (SUBJECTS order, empty ones left out).
     await expect(page.locator('[data-catalogue="sections"]')).toHaveCount(1);
     await expect(page.locator('[data-section]')).toHaveCount(6);
-    await expect(page.locator('[data-section="geography"] [data-topic]')).toHaveCount(5);
+    await expect(page.locator('[data-section="geography"] [data-topic]')).toHaveCount(6);
     await expect(page.locator('[data-section="biology"] [data-topic]')).toHaveCount(14);
     await expect(page.locator('[data-section="computer"] [data-topic]')).toHaveCount(1);
-    // Card tags: subject, then the stage type (ww1, ww2, four-taps, monsoon-and-weather and dinosaur-earth are Time, aircon, circuits, magnets, forces, energy-conversion, light-and-shadows, water, states-of-matter, living-things, mangrove-food-web, materials, grasshopper, mosquito, frog-and-chicken, plant, flower-and-seed, fossils-and-skeletons, steam-engine, sun-earth-moon, digestive-system, heart-and-lungs, b200-server, inside-the-earth, container-port bones-and-joints and the six muscle topics are Space, fractions, area-perimeter, multiplication-division, telling-time, decimals, measuring and nets-and-solids are Lessons). No status or sensitivity tags.
-    await expect(page.locator('[data-topic] .atlas-badge')).toHaveCount(86);
+    // Card tags: subject, then the stage type (ww1, ww2, four-taps, monsoon-and-weather, dinosaur-earth and southeast-asia are Time, aircon, circuits, magnets, forces, energy-conversion, heat, light-and-shadows, water, states-of-matter, living-things, mangrove-food-web, materials, grasshopper, mosquito, frog-and-chicken, plant, saturn-v, how-planes-fly, flower-and-seed, fossils-and-skeletons, steam-engine, sun-earth-moon, digestive-system, heart-and-lungs, b200-server, inside-the-earth, container-port bones-and-joints and the six muscle topics are Space, fractions, area-perimeter, multiplication-division, telling-time, decimals, measuring and nets-and-solids are Lessons). No status or sensitivity tags.
+    await expect(page.locator('[data-topic] .atlas-badge')).toHaveCount(94);
     await page.locator('[data-filter="subject"][data-value="history"]').click();
     await expect(page.locator('[data-topic]:visible')).toHaveCount(2);
     await expect(page.locator('[data-catalogue-end]')).toBeHidden();
     await page.locator('[data-filter="subject"][data-value="science"]').click();
-    await expect(page.locator('[data-topic]:visible')).toHaveCount(14);
+    await expect(page.locator('[data-topic]:visible')).toHaveCount(17);
     await page.locator('[data-filter="subject"][data-value="biology"]').click();
     await expect(page.locator('[data-topic]:visible')).toHaveCount(14);
     await expect(page.locator('[data-section="history"]')).toBeHidden();
@@ -95,9 +99,9 @@ for (const locale of LOCALES) {
     await page.locator('[data-filter="subject"][data-value="computer"]').click();
     await expect(page.locator('[data-topic]:visible')).toHaveCount(1);
     await page.locator('[data-filter="subject"][data-value="geography"]').click();
-    await expect(page.locator('[data-topic]:visible')).toHaveCount(5);
+    await expect(page.locator('[data-topic]:visible')).toHaveCount(6);
     await page.locator('[data-filter="subject"][data-value=""]').click();
-    await expect(page.locator('[data-topic]:visible')).toHaveCount(43);
+    await expect(page.locator('[data-topic]:visible')).toHaveCount(47);
     await page.screenshot({ path: `tests-e2e/__screenshots__/index-${locale}.png` });
     expect(errors).toEqual([]);
   });
@@ -122,11 +126,11 @@ for (const locale of LOCALES) {
     await expect(page.locator('[data-filter="subject"][data-soon]')).toHaveCount(0);
     await expect(page.locator('[data-filter="subject"][data-soon] svg[stroke-dasharray]')).toHaveCount(0);
     // Plate cards: one link each, numbered, with a drawing and a stats line counted from the topic data.
-    await expect(page.locator('[data-topic] [data-plate]')).toHaveCount(43);
-    await expect(page.locator('[data-topic] [data-figure="drawing"] img')).toHaveCount(43);
+    await expect(page.locator('[data-topic] [data-plate]')).toHaveCount(47);
+    await expect(page.locator('[data-topic] [data-figure="drawing"] img')).toHaveCount(47);
     const ww2 = page.locator('[data-topic]', { has: page.locator(`a[href$="/${locale}/topics/ww2/"]`) });
     await expect(ww2.locator('[data-stats]')).toHaveText(WW2_STATS[locale]);
-    await expect(ww2.locator('.plate__no')).toHaveText(locale === 'en' ? 'Plate 43' : '图版 43');
+    await expect(ww2.locator('.plate__no')).toHaveText(locale === 'en' ? 'Plate 47' : '图版 47');
     await expect(page.locator('[data-topic] [data-stats]:empty')).toHaveCount(0);
     // Reserved image boxes: no layout shift while drawings load.
     const box = await page.locator('[data-topic] [data-figure] img').first().boundingBox();

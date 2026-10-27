@@ -774,3 +774,33 @@ id 带 `term-` 防止与章节 / 事件重名；每词 EN、ZH 正文第一次�
 ### 9.3 主会话验收（2026-10-27）
 
 E-IR1 保留并精简：恢复高亮改用底部条 anchor（删 readerBeat），去掉详情组件里与 `revealReader()` 重复的滚动，索引标题进 i18n、样式同 `.space-index`。铁路按 §3.3-7 合并同年且端点相连的原线：18,804 个 lid 全保留在 8,906 段（`f` 年份、`n` 段内 lid 数），DP 750 m、量化 100,000；铁路 1,304,627 B、煤层 266,680 B、合计 1,571,307 B，均达预算（上面 §9.2 的超预算数字是首版）。地图 `visible` 计数按段：1834 = 11、1914 = 8,906。页面 JS 453.6 KB gz 超 400 KB 属所有地图主题共用的 MapLibre 分包，列 REVIEW。shoot（双语 × 双主题，37 拍、按键、八种尺寸布局）0 失败、控制台干净；结果与待判断项见 `src/content/topics/industrial-revolution/REVIEW.md`。
+
+### 9.4 内容后续：平实化、地点标签与姊妹链接（2026-10-27）
+
+`industrial-revolution` 仍为 **draft**。八章双语正文、细看与事件详情改为面向 10–12 岁读者的短句：直接讲机器、劳动、铁路、资本与材料的历史，移走“本轮只采用”“没有绘制”“不补精确日期”等作者工作说明。原有历史日期、数量、来源、史家归属与敏感内容保留；模型/专利/商业运行、奴隶制/其他劳动约束、全国普查/码头到访、法律/执行等必要区分仍清楚。选源深度、Hanlon 数值冲突、未取得几何与华工招募证据缺口集中记在 `AUDIT.md`，没有补写未经核实的史实。
+
+27 个地点标签改为各自的简短内容或定位提示，不再把同一句“现代城市参照，不是历史设施的精确位置”显示在每个标签第三行；所有点的现代城市坐标及全国法律/人口的地区锚点规则统一写在背景章阅读说明。保留每个点原有来源，斯托克顿/达灵顿标签采用已存在的 1825 年事实并补挂已有 S76。地点坐标、年代、对象/镜头/索引与所有几何均未改动。
+
+五处双语姊妹导读已接通实际发布的 `steam-engine`：01 冷凝→`keep-hot-and-cold-apart`；01 调速→`speed-feedback`；03 Rocket→`power-both-ways`；04 蒸汽船→`follow-the-energy`；07 地图与机器→`before-you-start`。对方相关章节提供五处回链，末章能量讨论回到历史04/07；两处导读明确固定式原理模型不等于 Rocket 或船用机器复原。没有改 Steam Engine 的发布状态。
+
+验证：`pnpm test -- tests/industrial-revolution.test.ts tests/steam-engine-content.test.ts`，2 文件 / 27 测试全过。原“不链不存在 steam-engine”断言改为检查五组双语实际章节目标和回链，另查地图地点标签不重复定位声明；既有日期、分母、索引、煤层/铁路来源与数量测试仍过。全量 check / validate / test / build 由主会话执行并续记。遵守本轮限制，不运行浏览器门槛、不控制用户浏览器/桌面、不进行 git 写入或修改 package/lock/review-queue。
+
+
+### 9.5 共享引擎与本轮验收（2026-10-27）
+
+手写 `<FlyTo preset event>` 对象索引现在选中对象并保留原命名取景，复用 readerTop 详情；自动 state.index 索引仍用原统一选择动作。TimeScene 按全题数据省略空控制区、空参与层、空路线与不适用的战斗／行动读数；本题的事件、地点、煤层与铁路保留。war 主题的当前零计数仍可见，Four Taps／土地利用／古文明仍保留真实路线与控制区。13 个 chronological 主题以实际 ControlPanel／StateCluster 双语 HTML 单测回归；sample-climate 保留独立月份视图，monsoon-and-weather 不在本工作树。郑和九条同址记录所用可选屏幕偏移是加法能力，来源坐标不改，契约见 docs/06。
+
+四项命令结果追加如下。本轮全部浏览器门槛跳过，未打开或驱动用户浏览器／桌面；未进行 git 写入、依赖／锁文件或 review-queue 修改。
+
+
+本轮最终非浏览器门槛（2026-10-27）：`pnpm check` exit 0，814 files、0 errors／0 warnings、4 hints；`pnpm validate` exit 0，63 topics、0 errors／0 warnings；全量 `pnpm test -- --maxWorkers=2` exit 0，175 files／4,479 tests 全过；`pnpm build` exit 0，129 static pages、PWA 完成（共享大 chunk 提醒仍在）。初次默认并发 test 有两项未修改的几何测试超过 5 秒，降低 worker 数后完整重跑通过；未放宽超时或改测试配置。`git diff --check` 通过。EN／ZH 静态成品各有 40 个郑和可选 FlyTo 行，两题仍为 draft。shoot／e2e 按用户要求未运行，完全未打开或驱动浏览器／桌面。
+
+### 9.6 浏览器验收（Claude，2026-10-27）
+
+- **共享引擎回归**：`pnpm shoot <t> --beats --keys` 跑 sample-time、ww1、ww2、four-taps、singapore-1819-1965、singapore-after-1965、singapore-land-use、ancient-civilisations、warring-states、industrial-revolution、zheng-he（main 上没有 monsoon-and-weather）：beat failures 全部 0。机器负载 140–240，`h` 恢复片淡入（0.35 s 拖到约 5 s）与 `drag` 自由镜头超时在多个主题间时有时无；同样的 drag 探针在 main 构建上同样不释放 four-taps 镜头，判为负载问题，非回归。
+- **战争读数与图层**：ww1 / ww2 保留参与方、战斗、行动、关键帧读数与全部战争图层；industrial-revolution 与 singapore-after-1965 不再出状态串和空图层行；zheng-he 因确有旧港等 battle 事件保留战斗读数（"0 场战斗"在非战段可见，记为 Gavin 待看）。
+- **修正**：无可画领土名称的题（zheng-he、industrial-revolution）仍注册 N 键但 LAYERS 无此行，`--keys` 报 "no button for this mode"；改为 N 键与行同条件（控制区、区域河名或今日岸线），两题 `--keys` 0 失败。
+- **索引行**：本题自动索引（04 章四行）点击后 `selectedId` 正确、详情在章头下、相机飞到对象且标注在舞台内。
+- **正文**：EN / ZH 八章逐段读过：来源号、数字与 Term/Num 与改写前逐一比对无丢失；立场平衡。顺了四句英文（03 章开头倒装句、"Railway passengers joined regions"、04 章 "It joined a country" 与电报广告重复句）及对应中文一句。部分段落对 10–12 岁仍偏抽象（"These explanations need not form opposing teams"、"different explanatory tasks"），留给 Gavin 定稿时再看。
+- **姊妹链接**：五处去向与回链在构建产物中解析到实际章节；steam-engine 两处链接文字改为对方章标题（"Railways, different beginnings"、"Seas and signals"）。
+- **门槛**：`pnpm check` 0 errors，`pnpm validate` 63 题 0 错，`pnpm test` 175 文件 / 4,480 测试全过，`pnpm build` 129 页。定向 e2e（industrial-revolution、zheng-he、steam-engine、smoke、hud、dated-layers、sample-climate、ancient-civilisations、singapore-after-1965、singapore-land-use、time-label-dates、time-label-drag，`--workers=2`）117 项 107 过；单独重跑后剩 steam-engine 一项（仍断言"无工业革命链接"，已改为核对五条实际去向，重跑 11/11 过），time-label-dates 两项与 hud sample-space 两项在 main 构建上同样失败（场景 5 s 内未加载完），判为负载问题。

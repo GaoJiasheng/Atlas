@@ -77,6 +77,10 @@ export interface SceneStats {
   /** Map stages: rendered features and zoom. */
   features?: number;
   zoom?: number;
+  /** TimeScene: exact dated non-site evidence counts, including timeline-only records. */
+  eventMarkers?: number;
+  activeEvents?: number;
+  recordedEvents?: number;
   gpu?: string;
   /** `performance.now()` of the stage's last drawn frame (QA: a screenshot waits for a frame after a canvas resize). */
   lastFrame?: number;
@@ -152,6 +156,8 @@ export interface SceneControls {
   test?: Record<string, (...args: never[]) => unknown>;
   /** A `<Task id>` in a chapter body was pressed: go to that sub-step; true when it exists. */
   goToTask?(id: string): boolean;
+  /** An authored object-index link: select and reveal its detail; false for invalid or blocked targets. */
+  selectEvent?(id: string): boolean;
   /** Mode switches. `set` receives `instant: true` when the caller wants the end state now (tests, shots). */
   modes?: {
     items: readonly SceneMode[];

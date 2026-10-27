@@ -8,6 +8,7 @@ import type { TelemetryRow } from '../schema';
 
 /** Value `dt` seconds after the target was set, starting from `from`. */
 export function lagValue(from: number, target: number, dt: number, lag: number): number {
+  if (lag <= 0) return target;
   if (dt <= 0) return from;
   return target + (from - target) * Math.exp(-dt / Math.max(lag, 1e-6));
 }

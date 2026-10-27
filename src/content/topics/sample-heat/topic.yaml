@@ -1,0 +1,13 @@
+id: sample-heat
+title: { en: "Sample: Heat bench", zh: "示例：热实验台" }
+subtitle: { en: "Draft engine fixture", zh: "引擎测试草稿" }
+subject: science
+levels: [P4]
+moe: []
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: draft
+note: { en: "Schematic engine fixture · model results, not measurements · endpoint indicator displacement ×500", zh: "几何引擎测试 · 数值为模型非实测 · 独立端点指示位移放大500倍" }

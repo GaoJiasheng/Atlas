@@ -1,4 +1,8 @@
 {
+  "time.mission.relatedSites": "Related launch centres",
+  "time.kind.mission": "Mission",
+  "time.mission.mapPoint": "Map point: associated launch centre",
+  "time.mission.storyRange": "The year lines show this story’s scope, not the founding dates of countries.",
   "site.name": "Atlas",
   "site.tagline": "A textbook that moves",
   "site.description": "Interactive, bilingual scenes for curious primary school students.",
@@ -1100,5 +1104,15 @@
   "math.specimen.net": "A cube net, folded half way",
   "math.grid.faces": "faces",
   "math.net.work.oppositeDone": "● opposite ●",
-  "math.net.work.bottomDone": "found: the bottom"
+  "math.net.work.bottomDone": "found: the bottom",
+  "space.try.curve": "Model curve",
+  "space.try.elapsed": "Elapsed time (s)",
+  "space.try.zero": "Back to 0 s",
+  "space.try.modelTable": "Model value table",
+  "space.try.conditionsChanged": "Conditions changed; start a new record.",
+  "space.try.comparedConditions": "Compared conditions",
+  "space.try.conditions": "Conditions",
+  "space.try.before": "Before",
+  "space.try.after": "After",
+  "space.try.showCurrent": "Show current result"
 }

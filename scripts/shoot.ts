@@ -422,7 +422,8 @@ function unlabelled(s: Session): Promise<string[]> {
       const r = el.getBoundingClientRect(); if (r.width > 0 && r.height > 0 && el.checkVisibility()) shown.add(el.dataset.id);
     }
     const highlight = (window.__atlas!.state() as { highlight?: string[] }).highlight ?? [];
-    return highlight.filter((id) => !shown.has(id));
+    const unlocated = new Set([...document.querySelectorAll<HTMLElement>('.ts-index__row[data-map-visibility="timeline-only"]')].map((row) => row.dataset.timeTarget));
+    return highlight.filter((id) => !unlocated.has(id) && !shown.has(id));
   });
 }
 
@@ -444,6 +445,8 @@ async function beatSceneOf(page: Page): Promise<BeatScene | null> {
       return { ...Object.fromEntries(['chapter', 't', 'highlight', 'layers', 'camera', 'inset', 'insetVisible', 'fossilMode'].map((k) => [k, st[k] ?? null])), reconstruction, inset: geology.inset, unfinished: [] };
     }
     const st = window.__atlas!.state() as unknown as Record<string, unknown>;
+    const geography=(window.__atlas!.engine as unknown as {geography?():{context:{kind:string;month?:number};geometryHash:string;memberIds:string[];memberCount:number;selection:string|null;climatology:null|{renderedMonth:number;layers:Record<string,{status:string}>}}}).geography?.();
+    if(geography){const c=geography.climatology;const shown=new Set(Array.isArray(st.layers)?st.layers as string[]:[]);return {...Object.fromEntries(['chapter','beat','geoContext','geoSelection','layers','highlight','camera'].map(k=>[k,st[k]??null])),geometryHash:geography.geometryHash,memberIds:geography.memberIds,memberCount:geography.memberCount,...(c?{month:geography.context.month,authoredMonth:geography.context.month,renderedMonth:c.renderedMonth,notReady:Object.entries(c.layers).filter(([id,l])=>shown.has(id)&&l.status!=='ready').map(([id,l])=>`${id}:${l.status}`)}:{}),unfinished:[]};}
     const climate = (window.__atlas!.engine as unknown as {
       climatology?(): { month: number; renderedMonth: number; authoredMonth: number; periodId: string; layers?: Record<string, { status: string }> };
     }).climatology?.();
@@ -972,7 +975,8 @@ function settleClimate(page: Page): Promise<unknown> {
   return page
     .waitForFunction(
       () => {
-        const c = (window.__atlas!.engine as unknown as { climatology?(): { month: number; renderedMonth: number } }).climatology?.();
+        const e=window.__atlas!.engine as unknown as {climatology?():{month:number;renderedMonth:number};geography?():{climatology:null|{month:number;renderedMonth:number}}};
+        const c=e.climatology?.()??e.geography?.().climatology;
         return !c || c.renderedMonth === c.month;
       },
       null,

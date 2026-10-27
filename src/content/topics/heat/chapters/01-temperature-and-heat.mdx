@@ -1,0 +1,213 @@
+---
+id: temperature-and-heat
+order: 1
+title:
+  en: Temperature and Heat
+  zh: 温度与热
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  layers:
+  - transfer
+  - heat-paths
+  labels:
+  - metal-spoon
+  - plastic-spoon
+  camera:
+    position:
+    - -0.15
+    - 1.15
+    - 0.65
+    target:
+    - -0.55
+    - 0.87
+    - 0.08
+    fov: 30
+  summary:
+    en: Temperature readings and energy transfers tell different things.
+    zh: 温度读数和能量传递描述不同的量。
+  sim:
+    set:
+      elapsed-s: 0
+      bath-c: 25
+    try:
+      vary: elapsed-s
+      keep:
+      - en: Same starting temperatures and room conditions
+        zh: 相同初温与室内条件
+      - en: Same two effective conducting paths; bath at 25 °C
+        zh: 相同两条有效导热通路，温浴维持 25 °C
+      observe:
+      - metal-c
+      - plastic-c
+      record: true
+      predict:
+        prompt:
+          en: Both tips and the bath start at the same temperature. At the later model time, which tip will be warmer?
+          zh: 两个远端与温浴从同温开始。推进模拟时间后，哪个远端较暖？
+        start:
+          elapsed-s: 0
+          bath-c: 25
+        change:
+          elapsed-s: 120
+        observe: tip-comparison
+        options:
+        - id: metal
+          label:
+            en: Metal path warmer
+            zh: 金属通路较暖
+          means: first-warmer
+        - id: same
+          label:
+            en: Same temperature
+            zh: 温度相同
+          means: same
+        - id: plastic
+          label:
+            en: Plastic path warmer
+            zh: 塑料通路较暖
+          means: second-warmer
+  beats:
+  - camera: view-probe
+    layers:
+    - transfer
+    - heat-paths
+    labels:
+    - metal-spoon
+    - plastic-spoon
+    sim:
+      set:
+        bath-c: 25
+        elapsed-s: 0
+    caption:
+      en: Both spoon tips start at the model room temperature. Their materials are different.
+      zh: 两个勺子远端从模拟室温开始，材料不同。
+  - camera: view-probe
+    layers:
+    - transfer
+    - heat-paths
+    labels:
+    - metal-spoon
+    - plastic-spoon
+    sim:
+      set:
+        bath-c: 25
+        elapsed-s: 0
+      reveal: true
+    caption:
+      en: At equal temperature, metal may still feel cooler because it carries energy away from skin faster. Predict the readings first.
+      zh: 同温时金属也可能摸起来更冷，因为它更快把能量从皮肤传走。先猜读数，再揭晓。
+  - camera: view-probe
+    layers:
+    - transfer
+    - heat-paths
+    labels:
+    - probe-marker
+    - metal-spoon
+    - plastic-spoon
+    sim:
+      set:
+        bath-c: 25
+        elapsed-s: 120
+      reveal: true
+    caption:
+      en: Both model readings stay at 25 degrees Celsius. Feeling cold is not a temperature measurement.
+      zh: 两个模拟读数都保持二十五摄氏度。冷的手感不是温度测量。
+  - camera: view-heater
+    layers:
+    - curves
+    labels:
+    - heater
+    - heater-water
+    - heater-probe-marker
+    sim:
+      set:
+        heater-w: 100
+        water-g: 200
+        elapsed-s: 120
+      reveal: true
+    caption:
+      en: In this simulation, input is 12,000 joules and water temperature is about 39.3 degrees Celsius. These
+        units describe different quantities.
+      zh: 这个模拟里，供能是一万二千焦耳，水温约三十九点三摄氏度。单位描述不同的量。
+  - camera: view-heater
+    layers:
+    - curves
+    labels:
+    - heater-water
+    - heater-probe-marker
+    sim:
+      set:
+        heater-w: 100
+        water-g: 400
+        elapsed-s: 120
+      reveal: true
+    caption:
+      en: With twice the model water mass and the same input, temperature rises less. Temperature alone does not
+        tell the whole energy story.
+      zh: 模拟水量加倍、供能相同，升温较少。只看温度，不能知道完整的能量变化。
+  index:
+    parts:
+    - metal-spoon
+    - plastic-spoon
+    - probe
+    - probe-marker
+    - heater-beaker
+    - heater-water
+    - heater
+    - heater-probe-marker
+---
+
+{/* Fact/source audit: H02,H05,H09,H18,H20,D01,D03,D05; S2,S3,S6,S10,S27. */}
+
+<Lang en>
+
+Look at the metal and plastic spoon tips. They start at the same model room temperature. Advancing time while the bath stays at that temperature leaves both readings unchanged. Metal can still feel cooler than plastic under ordinary room conditions: it transfers energy away from warmer skin more readily. A cold feeling alone does not establish a lower temperature.
+
+<Term id="heat">Heat</Term> is energy transferred because of a <Term id="temperature-difference">temperature difference</Term>. Temperature describes a thermal condition; heat describes a transfer. A thermometer gives a temperature reading. It does not count the energy stored inside an object. Measuring and feeling therefore answer different questions.
+
+Now turn to the heated water. At this simulated operating point, the heater supplies <Num s="S27">12,000 J</Num> over <Num s="S27">120 s</Num>. Starting with <Num s="S27">200 g</Num> of water at <Num s="S27">25 °C</Num>, the calculated temperature becomes about <Num s="S27">39.3 °C</Num>. Joules describe the energy supplied; degrees Celsius describe temperature. The quantities have different units because they tell different things.
+
+Keep the same energy input but double the water amount. The temperature rises less in this model. That comparison shows why a temperature reading alone cannot describe the whole energy change. Use the prediction card to compare the unchanged spoon readings, then reveal the evidence. The card records your observations without giving a score. Choose matching conditions when you make a comparison.
+
+<More title={{"en":"Energy and amount of water","zh":"能量与水量"}}>
+
+For the same substance undergoing the same temperature rise, a larger amount needs more energy. Total internal energy also depends on the substance and state. Heat is the name for energy in transfer, rather than a stock held inside an object.
+
+</More>
+
+<More title={{"en":"The probe needs time","zh":"探头也需要时间"}}>
+
+A real contact thermometer must settle to the temperature of what it measures. Its sensing end should sample the intended water. The model displays that water temperature immediately and does not calculate probe delay. <TopicLink slug="states-of-matter" ch="mass-and-space">States of matter</TopicLink> develops the distinction between matter and its properties.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+先看金属勺和塑料勺的远端。它们从相同的模拟室温开始，温浴也维持同温。推进时间，两个读数仍不变。不过，普通室温下金属可能比塑料摸起来冷，因为它更容易把能量从较暖的皮肤传走。手感较冷，不能单独证明温度较低。
+
+<Term id="heat">热</Term>是因为<Term id="temperature-difference">温差</Term>而传递的能量。温度描述冷热状态，热描述传递过程。温度计给出温度读数，并不计算物体内部储存多少能量。因此，手感和测量回答的是不同问题。
+
+再看加热杯。这个模拟运行点中，加热器在 <Num s="S27">120 s</Num> 内供能 <Num s="S27">12,000 J</Num>。<Num s="S27">200 g</Num> 水从 <Num s="S27">25 °C</Num> 开始，计算水温达到约 <Num s="S27">39.3 °C</Num>。焦耳表示供能，摄氏度表示温度；它们描述的量不同，单位也不同。
+
+保持供能相同，把水量加倍，模拟水温上升得较少。只凭温度，不能说明完整的能量变化。用预测卡比较同温勺子的读数，先留下想法，再揭示证据。卡片不评分；比较时要保持相关条件相同。两个同温远端并不需要继续升温；经过时间本身不是能量来源。看读数时也要交代测的是哪一处，不能把水温和勺柄远端温度当成同一个位置的测量。
+
+<More title={{"en":"Energy and amount of water","zh":"能量与水量"}}>
+
+同一种物质升高相同温度，水量较多时需要较多能量。物体的总内能也和物质种类、状态有关。热是传递中的能量，不能把它当作储存在物体内的一份“热”。
+
+</More>
+
+<More title={{"en":"The probe needs time","zh":"探头也需要时间"}}>
+
+真实接触式温度计需要达到被测物的温度，感温端也要放在想测量的水中。这里直接显示模拟水温，没有计算探头延迟。<TopicLink slug="states-of-matter" ch="mass-and-space">“物质三态”</TopicLink>进一步区分物质与描述物质的性质。
+
+</More>
+
+</Lang>

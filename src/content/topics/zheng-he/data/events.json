@@ -469,6 +469,10 @@
     "sources": [
       "S4",
       "S1"
+    ],
+    "displayOffset": [
+      0.0,
+      -96.0
     ]
   },
   {
@@ -520,7 +524,7 @@
     },
     "summary": {
       "en": "Wade cites Ming records reporting that 170 Ming troops were killed in Java in 1407. No total for local deaths is established here.",
-      "zh": "Wade 引述明方记录，报告 1407 年有 170 名明军在爪哇被杀。本题没有确定当地人的死亡总数。"
+      "zh": "韦德（Geoff Wade）引述明方记录，报告 1407 年有 170 名明军在爪哇被杀。本题没有确定当地人的死亡总数。"
     },
     "detail": {
       "en": "Surabaya is only a Java regional anchor for the 1407 report of Ming troops being killed. The conflict site has not been established here.",
@@ -552,8 +556,8 @@
       "zh": "第二次远航通常标为 1407—1409 年。日期用于区分航次，不表示某一天有船只停在这个坐标。"
     },
     "detail": {
-      "en": "Calicut, now Kozhikode, was an Indian southwest-coast destination. The point locates the modern city in a wider trading region, not a ship position.",
-      "zh": "古里，今科泽科德，是印度西南岸目的地。点定位贸易区域中的现代城市，不是船只位置。"
+      "en": "Columbia's account places the 1407–1409 expedition at Calicut for a new king's inauguration. It says Zheng He organised the expedition but did not lead it in person. The modern Kozhikode city point marks that destination, not a ship position or a known ceremony site.",
+      "zh": "哥伦比亚大学资料记述，1407—1409 年的船队前往古里参加新王即位典礼，并说明郑和组织了这次远航，却没有亲自率队。今天科泽科德的城市坐标表示这一目的地，不是船只位置或已知的典礼实址。"
     },
     "sources": [
       "S1"
@@ -582,6 +586,10 @@
     },
     "sources": [
       "S1"
+    ],
+    "displayOffset": [
+      61.7,
+      -73.5
     ]
   },
   {
@@ -608,7 +616,11 @@
     "sources": [
       "S2"
     ],
-    "sensitive": true
+    "sensitive": true,
+    "displayOffset": [
+      94.5,
+      -16.7
+    ]
   },
   {
     "id": "evt-fourth-voyage",
@@ -633,6 +645,10 @@
     },
     "sources": [
       "S1"
+    ],
+    "displayOffset": [
+      83.1,
+      48.0
     ]
   },
   {
@@ -658,6 +674,10 @@
     },
     "sources": [
       "S5"
+    ],
+    "displayOffset": [
+      32.8,
+      90.2
     ]
   },
   {
@@ -709,6 +729,10 @@
     },
     "sources": [
       "S1"
+    ],
+    "displayOffset": [
+      -32.8,
+      90.2
     ]
   },
   {
@@ -734,6 +758,10 @@
     },
     "sources": [
       "S1"
+    ],
+    "displayOffset": [
+      -83.1,
+      48.0
     ]
   },
   {
@@ -759,6 +787,10 @@
     },
     "sources": [
       "S1"
+    ],
+    "displayOffset": [
+      -94.5,
+      -16.7
     ]
   },
   {
@@ -786,6 +818,10 @@
       "S4",
       "S1",
       "S28"
+    ],
+    "displayOffset": [
+      -61.7,
+      -73.5
     ]
   }
 ]

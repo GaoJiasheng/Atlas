@@ -22,7 +22,8 @@
  *    (`data-labels="off"`, `data-hud="off"`).
  */
 import type { Map as MlMap } from 'maplibre-gl';
-import { projectNearCentre, type LngLat } from '../../lib/geo';
+import type { LngLat } from '../../lib/geo';
+import { eventDisplayPoint, type DisplayOffset } from '../../lib/event-display';
 
 export interface LeaderItem {
   /** Unique key (`event:sample-meeting`). */
@@ -30,12 +31,14 @@ export interface LeaderItem {
   /** Data id passed to `onSelect`. */
   id: string;
   kind: 'event' | 'movement' | 'entity';
+  badge?: string;
   en: string;
   zh: string;
   /** One-line note (summary); `date` is shown before it in mono. */
   note: string;
   date?: string;
   at: LngLat;
+  displayOffset?: DisplayOffset;
   /** Highlighted by the chapter or the user. */
   pinned: boolean;
   /** Placard is a button (events open the inspector). */
@@ -186,8 +189,14 @@ export function createLeaders(options: {
     el.dataset.kind = item.kind;
     el.dataset.id = item.id;
     el.dataset.pinned = String(item.pinned);
-    el.setAttribute('aria-label', `${item.en}${item.zh ? ` · ${item.zh}` : ''}`);
+    el.setAttribute('aria-label', `${item.badge ? `${item.badge} · ` : ''}${item.en}${item.zh ? ` · ${item.zh}` : ''}`);
     el.replaceChildren();
+    if (item.badge) {
+      const badge = document.createElement('span');
+      badge.className = 'ts-co__badge';
+      badge.textContent = item.badge;
+      el.appendChild(badge);
+    }
     const en = document.createElement('b');
     en.className = 'ts-co__en';
     en.lang = 'en';
@@ -212,7 +221,7 @@ export function createLeaders(options: {
     e.path.dataset.pinned = String(item.pinned);
   };
 
-  const signature = (i: LeaderItem) => `${i.en}|${i.zh}|${i.note}|${i.date ?? ''}|${i.pinned}|${i.clickable}`;
+  const signature = (i: LeaderItem) => `${i.badge ?? ''}|${i.en}|${i.zh}|${i.note}|${i.date ?? ''}|${i.pinned}|${i.clickable}`;
   const sigs = new Map<string, string>();
 
   function setItems(items: LeaderItem[]) {
@@ -338,7 +347,7 @@ export function createLeaders(options: {
     const shown: Entry[] = [];
     for (const e of entries.values()) {
       // The world copy the camera is looking at (a path across the antimeridian sits in the neighbouring copy).
-      const p = projectNearCentre((q) => map.project(q), e.item.at, width / 2);
+      const p = eventDisplayPoint((q) => map.project(q), e.item, width / 2);
       e.sx = p.x;
       e.sy = p.y;
       const onStage = p.x >= 0 && p.x <= width && p.y >= 0 && p.y <= height;

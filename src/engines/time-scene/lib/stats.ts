@@ -8,7 +8,7 @@ import type { Frame } from './frame';
 import type { TimeModel } from './model';
 
 /** Event kinds counted as battles in panel 03. */
-const BATTLE_KINDS = new Set(['battle', 'landing', 'bombing', 'siege']);
+export const BATTLE_KINDS: ReadonlySet<string> = new Set(['battle', 'landing', 'bombing', 'siege']);
 
 /** Controlled area (km²) per entity at each keyframe, indexed like `model.keyframes`. */
 export function controlAreas(model: TimeModel): Map<string, number[]> {
@@ -45,6 +45,8 @@ export interface FrameStats {
   participants: number;
   entities: number;
   activeBattles: number;
+  activeEvents: number;
+  recordedEvents: number;
   activeMovements: number;
   /** Keyframe at or before `t` (-1 before the first) and the next one (-1 after the last). */
   prevIndex: number;
@@ -60,7 +62,16 @@ export function frameStats(model: TimeModel, frame: Frame): FrameStats {
     const e = model.events.find((x) => x.event.id === ef.id)?.event;
     if (e && BATTLE_KINDS.has(e.kind)) activeBattles++;
   }
+  let activeEvents = 0;
+  let recordedEvents = 0;
+  for (const event of model.events) {
+    if (event.start > frame.t) continue;
+    recordedEvents++;
+    if (frame.t < event.activeUntil || (model.scale === 'ma' && frame.t === event.activeUntil)) activeEvents++;
+  }
   return {
+    activeEvents,
+    recordedEvents,
     participants: frame.participation.length,
     entities: model.entities.size,
     activeBattles,

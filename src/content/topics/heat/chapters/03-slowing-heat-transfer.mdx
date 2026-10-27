@@ -1,0 +1,203 @@
+---
+id: slowing-heat-transfer
+order: 3
+title:
+  en: Slowing Heat Transfer
+  zh: 隔热材料
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  layers:
+  - curves
+  labels:
+  - cooling-water
+  - cool-probe-marker
+  camera:
+    position:
+    - 1.05
+    - 1.2
+    - 0.75
+    target:
+    - 0.55
+    - 0.86
+    - 0.1
+    fov: 30
+  summary:
+    en: A poor conductor slows a transfer; it does not make energy.
+    zh: 不良导体减慢传热，不会制造能量。
+  sim:
+    set:
+      elapsed-s: 0
+      water-g: 200
+      cover: bare
+      cool-start-c: 85
+    try:
+      vary: cover
+      also:
+      - elapsed-s
+      - cool-start-c
+      keep:
+      - en: Same 200 g water and cup shape
+        zh: 同样 200 g 水与杯形
+      - en: Surroundings held at 25 °C
+        zh: 环境维持 25 °C
+      observe:
+      - cool-c
+      - cool-direction
+      curve:
+        x: elapsed-s
+        y:
+        - cool-c
+        samples: 101
+      record: true
+      predict:
+        prompt:
+          en: At the same model time, replace the bare cup with the wrapped cup. Will the hot water temperature
+            be higher, lower or unchanged?
+          zh: 同一模拟时刻，把裸杯改为包覆杯。热水温度会较高、较低，还是相同？
+        start:
+          cover: bare
+          elapsed-s: 120
+          cool-start-c: 85
+        change:
+          cover: wrapped
+        observe: cool-c
+        options:
+        - id: more
+          label:
+            en: Higher
+            zh: 较高
+          means: more
+        - id: less
+          label:
+            en: Lower
+            zh: 较低
+          means: less
+        - id: same
+          label:
+            en: The same
+            zh: 相同
+          means: same
+  beats:
+  - camera: view-cooler
+    layers:
+    - curves
+    labels:
+    - cooling-water
+    - cool-probe-marker
+    sim:
+      set:
+        cover: bare
+        cool-start-c: 85
+        elapsed-s: 120
+    caption:
+      en: The bare model cup transfers energy to cooler surroundings. Its temperature falls.
+      zh: 裸杯模型向较冷的环境传递能量，水温下降。
+  - camera: view-cooler
+    layers:
+    - curves
+    labels:
+    - wrap
+    - cool-probe-marker
+    sim:
+      set:
+        cover: wrapped
+        cool-start-c: 85
+        elapsed-s: 120
+      reveal: true
+    caption:
+      en: At equal time and starting temperature, the wrapped model cup has cooled less.
+      zh: 初温与经过时间相同时，包覆杯模型降温较少。
+  - camera: view-cooler
+    layers:
+    - curves
+    labels:
+    - wrap
+    - cooling-water
+    sim:
+      set:
+        cover: wrapped
+        cool-start-c: 85
+        elapsed-s: 300
+      reveal: true
+    caption:
+      en: The wrapped cup still cools. Slower transfer is different from no transfer.
+      zh: 包覆杯仍会冷却。传得较慢不等于完全不传。
+  - camera: view-cooler
+    layers:
+    - curves
+    labels:
+    - wrap
+    - cool-probe-marker
+    sim:
+      set:
+        cover: wrapped
+        cool-start-c: 5
+        elapsed-s: 120
+      reveal: true
+    caption:
+      en: For a colder starting object, insulation slows energy entering from warmer surroundings. It can help keep
+        cold things cold.
+      zh: 物体起点较冷时，隔热减慢能量从较暖环境传入，也能帮助保冷。
+  index:
+    parts:
+    - cooling-beaker
+    - cooling-water
+    - cool-probe-marker
+    - wrap
+    - air-gap
+---
+
+{/* Fact/source audit: H03,H07,H08,D02; S1,S3,S21,S27. */}
+
+<Lang en>
+
+The cooling cup begins warmer than its surroundings. Energy leaves the water and its temperature falls. Compare the bare cup with the wrapped cup at the same elapsed time and starting temperature. In this model, the wrapped cup remains warmer because energy leaves it more slowly. The wrapper does not supply energy to the water.
+
+A <Term id="poor-conductor">poor conductor of heat</Term> allows energy to pass through less readily under comparable conditions. Plastics, wood, rubber and still air are examples. Poor conduction means slower transfer, rather than no transfer. The wrapped model continues cooling as you advance time. Its reading is not permanently held at the starting value.
+
+<Term id="insulation">Insulation</Term> slows heat transfer into or out of an object. Try a starting temperature below the surroundings. Energy now enters the colder water, making it warmer. The same wrapper slows that incoming transfer, so it helps the cold water stay cold. Keeping a drink cool and keeping a drink warm use the same principle with opposite transfer directions.
+
+Use the card to change the cover while holding the water amount and starting conditions the same. Record matching times before drawing a conclusion. The model uses an effective transfer setting for each cover; it does not test a named plastic or predict every real cup. A waterproof covering is not automatically a good thermal insulator. <TopicLink slug="materials" ch="choosing-materials">Choosing materials</TopicLink> explains how different properties suit different uses.
+
+<More title={{"en":"Still air and moving air","zh":"静止空气与流动空气"}}>
+
+Air conducts heat poorly. Trapping it in small spaces can help insulation. Moving air can carry energy away, so a loose air space is not a promise that a real object will be well insulated.
+
+</More>
+
+<More title={{"en":"Designed transfer settings","zh":"设计的传热参数"}}>
+
+The bare and wrapped settings use <Num s="S27">2 W/K</Num> and <Num s="S27">0.5 W/K</Num> respectively. These are effective conductances for the whole model path, not material conductivities. The surroundings are held at a design value of <Num s="S27">25 °C</Num>.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+冷却杯的水从比环境更高的温度开始。能量向外传，水温下降。保持初温与经过时间相同，比较裸杯和包覆杯；这个模型里，包覆杯仍较暖，因为能量离开得较慢，包覆层并没有向水供能。
+
+<Term id="poor-conductor">热的不良导体</Term>在可比条件下较不容易传热，塑料、木、橡胶和静止空气都是例子。传得较慢不等于完全不传。继续推进时间，包覆杯仍会冷却，读数不会永远停在初温。
+
+<Term id="insulation">隔热</Term>能减慢能量传入或传出。把水的初温调得比环境低，能量便由较暖环境传入，水温上升。同样的包覆层减慢输入，所以也能帮助保冷。保温与保冷使用相同原理，只是传热方向相反。
+
+用卡片改变包覆条件时，保持水量与起始条件相同，在相同时刻记下读数，再解释差别。模型的传热参数代表整个路径，不是在测试某种塑料，也不能预测所有真实杯子。防水与隔热是不同性质，选材料要看用途；可到<TopicLink slug="materials" ch="choosing-materials">“选择材料”</TopicLink>继续比较。每次记一行时都要确认条件。若初温或经过时间已经改变，包覆杯较暖的结果就不能单独归因于包覆层；相同条件下的读数，才支持对传热快慢的比较。
+
+<More title={{"en":"Still air and moving air","zh":"静止空气与流动空气"}}>
+
+空气不良导热，把它限制在小空隙中，有助于隔热。不过，流动空气还会带走能量；真实器材中有空隙，不表示它就一定有良好隔热效果。
+
+</More>
+
+<More title={{"en":"Designed transfer settings","zh":"设计的传热参数"}}>
+
+裸杯与包覆杯的设计值分别为 <Num s="S27">2 W/K</Num> 和 <Num s="S27">0.5 W/K</Num>。它们是整条模拟路径的有效传热参数，不是材料导热率。模拟环境固定为设计值 <Num s="S27">25 °C</Num>。
+
+</More>
+
+</Lang>

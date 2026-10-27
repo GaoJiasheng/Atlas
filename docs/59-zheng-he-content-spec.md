@@ -541,3 +541,24 @@ NE land 的 feature 数不是岛屿数；Geometry MultiPolygon 内有许多岛�
 - **性能**：`pnpm shoot zheng-he --perf --gpu`（1920×1080，机器负载 120–230）：27 个镜头 58–60 fps，console clean，首屏 JS 452.9 KB gz／10 文件（共享 TimeScene 引擎，本题无新增 JS；高于 §4 写的 ≤400 KB，是引擎既有体量，非本题造成）。海岸运行时 363,634 bytes，按需加载。
 - **e2e**（`CI=1 ATLAS_E2E_PORT=5447`）：zheng-he.spec 7/7 通过（“forty beats” 在放宽等待后通过）；smoke 的 `index (en/zh) lists published topics only` 通过（draft 未上首页，smoke 计数未动）；`sample-space` 两项在重载下超时（SpaceScene，与本题无关，未改引擎），留主会话全量跑。
 - **剩余**：`--layout` 探针在 zh/cinema 偶发 `bar` 内容宽于面板：第一次 1280／1024、第二次 1920，每次只在前 1–3 章、尺寸不同，单独量 DOM 复现不出；ww2 zh/cinema 同探针在 3840–1024 全部通过。疑为重载下探针等待（350 ms）不足，仍请主会话在空闲机器上重跑 `--layout`。移动端字幕卡无 leader 标签、章节索引里 FlyTo 只切取景不开 inspector（需再点地图标记），都是引擎既有行为；见 REVIEW。
+
+
+### 9.4 TimeScene 与内容跟进（2026-10-27）
+
+本题继续 `status: draft`。中文 Geoff Wade 统一写“韦德”，正文首次“韦德（Geoff Wade）”；独立事件摘要／来源目录同样可对应英文姓名。原事实、来源与解释归属保留。
+
+南京的九条 dated 记录以 `displayOffset` 分开：D02 `at` 原样保留，site-nanjing 不动；半径 96 CSS px，正北起顺时针每 40°，按 first / third / captives / fourth / giraffe / fifth / sixth / seventh / final 的固定顺序，四舍五入 0.1 px。最小间距约 65.7 px；符号、命中、脉冲、引线共用偏移。不是新历史实址或航线。背景说明与正文双语说明约定，精确偏移表见 data/SOURCES.md；原 §9.1“无引擎修改”属于初版记录。
+
+重读 S1 的第二航次段，确认船队赴古里参加新王即位典礼，郑和组织但未亲自率队。evt-second-voyage 保留古里／科泽科德 D02 坐标；事件详情与章索引写明目的地含义，既不定位典礼实址，也不声称某日船位。
+
+八章双语 More 索引的每个 FlyTo 行都带 event id：点击选中并在章头下显示同一事件详情，仍使用原 preset 取景。普通正文取景按钮仍可只切取景。TimeScene 按数据决定战争统计与图层；本题确有旧港 battle，保留战斗统计／事件层，隐藏空行动、空控制区和空参与层。其他主题回归与本轮四项非浏览器门槛结果见本节后续记录；浏览器检查由主会话执行，本轮没有打开或控制浏览器／桌面。
+
+
+本轮最终非浏览器门槛（2026-10-27）：`pnpm check` exit 0，814 files、0 errors／0 warnings、4 hints；`pnpm validate` exit 0，63 topics、0 errors／0 warnings；全量 `pnpm test -- --maxWorkers=2` exit 0，175 files／4,479 tests 全过；`pnpm build` exit 0，129 static pages、PWA 完成（共享大 chunk 提醒仍在）。初次默认并发 test 有两项未修改的几何测试超过 5 秒，降低 worker 数后完整重跑通过；未放宽超时或改测试配置。`git diff --check` 通过。EN／ZH 静态成品各有 40 个郑和可选 FlyTo 行，两题仍为 draft。shoot／e2e 按用户要求未运行，完全未打开或驱动浏览器／桌面。
+
+### 9.5 浏览器验收（Claude，2026-10-27）
+
+- `pnpm shoot zheng-he --beats --keys`：40 拍 0 失败；修正 N 键后 keys 0 失败（原先无领土名称却注册 N 键）。
+- **对象索引**：02 章（1600×900）与 04 章（390×844，中文）各点四行 `<FlyTo event>`：选中对象正确、`detailCount` 1、详情在章头下、预设取景保留、阅读面板保持展开；手机上详情抽屉保留。
+- **南京偏移**：在 07 章中国沿岸视图逐个点击九个位置（八个环形记录 + 中心城市点），九次选中各不相同；1433 拍第九个记录 evt-final-return 出现并在环上。整区视图（zoom 3）下 96 px 半径约等于上千公里，环上标记会落到山东、台湾附近，读者难看出它们属于南京；已给偏移标记加一条 hairline 腿连回南京点（`displayLeg`，单测覆盖）。半径是否随缩放收小，留给 Gavin。
+- 文字：S2 中文来源名去掉套括号，改为"韦德（Geoff Wade）／新加坡国立大学亚洲研究所工作论文第 31 号（2004）·《郑和远航：重新评估》"，SOURCES.md 同步。

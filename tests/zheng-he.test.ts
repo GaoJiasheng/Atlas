@@ -96,13 +96,13 @@ describe('zheng-he draft history topic', () => {
         for (const id of state.highlight) {
           const event = eventById.get(id);
           expect(event, `${chapter.id}: ${id}`).toBeDefined();
-          expect(inViewport(event!.at, state.camera), `${chapter.id}: ${id} outside camera`).toBe(true);
+          expect(inViewport(event!.at!, state.camera), `${chapter.id}: ${id} outside camera`).toBe(true);
         }
       }
     }
   });
 
-  it('copies all seventeen sourced port anchors exactly into thirty event points', () => {
+  it('preserves all seventeen sourced geographic anchors for thirty event points', () => {
     expect(ports.features).toHaveLength(17);
     expect(portById.size).toBe(17);
     expect(events).toHaveLength(30);
@@ -123,6 +123,56 @@ describe('zheng-he draft history topic', () => {
     expect(eventById.get('site-hormuz')!.at).toEqual([56.4529, 27.095]);
     expect(eventById.get('site-hormuz')!.at).not.toEqual([56.272135, 27.20406]);
     expect(events.filter((event) => event.kind !== 'site').map((event) => event.id).sort()).toEqual(Object.keys(DATED_ANCHORS).sort());
+  });
+
+  it('separates nine Nanjing records with screen offsets while keeping the sourced city point', () => {
+    const records = events.filter((event) => event.displayOffset !== undefined);
+    expect(records.map((event) => event.id).sort()).toEqual(Object.entries(DATED_ANCHORS)
+      .filter(([, anchor]) => anchor === 'nanjing').map(([id]) => id).sort());
+    expect(records).toHaveLength(9);
+    const offsets = [[0, 0], ...records.map((event) => event.displayOffset!)];
+    for (const event of records) {
+      expect(event.at).toEqual(eventById.get('site-nanjing')!.at);
+      expect(Math.hypot(...event.displayOffset!)).toBeCloseTo(96, 0);
+    }
+    // Every 44 px target is disjoint, including the stationary city diamond.
+    for (let i = 0; i < offsets.length; i++) for (let j = i + 1; j < offsets.length; j++) {
+      expect(Math.max(Math.abs(offsets[i]![0]! - offsets[j]![0]!), Math.abs(offsets[i]![1]! - offsets[j]![1]!))).toBeGreaterThan(44);
+    }
+    expect(eventById.get('site-nanjing')!.displayOffset).toBeUndefined();
+    expect(chapters[0]!.state.note!.en).toContain('not separate historical sites');
+    expect(chapters[0]!.state.note!.zh).toContain('不表示不同的历史地点');
+  });
+
+  it('makes every authored index row select its named object and retains its framing preset', () => {
+    const presets = new Set(json('presets.json').presets.map((preset: { id: string }) => preset.id));
+    for (const chapter of chapters) for (const locale of ['en', 'zh']) {
+      const body = localeBody(chapter.body, locale);
+      const rows = [...body.matchAll(/^\| <FlyTo preset="([^"]+)" event="([^"]+)">([^<]+)<\/FlyTo>/gm)];
+      const tableRows = [...body.matchAll(/^\| <FlyTo /gm)];
+      expect(rows.length, `${chapter.id}/${locale}`).toBe(tableRows.length);
+      const ids = new Set(rows.map((row) => row[2]));
+      for (const id of new Set([...(chapter.state.highlight ?? []), ...chapter.state.beats.flatMap((beat) => beat.highlight)])) {
+        expect(ids.has(id), `${chapter.id}/${locale}: ${id}`).toBe(true);
+      }
+      for (const [, preset, id, label] of rows) {
+        expect(presets.has(preset!)).toBe(true);
+        expect(eventById.has(id!), label).toBe(true);
+      }
+    }
+  });
+
+  it('identifies Wade consistently in Chinese and locates the second expedition at its sourced destination', () => {
+    const chinese = chapters.map((chapter) => localeBody(chapter.body, 'zh')).join('\n');
+    expect(chinese).toContain('学者韦德（Geoff Wade）');
+    expect(chinese).not.toMatch(/学者 Geoff Wade|史家 Geoff Wade|(?<!Geoff )Wade/);
+    const second = eventById.get('evt-second-voyage')!;
+    expect(second.at).toEqual(portById.get('calicut')!.geometry.coordinates);
+    expect(second.sources).toContain('S1');
+    expect(second.detail!.en).toContain("new king's inauguration");
+    expect(second.detail!.en).toContain('did not lead it in person');
+    expect(second.detail!.zh).toContain('新王即位典礼');
+    expect(second.detail!.zh).toContain('没有亲自率队');
   });
 
   it('retains empty political control at every keyframe and supplies no inferred voyages', () => {
