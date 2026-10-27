@@ -59,3 +59,7 @@ Original reproduction: bones 04-02 and 05-02/03, and muscles-arms ch04 b1 (`ulna
 ## Final non-browser gates
 
 `pnpm check`, `pnpm validate`, `pnpm test -- --maxWorkers=2 --testTimeout=30000` (4,382/4,382), and `pnpm build` all pass. Full results and remaining main-session browser checks are in docs/57 §9.5. No git writes, package/lockfile edits or review-queue edits.
+
+## F1 reopened (2026-10-27, main session)
+
+The redrawn protected-organs figure counts 12 ribs per side, but ribs 11–12 are drawn as loose pieces beside the spine, not joined to the vertebrae. Floating ribs are free at the front only; at the back they join the thoracic vertebrae. The figure is withdrawn from chapter 02 (both locales) and its webp removed until it is redrawn with ribs 11–12 attached to the spine. Redraw is queued for Codex.

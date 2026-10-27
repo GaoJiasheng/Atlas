@@ -76,13 +76,9 @@ test.describe('bones and joints', () => {
     await expect.poll(async () => (await joint(page, 'elbow.l'))?.angles.flexion ?? 0).toBe(0);
   });
 
-  test('growth and repair stay qualitative and the corrected protection figure loads', async ({ page }) => {
+  test('growth and repair stay qualitative', async ({ page }) => {
     test.setTimeout(120_000);
     await open(page, 'ch=living-bone', 'zh');
-    const image = page.locator('img[src*="bones-and-joints-protected-organs"]');
-    await expect(image).toHaveCount(1);
-    await image.scrollIntoViewIfNeeded();
-    await expect.poll(() => image.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth === 1200)).toBe(true);
     await page.locator('[data-chapter="growth-and-repair"]').first().click();
     await expect(page.locator('.space-try')).toHaveCount(0);
     await page.locator('.atlas-axis__tick[data-beat="growth-and-repair.3"]').click();
