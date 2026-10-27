@@ -73,6 +73,21 @@ and `docs/screenshots/heart-and-lungs/` are derived from Z-Anatomy
 `THIRD-PARTY-NOTICES.md`. The texts and the other data files of these topics stay
 under CC BY-NC-SA 4.0 as above.
 
+Dinosaur Earth (topic `dinosaur-earth`) data-family notice: reconstructed land
+and coastline files `public/geo/de-land-*.json` adapt PALEOMAP PaleoDEMs v2 by
+Christopher R. Scotese and Nicky Wright (2018), upstream CC BY 4.0
+(https://creativecommons.org/licenses/by/4.0/), Zenodo
+https://doi.org/10.5281/zenodo.5460860. Atlas adaptations are CC BY-NC-SA 4.0
+as above; original attribution and the modification notice are retained in
+`scripts/geo/dinosaur-earth/SOURCES-GEO.md`. The PBDB-derived occurrence and
+collection facts in `public/geo/de-modern-points.json` and the retained public-record
+bibliography `public/geo/de-pbdb-references.json` remain CC0
+(https://creativecommons.org/publicdomain/zero/1.0/); the modern Natural Earth
+geometry `public/geo/de-modern-land.json` and `de-modern-countries.json` remains
+public domain, without added restrictions. Atlas editorial reference/card
+text and manifests remain CC BY-NC-SA 4.0. These families are separate files;
+no CC BY-SA source is combined with CC BY-NC-SA data.
+
 Exception — Plates and hazards (topic `plates-and-hazards`): the PB2002-derived
 files `public/geo/ph-plate-divergent.json`, `ph-plate-transform.json`,
 `ph-plate-subduction.json`, `ph-plate-convergent.json`, `ph-orogens.json`,

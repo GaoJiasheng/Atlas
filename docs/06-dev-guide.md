@@ -1750,6 +1750,35 @@ docs/40 §4.2 E-HL1。`sim.kind: "table"`：模型不算，只**按控件查有�
 - **validate**（`tableIssues`，parts 文件解析时）：`keys` 是控件、不重复；行的 `when` 恰好写全 `keys`、值合法；每个实验对 `keys` 的全部值组合**恰好一行**（列出缺的、重的）；`set` 的键是输出、种类对得上（数 / `{ value, decimals }` 给数输出，带标签的状态 id 给状态输出）；同一实验每行设定同一组输出；一个输出只属于一个实验；输出不写 `from`、只能是数或状态；`count` 绑定的零件 `repeat.count` ≥ 该输出在表里的最大份数（按 `count` 的取整），否则报"not enough balls"；先猜后看的 `change` 只改 `observe` 所在实验的 `keys`（`tablePredictIssues`，章节校验）。**来源**（`tableSourceIssues`，`pnpm validate` 对照 `data/sources.json`）：每个 `S#` 都在；设定 `sim` 数输出的行至少引一条 `design: true` 的来源（`sources.json` 新的可选字段：主题自己的设计研究；`SOURCES.md` 标注 design study），设定 `typical` 数输出的行至少引一条不是设计研究的来源；只设定状态的行引什么都行。
 - **测试 API**：`__atlas.engine.sim()` 照旧，表模型多一个 `sources`：`{ <typical 输出>: [S#…] }`（此刻那一行的来源）；`copies(partId)`：`count` 绑定此刻画出的份数。
 
+### SpaceScene · 可选食物网卡（sim.foodWeb，E-MW2）
+
+docs/53 §4。`sim.kind:"table"` 可以加 **`sim.foodWeb`**（与 `sim.table` 并列，不在 table 内）。这是有向图的显示数据，没有新的 solver、sim kind、输出种类、binding、URL、时钟、快捷键或测试 API。`sort` 只做特征分类；table 足够列出有限的移走/观察/潮位组合；普通 PartChainCard 是无方向的结构连接，不能表达食物→消费者。运行时 `foodWebModel` 只读已有 table 输出，不遍历或重新求图；内容生成器在构建时自行算路径并生成有来源的 table 行。
+
+所有对象 strict，文本必须双语，`sources` 是已有 `data/sources.json` 的 S#。精确形状：
+
+```ts
+foodWeb: {
+  inspect: string; // 已有 choice control，其 options 恰是全部 consumer node ids
+  nodes: Array<{ id:string; label:{en:string;zh:string}; role:'producer'|'consumer';
+    parts:string[]; d:[number,number]; output:string; sources:string[] }>;
+  edges: Array<{ id:string; from:string; to:string; output:string;
+    evidence:'general'|'local-observation'|'reported-observation'|'indexed-only';
+    sources:string[]; note:{en:string;zh:string} }>;
+  note:{en:string;zh:string};
+}
+```
+
+- `nodes` 2–12、`edges` 1–48；`parts` 1–12 个不同 selectable part，节点间不可共用。节点 id 唯一；边 id、from/to 配对不重复，已知端点、不自环、不成环，producer 不接受入边；每个 consumer 必须有上游 producer。这是本教学 DAG 的限制，不声称真实食物网必然无环。
+- `d` 是固定布局的归一化中心坐标，在 320×380 viewBox 中绘制；安全区 x=[0.22,0.78]、y=[0.10,0.90]，两坐标须有限。建议六点：`[.25,.10],[.75,.10],[.25,.37],[.75,.37],[.5,.64],[.5,.90]`。不使用 force/random/动画；作者须避免节点重叠。
+- node `output` 必须是 state 输出，且 `states` 必须含 `unchanged`、`fewer-foods`、`no-shown-food`、`removed` 的双语标签。卡片直接读状态：removed→present=false；unchanged/fewer-foods→supported=true；不支持的动物仍 present。producer 未移走时由 table 给 unchanged。
+- edge `output` 必须是 number 输出，table 所有对应格为 0/1；1→active 实线，0→断开虚线。箭头从食物指向消费者。计数仍经 table 写入，沿用 `__atlas.engine.sim()`。
+- `foodWebIssues` 接入 `simIssues` 检查上述引用/结构/状态/控件，错误含具体 path；`foodWebSourceIssues` 接入 `validate-content` 现有来源流程。未知来源、空白 card/edge note、未知/上下文 part、未知/种类错误输出、错 inspect 控件和选项、重复/循环都报错。
+- 桌面 `FoodWebCard` 替换右上 PartChainCard；<1024 px 在 reader 中显示独立卡，背景章无 try-it 也有。图中六个按钮同时组成可读的文本列表，另有可展开的关系/证据列表、SourceRefs 和逐边 note；general/reported/indexed 明示 medium evidence，local observation 独立标记。
+- 节点使用 native button，44 CSS px 以上，Tab/Enter/Space 与点击同路，只选 `parts[0]`；不改 inspect/remove。inspect 是虚线外框+文字，selected 是 signal 外框+文字。四状态同时用文字与实线/双线/虚线/点线边框区分。颜色全用既有 paper/cinema token，无 hover 必需操作。
+- hooks：`.space-food-web`；`[data-food-node][data-present][data-supported][data-inspect][data-selected][data-status]`；`[data-food-edge][data-active][data-evidence]`；`[data-food-relation]`。布尔属性始终写 `true/false`。
+
+草稿 fixture `sample-food-web`：简单 primitive，6节点/6边、20输出/49表行、无 try-it 的背景章和有预测/记录的实验章。单测 `tests/space-scene/food-web.test.ts` 覆盖 §4.4 数字、全部56组合、四状态、选择/观察分离与负例；浏览器规约 `tests-e2e/sample-food-web.spec.ts` 覆盖已有读数 API、deep link、键盘、证据来源、中英/cinema 与窄屏背景章/44 px。
+
 ### SpaceScene · 平面横梁机构（`mechanisms`，beam-steam）
 
 docs/52 §4 E-ST1/E-ST2；完整可运行作者例子在 `src/content/topics/sample-mechanism/data/parts.json`，生成器 `src/content/topics/sample-mechanism/generate.mjs`（`node` 直接运行；包括齿廓采样检查）。这是可选的根字段 `mechanisms`（缺省 `[]`，最多一项），**不增加 sim 种类**：压力、三档静态调速器和归一化能量账仍用 `sim.kind: "table"`。不增加 URL 字段、HUD、键位、齿轮 primitive 或通用物理引擎。
@@ -2352,3 +2381,67 @@ pnpm tsx scripts/geo/lib/check.ts --topic ww2         # MapLibre（Playwright）
 `encoding:{radius:{property:"mag",min:6,max:9.5,px:[2,8]}}` 只用于Point，要求每个mag有限且≥6。显示半径 `2+6*clamp((mag-6)/3.5,0,1)` px；这是展示编码，不改变源震级。`pick=<catalogue-id>` 是最长128字符kebab-id，引擎字段只在 core typed URL passthrough 注册；合法可见pick优先于hl，未知则回退旧hl，取消选择恢复当前拍/章highlight。隐藏层、回退日期、换章会清pick；深链等本层几何与元数据完成才解析，失败写双语错误并清pick。显式URL cam保留，其他有效pick深链飞到at。换主题/语言沿URL保留id。
 
 测试使用 `__atlas.engine.selectCatalogue(id|null):boolean`（隐藏对象或演示中返回false）、`catalogueState():{pick,layers:{[id]:{status,visible}},indexCount,renderedRows,selectedScreen}`；layers只报告已请求或当前开启的目录层，status为loading/ready/error，selectedScreen为选中锚点的视口CSS坐标或null。既有stats().datedLayers增加可选mode/sourceUpdates，sourceUpdates初次提交为1；跨时间边界才setFilter。`sample-science-layers`保持draft，合成数据不能作为科学来源；专用unit/e2e与shoot目录选中截图用于验收。
+
+### TimeScene · 深时重建与现代证据（E-DE1–E-DE3）
+
+`topic.basemap.reconstruction: { file, selection: hold-older }` 选择独立的重建主图分支，与 `local` / `region` 互斥。`file` 指向 `public/geo/<stem>.json` 的严格清单，帧按 Ma 从大到小排列，每帧为单对象 TopoJSON（对象名等于 stem）。`land` / `unavailable` 是面，`coast` 是线；属性明确 `modelId` 和 `frameMa`。构建加载器 `deep-time-build.ts` 实读并校验清单、每帧、sources、空 control 帧和现代子文件，将元数据 / 现代证据组成 `geo.deepTime`；古地图几何仍按需本地加载。客户端仅 `import type` 引用构建 schema，纯筛选函数在 `lib/deepTime.ts`。
+
+`GeoStage` 接收 `reconstruction={geo.deepTime?.reconstruction}`，有清单时懒加载 `reconstruction-map.ts`（历史 `controller` 不静态引用它；误收到清单时在建 style 之前直接报错，不回退现代底图）。样式只有空重建 source 和程序化经纬网，没有现代陆地 / 国界 / 国名 / 河流 / glyph / tiles。主图固定 maxZoom 3.6、`renderWorldCopies:false`，纬度由 Web Mercator 自身限在 ±85.051129°；不设 `maxBounds`（MapLibre 5.24 下 360° 宽的 `maxBounds` 让视图矩阵奇异，地图起不来）。点地图不抢键盘焦点（同历史 controller），不可旋转 / 倾斜。`reconstruction-style.ts` 只对 `kind:coast` 描边，不把不可用区的图框边画成海岸。换主题只重设 paint，不重传几何；重建主图隐藏不适用的现代实测比例尺。
+
+离散选择复用 `lib/deepTime.ts` 的 `frameAt`：query 先 clamp 到清单范围，再取最接近且不年轻于所选年代的帧；如 66→70、65→65、32.5→65。`lib/reconstruction.ts` 管理 generation / AbortSignal、最多当前与最近相邻两帧的已解码缓存和真实 source 状态。新帧未就绪先把几何图层不透明度置 0（不用 `visibility:none`：图层全隐藏时 source 不被使用，瓦片不重载，再显示时会先露出旧样本），等待 `setData(data,true)` 的 worker 完成且 source 瓦片全部载入后才显示 / ready；迟到请求不解码 / 不覆盖新帧，失败保持空白。相同 frameId 内拖动仅更新年代 / Δ，不重复 fetch / decode / `setData`。`geometryUpdates` 只计有效帧几何替换，不计清空或 paint 更新。`GeoController.reconstructionStats()` 与 `onReconstruction` 返回所选年代、实际已提交 sample / Δ、状态和计数；loading / unavailable 时 sample 字段为 null。
+
+现代图配置 `modernInset` 与重建分支配套，含独立 land / countries 和三种具名 bounds。point/card 文件保留 `coordinateSpace:modern`；每条 occurrence 独立闭区间相交，不合并年龄空档。cards 严格无坐标。MY 化石位置在聚合前抑制，只公开汇总抑制数与区域卡。`fossils-modern` 只控制化石符号，参考点 / 卡不计化石数。隐藏 inset 保留 view / mode 与内部计数。对象选择接既有 inspector，章 `state.index` 与 beat `highlight` 引用本题 point/card；现代图源不进入古主图。
+
+`maDigits:0|1|2|3` 接既有 Ma 转换 / 格式化 / URL；未写仍默认 2。TimeScene 的 `beat` 复用宿主 `b` 参数，`inset`、`inset-visible`、`fossil-mode` 使用差异基线，显式 URL 字段覆盖章 / 拍。自由拖动清空拍绑定。测试读实际结果用 `__atlas.engine.geology()`，其 reconstruction 部分来自 map controller，inset 部分区分 total / overlap / visible / in-view 与 reference / suppression 计数。
+
+可复用草稿 `sample-deep-time` 明确标 TEST/DESIGN：七张合成图形帧、四个 collection（含有空档的两条 occurrence）、两个 reference points、四张无坐标卡及 synthetic MY 抑制 2 collections / 3 occurrences。它不是科学地图或化石资料。单测 `reconstruction-map.test.ts` 覆盖源隔离、离散选择、缓存、晚响应 / 失败、同帧上传计数与销毁；`sample-deep-time.test.ts` 经过真实构建加载器；`tests-e2e/sample-deep-time.spec.ts` 覆盖双语 / 双 theme、b 深链、66/70 与 65、浏览窗、隐藏刷新、缺帧和现代主图请求隔离。浏览器测试与真机性能验收以本次交付记录为准，文件存在不代表已经通过。
+
+现代文件在构建时完整校验，`/topics/<slug>/data.json` 经 `compactDeepTimeData` 仅保留重建/现代清单及普通来源/名词/空control。`loadModernEvidence` 只从本地 `/geo/<stem>.json` 读取现代land、countries、points、cards与可选referenceFile，合并后才挂载场景；同一组并发/重挂载请求复用Promise，失败允许重载重试。这样现代矢量与PBDB记录只部署一份，不在topic payload重复。旧引擎数据响应原样保留。
+
+绑定示例（拍中的其他必填字段如caption依旧保留）：
+
+```json
+{"t":{"ma":66},"inset":"mexico","insetVisible":true,"fossilMode":"age-window","layers":["base","fossils-modern"],"highlight":["site-chicxulub-modern"],"caption":{"en":"Event age 66 Ma; map sample 70 Ma.","zh":"事件为6600万年前；地图样本为7000万年前。"}}
+```
+
+宿主 context 的 `revealReader()`，选中现代证据时在桌面打开阅读列，在窄屏展开同一个阅读抽屉；不另加详情HUD。手机（≤759 px，宿主在此隐藏卡片）现代小图移入阅读面板顶部，阅读抽屉与其他 TimeScene 题一样默认收起，不在载入 / 点拍时自动展开；底栏状态行换成「所选 / 地图样本 / Δ」读数（`Timeline` 的可选 `state`），左列 PLATE 用标准可折叠 `ts-plate` 行；悬浮读数只在演示中显示。深时专用 UI（`ModernInset.tsx`、`deep-time-transport.ts`）由 View 懒加载，不进其他 TimeScene 题的 View chunk；`,` / `.` 拍键只为重建题注册。重建主题的年代立即切换离散样本，镜头仍可缓动，避免缓动年代时下载路过的所有样本、或让化石筛选/所选读数与主图暂时不一致。普通日期主题保留原时间缓动与底图行为。
+
+现代清单的可选 `referenceFile` 指向本地原始书目表，例如 `{"version":1,"references":{"6837":"Original PBDB primary_reference string"}}`。构建要求每条occurrence的PBDB文献号可解析，inspector按号显示完整原文书目，双语解释不改写原始题名；书目同样由本地缓存支持离线，不重复进入topic payload。
+
+### SpaceScene · 试一试 · 翼型（airfoil）
+
+docs/45 §4 E-AF1–5。`kind:"airfoil"`；严格数据 `airfoil-schema.ts`，原创纯函数 `lib/sim/airfoil.ts` 与 `airfoil-field.ts`。注册 SIM_KINDS / simQuantities / quantityKind；无 timeline，`SEPARATE_EXPERIMENTS.airfoil=true`。作者完整模板 `tests/space-scene/fixtures/airfoil-bench.ts`，草稿 `sample-airfoil`。夹具页面用 NASA 平均大气，模板另导出固定密度 1.225 的数值测试例。
+
+```json
+{"model":"joukowski-illustrative-v1","angle":"angle-deg","speed":"airspeed-mps","atmosphere":{"kind":"nasa-troposphere","altitude":"altitude-m"},"profile":{"epsilon":0.08},"chord":1,"area":2,"section":{"part":"foil-sample","origin":[-0.5,1,0]},"stall":{"tag":"illustrative","peakDeg":12,"knots":[[12,1],[16,0.85],[20,0.6]],"source":"S58"},"sources":["S4","S11","S57","S58"],"plot":{"y":"cl-now"}}
+```
+
+物理控制必须 step：angle −20…20°、speed 0…60 m/s、altitude 0…10000 m；constant 大气改写为 `{"kind":"constant","density":1.225}`（0<ρ≤2）。未知字段、非法数与错误引用报具体路径；直接求解非法输入抛 `AirfoilInputError{field,reason}`。数输出 `rho/q/cl/lift-n/control:<本模型数控件>`，`tag:"sim"`；状态 `flow-state` 必须给 still / ideal-attached / separated-illustration 三个双语标签，不写 tag。`plot.y` 是 from=cl 或 lift-n 的数输出 ID。来源全存在，stall.source 必须在 sources 中且 `design:true`；S4 对应 spec 的 S04（公共来源 ID 不接受前导零）。
+
+几何：128 点 Joukowski 原创轮廓，乘 chord 后写现有 extrude.shape、depth .12、bevel 0；at=section.origin、无 scale/rotation/mirror/额外几何。样件与 `chord-marker` 只有一个相同的 `rotate`：
+
+```json
+{"control":"angle-deg","part":["foil-sample","chord-marker"],"rotate":{"axis":[0,0,1],"per":-1,"pivot":[-0.25,1,0]}}
+```
+
+这两个 airfoil 对象的转动直接到目标角，其他 rotate 缓动照旧。inflow-reference 保持固定。`airfoilOutline()` 导出轮廓，不能使用外部坐标或 wing primitive；前表面=origin.z+.06，场平面再前移 .002。
+
+流层复用单批 GPU points、既有 flow 材质与层开关。只给一条 flow 写 provider，flow 无 path/paths；count128、speed1、spread0、whenRun true、clip false、flat true；不混 intensity/state/tidal/stops/bilateral。普通 visible 可叠加 AND：
+
+```json
+[{"output":"flow-state","flow":"section-air","airfoilFlow":true},{"control":"flow-view","flow":"section-air","visible":{"eq":"streamlines"}}]
+```
+
+16 条固定种子，RK4 .008 上限、2048 步、碰撞时最多8次减半；全线段检查，失败路无点并提示。每路按自己的 tau 均匀重采样（最多2048点），不用 Catmull-Rom。每路8点，编号0为同刻发射的 signal 环，其余循环；各路到达时间不归一。时钟 dt·V/c/80；RUN/暂停/减少动态冻结点，静态线保留；关层、隐藏样件或展开时全部实验图解隐藏。±12°外只显示静态虚线及人工失速说明，V0 无路径或压力。缓存按角度存无量纲场，最多11项；速度/密度不重追线。分片任务以4ms为目标，追踪与重采样都有 yield；版本号拒绝过时结果，切主题释放缓存和纹理。
+
+卡内 `AirfoilPlot` 仅 vary=angle 出现：−20…20 每 .5°，有符号对称 y，实线附着、虚线+斜线底为人工失速区，当前点及共用表的记录方标。不给 T2/T6 另画曲线。airfoil 的记录条件签名包含模型/几何/大气/非 vary 的物理控件；改变即清本章表与预测并读屏提示；flow-view/diagram-case 不清表。共用表仍最多12行、驻内存。
+
+```json
+{"kind":"airfoil-pressure","part":"foil-sample","group":"flight-flows","when":{"control":"flow-view","is":{"eq":"pressure"}}}
+```
+
+`AirfoilPressure` 进同一试一试卡，Cp负向朝上、真实样本极值、上下支线型不同。六个触控代表样本钮读出坐标与 Cp，并对应实体表面标记。暂停保留压力；V0/失速显示不可用，不保留旧 Cp。完整压力64个中点与同场一致；≥2048中点积分只用于无黏二维自洽 QA，不宣称真实阻力为零。
+
+force-vectors 增加 lift/drag/thrust（KEY：Lift/升力、Drag/阻力、Thrust/推力），token `f-lift/f-drag/f-thrust` 两主题均≥3:1。仍用固定世界 dir、value、when、负值反向和合批；无 frame 字段。离散 bank pose 要 duration0，并把升力 dir 写 `[0,0.9396926208,-0.3420201433]`，重力 `[0,-1,0]`；不显示水平推阻。
+
+QA：`engine.airfoil()` 提供当前标量、fieldReady/version/inputKey、路径状态、压力数、pulseTime、实际画出的箭头方向、曲线与记录签名；`airfoilProbe({x,y})` 对已旋转弦坐标求值（无可用场则 unavailable/null），`airfoilSamples()` 仅 dev/本机测试 host 返回新副本。`ready` 只保证舞台，还要等 airfoil.fieldReady 且 inputKey 当前；`shoot --beats` 检查拍及拍链接的输入、Cl/L、场、图中点一致性。浏览器验收见 `tests-e2e/sample-airfoil.spec.ts`；专用端口 `ATLAS_E2E_PORT=5406`。

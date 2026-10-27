@@ -3,14 +3,13 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import { feature as topoFeature } from 'topojson-client';
 import { withBase, tx } from '../../../../i18n';
 import { readThemeTokens } from '../../../../theme/theme';
-import { BASE_LAYER_IDS } from '../../../../theme/map-style';
 import { sourceIds } from '../../../../content/schema/sources';
 import { isGeoCamera } from '../../../core/camera';
 import { metresPerPixel, scaleBar } from '../../lib/geo';
 import { sampleClimate, windGlyphs } from '../../lib/climate';
 import { ClimateLoader } from '../../lib/climateLoader';
 import { createLeaders } from './leaders';
-import { rainGeometry, rainPaint } from './climateStyle';
+import { coastOverClimate, COAST_OVER_CLIMATE, rainGeometry, rainPaint } from './climateStyle';
 import { buildGeoStyle, graticule, HI, HI_BBOX, HI_LOAD_ZOOM, LAYER, LOCAL, REGION } from './style';
 import type { ClimatologyStageProps, ClimateGeoController, ClimateSnapshot } from './ClimatologyStage';
 
@@ -259,8 +258,11 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
             },
           });
           installed.add(def.id);
-          // Coastlines remain above climate fills, including lazy high-resolution coastline.
-          for (const id of [BASE_LAYER_IDS.landEdge, HI.edge, LOCAL.edge, LOCAL.today]) if (map.getLayer(id)) map.moveLayer(id);
+          // Coastlines remain above climate fills, including lazy high-resolution coastline. The 1:50m
+          // coast goes over them as a copy that fades out while the 1:10m land fades in; the original
+          // stays under the 1:10m mask, so a close-up shows one coastline, not both.
+          if (!map.getLayer(COAST_OVER_CLIMATE)) map.addLayer(coastOverClimate(tk, !topic.basemap?.region));
+          for (const id of [COAST_OVER_CLIMATE, HI.edge, LOCAL.edge, LOCAL.today]) if (map.getLayer(id)) map.moveLayer(id);
         }
         const paint = rainPaint(month, tk);
         map.setPaintProperty(fill, 'fill-color', paint.color);
@@ -466,6 +468,9 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
     for (const layer of style.layers)
       if (map.getLayer(layer.id) && 'paint' in layer && layer.paint)
         for (const [key, value] of Object.entries(layer.paint)) map.setPaintProperty(layer.id, key, value);
+    if (map.getLayer(COAST_OVER_CLIMATE))
+      for (const [key, value] of Object.entries(coastOverClimate(readThemeTokens(), !topic.basemap?.region).paint ?? {}))
+        map.setPaintProperty(COAST_OVER_CLIMATE, key, value);
     requestRender();
   }
   map.on('load', recolor);

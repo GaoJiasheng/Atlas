@@ -129,6 +129,54 @@ attributed; no source text is reproduced beyond that.
 
 The other sources of this topic (public-domain mechanism texts, NASA, NOAA and NIST explanatory pages, the Lap-engine dimension references) are cited fact by fact; no text, drawing or image from them is reproduced. Per-source locators are in `src/content/topics/steam-engine/data/SOURCES.md`. The three illustrations (`public/illustrations/steam-engine*.webp`) are original artwork under the content licence above.
 
+## Dinosaur Earth (`dinosaur-earth`)
+
+**PALEOMAP PaleoDEMs v2**, Christopher R. Scotese and Nicky Wright (2018),
+Zenodo record 5460860, <https://doi.org/10.5281/zenodo.5460860>. Upstream
+licence **CC BY 4.0**, <https://creativecommons.org/licenses/by/4.0/>.
+`public/geo/de-land-{250,230,200,170,150,130,100,70,65,0}.json` are Atlas
+adaptations licensed **CC BY-NC-SA 4.0**: ten verified 1° CSV elevation grids
+were classified with strict `z>0`, converted to nearest-sample categorical
+cells, unioned, clipped to explicit source-domain/dateline and Mercator polar
+limits, and encoded as TopoJSON with shared true-coast arcs. Exact-zero samples
+remain non-land; old-grid 179…180° is unavailable. No modern coast substitution,
+seam welding, continuous interpolation or synthetic 66 Ma frame. Only exact
+collinear reduction is applied. Per-input/output hashes, grid limits, changes
+and topology checks are in `scripts/geo/dinosaur-earth/SOURCES-GEO.md` and
+`build-report.json`.
+
+**Paleobiology Database contributors**, API 1.2 fixed CSV snapshots 26 October 2026.
+Both raw responses explicitly declare **CC0**,
+<https://creativecommons.org/publicdomain/zero/1.0/>. The retained occurrence
+and collection facts in `public/geo/de-modern-points.json`, together with the
+815 original retained-public-record citations in `public/geo/de-pbdb-references.json`,
+remain CC0. The manifest binds the bibliography locally for offline inspector access.
+The bounded global and TH/LA/MY query snapshots were stably deduplicated by
+occurrence, Malaysian locations were suppressed before grouping, and the
+public result retains 2103 occurrences in 1274 collections. Original occurrence,
+collection and publication reference numbers and separate age bounds are
+preserved. Complete exact queries and contributor/publication credit:
+`src/content/topics/dinosaur-earth/data/SOURCES.md` and
+`scripts/geo/dinosaur-earth/publication-references.json`. No raw Malaysian
+location data is deployed. The selected record is not a census.
+
+**Natural Earth contributors**, 110m land v4.1.0 / 50m countries v5.1.1,
+<https://www.naturalearthdata.com/>. **Public domain**, per
+<https://www.naturalearthdata.com/about/terms-of-use/>.
+`public/geo/de-modern-land.json` retains global 110m land;
+`de-modern-countries.json` selects 15 real country features for the modern
+SEA/Mexico inset views. Shapefile winding is converted to RFC 7946 and
+coordinates rounded to 6 decimal places. No additional restrictions are
+asserted. These files and the Singapore DBF label anchor are modern references
+only, never ancient reconstruction inputs.
+
+The two modern editorial reference points, four text evidence cards,
+manifests, original bilingual prose and the three approved generated
+illustrations are Atlas content (CC BY-NC-SA 4.0). Modern factual coordinates
+retain their original source credit and are not claimed as exclusive facts.
+The illustrations are conceptual drawings, not specimen photographs,
+measured reconstructions or third-party map geometry.
+
 ## Plates and hazards — frozen scientific reference datasets
 
 - **PB2002**, Peter Bird (2003), “An updated digital model of plate boundaries”,

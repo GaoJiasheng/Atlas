@@ -1,0 +1,40 @@
+{
+  "sources": [
+    {
+      "id": "S4",
+      "text": {
+        "en": "NASA Glenn: Lift equation",
+        "zh": "NASA Glenn：Lift equation"
+      },
+      "url": "https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/lift-equation/"
+    },
+    {
+      "id": "S11",
+      "text": {
+        "en": "NASA Glenn: Earth atmosphere metric model",
+        "zh": "NASA Glenn：Earth atmosphere metric model"
+      },
+      "url": "https://www.grc.nasa.gov/www/k-12/airplane/atmosmet.html"
+    },
+    {
+      "id": "S57",
+      "text": {
+        "en": "NASA Glenn: Conformal mapping",
+        "zh": "NASA Glenn：Conformal mapping"
+      },
+      "url": "https://www.grc.nasa.gov/WWW/K-12/airplane/map.html"
+    },
+    {
+      "id": "S58",
+      "design": true,
+      "text": {
+        "en": "Atlas original Joukowski teaching design v1",
+        "zh": "Atlas 原创 Joukowski 教学设计 v1"
+      },
+      "note": {
+        "en": "Original equations from docs/45 §4, with epsilon .08, chord 1 m, reference area 2 m²; illustrative stall knots (12,1), (16,.85), (20,.60), signed mirror. Fixed-density fixture 1.225 kg/m³, V40 alpha4: Cl .47075898801417243, lift 922.687616507778 N. NASA atmosphere uses the full S11 constant set; h0/5000/10000 density 1.226613787410970/.7376745768470427/.4140080791698312. No viscous separation, finite-wing correction, drag or flight dynamics. Part thickness .12 m is illustrative, not reference span. Paths use RK4 and nondimensional time, slowed 80-fold. Original geometry and implementation, no third-party coordinates or software. Not wind-tunnel data or aircraft performance.",
+        "zh": "采用 docs/45 §4 原创教学规则，ε=.08、弦长 1 m、参考面积 2 m²，人工失速折线为 (12,1)、(16,.85)、(20,.60)，正负镜像。固定密度夹具为 1.225 kg/m³，V40、迎角4时 Cl=.47075898801417243、升力922.687616507778 N。NASA 大气采用 S11 完整常数组；h0/5000/10000 的密度为1.226613787410970/.7376745768470427/.4140080791698312。不计算黏性分离、有限翼修正、阻力或飞行动力学。厚度 .12 m 仅为示意，并非参考翼展。RK4 流线按无量纲时间推进，放慢80倍。原创几何与代码，不含外部坐标或软件。不是风洞数据或飞机性能。"
+      }
+    }
+  ]
+}

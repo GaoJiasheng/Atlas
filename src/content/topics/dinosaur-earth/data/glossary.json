@@ -1,0 +1,169 @@
+{
+  "terms": [
+    {
+      "id": "term-ma",
+      "term": {
+        "en": "Ma",
+        "zh": "百万年前"
+      },
+      "definition": {
+        "en": "Past time counted in millions of years; 66 Ma means 66 million years ago.",
+        "zh": "以百万年为单位表示过去的时间；66 Ma 表示6600万年前，不是公历年份。"
+      }
+    },
+    {
+      "id": "term-mesozoic",
+      "term": {
+        "en": "Mesozoic",
+        "zh": "中生代"
+      },
+      "definition": {
+        "en": "The era containing the Triassic, Jurassic and Cretaceous periods; numerical bounds follow the ICS June 2026 chart.",
+        "zh": "包含三叠纪、侏罗纪和白垩纪的地质年代；数值界限采用 ICS 2026年6月表。"
+      }
+    },
+    {
+      "id": "term-triassic",
+      "term": {
+        "en": "Triassic",
+        "zh": "三叠纪"
+      },
+      "definition": {
+        "en": "The earliest of these three periods. The 250 Ma map is a sample within it, not its beginning.",
+        "zh": "这里三个纪中最早的一个。250 Ma 地图是其中的一个样本，不是它的起点。"
+      }
+    },
+    {
+      "id": "term-jurassic",
+      "term": {
+        "en": "Jurassic",
+        "zh": "侏罗纪"
+      },
+      "definition": {
+        "en": "The period after the Triassic and before the Cretaceous; it is a different time from the 250 Ma sample.",
+        "zh": "位于三叠纪之后、白垩纪之前；与250 Ma样本属于不同年代。"
+      }
+    },
+    {
+      "id": "term-cretaceous",
+      "term": {
+        "en": "Cretaceous",
+        "zh": "白垩纪"
+      },
+      "definition": {
+        "en": "The last period of the Mesozoic, ending about 66 million years ago.",
+        "zh": "中生代最后的一个纪，约在6600万年前结束。"
+      }
+    },
+    {
+      "id": "term-pangaea",
+      "term": {
+        "en": "Pangaea",
+        "zh": "盘古大陆"
+      },
+      "definition": {
+        "en": "A supercontinent joining land masses that are separated today; it later broke apart.",
+        "zh": "过去由多块今天分开的大陆相连而成的超大陆；后来逐渐分裂。"
+      }
+    },
+    {
+      "id": "term-palaeogeography",
+      "term": {
+        "en": "palaeogeographic reconstruction",
+        "zh": "古地理复原"
+      },
+      "definition": {
+        "en": "Using evidence and models to reconstruct ancient land and sea patterns; it is not a photograph of the past.",
+        "zh": "根据证据和模型重建过去的水陆格局；不是远古照片。"
+      }
+    },
+    {
+      "id": "term-fossil",
+      "term": {
+        "en": "fossil",
+        "zh": "化石"
+      },
+      "definition": {
+        "en": "Evidence of past life preserved in a geological setting, including body remains and traces of activity.",
+        "zh": "保存在地质背景中的过去生命证据，包括身体遗存和活动痕迹。"
+      }
+    },
+    {
+      "id": "term-collection",
+      "term": {
+        "en": "collection",
+        "zh": "采集记录组"
+      },
+      "definition": {
+        "en": "PBDB groups geographically related fossil information into a collection; it need not represent one animal or one excavation.",
+        "zh": "PBDB把有地理联系的化石资料汇成一组；不一定等于一只动物或一次发掘。"
+      }
+    },
+    {
+      "id": "term-occurrence",
+      "term": {
+        "en": "occurrence",
+        "zh": "化石出现记录"
+      },
+      "definition": {
+        "en": "A record of a kind of fossil in one PBDB collection; one collection can contain several occurrences.",
+        "zh": "某类化石在一个PBDB采集记录组中的资料；同一组可以有多条出现记录。"
+      }
+    },
+    {
+      "id": "term-age-range",
+      "term": {
+        "en": "age range",
+        "zh": "年龄范围"
+      },
+      "definition": {
+        "en": "The older and younger age limits reported in published information; not an exact death date or proof of continuous survival between the limits.",
+        "zh": "发表资料给出的较老和较年轻年龄界限；不是精确死亡日期，也不是在两端之间一直生存的证明。"
+      }
+    },
+    {
+      "id": "term-non-avian",
+      "term": {
+        "en": "non-avian dinosaur",
+        "zh": "非鸟类恐龙"
+      },
+      "definition": {
+        "en": "Dinosaurs other than birds; living birds remain within the dinosaur family tree.",
+        "zh": "鸟类之外的恐龙；现生鸟仍属于恐龙谱系。"
+      }
+    },
+    {
+      "id": "term-extinction",
+      "term": {
+        "en": "extinction",
+        "zh": "灭绝"
+      },
+      "definition": {
+        "en": "A lineage has no surviving members. Some bird lineages survived the end of the Cretaceous, so not all dinosaurs became extinct.",
+        "zh": "某一谱系不再有存活成员。白垩纪末有鸟类支系存活，所以不能说所有恐龙都灭绝了。"
+      }
+    },
+    {
+      "id": "term-asteroid",
+      "term": {
+        "en": "asteroid",
+        "zh": "小行星"
+      },
+      "definition": {
+        "en": "A small celestial body. The illustration is conceptual and does not reconstruct the exact shape or scale of the impactor.",
+        "zh": "一种小天体。这里的插画是概念图，不复原撞击体的真实外形或比例。"
+      }
+    },
+    {
+      "id": "term-chicxulub",
+      "term": {
+        "en": "Chicxulub crater",
+        "zh": "希克苏鲁伯陨石坑"
+      },
+      "definition": {
+        "en": "The crater associated with the end-Cretaceous impact, in modern Mexico; its locator point is not the crater outline.",
+        "zh": "与白垩纪末撞击相关的坑址，今天位于墨西哥；地图定位点不是坑的轮廓。"
+      }
+    }
+  ]
+}

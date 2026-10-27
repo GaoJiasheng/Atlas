@@ -1,0 +1,18 @@
+{
+  "presets": [
+    {
+      "id": "sample-de-world",
+      "label": {
+        "en": "Test world",
+        "zh": "测试世界"
+      },
+      "camera": {
+        "center": [
+          0,
+          10
+        ],
+        "zoom": 1.1
+      }
+    }
+  ]
+}

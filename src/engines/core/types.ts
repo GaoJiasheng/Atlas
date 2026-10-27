@@ -32,6 +32,10 @@ export interface SceneState {
 export interface UrlEngineFields {
   /** TimeScene: selected catalogue feature. URL `pick`. */
   pick?: string | null;
+  /** TimeScene modern reference inset (only for reconstruction topics). */
+  inset?: 'world' | 'southeast-asia' | 'mexico';
+  insetVisible?: boolean;
+  fossilMode?: 'age-window' | 'all-mesozoic';
   /** SpaceScene orbit sims: model seconds on show (paused). URL `orb-t`. */
   orbitTime?: number | null;
   /** TimeScene climatology: calendar month 1..12. URL `m`. */

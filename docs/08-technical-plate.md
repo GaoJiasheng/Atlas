@@ -202,3 +202,5 @@
 | P5 内容期 | — | — | 未开始（等 Gavin 定稿内容） |
 | 版面轮（主题页） | 未提交 | 顶栏 VIEW 只放地理预设并折行、去掉 MODE 组；模式进控制面板（LAYERS / TOOLS）；阅读面板可收成 28 px 竖条（sessionStorage）、头部带 summary；TimeScene 底部合成一条（播放 · 标尺 · 状态串 · 可展开泳道），时间轴最小间距混合映射；参与卡可展开、行可点（地图加粗 + 实体详情）；PRESENTATION 改成用户翻页的节拍（ww2 第 07、11 章各四拍） | SpaceScene 保留章节镜头预设和三面板；节拍 `audio` 只预留，没有音频文件 |
 | 章节轴轮（SpaceScene） | 未提交 | 三块底部面板去掉：章节轴（core/axis，段 = 章、刻度 = 拍，点刻度在演示之外应用这一拍，`,` / `.`，URL `b`，P 从当前拍开始，⌄ 收成发丝线）；左列底部 PLATE 块（立面缩略图 + RUN / FLOW / ANIM / VIEW / EXPLODE + 模拟读数 + 当前选中 + perf）；阅读面板顺序 章头 → 节拍行 → 选中对象 → 正文 → 本章索引（`state.index`：零件或按器械分组的动作 + 示例训练课）；§2「全引擎 HUD 铁律」 | TimeScene 时间轴、MathScene 步骤条尚未换成 core 章节轴组件（同一语法，待统一）；MathScene 仍有三面板 |
+
+E-AF5（docs/45）：航空力的语义色 `--f-lift`（升力）、`--f-drag`（阻力）、`--f-thrust`（推力），paper/cinema 都定义；KEY 名称与世界方向箭头共同支持灰度辨认。翼型的迎角曲线与 Cp 图复用阅读面板试一试卡，底部仍只有章节轴。

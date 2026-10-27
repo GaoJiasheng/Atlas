@@ -27,6 +27,11 @@ export interface ReferenceSave {
 export interface SpaceUiState {
   /** An invalid live mechanism stops safely and reports a bilingual configuration error. */
   mechanismError: boolean;
+  airfoil: import('./lib/sim/airfoil-cache').AirfoilSnapshot | null;
+  airfoilSignatures: Readonly<Record<string,string>>;
+  airfoilReset: number;
+  airfoilSelected: number;
+  airfoilLaunch: number;
   /** ORBIT preset: slow turntable until the user drags. */
   orbit: boolean;
   /** REFERENCE mode on (with what to restore). */
@@ -64,6 +69,7 @@ export type SpaceUiStore = StoreApi<SpaceUiState>;
 export function createSpaceUi(): SpaceUiStore {
   return createStore<SpaceUiState>()(() => ({
     mechanismError: false,
+    airfoil: null, airfoilSignatures: {}, airfoilReset: 0, airfoilSelected: 16, airfoilLaunch: 0,
     orbit: false,
     reference: null,
     nextTweenMs: null,

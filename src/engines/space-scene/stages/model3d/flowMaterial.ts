@@ -25,6 +25,10 @@ const vertexShader = /* glsl */ `
 #include <clipping_planes_pars_vertex>
 
 uniform sampler2D uPath;
+uniform float uAirfoil;
+uniform float uPulse;
+uniform float uTauEnd[MAX_PATHS];
+uniform vec3 uMarkerColor;
 uniform float uCount[MAX_PATHS];
 uniform float uPhase[MAX_PATHS];
 uniform float uAlpha[MAX_PATHS];
@@ -42,6 +46,7 @@ attribute float aSeed;
 attribute float aPath;
 attribute float aRank;
 
+varying float vMark;
 varying float vAlpha;
 varying vec3 vColor;
 
@@ -59,7 +64,9 @@ vec3 stopColor(float u) {
 
 void main() {
   int k = int(aPath + 0.5);
-  float u = fract(aOffset + uPhase[k]);
+  float mark = uAirfoil > 0.5 && aRank < 0.0 ? 1.0 : 0.0;
+  float u = mark > 0.5 ? clamp(uPulse / uTauEnd[k], 0.0, 1.0) : fract(aOffset + uPhase[k]);
+  vMark = mark;
   float n = uCount[k];
   float x = u * (n - 1.0);
   float fi = min(floor(x), n - 2.0);
@@ -73,7 +80,9 @@ void main() {
   // Density (an energy share): only the particles ranked below the path's share are on show.
   float shown = aRank < uShare[k] ? 1.0 : 0.0;
   vAlpha = (uClosed[k] > 0.5 || uOpen > 0.5 ? 1.0 : smoothstep(0.0, 0.05, u) * (1.0 - smoothstep(0.92, 1.0, u))) * uAlpha[k] * shown;
-  vColor = stopColor(u);
+  if (mark > 0.5 && uPulse > uTauEnd[k]) vAlpha = 0.0;
+  vColor = mark > 0.5 ? uMarkerColor : stopColor(u);
+  if (mark > 0.5) gl_PointSize *= 1.8;
   #include <clipping_planes_vertex>
 }
 `;
@@ -85,6 +94,7 @@ const fragmentShader = /* glsl */ `
 uniform float uOpacity;
 uniform float uCore;
 
+varying float vMark;
 varying float vAlpha;
 varying vec3 vColor;
 
@@ -94,6 +104,7 @@ void main() {
   float d = length(c);
   if (d > 0.5) discard;
   float soft = smoothstep(0.5, 0.1, d);
+  if (vMark > 0.5) soft *= smoothstep(0.20, 0.30, d);
   float core = smoothstep(0.25, 0.0, d) * uCore;
   gl_FragColor = vec4(mix(vColor, vec3(1.0), core), soft * vAlpha * uOpacity);
   #include <colorspace_fragment>
@@ -103,6 +114,7 @@ void main() {
 export type FlowMaterial = ShaderMaterial & {
   uniforms: {
     uPath: { value: DataTexture };
+    uAirfoil: { value:number }; uPulse: { value:number }; uTauEnd: { value:number[] }; uMarkerColor: { value:Color };
     uCount: { value: number[] };
     uPhase: { value: number[] };
     uAlpha: { value: number[] };
@@ -144,6 +156,7 @@ export function createFlowMaterial(paths: readonly BakedFlow[], open: boolean): 
     defines: { MAX_STOPS, MAX_PATHS: MAX_FLOW_PATHS },
     uniforms: {
       uPath: { value: path },
+      uAirfoil: {value:0}, uPulse:{value:0}, uTauEnd:{value:per(()=>1)}, uMarkerColor:{value:new Color()},
       uCount: { value: per((b) => b.count) },
       uPhase: { value: per(() => 0) },
       uAlpha: { value: per(() => 1) },

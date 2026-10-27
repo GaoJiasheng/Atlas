@@ -1,0 +1,385 @@
+---
+id: inside-the-egg
+order: 3
+title:
+  en: Inside the egg
+  zh: 卵的里面
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  pose: null
+  layers: &id001
+  - chicken-cycle
+  hide:
+  - frog-eggs
+  - frog-tadpole
+  - frog-hind-legs
+  - frog-froglet
+  - frog-adult
+  - frog-marker
+  - frog-next-generation
+  - frog-tray
+  - compare-frog
+  - compare-chicken
+  - compare-mosquito
+  - compare-plant
+  - comparison-marker
+  - comparison-tray
+  - egg-white
+  - egg-yolk
+  ghost: []
+  labels: &id002
+  - chicken-egg
+  camera: &id003
+    position:
+    - 3.8
+    - 2.3
+    - 0.5
+    target:
+    - 2.8
+    - 0.5
+    - -1.4
+    fov: 30
+  highlight:
+    signal: &id004
+    - chicken-egg
+  sim:
+    set:
+      frog-view: egg
+      chicken-view: egg
+      egg-open: false
+      fertilised: true
+      compare-view: chicken
+    try:
+      vary: fertilised
+      keep:
+      - en: Same schematic egg, with the window open for comparison
+        zh: 同一套卵的示意结构，打开窗口来比较
+      observe:
+      - egg-condition
+      - embryo-view
+      also:
+      - egg-open
+      predict:
+        prompt:
+          en: With the window open, switch to the unfertilised example. Will a developing embryo be shown?
+          zh: 窗口保持打开，改看未受精的例子。会显示发育中的胚胎吗？
+        start:
+          egg-open: true
+          fertilised: true
+        change:
+          fertilised: false
+        observe: embryo-view
+        options:
+        - id: shown
+          label:
+            en: Embryo shown
+            zh: 显示胚胎
+          means: shown
+        - id: hidden
+          label:
+            en: No embryo shown
+            zh: 不显示胚胎
+          means: hidden
+  summary:
+    en: Development takes place inside a fertilised egg under suitable conditions.
+    zh: 受精卵在适宜条件下，内部的胚胎继续发育。
+  beats:
+  - view: assembled
+    explode: 0
+    part: null
+    run: false
+    cutaway: none
+    pose: null
+    layers: *id001
+    hide:
+    - frog-eggs
+    - frog-tadpole
+    - frog-hind-legs
+    - frog-froglet
+    - frog-adult
+    - frog-marker
+    - frog-next-generation
+    - frog-tray
+    - compare-frog
+    - compare-chicken
+    - compare-mosquito
+    - compare-plant
+    - comparison-marker
+    - comparison-tray
+    - egg-white
+    - egg-yolk
+    ghost: []
+    labels: *id002
+    camera: *id003
+    highlight:
+      signal: *id004
+    sim:
+      set:
+        frog-view: egg
+        chicken-view: egg
+        egg-open: false
+        fertilised: true
+        compare-view: chicken
+    caption:
+      en: The shell hides development inside the egg. Hatching is not the first moment of development.
+      zh: 蛋壳挡住了内部的发育过程。孵出并不是发育开始的时刻。
+  - view: assembled
+    explode: 0
+    part: null
+    run: false
+    cutaway: none
+    pose: null
+    layers: *id001
+    hide:
+    - frog-eggs
+    - frog-tadpole
+    - frog-hind-legs
+    - frog-froglet
+    - frog-adult
+    - frog-marker
+    - frog-next-generation
+    - frog-tray
+    - compare-frog
+    - compare-chicken
+    - compare-mosquito
+    - compare-plant
+    - comparison-marker
+    - comparison-tray
+    ghost: []
+    labels:
+    - egg-shell-window
+    - egg-yolk
+    - egg-embryo
+    camera:
+      position:
+      - 3.8
+      - 2.3
+      - 0.5
+      target:
+      - 2.8
+      - 0.5
+      - -1.4
+      fov: 30
+    highlight:
+      signal:
+      - egg-shell-window
+      - egg-yolk
+      - egg-embryo
+    sim:
+      set:
+        frog-view: egg
+        chicken-view: egg
+        egg-open: true
+        fertilised: true
+        compare-view: chicken
+    caption:
+      en: The model window reveals a schematic embryo beside its food supply. The window is a teaching device.
+      zh: 示意窗打开，显示胚胎和营养来源。这个窗口是为讲解而设置的。
+  - view: assembled
+    explode: 0
+    part: null
+    run: false
+    cutaway: none
+    pose: null
+    layers: *id001
+    hide:
+    - frog-eggs
+    - frog-tadpole
+    - frog-hind-legs
+    - frog-froglet
+    - frog-adult
+    - frog-marker
+    - frog-next-generation
+    - frog-tray
+    - compare-frog
+    - compare-chicken
+    - compare-mosquito
+    - compare-plant
+    - comparison-marker
+    - comparison-tray
+    ghost: []
+    labels:
+    - egg-yolk
+    - egg-embryo
+    camera:
+      position:
+      - 3.8
+      - 2.3
+      - 0.5
+      target:
+      - 2.8
+      - 0.5
+      - -1.4
+      fov: 30
+    highlight:
+      signal:
+      - egg-yolk
+      - egg-embryo
+    sim:
+      set:
+        frog-view: egg
+        chicken-view: egg
+        egg-open: true
+        fertilised: true
+        compare-view: chicken
+    caption:
+      en: The yolk provides nourishment. The yolk and the developing chick are different structures.
+      zh: 卵黄提供营养。卵黄与发育中的小鸡是不同的结构。
+  - view: assembled
+    explode: 0
+    part: null
+    run: false
+    cutaway: none
+    pose: null
+    layers: *id001
+    hide:
+    - frog-eggs
+    - frog-tadpole
+    - frog-hind-legs
+    - frog-froglet
+    - frog-adult
+    - frog-marker
+    - frog-next-generation
+    - frog-tray
+    - compare-frog
+    - compare-chicken
+    - compare-mosquito
+    - compare-plant
+    - comparison-marker
+    - comparison-tray
+    ghost: []
+    labels:
+    - egg-yolk
+    camera:
+      position:
+      - 3.8
+      - 2.3
+      - 0.5
+      target:
+      - 2.8
+      - 0.5
+      - -1.4
+      fov: 30
+    highlight:
+      signal:
+      - egg-yolk
+    sim:
+      set:
+        frog-view: egg
+        chicken-view: egg
+        egg-open: true
+        fertilised: false
+        compare-view: chicken
+    caption:
+      en: This example is unfertilised, so no developing chick is shown. Warmth does not fertilise an egg.
+      zh: 这个例子没有受精，因此不显示发育中的小鸡。温暖不会使卵受精。
+  - view: assembled
+    explode: 0
+    part: null
+    run: false
+    cutaway: none
+    pose: null
+    layers: *id001
+    hide:
+    - frog-eggs
+    - frog-tadpole
+    - frog-hind-legs
+    - frog-froglet
+    - frog-adult
+    - frog-marker
+    - frog-next-generation
+    - frog-tray
+    - compare-frog
+    - compare-chicken
+    - compare-mosquito
+    - compare-plant
+    - comparison-marker
+    - comparison-tray
+    ghost: []
+    labels:
+    - egg-embryo
+    camera:
+      position:
+      - 3.8
+      - 2.3
+      - 0.5
+      target:
+      - 2.8
+      - 0.5
+      - -1.4
+      fov: 30
+    highlight:
+      signal:
+      - egg-embryo
+    sim:
+      set:
+        frog-view: egg
+        chicken-view: egg
+        egg-open: true
+        fertilised: true
+        compare-view: chicken
+    caption:
+      en: A fertilised chicken egg normally hatches after about twenty-one days of suitable incubation. Fertilisation alone
+        does not guarantee hatching.
+      zh: 鸡的受精卵在适宜条件下孵化，通常约二十一天孵出。仅有受精并不能保证孵出。
+  index:
+    parts:
+    - chicken-egg
+    - egg-shell-window
+    - egg-yolk
+    - egg-white
+    - egg-embryo
+---
+
+<Lang en>
+
+The closed chicken egg hides what is inside. Development begins before hatching, so an unbroken shell does not mean that nothing is happening. Open the model's shell window to inspect the contents. This movable piece is a teaching device. A real developing egg does not open a neat window and then close it again.
+
+Inside, find the small embryo and the <Term id="yolk">yolk</Term> beside it. They are different structures. The yolk supplies nourishment for the developing young animal; it is not itself a small, complete chick. Egg white surrounds the yolk. The model separates these structures so that you can select them, and its embryo is a schematic shape without a stated age. <FlyTo preset="egg-close">Inspect the egg window</FlyTo>
+
+A chick can develop only from a fertilised egg. <Term id="fertilisation">Fertilisation</Term> is the joining of male and female reproductive cells. In a chicken, it happens before the shell is added and the egg is laid. Warmth does not fertilise an egg. Switching the control compares a fertilised example with an unfertilised example; it does not perform fertilisation on one egg.
+
+Keep the window open and predict whether the embryo will be shown in the unfertilised example. Then reveal that view. No developing embryo is shown there. A fertilised egg also needs suitable incubation conditions: fertilisation alone does not promise a chick. Normal chicken incubation is about <Num s="S8">21 days</Num>, counted from suitable incubation, rather than from buying an egg. This observation model has no hatch countdown and gives no instructions for incubating eggs.
+
+<More title={{"en": "A shell that exchanges gases", "zh": "能交换气体的蛋壳"}}>
+
+During development, oxygen enters and carbon dioxide leaves through pores in the shell. The shell encloses the contents but does not seal them off from all gas exchange. The model does not show these tiny pores or simulate breathing inside the egg.
+
+</More>
+
+<More title={{"en": "Hidden is a view description", "zh": "“不显示”说的是视图"}}>
+
+Closing the window hides the embryo even in the fertilised example. Opening the unfertilised example also gives “no embryo shown”, for a different reason. Read the development-condition label alongside the view label. Neither label is a calculation of death or a prediction of hatch success.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+完整的鸡卵，外面看不到内部。发育在孵出以前就已开始，所以蛋壳还没破，不等于里面没有变化。打开模型的壳窗，就能查看内部。这片可以移开的壳是讲解用的安排；真实发育中的卵，不会开出整齐的窗口，再把窗口关起来。
+
+里面的小胚胎和旁边的<Term id="yolk">卵黄</Term>是不同结构。卵黄为发育中的幼体提供营养，本身不是一只完整的小鸡。卵白围在卵黄外面。模型把这些结构分开画，方便分别选中；胚胎只是没有指定日龄的示意轮廓。<FlyTo preset="egg-close">近看卵的示意窗</FlyTo>
+
+只有受精卵才可能发育出雏鸡。<Term id="fertilisation">受精</Term>是雄性和雌性生殖细胞结合。鸡的受精发生在加上蛋壳、产卵以前，温暖不会使卵受精。切换控件，是比较受精和未受精的两个例子，不是在同一枚卵上执行受精。
+
+保持窗口打开，先猜未受精的例子会不会显示胚胎，再揭晓视图。这里不显示发育中的胚胎。受精卵还需要适宜的孵化条件，受精本身不保证孵出。鸡卵正常孵化通常约需 <Num s="S8">21 天</Num>，从适宜的孵化培育开始算，不是从买到卵时算。这个观察模型没有孵出倒计时，也不提供照着操作的孵化步骤。
+
+<More title={{"en": "A shell that exchanges gases", "zh": "能交换气体的蛋壳"}}>
+
+发育时，氧气经过蛋壳上的气孔进入，二氧化碳从气孔离开。蛋壳包围卵内结构，却没有隔绝所有气体交换。模型没有画出细小气孔，也没有模拟卵内的呼吸过程。
+
+</More>
+
+<More title={{"en": "Hidden is a view description", "zh": "“不显示”说的是视图"}}>
+
+即使是受精的例子，关窗也会挡住胚胎；打开未受精的例子，同样会得到“不显示胚胎”，原因却不同。要把发育条件与视图标签一起读。“不显示”不是计算出了死亡，也不是在预测孵出成功率。
+
+</More>
+
+</Lang>

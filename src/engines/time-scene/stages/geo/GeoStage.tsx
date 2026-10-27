@@ -12,13 +12,17 @@ import type { TimeSceneExt } from '../../index';
 import type { TimeModel } from '../../lib/model';
 import type { Playhead } from '../../lib/playhead';
 import type { DatedLayerLoaded } from '../../lib/datedLayers';
-import type { GeoController } from './controller';
+import type { GeoController, GeoControllerOptions } from './controller';
+import type { ReconstructionManifest } from '../../deep-time';
+import type { ReconstructionStats } from '../../lib/reconstruction';
 
 export interface GeoStageProps {
   store: SceneStore<TimeSceneExt>;
   playhead: Playhead;
   model: TimeModel;
   locale: Locale;
+  reconstruction?: ReconstructionManifest;
+  onReconstruction?(stats: ReconstructionStats): void;
   onSelectEvent(id: string): void;
   onSelectCatalogue?(id: string): void;
   onCatalogueLayers?(layers: import('../../lib/catalogue').CatalogueLayer[]): void;
@@ -29,7 +33,7 @@ export interface GeoStageProps {
   onDatedLayers?(info: DatedLayerLoaded[]): void;
 }
 
-export function GeoStage({ store, playhead, model, locale, onSelectEvent, onSelectCatalogue, onCatalogueLayers, onController, onLocalLand, onDatedLayers }: GeoStageProps) {
+export function GeoStage({ store, playhead, model, locale, reconstruction, onReconstruction, onSelectEvent, onSelectCatalogue, onCatalogueLayers, onController, onLocalLand, onDatedLayers }: GeoStageProps) {
   const t = useT();
   const { slots, topic } = useSceneContext();
   const leadersSvg = slots.leaders;
@@ -54,6 +58,8 @@ export function GeoStage({ store, playhead, model, locale, onSelectEvent, onSele
   localLandCb.current = onLocalLand;
   const datedLayersCb = useRef(onDatedLayers);
   datedLayersCb.current = onDatedLayers;
+  const reconstructionCb = useRef(onReconstruction);
+  reconstructionCb.current = onReconstruction;
   const localeRef = useRef(locale);
   localeRef.current = locale;
   const svgRef = useRef<SVGSVGElement | null>(null);
@@ -67,8 +73,10 @@ export function GeoStage({ store, playhead, model, locale, onSelectEvent, onSele
     const territoryRoot = territoryRef.current;
     if (!container || !labelRoot || !scaleRoot || !territoryRoot) return;
     let cancelled = false;
-    import('./controller')
-      .then(({ createGeoController }) => {
+    const factory = reconstruction
+      ? import('../../reconstruction-map').then(({ createReconstructionMap }) => ({ createGeoController: (options: GeoControllerOptions) => createReconstructionMap(options, reconstruction!) }))
+      : import('./controller');
+    factory.then(({ createGeoController }) => {
         if (cancelled) return;
         const controller = createGeoController({
           container,
@@ -78,6 +86,8 @@ export function GeoStage({ store, playhead, model, locale, onSelectEvent, onSele
           store,
           playhead,
           model,
+          reconstruction,
+          onReconstruction: (info) => reconstructionCb.current?.(info),
           locale: localeRef.current,
           blocLabels: blocLabelsRef.current,
           basemap: basemapRef.current,
@@ -104,7 +114,7 @@ export function GeoStage({ store, playhead, model, locale, onSelectEvent, onSele
       controllerRef.current = null;
       controllerCb.current(null);
     };
-  }, [store, playhead, model]);
+  }, [store, playhead, model, reconstruction]);
 
   useEffect(() => {
     controllerRef.current?.setLocale(locale);

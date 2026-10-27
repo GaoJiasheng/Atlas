@@ -21,6 +21,8 @@
  * Loaded lazily (dynamic import) so MapLibre stays out of the View chunk.
  */
 import { Map as MlMap, Marker, type GeoJSONSource } from 'maplibre-gl';
+import type { ReconstructionManifest } from '../../deep-time';
+import type { ReconstructionStats } from '../../lib/reconstruction';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import type { Feature, FeatureCollection } from 'geojson';
 import { feature as topoFeature } from 'topojson-client';
@@ -72,6 +74,8 @@ export interface GeoControllerOptions {
   strings?: EntityStrings;
   /** Optional static point, line or area sources with numeric year windows. */
   datedLayers?: readonly DatedLayerDef[];
+  reconstruction?: ReconstructionManifest;
+  onReconstruction?(stats: ReconstructionStats): void;
   onSelectEvent(id: string): void;
   onSelectCatalogue?(id: string): void;
   onCatalogueLayers?(layers: CatalogueLayer[]): void;
@@ -101,7 +105,8 @@ export interface GeoController {
   fitCamera(): GeoCamera | null;
   /** Regional plate: the camera that shows the whole plate (the first preset); null on the world map. */
   plateCamera(): GeoCamera | null;
-  stats(): { features: number; zoom: number; datedLayers: Record<string, DatedLayerStats> };
+  stats(): { features: number; zoom: number; datedLayers: Record<string, DatedLayerStats>; reconstruction?: ReconstructionStats };
+  reconstructionStats?(): ReconstructionStats;
   /** Viewport CSS position of a catalogue anchor (dated geo stage only). */
   catalogueScreen?(at: [number, number]): [number, number];
   destroy(): void;
@@ -172,6 +177,8 @@ function hatchImage(color: string, pixelRatio: number): ImageData | null {
 /* ------------------------------------------------------------------ */
 
 export function createGeoController(options: GeoControllerOptions): GeoController {
+  // GeoStage loads `reconstruction-map` for these topics; never build the modern style or fetch a modern source for one.
+  if (options.reconstruction || options.basemap?.reconstruction) throw new Error('A reconstruction topic needs reconstruction-map, not the historical controller');
   const { container, store, playhead, model } = options;
   let locale = options.locale;
   let tokens = readThemeTokens();
