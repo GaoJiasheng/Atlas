@@ -1,0 +1,9423 @@
+{
+  "parts": [
+    {
+      "id": "mud-bank",
+      "name": {
+        "en": "Mud bank",
+        "zh": "泥岸"
+      },
+      "group": "habitat",
+      "summary": {
+        "en": "Supports roots and marks the exposed habitat.",
+        "zh": "承托树根，标出露泥的生境。"
+      },
+      "detail": {
+        "en": "The mud bank gives this teaching scene a surface, with a lower channel along the front. Tide poses change which surfaces appear covered. [S27, S30]\n\nThis is an independent habitat model. Its outline, dimensions and drawn numbers are design choices, not a survey of Sungei Buloh. [S30]",
+        "zh": "泥岸承托这幅教学场景，前缘有较低的潮沟；潮位姿态改变画面上被水覆盖的区域。[S27, S30]\n\n这是独立的生境模型；轮廓、尺寸和画出的数量都属于设计，不是双溪布洛测量结果。[S30]"
+      },
+      "primitive": {
+        "kind": "extrude",
+        "shape": [
+          [
+            -0.8,
+            -0.5
+          ],
+          [
+            0.8,
+            -0.5
+          ],
+          [
+            0.8,
+            0.17
+          ],
+          [
+            0.64,
+            0.2
+          ],
+          [
+            0.44,
+            0.17
+          ],
+          [
+            0.22,
+            0.24
+          ],
+          [
+            0.03,
+            0.19
+          ],
+          [
+            -0.2,
+            0.24
+          ],
+          [
+            -0.42,
+            0.18
+          ],
+          [
+            -0.8,
+            0.24
+          ]
+        ],
+        "depth": 0.24,
+        "at": [
+          0,
+          -0.12,
+          0
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "color": "abrasive",
+        "tint": "token:neutral"
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "size": [
+            1.6,
+            0.06,
+            0.3
+          ],
+          "color": "abrasive",
+          "tint": "token:neutral",
+          "at": [
+            0,
+            -0.21,
+            0.35
+          ]
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "clip": true,
+      "castShadow": true,
+      "shell": true
+    },
+    {
+      "id": "tidal-water",
+      "name": {
+        "en": "Tidal water",
+        "zh": "潮水"
+      },
+      "group": "habitat",
+      "summary": {
+        "en": "Shows low and high water as two schematic poses.",
+        "zh": "以两种示意姿态显示低潮和高潮。"
+      },
+      "detail": {
+        "en": "Incoming tide changes the physical conditions around the mud bank. The water surface moves between two illustrative positions. [S27, S30]\n\nThese are not tide heights, a tide prediction or a water-volume calculation. The food graph uses the same links in both poses. [S30]",
+        "zh": "潮水涨落改变泥岸周围的条件；这里的水面只在两个示意位置间移动。[S27, S30]\n\n这些位置不是实测潮高或潮汐预报，也不计算水量；两种姿态使用相同的食物关系。[S30]"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          1.58,
+          0.008,
+          0.99
+        ],
+        "color": "glass",
+        "tint": "token:cold",
+        "at": [
+          0,
+          -0.04,
+          0
+        ]
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "clip": false,
+      "castShadow": false
+    },
+    {
+      "id": "burrow-mouth",
+      "name": {
+        "en": "Burrow opening",
+        "zh": "洞口"
+      },
+      "group": "habitat",
+      "summary": {
+        "en": "Marks a refuge used by fiddler crabs.",
+        "zh": "标示招潮蟹可躲藏的洞口。"
+      },
+      "detail": {
+        "en": "Fiddler crabs retreat into burrows during high tide. The opening remains visible as a separate habitat feature. [S5]\n\nThis short opening does not reconstruct the shape, depth or air supply of a real burrow. [S30]",
+        "zh": "招潮蟹在高潮时会退入洞中；洞口是独立的生境结构，即使蟹隐藏也仍然保留。[S5]\n\n这里只显示一个短洞口，没有重建真实洞穴的形状、深度或供气情况。[S30]"
+      },
+      "primitive": {
+        "kind": "sweep",
+        "at": [
+          -0.26,
+          0.008,
+          0.12
+        ],
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            -0.04,
+            0
+          ]
+        ],
+        "radius": 0.026,
+        "hollow": 0.007,
+        "radial": 16,
+        "segments": 4,
+        "color": "abrasive",
+        "tint": "token:ink-2"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "clip": false,
+      "castShadow": false
+    },
+    {
+      "id": "api-tree",
+      "name": {
+        "en": "Api-api Putih tree",
+        "zh": "Api-api Putih 红树"
+      },
+      "group": "mangroves",
+      "summary": {
+        "en": "Leaves make food and can excrete salt.",
+        "zh": "叶片制造食物，并能排出盐分。"
+      },
+      "detail": {
+        "en": "Api-api Putih (Avicennia alba) has leaves with salt glands. This salt-handling feature belongs to this named plant, not every mangrove. [S3]\n\nIts shallow lateral roots connect to upright pencil-shaped breathing roots. The neighbouring Bakau is a separate tree. [S2, S3]",
+        "zh": "Api-api Putih（Avicennia alba）的叶片有盐腺；这种排盐方式属于这株具名植物，不能推广到所有红树。[S3]\n\n它的浅侧根与直立的铅笔状呼吸根相连；旁边的 Bakau 是另一株独立的树。[S2, S3]"
+      },
+      "primitive": {
+        "kind": "sweep",
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.015,
+            0.25,
+            0.005
+          ],
+          [
+            -0.018,
+            0.48,
+            -0.015
+          ],
+          [
+            0,
+            0.74,
+            0.015
+          ]
+        ],
+        "radius": [
+          0.042,
+          0.034,
+          0.023,
+          0.009
+        ],
+        "radial": 8,
+        "color": "wood",
+        "tint": "token:neutral",
+        "segments": 18,
+        "caps": "round",
+        "at": [
+          -0.46,
+          -0.03,
+          -0.13
+        ]
+      },
+      "extra": [
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -0.099,
+              0.15,
+              -0.022
+            ],
+            [
+              -0.18,
+              0.25,
+              -0.04
+            ]
+          ],
+          "radius": [
+            0.024,
+            0.015,
+            0.007
+          ],
+          "radial": 8,
+          "color": "wood",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            -0.46,
+            0.31,
+            -0.13
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.0825,
+              0.21,
+              0.022
+            ],
+            [
+              0.15,
+              0.31,
+              0.04
+            ]
+          ],
+          "radius": [
+            0.024,
+            0.015,
+            0.007
+          ],
+          "radial": 8,
+          "color": "wood",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            -0.46,
+            0.31,
+            -0.13
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -0.044,
+              0.3,
+              0.011
+            ],
+            [
+              -0.08,
+              0.4,
+              0.02
+            ]
+          ],
+          "radius": [
+            0.024,
+            0.015,
+            0.007
+          ],
+          "radial": 8,
+          "color": "wood",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            -0.46,
+            0.31,
+            -0.13
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.066,
+              0.06,
+              -0.088
+            ],
+            [
+              0.12,
+              0.16,
+              -0.16
+            ]
+          ],
+          "radius": [
+            0.024,
+            0.015,
+            0.007
+          ],
+          "radial": 8,
+          "color": "wood",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            -0.46,
+            0.31,
+            -0.13
+          ]
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.02375,
+              0.02217
+            ],
+            [
+              0.0475,
+              0.02976
+            ],
+            [
+              0.07125,
+              0.03309
+            ],
+            [
+              0.095,
+              0.03316
+            ],
+            [
+              0.11875,
+              0.03042
+            ],
+            [
+              0.1425,
+              0.02502
+            ],
+            [
+              0.16625,
+              0.01671
+            ],
+            [
+              0.19,
+              0
+            ],
+            [
+              0.16625,
+              -0.01671
+            ],
+            [
+              0.1425,
+              -0.02502
+            ],
+            [
+              0.11875,
+              -0.03042
+            ],
+            [
+              0.095,
+              -0.03316
+            ],
+            [
+              0.07125,
+              -0.03309
+            ],
+            [
+              0.0475,
+              -0.02976
+            ],
+            [
+              0.02375,
+              -0.02217
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            -101.30993,
+            20.84163,
+            -169.61389
+          ],
+          "color": "tissue",
+          "tint": "token:seedling",
+          "at": [
+            -0.64,
+            0.56,
+            -0.17
+          ]
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.025,
+              0.02316
+            ],
+            [
+              0.05,
+              0.03109
+            ],
+            [
+              0.075,
+              0.03457
+            ],
+            [
+              0.1,
+              0.03465
+            ],
+            [
+              0.125,
+              0.03178
+            ],
+            [
+              0.15,
+              0.02614
+            ],
+            [
+              0.175,
+              0.01746
+            ],
+            [
+              0.2,
+              0
+            ],
+            [
+              0.175,
+              -0.01746
+            ],
+            [
+              0.15,
+              -0.02614
+            ],
+            [
+              0.125,
+              -0.03178
+            ],
+            [
+              0.1,
+              -0.03465
+            ],
+            [
+              0.075,
+              -0.03457
+            ],
+            [
+              0.05,
+              -0.03109
+            ],
+            [
+              0.025,
+              -0.02316
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            78.69007,
+            33.50025,
+            -5.83601
+          ],
+          "color": "tissue",
+          "tint": "token:seedling",
+          "at": [
+            -0.64,
+            0.56,
+            -0.17
+          ]
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.02125,
+              0.01985
+            ],
+            [
+              0.0425,
+              0.02665
+            ],
+            [
+              0.06375,
+              0.02963
+            ],
+            [
+              0.085,
+              0.0297
+            ],
+            [
+              0.10625,
+              0.02724
+            ],
+            [
+              0.1275,
+              0.0224
+            ],
+            [
+              0.14875,
+              0.01497
+            ],
+            [
+              0.17,
+              0
+            ],
+            [
+              0.14875,
+              -0.01497
+            ],
+            [
+              0.1275,
+              -0.0224
+            ],
+            [
+              0.10625,
+              -0.02724
+            ],
+            [
+              0.085,
+              -0.0297
+            ],
+            [
+              0.06375,
+              -0.02963
+            ],
+            [
+              0.0425,
+              -0.02665
+            ],
+            [
+              0.02125,
+              -0.01985
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            78.69007,
+            66.54113,
+            56.36075
+          ],
+          "color": "tissue",
+          "tint": "token:seedling",
+          "at": [
+            -0.64,
+            0.56,
+            -0.17
+          ]
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.02375,
+              0.02217
+            ],
+            [
+              0.0475,
+              0.02976
+            ],
+            [
+              0.07125,
+              0.03309
+            ],
+            [
+              0.095,
+              0.03316
+            ],
+            [
+              0.11875,
+              0.03042
+            ],
+            [
+              0.1425,
+              0.02502
+            ],
+            [
+              0.16625,
+              0.01671
+            ],
+            [
+              0.19,
+              0
+            ],
+            [
+              0.16625,
+              -0.01671
+            ],
+            [
+              0.1425,
+              -0.02502
+            ],
+            [
+              0.11875,
+              -0.03042
+            ],
+            [
+              0.095,
+              -0.03316
+            ],
+            [
+              0.07125,
+              -0.03309
+            ],
+            [
+              0.0475,
+              -0.02976
+            ],
+            [
+              0.02375,
+              -0.02217
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            -101.30993,
+            20.84163,
+            -169.61389
+          ],
+          "color": "tissue",
+          "tint": "token:seedling",
+          "at": [
+            -0.31,
+            0.62,
+            -0.09
+          ]
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.025,
+              0.02316
+            ],
+            [
+              0.05,
+              0.03109
+            ],
+            [
+              0.075,
+              0.03457
+            ],
+            [
+              0.1,
+              0.03465
+            ],
+            [
+              0.125,
+              0.03178
+            ],
+            [
+              0.15,
+              0.02614
+            ],
+            [
+              0.175,
+              0.01746
+            ],
+            [
+              0.2,
+              0
+            ],
+            [
+              0.175,
+              -0.01746
+            ],
+            [
+              0.15,
+              -0.02614
+            ],
+            [
+              0.125,
+              -0.03178
+            ],
+            [
+              0.1,
+              -0.03465
+            ],
+            [
+              0.075,
+              -0.03457
+            ],
+            [
+              0.05,
+              -0.03109
+            ],
+            [
+              0.025,
+              -0.02316
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            78.69007,
+            33.50025,
+            -5.83601
+          ],
+          "color": "tissue",
+          "tint": "token:seedling",
+          "at": [
+            -0.31,
+            0.62,
+            -0.09
+          ]
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.02125,
+              0.01985
+            ],
+            [
+              0.0425,
+              0.02665
+            ],
+            [
+              0.06375,
+              0.02963
+            ],
+            [
+              0.085,
+              0.0297
+            ],
+            [
+              0.10625,
+              0.02724
+            ],
+            [
+              0.1275,
+              0.0224
+            ],
+            [
+              0.14875,
+              0.01497
+            ],
+            [
+              0.17,
+              0
+            ],
+            [
+              0.14875,
+              -0.01497
+            ],
+            [
+              0.1275,
+              -0.0224
+            ],
+            [
+              0.10625,
+              -0.02724
+            ],
+            [
+              0.085,
+              -0.0297
+            ],
+            [
+              0.06375,
+              -0.02963
+            ],
+            [
+              0.0425,
+              -0.02665
+            ],
+            [
+              0.02125,
+              -0.01985
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            78.69007,
+            66.54113,
+            56.36075
+          ],
+          "color": "tissue",
+          "tint": "token:seedling",
+          "at": [
+            -0.31,
+            0.62,
+            -0.09
+          ]
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.02375,
+              0.02217
+            ],
+            [
+              0.0475,
+              0.02976
+            ],
+            [
+              0.07125,
+              0.03309
+            ],
+            [
+              0.095,
+              0.03316
+            ],
+            [
+              0.11875,
+              0.03042
+            ],
+            [
+              0.1425,
+              0.02502
+            ],
+            [
+              0.16625,
+              0.01671
+            ],
+            [
+              0.19,
+              0
+            ],
+            [
+              0.16625,
+              -0.01671
+            ],
+            [
+              0.1425,
+              -0.02502
+            ],
+            [
+              0.11875,
+              -0.03042
+            ],
+            [
+              0.095,
+              -0.03316
+            ],
+            [
+              0.07125,
+              -0.03309
+            ],
+            [
+              0.0475,
+              -0.02976
+            ],
+            [
+              0.02375,
+              -0.02217
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            -101.30993,
+            20.84163,
+            -169.61389
+          ],
+          "color": "tissue",
+          "tint": "token:seedling",
+          "at": [
+            -0.54,
+            0.71,
+            -0.11
+          ]
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.025,
+              0.02316
+            ],
+            [
+              0.05,
+              0.03109
+            ],
+            [
+              0.075,
+              0.03457
+            ],
+            [
+              0.1,
+              0.03465
+            ],
+            [
+              0.125,
+              0.03178
+            ],
+            [
+              0.15,
+              0.02614
+            ],
+            [
+              0.175,
+              0.01746
+            ],
+            [
+              0.2,
+              0
+            ],
+            [
+              0.175,
+              -0.01746
+            ],
+            [
+              0.15,
+              -0.02614
+            ],
+            [
+              0.125,
+              -0.03178
+            ],
+            [
+              0.1,
+              -0.03465
+            ],
+            [
+              0.075,
+              -0.03457
+            ],
+            [
+              0.05,
+              -0.03109
+            ],
+            [
+              0.025,
+              -0.02316
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            78.69007,
+            33.50025,
+            -5.83601
+          ],
+          "color": "tissue",
+          "tint": "token:seedling",
+          "at": [
+            -0.54,
+            0.71,
+            -0.11
+          ]
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.02125,
+              0.01985
+            ],
+            [
+              0.0425,
+              0.02665
+            ],
+            [
+              0.06375,
+              0.02963
+            ],
+            [
+              0.085,
+              0.0297
+            ],
+            [
+              0.10625,
+              0.02724
+            ],
+            [
+              0.1275,
+              0.0224
+            ],
+            [
+              0.14875,
+              0.01497
+            ],
+            [
+              0.17,
+              0
+            ],
+            [
+              0.14875,
+              -0.01497
+            ],
+            [
+              0.1275,
+              -0.0224
+            ],
+            [
+              0.10625,
+              -0.02724
+            ],
+            [
+              0.085,
+              -0.0297
+            ],
+            [
+              0.06375,
+              -0.02963
+            ],
+            [
+              0.0425,
+              -0.02665
+            ],
+            [
+              0.02125,
+              -0.01985
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            78.69007,
+            66.54113,
+            56.36075
+          ],
+          "color": "tissue",
+          "tint": "token:seedling",
+          "at": [
+            -0.54,
+            0.71,
+            -0.11
+          ]
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.02375,
+              0.02217
+            ],
+            [
+              0.0475,
+              0.02976
+            ],
+            [
+              0.07125,
+              0.03309
+            ],
+            [
+              0.095,
+              0.03316
+            ],
+            [
+              0.11875,
+              0.03042
+            ],
+            [
+              0.1425,
+              0.02502
+            ],
+            [
+              0.16625,
+              0.01671
+            ],
+            [
+              0.19,
+              0
+            ],
+            [
+              0.16625,
+              -0.01671
+            ],
+            [
+              0.1425,
+              -0.02502
+            ],
+            [
+              0.11875,
+              -0.03042
+            ],
+            [
+              0.095,
+              -0.03316
+            ],
+            [
+              0.07125,
+              -0.03309
+            ],
+            [
+              0.0475,
+              -0.02976
+            ],
+            [
+              0.02375,
+              -0.02217
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            -101.30993,
+            20.84163,
+            -169.61389
+          ],
+          "color": "tissue",
+          "tint": "token:seedling",
+          "at": [
+            -0.34,
+            0.47,
+            -0.29
+          ]
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.025,
+              0.02316
+            ],
+            [
+              0.05,
+              0.03109
+            ],
+            [
+              0.075,
+              0.03457
+            ],
+            [
+              0.1,
+              0.03465
+            ],
+            [
+              0.125,
+              0.03178
+            ],
+            [
+              0.15,
+              0.02614
+            ],
+            [
+              0.175,
+              0.01746
+            ],
+            [
+              0.2,
+              0
+            ],
+            [
+              0.175,
+              -0.01746
+            ],
+            [
+              0.15,
+              -0.02614
+            ],
+            [
+              0.125,
+              -0.03178
+            ],
+            [
+              0.1,
+              -0.03465
+            ],
+            [
+              0.075,
+              -0.03457
+            ],
+            [
+              0.05,
+              -0.03109
+            ],
+            [
+              0.025,
+              -0.02316
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            78.69007,
+            33.50025,
+            -5.83601
+          ],
+          "color": "tissue",
+          "tint": "token:seedling",
+          "at": [
+            -0.34,
+            0.47,
+            -0.29
+          ]
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.02125,
+              0.01985
+            ],
+            [
+              0.0425,
+              0.02665
+            ],
+            [
+              0.06375,
+              0.02963
+            ],
+            [
+              0.085,
+              0.0297
+            ],
+            [
+              0.10625,
+              0.02724
+            ],
+            [
+              0.1275,
+              0.0224
+            ],
+            [
+              0.14875,
+              0.01497
+            ],
+            [
+              0.17,
+              0
+            ],
+            [
+              0.14875,
+              -0.01497
+            ],
+            [
+              0.1275,
+              -0.0224
+            ],
+            [
+              0.10625,
+              -0.02724
+            ],
+            [
+              0.085,
+              -0.0297
+            ],
+            [
+              0.06375,
+              -0.02963
+            ],
+            [
+              0.0425,
+              -0.02665
+            ],
+            [
+              0.02125,
+              -0.01985
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            78.69007,
+            66.54113,
+            56.36075
+          ],
+          "color": "tissue",
+          "tint": "token:seedling",
+          "at": [
+            -0.34,
+            0.47,
+            -0.29
+          ]
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "clip": false,
+      "castShadow": true,
+      "connects": [
+        "api-lateral"
+      ]
+    },
+    {
+      "id": "api-lateral",
+      "name": {
+        "en": "Shallow lateral roots",
+        "zh": "浅侧根"
+      },
+      "group": "mangroves",
+      "summary": {
+        "en": "Connects the tree to its breathing roots.",
+        "zh": "把树体与呼吸根连接起来。"
+      },
+      "detail": {
+        "en": "Avicennia alba develops shallow lateral roots below the muddy surface. Upright breathing roots arise from this connected system. [S3]\n\nThe cutaway exposes the connection; the spacing and thickness here are schematic. [S30]",
+        "zh": "Avicennia alba 的浅侧根在泥面下延伸；直立的呼吸根从这套相连的根系长出。[S3]\n\n剖切让连接关系显露出来；这里的间距和粗细都是示意。[S30]"
+      },
+      "primitive": {
+        "kind": "sweep",
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            -0.06,
+            -0.01,
+            0.105
+          ],
+          [
+            -0.12,
+            -0.005,
+            0.225
+          ],
+          [
+            -0.18,
+            -0.003,
+            0.29
+          ]
+        ],
+        "radius": [
+          0.022,
+          0.018,
+          0.014,
+          0.009
+        ],
+        "radial": 8,
+        "color": "wood",
+        "tint": "token:neutral",
+        "segments": 18,
+        "caps": "round",
+        "at": [
+          -0.46,
+          -0.035,
+          -0.13
+        ]
+      },
+      "extra": [
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.15,
+              0,
+              0.07
+            ],
+            [
+              0.23,
+              0.005,
+              0.155
+            ]
+          ],
+          "radius": [
+            0.016,
+            0.011,
+            0.006
+          ],
+          "radial": 8,
+          "color": "wood",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            -0.52,
+            -0.045,
+            -0.025
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -0.15,
+              0,
+              -0.015
+            ]
+          ],
+          "radius": [
+            0.01,
+            0.005
+          ],
+          "radial": 8,
+          "color": "wood",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            -0.58,
+            -0.04,
+            0.095
+          ]
+        }
+      ],
+      "explode": {
+        "dir": [
+          -0.5,
+          0,
+          0.5
+        ],
+        "dist": 0.13
+      },
+      "clip": false,
+      "castShadow": false,
+      "connects": [
+        "api-tree",
+        "api-pencil"
+      ]
+    },
+    {
+      "id": "api-pencil",
+      "name": {
+        "en": "Pencil breathing roots",
+        "zh": "铅笔状呼吸根"
+      },
+      "group": "mangroves",
+      "summary": {
+        "en": "Protrudes above mud to help gas exchange.",
+        "zh": "伸出泥面，帮助气体交换。"
+      },
+      "detail": {
+        "en": "Pencil-shaped breathing roots protrude vertically from the shallow lateral root system and take in oxygen. [S2, S3]\n\nEvery upright root in this model joins a lateral branch below the mud. The drawn heights are design values. [S30]",
+        "zh": "铅笔状呼吸根从浅侧根系统直立伸出泥面，吸收氧气。[S2, S3]\n\n模型中的每根直立根都在泥下接上侧根；画出的高度属于设计值。[S30]"
+      },
+      "primitive": {
+        "kind": "sweep",
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.003,
+            0.085,
+            0
+          ],
+          [
+            0.005,
+            0.12,
+            0.002
+          ]
+        ],
+        "radius": [
+          0.011,
+          0.008,
+          0.0025
+        ],
+        "radial": 8,
+        "color": "wood",
+        "tint": "token:neutral",
+        "segments": 18,
+        "caps": "round",
+        "at": [
+          -0.52,
+          -0.045,
+          -0.025
+        ]
+      },
+      "extra": [
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.003,
+              0.106,
+              0
+            ],
+            [
+              0.005,
+              0.141,
+              0.002
+            ]
+          ],
+          "radius": [
+            0.011,
+            0.008,
+            0.0025
+          ],
+          "radial": 8,
+          "color": "wood",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            -0.58,
+            -0.04,
+            0.095
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.003,
+              0.13,
+              0
+            ],
+            [
+              0.005,
+              0.165,
+              0.002
+            ]
+          ],
+          "radius": [
+            0.011,
+            0.008,
+            0.0025
+          ],
+          "radial": 8,
+          "color": "wood",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            -0.64,
+            -0.038,
+            0.16
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.003,
+              0.085,
+              0
+            ],
+            [
+              0.005,
+              0.12,
+              0.002
+            ]
+          ],
+          "radius": [
+            0.011,
+            0.008,
+            0.0025
+          ],
+          "radial": 8,
+          "color": "wood",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            -0.37,
+            -0.045,
+            0.045
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.003,
+              0.106,
+              0
+            ],
+            [
+              0.005,
+              0.141,
+              0.002
+            ]
+          ],
+          "radius": [
+            0.011,
+            0.008,
+            0.0025
+          ],
+          "radial": 8,
+          "color": "wood",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            -0.29,
+            -0.04,
+            0.13
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.003,
+              0.132,
+              0
+            ],
+            [
+              0.005,
+              0.167,
+              0.002
+            ]
+          ],
+          "radius": [
+            0.011,
+            0.008,
+            0.0025
+          ],
+          "radial": 8,
+          "color": "wood",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            -0.73,
+            -0.04,
+            0.08
+          ]
+        }
+      ],
+      "explode": {
+        "dir": [
+          -0.5,
+          0.5,
+          0.5
+        ],
+        "dist": 0.13
+      },
+      "clip": false,
+      "castShadow": false,
+      "connects": [
+        "api-lateral"
+      ]
+    },
+    {
+      "id": "bakau-tree",
+      "name": {
+        "en": "Bakau Minyak tree",
+        "zh": "Bakau Minyak 红树"
+      },
+      "group": "mangroves",
+      "summary": {
+        "en": "Makes food and supplies leaf material.",
+        "zh": "制造食物，并提供叶片物质。"
+      },
+      "detail": {
+        "en": "This separate Bakau Minyak tree has prop roots descending from its trunk. Mangrove trees provide shelter and a supply of leaf material. [S2, S6, S8]\n\nThe food-web node represents continuing leaf supply. Removing that node does not make old fallen leaves disappear. [S30]",
+        "zh": "这株独立的 Bakau Minyak 有从树干向下延伸的支柱根；红树提供庇护和叶片物质。[S2, S6, S8]\n\n食物网节点表示持续的叶片供应；移走这个节点不会使已有落叶马上消失。[S30]"
+      },
+      "primitive": {
+        "kind": "sweep",
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.015,
+            0.25,
+            0.005
+          ],
+          [
+            -0.018,
+            0.48,
+            -0.015
+          ],
+          [
+            0,
+            0.81,
+            0.015
+          ]
+        ],
+        "radius": [
+          0.042,
+          0.034,
+          0.023,
+          0.009
+        ],
+        "radial": 8,
+        "color": "wood",
+        "tint": "token:neutral",
+        "segments": 18,
+        "caps": "round",
+        "at": [
+          0.18,
+          -0.03,
+          -0.25
+        ]
+      },
+      "extra": [
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -0.099,
+              0.15,
+              -0.022
+            ],
+            [
+              -0.18,
+              0.25,
+              -0.04
+            ]
+          ],
+          "radius": [
+            0.024,
+            0.015,
+            0.007
+          ],
+          "radial": 8,
+          "color": "wood",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            0.18,
+            0.31,
+            -0.25
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.0825,
+              0.21,
+              0.022
+            ],
+            [
+              0.15,
+              0.31,
+              0.04
+            ]
+          ],
+          "radius": [
+            0.024,
+            0.015,
+            0.007
+          ],
+          "radial": 8,
+          "color": "wood",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            0.18,
+            0.31,
+            -0.25
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -0.044,
+              0.37,
+              0.011
+            ],
+            [
+              -0.08,
+              0.47,
+              0.02
+            ]
+          ],
+          "radius": [
+            0.024,
+            0.015,
+            0.007
+          ],
+          "radial": 8,
+          "color": "wood",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            0.18,
+            0.31,
+            -0.25
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.066,
+              0.06,
+              -0.088
+            ],
+            [
+              0.12,
+              0.16,
+              -0.16
+            ]
+          ],
+          "radius": [
+            0.024,
+            0.015,
+            0.007
+          ],
+          "radial": 8,
+          "color": "wood",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            0.18,
+            0.31,
+            -0.25
+          ]
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.02375,
+              0.02217
+            ],
+            [
+              0.0475,
+              0.02976
+            ],
+            [
+              0.07125,
+              0.03309
+            ],
+            [
+              0.095,
+              0.03316
+            ],
+            [
+              0.11875,
+              0.03042
+            ],
+            [
+              0.1425,
+              0.02502
+            ],
+            [
+              0.16625,
+              0.01671
+            ],
+            [
+              0.19,
+              0
+            ],
+            [
+              0.16625,
+              -0.01671
+            ],
+            [
+              0.1425,
+              -0.02502
+            ],
+            [
+              0.11875,
+              -0.03042
+            ],
+            [
+              0.095,
+              -0.03316
+            ],
+            [
+              0.07125,
+              -0.03309
+            ],
+            [
+              0.0475,
+              -0.02976
+            ],
+            [
+              0.02375,
+              -0.02217
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            -101.30993,
+            20.84163,
+            -169.61389
+          ],
+          "color": "tissue",
+          "tint": "token:seedling",
+          "at": [
+            0,
+            0.56,
+            -0.29
+          ]
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.025,
+              0.02316
+            ],
+            [
+              0.05,
+              0.03109
+            ],
+            [
+              0.075,
+              0.03457
+            ],
+            [
+              0.1,
+              0.03465
+            ],
+            [
+              0.125,
+              0.03178
+            ],
+            [
+              0.15,
+              0.02614
+            ],
+            [
+              0.175,
+              0.01746
+            ],
+            [
+              0.2,
+              0
+            ],
+            [
+              0.175,
+              -0.01746
+            ],
+            [
+              0.15,
+              -0.02614
+            ],
+            [
+              0.125,
+              -0.03178
+            ],
+            [
+              0.1,
+              -0.03465
+            ],
+            [
+              0.075,
+              -0.03457
+            ],
+            [
+              0.05,
+              -0.03109
+            ],
+            [
+              0.025,
+              -0.02316
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            78.69007,
+            33.50025,
+            -5.83601
+          ],
+          "color": "tissue",
+          "tint": "token:seedling",
+          "at": [
+            0,
+            0.56,
+            -0.29
+          ]
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.02125,
+              0.01985
+            ],
+            [
+              0.0425,
+              0.02665
+            ],
+            [
+              0.06375,
+              0.02963
+            ],
+            [
+              0.085,
+              0.0297
+            ],
+            [
+              0.10625,
+              0.02724
+            ],
+            [
+              0.1275,
+              0.0224
+            ],
+            [
+              0.14875,
+              0.01497
+            ],
+            [
+              0.17,
+              0
+            ],
+            [
+              0.14875,
+              -0.01497
+            ],
+            [
+              0.1275,
+              -0.0224
+            ],
+            [
+              0.10625,
+              -0.02724
+            ],
+            [
+              0.085,
+              -0.0297
+            ],
+            [
+              0.06375,
+              -0.02963
+            ],
+            [
+              0.0425,
+              -0.02665
+            ],
+            [
+              0.02125,
+              -0.01985
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            78.69007,
+            66.54113,
+            56.36075
+          ],
+          "color": "tissue",
+          "tint": "token:seedling",
+          "at": [
+            0,
+            0.56,
+            -0.29
+          ]
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.02375,
+              0.02217
+            ],
+            [
+              0.0475,
+              0.02976
+            ],
+            [
+              0.07125,
+              0.03309
+            ],
+            [
+              0.095,
+              0.03316
+            ],
+            [
+              0.11875,
+              0.03042
+            ],
+            [
+              0.1425,
+              0.02502
+            ],
+            [
+              0.16625,
+              0.01671
+            ],
+            [
+              0.19,
+              0
+            ],
+            [
+              0.16625,
+              -0.01671
+            ],
+            [
+              0.1425,
+              -0.02502
+            ],
+            [
+              0.11875,
+              -0.03042
+            ],
+            [
+              0.095,
+              -0.03316
+            ],
+            [
+              0.07125,
+              -0.03309
+            ],
+            [
+              0.0475,
+              -0.02976
+            ],
+            [
+              0.02375,
+              -0.02217
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            -101.30993,
+            20.84163,
+            -169.61389
+          ],
+          "color": "tissue",
+          "tint": "token:seedling",
+          "at": [
+            0.33,
+            0.62,
+            -0.21
+          ]
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.025,
+              0.02316
+            ],
+            [
+              0.05,
+              0.03109
+            ],
+            [
+              0.075,
+              0.03457
+            ],
+            [
+              0.1,
+              0.03465
+            ],
+            [
+              0.125,
+              0.03178
+            ],
+            [
+              0.15,
+              0.02614
+            ],
+            [
+              0.175,
+              0.01746
+            ],
+            [
+              0.2,
+              0
+            ],
+            [
+              0.175,
+              -0.01746
+            ],
+            [
+              0.15,
+              -0.02614
+            ],
+            [
+              0.125,
+              -0.03178
+            ],
+            [
+              0.1,
+              -0.03465
+            ],
+            [
+              0.075,
+              -0.03457
+            ],
+            [
+              0.05,
+              -0.03109
+            ],
+            [
+              0.025,
+              -0.02316
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            78.69007,
+            33.50025,
+            -5.83601
+          ],
+          "color": "tissue",
+          "tint": "token:seedling",
+          "at": [
+            0.33,
+            0.62,
+            -0.21
+          ]
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.02125,
+              0.01985
+            ],
+            [
+              0.0425,
+              0.02665
+            ],
+            [
+              0.06375,
+              0.02963
+            ],
+            [
+              0.085,
+              0.0297
+            ],
+            [
+              0.10625,
+              0.02724
+            ],
+            [
+              0.1275,
+              0.0224
+            ],
+            [
+              0.14875,
+              0.01497
+            ],
+            [
+              0.17,
+              0
+            ],
+            [
+              0.14875,
+              -0.01497
+            ],
+            [
+              0.1275,
+              -0.0224
+            ],
+            [
+              0.10625,
+              -0.02724
+            ],
+            [
+              0.085,
+              -0.0297
+            ],
+            [
+              0.06375,
+              -0.02963
+            ],
+            [
+              0.0425,
+              -0.02665
+            ],
+            [
+              0.02125,
+              -0.01985
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            78.69007,
+            66.54113,
+            56.36075
+          ],
+          "color": "tissue",
+          "tint": "token:seedling",
+          "at": [
+            0.33,
+            0.62,
+            -0.21
+          ]
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.02375,
+              0.02217
+            ],
+            [
+              0.0475,
+              0.02976
+            ],
+            [
+              0.07125,
+              0.03309
+            ],
+            [
+              0.095,
+              0.03316
+            ],
+            [
+              0.11875,
+              0.03042
+            ],
+            [
+              0.1425,
+              0.02502
+            ],
+            [
+              0.16625,
+              0.01671
+            ],
+            [
+              0.19,
+              0
+            ],
+            [
+              0.16625,
+              -0.01671
+            ],
+            [
+              0.1425,
+              -0.02502
+            ],
+            [
+              0.11875,
+              -0.03042
+            ],
+            [
+              0.095,
+              -0.03316
+            ],
+            [
+              0.07125,
+              -0.03309
+            ],
+            [
+              0.0475,
+              -0.02976
+            ],
+            [
+              0.02375,
+              -0.02217
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            -101.30993,
+            20.84163,
+            -169.61389
+          ],
+          "color": "tissue",
+          "tint": "token:seedling",
+          "at": [
+            0.1,
+            0.78,
+            -0.23
+          ]
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.025,
+              0.02316
+            ],
+            [
+              0.05,
+              0.03109
+            ],
+            [
+              0.075,
+              0.03457
+            ],
+            [
+              0.1,
+              0.03465
+            ],
+            [
+              0.125,
+              0.03178
+            ],
+            [
+              0.15,
+              0.02614
+            ],
+            [
+              0.175,
+              0.01746
+            ],
+            [
+              0.2,
+              0
+            ],
+            [
+              0.175,
+              -0.01746
+            ],
+            [
+              0.15,
+              -0.02614
+            ],
+            [
+              0.125,
+              -0.03178
+            ],
+            [
+              0.1,
+              -0.03465
+            ],
+            [
+              0.075,
+              -0.03457
+            ],
+            [
+              0.05,
+              -0.03109
+            ],
+            [
+              0.025,
+              -0.02316
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            78.69007,
+            33.50025,
+            -5.83601
+          ],
+          "color": "tissue",
+          "tint": "token:seedling",
+          "at": [
+            0.1,
+            0.78,
+            -0.23
+          ]
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.02125,
+              0.01985
+            ],
+            [
+              0.0425,
+              0.02665
+            ],
+            [
+              0.06375,
+              0.02963
+            ],
+            [
+              0.085,
+              0.0297
+            ],
+            [
+              0.10625,
+              0.02724
+            ],
+            [
+              0.1275,
+              0.0224
+            ],
+            [
+              0.14875,
+              0.01497
+            ],
+            [
+              0.17,
+              0
+            ],
+            [
+              0.14875,
+              -0.01497
+            ],
+            [
+              0.1275,
+              -0.0224
+            ],
+            [
+              0.10625,
+              -0.02724
+            ],
+            [
+              0.085,
+              -0.0297
+            ],
+            [
+              0.06375,
+              -0.02963
+            ],
+            [
+              0.0425,
+              -0.02665
+            ],
+            [
+              0.02125,
+              -0.01985
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            78.69007,
+            66.54113,
+            56.36075
+          ],
+          "color": "tissue",
+          "tint": "token:seedling",
+          "at": [
+            0.1,
+            0.78,
+            -0.23
+          ]
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.02375,
+              0.02217
+            ],
+            [
+              0.0475,
+              0.02976
+            ],
+            [
+              0.07125,
+              0.03309
+            ],
+            [
+              0.095,
+              0.03316
+            ],
+            [
+              0.11875,
+              0.03042
+            ],
+            [
+              0.1425,
+              0.02502
+            ],
+            [
+              0.16625,
+              0.01671
+            ],
+            [
+              0.19,
+              0
+            ],
+            [
+              0.16625,
+              -0.01671
+            ],
+            [
+              0.1425,
+              -0.02502
+            ],
+            [
+              0.11875,
+              -0.03042
+            ],
+            [
+              0.095,
+              -0.03316
+            ],
+            [
+              0.07125,
+              -0.03309
+            ],
+            [
+              0.0475,
+              -0.02976
+            ],
+            [
+              0.02375,
+              -0.02217
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            -101.30993,
+            20.84163,
+            -169.61389
+          ],
+          "color": "tissue",
+          "tint": "token:seedling",
+          "at": [
+            0.3,
+            0.47,
+            -0.41
+          ]
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.025,
+              0.02316
+            ],
+            [
+              0.05,
+              0.03109
+            ],
+            [
+              0.075,
+              0.03457
+            ],
+            [
+              0.1,
+              0.03465
+            ],
+            [
+              0.125,
+              0.03178
+            ],
+            [
+              0.15,
+              0.02614
+            ],
+            [
+              0.175,
+              0.01746
+            ],
+            [
+              0.2,
+              0
+            ],
+            [
+              0.175,
+              -0.01746
+            ],
+            [
+              0.15,
+              -0.02614
+            ],
+            [
+              0.125,
+              -0.03178
+            ],
+            [
+              0.1,
+              -0.03465
+            ],
+            [
+              0.075,
+              -0.03457
+            ],
+            [
+              0.05,
+              -0.03109
+            ],
+            [
+              0.025,
+              -0.02316
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            78.69007,
+            33.50025,
+            -5.83601
+          ],
+          "color": "tissue",
+          "tint": "token:seedling",
+          "at": [
+            0.3,
+            0.47,
+            -0.41
+          ]
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.02125,
+              0.01985
+            ],
+            [
+              0.0425,
+              0.02665
+            ],
+            [
+              0.06375,
+              0.02963
+            ],
+            [
+              0.085,
+              0.0297
+            ],
+            [
+              0.10625,
+              0.02724
+            ],
+            [
+              0.1275,
+              0.0224
+            ],
+            [
+              0.14875,
+              0.01497
+            ],
+            [
+              0.17,
+              0
+            ],
+            [
+              0.14875,
+              -0.01497
+            ],
+            [
+              0.1275,
+              -0.0224
+            ],
+            [
+              0.10625,
+              -0.02724
+            ],
+            [
+              0.085,
+              -0.0297
+            ],
+            [
+              0.06375,
+              -0.02963
+            ],
+            [
+              0.0425,
+              -0.02665
+            ],
+            [
+              0.02125,
+              -0.01985
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            78.69007,
+            66.54113,
+            56.36075
+          ],
+          "color": "tissue",
+          "tint": "token:seedling",
+          "at": [
+            0.3,
+            0.47,
+            -0.41
+          ]
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "clip": false,
+      "castShadow": true,
+      "connects": [
+        "bakau-prop"
+      ]
+    },
+    {
+      "id": "bakau-prop",
+      "name": {
+        "en": "Prop roots",
+        "zh": "支柱根"
+      },
+      "group": "mangroves",
+      "summary": {
+        "en": "Anchors the tree and offers shelter.",
+        "zh": "支撑树体，并提供庇护。"
+      },
+      "detail": {
+        "en": "Bakau prop roots extend from the trunk towards the mud and anchor the tree. Root spaces also shelter young animals. [S2]\n\nThese roots belong to the Bakau, separate from the neighbouring Api-api pencil roots. [S30]",
+        "zh": "Bakau 的支柱根从树干向泥地延伸，支撑树体；根之间的空间也能为幼小动物提供庇护。[S2]\n\n这套根属于 Bakau，与邻株 Api-api 的铅笔状根分开。[S30]"
+      },
+      "primitive": {
+        "kind": "sweep",
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            -0.1075,
+            -0.07,
+            0.06
+          ],
+          [
+            -0.215,
+            -0.27,
+            0.12
+          ]
+        ],
+        "radius": [
+          0.025,
+          0.02,
+          0.013
+        ],
+        "radial": 8,
+        "color": "wood",
+        "tint": "token:neutral",
+        "segments": 18,
+        "caps": "round",
+        "at": [
+          0.18,
+          0.25,
+          -0.25
+        ]
+      },
+      "extra": [
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.115,
+              -0.16,
+              0.06
+            ],
+            [
+              0.23,
+              -0.36,
+              0.12
+            ]
+          ],
+          "radius": [
+            0.025,
+            0.02,
+            0.013
+          ],
+          "radial": 8,
+          "color": "wood",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            0.18,
+            0.34,
+            -0.25
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.07,
+              -0.07,
+              -0.095
+            ],
+            [
+              0.14,
+              -0.27,
+              -0.19
+            ]
+          ],
+          "radius": [
+            0.025,
+            0.02,
+            0.013
+          ],
+          "radial": 8,
+          "color": "wood",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            0.18,
+            0.25,
+            -0.25
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -0.08,
+              -0.16,
+              -0.09
+            ],
+            [
+              -0.16,
+              -0.36,
+              -0.18
+            ]
+          ],
+          "radius": [
+            0.025,
+            0.02,
+            0.013
+          ],
+          "radial": 8,
+          "color": "wood",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            0.18,
+            0.34,
+            -0.25
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -0.005,
+              -0.07,
+              0.1425
+            ],
+            [
+              -0.01,
+              -0.27,
+              0.285
+            ]
+          ],
+          "radius": [
+            0.025,
+            0.02,
+            0.013
+          ],
+          "radial": 8,
+          "color": "wood",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            0.18,
+            0.25,
+            -0.25
+          ]
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "clip": false,
+      "castShadow": false,
+      "connects": [
+        "bakau-tree"
+      ]
+    },
+    {
+      "id": "fallen-leaves",
+      "name": {
+        "en": "Fallen leaf material",
+        "zh": "落叶物质"
+      },
+      "group": "mangroves",
+      "summary": {
+        "en": "Supplies organic material to feeding pathways.",
+        "zh": "给取食路径提供有机物质。"
+      },
+      "detail": {
+        "en": "Some mangrove crabs eat fallen leaves and fragment them into smaller pieces. Dead leaf material still contains food energy. [S6, S24]\n\nExisting leaves stay visible when continuing tree supply is removed. Their disappearance and decomposition rate are not simulated. [S30]",
+        "zh": "有些红树林蟹取食落叶，把叶片弄成较小的碎片；死去的叶片仍含食物中的能量。[S6, S24]\n\n关闭树木持续供应时，已有落叶仍保留在画面里；这里没有模拟它们消失或分解的速率。[S30]"
+      },
+      "primitive": {
+        "kind": "extrude",
+        "shape": [
+          [
+            0,
+            0
+          ],
+          [
+            0.0125,
+            0.01324
+          ],
+          [
+            0.025,
+            0.01777
+          ],
+          [
+            0.0375,
+            0.01975
+          ],
+          [
+            0.05,
+            0.0198
+          ],
+          [
+            0.0625,
+            0.01816
+          ],
+          [
+            0.075,
+            0.01494
+          ],
+          [
+            0.0875,
+            0.00998
+          ],
+          [
+            0.1,
+            0
+          ],
+          [
+            0.0875,
+            -0.00998
+          ],
+          [
+            0.075,
+            -0.01494
+          ],
+          [
+            0.0625,
+            -0.01816
+          ],
+          [
+            0.05,
+            -0.0198
+          ],
+          [
+            0.0375,
+            -0.01975
+          ],
+          [
+            0.025,
+            -0.01777
+          ],
+          [
+            0.0125,
+            -0.01324
+          ]
+        ],
+        "depth": 0.0008,
+        "rotation": [
+          78.69007,
+          -2.80691,
+          26.54195
+        ],
+        "color": "tissue",
+        "tint": "token:neutral",
+        "at": [
+          -0.13,
+          0.008,
+          0.11
+        ]
+      },
+      "extra": [
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.0125,
+              0.01324
+            ],
+            [
+              0.025,
+              0.01777
+            ],
+            [
+              0.0375,
+              0.01975
+            ],
+            [
+              0.05,
+              0.0198
+            ],
+            [
+              0.0625,
+              0.01816
+            ],
+            [
+              0.075,
+              0.01494
+            ],
+            [
+              0.0875,
+              0.00998
+            ],
+            [
+              0.1,
+              0
+            ],
+            [
+              0.0875,
+              -0.00998
+            ],
+            [
+              0.075,
+              -0.01494
+            ],
+            [
+              0.0625,
+              -0.01816
+            ],
+            [
+              0.05,
+              -0.0198
+            ],
+            [
+              0.0375,
+              -0.01975
+            ],
+            [
+              0.025,
+              -0.01777
+            ],
+            [
+              0.0125,
+              -0.01324
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            78.69007,
+            8.36747,
+            -25.425
+          ],
+          "color": "tissue",
+          "tint": "token:neutral",
+          "at": [
+            -0.075,
+            0.009,
+            0.08
+          ]
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.0125,
+              0.01324
+            ],
+            [
+              0.025,
+              0.01777
+            ],
+            [
+              0.0375,
+              0.01975
+            ],
+            [
+              0.05,
+              0.0198
+            ],
+            [
+              0.0625,
+              0.01816
+            ],
+            [
+              0.075,
+              0.01494
+            ],
+            [
+              0.0875,
+              0.00998
+            ],
+            [
+              0.1,
+              0
+            ],
+            [
+              0.0875,
+              -0.00998
+            ],
+            [
+              0.075,
+              -0.01494
+            ],
+            [
+              0.0625,
+              -0.01816
+            ],
+            [
+              0.05,
+              -0.0198
+            ],
+            [
+              0.0375,
+              -0.01975
+            ],
+            [
+              0.025,
+              -0.01777
+            ],
+            [
+              0.0125,
+              -0.01324
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            78.69007,
+            -2.80691,
+            26.54195
+          ],
+          "color": "tissue",
+          "tint": "token:neutral",
+          "at": [
+            -0.16,
+            0.012,
+            0.06
+          ]
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "clip": false,
+      "castShadow": false
+    },
+    {
+      "id": "algae-patch",
+      "name": {
+        "en": "Surface algae",
+        "zh": "泥面藻类"
+      },
+      "group": "closeups",
+      "summary": {
+        "en": "Makes food using sunlight.",
+        "zh": "利用阳光制造食物。"
+      },
+      "detail": {
+        "en": "Algae are producers in these selected pathways. Some fiddlers and tree-climbing crabs consume algae, with evidence from different observations. [S7, S18, S24]\n\nThis patch marks a functional group on the surface; it is not a giant visible single cell or a measured local algal cover. [S30]",
+        "zh": "藻类是这些选入路径中的生产者；一些招潮蟹和树蟹会取食藻类，证据来自不同的观察。[S7, S18, S24]\n\n这个斑块标示泥面的功能组，不是一颗肉眼可见的巨大细胞，也不是当地藻类覆盖率测量。[S30]"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0,
+            -0.08
+          ],
+          [
+            0.02736,
+            -0.07518
+          ],
+          [
+            0.05142,
+            -0.06128
+          ],
+          [
+            0.06928,
+            -0.04
+          ],
+          [
+            0.07878,
+            -0.01389
+          ],
+          [
+            0.07878,
+            0.01389
+          ],
+          [
+            0.06928,
+            0.04
+          ],
+          [
+            0.05142,
+            0.06128
+          ],
+          [
+            0.02736,
+            0.07518
+          ],
+          [
+            0,
+            0.08
+          ]
+        ],
+        "segments": 16,
+        "color": "tissue",
+        "scale": [
+          1.5,
+          0.04,
+          0.65
+        ],
+        "tint": "token:seedling",
+        "at": [
+          0.055,
+          0.008,
+          0.13
+        ]
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "clip": false,
+      "castShadow": false
+    },
+    {
+      "id": "fiddler-crabs",
+      "name": {
+        "en": "Fiddler crabs",
+        "zh": "招潮蟹"
+      },
+      "group": "animals",
+      "summary": {
+        "en": "Small claw feeds; the enlarged male claw displays.",
+        "zh": "小螯取食，雄蟹的大螯用于展示。"
+      },
+      "detail": {
+        "en": "A male fiddler has one enlarged claw and a smaller feeding claw, with eye stalks and four pairs of walking legs. [S5, S32]\n\nThe group node is represented by one specimen symbol. High tide hides it in the burrow; drawing one does not report abundance. [S5, S30]",
+        "zh": "雄招潮蟹有一只大螯和一只取食小螯，还有眼柄及四对步足。[S5, S32]\n\n群组节点用一个标本符号表示；高潮时它藏进洞中。画一只不代表野外数量。[S5, S30]"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0,
+            -0.046
+          ],
+          [
+            0.01573,
+            -0.04323
+          ],
+          [
+            0.02957,
+            -0.03524
+          ],
+          [
+            0.03984,
+            -0.023
+          ],
+          [
+            0.0453,
+            -0.00799
+          ],
+          [
+            0.0453,
+            0.00799
+          ],
+          [
+            0.03984,
+            0.023
+          ],
+          [
+            0.02957,
+            0.03524
+          ],
+          [
+            0.01573,
+            0.04323
+          ],
+          [
+            0,
+            0.046
+          ]
+        ],
+        "segments": 16,
+        "color": "chitin",
+        "scale": [
+          1,
+          0.46,
+          0.8
+        ],
+        "tint": "token:neutral",
+        "at": [
+          -0.35,
+          0.035,
+          0.04
+        ]
+      },
+      "extra": [
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -0.035,
+              0.012,
+              -0.0102
+            ],
+            [
+              -0.065,
+              -0.03,
+              -0.0221
+            ]
+          ],
+          "radius": [
+            0.005,
+            0.0037,
+            0.0016
+          ],
+          "radial": 8,
+          "color": "chitin",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            -0.385,
+            0.034,
+            0.006
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -0.035,
+              0.012,
+              -0.0036
+            ],
+            [
+              -0.065,
+              -0.03,
+              -0.0078
+            ]
+          ],
+          "radius": [
+            0.005,
+            0.0037,
+            0.0016
+          ],
+          "radial": 8,
+          "color": "chitin",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            -0.385,
+            0.034,
+            0.028
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -0.035,
+              0.012,
+              0.0036
+            ],
+            [
+              -0.065,
+              -0.03,
+              0.0078
+            ]
+          ],
+          "radius": [
+            0.005,
+            0.0037,
+            0.0016
+          ],
+          "radial": 8,
+          "color": "chitin",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            -0.385,
+            0.034,
+            0.052
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -0.035,
+              0.012,
+              0.0102
+            ],
+            [
+              -0.065,
+              -0.03,
+              0.0221
+            ]
+          ],
+          "radius": [
+            0.005,
+            0.0037,
+            0.0016
+          ],
+          "radial": 8,
+          "color": "chitin",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            -0.385,
+            0.034,
+            0.074
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.035,
+              0.012,
+              -0.0102
+            ],
+            [
+              0.065,
+              -0.03,
+              -0.0221
+            ]
+          ],
+          "radius": [
+            0.005,
+            0.0037,
+            0.0016
+          ],
+          "radial": 8,
+          "color": "chitin",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            -0.315,
+            0.034,
+            0.006
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.035,
+              0.012,
+              -0.0036
+            ],
+            [
+              0.065,
+              -0.03,
+              -0.0078
+            ]
+          ],
+          "radius": [
+            0.005,
+            0.0037,
+            0.0016
+          ],
+          "radial": 8,
+          "color": "chitin",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            -0.315,
+            0.034,
+            0.028
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.035,
+              0.012,
+              0.0036
+            ],
+            [
+              0.065,
+              -0.03,
+              0.0078
+            ]
+          ],
+          "radius": [
+            0.005,
+            0.0037,
+            0.0016
+          ],
+          "radial": 8,
+          "color": "chitin",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            -0.315,
+            0.034,
+            0.052
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.035,
+              0.012,
+              0.0102
+            ],
+            [
+              0.065,
+              -0.03,
+              0.0221
+            ]
+          ],
+          "radius": [
+            0.005,
+            0.0037,
+            0.0016
+          ],
+          "radial": 8,
+          "color": "chitin",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            -0.315,
+            0.034,
+            0.074
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -0.024,
+              0.018,
+              0.027
+            ],
+            [
+              -0.027,
+              0.023,
+              0.049
+            ]
+          ],
+          "radius": [
+            0.006,
+            0.007,
+            0.005
+          ],
+          "radial": 8,
+          "color": "chitin",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            -0.378,
+            0.032,
+            0.075
+          ]
+        },
+        {
+          "kind": "extrude",
+          "at": [
+            -0.405,
+            0.055,
+            0.126
+          ],
+          "shape": [
+            [
+              -0.0238,
+              -0.03264
+            ],
+            [
+              0.0068000000000000005,
+              -0.034
+            ],
+            [
+              0.0442,
+              -0.02176
+            ],
+            [
+              0.068,
+              -0.00408
+            ],
+            [
+              0.054400000000000004,
+              -0.00272
+            ],
+            [
+              0.0238,
+              -0.014280000000000001
+            ],
+            [
+              0.00816,
+              -0.01088
+            ],
+            [
+              0.0102,
+              0.009520000000000002
+            ],
+            [
+              0.030600000000000002,
+              0.0204
+            ],
+            [
+              0.057800000000000004,
+              0.01156
+            ],
+            [
+              0.068,
+              0.0068000000000000005
+            ],
+            [
+              0.061200000000000004,
+              0.024480000000000002
+            ],
+            [
+              0.0238,
+              0.0374
+            ],
+            [
+              -0.017,
+              0.030600000000000002
+            ],
+            [
+              -0.03264,
+              0.00816
+            ]
+          ],
+          "depth": 0.017,
+          "rotation": [
+            90,
+            0,
+            28
+          ],
+          "color": "chitin",
+          "tint": "token:neutral",
+          "mirror": "x"
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -0.006,
+              0.037,
+              0.012
+            ]
+          ],
+          "radius": [
+            0.004,
+            0.0028
+          ],
+          "radial": 8,
+          "color": "chitin",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            -0.37,
+            0.046,
+            0.075
+          ]
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              -0.005
+            ],
+            [
+              0.00171,
+              -0.0047
+            ],
+            [
+              0.00321,
+              -0.00383
+            ],
+            [
+              0.00433,
+              -0.0025
+            ],
+            [
+              0.00492,
+              -0.00087
+            ],
+            [
+              0.00492,
+              0.00087
+            ],
+            [
+              0.00433,
+              0.0025
+            ],
+            [
+              0.00321,
+              0.00383
+            ],
+            [
+              0.00171,
+              0.0047
+            ],
+            [
+              0,
+              0.005
+            ]
+          ],
+          "segments": 16,
+          "color": "eye",
+          "scale": [
+            1,
+            1.2,
+            1
+          ],
+          "tint": "token:ink",
+          "at": [
+            -0.376,
+            0.085,
+            0.087
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.024,
+              0.018,
+              0.027
+            ],
+            [
+              0.027,
+              0.023,
+              0.049
+            ]
+          ],
+          "radius": [
+            0.006,
+            0.007,
+            0.005
+          ],
+          "radial": 8,
+          "color": "chitin",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            -0.322,
+            0.032,
+            0.075
+          ]
+        },
+        {
+          "kind": "extrude",
+          "at": [
+            -0.295,
+            0.055,
+            0.126
+          ],
+          "shape": [
+            [
+              -0.010849999999999999,
+              -0.014879999999999999
+            ],
+            [
+              0.0031000000000000003,
+              -0.0155
+            ],
+            [
+              0.02015,
+              -0.00992
+            ],
+            [
+              0.031,
+              -0.0018599999999999999
+            ],
+            [
+              0.024800000000000003,
+              -0.00124
+            ],
+            [
+              0.010849999999999999,
+              -0.006509999999999999
+            ],
+            [
+              0.0037199999999999998,
+              -0.00496
+            ],
+            [
+              0.00465,
+              0.00434
+            ],
+            [
+              0.01395,
+              0.0093
+            ],
+            [
+              0.02635,
+              0.00527
+            ],
+            [
+              0.031,
+              0.0031000000000000003
+            ],
+            [
+              0.0279,
+              0.01116
+            ],
+            [
+              0.010849999999999999,
+              0.017050000000000003
+            ],
+            [
+              -0.00775,
+              0.01395
+            ],
+            [
+              -0.014879999999999999,
+              0.0037199999999999998
+            ]
+          ],
+          "depth": 0.01,
+          "rotation": [
+            90,
+            0,
+            -28
+          ],
+          "color": "chitin",
+          "tint": "token:neutral"
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.006,
+              0.037,
+              0.012
+            ]
+          ],
+          "radius": [
+            0.004,
+            0.0028
+          ],
+          "radial": 8,
+          "color": "chitin",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            -0.33,
+            0.046,
+            0.075
+          ]
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              -0.005
+            ],
+            [
+              0.00171,
+              -0.0047
+            ],
+            [
+              0.00321,
+              -0.00383
+            ],
+            [
+              0.00433,
+              -0.0025
+            ],
+            [
+              0.00492,
+              -0.00087
+            ],
+            [
+              0.00492,
+              0.00087
+            ],
+            [
+              0.00433,
+              0.0025
+            ],
+            [
+              0.00321,
+              0.00383
+            ],
+            [
+              0.00171,
+              0.0047
+            ],
+            [
+              0,
+              0.005
+            ]
+          ],
+          "segments": 16,
+          "color": "eye",
+          "scale": [
+            1,
+            1.2,
+            1
+          ],
+          "tint": "token:ink",
+          "at": [
+            -0.324,
+            0.085,
+            0.087
+          ]
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "clip": false,
+      "castShadow": false
+    },
+    {
+      "id": "tree-crabs",
+      "name": {
+        "en": "Climbing crabs",
+        "zh": "攀爬蟹类"
+      },
+      "group": "animals",
+      "summary": {
+        "en": "Eats leaf material and can climb above water.",
+        "zh": "取食叶片物质，也能爬到水面之上。"
+      },
+      "detail": {
+        "en": "This teaching node groups several climbing crab kinds. Leaf material is supported by the Sungei Buloh report, while the separate algae input comes from an indexed account; these do not establish one Episesarma species diet. [S6, S7]\n\nThis specimen has four pairs of walking legs and two claws. The higher pose is schematic, with the feet against the Bakau trunk. [S32, S30]",
+        "zh": "这个教学节点合并几类会攀爬的蟹。双溪布洛报道支持叶片取食，另一个索引资料支持藻类输入；这些资料没有证实同一种 Episesarma 同时具有这份食谱。[S6, S7]\n\n这只示意标本有四对步足和一对螯；较高的姿态是示意，步足贴着 Bakau 树干。[S32, S30]"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0,
+            -0.046
+          ],
+          [
+            0.01573,
+            -0.04323
+          ],
+          [
+            0.02957,
+            -0.03524
+          ],
+          [
+            0.03984,
+            -0.023
+          ],
+          [
+            0.0453,
+            -0.00799
+          ],
+          [
+            0.0453,
+            0.00799
+          ],
+          [
+            0.03984,
+            0.023
+          ],
+          [
+            0.02957,
+            0.03524
+          ],
+          [
+            0.01573,
+            0.04323
+          ],
+          [
+            0,
+            0.046
+          ]
+        ],
+        "segments": 16,
+        "color": "chitin",
+        "scale": [
+          1,
+          0.8,
+          0.46
+        ],
+        "tint": "token:neutral",
+        "at": [
+          0.19,
+          0.12,
+          -0.191
+        ]
+      },
+      "extra": [
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -0.035,
+              -0.0102,
+              0.012
+            ],
+            [
+              0.007,
+              -0.0221,
+              -0.03
+            ]
+          ],
+          "radius": [
+            0.005,
+            0.0037,
+            0.0016
+          ],
+          "radial": 8,
+          "color": "chitin",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            0.155,
+            0.086,
+            -0.192
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -0.035,
+              -0.0036,
+              0.012
+            ],
+            [
+              0.007,
+              -0.0078,
+              -0.03
+            ]
+          ],
+          "radius": [
+            0.005,
+            0.0037,
+            0.0016
+          ],
+          "radial": 8,
+          "color": "chitin",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            0.155,
+            0.108,
+            -0.192
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -0.035,
+              0.0036,
+              0.012
+            ],
+            [
+              0.007,
+              0.0078,
+              -0.03
+            ]
+          ],
+          "radius": [
+            0.005,
+            0.0037,
+            0.0016
+          ],
+          "radial": 8,
+          "color": "chitin",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            0.155,
+            0.132,
+            -0.192
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -0.035,
+              0.0102,
+              0.012
+            ],
+            [
+              0.007,
+              0.0221,
+              -0.03
+            ]
+          ],
+          "radius": [
+            0.005,
+            0.0037,
+            0.0016
+          ],
+          "radial": 8,
+          "color": "chitin",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            0.155,
+            0.154,
+            -0.192
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.035,
+              -0.0102,
+              0.012
+            ],
+            [
+              -0.007,
+              -0.0221,
+              -0.03
+            ]
+          ],
+          "radius": [
+            0.005,
+            0.0037,
+            0.0016
+          ],
+          "radial": 8,
+          "color": "chitin",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            0.225,
+            0.086,
+            -0.192
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.035,
+              -0.0036,
+              0.012
+            ],
+            [
+              -0.007,
+              -0.0078,
+              -0.03
+            ]
+          ],
+          "radius": [
+            0.005,
+            0.0037,
+            0.0016
+          ],
+          "radial": 8,
+          "color": "chitin",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            0.225,
+            0.108,
+            -0.192
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.035,
+              0.0036,
+              0.012
+            ],
+            [
+              -0.007,
+              0.0078,
+              -0.03
+            ]
+          ],
+          "radius": [
+            0.005,
+            0.0037,
+            0.0016
+          ],
+          "radial": 8,
+          "color": "chitin",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            0.225,
+            0.132,
+            -0.192
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.035,
+              0.0102,
+              0.012
+            ],
+            [
+              -0.007,
+              0.0221,
+              -0.03
+            ]
+          ],
+          "radius": [
+            0.005,
+            0.0037,
+            0.0016
+          ],
+          "radial": 8,
+          "color": "chitin",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            0.225,
+            0.154,
+            -0.192
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -0.024,
+              0.027,
+              0.018
+            ],
+            [
+              -0.027,
+              0.049,
+              0.023
+            ]
+          ],
+          "radius": [
+            0.006,
+            0.007,
+            0.005
+          ],
+          "radial": 8,
+          "color": "chitin",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            0.162,
+            0.155,
+            -0.194
+          ]
+        },
+        {
+          "kind": "extrude",
+          "at": [
+            0.135,
+            0.206,
+            -0.171
+          ],
+          "shape": [
+            [
+              -0.010849999999999999,
+              -0.014879999999999999
+            ],
+            [
+              0.0031000000000000003,
+              -0.0155
+            ],
+            [
+              0.02015,
+              -0.00992
+            ],
+            [
+              0.031,
+              -0.0018599999999999999
+            ],
+            [
+              0.024800000000000003,
+              -0.00124
+            ],
+            [
+              0.010849999999999999,
+              -0.006509999999999999
+            ],
+            [
+              0.0037199999999999998,
+              -0.00496
+            ],
+            [
+              0.00465,
+              0.00434
+            ],
+            [
+              0.01395,
+              0.0093
+            ],
+            [
+              0.02635,
+              0.00527
+            ],
+            [
+              0.031,
+              0.0031000000000000003
+            ],
+            [
+              0.0279,
+              0.01116
+            ],
+            [
+              0.010849999999999999,
+              0.017050000000000003
+            ],
+            [
+              -0.00775,
+              0.01395
+            ],
+            [
+              -0.014879999999999999,
+              0.0037199999999999998
+            ]
+          ],
+          "depth": 0.01,
+          "rotation": [
+            0,
+            0,
+            28
+          ],
+          "color": "chitin",
+          "tint": "token:neutral",
+          "mirror": "x"
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -0.006,
+              0.012,
+              0.037
+            ]
+          ],
+          "radius": [
+            0.004,
+            0.0028
+          ],
+          "radial": 8,
+          "color": "chitin",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            0.17,
+            0.155,
+            -0.18
+          ]
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              -0.005
+            ],
+            [
+              0.00171,
+              -0.0047
+            ],
+            [
+              0.00321,
+              -0.00383
+            ],
+            [
+              0.00433,
+              -0.0025
+            ],
+            [
+              0.00492,
+              -0.00087
+            ],
+            [
+              0.00492,
+              0.00087
+            ],
+            [
+              0.00433,
+              0.0025
+            ],
+            [
+              0.00321,
+              0.00383
+            ],
+            [
+              0.00171,
+              0.0047
+            ],
+            [
+              0,
+              0.005
+            ]
+          ],
+          "segments": 16,
+          "color": "eye",
+          "scale": [
+            1,
+            1.2,
+            1
+          ],
+          "tint": "token:ink",
+          "at": [
+            0.164,
+            0.167,
+            -0.141
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.024,
+              0.027,
+              0.018
+            ],
+            [
+              0.027,
+              0.049,
+              0.023
+            ]
+          ],
+          "radius": [
+            0.006,
+            0.007,
+            0.005
+          ],
+          "radial": 8,
+          "color": "chitin",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            0.218,
+            0.155,
+            -0.194
+          ]
+        },
+        {
+          "kind": "extrude",
+          "at": [
+            0.245,
+            0.206,
+            -0.171
+          ],
+          "shape": [
+            [
+              -0.010849999999999999,
+              -0.014879999999999999
+            ],
+            [
+              0.0031000000000000003,
+              -0.0155
+            ],
+            [
+              0.02015,
+              -0.00992
+            ],
+            [
+              0.031,
+              -0.0018599999999999999
+            ],
+            [
+              0.024800000000000003,
+              -0.00124
+            ],
+            [
+              0.010849999999999999,
+              -0.006509999999999999
+            ],
+            [
+              0.0037199999999999998,
+              -0.00496
+            ],
+            [
+              0.00465,
+              0.00434
+            ],
+            [
+              0.01395,
+              0.0093
+            ],
+            [
+              0.02635,
+              0.00527
+            ],
+            [
+              0.031,
+              0.0031000000000000003
+            ],
+            [
+              0.0279,
+              0.01116
+            ],
+            [
+              0.010849999999999999,
+              0.017050000000000003
+            ],
+            [
+              -0.00775,
+              0.01395
+            ],
+            [
+              -0.014879999999999999,
+              0.0037199999999999998
+            ]
+          ],
+          "depth": 0.01,
+          "rotation": [
+            0,
+            0,
+            -28
+          ],
+          "color": "chitin",
+          "tint": "token:neutral"
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.006,
+              0.012,
+              0.037
+            ]
+          ],
+          "radius": [
+            0.004,
+            0.0028
+          ],
+          "radial": 8,
+          "color": "chitin",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            0.21,
+            0.155,
+            -0.18
+          ]
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              -0.005
+            ],
+            [
+              0.00171,
+              -0.0047
+            ],
+            [
+              0.00321,
+              -0.00383
+            ],
+            [
+              0.00433,
+              -0.0025
+            ],
+            [
+              0.00492,
+              -0.00087
+            ],
+            [
+              0.00492,
+              0.00087
+            ],
+            [
+              0.00433,
+              0.0025
+            ],
+            [
+              0.00321,
+              0.00383
+            ],
+            [
+              0.00171,
+              0.0047
+            ],
+            [
+              0,
+              0.005
+            ]
+          ],
+          "segments": 16,
+          "color": "eye",
+          "scale": [
+            1,
+            1.2,
+            1
+          ],
+          "tint": "token:ink",
+          "at": [
+            0.216,
+            0.167,
+            -0.141
+          ]
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "clip": false,
+      "castShadow": false
+    },
+    {
+      "id": "giant-mudskipper",
+      "name": {
+        "en": "Giant mudskipper",
+        "zh": "弹涂鱼"
+      },
+      "group": "animals",
+      "summary": {
+        "en": "Pectoral fins move this fish over exposed mud.",
+        "zh": "胸鳍帮助这条鱼在露泥上移动。"
+      },
+      "detail": {
+        "en": "Giant mudskippers are fish. Modified gill chambers and skin help gas exchange out of water; fleshy pectoral fins help movement. [S4]\n\nGeneral guides include crabs as food, while local diet samples differ. The selected links are possibilities, not a measured menu. [S4, S13, S31]",
+        "zh": "弹涂鱼是鱼；特化的鳃腔和皮肤帮助它离水时进行气体交换，肉质胸鳍帮助移动。[S4]\n\n一般指南把蟹列为其食物，但不同当地样本有差异；这些线表示可能关系，不是实测食谱。[S4, S13, S31]"
+      },
+      "primitive": {
+        "kind": "sweep",
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.06,
+            0.008,
+            0
+          ],
+          [
+            0.155,
+            0.018,
+            0
+          ],
+          [
+            0.218,
+            0.026,
+            0
+          ],
+          [
+            0.25,
+            0.018,
+            0
+          ]
+        ],
+        "radius": [
+          0.004,
+          0.017,
+          0.031,
+          0.035,
+          0.016
+        ],
+        "radial": 8,
+        "color": "tissue",
+        "tint": "token:ink-3",
+        "segments": 18,
+        "caps": "round",
+        "at": [
+          0.17,
+          0.031,
+          0.145
+        ]
+      },
+      "extra": [
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              -0.013
+            ],
+            [
+              0.00445,
+              -0.01222
+            ],
+            [
+              0.00836,
+              -0.00996
+            ],
+            [
+              0.01126,
+              -0.0065
+            ],
+            [
+              0.0128,
+              -0.00226
+            ],
+            [
+              0.0128,
+              0.00226
+            ],
+            [
+              0.01126,
+              0.0065
+            ],
+            [
+              0.00836,
+              0.00996
+            ],
+            [
+              0.00445,
+              0.01222
+            ],
+            [
+              0,
+              0.013
+            ]
+          ],
+          "segments": 16,
+          "color": "tissue",
+          "scale": [
+            0.9,
+            1.1,
+            0.8
+          ],
+          "tint": "token:ink-3",
+          "at": [
+            0.395,
+            0.077,
+            0.126
+          ]
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              -0.006
+            ],
+            [
+              0.00205,
+              -0.00564
+            ],
+            [
+              0.00386,
+              -0.0046
+            ],
+            [
+              0.0052,
+              -0.003
+            ],
+            [
+              0.00591,
+              -0.00104
+            ],
+            [
+              0.00591,
+              0.00104
+            ],
+            [
+              0.0052,
+              0.003
+            ],
+            [
+              0.00386,
+              0.0046
+            ],
+            [
+              0.00205,
+              0.00564
+            ],
+            [
+              0,
+              0.006
+            ]
+          ],
+          "segments": 16,
+          "color": "eye",
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "tint": "token:ink",
+          "at": [
+            0.399,
+            0.084,
+            0.122
+          ]
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.00875,
+              0.01079
+            ],
+            [
+              0.0175,
+              0.01724
+            ],
+            [
+              0.02625,
+              0.02161
+            ],
+            [
+              0.035,
+              0.0238
+            ],
+            [
+              0.04375,
+              0.02353
+            ],
+            [
+              0.0525,
+              0.02051
+            ],
+            [
+              0.06125,
+              0.01428
+            ],
+            [
+              0.07,
+              0
+            ],
+            [
+              0.06125,
+              -0.01428
+            ],
+            [
+              0.0525,
+              -0.02051
+            ],
+            [
+              0.04375,
+              -0.02353
+            ],
+            [
+              0.035,
+              -0.0238
+            ],
+            [
+              0.02625,
+              -0.02161
+            ],
+            [
+              0.0175,
+              -0.01724
+            ],
+            [
+              0.00875,
+              -0.01079
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            -180,
+            57.99462,
+            173.94925
+          ],
+          "color": "tissue",
+          "tint": "token:ink-3",
+          "at": [
+            0.347,
+            0.036,
+            0.121
+          ]
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              -0.013
+            ],
+            [
+              0.00445,
+              -0.01222
+            ],
+            [
+              0.00836,
+              -0.00996
+            ],
+            [
+              0.01126,
+              -0.0065
+            ],
+            [
+              0.0128,
+              -0.00226
+            ],
+            [
+              0.0128,
+              0.00226
+            ],
+            [
+              0.01126,
+              0.0065
+            ],
+            [
+              0.00836,
+              0.00996
+            ],
+            [
+              0.00445,
+              0.01222
+            ],
+            [
+              0,
+              0.013
+            ]
+          ],
+          "segments": 16,
+          "color": "tissue",
+          "scale": [
+            0.9,
+            1.1,
+            0.8
+          ],
+          "tint": "token:ink-3",
+          "at": [
+            0.395,
+            0.077,
+            0.164
+          ]
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              -0.006
+            ],
+            [
+              0.00205,
+              -0.00564
+            ],
+            [
+              0.00386,
+              -0.0046
+            ],
+            [
+              0.0052,
+              -0.003
+            ],
+            [
+              0.00591,
+              -0.00104
+            ],
+            [
+              0.00591,
+              0.00104
+            ],
+            [
+              0.0052,
+              0.003
+            ],
+            [
+              0.00386,
+              0.0046
+            ],
+            [
+              0.00205,
+              0.00564
+            ],
+            [
+              0,
+              0.006
+            ]
+          ],
+          "segments": 16,
+          "color": "eye",
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "tint": "token:ink",
+          "at": [
+            0.399,
+            0.084,
+            0.168
+          ]
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.00875,
+              0.01079
+            ],
+            [
+              0.0175,
+              0.01724
+            ],
+            [
+              0.02625,
+              0.02161
+            ],
+            [
+              0.035,
+              0.0238
+            ],
+            [
+              0.04375,
+              0.02353
+            ],
+            [
+              0.0525,
+              0.02051
+            ],
+            [
+              0.06125,
+              0.01428
+            ],
+            [
+              0.07,
+              0
+            ],
+            [
+              0.06125,
+              -0.01428
+            ],
+            [
+              0.0525,
+              -0.02051
+            ],
+            [
+              0.04375,
+              -0.02353
+            ],
+            [
+              0.035,
+              -0.0238
+            ],
+            [
+              0.02625,
+              -0.02161
+            ],
+            [
+              0.0175,
+              -0.01724
+            ],
+            [
+              0.00875,
+              -0.01079
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            -180,
+            -57.99462,
+            173.94925
+          ],
+          "color": "tissue",
+          "tint": "token:ink-3",
+          "at": [
+            0.347,
+            0.036,
+            0.169
+          ]
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              -0.055,
+              0.035
+            ],
+            [
+              -0.043,
+              0
+            ],
+            [
+              -0.055,
+              -0.035
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:ink-3",
+          "at": [
+            0.18,
+            0.036,
+            0.145
+          ]
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.01188,
+              0.01028
+            ],
+            [
+              0.02375,
+              0.01462
+            ],
+            [
+              0.03563,
+              0.01692
+            ],
+            [
+              0.0475,
+              0.01748
+            ],
+            [
+              0.05937,
+              0.01642
+            ],
+            [
+              0.07125,
+              0.01375
+            ],
+            [
+              0.08313,
+              0.0093
+            ],
+            [
+              0.095,
+              0
+            ],
+            [
+              0.08313,
+              -0.0093
+            ],
+            [
+              0.07125,
+              -0.01375
+            ],
+            [
+              0.05937,
+              -0.01642
+            ],
+            [
+              0.0475,
+              -0.01748
+            ],
+            [
+              0.03563,
+              -0.01692
+            ],
+            [
+              0.02375,
+              -0.01462
+            ],
+            [
+              0.01188,
+              -0.01028
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:ink-3",
+          "at": [
+            0.26,
+            0.059,
+            0.145
+          ]
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "clip": false,
+      "castShadow": false
+    },
+    {
+      "id": "heron",
+      "name": {
+        "en": "Heron",
+        "zh": "鹭"
+      },
+      "group": "animals",
+      "summary": {
+        "en": "Long legs, neck and bill support feeding.",
+        "zh": "长腿、长颈与长喙帮助取食。"
+      },
+      "detail": {
+        "en": "Herons have long necks and bills and eat fish and crustaceans. NParks lists herons among predators of giant mudskippers. [S4, S29]\n\nThis two-legged specimen represents herons generally, not a verified local feeding event by one named heron species. [S30]",
+        "zh": "鹭有长颈和长喙，会吃鱼和甲壳类；NParks 把鹭列为弹涂鱼的捕食者。[S4, S29]\n\n这只两腿的标本泛指鹭类，不声称已核实某种鹭在当地发生了一次具体捕食事件。[S30]"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0,
+            -0.074
+          ],
+          [
+            0.02531,
+            -0.06954
+          ],
+          [
+            0.04757,
+            -0.05669
+          ],
+          [
+            0.06409,
+            -0.037
+          ],
+          [
+            0.07288,
+            -0.01285
+          ],
+          [
+            0.07288,
+            0.01285
+          ],
+          [
+            0.06409,
+            0.037
+          ],
+          [
+            0.04757,
+            0.05669
+          ],
+          [
+            0.02531,
+            0.06954
+          ],
+          [
+            0,
+            0.074
+          ]
+        ],
+        "segments": 16,
+        "color": "feathers",
+        "scale": [
+          1.48,
+          0.8,
+          0.72
+        ],
+        "tint": "token:ink-3",
+        "at": [
+          0.555,
+          0.33,
+          -0.02
+        ]
+      },
+      "extra": [
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -0.07,
+              0.08,
+              0
+            ],
+            [
+              -0.07,
+              0.18,
+              0
+            ],
+            [
+              0.02,
+              0.21,
+              0
+            ],
+            [
+              0.07,
+              0.14,
+              0
+            ]
+          ],
+          "radius": [
+            0.029,
+            0.024,
+            0.019,
+            0.021,
+            0.024
+          ],
+          "radial": 8,
+          "color": "feathers",
+          "tint": "token:ink-3",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            0.6,
+            0.31,
+            -0.02
+          ]
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              -0.032
+            ],
+            [
+              0.01094,
+              -0.03007
+            ],
+            [
+              0.02057,
+              -0.02451
+            ],
+            [
+              0.02771,
+              -0.016
+            ],
+            [
+              0.03151,
+              -0.00556
+            ],
+            [
+              0.03151,
+              0.00556
+            ],
+            [
+              0.02771,
+              0.016
+            ],
+            [
+              0.02057,
+              0.02451
+            ],
+            [
+              0.01094,
+              0.03007
+            ],
+            [
+              0,
+              0.032
+            ]
+          ],
+          "segments": 16,
+          "color": "feathers",
+          "scale": [
+            1.35,
+            0.8,
+            0.8
+          ],
+          "tint": "token:ink-3",
+          "at": [
+            0.675,
+            0.45,
+            -0.02
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.08,
+              -0.085,
+              0
+            ]
+          ],
+          "radius": [
+            0.014,
+            0.0015
+          ],
+          "radial": 8,
+          "color": "chitin",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            0.71,
+            0.445,
+            -0.02
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -0.005,
+              -0.14,
+              0
+            ],
+            [
+              0.015,
+              -0.287,
+              0
+            ]
+          ],
+          "radius": [
+            0.007,
+            0.005,
+            0.003
+          ],
+          "radial": 8,
+          "color": "chitin",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            0.575,
+            0.29,
+            -0.047
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.03,
+              -0.0015,
+              -0.025
+            ]
+          ],
+          "radius": [
+            0.003,
+            0.0015
+          ],
+          "radial": 8,
+          "color": "chitin",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            0.59,
+            0.003,
+            -0.047
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.03,
+              -0.0015,
+              0.025
+            ]
+          ],
+          "radius": [
+            0.003,
+            0.0015
+          ],
+          "radial": 8,
+          "color": "chitin",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            0.59,
+            0.003,
+            -0.047
+          ]
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              -0.005
+            ],
+            [
+              0.00171,
+              -0.0047
+            ],
+            [
+              0.00321,
+              -0.00383
+            ],
+            [
+              0.00433,
+              -0.0025
+            ],
+            [
+              0.00492,
+              -0.00087
+            ],
+            [
+              0.00492,
+              0.00087
+            ],
+            [
+              0.00433,
+              0.0025
+            ],
+            [
+              0.00321,
+              0.00383
+            ],
+            [
+              0.00171,
+              0.0047
+            ],
+            [
+              0,
+              0.005
+            ]
+          ],
+          "segments": 16,
+          "color": "eye",
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "tint": "token:ink",
+          "at": [
+            0.687,
+            0.46,
+            -0.045
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -0.005,
+              -0.14,
+              0
+            ],
+            [
+              0.015,
+              -0.287,
+              0
+            ]
+          ],
+          "radius": [
+            0.007,
+            0.005,
+            0.003
+          ],
+          "radial": 8,
+          "color": "chitin",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            0.575,
+            0.29,
+            0.007
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.03,
+              -0.0015,
+              -0.025
+            ]
+          ],
+          "radius": [
+            0.003,
+            0.0015
+          ],
+          "radial": 8,
+          "color": "chitin",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            0.59,
+            0.003,
+            0.007
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.03,
+              -0.0015,
+              0.025
+            ]
+          ],
+          "radius": [
+            0.003,
+            0.0015
+          ],
+          "radial": 8,
+          "color": "chitin",
+          "tint": "token:neutral",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            0.59,
+            0.003,
+            0.007
+          ]
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              -0.005
+            ],
+            [
+              0.00171,
+              -0.0047
+            ],
+            [
+              0.00321,
+              -0.00383
+            ],
+            [
+              0.00433,
+              -0.0025
+            ],
+            [
+              0.00492,
+              -0.00087
+            ],
+            [
+              0.00492,
+              0.00087
+            ],
+            [
+              0.00433,
+              0.0025
+            ],
+            [
+              0.00321,
+              0.00383
+            ],
+            [
+              0.00171,
+              0.0047
+            ],
+            [
+              0,
+              0.005
+            ]
+          ],
+          "segments": 16,
+          "color": "eye",
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "tint": "token:ink",
+          "at": [
+            0.687,
+            0.46,
+            0.005
+          ]
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              -0.068
+            ],
+            [
+              0.02326,
+              -0.0639
+            ],
+            [
+              0.04371,
+              -0.05209
+            ],
+            [
+              0.05889,
+              -0.034
+            ],
+            [
+              0.06697,
+              -0.01181
+            ],
+            [
+              0.06697,
+              0.01181
+            ],
+            [
+              0.05889,
+              0.034
+            ],
+            [
+              0.04371,
+              0.05209
+            ],
+            [
+              0.02326,
+              0.0639
+            ],
+            [
+              0,
+              0.068
+            ]
+          ],
+          "segments": 16,
+          "color": "feathers",
+          "scale": [
+            1.6,
+            0.72,
+            0.47
+          ],
+          "tint": "token:ink-2",
+          "at": [
+            0.565,
+            0.34,
+            -0.044
+          ]
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "clip": false,
+      "castShadow": false
+    },
+    {
+      "id": "small-fish",
+      "name": {
+        "en": "Other small fish",
+        "zh": "其他小鱼"
+      },
+      "group": "animals",
+      "summary": {
+        "en": "Shows prey outside the selected food graph.",
+        "zh": "表示选入食物网之外的其他猎物。"
+      },
+      "detail": {
+        "en": "Herons and giant mudskippers can eat small fish. Real organisms may have food options outside a short teaching graph. [S4, S29]\n\nThis generic fish has no solver link. Its presence reminds us that no shown path is not the same as no possible food in nature. [S30]",
+        "zh": "鹭和弹涂鱼都可能吃小鱼；真实生物的食物选择可能超出简短教学图的范围。[S4, S29]\n\n这条普通小鱼没有求解连线；它提醒我们，图内没有路径，不等于自然界没有可能的食物。[S30]"
+      },
+      "primitive": {
+        "kind": "sweep",
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.0348,
+            0.00464,
+            0
+          ],
+          [
+            0.0899,
+            0.01044,
+            0
+          ],
+          [
+            0.12644,
+            0.01508,
+            0
+          ],
+          [
+            0.145,
+            0.01044,
+            0
+          ]
+        ],
+        "radius": [
+          0.00232,
+          0.00986,
+          0.01798,
+          0.0203,
+          0.00928
+        ],
+        "radial": 8,
+        "color": "tissue",
+        "tint": "token:ink-3",
+        "segments": 18,
+        "caps": "round",
+        "at": [
+          0.2446,
+          -0.074,
+          0.34
+        ]
+      },
+      "extra": [
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              -0.00754
+            ],
+            [
+              0.00258,
+              -0.00709
+            ],
+            [
+              0.00485,
+              -0.00578
+            ],
+            [
+              0.00653,
+              -0.00377
+            ],
+            [
+              0.00743,
+              -0.00131
+            ],
+            [
+              0.00743,
+              0.00131
+            ],
+            [
+              0.00653,
+              0.00377
+            ],
+            [
+              0.00485,
+              0.00578
+            ],
+            [
+              0.00258,
+              0.00709
+            ],
+            [
+              0,
+              0.00754
+            ]
+          ],
+          "segments": 16,
+          "color": "tissue",
+          "scale": [
+            0.9,
+            1.1,
+            0.8
+          ],
+          "tint": "token:ink-3",
+          "at": [
+            0.3751,
+            -0.04732,
+            0.32898
+          ]
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              -0.00348
+            ],
+            [
+              0.00174,
+              -0.00301
+            ],
+            [
+              0.00301,
+              -0.00174
+            ],
+            [
+              0.00348,
+              0
+            ],
+            [
+              0.00301,
+              0.00174
+            ],
+            [
+              0.00174,
+              0.00301
+            ],
+            [
+              0,
+              0.00348
+            ]
+          ],
+          "segments": 10,
+          "color": "eye",
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "tint": "token:ink",
+          "at": [
+            0.37742,
+            -0.04326,
+            0.32666
+          ]
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.00508,
+              0.00626
+            ],
+            [
+              0.01015,
+              0.01
+            ],
+            [
+              0.01523,
+              0.01253
+            ],
+            [
+              0.0203,
+              0.0138
+            ],
+            [
+              0.02538,
+              0.01365
+            ],
+            [
+              0.03045,
+              0.0119
+            ],
+            [
+              0.03553,
+              0.00828
+            ],
+            [
+              0.0406,
+              0
+            ],
+            [
+              0.03553,
+              -0.00828
+            ],
+            [
+              0.03045,
+              -0.0119
+            ],
+            [
+              0.02538,
+              -0.01365
+            ],
+            [
+              0.0203,
+              -0.0138
+            ],
+            [
+              0.01523,
+              -0.01253
+            ],
+            [
+              0.01015,
+              -0.01
+            ],
+            [
+              0.00508,
+              -0.00626
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            -180,
+            57.99462,
+            173.94925
+          ],
+          "color": "tissue",
+          "tint": "token:ink-3",
+          "at": [
+            0.34726,
+            -0.0711,
+            0.32608
+          ]
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              -0.00754
+            ],
+            [
+              0.00258,
+              -0.00709
+            ],
+            [
+              0.00485,
+              -0.00578
+            ],
+            [
+              0.00653,
+              -0.00377
+            ],
+            [
+              0.00743,
+              -0.00131
+            ],
+            [
+              0.00743,
+              0.00131
+            ],
+            [
+              0.00653,
+              0.00377
+            ],
+            [
+              0.00485,
+              0.00578
+            ],
+            [
+              0.00258,
+              0.00709
+            ],
+            [
+              0,
+              0.00754
+            ]
+          ],
+          "segments": 16,
+          "color": "tissue",
+          "scale": [
+            0.9,
+            1.1,
+            0.8
+          ],
+          "tint": "token:ink-3",
+          "at": [
+            0.3751,
+            -0.04732,
+            0.35102
+          ]
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              -0.00348
+            ],
+            [
+              0.00174,
+              -0.00301
+            ],
+            [
+              0.00301,
+              -0.00174
+            ],
+            [
+              0.00348,
+              0
+            ],
+            [
+              0.00301,
+              0.00174
+            ],
+            [
+              0.00174,
+              0.00301
+            ],
+            [
+              0,
+              0.00348
+            ]
+          ],
+          "segments": 10,
+          "color": "eye",
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "tint": "token:ink",
+          "at": [
+            0.37742,
+            -0.04326,
+            0.35334
+          ]
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.00508,
+              0.00626
+            ],
+            [
+              0.01015,
+              0.01
+            ],
+            [
+              0.01523,
+              0.01253
+            ],
+            [
+              0.0203,
+              0.0138
+            ],
+            [
+              0.02538,
+              0.01365
+            ],
+            [
+              0.03045,
+              0.0119
+            ],
+            [
+              0.03553,
+              0.00828
+            ],
+            [
+              0.0406,
+              0
+            ],
+            [
+              0.03553,
+              -0.00828
+            ],
+            [
+              0.03045,
+              -0.0119
+            ],
+            [
+              0.02538,
+              -0.01365
+            ],
+            [
+              0.0203,
+              -0.0138
+            ],
+            [
+              0.01523,
+              -0.01253
+            ],
+            [
+              0.01015,
+              -0.01
+            ],
+            [
+              0.00508,
+              -0.00626
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            -180,
+            -57.99462,
+            173.94925
+          ],
+          "color": "tissue",
+          "tint": "token:ink-3",
+          "at": [
+            0.34726,
+            -0.0711,
+            0.35392
+          ]
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              -0.0319,
+              0.0203
+            ],
+            [
+              -0.02494,
+              0
+            ],
+            [
+              -0.0319,
+              -0.0203
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:ink-3",
+          "at": [
+            0.2504,
+            -0.0711,
+            0.34
+          ]
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.00689,
+              0.00596
+            ],
+            [
+              0.01377,
+              0.00848
+            ],
+            [
+              0.02066,
+              0.00981
+            ],
+            [
+              0.02755,
+              0.01014
+            ],
+            [
+              0.03444,
+              0.00952
+            ],
+            [
+              0.04133,
+              0.00797
+            ],
+            [
+              0.04821,
+              0.00539
+            ],
+            [
+              0.0551,
+              0
+            ],
+            [
+              0.04821,
+              -0.00539
+            ],
+            [
+              0.04133,
+              -0.00797
+            ],
+            [
+              0.03444,
+              -0.00952
+            ],
+            [
+              0.02755,
+              -0.01014
+            ],
+            [
+              0.02066,
+              -0.00981
+            ],
+            [
+              0.01377,
+              -0.00848
+            ],
+            [
+              0.00689,
+              -0.00596
+            ]
+          ],
+          "depth": 0.0008,
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "color": "tissue",
+          "tint": "token:ink-3",
+          "at": [
+            0.2968,
+            -0.05776,
+            0.34
+          ]
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "clip": false,
+      "castShadow": false
+    },
+    {
+      "id": "bacteria-inset",
+      "name": {
+        "en": "Bacteria schematic",
+        "zh": "细菌示意"
+      },
+      "group": "closeups",
+      "summary": {
+        "en": "Helps explain decomposition of leaf material.",
+        "zh": "帮助说明叶片物质的分解。"
+      },
+      "detail": {
+        "en": "Bacteria help break down mangrove leaf litter. They obtain energy from organic material in decomposition. [S10]\n\nThese separate enlarged shapes are schematic and not to scale. They are not giant bacteria living above the mud surface. [S30]",
+        "zh": "细菌参与红树林落叶的分解；它们在分解过程中从有机物质获得能量。[S10]\n\n旁置的放大形状是示意，不按比例；这不是生活在泥面上的巨大细菌。[S30]"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0,
+            -0.026
+          ],
+          [
+            0.00889,
+            -0.02443
+          ],
+          [
+            0.01671,
+            -0.01992
+          ],
+          [
+            0.02252,
+            -0.013
+          ],
+          [
+            0.02561,
+            -0.00451
+          ],
+          [
+            0.02561,
+            0.00451
+          ],
+          [
+            0.02252,
+            0.013
+          ],
+          [
+            0.01671,
+            0.01992
+          ],
+          [
+            0.00889,
+            0.02443
+          ],
+          [
+            0,
+            0.026
+          ]
+        ],
+        "segments": 16,
+        "color": "tissue",
+        "scale": [
+          1.8,
+          0.75,
+          0.75
+        ],
+        "tint": "token:ink-2",
+        "at": [
+          1.02,
+          0.21,
+          -0.06
+        ]
+      },
+      "extra": [
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              -0.024
+            ],
+            [
+              0.00821,
+              -0.02255
+            ],
+            [
+              0.01543,
+              -0.01839
+            ],
+            [
+              0.02078,
+              -0.012
+            ],
+            [
+              0.02364,
+              -0.00417
+            ],
+            [
+              0.02364,
+              0.00417
+            ],
+            [
+              0.02078,
+              0.012
+            ],
+            [
+              0.01543,
+              0.01839
+            ],
+            [
+              0.00821,
+              0.02255
+            ],
+            [
+              0,
+              0.024
+            ]
+          ],
+          "segments": 16,
+          "color": "tissue",
+          "scale": [
+            0.8,
+            1.7,
+            0.8
+          ],
+          "tint": "token:ink-2",
+          "at": [
+            1.07,
+            0.25,
+            -0.05
+          ]
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              -0.022
+            ],
+            [
+              0.00752,
+              -0.02067
+            ],
+            [
+              0.01414,
+              -0.01685
+            ],
+            [
+              0.01905,
+              -0.011
+            ],
+            [
+              0.02167,
+              -0.00382
+            ],
+            [
+              0.02167,
+              0.00382
+            ],
+            [
+              0.01905,
+              0.011
+            ],
+            [
+              0.01414,
+              0.01685
+            ],
+            [
+              0.00752,
+              0.02067
+            ],
+            [
+              0,
+              0.022
+            ]
+          ],
+          "segments": 16,
+          "color": "tissue",
+          "scale": [
+            1.7,
+            0.8,
+            0.8
+          ],
+          "tint": "token:ink-2",
+          "at": [
+            0.98,
+            0.27,
+            -0.04
+          ]
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "clip": false,
+      "castShadow": false
+    },
+    {
+      "id": "fungi-inset",
+      "name": {
+        "en": "Fungal threads schematic",
+        "zh": "真菌丝体示意"
+      },
+      "group": "closeups",
+      "summary": {
+        "en": "Breaks down dead organic material.",
+        "zh": "分解死亡的有机物质。"
+      },
+      "detail": {
+        "en": "Fungi are among the organisms that break down mangrove leaf litter. They obtain energy from organic material, not from photosynthesis. [S10]\n\nThe branching threads are an enlarged schematic, not a species identification or a measured microscopic view. [S30]",
+        "zh": "真菌是参与红树林落叶分解的生物之一；它们从有机物质获得能量，不进行光合作用来制造食物。[S10]\n\n分枝丝体是放大示意，不是物种鉴定，也不是实测显微图像。[S30]"
+      },
+      "primitive": {
+        "kind": "sweep",
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.05,
+            0.06,
+            0.01
+          ],
+          [
+            0.09,
+            0.11,
+            0
+          ]
+        ],
+        "radius": 0.004,
+        "radial": 8,
+        "color": "tissue",
+        "tint": "token:ink-2",
+        "segments": 18,
+        "caps": "round",
+        "at": [
+          0.98,
+          0.12,
+          0.09
+        ]
+      },
+      "extra": [
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.08,
+              0,
+              -0.01
+            ],
+            [
+              0.11,
+              0.03,
+              -0.01
+            ]
+          ],
+          "radius": 0.004,
+          "radial": 8,
+          "color": "tissue",
+          "tint": "token:ink-2",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            1.03,
+            0.18,
+            0.1
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -0.03,
+              0.05,
+              0
+            ],
+            [
+              -0.07,
+              0.06,
+              0
+            ]
+          ],
+          "radius": 0.004,
+          "radial": 8,
+          "color": "tissue",
+          "tint": "token:ink-2",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            1.03,
+            0.18,
+            0.1
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.02,
+              -0.04,
+              0.01
+            ]
+          ],
+          "radius": 0.004,
+          "radial": 8,
+          "color": "tissue",
+          "tint": "token:ink-2",
+          "segments": 18,
+          "caps": "round",
+          "at": [
+            1.11,
+            0.18,
+            0.09
+          ]
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "clip": false,
+      "castShadow": false
+    },
+    {
+      "id": "gill-inset",
+      "name": {
+        "en": "Gill-chamber schematic",
+        "zh": "鳃腔示意"
+      },
+      "group": "closeups",
+      "summary": {
+        "en": "Marks a water-retaining gill chamber.",
+        "zh": "标示能保水的鳃腔。"
+      },
+      "detail": {
+        "en": "The giant mudskipper has modified gill chambers that support breathing out of water, alongside skin gas exchange. It remains a fish. [S4]\n\nThis open cavity is an explanatory schematic, not a verified anatomical section or a lung. No detailed gill anatomy is claimed. [S30]",
+        "zh": "弹涂鱼的特化鳃腔与皮肤气体交换，帮助它离水时呼吸；它仍然是鱼。[S4]\n\n这个开放空腔只是解释示意，不是经核实的解剖断面，也不是肺；这里没有声称显示详细鳃部结构。[S30]"
+      },
+      "primitive": {
+        "kind": "sweep",
+        "at": [
+          1.04,
+          0.13,
+          0.27
+        ],
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.02,
+            0.04,
+            0
+          ],
+          [
+            0,
+            0.09,
+            0
+          ]
+        ],
+        "radius": [
+          0.044,
+          0.055,
+          0.04
+        ],
+        "section": "u",
+        "hollow": 0.006,
+        "radial": 12,
+        "segments": 16,
+        "up": [
+          0,
+          0,
+          1
+        ],
+        "color": "tissue",
+        "tint": "token:ink-3"
+      },
+      "extra": [
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              -0.028
+            ],
+            [
+              0.00958,
+              -0.02631
+            ],
+            [
+              0.018,
+              -0.02145
+            ],
+            [
+              0.02425,
+              -0.014
+            ],
+            [
+              0.02757,
+              -0.00486
+            ],
+            [
+              0.02757,
+              0.00486
+            ],
+            [
+              0.02425,
+              0.014
+            ],
+            [
+              0.018,
+              0.02145
+            ],
+            [
+              0.00958,
+              0.02631
+            ],
+            [
+              0,
+              0.028
+            ]
+          ],
+          "segments": 16,
+          "color": "glass",
+          "scale": [
+            1,
+            0.35,
+            0.8
+          ],
+          "tint": "token:cold",
+          "at": [
+            1.04,
+            0.145,
+            0.275
+          ]
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "clip": false,
+      "castShadow": false
+    },
+    {
+      "id": "boardwalk-edge",
+      "name": {
+        "en": "Observation edge",
+        "zh": "观察边界"
+      },
+      "summary": {
+        "en": "Marks the far observation edge.",
+        "zh": "标示远侧的观察边界。"
+      },
+      "detail": {
+        "en": "A simple boardwalk edge suggests observing the habitat without collecting animals. It is scenery with no geographic claim. [S30]",
+        "zh": "简洁的步道边缘提示在栖地外观察；这是场景件，没有地理含义。[S30]"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          1.7,
+          0.045,
+          0.095
+        ],
+        "color": "wood",
+        "tint": "token:ink-3",
+        "at": [
+          0,
+          0.025,
+          -0.54
+        ]
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "clip": false,
+      "castShadow": false,
+      "context": true
+    },
+    {
+      "id": "specimen-base",
+      "name": {
+        "en": "Teaching specimen base",
+        "zh": "教学标本底座"
+      },
+      "summary": {
+        "en": "Supports the habitat and separate schematic insets.",
+        "zh": "承托生境和旁置的示意近景。"
+      },
+      "detail": {
+        "en": "This base holds the habitat and the separate enlarged schematics. It is a display stand with no geographic meaning. [S30]",
+        "zh": "底座承托生境与旁置的放大示意，是没有地理含义的展示台。[S30]"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          2.02,
+          0.04,
+          1.12
+        ],
+        "color": "plastic",
+        "tint": "token:ink-3",
+        "at": [
+          0.18,
+          -0.29,
+          0
+        ]
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "size": [
+            0.29,
+            0.015,
+            0.55
+          ],
+          "color": "plastic",
+          "tint": "token:neutral",
+          "at": [
+            1.04,
+            0.065,
+            0.08
+          ]
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "clip": false,
+      "castShadow": false,
+      "context": true
+    }
+  ],
+  "groups": [
+    {
+      "id": "habitat",
+      "name": {
+        "en": "Habitat",
+        "zh": "生境"
+      },
+      "color": "token:neutral"
+    },
+    {
+      "id": "mangroves",
+      "name": {
+        "en": "Mangrove trees and roots",
+        "zh": "红树与树根"
+      },
+      "color": "token:seedling"
+    },
+    {
+      "id": "animals",
+      "name": {
+        "en": "Animals",
+        "zh": "动物"
+      },
+      "color": "token:ink-2"
+    },
+    {
+      "id": "closeups",
+      "name": {
+        "en": "Schematic closeups · not to scale",
+        "zh": "示意近景 · 不按比例"
+      },
+      "color": "token:ink-3"
+    },
+    {
+      "id": "food-paths",
+      "name": {
+        "en": "Selected food pathways",
+        "zh": "选入食物路径"
+      },
+      "color": "token:en-light"
+    }
+  ],
+  "views": {
+    "assembled": {
+      "camera": {
+        "position": [
+          2.2,
+          1.7,
+          2.6
+        ],
+        "target": [
+          0,
+          0.35,
+          0
+        ],
+        "fov": 32
+      }
+    },
+    "exploded": {
+      "camera": {
+        "position": [
+          2.2,
+          1.7,
+          2.6
+        ],
+        "target": [
+          0,
+          0.35,
+          0
+        ],
+        "fov": 32
+      }
+    },
+    "cutaway": {
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "offset": 0.045
+    },
+    "cuts": {
+      "mud": {
+        "normal": [
+          0,
+          0,
+          -1
+        ],
+        "offset": 0.045,
+        "label": {
+          "en": "Mud section",
+          "zh": "泥层剖面"
+        }
+      }
+    },
+    "section": {
+      "plane": "xy"
+    },
+    "cover": {
+      "position": [
+        2.5,
+        1.8,
+        3
+      ],
+      "target": [
+        0.13,
+        0.29,
+        0
+      ],
+      "fov": 32
+    },
+    "shadows": "contact"
+  },
+  "presets": [
+    {
+      "id": "hero",
+      "label": {
+        "en": "Complete habitat",
+        "zh": "完整生境"
+      },
+      "camera": {
+        "position": [
+          2.2,
+          1.7,
+          2.6
+        ],
+        "target": [
+          0,
+          0.35,
+          0
+        ],
+        "fov": 32
+      }
+    },
+    {
+      "id": "habitat-view",
+      "label": {
+        "en": "Habitat",
+        "zh": "生境"
+      },
+      "camera": {
+        "position": [
+          1.8,
+          1.1,
+          2.2
+        ],
+        "target": [
+          0,
+          0.2,
+          0
+        ],
+        "fov": 32
+      }
+    },
+    {
+      "id": "roots-view",
+      "label": {
+        "en": "Root connections",
+        "zh": "根系连接"
+      },
+      "camera": {
+        "position": [
+          -1.1,
+          0.45,
+          1.2
+        ],
+        "target": [
+          -0.35,
+          0.02,
+          0
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "tide-view",
+      "label": {
+        "en": "Tide poses",
+        "zh": "潮位姿态"
+      },
+      "camera": {
+        "position": [
+          1.6,
+          0.5,
+          1.6
+        ],
+        "target": [
+          0.1,
+          0.05,
+          0.1
+        ],
+        "fov": 32
+      }
+    },
+    {
+      "id": "animal-view",
+      "label": {
+        "en": "Animal features",
+        "zh": "动物结构"
+      },
+      "camera": {
+        "position": [
+          1.2,
+          0.45,
+          1.3
+        ],
+        "target": [
+          0.2,
+          0.08,
+          0.2
+        ],
+        "fov": 28
+      }
+    },
+    {
+      "id": "web-view",
+      "label": {
+        "en": "Food relationships",
+        "zh": "食物关系"
+      },
+      "camera": {
+        "position": [
+          1.9,
+          1.4,
+          2.1
+        ],
+        "target": [
+          0.05,
+          0.25,
+          0.05
+        ],
+        "fov": 32
+      }
+    }
+  ],
+  "spec": [
+    {
+      "key": {
+        "en": "Model",
+        "zh": "模型"
+      },
+      "value": {
+        "en": "Habitat study",
+        "zh": "生境研究"
+      },
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Web",
+        "zh": "食物网"
+      },
+      "value": {
+        "en": "6 nodes · 6 links",
+        "zh": "6 节点 · 6 连线"
+      },
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Tide",
+        "zh": "潮位"
+      },
+      "value": {
+        "en": "Diagrammatic",
+        "zh": "示意"
+      },
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Sources",
+        "zh": "来源"
+      },
+      "value": {
+        "en": "Selected observations",
+        "zh": "选入的观察"
+      },
+      "tag": "design"
+    }
+  ],
+  "flows": [
+    {
+      "id": "food-e-leaves-tree",
+      "group": "food-paths",
+      "path": [
+        [
+          -0.1,
+          0.025,
+          0.1
+        ],
+        [
+          0.045,
+          0.25,
+          -0.045
+        ],
+        [
+          0.19,
+          0.15,
+          -0.19
+        ]
+      ],
+      "color": "token:food",
+      "speed": 0.12,
+      "count": 24,
+      "size": 0.6,
+      "spread": 0.002,
+      "clip": false,
+      "flat": true,
+      "whenRun": true
+    },
+    {
+      "id": "food-e-algae-tree",
+      "group": "food-paths",
+      "path": [
+        [
+          0.055,
+          0.014,
+          0.13
+        ],
+        [
+          0.1225,
+          0.25,
+          -0.03
+        ],
+        [
+          0.19,
+          0.15,
+          -0.19
+        ]
+      ],
+      "color": "token:food",
+      "speed": 0.12,
+      "count": 24,
+      "size": 0.6,
+      "spread": 0.002,
+      "clip": false,
+      "flat": true,
+      "whenRun": true
+    },
+    {
+      "id": "food-e-algae-fiddlers",
+      "group": "food-paths",
+      "path": [
+        [
+          0.055,
+          0.014,
+          0.13
+        ],
+        [
+          -0.1475,
+          0.14500000000000002,
+          0.085
+        ],
+        [
+          -0.35,
+          0.045,
+          0.04
+        ]
+      ],
+      "color": "token:food",
+      "speed": 0.12,
+      "count": 24,
+      "size": 0.6,
+      "spread": 0.002,
+      "clip": false,
+      "flat": true,
+      "whenRun": true
+    },
+    {
+      "id": "food-e-fiddlers-fish",
+      "group": "food-paths",
+      "path": [
+        [
+          -0.35,
+          0.045,
+          0.04
+        ],
+        [
+          0.035,
+          0.155,
+          0.0925
+        ],
+        [
+          0.42,
+          0.055,
+          0.145
+        ]
+      ],
+      "color": "token:food",
+      "speed": 0.12,
+      "count": 24,
+      "size": 0.6,
+      "spread": 0.002,
+      "clip": false,
+      "flat": true,
+      "whenRun": true
+    },
+    {
+      "id": "food-e-tree-fish",
+      "group": "food-paths",
+      "path": [
+        [
+          0.19,
+          0.15,
+          -0.19
+        ],
+        [
+          0.305,
+          0.25,
+          -0.022500000000000006
+        ],
+        [
+          0.42,
+          0.055,
+          0.145
+        ]
+      ],
+      "color": "token:food",
+      "speed": 0.12,
+      "count": 24,
+      "size": 0.6,
+      "spread": 0.002,
+      "clip": false,
+      "flat": true,
+      "whenRun": true
+    },
+    {
+      "id": "food-e-fish-heron",
+      "group": "food-paths",
+      "path": [
+        [
+          0.42,
+          0.055,
+          0.145
+        ],
+        [
+          0.605,
+          0.45999999999999996,
+          0.06249999999999999
+        ],
+        [
+          0.79,
+          0.36,
+          -0.02
+        ]
+      ],
+      "color": "token:food",
+      "speed": 0.12,
+      "count": 24,
+      "size": 0.6,
+      "spread": 0.002,
+      "clip": false,
+      "flat": true,
+      "whenRun": true
+    }
+  ],
+  "animations": [],
+  "sim": {
+    "kind": "table",
+    "controls": [
+      {
+        "id": "remove",
+        "kind": "choice",
+        "label": {
+          "en": "Remove from this web",
+          "zh": "从这个网移走"
+        },
+        "default": "none",
+        "options": [
+          {
+            "id": "none",
+            "label": {
+              "en": "Nothing",
+              "zh": "不移走"
+            }
+          },
+          {
+            "id": "n-mangrove",
+            "label": {
+              "en": "Mangrove leaf supply",
+              "zh": "红树叶片供应"
+            }
+          },
+          {
+            "id": "n-algae",
+            "label": {
+              "en": "Surface algae",
+              "zh": "泥面藻类"
+            }
+          },
+          {
+            "id": "n-tree-crabs",
+            "label": {
+              "en": "Climbing crabs",
+              "zh": "攀爬蟹类"
+            }
+          },
+          {
+            "id": "n-fiddlers",
+            "label": {
+              "en": "Fiddler crabs",
+              "zh": "招潮蟹"
+            }
+          },
+          {
+            "id": "n-mudskipper",
+            "label": {
+              "en": "Giant mudskipper",
+              "zh": "弹涂鱼"
+            }
+          },
+          {
+            "id": "n-heron",
+            "label": {
+              "en": "Heron",
+              "zh": "鹭"
+            }
+          }
+        ]
+      },
+      {
+        "id": "inspect",
+        "kind": "choice",
+        "label": {
+          "en": "Inspect food pathways",
+          "zh": "查看食物路径"
+        },
+        "default": "n-mudskipper",
+        "options": [
+          {
+            "id": "n-tree-crabs",
+            "label": {
+              "en": "Climbing crabs",
+              "zh": "攀爬蟹类"
+            }
+          },
+          {
+            "id": "n-fiddlers",
+            "label": {
+              "en": "Fiddler crabs",
+              "zh": "招潮蟹"
+            }
+          },
+          {
+            "id": "n-mudskipper",
+            "label": {
+              "en": "Giant mudskipper",
+              "zh": "弹涂鱼"
+            }
+          },
+          {
+            "id": "n-heron",
+            "label": {
+              "en": "Heron",
+              "zh": "鹭"
+            }
+          }
+        ]
+      },
+      {
+        "id": "tide",
+        "kind": "choice",
+        "label": {
+          "en": "Diagrammatic tide pose",
+          "zh": "示意潮位姿态"
+        },
+        "default": "low",
+        "options": [
+          {
+            "id": "low",
+            "label": {
+              "en": "Low",
+              "zh": "低水位"
+            }
+          },
+          {
+            "id": "high",
+            "label": {
+              "en": "High",
+              "zh": "高水位"
+            }
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "id": "present-count",
+        "kind": "number",
+        "label": {
+          "en": "Present nodes",
+          "zh": "未移走节点"
+        },
+        "decimals": 0,
+        "tag": "sim"
+      },
+      {
+        "id": "supported-count",
+        "kind": "number",
+        "label": {
+          "en": "Nodes with food paths",
+          "zh": "有食物路径节点"
+        },
+        "decimals": 0,
+        "tag": "sim"
+      },
+      {
+        "id": "active-links",
+        "kind": "number",
+        "label": {
+          "en": "Active links",
+          "zh": "有效连线"
+        },
+        "decimals": 0,
+        "tag": "sim"
+      },
+      {
+        "id": "status-n-mangrove",
+        "kind": "state",
+        "label": {
+          "en": "Mangrove leaf supply",
+          "zh": "红树叶片供应"
+        },
+        "states": {
+          "unchanged": {
+            "en": "Same shown foods",
+            "zh": "图内食物未减少"
+          },
+          "fewer-foods": {
+            "en": "Fewer shown foods",
+            "zh": "图内食物减少"
+          },
+          "no-shown-food": {
+            "en": "No food path shown",
+            "zh": "图内未留食物路径"
+          },
+          "removed": {
+            "en": "Removed from this web",
+            "zh": "已从这个网移走"
+          }
+        }
+      },
+      {
+        "id": "status-n-algae",
+        "kind": "state",
+        "label": {
+          "en": "Surface algae",
+          "zh": "泥面藻类"
+        },
+        "states": {
+          "unchanged": {
+            "en": "Same shown foods",
+            "zh": "图内食物未减少"
+          },
+          "fewer-foods": {
+            "en": "Fewer shown foods",
+            "zh": "图内食物减少"
+          },
+          "no-shown-food": {
+            "en": "No food path shown",
+            "zh": "图内未留食物路径"
+          },
+          "removed": {
+            "en": "Removed from this web",
+            "zh": "已从这个网移走"
+          }
+        }
+      },
+      {
+        "id": "status-n-tree-crabs",
+        "kind": "state",
+        "label": {
+          "en": "Climbing crabs",
+          "zh": "攀爬蟹类"
+        },
+        "states": {
+          "unchanged": {
+            "en": "Same shown foods",
+            "zh": "图内食物未减少"
+          },
+          "fewer-foods": {
+            "en": "Fewer shown foods",
+            "zh": "图内食物减少"
+          },
+          "no-shown-food": {
+            "en": "No food path shown",
+            "zh": "图内未留食物路径"
+          },
+          "removed": {
+            "en": "Removed from this web",
+            "zh": "已从这个网移走"
+          }
+        }
+      },
+      {
+        "id": "status-n-fiddlers",
+        "kind": "state",
+        "label": {
+          "en": "Fiddler crabs",
+          "zh": "招潮蟹"
+        },
+        "states": {
+          "unchanged": {
+            "en": "Same shown foods",
+            "zh": "图内食物未减少"
+          },
+          "fewer-foods": {
+            "en": "Fewer shown foods",
+            "zh": "图内食物减少"
+          },
+          "no-shown-food": {
+            "en": "No food path shown",
+            "zh": "图内未留食物路径"
+          },
+          "removed": {
+            "en": "Removed from this web",
+            "zh": "已从这个网移走"
+          }
+        }
+      },
+      {
+        "id": "status-n-mudskipper",
+        "kind": "state",
+        "label": {
+          "en": "Giant mudskipper",
+          "zh": "弹涂鱼"
+        },
+        "states": {
+          "unchanged": {
+            "en": "Same shown foods",
+            "zh": "图内食物未减少"
+          },
+          "fewer-foods": {
+            "en": "Fewer shown foods",
+            "zh": "图内食物减少"
+          },
+          "no-shown-food": {
+            "en": "No food path shown",
+            "zh": "图内未留食物路径"
+          },
+          "removed": {
+            "en": "Removed from this web",
+            "zh": "已从这个网移走"
+          }
+        }
+      },
+      {
+        "id": "status-n-heron",
+        "kind": "state",
+        "label": {
+          "en": "Heron",
+          "zh": "鹭"
+        },
+        "states": {
+          "unchanged": {
+            "en": "Same shown foods",
+            "zh": "图内食物未减少"
+          },
+          "fewer-foods": {
+            "en": "Fewer shown foods",
+            "zh": "图内食物减少"
+          },
+          "no-shown-food": {
+            "en": "No food path shown",
+            "zh": "图内未留食物路径"
+          },
+          "removed": {
+            "en": "Removed from this web",
+            "zh": "已从这个网移走"
+          }
+        }
+      },
+      {
+        "id": "active-e-leaves-tree",
+        "kind": "number",
+        "label": {
+          "en": "Active feeding link",
+          "zh": "有效取食连线"
+        },
+        "decimals": 0,
+        "tag": "sim"
+      },
+      {
+        "id": "active-e-algae-tree",
+        "kind": "number",
+        "label": {
+          "en": "Active feeding link",
+          "zh": "有效取食连线"
+        },
+        "decimals": 0,
+        "tag": "sim"
+      },
+      {
+        "id": "active-e-algae-fiddlers",
+        "kind": "number",
+        "label": {
+          "en": "Active feeding link",
+          "zh": "有效取食连线"
+        },
+        "decimals": 0,
+        "tag": "sim"
+      },
+      {
+        "id": "active-e-fiddlers-fish",
+        "kind": "number",
+        "label": {
+          "en": "Active feeding link",
+          "zh": "有效取食连线"
+        },
+        "decimals": 0,
+        "tag": "sim"
+      },
+      {
+        "id": "active-e-tree-fish",
+        "kind": "number",
+        "label": {
+          "en": "Active feeding link",
+          "zh": "有效取食连线"
+        },
+        "decimals": 0,
+        "tag": "sim"
+      },
+      {
+        "id": "active-e-fish-heron",
+        "kind": "number",
+        "label": {
+          "en": "Active feeding link",
+          "zh": "有效取食连线"
+        },
+        "decimals": 0,
+        "tag": "sim"
+      },
+      {
+        "id": "foods",
+        "kind": "number",
+        "label": {
+          "en": "Shown food types",
+          "zh": "图内食物种类"
+        },
+        "decimals": 0,
+        "tag": "sim"
+      },
+      {
+        "id": "food-status",
+        "kind": "state",
+        "label": {
+          "en": "Food pathway status",
+          "zh": "食物路径状态"
+        },
+        "states": {
+          "unchanged": {
+            "en": "Same shown foods",
+            "zh": "图内食物未减少"
+          },
+          "fewer-foods": {
+            "en": "Fewer shown foods",
+            "zh": "图内食物减少"
+          },
+          "no-shown-food": {
+            "en": "No food path shown",
+            "zh": "图内未留食物路径"
+          },
+          "removed": {
+            "en": "Removed from this web",
+            "zh": "已从这个网移走"
+          }
+        }
+      },
+      {
+        "id": "water-rise",
+        "kind": "number",
+        "label": {
+          "en": "Diagram water displacement",
+          "zh": "示意水面位移"
+        },
+        "decimals": 2,
+        "tag": "sim"
+      },
+      {
+        "id": "crab-rise",
+        "kind": "number",
+        "label": {
+          "en": "Diagram crab displacement",
+          "zh": "示意蟹位移"
+        },
+        "decimals": 2,
+        "tag": "sim"
+      },
+      {
+        "id": "show-fiddlers",
+        "kind": "number",
+        "label": {
+          "en": "Fiddlers visible",
+          "zh": "招潮蟹可见"
+        },
+        "decimals": 0,
+        "tag": "sim"
+      }
+    ],
+    "table": {
+      "experiments": {
+        "web": {
+          "keys": [
+            "remove"
+          ],
+          "rows": [
+            {
+              "when": {
+                "remove": "none"
+              },
+              "set": {
+                "present-count": 6,
+                "supported-count": 6,
+                "active-links": 6,
+                "status-n-mangrove": "unchanged",
+                "status-n-algae": "unchanged",
+                "status-n-tree-crabs": "unchanged",
+                "status-n-fiddlers": "unchanged",
+                "status-n-mudskipper": "unchanged",
+                "status-n-heron": "unchanged",
+                "active-e-leaves-tree": 1,
+                "active-e-algae-tree": 1,
+                "active-e-algae-fiddlers": 1,
+                "active-e-fiddlers-fish": 1,
+                "active-e-tree-fish": 1,
+                "active-e-fish-heron": 1
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-mangrove"
+              },
+              "set": {
+                "present-count": 5,
+                "supported-count": 5,
+                "active-links": 5,
+                "status-n-mangrove": "removed",
+                "status-n-algae": "unchanged",
+                "status-n-tree-crabs": "fewer-foods",
+                "status-n-fiddlers": "unchanged",
+                "status-n-mudskipper": "unchanged",
+                "status-n-heron": "unchanged",
+                "active-e-leaves-tree": 0,
+                "active-e-algae-tree": 1,
+                "active-e-algae-fiddlers": 1,
+                "active-e-fiddlers-fish": 1,
+                "active-e-tree-fish": 1,
+                "active-e-fish-heron": 1
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-algae"
+              },
+              "set": {
+                "present-count": 5,
+                "supported-count": 4,
+                "active-links": 3,
+                "status-n-mangrove": "unchanged",
+                "status-n-algae": "removed",
+                "status-n-tree-crabs": "fewer-foods",
+                "status-n-fiddlers": "no-shown-food",
+                "status-n-mudskipper": "fewer-foods",
+                "status-n-heron": "unchanged",
+                "active-e-leaves-tree": 1,
+                "active-e-algae-tree": 0,
+                "active-e-algae-fiddlers": 0,
+                "active-e-fiddlers-fish": 0,
+                "active-e-tree-fish": 1,
+                "active-e-fish-heron": 1
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-tree-crabs"
+              },
+              "set": {
+                "present-count": 5,
+                "supported-count": 5,
+                "active-links": 3,
+                "status-n-mangrove": "unchanged",
+                "status-n-algae": "unchanged",
+                "status-n-tree-crabs": "removed",
+                "status-n-fiddlers": "unchanged",
+                "status-n-mudskipper": "fewer-foods",
+                "status-n-heron": "unchanged",
+                "active-e-leaves-tree": 0,
+                "active-e-algae-tree": 0,
+                "active-e-algae-fiddlers": 1,
+                "active-e-fiddlers-fish": 1,
+                "active-e-tree-fish": 0,
+                "active-e-fish-heron": 1
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-fiddlers"
+              },
+              "set": {
+                "present-count": 5,
+                "supported-count": 5,
+                "active-links": 4,
+                "status-n-mangrove": "unchanged",
+                "status-n-algae": "unchanged",
+                "status-n-tree-crabs": "unchanged",
+                "status-n-fiddlers": "removed",
+                "status-n-mudskipper": "fewer-foods",
+                "status-n-heron": "unchanged",
+                "active-e-leaves-tree": 1,
+                "active-e-algae-tree": 1,
+                "active-e-algae-fiddlers": 0,
+                "active-e-fiddlers-fish": 0,
+                "active-e-tree-fish": 1,
+                "active-e-fish-heron": 1
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-mudskipper"
+              },
+              "set": {
+                "present-count": 5,
+                "supported-count": 4,
+                "active-links": 3,
+                "status-n-mangrove": "unchanged",
+                "status-n-algae": "unchanged",
+                "status-n-tree-crabs": "unchanged",
+                "status-n-fiddlers": "unchanged",
+                "status-n-mudskipper": "removed",
+                "status-n-heron": "no-shown-food",
+                "active-e-leaves-tree": 1,
+                "active-e-algae-tree": 1,
+                "active-e-algae-fiddlers": 1,
+                "active-e-fiddlers-fish": 0,
+                "active-e-tree-fish": 0,
+                "active-e-fish-heron": 0
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-heron"
+              },
+              "set": {
+                "present-count": 5,
+                "supported-count": 5,
+                "active-links": 5,
+                "status-n-mangrove": "unchanged",
+                "status-n-algae": "unchanged",
+                "status-n-tree-crabs": "unchanged",
+                "status-n-fiddlers": "unchanged",
+                "status-n-mudskipper": "unchanged",
+                "status-n-heron": "removed",
+                "active-e-leaves-tree": 1,
+                "active-e-algae-tree": 1,
+                "active-e-algae-fiddlers": 1,
+                "active-e-fiddlers-fish": 1,
+                "active-e-tree-fish": 1,
+                "active-e-fish-heron": 0
+              },
+              "source": [
+                "S30"
+              ]
+            }
+          ]
+        },
+        "inspection": {
+          "keys": [
+            "remove",
+            "inspect"
+          ],
+          "rows": [
+            {
+              "when": {
+                "remove": "none",
+                "inspect": "n-tree-crabs"
+              },
+              "set": {
+                "foods": 2,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "none",
+                "inspect": "n-fiddlers"
+              },
+              "set": {
+                "foods": 1,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "none",
+                "inspect": "n-mudskipper"
+              },
+              "set": {
+                "foods": 2,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "none",
+                "inspect": "n-heron"
+              },
+              "set": {
+                "foods": 1,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-mangrove",
+                "inspect": "n-tree-crabs"
+              },
+              "set": {
+                "foods": 1,
+                "food-status": "fewer-foods"
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-mangrove",
+                "inspect": "n-fiddlers"
+              },
+              "set": {
+                "foods": 1,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-mangrove",
+                "inspect": "n-mudskipper"
+              },
+              "set": {
+                "foods": 2,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-mangrove",
+                "inspect": "n-heron"
+              },
+              "set": {
+                "foods": 1,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-algae",
+                "inspect": "n-tree-crabs"
+              },
+              "set": {
+                "foods": 1,
+                "food-status": "fewer-foods"
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-algae",
+                "inspect": "n-fiddlers"
+              },
+              "set": {
+                "foods": 0,
+                "food-status": "no-shown-food"
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-algae",
+                "inspect": "n-mudskipper"
+              },
+              "set": {
+                "foods": 1,
+                "food-status": "fewer-foods"
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-algae",
+                "inspect": "n-heron"
+              },
+              "set": {
+                "foods": 1,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-tree-crabs",
+                "inspect": "n-tree-crabs"
+              },
+              "set": {
+                "foods": 0,
+                "food-status": "removed"
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-tree-crabs",
+                "inspect": "n-fiddlers"
+              },
+              "set": {
+                "foods": 1,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-tree-crabs",
+                "inspect": "n-mudskipper"
+              },
+              "set": {
+                "foods": 1,
+                "food-status": "fewer-foods"
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-tree-crabs",
+                "inspect": "n-heron"
+              },
+              "set": {
+                "foods": 1,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-fiddlers",
+                "inspect": "n-tree-crabs"
+              },
+              "set": {
+                "foods": 2,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-fiddlers",
+                "inspect": "n-fiddlers"
+              },
+              "set": {
+                "foods": 0,
+                "food-status": "removed"
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-fiddlers",
+                "inspect": "n-mudskipper"
+              },
+              "set": {
+                "foods": 1,
+                "food-status": "fewer-foods"
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-fiddlers",
+                "inspect": "n-heron"
+              },
+              "set": {
+                "foods": 1,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-mudskipper",
+                "inspect": "n-tree-crabs"
+              },
+              "set": {
+                "foods": 2,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-mudskipper",
+                "inspect": "n-fiddlers"
+              },
+              "set": {
+                "foods": 1,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-mudskipper",
+                "inspect": "n-mudskipper"
+              },
+              "set": {
+                "foods": 0,
+                "food-status": "removed"
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-mudskipper",
+                "inspect": "n-heron"
+              },
+              "set": {
+                "foods": 0,
+                "food-status": "no-shown-food"
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-heron",
+                "inspect": "n-tree-crabs"
+              },
+              "set": {
+                "foods": 2,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-heron",
+                "inspect": "n-fiddlers"
+              },
+              "set": {
+                "foods": 1,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-heron",
+                "inspect": "n-mudskipper"
+              },
+              "set": {
+                "foods": 2,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-heron",
+                "inspect": "n-heron"
+              },
+              "set": {
+                "foods": 0,
+                "food-status": "removed"
+              },
+              "source": [
+                "S30"
+              ]
+            }
+          ]
+        },
+        "tide-pose": {
+          "keys": [
+            "remove",
+            "tide"
+          ],
+          "rows": [
+            {
+              "when": {
+                "remove": "none",
+                "tide": "low"
+              },
+              "set": {
+                "water-rise": 0,
+                "crab-rise": 0,
+                "show-fiddlers": 1
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "none",
+                "tide": "high"
+              },
+              "set": {
+                "water-rise": 0.14,
+                "crab-rise": 0.16,
+                "show-fiddlers": 0
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-mangrove",
+                "tide": "low"
+              },
+              "set": {
+                "water-rise": 0,
+                "crab-rise": 0,
+                "show-fiddlers": 1
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-mangrove",
+                "tide": "high"
+              },
+              "set": {
+                "water-rise": 0.14,
+                "crab-rise": 0.16,
+                "show-fiddlers": 0
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-algae",
+                "tide": "low"
+              },
+              "set": {
+                "water-rise": 0,
+                "crab-rise": 0,
+                "show-fiddlers": 1
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-algae",
+                "tide": "high"
+              },
+              "set": {
+                "water-rise": 0.14,
+                "crab-rise": 0.16,
+                "show-fiddlers": 0
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-tree-crabs",
+                "tide": "low"
+              },
+              "set": {
+                "water-rise": 0,
+                "crab-rise": 0,
+                "show-fiddlers": 1
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-tree-crabs",
+                "tide": "high"
+              },
+              "set": {
+                "water-rise": 0.14,
+                "crab-rise": 0.16,
+                "show-fiddlers": 0
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-fiddlers",
+                "tide": "low"
+              },
+              "set": {
+                "water-rise": 0,
+                "crab-rise": 0,
+                "show-fiddlers": 0
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-fiddlers",
+                "tide": "high"
+              },
+              "set": {
+                "water-rise": 0.14,
+                "crab-rise": 0.16,
+                "show-fiddlers": 0
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-mudskipper",
+                "tide": "low"
+              },
+              "set": {
+                "water-rise": 0,
+                "crab-rise": 0,
+                "show-fiddlers": 1
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-mudskipper",
+                "tide": "high"
+              },
+              "set": {
+                "water-rise": 0.14,
+                "crab-rise": 0.16,
+                "show-fiddlers": 0
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-heron",
+                "tide": "low"
+              },
+              "set": {
+                "water-rise": 0,
+                "crab-rise": 0,
+                "show-fiddlers": 1
+              },
+              "source": [
+                "S30"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-heron",
+                "tide": "high"
+              },
+              "set": {
+                "water-rise": 0.14,
+                "crab-rise": 0.16,
+                "show-fiddlers": 0
+              },
+              "source": [
+                "S30"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "bind": [
+      {
+        "output": "water-rise",
+        "part": "tidal-water",
+        "offset": {
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "per": 1,
+          "origin": 0
+        }
+      },
+      {
+        "output": "crab-rise",
+        "part": "tree-crabs",
+        "offset": {
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "per": 1,
+          "origin": 0
+        }
+      },
+      {
+        "output": "show-fiddlers",
+        "part": "fiddler-crabs",
+        "visible": {
+          "eq": 1
+        }
+      },
+      {
+        "control": "remove",
+        "part": [
+          "bakau-tree",
+          "bakau-prop"
+        ],
+        "visible": {
+          "ne": "n-mangrove"
+        }
+      },
+      {
+        "control": "remove",
+        "part": [
+          "algae-patch"
+        ],
+        "visible": {
+          "ne": "n-algae"
+        }
+      },
+      {
+        "control": "remove",
+        "part": [
+          "tree-crabs"
+        ],
+        "visible": {
+          "ne": "n-tree-crabs"
+        }
+      },
+      {
+        "control": "remove",
+        "part": [
+          "giant-mudskipper"
+        ],
+        "visible": {
+          "ne": "n-mudskipper"
+        }
+      },
+      {
+        "control": "remove",
+        "part": [
+          "heron"
+        ],
+        "visible": {
+          "ne": "n-heron"
+        }
+      },
+      {
+        "output": "active-e-leaves-tree",
+        "flow": "food-e-leaves-tree",
+        "intensity": {
+          "full": 1,
+          "mode": "density"
+        }
+      },
+      {
+        "control": "tide",
+        "flow": "food-e-leaves-tree",
+        "visible": {
+          "eq": "low"
+        }
+      },
+      {
+        "output": "active-e-algae-tree",
+        "flow": "food-e-algae-tree",
+        "intensity": {
+          "full": 1,
+          "mode": "density"
+        }
+      },
+      {
+        "control": "tide",
+        "flow": "food-e-algae-tree",
+        "visible": {
+          "eq": "low"
+        }
+      },
+      {
+        "output": "active-e-algae-fiddlers",
+        "flow": "food-e-algae-fiddlers",
+        "intensity": {
+          "full": 1,
+          "mode": "density"
+        }
+      },
+      {
+        "control": "tide",
+        "flow": "food-e-algae-fiddlers",
+        "visible": {
+          "eq": "low"
+        }
+      },
+      {
+        "output": "active-e-fiddlers-fish",
+        "flow": "food-e-fiddlers-fish",
+        "intensity": {
+          "full": 1,
+          "mode": "density"
+        }
+      },
+      {
+        "control": "tide",
+        "flow": "food-e-fiddlers-fish",
+        "visible": {
+          "eq": "low"
+        }
+      },
+      {
+        "output": "active-e-tree-fish",
+        "flow": "food-e-tree-fish",
+        "intensity": {
+          "full": 1,
+          "mode": "density"
+        }
+      },
+      {
+        "control": "tide",
+        "flow": "food-e-tree-fish",
+        "visible": {
+          "eq": "low"
+        }
+      },
+      {
+        "output": "active-e-fish-heron",
+        "flow": "food-e-fish-heron",
+        "intensity": {
+          "full": 1,
+          "mode": "density"
+        }
+      },
+      {
+        "control": "tide",
+        "flow": "food-e-fish-heron",
+        "visible": {
+          "eq": "low"
+        }
+      }
+    ],
+    "foodWeb": {
+      "inspect": "inspect",
+      "nodes": [
+        {
+          "id": "n-mangrove",
+          "label": {
+            "en": "Mangrove leaf supply",
+            "zh": "红树叶片供应"
+          },
+          "role": "producer",
+          "parts": [
+            "bakau-tree",
+            "bakau-prop"
+          ],
+          "d": [
+            0.25,
+            0.1
+          ],
+          "sources": [
+            "S6",
+            "S24"
+          ],
+          "output": "status-n-mangrove"
+        },
+        {
+          "id": "n-algae",
+          "label": {
+            "en": "Surface algae",
+            "zh": "泥面藻类"
+          },
+          "role": "producer",
+          "parts": [
+            "algae-patch"
+          ],
+          "d": [
+            0.75,
+            0.1
+          ],
+          "sources": [
+            "S18",
+            "S24"
+          ],
+          "output": "status-n-algae"
+        },
+        {
+          "id": "n-tree-crabs",
+          "label": {
+            "en": "Climbing crabs",
+            "zh": "攀爬蟹类"
+          },
+          "role": "consumer",
+          "parts": [
+            "tree-crabs"
+          ],
+          "d": [
+            0.25,
+            0.37
+          ],
+          "sources": [
+            "S6",
+            "S7"
+          ],
+          "output": "status-n-tree-crabs"
+        },
+        {
+          "id": "n-fiddlers",
+          "label": {
+            "en": "Fiddler crabs",
+            "zh": "招潮蟹"
+          },
+          "role": "consumer",
+          "parts": [
+            "fiddler-crabs"
+          ],
+          "d": [
+            0.75,
+            0.37
+          ],
+          "sources": [
+            "S5",
+            "S18"
+          ],
+          "output": "status-n-fiddlers"
+        },
+        {
+          "id": "n-mudskipper",
+          "label": {
+            "en": "Giant mudskipper",
+            "zh": "弹涂鱼"
+          },
+          "role": "consumer",
+          "parts": [
+            "giant-mudskipper"
+          ],
+          "d": [
+            0.5,
+            0.64
+          ],
+          "sources": [
+            "S4"
+          ],
+          "output": "status-n-mudskipper"
+        },
+        {
+          "id": "n-heron",
+          "label": {
+            "en": "Heron",
+            "zh": "鹭"
+          },
+          "role": "consumer",
+          "parts": [
+            "heron"
+          ],
+          "d": [
+            0.5,
+            0.9
+          ],
+          "sources": [
+            "S4",
+            "S29"
+          ],
+          "output": "status-n-heron"
+        }
+      ],
+      "edges": [
+        {
+          "id": "e-leaves-tree",
+          "from": "n-mangrove",
+          "to": "n-tree-crabs",
+          "evidence": "local-observation",
+          "sources": [
+            "S6"
+          ],
+          "note": {
+            "en": "Fallen leaf material, not a living producer node for detritus.",
+            "zh": "这条边表示叶片输入，不把死叶当活生产者。"
+          },
+          "output": "active-e-leaves-tree"
+        },
+        {
+          "id": "e-algae-tree",
+          "from": "n-algae",
+          "to": "n-tree-crabs",
+          "evidence": "indexed-only",
+          "sources": [
+            "S7"
+          ],
+          "note": {
+            "en": "Indexed climbing-crab account. This selected group-level possibility is not a verified local Episesarma diet link. Different climbing-crab kinds are grouped here.",
+            "zh": "只读到攀爬蟹类资料的索引。此线是功能组层面的可能关系，不是本地某种 Episesarma 的已核食谱；这里合并了不同蟹类。"
+          },
+          "output": "active-e-algae-tree"
+        },
+        {
+          "id": "e-algae-fiddlers",
+          "from": "n-algae",
+          "to": "n-fiddlers",
+          "evidence": "general",
+          "sources": [
+            "S18"
+          ],
+          "note": {
+            "en": "Observed elsewhere; possible food-group link, not a Singapore measurement.",
+            "zh": "外地观察支持可能关系；不是本地食性实测。"
+          },
+          "output": "active-e-algae-fiddlers"
+        },
+        {
+          "id": "e-fiddlers-fish",
+          "from": "n-fiddlers",
+          "to": "n-mudskipper",
+          "evidence": "indexed-only",
+          "sources": [
+            "S4",
+            "S13",
+            "S31"
+          ],
+          "note": {
+            "en": "General guide differs from the Lim Chu Kang sample; not a measured local pair.",
+            "zh": "一般指南与林厝港样本不同；不是本地实测配对。"
+          },
+          "output": "active-e-fiddlers-fish"
+        },
+        {
+          "id": "e-tree-fish",
+          "from": "n-tree-crabs",
+          "to": "n-mudskipper",
+          "evidence": "reported-observation",
+          "sources": [
+            "S13"
+          ],
+          "note": {
+            "en": "The indexed paper reports opportunistic feeding on an Episesarma crab, without a feeding frequency. This functional group includes other climbing crabs.",
+            "zh": "论文索引报告了对 Episesarma 蟹的机会取食观察，没有取食频率。这个功能组也包含其他攀爬蟹类。"
+          },
+          "output": "active-e-tree-fish"
+        },
+        {
+          "id": "e-fish-heron",
+          "from": "n-mudskipper",
+          "to": "n-heron",
+          "evidence": "general",
+          "sources": [
+            "S4"
+          ],
+          "note": {
+            "en": "NParks identifies herons as predators of giant mudskippers.",
+            "zh": "NParks 明述鹭会捕食这种弹涂鱼。"
+          },
+          "output": "active-e-fish-heron"
+        }
+      ],
+      "note": {
+        "en": "Selected possible feeding links. Missing pathways do not predict extinction.",
+        "zh": "这里只选入一些可能的取食关系。路径中断不等于预测灭绝。"
+      }
+    }
+  }
+}

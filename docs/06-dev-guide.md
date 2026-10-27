@@ -1678,6 +1678,35 @@ docs/40 §4.2 E-HL1。`sim.kind: "table"`：模型不算，只**按控件查有�
 - **validate**（`tableIssues`，parts 文件解析时）：`keys` 是控件、不重复；行的 `when` 恰好写全 `keys`、值合法；每个实验对 `keys` 的全部值组合**恰好一行**（列出缺的、重的）；`set` 的键是输出、种类对得上（数 / `{ value, decimals }` 给数输出，带标签的状态 id 给状态输出）；同一实验每行设定同一组输出；一个输出只属于一个实验；输出不写 `from`、只能是数或状态；`count` 绑定的零件 `repeat.count` ≥ 该输出在表里的最大份数（按 `count` 的取整），否则报"not enough balls"；先猜后看的 `change` 只改 `observe` 所在实验的 `keys`（`tablePredictIssues`，章节校验）。**来源**（`tableSourceIssues`，`pnpm validate` 对照 `data/sources.json`）：每个 `S#` 都在；设定 `sim` 数输出的行至少引一条 `design: true` 的来源（`sources.json` 新的可选字段：主题自己的设计研究；`SOURCES.md` 标注 design study），设定 `typical` 数输出的行至少引一条不是设计研究的来源；只设定状态的行引什么都行。
 - **测试 API**：`__atlas.engine.sim()` 照旧，表模型多一个 `sources`：`{ <typical 输出>: [S#…] }`（此刻那一行的来源）；`copies(partId)`：`count` 绑定此刻画出的份数。
 
+### SpaceScene · 可选食物网卡（sim.foodWeb，E-MW2）
+
+docs/53 §4。`sim.kind:"table"` 可以加 **`sim.foodWeb`**（与 `sim.table` 并列，不在 table 内）。这是有向图的显示数据，没有新的 solver、sim kind、输出种类、binding、URL、时钟、快捷键或测试 API。`sort` 只做特征分类；table 足够列出有限的移走/观察/潮位组合；普通 PartChainCard 是无方向的结构连接，不能表达食物→消费者。运行时 `foodWebModel` 只读已有 table 输出，不遍历或重新求图；内容生成器在构建时自行算路径并生成有来源的 table 行。
+
+所有对象 strict，文本必须双语，`sources` 是已有 `data/sources.json` 的 S#。精确形状：
+
+```ts
+foodWeb: {
+  inspect: string; // 已有 choice control，其 options 恰是全部 consumer node ids
+  nodes: Array<{ id:string; label:{en:string;zh:string}; role:'producer'|'consumer';
+    parts:string[]; d:[number,number]; output:string; sources:string[] }>;
+  edges: Array<{ id:string; from:string; to:string; output:string;
+    evidence:'general'|'local-observation'|'reported-observation'|'indexed-only';
+    sources:string[]; note:{en:string;zh:string} }>;
+  note:{en:string;zh:string};
+}
+```
+
+- `nodes` 2–12、`edges` 1–48；`parts` 1–12 个不同 selectable part，节点间不可共用。节点 id 唯一；边 id、from/to 配对不重复，已知端点、不自环、不成环，producer 不接受入边；每个 consumer 必须有上游 producer。这是本教学 DAG 的限制，不声称真实食物网必然无环。
+- `d` 是固定布局的归一化中心坐标，在 320×380 viewBox 中绘制；安全区 x=[0.22,0.78]、y=[0.10,0.90]，两坐标须有限。建议六点：`[.25,.10],[.75,.10],[.25,.37],[.75,.37],[.5,.64],[.5,.90]`。不使用 force/random/动画；作者须避免节点重叠。
+- node `output` 必须是 state 输出，且 `states` 必须含 `unchanged`、`fewer-foods`、`no-shown-food`、`removed` 的双语标签。卡片直接读状态：removed→present=false；unchanged/fewer-foods→supported=true；不支持的动物仍 present。producer 未移走时由 table 给 unchanged。
+- edge `output` 必须是 number 输出，table 所有对应格为 0/1；1→active 实线，0→断开虚线。箭头从食物指向消费者。计数仍经 table 写入，沿用 `__atlas.engine.sim()`。
+- `foodWebIssues` 接入 `simIssues` 检查上述引用/结构/状态/控件，错误含具体 path；`foodWebSourceIssues` 接入 `validate-content` 现有来源流程。未知来源、空白 card/edge note、未知/上下文 part、未知/种类错误输出、错 inspect 控件和选项、重复/循环都报错。
+- 桌面 `FoodWebCard` 替换右上 PartChainCard；<1024 px 在 reader 中显示独立卡，背景章无 try-it 也有。图中六个按钮同时组成可读的文本列表，另有可展开的关系/证据列表、SourceRefs 和逐边 note；general/reported/indexed 明示 medium evidence，local observation 独立标记。
+- 节点使用 native button，44 CSS px 以上，Tab/Enter/Space 与点击同路，只选 `parts[0]`；不改 inspect/remove。inspect 是虚线外框+文字，selected 是 signal 外框+文字。四状态同时用文字与实线/双线/虚线/点线边框区分。颜色全用既有 paper/cinema token，无 hover 必需操作。
+- hooks：`.space-food-web`；`[data-food-node][data-present][data-supported][data-inspect][data-selected][data-status]`；`[data-food-edge][data-active][data-evidence]`；`[data-food-relation]`。布尔属性始终写 `true/false`。
+
+草稿 fixture `sample-food-web`：简单 primitive，6节点/6边、20输出/49表行、无 try-it 的背景章和有预测/记录的实验章。单测 `tests/space-scene/food-web.test.ts` 覆盖 §4.4 数字、全部56组合、四状态、选择/观察分离与负例；浏览器规约 `tests-e2e/sample-food-web.spec.ts` 覆盖已有读数 API、deep link、键盘、证据来源、中英/cinema 与窄屏背景章/44 px。
+
 ### SpaceScene · 平面横梁机构（`mechanisms`，beam-steam）
 
 docs/52 §4 E-ST1/E-ST2；完整可运行作者例子在 `src/content/topics/sample-mechanism/data/parts.json`，生成器 `src/content/topics/sample-mechanism/generate.mjs`（`node` 直接运行；包括齿廓采样检查）。这是可选的根字段 `mechanisms`（缺省 `[]`，最多一项），**不增加 sim 种类**：压力、三档静态调速器和归一化能量账仍用 `sim.kind: "table"`。不增加 URL 字段、HUD、键位、齿轮 primitive 或通用物理引擎。

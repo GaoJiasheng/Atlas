@@ -28,6 +28,7 @@ import { sortQuantity } from './lib/sim/sort';
 import { OUTPUT_TAGS, tableCellDecimals, tableIssues, tablePredictIssues, tableSchema, type TableCheckPart, type TableCount } from './table-schema';
 import { tableQuantity, tableStates } from './lib/sim/table';
 import { seedsIssues, seedsSchema } from './seeds-schema';
+import { foodWebSchema, foodWebIssues } from './food-web-schema';
 import { seedsQuantity, seedsStates } from './lib/sim/seeds';
 
 /** A control value: a toggle's boolean, a step's number, a choice's option id. */
@@ -975,6 +976,7 @@ export const simSchema = z
     materials: materialsSchema.optional(),
     sort: sortSchema.optional(),
     table: tableSchema.optional(),
+    foodWeb: foodWebSchema.optional(),
     seeds: seedsSchema.optional(),
   })
   .strict()
@@ -1278,6 +1280,10 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
   if (sim.kind === 'materials' && !sim.materials) issue(['materials'], 'a materials sim needs `materials`');
   if (sim.kind === 'table' && !sim.table) issue(['table'], 'a table sim needs `table`');
   if (sim.table) tableIssues(sim.table, controls, sim.outputs, (ctx.partData ?? []) as readonly TableCheckPart[], tableCounts(sim)).forEach((x) => issue(x.path, x.message));
+  if (sim.foodWeb) {
+    if (sim.kind !== 'table') issue(['foodWeb'], 'foodWeb belongs to a table sim');
+    foodWebIssues(sim.foodWeb, controls, sim.outputs, ctx.parts, ctx.contextParts ?? new Set(), sim.table).forEach((x) => issue(['foodWeb', ...x.path], x.message));
+  }
   if (sim.kind === 'seeds' && !sim.seeds) issue(['seeds'], 'a seeds sim needs `seeds`');
   if (sim.seeds) seedsIssues(sim.seeds, controls).forEach((x) => issue(['seeds', ...x.path], x.message));
   if (sim.materials) materialsIssues(sim.materials, controls).forEach((x) => issue(['materials', ...x.path], x.message));

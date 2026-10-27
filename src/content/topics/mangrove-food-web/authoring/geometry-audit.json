@@ -1,0 +1,2370 @@
+{
+  "method": "CPU primitive geometry, conservative boxes and numerical camera projection. No browser, screenshots, GPU calls, shadows or occlusion validation.",
+  "referenceReadOnly": [
+    {
+      "url": "https://commons.wikimedia.org/wiki/File:Ring-legged_Fiddler_Crab_(Uca_annulipes)_(15748699382).jpg",
+      "author": "Bernard Dupont",
+      "licence": "CC BY-SA 2.0",
+      "use": "Read-only verification of anatomical facts. No traced shape, texture, image or mesh is incorporated."
+    }
+  ],
+  "selectable": 18,
+  "context": 2,
+  "baseMaterialSlotCalls": 31,
+  "geometryTriangles": 39860,
+  "parts": [
+    {
+      "id": "mud-bank",
+      "context": false,
+      "extras": 1,
+      "slots": 1,
+      "pieces": 1,
+      "triangles": 48,
+      "bounds": {
+        "min": [
+          -0.8,
+          -0.24000000000000002,
+          -0.5
+        ],
+        "max": [
+          0.8,
+          1.3877787807814457e-17,
+          0.5
+        ]
+      }
+    },
+    {
+      "id": "tidal-water",
+      "context": false,
+      "extras": 0,
+      "slots": 1,
+      "pieces": 1,
+      "triangles": 12,
+      "bounds": {
+        "min": [
+          -0.79,
+          -0.044,
+          -0.495
+        ],
+        "max": [
+          0.79,
+          -0.036000000000000004,
+          0.495
+        ]
+      }
+    },
+    {
+      "id": "burrow-mouth",
+      "context": false,
+      "extras": 0,
+      "slots": 1,
+      "pieces": 1,
+      "triangles": 320,
+      "bounds": {
+        "min": [
+          -0.28600000000000003,
+          -0.032000000000000015,
+          0.094
+        ],
+        "max": [
+          -0.234,
+          0.008,
+          0.146
+        ]
+      }
+    },
+    {
+      "id": "api-tree",
+      "context": false,
+      "extras": 16,
+      "slots": 2,
+      "pieces": 2,
+      "triangles": 3120,
+      "bounds": {
+        "min": [
+          -0.8203876560534691,
+          -0.07200000000000001,
+          -0.3649631333550441
+        ],
+        "max": [
+          -0.1409289517643007,
+          0.8416406087806572,
+          0.05245411194712732
+        ]
+      }
+    },
+    {
+      "id": "api-lateral",
+      "context": false,
+      "extras": 2,
+      "slots": 1,
+      "pieces": 1,
+      "triangles": 1440,
+      "bounds": {
+        "min": [
+          -0.7349999999999999,
+          -0.06301815674579357,
+          -0.152
+        ],
+        "max": [
+          -0.2839999999999999,
+          -0.013000000000000005,
+          0.16899999999999987
+        ]
+      }
+    },
+    {
+      "id": "api-pencil",
+      "context": false,
+      "extras": 5,
+      "slots": 1,
+      "pieces": 1,
+      "triangles": 2880,
+      "bounds": {
+        "min": [
+          -0.741,
+          -0.055999999999999994,
+          -0.036000000000000004
+        ],
+        "max": [
+          -0.27869455007623967,
+          0.1295,
+          0.171
+        ]
+      }
+    },
+    {
+      "id": "bakau-tree",
+      "context": false,
+      "extras": 16,
+      "slots": 2,
+      "pieces": 2,
+      "triangles": 3120,
+      "bounds": {
+        "min": [
+          -0.18038765605346913,
+          -0.07200000000000001,
+          -0.4849631333550441
+        ],
+        "max": [
+          0.4990710482356993,
+          0.9116406087806572,
+          -0.06754588805287268
+        ]
+      }
+    },
+    {
+      "id": "bakau-prop",
+      "context": false,
+      "extras": 4,
+      "slots": 1,
+      "pieces": 1,
+      "triangles": 2400,
+      "bounds": {
+        "min": [
+          -0.04800000000000004,
+          -0.033000000000000196,
+          -0.45300000000000007
+        ],
+        "max": [
+          0.42300000000000004,
+          0.365,
+          0.04800000000000004
+        ]
+      }
+    },
+    {
+      "id": "fallen-leaves",
+      "context": false,
+      "extras": 2,
+      "slots": 1,
+      "pieces": 1,
+      "triangles": 180,
+      "bounds": {
+        "min": [
+          -0.168856661063034,
+          0.003709529985709139,
+          0.01795322476072271
+        ],
+        "max": [
+          0.02282185239831852,
+          0.0207581365256461,
+          0.17203933190639825
+        ]
+      }
+    },
+    {
+      "id": "algae-patch",
+      "context": false,
+      "extras": 0,
+      "slots": 1,
+      "pieces": 1,
+      "triangles": 288,
+      "bounds": {
+        "min": [
+          -0.06317,
+          0.0048000000000000004,
+          0.078793
+        ],
+        "max": [
+          0.17317,
+          0.0112,
+          0.181207
+        ]
+      }
+    },
+    {
+      "id": "fiddler-crabs",
+      "context": false,
+      "extras": 16,
+      "slots": 2,
+      "pieces": 2,
+      "triangles": 6736,
+      "bounds": {
+        "min": [
+          -0.4825986727625994,
+          0.0023999999999999994,
+          -0.0177
+        ],
+        "max": [
+          -0.24839999999999998,
+          0.091,
+          0.17434579178225534
+        ]
+      }
+    },
+    {
+      "id": "tree-crabs",
+      "context": false,
+      "extras": 16,
+      "slots": 2,
+      "pieces": 2,
+      "triangles": 6736,
+      "bounds": {
+        "min": [
+          0.09962413447587383,
+          0.062299999999999994,
+          -0.22360000000000002
+        ],
+        "max": [
+          0.2803758655241262,
+          0.22803999331249875,
+          -0.13607999999999998
+        ]
+      }
+    },
+    {
+      "id": "giant-mudskipper",
+      "context": false,
+      "extras": 8,
+      "slots": 2,
+      "pieces": 2,
+      "triangles": 1824,
+      "bounds": {
+        "min": [
+          0.125,
+          0.000999999999999994,
+          0.059631406852396915
+        ],
+        "max": [
+          0.43599999999999994,
+          0.09267345465039126,
+          0.2303685931476031
+        ]
+      }
+    },
+    {
+      "id": "heron",
+      "context": false,
+      "extras": 12,
+      "slots": 4,
+      "pieces": 4,
+      "triangles": 5280,
+      "bounds": {
+        "min": [
+          0.4471376,
+          -5.551115123125783e-17,
+          -0.0754759
+        ],
+        "max": [
+          0.7915,
+          0.5416162601293901,
+          0.0335
+        ]
+      }
+    },
+    {
+      "id": "small-fish",
+      "context": false,
+      "extras": 8,
+      "slots": 2,
+      "pieces": 2,
+      "triangles": 1488,
+      "bounds": {
+        "min": [
+          0.21850000000000003,
+          -0.0914,
+          0.2903975337081725
+        ],
+        "max": [
+          0.39887999999999996,
+          -0.03822939630277308,
+          0.3896024662918275
+        ]
+      }
+    },
+    {
+      "id": "bacteria-inset",
+      "context": false,
+      "extras": 2,
+      "slots": 1,
+      "pieces": 1,
+      "triangles": 864,
+      "bounds": {
+        "min": [
+          0.943161,
+          0.1905,
+          -0.0792075
+        ],
+        "max": [
+          1.088912,
+          0.2908,
+          -0.022664000000000004
+        ]
+      }
+    },
+    {
+      "id": "fungi-inset",
+      "context": false,
+      "extras": 3,
+      "slots": 1,
+      "pieces": 1,
+      "triangles": 1920,
+      "bounds": {
+        "min": [
+          0.956,
+          0.11599999999999999,
+          0.08554964488934161
+        ],
+        "max": [
+          1.1440000000000001,
+          0.244,
+          0.10400000000000001
+        ]
+      }
+    },
+    {
+      "id": "gill-inset",
+      "context": false,
+      "extras": 1,
+      "slots": 2,
+      "pieces": 2,
+      "triangles": 1168,
+      "bounds": {
+        "min": [
+          1.000646742334413,
+          0.11031952462195314,
+          0.21496868959349227
+        ],
+        "max": [
+          1.1145984186223867,
+          0.23485827335533105,
+          0.3250313104065078
+        ]
+      }
+    },
+    {
+      "id": "boardwalk-edge",
+      "context": true,
+      "extras": 0,
+      "slots": 1,
+      "pieces": 1,
+      "triangles": 12,
+      "bounds": {
+        "min": [
+          -0.85,
+          0.0025000000000000022,
+          -0.5875
+        ],
+        "max": [
+          0.85,
+          0.0475,
+          -0.49250000000000005
+        ]
+      }
+    },
+    {
+      "id": "specimen-base",
+      "context": true,
+      "extras": 1,
+      "slots": 2,
+      "pieces": 2,
+      "triangles": 24,
+      "bounds": {
+        "min": [
+          -0.8300000000000001,
+          -0.31,
+          -0.56
+        ],
+        "max": [
+          1.19,
+          0.07250000000000001,
+          0.56
+        ]
+      }
+    }
+  ],
+  "projections": [
+    {
+      "view": "hero",
+      "viewport": "desktop",
+      "id": "bakau-tree",
+      "anchor": [
+        0.1593416960911151,
+        0.4198203043903286,
+        -0.2762545107039584
+      ],
+      "ndc": [
+        0.157,
+        0.098,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "hero",
+      "viewport": "desktop",
+      "id": "giant-mudskipper",
+      "anchor": [
+        0.28049999999999997,
+        0.04683672732519563,
+        0.14500000000000002
+      ],
+      "ndc": [
+        0.067,
+        -0.388,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "hero",
+      "viewport": "desktop",
+      "id": "api-tree",
+      "anchor": [
+        -0.48065830390888487,
+        0.38482030439032855,
+        -0.1562545107039584
+      ],
+      "ndc": [
+        -0.129,
+        0.164,
+        1
+      ],
+      "inside": true
+    },
+    {
+      "view": "hero",
+      "viewport": "desktop",
+      "id": "mud-bank",
+      "anchor": [
+        0,
+        -0.12,
+        0
+      ],
+      "ndc": [
+        0,
+        -0.397,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "hero",
+      "viewport": "desktop",
+      "id": "tidal-water",
+      "anchor": [
+        0,
+        -0.04,
+        0
+      ],
+      "ndc": [
+        0,
+        -0.332,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "hero",
+      "viewport": "phone",
+      "id": "bakau-tree",
+      "anchor": [
+        0.1593416960911151,
+        0.4198203043903286,
+        -0.2762545107039584
+      ],
+      "ndc": [
+        0.353,
+        0.057,
+        1
+      ],
+      "inside": true
+    },
+    {
+      "view": "hero",
+      "viewport": "phone",
+      "id": "giant-mudskipper",
+      "anchor": [
+        0.28049999999999997,
+        0.04683672732519563,
+        0.14500000000000002
+      ],
+      "ndc": [
+        0.147,
+        -0.22,
+        1
+      ],
+      "inside": true
+    },
+    {
+      "view": "hero",
+      "viewport": "phone",
+      "id": "api-tree",
+      "anchor": [
+        -0.48065830390888487,
+        0.38482030439032855,
+        -0.1562545107039584
+      ],
+      "ndc": [
+        -0.298,
+        0.099,
+        1
+      ],
+      "inside": true
+    },
+    {
+      "view": "hero",
+      "viewport": "phone",
+      "id": "mud-bank",
+      "anchor": [
+        0,
+        -0.12,
+        0
+      ],
+      "ndc": [
+        0,
+        -0.234,
+        1
+      ],
+      "inside": true
+    },
+    {
+      "view": "hero",
+      "viewport": "phone",
+      "id": "tidal-water",
+      "anchor": [
+        0,
+        -0.04,
+        0
+      ],
+      "ndc": [
+        0,
+        -0.195,
+        1
+      ],
+      "inside": true
+    },
+    {
+      "view": "habitat-view",
+      "viewport": "desktop",
+      "id": "giant-mudskipper",
+      "anchor": [
+        0.28049999999999997,
+        0.04683672732519563,
+        0.14500000000000002
+      ],
+      "ndc": [
+        0.089,
+        -0.296,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "habitat-view",
+      "viewport": "desktop",
+      "id": "fiddler-crabs",
+      "anchor": [
+        -0.36549933638129967,
+        0.0467,
+        0.07832289589112768
+      ],
+      "ndc": [
+        -0.204,
+        -0.103,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "habitat-view",
+      "viewport": "desktop",
+      "id": "tree-crabs",
+      "anchor": [
+        0.19,
+        0.14516999665624936,
+        -0.17984
+      ],
+      "ndc": [
+        0.17,
+        -0.054,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "habitat-view",
+      "viewport": "desktop",
+      "id": "heron",
+      "anchor": [
+        0.6193188000000001,
+        0.27080813006469506,
+        -0.02098795
+      ],
+      "ndc": [
+        0.371,
+        -0.062,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "habitat-view",
+      "viewport": "desktop",
+      "id": "bakau-tree",
+      "anchor": [
+        0.1593416960911151,
+        0.4198203043903286,
+        -0.2762545107039584
+      ],
+      "ndc": [
+        0.194,
+        0.281,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "habitat-view",
+      "viewport": "desktop",
+      "id": "mud-bank",
+      "anchor": [
+        0,
+        -0.12,
+        0
+      ],
+      "ndc": [
+        0,
+        -0.346,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "habitat-view",
+      "viewport": "desktop",
+      "id": "tidal-water",
+      "anchor": [
+        0,
+        -0.04,
+        0
+      ],
+      "ndc": [
+        0,
+        -0.261,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "habitat-view",
+      "viewport": "phone",
+      "id": "giant-mudskipper",
+      "anchor": [
+        0.28049999999999997,
+        0.04683672732519563,
+        0.14500000000000002
+      ],
+      "ndc": [
+        0.192,
+        -0.165,
+        1
+      ],
+      "inside": true
+    },
+    {
+      "view": "habitat-view",
+      "viewport": "phone",
+      "id": "fiddler-crabs",
+      "anchor": [
+        -0.36549933638129967,
+        0.0467,
+        0.07832289589112768
+      ],
+      "ndc": [
+        -0.467,
+        -0.061,
+        1
+      ],
+      "inside": true
+    },
+    {
+      "view": "habitat-view",
+      "viewport": "phone",
+      "id": "tree-crabs",
+      "anchor": [
+        0.19,
+        0.14516999665624936,
+        -0.17984
+      ],
+      "ndc": [
+        0.379,
+        -0.031,
+        1
+      ],
+      "inside": true
+    },
+    {
+      "view": "habitat-view",
+      "viewport": "phone",
+      "id": "heron",
+      "anchor": [
+        0.6193188000000001,
+        0.27080813006469506,
+        -0.02098795
+      ],
+      "ndc": [
+        0.777,
+        -0.034,
+        1
+      ],
+      "inside": true
+    },
+    {
+      "view": "habitat-view",
+      "viewport": "phone",
+      "id": "bakau-tree",
+      "anchor": [
+        0.1593416960911151,
+        0.4198203043903286,
+        -0.2762545107039584
+      ],
+      "ndc": [
+        0.433,
+        0.163,
+        1
+      ],
+      "inside": true
+    },
+    {
+      "view": "habitat-view",
+      "viewport": "phone",
+      "id": "mud-bank",
+      "anchor": [
+        0,
+        -0.12,
+        0
+      ],
+      "ndc": [
+        0,
+        -0.202,
+        1
+      ],
+      "inside": true
+    },
+    {
+      "view": "habitat-view",
+      "viewport": "phone",
+      "id": "tidal-water",
+      "anchor": [
+        0,
+        -0.04,
+        0
+      ],
+      "ndc": [
+        0,
+        -0.152,
+        1
+      ],
+      "inside": true
+    },
+    {
+      "view": "roots-view",
+      "viewport": "desktop",
+      "id": "api-lateral",
+      "anchor": [
+        -0.5094999999999998,
+        -0.038009078372896785,
+        0.008499999999999938
+      ],
+      "ndc": [
+        -0.195,
+        -0.218,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "roots-view",
+      "viewport": "desktop",
+      "id": "api-pencil",
+      "anchor": [
+        -0.5098472750381198,
+        0.036750000000000005,
+        0.0675
+      ],
+      "ndc": [
+        -0.157,
+        -0.07,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "roots-view",
+      "viewport": "desktop",
+      "id": "api-tree",
+      "anchor": [
+        -0.48065830390888487,
+        0.38482030439032855,
+        -0.1562545107039584
+      ],
+      "ndc": [
+        -0.284,
+        0.957,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "roots-view",
+      "viewport": "desktop",
+      "id": "bakau-prop",
+      "anchor": [
+        0.1875,
+        0.1659999999999999,
+        -0.2025
+      ],
+      "ndc": [
+        0.39,
+        0.543,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "roots-view",
+      "viewport": "phone",
+      "id": "api-lateral",
+      "anchor": [
+        -0.5094999999999998,
+        -0.038009078372896785,
+        0.008499999999999938
+      ],
+      "ndc": [
+        -0.424,
+        -0.123,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "roots-view",
+      "viewport": "phone",
+      "id": "api-pencil",
+      "anchor": [
+        -0.5098472750381198,
+        0.036750000000000005,
+        0.0675
+      ],
+      "ndc": [
+        -0.333,
+        -0.039,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "roots-view",
+      "viewport": "phone",
+      "id": "api-tree",
+      "anchor": [
+        -0.48065830390888487,
+        0.38482030439032855,
+        -0.1562545107039584
+      ],
+      "ndc": [
+        -0.622,
+        0.545,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "roots-view",
+      "viewport": "phone",
+      "id": "bakau-prop",
+      "anchor": [
+        0.1875,
+        0.1659999999999999,
+        -0.2025
+      ],
+      "ndc": [
+        0.952,
+        0.344,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "tide-view",
+      "viewport": "desktop",
+      "id": "tidal-water",
+      "anchor": [
+        0,
+        -0.04,
+        0
+      ],
+      "ndc": [
+        0,
+        -0.088,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "tide-view",
+      "viewport": "desktop",
+      "id": "burrow-mouth",
+      "anchor": [
+        -0.26,
+        -0.012000000000000007,
+        0.12
+      ],
+      "ndc": [
+        -0.218,
+        -0.016,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "tide-view",
+      "viewport": "desktop",
+      "id": "fiddler-crabs",
+      "anchor": [
+        -0.36549933638129967,
+        0.0467,
+        0.07832289589112768
+      ],
+      "ndc": [
+        -0.246,
+        0.095,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "tide-view",
+      "viewport": "desktop",
+      "id": "tree-crabs",
+      "anchor": [
+        0.19,
+        0.14516999665624936,
+        -0.17984
+      ],
+      "ndc": [
+        0.225,
+        0.185,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "tide-view",
+      "viewport": "desktop",
+      "id": "bakau-tree",
+      "anchor": [
+        0.1593416960911151,
+        0.4198203043903286,
+        -0.2762545107039584
+      ],
+      "ndc": [
+        0.261,
+        0.616,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "tide-view",
+      "viewport": "phone",
+      "id": "tidal-water",
+      "anchor": [
+        0,
+        -0.04,
+        0
+      ],
+      "ndc": [
+        0,
+        -0.052,
+        1
+      ],
+      "inside": true
+    },
+    {
+      "view": "tide-view",
+      "viewport": "phone",
+      "id": "burrow-mouth",
+      "anchor": [
+        -0.26,
+        -0.012000000000000007,
+        0.12
+      ],
+      "ndc": [
+        -0.507,
+        -0.009,
+        1
+      ],
+      "inside": true
+    },
+    {
+      "view": "tide-view",
+      "viewport": "phone",
+      "id": "fiddler-crabs",
+      "anchor": [
+        -0.36549933638129967,
+        0.0467,
+        0.07832289589112768
+      ],
+      "ndc": [
+        -0.579,
+        0.058,
+        1
+      ],
+      "inside": true
+    },
+    {
+      "view": "tide-view",
+      "viewport": "phone",
+      "id": "tree-crabs",
+      "anchor": [
+        0.19,
+        0.14516999665624936,
+        -0.17984
+      ],
+      "ndc": [
+        0.511,
+        0.109,
+        1
+      ],
+      "inside": true
+    },
+    {
+      "view": "tide-view",
+      "viewport": "phone",
+      "id": "bakau-tree",
+      "anchor": [
+        0.1593416960911151,
+        0.4198203043903286,
+        -0.2762545107039584
+      ],
+      "ndc": [
+        0.597,
+        0.365,
+        1
+      ],
+      "inside": true
+    },
+    {
+      "view": "animal-view",
+      "viewport": "desktop",
+      "id": "giant-mudskipper",
+      "anchor": [
+        0.28049999999999997,
+        0.04683672732519563,
+        0.14500000000000002
+      ],
+      "ndc": [
+        0.143,
+        -0.093,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "animal-view",
+      "viewport": "desktop",
+      "id": "fiddler-crabs",
+      "anchor": [
+        -0.36549933638129967,
+        0.0467,
+        0.07832289589112768
+      ],
+      "ndc": [
+        -0.38,
+        0.163,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "animal-view",
+      "viewport": "phone",
+      "id": "giant-mudskipper",
+      "anchor": [
+        0.28049999999999997,
+        0.04683672732519563,
+        0.14500000000000002
+      ],
+      "ndc": [
+        0.317,
+        -0.054,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "animal-view",
+      "viewport": "phone",
+      "id": "fiddler-crabs",
+      "anchor": [
+        -0.36549933638129967,
+        0.0467,
+        0.07832289589112768
+      ],
+      "ndc": [
+        -0.937,
+        0.105,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "web-view",
+      "viewport": "desktop",
+      "id": "giant-mudskipper",
+      "anchor": [
+        0.28049999999999997,
+        0.04683672732519563,
+        0.14500000000000002
+      ],
+      "ndc": [
+        0.074,
+        -0.334,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "web-view",
+      "viewport": "desktop",
+      "id": "heron",
+      "anchor": [
+        0.6193188000000001,
+        0.27080813006469506,
+        -0.02098795
+      ],
+      "ndc": [
+        0.344,
+        -0.139,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "web-view",
+      "viewport": "desktop",
+      "id": "small-fish",
+      "anchor": [
+        0.30869,
+        -0.06481469815138655,
+        0.33999999999999997
+      ],
+      "ndc": [
+        -0.002,
+        -0.557,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "web-view",
+      "viewport": "desktop",
+      "id": "algae-patch",
+      "anchor": [
+        0.05499999999999999,
+        0.008,
+        0.13
+      ],
+      "ndc": [
+        -0.032,
+        -0.285,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "web-view",
+      "viewport": "desktop",
+      "id": "bakau-tree",
+      "anchor": [
+        0.1593416960911151,
+        0.4198203043903286,
+        -0.2762545107039584
+      ],
+      "ndc": [
+        0.191,
+        0.251,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "web-view",
+      "viewport": "desktop",
+      "id": "fallen-leaves",
+      "anchor": [
+        -0.07301740433235775,
+        0.01223383325567762,
+        0.09499627833356047
+      ],
+      "ndc": [
+        -0.076,
+        -0.224,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "web-view",
+      "viewport": "desktop",
+      "id": "tree-crabs",
+      "anchor": [
+        0.19,
+        0.14516999665624936,
+        -0.17984
+      ],
+      "ndc": [
+        0.163,
+        -0.076,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "web-view",
+      "viewport": "desktop",
+      "id": "fiddler-crabs",
+      "anchor": [
+        -0.36549933638129967,
+        0.0467,
+        0.07832289589112768
+      ],
+      "ndc": [
+        -0.194,
+        -0.094,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "web-view",
+      "viewport": "phone",
+      "id": "giant-mudskipper",
+      "anchor": [
+        0.28049999999999997,
+        0.04683672732519563,
+        0.14500000000000002
+      ],
+      "ndc": [
+        0.161,
+        -0.189,
+        1
+      ],
+      "inside": true
+    },
+    {
+      "view": "web-view",
+      "viewport": "phone",
+      "id": "heron",
+      "anchor": [
+        0.6193188000000001,
+        0.27080813006469506,
+        -0.02098795
+      ],
+      "ndc": [
+        0.729,
+        -0.077,
+        1
+      ],
+      "inside": true
+    },
+    {
+      "view": "web-view",
+      "viewport": "phone",
+      "id": "small-fish",
+      "anchor": [
+        0.30869,
+        -0.06481469815138655,
+        0.33999999999999997
+      ],
+      "ndc": [
+        -0.003,
+        -0.311,
+        1
+      ],
+      "inside": true
+    },
+    {
+      "view": "web-view",
+      "viewport": "phone",
+      "id": "algae-patch",
+      "anchor": [
+        0.05499999999999999,
+        0.008,
+        0.13
+      ],
+      "ndc": [
+        -0.072,
+        -0.166,
+        1
+      ],
+      "inside": true
+    },
+    {
+      "view": "web-view",
+      "viewport": "phone",
+      "id": "bakau-tree",
+      "anchor": [
+        0.1593416960911151,
+        0.4198203043903286,
+        -0.2762545107039584
+      ],
+      "ndc": [
+        0.429,
+        0.147,
+        1
+      ],
+      "inside": true
+    },
+    {
+      "view": "web-view",
+      "viewport": "phone",
+      "id": "fallen-leaves",
+      "anchor": [
+        -0.07301740433235775,
+        0.01223383325567762,
+        0.09499627833356047
+      ],
+      "ndc": [
+        -0.172,
+        -0.132,
+        1
+      ],
+      "inside": true
+    },
+    {
+      "view": "web-view",
+      "viewport": "phone",
+      "id": "tree-crabs",
+      "anchor": [
+        0.19,
+        0.14516999665624936,
+        -0.17984
+      ],
+      "ndc": [
+        0.368,
+        -0.044,
+        1
+      ],
+      "inside": true
+    },
+    {
+      "view": "web-view",
+      "viewport": "phone",
+      "id": "fiddler-crabs",
+      "anchor": [
+        -0.36549933638129967,
+        0.0467,
+        0.07832289589112768
+      ],
+      "ndc": [
+        -0.45,
+        -0.056,
+        1
+      ],
+      "inside": true
+    },
+    {
+      "view": "gill-view",
+      "viewport": "desktop",
+      "id": "giant-mudskipper",
+      "anchor": [
+        0.28049999999999997,
+        0.04683672732519563,
+        0.14500000000000002
+      ],
+      "ndc": [
+        -0.212,
+        -0.039,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "gill-view",
+      "viewport": "desktop",
+      "id": "gill-inset",
+      "anchor": [
+        1.0576225804783999,
+        0.1725888989886421,
+        0.27
+      ],
+      "ndc": [
+        0.266,
+        -0.104,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "gill-view",
+      "viewport": "phone",
+      "id": "giant-mudskipper",
+      "anchor": [
+        0.28049999999999997,
+        0.04683672732519563,
+        0.14500000000000002
+      ],
+      "ndc": [
+        -0.49,
+        -0.024,
+        1
+      ],
+      "inside": true
+    },
+    {
+      "view": "gill-view",
+      "viewport": "phone",
+      "id": "gill-inset",
+      "anchor": [
+        1.0576225804783999,
+        0.1725888989886421,
+        0.27
+      ],
+      "ndc": [
+        0.561,
+        -0.057,
+        1
+      ],
+      "inside": true
+    },
+    {
+      "view": "microbe-view",
+      "viewport": "desktop",
+      "id": "bacteria-inset",
+      "anchor": [
+        1.0160365,
+        0.24065,
+        -0.05093575
+      ],
+      "ndc": [
+        -0.026,
+        0.227,
+        0.998
+      ],
+      "inside": true
+    },
+    {
+      "view": "microbe-view",
+      "viewport": "desktop",
+      "id": "fungi-inset",
+      "anchor": [
+        1.05,
+        0.18,
+        0.09477482244467081
+      ],
+      "ndc": [
+        -0.072,
+        -0.238,
+        0.998
+      ],
+      "inside": true
+    },
+    {
+      "view": "microbe-view",
+      "viewport": "phone",
+      "id": "bacteria-inset",
+      "anchor": [
+        1.0160365,
+        0.24065,
+        -0.05093575
+      ],
+      "ndc": [
+        -0.057,
+        0.133,
+        0.999
+      ],
+      "inside": true
+    },
+    {
+      "view": "microbe-view",
+      "viewport": "phone",
+      "id": "fungi-inset",
+      "anchor": [
+        1.05,
+        0.18,
+        0.09477482244467081
+      ],
+      "ndc": [
+        -0.157,
+        -0.134,
+        0.999
+      ],
+      "inside": true
+    }
+  ],
+  "conservativeOverlaps": [
+    {
+      "a": "mud-bank",
+      "b": "tidal-water",
+      "extent": [
+        1.58,
+        0.008,
+        0.99
+      ]
+    },
+    {
+      "a": "mud-bank",
+      "b": "burrow-mouth",
+      "extent": [
+        0.052,
+        0.032,
+        0.052
+      ]
+    },
+    {
+      "a": "mud-bank",
+      "b": "api-tree",
+      "extent": [
+        0.65907,
+        0.072,
+        0.41742
+      ]
+    },
+    {
+      "a": "mud-bank",
+      "b": "api-lateral",
+      "extent": [
+        0.451,
+        0.05002,
+        0.321
+      ]
+    },
+    {
+      "a": "mud-bank",
+      "b": "api-pencil",
+      "extent": [
+        0.46231,
+        0.056,
+        0.207
+      ]
+    },
+    {
+      "a": "mud-bank",
+      "b": "bakau-tree",
+      "extent": [
+        0.67946,
+        0.072,
+        0.41742
+      ]
+    },
+    {
+      "a": "mud-bank",
+      "b": "bakau-prop",
+      "extent": [
+        0.471,
+        0.033,
+        0.501
+      ]
+    },
+    {
+      "a": "mud-bank",
+      "b": "heron",
+      "extent": [
+        0.34436,
+        0,
+        0.10898
+      ]
+    },
+    {
+      "a": "mud-bank",
+      "b": "small-fish",
+      "extent": [
+        0.18038,
+        0.05317,
+        0.0992
+      ]
+    },
+    {
+      "a": "mud-bank",
+      "b": "specimen-base",
+      "extent": [
+        1.6,
+        0.24,
+        1
+      ]
+    },
+    {
+      "a": "tidal-water",
+      "b": "api-tree",
+      "extent": [
+        0.64907,
+        0.008,
+        0.41742
+      ]
+    },
+    {
+      "a": "tidal-water",
+      "b": "api-lateral",
+      "extent": [
+        0.451,
+        0.008,
+        0.321
+      ]
+    },
+    {
+      "a": "tidal-water",
+      "b": "api-pencil",
+      "extent": [
+        0.46231,
+        0.008,
+        0.207
+      ]
+    },
+    {
+      "a": "tidal-water",
+      "b": "bakau-tree",
+      "extent": [
+        0.67946,
+        0.008,
+        0.41742
+      ]
+    },
+    {
+      "a": "tidal-water",
+      "b": "small-fish",
+      "extent": [
+        0.18038,
+        0.00577,
+        0.0992
+      ]
+    },
+    {
+      "a": "tidal-water",
+      "b": "specimen-base",
+      "extent": [
+        1.58,
+        0.008,
+        0.99
+      ]
+    },
+    {
+      "a": "burrow-mouth",
+      "b": "api-lateral",
+      "extent": [
+        0.002,
+        0.019,
+        0.052
+      ]
+    },
+    {
+      "a": "burrow-mouth",
+      "b": "api-pencil",
+      "extent": [
+        0.00731,
+        0.04,
+        0.052
+      ]
+    },
+    {
+      "a": "burrow-mouth",
+      "b": "fiddler-crabs",
+      "extent": [
+        0.0376,
+        0.0056,
+        0.052
+      ]
+    },
+    {
+      "a": "burrow-mouth",
+      "b": "specimen-base",
+      "extent": [
+        0.052,
+        0.04,
+        0.052
+      ]
+    },
+    {
+      "a": "api-tree",
+      "b": "api-lateral",
+      "extent": [
+        0.451,
+        0.05002,
+        0.20445
+      ]
+    },
+    {
+      "a": "api-tree",
+      "b": "api-pencil",
+      "extent": [
+        0.46231,
+        0.1855,
+        0.08845
+      ]
+    },
+    {
+      "a": "api-tree",
+      "b": "bakau-tree",
+      "extent": [
+        0.03946,
+        0.91364,
+        0.29742
+      ]
+    },
+    {
+      "a": "api-tree",
+      "b": "fallen-leaves",
+      "extent": [
+        0.02793,
+        0.01705,
+        0.0345
+      ]
+    },
+    {
+      "a": "api-tree",
+      "b": "fiddler-crabs",
+      "extent": [
+        0.2342,
+        0.0886,
+        0.07015
+      ]
+    },
+    {
+      "a": "api-tree",
+      "b": "specimen-base",
+      "extent": [
+        0.67946,
+        0.1445,
+        0.41742
+      ]
+    },
+    {
+      "a": "api-lateral",
+      "b": "api-pencil",
+      "extent": [
+        0.451,
+        0.043,
+        0.205
+      ]
+    },
+    {
+      "a": "api-lateral",
+      "b": "specimen-base",
+      "extent": [
+        0.451,
+        0.05002,
+        0.321
+      ]
+    },
+    {
+      "a": "api-pencil",
+      "b": "fiddler-crabs",
+      "extent": [
+        0.2039,
+        0.0886,
+        0.1887
+      ]
+    },
+    {
+      "a": "api-pencil",
+      "b": "specimen-base",
+      "extent": [
+        0.46231,
+        0.1285,
+        0.207
+      ]
+    },
+    {
+      "a": "bakau-tree",
+      "b": "bakau-prop",
+      "extent": [
+        0.471,
+        0.398,
+        0.38545
+      ]
+    },
+    {
+      "a": "bakau-tree",
+      "b": "tree-crabs",
+      "extent": [
+        0.18075,
+        0.16574,
+        0.08752
+      ]
+    },
+    {
+      "a": "bakau-tree",
+      "b": "heron",
+      "extent": [
+        0.05193,
+        0.54162,
+        0.00793
+      ]
+    },
+    {
+      "a": "bakau-tree",
+      "b": "specimen-base",
+      "extent": [
+        0.67946,
+        0.1445,
+        0.41742
+      ]
+    },
+    {
+      "a": "bakau-prop",
+      "b": "fallen-leaves",
+      "extent": [
+        0.07082,
+        0.01705,
+        0.03005
+      ]
+    },
+    {
+      "a": "bakau-prop",
+      "b": "tree-crabs",
+      "extent": [
+        0.18075,
+        0.16574,
+        0.08752
+      ]
+    },
+    {
+      "a": "bakau-prop",
+      "b": "specimen-base",
+      "extent": [
+        0.471,
+        0.1055,
+        0.501
+      ]
+    },
+    {
+      "a": "fallen-leaves",
+      "b": "algae-patch",
+      "extent": [
+        0.08599,
+        0.0064,
+        0.09325
+      ]
+    },
+    {
+      "a": "fallen-leaves",
+      "b": "specimen-base",
+      "extent": [
+        0.19168,
+        0.01705,
+        0.15409
+      ]
+    },
+    {
+      "a": "algae-patch",
+      "b": "giant-mudskipper",
+      "extent": [
+        0.04817,
+        0.0064,
+        0.10241
+      ]
+    },
+    {
+      "a": "algae-patch",
+      "b": "specimen-base",
+      "extent": [
+        0.23634,
+        0.0064,
+        0.10241
+      ]
+    },
+    {
+      "a": "fiddler-crabs",
+      "b": "specimen-base",
+      "extent": [
+        0.2342,
+        0.0701,
+        0.19205
+      ]
+    },
+    {
+      "a": "tree-crabs",
+      "b": "specimen-base",
+      "extent": [
+        0.18075,
+        0.0102,
+        0.08752
+      ]
+    },
+    {
+      "a": "giant-mudskipper",
+      "b": "specimen-base",
+      "extent": [
+        0.311,
+        0.0715,
+        0.17074
+      ]
+    },
+    {
+      "a": "heron",
+      "b": "specimen-base",
+      "extent": [
+        0.34436,
+        0.0725,
+        0.10898
+      ]
+    },
+    {
+      "a": "small-fish",
+      "b": "specimen-base",
+      "extent": [
+        0.18038,
+        0.05317,
+        0.0992
+      ]
+    },
+    {
+      "a": "boardwalk-edge",
+      "b": "specimen-base",
+      "extent": [
+        1.68,
+        0.045,
+        0.0675
+      ]
+    }
+  ],
+  "explodedConservativeOverlaps": [
+    {
+      "a": "mud-bank",
+      "b": "tidal-water",
+      "extent": [
+        1.58,
+        0.008,
+        0.99
+      ]
+    },
+    {
+      "a": "mud-bank",
+      "b": "burrow-mouth",
+      "extent": [
+        0.052,
+        0.032,
+        0.052
+      ]
+    },
+    {
+      "a": "mud-bank",
+      "b": "api-tree",
+      "extent": [
+        0.65907,
+        0.072,
+        0.41742
+      ]
+    },
+    {
+      "a": "mud-bank",
+      "b": "api-lateral",
+      "extent": [
+        0.42408,
+        0.05002,
+        0.321
+      ]
+    },
+    {
+      "a": "mud-bank",
+      "b": "bakau-tree",
+      "extent": [
+        0.67946,
+        0.072,
+        0.41742
+      ]
+    },
+    {
+      "a": "mud-bank",
+      "b": "bakau-prop",
+      "extent": [
+        0.471,
+        0.033,
+        0.501
+      ]
+    },
+    {
+      "a": "mud-bank",
+      "b": "heron",
+      "extent": [
+        0.34436,
+        0,
+        0.10898
+      ]
+    },
+    {
+      "a": "mud-bank",
+      "b": "small-fish",
+      "extent": [
+        0.18038,
+        0.05317,
+        0.0992
+      ]
+    },
+    {
+      "a": "mud-bank",
+      "b": "specimen-base",
+      "extent": [
+        1.6,
+        0.24,
+        1
+      ]
+    },
+    {
+      "a": "tidal-water",
+      "b": "api-tree",
+      "extent": [
+        0.64907,
+        0.008,
+        0.41742
+      ]
+    },
+    {
+      "a": "tidal-water",
+      "b": "api-lateral",
+      "extent": [
+        0.41408,
+        0.008,
+        0.321
+      ]
+    },
+    {
+      "a": "tidal-water",
+      "b": "bakau-tree",
+      "extent": [
+        0.67946,
+        0.008,
+        0.41742
+      ]
+    },
+    {
+      "a": "tidal-water",
+      "b": "small-fish",
+      "extent": [
+        0.18038,
+        0.00577,
+        0.0992
+      ]
+    },
+    {
+      "a": "tidal-water",
+      "b": "specimen-base",
+      "extent": [
+        1.58,
+        0.008,
+        0.99
+      ]
+    },
+    {
+      "a": "burrow-mouth",
+      "b": "fiddler-crabs",
+      "extent": [
+        0.0376,
+        0.0056,
+        0.052
+      ]
+    },
+    {
+      "a": "burrow-mouth",
+      "b": "specimen-base",
+      "extent": [
+        0.052,
+        0.04,
+        0.052
+      ]
+    },
+    {
+      "a": "api-tree",
+      "b": "api-lateral",
+      "extent": [
+        0.44446,
+        0.05002,
+        0.11253
+      ]
+    },
+    {
+      "a": "api-tree",
+      "b": "api-pencil",
+      "extent": [
+        0.46231,
+        0.1855,
+        0.0134
+      ]
+    },
+    {
+      "a": "api-tree",
+      "b": "bakau-tree",
+      "extent": [
+        0.03946,
+        0.91364,
+        0.29742
+      ]
+    },
+    {
+      "a": "api-tree",
+      "b": "fallen-leaves",
+      "extent": [
+        0.02793,
+        0.01705,
+        0.0345
+      ]
+    },
+    {
+      "a": "api-tree",
+      "b": "fiddler-crabs",
+      "extent": [
+        0.2342,
+        0.0886,
+        0.07015
+      ]
+    },
+    {
+      "a": "api-tree",
+      "b": "specimen-base",
+      "extent": [
+        0.67946,
+        0.1445,
+        0.41742
+      ]
+    },
+    {
+      "a": "api-lateral",
+      "b": "specimen-base",
+      "extent": [
+        0.451,
+        0.05002,
+        0.321
+      ]
+    },
+    {
+      "a": "api-pencil",
+      "b": "fiddler-crabs",
+      "extent": [
+        0.12885,
+        0.07194,
+        0.13529
+      ]
+    },
+    {
+      "a": "api-pencil",
+      "b": "specimen-base",
+      "extent": [
+        0.46231,
+        0.05344,
+        0.207
+      ]
+    },
+    {
+      "a": "bakau-tree",
+      "b": "bakau-prop",
+      "extent": [
+        0.471,
+        0.398,
+        0.38545
+      ]
+    },
+    {
+      "a": "bakau-tree",
+      "b": "tree-crabs",
+      "extent": [
+        0.18075,
+        0.16574,
+        0.08752
+      ]
+    },
+    {
+      "a": "bakau-tree",
+      "b": "heron",
+      "extent": [
+        0.05193,
+        0.54162,
+        0.00793
+      ]
+    },
+    {
+      "a": "bakau-tree",
+      "b": "specimen-base",
+      "extent": [
+        0.67946,
+        0.1445,
+        0.41742
+      ]
+    },
+    {
+      "a": "bakau-prop",
+      "b": "fallen-leaves",
+      "extent": [
+        0.07082,
+        0.01705,
+        0.03005
+      ]
+    },
+    {
+      "a": "bakau-prop",
+      "b": "tree-crabs",
+      "extent": [
+        0.18075,
+        0.16574,
+        0.08752
+      ]
+    },
+    {
+      "a": "bakau-prop",
+      "b": "specimen-base",
+      "extent": [
+        0.471,
+        0.1055,
+        0.501
+      ]
+    },
+    {
+      "a": "fallen-leaves",
+      "b": "algae-patch",
+      "extent": [
+        0.08599,
+        0.0064,
+        0.09325
+      ]
+    },
+    {
+      "a": "fallen-leaves",
+      "b": "specimen-base",
+      "extent": [
+        0.19168,
+        0.01705,
+        0.15409
+      ]
+    },
+    {
+      "a": "algae-patch",
+      "b": "giant-mudskipper",
+      "extent": [
+        0.04817,
+        0.0064,
+        0.10241
+      ]
+    },
+    {
+      "a": "algae-patch",
+      "b": "specimen-base",
+      "extent": [
+        0.23634,
+        0.0064,
+        0.10241
+      ]
+    },
+    {
+      "a": "fiddler-crabs",
+      "b": "specimen-base",
+      "extent": [
+        0.2342,
+        0.0701,
+        0.19205
+      ]
+    },
+    {
+      "a": "tree-crabs",
+      "b": "specimen-base",
+      "extent": [
+        0.18075,
+        0.0102,
+        0.08752
+      ]
+    },
+    {
+      "a": "giant-mudskipper",
+      "b": "specimen-base",
+      "extent": [
+        0.311,
+        0.0715,
+        0.17074
+      ]
+    },
+    {
+      "a": "heron",
+      "b": "specimen-base",
+      "extent": [
+        0.34436,
+        0.0725,
+        0.10898
+      ]
+    },
+    {
+      "a": "small-fish",
+      "b": "specimen-base",
+      "extent": [
+        0.18038,
+        0.05317,
+        0.0992
+      ]
+    },
+    {
+      "a": "boardwalk-edge",
+      "b": "specimen-base",
+      "extent": [
+        1.68,
+        0.045,
+        0.0675
+      ]
+    }
+  ],
+  "anatomy": {
+    "crabs": {
+      "walkingLegsPerSpecimen": 8,
+      "chelipedArms": 2,
+      "pincers": 2,
+      "eyeStalks": 2,
+      "eyes": 2,
+      "extras": 16
+    },
+    "mudskipper": {
+      "eyes": 2,
+      "pectoralFins": 2,
+      "tailFins": 1,
+      "dorsalFins": 1
+    },
+    "heron": {
+      "legs": 2,
+      "neck": 1,
+      "bill": 1
+    }
+  },
+  "checks": {
+    "finiteBounds": true,
+    "extraCap": true,
+    "allRelevantAnchorsInFrustum": true
+  }
+}
