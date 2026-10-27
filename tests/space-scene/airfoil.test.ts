@@ -154,3 +154,14 @@ describe('force-vector arrow scale (browser acceptance, docs/45 §9.2)', () => {
     expect(vectorScale(0.0004, 0.55)).toBeCloseTo(0.088, 12);
   });
 });
+
+describe('zero speed at a negative angle (browser acceptance, docs/45 §9.2)', () => {
+  it('reads plain 0 N, not −0 N', async () => {
+    const { solveAirfoil } = await import('../../src/engines/space-scene/lib/sim/airfoil');
+    const { AIRFOIL_DATA, AIRFOIL_DEFAULTS } = await import('./fixtures/airfoil-bench');
+    const s = solveAirfoil(AIRFOIL_DATA, { ...AIRFOIL_DEFAULTS, 'angle-deg': -16, 'airspeed-mps': 0 });
+    expect(s.mode).toBe('still');
+    expect(Object.is(s.lift, 0)).toBe(true);
+    expect(s.cl).toBeLessThan(0);
+  });
+});

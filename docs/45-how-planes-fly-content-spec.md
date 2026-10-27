@@ -732,6 +732,14 @@ Node CPU探针（Node v25.8.2，darwin arm64；与check/build并行，含调度�
 1. **力箭头在大牛顿数下看不见**。`force-vectors` 的箭杆和箭头粗细按 `per × 1.6 N` 缩放；翼型 `per = 0.00015`（单位是上千牛顿）时箭杆半径只有约 8×10⁻⁶ 场景单位，升力箭头实际不可见。新增 `lib/sim/arrows.ts` 的 `vectorScale(per, max) = max(per × 1.6, 0.16 × max)`，`SimOverlays` 改用它：`forces`、`sample-forces` 的比例不变（0.064、0.048），翼型变为 0.08。测试：`tests/space-scene/airfoil.test.ts`「force-vector arrow scale」。
 2. **冷角度流场超出 50 ms 目标**（确有其事）。浏览器 Chrome trace（SwiftShader，机器负载约 120）实测改前：冷角度 α 8/−8/0/−4/12/−12 从 setSim 到 fieldReady 52–64 ms，主线程任务合计 42–54 ms。原因是追踪每步重复求同一点的场：每步开头的探针与 RK4 的 k1 是同一点，上一步末的探针又是下一步开头；中间段 `segmentClear` 与随后的单位方向各做一次逆映射。改为复用这些求值（`clearUnit`、`unitOf`，步末探针转为下一步开头），算法和步长不变，输出逐位相同（七个角度的路径散列与改前一致）。改后同一测法：30–42 ms（墙钟），主线程合计 31–43 ms；单个任务最大 6.4–9.0 ms，偶有一个 >8 ms 的任务落在发布结果后的渲染，而非追踪切片（切片预算仍为 4 ms）。Node 下单次追踪约 22–26 ms（改前 36–57 ms）。测试：`tests/space-scene/airfoil-field.test.ts`「tracer reuses each field evaluation」，钉住改前追踪出的路径长度、末端 tau 与第 500 个样本点。
 
-**门槛记录（改后，不含 how-planes-fly 内容）**：`pnpm check` 0 错误 0 警告（3 个原有 hint）；`pnpm validate` 56 主题 0/0；`pnpm build` 115 页；`pnpm test` 160 文件 4271 条，整套跑时 2 条因机器负载超时（`tests/schemas.test.ts` 5 s 限时），单独重跑通过。改后 `pnpm shoot sample-airfoil --beats --keys --theme paper,cinema`：两主题 16/16 拍、拍链接一致、0 键位失败、0 拍失败。回归 `pnpm shoot <t> --beats --keys`（en·paper）：aircon 24/24 拍、0 失败；其余主题与浏览器 e2e 结果见 §9.3。
+**门槛记录（改后，不含 how-planes-fly 内容）**：`pnpm check` 0 错误 0 警告（3 个原有 hint）；`pnpm validate` 56 主题 0/0；`pnpm build` 115 页；`pnpm test` 160 文件 4271 条，整套跑时 2 条因机器负载超时（`tests/schemas.test.ts` 5 s 限时），单独重跑通过。改后 `pnpm shoot sample-airfoil --beats --keys --theme paper,cinema`：两主题 16/16 拍、拍链接一致、0 键位失败、0 拍失败。回归 `pnpm shoot <t> --beats --keys`（en·paper）：见 §9.3。
 
 **仍未覆盖**：真机（iPad）帧率与触控；Lighthouse。
+
+### 9.3 门槛记录（2026-10-27，机器负载 120–170，约十个代理同时开浏览器）
+
+**回归截图**（`pnpm shoot <t> --beats --keys`，en·paper，改后构建）：aircon 24/24、energy-conversion 37/37、forces 37/37、light-and-shadows 41/41、heart-and-lungs 33/33（SwiftShader 下一次截图超时，`--gpu` 重跑通过）拍链接一致，全部 0 拍失败、0 键位失败、console 干净。各主题的“chapter highlights 无标注”清单与本次改动无关（这些主题没有翼型或大牛顿数箭头）。
+
+**性能**（`pnpm shoot sample-airfoil --perf --gpu`，Apple M5 Max，ANGLE Metal，1520×1023 / 1920×1080）：各章 9 次绘制、30,820 个三角形、60 fps；EXPLODED 4 次。目标 <100 / ≤1.5 M 达标。不是 iPad 结论。
+
+**浏览器 e2e**：在 b1f97b5 上全套跑过一次（1 worker，3.4 小时）：270 通过、79 失败，失败散布在与翼型无关的 TimeScene／MathScene／HUD 用例，属负载超时。其中 `sample-airfoil.spec.ts` 的“signed α…”四个组合是真问题：V=0 且负迎角时升力读 −0（q=0 乘负 Cl），断言 `toBe(0)` 失败。改为 `lift = q·S·Cl || 0`，单测 `airfoil.test.ts`「zero speed at a negative angle」。修复后单跑 `sample-airfoil`、`smoke`、`forces`、`sample-forces`（`--workers=2`，16 分钟）：36 通过、5 失败；`sample-airfoil` 15/15 全过，`smoke` 除两条 sample-space“舞台出现”（30 s 内画布未出现）外全过。`forces` 与 `sample-forces` 的“记录一行再画图”用例在负载下超时（60 s）；用 headless 探针在 `sample-forces` 连点 8 次“记录”，8 行全部写入、无页面错误，单次点击 1.4–18 s，判为负载超时而非回归；sample-space 的画布超时同理（该主题加载 glb，不经本次改动的代码）。整套 e2e 待主会话合并时重跑。

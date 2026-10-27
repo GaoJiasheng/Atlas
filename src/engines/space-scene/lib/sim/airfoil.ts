@@ -68,8 +68,9 @@ export function solveAirfoil(d: AirfoilData, values: SimValues) {
       : Math.sign(angle) *
         peak *
         (t <= 16 ? 1 - (0.15 * (t - 12)) / 4 : 0.85 - (0.25 * (t - 16)) / 4);
+  // At zero speed a negative angle would give −0 N; the reading is plain 0.
   const q = 0.5 * rho * speed ** 2,
-    lift = q * d.area * cl;
+    lift = q * d.area * cl || 0;
   const mode: AirfoilMode =
     speed === 0
       ? 'still'
