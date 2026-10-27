@@ -188,7 +188,7 @@ slug：`zheng-he`；title EN **Zheng He and the Maritime Silk Routes** / ZH **�
 |---|---|---|---|---|
 | `beat-03-a` / 1411 | straits · site-melaka | By 1411: Melaka’s relations with the Ming court already have a history reaching back to Yin Qing’s mission. | 到 1411 年：马六甲与明廷的交往已有尹庆出使的前史。 | ZH-F07, ZH-F22 |
 | `beat-03-b` / 1411 | straits · site-melaka | By 1411: Melaka is a staging and storage point, while its rulers pursue local interests. | 到 1411 年：马六甲是船队停泊与存货的据点，当地统治者也在谋求自己的利益。 | ZH-F17, ZH-F24, ZH-F51 |
-| `beat-03-c` / 1411 | sri-lanka · site-galle | 1411, looking back: a stele dated 1409 records Chinese, Tamil and Persian inscriptions. Galle is its findspot. | 1411 年，回看史料：一方标有 1409 年日期的碑刻写有中文、泰米尔文和波斯文。加勒是发现地点。 | ZH-F28, ZH-F29 |
+| `beat-03-c` / 1411 | sri-lanka · site-galle | 1411, looking back: a stele dated 1409 records Chinese, Tamil and Persian inscriptions. Galle is its findspot. | 1411 年，回看史料：1409 年的碑刻写有中文、泰米尔文和波斯文；加勒是发现地。 | ZH-F28, ZH-F29 |
 | `beat-03-d` / 1411 | china · evt-captives-1411 | 1411: a Sri Lankan ruler and members of his family were taken to the Ming court after fighting. | 1411 年：战事之后，锡兰一位统治者及家人被带到明廷。 | ZH-F20 |
 | `beat-03-e` / 1411 | sri-lanka · 无（保留底图） | 1411: offerings and force belong in the same account; historians differ over how to explain the intervention. | 1411 年：献礼与武力都应写入这段历史；史家对干预的解释不同。 | ZH-F16, ZH-F20, ZH-F30, ZH-F52 |
 
@@ -217,7 +217,7 @@ slug：`zheng-he`；title EN **Zheng He and the Maritime Silk Routes** / ZH **�
 | `beat-04-a` / 1413 | china · evt-fourth-voyage | 1413: the Ming court sends out the fourth expedition; the marker locates Nanjing, not a measured departure quay. | 1413 年：明廷派出第四次远航；标记定位南京，不是测得的出发码头。 | ZH-F08, ZH-F12 |
 | `beat-04-b` / 1415 | gulf · site-hormuz | By 1415: the fourth expedition reaches Hormuz, beyond the earlier Indian destinations. | 到 1415 年：第四航次已到达霍尔木兹，远于早先的印度目的地。 | ZH-F08, ZH-F12 |
 | `beat-04-c` / 1415 | india · site-calicut | 1413–1415: interpreters and diplomatic specialists connect visitors and ports; neither side speaks with one voice. | 1413—1415 年：通事和外交人员把访客与港口联系起来；任何一方都不是只有一种声音。 | ZH-F13, ZH-F15, ZH-F46 |
-| `beat-04-d` / 1415 | bengal · site-bengal-region | 1415, looking back to 1414: the giraffe came as a gift from Bengal’s king. This is a regional locator, not its boarding place. | 1415 年，回看 1414 年：长颈鹿来自孟加拉国王的赠礼。这里是区域定位，不表示装船地点。 | ZH-F31, ZH-F32 |
+| `beat-04-d` / 1415 | bengal · site-bengal-region | 1415, looking back to 1414: the giraffe came as a gift from Bengal’s king. This is a regional locator, not its boarding place. | 1415 年，回看 1414 年：长颈鹿是孟加拉国王的赠礼；此处只是区域定位，不是装船地点。 | ZH-F31, ZH-F32 |
 | `beat-04-e` / 1415 | sumatra · evt-samudera-1415 | 1415: a claimant to power in Samudera was captured and taken to China; the succession accounts conflict. | 1415 年：苏门答剌一位争夺统治权的人被俘并被带往中国；继位争端的记载互有矛盾。 | ZH-F21 |
 #### 05 · east-african-ports · 东非的港口
 
@@ -243,7 +243,7 @@ slug：`zheng-he`；title EN **Zheng He and the Maritime Silk Routes** / ZH **�
 | `beat-05-a` / 1417 | china · evt-fifth-voyage | 1417: the fifth expedition begins another outward journey. | 1417 年：第五航次开始又一次出海。 | ZH-F09 |
 | `beat-05-b` / 1419 | arabia · site-aden | By 1419: Aden is among the destinations associated with the expedition. | 到 1419 年：亚丁是这一航次记载中的目的地之一。 | ZH-F09, ZH-F35 |
 | `beat-05-c` / 1419 | africa · site-mogadishu, site-malindi | By 1419: accounts name Mogadishu and Malindi; these points do not prove Zheng He personally landed at both. | 到 1419 年：记载提到摩加迪沙和马林迪；这些点不能证明郑和本人都曾登陆。 | ZH-F35 |
-| `beat-05-d` / 1419 | africa · site-kilwa | 1419: look farther south to Kilwa for the wider Swahili trading world, not a confirmed fleet stop. | 1419 年：把视线移向更南边的基尔瓦，看更广阔的斯瓦希里贸易世界；这里不是确认的船队停靠点。 | ZH-F33, ZH-F34 |
+| `beat-05-d` / 1419 | africa · site-kilwa | 1419: look farther south to Kilwa for the wider Swahili trading world, not a confirmed fleet stop. | 1419 年：基尔瓦代表更广阔的斯瓦希里贸易世界，不是确认的船队停靠点。 | ZH-F33, ZH-F34 |
 | `beat-05-e` / 1419 | africa · site-kilwa | 1419: Chinese porcelain in a trading city is evidence of exchange, not a signature left by one admiral. | 1419 年：贸易城市中的中国瓷器能说明交换，不能当作某位统帅留下的签名。 | ZH-F33, ZH-F46 |
 #### 06 · returning-envoys · 回程与停顿
 
@@ -269,8 +269,8 @@ slug：`zheng-he`；title EN **Zheng He and the Maritime Silk Routes** / ZH **�
 | `beat-06-a` / 1421 | china · evt-sixth-voyage | 1421: the sixth expedition carries envoys back across the connected seas. | 1421 年：第六航次运送使节返回这些相连的海域。 | ZH-F10, ZH-F15 |
 | `beat-06-b` / 1422 | straits · site-melaka | By 1422: returning through staging ports involves waiting and provisioning, not continuous sailing at a fixed speed. | 到 1422 年：经由停泊港返航需要候风和补给，不是以固定速度持续航行。 | ZH-F17, ZH-F51 |
 | `beat-06-c` / 1422 | ocean · 无（保留底图） | 1422: seasonal winds help explain schedules; no wind field on this plate claims to be an observation from this year. | 1422 年：季节性风有助于解释航程安排；本图版不把任何风场当作当年的观测。 | ZH-F41, ZH-F42, ZH-F51 |
-| `beat-06-d` / 1424 | china · site-nanjing | 1424: the court view raises questions about power, cost and priorities; historians weigh these motives differently. | 1424 年：从朝廷一端看，会遇到威望、成本和优先事务的问题；史家对这些动机的权重判断不同。 | ZH-F04, ZH-F16, ZH-F52 |
-| `beat-06-e` / 1424 | ocean · 无（保留底图） | After 1422: the voyage sequence pauses before the final expedition. Merchant networks are a separate history. | 1422 年以后：最后一次远航之前出现间隔；商人网络有另一条历史线索。 | ZH-F10, ZH-F11, ZH-F39 |
+| `beat-06-d` / 1422 | china · site-nanjing | After 1422: the court view raises questions about power, cost and priorities; historians weigh these motives differently. | 1422 年以后：朝廷要权衡威望、成本与优先事务；史家对各种动机的权重看法不同。 | ZH-F04, ZH-F16, ZH-F52 |
+| `beat-06-e` / 1422 | ocean · 无（保留底图） | After 1422: the voyage sequence pauses before the final expedition. Merchant networks are a separate history. | 1422 年以后：最后一次远航之前出现间隔；商人网络有另一条历史线索。 | ZH-F10, ZH-F11, ZH-F39 |
 #### 07 · last-voyage-and-evidence · 最后一次远航与留下的证据
 
 **内部核心问题**：船队停航之后，什么仍然存在？
@@ -395,7 +395,7 @@ NE land 的 feature 数不是岛屿数；Geometry MultiPolygon 内有许多岛�
 | 输入 | 校验规则 | 输出/绑定 | 验证样例（预期） |
 |---|---|---|---|
 | ports.geojson | FeatureCollection；17 个 Point；lon/lat 有限；id 唯一；每点来源；角色非空 | place→site id；坐标原样复制 events.at；新增英文/中文地域说明 | Hormuz = [56.4529,27.095]；禁止 [56.272135,27.20406] 的 Bandar Abbas 替代 |
-| control.keyframes | 1405,1407,1409,1411,1413,1415,1417,1421,1433 严格递增 | 每帧空 FeatureCollection；model 解码与淡化已有逻辑 | 9 帧，total control features=0；t=1424 不应有领土填色 |
+| control.keyframes | 1405,1407,1409,1411,1413,1415,1417,1421,1433 严格递增 | 每帧空 FeatureCollection；model 解码与淡化已有逻辑 | 9 帧，total control features=0；t=1422 不应有领土填色 |
 | chapters.state.beats | 8 章，每章 5；chapter id 唯一；所有 caption en/zh；fact 与 highlight 均存在 | applyBeatState → t/camera/layers/highlight；按既有 URL 同步 | 40 拍；07-b t=1433；highlight site-hormuz；点拍不自动连播 |
 | events / casualty | 每个日期、数量有 sources；unknown 不填 0；kind 条件满足 schema | EventInspector，来源按钮，Counter；全键盘/触控 | 自动 counterPer(5000)=500 →10 图标；counterPer(170)=10 →17 图标；170,per=100 →2 个槽、末槽70%（组件边界验证） |
 | layers | 每拍显式 [base,sites,battles]，无 borders；site 可点 | sites 静态点；dated events 走原 battles 层；0 movement | 05-d 只高亮 site-kilwa，详情明确“未证实访问”而非 landing |
@@ -524,3 +524,20 @@ NE land 的 feature 数不是岛屿数；Geometry MultiPolygon 内有许多岛�
 ### 9.2 门槛记录
 
 2026-10-27：`pnpm check` exit 0，765 files、0 errors／0 warnings、3 个既有 hints；`pnpm validate` 58 topics、0／0；`pnpm test` 161 files／4,285 tests 通过（本题 8 tests，索引后再跑也通过）；`pnpm build` exit 0，119 pages、PWA 完成，有共享 chunk >500 kB 提醒，未新增运行时 JS。构建后的两种语言各有 8 个章正文、2 个 figure、8 个索引；data 30 events／0 movements／9 空帧。`shoot` 与 `e2e` 按 BUILD brief 跳过，留主会话 port 5447；已写 7 项 e2e。不能将静态 QA 当作浏览器通过。详见 REVIEW.md／AUDIT.md。
+
+### 9.3 浏览器验收（Claude，2026-10-27）
+
+- **看过的图**：1024×768 en/paper 全 40 拍、zh/cinema 全 40 拍；390×844 zh/cinema 13 拍与 en/paper 8 章阅读视图；1280×800 与 390×844 上点开“本章索引”、点 FlyTo、点标记打开 EventInspector。官方 `pnpm shoot zheng-he --beats --keys --layout`：en/paper 全绿（console clean、key failures 0、layout 0、beat failures 0），zh/cinema 的 beats／keys 全绿；`pnpm shoot` 在负载 120+ 的机器上截图时机不稳，故另用同一 dist 的自写脚本在每拍等 3.5 秒后截图作为主要视觉依据。
+- **海岸与点**：现代 NE 海岸、无国界填色、无航线，各视野与 §3 一致；标签落在对应点上，没有 HUD 重叠。没有任何线条暗示航迹（只有标签引线）。
+- **改动（均为取景／字数，不动数据点）**：
+  - 02 章 2、3 拍（旧港）：旧港点原在字幕卡下被遮住，镜头改为 [103.9, −1.0, 5.5]。
+  - 00 章 4 拍、05 章 4、5 拍（基尔瓦）：基尔瓦贴字幕卡上沿，镜头改为 [42, −6, 4.2]。
+  - 全洋取景 `view-ocean` 与各“全图”拍：由 [80, 8, 2.2] 改为 [80, 10, 2.1]，1024×768 下版框底部不再被字幕卡压住。
+  - 06 章 4、5 拍时间 1424 → 1422：1424 年没有对应事实，字幕与正文也没有这一年；字幕 4 改为“After 1422 / 1422 年以后”。
+  - 4 条 zh 字幕（03-3、04-4、05-4、06-4）超过 45 字，在 390 宽字幕卡里被截掉末句（如“不是确认的船队停靠点”）；改写为 ≤ 40 字，意思不变。
+  - 07 章 ZH “茅坤图传统”改为“《武备志》所收的航海图（英文文献称 Mao Kun map）”：茅坤图是英文文献的称呼。
+  - e2e “forty beats” 的标签等待由 5 秒放宽到 20 秒（标签在镜头跳转后数帧才放置，机器负载高时 5 秒不够）。
+- **THIRD-PARTY-NOTICES**：新增 GeoNames（CC BY 4.0，霍尔木兹／基尔瓦两个点）一行；NE 属公有领域，已有总条目，不再重复。
+- **性能**：`pnpm shoot zheng-he --perf --gpu`（1920×1080，机器负载 120–230）：27 个镜头 58–60 fps，console clean，首屏 JS 452.9 KB gz／10 文件（共享 TimeScene 引擎，本题无新增 JS；高于 §4 写的 ≤400 KB，是引擎既有体量，非本题造成）。海岸运行时 363,634 bytes，按需加载。
+- **e2e**（`CI=1 ATLAS_E2E_PORT=5447`）：zheng-he.spec 7/7 通过（“forty beats” 在放宽等待后通过）；smoke 的 `index (en/zh) lists published topics only` 通过（draft 未上首页，smoke 计数未动）；`sample-space` 两项在重载下超时（SpaceScene，与本题无关，未改引擎），留主会话全量跑。
+- **剩余**：`--layout` 探针在 zh/cinema 偶发 `bar` 内容宽于面板：第一次 1280／1024、第二次 1920，每次只在前 1–3 章、尺寸不同，单独量 DOM 复现不出；ww2 zh/cinema 同探针在 3840–1024 全部通过。疑为重载下探针等待（350 ms）不足，仍请主会话在空闲机器上重跑 `--layout`。移动端字幕卡无 leader 标签、章节索引里 FlyTo 只切取景不开 inspector（需再点地图标记），都是引擎既有行为；见 REVIEW。

@@ -57,7 +57,8 @@ test('eight chapters and forty beats: each expected highlighted point has a visi
     await expect.poll(() => page.evaluate(() => window.__atlas!.state().presentation))
       .toMatchObject({ chapter: beat.chapter, beat: beat.index, autoplay: false });
     await expect.poll(() => page.evaluate(() => (window.__atlas!.state() as unknown as { highlight: string[] }).highlight)).toEqual(expected);
-    for (const id of expected) await expect(page.locator(`.ts-co[data-id="${id}"]`), `${beat.chapter} beat ${beat.index + 1}: ${id}`).toBeVisible();
+    // The stage renders on demand and places leader labels a few frames after the camera snaps: allow for a loaded machine.
+    for (const id of expected) await expect(page.locator(`.ts-co[data-id="${id}"]`), `${beat.chapter} beat ${beat.index + 1}: ${id}`).toBeVisible({ timeout: 20_000 });
     await expect(page.locator('.ts-arrowhead')).toHaveCount(0);
   }
   expect(errors).toEqual([]);
