@@ -1311,10 +1311,10 @@ const flows=[
  {id:'exhaust-out',group:'propellant-flow',color:'token:hot',speed:1.6,count:480,spread:[.35,.04,.35],clip:false,parts:['f1-centre','f1-outer'],paths:engines.map(([x,,z],i)=>({id:`exhaust-${i+1}`,path:[[x,.1,z],[x,-4,z],[x,-7,z]]}))},
 ];
 export const CAMERAS={
- hero:{position:[150,82,173],target:[0,55,0],fov:30},
+ hero:{position:[175,57,198],target:[0,45,0],fov:30},
  engines:{position:[18,6,20],target:[0,4,0],fov:30},
- tank:{position:[24,26,28],target:[0,25,0],fov:30},
- stages:{position:[150,65,170],target:[0,55,0],fov:30},
+ tank:{position:[55,28,66],target:[0,25,0],fov:30},
+ stages:{position:[175,57,198],target:[0,45,0],fov:30},
  apollo:{position:[18,105,22],target:[0,99,0],fov:30},
  lander:{position:[14,7,16],target:[0,3.5,0],fov:30},
 };

@@ -118,7 +118,7 @@ SV001–006的完整claim与source在`facts-extra.json`；其中SV005（Skylab�
 - **summary EN / ZH**：One rocket, several craft: follow each part through the change of configuration. / 一枚火箭，几种飞行器：沿着构型变化辨认各部分。
 - **正文提纲**：介绍111m发射构型与三个主推进级，区分火箭、飞船、地球和月球。说明外壳剖开与拆开是观察方式，不是真实飞行画面；先猜发动机关闭后会不会立即停下，再链接forces/轨道背景。 [SR039,SR043,SR044,SR050]
 - **细看**：①本章构型与真实任务的对应；②显示省略/放大的地方；③关键词与跨题证据链接。
-- **index.parts**：`cm-shell`, `sic-shell`, `sivb-shell`, `sii-shell`, `sm-shell`, `sla-shell`, `cm-heatshield`, `iu-ring`。hidden对象仍能从index选入对应局部镜头，必须先切可见phase再选中，不产生空白详情。
+- **index.parts**：`cm-shell`, `sic-shell`, `sivb-shell`, `sii-shell`, `sm-shell`, `sla-shell`, `cm-heatshield`, `iu-ring`, `les-tower`（browser acceptance补：正文与第1拍字幕提到逃逸系统）。hidden对象仍能从index选入对应局部镜头，必须先切可见phase再选中，不产生空白详情。
 
 | 拍 | phase / preset | labels / 选中索引 | Caption EN | 字幕 ZH | facts |
 |---|---|---|---|---|---|
@@ -514,3 +514,17 @@ S90：本spec §3.0–3.7、simulation-table.json，Atlas teaching model design 
 - 首次默认`pnpm test`：4326通过，既有energy.test守恒遍历一例因5000ms超时失败；单独重跑energy.test为64/64通过。为消除并发负载影响，再以`pnpm exec vitest run --maxWorkers=2 --testTimeout=15000`全量复跑：**161files、4327tests全部通过**（124.27s）。其中本题50测试包含实际网格/接口、全部13相位、35拍标签和相机投影、18行理想表与参考级读数，不把浏览器未运行当通过。
 - `pnpm build`：静态构建成功，119pages，PWA precache146entries；最终交付构建再次成功（127.76s），打包数据的零件说明与参考级发动机标签已与工作树逐项核对一致。未改引擎、依赖或锁文件。
 - `git diff --check`：通过。全部更改留在工作树；没有git写入、提交或合并。浏览器门槛及Gavin审阅范围见§9.3与REVIEW。
+
+### 9.5 浏览器验收（2026-10-27，Claude）
+
+看了什么：`pnpm shoot saturn-v --beats --layout --keys` EN/ZH × paper/cinema，35拍×4套截图、8个视口含1024×768与390×844、封面PNG、章图渲染、模式截图；另用单拍复现核对每条“no label”提示。
+
+- **引擎小修（带测试）**：渲染器远裁剪面固定200，而整栈远景相机离目标230m，运行时整枚火箭被裁掉（只剩标签）。`lib/camera.ts` 新增 `cameraFar(minDistance, radius)`（小模型仍为200，大模型取缩放上限+半径），`CameraRig` 在模型加载后设置；`tests/space-scene/camera.test.ts` 加1例。只对模型半径大于约10.5m（缩放上限+半径超过200）的主题有影响：本题，以及 steam-engine / energy-conversion 等约12m的模型，其远裁剪面由200增到约250，没有可见变化（steam-engine、energy-conversion、aircon 已跑 `--beats --keys` 回归）。
+- **镜头/数据修正**：整栈镜头（hero/stages及各章引用）目标下移到y=45、拉远，使整栈落在底部字幕条上方；tank镜头拉远，两个储箱和各自标签同时在屏；docking第1拍拉远降低，使折叠支腿可见；orientation第3拍拉远，露出逃逸塔并加标签；orientation第2拍与stages第1拍改 xray（S-II 壳的标签在非 xray 下被自身储箱遮挡而淡出，且字幕谈的是各级发动机）。
+- **索引补洞**：orientation正文与第1拍字幕提到逃逸系统，但`les-tower`不在本章index；已加入（同时是第1、3拍标签）。05章正文提到“逃逸塔与对接探杆已不存在”，它们在该章任何一拍都不可见，故不入索引（按设计，见REVIEW）。
+- **测试修正**：`tests-e2e/saturn-v.spec.ts` 的读数断言改为匹配千分位（界面显示 `3,295.84`）；试一试是步进按钮（上一值/下一值），不是按值的按钮，改为点步进按钮；刷新后等 `ready`。
+- **数字**：beats 35/35 在四套均落地、0 beat failure，35/35 beat link 落在同一场景；layout 4套×8视口 0 issue，console clean，页面JS 501.6 KB gz；keys 全部 OK；`--perf --gpu`（Apple M5 Max / ANGLE Metal）最大 41 draw calls / 157,908 三角形（预算 <100 目标、上限150；<300k），全章与全部模式 ≈60 fps（受机器负载限制，不是上限）。
+- **封面**：三个主级、仪器舱环、渐缩适配器、服务舱、指令舱、骨架逃逸塔、细长比例、无字无旗均正确，但S-IC底部只画出四个F-1喷管、中央一台不可见，写入 `FIXES.md`（由 Codex 重做，未手改）。
+- **LM收腿示意**：docking第1拍近看，四支腿收在下降级下方、脚垫落在IU环上，读作“收拢”，没有穿出适配器壳；仍是示意（REVIEW已声明）。
+- **截图伪影（非缺陷）**：机器负载约200时，若干拍的首帧画布尚未绘出（只见标签），隔几秒后单拍复查均正常；“no label”与“chapter highlights”提示每次落在不同的拍上，单拍复现全部通过。
+- **剩余**：封面重做（FIXES.md）；sibling `space-race`/`sun-earth-moon`/`how-planes-fly` 的回链仍待其发布后补；Gavin 请看译名、折腿示意、索引两步读法。

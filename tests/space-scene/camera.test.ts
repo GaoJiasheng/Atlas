@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  cameraFar,
   COVER_FILL,
   COVER_FILL_HEIGHT,
   COVER_MAX_HEIGHT,
@@ -146,5 +147,15 @@ describe('fitSphereCamera (default cover camera)', () => {
     // A wide subject (height-fit is not binding) keeps the sphere fit.
     const flat = fitSphereCamera(view, [0, 0, 0], 1.2, 1.6, undefined, [1.1, 0.1, 0.4]);
     expect(dist(flat)).toBeCloseTo(dist(fitSphereCamera(view, [0, 0, 0], 1.2, 1.6)), 9);
+  });
+});
+
+describe('cameraFar', () => {
+  it('keeps the usual 200 for small models and grows with the zoom-out limit of a large one', () => {
+    expect(cameraFar(0.9, 1)).toBe(200);
+    expect(cameraFar(9, 10)).toBe(200);
+    // A 111 m stack (radius ~60, zoom floor 0.9 r): the 230 m hero camera and the whole zoom range stay inside.
+    expect(cameraFar(54, 60)).toBeGreaterThan(230 + 60);
+    expect(cameraFar(54, 60)).toBe(54 * 20 + 60);
   });
 });

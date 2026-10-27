@@ -29,11 +29,12 @@ test.describe('saturn-v', () => {
     const linked = await sim(page);
     expect(linked.values).toMatchObject({ payload: 200, propellant: 600, 'carry-inert': false, phase: 3 });
     expect(linked.outputs['ideal-dv']).toBeCloseTo(3295.836866004329, 8);
-    await expect(readout(page, 'ideal-dv')).toContainText('3295.84');
+    await expect(readout(page, 'ideal-dv')).toContainText(/3,?295\.84/);
     const camera = await page.evaluate(() => window.__atlas!.state().camera);
     const labels = await page.locator('.space-leaders').getAttribute('data-want');
     await page.reload();
     await page.waitForFunction(() => window.__atlas !== undefined);
+    expect(await page.evaluate(() => window.__atlas!.ready)).toBe(true);
     expect((await sim(page)).values).toEqual(linked.values);
     expect((await sim(page)).outputs).toEqual(linked.outputs);
     await chapter(page, 'orientation');
@@ -54,7 +55,7 @@ test.describe('saturn-v', () => {
 
   test('real controls change mass ratio, stage selection preserves the ideal calculation, and an edited value survives reload', async ({ page }) => {
     await open(page, 'ch=ideal-model&b=2');
-    await page.locator('.space-try [data-sim-control="payload"] [data-sim-value="300"]').click();
+    await page.locator('.space-try [data-sim-control="payload"] .space-try__btn').last().click();
     await expect.poll(async () => (await sim(page)).values.payload).toBe(300);
     const expected = 3000 * Math.log(1000 / 400);
     expect((await sim(page)).outputs['ideal-dv']).toBeCloseTo(expected, 8);
@@ -66,6 +67,7 @@ test.describe('saturn-v', () => {
     }
     await page.reload();
     await page.waitForFunction(() => window.__atlas !== undefined);
+    expect(await page.evaluate(() => window.__atlas!.ready)).toBe(true);
     expect((await sim(page)).values.payload).toBe(300);
     expect((await sim(page)).outputs['ideal-dv']).toBeCloseTo(expected, 8);
   });
@@ -123,7 +125,8 @@ test.describe('saturn-v', () => {
       const more = page.locator('details.atlas-more').filter({ has: page.locator('a[href="?ch=ideal-model&b=5"]') });
       await more.locator('summary').click();
       await more.locator('a[href="?ch=ideal-model&b=5"]').click();
-      await page.waitForFunction(() => window.__atlas !== undefined && window.__atlas.ready);
+      await page.waitForFunction(() => window.__atlas !== undefined);
+      expect(await page.evaluate(() => window.__atlas!.ready)).toBe(true);
       await expect(page).toHaveURL(new RegExp(`/${locale}/topics/saturn-v/\\?ch=ideal-model&b=5`));
       expect((await sim(page)).outputs['configuration-name']).toBe('return');
       const row = page.locator('.space-index__row[data-part="cm-shell"]');
@@ -141,7 +144,7 @@ test.describe('saturn-v', () => {
       page.on('pageerror', (e) => errors.push(e.message));
       await open(page, `ch=ideal-model&b=2&theme=${theme}`, locale);
       await page.getByRole('button', { name: locale === 'en' ? 'Read' : '阅读', exact: true }).click();
-      await expect(readout(page, 'ideal-dv')).toContainText('3295.84');
+      await expect(readout(page, 'ideal-dv')).toContainText(/3,?295\.84/);
       for (const id of ['payload', 'propellant', 'carry-inert']) {
         const control = page.locator(`.space-try [data-sim-control="${id}"] button`).first();
         await control.scrollIntoViewIfNeeded();
@@ -150,7 +153,7 @@ test.describe('saturn-v', () => {
         expect(box.x).toBeGreaterThanOrEqual(0);
         expect(box.x + box.width).toBeLessThanOrEqual(390);
       }
-      await page.locator('.space-try [data-sim-control="payload"] [data-sim-value="100"]').click();
+      await page.locator('.space-try [data-sim-control="payload"] .space-try__btn').first().click();
       expect((await sim(page)).outputs['ideal-dv']).toBeCloseTo(3000 * Math.log(800 / 200), 8);
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
       expect(errors).toEqual([]);

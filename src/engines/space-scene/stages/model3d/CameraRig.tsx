@@ -50,6 +50,7 @@ import type { SpaceUiStore } from '../../ui';
 import type { StageBridge } from '../../bridge';
 import {
   CAMERA_TWEEN_MS,
+  cameraFar,
   COVER_TWEEN_MS,
   DEFAULT_FOV,
   fitCameraToAspect,
@@ -57,6 +58,7 @@ import {
   exerciseFraming,
   fitExerciseCamera,
   fitSpan,
+  MAX_DISTANCE_SHARE,
   ORBIT_PERIOD_S,
   roundCamera,
   transitionCamera,
@@ -133,6 +135,16 @@ export function CameraRig({
     const t = c ? c.target : { x: 0, y: 0, z: 0 };
     return { position: [camera.position.x, camera.position.y, camera.position.z], target: [t.x, t.y, t.z], fov: camera.fov };
   };
+
+  // A large model (111 m) must not be clipped by the default far plane at its farthest zoom.
+  useEffect(() => {
+    const far = cameraFar(minDistance, sphere.radius);
+    if (camera.far !== far) {
+      camera.far = far;
+      camera.updateProjectionMatrix();
+      invalidate();
+    }
+  }, [camera, invalidate, minDistance, sphere.radius]);
 
   useEffect(() => {
     bridge.liveCamera = current;
@@ -429,7 +441,7 @@ export function CameraRig({
       enableDamping
       dampingFactor={0.09}
       minDistance={floor}
-      maxDistance={minDistance * 20}
+      maxDistance={minDistance * MAX_DISTANCE_SHARE}
       zoomSpeed={0.8}
       maxPolarAngle={Math.PI * 0.82}
       onStart={() => {
