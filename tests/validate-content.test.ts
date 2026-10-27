@@ -78,6 +78,16 @@ beforeAll(() => {
       .replace('<FlyTo preset="sample-east">Go', '<FlyTo preset="nowhere">Go');
     writeFileSync(file, text);
   });
+  topic('event-links', (root) => {
+    writeFileSync(join(root, 'chapters/09-event-links.mdx'), chapterFile([
+      'id: inspect-events', 'order: 9', 'title: { en: Events, zh: 事件 }',
+    ], '<FlyTo preset="sample-east" event="sample-meeting">Event</FlyTo> <FlyTo preset="sample-east" event="missing-event">Unknown</FlyTo>'));
+  });
+  topic('space-event-link', (root) => {
+    writeFileSync(join(root, 'chapters/09-event-links.mdx'), chapterFile([
+      'id: event-links', 'order: 9', 'title: { en: Events, zh: 事件 }',
+    ], '<FlyTo preset="sample-left" event="sample-meeting">Event</FlyTo>'));
+  }, SAMPLE_SPACE);
   topic('with-background', (root) => {
     writeFileSync(
       join(root, 'chapters/00-before.mdx'),
@@ -210,7 +220,7 @@ afterAll(() => {
 describe('validate-content', () => {
   it('fails the run when any topic has errors', () => {
     expect(status).toBe(1);
-    expect(output).toMatch(/21 topic\(s\)/);
+    expect(output).toMatch(/23 topic\(s\)/);
   });
 
   it('passes an unmodified copy', () => {
@@ -239,6 +249,13 @@ describe('validate-content', () => {
     const lines = linesFor('bad-body').join('\n');
     expect(lines).toContain('<Num s="S7">: unknown source "S7"');
     expect(lines).toContain('<FlyTo preset="nowhere">: unknown preset');
+  });
+
+  it('accepts only local TimeScene events on object-index FlyTo links', () => {
+    const lines = linesFor('event-links').filter((line) => line.startsWith('error'));
+    expect(lines).toHaveLength(1);
+    expect(lines[0]).toContain('<FlyTo event="missing-event">: unknown event');
+    expect(linesFor('space-event-link').join('\n')).toContain('<FlyTo event="sample-meeting">: unknown event');
   });
 
   it('checks the chapter a <TopicLink ch> names', () => {

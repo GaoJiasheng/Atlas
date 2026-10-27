@@ -53,3 +53,12 @@
 | `pnpm shoot` / `pnpm e2e` | **按 BUILD brief 跳过**；7 项 e2e 已写未执行；主会话 `ATLAS_E2E_PORT=5447`。不宣称 UI／性能／语音已通过 |
 
 全部文件留工作树，未提交；未改 package.json、lockfile、review-queue、next-batch、其他主题正文、首页 smoke 数或许可总文件。
+
+
+## 2026-10-27 follow-up
+
+- 中文作者名统一为“韦德”；正文首次出现（02 章细看）写“韦德（Geoff Wade）”，独立事件详情与来源目录也保留英文以便识别。既有历史解释及 S2 归属不变。
+- 南京保留 D02 原坐标；九条 dated 记录采用 `displayOffset`，中央 site 不动。规则为 96 CSS px 圆环、从北顺时针每 40°、四舍五入 0.1 px，确切序列见 data/SOURCES.md。最小中心间距约 65.7 px，大于 44 px 命中宽度；这是显示分离，不是新的历史地点。背景阅读说明与正文双语解释。引擎将符号、命中检测、脉冲与标签锚点一起偏移。
+- 重读 [S1 Columbia · The Seven Voyages](https://afe.easia.columbia.edu/special/china_1000ce_mingvoyages.htm) 第二航次段：目的地古里、参加新王即位典礼；郑和组织但未亲自率队。故 evt-second-voyage 保持原古里坐标，详情与章索引补清证据关联，没有添加船数、精确典礼位置或船只轨迹。
+- 章索引所有双语 FlyTo 行增加事件 id，接入引擎的选中路径并保留原预设取景；详情在章头下。原先“只取景、不选中”的限制由本轮修复，以上旧记录是先前状态。
+- 本轮仍为 draft。浏览器／桌面完全不使用；shoot/e2e 按用户要求跳过，留主会话。本轮命令结果见 REVIEW 与 docs/59 §9.4。

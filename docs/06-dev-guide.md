@@ -101,7 +101,7 @@ pnpm tsx scripts/new-topic.ts <slug> --engine space-scene --subject science|biol
      | `<More>` | `<More title={{ en: "The numbers", zh: "数字" }}>`（里面空行再写 Markdown）`</More>` | 细看折叠块：hairline 标题行 + 小三角，默认收起；原生 `<details>`，无 JS 也能用 |
      | `<Figure>` | `<Figure src="figures/b200-rack" alt={{ en: "…", zh: "…" }} caption={{ en: "…", zh: "…" }} />` | 章节里的一张石墨插图（`public/illustrations/<src>.webp` + `@2x`，4:3，`scripts/illustrate.ts figure`）：paper 下正片叠底，dark plate 反相成粉笔（同首页插图 `.atlas-drawing`）；占位宽高预留；validate 检查文件存在、alt 与 caption 都写了 |
      | `<Num>` | `<Num s="S3">about 70,000</Num>`；多个来源 `s="S3,S7"` | 数字后跟 mono 上标来源号，点开来源弹层（文本、说明、链接，不联网） |
-     | `<FlyTo>` | `<FlyTo preset="singapore-island">Singapore island</FlyTo>` | 正文里的 hairline 按钮，镜头飞到命名预设（TimeScene `presets.json`，SpaceScene `parts.json` 的 `presets`；与 VIEW 按钮同一动作；手机上顺便收起阅读面板） |
+     | `<FlyTo>` | `<FlyTo preset="singapore-island">Singapore island</FlyTo>`；TimeScene 对象索引可加 `event="event-id"` | 正文里的 hairline 按钮，镜头飞到命名预设（TimeScene `presets.json`，SpaceScene `parts.json` 的 `presets`；与 VIEW 按钮同一动作）。普通取景在手机收起阅读面板；带 `event` 则选中本题事件/地点，详情显示在章头下并保留阅读面板展开与预设取景。validate 校验 preset 与 event 引用 |
      | `<TopicLink>` | `<TopicLink slug="four-taps">Singapore's Four Taps</TopicLink>`；链到某一章：`<TopicLink slug="ww2" ch="fall-of-singapore">…</TopicLink>` | 正文里链到另一个主题的页面：按读者语言和站点 base 生成地址（`localeHref`），不要手写 `/en/topics/…`；可选 `ch` 加 `?ch=<章 id>`（见「URL 参数」）；`pnpm validate` 检查主题存在、`ch` 是那个主题的章节 id（读目标主题各章 frontmatter 的 `id`） |
      | `<Term>` | `<Term id="blitzkrieg">闪电战</Term>` | 名词：点状下划线的 `span`（`role="button"`，Enter / 空格也能开），点开在阅读面板 inspector 区显示 `glossary.json` 里的定义和相关词（见「名词表」）；只包全主题第一次出现处 |
      | `<Frac>` | `<Frac n={3} d={4} />`、`<Frac w={1} n={3} d={4} />` | 静态竖排分数（与数据文本里的 `{3/4}` 同一套标记），读屏读文字（"three quarters" /「四分之三」）；校验 n、d 是整数、d ≥ 1 |
@@ -564,6 +564,8 @@ UI：左 PLATE 显示现今国形、上下文/日期/成员数，C 显示基准�
 | `sources.json`（可选） | 见上文"加一个主题"第 4 步。 |
 | `glossary.json`（可选） | 名词表，见「名词表」。 |
 
+**同址事件的显示偏移**：`events.json` 可选 `displayOffset: [x, y]`（CSS px，右／下为正，每轴 −96…96）。它只移动事件／地点标记、脉冲、引线锚点及 44 px 点击目标，偏移后的圆点画一条 hairline 腿连回原坐标（`displayLeg`，离锚点留 6 px），读者看得出它属于哪个地点；`at`、地理包围盒和镜头取景仍使用原始来源坐标。只用于拆开重叠点，并在主题 `data/SOURCES.md` 记录确定性排布规则；显示偏移不声称事件发生在另一地理位置。引擎选择偏移后最近的标记，未配置时位置不变。单测见 `tests/time-scene/event-display.test.ts`。
+
 **`site` 事件**是静态点位（监狱、纪念碑、建筑）：`t` 照写但不参与时间——不进时间轴范围、不进泳道和统计、不脉冲；只在 `sites` 图层打开时显示（小空心菱形 + 中心点），点击同样打开 inspector（眉题 `P-01`），高亮时出引线标注。
 
 章节 `state`：`time`（ISO 三种精度或 `{ ma }`）、`camera`、`layers`、`highlight`（实体/行动/事件 id）、`theme`、`note`（只在背景章：阅读说明）、`summary`（`{ en, zh }`，阅读面板标题下的一句话，也是默认演示字幕）、`question` / `answer`（`{ en, zh }`；没有 `summary` 时阅读面板头部显示 `question`；`answer` 必须配 `question`，目前不渲染），以及可选的 `beats`（演示节拍，见下）。底部条上每章一段，段从本章 `time`（第一拍更早就取第一拍的 `t`）开始，段里每拍一个刻度——**拍就是时间轴的结构**；**章节顺序必须等于时间顺序**（`tests/schemas.test.ts` 对 ww2 有检查）。
@@ -573,6 +575,8 @@ UI：左 PLATE 显示现今国形、上下文/日期/成员数，C 显示基准�
 `ChapterIndex.tsx` 放在 `readerEnd`（标题 `time.index.title`，样式同 SpaceScene 的 `.space-index`），按钮使用事件的双语 title，带 `data-time-target`、`aria-pressed`，命中高度至少 44 CSS px。索引选地点开 `sites`、保持日期；选非地点开 `battles`、跳到事件的原始日期（保留日精度），不换章或启动演示；镜头只改 center，保留 zoom / pitch / bearing。非法 id 或演示中返回 false、无副作用。原地图 / 引线选择继续复用唯一的 EventInspector，事件和实体详情移到 `readerTop`；未选择不画空框。宿主 `revealReader()` 打开已有阅读面板 / 手机抽屉并在展开后回到顶部；小于 1024 CSS px 只展开临时抽屉，不覆盖 `sessionStorage['atlas:reader']` 的 dock 折叠偏好，桌面显式选中会沿用原来的 reader 持久化路径打开列。关详情恢复底部条当前所停拍（anchor 的刻度）的高亮；拖时间、跳日期或换章后没有所停拍，恢复章默认。索引与选中 id 不新增 URL 字段。此项不包含阅读节拍行或 `b` 参数适配（E-IR2）。
 
 测试 API：`__atlas.engine.selectEvent(id): boolean` 走索引路径；`__atlas.engine.reader()` 返回 `{ indexIds: string[], selectedId: string | null, detailCount: number }`（详情数量 0 或 1）。纯函数 `lib/reader.ts` 和 schema 有 `tests/time-scene/reader.test.ts` 单测；真实 draft 主题 `industrial-revolution` 作为内容验收样本，不另建占位夹具。
+
+手写正文索引表也可用 `<FlyTo preset="view-china" event="evt-first-voyage">…</FlyTo>`：宿主原生 click 委托调用 `controls.selectEvent`（与自动索引和测试 API 同一路径），先选中事件/地点、应用日期/图层并打开阅读详情，再走原 VIEW 预设动作。因此保留原表的取景范围，不会被事件坐标改成另一个中心；手机也保留详情抽屉。演示中或无效事件不改状态；未带 `event` 的普通 FlyTo 行为不变。`tests/flyto.test.ts` 覆盖真实 store 的选择/预设转换顺序、地点日期不变、事件日精度、手机与拒绝路径。
 
 演示节拍（`state.beats`，可选，加法）：
 
@@ -679,7 +683,7 @@ TimeScene 不注册 `panel01–03`，宿主因此不画底部三面板带；原�
 
 - 左：泳道开关（小 chevron，`aria-expanded`）。PRESENT / 演示按钮已移到顶栏 VIEW 组右端（两个引擎共用，docs/08 §2；这里不再放第二个）。原来的播放 / 暂停和 ×1 ×2 ×4 已去掉（Gavin 2026-10-09），时间轴不再自己跑。
 - 中：**分段标尺**（Gavin 2026-10-10："外面的大时间轴做成跟演示模式类似，分几段，只标年月"）：每个正式章节一段，等宽（段间 6 px），段左界下方两行 mono 标签：章号 `07`、起始年月 `1941-12`（段宽 < 44 px 只写章号；地质时间写读数；公元前、跨度超过 100 年或 `datePrecision: year` 时只写年：`770 BCE` / `前770年`，`segmentDate` 用 `yearLabel`）。每段一条 2 px hairline 轨：已过的章墨色，当前章 signal 色、填到播放头。段里每个演示拍一个刻度（7 px 空心圆，坐在轨上），位置按拍的 `t` 在本段跨度里线性排、再推开到彼此 ≥ 10 px（段太窄时均分）；当前章的当前拍刻度实心 signal（刚套用的那拍；拖动后 = 播放头之前最近的一拍）。没写 `beats` 的章一个刻度（章节时间）。关键帧小空心菱形坐在轨上（同一映射）；没有年 / 月刻度。**点段**（`.ts-seg__btn`，44 px 高，`aria-label`「第 2 章：开战前的世界，自 1938-01」）= 换到那一章并落在第一拍（见「时间」）；**点刻度**（`.ts-seg__tick`，`data-beat="<章>.<拍>"`，命中区伸到与相邻刻度的中点，10–28 px 宽、24 px 高，压在段按钮上面——段在标签那一行点）= 套用那一拍；悬停 / 聚焦刻度出一张 hairline 小卡（`.ts-tip`）：拍的日期（mono signal）+ 字幕开头几个词（en 约 56 字符断在词边界，zh 22 字）。当前段的刻度是 Tab 停靠点，其余段的刻度只给指针（选了那段就能 Tab 进去）。手机宽度（条 < 560 px，容器查询）只画段、不画刻度。播放头：12 px 空心 signal 圆点（中间透出当前拍的实心刻度）加 hairline 竖线，日期写在线上方；44 px 命中区（`.ts-rule__grab`，`role="slider"`，`touch-action: none`）压在刻度上面——不拖动地点它 = 点了 22 px 内最近的刻度，没有就点了所在的段。**拖动**：在标尺上任何地方按下并移动 > 3 px 就开始拖（指针捕获），松手不再算点击；抓住播放头保持抓取偏移，从别处起拖则播放头跳到指针。鼠标和触屏都走 pointer events。
-- 右：状态串（mono）：参战方 `已加入 / 总数` · 进行中的战斗 · 进行中的行动 · 控制区关键帧 `K8→K9 23 %`；每段的 `title` 写双语全称（Participants / 参与方 …）。都是数据统计，不标 SIM。条窄于 860 px（容器查询）时状态串换到标尺下面一行。
+- 右：状态串（mono）：参与方 `已加入 / 总数` · 进行中的战斗 · 进行中的行动 · 控制区关键帧 `K8→K9 23 %`；只在全题有相应数据时出现（战斗按 battle/landing/bombing/siege；非战斗事件仍保留 Events 图层）。没有实体、路线或非空控制几何时分别省略参与方、行动或关键帧读数；当前日期暂时为 0 的读数保留。`lib/hud.ts` 按全题数据决定，不随时间或图层开关跳变；`tests/time-scene/hud.test.ts` 核查全部 TimeScene 主题和双语状态 HTML。每段的 `title` 写双语全称。都是数据统计，不标 SIM。条窄于 860 px（容器查询）时状态串换到标尺下面一行。
 - 泳道（默认收起）：KEYFRAMES（菱形）、MOVEMENTS（起止条，重叠自动分行）、EVENTS（点 + 进行窗口），当前章那一段淡 signal 底，播放头一条 signal 竖线；横坐标与标尺完全一致。
 - 行为：拖动 = 连续时间不换章；点段 = 换章并落在第一拍（不展开阅读面板，见「阅读面板收起」）；点刻度 = 那一拍；Shift+← → 全局微调；焦点在播放头上时 ← → ↑ ↓ 微调一格、PageUp/PageDown 十格、Home/End 跳到播放头所在段的两端。
 
@@ -715,6 +719,8 @@ end_i   = start_{i+1}；本章最后一拍更晚就取最后一拍（最后一�
 | `cardToggle` | 参与卡展开 / 收起 |
 | `beats` | `usePresentation` 的 `controls`（节拍列表与跳转、自动播放、语音、voiceLog） |
 | `escape` | 依次：退出 PRESENTATION → 退出 REFERENCE → 收起展开的参与卡（连同选中的实体）→ 取消选中实体 → 关闭事件详情 → 清空 highlight（来源弹层开着时 ESC 先关弹层，由弹层自己处理） |
+
+LAYERS 按全题是否有数据省略空行：控制区须有非空几何；何时加入须有实体及可着色的控制区几何（仅叙事实体时不出空图层，参与方读数与卡片仍保留）；路线（连同 F 模式）须有 movements；事件须有非 site 事件；地点须有 sites。领土名称（连同 N 键）在有控制区、区域河名或今日岸线时保留，三者都没有就不出行也不注册 N。datedLayers 的作者图层原样保留；不能因为题目没有战斗就隐藏 milestones、政治事件、输水管或铁路。
 
 - **REFERENCE（R）**：版图对照用"叠加"实现（不分屏）：当前主导关键帧照常，相邻关键帧（前一帧；当前是第一帧时取后一帧）的边界以墨色虚线叠上，2 s 淡入（`instant` 时直接到位）；舞台顶部横幅写"实线 K2 … · 虚线 K1 …"。再按恢复。少于两个关键帧时禁用；演示中禁用。
 - **PRESENTATION（P）**：core 演示系统（见「演示系统（core）」），TimeScene 的适配器在 `View.tsx`：`beatsOf` = 章的 `state.beats`；一拍 = 本章累积目标 ⊕ 拍里的 `t` / `camera` / `layers` / `highlight`，用 `applyState` 飞镜头（2.2 s）、缓动 `t`（1.6 s）——底部条点刻度、换章落第一拍用的是同一个函数（`applyBeatState`）；`saveState` / `restoreState` = store 快照 / `applyState` 恢复（章节、镜头、`t`、图层、高亮）；`onEnter` 退出 REFERENCE、清选中的事件 / 实体、收起参与卡；字幕卡表头的 `readout` = 播放头日期（同时间轴读数）；没有 `afterCameraSettle`（固定 2.3 s，等于镜头飞行加字幕淡入）。演示中 REFERENCE 禁用；顶栏 PRESENT 按钮 = P。拍落定后地图可拖动 / 缩放（见「翻页与自由查看」），演示中点地图上的事件不选中；用户平移 / 缩放（含滚轮）250 ms 后写回 `camera`，过渡开始时丢弃还没写回的那次。**引线标注**：HUD 隐藏时地图上仍画这拍 `highlight`（没写就是本章的）里的事件 / 行动 / 实体的引线标注（上限 6 个，字号比平时大 20%，遵守 L 开关；要对应图层开着），**只有这些**——别的事件标注、地名、实体名在演示里都不画（控制器 `setPresentation(true)`，样式挂在 `.ts-stage[data-presenting]`）；领土名称照常显示。字幕卡和标题块算引线栏的障碍，标注让开它们；演示中引线栏**只**把这两块当障碍（HUD 面板淡出时 `visibility` 还留着，不能算），并且进入演示、换拍（字幕卡出现 / 变高，`refreshLabels`）和镜头落定（`moveend`）时立刻重新量一次，不等 1 s 的兜底定时器。

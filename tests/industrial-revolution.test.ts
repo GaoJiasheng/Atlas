@@ -12,7 +12,7 @@ const root = join(import.meta.dirname, '..');
 const topicDir = join(root, 'src/content/topics/industrial-revolution');
 const json = (name: string) => JSON.parse(readFileSync(join(topicDir, 'data', name + '.json'), 'utf8'));
 const topic = parse(readFileSync(join(topicDir, 'topic.yaml'), 'utf8'));
-type Event = { id: string; t: string; kind: string; at: number[]; sources: string[]; detail: { en: string; zh: string }; casualties?: unknown; sides?: unknown };
+type Event = { id: string; t: string; kind: string; at: number[]; sources: string[]; detail: { en: string; zh: string }; summary: { en: string; zh: string }; casualties?: unknown; sides?: unknown };
 const events: Event[] = json('events');
 const eventById = new Map(events.map((e) => [e.id, e]));
 const chapters = readdirSync(join(topicDir, 'chapters')).filter((f) => f.endsWith('.mdx')).sort().map((f) => {
@@ -105,9 +105,43 @@ describe('industrial-revolution documentary content', () => {
       const bodies = chapters.map((c) => new RegExp(`<Lang ${lang}>([\\s\\S]*?)</Lang>`, 'g').exec(c.text)?.[1] ?? '').join('\n');
       expect(bodies.match(new RegExp(`<Term id="${term.id}"`, 'g')) ?? [], `${lang}: ${term.id}`).toHaveLength(1);
     }
-    expect(chapters.map((c) => c.text).join('\n')).not.toContain('<TopicLink slug="steam-engine"');
+    const steamDir = join(root, 'src/content/topics/steam-engine');
+    const steamChapters = readdirSync(join(steamDir, 'chapters')).filter((f) => f.endsWith('.mdx')).map((f) => {
+      const text = readFileSync(join(steamDir, 'chapters', f), 'utf8');
+      return { text, ...parse(/^---\n([\s\S]*?)\n---/.exec(text)![1]!) };
+    });
+    expect(parse(readFileSync(join(steamDir, 'topic.yaml'), 'utf8')).status).toBe('published');
+    const pairs = [
+      ['ir-thread-coal-power', 'keep-hot-and-cold-apart'],
+      ['ir-thread-coal-power', 'speed-feedback'],
+      ['ir-railways-networks', 'power-both-ways'],
+      ['ir-seas-signals', 'follow-the-energy'],
+      ['ir-connected-world-debates', 'before-you-start'],
+    ];
+    for (const [history, mechanism] of pairs) for (const lang of ['en', 'zh']) {
+      const body = new RegExp(`<Lang ${lang}>([\\s\\S]*?)</Lang>`).exec(chapters.find((c) => c.id === history)!.text)![1]!;
+      expect(body).toContain(`<TopicLink slug="steam-engine" ch="${mechanism}">`);
+      // The final return sits in the engine's energy chapter, where it follows the energy account.
+      const returnId = mechanism === 'before-you-start' ? 'follow-the-energy' : mechanism;
+      const returnBody = new RegExp(`<Lang ${lang}>([\\s\\S]*?)</Lang>`).exec(steamChapters.find((c) => c.id === returnId)!.text)![1]!;
+      expect(returnBody).toContain(`<TopicLink slug="industrial-revolution" ch="${history}">`);
+    }
     expect(json('presets').presets).toHaveLength(14);
     expect(new Set(json('sources').sources.map((s: { id: string }) => s.id)).size).toBe(54);
+  });
+
+  it('puts the city-location explanation in the background note and keeps labels about their places', () => {
+    expect(chapters[0].state.note.en).toContain('modern city locations');
+    expect(chapters[0].state.note.zh).toContain('今天的城市位置');
+    const sites = events.filter((e) => e.kind === 'site');
+    for (const lang of ['en', 'zh'] as const) {
+      expect(new Set(sites.map((e) => e.summary[lang])).size).toBe(sites.length);
+      for (const e of sites) {
+        expect(e.summary[lang]).not.toMatch(/Modern city reference|现代城市参照/);
+        expect(e.detail[lang]).not.toMatch(/This marker locates|此点用现代地名资料/);
+      }
+    }
+    for (const e of events) expect(e.detail.en).not.toMatch(/^Regional location reference/);
   });
 });
 

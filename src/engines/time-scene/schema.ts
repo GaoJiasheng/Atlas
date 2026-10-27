@@ -31,6 +31,7 @@ import { glossaryFile } from '../../content/schema/glossary';
 import { compareTime } from '../../lib/time';
 import { decodeControl, decodeTopologyObject } from './lib/control';
 import { colourConflicts, holderAdjacency } from './lib/holders';
+import { MAX_EVENT_DISPLAY_OFFSET } from './lib/event-display';
 import { riverFeatures } from './lib/rivers';
 import { datedWindow, eraSequenceIssues, hasDate } from './lib/dated';
 import { BUILTIN_TIME_LAYER_IDS, type DatedLayerDef } from '../../content/schema/topic';
@@ -327,6 +328,11 @@ const eventFields = {
     t: timePoint,
     until: timePoint.optional(),
     at: lngLat,
+    /** Screen-only CSS-pixel shift right/down; preserve sourced `at` coordinates. */
+    displayOffset: z.tuple([
+      z.number().finite().min(-MAX_EVENT_DISPLAY_OFFSET).max(MAX_EVENT_DISPLAY_OFFSET),
+      z.number().finite().min(-MAX_EVENT_DISPLAY_OFFSET).max(MAX_EVENT_DISPLAY_OFFSET),
+    ]).optional(),
     kind: z.enum(EVENT_KINDS),
     /** Required for battle / landing / bombing; optional for the others (`disaster` too). */
     sides: z.object({ attacker: kebabId, defender: kebabId }).strict().optional(),
