@@ -1,0 +1,432 @@
+---
+{
+  "id": "before-you-start",
+  "order": 0,
+  "kind": "background",
+  "title": {
+    "en": "Before you start",
+    "zh": "开始之前"
+  },
+  "sensitive": false,
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "part": null,
+    "run": false,
+    "cutaway": "none",
+    "pose": null,
+    "layers": [
+      "airframe",
+      "flight-controls",
+      "propulsion",
+      "flight-flows"
+    ],
+    "hide": [
+      "wing-box-skin",
+      "front-spar",
+      "rear-spar",
+      "wing-ribs",
+      "engine-shell",
+      "fan-disc",
+      "bypass-duct",
+      "compressor-bank",
+      "compressor-rotor",
+      "combustor-ring",
+      "turbine-bank",
+      "hp-turbine-rotor",
+      "lp-turbine-rotor",
+      "lp-shaft",
+      "hp-shaft",
+      "core-nozzle",
+      "bypass-nozzle",
+      "foil-sample",
+      "chord-marker",
+      "inflow-reference",
+      "angle-marker",
+      "display-plinth"
+    ],
+    "labels": [
+      "wing-left",
+      "nacelle-left",
+      "fin"
+    ],
+    "ghost": [],
+    "camera": {
+      "position": [
+        -5,
+        4.5,
+        6
+      ],
+      "target": [
+        0,
+        1.1,
+        0
+      ],
+      "fov": 30
+    },
+    "sim": {
+      "set": {
+        "angle-deg": 4,
+        "airspeed-mps": 40,
+        "altitude-m": 0,
+        "flow-view": "streamlines",
+        "diagram-case": "none"
+      }
+    },
+    "summary": {
+      "en": "Use a generic airliner and a separate wing experiment to see forces, flow and propulsion.",
+      "zh": "从一架通用客机和独立的翼型实验，看清力、气流与推进。"
+    },
+    "note": {
+      "en": "The aircraft and the engine are generic design studies, not any real type. Numbers marked SIM come from this topic’s teaching model and say “in this simulation”; they are not measurements. Dates, places and counts come from the sources listed in each chapter. Dashed lines mark the illustrative stall region.",
+      "zh": "飞机和发动机是通用设计研究，不对应任何真实机型。标“模拟”的数来自本主题的教学模型，句中写明“在这个模拟里”，不是测量值。日期、地名和数量来自各章列出的来源。虚线标出失速示意区。"
+    },
+    "index": {
+      "parts": [
+        "wing-left",
+        "nacelle-left",
+        "fin",
+        "foil-sample",
+        "chord-marker",
+        "fan-disc",
+        "combustor-ring",
+        "turbine-bank"
+      ]
+    },
+    "beats": [
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "airframe",
+          "flight-controls",
+          "propulsion",
+          "flight-flows"
+        ],
+        "hide": [
+          "wing-box-skin",
+          "front-spar",
+          "rear-spar",
+          "wing-ribs",
+          "engine-shell",
+          "fan-disc",
+          "bypass-duct",
+          "compressor-bank",
+          "compressor-rotor",
+          "combustor-ring",
+          "turbine-bank",
+          "hp-turbine-rotor",
+          "lp-turbine-rotor",
+          "lp-shaft",
+          "hp-shaft",
+          "core-nozzle",
+          "bypass-nozzle",
+          "foil-sample",
+          "chord-marker",
+          "inflow-reference",
+          "angle-marker",
+          "display-plinth"
+        ],
+        "labels": [
+          "wing-left",
+          "nacelle-left",
+          "fin"
+        ],
+        "ghost": [],
+        "camera": "aircraft-overview",
+        "sim": {
+          "set": {
+            "angle-deg": 4,
+            "airspeed-mps": 40,
+            "altitude-m": 0,
+            "flow-view": "streamlines",
+            "diagram-case": "none"
+          }
+        },
+        "caption": {
+          "en": "This generic airliner has wings, engines and a tail. The wings provide most of its lift; the engines supply thrust.",
+          "zh": "这架通用客机有机翼、发动机和尾翼。大部分升力来自机翼，发动机提供推力。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "airfoil-bench"
+        ],
+        "hide": [
+          "fuselage-shell",
+          "cockpit-glazing",
+          "wing-left",
+          "wing-right",
+          "wing-tip-left",
+          "wing-tip-right",
+          "aileron-left",
+          "aileron-right",
+          "spoiler-left",
+          "flap-left",
+          "flap-right",
+          "slat-left",
+          "slat-right",
+          "tailplane-left",
+          "tailplane-right",
+          "elevator-left",
+          "elevator-right",
+          "fin",
+          "rudder",
+          "nacelle-left",
+          "nacelle-right",
+          "fan-left",
+          "fan-right",
+          "wing-box-skin",
+          "front-spar",
+          "rear-spar",
+          "wing-ribs",
+          "engine-shell",
+          "fan-disc",
+          "bypass-duct",
+          "compressor-bank",
+          "compressor-rotor",
+          "combustor-ring",
+          "turbine-bank",
+          "hp-turbine-rotor",
+          "lp-turbine-rotor",
+          "lp-shaft",
+          "hp-shaft",
+          "core-nozzle",
+          "bypass-nozzle"
+        ],
+        "labels": [
+          "foil-sample",
+          "chord-marker"
+        ],
+        "ghost": [],
+        "camera": "section-view",
+        "sim": {
+          "set": {
+            "angle-deg": 4,
+            "airspeed-mps": 40,
+            "altitude-m": 0,
+            "flow-view": "streamlines",
+            "diagram-case": "none"
+          }
+        },
+        "caption": {
+          "en": "This separate wing section is an experiment. It uses a simple mathematical shape, not the wing of a named aircraft.",
+          "zh": "旁边这块翼型是实验教具。它用一个简单的数学形状，不是哪一型号飞机的机翼。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "engine-cut",
+        "pose": null,
+        "layers": [
+          "propulsion",
+          "flight-flows"
+        ],
+        "hide": [
+          "fuselage-shell",
+          "cockpit-glazing",
+          "wing-left",
+          "wing-right",
+          "wing-tip-left",
+          "wing-tip-right",
+          "aileron-left",
+          "aileron-right",
+          "spoiler-left",
+          "flap-left",
+          "flap-right",
+          "slat-left",
+          "slat-right",
+          "tailplane-left",
+          "tailplane-right",
+          "elevator-left",
+          "elevator-right",
+          "fin",
+          "rudder",
+          "nacelle-left",
+          "nacelle-right",
+          "fan-left",
+          "fan-right",
+          "wing-box-skin",
+          "front-spar",
+          "rear-spar",
+          "wing-ribs",
+          "foil-sample",
+          "chord-marker",
+          "inflow-reference",
+          "angle-marker",
+          "display-plinth"
+        ],
+        "labels": [
+          "fan-disc",
+          "combustor-ring",
+          "turbine-bank"
+        ],
+        "ghost": [],
+        "camera": "engine-section-view",
+        "sim": {
+          "set": {
+            "angle-deg": 4,
+            "airspeed-mps": 40,
+            "altitude-m": 0,
+            "flow-view": "streamlines",
+            "diagram-case": "none"
+          }
+        },
+        "caption": {
+          "en": "The cutaway shows a fan, a core and the machinery joining them. Some air passes around the core.",
+          "zh": "剖面能看见风扇、核心和连接它们的机构。有一部分空气绕过核心流动。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": true,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "airfoil-bench",
+          "flight-flows"
+        ],
+        "hide": [
+          "fuselage-shell",
+          "cockpit-glazing",
+          "wing-left",
+          "wing-right",
+          "wing-tip-left",
+          "wing-tip-right",
+          "aileron-left",
+          "aileron-right",
+          "spoiler-left",
+          "flap-left",
+          "flap-right",
+          "slat-left",
+          "slat-right",
+          "tailplane-left",
+          "tailplane-right",
+          "elevator-left",
+          "elevator-right",
+          "fin",
+          "rudder",
+          "nacelle-left",
+          "nacelle-right",
+          "fan-left",
+          "fan-right",
+          "wing-box-skin",
+          "front-spar",
+          "rear-spar",
+          "wing-ribs",
+          "engine-shell",
+          "fan-disc",
+          "bypass-duct",
+          "compressor-bank",
+          "compressor-rotor",
+          "combustor-ring",
+          "turbine-bank",
+          "hp-turbine-rotor",
+          "lp-turbine-rotor",
+          "lp-shaft",
+          "hp-shaft",
+          "core-nozzle",
+          "bypass-nozzle"
+        ],
+        "labels": [
+          "foil-sample"
+        ],
+        "ghost": [],
+        "camera": "section-view",
+        "sim": {
+          "set": {
+            "angle-deg": 16,
+            "airspeed-mps": 40,
+            "altitude-m": 0,
+            "flow-view": "streamlines",
+            "diagram-case": "none"
+          }
+        },
+        "caption": {
+          "en": "Dashed lines mark an illustrative stall region. They explain a limit of this teaching model; they are not a wind-tunnel measurement.",
+          "zh": "虚线标出失速示意区。它说明教学模型的范围，不是风洞测量。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+This topic uses three teaching models, each drawn at its own scale. The first is a generic airliner with two engines under its wings and a conventional tail. It is not any particular make or type. Its wings give most of its <Term id="lift">lift</Term>, the force from the air that holds it up in level flight, and its engines supply the <Term id="thrust">thrust</Term> that pushes it forwards. <FlyTo preset="aircraft-overview">Start with the whole aircraft</FlyTo>
+
+The second model is a short slice of wing, set up as an experiment beside the aircraft. Its cross-section, the <Term id="airfoil">airfoil</Term>, is a simple mathematical shape chosen for this topic, not the wing of a real aircraft. A computer model works out how air flows around it, and the readings it gives are marked SIM: they belong to the model, not to measurements. <FlyTo preset="section-view">Look at the experiment</FlyTo>
+
+The third model is an engine cut open along its length. You can see the fan at the front, the core behind it and the machinery that joins them. Some of the air goes around the core instead of through it. <FlyTo preset="engine-section-view">Open the engine</FlyTo>
+
+Two kinds of statement appear in this topic. Facts about aircraft, engines and airports come from published sources and carry a small source number. Values from the models, such as the angles, speeds and forces of the experiment, are design choices or simulation results and are labelled that way. Solid lines show what the model calculates. Dashed lines mark a region beyond the model’s limits; chapter 03 explains it.
+
+Pushes, pulls and the pull of gravity are introduced in <TopicLink slug="forces">Forces</TopicLink>. This topic uses the same ideas for an aircraft in the air.
+
+<More title={{ en: "Three scales", zh: "三种尺度" }}>
+
+The airliner is designed as <Num s="S58">40 m</Num> long with a span of <Num s="S58">36 m</Num> and a height of <Num s="S58">12 m</Num>, and it is drawn ten times smaller. The wing experiment is drawn at full size: its section measures <Num s="S58">1 m</Num> from front edge to back edge. The engine cutaway and the wing structure in chapter 02 are separate models drawn to show how the parts fit together; they do not share a scale with the airliner.
+
+</More>
+
+<More title={{ en: "What the models leave out", zh: "模型省略了什么" }}>
+
+The wing experiment uses ideal two-dimensional flow: air without any stickiness, flowing past a section that has no ends. That is enough to show how a wing turns the air, but it cannot predict what happens when the air breaks away from the surface. So when the section is tilted by more than <Num s="S58">12°</Num>, the model switches to a simple teaching rule and draws dashed lines. The fans and shafts turn at <Num s="S58">30 rpm</Num> and <Num s="S58">45 rpm</Num> on screen, slowed down so that you can follow them; these are not real engine speeds.
+
+</More>
+
+<More title={{ en: "Where the numbers come from", zh: "数字从哪里来" }}>
+
+The source list for this topic names each page and what was read on it. The model’s design values, its equations and its results are collected in one entry of that list, the Atlas design study, so that every number on the experiment’s card can be traced back to its inputs.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+本主题用三个教学模型，各有各的尺度。第一个是一架通用客机：两台发动机装在机翼下面，尾翼是常规布局，不代表任何厂家或型号。大部分<Term id="lift">升力</Term>来自它的机翼；水平飞行时，正是空气给的这个力把飞机托住。发动机提供<Term id="thrust">推力</Term>，推着飞机向前。<FlyTo preset="aircraft-overview">先看整架飞机</FlyTo>
+
+第二个模型是放在飞机旁边的一小段机翼，作为实验教具。它的剖面形状叫<Term id="airfoil">翼型</Term>，是为本主题选的一个简单数学形状，不是哪一架真飞机的机翼。计算机模型算出空气怎样绕着它流动，卡片上的读数都标着“模拟”：它们属于模型，不是测量结果。<FlyTo preset="section-view">看看这个实验</FlyTo>
+
+第三个模型是一台沿长度方向剖开的发动机。可以看到前面的风扇、后面的核心，以及把两者连起来的机构。有一部分空气不穿过核心，而是从核心外面绕过去。<FlyTo preset="engine-section-view">打开发动机</FlyTo>
+
+本主题里有两类说法。关于飞机、发动机和机场的事实来自公开资料，旁边标着来源编号。模型给出的数值，比如实验里的角度、速度和力，是设计选择或模拟结果，也都标明了。实线画的是模型算出来的东西；虚线标出模型管不到的范围，第 03 章会解释。
+
+推、拉和重力这些概念，在<TopicLink slug="forces">“力”</TopicLink>里已经讲过。本主题把同样的道理用到天上的飞机。
+
+<More title={{ en: "Three scales", zh: "三种尺度" }}>
+
+这架客机按长 <Num s="S58">40 m</Num>、翼展 <Num s="S58">36 m</Num>、高 <Num s="S58">12 m</Num> 设计，画的时候缩小了十倍。机翼实验按原大画：剖面从前缘到后缘长 <Num s="S58">1 m</Num>。发动机剖面和第 02 章的机翼结构是另外两个模型，只用来说明零件怎样装在一起，和客机不共用比例尺。
+
+</More>
+
+<More title={{ en: "What the models leave out", zh: "模型省略了什么" }}>
+
+机翼实验用的是理想二维流：空气完全没有黏性，翼段也没有两端。这足以说明机翼怎样让空气转向，却无法预测空气从表面分离以后的情形。所以翼段倾斜超过 <Num s="S58">12°</Num> 时，模型改用一条简单的教学规则，并画成虚线。画面里风扇和轴的转速是 <Num s="S58">30 rpm</Num> 和 <Num s="S58">45 rpm</Num>，是为了看得清而放慢的，不是真实发动机的转速。
+
+</More>
+
+<More title={{ en: "Where the numbers come from", zh: "数字从哪里来" }}>
+
+本主题的来源清单写明每一页资料读了哪些内容。模型的设计值、方程和结果都集中写在清单里的一条来源，即 Atlas 设计研究，实验卡片上的每个数都能追到它的输入。
+
+</More>
+
+</Lang>

@@ -1,0 +1,613 @@
+---
+{
+  "id": "angle-and-stall",
+  "order": 3,
+  "title": {
+    "en": "Angle of attack and stall",
+    "zh": "迎角与失速"
+  },
+  "sensitive": false,
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "part": null,
+    "run": true,
+    "cutaway": "none",
+    "pose": null,
+    "layers": [
+      "airfoil-bench",
+      "flight-flows"
+    ],
+    "hide": [
+      "fuselage-shell",
+      "cockpit-glazing",
+      "wing-left",
+      "wing-right",
+      "wing-tip-left",
+      "wing-tip-right",
+      "aileron-left",
+      "aileron-right",
+      "spoiler-left",
+      "flap-left",
+      "flap-right",
+      "slat-left",
+      "slat-right",
+      "tailplane-left",
+      "tailplane-right",
+      "elevator-left",
+      "elevator-right",
+      "fin",
+      "rudder",
+      "nacelle-left",
+      "nacelle-right",
+      "fan-left",
+      "fan-right",
+      "wing-box-skin",
+      "front-spar",
+      "rear-spar",
+      "wing-ribs",
+      "engine-shell",
+      "fan-disc",
+      "bypass-duct",
+      "compressor-bank",
+      "compressor-rotor",
+      "combustor-ring",
+      "turbine-bank",
+      "hp-turbine-rotor",
+      "lp-turbine-rotor",
+      "lp-shaft",
+      "hp-shaft",
+      "core-nozzle",
+      "bypass-nozzle"
+    ],
+    "labels": [
+      "chord-marker",
+      "inflow-reference"
+    ],
+    "ghost": [],
+    "camera": {
+      "position": [
+        0,
+        2.2,
+        7.5
+      ],
+      "target": [
+        0,
+        2.2,
+        2.7
+      ],
+      "fov": 30
+    },
+    "sim": {
+      "set": {
+        "angle-deg": 0,
+        "airspeed-mps": 40,
+        "altitude-m": 0,
+        "flow-view": "streamlines",
+        "diagram-case": "none"
+      },
+      "try": {
+        "vary": "angle-deg",
+        "also": [
+          "flow-view"
+        ],
+        "keep": [
+          "airspeed-mps",
+          "altitude-m",
+          {
+            "en": "Same section and reference area",
+            "zh": "翼型和参考面积不变"
+          }
+        ],
+        "observe": [
+          "cl-now",
+          "lift-n",
+          "flow-state"
+        ],
+        "record": true,
+        "predict": {
+          "prompt": {
+            "en": "In this model, the angle of attack goes from 12 to 16 degrees. What happens to the lift?",
+            "zh": "在这个模型里，迎角从 12 度增加到 16 度。升力会怎样？"
+          },
+          "start": {
+            "angle-deg": 12
+          },
+          "change": {
+            "angle-deg": 16
+          },
+          "observe": "lift-n",
+          "options": [
+            {
+              "id": "more",
+              "label": {
+                "en": "More lift",
+                "zh": "升力更大"
+              },
+              "means": "more"
+            },
+            {
+              "id": "same",
+              "label": {
+                "en": "The same",
+                "zh": "不变"
+              },
+              "means": "same"
+            },
+            {
+              "id": "less",
+              "label": {
+                "en": "Less lift",
+                "zh": "升力更小"
+              },
+              "means": "less"
+            }
+          ]
+        }
+      }
+    },
+    "summary": {
+      "en": "More angle gives more lift only over part of the range.",
+      "zh": "增加迎角只能在一定范围内增加升力。"
+    },
+    "index": {
+      "parts": [
+        "foil-sample",
+        "chord-marker",
+        "inflow-reference",
+        "angle-marker",
+        "fan-right",
+        "nacelle-right"
+      ]
+    },
+    "beats": [
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": true,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "airfoil-bench",
+          "flight-flows"
+        ],
+        "hide": [
+          "fuselage-shell",
+          "cockpit-glazing",
+          "wing-left",
+          "wing-right",
+          "wing-tip-left",
+          "wing-tip-right",
+          "aileron-left",
+          "aileron-right",
+          "spoiler-left",
+          "flap-left",
+          "flap-right",
+          "slat-left",
+          "slat-right",
+          "tailplane-left",
+          "tailplane-right",
+          "elevator-left",
+          "elevator-right",
+          "fin",
+          "rudder",
+          "nacelle-left",
+          "nacelle-right",
+          "fan-left",
+          "fan-right",
+          "wing-box-skin",
+          "front-spar",
+          "rear-spar",
+          "wing-ribs",
+          "engine-shell",
+          "fan-disc",
+          "bypass-duct",
+          "compressor-bank",
+          "compressor-rotor",
+          "combustor-ring",
+          "turbine-bank",
+          "hp-turbine-rotor",
+          "lp-turbine-rotor",
+          "lp-shaft",
+          "hp-shaft",
+          "core-nozzle",
+          "bypass-nozzle"
+        ],
+        "labels": [
+          "chord-marker",
+          "inflow-reference"
+        ],
+        "ghost": [],
+        "camera": "section-view",
+        "sim": {
+          "set": {
+            "angle-deg": 0,
+            "airspeed-mps": 40,
+            "altitude-m": 0,
+            "flow-view": "streamlines",
+            "diagram-case": "none"
+          }
+        },
+        "caption": {
+          "en": "Angle of attack is measured between the chord and the incoming air. Here the symmetric wing is at zero angle and has zero lift in the ideal model.",
+          "zh": "迎角是翼弦与来流之间的角。在理想模型里，这块对称翼型零迎角时，升力为零。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": true,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "airfoil-bench",
+          "flight-flows"
+        ],
+        "hide": [
+          "fuselage-shell",
+          "cockpit-glazing",
+          "wing-left",
+          "wing-right",
+          "wing-tip-left",
+          "wing-tip-right",
+          "aileron-left",
+          "aileron-right",
+          "spoiler-left",
+          "flap-left",
+          "flap-right",
+          "slat-left",
+          "slat-right",
+          "tailplane-left",
+          "tailplane-right",
+          "elevator-left",
+          "elevator-right",
+          "fin",
+          "rudder",
+          "nacelle-left",
+          "nacelle-right",
+          "fan-left",
+          "fan-right",
+          "wing-box-skin",
+          "front-spar",
+          "rear-spar",
+          "wing-ribs",
+          "engine-shell",
+          "fan-disc",
+          "bypass-duct",
+          "compressor-bank",
+          "compressor-rotor",
+          "combustor-ring",
+          "turbine-bank",
+          "hp-turbine-rotor",
+          "lp-turbine-rotor",
+          "lp-shaft",
+          "hp-shaft",
+          "core-nozzle",
+          "bypass-nozzle"
+        ],
+        "labels": [
+          "foil-sample",
+          "angle-marker"
+        ],
+        "ghost": [],
+        "camera": "section-view",
+        "sim": {
+          "set": {
+            "angle-deg": 4,
+            "airspeed-mps": 40,
+            "altitude-m": 0,
+            "flow-view": "streamlines",
+            "diagram-case": "none"
+          }
+        },
+        "caption": {
+          "en": "Tilt this symmetric section to four degrees in the simulation. It now produces lift; a rounded top alone is not the explanation.",
+          "zh": "在模拟里，把对称翼型转到四度，它就产生了升力。不能只用上表面的弯曲来解释。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": true,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "airfoil-bench",
+          "flight-flows"
+        ],
+        "hide": [
+          "fuselage-shell",
+          "cockpit-glazing",
+          "wing-left",
+          "wing-right",
+          "wing-tip-left",
+          "wing-tip-right",
+          "aileron-left",
+          "aileron-right",
+          "spoiler-left",
+          "flap-left",
+          "flap-right",
+          "slat-left",
+          "slat-right",
+          "tailplane-left",
+          "tailplane-right",
+          "elevator-left",
+          "elevator-right",
+          "fin",
+          "rudder",
+          "nacelle-left",
+          "nacelle-right",
+          "fan-left",
+          "fan-right",
+          "wing-box-skin",
+          "front-spar",
+          "rear-spar",
+          "wing-ribs",
+          "engine-shell",
+          "fan-disc",
+          "bypass-duct",
+          "compressor-bank",
+          "compressor-rotor",
+          "combustor-ring",
+          "turbine-bank",
+          "hp-turbine-rotor",
+          "lp-turbine-rotor",
+          "lp-shaft",
+          "hp-shaft",
+          "core-nozzle",
+          "bypass-nozzle"
+        ],
+        "labels": [
+          "foil-sample"
+        ],
+        "ghost": [],
+        "camera": "section-view",
+        "sim": {
+          "set": {
+            "angle-deg": 12,
+            "airspeed-mps": 40,
+            "altitude-m": 0,
+            "flow-view": "streamlines",
+            "diagram-case": "none"
+          }
+        },
+        "caption": {
+          "en": "The teaching curve rises to its chosen peak at twelve degrees. This value belongs to our illustrative model, not every real wing.",
+          "zh": "这条教学曲线在选定的十二度达到峰值。这个数属于示意模型，不适用于每一块真实机翼。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": true,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "airfoil-bench",
+          "flight-flows"
+        ],
+        "hide": [
+          "fuselage-shell",
+          "cockpit-glazing",
+          "wing-left",
+          "wing-right",
+          "wing-tip-left",
+          "wing-tip-right",
+          "aileron-left",
+          "aileron-right",
+          "spoiler-left",
+          "flap-left",
+          "flap-right",
+          "slat-left",
+          "slat-right",
+          "tailplane-left",
+          "tailplane-right",
+          "elevator-left",
+          "elevator-right",
+          "fin",
+          "rudder",
+          "nacelle-left",
+          "nacelle-right",
+          "fan-left",
+          "fan-right",
+          "wing-box-skin",
+          "front-spar",
+          "rear-spar",
+          "wing-ribs",
+          "engine-shell",
+          "fan-disc",
+          "bypass-duct",
+          "compressor-bank",
+          "compressor-rotor",
+          "combustor-ring",
+          "turbine-bank",
+          "hp-turbine-rotor",
+          "lp-turbine-rotor",
+          "lp-shaft",
+          "hp-shaft",
+          "core-nozzle",
+          "bypass-nozzle"
+        ],
+        "labels": [
+          "foil-sample"
+        ],
+        "ghost": [],
+        "camera": "section-view",
+        "sim": {
+          "set": {
+            "angle-deg": 16,
+            "airspeed-mps": 40,
+            "altitude-m": 0,
+            "flow-view": "streamlines",
+            "diagram-case": "none"
+          }
+        },
+        "caption": {
+          "en": "Beyond that model boundary, lift falls on the dashed curve. Separated flow is shown as a diagram; the ideal solver cannot calculate a real stall.",
+          "zh": "超过模型分界，虚线上的升力减小。分离气流用示意图表示；理想求解器不能计算真实失速。"
+        }
+      },
+      {
+        "view": "xray",
+        "explode": 0,
+        "part": null,
+        "run": true,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "airfoil-bench",
+          "propulsion",
+          "flight-flows"
+        ],
+        "hide": [
+          "fuselage-shell",
+          "cockpit-glazing",
+          "wing-left",
+          "wing-right",
+          "wing-tip-left",
+          "wing-tip-right",
+          "aileron-left",
+          "aileron-right",
+          "spoiler-left",
+          "flap-left",
+          "flap-right",
+          "slat-left",
+          "slat-right",
+          "tailplane-left",
+          "tailplane-right",
+          "elevator-left",
+          "elevator-right",
+          "fin",
+          "rudder",
+          "nacelle-left",
+          "fan-left",
+          "wing-box-skin",
+          "front-spar",
+          "rear-spar",
+          "wing-ribs",
+          "engine-shell",
+          "fan-disc",
+          "bypass-duct",
+          "compressor-bank",
+          "compressor-rotor",
+          "combustor-ring",
+          "turbine-bank",
+          "hp-turbine-rotor",
+          "lp-turbine-rotor",
+          "lp-shaft",
+          "hp-shaft",
+          "core-nozzle",
+          "bypass-nozzle"
+        ],
+        "labels": [
+          "foil-sample",
+          "fan-right"
+        ],
+        "ghost": [],
+        "camera": {
+          "position": [
+            -2.3,
+            3.2,
+            6.7
+          ],
+          "target": [
+            -0.4,
+            1.55,
+            1.1
+          ],
+          "fov": 30
+        },
+        "sim": {
+          "set": {
+            "angle-deg": 16,
+            "airspeed-mps": 40,
+            "altitude-m": 0,
+            "flow-view": "streamlines",
+            "diagram-case": "none"
+          }
+        },
+        "caption": {
+          "en": "A wing can stall while the engine is still running. Stall concerns airflow and lift, and does not mean all lift suddenly disappears.",
+          "zh": "发动机仍在运转时，机翼也可能失速。失速说的是气流和升力，不是所有升力突然消失。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+The <Term id="chord">chord</Term> is the straight line from the front edge of an airfoil to its back edge. The <Term id="angle-of-attack">angle of attack</Term> is the angle between the chord and the incoming air. It is measured against the air, not against the horizon, so the angle of the aircraft’s nose to the horizon is a different quantity. On the stage, the incoming-air line stays fixed and the chord turns with the section. <FlyTo preset="section-view">Look at the angle</FlyTo>
+
+At zero angle this symmetric section has no lift in the ideal model. Tilt it to <Num s="S58">4°</Num> and it has lift, even though its top and bottom are the same shape. So a rounded upper surface on its own does not explain lift; turning the air does. In this simulation the lift coefficient rises from 0 to about <Num s="S58">0.47</Num> at <Num s="S58">4°</Num> and about <Num s="S58">1.40</Num> at <Num s="S58">12°</Num>.
+
+More angle gives more lift only over part of the range. At a large enough angle the air can no longer follow the upper surface: it separates from it, and lift falls. This is a <Term id="stall">stall</Term>. The angle at which it happens depends on the wing and the conditions, and has to be found by testing. The model uses a chosen limit of <Num s="S58">12°</Num>. Beyond it the curve on the card is dashed: in this simulation lift falls to <Num s="S58">0.85</Num> of the peak value at <Num s="S58">16°</Num>. The stage then shows separated air as a diagram, because the ideal model cannot calculate it.
+
+A stall is about airflow and lift. It does not mean the engine has stopped: in the last beat the fan beside the experiment keeps turning. Nor does it mean that all lift suddenly disappears.
+
+<More title={{ en: "The angle of the wing and the angle of the nose", zh: "机翼的迎角和机头的角度" }}>
+
+Angle of attack is always measured from the direction of the incoming air. The angle between the aircraft’s nose and the horizon is its attitude, and it is not the same thing: if the air is coming from a different direction, the same attitude gives a different angle of attack.
+
+</More>
+
+<More title={{ en: "Why the dashed curve is not wind-tunnel data", zh: "虚线为什么不是风洞数据" }}>
+
+Real wings stall at angles that depend on their shape, their surface, their size and their speed, so the angle has to be measured for each wing in matching conditions. The ideal model has no stickiness and cannot show air separating from the surface at all. Its peak at <Num s="S58">12°</Num> and the values <Num s="S58">0.85</Num> at <Num s="S58">16°</Num> and <Num s="S58">0.60</Num> at <Num s="S58">20°</Num> are a teaching rule chosen for this topic, not a measurement. NASA’s own teaching program for students works the same way, with ideal flow and a separate stall correction added on top.
+
+</More>
+
+<More title={{ en: "Negative angles", zh: "负迎角" }}>
+
+Turn the section nose down and the angle of attack becomes negative. The model is symmetric, so everything is mirrored: lift points downwards, and beyond <Num s="S58">−12°</Num> the dashed separation diagram moves to the lower surface.
+
+</More>
+
+<More title={{ en: "Lift is a push of the air", zh: "升力是空气的推" }}>
+
+Lift and drag are pushes of the air on the wing, forces of the same kind as the pushes in <TopicLink slug="forces" ch="pushes-and-pulls">Pushes and pulls</TopicLink>. A stall changes how hard the air pushes, and in which direction; it does not switch the push off.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+<Term id="chord">翼弦</Term>是连接翼型前缘和后缘的直线。<Term id="angle-of-attack">迎角（攻角）</Term>是翼弦与来流之间的角。迎角是对着来流量的，不是对着地平线量的，所以机头与地平线之间的角是另一个量。舞台上，来流那条线固定不动，翼弦跟着翼段一起转。<FlyTo preset="section-view">看看迎角</FlyTo>
+
+在理想模型里，这块对称翼型迎角为零时没有升力。把它转到 <Num s="S58">4°</Num>，即使上下形状一样，也产生了升力。可见单靠上表面鼓起来解释不了升力，关键在于让空气转向。在这个模拟里，升力系数从 0 增加到 <Num s="S58">4°</Num> 时的约 <Num s="S58">0.47</Num>，再到 <Num s="S58">12°</Num> 时的约 <Num s="S58">1.40</Num>。
+
+增加迎角，只在一定范围内能增加升力。迎角大到一定程度，空气再也贴不住上表面，从表面分离，升力随之下降，这就是<Term id="stall">失速</Term>。发生失速的角度取决于机翼和工况，要靠试验来确定。模型选定的分界是 <Num s="S58">12°</Num>；超过它，卡片上的曲线变成虚线，在这个模拟里 <Num s="S58">16°</Num> 时升力降到峰值的 <Num s="S58">0.85</Num>。舞台上用示意图画出分离的气流，因为理想模型算不出它。
+
+失速说的是气流和升力。它不表示发动机停了：最后一拍里，实验旁边的风扇一直在转。它也不表示升力一下子全没了。
+
+<More title={{ en: "The angle of the wing and the angle of the nose", zh: "机翼的迎角和机头的角度" }}>
+
+迎角总是从来流方向量起。机头与地平线之间的角叫姿态角，和迎角不是一回事：来流方向不同，同样的姿态角就对应不同的迎角。
+
+</More>
+
+<More title={{ en: "Why the dashed curve is not wind-tunnel data", zh: "虚线为什么不是风洞数据" }}>
+
+真实机翼在多大角度失速，取决于它的形状、表面、尺寸和速度，所以要在相似的条件下逐一测量。理想模型没有黏性，根本显示不出空气从表面分离。它在 <Num s="S58">12°</Num> 达到峰值、<Num s="S58">16°</Num> 时为 <Num s="S58">0.85</Num>、<Num s="S58">20°</Num> 时为 <Num s="S58">0.60</Num>，这些都是为本主题选定的教学规则，不是测量结果。NASA 给学生用的教学程序也是这样做的：理想流之外，另加一个失速修正。
+
+</More>
+
+<More title={{ en: "Negative angles", zh: "负迎角" }}>
+
+把翼段机头朝下转，迎角就成了负值。模型是对称的，一切都镜像过来：升力朝下，超过 <Num s="S58">−12°</Num> 以后，虚线分离示意改画在下表面。
+
+</More>
+
+<More title={{ en: "Lift is a push of the air", zh: "升力是空气的推" }}>
+
+升力和阻力都是空气对机翼的推，和<TopicLink slug="forces" ch="pushes-and-pulls">“推和拉”</TopicLink>里讲的推是同一类力。失速改变的是空气推得多大、朝哪个方向推，并没有把这个推关掉。
+
+</More>
+
+</Lang>

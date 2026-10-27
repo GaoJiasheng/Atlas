@@ -1,0 +1,148 @@
+{
+  "terms": [
+    {
+      "id": "lift",
+      "term": { "en": "Lift", "zh": "升力" },
+      "definition": {
+        "en": "The part of the aerodynamic force that acts across the incoming airflow. It is not always vertical: when an aircraft banks, its lift tilts too.",
+        "zh": "空气动力中垂直于来流方向的分量。升力不一定竖直向上：飞机倾斜时，升力也跟着倾斜。"
+      },
+      "see": ["drag", "angle-of-attack"]
+    },
+    {
+      "id": "weight",
+      "term": { "en": "Weight", "zh": "重力" },
+      "definition": {
+        "en": "The force pulling the aircraft towards Earth. It depends on the aircraft itself, its fuel and what it carries.",
+        "zh": "把飞机拉向地球的力。它取决于飞机本身、燃油和所载的人与货物。"
+      },
+      "see": ["lift"]
+    },
+    {
+      "id": "thrust",
+      "term": { "en": "Thrust", "zh": "推力" },
+      "definition": {
+        "en": "The force supplied by the propulsion system, pushing the aircraft forwards through the air.",
+        "zh": "推进系统施加的力，推动飞机在空气中向前运动。"
+      },
+      "see": ["drag", "turbofan"]
+    },
+    {
+      "id": "drag",
+      "term": { "en": "Drag", "zh": "阻力" },
+      "definition": {
+        "en": "The aerodynamic force that acts along the incoming airflow and opposes the aircraft’s movement through the air.",
+        "zh": "沿来流方向、阻碍飞机相对空气运动的空气动力。"
+      },
+      "see": ["lift", "thrust"]
+    },
+    {
+      "id": "airfoil",
+      "term": { "en": "Airfoil", "zh": "翼型" },
+      "definition": {
+        "en": "The cross-sectional shape of a wing, seen as if the wing were sliced from front to back. It is not the outline of the whole wing seen from above.",
+        "zh": "机翼剖面的形状，就像把机翼从前到后切开看到的截面；不是从上面看整块机翼的外形。"
+      },
+      "see": ["chord", "streamline"]
+    },
+    {
+      "id": "chord",
+      "term": { "en": "Chord", "zh": "翼弦" },
+      "definition": {
+        "en": "A straight line from the leading edge to the trailing edge of an airfoil.",
+        "zh": "连接翼型前缘和后缘的直线。"
+      },
+      "see": ["airfoil", "angle-of-attack"]
+    },
+    {
+      "id": "angle-of-attack",
+      "term": { "en": "Angle of attack", "zh": "迎角（攻角）" },
+      "definition": {
+        "en": "The angle between the chord and the incoming air. It is not the angle between the aircraft’s nose and the horizon.",
+        "zh": "翼弦与来流之间的角，不是机头与地平线之间的角。"
+      },
+      "see": ["chord", "stall"]
+    },
+    {
+      "id": "stall",
+      "term": { "en": "Wing stall", "zh": "机翼失速" },
+      "definition": {
+        "en": "At a large enough angle of attack, the air can separate from the wing and lift falls. A stall is about airflow and lift, not about an engine stopping.",
+        "zh": "迎角大到一定程度时，气流可能从机翼表面分离，升力下降。失速说的是气流和升力，不是发动机停转。"
+      },
+      "see": ["angle-of-attack", "lift"]
+    },
+    {
+      "id": "pressure",
+      "term": { "en": "Pressure", "zh": "气压" },
+      "definition": {
+        "en": "Force per unit area. The pressure all over a wing’s surface adds up to the aerodynamic force on it.",
+        "zh": "单位面积上的作用力。翼面各处的气压合在一起，形成作用在机翼上的空气动力。"
+      },
+      "see": ["streamline", "lift"]
+    },
+    {
+      "id": "streamline",
+      "term": { "en": "Streamline", "zh": "流线" },
+      "definition": {
+        "en": "In this steady flow model, a line drawn along the local direction of the air everywhere. The spacing of the lines is not read as a speed.",
+        "zh": "在这个定常流模型里，沿着各处气流方向画出的线。线与线的间距不直接表示速度。"
+      },
+      "see": ["airfoil", "pressure"]
+    },
+    {
+      "id": "flight-controls",
+      "term": { "en": "Control surfaces", "zh": "操纵面" },
+      "definition": {
+        "en": "Hinged surfaces that turn the aircraft: ailerons change roll, the elevator changes pitch and the rudder changes yaw.",
+        "zh": "可以偏转的翼面，用来改变飞机的姿态：副翼改变滚转，升降舵改变俯仰，方向舵改变偏航。"
+      },
+      "see": ["high-lift-devices"]
+    },
+    {
+      "id": "high-lift-devices",
+      "term": { "en": "Flaps and slats", "zh": "襟翼与缝翼" },
+      "definition": {
+        "en": "Movable devices on the trailing edge (flaps) and leading edge (slats) that change the wing for lower-speed flight. Flaps also add drag.",
+        "zh": "装在机翼后缘（襟翼）和前缘（缝翼）的活动装置，改变翼形，帮助较低速度飞行；襟翼放下时也增加阻力。"
+      },
+      "see": ["flight-controls", "drag"]
+    },
+    {
+      "id": "wing-structure",
+      "term": { "en": "Spars and ribs", "zh": "翼梁与翼肋" },
+      "definition": {
+        "en": "Inside a wing, spars run along the span and carry bending loads; ribs run from front to back and keep the airfoil shape.",
+        "zh": "机翼内部，翼梁沿翼展延伸，承担弯曲载荷；翼肋从前到后排列，保持翼型。"
+      },
+      "see": ["airfoil"]
+    },
+    {
+      "id": "turbofan",
+      "term": { "en": "Turbofan", "zh": "涡扇发动机" },
+      "definition": {
+        "en": "A turbine engine with a large front fan, a central core and an outer bypass path for air that goes around the core. Bypass ratio compares the mass of air going around the core with the mass going through it.",
+        "zh": "一种涡轮发动机：前方有大风扇，中央是核心，外圈有绕过核心的外涵气路。涵道比是绕过核心与穿过核心的空气质量流量之比。"
+      },
+      "see": ["core-machinery", "thrust"]
+    },
+    {
+      "id": "core-machinery",
+      "term": { "en": "Core machinery", "zh": "核心机械" },
+      "definition": {
+        "en": "In a turbofan’s core, the compressor squeezes the air, fuel burns in the combustor and the turbines take energy from the hot gas to turn the shafts.",
+        "zh": "涡扇核心里，压气机压缩空气，燃料在燃烧室里燃烧，涡轮从热气中取出能量，带动轴转动。"
+      },
+      "see": ["turbofan"]
+    },
+    {
+      "id": "air-density",
+      "term": { "en": "Air density", "zh": "空气密度" },
+      "definition": {
+        "en": "The mass of air in each unit of volume. In this topic it falls with height, following an average-atmosphere formula.",
+        "zh": "单位体积内空气的质量。本主题里，它按平均大气公式随高度减小。"
+      },
+      "see": ["lift"]
+    }
+  ]
+}
