@@ -150,6 +150,8 @@ export interface SceneControls {
   test?: Record<string, (...args: never[]) => unknown>;
   /** A `<Task id>` in a chapter body was pressed: go to that sub-step; true when it exists. */
   goToTask?(id: string): boolean;
+  /** An authored object-index link: select and reveal its detail; false for invalid or blocked targets. */
+  selectEvent?(id: string): boolean;
   /** Mode switches. `set` receives `instant: true` when the caller wants the end state now (tests, shots). */
   modes?: {
     items: readonly SceneMode[];

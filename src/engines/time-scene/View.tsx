@@ -62,6 +62,7 @@ import { EventInspector } from './EventInspector';
 import { EntityInspector } from './EntityInspector';
 import { ChapterIndex } from './ChapterIndex';
 import { eventSelectionPatch } from './lib/reader';
+import { timeHudAvailability, timeLayerRows } from './lib/hud';
 import { BandCard, PerfReadout, useFps } from './hud/HudPanels';
 import { DatedLayerPlate } from './hud/DatedLayerPlate';
 import type { DatedLayerIndex } from './lib/datedLayers';
@@ -120,6 +121,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     const n = t0 !== null ? toNumber(t0) : Number.NaN;
     return createPlayhead(Number.isFinite(n) ? n : model.min);
   });
+  const available = useMemo(() => timeHudAvailability(model), [model]);
   useEffect(() => () => playhead.destroy(), [playhead]);
 
   /** Last `t` this view wrote, so the store echo is not treated as a jump. */
@@ -465,20 +467,12 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
 
   /* ---------- control panel: LAYERS (store layers + drawing modes) and TOOLS ---------- */
   const panelLayers = useMemo<ControlRow[]>(
-    () => [
-      { kind: 'layer', id: 'control', label: t('time.layer.control') },
-      { kind: 'mode', id: 'territory', label: t('time.layer.territory') },
-      // A regional plate has no modern borders.
-      ...(region ? [] : [{ kind: 'mode' as const, id: 'borders', label: t('time.layer.borders') }]),
-      { kind: 'mode', id: 'graticule', label: t('time.layer.graticule') },
-      { kind: 'mode', id: 'flow', label: t('time.layer.movements') },
-      { kind: 'layer', id: 'battles', label: t('time.layer.battles') },
-      { kind: 'layer', id: 'participation', label: t('time.layer.participation') },
-      ...(model.sites.length > 0 ? [{ kind: 'layer' as const, id: 'sites', label: t('time.layer.sites') }] : []),
-      ...(topic.datedLayers ?? []).map((layer) => ({ kind: 'layer' as const, id: layer.id, label: layer.label, color: layer.color ?? entityCssColor(geo.entities.find((e) => e.id === layer.holder))})),
-      { kind: 'mode', id: 'labels', label: t('time.layer.labels') },
-    ],
-    [model, locale, region, topic.datedLayers, geo.entities], // `t` is bound to `locale`
+    () => timeLayerRows(available, locale, {
+      borders: !region,
+      territory: !!(region?.rivers || coastToday),
+      dated: (topic.datedLayers ?? []).map((layer) => ({ kind: 'layer' as const, id: layer.id, label: layer.label, color: layer.color ?? entityCssColor(geo.entities.find((e) => e.id === layer.holder))})),
+    }),
+    [available, locale, region, coastToday, topic.datedLayers, geo.entities], // `t` is bound to `locale`
   );
   const hasGlossary = (geo.glossary?.terms.length ?? 0) > 0;
   const panelTools = useMemo<ControlRow[]>(
@@ -548,7 +542,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       },
       modes: {
         items: [
-          { id: 'flow', key: 'f', label: t('time.mode.flow'), on: movementsOn, tone: 'hot', status: 'FLOW' },
+          ...(available.movements ? [{ id: 'flow', key: 'f', label: t('time.mode.flow'), on: movementsOn, tone: 'hot' as const, status: 'FLOW' }] : []),
           ...(region ? [] : [{ id: 'borders', key: 'b', label: t('time.mode.borders'), on: bordersOn }]),
           { id: 'graticule', key: 'g', label: t('time.mode.graticule'), on: graticuleOn, phone: false },
           { id: 'territory', key: 'n', label: t('time.mode.territory'), on: territoryOn },
@@ -594,6 +588,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       // No participants (a single-country story): no participation card, not an empty frame.
       ...(geo.entities.length > 0 ? { card: bi('time.card.title'), cardToggle: { expanded: cardExpanded, set: setCardExpanded } } : {}),
       beats: beatControls,
+      selectEvent: selectIndexedEvent,
       test: {
         selectEvent: (id: string) => selectIndexedEvent(id),
         reader: () => ({
@@ -635,6 +630,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     store,
     geo,
     model,
+    available,
     movementsOn,
     bordersOn,
     graticuleOn,
