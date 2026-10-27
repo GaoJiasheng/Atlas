@@ -11,9 +11,10 @@ const sim = (page: Page) => page.evaluate(() => (window.__atlas!.engine as unkno
 const set = (page: Page, v: Record<string, string | number>) => page.evaluate((values) => (window.__atlas!.engine as unknown as Engine).setSim(values), v);
 const card = (page: Page) => page.locator('.space-try');
 async function open(page: Page, chapter: string, params = '', locale = 'en') {
+  await page.setViewportSize({ width: 1600, height: 900 });
   await page.goto(`/${locale}/topics/heat/?ch=${chapter}${params}`);
-  await expect.poll(() => page.evaluate(() => Boolean(window.__atlas?.engine))).toBe(true);
-  await expect(card(page)).toBeVisible();
+  await expect.poll(() => page.evaluate(() => Boolean(window.__atlas?.engine)), { timeout: 60_000 }).toBe(true);
+  await expect(card(page)).toBeVisible({ timeout: 60_000 });
 }
 test('heat: heating curve, cursor, record and PLATE agree at the authored instant', async ({ page }) => {
   await open(page, 'heating-curves', '&b=2&sim=elapsed-s.120');

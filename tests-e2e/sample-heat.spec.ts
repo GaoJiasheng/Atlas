@@ -9,8 +9,8 @@ const card = (page: Page) => page.locator('.space-try');
 const output = (page: Page, id: string) => card(page).locator(`[data-sim-output="${id}"]`);
 async function open(page: Page, chapter: string, query = '', locale = 'en') {
   await page.goto(`/${locale}/topics/sample-heat/?ch=${chapter}${query}`);
-  await page.waitForFunction(() => window.__atlas !== undefined, null, { timeout: 30_000 });
-  expect(await page.evaluate(() => window.__atlas!.ready)).toBe(true);
+  await page.waitForFunction(() => window.__atlas !== undefined, null, { timeout: 60_000 });
+  await expect.poll(() => page.evaluate(() => window.__atlas!.ready), { timeout: 60_000 }).toBe(true);
 }
 
 test.describe('sample-heat explicit analytic experiment', () => {

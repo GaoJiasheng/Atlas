@@ -739,3 +739,14 @@ S29：[OpenStax Calculus Volume 2 §4.3 Separable Equations](https://openstax.or
 - 未做git写操作、未改package.json/lockfile或review-queue/next-batch。published首页smoke计数改为35主题、70badges、science11，末图版35；draft夹具不计入。
 
 **最终验收（2026-10-27）**：`pnpm check`通过，776文件零错误/警告、3个既有hint；`pnpm validate`通过，59主题零错误/警告；`pnpm run test --maxWorkers=1`通过，165文件、4,329/4,329测试（211.17秒）。默认并行全套为4,328通过、旧energy守恒用例超时；串行同用例约2.22秒、64/64通过，无修改旧用例或超时。`pnpm build`通过，121静态页、148 precache entries（106.49秒），其内置validate仍为59主题零错误/警告。`git diff --check`通过。所有浏览器门槛依brief未运行。
+
+### 9.5 浏览器验收（Claude，2026-10-27）
+
+- **合并**：`git merge main` 后解决六处冲突（`hud/sim.ts`、`lib/sim/index.ts`、`sim-schema.ts`、`space-scene.css`、`illustrations.json`、`smoke.spec.ts`），均保留双方；`SIM_KINDS` 现含 `heat` 与 `orbit-rotation`。`smoke.spec.ts` 的计数取 main 的版本（36），未含 heat；合并时需把主题数、徽章数、science 筛选数、图版号各 +1（37 / 74 / 13 / 37），heat 卡片链接断言保留。
+- **修复**：main 的 step 控件 schema 现已对 `Infinity` 直接报结构错，`heat.test.ts` 的时间域用例改为先断言解析抛错、再测其余非法域。`heat.spec.ts` 补 1600×900 视口（默认 1280 宽时试一试卡不在阅读面板），两份 spec 的等待改为 60 s 以容忍负载。第 01 章第 2 拍字幕补一句“金属更快把能量从皮肤传走”，与正文解释一致。
+- **看过的**：`pnpm shoot heat --beats --tasks --keys --layout`（EN/paper，37 拍全部、8 个尺寸、按键 24 项）零失败；链接打开 37/37 与展示一致。HUD 视图加试一试卡在 1024×768 与 390×844、EN/ZH、paper/cinema 下检查了第 01–06 章曲线：游标、点、虚线、双曲线图例、模型值表、`回到 0 s` 均可读，44 px 目标成立；390 宽曲线轴字小但可读。物理：同温勺不变、冷浴方向反转、加热 39.3 °C、冷却 54.4/75.2 °C、杆 0.072 mm 均与求解器一致（`heat-topic.test.ts` 逐项断言）。
+- **负载说明**：本机负载 170+，beats 截图中约 10 张出现“只有引线、舞台空白”，用 7 s 等待重拍均正常，属渲染未及时完成，不是模型问题。
+- **性能**（`--perf --gpu`，M5 Max）：最大 52 draw calls、60,828 三角形、60–63 fps；预算 ≤70 / ≤0.3M，满足。
+- **回归**：sample-heat、forces `--beats --keys` 零失败；materials、states-of-matter 首次因负载超时/一次弯曲读数偏差，重跑零失败。
+- **e2e**：heat 4/4、sample-heat 8/8 通过；smoke 仅四条计数断言（36 对 37）失败，属上条合并说明；materials/states-of-matter/forces/energy-conversion/steam-engine/light-and-shadows 58 通过，materials 的 light-through 与 light-and-shadows 的一条投影用例在负载下间歇失败，单独重跑通过（materials 那条重跑仍有一次失败、一次通过，等待 5 s 的 poll 对负载敏感）。
+- **留给主会话**：全量 e2e；cinema/ZH 的逐拍展示截图只抽查（HUD 视图四象限已看），未做 `--beats` 全组合。

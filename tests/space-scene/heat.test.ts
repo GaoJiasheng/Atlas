@@ -125,9 +125,10 @@ describe('heat registration and strict author validation', () => {
   });
   it('checks time type, initial zero, ascending seconds and maximum domain', () => {
     expect(issues(edit((s) => { s.heat!.time = 'cover'; }))).toContain('time must name a step');
-    for (const values of [[30, 60], [0, -1], [0, 601], [0, Infinity], [0, 30, 15]]) {
+    for (const values of [[30, 60], [0, -1], [0, 601], [0, 30, 15]]) {
       expect(issues(edit((s) => { const c = s.controls[0]!; if (c.kind === 'step') c.values = values; }))).toContain('ascend from 0');
     }
+    expect(() => simSchema.parse(edit((s) => { const c = s.controls[0]!; if (c.kind === 'step') c.values = [0, Infinity]; }))).toThrow();
     expect(issues(edit((s) => { const c = s.controls[0]!; if (c.kind === 'step') c.unit = 'h'; }))).toContain('unit s');
   });
   it('checks numeric references, choice coverage, and prohibits time-dependent parameters', () => {
