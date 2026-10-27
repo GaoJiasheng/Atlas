@@ -1,0 +1,255 @@
+{
+  "sources": [
+    {
+      "id": "S3",
+      "text": {
+        "en": "NASA Space Place, What Causes the Seasons? Rotation makes day and night; a nearly fixed tilted axis changes sunlight angle and gives opposite hemispheres opposite seasons.",
+        "zh": "NASA Space Place《季节的成因》：自转产生昼夜；倾斜地轴一年内近似同向，使阳光角度变化、南北季节相反。"
+      },
+      "note": {
+        "en": "Body read 2026-10-27. Tilted-axis and lopsided-orbit sections. Perihelion is usually in January and aphelion in July; distance alone cannot explain opposite seasons. No source illustration redistributed.",
+        "zh": "2026-10-27 读取正文。核对地轴和椭圆轨道段；通常一月近日、七月远日，距离不能解释半球季节相反。不发行原插图。"
+      },
+      "url": "https://spaceplace.nasa.gov/seasons/en/"
+    },
+    {
+      "id": "S4",
+      "text": {
+        "en": "NASA Science, Facts About Earth: Earth is a planet; its rotation relative to distant stars takes about 23.9 hours.",
+        "zh": "NASA Science《地球事实》：地球是行星，相对远方恒星自转一周约 23.9 小时。"
+      },
+      "note": {
+        "en": "Body read 2026-10-27. Identity and Orbit and Rotation. Exact adopted periods come from S10. This topic measures obliquity from the orbital normal and does not adopt the page’s abbreviated plane wording.",
+        "zh": "2026-10-27 读取正文。核对身份与公转自转段；模型精确周期取 S10。倾角从轨道法线量，不采用该页关于轨道平面的简略措辞。"
+      },
+      "url": "https://science.nasa.gov/earth/facts/"
+    },
+    {
+      "id": "S5",
+      "text": {
+        "en": "NASA Science, Moon Phases: moonlight is reflected sunlight. Changing views of the sunlit surface give phases; first and last quarter show about half the visible disc lit. The Moon can appear in daytime.",
+        "zh": "NASA Science《月相》：月光是反射的太阳光；观察到的受光部分变化形成月相。上弦和下弦约半个月盘亮，白天也可见月球。"
+      },
+      "note": {
+        "en": "Body read 2026-10-27. Quick Facts, All Moon Phases, First/Last Quarter and Daytime Moons. Full Moon rises roughly around sunset, not a fixed local clock time. North-up model views are not Singapore horizon charts.",
+        "zh": "2026-10-27 读取正文。核对速览、月相、上弦、下弦与白昼月球段。满月大致傍晚升起，不作当地钟点预报；模型北朝上视图不代表新加坡地平朝向。"
+      },
+      "url": "https://science.nasa.gov/moon/moon-phases/"
+    },
+    {
+      "id": "S6",
+      "text": {
+        "en": "NASA Science, Types of Solar Eclipses: the Moon may cover all or part of the Sun for an aligned observer. A smaller centred lunar disc leaves a bright ring. Lunar eclipses occur when Earth’s shadow reaches the Moon near full phase.",
+        "zh": "NASA Science《日食类型》：月球对排齐的观察者遮住全部或部分太阳；月盘较小且居中时留下亮环。满月附近月球进入地影可发生月食。"
+      },
+      "note": {
+        "en": "Body read 2026-10-27. Solar types and Lunar Eclipses. Annularity is tested by apparent size and alignment; the Moon need not be exactly at apogee. Safety uses S35; orbital tilt uses S40.",
+        "zh": "2026-10-27 读取正文。核对日食各型与月食段。环食以视大小和排齐判断，不要求恰在远地点；安全见 S35，轨道倾斜见 S40。"
+      },
+      "url": "https://science.nasa.gov/eclipses/types/"
+    },
+    {
+      "id": "S7",
+      "text": {
+        "en": "NASA Science, Moon Facts: the Moon is Earth’s natural satellite; its far side is not permanently dark.",
+        "zh": "NASA Science《月球事实》：月球是地球的天然卫星，背面并非永远黑暗。"
+      },
+      "note": {
+        "en": "Body read 2026-10-27. Natural-satellite identity and near/far-side discussion. The ambiguous mutual tidal-locking summary is not used; synchronous rotation is supported by S21.",
+        "zh": "2026-10-27 读取正文。核对天然卫星身份与近侧、远侧说明。不引用地月互相锁定的含混概述，同步自转依据 S21。"
+      },
+      "url": "https://science.nasa.gov/moon/facts/"
+    },
+    {
+      "id": "S8",
+      "text": {
+        "en": "NASA NSSDC, Moon Fact Sheet: volumetric mean radii Moon 1,737.4 km and Earth 6,371.0 km; lunar semimajor axis 384,400 km; stellar orbit 27.3217 days, mean phase cycle 29.53 days, inclination 5.145°.",
+        "zh": "NASA NSSDC《月球资料表》：月球、地球体积平均半径分别为 1,737.4、6,371.0 km；月轨道半长轴 384,400 km，恒星公转周期 27.3217 日，平均朔望周期 29.53 日，倾角 5.145°。"
+      },
+      "note": {
+        "en": "Body read 2026-10-27. Bulk/orbital tables and footnote. 363,300 and 405,500 km are mean perigee/apogee values, used here as DESIGN samples rather than absolute distance limits. Diameters are twice mean radii; S36 derives scale and apparent-size values.",
+        "zh": "2026-10-27 读取正文。核对物理、轨道表与脚注。363,300、405,500 km 是平均近远地点值，本题只作设计采样，不当绝对边界。直径为平均半径的两倍；比例与视盘数值由 S36 推导。"
+      },
+      "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html"
+    },
+    {
+      "id": "S9",
+      "text": {
+        "en": "NASA NSSDC, Sun Fact Sheet: volumetric mean radii Sun 695,700 km and Earth 6,371 km; adopted Earth obliquity 23.44°; solar apparent diameter changes with distance.",
+        "zh": "NASA NSSDC《太阳资料表》：太阳、地球体积平均半径分别为 695,700、6,371 km；采用地轴倾角 23.44°；太阳视直径随距离变化。"
+      },
+      "note": {
+        "en": "Body read 2026-10-27. Bulk parameters, Earth obliquity and apparent-diameter rows. Diameters double the mean radii. Model values are nominal, not daily astronomical measurements; S36 derives the scale comparisons.",
+        "zh": "2026-10-27 读取正文。核对平均半径、地轴倾角与视直径行。直径为平均半径的两倍。模型采用名义值，不是逐日实测；比例对照由 S36 推导。"
+      },
+      "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html"
+    },
+    {
+      "id": "S10",
+      "text": {
+        "en": "NASA/JPL SSD, Astrodynamic Parameters: day 86,400 s; Julian year 365.25 days; mean sidereal day 86,164.09054 s; astronomical unit exactly 149,597,870,700 m.",
+        "zh": "NASA/JPL SSD《天体动力学参数》：一日 86,400 s，儒略年 365.25 日，平均恒星日 86,164.09054 s；天文单位精确定义为 149,597,870,700 m。"
+      },
+      "note": {
+        "en": "Body read 2026-10-27. Parameter table. AU/1000 gives 149,597,870.7 km. Julian year × 86,400 gives the DESIGN circular-year period 31,557,600 s. Neither AU nor the synthetic year supplies a current distance or calendar date.",
+        "zh": "2026-10-27 读取正文。核对参数表。天文单位除以 1000 得 km；儒略年乘每日秒数得设计圆轨道年周期 31,557,600 s。定义单位和合成年周期不代表当日日地距或历法日期。"
+      },
+      "url": "https://ssd.jpl.nasa.gov/astro_par.html"
+    },
+    {
+      "id": "S11",
+      "text": {
+        "en": "Meteorological Service Singapore, Climate of Singapore: tropical climate, two monsoon seasons and inter-monsoon periods; near-equatorial day length varies little. Sunshine duration depends on direct sunlight and cloud cover.",
+        "zh": "新加坡气象署《新加坡气候》：热带气候，两季季风之间有季风间期；近赤道日长变化小，日照时数取决于直接阳光和云量。"
+      },
+      "note": {
+        "en": "Body read 2026-10-27. Seasons and Sunshine Duration. Daylight between calculated rise/set is distinct from measured sunshine; no sunshine-hour total is inferred from the model. “Autumn” in a festival name is not a Singapore temperate season.",
+        "zh": "2026-10-27 读取正文。核对季节与日照时数段。计算升落之间的白昼不同于实测日照，不从模型推算日照时数；节名的“秋”不表示新加坡有温带秋季。"
+      },
+      "url": "https://www.weather.gov.sg/climate-climate-of-singapore/"
+    },
+    {
+      "id": "S14",
+      "text": {
+        "en": "Science Centre Singapore, Night at the Museum: Stargazing at Science Centre Singapore. Its Observatory offers public astronomy learning; clouds affect observing.",
+        "zh": "新加坡科学馆《科学馆夜间观星》：天文台提供公众天文学习，云层会影响观察。"
+      },
+      "note": {
+        "en": "Body read 2026-10-27. Public education and weather paragraphs. No recurring schedule, ticket promise, telescope diameter or official coordinate claim retained.",
+        "zh": "2026-10-27 读取正文。只取公众教育与天气段。不固化活动日程、票务，不保留望远镜口径或官方坐标说法。"
+      },
+      "url": "https://voiddeck.science.edu.sg/articles/space/scob-stargazing/"
+    },
+    {
+      "id": "S18",
+      "text": {
+        "en": "Hong Kong Observatory, 历法: the Chinese calendar is lunisolar, combining lunar-month information with the solar year. 朔望月 names the interval between successive new Moons or full Moons.",
+        "zh": "香港天文台《历法》：农历是结合月球月份与太阳年信息的阴阳历；朔望月指相邻两次朔或两次望之间的时间。"
+      },
+      "note": {
+        "en": "Body read 2026-10-27. 农历历法. Supports 阴阳历 and 朔望月 terminology. No conversion table is copied or generated from a fixed mean period.",
+        "zh": "2026-10-27 读取正文。核对“农历历法”，参考“阴阳历”“朔望月”译名。不复制历表，不用固定平均周期生成历法换算。"
+      },
+      "url": "https://www.hko.gov.hk/sc/gts/time/calendarinfo.htm"
+    },
+    {
+      "id": "S21",
+      "text": {
+        "en": "Hong Kong Observatory, 甚么是月球天平动？ Synchronous rotation keeps nearly the same lunar hemisphere towards Earth; libration changes the exact view slightly.",
+        "zh": "香港天文台《甚么是月球天平动？》：同步自转使月球近似同一面朝地球，天平动让真实可见范围略有变化。"
+      },
+      "note": {
+        "en": "Body read 2026-10-27. Opening and synchronous-rotation explanation. This topic omits libration animation and does not reproduce the page’s visibility percentage or later tilt numbers.",
+        "zh": "2026-10-27 读取正文。核对开头与同步自转解释。模型省略天平动动画，不引用可见百分比或后文倾角数值。"
+      },
+      "url": "https://www.hko.gov.hk/sc/education/astronomy-and-time/astronomy/00777-what-is-lunar-libration.html"
+    },
+    {
+      "id": "S26",
+      "text": {
+        "en": "NOAA GML, Solar Calculation Details: Meeus-based solar calculations are estimates; atmosphere and horizon conditions change observed rise and set times. The NOAA calculator is no longer maintained.",
+        "zh": "NOAA GML《太阳计算说明》：基于 Meeus 的计算是估计；大气与地平线条件影响实际升落。NOAA 计算器已停止维护。"
+      },
+      "note": {
+        "en": "Body read 2026-10-27. General, Refraction and maintenance notice. S33 uses original equations and a geometric-centre threshold −0.833° for a flat sea-level horizon. Reproducing an algorithm is not independent observed validation.",
+        "zh": "2026-10-27 读取正文。核对总述、折射与停维护通知。S33 用原创实现，以太阳中心几何高度 −0.833° 过平坦海平面地平线的约定求值。复现算法不等于独立实测验证。"
+      },
+      "url": "https://gml.noaa.gov/grad/solcalc/calcdetails.html"
+    },
+    {
+      "id": "S33",
+      "text": {
+        "en": "Atlas, computed Singapore solar year 2026: original CC0 table of 365 daily rise, noon, set and daylight estimates at the Atlas teaching reference point 1.3342°N, 103.7357°E.",
+        "zh": "Atlas《2026 新加坡计算太阳年表》：原创 CC0 表，含 Atlas 教学参考点北纬 1.3342°、东经 103.7357° 的 365 日升落、正午与昼长估计。"
+      },
+      "note": {
+        "en": "Computed, not observed. Original prepare.py uses NOAA/Meeus geometry (S26), UTC+8, flat unobstructed sea-level horizon and centre threshold −0.833°. Times display nearest minute; daylight retains its unrounded calculation before display. Range 722.886–732.005 min rounds to about 12 h 03 min–12 h 12 min. Published metadata removes an obsolete MSS cross-check; all daily numbers are preserved. This is not an official observatory-coordinate claim or independent full-year validation. Hashes and method: data/SOURCES.md.",
+        "zh": "非实测。原创 prepare.py 依据 S26 的 NOAA/Meeus 几何，取 UTC+8、无遮挡平坦海平面地平线与太阳中心阈值 −0.833°。时刻按分钟显示，昼长保留取整前计算值。722.886–732.005 min 显示约 12 小时 03 分至 12 小时 12 分。发行版删去过时 MSS 核对断言，所有逐日数值不变。不声称官方天文台坐标或全年独立验证；方法与哈希见 data/SOURCES.md。"
+      }
+    },
+    {
+      "id": "S34",
+      "text": {
+        "en": "NASA Science, Sun: Facts: the Sun is the star in our solar system.",
+        "zh": "NASA Science《太阳事实》：太阳是太阳系中的恒星。"
+      },
+      "note": {
+        "en": "Body read 2026-10-27. Opening and identity facts. This source establishes classification; numerical radii use S9, not rounded popular-science sizes.",
+        "zh": "2026-10-27 读取正文。核对开头与身份段。只取恒星身份，数值半径用 S9，不混用科普取整值。"
+      },
+      "url": "https://science.nasa.gov/sun/facts/"
+    },
+    {
+      "id": "S35",
+      "text": {
+        "en": "NASA Science, Eclipse Viewing Safety: partial and annular eclipses require safe solar viewing throughout; ordinary sunglasses do not protect eyes. For supervised indirect projection, face away from the Sun and view the image, never through the pinhole.",
+        "zh": "NASA Science《日食观察安全》：偏食和环食全程需安全观日，普通太阳眼镜不能保护眼睛。成人监督间接投影时背向太阳看纸面，绝不可透孔看太阳。"
+      },
+      "note": {
+        "en": "Body read 2026-10-27. Eye Safety for Partial and Annular Solar Eclipses and pinhole projection. No unfiltered camera, binocular or telescope viewing. Children require supervision. This activity only describes indirect projection; no telescope installation instructions.",
+        "zh": "2026-10-27 读取正文。核对偏食、环食安全与针孔投影段。不得经未滤光相机、双筒镜或望远镜直视太阳；儿童需监督。本活动只讲间接投影，不教儿童安装望远镜。"
+      },
+      "url": "https://science.nasa.gov/eclipses/safety/"
+    },
+    {
+      "id": "S36",
+      "text": {
+        "en": "Atlas sun-earth-moon design study v1. DESIGN: spherical Sun/Earth/Moon with radii 695700/6371/1737.4 km, circular Earth orbit 149597870.7 km, lunar reference 384400 km and distance samples 363300/384400/405500 km (S8–S10). Fixed Earth axis 23.44°, lunar inclination 5.145°. Periods: year 31557600 s, stellar spin 86164.09054 s, lunar orbit 27.3217 × 86400 s. True scale sets Earth diameter to 10 mm; schematic display maps Earth orbit to 3.6 m, lunar reference orbit to 0.75 m, Sun radius to 0.45 m, Earth radius to 0.12 m and preserves Moon/Earth radius ratio. Experiments: coupled advances all motions; day freezes orbits and uses a DESIGN 86400 s spin; year advances only Earth orbit; moon freezes Earth orbit and spin; eclipse is a static geometric comparison; local-year selects a row from S33.",
+        "zh": "Atlas 太阳、地球、月亮设计研究 v1。设计：球形太阳、地球、月球半径分别为 695700、6371、1737.4 km，圆轨道日地距 149597870.7 km、地月参考距 384400 km，月距采样 363300、384400、405500 km（S8–S10）。固定地轴倾角 23.44°、月轨道倾角 5.145°。年周期 31557600 s、恒星自转周期 86164.09054 s、月球公转周期 27.3217 × 86400 s。真尺度取地球直径 10 mm；示意显示取地球轨道 3.6 m、月球参考轨道 0.75 m、太阳半径 0.45 m、地球半径 0.12 m，并保留月地半径比。耦合实验推进三种运动；昼夜冻结公转、设计自转周期为 86400 s；年实验只推进地球公转；月实验冻结地球公转和自转；食实验静态比较；本地年表实验只读 S33。"
+      },
+      "note": {
+        "en": "SIM, not measurements, ephemerides or dated forecasts. Units kilometres, seconds and degrees; y-up ecliptic frame; one shared model time. Sun S=(0,0,0), Earth E=AU(cos λ,0,−sin λ), Moon M=E+r RY(Ω)RX(i)(cos u,0,−sin u). Earth orientation qX(ε)qY(θ) keeps its axis fixed; synchronous Moon local +X points to Earth, while disabled synchrony fixes inertial orientation. For latitude φ and solar declination δ: D=24 acos(−tan φ tan δ)/π h, clamped to 0/24 at polar limits; noon altitude=90°−|φ−δ|. These geometric-centre horizons exclude refraction; S33 independently uses −0.833°. Phase angle β is between Moon-to-Sun and Moon-to-Earth; lit fraction=(1+cos β)/2, separate from eclipse dimming. Apparent diameter=2 asin(radius/observer distance); disc separation and finite tangent cones determine eclipses at a stated model surface observer. Nominal quarter gives about 50.13%, not exactly 50%; coupled mean phase cycle=1/(1/27.3217−1/365.25)=29.5306753681 d. At 45° latitude, model daylight is about 15.43/8.57 h at opposite solstices, and 12 h at zero tilt. Earth 10 mm gives Moon about 2.73 mm, lunar centre distance 302 mm, surface gap 295 mm, Sun about 1.09 m and Earth–Sun centre distance 117.4 m. Display mappings never change physics; darkFill=0.035 is teaching fill light, not lunar brightness. No precession, N-body forces, textures, real lunar libration or atmosphere. CC0 arithmetic oracles and full equations/provenance are in data/SOURCES.md and docs/44 §§4,9.",
+        "zh": "模拟，不是实测、星历或日期预报。km/s/deg、黄道 y 轴朝上坐标，单一模型时间。太阳 S=(0,0,0)，地球 E=AU(cos λ,0,−sin λ)，月球 M=E+r RY(Ω)RX(i)(cos u,0,−sin u)。地球姿态 qX(ε)qY(θ) 保持轴向不变；同步时月球局部 +X 朝地球，关闭同步则固定惯性朝向。纬度 φ、太阳赤纬 δ 的几何日长 D=24 acos(−tan φ tan δ)/π 小时，极区夹到 0 或 24；正午高度=90°−|φ−δ|。这是无折射的太阳中心地平线，区别于 S33 的 −0.833°。月球指向太阳与地球的夹角 β 给亮部=(1+cos β)/2，食遮暗另报。视直径=2 asin(半径/观察距离)，视盘分离与有限光源切锥决定指定模型地表点的食型。名义弦月约 50.13%，并非精确一半；耦合平均朔望周期=1/(1/27.3217−1/365.25)=29.5306753681 日。纬度 45° 的相反至点约 15.43、8.57 小时，零倾角为 12 小时。地球 10 mm 时月球约 2.73 mm、中心距 302 mm、表面间隙 295 mm，太阳约 1.09 m、日地中心距 117.4 m。显示映射不改物理；暗面 0.035 填光是教学画法，不预测月亮亮度。省略岁差、N 体、纹理、真实天平动与大气。CC0 算术对照、完整方程和出处见 data/SOURCES.md 与 docs/44 第 4、9 节。"
+      },
+      "design": true
+    },
+    {
+      "id": "S37",
+      "text": {
+        "en": "NUS Physics, Solar Eclipse: an annular solar eclipse was observed at the National University of Singapore on 26 December 2019.",
+        "zh": "新加坡国立大学物理系《日食》：2019 年 12 月 26 日，新加坡国立大学现场观察到日环食。"
+      },
+      "note": {
+        "en": "Body read 2026-10-27. Annular Solar Eclipse and SEANN Meeting, 26–28 Dec, 2019. Only event date, location and eclipse type retained. No duration, contact time, attendance, equipment count or future prediction is adopted.",
+        "zh": "2026-10-27 读取正文。核对 2019 年 12 月日环食与会议报道；只取事件日期、地点、食型。不取持续时间、接触时刻、人数、器材数或未来预报。"
+      },
+      "url": "https://www.physics.nus.edu.sg/solar-eclipse/"
+    },
+    {
+      "id": "S38",
+      "text": {
+        "en": "Singapore Chinese Cultural Centre, Culturepaedia, 李国樑, 中秋节: Mid-Autumn falls on day 15 of lunar month 8.",
+        "zh": "新加坡华族文化中心华族文化百科，李国樑《中秋节》：中秋节为农历八月十五。"
+      },
+      "note": {
+        "en": "Body read 2026-10-27. Opening paragraph only, for the date and local Chinese wording. No universal celebration claim, historical origin story or astronomical “roundest/nearest Moon” claim is retained.",
+        "zh": "2026-10-27 读取正文。只取首段日期与本地中文用词。不声称所有家庭庆祝，不取起源故事或“必定最圆、最近”的天文说法。"
+      },
+      "url": "https://culturepaedia.singaporeccc.org.sg/zh/social-practices/festivals/the-mid-autumn-festival-in-singapore/"
+    },
+    {
+      "id": "S39",
+      "text": {
+        "en": "Hong Kong Observatory, 二零二六年中秋节赏月锦囊: the festival date and exact full-Moon instant can fall on different calendar days.",
+        "zh": "香港天文台《二零二六年中秋节赏月锦囊》：中秋日期与精确满月时刻可以不在同一日。"
+      },
+      "note": {
+        "en": "Body read 2026-10-27. Opening explicitly distinguishes the 2026 festival from the later full Moon. Used only as a counterexample to “day 15 is the exact full Moon”; no Hong Kong rise/set or full-Moon timetable is presented as Singapore data.",
+        "zh": "2026-10-27 读取正文。首段明确区分当年中秋与较后的满月，只用来反证“十五就是精确满月”；不把香港升落或满月时刻表当新加坡数据。"
+      },
+      "url": "https://www.hko.gov.hk/sc/新闻公报/110730/﻿二零二六年中秋节赏月锦囊"
+    },
+    {
+      "id": "S40",
+      "text": {
+        "en": "NASA Science, Eclipses and the Moon: the lunar orbit is tilted by about 5° to Earth’s orbital plane, so new and full Moons do not produce eclipses every month.",
+        "zh": "NASA Science《日月食与月球》：月轨道相对地球轨道平面倾约 5°，因此不是每次新月和满月都会发生食。"
+      },
+      "note": {
+        "en": "Body read 2026-10-27. The Moon’s Tilted Orbit and Lunar Eclipse Basics. Umbra is the full-shadow region; the surrounding penumbra blocks only part of the Sun. Exact adopted inclination uses S8. Future-event tables and atmospheric colour predictions are not used.",
+        "zh": "2026-10-27 读取正文。核对月轨道倾斜与月食基础。本影挡住全部太阳，外围半影只挡住部分太阳；精确采用倾角取 S8。不取未来天象表或大气颜色预测。"
+      },
+      "url": "https://science.nasa.gov/moon/eclipses/"
+    }
+  ]
+}

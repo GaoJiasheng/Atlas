@@ -1,0 +1,420 @@
+---
+{
+  "id": "a-tilted-year",
+  "order": 2,
+  "title": {
+    "en": "A tilted year",
+    "zh": "倾斜地轴下的一年"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "cutaway": "none",
+    "ghost": [],
+    "layers": [
+      "solar-body",
+      "earth-system",
+      "orbital-guides"
+    ],
+    "labels": [
+      "earth-body",
+      "earth-axis",
+      "orbital-plane"
+    ],
+    "camera": {
+      "position": [
+        4.22,
+        0.45,
+        0.95
+      ],
+      "target": [
+        3.6,
+        0,
+        -0.0
+      ],
+      "fov": 37
+    },
+    "index": {
+      "parts": [
+        "earth-body",
+        "earth-axis",
+        "orbital-plane",
+        "equator-ring",
+        "light-ray-guide",
+        "earth-track",
+        "observer-marker"
+      ]
+    },
+    "sim": {
+      "set": {
+        "lab": "year",
+        "elapsed": 0,
+        "year-angle": 0,
+        "lunar-angle": 0,
+        "spin-angle": 180,
+        "obliquity": 23.44,
+        "lunar-tilt": 5.145,
+        "node-angle": 0,
+        "observer-lat": 45,
+        "moon-range": 384400,
+        "synchronous": true,
+        "scale-mode": "schematic",
+        "day-index": 1
+      },
+      "try": {
+        "vary": "year-angle",
+        "also": [
+          "obliquity",
+          "observer-lat"
+        ],
+        "observe": [
+          "geometric-daylight-hours",
+          "noon-altitude-deg"
+        ],
+        "record": {
+          "chart": {
+            "y": "geometric-daylight-hours"
+          }
+        },
+        "keep": [
+          {
+            "en": "Same circular orbital radius",
+            "zh": "相同的圆轨道半径"
+          }
+        ]
+      }
+    },
+    "beats": [
+      {
+        "sim": {
+          "set": {
+            "lab": "year",
+            "elapsed": 0,
+            "year-angle": 0,
+            "lunar-angle": 0,
+            "spin-angle": 180,
+            "obliquity": 23.44,
+            "lunar-tilt": 5.145,
+            "node-angle": 0,
+            "observer-lat": 45,
+            "moon-range": 384400,
+            "synchronous": true,
+            "scale-mode": "schematic",
+            "day-index": 1
+          }
+        },
+        "caption": {
+          "en": "Earth's tilt is measured from the perpendicular to its orbital plane. Here it is about twenty-three point four degrees.",
+          "zh": "地轴倾角从轨道平面的垂线量起，这里约二十三点四度。"
+        },
+        "part": null,
+        "run": false,
+        "hide": [
+          "moon-body",
+          "near-side-mark",
+          "lunar-track",
+          "node-line",
+          "scale-ruler"
+        ],
+        "labels": [
+          "earth-axis",
+          "orbital-plane"
+        ],
+        "camera": {
+          "position": [
+            4.22,
+            0.45,
+            0.95
+          ],
+          "target": [
+            3.6,
+            0,
+            -0.0
+          ],
+          "fov": 37
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "lab": "year",
+            "elapsed": 0,
+            "year-angle": 90,
+            "lunar-angle": 0,
+            "spin-angle": 180,
+            "obliquity": 23.44,
+            "lunar-tilt": 5.145,
+            "node-angle": 0,
+            "observer-lat": 45,
+            "moon-range": 384400,
+            "synchronous": true,
+            "scale-mode": "schematic",
+            "day-index": 1
+          }
+        },
+        "caption": {
+          "en": "The northern hemisphere tilts towards the Sun. At the model latitude of forty-five degrees north, daylight lasts about fifteen hours and twenty-six minutes.",
+          "zh": "北半球倾向太阳。在模型北纬四十五度处，白昼约十五小时二十六分。"
+        },
+        "part": null,
+        "run": false,
+        "hide": [
+          "moon-body",
+          "near-side-mark",
+          "lunar-track",
+          "node-line",
+          "scale-ruler"
+        ],
+        "labels": [
+          "earth-body",
+          "earth-axis",
+          "light-ray-guide"
+        ],
+        "camera": {
+          "position": [
+            0.6200000000000002,
+            0.45,
+            -2.6500000000000004
+          ],
+          "target": [
+            2.2043642384652358e-16,
+            0,
+            -3.6
+          ],
+          "fov": 37
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "lab": "year",
+            "elapsed": 0,
+            "year-angle": 270,
+            "lunar-angle": 0,
+            "spin-angle": 180,
+            "obliquity": 23.44,
+            "lunar-tilt": 5.145,
+            "node-angle": 0,
+            "observer-lat": 45,
+            "moon-range": 384400,
+            "synchronous": true,
+            "scale-mode": "schematic",
+            "day-index": 1
+          }
+        },
+        "caption": {
+          "en": "Half a model year later, the axis remains parallel. The same northern latitude now has about eight hours and thirty-four minutes of daylight.",
+          "zh": "模型过了半年，地轴方向仍近似平行。同一北纬地点的白昼现在约八小时三十四分。"
+        },
+        "part": null,
+        "run": false,
+        "hide": [
+          "moon-body",
+          "near-side-mark",
+          "lunar-track",
+          "node-line",
+          "scale-ruler"
+        ],
+        "labels": [
+          "earth-body",
+          "earth-axis"
+        ],
+        "camera": {
+          "position": [
+            0.6199999999999993,
+            0.45,
+            4.55
+          ],
+          "target": [
+            -6.613092715395707e-16,
+            0,
+            3.6
+          ],
+          "fov": 37
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "lab": "year",
+            "elapsed": 0,
+            "year-angle": 90,
+            "lunar-angle": 0,
+            "spin-angle": 180,
+            "obliquity": 23.44,
+            "lunar-tilt": 5.145,
+            "node-angle": 0,
+            "observer-lat": -45,
+            "moon-range": 384400,
+            "synchronous": true,
+            "scale-mode": "schematic",
+            "day-index": 1
+          }
+        },
+        "caption": {
+          "en": "At the opposite latitude in the south, the long and short days swap. Both hemispheres are almost the same distance from the Sun.",
+          "zh": "换到相反的南纬地点，长日和短日交换。两个半球到太阳的距离几乎一样。"
+        },
+        "part": null,
+        "run": false,
+        "hide": [
+          "moon-body",
+          "near-side-mark",
+          "lunar-track",
+          "node-line",
+          "scale-ruler"
+        ],
+        "labels": [
+          "earth-body",
+          "earth-axis",
+          "observer-marker"
+        ],
+        "camera": {
+          "position": [
+            -0.6199999999999998,
+            -0.45,
+            -4.55
+          ],
+          "target": [
+            2.2043642384652358e-16,
+            0,
+            -3.6
+          ],
+          "fov": 37
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "lab": "year",
+            "elapsed": 0,
+            "year-angle": 90,
+            "lunar-angle": 0,
+            "spin-angle": 180,
+            "obliquity": 0,
+            "lunar-tilt": 5.145,
+            "node-angle": 0,
+            "observer-lat": 45,
+            "moon-range": 384400,
+            "synchronous": true,
+            "scale-mode": "schematic",
+            "day-index": 1
+          }
+        },
+        "caption": {
+          "en": "Remove the tilt in this circular model and the seasonal daylight change disappears. Earth's real distance variation is not the explanation for opposite seasons.",
+          "zh": "在这个圆轨道模型里取消倾角，季节性的日长变化消失。真实日地距离的变化不能解释南北半球季节相反。"
+        },
+        "part": null,
+        "run": false,
+        "hide": [
+          "moon-body",
+          "near-side-mark",
+          "lunar-track",
+          "node-line",
+          "scale-ruler"
+        ],
+        "labels": [
+          "earth-axis",
+          "orbital-plane",
+          "observer-marker"
+        ],
+        "camera": {
+          "position": [
+            -0.6199999999999998,
+            0.45,
+            -2.6500000000000004
+          ],
+          "target": [
+            2.2043642384652358e-16,
+            0,
+            -3.6
+          ],
+          "fov": 37
+        }
+      }
+    ],
+    "part": null,
+    "summary": {
+      "en": "Follow an almost parallel spin axis around a circular year and compare the two hemispheres.",
+      "zh": "让近似平行的地轴走过圆形一年，比较南北半球的受光。"
+    },
+    "hide": [
+      "moon-body",
+      "near-side-mark",
+      "lunar-track",
+      "node-line",
+      "scale-ruler"
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Earth's axis leans relative to its yearly path. The <Term id="obliquity">obliquity</Term>, or axial tilt, is measured from a line perpendicular to the orbital plane. It is about <Num s="S9,S3">23.4°</Num>. Measuring from the plane itself would give the wrong angle. The plane and axis guides make that reference visible.<Num s="S36" />
+
+Follow the successive positions. The axis keeps nearly the same direction in space throughout a year; it does not turn to keep pointing towards the Sun. A <Term id="hemisphere">hemisphere</Term> is half a sphere. Earth's equator separates the northern and southern hemispheres. Each takes its turn leaning towards the Sun as Earth travels around it.<Num s="S3" />
+
+At the model latitude <Num s="S36">45° north</Num>, the Sun's midday height and the time spent above the horizon both change. With the north tilted sunwards, geometric daylight lasts about <Num s="S36">15 hours 26 minutes</Num>. Half a model year later it lasts about <Num s="S36">8 hours 34 minutes</Num>, even though the circular orbit keeps the same distance from the Sun.
+
+<Figure src="figures/sun-earth-moon-parallel-axes" alt={{ en: "Two Earth views with parallel axes and opposite sunlight relations.", zh: "两个地球视图，地轴平行，受光关系相反。" }} caption={{ en: "Parallel axes at opposite model positions. Sizes, gaps and the projected angle are schematic.", zh: "相反轨道位置上的地轴保持平行。大小、间距和画面投影角均为示意。" }} />
+
+Move the observer to the matching southern latitude. Long and short days exchange places. The hemispheres receive different sunlight angles and day lengths at the same time; this helps explain their opposite seasons. A simple claim that the whole Earth becomes warmer just because it moves nearer the Sun cannot explain that exchange.<Num s="S3,S36" />
+
+Finally set the tilt to <Num s="S36">0°</Num>. The seasonal daylight difference disappears in this circular model. Use Try it to record day length against year angle, keeping the same latitude for a comparison. This is a sunlight geometry study: its curve does not calculate the temperature.<Num s="S36" />
+
+<More title={{"en": "Nearer in January", "zh": "近日点在一月"}}>
+
+Earth is usually nearest the Sun in January and farthest in July. Northern winter occurs near the nearer part of the orbit, so distance alone cannot explain seasons. This topic uses a circle to keep distance fixed while testing the tilt.<Num s="S3,S36" />
+
+</More>
+
+<More title={{"en": "Day length is not temperature", "zh": "昼长不是气温模型"}}>
+
+Sunlight angle and daylight help explain seasonal energy input. This model calculates neither clouds nor temperature. Singapore has a tropical climate with monsoon seasons and inter-monsoon periods; the next chapter separates its small annual daylight change from weather.<Num s="S3,S11,S36" />
+
+</More>
+
+<More title={{"en": "Two horizon definitions", "zh": "两个地平线定义"}}>
+
+This chapter counts daylight while the Sun centre is above a geometric horizon. The Singapore table instead uses a centre altitude of <Num s="S26,S33">−0.833°</Num>, a standard convention allowing for the solar disc and typical atmospheric refraction. An equinox therefore need not have exactly <Num s="S26,S36">12 hours</Num> between calculated sunrise and sunset. Actual atmospheric conditions and the local skyline add differences.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+地轴相对一年轨道是倾斜的。<Term id="obliquity">地轴倾角</Term>从轨道平面的垂线量起，约 <Num s="S9,S3">23.4°</Num>，不能从平面本身量起。舞台上的平面和地轴辅助线让这条量角基准看得见，换镜头也不改变真实夹角。画面中投影出的角度可能看起来不同，因此不要直接拿插图量角。<Num s="S36" />
+
+沿顺序快照看，地轴一年内在空间的方向近似不变，并不一直追着太阳转。<Term id="hemisphere">半球</Term>就是球的一半，赤道把地球分成南北半球。公转改变地轴与阳光的关系，两半球便轮流倾向太阳。<Num s="S3" />
+
+在模型北纬 <Num s="S36">45°</Num>处，正午太阳高度和日长一起变化。北半球倾向太阳时，几何白昼约 <Num s="S36">15 小时 26 分钟</Num>；模型过了半年，约为 <Num s="S36">8 小时 34 分钟</Num>。圆轨道的日地距离没有改变，日长却变了。
+
+<Figure src="figures/sun-earth-moon-parallel-axes" alt={{ en: "Two Earth views with parallel axes and opposite sunlight relations.", zh: "两个地球视图，地轴平行，受光关系相反。" }} caption={{ en: "Parallel axes at opposite model positions. Sizes, gaps and the projected angle are schematic.", zh: "相反轨道位置上的地轴保持平行。大小、间距和画面投影角均为示意。" }} />
+
+把观察点换到相反的南纬，长日和短日就交换。两半球同时得到不同的入射角和日长，这有助于解释季节相反。只说整个地球靠近太阳就变暖，解释不了这种交换。<Num s="S3,S36" />
+
+最后将倾角设为 <Num s="S36">0°</Num>，这个圆轨道模型的季节性日长差就消失了。“试一试”可按年角记录日长；一次比较保持同一纬度。曲线研究受光几何，并没有计算当地气温。<Num s="S36" />
+
+<More title={{"en": "Nearer in January", "zh": "近日点在一月"}}>
+
+地球通常一月最接近太阳，七月最远。北半球冬季却在较近的一段，所以距离本身解释不了季节。本主题用圆轨道固定距离，单独测试倾角。<Num s="S3,S36" />
+
+</More>
+
+<More title={{"en": "Day length is not temperature", "zh": "昼长不是气温模型"}}>
+
+阳光入射角和日长有助于解释季节受光差异；本模型不计算云量或气温。新加坡属热带气候，有季风期和季风间期，下一章把全年较小的日长变化与天气分开。<Num s="S3,S11,S36" />
+
+</More>
+
+<More title={{"en": "Two horizon definitions", "zh": "两个地平线定义"}}>
+
+本章以太阳中心高于几何地平线计白昼。新加坡计算表则取太阳中心高度 <Num s="S26,S33">−0.833°</Num>，按标准约定计入太阳圆盘和典型大气折射。因此分点的计算日出至日落不必恰为 <Num s="S26,S36">12 小时</Num>；实际大气和当地天际线还会造成差别。
+
+</More>
+
+</Lang>

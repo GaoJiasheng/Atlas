@@ -958,6 +958,8 @@ export const viewsSchema = z
      * camera re-fitted so the model's bounding sphere fills ~75 % of the stage width.
      */
     cover: orbitCamera.optional(),
+    /** Opt-in HUD-aware framing; only these subjects that intersect the authored view are fitted. */
+    hudFrame: z.object({ parts: z.array(kebabId).min(1).max(32) }).strict().optional(),
     /**
      * How the body reads while an exercise plays (topics with a skinned
      * `context` skin part): `wire` (default when the glb has a `skin-wire`
@@ -1205,6 +1207,9 @@ export const partsFileBase = z
   })
   .strict()
   .superRefine((file, ctx) => {
+    for (const [i, id] of (file.views.hudFrame?.parts ?? []).entries())
+      if (!file.parts.some(p => p.id === id && !p.context))
+        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['views', 'hudFrame', 'parts', i], message: `unknown selectable framing part ${id}` });
     for (const x of mechanismIssues(file.mechanisms, file)) ctx.addIssue({ code: z.ZodIssueCode.custom, ...x });
     if (file.sim) {
       const spanTargets = new Set(file.sim.bind.flatMap((b) => 'part' in b && b.span && typeof b.part === 'string' ? [b.part] : []));

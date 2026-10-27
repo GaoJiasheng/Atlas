@@ -136,6 +136,8 @@ export type MechanismSave = Record<string, { thetaRad: number; qaHold: boolean }
 export interface StageBridge {
   /** Actual rig rotations and world origins after skinning motion (QA only). */
   joints: Map<string, { angles: Record<string, number>; position: number[]; quaternion: number[] }>;
+  /** Measured free stage band for opt-in camera framing. */
+  freeStage?: import('./lib/hud-framing').FrameRect;
   /** Orbit sims (docs/44 §4.10): what OrbitDriver really drew for the snapshot `snapshotId` (world position / quaternion / scale, Sun uniforms). */
   orbitRendered?: { snapshotId: number; parts: Record<string, { position: number[]; quaternion: number[]; scale: number[]; visible: boolean }>; solarDirections: Record<string, number[]> };
   spans: Map<string, SpanReading>;

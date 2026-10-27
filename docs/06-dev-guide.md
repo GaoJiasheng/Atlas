@@ -674,6 +674,8 @@ end_i   = start_{i+1}；本章最后一拍更晚就取最后一拍（最后一�
 - **章节在时间上会重叠**（某章后几拍晚于下一章的开始，如 ww2 第 08 章的拍到 1943-10，第 09 章从 1942-06 开始），同一时间可能在两段里。播放头带一个**锚**（`Anchor { segment, tick? }`，`View.tsx` 维护）：换章 / 套用拍时 = 那一章的段（和那一拍），拖动时 = 指针所在的段；`x(t, anchor)` 优先画在锚的段里（时间恰好是锚定拍的时间就画在那个刻度上），锚的段不含这个时间才退回默认。默认（关键帧菱形、泳道、参与卡的条带）= 第一个跨度含 `t` 的段；默认映射对时间单调。
 - 用同一映射的：段、刻度、关键帧菱形、播放头、拖动（反函数）、泳道、参与卡（同一组段套在卡片自己的宽度上，当前章那段淡 signal 底）。参与卡的时间轴刻度仍是真实日期（`ruleTicks` + `thinTicks`，`lib/ticks.ts`），经映射落位。
 
+可选 `views.hudFrame: { "parts": ["earth-body", "moon-body", "sun-body"] }` 启用实际 HUD 自由区取景（默认关闭，既有主题镜头保持原行为）。仅列需要保住的真实可选主体；作者镜头完全排除的对象不被重新拉入近景。舞台测量当前标题、PLATE、观察卡、抽屉/章节轴等可见 `data-hud-panel`，右侧 overlay 按实际卡片测量；在已有宽高比后拉之上，保持视线方向与 fov，按各对象深度求最小后拉及横/纵平移，使包围盒落入留有 12 px 间隔的自由矩形。尺寸、卡片折叠、HUD/演示切换会重算，始终从作者镜头出发；拖拽后交还自由相机。适用边界：自由矩形必须非空，故意出画的对象不强行收入。纯函数及透视投影回算见 `tests/space-scene/hud-framing.test.ts`，浏览器验收仍需单独执行。
+
 ### HUD 控件与内容（docs/08 §2、§3）
 
 注册（`View.tsx` 的 `useSceneControls`）：
@@ -1841,7 +1843,7 @@ docs/40 §4.4 E-HL3。流的可选字段：
 
 ### SpaceScene · 试一试 · 太阳、地球与月球（orbit-rotation）
 
-`docs/44 §4` 的 E-SEM1–3。完整可解析模板是 `src/content/topics/sample-orbit/data/parts.json`（draft，13 controls、23 outputs、13 selectable parts、2 overlays）；8 章 / 39 拍覆盖三种观察窗、真尺度、离交点、偏食、环食、全月食。这里只施工引擎夹具，未创建正式 `sun-earth-moon` 内容。
+`docs/44 §4` 的 E-SEM1–3。完整可解析模板是 `src/content/topics/sample-orbit/data/parts.json`（draft，13 controls、23 outputs、13 selectable parts、2 overlays）；8 章 / 39 拍覆盖三种观察窗、真尺度、离交点、偏食、环食、全月食。正式发布内容见 `src/content/topics/sun-earth-moon/`；实际相机使用 lab 坐标系的显式数字，跨实验不要把同名预设误当成自动跟随天体的坐标变换。
 
 注册：`SIM_KINDS` → `simSchema.orbitRotation`（`orbit-rotation-schema.ts`）→ `simQuantities` / `evaluateSim`（`lib/sim/orbit-rotation.ts`）→ `quantityKind` / `ORBIT_STATES`（`orbit-constants.ts`）→ `SEPARATE_EXPERIMENTS['orbit-rotation']=true`。没有 timeline channels；`evaluateSim(sim, values, observe, frames, parts, {timeSeconds})` 在原五参数末尾增加可选 context，旧模型不读它。未知输出和种类不符都报错，不依赖缺量回退。
 
@@ -1871,9 +1873,9 @@ docs/40 §4.4 E-HL3。流的可选字段：
 ]
 ```
 
-这些是 `sim.bind` 项。天体、轴、赤道与标记都使用父体半径为1的局部几何。`surface` 要非零 direction、正 factor≤1.1；`centre` 不写 direction / factor；observer 只能 centre，用地球显示半径安放。绝对位置已包含 parent。`body-frame` 是32个固定点键 `earth.xKm`、`earth.qw`、`earth.radiusKm` 等；`solar-directions` 是6个 `earth.x/y/z`、`moon.x/y/z` 键。向量由求解器产生，不是作者输入。非单位四元数 / 缺键检查见 `validateBodyFrame`。
+这些是 `sim.bind` 项。`bodyTransform.labelPoint` 可选，指定附件局部几何内的标注点；跟随同一四元数与几何缩放，不移动模型或 bounds。例如地轴 `[0,1.35,0]` 指向轴端。天体、轴、赤道与标记都使用父体半径为1的局部几何。`surface` 要非零 direction、正 factor≤1.1；`centre` 不写 direction / factor；observer 只能 centre，用地球显示半径安放。绝对位置已包含 parent。`body-frame` 是32个固定点键 `earth.xKm`、`earth.qw`、`earth.radiusKm` 等；`solar-directions` 是6个 `earth.x/y/z`、`moon.x/y/z` 键。向量由求解器产生，不是作者输入。非单位四元数 / 缺键检查见 `validateBodyFrame`。
 
-`bodyTransform` 与 guide writer 的零件禁止重复写变换、pose、动画、explode、offset、rotate、shift、place 或 play；普通显隐和 selection 保持原行为。`OrbitDriver` 更新既有可选 mesh，guide primitive 在首帧由同一节点的动态几何替换，不画第二份锚点。轨道128段；零倾角不画交线，并写“平面重合”。Earth / Moon 的解析太阳明暗覆盖棚灯输出，暗侧填光≤0.05；太阳自发光，不投假点光源影子。所有颜色取已有双主题 token。
+`bodyTransform` 与 guide writer 的零件禁止重复写变换、pose、动画、explode、offset、rotate、shift、place 或 play；普通显隐和 selection 保持原行为。`OrbitDriver` 更新既有可选 mesh，guide primitive 在首帧由同一节点的动态几何替换，不画第二份锚点。可选 orbit-guides `radius` 为地球显示半径的管半径比例（未写保留 0.012），`labelAnchors: "strokes"` 将平面/地球轨道标注锚在法线端/轨道采样点（未写保留 bounds 中心）。`orbitRotation.panel.shadowNote` 可选双语卡内说明，均默认不影响已有主题。轨道128段；零倾角不画交线，并写“平面重合”。Earth / Moon 的解析太阳明暗覆盖棚灯输出，暗侧填光≤0.05；太阳自发光，不投假点光源影子。所有颜色取已有双主题 token。
 
 ```json
 [
@@ -1981,6 +1983,8 @@ state:
 `pnpm validate` 核对 `index.parts` 是零件（不是 context）、`index.exercises` 在 `training.json` 里。
 
 章节目标照常累积（`labels`、`hide`、`pose`、`ghost`、`exercise`、`highlight`、`sites` 不累积，只看本章；这三项肌肉主题字段在章 state 与拍里写法相同）。**镜头规则**（`lib/camera.ts transitionCamera`，有单测；CameraRig 订阅 store，transition 一发出就按顺序处理，所以同一 tick 里先 `setPreset` 再 `setMode`（snap）也落在预设镜头上，截图脚本不需要延时）：切章 / 首次加载 / URL：本章自己写了 `camera`（或 URL `cam=` 与本章基线不同）就用它；否则 `views[当前 view].camera`；都没有就沿用。**预设（VIEW 按钮 / 数字键）永远落在该预设的镜头上**（P1 遗留问题：本章没有自己镜头时，基线是继承来的，曾被误判成"非显式"而飞去视图预设；已修）。模式切换（X / E / C / F）不动镜头。较窄的舞台（宽高比 < 1.6：HUD 占去两侧的桌面、平板、竖屏手机）自动把镜头往后拉（手机竖屏、宽高比 < 0.8 时 HUD 叠在上面，模型独占整宽，拉回量渐减到一半），回写 URL 时换算回来，链接与设备无关。**封面镜头**：演示以外隐藏 HUD（H、`pnpm shoot` 的 `hero-clean`）时 0.8 s 飞到 `views.cover`；没写就沿当前视线方向重新取景，让模型包围球占舞台宽 75 %（宽屏上最多超出高度 30 %，`fitSphereCamera`），舞台尺寸变了再重算；显示 HUD 时 0.8 s 飞回离开时的镜头——中间换过章、按过预设或拖过镜头就不飞回。章节镜头按带 HUD 的舞台取景：模型放在 HUD 块之间的空带里（1600×900 约 590 × 680 px），给引线标注留位置；封面镜头按满屏取景（模型约占宽 70 %）。
+
+可选 `views.hudFrame: { "parts": ["earth-body", "moon-body", "sun-body"] }` 启用实际 HUD 自由区取景（默认关闭，既有主题镜头保持原行为）。仅列需要保住的真实可选主体；作者镜头完全排除的对象不被重新拉入近景。舞台测量当前标题、PLATE、观察卡、抽屉/章节轴等可见 `data-hud-panel`，右侧 overlay 按实际卡片测量；在已有宽高比后拉之上，保持视线方向与 fov，按各对象深度求最小后拉及横/纵平移，使包围盒落入留有 12 px 间隔的自由矩形。尺寸、卡片折叠、HUD/演示切换会重算，始终从作者镜头出发；拖拽后交还自由相机。适用边界：自由矩形必须非空，故意出画的对象不强行收入。纯函数及透视投影回算见 `tests/space-scene/hud-framing.test.ts`，浏览器验收仍需单独执行。
 
 ### HUD 控件与内容（docs/08 §2、§3）
 
@@ -2363,6 +2367,9 @@ pnpm tsx scripts/geo/lib/check.ts --topic ww2         # MapLibre（Playwright）
 - **分框细度**（docs/28 P3，`simplify.ts`）：`pipeline.focus` 的一项可以写成 `{ "box": [w, s, e, n], "fineKm": 0.005 }`，这个框用自己的固定间隔（岛尺度要几米，区域框照旧 1 km 上下）：先从普通焦点框里挖出来，单独简化，用自己那份陆地沿海岸（与 inside / outside 两半同一做法）；排在前面的框在重叠处优先。自动预算搜索只调普通焦点框的间隔。没有这种项、没有 `excludeBox` 时产物与以前逐字节相同（ww1、ww2、warring-states、four-taps 的 simplify 改前改后各跑一次比对过）。
 - 东南亚近景底图：`scripts/build-geo.ts` 另出 `public/geo/land-10m-sea.json`（Natural Earth 1:10m 陆地，裁到 95°E–125°E、9°S–22°N，TopoJSON，约 234 KB）。GeoStage 在镜头 zoom ≥ 6.5 且视野与该框相交时才 fetch；zoom 7 起绘制、到 8 完全显现：框内先铺一层水色遮住 50m 陆地（不透明度 7→8 渐入），10m 陆地和海岸线叠在上面，颜色同为 `--land` / `--land-edge` / `--water` token。其他主题不加载它。
 
+#### orbit-rotation 内容补记（2026-10-27）
+
+正式 `sun-earth-moon` 复用夹具的13控件/23输出/9绑定/2 overlays，加入正文、出处与逐拍验收。`orbital-plane` 的既有 guide 几何补上法线及地轴倾角弧（`orbitalTiltGuide`），弧与法线从同一物理 axis 生成，零倾角时弧退化到法线；不另建可选对象。无普通 orbit 输出显隐绑定，因此保留 §9.2 运行中普通绑定的已知边界。浏览器验收由主会话执行，见主题 REVIEW.md。
 
 ### TimeScene · 深时重建与现代证据（E-DE1–E-DE3）
 
