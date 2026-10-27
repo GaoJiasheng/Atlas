@@ -1137,38 +1137,46 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   const loadingLayers = new Set<string>();
   const notifyCatalogue = () => options.onCatalogueLayers?.([...catalogueLayers]);
   const loadDatedLayers = async () => {
-    const definitions = (options.datedLayers ?? []).filter((def) => layersOn().has(def.id) && !loadingLayers.has(def.id));
+    // Catalogue layers (docs/49, megabytes of metadata) load when first switched on; plain dated layers keep
+    // the eager load existing topics rely on (every PLATE count and legend row ready at the map's load).
+    const definitions = (options.datedLayers ?? []).filter((def) => (layersOn().has(def.id) || !def.catalogue) && !loadingLayers.has(def.id));
     definitions.forEach((def) => loadingLayers.add(def.id));
-    for (const def of definitions) {
+    // Fetch and prepare every newly enabled layer at once (the old eager loader was parallel too),
+    // then commit them in definition order so their map stacking stays fixed.
+    const jobs = definitions.map((def) => {
       const info: CatalogueLayer = { id: def.id, def, status: 'loading', entries: [], features: { type: 'FeatureCollection', features: [] } };
       catalogueLayers.push(info);
-      notifyCatalogue();
-      try {
+      const work = (async () => {
         const [topo, metadata] = await Promise.all([
           fetchJson<Parameters<typeof topoFeature>[0]>(withBase(`/geo/${def.file}.json`)),
           def.catalogue ? fetchJson<{ entries: CatalogueEntry[] }>(withBase(`/geo/${def.catalogue.file}.json`)) : Promise.resolve({ entries: [] }),
         ]);
-        if (destroyed) return;
-        const prepared = await prepareDatedLayer(topo, def.file, def);
-        if (destroyed) return;
-        if (!prepared) throw new Error(`${def.file}: missing named object`);
-        const { collection, index } = prepared;
-        const t = playhead.get();
-        const drawn = createDatedMapLayer(map, def, collection, tokens, datedColor(def, t), t, index);
-        drawn.setSelected(store.getState().pick);
-        datedLayers.push(drawn);
-        info.entries = metadata.entries;
-        info.features = collection;
-        info.status = 'ready';
-        applyVisibility();
-        options.onDatedLayers?.(datedLayers.map(({ id, index }) => ({ id, index })));
-        notifyCatalogue();
-        requestRender();
-      } catch {
-        if (destroyed) return;
+        if (destroyed) return null;
+        return { metadata, prepared: await prepareDatedLayer(topo, def.file, def) };
+      })().then((value) => ({ ok: true as const, value }), () => ({ ok: false as const, value: null }));
+      return { def, info, work };
+    });
+    if (jobs.length) notifyCatalogue();
+    for (const { def, info, work } of jobs) {
+      const result = await work;
+      if (destroyed) return;
+      if (!result.ok || !result.value?.prepared) {
         info.status = 'error';
         notifyCatalogue();
+        continue;
       }
+      const { metadata, prepared: { collection, index } } = result.value;
+      const t = playhead.get();
+      const drawn = createDatedMapLayer(map, def, collection, tokens, datedColor(def, t), t, index);
+      drawn.setSelected(store.getState().pick);
+      datedLayers.push(drawn);
+      info.entries = metadata.entries;
+      info.features = collection;
+      info.status = 'ready';
+      applyVisibility();
+      options.onDatedLayers?.(datedLayers.map(({ id, index }) => ({ id, index })));
+      notifyCatalogue();
+      requestRender();
     }
   };
 

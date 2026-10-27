@@ -1,11 +1,16 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect, useRef } from 'react';
 import { tx } from '../../i18n';
 import type { Locale } from '../core/types';
 import type { DatedLayerDef } from '../../content/schema/topic';
 import type { CatalogueEntry } from './catalogueSchema';
 import { SourceRefs } from '../widgets/SourcePopover';
 export function CatalogueInspector({ entry, layer, locale, onClose }: { entry: CatalogueEntry; layer: DatedLayerDef; locale: Locale; onClose(): void }) {
-  return <article className="ts-event" data-catalogue-inspector={entry.id}>
+  const ref = useRef<HTMLElement>(null);
+  // Picked from the index at the panel's foot or on the map: the detail under the chapter header must be in view.
+  useEffect(() => {
+    ref.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  }, [entry.id]);
+  return <article ref={ref} className="ts-event" data-catalogue-inspector={entry.id}>
     <header className="ts-event__header"><span>{layer.temporal?.mode === 'reference' ? 'REF.' : tx(layer.label, locale)}</span><button type="button" className="atlas-control" onClick={onClose} aria-label={locale === 'en' ? 'Close details' : '关闭详情'}>×</button></header>
     <h3 className="ts-event__title">{tx(entry.title, locale)}</h3>
     <p>{tx(entry.summary, locale)}</p>

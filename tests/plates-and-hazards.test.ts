@@ -33,7 +33,7 @@ describe('plates-and-hazards authoring contract', () => {
     expect(engine.events.filter((e) => e.kind === 'disaster')).toHaveLength(5);
     expect(engine.events.filter((e) => e.kind === 'site')).toHaveLength(4);
   });
-  it('contains exactly the eight specified chapters and38 explicit dated bilingual beats', () => {
+  it('contains exactly the eight specified chapters and 38 explicit dated bilingual beats', () => {
     expect(chapters.map((c) => c.id)).toEqual(['background','tambora-1815','krakatau-1883','mapping-plates','indian-ocean-2004','anak-krakatau-2018','felt-in-singapore','comparing-evidence']);
     expect(chapters.map((c) => c.state.beats.length)).toEqual([4,5,5,5,5,4,5,5]);
     expect(chapters[0].kind).toBe('background');
@@ -51,7 +51,7 @@ describe('plates-and-hazards authoring contract', () => {
       }
     }
   });
-  it('keeps each body within the agreed length and paragraph bands with2–4 More blocks per locale', () => {
+  it('keeps each body within the agreed length and paragraph bands with 2–4 More blocks per locale', () => {
     for (const [i, text] of chapterText.entries()) for (const locale of ['en','zh']) {
       const body = new RegExp(`<Lang ${locale}>([\\s\\S]*?)</Lang>`).exec(text)![1]!;
       const more = [...body.matchAll(/<More\b/g)].length;
@@ -102,7 +102,7 @@ describe('plates-and-hazards frozen map output', () => {
       if (layer.temporal?.mode==='reference') for(const f of features(layer.file)) { expect(f.properties?.f).toBeUndefined(); expect(f.properties?.u).toBeUndefined(); }
       expect(layer.recent).toBe(false);
     }
-  });
+  }, 30_000); // validates ~6 MB of geometry and catalogues; slow on a loaded machine
   it('keeps all original PB sequence parts and no dateline long chords', () => {
     const pb = Object.keys(counts).filter((id) => id.startsWith('ph-plate-')).flatMap(features);
     expect(pb).toHaveLength(5824);

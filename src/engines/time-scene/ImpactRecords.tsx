@@ -9,6 +9,7 @@ import { impactDateLabel, impactEstimateText } from './lib/impacts';
 /** Source-defined totals stay independent, neutral, static, and beside their definitions. */
 export function ImpactRecords({ records, locale }: { records: readonly ImpactRecord[]; locale: Locale }) {
   const fmt = new Intl.NumberFormat(locale === 'zh' ? 'zh-CN' : 'en-SG');
+  const colon = locale === 'zh' ? '：' : ': ';
   return <>{records.map((record) => {
     const definition = tx(record.label, locale);
     return (
@@ -17,11 +18,11 @@ export function ImpactRecords({ records, locale }: { records: readonly ImpactRec
         <Counter value={record.estimate.value} per={counterPer(record.estimate.value)} locale={locale}
           label={definition} valueLabel={impactEstimateText(record, locale)} />
         <p>{tx(record.scope, locale)}</p>
-        <p>{impactDateLabel(record.sourceDateKind, locale)}: <time dateTime={record.sourceAsOf}>{record.sourceAsOf}</time>
+        <p>{impactDateLabel(record.sourceDateKind, locale)}{colon}<time dateTime={record.sourceAsOf}>{record.sourceAsOf}</time>
           <SourceRefs ids={record.sources} locale={locale} /></p>
         {record.components && <>
           <ul>{record.components.map((component) => (
-            <li key={component.id}>{tx(component.label, locale)}: {fmt.format(component.value)}
+            <li key={component.id}>{tx(component.label, locale)}{colon}{fmt.format(component.value)}
               <SourceRefs ids={component.sources} locale={locale} /></li>
           ))}</ul>
           {record.componentsComplete !== true && <p>{locale === 'zh'

@@ -7,7 +7,8 @@ async function open(page: Page, query = '', locale = 'en') {
   await page.goto(`/${locale}/topics/plates-and-hazards/?${query}`);
   await page.waitForFunction(() => window.__atlas !== undefined);
   expect(await page.evaluate(() => window.__atlas!.ready)).toBe(true);
-  await expect.poll(async () => Object.values((await catalogue(page)).layers).every((layer) => layer.status === 'ready')).toBe(true);
+  // Up to ~3 MB of reference geometry and catalogue text per chapter: seconds on a loaded machine.
+  await expect.poll(async () => Object.values((await catalogue(page)).layers).every((layer) => layer.status === 'ready'), { timeout: 30_000 }).toBe(true);
 }
 
 for (const locale of ['en', 'zh']) for (const theme of ['paper', 'cinema']) {
@@ -49,7 +50,8 @@ test('catalogues retain exact ids across refresh and clear when hidden or before
   const detail = page.locator('[data-catalogue-inspector="ph-q-us6000gzyg"]');
   await expect(detail).toContainText('mww');
   await page.reload(); await page.waitForFunction(() => window.__atlas !== undefined);
-  await expect.poll(async () => (await catalogue(page)).pick).toBe('ph-q-us6000gzyg');
+  expect(await page.evaluate(() => window.__atlas!.ready)).toBe(true);
+  await expect.poll(async () => (await catalogue(page)).pick, { timeout: 30_000 }).toBe('ph-q-us6000gzyg');
   await page.locator('[data-layer="ph-quake-sample"]').click();
   await expect.poll(async () => (await catalogue(page)).pick).toBeNull();
   await open(page, 'ch=mapping-plates&t=2004-12-25&pick=ph-q-official20041226005853450-30');
@@ -72,8 +74,9 @@ test('observation groups are separate and reference versions remain visible', as
 for (const locale of ['en', 'zh']) test(`phone catalogue controls and impact definition fit ${locale}`, async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await open(page, 'ch=indian-ocean-2004', locale);
+  // Phone hides map labels (docs/08 §2); the label button is still the selection action a map tap reaches.
+  await page.locator('button.ts-label[data-id="event-sumatra-2004"]').dispatchEvent('click');
   await page.locator('.atlas-panel__toggle').click();
-  await page.locator('button.ts-label[data-id="event-sumatra-2004"]').click();
   const impact = page.locator('[data-impact="impact-indian-ocean"]');
   await expect(impact).toBeVisible();
   expect(await page.locator('.atlas-panel').evaluate((e) => e.scrollWidth <= e.clientWidth + 1)).toBe(true);

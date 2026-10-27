@@ -298,7 +298,9 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   const [catalogueLayers, setCatalogueLayers] = useState<CatalogueLayer[]>([]);
   const renderedRows = useRef(0);
   const countRows = useCallback((count: number) => { renderedRows.current = count; }, []);
-  const boundary = useSyncExternalStore(playhead.subscribe, () => datedIndexes.map(({ index }) => datedLayerState(index, playhead.get()).signature).join('|'), () => '');
+  // Only catalogue layers re-render the view at a count boundary; plain dated layers (HDB blocks) keep scrubbing cheap.
+  const catalogueIndexes = useMemo(() => datedIndexes.filter(({ id }) => topic.datedLayers?.some((def) => def.id === id && def.catalogue)), [datedIndexes, topic.datedLayers]);
+  const boundary = useSyncExternalStore(playhead.subscribe, () => catalogueIndexes.map(({ index }) => datedLayerState(index, playhead.get()).signature).join('|'), () => '');
   const chapterState = chapters.find((chapter) => chapter.id === currentChapter)?.state as TimeChapterState | undefined;
   const indexSpec = anchor?.tick !== null && anchor?.tick !== undefined ? chapterState?.beats?.[anchor.tick]?.catalogueIndex ?? chapterState?.catalogueIndex : chapterState?.catalogueIndex;
   const catalogueEntries = useMemo(() => catalogueItems(catalogueLayers, layers, playhead.get(), indexSpec), [catalogueLayers, layers, playhead, indexSpec, boundary]);
@@ -470,7 +472,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     if (coastToday && territoryOn) items.push({ id: 'coast-today', label: bi('time.legend.coastToday'), color: 'var(--ink)', kind: 'line-dashed' });
     for (const layer of topic.datedLayers ?? []) {
       if (!layers.includes(layer.id)) continue;
-      items.push({ id: `dated-layer-${layer.id}`, label: layer.label, color: layer.color ?? entityCssColor(geo.entities.find((e) => e.id === layer.holder)), kind: layer.kind === 'area' ? 'fill' : layer.kind === 'line' ? 'line' : 'point' });
+      items.push({ id: `dated-layer-${layer.id}`, label: layer.temporal?.mode === 'reference' ? { en: `${layer.label.en} · REF. ${layer.temporal.release}`, zh: `${layer.label.zh} · REF. ${layer.temporal.release}` } : layer.label, color: layer.color ?? entityCssColor(geo.entities.find((e) => e.id === layer.holder)), kind: layer.kind === 'area' ? 'fill' : layer.kind === 'line' ? 'line' : 'point' });
     }
     if (topic.datedLayers?.some((layer) => layer.kind === 'point' && layer.recent !== false && layer.temporal?.mode !== 'reference' && layers.includes(layer.id)))
       items.push({ id: 'dated-recent', label: bi('time.legend.datedRecent'), color: 'var(--signal)', kind: 'ring' });
@@ -776,8 +778,8 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       </SceneSlot>
 
       {indexSpec && <SceneSlot name="readerEnd"><CatalogueIndex entries={catalogueEntries} locale={locale} pick={pick} onSelect={selectCatalogue} onRows={countRows} /></SceneSlot>}
-      {catalogueLayers.some((layer) => layers.includes(layer.id) && layer.status === 'error') && <SceneSlot name="inspector"><p role="status">{locale === 'en' ? 'Layer could not be loaded' : '图层未能载入'}</p></SceneSlot>}
-      {pickedCatalogue && selectedLayer && <SceneSlot name="inspector"><CatalogueInspector entry={pickedCatalogue} layer={selectedLayer.def} locale={locale} onClose={() => selectCatalogue(null)} /></SceneSlot>}
+      {catalogueLayers.some((layer) => layers.includes(layer.id) && layer.status === 'error') && <SceneSlot name="readerTop"><p role="status">{locale === 'en' ? 'Layer could not be loaded' : '图层未能载入'}</p></SceneSlot>}
+      {pickedCatalogue && selectedLayer && <SceneSlot name="readerTop"><CatalogueInspector entry={pickedCatalogue} layer={selectedLayer.def} locale={locale} onClose={() => selectCatalogue(null)} /></SceneSlot>}
       {selectedEvent && (
         <SceneSlot name="inspector">
           <EventInspector event={selectedEvent} model={model} locale={locale} onClose={closeEvent} />

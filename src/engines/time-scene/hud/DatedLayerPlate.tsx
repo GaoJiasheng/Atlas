@@ -28,6 +28,8 @@ export function DatedLayerPlate({ definitions, indexes, layers, playhead, locale
   }).join('|');
   const values = useSyncExternalStore(playhead.subscribe, snapshot, snapshot).split('|');
   const fold = t(locale, open ? 'time.plate.fold' : 'time.plate.unfold');
+  // A run of reference layers with the same release and note (PB2002's four classes) states them once.
+  const refKey = (layer: DatedLayerDef | undefined) => layer?.temporal?.mode === 'reference' ? `${layer.temporal.release}|${layer.temporal.note.en}` : null;
   return (
     <section className="ts-plate" data-hud-panel="plate" data-folded={!open || undefined}>
       <button type="button" className="ts-plate__head" aria-expanded={open} aria-label={fold} title={fold} onClick={(event) => {
@@ -40,7 +42,7 @@ export function DatedLayerPlate({ definitions, indexes, layers, playhead, locale
       </button>
       {open && <dl className="ts-plate__rows">
         {counted.map((layer, i) => <div key={layer.id} className="ts-plate__row" data-dated-count={layer.id} data-enabled={layers.includes(layer.id)}>
-          <dt>{tx(layer.countLabel ?? layer.label, locale)}{layer.temporal?.mode === 'reference' && <><small> REF. · {layer.temporal.release}</small><small>{tx(layer.temporal.note, locale)}</small></>}</dt>
+          <dt>{tx(layer.countLabel ?? layer.label, locale)}{layer.temporal?.mode === 'reference' && refKey(layer) !== refKey(counted[i - 1]) && <small className="ts-plate__ref">REF. · {layer.temporal.release} · {tx(layer.temporal.note, locale)}</small>}</dt>
           <dd>{values[i] === 'error' ? (locale === 'en' ? 'Layer could not be loaded' : '图层未能载入') : values[i] === '—' ? '—' : Number(values[i]).toLocaleString(locale === 'zh' ? 'zh-SG' : 'en-SG')}</dd>
         </div>)}
         {selectedSummary && <div className="ts-plate__row"><dt>{locale === 'en' ? 'Selected' : '已选'}</dt><dd>{tx(selectedSummary, locale)}</dd></div>}

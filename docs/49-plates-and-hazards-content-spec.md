@@ -676,3 +676,72 @@ S05/S09/S46/S52不作为本题必要来源：未成功再次直取的部分分�
 验收：整合`pnpm test`163files/4286tests全部通过（基线158files/4236tests）；`pnpm validate`58topics、0error/0warning；`pnpm check`0error/0warning（原3条hint；本轮新增unused已移除后复查）。Phase1 build117pages通过；最终build119pages通过。Playwright仅做无浏览器test--list，登记363tests/41files，不当执行通过。生产构建静态import闭包估计10files/468033B gzip，超过旧300KB总页预算；这不是浏览器网络实测，也不拿旧391KB文档值当本轮基线。第一次并行build/test时旧schemas控制区解析5s超时，单独41/41通过，随后全套也通过。未修改旧主题数据来遮盖回归。
 
 **浏览器门槛未执行**：本次两个brief明确禁止sandbox内shoot/e2e，未尝试浏览器/桌面绕过。已添加fixture、本题e2e与shoot目录数值/inspector顺序/选中锚点截图检查，但不能据此声称手机/双主题/键盘触摸/标注布局、延迟加载浏览器路径、来源焦点、GPU帧率或生产Vite实际网络JS总量通过。`ww2`、`sample-dated-layers`、`ancient-civilisations`、`singapore-land-use`、`singapore-after-1965`的shoot/e2e回归同样留给主会话；实际设备60/30fps、原生JSON解析50ms与旧391KB总JS债务仍待浏览器量测。运行e2e固定`CI=1 ATLAS_E2E_PORT=5424 pnpm e2e`。
+
+### 9.4 浏览器验收（主会话，2026-10-27）
+
+在 worktree `codex/plates` 上，由 Playwright 驱动构建后的 dist 完成；机器满载（load 80–140）。Codex 原样交付的内容单独提交为 a0a2c0e。随后合入 main（`inside-the-earth` 已在其中），本节的修复再单独提交一次。
+
+**看到的问题与已修复**
+
+1. **点图层在区域视图里几乎看不见。** 原半径曲线是为城市尺度设计的（zoom 9 → 1.2 px），火山与 NCEI 观测点在 zoom 1–7 都只有针尖大小，例如 02-2、04-2 的说明写着“出现观测点”，图上却看不清。
+   - 修复：zoom ≤ 8 时，普通点改为 2.2 px，新增环改为 3 px；zoom 9–14 的曲线不变，singapore-land-use 的镜头全在 zoom 10.2 以上，不受影响。
+   - 复看：三组观测、火山、震级编码的地震都清楚可读，图例齐全。
+2. **PLATE 块溢出到底部章节轴下面。** 10 个计数层，每层都带 REF.、版本和说明，而且两个 `<small>` 首尾粘连（“2026-10-26FIXED…”）。1080p 及以下，文字从章节轴的半透明底下透出来。`--layout` 的面板检查没有抓到这种溢出。
+   - 修复：`.ts-plate` 改为在左列内滚动。
+   - 修复：REF. · 版本 · 说明合成一行小字。若干层的版本和说明完全相同（PB2002 的四类），只在第一层写一次。
+3. **目录详情排在正文和索引之后**（TimeScene 的 `inspector` 槽位于面板末尾），违反 HUD 铁律 c。shoot 的目录检查在 8 章全都失败；第一轮报告只给计数，现在改为逐条打印。
+   - 修复：`CatalogueInspector` 与图层载入失败提示改用 `readerTop`（章头正下方），并在选中时滚到可见处。
+   - 未改：旧的事件 / 实体详情仍在原槽位。这个问题由并行的 docs/50 E-MW3 和 docs/51 E-IR1 处理，本分支不动，避免冲突。
+4. **其他小修**
+   - 目录索引行加上稳定 id（2004 年观测有 332 条同名的 “ACEH, SUMATRA”）。
+   - 中文影响记录改用全角冒号。
+   - 04 章 EN／ZH 的总数动词按 §0.2 统一为“记载 / records”，不再写“估计 / estimates”。
+   - `inside-the-earth` 已合并，REVIEW 三所列 6 处（EN／ZH 各一）恢复为只带 slug 的 `TopicLink`。
+   - 修正 THIRD-PARTY-NOTICES 与生成的 SOURCES.md 里缺空格的版本号和许可写法（如 “ODC-BY1.0”“snapshot2026-10-26”）。
+   - 冻结数据的单测在满载时会超过 5 s，给了 30 s 时限。
+5. **性能**：所有带日期图层的 View 原本在每个计数边界都整体重渲染，现在只在目录层的边界重渲染。这样 HDB 这类普通 dated 图层拖动时保持原来的开销。
+6. **旧主题行为回归**：Codex 把所有 dated 图层都改成“首次开启才载入”，而且逐层串行载入，旧主题的行为因此改变。singapore-land-use 在 e2e 中只载入当前章开启的层，旧版是全部载入；sample-dated-layers 的载入也更慢。
+   - 修复：只有带 `catalogue` 的层懒载，普通 dated 层恢复在地图载入时全部取回。
+   - 修复：同一批新开启的层改为并行取回、并行准备，再按定义顺序提交到地图，图层叠放顺序不变。
+   - 同样的满载下实测 sample-dated-layers：从 ready 到 3 层全部就绪，main 构建 4.3–5.5 s，本分支 5.6–7.3 s。多出的时间来自 250 条一批的让出。
+7. **图例缺版本**：参考层的 KEY 行加上“· REF. <release>”。本题 e2e 本来就检查这一点，但实现漏掉了。
+8. **e2e 本身的问题**：
+   - 手机端地图标签按设计隐藏，改为直接触发标签按钮的选择动作；
+   - reload 或 goto 之后先等 `__atlas.ready`；
+   - 读取几 MB 数据的就绪等待放宽到 30 s；
+   - 合成 fixture 的拦截路由在 service worker 缓存之后会失效，所以 fixture spec 阻止 service worker。
+
+**载入与预算**
+- 发布几何 1.45 MB，目录 4.98 MB。
+- 每层在首次开启时才载入，深链到某章只取该章的图层；`data.json` 为 46 KB。
+- 首屏（背景章）取：
+  - 4 个 PB 文件和火山几何：690 KB，gzip 后 118 KB；
+  - 它们的目录：2.08 MB，gzip 后 121 KB；
+  - 加上已有的 land-50m。
+- 地震目录（1.74 MB）和 2004 年观测目录（0.93 MB）只在第 03、04 章及以后才取。
+- 首屏为背景章而预取的 PB 目录文字，见 FIXES.md F1。
+- 页面 JS 457 KB gz，分 10 个文件；超出 docs/02 预算的旧债仍在。
+
+**门槛结果**（满载 load 110–220，约 10 个代理同时开浏览器）
+- **全量 shoot**：`pnpm shoot plates-and-hazards --beats --tasks --keys --layout --locale en,zh --theme paper,cinema`，用修复后的构建跑。
+  - 4 个组合 × 38 拍，0 失败；目录选中检查 8 章 × 4，0 失败；console 干净，无外部请求。
+  - 偶发：en-cinema 的 drag 键检查失败 1 次（帧率 1–4 fps，没能进入自由镜头）。
+  - 偶发：4 次 `content wider than panel: bar`，出现在缩放到不同尺寸的瞬间；在 2560×1440 直接载入后测量为 1463 = 1463，没有溢出。
+  - “chapter highlights” 的无标注清单（只列出、不算失败）各轮结果不一。
+  - 合并并恢复旧图层的预载之后，又跑了一遍 `--beats`（zh/cinema）：38 拍 0 失败，目录检查 8 章全部通过。
+- **`--perf --gpu`**：8 章与全部模式、预设都是 60 fps，要素 7,092–10,837 个。
+- **TimeScene 回归 `--beats --keys`**：
+  - ww2、singapore-after-1965、ancient-civilisations、singapore-land-use 的节拍都是 0 失败。
+  - 键检查里，`h`（HUD 恢复按钮淡入）和 `drag` 在不同主题、不同轮次之间时好时坏。shoot 里本来就有说明：主线程被占时这两项会超时；本题自己的 `h` 在 4 个组合都通过。
+  - 恢复预载之后，singapore-land-use 重跑两次都卡在 `page.screenshot` 30 s 超时（机器满载），没能跑完。
+- **`pnpm check`** 0 错误 0 警告；**`pnpm validate`** 59 主题 0 错 0 警告；**`pnpm test`** 165 个文件、4,327 项全部通过。
+- **e2e**：协调方要求不跑全量，只跑相关 spec（`--workers=2`，端口 5491）。
+  - 本题、两个合成 fixture spec 与 smoke 的 deep-link 用例全部通过：plates-and-hazards 8/8，sample-science-layers 7/7，sample-science-impacts 2/2。
+  - singapore-land-use（3）、dated-layers（2）与 smoke 的 sample-space（2）在同样的负载下，用 main 的导出构建同样失败，属于负载造成，不是本分支的回归。
+
+**留给 Codex（FIXES.md）**
+- F1：目录文字改为用到才取；
+- F2：地震时间戳显示为 ISO UTC；
+- F3：喷发段原始字段与千分位年份（“1,815”）。
+
+**给 Gavin 的判断项**：见 REVIEW.md 五。主题保持 `status: draft`。

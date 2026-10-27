@@ -787,6 +787,7 @@ async function runCatalogues(s: Session, out: string, report: RunReport): Promis
     selectedScreen?: [number, number] | null;
   };
   const chapters = await s.ev(() => window.__atlas!.chapters());
+  const before = report.beatFailures.length;
   let selected = 0;
   for (const chapter of chapters) {
     await s.apply({ chapter, wait: 400 });
@@ -833,6 +834,7 @@ async function runCatalogues(s: Session, out: string, report: RunReport): Promis
   }
   await s.apply({ wait: 300 });
   console.log(`  catalogue selections: ${selected} chapters checked (50-row cap, inspector order, anchor)`);
+  for (const failure of report.beatFailures.slice(before)) console.log(`    FAIL ${failure}`);
 }
 
 /** Ids each chapter's own state asks to label (TimeScene `highlight`, SpaceScene `labels`) with no label on screen at the chapter camera: listed, never a failure. */

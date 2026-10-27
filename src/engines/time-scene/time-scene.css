@@ -1162,6 +1162,8 @@ button.ts-co:focus-visible {
 .ts-plate {
   border-top: 1px solid var(--line);
   text-shadow: none;
+  /* Many counted layers (docs/49: ten) scroll inside the column instead of running under the bottom axis. */
+  overflow-y: auto;
 }
 .ts-plate__head {
   display: flex;
@@ -1206,6 +1208,12 @@ button.ts-co:focus-visible {
   font: 500 calc(12 * var(--u)) / 1.5 var(--font-mono);
 }
 .ts-plate__row[data-enabled="false"] dd { color: var(--ink-3); }
+.ts-plate__ref {
+  display: block;
+  font: 400 calc(9.5 * var(--u)) / 1.4 var(--font-hud);
+  letter-spacing: .02em;
+  text-transform: none;
+}
 
 /* A bounded catalogue belongs at the chapter's existing reader-end slot. */
 .ts-catalogue-index { border-top: 1px solid var(--line); padding-top: 12px; }
@@ -1213,5 +1221,7 @@ button.ts-co:focus-visible {
 .ts-catalogue-index ul { list-style: none; padding: 0; }
 .ts-catalogue-index button { min-height: 44px; color: var(--ink); background: transparent; border: 0; border-bottom: 1px solid var(--line); text-align: start; padding: 8px; width: 100%; }
 .ts-catalogue-index button[aria-pressed="true"] { color: var(--signal); }
+/* Many records share a place name (332 × ACEH, SUMATRA): the stable id tells the rows apart. */
+.ts-catalogue-index li button small { display: block; color: var(--ink-3); font: 400 calc(10 * var(--u)) / 1.4 var(--font-mono); }
 .ts-catalogue-index nav { display: flex; align-items: center; gap: 12px; }
 .ts-catalogue-index nav button { width: 44px; }

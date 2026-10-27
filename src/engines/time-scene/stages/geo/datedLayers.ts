@@ -25,10 +25,11 @@ export function datedLayerStyles(def: DatedLayerDef, tokens: ThemeTokens, color:
   const id = (part: string) => `${source}-${part}`;
   const filter = def.temporal?.mode === 'reference' ? ['all'] as ExpressionSpecification : datedLayerFilter(t);
   if (def.kind === 'point') {
-    const radius: ExpressionSpecification = def.encoding ? ['interpolate', ['linear'], ['get', 'mag'], 6, 2, 9.5, 8] : ['interpolate', ['linear'], ['zoom'], 9, 1.2, 14, 3];
+    // Regional and world views (≤ z8) need a readable dot; dense city-scale layers (z ≥ 9) keep 1.2–3 px.
+    const radius: ExpressionSpecification = def.encoding ? ['interpolate', ['linear'], ['get', 'mag'], 6, 2, 9.5, 8] : ['interpolate', ['linear'], ['zoom'], 8, 2.2, 9, 1.2, 14, 3];
     return [
       { id: id('point'), source, type: 'circle', filter, paint: { 'circle-radius': radius, 'circle-color': color, 'circle-opacity': 0.85 } },
-      ...(def.temporal?.mode !== 'reference' && def.recent !== false ? [{ id: id('recent'), source, type: 'circle', filter: datedLayerFilter(t, true), paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 9, 2.2, 14, 4], 'circle-color': color, 'circle-stroke-color': tokens.signal, 'circle-stroke-width': 0.8 } } as LayerSpecification] : []),
+      ...(def.temporal?.mode !== 'reference' && def.recent !== false ? [{ id: id('recent'), source, type: 'circle', filter: datedLayerFilter(t, true), paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 8, 3, 9, 2.2, 14, 4], 'circle-color': color, 'circle-stroke-color': tokens.signal, 'circle-stroke-width': 0.8 } } as LayerSpecification] : []),
     ];
   }
   if (def.kind === 'line') return [
