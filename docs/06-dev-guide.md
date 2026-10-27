@@ -528,6 +528,28 @@ URL `b` 从 1 起，store beat 从 0 起；`m` 只接受整数 1…12。优先�
 
 可运行夹具：`sample-climate`（draft、12拍），数据来源/变换哈希见其 `data/SOURCES.md`。人工2×2是测试数据，不能用于正文天气地图。
 
+### 现今地理上下文（E-SEA1–2，docs/54 §4）
+
+`temporalMode: geography` 仅用于 `time-scene / geo`：今天的国形、自然地理对象与按加入日期筛选的成员。复用 `ClimatologyStage` / controller、ClimateLoader、雨格、风箭头、原生采样、KEY、ChapterAxis 与 PRESENT；不创建历史 time model / playhead，`t=null`。`four-taps` 的控制帧/永久路线、`singapore-land-use` 的数值 f/u 层仍属于年代模式，不能拿假日期套静态地理。
+
+```json
+{"temporalMode":"geography","geography":{"asOf":"2026-10-27","geometryEpoch":"Present-day Natural Earth cartographic snapshot","dateRange":["1967-08-07","2026-10-27"],"initialContext":{"kind":"present"}}}
+```
+
+`data/geography.json` 是单份 inline 数据：`countries` 为 Polygon/MultiPolygon FeatureCollection（properties：`id,a3,name:{en,zh},sources,summary?,detail?`）；`layers:[{id,kind:'point'|'line'|'area',label:{en,zh},color:'token:…',features:FeatureCollection}]`，feature properties 为 `id,name,sources,summary?,detail?`；`anchors:[{id,name,at:[lon,lat],sources}]`；`members:[{id,a3,joined:'YYYY-MM-DD',sources}]`；`referenceItems:[{id,label,summary,detail?,sourceIds,locationRef,locationScope:'country',figure?}]`。最后者不能有 `at`，只高亮 country `locationRef`。`figure` 是本章已存在的 HTML id；仅目标在当前阅读正文中可见时显示按钮。国家/成员 id 与 A3 唯一、一一对应，日期真实且不晚于 asOf，坐标/几何、非空双语、source ids、locationRef 均验证。地理数据之外 `presets/sources/glossary` 仍用既有文件；旧 entities/control/movements/events 可省略或显式空，不接受假事件日期。
+
+图层 `geo-countries` 与 `geo-membership` 是内置的，`geo-anchors` 从有来源的 anchor 生成点（已有 point/line feature id 不再生成第二个点）；其余来自 inline `layers`。Mekong 的两条源 feature 可以共用同一 id，索引只列一次、选择时两线同亮。国形装载一次，成员日期只改 GPU filter；成员色为同一 signal token，选择描边与成员填色区分，不计算参与面积/阵营。成员谓词 `joined <= date`（ISO 日），计数按唯一国家；关成员层仍保留真实语义 count，并在 PLATE 显示“图层已关闭”。
+
+章节和每拍用 `geoContext:{kind:'present'} | {kind:'climatology',month:1…12} | {kind:'membership',date:'YYYY-MM-DD'}`，每拍显式 `selection:string|null`，章节 `index:string[]`。其余 `camera/layers/highlight/caption` 沿用。首拍是章节目标，拍按作者顺序走章轴；原子应用 context、camera、layers、highlight、selection。index 可引用国家、线/点、阅读个案、`cell-105-0` 气候格点；全部按钮 ≥44px。P/A 不显示残留月样本，C 不显示成员色；月真值只在 geoContext.month，没有第二个 month store。没有月元数据时拒绝 C 上下文。
+
+URL 保留 `ch,b,cam,layers,theme`；`gc=p|c|a` 必写合法当前 context；C 完整写 `m=1…12`，A 写 `at=YYYY-MM-DD`，P 无 m/at。先选择 ch/b baseline，再整体套有效 context override；无效/缺月或日期恢复该拍 baseline，canonical 删除 t 及冲突参数，写完整合法 context。无 gc 时忽略 m/at。跨 kind 不积累旧字段和旧气候选择；popstate/语言切换沿既有 URL 同步。
+
+月文件可按原 stem 引用已有资源，原字节与数组不复制、不改写。若本主题编号来源与原资源不同，monthlyLayers 可加 `sourceMap:{"S22":"S201","S25":"S20","S101":"S203"}`。共享 loader 和 build validator 只在解析时映射来源元数据，格网/数值原样；map 键必须在资源 sources 中，映射后的来源须与 layer.sources 一致且存在本题书目。无 sourceMap 的月主题行为不变。
+
+UI：左 PLATE 显示现今国形、上下文/日期/成员数，C 显示基准期、850 hPa/原生格距/mm/day（从实际资源元数据读取）；右 TOOLS 旁放月或日期控件，手机阅读中同功能。readerTop 为节拍→选中详情，readerEnd 为本章索引；底部只有章轴。小国家位置标记不放大国土。地图/索引/键盘/API 共享动作；C 的地图点击采样气候，国家仍可从索引选。
+
+测试 API：`engine.geography()` → `{context,geometryHash,countryCount,memberIds,memberCount,selection,visibleLayerIds,climateSample,climatology}`；geometryHash 为固定国形 JSON 的 FNV-1a 稳定校验值（原始来源 SHA-256 另在 provenance），memberIds 按 A3 排序。`setGeoContext(ctx)`、`selectGeography(id|null)`、`goToGeographyBeat(ch,index)`、`toggleGeographyLayer(id,on)` 与 `sampleClimate(lon,lat,month?)` 复用 UI；非 C 的 sampleClimate 返回 null。`ready` 等待 inline 地图 source worker 与开启月层完成。`shoot --beats` 同时记录 context/selection/geometryHash/成员集合、检查月渲染一致与 URL 重开一致。draft 夹具 `sample-geography` 有三国真实数据、8拍，明确不是全区域成员地图。
+
 ### 作者怎么写数据
 
 四个文件放 `data/`（schema 见 docs/03 §A 与 `schema.ts`）：

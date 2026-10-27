@@ -12,9 +12,20 @@ export const monthlyLayerSchema = z
     label: bilingual,
     periodId: kebabId,
     sources: z.array(sourceId).min(1),
+    sourceMap: z.record(sourceId, sourceId).optional(),
   })
   .strict();
 export type MonthlyLayer = z.infer<typeof monthlyLayerSchema>;
+/** Reuse immutable monthly files in topics whose numbered bibliography differs. */
+export function remapClimateSources(input:unknown,map?:Readonly<Record<string,string>>):unknown {
+ if(!map)return input;
+ if(!input || typeof input!=='object' || !Array.isArray((input as {sources?:unknown}).sources))return input;
+ const value=input as {sources:string[]};
+ const unknown=Object.keys(map).filter(id=>!value.sources.includes(id));
+ if(unknown.length)throw new Error(`sourceMap contains unknown resource sources: ${unknown.join(', ')}`);
+ return {...input,sources:value.sources.map(id=>map[id]??id)};
+}
+
 const finite = z.number().finite();
 const gridSchema = z
   .object({

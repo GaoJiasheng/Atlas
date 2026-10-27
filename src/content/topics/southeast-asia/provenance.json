@@ -1,0 +1,95 @@
+{
+  "acquired": "2026-10-27",
+  "crs": "EPSG:4326",
+  "licenceFamily": "PD-derived",
+  "method": "Exact source coordinates; selected properties only. No simplification, interpolation, geometric joins or invented shapes. Sea labels use prepared interior points; country anchors use source LABEL_X/Y.",
+  "inputs": [
+    {
+      "file": "countries-sea.geojson",
+      "sha256": "f44cb1973df61fc9091bb8b25ea600a927d6a5e56b9f992e27cf298addc72b46"
+    },
+    {
+      "file": "rivers-sea.geojson",
+      "sha256": "0a5c96991a946f1a42eecb40bdd4847b22e4eb627597a39ea2bbac692e334da4"
+    },
+    {
+      "file": "peaks-sea.geojson",
+      "sha256": "47c1447d0f4c38929691ec21cb51092111135cb1eb78f117f1c75fce7daaed0d"
+    },
+    {
+      "file": "marine-reference-sea.geojson",
+      "sha256": "8d240ae980015062175bc88099819bdf15b05617cd19ce8c51a9da76a479a02e"
+    },
+    {
+      "file": "anchors-sea.json",
+      "sha256": "e5b88c6433598ba3051b98df45df5e7665bded9ea7c80154190a523dd1eb0cd2"
+    },
+    {
+      "file": "cities-sea.geojson",
+      "sha256": "9eb14be6e9ed94ab0c6761227af44af4451844b4f769946e95c7caf4ba250342"
+    },
+    {
+      "file": "membership-sea.json",
+      "sha256": "16e37a76a456b13e3d765d6cffc0b3e0f373ac455f010934819bad412c7c55ee"
+    }
+  ],
+  "output": {
+    "file": "geography.json",
+    "bytes": 1087033,
+    "sha256": "c4da17f18e1681f707a4bb6d019de81d92c3e83534d9d0450aac5d589facbb42",
+    "countryGeometrySha256": "2c72413ff669f7e486ce84cb903202c309d6c0ccc8131b586f9fa1bf35000f9d"
+  },
+  "countries": [
+    {
+      "id": "geo-idn",
+      "neId": 1159320845
+    },
+    {
+      "id": "geo-mys",
+      "neId": 1159321083
+    },
+    {
+      "id": "geo-vnm",
+      "neId": 1159321417
+    },
+    {
+      "id": "geo-khm",
+      "neId": 1159320979
+    },
+    {
+      "id": "geo-lao",
+      "neId": 1159321011
+    },
+    {
+      "id": "geo-tha",
+      "neId": 1159321305
+    },
+    {
+      "id": "geo-tls",
+      "neId": 1159321313
+    },
+    {
+      "id": "geo-brn",
+      "neId": 1159320451
+    },
+    {
+      "id": "geo-mmr",
+      "neId": 1159321067
+    },
+    {
+      "id": "geo-phl",
+      "neId": 1159321169
+    },
+    {
+      "id": "geo-sgp",
+      "neId": 1159321247
+    }
+  ],
+  "riverSourceNames": [
+    "Ayeyarwady",
+    "Hong",
+    "Lancang",
+    "Mekong",
+    "Chao Phraya"
+  ]
+}
