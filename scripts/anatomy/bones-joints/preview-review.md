@@ -5,7 +5,7 @@ side-by-side source and simplified images with the image-view tool. These are
 deterministic CPU orthographic triangle projections, **not native Blender renders
 or browser screenshots**.
 
-The inspected copies are archived in `previews/source-vs-reduced-{front,back,left,pose}.png`
+The inspected copies are kept locally (not in git) in `scripts/anatomy/cache/bones-joints/previews/source-vs-reduced-{front,back,left,pose}.png`
 beside this record (CC BY-SA 4.0). The large intermediate triangle arrays remain
 in the ignored cache; the archived diagnostics are available without rerunning it.
 

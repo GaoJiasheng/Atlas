@@ -723,7 +723,11 @@ export function PartNode(props: PartNodeProps) {
     m.cast = cast;
     // See-through families (membrane, glass) never hide what is behind them from the labels.
     handle.fade = m.fade * style.look.opacity;
-    handle.visible = shown && display.visible;
+    const nowVisible = shown && display.visible;
+    // The label probe reads handles before this node in a frame: a snapped change (load, deep link)
+    // needs one more frame, or its anchor keeps the old visibility and its label never appears.
+    if (handle.visible !== nowVisible) keepAnimating(state.invalidate);
+    handle.visible = nowVisible;
 
     // Selection edge (hover: weaker).
     const selTarget = display.selected ? 1 : props.hovered && display.visible ? 0.45 : 0;

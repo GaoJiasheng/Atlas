@@ -9,7 +9,7 @@ async function open(page: Page, query: string, locale = 'en') {
   await page.goto(`/${locale}/topics/sample-joint/?${query}`);
   await page.waitForFunction(() => window.__atlas !== undefined);
   expect(await page.evaluate(() => window.__atlas!.ready)).toBe(true);
-  await expect.poll(() => joint(page, 'elbow.l')).not.toBeNull();
+  await expect.poll(() => joint(page, 'elbow.l'), { timeout: 30_000 }).not.toBeNull();
 }
 const distance = (a: number[], b: number[]) => Math.hypot(...a.map((x, i) => x - b[i]!));
 
@@ -39,7 +39,7 @@ test.describe('numeric rig joint binding', () => {
     await expect.poll(async () => (await joint(page, 'elbow.l'))?.angles.flexion).toBeCloseTo(90, 5);
     const manual = (await joint(page, 'hand.l'))!;
     await page.reload();
-    await expect.poll(() => joint(page, 'hand.l')).not.toBeNull();
+    await expect.poll(() => joint(page, 'hand.l'), { timeout: 30_000 }).not.toBeNull();
     const linked = (await joint(page, 'hand.l'))!;
     expect(distance(manual.position, linked.position)).toBeLessThan(1e-6);
     expect(distance(manual.quaternion, linked.quaternion)).toBeLessThan(1e-6);

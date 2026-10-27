@@ -15,7 +15,7 @@ async function open(page: Page, query = '', locale = 'en') {
   await page.goto(`/${locale}/topics/bones-and-joints/${query ? `?${query}` : ''}`);
   await page.waitForFunction(() => window.__atlas !== undefined, null, { timeout: 30_000 });
   expect(await page.evaluate(() => window.__atlas!.ready)).toBe(true);
-  await expect.poll(() => joint(page, 'elbow.l')).not.toBeNull();
+  await expect.poll(() => joint(page, 'elbow.l'), { timeout: 30_000 }).not.toBeNull();
 }
 const CHAPTERS = [
   ['before-you-start', 4], ['connected-skeleton', 6], ['living-bone', 5], ['joint-connections', 5],

@@ -178,7 +178,7 @@ function ForceArrows({
 
 
 type Vectors = Extract<SimOverlay, { kind: 'force-vectors' }>;
-/** A force arrow's shaft and head scale with the overlay's `per` (the length of 1 N): this many newtons' worth. */
+/** A force arrow's shaft and head scale with the overlay's `width`, else its `per` (the length of 1 N): this many newtons' worth. */
 const VECTOR_FULL = 1.6;
 const tmpStart: Vec3 = [0, 0, 0];
 const tmpDir: Vec3 = [0, 0, 0];
@@ -228,7 +228,7 @@ function ForceVectors({
   useEffect(() => {
     m.current.snap = true;
   }, [snapKey]);
-  const full = overlay.per * VECTOR_FULL;
+  const full = overlay.width ?? overlay.per * VECTOR_FULL;
 
   useFrame((state, delta) => {
     const dt = Math.min(delta, MAX_DT);

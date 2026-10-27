@@ -49,6 +49,6 @@
 - 最后集成发现PLATE缺telemetry；补齐四行及本章观察量，并同步离线生成器。新增连线断言后，最终内容单测7/7通过；新测试总数为18引擎+5几何+7内容=30。全套记录加上最后新增用例，共4,307个不同用例具有通过记录。
 - 最终`pnpm build`通过，121静态页面。直接读取构建HTML/JSON：EN/ZH目录各35卡，均有本主题链接；数据包含62件（61可选）、4条PLATE读数、24静力行、34来源、20术语；两语言props均包含四个观察量。`git diff --check`通过。
 - GLB为3,024,092bytes、313,580triangles、44mesh nodes/19joints；236源结构采样误差最大0.945331684mm，压缩bbox最大0.002653061mm。源清单每侧12肋、10肋软骨，胸骨3实际结构。详见`scripts/anatomy/bones-joints/report.md`和独立audit输出。
-- 已目检原图/处理图与正、背、左、肘姿态CPU源比较。CPU诊断归档在`scripts/anatomy/bones-joints/previews/`；不声称查看过浏览器截图。
+- 已目检原图/处理图与正、背、左、肘姿态CPU源比较。CPU诊断归档在`scripts/anatomy/cache/bones-joints/previews/`（本地，不进git）；不声称查看过浏览器截图。
 
 Browser gates were deliberately not executed, as the build brief forbids them in this sandbox. Main-session handoff uses `ATLAS_E2E_PORT=5445`, with per-beat/keys/tasks/layout screenshots in EN/ZH and paper/cinema, including390×844. Native Blender startup exited139; named anatomy approval, actual muscle deformation, labels and runtime performance remain pending. No git writes, package or lockfile changes were made.

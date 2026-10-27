@@ -81,5 +81,8 @@ describe('bones and joints: exact source geometry packet', () => {
       expect(p[0]!*a.dir[1]-p[1]!*a.dir[0]).toBeCloseTo(.04,12);
       expect(a.when).toEqual({control:'elbow-angle',is:{eq:degrees}});
     }
+    // per = 0.001 m/N would scale the shaft to a hairline; width keeps it readable beside the 14 mm beam.
+    expect(overlay.width).toBeGreaterThanOrEqual(.05);
+    expect(overlay.arrows.find(a => a.part === 'lever-load')?.at).toBe('bottom');
   });
 });

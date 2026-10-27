@@ -909,7 +909,9 @@ export const simOverlaySchema = z.discriminatedUnion('kind', [
   /**
    * Force arrows (docs/30 F3): `per` scene units per newton (default 0.03),
    * at most `max` long (0.25), faded below 0.05 N; all arrows one draw call;
-   * `group`: a group (LAYERS row) they show with.
+   * `group`: a group (LAYERS row) they show with. `width`: the thickness
+   * scale in scene units (default `per` × 1.6), for a small `per` whose
+   * arrows would otherwise be hairlines.
    */
   z
     .object({
@@ -917,6 +919,7 @@ export const simOverlaySchema = z.discriminatedUnion('kind', [
       arrows: z.array(forceArrowSchema).min(1).max(24),
       per: pos.default(0.03),
       max: pos.default(0.25),
+      width: pos.optional(),
       group: kebabId.optional(),
     })
     .strict(),

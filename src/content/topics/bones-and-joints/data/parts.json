@@ -3774,6 +3774,7 @@
         "group": "force-overlay",
         "per": 0.001,
         "max": 0.2,
+        "width": 0.06,
         "arrows": [
           {
             "part": "lever-load",
@@ -3786,6 +3787,7 @@
             "value": {
               "output": "load"
             },
+            "at": "bottom",
             "when": {
               "control": "mode",
               "is": {

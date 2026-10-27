@@ -1342,7 +1342,7 @@ interface Timeline {
 ```
 
 - `force` ∈ `gravity` / `friction` / `elastic` / `push` / `magnetic` → token `--f-gravity` / `--f-friction` / `--f-elastic` / `--f-push` / `--pole-n`（docs/08 §1）；KEY 名称"Gravitational force / 重力""Frictional force / 摩擦力""Elastic spring force / 弹簧的弹力""Push or pull / 推力或拉力""Magnetic force / 磁力"（`lib/sim/arrows.ts`）。
-- `value`：一个数、一个数输出（缓动）、或时间线输出的 `channel`（跟着播放走）；负值反向。长度 = `per`（默认 0.03 m / N）× 牛顿，≤ `max`（默认 0.25）；粗细与箭头按 `per` 缩放；< 0.05 N 淡出。起点 = 零件包围盒的中心 / 顶 / 底（`at`）+ `offset`，跟着零件的姿态、offset、`play` 走（读标注锚点）。方向随选项变时写几支带 `when` 的箭头（推的方向）。
+- `value`：一个数、一个数输出（缓动）、或时间线输出的 `channel`（跟着播放走）；负值反向。长度 = `per`（默认 0.03 m / N）× 牛顿，≤ `max`（默认 0.25）；粗细与箭头按 `per` 缩放，可选 `width`（场景单位）另给粗细尺度（`per` 很小时，例如 bones-and-joints 的 0.001 m / N，否则箭头细成发丝）；< 0.05 N 淡出。起点 = 零件包围盒的中心 / 顶 / 底（`at`）+ `offset`，跟着零件的姿态、offset、`play` 走（读标注锚点）。方向随选项变时写几支带 `when` 的箭头（推的方向）。
 - 一个叠加的全部箭头 = 一个网格（顶点色带透明度），**一次绘制**；零件不在场、`when` 不成立、`group` 的图层关着、EXPLODED 时淡出。`group`：一个没有零件的组（LAYERS 一行"Forces / 力"，章 / 拍的 `layers` 照常控制它）。
 - **KEY**：控制面板的图例自动加上此刻画着的力（箭头的零件在场、`when` 成立、图层开着、时间线在整段里有一处 ≥ 0.05 N 或数 ≥ 0.05 N；`forcesOnShow`）。
 - validate：零件存在、方向非零、数输出 / 时间线通道存在、`when` 的控件或输出存在、`group` 存在；**被 `play` 转动的零件（车轮）不能画摩擦力箭头**（课纲 Note：滚动物体的摩擦方向不要求，docs/30 D3）。

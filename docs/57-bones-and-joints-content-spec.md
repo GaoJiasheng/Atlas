@@ -497,7 +497,7 @@ pnpm check、validate、test、build必须运行并记录结果。浏览器shoot
 - 61可选语义件+1皮肤context；34全身骨区域、7真实左手细部骨、2真实肌肉、18原创教学件。6组（骨截面/力层不进链路卡，4列）、6镜头预设、8命名姿态；没有流、没有循环clips。04改为逐拍命名终点姿态，避免共享rig片段同时驱动同一关节。教学肌腱不冒充独立扫描结构；精确止点事实与模型候选骨面人审区分。
 - 保留既有table：24行、9数输出（6力学量及distance/tip-x/tip-y布局量）；四个PLATE跟随量为load/load-arm/muscle-force/angle，并由本章observe限定。最后集成复核补齐了最初遗漏的telemetry；新增内容单测检查读数连线，离线生成器同步。角度绑定只覆盖elbow.l；探索/其它章无覆盖。梁在x=4，与成人手臂分工位；正文提供ELBOW镜头链接作数值角度对照。
 - GLB：3,024,092 bytes、313,580 triangles、44 mesh nodes、49材质primitive、19关节；SHA `4ddb706ff0664f772e294d6210294258556775a3037cf7c3a3ed51fead6f362e`。骨架源236项双向采样误差最大0.945331684 mm；压缩后bbox最大附加差0.002653061 mm；未放宽1 mm/4MB/350k门槛。失败的两侧顶骨及第四肋软骨恢复源几何；保留每侧First–Twelfth十二肋+十块软骨。源肌肉的逐mesh量化先解码到bind world再合并，避免共用错误inverse bind矩阵；蒙皮/纤维/关节链沿用源数据。
-- Blender启动139，改走主题内Three FBXLoader+独立二进制FBX控制点审计与glTF压缩输出检查。不是原生Blender验收。正/背/左/肘姿态CPU source/reduced对比均已目检并归档`scripts/anatomy/bones-joints/previews/`，详见report/preview-review；不把骨刚性投影当真实肌肉形变或浏览器画面检查。所有附着/局部关节轴仍为pending人审。
+- Blender启动139，改走主题内Three FBXLoader+独立二进制FBX控制点审计与glTF压缩输出检查。不是原生Blender验收。正/背/左/肘姿态CPU source/reduced对比均已目检并归档`scripts/anatomy/cache/bones-joints/previews/`（本地，不进git），详见report/preview-review；不把骨刚性投影当真实肌肉形变或浏览器画面检查。所有附着/局部关节轴仍为pending人审。
 - 保护器官图用built-in image_gen经3次编辑重绘：12对肋骨、胸骨、后方脊柱、心肺位于胸廓内；第二次修正下方肋弓/浮肋，第三次清除两片孤立残片。最终原图与WebP逐对目检；临床准确性未获具名认证。prompt、hash、检查局限见主题`FIGURES.md`。两张既有approved图逐张检查后沿用。输出封面80,164/240,250 bytes，活骨图98,398 bytes，保护图118,178 bytes，均在illustrate预算内。
 - LICENSE-CONTENT/THIRD-PARTY-NOTICES明确整个parts/GLB/源派生rig/sites/预览/截图为BY-SA；独立图与OpenStax教学正文/名词表为NC-SA，互不烘入同一派生文件。另登记sample-joint的BY-SA parts。9个已出版相邻主题只增加双语回链句；smoke预期35主题、13biology、70badges、末版35。
 
@@ -515,3 +515,12 @@ pnpm check、validate、test、build必须运行并记录结果。浏览器shoot
 | native / human anatomy / runtime perf | Blender启动139；原生、人审与实际浏览器材质/变形/标签/手机/性能均未标通过。CPU源比较、离线mesh预算与数值审计不替代这些门槛。 |
 
 主会话：先`pnpm build`，再`pnpm shoot bones-and-joints --beats --tasks --keys --layout --locale en,zh --theme paper,cinema`，并检查390×844、每章标签、模式组合及runtimecalls。引擎fixture用`pnpm shoot sample-joint --beats --keys --layout`，回归forces/muscles-arms；最后`CI=1 ATLAS_E2E_PORT=5445 pnpm e2e`。两个新增e2e文件及smoke预期已落地。Gavin后审清单见主题REVIEW：六型/中文名称、牛顿读数位置、成人左右/比例、肌腱止点和轴的人审、重绘图逐对肋数/比例、双主题与手机视觉及性能。
+
+### 9.4 浏览器验收（Claude，2026-10-27）
+
+- **看了什么**：`--beats --keys`（en-paper 1920×1080，40拍全部逐张看，40/40拍链接与演示一致，键位全OK）；章节+模式镜头四组合（en/zh × paper/cinema，--gpu）；`--layout` en/zh 八个尺寸含1024×768、390×844，0 layout issues；另用深链在1600×900逐章核对标签、读数与关节。全负载机器上非GPU的`--layout`/逐拍zh、cinema两次截图超时，改用--gpu重跑；zh/cinema逐拍未跑，以章节镜头代替。
+- **性能**（`--perf --gpu`，Apple M5 Max / ANGLE Metal，缓冲1520×1023）：全身视图37 calls、288,055 tris；各章5–37 calls、3k–288k tris；稳定后59–63 fps（前三章预热期18–46 fps，机器负载≈200）。GLB 3,024,092 B / 313,580 tris，低于软目标4 MB / 350k；只由本主题页按需加载，不进PWA预缓存。首屏JS 521.8 KB gz / 12文件，为共享引擎包（steam-engine合并时记500.3 KB），非本主题新增。无需减面或拆分加载。
+- **解剖/数值**：源清单两侧各12条命名肋+肋软骨，胸骨三段，桡尺、胫腓、髌骨独立，颅骨27件、手27件、足26骨+籽骨；杠杆字幕与表一致（L=.30、θ=90 → 150 N；θ=30 → 垂直力臂.15 m → 75 N），θ为前臂自竖直向下转角，与左肘flexion同值；04六型每拍单一示例关节、姿态与字幕相符；二头肌→桡骨、三头肌→尺骨鹰嘴。
+- **本轮修正**：力箭头因`per`=0.001被缩成发丝（引擎新增可选`width`，主题用0.06，负载箭头改`at: bottom`）；首次载入/深链时标签不出现（PartNode可见性翻转时多请求一帧）；01-05、04-01/03/04/05镜头按实际标本包围盒重取景；CPU预览PNG移出git。
+- **未通过、交回Codex**（`src/content/topics/bones-and-joints/FIXES.md`）：F1 保护器官图实为每侧14条肋（7真肋+4假肋+3浮肋），须重绘为12对；F2 61件零件详情是审查口吻，需改写为学生文字；F3 骨截面、通用滑膜关节、四个修复标本的原创几何不达技术图版标准，关节软骨画成悬空圆片、红骨髓缺失；F4 杠杆工位无支点与0.04 m附着标记。
+- **另记**：深链上仅肘屈的姿态时，蒙皮零件标签锚点停在静息位（04-02、05-02/03的尺骨），main上muscles-arms同样存在，属引擎既有问题。
