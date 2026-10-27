@@ -320,6 +320,10 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
           svg.innerHTML = glyphMarkup;
           if (renderedMonth !== month) commits++;
           renderedMonth = month;
+        } else if (renderedMonth !== month) {
+          // The rain source was still (re)tiling, e.g. after a camera flight: try again once the map
+          // is idle, or the month on show stays one beat behind until the next interaction.
+          map.once('idle', requestRender);
         }
         publish();
       });

@@ -605,7 +605,9 @@ PRESENT 的字幕自足；图只在普通阅读出现。退出演示沿用恢复
 4. **共享核心收缩。** `setClimatologyMonth` 从共享 `core/store.ts` 移到 `time-scene/lib/climatology-state.ts`（同一校验，UI/快捷键/测试 API 共用）；其余核心改动（`m` codec、`fromUrl(fields, topic)`、月模式 hydration/popstate、`ready()`、`monthStep`、`revealReader`、按 temporalMode 懒加载视图、`engineSchemas(…, temporalMode)`）都只在 climatology 分支生效，保留。
 5. **图层与图例卡**改用历史视图同一 `ts-overlay` 结构（关闭时为图标芯片）；≥760 px 默认展开（雨色阶是读图必需），手机默认收起，不再盖住半张地图。“正在查看”提示阅读面板与 PRESENT 共用 `exploringText`（月名而非“month 7”）。
 6. **许可。** 撤回 LICENSE-CONTENT 的 PD-derived 例外段：公有领域数据只需署名，不需要也不应写成另一种许可例外；改为 THIRD-PARTY-NOTICES 地理数据表的三行鸣谢（NCEP/NCAR R1、GPCP v2.3、NE 110m 城市点）。§3 第 299 行与 §8 勾选项里“LICENSE-CONTENT 列例外”的要求据此作废。rain token 移到 holder 色之后、带独立注释，hex 改小写。
-7. **KEY 来源。** 引擎原在每层来源芯片后硬编码追加 `S199`（本题专有 id）；改为作者字段 `climatology.keySources: ["S199"]`（可选，validate 检查 id 在 sources.json）。正式主题照此写。
+7. **规范 URL。** 宿主在月视图懒加载完成前就开始同步 URL，那时只能用章首拍作基线，`?ch=…&b=3&m=13` 会被写成 `b=3&m=2&cam=…`。基线改为 `lib/climatology-state.ts` 的 `monthlyUrlBaseline`，宿主与视图共用，首次写入即规范。e2e 里这个连开 8 次页面的用例放宽到 180 s。
+8. **月份提交卡住。** 月份只在雨源已加载的那一帧提交；镜头飞行后雨源仍在重切片时，那一帧判“未就绪”就放弃，之后没有事件再触发，地图会停在上一拍的月份（重负载下 shoot 每拍复现）。现在未就绪时挂一次 `map.once('idle')` 重试。shoot 在判定每拍和每个 `?ch&b` 链接前等月份提交（≤10 s），再判、再截图。
+9. **KEY 来源。** 引擎原在每层来源芯片后硬编码追加 `S199`（本题专有 id）；改为作者字段 `climatology.keySources: ["S199"]`（可选，validate 检查 id 在 sources.json）。正式主题照此写。
 
 仍未达标/留给正文：月页静态 JS 约 447 KB gzip（>400 KB 目标，主要是既有 MapLibre 与 React，未在本轮重构）；iPad 真机切月 p95 未测。
 

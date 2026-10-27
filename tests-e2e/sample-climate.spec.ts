@@ -98,6 +98,8 @@ test.describe('sample-climate monthly TimeScene', () => {
     expect(((await sample(page, [103.85, 1.3])).rain as { rate: number }).rate).toBe(4.8847475);
   });
   test('deep-link precedence, invalid months, canonical URL and refresh', async ({ page }) => {
+    // Eight fresh page loads, each waiting for both monthly layers to draw.
+    test.setTimeout(180_000);
     await open(page, 'ch=northeast-monsoon&b=3&m=7&t=1942&utm=fixture');
     expect(await page.evaluate(() => window.__atlas!.state())).toMatchObject({
       beat: 2,

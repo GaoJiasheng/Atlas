@@ -5,7 +5,7 @@ import { engineSchemas, validateEngineChapterState } from '../../src/engines/sch
 import { createSceneStore } from '../../src/engines/core/store';
 import { decodeSceneState, encodeSceneState, mergeSearch } from '../../src/engines/core/url-state';
 import { timeSceneEngine } from '../../src/engines/time-scene';
-import { monthlyUrlPatch, monthlyBeatScene, cycleMonth, setClimatologyMonth, type ClimatologyExt } from '../../src/engines/time-scene/lib/climatology-state';
+import { monthlyUrlPatch, monthlyUrlBaseline, monthlyBeatScene, cycleMonth, setClimatologyMonth, type ClimatologyExt } from '../../src/engines/time-scene/lib/climatology-state';
 import { tickPosition, stepBeat } from '../../src/engines/core/axis/axis';
 import { buildBeats } from '../../src/engines/core/presentation/beats';
 import type { Chapter, SceneSnapshot } from '../../src/engines/core/types';
@@ -189,10 +189,9 @@ describe('monthly state and URL priorities', () => {
       t: null,
       camera,
     });
-    const baseline = {
-      ...monthlyBeatScene(store, chapters, 'northeast-monsoon', 2),
-      beat: 0,
-    };
+    // The same baseline SceneHost uses before the view has loaded (and the view after).
+    const baseline = monthlyUrlBaseline(store, chapters, store.getState())!;
+    expect(baseline).toEqual({ ...monthlyBeatScene(store, chapters, 'northeast-monsoon', 2), beat: 0 });
     expect(mergeSearch('?utm_source=x&t=1942', encodeSceneState(store.getState().snapshot(), baseline))).toBe(
       '?ch=northeast-monsoon&b=3&m=7&utm_source=x',
     );
