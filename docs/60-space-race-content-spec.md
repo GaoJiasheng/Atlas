@@ -139,7 +139,7 @@ K0–K7 是日期上的空 FeatureCollection，不是手画国家面；海岸始
 | 拍 | 日期 / camera | highlight / 证据 id | Caption EN | 字幕 ZH | facts |
 |---|---|---|---|---|---|
 | 1 | 1957-10-04 / baikonur | `ev-sputnik-orbit` | Sputnik 1 becomes the first artificial satellite to orbit Earth. | 斯普特尼克1号成为第一颗环绕地球的人造卫星。 | SR004,SR005 |
-| 2 | 1957-11-03 / baikonur | `ev-laika-flight` | Sputnik 2 carries Laika without a return system. She does not survive. | 斯普特尼克2号带着莱卡飞行，没有返回系统；她未能生还。 | SR008 |
+| 2 | 1957-11-03 / baikonur | `ev-laika-flight` | Sputnik 2 carries Laika without a return system. She dies during the flight. | 斯普特尼克2号带着莱卡飞行，没有返回系统；她在飞行中死去。 | SR008 |
 | 3 | 1958-02-01 / florida | `ev-explorer-orbit` | Explorer 1 is the first US satellite; Florida’s launch date is 31 January. | 探险者1号是美国第一颗卫星；佛罗里达当地发射日是1月31日。 | SR006 |
 | 4 | 1958-10-01 / world | `ev-nasa-operations` | NASA begins operations after Explorer 1 has already flown. | NASA 开始运作时，探险者1号已经飞行。 | SR007 |
 | 5 | 1959-10-07 / baikonur | `ev-luna-early` | The 1959 Luna probes fly past, impact, and photograph the Moon. These are different results. | 1959年的月球号探测器分别飞越、撞击与拍摄月球，成果各不相同。 | SR015 |
@@ -512,3 +512,17 @@ timePresentation?: {
 
 浏览器shoot/e2e按任务brief在沙箱内跳过，未启动或控制用户浏览器/桌面；主会话用5448端口完成真正视觉与交互验收。静态地图审计和单元测试不能替代这一项。所有修改仅留工作树，无git写操作。
 
+
+### 9.4 合并 main 与浏览器验收（Claude，2026-10-27）
+
+**合并**：先把 Codex 交付原样提交，再 `git merge main`（E-IR1 章节索引、月气候层、zheng-he、industrial-revolution）。冲突按 main 的 E-IR1 解决：所有 TimeScene 主题的事件 / 实体详情都在 `readerTop`，章末索引是作者写的 `state.index`（`ChapterIndex`）。Codex 按高亮自动推导的 missions 索引（`missionChapterIndex`、`time.mission.index`）删除；space-race 与 sample-missions 各章改为显式 `state.index`，行与原推导结果相同（证据按首次出现 + 关联中心）。保留的 space-race 增量：`missionContext`（kind `mission`、引线 / 详情环境标签）、`mapVisibility: timeline-only`（无坐标证据，`at` 可省；索引选中只跳日期不移镜头，`reader.ts` + 单测）、`timePresentation`（项目 / 事件词、无面积统计，与 climatology 互斥）、missions opt-in 的节拍行与 `b`（docs/51 E-IR2 的子集；`fromUrl` 只对 missions 主题读 `b`，未 opt-in 主题行为不变）。索引行对 timeline-only 证据加 `data-map-visibility`，shoot 漏标审计据此跳过。
+
+**看过的图**：`pnpm shoot space-race --beats --tasks --keys --layout --locale en,zh --theme paper,cinema`，40 拍 × 4 组合逐章抽看（每章至少 1–2 张，事故 / 1969 / 费用章全部）：任务环与「月面任务 · 关联发射中心」等标签读得清，佛罗里达两点不重叠，timeline-only 证据无地图点，节拍行在章头下、详情前，索引在正文后，项目卡无面积带，cinema / zh 正常。layout 8 尺寸（含 390×844、1024×768）：仅 4K / 2560 偶发 `bar` 内容宽于面板（每次出现在不同章、cinema zh 重跑通过，判为负载下的 resize 时序）。键位：偶发 `h` / `drag` 失败，同样出现在同机跑的 four-taps、singapore-after-1965、ww1、ww2（机器 load 170+），判为负载。章首拍「no label」提示同理在各旧主题都出现。
+
+**回归**：`--beats --keys` 跑 four-taps、singapore-after-1965、ancient-civilisations、ww1、ww2、sample-missions：beat failures 0、console clean；只有上述负载类提示。`--perf --gpu`：各章 60 fps，features 56–80（borders 295），page JS 457.9 KB gz（与 main 同级）。
+
+**门槛**：check 0 errors（4 条既有 hints）；validate 65 topics 0 errors；unit 174 文件 4506 条全过（Laika 措辞改后同步了 1 条内容断言）；build 通过；e2e（space-race、sample-missions、smoke、industrial-revolution，2 workers）30/32 过，2 条失败：space-race 拍链接测试点第 3 拍刻度被播放头手柄挡住（16–20 日的 3 拍挤在九个月宽的段里，已改为直接触发刻度，单跑通过），smoke 的 sample-space 截图超时（SpaceScene，未改动，单跑 en 过 / zh 又超时，负载）。
+
+**措辞修正**：Laika「did not survive / 未能生还」改为「died during the flight / 在飞行中死去」（字幕、事件、正文）；Apollo 1 详情中文名统一为「埃德·怀特」。
+
+**仍待**：05 章的 1–3 拍在轴上几乎重叠（章段按日期铺开），读者靠节拍行 ‹ › 或 `,` `.` 换拍；是否给 missions 主题的章段按拍等分，交 Gavin / E-IR2 决定。saturn-v / sun-earth-moon 链接待姊妹题发布后再加。保持 draft。

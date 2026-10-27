@@ -144,8 +144,8 @@
       "zh": "斯普特尼克2号上的莱卡"
     },
     "summary": {
-      "en": "Sputnik 2 carries Laika without a return system. She does not survive.",
-      "zh": "斯普特尼克2号带着莱卡飞行，没有返回系统；她未能生还。"
+      "en": "Sputnik 2 carries Laika without a return system. She dies during the flight.",
+      "zh": "斯普特尼克2号带着莱卡飞行，没有返回系统；她在飞行中死去。"
     },
     "sources": [
       "S6"
@@ -510,7 +510,7 @@
     },
     "detail": {
       "en": "Gus Grissom, Ed White and Roger Chaffee died on 27 January 1967 during a ground test. The cabin fire was not a launch accident.",
-      "zh": "格斯·格里森、爱德华·怀特和罗杰·查菲于1967年1月27日在地面测试中遇难。舱内火灾不是发射事故。"
+      "zh": "格斯·格里森、埃德·怀特和罗杰·查菲于1967年1月27日在地面测试中遇难。舱内火灾不是发射事故。"
     },
     "casualties": {
       "us": 3

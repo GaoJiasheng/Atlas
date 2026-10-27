@@ -204,7 +204,7 @@ describe('space-race content (docs/60)', () => {
     }
     expect(prose('background')).toMatch(/forced labour/); expect(prose('background')).toMatch(/强迫劳动/);
     expect(prose('background')).toMatch(/imprison/); expect(prose('background')).toMatch(/监禁|被囚/);
-    expect(prose('beeps-and-probes')).toMatch(/Laika/); expect(prose('beeps-and-probes')).toMatch(/未能生还|未生还|没有生还|死亡/);
+    expect(prose('beeps-and-probes')).toMatch(/Laika[\s\S]{0,80}died/); expect(prose('beeps-and-probes')).toMatch(/死去|死亡|未能生还/);
     expect(prose('robots-and-stations')).toMatch(/Luna 16/); expect(prose('robots-and-stations')).toMatch(/Salyut/);
   });
 

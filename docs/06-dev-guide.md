@@ -274,7 +274,7 @@ store.getState().chapterTarget(id);                                // 某章的�
 | `bottomBar` | 底部最下 | 时间轴 / Explorer 控件（44px 触控，不随 HUD 缩小，4K 时放大） |
 | `stageOverlay` | 右列，示意卡下 | 控制面板 `ControlPanel`：LAYERS（图层 + 绘制类模式）、TOOLS（其余模式 + 隐藏 HUD）、KEY（图例） |
 | `inspector` | InfoPanel 内，正文之后 | 遗留扩展插槽；选中对象用 readerTop |
-| `readerTop` | InfoPanel 滚动区最上，章头正下方、正文之前 | TimeScene：选中事件 / 实体；SpaceScene：节拍行 + 选中零件 / 当前动作卡（docs/08 §2 铁律 c、d）；MathScene：节拍行 + 小测托盘 |
+| `readerTop` | InfoPanel 滚动区最上，章头正下方、正文之前 | TimeScene：选中事件 / 实体（`timePresentation: missions` 的主题前面加节拍行）；SpaceScene：节拍行 + 选中零件 / 当前动作卡（docs/08 §2 铁律 c、d）；MathScene：节拍行 + 小测托盘 |
 | `readerEnd` | InfoPanel 内，正文之后 | TimeScene：本章事件索引；SpaceScene：本章索引（`state.index`）；MathScene：要点 + 课纲对照 |
 | `plate` | 左列底部，章节轨之下 | 次级读数的紧凑块（SpaceScene：PLATE 图版块；MathScene：模型 · 份数 · 标记 · 分数）；手机隐藏 |
 | `card` | 右列顶 | 示意 SVG 卡的**内容**；标题由 `controls.card` 注册，宿主画框和 `A NAME 中文` 表头；注册了 `cardToggle` 时表头是展开按钮（`aria-expanded`），框带 `data-expanded`，展开后高 ≤ 右列 60%，内容自己滚动 |

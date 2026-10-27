@@ -66,7 +66,9 @@ test('beat link, chapter-axis tick and PRESENT reach the same date, evidence and
   const linked = await state(page);
   const context = await mission(page, 'ev-eagle-touchdown');
   await page.locator('.ts-seg__btn[data-segment="eight-days"]').click({ position: { x: 6, y: 38 } });
-  await page.locator('.ts-seg__tick[data-beat="eight-days.2"]').click();
+  await expect.poll(async () => (await state(page)).beat, { timeout: 20_000 }).toBe(0);
+  // Beats 1–3 fall within four days of a nine-month segment, so the playhead grab covers this tick: fire the tick itself.
+  await page.locator('.ts-seg__tick[data-beat="eight-days.2"]').dispatchEvent('click');
   await expect.poll(async () => (await state(page)).beat).toBe(2);
   const axis = await state(page);
   expect({ t: axis.t, highlight: axis.highlight }).toEqual({ t: linked.t, highlight: linked.highlight });

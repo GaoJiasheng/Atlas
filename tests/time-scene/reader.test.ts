@@ -43,6 +43,14 @@ describe('TimeScene reader index schema', () => {
 });
 
 describe('TimeScene reader selection', () => {
+  it('jumps to unlocated (timeline-only) evidence by date only, keeping the camera', () => {
+    const { at: _at, ...noAt } = census;
+    const record = eventSchema.parse({ ...noAt, id: 'ev-cost-account', kind: 'political', mapVisibility: 'timeline-only' });
+    const patch = eventSelectionPatch(initial, [...events, record], record.id)!;
+    expect(patch.t).toBe('1860');
+    expect(patch.camera).toEqual(initial.camera);
+    expect(patch.highlight).toEqual([record.id]);
+  });
   it('opens a site at its location without changing the chapter or time', () => {
     const patch = eventSelectionPatch(initial, events, site.id)!;
     const next = { ...initial, ...patch };
