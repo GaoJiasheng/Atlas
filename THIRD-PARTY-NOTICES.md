@@ -87,6 +87,20 @@ The glb and the geometry derived from it (`scripts/anatomy/heart-lungs/centrelin
 `landmarks.json`, `routes.json`, and the flow paths, pivots and camera targets taken
 from them into the topic's `parts.json`) are CC BY-SA 4.0.
 
+## Industrial Revolution map data (`industrial-revolution`)
+
+| Work | Use | Licence |
+|---|---|---|
+| RShapes 1.0 (Müller-Crepon, Girardin; ETH Zürich, https://icr.ethz.ch/data/rshapes/). Requested reference: Cederman, Girardin, Müller-Crepon and Pengl (2025), *Nationalism and the Transformation of the State*, Cambridge University Press | `public/geo/industrial-rail-rshapes.json`; changes: features touching the Great Britain / Ireland main islands removed, years to 1914, simplified, quantised, same-year connected lines merged. Derived only from RShapes (no CC BY-SA or OpenHistoricalMap input) | CC BY-NC-SA 4.0 |
+| British Geological Survey, *Coal resources for new technologies* (https://www.bgs.ac.uk/datasets/coal-resources-for-new-technologies/) | `public/geo/industrial-coal-strata.json`; changes: GB coal-bearing strata only, EPSG:27700 to WGS84 (OSGB36 seven-parameter, no OSTN15 grid), simplified, quantised | Open Government Licence 3.0 |
+| GeoNames cities15000 (https://www.geonames.org/) | six modern city coordinates in the topic's `data/events.json` | CC BY 4.0 |
+| Natural Earth 1:10m populated places and 1:50m land | 21 modern city coordinates; main-island masks | Public domain |
+
+Attribution: **Contains British Geological Survey materials © UKRI 2026.** The
+BGS product also carries *Contains OS data © Crown copyright 2020*; no OS map is
+redistributed. City coordinates © GeoNames. Inputs, hashes and methods:
+`scripts/geo/industrial-revolution/SOURCES-GEO.md`.
+
 ## Fonts and libraries
 
 | Work | Licence |

@@ -1,0 +1,127 @@
+{
+  "inputs": {
+    "rshapes-1.0.geojson": "c1e52458c7b325153ce079d0d4f3a129fd3549ed21cb8cfce67bb8bf031fde68",
+    "rshapes-through-1914-continent.geojson": "92e50dcb6fb7cd7bae8370928eaf57174b5beeb8380da022f191e575f8f051ac",
+    "ne-50m-land.geojson": "e874b27a51d146452be360cafb3cc50c86001074a67d534113e6534682f9826b",
+    "industrial-places.geojson": "392d6cecadb432dfdf6ac07d624c834e4c03dcb793f3e1a7a5cbd5c5d2dcd285",
+    "Coal Resources For New Technologies/Coal_Resources_For_New_Technologies_GB.gpkg": "a4e08896ffd4f25f907494a62d3158ce6a9c9eea974e61df3f806d9d34d80a86"
+  },
+  "tools": {
+    "mapshaper": "0.6.121",
+    "mproj": "0.0.40"
+  },
+  "rail": {
+    "rawFeatures": 20661,
+    "removedTouchingMainIslands": 1061,
+    "features": 18804,
+    "counts": {
+      "1760": 0,
+      "1830": 0,
+      "1834": 35,
+      "1840": 428,
+      "1850": 1925,
+      "1869": 7355,
+      "1871": 8339,
+      "1890": 15577,
+      "1914": 18804
+    },
+    "mergedRuns": 8906,
+    "runCounts": {
+      "1760": 0,
+      "1830": 0,
+      "1834": 11,
+      "1840": 182,
+      "1850": 830,
+      "1869": 3230,
+      "1871": 3691,
+      "1890": 7273,
+      "1914": 8906
+    },
+    "merge": "Same construction year and a shared source endpoint (connected run); properties f (year) and n (source lids in the run)",
+    "simplifyMetres": 750,
+    "candidates": [
+      {
+        "intervalMetres": 750,
+        "bytes": 1304627
+      }
+    ],
+    "sourceGeometryRestoredLids": [
+      17463
+    ],
+    "deviation": {
+      "vertices": 333186,
+      "method": "Every source vertex to nearest output boundary/line of the same source id; local equirectangular metres. Not positional accuracy or a strict Hausdorff bound.",
+      "p50Metres": 134.9068128088506,
+      "p95Metres": 494.09344744919224,
+      "p99Metres": 639.5311126095376,
+      "maxMetres": 839.3902335274944
+    },
+    "quantization": 100000,
+    "licence": "CC-BY-NC-SA-4.0"
+  },
+  "coal": {
+    "features": 622,
+    "nativeRings": 1017,
+    "nativePolygonComponents": 624,
+    "outputPolygonComponents": 624,
+    "wrongWinding": 0,
+    "interRingCrossingPolygons": 0,
+    "holesOutsideExteriors": 0,
+    "sourceGeometryRestoredPolygons": [
+      "coal-gb-273/polygon-0",
+      "coal-gb-529/polygon-0",
+      "coal-gb-583/polygon-0",
+      "coal-gb-599/polygon-0"
+    ],
+    "rings": 1017,
+    "zeroArea": 0,
+    "selfCrossing": 0,
+    "deviation": {
+      "vertices": 169654,
+      "method": "Every source vertex to nearest output boundary/line of the same source id; local equirectangular metres. Not positional accuracy or a strict Hausdorff bound.",
+      "p50Metres": 64.9663059430684,
+      "p95Metres": 308.472142030909,
+      "p99Metres": 413.497930314453,
+      "maxMetres": 1925.6655372237185
+    },
+    "simplifyMetres": 500,
+    "quantization": 1000000,
+    "crsFrom": "EPSG:27700",
+    "crsTo": "EPSG:4326",
+    "transform": "mproj EPSG registry OSGB36 seven-parameter Helmert → WGS84; no OSTN15 grid supported",
+    "maxNumericalRoundTripMetres": 0.0010562159957536947,
+    "positionalAccuracy": "Not independently measured; numerical round trip is not positional accuracy. No survey-level accuracy claim."
+  },
+  "sizes": {
+    "industrial-rail-rshapes.json": {
+      "bytes": 1304627,
+      "gzipBytes": 300369,
+      "sha256": "1db7acc983f35fbdafca3bfff1012c888606c96515d0d140b0e8fc750d38acf2"
+    },
+    "industrial-coal-strata.json": {
+      "bytes": 266680,
+      "gzipBytes": 75990,
+      "sha256": "f92b6c67b6c5728a5f3d5a08f945eef47ed983cf9ea78d10408ec364ece04358"
+    },
+    "industrial-places.geojson": {
+      "bytes": 12524,
+      "gzipBytes": 1222,
+      "sha256": "392d6cecadb432dfdf6ac07d624c834e4c03dcb793f3e1a7a5cbd5c5d2dcd285"
+    },
+    "control.json": {
+      "bytes": 149,
+      "gzipBytes": 91,
+      "sha256": "9c0a77d37aff5de583008780ab99a942198e1bbc3a4e6a662f7f90694cc1d2e4"
+    },
+    "entities.json": {
+      "bytes": 2,
+      "gzipBytes": 22,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "movements.json": {
+      "bytes": 2,
+      "gzipBytes": 22,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    }
+  }
+}

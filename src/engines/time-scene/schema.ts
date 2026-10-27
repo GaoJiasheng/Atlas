@@ -561,6 +561,14 @@ export const timeChapterState = z
     layers: z.array(kebabId).optional(),
     /** Event / movement / entity ids to emphasise. */
     highlight: z.array(kebabId).optional(),
+    /** Ordered event ids reachable from this chapter's reader; never inherited. */
+    index: z.array(kebabId).optional().superRefine((ids, ctx) => {
+      const seen = new Set<string>();
+      ids?.forEach((id, i) => {
+        if (seen.has(id)) ctx.addIssue({ code: z.ZodIssueCode.custom, message: `duplicate event "${id}"`, path: [i] });
+        seen.add(id);
+      });
+    }),
     theme: theme.optional(),
     /** The child's question for this chapter (reading panel header when there is no `summary`). */
     question: bilingual.optional(),
@@ -613,6 +621,12 @@ export function timeScenePresetIds(data: TimeSceneGeoData): string[] {
 
 export function timeChapterRefs(state: TimeChapterState): string[] {
   return [...(state.highlight ?? []), ...(state.beats ?? []).flatMap((b) => b.highlight ?? [])];
+}
+
+/** The reader index is event-only; do not add it to the shared id namespace check. */
+export function timeChapterIndexIssues(state: TimeChapterState, data: Pick<TimeSceneGeoData, 'events'>): string[] {
+  const events = new Set(data.events.map((event) => event.id));
+  return (state.index ?? []).flatMap((id, i) => events.has(id) ? [] : [`state.index.${i}: unknown event "${id}"`]);
 }
 
 /** Layer ids are topic-dependent, so check them after parsing the chapter. */

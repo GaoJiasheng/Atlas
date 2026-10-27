@@ -358,10 +358,7 @@ export default function SceneHost(props: SceneHostProps) {
   } as CSSProperties;
 
   const [sheetOpen, setSheetOpen] = useState(false);
-  const revealReader = useCallback(() => {
-    hud.setState({ reader: true });
-    setSheetOpen(true);
-  }, [hud]);
+  const [readerReveal, setReaderReveal] = useState(0);
 
   /* ---------------- chapter-body controls (static HTML, delegated) ---------------- */
   const sceneRef = useRef<HTMLDivElement>(null);
@@ -435,9 +432,22 @@ export default function SceneHost(props: SceneHostProps) {
     };
   }, []);
 
+  const revealReader = useCallback(() => {
+    // The phone sheet is temporary; opening it must not overwrite the dock's
+    // persisted collapse preference (scene.css switches at 1024 CSS px).
+    if (window.matchMedia('(min-width: 1024px)').matches) hud.setState({ reader: true });
+    setSheetOpen(true);
+    setReaderReveal((revision) => revision + 1);
+  }, [hud]);
+  // Wait for the existing drawer/reader to render open. Re-selecting the same
+  // event must also return to the top, even if its inspector did not remount.
+  useLayoutEffect(() => {
+    if (readerReveal > 0) sceneRef.current?.querySelector('.atlas-panel__scroll')?.scrollTo({ top: 0 });
+  }, [readerReveal]);
+
   const context = useMemo<SceneContextValue>(
-    () => ({ store, hud, actions, topic, chapters, locale, slots, revealReader }),
-    [store, hud, actions, topic, chapters, locale, slots, revealReader],
+    () => ({ store, hud, actions, revealReader, topic, chapters, locale, slots }),
+    [store, hud, actions, revealReader, topic, chapters, locale, slots],
   );
 
   /* ---------------- window.__atlas ---------------- */

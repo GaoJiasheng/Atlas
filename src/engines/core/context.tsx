@@ -50,12 +50,12 @@ export interface SceneContextValue {
   hud: HudStore;
   /** The actions behind the HUD buttons and keys (modes, presets, HUD, reader). */
   actions: HudActions;
+  /** Reveal selected details in the docked reader or the existing mobile sheet. */
+  revealReader(): void;
   topic: TopicMeta;
   chapters: readonly Chapter[];
   locale: Locale;
   slots: Partial<Record<SlotName, Element | null>>;
-  /** Reveal selected details in the desktop reader or phone reading sheet. */
-  revealReader?(): void;
 }
 
 export const SceneContext = createContext<SceneContextValue | null>(null);
