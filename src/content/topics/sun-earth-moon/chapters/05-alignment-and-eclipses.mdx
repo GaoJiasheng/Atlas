@@ -1,0 +1,400 @@
+---
+{
+  "id": "alignment-and-eclipses",
+  "order": 5,
+  "title": {
+    "en": "Alignment and eclipses",
+    "zh": "排列与日月食"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "cutaway": "none",
+    "ghost": [],
+    "layers": [
+      "solar-body",
+      "earth-system",
+      "moon-system",
+      "orbital-guides"
+    ],
+    "labels": [
+      "moon-body",
+      "lunar-track",
+      "orbital-plane"
+    ],
+    "camera": {
+      "position": [
+        -0.25,
+        0.65,
+        1.6
+      ],
+      "target": [
+        -0.25,
+        0,
+        0
+      ],
+      "fov": 42
+    },
+    "index": {
+      "parts": [
+        "sun-body",
+        "earth-body",
+        "moon-body",
+        "lunar-track",
+        "orbital-plane",
+        "node-line",
+        "observer-marker"
+      ]
+    },
+    "sim": {
+      "set": {
+        "lab": "eclipse",
+        "elapsed": 0,
+        "year-angle": 0,
+        "lunar-angle": 0,
+        "spin-angle": 180,
+        "obliquity": 0,
+        "lunar-tilt": 5.145,
+        "node-angle": 90,
+        "observer-lat": 0,
+        "moon-range": 384400,
+        "synchronous": true,
+        "scale-mode": "schematic",
+        "day-index": 1
+      },
+      "try": {
+        "vary": "node-angle",
+        "also": [
+          "lunar-angle",
+          "lunar-tilt",
+          "moon-range"
+        ],
+        "observe": [
+          "solar-eclipse",
+          "lunar-eclipse",
+          "sun-diameter-deg",
+          "moon-diameter-deg"
+        ],
+        "record": true,
+        "keep": [
+          {
+            "en": "Same physical body radii",
+            "zh": "相同的物理半径"
+          }
+        ]
+      }
+    },
+    "beats": [
+      {
+        "sim": {
+          "set": {
+            "lab": "eclipse",
+            "elapsed": 0,
+            "year-angle": 0,
+            "lunar-angle": 0,
+            "spin-angle": 180,
+            "obliquity": 0,
+            "lunar-tilt": 5.145,
+            "node-angle": 90,
+            "observer-lat": 0,
+            "moon-range": 384400,
+            "synchronous": true,
+            "scale-mode": "schematic",
+            "day-index": 1
+          }
+        },
+        "caption": {
+          "en": "Near new Moon, the tilted lunar orbit can carry the Moon above or below the required alignment. New Moon alone does not guarantee a solar eclipse.",
+          "zh": "接近新月时，倾斜月轨道可让月球偏离所需的排列。仅有新月并不保证发生日食。"
+        },
+        "part": null,
+        "labels": [
+          "moon-body",
+          "lunar-track",
+          "orbital-plane"
+        ],
+        "hide": [
+          "earth-track",
+          "scale-ruler"
+        ],
+        "camera": {
+          "position": [
+            -0.25,
+            0.65,
+            1.6
+          ],
+          "target": [
+            -0.25,
+            0,
+            0
+          ],
+          "fov": 42
+        },
+        "run": false
+      },
+      {
+        "sim": {
+          "set": {
+            "lab": "eclipse",
+            "elapsed": 0,
+            "year-angle": 0,
+            "lunar-angle": 0,
+            "spin-angle": 180,
+            "obliquity": 0,
+            "lunar-tilt": 5.145,
+            "node-angle": 0,
+            "observer-lat": 0,
+            "moon-range": 384400,
+            "synchronous": true,
+            "scale-mode": "schematic",
+            "day-index": 1
+          }
+        },
+        "caption": {
+          "en": "The orbital planes meet along a line. Near that crossing, the Moon can come between the Sun and the model observer.",
+          "zh": "两个轨道平面沿一条线相交。在交点附近，月球才可能来到太阳与模型观察点之间。"
+        },
+        "part": null,
+        "labels": [
+          "moon-body",
+          "node-line",
+          "observer-marker"
+        ],
+        "hide": [
+          "earth-track",
+          "scale-ruler"
+        ],
+        "camera": {
+          "position": [
+            -0.25,
+            0.65,
+            1.6
+          ],
+          "target": [
+            -0.25,
+            0,
+            0
+          ],
+          "fov": 42
+        },
+        "run": false
+      },
+      {
+        "sim": {
+          "set": {
+            "lab": "eclipse",
+            "elapsed": 0,
+            "year-angle": 0,
+            "lunar-angle": 180,
+            "spin-angle": 180,
+            "obliquity": 0,
+            "lunar-tilt": 5.145,
+            "node-angle": 0,
+            "observer-lat": 0,
+            "moon-range": 384400,
+            "synchronous": true,
+            "scale-mode": "schematic",
+            "day-index": 1
+          }
+        },
+        "caption": {
+          "en": "At full-Moon alignment, Earth is between Sun and Moon. Now Earth's shadow can fall on the Moon: a lunar eclipse.",
+          "zh": "满月排齐时，地球位于太阳和月球之间。地影可以落到月面上，形成月食。"
+        },
+        "part": null,
+        "labels": [
+          "earth-body",
+          "moon-body",
+          "node-line"
+        ],
+        "hide": [
+          "earth-track",
+          "scale-ruler"
+        ],
+        "camera": {
+          "position": [
+            -0.25,
+            0.65,
+            1.6
+          ],
+          "target": [
+            -0.25,
+            0,
+            0
+          ],
+          "fov": 42
+        },
+        "run": false
+      },
+      {
+        "sim": {
+          "set": {
+            "lab": "eclipse",
+            "elapsed": 0,
+            "year-angle": 0,
+            "lunar-angle": 0,
+            "spin-angle": 180,
+            "obliquity": 0,
+            "lunar-tilt": 0,
+            "node-angle": 0,
+            "observer-lat": 0,
+            "moon-range": 363300,
+            "synchronous": true,
+            "scale-mode": "schematic",
+            "day-index": 1
+          }
+        },
+        "caption": {
+          "en": "In this central model alignment, the nearer Moon's apparent disc covers the Sun. The calculated model eclipse is total.",
+          "zh": "在这个中心对齐模型里，较近月球的视圆盘盖住太阳，算出的模型食型是日全食。"
+        },
+        "part": null,
+        "labels": [
+          "earth-body",
+          "moon-body",
+          "observer-marker"
+        ],
+        "hide": [
+          "earth-track",
+          "scale-ruler"
+        ],
+        "camera": {
+          "position": [
+            -0.25,
+            0.65,
+            1.6
+          ],
+          "target": [
+            -0.25,
+            0,
+            0
+          ],
+          "fov": 42
+        },
+        "run": false
+      },
+      {
+        "sim": {
+          "set": {
+            "lab": "eclipse",
+            "elapsed": 0,
+            "year-angle": 0,
+            "lunar-angle": 0,
+            "spin-angle": 180,
+            "obliquity": 0,
+            "lunar-tilt": 0,
+            "node-angle": 0,
+            "observer-lat": 0,
+            "moon-range": 405500,
+            "synchronous": true,
+            "scale-mode": "schematic",
+            "day-index": 1
+          }
+        },
+        "caption": {
+          "en": "Move the Moon farther away without changing its physical radius. A bright ring remains because its apparent disc is now smaller than the Sun's.",
+          "zh": "月球实体半径不变，只移得更远。视圆盘变得比太阳小，周围便留下明亮光环。"
+        },
+        "part": null,
+        "labels": [
+          "earth-body",
+          "moon-body",
+          "observer-marker"
+        ],
+        "hide": [
+          "earth-track",
+          "scale-ruler"
+        ],
+        "camera": {
+          "position": [
+            -0.25,
+            0.65,
+            1.6
+          ],
+          "target": [
+            -0.25,
+            0,
+            0
+          ],
+          "fov": 42
+        },
+        "run": false
+      }
+    ],
+    "hide": [
+      "earth-track",
+      "scale-ruler"
+    ],
+    "part": null,
+    "summary": {
+      "en": "Add the Moon's tilted orbital plane and compare phase, alignment and apparent size as separate conditions.",
+      "zh": "加回倾斜的月球轨道，把月相、排列和视大小三个条件分开比较。"
+    }
+  }
+}
+---
+
+<Lang en>
+
+At the opening new-Moon position, the Moon misses the alignment needed for an eclipse. Its orbit is tilted by about <Num s="S8">5.1 degrees</Num> relative to Earth's orbital plane. That is a different angle from Earth's axial tilt. New Moon alone therefore does not guarantee a <Term id="solar-eclipse">solar eclipse</Term>, and full Moon alone does not guarantee a <Term id="lunar-eclipse">lunar eclipse</Term>. <Num s="S6,S40" />
+
+The planes intersect along the drawn line. An <Term id="node">orbital node</Term> is where the lunar orbit crosses Earth's orbital plane. Near a crossing, the bodies can line up closely enough. Turn the node control to bring the crossing towards the alignment; it changes the geometry, rather than advancing to a real eclipse date. <Num s="S40,S36" />
+
+A solar eclipse needs the Moon between the Sun and a surface observer. A lunar eclipse instead puts the Moon inside Earth's shadow near full Moon. The umbra receives no direct light from the Sun; the surrounding penumbra receives light from only part of it. The local shadow diagram uses one common scale. <Num s="S6,S36" />
+
+Next compare central alignments at different Moon distances. <Term id="apparent-diameter">Apparent diameter</Term> means angular width in an observer's view, rather than physical width. Bringing the Moon nearer makes its apparent disc larger; moving it farther away can leave a bright solar ring around it: an <Term id="annular-eclipse">annular eclipse</Term>. Its physical radius stays unchanged throughout this comparison. <Num s="S6,S8,S9,S36" />
+
+The disc window belongs to the marked model observer; the phase window uses Earth's centre. Keep those viewpoints separate. These circles and shadows explain conditions for an eclipse. They supply neither a dated forecast nor a real eclipse path across the ground. <Num s="S36" />
+
+<More title={{ en: "Where the observer stands", zh: "观察者站在哪里" }}>
+
+Different places can see different solar coverage during the same real event. This model uses one explicitly marked surface point. Changing the node or Moon distance is a geometry experiment, not a journey along an actual eclipse track. <Num s="S6,S36" />
+
+</More>
+
+<More title={{ en: "Where each shadow falls", zh: "影子落在哪里" }}>
+
+In a solar eclipse, the Moon casts the shadow towards Earth. In a lunar eclipse, Earth casts the shadow towards the Moon. Beyond the tip of the Moon's umbra is the antumbra, where a centrally aligned observer can see an annular eclipse. The diagram computes finite-Sun shadow cones using physical radii and distances, independently of the enlarged stage bodies. <Num s="S6,S36" />
+
+</More>
+
+<More title={{ en: "A deliberately flat experiment", zh: "刻意设成共面的实验" }}>
+
+The total-versus-annular comparison sets lunar tilt to <Num s="S36">0 degrees</Num>. The planes then coincide, so there is no unique node line. This is a design setting, not the real lunar orbit. Records in Try it describe only the current experiment settings; changing another input replaces the record at the same node value. <Num s="S36" />
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+开场虽是新月位置，月球却没有排到发生<Term id="solar-eclipse">日食</Term>所需的位置。月轨道相对地球轨道面倾斜约 <Num s="S8">5.1 度</Num>，与地轴倾角是两回事。因此，仅有新月不保证日食，仅有满月也不保证<Term id="lunar-eclipse">月食</Term>。先看轨道在空间怎样偏离，再看是否真正排齐。<Num s="S6,S40" />
+
+两个轨道平面沿画出的直线相交。月球轨道穿过地球轨道面的地方叫<Term id="node">轨道交点</Term>，靠近这里才可能排得足够齐。转动交点方向控件，把交线带向所需方向。这是在改变几何条件，并不是把日期推进到某次真实日食。<Num s="S40,S36" />
+
+日食需要月球来到太阳与地表观察者之间；月食则是满月附近的月球进入地影。本影内完全收不到太阳的直接光；周围的半影，只收得到太阳部分区域的光。局部影图里的球体和距离采用同一尺度，不是直接拿舞台上放大的球体投影。<Num s="S6,S36" />
+
+接着保持中心对齐，只比较不同的地月距离。<Term id="apparent-diameter">视直径</Term>是在观察者眼中占据的角宽，不是天体实际直径。移近月球，月盘看起来较大，能盖住太阳；移远则可能留下亮环，形成<Term id="annular-eclipse">日环食</Term>。月球实体半径在比较中始终没有改变。<Num s="S6,S8,S9,S36" />
+
+视盘窗口属于标出的模型地表观察点，月相窗口却从地心看，两种视角要分清。圆盘和影锥说明食的条件，不提供真实日期、接触时刻或地面食带。记录结果时，也要写明当时改变了哪些输入。<Num s="S36" />
+
+<More title={{ en: "Where the observer stands", zh: "观察者站在哪里" }}>
+
+同一次真实日食，不同地点看见的遮盖程度可能不同。这里固定一个明确标出的模型地表点；改变交点方向或地月距离，是几何实验，并不是沿真实食带移动观察者。<Num s="S6,S36" />
+
+</More>
+
+<More title={{ en: "Where each shadow falls", zh: "影子落在哪里" }}>
+
+日食是月影投向地球，月食是地影投向月球。月球本影尖端以外是伪本影，中心排齐的观察者可在这里看见日环食。影图用物理半径与距离计算有限大小太阳形成的影锥，不使用舞台球体的放大倍率。<Num s="S6,S36" />
+
+</More>
+
+<More title={{ en: "A deliberately flat experiment", zh: "刻意设成共面的实验" }}>
+
+全食与环食对照把月轨道倾角设为 <Num s="S36">0 度</Num>。此时两平面重合，没有唯一的交线，这是设计实验，不是真实月轨道。“试一试”的记录只对应当前设定；改变其他输入后，同一交点方向下的记录会被覆盖，不能把不同条件的记录当成单变量曲线。<Num s="S36" />
+
+</More>
+
+</Lang>

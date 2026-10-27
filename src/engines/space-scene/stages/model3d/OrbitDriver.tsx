@@ -6,7 +6,7 @@ import type { PartsFile } from '../../schema';
 import type { PartHandle } from './PartNode';
 import type { StageBridge } from '../../bridge';
 import type { OrbitSession } from '../../lib/sim/orbit-session';
-import { bodyPlacement } from '../../lib/sim/orbit-projection';
+import { bodyPlacement, orbitalTiltGuide } from '../../lib/sim/orbit-projection';
 import { add, mul, sub, unit, cross, rotate, qm, qy, qx, type V3 } from '../../lib/sim/orbit-rotation';
 import { holds } from '../../lib/sim/bind';
 import { keepAnimating, useRuntime } from './runtime';
@@ -98,18 +98,7 @@ function guidePoints(key: string, orbit: OrbitSession): V3[] {
     const n = rotate(qy(p.node), [r * 1.12, 0, 0]);
     return [sub(E, n), add(E, n)];
   }
-  if (key === 'plane') {
-    const r = Math.hypot(...sub(M, E)) * 1.12;
-    return (
-      [
-        [-r, 0, -r],
-        [r, 0, -r],
-        [r, 0, r],
-        [-r, 0, r],
-        [-r, 0, -r],
-      ] as V3[]
-    ).map((p) => add(E, p));
-  }
+  if (key === 'plane') return orbitalTiltGuide(E, s.axis, d.radii.earth, Math.hypot(...sub(M, E)) * 1.12);
   if (key === 'ruler') return [E, M];
   const r = d.radii.earth,
     v = s.solarDirections.earth,

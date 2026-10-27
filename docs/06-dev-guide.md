@@ -1747,7 +1747,7 @@ docs/40 §4.4 E-HL3。流的可选字段：
 
 ### SpaceScene · 试一试 · 太阳、地球与月球（orbit-rotation）
 
-`docs/44 §4` 的 E-SEM1–3。完整可解析模板是 `src/content/topics/sample-orbit/data/parts.json`（draft，13 controls、23 outputs、13 selectable parts、2 overlays）；8 章 / 39 拍覆盖三种观察窗、真尺度、离交点、偏食、环食、全月食。这里只施工引擎夹具，未创建正式 `sun-earth-moon` 内容。
+`docs/44 §4` 的 E-SEM1–3。完整可解析模板是 `src/content/topics/sample-orbit/data/parts.json`（draft，13 controls、23 outputs、13 selectable parts、2 overlays）；8 章 / 39 拍覆盖三种观察窗、真尺度、离交点、偏食、环食、全月食。正式发布内容见 `src/content/topics/sun-earth-moon/`；实际相机使用 lab 坐标系的显式数字，跨实验不要把同名预设误当成自动跟随天体的坐标变换。
 
 注册：`SIM_KINDS` → `simSchema.orbitRotation`（`orbit-rotation-schema.ts`）→ `simQuantities` / `evaluateSim`（`lib/sim/orbit-rotation.ts`）→ `quantityKind` / `ORBIT_STATES`（`orbit-constants.ts`）→ `SEPARATE_EXPERIMENTS['orbit-rotation']=true`。没有 timeline channels；`evaluateSim(sim, values, observe, frames, parts, {timeSeconds})` 在原五参数末尾增加可选 context，旧模型不读它。未知输出和种类不符都报错，不依赖缺量回退。
 
@@ -2267,3 +2267,7 @@ pnpm tsx scripts/geo/lib/check.ts --topic ww2         # MapLibre（Playwright）
 - **按年代裁过的要素不再沿底图海岸**（docs/28 P2，`simplify.ts`）：`pipeline.coast.excludeBox: [w, s, e, n]`（缺省 `null`）：这个框里不做海岸一步。底图陆地和水都挖掉这个框，于是框里的要素不被擦水、框外的 holder 也不会补缝长进来；框里的要素保持 compose 给它的海岸（新加坡要素已按时代 `intersect` 到 `work/coast-L#.geojson`）；柔佛、廖内等框里的邻国要素也就不再裁到 10m 海岸，需要的话在 compose 里 `intersect` 到 10m 陆地。偏差统计在框里不跳过"海里"的点。
 - **分框细度**（docs/28 P3，`simplify.ts`）：`pipeline.focus` 的一项可以写成 `{ "box": [w, s, e, n], "fineKm": 0.005 }`，这个框用自己的固定间隔（岛尺度要几米，区域框照旧 1 km 上下）：先从普通焦点框里挖出来，单独简化，用自己那份陆地沿海岸（与 inside / outside 两半同一做法）；排在前面的框在重叠处优先。自动预算搜索只调普通焦点框的间隔。没有这种项、没有 `excludeBox` 时产物与以前逐字节相同（ww1、ww2、warring-states、four-taps 的 simplify 改前改后各跑一次比对过）。
 - 东南亚近景底图：`scripts/build-geo.ts` 另出 `public/geo/land-10m-sea.json`（Natural Earth 1:10m 陆地，裁到 95°E–125°E、9°S–22°N，TopoJSON，约 234 KB）。GeoStage 在镜头 zoom ≥ 6.5 且视野与该框相交时才 fetch；zoom 7 起绘制、到 8 完全显现：框内先铺一层水色遮住 50m 陆地（不透明度 7→8 渐入），10m 陆地和海岸线叠在上面，颜色同为 `--land` / `--land-edge` / `--water` token。其他主题不加载它。
+
+#### orbit-rotation 内容补记（2026-10-27）
+
+正式 `sun-earth-moon` 复用夹具的13控件/23输出/9绑定/2 overlays，加入正文、出处与逐拍验收。`orbital-plane` 的既有 guide 几何补上法线及地轴倾角弧（`orbitalTiltGuide`），弧与法线从同一物理 axis 生成，零倾角时弧退化到法线；不另建可选对象。无普通 orbit 输出显隐绑定，因此保留 §9.2 运行中普通绑定的已知边界。浏览器验收由主会话执行，见主题 REVIEW.md。

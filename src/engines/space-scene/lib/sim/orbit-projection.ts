@@ -83,3 +83,22 @@ export function bodyPlacement(
     scale: b.scaleWithRadius ? d.radii[b.body] : 1,
   };
 }
+
+/** A selectable reference-plane guide with its normal and the axial-tilt arc.
+ * Disconnected strokes use the guide writer's NaN pen-up convention. */
+export function orbitalTiltGuide(earth: V3, axis: V3, earthRadius: number, planeRadius: number): V3[] {
+  const lift = (p: V3) => add(earth, p);
+  const gap = (): V3 => [NaN, 0, 0];
+  const normalLength = earthRadius * 1.7, arcRadius = earthRadius * 1.55;
+  const angle = Math.acos(Math.max(-1, Math.min(1, axis[1])));
+  const sideways = Math.hypot(axis[0], axis[2]);
+  const direction: V3 = sideways > 1e-12 ? [axis[0] / sideways, 0, axis[2] / sideways] : [0, 0, 1];
+  const outline: V3[] = [[-planeRadius,0,-planeRadius],[planeRadius,0,-planeRadius],[planeRadius,0,planeRadius],[-planeRadius,0,planeRadius],[-planeRadius,0,-planeRadius]];
+  return [
+    ...outline.map(lift), gap(), lift([0,0,0]), lift([0,normalLength,0]), gap(),
+    ...Array.from({length: 25}, (_,i) => {
+      const a = angle * i / 24;
+      return lift([direction[0] * Math.sin(a) * arcRadius, Math.cos(a) * arcRadius, direction[2] * Math.sin(a) * arcRadius]);
+    }),
+  ];
+}
