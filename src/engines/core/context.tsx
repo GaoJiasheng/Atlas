@@ -54,6 +54,8 @@ export interface SceneContextValue {
   chapters: readonly Chapter[];
   locale: Locale;
   slots: Partial<Record<SlotName, Element | null>>;
+  /** Reveal selected details in the desktop reader or phone reading sheet. */
+  revealReader?(): void;
 }
 
 export const SceneContext = createContext<SceneContextValue | null>(null);

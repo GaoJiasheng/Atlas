@@ -1,0 +1,607 @@
+---
+{
+  "id": "atmospheric-push",
+  "order": 1,
+  "title": {
+    "en": "Air pushes the piston",
+    "zh": "空气推动活塞"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "cutaway": "none",
+    "pose": "nc-fill",
+    "layers": [
+      "teaching"
+    ],
+    "hide": [
+      "boiler",
+      "boiler-water",
+      "furnace",
+      "steam-main",
+      "throttle",
+      "throttle-disc",
+      "valve-chest",
+      "valve-upper-in",
+      "valve-lower-in",
+      "valve-upper-out",
+      "valve-lower-out",
+      "cylinder",
+      "piston",
+      "piston-rod",
+      "beam",
+      "parallel-inner",
+      "parallel-outer",
+      "parallel-bottom",
+      "radius-rod",
+      "drive-rod",
+      "planet",
+      "sun",
+      "centre-link",
+      "shaft",
+      "flywheel",
+      "governor-spindle",
+      "governor-balls",
+      "governor-ball-right",
+      "governor-upper",
+      "governor-upper-right",
+      "governor-lower",
+      "governor-lower-right",
+      "governor-collar",
+      "throttle-link",
+      "throttle-rod",
+      "throttle-crank",
+      "condenser",
+      "injection-jet",
+      "cooling-cistern",
+      "air-pump",
+      "pump-piston",
+      "pump-rod",
+      "hot-well",
+      "feed-pump",
+      "water-pipes",
+      "load-wheel",
+      "energy-input",
+      "energy-work",
+      "energy-reject"
+    ],
+    "ghost": [],
+    "labels": [
+      "nc-cylinder",
+      "nc-piston",
+      "nc-beam",
+      "nc-pump"
+    ],
+    "camera": {
+      "position": [
+        -7,
+        5,
+        7
+      ],
+      "target": [
+        -11,
+        2,
+        0
+      ],
+      "fov": 30
+    },
+    "summary": {
+      "en": "Condensing steam lowers the pressure below the piston. Air above it then pushes it down, while the beam raises the mine-pump rod.",
+      "zh": "蒸汽凝结后，活塞下面的压力降低。上方的空气把活塞向下推，横梁另一端便把矿井泵杆提起来。"
+    },
+    "sim": {
+      "set": {
+        "experiment": "pressure",
+        "motion-mode": "manual",
+        "phase-deg": 0,
+        "cycle-rate": 10,
+        "cold-pressure": 20,
+        "governor-rpm": 90,
+        "work-share": 20
+      }
+    },
+    "index": {
+      "parts": [
+        "nc-cylinder",
+        "nc-piston",
+        "nc-beam",
+        "nc-pump",
+        "nc-jet",
+        "nc-chain",
+        "nc-pump-chain"
+      ]
+    },
+    "beats": [
+      {
+        "view": "assembled",
+        "explode": 0,
+        "run": false,
+        "part": null,
+        "cutaway": "none",
+        "pose": "nc-fill",
+        "layers": [
+          "teaching"
+        ],
+        "hide": [
+          "boiler",
+          "boiler-water",
+          "furnace",
+          "steam-main",
+          "throttle",
+          "throttle-disc",
+          "valve-chest",
+          "valve-upper-in",
+          "valve-lower-in",
+          "valve-upper-out",
+          "valve-lower-out",
+          "cylinder",
+          "piston",
+          "piston-rod",
+          "beam",
+          "parallel-inner",
+          "parallel-outer",
+          "parallel-bottom",
+          "radius-rod",
+          "drive-rod",
+          "planet",
+          "sun",
+          "centre-link",
+          "shaft",
+          "flywheel",
+          "governor-spindle",
+          "governor-balls",
+          "governor-ball-right",
+          "governor-upper",
+          "governor-upper-right",
+          "governor-lower",
+          "governor-lower-right",
+          "governor-collar",
+          "throttle-link",
+          "throttle-rod",
+          "throttle-crank",
+          "condenser",
+          "injection-jet",
+          "cooling-cistern",
+          "air-pump",
+          "pump-piston",
+          "pump-rod",
+          "hot-well",
+          "feed-pump",
+          "water-pipes",
+          "load-wheel",
+          "energy-input",
+          "energy-work",
+          "energy-reject"
+        ],
+        "ghost": [],
+        "labels": [
+          "nc-cylinder",
+          "nc-piston"
+        ],
+        "camera": "newcomen-view",
+        "sim": {
+          "set": {
+            "experiment": "pressure",
+            "motion-mode": "manual",
+            "phase-deg": 0,
+            "cycle-rate": 10,
+            "cold-pressure": 20,
+            "governor-rpm": 90,
+            "work-share": 20
+          }
+        },
+        "caption": {
+          "en": "The cylinder is open above the piston. Steam enters below it as the heavy pump rod helps raise the piston.",
+          "zh": "活塞上方的汽缸敞开着。蒸汽进入下面的空间，沉重的泵杆帮助活塞升起来。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "run": false,
+        "part": null,
+        "cutaway": "none",
+        "pose": "nc-condense",
+        "layers": [
+          "teaching"
+        ],
+        "hide": [
+          "boiler",
+          "boiler-water",
+          "furnace",
+          "steam-main",
+          "throttle",
+          "throttle-disc",
+          "valve-chest",
+          "valve-upper-in",
+          "valve-lower-in",
+          "valve-upper-out",
+          "valve-lower-out",
+          "cylinder",
+          "piston",
+          "piston-rod",
+          "beam",
+          "parallel-inner",
+          "parallel-outer",
+          "parallel-bottom",
+          "radius-rod",
+          "drive-rod",
+          "planet",
+          "sun",
+          "centre-link",
+          "shaft",
+          "flywheel",
+          "governor-spindle",
+          "governor-balls",
+          "governor-ball-right",
+          "governor-upper",
+          "governor-upper-right",
+          "governor-lower",
+          "governor-lower-right",
+          "governor-collar",
+          "throttle-link",
+          "throttle-rod",
+          "throttle-crank",
+          "condenser",
+          "injection-jet",
+          "cooling-cistern",
+          "air-pump",
+          "pump-piston",
+          "pump-rod",
+          "hot-well",
+          "feed-pump",
+          "water-pipes",
+          "load-wheel",
+          "energy-input",
+          "energy-work",
+          "energy-reject"
+        ],
+        "ghost": [],
+        "labels": [
+          "nc-jet",
+          "nc-cylinder"
+        ],
+        "camera": "newcomen-view",
+        "sim": {
+          "set": {
+            "experiment": "pressure",
+            "motion-mode": "manual",
+            "phase-deg": 0,
+            "cycle-rate": 10,
+            "cold-pressure": 20,
+            "governor-rpm": 90,
+            "work-share": 20
+          }
+        },
+        "caption": {
+          "en": "A spray of cold water condenses the steam inside the cylinder. The pressure below the piston falls.",
+          "zh": "冷水喷入汽缸，让里面的蒸汽凝结。活塞下面的压力降低。"
+        }
+      },
+      {
+        "view": "xray",
+        "explode": 0,
+        "run": false,
+        "part": null,
+        "cutaway": "none",
+        "pose": "nc-power",
+        "layers": [
+          "teaching"
+        ],
+        "hide": [
+          "boiler",
+          "boiler-water",
+          "furnace",
+          "steam-main",
+          "throttle",
+          "throttle-disc",
+          "valve-chest",
+          "valve-upper-in",
+          "valve-lower-in",
+          "valve-upper-out",
+          "valve-lower-out",
+          "cylinder",
+          "piston",
+          "piston-rod",
+          "beam",
+          "parallel-inner",
+          "parallel-outer",
+          "parallel-bottom",
+          "radius-rod",
+          "drive-rod",
+          "planet",
+          "sun",
+          "centre-link",
+          "shaft",
+          "flywheel",
+          "governor-spindle",
+          "governor-balls",
+          "governor-ball-right",
+          "governor-upper",
+          "governor-upper-right",
+          "governor-lower",
+          "governor-lower-right",
+          "governor-collar",
+          "throttle-link",
+          "throttle-rod",
+          "throttle-crank",
+          "condenser",
+          "injection-jet",
+          "cooling-cistern",
+          "air-pump",
+          "pump-piston",
+          "pump-rod",
+          "hot-well",
+          "feed-pump",
+          "water-pipes",
+          "load-wheel",
+          "energy-input",
+          "energy-work",
+          "energy-reject"
+        ],
+        "ghost": [],
+        "labels": [
+          "nc-piston",
+          "nc-cylinder"
+        ],
+        "camera": {
+          "position": [
+            -8.5,
+            3.6,
+            5
+          ],
+          "target": [
+            -12,
+            2.5,
+            0
+          ],
+          "fov": 30
+        },
+        "sim": {
+          "set": {
+            "experiment": "pressure",
+            "motion-mode": "manual",
+            "phase-deg": 0,
+            "cycle-rate": 10,
+            "cold-pressure": 20,
+            "governor-rpm": 90,
+            "work-share": 20
+          }
+        },
+        "caption": {
+          "en": "Air above the piston pushes harder than the low-pressure contents below it. The pressure difference produces a downward force; a vacuum does not pull.",
+          "zh": "活塞上方空气的推力，大于下方低压空间的推力。压强差产生向下的力，并不是「真空在拉」。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "run": false,
+        "part": null,
+        "cutaway": "none",
+        "pose": "nc-power",
+        "layers": [
+          "teaching"
+        ],
+        "hide": [
+          "boiler",
+          "boiler-water",
+          "furnace",
+          "steam-main",
+          "throttle",
+          "throttle-disc",
+          "valve-chest",
+          "valve-upper-in",
+          "valve-lower-in",
+          "valve-upper-out",
+          "valve-lower-out",
+          "cylinder",
+          "piston",
+          "piston-rod",
+          "beam",
+          "parallel-inner",
+          "parallel-outer",
+          "parallel-bottom",
+          "radius-rod",
+          "drive-rod",
+          "planet",
+          "sun",
+          "centre-link",
+          "shaft",
+          "flywheel",
+          "governor-spindle",
+          "governor-balls",
+          "governor-ball-right",
+          "governor-upper",
+          "governor-upper-right",
+          "governor-lower",
+          "governor-lower-right",
+          "governor-collar",
+          "throttle-link",
+          "throttle-rod",
+          "throttle-crank",
+          "condenser",
+          "injection-jet",
+          "cooling-cistern",
+          "air-pump",
+          "pump-piston",
+          "pump-rod",
+          "hot-well",
+          "feed-pump",
+          "water-pipes",
+          "load-wheel",
+          "energy-input",
+          "energy-work",
+          "energy-reject"
+        ],
+        "ghost": [],
+        "labels": [
+          "nc-beam",
+          "nc-pump"
+        ],
+        "camera": {
+          "position": [
+            -7,
+            5,
+            7
+          ],
+          "target": [
+            -11,
+            3,
+            0
+          ],
+          "fov": 30
+        },
+        "sim": {
+          "set": {
+            "experiment": "pressure",
+            "motion-mode": "manual",
+            "phase-deg": 0,
+            "cycle-rate": 10,
+            "cold-pressure": 20,
+            "governor-rpm": 90,
+            "work-share": 20
+          }
+        },
+        "caption": {
+          "en": "As the engine piston descends, the other end of the beam lifts the mine-pump rod.",
+          "zh": "蒸汽机的活塞下降时，横梁另一端把矿井泵杆提起来。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "run": false,
+        "part": null,
+        "cutaway": "none",
+        "pose": "nc-return",
+        "layers": [
+          "teaching"
+        ],
+        "hide": [
+          "boiler",
+          "boiler-water",
+          "furnace",
+          "steam-main",
+          "throttle",
+          "throttle-disc",
+          "valve-chest",
+          "valve-upper-in",
+          "valve-lower-in",
+          "valve-upper-out",
+          "valve-lower-out",
+          "cylinder",
+          "piston",
+          "piston-rod",
+          "beam",
+          "parallel-inner",
+          "parallel-outer",
+          "parallel-bottom",
+          "radius-rod",
+          "drive-rod",
+          "planet",
+          "sun",
+          "centre-link",
+          "shaft",
+          "flywheel",
+          "governor-spindle",
+          "governor-balls",
+          "governor-ball-right",
+          "governor-upper",
+          "governor-upper-right",
+          "governor-lower",
+          "governor-lower-right",
+          "governor-collar",
+          "throttle-link",
+          "throttle-rod",
+          "throttle-crank",
+          "condenser",
+          "injection-jet",
+          "cooling-cistern",
+          "air-pump",
+          "pump-piston",
+          "pump-rod",
+          "hot-well",
+          "feed-pump",
+          "water-pipes",
+          "load-wheel",
+          "energy-input",
+          "energy-work",
+          "energy-reject"
+        ],
+        "ghost": [],
+        "labels": [
+          "nc-cylinder",
+          "nc-jet"
+        ],
+        "camera": "newcomen-view",
+        "sim": {
+          "set": {
+            "experiment": "pressure",
+            "motion-mode": "manual",
+            "phase-deg": 0,
+            "cycle-rate": 10,
+            "cold-pressure": 20,
+            "governor-rpm": 90,
+            "work-share": 20
+          }
+        },
+        "caption": {
+          "en": "Steam enters again and the weighted pump side helps the return. The cylinder that was cooled now has to warm again.",
+          "zh": "蒸汽再次进入，沉重的泵杆一侧帮助机构回程。刚被冷却的汽缸又要重新加热。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+At the comparison station, the cylinder is open above the piston. Its upper face is exposed to air. Steam enters the space below it, while the heavy mine-pump rod on the other side of the beam helps raise the engine piston. The model shows distinct end positions so that this sequence can be followed without confusing it with the later sealed cylinder. [S11] <FlyTo preset="newcomen-view">Look at the open cylinder</FlyTo>
+
+Next, cold water sprays inside the cylinder. The steam changes to liquid water: this is <Term id="condensation">condensation</Term>. The pressure below the piston falls. Air still presses on the upper face, while the contents below press upwards less strongly. The resulting <Term id="pressure-difference">pressure difference</Term> produces a downward force. A vacuum is not a substance that pulls the piston. [S8, S9, S11]
+
+As the engine piston descends, the other end of the beam rises and lifts the mine-pump rod. Steam can then enter again. The weighted pump side descends and helps return the engine piston to its high position. The flexible chain segments transmit tension; they cannot push a rod upwards as a rigid connection could. [S6, S11]
+
+This arrangement cools the working cylinder itself. When steam enters again, that cylinder has to warm again. The next chapter separates the place where steam works from the place where it condenses. Follow the cold-water route in both models to see the change; a cold container beside an engine is not enough to explain the complete pumping system. [S7, S12]
+
+<More title={{ en: "Air also exerts pressure", zh: "空气也会产生压力" }}>
+
+<TopicLink slug="states-of-matter" ch="air-is-matter">States of Matter: air is matter</TopicLink> introduces air as matter. For an explicitly assumed comparison using the study’s piston area, air at <Num s="S1">101.325 kPa abs</Num> above and contents at <Num s="S1">20 kPa abs</Num> below give about <Num s="S1">14.487 kN</Num> downwards. This is a calculated example, not a Newcomen measurement. There is no rod passing through a sealed upper cover, so the later engine’s rod-area correction is not used. [S1, S8]
+
+</More>
+
+<More title={{ en: "Earlier engines and flexible chains", zh: "较早的蒸汽机与柔性链条" }}>
+
+The Newcomen milestone near Dudley is <Num s="S11">1712</Num>. The museum’s surviving later example is not the machine made that year. This station explains an atmospheric pumping principle. Chains can pull on the beam’s curved ends, but a double-acting engine needs a connection that can transmit forces in both directions. [S6, S11]
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+比较工位上的汽缸，活塞上方敞开，直接接触空气。蒸汽从下面进入；横梁另一侧沉重的矿井泵杆下降，帮助蒸汽机活塞升起来。这里用分开的端态展示过程，便于与后面上端密封的汽缸比较。[S11]<FlyTo preset="newcomen-view">看看开口汽缸</FlyTo>
+
+接着，冷水喷入缸内，蒸汽变成液态水，这叫<Term id="condensation">凝结</Term>。活塞下面的压力随之降低。上方的空气仍然向下推，下方的内容物向上推得较弱，于是两侧的<Term id="pressure-difference">压强差</Term>产生向下的合力。并不是有一种叫“真空”的东西在拉活塞。[S8, S9, S11]
+
+蒸汽机活塞下降时，横梁另一端升起，把矿井泵杆提起来。随后重新通入蒸汽，较重的泵杆一侧下降，帮助机构回程。连接横梁弧形端部的链段只能承受拉力，不能像刚杆那样把力朝两个方向传递。[S6, S11]
+
+这种做法把工作汽缸本身也冷却了，下一次通汽时又得重新加热。下一章把蒸汽做功的地方与蒸汽冷凝的地方分开。比较两套模型时，先找冷水流向哪里，再看水和空气怎样离开；沿拍轴回看时，还能把喷冷水、向下做功和回程分别停住观察。只在机器旁边放一个冷罐，还没有解释完整的抽水系统。[S7, S12]
+
+<More title={{ en: "Air also exerts pressure", zh: "空气也会产生压力" }}>
+
+<TopicLink slug="states-of-matter" ch="air-is-matter">“物质的状态”的“空气也是物质”</TopicLink>介绍空气也是物质。假设采用本研究的活塞面积，上方空气为 <Num s="S1">101.325 千帕绝压</Num>、下方为 <Num s="S1">20 千帕绝压</Num>，算得向下合力约 <Num s="S1">14.487 千牛</Num>。这是假设算例，并非纽科门机器的测量。这里没有穿过密封上盖的杆，因此不能套用后面主机的杆面积修正。[S1, S8]
+
+</More>
+
+<More title={{ en: "Earlier engines and flexible chains", zh: "较早的蒸汽机与柔性链条" }}>
+
+纽科门在 Dudley 附近的蒸汽机节点是 <Num s="S11">1712</Num> 年，博物馆保存的较晚实例并非当年的原机。这个工位只解释大气式抽水原理。链条可以拉住横梁弧端；双作用蒸汽机则需要能向两个方向传力的连接。[S6, S11]
+
+</More>
+
+</Lang>

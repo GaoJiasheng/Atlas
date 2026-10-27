@@ -6,6 +6,7 @@
  * InfoPanel shows the current one (first chapter visible without JS).
  */
 import { render } from 'astro:content';
+import { validateEngineChapterState } from '../../../engines/schemas';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import SceneHost from '../../../engines/core/SceneHost';
 import LangEn from '../../../components/mdx/LangEn.astro';
@@ -38,7 +39,10 @@ const { topic } = Astro.props;
 const locale = Astro.params.locale as Locale;
 
 const chapterEntries = await getTopicChapters(topic.id);
-const chapters = chapterEntries.map((entry) => entry.data);
+const chapters = chapterEntries.map((entry) => {
+  validateEngineChapterState(topic.data.engine, topic.data.stage, entry.data.state, entry.id, topic.data.temporalMode);
+  return entry.data;
+});
 const bodies = await Promise.all(chapterEntries.map((entry) => render(entry)));
 // Engine data is validated here (a bad data file fails the page build) but NOT embedded in the
 // island props: it is written once per topic to /topics/<slug>/data.json (src/pages/topics) and the

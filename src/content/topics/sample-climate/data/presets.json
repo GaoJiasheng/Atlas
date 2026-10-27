@@ -1,0 +1,36 @@
+{
+  "presets": [
+    {
+      "id": "view-region",
+      "label": {
+        "en": "Regional fixture view",
+        "zh": "区域测试视图"
+      },
+      "camera": {
+        "center": [
+          115,
+          7.5
+        ],
+        "zoom": 3.35,
+        "pitch": 0,
+        "bearing": 0
+      }
+    },
+    {
+      "id": "view-java",
+      "label": {
+        "en": "Java fixture view",
+        "zh": "爪哇测试视图"
+      },
+      "camera": {
+        "center": [
+          110,
+          -6
+        ],
+        "zoom": 4.7,
+        "pitch": 0,
+        "bearing": 0
+      }
+    }
+  ]
+}

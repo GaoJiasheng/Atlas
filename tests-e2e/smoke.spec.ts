@@ -47,7 +47,6 @@ for (const locale of LOCALES) {
     await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/plant/"]`)).toHaveCount(1);
     await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/digestive-system/"]`)).toHaveCount(1);
     await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/heart-and-lungs/"]`)).toHaveCount(1);
-    await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/bones-and-joints/"]`)).toHaveCount(1);
     await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/circuits/"]`)).toHaveCount(1);
     await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/magnets/"]`)).toHaveCount(1);
     await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/forces/"]`)).toHaveCount(1);
@@ -60,6 +59,7 @@ for (const locale of LOCALES) {
     await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/four-taps/"]`)).toHaveCount(1);
     await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/flower-and-seed/"]`)).toHaveCount(1);
     await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/inside-the-earth/"]`)).toHaveCount(1);
+    await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/steam-engine/"]`)).toHaveCount(1);
     await expect(page.locator('[data-filter="subject"]:not([data-value=""])')).toHaveCount(6);
     await expect(page.locator('[data-filter="subject"][data-value="science"]')).toBeEnabled();
     await expect(page.locator('[data-filter="subject"][data-value="biology"]')).toBeEnabled();
@@ -70,17 +70,17 @@ for (const locale of LOCALES) {
     await expect(page.locator('[data-catalogue="sections"]')).toHaveCount(1);
     await expect(page.locator('[data-section]')).toHaveCount(6);
     await expect(page.locator('[data-section="geography"] [data-topic]')).toHaveCount(2);
-    await expect(page.locator('[data-section="biology"] [data-topic]')).toHaveCount(13);
+    await expect(page.locator('[data-section="biology"] [data-topic]')).toHaveCount(12);
     await expect(page.locator('[data-section="computer"] [data-topic]')).toHaveCount(1);
-    // Card tags: subject, then the stage type (ww1, ww2 and four-taps are Time, aircon, circuits, magnets, forces, energy-conversion, light-and-shadows, water, states-of-matter, living-things, materials, grasshopper, mosquito, plant, flower-and-seed, digestive-system, heart-and-lungs, bones-and-joints, b200-server, inside-the-earth and the six muscle topics are Space, fractions, area-perimeter, multiplication-division, telling-time, decimals, measuring and nets-and-solids are Lessons). No status or sensitivity tags.
+    // Card tags: subject, then the stage type (ww1, ww2 and four-taps are Time, aircon, circuits, magnets, forces, energy-conversion, light-and-shadows, water, states-of-matter, living-things, materials, grasshopper, mosquito, plant, flower-and-seed, steam-engine, digestive-system, heart-and-lungs, b200-server, inside-the-earth and the six muscle topics are Space, fractions, area-perimeter, multiplication-division, telling-time, decimals, measuring and nets-and-solids are Lessons). No status or sensitivity tags.
     await expect(page.locator('[data-topic] .atlas-badge')).toHaveCount(70);
     await page.locator('[data-filter="subject"][data-value="history"]').click();
     await expect(page.locator('[data-topic]:visible')).toHaveCount(2);
     await expect(page.locator('[data-catalogue-end]')).toBeHidden();
     await page.locator('[data-filter="subject"][data-value="science"]').click();
-    await expect(page.locator('[data-topic]:visible')).toHaveCount(10);
+    await expect(page.locator('[data-topic]:visible')).toHaveCount(11);
     await page.locator('[data-filter="subject"][data-value="biology"]').click();
-    await expect(page.locator('[data-topic]:visible')).toHaveCount(13);
+    await expect(page.locator('[data-topic]:visible')).toHaveCount(12);
     await expect(page.locator('[data-section="history"]')).toBeHidden();
     await page.locator('[data-filter="subject"][data-value="math"]').click();
     await expect(page.locator('[data-topic]:visible')).toHaveCount(7);
