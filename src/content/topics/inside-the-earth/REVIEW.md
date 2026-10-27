@@ -1,6 +1,6 @@
 # 地球内部与火山剖面 · 给 Gavin 的审阅清单
 
-**当前状态：draft，未发布。** 浏览器启动权限阻止必需的视觉与e2e门槛；按spec只在全部门槛通过后改为published，首页smoke计数因此保持原值。
+**当前状态：published（直接上线路线，2026-10-27）。** 浏览器验收（shoot四轮、perf、e2e）已通过，详见 docs/48 §9.4。
 
 本题按 docs/48 已定稿口径施工，主题为地理拓展，默认paper，SpaceScene / Model3DStage，使用既有table与pose能力。没有新增引擎、测验、音频、照片贴图、地理数据或灾害伤亡数字。事实逐项记录见 [AUDIT.md](AUDIT.md)，来源及许可见 [data/SOURCES.md](data/SOURCES.md)。
 
@@ -32,12 +32,8 @@
 
 生产choice控件禁止保留值 `on`／`off`：`flow-mode`静止选项由spec的 `off` 改为 `none`，保持两条流关闭的同一语义。默认值及各章各拍同步修改，不改引擎schema。生成器位于 `scripts/geo/inside-the-earth/build-parts.ts`。
 
-## 实际门槛与发布阻断（2026-10-27）
+## 浏览器验收与发布（2026-10-27）
 
-静态验证：check与validate无error/warning；157个测试文件、4220例全部通过（本题32例，加九个环形标签锚点回归例）；静态build为115页。完整施工记录见 docs/48 §9。首次并行运行时原有control.json例超时，单独重跑与最终全套均通过。
+浏览器门槛已实际跑过：`pnpm shoot --beats --tasks --keys --layout`（EN／ZH × paper／cinema）与`--perf --gpu`全部0失败、console干净，全站e2e通过；逐张看了章镜头、标签、地球分层、边界小样、P/S两排、海水柱、建筑和手机版式，细节与修掉的标签问题见 docs/48 §9.4。`shapes.ts`的环形锚点修复被保留，它对其他主题只改变了4个剖开果壳／电池剖面零件的引线落点（落在剖面上，更正确）。THIRD-PARTY-NOTICES的新增条目已撤销（本题全是原创内容）。
 
-实际浏览器门槛未通过：完整shoot与GPU性能命令均在Chromium启动时报macOS bootstrap_check_in / MachPortRendezvousServer Permission denied (1100)，SIGTRAP。主题13例e2e都未进入测试体；全站348例以failfast运行，首例启动失败、347例未运行。没有实际产品截图、手机图、drawcall/FPS、离线或运行时请求证据。原生Chrome回退也被工具拒绝，原因为“Computer Use was not approved to use Google Chrome”。本题保持draft，不能据静态测试宣称发布门槛全绿。
-
-静态几何核对发现原05镜头的震源被右侧岩块遮挡，改为X=0的正面镜头，震源仍在岩块内部。另修复既有renderer的环形局部lathe引线落在中心孔内的问题，改为指向实际切面材料；九例使用真实三角面的射线回归通过。这是最小标签bug修复，不增加求解器或schema。实际标签排布、细薄地壳可读性、两主题材质仍需要浏览器截图确认。
-
-给Gavin：请先在允许Chromium启动的环境完成brief全部浏览器门槛，再审本页逐章中文和D1–D10默认项；确认BCA语气、图解单位、记录表限制与两幅超建议大小的图。通过后改published并更新首页smoke计数；姊妹路由落地后再补本页列出的双向主题链接。
+给Gavin：请审本页逐章中文和D1–D10默认项；确认BCA语气、图解单位、记录表限制与两幅超建议大小（151／163 KiB）的章节图；姊妹题`plates-and-hazards`路由落地后补本页列出的双向主题链接。

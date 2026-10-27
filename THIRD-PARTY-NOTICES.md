@@ -102,17 +102,3 @@ The skills under `.claude/skills/` are working notes for AI assistants, not lice
 Figures and claims in topic texts cite their sources with `[S#]` ids; each
 topic's `data/SOURCES.md` lists them with URLs. Quotations are short and
 attributed; no source text is reproduced beyond that.
-
-## Inside the Earth: original content and illustrations
-
-`inside-the-earth` uses original Atlas procedural geometry and formula-generated
-teaching snapshots (`data/parts.json`), original bilingual paraphrases, and three
-project-owned drawings exported to `public/illustrations/inside-the-earth*.webp`
-and `public/illustrations/figures/inside-the-earth-*.webp`. The two chapter drawings
-reuse the project's `volcanoes-and-earthquakes` planned art; they are not copied
-from the scientific web sources. These content assets are © 2026 Gao Jiasheng,
-Atlas, CC BY-NC-SA 4.0, as in LICENSE-CONTENT. No third-party map data, mesh or
-webpage image is redistributed, and no additional licence exception applies.
-Scientific sources and access limitations are listed in
-`src/content/topics/inside-the-earth/data/SOURCES.md`; scripts and tests remain
-under the repository's software licence.

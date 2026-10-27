@@ -6806,12 +6806,12 @@
         "size": [
           1.65,
           0.22,
-          1.2
+          0.14
         ],
         "at": [
           0,
           -0.26,
-          0
+          0.53
         ],
         "color": "plastic",
         "tint": "token:ink-3"
@@ -6835,7 +6835,24 @@
       "connects": [
         "building-foundation"
       ],
-      "castShadow": false
+      "castShadow": false,
+      "extra": [
+        {
+          "kind": "box",
+          "size": [
+            1.65,
+            0.22,
+            1.06
+          ],
+          "at": [
+            0,
+            -0.26,
+            -0.07
+          ],
+          "color": "plastic",
+          "tint": "token:ink-3"
+        }
+      ]
     },
     {
       "id": "building-foundation",
@@ -6893,13 +6910,13 @@
         "kind": "box",
         "size": [
           0.075,
-          2.6,
+          0.55,
           0.075
         ],
         "at": [
-          -0.45,
-          1.3,
-          -0.35
+          0.45,
+          0.975,
+          0.35
         ],
         "color": "plastic",
         "tint": "token:ink-2"
@@ -6931,12 +6948,27 @@
           "kind": "box",
           "size": [
             0.075,
-            2.6,
+            0.7,
             0.075
           ],
           "at": [
-            -0.45,
-            1.3,
+            0.45,
+            0.35,
+            0.35
+          ],
+          "color": "plastic",
+          "tint": "token:ink-2"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.075,
+            1.35,
+            0.075
+          ],
+          "at": [
+            0.45,
+            1.925,
             0.35
           ],
           "color": "plastic",
@@ -6965,9 +6997,24 @@
             0.075
           ],
           "at": [
-            0.45,
+            -0.45,
             1.3,
             0.35
+          ],
+          "color": "plastic",
+          "tint": "token:ink-2"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.075,
+            2.6,
+            0.075
+          ],
+          "at": [
+            -0.45,
+            1.3,
+            -0.35
           ],
           "color": "plastic",
           "tint": "token:ink-2"
@@ -7278,12 +7325,12 @@
         "kind": "box",
         "size": [
           0.36,
-          2.6,
+          1.9,
           0.09
         ],
         "at": [
           0,
-          1.3,
+          0.95,
           -0.2
         ],
         "color": "plastic",
@@ -7310,7 +7357,24 @@
         "building-frame",
         "building-floors"
       ],
-      "castShadow": false
+      "castShadow": false,
+      "extra": [
+        {
+          "kind": "box",
+          "size": [
+            0.36,
+            0.7,
+            0.09
+          ],
+          "at": [
+            0,
+            2.25,
+            -0.2
+          ],
+          "color": "plastic",
+          "tint": "token:accent-1"
+        }
+      ]
     }
   ],
   "groups": [
@@ -11464,8 +11528,8 @@
       {
         "id": "longwave-ms",
         "label": {
-          "en": "Theoretical long-wave speed",
-          "zh": "理论长波速度"
+          "en": "Model long-wave speed if a wave is present",
+          "zh": "模型中存在长波时的理论速度"
         },
         "kind": "number",
         "tag": "sim",
@@ -11475,8 +11539,8 @@
       {
         "id": "longwave-kmh",
         "label": {
-          "en": "Theoretical long-wave speed",
-          "zh": "理论长波速度"
+          "en": "Model long-wave speed if a wave is present",
+          "zh": "模型中存在长波时的理论速度"
         },
         "kind": "number",
         "tag": "sim",
@@ -12347,13 +12411,13 @@
       },
       "camera": {
         "position": [
-          3,
-          2.2,
-          5
+          3.3,
+          2.3,
+          5.8
         ],
         "target": [
           0,
-          1,
+          1.05,
           0
         ],
         "fov": 34

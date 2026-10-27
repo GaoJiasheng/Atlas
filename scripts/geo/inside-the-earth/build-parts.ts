@@ -194,12 +194,16 @@ add('sea-coast', 'Shore sample', '近岸小样', 'water-and-structures', extrude
 
 // A generic four-floor structure. All upper parts share one foundation-top
 // pivot, so they remain connected in the exaggerated ±1 degree poses.
-add('building-ground', 'Ground', '地面', 'water-and-structures', box([1.65, 0.22, 1.2], [0, -0.26, 0], muted),
-  bi('Moving ground supplies the motion at the foundation.', '移动的地面把运动传到基础。'), bi('This is a generic ground sample with no fault beneath it. Ground conditions help determine how shaking affects a structure. It is not a Singapore soil survey. [S25, S63]', '这是通用地面小样，下方不画断层。地面条件会影响结构对震动的响应；它不是新加坡土层勘测。[S25, S63]'), { connects: ['building-foundation'] });
+// The main primitive is the front strip beyond the foundation, so the leader
+// lands on ground that shows; the rest is the same slab.
+add('building-ground', 'Ground', '地面', 'water-and-structures', box([1.65, 0.22, 0.14], [0, -0.26, 0.53], muted),
+  bi('Moving ground supplies the motion at the foundation.', '移动的地面把运动传到基础。'), bi('This is a generic ground sample with no fault beneath it. Ground conditions help determine how shaking affects a structure. It is not a Singapore soil survey. [S25, S63]', '这是通用地面小样，下方不画断层。地面条件会影响结构对震动的响应；它不是新加坡土层勘测。[S25, S63]'), { extra: [box([1.65, 0.22, 1.06], [0, -0.26, -0.07], muted)], connects: ['building-foundation'] });
 add('building-foundation', 'Foundation', '基础', 'water-and-structures', box([1.2, 0.3, 0.92], [0, -0.15, 0], ink),
   bi('The foundation connects the structure to the ground.', '基础把结构连接到地面。'), bi('The foundation depth and width are design choices. This sample has no default isolation device, specified piles or building-code parameters. It does not assess an actual building. [S25, S63]', '基础深度和宽度是设计选择。本样本没有默认隔震装置、指定桩基或建筑规范参数，不评估真实建筑。[S25, S63]'), { connects: ['building-ground', 'building-frame', 'building-core'] });
 const frame: Primitive[] = [];
-for (const x of [-0.45, 0.45]) for (const z of [-0.35, 0.35]) frame.push(box([0.075, 2.6, 0.075], [x, 1.3, z], ink));
+// The first piece is the front column between two floor slabs, so the leader anchor is not buried in a slab.
+frame.push(box([0.075, 0.55, 0.075], [0.45, 0.975, 0.35], ink), box([0.075, 0.7, 0.075], [0.45, 0.35, 0.35], ink), box([0.075, 1.35, 0.075], [0.45, 1.925, 0.35], ink));
+for (const [x, z] of [[0.45, -0.35], [-0.45, 0.35], [-0.45, -0.35]] as const) frame.push(box([0.075, 2.6, 0.075], [x, 1.3, z], ink));
 for (const y of [0.65, 1.3, 1.95, 2.6]) {
   for (const z of [-0.35, 0.35]) frame.push(box([0.98, 0.07, 0.07], [0, y, z], ink));
   for (const x of [-0.45, 0.45]) frame.push(box([0.07, 0.07, 0.78], [x, y, 0], ink));
@@ -212,10 +216,11 @@ add('building-floors', 'Floors', '楼板', 'water-and-structures', box([1, 0.065
   bi('Floor slabs connect to the frame and structural wall in this sample.', '本样本的楼板与框架和结构墙相连。'),
   bi('The repeated floors are design geometry, not a claim about a real building’s storey count. The floor, frame and wall share the same pose pivot so the connections stay together. [S25, S63]', '重复楼板是设计几何，不表示真实建筑的楼层数。楼板、框架和结构墙共用姿态枢轴，使连接保持相接。[S25, S63]'),
   { repeat: { count: 4, axis: [0, 1, 0], spacing: 0.65 }, connects: ['building-frame', 'building-core'] });
-add('building-core', 'Structural wall', '结构墙', 'water-and-structures', box([0.36, 2.6, 0.09], [0, 1.3, -0.2], accent),
+// Same wall in two pieces; the main one ends between floor slabs so its leader anchor is not buried in one.
+add('building-core', 'Structural wall', '结构墙', 'water-and-structures', box([0.36, 1.9, 0.09], [0, 0.95, -0.2], accent),
   bi('This wall is connected to the frame, floors and foundation.', '这面墙与框架、楼板和基础相连。'),
   bi('The wall is one generic example of structural support, not a claim about every Singapore building. Response depends on ground conditions and vibration characteristics; height alone cannot rank safety. [S25, S63]', '这面墙只是结构支撑的通用例子，不代表每栋新加坡建筑。响应受地面条件和振动特性影响，不能只按高矮排列安全程度。[S25, S63]'),
-  { connects: ['building-foundation', 'building-frame', 'building-floors'] });
+  { extra: [box([0.36, 0.7, 0.09], [0, 2.25, -0.2], accent)], connects: ['building-foundation', 'building-frame', 'building-floors'] });
 
 // Non-simulation poses never take ownership of the wave or source glyphs.
 poses['edge-open'] = { duration: 0.6, 'edge-div-left': { offset: [-0.2, 0, 0] }, 'edge-div-right': { offset: [0.2, 0, 0] } };
@@ -278,8 +283,8 @@ const sim: z.input<typeof simSchema> = {
     { id: 'wave-front', label: bi('Selected wavefront (diagram units)', '所选波前（图解单位）'), kind: 'number', tag: 'sim', unit: 'du', decimals: 1 },
     { id: 'water-shape', label: bi('Water snapshot shape', '水体快照形状'), kind: 'state', states: shapeStates('water', 'water-rest') },
     { id: 'water-stage', label: bi('Water state', '水体状态'), kind: 'state', states: { 'no-uplift-in-model': bi('No source in this model', '本例没有位移源'), rest: bi('At rest', '静止'), displaced: bi('Water displaced', '水体被移开'), spreading: bi('Disturbance spreading', '扰动向外传播') } },
-    { id: 'longwave-ms', label: bi('Theoretical long-wave speed', '理论长波速度'), kind: 'number', tag: 'sim', unit: 'm/s', decimals: 1 },
-    { id: 'longwave-kmh', label: bi('Theoretical long-wave speed', '理论长波速度'), kind: 'number', tag: 'sim', unit: 'km/h', decimals: 1 },
+    { id: 'longwave-ms', label: bi('Model long-wave speed if a wave is present', '模型中存在长波时的理论速度'), kind: 'number', tag: 'sim', unit: 'm/s', decimals: 1 },
+    { id: 'longwave-kmh', label: bi('Model long-wave speed if a wave is present', '模型中存在长波时的理论速度'), kind: 'number', tag: 'sim', unit: 'km/h', decimals: 1 },
   ],
   bind: [
     { output: 'wave-shape', part: waveIds, pose: Object.fromEntries(steps.map(k => [k === 0 ? 'wave-rest' : `wave-at-${k}`, `wave-snap-${k}`])) },
@@ -319,7 +324,7 @@ const file = {
     { id: 'volcano-view', label: bi('Volcano', '火山'), camera: camera([3, 2.1, 4.8], [0, 0.4, 0]) },
     { id: 'fault-view', label: bi('Slip and waves', '滑动与波'), camera: camera([0, 2.2, 6.5], [0, 0, 0]) },
     { id: 'sea-view', label: bi('Sea', '海水'), camera: camera([0, 1.5, 5.8], [0, 0, 0]) },
-    { id: 'building-view', label: bi('Structure', '结构'), camera: camera([3, 2.2, 5], [0, 1, 0]) },
+    { id: 'building-view', label: bi('Structure', '结构'), camera: camera([3.3, 2.3, 5.8], [0, 1.05, 0]) },
   ],
   spec: [
     { key: bi('Earth radius', '地球半径'), value: '≈ 6371 km [S58]', tag: 'typical' },
