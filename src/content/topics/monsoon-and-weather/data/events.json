@@ -1,0 +1,146 @@
+[
+  {
+    "id": "site-singapore",
+    "kind": "site",
+    "at": [
+      103.853875,
+      1.294979
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Singapore",
+      "zh": "新加坡"
+    },
+    "summary": {
+      "en": "Reading anchor, not a weather station",
+      "zh": "认位置用的城市点，不是气象站"
+    },
+    "detail": {
+      "en": "Representative city point from Natural Earth 1:110m populated places (NE_ID 1159151627), coordinates unchanged. It marks the city only: not a weather station, a monitoring instrument or a fire location. The monthly wind and rain values come from regional grid cells, not from measurements in this city.",
+      "zh": "取自 Natural Earth 1:110m 城市点（NE_ID 1159151627）的城市代表点，坐标未改。它只标出城市，不是气象站、监测仪器，也不是火点。月平均风和雨的数值来自区域格点，不是在这座城市测得的。"
+    },
+    "sources": [
+      "S103"
+    ]
+  },
+  {
+    "id": "site-kuala-lumpur",
+    "kind": "site",
+    "at": [
+      101.688699,
+      3.139797
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Kuala Lumpur",
+      "zh": "吉隆坡"
+    },
+    "summary": {
+      "en": "Reading anchor, not a weather station",
+      "zh": "认位置用的城市点，不是气象站"
+    },
+    "detail": {
+      "en": "Representative city point from Natural Earth 1:110m populated places (NE_ID 1159151317), coordinates unchanged. It marks the city only: not a weather station, a monitoring instrument or a fire location. The monthly wind and rain values come from regional grid cells, not from measurements in this city.",
+      "zh": "取自 Natural Earth 1:110m 城市点（NE_ID 1159151317）的城市代表点，坐标未改。它只标出城市，不是气象站、监测仪器，也不是火点。月平均风和雨的数值来自区域格点，不是在这座城市测得的。"
+    },
+    "sources": [
+      "S103"
+    ]
+  },
+  {
+    "id": "site-jakarta",
+    "kind": "site",
+    "at": [
+      106.827492,
+      -6.172472
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Jakarta",
+      "zh": "雅加达"
+    },
+    "summary": {
+      "en": "Reading anchor, not a weather station",
+      "zh": "认位置用的城市点，不是气象站"
+    },
+    "detail": {
+      "en": "Representative city point from Natural Earth 1:110m populated places (NE_ID 1159151599), coordinates unchanged. It marks the city only: not a weather station, a monitoring instrument or a fire location. The monthly wind and rain values come from regional grid cells, not from measurements in this city.",
+      "zh": "取自 Natural Earth 1:110m 城市点（NE_ID 1159151599）的城市代表点，坐标未改。它只标出城市，不是气象站、监测仪器，也不是火点。月平均风和雨的数值来自区域格点，不是在这座城市测得的。"
+    },
+    "sources": [
+      "S103"
+    ]
+  },
+  {
+    "id": "site-hanoi",
+    "kind": "site",
+    "at": [
+      105.848068,
+      21.035273
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Hanoi",
+      "zh": "河内"
+    },
+    "summary": {
+      "en": "Reading anchor, not a weather station",
+      "zh": "认位置用的城市点，不是气象站"
+    },
+    "detail": {
+      "en": "Representative city point from Natural Earth 1:110m populated places (NE_ID 1159151251), coordinates unchanged. It marks the city only: not a weather station, a monitoring instrument or a fire location. The monthly wind and rain values come from regional grid cells, not from measurements in this city.",
+      "zh": "取自 Natural Earth 1:110m 城市点（NE_ID 1159151251）的城市代表点，坐标未改。它只标出城市，不是气象站、监测仪器，也不是火点。月平均风和雨的数值来自区域格点，不是在这座城市测得的。"
+    },
+    "sources": [
+      "S103"
+    ]
+  },
+  {
+    "id": "site-bangkok",
+    "kind": "site",
+    "at": [
+      100.514699,
+      13.751945
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Bangkok",
+      "zh": "曼谷"
+    },
+    "summary": {
+      "en": "Reading anchor, not a weather station",
+      "zh": "认位置用的城市点，不是气象站"
+    },
+    "detail": {
+      "en": "Representative city point from Natural Earth 1:110m populated places (NE_ID 1159151509), coordinates unchanged. It marks the city only: not a weather station, a monitoring instrument or a fire location. The monthly wind and rain values come from regional grid cells, not from measurements in this city.",
+      "zh": "取自 Natural Earth 1:110m 城市点（NE_ID 1159151509）的城市代表点，坐标未改。它只标出城市，不是气象站、监测仪器，也不是火点。月平均风和雨的数值来自区域格点，不是在这座城市测得的。"
+    },
+    "sources": [
+      "S103"
+    ]
+  },
+  {
+    "id": "site-manila",
+    "kind": "site",
+    "at": [
+      120.980271,
+      14.606105
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Manila",
+      "zh": "马尼拉"
+    },
+    "summary": {
+      "en": "Reading anchor, not a weather station",
+      "zh": "认位置用的城市点，不是气象站"
+    },
+    "detail": {
+      "en": "Representative city point from Natural Earth 1:110m populated places (NE_ID 1159151525), coordinates unchanged. It marks the city only: not a weather station, a monitoring instrument or a fire location. The monthly wind and rain values come from regional grid cells, not from measurements in this city.",
+      "zh": "取自 Natural Earth 1:110m 城市点（NE_ID 1159151525）的城市代表点，坐标未改。它只标出城市，不是气象站、监测仪器，也不是火点。月平均风和雨的数值来自区域格点，不是在这座城市测得的。"
+    },
+    "sources": [
+      "S103"
+    ]
+  }
+]

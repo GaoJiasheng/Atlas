@@ -1,9 +1,9 @@
 /**
  * Details of an entity picked in the participation card (BandCard row), shown
- * in the InfoPanel's `inspector` slot: name (both languages), bloc spans,
+ * in the InfoPanel's `readerTop` slot: name (both languages), bloc spans,
  * joined / left, and the approximate controlled area at the playhead time.
  */
-import { useEffect, useMemo, useRef, type CSSProperties } from 'react';
+import { useMemo, type CSSProperties } from 'react';
 import type { Locale } from '../core/types';
 import { tx } from '../../i18n';
 import { useSceneContext, useT } from '../core/context';
@@ -29,13 +29,9 @@ export interface EntityInspectorProps {
 export function EntityInspector({ entity, model, playhead, locale, onClose }: EntityInspectorProps) {
   const t = useT();
   const { topic } = useSceneContext();
-  const ref = useRef<HTMLElement>(null);
   const now = usePlayheadT(playhead);
   const areas = useMemo(() => controlAreas(model), [model]);
 
-  useEffect(() => {
-    ref.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-  }, [entity.id]);
 
   const index = `N-${String([...model.entities.keys()].indexOf(entity.id) + 1).padStart(2, '0')}`;
   const other = locale === 'zh' ? entity.name.en : entity.name.zh;
@@ -44,7 +40,7 @@ export function EntityInspector({ entity, model, playhead, locale, onClose }: En
   const date = (p: Parameters<typeof formatTime>[0]) => formatTime(p, locale, model.datePrecision, model.mixedEra);
 
   return (
-    <article ref={ref} className="ts-event ts-entity" aria-labelledby={`ts-entity-${entity.id}`}>
+    <article className="ts-event ts-entity" aria-labelledby={`ts-entity-${entity.id}`}>
       <header className="ts-event__header">
         <p className="ts-event__eyebrow">
           <span>{index}</span>

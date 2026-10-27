@@ -42,7 +42,8 @@ function groupThousands(s: string): string {
   return frac ? `${grouped}.${frac}` : grouped;
 }
 
-function formatMa(ma: number, locale: Locale): string {
+function formatMa(ma: number, locale: Locale, maDigits?: number): string {
+  if (maDigits !== undefined) return `${trim(ma, maDigits)}${locale === 'zh' ? ' Ma / ' + trim(ma, maDigits) + '百万年前' : ' Ma'}`;
   if (locale === 'zh') {
     if (ma === 0) return '现在';
     const years = ma * 1e6;
@@ -56,8 +57,8 @@ function formatMa(ma: number, locale: Locale): string {
 /** True for a CE year that gets the era marker in a mixed-era topic. */
 const marksCe = (year: number, ce: boolean | undefined) => ce === true && year > 0 && year < 1000;
 
-export function formatTime(t: TimePoint, locale: Locale, precision?: DisplayPrecision, ce?: boolean): string {
-  if (isGeoTime(t)) return formatMa(t.ma, locale);
+export function formatTime(t: TimePoint, locale: Locale, precision?: DisplayPrecision, ce?: boolean, maDigits?: number): string {
+  if (isGeoTime(t)) return formatMa(t.ma, locale, maDigits);
   const m = DATE_RE.exec(t);
   if (!m) return t;
   const bce = m[1] === '-';

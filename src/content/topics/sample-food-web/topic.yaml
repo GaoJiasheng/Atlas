@@ -1,0 +1,20 @@
+id: sample-food-web
+title:
+  en: 'Sample: Directed food web'
+  zh: 示例：有向食物网
+subtitle:
+  en: Draft engine test fixture
+  zh: 引擎草稿测试样例
+subject: science
+levels:
+- P6
+moe: []
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: draft
+note:
+  en: Engine fixture · simple shapes and sample evidence
+  zh: 引擎测试样例 · 简单形体与示例证据

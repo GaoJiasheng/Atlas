@@ -68,7 +68,7 @@ export const isoDate = z
 export type IsoDate = z.infer<typeof isoDate>;
 
 /** Geological time in millions of years ago: `{ ma: 200 }`. */
-export const geoTime = z.object({ ma: z.number().nonnegative() }).strict();
+export const geoTime = z.object({ ma: z.number().finite().nonnegative().refine((n) => Number.isFinite(n * 1e6), 'Ma overflows the time axis') }).strict();
 export type GeoTime = z.infer<typeof geoTime>;
 
 /** Any point on a TimeScene axis: historical date or geological time. */

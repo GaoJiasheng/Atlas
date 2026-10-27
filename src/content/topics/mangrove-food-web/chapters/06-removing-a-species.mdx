@@ -1,0 +1,237 @@
+---
+id: removing-a-species
+order: 6
+title:
+  en: Removing a species
+  zh: 移走一种生物
+level: P6
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  pose: null
+  layers:
+  - habitat
+  - mangroves
+  - animals
+  - closeups
+  - food-paths
+  hide:
+  - bacteria-inset
+  - fungi-inset
+  - gill-inset
+  labels:
+  - fiddler-crabs
+  - tree-crabs
+  - giant-mudskipper
+  camera:
+    position:
+    - 1.9
+    - 1.4
+    - 2.1
+    target:
+    - 0.05
+    - 0.25
+    - 0.05
+    fov: 32
+  summary:
+    en: Change one removal control and inspect which food pathways remain.
+    zh: 只改变一次移走操作，再检查哪些食物路径还留着。
+  sim:
+    set:
+      remove: none
+      inspect: n-mudskipper
+      tide: low
+    try:
+      vary: remove
+      also:
+      - inspect
+      keep:
+      - tide
+      - en: Same selected links
+        zh: 同一组选入关系
+      observe:
+      - foods
+      - food-status
+      - active-links
+      record: true
+      predict:
+        prompt:
+          en: With the mudskipper selected, what happens to its shown food count when fiddlers are removed?
+          zh: 查看弹涂鱼时，移走招潮蟹后，它的图内食物种类会怎样？
+        start:
+          remove: none
+          inspect: n-mudskipper
+          tide: low
+        change:
+          remove: n-fiddlers
+        observe: foods
+        options:
+        - id: less
+          label:
+            en: Fewer foods
+            zh: 减少
+          means: less
+        - id: same
+          label:
+            en: Same count
+            zh: 不变
+          means: same
+        - id: zero
+          label:
+            en: No shown food
+            zh: 图内无食物
+          means: zero
+  beats:
+  - hide:
+    - bacteria-inset
+    - fungi-inset
+    - gill-inset
+    sim:
+      set:
+        remove: none
+        inspect: n-mudskipper
+        tide: low
+    labels:
+    - fiddler-crabs
+    - tree-crabs
+    - giant-mudskipper
+    caption:
+      en: Before the change, this model gives the mudskipper two shown food inputs. Predict what remains if the
+        fiddlers are removed.
+      zh: 改变前，这个模型给弹涂鱼画了两种食物输入；先猜移走招潮蟹后还剩什么。
+  - hide:
+    - bacteria-inset
+    - fungi-inset
+    - gill-inset
+    sim:
+      set:
+        remove: n-fiddlers
+        inspect: n-mudskipper
+    labels:
+    - tree-crabs
+    - giant-mudskipper
+    caption:
+      en: In this model, the shown food count falls from two to one. The climbing-crab pathway remains.
+      zh: 在这个模型里，图中食物种类从两种减为一种；攀爬蟹类路径仍然留着。
+  - hide:
+    - bacteria-inset
+    - fungi-inset
+    - gill-inset
+    sim:
+      set:
+        remove: n-algae
+        inspect: n-fiddlers
+    labels:
+    - fiddler-crabs
+    run: false
+    caption:
+      en: 'Removing algae leaves no food pathway shown for the fiddlers. The animal symbol stays: this is not a
+        prediction of immediate death.'
+      zh: 移走藻类后，图内没有给招潮蟹留下食物路径；动物图标仍在，这不表示预测它立刻死亡。
+  - hide:
+    - bacteria-inset
+    - fungi-inset
+    - gill-inset
+    sim:
+      set:
+        remove: n-algae
+        inspect: n-mudskipper
+    labels:
+    - fallen-leaves
+    - tree-crabs
+    - giant-mudskipper
+    caption:
+      en: In this model, the mudskipper loses one input indirectly, but the leaf-to-climbing-crab route still reaches
+        it. Trace the whole path.
+      zh: 在这个模型里，弹涂鱼间接少了一种食物，但叶片到攀爬蟹类的路径仍能通向它；要沿整条路径解释。
+  - hide:
+    - bacteria-inset
+    - fungi-inset
+    - gill-inset
+    sim:
+      set:
+        remove: n-heron
+        inspect: n-mudskipper
+    labels:
+    - giant-mudskipper
+    caption:
+      en: Removing the heron removes one shown predator of the mudskipper. Fewer predators may matter, but this
+        model does not calculate a population increase.
+      zh: 移走鹭，就少了一个图中弹涂鱼的捕食者；捕食压力可能改变，但模型不计算种群增加多少。
+  - hide:
+    - bacteria-inset
+    - fungi-inset
+    - gill-inset
+    sim:
+      set:
+        remove: n-mudskipper
+        inspect: n-heron
+    labels:
+    - heron
+    - small-fish
+    caption:
+      en: No food path remains for the heron inside this excerpt. Other prey, movement and time could change a real
+        outcome.
+      zh: 在这个节选里，鹭没有剩余食物路径；真实结果还可能受其他猎物、迁移和时间影响。
+  index:
+    parts:
+    - fiddler-crabs
+    - tree-crabs
+    - giant-mudskipper
+    - heron
+    - algae-patch
+    - bakau-tree
+    - small-fish
+    - fallen-leaves
+---
+
+<Lang en>
+
+Keep the selected links, tide pose and inspected mudskipper the same. Before changing anything, predict what removing fiddler crabs will do to the mudskipper’s shown food count. Then apply the change. In this model the count falls from <Num s="S30">2</Num> to <Num s="S30">1</Num>. The remaining route passes through the climbing-crab group. The comparison is about available graph inputs, not the size of a meal.
+
+Now remove algae and inspect the fiddlers. Their only selected input has gone, so the card says no shown food. Their animal symbol remains. This status means that no food pathway is available within this excerpt; it does not calculate starvation, the time an animal can survive or its access to food outside the graph.
+
+Inspect the mudskipper without changing that algae removal. It loses an input indirectly: algae no longer supports the selected fiddler route. Trace the remaining leaf-supply route through climbing crabs to the fish. An indirect explanation needs the intervening steps, not simply a claim that removing algae changes everything equally. The graph makes those steps visible under its chosen rules.
+
+Removing the heron instead closes one shown predator link. Fewer predators may affect a real population, but the model cannot give the amount or direction of a net population change. Real outcomes also depend on other prey, movement, reproduction and time. A useful conclusion therefore includes a condition: within these selected links, this pathway remains or is lost. It should not turn missing information into a certain extinction forecast.
+
+<More title={{"en": "A path is not a population", "zh": "路径不是种群数量"}}>
+
+Present nodes counts what was not explicitly removed. Supported nodes counts what is reachable from the available producers under the graph rules. Active links connect those nodes. These are model diagnostics, not animal counts. An unsupported consumer may still exist, move or have other foods in the real habitat.
+
+</More>
+
+<More title={{"en": "The removal control", "zh": "移走控件的含义"}}>
+
+The control closes one node’s continuing supply and its selected links. It omits existing litter and carcasses, reproduction, immigration and alternative foods. Its instantaneous diagram update is not an instantaneous biological event.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+先保持选入关系、潮位姿态和查看的弹涂鱼相同。改变前预测：移走招潮蟹后，弹涂鱼的图内食物种类会怎样？再应用改变。在这个模型里，计数从 <Num s="S30">2</Num> 种减为 <Num s="S30">1</Num> 种，经过攀爬蟹类的路线仍保留。比较的是图中可用的输入，不是一餐吃了多少。
+
+再移走藻类，查看招潮蟹。它唯一选入的输入消失，卡片显示“图内无食物”，动物造型却仍在。这个状态只表示本节选没有可用的食物路径，不计算饥饿、能活多久，或到图外寻找食物的机会。
+
+保持藻类被移走，再查看弹涂鱼。它间接失去一种输入：藻类不再支持图中的招潮蟹路线。沿另一条线追踪，叶片供应经攀爬蟹类仍能通到鱼。解释间接影响，要指出中间经过的步骤，不能只说移走藻类会让所有生物受到同样影响。
+
+换成移走鹭，会关闭一个图中的捕食者关系。捕食者减少可能影响真实种群，但模型算不出最终数量改变多少。其他食物、迁移、繁殖和时间也会影响结果。因此结论要带条件：在这些选入关系中，某条路径保留或消失。缺少资料，不能变成确定的灭绝预测。
+
+<More title={{"en": "A path is not a population", "zh": "路径不是种群数量"}}>
+
+“未移走节点”数未被明确关闭的节点；“有路径节点”数按图规则能从现有生产者到达的节点；“有效连线”连接这些节点。这些是模型诊断，不是动物数量。真实生境中，没有图内路径的消费者仍可能存在、迁移或取食其他食物。
+
+</More>
+
+<More title={{"en": "The removal control", "zh": "移走控件的含义"}}>
+
+控件关闭一个节点的持续供应及相关的选入连线，不模拟原有落叶与尸体、繁殖、迁入和别的食物。图立即更新，不表示真实生物过程立即发生。
+
+</More>
+
+</Lang>

@@ -1,0 +1,64 @@
+{
+  "sources": [
+    {
+      "id": "S8",
+      "text": {
+        "en": "NASA Moon parameters",
+        "zh": "NASA 月球参数"
+      },
+      "note": {
+        "en": "Circular model parameters and equations; not an ephemeris.",
+        "zh": "圆轨道模型参数与公式，非星历。"
+      },
+      "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html"
+    },
+    {
+      "id": "S9",
+      "text": {
+        "en": "NASA planetary parameters",
+        "zh": "NASA 行星参数"
+      },
+      "note": {
+        "en": "Circular model parameters and equations; not an ephemeris.",
+        "zh": "圆轨道模型参数与公式，非星历。"
+      },
+      "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/"
+    },
+    {
+      "id": "S10",
+      "text": {
+        "en": "JPL astronomical constants",
+        "zh": "JPL 天文常量"
+      },
+      "note": {
+        "en": "Circular model parameters and equations; not an ephemeris.",
+        "zh": "圆轨道模型参数与公式，非星历。"
+      },
+      "url": "https://ssd.jpl.nasa.gov/astro_par.html"
+    },
+    {
+      "id": "S33",
+      "text": {
+        "en": "Atlas computed Singapore solar year, CC0",
+        "zh": "Atlas 新加坡计算太阳年表，CC0"
+      },
+      "note": {
+        "en": "CC0 original computed table; Atlas teaching reference point 1.3342°N, 103.7357°E, unobstructed sea-level horizon, centre threshold −0.833°, UTC+8. All 365 rows preserved; displayed to nearest minute. Not independently observed validation.",
+        "zh": "CC0原创计算表；Atlas教学参考点北纬1.3342°、东经103.7357°，无遮挡海平面地平线，太阳中心阈值−0.833°，UTC+8。365行数值全部保留，按分钟显示；非独立实测验证。"
+      },
+      "url": "https://gml.noaa.gov/grad/solcalc/calcdetails.html"
+    },
+    {
+      "id": "S36",
+      "text": {
+        "en": "Atlas circular model design study",
+        "zh": "Atlas 圆轨道教学模型设计"
+      },
+      "design": true,
+      "note": {
+        "en": "DESIGN: synthetic circular orbits; fixed Earth axis; active rotations; finite Sun sphere/disc tangents; no atmospheric lunar brightness, ephemeris or dates. D=24 acos(−tan latitude tan declination)/π; k=(1+cos phase)/2. Nominal radii and periods are sourced in S8–S10. See docs/44 §4 for the full equations.",
+        "zh": "设计：合成圆轨道、固定地轴、主动旋转、有限太阳球体/视盘切线；无月食大气亮度、星历或日期。日长=24 acos(−tan纬度 tan赤纬)/π；亮部=(1+cos相角)/2。名义半径和周期取自S8至S10。完整公式见docs/44第4节。"
+      }
+    }
+  ]
+}

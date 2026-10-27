@@ -1,0 +1,158 @@
+{
+  "presets": [
+    {
+      "id": "view-ocean",
+      "label": {
+        "en": "Indian Ocean",
+        "zh": "印度洋"
+      },
+      "camera": {
+        "center": [
+          80,
+          10
+        ],
+        "zoom": 2.1
+      }
+    },
+    {
+      "id": "view-china",
+      "label": {
+        "en": "Chinese coast",
+        "zh": "中国沿岸"
+      },
+      "camera": {
+        "center": [
+          119,
+          28
+        ],
+        "zoom": 4.3
+      }
+    },
+    {
+      "id": "view-straits",
+      "label": {
+        "en": "The straits",
+        "zh": "海峡"
+      },
+      "camera": {
+        "center": [
+          102.8,
+          1.9
+        ],
+        "zoom": 5.0
+      }
+    },
+    {
+      "id": "view-india",
+      "label": {
+        "en": "Indian southwest coast",
+        "zh": "印度西南岸"
+      },
+      "camera": {
+        "center": [
+          76,
+          10
+        ],
+        "zoom": 5
+      }
+    },
+    {
+      "id": "view-sri-lanka",
+      "label": {
+        "en": "Sri Lanka",
+        "zh": "斯里兰卡"
+      },
+      "camera": {
+        "center": [
+          80.7,
+          7.3
+        ],
+        "zoom": 5.7
+      }
+    },
+    {
+      "id": "view-gulf",
+      "label": {
+        "en": "Hormuz",
+        "zh": "霍尔木兹"
+      },
+      "camera": {
+        "center": [
+          56.45,
+          27
+        ],
+        "zoom": 6
+      }
+    },
+    {
+      "id": "view-africa",
+      "label": {
+        "en": "East African coast",
+        "zh": "东非沿岸"
+      },
+      "camera": {
+        "center": [
+          43,
+          -3
+        ],
+        "zoom": 3.9
+      }
+    },
+    {
+      "id": "view-arabia",
+      "label": {
+        "en": "Aden",
+        "zh": "亚丁"
+      },
+      "camera": {
+        "center": [
+          45,
+          13
+        ],
+        "zoom": 5.3
+      }
+    },
+    {
+      "id": "view-java",
+      "label": {
+        "en": "Java",
+        "zh": "爪哇"
+      },
+      "camera": {
+        "center": [
+          111,
+          -7
+        ],
+        "zoom": 5
+      }
+    },
+    {
+      "id": "view-sumatra",
+      "label": {
+        "en": "Samudera region",
+        "zh": "苏门答剌区域"
+      },
+      "camera": {
+        "center": [
+          97.2,
+          5
+        ],
+        "zoom": 6
+      }
+    },
+    {
+      "id": "view-bengal",
+      "label": {
+        "en": "Bengal region",
+        "zh": "孟加拉区域"
+      },
+      "camera": {
+        "center": [
+          90.2,
+          23
+        ],
+        "zoom": 4.4
+      }
+    }
+  ]
+}

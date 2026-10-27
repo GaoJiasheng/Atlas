@@ -15,6 +15,7 @@
  * This module is build-time only (zod); client code imports its *types* only.
  */
 import { z } from 'zod';
+import { deepTimeBundleSchema } from './deep-time';
 import {
   bilingual,
   colorRef,
@@ -448,6 +449,7 @@ export type RiversFile = z.output<typeof riversFile>;
 /** Parsed `data/*.json` of a GeoStage topic, keyed by file name. */
 export const timeSceneGeoData = z
   .object({
+    deepTime: deepTimeBundleSchema.optional(),
     entities: entitiesFile,
     control: controlFile,
     movements: movementsFile,
@@ -540,6 +542,9 @@ export type TimeLayer = (typeof TIME_LAYERS)[number];
 export const timeBeat = z
   .object({
     t: timePoint.optional(),
+    inset: z.enum(['world', 'southeast-asia', 'mexico']).optional(),
+    insetVisible: z.boolean().optional(),
+    fossilMode: z.enum(['age-window', 'all-mesozoic']).optional(),
     camera: geoCamera.optional(),
     layers: z.array(kebabId).optional(),
     highlight: z.array(kebabId).optional(),
@@ -557,10 +562,21 @@ export const timeChapterState = z
   .object({
     /** Target time for the chapter (`t` in the URL). */
     time: timePoint.optional(),
+    inset: z.enum(['world', 'southeast-asia', 'mexico']).optional(),
+    insetVisible: z.boolean().optional(),
+    fossilMode: z.enum(['age-window', 'all-mesozoic']).optional(),
     camera: geoCamera.optional(),
     layers: z.array(kebabId).optional(),
     /** Event / movement / entity ids to emphasise. */
     highlight: z.array(kebabId).optional(),
+    /** Ordered event ids reachable from this chapter's reader (a reconstruction topic: its modern points / cards, docs/47 E-DE2); never inherited. */
+    index: z.array(kebabId).optional().superRefine((ids, ctx) => {
+      const seen = new Set<string>();
+      ids?.forEach((id, i) => {
+        if (seen.has(id)) ctx.addIssue({ code: z.ZodIssueCode.custom, message: `duplicate event "${id}"`, path: [i] });
+        seen.add(id);
+      });
+    }),
     theme: theme.optional(),
     /** The child's question for this chapter (reading panel header when there is no `summary`). */
     question: bilingual.optional(),
@@ -598,6 +614,9 @@ export type ClimatologyChapterState = z.output<typeof climatologyChapterState>;
 
 export function timeSceneIds(data: TimeSceneGeoData, topic?: Pick<TopicLike, 'datedLayers'>): { kind: string; id: string }[] {
   return [
+    ...(data.deepTime ? (data.glossary?.terms ?? []).map((t) => ({ kind: 'term', id: t.id })) : []),
+    ...(data.deepTime?.reconstruction.frames ?? []).map((f) => ({ kind: 'reconstruction frame', id: f.id })),
+    ...[...(data.deepTime?.points ?? []), ...(data.deepTime?.cards ?? [])].map((p) => ({ kind: 'modern evidence', id: p.id })),
     ...data.entities.map((e) => ({ kind: 'entity', id: e.id })),
     ...data.movements.map((m) => ({ kind: 'movement', id: m.id })),
     ...data.events.map((e) => ({ kind: 'event', id: e.id })),
@@ -615,9 +634,19 @@ export function timeChapterRefs(state: TimeChapterState): string[] {
   return [...(state.highlight ?? []), ...(state.beats ?? []).flatMap((b) => b.highlight ?? [])];
 }
 
+/** The reader index lists events; a reconstruction topic's lists its modern points / cards (docs/47 E-DE2) instead. */
+export function timeChapterIndexIssues(state: TimeChapterState, data: Pick<TimeSceneGeoData, 'events'> & Partial<Pick<TimeSceneGeoData, 'deepTime'>>): string[] {
+  if (data.deepTime) {
+    const objects = new Set([...data.deepTime.points, ...data.deepTime.cards].map((object) => object.id));
+    return (state.index ?? []).flatMap((id, i) => objects.has(id) ? [] : [`state.index.${i}: unknown modern point or card "${id}"`]);
+  }
+  const events = new Set(data.events.map((event) => event.id));
+  return (state.index ?? []).flatMap((id, i) => events.has(id) ? [] : [`state.index.${i}: unknown event "${id}"`]);
+}
+
 /** Layer ids are topic-dependent, so check them after parsing the chapter. */
 export function timeChapterLayerIssues(state: Pick<TimeChapterState, 'layers' | 'beats'>, layers: readonly Pick<DatedLayerDef, 'id'>[] = []): string[] {
-  const known = new Set<string>([...TIME_LAYERS, ...layers.map((layer) => layer.id)]);
+  const known = new Set<string>([...TIME_LAYERS, 'fossils-modern', ...layers.map((layer) => layer.id)]);
   const issues: string[] = [];
   const check = (ids: readonly string[] | undefined, path: string) => {
     for (const id of ids ?? []) if (!known.has(id)) issues.push(`${path}: unknown layer "${id}"`);

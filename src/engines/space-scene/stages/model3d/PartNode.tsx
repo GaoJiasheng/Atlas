@@ -66,7 +66,7 @@ import { contractScale, STRIPE_OPACITY } from '../../lib/rig';
 import { damp, DEG2RAD, easeInOutCubic, normalize3, type Vec3 } from '../../lib/math';
 import { isRest, lerpTransform, restTransform, sampleSequence, sequenceLength, smoothstep01, type PartTransform } from '../../lib/pose';
 import { keepAnimating, MAX_DT, prefersReducedMotion, useRuntime } from './runtime';
-import { createPartMaterial, clippingForPart, setPartClipping, stylePartMaterial, styleFibreGrain, type PartStyle } from './materials';
+import { createPartMaterial, clippingForPart, setPartClipping, stylePartMaterial, styleFibreGrain, type PartStyle, type PartUniforms } from './materials';
 import type { FibreMeasure } from './GltfSource';
 import { skinnedRaycast } from './skinPick';
 import { updateSkinAnchor } from './skinAnchor';
@@ -136,6 +136,8 @@ export interface PartShape {
 
 /** What the label probe needs to know about a part (filled by PartNode). */
 export interface PartHandle {
+  /** Orbit sims: the material uniforms OrbitDriver writes the analytic sunlight into. */
+  orbitUniforms?: PartUniforms[];
   /** Whether cutaway planes apply to this part and its label / site anchors. */
   clip: boolean;
   object: Object3D;
@@ -193,6 +195,7 @@ export interface PartNodeProps {
   count?: number | null;
   /** Try-it offset (scene units) and turn about a unit axis through the part centre or `pivot` (a scene point at rest), eased or swinging (`settle`). */
   simMove?: SimMove | null;
+  airfoilSnap?: boolean;
   /** Try-it timeline channels the part plays (moves and turns). */
   play?: readonly SimPlay[] | null;
   /** Try-it stretch of the part's coil. */
@@ -560,6 +563,7 @@ export function PartNode(props: PartNodeProps) {
       point: [...props.anchorPoint] as Vec3,
       radius: props.anchorRadius,
       half: [...props.anchorHalf] as Vec3,
+      orbitUniforms: pms.map((pm) => pm.uniforms),
       meshes: [],
       fade: 0,
       visible: false,
@@ -853,7 +857,7 @@ export function PartNode(props: PartNodeProps) {
       const settle = sm?.settle;
       // A swinging turn goes the short way round to its target; a plain one eases straight there.
       const turnTo = settle ? nearestTurn(m.turn, sm!.deg) : (sm?.deg ?? 0);
-      if (snap) {
+      if (snap || props.airfoilSnap) {
         m.turn = turnTo;
         m.turnV = 0;
       } else if (settle) {

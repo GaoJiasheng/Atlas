@@ -1,0 +1,58 @@
+{
+  "type": "Topology",
+  "objects": {
+    "sample-de-land-100": {
+      "type": "GeometryCollection",
+      "geometries": [
+        {
+          "type": "Polygon",
+          "arcs": [
+            [
+              0
+            ]
+          ],
+          "properties": {
+            "kind": "land",
+            "modelId": "sample-de-model",
+            "frameMa": 100
+          }
+        },
+        {
+          "type": "LineString",
+          "arcs": [
+            0
+          ],
+          "properties": {
+            "kind": "coast",
+            "modelId": "sample-de-model",
+            "frameMa": 100
+          }
+        }
+      ]
+    }
+  },
+  "arcs": [
+    [
+      [
+        -21,
+        -15
+      ],
+      [
+        14,
+        -15
+      ],
+      [
+        24,
+        12
+      ],
+      [
+        -11,
+        25
+      ],
+      [
+        -21,
+        -15
+      ]
+    ]
+  ]
+}

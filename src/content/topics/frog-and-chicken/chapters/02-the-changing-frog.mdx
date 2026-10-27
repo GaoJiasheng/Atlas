@@ -1,0 +1,368 @@
+---
+id: the-changing-frog
+order: 2
+title:
+  en: The changing frog
+  zh: 变化中的青蛙
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  pose: null
+  layers: &id001
+  - frog-cycle
+  hide:
+  - chicken-egg
+  - egg-shell-window
+  - egg-yolk
+  - egg-white
+  - egg-embryo
+  - chicken-chick
+  - chicken-adult
+  - chicken-marker
+  - chicken-next-generation
+  - chicken-tray
+  - compare-frog
+  - compare-chicken
+  - compare-mosquito
+  - compare-plant
+  - comparison-marker
+  - comparison-tray
+  ghost: []
+  labels: &id002
+  - frog-hind-legs
+  camera: &id003
+    position:
+    - 0
+    - 5
+    - 6
+    target:
+    - -2.8
+    - 0.4
+    - 0
+    fov: 32
+  highlight:
+    signal: &id004
+    - frog-hind-legs
+  sim:
+    set:
+      frog-view: tadpole
+      chicken-view: egg
+      egg-open: false
+      fertilised: true
+      compare-view: frog
+    try:
+      vary: frog-view
+      keep:
+      - en: Same selected specimens and display scale
+        zh: 相同的标本与展示比例
+      observe:
+      - frog-form
+  summary:
+    en: Legs become visible and the attached tail gradually shrinks.
+    zh: 腿逐渐显现，连在身体上的尾巴慢慢缩短。
+  beats:
+  - view: assembled
+    explode: 0
+    part: null
+    run: false
+    cutaway: none
+    pose: null
+    layers: *id001
+    hide:
+    - chicken-egg
+    - egg-shell-window
+    - egg-yolk
+    - egg-white
+    - egg-embryo
+    - chicken-chick
+    - chicken-adult
+    - chicken-marker
+    - chicken-next-generation
+    - chicken-tray
+    - compare-frog
+    - compare-chicken
+    - compare-mosquito
+    - compare-plant
+    - comparison-marker
+    - comparison-tray
+    ghost: []
+    labels: *id002
+    camera: *id003
+    highlight:
+      signal: *id004
+    sim:
+      set:
+        frog-view: hind-legs
+        chicken-view: egg
+        egg-open: false
+        fertilised: true
+        compare-view: frog
+    caption:
+      en: The hind legs are now visible beside the tail. The front legs are not yet shown at this observation.
+      zh: 尾巴旁已能看见后腿。在这个观察阶段，前肢还没有显现。
+  - view: assembled
+    explode: 0
+    part: null
+    run: false
+    cutaway: none
+    pose: null
+    layers: *id001
+    hide:
+    - chicken-egg
+    - egg-shell-window
+    - egg-yolk
+    - egg-white
+    - egg-embryo
+    - chicken-chick
+    - chicken-adult
+    - chicken-marker
+    - chicken-next-generation
+    - chicken-tray
+    - compare-frog
+    - compare-chicken
+    - compare-mosquito
+    - compare-plant
+    - comparison-marker
+    - comparison-tray
+    ghost: []
+    labels:
+    - frog-froglet
+    camera:
+      position:
+      - 0
+      - 5
+      - 6
+      target:
+      - -2.8
+      - 0.4
+      - 0
+      fov: 32
+    highlight:
+      signal:
+      - frog-froglet
+    sim:
+      set:
+        frog-view: froglet
+        chicken-view: egg
+        egg-open: false
+        fertilised: true
+        compare-view: frog
+    caption:
+      en: This froglet has four limbs, while an attached tail remains. The body is changing through metamorphosis.
+      zh: 这只幼蛙已经有四肢，尾巴仍连在身体上。身体正在经历变态发育。
+  - view: assembled
+    explode: 0
+    part: null
+    run: false
+    cutaway: none
+    pose: null
+    layers: *id001
+    hide:
+    - chicken-egg
+    - egg-shell-window
+    - egg-yolk
+    - egg-white
+    - egg-embryo
+    - chicken-chick
+    - chicken-adult
+    - chicken-marker
+    - chicken-next-generation
+    - chicken-tray
+    - compare-frog
+    - compare-chicken
+    - compare-mosquito
+    - compare-plant
+    - comparison-marker
+    - comparison-tray
+    ghost: []
+    labels:
+    - frog-froglet
+    camera:
+      position:
+      - -2.4
+      - 2
+      - 3.3
+      target:
+      - -3.622899
+      - 0.4
+      - 1.132624
+      fov: 30
+    highlight:
+      signal:
+      - frog-froglet
+    sim:
+      set:
+        frog-view: froglet
+        chicken-view: egg
+        egg-open: false
+        fertilised: true
+        compare-view: frog
+    caption:
+      en: The tail becomes shorter as it is absorbed. It is not a piece that falls off behind the animal.
+      zh: 尾巴被吸收，逐渐缩短，并不是一段从身体后方掉下来的东西。
+  - view: assembled
+    explode: 0
+    part: null
+    run: false
+    cutaway: none
+    pose: null
+    layers: *id001
+    hide:
+    - chicken-egg
+    - egg-shell-window
+    - egg-yolk
+    - egg-white
+    - egg-embryo
+    - chicken-chick
+    - chicken-adult
+    - chicken-marker
+    - chicken-next-generation
+    - chicken-tray
+    - compare-frog
+    - compare-chicken
+    - compare-mosquito
+    - compare-plant
+    - comparison-marker
+    - comparison-tray
+    ghost: []
+    labels:
+    - frog-adult
+    camera:
+      position:
+      - 0
+      - 5
+      - 6
+      target:
+      - -2.8
+      - 0.4
+      - 0
+      fov: 32
+    highlight:
+      signal:
+      - frog-adult
+    sim:
+      set:
+        frog-view: adult
+        chicken-view: egg
+        egg-open: false
+        fertilised: true
+        compare-view: frog
+    caption:
+      en: The adult specimen has the frog body form and no tadpole tail. It does not pass through a pupa.
+      zh: 成体标本呈现成蛙的身体形态，没有蝌蚪的尾巴，也不经过蛹期。
+  - view: assembled
+    explode: 0
+    part: null
+    run: false
+    cutaway: none
+    pose: null
+    layers: *id001
+    hide:
+    - chicken-egg
+    - egg-shell-window
+    - egg-yolk
+    - egg-white
+    - egg-embryo
+    - chicken-chick
+    - chicken-adult
+    - chicken-marker
+    - chicken-next-generation
+    - chicken-tray
+    - compare-frog
+    - compare-chicken
+    - compare-mosquito
+    - compare-plant
+    - comparison-marker
+    - comparison-tray
+    ghost: []
+    labels:
+    - frog-eggs
+    - frog-tadpole
+    - frog-adult
+    camera:
+      position:
+      - 0
+      - 5
+      - 6
+      target:
+      - -2.8
+      - 0.4
+      - 0
+      fov: 32
+    highlight:
+      signal:
+      - frog-eggs
+      - frog-tadpole
+      - frog-adult
+    sim:
+      set:
+        frog-view: adult
+        chicken-view: egg
+        egg-open: false
+        fertilised: true
+        compare-view: frog
+    caption:
+      en: Five selected views help us inspect continuous change. A simpler diagram may group these views into fewer stages.
+      zh: 五个选定视图帮助我们观察连续变化。简化图可以把这些视图归成较少的阶段。
+  index:
+    parts:
+    - frog-eggs
+    - frog-tadpole
+    - frog-hind-legs
+    - frog-froglet
+    - frog-adult
+    - frog-marker
+    - frog-next-generation
+---
+
+<Lang en>
+
+Begin with the tadpole that has hind legs. Beside its tail, the back pair is visible; the front pair is not yet shown in this observation. Compare it with the earlier swimming tadpole. The difference is a change in the animal's body, not a different kind of animal being added to the tray.
+
+Next, inspect the <Term id="froglet">froglet</Term>. It has front and hind limbs, while a short tail remains attached. This large change from the tadpole's body form is part of <Term id="metamorphosis">metamorphosis</Term>. More changes occur than the outside alone reveals. Here we follow the visible limbs and tail instead of trying to show the remodelling inside the body.
+
+Before the close view, predict what will happen to that tail. Then inspect the third beat. The tail is gradually absorbed and becomes shorter; it is not shed as a loose piece behind the animal. The adult specimen has the frog body form without a tadpole tail. A <Term id="pupa">pupa</Term>, a stage found in the mosquito sequence, is not part of the frog's development.
+
+Finally, look across the whole frog tray. This display separates several useful observations so that you can compare them. Development itself is continuous: an animal does not jump instantly between these still specimens. A simpler account can group the sequence more broadly as egg, young animal and adult. What matters is the order and the changes, rather than memorising this display's number of stations. The pointer can move backwards for inspection; the animal's growth cannot.
+
+<More title={{"en": "Views within continuous change", "zh": "连续变化中的视图"}}>
+
+The hind-leg tadpole and tailed froglet make useful comparison points. Their labels do not divide all frog development into rigid, equal steps. The short attached tail on the froglet helps show that body changes overlap.
+
+</More>
+
+<More title={{"en": "What remains outside this model", "zh": "模型没有展开的部分"}}>
+
+Metamorphosis also involves changes within the body and a change from tail swimming to movement using limbs. The specimens do not calculate tissue changes, hormones or the time needed. The link from an adult to eggs still means reproduction into a new generation.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+先看长出后腿的蝌蚪。尾巴旁能看见一对后腿，这个观察阶段还没有画出显现的前肢。把它和较早的游泳蝌蚪比较：改变的是同一种动物的身体，不是展台突然多了一种别的动物。尾巴此时仍然连着身体。
+
+接着看<Term id="froglet">幼蛙</Term>。前肢和后肢都已显现，身后还连着一小段尾巴。从蝌蚪到蛙形身体的明显改变，是<Term id="metamorphosis">变态发育</Term>的一部分。变化不只发生在外表；这里先观察看得见的四肢和尾巴，不用模型演示体内各组织的重塑。
+
+近看以前，先猜一猜尾巴之后会怎样，再看第三拍。尾巴逐渐被吸收、缩短，不是断成一段掉在身后。成蛙具有蛙的身体形态，已经没有蝌蚪的尾巴。蚊子的顺序里有一个阶段叫<Term id="pupa">蛹</Term>，青蛙的发育没有这个阶段。
+
+最后回看整个青蛙展台。为了方便比较，模型选出了几个值得细看的样子；真实发育是连续的，动物不会瞬间从一个静止标本跳成另一个。较简略的说明也可以把过程归为卵、幼体和成体。重要的是先后顺序和身体变化，不是背出这个展台有几站。把指示珠往回拨，只是回头观察，不会让动物倒着生长。
+
+<More title={{"en": "Views within continuous change", "zh": "连续变化中的视图"}}>
+
+有后腿的蝌蚪、还带尾巴的幼蛙，都适合作为比较点。这些名称没有把所有蛙的发育切成固定、等长的几步。幼蛙身上仍连着短尾，正好显示几种变化可以同时发生。
+
+</More>
+
+<More title={{"en": "What remains outside this model", "zh": "模型没有展开的部分"}}>
+
+变态发育也涉及体内变化，以及从靠尾巴游动到用四肢运动的转变。标本不计算组织变化、激素或所需时间。成体通向卵的连接仍表示繁殖，进入的是下一代。
+
+</More>
+
+</Lang>

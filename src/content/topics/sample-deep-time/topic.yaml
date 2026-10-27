@@ -1,0 +1,26 @@
+id: sample-deep-time
+title: { en: "Sample: Deep Time", zh: "示例：深时" }
+subtitle: { en: "TEST/DESIGN engine fixture · no scientific claims", zh: "测试／设计引擎夹具 · 不作科学主张" }
+subject: geography
+tags: [beyond-syllabus]
+mode: time
+engine: time-scene
+stage: geo
+theme: paper
+sensitivity: open
+status: draft
+maDigits: 3
+note: { en: "Synthetic TEST/DESIGN geometry and records", zh: "合成测试／设计几何与记录" }
+basemap: { reconstruction: { file: sample-de-reconstruction, selection: hold-older } }
+modernInset:
+  file: sample-de-modern-inset
+  land: sample-de-modern-land
+  countries: sample-de-modern-countries
+  label: { en: "TEST modern locations", zh: "测试现代位置" }
+  defaultView: world
+  defaultVisible: true
+  ageWindowHalfWidthMa: 5
+  views:
+    - { id: world, label: { en: "World", zh: "世界" }, bounds: [-180, -85, 180, 85] }
+    - { id: southeast-asia, label: { en: "Southeast Asia", zh: "东南亚" }, bounds: [90, -10, 120, 25] }
+    - { id: mexico, label: { en: "Mexico", zh: "墨西哥" }, bounds: [-105, 10, -80, 30] }

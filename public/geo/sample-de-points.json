@@ -1,0 +1,239 @@
+{
+  "version": 1,
+  "coordinateSpace": "modern",
+  "points": [
+    {
+      "id": "sample-de-collection-a",
+      "coordinateSpace": "modern",
+      "at": [
+        100,
+        15
+      ],
+      "title": {
+        "en": "TEST collection A",
+        "zh": "测试采集 A"
+      },
+      "summary": {
+        "en": "Synthetic collection; inspect every independent occurrence interval.",
+        "zh": "合成采集；逐条查看独立的记录年龄区间。"
+      },
+      "detail": {
+        "en": "TEST/DESIGN data, not a real fossil discovery.",
+        "zh": "测试／设计数据，不是真实化石发现。"
+      },
+      "sources": [
+        "S1"
+      ],
+      "kind": "fossil-collection",
+      "pbdbCollectionId": "test-a",
+      "countryCode": "TH",
+      "precision": {
+        "en": "Synthetic test location",
+        "zh": "合成测试位置"
+      },
+      "occurrenceAges": [
+        {
+          "pbdbOccurrenceId": "test-a-1",
+          "olderMa": 75,
+          "youngerMa": 65,
+          "basis": {
+            "en": "TEST/DESIGN age interval",
+            "zh": "测试／设计年龄区间"
+          },
+          "sources": [
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sample-de-collection-b",
+      "coordinateSpace": "modern",
+      "at": [
+        105,
+        15
+      ],
+      "title": {
+        "en": "TEST collection B",
+        "zh": "测试采集 B"
+      },
+      "summary": {
+        "en": "Synthetic collection; inspect every independent occurrence interval.",
+        "zh": "合成采集；逐条查看独立的记录年龄区间。"
+      },
+      "detail": {
+        "en": "TEST/DESIGN data, not a real fossil discovery.",
+        "zh": "测试／设计数据，不是真实化石发现。"
+      },
+      "sources": [
+        "S1"
+      ],
+      "kind": "fossil-collection",
+      "pbdbCollectionId": "test-b",
+      "countryCode": "TH",
+      "precision": {
+        "en": "Synthetic test location",
+        "zh": "合成测试位置"
+      },
+      "occurrenceAges": [
+        {
+          "pbdbOccurrenceId": "test-b-1",
+          "olderMa": 90,
+          "youngerMa": 80,
+          "basis": {
+            "en": "TEST/DESIGN age interval",
+            "zh": "测试／设计年龄区间"
+          },
+          "sources": [
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sample-de-collection-c",
+      "coordinateSpace": "modern",
+      "at": [
+        -90,
+        20
+      ],
+      "title": {
+        "en": "TEST collection C",
+        "zh": "测试采集 C"
+      },
+      "summary": {
+        "en": "Synthetic collection; inspect every independent occurrence interval.",
+        "zh": "合成采集；逐条查看独立的记录年龄区间。"
+      },
+      "detail": {
+        "en": "TEST/DESIGN data, not a real fossil discovery.",
+        "zh": "测试／设计数据，不是真实化石发现。"
+      },
+      "sources": [
+        "S1"
+      ],
+      "kind": "fossil-collection",
+      "pbdbCollectionId": "test-c",
+      "countryCode": "MX",
+      "precision": {
+        "en": "Synthetic test location",
+        "zh": "合成测试位置"
+      },
+      "occurrenceAges": [
+        {
+          "pbdbOccurrenceId": "test-c-1",
+          "olderMa": 66,
+          "youngerMa": 66,
+          "basis": {
+            "en": "TEST/DESIGN age interval",
+            "zh": "测试／设计年龄区间"
+          },
+          "sources": [
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sample-de-collection-gap",
+      "coordinateSpace": "modern",
+      "at": [
+        110,
+        15
+      ],
+      "title": {
+        "en": "TEST collection GAP",
+        "zh": "测试采集 GAP"
+      },
+      "summary": {
+        "en": "Synthetic collection; inspect every independent occurrence interval.",
+        "zh": "合成采集；逐条查看独立的记录年龄区间。"
+      },
+      "detail": {
+        "en": "TEST/DESIGN data, not a real fossil discovery.",
+        "zh": "测试／设计数据，不是真实化石发现。"
+      },
+      "sources": [
+        "S1"
+      ],
+      "kind": "fossil-collection",
+      "pbdbCollectionId": "test-gap",
+      "countryCode": "TH",
+      "precision": {
+        "en": "Synthetic test location",
+        "zh": "合成测试位置"
+      },
+      "occurrenceAges": [
+        {
+          "pbdbOccurrenceId": "test-gap-1",
+          "olderMa": 145,
+          "youngerMa": 140,
+          "basis": {
+            "en": "TEST/DESIGN age interval",
+            "zh": "测试／设计年龄区间"
+          },
+          "sources": [
+            "S1"
+          ]
+        },
+        {
+          "pbdbOccurrenceId": "test-gap-2",
+          "olderMa": 100,
+          "youngerMa": 95,
+          "basis": {
+            "en": "TEST/DESIGN age interval",
+            "zh": "测试／设计年龄区间"
+          },
+          "sources": [
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sample-de-reference-singapore",
+      "coordinateSpace": "modern",
+      "at": [
+        103.816925,
+        1.366587
+      ],
+      "title": {
+        "en": "TEST reference: singapore",
+        "zh": "测试参照：singapore"
+      },
+      "summary": {
+        "en": "Reference point exercises selection independently of fossil filtering.",
+        "zh": "参照点独立于化石筛选，供测试选择。"
+      },
+      "sources": [
+        "S1"
+      ],
+      "kind": "reference",
+      "role": "singapore"
+    },
+    {
+      "id": "sample-de-reference-impact",
+      "coordinateSpace": "modern",
+      "at": [
+        -89.5,
+        21.333333
+      ],
+      "title": {
+        "en": "TEST reference: impact",
+        "zh": "测试参照：impact"
+      },
+      "summary": {
+        "en": "Reference point exercises selection independently of fossil filtering.",
+        "zh": "参照点独立于化石筛选，供测试选择。"
+      },
+      "sources": [
+        "S1"
+      ],
+      "kind": "reference",
+      "role": "impact-site",
+      "eventAge": {
+        "ma": 66
+      }
+    }
+  ]
+}
