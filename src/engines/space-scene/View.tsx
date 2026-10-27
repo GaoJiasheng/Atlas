@@ -674,6 +674,10 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
           const mm = (v: readonly number[]) => v.map((x) => Math.round(x * 1e4) / 1e4);
           return r ? { offset: mm(r.offset), target: mm(r.target), shown: r.shown, delay: Math.round(r.delay * 1000) / 1000 } : null;
         },
+        span: (id: string) => {
+          const r = bridge.spans.get(id);
+          return r ? { from: [...r.from], to: [...r.to], centre: [...r.centre], length: r.length, shown: r.shown, matrix: [...r.matrix] } : null;
+        },
         // Energy bars on the stage (docs/31 E-EN6): per timeline output, the three bars now (potential + kinetic + lost = 100) and whether they show.
         energyBars: () =>
           Object.fromEntries(

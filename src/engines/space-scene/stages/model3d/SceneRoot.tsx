@@ -63,6 +63,7 @@ import { SimOverlays } from './SimOverlays';
 import { TimelineClock } from './TimelineClock';
 import { AnimClocks } from './AnimClocks';
 import { MechanismDriver } from './MechanismDriver';
+import { SpanDriver } from './SpanDriver';
 import type { Matrix4 } from 'three';
 import { getOrbitSession } from '../../lib/sim/orbit-session';
 import { OrbitClockDriver, OrbitDriver } from './OrbitDriver';
@@ -687,6 +688,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
           />
         );
       })}
+      {data.sim && <SpanDriver data={data} bridge={bridge} handles={handles} />}
       {data.sim && data.sim.overlays.length > 0 && simRun && (
         <SimOverlays
           overlays={data.sim.overlays}

@@ -1207,6 +1207,14 @@ export const partsFileBase = z
   .superRefine((file, ctx) => {
     for (const x of mechanismIssues(file.mechanisms, file)) ctx.addIssue({ code: z.ZodIssueCode.custom, ...x });
     if (file.sim) {
+      const spanTargets = new Set(file.sim.bind.flatMap((b) => 'part' in b && b.span && typeof b.part === 'string' ? [b.part] : []));
+      for (const [name, pose] of Object.entries(file.poses ?? {})) for (const id of spanTargets) {
+        if (id in pose.parts || id in pose.contract) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['poses', name, id], message: `span target "${id}" cannot have a pose driver` });
+      }
+      for (const m of file.mechanisms) for (const binding of [...Object.values(m.parts), ...Object.values(m.ports)]) {
+        if (spanTargets.has(binding.part)) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['mechanisms'], message: `span target "${binding.part}" cannot have a mechanism driver` });
+      }
+      for (const p of file.parts) if (spanTargets.has(p.id) && p.bilateral) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['parts', p.id, 'bilateral'], message: 'span target cannot be bilateral' });
       const countable = new Set(file.parts.filter((p) => p.repeat !== undefined && (p.extra ?? []).length === 0).map((p) => p.id));
       for (const x of simIssues(file.sim, {
         parts: new Set(file.parts.map((p) => p.id)),

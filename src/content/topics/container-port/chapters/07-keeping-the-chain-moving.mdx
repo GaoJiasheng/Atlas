@@ -1,0 +1,240 @@
+---
+{
+  "id": "keeping-the-chain-moving",
+  "order": 7,
+  "title": {
+    "en": "Keeping the chain moving",
+    "zh": "让整条链保持畅通"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "cutaway": "none",
+    "run": false,
+    "pose": "port-source",
+    "camera": {
+      "position": [
+        105,
+        85,
+        115
+      ],
+      "target": [
+        0,
+        15,
+        5
+      ],
+      "fov": 34
+    },
+    "layers": [
+      "quay-crane",
+      "transfer",
+      "yard"
+    ],
+    "hide": [
+      "destination-box",
+      "control-room",
+      "yard-target",
+      "yard-blocker-a",
+      "yard-blocker-b"
+    ],
+    "part": "portal",
+    "labels": [
+      "portal",
+      "agv-body",
+      "yard-gantry"
+    ],
+    "question": {
+      "en": "Will one more quay crane remove the waiting?",
+      "zh": "多加一台岸桥就能消除等待吗？"
+    },
+    "summary": {
+      "en": "In this model, the slowest stage limits the handling chain.",
+      "zh": "在这个模型里，整条搬运链的能力受最慢工序限制。"
+    },
+    "index": {
+      "parts": [
+        "portal",
+        "agv-body",
+        "yard-gantry"
+      ]
+    },
+    "sim": {
+      "set": {
+        "n20": 2,
+        "n40": 1,
+        "lock-confirmed": true,
+        "above": 2,
+        "yard-state": "original",
+        "cranes": 1,
+        "carriers": 1,
+        "yards": 1,
+        "arrivals": 24,
+        "hours": 2,
+        "lift-live": false
+      },
+      "try": {
+        "vary": "cranes",
+        "also": [
+          "carriers",
+          "yards"
+        ],
+        "keep": [
+          "arrivals",
+          "hours"
+        ],
+        "observe": [
+          "capacity-rate",
+          "queued",
+          "bottleneck"
+        ],
+        "record": {
+          "chart": {
+            "y": "capacity-rate"
+          }
+        },
+        "predict": {
+          "start": {
+            "cranes": 1,
+            "carriers": 1,
+            "yards": 1
+          },
+          "change": {
+            "cranes": 2
+          },
+          "observe": "capacity-rate",
+          "options": [
+            {
+              "id": "unchanged",
+              "means": "same",
+              "label": {
+                "en": "Same",
+                "zh": "不变"
+              }
+            },
+            {
+              "id": "higher",
+              "means": "more",
+              "label": {
+                "en": "Higher",
+                "zh": "增加"
+              }
+            }
+          ],
+          "prompt": {
+            "en": "Will another crane increase this chain’s capacity?",
+            "zh": "多一台岸桥会增加这条链的能力吗？"
+          }
+        }
+      }
+    },
+    "beats": [
+      {
+        "sim": {
+          "set": {
+            "cranes": 1,
+            "carriers": 1,
+            "yards": 1
+          }
+        },
+        "caption": {
+          "en": "Predict first: will adding only a quay crane change the chain’s capacity?",
+          "zh": "先预测：只增加岸桥，整条链的处理能力会改变吗？"
+        }
+      },
+      {
+        "part": "yard-gantry",
+        "caption": {
+          "en": "In this simulation, the crane, transfer and yard stages can handle 30, 24 and 18 boxes an hour.",
+          "zh": "在这个模拟里，岸桥、运输和堆场分别能处理30、24和18箱/小时。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "cranes": 2,
+            "carriers": 1,
+            "yards": 1
+          }
+        },
+        "caption": {
+          "en": "Crane capacity increases, but the yard still limits the chain to 18 boxes an hour.",
+          "zh": "岸桥能力增加，堆场仍限制全链为18箱/小时。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "cranes": 1,
+            "carriers": 1,
+            "yards": 2
+          }
+        },
+        "caption": {
+          "en": "With more yard resources, transfer becomes the new limit at 24 boxes an hour.",
+          "zh": "增加堆场资源后，运输环节成为新的限制，能力为24箱/小时。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "cranes": 1,
+            "carriers": 1,
+            "yards": 2
+          }
+        },
+        "caption": {
+          "en": "With arrivals fixed at 24 boxes an hour, this model stops building a queue; real ports face more conditions.",
+          "zh": "到达率固定为24箱/小时，这个模型不再继续积压；真实港口还受更多条件影响。"
+        }
+      }
+    ]
+  }
+}
+---
+<Lang en>
+
+Start with the chain of quay crane, carrier and yard crane. A box must pass through these stages, so increasing one stage’s ability does not necessarily increase the whole chain’s ability. Predict what will happen if the model gets an extra quay crane while everything else stays the same. Then use Try it to check and record the result.
+
+The selected SIM rates per resource are <Num s="S1">30, 24 and 18 boxes an hour</Num>, respectively. With one resource at each stage, the yard stage has the smallest capacity. The chain’s modelled capacity is therefore <Num s="S1">18 boxes an hour</Num>. The limiting stage is called the bottleneck. These are teaching assumptions, not measurements of the machines shown or of Tuas Port.
+
+Add the quay crane. Its own stage can now handle <Num s="S1">60 boxes an hour</Num> in the model. Yet the yard stage still limits the chain to <Num s="S1">18 boxes an hour</Num>. Return to the original quay-crane count and increase the yard resources instead. The yard stage can handle more, but the carrier stage now becomes the limit: <Num s="S1">24 boxes an hour</Num>. A bottleneck can change when resources change.
+
+Compare arriving and completed boxes. At arrivals of <Num s="S1">24 boxes an hour</Num>, the original chain leaves <Num s="S1">12 boxes</Num> queued after <Num s="S1">2 hours</Num> in this simulation. The revised chain with the extra yard resource stops building that queue. Read the capacity, completed amount and queued amount with their units; none of these is the Singapore-wide annual TEU statistic.
+
+<More title={{ en: "The arithmetic behind the readings", zh: "读数背后的算式" }}>
+
+Chain capacity is the smallest of the stage capacities. Completed boxes equal the smaller of arrivals and capacity, multiplied by hours. Queued boxes equal the positive excess of arrivals over capacity, multiplied by hours. For the default case: <Num s="S1">(24 − 18) × 2 = 12 boxes</Num>. If arrivals are below capacity, spare capacity does not create extra cargo.
+
+</More>
+
+<More title={{ en: "What this queue cannot predict", zh: "这条队列不能预测什么" }}>
+
+The model starts with no queued boxes and treats flow as continuous. It omits startup delays, equipment interference, weather, storage limits and vessel schedules. MOT’s account of a 2024 disruption discusses off-schedule arrivals and onward cargo, illustrating why real congestion needs more information. Our simulated queue is not a live waiting count or an operational forecast.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+从岸桥、运输车、场桥这条链开始看。箱子要逐段通过，所以只提高其中一段的能力，不一定提高整条链的能力。先预测：其它条件不变，多一台岸桥会怎样？再用“试一试”核对，并记下一行结果。
+
+本模型选的 SIM 处理率依次为每台<Num s="S1">每小时 30、24、18 只箱</Num>。每段都只有一份设备资源时，堆场一段能力最小，因此全链模拟能力是<Num s="S1">每小时 18 只箱</Num>。限制全链的一段叫瓶颈。这些是教学假设，不是画面中机器或大士港口的实测效率。
+
+增加岸桥后，岸桥一段在模型中可处理<Num s="S1">每小时 60 只箱</Num>，但堆场仍把全链限制在<Num s="S1">每小时 18 只箱</Num>。把岸桥数量还原，改为增加堆场资源。堆场能力提高了，这次却轮到运输环节限制全链，能力变为<Num s="S1">每小时 24 只箱</Num>。改变资源后，瓶颈也会换到别处。
+
+再比较到达和完成的数量。到达率为<Num s="S1">每小时 24 只箱</Num>时，原来的链经过 <Num s="S1">2 小时</Num>，在本模拟中积压 <Num s="S1">12 只箱</Num>；增加堆场资源后，这个情景不再继续积压。读数要带单位，分清每小时能力、已完成箱数和排队箱数；它们都不是新加坡全港的年度 TEU 统计。
+
+<More title={{ en: "The arithmetic behind the readings", zh: "读数背后的算式" }}>
+
+全链能力取各段能力的最小值。完成箱数是到达率与能力中较小者乘时间；积压箱数是到达率超过能力的部分乘时间。默认算式为 <Num s="S1">（24－18）×2＝12 只箱</Num>。若到达率更低，空余能力不会凭空制造货物。
+
+</More>
+
+<More title={{ en: "What this queue cannot predict", zh: "这条队列不能预测什么" }}>
+
+模型从空队列开始，把流量看作连续流，省略起动、设备互扰、天气、存放上限和船期。交通部关于 2024 年一次拥堵的说明，提到船只未按计划到达和后续转运货物，说明现实需要更多资料。这里的排队数不是现场实况，也不是作业预测。
+
+</More>
+
+</Lang>

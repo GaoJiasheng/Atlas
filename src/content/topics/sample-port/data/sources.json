@@ -1,0 +1,12 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "design": true,
+      "text": {
+        "en": "Port engine design study: docs/62 §4. Schematic 32-second lift; linear interpolation; single-box continuous-flow capacities 30/24/18 boxes per hour; no delay, collision or interference physics. Counts are n20+n40 boxes and n20+2n40 TEU. Yard moves omit restoration.",
+        "zh": "港口引擎设计研究：docs/62 §4。32秒吊运采用线性插值；单箱连续流能力为每小时30/24/18箱；忽略延迟、碰撞和相互干扰。箱数为n20+n40，TEU为n20+2n40。堆场搬运不计复位。"
+      }
+    }
+  ]
+}

@@ -141,6 +141,8 @@ export interface PartHandle {
   /** Whether cutaway planes apply to this part and its label / site anchors. */
   clip: boolean;
   object: Object3D;
+  /** Main primitive-local (relative to primitive.at) → final model frame, written after pose/play/shift/animations. */
+  attachmentMatrix: Matrix4;
   /** Bounds centre relative to the part centre (group boxes, the on-screen box). */
   offset: Vec3;
   /** Leader-label anchor relative to the part centre (the bounds centre; a pipe's path midpoint). */
@@ -559,6 +561,7 @@ export function PartNode(props: PartNodeProps) {
     () => ({
       clip: part.clip !== false,
       object: null as unknown as Object3D,
+      attachmentMatrix: new Matrix4(),
       offset: [...props.anchorOffset] as Vec3,
       point: [...props.anchorPoint] as Vec3,
       radius: props.anchorRadius,
@@ -1186,6 +1189,9 @@ export function PartNode(props: PartNodeProps) {
 
     if (moving || m.fade !== targetFade || m.base !== targetBase || m.aside !== asideTarget || m.sel !== selTarget || m.tint !== tintTarget || m.simTint !== simTarget || m.glow !== glowTarget)
       keepAnimating(state.invalidate);
+    // Read by SpanDriver after every PartNode has consumed this frame's pose,
+    // timeline and shift. The primitive's authored local points share this frame.
+    if (g && pr && anim) handle.attachmentMatrix.makeTranslation(g.position.x, g.position.y, g.position.z).multiply(pr.matrix).multiply(anim.matrix);
   });
 
   const onClick = (e: ThreeEvent<MouseEvent>) => {

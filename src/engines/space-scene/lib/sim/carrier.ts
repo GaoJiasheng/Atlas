@@ -64,7 +64,7 @@ export function evaluateSimOnStage(
   observe: readonly string[] = [],
 ): { outputs: SimOutputs; frames: MagnetFrames } {
   const frames = sim.magnet ? magnetFrames(sim, source, values, pose) : NO_FRAMES;
-  // The matter model reads its liquids' primitives; the sort model its specimens' homes (the parts as they are: one list, cached).
-  const parts = sim.kind === 'matter' ? source.parts.map((p) => ({ id: p.id, ...(p.primitive && 'kind' in p.primitive ? { primitive: p.primitive } : {}) })) : sim.kind === 'sort' ? (source.parts as unknown as readonly MatterPart[]) : [];
+  // The matter model reads its liquids' primitives; the sort and port models their specimens' and boxes' homes (the parts as they are: one list, cached).
+  const parts = sim.kind === 'matter' ? source.parts.map((p) => ({ id: p.id, ...(p.primitive && 'kind' in p.primitive ? { primitive: p.primitive } : {}) })) : sim.kind === 'sort' || sim.kind === 'port' ? (source.parts as unknown as readonly MatterPart[]) : [];
   return { outputs: evaluateSim(sim, values, observe, frames, parts), frames };
 }
