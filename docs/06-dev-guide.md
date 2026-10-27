@@ -2214,3 +2214,23 @@ pnpm tsx scripts/geo/lib/check.ts --topic ww2         # MapLibre（Playwright）
 - **按年代裁过的要素不再沿底图海岸**（docs/28 P2，`simplify.ts`）：`pipeline.coast.excludeBox: [w, s, e, n]`（缺省 `null`）：这个框里不做海岸一步。底图陆地和水都挖掉这个框，于是框里的要素不被擦水、框外的 holder 也不会补缝长进来；框里的要素保持 compose 给它的海岸（新加坡要素已按时代 `intersect` 到 `work/coast-L#.geojson`）；柔佛、廖内等框里的邻国要素也就不再裁到 10m 海岸，需要的话在 compose 里 `intersect` 到 10m 陆地。偏差统计在框里不跳过"海里"的点。
 - **分框细度**（docs/28 P3，`simplify.ts`）：`pipeline.focus` 的一项可以写成 `{ "box": [w, s, e, n], "fineKm": 0.005 }`，这个框用自己的固定间隔（岛尺度要几米，区域框照旧 1 km 上下）：先从普通焦点框里挖出来，单独简化，用自己那份陆地沿海岸（与 inside / outside 两半同一做法）；排在前面的框在重叠处优先。自动预算搜索只调普通焦点框的间隔。没有这种项、没有 `excludeBox` 时产物与以前逐字节相同（ww1、ww2、warring-states、four-taps 的 simplify 改前改后各跑一次比对过）。
 - 东南亚近景底图：`scripts/build-geo.ts` 另出 `public/geo/land-10m-sea.json`（Natural Earth 1:10m 陆地，裁到 95°E–125°E、9°S–22°N，TopoJSON，约 234 KB）。GeoStage 在镜头 zoom ≥ 6.5 且视野与该框相交时才 fetch；zoom 7 起绘制、到 8 完全显现：框内先铺一层水色遮住 50m 陆地（不透明度 7→8 渐入），10m 陆地和海岸线叠在上面，颜色同为 `--land` / `--land-edge` / `--water` token。其他主题不加载它。
+
+### SpaceScene · senses：近轴眼与纵波（docs/58 §4）
+
+`sim.kind: senses` 复用 try-it、表格/图、预测、URL、pose / enabled / hz 绑定；不加声音播放、独立时轴或控制面板。固定课堂模型（不是活眼测量），`sim.senses`：
+
+```json
+{"eye":{"illumination":"light-in","pupilMm":"pupil-mm","object":"object-range","focus":"lens-focus","objectsCm":{"near":12,"far":40},"focalCm":{"near":3,"far":3.6363636363636362},"retinaCm":4,"referencePupilMm":2,"objectHeightsCm":[1,-0.5],"sources":["S11","S31"]},"sound":{"active":"sound-active","frequencyHz":"frequency-hz","amplitude":"amplitude","slowFactor":250,"baseFrequencyHz":250,"baseWavelengthScene":1,"baseDisplacementScene":0.0125,"sources":["S9","S10","S31"]}}
+```
+
+七个控制的 ID / kind / 默认固定：`light-in` toggle true、`pupil-mm` step [2,4] 默认2、`object-range` 与 `lens-focus` choice [near,far] 默认far、`sound-active` toggle true、`frequency-hz` step [250,500] 默认250、`amplitude` step [1,2] 默认1。显示文本仍是双语数据。`from` 白名单：aperture-area、relative-light、image-distance、magnification、retinal-top-y、blur-diameter、focus-state、eye-state、visual-hz、wavelength-scene、displacement-max、amplitude-level、sound-state；三个名字带 state 的量为 state，其余 number。focus-state 是 on-retina / before-retina / behind-retina；eye-state 是 dark / lit；sound-state 是 still / vibrating。暗处焦点仍为几何预测，不画光线与光斑。三个独立实验 eye-light / eye-focus / sound 的 PLATE 只选本卡 observe 对应工位，预测沿用显式 observe。
+
+新增两个 overlay，均可选 `group`（随现有 layers）、`when`（恰好一个 control 或 output，is 是合法值），origin 三维有限向量：
+
+```json
+[{"kind":"paraxial-eye","model":"eye","group":"eye-study","origin":[1,1,0],"cmToScene":0.06,"halfApertureSamples":1},{"kind":"longitudinal-wave","model":"sound","group":"wave-study","origin":[-1,0.5,0],"axis":[1,0,0],"count":41,"spacing":0.05,"referenceIndex":5}]
+```
+
+`effectiveEyeRays()` 与 `solveSenses()` 共用薄透镜几何；两物点、三孔径高度组成6条光线，12段合并一次绘制，止于接收面。两个光斑另一次 instancing；偏焦直径用同一公式，聚焦时只画小标记，不生成照片。`longitudinalPositions()` 以局部静止点生成位移，41粒子一次 instancing，基线和静止刻度一次绘制；相位只有 RUN 且声音启用、图层可见时推进，暂停不请求新帧，reduced motion 固定相位。频率、振幅变化立即 snap；现有 transitionId / snapKey 的章节/节拍切换把局部相位复位为0，保持手动与深链接一致。senses 在 exploded 或实际显示的 runtime.explode > 0 时立即把共享 RUN energy 归零，冻结 elapsed / phase，停止听骨和条带传振；退出 E 并重新组装到实际间距0后恢复，即使记忆中的滑块值仍为0.55；其他 sim 保持原有 RUN 行为。拆开时两个 overlay 隐藏，PLATE 说明与实际/显示Hz、250倍慢放、几何模型限制跟随工位。
+
+校验拒绝非 senses overlay、其它 kind 配置、错 control/source/state、非法单位轴、非有限值、u≤f、非固定课堂常数、粒子穿越域。sources 跨文件检查在 validate-content。QA `engine.senses()` 返回同源眼端点、实际缩放端点、读数、可见/隐藏原因及 wave 的 phaseCycles / positions / rests / visualHz / lambda / A / playing / slowFactor；`sensesSeek(cycles)` 是测试相位定位，保持到下一次 RUN/控制变化。`pnpm shoot --beats` 增加 senses 数/图一致性检查。草稿夹具 sample-senses，纯函数/128组合/非法域测试 `tests/space-scene/senses.test.ts`，浏览器用例 `tests-e2e/sample-senses.spec.ts`。浏览器验收按 BRIEF 在 sandbox 明确跳过，须在主会话执行。

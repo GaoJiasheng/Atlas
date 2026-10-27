@@ -1,0 +1,12 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "design": true,
+      "text": {
+        "en": "Atlas original classroom model: fixed thin-lens equations and 250 times slowed longitudinal displacement; all lengths are design values.",
+        "zh": "Atlas原创课堂模型：固定薄透镜公式与250倍慢放纵向位移；长度都是设计值。"
+      }
+    }
+  ]
+}

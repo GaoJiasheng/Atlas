@@ -1,0 +1,129 @@
+{
+  "meta": {
+    "slug": "eyes-and-ears",
+    "tag": "SIM",
+    "licence": "Original Atlas CC BY-NC-SA 4.0",
+    "purpose": "Contract oracles only. No engine code built. Constants are chosen model values, not eye biometry or hearing measurements."
+  },
+  "lens": [
+    {
+      "uCm": 40,
+      "fCm": 3.6363636363636362,
+      "retinaCm": 4,
+      "pupilMm": 2,
+      "expected": {
+        "vCm": 4,
+        "magnificationAtFocus": -0.1,
+        "retinalTopYCm": -0.1,
+        "blurDiameterCm": 0.0,
+        "focusState": "on-retina"
+      }
+    },
+    {
+      "uCm": 12,
+      "fCm": 3,
+      "retinaCm": 4,
+      "pupilMm": 2,
+      "expected": {
+        "vCm": 4,
+        "magnificationAtFocus": -0.3333333333333333,
+        "retinalTopYCm": -0.3333333333333333,
+        "blurDiameterCm": 0.0,
+        "focusState": "on-retina"
+      }
+    },
+    {
+      "uCm": 12,
+      "fCm": 3.6363636363636362,
+      "retinaCm": 4,
+      "pupilMm": 2,
+      "expected": {
+        "vCm": 5.217391304347826,
+        "magnificationAtFocus": -0.43478260869565216,
+        "retinalTopYCm": -0.3333333333333333,
+        "blurDiameterCm": 0.04666666666666668,
+        "focusState": "behind-retina"
+      }
+    },
+    {
+      "uCm": 40,
+      "fCm": 3,
+      "retinaCm": 4,
+      "pupilMm": 2,
+      "expected": {
+        "vCm": 3.2432432432432434,
+        "magnificationAtFocus": -0.08108108108108109,
+        "retinalTopYCm": -0.1,
+        "blurDiameterCm": 0.046666666666666634,
+        "focusState": "before-retina"
+      }
+    }
+  ],
+  "aperture": [
+    {
+      "diameterMm": 2,
+      "areaMm2": 3.141592653589793,
+      "relativeLight": 1
+    },
+    {
+      "diameterMm": 4,
+      "areaMm2": 12.566370614359172,
+      "relativeLight": 4
+    }
+  ],
+  "sound": [
+    {
+      "frequencyHz": 250,
+      "amplitude": 1,
+      "visualHz": 1,
+      "wavelengthScene": 1,
+      "displacementMax": 0.0125,
+      "amplitudeLevel": 1
+    },
+    {
+      "frequencyHz": 500,
+      "amplitude": 1,
+      "visualHz": 2,
+      "wavelengthScene": 0.5,
+      "displacementMax": 0.0125,
+      "amplitudeLevel": 1
+    },
+    {
+      "frequencyHz": 250,
+      "amplitude": 2,
+      "visualHz": 1,
+      "wavelengthScene": 1,
+      "displacementMax": 0.025,
+      "amplitudeLevel": 2
+    }
+  ],
+  "waveSamples": [
+    {
+      "frequencyHz": 250,
+      "amplitude": 1,
+      "x0": 0.25,
+      "secondsVisual": 0,
+      "expectedX": 0.2625
+    },
+    {
+      "frequencyHz": 250,
+      "amplitude": 1,
+      "x0": 0.25,
+      "secondsVisual": 0.25,
+      "expectedX": 0.25
+    },
+    {
+      "frequencyHz": 500,
+      "amplitude": 1,
+      "x0": 0.25,
+      "secondsVisual": 0,
+      "expectedX": 0.25
+    }
+  ],
+  "checks": {
+    "floatTolerance": 1e-09,
+    "renderToleranceSceneUnits": 0.0001,
+    "domainCombinations": 128,
+    "notes": "2 light values ×2 pupil values ×2 object choices ×2 lens choices =16 eye combinations; independent sound 2×2×2=8, plus cross-product entire control space 128. DomainCombinations amended by validation below."
+  }
+}

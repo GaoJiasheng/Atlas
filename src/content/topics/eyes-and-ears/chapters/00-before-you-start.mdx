@@ -1,0 +1,194 @@
+---
+{
+  "id": "before-you-start",
+  "order": 0,
+  "title": {
+    "en": "Before you start",
+    "zh": "开始之前"
+  },
+  "sensitive": false,
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "part": null,
+    "run": false,
+    "cutaway": "none",
+    "pose": null,
+    "ghost": [],
+    "layers": [
+      "eye-front",
+      "eye-receiver",
+      "ear-transfer",
+      "ear-receiver"
+    ],
+    "hide": [
+      "ciliary-ring",
+      "basilar-strip",
+      "hair-patch",
+      "signal-marker"
+    ],
+    "labels": [
+      "retina",
+      "eardrum",
+      "cochlea-shell"
+    ],
+    "camera": {
+      "position": [
+        0,
+        2,
+        11.8
+      ],
+      "target": [
+        0.2,
+        0,
+        0
+      ],
+      "fov": 32
+    },
+    "sim": {
+      "set": {
+        "light-in": false,
+        "pupil-mm": 2,
+        "object-range": "far",
+        "lens-focus": "far",
+        "sound-active": false,
+        "frequency-hz": 250,
+        "amplitude": 1
+      }
+    },
+    "index": {
+      "parts": [
+        "cornea",
+        "retina",
+        "optic-nerve",
+        "eardrum",
+        "cochlea-shell",
+        "auditory-nerve"
+      ]
+    },
+    "beats": [
+      {
+        "camera": "overview",
+        "part": null,
+        "caption": {
+          "en": "The eye and ear are shown at separate study stations.",
+          "zh": "眼睛和耳朵分成两个工位展示。"
+        }
+      },
+      {
+        "camera": "eye",
+        "part": "retina",
+        "labels": [
+          "retina",
+          "cornea"
+        ],
+        "caption": {
+          "en": "Light enters the eye and reaches its light-sensitive retina.",
+          "zh": "光进入眼睛，到达能感光的视网膜。"
+        }
+      },
+      {
+        "camera": "ear",
+        "part": "eardrum",
+        "labels": [
+          "eardrum",
+          "cochlea-shell"
+        ],
+        "caption": {
+          "en": "Sound vibration reaches the eardrum and then the inner ear.",
+          "zh": "声音的振动传到鼓膜，再传入内耳。"
+        }
+      },
+      {
+        "camera": "overview",
+        "part": "optic-nerve",
+        "labels": [
+          "optic-nerve",
+          "auditory-nerve"
+        ],
+        "caption": {
+          "en": "Both routes send signals along nerves to the brain.",
+          "zh": "两条路线都通过神经把信号传到大脑。"
+        }
+      },
+      {
+        "camera": "overview",
+        "part": null,
+        "labels": [
+          "cornea",
+          "eardrum"
+        ],
+        "caption": {
+          "en": "Seeing begins with incoming light; hearing begins with vibration.",
+          "zh": "看见东西从入眼的光开始，听见声音从振动开始。"
+        }
+      }
+    ],
+    "summary": {
+      "en": "Follow separate eye and ear study stations: incoming light and vibration are converted into nerve signals. The models are schematic and use different scales.",
+      "zh": "分别跟随眼睛与耳朵工位：入眼的光和传来的振动，经过接收结构变成神经信号。模型是示意，各部分比例不同。"
+    }
+  }
+}
+---
+
+<Lang en>
+
+The eye and ear occupy separate study stations on the stage. They are enlarged and turned so that their inner parts can be followed. They are not shown at their real relative sizes or positions in a head. Start with the whole view, then select a named part to read what it does.
+
+Imagine watching someone clap. Light reflected from the moving hands enters your eyes. Inside each eye, the <Term id="retina">retina</Term> is a thin layer containing light-sensitive cells. These cells begin the conversion of light into electrical signals. The <Term id="optic-nerve">optic nerve</Term> carries signals towards the brain. Nothing has to shine out of your eyes towards the hands.
+
+The clap also creates a disturbance in the surrounding air. At the other station, follow the ear canal to the <Term id="eardrum">eardrum</Term>, a thin membrane that vibrates. Movement passes through the middle ear towards the <Term id="cochlea">cochlea</Term>, the curled, fluid-filled structure of the inner ear. Sensory cells there help turn movement into electrical signalling. The <Term id="auditory-nerve">auditory nerve</Term> carries signals towards the brain.
+
+Both routes involve receiving something from the surroundings and sending nerve signals. Their inputs and receiving structures differ. The eye receives light; the ear responds to vibration. Follow those changes separately before comparing them. The whole topic can be explored silently: its moving marks explain processes without testing your sight or hearing. <FlyTo preset="overview">Compare the study stations</FlyTo>
+
+<More title={{"en": "The light before the eye", "zh": "入眼以前的光"}}>
+
+The earlier part of the route is in <TopicLink slug="light-and-shadows" ch="seeing-light">Light and Shadows: seeing light</TopicLink>. A source emits light; an illuminated object can reflect some of it into an eye. This topic continues the route inside the eye. [S1, S2]
+
+</More>
+
+<More title={{"en": "What this model leaves out", "zh": "模型省略了什么"}}>
+
+These are original schematic organs, not scans of a person. Supporting tissues, blood supply and much of the nervous system are omitted. The enlarged hair-cell study and optical bench use their own scales. Layout and colours identify structures; they are not measurements. [S31]
+
+</More>
+
+<More title={{"en": "Body systems", "zh": "身体各系统"}}>
+
+<TopicLink slug="digestive-system" ch="five-systems">The digestive-system overview</TopicLink> introduces several cooperating body systems. The present topic adds a close view of sensory organs; it does not redefine the syllabus list of systems. [S1]
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+舞台把眼睛和耳朵分开摆在不同工位，放大并转向观者，方便看清内部。它们在头部里的真实位置和大小比例并不是这样。先看全貌，再点选名称，便能读到各部分的作用。透明和剖开的地方是观察安排，不表示身体里面原本就有这些开口。
+
+想象你正在看别人拍手。手反射的光进入眼睛，来到内壁上含有感光细胞的薄层——<Term id="retina">视网膜</Term>。这些细胞开始把光转成电信号，<Term id="optic-nerve">视神经</Term>再把信号传向大脑。看见手，并不需要眼睛向手发出光；先有光入眼，才有这条路线后面的过程。
+
+拍手也使周围空气产生扰动。在另一工位，沿外耳道找到薄薄的<Term id="eardrum">鼓膜</Term>。它会随传来的声音振动，运动再经过中耳，传向内耳里卷曲、充满液体的<Term id="cochlea">耳蜗</Term>。耳蜗里的感受细胞帮助把机械运动转成电信号，<Term id="auditory-nerve">听神经</Term>把信号传向大脑。
+
+两条路线都有接收外界输入、传递神经信号的阶段，但输入和接收结构不同：眼接收光，耳响应振动。接下来的章节分别跟随这些变化，再回头比较。全课静音也能学完；画面中的运动用于说明过程，并不是检查你的视力或听力。<FlyTo preset="overview">比较两个工位</FlyTo>
+
+<More title={{"en": "The light before the eye", "zh": "入眼以前的光"}}>
+
+路线的前半段见<TopicLink slug="light-and-shadows" ch="seeing-light">光与影：看见光</TopicLink>。光源发光，被照亮的物体能把部分光反射进眼睛。本主题接着观察入眼以后的过程。[S1, S2]
+
+</More>
+
+<More title={{"en": "What this model leaves out", "zh": "模型省略了什么"}}>
+
+这里是原创解剖示意，不是某个人体的扫描；支撑组织、血液供应和大量神经结构被省略。毛细胞放大窗与光学实验台另用各自比例。摆放和颜色用于辨别结构，不是测量结果。[S31]
+
+</More>
+
+<More title={{"en": "Body systems", "zh": "身体各系统"}}>
+
+<TopicLink slug="digestive-system" ch="five-systems">消化系统的总览</TopicLink>介绍身体中相互协作的系统。本主题深入观察感官器官，不重新定义课纲列出的系统。[S1]
+
+</More>
+
+</Lang>
+

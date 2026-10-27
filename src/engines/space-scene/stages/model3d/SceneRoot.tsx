@@ -21,9 +21,10 @@ import { explodeStages, targetExplodeAmount } from '../../lib/explode';
 import { bendAxisIndex } from '../../lib/bend';
 import { jointOf, musclePartIds } from '../../lib/rig';
 import { activeSites } from '../../lib/sites';
+import { sensesMotionBlocked, stepRunTime } from '../../lib/run-clock';
 import { animationsByPart } from '../../lib/animation';
 import { resolveDataColor, resolveMaterialLook } from '../../lib/color';
-import { damp, easeInOutCubic, normalize3, type Vec3 } from '../../lib/math';
+import { easeInOutCubic, normalize3, type Vec3 } from '../../lib/math';
 import { POSE_DURATION, restTransform, toTransform, type PartTransform } from '../../lib/pose';
 import { createRuntime, keepAnimating, MAX_DT, RuntimeContext, useRuntime, type StageRuntime } from './runtime';
 import { PartNode, type PartHandle, type PartShape, type ShiftMove, type SimMove } from './PartNode';
@@ -93,7 +94,6 @@ function boxAnchor(box: Box3Like, at: readonly number[]): { offset: Vec3; half: 
 }
 
 /** FLOW fade-in (master-spec H: ~0.6 s). */
-const RUN_RATE = 5;
 /** EXPLODED toggle (master-spec H: ~2 s easeInOut); slider drags follow quickly. */
 const EXPLODE_MS = 2000;
 const EXPLODE_DRAG_MS = 220;
@@ -110,18 +110,15 @@ const HAND_LINE_INK = 0.7;
 const SHADOW_CASTER_RATIO = 0.28;
 
 /** Eases `run` in/out and advances the shared clocks. */
-function RunClock({ run, alwaysOn }: { run: boolean; alwaysOn: boolean }) {
+function RunClock({ run, alwaysOn, simKind, view }: { run: boolean; alwaysOn: boolean; simKind?: string; view: string }) {
   const runtime = useRuntime();
   const invalidate = useThree((s) => s.invalidate);
-  useEffect(() => invalidate(), [run, invalidate]);
+  useEffect(() => invalidate(), [run, simKind, view, invalidate]);
   useFrame((state, delta) => {
     const dt = Math.min(delta, MAX_DT);
-    runtime.elapsed += dt;
-    runtime.energy = damp(runtime.energy, run ? 1 : 0, RUN_RATE, dt);
-    if (run && runtime.energy > 0.995) runtime.energy = 1;
-    if (!run && runtime.energy < 0.01) runtime.energy = 0;
-    runtime.phase += dt * runtime.energy;
-    if (runtime.energy > 0 || alwaysOn) keepAnimating(state.invalidate);
+    const blocked = sensesMotionBlocked(simKind, view, runtime.explode);
+    stepRunTime(runtime, run, dt, blocked);
+    if (!blocked && (runtime.energy > 0 || alwaysOn)) keepAnimating(state.invalidate);
   });
   return null;
 }
@@ -595,7 +592,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
   return (
     <RuntimeContext.Provider value={runtime}>
       {data.mechanisms.length > 0 && <MechanismDriver data={data} store={store} ui={ui} bridge={bridge} />}
-      <RunClock run={s.run} alwaysOn={alwaysOn} />
+      <RunClock run={s.run} alwaysOn={alwaysOn} simKind={data.sim?.kind} view={s.view} />
       <AnimClocks animations={data.animations} effects={sim?.animations} bridge={bridge} snapKey={snap.current.key} />
       <ExplodeClock target={explodeTarget} snapKey={snap.current.key} />
       <Lighting look={look} center={bounds.center} radius={bounds.modelRadius} runtime={runtime} shadows={data.views.shadows} />
@@ -692,6 +689,8 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
           displays={displays}
           layers={s.layers}
           exploded={s.view === 'exploded'}
+          run={s.run}
+          phaseKey={s.transitionId}
           look={look}
           snapKey={snap.current.key}
           bridge={bridge}
