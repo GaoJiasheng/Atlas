@@ -1,0 +1,267 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "Singapore MOE. Primary Science Teaching & Learning Syllabus: 2023 cohort, updated Jan 2026. Printed p.42 / PDF p.43; P3 Life Cycles; printed p.38 classification.",
+        "zh": "MOE《小学科学教学与学习课纲》，2023 届、2026 年 1 月更新。印刷第 42 页、PDF 第 43 页列出小三生活史比较，包括青蛙与鸡；植物比较为种子、幼株与成株。"
+      },
+      "note": {
+        "en": "Access recorded 2026-10-27: existing local PDF. Live URL requests robot verification; did not interact. Read existing cache, not downloaded or copied.",
+        "zh": "准备时读取已有的课纲缓存；实时网址要求机器人验证，没有与验证交互。课纲定位与事实 F01–F03 保留；不是本轮重新下载。"
+      },
+      "url": "https://www.moe.gov.sg/-/media/files/primary/syllabus/primary-science-syllabus-2023_may24.pdf"
+    },
+    {
+      "id": "S2",
+      "text": {
+        "en": "Natural History Museum, London. How to find frogspawn, tadpoles and froglets. From tadpole to frog; Feasting froglets.",
+        "zh": "伦敦自然历史博物馆《怎样寻找蛙卵、蝌蚪与幼蛙》。“From tadpole to frog”和“Feasting froglets”说明后腿、前肢以及尾巴吸收的变化。"
+      },
+      "note": {
+        "en": "Access recorded 2026-10-27: full text. UK common-frog context. Do not transfer its seasonal dates or approximate 16-week wording to Singapore. Full text rechecked by the main build session on 2026-10-27.",
+        "zh": "2026-10-27 主会话重新核读全文。原文为英国常见蛙背景；没有把季节日期或约十六周说法搬到新加坡。"
+      },
+      "url": "https://www.nhm.ac.uk/discover/frogspawn-tadpoles-and-froglets.html"
+    },
+    {
+      "id": "S3",
+      "text": {
+        "en": "American Museum of Natural History. Tadpoles. Introductory paragraph and American Bullfrog Tadpoles account.",
+        "zh": "美国自然历史博物馆《蝌蚪》。开头与牛蛙蝌蚪说明：蝌蚪是青蛙幼体，发育所需时间因物种与条件而异。"
+      },
+      "note": {
+        "en": "Access recorded 2026-10-27: full text.  Full text rechecked by the main build session on 2026-10-27.",
+        "zh": "2026-10-27 主会话重新核读全文。不为所有青蛙指定统一发育天数。"
+      },
+      "url": "https://www.amnh.org/exhibitions/frogs-a-chorus-of-colors/reproduction/tadpoles"
+    },
+    {
+      "id": "S4",
+      "text": {
+        "en": "University of St Andrews, Tadpoles outreach. Metamorphosis From Tadpole to Frog. From tail swimming to limb-based locomotion; tissue remodelling.",
+        "zh": "圣安德鲁斯大学《从蝌蚪到青蛙的变态发育》。说明组织重塑，以及从靠尾游动到用肢运动的改变。"
+      },
+      "note": {
+        "en": "Access recorded 2026-10-27: full text. ",
+        "zh": "准备记录为全文可读。本主题不增加组织或激素层面的定量结论。"
+      },
+      "url": "https://tadpoles.wp.st-andrews.ac.uk/from-tadpole-to-frog/"
+    },
+    {
+      "id": "S5",
+      "text": {
+        "en": "Natural History Museum, London. Tadpoles have an eye on the future as their vision develops. Paragraph describing direct development within eggs.",
+        "zh": "伦敦自然历史博物馆《蝌蚪视觉发育》的报道。其中一段说明某些蛙在卵内直接发育、以幼蛙形态出来。"
+      },
+      "note": {
+        "en": "Access recorded 2026-10-27: full text. ",
+        "zh": "准备记录为全文可读。只用直接发育的例子说明蛙种之间的差异。"
+      },
+      "url": "https://www.nhm.ac.uk/discover/news/2022/november/tadpoles-have-eye-on-future-as-vision-develops.html"
+    },
+    {
+      "id": "S6",
+      "text": {
+        "en": "Mississippi State University Extension. The Avian Embryo, publication P1150. Formation and Parts of the Egg; Life in 21 Days; Table 2; hatching paragraph.",
+        "zh": "密西西比州立大学推广部《鸟类胚胎》，P1150。“卵的形成与结构”“21 天中的生命”、表 2 与孵出段落：受精先于壳形成，卵内发育、气体交换与破壳。"
+      },
+      "note": {
+        "en": "Access recorded 2026-10-27: full text. Use biological facts, not the historical specimen-dissection or incubator-building activities. Full text rechecked by the main build session on 2026-10-27.",
+        "zh": "2026-10-27 主会话重新核读全文。鸡卵胚胎只画无日龄示意，不复制原文图像。"
+      },
+      "url": "https://extension.msstate.edu/publications/the-avian-embryo"
+    },
+    {
+      "id": "S7",
+      "text": {
+        "en": "University of Illinois Extension. Eggs Structure. Yolk, albumen, membranes, air cell and chalazae.",
+        "zh": "伊利诺伊大学推广部《卵的结构》。卵黄、卵白、膜、气室与系带的说明；本主题只采用有关卵内结构与营养的事实。"
+      },
+      "note": {
+        "en": "Access recorded 2026-10-27: full text. ",
+        "zh": "准备记录为全文可读。引用公开结构事实，没有复制来源插图。"
+      },
+      "url": "https://extension.illinois.edu/eggs-structure"
+    },
+    {
+      "id": "S8",
+      "text": {
+        "en": "University of Illinois Extension. Incubation and Embryology Q & A. Questions 25–26, 46 and 61.",
+        "zh": "伊利诺伊大学推广部《孵化与胚胎学问答》。第 25–26、46、61 问；正常鸡卵孵化约 21 天，从适宜孵化开始计算。"
+      },
+      "note": {
+        "en": "Access recorded 2026-10-27: full text. Older multi-purpose advice page. Use only selected corroborated development statements; no husbandry or food-safety advice imported. Full text rechecked by the main build session on 2026-10-27.",
+        "zh": "2026-10-27 主会话重新核读全文。约 21 天是适宜孵化下的典型值，不是购买后的倒计时或保证。"
+      },
+      "url": "https://extension.illinois.edu/incubation-and-embryology-q"
+    },
+    {
+      "id": "S9",
+      "text": {
+        "en": "Penn State Extension. Hen Reproduction. Paragraph: only fertilized eggs develop into chicks; shell added in oviduct.",
+        "zh": "宾夕法尼亚州立大学推广部《母鸡的繁殖》。索引摘录说明只有受精卵能发育出雏鸡，以及壳在输卵管内加上。"
+      },
+      "note": {
+        "en": "Access recorded 2026-10-27: search-index full excerpt; direct open 403. Corroborate with S06; do not quote or treat as retrieved full page.",
+        "zh": "准备时只读到搜索索引的完整相关摘录；直接页面返回 403。受精先于壳形成的要点由 S6 交叉支持；不声称读过全文。"
+      },
+      "url": "https://extension.psu.edu/hen-reproduction"
+    },
+    {
+      "id": "S10",
+      "text": {
+        "en": "SG101 / Singapore Government. Cinnamon Bush Frogs in Singapore. Conservation translocation account, December 2017.",
+        "zh": "SG101 新加坡政府《新加坡的 Cinnamon Bush Frog》。记录 2017 年 12 月迁移蝌蚪至植物园适宜地点及之后观察到繁殖。"
+      },
+      "note": {
+        "en": "Access recorded 2026-10-27: full text. ",
+        "zh": "准备记录为全文可读。保育迁移由机构进行，正文不是自行收集或搬移的活动指引。"
+      },
+      "url": "https://www.sg101.gov.sg/resources/archives/nature-cinnamon-bush-frog-in-singapore/"
+    },
+    {
+      "id": "S11",
+      "text": {
+        "en": "National Parks Board. What Is That Red Bird. Red Junglefowl section.",
+        "zh": "NParks《那只红色的鸟》。红原鸡一节说明新加坡自由活动的鸡群混有家鸡与红原鸡。"
+      },
+      "note": {
+        "en": "Access recorded 2026-10-27: full text. Describes roaming flocks mixing domestic fowl and Red Junglefowl, not a field identification guarantee.",
+        "zh": "准备记录为全文可读。家鸡母鸡模型不作野外血缘或物种鉴定。"
+      },
+      "url": "https://www.nparks.gov.sg/publications-resources/articles/what-is-that-red-bird"
+    },
+    {
+      "id": "S12",
+      "text": {
+        "en": "National Parks Board. What’s the Frog?. Local frog examples and Cinnamon Bush Frog account.",
+        "zh": "NParks《这是什么蛙》。介绍新加坡的蛙种，包括 Cinnamon Bush Frog；不据此把通用模型认作该物种。"
+      },
+      "note": {
+        "en": "Access recorded 2026-10-27: full text. ",
+        "zh": "准备记录为全文可读。Cinnamon Bush Frog 中文种名未独立核定，正文保留英文名。"
+      },
+      "url": "https://www.nparks.gov.sg/publications-resources/articles/what-s-the-frog"
+    },
+    {
+      "id": "S13",
+      "text": {
+        "en": "National Environment Agency. Aedes Mosquito. Life-cycle paragraph; dry-egg survival.",
+        "zh": "新加坡国家环境局《伊蚊》。生活史段落与干燥卵存活说明；用于蚊图中水线上方卵的比较。"
+      },
+      "note": {
+        "en": "Access recorded 2026-10-27: full text. Stage sequence only; temperature-dependent timing stays in mosquito topic.",
+        "zh": "准备记录为全文可读。正文与图注明确蚊卵不是蛙卵；未展开防治步骤。"
+      },
+      "url": "https://www.nea.gov.sg/dengue-zika/prevent-aedes-mosquito-breeding/aedes-mosquito"
+    },
+    {
+      "id": "S14",
+      "text": {
+        "en": "US Environmental Protection Agency. Mosquito Life Cycle. Egg / larva / pupa / adult bullet list.",
+        "zh": "美国环保署《蚊子的生活史》。卵、幼虫、蛹、成虫四阶段；幼虫与蛹在水中发育。"
+      },
+      "note": {
+        "en": "Access recorded 2026-10-27: full text. ",
+        "zh": "准备记录为全文可读。用于蚊子对照，不把蛹添加进青蛙或鸡的顺序。"
+      },
+      "url": "https://www.epa.gov/mosquitocontrol/mosquito-life-cycle"
+    },
+    {
+      "id": "S15",
+      "text": {
+        "en": "Menendez et al., CBE—Life Sciences Education. Representing Variability: The Case of Life Cycle Diagrams (2020), DOI 10.1187/cbe.19-11-0251. Methods; spatial arrangement; variability coding; discussion.",
+        "zh": "Menendez 等《表现差异：以生活史图为例》（2020），DOI 10.1187/cbe.19-11-0251。方法、空间排列、差异编码与讨论，用于解释环图的限度。"
+      },
+      "note": {
+        "en": "Access recorded 2026-10-27: substantial indexed full-text excerpt; direct PMC robot check / publisher 403. Diagram-content analysis, not a prevalence survey of Singapore pupils. No PDF downloaded; indexed content only.",
+        "zh": "准备时读取大量索引全文摘录；PMC 直接页面要求机器人验证，出版社返回 403。没有绕过验证，不声称已下载论文全文。"
+      },
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8711823/"
+    },
+    {
+      "id": "S16",
+      "text": {
+        "en": "Prasad, Deshmukh & Shaikh; Asian Journal of Biology Education. Diagnosing and remediating elementary students’ misconceptions about the Growth of Plants (2024), 17:2–12. Abstract.",
+        "zh": "Prasad、Deshmukh 与 Shaikh《诊断并纠正小学生对植物生长的误解》（2024），Asian Journal of Biology Education 17:2–12。已读摘要，作为教学问题的背景。"
+      },
+      "note": {
+        "en": "Access recorded 2026-10-27: full abstract. Mumbai school study; not Singapore prevalence. Seeds-not-alive and anthropomorphic explanations are explicitly reported.",
+        "zh": "准备时读取完整摘要，未读全文。不将研究中的误解写成新加坡学生误解的发生率。"
+      },
+      "url": "https://www.jstage.jst.go.jp/article/ajbe/17/0/17_2/_article/-char/en"
+    },
+    {
+      "id": "S17",
+      "text": {
+        "en": "Menendez et al.; developmental research article. Detailed bugs or bugging details? The influence of perceptual richness across elementary school years. Pretest endorsements; generalization to non-ladybug insects.",
+        "zh": "Menendez 等《细致的昆虫图像或干扰的细节》。有关小学阶段视觉丰富度、前测及向其他昆虫概括的研究，只作为教学设计背景。"
+      },
+      "note": {
+        "en": "Access recorded 2026-10-27: indexed full-text excerpt; direct PMC robot check. Supports caution in transfer beyond familiar exemplars; no numerical effect size used.",
+        "zh": "准备时读取索引全文摘录；PMC 直接页面要求机器人验证。未绕过验证；不增加误解比例或因果数字。"
+      },
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8463490/"
+    },
+    {
+      "id": "S18",
+      "text": {
+        "en": "Hong Kong Education Bureau. English-Chinese Glossary of Science, S1–3 (2017). Existing cached edb-science-glossary-2017.pdf; entry pages in terms.",
+        "zh": "香港教育局《英汉科学词汇，初中一至三年级》（2017）。缓存 PDF 中 egg、embryo、fertilisation、reproduction、seedling 等词条；繁体转简体。"
+      },
+      "note": {
+        "en": "Access recorded 2026-10-27: existing local PDF + live index. Traditional terms converted to simplified explicitly; this does not attest Singapore usage. Polysemous stage=載物台 is not used for life stage.",
+        "zh": "准备时读取已有 PDF 缓存及实时索引；逐词页码在母研究中。香港用词证据与简化字转换不等于新加坡教育部核定。"
+      },
+      "url": "https://www.edb.gov.hk/en/curriculum-development/kla/science-edu/ref-and-resources/glossary.html"
+    },
+    {
+      "id": "S19",
+      "text": {
+        "en": "Hong Kong Education Bureau. Science (P1–P6) Curriculum Guide (2025). 3LC1–3LC5.",
+        "zh": "香港教育局《科学（小一至小六）课程指引》（2025），3LC1–3LC5 索引摘录。提供“生命周期”等中文用词证据，不当作新加坡官方用词。"
+      },
+      "note": {
+        "en": "Access recorded 2026-10-27: indexed excerpt; full PDF too large for web tool. Supports terminology only; not the Singapore syllabus. No download made.",
+        "zh": "只读取索引摘录，完整 PDF 超过工具响应大小。生活史为编辑选择，生命周期有索引词形依据；未核定新加坡用法。"
+      },
+      "url": "https://www.edb.gov.hk/attachment/tc/curriculum-development/kla/science-edu/pri-sci/PSCG%282025%29.pdf"
+    },
+    {
+      "id": "S20",
+      "text": {
+        "en": "Australian Government / Fauna of Australia. Amphibia: morphology, Fauna of Australia 2A. Statement near figures 2.4–2.6: four fingers, five toes.",
+        "zh": "澳大利亚政府《澳大利亚动物志 2A：两栖动物的形态》。图 2.4–2.6 附近的索引摘录，说明一般蛙前足四指、后足五趾。"
+      },
+      "note": {
+        "en": "Access recorded 2026-10-27: indexed excerpt. Use standard pond-type frog morphology; not a universal claim about all reduced-digit species.",
+        "zh": "只读取索引摘录。用于普通池塘型模型的趾数核对，不扩大为所有两栖动物的无例外规则。"
+      },
+      "url": "https://www.dcceew.gov.au/sites/default/files/env/pages/dc11235d-8b3b-43f7-b991-8429f477a1d4/files/04-fauna-2a-amphibia-morphology.pdf"
+    },
+    {
+      "id": "S21",
+      "text": {
+        "en": "Atlas repository. Atlas published topic inventory and life-cycle implementation. mosquito, plant, grasshopper topic.yaml and chapters; docs/06 life-cycle; lifecycle.ts.",
+        "zh": "Atlas 已发布主题与实现的本地目录核查：mosquito、plant、grasshopper 的 topic.yaml 与章节；docs/06 及生活史实现。链接只指向已存在入口。"
+      },
+      "note": {
+        "en": "Access recorded 2026-10-27: local files. Status checked on preparation date. Comparative designs are teaching selections, not new biological datasets.",
+        "zh": "本地文件，非外部网址；不造 http 链接。只用于已发布状态、章节 id 和复用能力的核对。"
+      }
+    },
+    {
+      "id": "S22",
+      "text": {
+        "en": "Atlas original frog-and-chicken model study. Generic pond-type frog and domestic hen; five frog observations, three chicken stages, four mosquito stages and three plant groups, enlarged independently. Five choice/toggle controls, six state outputs, four complete tables with sixteen rows. Discrete lookup moves observation markers, opens the teaching window and controls embryo display. No development rate, survival probability or hatch forecast is calculated.",
+        "zh": "Atlas 青蛙与鸡的原创模型研究。通用池塘型青蛙、家鸡母鸡；五个青蛙观察视图、三个鸡阶段、蚊子四阶段与植物三个分组，各自放大。标本环与指示珠只表示观察顺序，不表示真实大小或时间。五个选择或开关、六个状态输出、四张表共十六行；不计算发育速度、存活率或孵出成功。"
+      },
+      "note": {
+        "en": "Original DESIGN, not a measurement. Spec docs/56 and preparation beat-plan.json, sim-plan.json, layout-plan.json define the authored states. Equal arc spacing is not equal time. Reversible inspection is not reversible development. The fertilised control compares examples, rather than fertilising one egg. No external measurement dataset, map or runtime service.",
+        "zh": "原创 DESIGN，不是实测数据。输入是离散观察选择；查表结果移动指示珠、打开壳窗或显示示意胚胎。等弧距不代表等时长，返回观察不代表生物逆向生长。受精与窗口两个开关组合仅比较例子；不在同一卵上执行受精。未采用外部测量数据、地图或运行时服务。"
+      },
+      "design": true
+    }
+  ]
+}
