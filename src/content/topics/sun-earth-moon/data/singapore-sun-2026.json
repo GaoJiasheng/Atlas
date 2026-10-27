@@ -1,0 +1,3358 @@
+{
+  "meta": {
+    "kind": "computed, not observed",
+    "licence": "CC0-1.0 for original computed table and prepare.py",
+    "lat_deg_north": 1.3342,
+    "lon_deg_east": 103.7357,
+    "height_m": 0,
+    "timezone": "Asia/Singapore; UTC+08:00; no DST",
+    "horizon": "unobstructed, sea-level astronomical horizon",
+    "threshold_solar_centre_deg": -0.833,
+    "method": "NOAA/Meeus solar coordinates, bisection on geometric altitude; 42 iterations; equation-of-time solar noon",
+    "source": "https://gml.noaa.gov/grad/solcalc/calcdetails.html",
+    "precision": "Computed estimate, displayed nearest minute; no independent full-year observed validation. Weather, horizon and refraction vary."
+  },
+  "summary": {
+    "shortest": {
+      "date": "2026-12-21",
+      "sunrise_sgt": "07:02",
+      "solar_noon_sgt": "13:03",
+      "sunset_sgt": "19:04",
+      "daylight_minutes": 722.886,
+      "sunrise_azimuth_deg": 113.423,
+      "sunset_azimuth_deg": 246.575
+    },
+    "longest": {
+      "date": "2026-06-21",
+      "sunrise_sgt": "07:01",
+      "solar_noon_sgt": "13:07",
+      "sunset_sgt": "19:13",
+      "daylight_minutes": 732.005,
+      "sunrise_azimuth_deg": 66.532,
+      "sunset_azimuth_deg": 293.469
+    },
+    "earliest_sunrise": {
+      "date": "2026-10-20",
+      "sunrise_sgt": "06:47",
+      "solar_noon_sgt": "12:50",
+      "sunset_sgt": "18:52",
+      "daylight_minutes": 724.739,
+      "sunrise_azimuth_deg": 100.231,
+      "sunset_azimuth_deg": 259.589
+    },
+    "latest_sunrise": {
+      "date": "2026-01-31",
+      "sunrise_sgt": "07:17",
+      "solar_noon_sgt": "13:18",
+      "sunset_sgt": "19:20",
+      "daylight_minutes": 723.719,
+      "sunrise_azimuth_deg": 107.433,
+      "sunset_azimuth_deg": 252.707
+    },
+    "earliest_sunset": {
+      "date": "2026-10-25",
+      "sunrise_sgt": "06:47",
+      "solar_noon_sgt": "12:49",
+      "sunset_sgt": "18:51",
+      "daylight_minutes": 724.469,
+      "sunrise_azimuth_deg": 101.994,
+      "sunset_azimuth_deg": 257.833
+    },
+    "latest_sunset": {
+      "date": "2026-02-02",
+      "sunrise_sgt": "07:17",
+      "solar_noon_sgt": "13:19",
+      "sunset_sgt": "19:21",
+      "daylight_minutes": 723.8,
+      "sunrise_azimuth_deg": 106.866,
+      "sunset_azimuth_deg": 253.279
+    }
+  },
+  "days": [
+    {
+      "date": "2026-01-01",
+      "sunrise_sgt": "07:07",
+      "solar_noon_sgt": "13:08",
+      "sunset_sgt": "19:10",
+      "daylight_minutes": 722.946,
+      "sunrise_azimuth_deg": 113.009,
+      "sunset_azimuth_deg": 247.033
+    },
+    {
+      "date": "2026-01-02",
+      "sunrise_sgt": "07:07",
+      "solar_noon_sgt": "13:09",
+      "sunset_sgt": "19:10",
+      "daylight_minutes": 722.958,
+      "sunrise_azimuth_deg": 112.924,
+      "sunset_azimuth_deg": 247.121
+    },
+    {
+      "date": "2026-01-03",
+      "sunrise_sgt": "07:08",
+      "solar_noon_sgt": "13:09",
+      "sunset_sgt": "19:11",
+      "daylight_minutes": 722.97,
+      "sunrise_azimuth_deg": 112.832,
+      "sunset_azimuth_deg": 247.217
+    },
+    {
+      "date": "2026-01-04",
+      "sunrise_sgt": "07:08",
+      "solar_noon_sgt": "13:10",
+      "sunset_sgt": "19:11",
+      "daylight_minutes": 722.984,
+      "sunrise_azimuth_deg": 112.733,
+      "sunset_azimuth_deg": 247.32
+    },
+    {
+      "date": "2026-01-05",
+      "sunrise_sgt": "07:09",
+      "solar_noon_sgt": "13:10",
+      "sunset_sgt": "19:12",
+      "daylight_minutes": 722.999,
+      "sunrise_azimuth_deg": 112.625,
+      "sunset_azimuth_deg": 247.431
+    },
+    {
+      "date": "2026-01-06",
+      "sunrise_sgt": "07:09",
+      "solar_noon_sgt": "13:11",
+      "sunset_sgt": "19:12",
+      "daylight_minutes": 723.014,
+      "sunrise_azimuth_deg": 112.511,
+      "sunset_azimuth_deg": 247.549
+    },
+    {
+      "date": "2026-01-07",
+      "sunrise_sgt": "07:10",
+      "solar_noon_sgt": "13:11",
+      "sunset_sgt": "19:13",
+      "daylight_minutes": 723.031,
+      "sunrise_azimuth_deg": 112.389,
+      "sunset_azimuth_deg": 247.675
+    },
+    {
+      "date": "2026-01-08",
+      "sunrise_sgt": "07:10",
+      "solar_noon_sgt": "13:12",
+      "sunset_sgt": "19:13",
+      "daylight_minutes": 723.049,
+      "sunrise_azimuth_deg": 112.259,
+      "sunset_azimuth_deg": 247.808
+    },
+    {
+      "date": "2026-01-09",
+      "sunrise_sgt": "07:11",
+      "solar_noon_sgt": "13:12",
+      "sunset_sgt": "19:14",
+      "daylight_minutes": 723.067,
+      "sunrise_azimuth_deg": 112.123,
+      "sunset_azimuth_deg": 247.949
+    },
+    {
+      "date": "2026-01-10",
+      "sunrise_sgt": "07:11",
+      "solar_noon_sgt": "13:12",
+      "sunset_sgt": "19:14",
+      "daylight_minutes": 723.087,
+      "sunrise_azimuth_deg": 111.979,
+      "sunset_azimuth_deg": 248.096
+    },
+    {
+      "date": "2026-01-11",
+      "sunrise_sgt": "07:11",
+      "solar_noon_sgt": "13:13",
+      "sunset_sgt": "19:14",
+      "daylight_minutes": 723.108,
+      "sunrise_azimuth_deg": 111.828,
+      "sunset_azimuth_deg": 248.251
+    },
+    {
+      "date": "2026-01-12",
+      "sunrise_sgt": "07:12",
+      "solar_noon_sgt": "13:13",
+      "sunset_sgt": "19:15",
+      "daylight_minutes": 723.129,
+      "sunrise_azimuth_deg": 111.67,
+      "sunset_azimuth_deg": 248.412
+    },
+    {
+      "date": "2026-01-13",
+      "sunrise_sgt": "07:12",
+      "solar_noon_sgt": "13:14",
+      "sunset_sgt": "19:15",
+      "daylight_minutes": 723.152,
+      "sunrise_azimuth_deg": 111.504,
+      "sunset_azimuth_deg": 248.581
+    },
+    {
+      "date": "2026-01-14",
+      "sunrise_sgt": "07:12",
+      "solar_noon_sgt": "13:14",
+      "sunset_sgt": "19:16",
+      "daylight_minutes": 723.175,
+      "sunrise_azimuth_deg": 111.332,
+      "sunset_azimuth_deg": 248.757
+    },
+    {
+      "date": "2026-01-15",
+      "sunrise_sgt": "07:13",
+      "solar_noon_sgt": "13:14",
+      "sunset_sgt": "19:16",
+      "daylight_minutes": 723.2,
+      "sunrise_azimuth_deg": 111.153,
+      "sunset_azimuth_deg": 248.939
+    },
+    {
+      "date": "2026-01-16",
+      "sunrise_sgt": "07:13",
+      "solar_noon_sgt": "13:15",
+      "sunset_sgt": "19:16",
+      "daylight_minutes": 723.225,
+      "sunrise_azimuth_deg": 110.968,
+      "sunset_azimuth_deg": 249.128
+    },
+    {
+      "date": "2026-01-17",
+      "sunrise_sgt": "07:13",
+      "solar_noon_sgt": "13:15",
+      "sunset_sgt": "19:17",
+      "daylight_minutes": 723.252,
+      "sunrise_azimuth_deg": 110.775,
+      "sunset_azimuth_deg": 249.324
+    },
+    {
+      "date": "2026-01-18",
+      "sunrise_sgt": "07:14",
+      "solar_noon_sgt": "13:15",
+      "sunset_sgt": "19:17",
+      "daylight_minutes": 723.279,
+      "sunrise_azimuth_deg": 110.576,
+      "sunset_azimuth_deg": 249.526
+    },
+    {
+      "date": "2026-01-19",
+      "sunrise_sgt": "07:14",
+      "solar_noon_sgt": "13:16",
+      "sunset_sgt": "19:17",
+      "daylight_minutes": 723.308,
+      "sunrise_azimuth_deg": 110.371,
+      "sunset_azimuth_deg": 249.735
+    },
+    {
+      "date": "2026-01-20",
+      "sunrise_sgt": "07:14",
+      "solar_noon_sgt": "13:16",
+      "sunset_sgt": "19:18",
+      "daylight_minutes": 723.337,
+      "sunrise_azimuth_deg": 110.159,
+      "sunset_azimuth_deg": 249.95
+    },
+    {
+      "date": "2026-01-21",
+      "sunrise_sgt": "07:15",
+      "solar_noon_sgt": "13:16",
+      "sunset_sgt": "19:18",
+      "daylight_minutes": 723.367,
+      "sunrise_azimuth_deg": 109.941,
+      "sunset_azimuth_deg": 250.171
+    },
+    {
+      "date": "2026-01-22",
+      "sunrise_sgt": "07:15",
+      "solar_noon_sgt": "13:17",
+      "sunset_sgt": "19:18",
+      "daylight_minutes": 723.398,
+      "sunrise_azimuth_deg": 109.716,
+      "sunset_azimuth_deg": 250.399
+    },
+    {
+      "date": "2026-01-23",
+      "sunrise_sgt": "07:15",
+      "solar_noon_sgt": "13:17",
+      "sunset_sgt": "19:19",
+      "daylight_minutes": 723.43,
+      "sunrise_azimuth_deg": 109.486,
+      "sunset_azimuth_deg": 250.633
+    },
+    {
+      "date": "2026-01-24",
+      "sunrise_sgt": "07:15",
+      "solar_noon_sgt": "13:17",
+      "sunset_sgt": "19:19",
+      "daylight_minutes": 723.463,
+      "sunrise_azimuth_deg": 109.249,
+      "sunset_azimuth_deg": 250.872
+    },
+    {
+      "date": "2026-01-25",
+      "sunrise_sgt": "07:16",
+      "solar_noon_sgt": "13:17",
+      "sunset_sgt": "19:19",
+      "daylight_minutes": 723.497,
+      "sunrise_azimuth_deg": 109.006,
+      "sunset_azimuth_deg": 251.118
+    },
+    {
+      "date": "2026-01-26",
+      "sunrise_sgt": "07:16",
+      "solar_noon_sgt": "13:18",
+      "sunset_sgt": "19:19",
+      "daylight_minutes": 723.532,
+      "sunrise_azimuth_deg": 108.758,
+      "sunset_azimuth_deg": 251.369
+    },
+    {
+      "date": "2026-01-27",
+      "sunrise_sgt": "07:16",
+      "solar_noon_sgt": "13:18",
+      "sunset_sgt": "19:20",
+      "daylight_minutes": 723.567,
+      "sunrise_azimuth_deg": 108.504,
+      "sunset_azimuth_deg": 251.626
+    },
+    {
+      "date": "2026-01-28",
+      "sunrise_sgt": "07:16",
+      "solar_noon_sgt": "13:18",
+      "sunset_sgt": "19:20",
+      "daylight_minutes": 723.604,
+      "sunrise_azimuth_deg": 108.245,
+      "sunset_azimuth_deg": 251.888
+    },
+    {
+      "date": "2026-01-29",
+      "sunrise_sgt": "07:16",
+      "solar_noon_sgt": "13:18",
+      "sunset_sgt": "19:20",
+      "daylight_minutes": 723.641,
+      "sunrise_azimuth_deg": 107.979,
+      "sunset_azimuth_deg": 252.156
+    },
+    {
+      "date": "2026-01-30",
+      "sunrise_sgt": "07:16",
+      "solar_noon_sgt": "13:18",
+      "sunset_sgt": "19:20",
+      "daylight_minutes": 723.68,
+      "sunrise_azimuth_deg": 107.709,
+      "sunset_azimuth_deg": 252.429
+    },
+    {
+      "date": "2026-01-31",
+      "sunrise_sgt": "07:17",
+      "solar_noon_sgt": "13:18",
+      "sunset_sgt": "19:20",
+      "daylight_minutes": 723.719,
+      "sunrise_azimuth_deg": 107.433,
+      "sunset_azimuth_deg": 252.707
+    },
+    {
+      "date": "2026-02-01",
+      "sunrise_sgt": "07:17",
+      "solar_noon_sgt": "13:19",
+      "sunset_sgt": "19:20",
+      "daylight_minutes": 723.759,
+      "sunrise_azimuth_deg": 107.152,
+      "sunset_azimuth_deg": 252.991
+    },
+    {
+      "date": "2026-02-02",
+      "sunrise_sgt": "07:17",
+      "solar_noon_sgt": "13:19",
+      "sunset_sgt": "19:21",
+      "daylight_minutes": 723.8,
+      "sunrise_azimuth_deg": 106.866,
+      "sunset_azimuth_deg": 253.279
+    },
+    {
+      "date": "2026-02-03",
+      "sunrise_sgt": "07:17",
+      "solar_noon_sgt": "13:19",
+      "sunset_sgt": "19:21",
+      "daylight_minutes": 723.842,
+      "sunrise_azimuth_deg": 106.576,
+      "sunset_azimuth_deg": 253.572
+    },
+    {
+      "date": "2026-02-04",
+      "sunrise_sgt": "07:17",
+      "solar_noon_sgt": "13:19",
+      "sunset_sgt": "19:21",
+      "daylight_minutes": 723.884,
+      "sunrise_azimuth_deg": 106.28,
+      "sunset_azimuth_deg": 253.87
+    },
+    {
+      "date": "2026-02-05",
+      "sunrise_sgt": "07:17",
+      "solar_noon_sgt": "13:19",
+      "sunset_sgt": "19:21",
+      "daylight_minutes": 723.928,
+      "sunrise_azimuth_deg": 105.98,
+      "sunset_azimuth_deg": 254.173
+    },
+    {
+      "date": "2026-02-06",
+      "sunrise_sgt": "07:17",
+      "solar_noon_sgt": "13:19",
+      "sunset_sgt": "19:21",
+      "daylight_minutes": 723.972,
+      "sunrise_azimuth_deg": 105.675,
+      "sunset_azimuth_deg": 254.48
+    },
+    {
+      "date": "2026-02-07",
+      "sunrise_sgt": "07:17",
+      "solar_noon_sgt": "13:19",
+      "sunset_sgt": "19:21",
+      "daylight_minutes": 724.017,
+      "sunrise_azimuth_deg": 105.365,
+      "sunset_azimuth_deg": 254.792
+    },
+    {
+      "date": "2026-02-08",
+      "sunrise_sgt": "07:17",
+      "solar_noon_sgt": "13:19",
+      "sunset_sgt": "19:21",
+      "daylight_minutes": 724.063,
+      "sunrise_azimuth_deg": 105.051,
+      "sunset_azimuth_deg": 255.108
+    },
+    {
+      "date": "2026-02-09",
+      "sunrise_sgt": "07:17",
+      "solar_noon_sgt": "13:19",
+      "sunset_sgt": "19:21",
+      "daylight_minutes": 724.11,
+      "sunrise_azimuth_deg": 104.733,
+      "sunset_azimuth_deg": 255.428
+    },
+    {
+      "date": "2026-02-10",
+      "sunrise_sgt": "07:17",
+      "solar_noon_sgt": "13:19",
+      "sunset_sgt": "19:21",
+      "daylight_minutes": 724.158,
+      "sunrise_azimuth_deg": 104.411,
+      "sunset_azimuth_deg": 255.752
+    },
+    {
+      "date": "2026-02-11",
+      "sunrise_sgt": "07:17",
+      "solar_noon_sgt": "13:19",
+      "sunset_sgt": "19:21",
+      "daylight_minutes": 724.206,
+      "sunrise_azimuth_deg": 104.085,
+      "sunset_azimuth_deg": 256.081
+    },
+    {
+      "date": "2026-02-12",
+      "sunrise_sgt": "07:17",
+      "solar_noon_sgt": "13:19",
+      "sunset_sgt": "19:21",
+      "daylight_minutes": 724.255,
+      "sunrise_azimuth_deg": 103.755,
+      "sunset_azimuth_deg": 256.413
+    },
+    {
+      "date": "2026-02-13",
+      "sunrise_sgt": "07:17",
+      "solar_noon_sgt": "13:19",
+      "sunset_sgt": "19:21",
+      "daylight_minutes": 724.305,
+      "sunrise_azimuth_deg": 103.421,
+      "sunset_azimuth_deg": 256.748
+    },
+    {
+      "date": "2026-02-14",
+      "sunrise_sgt": "07:17",
+      "solar_noon_sgt": "13:19",
+      "sunset_sgt": "19:21",
+      "daylight_minutes": 724.356,
+      "sunrise_azimuth_deg": 103.083,
+      "sunset_azimuth_deg": 257.088
+    },
+    {
+      "date": "2026-02-15",
+      "sunrise_sgt": "07:17",
+      "solar_noon_sgt": "13:19",
+      "sunset_sgt": "19:21",
+      "daylight_minutes": 724.407,
+      "sunrise_azimuth_deg": 102.742,
+      "sunset_azimuth_deg": 257.43
+    },
+    {
+      "date": "2026-02-16",
+      "sunrise_sgt": "07:17",
+      "solar_noon_sgt": "13:19",
+      "sunset_sgt": "19:21",
+      "daylight_minutes": 724.46,
+      "sunrise_azimuth_deg": 102.398,
+      "sunset_azimuth_deg": 257.777
+    },
+    {
+      "date": "2026-02-17",
+      "sunrise_sgt": "07:17",
+      "solar_noon_sgt": "13:19",
+      "sunset_sgt": "19:21",
+      "daylight_minutes": 724.513,
+      "sunrise_azimuth_deg": 102.05,
+      "sunset_azimuth_deg": 258.126
+    },
+    {
+      "date": "2026-02-18",
+      "sunrise_sgt": "07:17",
+      "solar_noon_sgt": "13:19",
+      "sunset_sgt": "19:21",
+      "daylight_minutes": 724.567,
+      "sunrise_azimuth_deg": 101.699,
+      "sunset_azimuth_deg": 258.479
+    },
+    {
+      "date": "2026-02-19",
+      "sunrise_sgt": "07:17",
+      "solar_noon_sgt": "13:19",
+      "sunset_sgt": "19:21",
+      "daylight_minutes": 724.621,
+      "sunrise_azimuth_deg": 101.345,
+      "sunset_azimuth_deg": 258.834
+    },
+    {
+      "date": "2026-02-20",
+      "sunrise_sgt": "07:16",
+      "solar_noon_sgt": "13:19",
+      "sunset_sgt": "19:21",
+      "daylight_minutes": 724.676,
+      "sunrise_azimuth_deg": 100.988,
+      "sunset_azimuth_deg": 259.193
+    },
+    {
+      "date": "2026-02-21",
+      "sunrise_sgt": "07:16",
+      "solar_noon_sgt": "13:19",
+      "sunset_sgt": "19:21",
+      "daylight_minutes": 724.732,
+      "sunrise_azimuth_deg": 100.628,
+      "sunset_azimuth_deg": 259.554
+    },
+    {
+      "date": "2026-02-22",
+      "sunrise_sgt": "07:16",
+      "solar_noon_sgt": "13:19",
+      "sunset_sgt": "19:21",
+      "daylight_minutes": 724.789,
+      "sunrise_azimuth_deg": 100.265,
+      "sunset_azimuth_deg": 259.918
+    },
+    {
+      "date": "2026-02-23",
+      "sunrise_sgt": "07:16",
+      "solar_noon_sgt": "13:18",
+      "sunset_sgt": "19:21",
+      "daylight_minutes": 724.847,
+      "sunrise_azimuth_deg": 99.9,
+      "sunset_azimuth_deg": 260.285
+    },
+    {
+      "date": "2026-02-24",
+      "sunrise_sgt": "07:16",
+      "solar_noon_sgt": "13:18",
+      "sunset_sgt": "19:21",
+      "daylight_minutes": 724.905,
+      "sunrise_azimuth_deg": 99.532,
+      "sunset_azimuth_deg": 260.654
+    },
+    {
+      "date": "2026-02-25",
+      "sunrise_sgt": "07:16",
+      "solar_noon_sgt": "13:18",
+      "sunset_sgt": "19:21",
+      "daylight_minutes": 724.964,
+      "sunrise_azimuth_deg": 99.162,
+      "sunset_azimuth_deg": 261.025
+    },
+    {
+      "date": "2026-02-26",
+      "sunrise_sgt": "07:15",
+      "solar_noon_sgt": "13:18",
+      "sunset_sgt": "19:20",
+      "daylight_minutes": 725.023,
+      "sunrise_azimuth_deg": 98.789,
+      "sunset_azimuth_deg": 261.399
+    },
+    {
+      "date": "2026-02-27",
+      "sunrise_sgt": "07:15",
+      "solar_noon_sgt": "13:18",
+      "sunset_sgt": "19:20",
+      "daylight_minutes": 725.083,
+      "sunrise_azimuth_deg": 98.415,
+      "sunset_azimuth_deg": 261.775
+    },
+    {
+      "date": "2026-02-28",
+      "sunrise_sgt": "07:15",
+      "solar_noon_sgt": "13:18",
+      "sunset_sgt": "19:20",
+      "daylight_minutes": 725.144,
+      "sunrise_azimuth_deg": 98.038,
+      "sunset_azimuth_deg": 262.153
+    },
+    {
+      "date": "2026-03-01",
+      "sunrise_sgt": "07:15",
+      "solar_noon_sgt": "13:17",
+      "sunset_sgt": "19:20",
+      "daylight_minutes": 725.206,
+      "sunrise_azimuth_deg": 97.659,
+      "sunset_azimuth_deg": 262.532
+    },
+    {
+      "date": "2026-03-02",
+      "sunrise_sgt": "07:15",
+      "solar_noon_sgt": "13:17",
+      "sunset_sgt": "19:20",
+      "daylight_minutes": 725.268,
+      "sunrise_azimuth_deg": 97.279,
+      "sunset_azimuth_deg": 262.914
+    },
+    {
+      "date": "2026-03-03",
+      "sunrise_sgt": "07:14",
+      "solar_noon_sgt": "13:17",
+      "sunset_sgt": "19:20",
+      "daylight_minutes": 725.331,
+      "sunrise_azimuth_deg": 96.896,
+      "sunset_azimuth_deg": 263.297
+    },
+    {
+      "date": "2026-03-04",
+      "sunrise_sgt": "07:14",
+      "solar_noon_sgt": "13:17",
+      "sunset_sgt": "19:20",
+      "daylight_minutes": 725.394,
+      "sunrise_azimuth_deg": 96.512,
+      "sunset_azimuth_deg": 263.682
+    },
+    {
+      "date": "2026-03-05",
+      "sunrise_sgt": "07:14",
+      "solar_noon_sgt": "13:17",
+      "sunset_sgt": "19:19",
+      "daylight_minutes": 725.458,
+      "sunrise_azimuth_deg": 96.127,
+      "sunset_azimuth_deg": 264.068
+    },
+    {
+      "date": "2026-03-06",
+      "sunrise_sgt": "07:14",
+      "solar_noon_sgt": "13:16",
+      "sunset_sgt": "19:19",
+      "daylight_minutes": 725.523,
+      "sunrise_azimuth_deg": 95.74,
+      "sunset_azimuth_deg": 264.455
+    },
+    {
+      "date": "2026-03-07",
+      "sunrise_sgt": "07:13",
+      "solar_noon_sgt": "13:16",
+      "sunset_sgt": "19:19",
+      "daylight_minutes": 725.588,
+      "sunrise_azimuth_deg": 95.352,
+      "sunset_azimuth_deg": 264.844
+    },
+    {
+      "date": "2026-03-08",
+      "sunrise_sgt": "07:13",
+      "solar_noon_sgt": "13:16",
+      "sunset_sgt": "19:19",
+      "daylight_minutes": 725.654,
+      "sunrise_azimuth_deg": 94.963,
+      "sunset_azimuth_deg": 265.234
+    },
+    {
+      "date": "2026-03-09",
+      "sunrise_sgt": "07:13",
+      "solar_noon_sgt": "13:16",
+      "sunset_sgt": "19:18",
+      "daylight_minutes": 725.721,
+      "sunrise_azimuth_deg": 94.572,
+      "sunset_azimuth_deg": 265.625
+    },
+    {
+      "date": "2026-03-10",
+      "sunrise_sgt": "07:12",
+      "solar_noon_sgt": "13:15",
+      "sunset_sgt": "19:18",
+      "daylight_minutes": 725.788,
+      "sunrise_azimuth_deg": 94.181,
+      "sunset_azimuth_deg": 266.017
+    },
+    {
+      "date": "2026-03-11",
+      "sunrise_sgt": "07:12",
+      "solar_noon_sgt": "13:15",
+      "sunset_sgt": "19:18",
+      "daylight_minutes": 725.855,
+      "sunrise_azimuth_deg": 93.788,
+      "sunset_azimuth_deg": 266.41
+    },
+    {
+      "date": "2026-03-12",
+      "sunrise_sgt": "07:12",
+      "solar_noon_sgt": "13:15",
+      "sunset_sgt": "19:18",
+      "daylight_minutes": 725.924,
+      "sunrise_azimuth_deg": 93.395,
+      "sunset_azimuth_deg": 266.803
+    },
+    {
+      "date": "2026-03-13",
+      "sunrise_sgt": "07:12",
+      "solar_noon_sgt": "13:15",
+      "sunset_sgt": "19:18",
+      "daylight_minutes": 725.992,
+      "sunrise_azimuth_deg": 93.002,
+      "sunset_azimuth_deg": 267.197
+    },
+    {
+      "date": "2026-03-14",
+      "sunrise_sgt": "07:11",
+      "solar_noon_sgt": "13:14",
+      "sunset_sgt": "19:17",
+      "daylight_minutes": 726.062,
+      "sunrise_azimuth_deg": 92.607,
+      "sunset_azimuth_deg": 267.592
+    },
+    {
+      "date": "2026-03-15",
+      "sunrise_sgt": "07:11",
+      "solar_noon_sgt": "13:14",
+      "sunset_sgt": "19:17",
+      "daylight_minutes": 726.131,
+      "sunrise_azimuth_deg": 92.213,
+      "sunset_azimuth_deg": 267.987
+    },
+    {
+      "date": "2026-03-16",
+      "sunrise_sgt": "07:11",
+      "solar_noon_sgt": "13:14",
+      "sunset_sgt": "19:17",
+      "daylight_minutes": 726.202,
+      "sunrise_azimuth_deg": 91.817,
+      "sunset_azimuth_deg": 268.382
+    },
+    {
+      "date": "2026-03-17",
+      "sunrise_sgt": "07:10",
+      "solar_noon_sgt": "13:13",
+      "sunset_sgt": "19:17",
+      "daylight_minutes": 726.273,
+      "sunrise_azimuth_deg": 91.422,
+      "sunset_azimuth_deg": 268.777
+    },
+    {
+      "date": "2026-03-18",
+      "sunrise_sgt": "07:10",
+      "solar_noon_sgt": "13:13",
+      "sunset_sgt": "19:16",
+      "daylight_minutes": 726.344,
+      "sunrise_azimuth_deg": 91.027,
+      "sunset_azimuth_deg": 269.173
+    },
+    {
+      "date": "2026-03-19",
+      "sunrise_sgt": "07:10",
+      "solar_noon_sgt": "13:13",
+      "sunset_sgt": "19:16",
+      "daylight_minutes": 726.416,
+      "sunrise_azimuth_deg": 90.631,
+      "sunset_azimuth_deg": 269.569
+    },
+    {
+      "date": "2026-03-20",
+      "sunrise_sgt": "07:09",
+      "solar_noon_sgt": "13:13",
+      "sunset_sgt": "19:16",
+      "daylight_minutes": 726.488,
+      "sunrise_azimuth_deg": 90.236,
+      "sunset_azimuth_deg": 269.964
+    },
+    {
+      "date": "2026-03-21",
+      "sunrise_sgt": "07:09",
+      "solar_noon_sgt": "13:12",
+      "sunset_sgt": "19:16",
+      "daylight_minutes": 726.561,
+      "sunrise_azimuth_deg": 89.84,
+      "sunset_azimuth_deg": 270.359
+    },
+    {
+      "date": "2026-03-22",
+      "sunrise_sgt": "07:09",
+      "solar_noon_sgt": "13:12",
+      "sunset_sgt": "19:15",
+      "daylight_minutes": 726.634,
+      "sunrise_azimuth_deg": 89.445,
+      "sunset_azimuth_deg": 270.754
+    },
+    {
+      "date": "2026-03-23",
+      "sunrise_sgt": "07:08",
+      "solar_noon_sgt": "13:12",
+      "sunset_sgt": "19:15",
+      "daylight_minutes": 726.707,
+      "sunrise_azimuth_deg": 89.05,
+      "sunset_azimuth_deg": 271.149
+    },
+    {
+      "date": "2026-03-24",
+      "sunrise_sgt": "07:08",
+      "solar_noon_sgt": "13:11",
+      "sunset_sgt": "19:15",
+      "daylight_minutes": 726.781,
+      "sunrise_azimuth_deg": 88.656,
+      "sunset_azimuth_deg": 271.543
+    },
+    {
+      "date": "2026-03-25",
+      "sunrise_sgt": "07:08",
+      "solar_noon_sgt": "13:11",
+      "sunset_sgt": "19:15",
+      "daylight_minutes": 726.856,
+      "sunrise_azimuth_deg": 88.262,
+      "sunset_azimuth_deg": 271.936
+    },
+    {
+      "date": "2026-03-26",
+      "sunrise_sgt": "07:07",
+      "solar_noon_sgt": "13:11",
+      "sunset_sgt": "19:14",
+      "daylight_minutes": 726.93,
+      "sunrise_azimuth_deg": 87.869,
+      "sunset_azimuth_deg": 272.329
+    },
+    {
+      "date": "2026-03-27",
+      "sunrise_sgt": "07:07",
+      "solar_noon_sgt": "13:10",
+      "sunset_sgt": "19:14",
+      "daylight_minutes": 727.005,
+      "sunrise_azimuth_deg": 87.477,
+      "sunset_azimuth_deg": 272.721
+    },
+    {
+      "date": "2026-03-28",
+      "sunrise_sgt": "07:07",
+      "solar_noon_sgt": "13:10",
+      "sunset_sgt": "19:14",
+      "daylight_minutes": 727.081,
+      "sunrise_azimuth_deg": 87.086,
+      "sunset_azimuth_deg": 273.112
+    },
+    {
+      "date": "2026-03-29",
+      "sunrise_sgt": "07:06",
+      "solar_noon_sgt": "13:10",
+      "sunset_sgt": "19:13",
+      "daylight_minutes": 727.157,
+      "sunrise_azimuth_deg": 86.695,
+      "sunset_azimuth_deg": 273.502
+    },
+    {
+      "date": "2026-03-30",
+      "sunrise_sgt": "07:06",
+      "solar_noon_sgt": "13:10",
+      "sunset_sgt": "19:13",
+      "daylight_minutes": 727.233,
+      "sunrise_azimuth_deg": 86.306,
+      "sunset_azimuth_deg": 273.891
+    },
+    {
+      "date": "2026-03-31",
+      "sunrise_sgt": "07:06",
+      "solar_noon_sgt": "13:09",
+      "sunset_sgt": "19:13",
+      "daylight_minutes": 727.309,
+      "sunrise_azimuth_deg": 85.917,
+      "sunset_azimuth_deg": 274.278
+    },
+    {
+      "date": "2026-04-01",
+      "sunrise_sgt": "07:05",
+      "solar_noon_sgt": "13:09",
+      "sunset_sgt": "19:13",
+      "daylight_minutes": 727.386,
+      "sunrise_azimuth_deg": 85.53,
+      "sunset_azimuth_deg": 274.665
+    },
+    {
+      "date": "2026-04-02",
+      "sunrise_sgt": "07:05",
+      "solar_noon_sgt": "13:09",
+      "sunset_sgt": "19:12",
+      "daylight_minutes": 727.463,
+      "sunrise_azimuth_deg": 85.145,
+      "sunset_azimuth_deg": 275.05
+    },
+    {
+      "date": "2026-04-03",
+      "sunrise_sgt": "07:05",
+      "solar_noon_sgt": "13:08",
+      "sunset_sgt": "19:12",
+      "daylight_minutes": 727.54,
+      "sunrise_azimuth_deg": 84.76,
+      "sunset_azimuth_deg": 275.433
+    },
+    {
+      "date": "2026-04-04",
+      "sunrise_sgt": "07:04",
+      "solar_noon_sgt": "13:08",
+      "sunset_sgt": "19:12",
+      "daylight_minutes": 727.618,
+      "sunrise_azimuth_deg": 84.378,
+      "sunset_azimuth_deg": 275.815
+    },
+    {
+      "date": "2026-04-05",
+      "sunrise_sgt": "07:04",
+      "solar_noon_sgt": "13:08",
+      "sunset_sgt": "19:12",
+      "daylight_minutes": 727.696,
+      "sunrise_azimuth_deg": 83.997,
+      "sunset_azimuth_deg": 276.195
+    },
+    {
+      "date": "2026-04-06",
+      "sunrise_sgt": "07:04",
+      "solar_noon_sgt": "13:08",
+      "sunset_sgt": "19:11",
+      "daylight_minutes": 727.774,
+      "sunrise_azimuth_deg": 83.617,
+      "sunset_azimuth_deg": 276.574
+    },
+    {
+      "date": "2026-04-07",
+      "sunrise_sgt": "07:03",
+      "solar_noon_sgt": "13:07",
+      "sunset_sgt": "19:11",
+      "daylight_minutes": 727.852,
+      "sunrise_azimuth_deg": 83.24,
+      "sunset_azimuth_deg": 276.951
+    },
+    {
+      "date": "2026-04-08",
+      "sunrise_sgt": "07:03",
+      "solar_noon_sgt": "13:07",
+      "sunset_sgt": "19:11",
+      "daylight_minutes": 727.93,
+      "sunrise_azimuth_deg": 82.864,
+      "sunset_azimuth_deg": 277.325
+    },
+    {
+      "date": "2026-04-09",
+      "sunrise_sgt": "07:03",
+      "solar_noon_sgt": "13:07",
+      "sunset_sgt": "19:11",
+      "daylight_minutes": 728.008,
+      "sunrise_azimuth_deg": 82.49,
+      "sunset_azimuth_deg": 277.698
+    },
+    {
+      "date": "2026-04-10",
+      "sunrise_sgt": "07:02",
+      "solar_noon_sgt": "13:06",
+      "sunset_sgt": "19:10",
+      "daylight_minutes": 728.087,
+      "sunrise_azimuth_deg": 82.119,
+      "sunset_azimuth_deg": 278.068
+    },
+    {
+      "date": "2026-04-11",
+      "sunrise_sgt": "07:02",
+      "solar_noon_sgt": "13:06",
+      "sunset_sgt": "19:10",
+      "daylight_minutes": 728.166,
+      "sunrise_azimuth_deg": 81.749,
+      "sunset_azimuth_deg": 278.436
+    },
+    {
+      "date": "2026-04-12",
+      "sunrise_sgt": "07:02",
+      "solar_noon_sgt": "13:06",
+      "sunset_sgt": "19:10",
+      "daylight_minutes": 728.244,
+      "sunrise_azimuth_deg": 81.382,
+      "sunset_azimuth_deg": 278.802
+    },
+    {
+      "date": "2026-04-13",
+      "sunrise_sgt": "07:01",
+      "solar_noon_sgt": "13:06",
+      "sunset_sgt": "19:10",
+      "daylight_minutes": 728.323,
+      "sunrise_azimuth_deg": 81.018,
+      "sunset_azimuth_deg": 279.166
+    },
+    {
+      "date": "2026-04-14",
+      "sunrise_sgt": "07:01",
+      "solar_noon_sgt": "13:05",
+      "sunset_sgt": "19:10",
+      "daylight_minutes": 728.402,
+      "sunrise_azimuth_deg": 80.656,
+      "sunset_azimuth_deg": 279.527
+    },
+    {
+      "date": "2026-04-15",
+      "sunrise_sgt": "07:01",
+      "solar_noon_sgt": "13:05",
+      "sunset_sgt": "19:09",
+      "daylight_minutes": 728.481,
+      "sunrise_azimuth_deg": 80.296,
+      "sunset_azimuth_deg": 279.885
+    },
+    {
+      "date": "2026-04-16",
+      "sunrise_sgt": "07:01",
+      "solar_noon_sgt": "13:05",
+      "sunset_sgt": "19:09",
+      "daylight_minutes": 728.559,
+      "sunrise_azimuth_deg": 79.939,
+      "sunset_azimuth_deg": 280.24
+    },
+    {
+      "date": "2026-04-17",
+      "sunrise_sgt": "07:00",
+      "solar_noon_sgt": "13:05",
+      "sunset_sgt": "19:09",
+      "daylight_minutes": 728.638,
+      "sunrise_azimuth_deg": 79.585,
+      "sunset_azimuth_deg": 280.593
+    },
+    {
+      "date": "2026-04-18",
+      "sunrise_sgt": "07:00",
+      "solar_noon_sgt": "13:04",
+      "sunset_sgt": "19:09",
+      "daylight_minutes": 728.717,
+      "sunrise_azimuth_deg": 79.234,
+      "sunset_azimuth_deg": 280.943
+    },
+    {
+      "date": "2026-04-19",
+      "sunrise_sgt": "07:00",
+      "solar_noon_sgt": "13:04",
+      "sunset_sgt": "19:09",
+      "daylight_minutes": 728.795,
+      "sunrise_azimuth_deg": 78.885,
+      "sunset_azimuth_deg": 281.29
+    },
+    {
+      "date": "2026-04-20",
+      "sunrise_sgt": "07:00",
+      "solar_noon_sgt": "13:04",
+      "sunset_sgt": "19:08",
+      "daylight_minutes": 728.874,
+      "sunrise_azimuth_deg": 78.54,
+      "sunset_azimuth_deg": 281.633
+    },
+    {
+      "date": "2026-04-21",
+      "sunrise_sgt": "06:59",
+      "solar_noon_sgt": "13:04",
+      "sunset_sgt": "19:08",
+      "daylight_minutes": 728.952,
+      "sunrise_azimuth_deg": 78.198,
+      "sunset_azimuth_deg": 281.974
+    },
+    {
+      "date": "2026-04-22",
+      "sunrise_sgt": "06:59",
+      "solar_noon_sgt": "13:04",
+      "sunset_sgt": "19:08",
+      "daylight_minutes": 729.03,
+      "sunrise_azimuth_deg": 77.859,
+      "sunset_azimuth_deg": 282.311
+    },
+    {
+      "date": "2026-04-23",
+      "sunrise_sgt": "06:59",
+      "solar_noon_sgt": "13:03",
+      "sunset_sgt": "19:08",
+      "daylight_minutes": 729.108,
+      "sunrise_azimuth_deg": 77.524,
+      "sunset_azimuth_deg": 282.645
+    },
+    {
+      "date": "2026-04-24",
+      "sunrise_sgt": "06:59",
+      "solar_noon_sgt": "13:03",
+      "sunset_sgt": "19:08",
+      "daylight_minutes": 729.186,
+      "sunrise_azimuth_deg": 77.191,
+      "sunset_azimuth_deg": 282.975
+    },
+    {
+      "date": "2026-04-25",
+      "sunrise_sgt": "06:58",
+      "solar_noon_sgt": "13:03",
+      "sunset_sgt": "19:08",
+      "daylight_minutes": 729.263,
+      "sunrise_azimuth_deg": 76.863,
+      "sunset_azimuth_deg": 283.302
+    },
+    {
+      "date": "2026-04-26",
+      "sunrise_sgt": "06:58",
+      "solar_noon_sgt": "13:03",
+      "sunset_sgt": "19:08",
+      "daylight_minutes": 729.34,
+      "sunrise_azimuth_deg": 76.538,
+      "sunset_azimuth_deg": 283.626
+    },
+    {
+      "date": "2026-04-27",
+      "sunrise_sgt": "06:58",
+      "solar_noon_sgt": "13:03",
+      "sunset_sgt": "19:07",
+      "daylight_minutes": 729.417,
+      "sunrise_azimuth_deg": 76.216,
+      "sunset_azimuth_deg": 283.945
+    },
+    {
+      "date": "2026-04-28",
+      "sunrise_sgt": "06:58",
+      "solar_noon_sgt": "13:03",
+      "sunset_sgt": "19:07",
+      "daylight_minutes": 729.493,
+      "sunrise_azimuth_deg": 75.899,
+      "sunset_azimuth_deg": 284.261
+    },
+    {
+      "date": "2026-04-29",
+      "sunrise_sgt": "06:58",
+      "solar_noon_sgt": "13:02",
+      "sunset_sgt": "19:07",
+      "daylight_minutes": 729.569,
+      "sunrise_azimuth_deg": 75.585,
+      "sunset_azimuth_deg": 284.573
+    },
+    {
+      "date": "2026-04-30",
+      "sunrise_sgt": "06:58",
+      "solar_noon_sgt": "13:02",
+      "sunset_sgt": "19:07",
+      "daylight_minutes": 729.645,
+      "sunrise_azimuth_deg": 75.275,
+      "sunset_azimuth_deg": 284.88
+    },
+    {
+      "date": "2026-05-01",
+      "sunrise_sgt": "06:57",
+      "solar_noon_sgt": "13:02",
+      "sunset_sgt": "19:07",
+      "daylight_minutes": 729.72,
+      "sunrise_azimuth_deg": 74.969,
+      "sunset_azimuth_deg": 285.184
+    },
+    {
+      "date": "2026-05-02",
+      "sunrise_sgt": "06:57",
+      "solar_noon_sgt": "13:02",
+      "sunset_sgt": "19:07",
+      "daylight_minutes": 729.795,
+      "sunrise_azimuth_deg": 74.668,
+      "sunset_azimuth_deg": 285.483
+    },
+    {
+      "date": "2026-05-03",
+      "sunrise_sgt": "06:57",
+      "solar_noon_sgt": "13:02",
+      "sunset_sgt": "19:07",
+      "daylight_minutes": 729.869,
+      "sunrise_azimuth_deg": 74.37,
+      "sunset_azimuth_deg": 285.779
+    },
+    {
+      "date": "2026-05-04",
+      "sunrise_sgt": "06:57",
+      "solar_noon_sgt": "13:02",
+      "sunset_sgt": "19:07",
+      "daylight_minutes": 729.942,
+      "sunrise_azimuth_deg": 74.077,
+      "sunset_azimuth_deg": 286.07
+    },
+    {
+      "date": "2026-05-05",
+      "sunrise_sgt": "06:57",
+      "solar_noon_sgt": "13:02",
+      "sunset_sgt": "19:07",
+      "daylight_minutes": 730.015,
+      "sunrise_azimuth_deg": 73.789,
+      "sunset_azimuth_deg": 286.356
+    },
+    {
+      "date": "2026-05-06",
+      "sunrise_sgt": "06:57",
+      "solar_noon_sgt": "13:02",
+      "sunset_sgt": "19:07",
+      "daylight_minutes": 730.087,
+      "sunrise_azimuth_deg": 73.504,
+      "sunset_azimuth_deg": 286.638
+    },
+    {
+      "date": "2026-05-07",
+      "sunrise_sgt": "06:57",
+      "solar_noon_sgt": "13:02",
+      "sunset_sgt": "19:07",
+      "daylight_minutes": 730.158,
+      "sunrise_azimuth_deg": 73.225,
+      "sunset_azimuth_deg": 286.915
+    },
+    {
+      "date": "2026-05-08",
+      "sunrise_sgt": "06:56",
+      "solar_noon_sgt": "13:02",
+      "sunset_sgt": "19:07",
+      "daylight_minutes": 730.229,
+      "sunrise_azimuth_deg": 72.95,
+      "sunset_azimuth_deg": 287.188
+    },
+    {
+      "date": "2026-05-09",
+      "sunrise_sgt": "06:56",
+      "solar_noon_sgt": "13:02",
+      "sunset_sgt": "19:07",
+      "daylight_minutes": 730.299,
+      "sunrise_azimuth_deg": 72.68,
+      "sunset_azimuth_deg": 287.456
+    },
+    {
+      "date": "2026-05-10",
+      "sunrise_sgt": "06:56",
+      "solar_noon_sgt": "13:01",
+      "sunset_sgt": "19:07",
+      "daylight_minutes": 730.368,
+      "sunrise_azimuth_deg": 72.414,
+      "sunset_azimuth_deg": 287.719
+    },
+    {
+      "date": "2026-05-11",
+      "sunrise_sgt": "06:56",
+      "solar_noon_sgt": "13:01",
+      "sunset_sgt": "19:07",
+      "daylight_minutes": 730.436,
+      "sunrise_azimuth_deg": 72.154,
+      "sunset_azimuth_deg": 287.977
+    },
+    {
+      "date": "2026-05-12",
+      "sunrise_sgt": "06:56",
+      "solar_noon_sgt": "13:01",
+      "sunset_sgt": "19:07",
+      "daylight_minutes": 730.503,
+      "sunrise_azimuth_deg": 71.898,
+      "sunset_azimuth_deg": 288.23
+    },
+    {
+      "date": "2026-05-13",
+      "sunrise_sgt": "06:56",
+      "solar_noon_sgt": "13:01",
+      "sunset_sgt": "19:07",
+      "daylight_minutes": 730.57,
+      "sunrise_azimuth_deg": 71.647,
+      "sunset_azimuth_deg": 288.478
+    },
+    {
+      "date": "2026-05-14",
+      "sunrise_sgt": "06:56",
+      "solar_noon_sgt": "13:01",
+      "sunset_sgt": "19:07",
+      "daylight_minutes": 730.635,
+      "sunrise_azimuth_deg": 71.402,
+      "sunset_azimuth_deg": 288.72
+    },
+    {
+      "date": "2026-05-15",
+      "sunrise_sgt": "06:56",
+      "solar_noon_sgt": "13:01",
+      "sunset_sgt": "19:07",
+      "daylight_minutes": 730.7,
+      "sunrise_azimuth_deg": 71.162,
+      "sunset_azimuth_deg": 288.958
+    },
+    {
+      "date": "2026-05-16",
+      "sunrise_sgt": "06:56",
+      "solar_noon_sgt": "13:01",
+      "sunset_sgt": "19:07",
+      "daylight_minutes": 730.763,
+      "sunrise_azimuth_deg": 70.927,
+      "sunset_azimuth_deg": 289.19
+    },
+    {
+      "date": "2026-05-17",
+      "sunrise_sgt": "06:56",
+      "solar_noon_sgt": "13:01",
+      "sunset_sgt": "19:07",
+      "daylight_minutes": 730.825,
+      "sunrise_azimuth_deg": 70.698,
+      "sunset_azimuth_deg": 289.417
+    },
+    {
+      "date": "2026-05-18",
+      "sunrise_sgt": "06:56",
+      "solar_noon_sgt": "13:01",
+      "sunset_sgt": "19:07",
+      "daylight_minutes": 730.886,
+      "sunrise_azimuth_deg": 70.474,
+      "sunset_azimuth_deg": 289.638
+    },
+    {
+      "date": "2026-05-19",
+      "sunrise_sgt": "06:56",
+      "solar_noon_sgt": "13:02",
+      "sunset_sgt": "19:07",
+      "daylight_minutes": 730.946,
+      "sunrise_azimuth_deg": 70.255,
+      "sunset_azimuth_deg": 289.854
+    },
+    {
+      "date": "2026-05-20",
+      "sunrise_sgt": "06:56",
+      "solar_noon_sgt": "13:02",
+      "sunset_sgt": "19:07",
+      "daylight_minutes": 731.004,
+      "sunrise_azimuth_deg": 70.042,
+      "sunset_azimuth_deg": 290.064
+    },
+    {
+      "date": "2026-05-21",
+      "sunrise_sgt": "06:56",
+      "solar_noon_sgt": "13:02",
+      "sunset_sgt": "19:07",
+      "daylight_minutes": 731.062,
+      "sunrise_azimuth_deg": 69.835,
+      "sunset_azimuth_deg": 290.268
+    },
+    {
+      "date": "2026-05-22",
+      "sunrise_sgt": "06:56",
+      "solar_noon_sgt": "13:02",
+      "sunset_sgt": "19:07",
+      "daylight_minutes": 731.118,
+      "sunrise_azimuth_deg": 69.634,
+      "sunset_azimuth_deg": 290.466
+    },
+    {
+      "date": "2026-05-23",
+      "sunrise_sgt": "06:56",
+      "solar_noon_sgt": "13:02",
+      "sunset_sgt": "19:07",
+      "daylight_minutes": 731.172,
+      "sunrise_azimuth_deg": 69.438,
+      "sunset_azimuth_deg": 290.659
+    },
+    {
+      "date": "2026-05-24",
+      "sunrise_sgt": "06:56",
+      "solar_noon_sgt": "13:02",
+      "sunset_sgt": "19:08",
+      "daylight_minutes": 731.226,
+      "sunrise_azimuth_deg": 69.248,
+      "sunset_azimuth_deg": 290.846
+    },
+    {
+      "date": "2026-05-25",
+      "sunrise_sgt": "06:56",
+      "solar_noon_sgt": "13:02",
+      "sunset_sgt": "19:08",
+      "daylight_minutes": 731.277,
+      "sunrise_azimuth_deg": 69.064,
+      "sunset_azimuth_deg": 291.027
+    },
+    {
+      "date": "2026-05-26",
+      "sunrise_sgt": "06:56",
+      "solar_noon_sgt": "13:02",
+      "sunset_sgt": "19:08",
+      "daylight_minutes": 731.328,
+      "sunrise_azimuth_deg": 68.887,
+      "sunset_azimuth_deg": 291.201
+    },
+    {
+      "date": "2026-05-27",
+      "sunrise_sgt": "06:57",
+      "solar_noon_sgt": "13:02",
+      "sunset_sgt": "19:08",
+      "daylight_minutes": 731.376,
+      "sunrise_azimuth_deg": 68.715,
+      "sunset_azimuth_deg": 291.37
+    },
+    {
+      "date": "2026-05-28",
+      "sunrise_sgt": "06:57",
+      "solar_noon_sgt": "13:02",
+      "sunset_sgt": "19:08",
+      "daylight_minutes": 731.423,
+      "sunrise_azimuth_deg": 68.549,
+      "sunset_azimuth_deg": 291.533
+    },
+    {
+      "date": "2026-05-29",
+      "sunrise_sgt": "06:57",
+      "solar_noon_sgt": "13:02",
+      "sunset_sgt": "19:08",
+      "daylight_minutes": 731.469,
+      "sunrise_azimuth_deg": 68.39,
+      "sunset_azimuth_deg": 291.689
+    },
+    {
+      "date": "2026-05-30",
+      "sunrise_sgt": "06:57",
+      "solar_noon_sgt": "13:03",
+      "sunset_sgt": "19:08",
+      "daylight_minutes": 731.513,
+      "sunrise_azimuth_deg": 68.237,
+      "sunset_azimuth_deg": 291.839
+    },
+    {
+      "date": "2026-05-31",
+      "sunrise_sgt": "06:57",
+      "solar_noon_sgt": "13:03",
+      "sunset_sgt": "19:09",
+      "daylight_minutes": 731.555,
+      "sunrise_azimuth_deg": 68.09,
+      "sunset_azimuth_deg": 291.983
+    },
+    {
+      "date": "2026-06-01",
+      "sunrise_sgt": "06:57",
+      "solar_noon_sgt": "13:03",
+      "sunset_sgt": "19:09",
+      "daylight_minutes": 731.596,
+      "sunrise_azimuth_deg": 67.949,
+      "sunset_azimuth_deg": 292.12
+    },
+    {
+      "date": "2026-06-02",
+      "sunrise_sgt": "06:57",
+      "solar_noon_sgt": "13:03",
+      "sunset_sgt": "19:09",
+      "daylight_minutes": 731.635,
+      "sunrise_azimuth_deg": 67.815,
+      "sunset_azimuth_deg": 292.251
+    },
+    {
+      "date": "2026-06-03",
+      "sunrise_sgt": "06:57",
+      "solar_noon_sgt": "13:03",
+      "sunset_sgt": "19:09",
+      "daylight_minutes": 731.672,
+      "sunrise_azimuth_deg": 67.687,
+      "sunset_azimuth_deg": 292.375
+    },
+    {
+      "date": "2026-06-04",
+      "sunrise_sgt": "06:58",
+      "solar_noon_sgt": "13:03",
+      "sunset_sgt": "19:09",
+      "daylight_minutes": 731.707,
+      "sunrise_azimuth_deg": 67.566,
+      "sunset_azimuth_deg": 292.493
+    },
+    {
+      "date": "2026-06-05",
+      "sunrise_sgt": "06:58",
+      "solar_noon_sgt": "13:04",
+      "sunset_sgt": "19:09",
+      "daylight_minutes": 731.74,
+      "sunrise_azimuth_deg": 67.451,
+      "sunset_azimuth_deg": 292.604
+    },
+    {
+      "date": "2026-06-06",
+      "sunrise_sgt": "06:58",
+      "solar_noon_sgt": "13:04",
+      "sunset_sgt": "19:10",
+      "daylight_minutes": 731.772,
+      "sunrise_azimuth_deg": 67.343,
+      "sunset_azimuth_deg": 292.709
+    },
+    {
+      "date": "2026-06-07",
+      "sunrise_sgt": "06:58",
+      "solar_noon_sgt": "13:04",
+      "sunset_sgt": "19:10",
+      "daylight_minutes": 731.801,
+      "sunrise_azimuth_deg": 67.242,
+      "sunset_azimuth_deg": 292.807
+    },
+    {
+      "date": "2026-06-08",
+      "sunrise_sgt": "06:58",
+      "solar_noon_sgt": "13:04",
+      "sunset_sgt": "19:10",
+      "daylight_minutes": 731.829,
+      "sunrise_azimuth_deg": 67.147,
+      "sunset_azimuth_deg": 292.899
+    },
+    {
+      "date": "2026-06-09",
+      "sunrise_sgt": "06:58",
+      "solar_noon_sgt": "13:04",
+      "sunset_sgt": "19:10",
+      "daylight_minutes": 731.855,
+      "sunrise_azimuth_deg": 67.059,
+      "sunset_azimuth_deg": 292.983
+    },
+    {
+      "date": "2026-06-10",
+      "sunrise_sgt": "06:59",
+      "solar_noon_sgt": "13:04",
+      "sunset_sgt": "19:10",
+      "daylight_minutes": 731.879,
+      "sunrise_azimuth_deg": 66.977,
+      "sunset_azimuth_deg": 293.061
+    },
+    {
+      "date": "2026-06-11",
+      "sunrise_sgt": "06:59",
+      "solar_noon_sgt": "13:05",
+      "sunset_sgt": "19:11",
+      "daylight_minutes": 731.9,
+      "sunrise_azimuth_deg": 66.903,
+      "sunset_azimuth_deg": 293.133
+    },
+    {
+      "date": "2026-06-12",
+      "sunrise_sgt": "06:59",
+      "solar_noon_sgt": "13:05",
+      "sunset_sgt": "19:11",
+      "daylight_minutes": 731.92,
+      "sunrise_azimuth_deg": 66.835,
+      "sunset_azimuth_deg": 293.197
+    },
+    {
+      "date": "2026-06-13",
+      "sunrise_sgt": "06:59",
+      "solar_noon_sgt": "13:05",
+      "sunset_sgt": "19:11",
+      "daylight_minutes": 731.938,
+      "sunrise_azimuth_deg": 66.774,
+      "sunset_azimuth_deg": 293.255
+    },
+    {
+      "date": "2026-06-14",
+      "sunrise_sgt": "06:59",
+      "solar_noon_sgt": "13:05",
+      "sunset_sgt": "19:11",
+      "daylight_minutes": 731.954,
+      "sunrise_azimuth_deg": 66.719,
+      "sunset_azimuth_deg": 293.306
+    },
+    {
+      "date": "2026-06-15",
+      "sunrise_sgt": "07:00",
+      "solar_noon_sgt": "13:06",
+      "sunset_sgt": "19:12",
+      "daylight_minutes": 731.967,
+      "sunrise_azimuth_deg": 66.672,
+      "sunset_azimuth_deg": 293.349
+    },
+    {
+      "date": "2026-06-16",
+      "sunrise_sgt": "07:00",
+      "solar_noon_sgt": "13:06",
+      "sunset_sgt": "19:12",
+      "daylight_minutes": 731.979,
+      "sunrise_azimuth_deg": 66.631,
+      "sunset_azimuth_deg": 293.387
+    },
+    {
+      "date": "2026-06-17",
+      "sunrise_sgt": "07:00",
+      "solar_noon_sgt": "13:06",
+      "sunset_sgt": "19:12",
+      "daylight_minutes": 731.988,
+      "sunrise_azimuth_deg": 66.598,
+      "sunset_azimuth_deg": 293.417
+    },
+    {
+      "date": "2026-06-18",
+      "sunrise_sgt": "07:00",
+      "solar_noon_sgt": "13:06",
+      "sunset_sgt": "19:12",
+      "daylight_minutes": 731.996,
+      "sunrise_azimuth_deg": 66.571,
+      "sunset_azimuth_deg": 293.44
+    },
+    {
+      "date": "2026-06-19",
+      "sunrise_sgt": "07:00",
+      "solar_noon_sgt": "13:06",
+      "sunset_sgt": "19:12",
+      "daylight_minutes": 732.001,
+      "sunrise_azimuth_deg": 66.551,
+      "sunset_azimuth_deg": 293.456
+    },
+    {
+      "date": "2026-06-20",
+      "sunrise_sgt": "07:01",
+      "solar_noon_sgt": "13:07",
+      "sunset_sgt": "19:13",
+      "daylight_minutes": 732.004,
+      "sunrise_azimuth_deg": 66.538,
+      "sunset_azimuth_deg": 293.466
+    },
+    {
+      "date": "2026-06-21",
+      "sunrise_sgt": "07:01",
+      "solar_noon_sgt": "13:07",
+      "sunset_sgt": "19:13",
+      "daylight_minutes": 732.005,
+      "sunrise_azimuth_deg": 66.532,
+      "sunset_azimuth_deg": 293.469
+    },
+    {
+      "date": "2026-06-22",
+      "sunrise_sgt": "07:01",
+      "solar_noon_sgt": "13:07",
+      "sunset_sgt": "19:13",
+      "daylight_minutes": 732.004,
+      "sunrise_azimuth_deg": 66.533,
+      "sunset_azimuth_deg": 293.464
+    },
+    {
+      "date": "2026-06-23",
+      "sunrise_sgt": "07:01",
+      "solar_noon_sgt": "13:07",
+      "sunset_sgt": "19:13",
+      "daylight_minutes": 732.001,
+      "sunrise_azimuth_deg": 66.54,
+      "sunset_azimuth_deg": 293.453
+    },
+    {
+      "date": "2026-06-24",
+      "sunrise_sgt": "07:01",
+      "solar_noon_sgt": "13:07",
+      "sunset_sgt": "19:13",
+      "daylight_minutes": 731.996,
+      "sunrise_azimuth_deg": 66.555,
+      "sunset_azimuth_deg": 293.435
+    },
+    {
+      "date": "2026-06-25",
+      "sunrise_sgt": "07:02",
+      "solar_noon_sgt": "13:08",
+      "sunset_sgt": "19:14",
+      "daylight_minutes": 731.988,
+      "sunrise_azimuth_deg": 66.576,
+      "sunset_azimuth_deg": 293.41
+    },
+    {
+      "date": "2026-06-26",
+      "sunrise_sgt": "07:02",
+      "solar_noon_sgt": "13:08",
+      "sunset_sgt": "19:14",
+      "daylight_minutes": 731.979,
+      "sunrise_azimuth_deg": 66.605,
+      "sunset_azimuth_deg": 293.378
+    },
+    {
+      "date": "2026-06-27",
+      "sunrise_sgt": "07:02",
+      "solar_noon_sgt": "13:08",
+      "sunset_sgt": "19:14",
+      "daylight_minutes": 731.967,
+      "sunrise_azimuth_deg": 66.64,
+      "sunset_azimuth_deg": 293.34
+    },
+    {
+      "date": "2026-06-28",
+      "sunrise_sgt": "07:02",
+      "solar_noon_sgt": "13:08",
+      "sunset_sgt": "19:14",
+      "daylight_minutes": 731.954,
+      "sunrise_azimuth_deg": 66.682,
+      "sunset_azimuth_deg": 293.294
+    },
+    {
+      "date": "2026-06-29",
+      "sunrise_sgt": "07:03",
+      "solar_noon_sgt": "13:09",
+      "sunset_sgt": "19:14",
+      "daylight_minutes": 731.938,
+      "sunrise_azimuth_deg": 66.731,
+      "sunset_azimuth_deg": 293.242
+    },
+    {
+      "date": "2026-06-30",
+      "sunrise_sgt": "07:03",
+      "solar_noon_sgt": "13:09",
+      "sunset_sgt": "19:15",
+      "daylight_minutes": 731.92,
+      "sunrise_azimuth_deg": 66.786,
+      "sunset_azimuth_deg": 293.183
+    },
+    {
+      "date": "2026-07-01",
+      "sunrise_sgt": "07:03",
+      "solar_noon_sgt": "13:09",
+      "sunset_sgt": "19:15",
+      "daylight_minutes": 731.901,
+      "sunrise_azimuth_deg": 66.849,
+      "sunset_azimuth_deg": 293.117
+    },
+    {
+      "date": "2026-07-02",
+      "sunrise_sgt": "07:03",
+      "solar_noon_sgt": "13:09",
+      "sunset_sgt": "19:15",
+      "daylight_minutes": 731.879,
+      "sunrise_azimuth_deg": 66.918,
+      "sunset_azimuth_deg": 293.045
+    },
+    {
+      "date": "2026-07-03",
+      "sunrise_sgt": "07:03",
+      "solar_noon_sgt": "13:09",
+      "sunset_sgt": "19:15",
+      "daylight_minutes": 731.855,
+      "sunrise_azimuth_deg": 66.994,
+      "sunset_azimuth_deg": 292.965
+    },
+    {
+      "date": "2026-07-04",
+      "sunrise_sgt": "07:04",
+      "solar_noon_sgt": "13:09",
+      "sunset_sgt": "19:15",
+      "daylight_minutes": 731.83,
+      "sunrise_azimuth_deg": 67.076,
+      "sunset_azimuth_deg": 292.879
+    },
+    {
+      "date": "2026-07-05",
+      "sunrise_sgt": "07:04",
+      "solar_noon_sgt": "13:10",
+      "sunset_sgt": "19:16",
+      "daylight_minutes": 731.802,
+      "sunrise_azimuth_deg": 67.165,
+      "sunset_azimuth_deg": 292.787
+    },
+    {
+      "date": "2026-07-06",
+      "sunrise_sgt": "07:04",
+      "solar_noon_sgt": "13:10",
+      "sunset_sgt": "19:16",
+      "daylight_minutes": 731.773,
+      "sunrise_azimuth_deg": 67.261,
+      "sunset_azimuth_deg": 292.688
+    },
+    {
+      "date": "2026-07-07",
+      "sunrise_sgt": "07:04",
+      "solar_noon_sgt": "13:10",
+      "sunset_sgt": "19:16",
+      "daylight_minutes": 731.742,
+      "sunrise_azimuth_deg": 67.363,
+      "sunset_azimuth_deg": 292.582
+    },
+    {
+      "date": "2026-07-08",
+      "sunrise_sgt": "07:04",
+      "solar_noon_sgt": "13:10",
+      "sunset_sgt": "19:16",
+      "daylight_minutes": 731.708,
+      "sunrise_azimuth_deg": 67.472,
+      "sunset_azimuth_deg": 292.47
+    },
+    {
+      "date": "2026-07-09",
+      "sunrise_sgt": "07:04",
+      "solar_noon_sgt": "13:10",
+      "sunset_sgt": "19:16",
+      "daylight_minutes": 731.673,
+      "sunrise_azimuth_deg": 67.588,
+      "sunset_azimuth_deg": 292.351
+    },
+    {
+      "date": "2026-07-10",
+      "sunrise_sgt": "07:05",
+      "solar_noon_sgt": "13:10",
+      "sunset_sgt": "19:16",
+      "daylight_minutes": 731.637,
+      "sunrise_azimuth_deg": 67.71,
+      "sunset_azimuth_deg": 292.226
+    },
+    {
+      "date": "2026-07-11",
+      "sunrise_sgt": "07:05",
+      "solar_noon_sgt": "13:11",
+      "sunset_sgt": "19:16",
+      "daylight_minutes": 731.598,
+      "sunrise_azimuth_deg": 67.838,
+      "sunset_azimuth_deg": 292.095
+    },
+    {
+      "date": "2026-07-12",
+      "sunrise_sgt": "07:05",
+      "solar_noon_sgt": "13:11",
+      "sunset_sgt": "19:16",
+      "daylight_minutes": 731.558,
+      "sunrise_azimuth_deg": 67.972,
+      "sunset_azimuth_deg": 291.957
+    },
+    {
+      "date": "2026-07-13",
+      "sunrise_sgt": "07:05",
+      "solar_noon_sgt": "13:11",
+      "sunset_sgt": "19:17",
+      "daylight_minutes": 731.516,
+      "sunrise_azimuth_deg": 68.113,
+      "sunset_azimuth_deg": 291.813
+    },
+    {
+      "date": "2026-07-14",
+      "sunrise_sgt": "07:05",
+      "solar_noon_sgt": "13:11",
+      "sunset_sgt": "19:17",
+      "daylight_minutes": 731.472,
+      "sunrise_azimuth_deg": 68.26,
+      "sunset_azimuth_deg": 291.663
+    },
+    {
+      "date": "2026-07-15",
+      "sunrise_sgt": "07:05",
+      "solar_noon_sgt": "13:11",
+      "sunset_sgt": "19:17",
+      "daylight_minutes": 731.427,
+      "sunrise_azimuth_deg": 68.414,
+      "sunset_azimuth_deg": 291.506
+    },
+    {
+      "date": "2026-07-16",
+      "sunrise_sgt": "07:05",
+      "solar_noon_sgt": "13:11",
+      "sunset_sgt": "19:17",
+      "daylight_minutes": 731.38,
+      "sunrise_azimuth_deg": 68.573,
+      "sunset_azimuth_deg": 291.344
+    },
+    {
+      "date": "2026-07-17",
+      "sunrise_sgt": "07:06",
+      "solar_noon_sgt": "13:11",
+      "sunset_sgt": "19:17",
+      "daylight_minutes": 731.332,
+      "sunrise_azimuth_deg": 68.738,
+      "sunset_azimuth_deg": 291.175
+    },
+    {
+      "date": "2026-07-18",
+      "sunrise_sgt": "07:06",
+      "solar_noon_sgt": "13:11",
+      "sunset_sgt": "19:17",
+      "daylight_minutes": 731.282,
+      "sunrise_azimuth_deg": 68.91,
+      "sunset_azimuth_deg": 291.001
+    },
+    {
+      "date": "2026-07-19",
+      "sunrise_sgt": "07:06",
+      "solar_noon_sgt": "13:11",
+      "sunset_sgt": "19:17",
+      "daylight_minutes": 731.231,
+      "sunrise_azimuth_deg": 69.087,
+      "sunset_azimuth_deg": 290.82
+    },
+    {
+      "date": "2026-07-20",
+      "sunrise_sgt": "07:06",
+      "solar_noon_sgt": "13:11",
+      "sunset_sgt": "19:17",
+      "daylight_minutes": 731.178,
+      "sunrise_azimuth_deg": 69.27,
+      "sunset_azimuth_deg": 290.634
+    },
+    {
+      "date": "2026-07-21",
+      "sunrise_sgt": "07:06",
+      "solar_noon_sgt": "13:11",
+      "sunset_sgt": "19:17",
+      "daylight_minutes": 731.124,
+      "sunrise_azimuth_deg": 69.46,
+      "sunset_azimuth_deg": 290.442
+    },
+    {
+      "date": "2026-07-22",
+      "sunrise_sgt": "07:06",
+      "solar_noon_sgt": "13:12",
+      "sunset_sgt": "19:17",
+      "daylight_minutes": 731.068,
+      "sunrise_azimuth_deg": 69.654,
+      "sunset_azimuth_deg": 290.245
+    },
+    {
+      "date": "2026-07-23",
+      "sunrise_sgt": "07:06",
+      "solar_noon_sgt": "13:12",
+      "sunset_sgt": "19:17",
+      "daylight_minutes": 731.011,
+      "sunrise_azimuth_deg": 69.855,
+      "sunset_azimuth_deg": 290.041
+    },
+    {
+      "date": "2026-07-24",
+      "sunrise_sgt": "07:06",
+      "solar_noon_sgt": "13:12",
+      "sunset_sgt": "19:17",
+      "daylight_minutes": 730.953,
+      "sunrise_azimuth_deg": 70.061,
+      "sunset_azimuth_deg": 289.832
+    },
+    {
+      "date": "2026-07-25",
+      "sunrise_sgt": "07:06",
+      "solar_noon_sgt": "13:12",
+      "sunset_sgt": "19:17",
+      "daylight_minutes": 730.894,
+      "sunrise_azimuth_deg": 70.272,
+      "sunset_azimuth_deg": 289.618
+    },
+    {
+      "date": "2026-07-26",
+      "sunrise_sgt": "07:06",
+      "solar_noon_sgt": "13:12",
+      "sunset_sgt": "19:17",
+      "daylight_minutes": 730.834,
+      "sunrise_azimuth_deg": 70.49,
+      "sunset_azimuth_deg": 289.398
+    },
+    {
+      "date": "2026-07-27",
+      "sunrise_sgt": "07:06",
+      "solar_noon_sgt": "13:12",
+      "sunset_sgt": "19:17",
+      "daylight_minutes": 730.772,
+      "sunrise_azimuth_deg": 70.712,
+      "sunset_azimuth_deg": 289.173
+    },
+    {
+      "date": "2026-07-28",
+      "sunrise_sgt": "07:06",
+      "solar_noon_sgt": "13:12",
+      "sunset_sgt": "19:17",
+      "daylight_minutes": 730.71,
+      "sunrise_azimuth_deg": 70.94,
+      "sunset_azimuth_deg": 288.943
+    },
+    {
+      "date": "2026-07-29",
+      "sunrise_sgt": "07:06",
+      "solar_noon_sgt": "13:12",
+      "sunset_sgt": "19:17",
+      "daylight_minutes": 730.646,
+      "sunrise_azimuth_deg": 71.173,
+      "sunset_azimuth_deg": 288.707
+    },
+    {
+      "date": "2026-07-30",
+      "sunrise_sgt": "07:06",
+      "solar_noon_sgt": "13:12",
+      "sunset_sgt": "19:17",
+      "daylight_minutes": 730.581,
+      "sunrise_azimuth_deg": 71.411,
+      "sunset_azimuth_deg": 288.466
+    },
+    {
+      "date": "2026-07-31",
+      "sunrise_sgt": "07:06",
+      "solar_noon_sgt": "13:11",
+      "sunset_sgt": "19:17",
+      "daylight_minutes": 730.515,
+      "sunrise_azimuth_deg": 71.654,
+      "sunset_azimuth_deg": 288.221
+    },
+    {
+      "date": "2026-08-01",
+      "sunrise_sgt": "07:06",
+      "solar_noon_sgt": "13:11",
+      "sunset_sgt": "19:17",
+      "daylight_minutes": 730.449,
+      "sunrise_azimuth_deg": 71.902,
+      "sunset_azimuth_deg": 287.97
+    },
+    {
+      "date": "2026-08-02",
+      "sunrise_sgt": "07:06",
+      "solar_noon_sgt": "13:11",
+      "sunset_sgt": "19:17",
+      "daylight_minutes": 730.381,
+      "sunrise_azimuth_deg": 72.155,
+      "sunset_azimuth_deg": 287.714
+    },
+    {
+      "date": "2026-08-03",
+      "sunrise_sgt": "07:06",
+      "solar_noon_sgt": "13:11",
+      "sunset_sgt": "19:16",
+      "daylight_minutes": 730.313,
+      "sunrise_azimuth_deg": 72.413,
+      "sunset_azimuth_deg": 287.454
+    },
+    {
+      "date": "2026-08-04",
+      "sunrise_sgt": "07:06",
+      "solar_noon_sgt": "13:11",
+      "sunset_sgt": "19:16",
+      "daylight_minutes": 730.244,
+      "sunrise_azimuth_deg": 72.676,
+      "sunset_azimuth_deg": 287.189
+    },
+    {
+      "date": "2026-08-05",
+      "sunrise_sgt": "07:06",
+      "solar_noon_sgt": "13:11",
+      "sunset_sgt": "19:16",
+      "daylight_minutes": 730.174,
+      "sunrise_azimuth_deg": 72.943,
+      "sunset_azimuth_deg": 286.919
+    },
+    {
+      "date": "2026-08-06",
+      "sunrise_sgt": "07:06",
+      "solar_noon_sgt": "13:11",
+      "sunset_sgt": "19:16",
+      "daylight_minutes": 730.104,
+      "sunrise_azimuth_deg": 73.215,
+      "sunset_azimuth_deg": 286.645
+    },
+    {
+      "date": "2026-08-07",
+      "sunrise_sgt": "07:06",
+      "solar_noon_sgt": "13:11",
+      "sunset_sgt": "19:16",
+      "daylight_minutes": 730.032,
+      "sunrise_azimuth_deg": 73.492,
+      "sunset_azimuth_deg": 286.367
+    },
+    {
+      "date": "2026-08-08",
+      "sunrise_sgt": "07:06",
+      "solar_noon_sgt": "13:11",
+      "sunset_sgt": "19:16",
+      "daylight_minutes": 729.96,
+      "sunrise_azimuth_deg": 73.773,
+      "sunset_azimuth_deg": 286.083
+    },
+    {
+      "date": "2026-08-09",
+      "sunrise_sgt": "07:06",
+      "solar_noon_sgt": "13:11",
+      "sunset_sgt": "19:16",
+      "daylight_minutes": 729.888,
+      "sunrise_azimuth_deg": 74.058,
+      "sunset_azimuth_deg": 285.796
+    },
+    {
+      "date": "2026-08-10",
+      "sunrise_sgt": "07:06",
+      "solar_noon_sgt": "13:10",
+      "sunset_sgt": "19:15",
+      "daylight_minutes": 729.815,
+      "sunrise_azimuth_deg": 74.347,
+      "sunset_azimuth_deg": 285.505
+    },
+    {
+      "date": "2026-08-11",
+      "sunrise_sgt": "07:05",
+      "solar_noon_sgt": "13:10",
+      "sunset_sgt": "19:15",
+      "daylight_minutes": 729.741,
+      "sunrise_azimuth_deg": 74.641,
+      "sunset_azimuth_deg": 285.209
+    },
+    {
+      "date": "2026-08-12",
+      "sunrise_sgt": "07:05",
+      "solar_noon_sgt": "13:10",
+      "sunset_sgt": "19:15",
+      "daylight_minutes": 729.667,
+      "sunrise_azimuth_deg": 74.938,
+      "sunset_azimuth_deg": 284.909
+    },
+    {
+      "date": "2026-08-13",
+      "sunrise_sgt": "07:05",
+      "solar_noon_sgt": "13:10",
+      "sunset_sgt": "19:15",
+      "daylight_minutes": 729.592,
+      "sunrise_azimuth_deg": 75.24,
+      "sunset_azimuth_deg": 284.605
+    },
+    {
+      "date": "2026-08-14",
+      "sunrise_sgt": "07:05",
+      "solar_noon_sgt": "13:10",
+      "sunset_sgt": "19:15",
+      "daylight_minutes": 729.517,
+      "sunrise_azimuth_deg": 75.546,
+      "sunset_azimuth_deg": 284.298
+    },
+    {
+      "date": "2026-08-15",
+      "sunrise_sgt": "07:05",
+      "solar_noon_sgt": "13:10",
+      "sunset_sgt": "19:14",
+      "daylight_minutes": 729.442,
+      "sunrise_azimuth_deg": 75.855,
+      "sunset_azimuth_deg": 283.987
+    },
+    {
+      "date": "2026-08-16",
+      "sunrise_sgt": "07:05",
+      "solar_noon_sgt": "13:09",
+      "sunset_sgt": "19:14",
+      "daylight_minutes": 729.366,
+      "sunrise_azimuth_deg": 76.168,
+      "sunset_azimuth_deg": 283.672
+    },
+    {
+      "date": "2026-08-17",
+      "sunrise_sgt": "07:05",
+      "solar_noon_sgt": "13:09",
+      "sunset_sgt": "19:14",
+      "daylight_minutes": 729.29,
+      "sunrise_azimuth_deg": 76.485,
+      "sunset_azimuth_deg": 283.353
+    },
+    {
+      "date": "2026-08-18",
+      "sunrise_sgt": "07:04",
+      "solar_noon_sgt": "13:09",
+      "sunset_sgt": "19:14",
+      "daylight_minutes": 729.213,
+      "sunrise_azimuth_deg": 76.805,
+      "sunset_azimuth_deg": 283.031
+    },
+    {
+      "date": "2026-08-19",
+      "sunrise_sgt": "07:04",
+      "solar_noon_sgt": "13:09",
+      "sunset_sgt": "19:13",
+      "daylight_minutes": 729.137,
+      "sunrise_azimuth_deg": 77.129,
+      "sunset_azimuth_deg": 282.705
+    },
+    {
+      "date": "2026-08-20",
+      "sunrise_sgt": "07:04",
+      "solar_noon_sgt": "13:09",
+      "sunset_sgt": "19:13",
+      "daylight_minutes": 729.06,
+      "sunrise_azimuth_deg": 77.457,
+      "sunset_azimuth_deg": 282.377
+    },
+    {
+      "date": "2026-08-21",
+      "sunrise_sgt": "07:04",
+      "solar_noon_sgt": "13:08",
+      "sunset_sgt": "19:13",
+      "daylight_minutes": 728.983,
+      "sunrise_azimuth_deg": 77.787,
+      "sunset_azimuth_deg": 282.044
+    },
+    {
+      "date": "2026-08-22",
+      "sunrise_sgt": "07:04",
+      "solar_noon_sgt": "13:08",
+      "sunset_sgt": "19:12",
+      "daylight_minutes": 728.905,
+      "sunrise_azimuth_deg": 78.121,
+      "sunset_azimuth_deg": 281.709
+    },
+    {
+      "date": "2026-08-23",
+      "sunrise_sgt": "07:03",
+      "solar_noon_sgt": "13:08",
+      "sunset_sgt": "19:12",
+      "daylight_minutes": 728.828,
+      "sunrise_azimuth_deg": 78.458,
+      "sunset_azimuth_deg": 281.371
+    },
+    {
+      "date": "2026-08-24",
+      "sunrise_sgt": "07:03",
+      "solar_noon_sgt": "13:08",
+      "sunset_sgt": "19:12",
+      "daylight_minutes": 728.75,
+      "sunrise_azimuth_deg": 78.797,
+      "sunset_azimuth_deg": 281.029
+    },
+    {
+      "date": "2026-08-25",
+      "sunrise_sgt": "07:03",
+      "solar_noon_sgt": "13:07",
+      "sunset_sgt": "19:12",
+      "daylight_minutes": 728.673,
+      "sunrise_azimuth_deg": 79.14,
+      "sunset_azimuth_deg": 280.685
+    },
+    {
+      "date": "2026-08-26",
+      "sunrise_sgt": "07:03",
+      "solar_noon_sgt": "13:07",
+      "sunset_sgt": "19:11",
+      "daylight_minutes": 728.595,
+      "sunrise_azimuth_deg": 79.486,
+      "sunset_azimuth_deg": 280.338
+    },
+    {
+      "date": "2026-08-27",
+      "sunrise_sgt": "07:02",
+      "solar_noon_sgt": "13:07",
+      "sunset_sgt": "19:11",
+      "daylight_minutes": 728.517,
+      "sunrise_azimuth_deg": 79.834,
+      "sunset_azimuth_deg": 279.988
+    },
+    {
+      "date": "2026-08-28",
+      "sunrise_sgt": "07:02",
+      "solar_noon_sgt": "13:06",
+      "sunset_sgt": "19:11",
+      "daylight_minutes": 728.439,
+      "sunrise_azimuth_deg": 80.185,
+      "sunset_azimuth_deg": 279.636
+    },
+    {
+      "date": "2026-08-29",
+      "sunrise_sgt": "07:02",
+      "solar_noon_sgt": "13:06",
+      "sunset_sgt": "19:10",
+      "daylight_minutes": 728.361,
+      "sunrise_azimuth_deg": 80.539,
+      "sunset_azimuth_deg": 279.281
+    },
+    {
+      "date": "2026-08-30",
+      "sunrise_sgt": "07:02",
+      "solar_noon_sgt": "13:06",
+      "sunset_sgt": "19:10",
+      "daylight_minutes": 728.284,
+      "sunrise_azimuth_deg": 80.895,
+      "sunset_azimuth_deg": 278.923
+    },
+    {
+      "date": "2026-08-31",
+      "sunrise_sgt": "07:01",
+      "solar_noon_sgt": "13:05",
+      "sunset_sgt": "19:10",
+      "daylight_minutes": 728.206,
+      "sunrise_azimuth_deg": 81.254,
+      "sunset_azimuth_deg": 278.564
+    },
+    {
+      "date": "2026-09-01",
+      "sunrise_sgt": "07:01",
+      "solar_noon_sgt": "13:05",
+      "sunset_sgt": "19:09",
+      "daylight_minutes": 728.128,
+      "sunrise_azimuth_deg": 81.615,
+      "sunset_azimuth_deg": 278.202
+    },
+    {
+      "date": "2026-09-02",
+      "sunrise_sgt": "07:01",
+      "solar_noon_sgt": "13:05",
+      "sunset_sgt": "19:09",
+      "daylight_minutes": 728.051,
+      "sunrise_azimuth_deg": 81.978,
+      "sunset_azimuth_deg": 277.837
+    },
+    {
+      "date": "2026-09-03",
+      "sunrise_sgt": "07:01",
+      "solar_noon_sgt": "13:05",
+      "sunset_sgt": "19:09",
+      "daylight_minutes": 727.973,
+      "sunrise_azimuth_deg": 82.343,
+      "sunset_azimuth_deg": 277.471
+    },
+    {
+      "date": "2026-09-04",
+      "sunrise_sgt": "07:00",
+      "solar_noon_sgt": "13:04",
+      "sunset_sgt": "19:08",
+      "daylight_minutes": 727.896,
+      "sunrise_azimuth_deg": 82.711,
+      "sunset_azimuth_deg": 277.103
+    },
+    {
+      "date": "2026-09-05",
+      "sunrise_sgt": "07:00",
+      "solar_noon_sgt": "13:04",
+      "sunset_sgt": "19:08",
+      "daylight_minutes": 727.818,
+      "sunrise_azimuth_deg": 83.08,
+      "sunset_azimuth_deg": 276.732
+    },
+    {
+      "date": "2026-09-06",
+      "sunrise_sgt": "07:00",
+      "solar_noon_sgt": "13:04",
+      "sunset_sgt": "19:07",
+      "daylight_minutes": 727.741,
+      "sunrise_azimuth_deg": 83.451,
+      "sunset_azimuth_deg": 276.36
+    },
+    {
+      "date": "2026-09-07",
+      "sunrise_sgt": "06:59",
+      "solar_noon_sgt": "13:03",
+      "sunset_sgt": "19:07",
+      "daylight_minutes": 727.665,
+      "sunrise_azimuth_deg": 83.824,
+      "sunset_azimuth_deg": 275.987
+    },
+    {
+      "date": "2026-09-08",
+      "sunrise_sgt": "06:59",
+      "solar_noon_sgt": "13:03",
+      "sunset_sgt": "19:07",
+      "daylight_minutes": 727.588,
+      "sunrise_azimuth_deg": 84.199,
+      "sunset_azimuth_deg": 275.611
+    },
+    {
+      "date": "2026-09-09",
+      "sunrise_sgt": "06:59",
+      "solar_noon_sgt": "13:03",
+      "sunset_sgt": "19:06",
+      "daylight_minutes": 727.511,
+      "sunrise_azimuth_deg": 84.575,
+      "sunset_azimuth_deg": 275.234
+    },
+    {
+      "date": "2026-09-10",
+      "sunrise_sgt": "06:58",
+      "solar_noon_sgt": "13:02",
+      "sunset_sgt": "19:06",
+      "daylight_minutes": 727.435,
+      "sunrise_azimuth_deg": 84.953,
+      "sunset_azimuth_deg": 274.856
+    },
+    {
+      "date": "2026-09-11",
+      "sunrise_sgt": "06:58",
+      "solar_noon_sgt": "13:02",
+      "sunset_sgt": "19:05",
+      "daylight_minutes": 727.359,
+      "sunrise_azimuth_deg": 85.332,
+      "sunset_azimuth_deg": 274.476
+    },
+    {
+      "date": "2026-09-12",
+      "sunrise_sgt": "06:58",
+      "solar_noon_sgt": "13:01",
+      "sunset_sgt": "19:05",
+      "daylight_minutes": 727.284,
+      "sunrise_azimuth_deg": 85.713,
+      "sunset_azimuth_deg": 274.095
+    },
+    {
+      "date": "2026-09-13",
+      "sunrise_sgt": "06:57",
+      "solar_noon_sgt": "13:01",
+      "sunset_sgt": "19:05",
+      "daylight_minutes": 727.208,
+      "sunrise_azimuth_deg": 86.094,
+      "sunset_azimuth_deg": 273.712
+    },
+    {
+      "date": "2026-09-14",
+      "sunrise_sgt": "06:57",
+      "solar_noon_sgt": "13:01",
+      "sunset_sgt": "19:04",
+      "daylight_minutes": 727.133,
+      "sunrise_azimuth_deg": 86.477,
+      "sunset_azimuth_deg": 273.329
+    },
+    {
+      "date": "2026-09-15",
+      "sunrise_sgt": "06:57",
+      "solar_noon_sgt": "13:00",
+      "sunset_sgt": "19:04",
+      "daylight_minutes": 727.059,
+      "sunrise_azimuth_deg": 86.861,
+      "sunset_azimuth_deg": 272.944
+    },
+    {
+      "date": "2026-09-16",
+      "sunrise_sgt": "06:57",
+      "solar_noon_sgt": "13:00",
+      "sunset_sgt": "19:04",
+      "daylight_minutes": 726.984,
+      "sunrise_azimuth_deg": 87.246,
+      "sunset_azimuth_deg": 272.559
+    },
+    {
+      "date": "2026-09-17",
+      "sunrise_sgt": "06:56",
+      "solar_noon_sgt": "13:00",
+      "sunset_sgt": "19:03",
+      "daylight_minutes": 726.91,
+      "sunrise_azimuth_deg": 87.632,
+      "sunset_azimuth_deg": 272.173
+    },
+    {
+      "date": "2026-09-18",
+      "sunrise_sgt": "06:56",
+      "solar_noon_sgt": "12:59",
+      "sunset_sgt": "19:03",
+      "daylight_minutes": 726.836,
+      "sunrise_azimuth_deg": 88.019,
+      "sunset_azimuth_deg": 271.786
+    },
+    {
+      "date": "2026-09-19",
+      "sunrise_sgt": "06:56",
+      "solar_noon_sgt": "12:59",
+      "sunset_sgt": "19:02",
+      "daylight_minutes": 726.763,
+      "sunrise_azimuth_deg": 88.406,
+      "sunset_azimuth_deg": 271.398
+    },
+    {
+      "date": "2026-09-20",
+      "sunrise_sgt": "06:55",
+      "solar_noon_sgt": "12:59",
+      "sunset_sgt": "19:02",
+      "daylight_minutes": 726.69,
+      "sunrise_azimuth_deg": 88.794,
+      "sunset_azimuth_deg": 271.01
+    },
+    {
+      "date": "2026-09-21",
+      "sunrise_sgt": "06:55",
+      "solar_noon_sgt": "12:58",
+      "sunset_sgt": "19:02",
+      "daylight_minutes": 726.618,
+      "sunrise_azimuth_deg": 89.182,
+      "sunset_azimuth_deg": 270.622
+    },
+    {
+      "date": "2026-09-22",
+      "sunrise_sgt": "06:55",
+      "solar_noon_sgt": "12:58",
+      "sunset_sgt": "19:01",
+      "daylight_minutes": 726.546,
+      "sunrise_azimuth_deg": 89.571,
+      "sunset_azimuth_deg": 270.233
+    },
+    {
+      "date": "2026-09-23",
+      "sunrise_sgt": "06:54",
+      "solar_noon_sgt": "12:58",
+      "sunset_sgt": "19:01",
+      "daylight_minutes": 726.474,
+      "sunrise_azimuth_deg": 89.96,
+      "sunset_azimuth_deg": 269.843
+    },
+    {
+      "date": "2026-09-24",
+      "sunrise_sgt": "06:54",
+      "solar_noon_sgt": "12:57",
+      "sunset_sgt": "19:00",
+      "daylight_minutes": 726.403,
+      "sunrise_azimuth_deg": 90.35,
+      "sunset_azimuth_deg": 269.454
+    },
+    {
+      "date": "2026-09-25",
+      "sunrise_sgt": "06:54",
+      "solar_noon_sgt": "12:57",
+      "sunset_sgt": "19:00",
+      "daylight_minutes": 726.332,
+      "sunrise_azimuth_deg": 90.739,
+      "sunset_azimuth_deg": 269.065
+    },
+    {
+      "date": "2026-09-26",
+      "sunrise_sgt": "06:53",
+      "solar_noon_sgt": "12:57",
+      "sunset_sgt": "19:00",
+      "daylight_minutes": 726.262,
+      "sunrise_azimuth_deg": 91.128,
+      "sunset_azimuth_deg": 268.675
+    },
+    {
+      "date": "2026-09-27",
+      "sunrise_sgt": "06:53",
+      "solar_noon_sgt": "12:56",
+      "sunset_sgt": "18:59",
+      "daylight_minutes": 726.192,
+      "sunrise_azimuth_deg": 91.518,
+      "sunset_azimuth_deg": 268.286
+    },
+    {
+      "date": "2026-09-28",
+      "sunrise_sgt": "06:53",
+      "solar_noon_sgt": "12:56",
+      "sunset_sgt": "18:59",
+      "daylight_minutes": 726.122,
+      "sunrise_azimuth_deg": 91.907,
+      "sunset_azimuth_deg": 267.897
+    },
+    {
+      "date": "2026-09-29",
+      "sunrise_sgt": "06:52",
+      "solar_noon_sgt": "12:55",
+      "sunset_sgt": "18:59",
+      "daylight_minutes": 726.053,
+      "sunrise_azimuth_deg": 92.296,
+      "sunset_azimuth_deg": 267.508
+    },
+    {
+      "date": "2026-09-30",
+      "sunrise_sgt": "06:52",
+      "solar_noon_sgt": "12:55",
+      "sunset_sgt": "18:58",
+      "daylight_minutes": 725.985,
+      "sunrise_azimuth_deg": 92.685,
+      "sunset_azimuth_deg": 267.119
+    },
+    {
+      "date": "2026-10-01",
+      "sunrise_sgt": "06:52",
+      "solar_noon_sgt": "12:55",
+      "sunset_sgt": "18:58",
+      "daylight_minutes": 725.917,
+      "sunrise_azimuth_deg": 93.073,
+      "sunset_azimuth_deg": 266.731
+    },
+    {
+      "date": "2026-10-02",
+      "sunrise_sgt": "06:52",
+      "solar_noon_sgt": "12:55",
+      "sunset_sgt": "18:57",
+      "daylight_minutes": 725.85,
+      "sunrise_azimuth_deg": 93.461,
+      "sunset_azimuth_deg": 266.344
+    },
+    {
+      "date": "2026-10-03",
+      "sunrise_sgt": "06:51",
+      "solar_noon_sgt": "12:54",
+      "sunset_sgt": "18:57",
+      "daylight_minutes": 725.783,
+      "sunrise_azimuth_deg": 93.848,
+      "sunset_azimuth_deg": 265.957
+    },
+    {
+      "date": "2026-10-04",
+      "sunrise_sgt": "06:51",
+      "solar_noon_sgt": "12:54",
+      "sunset_sgt": "18:57",
+      "daylight_minutes": 725.717,
+      "sunrise_azimuth_deg": 94.234,
+      "sunset_azimuth_deg": 265.572
+    },
+    {
+      "date": "2026-10-05",
+      "sunrise_sgt": "06:51",
+      "solar_noon_sgt": "12:54",
+      "sunset_sgt": "18:56",
+      "daylight_minutes": 725.651,
+      "sunrise_azimuth_deg": 94.619,
+      "sunset_azimuth_deg": 265.187
+    },
+    {
+      "date": "2026-10-06",
+      "sunrise_sgt": "06:50",
+      "solar_noon_sgt": "12:53",
+      "sunset_sgt": "18:56",
+      "daylight_minutes": 725.586,
+      "sunrise_azimuth_deg": 95.004,
+      "sunset_azimuth_deg": 264.803
+    },
+    {
+      "date": "2026-10-07",
+      "sunrise_sgt": "06:50",
+      "solar_noon_sgt": "12:53",
+      "sunset_sgt": "18:56",
+      "daylight_minutes": 725.522,
+      "sunrise_azimuth_deg": 95.387,
+      "sunset_azimuth_deg": 264.42
+    },
+    {
+      "date": "2026-10-08",
+      "sunrise_sgt": "06:50",
+      "solar_noon_sgt": "12:53",
+      "sunset_sgt": "18:55",
+      "daylight_minutes": 725.458,
+      "sunrise_azimuth_deg": 95.77,
+      "sunset_azimuth_deg": 264.038
+    },
+    {
+      "date": "2026-10-09",
+      "sunrise_sgt": "06:50",
+      "solar_noon_sgt": "12:52",
+      "sunset_sgt": "18:55",
+      "daylight_minutes": 725.394,
+      "sunrise_azimuth_deg": 96.151,
+      "sunset_azimuth_deg": 263.658
+    },
+    {
+      "date": "2026-10-10",
+      "sunrise_sgt": "06:49",
+      "solar_noon_sgt": "12:52",
+      "sunset_sgt": "18:55",
+      "daylight_minutes": 725.332,
+      "sunrise_azimuth_deg": 96.53,
+      "sunset_azimuth_deg": 263.279
+    },
+    {
+      "date": "2026-10-11",
+      "sunrise_sgt": "06:49",
+      "solar_noon_sgt": "12:52",
+      "sunset_sgt": "18:54",
+      "daylight_minutes": 725.269,
+      "sunrise_azimuth_deg": 96.909,
+      "sunset_azimuth_deg": 262.901
+    },
+    {
+      "date": "2026-10-12",
+      "sunrise_sgt": "06:49",
+      "solar_noon_sgt": "12:52",
+      "sunset_sgt": "18:54",
+      "daylight_minutes": 725.208,
+      "sunrise_azimuth_deg": 97.285,
+      "sunset_azimuth_deg": 262.525
+    },
+    {
+      "date": "2026-10-13",
+      "sunrise_sgt": "06:49",
+      "solar_noon_sgt": "12:51",
+      "sunset_sgt": "18:54",
+      "daylight_minutes": 725.147,
+      "sunrise_azimuth_deg": 97.66,
+      "sunset_azimuth_deg": 262.151
+    },
+    {
+      "date": "2026-10-14",
+      "sunrise_sgt": "06:49",
+      "solar_noon_sgt": "12:51",
+      "sunset_sgt": "18:54",
+      "daylight_minutes": 725.087,
+      "sunrise_azimuth_deg": 98.034,
+      "sunset_azimuth_deg": 261.779
+    },
+    {
+      "date": "2026-10-15",
+      "sunrise_sgt": "06:48",
+      "solar_noon_sgt": "12:51",
+      "sunset_sgt": "18:53",
+      "daylight_minutes": 725.027,
+      "sunrise_azimuth_deg": 98.405,
+      "sunset_azimuth_deg": 261.409
+    },
+    {
+      "date": "2026-10-16",
+      "sunrise_sgt": "06:48",
+      "solar_noon_sgt": "12:51",
+      "sunset_sgt": "18:53",
+      "daylight_minutes": 724.968,
+      "sunrise_azimuth_deg": 98.775,
+      "sunset_azimuth_deg": 261.04
+    },
+    {
+      "date": "2026-10-17",
+      "sunrise_sgt": "06:48",
+      "solar_noon_sgt": "12:50",
+      "sunset_sgt": "18:53",
+      "daylight_minutes": 724.91,
+      "sunrise_azimuth_deg": 99.142,
+      "sunset_azimuth_deg": 260.674
+    },
+    {
+      "date": "2026-10-18",
+      "sunrise_sgt": "06:48",
+      "solar_noon_sgt": "12:50",
+      "sunset_sgt": "18:53",
+      "daylight_minutes": 724.853,
+      "sunrise_azimuth_deg": 99.507,
+      "sunset_azimuth_deg": 260.31
+    },
+    {
+      "date": "2026-10-19",
+      "sunrise_sgt": "06:48",
+      "solar_noon_sgt": "12:50",
+      "sunset_sgt": "18:52",
+      "daylight_minutes": 724.796,
+      "sunrise_azimuth_deg": 99.87,
+      "sunset_azimuth_deg": 259.948
+    },
+    {
+      "date": "2026-10-20",
+      "sunrise_sgt": "06:47",
+      "solar_noon_sgt": "12:50",
+      "sunset_sgt": "18:52",
+      "daylight_minutes": 724.739,
+      "sunrise_azimuth_deg": 100.231,
+      "sunset_azimuth_deg": 259.589
+    },
+    {
+      "date": "2026-10-21",
+      "sunrise_sgt": "06:47",
+      "solar_noon_sgt": "12:50",
+      "sunset_sgt": "18:52",
+      "daylight_minutes": 724.684,
+      "sunrise_azimuth_deg": 100.589,
+      "sunset_azimuth_deg": 259.232
+    },
+    {
+      "date": "2026-10-22",
+      "sunrise_sgt": "06:47",
+      "solar_noon_sgt": "12:50",
+      "sunset_sgt": "18:52",
+      "daylight_minutes": 724.629,
+      "sunrise_azimuth_deg": 100.944,
+      "sunset_azimuth_deg": 258.878
+    },
+    {
+      "date": "2026-10-23",
+      "sunrise_sgt": "06:47",
+      "solar_noon_sgt": "12:49",
+      "sunset_sgt": "18:52",
+      "daylight_minutes": 724.575,
+      "sunrise_azimuth_deg": 101.297,
+      "sunset_azimuth_deg": 258.527
+    },
+    {
+      "date": "2026-10-24",
+      "sunrise_sgt": "06:47",
+      "solar_noon_sgt": "12:49",
+      "sunset_sgt": "18:52",
+      "daylight_minutes": 724.522,
+      "sunrise_azimuth_deg": 101.647,
+      "sunset_azimuth_deg": 258.178
+    },
+    {
+      "date": "2026-10-25",
+      "sunrise_sgt": "06:47",
+      "solar_noon_sgt": "12:49",
+      "sunset_sgt": "18:51",
+      "daylight_minutes": 724.469,
+      "sunrise_azimuth_deg": 101.994,
+      "sunset_azimuth_deg": 257.833
+    },
+    {
+      "date": "2026-10-26",
+      "sunrise_sgt": "06:47",
+      "solar_noon_sgt": "12:49",
+      "sunset_sgt": "18:51",
+      "daylight_minutes": 724.417,
+      "sunrise_azimuth_deg": 102.337,
+      "sunset_azimuth_deg": 257.491
+    },
+    {
+      "date": "2026-10-27",
+      "sunrise_sgt": "06:47",
+      "solar_noon_sgt": "12:49",
+      "sunset_sgt": "18:51",
+      "daylight_minutes": 724.366,
+      "sunrise_azimuth_deg": 102.678,
+      "sunset_azimuth_deg": 257.152
+    },
+    {
+      "date": "2026-10-28",
+      "sunrise_sgt": "06:47",
+      "solar_noon_sgt": "12:49",
+      "sunset_sgt": "18:51",
+      "daylight_minutes": 724.316,
+      "sunrise_azimuth_deg": 103.016,
+      "sunset_azimuth_deg": 256.816
+    },
+    {
+      "date": "2026-10-29",
+      "sunrise_sgt": "06:47",
+      "solar_noon_sgt": "12:49",
+      "sunset_sgt": "18:51",
+      "daylight_minutes": 724.266,
+      "sunrise_azimuth_deg": 103.35,
+      "sunset_azimuth_deg": 256.484
+    },
+    {
+      "date": "2026-10-30",
+      "sunrise_sgt": "06:47",
+      "solar_noon_sgt": "12:49",
+      "sunset_sgt": "18:51",
+      "daylight_minutes": 724.217,
+      "sunrise_azimuth_deg": 103.68,
+      "sunset_azimuth_deg": 256.155
+    },
+    {
+      "date": "2026-10-31",
+      "sunrise_sgt": "06:47",
+      "solar_noon_sgt": "12:49",
+      "sunset_sgt": "18:51",
+      "daylight_minutes": 724.169,
+      "sunrise_azimuth_deg": 104.007,
+      "sunset_azimuth_deg": 255.83
+    },
+    {
+      "date": "2026-11-01",
+      "sunrise_sgt": "06:47",
+      "solar_noon_sgt": "12:49",
+      "sunset_sgt": "18:51",
+      "daylight_minutes": 724.122,
+      "sunrise_azimuth_deg": 104.33,
+      "sunset_azimuth_deg": 255.509
+    },
+    {
+      "date": "2026-11-02",
+      "sunrise_sgt": "06:47",
+      "solar_noon_sgt": "12:49",
+      "sunset_sgt": "18:51",
+      "daylight_minutes": 724.075,
+      "sunrise_azimuth_deg": 104.65,
+      "sunset_azimuth_deg": 255.191
+    },
+    {
+      "date": "2026-11-03",
+      "sunrise_sgt": "06:47",
+      "solar_noon_sgt": "12:49",
+      "sunset_sgt": "18:51",
+      "daylight_minutes": 724.03,
+      "sunrise_azimuth_deg": 104.965,
+      "sunset_azimuth_deg": 254.878
+    },
+    {
+      "date": "2026-11-04",
+      "sunrise_sgt": "06:47",
+      "solar_noon_sgt": "12:49",
+      "sunset_sgt": "18:51",
+      "daylight_minutes": 723.985,
+      "sunrise_azimuth_deg": 105.276,
+      "sunset_azimuth_deg": 254.569
+    },
+    {
+      "date": "2026-11-05",
+      "sunrise_sgt": "06:47",
+      "solar_noon_sgt": "12:49",
+      "sunset_sgt": "18:51",
+      "daylight_minutes": 723.941,
+      "sunrise_azimuth_deg": 105.584,
+      "sunset_azimuth_deg": 254.264
+    },
+    {
+      "date": "2026-11-06",
+      "sunrise_sgt": "06:47",
+      "solar_noon_sgt": "12:49",
+      "sunset_sgt": "18:51",
+      "daylight_minutes": 723.897,
+      "sunrise_azimuth_deg": 105.887,
+      "sunset_azimuth_deg": 253.963
+    },
+    {
+      "date": "2026-11-07",
+      "sunrise_sgt": "06:47",
+      "solar_noon_sgt": "12:49",
+      "sunset_sgt": "18:51",
+      "daylight_minutes": 723.855,
+      "sunrise_azimuth_deg": 106.185,
+      "sunset_azimuth_deg": 253.667
+    },
+    {
+      "date": "2026-11-08",
+      "sunrise_sgt": "06:47",
+      "solar_noon_sgt": "12:49",
+      "sunset_sgt": "18:51",
+      "daylight_minutes": 723.813,
+      "sunrise_azimuth_deg": 106.479,
+      "sunset_azimuth_deg": 253.375
+    },
+    {
+      "date": "2026-11-09",
+      "sunrise_sgt": "06:47",
+      "solar_noon_sgt": "12:49",
+      "sunset_sgt": "18:51",
+      "daylight_minutes": 723.772,
+      "sunrise_azimuth_deg": 106.768,
+      "sunset_azimuth_deg": 253.088
+    },
+    {
+      "date": "2026-11-10",
+      "sunrise_sgt": "06:47",
+      "solar_noon_sgt": "12:49",
+      "sunset_sgt": "18:51",
+      "daylight_minutes": 723.732,
+      "sunrise_azimuth_deg": 107.053,
+      "sunset_azimuth_deg": 252.806
+    },
+    {
+      "date": "2026-11-11",
+      "sunrise_sgt": "06:47",
+      "solar_noon_sgt": "12:49",
+      "sunset_sgt": "18:51",
+      "daylight_minutes": 723.693,
+      "sunrise_azimuth_deg": 107.333,
+      "sunset_azimuth_deg": 252.528
+    },
+    {
+      "date": "2026-11-12",
+      "sunrise_sgt": "06:47",
+      "solar_noon_sgt": "12:49",
+      "sunset_sgt": "18:51",
+      "daylight_minutes": 723.655,
+      "sunrise_azimuth_deg": 107.608,
+      "sunset_azimuth_deg": 252.256
+    },
+    {
+      "date": "2026-11-13",
+      "sunrise_sgt": "06:47",
+      "solar_noon_sgt": "12:49",
+      "sunset_sgt": "18:51",
+      "daylight_minutes": 723.617,
+      "sunrise_azimuth_deg": 107.878,
+      "sunset_azimuth_deg": 251.989
+    },
+    {
+      "date": "2026-11-14",
+      "sunrise_sgt": "06:48",
+      "solar_noon_sgt": "12:49",
+      "sunset_sgt": "18:51",
+      "daylight_minutes": 723.581,
+      "sunrise_azimuth_deg": 108.142,
+      "sunset_azimuth_deg": 251.727
+    },
+    {
+      "date": "2026-11-15",
+      "sunrise_sgt": "06:48",
+      "solar_noon_sgt": "12:50",
+      "sunset_sgt": "18:51",
+      "daylight_minutes": 723.545,
+      "sunrise_azimuth_deg": 108.401,
+      "sunset_azimuth_deg": 251.47
+    },
+    {
+      "date": "2026-11-16",
+      "sunrise_sgt": "06:48",
+      "solar_noon_sgt": "12:50",
+      "sunset_sgt": "18:51",
+      "daylight_minutes": 723.51,
+      "sunrise_azimuth_deg": 108.655,
+      "sunset_azimuth_deg": 251.219
+    },
+    {
+      "date": "2026-11-17",
+      "sunrise_sgt": "06:48",
+      "solar_noon_sgt": "12:50",
+      "sunset_sgt": "18:52",
+      "daylight_minutes": 723.476,
+      "sunrise_azimuth_deg": 108.904,
+      "sunset_azimuth_deg": 250.974
+    },
+    {
+      "date": "2026-11-18",
+      "sunrise_sgt": "06:48",
+      "solar_noon_sgt": "12:50",
+      "sunset_sgt": "18:52",
+      "daylight_minutes": 723.443,
+      "sunrise_azimuth_deg": 109.147,
+      "sunset_azimuth_deg": 250.734
+    },
+    {
+      "date": "2026-11-19",
+      "sunrise_sgt": "06:49",
+      "solar_noon_sgt": "12:50",
+      "sunset_sgt": "18:52",
+      "daylight_minutes": 723.411,
+      "sunrise_azimuth_deg": 109.384,
+      "sunset_azimuth_deg": 250.499
+    },
+    {
+      "date": "2026-11-20",
+      "sunrise_sgt": "06:49",
+      "solar_noon_sgt": "12:51",
+      "sunset_sgt": "18:52",
+      "daylight_minutes": 723.38,
+      "sunrise_azimuth_deg": 109.615,
+      "sunset_azimuth_deg": 250.271
+    },
+    {
+      "date": "2026-11-21",
+      "sunrise_sgt": "06:49",
+      "solar_noon_sgt": "12:51",
+      "sunset_sgt": "18:52",
+      "daylight_minutes": 723.349,
+      "sunrise_azimuth_deg": 109.84,
+      "sunset_azimuth_deg": 250.049
+    },
+    {
+      "date": "2026-11-22",
+      "sunrise_sgt": "06:49",
+      "solar_noon_sgt": "12:51",
+      "sunset_sgt": "18:53",
+      "daylight_minutes": 723.32,
+      "sunrise_azimuth_deg": 110.06,
+      "sunset_azimuth_deg": 249.833
+    },
+    {
+      "date": "2026-11-23",
+      "sunrise_sgt": "06:50",
+      "solar_noon_sgt": "12:51",
+      "sunset_sgt": "18:53",
+      "daylight_minutes": 723.291,
+      "sunrise_azimuth_deg": 110.273,
+      "sunset_azimuth_deg": 249.622
+    },
+    {
+      "date": "2026-11-24",
+      "sunrise_sgt": "06:50",
+      "solar_noon_sgt": "12:52",
+      "sunset_sgt": "18:53",
+      "daylight_minutes": 723.264,
+      "sunrise_azimuth_deg": 110.48,
+      "sunset_azimuth_deg": 249.419
+    },
+    {
+      "date": "2026-11-25",
+      "sunrise_sgt": "06:50",
+      "solar_noon_sgt": "12:52",
+      "sunset_sgt": "18:54",
+      "daylight_minutes": 723.237,
+      "sunrise_azimuth_deg": 110.68,
+      "sunset_azimuth_deg": 249.221
+    },
+    {
+      "date": "2026-11-26",
+      "sunrise_sgt": "06:51",
+      "solar_noon_sgt": "12:52",
+      "sunset_sgt": "18:54",
+      "daylight_minutes": 723.211,
+      "sunrise_azimuth_deg": 110.875,
+      "sunset_azimuth_deg": 249.03
+    },
+    {
+      "date": "2026-11-27",
+      "sunrise_sgt": "06:51",
+      "solar_noon_sgt": "12:53",
+      "sunset_sgt": "18:54",
+      "daylight_minutes": 723.187,
+      "sunrise_azimuth_deg": 111.062,
+      "sunset_azimuth_deg": 248.846
+    },
+    {
+      "date": "2026-11-28",
+      "sunrise_sgt": "06:51",
+      "solar_noon_sgt": "12:53",
+      "sunset_sgt": "18:54",
+      "daylight_minutes": 723.163,
+      "sunrise_azimuth_deg": 111.244,
+      "sunset_azimuth_deg": 248.668
+    },
+    {
+      "date": "2026-11-29",
+      "sunrise_sgt": "06:52",
+      "solar_noon_sgt": "12:53",
+      "sunset_sgt": "18:55",
+      "daylight_minutes": 723.14,
+      "sunrise_azimuth_deg": 111.418,
+      "sunset_azimuth_deg": 248.497
+    },
+    {
+      "date": "2026-11-30",
+      "sunrise_sgt": "06:52",
+      "solar_noon_sgt": "12:54",
+      "sunset_sgt": "18:55",
+      "daylight_minutes": 723.118,
+      "sunrise_azimuth_deg": 111.586,
+      "sunset_azimuth_deg": 248.333
+    },
+    {
+      "date": "2026-12-01",
+      "sunrise_sgt": "06:52",
+      "solar_noon_sgt": "12:54",
+      "sunset_sgt": "18:56",
+      "daylight_minutes": 723.097,
+      "sunrise_azimuth_deg": 111.747,
+      "sunset_azimuth_deg": 248.175
+    },
+    {
+      "date": "2026-12-02",
+      "sunrise_sgt": "06:53",
+      "solar_noon_sgt": "12:54",
+      "sunset_sgt": "18:56",
+      "daylight_minutes": 723.077,
+      "sunrise_azimuth_deg": 111.901,
+      "sunset_azimuth_deg": 248.025
+    },
+    {
+      "date": "2026-12-03",
+      "sunrise_sgt": "06:53",
+      "solar_noon_sgt": "12:55",
+      "sunset_sgt": "18:56",
+      "daylight_minutes": 723.058,
+      "sunrise_azimuth_deg": 112.048,
+      "sunset_azimuth_deg": 247.881
+    },
+    {
+      "date": "2026-12-04",
+      "sunrise_sgt": "06:54",
+      "solar_noon_sgt": "12:55",
+      "sunset_sgt": "18:57",
+      "daylight_minutes": 723.04,
+      "sunrise_azimuth_deg": 112.187,
+      "sunset_azimuth_deg": 247.745
+    },
+    {
+      "date": "2026-12-05",
+      "sunrise_sgt": "06:54",
+      "solar_noon_sgt": "12:56",
+      "sunset_sgt": "18:57",
+      "daylight_minutes": 723.023,
+      "sunrise_azimuth_deg": 112.32,
+      "sunset_azimuth_deg": 247.616
+    },
+    {
+      "date": "2026-12-06",
+      "sunrise_sgt": "06:54",
+      "solar_noon_sgt": "12:56",
+      "sunset_sgt": "18:57",
+      "daylight_minutes": 723.007,
+      "sunrise_azimuth_deg": 112.445,
+      "sunset_azimuth_deg": 247.494
+    },
+    {
+      "date": "2026-12-07",
+      "sunrise_sgt": "06:55",
+      "solar_noon_sgt": "12:56",
+      "sunset_sgt": "18:58",
+      "daylight_minutes": 722.992,
+      "sunrise_azimuth_deg": 112.564,
+      "sunset_azimuth_deg": 247.38
+    },
+    {
+      "date": "2026-12-08",
+      "sunrise_sgt": "06:55",
+      "solar_noon_sgt": "12:57",
+      "sunset_sgt": "18:58",
+      "daylight_minutes": 722.977,
+      "sunrise_azimuth_deg": 112.674,
+      "sunset_azimuth_deg": 247.273
+    },
+    {
+      "date": "2026-12-09",
+      "sunrise_sgt": "06:56",
+      "solar_noon_sgt": "12:57",
+      "sunset_sgt": "18:59",
+      "daylight_minutes": 722.964,
+      "sunrise_azimuth_deg": 112.778,
+      "sunset_azimuth_deg": 247.173
+    },
+    {
+      "date": "2026-12-10",
+      "sunrise_sgt": "06:56",
+      "solar_noon_sgt": "12:58",
+      "sunset_sgt": "18:59",
+      "daylight_minutes": 722.952,
+      "sunrise_azimuth_deg": 112.874,
+      "sunset_azimuth_deg": 247.081
+    },
+    {
+      "date": "2026-12-11",
+      "sunrise_sgt": "06:57",
+      "solar_noon_sgt": "12:58",
+      "sunset_sgt": "19:00",
+      "daylight_minutes": 722.941,
+      "sunrise_azimuth_deg": 112.962,
+      "sunset_azimuth_deg": 246.997
+    },
+    {
+      "date": "2026-12-12",
+      "sunrise_sgt": "06:57",
+      "solar_noon_sgt": "12:59",
+      "sunset_sgt": "19:00",
+      "daylight_minutes": 722.931,
+      "sunrise_azimuth_deg": 113.043,
+      "sunset_azimuth_deg": 246.92
+    },
+    {
+      "date": "2026-12-13",
+      "sunrise_sgt": "06:58",
+      "solar_noon_sgt": "12:59",
+      "sunset_sgt": "19:01",
+      "daylight_minutes": 722.922,
+      "sunrise_azimuth_deg": 113.116,
+      "sunset_azimuth_deg": 246.85
+    },
+    {
+      "date": "2026-12-14",
+      "sunrise_sgt": "06:58",
+      "solar_noon_sgt": "13:00",
+      "sunset_sgt": "19:01",
+      "daylight_minutes": 722.914,
+      "sunrise_azimuth_deg": 113.181,
+      "sunset_azimuth_deg": 246.789
+    },
+    {
+      "date": "2026-12-15",
+      "sunrise_sgt": "06:59",
+      "solar_noon_sgt": "13:00",
+      "sunset_sgt": "19:02",
+      "daylight_minutes": 722.907,
+      "sunrise_azimuth_deg": 113.239,
+      "sunset_azimuth_deg": 246.735
+    },
+    {
+      "date": "2026-12-16",
+      "sunrise_sgt": "06:59",
+      "solar_noon_sgt": "13:01",
+      "sunset_sgt": "19:02",
+      "daylight_minutes": 722.901,
+      "sunrise_azimuth_deg": 113.289,
+      "sunset_azimuth_deg": 246.688
+    },
+    {
+      "date": "2026-12-17",
+      "sunrise_sgt": "07:00",
+      "solar_noon_sgt": "13:01",
+      "sunset_sgt": "19:02",
+      "daylight_minutes": 722.896,
+      "sunrise_azimuth_deg": 113.332,
+      "sunset_azimuth_deg": 246.65
+    },
+    {
+      "date": "2026-12-18",
+      "sunrise_sgt": "07:00",
+      "solar_noon_sgt": "13:02",
+      "sunset_sgt": "19:03",
+      "daylight_minutes": 722.892,
+      "sunrise_azimuth_deg": 113.366,
+      "sunset_azimuth_deg": 246.619
+    },
+    {
+      "date": "2026-12-19",
+      "sunrise_sgt": "07:01",
+      "solar_noon_sgt": "13:02",
+      "sunset_sgt": "19:03",
+      "daylight_minutes": 722.889,
+      "sunrise_azimuth_deg": 113.393,
+      "sunset_azimuth_deg": 246.597
+    },
+    {
+      "date": "2026-12-20",
+      "sunrise_sgt": "07:01",
+      "solar_noon_sgt": "13:02",
+      "sunset_sgt": "19:04",
+      "daylight_minutes": 722.887,
+      "sunrise_azimuth_deg": 113.412,
+      "sunset_azimuth_deg": 246.582
+    },
+    {
+      "date": "2026-12-21",
+      "sunrise_sgt": "07:02",
+      "solar_noon_sgt": "13:03",
+      "sunset_sgt": "19:04",
+      "daylight_minutes": 722.886,
+      "sunrise_azimuth_deg": 113.423,
+      "sunset_azimuth_deg": 246.575
+    },
+    {
+      "date": "2026-12-22",
+      "sunrise_sgt": "07:02",
+      "solar_noon_sgt": "13:03",
+      "sunset_sgt": "19:05",
+      "daylight_minutes": 722.886,
+      "sunrise_azimuth_deg": 113.426,
+      "sunset_azimuth_deg": 246.575
+    },
+    {
+      "date": "2026-12-23",
+      "sunrise_sgt": "07:03",
+      "solar_noon_sgt": "13:04",
+      "sunset_sgt": "19:05",
+      "daylight_minutes": 722.887,
+      "sunrise_azimuth_deg": 113.421,
+      "sunset_azimuth_deg": 246.584
+    },
+    {
+      "date": "2026-12-24",
+      "sunrise_sgt": "07:03",
+      "solar_noon_sgt": "13:04",
+      "sunset_sgt": "19:06",
+      "daylight_minutes": 722.889,
+      "sunrise_azimuth_deg": 113.409,
+      "sunset_azimuth_deg": 246.6
+    },
+    {
+      "date": "2026-12-25",
+      "sunrise_sgt": "07:04",
+      "solar_noon_sgt": "13:05",
+      "sunset_sgt": "19:06",
+      "daylight_minutes": 722.892,
+      "sunrise_azimuth_deg": 113.388,
+      "sunset_azimuth_deg": 246.625
+    },
+    {
+      "date": "2026-12-26",
+      "sunrise_sgt": "07:04",
+      "solar_noon_sgt": "13:05",
+      "sunset_sgt": "19:07",
+      "daylight_minutes": 722.897,
+      "sunrise_azimuth_deg": 113.36,
+      "sunset_azimuth_deg": 246.657
+    },
+    {
+      "date": "2026-12-27",
+      "sunrise_sgt": "07:05",
+      "solar_noon_sgt": "13:06",
+      "sunset_sgt": "19:07",
+      "daylight_minutes": 722.902,
+      "sunrise_azimuth_deg": 113.324,
+      "sunset_azimuth_deg": 246.697
+    },
+    {
+      "date": "2026-12-28",
+      "sunrise_sgt": "07:05",
+      "solar_noon_sgt": "13:06",
+      "sunset_sgt": "19:08",
+      "daylight_minutes": 722.908,
+      "sunrise_azimuth_deg": 113.28,
+      "sunset_azimuth_deg": 246.745
+    },
+    {
+      "date": "2026-12-29",
+      "sunrise_sgt": "07:05",
+      "solar_noon_sgt": "13:07",
+      "sunset_sgt": "19:08",
+      "daylight_minutes": 722.916,
+      "sunrise_azimuth_deg": 113.229,
+      "sunset_azimuth_deg": 246.8
+    },
+    {
+      "date": "2026-12-30",
+      "sunrise_sgt": "07:06",
+      "solar_noon_sgt": "13:07",
+      "sunset_sgt": "19:09",
+      "daylight_minutes": 722.924,
+      "sunrise_azimuth_deg": 113.169,
+      "sunset_azimuth_deg": 246.863
+    },
+    {
+      "date": "2026-12-31",
+      "sunrise_sgt": "07:06",
+      "solar_noon_sgt": "13:08",
+      "sunset_sgt": "19:09",
+      "daylight_minutes": 722.933,
+      "sunrise_azimuth_deg": 113.102,
+      "sunset_azimuth_deg": 246.934
+    }
+  ]
+}

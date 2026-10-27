@@ -1,0 +1,436 @@
+{
+  "spec": "docs/62-container-port-content-spec.md",
+  "captions": [
+    {
+      "chapter": "before-you-start",
+      "beat": 1,
+      "facts": [
+        "F31",
+        "D01"
+      ],
+      "caption": {
+        "en": "Follow this one box; the next views keep its identity.",
+        "zh": "先看这一只箱子；接下来的画面保持它的身份。"
+      }
+    },
+    {
+      "chapter": "before-you-start",
+      "beat": 2,
+      "facts": [
+        "F06",
+        "F16",
+        "D01"
+      ],
+      "caption": {
+        "en": "The ship, quay crane, carrier and yard each handle a different part of the transfer.",
+        "zh": "船、岸桥、运输车和堆场分别完成不同的一段工作。"
+      }
+    },
+    {
+      "chapter": "before-you-start",
+      "beat": 3,
+      "facts": [
+        "M01",
+        "M02"
+      ],
+      "caption": {
+        "en": "The ship is large, but size or heaviness alone cannot tell us whether an object floats.",
+        "zh": "船很大，但“大”或“重”本身不足以判断一个物体会不会浮。"
+      }
+    },
+    {
+      "chapter": "before-you-start",
+      "beat": 4,
+      "facts": [
+        "D01",
+        "F28"
+      ],
+      "caption": {
+        "en": "This is a generic port model; it is not a surveyed plan of Tuas Port.",
+        "zh": "这是通用港口模型；它不表示大士港的实测平面布局。"
+      }
+    },
+    {
+      "chapter": "boxes-and-teu",
+      "beat": 1,
+      "facts": [
+        "F01",
+        "D02"
+      ],
+      "caption": {
+        "en": "One 20-foot container counts as 1 TEU.",
+        "zh": "一只20英尺集装箱记为1 TEU。"
+      }
+    },
+    {
+      "chapter": "boxes-and-teu",
+      "beat": 2,
+      "facts": [
+        "F01"
+      ],
+      "caption": {
+        "en": "This 40-foot box is one object, but it counts as 2 TEU.",
+        "zh": "这一只40英尺箱仍是一只物体，却记为2 TEU。"
+      }
+    },
+    {
+      "chapter": "boxes-and-teu",
+      "beat": 3,
+      "facts": [
+        "F34",
+        "D02"
+      ],
+      "caption": {
+        "en": "There are now three boxes, totalling 4 TEU.",
+        "zh": "现在是三只箱子，合计4 TEU。"
+      }
+    },
+    {
+      "chapter": "boxes-and-teu",
+      "beat": 4,
+      "facts": [
+        "F02"
+      ],
+      "caption": {
+        "en": "Two 20-foot boxes are slightly shorter in total than one 40-foot box; the names are nominal lengths.",
+        "zh": "两只20英尺箱的实际总长略短于一只40英尺箱；名称不是外长的精确米数。"
+      }
+    },
+    {
+      "chapter": "boxes-and-teu",
+      "beat": 5,
+      "facts": [
+        "F32"
+      ],
+      "caption": {
+        "en": "TEU does not tell us how heavy the cargo inside is.",
+        "zh": "TEU不告诉我们箱里装了多重的货物。"
+      }
+    },
+    {
+      "chapter": "the-crane-load-path",
+      "beat": 1,
+      "facts": [
+        "F05",
+        "F07",
+        "F29"
+      ],
+      "caption": {
+        "en": "Find the four upper corner fittings; the lifting connections are not at the centre of the thin roof.",
+        "zh": "先找箱顶的四个角件；起吊连接点不在薄屋顶的中央。"
+      }
+    },
+    {
+      "chapter": "the-crane-load-path",
+      "beat": 2,
+      "facts": [
+        "F05",
+        "F29",
+        "D03"
+      ],
+      "caption": {
+        "en": "The spreader’s twistlocks engage the corners; this model confirms the connection before lifting.",
+        "zh": "吊具的旋锁接上四角；本模型先确认连接，再开始抬升。"
+      }
+    },
+    {
+      "chapter": "the-crane-load-path",
+      "beat": 3,
+      "facts": [
+        "F33",
+        "D03"
+      ],
+      "caption": {
+        "en": "The hoist raises the box; in this step the trolley has not yet crossed.",
+        "zh": "起升机构把箱子抬高；这一拍小车尚未横移。"
+      }
+    },
+    {
+      "chapter": "the-crane-load-path",
+      "beat": 4,
+      "facts": [
+        "F33",
+        "D03"
+      ],
+      "caption": {
+        "en": "With the box raised, the trolley moves it along the boom towards the quay.",
+        "zh": "箱子保持抬高，小车沿臂架把它移向岸边。"
+      }
+    },
+    {
+      "chapter": "the-crane-load-path",
+      "beat": 5,
+      "facts": [
+        "D03"
+      ],
+      "caption": {
+        "en": "In this schematic sequence, the box is supported before release; the empty spreader rises while the box stays on the carrier.",
+        "zh": "在这段示意过程里，箱子先落稳再解锁；空吊具升起，箱子留在车上。"
+      }
+    },
+    {
+      "chapter": "quay-to-yard",
+      "beat": 1,
+      "facts": [
+        "F16",
+        "D01"
+      ],
+      "caption": {
+        "en": "The low carrier moves a box from wharf to yard; it does not do the quay crane’s lift.",
+        "zh": "低平运输车把箱子从岸边送往堆场，不承担岸桥的起吊动作。"
+      }
+    },
+    {
+      "chapter": "quay-to-yard",
+      "beat": 2,
+      "facts": [
+        "F16",
+        "D01"
+      ],
+      "caption": {
+        "en": "The yard crane spans the container rows and lifts boxes within the yard.",
+        "zh": "场桥跨在箱列上方，在堆场内抬起和放下箱子。"
+      }
+    },
+    {
+      "chapter": "quay-to-yard",
+      "beat": 3,
+      "facts": [
+        "F07",
+        "D05"
+      ],
+      "caption": {
+        "en": "This schematic stack aligns the corners; two boxes sit above the target.",
+        "zh": "这个示意箱堆把角部对齐；目标箱上方有两只箱。"
+      }
+    },
+    {
+      "chapter": "quay-to-yard",
+      "beat": 4,
+      "facts": [
+        "D05"
+      ],
+      "caption": {
+        "en": "In this model, two blocking boxes must be moved before the target can be retrieved.",
+        "zh": "在这个模型里，先移开两只阻挡箱，再取目标箱。"
+      }
+    },
+    {
+      "chapter": "quay-to-yard",
+      "beat": 5,
+      "facts": [
+        "D05"
+      ],
+      "caption": {
+        "en": "Here we count two rehandles and one retrieval; with no box above, only the target needs lifting.",
+        "zh": "这里数了两次移开和一次取出；若上方没有箱子，只需取出目标。"
+      }
+    },
+    {
+      "chapter": "an-onward-connection",
+      "beat": 1,
+      "facts": [
+        "F16",
+        "F21",
+        "D01"
+      ],
+      "caption": {
+        "en": "After unloading from the first ship, this box enters the landside transfer.",
+        "zh": "这只箱从第一条船卸下后，进入岸上运输环节。"
+      }
+    },
+    {
+      "chapter": "an-onward-connection",
+      "beat": 2,
+      "facts": [
+        "F21",
+        "F31",
+        "D01"
+      ],
+      "caption": {
+        "en": "The same box waits in the yard for its next connection.",
+        "zh": "同一只箱暂放堆场，等待下一段运输。"
+      }
+    },
+    {
+      "chapter": "an-onward-connection",
+      "beat": 3,
+      "facts": [
+        "F21",
+        "F31",
+        "D01"
+      ],
+      "caption": {
+        "en": "The box joins an onward ship for another destination; this is a transhipment transfer.",
+        "zh": "箱子装上接续船继续去别处；这是一种转运过程。"
+      }
+    },
+    {
+      "chapter": "an-onward-connection",
+      "beat": 4,
+      "facts": [
+        "F21"
+      ],
+      "caption": {
+        "en": "Other cargo is delivered locally; both paths should not be called local imports.",
+        "zh": "另一些货物会在本地交付；两条去向不能都叫本地进口。"
+      }
+    },
+    {
+      "chapter": "beside-two-straits",
+      "beat": 1,
+      "facts": [
+        "F18",
+        "F26–F28",
+        "D06"
+      ],
+      "caption": {
+        "en": "Use the real coastline map to locate the Malay Peninsula, Sumatra and the Singapore region.",
+        "zh": "在真实海岸图上找马来半岛、苏门答腊和新加坡所在的区域。"
+      }
+    },
+    {
+      "chapter": "beside-two-straits",
+      "beat": 2,
+      "facts": [
+        "F18",
+        "F27",
+        "D06"
+      ],
+      "caption": {
+        "en": "The Malacca and Singapore straits link sea passages in this region; this map adds no invented vessel tracks.",
+        "zh": "马六甲海峡与新加坡海峡连接这一带的海上通道；图中没有虚构的船只轨迹。"
+      }
+    },
+    {
+      "chapter": "beside-two-straits",
+      "beat": 3,
+      "facts": [
+        "F19",
+        "F20"
+      ],
+      "caption": {
+        "en": "Beyond location, shipping connections and maritime services support the hub.",
+        "zh": "位置之外，班轮联系和多种海事服务一起支持枢纽运作。"
+      }
+    },
+    {
+      "chapter": "beside-two-straits",
+      "beat": 4,
+      "facts": [
+        "F27",
+        "F28",
+        "D01",
+        "D06"
+      ],
+      "caption": {
+        "en": "The coastline map explains where; the port model explains how boxes are handled.",
+        "zh": "海岸图解释“在哪里”；刚才的港口模型解释“怎样搬运”。"
+      }
+    },
+    {
+      "chapter": "the-tuas-transition",
+      "beat": 1,
+      "facts": [
+        "F22"
+      ],
+      "caption": {
+        "en": "Tanjong Pagar container terminal opened in 1972; the modern port developed through successive stages.",
+        "zh": "丹戎巴葛集装箱码头于1972年启用；现代港口经历了多次发展。"
+      }
+    },
+    {
+      "chapter": "the-tuas-transition",
+      "beat": 2,
+      "facts": [
+        "F10",
+        "F11"
+      ],
+      "caption": {
+        "en": "Tuas’s first two berths began operating in December 2021; the official opening followed in September 2022.",
+        "zh": "大士首两个泊位于2021年12月开始作业，2022年9月正式开港。"
+      }
+    },
+    {
+      "chapter": "the-tuas-transition",
+      "beat": 3,
+      "facts": [
+        "F16",
+        "F17"
+      ],
+      "caption": {
+        "en": "AGVs, automated yard cranes and remote management change the work; they do not mean there are no people.",
+        "zh": "自动导引车、自动化场桥和远程管理改变了工作方式，并不等于没有人。"
+      }
+    },
+    {
+      "chapter": "the-tuas-transition",
+      "beat": 4,
+      "facts": [
+        "F08",
+        "F12",
+        "F35"
+      ],
+      "caption": {
+        "en": "Singapore handled 44.66 million TEU in 2025; Tuas’s planned 65 million TEU a year is for completion in the 2040s.",
+        "zh": "2025年新加坡全港处理4,466万TEU；大士未来6,500万TEU/年是2040年代完工时的规划能力。"
+      }
+    },
+    {
+      "chapter": "keeping-the-chain-moving",
+      "beat": 1,
+      "facts": [
+        "D04"
+      ],
+      "caption": {
+        "en": "Predict first: will adding only a quay crane change the chain’s capacity?",
+        "zh": "先预测：只增加岸桥，整条链的处理能力会改变吗？"
+      }
+    },
+    {
+      "chapter": "keeping-the-chain-moving",
+      "beat": 2,
+      "facts": [
+        "D04"
+      ],
+      "caption": {
+        "en": "In this simulation, the crane, transfer and yard stages can handle 30, 24 and 18 boxes an hour.",
+        "zh": "在这个模拟里，岸桥、运输和堆场分别能处理30、24和18箱/小时。"
+      }
+    },
+    {
+      "chapter": "keeping-the-chain-moving",
+      "beat": 3,
+      "facts": [
+        "D04"
+      ],
+      "caption": {
+        "en": "Crane capacity increases, but the yard still limits the chain to 18 boxes an hour.",
+        "zh": "岸桥能力增加，堆场仍限制全链为18箱/小时。"
+      }
+    },
+    {
+      "chapter": "keeping-the-chain-moving",
+      "beat": 4,
+      "facts": [
+        "D04"
+      ],
+      "caption": {
+        "en": "With more yard resources, transfer becomes the new limit at 24 boxes an hour.",
+        "zh": "增加堆场资源后，运输环节成为新的限制，能力为24箱/小时。"
+      }
+    },
+    {
+      "chapter": "keeping-the-chain-moving",
+      "beat": 5,
+      "facts": [
+        "D04",
+        "F23"
+      ],
+      "caption": {
+        "en": "With arrivals fixed at 24 boxes an hour, this model stops building a queue; real ports face more conditions.",
+        "zh": "到达率固定为24箱/小时，这个模型不再继续积压；真实港口还受更多条件影响。"
+      }
+    }
+  ]
+}

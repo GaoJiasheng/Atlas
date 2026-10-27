@@ -1,0 +1,210 @@
+---
+{
+  "id": "background",
+  "order": 0,
+  "title": {
+    "en": "Reading a regional map",
+    "zh": "怎样读区域地图"
+  },
+  "sensitive": false,
+  "state": {
+    "geoContext": {
+      "kind": "present"
+    },
+    "camera": {
+      "center": [
+        105.0,
+        8.0
+      ],
+      "zoom": 1.2,
+      "pitch": 0,
+      "bearing": 0
+    },
+    "layers": [
+      "base"
+    ],
+    "highlight": [],
+    "selection": null,
+    "question": {
+      "en": "What does this map show?",
+      "zh": "地图在告诉我什么？"
+    },
+    "summary": {
+      "en": "Land shapes, location markers and changing data each tell a different part of the story.",
+      "zh": "国形、位置标记和会变的数据，各自说明不同的事情。"
+    },
+    "index": [
+      "geo-brn",
+      "geo-khm",
+      "geo-idn",
+      "geo-lao",
+      "geo-mys",
+      "geo-mmr",
+      "geo-phl",
+      "geo-sgp",
+      "geo-tha",
+      "geo-tls",
+      "geo-vnm",
+      "city-singapore"
+    ],
+    "beats": [
+      {
+        "geoContext": {
+          "kind": "present"
+        },
+        "camera": {
+          "center": [
+            105.0,
+            8.0
+          ],
+          "zoom": 1.2,
+          "pitch": 0,
+          "bearing": 0
+        },
+        "layers": [
+          "base"
+        ],
+        "highlight": [],
+        "selection": null,
+        "caption": {
+          "en": "Present-day reference: start with the world before moving into Southeast Asia.",
+          "zh": "今天的地理参考：先看世界，再进入东南亚。"
+        }
+      },
+      {
+        "geoContext": {
+          "kind": "present"
+        },
+        "camera": {
+          "center": [
+            116.0,
+            8.0
+          ],
+          "zoom": 3.0,
+          "pitch": 0,
+          "bearing": 0
+        },
+        "layers": [
+          "base",
+          "geo-countries",
+          "geo-anchors"
+        ],
+        "highlight": [
+          "geo-sgp"
+        ],
+        "selection": "geo-sgp",
+        "caption": {
+          "en": "Present-day reference: the Singapore marker locates a small country without enlarging its land.",
+          "zh": "今天的地理参考：用标记找到新加坡，国土没有被放大。"
+        }
+      },
+      {
+        "geoContext": {
+          "kind": "present"
+        },
+        "camera": {
+          "center": [
+            116.0,
+            8.0
+          ],
+          "zoom": 3.0,
+          "pitch": 0,
+          "bearing": 0
+        },
+        "layers": [
+          "base",
+          "geo-countries"
+        ],
+        "highlight": [
+          "geo-lao"
+        ],
+        "selection": "geo-lao",
+        "caption": {
+          "en": "Present-day reference: this country outline belongs to Lao PDR, one of the region’s eleven countries.",
+          "zh": "今天的地理参考：这片国形是寮国，是区域十一国之一。"
+        }
+      },
+      {
+        "geoContext": {
+          "kind": "present"
+        },
+        "camera": {
+          "center": [
+            103.84,
+            1.35
+          ],
+          "zoom": 8.2,
+          "pitch": 0,
+          "bearing": 0
+        },
+        "layers": [
+          "base",
+          "geo-countries",
+          "geo-anchors"
+        ],
+        "highlight": [
+          "city-singapore"
+        ],
+        "selection": "city-singapore",
+        "caption": {
+          "en": "Present-day reference: the city point helps us read location; it is not a climate station.",
+          "zh": "今天的地理参考：城市点帮助读位置，不代表气象站。"
+        }
+      }
+    ],
+    "note": {
+      "en": "The land and country shapes are a present-day cartographic snapshot. Climate views reuse monthly means for 1991–2020. ASEAN dates change membership shading on those same shapes. Local case studies are located at country scale unless a more precise source is stated.",
+      "zh": "陆地和国形采用今天的制图快照。气候图复用 1991–2020 年月平均；亚细安日期只改变同一组国形的成员着色。个案默认只定位到国家尺度，不能据此寻找田块或公园边界。"
+    }
+  },
+  "kind": "background"
+}
+---
+
+<Lang en>
+
+Southeast Asia is a <Term id="term-region">region</Term>: a way of grouping places to study them together. The United Nations statistical grouping includes <Num s="S3">11</Num> countries, from Myanmar in the west to the Philippines farther east and Timor-Leste in the south. The country index gives the complete list. Begin with the world view, then move closer to see how mainland land, islands and surrounding seas fit together.
+
+The country shapes come from Natural Earth, a published map dataset. They are a present-day cartographic snapshot, rather than a reconstruction of an earlier century. A large country occupies more of the map than a small country. Singapore's marker makes a small place easier to find without making its land larger. A country outline and a city point answer different questions: one shows an area, while the other helps locate a named place.
+
+Watch what changes when the reading context changes. The ordinary geography view keeps the country shapes in place. The climate view shows monthly averages for 1991–2020. The <Term id="term-asean">ASEAN</Term> view changes membership shading according to admission dates, using the same present-day shapes throughout. A membership date therefore does not date the coastline beside it.
+
+Some chapters move from the regional map to a local example. Selecting a park or terrace case highlights its country as a location reference. It does not draw that site's boundary or promise directions to it. Read the map, the case description and any separate drawing together: each supplies information at a different scale.
+
+<More title={{"en": "The map has a source", "zh": "地图也有资料来源"}}>
+
+Natural Earth makes its map data public domain. Small bends, islands and other details are generalised for map reading. That allows a useful overview, but a classroom regional map cannot replace a survey or a legal boundary document.
+
+</More>
+
+<More title={{"en": "A region and an organisation", "zh": "区域与组织"}}>
+
+The United Nations regional grouping and ASEAN membership are different kinds of list. One is used for geographical statistics; the other records states joining an organisation. The last chapter follows those admission dates. Water also connects places beyond country outlines: explore the <TopicLink slug="water">water cycle</TopicLink> alongside this map.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+东南亚是一个<Term id="term-region">区域</Term>，把地方放在一起，方便比较和研究。联合国的统计分组列有 <Num s="S3">11</Num> 个国家，完整名单在本章索引中。先从世界地图找亚洲，再移近东南亚，观察大陆、岛屿和海洋怎样排列。国名名单帮助认地方，陆地轮廓则帮助理解它们的相对位置，两者要一起读。
+
+这张图的国形取自 Natural Earth 制图资料，采用今天的地图快照。新加坡在区域图上很小，所以另有可点的标记；标记让人容易找到它，并没有放大国土。国家的轮廓表示一片面积，城市点表示具名地点，不能把两种符号当成同一回事。
+
+阅读时还要留意资料的时间。普通地理图展示固定国形；气候图采用 1991–2020 年的月平均；<Term id="term-asean">亚细安</Term>（也称东盟）图按入会日期改变颜色，仍沿用同一组今天的国形。因此，入会日不是旁边海岸线的年代，气候月份也不是某一天的天气。
+
+后面会从区域图转向公园、梯田等案例。选择案例时，地图只用所在国家帮助定位，不显示实地边界，也不能据此寻找入口或田块。把位置图、文字和另附的示意图合起来读，并分别辨认它们的尺度。
+
+<More title={{"en": "The map has a source", "zh": "地图也有资料来源"}}>
+
+Natural Earth 的地图资料属于公有领域。为了便于读图，细小弯曲、岛屿等细节经过概括。这样的图适合看全局，不能代替实地测量或法律上的边界文件。
+
+</More>
+
+<More title={{"en": "A region and an organisation", "zh": "区域与组织"}}>
+
+联合国的区域分组与亚细安成员名单性质不同：前者用于地理统计，后者记录国家加入组织。最后一章会按日期看入会过程。水的联系也不限于国形，可以配合<TopicLink slug="water">水循环</TopicLink>一起读。
+
+</More>
+
+</Lang>

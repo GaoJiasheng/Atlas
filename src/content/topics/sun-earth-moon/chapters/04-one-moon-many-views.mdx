@@ -1,0 +1,395 @@
+---
+{
+  "id": "one-moon-many-views",
+  "order": 4,
+  "title": {
+    "en": "One Moon, changing views",
+    "zh": "一个月球，不同月相"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "cutaway": "none",
+    "ghost": [],
+    "layers": [
+      "solar-body",
+      "earth-system",
+      "moon-system",
+      "orbital-guides"
+    ],
+    "labels": [
+      "sun-body",
+      "earth-body",
+      "moon-body"
+    ],
+    "camera": {
+      "position": [
+        -1.7,
+        3,
+        5.5
+      ],
+      "target": [
+        -1.7,
+        0,
+        0
+      ],
+      "fov": 42
+    },
+    "index": {
+      "parts": [
+        "sun-body",
+        "earth-body",
+        "moon-body",
+        "near-side-mark",
+        "lunar-track",
+        "light-ray-guide"
+      ]
+    },
+    "sim": {
+      "set": {
+        "lab": "moon",
+        "elapsed": 0,
+        "year-angle": 0,
+        "lunar-angle": 0,
+        "spin-angle": 180,
+        "obliquity": 0,
+        "lunar-tilt": 0,
+        "node-angle": 0,
+        "observer-lat": 0,
+        "moon-range": 384400,
+        "synchronous": true,
+        "scale-mode": "schematic",
+        "day-index": 1
+      },
+      "try": {
+        "vary": "lunar-angle",
+        "also": [
+          "synchronous"
+        ],
+        "observe": [
+          "moon-lit-percent",
+          "moon-phase"
+        ],
+        "record": true,
+        "keep": [
+          {
+            "en": "Fixed Sun direction and north-up view",
+            "zh": "固定太阳方向与北朝上视图"
+          }
+        ]
+      }
+    },
+    "beats": [
+      {
+        "sim": {
+          "set": {
+            "lab": "moon",
+            "elapsed": 0,
+            "year-angle": 0,
+            "lunar-angle": 0,
+            "spin-angle": 180,
+            "obliquity": 0,
+            "lunar-tilt": 0,
+            "node-angle": 0,
+            "observer-lat": 0,
+            "moon-range": 384400,
+            "synchronous": true,
+            "scale-mode": "schematic",
+            "day-index": 1
+          }
+        },
+        "caption": {
+          "en": "The Moon reflects sunlight. At this model new-Moon position, its bright side points mostly away from Earth.",
+          "zh": "月球反射太阳光。在这个模型新月位置，亮面主要背向地球。"
+        },
+        "part": null,
+        "labels": [
+          "sun-body",
+          "moon-body",
+          "earth-body"
+        ],
+        "hide": [
+          "node-line",
+          "scale-ruler"
+        ],
+        "camera": {
+          "position": [
+            -1.7,
+            3,
+            5.5
+          ],
+          "target": [
+            -1.7,
+            0,
+            0
+          ],
+          "fov": 42
+        },
+        "run": false
+      },
+      {
+        "sim": {
+          "set": {
+            "lab": "moon",
+            "elapsed": 0,
+            "year-angle": 0,
+            "lunar-angle": 90,
+            "spin-angle": 180,
+            "obliquity": 0,
+            "lunar-tilt": 0,
+            "node-angle": 0,
+            "observer-lat": 0,
+            "moon-range": 384400,
+            "synchronous": true,
+            "scale-mode": "schematic",
+            "day-index": 1
+          }
+        },
+        "caption": {
+          "en": "From Earth's centre we now see about half the disc illuminated. First quarter names a point in the cycle, not a quarter-lit visible disc.",
+          "zh": "从地心看，现在约半个月盘亮着。“上弦”说的是周期中的位置，不是可见圆盘只有四分之一亮。"
+        },
+        "part": null,
+        "labels": [
+          "moon-body",
+          "light-ray-guide"
+        ],
+        "hide": [
+          "node-line",
+          "scale-ruler"
+        ],
+        "camera": {
+          "position": [
+            -0.25,
+            0.65,
+            1.8
+          ],
+          "target": [
+            -0.25,
+            0,
+            0.2
+          ],
+          "fov": 42
+        },
+        "run": false
+      },
+      {
+        "sim": {
+          "set": {
+            "lab": "moon",
+            "elapsed": 0,
+            "year-angle": 0,
+            "lunar-angle": 180,
+            "spin-angle": 180,
+            "obliquity": 0,
+            "lunar-tilt": 0,
+            "node-angle": 0,
+            "observer-lat": 0,
+            "moon-range": 384400,
+            "synchronous": true,
+            "scale-mode": "schematic",
+            "day-index": 1
+          }
+        },
+        "caption": {
+          "en": "The illuminated side now faces Earth. This is full-Moon geometry; an eclipse can dim it when the bodies are aligned, as this deliberately flat model is.",
+          "zh": "受光面现在朝地球，这是满月的位置关系。若天体恰好排齐，月食还会遮暗它；这个刻意共面的模型正是这种排列。"
+        },
+        "part": null,
+        "labels": [
+          "moon-body",
+          "earth-body"
+        ],
+        "hide": [
+          "node-line",
+          "scale-ruler"
+        ],
+        "camera": {
+          "position": [
+            0.3,
+            0.65,
+            1.6
+          ],
+          "target": [
+            0.3,
+            0,
+            0
+          ],
+          "fov": 46
+        },
+        "run": false
+      },
+      {
+        "sim": {
+          "set": {
+            "lab": "moon",
+            "elapsed": 0,
+            "year-angle": 0,
+            "lunar-angle": 270,
+            "spin-angle": 180,
+            "obliquity": 0,
+            "lunar-tilt": 0,
+            "node-angle": 0,
+            "observer-lat": 0,
+            "moon-range": 384400,
+            "synchronous": true,
+            "scale-mode": "schematic",
+            "day-index": 1
+          }
+        },
+        "caption": {
+          "en": "At last quarter we again see about half illuminated. The Moon is well away from Earth's shadow, so that shadow is not making the phase.",
+          "zh": "下弦时也约半个月盘亮着。月球远离地球影子，说明这个月相不是地影造成的。"
+        },
+        "part": null,
+        "labels": [
+          "moon-body",
+          "light-ray-guide"
+        ],
+        "hide": [
+          "node-line",
+          "scale-ruler"
+        ],
+        "camera": {
+          "position": [
+            -0.25,
+            0.65,
+            1.6
+          ],
+          "target": [
+            -0.25,
+            0,
+            0
+          ],
+          "fov": 42
+        },
+        "run": false
+      },
+      {
+        "sim": {
+          "set": {
+            "lab": "moon",
+            "elapsed": 0,
+            "year-angle": 0,
+            "lunar-angle": 90,
+            "spin-angle": 180,
+            "obliquity": 0,
+            "lunar-tilt": 0,
+            "node-angle": 0,
+            "observer-lat": 0,
+            "moon-range": 384400,
+            "synchronous": false,
+            "scale-mode": "schematic",
+            "day-index": 1
+          }
+        },
+        "caption": {
+          "en": "Keeping one face towards Earth requires the Moon to turn as it orbits. Its far side is not permanently dark.",
+          "zh": "月球一边公转一边自转，才能让近似同一面朝向地球。背面并不是永远黑暗。"
+        },
+        "part": null,
+        "labels": [
+          "moon-body",
+          "near-side-mark"
+        ],
+        "hide": [
+          "node-line",
+          "scale-ruler"
+        ],
+        "camera": {
+          "position": [
+            0.15,
+            0.65,
+            1.6
+          ],
+          "target": [
+            0,
+            0,
+            0.5
+          ],
+          "fov": 42
+        },
+        "run": false
+      }
+    ],
+    "hide": [
+      "node-line",
+      "scale-ruler"
+    ],
+    "part": null,
+    "summary": {
+      "en": "Move one half-lit Moon and compare the changing illuminated part seen from Earth's centre.",
+      "zh": "移动一个受光约一半的月球，比较从地心看见的亮部怎样变化。"
+    }
+  }
+}
+---
+
+<Lang en>
+
+The stage shows a Moon lit on the side facing the Sun. Moonlight is reflected sunlight. Except during an eclipse, about half the lunar sphere receives sunlight; that does not mean Earth always sees a half-bright disc. A <Term id="phase">Moon phase</Term> is the changing shape of the illuminated part we see. <Num s="S5" />
+
+Move the Moon while keeping the Sun's direction fixed. The observation window looks from Earth's centre with north up, even when you turn the main camera. Near new Moon the bright side faces mostly away from Earth. Between the named phases, the visible bright shape changes continuously. This window is not a view from Singapore's horizon. <Num s="S5,S36" />
+
+At first quarter, about half the visible disc is bright, on the right in this north-up view. Full Moon puts the illuminated side towards Earth. At last quarter, about half is bright again, on the left. “Quarter” names a position in the cycle, rather than a quarter-bright disc. <Num s="S5" />
+
+Ordinary phases are not Earth's shadow moving across the Moon. At either quarter, the Moon lies well away from that shadow. This deliberately flat model also shows a different event: at full-Moon alignment, Earth's shadow can dim the Moon. Real orbital tilt prevents an eclipse at most full Moons. <Num s="S5,S6,S40,S36" />
+
+<Figure src="figures/sun-earth-moon-four-phases" alt={{ en: "Four lunar discs in two rows.", zh: "两行排列的四个月盘。" }} caption={{ en: "Four north-up phase views: new, first quarter, full and last quarter. This is not a Singapore horizon chart.", zh: "北朝上的四种月相：新月、上弦、满月、下弦。这不是新加坡地平视图。" }} />
+
+The surface mark makes <Term id="synchronous-rotation">synchronous rotation</Term> visible: the Moon turns as it orbits, keeping nearly the same face towards Earth. Switch synchrony off at the same position to compare its orientation. The far side still receives sunlight; “far” does not mean permanently dark. <Num s="S5,S21,S36" />
+
+<More title={{ en: "The Moon in daylight", zh: "白天的月亮" }}>
+
+The Moon can be visible during daylight. A full Moon rises roughly around sunset, but that is a broad relationship, not a fixed clock-time forecast. This geocentric window supplies neither a local horizon nor a rise-time prediction. <Num s="S5,S36" />
+
+</More>
+
+<More title={{ en: "Two different lunar periods", zh: "两个不同的月球周期" }}>
+
+Relative to distant stars, the Moon completes an orbit in about <Num s="S8">27.32 days</Num>. The average phase cycle is about <Num s="S8">29.53 days</Num>, because Earth and Moon also move around the Sun. The separate Moon experiment freezes that changing solar direction to make phase geometry easier to compare. <Num s="S36" />
+
+</More>
+
+<More title={{ en: "One face, with a small real variation", zh: "同一面并非分毫不变" }}>
+
+Real libration lets us see slightly different portions of the Moon over time; this model omits it. With an adult, walk around a chair while always facing it. Your body must turn as you walk. Then keep facing one wall throughout the circuit to compare an orbit without that turn. <Num s="S21,S36" />
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+舞台上的月球，朝向太阳的一侧受光。月光主要是反射的太阳光；非月食时，月球表面约有一半受光，但从地球看见的亮部未必占半个月盘。随着位置改变，可见亮部呈现不同形状，这就是<Term id="phase">月相</Term>。先分清整个球体的受光范围，再看眼前月盘的形状。<Num s="S5" />
+
+固定太阳方向，移动月球，比较地心观察窗。无论怎样转动主镜头，这个窗口都保持地球北方朝上。新月附近，月球亮面主要背向地球；继续移动，亮部逐渐出现。这是地心视图，并不是从新加坡地面仰望天空的方向图，不能据此判断今晚月亮怎样斜挂。<Num s="S5,S36" />
+
+上弦时约半个月盘亮着，在这个北朝上窗口里是右半边；满月时受光面朝向地球；到了下弦，约半个月盘又亮着，改为左半边。“弦”所指的周期位置，不代表只有四分之一月盘受光。各种名称之间，亮部仍连续变化。<Num s="S5" />
+
+普通月相不是地影造成的。弦月位置远离地影轴，仍然出现半亮月盘。这个刻意共面的模型在满月排齐时，却还会显示地影遮暗月球，那是月食。真实月轨道有倾角，大多数满月不会发生月食；几何亮部与食遮暗要分开读。<Num s="S5,S6,S40,S36" />
+
+<Figure src="figures/sun-earth-moon-four-phases" alt={{ en: "Four lunar discs in two rows.", zh: "两行排列的四个月盘。" }} caption={{ en: "Four north-up phase views: new, first quarter, full and last quarter. This is not a Singapore horizon chart.", zh: "北朝上的四种月相：新月、上弦、满月、下弦。这不是新加坡地平视图。" }} />
+
+月面标记让<Term id="synchronous-rotation">同步自转</Term>看得见：月球一边公转一边自转，才让近似同一面朝地。保持位置不动，关掉同步，比较标记朝向。“背面”只是背向地球的一面，也会受太阳照射，并非永远黑暗。<Num s="S5,S21,S36" />
+
+<More title={{ en: "The Moon in daylight", zh: "白天的月亮" }}>
+
+白天也可能看见月球。满月大致在日落前后升起，但这只是大体关系，不是固定钟点预报。地心观察窗没有本地地平线，不能给出家门口的月出时刻。<Num s="S5,S36" />
+
+</More>
+
+<More title={{ en: "Two different lunar periods", zh: "两个不同的月球周期" }}>
+
+相对恒星，月球公转一周约 <Num s="S8">27.32 天</Num>；平均月相周期约 <Num s="S8">29.53 天</Num>。因为地月系统也绕太阳移动，重回相同月相还需要额外时间。独立的月相实验冻结太阳方向，方便只比较几何关系。<Num s="S36" />
+
+</More>
+
+<More title={{ en: "One face, with a small real variation", zh: "同一面并非分毫不变" }}>
+
+真实月球有天平动，可见范围会略变，本模型省略了它。可在成人陪同下绕椅子走，始终面向椅子，体会身体必须随之转动；再试着一直朝向同一面墙绕圈，比较不随公转转身的情况。<Num s="S21,S36" />
+
+</More>
+
+</Lang>

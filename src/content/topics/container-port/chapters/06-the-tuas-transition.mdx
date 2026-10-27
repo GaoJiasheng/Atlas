@@ -1,0 +1,170 @@
+---
+{
+  "id": "the-tuas-transition",
+  "order": 6,
+  "title": {
+    "en": "The Tuas transition",
+    "zh": "转向大士港口"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "cutaway": "none",
+    "run": false,
+    "pose": "tuas-context",
+    "camera": {
+      "position": [
+        105,
+        85,
+        115
+      ],
+      "target": [
+        0,
+        15,
+        5
+      ],
+      "fov": 34
+    },
+    "layers": [
+      "vessel",
+      "quay-crane",
+      "transfer",
+      "yard"
+    ],
+    "hide": [
+      "onward-ship",
+      "destination-box",
+      "yard-target",
+      "yard-blocker-a",
+      "yard-blocker-b"
+    ],
+    "part": "agv-body",
+    "labels": [
+      "portal",
+      "agv-body",
+      "yard-gantry",
+      "control-room"
+    ],
+    "question": {
+      "en": "Is Tuas Port already fully completed?",
+      "zh": "大士港口已经全部建好了吗？"
+    },
+    "summary": {
+      "en": "Operations and construction proceed in phases; first operation, official opening and ultimate capacity are different milestones.",
+      "zh": "港口分阶段运作和建设；开始作业、正式开港与最终处理能力是不同的事。"
+    },
+    "index": {
+      "parts": [
+        "portal",
+        "agv-body",
+        "yard-gantry",
+        "control-room"
+      ]
+    },
+    "sim": {
+      "set": {
+        "n20": 2,
+        "n40": 1,
+        "lock-confirmed": true,
+        "above": 2,
+        "yard-state": "original",
+        "cranes": 1,
+        "carriers": 1,
+        "yards": 1,
+        "arrivals": 24,
+        "hours": 2,
+        "lift-live": false
+      }
+    },
+    "beats": [
+      {
+        "caption": {
+          "en": "Tanjong Pagar container terminal opened in 1972; the modern port developed through successive stages.",
+          "zh": "丹戎巴葛集装箱码头于1972年启用；现代港口经历了多次发展。"
+        }
+      },
+      {
+        "caption": {
+          "en": "Tuas’s first two berths began operating in December 2021; the official opening followed in September 2022.",
+          "zh": "大士首两个泊位于2021年12月开始作业，2022年9月正式开港。"
+        }
+      },
+      {
+        "part": "control-room",
+        "labels": [
+          "agv-body",
+          "yard-gantry",
+          "control-room"
+        ],
+        "caption": {
+          "en": "AGVs, automated yard cranes and remote management change the work; they do not mean there are no people.",
+          "zh": "自动导引车、自动化场桥和远程管理改变了工作方式，并不等于没有人。"
+        }
+      },
+      {
+        "caption": {
+          "en": "Singapore handled 44.66 million TEU in 2025; Tuas’s planned 65 million TEU a year is for completion in the 2040s.",
+          "zh": "2025年新加坡全港处理4,466万TEU；大士未来6,500万TEU/年是2040年代完工时的规划能力。"
+        }
+      }
+    ]
+  }
+}
+---
+<Lang en>
+
+The machines on the stage remain a generic port study. They help explain work discussed in the Tuas story, but they do not become a surveyed reconstruction when this chapter opens. Container handling in Singapore has developed over time: Tanjong Pagar container terminal opened in <Num s="S27">1972</Num>, long before Tuas began operating.
+
+Tuas’s first <Num s="S5">two berths</Num> began operations in December <Num s="S5">2021</Num>. Its official opening followed on <Num s="S5">1 September 2022</Num>. Beginning operations and holding an official opening are different milestones. Neither means that every planned stage of the port was complete on that date.
+
+Automation changes how work is done. Tuas uses automated guided vehicles, electric automated yard cranes and remote management from a control centre. Select the carrier, yard crane and control room to connect those descriptions to the model. Automatic movement still belongs to a system involving people, planning, maintenance and supervision; the model does not count workers or show that the port is empty of them.
+
+Read the two evidence entries separately. <Term id="throughput">Throughput</Term> is the amount actually handled within a stated time and scope. <Term id="capacity">Capacity</Term> describes what could be handled under the stated conditions. A future capacity for Tuas and a past result for all Singapore describe different things. They must not be joined into a single measured trend or read as a forecast that the real annual total will equal the planned capacity.
+
+| Evidence | Value | Scope |
+|---|---|---|
+| OBSERVED · 2025 | <Num s="S4">44.66 million TEU</Num> | Actual Singapore-wide container throughput in that year |
+| PLANNED · full completion in the 2040s | <Num s="S20">65 million TEU per year</Num> | Tuas ultimate handling capacity, not an observed annual result |
+
+<More title={{ en: "Open and still developing", zh: "已开港，仍在发展" }}>
+
+A large facility can begin working before all its planned stages are built. The Ministry of Transport’s August 2026 account places full Tuas completion in the <Num s="S20">2040s</Num>. This is a target period; our model neither predicts an exact completion date nor animates a guessed future shoreline.
+
+</More>
+
+<More title={{ en: "Automation and people", zh: "自动化与人" }}>
+
+The control-room object stands for remote coordination. It contains no replica of a branded control system or a live terminal feed. The simplified vehicles and crane are function examples, not a claim that every piece of Tuas equipment has the same shape or control arrangement.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+舞台上的机器仍然是通用港口研究，用来说明大士港口故事里的一些工作，并没有因为切到本章，就变成实测复原。新加坡的集装箱搬运经历过多次发展；丹戎巴葛集装箱码头早在 <Num s="S27">1972 年</Num>启用，比大士开始作业早得多。
+
+大士最先投入作业的 <Num s="S5">两个泊位</Num>于 <Num s="S5">2021 年</Num> 12 月开始运作，正式开港则在 <Num s="S5">2022 年 9 月 1 日</Num>。开始作业和举行开港仪式是不同里程碑，都不等于规划中的全部工程在那天已经完成。
+
+自动化改变了工作的方式。大士采用自动导引车、电动自动化场桥，并由控制中心远程管理。选中模型中的车、场桥和控制室，把文字说明与功能接起来。自动移动的背后，仍有计划、维修、管理等工作；模型没有计算工人数量，也没有表示港口里没有人。
+
+下面两项证据要分开读。<Term id="throughput">吞吐量</Term>是在所述时段和范围内实际处理了多少；<Term id="capacity">处理能力</Term>是在所述条件下可处理多少。大士未来的规划，与新加坡全港过去一年的实际结果，时间、范围和类别都不同，不能连成一条实测增长线，也不能当作未来实际年处理量的保证。
+
+| 证据类别 | 数值 | 范围 |
+|---|---|---|
+| OBSERVED · 2025 年 | <Num s="S4">4,466 万 TEU</Num> | 当年新加坡全港实际集装箱吞吐量 |
+| PLANNED · 2040 年代全面完成时 | <Num s="S20">每年 6,500 万 TEU</Num> | 大士最终规划处理能力，不是已经实现的年处理量 |
+
+<More title={{ en: "Open and still developing", zh: "已开港，仍在发展" }}>
+
+大型设施可以先投入作业，再继续建后面的阶段。交通部 2026 年 8 月的说明，把大士全面完成放在 <Num s="S20">2040 年代</Num>。这是目标时段；模型不预测精确完工日，也不画猜测的未来海岸线。
+
+</More>
+
+<More title={{ en: "Automation and people", zh: "自动化与人" }}>
+
+控制室对象代表远程协调，没有复制任何公司的系统，也没有接入真实码头画面。车和起重机都是功能示例，不能据此说大士每台设备都有相同外形或控制方式。
+
+</More>
+
+</Lang>

@@ -528,6 +528,28 @@ URL `b` 从 1 起，store beat 从 0 起；`m` 只接受整数 1…12。优先�
 
 可运行夹具：`sample-climate`（draft、12拍），数据来源/变换哈希见其 `data/SOURCES.md`。人工2×2是测试数据，不能用于正文天气地图。
 
+### 现今地理上下文（E-SEA1–2，docs/54 §4）
+
+`temporalMode: geography` 仅用于 `time-scene / geo`：今天的国形、自然地理对象与按加入日期筛选的成员。复用 `ClimatologyStage` / controller、ClimateLoader、雨格、风箭头、原生采样、KEY、ChapterAxis 与 PRESENT；不创建历史 time model / playhead，`t=null`。`four-taps` 的控制帧/永久路线、`singapore-land-use` 的数值 f/u 层仍属于年代模式，不能拿假日期套静态地理。
+
+```json
+{"temporalMode":"geography","geography":{"asOf":"2026-10-27","geometryEpoch":"Present-day Natural Earth cartographic snapshot","dateRange":["1967-08-07","2026-10-27"],"initialContext":{"kind":"present"}}}
+```
+
+`data/geography.json` 是单份 inline 数据：`countries` 为 Polygon/MultiPolygon FeatureCollection（properties：`id,a3,name:{en,zh},sources,summary?,detail?`）；`layers:[{id,kind:'point'|'line'|'area',label:{en,zh},color:'token:…',features:FeatureCollection}]`，feature properties 为 `id,name,sources,summary?,detail?`；`anchors:[{id,name,at:[lon,lat],sources}]`；`members:[{id,a3,joined:'YYYY-MM-DD',sources}]`；`referenceItems:[{id,label,summary,detail?,sourceIds,locationRef,locationScope:'country',figure?}]`。最后者不能有 `at`，只高亮 country `locationRef`。`figure` 是本章已存在的 HTML id；仅目标在当前阅读正文中可见时显示按钮。国家/成员 id 与 A3 唯一、一一对应，日期真实且不晚于 asOf，坐标/几何、非空双语、source ids、locationRef 均验证。地理数据之外 `presets/sources/glossary` 仍用既有文件；旧 entities/control/movements/events 可省略或显式空，不接受假事件日期。
+
+图层 `geo-countries` 与 `geo-membership` 是内置的，`geo-anchors` 从有来源的 anchor 生成点（已有 point/line feature id 不再生成第二个点）；其余来自 inline `layers`。Mekong 的两条源 feature 可以共用同一 id，索引只列一次、选择时两线同亮。国形装载一次，成员日期只改 GPU filter；成员色为同一 signal token，选择描边与成员填色区分，不计算参与面积/阵营。成员谓词 `joined <= date`（ISO 日），计数按唯一国家；关成员层仍保留真实语义 count，并在 PLATE 显示“图层已关闭”。
+
+章节和每拍用 `geoContext:{kind:'present'} | {kind:'climatology',month:1…12} | {kind:'membership',date:'YYYY-MM-DD'}`，每拍显式 `selection:string|null`，章节 `index:string[]`。其余 `camera/layers/highlight/caption` 沿用。首拍是章节目标，拍按作者顺序走章轴；原子应用 context、camera、layers、highlight、selection。index 可引用国家、线/点、阅读个案、`cell-105-0` 气候格点；全部按钮 ≥44px。P/A 不显示残留月样本，C 不显示成员色；月真值只在 geoContext.month，没有第二个 month store。没有月元数据时拒绝 C 上下文。
+
+URL 保留 `ch,b,cam,layers,theme`；`gc=p|c|a` 必写合法当前 context；C 完整写 `m=1…12`，A 写 `at=YYYY-MM-DD`，P 无 m/at。先选择 ch/b baseline，再整体套有效 context override；无效/缺月或日期恢复该拍 baseline，canonical 删除 t 及冲突参数，写完整合法 context。无 gc 时忽略 m/at。跨 kind 不积累旧字段和旧气候选择；popstate/语言切换沿既有 URL 同步。
+
+月文件可按原 stem 引用已有资源，原字节与数组不复制、不改写。若本主题编号来源与原资源不同，monthlyLayers 可加 `sourceMap:{"S22":"S201","S25":"S20","S101":"S203"}`。共享 loader 和 build validator 只在解析时映射来源元数据，格网/数值原样；map 键必须在资源 sources 中，映射后的来源须与 layer.sources 一致且存在本题书目。无 sourceMap 的月主题行为不变。
+
+UI：左 PLATE 显示现今国形、上下文/日期/成员数，C 显示基准期、850 hPa/原生格距/mm/day（从实际资源元数据读取）；右 TOOLS 旁放月或日期控件，手机阅读中同功能。readerTop 为节拍→选中详情，readerEnd 为本章索引；底部只有章轴。小国家位置标记不放大国土。地图/索引/键盘/API 共享动作；C 的地图点击采样气候，国家仍可从索引选。
+
+测试 API：`engine.geography()` → `{context,geometryHash,countryCount,memberIds,memberCount,selection,visibleLayerIds,climateSample,climatology}`；geometryHash 为固定国形 JSON 的 FNV-1a 稳定校验值（原始来源 SHA-256 另在 provenance），memberIds 按 A3 排序。`setGeoContext(ctx)`、`selectGeography(id|null)`、`goToGeographyBeat(ch,index)`、`toggleGeographyLayer(id,on)` 与 `sampleClimate(lon,lat,month?)` 复用 UI；非 C 的 sampleClimate 返回 null。`ready` 等待 inline 地图 source worker 与开启月层完成。`shoot --beats` 同时记录 context/selection/geometryHash/成员集合、检查月渲染一致与 URL 重开一致。draft 夹具 `sample-geography` 有三国真实数据、8拍，明确不是全区域成员地图。
+
 ### 作者怎么写数据
 
 四个文件放 `data/`（schema 见 docs/03 §A 与 `schema.ts`）：
@@ -694,6 +716,8 @@ end_i   = start_{i+1}；本章最后一拍更晚就取最后一拍（最后一�
 - 段等宽，每段把自己的整个跨度映到自己的宽度上，逐段可逆（拖动用反函数 `invert(px) → { t, segment }`）。刻度被推开的地方时间会"挤"在刻度上（那一小段 x 不变），其余处处精确往返。宽度变化（ResizeObserver）时重算。
 - **章节在时间上会重叠**（某章后几拍晚于下一章的开始，如 ww2 第 08 章的拍到 1943-10，第 09 章从 1942-06 开始），同一时间可能在两段里。播放头带一个**锚**（`Anchor { segment, tick? }`，`View.tsx` 维护）：换章 / 套用拍时 = 那一章的段（和那一拍），拖动时 = 指针所在的段；`x(t, anchor)` 优先画在锚的段里（时间恰好是锚定拍的时间就画在那个刻度上），锚的段不含这个时间才退回默认。默认（关键帧菱形、泳道、参与卡的条带）= 第一个跨度含 `t` 的段；默认映射对时间单调。
 - 用同一映射的：段、刻度、关键帧菱形、播放头、拖动（反函数）、泳道、参与卡（同一组段套在卡片自己的宽度上，当前章那段淡 signal 底）。参与卡的时间轴刻度仍是真实日期（`ruleTicks` + `thinTicks`，`lib/ticks.ts`），经映射落位。
+
+可选 `views.hudFrame: { "parts": ["earth-body", "moon-body", "sun-body"] }` 启用实际 HUD 自由区取景（默认关闭，既有主题镜头保持原行为）。仅列需要保住的真实可选主体；作者镜头完全排除的对象不被重新拉入近景。舞台测量当前标题、PLATE、观察卡、抽屉/章节轴等可见 `data-hud-panel`，右侧 overlay 按实际卡片测量；在已有宽高比后拉之上，保持视线方向与 fov，按各对象深度求最小后拉及横/纵平移，使包围盒落入留有 12 px 间隔的自由矩形。尺寸、卡片折叠、HUD/演示切换会重算，始终从作者镜头出发；拖拽后交还自由相机。适用边界：自由矩形必须非空，故意出画的对象不强行收入。纯函数及透视投影回算见 `tests/space-scene/hud-framing.test.ts`，浏览器验收仍需单独执行。
 
 ### HUD 控件与内容（docs/08 §2、§3）
 
@@ -1138,7 +1162,7 @@ docs/22 §4.3（E-SIM 核心，磁铁与电路共用）+ docs/23 §4（电路模
 
 ```jsonc
 "sim": {
-  "kind": "circuit",                                   // circuit | magnet | force | energy | life-cycle | matter | light | sort | materials | table | seeds：lib/sim/<kind>.ts（life-cycle → lifecycle.ts）
+  "kind": "circuit",                                   // circuit | magnet | force | energy | life-cycle | matter | light | sort | materials | table | seeds | port：lib/sim/<kind>.ts（life-cycle → lifecycle.ts）
   "controls": [                                        // ≤ 16，id 全主题的 sim 里唯一
     { "id": "main", "kind": "toggle", "default": true, "label": {en, zh} },
     { "id": "cells", "kind": "step", "values": [1, 2, 3], "default": 2, "label": {en, zh}, "unit"?: "cm" },
@@ -1369,7 +1393,7 @@ interface Timeline {
 ```
 
 - `force` ∈ `gravity` / `friction` / `elastic` / `push` / `magnetic` → token `--f-gravity` / `--f-friction` / `--f-elastic` / `--f-push` / `--pole-n`（docs/08 §1）；KEY 名称"Gravitational force / 重力""Frictional force / 摩擦力""Elastic spring force / 弹簧的弹力""Push or pull / 推力或拉力""Magnetic force / 磁力"（`lib/sim/arrows.ts`）。
-- `value`：一个数、一个数输出（缓动）、或时间线输出的 `channel`（跟着播放走）；负值反向。长度 = `per`（默认 0.03 m / N）× 牛顿，≤ `max`（默认 0.25）；粗细与箭头按 `per` 缩放；< 0.05 N 淡出。起点 = 零件包围盒的中心 / 顶 / 底（`at`）+ `offset`，跟着零件的姿态、offset、`play` 走（读标注锚点）。方向随选项变时写几支带 `when` 的箭头（推的方向）。
+- `value`：一个数、一个数输出（缓动）、或时间线输出的 `channel`（跟着播放走）；负值反向。长度 = `per`（默认 0.03 m / N）× 牛顿，≤ `max`（默认 0.25）；粗细与箭头按 `per` 缩放（不小于 `max` 的 0.16，`vectorScale`），可选 `width`（场景单位）直接给粗细尺度（bones-and-joints 用 0.06，配 0.001 m / N）；< 0.05 N 淡出。起点 = 零件包围盒的中心 / 顶 / 底（`at`）+ `offset`，跟着零件的姿态、offset、`play` 走（读标注锚点）。方向随选项变时写几支带 `when` 的箭头（推的方向）。
 - 一个叠加的全部箭头 = 一个网格（顶点色带透明度），**一次绘制**；零件不在场、`when` 不成立、`group` 的图层关着、EXPLODED 时淡出。`group`：一个没有零件的组（LAYERS 一行"Forces / 力"，章 / 拍的 `layers` 照常控制它）。
 - **KEY**：控制面板的图例自动加上此刻画着的力（箭头的零件在场、`when` 成立、图层开着、时间线在整段里有一处 ≥ 0.05 N 或数 ≥ 0.05 N；`forcesOnShow`）。
 - validate：零件存在、方向非零、数输出 / 时间线通道存在、`when` 的控件或输出存在、`group` 存在；**被 `play` 转动的零件（车轮）不能画摩擦力箭头**（课纲 Note：滚动物体的摩擦方向不要求，docs/30 D3）。
@@ -1750,6 +1774,20 @@ docs/40 §4.2 E-HL1。`sim.kind: "table"`：模型不算，只**按控件查有�
 - **validate**（`tableIssues`，parts 文件解析时）：`keys` 是控件、不重复；行的 `when` 恰好写全 `keys`、值合法；每个实验对 `keys` 的全部值组合**恰好一行**（列出缺的、重的）；`set` 的键是输出、种类对得上（数 / `{ value, decimals }` 给数输出，带标签的状态 id 给状态输出）；同一实验每行设定同一组输出；一个输出只属于一个实验；输出不写 `from`、只能是数或状态；`count` 绑定的零件 `repeat.count` ≥ 该输出在表里的最大份数（按 `count` 的取整），否则报"not enough balls"；先猜后看的 `change` 只改 `observe` 所在实验的 `keys`（`tablePredictIssues`，章节校验）。**来源**（`tableSourceIssues`，`pnpm validate` 对照 `data/sources.json`）：每个 `S#` 都在；设定 `sim` 数输出的行至少引一条 `design: true` 的来源（`sources.json` 新的可选字段：主题自己的设计研究；`SOURCES.md` 标注 design study），设定 `typical` 数输出的行至少引一条不是设计研究的来源；只设定状态的行引什么都行。
 - **测试 API**：`__atlas.engine.sim()` 照旧，表模型多一个 `sources`：`{ <typical 输出>: [S#…] }`（此刻那一行的来源）；`copies(partId)`：`count` 绑定此刻画出的份数。
 
+### SpaceScene · 数字到骨架关节（joint binding）
+
+docs/57 §4 E-BJ2；可运行草稿 `sample-joint` 复用 `muscles-arms.glb` 和19关节rig，数字来自24行 `table`，不加sim kind。`sim.bind`另一个互斥target：
+
+```json
+{ "output": "angle", "joint": "elbow.l", "movement": "flexion", "angle": { "per": 1, "origin": 0 }, "when": { "control": "mode", "is": { "eq": "lever" } } }
+```
+
+- `control`数值step或`output`数输出恰写一个；`joint`是 `rig.joints` 对象的确切key，`movement`必须直接声明在该关节的`axes`里。无动作按钮的关节回退、无自动镜像。右侧需显式另写绑定。
+- 角度 `(value-origin)*per`；`per`默认1且有限非零，`origin`默认0且有限。step全部选项、table全部对应数格校验有限且在[-180,180]°；其它solver的运行值同样检查。NaN、无穷、越界或非数值不产生override，不把无效值当0°。当前rig无单独的角度边界字段；这不是临床ROM。
+- 可选`when`同`play.when`：`control`或`output`恰写一个，`is`为`true`或`eq/ne/in/gte/lte`条件。条件不成立即撤销override，恢复章/拍pose。table仍在内部求值；是否展示卡片由章节控制。相同joint+movement重复绑定报错，即使guard不同；一个joint可分别覆盖不同movement。相同joint已有sequence动画时拒绝再加数字绑定，避免两个驱动争用。
+- `simEffects.joints`按movement覆盖章/拍pose或exercise的相应字段，保留其它movement、其它joint和contraction。共用MotionDriver、父链、local axis与蒙皮；不对part再转一次。普通控件变更或撤销override用0.5秒缓动；URL初载与reduced-motion瞬到目标。章节清空上章sim.set，作者应给普通章`mode: explore`基线。
+- `spaceChapterIssues`检查章/拍中active绑定与exercise key是否争用同一joint；该组合报错。测试：`tests/space-scene/joint-binding.test.ts`；浏览器声明 `tests-e2e/sample-joint.spec.ts`。QA `__atlas.engine.joint(name)`读实际骨架的 `{ angles, position, quaternion }`（world origin/world quaternion），不存在的关节返回null；用于比较命名pose与数字绑定的深链末端，不是仅返回控件值。
+
 ### SpaceScene · 可选食物网卡（sim.foodWeb，E-MW2）
 
 docs/53 §4。`sim.kind:"table"` 可以加 **`sim.foodWeb`**（与 `sim.table` 并列，不在 table 内）。这是有向图的显示数据，没有新的 solver、sim kind、输出种类、binding、URL、时钟、快捷键或测试 API。`sort` 只做特征分类；table 足够列出有限的移走/观察/潮位组合；普通 PartChainCard 是无方向的结构连接，不能表达食物→消费者。运行时 `foodWebModel` 只读已有 table 输出，不遍历或重新求图；内容生成器在构建时自行算路径并生成有来源的 table 行。
@@ -1848,7 +1886,7 @@ docs/40 §4.4 E-HL3。流的可选字段：
 
 ### SpaceScene · 试一试 · 太阳、地球与月球（orbit-rotation）
 
-`docs/44 §4` 的 E-SEM1–3。完整可解析模板是 `src/content/topics/sample-orbit/data/parts.json`（draft，13 controls、23 outputs、13 selectable parts、2 overlays）；8 章 / 39 拍覆盖三种观察窗、真尺度、离交点、偏食、环食、全月食。这里只施工引擎夹具，未创建正式 `sun-earth-moon` 内容。
+`docs/44 §4` 的 E-SEM1–3。完整可解析模板是 `src/content/topics/sample-orbit/data/parts.json`（draft，13 controls、23 outputs、13 selectable parts、2 overlays）；8 章 / 39 拍覆盖三种观察窗、真尺度、离交点、偏食、环食、全月食。正式发布内容见 `src/content/topics/sun-earth-moon/`；实际相机使用 lab 坐标系的显式数字，跨实验不要把同名预设误当成自动跟随天体的坐标变换。
 
 注册：`SIM_KINDS` → `simSchema.orbitRotation`（`orbit-rotation-schema.ts`）→ `simQuantities` / `evaluateSim`（`lib/sim/orbit-rotation.ts`）→ `quantityKind` / `ORBIT_STATES`（`orbit-constants.ts`）→ `SEPARATE_EXPERIMENTS['orbit-rotation']=true`。没有 timeline channels；`evaluateSim(sim, values, observe, frames, parts, {timeSeconds})` 在原五参数末尾增加可选 context，旧模型不读它。未知输出和种类不符都报错，不依赖缺量回退。
 
@@ -1878,9 +1916,9 @@ docs/40 §4.4 E-HL3。流的可选字段：
 ]
 ```
 
-这些是 `sim.bind` 项。天体、轴、赤道与标记都使用父体半径为1的局部几何。`surface` 要非零 direction、正 factor≤1.1；`centre` 不写 direction / factor；observer 只能 centre，用地球显示半径安放。绝对位置已包含 parent。`body-frame` 是32个固定点键 `earth.xKm`、`earth.qw`、`earth.radiusKm` 等；`solar-directions` 是6个 `earth.x/y/z`、`moon.x/y/z` 键。向量由求解器产生，不是作者输入。非单位四元数 / 缺键检查见 `validateBodyFrame`。
+这些是 `sim.bind` 项。`bodyTransform.labelPoint` 可选，指定附件局部几何内的标注点；跟随同一四元数与几何缩放，不移动模型或 bounds。例如地轴 `[0,1.35,0]` 指向轴端。天体、轴、赤道与标记都使用父体半径为1的局部几何。`surface` 要非零 direction、正 factor≤1.1；`centre` 不写 direction / factor；observer 只能 centre，用地球显示半径安放。绝对位置已包含 parent。`body-frame` 是32个固定点键 `earth.xKm`、`earth.qw`、`earth.radiusKm` 等；`solar-directions` 是6个 `earth.x/y/z`、`moon.x/y/z` 键。向量由求解器产生，不是作者输入。非单位四元数 / 缺键检查见 `validateBodyFrame`。
 
-`bodyTransform` 与 guide writer 的零件禁止重复写变换、pose、动画、explode、offset、rotate、shift、place 或 play；普通显隐和 selection 保持原行为。`OrbitDriver` 更新既有可选 mesh，guide primitive 在首帧由同一节点的动态几何替换，不画第二份锚点。轨道128段；零倾角不画交线，并写“平面重合”。Earth / Moon 的解析太阳明暗覆盖棚灯输出，暗侧填光≤0.05；太阳自发光，不投假点光源影子。所有颜色取已有双主题 token。
+`bodyTransform` 与 guide writer 的零件禁止重复写变换、pose、动画、explode、offset、rotate、shift、place 或 play；普通显隐和 selection 保持原行为。`OrbitDriver` 更新既有可选 mesh，guide primitive 在首帧由同一节点的动态几何替换，不画第二份锚点。可选 orbit-guides `radius` 为地球显示半径的管半径比例（未写保留 0.012），`labelAnchors: "strokes"` 将平面/地球轨道标注锚在法线端/轨道采样点（未写保留 bounds 中心）。`orbitRotation.panel.shadowNote` 可选双语卡内说明，均默认不影响已有主题。轨道128段；零倾角不画交线，并写“平面重合”。Earth / Moon 的解析太阳明暗覆盖棚灯输出，暗侧填光≤0.05；太阳自发光，不投假点光源影子。所有颜色取已有双主题 token。
 
 ```json
 [
@@ -1988,6 +2026,8 @@ state:
 `pnpm validate` 核对 `index.parts` 是零件（不是 context）、`index.exercises` 在 `training.json` 里。
 
 章节目标照常累积（`labels`、`hide`、`pose`、`ghost`、`exercise`、`highlight`、`sites` 不累积，只看本章；这三项肌肉主题字段在章 state 与拍里写法相同）。**镜头规则**（`lib/camera.ts transitionCamera`，有单测；CameraRig 订阅 store，transition 一发出就按顺序处理，所以同一 tick 里先 `setPreset` 再 `setMode`（snap）也落在预设镜头上，截图脚本不需要延时）：切章 / 首次加载 / URL：本章自己写了 `camera`（或 URL `cam=` 与本章基线不同）就用它；否则 `views[当前 view].camera`；都没有就沿用。**预设（VIEW 按钮 / 数字键）永远落在该预设的镜头上**（P1 遗留问题：本章没有自己镜头时，基线是继承来的，曾被误判成"非显式"而飞去视图预设；已修）。模式切换（X / E / C / F）不动镜头。较窄的舞台（宽高比 < 1.6：HUD 占去两侧的桌面、平板、竖屏手机）自动把镜头往后拉（手机竖屏、宽高比 < 0.8 时 HUD 叠在上面，模型独占整宽，拉回量渐减到一半），回写 URL 时换算回来，链接与设备无关。**封面镜头**：演示以外隐藏 HUD（H、`pnpm shoot` 的 `hero-clean`）时 0.8 s 飞到 `views.cover`；没写就沿当前视线方向重新取景，让模型包围球占舞台宽 75 %（宽屏上最多超出高度 30 %，`fitSphereCamera`），舞台尺寸变了再重算；显示 HUD 时 0.8 s 飞回离开时的镜头——中间换过章、按过预设或拖过镜头就不飞回。章节镜头按带 HUD 的舞台取景：模型放在 HUD 块之间的空带里（1600×900 约 590 × 680 px），给引线标注留位置；封面镜头按满屏取景（模型约占宽 70 %）。
+
+可选 `views.hudFrame: { "parts": ["earth-body", "moon-body", "sun-body"] }` 启用实际 HUD 自由区取景（默认关闭，既有主题镜头保持原行为）。仅列需要保住的真实可选主体；作者镜头完全排除的对象不被重新拉入近景。舞台测量当前标题、PLATE、观察卡、抽屉/章节轴等可见 `data-hud-panel`，右侧 overlay 按实际卡片测量；在已有宽高比后拉之上，保持视线方向与 fov，按各对象深度求最小后拉及横/纵平移，使包围盒落入留有 12 px 间隔的自由矩形。尺寸、卡片折叠、HUD/演示切换会重算，始终从作者镜头出发；拖拽后交还自由相机。适用边界：自由矩形必须非空，故意出画的对象不强行收入。纯函数及透视投影回算见 `tests/space-scene/hud-framing.test.ts`，浏览器验收仍需单独执行。
 
 ### HUD 控件与内容（docs/08 §2、§3）
 
@@ -2382,6 +2422,10 @@ pnpm tsx scripts/geo/lib/check.ts --topic ww2         # MapLibre（Playwright）
 
 测试使用 `__atlas.engine.selectCatalogue(id|null):boolean`（隐藏对象或演示中返回false）、`catalogueState():{pick,layers:{[id]:{status,visible}},indexCount,renderedRows,selectedScreen}`；layers只报告已请求或当前开启的目录层，status为loading/ready/error，selectedScreen为选中锚点的视口CSS坐标或null。既有stats().datedLayers增加可选mode/sourceUpdates，sourceUpdates初次提交为1；跨时间边界才setFilter。`sample-science-layers`保持draft，合成数据不能作为科学来源；专用unit/e2e与shoot目录选中截图用于验收。
 
+#### orbit-rotation 内容补记（2026-10-27）
+
+正式 `sun-earth-moon` 复用夹具的13控件/23输出/9绑定/2 overlays，加入正文、出处与逐拍验收。`orbital-plane` 的既有 guide 几何补上法线及地轴倾角弧（`orbitalTiltGuide`），弧与法线从同一物理 axis 生成，零倾角时弧退化到法线；不另建可选对象。无普通 orbit 输出显隐绑定，因此保留 §9.2 运行中普通绑定的已知边界。浏览器验收由主会话执行，见主题 REVIEW.md。
+
 ### TimeScene · 深时重建与现代证据（E-DE1–E-DE3）
 
 `topic.basemap.reconstruction: { file, selection: hold-older }` 选择独立的重建主图分支，与 `local` / `region` 互斥。`file` 指向 `public/geo/<stem>.json` 的严格清单，帧按 Ma 从大到小排列，每帧为单对象 TopoJSON（对象名等于 stem）。`land` / `unavailable` 是面，`coast` 是线；属性明确 `modelId` 和 `frameMa`。构建加载器 `deep-time-build.ts` 实读并校验清单、每帧、sources、空 control 帧和现代子文件，将元数据 / 现代证据组成 `geo.deepTime`；古地图几何仍按需本地加载。客户端仅 `import type` 引用构建 schema，纯筛选函数在 `lib/deepTime.ts`。
@@ -2445,3 +2489,55 @@ docs/45 §4 E-AF1–5。`kind:"airfoil"`；严格数据 `airfoil-schema.ts`，�
 force-vectors 增加 lift/drag/thrust（KEY：Lift/升力、Drag/阻力、Thrust/推力），token `f-lift/f-drag/f-thrust` 两主题均≥3:1。仍用固定世界 dir、value、when、负值反向和合批；无 frame 字段。离散 bank pose 要 duration0，并把升力 dir 写 `[0,0.9396926208,-0.3420201433]`，重力 `[0,-1,0]`；不显示水平推阻。
 
 QA：`engine.airfoil()` 提供当前标量、fieldReady/version/inputKey、路径状态、压力数、pulseTime、实际画出的箭头方向、曲线与记录签名；`airfoilProbe({x,y})` 对已旋转弦坐标求值（无可用场则 unavailable/null），`airfoilSamples()` 仅 dev/本机测试 host 返回新副本。`ready` 只保证舞台，还要等 airfoil.fieldReady 且 inputKey 当前；`shoot --beats` 检查拍及拍链接的输入、Cl/L、场、图中点一致性。浏览器验收见 `tests-e2e/sample-airfoil.spec.ts`；专用端口 `ATLAS_E2E_PORT=5406`。
+### SpaceScene · 两锚点直绳 `span`（docs/62 E-CP2）
+
+`sim.bind` 中独立的几何分支，不给 `control` / `output`。用于一个 Y 轴、原高 1 的 cylinder，圆柱半径保留，端点之间变长；不求垂缆、张力、碰撞或滑轮倍率。
+
+```json
+{ "part": "rope-a", "span": {
+  "from": { "part": "trolley", "point": [-2.6, 0, -1] },
+  "to": { "part": "spreader", "point": [-2.6, 0.3, -1] },
+  "minLength": 0.001
+} }
+```
+
+`point` 是相对被引用零件主 `primitive.at` 的未变换局部坐标。PartNode 帧结束写 `attachmentMatrix`（pose → offset/rotate → play → shift → animation）；全部零件完成后，SpanDriver 同帧读取两端矩阵，将单位圆柱的局部 −Y/+Y 端放到 from/to，更新中心、朝向、Y 长度和引线/组包围盒。目标绳不再叠自己的 pose、play、shift 或 explode。端点因 hide / group 不可见，或间距不足 `minLength` 时绳隐藏；恢复显示与 REFERENCE、reduced-motion、静止终态仍走相同的无时钟几何通道。
+
+校验在 `span-schema.ts` 的 `spanIssues` 和 `partsFile` 边界：全题 ≤16、每目标一条；单目标非 context 圆柱，无 extra、repeat、bilateral、旋转/缩放/镜像；高度恰为 1。引用必须存在并有主 primitive，不能自引用、依赖另一个 span（因此不能成环）或指向 repeat；目标不得有其它绑定、动画、命名 pose 或 mechanism 驱动。`minLength` 必须为有限正数，默认 0.001；锚点必须有限。
+
+纯几何 `lib/span.ts`、渲染 `stages/model3d/{SpanDriver,spanRuntime}`；不增加 primitive、动画钟或 UI。QA：`__atlas.engine.span(id)` 返回 `{ from, to, centre, length, shown, matrix }`（米；matrix 为圆柱局部 → 模型坐标，列主序），无此绑定返回 null；`anchor(id)` 跟随新中心。单测 `tests/space-scene/span.test.ts` 覆盖 3-4-5 斜绳、端点方向/半径、36.809/21.809/44.809 m、零长隐藏、同帧变换与可见性传播、动态包围盒和内容拒绝。草稿 `sample-port` 与正式 `container-port` 共用此绑定。
+
+### SpaceScene · 试一试 · 港口（port）
+
+`docs/62 §4.2–4.3`（E-CP1）。`sim.kind: "port"` 是四个相互独立的教学实验：箱数/TEU、一次有限吊运、目标箱上方阻挡箱的移开，以及连续流工序能力。注册 `SIM_KINDS` → `simQuantities` / `evaluateSim` → `quantityKind`；`SEPARATE_EXPERIMENTS.port = true`，PLATE 块尾只写本章观察的状态。纯函数 `lib/sim/port.ts`，严格数据与交叉校验 `port-schema.ts`；`scripts/validate-content.ts` 另做 `portSourceIssues`，引用中至少一条必须是 `design:true`。没有真实排队、吊摆、碰撞、港口遥测或质量模型。完整可复制模板是 `src/content/topics/sample-port/data/parts.json`，单测 `tests/space-scene/port.test.ts`，浏览器契约 `tests-e2e/sample-port.spec.ts`。
+
+```json
+"port": {
+  "count": { "n20": "n20", "n40": "n40" },
+  "lift": {
+    "enabled": "lock-confirmed",
+    "workingPart": "working-box", "spreaderPart": "spreader", "trolleyPart": "trolley",
+    "source": [0,11.2955,-18], "destination": [0,3.2955,10],
+    "boxHeight": 2.591, "spreaderDepth": 0.6, "clearBottomY": 25,
+    "knots": { "lock":4, "raised":12, "crossed":20, "landed":28, "released":30, "finished":32 }, "slow":1
+  },
+  "yard": {
+    "above":"above", "state":"yard-state", "target":"yard-target",
+    "blockers":["yard-blocker-a","yard-blocker-b"], "pitch":2.591,
+    "park":[[28,1.2955,40],[38,1.2955,40]], "retrieved":[18,1.2955,50]
+  },
+  "capacity": {
+    "cranes":"cranes", "carriers":"carriers", "yards":"yards", "arrivals":"arrivals", "hours":"hours",
+    "rate":{"crane":30,"carrier":24,"yard":18}
+  },
+  "source":["S1"]
+}
+```
+
+- **控件（11）**：`n20,n40` 为非负整数 step，模板 `[0,1,2,3,4]`；`lock-confirmed` 为 toggle；`above` 为 0–2 整数 step；`yard-state` 的 choice 选项恰为 `original|cleared|retrieved`；`cranes,carriers,yards` 为≥1整数 step；`arrivals` 为非负 step（箱/小时）；`hours` 为正 step；`lift-live` 是只给 play 的条件开关，不参与模型。模板默认 2/1 箱、锁确认 true、above2、original、1/1/1资源、到达24、2小时、live true。
+- **输出（15）**：`boxes=n20+n40`、`teu=n20+2*n40`；`lift-status` 状态恰为 `lock-not-confirmed|ready`；`lift-run` 为 timeline；`yard-slots` 为向量；`rehandles=above`、`retrieval-lifts=above+1`；`crane-rate,carrier-rate,yard-rate`=资源数×相应 rate；`capacity-rate`=三工序最小值；`completed=min(arrivals,capacity-rate)*hours`；`queue-growth=max(0,arrivals-capacity-rate)`；`queued=queue-growth*hours`；`bottleneck` 状态恰为 `crane|carrier|yard|tied`，多个工序同时最小时 tied。数量单位分别 boxes/TEU/moves/boxes/h；混箱计数不参与工序能力。
+- **吊运**：`simTimelineChannels` 只登记 `lift-run` 的 `trolley-dz,spreader-dy,cargo-dy,cargo-dz,lock-deg`。按 knots 线性采样，每通道7点、包含0和finished；未锁确认时 duration0、每通道只有 `[0,0]`。几何与 enabled 构成 `port-lift:<enabled>:<hash>` key，计数/能力/live不会重启过程。source和destination须同X（这里只有Y/Z通道），source等于工作箱主primitive.at；起点吊具中心应为 sourceY+boxHeight/2+spreaderDepth/2。终点箱落稳、解锁后，只有吊具再次升高；状态 `ready` 不表示播放进度。
+- **快照与回放**：命名 pose 自行写所有相关零件的位移，快照拍 `sim.set.lift-live:false`；重放拍清 pose、设true。所有 lift play 绑定都带 `when:{control:"lift-live",is:true}`，避免 pose与timeline叠加。`try.replay:["lift-run"]`、G、URL、减少动态和初始终态沿用共用机制，不加动画时钟或seek拍字段。QA用 `engine.simSeek("lift-run",t)`；`engine.sim().timeline`读实际播放头。
+- **堆场**：求值须传已有 `evaluateSim` 的 parts 参数；`evaluateSimOnStage` 已如此传入。`yard-slots` 的键为 `<part>:x/y/z/shown`，相对各主primitive.at；原状保持静止，cleared/retrieved把存在的阻挡箱移到park，retrieved另把target移到retrieved。超出above的阻挡箱shown0，目标始终为底层。绑定 `{output:"yard-slots",part:[...],shift:{ease:0,lift:0}}`；不把直线位移当作安全吊运路径。QA继续读 `engine.shift(id)`。
+- **校验**：严格字段/有限数/正尺寸与slow≥1；控件类型、合法默认值与范围；目标/阻挡箱互异、非context primitive；clearBottomY清过起终点箱顶、trolley原点高于最高吊具顶、knots严格递增；lift起终点位于模型静止包络。输出只允许上述15种，kind与全部状态标签须准确；count的repeat数量须覆盖该控制值。现有绑定/pose引用校验保留。source id沿用现有 `S1` 格式（prep文献 `S01` 映射 `S1`）。
+- **镜头远平面**：舞台相机 far 默认 200 m；模型半径大到轨道最远距离超过它时（港口约 100 m 的岸桥），`CameraRig` 按 `farPlane(radius)`（`lib/camera.ts`：`max(200, 20 × 0.9R + 2R)`）抬高，否则窄屏 / 竖屏下相机退远后整座模型被裁掉。展品尺度的主题仍是 200，不受影响。

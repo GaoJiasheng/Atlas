@@ -1,0 +1,171 @@
+---
+{
+  "id": "before-you-start",
+  "order": 0,
+  "title": {
+    "en": "A box passing through",
+    "zh": "经过港口的一只箱"
+  },
+  "kind": "background",
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "cutaway": "none",
+    "run": false,
+    "pose": "port-source",
+    "camera": {
+      "position": [
+        105,
+        85,
+        115
+      ],
+      "target": [
+        0,
+        15,
+        5
+      ],
+      "fov": 34
+    },
+    "layers": [
+      "vessel",
+      "quay-crane",
+      "transfer",
+      "yard",
+      "trace"
+    ],
+    "hide": [
+      "sample-20",
+      "sample-40",
+      "onward-ship",
+      "destination-box",
+      "yard-target",
+      "yard-blocker-a",
+      "yard-blocker-b"
+    ],
+    "part": "working-box",
+    "labels": [
+      "working-box",
+      "ship-hull",
+      "portal",
+      "agv-body",
+      "yard-gantry"
+    ],
+    "question": {
+      "en": "Will this box stay in Singapore?",
+      "zh": "这只箱子会留在新加坡吗？"
+    },
+    "summary": {
+      "en": "A box can change ships here; the port joins several handling jobs.",
+      "zh": "一只箱子可以在这里换船，港口把几种搬运工作接起来。"
+    },
+    "index": {
+      "parts": [
+        "working-box",
+        "ship-hull",
+        "portal",
+        "agv-body",
+        "yard-gantry"
+      ]
+    },
+    "sim": {
+      "set": {
+        "n20": 2,
+        "n40": 1,
+        "lock-confirmed": true,
+        "above": 2,
+        "yard-state": "original",
+        "cranes": 1,
+        "carriers": 1,
+        "yards": 1,
+        "arrivals": 24,
+        "hours": 2,
+        "lift-live": false
+      }
+    },
+    "beats": [
+      {
+        "part": "working-box",
+        "caption": {
+          "en": "Follow this one box; the next views keep its identity.",
+          "zh": "先看这一只箱子；接下来的画面保持它的身份。"
+        }
+      },
+      {
+        "labels": [
+          "ship-hull",
+          "portal",
+          "agv-body",
+          "yard-gantry"
+        ],
+        "caption": {
+          "en": "The ship, quay crane, carrier and yard each handle a different part of the transfer.",
+          "zh": "船、岸桥、运输车和堆场分别完成不同的一段工作。"
+        }
+      },
+      {
+        "part": "ship-hull",
+        "caption": {
+          "en": "The ship is large, but size or heaviness alone cannot tell us whether an object floats.",
+          "zh": "船很大，但“大”或“重”本身不足以判断一个物体会不会浮。"
+        }
+      },
+      {
+        "labels": [
+          "working-box"
+        ],
+        "caption": {
+          "en": "This is a generic port model; it is not a surveyed plan of Tuas Port.",
+          "zh": "这是通用港口模型；它不表示大士港的实测平面布局。"
+        }
+      }
+    ]
+  }
+}
+---
+<Lang en>
+
+Start with the box on the ship. A <Term id="container">container</Term> is a freight box that can pass between different stages of a journey. Here it will leave the ship, cross the <Term id="quay">quay</Term> and reach a <Term id="yard">yard</Term>, where boxes can wait between handling jobs. The same box keeps the same identity as its position changes.
+
+Each machine does part of the job. The tall <Term id="quay-crane">quay crane</Term> reaches out over the vessel. Its lifting equipment brings the box up and across to a low carrier. The carrier handles horizontal transport on land. A yard crane can lift the box into or out of a stack. Select these objects in the chapter index to follow the connections.
+
+The journey can continue by sea. A box may wait in the yard and then join another ship for another destination. This is <Term id="transhipment">transhipment</Term>. Other cargo is delivered locally. Seeing a box unloaded in Singapore does not tell us which of these journeys it will make.
+
+This is a generic teaching model, with compressed distances so that the jobs can be seen together. It is not a plan of Tuas Port. The container proportions, the model’s handling steps and the real port’s dated statistics have different sources. As you move through the chapters, keep asking what the picture shows and what evidence supports the claim.
+
+<More title={{ en: "What this model leaves out", zh: "模型省略了什么" }}>
+
+The ship and quay are schematic. The model omits tides, waves, cargo planning, inspections and detailed machinery. Its timings and resource rates are labelled SIM. They are selected teaching values, not recorded terminal performance. The regional coastline in chapter 5 uses a separate real geographical dataset.
+
+</More>
+
+<More title={{ en: "A prediction about floating", zh: "关于浮沉的预测" }}>
+
+Would a large object always sink, or a heavy one? Size or heaviness alone cannot decide. Studies of floating-and-sinking judgements motivate this prediction, but do not supply a Singapore classroom percentage. This diorama does not calculate flotation. Explore the different materials in <TopicLink slug="materials">Materials Around Us</TopicLink>.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+先看船上的这只<Term id="container">集装箱</Term>。这种货物箱可以在不同运输环节之间搬运，不必每换一种运输方式就把货物散开重装。在这里，箱子将离开船，经过<Term id="quay">码头岸壁</Term>，再到<Term id="yard">堆场</Term>暂存。位置虽然改变，我们追踪的始终是同一只箱子。
+
+每种机器负责其中一段。高大的<Term id="quay-crane">岸桥</Term>把臂架伸到船上方，用起吊设备把箱子抬高、移到岸上的低平运输车。运输车负责陆上的水平搬运；到了堆场，场桥再把箱子放入箱堆或从箱堆取出。从本章索引选中这些对象，就能逐段看它们怎样接上。
+
+接下来的旅程也可能仍在海上。箱子可以暂放堆场，再装上另一条船，前往别的目的地。这叫<Term id="transhipment">转运</Term>。另一些货物则在本地交付。所以，看见箱子在新加坡卸下，还不能判断里面的货物是不是送给新加坡的。
+
+这是一个通用教学模型，把距离压缩，方便同时看见几种工作，不是大士港口的平面图。箱子的比例、模型中的搬运步骤、真实港口按年份公布的统计，各有自己的依据。接着阅读时，可以一边看画面，一边分清哪些是模型选择，哪些是实际记录。
+
+<More title={{ en: "What this model leaves out", zh: "模型省略了什么" }}>
+
+船和岸壁的位置是示意的，潮汐、波浪、配载计划、检查和复杂机械都省略了。时间和设备处理率标为 SIM，是教学选择，不是码头实测成绩。第 5 章的区域海岸图另用真实地理数据。
+
+</More>
+
+<More title={{ en: "A prediction about floating", zh: "关于浮沉的预测" }}>
+
+大的物体一定下沉吗？重的呢？只知道“大”或“重”还不能判断。有关浮沉判断的研究帮助设计这个预测，但不能据此说新加坡有多少学生这样想。本场景不计算浮力；可到<TopicLink slug="materials">身边的材料</TopicLink>比较不同材料。
+
+</More>
+
+</Lang>

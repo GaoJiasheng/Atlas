@@ -27,7 +27,7 @@
  * to the new target over the pose's duration (0.8 s by default; instant
  * transitions jump), and a loop starts once it has arrived.
  */
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Euler, Matrix4, Quaternion, Vector3, type Group, type Object3D, type SkinnedMesh } from 'three';
 import { equipmentList, otherSideJoint, type ExercisePhase, type Movement } from '../../../../lib/anatomy';
@@ -58,8 +58,9 @@ import {
 } from '../../lib/rig';
 import { contractionAt, contractionPlan, type ContractionPlan } from '../../lib/contraction';
 import { contactPlan, handsCorrection, hingeAngle, NO_CONTACT, type ContactPlan } from '../../lib/contact';
-import { keepAnimating, useRuntime } from './runtime';
+import { keepAnimating, prefersReducedMotion, useRuntime } from './runtime';
 import { clockTime } from '../../lib/sim/hz';
+import { overrideJoints } from '../../lib/sim/joints';
 import type { GltfRig } from './GltfSource';
 import { gripPoint, type Grip } from './grip';
 import { defaultContacts, equipmentFloor, EQUIPMENT_INFO, heldReach, PRESS_SURFACES } from '../../lib/equipment';
@@ -83,6 +84,7 @@ interface Frame {
   root: { rotation: Vec3; offset: Vec3 };
 }
 
+const NO_ANGLES: Angles = {};
 const REST_ROOT = { rotation: [0, 0, 0] as Vec3, offset: [0, 0, 0] as Vec3 };
 const emptyFrame = (): Frame => ({ joints: new Map(), contract: new Map(), root: REST_ROOT });
 
@@ -96,6 +98,7 @@ function mixFrames(a: Frame, b: Frame, k: number): Frame {
 }
 
 export interface MotionInput {
+  joints?: ReadonlyMap<string, Angles>;
   pose: string | null;
   exercise: SpaceSceneExt['exercise'];
   demo: SpaceSceneExt['demo'];
@@ -205,11 +208,14 @@ export function MotionDriver({
     }
     return out;
   }, [rig, data.rig]);
-  useEffect(
+  useLayoutEffect(
     () => () => {
       for (const j of joints.values()) j.bone.quaternion.copy(j.rest);
+      // One MotionDriver owns these readings. Clear before a replacement rig's
+      // first frame, and on unmount, so the QA API never returns the old bones.
+      bridge.joints.clear();
     },
-    [joints],
+    [joints, bridge],
   );
   // The exercise turn's pivot: the trunk joint at rest (it never moves with the limbs), else the subject's centre.
   const pivot = useMemo(() => {
@@ -329,6 +335,7 @@ export function MotionDriver({
 
   const st = useRef({
     key: '',
+    jointKey: '[]',
     from: emptyFrame(),
     now: emptyFrame(),
     t0: 0,
@@ -470,10 +477,12 @@ export function MotionDriver({
     return [footing.l, footing.r].filter((f) => f !== null).map((f) => (side === 'left' ? f === footing.l : side === 'right' ? f === footing.r : true));
   };
 
+  const jointKey = useMemo(() => JSON.stringify([...(input.joints ?? [])]), [input.joints]);
+  const motionKey = useMemo(() => JSON.stringify([input.pose, input.exercise, input.demo, jointKey]), [input.pose, input.exercise, input.demo, jointKey]);
   useFrame((state) => {
     const s = st.current;
     const nowMs = performance.now();
-    const key = JSON.stringify([input.pose, input.exercise, input.demo]);
+    const key = motionKey;
     const exSheet = input.exercise && playable.has(input.exercise.id) ? exercises.get(input.exercise.id) : undefined;
     const prep = exSheet?.motion ? preps(exSheet) : null;
     const equipment = equipmentList(exSheet?.motion?.equipment);
@@ -486,16 +495,20 @@ export function MotionDriver({
       s.key = key;
       s.from = s.now;
       s.t0 = nowMs;
-      s.ms = (input.pose ? (data.poses?.[input.pose]?.duration ?? POSE_DURATION) : POSE_DURATION) * 1000;
+      const simChange = s.jointKey !== jointKey;
+      s.jointKey = jointKey;
+      s.ms = simChange ? 500 : (input.pose ? (data.poses?.[input.pose]?.duration ?? POSE_DURATION) : POSE_DURATION) * 1000;
     }
     if (s.snap) {
       s.snap = false;
       s.ms = 0;
     }
+    if (prefersReducedMotion()) s.ms = 0;
     const since = nowMs - s.t0;
     const k = s.ms > 0 ? smoothstep01(since / s.ms) : 1;
     const goal = target(input, Math.max(0, since - s.ms) / 1000);
-    let frame = k < 1 ? mixFrames(s.from, goal.frame, k) : goal.frame;
+    const goalFrame = input.joints?.size ? { ...goal.frame, joints: overrideJoints(goal.frame.joints, input.joints) } : goal.frame;
+    let frame = k < 1 ? mixFrames(s.from, goalFrame, k) : goalFrame;
     s.now = frame;
 
     // Clips and contraction pulses while the scene runs (always-on ones from load).
@@ -513,7 +526,7 @@ export function MotionDriver({
         if (joint !== null) {
           const add = sampleAngles(a.keys, t, a.loop);
           const sum = { ...(frame.joints.get(joint) ?? {}) };
-          for (const [m, deg] of Object.entries(add) as [Movement, number][]) sum[m] = (sum[m] ?? 0) + deg * w;
+          for (const [m, deg] of Object.entries(add) as [Movement, number][]) if (input.joints?.get(joint)?.[m] === undefined) sum[m] = (sum[m] ?? 0) + deg * w;
           frame.joints.set(joint, sum);
         } else {
           const c = sampleContract(a.keys, t, a.loop);
@@ -680,6 +693,17 @@ export function MotionDriver({
         });
         runtime.exercise = ex;
       } else runtime.exercise = null;
+    }
+    // Update the existing QA bridge from the actual bones, after parent transforms.
+    if (rig) {
+      rig.root.updateWorldMatrix(true, true);
+      for (const [name, j] of joints) {
+        let reading = bridge.joints.get(name);
+        if (!reading) { reading = { angles: {}, position: [0, 0, 0], quaternion: [0, 0, 0, 1] }; bridge.joints.set(name, reading); }
+        reading.angles = frame.joints.get(name) ?? NO_ANGLES;
+        j.bone.getWorldPosition(_v).toArray(reading.position);
+        j.bone.getWorldQuaternion(_q).toArray(reading.quaternion);
+      }
     }
     // Bone motion re-projects the labels every frame but re-checks their occlusion (raycasts) only once it stops.
     if (moved) {

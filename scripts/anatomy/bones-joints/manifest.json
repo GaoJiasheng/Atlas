@@ -1,0 +1,5971 @@
+{
+  "license": "CC BY-SA 4.0",
+  "nativeBlender": {
+    "status": "REVIEW",
+    "probeExit": 139,
+    "reason": "Blender 5.1.2 initialization failed before Python; no native export or native preview claimed"
+  },
+  "pipeline": "Three FBXLoader offline extraction + inherited native arms rig + meshoptimizer + independently decoded audit",
+  "sourceFile": "SkeletalSystem100.fbx",
+  "sourceSha256": "294a649765cd060a62a4095da52b9c8ef2d97769aa447e196448aa5f7d596dea",
+  "modelSha256": "4ddb706ff0664f772e294d6210294258556775a3037cf7c3a3ed51fead6f362e",
+  "bytes": 3024092,
+  "triangles": 313580,
+  "draws": 49,
+  "sourceCentre": [
+    0,
+    0.030789900571107864,
+    1.2483623027801514
+  ],
+  "sourceStatureM": 1.7095352601027116,
+  "parts": [
+    {
+      "id": "skull",
+      "sources": [
+        "Anterior cells of ethmoid bone.l",
+        "Anterior cells of ethmoid bone.r",
+        "Ethmoid bone",
+        "Frontal bone",
+        "Inferior nasal concha bone.l",
+        "Inferior nasal concha bone.r",
+        "Lacrimal bone.l",
+        "Lacrimal bone.r",
+        "Maxilla.l",
+        "Maxilla.r",
+        "Middle cells of ethmoid bone.l",
+        "Middle cells of ethmoid bone.r",
+        "Nasal bone.l",
+        "Nasal bone.r",
+        "Occipital bone",
+        "Palatine bone.l",
+        "Palatine bone.r",
+        "Parietal bone.l",
+        "Parietal bone.r",
+        "Posterior cells of ethmoid bone.l",
+        "Posterior cells of ethmoid bone.r",
+        "Sphenoid bone",
+        "Temporal bone.l",
+        "Temporal bone.r",
+        "Vomer",
+        "Zygomatic bone.l",
+        "Zygomatic bone.r"
+      ],
+      "joint": "trunk",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          -0.07439017403986307,
+          0.2890817355237343,
+          -0.07258528969334545
+        ],
+        "max": [
+          0.07428561924749268,
+          0.4570920168058825,
+          0.13106157688047232
+        ]
+      }
+    },
+    {
+      "id": "mandible",
+      "sources": [
+        "Mandible"
+      ],
+      "joint": "trunk",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          -0.05166402419305514,
+          0.24793412485630495,
+          0.0325879296195387
+        ],
+        "max": [
+          0.051664050121075576,
+          0.3302848876825446,
+          0.11449983356265804
+        ]
+      }
+    },
+    {
+      "id": "cervical-spine",
+      "sources": [
+        "Atlas (C1)",
+        "Axis (C2)",
+        "Vertebra C3",
+        "Vertebra C4",
+        "Vertebra C5",
+        "Vertebra C6",
+        "Vertebra C7"
+      ],
+      "joint": "trunk",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          -0.043027915081922885,
+          0.19015185108522736,
+          -0.04643656934092236
+        ],
+        "max": [
+          0.0430362054876222,
+          0.30439375512893174,
+          0.03390408757101149
+        ]
+      }
+    },
+    {
+      "id": "thoracic-spine",
+      "sources": [
+        "Vertebra T1",
+        "Vertebra T10",
+        "Vertebra T11",
+        "Vertebra T12",
+        "Vertebra T2",
+        "Vertebra T3",
+        "Vertebra T4",
+        "Vertebra T5",
+        "Vertebra T6",
+        "Vertebra T7",
+        "Vertebra T8",
+        "Vertebra T9"
+      ],
+      "joint": "trunk",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          -0.03884493760699957,
+          -0.1363097949202141,
+          -0.07013133130613364
+        ],
+        "max": [
+          0.03884495733035406,
+          0.2050172821206826,
+          0.03441132019872093
+        ]
+      }
+    },
+    {
+      "id": "lumbar-spine",
+      "sources": [
+        "Vertebra L1",
+        "Vertebra L2",
+        "Vertebra L3",
+        "Vertebra L4",
+        "Vertebra L5"
+      ],
+      "joint": "trunk",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          -0.052922960252920107,
+          -0.2907669409788629,
+          -0.03998363869759024
+        ],
+        "max": [
+          0.052922968549927216,
+          -0.11482235371868299,
+          0.05009532215900995
+        ]
+      }
+    },
+    {
+      "id": "sacrum",
+      "sources": [
+        "Sacrum"
+      ],
+      "joint": "trunk",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          -0.06139515239084139,
+          -0.382608566429661,
+          -0.06398628436201895
+        ],
+        "max": [
+          0.06131699319844072,
+          -0.2675435903507821,
+          0.027189467315849026
+        ]
+      }
+    },
+    {
+      "id": "coccyx",
+      "sources": [
+        "Coccyx"
+      ],
+      "joint": "trunk",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          -0.016741091643011477,
+          -0.4180657467463925,
+          -0.05557884214390288
+        ],
+        "max": [
+          0.016763849713031784,
+          -0.38723675659720225,
+          -0.03585406536637506
+        ]
+      }
+    },
+    {
+      "id": "sternum",
+      "sources": [
+        "Manubrium of sternum",
+        "Body of sternum",
+        "Xiphoid process"
+      ],
+      "joint": "trunk",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          -0.028658594105224408,
+          -0.02745680004449924,
+          0.06239170043281854
+        ],
+        "max": [
+          0.028399185441399376,
+          0.15553776830756516,
+          0.1427614022064559
+        ]
+      }
+    },
+    {
+      "id": "ribs-l",
+      "sources": [
+        "First rib.l",
+        "Second rib.l",
+        "Third rib.l",
+        "Fourth rib.l",
+        "Fifth rib.l",
+        "Sixth rib.l",
+        "Seventh rib.l",
+        "Eighth rib.l",
+        "Ninth rib.l",
+        "Tenth rib.l",
+        "Eleventh rib.l",
+        "Twelfth rib.l",
+        "Costal cartilage of first rib.l",
+        "Costal cartilage of second rib.l",
+        "Costal cartilage of third rib.l",
+        "Costal cartilage of fourth rib.l",
+        "Costal cartilage of fifth rib.l",
+        "Costal cartilage of sixth rib.l",
+        "Costal cartilage of seventh rib.l",
+        "Costal cartilage of eighth rib.l",
+        "Costal cartilage of ninth rib.l",
+        "Costal cartilage of tenth rib.l"
+      ],
+      "joint": "trunk",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          0.006290900355884528,
+          -0.19191653959362442,
+          -0.0664453142905413
+        ],
+        "max": [
+          0.14164013163323716,
+          0.19817861415987914,
+          0.14355859700665802
+        ]
+      }
+    },
+    {
+      "id": "ribs-r",
+      "sources": [
+        "First rib.r",
+        "Second rib.r",
+        "Third rib.r",
+        "Fourth rib.r",
+        "Fifth rib.r",
+        "Sixth rib.r",
+        "Seventh rib.r",
+        "Eighth rib.r",
+        "Ninth rib.r",
+        "Tenth rib.r",
+        "Eleventh rib.r",
+        "Twelfth rib.r",
+        "Costal cartilage of first rib.r",
+        "Costal cartilage of second rib.r",
+        "Costal cartilage of third rib.r",
+        "Costal cartilage of fourth rib.r",
+        "Costal cartilage of fifth rib.r",
+        "Costal cartilage of sixth rib.r",
+        "Costal cartilage of seventh rib.r",
+        "Costal cartilage of eighth rib.r",
+        "Costal cartilage of ninth rib.r",
+        "Costal cartilage of tenth rib.r"
+      ],
+      "joint": "trunk",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          -0.1416401650877341,
+          -0.19191653850936352,
+          -0.06648149905147178
+        ],
+        "max": [
+          -0.0063177173761727,
+          0.1981785971944401,
+          0.14355859686475092
+        ]
+      }
+    },
+    {
+      "id": "clavicle-l",
+      "sources": [
+        "Clavicle.l"
+      ],
+      "joint": "clavicle.l",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          0.011214524252258818,
+          0.14075006487553576,
+          -0.021471871554052127
+        ],
+        "max": [
+          0.15433063765383154,
+          0.17685331692647943,
+          0.08129976995398208
+        ]
+      }
+    },
+    {
+      "id": "clavicle-r",
+      "sources": [
+        "Clavicle.r"
+      ],
+      "joint": "clavicle.r",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          -0.15433062726021018,
+          0.14075006383940947,
+          -0.021471871428366464
+        ],
+        "max": [
+          -0.011214513858637308,
+          0.17685331800154303,
+          0.0812997696554335
+        ]
+      }
+    },
+    {
+      "id": "scapula-l",
+      "sources": [
+        "Scapula.l"
+      ],
+      "joint": "scapula.l",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          0.06066934113230092,
+          0.0059125962431954004,
+          -0.08201746696982777
+        ],
+        "max": [
+          0.17357541117781014,
+          0.16947769038637528,
+          0.03197855881307511
+        ]
+      }
+    },
+    {
+      "id": "scapula-r",
+      "sources": [
+        "Scapula.r"
+      ],
+      "joint": "scapula.r",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          -0.17357536166863902,
+          0.0059848457608995265,
+          -0.08201746984027214
+        ],
+        "max": [
+          -0.06067022294568591,
+          0.16946731810931892,
+          0.03197855949410881
+        ]
+      }
+    },
+    {
+      "id": "humerus-l",
+      "sources": [
+        "Humerus.l"
+      ],
+      "joint": "shoulder.l",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          0.14460656876485609,
+          -0.16115391610696572,
+          -0.02283630106919022
+        ],
+        "max": [
+          0.24868768331367577,
+          0.15616427817435463,
+          0.02953073375843459
+        ]
+      }
+    },
+    {
+      "id": "humerus-r",
+      "sources": [
+        "Humerus.r"
+      ],
+      "joint": "shoulder.r",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          -0.24868766955813126,
+          -0.1611539160997184,
+          -0.022836305111200023
+        ],
+        "max": [
+          -0.14460655500931158,
+          0.15616427816692946,
+          0.029530738004111604
+        ]
+      }
+    },
+    {
+      "id": "radius-l",
+      "sources": [
+        "Radius.l"
+      ],
+      "joint": "forearm.l",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          0.22687696013087735,
+          -0.3920384658901832,
+          -0.011150884170089921
+        ],
+        "max": [
+          0.28866697258904245,
+          -0.15503082530326284,
+          0.057520221169951494
+        ]
+      }
+    },
+    {
+      "id": "radius-r",
+      "sources": [
+        "Radius.r"
+      ],
+      "joint": "forearm.r",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          -0.28866695883349786,
+          -0.39203846662412756,
+          -0.011150880327394516
+        ],
+        "max": [
+          -0.22687694637533276,
+          -0.15503082469993634,
+          0.057520218089867285
+        ]
+      }
+    },
+    {
+      "id": "ulna-l",
+      "sources": [
+        "Ulna.l"
+      ],
+      "joint": "elbow.l",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          0.2032372816867927,
+          -0.39278193096401637,
+          -0.029598142103535126
+        ],
+        "max": [
+          0.255630281218757,
+          -0.1373424282958391,
+          0.05364136746227299
+        ]
+      }
+    },
+    {
+      "id": "ulna-r",
+      "sources": [
+        "Ulna.r"
+      ],
+      "joint": "elbow.r",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          -0.2556302004079845,
+          -0.39278193207265866,
+          -0.029598139653407962
+        ],
+        "max": [
+          -0.20323720087602015,
+          -0.1373424275420847,
+          0.053641362691518486
+        ]
+      }
+    },
+    {
+      "id": "hand-l",
+      "sources": [
+        "Capitate bone.l",
+        "Distal phalanx of fifth finger of hand.l",
+        "Distal phalanx of first finger of hand.l",
+        "Distal phalanx of fourth finger of hand.l",
+        "Distal phalanx of second finger of hand.l",
+        "Distal phalanx of third finger of hand.l",
+        "Fifth metacarpal bone.l",
+        "First metacarpal bone.l",
+        "Fourth metacarpal bone.l",
+        "Hamate bone.l",
+        "Lunate bone.l",
+        "Middle phalanx of fifth finger of hand.l",
+        "Middle phalanx of fourth finger of hand.l",
+        "Middle phalanx of second finger of hand.l",
+        "Middle phalanx of third finger of hand.l",
+        "Pisiform bone.l",
+        "Proximal phalanx of fifth finger of hand.l",
+        "Proximal phalanx of first finger of hand.l",
+        "Proximal phalanx of fourth finger of hand.l",
+        "Proximal phalanx of second finger of hand.l",
+        "Proximal phalanx of third finger of hand.l",
+        "Scaphoid bone.l",
+        "Second metacarpal bone.l",
+        "Third metacarpal bone.l",
+        "Trapezium bone.l",
+        "Trapezoid bone.l",
+        "Triquetrum bone.l"
+      ],
+      "joint": "hand.l",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          0.2260756128242776,
+          -0.5496761556077192,
+          0.039761289313647405
+        ],
+        "max": [
+          0.33462462174372576,
+          -0.3856546835289971,
+          0.1278208200427636
+        ]
+      }
+    },
+    {
+      "id": "hand-r",
+      "sources": [
+        "Capitate bone.r",
+        "Distal phalanx of fifth finger of hand.r",
+        "Distal phalanx of first finger of hand.r",
+        "Distal phalanx of fourth finger of hand.r",
+        "Distal phalanx of second finger of hand.r",
+        "Distal phalanx of third finger of hand.r",
+        "Fifth metacarpal bone.r",
+        "First metacarpal bone.r",
+        "Fourth metacarpal bone.r",
+        "Hamate bone.r",
+        "Lunate bone.r",
+        "Middle phalanx of fifth finger of hand.r",
+        "Middle phalanx of fourth finger of hand.r",
+        "Middle phalanx of second finger of hand.r",
+        "Middle phalanx of third finger of hand.r",
+        "Pisiform bone.r",
+        "Proximal phalanx of fifth finger of hand.r",
+        "Proximal phalanx of first finger of hand.r",
+        "Proximal phalanx of fourth finger of hand.r",
+        "Proximal phalanx of second finger of hand.r",
+        "Proximal phalanx of third finger of hand.r",
+        "Scaphoid bone.r",
+        "Second metacarpal bone.r",
+        "Third metacarpal bone.r",
+        "Trapezium bone.r",
+        "Trapezoid bone.r",
+        "Triquetrum bone.r"
+      ],
+      "joint": "hand.r",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          -0.3346245632846958,
+          -0.5496761558544543,
+          0.03976128910628073
+        ],
+        "max": [
+          -0.22607550966176232,
+          -0.3856546835223691,
+          0.12782081989221578
+        ]
+      }
+    },
+    {
+      "id": "hip-bone-l",
+      "sources": [
+        "Hip bone.l"
+      ],
+      "joint": "trunk",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          0.0029371542278133767,
+          -0.4510225663013776,
+          -0.05599371021694741
+        ],
+        "max": [
+          0.13489441870781613,
+          -0.23642206559145862,
+          0.086858570147829
+        ]
+      }
+    },
+    {
+      "id": "hip-bone-r",
+      "sources": [
+        "Hip bone.r"
+      ],
+      "joint": "trunk",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          -0.13489440521729099,
+          -0.4510225655953082,
+          -0.05599370825443682
+        ],
+        "max": [
+          -0.002937140737288235,
+          -0.23642206509905295,
+          0.08685857165478124
+        ]
+      }
+    },
+    {
+      "id": "femur-l",
+      "sources": [
+        "Femur.l"
+      ],
+      "joint": "hip.l",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          0.031938329628915164,
+          -0.818496384678606,
+          -0.028562909278778283
+        ],
+        "max": [
+          0.14853093570466652,
+          -0.3640571357183262,
+          0.04954799597645325
+        ]
+      }
+    },
+    {
+      "id": "femur-r",
+      "sources": [
+        "Femur.r"
+      ],
+      "joint": "hip.r",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          -0.14853088526153577,
+          -0.8184963843046209,
+          -0.028562915769463876
+        ],
+        "max": [
+          -0.03193827918578442,
+          -0.3640571361092466,
+          0.04954800244803818
+        ]
+      }
+    },
+    {
+      "id": "patella-l",
+      "sources": [
+        "Patella.l"
+      ],
+      "joint": "knee.l",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          0.06285183452260465,
+          -0.8245566252224938,
+          0.02670197764435169
+        ],
+        "max": [
+          0.10603749050505032,
+          -0.7836344203170302,
+          0.0494542325461107
+        ]
+      }
+    },
+    {
+      "id": "patella-r",
+      "sources": [
+        "Patella.r"
+      ],
+      "joint": "knee.r",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          -0.10603744005833321,
+          -0.8245566253887706,
+          0.026701978390220385
+        ],
+        "max": [
+          -0.0628517840743548,
+          -0.7836344202576027,
+          0.04945423174160295
+        ]
+      }
+    },
+    {
+      "id": "tibia-l",
+      "sources": [
+        "Tibia.l"
+      ],
+      "joint": "knee.l",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          0.03734218617159954,
+          -1.1731441847782398,
+          -0.03216977752462856
+        ],
+        "max": [
+          0.1157890981235602,
+          -0.8151809815119329,
+          0.03585336201355749
+        ]
+      }
+    },
+    {
+      "id": "tibia-r",
+      "sources": [
+        "Tibia.r"
+      ],
+      "joint": "knee.r",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          -0.11578904768042943,
+          -1.1731441848533541,
+          -0.0321697738936807
+        ],
+        "max": [
+          -0.03734213572846876,
+          -0.8151809814510029,
+          0.03585336508640621
+        ]
+      }
+    },
+    {
+      "id": "fibula-l",
+      "sources": [
+        "Fibula.l"
+      ],
+      "joint": "knee.l",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          0.08862371554849732,
+          -1.1931514511492083,
+          -0.02889663475513804
+        ],
+        "max": [
+          0.1248471841308598,
+          -0.8306589650791911,
+          0.004029499471370723
+        ]
+      }
+    },
+    {
+      "id": "fibula-r",
+      "sources": [
+        "Fibula.r"
+      ],
+      "joint": "knee.r",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          -0.12484712251185773,
+          -1.1931514509738537,
+          -0.02889664033875268
+        ],
+        "max": [
+          -0.08862365392949528,
+          -0.8306589650587772,
+          0.004029504199864108
+        ]
+      }
+    },
+    {
+      "id": "foot-l",
+      "sources": [
+        "Calcaneus.l",
+        "Cuboid bone.l",
+        "Distal phalanx of fifth finger of foot.l",
+        "Distal phalanx of first finger of foot.l",
+        "Distal phalanx of fourth finger of foot.l",
+        "Distal phalanx of second finger of foot.l",
+        "Distal phalanx of third finger of foot.l",
+        "Fifth metatarsal bone.l",
+        "First metatarsal bone.l",
+        "Fourth metatarsal bone.l",
+        "Intermediate cuneiform bone.l",
+        "Lateral cuneiform bone.l",
+        "Medial cuneiform bone.l",
+        "Middle phalanx of fifth finger of foot.l",
+        "Middle phalanx of fourth finger of foot.l",
+        "Middle phalanx of second finger of foot.l",
+        "Middle phalanx of third finger of foot.l",
+        "Navicular bone.l",
+        "Proximal phalanx of fifth finger of foot.l",
+        "Proximal phalanx of first finger of foot.l",
+        "Proximal phalanx of fourth finger of foot.l",
+        "Proximal phalanx of second finger of foot.l",
+        "Proximal phalanx of third finger of foot.l",
+        "Second metatarsal bone.l",
+        "Sesamoid bones of foot.l",
+        "Talus.l",
+        "Third metatarsal bone.l"
+      ],
+      "joint": "ankle.l",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          0.052689965472783505,
+          -1.2391591462743634,
+          -0.06076626746901147
+        ],
+        "max": [
+          0.1464164584706117,
+          -1.162886879089431,
+          0.16809789806687306
+        ]
+      }
+    },
+    {
+      "id": "foot-r",
+      "sources": [
+        "Calcaneus.r",
+        "Cuboid bone.r",
+        "Distal phalanx of fifth finger of foot.r",
+        "Distal phalanx of first finger of foot.r",
+        "Distal phalanx of fourth finger of foot.r",
+        "Distal phalanx of second finger of foot.r",
+        "Distal phalanx of third finger of foot.r",
+        "Fifth metatarsal bone.r",
+        "First metatarsal bone.r",
+        "Fourth metatarsal bone.r",
+        "Intermediate cuneiform bone.r",
+        "Lateral cuneiform bone.r",
+        "Medial cuneiform bone.r",
+        "Middle phalanx of fifth finger of foot.r",
+        "Middle phalanx of fourth finger of foot.r",
+        "Middle phalanx of second finger of foot.r",
+        "Middle phalanx of third finger of foot.r",
+        "Navicular bone.r",
+        "Proximal phalanx of fifth finger of foot.r",
+        "Proximal phalanx of first finger of foot.r",
+        "Proximal phalanx of fourth finger of foot.r",
+        "Proximal phalanx of second finger of foot.r",
+        "Proximal phalanx of third finger of foot.r",
+        "Second metatarsal bone.r",
+        "Sesamoid bones of foot.r",
+        "Talus.r",
+        "Third metatarsal bone.r"
+      ],
+      "joint": "ankle.r",
+      "station": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          -0.14641641538568645,
+          -1.2391591463842315,
+          -0.0607662669418227
+        ],
+        "max": [
+          -0.05268988864345959,
+          -1.1628868790848736,
+          0.16809789802733677
+        ]
+      }
+    },
+    {
+      "id": "carpal-scaphoid",
+      "sources": [
+        "Scaphoid bone.l"
+      ],
+      "joint": null,
+      "station": [
+        -2.27,
+        0.39,
+        -0.03
+      ],
+      "bounds": {
+        "min": [
+          -2.0124711675671447,
+          -0.011862436854671699,
+          0.010915486376670239
+        ],
+        "max": [
+          -1.9879115808148806,
+          0.004345316471002891,
+          0.026804049995606705
+        ]
+      }
+    },
+    {
+      "id": "carpal-lunate",
+      "sources": [
+        "Lunate bone.l"
+      ],
+      "joint": null,
+      "station": [
+        -2.27,
+        0.39,
+        -0.03
+      ],
+      "bounds": {
+        "min": [
+          -2.026043416115264,
+          -0.01058039608782646,
+          0.010299272401912307
+        ],
+        "max": [
+          -2.008946309320194,
+          0.002159031690595503,
+          0.026906063288436706
+        ]
+      }
+    },
+    {
+      "id": "carpal-capitate",
+      "sources": [
+        "Capitate bone.l"
+      ],
+      "joint": null,
+      "station": [
+        -2.27,
+        0.39,
+        -0.03
+      ],
+      "bounds": {
+        "min": [
+          -2.013451198699645,
+          -0.02648241804190654,
+          0.009761289313647406
+        ],
+        "max": [
+          -1.9968395335423996,
+          -0.003072575250803178,
+          0.027734457736706027
+        ]
+      }
+    },
+    {
+      "id": "mcp-metacarpal",
+      "sources": [
+        "Second metacarpal bone.l"
+      ],
+      "joint": null,
+      "station": [
+        -2.27,
+        0.39,
+        -0.03
+      ],
+      "bounds": {
+        "min": [
+          -1.9997395822203683,
+          -0.09181555755424664,
+          0.016722392018464212
+        ],
+        "max": [
+          -1.967647369227307,
+          -0.021284431668258663,
+          0.04342234702750211
+        ]
+      }
+    },
+    {
+      "id": "mcp-phalanx",
+      "sources": [
+        "Proximal phalanx of second finger of hand.l"
+      ],
+      "joint": null,
+      "station": [
+        -2.27,
+        0.39,
+        -0.03
+      ],
+      "bounds": {
+        "min": [
+          -1.9800267619121825,
+          -0.12597631736427728,
+          0.0342554623573119
+        ],
+        "max": [
+          -1.9572790669181244,
+          -0.08706634813259806,
+          0.057966943346233424
+        ]
+      }
+    },
+    {
+      "id": "thumb-trapezium",
+      "sources": [
+        "Trapezium bone.l"
+      ],
+      "joint": null,
+      "station": [
+        -2.27,
+        0.39,
+        -0.03
+      ],
+      "bounds": {
+        "min": [
+          -1.9966123746049282,
+          -0.02268312512055959,
+          0.017467619143341717
+        ],
+        "max": [
+          -1.978940849477667,
+          -0.0018856943141667415,
+          0.034992455862552646
+        ]
+      }
+    },
+    {
+      "id": "thumb-metacarpal",
+      "sources": [
+        "First metacarpal bone.l"
+      ],
+      "joint": null,
+      "station": [
+        -2.27,
+        0.39,
+        -0.03
+      ],
+      "bounds": {
+        "min": [
+          -1.9888199304138203,
+          -0.04899558730355069,
+          0.023350504408493608
+        ],
+        "max": [
+          -1.9501557690230422,
+          -0.01061657620669798,
+          0.054830137981164845
+        ]
+      }
+    }
+  ],
+  "sourceMeshes": [
+    {
+      "source": "Anterior cells of ethmoid bone.l",
+      "sourceTriangles": 736,
+      "triangles": 736,
+      "bboxErrorM": 6.085988935033981e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.005374101682075766,
+          1.5810766828691667,
+          0.05503186834728104
+        ],
+        "max": [
+          0.0125638627115144,
+          1.5952622105661718,
+          0.062693750249887
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Anterior cells of ethmoid bone.r",
+      "sourceTriangles": 736,
+      "triangles": 736,
+      "bboxErrorM": 6.08055976680788e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.012563859865787775,
+          1.581076682814875,
+          0.05503186848918646
+        ],
+        "max": [
+          -0.005374098836349139,
+          1.5952622104938237,
+          0.06269375041396179
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Ethmoid bone",
+      "sourceTriangles": 10130,
+      "triangles": 3497,
+      "bboxErrorM": 5.8291355964357194e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.01874006527612954,
+          1.565877540461783,
+          0.031408782832149394
+        ],
+        "max": [
+          0.018740064396565607,
+          1.6053112136105698,
+          0.07594646055000585
+        ]
+      },
+      "simplifierErrorM": 0.00021294850739650428
+    },
+    {
+      "source": "Frontal bone",
+      "sourceTriangles": 7776,
+      "triangles": 3498,
+      "bboxErrorM": 4.204841497212897e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.061189000532954084,
+          1.5926117476549542,
+          0.018013146549613727
+        ],
+        "max": [
+          0.06118899220280837,
+          1.699192521745632,
+          0.08711200742090719
+        ]
+      },
+      "simplifierErrorM": 0.00032120008836500347
+    },
+    {
+      "source": "Inferior nasal concha bone.l",
+      "sourceTriangles": 476,
+      "triangles": 476,
+      "bboxErrorM": 2.4971453793654064e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.004423438150533835,
+          1.552103544411151,
+          0.04078772213700355
+        ],
+        "max": [
+          0.014880187650095649,
+          1.5746228926936392,
+          0.0754293685715253
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Inferior nasal concha bone.r",
+      "sourceTriangles": 476,
+      "triangles": 476,
+      "bboxErrorM": 2.5498528399836573e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.01488017362849868,
+          1.5521035449382257,
+          0.04078772182127719
+        ],
+        "max": [
+          -0.004423424128936867,
+          1.5746228924521342,
+          0.07542936859400061
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Lacrimal bone.l",
+      "sourceTriangles": 588,
+      "triangles": 588,
+      "bboxErrorM": 5.886986609304756e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.006468213782817829,
+          1.573117553452996,
+          0.06151900049022086
+        ],
+        "max": [
+          0.017119673975271865,
+          1.5982195693002896,
+          0.07622788446851679
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Lacrimal bone.r",
+      "sourceTriangles": 588,
+      "triangles": 588,
+      "bboxErrorM": 5.8861787444186575e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.0171196599536749,
+          1.5731175534449173,
+          0.061519000297352675
+        ],
+        "max": [
+          -0.006468199761220861,
+          1.598219569220498,
+          0.07622788459349063
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Maxilla.l",
+      "sourceTriangles": 4798,
+      "triangles": 2000,
+      "bboxErrorM": 4.354193805511386e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.00021110202953122936,
+          1.537444039017707,
+          0.040060483989476356
+        ],
+        "max": [
+          0.046034120372252046,
+          1.6052191590474203,
+          0.09387255681917299
+        ]
+      },
+      "simplifierErrorM": 0.00026437354972586036
+    },
+    {
+      "source": "Maxilla.r",
+      "sourceTriangles": 4798,
+      "triangles": 2000,
+      "bboxErrorM": 4.281891174962027e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.04603410635065508,
+          1.5374440382946808,
+          0.04006048405648878
+        ],
+        "max": [
+          0.00021111605112819731,
+          1.6052191586010984,
+          0.09387255728579566
+        ]
+      },
+      "simplifierErrorM": 0.0002643336192704737
+    },
+    {
+      "source": "Middle cells of ethmoid bone.l",
+      "sourceTriangles": 960,
+      "triangles": 960,
+      "bboxErrorM": 1.5027075290705016e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.005267008081824303,
+          1.5810696983040071,
+          0.04733497859829122
+        ],
+        "max": [
+          0.014302384624051201,
+          1.5944095726295089,
+          0.05570102788202149
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Middle cells of ethmoid bone.r",
+      "sourceTriangles": 960,
+      "triangles": 960,
+      "bboxErrorM": 1.629647108924992e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.014302381778324574,
+          1.5810696981623642,
+          0.04733497835515899
+        ],
+        "max": [
+          -0.005267005236097677,
+          1.5944095726769678,
+          0.055701027494041315
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Nasal bone.l",
+      "sourceTriangles": 292,
+      "triangles": 292,
+      "bboxErrorM": 1.1749523312620802e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          2.6920965498500316e-8,
+          1.5737074676366047,
+          0.07933587058274588
+        ],
+        "max": [
+          0.008399786924336707,
+          1.6050797720229353,
+          0.10027167630936447
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Nasal bone.r",
+      "sourceTriangles": 292,
+      "triangles": 292,
+      "bboxErrorM": 1.1468702043604395e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.00839977290273974,
+          1.5737074674672105,
+          0.07933587100390456
+        ],
+        "max": [
+          -1.2899368530550072e-8,
+          1.605079772263459,
+          0.1002716760285432
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Occipital bone",
+      "sourceTriangles": 7531,
+      "triangles": 3497,
+      "bboxErrorM": 2.6500915240035283e-8,
+      "unreferencedControlPoints": 10,
+      "renderBounds": {
+        "min": [
+          -0.05963081207559071,
+          1.5507362986231368,
+          -0.10337519026445331
+        ],
+        "max": [
+          0.05963078139370232,
+          1.655193183147217,
+          0.012472257468999014
+        ]
+      },
+      "simplifierErrorM": 0.00029586770688183606
+    },
+    {
+      "source": "Palatine bone.l",
+      "sourceTriangles": 1460,
+      "triangles": 1460,
+      "bboxErrorM": 3.8685838310570375e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.0007838924861305486,
+          1.54397782384303,
+          0.02477785824418243
+        ],
+        "max": [
+          0.027038392711629743,
+          1.5841306061124405,
+          0.05999695624638454
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Palatine bone.r",
+      "sourceTriangles": 1460,
+      "triangles": 1460,
+      "bboxErrorM": 3.848992435884213e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.027038378690032776,
+          1.5439778239672308,
+          0.02477785860058304
+        ],
+        "max": [
+          -0.0007838784645335806,
+          1.5841306063083544,
+          0.059996956019953605
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Parietal bone.l",
+      "sourceTriangles": 6886,
+      "triangles": 6886,
+      "bboxErrorM": 1.156145907899031e-7,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.007425175787229175,
+          1.5896924698168613,
+          -0.10056016058164716
+        ],
+        "max": [
+          0.07428561924749268,
+          1.7053677807988643,
+          0.04274305282096288
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Parietal bone.r",
+      "sourceTriangles": 6780,
+      "triangles": 6780,
+      "bboxErrorM": 1.0101331326950458e-7,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.07439017403986307,
+          1.5898203667832718,
+          -0.10030512101191681
+        ],
+        "max": [
+          0.00561599881626099,
+          1.7054543195860339,
+          0.03906109371722568
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Posterior cells of ethmoid bone.l",
+      "sourceTriangles": 1216,
+      "triangles": 1216,
+      "bboxErrorM": 5.987233442361628e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.004375800600966849,
+          1.5818385484511308,
+          0.03954710359256684
+        ],
+        "max": [
+          0.013940119020452604,
+          1.5941206796190093,
+          0.04797394197417427
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Posterior cells of ethmoid bone.r",
+      "sourceTriangles": 1216,
+      "triangles": 1216,
+      "bboxErrorM": 5.985931261776045e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.013940116193413385,
+          1.581838548438109,
+          0.0395471036001734
+        ],
+        "max": [
+          -0.00437579775647972,
+          1.5941206796653316,
+          0.047973942142445505
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Sphenoid bone",
+      "sourceTriangles": 7308,
+      "triangles": 3500,
+      "bboxErrorM": 6.433994848009661e-8,
+      "unreferencedControlPoints": 2,
+      "renderBounds": {
+        "min": [
+          -0.054419330611143124,
+          1.5503123355242483,
+          0.0022515418750429107
+        ],
+        "max": [
+          0.05441929992925473,
+          1.62024873793627,
+          0.055454025967731975
+        ]
+      },
+      "simplifierErrorM": 0.0002701582561712712
+    },
+    {
+      "source": "Temporal bone.l",
+      "sourceTriangles": 14094,
+      "triangles": 3500,
+      "bboxErrorM": 7.543651792119022e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.009648580772076847,
+          1.5487266024580744,
+          -0.05156398067900014
+        ],
+        "max": [
+          0.07242035624029126,
+          1.6231456545200182,
+          0.0447830871124171
+        ]
+      },
+      "simplifierErrorM": 0.00028710716287605464
+    },
+    {
+      "source": "Temporal bone.r",
+      "sourceTriangles": 14094,
+      "triangles": 3500,
+      "bboxErrorM": 7.567218918147489e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.07242034780662998,
+          1.548726602222403,
+          -0.051563980469868494
+        ],
+        "max": [
+          -0.009648572338415557,
+          1.623145654207077,
+          0.04478308700731426
+        ]
+      },
+      "simplifierErrorM": 0.0002914623764809221
+    },
+    {
+      "source": "Vomer",
+      "sourceTriangles": 1022,
+      "triangles": 1022,
+      "bboxErrorM": 6.089406578979606e-8,
+      "unreferencedControlPoints": 1,
+      "renderBounds": {
+        "min": [
+          -0.005118647454684278,
+          1.5574068480202923,
+          0.02095836586778737
+        ],
+        "max": [
+          0.005118683828023924,
+          1.5803582059363785,
+          0.08210163067721256
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Zygomatic bone.l",
+      "sourceTriangles": 1328,
+      "triangles": 1328,
+      "bboxErrorM": 1.941483285250456e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.0316171212346565,
+          1.5537166789607313,
+          0.03270854923217229
+        ],
+        "max": [
+          0.062324699682147815,
+          1.6084656834939468,
+          0.07167744169397741
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Zygomatic bone.r",
+      "sourceTriangles": 1328,
+      "triangles": 1328,
+      "bboxErrorM": 1.932685278482893e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.06232468566055088,
+          1.5537166788727512,
+          0.032708549019270804
+        ],
+        "max": [
+          -0.03161710721305957,
+          1.6084656832010078,
+          0.07167744138880404
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Mandible",
+      "sourceTriangles": 18838,
+      "triangles": 3498,
+      "bboxErrorM": 9.736506956237179e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.05166402419305514,
+          1.4962964276364563,
+          0.001798029048430836
+        ],
+        "max": [
+          0.051664050121075576,
+          1.578647190462696,
+          0.08370993299155018
+        ]
+      },
+      "simplifierErrorM": 0.0002124396269209683
+    },
+    {
+      "source": "Atlas (C1)",
+      "sourceTriangles": 2194,
+      "triangles": 2000,
+      "bboxErrorM": 3.216193052157923e-8,
+      "unreferencedControlPoints": 13,
+      "renderBounds": {
+        "min": [
+          -0.043027915081922885,
+          1.533108340105299,
+          -0.045953320836285075
+        ],
+        "max": [
+          0.0430362054876222,
+          1.552756057909083,
+          0.003114186999903623
+        ]
+      },
+      "simplifierErrorM": 0.00007015323353698477
+    },
+    {
+      "source": "Axis (C2)",
+      "sourceTriangles": 2334,
+      "triangles": 2000,
+      "bboxErrorM": 6.942094277206934e-8,
+      "unreferencedControlPoints": 5,
+      "renderBounds": {
+        "min": [
+          -0.0267846265841435,
+          1.508525114155498,
+          -0.052382427873679534
+        ],
+        "max": [
+          0.026815908848644123,
+          1.5514351627415328,
+          0.0003565106993936418
+        ]
+      },
+      "simplifierErrorM": 0.00009699121437733993
+    },
+    {
+      "source": "Vertebra C3",
+      "sourceTriangles": 2440,
+      "triangles": 2000,
+      "bboxErrorM": 8.093319880941863e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.02826076838204986,
+          1.4930546666482831,
+          -0.05398053698068665
+        ],
+        "max": [
+          0.028260788815314547,
+          1.519705849904268,
+          0.00020097837932058217
+        ]
+      },
+      "simplifierErrorM": 0.00010416343866381794
+    },
+    {
+      "source": "Vertebra C4",
+      "sourceTriangles": 1940,
+      "triangles": 1940,
+      "bboxErrorM": 8.121610384215217e-8,
+      "unreferencedControlPoints": 6,
+      "renderBounds": {
+        "min": [
+          -0.028904478072202706,
+          1.4805546188014507,
+          -0.05264845344800019
+        ],
+        "max": [
+          0.02905533298486346,
+          1.5055945299518039,
+          -0.0002917573436189147
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Vertebra C5",
+      "sourceTriangles": 2336,
+      "triangles": 2000,
+      "bboxErrorM": 8.391248762507075e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.030715876052907723,
+          1.468895164851701,
+          -0.057996859394898626
+        ],
+        "max": [
+          0.030715892773123685,
+          1.4913939590562624,
+          -0.0015562845818740767
+        ]
+      },
+      "simplifierErrorM": 0.00010120837396243587
+    },
+    {
+      "source": "Vertebra C6",
+      "sourceTriangles": 2304,
+      "triangles": 2000,
+      "bboxErrorM": 1.1566280955221941e-7,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.030630744185995755,
+          1.453726056784395,
+          -0.06676754940179422
+        ],
+        "max": [
+          0.03063076835669675,
+          1.4783261661528024,
+          -0.0031452638133052657
+        ]
+      },
+      "simplifierErrorM": 0.00007848140376154333
+    },
+    {
+      "source": "Vertebra C7",
+      "sourceTriangles": 2164,
+      "triangles": 2000,
+      "bboxErrorM": 7.877011931611833e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.035610393005302624,
+          1.4385141538653787,
+          -0.07722646991203022
+        ],
+        "max": [
+          0.035610409725520924,
+          1.4655271948568447,
+          -0.006920320806973542
+        ]
+      },
+      "simplifierErrorM": 0.00006817508256062865
+    },
+    {
+      "source": "Vertebra T1",
+      "sourceTriangles": 1946,
+      "triangles": 1946,
+      "bboxErrorM": 7.30676430471533e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.03884493760699957,
+          1.4226065300431856,
+          -0.08344421149407409
+        ],
+        "max": [
+          0.03884495733035406,
+          1.453379584900834,
+          -0.011261815028628908
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Vertebra T10",
+      "sourceTriangles": 3058,
+      "triangles": 2000,
+      "bboxErrorM": 1.6462492125057793e-7,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.0375502350376354,
+          1.167846129056684,
+          -0.09202759116828198
+        ],
+        "max": [
+          0.03766890527991266,
+          1.2271713706040606,
+          -0.014319490328738258
+        ]
+      },
+      "simplifierErrorM": 0.00019712848006747663
+    },
+    {
+      "source": "Vertebra T11",
+      "sourceTriangles": 1798,
+      "triangles": 1798,
+      "bboxErrorM": 9.344239182418335e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.029034612869518063,
+          1.1418151597799773,
+          -0.0844007060340267
+        ],
+        "max": [
+          0.029034632614431965,
+          1.1968157883522277,
+          -0.005754932372531858
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Vertebra T12",
+      "sourceTriangles": 2586,
+      "triangles": 2000,
+      "bboxErrorM": 7.975474347610145e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.023341545991529936,
+          1.1120525078599373,
+          -0.07708428626575675
+        ],
+        "max": [
+          0.023341558285862544,
+          1.1661007009781932,
+          0.003621419627613065
+        ]
+      },
+      "simplifierErrorM": 0.00015486690972466022
+    },
+    {
+      "source": "Vertebra T2",
+      "sourceTriangles": 2142,
+      "triangles": 2000,
+      "bboxErrorM": 9.556087743334274e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.03755067461797501,
+          1.4025536380870158,
+          -0.08924819129573931
+        ],
+        "max": [
+          0.037550701821310394,
+          1.4375724555996348,
+          -0.016283498727166768
+        ]
+      },
+      "simplifierErrorM": 0.000016711939679225907
+    },
+    {
+      "source": "Vertebra T3",
+      "sourceTriangles": 2344,
+      "triangles": 2000,
+      "bboxErrorM": 1.3324720216090213e-7,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.03442718501444177,
+          1.378167643279856,
+          -0.10040142966595923
+        ],
+        "max": [
+          0.034427197308763376,
+          1.4194360203506498,
+          -0.02255815018592093
+        ]
+      },
+      "simplifierErrorM": 0.000083059974713251
+    },
+    {
+      "source": "Vertebra T4",
+      "sourceTriangles": 2216,
+      "triangles": 2000,
+      "bboxErrorM": 9.232568398687135e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.03543599343628534,
+          1.3536842717253534,
+          -0.1009212318772415
+        ],
+        "max": [
+          0.03543601318119001,
+          1.396760436830994,
+          -0.029590391473360605
+        ]
+      },
+      "simplifierErrorM": 0.00006709706940455362
+    },
+    {
+      "source": "Vertebra T5",
+      "sourceTriangles": 2152,
+      "triangles": 2000,
+      "bboxErrorM": 1.483998115503482e-7,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.03770854160456266,
+          1.3205786274310278,
+          -0.09934253136100701
+        ],
+        "max": [
+          0.03770866565759415,
+          1.3739285760960396,
+          -0.03279146101474602
+        ]
+      },
+      "simplifierErrorM": 0.0000477900575788226
+    },
+    {
+      "source": "Vertebra T6",
+      "sourceTriangles": 1780,
+      "triangles": 1780,
+      "bboxErrorM": 8.078813840128873e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.03797267956729299,
+          1.2831986626435026,
+          -0.10013468729732905
+        ],
+        "max": [
+          0.03797269931220183,
+          1.345281920158866,
+          -0.03337340126132936
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Vertebra T7",
+      "sourceTriangles": 2794,
+      "triangles": 2000,
+      "bboxErrorM": 1.0205766698412333e-7,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.03829715232699146,
+          1.2551282472755625,
+          -0.0982514215900364
+        ],
+        "max": [
+          0.038297172071901614,
+          1.3169531584999303,
+          -0.03165014153107497
+        ]
+      },
+      "simplifierErrorM": 0.00014948561147321016
+    },
+    {
+      "source": "Vertebra T8",
+      "sourceTriangles": 1733,
+      "triangles": 1733,
+      "bboxErrorM": 1.0173592523976538e-7,
+      "unreferencedControlPoints": 31,
+      "renderBounds": {
+        "min": [
+          -0.035097353508710225,
+          1.2257130841088937,
+          -0.10026933741353208
+        ],
+        "max": [
+          0.035097373253625566,
+          1.2859474245813842,
+          -0.02656617282570509
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Vertebra T9",
+      "sourceTriangles": 2978,
+      "triangles": 2000,
+      "bboxErrorM": 1.412176451331959e-7,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.03614104338327846,
+          1.200161002232965,
+          -0.09643561426596012
+        ],
+        "max": [
+          0.03614107057877064,
+          1.2568003419834868,
+          -0.020759098213426554
+        ]
+      },
+      "simplifierErrorM": 0.00016844982746988535
+    },
+    {
+      "source": "Vertebra L1",
+      "sourceTriangles": 3162,
+      "triangles": 2000,
+      "bboxErrorM": 1.5126740771087555e-7,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.037206136757158094,
+          1.074278291125079,
+          -0.07077353926869812
+        ],
+        "max": [
+          0.03720615942177183,
+          1.1335515104440435,
+          0.012298761160505763
+        ]
+      },
+      "simplifierErrorM": 0.00021812281920574605
+    },
+    {
+      "source": "Vertebra L2",
+      "sourceTriangles": 2688,
+      "triangles": 2000,
+      "bboxErrorM": 1.5148642273921098e-7,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.041909914427536686,
+          1.0500548208666107,
+          -0.06565508231825368
+        ],
+        "max": [
+          0.04190993781094667,
+          1.0997828891308925,
+          0.01744801103544324
+        ]
+      },
+      "simplifierErrorM": 0.00016836155555211008
+    },
+    {
+      "source": "Vertebra L3",
+      "sourceTriangles": 3160,
+      "triangles": 2000,
+      "bboxErrorM": 1.0568100838881378e-7,
+      "unreferencedControlPoints": 20,
+      "renderBounds": {
+        "min": [
+          -0.04171565724669665,
+          1.0210127637695965,
+          -0.06564199931461001
+        ],
+        "max": [
+          0.04173630489669044,
+          1.065721021475381,
+          0.019305421587902084
+        ]
+      },
+      "simplifierErrorM": 0.00021185757941566408
+    },
+    {
+      "source": "Vertebra L4",
+      "sourceTriangles": 3804,
+      "triangles": 2000,
+      "bboxErrorM": 1.296712541787315e-7,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.044370333948103066,
+          0.9936060162892383,
+          -0.0662187779569041
+        ],
+        "max": [
+          0.04437037254429893,
+          1.0364899739934588,
+          0.018112026065920467
+        ]
+      },
+      "simplifierErrorM": 0.000272710167337209
+    },
+    {
+      "source": "Vertebra L5",
+      "sourceTriangles": 4032,
+      "triangles": 2000,
+      "bboxErrorM": 1.3265242371218733e-7,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.052922960252920107,
+          0.9575953618012885,
+          -0.07048420321424713
+        ],
+        "max": [
+          0.052922968549927216,
+          1.0080160783312961,
+          0.01223389558780463
+        ]
+      },
+      "simplifierErrorM": 0.000301016349112615
+    },
+    {
+      "source": "Sacrum",
+      "sourceTriangles": 11676,
+      "triangles": 3500,
+      "bboxErrorM": 8.568520715179773e-8,
+      "unreferencedControlPoints": 21,
+      "renderBounds": {
+        "min": [
+          -0.061504284792524386,
+          0.8657537363504904,
+          -0.09500251106393157
+        ],
+        "max": [
+          0.06142611442425041,
+          0.980834515057109,
+          -0.003600433255258837
+        ]
+      },
+      "simplifierErrorM": 0.0004368018126115203
+    },
+    {
+      "source": "Coccyx",
+      "sourceTriangles": 1166,
+      "triangles": 1166,
+      "bboxErrorM": 3.961530181673112e-8,
+      "unreferencedControlPoints": 4,
+      "renderBounds": {
+        "min": [
+          -0.016741091643011477,
+          0.8302965560337588,
+          -0.08636874271501074
+        ],
+        "max": [
+          0.016763849713031784,
+          0.8611255461829491,
+          -0.06664396593748292
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Manubrium of sternum",
+      "sourceTriangles": 2662,
+      "triangles": 2000,
+      "bboxErrorM": 4.475805348569395e-8,
+      "unreferencedControlPoints": 3,
+      "renderBounds": {
+        "min": [
+          -0.028658594105224408,
+          1.3499360429415899,
+          0.031601799861710675
+        ],
+        "max": [
+          0.028399185441399376,
+          1.4039206952402312,
+          0.08383232062929916
+        ]
+      },
+      "simplifierErrorM": 0.00011375635222066194
+    },
+    {
+      "source": "Body of sternum",
+      "sourceTriangles": 4466,
+      "triangles": 2000,
+      "bboxErrorM": 1.5071254955145719e-7,
+      "unreferencedControlPoints": 5,
+      "renderBounds": {
+        "min": [
+          -0.024674178042700955,
+          1.2395916300140022,
+          0.0691361029908858
+        ],
+        "max": [
+          0.024674179826214213,
+          1.3589443673217658,
+          0.11218428984682838
+        ]
+      },
+      "simplifierErrorM": 0.00025174839538522065
+    },
+    {
+      "source": "Xiphoid process",
+      "sourceTriangles": 913,
+      "triangles": 913,
+      "bboxErrorM": 1.9878057400113391e-7,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.010850234927998007,
+          1.2209055027356521,
+          0.09588755445180933
+        ],
+        "max": [
+          0.010850232171313645,
+          1.2435901956710682,
+          0.11124720246735978
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "First rib.l",
+      "sourceTriangles": 3210,
+      "triangles": 900,
+      "bboxErrorM": 8.442049925783124e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.01627348662510059,
+          1.38714343415128,
+          -0.03353789827095941
+        ],
+        "max": [
+          0.07117544426012858,
+          1.4465409169400305,
+          0.03712941487389371
+        ]
+      },
+      "simplifierErrorM": 0.0001573734189150855
+    },
+    {
+      "source": "Second rib.l",
+      "sourceTriangles": 5364,
+      "triangles": 900,
+      "bboxErrorM": 9.054257898988283e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.01727434507807824,
+          1.3450919801798475,
+          -0.045289303700037024
+        ],
+        "max": [
+          0.09940082252646569,
+          1.4363987159164193,
+          0.06669199901397886
+        ]
+      },
+      "simplifierErrorM": 0.00023398581834044307
+    },
+    {
+      "source": "Third rib.l",
+      "sourceTriangles": 6980,
+      "triangles": 900,
+      "bboxErrorM": 5.358823162993076e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.017041463279203476,
+          1.310726219359716,
+          -0.06279154237594821
+        ],
+        "max": [
+          0.1125455340793089,
+          1.4165054367878953,
+          0.07643291462438692
+        ]
+      },
+      "simplifierErrorM": 0.0002713457797653973
+    },
+    {
+      "source": "Fourth rib.l",
+      "sourceTriangles": 8646,
+      "triangles": 900,
+      "bboxErrorM": 1.463094765341566e-7,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.015797885189969465,
+          1.27751762646883,
+          -0.0770111341178954
+        ],
+        "max": [
+          0.12538290689445,
+          1.3946082863012368,
+          0.09279834505225694
+        ]
+      },
+      "simplifierErrorM": 0.0002871673204936087
+    },
+    {
+      "source": "Fifth rib.l",
+      "sourceTriangles": 9376,
+      "triangles": 900,
+      "bboxErrorM": 7.423197678768645e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.015495745890210478,
+          1.241311505163068,
+          -0.08722752409557898
+        ],
+        "max": [
+          0.13130794500311563,
+          1.367296115183884,
+          0.10210646717535941
+        ]
+      },
+      "simplifierErrorM": 0.00028343903250060976
+    },
+    {
+      "source": "Sixth rib.l",
+      "sourceTriangles": 10132,
+      "triangles": 900,
+      "bboxErrorM": 3.9211402569350184e-8,
+      "unreferencedControlPoints": 10,
+      "renderBounds": {
+        "min": [
+          0.01573149963491411,
+          1.205814996830116,
+          -0.09734211131516554
+        ],
+        "max": [
+          0.13881560997025308,
+          1.3444127981685983,
+          0.09886510925422354
+        ]
+      },
+      "simplifierErrorM": 0.000287400878733024
+    },
+    {
+      "source": "Seventh rib.l",
+      "sourceTriangles": 9776,
+      "triangles": 900,
+      "bboxErrorM": 3.051753101612764e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.016455014417802064,
+          1.1714483558625666,
+          -0.09646568289064889
+        ],
+        "max": [
+          0.14164013163323716,
+          1.3157998100956918,
+          0.08515875858063755
+        ]
+      },
+      "simplifierErrorM": 0.00030030234484001994
+    },
+    {
+      "source": "Eighth rib.l",
+      "sourceTriangles": 8270,
+      "triangles": 900,
+      "bboxErrorM": 1.317525049060464e-7,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.017409844547987677,
+          1.1352981454396387,
+          -0.09638122485861474
+        ],
+        "max": [
+          0.13529005072346798,
+          1.286828997089878,
+          0.067040491936867
+        ]
+      },
+      "simplifierErrorM": 0.00028207528521306813
+    },
+    {
+      "source": "Ninth rib.l",
+      "sourceTriangles": 7778,
+      "triangles": 900,
+      "bboxErrorM": 8.489210867601571e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.01817485027232614,
+          1.10384973432143,
+          -0.09331291383759702
+        ],
+        "max": [
+          0.1333899346780068,
+          1.2589753487655526,
+          0.0390830465930847
+        ]
+      },
+      "simplifierErrorM": 0.00027809079620055854
+    },
+    {
+      "source": "Tenth rib.l",
+      "sourceTriangles": 7026,
+      "triangles": 900,
+      "bboxErrorM": 1.2195850906948635e-7,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.01853186331814448,
+          1.072434635483028,
+          -0.08520652067988398
+        ],
+        "max": [
+          0.13145633786708358,
+          1.229274990923658,
+          0.02418262992715067
+        ]
+      },
+      "simplifierErrorM": 0.00022910357802174985
+    },
+    {
+      "source": "Eleventh rib.l",
+      "sourceTriangles": 5034,
+      "triangles": 900,
+      "bboxErrorM": 4.5909146688654506e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.019885848049786468,
+          1.0590535311387343,
+          -0.0782551997124716
+        ],
+        "max": [
+          0.11971874552388061,
+          1.1910812418754428,
+          0.0029321981543404085
+        ]
+      },
+      "simplifierErrorM": 0.00021308305440470576
+    },
+    {
+      "source": "Twelfth rib.l",
+      "sourceTriangles": 3002,
+      "triangles": 900,
+      "bboxErrorM": 7.383434708074788e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.019427806971477415,
+          1.056445763186527,
+          -0.06811447315109116
+        ],
+        "max": [
+          0.08543671224087715,
+          1.154332761667172,
+          -0.023724117184396824
+        ]
+      },
+      "simplifierErrorM": 0.00015466428885702044
+    },
+    {
+      "source": "Costal cartilage of first rib.l",
+      "sourceTriangles": 2771,
+      "triangles": 899,
+      "bboxErrorM": 8.321368771824211e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.02354237789278381,
+          1.3786073563154944,
+          0.027589259080431142
+        ],
+        "max": [
+          0.054104723964870836,
+          1.3975733111395483,
+          0.05170694378762532
+        ]
+      },
+      "simplifierErrorM": 0.00005374055399443023
+    },
+    {
+      "source": "Costal cartilage of second rib.l",
+      "sourceTriangles": 3408,
+      "triangles": 900,
+      "bboxErrorM": 5.90387965182515e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.012630986910472708,
+          1.343082010180154,
+          0.057426294143130364
+        ],
+        "max": [
+          0.04595037033528203,
+          1.3598293967451724,
+          0.08173464425337339
+        ]
+      },
+      "simplifierErrorM": 0.00005625278936349787
+    },
+    {
+      "source": "Costal cartilage of third rib.l",
+      "sourceTriangles": 3600,
+      "triangles": 900,
+      "bboxErrorM": 5.083287901719302e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.015354827947684143,
+          1.3105069731021224,
+          0.06879659543827397
+        ],
+        "max": [
+          0.05267367471461565,
+          1.3298670561810846,
+          0.0911203933146601
+        ]
+      },
+      "simplifierErrorM": 0.00005903786950511858
+    },
+    {
+      "source": "Costal cartilage of fourth rib.l",
+      "sourceTriangles": 4472,
+      "triangles": 4472,
+      "bboxErrorM": 6.590663348404746e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.016194666718309707,
+          1.277016467197527,
+          0.08477053528449767
+        ],
+        "max": [
+          0.07064327583868772,
+          1.3059669899878856,
+          0.0973440069639454
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Costal cartilage of fifth rib.l",
+      "sourceTriangles": 6492,
+      "triangles": 900,
+      "bboxErrorM": 4.2051821580457727e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.019041015791456718,
+          1.2406574830529997,
+          0.09333082110138728
+        ],
+        "max": [
+          0.08466891951558925,
+          1.2800420943208035,
+          0.10967178394639295
+        ]
+      },
+      "simplifierErrorM": 0.00007663962605874985
+    },
+    {
+      "source": "Costal cartilage of sixth rib.l",
+      "sourceTriangles": 8120,
+      "triangles": 900,
+      "bboxErrorM": 6.284645803766864e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.013711019364606232,
+          1.205725902688353,
+          0.09017542952522595
+        ],
+        "max": [
+          0.09629077116281504,
+          1.2614474925034405,
+          0.11281316702888802
+        ]
+      },
+      "simplifierErrorM": 0.0001034680608427152
+    },
+    {
+      "source": "Costal cartilage of seventh rib.l",
+      "sourceTriangles": 13764,
+      "triangles": 900,
+      "bboxErrorM": 9.991162230882367e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.006262584423903972,
+          1.1688371703767102,
+          0.07525017952782577
+        ],
+        "max": [
+          0.11432648128950872,
+          1.2443319769051897,
+          0.11192792104519604
+        ]
+      },
+      "simplifierErrorM": 0.00017335417214781046
+    },
+    {
+      "source": "Costal cartilage of eighth rib.l",
+      "sourceTriangles": 2624,
+      "triangles": 900,
+      "bboxErrorM": 8.136761864285802e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.03712555329881995,
+          1.1300559857560464,
+          0.05828229592908004
+        ],
+        "max": [
+          0.11865274665925579,
+          1.1923941815535195,
+          0.10844904074743866
+        ]
+      },
+      "simplifierErrorM": 0.00009942725591827184
+    },
+    {
+      "source": "Costal cartilage of ninth rib.l",
+      "sourceTriangles": 1964,
+      "triangles": 900,
+      "bboxErrorM": 7.153943037963018e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.06499101944447644,
+          1.0953567743439958,
+          0.030167573323845846
+        ],
+        "max": [
+          0.12685027788549635,
+          1.1347090553336163,
+          0.09688215217535287
+        ]
+      },
+      "simplifierErrorM": 0.00009173111175186932
+    },
+    {
+      "source": "Costal cartilage of tenth rib.l",
+      "sourceTriangles": 1524,
+      "triangles": 900,
+      "bboxErrorM": 5.0447655164376215e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.08046072349832102,
+          1.0629425553304677,
+          0.016216934855924913
+        ],
+        "max": [
+          0.1275907594370911,
+          1.0988786410710158,
+          0.08361079248103025
+        ]
+      },
+      "simplifierErrorM": 0.00005455447899294086
+    },
+    {
+      "source": "First rib.r",
+      "sourceTriangles": 3210,
+      "triangles": 900,
+      "bboxErrorM": 7.360492793040407e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.0711754878443078,
+          1.3871434470943078,
+          -0.03353790610294757
+        ],
+        "max": [
+          -0.016273532896874877,
+          1.4465408999745915,
+          0.03712943215117364
+        ]
+      },
+      "simplifierErrorM": 0.00016142863023560494
+    },
+    {
+      "source": "Second rib.r",
+      "sourceTriangles": 5364,
+      "triangles": 900,
+      "bboxErrorM": 8.074432944482623e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.0994008761159563,
+          1.3450919931612515,
+          -0.045289307472197664
+        ],
+        "max": [
+          -0.01727439719874665,
+          1.4363987061181698,
+          0.06669201273240453
+        ]
+      },
+      "simplifierErrorM": 0.00023827599943615496
+    },
+    {
+      "source": "Third rib.r",
+      "sourceTriangles": 6980,
+      "triangles": 900,
+      "bboxErrorM": 8.417361407886403e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.11254556400874843,
+          1.3107262471438477,
+          -0.06279154826566992
+        ],
+        "max": [
+          -0.01704149015941958,
+          1.4165054209350887,
+          0.07643293839296249
+        ]
+      },
+      "simplifierErrorM": 0.0002711574488785118
+    },
+    {
+      "source": "Fourth rib.r",
+      "sourceTriangles": 8646,
+      "triangles": 900,
+      "bboxErrorM": 1.3261657905161428e-7,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.1253829396705172,
+          1.2775176463959617,
+          -0.07701113441302333
+        ],
+        "max": [
+          -0.015797917534949503,
+          1.3946082726083393,
+          0.09279836474388028
+        ]
+      },
+      "simplifierErrorM": 0.00029323328635655344
+    },
+    {
+      "source": "Fifth rib.r",
+      "sourceTriangles": 9376,
+      "triangles": 900,
+      "bboxErrorM": 9.977333403909938e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.13130799834584095,
+          1.2413115307044253,
+          -0.08722752416504104
+        ],
+        "max": [
+          -0.015495795003341807,
+          1.3672961045109233,
+          0.10210648708088911
+        ]
+      },
+      "simplifierErrorM": 0.0002831870806403458
+    },
+    {
+      "source": "Sixth rib.r",
+      "sourceTriangles": 10132,
+      "triangles": 900,
+      "bboxErrorM": 5.016504345256578e-8,
+      "unreferencedControlPoints": 10,
+      "renderBounds": {
+        "min": [
+          -0.13881567201813944,
+          1.2058150077837568,
+          -0.09734210572728909
+        ],
+        "max": [
+          -0.01573156394756432,
+          1.3444127946234292,
+          0.09886512525670606
+        ]
+      },
+      "simplifierErrorM": 0.00029449904104694724
+    },
+    {
+      "source": "Seventh rib.r",
+      "sourceTriangles": 9776,
+      "triangles": 900,
+      "bboxErrorM": 2.6269388664346138e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.1416401650877341,
+          1.1714483676017076,
+          -0.09646567979123756
+        ],
+        "max": [
+          -0.016455044342165354,
+          1.3157998060746665,
+          0.08515877153638521
+        ]
+      },
+      "simplifierErrorM": 0.00029855058528482914
+    },
+    {
+      "source": "Eighth rib.r",
+      "sourceTriangles": 8270,
+      "triangles": 900,
+      "bboxErrorM": 2.742026260216246e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.13529005542202185,
+          1.135298143902185,
+          -0.09638122696056672
+        ],
+        "max": [
+          -0.01740984972732413,
+          1.2868289987442103,
+          0.06704048574183395
+        ]
+      },
+      "simplifierErrorM": 0.0002873989869840443
+    },
+    {
+      "source": "Ninth rib.r",
+      "sourceTriangles": 7778,
+      "triangles": 900,
+      "bboxErrorM": 1.046336688403926e-7,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.1333899457576355,
+          1.1038497540629901,
+          -0.09331292042274415
+        ],
+        "max": [
+          -0.018174863534037834,
+          1.2589753499086223,
+          0.039083060531286816
+        ]
+      },
+      "simplifierErrorM": 0.0002730903506744653
+    },
+    {
+      "source": "Tenth rib.r",
+      "sourceTriangles": 7026,
+      "triangles": 900,
+      "bboxErrorM": 1.2139917315856508e-7,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.1314563548543282,
+          1.0724346488243786,
+          -0.08520652450770362
+        ],
+        "max": [
+          -0.018531882012334994,
+          1.229274990364322,
+          0.024182646699717543
+        ]
+      },
+      "simplifierErrorM": 0.00022866102517582476
+    },
+    {
+      "source": "Eleventh rib.r",
+      "sourceTriangles": 5034,
+      "triangles": 900,
+      "bboxErrorM": 4.613897419680768e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.11971875159800224,
+          1.0590535288326461,
+          -0.07825520194802708
+        ],
+        "max": [
+          -0.01988584955469852,
+          1.1910812393377104,
+          0.0029321857913294294
+        ]
+      },
+      "simplifierErrorM": 0.00021353160263970494
+    },
+    {
+      "source": "Twelfth rib.r",
+      "sourceTriangles": 3002,
+      "triangles": 900,
+      "bboxErrorM": 1.2070069854708265e-7,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.08543670826841442,
+          1.0564457642707878,
+          -0.06811447610175775
+        ],
+        "max": [
+          -0.019427797781429605,
+          1.1543327584875638,
+          -0.02372411653278997
+        ]
+      },
+      "simplifierErrorM": 0.00015726122364867479
+    },
+    {
+      "source": "Costal cartilage of first rib.r",
+      "sourceTriangles": 2771,
+      "triangles": 899,
+      "bboxErrorM": 8.286908248500424e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.05410470771873933,
+          1.3786073559708891,
+          0.027589259262034673
+        ],
+        "max": [
+          -0.023542361646652302,
+          1.3975733113701905,
+          0.05170694355174602
+        ]
+      },
+      "simplifierErrorM": 0.00005481072730617598
+    },
+    {
+      "source": "Costal cartilage of second rib.r",
+      "sourceTriangles": 3408,
+      "triangles": 900,
+      "bboxErrorM": 5.9421927822711496e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.04595035408915053,
+          1.3430820105632852,
+          0.057426297322899486
+        ],
+        "max": [
+          -0.01263097066434121,
+          1.359829397568885,
+          0.08173464720483194
+        ]
+      },
+      "simplifierErrorM": 0.00005631509702652693
+    },
+    {
+      "source": "Costal cartilage of third rib.r",
+      "sourceTriangles": 3600,
+      "triangles": 900,
+      "bboxErrorM": 5.0732242851125875e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.05267366591906487,
+          1.3105069732527412,
+          0.06879659540437102
+        ],
+        "max": [
+          -0.015354819152133357,
+          1.3298670560804484,
+          0.09112039325423635
+        ]
+      },
+      "simplifierErrorM": 0.000058805781009141356
+    },
+    {
+      "source": "Costal cartilage of fourth rib.r",
+      "sourceTriangles": 4472,
+      "triangles": 4472,
+      "bboxErrorM": 6.592628176704807e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.07064326704313695,
+          1.2770164672171753,
+          0.08477053519375426
+        ],
+        "max": [
+          -0.01619465792275893,
+          1.3059669900038768,
+          0.09734400702147934
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Costal cartilage of fifth rib.r",
+      "sourceTriangles": 6492,
+      "triangles": 900,
+      "bboxErrorM": 4.2145217094002874e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.08466891072003845,
+          1.2406574830261823,
+          0.09333082081524911
+        ],
+        "max": [
+          -0.019041006995905933,
+          1.280042094414199,
+          0.10967178375003578
+        ]
+      },
+      "simplifierErrorM": 0.00007837708108127117
+    },
+    {
+      "source": "Costal cartilage of sixth rib.r",
+      "sourceTriangles": 8120,
+      "triangles": 898,
+      "bboxErrorM": 6.281913811356787e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.09629075491668353,
+          1.2057259028883782,
+          0.09017542904869912
+        ],
+        "max": [
+          -0.013711003118474716,
+          1.2614474924761205,
+          0.11281316691094301
+        ]
+      },
+      "simplifierErrorM": 0.00010420653416076675
+    },
+    {
+      "source": "Costal cartilage of seventh rib.r",
+      "sourceTriangles": 13764,
+      "triangles": 900,
+      "bboxErrorM": 1.0018020502045033e-7,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.11432647249395793,
+          1.168837170645293,
+          0.07525017853200479
+        ],
+        "max": [
+          -0.006262575628353187,
+          1.2443319766937468,
+          0.11192792173203993
+        ]
+      },
+      "simplifierErrorM": 0.00016943547234404832
+    },
+    {
+      "source": "Costal cartilage of eighth rib.r",
+      "sourceTriangles": 2624,
+      "triangles": 900,
+      "bboxErrorM": 8.159089803783104e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.11865273041312428,
+          1.1300559859793258,
+          0.05828229537060132
+        ],
+        "max": [
+          -0.03712553705268843,
+          1.1923941811423584,
+          0.10844904157592071
+        ]
+      },
+      "simplifierErrorM": 0.00009670670988271013
+    },
+    {
+      "source": "Costal cartilage of ninth rib.r",
+      "sourceTriangles": 1964,
+      "triangles": 900,
+      "bboxErrorM": 7.153646741642206e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.12685026163936486,
+          1.0953567743410328,
+          0.030167573156663807
+        ],
+        "max": [
+          -0.06499100319834493,
+          1.1347090546575977,
+          0.09688215283869404
+        ]
+      },
+      "simplifierErrorM": 0.00009455071267439052
+    },
+    {
+      "source": "Costal cartilage of tenth rib.r",
+      "sourceTriangles": 1524,
+      "triangles": 900,
+      "bboxErrorM": 1.3725970515743313e-7,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.1275907431909596,
+          1.0629425555866683,
+          0.01621693472617908
+        ],
+        "max": [
+          -0.0804607072521895,
+          1.0988786401054693,
+          0.08361079305390529
+        ]
+      },
+      "simplifierErrorM": 0.00005411470556282438
+    },
+    {
+      "source": "Clavicle.l",
+      "sourceTriangles": 1550,
+      "triangles": 1550,
+      "bboxErrorM": 3.960648704837144e-8,
+      "unreferencedControlPoints": 12,
+      "renderBounds": {
+        "min": [
+          0.011214524252258818,
+          1.3891123676556871,
+          -0.05226177212515999
+        ],
+        "max": [
+          0.15433063765383154,
+          1.4252156197066308,
+          0.05050986938287422
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Clavicle.r",
+      "sourceTriangles": 1550,
+      "triangles": 1550,
+      "bboxErrorM": 3.948080138510557e-8,
+      "unreferencedControlPoints": 12,
+      "renderBounds": {
+        "min": [
+          -0.15433062726021018,
+          1.3891123666195608,
+          -0.05226177199947433
+        ],
+        "max": [
+          -0.011214513858637308,
+          1.4252156207816944,
+          0.05050986908432563
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Scapula.l",
+      "sourceTriangles": 25325,
+      "triangles": 4999,
+      "bboxErrorM": 5.3900055752009735e-8,
+      "unreferencedControlPoints": 26,
+      "renderBounds": {
+        "min": [
+          0.0606111893518973,
+          1.2542748990233468,
+          -0.11280736754093564
+        ],
+        "max": [
+          0.17357541117781014,
+          1.4178399931665266,
+          0.0012646876144348873
+        ]
+      },
+      "simplifierErrorM": 0.00014388411364052445
+    },
+    {
+      "source": "Scapula.r",
+      "sourceTriangles": 25325,
+      "triangles": 4999,
+      "bboxErrorM": 5.517917212038981e-8,
+      "unreferencedControlPoints": 26,
+      "renderBounds": {
+        "min": [
+          -0.17357536166863902,
+          1.2542749003024631,
+          -0.11280737041138
+        ],
+        "max": [
+          -0.06061113984272617,
+          1.4178399921048714,
+          0.0012646883164838041
+        ]
+      },
+      "simplifierErrorM": 0.0001439116895198822
+    },
+    {
+      "source": "Humerus.l",
+      "sourceTriangles": 4280,
+      "triangles": 2000,
+      "bboxErrorM": 4.347829582473928e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.14460656876485609,
+          1.0870225244484037,
+          -0.053626201640298084
+        ],
+        "max": [
+          0.24883280571965935,
+          1.4046044694778916,
+          -0.0012591668126732758
+        ]
+      },
+      "simplifierErrorM": 0.0002999945427291095
+    },
+    {
+      "source": "Humerus.r",
+      "sourceTriangles": 4280,
+      "triangles": 2000,
+      "bboxErrorM": 3.440225704309796e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.24883279196411484,
+          1.0870225245254312,
+          -0.05362620568230789
+        ],
+        "max": [
+          -0.14460655500931158,
+          1.404604469369298,
+          -0.0012591625669962614
+        ]
+      },
+      "simplifierErrorM": 0.00030006148153916
+    },
+    {
+      "source": "Radius.l",
+      "sourceTriangles": 784,
+      "triangles": 784,
+      "bboxErrorM": 3.881409432748839e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.22687696013087735,
+          0.8563238368899682,
+          -0.041940784741197785
+        ],
+        "max": [
+          0.28866697258904245,
+          1.0933314774768885,
+          0.026730320598843633
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Radius.r",
+      "sourceTriangles": 784,
+      "triangles": 784,
+      "bboxErrorM": 2.5973368338039204e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.28866695883349786,
+          0.8563238361560238,
+          -0.04194078089850238
+        ],
+        "max": [
+          -0.22687694637533276,
+          1.093331478080215,
+          0.02673031751875942
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Ulna.l",
+      "sourceTriangles": 904,
+      "triangles": 904,
+      "bboxErrorM": 3.123951944350445e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.2032372816867927,
+          0.855580371816135,
+          -0.06038804267464299
+        ],
+        "max": [
+          0.255630281218757,
+          1.1110198744843123,
+          0.022851466891165132
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Ulna.r",
+      "sourceTriangles": 904,
+      "triangles": 904,
+      "bboxErrorM": 4.081247317877512e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.2556302004079845,
+          0.8555803707074927,
+          -0.06038804022451583
+        ],
+        "max": [
+          -0.20323720087602015,
+          1.1110198752380667,
+          0.022851462120410622
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Capitate bone.l",
+      "sourceTriangles": 472,
+      "triangles": 472,
+      "bboxErrorM": 4.033765520564114e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.25654880130035507,
+          0.8318798847382448,
+          0.008971388742539544
+        ],
+        "max": [
+          0.27316046645760034,
+          0.8552897275293482,
+          0.02694455716559816
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Distal phalanx of fifth finger of hand.l",
+      "sourceTriangles": 192,
+      "triangles": 192,
+      "bboxErrorM": 6.019115597610813e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.22608555042894804,
+          0.7229509822752215,
+          0.06876538007497937
+        ],
+        "max": [
+          0.23466772503642014,
+          0.7360834340991923,
+          0.08356414029343108
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Distal phalanx of first finger of hand.l",
+      "sourceTriangles": 222,
+      "triangles": 222,
+      "bboxErrorM": 4.885360922052273e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.3206130005468919,
+          0.7668560993385799,
+          0.05737582636639799
+        ],
+        "max": [
+          0.33462462174372576,
+          0.7909848926540304,
+          0.07413418633027724
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Distal phalanx of fourth finger of hand.l",
+      "sourceTriangles": 134,
+      "triangles": 134,
+      "bboxErrorM": 5.8997201859978254e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.2533382424034626,
+          0.7107602255222178,
+          0.07966982512526506
+        ],
+        "max": [
+          0.2619461960192878,
+          0.7203671221921046,
+          0.09584969917120592
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Distal phalanx of second finger of hand.l",
+      "sourceTriangles": 250,
+      "triangles": 250,
+      "bboxErrorM": 6.293285496894452e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.31113782526310796,
+          0.7077908598957362,
+          0.0702847720904771
+        ],
+        "max": [
+          0.32157424072805724,
+          0.722090728110089,
+          0.08793047403324254
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Distal phalanx of third finger of hand.l",
+      "sourceTriangles": 192,
+      "triangles": 192,
+      "bboxErrorM": 5.671902747472757e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.28024925215053315,
+          0.6986861471724322,
+          0.07913007298632713
+        ],
+        "max": [
+          0.29011128746751624,
+          0.7125944728574147,
+          0.09703091947165574
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Fifth metacarpal bone.l",
+      "sourceTriangles": 512,
+      "triangles": 512,
+      "bboxErrorM": 4.439954517931888e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.23251806106826592,
+          0.7801267520046254,
+          0.018938424057328214
+        ],
+        "max": [
+          0.2534331963939533,
+          0.837085304867963,
+          0.044446292960689054
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "First metacarpal bone.l",
+      "sourceTriangles": 682,
+      "triangles": 682,
+      "bboxErrorM": 4.9602999263598235e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.28118006958617975,
+          0.8093667154766007,
+          0.022560603837385746
+        ],
+        "max": [
+          0.31984423097695786,
+          0.8477457265734534,
+          0.05404023741005698
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Fourth metacarpal bone.l",
+      "sourceTriangles": 642,
+      "triangles": 642,
+      "bboxErrorM": 4.8647464069226376e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.24918274814057945,
+          0.7731236368735981,
+          0.014743076856077465
+        ],
+        "max": [
+          0.2622729262509767,
+          0.8351924535403177,
+          0.04188514137876316
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Hamate bone.l",
+      "sourceTriangles": 536,
+      "triangles": 536,
+      "bboxErrorM": 4.205909842625033e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.24423455018120757,
+          0.830940467455064,
+          0.010051167173853277
+        ],
+        "max": [
+          0.26033385428780453,
+          0.8511417325189488,
+          0.03346100973081199
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Lunate bone.l",
+      "sourceTriangles": 2088,
+      "triangles": 2088,
+      "bboxErrorM": 4.950350640520185e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.24395658388473576,
+          0.8477819066923249,
+          0.00950937183080444
+        ],
+        "max": [
+          0.2610536906798061,
+          0.8605213344707469,
+          0.02611616271732884
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Middle phalanx of fifth finger of hand.l",
+      "sourceTriangles": 292,
+      "triangles": 292,
+      "bboxErrorM": 6.134182710393343e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.2260756128242776,
+          0.734194917119575,
+          0.054928386417869436
+        ],
+        "max": [
+          0.23812762705492596,
+          0.7546472362286438,
+          0.07221357698113222
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Middle phalanx of fourth finger of hand.l",
+      "sourceTriangles": 446,
+      "triangles": 446,
+      "bboxErrorM": 5.3559489822385675e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.2505098967556535,
+          0.7158590368736734,
+          0.05663780263537941
+        ],
+        "max": [
+          0.26307324432250945,
+          0.7406996282627017,
+          0.08169011156369681
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Middle phalanx of second finger of hand.l",
+      "sourceTriangles": 314,
+      "triangles": 314,
+      "bboxErrorM": 6.340317559860864e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.3040460058646321,
+          0.7170670666532977,
+          0.051226687713867264
+        ],
+        "max": [
+          0.3191753328724259,
+          0.7383829971016306,
+          0.07284841389608543
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Middle phalanx of third finger of hand.l",
+      "sourceTriangles": 360,
+      "triangles": 360,
+      "bboxErrorM": 5.7102437056588684e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.27525917635684005,
+          0.7082518178930093,
+          0.05801949392562389
+        ],
+        "max": [
+          0.2894773872483608,
+          0.73451064215945,
+          0.0818342764985514
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Pisiform bone.l",
+      "sourceTriangles": 1668,
+      "triangles": 1668,
+      "bboxErrorM": 4.0610559373654986e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.23962302167621974,
+          0.8397770015058094,
+          0.026879343767888933
+        ],
+        "max": [
+          0.24808633437982294,
+          0.8518676955938169,
+          0.037298670866025715
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Proximal phalanx of fifth finger of hand.l",
+      "sourceTriangles": 560,
+      "triangles": 560,
+      "bboxErrorM": 5.3862612474364635e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.22937664947182884,
+          0.7505383831507542,
+          0.03821039743212961
+        ],
+        "max": [
+          0.24421465878407092,
+          0.7843443473847227,
+          0.05984657110994469
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Proximal phalanx of first finger of hand.l",
+      "sourceTriangles": 328,
+      "triangles": 328,
+      "bboxErrorM": 4.4414755220878455e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.30836093819303106,
+          0.783940790984909,
+          0.04233976422214804
+        ],
+        "max": [
+          0.3292884861857463,
+          0.8164771764666116,
+          0.06536842853760373
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Proximal phalanx of fourth finger of hand.l",
+      "sourceTriangles": 368,
+      "triangles": 368,
+      "bboxErrorM": 5.124871247513818e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.24822037944109998,
+          0.7366891317443249,
+          0.03510085332453122
+        ],
+        "max": [
+          0.26217001180859895,
+          0.7771217610021881,
+          0.06237412153546327
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Proximal phalanx of second finger of hand.l",
+      "sourceTriangles": 414,
+      "triangles": 414,
+      "bboxErrorM": 5.792853361580308e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.28997323808781744,
+          0.7323859854158741,
+          0.03346556178620404
+        ],
+        "max": [
+          0.3127209330818757,
+          0.7712959546475533,
+          0.057177042775125565
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Proximal phalanx of third finger of hand.l",
+      "sourceTriangles": 440,
+      "triangles": 440,
+      "bboxErrorM": 5.751859654540281e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.2676554066040247,
+          0.730848533680652,
+          0.03458346590411176
+        ],
+        "max": [
+          0.2866109349635267,
+          0.7729970015810492,
+          0.06475221595489516
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Scaphoid bone.l",
+      "sourceTriangles": 390,
+      "triangles": 390,
+      "bboxErrorM": 3.81580861769093e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.2575288324328555,
+          0.8464998659254797,
+          0.010125585805562373
+        ],
+        "max": [
+          0.2820884191851194,
+          0.8627076192511542,
+          0.02601414942449884
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Second metacarpal bone.l",
+      "sourceTriangles": 764,
+      "triangles": 764,
+      "bboxErrorM": 4.919215207399574e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.2702604177796317,
+          0.7665467452259047,
+          0.015932491447356346
+        ],
+        "max": [
+          0.3023526307726929,
+          0.8370778711118927,
+          0.042632446456394246
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Third metacarpal bone.l",
+      "sourceTriangles": 708,
+      "triangles": 708,
+      "bboxErrorM": 7.41066698006776e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.26062313943690474,
+          0.7685870119514446,
+          0.011006227433784715
+        ],
+        "max": [
+          0.2814122854472013,
+          0.8352753665032152,
+          0.04272035512716116
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Trapezium bone.l",
+      "sourceTriangles": 500,
+      "triangles": 500,
+      "bboxErrorM": 5.607716724309597e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.2733876253950718,
+          0.8356791776595918,
+          0.016677718572233848
+        ],
+        "max": [
+          0.2910591505223331,
+          0.8564766084659846,
+          0.034202555291444774
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Trapezoid bone.l",
+      "sourceTriangles": 364,
+      "triangles": 364,
+      "bboxErrorM": 4.1247678574801716e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.270657553554509,
+          0.8325561222009401,
+          0.012277447888029393
+        ],
+        "max": [
+          0.2823717733687654,
+          0.8456917342847616,
+          0.027822032646507726
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Triquetrum bone.l",
+      "sourceTriangles": 176,
+      "triangles": 176,
+      "bboxErrorM": 3.946155540876517e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.23969185167062093,
+          0.8388752273701253,
+          0.013432680043878483
+        ],
+        "max": [
+          0.25079245658026733,
+          0.8531523868184573,
+          0.029362572475922943
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Capitate bone.r",
+      "sourceTriangles": 472,
+      "triangles": 472,
+      "bboxErrorM": 4.01302885279925e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.2731604079985704,
+          0.8318798849425967,
+          0.008971388535172866
+        ],
+        "max": [
+          -0.2565487428413251,
+          0.8552897275351441,
+          0.026944556960531583
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Distal phalanx of fifth finger of hand.r",
+      "sourceTriangles": 192,
+      "triangles": 192,
+      "bboxErrorM": 6.031236485237734e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.2346676442256475,
+          0.7229509821110149,
+          0.06876538019618825
+        ],
+        "max": [
+          -0.2260854696181754,
+          0.7360834342313254,
+          0.0835641401745154
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Distal phalanx of first finger of hand.r",
+      "sourceTriangles": 222,
+      "triangles": 222,
+      "bboxErrorM": 4.517434040035573e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.3346245632846958,
+          0.7668560991942733,
+          0.05737582641241947
+        ],
+        "max": [
+          -0.32061294208786195,
+          0.7909848926636892,
+          0.07413418599018584
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Distal phalanx of fourth finger of hand.r",
+      "sourceTriangles": 134,
+      "triangles": 134,
+      "bboxErrorM": 5.900866369146218e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.26194613756025786,
+          0.7107602253027026,
+          0.0796698251367269
+        ],
+        "max": [
+          -0.25333818394443264,
+          0.7203671223613614,
+          0.09584969906735152
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Distal phalanx of second finger of hand.r",
+      "sourceTriangles": 250,
+      "triangles": 250,
+      "bboxErrorM": 6.27865804209149e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.32157415991728466,
+          0.7077908596748567,
+          0.0702847721209539
+        ],
+        "max": [
+          -0.31113774445233533,
+          0.7220907282544385,
+          0.08793047380668338
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Distal phalanx of third finger of hand.r",
+      "sourceTriangles": 192,
+      "triangles": 192,
+      "bboxErrorM": 5.676595243864213e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.2901112290084865,
+          0.6986861469256971,
+          0.07913007303325209
+        ],
+        "max": [
+          -0.2802491936915034,
+          0.7125944730289706,
+          0.09703091932110793
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Fifth metacarpal bone.r",
+      "sourceTriangles": 512,
+      "triangles": 512,
+      "bboxErrorM": 4.3681120547034435e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.253433093231438,
+          0.7801267517903646,
+          0.01893842475585267
+        ],
+        "max": [
+          -0.23251795790575064,
+          0.8370853050772471,
+          0.04444629224226442
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "First metacarpal bone.r",
+      "sourceTriangles": 682,
+      "triangles": 682,
+      "bboxErrorM": 4.930734109898083e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.3198441725179281,
+          0.8093667153762961,
+          0.022560604367297822
+        ],
+        "max": [
+          -0.28118001112715,
+          0.8477457268691115,
+          0.05404023712597821
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Fourth metacarpal bone.r",
+      "sourceTriangles": 642,
+      "triangles": 642,
+      "bboxErrorM": 4.8468094690501395e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.26227286779194675,
+          0.773123636608562,
+          0.01474307760803066
+        ],
+        "max": [
+          -0.24918268968154952,
+          0.8351924535914214,
+          0.04188514058508634
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Hamate bone.r",
+      "sourceTriangles": 536,
+      "triangles": 536,
+      "bboxErrorM": 4.222198257686216e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.2603337958287746,
+          0.8309404676179482,
+          0.01005116727301995
+        ],
+        "max": [
+          -0.24423449172217762,
+          0.8511417326073621,
+          0.033461009754750776
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Lunate bone.r",
+      "sourceTriangles": 2088,
+      "triangles": 2088,
+      "bboxErrorM": 4.932708108640327e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.2610536098690335,
+          0.8477819068687502,
+          0.009509371767238687
+        ],
+        "max": [
+          -0.24395650307396313,
+          0.8605213343912199,
+          0.026116162789955242
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Middle phalanx of fifth finger of hand.r",
+      "sourceTriangles": 292,
+      "triangles": 292,
+      "bboxErrorM": 6.146817822100248e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.23812752389241065,
+          0.7341949169267402,
+          0.05492838658481259
+        ],
+        "max": [
+          -0.22607550966176232,
+          0.7546472363340206,
+          0.07221357672584527
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Middle phalanx of fourth finger of hand.r",
+      "sourceTriangles": 446,
+      "triangles": 446,
+      "bboxErrorM": 5.380097196222566e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.2630731635117368,
+          0.7158590365850048,
+          0.05663780287686155
+        ],
+        "max": [
+          -0.25050981594488086,
+          0.7406996284245356,
+          0.08169011128105982
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Middle phalanx of second finger of hand.r",
+      "sourceTriangles": 314,
+      "triangles": 314,
+      "bboxErrorM": 6.31043194365688e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.31917527441339594,
+          0.7170670663544415,
+          0.05122668785940353
+        ],
+        "max": [
+          -0.30404594740560215,
+          0.7383829972699906,
+          0.07284841368299225
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Middle phalanx of third finger of hand.r",
+      "sourceTriangles": 360,
+      "triangles": 360,
+      "bboxErrorM": 5.720609789344744e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.28947732878933086,
+          0.708251817545031,
+          0.058019494101945214
+        ],
+        "max": [
+          -0.27525911789781016,
+          0.7345106422503501,
+          0.08183427608432813
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Pisiform bone.r",
+      "sourceTriangles": 1668,
+      "triangles": 1668,
+      "bboxErrorM": 4.07290438389496e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.24808623121730766,
+          0.8397770015399209,
+          0.0268793438863734
+        ],
+        "max": [
+          -0.23962291851370446,
+          0.851867695630348,
+          0.03729867084922938
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Proximal phalanx of fifth finger of hand.r",
+      "sourceTriangles": 560,
+      "triangles": 560,
+      "bboxErrorM": 5.381513364793866e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.2442145779732983,
+          0.7505383828695835,
+          0.03821039762669535
+        ],
+        "max": [
+          -0.22937656866105624,
+          0.7843443474484886,
+          0.05984657051373251
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Proximal phalanx of first finger of hand.r",
+      "sourceTriangles": 328,
+      "triangles": 328,
+      "bboxErrorM": 4.467019996956534e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.32928840537497367,
+          0.7839407908157572,
+          0.04233976450214348
+        ],
+        "max": [
+          -0.30836085738225844,
+          0.8164771765762655,
+          0.0653684282706252
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Proximal phalanx of fourth finger of hand.r",
+      "sourceTriangles": 368,
+      "triangles": 368,
+      "bboxErrorM": 5.1041426731013306e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.26216995334956905,
+          0.7366891314699374,
+          0.035100853820624424
+        ],
+        "max": [
+          -0.24822032098207003,
+          0.7771217612183958,
+          0.0623741210285978
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Proximal phalanx of second finger of hand.r",
+      "sourceTriangles": 414,
+      "triangles": 414,
+      "bboxErrorM": 5.755293695092201e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.31272087462284576,
+          0.7323859851808265,
+          0.03346556219923822
+        ],
+        "max": [
+          -0.2899731796287875,
+          0.7712959548176629,
+          0.057177042222896476
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Proximal phalanx of third finger of hand.r",
+      "sourceTriangles": 440,
+      "triangles": 440,
+      "bboxErrorM": 5.428517635408525e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.28661087650449674,
+          0.730848533339748,
+          0.034583466395981866
+        ],
+        "max": [
+          -0.2676553481449948,
+          0.7729970018313803,
+          0.06475221540016582
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Scaphoid bone.r",
+      "sourceTriangles": 390,
+      "triangles": 390,
+      "bboxErrorM": 3.814242723922112e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.28208836072608945,
+          0.8464998658757291,
+          0.010125585789903436
+        ],
+        "max": [
+          -0.25752877397382556,
+          0.8627076192577823,
+          0.026014149393110763
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Second metacarpal bone.r",
+      "sourceTriangles": 764,
+      "triangles": 764,
+      "bboxErrorM": 4.8294557165873275e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.3023525499619203,
+          0.7665467450278998,
+          0.015932492342384048
+        ],
+        "max": [
+          -0.2702603369688591,
+          0.8370778713593334,
+          0.04263244555879934
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Third metacarpal bone.r",
+      "sourceTriangles": 708,
+      "triangles": 708,
+      "bboxErrorM": 7.802987100902214e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.28141222698817137,
+          0.7685870116426945,
+          0.011006228308811823
+        ],
+        "max": [
+          -0.2606230809778748,
+          0.8352753668769826,
+          0.04272035413059964
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Trapezium bone.r",
+      "sourceTriangles": 500,
+      "triangles": 500,
+      "bboxErrorM": 5.6160605610422465e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.2910590697115605,
+          0.8356791777094652,
+          0.016677718325492336
+        ],
+        "max": [
+          -0.2733875445842992,
+          0.8564766083825462,
+          0.03420255530338191
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Trapezoid bone.r",
+      "sourceTriangles": 364,
+      "triangles": 364,
+      "bboxErrorM": 4.1105147547890186e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.28237169255799277,
+          0.8325561223660738,
+          0.012277447745498367
+        ],
+        "max": [
+          -0.27065747274373636,
+          0.8456917341068964,
+          0.027822032736123044
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Triquetrum bone.r",
+      "sourceTriangles": 176,
+      "triangles": 176,
+      "bboxErrorM": 3.956826025337812e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.2507923757694947,
+          0.8388752272878932,
+          0.013432680150583328
+        ],
+        "max": [
+          -0.23969177085984833,
+          0.8531523867840338,
+          0.029362572332848225
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Hip bone.l",
+      "sourceTriangles": 3788,
+      "triangles": 3500,
+      "bboxErrorM": 1.1553799694752342e-7,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.0029371542278133767,
+          0.7973397364787738,
+          -0.08678361078805527
+        ],
+        "max": [
+          0.13489441870781613,
+          1.0119402371886927,
+          0.056068669576721124
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Hip bone.r",
+      "sourceTriangles": 3788,
+      "triangles": 3500,
+      "bboxErrorM": 5.9374174243842504e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.13489440521729099,
+          0.7973397371848432,
+          -0.08678360882554469
+        ],
+        "max": [
+          -0.002937140737288235,
+          1.0119402376810984,
+          0.056068671083673374
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Femur.l",
+      "sourceTriangles": 3794,
+      "triangles": 2000,
+      "bboxErrorM": 2.139973265258277e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.031938329628915164,
+          0.4298659181015454,
+          -0.05935280984988615
+        ],
+        "max": [
+          0.14853093570466652,
+          0.8843051670618252,
+          0.01875809540534538
+        ]
+      },
+      "simplifierErrorM": 0.00039199122693389654
+    },
+    {
+      "source": "Femur.r",
+      "sourceTriangles": 3794,
+      "triangles": 2000,
+      "bboxErrorM": 2.1773717717721297e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.14853088526153577,
+          0.42986591847553046,
+          -0.05935281634057174
+        ],
+        "max": [
+          -0.03193827918578442,
+          0.8843051666709048,
+          0.018758101876930312
+        ]
+      },
+      "simplifierErrorM": 0.0003981250920332968
+    },
+    {
+      "source": "Patella.l",
+      "sourceTriangles": 276,
+      "triangles": 276,
+      "bboxErrorM": 3.183284160226951e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.06285183452260465,
+          0.42380567755765747,
+          -0.004087922926756176
+        ],
+        "max": [
+          0.10603749050505032,
+          0.4647278824631212,
+          0.018664331975002835
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Patella.r",
+      "sourceTriangles": 276,
+      "triangles": 276,
+      "bboxErrorM": 3.257871030067083e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.10603744005833321,
+          0.42380567739138075,
+          -0.004087922180887478
+        ],
+        "max": [
+          -0.0628517840743548,
+          0.4647278825225487,
+          0.01866433117049508
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Tibia.l",
+      "sourceTriangles": 1670,
+      "triangles": 1670,
+      "bboxErrorM": 4.640311890291571e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.03734218617159954,
+          0.0752181180019116,
+          -0.06295967809573642
+        ],
+        "max": [
+          0.1157890981235602,
+          0.4331813212682185,
+          0.005063461442449624
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Tibia.r",
+      "sourceTriangles": 1670,
+      "triangles": 1670,
+      "bboxErrorM": 4.870978342896848e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.11578904768042943,
+          0.07521811792679732,
+          -0.06295967446478856
+        ],
+        "max": [
+          -0.03734213572846876,
+          0.4331813213291485,
+          0.0050634645152983415
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Fibula.l",
+      "sourceTriangles": 1264,
+      "triangles": 1264,
+      "bboxErrorM": 6.583571088292217e-8,
+      "unreferencedControlPoints": 19,
+      "renderBounds": {
+        "min": [
+          0.08862371554849732,
+          0.05521085163094302,
+          -0.059686535326245904
+        ],
+        "max": [
+          0.1248471841308598,
+          0.4177033377009603,
+          -0.026760401099737142
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Fibula.r",
+      "sourceTriangles": 1264,
+      "triangles": 1264,
+      "bboxErrorM": 6.397738654129181e-8,
+      "unreferencedControlPoints": 19,
+      "renderBounds": {
+        "min": [
+          -0.12484712251185773,
+          0.05521085180629761,
+          -0.059686540909860544
+        ],
+        "max": [
+          -0.08862365392949528,
+          0.4177033377213742,
+          -0.026760396371243757
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Calcaneus.l",
+      "sourceTriangles": 1448,
+      "triangles": 1448,
+      "bboxErrorM": 9.791008361015319e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.054685356489969035,
+          0.011449247327629117,
+          -0.09155616804011933
+        ],
+        "max": [
+          0.10222746782170918,
+          0.06255661424547389,
+          -0.015868480531464883
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Cuboid bone.l",
+      "sourceTriangles": 998,
+      "triangles": 998,
+      "bboxErrorM": 9.186689271800663e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.079520562075258,
+          0.02890412407713925,
+          -0.02347255997236357
+        ],
+        "max": [
+          0.11175454207654419,
+          0.05976178316849289,
+          0.01071950172598464
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Distal phalanx of fifth finger of foot.l",
+      "sourceTriangles": 236,
+      "triangles": 236,
+      "bboxErrorM": 8.543292413787373e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.13852771589160714,
+          0.009203156505787947,
+          0.08558509101430307
+        ],
+        "max": [
+          0.1464164584706117,
+          0.014837474703285261,
+          0.09651319974709789
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Distal phalanx of first finger of foot.l",
+      "sourceTriangles": 466,
+      "triangles": 466,
+      "bboxErrorM": 7.572110698184087e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.06963678420705996,
+          0.009948173178343605,
+          0.10771144303020046
+        ],
+        "max": [
+          0.09042908624412503,
+          0.021417215303790524,
+          0.13462211056462903
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Distal phalanx of fourth finger of foot.l",
+      "sourceTriangles": 278,
+      "triangles": 278,
+      "bboxErrorM": 8.440151934296924e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.12778303459049142,
+          0.009239187567348157,
+          0.10372727608814959
+        ],
+        "max": [
+          0.13657231883833945,
+          0.01657172208828709,
+          0.1154032577306975
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Distal phalanx of second finger of foot.l",
+      "sourceTriangles": 236,
+      "triangles": 236,
+      "bboxErrorM": 7.130615944928032e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.0987092216007668,
+          0.00946291811563224,
+          0.1236414206814074
+        ],
+        "max": [
+          0.10889415555664857,
+          0.017046331533563455,
+          0.1373079974957652
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Distal phalanx of third finger of foot.l",
+      "sourceTriangles": 318,
+      "triangles": 318,
+      "bboxErrorM": 8.380928440132607e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.11437459847921135,
+          0.009477539873394118,
+          0.11827965266027851
+        ],
+        "max": [
+          0.12322285843364612,
+          0.01564133999391261,
+          0.13027484983667814
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Fifth metatarsal bone.l",
+      "sourceTriangles": 894,
+      "triangles": 894,
+      "bboxErrorM": 9.849170658216e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.10093513712842621,
+          0.00988725834351379,
+          -0.01403832272192028
+        ],
+        "max": [
+          0.13795910746814147,
+          0.04105837418048518,
+          0.05969457495066806
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "First metatarsal bone.l",
+      "sourceTriangles": 1088,
+      "triangles": 1088,
+      "bboxErrorM": 9.301868160796478e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.06031530982907131,
+          0.01463938681574661,
+          0.02083402488198956
+        ],
+        "max": [
+          0.08216331342220967,
+          0.05953385927010031,
+          0.08440998136874406
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Fourth metatarsal bone.l",
+      "sourceTriangles": 834,
+      "triangles": 834,
+      "bboxErrorM": 9.481164882970544e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.09434928911250641,
+          0.012411041817955291,
+          0.0036658286612785895
+        ],
+        "max": [
+          0.1242211676189233,
+          0.049382106578135486,
+          0.07218466408681778
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Intermediate cuneiform bone.l",
+      "sourceTriangles": 444,
+      "triangles": 444,
+      "bboxErrorM": 8.76699842211658e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.073851082529019,
+          0.04667759415445096,
+          -0.0002193942253442782
+        ],
+        "max": [
+          0.09337495172319814,
+          0.07069862405475326,
+          0.02274273820506079
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Lateral cuneiform bone.l",
+      "sourceTriangles": 638,
+      "triangles": 638,
+      "bboxErrorM": 8.918222725150943e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.08131529986425413,
+          0.040224282275487744,
+          -0.006201078408688905
+        ],
+        "max": [
+          0.1055415767510538,
+          0.06708479741221905,
+          0.02026963541358791
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Medial cuneiform bone.l",
+      "sourceTriangles": 992,
+      "triangles": 992,
+      "bboxErrorM": 8.761042757238213e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.05807013981117415,
+          0.035434364906829746,
+          -0.0009967516076116278
+        ],
+        "max": [
+          0.083153333678304,
+          0.06773656253780126,
+          0.03196222155446215
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Middle phalanx of fifth finger of foot.l",
+      "sourceTriangles": 216,
+      "triangles": 216,
+      "bboxErrorM": 7.927061862478268e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.13682789185673444,
+          0.009575626660108201,
+          0.07977449347879195
+        ],
+        "max": [
+          0.14542389689450314,
+          0.016178211181503765,
+          0.08756434648873157
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Middle phalanx of fourth finger of foot.l",
+      "sourceTriangles": 448,
+      "triangles": 448,
+      "bboxErrorM": 8.426665334959615e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.12432037932050259,
+          0.009819074594968377,
+          0.09228324376105337
+        ],
+        "max": [
+          0.13546095876846329,
+          0.018155501439717333,
+          0.10633720504625303
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Middle phalanx of second finger of foot.l",
+      "sourceTriangles": 382,
+      "triangles": 382,
+      "bboxErrorM": 8.295349548936848e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.09483507922723654,
+          0.011842318616873522,
+          0.1089427332120366
+        ],
+        "max": [
+          0.10716065247491394,
+          0.0209260221711882,
+          0.12656981475282902
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Middle phalanx of third finger of foot.l",
+      "sourceTriangles": 400,
+      "triangles": 400,
+      "bboxErrorM": 8.047472867256378e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.11054732551866371,
+          0.010965367108341615,
+          0.10339878351342115
+        ],
+        "max": [
+          0.12165477853785123,
+          0.019264923527274082,
+          0.12083685221166608
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Navicular bone.l",
+      "sourceTriangles": 732,
+      "triangles": 732,
+      "bboxErrorM": 8.81096829056377e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.052689965472783505,
+          0.048459156728304635,
+          -0.015108278387178075
+        ],
+        "max": [
+          0.09337543532328027,
+          0.07597560767487897,
+          0.008928479659616866
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Proximal phalanx of fifth finger of foot.l",
+      "sourceTriangles": 516,
+      "triangles": 516,
+      "bboxErrorM": 8.202929001333015e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.12629696957356099,
+          0.00970011467147967,
+          0.05501705787915688
+        ],
+        "max": [
+          0.14463830574224518,
+          0.020145491259603708,
+          0.08179860741957022
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Proximal phalanx of first finger of foot.l",
+      "sourceTriangles": 532,
+      "triangles": 532,
+      "bboxErrorM": 8.513014364275318e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.060891724834094114,
+          0.011326380618345922,
+          0.07992056395850881
+        ],
+        "max": [
+          0.08703817949676555,
+          0.02905816104502165,
+          0.1144413532761817
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Proximal phalanx of fourth finger of foot.l",
+      "sourceTriangles": 460,
+      "triangles": 460,
+      "bboxErrorM": 8.578934868053167e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.11410624326050113,
+          0.009965703618414213,
+          0.06846056346310152
+        ],
+        "max": [
+          0.13220922863182547,
+          0.023723118191376163,
+          0.09445494796672066
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Proximal phalanx of second finger of foot.l",
+      "sourceTriangles": 426,
+      "triangles": 426,
+      "bboxErrorM": 8.624929517808688e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.08660423672026132,
+          0.013031095522534541,
+          0.08244565477039592
+        ],
+        "max": [
+          0.10446779983034266,
+          0.025983629419442975,
+          0.11182725113767714
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Proximal phalanx of third finger of foot.l",
+      "sourceTriangles": 460,
+      "triangles": 460,
+      "bboxErrorM": 8.87001447291702e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.10241048048191848,
+          0.012156898052699308,
+          0.07608251948007866
+        ],
+        "max": [
+          0.1188027694394467,
+          0.024133907280788902,
+          0.10629672442970706
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Second metatarsal bone.l",
+      "sourceTriangles": 690,
+      "triangles": 690,
+      "bboxErrorM": 9.256234551752174e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.08074901011362101,
+          0.013528785131358,
+          0.014697258722094549
+        ],
+        "max": [
+          0.09813740259526336,
+          0.06343971677119777,
+          0.08515400320027114
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Sesamoid bones of foot.l",
+      "sourceTriangles": 290,
+      "triangles": 290,
+      "bboxErrorM": 8.938291502780249e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.06302053319949506,
+          0.01063502302653392,
+          0.06363531681344892
+        ],
+        "max": [
+          0.08037596093164917,
+          0.018657484508871808,
+          0.07726884630897475
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Talus.l",
+      "sourceTriangles": 1350,
+      "triangles": 1350,
+      "bboxErrorM": 9.246477011837229e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.05364578389829863,
+          0.04986256001886297,
+          -0.06610496036401864
+        ],
+        "max": [
+          0.09575544905311772,
+          0.08547542369072059,
+          -0.007040739154489177
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Third metatarsal bone.l",
+      "sourceTriangles": 814,
+      "triangles": 814,
+      "bboxErrorM": 9.426613228197267e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.08914402827394748,
+          0.013418903985646085,
+          0.013553072900966572
+        ],
+        "max": [
+          0.11222231994267322,
+          0.057860976475434464,
+          0.08130751744362943
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Calcaneus.r",
+      "sourceTriangles": 1448,
+      "triangles": 1448,
+      "bboxErrorM": 9.84372723750182e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.10222739099090271,
+          0.011449245718574265,
+          -0.09155616751293057
+        ],
+        "max": [
+          -0.05468527964001474,
+          0.06255661286217294,
+          -0.01586848179607549
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Cuboid bone.r",
+      "sourceTriangles": 998,
+      "triangles": 998,
+      "bboxErrorM": 9.167122963851804e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.11175447083515565,
+          0.028904124373909986,
+          -0.023472560168026648
+        ],
+        "max": [
+          -0.07952049083386946,
+          0.059761783226219584,
+          0.0107195015460007
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Distal phalanx of fifth finger of foot.r",
+      "sourceTriangles": 236,
+      "triangles": 236,
+      "bboxErrorM": 8.540592962014149e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.14641641538568645,
+          0.009203156395919829,
+          0.08558509098730856
+        ],
+        "max": [
+          -0.1385276728066819,
+          0.014837474776442157,
+          0.09651319974952437
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Distal phalanx of first finger of foot.r",
+      "sourceTriangles": 466,
+      "triangles": 466,
+      "bboxErrorM": 7.569600338208637e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.0904290319833291,
+          0.009948173309382304,
+          0.10771144300509686
+        ],
+        "max": [
+          -0.06963672994626403,
+          0.021417215599105376,
+          0.1346221105734627
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Distal phalanx of fourth finger of foot.r",
+      "sourceTriangles": 278,
+      "triangles": 278,
+      "bboxErrorM": 8.439566590023873e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.1365723092810264,
+          0.009239187481166073,
+          0.10372727608229615
+        ],
+        "max": [
+          -0.12778302503317834,
+          0.016571722149667418,
+          0.11540325769180473
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Distal phalanx of second finger of foot.r",
+      "sourceTriangles": 236,
+      "triangles": 236,
+      "bboxErrorM": 7.870740559301481e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.10889411247172336,
+          0.00946291798259089,
+          0.12364142063207295
+        ],
+        "max": [
+          -0.09870917851584159,
+          0.017046331654044844,
+          0.1373079974562289
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Distal phalanx of third finger of foot.r",
+      "sourceTriangles": 318,
+      "triangles": 318,
+      "bboxErrorM": 8.377913618407007e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.12322283770046234,
+          0.0094775397308055,
+          0.1182796526301303
+        ],
+        "max": [
+          -0.11437457774602755,
+          0.0156413400725695,
+          0.1302748498250251
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Fifth metatarsal bone.r",
+      "sourceTriangles": 894,
+      "triangles": 894,
+      "bboxErrorM": 9.859291678210313e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.13795904586256777,
+          0.009887257517217763,
+          -0.01403832262071008
+        ],
+        "max": [
+          -0.1009350755228525,
+          0.04105837475015454,
+          0.05969457470360049
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "First metatarsal bone.r",
+      "sourceTriangles": 1088,
+      "triangles": 1088,
+      "bboxErrorM": 9.319171710361895e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.08216324622870057,
+          0.014639386016720546,
+          0.020834025055025056
+        ],
+        "max": [
+          -0.060315242635562205,
+          0.059533859849571845,
+          0.08440998108269347
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Fourth metatarsal bone.r",
+      "sourceTriangles": 834,
+      "triangles": 834,
+      "bboxErrorM": 9.487791909025198e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.12422109483747885,
+          0.012411040805774985,
+          0.0036658289603794937
+        ],
+        "max": [
+          -0.09434921633106197,
+          0.049382107163760756,
+          0.07218466368497388
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Intermediate cuneiform bone.r",
+      "sourceTriangles": 444,
+      "triangles": 444,
+      "bboxErrorM": 8.76745720046338e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.09337487489387422,
+          0.046677594099242,
+          -0.00021939432261990134
+        ],
+        "max": [
+          -0.07385100569969508,
+          0.07069862419022009,
+          0.022742738359581197
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Lateral cuneiform bone.r",
+      "sourceTriangles": 638,
+      "triangles": 638,
+      "bboxErrorM": 8.899864774227634e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.10554150550966523,
+          0.040224282072702254,
+          -0.006201078126607127
+        ],
+        "max": [
+          -0.08131522862286557,
+          0.06708479753263301,
+          0.020269635628410346
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Medial cuneiform bone.r",
+      "sourceTriangles": 992,
+      "triangles": 992,
+      "bboxErrorM": 8.755659224534383e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.08315325684898006,
+          0.035434364841020714,
+          -0.0009967516985022829
+        ],
+        "max": [
+          -0.05807006298185023,
+          0.06773656265150374,
+          0.031962221768829846
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Middle phalanx of fifth finger of foot.r",
+      "sourceTriangles": 216,
+      "triangles": 216,
+      "bboxErrorM": 7.930637785369399e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.14542385380957792,
+          0.009575626622553799,
+          0.07977449342571909
+        ],
+        "max": [
+          -0.13682784877180923,
+          0.01617821120883214,
+          0.0875643465244908
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Middle phalanx of fourth finger of foot.r",
+      "sourceTriangles": 448,
+      "triangles": 448,
+      "bboxErrorM": 8.417605312782683e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.1354609492111502,
+          0.00981907476705457,
+          0.09228324367045315
+        ],
+        "max": [
+          -0.12432036976318951,
+          0.018155501574633654,
+          0.10633720512550339
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Middle phalanx of second finger of foot.r",
+      "sourceTriangles": 382,
+      "triangles": 382,
+      "bboxErrorM": 8.290176219116763e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.10716063174173018,
+          0.011842318529952513,
+          0.1089427331603033
+        ],
+        "max": [
+          -0.0948350584940528,
+          0.020926022311619937,
+          0.12656981478004325
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Middle phalanx of third finger of foot.r",
+      "sourceTriangles": 400,
+      "triangles": 400,
+      "bboxErrorM": 8.044049096267436e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.12165473545292599,
+          0.010965367238395439,
+          0.10339878347918344
+        ],
+        "max": [
+          -0.11054728243373849,
+          0.019264923655620388,
+          0.12083685221654814
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Navicular bone.r",
+      "sourceTriangles": 732,
+      "triangles": 732,
+      "bboxErrorM": 8.807815650782591e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.09337535849395635,
+          0.048459156746896444,
+          -0.015108278418704473
+        ],
+        "max": [
+          -0.05268988864345959,
+          0.07597560775520808,
+          0.008928479791600339
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Proximal phalanx of fifth finger of foot.r",
+      "sourceTriangles": 516,
+      "triangles": 516,
+      "bboxErrorM": 8.209196275532626e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.14463826265731997,
+          0.009700114297512082,
+          0.05501705794182962
+        ],
+        "max": [
+          -0.12629692648863575,
+          0.02014549144564483,
+          0.08179860738304262
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Proximal phalanx of first finger of foot.r",
+      "sourceTriangles": 532,
+      "triangles": 532,
+      "bboxErrorM": 8.567726204888881e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.08703812523596964,
+          0.011326380356284747,
+          0.07992056384241174
+        ],
+        "max": [
+          -0.06089167057329821,
+          0.029058161277856546,
+          0.11444135328687507
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Proximal phalanx of fourth finger of foot.r",
+      "sourceTriangles": 460,
+      "triangles": 460,
+      "bboxErrorM": 8.41490114672494e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.13220918554690025,
+          0.009965703276810033,
+          0.06846056352771172
+        ],
+        "max": [
+          -0.1141062001755759,
+          0.023723118468194474,
+          0.09445494797352938
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Proximal phalanx of second finger of foot.r",
+      "sourceTriangles": 426,
+      "triangles": 426,
+      "bboxErrorM": 8.62511446986236e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.10446776792128817,
+          0.013031095204969647,
+          0.08244565491378694
+        ],
+        "max": [
+          -0.08660420481120686,
+          0.0259836298299052,
+          0.11182725113952666
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Proximal phalanx of third finger of foot.r",
+      "sourceTriangles": 460,
+      "triangles": 460,
+      "bboxErrorM": 8.126375170003364e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.1188027263545215,
+          0.012156897626223302,
+          0.07608251949426623
+        ],
+        "max": [
+          -0.10241043739699329,
+          0.02413390754579461,
+          0.1062967243777196
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Second metatarsal bone.r",
+      "sourceTriangles": 690,
+      "triangles": 690,
+      "bboxErrorM": 9.266507758516618e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.09813731863794818,
+          0.01352878399422028,
+          0.014697258824826616
+        ],
+        "max": [
+          -0.08074892615630583,
+          0.06343971730279024,
+          0.08515400251717671
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Sesamoid bones of foot.r",
+      "sourceTriangles": 290,
+      "triangles": 290,
+      "bboxErrorM": 8.934768773449786e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.08037585829077153,
+          0.010635022972432137,
+          0.0636353168258531
+        ],
+        "max": [
+          -0.06302043055861742,
+          0.01865748456489973,
+          0.07726884627374746
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Talus.r",
+      "sourceTriangles": 1350,
+      "triangles": 1350,
+      "bboxErrorM": 9.232269509995561e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.09575537222379382,
+          0.04986256026994635,
+          -0.06610496050609366
+        ],
+        "max": [
+          -0.053645707068974716,
+          0.08547542369527769,
+          -0.007040739008050436
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Third metatarsal bone.r",
+      "sourceTriangles": 814,
+      "triangles": 814,
+      "bboxErrorM": 9.4509459961159e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          -0.11222224716122875,
+          0.013418903228323717,
+          0.01355307314429425
+        ],
+        "max": [
+          -0.08914395549250301,
+          0.05786097727411823,
+          0.0813075170634681
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Scaphoid bone.l",
+      "sourceTriangles": 390,
+      "triangles": 390,
+      "bboxErrorM": 3.81580861769093e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.2575288324328555,
+          0.8464998659254797,
+          0.010125585805562373
+        ],
+        "max": [
+          0.2820884191851194,
+          0.8627076192511542,
+          0.02601414942449884
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Lunate bone.l",
+      "sourceTriangles": 2088,
+      "triangles": 2088,
+      "bboxErrorM": 4.950350640520185e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.24395658388473576,
+          0.8477819066923249,
+          0.00950937183080444
+        ],
+        "max": [
+          0.2610536906798061,
+          0.8605213344707469,
+          0.02611616271732884
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Capitate bone.l",
+      "sourceTriangles": 472,
+      "triangles": 472,
+      "bboxErrorM": 4.033765520564114e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.25654880130035507,
+          0.8318798847382448,
+          0.008971388742539544
+        ],
+        "max": [
+          0.27316046645760034,
+          0.8552897275293482,
+          0.02694455716559816
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Second metacarpal bone.l",
+      "sourceTriangles": 764,
+      "triangles": 764,
+      "bboxErrorM": 4.919215207399574e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.2702604177796317,
+          0.7665467452259047,
+          0.015932491447356346
+        ],
+        "max": [
+          0.3023526307726929,
+          0.8370778711118927,
+          0.042632446456394246
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Proximal phalanx of second finger of hand.l",
+      "sourceTriangles": 414,
+      "triangles": 414,
+      "bboxErrorM": 5.792853361580308e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.28997323808781744,
+          0.7323859854158741,
+          0.03346556178620404
+        ],
+        "max": [
+          0.3127209330818757,
+          0.7712959546475533,
+          0.057177042775125565
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "Trapezium bone.l",
+      "sourceTriangles": 500,
+      "triangles": 500,
+      "bboxErrorM": 5.607716724309597e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.2733876253950718,
+          0.8356791776595918,
+          0.016677718572233848
+        ],
+        "max": [
+          0.2910591505223331,
+          0.8564766084659846,
+          0.034202555291444774
+        ]
+      },
+      "simplifierErrorM": 0
+    },
+    {
+      "source": "First metacarpal bone.l",
+      "sourceTriangles": 682,
+      "triangles": 682,
+      "bboxErrorM": 4.9602999263598235e-8,
+      "unreferencedControlPoints": 0,
+      "renderBounds": {
+        "min": [
+          0.28118006958617975,
+          0.8093667154766007,
+          0.022560603837385746
+        ],
+        "max": [
+          0.31984423097695786,
+          0.8477457265734534,
+          0.05404023741005698
+        ]
+      },
+      "simplifierErrorM": 0
+    }
+  ],
+  "meshNodes": [
+    "biceps-l",
+    "triceps-l",
+    "skin-outline",
+    "skull",
+    "mandible",
+    "cervical-spine",
+    "thoracic-spine",
+    "lumbar-spine",
+    "sacrum",
+    "coccyx",
+    "sternum",
+    "ribs-l",
+    "ribs-r",
+    "clavicle-l",
+    "clavicle-r",
+    "scapula-l",
+    "scapula-r",
+    "humerus-l",
+    "humerus-r",
+    "radius-l",
+    "radius-r",
+    "ulna-l",
+    "ulna-r",
+    "hand-l",
+    "hand-r",
+    "hip-bone-l",
+    "hip-bone-r",
+    "femur-l",
+    "femur-r",
+    "patella-l",
+    "patella-r",
+    "tibia-l",
+    "tibia-r",
+    "fibula-l",
+    "fibula-r",
+    "foot-l",
+    "foot-r",
+    "carpal-scaphoid",
+    "carpal-lunate",
+    "carpal-capitate",
+    "mcp-metacarpal",
+    "mcp-phalanx",
+    "thumb-trapezium",
+    "thumb-metacarpal"
+  ],
+  "review": "Named attachment faces, demonstration axes and native previews remain REVIEW. Source bbox checks are coordinate checks, not medical review."
+}

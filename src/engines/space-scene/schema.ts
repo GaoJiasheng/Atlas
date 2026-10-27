@@ -40,11 +40,14 @@ import {
   type Side,
 } from './lib/bilateral';
 import { MAX_POSES, POSE_DURATION } from './lib/pose';
-import { canMove, jointCandidates, DEFAULT_BULGE, DEFAULT_DEMO_ANGLE, JOINT_PREFIX, jointOf, MIN_DEMO_ANGLE, musclePartIds } from './lib/rig';
+import { bothSides, canMove, jointCandidates, DEFAULT_BULGE, DEFAULT_DEMO_ANGLE, JOINT_PREFIX, jointOf, MIN_DEMO_ANGLE, musclePartIds } from './lib/rig';
 import { MAX_EXPLODE_STAGE } from './lib/explode';
 import { MAX_FLOW_PATHS } from './lib/flow-curve';
 import { beatSimSchema, chapterSimIssues, chapterSimSchema, simIssues, simSchema } from './sim-schema';
 import { materialsShowable } from './lib/sim/materials';
+import { simEffects } from './lib/sim/bind';
+import { resolveSimValues } from './lib/sim/controls';
+import { evaluateSim } from './lib/sim';
 import { linkOrbitTable, orbitTableIssues } from './orbit-rotation-schema';
 import { mechanismIssues, mechanismSchema } from './mechanism-schema';
 export { mechanismIssues } from './mechanism-schema';
@@ -955,6 +958,8 @@ export const viewsSchema = z
      * camera re-fitted so the model's bounding sphere fills ~75 % of the stage width.
      */
     cover: orbitCamera.optional(),
+    /** Opt-in HUD-aware framing; only these subjects that intersect the authored view are fitted. */
+    hudFrame: z.object({ parts: z.array(kebabId).min(1).max(32) }).strict().optional(),
     /**
      * How the body reads while an exercise plays (topics with a skinned
      * `context` skin part): `wire` (default when the glb has a `skin-wire`
@@ -1202,8 +1207,19 @@ export const partsFileBase = z
   })
   .strict()
   .superRefine((file, ctx) => {
+    for (const [i, id] of (file.views.hudFrame?.parts ?? []).entries())
+      if (!file.parts.some(p => p.id === id && !p.context))
+        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['views', 'hudFrame', 'parts', i], message: `unknown selectable framing part ${id}` });
     for (const x of mechanismIssues(file.mechanisms, file)) ctx.addIssue({ code: z.ZodIssueCode.custom, ...x });
     if (file.sim) {
+      const spanTargets = new Set(file.sim.bind.flatMap((b) => 'part' in b && b.span && typeof b.part === 'string' ? [b.part] : []));
+      for (const [name, pose] of Object.entries(file.poses ?? {})) for (const id of spanTargets) {
+        if (id in pose.parts || id in pose.contract) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['poses', name, id], message: `span target "${id}" cannot have a pose driver` });
+      }
+      for (const m of file.mechanisms) for (const binding of [...Object.values(m.parts), ...Object.values(m.ports)]) {
+        if (spanTargets.has(binding.part)) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['mechanisms'], message: `span target "${binding.part}" cannot have a mechanism driver` });
+      }
+      for (const p of file.parts) if (spanTargets.has(p.id) && p.bilateral) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['parts', p.id, 'bilateral'], message: 'span target cannot be bilateral' });
       const countable = new Set(file.parts.filter((p) => p.repeat !== undefined && (p.extra ?? []).length === 0).map((p) => p.id));
       for (const x of simIssues(file.sim, {
         parts: new Set(file.parts.map((p) => p.id)),
@@ -1211,6 +1227,7 @@ export const partsFileBase = z
         flows: new Map(file.flows.map((f) => [f.id, { paths: f.paths, own: f.path.length > 0 }])),
         animations: new Map(file.animations.map((a) => [a.id, { kind: a.kind, target: a.target, ...(a.kind === 'sequence' ? { loop: a.loop } : {}) }])),
         poses: new Set(Object.keys(file.poses ?? {})),
+        joints: file.rig?.joints,
         countable,
         filings: new Set(file.parts.filter((p) => p.primitive?.kind === 'filings').map((p) => p.id)),
         primitives: new Set(file.parts.filter((p) => p.primitive !== undefined).map((p) => p.id)),
@@ -1805,6 +1822,21 @@ export function spaceChapterIssues(state: SpaceChapterState, data: SpaceSceneDat
   state.beats?.forEach((b, i) => check(`state.beats.${i}.`, b));
   out.push(...chapterSimIssues('state.', state.sim, f.sim));
   state.beats?.forEach((b, i) => out.push(...chapterSimIssues(`state.beats.${i}.`, b.sim, f.sim)));
+  // Exercise keys and active numeric overrides cannot both own one joint.
+  if (f.sim) {
+    const sim = f.sim;
+    const checkJointConflict = (where: string, exercise: typeof state.exercise, set: typeof state.sim, beat?: SpaceBeat) => {
+      if (!exercise) return;
+      const sheet = data.fitness?.exercises.find((e) => e.id === exercise.id);
+      const rigJoints = new Set(Object.keys(f.rig?.joints ?? {}));
+      const owned = new Set(sheet?.motion?.keys.flatMap((k) => Object.keys(bothSides(k.joints, rigJoints))) ?? []);
+      const values = resolveSimValues(sim, { ...set?.set, ...beat?.sim?.set });
+      const effects = simEffects(sim, values, evaluateSim(sim, values));
+      for (const joint of effects.joints.keys()) if (owned.has(joint)) out.push(`${where}exercise: active sim binding also drives joint "${joint}"`);
+    };
+    checkJointConflict('state.', state.exercise, state.sim);
+    state.beats?.forEach((b, i) => checkJointConflict(`state.beats.${i}.`, b.exercise === undefined ? state.exercise : b.exercise, state.sim, b));
+  }
   for (const id of state.index?.parts ?? []) {
     const p = parts.get(id);
     if (!p) out.push(`state.index.parts: unknown part "${id}"`);

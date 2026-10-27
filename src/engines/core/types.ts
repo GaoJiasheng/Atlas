@@ -40,6 +40,7 @@ export interface UrlEngineFields {
   orbitTime?: number | null;
   /** TimeScene climatology: calendar month 1..12. URL `m`. */
   month?: number;
+  geoContext?: import('../time-scene/lib/geography').GeoContext;
   /** TimeScene: current time. URL `t`. */
   t?: TimePoint | null;
   /** SpaceScene: beat of the current chapter on show (0-based; `null` = the chapter's own state). URL `b`, 1-based. */

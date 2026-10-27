@@ -1,3 +1,4 @@
+import { portSourceIssues } from '../src/engines/space-scene/port-schema';
 /**
  * Content validator: `pnpm validate` (also runs before `pnpm build`).
  *
@@ -452,6 +453,7 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
       warn(join(dataDir, 'parts.json'), `views.exerciseBody "wire": model ${model} has no "skin-wire" node, so the engine decimates the skin outline at load (slower, rougher)`);
   }
   const matterFile = topic.engine === 'space-scene' && data ? (data as { parts?: PartsFile }).parts : undefined;
+  if (matterFile?.sim?.port) for (const issue of portSourceIssues(matterFile.sim.port, new Map((sourcesFile?.sources ?? []).map((x) => [x.id, x])))) error(join(dataDir, 'parts.json'), `sim.port.${issue.path.join('.')}: ${issue.message}`);
   // A table model's rows (docs/40 §4.2): every source listed, SIM rows citing the design study, TYPICAL rows another source.
   if (matterFile?.sim?.airfoil) for (const issue of airfoilSourceIssues(matterFile.sim.airfoil, new Map((sourcesFile?.sources ?? []).map(x => [x.id, x])))) error(join(dataDir, 'parts.json'), `sim.airfoil.${issue.path.join('.')}: ${issue.message}`);
   if (matterFile?.sim?.table)
@@ -482,6 +484,9 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
     for (const issue of timeSceneTopicIssues(topic, data as TimeSceneGeoData, readGeo)) {
       const file = issue.file.startsWith('public/') ? join(ROOT, issue.file) : join(dir, issue.file);
       (issue.level === 'error' ? error : warn)(file, issue.message);
+    }
+    if(topic.temporalMode==='geography' && topic.geography){
+      for(const m of (data as {geography:{members:{id:string;joined:string}[]}}).geography.members)if(m.joined>topic.geography.asOf)error(join(dataDir,'geography.json'),`${m.id}: joined after geography.asOf`);
     }
     for (const issue of monthlyResourceIssues(topic, sources ?? new Set(), readGeo))
       error(issue.file.startsWith('public/') ? join(ROOT, issue.file) : join(dir, issue.file), issue.message);
@@ -559,12 +564,13 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
     if (!state.success) {
       reportZod(file, state.error, 'state.');
     } else if (data !== undefined) {
+      if(topic.temporalMode==='geography' && topic.geography){const gs=state.data as {geoContext:{kind:string;date?:string};beats:{geoContext:{kind:string;date?:string}}[]};for(const ctx of [gs.geoContext,...gs.beats.map(b=>b.geoContext)]){if(ctx.kind==='climatology'&&(!topic.climatology||!topic.monthlyLayers?.length))error(file,'climatology context requires monthly layers and metadata');if(ctx.kind==='membership'&&(ctx.date!<topic.geography.dateRange[0]||ctx.date!>topic.geography.dateRange[1]))error(file,'geoContext membership date outside geography.dateRange');}}
       for (const ref of schemas.chapterRefs(state.data)) {
         if (!ids.has(ref)) error(file, `state references unknown id "${ref}"`);
       }
       for (const issue of schemas.chapterIssues?.(state.data, data) ?? []) error(file, issue);
       if (topic.engine === 'time-scene' && topic.stage === 'geo') {
-        for (const issue of timeChapterLayerIssues(state.data as TimeChapterState, [...(topic.datedLayers ?? []), ...(topic.monthlyLayers ?? [])])) error(file, issue);
+        for (const issue of timeChapterLayerIssues(state.data as TimeChapterState, [...(topic.datedLayers ?? []), ...(topic.monthlyLayers ?? []), ...((data as {geography?: {layers:{id:string}[]}})?.geography?.layers ?? []), ...(topic.temporalMode==='geography'?[{id:'geo-countries'},{id:'geo-membership'},{id:'geo-anchors'}]:[])])) error(file, issue);
         for (const issue of timeCatalogueIndexIssues(state.data as TimeChapterState, topic.datedLayers ?? [], (name) => {
           const target = join(PUBLIC_DIR, 'geo', `${name}.json`);
           return existsSync(target) ? JSON.parse(readFileSync(target, 'utf8')) : undefined;

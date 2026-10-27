@@ -42,6 +42,8 @@ export interface ClimatologyStageProps {
   topic: TopicMeta;
   locale: Locale;
   month?: number;
+  geography?: import('../../geography-schema').GeographyFile;
+  onSelectGeography?(id:string):void;
   layers?: string[];
   isPresenting?(): boolean;
   onSelectSite(id: string | null): void;

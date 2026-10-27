@@ -1,0 +1,53 @@
+{
+  "license": "CC BY-SA 4.0",
+  "contacts": [
+    {
+      "parts": [
+        "carpal-scaphoid",
+        "carpal-lunate"
+      ],
+      "position": [
+        -2.011354225874747,
+        -0.0022647001169562777,
+        0.015388015163940193
+      ],
+      "minimumSourceVertexGapM": 0.00044139112526865435,
+      "patchVertices": 26,
+      "method": "Midpoint mean of opposing source vertices within 1.5 mm of the nearest-vertex gap; vertex sampling, not continuous-surface or clinical-axis proof",
+      "review": "pending; candidate pivot only",
+      "demonstrationAxes": "Conservative original XYZ teaching rotations; not measured clinical ROM or validated axes"
+    },
+    {
+      "parts": [
+        "mcp-metacarpal",
+        "mcp-phalanx"
+      ],
+      "position": [
+        -1.9751125089659256,
+        -0.08925891024525058,
+        0.04034711402441637
+      ],
+      "minimumSourceVertexGapM": 0.00033507482373882,
+      "patchVertices": 15,
+      "method": "Midpoint mean of opposing source vertices within 1.5 mm of the nearest-vertex gap; vertex sampling, not continuous-surface or clinical-axis proof",
+      "review": "pending; candidate pivot only",
+      "demonstrationAxes": "Conservative original XYZ teaching rotations; not measured clinical ROM or validated axes"
+    },
+    {
+      "parts": [
+        "thumb-trapezium",
+        "thumb-metacarpal"
+      ],
+      "position": [
+        -1.9815405868441702,
+        -0.013808783193040873,
+        0.029889048577700122
+      ],
+      "minimumSourceVertexGapM": 0.0004724384451857939,
+      "patchVertices": 18,
+      "method": "Midpoint mean of opposing source vertices within 1.5 mm of the nearest-vertex gap; vertex sampling, not continuous-surface or clinical-axis proof",
+      "review": "pending; candidate pivot only",
+      "demonstrationAxes": "Conservative original XYZ teaching rotations; not measured clinical ROM or validated axes"
+    }
+  ]
+}
