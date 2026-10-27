@@ -21,7 +21,7 @@ import { decodeSimParam, encodeSimParam } from '../space-scene/lib/sim/controls'
 export type UrlState = Partial<SceneState & UrlEngineFields>;
 
 /** Order in which keys are written (most meaningful first). */
-export const URL_KEY_ORDER = ['ch', 'b', 'task', 'model', 't', 'hl', 'part', 'view', 'explode', 'run', 'cut', 'pose', 'sim', 'layers', 'cam', 'theme'] as const;
+export const URL_KEY_ORDER = ['ch', 'b', 'task', 'model', 't', 'm', 'hl', 'part', 'view', 'explode', 'run', 'cut', 'pose', 'sim', 'layers', 'cam', 'theme'] as const;
 export type UrlKey = (typeof URL_KEY_ORDER)[number];
 
 const ID_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -51,6 +51,8 @@ function encodeField(key: UrlKey, state: UrlState): string | null {
       return state.theme ?? null;
     case 't':
       return state.t === undefined ? null : state.t === null ? '' : formatTimeParam(state.t);
+    case 'm':
+      return state.month === undefined ? null : String(state.month);
     case 'hl':
       return state.highlight === undefined ? null : state.highlight.join(',');
     case 'part':
@@ -127,6 +129,9 @@ export function decodeSceneState(input: string | URLSearchParams): UrlState {
       if (parsed !== null) out.t = parsed;
     }
   }
+
+  const m = params.get('m');
+  if (m !== null && /^(?:[1-9]|1[0-2])$/.test(m)) out.month = Number(m);
 
   const hl = params.get('hl');
   if (hl !== null) out.highlight = hl === '' ? [] : hl.split(',').filter((id) => ID_RE.test(id));
