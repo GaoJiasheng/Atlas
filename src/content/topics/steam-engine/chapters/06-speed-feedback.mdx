@@ -1,0 +1,525 @@
+---
+{
+  "id": "speed-feedback",
+  "order": 6,
+  "title": {
+    "en": "Speed and feedback",
+    "zh": "速度与反馈"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "cutaway": "none",
+    "pose": null,
+    "layers": [
+      "steam-supply",
+      "working-motion",
+      "condensing",
+      "regulation"
+    ],
+    "hide": [
+      "nc-cylinder",
+      "nc-piston",
+      "nc-beam",
+      "nc-pump",
+      "nc-jet",
+      "nc-chain",
+      "nc-pump-chain",
+      "energy-input",
+      "energy-work",
+      "energy-reject"
+    ],
+    "ghost": [
+      "cylinder",
+      "piston",
+      "piston-rod",
+      "beam",
+      "parallel-inner",
+      "parallel-outer",
+      "parallel-bottom",
+      "radius-rod",
+      "drive-rod",
+      "planet",
+      "sun",
+      "centre-link",
+      "shaft",
+      "flywheel",
+      "condenser",
+      "injection-jet",
+      "cooling-cistern",
+      "air-pump",
+      "pump-piston",
+      "pump-rod",
+      "hot-well",
+      "feed-pump",
+      "water-pipes",
+      "load-wheel",
+      "engine-frame"
+    ],
+    "labels": [
+      "governor-balls",
+      "governor-collar",
+      "throttle-link",
+      "throttle"
+    ],
+    "camera": {
+      "position": [
+        3,
+        4,
+        5
+      ],
+      "target": [
+        1,
+        2.1,
+        0.9
+      ],
+      "fov": 30
+    },
+    "summary": {
+      "en": "The flyballs and sliding collar change the throttle opening as speed changes. This is a feedback path from rotation back to steam admission.",
+      "zh": "转速变化时，飞球和滑套会改变节流阀开度。这是一条从转动回到进汽的反馈路径。"
+    },
+    "sim": {
+      "set": {
+        "experiment": "governor",
+        "motion-mode": "manual",
+        "phase-deg": 0,
+        "cycle-rate": 10,
+        "cold-pressure": 20,
+        "governor-rpm": 60,
+        "work-share": 20
+      },
+      "try": {
+        "vary": "governor-rpm",
+        "observe": [
+          "collar-rise",
+          "throttle-opening"
+        ],
+        "keep": [
+          {
+            "en": "Same link lengths, balls and gravity",
+            "zh": "相同杆长、球和重力"
+          }
+        ],
+        "record": true,
+        "predict": {
+          "prompt": {
+            "en": "How will the model throttle opening change?",
+            "zh": "模型的节流阀开度会怎样变化？"
+          },
+          "start": {
+            "governor-rpm": 60
+          },
+          "change": {
+            "governor-rpm": 120
+          },
+          "observe": "throttle-opening",
+          "options": [
+            {
+              "id": "more",
+              "label": {
+                "en": "More",
+                "zh": "变大"
+              },
+              "means": "more"
+            },
+            {
+              "id": "less",
+              "label": {
+                "en": "Less",
+                "zh": "变小"
+              },
+              "means": "less"
+            },
+            {
+              "id": "same",
+              "label": {
+                "en": "The same",
+                "zh": "不变"
+              },
+              "means": "same"
+            }
+          ]
+        }
+      }
+    },
+    "index": {
+      "parts": [
+        "governor-spindle",
+        "governor-balls",
+        "governor-ball-right",
+        "governor-upper",
+        "governor-upper-right",
+        "governor-lower",
+        "governor-lower-right",
+        "governor-collar",
+        "throttle-link",
+        "throttle-rod",
+        "throttle-crank",
+        "throttle",
+        "throttle-disc",
+        "flywheel"
+      ]
+    },
+    "beats": [
+      {
+        "view": "assembled",
+        "explode": 0,
+        "run": false,
+        "part": null,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "steam-supply",
+          "working-motion",
+          "condensing",
+          "regulation"
+        ],
+        "hide": [
+          "nc-cylinder",
+          "nc-piston",
+          "nc-beam",
+          "nc-pump",
+          "nc-jet",
+          "nc-chain",
+          "nc-pump-chain",
+          "energy-input",
+          "energy-work",
+          "energy-reject"
+        ],
+        "ghost": [
+          "cylinder",
+          "piston",
+          "piston-rod",
+          "beam",
+          "parallel-inner",
+          "parallel-outer",
+          "parallel-bottom",
+          "radius-rod",
+          "drive-rod",
+          "planet",
+          "sun",
+          "centre-link",
+          "shaft",
+          "flywheel",
+          "condenser",
+          "injection-jet",
+          "cooling-cistern",
+          "air-pump",
+          "pump-piston",
+          "pump-rod",
+          "hot-well",
+          "feed-pump",
+          "water-pipes",
+          "load-wheel",
+          "engine-frame"
+        ],
+        "labels": [
+          "governor-spindle",
+          "governor-balls",
+          "governor-collar"
+        ],
+        "camera": "governor-view",
+        "sim": {
+          "set": {
+            "experiment": "governor",
+            "motion-mode": "manual",
+            "phase-deg": 0,
+            "cycle-rate": 10,
+            "cold-pressure": 20,
+            "governor-rpm": 60,
+            "work-share": 20
+          }
+        },
+        "caption": {
+          "en": "Two flyballs are linked to one rotating spindle and one sliding collar. The collar can rise and fall along the spindle.",
+          "zh": "两个飞球连着同一根转轴和同一个滑套。滑套可以沿轴上下移动。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "run": false,
+        "part": null,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "steam-supply",
+          "working-motion",
+          "condensing",
+          "regulation"
+        ],
+        "hide": [
+          "nc-cylinder",
+          "nc-piston",
+          "nc-beam",
+          "nc-pump",
+          "nc-jet",
+          "nc-chain",
+          "nc-pump-chain",
+          "energy-input",
+          "energy-work",
+          "energy-reject"
+        ],
+        "ghost": [
+          "cylinder",
+          "piston",
+          "piston-rod",
+          "beam",
+          "parallel-inner",
+          "parallel-outer",
+          "parallel-bottom",
+          "radius-rod",
+          "drive-rod",
+          "planet",
+          "sun",
+          "centre-link",
+          "shaft",
+          "flywheel",
+          "condenser",
+          "injection-jet",
+          "cooling-cistern",
+          "air-pump",
+          "pump-piston",
+          "pump-rod",
+          "hot-well",
+          "feed-pump",
+          "water-pipes",
+          "load-wheel",
+          "engine-frame"
+        ],
+        "labels": [
+          "governor-balls",
+          "governor-collar",
+          "throttle-link"
+        ],
+        "camera": "governor-view",
+        "sim": {
+          "set": {
+            "experiment": "governor",
+            "motion-mode": "manual",
+            "phase-deg": 0,
+            "cycle-rate": 10,
+            "cold-pressure": 20,
+            "governor-rpm": 90,
+            "work-share": 20
+          }
+        },
+        "caption": {
+          "en": "At a higher steady speed in this ideal model, the balls sit farther out and the collar rises. The non-rotating fork carries that movement to the throttle linkage.",
+          "zh": "在这个理想模型中，较高的稳定转速对应更张开的飞球和更高的滑套。不旋转的叉环把升降运动传给节流连杆。"
+        }
+      },
+      {
+        "view": "xray",
+        "explode": 0,
+        "run": false,
+        "part": null,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "steam-supply",
+          "working-motion",
+          "condensing",
+          "regulation"
+        ],
+        "hide": [
+          "nc-cylinder",
+          "nc-piston",
+          "nc-beam",
+          "nc-pump",
+          "nc-jet",
+          "nc-chain",
+          "nc-pump-chain",
+          "energy-input",
+          "energy-work",
+          "energy-reject"
+        ],
+        "ghost": [
+          "cylinder",
+          "piston",
+          "piston-rod",
+          "beam",
+          "parallel-inner",
+          "parallel-outer",
+          "parallel-bottom",
+          "radius-rod",
+          "drive-rod",
+          "planet",
+          "sun",
+          "centre-link",
+          "shaft",
+          "flywheel",
+          "condenser",
+          "injection-jet",
+          "cooling-cistern",
+          "air-pump",
+          "pump-piston",
+          "pump-rod",
+          "hot-well",
+          "feed-pump",
+          "water-pipes",
+          "load-wheel",
+          "engine-frame"
+        ],
+        "labels": [
+          "throttle-link",
+          "throttle"
+        ],
+        "camera": {
+          "position": [
+            3.3,
+            3.5,
+            4
+          ],
+          "target": [
+            1.5,
+            2.5,
+            0.9
+          ],
+          "fov": 30
+        },
+        "sim": {
+          "set": {
+            "experiment": "governor",
+            "motion-mode": "manual",
+            "phase-deg": 0,
+            "cycle-rate": 10,
+            "cold-pressure": 20,
+            "governor-rpm": 120,
+            "work-share": 20
+          }
+        },
+        "caption": {
+          "en": "The linkage reduces the throttle opening. It limits steam admission rather than applying a brake to the flywheel.",
+          "zh": "连杆让节流阀开度减小，限制进汽，并不是给飞轮加上刹车。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "run": false,
+        "part": null,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "steam-supply",
+          "working-motion",
+          "condensing",
+          "regulation"
+        ],
+        "hide": [
+          "nc-cylinder",
+          "nc-piston",
+          "nc-beam",
+          "nc-pump",
+          "nc-jet",
+          "nc-chain",
+          "nc-pump-chain",
+          "energy-input",
+          "energy-work",
+          "energy-reject"
+        ],
+        "ghost": [
+          "cylinder",
+          "piston",
+          "piston-rod",
+          "beam",
+          "parallel-inner",
+          "parallel-outer",
+          "parallel-bottom",
+          "radius-rod",
+          "drive-rod",
+          "planet",
+          "sun",
+          "centre-link",
+          "shaft",
+          "flywheel",
+          "condenser",
+          "injection-jet",
+          "cooling-cistern",
+          "air-pump",
+          "pump-piston",
+          "pump-rod",
+          "hot-well",
+          "feed-pump",
+          "water-pipes",
+          "load-wheel",
+          "engine-frame"
+        ],
+        "labels": [
+          "governor-balls",
+          "governor-collar",
+          "throttle"
+        ],
+        "camera": "governor-view",
+        "sim": {
+          "set": {
+            "experiment": "governor",
+            "motion-mode": "manual",
+            "phase-deg": 0,
+            "cycle-rate": 10,
+            "cold-pressure": 20,
+            "governor-rpm": 60,
+            "work-share": 20
+          }
+        },
+        "caption": {
+          "en": "Lower speed gives the opposite arrangement. These are three steady model positions; no response to a changing load is calculated here.",
+          "zh": "较低转速对应相反的机构位置。这里比较三个模型静态位置，并没有计算负载变化后的响应。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+The <Term id="centrifugal-governor">centrifugal governor</Term> connects rotation to the steam supply. Its spindle supports <Num s="S1">two</Num> flyballs, with upper arms and lower links meeting a single sliding collar. The collar can move along the spindle. This chapter compares complete stationary arrangements, so each rod retains its length while the ball and collar positions change together. [S1, S7] <FlyTo preset="governor-view">Look at the governor linkage</FlyTo>
+
+In this ideal static model, a higher steady speed corresponds to balls farther from the spindle and a higher collar. A fork around the collar carries its vertical movement without revolving with the spindle. The fork connects to a throttle rod and crank, which turn the valve disc in the steam passage. Trace that complete route from the balls to the valve. [S1, S7]
+
+The <Term id="throttle">throttle valve</Term> restricts the supply passage. In the faster model position it closes farther, limiting steam admission. At lower speed, the arrangement reverses. This is <Term id="feedback">feedback</Term>: an output, rotation, affects the input supplying it. The throttle does not act as a brake on the flywheel, and it has a different job from the paired inlet and exhaust valves. [S7]
+
+Use the card to compare the steady model positions while keeping the links, balls and gravity unchanged. Observe collar rise and throttle opening. These snapshots explain the direction of the linkage’s action. They do not calculate a machine’s changing speed after a load change, the actual amount of steam passing the opening or perfectly constant running speed. [S1]
+
+<More title={{ en: "Three static comparisons", zh: "三档静态比较" }}>
+
+The independent model speeds are <Num s="S1">60</Num>, <Num s="S1">90</Num> and <Num s="S1">120 rpm</Num>. The corresponding collar rises are about <Num s="S1">0.503</Num>, <Num s="S1">0.779</Num> and <Num s="S1">0.876 m</Num>, with throttle openings about <Num s="S1">84.9%</Num>, <Num s="S1">50.0%</Num> and <Num s="S1">36.3%</Num>. Opening is a normalized valve angle, not that percentage of a measured mass flow. [S1]
+
+</More>
+
+<More title={{ en: "The cover and the complete route", zh: "封面与完整联动" }}>
+
+The cover shows the flyball subassembly and omits its external throttle linkage. The stage includes the separate fork, rod, crank and valve disc so that the feedback path can be followed. The model’s collar direction follows its reconstructed symmetric geometry; it is not copied from a historical drawing with a different lever arrangement. Main-engine running beats hide this independent static comparison. [S1, S7, S14]
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+<Term id="centrifugal-governor">离心调速器</Term>把转动与供汽联系起来。转轴旁有 <Num s="S1">两个</Num> 飞球，上摆臂和下连杆接到同一个滑套，滑套可以沿轴升降。本章比较完整的静态姿态，球、杆与滑套的位置一起改变，刚杆长度保持不变。[S1, S7]<FlyTo preset="governor-view">看看调速器的联动</FlyTo>
+
+在这个理想静态模型中，较高的稳定转速对应更张开的飞球和更高的滑套。套在滑套外的叉环传递上下运动，却不跟着轴公转。叉环再连接节流连杆和曲柄，转动供汽通道中的阀片。沿着这些连接，可以从飞球一路追踪到阀片。[S1, S7]
+
+<Term id="throttle">节流阀</Term>限制供汽通道的开度。较快的模型姿态把阀关小，限制进汽；较慢时则相反。输出的转动反过来影响供汽输入，这条路径叫<Term id="feedback">反馈</Term>。节流阀不是给飞轮加刹车，也不同于交替开启的进汽阀和排汽阀。[S7]
+
+试一试卡保持杆长、飞球和重力不变，比较稳定姿态下的滑套升程与阀开度。静帧说明联动的方向，却没有计算改变负载后的转速过程，也没有求出实际进汽流量，更不能据此承诺机器完全恒速。每次切换都显示完整静态姿态，而不是播放调速器转轴的旋转。[S1]
+
+<More title={{ en: "Three static comparisons", zh: "三档静态比较" }}>
+
+独立比较转速为每分钟 <Num s="S1">60</Num>、<Num s="S1">90</Num>、<Num s="S1">120 转</Num>，对应滑套升程约 <Num s="S1">0.503</Num>、<Num s="S1">0.779</Num>、<Num s="S1">0.876 米</Num>，阀开度约 <Num s="S1">84.9%</Num>、<Num s="S1">50.0%</Num>、<Num s="S1">36.3%</Num>。这里的开度是阀片角度归一化的结果，不是相同比例的实测质量流量。[S1]
+
+</More>
+
+<More title={{ en: "The cover and the complete route", zh: "封面与完整联动" }}>
+
+封面只画飞球组件，省略外接节流连杆。舞台则保留叉环、连杆、曲柄和独立阀片，让反馈路径能被完整追踪。滑套方向来自本研究重建的对称几何，没有照搬杠杆布置不同的历史图。主机运行拍隐藏这套独立静态比较，避免误读为实时调速。[S1, S7, S14]
+
+</More>
+
+</Lang>

@@ -17,6 +17,9 @@ Atlas code is MIT (see `LICENSE`); Atlas content is CC BY-NC-SA 4.0 (see
 | Natural Earth 1:10m rivers and lake centerlines, lakes (v5.0.0) | `ancient-civilisations` rivers and the Tonlé Sap outline (`public/geo/ancient-rivers.json`) | Public domain |
 | Wikidata | point coordinates (P625) of the `ancient-civilisations` events and sites | CC0 |
 | Kanguole, *Ancient North China Plain blank relief map.svg* (Wikimedia Commons), via `public/geo/warring-states-rivers.json` | two reconstructed Yellow River courses in `public/geo/ancient-rivers.json`, which is therefore published CC BY-SA 4.0 (see LICENSE-CONTENT) | CC BY-SA 4.0 |
+| NOAA PSL NCEP/NCAR Reanalysis 1, monthly long-term mean 850 hPa `uwnd` / `vwnd` with valid-year counts, 1991–2020 (https://psl.noaa.gov/) | `sample-climate` wind arrays (`public/geo/sample-climate-wind-850-1991-2020.json`); native 2.5° grid, values unchanged, source ids remapped | Public domain (US Government data); "NCEP Reanalysis data provided by NOAA PSL, Boulder, Colorado, USA" |
+| GPCP Version 2.3 monthly precipitation, long-term mean 1991–2020, via NOAA PSL (https://psl.noaa.gov/) | `sample-climate` rain arrays (`public/geo/sample-climate-rain-gpcp-1991-2020.json`); native 2.5° grid, values unchanged, source ids remapped | Public domain (US Government data); "GPCP Precipitation data provided by NOAA PSL, Boulder, Colorado, USA" |
+| Natural Earth 1:110m populated places | `sample-climate` city anchor coordinates (`data/events.json`) | Public domain |
 
 ## 3D anatomy models
 
@@ -102,6 +105,14 @@ The skills under `.claude/skills/` are working notes for AI assistants, not lice
 Figures and claims in topic texts cite their sources with `[S#]` ids; each
 topic's `data/SOURCES.md` lists them with URLs. Quotations are short and
 attributed; no source text is reproduced beyond that.
+
+## Watt steam engine (`steam-engine`)
+
+| Source / work | Use and changes | Licence |
+|---|---|---|
+| Science Museum Group collection, *Rotative Steam Engine by Boulton and Watt, 1788* (object 1861-46, https://collection.sciencemuseumgroup.org.uk/objects/co50948/rotative-steam-engine-by-boulton-and-watt-1788), *Newcomen Atmospheric Engine* (https://collection.sciencemuseumgroup.org.uk/objects/co50900/newcomen-atmospheric-engine) and *James Watt* (https://collection.sciencemuseumgroup.org.uk/people/ap24508/watt-james), accessed 2026-10-27 | Object descriptions independently rewritten, shortened and translated for the chapters, part explanations and glossary; museum photographs are not copied, traced or used as textures | Descriptive text CC BY 4.0, https://creativecommons.org/licenses/by/4.0/ (metadata CC0) |
+
+The other sources of this topic (public-domain mechanism texts, NASA, NOAA and NIST explanatory pages, the Lap-engine dimension references) are cited fact by fact; no text, drawing or image from them is reproduced. Per-source locators are in `src/content/topics/steam-engine/data/SOURCES.md`. The three illustrations (`public/illustrations/steam-engine*.webp`) are original artwork under the content licence above.
 
 ## Dinosaur Earth (`dinosaur-earth`)
 

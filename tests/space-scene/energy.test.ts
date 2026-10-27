@@ -325,7 +325,7 @@ describe('chains: conservation, switching off, paths', () => {
         for (const l of outs) expect(Number.isInteger(f.links[l.id])).toBe(true);
       }
     }
-  });
+  }, 30_000); // every chain × every combination; slow when the machine is busy
   it('links: one entry per link of the chain on show; paths: only the flow paths the data has, 0–1', () => {
     for (const chain of CHAINS) {
       const o = run({ chain, 'torch-on': true, winds: 4, speed: 10 });

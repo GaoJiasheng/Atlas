@@ -1,0 +1,236 @@
+{
+  "terms": [
+    {
+      "id": "crust",
+      "term": {
+        "en": "Crust",
+        "zh": "地壳"
+      },
+      "definition": {
+        "en": "The rocky outer layer of Earth, whose thickness varies between places.",
+        "zh": "地球最外面的岩石层，各处厚度不同。"
+      },
+      "see": [
+        "mantle",
+        "lithosphere"
+      ]
+    },
+    {
+      "id": "mantle",
+      "term": {
+        "en": "Mantle",
+        "zh": "地幔"
+      },
+      "definition": {
+        "en": "The region of mostly solid rock between the crust and the core; its rock can deform over geological time.",
+        "zh": "地壳与地核之间、大部分为固态岩石的区域；岩石能在地质时间尺度上变形。"
+      },
+      "see": [
+        "crust",
+        "lithosphere"
+      ]
+    },
+    {
+      "id": "lithosphere",
+      "term": {
+        "en": "Lithosphere",
+        "zh": "岩石圈"
+      },
+      "definition": {
+        "en": "The crust and rigid uppermost mantle together, divided into moving plates.",
+        "zh": "地壳和刚性的最上部地幔合成的整体，分成移动的板块。"
+      },
+      "see": [
+        "tectonic-plate"
+      ]
+    },
+    {
+      "id": "tectonic-plate",
+      "term": {
+        "en": "Tectonic plate",
+        "zh": "板块"
+      },
+      "definition": {
+        "en": "A moving block of lithosphere that may include both continental and oceanic parts.",
+        "zh": "移动的岩石圈块体，可以同时包括大陆与海洋部分。"
+      },
+      "see": [
+        "lithosphere",
+        "subduction"
+      ]
+    },
+    {
+      "id": "inner-core",
+      "term": {
+        "en": "Inner core",
+        "zh": "内核"
+      },
+      "definition": {
+        "en": "The region of solid metal at the centre of Earth.",
+        "zh": "位于地球中心的固态金属区域。"
+      },
+      "see": [
+        "outer-core"
+      ]
+    },
+    {
+      "id": "outer-core",
+      "term": {
+        "en": "Outer core",
+        "zh": "外核"
+      },
+      "definition": {
+        "en": "The region of liquid metal surrounding the inner core.",
+        "zh": "包围内核的液态金属区域。"
+      },
+      "see": [
+        "inner-core",
+        "mantle"
+      ]
+    },
+    {
+      "id": "magma",
+      "term": {
+        "en": "Magma",
+        "zh": "岩浆"
+      },
+      "definition": {
+        "en": "Molten rock material below the surface, which can contain crystals and dissolved gas.",
+        "zh": "位于地表下的熔融岩石物质，可以含晶体和溶解气体。"
+      },
+      "see": [
+        "lava",
+        "vent"
+      ]
+    },
+    {
+      "id": "lava",
+      "term": {
+        "en": "Lava",
+        "zh": "熔岩"
+      },
+      "definition": {
+        "en": "Molten rock that has erupted onto the surface.",
+        "zh": "已经喷出到地表的熔融岩石。"
+      },
+      "see": [
+        "magma"
+      ]
+    },
+    {
+      "id": "subduction",
+      "term": {
+        "en": "Subduction",
+        "zh": "俯冲"
+      },
+      "definition": {
+        "en": "The descent of one lithospheric plate beneath another plate.",
+        "zh": "一块岩石圈板块向另一板块下方下降的过程。"
+      },
+      "see": [
+        "tectonic-plate"
+      ]
+    },
+    {
+      "id": "vent",
+      "term": {
+        "en": "Volcanic vent",
+        "zh": "喷发口"
+      },
+      "definition": {
+        "en": "An opening through which volcanic gas, fragments and/or lava reach the surface or atmosphere.",
+        "zh": "火山气体、碎屑和／或熔岩到达地表或大气的开口。"
+      },
+      "see": [
+        "magma",
+        "lava"
+      ]
+    },
+    {
+      "id": "fault",
+      "term": {
+        "en": "Fault",
+        "zh": "断层"
+      },
+      "definition": {
+        "en": "A fracture surface along which rocks can move relative to each other.",
+        "zh": "岩体可以沿着相对移动的破裂面。"
+      },
+      "see": [
+        "focus",
+        "epicentre"
+      ]
+    },
+    {
+      "id": "focus",
+      "term": {
+        "en": "Focus",
+        "zh": "震源"
+      },
+      "definition": {
+        "en": "The place inside Earth where an earthquake rupture begins.",
+        "zh": "地球内部一次地震破裂开始的位置。"
+      },
+      "see": [
+        "epicentre"
+      ]
+    },
+    {
+      "id": "epicentre",
+      "term": {
+        "en": "Epicentre",
+        "zh": "震中"
+      },
+      "definition": {
+        "en": "The point on the surface directly above the focus.",
+        "zh": "震源在地表正上方的位置。"
+      },
+      "see": [
+        "focus"
+      ]
+    },
+    {
+      "id": "p-wave",
+      "term": {
+        "en": "P wave",
+        "zh": "P波（纵波）"
+      },
+      "definition": {
+        "en": "A seismic wave in which particles vibrate parallel to the direction the wave travels.",
+        "zh": "质点振动方向与传播方向平行的地震波。"
+      },
+      "see": [
+        "s-wave"
+      ]
+    },
+    {
+      "id": "s-wave",
+      "term": {
+        "en": "S wave",
+        "zh": "S波（横波）"
+      },
+      "definition": {
+        "en": "A seismic wave in which particles vibrate perpendicular to the travel direction; it does not travel directly through the liquid outer core.",
+        "zh": "质点振动方向垂直于传播方向的地震波，不能直接穿过液态外核。"
+      },
+      "see": [
+        "p-wave",
+        "outer-core"
+      ]
+    },
+    {
+      "id": "tsunami",
+      "term": {
+        "en": "Tsunami",
+        "zh": "海啸"
+      },
+      "definition": {
+        "en": "A series of long waves caused by a large, sudden displacement of water, unrelated to tides.",
+        "zh": "大量水体突然位移产生的长波列，与潮汐不同。"
+      },
+      "see": [
+        "fault"
+      ]
+    }
+  ]
+}

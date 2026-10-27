@@ -21,7 +21,7 @@ import { decodeSimParam, encodeSimParam } from '../space-scene/lib/sim/controls'
 export type UrlState = Partial<SceneState & UrlEngineFields>;
 
 /** Order in which keys are written (most meaningful first). */
-export const URL_KEY_ORDER = ['ch', 'b', 'task', 'model', 't', 'inset', 'inset-visible', 'fossil-mode', 'hl', 'part', 'view', 'explode', 'run', 'cut', 'pose', 'sim', 'layers', 'cam', 'theme'] as const;
+export const URL_KEY_ORDER = ['ch', 'b', 'task', 'model', 't', 'm', 'inset', 'inset-visible', 'fossil-mode', 'hl', 'part', 'view', 'explode', 'run', 'cut', 'pose', 'sim', 'layers', 'cam', 'theme'] as const;
 export type UrlKey = (typeof URL_KEY_ORDER)[number];
 
 const ID_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -51,6 +51,8 @@ function encodeField(key: UrlKey, state: UrlState): string | null {
       return state.theme ?? null;
     case 't':
       return state.t === undefined ? null : state.t === null ? '' : formatTimeParam(state.t);
+    case 'm':
+      return state.month === undefined ? null : String(state.month);
     case 'inset': return state.inset ?? null;
     case 'inset-visible': return state.insetVisible === undefined ? null : state.insetVisible ? '1' : '0';
     case 'fossil-mode': return state.fossilMode ?? null;
@@ -131,6 +133,8 @@ export function decodeSceneState(input: string | URLSearchParams): UrlState {
     }
   }
 
+  const m = params.get('m');
+  if (m !== null && /^(?:[1-9]|1[0-2])$/.test(m)) out.month = Number(m);
   const inset = params.get('inset');
   if (inset === 'world' || inset === 'southeast-asia' || inset === 'mexico') out.inset = inset;
   const visible = params.get('inset-visible');

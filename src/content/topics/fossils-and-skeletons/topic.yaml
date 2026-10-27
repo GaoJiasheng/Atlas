@@ -1,0 +1,15 @@
+id: fossils-and-skeletons
+title: { en: "Fossils and Skeletons", zh: "化石与恐龙骨架" }
+subtitle: { en: "Reading the evidence: bodies, tracks, rock layers and reconstructed skeletons", zh: "读懂证据：身体、足迹、地层与骨架复原" }
+shortTitle: { en: "Fossils & skeletons", zh: "化石与骨架" }
+subject: science
+levels: [P3, P4, P5, P6]
+tags: [beyond-syllabus, singapore]
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: published
+illustration: fossils-and-skeletons
+note: { en: "Schematic fossil evidence studies. Not a museum specimen inventory. Ages marked SIM are invented examples; parts are not drawn to a shared scale.", zh: "化石证据示意研究，并非馆藏标本清单。标 SIM 的年代为虚构算例；各部分不采用统一比例。" }

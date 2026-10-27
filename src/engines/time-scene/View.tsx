@@ -138,7 +138,7 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
   }, []);
   const [reconstructionStats, setReconstructionStats] = useState<ReconstructionStats | null>(null);
   const store = useSceneStore<TimeSceneExt>();
-  const { hud, openReader } = useSceneContext();
+  const { hud, revealReader } = useSceneContext();
   const currentChapter = useScene<TimeSceneExt, string | null>((s) => s.chapter);
   const layers = useScene<TimeSceneExt, string[]>((s) => s.layers);
   const highlight = useScene<TimeSceneExt, string[]>((s) => s.highlight);
@@ -153,7 +153,7 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
   const [selectedObjectId, setSelectedObjectId] = useState<string | null>(null);
   const modernObjects = useMemo(() => new Map([...(deepTime?.points ?? []), ...(deepTime?.cards ?? [])].map((o) => [o.id, o])), [deepTime]);
   const modernCounts = useMemo(() => deepTime ? filterModernPoints(deepTime.points, { selectedMa, fossilMode, fossilsEnabled: layers.includes('fossils-modern'), bounds: topic.modernInset?.views.find((v) => v.id === inset)?.bounds, cards: deepTime.cards }) : null, [deepTime, selectedMa, fossilMode, layers, inset, topic.modernInset]);
-  const selectModern = useCallback((id: string) => { const object = modernObjects.get(id); const outside = object?.kind === 'fossil-collection' && !modernCounts?.visiblePoints.some((p) => p.id === id); outsideSelection.current = outside ? id : null; setSelectedObjectId(id); store.getState().patch({ highlight: outside ? [] : [id] }); openReader?.(); }, [store, openReader, modernObjects, modernCounts]);
+  const selectModern = useCallback((id: string) => { const object = modernObjects.get(id); const outside = object?.kind === 'fossil-collection' && !modernCounts?.visiblePoints.some((p) => p.id === id); outsideSelection.current = outside ? id : null; setSelectedObjectId(id); store.getState().patch({ highlight: outside ? [] : [id] }); revealReader?.(); }, [store, revealReader, modernObjects, modernCounts]);
   const modernPatch = useCallback((patch: Pick<Partial<TimeSceneExt>, 'inset' | 'insetVisible' | 'fossilMode'>) => store.getState().patch(patch), [store]);
 
   /* ---------- model + playhead ---------- */

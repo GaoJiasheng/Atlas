@@ -11,7 +11,7 @@ import type { Vec3 } from '../../lib/math';
 import { eachPieces, isClosedPrimitive, partPieces } from './geometry';
 import { partPrimitives } from '../../lib/parts';
 import { restFan } from '../../lib/wing';
-import { latheProfileClosed } from '../../lib/shaped';
+import { latheArcStart, latheProfileClosed } from '../../lib/shaped';
 import type { PartShape } from './PartNode';
 
 /**
@@ -60,6 +60,26 @@ export function anchorOffset(part: Part): Vec3 {
  */
 export function anchorPoint(part: Part): Vec3 {
   const p = part.primitive;
+  // An annular cutaway's bounds centre lies in its hole. Put its leader on
+  // the actual section face instead; keep bounds/occlusion extents intact.
+  if (p?.kind === 'lathe' && p.arc !== undefined && !part.repeat && latheProfileClosed(p.profile)) {
+    const y = (Math.min(...p.profile.map((v) => v[1])) + Math.max(...p.profile.map((v) => v[1]))) / 2;
+    const crossings: number[] = [];
+    for (let i = 0; i < p.profile.length; i++) {
+      const a = p.profile[i]!, b = p.profile[(i + 1) % p.profile.length]!;
+      // Half-open scanline intersections count a vertex once, not twice.
+      if ((a[1] <= y && b[1] > y) || (b[1] <= y && a[1] > y))
+        crossings.push(a[0] + ((y - a[1]) / (b[1] - a[1])) * (b[0] - a[0]));
+    }
+    crossings.sort((a, b) => a - b);
+    // Only one unambiguous annular interval; solid profiles touch the axis.
+    if (crossings.length === 2 && crossings[0]! > 1e-9 && crossings[1]! - crossings[0]! > 1e-9) {
+      const r = (crossings[0]! + crossings[1]!) / 2, phi = latheArcStart(p.arc), s = primitiveScale(p);
+      const point: Vec3 = [r * Math.sin(phi) * s[0], y * s[1], r * Math.cos(phi) * s[2]];
+      if (p.mirror) point[p.mirror === 'x' ? 0 : p.mirror === 'y' ? 1 : 2] *= -1;
+      return apply3(eulerDeg(p.rotation), point);
+    }
+  }
   if (p?.kind === 'tube' && !part.repeat) {
     const m = tubeMidpoint(p);
     const k = primitiveScale(p);

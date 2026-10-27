@@ -82,7 +82,7 @@ export function rawTopicData(slug: string): Record<string, unknown> {
 
 /** Parsed engine data for a topic (throws on invalid data, failing the build). */
 export function topicEngineData(topic: TopicEntry): unknown {
-  return parseEngineData(topic.data.engine, topic.data.stage, loadDeepTime(topic.data, rawTopicData(topic.id), (stem) => { const file = join(process.cwd(), 'public/geo', `${stem}.json`); return existsSync(file) ? JSON.parse(readFileSync(file, 'utf8')) : undefined; }), `topic "${topic.id}"`);
+  return parseEngineData(topic.data.engine, topic.data.stage, loadDeepTime(topic.data, rawTopicData(topic.id), (stem) => { const file = join(process.cwd(), 'public/geo', `${stem}.json`); return existsSync(file) ? JSON.parse(readFileSync(file, 'utf8')) : undefined; }), `topic "${topic.id}"`, topic.data.temporalMode);
 }
 
 /**
