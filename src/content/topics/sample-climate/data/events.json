@@ -1,0 +1,146 @@
+[
+  {
+    "id": "site-singapore",
+    "kind": "site",
+    "at": [
+      103.853875,
+      1.294979
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Singapore",
+      "zh": "新加坡"
+    },
+    "summary": {
+      "en": "City reading anchor for the engine fixture; not a weather station or fire location.",
+      "zh": "引擎测试用城市阅读锚点，不是气象站或火点。"
+    },
+    "detail": {
+      "en": "Natural Earth 1:110m populated places; NE_ID 1159151627. Original representative city coordinates retained. This is fixture/test data.",
+      "zh": "Natural Earth 1:110m 城市点；NE_ID 1159151627。保留原城市代表坐标，用于引擎测试。"
+    },
+    "sources": [
+      "S103"
+    ]
+  },
+  {
+    "id": "site-kuala-lumpur",
+    "kind": "site",
+    "at": [
+      101.688699,
+      3.139797
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Kuala Lumpur",
+      "zh": "吉隆坡"
+    },
+    "summary": {
+      "en": "City reading anchor for the engine fixture; not a weather station or fire location.",
+      "zh": "引擎测试用城市阅读锚点，不是气象站或火点。"
+    },
+    "detail": {
+      "en": "Natural Earth 1:110m populated places; NE_ID 1159151317. Original representative city coordinates retained. This is fixture/test data.",
+      "zh": "Natural Earth 1:110m 城市点；NE_ID 1159151317。保留原城市代表坐标，用于引擎测试。"
+    },
+    "sources": [
+      "S103"
+    ]
+  },
+  {
+    "id": "site-jakarta",
+    "kind": "site",
+    "at": [
+      106.827492,
+      -6.172472
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Jakarta",
+      "zh": "雅加达"
+    },
+    "summary": {
+      "en": "City reading anchor for the engine fixture; not a weather station or fire location.",
+      "zh": "引擎测试用城市阅读锚点，不是气象站或火点。"
+    },
+    "detail": {
+      "en": "Natural Earth 1:110m populated places; NE_ID 1159151599. Original representative city coordinates retained. This is fixture/test data.",
+      "zh": "Natural Earth 1:110m 城市点；NE_ID 1159151599。保留原城市代表坐标，用于引擎测试。"
+    },
+    "sources": [
+      "S103"
+    ]
+  },
+  {
+    "id": "site-hanoi",
+    "kind": "site",
+    "at": [
+      105.848068,
+      21.035273
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Hanoi",
+      "zh": "河内"
+    },
+    "summary": {
+      "en": "City reading anchor for the engine fixture; not a weather station or fire location.",
+      "zh": "引擎测试用城市阅读锚点，不是气象站或火点。"
+    },
+    "detail": {
+      "en": "Natural Earth 1:110m populated places; NE_ID 1159151251. Original representative city coordinates retained. This is fixture/test data.",
+      "zh": "Natural Earth 1:110m 城市点；NE_ID 1159151251。保留原城市代表坐标，用于引擎测试。"
+    },
+    "sources": [
+      "S103"
+    ]
+  },
+  {
+    "id": "site-bangkok",
+    "kind": "site",
+    "at": [
+      100.514699,
+      13.751945
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Bangkok",
+      "zh": "曼谷"
+    },
+    "summary": {
+      "en": "City reading anchor for the engine fixture; not a weather station or fire location.",
+      "zh": "引擎测试用城市阅读锚点，不是气象站或火点。"
+    },
+    "detail": {
+      "en": "Natural Earth 1:110m populated places; NE_ID 1159151509. Original representative city coordinates retained. This is fixture/test data.",
+      "zh": "Natural Earth 1:110m 城市点；NE_ID 1159151509。保留原城市代表坐标，用于引擎测试。"
+    },
+    "sources": [
+      "S103"
+    ]
+  },
+  {
+    "id": "site-manila",
+    "kind": "site",
+    "at": [
+      120.980271,
+      14.606105
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Manila",
+      "zh": "马尼拉"
+    },
+    "summary": {
+      "en": "City reading anchor for the engine fixture; not a weather station or fire location.",
+      "zh": "引擎测试用城市阅读锚点，不是气象站或火点。"
+    },
+    "detail": {
+      "en": "Natural Earth 1:110m populated places; NE_ID 1159151525. Original representative city coordinates retained. This is fixture/test data.",
+      "zh": "Natural Earth 1:110m 城市点；NE_ID 1159151525。保留原城市代表坐标，用于引擎测试。"
+    },
+    "sources": [
+      "S103"
+    ]
+  }
+]
