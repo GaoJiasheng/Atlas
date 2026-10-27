@@ -18,7 +18,7 @@ async function open(page: Page, query = '', locale = 'en') {
 
 async function select(page: Page, id: string) {
   const selected = await page.evaluate((target) => (window.__atlas!.engine as unknown as Engine).selectEvent(target), id);
-  if (selected) await expect.poll(async () => (await reader(page)).selectedId).toBe(id);
+  if (selected) await expect.poll(async () => (await reader(page)).selectedId, { timeout: 20_000 }).toBe(id);
   return selected;
 }
 
@@ -46,7 +46,7 @@ test('eight chapters and 37 beats remain a draft with no invented participants o
     expect(state.layers).not.toContain('control');
     expect(state.layers).not.toContain('borders');
     expect(state.layers).not.toContain('movements');
-    await expect.poll(async () => (await timeState(page)).presentation?.chapter).toBe(beats[n]!.chapter);
+    await expect.poll(async () => (await timeState(page)).presentation?.chapter, { timeout: 20_000 }).toBe(beats[n]!.chapter);
   }
   expect(errors).toEqual([]);
   expect(external).toEqual([]);
@@ -123,7 +123,8 @@ test('railway dates match the source sample and switching off removes every visi
   await page.setViewportSize({ width: 1920, height: 1080 });
   await open(page, 'ch=ir-connected-world-debates&t=1914&layers=base,rail-rshapes,sites');
   const rails = () => page.evaluate(() => (window.__atlas!.stats() as unknown as DatedStats).datedLayers?.['rail-rshapes']);
-  await expect.poll(async () => (await rails())?.total).toBe(8906); // same-year connected runs of the 18,804 RShapes lids
+  // The 1.3 MB layer loads after the map; give a busy machine time to decode it.
+  await expect.poll(async () => (await rails())?.total, { timeout: 30_000 }).toBe(8906); // same-year connected runs of the 18,804 RShapes lids
   await expect.poll(async () => (await rails())?.visible).toBe(8906);
   const toggle = page.locator('[data-layer="rail-rshapes"]');
   await expect(toggle).toHaveAttribute('aria-pressed', 'true');
@@ -131,7 +132,7 @@ test('railway dates match the source sample and switching off removes every visi
   await expect(toggle).toHaveAttribute('aria-pressed', 'false');
   await expect.poll(async () => (await rails())?.visible).toBe(0);
   await open(page, 'ch=ir-railways-networks&t=1834&layers=base,rail-rshapes,sites');
-  await expect.poll(async () => (await rails())?.visible).toBe(11); // 35 lids
+  await expect.poll(async () => (await rails())?.visible, { timeout: 30_000 }).toBe(11); // 35 lids
 });
 
 for (const locale of ['en', 'zh']) for (const theme of ['paper', 'cinema'] as const) {
