@@ -615,4 +615,4 @@ PRESENT 的字幕自足；图只在普通阅读出现。退出演示沿用恢复
 
 **相对 §2 的出入。** 背景第 1 拍不开月层，字幕改为“月平均图层还没有打开”；字幕里的“MSS”改“新加坡气象局”，“《水》”改《新加坡的水》。正文中的地图读数按数据核正：1 月南中国海风来自东、东北，7 月赤道以南 850 hPa 为东风（不是东南风）。没有做图的章末锚点（`Figure` 无 id）。《新加坡的水》第 02 章加一句回链。
 
-**引擎小修。** 雨层装上后 1:50m 海岸被移到 1:10m 遮罩之上，新加坡近景出现两条海岸线；改为在雨格上另画一层随 zoom 7→8 淡出的 1:50m 海岸（`climateStyle.ts` `coastOverClimate`），原海岸留在遮罩下；单测 `tests/time-scene/climate-coast.test.ts`。另外 `scripts/shoot.ts --beats` 在取每拍快照前等月份提交（`renderedMonth === month`，最多 30 秒）：负载高时软件 WebGL 画一个新月份要 2–8 秒，原来固定等 1.5 秒会误报。
+**引擎小修。** 雨层装上后 1:50m 海岸被移到 1:10m 遮罩之上，新加坡近景出现两条海岸线；改为在雨格上另画一层随 zoom 7→8 淡出的 1:50m 海岸（`climateStyle.ts` `coastOverClimate`），原海岸留在遮罩下；单测 `tests/time-scene/climate-coast.test.ts`。另外 `scripts/shoot.ts --beats` 在取每拍快照前等月份提交（`renderedMonth === month`，最多 30 秒）：负载高时软件 WebGL 画一个新月份要 2–8 秒，原来固定等 1.5 秒会误报；页面 20 秒内未 ready 时重新加载，最多三次。

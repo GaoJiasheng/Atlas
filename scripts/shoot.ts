@@ -242,12 +242,18 @@ class Session {
    */
   async load(path: string, what: string): Promise<void> {
     const { page } = this;
-    await page.goto(`${this.origin}${path}`);
-    await page.waitForFunction(() => window.__atlas !== undefined, null, { timeout: 60_000 });
-    const ready = await page.evaluate(() =>
-      Promise.race([window.__atlas!.ready, new Promise<boolean>((resolve) => window.setTimeout(() => resolve(false), 60_000))]),
-    );
-    if (!ready) throw new Error(`${what}: stage never became ready`);
+    // `__atlas.ready` gives up after 20 s; software WebGL on a heavily loaded machine can need longer
+    // for a first paint, so a stage that is not ready is loaded afresh twice more before it fails.
+    for (let attempt = 1; ; attempt++) {
+      await page.goto(`${this.origin}${path}`);
+      await page.waitForFunction(() => window.__atlas !== undefined, null, { timeout: 60_000 });
+      const ready = await page.evaluate(() =>
+        Promise.race([window.__atlas!.ready, new Promise<boolean>((resolve) => window.setTimeout(() => resolve(false), 60_000))]),
+      );
+      if (ready) return;
+      if (attempt === 3) throw new Error(`${what}: stage never became ready`);
+      console.log(`  ${what}: stage not ready, loading again (${attempt + 1}/3)`);
+    }
   }
 
   /** The topic page as the session opened it (after link checks have navigated the tab away): loaded, in the session's theme. */

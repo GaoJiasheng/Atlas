@@ -27,7 +27,7 @@
 ## 三、给主会话的备注
 
 15. **引擎小修（一处，附单测）**：新加坡近景（zoom 8）在雨层装上之后出现两条海岸线（1:50m 与 1:10m 错开）。原因是 `climatologyController.ts` 为了让海岸压在雨格上面，把 1:50m 海岸移到最上层，也就移到了 1:10m 的遮罩之上。改为：原来的 1:50m 海岸留在遮罩下面，另加一层 `clim-land-edge-over`（`climateStyle.ts` 的 `coastOverClimate`）压在雨格上，从 zoom 7 到 8 淡出，正好与 1:10m 陆地和海岸淡入对接；区域图版主题不淡出。单测 `tests/time-scene/climate-coast.test.ts`。引擎代理合并时请过目。
-16. **`scripts/shoot.ts` 小改**：`--beats` 每拍原来固定等 1.5 秒就取快照；在负载很高的机器上，软件 WebGL 画完一个新月份要 2–8 秒，月份还没提交就被判“月份不一致”。改为另外等 `renderedMonth === month`（最多 30 秒，仍未提交照样判失败）。
+16. **`scripts/shoot.ts` 小改**：`--beats` 每拍原来固定等 1.5 秒就取快照；在负载很高的机器上，软件 WebGL 画完一个新月份要 2–8 秒，月份还没提交就被判“月份不一致”。改为另外等 `renderedMonth === month`（最多 30 秒，仍未提交照样判失败）。另外 `Session.load` 在 `__atlas.ready`（20 秒放弃）为 false 时重新加载页面，最多三次，三次都不行才判失败。两处都只放宽等待，不改判定。
 17. **首页卡片统计写成“8 chapters · 6 events”**：`src/lib/home.ts` 的 `topicStats` 把六个城市点（`site`）算作事件。最小改动是月模式不计 site 或改称地点；共享代码，本次没改。
 18. **THIRD-PARTY-NOTICES** 现有的 NCEP/NCAR、GPCP、NE 110m 三行只写了 `sample-climate` 的文件名。数据属公有领域，按 brief 不新增条目；合并时可以把这三行的“用在哪里”扩成同时写本主题的两个文件。
 19. **性能**：月页 JS 约 447.6 KB gzip，超过 400 KB 目标（引擎已知项，主要是既有 MapLibre 与 React）。
