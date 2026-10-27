@@ -138,7 +138,7 @@ export function installTestApi(deps: TestApiDeps): () => void {
         const start = performance.now();
         const poll = () => {
           const size = drawnSize(deps.stage());
-          if (size && size[0] > 0 && size[1] > 0) resolve(true);
+          if (size && size[0] > 0 && size[1] > 0 && (hud.getState().controls?.ready?.() ?? true)) resolve(true);
           else if (performance.now() - start > READY_TIMEOUT_MS) resolve(false);
           else window.setTimeout(poll, 100);
         };

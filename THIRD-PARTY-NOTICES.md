@@ -17,6 +17,9 @@ Atlas code is MIT (see `LICENSE`); Atlas content is CC BY-NC-SA 4.0 (see
 | Natural Earth 1:10m rivers and lake centerlines, lakes (v5.0.0) | `ancient-civilisations` rivers and the Tonlé Sap outline (`public/geo/ancient-rivers.json`) | Public domain |
 | Wikidata | point coordinates (P625) of the `ancient-civilisations` events and sites | CC0 |
 | Kanguole, *Ancient North China Plain blank relief map.svg* (Wikimedia Commons), via `public/geo/warring-states-rivers.json` | two reconstructed Yellow River courses in `public/geo/ancient-rivers.json`, which is therefore published CC BY-SA 4.0 (see LICENSE-CONTENT) | CC BY-SA 4.0 |
+| NOAA PSL NCEP/NCAR Reanalysis 1, monthly long-term mean 850 hPa `uwnd` / `vwnd` with valid-year counts, 1991–2020 (https://psl.noaa.gov/) | `sample-climate` wind arrays (`public/geo/sample-climate-wind-850-1991-2020.json`); native 2.5° grid, values unchanged, source ids remapped | Public domain (US Government data); "NCEP Reanalysis data provided by NOAA PSL, Boulder, Colorado, USA" |
+| GPCP Version 2.3 monthly precipitation, long-term mean 1991–2020, via NOAA PSL (https://psl.noaa.gov/) | `sample-climate` rain arrays (`public/geo/sample-climate-rain-gpcp-1991-2020.json`); native 2.5° grid, values unchanged, source ids remapped | Public domain (US Government data); "GPCP Precipitation data provided by NOAA PSL, Boulder, Colorado, USA" |
+| Natural Earth 1:110m populated places | `sample-climate` city anchor coordinates (`data/events.json`) | Public domain |
 
 ## 3D anatomy models
 

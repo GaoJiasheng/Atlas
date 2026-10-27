@@ -1,0 +1,82 @@
+.clim-beatline {
+  display: flex;
+  gap: 8px;
+  padding: 12px 0;
+  border-block: 1px solid var(--line);
+}
+.clim-beatline p {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.clim-beatline b {
+  display: block;
+  font: 11px var(--font-mono);
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+}
+.clim-beatline__nav {
+  display: flex;
+  align-items: start;
+}
+.clim-beatline__nav button {
+  background: transparent;
+  color: var(--ink);
+  border: 0;
+  min-width: 44px;
+  min-height: 44px;
+  cursor: pointer;
+}
+.clim-beatline__nav button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.clim-exploring {
+  border-left: 2px solid var(--signal);
+  padding-left: 10px;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.clim-index {
+  border-top: 1px solid var(--line);
+  margin-top: 24px;
+  padding-top: 12px;
+}
+.clim-index h3 {
+  font: 12px var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.clim-index ul {
+  padding: 0;
+  list-style: none;
+}
+.clim-index button {
+  display: grid;
+  gap: 4px;
+  text-align: left;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 0;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+.clim-index button[aria-pressed='true'] {
+  color: var(--signal);
+}
+.clim-index button span {
+  font-size: 12px;
+  line-height: 1.5;
+}
+.clim-site-more summary {
+  min-height: 44px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+}
