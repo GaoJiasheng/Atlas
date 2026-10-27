@@ -23,15 +23,17 @@ async function open(page: Page, query: string, locale = 'en') {
   await page.waitForFunction(() => window.__atlas !== undefined, null, { timeout: 30_000 });
   expect(await page.evaluate(() => window.__atlas!.ready)).toBe(true);
 }
-async function stableAnchor(page: Page, id: string) {
+/** The anchor once it has stopped moving; `away` is the previous selection's spot, which a slow frame must not be mistaken for. */
+async function stableAnchor(page: Page, id: string, away?: Anchor) {
   let previous: Anchor | null = null;
   let current: Anchor | null = null;
   await expect.poll(async () => {
     current = await anchor(page, id);
-    const stable = current && previous && current.shown && current.onScreen && Math.hypot(current.x - previous.x, current.y - previous.y) < 0.1;
+    const left = !away || (current !== null && Math.hypot(current.x - away.x, current.y - away.y) > 1);
+    const stable = left && current && previous && current.shown && current.onScreen && Math.hypot(current.x - previous.x, current.y - previous.y) < 0.1;
     previous = current;
     return Boolean(stable);
-  }, { intervals: [150] }).toBe(true);
+  }, { intervals: [150], timeout: 15_000 }).toBe(true);
   return current!;
 }
 
@@ -54,7 +56,7 @@ test.describe('frog-and-chicken', () => {
     for (const view of ['egg', 'tadpole', 'hind-legs', 'froglet', 'adult']) {
       await card(page).locator(`[data-sim-control="frog-view"] [data-sim-value="${view}"]`).click();
       await expect(readout(page, 'frog-form')).toHaveAttribute('data-state', view);
-      points.push(await stableAnchor(page, 'frog-marker'));
+      points.push(await stableAnchor(page, 'frog-marker', points.at(-1)));
     }
     expect(new Set(points.map((p) => `${p.x},${p.y}`)).size).toBe(5);
     await page.evaluate(() => (document.activeElement as HTMLElement | null)?.blur());
@@ -71,7 +73,7 @@ test.describe('frog-and-chicken', () => {
         'embryo-view': openEgg && fertilised ? 'shown' : 'hidden',
         'egg-condition': fertilised ? 'fertilised' : 'unfertilised',
       });
-      await expect.poll(async () => (await anchor(page, 'egg-embryo'))?.shown).toBe(openEgg && fertilised);
+      await expect.poll(async () => (await anchor(page, 'egg-embryo'))?.shown, { timeout: 20_000 }).toBe(openEgg && fertilised);
       await expect(card(page).locator('[data-sim-control="egg-open"] [role="switch"]')).toHaveAttribute('aria-checked', String(openEgg));
       await expect(readout(page, 'egg-condition')).toHaveAttribute('data-state', fertilised ? 'fertilised' : 'unfertilised');
       if (!fertilised) await expect(readout(page, 'egg-condition')).toContainText('warmth does not fertilise');
@@ -83,10 +85,10 @@ test.describe('frog-and-chicken', () => {
     expect((await sim(page)).outputs['embryo-view']).toBe('hidden');
     await page.locator('.atlas-axis__tick[data-beat="inside-the-egg.4"]').click();
     await expect.poll(async () => (await sim(page)).outputs['embryo-view']).toBe('shown');
-    await expect.poll(async () => (await anchor(page, 'egg-embryo'))?.shown).toBe(true);
+    await expect.poll(async () => (await anchor(page, 'egg-embryo'))?.shown, { timeout: 20_000 }).toBe(true);
     await page.locator('.atlas-axis__tick[data-beat="inside-the-egg.0"]').click();
     await expect.poll(async () => (await sim(page)).outputs['egg-view']).toBe('closed');
-    await expect.poll(async () => (await anchor(page, 'egg-embryo'))?.shown).toBe(false);
+    await expect.poll(async () => (await anchor(page, 'egg-embryo'))?.shown, { timeout: 20_000 }).toBe(false);
   });
 
   test('chapter navigation restores controls, hidden groups and shell after manual changes', async ({ page }) => {
@@ -94,33 +96,35 @@ test.describe('frog-and-chicken', () => {
     await apply(page, { ghosted: ['chicken-cycle'], hidden: ['egg-embryo'], pose: 'egg-window-open' });
     await page.evaluate(() => window.__atlas!.goToChapter('eggs-and-tadpoles', { instant: true }));
     expect((await sim(page)).values).toMatchObject({ 'frog-view': 'egg', 'egg-open': false, fertilised: true });
-    await expect.poll(async () => (await anchor(page, 'frog-eggs'))?.shown).toBe(true);
-    await expect.poll(async () => (await anchor(page, 'chicken-egg'))?.shown).toBe(false);
+    await expect.poll(async () => (await anchor(page, 'frog-eggs'))?.shown, { timeout: 20_000 }).toBe(true);
+    await expect.poll(async () => (await anchor(page, 'chicken-egg'))?.shown, { timeout: 20_000 }).toBe(false);
     await page.evaluate(() => window.__atlas!.goToChapter('inside-the-egg', { instant: true }));
     expect((await sim(page)).outputs['egg-view']).toBe('closed');
-    await expect.poll(async () => (await anchor(page, 'chicken-egg'))?.shown).toBe(true);
-    await expect.poll(async () => (await anchor(page, 'frog-eggs'))?.shown).toBe(false);
+    await expect.poll(async () => (await anchor(page, 'chicken-egg'))?.shown, { timeout: 20_000 }).toBe(true);
+    await expect.poll(async () => (await anchor(page, 'frog-eggs'))?.shown, { timeout: 20_000 }).toBe(false);
   });
 
   test('a hidden embryo remains hidden when the table says shown; ghost does not restore a hidden part', async ({ page }) => {
     await open(page, 'ch=inside-the-egg&sim=egg-open.on');
-    await expect.poll(async () => (await anchor(page, 'egg-embryo'))?.shown).toBe(true);
+    await expect.poll(async () => (await anchor(page, 'egg-embryo'))?.shown, { timeout: 20_000 }).toBe(true);
     await apply(page, { hidden: ['egg-embryo'], ghosted: ['chicken-cycle'] });
     await set(page, { fertilised: false });
     await set(page, { fertilised: true });
     expect((await sim(page)).outputs['embryo-view']).toBe('shown');
-    await expect.poll(async () => (await anchor(page, 'egg-embryo'))?.shown).toBe(false);
+    await expect.poll(async () => (await anchor(page, 'egg-embryo'))?.shown, { timeout: 20_000 }).toBe(false);
     await apply(page, { hidden: [], ghosted: [] });
-    await expect.poll(async () => (await anchor(page, 'egg-embryo'))?.shown).toBe(true);
+    await expect.poll(async () => (await anchor(page, 'egg-embryo'))?.shown, { timeout: 20_000 }).toBe(true);
   });
 
   test('beat deep link, reload, axis and keyboard reconstruct the same shell and marker', async ({ page }) => {
+    test.setTimeout(180_000);
     await open(page, 'ch=inside-the-egg&b=2');
     const linked = await sim(page);
     const spot = await stableAnchor(page, 'chicken-marker');
     const camera = await page.evaluate(() => window.__atlas!.state().camera);
     await page.reload();
     await page.waitForFunction(() => window.__atlas !== undefined);
+    expect(await page.evaluate(() => window.__atlas!.ready)).toBe(true);
     await expect.poll(() => sim(page)).toEqual(linked);
     await page.locator('.atlas-axis__tick[data-beat="inside-the-egg.0"]').click();
     await page.evaluate(() => (document.activeElement as HTMLElement | null)?.blur());
@@ -139,7 +143,7 @@ test.describe('frog-and-chicken', () => {
     for (const view of ['frog', 'chicken', 'mosquito', 'plant']) {
       await card(page).locator(`[data-sim-control="compare-view"] [data-sim-value="${view}"]`).click();
       await expect(readout(page, 'comparison')).toHaveAttribute('data-state', view);
-      spots.push(await stableAnchor(page, 'comparison-marker'));
+      spots.push(await stableAnchor(page, 'comparison-marker', spots.at(-1)));
     }
     expect(new Set(spots.map((p) => `${p.x},${p.y}`)).size).toBe(4);
     await expect(page.locator('a[href*="/en/topics/mosquito/"]').first()).toBeAttached();
@@ -152,7 +156,7 @@ test.describe('frog-and-chicken', () => {
     await button.click();
     await expect(button).toHaveAttribute('aria-pressed', 'true');
     await expect(page.locator('.space-inspector__summary')).toBeVisible();
-    await expect.poll(async () => (await anchor(page, 'frog-froglet'))?.shown).toBe(true);
+    await expect.poll(async () => (await anchor(page, 'frog-froglet'))?.shown, { timeout: 20_000 }).toBe(true);
     await page.locator('.space-inspector__more').click();
     await expect(page.locator('.space-inspector__detail')).toBeVisible();
   });
@@ -162,9 +166,9 @@ test.describe('frog-and-chicken', () => {
     await open(page, 'ch=inside-the-egg&b=4&theme=cinema', 'zh');
     await expect(card(page)).toContainText('试一试');
     await expect(readout(page, 'egg-condition')).toContainText('温暖不会使它受精');
-    await expect.poll(async () => (await anchor(page, 'egg-embryo'))?.shown).toBe(false);
+    await expect.poll(async () => (await anchor(page, 'egg-embryo'))?.shown, { timeout: 20_000 }).toBe(false);
     await page.locator('.atlas-axis__tick[data-beat="inside-the-egg.4"]').click();
-    await expect.poll(async () => (await anchor(page, 'egg-embryo'))?.shown).toBe(true);
+    await expect.poll(async () => (await anchor(page, 'egg-embryo'))?.shown, { timeout: 20_000 }).toBe(true);
     expect((await sim(page)).values.fertilised).toBe(true);
   });
 

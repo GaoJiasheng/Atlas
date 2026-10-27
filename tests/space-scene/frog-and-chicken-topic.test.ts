@@ -202,7 +202,7 @@ describe('frog-and-chicken: drawings agree with the selected observations', () =
   });
 
   it('uses a separate removable shell piece and embryo, without moving the yolk', () => {
-    expect(file.poses!['egg-window-open']!.parts['egg-shell-window']!.offset).toEqual([0, 0.6, 0.5]);
+    expect(file.poses!['egg-window-open']!.parts['egg-shell-window']!.offset).toEqual([0.8, 0.25, -0.41]);
     expect(file.parts.find((p) => p.id === 'egg-embryo')!.primitive!.at).not.toEqual(file.parts.find((p) => p.id === 'egg-yolk')!.primitive!.at);
     const moved = sim.bind.filter((b) => 'part' in b && b.part === 'egg-yolk');
     expect(moved).toHaveLength(0);

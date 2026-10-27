@@ -36,14 +36,14 @@ state:
   - frog-eggs
   camera: &id003
     position:
-    - -1.8
-    - 2
-    - 1
+    - 0
+    - 5
+    - 6
     target:
     - -2.8
     - 0.4
-    - -1.4
-    fov: 30
+    - 0
+    fov: 32
   highlight:
     signal: &id004
     - frog-eggs
@@ -91,7 +91,16 @@ state:
     - comparison-tray
     ghost: []
     labels: *id002
-    camera: *id003
+    camera:
+      position:
+      - -1.8
+      - 2
+      - 1
+      target:
+      - -2.8
+      - 0.4
+      - -1.4
+      fov: 30
     highlight:
       signal: *id004
     sim:

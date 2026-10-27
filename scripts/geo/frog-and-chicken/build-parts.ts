@@ -222,13 +222,13 @@ for (const [prefix, id, points, names] of [
   ['chicken', 'chicken-marker', chickenPoints, ['egg', 'chick', 'adult']],
   ['compare', 'comparison-marker', [[-3, .2, 3.5], [-1, .2, 3.5], [1, .2, 3.5], [3, .2, 3.5]], ['frog', 'chicken', 'mosquito', 'plant']],
 ] as [string, string, V[], string[]][]) for (let i = 0; i < names.length; i++) poses[`${prefix}-at-${names[i]}`] = { [id]: { offset: points[i]!.map((v, j) => n(v - points[0]![j]!)) }, duration: .65 };
-poses['egg-window-open'] = { 'egg-shell-window': { offset: [0, .6, .5], rotation: [0, 0, 0] }, duration: .65 };
+poses['egg-window-open'] = { 'egg-shell-window': { offset: [.8, .25, -.41], rotation: [0, 0, 0] }, duration: .65 };
 const cameras = [
   ['overview', bi('Whole study', '全图'), [10, 10, 14], [0, .4, 0], 32],
   ['frog-overview', bi('Frog observations', '青蛙观察'), [0, 5, 6], [-2.8, .4, 0], 32],
   ['chicken-overview', bi('Chicken observations', '鸡的观察'), [5.6, 5, 6], [2.8, .4, 0], 32],
   ['egg-close', bi('Inside the egg', '卵的里面'), [3.8, 2.3, .5], [2.8, .5, -1.4], 30],
-  ['comparison-view', bi('Compare life cycles', '比较生活史'), [0, 7, 10], [0, .3, 3.5], 32],
+  ['comparison-view', bi('Compare life cycles', '比较生活史'), [0, 11.7, 16.1], [0, .3, 3.5], 32],
 ] as const;
 const SIM = {
   "kind": "table",
