@@ -1,19 +1,19 @@
 {
   "method": "Deduplicated emitted ES-module static import closure; add only TimeScene View, its lazy deep-time HUD / evidence loader and the selected reconstruction-map lazy branch (with the MapLibre chunk it imports). Per-resource gzip level9, no source maps. Includes Astro React renderer. Excludes CSS/fonts/JSON, inline scripts, service worker, unselected engine views and historical controller. A build artifact estimate, not transferred bytes or GPU/iPad timing.",
   "shell": {
-    "gzipBytes": 128671,
+    "gzipBytes": 129653,
     "files": [
       {
-        "file": "_astro/GlobalToggles.0AuwckhV.js",
-        "gzipBytes": 32183
+        "file": "_astro/GlobalToggles.Co9H6SPn.js",
+        "gzipBytes": 32248
       },
       {
-        "file": "_astro/SceneHost.BMQ6qOV0.js",
+        "file": "_astro/SceneHost.DqqxDpvr.js",
+        "gzipBytes": 26241
+      },
+      {
+        "file": "_astro/SceneHost.RKFzHJyY.js",
         "gzipBytes": 137
-      },
-      {
-        "file": "_astro/SceneHost.BrgO0hW0.js",
-        "gzipBytes": 25324
       },
       {
         "file": "_astro/client.1QeOYOsc.js",
@@ -34,39 +34,39 @@
     ]
   },
   "mapReady": {
-    "gzipBytes": 461202,
+    "gzipBytes": 462853,
     "files": [
       {
-        "file": "_astro/ControlPanel.bdCKRnXH.js",
-        "gzipBytes": 7459
+        "file": "_astro/ControlPanel.D7OuECcV.js",
+        "gzipBytes": 7463
       },
       {
-        "file": "_astro/GlobalToggles.0AuwckhV.js",
-        "gzipBytes": 32183
+        "file": "_astro/GlobalToggles.Co9H6SPn.js",
+        "gzipBytes": 32248
       },
       {
-        "file": "_astro/ModernInset.DAZVomgQ.js",
-        "gzipBytes": 5105
+        "file": "_astro/ModernInset.C-xTywFu.js",
+        "gzipBytes": 5123
       },
       {
-        "file": "_astro/SceneHost.BMQ6qOV0.js",
+        "file": "_astro/SceneHost.DqqxDpvr.js",
+        "gzipBytes": 26241
+      },
+      {
+        "file": "_astro/SceneHost.RKFzHJyY.js",
         "gzipBytes": 137
       },
       {
-        "file": "_astro/SceneHost.BrgO0hW0.js",
-        "gzipBytes": 25324
-      },
-      {
-        "file": "_astro/View.DlrI4vLo.js",
-        "gzipBytes": 27977
+        "file": "_astro/View.CJEQjIke.js",
+        "gzipBytes": 25496
       },
       {
         "file": "_astro/client.1QeOYOsc.js",
         "gzipBytes": 64512
       },
       {
-        "file": "_astro/deep-time-transport.DUIOVfCg.js",
-        "gzipBytes": 680
+        "file": "_astro/deep-time-transport.DMpnLQe1.js",
+        "gzipBytes": 698
       },
       {
         "file": "_astro/index.BTDmyNhY.js",
@@ -81,12 +81,16 @@
         "gzipBytes": 3229
       },
       {
-        "file": "_astro/reconstruction-map.XqcBZrPq.js",
-        "gzipBytes": 2913
+        "file": "_astro/localLand.ftRAwxAQ.js",
+        "gzipBytes": 3080
       },
       {
-        "file": "_astro/style.DwXnyAyR.js",
-        "gzipBytes": 285865
+        "file": "_astro/reconstruction-map.DdJvSWxD.js",
+        "gzipBytes": 2934
+      },
+      {
+        "file": "_astro/style.g8JO7CeT.js",
+        "gzipBytes": 285874
       },
       {
         "file": "_astro/territory.43VqRVRX.js",

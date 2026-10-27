@@ -602,3 +602,17 @@ E-DE2 / E-DE3 构建 schema、实际文件读取 / source-ID / 坐标空间校�
 新增 `tests-e2e/{sample-deep-time,dinosaur-earth}.spec.ts`，含双语双theme、35拍完整重载、逐occurrence/MY、视图不改主camera、隐藏刷新、来源/ESC、列表键盘、演示恢复、窄屏证据、缺帧/迟响应、离线缓存。shoot的TimeScene高亮检查现纳入现代引线/具名卡data-id；现代题才开启整页b链接对照，旧题行为保持。以上代码存在不表示已运行。
 
 主会话待跑（端口固定5423）：sample-deep-time与dinosaur-earth的 `shoot --beats --keys --layout`（正式题两语言/两theme），sample-time、ww1、ww2、singapore-land-use等旧地图的前后视觉回归，以及 `CI=1 ATLAS_E2E_PORT=5423 pnpm e2e`；另做真iPad/GPU预算。§8未整体打勾，发布验收仍有以上明确差距。
+
+### 9.4 浏览器验收 · 2026-10-27（主会话子代理）
+
+**修掉的阻断问题**（详见提交 `fix(time-scene): dinosaur-earth browser acceptance fixes`）：重建主图起不来（360° 宽 `maxBounds` 在 MapLibre 5.24 使视图矩阵奇异，改由 Web Mercator 自身限纬度）；换帧时短暂露出旧样本（图层全 `visibility:none` 时 source 不被使用、瓦片不重载；改为不透明度隐藏，瓦片全部到位才报 ready）；拖过地图后数字预设键失效（画布抢焦点，按历史 controller 处理）；`L` 键无对应按钮（重建图没有标签，不注册）；背景章节拍在底轴无刻度（shoot 不再要求填充）。HUD：左列 PLATE 改用标准可折叠 `ts-plate` 行（原长段落在 1024×768 压到底轴）；底栏状态行换成「所选 / 地图样本 / Δ」；悬浮读数只在演示；手机阅读抽屉默认收起（原载入 / 点拍即展开把 HUD 挤叠），小图移入阅读面板且不带 `data-hud-panel`；证据卡不再单独作为 HUD 面板（被卡片滚动裁掉的部分曾误报重叠）。
+
+**JS 预算**（静态依赖图 gzip -9，同 `bundle-budget.py`）：地图就绪路径 Codex 交付 458,408 → 修后 461,202（合并 main 后 462,853，含 main 自身增长）。仍高于 400,000：MapLibre 一块约 286 KB、宿主壳层约 129 KB，两者相加已超预算；main d073918 上 ww2 同口径就是 463,726。深时代码本身只占约 10 KB（懒加载 `ModernInset`、`deep-time-transport`、`reconstruction-map`）。增长的另一面是其他 TimeScene 题：Codex 版让 ww2 到 474,523（历史 controller 静态引入重建模块、深时 UI 在 View chunk），修后 468,616（+4.9 KB，主要是 View 里的拍 / URL 接线）。shoot 实测页面 JS：dinosaur-earth 450.4 KB，ww2 452.9 → 457.6 KB。把地图题压到 400 KB 需要共享层工作（i18n 字典按语言拆、MapLibre worker 拆分），不在本题范围，交 Gavin 定预算。
+
+**数据**：`public/geo/de-*.json` 1,924,316 B + topic 响应 28,615 B = 1,952,931 B，未超 2 MB。十帧按需载入，每帧 4–11 KB gzip；现代证据（陆地、国家、点、卡、书目）在场景挂载前一次载入：原始 1.47 MB，gzip 约 258 KB。
+
+**shoot**（`--gpu`，负载 ~150）：`dinosaur-earth --beats --tasks --keys --layout --locale en,zh --theme paper,cinema` 四组均为 35 拍、35/35 拍链接一致、高亮都在屏、按键 0 失败、布局 0 问题（8 种尺寸）、控制台干净。`--perf --gpu` 控制台干净。`sample-deep-time --beats --keys`：13/13 拍链接、0 失败。TimeScene 回归 ww2、singapore-after-1965、ancient-civilisations、singapore-land-use（`--beats --keys`，与 main d073918 的 dist 对照）：0 新失败，拍截图逐张像素比对；ww2 有几张地图图层渐显时序差，长等待重拍后一致。
+
+**看过的画面**：古地图只有重建陆地（0 Ma 也是 PaleoDEM 帧，没有 Natural Earth 海岸混入）；66 Ma 拍显示「所选 66 Ma · 地图样本 70 Ma · Δ 4 Ma」及「此区间未提供中间样本」；小图三视图与年龄窗 / 全部记录切换正常；Ma 标签 EN「251.902 Ma」/ ZH「… Ma / …百万年前」；1024×768、900×1200、390×844 无重叠。未修的设计 / 内容问题写在 `src/content/topics/dinosaur-earth/FIXES.md`。
+
+**e2e**（合并 main ad476ce 后，`pnpm build` 通过）：deep-time 两份 spec 12 条在硬件 GL（`ATLAS_E2E_GPU=1`，workers 1）全过；软件 GL 在负载 ~190 下 sample-deep-time 4 条全过，dinosaur-earth 6 条超时（首帧 ready 单页就要约 27 s，35 拍循环超出 240 s），属负载。spec 只改了等待：`geology()` 等深时 HUD 注册后再读（每次重载后都要等），刷新前等 URL 写入 inset 状态。改过引擎的 TimeScene spec（ancient-civilisations、dated-layers、singapore-after-1965、singapore-land-use、time-label-dates、time-label-drag）19/19、hud.spec 全过；smoke 用 main 版本，只差已发布题计数（37 对 36），由主会话合并时对齐。合并前那次全量（重负载、软件 GL）265 过 / 93 失败，单跑复查后无残留引擎失败；按协调要求不再全量重跑。合并后 `shoot dinosaur-earth --beats --keys --layout --gpu`（en/paper）：35/35、0 失败。
