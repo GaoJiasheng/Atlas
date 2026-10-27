@@ -144,6 +144,13 @@
   /* Exercise mode (docs/06 动作模式数据手册): the solid figure under the muscles, warm light grey. */
   --mannequin: #bfb8ac;
   /* Many-state maps (docs/06 TimeScene 按国配色): eight muted hues, distinct for colour-blind readers by hue and lightness. */
+  --rain-0: #E2ECEC;
+  --rain-1: #C8DBDD;
+  --rain-2: #A4C5CA;
+  --rain-3: #7BA8B2;
+  --rain-4: #548995;
+  --rain-5: #326876;
+  --rain-6: #174856;
   --holder-1: #4a4f8f;
   --holder-2: #b89a45;
   --holder-3: #b25f6e;
@@ -261,6 +268,13 @@
   --muscle-3: #70443f;
   --bone: #cfc5af;
   --mannequin: #6f7174;
+  --rain-0: #303C3E;
+  --rain-1: #3D5155;
+  --rain-2: #4C6970;
+  --rain-3: #5E838D;
+  --rain-4: #78A1AC;
+  --rain-5: #9BBFC7;
+  --rain-6: #C7DCE0;
   --holder-1: #7f84c4;
   --holder-2: #d9bd72;
   --holder-3: #d6838f;

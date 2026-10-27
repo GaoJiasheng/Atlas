@@ -574,3 +574,23 @@ PRESENT 的字幕自足；图只在普通阅读出现。退出演示沿用恢复
 没有 TODO、占位词、死控件或 console 噪音。§0代定项在交付审读材料逐项可定位；这是常规复核，不改变“直接上线”的既定分类。完成才改 `status: published`。本次 spec-only 不运行会生成应用产物的这些门槛，也没有把待施工的勾选项打勾。
 
 ## 9. 引擎记录（施工后填写）
+
+### 9.1 引擎施工（2026-10-27，Codex；夹具 `sample-climate`）
+
+**实现范围。** E-MW1–E-MW3 进入共享 TimeScene。新增 `lib/climatology-state.ts`、`lib/climate.ts`、`lib/climateLoader.ts`、`ClimatologyView.tsx`、`stages/geo/ClimatologyStage.tsx` / `climatologyController.ts` / `climateStyle.ts`、阅读/格点/KEY 组件与两套 rain token。`engineSchemas(engine, stage, temporalMode)` 是 build/validate 共用入口，页面也验证 chapter state；`scripts/lib/monthly-resources.ts` 检查公共资源、来源/时期/quantity 与禁止带时间的底图。旧日期/Ma 路径继续独立懒加载；月份分支不建立 TimeModel、不做日期 min/max/frameAt/playhead。`__atlas.state().t/playhead=null`。
+
+月 store 动作拒绝非整数及越界输入；URL 的章→拍→m/其他覆盖、无效值规范化、locale flush、月分支 popstate 有单测/浏览器用例。章轴、节拍步进、PRESENT、来源弹层与 site leaders 均复用。PLATE/手机月控件、readerTop 节拍及互斥详情、readerEnd 地点索引、格点经纬输入/风节点方向钮走同一采样和选择动作。风/雨独立原生网格取样，缺测用掩码保存；加载失败可显式 retry，不妨碍另一层。雨几何按挂载构造，月份只改属性表达式；SVG 风在对应 GL 雨图已绘制的同一浏览器帧提交，过期提交不回填；无常驻风动画。测试快照如 §4.4，另含 `authoredMonth/exploring` 和各 layer 的 status/counts。
+
+**夹具与来源。** 按本次用户指定，名字为 `sample-climate`，`status: draft`，不进发布索引；背景 + 两章共12拍，其中 `12→1→2→2` 及四个4月拍各自可点。真实 NOAA 风/雨数组只改 source 元数据，合计171,071 bytes；原值、坐标、顺序与 validYears 不变。另有2×2偏移人工数组（2,693 bytes），覆盖0/null/29年/静风/六方向，明确标为 fixture/test data。输入与输出 SHA-256、原始精确 URL、PD-derived 族、NE 城市坐标与再用底图、M01–M12 原生格网方法均记在夹具 `data/SOURCES.md` 与 `scripts/geo/sample-climate/SOURCES-GEO.md`；LICENSE-CONTENT 和 THIRD-PARTY-NOTICES 增加逐文件例外。
+
+**相对 §4 的出入及理由。**
+
+1. 夹具名从 spec 的 `sample-climatology` 改为用户明确指定的 `sample-climate`。本轮是引擎交付，未创建正式36拍内容或发布 `monsoon-and-weather`；12拍满足小夹具最少两章的合同。
+2. 月舞台使用独立轻量 controller，而不是向有日期假定的历史 controller 塞假日期；复用原 MapLibre 样式、海岸、静态底图/河流、比例尺与 leaders。`registry` 按 temporalMode 分开懒加载，历史主题不下载月视图，月主题不下载历史视图。没有扩充天气求解器、流线或 SpaceScene bindings。
+3. 宿主仅增加可选 `SceneControls.ready()`（等首批开启资源 ready/error）与 `revealReader()`（同一次选择打开桌面 reader 或手机 sheet），没有改 InfoPanel 的其他引擎顺序。
+4. **预算未全达标。** 新增 client bundle 的全站构建增量约17.38 KB gzip（含共享 chunk 重分配，低于35 KB），两份真实数组171,071 bytes（低于250 KB）。月页静态 import 图的 gzip -9 总量约447 KiB，超过400 KB目标；其中既有 MapLibre/shared-style chunk约282 KiB、React客户端约63 KiB。该值是构建静态依赖核算，不冒称浏览器首屏实测。为本轮压缩既有渲染/翻译运行时会扩展到其他引擎，未做该重构。
+5. **浏览器验收被环境阻止，未当通过。** `shoot sample-climate --beats --keys --layout` 和四个回归题的改前/改后命令都在启动 Chromium 前后立即失败：macOS `bootstrap_check_in … MachPortRendezvousServer: Permission denied (1100)`。完整 `CI=1 ATLAS_E2E_PORT=5403 pnpm e2e` 的349个用例均因同一浏览器启动错误未到页面断言；后续增加的浏览器用例也没有可用浏览器验收。备用现有 Chrome 的访问被 automatic approval review 拒绝（工具未提供进一步原因）。因此没有截图可肉眼审查，没有“0新失败”的回归结论，也没有冒报 iPad/浏览器 p95、缓存离线或布局通过。
+
+**可复核门槛。** `pnpm check`：0 errors、0 warnings、3条既有 unused-variable hints；`pnpm validate`：56 topics、0 errors、0 warnings；`pnpm test`：161 files、4226 tests 全过；`pnpm build`：115 pages，静态构建通过。`git diff --check` 通过。单测覆盖实际数组 T01/T03–T06、网格边界/方向/雨档/null T07–T10、schema/source/period 错误、month/URL/order、缓存/显式重试/旧 promise/卸载；浏览器用例在 `tests-e2e/sample-climate.spec.ts`（EN/ZH × paper/cinema、全部12拍、URL/刷新/history/locale/theme、range与快捷键、PRESENT恢复、地图拖动、手机、0/null/29年、隐藏层、error/retry、暖缓存离线）。`scripts/shoot.ts` 增加每拍 authored/store/rendered 月核对、fresh `?ch&b` 核对及 M01/M07/M12、单层/全关/格点/手机截图任务。浏览器合同 T11–T18 仍须在有浏览器权限的环境跑完；§8的正式内容/发布勾选保持未完成。
+
+详细构建依赖尺寸、逐文件输出指纹与受阻的回归命令记录见 `scripts/geo/sample-climate/ENGINE-QA.md`。

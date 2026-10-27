@@ -5,6 +5,21 @@ Atlas code is MIT (see `LICENSE`); Atlas content is CC BY-NC-SA 4.0 (see
 
 ## Geographic data
 
+`sample-climate` uses NOAA PSL NCEP/NCAR Reanalysis 1 monthly 850 hPa wind
+climatology and GPCP V2.3 monthly precipitation-rate climatology (1991–2020),
+distributed as public-domain-derived numeric arrays in
+`public/geo/sample-climate-{wind-850,rain-gpcp}-1991-2020.json`. NCEP Reanalysis
+and GPCP precipitation data provided by NOAA PSL, Boulder, Colorado, USA,
+https://psl.noaa.gov/. Changes: source-id metadata remapped; numeric arrays,
+native coordinates and valid-year counts unchanged. Native-grid cell polygons
+and projected wind glyphs are PD-derived. These are not official NOAA products
+or forecasts. The fixture's six city anchors preserve Natural Earth 1:110m
+populated-place coordinates (public domain). Separate 2×2 arrays are artificial
+test values, not observations. Exact requests, input/output SHA-256 and licence
+families are in `src/content/topics/sample-climate/data/SOURCES.md` and
+`scripts/geo/sample-climate/SOURCES-GEO.md`. NOAA software is not covered by this
+data acknowledgement.
+
 | Work | Use | Licence |
 |---|---|---|
 | CShapes 2.0 (Schvitz, Girardin, Rüegger, Walter, Cederman, Gleditsch; ETH Zürich) | sovereign borders at each keyframe date | CC BY-NC-SA 4.0 |

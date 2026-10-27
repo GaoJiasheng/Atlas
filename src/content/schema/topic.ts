@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { bilingual, kebabId, level, theme } from './common';
 import { TOKEN_NAMES } from '../../theme/theme';
+import { monthlyLayerSchema } from '../../engines/time-scene/lib/climate';
 
 /** The six fixed top-level categories, in display order. */
 export const SUBJECTS = [
@@ -135,6 +136,14 @@ export const datedLayers = z.array(datedLayerDef).superRefine((layers, ctx) => {
 });
 
 /** `src/content/topics/<slug>/topic.yaml` (docs/02). */
+export const climatologyPeriod = z.object({
+  periodId: kebabId,
+  startYear: z.number().int(),
+  endYear: z.number().int(),
+  initialMonth: z.number().int().min(1).max(12),
+}).strict().refine((p) => p.startYear <= p.endYear, { path: ['endYear'], message: 'endYear must be at least startYear' });
+export type ClimatologyPeriod = z.output<typeof climatologyPeriod>;
+
 export const topicSchema = z
   .object({
     id: kebabId,
@@ -177,6 +186,9 @@ export const topicSchema = z
     basemap: basemapOptions.optional(),
     /** TimeScene GeoStage: dated GPU overlays from public/geo/<file>.json. */
     datedLayers: datedLayers.optional(),
+    temporalMode: z.enum(['chronological', 'climatology']).default('chronological'),
+    climatology: climatologyPeriod.optional(),
+    monthlyLayers: z.array(monthlyLayerSchema).min(1).optional(),
     /**
      * TimeScene: `entity` colours every control area by its holder (`entities[].color`,
      * `token:holder-1` … `token:holder-8`, assigned by scripts/geo/lib/colour-holders.ts)
@@ -199,6 +211,21 @@ export const topicSchema = z
   })
   .strict()
   .superRefine((topic, ctx) => {
+    if (topic.temporalMode === 'climatology') {
+      if (topic.engine !== 'time-scene' || topic.stage !== 'geo') ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['temporalMode'], message: 'climatology requires time-scene with stage: geo' });
+      if (!topic.monthlyLayers) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['monthlyLayers'], message: 'at least one monthly layer is required' });
+      if (!topic.climatology) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['climatology'], message: 'climatology period is required' });
+      if (topic.datedLayers !== undefined) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['datedLayers'], message: 'climatology does not support datedLayers' });
+    } else if (topic.climatology) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['climatology'], message: 'climatology metadata requires temporalMode: climatology' });
+    if (topic.monthlyLayers) {
+      if (topic.temporalMode !== 'climatology') ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['monthlyLayers'], message: 'monthlyLayers requires climatology mode' });
+      const used = new Set<string>([...BUILTIN_TIME_LAYER_IDS, ...(topic.datedLayers ?? []).map((l) => l.id)]);
+      topic.monthlyLayers.forEach((layer, i) => {
+        if (used.has(layer.id)) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['monthlyLayers', i, 'id'], message: 'layer id must be unique and cannot collide with built-in layers' });
+        used.add(layer.id);
+        if (layer.periodId !== topic.climatology?.periodId) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['monthlyLayers', i, 'periodId'], message: 'must match climatology.periodId' });
+      });
+    }
     if (topic.datedLayers !== undefined && (topic.engine !== 'time-scene' || topic.stage !== 'geo'))
       ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['datedLayers'], message: '`datedLayers` requires time-scene with stage: geo' });
     const stages: readonly string[] = ENGINE_STAGES[topic.engine];

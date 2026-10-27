@@ -32,6 +32,8 @@ export interface SceneActions<E extends EngineExtension> {
   patch(partial: Partial<SceneSnapshot<E>>): void;
   toggleLayer(id: string): void;
   setLayers(ids: string[]): void;
+  /** Monthly TimeScene only: reject invalid inputs without changing any state. */
+  setClimatologyMonth(month: number): boolean;
   setCamera(camera: CameraState | null): void;
   /** Camera preset: set `camera` and bump the transition (reason `preset`) so the stage flies there. */
   applyCameraPreset(camera: CameraState, options?: { instant?: boolean }): void;
@@ -164,6 +166,12 @@ export function createSceneStore<E extends EngineExtension>(options: CreateScene
 
     setLayers(layers) {
       set({ layers: [...layers] } as Partial<SceneStoreState<E>>);
+    },
+
+    setClimatologyMonth(month) {
+      if (!Number.isInteger(month) || month < 1 || month > 12 || typeof (get() as unknown as {month?: unknown}).month !== 'number') return false;
+      set({ month } as unknown as Partial<SceneStoreState<E>>);
+      return true;
     },
 
     setCamera(camera) {

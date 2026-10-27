@@ -1,0 +1,149 @@
+.clim-month {
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  color: var(--ink);
+}
+.clim-overlay > summary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font: 500 11px/1.4 var(--font-hud);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.ts-climate-key {
+  font: 400 11px/1.5 var(--font-hud);
+  color: var(--ink);
+}
+.ts-climate-key p {
+  margin: 8px 0;
+}
+.clim-month h3 {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+}
+.clim-month h3 small {
+  display: block;
+  margin-top: 3px;
+  font-weight: 400;
+}
+.clim-month p {
+  margin: 8px 0;
+}
+.clim-month__controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.clim-month__controls button {
+  min-width: 44px;
+  min-height: 44px;
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  font-size: 22px;
+}
+.clim-month__controls input {
+  min-width: 0;
+  min-height: 44px;
+  width: 100%;
+  accent-color: var(--signal);
+}
+.clim-month__note {
+  color: var(--ink-muted);
+  font-size: 11px;
+}
+.clim-phone-month {
+  display: none;
+}
+@media (max-width: 1023px) {
+  .clim-phone-month {
+    display: block;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 12px;
+  }
+  .clim-phone-month > summary {
+    cursor: pointer;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+}
+.clim-cell-detail {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+}
+.clim-cell-detail header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.clim-cell-detail h3,
+.clim-cell-detail h4 {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+}
+.clim-cell-detail header button {
+  min-width: 44px;
+  min-height: 44px;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--line);
+}
+.clim-cell-detail dl {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6px 12px;
+}
+.clim-cell-detail dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+.clim-cell-controls {
+  border-top: 1px solid var(--line);
+  padding-top: 8px;
+  font-size: 11px;
+}
+.clim-cell-controls button {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 6px;
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+.clim-cell-controls form {
+  display: flex;
+  gap: 6px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+.clim-cell-controls label {
+  flex: 1;
+  min-width: 65px;
+}
+.clim-cell-controls input {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  min-width: 0;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+.clim-cell-controls__directions {
+  display: flex;
+  gap: 4px;
+  margin-top: 6px;
+}
+.clim-cell-controls button:disabled {
+  opacity: 0.4;
+}
