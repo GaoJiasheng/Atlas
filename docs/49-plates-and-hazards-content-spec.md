@@ -704,6 +704,12 @@ S05/S09/S46/S52不作为本题必要来源：未成功再次直取的部分分�
 - 第四次合并后：
   - check 0 错误；validate 79 主题 0 错 0 警告；test 206 个文件、5,220 项全部通过；
   - 本题与两个 fixture 的 e2e 17/17 通过，smoke 14/14 通过；`pnpm shoot plates-and-hazards --beats --keys` 0 失败。
+- 第五次合并（heat 与 TimeScene polish，对应 main 32baaaa）：
+  - 地图点击先用 main 的显示点事件命中，没命中再找目录候选；
+  - check 0 错误，validate 81 主题 0 错；
+  - e2e：本题 8/8，两个 fixture 9/9，smoke 14/14；
+  - `--beats --keys`：plates-and-hazards 与 ww2 都是 0 失败。
+  - `tests/time-scene/hud.test.ts` 在 main 32baaaa 上本身就失败：它遍历 TimeScene 主题时会去读 sample-geography 的 control.json，而这个 geography 模式主题没有该文件。属于 main 的问题，本分支没动。
 
 **看到的问题与已修复**
 
