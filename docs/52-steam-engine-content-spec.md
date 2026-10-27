@@ -707,7 +707,7 @@ phaseDeg 在 [0,360)，cycles=θ/2π，shaftTurns=δs/2π 保留累计圈数，�
 
 ## 9. 引擎记录（施工后填写）
 
-### 9.1 E-ST1 / E-ST2（2026-10-27；引擎已实现，浏览器验收受环境阻塞）
+### 9.1 E-ST1 / E-ST2（2026-10-27；引擎已实现，浏览器验收已补跑通过）
 
 本轮只做两项引擎与 **`sample-mechanism` draft 夹具**，没有施工或发布生产 `steam-engine`。全部改动留在 working tree；没有 git 写操作、依赖或 package/lockfile 变更，也没有改 review-queue。
 
@@ -743,3 +743,5 @@ phaseDeg 在 [0,360)，cycles=θ/2π，shaftTurns=δs/2π 保留累计圈数，�
 | `CI=1 ATLAS_E2E_PORT=5402 pnpm e2e` | 346/346 在 Chromium 启动处失败（含本夹具 11 条），0 条到达页面；非应用断言失败 |
 
 剩余工作仅为在获准运行 Chromium 的环境重新执行上述浏览器门槛、逐张看 EN/ZH × paper/cinema 拍图/五相位剖面，并测绘制/加载预算；`sample-mechanism` 保持 draft，未将 §8 或生产发布标成完成。
+
+**浏览器验收（2026-10-27，Claude 代理补跑，取代上文第 5 条和表中三行浏览器记录）**：`pnpm shoot sample-mechanism --beats --keys --layout`（paper、cinema）控制台干净，键 / 布局 / 拍 0 失败，16/16 拍链接落在演示场景；看过两套主题拍图、1024×768 布局和调速器、能量章：主梁随拍摆动、活塞杆始终竖直、太阳行星轮与飞轮逐拍换姿。回归 `--beats --keys`：aircon、energy-conversion、sample-materials、sample-heart 0 失败；b200-server 软件 GL 下两次截图超时（机器负载 50–100），`--gpu` 下 0 失败。`CI=1 pnpm e2e` 344/346，失败的 ancient-civilisations:59 与 sample-heart:87 单独复跑通过（负载抖动），sample-mechanism 11/11 通过。仍未做：ZH 截图、`--perf --gpu` 绘制与加载预算，留给生产 steam-engine 验收。
