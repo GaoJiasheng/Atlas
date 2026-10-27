@@ -1,0 +1,107 @@
+---
+{
+  "id": "sample-aperture",
+  "order": 1,
+  "title": {
+    "en": "Aperture fixture",
+    "zh": "孔径测试"
+  },
+  "sensitive": false,
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "cutaway": "none",
+    "layers": [
+      "bench", "eye-study"
+    ],
+    "hide": [],
+    "labels": [
+      "lens-plane",
+      "receiver",
+      "wave-reference"
+    ],
+    "camera": {
+      "position": [
+        0,
+        0.8,
+        6
+      ],
+      "target": [
+        0,
+        0.8,
+        0
+      ],
+      "fov": 40
+    },
+    "summary": {
+      "en": "Draft engine fixture.",
+      "zh": "引擎草稿测试。"
+    },
+    "sim": {
+      "set": {
+        "light-in": true,
+        "pupil-mm": 2,
+        "object-range": "far",
+        "lens-focus": "far",
+        "sound-active": true,
+        "frequency-hz": 250,
+        "amplitude": 1
+      },
+      "try": {
+        "vary": "pupil-mm",
+        "also": [
+          "light-in"
+        ],
+        "observe": [
+          "aperture-area",
+          "relative-light"
+        ],
+        "record": true
+      }
+    },
+    "beats": [
+      {
+        "caption": {
+          "en": "Schematic model test state.",
+          "zh": "示意模型测试状态。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "pupil-mm": 4
+          }
+        },
+        "caption": {
+          "en": "Schematic model test state.",
+          "zh": "示意模型测试状态。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "light-in": false
+          }
+        },
+        "caption": {
+          "en": "Schematic model test state.",
+          "zh": "示意模型测试状态。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Draft fixture for deterministic model and overlay tests.
+
+</Lang>
+
+<Lang zh>
+
+用于确定性模型和叠加层测试的草稿示例。
+
+</Lang>

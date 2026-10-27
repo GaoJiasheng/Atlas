@@ -44,6 +44,7 @@ import type { PartsFile, TelemetryRow } from '../schema';
 import type { SpaceUiStore } from '../ui';
 import type { StageBridge } from '../bridge';
 import { flowingGroups, keyGroups, partNumber } from './common';
+import { SensesNotes } from './SensesNotes';
 import { PerfReadout } from './PerfReadout';
 
 const REFRESH_MS = 250;
@@ -348,6 +349,7 @@ export function PlateBlock({ file, ui, bridge }: { file: PartsFile; ui: SpaceUiS
             </span>
           ))}
         </p>
+        {file.sim?.kind === 'senses' && <SensesNotes file={file} />}
         {file.telemetry && <Telemetry rows={file.telemetry} run={s.run} file={file} ui={ui} />}
         {picked ? (
           <button type="button" className="space-plate__sel" title={t('space.plate.show', { name: tx(picked.name, locale) })} onClick={showInspector}>

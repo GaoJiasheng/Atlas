@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-27",
+  "visualReview": "All three approved original PNGs and all three processed WebP compositions inspected: separated eye/ear, two accommodation lens forms, exactly three ossicles; margins and transparency preserved. Browser layout/theme review pending.",
+  "entries": [
+    {
+      "input": "eyes-and-ears.png",
+      "originalSha256": "26e01d5d8dcc73f2fb429a2be3f64f2396e2bb2433dadf86a7b0819feafdb36e",
+      "licence": "Original Atlas CC BY-NC-SA 4.0; independent generated illustration, no third-party mesh or image input",
+      "method": "scripts/illustrate.ts process",
+      "outputs": [
+        {
+          "file": "public/illustrations/eyes-and-ears.webp",
+          "bytes": 84330,
+          "width": 800,
+          "height": 800,
+          "alpha": true,
+          "sha256": "27508bd5eafdc5da56bea6e31d416caf6c9c086b76e4e45e5253dd12a2db1678"
+        },
+        {
+          "file": "public/illustrations/eyes-and-ears@2x.webp",
+          "bytes": 219500,
+          "width": 1600,
+          "height": 1600,
+          "alpha": true,
+          "sha256": "592c0e4706913d6527bb58c745309de3679fccf0d8ec49663603a06e745e5b6c"
+        }
+      ]
+    },
+    {
+      "input": "eyes-and-ears-lens-shapes.png",
+      "originalSha256": "3186b31a55dc5a217ed826d64d87095d0fea92c6c030182b11b1a55b59bcbc2c",
+      "licence": "Original Atlas CC BY-NC-SA 4.0; independent generated illustration, no third-party mesh or image input",
+      "method": "scripts/illustrate.ts figure",
+      "outputs": [
+        {
+          "file": "public/illustrations/figures/eyes-and-ears-lens-shapes.webp",
+          "bytes": 114110,
+          "width": 1200,
+          "height": 900,
+          "alpha": true,
+          "sha256": "914e783fd031dfb61b237b78e855d6d8a2018a30d614837b1d9608c6ea7c4aec"
+        }
+      ]
+    },
+    {
+      "input": "eyes-and-ears-middle-ear-chain.png",
+      "originalSha256": "bb510ea13bdc29590a482c2646deb753ee1dff63d0e3ab2cf9b78e9a614b2e64",
+      "licence": "Original Atlas CC BY-NC-SA 4.0; independent generated illustration, no third-party mesh or image input",
+      "method": "scripts/illustrate.ts figure",
+      "outputs": [
+        {
+          "file": "public/illustrations/figures/eyes-and-ears-middle-ear-chain.webp",
+          "bytes": 114320,
+          "width": 1200,
+          "height": 900,
+          "alpha": true,
+          "sha256": "b8b6f2e37953f6366fa1f5d2869f0164406e450722b77a11a00fdf4bd58a2e85"
+        }
+      ]
+    }
+  ]
+}

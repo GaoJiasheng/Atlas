@@ -36,6 +36,10 @@ describe('HUD-aware perspective framing', () => {
   it('measures left/right panels and a bottom drawer, excluding panels outside the stage', () => {
     expect(freeStageRect(1000,700,[{x0:10,y0:20,x1:240,y1:500},{x0:710,y0:20,x1:980,y1:300},{x0:0,y0:600,x1:1000,y1:700},{x0:1000,y0:0,x1:1400,y1:700}])).toEqual({x0:252,y0:12,x1:698,y1:588});
   });
+  it('keeps the full width on a stacked phone stage: only the top and bottom bands constrain', () => {
+    // 390 × 844: a title block in the top-left corner, a layers card across the middle, the chapter bar at the bottom.
+    expect(freeStageRect(390,844,[{x0:12,y0:82,x1:165,y1:180},{x0:175,y0:82,x1:378,y1:500},{x0:12,y0:733,x1:378,y1:778}])).toEqual({x0:12,y0:12,x1:378,y1:721});
+  });
   it('returns the authored camera for unavailable layout or no subjects', () => {
     expect(fitCameraToHud(cam,bodies,0,0,{x0:0,y0:0,x1:0,y1:0})).toBe(cam);
     expect(fitCameraToHud(cam,[],800,600,{x0:10,y0:10,x1:790,y1:590})).toBe(cam);

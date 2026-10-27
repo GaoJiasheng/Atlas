@@ -1,0 +1,5540 @@
+{
+  "parts": [
+    {
+      "id": "cornea",
+      "group": "eye-front",
+      "name": {
+        "en": "Cornea",
+        "zh": "角膜"
+      },
+      "summary": {
+        "en": "The transparent cornea admits and bends incoming light.",
+        "zh": "透明的角膜让光进入，并使光折射。"
+      },
+      "detail": {
+        "en": "The cornea is the curved transparent surface at the front of the eye, ahead of the iris and lens. It works with the lens to focus incoming light. [S2]\n\nThis clear shell is an original cutaway schematic. Its thickness and curvature are design choices; the separate optical bench combines the cornea and lens into one effective lens. [S31]",
+        "zh": "角膜是眼睛前端弯曲、透明的表面，位于虹膜和晶状体之前。它与晶状体一起使入眼的光聚焦。[S2]\n\n这里的透明薄壳是原创剖面示意，厚度与曲率是设计值。另一个光学工位把角膜与晶状体合成一个有效透镜。[S31]"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          -2,
+          0,
+          0
+        ],
+        "profile": [
+          [
+            0,
+            -1.08
+          ],
+          [
+            0.25,
+            -1.04
+          ],
+          [
+            0.44,
+            -0.92
+          ],
+          [
+            0.57,
+            -0.73
+          ],
+          [
+            0.55,
+            -0.715
+          ],
+          [
+            0.42,
+            -0.905
+          ],
+          [
+            0.24,
+            -1.015
+          ],
+          [
+            0,
+            -1.055
+          ]
+        ],
+        "segments": 48,
+        "rotation": [
+          0,
+          0,
+          -90
+        ],
+        "color": "glass",
+        "tint": "token:bone",
+        "arc": 178
+      },
+      "castShadow": false,
+      "connects": [
+        "iris"
+      ],
+      "shell": true
+    },
+    {
+      "id": "iris",
+      "group": "eye-front",
+      "name": {
+        "en": "Iris",
+        "zh": "虹膜"
+      },
+      "summary": {
+        "en": "The iris controls the size of the opening called the pupil.",
+        "zh": "虹膜调节称为瞳孔的开口大小。"
+      },
+      "detail": {
+        "en": "The iris lies behind the cornea and in front of the lens. The pupil is its opening, not a solid black part. Changing that opening changes how much light can enter. [S2]\n\nSelect this fixed outer rim to inspect the iris. Two non-selectable annular inserts show the two model apertures with the same outer diameter and a twofold change of inner diameter. They are discrete schematic states, not a muscle simulation or a measurement of a child’s pupil. [S31]",
+        "zh": "虹膜位于角膜后、晶状体前。瞳孔是虹膜中的开口，不是一块黑色实物。开口大小改变，能进入的光量也随之改变。[S2]\n\n可选中的这一圈是虹膜的固定外缘。两张不可选中的环形薄片表示两档模型孔径；外径相同，内径相差两倍。这是离散示意状态，不是肌肉模拟，也不是儿童瞳孔测量。[S31]"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          -2.68,
+          0,
+          0
+        ],
+        "profile": [
+          [
+            0.495,
+            -0.0175
+          ],
+          [
+            0.535,
+            -0.0175
+          ],
+          [
+            0.535,
+            0.0175
+          ],
+          [
+            0.495,
+            0.0175
+          ],
+          [
+            0.495,
+            -0.0175
+          ]
+        ],
+        "segments": 48,
+        "rotation": [
+          0,
+          0,
+          -90
+        ],
+        "color": "tissue",
+        "tint": "token:ink-2"
+      },
+      "castShadow": false,
+      "connects": [
+        "lens"
+      ]
+    },
+    {
+      "id": "lens",
+      "group": "eye-front",
+      "name": {
+        "en": "Lens",
+        "zh": "晶状体"
+      },
+      "summary": {
+        "en": "The lens changes shape to help focus at different distances.",
+        "zh": "晶状体改变形状，帮助眼睛看清不同距离。"
+      },
+      "detail": {
+        "en": "The lens sits behind the iris, held around its edge by fibres connected to the ciliary body. The cornea and lens together focus light toward the retina. [S2, S3]\n\nDuring near viewing the lens becomes rounder; during far viewing it is flatter. These two biconvex shapes illustrate that change without claiming a measured focal length or quantitative tissue deformation. [S3, S31]",
+        "zh": "晶状体位于虹膜之后，周缘由连接睫状体的纤维悬持。角膜与晶状体共同把光聚向视网膜。[S2, S3]\n\n看近处时晶状体更圆鼓，看远处时较扁。这里的两种双凸形状只说明这一变化，不表示真实焦距或组织变形量。[S3, S31]"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          -2.47,
+          0,
+          0
+        ],
+        "profile": [
+          [
+            0,
+            -0.14
+          ],
+          [
+            0.18,
+            -0.12
+          ],
+          [
+            0.34,
+            -0.065
+          ],
+          [
+            0.4,
+            0
+          ],
+          [
+            0.34,
+            0.065
+          ],
+          [
+            0.18,
+            0.12
+          ],
+          [
+            0,
+            0.14
+          ]
+        ],
+        "segments": 48,
+        "rotation": [
+          0,
+          0,
+          -90
+        ],
+        "color": "glass",
+        "tint": "token:bone"
+      },
+      "castShadow": false,
+      "connects": [
+        "ciliary-ring",
+        "vitreous"
+      ]
+    },
+    {
+      "id": "ciliary-ring",
+      "group": "eye-front",
+      "name": {
+        "en": "Ciliary ring",
+        "zh": "睫状环"
+      },
+      "summary": {
+        "en": "The ciliary apparatus changes the tension holding the lens.",
+        "zh": "睫状装置改变悬持晶状体的张力。"
+      },
+      "detail": {
+        "en": "The ciliary body surrounds the lens and connects to it through suspensory fibres. Changes in muscle action and fibre tension allow the lens to change shape. [S3]\n\nThe ring and a few radial fibres are enlarged schematic landmarks. The number of fibres drawn is not an anatomical count, and their movement is not calculated here. [S31]",
+        "zh": "睫状体环绕晶状体，通过悬韧带与它相连。肌肉活动和纤维张力的变化，使晶状体能改变形状。[S3]\n\n环与少量放射纤维是便于辨认的放大示意。画出的纤维数不代表解剖总数，这里也不计算纤维运动。[S31]"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          -2.45,
+          0,
+          0
+        ],
+        "profile": [
+          [
+            0.59,
+            -0.0375
+          ],
+          [
+            0.68,
+            -0.0375
+          ],
+          [
+            0.68,
+            0.0375
+          ],
+          [
+            0.59,
+            0.0375
+          ],
+          [
+            0.59,
+            -0.0375
+          ]
+        ],
+        "segments": 48,
+        "rotation": [
+          0,
+          0,
+          -90
+        ],
+        "color": "tissue",
+        "tint": "token:muscle-2",
+        "arc": 178
+      },
+      "castShadow": false,
+      "extra": [
+        {
+          "kind": "sweep",
+          "at": [
+            -2.47,
+            0,
+            0
+          ],
+          "path": [
+            [
+              -0.02,
+              0,
+              0.4
+            ],
+            [
+              0.02,
+              0,
+              0.62
+            ]
+          ],
+          "radius": 0.008,
+          "color": "tissue",
+          "tint": "token:ink-3",
+          "radial": 12,
+          "caps": "flat"
+        },
+        {
+          "kind": "sweep",
+          "at": [
+            -2.47,
+            0,
+            0
+          ],
+          "path": [
+            [
+              -0.02,
+              0.19999999999999998,
+              0.3464101615137755
+            ],
+            [
+              0.02,
+              0.30999999999999994,
+              0.536935750346352
+            ]
+          ],
+          "radius": 0.008,
+          "color": "tissue",
+          "tint": "token:ink-3",
+          "radial": 12,
+          "caps": "flat"
+        },
+        {
+          "kind": "sweep",
+          "at": [
+            -2.47,
+            0,
+            0
+          ],
+          "path": [
+            [
+              -0.02,
+              0.34641016151377546,
+              0.20000000000000007
+            ],
+            [
+              0.02,
+              0.5369357503463519,
+              0.31000000000000005
+            ]
+          ],
+          "radius": 0.008,
+          "color": "tissue",
+          "tint": "token:ink-3",
+          "radial": 12,
+          "caps": "flat"
+        },
+        {
+          "kind": "sweep",
+          "at": [
+            -2.47,
+            0,
+            0
+          ],
+          "path": [
+            [
+              -0.02,
+              0.4,
+              2.4492935982947065e-17
+            ],
+            [
+              0.02,
+              0.62,
+              3.796405077356795e-17
+            ]
+          ],
+          "radius": 0.008,
+          "color": "tissue",
+          "tint": "token:ink-3",
+          "radial": 12,
+          "caps": "flat"
+        },
+        {
+          "kind": "sweep",
+          "at": [
+            -2.47,
+            0,
+            0
+          ],
+          "path": [
+            [
+              -0.02,
+              0.3464101615137755,
+              -0.19999999999999993
+            ],
+            [
+              0.02,
+              0.536935750346352,
+              -0.3099999999999999
+            ]
+          ],
+          "radius": 0.008,
+          "color": "tissue",
+          "tint": "token:ink-3",
+          "radial": 12,
+          "caps": "flat"
+        },
+        {
+          "kind": "sweep",
+          "at": [
+            -2.47,
+            0,
+            0
+          ],
+          "path": [
+            [
+              -0.02,
+              0.19999999999999998,
+              -0.3464101615137755
+            ],
+            [
+              0.02,
+              0.30999999999999994,
+              -0.536935750346352
+            ]
+          ],
+          "radius": 0.008,
+          "color": "tissue",
+          "tint": "token:ink-3",
+          "radial": 12,
+          "caps": "flat"
+        },
+        {
+          "kind": "sweep",
+          "at": [
+            -2.47,
+            0,
+            0
+          ],
+          "path": [
+            [
+              -0.02,
+              4.898587196589413e-17,
+              -0.4
+            ],
+            [
+              0.02,
+              7.59281015471359e-17,
+              -0.62
+            ]
+          ],
+          "radius": 0.008,
+          "color": "tissue",
+          "tint": "token:ink-3",
+          "radial": 12,
+          "caps": "flat"
+        },
+        {
+          "kind": "sweep",
+          "at": [
+            -2.47,
+            0,
+            0
+          ],
+          "path": [
+            [
+              -0.02,
+              -0.20000000000000007,
+              -0.34641016151377546
+            ],
+            [
+              0.02,
+              -0.31000000000000005,
+              -0.5369357503463519
+            ]
+          ],
+          "radius": 0.008,
+          "color": "tissue",
+          "tint": "token:ink-3",
+          "radial": 12,
+          "caps": "flat"
+        },
+        {
+          "kind": "sweep",
+          "at": [
+            -2.47,
+            0,
+            0
+          ],
+          "path": [
+            [
+              -0.02,
+              -0.3464101615137754,
+              -0.20000000000000018
+            ],
+            [
+              0.02,
+              -0.5369357503463519,
+              -0.3100000000000003
+            ]
+          ],
+          "radius": 0.008,
+          "color": "tissue",
+          "tint": "token:ink-3",
+          "radial": 12,
+          "caps": "flat"
+        },
+        {
+          "kind": "sweep",
+          "at": [
+            -2.47,
+            0,
+            0
+          ],
+          "path": [
+            [
+              -0.02,
+              -0.4,
+              -7.347880794884119e-17
+            ],
+            [
+              0.02,
+              -0.62,
+              -1.1389215232070384e-16
+            ]
+          ],
+          "radius": 0.008,
+          "color": "tissue",
+          "tint": "token:ink-3",
+          "radial": 12,
+          "caps": "flat"
+        },
+        {
+          "kind": "sweep",
+          "at": [
+            -2.47,
+            0,
+            0
+          ],
+          "path": [
+            [
+              -0.02,
+              -0.34641016151377546,
+              0.20000000000000007
+            ],
+            [
+              0.02,
+              -0.5369357503463519,
+              0.31000000000000005
+            ]
+          ],
+          "radius": 0.008,
+          "color": "tissue",
+          "tint": "token:ink-3",
+          "radial": 12,
+          "caps": "flat"
+        },
+        {
+          "kind": "sweep",
+          "at": [
+            -2.47,
+            0,
+            0
+          ],
+          "path": [
+            [
+              -0.02,
+              -0.20000000000000018,
+              0.34641016151377535
+            ],
+            [
+              0.02,
+              -0.3100000000000003,
+              0.5369357503463518
+            ]
+          ],
+          "radius": 0.008,
+          "color": "tissue",
+          "tint": "token:ink-3",
+          "radial": 12,
+          "caps": "flat"
+        }
+      ],
+      "connects": [
+        "lens"
+      ]
+    },
+    {
+      "id": "sclera-shell",
+      "group": "eye-receiver",
+      "name": {
+        "en": "Sclera",
+        "zh": "巩膜"
+      },
+      "summary": {
+        "en": "The sclera forms the tough outer wall of the eyeball.",
+        "zh": "巩膜构成眼球坚韧的外壁。"
+      },
+      "detail": {
+        "en": "The sclera is the outer coat surrounding most of the eyeball. At the front, the transparent cornea takes its place. The retina lines the inside of the back region. [S24]\n\nThis hollow shell is opened toward the viewer to expose the inside. It is not an empty solid sphere. X-ray changes this outer shell while leaving internal structures readable; dimensions are schematic. [S31]",
+        "zh": "巩膜包围眼球的大部分，形成外层壁；眼球前端则是透明的角膜。后部内壁的里面衬着视网膜。[S24]\n\n这是一层中空外壳，朝观察者的一面打开，以露出内部。它不是一颗实心球。透视时主要降低外壳的不透明度，使内层仍可辨认；尺寸均为示意。[S31]"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          -2,
+          0,
+          0
+        ],
+        "profile": [
+          [
+            0.56,
+            -0.73
+          ],
+          [
+            0.58392,
+            -0.70144
+          ],
+          [
+            0.61816,
+            -0.66272
+          ],
+          [
+            0.65744,
+            -0.61528
+          ],
+          [
+            0.69648,
+            -0.56056
+          ],
+          [
+            0.73,
+            -0.5
+          ],
+          [
+            0.75928,
+            -0.43088
+          ],
+          [
+            0.78784,
+            -0.35224
+          ],
+          [
+            0.81376,
+            -0.26816
+          ],
+          [
+            0.83512,
+            -0.18272
+          ],
+          [
+            0.85,
+            -0.1
+          ],
+          [
+            0.85872,
+            -0.01952
+          ],
+          [
+            0.86256,
+            0.06144
+          ],
+          [
+            0.86104,
+            0.14216
+          ],
+          [
+            0.85368,
+            0.22192
+          ],
+          [
+            0.84,
+            0.3
+          ],
+          [
+            0.82032,
+            0.37848
+          ],
+          [
+            0.79496,
+            0.45784
+          ],
+          [
+            0.76344,
+            0.53496
+          ],
+          [
+            0.72528,
+            0.60672
+          ],
+          [
+            0.68,
+            0.67
+          ],
+          [
+            0.6252,
+            0.72448
+          ],
+          [
+            0.5612,
+            0.77224
+          ],
+          [
+            0.4916,
+            0.81376
+          ],
+          [
+            0.42,
+            0.84952
+          ],
+          [
+            0.35,
+            0.88
+          ],
+          [
+            0.27568,
+            0.90408
+          ],
+          [
+            0.19464,
+            0.92144
+          ],
+          [
+            0.11576,
+            0.93376
+          ],
+          [
+            0.04792,
+            0.94272
+          ],
+          [
+            0,
+            0.95
+          ],
+          [
+            0,
+            0.895
+          ],
+          [
+            0.04368,
+            0.88848
+          ],
+          [
+            0.10544,
+            0.88064
+          ],
+          [
+            0.17736,
+            0.86956
+          ],
+          [
+            0.25152,
+            0.85332
+          ],
+          [
+            0.32,
+            0.83
+          ],
+          [
+            0.38504,
+            0.79936
+          ],
+          [
+            0.45192,
+            0.76268
+          ],
+          [
+            0.51728,
+            0.72032
+          ],
+          [
+            0.57776,
+            0.67264
+          ],
+          [
+            0.63,
+            0.62
+          ],
+          [
+            0.674,
+            0.56096
+          ],
+          [
+            0.712,
+            0.49528
+          ],
+          [
+            0.744,
+            0.42512
+          ],
+          [
+            0.77,
+            0.35264
+          ],
+          [
+            0.79,
+            0.28
+          ],
+          [
+            0.80368,
+            0.20656
+          ],
+          [
+            0.81104,
+            0.13088
+          ],
+          [
+            0.81256,
+            0.05392
+          ],
+          [
+            0.80872,
+            -0.02336
+          ],
+          [
+            0.8,
+            -0.1
+          ],
+          [
+            0.78512,
+            -0.17808
+          ],
+          [
+            0.76376,
+            -0.25824
+          ],
+          [
+            0.73784,
+            -0.33736
+          ],
+          [
+            0.70928,
+            -0.41232
+          ],
+          [
+            0.68,
+            -0.48
+          ],
+          [
+            0.64648,
+            -0.54232
+          ],
+          [
+            0.60744,
+            -0.60136
+          ],
+          [
+            0.56816,
+            -0.65424
+          ],
+          [
+            0.53392,
+            -0.69808
+          ],
+          [
+            0.51,
+            -0.73
+          ],
+          [
+            0.56,
+            -0.73
+          ]
+        ],
+        "segments": 64,
+        "rotation": [
+          0,
+          0,
+          -90
+        ],
+        "color": "tissue",
+        "tint": "token:bone",
+        "arc": 225
+      },
+      "castShadow": true,
+      "shell": true,
+      "connects": [
+        "cornea",
+        "retina"
+      ]
+    },
+    {
+      "id": "vitreous",
+      "group": "eye-receiver",
+      "name": {
+        "en": "Vitreous",
+        "zh": "玻璃体"
+      },
+      "summary": {
+        "en": "The vitreous is the clear gel filling the space behind the lens.",
+        "zh": "玻璃体是填充晶状体后方空间的透明胶状物。"
+      },
+      "detail": {
+        "en": "The vitreous occupies the large space between the lens and retina. It is a transparent gel rather than air. [S24]\n\nA translucent volume distinguishes the filling from the surrounding thin layers. Its open front and low opacity make the retina visible; the shape and displayed transparency are design choices. [S31]",
+        "zh": "玻璃体位于晶状体与视网膜之间的大部分空间内，是透明胶状物，不是空气。[S24]\n\n这里用半透明的体积把填充物与周围薄层区分开。前方打开并降低不透明度，让视网膜可以看见；形状和透明程度是显示设计。[S31]"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          -2,
+          0,
+          0
+        ],
+        "profile": [
+          [
+            0,
+            -0.34
+          ],
+          [
+            0.57,
+            -0.34
+          ],
+          [
+            0.75,
+            -0.1
+          ],
+          [
+            0.74,
+            0.28
+          ],
+          [
+            0.59,
+            0.58
+          ],
+          [
+            0.29,
+            0.78
+          ],
+          [
+            0,
+            0.84
+          ]
+        ],
+        "segments": 48,
+        "rotation": [
+          0,
+          0,
+          -90
+        ],
+        "color": "glass",
+        "tint": "token:bone",
+        "arc": 190
+      },
+      "castShadow": false,
+      "connects": [
+        "retina"
+      ]
+    },
+    {
+      "id": "retina",
+      "group": "eye-receiver",
+      "name": {
+        "en": "Retina",
+        "zh": "视网膜"
+      },
+      "summary": {
+        "en": "The retina receives light and starts electrical signalling.",
+        "zh": "视网膜接收光，并启动电信号传递。"
+      },
+      "detail": {
+        "en": "The retina is a thin light-sensitive layer at the back inside the eye. Rod and cone cells help convert incoming light into electrical activity. [S2, S24]\n\nThis thin lining follows the inside wall; it is not a second eyeball. Individual receptor distributions and the later processing of vision in the brain are omitted. Light rays stop at the receiver in the separate bench; nerve paths show signals. [S31]",
+        "zh": "视网膜是眼球内部后方的一层薄薄的感光组织，其中的视杆细胞和视锥细胞帮助把入射光转成电活动。[S2, S24]\n\n这里的薄层贴着内壁，不是另一个眼球。模型没有画感光细胞分布，也没有模拟脑内的视觉处理。另一个工位的光线止于接收面，神经路径表示信号。[S31]"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          -2,
+          0,
+          0
+        ],
+        "profile": [
+          [
+            0.669862,
+            -0.371828
+          ],
+          [
+            0.702751,
+            -0.318755
+          ],
+          [
+            0.731443,
+            -0.2633
+          ],
+          [
+            0.755768,
+            -0.205796
+          ],
+          [
+            0.775579,
+            -0.146585
+          ],
+          [
+            0.79076,
+            -0.086022
+          ],
+          [
+            0.801218,
+            -0.024466
+          ],
+          [
+            0.806893,
+            0.037713
+          ],
+          [
+            0.807749,
+            0.100144
+          ],
+          [
+            0.803782,
+            0.162455
+          ],
+          [
+            0.795015,
+            0.224274
+          ],
+          [
+            0.781501,
+            0.285231
+          ],
+          [
+            0.763321,
+            0.344963
+          ],
+          [
+            0.740582,
+            0.403113
+          ],
+          [
+            0.713422,
+            0.459333
+          ],
+          [
+            0.682001,
+            0.513288
+          ],
+          [
+            0.646508,
+            0.564656
+          ],
+          [
+            0.607154,
+            0.61313
+          ],
+          [
+            0.564175,
+            0.65842
+          ],
+          [
+            0.517827,
+            0.700257
+          ],
+          [
+            0.468388,
+            0.73839
+          ],
+          [
+            0.416151,
+            0.772591
+          ],
+          [
+            0.361429,
+            0.802657
+          ],
+          [
+            0.304549,
+            0.828408
+          ],
+          [
+            0.245851,
+            0.849689
+          ],
+          [
+            0.185684,
+            0.866375
+          ],
+          [
+            0.124409,
+            0.878365
+          ],
+          [
+            0.062391,
+            0.885588
+          ],
+          [
+            0,
+            0.888
+          ],
+          [
+            0,
+            0.872
+          ],
+          [
+            0.061155,
+            0.869635
+          ],
+          [
+            0.121945,
+            0.862556
+          ],
+          [
+            0.182007,
+            0.850803
+          ],
+          [
+            0.240982,
+            0.834448
+          ],
+          [
+            0.298518,
+            0.813588
+          ],
+          [
+            0.354272,
+            0.788347
+          ],
+          [
+            0.40791,
+            0.758877
+          ],
+          [
+            0.459113,
+            0.725352
+          ],
+          [
+            0.507573,
+            0.687975
+          ],
+          [
+            0.553004,
+            0.646967
+          ],
+          [
+            0.595132,
+            0.602573
+          ],
+          [
+            0.633706,
+            0.555059
+          ],
+          [
+            0.668496,
+            0.504708
+          ],
+          [
+            0.699294,
+            0.451821
+          ],
+          [
+            0.725917,
+            0.396714
+          ],
+          [
+            0.748205,
+            0.339716
+          ],
+          [
+            0.766026,
+            0.281167
+          ],
+          [
+            0.779272,
+            0.221417
+          ],
+          [
+            0.787865,
+            0.160822
+          ],
+          [
+            0.791754,
+            0.099745
+          ],
+          [
+            0.790915,
+            0.03855
+          ],
+          [
+            0.785353,
+            -0.022398
+          ],
+          [
+            0.775101,
+            -0.082734
+          ],
+          [
+            0.760221,
+            -0.142098
+          ],
+          [
+            0.740802,
+            -0.200137
+          ],
+          [
+            0.716959,
+            -0.256502
+          ],
+          [
+            0.688835,
+            -0.310859
+          ],
+          [
+            0.656598,
+            -0.362881
+          ],
+          [
+            0.669862,
+            -0.371828
+          ]
+        ],
+        "segments": 64,
+        "rotation": [
+          0,
+          0,
+          -90
+        ],
+        "color": "tissue",
+        "tint": "token:muscle-1",
+        "arc": 178
+      },
+      "castShadow": false,
+      "connects": [
+        "optic-nerve"
+      ]
+    },
+    {
+      "id": "optic-nerve",
+      "group": "eye-receiver",
+      "name": {
+        "en": "Optic nerve",
+        "zh": "视神经"
+      },
+      "summary": {
+        "en": "The optic nerve carries visual signals toward the brain.",
+        "zh": "视神经把视觉信号传向大脑。"
+      },
+      "detail": {
+        "en": "The optic nerve leaves the back of the eye and carries electrical signals from the retina toward the brain. Light does not continue along the nerve. [S2]\n\nThe bundled tube and moving markers are schematic. The displayed speed is for reading the route, not a measured nerve conduction speed, and the brain lies outside this model. [S31]",
+        "zh": "视神经从眼球后部离开，把来自视网膜的电信号传向大脑。光不会沿视神经继续前进。[S2]\n\n束状管与移动标记都是示意。显示速度只为看清路径，不表示神经传导速度；大脑位于模型之外。[S31]"
+      },
+      "primitive": {
+        "kind": "sweep",
+        "at": [
+          -1.12,
+          0.03,
+          -0.12
+        ],
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.19,
+            -0.02,
+            -0.04
+          ],
+          [
+            0.43,
+            -0.08,
+            -0.11
+          ]
+        ],
+        "radius": [
+          0.13,
+          0.115,
+          0.1
+        ],
+        "color": "nerve",
+        "tint": "token:bone",
+        "radial": 12
+      },
+      "castShadow": false,
+      "connects": [
+        "retina"
+      ]
+    },
+    {
+      "id": "pinna",
+      "group": "ear-transfer",
+      "name": {
+        "en": "Pinna",
+        "zh": "耳廓"
+      },
+      "summary": {
+        "en": "The pinna helps collect sound toward the ear canal.",
+        "zh": "耳廓帮助把声音汇入外耳道。"
+      },
+      "detail": {
+        "en": "The pinna is the visible outer flap of the ear. Its folds lead toward the entrance of the ear canal; it is only one part of the ear. [S7]\n\nThis single-ear schematic uses an original outer rim and inner fold. Fine skin anatomy and personal differences are omitted, and this station is enlarged independently from the eye. [S31]",
+        "zh": "耳廓是从外面看得见的耳部，褶皱通向外耳道入口。它只是耳朵的一部分。[S7]\n\n这一只耳的示意由原创外缘与内侧褶皱组成，省略皮肤细节和个体差异。它与眼睛工位分别放大，不共用真实比例。[S31]"
+      },
+      "primitive": {
+        "kind": "extrude",
+        "at": [
+          0.9,
+          0,
+          -0.18
+        ],
+        "shape": [
+          [
+            0.2,
+            0.5
+          ],
+          [
+            0.189352,
+            0.539398
+          ],
+          [
+            0.177037,
+            0.585185
+          ],
+          [
+            0.1625,
+            0.63375
+          ],
+          [
+            0.145185,
+            0.681481
+          ],
+          [
+            0.124537,
+            0.724769
+          ],
+          [
+            0.1,
+            0.76
+          ],
+          [
+            0.070509,
+            0.788588
+          ],
+          [
+            0.036296,
+            0.813704
+          ],
+          [
+            -0.00125,
+            0.834375
+          ],
+          [
+            -0.040741,
+            0.84963
+          ],
+          [
+            -0.080787,
+            0.858495
+          ],
+          [
+            -0.12,
+            0.86
+          ],
+          [
+            -0.160116,
+            0.853958
+          ],
+          [
+            -0.202593,
+            0.841111
+          ],
+          [
+            -0.245625,
+            0.821875
+          ],
+          [
+            -0.287407,
+            0.796667
+          ],
+          [
+            -0.326134,
+            0.765903
+          ],
+          [
+            -0.36,
+            0.73
+          ],
+          [
+            -0.389306,
+            0.687153
+          ],
+          [
+            -0.415556,
+            0.636667
+          ],
+          [
+            -0.43875,
+            0.580625
+          ],
+          [
+            -0.458889,
+            0.521111
+          ],
+          [
+            -0.475972,
+            0.460208
+          ],
+          [
+            -0.49,
+            0.4
+          ],
+          [
+            -0.500856,
+            0.33956
+          ],
+          [
+            -0.508519,
+            0.277037
+          ],
+          [
+            -0.513125,
+            0.213125
+          ],
+          [
+            -0.514815,
+            0.148519
+          ],
+          [
+            -0.513727,
+            0.083912
+          ],
+          [
+            -0.51,
+            0.02
+          ],
+          [
+            -0.503148,
+            -0.044722
+          ],
+          [
+            -0.492963,
+            -0.111111
+          ],
+          [
+            -0.48,
+            -0.1775
+          ],
+          [
+            -0.464815,
+            -0.242222
+          ],
+          [
+            -0.447963,
+            -0.303611
+          ],
+          [
+            -0.43,
+            -0.36
+          ],
+          [
+            -0.41037,
+            -0.411782
+          ],
+          [
+            -0.388519,
+            -0.46037
+          ],
+          [
+            -0.365,
+            -0.505625
+          ],
+          [
+            -0.34037,
+            -0.547407
+          ],
+          [
+            -0.315185,
+            -0.585579
+          ],
+          [
+            -0.29,
+            -0.62
+          ],
+          [
+            -0.264375,
+            -0.65162
+          ],
+          [
+            -0.237778,
+            -0.680741
+          ],
+          [
+            -0.210625,
+            -0.70625
+          ],
+          [
+            -0.183333,
+            -0.727037
+          ],
+          [
+            -0.156319,
+            -0.741991
+          ],
+          [
+            -0.13,
+            -0.75
+          ],
+          [
+            -0.103148,
+            -0.750208
+          ],
+          [
+            -0.075185,
+            -0.743333
+          ],
+          [
+            -0.0475,
+            -0.730625
+          ],
+          [
+            -0.021481,
+            -0.713333
+          ],
+          [
+            0.001481,
+            -0.692708
+          ],
+          [
+            0.02,
+            -0.67
+          ],
+          [
+            0.033264,
+            -0.643611
+          ],
+          [
+            0.042222,
+            -0.612222
+          ],
+          [
+            0.048125,
+            -0.5775
+          ],
+          [
+            0.052222,
+            -0.541111
+          ],
+          [
+            0.055764,
+            -0.504722
+          ],
+          [
+            0.06,
+            -0.47
+          ],
+          [
+            0.063681,
+            -0.435972
+          ],
+          [
+            0.065556,
+            -0.401111
+          ],
+          [
+            0.066875,
+            -0.36625
+          ],
+          [
+            0.068889,
+            -0.332222
+          ],
+          [
+            0.072847,
+            -0.299861
+          ],
+          [
+            0.08,
+            -0.27
+          ],
+          [
+            0.091412,
+            -0.244468
+          ],
+          [
+            0.106296,
+            -0.222963
+          ],
+          [
+            0.123125,
+            -0.203125
+          ],
+          [
+            0.14037,
+            -0.182593
+          ],
+          [
+            0.156505,
+            -0.159005
+          ],
+          [
+            0.17,
+            -0.13
+          ],
+          [
+            0.181227,
+            -0.094352
+          ],
+          [
+            0.191481,
+            -0.053704
+          ],
+          [
+            0.200625,
+            -0.01
+          ],
+          [
+            0.208519,
+            0.034815
+          ],
+          [
+            0.215023,
+            0.078796
+          ],
+          [
+            0.22,
+            0.12
+          ],
+          [
+            0.223125,
+            0.159097
+          ],
+          [
+            0.224444,
+            0.197778
+          ],
+          [
+            0.224375,
+            0.235625
+          ],
+          [
+            0.223333,
+            0.272222
+          ],
+          [
+            0.221736,
+            0.307153
+          ],
+          [
+            0.22,
+            0.34
+          ],
+          [
+            0.21875,
+            0.368981
+          ],
+          [
+            0.217778,
+            0.394074
+          ],
+          [
+            0.21625,
+            0.4175
+          ],
+          [
+            0.213333,
+            0.441481
+          ],
+          [
+            0.208194,
+            0.468241
+          ]
+        ],
+        "depth": 0.13,
+        "bevel": 0.04,
+        "color": "tissue",
+        "tint": "token:muscle-1"
+      },
+      "castShadow": false,
+      "extra": [
+        {
+          "kind": "sweep",
+          "at": [
+            0.9,
+            0,
+            -0.1
+          ],
+          "path": [
+            [
+              0.14,
+              0.66,
+              0
+            ],
+            [
+              0.02,
+              0.77,
+              0
+            ],
+            [
+              -0.12,
+              0.8,
+              0.005
+            ],
+            [
+              -0.3,
+              0.69,
+              0.01
+            ],
+            [
+              -0.42,
+              0.42,
+              0.012
+            ],
+            [
+              -0.45,
+              0.05,
+              0.012
+            ],
+            [
+              -0.39,
+              -0.3,
+              0.01
+            ],
+            [
+              -0.27,
+              -0.54,
+              0.005
+            ]
+          ],
+          "radius": [
+            0.035,
+            0.05,
+            0.058,
+            0.062,
+            0.06,
+            0.056,
+            0.05,
+            0.042
+          ],
+          "color": "tissue",
+          "tint": "token:muscle-1",
+          "radial": 14,
+          "segments": 64,
+          "caps": "round"
+        },
+        {
+          "kind": "sweep",
+          "at": [
+            0.9,
+            0,
+            -0.11
+          ],
+          "path": [
+            [
+              -0.2,
+              -0.34,
+              0
+            ],
+            [
+              -0.27,
+              -0.06,
+              0.005
+            ],
+            [
+              -0.25,
+              0.22,
+              0.008
+            ],
+            [
+              -0.13,
+              0.48,
+              0.005
+            ],
+            [
+              0.02,
+              0.58,
+              0
+            ]
+          ],
+          "radius": [
+            0.028,
+            0.036,
+            0.038,
+            0.034,
+            0.024
+          ],
+          "color": "tissue",
+          "tint": "token:muscle-2",
+          "radial": 12,
+          "segments": 40,
+          "caps": "round"
+        },
+        {
+          "kind": "sphere",
+          "at": [
+            0.96,
+            -0.13,
+            -0.06
+          ],
+          "size": [
+            0.12
+          ],
+          "scale": [
+            0.75,
+            1,
+            1.1
+          ],
+          "color": "tissue",
+          "tint": "token:muscle-2"
+        }
+      ],
+      "connects": [
+        "canal"
+      ],
+      "clip": false
+    },
+    {
+      "id": "canal",
+      "group": "ear-transfer",
+      "name": {
+        "en": "Ear canal",
+        "zh": "外耳道"
+      },
+      "summary": {
+        "en": "The ear canal guides sound vibration to the eardrum.",
+        "zh": "外耳道把声音振动传到鼓膜。"
+      },
+      "detail": {
+        "en": "The ear canal runs inward from the pinna and ends at the eardrum. It does not continue through the middle ear into the cochlea. [S7]\n\nThe open U-shaped wall exposes the air passage in this longitudinal cut. Its shortened path is a display choice; do not put objects into the ear canal. [S18, S31]",
+        "zh": "外耳道从耳廓向内延伸，止于鼓膜，并不会穿过中耳一直通到耳蜗。[S7]\n\n纵切示意用打开的U形壁露出通道，路径为展示而缩短。不要把物品伸入外耳道。[S18, S31]"
+      },
+      "primitive": {
+        "kind": "sweep",
+        "at": [
+          1.05,
+          -0.13,
+          0
+        ],
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.13,
+            0.01,
+            -0.02
+          ],
+          [
+            0.28,
+            0.045,
+            -0.035
+          ],
+          [
+            0.46,
+            0.06,
+            -0.045
+          ]
+        ],
+        "radius": [
+          0.18,
+          0.16,
+          0.15,
+          0.17
+        ],
+        "color": "tissue",
+        "tint": "token:muscle-1",
+        "radial": 12,
+        "hollow": 0.035,
+        "section": {
+          "u": 210
+        },
+        "up": [
+          0,
+          0,
+          -1
+        ],
+        "caps": "none"
+      },
+      "castShadow": false,
+      "connects": [
+        "pinna",
+        "eardrum"
+      ],
+      "shell": true
+    },
+    {
+      "id": "eardrum",
+      "group": "ear-transfer",
+      "name": {
+        "en": "Eardrum",
+        "zh": "鼓膜"
+      },
+      "summary": {
+        "en": "The eardrum vibrates when sound reaches the end of the canal.",
+        "zh": "声音到达外耳道末端，使鼓膜振动。"
+      },
+      "detail": {
+        "en": "The eardrum is a thin membrane at the inner end of the ear canal. Its movement passes to the malleus, the first of the three middle-ear bones. [S7, S8]\n\nThe sloping, shallow membrane vibrates slowly here so its motion can be seen. The shown displacement and timing are illustrative, not measured eardrum movement. [S31]",
+        "zh": "鼓膜位于外耳道内端，是一层薄膜。它的运动传给锤骨，即中耳三块听小骨中的第一块。[S7, S8]\n\n这里把浅凹、倾斜的薄膜慢放振动，便于观察。显示的位移与节律只是示意，不是鼓膜运动测量。[S31]"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          1.51,
+          -0.065,
+          -0.045
+        ],
+        "profile": [
+          [
+            0,
+            -0.035
+          ],
+          [
+            0.1,
+            -0.022
+          ],
+          [
+            0.19,
+            0.012
+          ],
+          [
+            0.235,
+            0.035
+          ]
+        ],
+        "segments": 48,
+        "rotation": [
+          0,
+          0,
+          -72
+        ],
+        "color": "membrane",
+        "tint": "token:bone"
+      },
+      "castShadow": false,
+      "connects": [
+        "canal",
+        "malleus"
+      ]
+    },
+    {
+      "id": "malleus",
+      "group": "ear-transfer",
+      "name": {
+        "en": "Malleus",
+        "zh": "锤骨"
+      },
+      "summary": {
+        "en": "The malleus transfers movement from the eardrum to the incus.",
+        "zh": "锤骨把鼓膜运动传给砧骨。"
+      },
+      "detail": {
+        "en": "The handle of the malleus contacts the eardrum, while its rounded head articulates with the incus. It is one of the three ossicles. [S7, S8]\n\nThe head and curved handle are an original simplified outline. The slow rocking motion shows transfer through the connected chain without claiming a real lever gain or biological delay. [S31]",
+        "zh": "锤骨的柄与鼓膜接触，圆头与砧骨相接。它是三块听小骨之一。[S7, S8]\n\n圆头与弯柄是原创简化外形。慢速摆动用来说明相连骨链传递运动，不表示真实杠杆增益或生理延迟。[S31]"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          1.68,
+          0.26,
+          -0.065
+        ],
+        "size": [
+          0.105
+        ],
+        "scale": [
+          0.9,
+          1.1,
+          0.9
+        ],
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "castShadow": false,
+      "extra": [
+        {
+          "kind": "sweep",
+          "at": [
+            1.68,
+            0.26,
+            -0.065
+          ],
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -0.035,
+              -0.14,
+              0
+            ],
+            [
+              -0.12,
+              -0.3,
+              0.015
+            ],
+            [
+              -0.16,
+              -0.42,
+              0.02
+            ]
+          ],
+          "radius": [
+            0.053,
+            0.043,
+            0.03,
+            0.022
+          ],
+          "color": "tissue",
+          "tint": "token:bone",
+          "radial": 12
+        },
+        {
+          "kind": "sweep",
+          "at": [
+            1.64,
+            0.15,
+            -0.065
+          ],
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -0.13,
+              0.01,
+              0.01
+            ]
+          ],
+          "radius": [
+            0.035,
+            0.018
+          ],
+          "color": "tissue",
+          "tint": "token:bone",
+          "radial": 12
+        }
+      ],
+      "connects": [
+        "eardrum",
+        "incus"
+      ],
+      "explode": {
+        "dir": [
+          0,
+          0.8,
+          0.4
+        ],
+        "dist": 0.26
+      }
+    },
+    {
+      "id": "incus",
+      "group": "ear-transfer",
+      "name": {
+        "en": "Incus",
+        "zh": "砧骨"
+      },
+      "summary": {
+        "en": "The incus links the malleus to the stapes.",
+        "zh": "砧骨连接锤骨与镫骨。"
+      },
+      "detail": {
+        "en": "The incus is the middle bone of the ossicle chain. Its body meets the malleus, and its long process reaches the stapes. [S7, S8]\n\nThe two processes are kept distinct in this original schematic. The contact at each end is enlarged enough to read; small joints and ligaments are omitted. [S31]",
+        "zh": "砧骨位于听小骨链中间，体部与锤骨相接，长突伸向镫骨。[S7, S8]\n\n原创示意保留了可分辨的两个突起。两端接触处放大以便观察，省略细小关节与韧带。[S31]"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          1.86,
+          0.25,
+          -0.065
+        ],
+        "size": [
+          0.105
+        ],
+        "scale": [
+          1.15,
+          0.8,
+          0.8
+        ],
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "castShadow": false,
+      "extra": [
+        {
+          "kind": "sweep",
+          "at": [
+            1.86,
+            0.25,
+            -0.065
+          ],
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.12,
+              0.055,
+              -0.025
+            ],
+            [
+              0.2,
+              0.02,
+              -0.03
+            ]
+          ],
+          "radius": [
+            0.05,
+            0.032,
+            0.015
+          ],
+          "color": "tissue",
+          "tint": "token:bone",
+          "radial": 12
+        },
+        {
+          "kind": "sweep",
+          "at": [
+            1.86,
+            0.25,
+            -0.065
+          ],
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.1,
+              -0.13,
+              0
+            ],
+            [
+              0.2,
+              -0.27,
+              0.01
+            ],
+            [
+              0.29,
+              -0.29,
+              0.015
+            ]
+          ],
+          "radius": [
+            0.048,
+            0.038,
+            0.024,
+            0.025
+          ],
+          "color": "tissue",
+          "tint": "token:bone",
+          "radial": 12
+        }
+      ],
+      "connects": [
+        "malleus",
+        "stapes"
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0.4
+        ],
+        "dist": 0.3
+      }
+    },
+    {
+      "id": "stapes",
+      "group": "ear-transfer",
+      "name": {
+        "en": "Stapes",
+        "zh": "镫骨"
+      },
+      "summary": {
+        "en": "The stapes footplate transfers movement at the oval window.",
+        "zh": "镫骨底板在卵圆窗处传递运动。"
+      },
+      "detail": {
+        "en": "The stapes receives movement from the incus. Its two limbs join a footplate that rests at the oval window, transferring movement into the inner ear. [S8]\n\nThe two crura and single footplate are explicit in this original schematic. The small piston-like movement is illustrative and stays at the window; it is not a spinning bone. [S31]",
+        "zh": "镫骨接收砧骨的运动，两条脚连接一块底板，底板位于卵圆窗处，把运动传入内耳。[S8]\n\n原创示意明确画出两脚和一块底板。小幅活塞式运动只作说明，底板保持在窗处；镫骨不会自转。[S31]"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          2.15,
+          -0.04,
+          -0.05
+        ],
+        "size": [
+          0.04
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "castShadow": false,
+      "extra": [
+        {
+          "kind": "sweep",
+          "at": [
+            2.15,
+            -0.04,
+            -0.05
+          ],
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.11,
+              0.065,
+              0
+            ],
+            [
+              0.24,
+              0.065,
+              0
+            ]
+          ],
+          "radius": [
+            0.022,
+            0.018,
+            0.021
+          ],
+          "color": "tissue",
+          "tint": "token:bone",
+          "radial": 12
+        },
+        {
+          "kind": "sweep",
+          "at": [
+            2.15,
+            -0.04,
+            -0.05
+          ],
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.11,
+              -0.065,
+              0
+            ],
+            [
+              0.24,
+              -0.065,
+              0
+            ]
+          ],
+          "radius": [
+            0.022,
+            0.018,
+            0.021
+          ],
+          "color": "tissue",
+          "tint": "token:bone",
+          "radial": 12
+        },
+        {
+          "kind": "sphere",
+          "at": [
+            2.4,
+            -0.04,
+            -0.05
+          ],
+          "size": [
+            0.09
+          ],
+          "scale": [
+            0.18,
+            1.2,
+            0.65
+          ],
+          "color": "tissue",
+          "tint": "token:bone"
+        }
+      ],
+      "connects": [
+        "incus",
+        "oval-window"
+      ],
+      "explode": {
+        "dir": [
+          0,
+          0.4,
+          1
+        ],
+        "dist": 0.24
+      }
+    },
+    {
+      "id": "oval-window",
+      "group": "ear-transfer",
+      "name": {
+        "en": "Oval window",
+        "zh": "卵圆窗"
+      },
+      "summary": {
+        "en": "The oval window is the interface where stapes movement enters the inner ear.",
+        "zh": "卵圆窗是镫骨运动传入内耳的界面。"
+      },
+      "detail": {
+        "en": "The stapes footplate sits at the oval window. Its movement passes to the fluid-filled inner ear rather than carrying a stream of outside air into the cochlea. [S8]\n\nThe thin oval interface and footplate touch in this schematic. Surrounding bone is omitted to expose that relationship; the displayed size is not a measurement. [S31]",
+        "zh": "镫骨底板位于卵圆窗处，其运动传到充满液体的内耳，并不是把外界空气不断送进耳蜗。[S8]\n\n薄薄的椭圆界面与底板在示意中相接。为了露出这层关系，周围骨壁被省略；显示尺寸不是测量值。[S31]"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          2.415,
+          -0.04,
+          -0.05
+        ],
+        "size": [
+          0.105
+        ],
+        "scale": [
+          0.12,
+          1.15,
+          0.67
+        ],
+        "color": "membrane",
+        "tint": "token:bone"
+      },
+      "castShadow": false,
+      "connects": [
+        "stapes",
+        "cochlea-shell"
+      ]
+    },
+    {
+      "id": "eustachian-tube",
+      "group": "ear-transfer",
+      "name": {
+        "en": "Eustachian tube",
+        "zh": "咽鼓管"
+      },
+      "summary": {
+        "en": "The Eustachian tube helps equalise pressure across the eardrum.",
+        "zh": "咽鼓管帮助平衡鼓膜两侧的气压。"
+      },
+      "detail": {
+        "en": "The Eustachian tube connects the middle ear toward the throat and helps equalise pressure. It is not the main route carrying hearing signals to the brain. [S8]\n\nThe downward tube is shown only as context. This lesson does not simulate opening, swallowing or pressure changes. [S31]",
+        "zh": "咽鼓管连接中耳与咽部方向，帮助平衡气压。它不是把听觉信号传向大脑的主要路径。[S8]\n\n向下的管道只用来定位。本课不模拟管道开放、吞咽或压力变化。[S31]"
+      },
+      "primitive": {
+        "kind": "sweep",
+        "at": [
+          1.94,
+          -0.25,
+          -0.2
+        ],
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.12,
+            -0.23,
+            -0.02
+          ],
+          [
+            0.36,
+            -0.61,
+            -0.05
+          ]
+        ],
+        "radius": [
+          0.13,
+          0.11,
+          0.08
+        ],
+        "color": "tissue",
+        "tint": "token:bone",
+        "radial": 12,
+        "hollow": 0.025,
+        "caps": "none"
+      },
+      "castShadow": false,
+      "short": {
+        "en": "Pressure tube",
+        "zh": "咽鼓管"
+      }
+    },
+    {
+      "id": "cochlea-shell",
+      "group": "ear-receiver",
+      "name": {
+        "en": "Cochlea",
+        "zh": "耳蜗"
+      },
+      "summary": {
+        "en": "The fluid-filled cochlea contains structures that turn vibration into signals.",
+        "zh": "充满液体的耳蜗含有把振动转成信号的结构。"
+      },
+      "detail": {
+        "en": "The cochlea is the coiled hearing structure of the inner ear. Movement at the oval window produces motion in its fluid and a travelling wave along the basilar membrane. [S7]\n\nThis original open spiral shows a cavity, not a pipe draining water out of the ear. Its turns are schematic, not an exact anatomical turn count. A separate enlarged strip makes the membrane and sensory cells readable. [S31]",
+        "zh": "耳蜗是内耳中卷曲的听觉结构。卵圆窗处的运动使内部液体运动，并在基底膜上形成行波。[S7]\n\n原创的开口螺旋显示腔体，不表示水不断排出耳外。圈数是示意，不是精确解剖计数。另一个放大条带用来展示膜与感受细胞。[S31]"
+      },
+      "primitive": {
+        "kind": "sweep",
+        "at": [
+          2.43,
+          -0.04,
+          0
+        ],
+        "path": [
+          [
+            0,
+            0.05,
+            -0.11
+          ],
+          [
+            0.015147,
+            -0.045352,
+            -0.110933
+          ],
+          [
+            0.04757,
+            -0.135068,
+            -0.111867
+          ],
+          [
+            0.095707,
+            -0.216092,
+            -0.1128
+          ],
+          [
+            0.157465,
+            -0.285748,
+            -0.113733
+          ],
+          [
+            0.230316,
+            -0.341834,
+            -0.114667
+          ],
+          [
+            0.311392,
+            -0.382688,
+            -0.1156
+          ],
+          [
+            0.397602,
+            -0.407236,
+            -0.116533
+          ],
+          [
+            0.485744,
+            -0.415014,
+            -0.117467
+          ],
+          [
+            0.572628,
+            -0.406174,
+            -0.1184
+          ],
+          [
+            0.655191,
+            -0.381463,
+            -0.119333
+          ],
+          [
+            0.730601,
+            -0.342176,
+            -0.120267
+          ],
+          [
+            0.796359,
+            -0.290105,
+            -0.1212
+          ],
+          [
+            0.850379,
+            -0.227449,
+            -0.122133
+          ],
+          [
+            0.891052,
+            -0.156737,
+            -0.123067
+          ],
+          [
+            0.917297,
+            -0.080714,
+            -0.124
+          ],
+          [
+            0.92858,
+            -0.002247,
+            -0.124933
+          ],
+          [
+            0.924923,
+            0.07579,
+            -0.125867
+          ],
+          [
+            0.906889,
+            0.15062,
+            -0.1268
+          ],
+          [
+            0.875543,
+            0.219659,
+            -0.127733
+          ],
+          [
+            0.832404,
+            0.280608,
+            -0.128667
+          ],
+          [
+            0.779372,
+            0.331528,
+            -0.1296
+          ],
+          [
+            0.71865,
+            0.370901,
+            -0.130533
+          ],
+          [
+            0.652654,
+            0.397674,
+            -0.131467
+          ],
+          [
+            0.583919,
+            0.411285,
+            -0.1324
+          ],
+          [
+            0.515,
+            0.411667,
+            -0.133333
+          ],
+          [
+            0.44838,
+            0.399236,
+            -0.134267
+          ],
+          [
+            0.386377,
+            0.374864,
+            -0.1352
+          ],
+          [
+            0.331069,
+            0.33983,
+            -0.136133
+          ],
+          [
+            0.284216,
+            0.29576,
+            -0.137067
+          ],
+          [
+            0.247215,
+            0.244557,
+            -0.138
+          ],
+          [
+            0.221052,
+            0.188321,
+            -0.138933
+          ],
+          [
+            0.20628,
+            0.129266,
+            -0.139867
+          ],
+          [
+            0.203017,
+            0.069628,
+            -0.1408
+          ],
+          [
+            0.21095,
+            0.01159,
+            -0.141733
+          ],
+          [
+            0.229366,
+            -0.042808,
+            -0.142667
+          ],
+          [
+            0.257191,
+            -0.091732,
+            -0.1436
+          ],
+          [
+            0.293041,
+            -0.133621,
+            -0.144533
+          ],
+          [
+            0.335289,
+            -0.167233,
+            -0.145467
+          ],
+          [
+            0.382132,
+            -0.191685,
+            -0.1464
+          ],
+          [
+            0.431668,
+            -0.206468,
+            -0.147333
+          ],
+          [
+            0.481971,
+            -0.211455,
+            -0.148267
+          ],
+          [
+            0.531162,
+            -0.206892,
+            -0.1492
+          ],
+          [
+            0.577487,
+            -0.193373,
+            -0.150133
+          ],
+          [
+            0.619373,
+            -0.171803,
+            -0.151067
+          ],
+          [
+            0.655481,
+            -0.143355,
+            -0.152
+          ],
+          [
+            0.684752,
+            -0.109408,
+            -0.152933
+          ],
+          [
+            0.706437,
+            -0.07149,
+            -0.153867
+          ],
+          [
+            0.720109,
+            -0.031208,
+            -0.1548
+          ],
+          [
+            0.725668,
+            0.009813,
+            -0.155733
+          ],
+          [
+            0.723333,
+            0.05,
+            -0.156667
+          ],
+          [
+            0.713618,
+            0.087889,
+            -0.1576
+          ],
+          [
+            0.697298,
+            0.122177,
+            -0.158533
+          ],
+          [
+            0.675366,
+            0.151771,
+            -0.159467
+          ],
+          [
+            0.648984,
+            0.17582,
+            -0.1604
+          ],
+          [
+            0.61943,
+            0.193735,
+            -0.161333
+          ],
+          [
+            0.588035,
+            0.205208,
+            -0.162267
+          ],
+          [
+            0.556133,
+            0.210204,
+            -0.1632
+          ],
+          [
+            0.525,
+            0.208952,
+            -0.164133
+          ],
+          [
+            0.495807,
+            0.201926,
+            -0.165067
+          ],
+          [
+            0.469575,
+            0.189805,
+            -0.166
+          ],
+          [
+            0.447137,
+            0.173442,
+            -0.166933
+          ],
+          [
+            0.429118,
+            0.153814,
+            -0.167867
+          ],
+          [
+            0.415912,
+            0.131973,
+            -0.1688
+          ],
+          [
+            0.407682,
+            0.108999,
+            -0.169733
+          ],
+          [
+            0.40436,
+            0.085949,
+            -0.170667
+          ],
+          [
+            0.405669,
+            0.063812,
+            -0.1716
+          ],
+          [
+            0.411139,
+            0.043466,
+            -0.172533
+          ],
+          [
+            0.420143,
+            0.025645,
+            -0.173467
+          ],
+          [
+            0.431937,
+            0.010913,
+            -0.1744
+          ],
+          [
+            0.445694,
+            -0.000354,
+            -0.175333
+          ],
+          [
+            0.460556,
+            -0.007977,
+            -0.176267
+          ],
+          [
+            0.47567,
+            -0.011974,
+            -0.1772
+          ],
+          [
+            0.490237,
+            -0.012543,
+            -0.178133
+          ],
+          [
+            0.503545,
+            -0.01005,
+            -0.179067
+          ],
+          [
+            0.515,
+            -0.005,
+            -0.18
+          ]
+        ],
+        "radius": [
+          0.12,
+          0.119267,
+          0.118533,
+          0.1178,
+          0.117067,
+          0.116333,
+          0.1156,
+          0.114867,
+          0.114133,
+          0.1134,
+          0.112667,
+          0.111933,
+          0.1112,
+          0.110467,
+          0.109733,
+          0.109,
+          0.108267,
+          0.107533,
+          0.1068,
+          0.106067,
+          0.105333,
+          0.1046,
+          0.103867,
+          0.103133,
+          0.1024,
+          0.101667,
+          0.100933,
+          0.1002,
+          0.099467,
+          0.098733,
+          0.098,
+          0.097267,
+          0.096533,
+          0.0958,
+          0.095067,
+          0.094333,
+          0.0936,
+          0.092867,
+          0.092133,
+          0.0914,
+          0.090667,
+          0.089933,
+          0.0892,
+          0.088467,
+          0.087733,
+          0.087,
+          0.086267,
+          0.085533,
+          0.0848,
+          0.084067,
+          0.083333,
+          0.0826,
+          0.081867,
+          0.081133,
+          0.0804,
+          0.079667,
+          0.078933,
+          0.0782,
+          0.077467,
+          0.076733,
+          0.076,
+          0.075267,
+          0.074533,
+          0.0738,
+          0.073067,
+          0.072333,
+          0.0716,
+          0.070867,
+          0.070133,
+          0.0694,
+          0.068667,
+          0.067933,
+          0.0672,
+          0.066467,
+          0.065733,
+          0.065
+        ],
+        "color": "tissue",
+        "tint": "token:bone",
+        "radial": 16,
+        "hollow": 0.022,
+        "section": {
+          "u": 235
+        },
+        "up": [
+          0,
+          0,
+          -1
+        ],
+        "caps": "none",
+        "segments": 200
+      },
+      "castShadow": false,
+      "shell": true,
+      "extra": [
+        {
+          "kind": "sweep",
+          "at": [
+            2.43,
+            -0.04,
+            0
+          ],
+          "path": [
+            [
+              0,
+              0.05,
+              -0.11
+            ],
+            [
+              0.015147,
+              -0.045352,
+              -0.110933
+            ],
+            [
+              0.04757,
+              -0.135068,
+              -0.111867
+            ],
+            [
+              0.095707,
+              -0.216092,
+              -0.1128
+            ],
+            [
+              0.157465,
+              -0.285748,
+              -0.113733
+            ],
+            [
+              0.230316,
+              -0.341834,
+              -0.114667
+            ],
+            [
+              0.311392,
+              -0.382688,
+              -0.1156
+            ],
+            [
+              0.397602,
+              -0.407236,
+              -0.116533
+            ],
+            [
+              0.485744,
+              -0.415014,
+              -0.117467
+            ],
+            [
+              0.572628,
+              -0.406174,
+              -0.1184
+            ],
+            [
+              0.655191,
+              -0.381463,
+              -0.119333
+            ],
+            [
+              0.730601,
+              -0.342176,
+              -0.120267
+            ],
+            [
+              0.796359,
+              -0.290105,
+              -0.1212
+            ],
+            [
+              0.850379,
+              -0.227449,
+              -0.122133
+            ],
+            [
+              0.891052,
+              -0.156737,
+              -0.123067
+            ],
+            [
+              0.917297,
+              -0.080714,
+              -0.124
+            ],
+            [
+              0.92858,
+              -0.002247,
+              -0.124933
+            ],
+            [
+              0.924923,
+              0.07579,
+              -0.125867
+            ],
+            [
+              0.906889,
+              0.15062,
+              -0.1268
+            ],
+            [
+              0.875543,
+              0.219659,
+              -0.127733
+            ],
+            [
+              0.832404,
+              0.280608,
+              -0.128667
+            ],
+            [
+              0.779372,
+              0.331528,
+              -0.1296
+            ],
+            [
+              0.71865,
+              0.370901,
+              -0.130533
+            ],
+            [
+              0.652654,
+              0.397674,
+              -0.131467
+            ],
+            [
+              0.583919,
+              0.411285,
+              -0.1324
+            ],
+            [
+              0.515,
+              0.411667,
+              -0.133333
+            ],
+            [
+              0.44838,
+              0.399236,
+              -0.134267
+            ],
+            [
+              0.386377,
+              0.374864,
+              -0.1352
+            ],
+            [
+              0.331069,
+              0.33983,
+              -0.136133
+            ],
+            [
+              0.284216,
+              0.29576,
+              -0.137067
+            ],
+            [
+              0.247215,
+              0.244557,
+              -0.138
+            ],
+            [
+              0.221052,
+              0.188321,
+              -0.138933
+            ],
+            [
+              0.20628,
+              0.129266,
+              -0.139867
+            ],
+            [
+              0.203017,
+              0.069628,
+              -0.1408
+            ],
+            [
+              0.21095,
+              0.01159,
+              -0.141733
+            ],
+            [
+              0.229366,
+              -0.042808,
+              -0.142667
+            ],
+            [
+              0.257191,
+              -0.091732,
+              -0.1436
+            ],
+            [
+              0.293041,
+              -0.133621,
+              -0.144533
+            ],
+            [
+              0.335289,
+              -0.167233,
+              -0.145467
+            ],
+            [
+              0.382132,
+              -0.191685,
+              -0.1464
+            ],
+            [
+              0.431668,
+              -0.206468,
+              -0.147333
+            ],
+            [
+              0.481971,
+              -0.211455,
+              -0.148267
+            ],
+            [
+              0.531162,
+              -0.206892,
+              -0.1492
+            ],
+            [
+              0.577487,
+              -0.193373,
+              -0.150133
+            ],
+            [
+              0.619373,
+              -0.171803,
+              -0.151067
+            ],
+            [
+              0.655481,
+              -0.143355,
+              -0.152
+            ],
+            [
+              0.684752,
+              -0.109408,
+              -0.152933
+            ],
+            [
+              0.706437,
+              -0.07149,
+              -0.153867
+            ],
+            [
+              0.720109,
+              -0.031208,
+              -0.1548
+            ],
+            [
+              0.725668,
+              0.009813,
+              -0.155733
+            ],
+            [
+              0.723333,
+              0.05,
+              -0.156667
+            ],
+            [
+              0.713618,
+              0.087889,
+              -0.1576
+            ],
+            [
+              0.697298,
+              0.122177,
+              -0.158533
+            ],
+            [
+              0.675366,
+              0.151771,
+              -0.159467
+            ],
+            [
+              0.648984,
+              0.17582,
+              -0.1604
+            ],
+            [
+              0.61943,
+              0.193735,
+              -0.161333
+            ],
+            [
+              0.588035,
+              0.205208,
+              -0.162267
+            ],
+            [
+              0.556133,
+              0.210204,
+              -0.1632
+            ],
+            [
+              0.525,
+              0.208952,
+              -0.164133
+            ],
+            [
+              0.495807,
+              0.201926,
+              -0.165067
+            ],
+            [
+              0.469575,
+              0.189805,
+              -0.166
+            ],
+            [
+              0.447137,
+              0.173442,
+              -0.166933
+            ],
+            [
+              0.429118,
+              0.153814,
+              -0.167867
+            ],
+            [
+              0.415912,
+              0.131973,
+              -0.1688
+            ],
+            [
+              0.407682,
+              0.108999,
+              -0.169733
+            ],
+            [
+              0.40436,
+              0.085949,
+              -0.170667
+            ],
+            [
+              0.405669,
+              0.063812,
+              -0.1716
+            ],
+            [
+              0.411139,
+              0.043466,
+              -0.172533
+            ],
+            [
+              0.420143,
+              0.025645,
+              -0.173467
+            ],
+            [
+              0.431937,
+              0.010913,
+              -0.1744
+            ],
+            [
+              0.445694,
+              -0.000354,
+              -0.175333
+            ],
+            [
+              0.460556,
+              -0.007977,
+              -0.176267
+            ],
+            [
+              0.47567,
+              -0.011974,
+              -0.1772
+            ],
+            [
+              0.490237,
+              -0.012543,
+              -0.178133
+            ],
+            [
+              0.503545,
+              -0.01005,
+              -0.179067
+            ],
+            [
+              0.515,
+              -0.005,
+              -0.18
+            ]
+          ],
+          "radius": [
+            0.087,
+            0.0864,
+            0.0858,
+            0.0852,
+            0.0846,
+            0.084,
+            0.0834,
+            0.0828,
+            0.0822,
+            0.0816,
+            0.081,
+            0.0804,
+            0.0798,
+            0.0792,
+            0.0786,
+            0.078,
+            0.0774,
+            0.0768,
+            0.0762,
+            0.0756,
+            0.075,
+            0.0744,
+            0.0738,
+            0.0732,
+            0.0726,
+            0.072,
+            0.0714,
+            0.0708,
+            0.0702,
+            0.0696,
+            0.069,
+            0.0684,
+            0.0678,
+            0.0672,
+            0.0666,
+            0.066,
+            0.0654,
+            0.0648,
+            0.0642,
+            0.0636,
+            0.063,
+            0.0624,
+            0.0618,
+            0.0612,
+            0.0606,
+            0.06,
+            0.0594,
+            0.0588,
+            0.0582,
+            0.0576,
+            0.057,
+            0.0564,
+            0.0558,
+            0.0552,
+            0.0546,
+            0.054,
+            0.0534,
+            0.0528,
+            0.0522,
+            0.0516,
+            0.051,
+            0.0504,
+            0.0498,
+            0.0492,
+            0.0486,
+            0.048,
+            0.0474,
+            0.0468,
+            0.0462,
+            0.0456,
+            0.045,
+            0.0444,
+            0.0438,
+            0.0432,
+            0.0426,
+            0.042
+          ],
+          "color": "glass",
+          "tint": "token:bone",
+          "radial": 12,
+          "segments": 180,
+          "caps": "round"
+        }
+      ],
+      "connects": [
+        "oval-window",
+        "auditory-nerve"
+      ]
+    },
+    {
+      "id": "basilar-strip",
+      "group": "ear-receiver",
+      "name": {
+        "en": "Basilar membrane",
+        "zh": "基底膜"
+      },
+      "summary": {
+        "en": "A travelling wave along the basilar membrane moves nearby sensory structures.",
+        "zh": "沿基底膜传播的行波使附近的感受结构运动。"
+      },
+      "detail": {
+        "en": "The basilar membrane lies within the cochlea. Cochlear fluid movement sets up a travelling wave along it; different regions respond most strongly to different frequencies. [S7]\n\nThis unfolded strip is an enlarged schematic, at a different scale and outside its anatomical position. A single local patch rises and falls as one sample; this is not a simulation of a spatial travelling wave, biological timing or cochlear tuning. [S31]",
+        "zh": "基底膜位于耳蜗内部，耳蜗液体的运动在它上面形成行波。不同区域对不同频率的响应较强。[S7]\n\n展开的条带是独立放大示意，比例与原位不同。单个局部膜片作为一个示意样本整体起伏，不模拟空间行波、生理时延或具体的耳蜗调谐曲线。[S31]"
+      },
+      "primitive": {
+        "kind": "extrude",
+        "at": [
+          3.15,
+          -1.58,
+          0.35
+        ],
+        "shape": [
+          [
+            -0.65,
+            -0.025
+          ],
+          [
+            0.65,
+            -0.045
+          ],
+          [
+            0.65,
+            0.045
+          ],
+          [
+            -0.65,
+            0.025
+          ]
+        ],
+        "depth": 0.23,
+        "bevel": 0.008,
+        "color": "tissue",
+        "tint": "token:muscle-1"
+      },
+      "castShadow": false,
+      "clip": false,
+      "short": {
+        "en": "Basilar strip",
+        "zh": "基底膜"
+      },
+      "connects": [
+        "hair-patch"
+      ],
+      "extra": [
+        {
+          "kind": "sphere",
+          "at": [
+            2.85,
+            -1.34,
+            0.35
+          ],
+          "size": [
+            0.13
+          ],
+          "scale": [
+            0.7,
+            1.55,
+            0.7
+          ],
+          "color": "tissue",
+          "tint": "token:bone"
+        },
+        {
+          "kind": "sphere",
+          "at": [
+            3.15,
+            -1.34,
+            0.35
+          ],
+          "size": [
+            0.13
+          ],
+          "scale": [
+            0.7,
+            1.55,
+            0.7
+          ],
+          "color": "tissue",
+          "tint": "token:bone"
+        },
+        {
+          "kind": "sphere",
+          "at": [
+            3.45,
+            -1.34,
+            0.35
+          ],
+          "size": [
+            0.13
+          ],
+          "scale": [
+            0.7,
+            1.55,
+            0.7
+          ],
+          "color": "tissue",
+          "tint": "token:bone"
+        }
+      ]
+    },
+    {
+      "id": "hair-patch",
+      "group": "ear-receiver",
+      "name": {
+        "en": "Hair-cell patch",
+        "zh": "毛细胞局部"
+      },
+      "summary": {
+        "en": "Bending the tiny bundles helps sensory hair cells start electrical signalling.",
+        "zh": "微小纤毛束的弯曲帮助毛细胞启动电信号传递。"
+      },
+      "detail": {
+        "en": "Sensory hair cells lie on the cochlear sensory structure. Their tiny hair-like bundles bend during movement and help initiate electrical signalling. These bundles are not ordinary hair. [S7]\n\nThe three cells and a few bundle strokes form an enlarged schematic at a different scale. The number drawn is not a total cell count, and the bundles tilt together as a stylised sample rather than deforming each stereocilium. No ion channels or biological delays are calculated. [S31]",
+        "zh": "感受毛细胞位于耳蜗的感受结构上，微小的纤毛束在运动中弯曲，帮助启动电信号。纤毛束不是普通毛发。[S7]\n\n这里的三个细胞和少量纤毛笔画是独立比例的放大示意，画出数量不代表细胞总数。纤毛束整体倾斜是风格化样本，不是逐根纤毛的变形模拟，也不计算离子通道或生理时延。[S31]"
+      },
+      "primitive": {
+        "kind": "sweep",
+        "at": [
+          3.15,
+          -1.155,
+          0.35
+        ],
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.015,
+            0.18,
+            0
+          ]
+        ],
+        "radius": 0.012,
+        "color": "tissue",
+        "tint": "token:ink-2",
+        "radial": 12,
+        "caps": "flat"
+      },
+      "castShadow": false,
+      "extra": [
+        {
+          "kind": "sweep",
+          "at": [
+            2.815,
+            -1.155,
+            0.35
+          ],
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.015,
+              0.13,
+              0
+            ]
+          ],
+          "radius": 0.012,
+          "color": "tissue",
+          "tint": "token:ink-2",
+          "radial": 12,
+          "caps": "flat"
+        },
+        {
+          "kind": "sweep",
+          "at": [
+            2.85,
+            -1.155,
+            0.35
+          ],
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.015,
+              0.18,
+              0
+            ]
+          ],
+          "radius": 0.012,
+          "color": "tissue",
+          "tint": "token:ink-2",
+          "radial": 12,
+          "caps": "flat"
+        },
+        {
+          "kind": "sweep",
+          "at": [
+            2.885,
+            -1.155,
+            0.35
+          ],
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.015,
+              0.23,
+              0
+            ]
+          ],
+          "radius": 0.012,
+          "color": "tissue",
+          "tint": "token:ink-2",
+          "radial": 12,
+          "caps": "flat"
+        },
+        {
+          "kind": "sweep",
+          "at": [
+            3.115,
+            -1.155,
+            0.35
+          ],
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.015,
+              0.13,
+              0
+            ]
+          ],
+          "radius": 0.012,
+          "color": "tissue",
+          "tint": "token:ink-2",
+          "radial": 12,
+          "caps": "flat"
+        },
+        {
+          "kind": "sweep",
+          "at": [
+            3.185,
+            -1.155,
+            0.35
+          ],
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.015,
+              0.23,
+              0
+            ]
+          ],
+          "radius": 0.012,
+          "color": "tissue",
+          "tint": "token:ink-2",
+          "radial": 12,
+          "caps": "flat"
+        },
+        {
+          "kind": "sweep",
+          "at": [
+            3.415,
+            -1.155,
+            0.35
+          ],
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.015,
+              0.13,
+              0
+            ]
+          ],
+          "radius": 0.012,
+          "color": "tissue",
+          "tint": "token:ink-2",
+          "radial": 12,
+          "caps": "flat"
+        },
+        {
+          "kind": "sweep",
+          "at": [
+            3.45,
+            -1.155,
+            0.35
+          ],
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.015,
+              0.18,
+              0
+            ]
+          ],
+          "radius": 0.012,
+          "color": "tissue",
+          "tint": "token:ink-2",
+          "radial": 12,
+          "caps": "flat"
+        },
+        {
+          "kind": "sweep",
+          "at": [
+            3.485,
+            -1.155,
+            0.35
+          ],
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.015,
+              0.23,
+              0
+            ]
+          ],
+          "radius": 0.012,
+          "color": "tissue",
+          "tint": "token:ink-2",
+          "radial": 12,
+          "caps": "flat"
+        }
+      ],
+      "clip": false,
+      "short": {
+        "en": "Hair cells",
+        "zh": "毛细胞"
+      },
+      "connects": [
+        "basilar-strip",
+        "auditory-nerve"
+      ]
+    },
+    {
+      "id": "auditory-nerve",
+      "group": "ear-receiver",
+      "name": {
+        "en": "Auditory nerve",
+        "zh": "听神经"
+      },
+      "summary": {
+        "en": "The auditory nerve carries hearing signals toward the brain.",
+        "zh": "听神经把听觉信号传向大脑。"
+      },
+      "detail": {
+        "en": "The auditory nerve carries electrical signals from the cochlea toward the brain. Outside air particles do not travel along this nerve. [S7]\n\nThe tube is a schematic nerve bundle. The signal route connects the enlarged sensory-cell window to this route for teaching; its length and the speed of markers are not biological measurements. [S31]",
+        "zh": "听神经把来自耳蜗的电信号传向大脑。外界空气粒子不会沿这条神经传到脑里。[S7]\n\n管状形体表示神经束。为了教学，信号路径把放大的感受细胞窗接向这一通路；路径长度和标记速度都不是生理测量。[S31]"
+      },
+      "primitive": {
+        "kind": "sweep",
+        "at": [
+          3.01,
+          0.12,
+          -0.22
+        ],
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.23,
+            0.14,
+            -0.02
+          ],
+          [
+            0.53,
+            0.13,
+            -0.07
+          ],
+          [
+            0.73,
+            0.15,
+            -0.12
+          ]
+        ],
+        "radius": [
+          0.11,
+          0.12,
+          0.1,
+          0.09
+        ],
+        "color": "nerve",
+        "tint": "token:bone",
+        "radial": 12
+      },
+      "castShadow": false,
+      "short": {
+        "en": "Hearing nerve",
+        "zh": "听神经"
+      },
+      "connects": [
+        "cochlea-shell"
+      ]
+    },
+    {
+      "id": "balance-context",
+      "group": "ear-receiver",
+      "name": {
+        "en": "Balance organs",
+        "zh": "平衡结构"
+      },
+      "summary": {
+        "en": "Nearby vestibular structures help sense head movement and balance.",
+        "zh": "附近的前庭结构帮助感知头部运动与平衡。"
+      },
+      "detail": {
+        "en": "The vestibular structures, including the semicircular canals, lie beside the cochlea. They help with balance and are distinct from the hearing pathway taught here. [S8]\n\nThree simplified loops locate this neighbouring system. No balance experiment, fluid response or individual vestibular function is simulated. [S31]",
+        "zh": "前庭结构包括半规管，位于耳蜗附近，帮助维持平衡，与这里讲述的听觉通路功能不同。[S8]\n\n三个简化环只用来定位邻近系统，不模拟平衡实验、液体响应或个人前庭功能。[S31]"
+      },
+      "primitive": {
+        "kind": "sweep",
+        "at": [
+          2.57,
+          0.3,
+          -0.24
+        ],
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            -0.23,
+            0.23,
+            -0.05
+          ],
+          [
+            -0.2,
+            0.55,
+            -0.08
+          ],
+          [
+            0.02,
+            0.65,
+            -0.09
+          ],
+          [
+            0.19,
+            0.48,
+            -0.07
+          ],
+          [
+            0.13,
+            0.18,
+            -0.03
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "radius": 0.04,
+        "color": "tissue",
+        "tint": "token:ink-3",
+        "radial": 12,
+        "closed": true
+      },
+      "castShadow": false,
+      "extra": [
+        {
+          "kind": "sweep",
+          "at": [
+            2.57,
+            0.3,
+            -0.24
+          ],
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.05,
+              0.23,
+              -0.23
+            ],
+            [
+              0.11,
+              0.49,
+              -0.34
+            ],
+            [
+              0.29,
+              0.52,
+              -0.24
+            ],
+            [
+              0.36,
+              0.29,
+              -0.08
+            ],
+            [
+              0.2,
+              0.08,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "radius": 0.04,
+          "color": "tissue",
+          "tint": "token:ink-3",
+          "radial": 12,
+          "closed": true
+        },
+        {
+          "kind": "sweep",
+          "at": [
+            2.57,
+            0.3,
+            -0.24
+          ],
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -0.25,
+              0.07,
+              -0.12
+            ],
+            [
+              -0.37,
+              0.22,
+              -0.31
+            ],
+            [
+              -0.19,
+              0.29,
+              -0.43
+            ],
+            [
+              0.04,
+              0.21,
+              -0.31
+            ],
+            [
+              0.12,
+              0.05,
+              -0.1
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "radius": 0.04,
+          "color": "tissue",
+          "tint": "token:ink-3",
+          "radial": 12,
+          "closed": true
+        }
+      ],
+      "short": {
+        "en": "Balance",
+        "zh": "平衡结构"
+      }
+    },
+    {
+      "id": "object-top",
+      "group": "study-bench",
+      "name": {
+        "en": "Object top",
+        "zh": "物体上部"
+      },
+      "summary": {
+        "en": "This point marks the upper part of the model object.",
+        "zh": "这一点表示模型物体的上部。"
+      },
+      "detail": {
+        "en": "The upper point supplies one set of rays to the effective lens. At the receiver its beam centre lies below the optical axis. [S11]\n\nThe model height is one model centimetre. The bench draws heights twenty times taller than distances so the inverted image and any blur can be seen; this vertical exaggeration is schematic. This larger amber point and the smaller teal lower point, with their matching rays, make the inversion readable without drawing a photographic image; these are design values, not eye measurements. [S31]",
+        "zh": "物体上部的一点向有效透镜提供一组光线；在接收面上，这束光的中心位于光轴下方。[S11]\n\n模型高度为一模型厘米。为了看清倒像和光斑，实验台把高度画成距离的二十倍，这是示意性的竖向放大。较大的琥珀色上点、较小的青色下点及各自同色的光线帮助辨认倒立关系，不表示完整照片；这些是设计值，不是眼球测量。[S31]"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          -3.4,
+          -1.2,
+          1.3
+        ],
+        "size": [
+          0.04
+        ],
+        "color": "token:ray-top"
+      },
+      "castShadow": false,
+      "clip": false,
+      "connects": [
+        "retinal-screen"
+      ]
+    },
+    {
+      "id": "object-bottom",
+      "group": "study-bench",
+      "name": {
+        "en": "Object bottom",
+        "zh": "物体下部"
+      },
+      "summary": {
+        "en": "This point marks the lower part of the model object.",
+        "zh": "这一点表示模型物体的下部。"
+      },
+      "detail": {
+        "en": "The lower point supplies the other three rays in the optical model. Its beam centre reaches the upper part of the receiver. [S11]\n\nIts height is minus half a model centimetre, drawn with the same twentyfold vertical exaggeration as the rest of the bench. The two unequal marker sizes and colours belong to the teaching object and do not represent a living structure. [S31]",
+        "zh": "模型下部的一点提供另一组三条光线，它的光束中心到达接收面的上部。[S11]\n\n高度为负半模型厘米，与整个实验台一样按二十倍竖向放大绘制。两个大小、颜色不同的标记只属于教学物体，不表示生物结构。[S31]"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          -3.4,
+          -3,
+          1.3
+        ],
+        "size": [
+          0.026
+        ],
+        "color": "token:ray-bottom"
+      },
+      "castShadow": false,
+      "clip": false,
+      "connects": [
+        "object-top"
+      ]
+    },
+    {
+      "id": "retinal-screen",
+      "group": "study-bench",
+      "name": {
+        "en": "Model receiver",
+        "zh": "模型接收面"
+      },
+      "summary": {
+        "en": "The fixed receiver shows where the model light bundle arrives.",
+        "zh": "固定接收面显示模型光束落在哪里。"
+      },
+      "detail": {
+        "en": "This receiver represents the retina in the separate effective-lens model. Light rays terminate at the receiver; a focused point or blur is derived from the same thin-lens geometry as the readouts. [S11]\n\nIt stays four model centimetres behind the effective lens. Heights on the bench, including the spot, are drawn twenty times taller than distances (a schematic vertical exaggeration). This frame is not a second anatomical retina, and its dimensions are design values rather than human measurements. [S31]",
+        "zh": "这一接收面在独立有效透镜模型中代表视网膜。光线到这里为止；清晰点或散开的光斑与读数使用同一套薄透镜几何计算。[S11]\n\n它固定在有效透镜后四模型厘米。实验台上的高度（包括光斑）都画成距离的二十倍，这是示意性的竖向放大。线框不是另一层解剖视网膜，尺寸是设计值，不是人体测量。[S31]"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          -0.76,
+          -2.4,
+          1.3
+        ],
+        "size": [
+          0.008,
+          0.9,
+          0.008
+        ],
+        "color": "token:ink-2"
+      },
+      "castShadow": false,
+      "extra": [
+        {
+          "kind": "box",
+          "at": [
+            -0.76,
+            -2.85,
+            1.3
+          ],
+          "size": [
+            0.008,
+            0.008,
+            0.1
+          ],
+          "color": "token:ink-2"
+        },
+        {
+          "kind": "box",
+          "at": [
+            -0.76,
+            -1.95,
+            1.3
+          ],
+          "size": [
+            0.008,
+            0.008,
+            0.1
+          ],
+          "color": "token:ink-2"
+        },
+        {
+          "kind": "lathe",
+          "at": [
+            -1,
+            -2.4,
+            1.3
+          ],
+          "profile": [
+            [
+              0,
+              -0.014
+            ],
+            [
+              0.1,
+              -0.01
+            ],
+            [
+              0.17,
+              0
+            ],
+            [
+              0.1,
+              0.01
+            ],
+            [
+              0,
+              0.014
+            ]
+          ],
+          "segments": 32,
+          "rotation": [
+            0,
+            0,
+            -90
+          ],
+          "color": "tissue",
+          "tint": "token:ink-3",
+          "scale": [
+            1,
+            1,
+            0.35
+          ]
+        }
+      ],
+      "clip": false,
+      "short": {
+        "en": "Receiver",
+        "zh": "接收面"
+      }
+    },
+    {
+      "id": "signal-marker",
+      "group": "ear-receiver",
+      "name": {
+        "en": "Signal",
+        "zh": "信号"
+      },
+      "summary": {
+        "en": "This marker identifies the start of the hearing-signal route.",
+        "zh": "这一标记指出听觉信号通路的起点。"
+      },
+      "detail": {
+        "en": "Electrical signalling begins after sensory transduction, rather than being a continuation of incoming light or a stream of outside air. [S2, S7]\n\nThe small marker sits beside the enlarged hair-cell window. Moving route markers represent signals only, and their size and speed are chosen for visibility. [S31]",
+        "zh": "感受结构转导之后才开始电信号传递；它不是入射光的延续，也不是外界空气流。[S2, S7]\n\n小标记位于放大毛细胞窗旁。路径中的移动标记只表示信号，大小与速度按可见性设计。[S31]"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          3.89,
+          -1.54,
+          0.35
+        ],
+        "size": [
+          0.045
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "color": "tissue",
+        "tint": "token:ink-2"
+      },
+      "castShadow": false,
+      "clip": false,
+      "connects": [
+        "hair-patch",
+        "auditory-nerve"
+      ]
+    },
+    {
+      "id": "wave-reference",
+      "group": "study-bench",
+      "name": {
+        "en": "Particle reference",
+        "zh": "粒子参照"
+      },
+      "summary": {
+        "en": "The rest mark shows that a medium particle moves locally back and forth.",
+        "zh": "静止位置标记显示介质粒子只在附近来回运动。"
+      },
+      "detail": {
+        "en": "In a longitudinal sound wave, medium particles move back and forth about their rest positions while the wave pattern travels. A particle does not make the journey from a source to the ear. [S9]\n\nThis fixed tick marks the highlighted particle’s rest position. The silent model uses a fixed slowdown factor and relative displacement; it is not a sound-level meter or a hearing test. [S31]",
+        "zh": "纵向声波中的介质粒子在静止位置附近往复，而波的形态向前传播。粒子不会从声源一路走到耳朵。[S9]\n\n固定短刻度标出高亮粒子的静止位置。无声模型使用固定慢放倍率与相对位移，不是声级计或听力测试。[S31]"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          1.25,
+          -1.5,
+          1.29
+        ],
+        "size": [
+          0.006,
+          0.1,
+          0.006
+        ],
+        "color": "token:ink-2"
+      },
+      "castShadow": false,
+      "extra": [
+        {
+          "kind": "box",
+          "at": [
+            0.985,
+            -1.53,
+            1.29
+          ],
+          "size": [
+            0.006,
+            0.07,
+            0.006
+          ],
+          "color": "token:ink-3"
+        },
+        {
+          "kind": "box",
+          "at": [
+            3.015,
+            -1.53,
+            1.29
+          ],
+          "size": [
+            0.006,
+            0.07,
+            0.006
+          ],
+          "color": "token:ink-3"
+        }
+      ],
+      "clip": false,
+      "short": {
+        "en": "Rest position",
+        "zh": "静止位置"
+      }
+    },
+    {
+      "id": "iris-aperture-small",
+      "name": {
+        "en": "Small iris aperture",
+        "zh": "虹膜小开口"
+      },
+      "group": "eye-front",
+      "context": true,
+      "castShadow": false,
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          -2.68,
+          0,
+          0
+        ],
+        "profile": [
+          [
+            0.12,
+            -0.009
+          ],
+          [
+            0.5,
+            -0.009
+          ],
+          [
+            0.5,
+            0.009
+          ],
+          [
+            0.12,
+            0.009
+          ],
+          [
+            0.12,
+            -0.009
+          ]
+        ],
+        "segments": 48,
+        "rotation": [
+          0,
+          0,
+          -90
+        ],
+        "color": "tissue",
+        "tint": "token:ink-2"
+      },
+      "summary": {
+        "en": "This insert shows one model pupil opening.",
+        "zh": "这张薄片显示一档模型瞳孔开口。"
+      },
+      "detail": {
+        "en": "Original schematic annulus with a fixed outer diameter and a control-selected inner aperture. It is non-selectable context belonging to the iris. [S31]",
+        "zh": "原创环形示意保持外径不变，由控件选择内孔。这是属于虹膜的不可选中背景件。[S31]"
+      }
+    },
+    {
+      "id": "iris-aperture-large",
+      "name": {
+        "en": "Large iris aperture",
+        "zh": "虹膜大开口"
+      },
+      "group": "eye-front",
+      "context": true,
+      "castShadow": false,
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          -2.68,
+          0,
+          0
+        ],
+        "profile": [
+          [
+            0.24,
+            -0.009
+          ],
+          [
+            0.5,
+            -0.009
+          ],
+          [
+            0.5,
+            0.009
+          ],
+          [
+            0.24,
+            0.009
+          ],
+          [
+            0.24,
+            -0.009
+          ]
+        ],
+        "segments": 48,
+        "rotation": [
+          0,
+          0,
+          -90
+        ],
+        "color": "tissue",
+        "tint": "token:ink-2"
+      },
+      "summary": {
+        "en": "This insert shows one model pupil opening.",
+        "zh": "这张薄片显示一档模型瞳孔开口。"
+      },
+      "detail": {
+        "en": "Original schematic annulus with a fixed outer diameter and a control-selected inner aperture. It is non-selectable context belonging to the iris. [S31]",
+        "zh": "原创环形示意保持外径不变，由控件选择内孔。这是属于虹膜的不可选中背景件。[S31]"
+      }
+    }
+  ],
+  "groups": [
+    {
+      "id": "eye-front",
+      "name": {
+        "en": "Eye entrance",
+        "zh": "眼前部"
+      },
+      "color": "token:ink-2"
+    },
+    {
+      "id": "eye-receiver",
+      "name": {
+        "en": "Retina and nerve",
+        "zh": "视网膜与神经"
+      },
+      "color": "token:ink-2"
+    },
+    {
+      "id": "ear-transfer",
+      "name": {
+        "en": "Eardrum and bones",
+        "zh": "鼓膜与听骨"
+      },
+      "color": "token:ink-2"
+    },
+    {
+      "id": "ear-receiver",
+      "name": {
+        "en": "Cochlea and nerve",
+        "zh": "耳蜗与神经"
+      },
+      "color": "token:ink-2"
+    },
+    {
+      "id": "study-bench",
+      "name": {
+        "en": "Model studies",
+        "zh": "示意实验"
+      },
+      "color": "token:ink-2",
+      "card": false
+    },
+    {
+      "id": "nerve-signals",
+      "name": {
+        "en": "Nerve signals",
+        "zh": "神经信号"
+      },
+      "color": "token:en-electrical"
+    }
+  ],
+  "flows": [
+    {
+      "id": "optic-signal",
+      "group": "nerve-signals",
+      "path": [
+        [
+          -1.17,
+          0.03,
+          -0.12
+        ],
+        [
+          -1.08,
+          0.02,
+          -0.12
+        ],
+        [
+          -0.92,
+          0,
+          -0.16
+        ],
+        [
+          -0.69,
+          -0.05,
+          -0.23
+        ]
+      ],
+      "speed": 0.22,
+      "color": "token:en-electrical",
+      "count": 18,
+      "size": 0.7,
+      "spread": 0.006,
+      "parts": [
+        "retina",
+        "optic-nerve"
+      ],
+      "clip": false
+    },
+    {
+      "id": "auditory-signal",
+      "group": "nerve-signals",
+      "path": [
+        [
+          3.89,
+          -1.54,
+          0.35
+        ],
+        [
+          3.95,
+          -1.2,
+          0.3
+        ],
+        [
+          3.81,
+          -0.82,
+          0.23
+        ],
+        [
+          3.62,
+          -0.42,
+          -0.05
+        ],
+        [
+          3.22,
+          -0.05,
+          -0.18
+        ],
+        [
+          3.01,
+          0.12,
+          -0.22
+        ],
+        [
+          3.24,
+          0.26,
+          -0.24
+        ],
+        [
+          3.54,
+          0.25,
+          -0.29
+        ],
+        [
+          3.74,
+          0.27,
+          -0.34
+        ]
+      ],
+      "speed": 0.28,
+      "color": "token:en-electrical",
+      "count": 32,
+      "size": 0.7,
+      "spread": 0.006,
+      "parts": [
+        "hair-patch",
+        "auditory-nerve"
+      ],
+      "clip": false
+    }
+  ],
+  "animations": [
+    {
+      "id": "drum-vibrate",
+      "target": "eardrum",
+      "kind": "sequence",
+      "loop": true,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 0.25,
+          "offset": [
+            0.008,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 0.5,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 0.75,
+          "offset": [
+            -0.008,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 1,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "malleus-rock",
+      "target": "malleus",
+      "kind": "oscillate",
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "amplitude": 1.5,
+      "hz": 1,
+      "pivot": [
+        1.68,
+        0.26,
+        -0.065
+      ]
+    },
+    {
+      "id": "incus-rock",
+      "target": "incus",
+      "kind": "oscillate",
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "amplitude": 1.3,
+      "hz": 1,
+      "pivot": [
+        1.86,
+        0.25,
+        -0.065
+      ]
+    },
+    {
+      "id": "stapes-piston",
+      "target": "stapes",
+      "kind": "sequence",
+      "loop": true,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 0.25,
+          "offset": [
+            0.008,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 0.5,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 0.75,
+          "offset": [
+            -0.008,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 1,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "basilar-wave",
+      "target": "basilar-strip",
+      "kind": "sequence",
+      "loop": true,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 0.25,
+          "offset": [
+            0,
+            0.045,
+            0
+          ]
+        },
+        {
+          "t": 0.5,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 0.75,
+          "offset": [
+            0,
+            -0.045,
+            0
+          ]
+        },
+        {
+          "t": 1,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bundle-bend",
+      "target": "hair-patch",
+      "kind": "sequence",
+      "loop": true,
+      "pivot": [
+        3.15,
+        -1.155,
+        0.35
+      ],
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 0.25,
+          "offset": [
+            0,
+            0.045,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            5
+          ]
+        },
+        {
+          "t": 0.5,
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 0.75,
+          "offset": [
+            0,
+            -0.045,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            -5
+          ]
+        },
+        {
+          "t": 1,
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "poses": {
+    "lens-far": {
+      "lens": {
+        "pivot": [
+          -2.47,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "duration": 0.5
+    },
+    "lens-near": {
+      "lens": {
+        "pivot": [
+          -2.47,
+          0,
+          0
+        ],
+        "scale": [
+          1.5,
+          0.88,
+          0.88
+        ]
+      },
+      "duration": 0.5
+    },
+    "object-far": {
+      "object-top": {
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "object-bottom": {
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "duration": 0.3
+    },
+    "object-near": {
+      "object-top": {
+        "offset": [
+          1.68,
+          0,
+          0
+        ]
+      },
+      "object-bottom": {
+        "offset": [
+          1.68,
+          0,
+          0
+        ]
+      },
+      "duration": 0.3
+    }
+  },
+  "views": {
+    "assembled": {
+      "camera": {
+        "position": [
+          0,
+          2,
+          11.8
+        ],
+        "target": [
+          0.2,
+          0,
+          0
+        ],
+        "fov": 32
+      }
+    },
+    "exploded": {
+      "camera": {
+        "position": [
+          2,
+          1,
+          5.4
+        ],
+        "target": [
+          2.1,
+          0.02,
+          -0.05
+        ],
+        "fov": 30
+      }
+    },
+    "cutaway": {
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "offset": 0
+    },
+    "section": {
+      "plane": "xy"
+    },
+    "cover": {
+      "position": [
+        0,
+        2,
+        11.8
+      ],
+      "target": [
+        0.2,
+        0,
+        0
+      ],
+      "fov": 32
+    },
+    "hudFrame": {
+      "parts": [
+        "cornea",
+        "sclera-shell",
+        "object-top",
+        "object-bottom",
+        "retinal-screen",
+        "pinna",
+        "cochlea-shell",
+        "auditory-nerve",
+        "basilar-strip",
+        "hair-patch",
+        "signal-marker",
+        "wave-reference"
+      ]
+    },
+    "insets": [
+      {
+        "id": "hair-cell-window",
+        "parts": [
+          "basilar-strip",
+          "hair-patch",
+          "signal-marker"
+        ],
+        "label": {
+          "en": "Enlarged schematic · different scale",
+          "zh": "放大示意·非同一比例"
+        }
+      }
+    ],
+    "cuts": {
+      "eye-cut": {
+        "normal": [
+          0,
+          0,
+          -1
+        ],
+        "offset": 0,
+        "label": {
+          "en": "Eye section",
+          "zh": "眼部剖面"
+        }
+      },
+      "ear-cut": {
+        "normal": [
+          0,
+          0,
+          -1
+        ],
+        "offset": 0,
+        "label": {
+          "en": "Ear section",
+          "zh": "耳部剖面"
+        }
+      }
+    }
+  },
+  "presets": [
+    {
+      "id": "overview",
+      "label": {
+        "en": "OVERVIEW",
+        "zh": "总览"
+      },
+      "camera": {
+        "position": [
+          0,
+          2,
+          11.8
+        ],
+        "target": [
+          0.2,
+          0,
+          0
+        ],
+        "fov": 32
+      }
+    },
+    {
+      "id": "eye",
+      "label": {
+        "en": "EYE",
+        "zh": "眼睛"
+      },
+      "camera": {
+        "position": [
+          -4.3,
+          1.1,
+          4.8
+        ],
+        "target": [
+          -2,
+          0,
+          0
+        ],
+        "fov": 28
+      }
+    },
+    {
+      "id": "focus-bench",
+      "label": {
+        "en": "FOCUS",
+        "zh": "聚焦"
+      },
+      "camera": {
+        "position": [
+          -2.05,
+          -0.45,
+          9.4
+        ],
+        "target": [
+          -2.05,
+          -1,
+          0.7
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "ear",
+      "label": {
+        "en": "EAR",
+        "zh": "耳朵"
+      },
+      "camera": {
+        "position": [
+          2,
+          1,
+          5.4
+        ],
+        "target": [
+          2.1,
+          0.02,
+          -0.05
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "cochlea",
+      "label": {
+        "en": "COCHLEA",
+        "zh": "耳蜗"
+      },
+      "camera": {
+        "position": [
+          2.95,
+          0.25,
+          5.9
+        ],
+        "target": [
+          3,
+          -0.45,
+          0.1
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "wave",
+      "label": {
+        "en": "VIBRATION",
+        "zh": "振动"
+      },
+      "camera": {
+        "position": [
+          2.1,
+          -0.05,
+          6.3
+        ],
+        "target": [
+          2.1,
+          -0.5,
+          0.65
+        ],
+        "fov": 28
+      }
+    }
+  ],
+  "spec": [
+    {
+      "key": {
+        "en": "Model",
+        "zh": "模型"
+      },
+      "value": {
+        "en": "Original schematic · separate scales",
+        "zh": "原创示意·各工位比例不同"
+      },
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Optics",
+        "zh": "光学"
+      },
+      "value": {
+        "en": "Cornea + lens → one effective lens",
+        "zh": "角膜与晶状体合成一个有效透镜"
+      },
+      "tag": "sim"
+    },
+    {
+      "key": {
+        "en": "Bench heights",
+        "zh": "实验台高度"
+      },
+      "value": {
+        "en": "Vertical ×20 · schematic",
+        "zh": "竖向放大 ×20·示意"
+      },
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Hair-cell window",
+        "zh": "毛细胞窗"
+      },
+      "value": {
+        "en": "Enlarged schematic · different scale",
+        "zh": "放大示意·非同一比例"
+      },
+      "tag": "design"
+    }
+  ],
+  "sim": {
+    "kind": "senses",
+    "controls": [
+      {
+        "id": "light-in",
+        "kind": "toggle",
+        "label": {
+          "en": "Incoming light",
+          "zh": "入射光"
+        },
+        "default": true
+      },
+      {
+        "id": "pupil-mm",
+        "kind": "step",
+        "label": {
+          "en": "Model aperture",
+          "zh": "模型孔径"
+        },
+        "default": 2,
+        "values": [
+          2,
+          4
+        ],
+        "unit": "mm"
+      },
+      {
+        "id": "object-range",
+        "kind": "choice",
+        "label": {
+          "en": "Object distance",
+          "zh": "物距"
+        },
+        "default": "far",
+        "options": [
+          {
+            "id": "near",
+            "label": {
+              "en": "Near",
+              "zh": "近"
+            }
+          },
+          {
+            "id": "far",
+            "label": {
+              "en": "Far",
+              "zh": "远"
+            }
+          }
+        ]
+      },
+      {
+        "id": "lens-focus",
+        "kind": "choice",
+        "label": {
+          "en": "Focus setting",
+          "zh": "聚焦设置"
+        },
+        "default": "far",
+        "options": [
+          {
+            "id": "near",
+            "label": {
+              "en": "Near",
+              "zh": "近"
+            }
+          },
+          {
+            "id": "far",
+            "label": {
+              "en": "Far",
+              "zh": "远"
+            }
+          }
+        ]
+      },
+      {
+        "id": "sound-active",
+        "kind": "toggle",
+        "label": {
+          "en": "Vibration active",
+          "zh": "振动启用"
+        },
+        "default": true
+      },
+      {
+        "id": "frequency-hz",
+        "kind": "step",
+        "label": {
+          "en": "Example frequency",
+          "zh": "示例频率"
+        },
+        "default": 250,
+        "values": [
+          250,
+          500
+        ],
+        "unit": "Hz"
+      },
+      {
+        "id": "amplitude",
+        "kind": "step",
+        "label": {
+          "en": "Relative displacement",
+          "zh": "相对位移"
+        },
+        "default": 1,
+        "values": [
+          1,
+          2
+        ],
+        "unit": "×"
+      }
+    ],
+    "outputs": [
+      {
+        "id": "aperture-area",
+        "from": "aperture-area",
+        "kind": "number",
+        "label": {
+          "en": "Aperture area",
+          "zh": "开口面积"
+        },
+        "unit": "mm²",
+        "decimals": 3
+      },
+      {
+        "id": "relative-light",
+        "from": "relative-light",
+        "kind": "number",
+        "label": {
+          "en": "Relative incoming light",
+          "zh": "相对进光量"
+        },
+        "unit": "×",
+        "decimals": 0
+      },
+      {
+        "id": "image-distance",
+        "from": "image-distance",
+        "kind": "number",
+        "label": {
+          "en": "Image distance",
+          "zh": "像距"
+        },
+        "unit": "model cm",
+        "decimals": 3
+      },
+      {
+        "id": "magnification",
+        "from": "magnification",
+        "kind": "number",
+        "label": {
+          "en": "Focal-plane magnification",
+          "zh": "焦面放大率"
+        },
+        "unit": "×",
+        "decimals": 3
+      },
+      {
+        "id": "retinal-top-y",
+        "from": "retinal-top-y",
+        "kind": "number",
+        "label": {
+          "en": "Receiver centre height",
+          "zh": "接收面光束中心高度"
+        },
+        "unit": "model cm",
+        "decimals": 3
+      },
+      {
+        "id": "blur-diameter",
+        "from": "blur-diameter",
+        "kind": "number",
+        "label": {
+          "en": "Geometric blur diameter",
+          "zh": "几何光斑直径"
+        },
+        "unit": "model cm",
+        "decimals": 3
+      },
+      {
+        "id": "focus-state",
+        "from": "focus-state",
+        "kind": "state",
+        "label": {
+          "en": "Geometric focus",
+          "zh": "几何焦点"
+        },
+        "states": {
+          "on-retina": {
+            "en": "On receiver",
+            "zh": "在接收面上"
+          },
+          "before-retina": {
+            "en": "Before receiver",
+            "zh": "在接收面前"
+          },
+          "behind-retina": {
+            "en": "Behind receiver",
+            "zh": "在接收面后"
+          }
+        }
+      },
+      {
+        "id": "eye-state",
+        "from": "eye-state",
+        "kind": "state",
+        "label": {
+          "en": "Light state",
+          "zh": "光照状态"
+        },
+        "states": {
+          "dark": {
+            "en": "Dark · geometry prediction",
+            "zh": "暗处·几何预测"
+          },
+          "lit": {
+            "en": "Lit",
+            "zh": "有光"
+          }
+        }
+      },
+      {
+        "id": "visual-hz",
+        "from": "visual-hz",
+        "kind": "number",
+        "label": {
+          "en": "Displayed frequency",
+          "zh": "显示频率"
+        },
+        "unit": "Hz",
+        "decimals": 0
+      },
+      {
+        "id": "wavelength-scene",
+        "from": "wavelength-scene",
+        "kind": "number",
+        "label": {
+          "en": "Model wavelength · scene units",
+          "zh": "模型波长·场景单位"
+        },
+        "unit": "u",
+        "decimals": 3
+      },
+      {
+        "id": "displacement-max",
+        "from": "displacement-max",
+        "kind": "number",
+        "label": {
+          "en": "Maximum model displacement · scene units",
+          "zh": "模型最大位移·场景单位"
+        },
+        "unit": "u",
+        "decimals": 3
+      },
+      {
+        "id": "amplitude-level",
+        "from": "amplitude-level",
+        "kind": "number",
+        "label": {
+          "en": "Relative displacement amplitude",
+          "zh": "相对位移振幅"
+        },
+        "unit": "×",
+        "decimals": 0
+      },
+      {
+        "id": "sound-state",
+        "from": "sound-state",
+        "kind": "state",
+        "label": {
+          "en": "Vibration state",
+          "zh": "振动状态"
+        },
+        "states": {
+          "still": {
+            "en": "Still",
+            "zh": "静止"
+          },
+          "vibrating": {
+            "en": "Vibrating",
+            "zh": "振动"
+          }
+        }
+      }
+    ],
+    "bind": [
+      {
+        "control": "pupil-mm",
+        "part": "iris-aperture-small",
+        "visible": {
+          "eq": 2
+        }
+      },
+      {
+        "control": "pupil-mm",
+        "part": "iris-aperture-large",
+        "visible": {
+          "eq": 4
+        }
+      },
+      {
+        "control": "lens-focus",
+        "part": "lens",
+        "pose": {
+          "far": "lens-far",
+          "near": "lens-near"
+        }
+      },
+      {
+        "control": "object-range",
+        "part": [
+          "object-top",
+          "object-bottom"
+        ],
+        "pose": {
+          "far": "object-far",
+          "near": "object-near"
+        }
+      },
+      {
+        "output": "visual-hz",
+        "animation": [
+          "drum-vibrate",
+          "malleus-rock",
+          "incus-rock",
+          "stapes-piston"
+        ],
+        "hz": {
+          "per": 1,
+          "origin": 0
+        }
+      },
+      {
+        "output": "sound-state",
+        "animation": [
+          "drum-vibrate",
+          "malleus-rock",
+          "incus-rock",
+          "stapes-piston"
+        ],
+        "enabled": {
+          "eq": "vibrating"
+        }
+      },
+      {
+        "control": "light-in",
+        "flow": "optic-signal",
+        "visible": {
+          "eq": true
+        }
+      },
+      {
+        "control": "sound-active",
+        "flow": "auditory-signal",
+        "visible": {
+          "eq": true
+        }
+      }
+    ],
+    "senses": {
+      "eye": {
+        "illumination": "light-in",
+        "pupilMm": "pupil-mm",
+        "object": "object-range",
+        "focus": "lens-focus",
+        "objectsCm": {
+          "near": 12,
+          "far": 40
+        },
+        "focalCm": {
+          "near": 3,
+          "far": 3.6363636363636362
+        },
+        "retinaCm": 4,
+        "referencePupilMm": 2,
+        "objectHeightsCm": [
+          1,
+          -0.5
+        ],
+        "sources": [
+          "S11",
+          "S31"
+        ]
+      },
+      "sound": {
+        "active": "sound-active",
+        "frequencyHz": "frequency-hz",
+        "amplitude": "amplitude",
+        "slowFactor": 250,
+        "baseFrequencyHz": 250,
+        "baseWavelengthScene": 1,
+        "baseDisplacementScene": 0.035,
+        "sources": [
+          "S9",
+          "S10",
+          "S31"
+        ]
+      }
+    },
+    "overlays": [
+      {
+        "kind": "paraxial-eye",
+        "group": "study-bench",
+        "model": "eye",
+        "origin": [
+          -1,
+          -2.4,
+          1.3
+        ],
+        "cmToScene": 0.06,
+        "yScale": 20,
+        "pointColors": [
+          "token:ray-top",
+          "token:ray-bottom"
+        ],
+        "halfApertureSamples": 1,
+        "when": {
+          "control": "light-in",
+          "is": true
+        }
+      },
+      {
+        "kind": "longitudinal-wave",
+        "group": "study-bench",
+        "model": "sound",
+        "origin": [
+          1,
+          -1.5,
+          1.3
+        ],
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "count": 41,
+        "spacing": 0.05,
+        "referenceIndex": 5,
+        "when": {
+          "control": "sound-active",
+          "is": true
+        }
+      }
+    ]
+  }
+}

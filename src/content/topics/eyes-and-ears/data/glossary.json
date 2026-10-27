@@ -1,0 +1,269 @@
+{
+  "terms": [
+    {
+      "id": "cornea",
+      "term": {
+        "en": "Cornea",
+        "zh": "角膜"
+      },
+      "definition": {
+        "en": "The clear curved front surface of the eye, which admits and bends light.",
+        "zh": "眼前透明、弯曲的表面，让光进入并折光。"
+      },
+      "see": [
+        "lens",
+        "iris"
+      ]
+    },
+    {
+      "id": "pupil",
+      "term": {
+        "en": "Pupil",
+        "zh": "瞳孔"
+      },
+      "definition": {
+        "en": "The opening in the iris through which light enters the eye.",
+        "zh": "虹膜中央让光进入眼内的开口。"
+      },
+      "see": [
+        "iris"
+      ]
+    },
+    {
+      "id": "iris",
+      "term": {
+        "en": "Iris",
+        "zh": "虹膜"
+      },
+      "definition": {
+        "en": "The coloured ring that controls the size of the pupil opening.",
+        "zh": "调节瞳孔开口大小的有色环形结构。"
+      },
+      "see": [
+        "pupil",
+        "lens"
+      ]
+    },
+    {
+      "id": "lens",
+      "term": {
+        "en": "Lens",
+        "zh": "晶状体"
+      },
+      "definition": {
+        "en": "A clear inner structure that works with the cornea to focus light and changes shape during accommodation.",
+        "zh": "与角膜共同聚焦光线的眼内透明结构，调节时会改变形状。"
+      },
+      "see": [
+        "cornea",
+        "retina"
+      ]
+    },
+    {
+      "id": "retina",
+      "term": {
+        "en": "Retina",
+        "zh": "视网膜"
+      },
+      "definition": {
+        "en": "The light-sensitive tissue lining the back of the eye; its cells begin conversion from light to electrical signalling.",
+        "zh": "眼内后部能感光的薄层组织，其中细胞开始把光转成电信号。"
+      },
+      "see": [
+        "optic-nerve"
+      ]
+    },
+    {
+      "id": "optic-nerve",
+      "term": {
+        "en": "Optic nerve",
+        "zh": "视神经"
+      },
+      "definition": {
+        "en": "The nerve carrying signals from the retina towards the brain.",
+        "zh": "把视网膜信号传向大脑的神经。"
+      },
+      "see": [
+        "retina"
+      ]
+    },
+    {
+      "id": "myopia",
+      "term": {
+        "en": "Myopia",
+        "zh": "近视"
+      },
+      "definition": {
+        "en": "A refractive condition in which distant light focuses in front of the retina and distant objects can look blurred.",
+        "zh": "远处光聚在视网膜前、远物可能模糊的屈光状况。"
+      },
+      "see": [
+        "retina",
+        "lens"
+      ]
+    },
+    {
+      "id": "eardrum",
+      "term": {
+        "en": "Eardrum",
+        "zh": "鼓膜"
+      },
+      "definition": {
+        "en": "The thin membrane at the end of the ear canal that vibrates in response to incoming sound.",
+        "zh": "外耳道尽头随传来声音振动的薄膜。"
+      },
+      "see": [
+        "ossicles"
+      ]
+    },
+    {
+      "id": "ossicles",
+      "term": {
+        "en": "Ossicles",
+        "zh": "听小骨"
+      },
+      "definition": {
+        "en": "The three connected middle-ear bones: malleus, incus and stapes.",
+        "zh": "中耳里相连的锤骨、砧骨与镫骨的合称。"
+      },
+      "see": [
+        "malleus",
+        "incus",
+        "stapes"
+      ]
+    },
+    {
+      "id": "malleus",
+      "term": {
+        "en": "Malleus",
+        "zh": "锤骨"
+      },
+      "definition": {
+        "en": "The ossicle whose handle contacts the eardrum and whose head meets the incus.",
+        "zh": "柄部接鼓膜、头部与砧骨相接的听小骨。"
+      },
+      "see": [
+        "incus",
+        "eardrum"
+      ]
+    },
+    {
+      "id": "incus",
+      "term": {
+        "en": "Incus",
+        "zh": "砧骨"
+      },
+      "definition": {
+        "en": "The middle member of the ossicle chain, linking malleus and stapes.",
+        "zh": "听骨链中间连接锤骨与镫骨的骨。"
+      },
+      "see": [
+        "malleus",
+        "stapes"
+      ]
+    },
+    {
+      "id": "stapes",
+      "term": {
+        "en": "Stapes",
+        "zh": "镫骨"
+      },
+      "definition": {
+        "en": "The stirrup-shaped ossicle whose footplate moves at the oval window.",
+        "zh": "形似马镫、底板在卵圆窗处活动的听小骨。"
+      },
+      "see": [
+        "incus",
+        "cochlea"
+      ]
+    },
+    {
+      "id": "cochlea",
+      "term": {
+        "en": "Cochlea",
+        "zh": "耳蜗"
+      },
+      "definition": {
+        "en": "The curled, fluid-filled hearing structure of the inner ear, containing sensory structures that convert movement into signals.",
+        "zh": "内耳里卷曲、充满液体的听觉结构，感受结构把运动连接到信号传递。"
+      },
+      "see": [
+        "hair-cell",
+        "auditory-nerve"
+      ]
+    },
+    {
+      "id": "hair-cell",
+      "term": {
+        "en": "Hair cell",
+        "zh": "毛细胞"
+      },
+      "definition": {
+        "en": "A sensory cell with a microscopic hair-like bundle whose bending helps initiate electrical signalling; not an ordinary hair.",
+        "zh": "带微小毛发状束的感受细胞，小束弯曲帮助启动电信号传递，不是普通毛发。"
+      },
+      "see": [
+        "cochlea",
+        "auditory-nerve"
+      ]
+    },
+    {
+      "id": "auditory-nerve",
+      "term": {
+        "en": "Auditory nerve",
+        "zh": "听神经"
+      },
+      "definition": {
+        "en": "The nerve carrying hearing signals from the inner ear towards the brain.",
+        "zh": "把内耳听觉信号传向大脑的神经。"
+      },
+      "see": [
+        "cochlea"
+      ]
+    },
+    {
+      "id": "frequency",
+      "term": {
+        "en": "Frequency",
+        "zh": "频率"
+      },
+      "definition": {
+        "en": "The number of repeating cycles per unit time; hertz expresses cycles per second.",
+        "zh": "单位时间内重复振动的次数；赫兹表示每秒次数。"
+      },
+      "see": [
+        "pitch",
+        "amplitude"
+      ]
+    },
+    {
+      "id": "amplitude",
+      "term": {
+        "en": "Amplitude",
+        "zh": "振幅"
+      },
+      "definition": {
+        "en": "The maximum displacement from a rest position in an oscillation. Here it is a chosen relative particle displacement, not a decibel reading.",
+        "zh": "往复运动中离开静止位置的最大偏移；这里是选定的相对粒子位移，不是分贝读数。"
+      },
+      "see": [
+        "frequency",
+        "pitch"
+      ]
+    },
+    {
+      "id": "pitch",
+      "term": {
+        "en": "Pitch",
+        "zh": "音高"
+      },
+      "definition": {
+        "en": "The perceived highness or lowness of a sound, related to frequency.",
+        "zh": "声音听起来高或低的感觉，与频率有关。"
+      },
+      "see": [
+        "frequency"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,275 @@
+---
+{
+  "id": "pitch-and-strength",
+  "order": 6,
+  "title": {
+    "en": "Pitch and strength",
+    "zh": "音高与强弱"
+  },
+  "sensitive": false,
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "part": null,
+    "run": true,
+    "cutaway": "none",
+    "pose": null,
+    "ghost": [],
+    "layers": [
+      "ear-transfer",
+      "ear-receiver",
+      "study-bench"
+    ],
+    "hide": [
+      "basilar-strip",
+      "hair-patch",
+      "signal-marker",
+      "object-top",
+      "object-bottom",
+      "retinal-screen",
+      "balance-context",
+      "eustachian-tube"
+    ],
+    "labels": [
+      "wave-reference",
+      "eardrum",
+      "cochlea-shell"
+    ],
+    "camera": {
+      "position": [
+        2.1,
+        -0.05,
+        6.3
+      ],
+      "target": [
+        2.1,
+        -0.5,
+        0.65
+      ],
+      "fov": 28
+    },
+    "sim": {
+      "set": {
+        "light-in": false,
+        "pupil-mm": 2,
+        "object-range": "far",
+        "lens-focus": "far",
+        "sound-active": true,
+        "frequency-hz": 250,
+        "amplitude": 1
+      },
+      "try": {
+        "vary": "frequency-hz",
+        "also": [
+          "amplitude"
+        ],
+        "keep": [
+          "sound-active",
+          {
+            "en": "Same 250-fold visual slow factor",
+            "zh": "相同的 250 倍视觉慢放"
+          }
+        ],
+        "observe": [
+          "visual-hz",
+          "amplitude-level"
+        ],
+        "record": {
+          "chart": {
+            "y": "visual-hz"
+          }
+        },
+        "predict": {
+          "prompt": {
+            "en": "Keep relative displacement at one and double input frequency. What happens to displacement amplitude?",
+            "zh": "相对位移保持为一，输入频率加倍。位移振幅会怎样？"
+          },
+          "start": {
+            "frequency-hz": 250,
+            "amplitude": 1,
+            "sound-active": true
+          },
+          "change": {
+            "frequency-hz": 500
+          },
+          "observe": "amplitude-level",
+          "options": [
+            {
+              "id": "more",
+              "label": {
+                "en": "Increases",
+                "zh": "增加"
+              },
+              "means": "more"
+            },
+            {
+              "id": "less",
+              "label": {
+                "en": "Decreases",
+                "zh": "减少"
+              },
+              "means": "less"
+            },
+            {
+              "id": "same",
+              "label": {
+                "en": "Unchanged",
+                "zh": "不变"
+              },
+              "means": "same"
+            }
+          ]
+        }
+      }
+    },
+    "index": {
+      "parts": [
+        "wave-reference",
+        "eardrum",
+        "cochlea-shell"
+      ]
+    },
+    "beats": [
+      {
+        "part": "wave-reference",
+        "labels": [
+          "wave-reference"
+        ],
+        "sim": {
+          "set": {
+            "frequency-hz": 250,
+            "amplitude": 1
+          }
+        },
+        "caption": {
+          "en": "The highlighted particle moves back and forth about its rest point. This study is shown 250 times slower and emits no sound.",
+          "zh": "标出的粒子在静止位置附近来回运动。本示意以 250 倍慢放显示，不发出声音。"
+        }
+      },
+      {
+        "part": "wave-reference",
+        "labels": [
+          "wave-reference"
+        ],
+        "sim": {
+          "set": {
+            "frequency-hz": 250,
+            "amplitude": 1
+          }
+        },
+        "caption": {
+          "en": "The 250 hertz example is shown 250 times slower, at one cycle per second.",
+          "zh": "250 赫兹的例子以 250 倍慢放显示，即每秒一次。"
+        }
+      },
+      {
+        "part": "wave-reference",
+        "sim": {
+          "set": {
+            "frequency-hz": 500,
+            "amplitude": 1
+          }
+        },
+        "caption": {
+          "en": "Doubling frequency doubles the displayed pace; amplitude is unchanged. The same 250-fold slow factor remains.",
+          "zh": "频率变成两倍，显示节律也变成两倍；振幅不变，慢放倍率仍是 250。"
+        }
+      },
+      {
+        "part": "wave-reference",
+        "sim": {
+          "set": {
+            "frequency-hz": 250,
+            "amplitude": 2
+          }
+        },
+        "caption": {
+          "en": "Now amplitude doubles while frequency stays at the original setting.",
+          "zh": "现在振幅变成两倍，频率保持在原来的设置。"
+        }
+      },
+      {
+        "part": "wave-reference",
+        "labels": [
+          "wave-reference"
+        ],
+        "sim": {
+          "set": {
+            "frequency-hz": 250,
+            "amplitude": 1
+          }
+        },
+        "caption": {
+          "en": "The wave pattern travels while particles keep returning about their rest positions.",
+          "zh": "波的形态向前传播，粒子仍在各自静止位置附近往复。"
+        }
+      }
+    ],
+    "summary": {
+      "en": "Particles oscillate locally while a wave travels. The 250 and 500 hertz inputs are displayed 250 times slower; frequency and displacement amplitude change separately. No sound is emitted.",
+      "zh": "波传播时，粒子仍在局部往复。250 与 500 赫兹输入都以 250 倍慢放显示；频率和位移振幅分别改变，不发出声音。"
+    }
+  }
+}
+---
+
+<Lang en>
+
+Watch the highlighted particle beside its rest mark. It moves back and forth while neighbouring particles do the same around their own positions. The pattern travels along the row, but the particles do not travel with it from source to ear. This is a longitudinal-wave study: local movement is along the direction of the travelling disturbance.
+
+<Term id="frequency">Frequency</Term> describes how many cycles occur in a given time. The input examples in this simulation are <Num s="S31">250 hertz</Num> and <Num s="S31">500 hertz</Num>, displayed <Num s="S31">250 times</Num> slower so that movement can be followed. Doubling the input frequency doubles the displayed pace. <Term id="pitch">Pitch</Term> is the highness or lowness of a sound, related to frequency. The study emits no sound.
+
+On the card, keep the relative displacement setting unchanged and predict what happens to its reading when frequency increases. Reveal the change and record both settings. A faster oscillation need not have a larger <Term id="amplitude">amplitude</Term>, the greatest displacement from rest. Compare how often the reference particle repeats its motion with how far it moves from its mark.
+
+Now return to the lower frequency and increase relative displacement. The movement becomes wider while its repetition rate stays the same. Amplitude and pitch describe different features. A screen displacement setting is not a calibrated measure of sound intensity or perceived loudness, and it cannot establish a safe listening level. Continue the comparison visually without changing device volume. <FlyTo preset="wave">Follow the reference particle</FlyTo>
+
+<More title={{"en": "The same slow-motion clock", "zh": "同一慢放时钟"}}>
+
+In this simulation, <Num s="S31">250 hertz</Num> appears as <Num s="S31">1 cycle per second</Num>, and <Num s="S31">500 hertz</Num> as <Num s="S31">2 cycles per second</Num>. The slow factor remains <Num s="S31">250</Num>; changing frequency does not silently change the playback scale.
+
+</More>
+
+<More title={{"en": "Amplitude is not loudness calibration", "zh": "振幅不是响度校准"}}>
+
+Amplitude relates to the strength of a sound, but perceived loudness also depends on frequency and listening conditions. The relative slider describes chosen particle displacement. It does not provide a decibel reading or justify a claim of equal sound intensity at different frequencies. [S10, S25, S31]
+
+</More>
+
+<More title={{"en": "Propagation without a stream", "zh": "传播不等于一股流"}}>
+
+Air particles oscillate locally as a sound disturbance travels. The rest ticks make that distinction visible. The diagram’s particle spacing and wave speed are design choices, not measurements of air or an ear. Sound propagation can be explored as a separate topic. [S9, S31]
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+看看标出粒子旁边的静止位置。它来回运动，相邻粒子也在各自位置附近往复。波的形态沿整排传播，粒子却没有跟着波从声源一路走到耳朵。这是纵波示意：局部运动方向与扰动传播方向相同，不能把一排移动点误读成单向气流。
+
+<Term id="frequency">频率</Term>描述一定时间内重复振动的次数。这个模拟的输入例子为 <Num s="S31">250 赫兹</Num> 与 <Num s="S31">500 赫兹</Num>，都以 <Num s="S31">250 倍</Num> 慢放，让运动容易跟随。输入频率加倍，显示节律也加倍。<Term id="pitch">音高</Term>是声音听起来高或低的感觉，与频率有关；本示意不发出声音。
+
+在卡片上保持相对位移设置不变，先猜提高频率后，这个读数会怎样，再揭示变化并记录前后设置。振动更快，不一定有更大的<Term id="amplitude">振幅</Term>；振幅是离开静止位置的最大偏移。分别比较重复得多快，以及离开标记有多远，便能看清它们不是同一件事。
+
+现在回到较低频率，再增大相对位移。画面中往复范围变宽，重复节律却不变。振幅与音高描述不同特征，屏幕位移设置不是校准过的声强或主观响度测量，也不能判断聆听是否安全。只用画面继续比较，不调高设备音量。<FlyTo preset="wave">跟随参照粒子</FlyTo>
+
+<More title={{"en": "The same slow-motion clock", "zh": "同一慢放时钟"}}>
+
+在这个模拟里，<Num s="S31">250 赫兹</Num> 显示为 <Num s="S31">每秒 1 次</Num>，<Num s="S31">500 赫兹</Num> 显示为 <Num s="S31">每秒 2 次</Num>。慢放倍率一直是 <Num s="S31">250</Num>；改变频率不会暗中改变播放比例。
+
+</More>
+
+<More title={{"en": "Amplitude is not loudness calibration", "zh": "振幅不是响度校准"}}>
+
+振幅与声音强弱有关，但主观响度也受频率和聆听条件影响。相对滑块描述选定的粒子位移，不给出分贝读数，也不能据此断言不同频率下声强相同。[S10, S25, S31]
+
+</More>
+
+<More title={{"en": "Propagation without a stream", "zh": "传播不等于一股流"}}>
+
+空气粒子在局部往复，声音扰动仍能传播。静止刻度让这点容易辨别。图中的粒子间距和波速是设计选择，不是空气或耳部的测量值。声音传播可另作专题。[S9, S31]
+
+</More>
+
+</Lang>
+

@@ -1,0 +1,109 @@
+---
+{
+  "id": "sample-sound",
+  "order": 3,
+  "title": {
+    "en": "Wave fixture",
+    "zh": "纵波测试"
+  },
+  "sensitive": false,
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "cutaway": "none",
+    "layers": [
+      "bench", "wave-study"
+    ],
+    "hide": [],
+    "labels": [
+      "lens-plane",
+      "receiver",
+      "wave-reference"
+    ],
+    "camera": {
+      "position": [
+        0,
+        0.8,
+        6
+      ],
+      "target": [
+        0,
+        0.8,
+        0
+      ],
+      "fov": 40
+    },
+    "summary": {
+      "en": "Draft engine fixture.",
+      "zh": "引擎草稿测试。"
+    },
+    "sim": {
+      "set": {
+        "light-in": true,
+        "pupil-mm": 2,
+        "object-range": "far",
+        "lens-focus": "far",
+        "sound-active": true,
+        "frequency-hz": 250,
+        "amplitude": 1
+      },
+      "try": {
+        "vary": "frequency-hz",
+        "also": [
+          "amplitude",
+          "sound-active"
+        ],
+        "observe": [
+          "visual-hz",
+          "amplitude-level",
+          "sound-state"
+        ],
+        "record": true
+      }
+    },
+    "beats": [
+      {
+        "caption": {
+          "en": "Schematic model test state.",
+          "zh": "示意模型测试状态。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "frequency-hz": 500
+          }
+        },
+        "caption": {
+          "en": "Schematic model test state.",
+          "zh": "示意模型测试状态。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "amplitude": 2
+          }
+        },
+        "caption": {
+          "en": "Schematic model test state.",
+          "zh": "示意模型测试状态。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Draft fixture for deterministic model and overlay tests.
+
+</Lang>
+
+<Lang zh>
+
+用于确定性模型和叠加层测试的草稿示例。
+
+</Lang>

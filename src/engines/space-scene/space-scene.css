@@ -2227,3 +2227,40 @@ button.space-plate__sel:focus-visible {
 .space-food-web--card { padding: 8px 12px; max-height: 64vh; overflow: auto; }
 .space-food-web .atlas-src { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; }
 .space-food-web .atlas-src::after { inset: 0; }
+
+/* Enlarged-window border (views.insets, docs/58 F4): a hairline frame around the inset's parts and its label on the top edge. */
+.space-inset [data-inset] {
+  transition: opacity 0.2s ease;
+}
+.space-inset__frame {
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 1;
+  stroke-dasharray: 5 3;
+}
+.space-inset__label {
+  font: 500 10.5px / 1 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  fill: var(--ink);
+  paint-order: stroke;
+  stroke: var(--paper);
+  stroke-width: 3px;
+}
+
+/* Optical study note (docs/58 F1): the vertical exaggeration and the object-point key under the bench. */
+.space-senses-note {
+  transition: opacity 0.2s ease;
+}
+.space-senses-note text {
+  font: 500 10.5px / 1 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  fill: var(--ink);
+  paint-order: stroke;
+  stroke: var(--paper);
+  stroke-width: 3px;
+}
+.space-senses-note tspan[style] {
+  stroke: none;
+}

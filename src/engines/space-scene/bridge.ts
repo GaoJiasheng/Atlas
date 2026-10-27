@@ -133,7 +133,13 @@ export interface MechanismReading {
 
 export type MechanismSave = Record<string, { thetaRad: number; qaHold: boolean }>;
 
+export interface SensesReading {
+  eye?: ReturnType<typeof import('./lib/sim/senses').effectiveEyeRays> & { yScale: number; active: boolean; hiddenReason: string | null; readings: Record<string, number | string>; rendered: { object: number[]; lens: number[]; retina: number[] }[][]; label: { x: number; y: number; shown: boolean } };
+  wave?: { phaseCycles: number; positions: number[]; rests: number[]; visualHz: number; lambda: number; A: number; playing: boolean; slowFactor: number; active: boolean; hiddenReason: string | null };
+}
 export interface StageBridge {
+  senses: SensesReading;
+  sensesSeek(cycles: number): boolean;
   /** Actual rig rotations and world origins after skinning motion (QA only). */
   joints: Map<string, { angles: Record<string, number>; position: number[]; quaternion: number[] }>;
   /** Measured free stage band for opt-in camera framing. */
@@ -218,6 +224,8 @@ export function cameraSettled(bridge: StageBridge, id: number, timeoutMs: number
 
 export function createBridge(): StageBridge {
   return {
+    senses: {},
+    sensesSeek: () => false,
     spans: new Map(),
     mechanisms: new Map(),
     seekMechanism: () => false,

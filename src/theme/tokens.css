@@ -22,6 +22,8 @@
  *   --blood-rich / --blood-poor  blood with much / little oxygen (bright red / wine red; docs/40 E-HL4:
  *                both red, apart in lightness by L* ≥ 20 so they read in grey too)
  *   --oxygen  oxygen (clear green)   --carbon-dioxide  carbon dioxide (warm grey)   --air  air, the mixed gases (blue-grey)
+ *   --ray-top / --ray-bottom  the optical study's two object points (docs/58 F1): the rays, receiver spot and marker
+ *                of the upper point (amber) and the lower point (teal); the markers also differ in size, so they read without colour
  *   --seedling / --seedling-pale  a seedling grown in the light (leaf green) / in the dark (pale yellow; docs/41 E-S1:
  *                the try-it tint of a cup kept from the light; apart in lightness so they read in grey too)
  *   --face-1/2/3  a solid's opposite faces in pairs (docs/39 D10: MathScene nets), each with
@@ -176,6 +178,9 @@
   /* Germination (docs/41 E-S1): a seedling in the light (leaf green) and one grown in the dark (pale yellow, L* ≥ 80, chroma 20–40), L* ≥ 20 apart; pale apart from --bone and --food. */
   --seedling: #6b8e3a;
   --seedling-pale: #e4dba2;
+  /* Optical study object points (docs/58 F1): apart from each other (ΔE*ab ≥ 40) and from --signal (≥ 15), ≥ 3:1 on the paper. */
+  --ray-top: #a35f00;
+  --ray-bottom: #16707f;
 
   /* Legacy names mapped onto the plate palette. */
   --bg: var(--paper);
@@ -301,6 +306,8 @@
   --air: #8fa9bb;
   --seedling: #86ab52;
   --seedling-pale: #ebe2a6;
+  --ray-top: #f0b440;
+  --ray-bottom: #53b8cc;
 
   --bg: var(--paper);
   --surface: var(--panel-solid);

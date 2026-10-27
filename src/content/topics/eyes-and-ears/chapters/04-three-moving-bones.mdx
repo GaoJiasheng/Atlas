@@ -1,0 +1,204 @@
+---
+{
+  "id": "three-moving-bones",
+  "order": 4,
+  "title": {
+    "en": "Three connected bones",
+    "zh": "三块相连的骨"
+  },
+  "sensitive": false,
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "part": null,
+    "run": true,
+    "cutaway": "ear-cut",
+    "pose": null,
+    "ghost": [],
+    "layers": [
+      "ear-transfer",
+      "ear-receiver"
+    ],
+    "hide": [
+      "basilar-strip",
+      "hair-patch",
+      "signal-marker"
+    ],
+    "labels": [
+      "eardrum",
+      "malleus",
+      "incus",
+      "stapes"
+    ],
+    "camera": {
+      "position": [
+        2,
+        1,
+        5.4
+      ],
+      "target": [
+        2.1,
+        0.02,
+        -0.05
+      ],
+      "fov": 30
+    },
+    "sim": {
+      "set": {
+        "light-in": false,
+        "pupil-mm": 2,
+        "object-range": "far",
+        "lens-focus": "far",
+        "sound-active": true,
+        "frequency-hz": 250,
+        "amplitude": 1
+      }
+    },
+    "index": {
+      "parts": [
+        "pinna",
+        "canal",
+        "eardrum",
+        "malleus",
+        "incus",
+        "stapes",
+        "oval-window",
+        "cochlea-shell",
+        "eustachian-tube"
+      ]
+    },
+    "beats": [
+      {
+        "run": false,
+        "part": "canal",
+        "labels": [
+          "pinna",
+          "canal",
+          "eardrum"
+        ],
+        "caption": {
+          "en": "The ear canal leads to the eardrum.",
+          "zh": "外耳道通到鼓膜。"
+        }
+      },
+      {
+        "run": true,
+        "part": "eardrum",
+        "labels": [
+          "eardrum",
+          "malleus"
+        ],
+        "caption": {
+          "en": "Incoming sound makes the eardrum vibrate. The movement is slowed for explanation.",
+          "zh": "传来的声音使鼓膜振动；画面为说明而放慢。"
+        }
+      },
+      {
+        "run": true,
+        "part": "incus",
+        "labels": [
+          "malleus",
+          "incus",
+          "stapes"
+        ],
+        "caption": {
+          "en": "Three middle-ear bones form a connected chain.",
+          "zh": "中耳的三块听小骨相连成链。"
+        }
+      },
+      {
+        "part": "stapes",
+        "labels": [
+          "stapes",
+          "oval-window"
+        ],
+        "caption": {
+          "en": "The stapes footplate moves at the oval window.",
+          "zh": "镫骨底板在卵圆窗处活动。"
+        }
+      },
+      {
+        "camera": "cochlea",
+        "part": "oval-window",
+        "labels": [
+          "oval-window",
+          "cochlea-shell"
+        ],
+        "caption": {
+          "en": "This motion transfers into the fluid-filled cochlea.",
+          "zh": "这份运动传入充满液体的耳蜗。"
+        }
+      }
+    ],
+    "summary": {
+      "en": "Follow the eardrum through three connected bones to the oval window. Motion is enlarged and slowed for explanation, not measured in an ear.",
+      "zh": "从鼓膜沿三块相连的听小骨到卵圆窗。运动为说明而放大、放慢，不是耳内测量结果。"
+    }
+  }
+}
+---
+
+<Lang en>
+
+At the ear station, follow the outer folds towards the canal. The canal ends at the eardrum. The membrane lies at an angle in this cutaway view, making its connection to the middle-ear bones easier to follow. Incoming sound sets the membrane vibrating; it does not need a hole through the eardrum to continue the process.
+
+Beyond the membrane is a connected chain of <Num s="S7">three</Num> small bones, together called the <Term id="ossicles">ossicles</Term>. The <Term id="malleus">malleus</Term> has a handle connected to the drum. Its head meets the <Term id="incus">incus</Term>, which links it to the <Term id="stapes">stapes</Term>. Select the names in order and follow their contacts, rather than treating the bones as separate objects floating in an empty space.
+
+The stapes resembles a stirrup. Its footplate moves at the oval window, the interface towards the fluid-filled inner ear. This transfer couples vibration from the air-driven membrane and bone chain into movement of cochlear fluid. The structures transfer mechanical energy; they do not create energy or send a stream of air into the nerve.
+
+Watch the stage's slow rocking and back-and-forth motions. Their size and timing are chosen to make the contacts visible, not to show a measured displacement or delay in an ear. At the final beat, follow the movement towards the cochlea. The next chapter moves inside that structure, where sensory cells connect mechanical movement to electrical signalling. <FlyTo preset="ear">Follow the connected bones</FlyTo>
+
+<Figure src="figures/eyes-and-ears-middle-ear-chain" alt={{"en": "An eardrum connected to a malleus, an incus and a stirrup-shaped stapes with one footplate.", "zh": "鼓膜连接锤骨、砧骨和马镫形的镫骨；镫骨有一个底板。"}} caption={{"en": "The connected middle-ear chain transfers vibration. Original schematic illustration; not to scale.", "zh": "相连的中耳骨链传递振动。原创示意图，不按真实比例。"}} />
+
+<More title={{"en": "Three bones in one ear", "zh": "单侧耳部的三骨"}}>
+
+The names mean hammer, anvil and stirrup. Keep a separate selectable part for each bone. The stapes footplate meets the oval window; the round window provides another moving membrane as cochlear fluid is displaced. Its detailed shape is omitted here. [S7, S8]
+
+</More>
+
+<More title={{"en": "The pressure connection", "zh": "与调压有关的通道"}}>
+
+The descending Eustachian tube connects the middle ear with the pharynx and helps equalise pressure across the eardrum. It is not the route from the outer ear to the auditory nerve. The eardrum can be described as the canal–middle-ear boundary without making its textbook classification a quiz. [S8]
+
+</More>
+
+<More title={{"en": "Slowed movement", "zh": "放慢的运动"}}>
+
+The default input example is <Num s="S31">250 hertz</Num>, shown at <Num s="S31">1 cycle per second</Num>: <Num s="S31">250 times</Num> slower. Bone movements share the display clock; their amplitudes are illustrative. Exploding the model separates contacts, so it is a structural view rather than working transmission. [S31]
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+在耳朵工位，沿外部的褶皱走向外耳道，尽头便是鼓膜。剖面里的鼓膜斜着放，方便跟随它与中耳听骨的联系。传来的声音让这片薄膜振动，并不需要先在鼓膜上开洞，后面的过程才能继续。
+
+膜后有相连的 <Num s="S7">三块</Num> 小骨，合称<Term id="ossicles">听小骨</Term>。<Term id="malleus">锤骨</Term>的柄连着鼓膜，头部与<Term id="incus">砧骨</Term>相接；砧骨再接到<Term id="stapes">镫骨</Term>。依次点选它们，跟随接触位置，比把它们当作悬浮在空处的装饰更容易理解传振过程。
+
+镫骨的外形像马镫，底板在卵圆窗处活动，把鼓膜和骨链的运动传向充满液体的内耳。比较时还可以留意每个接触点前后的结构，按顺序跟随，而不只盯着摆动幅度。这些结构把机械能传过去，不会凭空创造能量，也不会把一股空气送进神经。读图时要把骨链运动与下一阶段的神经信号分开。
+
+舞台用缓慢摆动和往复运动展示相互接触的位置。位移大小和节律经过教学安排，不表示真实耳内测得的振幅或延迟。最后一拍跟随运动来到耳蜗；下一章再进入它内部，观察感受细胞怎样把机械运动连接到电信号传递。<FlyTo preset="ear">沿相连的听骨观察</FlyTo>
+
+<Figure src="figures/eyes-and-ears-middle-ear-chain" alt={{"en": "An eardrum connected to a malleus, an incus and a stirrup-shaped stapes with one footplate.", "zh": "鼓膜连接锤骨、砧骨和马镫形的镫骨；镫骨有一个底板。"}} caption={{"en": "The connected middle-ear chain transfers vibration. Original schematic illustration; not to scale.", "zh": "相连的中耳骨链传递振动。原创示意图，不按真实比例。"}} />
+
+<More title={{"en": "Three bones in one ear", "zh": "单侧耳部的三骨"}}>
+
+英文名称分别有锤、砧和马镫的意思，模型把每块骨保留为独立可选零件。镫骨底板接卵圆窗；耳蜗液体受推动时，圆窗膜也能活动。这里省略了圆窗的详细外形。[S7, S8]
+
+</More>
+
+<More title={{"en": "The pressure connection", "zh": "与调压有关的通道"}}>
+
+向下的咽鼓管连接中耳与咽部，帮助平衡鼓膜两侧气压；它不是外耳通往听神经的路线。把鼓膜称为外耳道与中耳的边界即可，不把教材分类差别做成测验。[S8]
+
+</More>
+
+<More title={{"en": "Slowed movement", "zh": "放慢的运动"}}>
+
+默认输入例子为 <Num s="S31">250 赫兹</Num>，画面显示为 <Num s="S31">每秒 1 次</Num>，即 <Num s="S31">250 倍</Num> 慢放。骨链共用显示时钟，振幅只作示意。拆开模型会分离接触点，因此是结构视图，不表示仍在正常传振。[S31]
+
+</More>
+
+</Lang>
+

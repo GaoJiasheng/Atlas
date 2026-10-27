@@ -1,0 +1,13 @@
+# Sample: Senses. Content spec first: skill atlas-space-topic, references/spec-template.md (docs/12 is the aircon example).
+id: sample-senses
+title: { en: "Sample: Senses", zh: "示例：感官" }
+subtitle: { en: "What is inside and how it works", zh: "里面有什么、怎样工作" }
+subject: science
+moe: []
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: draft
+note: { en: "Draft engine fixture · schematic optics and slowed particles · chosen classroom constants", zh: "引擎草稿测试 · 光学与慢放粒子示意 · 课堂选定常数" }

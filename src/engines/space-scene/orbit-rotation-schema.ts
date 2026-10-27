@@ -153,7 +153,7 @@ export function orbitIssues(sim: SimData, controls: ReadonlyMap<string, SimContr
   const issues: Issue[] = [];
   const err = (path: (string | number)[], message: string) => issues.push({ path: ['outputs', 'bind', 'overlays'].includes(String(path[0])) ? path : ['orbitRotation', ...path], message });
   if (sim.kind !== 'orbit-rotation') err([], 'orbitRotation belongs to orbit-rotation');
-  for (const k of ['circuit', 'magnet', 'force', 'energy', 'lifeCycle', 'matter', 'light', 'materials', 'sort', 'table', 'seeds'] as const)
+  for (const k of ['circuit', 'magnet', 'force', 'energy', 'lifeCycle', 'matter', 'light', 'materials', 'sort', 'table', 'seeds', 'senses'] as const)
     if (sim[k]) err([], `orbit-rotation cannot also configure ${k}`);
   if (new Set(Object.values(c.controls)).size !== 13 || controls.size !== 13) err(['controls'], 'give thirteen distinct one-to-one controls');
   for (const key of ORBIT_INPUTS) {

@@ -1,3 +1,4 @@
+import { SensesOverlay } from './SensesOverlays';
 /**
  * Try-it overlays drawn from the model's outputs (sim `overlays`, docs/22
  * §4.4 M5, docs/30 F3). `force-vectors`: an arrow per force on a part, its
@@ -483,6 +484,8 @@ export function SimOverlays({
   displays,
   layers,
   exploded,
+  run,
+  phaseKey,
   look,
   snapKey,
   bridge,
@@ -497,6 +500,8 @@ export function SimOverlays({
   /** Layers on (a force-vectors overlay's `group`). */
   layers: readonly string[];
   exploded: boolean;
+  run: boolean;
+  phaseKey: number;
   look: StageLook;
   snapKey: number;
   bridge: StageBridge;
@@ -521,6 +526,7 @@ export function SimOverlays({
       )}
       {overlays.map((o, i) => {
         if (o.kind === 'energy-bars' || o.kind === 'orbit-guides' || o.kind === 'orbit-eclipse-shadow' || o.kind === 'airfoil-pressure') return null;
+        if (o.kind === 'paraxial-eye' || o.kind === 'longitudinal-wave') return <SensesOverlay key={i} overlay={o} sim={sim} values={resolved} outputs={outputs} exploded={exploded} layers={layers} run={run} snapKey={snapKey} phaseKey={phaseKey} look={look} bridge={bridge} />;
         if (o.kind === 'shadow-cast') return <ShadowCast key={i} overlay={o} index={i} sim={sim} values={resolved} outputs={outputs} handles={handles} displays={displays} layers={layers} exploded={exploded} look={look} snapKey={snapKey} bridge={bridge} />;
         if (o.kind === 'force-vectors')
           return (
