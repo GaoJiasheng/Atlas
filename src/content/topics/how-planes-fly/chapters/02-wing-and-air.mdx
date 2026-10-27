@@ -1,0 +1,603 @@
+---
+{
+  "id": "wing-and-air",
+  "order": 2,
+  "title": {
+    "en": "The wing and the air",
+    "zh": "机翼与空气"
+  },
+  "sensitive": false,
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "part": null,
+    "run": false,
+    "cutaway": "none",
+    "pose": null,
+    "layers": [
+      "airframe"
+    ],
+    "hide": [
+      "fuselage-shell",
+      "cockpit-glazing",
+      "wing-left",
+      "wing-right",
+      "wing-tip-left",
+      "wing-tip-right",
+      "aileron-left",
+      "aileron-right",
+      "spoiler-left",
+      "flap-left",
+      "flap-right",
+      "slat-left",
+      "slat-right",
+      "tailplane-left",
+      "tailplane-right",
+      "elevator-left",
+      "elevator-right",
+      "fin",
+      "rudder",
+      "nacelle-left",
+      "nacelle-right",
+      "fan-left",
+      "fan-right",
+      "engine-shell",
+      "fan-disc",
+      "bypass-duct",
+      "compressor-bank",
+      "compressor-rotor",
+      "combustor-ring",
+      "turbine-bank",
+      "hp-turbine-rotor",
+      "lp-turbine-rotor",
+      "lp-shaft",
+      "hp-shaft",
+      "core-nozzle",
+      "bypass-nozzle",
+      "foil-sample",
+      "chord-marker",
+      "inflow-reference",
+      "angle-marker",
+      "display-plinth"
+    ],
+    "labels": [
+      "front-spar",
+      "rear-spar",
+      "wing-ribs"
+    ],
+    "ghost": [
+      "wing-box-skin"
+    ],
+    "camera": {
+      "position": [
+        -1.45,
+        1.85,
+        4.85
+      ],
+      "target": [
+        0.02,
+        1.1,
+        2.4
+      ],
+      "fov": 30
+    },
+    "sim": {
+      "set": {
+        "angle-deg": 4,
+        "airspeed-mps": 40,
+        "altitude-m": 0,
+        "flow-view": "streamlines",
+        "diagram-case": "none"
+      },
+      "try": {
+        "vary": "airspeed-mps",
+        "also": [
+          "flow-view"
+        ],
+        "keep": [
+          "angle-deg",
+          "altitude-m",
+          {
+            "en": "Same section and reference area",
+            "zh": "翼型和参考面积不变"
+          }
+        ],
+        "observe": [
+          "speed-now",
+          "lift-n"
+        ],
+        "record": true,
+        "predict": {
+          "prompt": {
+            "en": "In this model, the airspeed goes from 20 to 40 metres per second. What happens to the lift?",
+            "zh": "在这个模型里，空气速度从每秒 20 米增加到每秒 40 米。升力会怎样？"
+          },
+          "start": {
+            "airspeed-mps": 20
+          },
+          "change": {
+            "airspeed-mps": 40
+          },
+          "observe": "lift-n",
+          "options": [
+            {
+              "id": "more",
+              "label": {
+                "en": "More lift",
+                "zh": "升力更大"
+              },
+              "means": "more"
+            },
+            {
+              "id": "same",
+              "label": {
+                "en": "The same",
+                "zh": "不变"
+              },
+              "means": "same"
+            },
+            {
+              "id": "less",
+              "label": {
+                "en": "Less lift",
+                "zh": "升力更小"
+              },
+              "means": "less"
+            }
+          ]
+        }
+      }
+    },
+    "summary": {
+      "en": "A wing changes the surrounding airflow and pressure.",
+      "zh": "机翼改变周围的气流和气压。"
+    },
+    "index": {
+      "parts": [
+        "wing-box-skin",
+        "front-spar",
+        "rear-spar",
+        "wing-ribs",
+        "foil-sample",
+        "chord-marker",
+        "inflow-reference"
+      ]
+    },
+    "beats": [
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "airframe"
+        ],
+        "hide": [
+          "fuselage-shell",
+          "cockpit-glazing",
+          "wing-left",
+          "wing-right",
+          "wing-tip-left",
+          "wing-tip-right",
+          "aileron-left",
+          "aileron-right",
+          "spoiler-left",
+          "flap-left",
+          "flap-right",
+          "slat-left",
+          "slat-right",
+          "tailplane-left",
+          "tailplane-right",
+          "elevator-left",
+          "elevator-right",
+          "fin",
+          "rudder",
+          "nacelle-left",
+          "nacelle-right",
+          "fan-left",
+          "fan-right",
+          "engine-shell",
+          "fan-disc",
+          "bypass-duct",
+          "compressor-bank",
+          "compressor-rotor",
+          "combustor-ring",
+          "turbine-bank",
+          "hp-turbine-rotor",
+          "lp-turbine-rotor",
+          "lp-shaft",
+          "hp-shaft",
+          "core-nozzle",
+          "bypass-nozzle",
+          "foil-sample",
+          "chord-marker",
+          "inflow-reference",
+          "angle-marker",
+          "display-plinth"
+        ],
+        "labels": [
+          "front-spar",
+          "rear-spar",
+          "wing-ribs"
+        ],
+        "ghost": [
+          "wing-box-skin"
+        ],
+        "camera": "wing-structure-view",
+        "sim": {
+          "set": {
+            "angle-deg": 4,
+            "airspeed-mps": 40,
+            "altitude-m": 0,
+            "flow-view": "streamlines",
+            "diagram-case": "none"
+          }
+        },
+        "caption": {
+          "en": "Spars run along the wing, while ribs hold its cross-sectional shape. This cutaway shows one chosen structural example.",
+          "zh": "翼梁沿翼展延伸，翼肋维持机翼的剖面形状。这幅剖面画的是选定的一种结构样件。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": true,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "airfoil-bench",
+          "flight-flows"
+        ],
+        "hide": [
+          "fuselage-shell",
+          "cockpit-glazing",
+          "wing-left",
+          "wing-right",
+          "wing-tip-left",
+          "wing-tip-right",
+          "aileron-left",
+          "aileron-right",
+          "spoiler-left",
+          "flap-left",
+          "flap-right",
+          "slat-left",
+          "slat-right",
+          "tailplane-left",
+          "tailplane-right",
+          "elevator-left",
+          "elevator-right",
+          "fin",
+          "rudder",
+          "nacelle-left",
+          "nacelle-right",
+          "fan-left",
+          "fan-right",
+          "wing-box-skin",
+          "front-spar",
+          "rear-spar",
+          "wing-ribs",
+          "engine-shell",
+          "fan-disc",
+          "bypass-duct",
+          "compressor-bank",
+          "compressor-rotor",
+          "combustor-ring",
+          "turbine-bank",
+          "hp-turbine-rotor",
+          "lp-turbine-rotor",
+          "lp-shaft",
+          "hp-shaft",
+          "core-nozzle",
+          "bypass-nozzle"
+        ],
+        "labels": [
+          "foil-sample",
+          "inflow-reference"
+        ],
+        "ghost": [],
+        "camera": "section-view",
+        "sim": {
+          "set": {
+            "angle-deg": 4,
+            "airspeed-mps": 40,
+            "altitude-m": 0,
+            "flow-view": "streamlines",
+            "diagram-case": "none"
+          }
+        },
+        "caption": {
+          "en": "In this ideal flow model, air changes direction around both sides of the wing. The lines show direction, not packets that must stay together.",
+          "zh": "在这个理想流模型里，空气沿机翼上下两侧改变方向。线表示气流方向，不表示必须结伴的空气包。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": true,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "airfoil-bench",
+          "flight-flows"
+        ],
+        "hide": [
+          "fuselage-shell",
+          "cockpit-glazing",
+          "wing-left",
+          "wing-right",
+          "wing-tip-left",
+          "wing-tip-right",
+          "aileron-left",
+          "aileron-right",
+          "spoiler-left",
+          "flap-left",
+          "flap-right",
+          "slat-left",
+          "slat-right",
+          "tailplane-left",
+          "tailplane-right",
+          "elevator-left",
+          "elevator-right",
+          "fin",
+          "rudder",
+          "nacelle-left",
+          "nacelle-right",
+          "fan-left",
+          "fan-right",
+          "wing-box-skin",
+          "front-spar",
+          "rear-spar",
+          "wing-ribs",
+          "engine-shell",
+          "fan-disc",
+          "bypass-duct",
+          "compressor-bank",
+          "compressor-rotor",
+          "combustor-ring",
+          "turbine-bank",
+          "hp-turbine-rotor",
+          "lp-turbine-rotor",
+          "lp-shaft",
+          "hp-shaft",
+          "core-nozzle",
+          "bypass-nozzle"
+        ],
+        "labels": [
+          "foil-sample"
+        ],
+        "ghost": [],
+        "camera": "section-view",
+        "sim": {
+          "set": {
+            "angle-deg": 4,
+            "airspeed-mps": 40,
+            "altitude-m": 0,
+            "flow-view": "streamlines",
+            "diagram-case": "none"
+          }
+        },
+        "caption": {
+          "en": "The marked air follows local speeds. Air passing above and below has no requirement to meet again at the trailing edge.",
+          "zh": "标出的空气按各处的速度前进。经过上下两侧的空气，不需要在后缘重新碰头。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": true,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "airfoil-bench",
+          "flight-flows"
+        ],
+        "hide": [
+          "fuselage-shell",
+          "cockpit-glazing",
+          "wing-left",
+          "wing-right",
+          "wing-tip-left",
+          "wing-tip-right",
+          "aileron-left",
+          "aileron-right",
+          "spoiler-left",
+          "flap-left",
+          "flap-right",
+          "slat-left",
+          "slat-right",
+          "tailplane-left",
+          "tailplane-right",
+          "elevator-left",
+          "elevator-right",
+          "fin",
+          "rudder",
+          "nacelle-left",
+          "nacelle-right",
+          "fan-left",
+          "fan-right",
+          "wing-box-skin",
+          "front-spar",
+          "rear-spar",
+          "wing-ribs",
+          "engine-shell",
+          "fan-disc",
+          "bypass-duct",
+          "compressor-bank",
+          "compressor-rotor",
+          "combustor-ring",
+          "turbine-bank",
+          "hp-turbine-rotor",
+          "lp-turbine-rotor",
+          "lp-shaft",
+          "hp-shaft",
+          "core-nozzle",
+          "bypass-nozzle"
+        ],
+        "labels": [
+          "foil-sample"
+        ],
+        "ghost": [],
+        "camera": "section-view",
+        "sim": {
+          "set": {
+            "angle-deg": 4,
+            "airspeed-mps": 40,
+            "altitude-m": 0,
+            "flow-view": "pressure",
+            "diagram-case": "none"
+          }
+        },
+        "caption": {
+          "en": "This pressure view uses the same ideal flow. Pressure differences and the turning of air describe one aerodynamic force.",
+          "zh": "气压图使用同一个理想流。气压差与气流转向，是对同一个空气动力的两种描述。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": true,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "airfoil-bench",
+          "flight-flows"
+        ],
+        "hide": [
+          "fuselage-shell",
+          "cockpit-glazing",
+          "wing-left",
+          "wing-right",
+          "wing-tip-left",
+          "wing-tip-right",
+          "aileron-left",
+          "aileron-right",
+          "spoiler-left",
+          "flap-left",
+          "flap-right",
+          "slat-left",
+          "slat-right",
+          "tailplane-left",
+          "tailplane-right",
+          "elevator-left",
+          "elevator-right",
+          "fin",
+          "rudder",
+          "nacelle-left",
+          "nacelle-right",
+          "fan-left",
+          "fan-right",
+          "wing-box-skin",
+          "front-spar",
+          "rear-spar",
+          "wing-ribs",
+          "engine-shell",
+          "fan-disc",
+          "bypass-duct",
+          "compressor-bank",
+          "compressor-rotor",
+          "combustor-ring",
+          "turbine-bank",
+          "hp-turbine-rotor",
+          "lp-turbine-rotor",
+          "lp-shaft",
+          "hp-shaft",
+          "core-nozzle",
+          "bypass-nozzle"
+        ],
+        "labels": [
+          "foil-sample"
+        ],
+        "ghost": [],
+        "camera": "section-view",
+        "sim": {
+          "set": {
+            "angle-deg": 4,
+            "airspeed-mps": 40,
+            "altitude-m": 0,
+            "flow-view": "streamlines",
+            "diagram-case": "none"
+          }
+        },
+        "caption": {
+          "en": "In this simulation, doubling speed gives four times the lift while density, area and lift coefficient stay fixed.",
+          "zh": "在这个模拟里，密度、面积和升力系数不变时，速度加倍，升力变成四倍。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Start inside a wing. Under its skin, <Term id="wing-structure">spars and ribs</Term> make a frame. The spars run along the span and carry the bending loads; the ribs run from front to back and keep the wing’s cross-section in shape. Two spars, the skin and the ribs together form a closed box. Real wings vary; this cutaway is one chosen example with three ribs. <FlyTo preset="wing-structure-view">Open the wing box</FlyTo>
+
+<Figure src="figures/how-planes-fly-wing-cutaway" alt={{ en: "A generic wing cutaway showing spars, ribs and skin.", zh: "通用机翼剖面，可见翼梁、翼肋与蒙皮。" }} caption={{ en: "Inside a generic wing: two spars along the span, ribs across it and the skin around them. An illustration made for this topic; not to scale, and not the shape of the wing experiment.", zh: "通用机翼的内部：两根翼梁沿翼展延伸，翼肋横在其间，外面包着蒙皮。为本主题绘制的示意图，不按比例，也不是机翼实验的形状。" }} />
+
+The experiment beside the aircraft is a symmetric section, the same shape above and below. The lines around it are <Term id="streamline">streamlines</Term>: in this ideal flow model they follow the direction of the air at every point. The air curves around both the upper and the lower surface. Both sides turn the flow, so a wing is not simply being hit by air from below. <FlyTo preset="section-view">Look at the airflow</FlyTo>
+
+A common story says that air going over the longer top must hurry to meet the air from underneath at the back edge. That is wrong. In the model, marked air released at the same moment upstream does not arrive together, and nothing waits at the back edge for its partner.
+
+Switch the card to the pressure view and the same flow is shown as <Term id="pressure">pressure</Term> along the surface. The pressure differences over the surface and the turning of the air are two descriptions of one aerodynamic force, not two forces to be added together.
+
+Speed matters a great deal. In this simulation the section is set at <Num s="S58">4°</Num> in air at sea level. At <Num s="S58">20 m/s</Num> it gives about <Num s="S58">231 N</Num> of lift; at <Num s="S58">40 m/s</Num>, twice as fast, it gives about <Num s="S58">924 N</Num>, four times as much.
+
+<More title={{ en: "The lift equation", zh: "升力方程" }}>
+
+Lift can be written as <Num s="S4">L = ½ ρ V² S Cl</Num>. Here ρ is how much mass of air is packed into each cubic metre, V is the speed relative to the air, S is a reference area and Cl is the lift coefficient, which gathers the effects of the shape, its tilt and the flow conditions. If ρ, S and Cl stay the same, doubling V makes V² four times as big, so lift is <Num s="S4">four times</Num> as big. The experiment uses a reference area of <Num s="S58">2 m²</Num>; the slice you see on the stage is only a short piece of it.
+
+</More>
+
+<More title={{ en: "What the ideal model leaves out", zh: "理想模型省略了什么" }}>
+
+Real air is slightly sticky, and near a real surface it forms a thin slow layer that this model does not have. The model also treats the section as part of a wing with no ends. Adding up the model’s pressure all round the surface gives back exactly its lift and almost no force along the stream. That only shows that the model is consistent with itself; it does not mean that a real wing has no drag.
+
+</More>
+
+<More title={{ en: "Air does not need to meet again", zh: "空气不必重新会合" }}>
+
+Watch the ringed dots in beat 3. They leave the upstream edge of the picture at the same moment, one on each line. The ones passing above the section move faster and reach the back first; the ones below arrive later, and no dot is held back or moved to make them meet. The dots are slowed down <Num s="S58">80 times</Num> in the picture so that you can follow them.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+先看机翼的里面。蒙皮下面，<Term id="wing-structure">翼梁与翼肋</Term>搭成骨架：翼梁沿翼展延伸，承担弯曲载荷；翼肋从前到后排列，保持机翼的剖面形状。两根翼梁、蒙皮和翼肋合在一起，形成一个封闭的盒子。真实机翼的结构各不相同，这个剖面画的是选定的一种，带三道翼肋。<FlyTo preset="wing-structure-view">打开翼盒</FlyTo>
+
+<Figure src="figures/how-planes-fly-wing-cutaway" alt={{ en: "A generic wing cutaway showing spars, ribs and skin.", zh: "通用机翼剖面，可见翼梁、翼肋与蒙皮。" }} caption={{ en: "Inside a generic wing: two spars along the span, ribs across it and the skin around them. An illustration made for this topic; not to scale, and not the shape of the wing experiment.", zh: "通用机翼的内部：两根翼梁沿翼展延伸，翼肋横在其间，外面包着蒙皮。为本主题绘制的示意图，不按比例，也不是机翼实验的形状。" }} />
+
+飞机旁边的实验件是一个对称翼型，上下形状相同。它周围的线叫<Term id="streamline">流线</Term>：在这个理想流模型里，流线处处顺着空气流动的方向。空气同时绕着上表面和下表面弯曲。上下两面都在让气流转向，所以不能简单地说机翼只是被下面的空气撞着。<FlyTo preset="section-view">看看气流</FlyTo>
+
+有一种常见的说法：上表面路程更长，上面的空气必须赶快走，才能在后缘和下面的空气碰头。这个说法是错的。在模型里，同一时刻从上游放出的标记空气并不同时到达后面，后缘也没有谁在等谁。
+
+把卡片切到气压视图，同一个气流就变成沿表面分布的<Term id="pressure">气压</Term>。表面上的气压差和空气的转向，是对同一个空气动力的两种描述，不是两个可以相加的力。
+
+速度的影响很大。在这个模拟里，翼段倾斜 <Num s="S58">4°</Num>，放在海平面的空气中。速度 <Num s="S58">20 m/s</Num> 时升力约 <Num s="S58">231 N</Num>；速度加倍到 <Num s="S58">40 m/s</Num>，升力约 <Num s="S58">924 N</Num>，变成四倍。
+
+<More title={{ en: "The lift equation", zh: "升力方程" }}>
+
+升力可以写成 <Num s="S4">L = ½ ρ V² S Cl</Num>。ρ 表示每立方米里有多少质量的空气，V 是相对空气的速度，S 是参考面积，Cl 是升力系数，包含形状、倾斜程度和流动条件的影响。ρ、S、Cl 都不变时，速度加倍，V² 变成四倍，升力也就变成 <Num s="S4">四倍</Num>。实验用的参考面积是 <Num s="S58">2 m²</Num>；舞台上看到的只是其中短短一段。
+
+</More>
+
+<More title={{ en: "What the ideal model leaves out", zh: "理想模型省略了什么" }}>
+
+真实的空气有一点黏性，在真实表面附近会形成一层很薄、流得较慢的空气，这个模型里没有。模型还把翼段当作一块没有两端的机翼的一部分。把模型表面一圈的气压加起来，正好还原它的升力，沿来流方向的力几乎为零。这只说明模型自己前后一致，并不表示真实机翼没有阻力。
+
+</More>
+
+<More title={{ en: "Air does not need to meet again", zh: "空气不必重新会合" }}>
+
+看第 3 拍里带圈的点。它们在同一时刻从画面上游出发，每条线上一个。从上方经过的点走得快，先到后面；下方的点后到，没有哪个点被拦住或挪动来凑齐。画面里这些点放慢了 <Num s="S58">80 倍</Num>，好让你看清。
+
+</More>
+
+</Lang>

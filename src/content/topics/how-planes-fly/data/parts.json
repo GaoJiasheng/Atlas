@@ -1,0 +1,8109 @@
+{
+  "parts": [
+    {
+      "id": "fuselage-shell",
+      "name": {
+        "en": "Fuselage",
+        "zh": "机身"
+      },
+      "group": "airframe",
+      "summary": {
+        "en": "Joins the wings, tail and cabin into one body.",
+        "zh": "把机翼、尾翼和客舱连成一体。"
+      },
+      "detail": {
+        "en": "The long body of the generic airliner: the wings, the tail and the cockpit are all attached to it, and the passengers and cargo ride inside. It is on the stage in the background chapter and in chapters 01, 04, 06 and 07; the four-force arrows of chapter 01 start from its outline.\n\nThe design airliner is nominally about 40 m long, 36 m across the wings and 12 m high, drawn ten times smaller [S58]. Everything the fuselage carries, including the fuel and the load, adds to the weight that the wings must balance in level flight [S1].\n\nIt is a generic shape with no windows of any real type, and no maker, model or airline is meant [S58].",
+        "zh": "通用客机的长条形机体：机翼、尾翼和驾驶舱都装在它上面，乘客和货物在里面。背景章和第 01、04、06、07 章的舞台上都有它；第 01 章的四力箭头从它的轮廓画出。\n\n设计中的客机名义尺寸约长 40 米、翼展 36 米、高 12 米，按十分之一画出 [S58]。机身所载的一切，包括燃油和人与货物，都计入重力；水平飞行时，机翼的升力要与它平衡 [S1]。\n\n这是通用外形，不对应任何制造商、型号或航空公司 [S58]。"
+      },
+      "primitive": {
+        "kind": "sweep",
+        "path": [
+          [
+            -2,
+            -0.03,
+            0
+          ],
+          [
+            -1.93,
+            -0.022,
+            0
+          ],
+          [
+            -1.82,
+            -0.012,
+            0
+          ],
+          [
+            -1.65,
+            -0.004,
+            0
+          ],
+          [
+            -1.4,
+            0,
+            0
+          ],
+          [
+            -1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.8,
+            0,
+            0
+          ],
+          [
+            1.2,
+            0.03,
+            0
+          ],
+          [
+            1.5,
+            0.07,
+            0
+          ],
+          [
+            1.75,
+            0.1,
+            0
+          ],
+          [
+            1.95,
+            0.12,
+            0
+          ],
+          [
+            2.02,
+            0.125,
+            0
+          ]
+        ],
+        "radius": [
+          0.012,
+          0.075,
+          0.13,
+          0.17,
+          0.195,
+          0.2,
+          0.2,
+          0.2,
+          0.19,
+          0.16,
+          0.11,
+          0.06,
+          0.025
+        ],
+        "radial": 32,
+        "segments": 120,
+        "at": [
+          0,
+          1.1,
+          0
+        ],
+        "color": "casing"
+      },
+      "extra": [
+        {
+          "kind": "fins",
+          "size": [
+            0.006,
+            0.026,
+            0.018
+          ],
+          "count": 36,
+          "gap": 0.042,
+          "axis": "x",
+          "at": [
+            -0.34,
+            1.135,
+            0.197
+          ],
+          "color": "rubber"
+        },
+        {
+          "kind": "fins",
+          "size": [
+            0.006,
+            0.026,
+            0.018
+          ],
+          "count": 36,
+          "gap": 0.042,
+          "axis": "x",
+          "at": [
+            -0.34,
+            1.135,
+            -0.197
+          ],
+          "color": "rubber"
+        }
+      ],
+      "shell": true,
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.4
+      },
+      "connects": [
+        "cockpit-glazing",
+        "wing-left",
+        "wing-right",
+        "tailplane-left",
+        "tailplane-right",
+        "fin"
+      ]
+    },
+    {
+      "id": "cockpit-glazing",
+      "name": {
+        "en": "Cockpit",
+        "zh": "驾驶舱"
+      },
+      "group": "airframe",
+      "summary": {
+        "en": "Marks the nose, where the crew sit.",
+        "zh": "标出机头，机组坐在这里。"
+      },
+      "detail": {
+        "en": "The windows at the front of the fuselage, where the flight crew sit. On the stage they mark which end is the nose: the airliner flies towards −X, into the incoming air.\n\nThe glazing is drawn as a simple band; real window frames and their number are not modelled [S58].",
+        "zh": "机身前端的窗户，机组坐在后面。在舞台上，它标出哪一头是机头：客机朝 −X 方向飞，迎着来流。\n\n风挡只画成一条简单的带子，没有画真实的窗框和窗的数目 [S58]。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0.109,
+            -0.08
+          ],
+          [
+            0.129,
+            -0.04
+          ],
+          [
+            0.1411,
+            0
+          ],
+          [
+            0.1505,
+            0.04
+          ],
+          [
+            0.1599,
+            0.08
+          ],
+          [
+            0.1519,
+            0.08
+          ],
+          [
+            0.1425,
+            0.04
+          ],
+          [
+            0.1331,
+            0
+          ],
+          [
+            0.121,
+            -0.04
+          ],
+          [
+            0.101,
+            -0.08
+          ],
+          [
+            0.109,
+            -0.08
+          ]
+        ],
+        "segments": 64,
+        "arc": 120,
+        "at": [
+          -1.79,
+          1.089,
+          0
+        ],
+        "rotation": [
+          90,
+          0,
+          -90
+        ],
+        "color": "glass",
+        "tint": "#33424b"
+      },
+      "connects": [
+        "fuselage-shell"
+      ]
+    },
+    {
+      "id": "wing-left",
+      "name": {
+        "en": "Left wing",
+        "zh": "左翼"
+      },
+      "group": "airframe",
+      "summary": {
+        "en": "Gives most of the lift on the left side.",
+        "zh": "在左侧提供大部分升力。"
+      },
+      "detail": {
+        "en": "The left wing as the pilot sees it. On a conventional airliner the wings provide most of the lift, while the engines supply thrust [S1]. It carries the left aileron, flap, slat and spoiler, and the left engine hangs below it.\n\nIts cross-section is an airfoil, and the angle between its chord and the incoming air, the angle of attack, sets how much lift it gives [S3]. Chapter 02 opens up a wing to show the spars and ribs inside [S43]; the wing on the airliner is drawn as a solid shape.\n\nLift acts across the incoming airflow, so when the aircraft banks the lift of both wings tilts with it [S1, S5].",
+        "zh": "飞行员视角的左侧机翼。常规客机的大部分升力来自机翼，推力由发动机提供 [S1]。它上面装着左副翼、襟翼、缝翼和扰流板，左发动机挂在它下面。\n\n机翼的剖面是翼型；翼弦与来流之间的角，也就是迎角，决定它产生多少升力 [S3]。第 02 章剖开一段机翼，展示里面的翼梁和翼肋 [S43]；客机上的机翼画成实心外形。\n\n升力垂直于来流，所以飞机倾斜时，两侧机翼的升力也跟着倾斜 [S1, S5]。"
+      },
+      "primitive": {
+        "kind": "sweep",
+        "path": [
+          [
+            -0.2866,
+            -0.083,
+            -0.79
+          ],
+          [
+            -0.2582,
+            -0.0738,
+            -0.7022
+          ],
+          [
+            -0.2298,
+            -0.0646,
+            -0.6144
+          ],
+          [
+            -0.2015,
+            -0.0554,
+            -0.5267
+          ],
+          [
+            -0.1731,
+            -0.0461,
+            -0.4389
+          ],
+          [
+            -0.1447,
+            -0.0369,
+            -0.3511
+          ],
+          [
+            -0.1135,
+            -0.0277,
+            -0.2633
+          ],
+          [
+            -0.0756,
+            -0.0185,
+            -0.1756
+          ],
+          [
+            -0.0378,
+            -0.0092,
+            -0.0878
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.0378,
+            0.0092,
+            0.0878
+          ],
+          [
+            0.0756,
+            0.0185,
+            0.1756
+          ],
+          [
+            0.1135,
+            0.0277,
+            0.2633
+          ],
+          [
+            0.1513,
+            0.0369,
+            0.3511
+          ],
+          [
+            0.1891,
+            0.0461,
+            0.4389
+          ],
+          [
+            0.2269,
+            0.0554,
+            0.5267
+          ],
+          [
+            0.2648,
+            0.0646,
+            0.6144
+          ],
+          [
+            0.3026,
+            0.0738,
+            0.7022
+          ],
+          [
+            0.3404,
+            0.083,
+            0.79
+          ]
+        ],
+        "radius": [
+          0.3106,
+          0.2925,
+          0.2743,
+          0.2562,
+          0.238,
+          0.2199,
+          0.2046,
+          0.1959,
+          0.1872,
+          0.1785,
+          0.1698,
+          0.1611,
+          0.1524,
+          0.1437,
+          0.135,
+          0.1263,
+          0.1176,
+          0.1089,
+          0.1002
+        ],
+        "section": {
+          "flat": 0.14
+        },
+        "up": [
+          0,
+          1,
+          0
+        ],
+        "radial": 28,
+        "at": [
+          0.0408,
+          1.073,
+          0.91
+        ],
+        "color": "casing"
+      },
+      "shell": true,
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.5
+      },
+      "connects": [
+        "fuselage-shell",
+        "wing-tip-left",
+        "aileron-left",
+        "spoiler-left",
+        "flap-left",
+        "slat-left",
+        "nacelle-left"
+      ]
+    },
+    {
+      "id": "wing-right",
+      "name": {
+        "en": "Right wing",
+        "zh": "右翼"
+      },
+      "group": "airframe",
+      "summary": {
+        "en": "Gives most of the lift on the right side.",
+        "zh": "在右侧提供大部分升力。"
+      },
+      "detail": {
+        "en": "The right wing as the pilot sees it, the mirror of the left. It carries the right aileron, flap and slat, and the right engine hangs below it. In chapter 04 the banked pose drops this wing, and the lift arrow leans towards it [S5].\n\nThe wings provide most of an airliner’s lift [S1]. The shape and size are a generic design drawn ten times smaller [S58].\n\nIn a bank, the sideways part of the lift curves the flight path; the stage shows one fixed bank, not a calculated turn [S5, S58].",
+        "zh": "飞行员视角的右侧机翼，与左翼对称。它上面装着右副翼、襟翼和缝翼，右发动机挂在它下面。第 04 章的倾斜姿态让这一侧机翼向下，升力箭头也朝它这边倾斜 [S5]。\n\n客机的大部分升力来自机翼 [S1]。外形和尺寸是通用设计，按十分之一画出 [S58]。\n\n倾斜时，升力的侧向部分让航迹弯曲；舞台上只画一个固定的倾斜姿态，不是计算出来的转弯 [S5, S58]。"
+      },
+      "primitive": {
+        "kind": "sweep",
+        "path": [
+          [
+            -0.2866,
+            -0.083,
+            0.79
+          ],
+          [
+            -0.2582,
+            -0.0738,
+            0.7022
+          ],
+          [
+            -0.2298,
+            -0.0646,
+            0.6144
+          ],
+          [
+            -0.2015,
+            -0.0554,
+            0.5267
+          ],
+          [
+            -0.1731,
+            -0.0461,
+            0.4389
+          ],
+          [
+            -0.1447,
+            -0.0369,
+            0.3511
+          ],
+          [
+            -0.1135,
+            -0.0277,
+            0.2633
+          ],
+          [
+            -0.0756,
+            -0.0185,
+            0.1756
+          ],
+          [
+            -0.0378,
+            -0.0092,
+            0.0878
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.0378,
+            0.0092,
+            -0.0878
+          ],
+          [
+            0.0756,
+            0.0185,
+            -0.1756
+          ],
+          [
+            0.1135,
+            0.0277,
+            -0.2633
+          ],
+          [
+            0.1513,
+            0.0369,
+            -0.3511
+          ],
+          [
+            0.1891,
+            0.0461,
+            -0.4389
+          ],
+          [
+            0.2269,
+            0.0554,
+            -0.5267
+          ],
+          [
+            0.2648,
+            0.0646,
+            -0.6144
+          ],
+          [
+            0.3026,
+            0.0738,
+            -0.7022
+          ],
+          [
+            0.3404,
+            0.083,
+            -0.79
+          ]
+        ],
+        "radius": [
+          0.3106,
+          0.2925,
+          0.2743,
+          0.2562,
+          0.238,
+          0.2199,
+          0.2046,
+          0.1959,
+          0.1872,
+          0.1785,
+          0.1698,
+          0.1611,
+          0.1524,
+          0.1437,
+          0.135,
+          0.1263,
+          0.1176,
+          0.1089,
+          0.1002
+        ],
+        "section": {
+          "flat": 0.14
+        },
+        "up": [
+          0,
+          1,
+          0
+        ],
+        "radial": 28,
+        "at": [
+          0.0408,
+          1.073,
+          -0.91
+        ],
+        "color": "casing"
+      },
+      "shell": true,
+      "explode": {
+        "dir": [
+          0,
+          0,
+          -1
+        ],
+        "dist": 0.5
+      },
+      "connects": [
+        "fuselage-shell",
+        "wing-tip-right",
+        "aileron-right",
+        "flap-right",
+        "slat-right",
+        "nacelle-right"
+      ]
+    },
+    {
+      "id": "wing-tip-left",
+      "name": {
+        "en": "Left wing tip",
+        "zh": "左翼尖"
+      },
+      "group": "airframe",
+      "summary": {
+        "en": "Closes off the outer end of the left wing.",
+        "zh": "收住左翼的外端。"
+      },
+      "detail": {
+        "en": "The outermost piece of the left wing, finishing its outline. It is part of the airliner seen in the background chapter and chapters 01, 04, 06 and 07.\n\nIt is drawn as a small upturned tip. The model makes no claim that its shape saves fuel or reduces drag by any amount [S58].",
+        "zh": "左翼最外端的一块，收住机翼的轮廓。它属于背景章和第 01、04、06、07 章里的客机。\n\n这里画成一个向上翘起的小翼尖。模型不声称这个形状能省多少油或减少多少阻力 [S58]。"
+      },
+      "primitive": {
+        "kind": "extrude",
+        "shape": [
+          [
+            0,
+            0
+          ],
+          [
+            0.2,
+            0
+          ],
+          [
+            0.235,
+            0.17
+          ],
+          [
+            0.165,
+            0.178
+          ]
+        ],
+        "depth": 0.012,
+        "bevel": 0.004,
+        "at": [
+          0.31,
+          1.1501,
+          1.7
+        ],
+        "rotation": [
+          12,
+          0,
+          0
+        ],
+        "color": "casing"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0.2,
+          1
+        ],
+        "dist": 0.75
+      },
+      "connects": [
+        "wing-left"
+      ]
+    },
+    {
+      "id": "wing-tip-right",
+      "name": {
+        "en": "Right wing tip",
+        "zh": "右翼尖"
+      },
+      "group": "airframe",
+      "summary": {
+        "en": "Closes off the outer end of the right wing.",
+        "zh": "收住右翼的外端。"
+      },
+      "detail": {
+        "en": "The outermost piece of the right wing, the mirror of the left tip. It is part of the airliner seen in the background chapter and chapters 01, 04, 06 and 07.\n\nIt is drawn as a small upturned tip, with no claim about fuel or drag savings [S58].",
+        "zh": "右翼最外端的一块，与左翼尖对称。它属于背景章和第 01、04、06、07 章里的客机。\n\n这里画成一个向上翘起的小翼尖，不声称能省油或减阻 [S58]。"
+      },
+      "primitive": {
+        "kind": "extrude",
+        "shape": [
+          [
+            0,
+            0
+          ],
+          [
+            0.2,
+            0
+          ],
+          [
+            0.235,
+            0.17
+          ],
+          [
+            0.165,
+            0.178
+          ]
+        ],
+        "depth": 0.012,
+        "bevel": 0.004,
+        "at": [
+          0.31,
+          1.1501,
+          -1.7
+        ],
+        "rotation": [
+          -12,
+          0,
+          0
+        ],
+        "color": "casing"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0.2,
+          -1
+        ],
+        "dist": 0.75
+      },
+      "connects": [
+        "wing-right"
+      ]
+    },
+    {
+      "id": "wing-box-skin",
+      "name": {
+        "en": "Wing skin",
+        "zh": "翼蒙皮"
+      },
+      "group": "airframe",
+      "summary": {
+        "en": "Covers the frame and closes the wing box.",
+        "zh": "包住骨架，封闭翼盒。"
+      },
+      "detail": {
+        "en": "The outer skin of a separate wing-box model, shown only in chapter 02, beat 1, where it is drawn faint so that the spars and ribs show through. It forms the wing’s smooth surface.\n\nTwo spars, the skin panels and the ribs at their ends together make a closed box, one common way of building a wing; real structures vary with the design [S43]. This short piece is a generic example drawn for structure, not at the airliner’s scale [S58].\n\nThe skin is the surface the air flows over; its shape comes from the ribs underneath [S43].",
+        "zh": "一个独立翼盒模型的外层蒙皮，只在第 02 章第 1 拍出现；那一拍把它画得很淡，透出里面的翼梁和翼肋。它构成机翼平滑的表面。\n\n两根翼梁、蒙皮板和两端的翼肋合成一个封闭的盒，这是机翼常见的一种做法；真实结构随设计而不同 [S43]。这一小段是为说明结构画的通用样件，不按客机的比例 [S58]。\n\n空气流过的就是蒙皮的表面；它的形状由下面的翼肋撑出来 [S43]。"
+      },
+      "shell": true,
+      "primitive": {
+        "kind": "extrude",
+        "shape": [
+          [
+            0.5,
+            0
+          ],
+          [
+            0.4977,
+            0.0005
+          ],
+          [
+            0.491,
+            0.0019
+          ],
+          [
+            0.4797,
+            0.0042
+          ],
+          [
+            0.4642,
+            0.0074
+          ],
+          [
+            0.4444,
+            0.0113
+          ],
+          [
+            0.4206,
+            0.0159
+          ],
+          [
+            0.393,
+            0.021
+          ],
+          [
+            0.3619,
+            0.0266
+          ],
+          [
+            0.3274,
+            0.0324
+          ],
+          [
+            0.29,
+            0.0384
+          ],
+          [
+            0.25,
+            0.0444
+          ],
+          [
+            0.2077,
+            0.0503
+          ],
+          [
+            0.1635,
+            0.056
+          ],
+          [
+            0.1179,
+            0.0613
+          ],
+          [
+            0.0712,
+            0.0662
+          ],
+          [
+            0.0238,
+            0.0704
+          ],
+          [
+            -0.0238,
+            0.074
+          ],
+          [
+            -0.0712,
+            0.0767
+          ],
+          [
+            -0.1179,
+            0.0786
+          ],
+          [
+            -0.1635,
+            0.0792
+          ],
+          [
+            -0.2077,
+            0.0785
+          ],
+          [
+            -0.25,
+            0.0766
+          ],
+          [
+            -0.29,
+            0.0734
+          ],
+          [
+            -0.3274,
+            0.069
+          ],
+          [
+            -0.3619,
+            0.0636
+          ],
+          [
+            -0.393,
+            0.0572
+          ],
+          [
+            -0.4206,
+            0.0501
+          ],
+          [
+            -0.4444,
+            0.0423
+          ],
+          [
+            -0.4642,
+            0.0342
+          ],
+          [
+            -0.4797,
+            0.0257
+          ],
+          [
+            -0.491,
+            0.0171
+          ],
+          [
+            -0.4977,
+            0.0085
+          ],
+          [
+            -0.5,
+            0
+          ],
+          [
+            -0.4977,
+            -0.0081
+          ],
+          [
+            -0.491,
+            -0.0153
+          ],
+          [
+            -0.4797,
+            -0.0218
+          ],
+          [
+            -0.4642,
+            -0.0273
+          ],
+          [
+            -0.4444,
+            -0.032
+          ],
+          [
+            -0.4206,
+            -0.0358
+          ],
+          [
+            -0.393,
+            -0.0387
+          ],
+          [
+            -0.3619,
+            -0.0407
+          ],
+          [
+            -0.3274,
+            -0.042
+          ],
+          [
+            -0.29,
+            -0.0424
+          ],
+          [
+            -0.25,
+            -0.0422
+          ],
+          [
+            -0.2077,
+            -0.0414
+          ],
+          [
+            -0.1635,
+            -0.0402
+          ],
+          [
+            -0.1179,
+            -0.0387
+          ],
+          [
+            -0.0712,
+            -0.0368
+          ],
+          [
+            -0.0238,
+            -0.0346
+          ],
+          [
+            0.0238,
+            -0.0321
+          ],
+          [
+            0.0712,
+            -0.0294
+          ],
+          [
+            0.1179,
+            -0.0266
+          ],
+          [
+            0.1635,
+            -0.0237
+          ],
+          [
+            0.2077,
+            -0.0208
+          ],
+          [
+            0.25,
+            -0.018
+          ],
+          [
+            0.29,
+            -0.0153
+          ],
+          [
+            0.3274,
+            -0.0127
+          ],
+          [
+            0.3619,
+            -0.0103
+          ],
+          [
+            0.393,
+            -0.008
+          ],
+          [
+            0.4206,
+            -0.006
+          ],
+          [
+            0.4444,
+            -0.0043
+          ],
+          [
+            0.4642,
+            -0.0028
+          ],
+          [
+            0.4797,
+            -0.0016
+          ],
+          [
+            0.491,
+            -0.0007
+          ],
+          [
+            0.4977,
+            -0.0002
+          ]
+        ],
+        "holes": [
+          [
+            [
+              0.4642,
+              0.0023
+            ],
+            [
+              0.4444,
+              0.0035
+            ],
+            [
+              0.4206,
+              0.0079
+            ],
+            [
+              0.393,
+              0.013
+            ],
+            [
+              0.3619,
+              0.0186
+            ],
+            [
+              0.3274,
+              0.0244
+            ],
+            [
+              0.29,
+              0.0304
+            ],
+            [
+              0.25,
+              0.0364
+            ],
+            [
+              0.2077,
+              0.0423
+            ],
+            [
+              0.1635,
+              0.048
+            ],
+            [
+              0.1179,
+              0.0533
+            ],
+            [
+              0.0712,
+              0.0582
+            ],
+            [
+              0.0238,
+              0.0624
+            ],
+            [
+              -0.0238,
+              0.066
+            ],
+            [
+              -0.0712,
+              0.0687
+            ],
+            [
+              -0.1179,
+              0.0706
+            ],
+            [
+              -0.1635,
+              0.0712
+            ],
+            [
+              -0.2077,
+              0.0705
+            ],
+            [
+              -0.25,
+              0.0686
+            ],
+            [
+              -0.29,
+              0.0654
+            ],
+            [
+              -0.3274,
+              0.061
+            ],
+            [
+              -0.3619,
+              0.0556
+            ],
+            [
+              -0.393,
+              0.0492
+            ],
+            [
+              -0.4206,
+              0.0421
+            ],
+            [
+              -0.4444,
+              0.0343
+            ],
+            [
+              -0.4642,
+              0.0262
+            ],
+            [
+              -0.4797,
+              0.0177
+            ],
+            [
+              -0.491,
+              0.0091
+            ],
+            [
+              -0.4797,
+              -0.0138
+            ],
+            [
+              -0.4642,
+              -0.0193
+            ],
+            [
+              -0.4444,
+              -0.024
+            ],
+            [
+              -0.4206,
+              -0.0278
+            ],
+            [
+              -0.393,
+              -0.0307
+            ],
+            [
+              -0.3619,
+              -0.0327
+            ],
+            [
+              -0.3274,
+              -0.034
+            ],
+            [
+              -0.29,
+              -0.0344
+            ],
+            [
+              -0.25,
+              -0.0342
+            ],
+            [
+              -0.2077,
+              -0.0334
+            ],
+            [
+              -0.1635,
+              -0.0322
+            ],
+            [
+              -0.1179,
+              -0.0307
+            ],
+            [
+              -0.0712,
+              -0.0288
+            ],
+            [
+              -0.0238,
+              -0.0266
+            ],
+            [
+              0.0238,
+              -0.0241
+            ],
+            [
+              0.0712,
+              -0.0214
+            ],
+            [
+              0.1179,
+              -0.0186
+            ],
+            [
+              0.1635,
+              -0.0157
+            ],
+            [
+              0.2077,
+              -0.0128
+            ],
+            [
+              0.25,
+              -0.01
+            ],
+            [
+              0.29,
+              -0.0073
+            ],
+            [
+              0.3274,
+              -0.0047
+            ],
+            [
+              0.3619,
+              -0.0023
+            ],
+            [
+              0.393,
+              0
+            ],
+            [
+              0.4206,
+              0.002
+            ],
+            [
+              0.4444,
+              0.0035
+            ]
+          ]
+        ],
+        "depth": 1,
+        "bevel": 0,
+        "at": [
+          0,
+          1.1,
+          2.4
+        ],
+        "color": "casing"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.3
+      },
+      "connects": [
+        "front-spar",
+        "rear-spar",
+        "wing-ribs"
+      ]
+    },
+    {
+      "id": "front-spar",
+      "name": {
+        "en": "Front spar",
+        "zh": "前翼梁"
+      },
+      "group": "airframe",
+      "summary": {
+        "en": "Runs along the span and carries bending loads.",
+        "zh": "沿翼展延伸，承担弯曲载荷。"
+      },
+      "detail": {
+        "en": "The forward of the two beams inside the wing-box model, seen in chapter 02, beat 1. It runs along the span, from the root of the wing towards the tip.\n\nSpars carry the bending loads of the wing [S43]. This one is drawn as a web with flanges along its top and bottom edges; its position near the front of the section is a drawing choice for this generic example [S58].\n\nWith the rear spar, the skin and the ribs it forms a closed box [S43].",
+        "zh": "翼盒模型里两根梁中靠前的一根，见第 02 章第 1 拍。它沿翼展方向，从翼根伸向翼尖。\n\n翼梁承担机翼的弯曲载荷 [S43]。这里画成一块腹板，上下边缘带缘条；它靠近剖面前部的位置是这个通用样件的绘图选择 [S58]。\n\n它和后翼梁、蒙皮、翼肋一起构成封闭的盒 [S43]。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.008,
+          0.0889,
+          0.99
+        ],
+        "bevel": 0.002,
+        "at": [
+          -0.35,
+          1.1122,
+          2.4
+        ],
+        "color": "steel"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.05,
+            0.007,
+            0.99
+          ],
+          "bevel": 0.002,
+          "at": [
+            -0.35,
+            1.1531,
+            2.4
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.05,
+            0.007,
+            0.99
+          ],
+          "bevel": 0.002,
+          "at": [
+            -0.35,
+            1.0712,
+            2.4
+          ],
+          "color": "steel"
+        }
+      ],
+      "explode": {
+        "dir": [
+          -1,
+          0,
+          0
+        ],
+        "dist": 0.15
+      },
+      "connects": [
+        "wing-box-skin",
+        "wing-ribs"
+      ]
+    },
+    {
+      "id": "rear-spar",
+      "name": {
+        "en": "Rear spar",
+        "zh": "后翼梁"
+      },
+      "group": "airframe",
+      "summary": {
+        "en": "Runs along the span and carries bending loads.",
+        "zh": "沿翼展延伸，承担弯曲载荷。"
+      },
+      "detail": {
+        "en": "The rear of the two beams inside the wing-box model, seen in chapter 02, beat 1. It runs along the span behind the front spar.\n\nSpars carry the wing’s bending loads [S43]. Behind the rear spar of a real wing there is room for the flaps and ailerons; this short model piece does not draw them [S58].\n\nWith the front spar, the skin and the ribs it closes the box [S43].",
+        "zh": "翼盒模型里两根梁中靠后的一根，见第 02 章第 1 拍。它在前翼梁后面沿翼展延伸。\n\n翼梁承担机翼的弯曲载荷 [S43]。真实机翼后翼梁的后面留着装襟翼和副翼的位置；这一小段模型没有画出它们 [S58]。\n\n它和前翼梁、蒙皮、翼肋一起封闭这个盒 [S43]。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.008,
+          0.0695,
+          0.99
+        ],
+        "bevel": 0.002,
+        "at": [
+          0.12,
+          1.1173,
+          2.4
+        ],
+        "color": "steel"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.05,
+            0.007,
+            0.99
+          ],
+          "bevel": 0.002,
+          "at": [
+            0.12,
+            1.1486,
+            2.4
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.05,
+            0.007,
+            0.99
+          ],
+          "bevel": 0.002,
+          "at": [
+            0.12,
+            1.086,
+            2.4
+          ],
+          "color": "steel"
+        }
+      ],
+      "explode": {
+        "dir": [
+          1,
+          0,
+          0
+        ],
+        "dist": 0.15
+      },
+      "connects": [
+        "wing-box-skin",
+        "wing-ribs"
+      ]
+    },
+    {
+      "id": "wing-ribs",
+      "name": {
+        "en": "Ribs",
+        "zh": "翼肋"
+      },
+      "group": "airframe",
+      "summary": {
+        "en": "Hold the wing in its airfoil shape.",
+        "zh": "保持机翼的翼型。"
+      },
+      "detail": {
+        "en": "The plates that run from the front of the wing to the back inside the wing-box model, seen in chapter 02, beat 1. Each one has the outline of the wing’s cross-section, with holes cut to save weight.\n\nRibs give the wing its airfoil shape and tie the spars and skin together [S43]. The model has three; that number is a drawing choice, not the count for any real wing [S58].\n\nThe rib outline is a generic curved section drawn for this structure; it is not the symmetric shape of the wing experiment [S58].",
+        "zh": "翼盒模型里从机翼前部排到后部的板，见第 02 章第 1 拍。每一块都是机翼剖面的轮廓，上面开了减重孔。\n\n翼肋给机翼以翼型，并把翼梁和蒙皮连在一起 [S43]。模型里有三道；这个数目是绘图选择，不是任何真实机翼的数目 [S58]。\n\n翼肋的轮廓是为这个结构画的通用弯曲剖面，不是机翼实验里的对称形状 [S58]。"
+      },
+      "primitive": {
+        "kind": "extrude",
+        "shape": [
+          [
+            0.4642,
+            0.0023
+          ],
+          [
+            0.4444,
+            0.0035
+          ],
+          [
+            0.4206,
+            0.0059
+          ],
+          [
+            0.393,
+            0.011
+          ],
+          [
+            0.3619,
+            0.0166
+          ],
+          [
+            0.3274,
+            0.0224
+          ],
+          [
+            0.29,
+            0.0284
+          ],
+          [
+            0.25,
+            0.0344
+          ],
+          [
+            0.2077,
+            0.0403
+          ],
+          [
+            0.1635,
+            0.046
+          ],
+          [
+            0.1179,
+            0.0513
+          ],
+          [
+            0.0712,
+            0.0562
+          ],
+          [
+            0.0238,
+            0.0604
+          ],
+          [
+            -0.0238,
+            0.064
+          ],
+          [
+            -0.0712,
+            0.0667
+          ],
+          [
+            -0.1179,
+            0.0686
+          ],
+          [
+            -0.1635,
+            0.0692
+          ],
+          [
+            -0.2077,
+            0.0685
+          ],
+          [
+            -0.25,
+            0.0666
+          ],
+          [
+            -0.29,
+            0.0634
+          ],
+          [
+            -0.3274,
+            0.059
+          ],
+          [
+            -0.3619,
+            0.0536
+          ],
+          [
+            -0.393,
+            0.0472
+          ],
+          [
+            -0.4206,
+            0.0401
+          ],
+          [
+            -0.4444,
+            0.0323
+          ],
+          [
+            -0.4642,
+            0.0242
+          ],
+          [
+            -0.4797,
+            0.0157
+          ],
+          [
+            -0.4642,
+            -0.0173
+          ],
+          [
+            -0.4444,
+            -0.022
+          ],
+          [
+            -0.4206,
+            -0.0258
+          ],
+          [
+            -0.393,
+            -0.0287
+          ],
+          [
+            -0.3619,
+            -0.0307
+          ],
+          [
+            -0.3274,
+            -0.032
+          ],
+          [
+            -0.29,
+            -0.0324
+          ],
+          [
+            -0.25,
+            -0.0322
+          ],
+          [
+            -0.2077,
+            -0.0314
+          ],
+          [
+            -0.1635,
+            -0.0302
+          ],
+          [
+            -0.1179,
+            -0.0287
+          ],
+          [
+            -0.0712,
+            -0.0268
+          ],
+          [
+            -0.0238,
+            -0.0246
+          ],
+          [
+            0.0238,
+            -0.0221
+          ],
+          [
+            0.0712,
+            -0.0194
+          ],
+          [
+            0.1179,
+            -0.0166
+          ],
+          [
+            0.1635,
+            -0.0137
+          ],
+          [
+            0.2077,
+            -0.0108
+          ],
+          [
+            0.25,
+            -0.008
+          ],
+          [
+            0.29,
+            -0.0053
+          ],
+          [
+            0.3274,
+            -0.0027
+          ],
+          [
+            0.3619,
+            -0.0003
+          ],
+          [
+            0.393,
+            0.002
+          ],
+          [
+            0.4206,
+            0.004
+          ],
+          [
+            0.4444,
+            0.0035
+          ]
+        ],
+        "holes": [
+          [
+            [
+              -0.2015,
+              0.0179
+            ],
+            [
+              -0.2029,
+              0.0267
+            ],
+            [
+              -0.207,
+              0.0346
+            ],
+            [
+              -0.2133,
+              0.0409
+            ],
+            [
+              -0.2212,
+              0.045
+            ],
+            [
+              -0.23,
+              0.0464
+            ],
+            [
+              -0.2388,
+              0.045
+            ],
+            [
+              -0.2467,
+              0.0409
+            ],
+            [
+              -0.253,
+              0.0346
+            ],
+            [
+              -0.2571,
+              0.0267
+            ],
+            [
+              -0.2585,
+              0.0179
+            ],
+            [
+              -0.2571,
+              0.0091
+            ],
+            [
+              -0.253,
+              0.0011
+            ],
+            [
+              -0.2467,
+              -0.0052
+            ],
+            [
+              -0.2388,
+              -0.0092
+            ],
+            [
+              -0.23,
+              -0.0106
+            ],
+            [
+              -0.2212,
+              -0.0092
+            ],
+            [
+              -0.2133,
+              -0.0052
+            ],
+            [
+              -0.207,
+              0.0011
+            ],
+            [
+              -0.2029,
+              0.0091
+            ]
+          ],
+          [
+            [
+              -0.0872,
+              0.02
+            ],
+            [
+              -0.0886,
+              0.0286
+            ],
+            [
+              -0.0925,
+              0.0363
+            ],
+            [
+              -0.0987,
+              0.0425
+            ],
+            [
+              -0.1064,
+              0.0464
+            ],
+            [
+              -0.115,
+              0.0478
+            ],
+            [
+              -0.1236,
+              0.0464
+            ],
+            [
+              -0.1313,
+              0.0425
+            ],
+            [
+              -0.1375,
+              0.0363
+            ],
+            [
+              -0.1414,
+              0.0286
+            ],
+            [
+              -0.1428,
+              0.02
+            ],
+            [
+              -0.1414,
+              0.0114
+            ],
+            [
+              -0.1375,
+              0.0036
+            ],
+            [
+              -0.1313,
+              -0.0025
+            ],
+            [
+              -0.1236,
+              -0.0065
+            ],
+            [
+              -0.115,
+              -0.0078
+            ],
+            [
+              -0.1064,
+              -0.0065
+            ],
+            [
+              -0.0987,
+              -0.0025
+            ],
+            [
+              -0.0925,
+              0.0036
+            ],
+            [
+              -0.0886,
+              0.0114
+            ]
+          ],
+          [
+            [
+              0.0247,
+              0.0194
+            ],
+            [
+              0.0235,
+              0.0271
+            ],
+            [
+              0.02,
+              0.0339
+            ],
+            [
+              0.0145,
+              0.0394
+            ],
+            [
+              0.0076,
+              0.0429
+            ],
+            [
+              0,
+              0.0441
+            ],
+            [
+              -0.0076,
+              0.0429
+            ],
+            [
+              -0.0145,
+              0.0394
+            ],
+            [
+              -0.02,
+              0.0339
+            ],
+            [
+              -0.0235,
+              0.0271
+            ],
+            [
+              -0.0247,
+              0.0194
+            ],
+            [
+              -0.0235,
+              0.0118
+            ],
+            [
+              -0.02,
+              0.0049
+            ],
+            [
+              -0.0145,
+              -0.0005
+            ],
+            [
+              -0.0076,
+              -0.004
+            ],
+            [
+              0,
+              -0.0052
+            ],
+            [
+              0.0076,
+              -0.004
+            ],
+            [
+              0.0145,
+              -0.0005
+            ],
+            [
+              0.02,
+              0.0049
+            ],
+            [
+              0.0235,
+              0.0118
+            ]
+          ]
+        ],
+        "depth": 0.008,
+        "bevel": 0,
+        "at": [
+          0,
+          1.1,
+          2.4
+        ],
+        "color": "casing",
+        "tint": "#a8adb1"
+      },
+      "repeat": {
+        "count": 3,
+        "axis": [
+          0,
+          0,
+          1
+        ],
+        "spacing": 0.4
+      },
+      "connects": [
+        "wing-box-skin",
+        "front-spar",
+        "rear-spar"
+      ]
+    },
+    {
+      "id": "aileron-left",
+      "name": {
+        "en": "Left aileron",
+        "zh": "左副翼"
+      },
+      "group": "flight-controls",
+      "summary": {
+        "en": "Rolls the aircraft, moving opposite to the right one.",
+        "zh": "与右副翼反向偏转，让飞机滚转。"
+      },
+      "detail": {
+        "en": "A hinged surface near the outer back edge of the left wing. Chapter 04, beat 1 moves it.\n\nThe two ailerons deflect in opposite directions, one up and one down, which rolls the aircraft into a bank [S5]. In the model each moves 12°, a design angle chosen to be visible [S58].\n\nBanking tilts the lift, and its sideways part curves the flight path [S5].",
+        "zh": "左翼外侧后缘一块可偏转的翼面。第 04 章第 1 拍让它动起来。\n\n两侧副翼朝相反方向偏转，一上一下，使飞机滚转、倾斜 [S5]。模型里每块偏 12°，这是为了看得清而选的设计角度 [S58]。\n\n倾斜使升力倾斜，升力的侧向部分让航迹弯曲 [S5]。"
+      },
+      "primitive": {
+        "kind": "extrude",
+        "shape": [
+          [
+            0.2532,
+            1.0055
+          ],
+          [
+            0.4854,
+            1.7094
+          ],
+          [
+            0.5379,
+            1.7094
+          ],
+          [
+            0.3448,
+            1.0055
+          ]
+        ],
+        "depth": 0.009,
+        "bevel": 0.003,
+        "at": [
+          0,
+          0.9774,
+          0
+        ],
+        "rotation": [
+          84,
+          0,
+          0
+        ],
+        "color": "casing",
+        "tint": "#8d949a"
+      },
+      "explode": {
+        "dir": [
+          0.3,
+          -0.3,
+          1
+        ],
+        "dist": 0.65
+      },
+      "connects": [
+        "wing-left"
+      ]
+    },
+    {
+      "id": "aileron-right",
+      "name": {
+        "en": "Right aileron",
+        "zh": "右副翼"
+      },
+      "group": "flight-controls",
+      "summary": {
+        "en": "Rolls the aircraft, moving opposite to the left one.",
+        "zh": "与左副翼反向偏转，让飞机滚转。"
+      },
+      "detail": {
+        "en": "A hinged surface near the outer back edge of the right wing. Chapter 04, beat 1 moves it the opposite way to the left aileron.\n\nOpposite aileron deflections roll the aircraft [S5]. The 12° on the model is a design angle, not a value from any aircraft [S58].\n\nOnce banked, the aircraft’s lift has a sideways part that curves its path [S5].",
+        "zh": "右翼外侧后缘一块可偏转的翼面。第 04 章第 1 拍让它朝与左副翼相反的方向偏转。\n\n两侧副翼反向偏转使飞机滚转 [S5]。模型上的 12° 是设计角度，不取自任何飞机 [S58]。\n\n飞机倾斜以后，升力有了侧向部分，让航迹弯曲 [S5]。"
+      },
+      "primitive": {
+        "kind": "extrude",
+        "shape": [
+          [
+            0.2532,
+            -1.0055
+          ],
+          [
+            0.4854,
+            -1.7094
+          ],
+          [
+            0.5379,
+            -1.7094
+          ],
+          [
+            0.3448,
+            -1.0055
+          ]
+        ],
+        "depth": 0.009,
+        "bevel": 0.003,
+        "at": [
+          0,
+          0.9774,
+          0
+        ],
+        "rotation": [
+          96,
+          0,
+          0
+        ],
+        "color": "casing",
+        "tint": "#8d949a"
+      },
+      "explode": {
+        "dir": [
+          0.3,
+          -0.3,
+          -1
+        ],
+        "dist": 0.65
+      },
+      "connects": [
+        "wing-right"
+      ]
+    },
+    {
+      "id": "spoiler-left",
+      "name": {
+        "en": "Spoiler",
+        "zh": "扰流板"
+      },
+      "group": "flight-controls",
+      "summary": {
+        "en": "Rises from the top of the wing to cut lift and add drag.",
+        "zh": "从机翼上表面抬起，减升增阻。"
+      },
+      "detail": {
+        "en": "A panel on the upper surface of the left wing, ahead of the flap; it rises in chapter 04’s last pose, independently of the flaps.\n\nSpoilers reduce lift and add drag; they are different from flaps [S8]. Only one panel is drawn, on the left wing, to keep the picture clear; this says nothing about how many a real wing has [S58].",
+        "zh": "左翼上表面、襟翼前方的一块板，在第 04 章最后一个姿态中抬起，与襟翼分开。\n\n扰流板减少升力、增加阻力，与襟翼不同 [S8]。为了画面清楚，只在左翼画了一块，这并不说明真实机翼上有几块 [S58]。"
+      },
+      "primitive": {
+        "kind": "extrude",
+        "shape": [
+          [
+            0.0248,
+            0.4223
+          ],
+          [
+            0.1476,
+            0.9251
+          ],
+          [
+            0.2146,
+            0.9251
+          ],
+          [
+            0.0918,
+            0.4223
+          ]
+        ],
+        "depth": 0.006,
+        "bevel": 0.002,
+        "at": [
+          0,
+          0.9973,
+          0
+        ],
+        "rotation": [
+          84,
+          0,
+          0
+        ],
+        "color": "casing",
+        "tint": "#8d949a"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0.8,
+          1
+        ],
+        "dist": 0.6
+      },
+      "connects": [
+        "wing-left"
+      ]
+    },
+    {
+      "id": "flap-left",
+      "name": {
+        "en": "Left flap",
+        "zh": "左襟翼"
+      },
+      "group": "flight-controls",
+      "summary": {
+        "en": "Slides back and down to help the wing at low speed.",
+        "zh": "向后、向下伸出，帮助机翼低速飞行。"
+      },
+      "detail": {
+        "en": "A movable surface on the inner trailing edge of the left wing. Chapter 04, beat 5 extends it.\n\nFlaps change the shape of the wing, and those that slide out also add area, so the wing gives more lift at lower speed; deployed flaps also add drag [S8]. In the model it slides back 0.04 m and turns down 20°, on a model ten times smaller than the design airliner [S58].\n\nFlaps are not spoilers: a raised spoiler cuts lift, while an extended flap lets the wing keep enough lift at a lower speed [S8].",
+        "zh": "左翼内侧后缘一块可以活动的翼面。第 04 章第 5 拍把它放出来。\n\n襟翼改变机翼形状，向外滑出的襟翼还增加面积，让机翼在较低速度下产生更多升力；放下的襟翼也增加阻力 [S8]。模型里它向后移 0.04 米、向下转 20°，这是在缩小十倍的模型上画的 [S58]。\n\n襟翼不是扰流板：扰流板抬起会减少升力，襟翼放出则让机翼在较低速度下仍有足够的升力 [S8]。"
+      },
+      "primitive": {
+        "kind": "extrude",
+        "shape": [
+          [
+            0.0805,
+            0.2212
+          ],
+          [
+            0.1271,
+            0.6234
+          ],
+          [
+            0.2465,
+            0.9854
+          ],
+          [
+            0.3393,
+            0.9854
+          ],
+          [
+            0.24,
+            0.6234
+          ],
+          [
+            0.24,
+            0.2212
+          ]
+        ],
+        "depth": 0.009,
+        "bevel": 0.003,
+        "at": [
+          0,
+          0.9774,
+          0
+        ],
+        "rotation": [
+          84,
+          0,
+          0
+        ],
+        "color": "casing",
+        "tint": "#8d949a"
+      },
+      "explode": {
+        "dir": [
+          0.4,
+          -0.5,
+          1
+        ],
+        "dist": 0.6
+      },
+      "connects": [
+        "wing-left"
+      ]
+    },
+    {
+      "id": "flap-right",
+      "name": {
+        "en": "Right flap",
+        "zh": "右襟翼"
+      },
+      "group": "flight-controls",
+      "summary": {
+        "en": "Slides back and down to help the wing at low speed.",
+        "zh": "向后、向下伸出，帮助机翼低速飞行。"
+      },
+      "detail": {
+        "en": "The movable surface on the inner trailing edge of the right wing, the mirror of the left flap. Chapter 04, beat 5 extends both together.\n\nExtended flaps let the wing give enough lift at a lower speed and add drag [S8]. The 0.04 m slide and 20° turn are design values for the model [S58].",
+        "zh": "右翼内侧后缘可以活动的翼面，与左襟翼对称。第 04 章第 5 拍把两侧一起放出来。\n\n放出的襟翼让机翼在较低速度下仍有足够的升力，同时增加阻力 [S8]。后移 0.04 米、下转 20° 是模型的设计值 [S58]。"
+      },
+      "primitive": {
+        "kind": "extrude",
+        "shape": [
+          [
+            0.0805,
+            -0.2212
+          ],
+          [
+            0.1271,
+            -0.6234
+          ],
+          [
+            0.2465,
+            -0.9854
+          ],
+          [
+            0.3393,
+            -0.9854
+          ],
+          [
+            0.24,
+            -0.6234
+          ],
+          [
+            0.24,
+            -0.2212
+          ]
+        ],
+        "depth": 0.009,
+        "bevel": 0.003,
+        "at": [
+          0,
+          0.9774,
+          0
+        ],
+        "rotation": [
+          96,
+          0,
+          0
+        ],
+        "color": "casing",
+        "tint": "#8d949a"
+      },
+      "explode": {
+        "dir": [
+          0.4,
+          -0.5,
+          -1
+        ],
+        "dist": 0.6
+      },
+      "connects": [
+        "wing-right"
+      ]
+    },
+    {
+      "id": "slat-left",
+      "name": {
+        "en": "Left slat",
+        "zh": "左缝翼"
+      },
+      "group": "flight-controls",
+      "summary": {
+        "en": "Moves forward from the leading edge for low speed.",
+        "zh": "从前缘向前伸出，帮助低速飞行。"
+      },
+      "detail": {
+        "en": "A curved strip along the leading edge of the left wing. Chapter 04, beat 5 moves it forward, opening a narrow gap in front of the wing.\n\nSlats on the leading edge, like flaps on the trailing edge, change the wing so that it can fly more slowly [S8]. In the model it moves forward 0.025 m [S58].",
+        "zh": "沿左翼前缘的一条弯曲翼片。第 04 章第 5 拍让它向前伸出，在机翼前面留出一道窄缝。\n\n前缘缝翼和后缘襟翼一样，改变机翼，让飞机能飞得更慢 [S8]。模型里它向前移 0.025 米 [S58]。"
+      },
+      "primitive": {
+        "kind": "sweep",
+        "path": [
+          [
+            -0.3498,
+            -0.0694,
+            -0.66
+          ],
+          [
+            -0.2623,
+            -0.052,
+            -0.495
+          ],
+          [
+            -0.1749,
+            -0.0347,
+            -0.33
+          ],
+          [
+            -0.0875,
+            -0.0173,
+            -0.165
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.0875,
+            0.0173,
+            0.165
+          ],
+          [
+            0.1749,
+            0.0347,
+            0.33
+          ],
+          [
+            0.2624,
+            0.052,
+            0.495
+          ],
+          [
+            0.3498,
+            0.0694,
+            0.66
+          ]
+        ],
+        "radius": 0.016,
+        "section": {
+          "flat": 0.48
+        },
+        "up": [
+          0,
+          1,
+          0
+        ],
+        "radial": 16,
+        "at": [
+          -0.1412,
+          1.0783,
+          0.96
+        ],
+        "color": "casing",
+        "tint": "#8d949a"
+      },
+      "explode": {
+        "dir": [
+          -0.6,
+          0,
+          1
+        ],
+        "dist": 0.6
+      },
+      "connects": [
+        "wing-left"
+      ]
+    },
+    {
+      "id": "slat-right",
+      "name": {
+        "en": "Right slat",
+        "zh": "右缝翼"
+      },
+      "group": "flight-controls",
+      "summary": {
+        "en": "Moves forward from the leading edge for low speed.",
+        "zh": "从前缘向前伸出，帮助低速飞行。"
+      },
+      "detail": {
+        "en": "The curved strip along the leading edge of the right wing, the mirror of the left slat. Chapter 04, beat 5 moves both forward.\n\nLeading-edge slats help the wing at lower speed [S8]; the 0.025 m movement is a design value for the model [S58].",
+        "zh": "沿右翼前缘的弯曲翼片，与左缝翼对称。第 04 章第 5 拍让两侧一起向前伸出。\n\n前缘缝翼帮助机翼低速飞行 [S8]；前移 0.025 米是模型的设计值 [S58]。"
+      },
+      "primitive": {
+        "kind": "sweep",
+        "path": [
+          [
+            -0.3498,
+            -0.0694,
+            0.66
+          ],
+          [
+            -0.2623,
+            -0.052,
+            0.495
+          ],
+          [
+            -0.1749,
+            -0.0347,
+            0.33
+          ],
+          [
+            -0.0875,
+            -0.0173,
+            0.165
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.0875,
+            0.0173,
+            -0.165
+          ],
+          [
+            0.1749,
+            0.0347,
+            -0.33
+          ],
+          [
+            0.2624,
+            0.052,
+            -0.495
+          ],
+          [
+            0.3498,
+            0.0694,
+            -0.66
+          ]
+        ],
+        "radius": 0.016,
+        "section": {
+          "flat": 0.48
+        },
+        "up": [
+          0,
+          1,
+          0
+        ],
+        "radial": 16,
+        "at": [
+          -0.1412,
+          1.0783,
+          -0.96
+        ],
+        "color": "casing",
+        "tint": "#8d949a"
+      },
+      "explode": {
+        "dir": [
+          -0.6,
+          0,
+          -1
+        ],
+        "dist": 0.6
+      },
+      "connects": [
+        "wing-right"
+      ]
+    },
+    {
+      "id": "tailplane-left",
+      "name": {
+        "en": "Left tailplane",
+        "zh": "左水平尾翼"
+      },
+      "short": {
+        "en": "L. tailplane",
+        "zh": "左平尾"
+      },
+      "group": "flight-controls",
+      "summary": {
+        "en": "Horizontal tail surface that carries the left elevator.",
+        "zh": "承载左升降舵的水平尾面。"
+      },
+      "detail": {
+        "en": "The left half of the horizontal tail, at the back of the fuselage. The left elevator is hinged to its back edge; see chapter 04, beat 2.\n\nThis airliner has a conventional rear tail, with the elevator on the horizontal tail; the Wright brothers’ first aircraft had its elevator in front instead [S6].",
+        "zh": "水平尾翼的左半边，在机身后部。左升降舵铰接在它的后缘，见第 04 章第 2 拍。\n\n这架客机是常规的后置尾翼，升降舵装在水平尾翼上；莱特兄弟的第一架飞机则把升降舵装在前面 [S6]。"
+      },
+      "primitive": {
+        "kind": "extrude",
+        "shape": [
+          [
+            1.446,
+            0.0402
+          ],
+          [
+            1.8743,
+            0.7039
+          ],
+          [
+            1.9895,
+            0.7039
+          ],
+          [
+            1.7377,
+            0.0402
+          ]
+        ],
+        "depth": 0.022,
+        "bevel": 0.007,
+        "at": [
+          0,
+          1.155,
+          0
+        ],
+        "rotation": [
+          84,
+          0,
+          0
+        ],
+        "color": "casing"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "connects": [
+        "fuselage-shell",
+        "elevator-left"
+      ]
+    },
+    {
+      "id": "tailplane-right",
+      "name": {
+        "en": "Right tailplane",
+        "zh": "右水平尾翼"
+      },
+      "short": {
+        "en": "R. tailplane",
+        "zh": "右平尾"
+      },
+      "group": "flight-controls",
+      "summary": {
+        "en": "Horizontal tail surface that carries the right elevator.",
+        "zh": "承载右升降舵的水平尾面。"
+      },
+      "detail": {
+        "en": "The right half of the horizontal tail, the mirror of the left. The right elevator is hinged to its back edge; see chapter 04, beat 2.\n\nOn a conventional tail the elevator is part of the horizontal tail [S6]. The shape is a generic design [S58].",
+        "zh": "水平尾翼的右半边，与左半边对称。右升降舵铰接在它的后缘，见第 04 章第 2 拍。\n\n常规尾翼的升降舵是水平尾翼的一部分 [S6]。外形是通用设计 [S58]。"
+      },
+      "primitive": {
+        "kind": "extrude",
+        "shape": [
+          [
+            1.446,
+            -0.0402
+          ],
+          [
+            1.8743,
+            -0.7039
+          ],
+          [
+            1.9895,
+            -0.7039
+          ],
+          [
+            1.7377,
+            -0.0402
+          ]
+        ],
+        "depth": 0.022,
+        "bevel": 0.007,
+        "at": [
+          0,
+          1.155,
+          0
+        ],
+        "rotation": [
+          96,
+          0,
+          0
+        ],
+        "color": "casing"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          -1
+        ],
+        "dist": 0.35
+      },
+      "connects": [
+        "fuselage-shell",
+        "elevator-right"
+      ]
+    },
+    {
+      "id": "elevator-left",
+      "name": {
+        "en": "Left elevator",
+        "zh": "左升降舵"
+      },
+      "group": "flight-controls",
+      "summary": {
+        "en": "Pitches the nose up or down.",
+        "zh": "让机头向上或向下转。"
+      },
+      "detail": {
+        "en": "The hinged back part of the left tailplane. Chapter 04, beat 2 raises both elevators.\n\nThe elevator is a hinged part of the horizontal tail and changes the aircraft’s pitch, turning the nose up or down [S6]. On the model it moves 10° up, a design angle [S58].",
+        "zh": "左水平尾翼后部可以偏转的部分。第 04 章第 2 拍让两侧升降舵一起上偏。\n\n升降舵是水平尾翼上可偏转的部分，改变飞机的俯仰，让机头向上或向下转 [S6]。模型上它上偏 10°，这是设计角度 [S58]。"
+      },
+      "primitive": {
+        "kind": "extrude",
+        "shape": [
+          [
+            1.7607,
+            0.0905
+          ],
+          [
+            1.9859,
+            0.6837
+          ],
+          [
+            2.0287,
+            0.6837
+          ],
+          [
+            1.865,
+            0.0905
+          ]
+        ],
+        "depth": 0.009,
+        "bevel": 0.003,
+        "at": [
+          0,
+          1.155,
+          0
+        ],
+        "rotation": [
+          84,
+          0,
+          0
+        ],
+        "color": "casing",
+        "tint": "#8d949a"
+      },
+      "explode": {
+        "dir": [
+          0.4,
+          0,
+          1
+        ],
+        "dist": 0.45
+      },
+      "connects": [
+        "tailplane-left"
+      ]
+    },
+    {
+      "id": "elevator-right",
+      "name": {
+        "en": "Right elevator",
+        "zh": "右升降舵"
+      },
+      "group": "flight-controls",
+      "summary": {
+        "en": "Pitches the nose up or down.",
+        "zh": "让机头向上或向下转。"
+      },
+      "detail": {
+        "en": "The hinged back part of the right tailplane, moving together with the left elevator in chapter 04, beat 2.\n\nThe elevators change pitch [S6]; the 10° on the model is a design angle, not a value from any aircraft [S58].",
+        "zh": "右水平尾翼后部可以偏转的部分，第 04 章第 2 拍和左升降舵一起动。\n\n升降舵改变俯仰 [S6]；模型上的 10° 是设计角度，不取自任何飞机 [S58]。"
+      },
+      "primitive": {
+        "kind": "extrude",
+        "shape": [
+          [
+            1.7607,
+            -0.0905
+          ],
+          [
+            1.9859,
+            -0.6837
+          ],
+          [
+            2.0287,
+            -0.6837
+          ],
+          [
+            1.865,
+            -0.0905
+          ]
+        ],
+        "depth": 0.009,
+        "bevel": 0.003,
+        "at": [
+          0,
+          1.155,
+          0
+        ],
+        "rotation": [
+          96,
+          0,
+          0
+        ],
+        "color": "casing",
+        "tint": "#8d949a"
+      },
+      "explode": {
+        "dir": [
+          0.4,
+          0,
+          -1
+        ],
+        "dist": 0.45
+      },
+      "connects": [
+        "tailplane-right"
+      ]
+    },
+    {
+      "id": "fin",
+      "name": {
+        "en": "Vertical fin",
+        "zh": "垂直尾翼"
+      },
+      "group": "flight-controls",
+      "summary": {
+        "en": "Upright tail surface that carries the rudder.",
+        "zh": "承载方向舵的竖直尾面。"
+      },
+      "detail": {
+        "en": "The upright surface at the back of the fuselage. The rudder is hinged to its back edge; it appears with the rudder in chapter 04, beat 3, and on the airliner in the background chapter.\n\nThe rudder hinged to the vertical tail controls yaw [S7]. The fin’s shape is a generic design [S58].",
+        "zh": "机身后部竖立的尾面。方向舵铰接在它的后缘；第 04 章第 3 拍和方向舵一起出现，背景章的客机上也能看到。\n\n铰接在垂直尾翼上的方向舵控制偏航 [S7]。垂直尾翼的外形是通用设计 [S58]。"
+      },
+      "primitive": {
+        "kind": "extrude",
+        "shape": [
+          [
+            1.3,
+            1.25
+          ],
+          [
+            1.7922,
+            1.88
+          ],
+          [
+            1.9672,
+            1.88
+          ],
+          [
+            1.762,
+            1.25
+          ]
+        ],
+        "depth": 0.024,
+        "bevel": 0.008,
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "casing"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.35
+      },
+      "connects": [
+        "fuselage-shell",
+        "rudder"
+      ]
+    },
+    {
+      "id": "rudder",
+      "name": {
+        "en": "Rudder",
+        "zh": "方向舵"
+      },
+      "group": "flight-controls",
+      "summary": {
+        "en": "Yaws the nose left or right.",
+        "zh": "让机头向左或向右偏。"
+      },
+      "detail": {
+        "en": "The hinged back part of the vertical fin. Chapter 04, beat 3 turns it.\n\nThe rudder controls yaw, turning the nose left or right; in a coordinated turn it helps keep the aircraft lined up with its curving path [S7]. On the model it turns 10°, a design angle [S58].\n\nThe turn itself comes mainly from banking, which tilts the lift [S5].",
+        "zh": "垂直尾翼后部可以偏转的部分。第 04 章第 3 拍让它偏转。\n\n方向舵控制偏航，让机头向左或向右偏；协调转弯时，它帮助飞机对准弯曲的航迹 [S7]。模型上它偏 10°，这是设计角度 [S58]。\n\n转弯本身主要靠倾斜，让升力倾斜 [S5]。"
+      },
+      "primitive": {
+        "kind": "extrude",
+        "shape": [
+          [
+            1.7855,
+            1.31
+          ],
+          [
+            1.9614,
+            1.85
+          ],
+          [
+            2.0383,
+            1.85
+          ],
+          [
+            1.9678,
+            1.31
+          ]
+        ],
+        "depth": 0.01,
+        "bevel": 0.003,
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "casing",
+        "tint": "#8d949a"
+      },
+      "explode": {
+        "dir": [
+          0.5,
+          1,
+          0
+        ],
+        "dist": 0.45
+      },
+      "connects": [
+        "fin"
+      ]
+    },
+    {
+      "id": "nacelle-left",
+      "name": {
+        "en": "Left nacelle",
+        "zh": "左发动机舱"
+      },
+      "group": "propulsion",
+      "summary": {
+        "en": "Encloses the left engine and its fan.",
+        "zh": "包住左发动机和它的风扇。"
+      },
+      "detail": {
+        "en": "The streamlined casing of the left engine, hung below the left wing. Seen on the airliner throughout; chapter 01, beat 4 hides both engines for the glider comparison.\n\nThe engines supply the thrust, while the wings provide most of the lift [S1]. What is inside an engine like this is shown in the separate cutaway of chapter 05 [S9].\n\nHigher up the air is thinner, but the engines still need enough of it: the thrust available is one of the limits on how high an aircraft cruises [S12].",
+        "zh": "左发动机流线形的外罩，挂在左翼下面。客机出现时都能看到；第 01 章第 4 拍为了和滑翔机对照，把两台发动机都藏了起来。\n\n发动机提供推力，大部分升力来自机翼 [S1]。这类发动机里面是什么样，见第 05 章单独的剖面模型 [S9]。\n\n越往高处空气越稀薄，但发动机仍然需要足够的空气：可用推力是限制巡航高度的因素之一 [S12]。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0.098,
+            -0.22
+          ],
+          [
+            0.109,
+            -0.2
+          ],
+          [
+            0.115,
+            -0.15
+          ],
+          [
+            0.117,
+            -0.06
+          ],
+          [
+            0.113,
+            0.06
+          ],
+          [
+            0.102,
+            0.17
+          ],
+          [
+            0.094,
+            0.22
+          ],
+          [
+            0.086,
+            0.22
+          ],
+          [
+            0.087,
+            0.06
+          ],
+          [
+            0.089,
+            -0.12
+          ],
+          [
+            0.09,
+            -0.19
+          ],
+          [
+            0.093,
+            -0.215
+          ],
+          [
+            0.098,
+            -0.22
+          ]
+        ],
+        "segments": 48,
+        "at": [
+          -0.58,
+          0.84,
+          0.6
+        ],
+        "rotation": [
+          0,
+          0,
+          -90
+        ],
+        "color": "casing"
+      },
+      "extra": [
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              -0.64,
+              0.94
+            ],
+            [
+              -0.42,
+              1.0409
+            ],
+            [
+              0,
+              1.0309
+            ],
+            [
+              0.02,
+              0.9989
+            ],
+            [
+              -0.3,
+              0.94
+            ]
+          ],
+          "depth": 0.022,
+          "bevel": 0.006,
+          "at": [
+            0,
+            0,
+            0.6
+          ],
+          "color": "casing"
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              0.17
+            ],
+            [
+              0.074,
+              0.17
+            ],
+            [
+              0.07,
+              0.24
+            ],
+            [
+              0.048,
+              0.3
+            ],
+            [
+              0.022,
+              0.345
+            ],
+            [
+              0,
+              0.36
+            ]
+          ],
+          "segments": 32,
+          "at": [
+            -0.58,
+            0.84,
+            0.6
+          ],
+          "rotation": [
+            0,
+            0,
+            -90
+          ],
+          "color": "steel"
+        }
+      ],
+      "shell": true,
+      "explode": {
+        "dir": [
+          0,
+          -1,
+          0.4
+        ],
+        "dist": 0.35
+      },
+      "connects": [
+        "wing-left",
+        "fan-left"
+      ]
+    },
+    {
+      "id": "nacelle-right",
+      "name": {
+        "en": "Right nacelle",
+        "zh": "右发动机舱"
+      },
+      "group": "propulsion",
+      "summary": {
+        "en": "Encloses the right engine and its fan.",
+        "zh": "包住右发动机和它的风扇。"
+      },
+      "detail": {
+        "en": "The casing of the right engine, below the right wing. In chapter 03, beat 5 it stands beside the wing experiment, its fan still turning while the wing section stalls.\n\nA wing stall concerns the airflow over the wing and its lift, not an engine stopping [S3]. The engine supplies thrust [S1].",
+        "zh": "右发动机的外罩，在右翼下面。第 03 章第 5 拍里它出现在机翼实验旁边：翼段失速时，它的风扇照样在转。\n\n机翼失速说的是机翼上方的气流和升力，不是发动机停转 [S3]。发动机提供推力 [S1]。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0.098,
+            -0.22
+          ],
+          [
+            0.109,
+            -0.2
+          ],
+          [
+            0.115,
+            -0.15
+          ],
+          [
+            0.117,
+            -0.06
+          ],
+          [
+            0.113,
+            0.06
+          ],
+          [
+            0.102,
+            0.17
+          ],
+          [
+            0.094,
+            0.22
+          ],
+          [
+            0.086,
+            0.22
+          ],
+          [
+            0.087,
+            0.06
+          ],
+          [
+            0.089,
+            -0.12
+          ],
+          [
+            0.09,
+            -0.19
+          ],
+          [
+            0.093,
+            -0.215
+          ],
+          [
+            0.098,
+            -0.22
+          ]
+        ],
+        "segments": 48,
+        "at": [
+          -0.58,
+          0.84,
+          -0.6
+        ],
+        "rotation": [
+          0,
+          0,
+          -90
+        ],
+        "color": "casing"
+      },
+      "extra": [
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              -0.64,
+              0.94
+            ],
+            [
+              -0.42,
+              1.0409
+            ],
+            [
+              0,
+              1.0309
+            ],
+            [
+              0.02,
+              0.9989
+            ],
+            [
+              -0.3,
+              0.94
+            ]
+          ],
+          "depth": 0.022,
+          "bevel": 0.006,
+          "at": [
+            0,
+            0,
+            -0.6
+          ],
+          "color": "casing"
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              0.17
+            ],
+            [
+              0.074,
+              0.17
+            ],
+            [
+              0.07,
+              0.24
+            ],
+            [
+              0.048,
+              0.3
+            ],
+            [
+              0.022,
+              0.345
+            ],
+            [
+              0,
+              0.36
+            ]
+          ],
+          "segments": 32,
+          "at": [
+            -0.58,
+            0.84,
+            -0.6
+          ],
+          "rotation": [
+            0,
+            0,
+            -90
+          ],
+          "color": "steel"
+        }
+      ],
+      "shell": true,
+      "explode": {
+        "dir": [
+          0,
+          -1,
+          -0.4
+        ],
+        "dist": 0.35
+      },
+      "connects": [
+        "wing-right",
+        "fan-right"
+      ]
+    },
+    {
+      "id": "fan-left",
+      "name": {
+        "en": "Left fan",
+        "zh": "左风扇"
+      },
+      "group": "propulsion",
+      "summary": {
+        "en": "Turns at the front of the left engine, moving air back.",
+        "zh": "在左发动机前端转动，把空气推向后方。"
+      },
+      "detail": {
+        "en": "The fan at the front of the left engine, seen through the intake whenever the airliner runs.\n\nIn a turbofan the front fan feeds air both into the core and around it, and both streams help to produce thrust [S9]. It turns at 30 rpm on screen, slowed down for reading; this is not a real engine speed [S58].",
+        "zh": "左发动机前端的风扇，客机运转时从进气口能看到。\n\n涡扇发动机前方的风扇把空气送进核心，也送到核心外面绕过去，两股气流都帮助产生推力 [S9]。画面里它每分钟转 30 转，是为了看得清而放慢的，不是真实转速 [S58]。"
+      },
+      "primitive": {
+        "kind": "blades",
+        "count": 18,
+        "radius": 0.085,
+        "hub": 0.027,
+        "chord": 0.03,
+        "twist": 30,
+        "sweep": 20,
+        "pitch": 42,
+        "thickness": 0.003,
+        "at": [
+          -0.74,
+          0.84,
+          0.6
+        ],
+        "rotation": [
+          0,
+          0,
+          90
+        ],
+        "color": "steel"
+      },
+      "explode": {
+        "dir": [
+          -1,
+          -0.6,
+          0.3
+        ],
+        "dist": 0.5
+      },
+      "connects": [
+        "nacelle-left"
+      ]
+    },
+    {
+      "id": "fan-right",
+      "name": {
+        "en": "Right fan",
+        "zh": "右风扇"
+      },
+      "group": "propulsion",
+      "summary": {
+        "en": "Turns at the front of the right engine, moving air back.",
+        "zh": "在右发动机前端转动，把空气推向后方。"
+      },
+      "detail": {
+        "en": "The fan at the front of the right engine. In chapter 03, beat 5 it keeps turning beside the stalled wing section: a stall is about airflow and lift, not about the engine [S3].\n\nThe fan sends air into and around the core [S9]. It turns at 30 rpm on screen, slowed down for reading [S58].",
+        "zh": "右发动机前端的风扇。第 03 章第 5 拍里，它在失速的翼段旁边照样转动：失速说的是气流和升力，与发动机无关 [S3]。\n\n风扇把空气送进核心，也送到核心外面 [S9]。画面里每分钟转 30 转，是为了看得清而放慢的 [S58]。"
+      },
+      "primitive": {
+        "kind": "blades",
+        "count": 18,
+        "radius": 0.085,
+        "hub": 0.027,
+        "chord": 0.03,
+        "twist": 30,
+        "sweep": 20,
+        "pitch": 42,
+        "thickness": 0.003,
+        "at": [
+          -0.74,
+          0.84,
+          -0.6
+        ],
+        "rotation": [
+          0,
+          0,
+          90
+        ],
+        "color": "steel"
+      },
+      "explode": {
+        "dir": [
+          -1,
+          -0.6,
+          -0.3
+        ],
+        "dist": 0.5
+      },
+      "connects": [
+        "nacelle-right"
+      ]
+    },
+    {
+      "id": "engine-shell",
+      "name": {
+        "en": "Engine case",
+        "zh": "发动机外壳"
+      },
+      "group": "propulsion",
+      "summary": {
+        "en": "Surrounds the fan and the outer air stream.",
+        "zh": "围住风扇和外圈气流。"
+      },
+      "detail": {
+        "en": "The outer casing of the separate turbofan cutaway, seen in chapter 05 and in beat 3 of the background chapter. The half facing you is cut away so the inside shows; the fixed guide vanes behind the fan belong to it.\n\nAir enters through the inlet at the front, and the fan splits it between the core and the bypass stream around it [S9]. The cutaway is drawn for structure; its size has no common scale with the airliner [S58].",
+        "zh": "独立涡扇剖面模型的外壳，见第 05 章和背景章第 3 拍。朝向你的一半被剖掉，露出里面；风扇后面固定不动的导向叶片也属于它。\n\n空气从前方的进气口进入，风扇把它分成穿过核心的一股和绕过核心的外涵气流 [S9]。这个剖面只用来说明结构，尺寸与客机没有共同比例尺 [S58]。"
+      },
+      "shell": true,
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0.345,
+            -0.92
+          ],
+          [
+            0.366,
+            -0.905
+          ],
+          [
+            0.384,
+            -0.86
+          ],
+          [
+            0.396,
+            -0.78
+          ],
+          [
+            0.401,
+            -0.6
+          ],
+          [
+            0.398,
+            -0.3
+          ],
+          [
+            0.386,
+            -0.05
+          ],
+          [
+            0.372,
+            0.12
+          ],
+          [
+            0.353,
+            0.12
+          ],
+          [
+            0.346,
+            -0.1
+          ],
+          [
+            0.339,
+            -0.5
+          ],
+          [
+            0.336,
+            -0.78
+          ],
+          [
+            0.339,
+            -0.88
+          ],
+          [
+            0.345,
+            -0.92
+          ]
+        ],
+        "segments": 64,
+        "at": [
+          0,
+          0.8,
+          -2.8
+        ],
+        "rotation": [
+          0,
+          0,
+          -90
+        ],
+        "color": "casing"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.035,
+            0.13,
+            0.012
+          ],
+          "bevel": 0.003,
+          "at": [
+            -0.42,
+            1.0338,
+            -2.665
+          ],
+          "rotation": [
+            30,
+            0,
+            0
+          ],
+          "color": "casing"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.035,
+            0.13,
+            0.012
+          ],
+          "bevel": 0.003,
+          "at": [
+            -0.42,
+            0.8,
+            -2.53
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "color": "casing"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.035,
+            0.13,
+            0.012
+          ],
+          "bevel": 0.003,
+          "at": [
+            -0.42,
+            0.5662,
+            -2.665
+          ],
+          "rotation": [
+            150,
+            0,
+            0
+          ],
+          "color": "casing"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.035,
+            0.13,
+            0.012
+          ],
+          "bevel": 0.003,
+          "at": [
+            -0.42,
+            0.5662,
+            -2.935
+          ],
+          "rotation": [
+            210,
+            0,
+            0
+          ],
+          "color": "casing"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.035,
+            0.13,
+            0.012
+          ],
+          "bevel": 0.003,
+          "at": [
+            -0.42,
+            0.8,
+            -3.07
+          ],
+          "rotation": [
+            270,
+            0,
+            0
+          ],
+          "color": "casing"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.035,
+            0.13,
+            0.012
+          ],
+          "bevel": 0.003,
+          "at": [
+            -0.42,
+            1.0338,
+            -2.935
+          ],
+          "rotation": [
+            330,
+            0,
+            0
+          ],
+          "color": "casing"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.3
+      },
+      "connects": [
+        "bypass-duct",
+        "bypass-nozzle",
+        "compressor-bank",
+        "turbine-bank",
+        "core-nozzle"
+      ]
+    },
+    {
+      "id": "fan-disc",
+      "name": {
+        "en": "Fan",
+        "zh": "风扇"
+      },
+      "group": "propulsion",
+      "summary": {
+        "en": "Pushes air into both the bypass and the core.",
+        "zh": "把空气推进外涵和核心两路。"
+      },
+      "detail": {
+        "en": "The large bladed disc at the front of the turbofan cutaway, chapter 05 and background beat 3. It is fixed to the fan shaft and turns with the fan turbine at the back.\n\nThe fan draws air in and sends part of it through the core and part around it; the fan-driven bypass air contributes thrust [S9]. In this two-spool example the fan turbine drives it through the inner shaft [S9]. It turns at 30 rpm on screen, slowed down; the number of blades is a drawing choice [S58].",
+        "zh": "涡扇剖面模型前方带叶片的大圆盘，见第 05 章和背景章第 3 拍。它固定在风扇轴上，和后部的风扇涡轮一起转。\n\n风扇把空气吸进来，一部分送进核心，一部分绕过核心；风扇推动的外涵空气也产生推力 [S9]。在这个两转子例子里，风扇涡轮经内轴带动它 [S9]。画面里每分钟转 30 转，已放慢；叶片数是绘图选择 [S58]。"
+      },
+      "primitive": {
+        "kind": "blades",
+        "count": 22,
+        "radius": 0.325,
+        "hub": 0.1,
+        "chord": 0.11,
+        "twist": 38,
+        "sweep": 18,
+        "pitch": 52,
+        "thickness": 0.007,
+        "at": [
+          -0.72,
+          0.8,
+          -2.8
+        ],
+        "rotation": [
+          0,
+          0,
+          90
+        ],
+        "color": "steel"
+      },
+      "extra": [
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              -0.88
+            ],
+            [
+              0.03,
+              -0.86
+            ],
+            [
+              0.062,
+              -0.82
+            ],
+            [
+              0.088,
+              -0.78
+            ],
+            [
+              0.1,
+              -0.76
+            ],
+            [
+              0,
+              -0.76
+            ]
+          ],
+          "segments": 48,
+          "at": [
+            0,
+            0.8,
+            -2.8
+          ],
+          "rotation": [
+            0,
+            0,
+            -90
+          ],
+          "color": "steel"
+        }
+      ],
+      "explode": {
+        "dir": [
+          -1,
+          0,
+          0
+        ],
+        "dist": 0.3
+      },
+      "connects": [
+        "lp-shaft",
+        "bypass-duct"
+      ]
+    },
+    {
+      "id": "bypass-duct",
+      "name": {
+        "en": "Bypass duct",
+        "zh": "外涵道"
+      },
+      "group": "propulsion",
+      "summary": {
+        "en": "Guides the outer air stream around the core.",
+        "zh": "引导外圈气流绕过核心。"
+      },
+      "detail": {
+        "en": "The ring-shaped channel between the core and the engine case, chapter 05, beat 2. Air pushed by the outer part of the fan flows through it.\n\nBypass air goes around the combustor and turbines and never passes through them; it leaves through the bypass outlet and adds to the thrust [S9].\n\nEngineers compare the two streams with the bypass ratio, a ratio of air mass flows; the dots on the stage show the route, not the amount [S9, S58].",
+        "zh": "核心与发动机外壳之间的环形通道，见第 05 章第 2 拍。风扇外圈推动的空气从这里流过。\n\n外涵空气绕过燃烧室和涡轮，从不穿过它们；它从外涵出口排出，也贡献推力 [S9]。\n\n工程师用涵道比比较两股气流，那是空气质量流量之比；舞台上的点只表示路线，不表示流量 [S9, S58]。"
+      },
+      "shell": true,
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0.198,
+            -0.6
+          ],
+          [
+            0.205,
+            -0.56
+          ],
+          [
+            0.211,
+            -0.4
+          ],
+          [
+            0.209,
+            -0.1
+          ],
+          [
+            0.2,
+            0.2
+          ],
+          [
+            0.191,
+            0.45
+          ],
+          [
+            0.186,
+            0.56
+          ],
+          [
+            0.174,
+            0.56
+          ],
+          [
+            0.179,
+            0.45
+          ],
+          [
+            0.188,
+            0.2
+          ],
+          [
+            0.197,
+            -0.1
+          ],
+          [
+            0.199,
+            -0.4
+          ],
+          [
+            0.193,
+            -0.55
+          ],
+          [
+            0.19,
+            -0.58
+          ],
+          [
+            0.198,
+            -0.6
+          ]
+        ],
+        "segments": 64,
+        "at": [
+          0,
+          0.8,
+          -2.8
+        ],
+        "rotation": [
+          0,
+          0,
+          -90
+        ],
+        "color": "casing"
+      },
+      "extra": [
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0.202,
+              -0.6
+            ],
+            [
+              0.187,
+              -0.55
+            ],
+            [
+              0.172,
+              -0.45
+            ],
+            [
+              0.152,
+              -0.25
+            ],
+            [
+              0.132,
+              -0.02
+            ],
+            [
+              0.177,
+              0.02
+            ],
+            [
+              0.177,
+              0.22
+            ],
+            [
+              0.152,
+              0.26
+            ],
+            [
+              0.172,
+              0.42
+            ],
+            [
+              0.184,
+              0.56
+            ],
+            [
+              0.172,
+              0.56
+            ],
+            [
+              0.16,
+              0.42
+            ],
+            [
+              0.14,
+              0.26
+            ],
+            [
+              0.165,
+              0.22
+            ],
+            [
+              0.165,
+              0.02
+            ],
+            [
+              0.12,
+              -0.02
+            ],
+            [
+              0.14,
+              -0.25
+            ],
+            [
+              0.16,
+              -0.45
+            ],
+            [
+              0.175,
+              -0.55
+            ],
+            [
+              0.19,
+              -0.6
+            ],
+            [
+              0.202,
+              -0.6
+            ]
+          ],
+          "segments": 64,
+          "at": [
+            0,
+            0.8,
+            -2.8
+          ],
+          "rotation": [
+            0,
+            0,
+            -90
+          ],
+          "color": "casing"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.2
+      },
+      "connects": [
+        "fan-disc",
+        "engine-shell",
+        "bypass-nozzle"
+      ]
+    },
+    {
+      "id": "compressor-bank",
+      "name": {
+        "en": "Compressor stators",
+        "zh": "压气机静子"
+      },
+      "short": {
+        "en": "Comp. stators",
+        "zh": "压气机静子"
+      },
+      "group": "propulsion",
+      "summary": {
+        "en": "Fixed blade rows that guide air through the compressor.",
+        "zh": "固定叶排，引导空气穿过压气机。"
+      },
+      "detail": {
+        "en": "The fixed rows of blades between the compressor’s rotating rows, chapter 05, beats 2 and 3. They hang from the core casing and do not turn.\n\nIn the core, the air is compressed before fuel is added and burned [S9]. The rotating compressor blades do the squeezing; these fixed rows between them guide the air. The number of rows is a drawing choice, not a real stage count [S58].",
+        "zh": "压气机转动叶排之间固定的叶排，见第 05 章第 2、3 拍。它们装在核心机匣上，不转。\n\n在核心里，空气先被压缩，然后才加入燃料燃烧 [S9]。压缩靠转动的压气机叶片；夹在中间的这些固定叶排负责引导气流。叶排数是绘图选择，不是真实级数 [S58]。"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.003,
+          0.003,
+          0.003
+        ],
+        "at": [
+          -0.405,
+          0.8,
+          -2.8
+        ],
+        "color": "casing",
+        "tint": "#a3a8ad"
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "size": [
+            0.026,
+            0.0765,
+            0.0045
+          ],
+          "at": [
+            -0.405,
+            0.9173,
+            -2.8
+          ],
+          "rotation": [
+            0,
+            -38,
+            0
+          ],
+          "color": "casing",
+          "tint": "#a3a8ad"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.026,
+            0.062,
+            0.0045
+          ],
+          "at": [
+            -0.295,
+            0.9135,
+            -2.8
+          ],
+          "rotation": [
+            0,
+            -38,
+            0
+          ],
+          "color": "casing",
+          "tint": "#a3a8ad"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.026,
+            0.0483,
+            0.0045
+          ],
+          "at": [
+            -0.185,
+            0.9102,
+            -2.8
+          ],
+          "rotation": [
+            0,
+            -38,
+            0
+          ],
+          "color": "casing",
+          "tint": "#a3a8ad"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.026,
+            0.0352,
+            0.0045
+          ],
+          "at": [
+            -0.075,
+            0.9072,
+            -2.8
+          ],
+          "rotation": [
+            0,
+            -38,
+            0
+          ],
+          "color": "casing",
+          "tint": "#a3a8ad"
+        }
+      ],
+      "repeat": {
+        "count": 24,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "radius": 0.001
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.2
+      },
+      "connects": [
+        "engine-shell",
+        "compressor-rotor",
+        "combustor-ring"
+      ]
+    },
+    {
+      "id": "compressor-rotor",
+      "name": {
+        "en": "Compressor rotor",
+        "zh": "压气机转子"
+      },
+      "short": {
+        "en": "Comp. rotor",
+        "zh": "压气机转子"
+      },
+      "group": "propulsion",
+      "summary": {
+        "en": "Rotating blades that squeeze the core air.",
+        "zh": "转动的叶片，压缩核心气流。"
+      },
+      "detail": {
+        "en": "The rotating blade rows of the compressor, chapter 05, beat 3. They are fixed to the hollow core shaft.\n\nThe core turbine drives the compressor through a shaft [S9]. Here it turns with the core shaft and core turbine at 45 rpm on screen, faster than the fan spool but slowed down for reading [S58].\n\nThe order inside the core is fixed: compress first, then burn, then the turbines [S9].",
+        "zh": "压气机转动的叶排，见第 05 章第 3 拍。它们固定在空心的核心轴上。\n\n核心涡轮经轴带动压气机 [S9]。在这里它和核心轴、核心涡轮一起，画面上每分钟转 45 转，比风扇转子快，但仍是放慢的 [S58]。\n\n核心里的顺序是固定的：先压缩，再燃烧，然后经过涡轮 [S9]。"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.003,
+          0.003,
+          0.003
+        ],
+        "at": [
+          -0.46,
+          0.8,
+          -2.8
+        ],
+        "color": "steel"
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "size": [
+            0.03,
+            0.0882,
+            0.0045
+          ],
+          "at": [
+            -0.46,
+            0.9114,
+            -2.8
+          ],
+          "rotation": [
+            0,
+            40,
+            0
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.03,
+            0.0732,
+            0.0045
+          ],
+          "at": [
+            -0.35,
+            0.9074,
+            -2.8
+          ],
+          "rotation": [
+            0,
+            40,
+            0
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.03,
+            0.0588,
+            0.0045
+          ],
+          "at": [
+            -0.24,
+            0.9037,
+            -2.8
+          ],
+          "rotation": [
+            0,
+            40,
+            0
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.03,
+            0.0458,
+            0.0045
+          ],
+          "at": [
+            -0.13,
+            0.9007,
+            -2.8
+          ],
+          "rotation": [
+            0,
+            40,
+            0
+          ],
+          "color": "steel"
+        }
+      ],
+      "repeat": {
+        "count": 24,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "radius": 0.001
+      },
+      "explode": {
+        "dir": [
+          0,
+          -1,
+          0
+        ],
+        "dist": 0.25
+      },
+      "connects": [
+        "compressor-bank",
+        "hp-shaft"
+      ]
+    },
+    {
+      "id": "combustor-ring",
+      "name": {
+        "en": "Combustor",
+        "zh": "燃烧室"
+      },
+      "group": "propulsion",
+      "summary": {
+        "en": "Burns fuel in the compressed air.",
+        "zh": "在压缩后的空气里燃烧燃料。"
+      },
+      "detail": {
+        "en": "The ring-shaped chamber between the compressor and the turbines, chapter 05, beat 3, and background beat 3. The shafts pass through the hole in its middle.\n\nFuel is added to the compressed air and burned here; the hot gas then flows through the turbines and towards the nozzle [S9]. The bypass air never passes through it [S9].\n\nThe model draws no flame outside the engine; the colour of the hot-gas dots marks hot gas, not a temperature scale [S58].",
+        "zh": "压气机和涡轮之间的环形腔，见第 05 章第 3 拍和背景章第 3 拍。两根轴从它中间的孔穿过。\n\n燃料加进压缩后的空气，在这里燃烧；热气随后流过涡轮，流向喷口 [S9]。外涵空气从不经过这里 [S9]。\n\n模型不在发动机外面画火焰；热气点的颜色只表示热气，不是温度刻度 [S58]。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0.152,
+            0.03
+          ],
+          [
+            0.16,
+            0.08
+          ],
+          [
+            0.157,
+            0.17
+          ],
+          [
+            0.142,
+            0.212
+          ],
+          [
+            0.136,
+            0.212
+          ],
+          [
+            0.151,
+            0.17
+          ],
+          [
+            0.154,
+            0.08
+          ],
+          [
+            0.146,
+            0.03
+          ],
+          [
+            0.152,
+            0.03
+          ]
+        ],
+        "segments": 64,
+        "at": [
+          0,
+          0.8,
+          -2.8
+        ],
+        "rotation": [
+          0,
+          0,
+          -90
+        ],
+        "color": "stainless"
+      },
+      "extra": [
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0.082,
+              0.03
+            ],
+            [
+              0.078,
+              0.08
+            ],
+            [
+              0.08,
+              0.17
+            ],
+            [
+              0.096,
+              0.212
+            ],
+            [
+              0.102,
+              0.212
+            ],
+            [
+              0.086,
+              0.17
+            ],
+            [
+              0.084,
+              0.08
+            ],
+            [
+              0.088,
+              0.03
+            ],
+            [
+              0.082,
+              0.03
+            ]
+          ],
+          "segments": 64,
+          "at": [
+            0,
+            0.8,
+            -2.8
+          ],
+          "rotation": [
+            0,
+            0,
+            -90
+          ],
+          "color": "stainless"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          -1,
+          0
+        ],
+        "dist": 0.32
+      },
+      "connects": [
+        "compressor-bank",
+        "turbine-bank"
+      ]
+    },
+    {
+      "id": "turbine-bank",
+      "name": {
+        "en": "Turbine stators",
+        "zh": "涡轮静子"
+      },
+      "short": {
+        "en": "Turb. stators",
+        "zh": "涡轮静子"
+      },
+      "group": "propulsion",
+      "summary": {
+        "en": "Fixed blade rows that guide hot gas onto the turbines.",
+        "zh": "固定叶排，把热气引向涡轮。"
+      },
+      "detail": {
+        "en": "The fixed blade rows between the turbines’ rotating rows, chapter 05, beats 3 and 4, and background beat 3. They hang from the core casing and do not turn.\n\nAfter the combustor, the hot gas passes through the turbines, which take energy from it to drive the compressor and fan [S9]. These fixed rows guide the gas between the rotating ones. Row counts are a drawing choice [S58].",
+        "zh": "涡轮转动叶排之间固定的叶排，见第 05 章第 3、4 拍和背景章第 3 拍。它们装在核心机匣上，不转。\n\n热气离开燃烧室后流过涡轮，涡轮从中取出能量，带动压气机和风扇 [S9]。这些固定叶排在转动的叶排之间引导气流。叶排数是绘图选择 [S58]。"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.003,
+          0.003,
+          0.003
+        ],
+        "at": [
+          0.235,
+          0.8,
+          -2.8
+        ],
+        "color": "casing",
+        "tint": "#a3a8ad"
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "size": [
+            0.03,
+            0.0646,
+            0.0045
+          ],
+          "at": [
+            0.235,
+            0.9233,
+            -2.8
+          ],
+          "rotation": [
+            0,
+            -45,
+            0
+          ],
+          "color": "casing",
+          "tint": "#a3a8ad"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.03,
+            0.0565,
+            0.0045
+          ],
+          "at": [
+            0.375,
+            0.9261,
+            -2.8
+          ],
+          "rotation": [
+            0,
+            -40,
+            0
+          ],
+          "color": "casing",
+          "tint": "#a3a8ad"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.03,
+            0.0663,
+            0.0045
+          ],
+          "at": [
+            0.505,
+            0.9341,
+            -2.8
+          ],
+          "rotation": [
+            0,
+            -40,
+            0
+          ],
+          "color": "casing",
+          "tint": "#a3a8ad"
+        }
+      ],
+      "repeat": {
+        "count": 24,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "radius": 0.001
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.25
+      },
+      "connects": [
+        "engine-shell",
+        "combustor-ring",
+        "hp-turbine-rotor",
+        "lp-turbine-rotor",
+        "core-nozzle"
+      ]
+    },
+    {
+      "id": "hp-turbine-rotor",
+      "name": {
+        "en": "Core turbine",
+        "zh": "核心涡轮转子"
+      },
+      "group": "propulsion",
+      "summary": {
+        "en": "Turns in the hot gas and drives the compressor.",
+        "zh": "在热气中转动，带动压气机。"
+      },
+      "detail": {
+        "en": "The first rotating turbine, just behind the combustor, chapter 05, beat 4. It is fixed to the hollow core shaft.\n\nTurbines take energy from the hot gas and drive the compressor through a shaft [S9]. This one turns with the compressor rotor at 45 rpm on screen, slowed down [S58].",
+        "zh": "紧接在燃烧室后面的第一个转动涡轮，见第 05 章第 4 拍。它固定在空心的核心轴上。\n\n涡轮从热气中取出能量，经轴带动压气机 [S9]。它和压气机转子一起，画面上每分钟转 45 转，已放慢 [S58]。"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.003,
+          0.003,
+          0.003
+        ],
+        "at": [
+          0.295,
+          0.8,
+          -2.8
+        ],
+        "color": "steel"
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "size": [
+            0.032,
+            0.0574,
+            0.0045
+          ],
+          "at": [
+            0.295,
+            0.9097,
+            -2.8
+          ],
+          "rotation": [
+            0,
+            48,
+            0
+          ],
+          "color": "steel"
+        }
+      ],
+      "repeat": {
+        "count": 24,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "radius": 0.001
+      },
+      "explode": {
+        "dir": [
+          0,
+          -1,
+          0
+        ],
+        "dist": 0.42
+      },
+      "connects": [
+        "turbine-bank",
+        "hp-shaft"
+      ]
+    },
+    {
+      "id": "lp-turbine-rotor",
+      "name": {
+        "en": "Fan turbine",
+        "zh": "风扇涡轮转子"
+      },
+      "group": "propulsion",
+      "summary": {
+        "en": "Turns in the hot gas and drives the fan.",
+        "zh": "在热气中转动，带动风扇。"
+      },
+      "detail": {
+        "en": "The rotating turbine rows behind the core turbine, chapter 05, beat 4. They are fixed to the inner fan shaft.\n\nIn the two-spool example, the fan is driven through a shaft that runs inside the core shaft [S9]. This turbine turns with the fan at 30 rpm on screen, slowed down [S58]. Other engines can have more spools [S9].",
+        "zh": "核心涡轮后面转动的涡轮叶排，见第 05 章第 4 拍。它们固定在里面的风扇轴上。\n\n在两转子例子里，带动风扇的轴从核心轴内部穿过 [S9]。这个涡轮和风扇一起，画面上每分钟转 30 转，已放慢 [S58]。其他发动机可能有更多转子 [S9]。"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.003,
+          0.003,
+          0.003
+        ],
+        "at": [
+          0.44,
+          0.8,
+          -2.8
+        ],
+        "color": "steel"
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "size": [
+            0.032,
+            0.0647,
+            0.0045
+          ],
+          "at": [
+            0.44,
+            0.9234,
+            -2.8
+          ],
+          "rotation": [
+            0,
+            45,
+            0
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.032,
+            0.075,
+            0.0045
+          ],
+          "at": [
+            0.565,
+            0.9285,
+            -2.8
+          ],
+          "rotation": [
+            0,
+            45,
+            0
+          ],
+          "color": "steel"
+        }
+      ],
+      "repeat": {
+        "count": 24,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "radius": 0.001
+      },
+      "explode": {
+        "dir": [
+          1,
+          -1,
+          0
+        ],
+        "dist": 0.4
+      },
+      "connects": [
+        "turbine-bank",
+        "lp-shaft"
+      ]
+    },
+    {
+      "id": "lp-shaft",
+      "name": {
+        "en": "Fan shaft",
+        "zh": "风扇轴"
+      },
+      "group": "propulsion",
+      "summary": {
+        "en": "Inner shaft carrying work from the fan turbine to the fan.",
+        "zh": "内轴，把风扇涡轮的功传给风扇。"
+      },
+      "detail": {
+        "en": "The inner shaft of the turbofan cutaway, chapter 05, beat 4. It runs the whole length of the core, from the fan at the front to the fan turbine at the back.\n\nIn this two-spool example the fan shaft runs inside the hollow core shaft [S9]. A shaft carries turning work, not air. It turns at 30 rpm on screen, slowed down [S58].",
+        "zh": "涡扇剖面模型里的内轴，见第 05 章第 4 拍。它贯穿整个核心，从前面的风扇一直通到后面的风扇涡轮。\n\n在这个两转子例子里，风扇轴从空心的核心轴里面穿过 [S9]。轴传递的是转动的功，不是空气。画面上每分钟转 30 转，已放慢 [S58]。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.018,
+          0.018,
+          1.36
+        ],
+        "at": [
+          -0.06,
+          0.8,
+          -2.8
+        ],
+        "rotation": [
+          0,
+          0,
+          90
+        ],
+        "color": "steel",
+        "tint": "#7d8489"
+      },
+      "extra": [
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0.018,
+              0.4
+            ],
+            [
+              0.093,
+              0.41
+            ],
+            [
+              0.093,
+              0.595
+            ],
+            [
+              0.018,
+              0.605
+            ],
+            [
+              0.018,
+              0.4
+            ]
+          ],
+          "segments": 64,
+          "at": [
+            0,
+            0.8,
+            -2.8
+          ],
+          "rotation": [
+            0,
+            0,
+            -90
+          ],
+          "color": "steel",
+          "tint": "#7d8489"
+        }
+      ],
+      "connects": [
+        "fan-disc",
+        "lp-turbine-rotor"
+      ]
+    },
+    {
+      "id": "hp-shaft",
+      "name": {
+        "en": "Core shaft",
+        "zh": "核心轴"
+      },
+      "group": "propulsion",
+      "summary": {
+        "en": "Hollow shaft carrying work from core turbine to compressor.",
+        "zh": "空心轴，把核心涡轮的功传给压气机。"
+      },
+      "detail": {
+        "en": "The hollow outer shaft of the turbofan cutaway, chapter 05, beat 4. It joins the core turbine to the compressor rotor, and the fan shaft runs through its middle with a small gap.\n\nTurbines drive the compressor through shafts; in the two-spool example the core shaft surrounds the fan shaft [S9]. The two spools turn separately: 45 rpm here against 30 rpm for the fan, both slowed down for reading [S58].",
+        "zh": "涡扇剖面模型里空心的外轴，见第 05 章第 4 拍。它把核心涡轮和压气机转子连起来，风扇轴从它中间穿过，两者之间留有间隙。\n\n涡轮经轴带动压气机；在两转子例子里，核心轴套在风扇轴外面 [S9]。两个转子各转各的：这里每分钟 45 转，风扇是 30 转，都已为便于观看而放慢 [S58]。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0.036,
+            -0.52
+          ],
+          [
+            0.036,
+            0.33
+          ],
+          [
+            0.027,
+            0.33
+          ],
+          [
+            0.027,
+            -0.52
+          ],
+          [
+            0.036,
+            -0.52
+          ]
+        ],
+        "segments": 64,
+        "at": [
+          0,
+          0.8,
+          -2.8
+        ],
+        "rotation": [
+          0,
+          0,
+          -90
+        ],
+        "color": "steel"
+      },
+      "extra": [
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0.034,
+              -0.495
+            ],
+            [
+              0.07,
+              -0.495
+            ],
+            [
+              0.07,
+              -0.487
+            ],
+            [
+              0.034,
+              -0.487
+            ],
+            [
+              0.034,
+              -0.495
+            ]
+          ],
+          "segments": 64,
+          "at": [
+            0,
+            0.8,
+            -2.8
+          ],
+          "rotation": [
+            0,
+            0,
+            -90
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0.034,
+              -0.038
+            ],
+            [
+              0.084,
+              -0.038
+            ],
+            [
+              0.084,
+              -0.03
+            ],
+            [
+              0.034,
+              -0.03
+            ],
+            [
+              0.034,
+              -0.038
+            ]
+          ],
+          "segments": 64,
+          "at": [
+            0,
+            0.8,
+            -2.8
+          ],
+          "rotation": [
+            0,
+            0,
+            -90
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0.068,
+              -0.5
+            ],
+            [
+              0.084,
+              -0.04
+            ],
+            [
+              0.084,
+              -0.025
+            ],
+            [
+              0.04,
+              -0.025
+            ],
+            [
+              0.04,
+              -0.27
+            ],
+            [
+              0.062,
+              -0.29
+            ],
+            [
+              0.062,
+              -0.48
+            ],
+            [
+              0.068,
+              -0.5
+            ]
+          ],
+          "segments": 64,
+          "at": [
+            0,
+            0.8,
+            -2.8
+          ],
+          "rotation": [
+            0,
+            0,
+            -90
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0.036,
+              0.26
+            ],
+            [
+              0.084,
+              0.27
+            ],
+            [
+              0.084,
+              0.315
+            ],
+            [
+              0.036,
+              0.325
+            ],
+            [
+              0.036,
+              0.26
+            ]
+          ],
+          "segments": 64,
+          "at": [
+            0,
+            0.8,
+            -2.8
+          ],
+          "rotation": [
+            0,
+            0,
+            -90
+          ],
+          "color": "steel"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          -1,
+          0
+        ],
+        "dist": 0.15
+      },
+      "connects": [
+        "compressor-rotor",
+        "hp-turbine-rotor"
+      ]
+    },
+    {
+      "id": "core-nozzle",
+      "name": {
+        "en": "Core nozzle",
+        "zh": "核心喷口"
+      },
+      "group": "propulsion",
+      "summary": {
+        "en": "Lets the hot core stream out at the back.",
+        "zh": "让核心热气从后方排出。"
+      },
+      "detail": {
+        "en": "The narrowing exit at the back of the core, chapter 05, beat 5, with a cone in its middle behind the end of the shafts.\n\nAfter the turbines, the hot gas leaves through the nozzle, and the core exhaust contributes to thrust together with the bypass air [S9]. The shape is a generic drawing [S58].",
+        "zh": "核心后部逐渐收窄的出口，见第 05 章第 5 拍；中间有一个锥体，位于两根轴的末端后面。\n\n热气流过涡轮后从喷口排出，核心排气和外涵空气一起贡献推力 [S9]。外形是通用画法 [S58]。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0.186,
+            0.56
+          ],
+          [
+            0.174,
+            0.7
+          ],
+          [
+            0.146,
+            0.86
+          ],
+          [
+            0.136,
+            0.86
+          ],
+          [
+            0.161,
+            0.7
+          ],
+          [
+            0.172,
+            0.56
+          ],
+          [
+            0.186,
+            0.56
+          ]
+        ],
+        "segments": 64,
+        "at": [
+          0,
+          0.8,
+          -2.8
+        ],
+        "rotation": [
+          0,
+          0,
+          -90
+        ],
+        "color": "casing"
+      },
+      "extra": [
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              0.62
+            ],
+            [
+              0.09,
+              0.62
+            ],
+            [
+              0.086,
+              0.72
+            ],
+            [
+              0.062,
+              0.86
+            ],
+            [
+              0.03,
+              0.96
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "segments": 64,
+          "at": [
+            0,
+            0.8,
+            -2.8
+          ],
+          "rotation": [
+            0,
+            0,
+            -90
+          ],
+          "color": "steel"
+        }
+      ],
+      "explode": {
+        "dir": [
+          1,
+          0,
+          0
+        ],
+        "dist": 0.3
+      },
+      "connects": [
+        "engine-shell",
+        "turbine-bank"
+      ]
+    },
+    {
+      "id": "bypass-nozzle",
+      "name": {
+        "en": "Bypass outlet",
+        "zh": "外涵出口"
+      },
+      "group": "propulsion",
+      "summary": {
+        "en": "Lets the outer bypass stream out.",
+        "zh": "让外圈的外涵气流排出。"
+      },
+      "detail": {
+        "en": "The ring-shaped exit at the back of the bypass duct, chapter 05, beat 5.\n\nThe bypass air pushed by the fan leaves here and adds to the thrust; it has not passed through the combustor or turbines [S9]. The shape is a generic drawing [S58].",
+        "zh": "外涵道后部的环形出口，见第 05 章第 5 拍。\n\n风扇推动的外涵空气从这里排出，贡献推力；它没有经过燃烧室和涡轮 [S9]。外形是通用画法 [S58]。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0.372,
+            0.12
+          ],
+          [
+            0.352,
+            0.3
+          ],
+          [
+            0.322,
+            0.44
+          ],
+          [
+            0.312,
+            0.44
+          ],
+          [
+            0.333,
+            0.3
+          ],
+          [
+            0.353,
+            0.12
+          ],
+          [
+            0.372,
+            0.12
+          ]
+        ],
+        "segments": 64,
+        "at": [
+          0,
+          0.8,
+          -2.8
+        ],
+        "rotation": [
+          0,
+          0,
+          -90
+        ],
+        "color": "casing"
+      },
+      "explode": {
+        "dir": [
+          1,
+          1,
+          0
+        ],
+        "dist": 0.35
+      },
+      "connects": [
+        "bypass-duct",
+        "engine-shell"
+      ]
+    },
+    {
+      "id": "foil-sample",
+      "name": {
+        "en": "Airfoil",
+        "zh": "翼型"
+      },
+      "group": "airfoil-bench",
+      "summary": {
+        "en": "The wing section the model calculates airflow around.",
+        "zh": "模型为它计算周围气流的翼段。"
+      },
+      "detail": {
+        "en": "The wing experiment, a short slice of wing beside the airliner, in chapters 02, 03 and 06 and the background chapter. Its cross-section is a symmetric Joukowski airfoil, a shape made by a mathematical mapping of a circle [S57]; it turns about a point a quarter of the way back from its front edge as the angle of attack changes.\n\nDesign values: chord 1 m, reference area 2 m², the 0.12 m thickness on the stage only a slice of it [S58]. Up to 12° the model uses ideal attached flow; beyond that a teaching rule takes over and the stage shows separation as a dashed diagram [S58]. At 4° and 40 m/s near sea level, in this simulation, lift is about 924 N [S58].\n\nIt is not the wing of any real aircraft, and its readings are simulation results, not measurements [S58]. In ideal flow a symmetric section has no lift at zero angle of attack but does at other angles [S3]. The way it is shown, with streamlines, surface pressure and a lift curve, follows NASA’s student airfoil program, but none of its code is used [S10].",
+        "zh": "机翼实验：客机旁边的一小段机翼，见第 02、03、06 章和背景章。它的剖面是对称的茹科夫斯基翼型，是把一个圆经过数学映射得到的形状 [S57]；迎角改变时，它绕着离前缘四分之一弦长的点转动。\n\n设计值：弦长 1 米，参考面积 2 平方米；舞台上 0.12 米的厚度只是截取的一段 [S58]。12° 以内模型用附着的理想流；超过 12° 改用教学规则，舞台用虚线画出分离示意 [S58]。在这个模拟里，迎角 4°、速度 40 米每秒、接近海平面时，升力约 924 牛 [S58]。\n\n它不是任何真实飞机的机翼，读数是模拟结果，不是测量值 [S58]。在理想流里，对称翼型零迎角时没有升力，其他迎角时有 [S3]。用流线、表面气压和升力曲线来展示的做法，参照了 NASA 的学生翼型程序，但没有用它的任何代码 [S10]。"
+      },
+      "primitive": {
+        "kind": "extrude",
+        "shape": [
+          [
+            1,
+            0
+          ],
+          [
+            0.9993014335632324,
+            0.000002741862545008189
+          ],
+          [
+            0.9972084164619446,
+            0.000021881633074372075
+          ],
+          [
+            0.9937286972999573,
+            0.00007355193520197645
+          ],
+          [
+            0.9888752698898315,
+            0.00017335970187559724
+          ],
+          [
+            0.9826661944389343,
+            0.00033613533014431596
+          ],
+          [
+            0.9751244783401489,
+            0.0005756960599683225
+          ],
+          [
+            0.9662776589393616,
+            0.0009046272025443614
+          ],
+          [
+            0.9561579823493958,
+            0.0013340858276933432
+          ],
+          [
+            0.9448018670082092,
+            0.0018736290512606502
+          ],
+          [
+            0.9322497844696045,
+            0.002531069563701749
+          ],
+          [
+            0.9185459017753601,
+            0.003312361193820834
+          ],
+          [
+            0.9037378430366516,
+            0.004221514333039522
+          ],
+          [
+            0.8878762722015381,
+            0.005260543432086706
+          ],
+          [
+            0.8710146546363831,
+            0.006429442670196295
+          ],
+          [
+            0.8532088398933411,
+            0.0077261971309781075
+          ],
+          [
+            0.8345168828964233,
+            0.009146816097199917
+          ],
+          [
+            0.8149985671043396,
+            0.010685401037335396
+          ],
+          [
+            0.794715166091919,
+            0.012334228493273258
+          ],
+          [
+            0.7737290859222412,
+            0.014083869755268097
+          ],
+          [
+            0.7521036863327026,
+            0.015923313796520233
+          ],
+          [
+            0.7299029231071472,
+            0.017840122804045677
+          ],
+          [
+            0.7071909308433533,
+            0.01982058770954609
+          ],
+          [
+            0.6840320825576782,
+            0.021849902346730232
+          ],
+          [
+            0.6604905724525452,
+            0.023912347853183746
+          ],
+          [
+            0.6366302371025085,
+            0.025991475209593773
+          ],
+          [
+            0.6125143766403198,
+            0.028070295229554176
+          ],
+          [
+            0.5882056951522827,
+            0.03013145923614502
+          ],
+          [
+            0.5637658834457397,
+            0.03215745463967323
+          ],
+          [
+            0.5392557382583618,
+            0.034130774438381195
+          ],
+          [
+            0.5147348642349243,
+            0.036034103482961655
+          ],
+          [
+            0.4902617633342743,
+            0.037850480526685715
+          ],
+          [
+            0.46589359641075134,
+            0.039563439786434174
+          ],
+          [
+            0.44168609380722046,
+            0.041157178580760956
+          ],
+          [
+            0.4176935851573944,
+            0.04261668771505356
+          ],
+          [
+            0.3939688801765442,
+            0.0439278669655323
+          ],
+          [
+            0.37056323885917664,
+            0.04507763683795929
+          ],
+          [
+            0.34752634167671204,
+            0.04605404660105705
+          ],
+          [
+            0.32490625977516174,
+            0.04684634506702423
+          ],
+          [
+            0.3027493953704834,
+            0.04744506627321243
+          ],
+          [
+            0.28110048174858093,
+            0.04784208908677101
+          ],
+          [
+            0.2600025534629822,
+            0.04803066700696945
+          ],
+          [
+            0.23949699103832245,
+            0.048005491495132446
+          ],
+          [
+            0.21962343156337738,
+            0.04776269569993019
+          ],
+          [
+            0.20041978359222412,
+            0.04729986935853958
+          ],
+          [
+            0.18192227184772491,
+            0.0466160774230957
+          ],
+          [
+            0.16416534781455994,
+            0.04571182653307915
+          ],
+          [
+            0.14718174934387207,
+            0.04458906874060631
+          ],
+          [
+            0.13100245594978333,
+            0.04325117543339729
+          ],
+          [
+            0.11565669625997543,
+            0.04170287773013115
+          ],
+          [
+            0.10117198526859283,
+            0.039950259029865265
+          ],
+          [
+            0.0875740572810173,
+            0.038000673055648804
+          ],
+          [
+            0.07488688826560974,
+            0.03586270660161972
+          ],
+          [
+            0.06313271075487137,
+            0.03354611620306969
+          ],
+          [
+            0.052331987768411636,
+            0.031061748042702675
+          ],
+          [
+            0.04250340908765793,
+            0.028421469032764435
+          ],
+          [
+            0.03366390988230705,
+            0.025638096034526825
+          ],
+          [
+            0.025828644633293152,
+            0.0227253008633852
+          ],
+          [
+            0.019010992720723152,
+            0.019697533920407295
+          ],
+          [
+            0.013222558423876762,
+            0.01656992733478546
+          ],
+          [
+            0.008473162539303303,
+            0.013358204625546932
+          ],
+          [
+            0.004770847503095865,
+            0.010078588500618935
+          ],
+          [
+            0.0021218666806817055,
+            0.006747700273990631
+          ],
+          [
+            0.0005306901875883341,
+            0.003382462775334716
+          ],
+          [
+            0,
+            8.445839963327758e-18
+          ],
+          [
+            0.0005306901875883341,
+            -0.003382462775334716
+          ],
+          [
+            0.0021218666806817055,
+            -0.006747700273990631
+          ],
+          [
+            0.004770847503095865,
+            -0.010078588500618935
+          ],
+          [
+            0.008473162539303303,
+            -0.013358204625546932
+          ],
+          [
+            0.013222558423876762,
+            -0.01656992733478546
+          ],
+          [
+            0.019010992720723152,
+            -0.019697533920407295
+          ],
+          [
+            0.025828644633293152,
+            -0.0227253008633852
+          ],
+          [
+            0.03366390988230705,
+            -0.025638096034526825
+          ],
+          [
+            0.04250340908765793,
+            -0.028421469032764435
+          ],
+          [
+            0.052331987768411636,
+            -0.031061748042702675
+          ],
+          [
+            0.06313271075487137,
+            -0.03354611620306969
+          ],
+          [
+            0.07488688826560974,
+            -0.03586270660161972
+          ],
+          [
+            0.0875740572810173,
+            -0.038000673055648804
+          ],
+          [
+            0.10117198526859283,
+            -0.039950259029865265
+          ],
+          [
+            0.11565669625997543,
+            -0.04170287773013115
+          ],
+          [
+            0.13100245594978333,
+            -0.04325117543339729
+          ],
+          [
+            0.14718174934387207,
+            -0.04458906874060631
+          ],
+          [
+            0.16416534781455994,
+            -0.04571182653307915
+          ],
+          [
+            0.18192227184772491,
+            -0.0466160774230957
+          ],
+          [
+            0.20041978359222412,
+            -0.04729986935853958
+          ],
+          [
+            0.21962343156337738,
+            -0.04776269569993019
+          ],
+          [
+            0.23949699103832245,
+            -0.048005491495132446
+          ],
+          [
+            0.2600025534629822,
+            -0.04803066700696945
+          ],
+          [
+            0.28110048174858093,
+            -0.04784208908677101
+          ],
+          [
+            0.3027493953704834,
+            -0.04744506627321243
+          ],
+          [
+            0.32490625977516174,
+            -0.04684634506702423
+          ],
+          [
+            0.34752634167671204,
+            -0.04605404660105705
+          ],
+          [
+            0.37056323885917664,
+            -0.04507763683795929
+          ],
+          [
+            0.3939688801765442,
+            -0.0439278669655323
+          ],
+          [
+            0.4176935851573944,
+            -0.04261668771505356
+          ],
+          [
+            0.44168609380722046,
+            -0.041157178580760956
+          ],
+          [
+            0.46589359641075134,
+            -0.039563439786434174
+          ],
+          [
+            0.4902617633342743,
+            -0.037850480526685715
+          ],
+          [
+            0.5147348642349243,
+            -0.036034103482961655
+          ],
+          [
+            0.5392557382583618,
+            -0.034130774438381195
+          ],
+          [
+            0.5637658834457397,
+            -0.03215745463967323
+          ],
+          [
+            0.5882056951522827,
+            -0.03013145923614502
+          ],
+          [
+            0.6125143766403198,
+            -0.028070295229554176
+          ],
+          [
+            0.6366302371025085,
+            -0.025991475209593773
+          ],
+          [
+            0.6604905724525452,
+            -0.023912347853183746
+          ],
+          [
+            0.6840320825576782,
+            -0.021849902346730232
+          ],
+          [
+            0.7071909308433533,
+            -0.01982058770954609
+          ],
+          [
+            0.7299029231071472,
+            -0.017840122804045677
+          ],
+          [
+            0.7521036863327026,
+            -0.015923313796520233
+          ],
+          [
+            0.7737290859222412,
+            -0.014083869755268097
+          ],
+          [
+            0.794715166091919,
+            -0.012334228493273258
+          ],
+          [
+            0.8149985671043396,
+            -0.010685401037335396
+          ],
+          [
+            0.8345168828964233,
+            -0.009146816097199917
+          ],
+          [
+            0.8532088398933411,
+            -0.0077261971309781075
+          ],
+          [
+            0.8710146546363831,
+            -0.006429442670196295
+          ],
+          [
+            0.8878762722015381,
+            -0.005260543432086706
+          ],
+          [
+            0.9037378430366516,
+            -0.004221514333039522
+          ],
+          [
+            0.9185459017753601,
+            -0.003312361193820834
+          ],
+          [
+            0.9322497844696045,
+            -0.002531069563701749
+          ],
+          [
+            0.9448018670082092,
+            -0.0018736290512606502
+          ],
+          [
+            0.9561579823493958,
+            -0.0013340858276933432
+          ],
+          [
+            0.9662776589393616,
+            -0.0009046272025443614
+          ],
+          [
+            0.9751244783401489,
+            -0.0005756960599683225
+          ],
+          [
+            0.9826661944389343,
+            -0.00033613533014431596
+          ],
+          [
+            0.9888752698898315,
+            -0.00017335970187559724
+          ],
+          [
+            0.9937286972999573,
+            -0.00007355193520197645
+          ],
+          [
+            0.9972084164619446,
+            -0.000021881633074372075
+          ],
+          [
+            0.9993014335632324,
+            -0.000002741862545008189
+          ]
+        ],
+        "depth": 0.12,
+        "bevel": 0,
+        "at": [
+          -0.5,
+          2.2,
+          2.7
+        ],
+        "color": "casing"
+      },
+      "connects": [
+        "chord-marker",
+        "angle-marker"
+      ]
+    },
+    {
+      "id": "chord-marker",
+      "name": {
+        "en": "Chord",
+        "zh": "翼弦"
+      },
+      "group": "airfoil-bench",
+      "summary": {
+        "en": "Straight line used to measure the angle of attack.",
+        "zh": "用来量迎角的直线。"
+      },
+      "detail": {
+        "en": "The thin line from the front edge of the airfoil to its back edge, in chapters 02, 03 and 06. It turns with the section.\n\nThe chord is the straight line joining the leading and trailing edges [S13]. The angle of attack is measured between the chord and the incoming air [S3]. In the model the chord is 1 m long [S58].",
+        "zh": "从翼型前缘连到后缘的细线，见第 02、03、06 章。它跟着翼段一起转。\n\n翼弦是连接前缘和后缘的直线 [S13]。迎角就是翼弦与来流之间的角 [S3]。模型里的翼弦长 1 米 [S58]。"
+      },
+      "primitive": {
+        "kind": "tube",
+        "path": [
+          [
+            -0.5,
+            2.2,
+            2.764
+          ],
+          [
+            0.5,
+            2.2,
+            2.764
+          ]
+        ],
+        "radius": 0.0022,
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "token:ink-2"
+      },
+      "connects": [
+        "foil-sample"
+      ]
+    },
+    {
+      "id": "inflow-reference",
+      "name": {
+        "en": "Incoming air",
+        "zh": "来流"
+      },
+      "group": "airfoil-bench",
+      "summary": {
+        "en": "Fixed line showing the direction of the oncoming air.",
+        "zh": "固定的线，表示迎面来流的方向。"
+      },
+      "detail": {
+        "en": "The fixed line in front of the airfoil, showing the direction of the air flowing towards it, in chapters 01, 02, 03 and 06. Unlike the chord, it never turns.\n\nLift acts across the incoming air and drag along it [S1, S2]; the angle of attack is measured from this direction, not from the horizon [S3].",
+        "zh": "翼型前面固定不动的线，表示流向翼型的空气的方向，见第 01、02、03、06 章。它不像翼弦那样会转。\n\n升力垂直于来流，阻力沿着来流 [S1, S2]；迎角从这个方向量起，而不是从地平线量起 [S3]。"
+      },
+      "primitive": {
+        "kind": "tube",
+        "path": [
+          [
+            -1.12,
+            2.2,
+            2.765
+          ],
+          [
+            -0.56,
+            2.2,
+            2.765
+          ]
+        ],
+        "radius": 0.003,
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "token:air"
+      }
+    },
+    {
+      "id": "angle-marker",
+      "name": {
+        "en": "Angle",
+        "zh": "迎角"
+      },
+      "group": "airfoil-bench",
+      "summary": {
+        "en": "Marks where the angle of attack is measured.",
+        "zh": "标出迎角在哪里量。"
+      },
+      "detail": {
+        "en": "A small marker at the point a quarter of the way back along the chord, where the arc of the angle of attack is drawn, chapter 03.\n\nThe arc runs from the incoming-air direction to the chord, and its size is the angle of attack [S3]. The model allows angles from −20° to 20° in steps of 4° [S58]; at zero angle no arc is drawn.",
+        "zh": "翼弦上离前缘四分之一处的小标记，迎角的弧就画在这里，见第 03 章。\n\n弧从来流方向画到翼弦，它的大小就是迎角 [S3]。模型的迎角范围是 −20° 到 20°，每档 4° [S58]；迎角为零时不画弧。"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.006
+        ],
+        "at": [
+          -0.25,
+          2.2,
+          2.766
+        ],
+        "color": "token:signal"
+      },
+      "connects": [
+        "foil-sample"
+      ]
+    },
+    {
+      "id": "display-plinth",
+      "name": {
+        "en": "Display stand",
+        "zh": "展台"
+      },
+      "context": true,
+      "summary": {
+        "en": "Holds the wing experiment in place.",
+        "zh": "托住机翼实验件。"
+      },
+      "detail": {
+        "en": "A plain stand that holds the wing experiment, like a museum exhibit. It is scenery, not part of any aircraft, and is shown only with the experiment.\n\nIt is not to scale with the airliner or the engine, and it does not touch the airflow the model calculates [S58].",
+        "zh": "一个朴素的展台，像博物馆展品那样托住机翼实验件。它是场景，不属于任何飞机，只和实验件一起出现。\n\n它和客机、发动机不按同一比例，也不影响模型计算的气流 [S58]。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.62,
+          0.05,
+          0.34
+        ],
+        "bevel": 0.012,
+        "at": [
+          -0.25,
+          1,
+          2.53
+        ],
+        "color": "powder",
+        "tint": "#6f6a62"
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "size": [
+            0.014,
+            0.014,
+            1.15
+          ],
+          "at": [
+            -0.25,
+            1.6,
+            2.52
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.011,
+            0.011,
+            0.14
+          ],
+          "at": [
+            -0.25,
+            2.2,
+            2.585
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "color": "steel"
+        }
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "id": "airframe",
+      "name": {
+        "en": "Airframe",
+        "zh": "机体"
+      },
+      "color": "token:ink-2"
+    },
+    {
+      "id": "flight-controls",
+      "name": {
+        "en": "Controls",
+        "zh": "操纵面"
+      },
+      "color": "token:ink-3"
+    },
+    {
+      "id": "propulsion",
+      "name": {
+        "en": "Propulsion",
+        "zh": "推进"
+      },
+      "color": "token:neutral"
+    },
+    {
+      "id": "airfoil-bench",
+      "name": {
+        "en": "Airfoil",
+        "zh": "翼型实验"
+      },
+      "color": "token:signal"
+    },
+    {
+      "id": "flight-flows",
+      "name": {
+        "en": "Air and forces",
+        "zh": "气流与力"
+      },
+      "color": "token:air"
+    }
+  ],
+  "flows": [
+    {
+      "id": "section-air",
+      "group": "flight-flows",
+      "color": "token:air",
+      "count": 128,
+      "size": 0.8,
+      "speed": 1,
+      "spread": 0,
+      "whenRun": true,
+      "clip": false,
+      "flat": true
+    },
+    {
+      "id": "engine-intake",
+      "group": "flight-flows",
+      "paths": [
+        {
+          "id": "intake-top-1",
+          "path": [
+            [
+              -1.28,
+              1.0916,
+              -2.795
+            ],
+            [
+              -1,
+              1.0781,
+              -2.795
+            ],
+            [
+              -0.8,
+              1.07,
+              -2.795
+            ]
+          ]
+        },
+        {
+          "id": "intake-bottom-1",
+          "path": [
+            [
+              -1.28,
+              0.5084,
+              -2.795
+            ],
+            [
+              -1,
+              0.5219,
+              -2.795
+            ],
+            [
+              -0.8,
+              0.53,
+              -2.795
+            ]
+          ]
+        },
+        {
+          "id": "intake-top-2",
+          "path": [
+            [
+              -1.28,
+              0.962,
+              -2.795
+            ],
+            [
+              -1,
+              0.9545,
+              -2.795
+            ],
+            [
+              -0.8,
+              0.95,
+              -2.795
+            ]
+          ]
+        },
+        {
+          "id": "intake-bottom-2",
+          "path": [
+            [
+              -1.28,
+              0.638,
+              -2.795
+            ],
+            [
+              -1,
+              0.6455,
+              -2.795
+            ],
+            [
+              -0.8,
+              0.65,
+              -2.795
+            ]
+          ]
+        }
+      ],
+      "speed": 0.25,
+      "color": "token:air",
+      "ends": "open",
+      "count": 96,
+      "size": 0.8,
+      "spread": 0,
+      "clip": false,
+      "parts": [
+        "bypass-duct",
+        "fan-disc"
+      ]
+    },
+    {
+      "id": "engine-bypass",
+      "group": "flight-flows",
+      "paths": [
+        {
+          "id": "bypass-top-1",
+          "path": [
+            [
+              -0.66,
+              1.1,
+              -2.795
+            ],
+            [
+              -0.4,
+              1.1,
+              -2.795
+            ],
+            [
+              -0.1,
+              1.095,
+              -2.795
+            ],
+            [
+              0.2,
+              1.085,
+              -2.795
+            ],
+            [
+              0.44,
+              1.07,
+              -2.795
+            ],
+            [
+              0.72,
+              1.06,
+              -2.795
+            ]
+          ]
+        },
+        {
+          "id": "bypass-bottom-1",
+          "path": [
+            [
+              -0.66,
+              0.5,
+              -2.795
+            ],
+            [
+              -0.4,
+              0.5,
+              -2.795
+            ],
+            [
+              -0.1,
+              0.505,
+              -2.795
+            ],
+            [
+              0.2,
+              0.515,
+              -2.795
+            ],
+            [
+              0.44,
+              0.53,
+              -2.795
+            ],
+            [
+              0.72,
+              0.54,
+              -2.795
+            ]
+          ]
+        },
+        {
+          "id": "bypass-top-2",
+          "path": [
+            [
+              -0.66,
+              1.055,
+              -2.795
+            ],
+            [
+              -0.4,
+              1.055,
+              -2.795
+            ],
+            [
+              -0.1,
+              1.05,
+              -2.795
+            ],
+            [
+              0.2,
+              1.04,
+              -2.795
+            ],
+            [
+              0.44,
+              1.025,
+              -2.795
+            ],
+            [
+              0.72,
+              1.015,
+              -2.795
+            ]
+          ]
+        },
+        {
+          "id": "bypass-bottom-2",
+          "path": [
+            [
+              -0.66,
+              0.545,
+              -2.795
+            ],
+            [
+              -0.4,
+              0.545,
+              -2.795
+            ],
+            [
+              -0.1,
+              0.55,
+              -2.795
+            ],
+            [
+              0.2,
+              0.56,
+              -2.795
+            ],
+            [
+              0.44,
+              0.575,
+              -2.795
+            ],
+            [
+              0.72,
+              0.585,
+              -2.795
+            ]
+          ]
+        }
+      ],
+      "speed": 0.35,
+      "color": "token:air",
+      "ends": "open",
+      "count": 128,
+      "size": 0.8,
+      "spread": 0,
+      "clip": false,
+      "parts": [
+        "fan-disc",
+        "bypass-duct",
+        "bypass-nozzle"
+      ]
+    },
+    {
+      "id": "engine-core-cold",
+      "group": "flight-flows",
+      "paths": [
+        {
+          "id": "core-cold-top-1",
+          "path": [
+            [
+              -0.66,
+              0.96,
+              -2.795
+            ],
+            [
+              -0.6,
+              0.95,
+              -2.795
+            ],
+            [
+              -0.52,
+              0.9203,
+              -2.795
+            ],
+            [
+              -0.4,
+              0.9141,
+              -2.795
+            ],
+            [
+              -0.28,
+              0.91,
+              -2.795
+            ],
+            [
+              -0.16,
+              0.9065,
+              -2.795
+            ],
+            [
+              -0.05,
+              0.9035,
+              -2.795
+            ],
+            [
+              0.03,
+              0.918,
+              -2.795
+            ]
+          ]
+        },
+        {
+          "id": "core-cold-bottom-1",
+          "path": [
+            [
+              -0.66,
+              0.64,
+              -2.795
+            ],
+            [
+              -0.6,
+              0.65,
+              -2.795
+            ],
+            [
+              -0.52,
+              0.6798,
+              -2.795
+            ],
+            [
+              -0.4,
+              0.6859,
+              -2.795
+            ],
+            [
+              -0.28,
+              0.69,
+              -2.795
+            ],
+            [
+              -0.16,
+              0.6935,
+              -2.795
+            ],
+            [
+              -0.05,
+              0.6965,
+              -2.795
+            ],
+            [
+              0.03,
+              0.682,
+              -2.795
+            ]
+          ]
+        }
+      ],
+      "speed": 0.25,
+      "color": "token:air",
+      "ends": "open",
+      "count": 96,
+      "size": 0.8,
+      "spread": 0,
+      "clip": false,
+      "parts": [
+        "fan-disc",
+        "compressor-rotor",
+        "combustor-ring"
+      ]
+    },
+    {
+      "id": "engine-core-hot",
+      "group": "flight-flows",
+      "paths": [
+        {
+          "id": "core-hot-top-1",
+          "path": [
+            [
+              0.03,
+              0.918,
+              -2.795
+            ],
+            [
+              0.12,
+              0.92,
+              -2.795
+            ],
+            [
+              0.21,
+              0.92,
+              -2.795
+            ],
+            [
+              0.27,
+              0.9131,
+              -2.795
+            ],
+            [
+              0.35,
+              0.92,
+              -2.795
+            ],
+            [
+              0.45,
+              0.9288,
+              -2.795
+            ],
+            [
+              0.55,
+              0.9331,
+              -2.795
+            ],
+            [
+              0.7,
+              0.92,
+              -2.795
+            ],
+            [
+              0.86,
+              0.9,
+              -2.795
+            ],
+            [
+              1.02,
+              0.87,
+              -2.795
+            ]
+          ]
+        },
+        {
+          "id": "core-hot-bottom-1",
+          "path": [
+            [
+              0.03,
+              0.682,
+              -2.795
+            ],
+            [
+              0.12,
+              0.68,
+              -2.795
+            ],
+            [
+              0.21,
+              0.68,
+              -2.795
+            ],
+            [
+              0.27,
+              0.6869,
+              -2.795
+            ],
+            [
+              0.35,
+              0.68,
+              -2.795
+            ],
+            [
+              0.45,
+              0.6712,
+              -2.795
+            ],
+            [
+              0.55,
+              0.6669,
+              -2.795
+            ],
+            [
+              0.7,
+              0.68,
+              -2.795
+            ],
+            [
+              0.86,
+              0.7,
+              -2.795
+            ],
+            [
+              1.02,
+              0.73,
+              -2.795
+            ]
+          ]
+        }
+      ],
+      "speed": 0.35,
+      "color": "token:hot",
+      "ends": "open",
+      "count": 128,
+      "size": 0.8,
+      "spread": 0,
+      "clip": false,
+      "parts": [
+        "combustor-ring",
+        "hp-turbine-rotor",
+        "lp-turbine-rotor",
+        "core-nozzle"
+      ]
+    }
+  ],
+  "animations": [
+    {
+      "id": "balanced-travel-fuselage-shell",
+      "target": "fuselage-shell",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-cockpit-glazing",
+      "target": "cockpit-glazing",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-wing-left",
+      "target": "wing-left",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-wing-right",
+      "target": "wing-right",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-wing-tip-left",
+      "target": "wing-tip-left",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-wing-tip-right",
+      "target": "wing-tip-right",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-aileron-left",
+      "target": "aileron-left",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-aileron-right",
+      "target": "aileron-right",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-spoiler-left",
+      "target": "spoiler-left",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-flap-left",
+      "target": "flap-left",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-flap-right",
+      "target": "flap-right",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-slat-left",
+      "target": "slat-left",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-slat-right",
+      "target": "slat-right",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-tailplane-left",
+      "target": "tailplane-left",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-tailplane-right",
+      "target": "tailplane-right",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-elevator-left",
+      "target": "elevator-left",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-elevator-right",
+      "target": "elevator-right",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-fin",
+      "target": "fin",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-rudder",
+      "target": "rudder",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-nacelle-left",
+      "target": "nacelle-left",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-nacelle-right",
+      "target": "nacelle-right",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-fan-left",
+      "target": "fan-left",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-fan-right",
+      "target": "fan-right",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fan-left-spin",
+      "target": "fan-left",
+      "kind": "rotate",
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "rpm": 30
+    },
+    {
+      "id": "fan-right-spin",
+      "target": "fan-right",
+      "kind": "rotate",
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "rpm": 30
+    },
+    {
+      "id": "fan-disc-spin",
+      "target": "fan-disc",
+      "kind": "rotate",
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "rpm": 30
+    },
+    {
+      "id": "lp-shaft-spin",
+      "target": "lp-shaft",
+      "kind": "rotate",
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "rpm": 30
+    },
+    {
+      "id": "lp-turbine-spin",
+      "target": "lp-turbine-rotor",
+      "kind": "rotate",
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "rpm": 30
+    },
+    {
+      "id": "hp-shaft-spin",
+      "target": "hp-shaft",
+      "kind": "rotate",
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "rpm": 45
+    },
+    {
+      "id": "compressor-rotor-spin",
+      "target": "compressor-rotor",
+      "kind": "rotate",
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "rpm": 45
+    },
+    {
+      "id": "hp-turbine-spin",
+      "target": "hp-turbine-rotor",
+      "kind": "rotate",
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "rpm": 45
+    }
+  ],
+  "poses": {
+    "controls-roll": {
+      "aileron-left": {
+        "pivot": [
+          0.2492,
+          1.0825,
+          1
+        ],
+        "rotation": [
+          -3.8533,
+          -0.812,
+          -11.3651
+        ]
+      },
+      "aileron-right": {
+        "pivot": [
+          0.2492,
+          1.0825,
+          -1
+        ],
+        "rotation": [
+          -3.619,
+          -1.5532,
+          11.2887
+        ]
+      }
+    },
+    "controls-pitch": {
+      "elevator-left": {
+        "pivot": [
+          1.7567,
+          1.1645,
+          0.09
+        ],
+        "rotation": [
+          3.4538,
+          1.2596,
+          9.2634
+        ]
+      },
+      "elevator-right": {
+        "pivot": [
+          1.7567,
+          1.1645,
+          -0.09
+        ],
+        "rotation": [
+          -3.4538,
+          -1.2596,
+          9.2634
+        ]
+      }
+    },
+    "controls-yaw": {
+      "rudder": {
+        "pivot": [
+          1.7815,
+          1.31,
+          0
+        ],
+        "rotation": [
+          3.1259,
+          9.5036,
+          -0.2599
+        ]
+      }
+    },
+    "controls-bank": {
+      "duration": 0,
+      "fuselage-shell": {
+        "pivot": [
+          0,
+          1.1,
+          0
+        ],
+        "rotation": [
+          -20,
+          0,
+          0
+        ]
+      },
+      "cockpit-glazing": {
+        "pivot": [
+          0,
+          1.1,
+          0
+        ],
+        "rotation": [
+          -20,
+          0,
+          0
+        ]
+      },
+      "wing-left": {
+        "pivot": [
+          0,
+          1.1,
+          0
+        ],
+        "rotation": [
+          -20,
+          0,
+          0
+        ]
+      },
+      "wing-right": {
+        "pivot": [
+          0,
+          1.1,
+          0
+        ],
+        "rotation": [
+          -20,
+          0,
+          0
+        ]
+      },
+      "wing-tip-left": {
+        "pivot": [
+          0,
+          1.1,
+          0
+        ],
+        "rotation": [
+          -20,
+          0,
+          0
+        ]
+      },
+      "wing-tip-right": {
+        "pivot": [
+          0,
+          1.1,
+          0
+        ],
+        "rotation": [
+          -20,
+          0,
+          0
+        ]
+      },
+      "aileron-left": {
+        "pivot": [
+          0,
+          1.1,
+          0
+        ],
+        "rotation": [
+          -20,
+          0,
+          0
+        ]
+      },
+      "aileron-right": {
+        "pivot": [
+          0,
+          1.1,
+          0
+        ],
+        "rotation": [
+          -20,
+          0,
+          0
+        ]
+      },
+      "spoiler-left": {
+        "pivot": [
+          0,
+          1.1,
+          0
+        ],
+        "rotation": [
+          -20,
+          0,
+          0
+        ]
+      },
+      "flap-left": {
+        "pivot": [
+          0,
+          1.1,
+          0
+        ],
+        "rotation": [
+          -20,
+          0,
+          0
+        ]
+      },
+      "flap-right": {
+        "pivot": [
+          0,
+          1.1,
+          0
+        ],
+        "rotation": [
+          -20,
+          0,
+          0
+        ]
+      },
+      "slat-left": {
+        "pivot": [
+          0,
+          1.1,
+          0
+        ],
+        "rotation": [
+          -20,
+          0,
+          0
+        ]
+      },
+      "slat-right": {
+        "pivot": [
+          0,
+          1.1,
+          0
+        ],
+        "rotation": [
+          -20,
+          0,
+          0
+        ]
+      },
+      "tailplane-left": {
+        "pivot": [
+          0,
+          1.1,
+          0
+        ],
+        "rotation": [
+          -20,
+          0,
+          0
+        ]
+      },
+      "tailplane-right": {
+        "pivot": [
+          0,
+          1.1,
+          0
+        ],
+        "rotation": [
+          -20,
+          0,
+          0
+        ]
+      },
+      "elevator-left": {
+        "pivot": [
+          0,
+          1.1,
+          0
+        ],
+        "rotation": [
+          -20,
+          0,
+          0
+        ]
+      },
+      "elevator-right": {
+        "pivot": [
+          0,
+          1.1,
+          0
+        ],
+        "rotation": [
+          -20,
+          0,
+          0
+        ]
+      },
+      "fin": {
+        "pivot": [
+          0,
+          1.1,
+          0
+        ],
+        "rotation": [
+          -20,
+          0,
+          0
+        ]
+      },
+      "rudder": {
+        "pivot": [
+          0,
+          1.1,
+          0
+        ],
+        "rotation": [
+          -20,
+          0,
+          0
+        ]
+      },
+      "nacelle-left": {
+        "pivot": [
+          0,
+          1.1,
+          0
+        ],
+        "rotation": [
+          -20,
+          0,
+          0
+        ]
+      },
+      "nacelle-right": {
+        "pivot": [
+          0,
+          1.1,
+          0
+        ],
+        "rotation": [
+          -20,
+          0,
+          0
+        ]
+      },
+      "fan-left": {
+        "pivot": [
+          0,
+          1.1,
+          0
+        ],
+        "rotation": [
+          -20,
+          0,
+          0
+        ]
+      },
+      "fan-right": {
+        "pivot": [
+          0,
+          1.1,
+          0
+        ],
+        "rotation": [
+          -20,
+          0,
+          0
+        ]
+      }
+    },
+    "high-lift-open": {
+      "spoiler-left": {
+        "pivot": [
+          0.0248,
+          1.0414,
+          0.42
+        ],
+        "rotation": [
+          6.8346,
+          5.7227,
+          33.5404
+        ]
+      },
+      "flap-left": {
+        "pivot": [
+          0.0765,
+          1.0005,
+          0.22
+        ],
+        "rotation": [
+          -4.5105,
+          -1.2886,
+          -19.4984
+        ],
+        "offset": [
+          0.04,
+          0,
+          0
+        ]
+      },
+      "flap-right": {
+        "pivot": [
+          0.0765,
+          1.0005,
+          -0.22
+        ],
+        "rotation": [
+          4.5105,
+          1.2886,
+          -19.4984
+        ],
+        "offset": [
+          0.04,
+          0,
+          0
+        ]
+      },
+      "slat-left": {
+        "offset": [
+          -0.025,
+          -0.008,
+          0
+        ]
+      },
+      "slat-right": {
+        "offset": [
+          -0.025,
+          -0.008,
+          0
+        ]
+      }
+    }
+  },
+  "views": {
+    "assembled": {
+      "camera": {
+        "position": [
+          -5,
+          4.5,
+          6
+        ],
+        "target": [
+          0,
+          1.1,
+          0
+        ],
+        "fov": 30
+      }
+    },
+    "cover": {
+      "position": [
+        -4.15,
+        3.55,
+        5
+      ],
+      "target": [
+        0.05,
+        1.18,
+        0
+      ],
+      "fov": 30
+    },
+    "section": {
+      "plane": "xy"
+    },
+    "cutaway": {
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "offset": 0
+    },
+    "cuts": {
+      "engine-cut": {
+        "normal": [
+          0,
+          0,
+          -1
+        ],
+        "offset": -2.8,
+        "label": {
+          "en": "Engine section",
+          "zh": "发动机剖面"
+        }
+      }
+    }
+  },
+  "presets": [
+    {
+      "id": "aircraft-overview",
+      "label": {
+        "en": "Aircraft",
+        "zh": "整机"
+      },
+      "camera": {
+        "position": [
+          -5,
+          4.5,
+          6
+        ],
+        "target": [
+          0,
+          1.1,
+          0
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "wing-structure-view",
+      "label": {
+        "en": "Wing box",
+        "zh": "翼盒"
+      },
+      "camera": {
+        "position": [
+          -1.45,
+          1.85,
+          4.85
+        ],
+        "target": [
+          0.02,
+          1.1,
+          2.4
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "section-view",
+      "label": {
+        "en": "Airfoil",
+        "zh": "翼型"
+      },
+      "camera": {
+        "position": [
+          0,
+          2.2,
+          7.5
+        ],
+        "target": [
+          0,
+          2.2,
+          2.7
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "controls-view",
+      "label": {
+        "en": "Controls",
+        "zh": "操纵面"
+      },
+      "camera": {
+        "position": [
+          6.1,
+          2.5,
+          1.15
+        ],
+        "target": [
+          0.35,
+          1.15,
+          0
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "engine-section-view",
+      "label": {
+        "en": "Engine",
+        "zh": "发动机"
+      },
+      "camera": {
+        "position": [
+          -0.12,
+          1.45,
+          1.6
+        ],
+        "target": [
+          -0.12,
+          0.8,
+          -2.8
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "cruise-view",
+      "label": {
+        "en": "Cruise",
+        "zh": "巡航"
+      },
+      "camera": {
+        "position": [
+          -4.5,
+          4,
+          6
+        ],
+        "target": [
+          0,
+          1.1,
+          0
+        ],
+        "fov": 30
+      }
+    }
+  ],
+  "spec": [
+    {
+      "key": {
+        "en": "Aircraft",
+        "zh": "飞机"
+      },
+      "value": {
+        "en": "Generic twin-engine airliner · 1:10",
+        "zh": "通用双发客机 · 1:10"
+      },
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Airfoil",
+        "zh": "翼型"
+      },
+      "value": {
+        "en": "Symmetric Joukowski · ε 0.08",
+        "zh": "对称 Joukowski · ε 0.08"
+      },
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Reference",
+        "zh": "参考"
+      },
+      "value": "1 m · 2 m²",
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Angle range",
+        "zh": "迎角范围"
+      },
+      "value": "−20…20°",
+      "tag": "sim"
+    }
+  ],
+  "telemetry": [
+    {
+      "key": {
+        "en": "Angle",
+        "zh": "迎角"
+      },
+      "unit": "°",
+      "follow": "angle-now",
+      "scope": "observe"
+    },
+    {
+      "key": {
+        "en": "Airspeed",
+        "zh": "空气速度"
+      },
+      "unit": "m/s",
+      "follow": "speed-now",
+      "scope": "observe"
+    },
+    {
+      "key": {
+        "en": "Density",
+        "zh": "密度"
+      },
+      "unit": "kg/m³",
+      "follow": "rho-now",
+      "scope": "observe"
+    },
+    {
+      "key": {
+        "en": "Dynamic pressure",
+        "zh": "动压"
+      },
+      "unit": "Pa",
+      "follow": "q-now",
+      "scope": "observe"
+    },
+    {
+      "key": {
+        "en": "Lift coefficient",
+        "zh": "升力系数"
+      },
+      "unit": "",
+      "follow": "cl-now",
+      "scope": "observe"
+    },
+    {
+      "key": {
+        "en": "Lift",
+        "zh": "升力"
+      },
+      "unit": "N",
+      "follow": "lift-n",
+      "scope": "observe"
+    }
+  ],
+  "sim": {
+    "kind": "airfoil",
+    "airfoil": {
+      "model": "joukowski-illustrative-v1",
+      "angle": "angle-deg",
+      "speed": "airspeed-mps",
+      "atmosphere": {
+        "kind": "nasa-troposphere",
+        "altitude": "altitude-m"
+      },
+      "profile": {
+        "epsilon": 0.08
+      },
+      "chord": 1,
+      "area": 2,
+      "section": {
+        "part": "foil-sample",
+        "origin": [
+          -0.5,
+          2.2,
+          2.7
+        ]
+      },
+      "stall": {
+        "tag": "illustrative",
+        "peakDeg": 12,
+        "knots": [
+          [
+            12,
+            1
+          ],
+          [
+            16,
+            0.85
+          ],
+          [
+            20,
+            0.6
+          ]
+        ],
+        "source": "S58"
+      },
+      "sources": [
+        "S4",
+        "S11",
+        "S57",
+        "S58"
+      ],
+      "plot": {
+        "y": "cl-now"
+      }
+    },
+    "controls": [
+      {
+        "id": "angle-deg",
+        "kind": "step",
+        "label": {
+          "en": "Angle of attack",
+          "zh": "迎角"
+        },
+        "values": [
+          -20,
+          -16,
+          -12,
+          -8,
+          -4,
+          0,
+          4,
+          8,
+          12,
+          16,
+          20
+        ],
+        "default": 4,
+        "unit": "°"
+      },
+      {
+        "id": "airspeed-mps",
+        "kind": "step",
+        "label": {
+          "en": "Relative airspeed",
+          "zh": "相对空气速度"
+        },
+        "values": [
+          0,
+          20,
+          30,
+          40,
+          50,
+          60
+        ],
+        "default": 40,
+        "unit": "m/s"
+      },
+      {
+        "id": "altitude-m",
+        "kind": "step",
+        "label": {
+          "en": "Altitude",
+          "zh": "高度"
+        },
+        "values": [
+          0,
+          5000,
+          10000
+        ],
+        "default": 0,
+        "unit": "m"
+      },
+      {
+        "id": "flow-view",
+        "kind": "choice",
+        "label": {
+          "en": "Flow view",
+          "zh": "气流视图"
+        },
+        "default": "streamlines",
+        "options": [
+          {
+            "id": "streamlines",
+            "label": {
+              "en": "Streamlines",
+              "zh": "流线"
+            }
+          },
+          {
+            "id": "pressure",
+            "label": {
+              "en": "Pressure",
+              "zh": "气压"
+            }
+          }
+        ]
+      },
+      {
+        "id": "diagram-case",
+        "kind": "choice",
+        "label": {
+          "en": "Diagram",
+          "zh": "图示"
+        },
+        "default": "none",
+        "options": [
+          {
+            "id": "none",
+            "label": {
+              "en": "None",
+              "zh": "无"
+            }
+          },
+          {
+            "id": "vertical",
+            "label": {
+              "en": "Lift and weight",
+              "zh": "升力与重力"
+            }
+          },
+          {
+            "id": "level",
+            "label": {
+              "en": "Level flight",
+              "zh": "水平飞行"
+            }
+          },
+          {
+            "id": "axial",
+            "label": {
+              "en": "Thrust and drag",
+              "zh": "推力与阻力"
+            }
+          },
+          {
+            "id": "bank",
+            "label": {
+              "en": "Bank",
+              "zh": "倾斜"
+            }
+          },
+          {
+            "id": "weight",
+            "label": {
+              "en": "Weight",
+              "zh": "重力"
+            }
+          },
+          {
+            "id": "engine-intake",
+            "label": {
+              "en": "Intake",
+              "zh": "进气"
+            }
+          },
+          {
+            "id": "engine-split",
+            "label": {
+              "en": "Two streams",
+              "zh": "分流"
+            }
+          },
+          {
+            "id": "engine-core",
+            "label": {
+              "en": "Core",
+              "zh": "核心"
+            }
+          },
+          {
+            "id": "engine-shafts",
+            "label": {
+              "en": "Shafts",
+              "zh": "轴"
+            }
+          },
+          {
+            "id": "engine-exhaust",
+            "label": {
+              "en": "Exhaust",
+              "zh": "排气"
+            }
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "id": "angle-now",
+        "kind": "number",
+        "from": "control:angle-deg",
+        "label": {
+          "en": "Angle",
+          "zh": "迎角"
+        },
+        "unit": "°",
+        "decimals": 0,
+        "tag": "sim"
+      },
+      {
+        "id": "speed-now",
+        "kind": "number",
+        "from": "control:airspeed-mps",
+        "label": {
+          "en": "Airspeed",
+          "zh": "空气速度"
+        },
+        "unit": "m/s",
+        "decimals": 0,
+        "tag": "sim"
+      },
+      {
+        "id": "rho-now",
+        "kind": "number",
+        "from": "rho",
+        "label": {
+          "en": "Air density",
+          "zh": "空气密度"
+        },
+        "unit": "kg/m³",
+        "decimals": 3,
+        "tag": "sim"
+      },
+      {
+        "id": "q-now",
+        "kind": "number",
+        "from": "q",
+        "label": {
+          "en": "Dynamic pressure",
+          "zh": "动压"
+        },
+        "unit": "Pa",
+        "decimals": 1,
+        "tag": "sim"
+      },
+      {
+        "id": "cl-now",
+        "kind": "number",
+        "from": "cl",
+        "label": {
+          "en": "Lift coefficient",
+          "zh": "升力系数"
+        },
+        "unit": "",
+        "decimals": 3,
+        "tag": "sim"
+      },
+      {
+        "id": "lift-n",
+        "kind": "number",
+        "from": "lift-n",
+        "label": {
+          "en": "Lift",
+          "zh": "升力"
+        },
+        "unit": "N",
+        "decimals": 1,
+        "tag": "sim"
+      },
+      {
+        "id": "flow-state",
+        "kind": "state",
+        "from": "flow-state",
+        "label": {
+          "en": "Flow state",
+          "zh": "气流状态"
+        },
+        "states": {
+          "still": {
+            "en": "Still",
+            "zh": "无气流"
+          },
+          "ideal-attached": {
+            "en": "Ideal attached flow",
+            "zh": "理想附着流"
+          },
+          "separated-illustration": {
+            "en": "Separated-flow illustration",
+            "zh": "分离气流示意"
+          }
+        }
+      }
+    ],
+    "bind": [
+      {
+        "control": "diagram-case",
+        "animation": [
+          "balanced-travel-fuselage-shell",
+          "balanced-travel-cockpit-glazing",
+          "balanced-travel-wing-left",
+          "balanced-travel-wing-right",
+          "balanced-travel-wing-tip-left",
+          "balanced-travel-wing-tip-right",
+          "balanced-travel-aileron-left",
+          "balanced-travel-aileron-right",
+          "balanced-travel-spoiler-left",
+          "balanced-travel-flap-left",
+          "balanced-travel-flap-right",
+          "balanced-travel-slat-left",
+          "balanced-travel-slat-right",
+          "balanced-travel-tailplane-left",
+          "balanced-travel-tailplane-right",
+          "balanced-travel-elevator-left",
+          "balanced-travel-elevator-right",
+          "balanced-travel-fin",
+          "balanced-travel-rudder",
+          "balanced-travel-nacelle-left",
+          "balanced-travel-nacelle-right",
+          "balanced-travel-fan-left",
+          "balanced-travel-fan-right"
+        ],
+        "enabled": {
+          "eq": "level"
+        }
+      },
+      {
+        "control": "angle-deg",
+        "part": [
+          "foil-sample",
+          "chord-marker"
+        ],
+        "rotate": {
+          "axis": [
+            0,
+            0,
+            1
+          ],
+          "per": -1,
+          "pivot": [
+            -0.25,
+            2.2,
+            2.7
+          ]
+        }
+      },
+      {
+        "output": "flow-state",
+        "flow": "section-air",
+        "airfoilFlow": true
+      },
+      {
+        "control": "flow-view",
+        "flow": "section-air",
+        "visible": {
+          "eq": "streamlines"
+        }
+      },
+      {
+        "control": "diagram-case",
+        "flow": "engine-intake",
+        "visible": {
+          "in": [
+            "engine-intake",
+            "engine-split",
+            "engine-core",
+            "engine-shafts",
+            "engine-exhaust"
+          ]
+        }
+      },
+      {
+        "control": "diagram-case",
+        "flow": [
+          "engine-bypass",
+          "engine-core-cold"
+        ],
+        "visible": {
+          "in": [
+            "engine-split",
+            "engine-core",
+            "engine-shafts",
+            "engine-exhaust"
+          ]
+        }
+      },
+      {
+        "control": "diagram-case",
+        "flow": "engine-core-hot",
+        "visible": {
+          "in": [
+            "engine-core",
+            "engine-shafts",
+            "engine-exhaust"
+          ]
+        }
+      }
+    ],
+    "overlays": [
+      {
+        "kind": "force-vectors",
+        "group": "flight-flows",
+        "per": 0.00015,
+        "max": 0.5,
+        "arrows": [
+          {
+            "part": "foil-sample",
+            "force": "lift",
+            "dir": [
+              0,
+              1,
+              0
+            ],
+            "value": {
+              "output": "lift-n"
+            }
+          }
+        ]
+      },
+      {
+        "kind": "force-vectors",
+        "group": "flight-flows",
+        "per": 0.0005,
+        "max": 1,
+        "arrows": [
+          {
+            "part": "fuselage-shell",
+            "force": "gravity",
+            "dir": [
+              0,
+              -1,
+              0
+            ],
+            "value": 1000,
+            "at": "bottom",
+            "when": {
+              "control": "diagram-case",
+              "is": {
+                "in": [
+                  "vertical",
+                  "level",
+                  "bank",
+                  "weight"
+                ]
+              }
+            }
+          },
+          {
+            "part": "fuselage-shell",
+            "force": "lift",
+            "dir": [
+              0,
+              1,
+              0
+            ],
+            "value": 1000,
+            "at": "top",
+            "when": {
+              "control": "diagram-case",
+              "is": {
+                "in": [
+                  "vertical",
+                  "level"
+                ]
+              }
+            }
+          },
+          {
+            "part": "fuselage-shell",
+            "force": "lift",
+            "dir": [
+              0,
+              0.9396926208,
+              -0.3420201433
+            ],
+            "value": 1000,
+            "at": "top",
+            "when": {
+              "control": "diagram-case",
+              "is": {
+                "eq": "bank"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "kind": "force-vectors",
+        "group": "flight-flows",
+        "per": 0.004,
+        "max": 1,
+        "arrows": [
+          {
+            "part": "fuselage-shell",
+            "force": "thrust",
+            "dir": [
+              -1,
+              0,
+              0
+            ],
+            "value": 100,
+            "offset": [
+              -2.05,
+              -0.06,
+              0
+            ],
+            "when": {
+              "control": "diagram-case",
+              "is": {
+                "in": [
+                  "level",
+                  "axial"
+                ]
+              }
+            }
+          },
+          {
+            "part": "fuselage-shell",
+            "force": "drag",
+            "dir": [
+              1,
+              0,
+              0
+            ],
+            "value": 100,
+            "offset": [
+              2.07,
+              0.07,
+              0
+            ],
+            "when": {
+              "control": "diagram-case",
+              "is": {
+                "in": [
+                  "level",
+                  "axial"
+                ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "kind": "airfoil-pressure",
+        "part": "foil-sample",
+        "group": "flight-flows",
+        "when": {
+          "control": "flow-view",
+          "is": {
+            "eq": "pressure"
+          }
+        }
+      }
+    ]
+  }
+}

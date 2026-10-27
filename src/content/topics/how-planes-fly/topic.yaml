@@ -1,0 +1,17 @@
+# Beyond the syllabus: how aeroplanes fly; docs/45 (final v1, 2026-10-27), §9 engine and content records.
+# Parts: pnpm tsx scripts/geo/how-planes-fly/build-parts.ts; chapter frontmatter: pnpm tsx scripts/geo/how-planes-fly/build-chapters.ts
+id: how-planes-fly
+title: { en: "How planes fly", zh: "飞机为什么能飞" }
+subtitle: { en: "Four forces, a wing in moving air, control surfaces and a turbofan engine", zh: "四种力、气流中的机翼、操纵面和涡扇发动机" }
+shortTitle: { en: "How planes fly", zh: "飞机为什么能飞" }
+subject: science
+tags: [singapore, beyond-syllabus]
+moe: []
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: published
+illustration: how-planes-fly
+note: { en: "The aircraft and engine are generic design studies. The separate wing uses ideal two-dimensional flow. The dashed stall region is an illustrative teaching rule, not measured aircraft performance.", zh: "飞机与发动机是通用设计研究。旁边的翼型采用理想二维流。失速区虚线是教学示意，不是实测飞机性能。" }

@@ -1,0 +1,501 @@
+---
+{
+  "id": "thin-air",
+  "order": 6,
+  "title": {
+    "en": "Flying in thinner air",
+    "zh": "在较稀薄的空气中飞行"
+  },
+  "sensitive": false,
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "part": null,
+    "run": true,
+    "cutaway": "none",
+    "pose": null,
+    "layers": [
+      "airfoil-bench",
+      "flight-flows"
+    ],
+    "hide": [
+      "fuselage-shell",
+      "cockpit-glazing",
+      "wing-left",
+      "wing-right",
+      "wing-tip-left",
+      "wing-tip-right",
+      "aileron-left",
+      "aileron-right",
+      "spoiler-left",
+      "flap-left",
+      "flap-right",
+      "slat-left",
+      "slat-right",
+      "tailplane-left",
+      "tailplane-right",
+      "elevator-left",
+      "elevator-right",
+      "fin",
+      "rudder",
+      "nacelle-left",
+      "nacelle-right",
+      "fan-left",
+      "fan-right",
+      "wing-box-skin",
+      "front-spar",
+      "rear-spar",
+      "wing-ribs",
+      "engine-shell",
+      "fan-disc",
+      "bypass-duct",
+      "compressor-bank",
+      "compressor-rotor",
+      "combustor-ring",
+      "turbine-bank",
+      "hp-turbine-rotor",
+      "lp-turbine-rotor",
+      "lp-shaft",
+      "hp-shaft",
+      "core-nozzle",
+      "bypass-nozzle"
+    ],
+    "labels": [
+      "foil-sample",
+      "inflow-reference"
+    ],
+    "ghost": [],
+    "camera": {
+      "position": [
+        0,
+        2.2,
+        7.5
+      ],
+      "target": [
+        0,
+        2.2,
+        2.7
+      ],
+      "fov": 30
+    },
+    "sim": {
+      "set": {
+        "angle-deg": 4,
+        "airspeed-mps": 40,
+        "altitude-m": 0,
+        "flow-view": "streamlines",
+        "diagram-case": "none"
+      },
+      "try": {
+        "vary": "altitude-m",
+        "also": [
+          "flow-view"
+        ],
+        "keep": [
+          "angle-deg",
+          "airspeed-mps",
+          {
+            "en": "Same section and reference area",
+            "zh": "翼型和参考面积不变"
+          }
+        ],
+        "observe": [
+          "rho-now",
+          "lift-n"
+        ],
+        "record": true,
+        "predict": {
+          "prompt": {
+            "en": "In this model, the speed and the angle stay the same while the altitude goes from 0 to 10,000 metres. What happens to the lift?",
+            "zh": "在这个模型里，速度和迎角不变，高度从 0 米升到 10,000 米。升力会怎样？"
+          },
+          "start": {
+            "altitude-m": 0
+          },
+          "change": {
+            "altitude-m": 10000
+          },
+          "observe": "lift-n",
+          "options": [
+            {
+              "id": "more",
+              "label": {
+                "en": "More lift",
+                "zh": "升力更大"
+              },
+              "means": "more"
+            },
+            {
+              "id": "same",
+              "label": {
+                "en": "The same",
+                "zh": "不变"
+              },
+              "means": "same"
+            },
+            {
+              "id": "less",
+              "label": {
+                "en": "Less lift",
+                "zh": "升力更小"
+              },
+              "means": "less"
+            }
+          ]
+        }
+      }
+    },
+    "summary": {
+      "en": "Thinner air changes aerodynamic forces, but does not remove the need to support weight.",
+      "zh": "稀薄空气会改变空气动力，但飞机仍需要支撑重量。"
+    },
+    "index": {
+      "parts": [
+        "foil-sample",
+        "chord-marker",
+        "inflow-reference",
+        "fuselage-shell",
+        "wing-left",
+        "nacelle-left"
+      ]
+    },
+    "beats": [
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": true,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "airfoil-bench",
+          "flight-flows"
+        ],
+        "hide": [
+          "fuselage-shell",
+          "cockpit-glazing",
+          "wing-left",
+          "wing-right",
+          "wing-tip-left",
+          "wing-tip-right",
+          "aileron-left",
+          "aileron-right",
+          "spoiler-left",
+          "flap-left",
+          "flap-right",
+          "slat-left",
+          "slat-right",
+          "tailplane-left",
+          "tailplane-right",
+          "elevator-left",
+          "elevator-right",
+          "fin",
+          "rudder",
+          "nacelle-left",
+          "nacelle-right",
+          "fan-left",
+          "fan-right",
+          "wing-box-skin",
+          "front-spar",
+          "rear-spar",
+          "wing-ribs",
+          "engine-shell",
+          "fan-disc",
+          "bypass-duct",
+          "compressor-bank",
+          "compressor-rotor",
+          "combustor-ring",
+          "turbine-bank",
+          "hp-turbine-rotor",
+          "lp-turbine-rotor",
+          "lp-shaft",
+          "hp-shaft",
+          "core-nozzle",
+          "bypass-nozzle"
+        ],
+        "labels": [
+          "foil-sample",
+          "inflow-reference"
+        ],
+        "ghost": [],
+        "camera": "section-view",
+        "sim": {
+          "set": {
+            "angle-deg": 4,
+            "airspeed-mps": 40,
+            "altitude-m": 0,
+            "flow-view": "streamlines",
+            "diagram-case": "none"
+          }
+        },
+        "caption": {
+          "en": "This average-atmosphere model starts near sea level. It is a reference model, not today’s Singapore weather.",
+          "zh": "这个平均大气模型从接近海平面开始。它是参考模型，不是新加坡今天的天气。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": true,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "airfoil-bench",
+          "flight-flows"
+        ],
+        "hide": [
+          "fuselage-shell",
+          "cockpit-glazing",
+          "wing-left",
+          "wing-right",
+          "wing-tip-left",
+          "wing-tip-right",
+          "aileron-left",
+          "aileron-right",
+          "spoiler-left",
+          "flap-left",
+          "flap-right",
+          "slat-left",
+          "slat-right",
+          "tailplane-left",
+          "tailplane-right",
+          "elevator-left",
+          "elevator-right",
+          "fin",
+          "rudder",
+          "nacelle-left",
+          "nacelle-right",
+          "fan-left",
+          "fan-right",
+          "wing-box-skin",
+          "front-spar",
+          "rear-spar",
+          "wing-ribs",
+          "engine-shell",
+          "fan-disc",
+          "bypass-duct",
+          "compressor-bank",
+          "compressor-rotor",
+          "combustor-ring",
+          "turbine-bank",
+          "hp-turbine-rotor",
+          "lp-turbine-rotor",
+          "lp-shaft",
+          "hp-shaft",
+          "core-nozzle",
+          "bypass-nozzle"
+        ],
+        "labels": [
+          "foil-sample"
+        ],
+        "ghost": [],
+        "camera": "section-view",
+        "sim": {
+          "set": {
+            "angle-deg": 4,
+            "airspeed-mps": 40,
+            "altitude-m": 5000,
+            "flow-view": "streamlines",
+            "diagram-case": "none"
+          }
+        },
+        "caption": {
+          "en": "At the same speed, angle and reference area, the thinner air gives less lift in this simulation.",
+          "zh": "在这个模拟里，速度、迎角和参考面积不变时，较稀薄的空气产生较小的升力。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": true,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "airfoil-bench",
+          "flight-flows"
+        ],
+        "hide": [
+          "fuselage-shell",
+          "cockpit-glazing",
+          "wing-left",
+          "wing-right",
+          "wing-tip-left",
+          "wing-tip-right",
+          "aileron-left",
+          "aileron-right",
+          "spoiler-left",
+          "flap-left",
+          "flap-right",
+          "slat-left",
+          "slat-right",
+          "tailplane-left",
+          "tailplane-right",
+          "elevator-left",
+          "elevator-right",
+          "fin",
+          "rudder",
+          "nacelle-left",
+          "nacelle-right",
+          "fan-left",
+          "fan-right",
+          "wing-box-skin",
+          "front-spar",
+          "rear-spar",
+          "wing-ribs",
+          "engine-shell",
+          "fan-disc",
+          "bypass-duct",
+          "compressor-bank",
+          "compressor-rotor",
+          "combustor-ring",
+          "turbine-bank",
+          "hp-turbine-rotor",
+          "lp-turbine-rotor",
+          "lp-shaft",
+          "hp-shaft",
+          "core-nozzle",
+          "bypass-nozzle"
+        ],
+        "labels": [
+          "foil-sample"
+        ],
+        "ghost": [],
+        "camera": "section-view",
+        "sim": {
+          "set": {
+            "angle-deg": 4,
+            "airspeed-mps": 40,
+            "altitude-m": 10000,
+            "flow-view": "streamlines",
+            "diagram-case": "none"
+          }
+        },
+        "caption": {
+          "en": "Density changes the force here, while the ideal streamline shape stays the same. A real aircraft still needs to support its weight.",
+          "zh": "这里密度改变了力，理想流线的形状仍相同。真实飞机仍然需要支撑自身重量。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": true,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "airframe",
+          "flight-controls",
+          "propulsion",
+          "flight-flows"
+        ],
+        "hide": [
+          "wing-box-skin",
+          "front-spar",
+          "rear-spar",
+          "wing-ribs",
+          "engine-shell",
+          "fan-disc",
+          "bypass-duct",
+          "compressor-bank",
+          "compressor-rotor",
+          "combustor-ring",
+          "turbine-bank",
+          "hp-turbine-rotor",
+          "lp-turbine-rotor",
+          "lp-shaft",
+          "hp-shaft",
+          "core-nozzle",
+          "bypass-nozzle",
+          "foil-sample",
+          "chord-marker",
+          "inflow-reference",
+          "angle-marker",
+          "display-plinth"
+        ],
+        "labels": [
+          "fuselage-shell",
+          "wing-left",
+          "nacelle-left"
+        ],
+        "ghost": [],
+        "camera": "cruise-view",
+        "sim": {
+          "set": {
+            "angle-deg": 4,
+            "airspeed-mps": 40,
+            "altitude-m": 0,
+            "flow-view": "streamlines",
+            "diagram-case": "weight"
+          }
+        },
+        "caption": {
+          "en": "Flying higher is a compromise. Aircraft performance, available thrust, weather and traffic all limit the choice; higher is not always better.",
+          "zh": "飞得更高是一种取舍。飞机性能、可用推力、天气和空中交通都会限制选择；并非越高越好。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Air gets thinner with height. In NASA’s average-atmosphere model, both the pressure and the <Term id="air-density">air density</Term> fall as you go up. In this simulation the density is about <Num s="S58">1.23 kg/m³</Num> near sea level, about <Num s="S58">0.74 kg/m³</Num> at <Num s="S58">5,000 m</Num> and about <Num s="S58">0.41 kg/m³</Num> at <Num s="S58">10,000 m</Num>. The model is an average reference, not today’s weather over Singapore. <FlyTo preset="section-view">Go back to the experiment</FlyTo>
+
+The experiment keeps the same speed, the same angle of attack and the same reference area, and only the height changes. In this simulation, at <Num s="S58">40 m/s</Num> and <Num s="S58">4°</Num>, lift falls from about <Num s="S58">924 N</Num> at sea level to about <Num s="S58">556 N</Num> at <Num s="S58">5,000 m</Num> and about <Num s="S58">312 N</Num> at <Num s="S58">10,000 m</Num>, in step with the density. The streamlines keep exactly the same shape: in the ideal model, density changes the size of the force, not the pattern of the flow.
+
+This is a comparison under fixed conditions, not a picture of how a real aircraft cruises. A real aircraft still has to support its weight. Higher up it flies faster through the air or changes its angle of attack, so that its wings still give enough lift, and its engines still need enough air to work. The last beat returns to the airliner, with its weight, for that reason.
+
+Choosing a cruising height is a compromise. The aircraft’s performance, the thrust available, the weather and other air traffic all limit the choice, so flying higher is not always better.
+
+<More title={{ en: "The average-atmosphere formula", zh: "平均大气公式" }}>
+
+For the lowest layer of the atmosphere, up to the heights used here, NASA’s model gives the temperature as <Num s="S11">T = 15.04 − 0.00649 h</Num> (in °C, with h in metres), the pressure as <Num s="S11">p = 101.29 × [(T + 273.1) / 288.08]^5.256</Num> (in kilopascals) and the density as <Num s="S11">ρ = p / [0.2869 × (T + 273.1)]</Num>. These are curve fits to average measurements. The real air on any day can differ from this average.
+
+</More>
+
+<More title={{ en: "What about drag", zh: "阻力会怎样" }}>
+
+Drag can be written in the same form as lift, <Num s="S14">D = ½ ρ V² S Cd</Num>. With Cd, V and S kept the same, thinner air gives less drag. But a real aircraft does not keep them the same when it climbs, so this does not say how much drag an airliner has at cruise. The experiment in this topic does not calculate drag at all.
+
+</More>
+
+<More title={{ en: "Why the experiment is not a cruise", zh: "为什么这个实验不是巡航" }}>
+
+The card changes one thing at a time so that you can see the effect of density on its own. A flight crew must consider speed, height and angle of attack together, within limits set by the aircraft and by the air traffic around it. This topic gives no speeds or heights for real flights.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+越往高处，空气越稀薄。在 NASA 的平均大气模型里，气压和<Term id="air-density">空气密度</Term>都随高度减小。在这个模拟里，接近海平面时密度约 <Num s="S58">1.23 kg/m³</Num>，<Num s="S58">5,000 m</Num> 高处约 <Num s="S58">0.74 kg/m³</Num>，<Num s="S58">10,000 m</Num> 高处约 <Num s="S58">0.41 kg/m³</Num>。这个模型给的是多年测量的平均参考值，描述的是一般情况，不是新加坡今天的天气，也不是哪一天的实测。<FlyTo preset="section-view">回到实验</FlyTo>
+
+实验保持速度、迎角和参考面积都不变，只改变高度。在这个模拟里，速度 <Num s="S58">40 m/s</Num>、迎角 <Num s="S58">4°</Num> 时，升力从海平面的约 <Num s="S58">924 N</Num>，降到 <Num s="S58">5,000 m</Num> 高处的约 <Num s="S58">556 N</Num>，再降到 <Num s="S58">10,000 m</Num> 高处的约 <Num s="S58">312 N</Num>，和密度同比例减小。流线的形状完全没变：在理想模型里，密度改变的是力的大小，不是气流的样子。
+
+这只是在固定条件下所做的比较，只改了高度这一个量，其他输入都固定，不代表真实飞机怎样巡航。真实飞机仍然要支撑自身的重量。飞得更高时，它相对空气飞得更快，或者改变迎角，让机翼仍有足够的升力；发动机也仍然需要足够的空气才能工作。所以最后一拍回到客机，画出它的重力。
+
+选择巡航高度是一种取舍。飞机的性能、可用的推力、天气和其他空中交通都会限制这个选择，所以并非飞得越高越好。
+
+<More title={{ en: "The average-atmosphere formula", zh: "平均大气公式" }}>
+
+在大气的最低一层，也就是本主题用到的高度范围内，NASA 的模型给出：温度 <Num s="S11">T = 15.04 − 0.00649 h</Num>（单位 ℃，h 以米计），气压 <Num s="S11">p = 101.29 × [(T + 273.1) / 288.08]^5.256</Num>（单位千帕），密度 <Num s="S11">ρ = p / [0.2869 × (T + 273.1)]</Num>。这些公式是对平均测量值的拟合；某一天的真实空气可能与这个平均值不同。
+
+</More>
+
+<More title={{ en: "What about drag", zh: "阻力会怎样" }}>
+
+阻力可以写成和升力相似的形式：<Num s="S14">D = ½ ρ V² S Cd</Num>。Cd、V、S 都不变时，空气越稀薄，阻力越小。可是真实飞机爬高时并不保持这些量不变，所以这不能说明客机巡航时阻力有多大。本主题的实验根本不计算阻力。
+
+</More>
+
+<More title={{ en: "Why the experiment is not a cruise", zh: "为什么这个实验不是巡航" }}>
+
+卡片一次只改一个量，好让你单独看到密度的影响。机组需要把速度、高度和迎角一起考虑，而且要遵守飞机和周围空中交通设定的限制。本主题不给出真实航班的任何速度或高度。
+
+</More>
+
+</Lang>
