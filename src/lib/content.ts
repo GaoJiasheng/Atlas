@@ -79,7 +79,7 @@ export function rawTopicData(slug: string): Record<string, unknown> {
 
 /** Parsed engine data for a topic (throws on invalid data, failing the build). */
 export function topicEngineData(topic: TopicEntry): unknown {
-  return parseEngineData(topic.data.engine, topic.data.stage, rawTopicData(topic.id), `topic "${topic.id}"`);
+  return parseEngineData(topic.data.engine, topic.data.stage, rawTopicData(topic.id), `topic "${topic.id}"`, topic.data.temporalMode);
 }
 
 /**
