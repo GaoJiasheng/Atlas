@@ -1,0 +1,52 @@
+[
+  {
+    "id": "actor-ming-fleet",
+    "name": {
+      "en": "Ming expedition fleet",
+      "zh": "明朝远航船队"
+    },
+    "bloc": "neutral",
+    "joined": "1405",
+    "color": "token:holder-1"
+  },
+  {
+    "id": "actor-old-port-force",
+    "name": {
+      "en": "Chen Zuyi’s force, as described in Ming records",
+      "zh": "明方所记陈祖义的势力"
+    },
+    "bloc": "neutral",
+    "joined": "1407",
+    "color": "token:holder-2"
+  },
+  {
+    "id": "actor-melaka",
+    "name": {
+      "en": "Melaka polity",
+      "zh": "马六甲政权"
+    },
+    "bloc": "neutral",
+    "joined": "1405",
+    "color": "token:holder-3"
+  },
+  {
+    "id": "actor-indian-ocean-ports",
+    "name": {
+      "en": "Indian Ocean ports (narrative group)",
+      "zh": "印度洋港口（叙事分组）"
+    },
+    "bloc": "neutral",
+    "joined": "1405",
+    "color": "token:holder-4"
+  },
+  {
+    "id": "actor-swahili-ports",
+    "name": {
+      "en": "Swahili trading ports (narrative group)",
+      "zh": "斯瓦希里贸易港口（叙事分组）"
+    },
+    "bloc": "neutral",
+    "joined": "1405",
+    "color": "token:holder-5"
+  }
+]

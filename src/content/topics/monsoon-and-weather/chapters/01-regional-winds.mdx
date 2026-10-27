@@ -1,0 +1,195 @@
+---
+{
+  "id": "regional-winds",
+  "order": 1,
+  "title": {
+    "en": "The winds change through the year",
+    "zh": "风怎样随着月份转变"
+  },
+  "sensitive": false,
+  "state": {
+    "month": 1,
+    "camera": {
+      "center": [
+        115,
+        7.5
+      ],
+      "zoom": 3.35,
+      "pitch": 0,
+      "bearing": 0
+    },
+    "layers": [
+      "base",
+      "sites",
+      "clim-wind",
+      "clim-rain"
+    ],
+    "highlight": [],
+    "summary": {
+      "en": "January climatology: inspect the regional arrows and rain cells together. Seasonal circulation concerns a region, rather than one coastal afternoon.",
+      "zh": "1 月气候平均：一起看区域风箭头和雨量格点。季风讲的是大范围环流，并非一个海岸下午的海风。"
+    },
+    "index": [
+      "site-singapore",
+      "site-hanoi"
+    ],
+    "beats": [
+      {
+        "month": 1,
+        "camera": {
+          "center": [
+            115,
+            7.5
+          ],
+          "zoom": 3.35,
+          "pitch": 0,
+          "bearing": 0
+        },
+        "layers": [
+          "base",
+          "sites",
+          "clim-wind",
+          "clim-rain"
+        ],
+        "highlight": [],
+        "caption": {
+          "en": "January climatology: inspect the regional arrows and rain cells together. Seasonal circulation concerns a region, rather than one coastal afternoon.",
+          "zh": "1 月气候平均：一起看区域风箭头和雨量格点。季风讲的是大范围环流，并非一个海岸下午的海风。"
+        }
+      },
+      {
+        "month": 7,
+        "camera": {
+          "center": [
+            108,
+            -1.5
+          ],
+          "zoom": 4.2,
+          "pitch": 0,
+          "bearing": 0
+        },
+        "layers": [
+          "base",
+          "sites",
+          "clim-wind",
+          "clim-rain"
+        ],
+        "highlight": [
+          "site-singapore"
+        ],
+        "caption": {
+          "en": "July climatology: near the equatorial grid node at 105 degrees east, the mean northward wind component differs from January.",
+          "zh": "7 月气候平均：在东经 105 度的赤道格点，平均南北风分量与 1 月不同。"
+        }
+      },
+      {
+        "month": 7,
+        "camera": {
+          "center": [
+            112,
+            18
+          ],
+          "zoom": 4.1,
+          "pitch": 0,
+          "bearing": 0
+        },
+        "layers": [
+          "base",
+          "sites",
+          "clim-wind"
+        ],
+        "highlight": [
+          "site-hanoi"
+        ],
+        "caption": {
+          "en": "July climatology: these arrows describe regional flow. Rotation affects large-scale winds differently north and south of the equator.",
+          "zh": "7 月气候平均：箭头显示区域环流。地球自转对赤道南北两侧的大范围风有不同的偏转作用。"
+        }
+      },
+      {
+        "month": 12,
+        "camera": {
+          "center": [
+            115,
+            7.5
+          ],
+          "zoom": 3.35,
+          "pitch": 0,
+          "bearing": 0
+        },
+        "layers": [
+          "base",
+          "sites",
+          "clim-wind",
+          "clim-rain"
+        ],
+        "highlight": [],
+        "caption": {
+          "en": "December climatology: return to the same fixed legends. A month’s resultant vector is not the average of all its instantaneous wind speeds.",
+          "zh": "12 月气候平均：回看相同的固定图例。月平均矢量的大小，不等于这一个月每次风速的平均。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+A <Term id="term-monsoon">monsoon</Term> is a large-scale circulation of the air whose winds change with the seasons. Land and sea warm up at different rates, and that difference helps set up the seasonal pattern. A <Term id="term-sea-breeze">sea breeze</Term> works in a similar way on a small scale: by day the land heats faster than the sea, and air moves in from the sea. But a sea breeze comes and goes within hours along one coast. A monsoon changes over months, across a whole region.
+
+Compare January and July. In January the arrows over the South China Sea come from the east and north-east; in July they come from the south-west and west. At the grid point on the equator at 105° E, the January arrow points almost due south: its northward part is about <Num s="S101,S24">−4.9</Num> metres per second. In July it points north, at about <Num s="S101,S24">+3.6</Num>. <FlyTo preset="view-equator">Near the equator</FlyTo>
+
+Earth's rotation turns large-scale winds: to the right in the Northern Hemisphere and to the left in the Southern. That helps explain why a broad flow of air can curve as it crosses the equator. It is not a switch that flips the wind at the equator line. <FlyTo preset="view-north">South China Sea</FlyTo>
+
+Every month uses the same arrow scale and the same rain colours, so months can be compared fairly. An arrow is a monthly average. It does not trace the path of any parcel of air.
+
+<More title={{ en: "A day and a season", zh: "一天与一个季节" }}>
+
+A sea breeze is a daytime wind that blows once the land has warmed, along one stretch of coast. A monsoon belongs to a whole season and to a region far larger than any coast. Both start from land and sea heating differently, but they are not the same wind.
+
+</More>
+
+<More title={{ en: "Why the average arrow can be short", zh: "平均箭头为什么可能很短" }}>
+
+Averages of arrows can cancel. If the wind blew east at <Num s="S24">10</Num> metres per second for half a month and west at <Num s="S24">10</Num> metres per second for the other half, the average arrow would have no length at all, yet the wind was never calm. That is why the readout calls the arrow's size the "magnitude of the mean vector", not the average wind speed.
+
+</More>
+
+<More title={{ en: "Try it: read one grid point", zh: "试一试：读一个格点" }}>
+
+Open "Inspect climate cell". It starts at the equator, 105° E. Read the eastward part, u, and the northward part, v, for January. Now move the month to July without changing anything else. Which part changed sign? Which way does the arrow point now?
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+<Term id="term-monsoon">季风</Term>是随季节转变风向的大范围空气环流。陆地和海洋变暖的快慢不同，这个差别有助于形成季节性的风。<Term id="term-sea-breeze">海风</Term>的道理相近，只是规模小得多：白天陆地比海面热得快，空气就从海上吹进陆地。不过，海风在一段海岸上几小时就来了又去；季风却要经过几个月才转变，范围是整个区域。
+
+比较 1 月和 7 月。1 月，南中国海上空的箭头从东方和东北方来；7 月，箭头从西南方和西方来。在赤道上东经 105 度的格点，1 月的箭头几乎正指向南，向北的分量约为每秒 <Num s="S101,S24">−4.9</Num> 米；7 月它指向北，约为 <Num s="S101,S24">+3.6</Num>。<FlyTo preset="view-equator">赤道附近</FlyTo>
+
+地球自转会让大范围的风偏转：北半球向右，南半球向左。这有助于说明，一大股气流越过赤道时为什么会拐弯。但赤道并不是一个开关，风不会一到赤道线就突然掉头。<FlyTo preset="view-north">南中国海</FlyTo>
+
+每个月都用同一套箭头比例和同一套雨量颜色，月份之间才能公平比较。箭头是一个月的平均，并不是哪一团空气走过的路线。
+
+<More title={{ en: "A day and a season", zh: "一天与一个季节" }}>
+
+海风是白天陆地晒热以后、在一段海岸吹起的风。季风属于整个季节，范围远远大过任何一段海岸。两者都从陆海受热不同说起，但并不是同一种风。
+
+</More>
+
+<More title={{ en: "Why the average arrow can be short", zh: "平均箭头为什么可能很短" }}>
+
+箭头平均起来会互相抵消。假如半个月风以每秒 <Num s="S24">10</Num> 米向东吹，另外半个月以每秒 <Num s="S24">10</Num> 米向西吹，平均箭头的长度就是零，可是风从来没有停过。所以读数把箭头的大小叫做“平均矢量的模”，而不叫平均风速。
+
+</More>
+
+<More title={{ en: "Try it: read one grid point", zh: "试一试：读一个格点" }}>
+
+打开“查看气候格点”，它从赤道上的东经 105 度开始。读出 1 月向东的分量 u 和向北的分量 v。然后只把月份换到 7 月，其他都不动。哪个分量变了正负号？箭头现在指向哪里？
+
+</More>
+
+</Lang>

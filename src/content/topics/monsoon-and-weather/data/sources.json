@@ -1,0 +1,303 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "Meteorological Service Singapore (MSS): Climate",
+        "zh": "新加坡气象局（MSS）：气候"
+      },
+      "url": "https://www.weather.gov.sg/learn_climate/",
+      "note": {
+        "en": "Read 2026-10-27. “Difference between Climate and Weather” (weather is the short term, climate the pattern over many years) and “Climate Variability” (El Niño years generally drier here, La Niña years generally wetter). Paraphrased; tendencies, not forecasts.",
+        "zh": "2026 年 10 月 27 日阅读。“Difference between Climate and Weather”一节（天气是短时间的，气候是多年的规律）与“Climate Variability”一节（厄尔尼诺年份这里一般较少雨，拉尼娜年份一般较多雨）。转述；是倾向，不是预报。"
+      }
+    },
+    {
+      "id": "S2",
+      "text": {
+        "en": "MSS: Climate of Singapore",
+        "zh": "新加坡气象局：新加坡的气候"
+      },
+      "url": "https://www.weather.gov.sg/climate-climate-of-singapore/",
+      "note": {
+        "en": "Read 2026-10-27. Seasons table (Northeast Monsoon December to early March, wet first half and windy, relatively dry later part; Southwest Monsoon June to September with southeasterly to southerly winds; inter-monsoons late March to May and October to November, light and variable winds), the Rainfall paragraph (rain belt moves south to affect Java in February) and the 1991–2020 climate station means at Changi: February 105.1 mm, December 331.9 mm. Only these two values are used; the table is not copied.",
+        "zh": "2026 年 10 月 27 日阅读。季节表（东北季风约 12 月至 3 月初，前半段多雨，后半段多风、相对干燥；西南季风 6–9 月，东南至南风；季风过渡期 3 月下旬至 5 月、10–11 月，风轻而多变）、Rainfall 一段（2 月雨带南移，影响爪哇），以及樟宜站 1991–2020 年平均值：2 月 105.1 毫米，12 月 331.9 毫米。只用这两个数，不复制整张表。"
+      }
+    },
+    {
+      "id": "S3",
+      "text": {
+        "en": "MSS: Winds",
+        "zh": "新加坡气象局：风"
+      },
+      "url": "https://www.weather.gov.sg/learn_winds/",
+      "note": {
+        "en": "Read 2026-10-27. “Global Winds” (winds are named for where they come from; Earth's rotation turns large-scale winds right in the Northern Hemisphere, left in the Southern), “Local Winds” (land heats faster than the sea by day, drawing in a sea breeze) and “Tropical Monsoon” (a seasonal, large-scale circulation).",
+        "zh": "2026 年 10 月 27 日阅读。“Global Winds”（风按来向命名；地球自转使大范围的风在北半球向右、南半球向左偏转）、“Local Winds”（白天陆地比海面热得快，引来海风）与“Tropical Monsoon”（随季节变化的大范围环流）三节。"
+      }
+    },
+    {
+      "id": "S4",
+      "text": {
+        "en": "MSS: Clouds",
+        "zh": "新加坡气象局：云"
+      },
+      "url": "https://www.weather.gov.sg/learn_clouds/",
+      "note": {
+        "en": "Read 2026-10-27. “The Nature of Clouds” (rising air cools; water vapour condenses into droplets, with ice in colder parts) and “Cumulonimbus” (a deep cloud whose icy top can spread into an anvil). No cloud heights are used.",
+        "zh": "2026 年 10 月 27 日阅读。“The Nature of Clouds”（上升的空气冷却，水蒸气凝结成小水滴，较冷处有冰）与“Cumulonimbus”（深厚的云，冰质云顶可展开成砧状）两节。不采用云高数字。"
+      }
+    },
+    {
+      "id": "S5",
+      "text": {
+        "en": "MSS: Weather Systems",
+        "zh": "新加坡气象局：天气系统"
+      },
+      "url": "https://www.weather.gov.sg/learn_weather_systems/",
+      "note": {
+        "en": "Read 2026-10-27. Thunderstorm “Formation” (surface heating and converging sea breezes), “Lightning” (thunder is the sound of air heated and expanding along the lightning path; lightning can strike away from the rain), “Sumatra Squall” (an organised line of thunderstorms over Sumatra or the Strait of Malacca, usually moving east, often at night or in the morning, with sudden gusts and heavy rain) and “Monsoon Surge” (stronger Northeast Monsoon winds over the South China Sea that pick up moisture and can bring prolonged rain). No gust speeds or durations are used; no graphics are copied.",
+        "zh": "2026 年 10 月 27 日阅读。雷雨“Formation”（地面受热、海风汇合）、“Lightning”（雷声是闪电路径上的空气急速受热膨胀发出的声音；闪电可打在下雨区域以外）、“Sumatra Squall”（在苏门答腊或马六甲海峡上空形成、通常向东移动的有组织雷雨线，常在夜间或早晨，伴有突发阵风和大雨）与“Monsoon Surge”（东北季风在南中国海上空增强，带上水汽，可造成持续降雨）。不采用阵风速度或持续时间，不复制图形。"
+      }
+    },
+    {
+      "id": "S6",
+      "text": {
+        "en": "NOAA National Weather Service (NWS): Thunderstorm Life Cycle",
+        "zh": "美国国家气象局（NWS）：雷雨的生命周期"
+      },
+      "url": "https://www.weather.gov/spotterguide/life",
+      "note": {
+        "en": "Read 2026-10-27. The developing, mature and dissipating stages of an ordinary cell: updrafts feed the developing cell; the mature cell has updrafts and rain-cooled downdrafts; the outflow then cuts off the warm, moist inflow. No fixed durations or the American example sizes are used.",
+        "zh": "2026 年 10 月 27 日阅读。普通雨胞的成长、成熟、消散三个阶段：成长期主要由上升气流供给；成熟期上升气流与雨水带下的下沉气流并存；之后外流切断温暖潮湿的补给。不采用固定时长或美国例子里的尺寸。"
+      }
+    },
+    {
+      "id": "S7",
+      "text": {
+        "en": "NOAA NWS: Understanding Lightning: Thunderstorm Electrification",
+        "zh": "美国国家气象局：认识闪电——雷雨云怎样带电"
+      },
+      "url": "https://www.weather.gov/safety/lightning-science-electrification",
+      "note": {
+        "en": "Read 2026-10-27. Main text and figure captions: collisions among ice crystals and graupel, and their separation by rising and sinking air, help charge a thunderstorm; scientists are still studying the details.",
+        "zh": "2026 年 10 月 27 日阅读。正文与图注：冰晶和霰相互碰撞，再被上升、下沉气流分开，使雷雨云带电；细节仍在研究中。"
+      }
+    },
+    {
+      "id": "S8",
+      "text": {
+        "en": "NOAA NWS: Lightning Safety Tips and Resources",
+        "zh": "美国国家气象局：防雷安全提示"
+      },
+      "url": "https://www.weather.gov/safety/lightning-tips",
+      "note": {
+        "en": "Read 2026-10-27. Main tips and the indoor and last-resort outdoor sections: if you hear thunder, lightning is close enough to strike you; go to a substantial building with electricity or plumbing, or an enclosed, metal-topped vehicle with the windows up; stay in safe shelter at least 30 minutes after the last thunder; never shelter under an isolated tree; indoors, avoid plumbing and corded electrical equipment and stay away from windows and doors.",
+        "zh": "2026 年 10 月 27 日阅读。主要提示、室内与户外最后手段两节：听得见雷声，闪电就近得可能打到你；进入通电或装有水管的坚固建筑，或关好车窗、有金属车顶的封闭车辆；最后一次雷声后至少 30 分钟仍留在安全处；不要在孤立的树下避雷；在室内避开水管和有线电器，远离门窗。"
+      }
+    },
+    {
+      "id": "S9",
+      "text": {
+        "en": "Ministry of Health, Singapore: Haze",
+        "zh": "新加坡卫生部：烟霾"
+      },
+      "url": "https://www.moh.gov.sg/others/haze/",
+      "note": {
+        "en": "Read 2026-10-27. Opening explanation (page updated 21 October 2026): haze in the region comes from forest and land fires, and is affected by dry weather, little rain and the direction of the wind. Health grades, thresholds and personal advice on the page are not used.",
+        "zh": "2026 年 10 月 27 日阅读。开头的说明（页面标 2026 年 10 月 21 日更新）：区域的烟霾来自森林和土地火灾，受干燥天气、少雨和风向影响。页面上的健康分级、阈值和个人建议不用。"
+      }
+    },
+    {
+      "id": "S10",
+      "text": {
+        "en": "BMKG (Indonesian Agency for Meteorology, Climatology and Geophysics): Belajar dari Masa Lalu, BMKG: Sains dan Teknologi Kunci Penanganan Karhutla dan Asap Lintas Batas",
+        "zh": "印尼气象、气候和地球物理局（BMKG）：《从过去学习：科学与技术是应对森林火灾与跨境烟霾的关键》"
+      },
+      "url": "https://www.bmkg.go.id/berita/utama/belajar-dari-masa-lalu-bmkg-sains-dan-teknologi-kunci-penanganan-karhutla-dan-asap-lintas-batas",
+      "note": {
+        "en": "Read 2026-10-27. Article of 12 August 2025, in Indonesian: early warnings, work with other agencies and keeping peatland wetter (managing its water level) to reduce forest and land fires. Described as BMKG's own account; the article's percentages and forecasts are not used.",
+        "zh": "2026 年 10 月 27 日阅读。2025 年 8 月 12 日的印尼文文章：预警、与其他机构合作，以及让泥炭地保持湿润（管理地下水位）以减少森林和土地火灾。作为 BMKG 自己的介绍转述；文中的百分比和预测不用。"
+      }
+    },
+    {
+      "id": "S11",
+      "text": {
+        "en": "Malaysian Meteorological Department (METMalaysia): Global Atmosphere Watch",
+        "zh": "马来西亚气象局：全球大气监测"
+      },
+      "url": "https://www.met.gov.my/en/pendidikan/aktivitigaw/",
+      "note": {
+        "en": "Read 2026-10-27. Purpose of the GAW station: long-term atmospheric monitoring that supports research on regional problems, including transboundary haze, acid deposition and climate change. The city point on the map is not the station.",
+        "zh": "2026 年 10 月 27 日阅读。全球大气监测站的目的：长期监测大气，支持跨境烟霾、酸沉降和气候变化等区域问题的研究。地图上的城市点不是监测站。"
+      }
+    },
+    {
+      "id": "S12",
+      "text": {
+        "en": "ASEAN Haze Portal: Regional Policy Framework",
+        "zh": "东盟烟霾门户网站：区域政策框架"
+      },
+      "url": "https://hazeportal.asean.org/peatlands-in-sea/regional-policy-framework/",
+      "note": {
+        "en": "Read 2026-10-27. §ii, the ASEAN Agreement on Transboundary Haze Pollution: signed 10 June 2002, in force 25 November 2003; the page also describes haze crossing borders. Only the signing year is printed; current obligations are not inferred.",
+        "zh": "2026 年 10 月 27 日阅读。§ii《东盟跨境烟霾污染协定》：2002 年 6 月 10 日签署，2003 年 11 月 25 日生效；页面也说明烟霾跨越国界。正文只写签署年份，不推断现行义务。"
+      }
+    },
+    {
+      "id": "S13",
+      "text": {
+        "en": "MSS: Past Climate Trends",
+        "zh": "新加坡气象局：过去的气候趋势"
+      },
+      "url": "https://www.weather.gov.sg/climate-past-climate-trends/",
+      "note": {
+        "en": "Read 2026-10-27. Last paragraph of “Rainfall”: research available now cannot say for certain how much of the rainfall changes seen in Singapore comes from global warming, natural variation or other causes. Temperature and rainfall trend numbers are not used.",
+        "zh": "2026 年 10 月 27 日阅读。“Rainfall”一节最后一段：现有研究还不能确定，新加坡观测到的雨量变化有多少来自全球变暖、自然变化或其他原因。气温与雨量趋势数字不用。"
+      }
+    },
+    {
+      "id": "S14",
+      "text": {
+        "en": "IPCC (2023): Climate Change 2023: AR6 Synthesis Report, as described in the UNCCD Library",
+        "zh": "IPCC（2023）：《气候变化 2023：第六次评估综合报告》，据《联合国防治荒漠化公约》图书馆的介绍"
+      },
+      "url": "https://www.unccd.int/resources/unccd-library/climate-change-2023-ar6-synthesis-report",
+      "note": {
+        "en": "Read 2026-10-27. The library's description of the report: human-caused climate change is already affecting many weather and climate extremes in every region. Only this description was read, not the report itself; no temperature figures are used.",
+        "zh": "2026 年 10 月 27 日阅读。图书馆对报告的介绍：人为气候变化已在影响各地区的许多极端天气与气候。只读了这段介绍，没有读报告全文；不采用温度数字。"
+      }
+    },
+    {
+      "id": "S22",
+      "text": {
+        "en": "NOAA Physical Sciences Laboratory (PSL): NCEP-NCAR Reanalysis 1",
+        "zh": "美国国家海洋和大气管理局物理科学实验室（NOAA PSL）：NCEP-NCAR 再分析 1"
+      },
+      "url": "https://psl.noaa.gov/data/gridded/data.ncep.reanalysis.html",
+      "note": {
+        "en": "Read 2026-10-27. Product page: identity of the reanalysis and its usage and citation note. The grid, level and period used here are taken from the data files themselves (S101).",
+        "zh": "2026 年 10 月 27 日阅读。产品页：再分析资料的名称及使用与引用说明。本主题所用的格网、气压层和时期取自数据文件本身（S101）。"
+      }
+    },
+    {
+      "id": "S24",
+      "text": {
+        "en": "NOAA PSL: FAQ on reading PSL netCDF files",
+        "zh": "NOAA PSL：读取 netCDF 文件的常见问题"
+      },
+      "url": "https://psl.noaa.gov/data/help/faq.html",
+      "note": {
+        "en": "Read 2026-10-27. Positive u is wind towards the east and positive v towards the north; the size of a monthly mean vector, √(u²+v²), is not the same as the monthly mean wind speed. Used for the arrow directions and the wording of the cell readout.",
+        "zh": "2026 年 10 月 27 日阅读。u 为正表示风向东吹，v 为正表示向北吹；月平均矢量的大小 √(u²+v²) 不等于月平均风速。用于箭头方向和格点读数的写法。"
+      }
+    },
+    {
+      "id": "S25",
+      "text": {
+        "en": "NOAA PSL: Data access, use and citing data",
+        "zh": "NOAA PSL：数据获取、使用与引用"
+      },
+      "url": "https://psl.noaa.gov/data/help/help_body.html",
+      "note": {
+        "en": "Read 2026-10-27. “Citing Data and Plots”: PSL data are in the public domain; users acknowledge NOAA PSL and must not imply NOAA endorsement. Acknowledgement: NCEP Reanalysis and GPCP Precipitation data provided by the NOAA PSL, Boulder, Colorado, USA, from their website at https://psl.noaa.gov.",
+        "zh": "2026 年 10 月 27 日阅读。“Citing Data and Plots”：PSL 数据属公有领域；使用者应鸣谢 NOAA PSL，不得暗示获其认可。鸣谢：NCEP 再分析与 GPCP 降水数据由美国科罗拉多州博尔德的 NOAA PSL 提供，网址 https://psl.noaa.gov。"
+      }
+    },
+    {
+      "id": "S30",
+      "text": {
+        "en": "Natural Earth: Terms of use",
+        "zh": "Natural Earth：使用条款"
+      },
+      "url": "https://www.naturalearthdata.com/about/terms-of-use/",
+      "note": {
+        "en": "Read 2026-10-27. All Natural Earth vector and raster map data are in the public domain. Covers the coastline basemap and the six city points.",
+        "zh": "2026 年 10 月 27 日阅读。Natural Earth 的矢量与栅格地图数据全部属公有领域。适用于海岸底图和六个城市点。"
+      }
+    },
+    {
+      "id": "S31",
+      "text": {
+        "en": "MSS: Terms of use",
+        "zh": "新加坡气象局：使用条款"
+      },
+      "url": "https://www.weather.gov.sg/terms-of-use/",
+      "note": {
+        "en": "Read 2026-10-27. §4 limits reuse of the website's materials. This topic therefore quotes a few facts in its own words and copies no MSS maps, radar images, graphics or tables.",
+        "zh": "2026 年 10 月 27 日阅读。第 4 条限制转用网站资料。所以本主题只用自己的话转述少量事实，不复制气象局的地图、雷达图、图形或表格。"
+      }
+    },
+    {
+      "id": "S32",
+      "text": {
+        "en": "NOAA National Centers for Environmental Information (NCEI): Precipitation – GPCP Monthly Climate Data Record",
+        "zh": "NOAA 国家环境信息中心（NCEI）：降水——GPCP 月气候数据记录"
+      },
+      "url": "https://www.ncei.noaa.gov/products/climate-data-records/precipitation-gpcp-monthly",
+      "note": {
+        "en": "Read 2026-10-27. Product description: monthly precipitation that combines satellite estimates and rain-gauge measurements on a 2.5° grid. Registration is optional. The version, unit and period used here are taken from the data files (S102).",
+        "zh": "2026 年 10 月 27 日阅读。产品说明：把卫星估算与雨量计测量合成的月降水资料，格距 2.5°。注册为自愿。本主题所用的版本、单位和时期取自数据文件（S102）。"
+      }
+    },
+    {
+      "id": "S101",
+      "text": {
+        "en": "NOAA PSL: NCEP/NCAR Reanalysis 1 monthly long-term means 1991–2020, u- and v-wind (OPeNDAP metadata and data)",
+        "zh": "NOAA PSL：NCEP/NCAR 再分析 1 的 1991–2020 年月长期平均风（东西、南北分量；OPeNDAP 元数据与数据）"
+      },
+      "url": "https://psl.noaa.gov/thredds/dodsC/Datasets/ncep.reanalysis.derived/pressure/uwnd.mon.ltm.1991-2020.nc.das",
+      "note": {
+        "en": "Read 2026-10-27. Metadata: climatology period 1991/01/01–2020/12/31, units m/s, pressure level 850 hPa, 2.5° grid. The u and v arrays for 15° S–30° N, 90–140° E and their valid-year counts (30 for every cell and month) are in the topic's wind file; the exact requests and fingerprints are in data/SOURCES.md.",
+        "zh": "2026 年 10 月 27 日阅读。元数据：气候平均期 1991/01/01–2020/12/31，单位 m/s，850 hPa 气压层，格距 2.5°。南纬 15° 至北纬 30°、东经 90–140° 的 u、v 数组及有效年数（每格每月都是 30 年）存在本主题的风数据文件里；原始请求与指纹见 data/SOURCES.md。"
+      }
+    },
+    {
+      "id": "S102",
+      "text": {
+        "en": "NOAA PSL: GPCP Version 2.3 monthly long-term mean precipitation 1991–2020 (OPeNDAP metadata and data)",
+        "zh": "NOAA PSL：GPCP 第 2.3 版 1991–2020 年月长期平均降水（OPeNDAP 元数据与数据）"
+      },
+      "url": "https://psl.noaa.gov/thredds/dodsC/Datasets/gpcp/precip.mon.ltm.1991-2020.nc.das",
+      "note": {
+        "en": "Read 2026-10-27. Metadata: GPCP V2.3, climatology period 1991/01/01–2020/12/31, units mm/day (a mean daily rate, not a monthly total), 2.5° cells. The array for 15° S–30° N, 90–140° E and its valid-year counts (30 everywhere) are in the topic's rain file.",
+        "zh": "2026 年 10 月 27 日阅读。元数据：GPCP V2.3，气候平均期 1991/01/01–2020/12/31，单位毫米／日（平均每日降水率，不是月总量），格距 2.5°。南纬 15° 至北纬 30°、东经 90–140° 的数组及有效年数（处处 30 年）存在本主题的雨数据文件里。"
+      }
+    },
+    {
+      "id": "S103",
+      "text": {
+        "en": "Natural Earth: 1:110m populated places (GeoJSON)",
+        "zh": "Natural Earth：1:110m 城市点（GeoJSON）"
+      },
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_populated_places.geojson",
+      "note": {
+        "en": "Read 2026-10-27. Name, Chinese name, NE_ID and coordinates of Singapore, Kuala Lumpur, Jakarta, Hanoi, Bangkok and Manila, copied unchanged. The file is pinned by its SHA-256 in data/SOURCES.md. The points are city representative points, not stations.",
+        "zh": "2026 年 10 月 27 日阅读。新加坡、吉隆坡、雅加达、河内、曼谷、马尼拉的名称、中文名、NE_ID 与坐标，原样照抄。文件以 data/SOURCES.md 里的 SHA-256 固定。这些点是城市代表点，不是测站。"
+      }
+    },
+    {
+      "id": "S104",
+      "text": {
+        "en": "Atlas: the topic Water in Singapore",
+        "zh": "Atlas：《新加坡的水》主题"
+      },
+      "note": {
+        "en": "Checked 2026-10-27 in this repository: the topic is published, with the chapters “The Sun drives the water cycle”, “Catching the rain” and “Every drop counts” that this topic links to.",
+        "zh": "2026 年 10 月 27 日在本仓库核对：该主题已发布，本主题链接的“太阳推动水循环”“接住每一滴雨”“每一滴都算数”三章都在。"
+      }
+    },
+    {
+      "id": "S199",
+      "text": {
+        "en": "Atlas: how this topic draws the climate grids",
+        "zh": "Atlas：本主题怎样画气候格网"
+      },
+      "design": true,
+      "note": {
+        "en": "Display rules chosen for this topic; they are not observations or a weather model. Rain colour steps: under 1, 1 to under 2, 2 to under 4, 4 to under 8, 8 to under 16, 16 to under 32, and 32 mm/day or more. Arrow length 3 px per m/s, kept between 8 and 36 px; under 0.2 m/s a small open circle (calm, no direction). Direction towards = atan2(u, v), from = towards + 180°; size = √(u²+v²). Readouts rounded to one decimal place.",
+        "zh": "本主题自定的显示规则，不是观测，也不是天气模型。雨量色阶：不到 1、1 至不到 2、2 至不到 4、4 至不到 8、8 至不到 16、16 至不到 32、32 毫米／日及以上。箭头长度每 m/s 3 像素，限定在 8–36 像素；不到 0.2 m/s 画小空心圈（静风，无方向）。去向 = atan2(u, v)，来向 = 去向 + 180°；大小 = √(u²+v²)。读数取一位小数。"
+      }
+    }
+  ]
+}

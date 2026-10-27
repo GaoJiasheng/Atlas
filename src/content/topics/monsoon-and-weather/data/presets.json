@@ -1,0 +1,132 @@
+{
+  "presets": [
+    {
+      "id": "view-region",
+      "label": {
+        "en": "Southeast Asia",
+        "zh": "东南亚"
+      },
+      "camera": {
+        "center": [
+          115,
+          7.5
+        ],
+        "zoom": 3.35,
+        "pitch": 0,
+        "bearing": 0
+      }
+    },
+    {
+      "id": "view-north",
+      "label": {
+        "en": "South China Sea",
+        "zh": "南中国海"
+      },
+      "camera": {
+        "center": [
+          112,
+          18
+        ],
+        "zoom": 4.1,
+        "pitch": 0,
+        "bearing": 0
+      }
+    },
+    {
+      "id": "view-equator",
+      "label": {
+        "en": "Near the equator",
+        "zh": "赤道附近"
+      },
+      "camera": {
+        "center": [
+          108,
+          -1.5
+        ],
+        "zoom": 4.2,
+        "pitch": 0,
+        "bearing": 0
+      }
+    },
+    {
+      "id": "view-straits",
+      "label": {
+        "en": "Straits",
+        "zh": "海峡"
+      },
+      "camera": {
+        "center": [
+          102,
+          1.5
+        ],
+        "zoom": 6.0,
+        "pitch": 0,
+        "bearing": 0
+      }
+    },
+    {
+      "id": "view-singapore",
+      "label": {
+        "en": "Singapore",
+        "zh": "新加坡"
+      },
+      "camera": {
+        "center": [
+          103.85,
+          1.3
+        ],
+        "zoom": 8.0,
+        "pitch": 0,
+        "bearing": 0
+      }
+    },
+    {
+      "id": "view-java",
+      "label": {
+        "en": "Java",
+        "zh": "爪哇"
+      },
+      "camera": {
+        "center": [
+          110,
+          -6
+        ],
+        "zoom": 4.7,
+        "pitch": 0,
+        "bearing": 0
+      }
+    },
+    {
+      "id": "view-indonesia",
+      "label": {
+        "en": "Indonesia",
+        "zh": "印尼"
+      },
+      "camera": {
+        "center": [
+          111,
+          -2
+        ],
+        "zoom": 4.0,
+        "pitch": 0,
+        "bearing": 0
+      }
+    },
+    {
+      "id": "view-malaysia",
+      "label": {
+        "en": "Malaysia",
+        "zh": "马来西亚"
+      },
+      "camera": {
+        "center": [
+          105,
+          4
+        ],
+        "zoom": 4.5,
+        "pitch": 0,
+        "bearing": 0
+      }
+    }
+  ]
+}

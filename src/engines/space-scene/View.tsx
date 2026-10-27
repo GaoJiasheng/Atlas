@@ -79,6 +79,8 @@ import { CycleCard } from './hud/CycleCard';
 import { KeyCard } from './hud/KeyCard';
 import { EnergyBarLabels } from './hud/EnergyBarLabels';
 import { GroupScaleBars } from './hud/GroupScaleBars';
+import { airfoilApi } from './lib/sim/airfoil-api';
+import { AirfoilDriver } from './explorer/AirfoilDriver';
 import { TryIt } from './explorer/TryIt';
 import { setSim } from './hud/sim';
 import { replay } from './explorer/TryIt';
@@ -631,6 +633,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         },
         senses: () => bridge.senses,
         sensesSeek: (cycles: number) => bridge.sensesSeek(cycles),
+        ...(file.sim?.airfoil ? airfoilApi(file,store,ui,bridge,chapters) : {}),
         shadows: () => Object.fromEntries(bridge.shadows),
         mechanism: (id: string) => {
           const m = bridge.mechanisms.get(id);
@@ -792,6 +795,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
 
   return (
     <>
+      {file.sim?.airfoil && <AirfoilDriver file={file} store={store} ui={ui} chapters={chapters} />}
       <Suspense fallback={<StageLoading label={t('space.loading')} />}>
         <Model3DStage
           store={store}
@@ -843,7 +847,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
           onStep={beatStep}
         />
         {orbitSession && <OrbitCard file={file} reader />}
-        <TryIt file={file} ui={ui} />
+        <TryIt file={file} ui={ui} bridge={bridge} />
         <Inspector file={file} fitness={fitness} training={training} />
       </SceneSlot>
       <SceneSlot name="readerEnd">

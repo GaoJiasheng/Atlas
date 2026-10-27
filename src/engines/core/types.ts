@@ -30,6 +30,10 @@ export interface SceneState {
 
 /** Keys every engine may add on top of `SceneState`, with their URL keys. */
 export interface UrlEngineFields {
+  /** TimeScene modern reference inset (only for reconstruction topics). */
+  inset?: 'world' | 'southeast-asia' | 'mexico';
+  insetVisible?: boolean;
+  fossilMode?: 'age-window' | 'all-mesozoic';
   /** SpaceScene orbit sims: model seconds on show (paused). URL `orb-t`. */
   orbitTime?: number | null;
   /** TimeScene climatology: calendar month 1..12. URL `m`. */

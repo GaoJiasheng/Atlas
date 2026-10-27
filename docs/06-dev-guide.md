@@ -273,9 +273,9 @@ store.getState().chapterTarget(id);                                // 某章的�
 |---|---|---|
 | `bottomBar` | 底部最下 | 时间轴 / Explorer 控件（44px 触控，不随 HUD 缩小，4K 时放大） |
 | `stageOverlay` | 右列，示意卡下 | 控制面板 `ControlPanel`：LAYERS（图层 + 绘制类模式）、TOOLS（其余模式 + 隐藏 HUD）、KEY（图例） |
-| `inspector` | InfoPanel 内，正文之后 | 选中对象详情（TimeScene） |
-| `readerTop` | InfoPanel 滚动区最上，章头正下方、正文之前 | SpaceScene：节拍行 + 选中零件 / 当前动作卡（docs/08 §2 铁律 c、d）；MathScene：节拍行 + 小测托盘 |
-| `readerEnd` | InfoPanel 内，正文之后 | SpaceScene：本章索引（`state.index`）；MathScene：要点 + 课纲对照 |
+| `inspector` | InfoPanel 内，正文之后 | 遗留扩展插槽；选中对象用 readerTop |
+| `readerTop` | InfoPanel 滚动区最上，章头正下方、正文之前 | TimeScene：选中事件 / 实体；SpaceScene：节拍行 + 选中零件 / 当前动作卡（docs/08 §2 铁律 c、d）；MathScene：节拍行 + 小测托盘 |
+| `readerEnd` | InfoPanel 内，正文之后 | TimeScene：本章事件索引；SpaceScene：本章索引（`state.index`）；MathScene：要点 + 课纲对照 |
 | `plate` | 左列底部，章节轨之下 | 次级读数的紧凑块（SpaceScene：PLATE 图版块；MathScene：模型 · 份数 · 标记 · 分数）；手机隐藏 |
 | `card` | 右列顶 | 示意 SVG 卡的**内容**；标题由 `controls.card` 注册，宿主画框和 `A NAME 中文` 表头；注册了 `cardToggle` 时表头是展开按钮（`aria-expanded`），框带 `data-expanded`，展开后高 ≤ 右列 60%，内容自己滚动 |
 | `panel01` `panel02` `panel03` | 底部三块等高面板 | 面板**内容**；标题由 `controls.panels` 注册，宿主画框和 `01 NAME 中文` 表头；没注册标题的面板不出现，一个都没注册时整条面板带不出现（现在三个引擎都不注册） |
@@ -476,8 +476,8 @@ stages/geo/leaders.ts      引线标注（两列、避让、逐帧投影）
 timeline/Timeline.tsx      唯一的底部条（bottomBar）：泳道开关 · 标尺 · 状态串，下方可展开三条泳道（PRESENT 在顶栏）
 hud/HudPanels.tsx          card 参与与面积条带卡（可展开、行可点）、perf 读数
 hud/shared.tsx             useSize / usePlayheadT / useUnit / 斜线图案 / 章节时间窗
-EventInspector.tsx         点事件 → inspector 插槽（Counter / 双方 CounterVersus；细看折叠块；来源上标；伤亡始终显示）
-EntityInspector.tsx        点参与卡的一行 → inspector 插槽（名称、阵营时段、加入 / 退出、当前面积）
+EventInspector.tsx         点事件 → readerTop 插槽（Counter / 双方 CounterVersus；细看折叠块；来源上标；伤亡始终显示）
+EntityInspector.tsx        点参与卡的一行 → readerTop 插槽（名称、阵营时段、加入 / 退出、当前面积）
 lib/time.ts lib/format.ts lib/geo.ts lib/model.ts lib/frame.ts lib/playhead.ts lib/ticks.ts lib/segmentScale.ts lib/stats.ts lib/bloc.ts lib/control.ts lib/bandRows.ts
 lib/region.ts lib/rivers.ts lib/holders.ts lib/dated.ts lib/localLand.ts   纯函数，单测在 tests/time-scene/
 colors.ts  time-scene.css
@@ -545,6 +545,12 @@ URL `b` 从 1 起，store beat 从 0 起；`m` 只接受整数 1…12。优先�
 **`site` 事件**是静态点位（监狱、纪念碑、建筑）：`t` 照写但不参与时间——不进时间轴范围、不进泳道和统计、不脉冲；只在 `sites` 图层打开时显示（小空心菱形 + 中心点），点击同样打开 inspector（眉题 `P-01`），高亮时出引线标注。
 
 章节 `state`：`time`（ISO 三种精度或 `{ ma }`）、`camera`、`layers`、`highlight`（实体/行动/事件 id）、`theme`、`note`（只在背景章：阅读说明）、`summary`（`{ en, zh }`，阅读面板标题下的一句话，也是默认演示字幕）、`question` / `answer`（`{ en, zh }`；没有 `summary` 时阅读面板头部显示 `question`；`answer` 必须配 `question`，目前不渲染），以及可选的 `beats`（演示节拍，见下）。底部条上每章一段，段从本章 `time`（第一拍更早就取第一拍的 `t`）开始，段里每拍一个刻度——**拍就是时间轴的结构**；**章节顺序必须等于时间顺序**（`tests/schemas.test.ts` 对 ww2 有检查）。
+
+**本章事件索引（docs/51 E-IR1）**：`state.index: [loc-dudley, ev-watt-patent]` 是当前章独立、有序的事件 id 数组（省略 = 无按钮，不从前章继承）。只接受本题 `events.json` 的事件，包括 `site` / `milestone`；不接受图层、实体、行动或跨主题 id；重复 id 定位第二项，未知目标定位 `state.index.<i>`。`timeChapterIndexIssues` 注册到 `engineSchemas.chapterIssues`，与原有 highlight 校验分开。
+
+`ChapterIndex.tsx` 放在 `readerEnd`（标题 `time.index.title`，样式同 SpaceScene 的 `.space-index`），按钮使用事件的双语 title，带 `data-time-target`、`aria-pressed`，命中高度至少 44 CSS px。索引选地点开 `sites`、保持日期；选非地点开 `battles`、跳到事件的原始日期（保留日精度），不换章或启动演示；镜头只改 center，保留 zoom / pitch / bearing。非法 id 或演示中返回 false、无副作用。原地图 / 引线选择继续复用唯一的 EventInspector，事件和实体详情移到 `readerTop`；未选择不画空框。宿主 `revealReader()` 打开已有阅读面板 / 手机抽屉并在展开后回到顶部；小于 1024 CSS px 只展开临时抽屉，不覆盖 `sessionStorage['atlas:reader']` 的 dock 折叠偏好，桌面显式选中会沿用原来的 reader 持久化路径打开列。关详情恢复底部条当前所停拍（anchor 的刻度）的高亮；拖时间、跳日期或换章后没有所停拍，恢复章默认。索引与选中 id 不新增 URL 字段。此项不包含阅读节拍行或 `b` 参数适配（E-IR2）。
+
+测试 API：`__atlas.engine.selectEvent(id): boolean` 走索引路径；`__atlas.engine.reader()` 返回 `{ indexIds: string[], selectedId: string | null, detailCount: number }`（详情数量 0 或 1）。纯函数 `lib/reader.ts` 和 schema 有 `tests/time-scene/reader.test.ts` 单测；真实 draft 主题 `industrial-revolution` 作为内容验收样本，不另建占位夹具。
 
 演示节拍（`state.beats`，可选，加法）：
 
@@ -2333,3 +2339,67 @@ pnpm tsx scripts/geo/lib/check.ts --topic ww2         # MapLibre（Playwright）
 `effectiveEyeRays()` 与 `solveSenses()` 共用薄透镜几何；两物点、三孔径高度组成6条光线，12段合并一次绘制，止于接收面。两个光斑另一次 instancing；偏焦直径用同一公式，聚焦时只画小标记，不生成照片。`longitudinalPositions()` 以局部静止点生成位移，41粒子一次 instancing，基线和静止刻度一次绘制；相位只有 RUN 且声音启用、图层可见时推进，暂停不请求新帧，reduced motion 固定相位。频率、振幅变化立即 snap；现有 transitionId / snapKey 的章节/节拍切换把局部相位复位为0，保持手动与深链接一致。senses 在 exploded 或实际显示的 runtime.explode > 0 时立即把共享 RUN energy 归零，冻结 elapsed / phase，停止听骨和条带传振；退出 E 并重新组装到实际间距0后恢复，即使记忆中的滑块值仍为0.55；其他 sim 保持原有 RUN 行为。拆开时两个 overlay 隐藏，PLATE 说明与实际/显示Hz、250倍慢放、几何模型限制跟随工位。
 
 校验拒绝非 senses overlay、其它 kind 配置、错 control/source/state、非法单位轴、非有限值、u≤f、非固定课堂常数、粒子穿越域。sources 跨文件检查在 validate-content。QA `engine.senses()` 返回同源眼端点、实际缩放端点、读数、可见/隐藏原因及 wave 的 phaseCycles / positions / rests / visualHz / lambda / A / playing / slowFactor；`sensesSeek(cycles)` 是测试相位定位，保持到下一次 RUN/控制变化。`pnpm shoot --beats` 增加 senses 数/图一致性检查。草稿夹具 sample-senses，纯函数/128组合/非法域测试 `tests/space-scene/senses.test.ts`，浏览器用例 `tests-e2e/sample-senses.spec.ts`。浏览器验收按 BRIEF 在 sandbox 明确跳过，须在主会话执行。
+
+### TimeScene · 深时重建与现代证据（E-DE1–E-DE3）
+
+`topic.basemap.reconstruction: { file, selection: hold-older }` 选择独立的重建主图分支，与 `local` / `region` 互斥。`file` 指向 `public/geo/<stem>.json` 的严格清单，帧按 Ma 从大到小排列，每帧为单对象 TopoJSON（对象名等于 stem）。`land` / `unavailable` 是面，`coast` 是线；属性明确 `modelId` 和 `frameMa`。构建加载器 `deep-time-build.ts` 实读并校验清单、每帧、sources、空 control 帧和现代子文件，将元数据 / 现代证据组成 `geo.deepTime`；古地图几何仍按需本地加载。客户端仅 `import type` 引用构建 schema，纯筛选函数在 `lib/deepTime.ts`。
+
+`GeoStage` 接收 `reconstruction={geo.deepTime?.reconstruction}`，有清单时懒加载 `reconstruction-map.ts`（历史 `controller` 不静态引用它；误收到清单时在建 style 之前直接报错，不回退现代底图）。样式只有空重建 source 和程序化经纬网，没有现代陆地 / 国界 / 国名 / 河流 / glyph / tiles。主图固定 maxZoom 3.6、`renderWorldCopies:false`，纬度由 Web Mercator 自身限在 ±85.051129°；不设 `maxBounds`（MapLibre 5.24 下 360° 宽的 `maxBounds` 让视图矩阵奇异，地图起不来）。点地图不抢键盘焦点（同历史 controller），不可旋转 / 倾斜。`reconstruction-style.ts` 只对 `kind:coast` 描边，不把不可用区的图框边画成海岸。换主题只重设 paint，不重传几何；重建主图隐藏不适用的现代实测比例尺。
+
+离散选择复用 `lib/deepTime.ts` 的 `frameAt`：query 先 clamp 到清单范围，再取最接近且不年轻于所选年代的帧；如 66→70、65→65、32.5→65。`lib/reconstruction.ts` 管理 generation / AbortSignal、最多当前与最近相邻两帧的已解码缓存和真实 source 状态。新帧未就绪先把几何图层不透明度置 0（不用 `visibility:none`：图层全隐藏时 source 不被使用，瓦片不重载，再显示时会先露出旧样本），等待 `setData(data,true)` 的 worker 完成且 source 瓦片全部载入后才显示 / ready；迟到请求不解码 / 不覆盖新帧，失败保持空白。相同 frameId 内拖动仅更新年代 / Δ，不重复 fetch / decode / `setData`。`geometryUpdates` 只计有效帧几何替换，不计清空或 paint 更新。`GeoController.reconstructionStats()` 与 `onReconstruction` 返回所选年代、实际已提交 sample / Δ、状态和计数；loading / unavailable 时 sample 字段为 null。
+
+现代图配置 `modernInset` 与重建分支配套，含独立 land / countries 和三种具名 bounds。point/card 文件保留 `coordinateSpace:modern`；每条 occurrence 独立闭区间相交，不合并年龄空档。cards 严格无坐标。MY 化石位置在聚合前抑制，只公开汇总抑制数与区域卡。`fossils-modern` 只控制化石符号，参考点 / 卡不计化石数。隐藏 inset 保留 view / mode 与内部计数。对象选择接既有 inspector，章 `state.index` 与 beat `highlight` 引用本题 point/card；现代图源不进入古主图。
+
+`maDigits:0|1|2|3` 接既有 Ma 转换 / 格式化 / URL；未写仍默认 2。TimeScene 的 `beat` 复用宿主 `b` 参数，`inset`、`inset-visible`、`fossil-mode` 使用差异基线，显式 URL 字段覆盖章 / 拍。自由拖动清空拍绑定。测试读实际结果用 `__atlas.engine.geology()`，其 reconstruction 部分来自 map controller，inset 部分区分 total / overlap / visible / in-view 与 reference / suppression 计数。
+
+可复用草稿 `sample-deep-time` 明确标 TEST/DESIGN：七张合成图形帧、四个 collection（含有空档的两条 occurrence）、两个 reference points、四张无坐标卡及 synthetic MY 抑制 2 collections / 3 occurrences。它不是科学地图或化石资料。单测 `reconstruction-map.test.ts` 覆盖源隔离、离散选择、缓存、晚响应 / 失败、同帧上传计数与销毁；`sample-deep-time.test.ts` 经过真实构建加载器；`tests-e2e/sample-deep-time.spec.ts` 覆盖双语 / 双 theme、b 深链、66/70 与 65、浏览窗、隐藏刷新、缺帧和现代主图请求隔离。浏览器测试与真机性能验收以本次交付记录为准，文件存在不代表已经通过。
+
+现代文件在构建时完整校验，`/topics/<slug>/data.json` 经 `compactDeepTimeData` 仅保留重建/现代清单及普通来源/名词/空control。`loadModernEvidence` 只从本地 `/geo/<stem>.json` 读取现代land、countries、points、cards与可选referenceFile，合并后才挂载场景；同一组并发/重挂载请求复用Promise，失败允许重载重试。这样现代矢量与PBDB记录只部署一份，不在topic payload重复。旧引擎数据响应原样保留。
+
+绑定示例（拍中的其他必填字段如caption依旧保留）：
+
+```json
+{"t":{"ma":66},"inset":"mexico","insetVisible":true,"fossilMode":"age-window","layers":["base","fossils-modern"],"highlight":["site-chicxulub-modern"],"caption":{"en":"Event age 66 Ma; map sample 70 Ma.","zh":"事件为6600万年前；地图样本为7000万年前。"}}
+```
+
+宿主 context 的 `revealReader()`，选中现代证据时在桌面打开阅读列，在窄屏展开同一个阅读抽屉；不另加详情HUD。手机（≤759 px，宿主在此隐藏卡片）现代小图移入阅读面板顶部，阅读抽屉与其他 TimeScene 题一样默认收起，不在载入 / 点拍时自动展开；底栏状态行换成「所选 / 地图样本 / Δ」读数（`Timeline` 的可选 `state`），左列 PLATE 用标准可折叠 `ts-plate` 行；悬浮读数只在演示中显示。深时专用 UI（`ModernInset.tsx`、`deep-time-transport.ts`）由 View 懒加载，不进其他 TimeScene 题的 View chunk；`,` / `.` 拍键只为重建题注册。重建主题的年代立即切换离散样本，镜头仍可缓动，避免缓动年代时下载路过的所有样本、或让化石筛选/所选读数与主图暂时不一致。普通日期主题保留原时间缓动与底图行为。
+
+现代清单的可选 `referenceFile` 指向本地原始书目表，例如 `{"version":1,"references":{"6837":"Original PBDB primary_reference string"}}`。构建要求每条occurrence的PBDB文献号可解析，inspector按号显示完整原文书目，双语解释不改写原始题名；书目同样由本地缓存支持离线，不重复进入topic payload。
+
+### SpaceScene · 试一试 · 翼型（airfoil）
+
+docs/45 §4 E-AF1–5。`kind:"airfoil"`；严格数据 `airfoil-schema.ts`，原创纯函数 `lib/sim/airfoil.ts` 与 `airfoil-field.ts`。注册 SIM_KINDS / simQuantities / quantityKind；无 timeline，`SEPARATE_EXPERIMENTS.airfoil=true`。作者完整模板 `tests/space-scene/fixtures/airfoil-bench.ts`，草稿 `sample-airfoil`。夹具页面用 NASA 平均大气，模板另导出固定密度 1.225 的数值测试例。
+
+```json
+{"model":"joukowski-illustrative-v1","angle":"angle-deg","speed":"airspeed-mps","atmosphere":{"kind":"nasa-troposphere","altitude":"altitude-m"},"profile":{"epsilon":0.08},"chord":1,"area":2,"section":{"part":"foil-sample","origin":[-0.5,1,0]},"stall":{"tag":"illustrative","peakDeg":12,"knots":[[12,1],[16,0.85],[20,0.6]],"source":"S58"},"sources":["S4","S11","S57","S58"],"plot":{"y":"cl-now"}}
+```
+
+物理控制必须 step：angle −20…20°、speed 0…60 m/s、altitude 0…10000 m；constant 大气改写为 `{"kind":"constant","density":1.225}`（0<ρ≤2）。未知字段、非法数与错误引用报具体路径；直接求解非法输入抛 `AirfoilInputError{field,reason}`。数输出 `rho/q/cl/lift-n/control:<本模型数控件>`，`tag:"sim"`；状态 `flow-state` 必须给 still / ideal-attached / separated-illustration 三个双语标签，不写 tag。`plot.y` 是 from=cl 或 lift-n 的数输出 ID。来源全存在，stall.source 必须在 sources 中且 `design:true`；S4 对应 spec 的 S04（公共来源 ID 不接受前导零）。
+
+几何：128 点 Joukowski 原创轮廓，乘 chord 后写现有 extrude.shape、depth .12、bevel 0；at=section.origin、无 scale/rotation/mirror/额外几何。样件与 `chord-marker` 只有一个相同的 `rotate`：
+
+```json
+{"control":"angle-deg","part":["foil-sample","chord-marker"],"rotate":{"axis":[0,0,1],"per":-1,"pivot":[-0.25,1,0]}}
+```
+
+这两个 airfoil 对象的转动直接到目标角，其他 rotate 缓动照旧。inflow-reference 保持固定。`airfoilOutline()` 导出轮廓，不能使用外部坐标或 wing primitive；前表面=origin.z+.06，场平面再前移 .002。
+
+流层复用单批 GPU points、既有 flow 材质与层开关。只给一条 flow 写 provider，flow 无 path/paths；count128、speed1、spread0、whenRun true、clip false、flat true；不混 intensity/state/tidal/stops/bilateral。普通 visible 可叠加 AND：
+
+```json
+[{"output":"flow-state","flow":"section-air","airfoilFlow":true},{"control":"flow-view","flow":"section-air","visible":{"eq":"streamlines"}}]
+```
+
+16 条固定种子，RK4 .008 上限、2048 步、碰撞时最多8次减半；全线段检查，失败路无点并提示。每路按自己的 tau 均匀重采样（最多2048点），不用 Catmull-Rom。每路8点，编号0为同刻发射的 signal 环，其余循环；各路到达时间不归一。时钟 dt·V/c/80；RUN/暂停/减少动态冻结点，静态线保留；关层、隐藏样件或展开时全部实验图解隐藏。±12°外只显示静态虚线及人工失速说明，V0 无路径或压力。缓存按角度存无量纲场，最多11项；速度/密度不重追线。分片任务以4ms为目标，追踪与重采样都有 yield；版本号拒绝过时结果，切主题释放缓存和纹理。
+
+卡内 `AirfoilPlot` 仅 vary=angle 出现：−20…20 每 .5°，有符号对称 y，实线附着、虚线+斜线底为人工失速区，当前点及共用表的记录方标。不给 T2/T6 另画曲线。airfoil 的记录条件签名包含模型/几何/大气/非 vary 的物理控件；改变即清本章表与预测并读屏提示；flow-view/diagram-case 不清表。共用表仍最多12行、驻内存。
+
+```json
+{"kind":"airfoil-pressure","part":"foil-sample","group":"flight-flows","when":{"control":"flow-view","is":{"eq":"pressure"}}}
+```
+
+`AirfoilPressure` 进同一试一试卡，Cp负向朝上、真实样本极值、上下支线型不同。六个触控代表样本钮读出坐标与 Cp，并对应实体表面标记。暂停保留压力；V0/失速显示不可用，不保留旧 Cp。完整压力64个中点与同场一致；≥2048中点积分只用于无黏二维自洽 QA，不宣称真实阻力为零。
+
+force-vectors 增加 lift/drag/thrust（KEY：Lift/升力、Drag/阻力、Thrust/推力），token `f-lift/f-drag/f-thrust` 两主题均≥3:1。仍用固定世界 dir、value、when、负值反向和合批；无 frame 字段。离散 bank pose 要 duration0，并把升力 dir 写 `[0,0.9396926208,-0.3420201433]`，重力 `[0,-1,0]`；不显示水平推阻。
+
+QA：`engine.airfoil()` 提供当前标量、fieldReady/version/inputKey、路径状态、压力数、pulseTime、实际画出的箭头方向、曲线与记录签名；`airfoilProbe({x,y})` 对已旋转弦坐标求值（无可用场则 unavailable/null），`airfoilSamples()` 仅 dev/本机测试 host 返回新副本。`ready` 只保证舞台，还要等 airfoil.fieldReady 且 inputKey 当前；`shoot --beats` 检查拍及拍链接的输入、Cl/L、场、图中点一致性。浏览器验收见 `tests-e2e/sample-airfoil.spec.ts`；专用端口 `ATLAS_E2E_PORT=5406`。

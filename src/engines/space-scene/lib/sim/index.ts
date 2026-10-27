@@ -26,6 +26,7 @@ import { solveSort, type SortPart } from './sort';
 import { solveTable } from './table';
 import { solveSenses } from './senses';
 import { solveOrbitRotation } from './orbit-rotation';
+import { solveAirfoil } from './airfoil';
 import { solveSeeds } from './seeds';
 import { EMPTY_TIMELINE, type Timeline } from './timeline';
 
@@ -51,6 +52,7 @@ export function compassPoint(sim: SimData, values: SimValues): Vec3 | null {
 export function simQuantities(sim: SimData, values: SimValues, observe: readonly string[] = [], frames?: MagnetFrames, parts: readonly MatterPart[] = [], context?: { timeSeconds: number }): Record<string, SimOutputValue> {
   if (sim.kind === 'orbit-rotation' && sim.orbitRotation) return solveOrbitRotation(sim.orbitRotation, values, context);
   if (sim.kind === 'senses' && sim.senses) return solveSenses(sim.senses, values);
+  if (sim.kind === 'airfoil' && sim.airfoil) return solveAirfoil(sim.airfoil, values);
   if (sim.kind === 'light' && sim.light) return solveLight(sim.light, values, sim.controls);
   if (sim.kind === 'sort' && sim.sort) return solveSort(sim.sort, values, parts as readonly SortPart[]);
   if (sim.kind === 'matter' && sim.matter) return solveMatter(sim.matter, values, matterLiquidShapes(parts));
@@ -89,7 +91,7 @@ export function evaluateSim(sim: SimData, values: SimValues, observe: readonly s
  * magnets or one animal's life cycle is one system: its first state (the
  * stage on the day on show) always describes the bench.
  */
-export const SEPARATE_EXPERIMENTS: Readonly<Record<SimKind, boolean>> = { circuit: false, magnet: false, force: true, energy: true, 'life-cycle': false, matter: true, light: true, sort: true, materials: true, table: true, seeds: true, 'orbit-rotation': true, senses: true };
+export const SEPARATE_EXPERIMENTS: Readonly<Record<SimKind, boolean>> = { circuit: false, magnet: false, force: true, energy: true, 'life-cycle': false, matter: true, light: true, sort: true, materials: true, table: true, seeds: true, 'orbit-rotation': true, senses: true, airfoil: true };
 
 /** A number output's value (0 for states and vectors; NaN = not applicable here). */
 export const numberOf = (v: SimOutputValue | undefined): number => (typeof v === 'number' ? v : 0);

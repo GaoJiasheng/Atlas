@@ -699,3 +699,47 @@ Cl、bank、flow separation、bypass、spool、三种转动等在正文用一句
 - [ ] 过门槛后 `topic.yaml.status: published`；施工方将实际改动、测试结果、与本 spec 的出入、截图路径、已知局限填 §9。任何偏离人工失速身份／来源／动力学范围的改动先改本规格，不能悄悄换成“实测”。
 
 ## 9. 引擎记录（施工后填写）
+
+### 9.1 引擎 E-AF1–E-AF5（2026-10-27，Codex，`sample-airfoil`）
+
+**范围与文件**：只施工 §4 引擎与 draft 夹具；没有展开正式飞机主题、三张插图、整机／翼盒／涡扇或38拍正文。新增 `airfoil-schema.ts`；`lib/sim/airfoil.ts`（标量、曲线与记录签名）、`airfoil-field.ts`（解析场、逆映射、RK4、tau重采样）、`airfoil-cache.ts`（分片与版本／生命周期）、`airfoil-api.ts`；`explorer/AirfoilDriver.tsx`、`AirfoilPlot.tsx`、`AirfoilPressure.tsx`；`stages/model3d/AirfoilFlow.tsx` 是既有 Flows 的受控 provider，复用 flowMaterial 的纹理／GPU points，不新造普通流引擎。共同注册保持单行／短分支：SIM_KINDS、simSchema、simQuantities、quantityKind、states/issues、SEPARATE_EXPERIMENTS；无 timeline。既有 SimOverlays、KEY 与 force-vectors 加 lift/drag/thrust，两个主题有独立语义 token；没有 frame。文档：docs/06 新作者节、docs/08、夹具 `data/SOURCES.md`、内容许可声明。`sample-airfoil` 五章16拍：背景、速度（含V0）、迎角（0/4/12/16/−16/20、压力）、高度、固定bank；来源S58自描述设计。测试模板 `tests/space-scene/fixtures/airfoil-bench.ts`；四个要求的单测文件、force-token测试、e2e与shoot逐拍／深链断言均已添加。
+
+**与 §4 的出入／实施选择**：
+
+1. **S04 写作 S4**：现有公共来源 ID schema 不接受前导零。公式来源与身份不变，S11/S57/S58照原编号；没有扩大全局sourceId规则。
+2. **既有 extrude 原先不接受 bevel:0**：把该字段从 positive 改成 finite nonnegative，才可按 §4 写明确的零倒角；其他 primitive 的规则未改。夹具轮廓直接从原创公式采样，不用外部坐标。
+3. **夹具页面采用 NASA 大气**，因此默认L=923.9031443933111 N；测试模板另外导出固定ρ1.225模型以逐项复现 §4.7 的922.687616507778 N。这是刻意区分，不用固定密度数替换页面默认。夹具的对照块仅练习固定世界方向，不能冒充飞机几何。
+4. **本地任务分片而非 Worker**：RK4每32步、tau重采样每128点可yield，调度循环目标4ms；每路1024个等tau样本（provider上限2048），普通流采样预算不变。缓存只存无量纲场（角度，最多11项）；输入完整key还含速度／密度／几何，用递增版本拒绝旧结果。卸载取消发布、清缓存并释放GPU资源。
+5. **测试数组限制**：`airfoilSamples()` 只在dev或localhost/127.0.0.1/[::1]测试host返回新副本，远程production返回null；运行期不保留测试副本。其余测试API只有airfoil主题才注册。
+6. **浏览器门槛按本任务brief跳过**：未运行shoot、e2e、Lighthouse或截图／真机性能检查，也未操作用户浏览器／桌面。这些仍待主会话；不把纯函数通过当作视觉通过。§8整题清单没有因此勾选。
+
+**数值／自动校验**：新增89条单测，包括 §4.7 所有标量和S11读数、64个Cp样本、4096中点独立压力积分、边界法向残差、完整流线段穿透与每路ψ漂移、±角镜像、同刻seed07/seed10的不同到达时间与步长收敛、V0/失速不可用、过时异步结果拒绝、实际记录守卫清表／清预测、章切换保留兼容表、固定bank向量与两主题token对比。schema反例覆盖越域、NaN/Infinity、模型／knots／sources、未知字段／外部profile、错from／state、双provider／混强度、额外transform、压力引用和禁止frame。所有失败均通过修实现／数据或把浮点断言改为规格已有误差界解决，未篡改预期物理数字。
+
+**门槛记录**：`pnpm test`：160文件、4268条全过（新增89条）。`pnpm validate`：56主题、0错误、0警告。`pnpm check`：0错误、0警告、3个原有hint。`pnpm build`：115页，包含EN/ZH的sample-airfoil。一次误启动重叠build导致旧build的dist chunk被新build清理而失败；后一个独立完成的build全过，最终复核亦只运行一个build。浏览器e2e文件共14项，未执行；主会话命令 `CI=1 ATLAS_E2E_PORT=5406 pnpm e2e`。`pnpm shoot sample-airfoil --beats --keys --layout` 以及 `forces`、`sample-forces`、`energy-conversion` 的改前／改后 `--beats --keys` 全部跳过；没有可声称的0新增视觉失败结论。共享纯函数回归随全量单测通过。
+
+**已知未验收项**：图形／触控／深链／暂停／reduced-motion／切换图层和展开恢复／bank的浏览器断言已写但没跑；无截图路径。流层架构最多3次绘制，实际draw calls、三角形、drawing buffer、renderer、首屏300KB gz与真机fps均未实测，不宣称达标。构建仍给出既有大chunk提示；不能用单个chunk gzip大小冒充首屏总量。冷角度目标50ms与每任务≤8ms仍需浏览器复核；Node测量只记为CPU探针，不作iPad结论。没有依赖／package.json／lockfile／review-queue变更，没有写git历史。
+
+Node CPU探针（Node v25.8.2，darwin arm64；与check/build并行，含调度噪声，无browser/renderer）：1024点时α4/8/12总工作计时57.29/46.33/51.11ms，单次generator yield间隔最大2.43/1.95/4.64ms；因此不能宣称冷角50ms目标已验收。分片调度目标4ms，浏览器总任务≤8ms与真机预算仍待复核。所有16条路径为complete；完整场单测在1024点下仍通过。
+
+### 9.2 浏览器验收（2026-10-27，Claude，`sample-airfoil` 与回归主题）
+
+**代码审阅**：b1f97b5 对共享文件的改动都是加法式登记（SIM_KINDS、simSchema、quantityKind、states／issues、SEPARATE_EXPERIMENTS、FORCE_KINDS／名称／token、overlay 联合、flowBind 的 `airfoilFlow`、`shoot.ts` 的 airfoil 一致性检查、`validate-content.ts` 一行来源检查、extrude `bevel` 放宽到 ≥0）；其他主题的行为路径不变。`LICENSE-CONTENT`、`THIRD-PARTY-NOTICES.md` 里只覆盖原创夹具内容的两段已撤回（原创内容本来就在 CC BY-NC-SA 4.0 总条款下，无例外可写）。
+
+**看图结论**（`pnpm shoot sample-airfoil --beats --keys --layout --theme paper,cinema`，SwiftShader，1920×1080 及八个布局尺寸）：两主题各 16 拍、16/16 拍链接一致、0 键位失败、0 布局问题、console 干净。逐张看过：流线绕上下两面、上游上洗与下游下洗；同一路上等 tau 的示踪点在翼型上方间距明显大于下方（按局部速度前进）；比较标记从同一上游截面同刻发出，不在后缘等待。α ±16° 与 20° 只剩静态虚线分离示意，虚线在正角上侧、负角下侧并随样件转；附着流线、粒子和压力均停用。升力–迎角图：±12° 内实线、外侧虚线加斜线底，y 轴对称取 ±1.1×峰值（Cl 轴 ±1.54），当前点落在曲线上。压力图只在 ideal-attached 时出现（α4：上表面 Cp 负峰约 −1.69，负值朝上），α16 显示“此状态不计算压力”。力箭头沿世界方向：样件升力 [0,1,0]，负角向下；bank 姿态的倾斜升力 [0,.94,−.34] 与竖直重力分开。
+
+**修复（各带单测）**：
+
+1. **力箭头在大牛顿数下看不见**。`force-vectors` 的箭杆和箭头粗细按 `per × 1.6 N` 缩放；翼型 `per = 0.00015`（单位是上千牛顿）时箭杆半径只有约 8×10⁻⁶ 场景单位，升力箭头实际不可见。新增 `lib/sim/arrows.ts` 的 `vectorScale(per, max) = max(per × 1.6, 0.16 × max)`，`SimOverlays` 改用它：`forces`、`sample-forces` 的比例不变（0.064、0.048），翼型变为 0.08。测试：`tests/space-scene/airfoil.test.ts`「force-vector arrow scale」。
+2. **冷角度流场超出 50 ms 目标**（确有其事）。浏览器 Chrome trace（SwiftShader，机器负载约 120）实测改前：冷角度 α 8/−8/0/−4/12/−12 从 setSim 到 fieldReady 52–64 ms，主线程任务合计 42–54 ms。原因是追踪每步重复求同一点的场：每步开头的探针与 RK4 的 k1 是同一点，上一步末的探针又是下一步开头；中间段 `segmentClear` 与随后的单位方向各做一次逆映射。改为复用这些求值（`clearUnit`、`unitOf`，步末探针转为下一步开头），算法和步长不变，输出逐位相同（七个角度的路径散列与改前一致）。改后同一测法：30–42 ms（墙钟），主线程合计 31–43 ms；单个任务最大 6.4–9.0 ms，偶有一个 >8 ms 的任务落在发布结果后的渲染，而非追踪切片（切片预算仍为 4 ms）。Node 下单次追踪约 22–26 ms（改前 36–57 ms）。测试：`tests/space-scene/airfoil-field.test.ts`「tracer reuses each field evaluation」，钉住改前追踪出的路径长度、末端 tau 与第 500 个样本点。
+
+**门槛记录（改后，不含 how-planes-fly 内容）**：`pnpm check` 0 错误 0 警告（3 个原有 hint）；`pnpm validate` 56 主题 0/0；`pnpm build` 115 页；`pnpm test` 160 文件 4271 条，整套跑时 2 条因机器负载超时（`tests/schemas.test.ts` 5 s 限时），单独重跑通过。改后 `pnpm shoot sample-airfoil --beats --keys --theme paper,cinema`：两主题 16/16 拍、拍链接一致、0 键位失败、0 拍失败。回归 `pnpm shoot <t> --beats --keys`（en·paper）：见 §9.3。
+
+**仍未覆盖**：真机（iPad）帧率与触控；Lighthouse。
+
+### 9.3 门槛记录（2026-10-27，机器负载 120–170，约十个代理同时开浏览器）
+
+**回归截图**（`pnpm shoot <t> --beats --keys`，en·paper，改后构建）：aircon 24/24、energy-conversion 37/37、forces 37/37、light-and-shadows 41/41、heart-and-lungs 33/33（SwiftShader 下一次截图超时，`--gpu` 重跑通过）拍链接一致，全部 0 拍失败、0 键位失败、console 干净。各主题的“chapter highlights 无标注”清单与本次改动无关（这些主题没有翼型或大牛顿数箭头）。
+
+**性能**（`pnpm shoot sample-airfoil --perf --gpu`，Apple M5 Max，ANGLE Metal，1520×1023 / 1920×1080）：各章 9 次绘制、30,820 个三角形、60 fps；EXPLODED 4 次。目标 <100 / ≤1.5 M 达标。不是 iPad 结论。
+
+**浏览器 e2e**：在 b1f97b5 上全套跑过一次（1 worker，3.4 小时）：270 通过、79 失败，失败散布在与翼型无关的 TimeScene／MathScene／HUD 用例，属负载超时。其中 `sample-airfoil.spec.ts` 的“signed α…”四个组合是真问题：V=0 且负迎角时升力读 −0（q=0 乘负 Cl），断言 `toBe(0)` 失败。改为 `lift = q·S·Cl || 0`，单测 `airfoil.test.ts`「zero speed at a negative angle」。修复后单跑 `sample-airfoil`、`smoke`、`forces`、`sample-forces`（`--workers=2`，16 分钟）：36 通过、5 失败；`sample-airfoil` 15/15 全过，`smoke` 除两条 sample-space“舞台出现”（30 s 内画布未出现）外全过。`forces` 与 `sample-forces` 的“记录一行再画图”用例在负载下超时（60 s）；用 headless 探针在 `sample-forces` 连点 8 次“记录”，8 行全部写入、无页面错误，单次点击 1.4–18 s，判为负载超时而非回归；sample-space 的画布超时同理（该主题加载 glb，不经本次改动的代码）。整套 e2e 待主会话合并时重跑。

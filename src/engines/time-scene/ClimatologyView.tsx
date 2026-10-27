@@ -75,7 +75,7 @@ export default function ClimatologyView({ topic, data, chapters, locale }: Engin
         const current = store.getState();
         if (!current.layers.includes('sites')) current.toggleLayer('sites');
         current.patch({ highlight: [id] });
-        revealReader?.();
+        revealReader();
         hud.setState({ reader: true });
       }
       return true;
@@ -92,7 +92,7 @@ export default function ClimatologyView({ topic, data, chapters, locale }: Engin
       setSelectedCell([lon, lat]);
       setSelectedSite(null);
       selectionRef.current = true;
-      revealReader?.();
+      revealReader();
       hud.setState({ reader: true });
       return true;
     },

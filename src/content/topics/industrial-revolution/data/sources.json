@@ -1,0 +1,652 @@
+{
+  "sources": [
+    {
+      "id": "S3",
+      "text": {
+        "en": "British Library — 工业革命 (Matthew White)",
+        "zh": "British Library — 工业革命 (Matthew White)"
+      },
+      "url": "https://www.britishlibrary.cn/zh-cn/articles/industrial-revolution/",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "准备阶段复核直接读取公开网页；只使用对应事实的内容。"
+      }
+    },
+    {
+      "id": "S4",
+      "text": {
+        "en": "Science Museum Group — Newcomen Atmospheric Engine, 1920-124/1",
+        "zh": "Science Museum Group — Newcomen Atmospheric Engine, 1920-124/1"
+      },
+      "url": "https://collection.sciencemuseumgroup.org.uk/objects/co50900/newcomen-atmospheric-engine",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "准备阶段复核直接读取公开网页；只使用对应事实的内容。"
+      }
+    },
+    {
+      "id": "S6",
+      "text": {
+        "en": "Science Museum Group — James Watt, 1736–1819",
+        "zh": "Science Museum Group — James Watt, 1736–1819"
+      },
+      "url": "https://collection.sciencemuseumgroup.org.uk/people/ap24508/watt-james",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "准备阶段复核直接读取公开网页；只使用对应事实的内容。"
+      }
+    },
+    {
+      "id": "S7",
+      "text": {
+        "en": "Ben Russell / Science Museum — James Watt and the separate condenser",
+        "zh": "Ben Russell / Science Museum — James Watt and the separate condenser"
+      },
+      "url": "https://blog.sciencemuseum.org.uk/james-watt-and-the-separate-condenser/",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "准备阶段复核直接读取公开网页；只使用对应事实的内容。"
+      }
+    },
+    {
+      "id": "S9",
+      "text": {
+        "en": "Science Museum Group — Rotative Steam Engine by Boulton and Watt, 1788, 1858-1",
+        "zh": "Science Museum Group — Rotative Steam Engine by Boulton and Watt, 1788, 1858-1"
+      },
+      "url": "https://collection.sciencemuseumgroup.org.uk/objects/co50948/rotative-steam-engine-by-boulton-and-watt-1788",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "准备阶段复核直接读取公开网页；只使用对应事实的内容。"
+      }
+    },
+    {
+      "id": "S13",
+      "text": {
+        "en": "Science Museum Group — Replica of Hargreaves' Spinning Jenny, 1912-319",
+        "zh": "Science Museum Group — Replica of Hargreaves' Spinning Jenny, 1912-319"
+      },
+      "url": "https://collection.sciencemuseumgroup.org.uk/objects/co44544",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "准备阶段复核直接读取公开网页；只使用对应事实的内容。"
+      }
+    },
+    {
+      "id": "S14",
+      "text": {
+        "en": "Peter Maw / Economic History Review — After the great inventions: technological change in UK cotton spinning, 1780–1835",
+        "zh": "Peter Maw / Economic History Review — After the great inventions: technological change in UK cotton spinning, 1780–1835"
+      },
+      "url": "https://onlinelibrary.wiley.com/doi/full/10.1111/ehr.13082",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "准备阶段复核直接读取公开网页；只使用对应事实的内容。"
+      }
+    },
+    {
+      "id": "S17",
+      "text": {
+        "en": "SNCF Group — Two centuries of railway history",
+        "zh": "SNCF Group — Two centuries of railway history"
+      },
+      "url": "https://www.groupe-sncf.com/en/group/history-archives/two-centuries-railway-history",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "准备阶段复核直接读取公开网页；只使用对应事实的内容。"
+      }
+    },
+    {
+      "id": "S18",
+      "text": {
+        "en": "TrainWorld / SNCB heritage — Belgium on track (19th century)",
+        "zh": "TrainWorld / SNCB heritage — Belgium on track (19th century)"
+      },
+      "url": "https://trainworld.be/en/collections/history-of-the-belgian-railways/2-belgium-on-track-19th-century/",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "准备阶段复核直接读取公开网页；只使用对应事实的内容。"
+      }
+    },
+    {
+      "id": "S19",
+      "text": {
+        "en": "DB Museum — The history of the railway in Germany",
+        "zh": "DB Museum — The history of the railway in Germany"
+      },
+      "url": "https://dbmuseum.de/en/nuremberg/exhibitions/the-history-of-the-railway-in-germany",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "准备阶段复核直接读取公开网页；只使用对应事实的内容。"
+      }
+    },
+    {
+      "id": "S20",
+      "text": {
+        "en": "US National Park Service — Slater Mill",
+        "zh": "US National Park Service — Slater Mill"
+      },
+      "url": "https://home.nps.gov/blrv/learn/historyculture/slatermill.htm",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "准备阶段复核直接读取公开网页；只使用对应事实的内容。"
+      }
+    },
+    {
+      "id": "S21",
+      "text": {
+        "en": "Central Museum of Railway Transport, Russia — Открытие Царскосельской железной дороги",
+        "zh": "Central Museum of Railway Transport, Russia — Открытие Царскосельской железной дороги"
+      },
+      "url": "https://cmzt.ru/events/news-events/otkrytie-czarskoselskoj-zheleznoj-do/",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "准备阶段复核直接读取公开网页；只使用对应事实的内容。"
+      }
+    },
+    {
+      "id": "S22",
+      "text": {
+        "en": "Heritage Directorate, Indian Railways / Google Arts & Culture — A History of Indian Railways",
+        "zh": "Heritage Directorate, Indian Railways / Google Arts & Culture — A History of Indian Railways"
+      },
+      "url": "https://artsandculture.google.com/story/cAVh7RwiKiTtKg",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "准备阶段复核直接读取公开网页；只使用对应事实的内容。"
+      }
+    },
+    {
+      "id": "S24",
+      "text": {
+        "en": "UNESCO World Heritage Committee — Decision 39 COM 8B.14",
+        "zh": "UNESCO World Heritage Committee — Decision 39 COM 8B.14"
+      },
+      "url": "https://whc.unesco.org/en/decisions/6364",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "准备阶段复核直接读取公开网页；只使用对应事实的内容。"
+      }
+    },
+    {
+      "id": "S25",
+      "text": {
+        "en": "National Museum of China — 江南制造局在1865-1885年间所造船只清单",
+        "zh": "National Museum of China — 江南制造局在1865-1885年间所造船只清单"
+      },
+      "url": "https://www.chnmuseum.cn/zp/zpml/gmww/202104/t20210406_249554.shtml",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "准备阶段复核直接读取公开网页；只使用对应事实的内容。"
+      }
+    },
+    {
+      "id": "S27",
+      "text": {
+        "en": "Jean-François Fava-Verde / Science Museum Group Journal — A tale of two telegraphs: Cooke and Wheatstone’s differing visions of electric telegraphy",
+        "zh": "Jean-François Fava-Verde / Science Museum Group Journal — A tale of two telegraphs: Cooke and Wheatstone’s differing visions of electric telegraphy"
+      },
+      "url": "https://journal.sciencemuseum.ac.uk/article/cooke-and-wheatstones/",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "准备阶段复核直接读取公开网页；只使用对应事实的内容。"
+      }
+    },
+    {
+      "id": "S28",
+      "text": {
+        "en": "National Library Board Singapore — Opening of the Suez Canal",
+        "zh": "National Library Board Singapore — Opening of the Suez Canal"
+      },
+      "url": "https://www.nlb.gov.sg/main/article-detail?cmsuuid=15fcae20-2e3d-4eec-b5ab-2384f1aac2b9",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "准备阶段复核直接读取公开网页；只使用对应事实的内容。"
+      }
+    },
+    {
+      "id": "S29",
+      "text": {
+        "en": "National Library Board Singapore, BiblioAsia — Tapping History",
+        "zh": "National Library Board Singapore, BiblioAsia — Tapping History"
+      },
+      "url": "https://biblioasia.nlb.gov.sg/all-sections/vol-3-issue2-jul-2007-tapping-history/",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "准备阶段复核直接读取公开网页；只使用对应事实的内容。"
+      }
+    },
+    {
+      "id": "S30",
+      "text": {
+        "en": "Singapore Botanic Gardens / NParks, Gardenwise 25 (July 2005) — Ridley and Singapore’s Rubber Trees",
+        "zh": "Singapore Botanic Gardens / NParks, Gardenwise 25 (July 2005) — Ridley and Singapore’s Rubber Trees"
+      },
+      "url": "https://www.nparks.gov.sg/sbg/research/publications/-/media/sbg/gardenwise/2005-jul-gardenwise-vol-25.ashx",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "准备阶段复核直接读取公开网页；只使用对应事实的内容。"
+      }
+    },
+    {
+      "id": "S32",
+      "text": {
+        "en": "National Library Board Singapore, BiblioAsia — On the Waterfront: The Building of Singapore’s First High-rise Skyline, 1918–1928",
+        "zh": "National Library Board Singapore, BiblioAsia — On the Waterfront: The Building of Singapore’s First High-rise Skyline, 1918–1928"
+      },
+      "url": "https://biblioasia.nlb.gov.sg/chapters-of-asia/chapters-on-asia-2015-on-the-waterfront-the-building-of-singapore-s-first-high-rise-skyline-1918-1928/",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "准备阶段复核直接读取公开网页；只使用对应事实的内容。"
+      }
+    },
+    {
+      "id": "S34",
+      "text": {
+        "en": "UK Parliament — The 1833 Factory Act",
+        "zh": "UK Parliament — The 1833 Factory Act"
+      },
+      "url": "https://www.parliament.uk/about/living-heritage/transformingsociety/livinglearning/19thcentury/overview/factoryact/",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "准备阶段复核直接读取公开网页；只使用对应事实的内容。"
+      }
+    },
+    {
+      "id": "S35",
+      "text": {
+        "en": "UK Parliament — Later factory legislation",
+        "zh": "UK Parliament — Later factory legislation"
+      },
+      "url": "https://www.parliament.uk/about/living-heritage/transformingsociety/livinglearning/19thcentury/overview/laterfactoryleg/",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "准备阶段复核直接读取公开网页；只使用对应事实的内容。"
+      }
+    },
+    {
+      "id": "S37",
+      "text": {
+        "en": "Trades Union Congress — Section: The TUC’s first victories",
+        "zh": "Trades Union Congress — Section: The TUC’s first victories"
+      },
+      "url": "https://www.tuc.org.uk/research-analysis/reports/section-tucs-first-victories",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "准备阶段复核直接读取公开网页；只使用对应事实的内容。"
+      }
+    },
+    {
+      "id": "S38",
+      "text": {
+        "en": "UK Parliament — Key dates: towns and public health",
+        "zh": "UK Parliament — Key dates: towns and public health"
+      },
+      "url": "https://www.parliament.uk/about/living-heritage/transformingsociety/towncountry/towns/keydates/",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "准备阶段复核直接读取公开网页；只使用对应事实的内容。"
+      }
+    },
+    {
+      "id": "S40",
+      "text": {
+        "en": "Robert C. Allen / Economic History Review — Why the industrial revolution was British: commerce, induced invention, and the scientific revolution",
+        "zh": "Robert C. Allen / Economic History Review — Why the industrial revolution was British: commerce, induced invention, and the scientific revolution"
+      },
+      "url": "https://onlinelibrary.wiley.com/doi/10.1111/j.1468-0289.2010.00532.x",
+      "note": {
+        "en": "Preparation review read a public academic abstract; author arguments only. No claim to full-text access.",
+        "zh": "准备阶段复核公开学术摘要；只归属作者论点，不声称读过全书。"
+      }
+    },
+    {
+      "id": "S41",
+      "text": {
+        "en": "Joel Mokyr / Princeton University Press via JSTOR — A Culture of Growth: The Origins of the Modern Economy",
+        "zh": "Joel Mokyr / Princeton University Press via JSTOR — A Culture of Growth: The Origins of the Modern Economy"
+      },
+      "url": "https://www.jstor.org/stable/jj.40336711",
+      "note": {
+        "en": "Preparation review read a public publisher synopsis; attributed arguments only. The full book was not read.",
+        "zh": "准备阶段复核公开出版 synopsis；只归属论点，不补书中细节。"
+      }
+    },
+    {
+      "id": "S42",
+      "text": {
+        "en": "Kenneth Pomeranz / Princeton University Press via JSTOR — The Great Divergence: China, Europe, and the Making of the Modern World Economy",
+        "zh": "Kenneth Pomeranz / Princeton University Press via JSTOR — The Great Divergence: China, Europe, and the Making of the Modern World Economy"
+      },
+      "url": "https://www.jstor.org/stable/j.ctt7sv80",
+      "note": {
+        "en": "Preparation review read a public publisher synopsis; attributed arguments only. The full book was not read.",
+        "zh": "准备阶段复核公开出版 synopsis；只归属论点，不补书中细节。"
+      }
+    },
+    {
+      "id": "S43",
+      "text": {
+        "en": "Eric Williams / University of North Carolina Press — Capitalism and Slavery, Third Edition",
+        "zh": "Eric Williams / University of North Carolina Press — Capitalism and Slavery, Third Edition"
+      },
+      "url": "https://uncpress.org/9781469663678/capitalism-and-slavery-third-edition/",
+      "note": {
+        "en": "Preparation review read a public publisher synopsis; attributed arguments only. The full book was not read.",
+        "zh": "准备阶段复核公开出版 synopsis；只归属论点，不补书中细节。"
+      }
+    },
+    {
+      "id": "S44",
+      "text": {
+        "en": "Sven Beckert / Harvard Weatherhead Center, originally The Atlantic (2014) — Empire of Cotton (author essay)",
+        "zh": "Sven Beckert / Harvard Weatherhead Center, originally The Atlantic (2014) — Empire of Cotton (author essay)"
+      },
+      "url": "https://www.wcfia.harvard.edu/publications/empire-cotton-0",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "准备阶段复核直接读取公开网页；只使用对应事实的内容。"
+      }
+    },
+    {
+      "id": "S45",
+      "text": {
+        "en": "Trevor Burnard and Giorgio Riello / Journal of Global History — Slavery and the new history of capitalism",
+        "zh": "Trevor Burnard and Giorgio Riello / Journal of Global History — Slavery and the new history of capitalism"
+      },
+      "url": "https://www.cambridge.org/core/journals/journal-of-global-history/article/slavery-and-the-new-history-of-capitalism/6885E5697E7151B50FDEFC65ED96C79E",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "准备阶段复核直接读取公开网页；只使用对应事实的内容。"
+      }
+    },
+    {
+      "id": "S46",
+      "text": {
+        "en": "Alan L. Olmstead and Paul W. Rhode / Explorations in Economic History — Cotton, slavery, and the new history of capitalism",
+        "zh": "Alan L. Olmstead and Paul W. Rhode / Explorations in Economic History — Cotton, slavery, and the new history of capitalism"
+      },
+      "url": "https://ideas.repec.org/a/eee/exehis/v67y2018icp1-17.html",
+      "note": {
+        "en": "Preparation review read a public academic abstract; author arguments only. No claim to full-text access.",
+        "zh": "准备阶段复核公开学术摘要；只归属作者论点，不声称读过全书。"
+      }
+    },
+    {
+      "id": "S49",
+      "text": {
+        "en": "Bishnupriya Gupta and Tirthankar Roy / Oxford University Press — From Artisanal Production to Machine Tools: Industrialization in India over the Long Run",
+        "zh": "Bishnupriya Gupta and Tirthankar Roy / Oxford University Press — From Artisanal Production to Machine Tools: Industrialization in India over the Long Run"
+      },
+      "url": "https://academic.oup.com/book/7358/chapter/152152209",
+      "note": {
+        "en": "Preparation review read the public chapter on differing Indian industries, including its discussion of other studies. Those studies were not read independently.",
+        "zh": "准备阶段复核公开章节内容；手工业/新产业及对其他研究的讨论。原 S47/S48 未直接读到。"
+      }
+    },
+    {
+      "id": "S50",
+      "text": {
+        "en": "Robert C. Allen / Explorations in Economic History — Engels’ pause: Technical change, capital accumulation, and inequality in the British industrial revolution",
+        "zh": "Robert C. Allen / Explorations in Economic History — Engels’ pause: Technical change, capital accumulation, and inequality in the British industrial revolution"
+      },
+      "url": "https://ideas.repec.org/a/eee/exehis/v46y2009i4p418-435.html",
+      "note": {
+        "en": "Preparation review read a public academic abstract; author arguments only. No claim to full-text access.",
+        "zh": "准备阶段复核公开学术摘要；只归属作者论点，不声称读过全书。"
+      }
+    },
+    {
+      "id": "S59",
+      "text": {
+        "en": "National Library Board Singapore, BiblioAsia — Indian Migration into Malaya and Singapore During the British Period",
+        "zh": "National Library Board Singapore, BiblioAsia — Indian Migration into Malaya and Singapore During the British Period"
+      },
+      "url": "https://biblioasia.nlb.gov.sg/all-sections/vol-3-issue3-oct-2007-indian-migration-british-malaya-singapore/",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "准备阶段复核直接读取公开网页；只使用对应事实的内容。"
+      }
+    },
+    {
+      "id": "S60",
+      "text": {
+        "en": "Jeff Horn / MIT Press via Oxford Academic — The Path Not Taken: French Industrialization in the Age of Revolution, 1750–1830",
+        "zh": "Jeff Horn / MIT Press via Oxford Academic — The Path Not Taken: French Industrialization in the Age of Revolution, 1750–1830"
+      },
+      "url": "https://academic.oup.com/mit-press-scholarship-online/book/14881",
+      "note": {
+        "en": "Preparation review read a public academic abstract; author arguments only. No claim to full-text access.",
+        "zh": "准备阶段复核公开学术摘要；只归属作者论点，不声称读过全书。"
+      }
+    },
+    {
+      "id": "S61",
+      "text": {
+        "en": "Richard H. Tilly and Michael Kopsidis / University of Chicago Press via Oxford Academic — From Old Regime to Industrial State: A History of German Industrialization from the Eighteenth Century to World War I",
+        "zh": "Richard H. Tilly and Michael Kopsidis / University of Chicago Press via Oxford Academic — From Old Regime to Industrial State: A History of German Industrialization from the Eighteenth Century to World War I"
+      },
+      "url": "https://academic.oup.com/chicago-scholarship-online/book/37929",
+      "note": {
+        "en": "Preparation review read a public academic abstract; author arguments only. No claim to full-text access.",
+        "zh": "准备阶段复核公开学术摘要；只归属作者论点，不声称读过全书。"
+      }
+    },
+    {
+      "id": "S63",
+      "text": {
+        "en": "ETH Zürich, International Conflict Research — RShapes 1.0; downloaded GeoJSON and coverage audit",
+        "zh": "ETH Zürich, International Conflict Research — RShapes 1.0; downloaded GeoJSON and coverage audit"
+      },
+      "url": "https://icr.ethz.ch/data/rshapes/",
+      "note": {
+        "en": "Prefetched source data and published licence checked in preparation; build provenance and limitations are in data/SOURCES.md.",
+        "zh": "准备阶段重新读取公开产品/许可页并核对已下载原数据；文件/CRS/散列见 §3。"
+      }
+    },
+    {
+      "id": "S64",
+      "text": {
+        "en": "British Geological Survey / UKRI — Coal resources for new technologies",
+        "zh": "British Geological Survey / UKRI — Coal resources for new technologies"
+      },
+      "url": "https://www.bgs.ac.uk/datasets/coal-resources-for-new-technologies/",
+      "note": {
+        "en": "Prefetched source data and published licence checked in preparation; build provenance and limitations are in data/SOURCES.md.",
+        "zh": "准备阶段重新读取公开产品/许可页并核对已下载原数据；文件/CRS/散列见 §3。"
+      }
+    },
+    {
+      "id": "S65",
+      "text": {
+        "en": "Science Museum Group — Rocket locomotive, 1862-5",
+        "zh": "Science Museum Group — Rocket locomotive, 1862-5"
+      },
+      "url": "https://collection.sciencemuseumgroup.org.uk/objects/co26704",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "准备阶段复核直接读取公开网页；只使用对应事实的内容。"
+      }
+    },
+    {
+      "id": "S66",
+      "text": {
+        "en": "Karen Baker / National Railway Museum — Rocket, Railtrack and a history of design",
+        "zh": "Karen Baker / National Railway Museum — Rocket, Railtrack and a history of design"
+      },
+      "url": "https://blog.railwaymuseum.org.uk/rocket-railtrack-and-a-history-of-design/",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "准备阶段复核直接读取公开网页；只使用对应事实的内容。"
+      }
+    },
+    {
+      "id": "S67",
+      "text": {
+        "en": "Science Museum handbook, reproduced by Tring Local History Museum — Science Museum handbook excerpt: Rocket as originally built",
+        "zh": "Science Museum handbook, reproduced by Tring Local History Museum — Science Museum handbook excerpt: Rocket as originally built"
+      },
+      "url": "https://tringlocalhistorymuseum.org.uk/morehistory/Railway/c12_locomotive_(II).htm",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "准备阶段复核直接读取公开网页；只使用对应事实的内容。"
+      }
+    },
+    {
+      "id": "S68",
+      "text": {
+        "en": "Natural Earth — Natural Earth populated places and physical land",
+        "zh": "Natural Earth — Natural Earth populated places and physical land"
+      },
+      "url": "https://www.naturalearthdata.com/about/terms-of-use/",
+      "note": {
+        "en": "Prefetched source data and published licence checked in preparation; build provenance and limitations are in data/SOURCES.md.",
+        "zh": "准备阶段重新读取公开产品/许可页并核对已下载原数据；文件/CRS/散列见 §3。"
+      }
+    },
+    {
+      "id": "S70",
+      "text": {
+        "en": "Jason G. Gauthier / US Census Bureau — History and the Census: Juneteenth",
+        "zh": "Jason G. Gauthier / US Census Bureau — History and the Census: Juneteenth"
+      },
+      "url": "https://www.census.gov/about/history/stories/monthly/2025/june-2025.html",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "准备阶段复核直接读取公开网页；只使用对应事实的内容。"
+      }
+    },
+    {
+      "id": "S72",
+      "text": {
+        "en": "GeoNames — GeoNames cities15000 gazetteer",
+        "zh": "GeoNames — GeoNames cities15000 gazetteer"
+      },
+      "url": "https://download.geonames.org/export/dump/",
+      "note": {
+        "en": "Prefetched source data and published licence checked in preparation; build provenance and limitations are in data/SOURCES.md.",
+        "zh": "准备阶段重新读取公开产品/许可页并核对已下载原数据；文件/CRS/散列见 §3。"
+      }
+    },
+    {
+      "id": "S73",
+      "text": {
+        "en": "OpenHistoricalMap contributors; local audit — Bounded OHM railway/Suez response and element licence audit",
+        "zh": "OpenHistoricalMap contributors; local audit — Bounded OHM railway/Suez response and element licence audit"
+      },
+      "url": "https://overpass-api.openhistoricalmap.org/api/interpreter",
+      "note": {
+        "en": "Bounded local response audited in preparation only; no OpenHistoricalMap geometry ships.",
+        "zh": "只读本地有界响应及其实际查询/许可记录；研究隔离，不是已清理生产几何。"
+      }
+    },
+    {
+      "id": "S75",
+      "text": {
+        "en": "US National Park Service — Glossary of Weaving Terms",
+        "zh": "US National Park Service — Glossary of Weaving Terms"
+      },
+      "url": "https://www.nps.gov/articles/000/glossary-of-weaving-terms.htm",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "公开全文 Bobbin/Loom/Shuttle/Warp/Weft；替代旧 Smithsonian 条目。"
+      }
+    },
+    {
+      "id": "S76",
+      "text": {
+        "en": "Historic England — Early Railways in England",
+        "zh": "Historic England — Early Railways in England"
+      },
+      "url": "https://historicengland.org.uk/whats-new/research/early-railways-in-england/",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "公开全文，1825 开通；不采用额外人数或首创排名。"
+      }
+    },
+    {
+      "id": "S77",
+      "text": {
+        "en": "Katie Belshaw / Science and Industry Museum — Special Exhibitions Gallery: If these walls could talk",
+        "zh": "Katie Belshaw / Science and Industry Museum — Special Exhibitions Gallery: If these walls could talk"
+      },
+      "url": "https://blog.scienceandindustrymuseum.org.uk/seg-if-these-walls-could-talk/",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "公开全文，1830 利物浦—曼彻斯特蒸汽客货运输。"
+      }
+    },
+    {
+      "id": "S78",
+      "text": {
+        "en": "National Diet Library, Japan — Ukiyo-e depictions of railways",
+        "zh": "National Diet Library, Japan — Ukiyo-e depictions of railways"
+      },
+      "url": "https://www.ndl.go.jp/en/imagebank/theme/tetsudoukiyoe",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "公开全文，1872 新桥—横滨；替代受阻日本档案页。"
+      }
+    },
+    {
+      "id": "S79",
+      "text": {
+        "en": "Huang Chingchi / Chen Xibo — Peking-Mukden Railway historical geography, 2014",
+        "zh": "Huang Chingchi / Chen Xibo — Peking-Mukden Railway historical geography, 2014"
+      },
+      "url": "https://www.dlyj.ac.cn/EN/abstract/article/1000-0585/14696",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "公开研究论文，1881 唐胥段建设；不采用铁路首创排名。"
+      }
+    },
+    {
+      "id": "S80",
+      "text": {
+        "en": "The National Archives, UK — 1833 Factory Act: education source pack",
+        "zh": "The National Archives, UK — 1833 Factory Act: education source pack"
+      },
+      "url": "https://cdn.nationalarchives.gov.uk/documents/education/factory-actdoc.pdf",
+      "note": {
+        "en": "Preparation review read the 15-page source pack, including the 1836 inspector letter. The original HTML page was blocked.",
+        "zh": "直接读取 15 页 PDF，背景与 1836 监察员来信转录；原网页受阻。"
+      }
+    },
+    {
+      "id": "S81",
+      "text": {
+        "en": "W. Walker Hanlon — Pollution and Mortality in the 19th Century, September 2015",
+        "zh": "W. Walker Hanlon — Pollution and Mortality in the 19th Century, September 2015"
+      },
+      "url": "https://www.anderson.ucla.edu/sites/default/files/documents/areas/ctr/ziman/2015-18WP.pdf",
+      "note": {
+        "en": "Preparation review read the September 2015 working paper. Inconsistent lifespan estimates are omitted; qualitative association only.",
+        "zh": "直接读取 74 页工作论文；数值不一致，只保留定性结论。"
+      }
+    },
+    {
+      "id": "S82",
+      "text": {
+        "en": "Hassan Malik — Bankers and Bolsheviks",
+        "zh": "Hassan Malik — Bankers and Bolsheviks"
+      },
+      "url": "https://www.jstor.org/stable/j.ctv301gmn",
+      "note": {
+        "en": "Preparation review read a public publisher synopsis; attributed arguments only. The full book was not read.",
+        "zh": "公开出版 synopsis，仅支持外国资本与俄国联系，未读全书。"
+      }
+    },
+    {
+      "id": "S83",
+      "text": {
+        "en": "Ingenium, Canada Science and Technology Museum — Telegraph key",
+        "zh": "Ingenium, Canada Science and Technology Museum — Telegraph key"
+      },
+      "url": "https://ingenium.ca/en/learn/teachers-zone/resources/telegraph-key/",
+      "note": {
+        "en": "Public source read during preparation review (27 October 2026); used only for the claims recorded in docs/51 §0.3. No historical source images reproduced.",
+        "zh": "公开全文 Scientific explanation，按下电键闭合电路。"
+      }
+    }
+  ]
+}
