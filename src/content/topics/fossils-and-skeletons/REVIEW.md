@@ -1,6 +1,6 @@
 # 化石与恐龙骨架 · 给 Gavin 的复核单
 
-2026-10-27。背景章加七个正式章、36 拍、33 个可选件、两张原生试一试卡、16 个核心词及三幅既有生成插图已实现。主题保持 `status: draft`：本会话的 macOS 沙箱拒绝 Chromium 的 MachPortRendezvousServer 注册，浏览器在打开页面前退出；规格要求浏览器与画面门槛全绿后才可改为 published。没有改引擎、依赖、其他主题、review queue，也没有执行写入式 git 命令。
+2026-10-27。背景章加七个正式章、36 拍、33 个可选件、两张原生试一试卡、16 个核心词及三幅既有生成插图已实现。浏览器验收已在后续会话完成（见下“验证记录”），主题已改为 `status: published` 并更新 smoke 计数。没有改引擎、依赖、其他主题、review queue，也没有执行写入式 git 命令。
 
 中文正文独立成文；每个正式章四段，英文 225–236 词，中文约 352–373 个汉字（细看、表格与访问链接另计）。以下按段落列复核重点；文本中的事实来源入口、细看、零件详情和完整来源表可交叉核对。
 
@@ -33,8 +33,8 @@
 
 ## 验证记录
 
-命令及最终数字见 docs/46 §9 与 AUDIT.md 的施工记录。完整浏览器命令已尝试，页面尚未打开即失败。全量 e2e 在相同启动错误反复出现后中止；没有通过的应用断言，不能称为应用测试失败或仅加载 flake。9 个主题 e2e 已编写并通过静态类型与测试发现，实际执行待浏览器可用。主题保留 draft，smoke 发布计数没有更改。
+命令及最终数字见 docs/46 §9 与 AUDIT.md 的施工记录。浏览器验收（2026-10-27，另一会话）：`pnpm shoot fossils-and-skeletons --beats --tasks --keys --layout --locale en,zh --theme paper,cinema` 全部通过（36 拍 × 四组合截图已实看，拍链接 36/36 与演示一致，键位与八个尺寸布局无问题，console 干净）；静止 draw calls 6–15、最重工位约 10.5 万三角形。验收中把含化石层的底板去掉（让下方灰层锚点不被遮挡）、孔隙矿物标注改锚在右侧大孔、02 章默认用 X 光视图使埋藏骨标注可见，并修了两条 e2e 的严格定位。已知不足：馆藏三件示意互相遮挡较多，两条引线落在空隙里；paper 主题下象牙色骨架与纸色反差偏低；390 宽手机上馆藏章左端略出框。
 
 ## English review note
 
-Built: eight bilingual chapters, 36 exact beats, 33 selectable parts, two native cards, 16 terms, 20 sources, three approved drawings. The topic stays draft until browser gates pass. Key review choices are the invented age intervals, the independent evidence/material axes, the generic Tyrannosaurus and sauropod studies, editorial Chinese terms, pending dinosaur-earth links, and the oversized fossilisation figure. Offline geometry previews do not verify browser layout or GPU performance.
+Built: eight bilingual chapters, 36 exact beats, 33 selectable parts, two native cards, 16 terms, 20 sources, three approved drawings. Browser gates have since passed and the topic is published. Key review choices are the invented age intervals, the independent evidence/material axes, the generic Tyrannosaurus and sauropod studies, editorial Chinese terms, pending dinosaur-earth links, and the oversized fossilisation figure. Offline geometry previews do not verify browser layout or GPU performance.

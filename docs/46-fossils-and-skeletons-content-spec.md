@@ -655,11 +655,11 @@ S18 仅留审计记录：[LKCNHM Annual Report 2024–2025](https://lkcnhm.nus.e
 
 ## 9. 引擎记录（施工后填写）
 
-### 9.1 2026-10-27 · 已实现，保持 draft
+### 9.1 2026-10-27 · 已实现；浏览器验收后改 published
 
 本节为实际施工记录，不把准备阶段的期望冒充验收结果。新增引擎契约 **0 项**，引擎源码、package/lockfile、其他主题和 review queue 未改；无写入式 git 命令。背景 + 七正式章，拍数 4/5/5/4/5/5/4/4，36 条 EN/ZH 字幕逐字对照 §2；33 selectable + 1 context、五组研究、六个命名预设、四行规格、两控件、15 输出、两实验共六行、两条显隐绑定、两张原生卡、16 词、19 个机构来源 + S90、封面及两章图均已落地。
 
-**状态保持 `draft`，不执行发布计数变更。** 本会话受 macOS 沙箱限制，Chromium 在创建页面之前即因 `bootstrap_check_in ... MachPortRendezvousServer ... Permission denied (1100)` 退出。依本规格开篇及 §8，全绿后才改 published；这不是新的内容人工审批前置条件。标准浏览器启动、shoot 和 e2e 都遇到相同启动问题，未绕过权限；CUA 没有可用的已连接浏览器，Chrome 访问亦未获准。
+**施工会话中状态保持 `draft`**：该会话受 macOS 沙箱限制，Chromium 无法启动。随后的验收会话已跑完 shoot（四组合）、perf 与全量 e2e，并改为 `published`、更新 smoke 计数；结果见 REVIEW.md“验证记录”。以下浏览器相关“尚未”描述是施工当时的记录。
 
 ### 9.2 实现与结构复核
 

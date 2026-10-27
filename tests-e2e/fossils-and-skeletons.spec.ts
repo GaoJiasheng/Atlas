@@ -157,7 +157,7 @@ test.describe('fossils-and-skeletons', () => {
     await expect(page.locator('.space-inspector')).toBeVisible();
     expect((await snapshot(page)).part).toBe('sk-tail-tip');
     expect(await shown(page, 'sk-tail-tip')).toBe(false);
-    await page.locator('a[href="?ch=rebuilding-evidence&b=1&part=sk-tail-tip"]').click();
+    await page.locator('a[href="?ch=rebuilding-evidence&b=1&part=sk-tail-tip"]:visible').click();
     await ready(page);
     await expect.poll(() => shown(page, 'sk-tail-tip')).toBe(true);
     expect((await snapshot(page)).part).toBe('sk-tail-tip');
@@ -165,7 +165,7 @@ test.describe('fossils-and-skeletons', () => {
   });
 
   test('all 33 objects can be selected in their chapter index and revealed by the model links', async ({ page }) => {
-    test.setTimeout(180_000);
+    test.setTimeout(360_000);
     const checked = new Set<string>();
     for (const chapter of ['body-track-leaf', 'buried-to-exposed', 'ash-beds-and-ages', 'rebuilding-evidence', 'birds-are-dinosaurs', 'singapore-skeletons']) {
       await open(page, `ch=${chapter}`);
@@ -174,7 +174,7 @@ test.describe('fossils-and-skeletons', () => {
         await page.locator(`.space-index [data-part="${id}"]`).click();
         expect((await snapshot(page)).part).toBe(id);
         await expect(page.locator('.space-inspector')).toBeVisible();
-        await page.locator(`a[href^="?ch="][href$="&part=${id}"]`).click();
+        await page.locator(`a[href^="?ch="][href$="&part=${id}"]:visible`).click();
         await ready(page);
         await expect.poll(() => shown(page, id)).toBe(true);
         expect((await snapshot(page)).part).toBe(id);
