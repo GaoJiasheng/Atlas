@@ -654,3 +654,42 @@ S18 仅留审计记录：[LKCNHM Annual Report 2024–2025](https://lkcnhm.nus.e
 归档每章、hero-paper / hero-clean / hero-dark / hero-zh、mode-xray / mode-exploded、phone-390 与几何对照截图，记录实际 calls / triangles / JS 大小、命令结果和偏差。§9 施工前保持空白；本轮仅规格检查，不运行会生成其他文件的构建、截图或测试命令，不提交、不发布。
 
 ## 9. 引擎记录（施工后填写）
+
+### 9.1 2026-10-27 · 已实现；浏览器验收后改 published
+
+本节为实际施工记录，不把准备阶段的期望冒充验收结果。新增引擎契约 **0 项**，引擎源码、package/lockfile、其他主题和 review queue 未改；无写入式 git 命令。背景 + 七正式章，拍数 4/5/5/4/5/5/4/4，36 条 EN/ZH 字幕逐字对照 §2；33 selectable + 1 context、五组研究、六个命名预设、四行规格、两控件、15 输出、两实验共六行、两条显隐绑定、两张原生卡、16 词、19 个机构来源 + S90、封面及两章图均已落地。
+
+**施工会话中状态保持 `draft`**：该会话受 macOS 沙箱限制，Chromium 无法启动。随后的验收会话已跑完 shoot（四组合）、perf 与全量 e2e，并改为 `published`、更新 smoke 计数；结果见 REVIEW.md“验证记录”。以下浏览器相关“尚未”描述是施工当时的记录。
+
+### 9.2 实现与结构复核
+
+- 几何从 `scripts/geo/fossils-and-skeletons/build-model.ts` 的原始作者坐标重建，使用现行 `partBounds` 对六套研究各做一次均匀正比例仿射变换；变换、原始 AABB 与镜头在 `model-layout.json`，原生 table 独立保存在 `sim.json`。未引入运行时组变换、外部网格、地图、依赖或专有求解器。
+- 通过实际引擎 `partPieces` 的 CPU 离线投影完成两轮结构检查，修正足迹孔靠近板边、右后肢的镜像深度、上部羽枝越界。中空头骨/下颌、开放胸廓、双短前肢各两指、双足各三承重趾及小抬趾、抬尾、三件长颈四足示意、叶和足迹负形、孔隙及矿物填充均已离线查看。事实边界对照机构原文，生成插图不作度量基准。完整参考、粗筛交集限制及两轮差异见 `scripts/geo/fossils-and-skeletons/model-audit.md`。
+- CUTAWAY 的最终场景平面 normal=[0,0,-1]、offset=1.07，以保留孔壁后半和 pore-shell/pore-minerals 锚点；实际 GPU 剖面仍待浏览器检查。
+- 为修正 390×844 静态投影中尾端锚点略越右界，`skeleton-side` 镜头沿原方向后拉 8%：原始 p 从 [1,3,13] 变为 [1.08,3.128,14.04]，t 仍 [0,1.4,0]、FOV 34；烘焙后 p=[0.88444,3.70163,14.59097]、t=[-0.23794,1.90582,0]。章节内对应镜头同步。36 拍在 1920×1080、1600×900、390×844 共 **240 个标注锚点静态投影均在屏内**，不代表实际 HUD 标签避让、遮挡或点击已通过。
+- 当前完整静态网格（非投影剔除数、非 renderer.info）：标本 3,268 triangles / 5 pieces；埋藏 8,274 / 6；年龄 5,136 / 5；骨架 90,768 / 12；鸟 89,624 / 9；馆藏 103,920 / 3；context 588 / 1。单工位均低于 0.3M。不能以 pieces 数代替实测 draw calls；实际 calls、GPU triangles、首屏请求 JS gzip、帧率与静止 demand 行为尚未测得。
+
+### 9.3 门槛结果
+
+| 命令 | 实际结果 |
+|---|---|
+| `pnpm check` | 通过；752 文件，0 errors / 0 warnings，3 条仓库既有 hints。 |
+| `pnpm validate` | 通过；56 topics，0 errors / 0 warnings。 |
+| `pnpm test` | 通过；156 files、4,226 tests。含本主题 47 tests（36 拍与显隐、33 对象访问路径、年龄算术、九种独立组合、指趾几何）。一次并发运行中原有 `tests/schemas.test.ts` 的 ww2 GeoJSON/TopoJSON 读取超 5 秒；独立复跑 41/41 通过，随后全量 4,226/4,226 通过。 |
+| `pnpm build` | 通过；115 静态页面。最后版本包含中文词条编辑用词说明与最终镜头。 |
+| `pnpm shoot fossils-and-skeletons --beats --tasks --keys --layout --locale en,zh --theme paper,cinema` | 已尝试，浏览器启动权限错误，未打开页面、未产出浏览器截图。没有 lesson tasks；不把 tasks 缺省当失败。 |
+| `pnpm shoot fossils-and-skeletons --beats --locale en,zh --theme paper,cinema --size 1600x900` | 同一浏览器启动错误。 |
+| `pnpm shoot fossils-and-skeletons --perf --gpu` | 同一启动错误；没有实测 draw calls / GPU 或硬件 FPS。 |
+| `CI=1 ATLAS_E2E_PORT=5404 pnpm e2e` | 已尝试，发现 344 tests；连续 49 次浏览器创建前同一权限错误后中止（exit 130），295 did not run。没有已执行通过的应用断言，不视为加载 flake。本主题 9 个 e2e 已编写、通过类型检查及测试发现，实际交互未执行。 |
+
+### 9.4 来源、图像、姊妹衔接与待核项
+
+正式章 EN 225–236 词、ZH 约 352–373 汉字，四段；各有 2–3 个细看。每个正文数量使用 Num，16 个词各语言首次 Term。S90 的 text/note 均写全非实测声明、输入、公式、结果、前提与限制；自然事实沿用机构来源。38 条事实采用/删改账保留 25 verified / 3 changed / 10 cut，另审 DS01–DS04，见 `AUDIT.md`；没有重新声称读完整 S18 年报。
+
+三张批准 PNG 只读，经现行 illustrate.ts 处理为本地 WebP。封面 800/1600 两密度、两张 1200×900 章图；全部 RGBA 源图灰度、透明、哈希与发布字节重算在主题根 `image-qa.json`，重用链在 `illustration-manifest.jsonl`。充填图为 228,032 bytes（约 223 KiB），脚本最低 q58 下仍超过 120 KiB 目标，已列 REVIEW。无新生成、源 PNG 编辑或外部媒体。LICENSE-CONTENT / THIRD-PARTY-NOTICES 明示原创内容为 Atlas NC-SA 家族，无新第三方 share-alike 例外。
+
+`dinosaur-earth` 尚不存在，现行 validator 明确拒绝不存在的 TopicLink；00、03、04、06、07 在规格位置写书名普通文字。《恐龙时代的地球》上线后再以 `slug="dinosaur-earth"` 加 topic-only 链接，不猜章节 id；待加位置列在 REVIEW.md。没有改其他主题回链或造地图。
+
+本地留存：`docs/screenshots/fossils-and-skeletons/offline-geometry/` 有两轮离线网格图、粗筛记录、最终 tessellation 与 label-projections；`gates/` 有命令日志。它们按仓库约定 gitignored。离线图标明不是浏览器截图，**没有**伪造 hero-paper、hero-clean、hero-dark、hero-zh、每章/每拍、phone-390 等实际验收截图。
+
+仍须在可启动 Chromium 的会话完成：全量 e2e（5404）、四组合全部拍与 labels、1920/1600/390 浏览器实看、R3 两主题材质/灯光、H/各模式组合、手机抽屉与原生卡、逐个索引点击及显隐恢复、URL 覆盖/刷新、键鼠触控、演示往返、实际性能及首屏 JS 预算。iPad 真机触控未测。给 Gavin 的逐段中文复核与所有默认决定在 `src/content/topics/fossils-and-skeletons/REVIEW.md`。上述完成并全绿后，才将 status 改 published 并增 smoke 发布数。
