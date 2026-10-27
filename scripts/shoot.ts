@@ -36,6 +36,8 @@ import { chromium, type Browser, type Page } from '@playwright/test';
 import { hudLayoutIssues, LAYOUT_SIZES } from '../tests-e2e/hud-layout';
 import { capacity, fillBounds, fillShapeForPrimitive, levelForVolume } from '../src/engines/space-scene/lib/fill';
 import { bendAxisIndex, bendCurve } from '../src/engines/space-scene/lib/bend';
+import { solveAirfoil } from '../src/engines/space-scene/lib/sim/airfoil';
+import { airfoilInputKey } from '../src/engines/space-scene/lib/sim/airfoil-cache';
 import { animationHz, shiftEntry, tintLevel } from '../src/engines/space-scene/lib/sim/bind';
 import type { PartsFile } from '../src/engines/space-scene/schema';
 import type { MechanismReading } from '../src/engines/space-scene/bridge';
@@ -421,6 +423,23 @@ function beatSceneOf(page: Page): Promise<BeatScene | null> {
     return {
       ...Object.fromEntries(keys.map((k) => [k, st[k] ?? null])),
       sim: sim?.values ?? null,
+      // Orbit sims (docs/44): the shared snapshot and its outputs, rounded to 1e-6. Snapshot ids differ between loads, and what the
+      // stage drew (`rendered`, fades included) is per frame: orbitIssues checks it against the snapshot once the frame lands.
+      ...(() => {
+        const e = window.__atlas!.engine as unknown as { orbit?(): Record<string, unknown> | null; sim?(): unknown };
+        const orbit = e.orbit?.();
+        if (!orbit) return {};
+        const normalize = (v: unknown): unknown =>
+          typeof v === 'number'
+            ? Math.round(v * 1e6) / 1e6
+            : Array.isArray(v)
+              ? v.map(normalize)
+              : v && typeof v === 'object'
+                ? Object.fromEntries(Object.entries(v).filter(([k]) => k !== 'snapshotId' && k !== 'rendered').map(([k, x]) => [k, normalize(x)]))
+                : v;
+        return { orbit: normalize(orbit), orbitOutputs: normalize(e.sim?.()) };
+      })(),
+      airfoil: (()=>{const a=(window.__atlas!.engine as unknown as {airfoil?():{inputKey:string;mode:string;cl:number;lift:number;plot:unknown}}).airfoil?.();return a?{inputKey:a.inputKey,mode:a.mode,cl:a.cl,lift:a.lift,plot:a.plot}:null;})(),
       unfinished: Object.entries(sim?.timeline ?? {})
         .filter(([, r]) => r.playing || r.t !== r.duration)
         .map(([id]) => id),
@@ -511,6 +530,55 @@ async function bendIssues(s: Session): Promise<string[]> {
       if (Math.abs(drawn.length - length) > length * 0.005) issues.push(`${id}: bent length ${drawn.length.toFixed(4)} m, not ${length} m`);
     }
   }
+  return issues;
+}
+
+/** Orbit bindings: compare the actual world matrix / illumination uniform with the shared physical snapshot. */
+async function orbitIssues(s: Session): Promise<string[]> {
+  const path = join(ROOT, 'src/content/topics', s.topic, 'data/parts.json');
+  if (!existsSync(path)) return [];
+  const file = JSON.parse(readFileSync(path, 'utf8')) as PartsFile;
+  if (!file.sim?.orbitRotation) return [];
+  await s.page.waitForFunction(() => {
+    const o = (window.__atlas!.engine as unknown as { orbit(): any }).orbit();
+    return !!o?.rendered && o.snapshotId === o.rendered.snapshotId;
+  });
+  const o = await s.page.evaluate(() => (window.__atlas!.engine as unknown as { orbit(): any }).orbit());
+  const issues: string[] = [];
+  const cfg = file.sim.orbitRotation;
+  for (const b of file.sim.bind) {
+    if (!('part' in b)) continue;
+    for (const id of Array.isArray(b.part) ? b.part : [b.part]) {
+      const got = o.rendered.parts[id];
+      if (!got) {
+        issues.push(`${id}: no actual rendered matrix`);
+        continue;
+      }
+      if (b.bodyTransform?.attachment === 'centre') {
+        const body = b.bodyTransform.body;
+        if (got.position.some((v: number, j: number) => Math.abs(v - o.display.centres[body][j]) > 1e-6))
+          issues.push(`${id}: rendered position differs from display snapshot`);
+        const q = o.physical.bodies[body].quaternion;
+        if (Math.abs(Math.abs(got.quaternion.reduce((v: number, x: number, j: number) => v + x * q[j], 0)) - 1) > 1e-6)
+          issues.push(`${id}: rendered quaternion differs`);
+        if (b.bodyTransform.scaleWithRadius !== false && got.scale.some((v: number) => Math.abs(v - o.display.radii[body]) > 1e-8))
+          issues.push(`${id}: rendered radius differs`);
+      }
+      if (b.solarIllumination) {
+        const body = b.solarIllumination.body;
+        if (o.rendered.solarDirections[body]?.some((v: number, j: number) => Math.abs(v - o.physical.solarDirections[body][j]) > 1e-9))
+          issues.push(`${id}: solar uniform differs`);
+      }
+    }
+  }
+  if (o.scale === 'true-scale' && Math.abs(o.display.radii.earth - cfg.bodies[1].radiusKm * cfg.display.trueScaleMPerKm) > 1e-10)
+    issues.push('true scale radius differs');
+  if (o.panel.kind === 'phase' && !o.panel.northUp) issues.push('phase window is not north-up');
+  if (
+    o.panel.shadowFrame &&
+    Math.abs(o.panel.shadowFrame.radii.moon / o.panel.shadowFrame.radii.earth - cfg.bodies[2].radiusKm / cfg.bodies[1].radiusKm) > 1e-10
+  )
+    issues.push('shadow frame does not use one scale');
   return issues;
 }
 
@@ -683,6 +751,24 @@ async function mechanismDrawIssues(s: Session): Promise<string[]> {
   return issues;
 }
 
+/** Airfoil beats and their links must agree with the resolved scalar snapshot and current field. */
+async function airfoilIssues(s:Session):Promise<string[]> {
+  const path=join(ROOT,'src/content/topics',s.topic,'data/parts.json');
+  if(!existsSync(path))return [];
+  const file=JSON.parse(readFileSync(path,'utf8')) as PartsFile;
+  const d=file?.sim?.airfoil;if(!d)return [];
+  await s.page.waitForFunction(()=>{const e=window.__atlas!.engine as unknown as {airfoil():{fieldReady:boolean}};return e.airfoil()?.fieldReady;},null,{timeout:30000});
+  const reading=await s.page.evaluate(()=>{const e=window.__atlas!.engine as unknown as {sim():{values:Record<string,number|string|boolean>};airfoil():{inputKey:string;mode:string;cl:number;lift:number;pathCount:number;pressureCount:number;pathStatuses:{status:string}[];plot:{current:{x:number;y:number}}}};return {a:e.airfoil(),v:e.sim().values};});
+  const want=solveAirfoil(d,reading.v),a=reading.a,out:string[]=[];
+  if(a.inputKey!==airfoilInputKey(d,reading.v))out.push('airfoil field inputKey is stale');
+  if(a.mode!==want.mode||Math.abs(a.cl-want.cl)>1e-8||Math.abs(a.lift-want.lift)>1e-5)out.push('airfoil mode/Cl/lift differs from resolved inputs');
+  if(want.mode==='ideal-attached'&&(a.pathCount!==16||a.pressureCount!==64||a.pathStatuses.some(p=>p.status!=='complete')))out.push('attached airfoil field incomplete');
+  if(want.mode!=='ideal-attached'&&(a.pathCount||a.pressureCount))out.push('still/stall retains attached paths or pressure');
+  const output=file!.sim!.outputs.find(o=>o.id===d.plot.y),y=output?.from==='lift-n'?want.lift:want.cl;
+  if(a.plot.current.x!==want.angle||Math.abs(a.plot.current.y-y)>1e-8)out.push('airfoil plot current point is stale');
+  return out;
+}
+
 /**
  * Every beat opened from its link (`?ch=<chapter>&b=<n>`) in a fresh document of its own, against the scene the presentation
  * showed: a field that differs, or a run not at its end (links jump to the end), is a beat failure.
@@ -717,10 +803,26 @@ async function runBeatLinks(s: Session, beats: { chapter: string; index: number 
     for (const issue of await shiftIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     for (const issue of await hzIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     for (const issue of await tintIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
+    for (const issue of await orbitIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     for (const issue of await mechanismDrawIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
+    for (const issue of await airfoilIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     if (diffs.length) report.beatFailures.push(`${name}: opened from ${link}: ${diffs.join('; ')}`);
     else same++;
     if (diffs.length) console.log(`  ${`${name} (link)`.padEnd(36)} FAIL  ${diffs.join('; ').slice(0, 300)}`);
+  }
+  // Orbit sims: a link with `orb-t` opens on the same snapshot as seeking the clock there.
+  const orbitFile = join(ROOT, 'src/content/topics', s.topic, 'data/parts.json');
+  if (beats.length && existsSync(orbitFile) && (JSON.parse(readFileSync(orbitFile, 'utf8')) as PartsFile).sim?.orbitRotation) {
+    const b = beats[0]!;
+    const link = `?ch=${encodeURIComponent(b.chapter)}&b=${b.index + 1}`;
+    await s.load(`${path}${link}`, 'orbit seek');
+    await s.page.evaluate(() => (window.__atlas!.engine as unknown as { orbitSeek(t: number): boolean }).orbitSeek(21600));
+    await orbitIssues(s);
+    const want = await beatSceneOf(s.page);
+    await s.load(`${path}${link}&orb-t=21600`, 'orbit time link');
+    await orbitIssues(s);
+    const got = await beatSceneOf(s.page);
+    if (JSON.stringify(want?.orbit) !== JSON.stringify(got?.orbit)) report.beatFailures.push('orb-t=21600 differs from orbitSeek(21600)');
   }
   await s.reopen();
   console.log(`  beat links: ${same} of ${shown.size} open on the presentation's scene`);
@@ -767,7 +869,9 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
     for (const issue of await shiftIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     for (const issue of await hzIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     for (const issue of await tintIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
+    for (const issue of await orbitIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     for (const issue of await mechanismDrawIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
+    for (const issue of await airfoilIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     await s.page.screenshot({ path: join(out, `${name}${o.suffix}.png`) });
     console.log(`  ${name.padEnd(36)} ${landed ? 'OK' : 'FAIL'}${missing.length ? `  (no label: ${missing.join(', ')})` : ''}`);
     // A looping exercise beat (SpaceScene exercise mode) also gets a still at its start and end keys.

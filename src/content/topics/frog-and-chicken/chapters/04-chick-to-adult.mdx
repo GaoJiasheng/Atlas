@@ -1,0 +1,367 @@
+---
+id: chick-to-adult
+order: 4
+title:
+  en: Chick to adult
+  zh: 从雏鸡到成鸡
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  pose: null
+  layers: &id001
+  - chicken-cycle
+  hide:
+  - frog-eggs
+  - frog-tadpole
+  - frog-hind-legs
+  - frog-froglet
+  - frog-adult
+  - frog-marker
+  - frog-next-generation
+  - frog-tray
+  - compare-frog
+  - compare-chicken
+  - compare-mosquito
+  - compare-plant
+  - comparison-marker
+  - comparison-tray
+  - egg-white
+  - egg-yolk
+  ghost: []
+  labels: &id002
+  - egg-shell-window
+  camera: &id003
+    position:
+    - 5.6
+    - 5
+    - 6
+    target:
+    - 2.8
+    - 0.4
+    - 0
+    fov: 32
+  highlight:
+    signal: &id004
+    - egg-shell-window
+  sim:
+    set:
+      frog-view: egg
+      chicken-view: egg
+      egg-open: false
+      fertilised: true
+      compare-view: chicken
+    try:
+      vary: chicken-view
+      keep:
+      - en: Same selected specimens and display scale
+        zh: 相同的标本与展示比例
+      observe:
+      - chicken-form
+  summary:
+    en: The chick grows into an adult; reproduction links adults with the next generation.
+    zh: 雏鸡生长成为成鸡；繁殖把成体与下一代连接起来。
+  beats:
+  - view: assembled
+    explode: 0
+    part: null
+    run: false
+    cutaway: none
+    pose: null
+    layers: *id001
+    hide:
+    - frog-eggs
+    - frog-tadpole
+    - frog-hind-legs
+    - frog-froglet
+    - frog-adult
+    - frog-marker
+    - frog-next-generation
+    - frog-tray
+    - compare-frog
+    - compare-chicken
+    - compare-mosquito
+    - compare-plant
+    - comparison-marker
+    - comparison-tray
+    ghost: []
+    labels: *id002
+    camera: *id003
+    highlight:
+      signal: *id004
+    sim:
+      set:
+        frog-view: egg
+        chicken-view: egg
+        egg-open: true
+        fertilised: true
+        compare-view: chicken
+    caption:
+      en: During hatching, the chick opens the shell and emerges. The opened model shell only represents that event.
+      zh: 孵出时，雏鸡打开蛋壳并离开卵。模型壳片的打开只表示这个事件。
+  - view: assembled
+    explode: 0
+    part: null
+    run: false
+    cutaway: none
+    pose: null
+    layers: *id001
+    hide:
+    - frog-eggs
+    - frog-tadpole
+    - frog-hind-legs
+    - frog-froglet
+    - frog-adult
+    - frog-marker
+    - frog-next-generation
+    - frog-tray
+    - compare-frog
+    - compare-chicken
+    - compare-mosquito
+    - compare-plant
+    - comparison-marker
+    - comparison-tray
+    - egg-white
+    - egg-yolk
+    ghost: []
+    labels:
+    - chicken-chick
+    camera:
+      position:
+      - 5.6
+      - 5
+      - 6
+      target:
+      - 2.8
+      - 0.4
+      - 0
+      fov: 32
+    highlight:
+      signal:
+      - chicken-chick
+    sim:
+      set:
+        frog-view: egg
+        chicken-view: chick
+        egg-open: false
+        fertilised: true
+        compare-view: chicken
+    caption:
+      en: The emerged chick is covered in down. It grows as a young bird rather than passing through a pupa.
+      zh: 孵出的雏鸡长着绒羽。它作为幼鸟继续生长，不经过蛹期。
+  - view: assembled
+    explode: 0
+    part: null
+    run: false
+    cutaway: none
+    pose: null
+    layers: *id001
+    hide:
+    - frog-eggs
+    - frog-tadpole
+    - frog-hind-legs
+    - frog-froglet
+    - frog-adult
+    - frog-marker
+    - frog-next-generation
+    - frog-tray
+    - compare-frog
+    - compare-chicken
+    - compare-mosquito
+    - compare-plant
+    - comparison-marker
+    - comparison-tray
+    - egg-white
+    - egg-yolk
+    ghost: []
+    labels:
+    - chicken-adult
+    - chicken-chick
+    camera:
+      position:
+      - 5.6
+      - 5
+      - 6
+      target:
+      - 2.8
+      - 0.4
+      - 0
+      fov: 32
+    highlight:
+      signal:
+      - chicken-adult
+      - chicken-chick
+    sim:
+      set:
+        frog-view: egg
+        chicken-view: adult
+        egg-open: false
+        fertilised: true
+        compare-view: chicken
+    caption:
+      en: The adult hen and chick share a bird body form. Their proportions and feathers are not identical.
+      zh: 成体母鸡和雏鸡都具有鸟类的身体形态，比例和羽毛却不完全相同。
+  - view: assembled
+    explode: 0
+    part: null
+    run: false
+    cutaway: none
+    pose: null
+    layers: *id001
+    hide:
+    - frog-eggs
+    - frog-tadpole
+    - frog-hind-legs
+    - frog-froglet
+    - frog-adult
+    - frog-marker
+    - frog-next-generation
+    - frog-tray
+    - compare-frog
+    - compare-chicken
+    - compare-mosquito
+    - compare-plant
+    - comparison-marker
+    - comparison-tray
+    - egg-white
+    - egg-yolk
+    ghost: []
+    labels:
+    - chicken-adult
+    - chicken-egg
+    - chicken-next-generation
+    camera:
+      position:
+      - 5.6
+      - 5
+      - 6
+      target:
+      - 2.8
+      - 0.4
+      - 0
+      fov: 32
+    highlight:
+      signal:
+      - chicken-adult
+      - chicken-egg
+      - chicken-next-generation
+    sim:
+      set:
+        frog-view: egg
+        chicken-view: adult
+        egg-open: false
+        fertilised: true
+        compare-view: chicken
+    caption:
+      en: The adult-to-egg link means reproduction. The hen remains an adult while a new generation begins.
+      zh: 成体到卵的连接表示繁殖。母鸡仍然是成体，新一代由此开始。
+  - view: assembled
+    explode: 0
+    part: null
+    run: false
+    cutaway: none
+    pose: null
+    layers: *id001
+    hide:
+    - frog-eggs
+    - frog-tadpole
+    - frog-hind-legs
+    - frog-froglet
+    - frog-adult
+    - frog-marker
+    - frog-next-generation
+    - frog-tray
+    - compare-frog
+    - compare-chicken
+    - compare-mosquito
+    - compare-plant
+    - comparison-marker
+    - comparison-tray
+    - egg-white
+    - egg-yolk
+    ghost: []
+    labels:
+    - chicken-adult
+    camera:
+      position:
+      - 5.6
+      - 5
+      - 6
+      target:
+      - 2.8
+      - 0.4
+      - 0
+      fov: 32
+    highlight:
+      signal:
+      - chicken-adult
+    sim:
+      set:
+        frog-view: egg
+        chicken-view: adult
+        egg-open: false
+        fertilised: true
+        compare-view: chicken
+    caption:
+      en: Singapore flocks may include domestic fowl and Red Junglefowl. This model is a domestic hen, not a field identification.
+      zh: 新加坡的鸡群可能包含家鸡与红原鸡。这个模型是一只家鸡母鸡，不是野外鉴定图。
+  index:
+    parts:
+    - chicken-egg
+    - egg-shell-window
+    - chicken-chick
+    - chicken-adult
+    - chicken-marker
+    - chicken-next-generation
+---
+
+<Lang en>
+
+At hatching, the chick opens the shell with its beak and a temporary egg tooth, then emerges. Its down dries after it comes out. The moved shell piece in the model stands for an opening shell; it does not reproduce the force or every action of hatching. Development has already taken place inside the egg before this moment.
+
+Move the chicken pointer to the chick. This is a young bird with a beak, wings and legs. It is not an adult merely because it already has a bird's outline. The chick continues to grow into an adult chicken without a pupa. On this tray the egg, chick and adult are separate specimens that remain available for comparison.
+
+Now compare the chick with the adult hen. The shared bird body form is easy to recognise, but their proportions and feathers are not identical. Growth is more than enlarging a picture by the same amount in every direction. The adult specimen is a hen, a female chicken. Choosing a hen for the display does not mean that all adult chickens are hens.
+
+Follow the last link back towards the egg. It means reproduction and a new generation, not the adult hen becoming an egg. The observation control can return to any specimen so that you can inspect it again. These selections do not make the bird grow backwards. When you look at roaming fowl in Singapore, remember that flocks may include domestic fowl and Red Junglefowl. This model represents a domestic hen; it is not a field guide for identifying those birds.
+
+<More title={{"en": "Separate specimens", "zh": "分别绘制的标本"}}>
+
+The shell window, chick and hen have different jobs in the explanation. Moving the window reveals an egg model; selecting the chick points to a young bird. The display does not turn the egg into a chick by stretching its geometry.
+
+</More>
+
+<More title={{"en": "Fowl in Singapore", "zh": "新加坡的鸡"}}>
+
+NParks describes roaming flocks as a mixture of domestic fowl and Red Junglefowl. Their presence offers a local connection to the lesson, but a simplified hen specimen cannot identify an individual bird’s ancestry or conservation status.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+孵出时，雏鸡用喙和暂时具有的卵齿打开蛋壳，然后出来。出来以后，身上的绒羽逐渐干燥。模型移开壳片，只是表示蛋壳打开，没有重现破壳所用的力或每一个动作。在这个时刻以前，幼体已经在卵内发育了一段过程。
+
+把鸡的指示珠移到雏鸡。这是一只幼鸟，有喙、翅和足；已经具有鸟类的轮廓，不等于已经成年。雏鸡继续生长成为成鸡，不经过蛹期。展台上的卵、雏鸡和成鸡是分别绘制的标本，都保留下来，方便来回比较。
+
+再把雏鸡和成年母鸡对照。它们共同的鸟类身体形态很容易辨认，身体比例和羽毛却不完全相同。生长不只是把一幅图各方向放大同样多。这里选择母鸡作为成年个体的例子，不表示所有成鸡都是母鸡；公鸡也可以是成鸡。
+
+沿着最后一段连接回到卵的位置，读到的应当是繁殖和下一代，不是成年母鸡变回卵。观察控件能返回任何标本，是为了重新细看，不会让鸟倒着生长。在新加坡观察自由走动的鸡群时，还要记得其中可能有家鸡与红原鸡。这个模型画的是家鸡母鸡，不是鉴定这些鸟的野外图册。
+
+<More title={{"en": "Separate specimens", "zh": "分别绘制的标本"}}>
+
+壳窗、雏鸡和母鸡在讲解中各有作用。移开窗口，是露出卵内模型；选中雏鸡，是指出一只幼鸟。展示没有靠拉长、放大卵的几何形状，把卵变成雏鸡。
+
+</More>
+
+<More title={{"en": "Fowl in Singapore", "zh": "新加坡的鸡"}}>
+
+NParks 介绍，自由活动的鸡群中混有家鸡与红原鸡。这为课文提供了本地联系，但简化的母鸡标本不能判断某一只鸟的血缘或保育身份。
+
+</More>
+
+</Lang>

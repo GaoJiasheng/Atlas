@@ -30,6 +30,8 @@ export interface SceneState {
 
 /** Keys every engine may add on top of `SceneState`, with their URL keys. */
 export interface UrlEngineFields {
+  /** SpaceScene orbit sims: model seconds on show (paused). URL `orb-t`. */
+  orbitTime?: number | null;
   /** TimeScene climatology: calendar month 1..12. URL `m`. */
   month?: number;
   geoContext?: import('../time-scene/lib/geography').GeoContext;

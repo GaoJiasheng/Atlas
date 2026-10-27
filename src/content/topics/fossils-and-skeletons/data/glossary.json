@@ -1,0 +1,229 @@
+{
+  "terms": [
+    {
+      "id": "fossil",
+      "term": {
+        "en": "Fossil",
+        "zh": "化石"
+      },
+      "definition": {
+        "en": "Evidence of past life preserved in a geological setting. The Chinese term is editorial wording for this topic.",
+        "zh": "在地质环境中保存的过去生命证据。 中文为本课编辑用词。"
+      },
+      "see": [
+        "body-fossil",
+        "trace-fossil"
+      ]
+    },
+    {
+      "id": "reconstruction",
+      "term": {
+        "en": "Reconstruction",
+        "zh": "复原"
+      },
+      "definition": {
+        "en": "A model assembled from preserved evidence and stated comparisons or inferences. The Chinese term is editorial wording for this topic.",
+        "zh": "根据保存的证据、说明过的比较或推定，重建的模型。 中文为本课编辑用词。"
+      },
+      "see": [
+        "comparison-evidence"
+      ]
+    },
+    {
+      "id": "body-fossil",
+      "term": {
+        "en": "Body fossil",
+        "zh": "实体化石"
+      },
+      "definition": {
+        "en": "Evidence of an organism's body or a body part, including plants. The Chinese term is editorial wording for this topic.",
+        "zh": "生物身体或身体部分留下的证据，也包括植物。 中文为本课编辑用词。"
+      },
+      "see": [
+        "fossil"
+      ]
+    },
+    {
+      "id": "trace-fossil",
+      "term": {
+        "en": "Trace fossil",
+        "zh": "遗迹化石"
+      },
+      "definition": {
+        "en": "A preserved record of biological activity, such as a footprint. The Chinese term is editorial wording for this topic.",
+        "zh": "活动留下的地质记录，例如足迹。 中文为本课编辑用词。"
+      },
+      "see": [
+        "body-fossil"
+      ]
+    },
+    {
+      "id": "impression",
+      "term": {
+        "en": "Impression",
+        "zh": "印痕"
+      },
+      "definition": {
+        "en": "A shallow imprint without retained organic material. The Chinese term is editorial wording for this topic.",
+        "zh": "没有保留有机物质的浅表形体印记。 中文为本课编辑用词。"
+      },
+      "see": [
+        "body-fossil"
+      ]
+    },
+    {
+      "id": "sediment",
+      "term": {
+        "en": "Sediment",
+        "zh": "沉积物"
+      },
+      "definition": {
+        "en": "Material deposited in layers around the evidence in this model. The Chinese term is editorial wording for this topic.",
+        "zh": "在本模型中围着遗存逐层沉积的物质。 中文为本课编辑用词。"
+      },
+      "see": [
+        "stratum"
+      ]
+    },
+    {
+      "id": "permineralisation",
+      "term": {
+        "en": "Permineralisation",
+        "zh": "矿物充填作用"
+      },
+      "definition": {
+        "en": "Minerals deposited in natural pores within remains. The Chinese term is editorial wording for this topic.",
+        "zh": "矿物沉积到遗存内部原有的孔隙中。 中文为本课编辑用词。"
+      },
+      "see": [
+        "replacement"
+      ]
+    },
+    {
+      "id": "replacement",
+      "term": {
+        "en": "Mineral replacement",
+        "zh": "矿物置换作用"
+      },
+      "definition": {
+        "en": "Minerals substitute for dissolved original material. The Chinese term is editorial wording for this topic.",
+        "zh": "原来的物质溶解后，由矿物替代。 中文为本课编辑用词。"
+      },
+      "see": [
+        "permineralisation"
+      ]
+    },
+    {
+      "id": "stratum",
+      "term": {
+        "en": "Stratum",
+        "zh": "地层"
+      },
+      "definition": {
+        "en": "One layer in the sequence being examined. The Chinese term is editorial wording for this topic.",
+        "zh": "所观察层序中的一层。 中文为本课编辑用词。"
+      },
+      "see": [
+        "relative-age"
+      ]
+    },
+    {
+      "id": "relative-age",
+      "term": {
+        "en": "Relative age",
+        "zh": "相对年龄"
+      },
+      "definition": {
+        "en": "Whether a layer or fossil is older or younger than another, with geological conditions checked. The Chinese term is editorial wording for this topic.",
+        "zh": "在核对地质条件后，判断一层或化石比另一层或化石较老还是较新。 中文为本课编辑用词。"
+      },
+      "see": [
+        "age-bracket"
+      ]
+    },
+    {
+      "id": "radiometric-age",
+      "term": {
+        "en": "Radiometric age",
+        "zh": "放射性测年年龄"
+      },
+      "definition": {
+        "en": "A numerical estimate from a suitable isotope clock, with assumptions and uncertainty. The Chinese term is editorial wording for this topic.",
+        "zh": "利用合适同位素时钟得到、带有假设与误差的数值年龄。 中文为本课编辑用词。"
+      },
+      "see": [
+        "age-bracket"
+      ]
+    },
+    {
+      "id": "age-bracket",
+      "term": {
+        "en": "Age bracket",
+        "zh": "年龄夹定范围"
+      },
+      "definition": {
+        "en": "Older and younger limits supplied by dated evidence around a fossil. The Chinese term is editorial wording for this topic.",
+        "zh": "化石周围的测年证据给出的较古老和较年轻界限。 中文为本课编辑用词。"
+      },
+      "see": [
+        "relative-age"
+      ]
+    },
+    {
+      "id": "cast",
+      "term": {
+        "en": "Museum cast",
+        "zh": "博物馆复制件"
+      },
+      "definition": {
+        "en": "A made replica of a recorded fossil shape; distinguish it from a natural fossil cast. The Chinese term is editorial wording for this topic.",
+        "zh": "人工复制的化石形体；须与自然形成的铸型化石区别。 中文为本课编辑用词。"
+      },
+      "see": [
+        "reconstruction"
+      ]
+    },
+    {
+      "id": "comparison-evidence",
+      "term": {
+        "en": "Comparative evidence",
+        "zh": "比较依据"
+      },
+      "definition": {
+        "en": "Other documented anatomy used to constrain the shape of missing parts. The Chinese term is editorial wording for this topic.",
+        "zh": "用其他已记录的解剖结构，约束缺失部分的形状。 中文为本课编辑用词。"
+      },
+      "see": [
+        "reconstruction"
+      ]
+    },
+    {
+      "id": "theropod",
+      "term": {
+        "en": "Theropod",
+        "zh": "兽脚类"
+      },
+      "definition": {
+        "en": "The dinosaur group within which living birds are classified. The Chinese term is editorial wording for this topic.",
+        "zh": "现生鸟类在演化分类中所属的恐龙分支。 中文为本课编辑用词。"
+      },
+      "see": [
+        "fossil"
+      ]
+    },
+    {
+      "id": "diplodocid",
+      "term": {
+        "en": "Diplodocid",
+        "zh": "梁龙科恐龙"
+      },
+      "definition": {
+        "en": "The family-level sauropod grouping used for the Singapore trio in the adopted museum information. The Chinese term is editorial wording for this topic.",
+        "zh": "本课采用的馆方资料对新加坡三具蜥脚类标本所用的科级分类。 中文为本课编辑用词。"
+      },
+      "see": [
+        "reconstruction"
+      ]
+    }
+  ]
+}

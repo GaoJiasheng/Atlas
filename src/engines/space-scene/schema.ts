@@ -8,6 +8,7 @@
  * This module is build-time only (zod); client code imports its *types* only.
  */
 import { z } from 'zod';
+import { airfoilPartIssues } from './airfoil-schema';
 import { bilingual, colorRef, KEBAB_ID, kebabId, level, theme, vec3, type Bilingual } from '../../content/schema/common';
 import { orbitCamera } from '../../content/schema/camera';
 import { sourcesFile } from '../../content/schema/sources';
@@ -44,6 +45,7 @@ import { MAX_EXPLODE_STAGE } from './lib/explode';
 import { MAX_FLOW_PATHS } from './lib/flow-curve';
 import { beatSimSchema, chapterSimIssues, chapterSimSchema, simIssues, simSchema } from './sim-schema';
 import { materialsShowable } from './lib/sim/materials';
+import { linkOrbitTable, orbitTableIssues } from './orbit-rotation-schema';
 import { mechanismIssues, mechanismSchema } from './mechanism-schema';
 export { mechanismIssues } from './mechanism-schema';
 
@@ -310,7 +312,7 @@ export const primitiveSchema = z
         shape: outline,
         holes: z.array(outline).max(16).optional(),
         depth: positive,
-        bevel: positive.optional(),
+        bevel: z.number().finite().nonnegative().optional(),
         ...placement,
       })
       .strict(),
@@ -1220,6 +1222,23 @@ export const partsFileBase = z
       }))
         ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['sim', ...x.path], message: x.message });
     }
+    if (file.sim?.orbitRotation) {
+      if (file.rig) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['rig'], message: 'orbit body frames cannot inherit rig or exercise root motion' });
+      const writers = new Set(file.sim.bind.flatMap((b) => ('part' in b && b.bodyTransform ? (Array.isArray(b.part) ? b.part : [b.part]) : [])));
+      for (const o of file.sim.overlays) if (o.kind === 'orbit-guides') for (const id of Object.values(o.parts)) writers.add(id);
+      file.parts.forEach((p, i) => {
+        if (writers.has(p.id) && p.explode.dist !== 0)
+          ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['parts', i, 'explode'], message: 'orbit writer forbids explode motion' });
+      });
+      file.animations.forEach((a, i) => {
+        if (writers.has(a.target))
+          ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['animations', i, 'target'], message: 'orbit writer forbids animation motion' });
+      });
+      for (const [name, pose] of Object.entries(file.poses ?? {}))
+        for (const id of Object.keys(pose.parts))
+          if (writers.has(id)) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['poses', name, 'parts', id], message: 'orbit writer forbids pose motion' });
+    }
+    for (const x of airfoilPartIssues(file as PartsFile)) ctx.addIssue({code:z.ZodIssueCode.custom,...x});
     file.parts.forEach((p, i) => {
       const at = (path: (string | number)[], message: string) => ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['parts', i, ...path], message });
       (p.extra ?? []).forEach((e, k) => {
@@ -1232,7 +1251,7 @@ export const partsFileBase = z
     file.flows.forEach((f, i) => {
       if (f.tidal && 'sync' in f.tidal && !file.animations.some((a) => a.id === (f.tidal as { sync: string }).sync))
         ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['flows', i, 'tidal', 'sync'], message: `unknown animation "${f.tidal.sync}"` });
-      if (f.path.length === 0 && file.sim?.kind !== 'magnet')
+      if (f.path.length === 0 && file.sim?.kind !== 'magnet' && !file.sim?.bind.some(b => 'flow' in b && b.flow === f.id && b.airfoilFlow))
         ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['flows', i, 'path'], message: 'give `path` or `paths` (only a magnet sim\'s field-line flow has neither)' });
     });
     const outputs = new Map((file.sim?.outputs ?? []).map((o) => [o.id, o]));
@@ -1469,7 +1488,7 @@ export type PartsFile = z.output<typeof partsFile>;
  * (`fitness`, content/schema/fitness.ts `withSharedFitness`). Parts that link a
  * `muscle` take its summary, detail and short name unless they give their own.
  */
-export const spaceSceneData = z
+const spaceSceneDataBase = z
   .object({
     parts: partsFile,
     sources: sourcesFile.optional(),
@@ -1481,6 +1500,15 @@ export const spaceSceneData = z
   .superRefine((data, ctx) => {
     const issue = (path: (string | number)[], message: string) => ctx.addIssue({ code: z.ZodIssueCode.custom, path, message });
     // `[S#]` markers in part details must cite data/sources.json, `[M#]` the shared sources.
+    if (data.parts.sim?.orbitRotation) {
+      const c = data.parts.sim.orbitRotation;
+      orbitTableIssues(c).forEach((x) => issue(['parts', 'sim', ...x.path], x.message));
+      const src = new Map((data.sources?.sources ?? []).map((s) => [s.id, s]));
+      c.sources.forEach((id, i) => {
+        if (!src.has(id)) issue(['parts', 'sim', 'orbitRotation', 'sources', i], `unknown source ${id}`);
+      });
+      if (!src.get('S36')?.design) issue(['parts', 'sim', 'orbitRotation', 'sources'], 'S36 must be a design study');
+    }
     const known = new Set((data.sources?.sources ?? []).map((s) => s.id));
     const shared = new Set((data.fitness?.sources ?? []).map((s) => s.id));
     const muscles = new Map((data.fitness?.muscles ?? []).map((m) => [m.id, m]));
@@ -1552,6 +1580,7 @@ export const spaceSceneData = z
   });
 /** Shared fitness data as merged into a topic (the type the client sees). */
 export type { FitnessBundle };
+export const spaceSceneData = z.preprocess(linkOrbitTable, spaceSceneDataBase);
 export type SpaceSceneData = z.output<typeof spaceSceneData>;
 
 /* ------------------------------------------------------------------ */

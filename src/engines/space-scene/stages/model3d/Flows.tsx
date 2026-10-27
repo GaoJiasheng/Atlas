@@ -19,6 +19,10 @@
  * phase of the animation it follows (or its own `hz`) and stops with it;
  * with reduced motion its particles stay put.
  */
+import { AirfoilFlow } from './AirfoilFlow';
+import type { PartsFile } from '../../schema';
+import type { SpaceUiStore } from '../../ui';
+import type { SimValues } from '../../sim-schema';
 import { useEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { BufferAttribute, BufferGeometry, LineBasicMaterial, type LineSegments, type PerspectiveCamera, type Plane, type Points } from 'three';
@@ -311,6 +315,7 @@ function FlowPaths({
 }
 
 export function Flows({
+  airfoil,
   flows,
   layers,
   look,
@@ -319,6 +324,7 @@ export function Flows({
   fieldLines,
   bridge,
 }: {
+  airfoil?: {file:PartsFile;ui:SpaceUiStore;values:SimValues;on:boolean;run:boolean};
   flows: readonly Flow[];
   layers: readonly string[];
   look: StageLook;
@@ -331,7 +337,7 @@ export function Flows({
 }) {
   return (
     <>
-      {flows.map((flow, i) => (
+      {flows.map((flow, i) => airfoil && bridge && airfoil.file.sim?.bind.some(b => 'flow' in b && b.flow === flow.id && b.airfoilFlow) ? <AirfoilFlow key={flow.id} {...airfoil} flow={flow} bridge={bridge} look={look} on={airfoil.on && layers.includes(flow.group)} linesOn={effects?.get(flow.id)?.visible !== false} /> : (
         <FlowParticles
           key={flow.id}
           flow={flow}

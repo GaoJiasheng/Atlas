@@ -1,0 +1,84 @@
+[
+  {
+    "id": "D01",
+    "file": "ne-10m-land.geojson",
+    "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_land.geojson",
+    "licence": "Public domain",
+    "licenceURL": "https://www.naturalearthdata.com/about/terms-of-use/",
+    "status": "downloaded",
+    "bytes": 10157965,
+    "sha256": "1ac90796408bc6ad6911d69448485d3c4dbf2190370080368a09976e1c9f7416",
+    "features": 11,
+    "vertices": 446175,
+    "extent": [
+      -180,
+      -90,
+      180,
+      83.634101
+    ],
+    "timeCoverage": "Modern cartographic snapshot; downloaded 2026-10-27; no 1405–1433 time series",
+    "drives": "K0–K8 basemap",
+    "check": "JSON opened; geometry coordinates finite and in WGS84 bounds; extent and row count measured; upstream master mutable, pinned by SHA256"
+  },
+  {
+    "id": "D02",
+    "file": "ne-10m-populated-places.geojson",
+    "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_populated_places.geojson",
+    "licence": "Public domain",
+    "licenceURL": "https://www.naturalearthdata.com/about/terms-of-use/",
+    "status": "downloaded",
+    "bytes": 19359003,
+    "sha256": "9b8e3de09048ef00dfc70357dbb9fa324493f214b5e0ae4daf1aa79a8d10116b",
+    "features": 7342,
+    "vertices": 7342,
+    "extent": [
+      -179.589979,
+      -90,
+      179.383304,
+      82.483323
+    ],
+    "timeCoverage": "Modern cartographic snapshot; downloaded 2026-10-27; no 1405–1433 time series",
+    "drives": "port/site anchors in all chapters",
+    "check": "JSON opened; geometry coordinates finite and in WGS84 bounds; extent and row count measured; upstream master mutable, pinned by SHA256"
+  },
+  {
+    "id": "D03",
+    "file": "geonames-IR.zip",
+    "url": "https://download.geonames.org/export/dump/IR.zip",
+    "licence": "CC BY 4.0",
+    "licenceURL": "https://download.geonames.org/export/dump/readme.txt",
+    "status": "downloaded",
+    "bytes": 13669556,
+    "sha256": "d4338847ec485215ecde11c0ab197fef7e6abb84be155f40fbdf65452caa64b2",
+    "rows": 254986,
+    "extent": [
+      36.286,
+      25.0,
+      63.47302,
+      59.64
+    ],
+    "timeCoverage": "Modern records; record modification dates 1994-02-10 to 2026-10-26; no historical observation series",
+    "drives": "chapter 04/07 Hormuz",
+    "check": "ZIP CRC passed; UTF-8 TSV decoded; every row has 19 columns; exact geonameid 131231 selected; Hormoz, lon/lat [56.4529, 27.095]"
+  },
+  {
+    "id": "D04",
+    "file": "geonames-TZ.zip",
+    "url": "https://download.geonames.org/export/dump/TZ.zip",
+    "licence": "CC BY 4.0",
+    "licenceURL": "https://download.geonames.org/export/dump/readme.txt",
+    "status": "downloaded",
+    "bytes": 531720,
+    "sha256": "fb3cc5ede2af2bee7db31c750d236ed1a3367f610770f276c49c022b3cb69170",
+    "rows": 19524,
+    "extent": [
+      -4.26,
+      -11.73333,
+      41.13333,
+      31.32694
+    ],
+    "timeCoverage": "Modern records; record modification dates 1994-01-05 to 2026-10-23; no historical observation series",
+    "drives": "chapter 00/05 Kilwa context",
+    "check": "ZIP CRC passed; UTF-8 TSV decoded; every row has 19 columns; exact geonameid 157382 selected; Kilwa Kisiwani, lon/lat [39.49808, -8.95897]"
+  }
+]
