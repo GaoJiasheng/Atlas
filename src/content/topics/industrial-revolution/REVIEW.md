@@ -46,3 +46,5 @@
 ## 门槛（合并 main 后）
 
 `pnpm check` 0 错 / 0 警告；`pnpm validate` 57 题 0 / 0；`pnpm test` 160 文件 4,256 测试全过；`pnpm build` 117 页。`pnpm shoot industrial-revolution --beats --keys --layout --locale en,zh --theme paper,cinema`：四组各 37 拍、按键、八种尺寸布局 0 失败，控制台干净（一次负载下的 zh/paper 布局误报单独重跑为 0）。回归 `--beats --keys`：singapore-after-1965、ancient-civilisations、singapore-land-use 0 失败；ww2 的拖动释放镜头在机器高负载时失败、单独重跑通过（main 同样通过）。`CI=1 pnpm e2e` 全量 344 条：340 过；industrial 铁路一条是 Codex 未跑过的测试写错了控件（已改，本题 9 条单独全过）；heart-and-lungs 屏息、sample-space 冒烟两条是 SpaceScene 截图超时，同负载下 main 也同样失败，与本分支无关。
+
+第二次合并 main（inside-the-earth 已发布；`src/lib/illustrations.json` 冲突保留两条）后：check 0 / 0；validate 58 题 0 / 0；test 162 文件 4,297 全过；build 119 页；本题 e2e 9 条全过；`smoke.spec.ts`（2 workers）12 过，sample-space 两条与上面 main 同样的负载超时。机器负载约 150 时重跑本题 shoot：偶发 4K 布局“bar 比面板宽”、地图拖动未释放预设和“章节高亮标签不在屏内”，低负载下的两次全量与单独重跑均为 0，判断为负载导致；Gavin 合并时的全量再确认。monsoon 分支本轮还未进 main。
