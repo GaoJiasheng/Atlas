@@ -1,6 +1,6 @@
 /** Idealised Sun–Earth–Moon author contract (docs/44 §4). No ephemeris. */
 import { z } from 'zod';
-import { kebabId } from '../../content/schema/common';
+import { bilingual, kebabId } from '../../content/schema/common';
 import { sourceId } from '../../content/schema/sources';
 import type { SimControl, SimData } from './sim-schema';
 import { ORBIT_LABS, ORBIT_BODIES, ORBIT_INPUTS, ORBIT_STEPS, ORBIT_STATES, orbitQuantity } from './lib/sim/orbit-constants';
@@ -15,6 +15,8 @@ export const bodyTransformSchema = z
     localDirection: vec.optional(),
     surfaceFactor: pos.max(1.1).optional(),
     scaleWithRadius: z.boolean().default(true),
+    /** Optional anchor in the attachment’s local coordinates, scaled with its geometry. */
+    labelPoint: vec.optional(),
   })
   .strict();
 export const solarIlluminationSchema = z
@@ -131,6 +133,7 @@ export const orbitRotationSchema = z
           })
           .strict(),
         north: z.literal('earth-axis'),
+        shadowNote: bilingual.optional(),
       })
       .strict(),
     sources: z.array(sourceId).min(1),

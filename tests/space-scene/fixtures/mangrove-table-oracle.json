@@ -1,0 +1,1626 @@
+[
+  {
+    "input": {
+      "remove": "none",
+      "tide": "low",
+      "inspect": "n-tree-crabs"
+    },
+    "expected": {
+      "present-count": 6,
+      "supported-count": 6,
+      "active-links": 6,
+      "foods": 2,
+      "food-status": "unchanged",
+      "water-rise": 0,
+      "crab-rise": 0,
+      "show-fiddlers": 1,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 1,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "unchanged",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "unchanged",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "none",
+      "tide": "low",
+      "inspect": "n-fiddlers"
+    },
+    "expected": {
+      "present-count": 6,
+      "supported-count": 6,
+      "active-links": 6,
+      "foods": 1,
+      "food-status": "unchanged",
+      "water-rise": 0,
+      "crab-rise": 0,
+      "show-fiddlers": 1,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 1,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "unchanged",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "unchanged",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "none",
+      "tide": "low",
+      "inspect": "n-mudskipper"
+    },
+    "expected": {
+      "present-count": 6,
+      "supported-count": 6,
+      "active-links": 6,
+      "foods": 2,
+      "food-status": "unchanged",
+      "water-rise": 0,
+      "crab-rise": 0,
+      "show-fiddlers": 1,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 1,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "unchanged",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "unchanged",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "none",
+      "tide": "low",
+      "inspect": "n-heron"
+    },
+    "expected": {
+      "present-count": 6,
+      "supported-count": 6,
+      "active-links": 6,
+      "foods": 1,
+      "food-status": "unchanged",
+      "water-rise": 0,
+      "crab-rise": 0,
+      "show-fiddlers": 1,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 1,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "unchanged",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "unchanged",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "none",
+      "tide": "high",
+      "inspect": "n-tree-crabs"
+    },
+    "expected": {
+      "present-count": 6,
+      "supported-count": 6,
+      "active-links": 6,
+      "foods": 2,
+      "food-status": "unchanged",
+      "water-rise": 0.14,
+      "crab-rise": 0.16,
+      "show-fiddlers": 0,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 1,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "unchanged",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "unchanged",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "none",
+      "tide": "high",
+      "inspect": "n-fiddlers"
+    },
+    "expected": {
+      "present-count": 6,
+      "supported-count": 6,
+      "active-links": 6,
+      "foods": 1,
+      "food-status": "unchanged",
+      "water-rise": 0.14,
+      "crab-rise": 0.16,
+      "show-fiddlers": 0,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 1,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "unchanged",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "unchanged",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "none",
+      "tide": "high",
+      "inspect": "n-mudskipper"
+    },
+    "expected": {
+      "present-count": 6,
+      "supported-count": 6,
+      "active-links": 6,
+      "foods": 2,
+      "food-status": "unchanged",
+      "water-rise": 0.14,
+      "crab-rise": 0.16,
+      "show-fiddlers": 0,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 1,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "unchanged",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "unchanged",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "none",
+      "tide": "high",
+      "inspect": "n-heron"
+    },
+    "expected": {
+      "present-count": 6,
+      "supported-count": 6,
+      "active-links": 6,
+      "foods": 1,
+      "food-status": "unchanged",
+      "water-rise": 0.14,
+      "crab-rise": 0.16,
+      "show-fiddlers": 0,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 1,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "unchanged",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "unchanged",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-mangrove",
+      "tide": "low",
+      "inspect": "n-tree-crabs"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 5,
+      "foods": 1,
+      "food-status": "fewer-foods",
+      "water-rise": 0,
+      "crab-rise": 0,
+      "show-fiddlers": 1,
+      "active-e-leaves-tree": 0,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 1,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "removed",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "fewer-foods",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "unchanged",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-mangrove",
+      "tide": "low",
+      "inspect": "n-fiddlers"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 5,
+      "foods": 1,
+      "food-status": "unchanged",
+      "water-rise": 0,
+      "crab-rise": 0,
+      "show-fiddlers": 1,
+      "active-e-leaves-tree": 0,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 1,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "removed",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "fewer-foods",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "unchanged",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-mangrove",
+      "tide": "low",
+      "inspect": "n-mudskipper"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 5,
+      "foods": 2,
+      "food-status": "unchanged",
+      "water-rise": 0,
+      "crab-rise": 0,
+      "show-fiddlers": 1,
+      "active-e-leaves-tree": 0,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 1,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "removed",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "fewer-foods",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "unchanged",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-mangrove",
+      "tide": "low",
+      "inspect": "n-heron"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 5,
+      "foods": 1,
+      "food-status": "unchanged",
+      "water-rise": 0,
+      "crab-rise": 0,
+      "show-fiddlers": 1,
+      "active-e-leaves-tree": 0,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 1,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "removed",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "fewer-foods",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "unchanged",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-mangrove",
+      "tide": "high",
+      "inspect": "n-tree-crabs"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 5,
+      "foods": 1,
+      "food-status": "fewer-foods",
+      "water-rise": 0.14,
+      "crab-rise": 0.16,
+      "show-fiddlers": 0,
+      "active-e-leaves-tree": 0,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 1,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "removed",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "fewer-foods",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "unchanged",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-mangrove",
+      "tide": "high",
+      "inspect": "n-fiddlers"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 5,
+      "foods": 1,
+      "food-status": "unchanged",
+      "water-rise": 0.14,
+      "crab-rise": 0.16,
+      "show-fiddlers": 0,
+      "active-e-leaves-tree": 0,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 1,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "removed",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "fewer-foods",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "unchanged",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-mangrove",
+      "tide": "high",
+      "inspect": "n-mudskipper"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 5,
+      "foods": 2,
+      "food-status": "unchanged",
+      "water-rise": 0.14,
+      "crab-rise": 0.16,
+      "show-fiddlers": 0,
+      "active-e-leaves-tree": 0,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 1,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "removed",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "fewer-foods",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "unchanged",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-mangrove",
+      "tide": "high",
+      "inspect": "n-heron"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 5,
+      "foods": 1,
+      "food-status": "unchanged",
+      "water-rise": 0.14,
+      "crab-rise": 0.16,
+      "show-fiddlers": 0,
+      "active-e-leaves-tree": 0,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 1,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "removed",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "fewer-foods",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "unchanged",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-algae",
+      "tide": "low",
+      "inspect": "n-tree-crabs"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 4,
+      "active-links": 3,
+      "foods": 1,
+      "food-status": "fewer-foods",
+      "water-rise": 0,
+      "crab-rise": 0,
+      "show-fiddlers": 1,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 0,
+      "active-e-algae-fiddlers": 0,
+      "active-e-fiddlers-fish": 0,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "removed",
+      "status-n-tree-crabs": "fewer-foods",
+      "status-n-fiddlers": "no-shown-food",
+      "status-n-mudskipper": "fewer-foods",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-algae",
+      "tide": "low",
+      "inspect": "n-fiddlers"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 4,
+      "active-links": 3,
+      "foods": 0,
+      "food-status": "no-shown-food",
+      "water-rise": 0,
+      "crab-rise": 0,
+      "show-fiddlers": 1,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 0,
+      "active-e-algae-fiddlers": 0,
+      "active-e-fiddlers-fish": 0,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "removed",
+      "status-n-tree-crabs": "fewer-foods",
+      "status-n-fiddlers": "no-shown-food",
+      "status-n-mudskipper": "fewer-foods",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-algae",
+      "tide": "low",
+      "inspect": "n-mudskipper"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 4,
+      "active-links": 3,
+      "foods": 1,
+      "food-status": "fewer-foods",
+      "water-rise": 0,
+      "crab-rise": 0,
+      "show-fiddlers": 1,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 0,
+      "active-e-algae-fiddlers": 0,
+      "active-e-fiddlers-fish": 0,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "removed",
+      "status-n-tree-crabs": "fewer-foods",
+      "status-n-fiddlers": "no-shown-food",
+      "status-n-mudskipper": "fewer-foods",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-algae",
+      "tide": "low",
+      "inspect": "n-heron"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 4,
+      "active-links": 3,
+      "foods": 1,
+      "food-status": "unchanged",
+      "water-rise": 0,
+      "crab-rise": 0,
+      "show-fiddlers": 1,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 0,
+      "active-e-algae-fiddlers": 0,
+      "active-e-fiddlers-fish": 0,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "removed",
+      "status-n-tree-crabs": "fewer-foods",
+      "status-n-fiddlers": "no-shown-food",
+      "status-n-mudskipper": "fewer-foods",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-algae",
+      "tide": "high",
+      "inspect": "n-tree-crabs"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 4,
+      "active-links": 3,
+      "foods": 1,
+      "food-status": "fewer-foods",
+      "water-rise": 0.14,
+      "crab-rise": 0.16,
+      "show-fiddlers": 0,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 0,
+      "active-e-algae-fiddlers": 0,
+      "active-e-fiddlers-fish": 0,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "removed",
+      "status-n-tree-crabs": "fewer-foods",
+      "status-n-fiddlers": "no-shown-food",
+      "status-n-mudskipper": "fewer-foods",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-algae",
+      "tide": "high",
+      "inspect": "n-fiddlers"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 4,
+      "active-links": 3,
+      "foods": 0,
+      "food-status": "no-shown-food",
+      "water-rise": 0.14,
+      "crab-rise": 0.16,
+      "show-fiddlers": 0,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 0,
+      "active-e-algae-fiddlers": 0,
+      "active-e-fiddlers-fish": 0,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "removed",
+      "status-n-tree-crabs": "fewer-foods",
+      "status-n-fiddlers": "no-shown-food",
+      "status-n-mudskipper": "fewer-foods",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-algae",
+      "tide": "high",
+      "inspect": "n-mudskipper"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 4,
+      "active-links": 3,
+      "foods": 1,
+      "food-status": "fewer-foods",
+      "water-rise": 0.14,
+      "crab-rise": 0.16,
+      "show-fiddlers": 0,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 0,
+      "active-e-algae-fiddlers": 0,
+      "active-e-fiddlers-fish": 0,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "removed",
+      "status-n-tree-crabs": "fewer-foods",
+      "status-n-fiddlers": "no-shown-food",
+      "status-n-mudskipper": "fewer-foods",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-algae",
+      "tide": "high",
+      "inspect": "n-heron"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 4,
+      "active-links": 3,
+      "foods": 1,
+      "food-status": "unchanged",
+      "water-rise": 0.14,
+      "crab-rise": 0.16,
+      "show-fiddlers": 0,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 0,
+      "active-e-algae-fiddlers": 0,
+      "active-e-fiddlers-fish": 0,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "removed",
+      "status-n-tree-crabs": "fewer-foods",
+      "status-n-fiddlers": "no-shown-food",
+      "status-n-mudskipper": "fewer-foods",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-tree-crabs",
+      "tide": "low",
+      "inspect": "n-tree-crabs"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 3,
+      "foods": 0,
+      "food-status": "removed",
+      "water-rise": 0,
+      "crab-rise": 0,
+      "show-fiddlers": 1,
+      "active-e-leaves-tree": 0,
+      "active-e-algae-tree": 0,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 1,
+      "active-e-tree-fish": 0,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "removed",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "fewer-foods",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-tree-crabs",
+      "tide": "low",
+      "inspect": "n-fiddlers"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 3,
+      "foods": 1,
+      "food-status": "unchanged",
+      "water-rise": 0,
+      "crab-rise": 0,
+      "show-fiddlers": 1,
+      "active-e-leaves-tree": 0,
+      "active-e-algae-tree": 0,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 1,
+      "active-e-tree-fish": 0,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "removed",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "fewer-foods",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-tree-crabs",
+      "tide": "low",
+      "inspect": "n-mudskipper"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 3,
+      "foods": 1,
+      "food-status": "fewer-foods",
+      "water-rise": 0,
+      "crab-rise": 0,
+      "show-fiddlers": 1,
+      "active-e-leaves-tree": 0,
+      "active-e-algae-tree": 0,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 1,
+      "active-e-tree-fish": 0,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "removed",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "fewer-foods",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-tree-crabs",
+      "tide": "low",
+      "inspect": "n-heron"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 3,
+      "foods": 1,
+      "food-status": "unchanged",
+      "water-rise": 0,
+      "crab-rise": 0,
+      "show-fiddlers": 1,
+      "active-e-leaves-tree": 0,
+      "active-e-algae-tree": 0,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 1,
+      "active-e-tree-fish": 0,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "removed",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "fewer-foods",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-tree-crabs",
+      "tide": "high",
+      "inspect": "n-tree-crabs"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 3,
+      "foods": 0,
+      "food-status": "removed",
+      "water-rise": 0.14,
+      "crab-rise": 0.16,
+      "show-fiddlers": 0,
+      "active-e-leaves-tree": 0,
+      "active-e-algae-tree": 0,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 1,
+      "active-e-tree-fish": 0,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "removed",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "fewer-foods",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-tree-crabs",
+      "tide": "high",
+      "inspect": "n-fiddlers"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 3,
+      "foods": 1,
+      "food-status": "unchanged",
+      "water-rise": 0.14,
+      "crab-rise": 0.16,
+      "show-fiddlers": 0,
+      "active-e-leaves-tree": 0,
+      "active-e-algae-tree": 0,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 1,
+      "active-e-tree-fish": 0,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "removed",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "fewer-foods",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-tree-crabs",
+      "tide": "high",
+      "inspect": "n-mudskipper"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 3,
+      "foods": 1,
+      "food-status": "fewer-foods",
+      "water-rise": 0.14,
+      "crab-rise": 0.16,
+      "show-fiddlers": 0,
+      "active-e-leaves-tree": 0,
+      "active-e-algae-tree": 0,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 1,
+      "active-e-tree-fish": 0,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "removed",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "fewer-foods",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-tree-crabs",
+      "tide": "high",
+      "inspect": "n-heron"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 3,
+      "foods": 1,
+      "food-status": "unchanged",
+      "water-rise": 0.14,
+      "crab-rise": 0.16,
+      "show-fiddlers": 0,
+      "active-e-leaves-tree": 0,
+      "active-e-algae-tree": 0,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 1,
+      "active-e-tree-fish": 0,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "removed",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "fewer-foods",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-fiddlers",
+      "tide": "low",
+      "inspect": "n-tree-crabs"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 4,
+      "foods": 2,
+      "food-status": "unchanged",
+      "water-rise": 0,
+      "crab-rise": 0,
+      "show-fiddlers": 0,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 0,
+      "active-e-fiddlers-fish": 0,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "unchanged",
+      "status-n-fiddlers": "removed",
+      "status-n-mudskipper": "fewer-foods",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-fiddlers",
+      "tide": "low",
+      "inspect": "n-fiddlers"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 4,
+      "foods": 0,
+      "food-status": "removed",
+      "water-rise": 0,
+      "crab-rise": 0,
+      "show-fiddlers": 0,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 0,
+      "active-e-fiddlers-fish": 0,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "unchanged",
+      "status-n-fiddlers": "removed",
+      "status-n-mudskipper": "fewer-foods",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-fiddlers",
+      "tide": "low",
+      "inspect": "n-mudskipper"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 4,
+      "foods": 1,
+      "food-status": "fewer-foods",
+      "water-rise": 0,
+      "crab-rise": 0,
+      "show-fiddlers": 0,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 0,
+      "active-e-fiddlers-fish": 0,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "unchanged",
+      "status-n-fiddlers": "removed",
+      "status-n-mudskipper": "fewer-foods",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-fiddlers",
+      "tide": "low",
+      "inspect": "n-heron"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 4,
+      "foods": 1,
+      "food-status": "unchanged",
+      "water-rise": 0,
+      "crab-rise": 0,
+      "show-fiddlers": 0,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 0,
+      "active-e-fiddlers-fish": 0,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "unchanged",
+      "status-n-fiddlers": "removed",
+      "status-n-mudskipper": "fewer-foods",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-fiddlers",
+      "tide": "high",
+      "inspect": "n-tree-crabs"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 4,
+      "foods": 2,
+      "food-status": "unchanged",
+      "water-rise": 0.14,
+      "crab-rise": 0.16,
+      "show-fiddlers": 0,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 0,
+      "active-e-fiddlers-fish": 0,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "unchanged",
+      "status-n-fiddlers": "removed",
+      "status-n-mudskipper": "fewer-foods",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-fiddlers",
+      "tide": "high",
+      "inspect": "n-fiddlers"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 4,
+      "foods": 0,
+      "food-status": "removed",
+      "water-rise": 0.14,
+      "crab-rise": 0.16,
+      "show-fiddlers": 0,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 0,
+      "active-e-fiddlers-fish": 0,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "unchanged",
+      "status-n-fiddlers": "removed",
+      "status-n-mudskipper": "fewer-foods",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-fiddlers",
+      "tide": "high",
+      "inspect": "n-mudskipper"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 4,
+      "foods": 1,
+      "food-status": "fewer-foods",
+      "water-rise": 0.14,
+      "crab-rise": 0.16,
+      "show-fiddlers": 0,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 0,
+      "active-e-fiddlers-fish": 0,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "unchanged",
+      "status-n-fiddlers": "removed",
+      "status-n-mudskipper": "fewer-foods",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-fiddlers",
+      "tide": "high",
+      "inspect": "n-heron"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 4,
+      "foods": 1,
+      "food-status": "unchanged",
+      "water-rise": 0.14,
+      "crab-rise": 0.16,
+      "show-fiddlers": 0,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 0,
+      "active-e-fiddlers-fish": 0,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 1,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "unchanged",
+      "status-n-fiddlers": "removed",
+      "status-n-mudskipper": "fewer-foods",
+      "status-n-heron": "unchanged"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-mudskipper",
+      "tide": "low",
+      "inspect": "n-tree-crabs"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 4,
+      "active-links": 3,
+      "foods": 2,
+      "food-status": "unchanged",
+      "water-rise": 0,
+      "crab-rise": 0,
+      "show-fiddlers": 1,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 0,
+      "active-e-tree-fish": 0,
+      "active-e-fish-heron": 0,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "unchanged",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "removed",
+      "status-n-heron": "no-shown-food"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-mudskipper",
+      "tide": "low",
+      "inspect": "n-fiddlers"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 4,
+      "active-links": 3,
+      "foods": 1,
+      "food-status": "unchanged",
+      "water-rise": 0,
+      "crab-rise": 0,
+      "show-fiddlers": 1,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 0,
+      "active-e-tree-fish": 0,
+      "active-e-fish-heron": 0,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "unchanged",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "removed",
+      "status-n-heron": "no-shown-food"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-mudskipper",
+      "tide": "low",
+      "inspect": "n-mudskipper"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 4,
+      "active-links": 3,
+      "foods": 0,
+      "food-status": "removed",
+      "water-rise": 0,
+      "crab-rise": 0,
+      "show-fiddlers": 1,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 0,
+      "active-e-tree-fish": 0,
+      "active-e-fish-heron": 0,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "unchanged",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "removed",
+      "status-n-heron": "no-shown-food"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-mudskipper",
+      "tide": "low",
+      "inspect": "n-heron"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 4,
+      "active-links": 3,
+      "foods": 0,
+      "food-status": "no-shown-food",
+      "water-rise": 0,
+      "crab-rise": 0,
+      "show-fiddlers": 1,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 0,
+      "active-e-tree-fish": 0,
+      "active-e-fish-heron": 0,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "unchanged",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "removed",
+      "status-n-heron": "no-shown-food"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-mudskipper",
+      "tide": "high",
+      "inspect": "n-tree-crabs"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 4,
+      "active-links": 3,
+      "foods": 2,
+      "food-status": "unchanged",
+      "water-rise": 0.14,
+      "crab-rise": 0.16,
+      "show-fiddlers": 0,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 0,
+      "active-e-tree-fish": 0,
+      "active-e-fish-heron": 0,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "unchanged",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "removed",
+      "status-n-heron": "no-shown-food"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-mudskipper",
+      "tide": "high",
+      "inspect": "n-fiddlers"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 4,
+      "active-links": 3,
+      "foods": 1,
+      "food-status": "unchanged",
+      "water-rise": 0.14,
+      "crab-rise": 0.16,
+      "show-fiddlers": 0,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 0,
+      "active-e-tree-fish": 0,
+      "active-e-fish-heron": 0,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "unchanged",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "removed",
+      "status-n-heron": "no-shown-food"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-mudskipper",
+      "tide": "high",
+      "inspect": "n-mudskipper"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 4,
+      "active-links": 3,
+      "foods": 0,
+      "food-status": "removed",
+      "water-rise": 0.14,
+      "crab-rise": 0.16,
+      "show-fiddlers": 0,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 0,
+      "active-e-tree-fish": 0,
+      "active-e-fish-heron": 0,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "unchanged",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "removed",
+      "status-n-heron": "no-shown-food"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-mudskipper",
+      "tide": "high",
+      "inspect": "n-heron"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 4,
+      "active-links": 3,
+      "foods": 0,
+      "food-status": "no-shown-food",
+      "water-rise": 0.14,
+      "crab-rise": 0.16,
+      "show-fiddlers": 0,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 0,
+      "active-e-tree-fish": 0,
+      "active-e-fish-heron": 0,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "unchanged",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "removed",
+      "status-n-heron": "no-shown-food"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-heron",
+      "tide": "low",
+      "inspect": "n-tree-crabs"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 5,
+      "foods": 2,
+      "food-status": "unchanged",
+      "water-rise": 0,
+      "crab-rise": 0,
+      "show-fiddlers": 1,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 1,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 0,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "unchanged",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "unchanged",
+      "status-n-heron": "removed"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-heron",
+      "tide": "low",
+      "inspect": "n-fiddlers"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 5,
+      "foods": 1,
+      "food-status": "unchanged",
+      "water-rise": 0,
+      "crab-rise": 0,
+      "show-fiddlers": 1,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 1,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 0,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "unchanged",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "unchanged",
+      "status-n-heron": "removed"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-heron",
+      "tide": "low",
+      "inspect": "n-mudskipper"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 5,
+      "foods": 2,
+      "food-status": "unchanged",
+      "water-rise": 0,
+      "crab-rise": 0,
+      "show-fiddlers": 1,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 1,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 0,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "unchanged",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "unchanged",
+      "status-n-heron": "removed"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-heron",
+      "tide": "low",
+      "inspect": "n-heron"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 5,
+      "foods": 0,
+      "food-status": "removed",
+      "water-rise": 0,
+      "crab-rise": 0,
+      "show-fiddlers": 1,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 1,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 0,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "unchanged",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "unchanged",
+      "status-n-heron": "removed"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-heron",
+      "tide": "high",
+      "inspect": "n-tree-crabs"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 5,
+      "foods": 2,
+      "food-status": "unchanged",
+      "water-rise": 0.14,
+      "crab-rise": 0.16,
+      "show-fiddlers": 0,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 1,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 0,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "unchanged",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "unchanged",
+      "status-n-heron": "removed"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-heron",
+      "tide": "high",
+      "inspect": "n-fiddlers"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 5,
+      "foods": 1,
+      "food-status": "unchanged",
+      "water-rise": 0.14,
+      "crab-rise": 0.16,
+      "show-fiddlers": 0,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 1,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 0,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "unchanged",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "unchanged",
+      "status-n-heron": "removed"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-heron",
+      "tide": "high",
+      "inspect": "n-mudskipper"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 5,
+      "foods": 2,
+      "food-status": "unchanged",
+      "water-rise": 0.14,
+      "crab-rise": 0.16,
+      "show-fiddlers": 0,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 1,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 0,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "unchanged",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "unchanged",
+      "status-n-heron": "removed"
+    }
+  },
+  {
+    "input": {
+      "remove": "n-heron",
+      "tide": "high",
+      "inspect": "n-heron"
+    },
+    "expected": {
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 5,
+      "foods": 0,
+      "food-status": "removed",
+      "water-rise": 0.14,
+      "crab-rise": 0.16,
+      "show-fiddlers": 0,
+      "active-e-leaves-tree": 1,
+      "active-e-algae-tree": 1,
+      "active-e-algae-fiddlers": 1,
+      "active-e-fiddlers-fish": 1,
+      "active-e-tree-fish": 1,
+      "active-e-fish-heron": 0,
+      "status-n-mangrove": "unchanged",
+      "status-n-algae": "unchanged",
+      "status-n-tree-crabs": "unchanged",
+      "status-n-fiddlers": "unchanged",
+      "status-n-mudskipper": "unchanged",
+      "status-n-heron": "removed"
+    }
+  }
+]

@@ -64,6 +64,7 @@ import { SimOverlays } from './SimOverlays';
 import { TimelineClock } from './TimelineClock';
 import { AnimClocks } from './AnimClocks';
 import { MechanismDriver } from './MechanismDriver';
+import { SpanDriver } from './SpanDriver';
 import type { Matrix4 } from 'three';
 import { getOrbitSession } from '../../lib/sim/orbit-session';
 import { OrbitClockDriver, OrbitDriver } from './OrbitDriver';
@@ -606,7 +607,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
           data={data}
           fitness={fitness}
           rig={rig}
-          input={{ pose: s.pose, exercise: s.exercise, demo: s.demo }}
+          input={{ pose: s.pose, exercise: s.exercise, demo: s.demo, joints: sim?.joints }}
           playable={playable}
           rootRef={rootRef}
           center={bounds.fit.center}
@@ -684,6 +685,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
           />
         );
       })}
+      {data.sim && <SpanDriver data={data} bridge={bridge} handles={handles} />}
       {data.sim && data.sim.overlays.length > 0 && simRun && (
         <SimOverlays
           overlays={data.sim.overlays}
@@ -706,6 +708,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
       {orbitSession && <OrbitDriver orbit={orbitSession} data={data} handles={handles} bridge={bridge} />}
       <Flows airfoil={data.sim?.airfoil ? {file:data,ui,values:resolveSimValues(data.sim,s.sim),on:s.view !== 'exploded' && displays.get(data.sim.airfoil.section.part)?.visible === true,run:s.run && !referenceOn} : undefined} bridge={bridge} flows={data.flows} layers={s.view === 'exploded' ? NO_LAYERS : s.layers} look={look} clipping={clipping} effects={sim?.flows} fieldLines={linesOf} />
       <CameraRig
+        handles={handles}
         orbitSession={orbitSession}
         store={store}
         ui={ui}

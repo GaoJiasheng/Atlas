@@ -1,0 +1,169 @@
+---
+id: changing-tides
+order: 2
+title:
+  en: Changing tides
+  zh: 潮水改变条件
+level: P6
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  pose: null
+  layers:
+  - habitat
+  - mangroves
+  - animals
+  - closeups
+  - food-paths
+  hide:
+  - bacteria-inset
+  - fungi-inset
+  - gill-inset
+  labels:
+  - tidal-water
+  - mud-bank
+  - burrow-mouth
+  camera:
+    position:
+    - 1.6
+    - 0.5
+    - 1.6
+    target:
+    - 0.1
+    - 0.05
+    - 0.1
+    fov: 32
+  summary:
+    en: Rising and falling water changes which parts of the mudbank are exposed.
+    zh: 水位涨落会改变泥岸露出的部分。
+  sim:
+    set:
+      remove: none
+      inspect: n-mudskipper
+      tide: low
+    try:
+      vary: tide
+      keep:
+      - remove
+      - inspect
+      - en: Same selected links
+        zh: 同一组选入关系
+      observe:
+      - water-rise
+      - crab-rise
+      record: true
+  beats:
+  - hide:
+    - bacteria-inset
+    - fungi-inset
+    - gill-inset
+    sim:
+      set:
+        tide: low
+    labels:
+    - tidal-water
+    - mud-bank
+    run: false
+    caption:
+      en: At this low-water pose, more of the mudbank is exposed. The water heights are diagrammatic.
+      zh: 在这个低水位姿态里，更多泥岸露出来；这里的水位高度只是示意。
+  - hide:
+    - bacteria-inset
+    - fungi-inset
+    - gill-inset
+    sim:
+      set:
+        tide: high
+    labels:
+    - tidal-water
+    - burrow-mouth
+    run: false
+    caption:
+      en: Water covers more mud at the high-water pose. This does not count how many animals live here.
+      zh: 在高水位姿态里，水盖住更多泥面；这不能告诉我们这里有多少动物。
+  - hide:
+    - bacteria-inset
+    - fungi-inset
+    - gill-inset
+    sim:
+      set:
+        tide: high
+    labels:
+    - burrow-mouth
+    part: burrow-mouth
+    caption:
+      en: Fiddler crabs can stay in burrows at high tide. Hidden from view does not mean removed from the food web.
+      zh: 高潮时，招潮蟹会留在洞里；看不见它，不等于把它从食物网移走。
+  - hide:
+    - bacteria-inset
+    - fungi-inset
+    - gill-inset
+    sim:
+      set:
+        tide: high
+    labels:
+    - tree-crabs
+    part: tree-crabs
+    caption:
+      en: Some mangrove crabs climb above incoming water. Avoiding aquatic predators is one possible explanation.
+      zh: 有些红树林蟹会爬到涨水水面上方；减少遭遇水中捕食者是一种可能解释。
+  index:
+    parts:
+    - tidal-water
+    - mud-bank
+    - burrow-mouth
+    - fiddler-crabs
+    - tree-crabs
+    - bakau-tree
+---
+
+<Lang en>
+
+At the low-water pose, the channel leaves more of the mudbank exposed. Switch to the high-water pose and compare the same bank: water covers more of its surface. A mangrove shore lies in the <Term id="intertidal">intertidal zone</Term>, where the tide changes water cover. The positions here show a contrast, rather than predicting a tide at a particular hour.
+
+Use the Try it card to vary tide while keeping removal and the inspected node the same. The water and climbing-crab offsets change. The selected food relations and food counts do not. That separation is deliberate: this model uses tide to change the display pose. It has no rule that calculates feeding rates from water depth.
+
+Find the burrow mouth at high water. Fiddler crabs can remain in burrows during high tide. Their drawn bodies disappear in this pose, but their node remains in the food-web card. Hidden is different from removed. A viewer who counts only exposed bodies could confuse a change in visibility with a change in how many animals live there.
+
+The climbing crab moves up the trunk. Some mangrove crabs climb above incoming water; reducing encounters with aquatic predators is one possible explanation. The action is an observation, while its reason requires supporting evidence. Different crab kinds also use trees differently. Do not turn one explanation into a claim that every crab climbs for exactly the same reason.
+
+<More title={{"en": "Tide and rain", "zh": "潮水与雨水"}}>
+
+The tide control represents changing coastal water cover. It is separate from the rainfall and water-cycle processes in <TopicLink slug="water" ch="the-water-cycle">Water</TopicLink>, and the water-supply story in <TopicLink slug="four-taps">Singapore’s Four National Taps</TopicLink>. This scene does not calculate either process.
+
+</More>
+
+<More title={{"en": "Offsets are not tide measurements", "zh": "位移不是潮位测量"}}>
+
+At high water, the scene shifts water by <Num s="S30">0.14</Num> and the climbing-crab group by <Num s="S30">0.16</Num> model units. They are drawing offsets with no real tide datum, interval or forecast attached.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+低水位时，潮沟旁露出较多泥岸。换到高水位，比较同一块岸，水覆盖的泥面增加了。红树林海岸属于<Term id="intertidal">潮间带</Term>，潮水涨退会改变水的覆盖范围。这里显示两种状态的对比，不预报某一天、某个时刻的潮位。
+
+在“试一试”卡片里，只改变潮位，保持移走选择和查看对象相同。水面与攀爬蟹类的位移会变，选入的食物关系与食物计数则不变。这是模型刻意分开的两件事：潮位只改显示姿态，没有根据水深计算取食速率的规则。
+
+高潮时再找洞口。招潮蟹会留在洞里；这个姿态把它的身体藏起，食物网卡上的节点仍然保留。看不见与移走不同。只数露在外面的动物，可能把可见程度的改变，误当成整个生境中动物数量的改变。
+
+树干上的蟹向上移了。有些红树林蟹会爬到涨水水面上方；减少遇上水中捕食者，是一种可能解释。看到行动与解释原因是不同层次的证据。不同蟹类利用树的方式也有差别，不能把一种解释说成所有蟹唯一而确定的原因。判断时，要把观察到的现象与提出的解释分开记录。
+
+<More title={{"en": "Tide and rain", "zh": "潮水与雨水"}}>
+
+潮位控件表示海岸水面覆盖的改变。它与<TopicLink slug="water" ch="the-water-cycle">《水》</TopicLink>里的降雨、水循环，以及<TopicLink slug="four-taps">《新加坡的四大水喉》</TopicLink>里的供水问题分开讨论；本场景不计算这些过程。
+
+</More>
+
+<More title={{"en": "Offsets are not tide measurements", "zh": "位移不是潮位测量"}}>
+
+高水位把场景中的水面移高 <Num s="S30">0.14</Num>、攀爬蟹类移高 <Num s="S30">0.16</Num> 模型单位。这些是画面位移，没有对应的实测潮位基准、时间间隔或预报。
+
+</More>
+
+</Lang>

@@ -1,0 +1,193 @@
+---
+{
+  "id": "quay-to-yard",
+  "order": 3,
+  "title": {
+    "en": "From quay to yard",
+    "zh": "从岸边到堆场"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "cutaway": "none",
+    "run": false,
+    "pose": "transfer-at-yard",
+    "camera": {
+      "position": [
+        75,
+        40,
+        95
+      ],
+      "target": [
+        19,
+        5,
+        39
+      ],
+      "fov": 36
+    },
+    "layers": [
+      "transfer",
+      "yard"
+    ],
+    "hide": [
+      "destination-box",
+      "control-room"
+    ],
+    "part": "yard-target",
+    "labels": [
+      "agv-body",
+      "yard-gantry",
+      "yard-target",
+      "yard-blocker-a",
+      "yard-blocker-b"
+    ],
+    "question": {
+      "en": "Why not put every container in one pile?",
+      "zh": "为什么不能把所有箱子叠成一堆？"
+    },
+    "summary": {
+      "en": "A carrier moves boxes horizontally and a yard crane lifts them; upper boxes can block the one needed.",
+      "zh": "车负责水平运输，场桥负责堆场起吊；上面的箱子会挡住要取的箱子。"
+    },
+    "index": {
+      "parts": [
+        "agv-body",
+        "agv-wheels",
+        "yard-gantry",
+        "yard-trolley",
+        "yard-target",
+        "yard-blocker-a",
+        "yard-blocker-b",
+        "yard-slot"
+      ]
+    },
+    "sim": {
+      "set": {
+        "n20": 2,
+        "n40": 1,
+        "lock-confirmed": true,
+        "above": 2,
+        "yard-state": "original",
+        "cranes": 1,
+        "carriers": 1,
+        "yards": 1,
+        "arrivals": 24,
+        "hours": 2,
+        "lift-live": false
+      },
+      "try": {
+        "vary": "above",
+        "also": [
+          "yard-state"
+        ],
+        "observe": [
+          "rehandles",
+          "retrieval-lifts"
+        ],
+        "record": true
+      }
+    },
+    "beats": [
+      {
+        "part": "agv-body",
+        "caption": {
+          "en": "The low carrier moves a box from wharf to yard; it does not do the quay crane’s lift.",
+          "zh": "低平运输车把箱子从岸边送往堆场，不承担岸桥的起吊动作。"
+        }
+      },
+      {
+        "part": "yard-gantry",
+        "caption": {
+          "en": "The yard crane spans the container rows and lifts boxes within the yard.",
+          "zh": "场桥跨在箱列上方，在堆场内抬起和放下箱子。"
+        }
+      },
+      {
+        "view": "xray",
+        "part": "yard-target",
+        "sim": {
+          "set": {
+            "above": 2,
+            "yard-state": "original"
+          }
+        },
+        "caption": {
+          "en": "This schematic stack aligns the corners; two boxes sit above the target.",
+          "zh": "这个示意箱堆把角部对齐；目标箱上方有两只箱。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "above": 2,
+            "yard-state": "cleared"
+          }
+        },
+        "caption": {
+          "en": "In this model, two blocking boxes must be moved before the target can be retrieved.",
+          "zh": "在这个模型里，先移开两只阻挡箱，再取目标箱。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "above": 2,
+            "yard-state": "retrieved"
+          }
+        },
+        "caption": {
+          "en": "Here we count two rehandles and one retrieval; with no box above, only the target needs lifting.",
+          "zh": "这里数了两次移开和一次取出；若上方没有箱子，只需取出目标。"
+        }
+      }
+    ]
+  }
+}
+---
+<Lang en>
+
+The low carrier connects the quay to the yard. An <Term id="agv">automated guided vehicle</Term>, or AGV, moves loads horizontally under automatic guidance. It does not perform the quay crane’s lift. In this model, the box rests on its deck while travelling; the vehicle’s shape is generic, rather than a particular manufacturer’s design.
+
+The yard crane spans the container rows. It can lift containers within the yard, where waiting boxes need places from which they can later be retrieved. Look at the example stack. Its corner positions line up vertically. This drawing illustrates the relationship of the corners, without specifying a permissible stacking height for a real terminal.
+
+Select the bottom target box. With <Num s="S1">two boxes</Num> above it in this example, the target cannot be taken straight out from above. The upper boxes must be moved first. Moving a box that blocks access is called a <Term id="rehandle">rehandle</Term> here. The before-and-after views show which boxes have changed positions, rather than claiming a complete safe lifting route.
+
+Choose the cleared state, then the retrieved state. The model counts <Num s="S1">2 rehandles plus 1 retrieval lift</Num>. Now set the number above to zero and compare the readings. Only the target’s retrieval remains. Record both cases while keeping the target in the same bottom slot. An extra box in storage can affect access to another box; storage is about arrangement as well as available space.
+
+<More title={{ en: "What the move count includes", zh: "次数算到哪里" }}>
+
+Here, retrieval lifts equal the number above plus <Num s="S1">1</Num>. The count stops when the target is retrieved. Putting the other boxes back would add work, but those restoration moves are excluded. The parking places are schematic, not a recommendation for organising an actual yard.
+
+</More>
+
+<More title={{ en: "A state comparison, not a route", zh: "前后状态，不是搬运路线" }}>
+
+The blocking boxes change directly to their new slots. The model does not draw an invented collision-free path between stacks, calculate stability or assign real yard productivity. The working box traced from the ship and the target in this separate yard experiment are different objects.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+低平运输车把岸边和堆场接起来。<Term id="agv">自动导引车</Term>常用英文简称 AGV，按自动导引水平运送货物，不承担岸桥的起吊动作。在本模型里，箱子靠车的承载面托住。车的外形是通用示意，不对应某个厂商或车型。
+
+场桥跨在箱列上方，负责堆场内的起吊。暂存的箱子不只要放得下，还要能按需要再取出来。看看示例箱堆，上下箱子的角部位置对齐。这个画法说明角部的关系，不是在规定真实码头允许堆多少层，也不表示只有画出的因素才影响堆放。
+
+选中最下面的目标箱。本例中，上方有 <Num s="S1">2 只箱</Num>，挡住从上面取出目标的位置，必须先把它们移开。这里把先移开阻挡箱的动作称为<Term id="rehandle">翻箱</Term>。前后视图说明哪些箱换了位置，没有声称画出了完整、安全的吊运路线。
+
+先选“移开”，再选“已取出”。模型共数了 <Num s="S1">2 次翻箱加 1 次取目标</Num>。再把上方箱数设成零，比较读数，就只剩取目标的动作。保持目标箱的底层位置不变，记下两种情况。堆场里多放一只箱，也可能改变另一只箱能否方便取出，所以存放能力与安排方式也有关。
+
+<More title={{ en: "What the move count includes", zh: "次数算到哪里" }}>
+
+这里总起吊次数等于上方箱数加 <Num s="S1">1</Num>，取出目标就停止计数。把其它箱子再放回去还需要动作，但本模型不计这些复位动作。移箱位置只是示意，不是实际堆场安排建议。
+
+</More>
+
+<More title={{ en: "A state comparison, not a route", zh: "前后状态，不是搬运路线" }}>
+
+阻挡箱直接换到新位置，模型不凭空画出不会碰撞的搬运路径，也不计算稳定性或真实作业效率。沿船追踪的工作箱，与这个独立堆场实验的目标箱，是不同的对象。
+
+</More>
+
+</Lang>

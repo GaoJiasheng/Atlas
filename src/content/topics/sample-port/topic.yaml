@@ -1,0 +1,13 @@
+id: sample-port
+title: { en: "Sample: Port engine", zh: "示例：港口引擎" }
+subtitle: { en: "Draft engine fixture", zh: "引擎草稿测试" }
+subject: geography
+levels: [P4]
+moe: []
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: draft
+note: { en: "Engine fixture · schematic geometry · simulated times and capacities", zh: "引擎测试 · 几何示意 · 时间与能力为模拟" }

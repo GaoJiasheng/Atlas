@@ -1,0 +1,26 @@
+---
+id: before-you-start
+order: 0
+kind: background
+title: { en: "Shared joint fixture", zh: "共用关节测试" }
+state:
+  view: assembled
+  run: false
+  pose: baseline
+  layers: [skeleton]
+  summary: { en: "The left elbow rests at 30° and the right at 25°.", zh: "左肘停在30°，右肘停在25°。" }
+  sim: { set: { mode: explore } }
+  index: { parts: [humerus, radius, ulna, hand, humerus-r, radius-r, ulna-r, hand-r] }
+---
+
+<Lang en>
+
+This draft fixture checks one numeric override through the shared rig. The reference pose stays available when the experiment is inactive.
+
+</Lang>
+
+<Lang zh>
+
+这个草稿测试通过共用骨架覆盖一个数字角度。实验未启用时保留参考姿态。
+
+</Lang>

@@ -1,3 +1,4 @@
+import { solvePort } from './port';
 /**
  * The try-it model registry (docs/22 §4.3 S2; pure, synchronous, well under
  * a millisecond): `evaluateSim(sim, values)` runs the topic's model
@@ -53,6 +54,7 @@ export function simQuantities(sim: SimData, values: SimValues, observe: readonly
   if (sim.kind === 'orbit-rotation' && sim.orbitRotation) return solveOrbitRotation(sim.orbitRotation, values, context);
   if (sim.kind === 'senses' && sim.senses) return solveSenses(sim.senses, values);
   if (sim.kind === 'airfoil' && sim.airfoil) return solveAirfoil(sim.airfoil, values);
+  if (sim.kind === 'port' && sim.port) return solvePort(sim.port, values, parts);
   if (sim.kind === 'light' && sim.light) return solveLight(sim.light, values, sim.controls);
   if (sim.kind === 'sort' && sim.sort) return solveSort(sim.sort, values, parts as readonly SortPart[]);
   if (sim.kind === 'matter' && sim.matter) return solveMatter(sim.matter, values, matterLiquidShapes(parts));
@@ -91,7 +93,7 @@ export function evaluateSim(sim: SimData, values: SimValues, observe: readonly s
  * magnets or one animal's life cycle is one system: its first state (the
  * stage on the day on show) always describes the bench.
  */
-export const SEPARATE_EXPERIMENTS: Readonly<Record<SimKind, boolean>> = { circuit: false, magnet: false, force: true, energy: true, 'life-cycle': false, matter: true, light: true, sort: true, materials: true, table: true, seeds: true, 'orbit-rotation': true, senses: true, airfoil: true };
+export const SEPARATE_EXPERIMENTS: Readonly<Record<SimKind, boolean>> = { circuit: false, magnet: false, force: true, energy: true, 'life-cycle': false, matter: true, light: true, sort: true, materials: true, table: true, seeds: true, 'orbit-rotation': true, airfoil: true, port: true, senses: true };
 
 /** A number output's value (0 for states and vectors; NaN = not applicable here). */
 export const numberOf = (v: SimOutputValue | undefined): number => (typeof v === 'number' ? v : 0);

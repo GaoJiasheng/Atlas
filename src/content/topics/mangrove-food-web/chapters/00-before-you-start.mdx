@@ -1,0 +1,141 @@
+---
+id: before-you-start
+order: 0
+title:
+  en: Before you start
+  zh: 开始之前
+level: P6
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  pose: null
+  layers:
+  - habitat
+  - mangroves
+  - animals
+  - closeups
+  - food-paths
+  hide:
+  - bacteria-inset
+  - fungi-inset
+  - gill-inset
+  labels:
+  - mud-bank
+  - bakau-tree
+  - api-tree
+  camera:
+    position:
+    - 2.2
+    - 1.7
+    - 2.6
+    target:
+    - 0
+    - 0.35
+    - 0
+    fov: 32
+  summary:
+    en: Explore a mangrove model, then follow the food pathways it shows.
+    zh: 先观察红树林模型，再沿着它选入的食物路径读图。
+  sim:
+    set:
+      remove: none
+      inspect: n-mudskipper
+      tide: low
+  beats:
+  - hide:
+    - bacteria-inset
+    - fungi-inset
+    - gill-inset
+    camera: hero
+    labels:
+    - bakau-tree
+    - giant-mudskipper
+    run: false
+    caption:
+      en: This cutaway is a teaching model inspired by Singapore mangroves. It is not a surveyed map of Sungei Buloh.
+      zh: 这是一块参考新加坡红树林的教学剖面，不是双溪布洛的测绘地图。
+  - hide:
+    - bacteria-inset
+    - fungi-inset
+    - gill-inset
+    camera: roots-view
+    cutaway: mud
+    labels:
+    - api-lateral
+    - api-pencil
+    caption:
+      en: A root close-up reveals a connected system below and above the mud.
+      zh: 根部近景把泥上和泥下相连的根系显露出来。
+  - hide:
+    - bacteria-inset
+    - fungi-inset
+    - gill-inset
+    camera: web-view
+    labels:
+    - giant-mudskipper
+    - heron
+    caption:
+      en: The selected links show food reaching consumers. Many other links are outside this model.
+      zh: 选入的线表示食物传给消费者；许多其他关系没有画进这个模型。
+  index:
+    parts:
+    - mud-bank
+    - bakau-tree
+    - api-tree
+    - giant-mudskipper
+    - heron
+    - api-lateral
+    - api-pencil
+kind: background
+---
+
+<Lang en>
+
+Look across the mudbank: trees stand above the water, crabs are near the roots, a mudskipper rests on the mud, and a heron stands beside the channel. Sungei Buloh Wetland Reserve has mangroves and many kinds of animals. This scene uses that Singapore setting to study relationships. Its positions and drawn animals are an arrangement for learning, rather than a record of one visit.
+
+Start by selecting a tree or animal. The label names the object; its detail explains a structure, an action or a relationship. The chapter index lets you return to each object. Move through the beat marks to compare the whole habitat, connected roots and selected food pathways. A close-up can make something small easier to examine without showing its real size.
+
+The food-web card is a separate diagram. Read each arrow from food to the organism that eats it. It selects <Num s="S30">6</Num> functional nodes and <Num s="S30">6</Num> possible links in this model. A node may combine several kinds of organisms. It is not a census, and the diagram does not claim that every link happened together at Sungei Buloh.
+
+Later, change a removal control, inspect the pathways and record a comparison. Make a prediction before changing it. Explain what the selected graph shows, then say what further evidence you would need for a real habitat. Food availability, other organisms and physical conditions all matter; a feeding diagram describes only part of that system.
+
+<More title={{"en": "A model and a field observation", "zh": "模型与实地观察"}}>
+
+The mudbank, tide poses and counts belong to this teaching design. No map, abundance survey, death rate or population forecast is supplied. The enlarged microbe and gill displays are diagrams, not specimens drawn to a shared scale.
+
+</More>
+
+<More title={{"en": "Classification and relationships", "zh": "分类与关系"}}>
+
+Use <TopicLink slug="living-things" ch="animal-groups">Classifying Living Things</TopicLink> to revisit the features used to group animals. Here the question changes: which conditions and relationships affect their survival?
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+先看泥岸全景：水面上方有树，根边有蟹，泥上有弹涂鱼，潮沟旁站着鹭。双溪布洛湿地保护区有红树林，也有许多动物。本主题借用这个新加坡背景来研究关系；这里的摆放位置和动物数量是教学安排，不是某次到访的记录。
+
+点选树或动物，先读名字，再看详情怎样解释它的结构、行动或关系。本章索引可以让你重新选中这些对象。依次点节拍刻度，比较生境全景、相连的根和选入的食物路径。近景把细小部分放大，便于观察，并不表示实物有这么大。
+
+旁边的食物网卡是另一种读图方式。每条箭头从食物指向吃它的生物。这个模型选了 <Num s="S30">6</Num> 个功能节点和 <Num s="S30">6</Num> 条可能关系；一个节点可以合并几类生物。这不是生物数量调查，也不表示所有关系曾同时发生在双溪布洛。
+
+后面可以改变“移走”控件，查看留下的路径，并记录前后比较。改变之前先作预测；解释时先说图里看见什么，再说还缺什么证据。食物、其他生物和物理条件都会影响生存，取食图只表现其中一部分。每章都可以先读正文，再回到画面检查。
+
+<More title={{"en": "A model and a field observation", "zh": "模型与实地观察"}}>
+
+泥岸、潮位姿态和计数属于本教学设计。这里没有测绘地图、数量调查、死亡速率或种群预测。放大的微生物和鳃腔是示意图，各对象没有共同的实物比例。
+
+</More>
+
+<More title={{"en": "Classification and relationships", "zh": "分类与关系"}}>
+
+要重温怎样按特征给动物分类，可看<TopicLink slug="living-things" ch="animal-groups">《生物的分类》</TopicLink>。这里接着研究：哪些条件与关系影响它们的生存？
+
+</More>
+
+</Lang>

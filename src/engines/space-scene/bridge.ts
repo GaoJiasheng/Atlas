@@ -97,6 +97,16 @@ export interface ShiftReading {
   delay: number;
 }
 
+/** A span's drawn endpoints and centre in model metres, plus cylinder-local → model matrix. */
+export interface SpanReading {
+  from: [number, number, number];
+  to: [number, number, number];
+  centre: [number, number, number];
+  length: number;
+  shown: boolean;
+  matrix: number[];
+}
+
 /** An animation now (docs/40 §4.3): its frequency (Hz), cycle phase (0–1) and how far it is switched on. */
 export interface AnimationReading {
   hz: number;
@@ -130,8 +140,13 @@ export interface SensesReading {
 export interface StageBridge {
   senses: SensesReading;
   sensesSeek(cycles: number): boolean;
+  /** Actual rig rotations and world origins after skinning motion (QA only). */
+  joints: Map<string, { angles: Record<string, number>; position: number[]; quaternion: number[] }>;
+  /** Measured free stage band for opt-in camera framing. */
+  freeStage?: import('./lib/hud-framing').FrameRect;
   /** Orbit sims (docs/44 §4.10): what OrbitDriver really drew for the snapshot `snapshotId` (world position / quaternion / scale, Sun uniforms). */
   orbitRendered?: { snapshotId: number; parts: Record<string, { position: number[]; quaternion: number[]; scale: number[]; visible: boolean }>; solarDirections: Record<string, number[]> };
+  spans: Map<string, SpanReading>;
   mechanisms: Map<string, MechanismReading>;
   seekMechanism(id: string, deg: number): boolean;
   resetMechanisms(): void;
@@ -211,6 +226,7 @@ export function createBridge(): StageBridge {
   return {
     senses: {},
     sensesSeek: () => false,
+    spans: new Map(),
     mechanisms: new Map(),
     seekMechanism: () => false,
     resetMechanisms: () => {},
@@ -227,6 +243,7 @@ export function createBridge(): StageBridge {
     fills: new Map(),
     animations: new Map(),
     copies: new Map(),
+    joints: new Map(),
     tints: new Map(),
     bends: new Map(),
     shifts: new Map(),

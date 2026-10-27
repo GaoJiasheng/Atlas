@@ -73,6 +73,24 @@ and `docs/screenshots/heart-and-lungs/` are derived from Z-Anatomy
 `THIRD-PARTY-NOTICES.md`. The texts and the other data files of these topics stay
 under CC BY-NC-SA 4.0 as above.
 
+Exception — bones and joints (topic `bones-and-joints`): the model
+`public/models/bones-and-joints.glb`, the entire
+`src/content/topics/bones-and-joints/data/parts.json`, the geometry manifests,
+rig and audit data under `scripts/anatomy/bones-joints/`, the detail texts and
+teaching-specimen generators under `scripts/geo/bones-and-joints/`, and model
+screenshots under `docs/screenshots/bones-and-joints/` are licensed CC BY-SA 4.0
+(https://creativecommons.org/licenses/by-sa/4.0/). These files combine selected
+Z-Anatomy / BodyParts3D geometry with Atlas's original teaching geometry,
+independently written labels and mathematical model configuration, all offered
+under that same licence. Attribution and changes are recorded in
+`THIRD-PARTY-NOTICES.md` and the topic's `data/SOURCES.md`. OpenStax-derived
+educational prose and glossary definitions remain in separate chapter and
+glossary files under CC BY-NC-SA 4.0. The independent graphite illustrations
+were not made from Z-Anatomy renders and retain the default CC BY-NC-SA 4.0.
+
+The draft rig-binding fixture `src/content/topics/sample-joint/data/parts.json`
+reuses the arm model rig and is also CC BY-SA 4.0 under the same attribution.
+
 Dinosaur Earth (topic `dinosaur-earth`) data-family notice: reconstructed land
 and coastline files `public/geo/de-land-*.json` adapt PALEOMAP PaleoDEMs v2 by
 Christopher R. Scotese and Nicky Wright (2018), upstream CC BY 4.0

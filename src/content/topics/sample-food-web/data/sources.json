@@ -1,0 +1,19 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "Sample relation evidence for the draft engine fixture.",
+        "zh": "引擎草稿示例的关系证据。"
+      }
+    },
+    {
+      "id": "S2",
+      "design": true,
+      "text": {
+        "en": "Sample design study: fixed six-node teaching graph and lookup counts. No population dynamics.",
+        "zh": "示例设计研究：固定六节点教学图与查表计数，不模拟种群动态。"
+      }
+    }
+  ]
+}
