@@ -514,7 +514,7 @@ export function SimOverlays({
         />
       )}
       {overlays.map((o, i) => {
-        if (o.kind === 'energy-bars') return null;
+        if (o.kind === 'energy-bars' || o.kind === 'orbit-guides' || o.kind === 'orbit-eclipse-shadow') return null;
         if (o.kind === 'shadow-cast') return <ShadowCast key={i} overlay={o} index={i} sim={sim} values={resolved} outputs={outputs} handles={handles} displays={displays} layers={layers} exploded={exploded} look={look} snapKey={snapKey} bridge={bridge} />;
         if (o.kind === 'force-vectors')
           return (

@@ -1,0 +1,10 @@
+id: sample-orbit
+title: { en: "Sample: Sun, Earth and Moon", zh: "示例：太阳、地球与月球" }
+subtitle: { en: "Draft circular orbit engine fixture", zh: "圆轨道引擎草稿测试" }
+subject: science
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+status: draft
+note: { en: "SIM · undated circular teaching model · schematic sizes · faint dark-side teaching fill", zh: "模拟 · 无日期圆轨道教具 · 示意大小 · 暗侧为教学填光" }

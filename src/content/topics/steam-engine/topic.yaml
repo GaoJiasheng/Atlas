@@ -1,0 +1,16 @@
+id: steam-engine
+title: { en: "Watt’s Steam Engine", zh: "瓦特蒸汽机" }
+shortTitle: { en: "Steam Engine", zh: "蒸汽机" }
+subtitle: { en: "Pressure, condensation and a linked machine", zh: "压强、凝结与联动的机器" }
+subject: science
+tags: [beyond-syllabus, space]
+levels: [P5, P6]
+moe: []
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: published
+illustration: steam-engine
+note: { en: "Mechanism study after the preserved 1788 Lap engine · reconstructed links and enlarged clearances · model pressures, static governor positions and energy shares.", zh: "以保存的1788年Lap蒸汽机为参考的机构研究 · 连杆重建、间隙放大 · 压力、调速器静态位置和能量份数为模型值" }

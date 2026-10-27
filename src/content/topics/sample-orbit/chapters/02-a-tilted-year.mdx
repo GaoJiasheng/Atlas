@@ -1,0 +1,155 @@
+---
+{
+  "id": "a-tilted-year",
+  "order": 2,
+  "title": {
+    "en": "Sample 2 · a tilted year",
+    "zh": "示例 2 · 模型对照"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "cutaway": "none",
+    "ghost": [],
+    "layers": [
+      "solar-body",
+      "earth-system",
+      "moon-system",
+      "orbital-guides"
+    ],
+    "labels": [
+      "earth-body",
+      "moon-body"
+    ],
+    "camera": {
+      "position": [
+        0,
+        9,
+        0.1
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ],
+      "fov": 42
+    },
+    "index": {
+      "parts": [
+        "sun-body",
+        "earth-body",
+        "moon-body",
+        "observer-marker",
+        "near-side-mark",
+        "earth-axis",
+        "equator-ring",
+        "earth-track",
+        "lunar-track",
+        "orbital-plane",
+        "node-line",
+        "light-ray-guide",
+        "scale-ruler"
+      ]
+    },
+    "sim": {
+      "set": {
+        "lab": "year",
+        "elapsed": 0,
+        "year-angle": 0,
+        "lunar-angle": 0,
+        "spin-angle": 180,
+        "obliquity": 23.44,
+        "lunar-tilt": 5.145,
+        "node-angle": 0,
+        "observer-lat": 45,
+        "moon-range": 384400,
+        "synchronous": true,
+        "scale-mode": "schematic",
+        "day-index": 1
+      },
+      "try": {
+        "vary": "year-angle",
+        "also": [
+          "obliquity",
+          "observer-lat"
+        ],
+        "observe": [
+          "geometric-daylight-hours",
+          "noon-altitude-deg"
+        ],
+        "record": true
+      }
+    },
+    "beats": [
+      {
+        "sim": {
+          "set": {}
+        },
+        "caption": {
+          "en": "Sample 2.1: circular model comparison.",
+          "zh": "示例 2.1：圆轨道模型对照。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "year-angle": 90
+          }
+        },
+        "caption": {
+          "en": "Sample 2.2: circular model comparison.",
+          "zh": "示例 2.2：圆轨道模型对照。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "year-angle": 270
+          }
+        },
+        "caption": {
+          "en": "Sample 2.3: circular model comparison.",
+          "zh": "示例 2.3：圆轨道模型对照。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "year-angle": 90,
+            "observer-lat": -45
+          }
+        },
+        "caption": {
+          "en": "Sample 2.4: circular model comparison.",
+          "zh": "示例 2.4：圆轨道模型对照。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "year-angle": 90,
+            "obliquity": 0
+          }
+        },
+        "caption": {
+          "en": "Sample 2.5: circular model comparison.",
+          "zh": "示例 2.5：圆轨道模型对照。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Draft engine fixture. Compare model geometry and computed readings. The dark side uses a faint teaching fill; this is no dated sky prediction.
+
+</Lang>
+
+<Lang zh>
+
+引擎草稿测试。比较模型几何与计算读数。暗侧采用微弱教学填光；此模型不预测具体日期的天空。
+
+</Lang>

@@ -1,0 +1,17 @@
+{
+  "licence": "Atlas selection and original bilingual metadata: CC BY-NC-SA 4.0; underlying NE public domain and GeoNames CC BY 4.0",
+  "shareAlikeFamily": "CC BY-NC-SA only; no CC BY-SA source adapted",
+  "sources": [
+    "D02",
+    "D03",
+    "D04"
+  ],
+  "features": 17,
+  "extent": [
+    39.49808,
+    -8.95897,
+    119.2981,
+    32.051965
+  ],
+  "warning": "Geographic anchors do not establish a visit, a precise site, or historical coastline. Historical role is separately fact-referenced."
+}
