@@ -12,8 +12,8 @@
         "zh": "把机翼、尾翼和客舱连成一体。"
       },
       "detail": {
-        "en": "The long body of the generic airliner: the wings, the tail and the cockpit are all attached to it, and the passengers and cargo ride inside. It is on the stage in the background chapter and in chapters 01, 04, 06 and 07; the four-force arrows of chapter 01 start from its outline.\n\nThe design airliner is 40 m long, 36 m across the wings and 12 m high, drawn ten times smaller [S58]. Everything the fuselage carries, including the fuel and the load, adds to the weight that the wings must balance in level flight [S1].\n\nIt is a generic shape with no windows of any real type, and no maker, model or airline is meant [S58].",
-        "zh": "通用客机的长条形机体：机翼、尾翼和驾驶舱都装在它上面，乘客和货物在里面。背景章和第 01、04、06、07 章的舞台上都有它；第 01 章的四力箭头从它的轮廓画出。\n\n设计中的客机长 40 米、翼展 36 米、高 12 米，按十分之一画出 [S58]。机身所载的一切，包括燃油和人与货物，都计入重力；水平飞行时，机翼的升力要与它平衡 [S1]。\n\n这是通用外形，不对应任何制造商、型号或航空公司 [S58]。"
+        "en": "The long body of the generic airliner: the wings, the tail and the cockpit are all attached to it, and the passengers and cargo ride inside. It is on the stage in the background chapter and in chapters 01, 04, 06 and 07; the four-force arrows of chapter 01 start from its outline.\n\nThe design airliner is nominally about 40 m long, 36 m across the wings and 12 m high, drawn ten times smaller [S58]. Everything the fuselage carries, including the fuel and the load, adds to the weight that the wings must balance in level flight [S1].\n\nIt is a generic shape with no windows of any real type, and no maker, model or airline is meant [S58].",
+        "zh": "通用客机的长条形机体：机翼、尾翼和驾驶舱都装在它上面，乘客和货物在里面。背景章和第 01、04、06、07 章的舞台上都有它；第 01 章的四力箭头从它的轮廓画出。\n\n设计中的客机名义尺寸约长 40 米、翼展 36 米、高 12 米，按十分之一画出 [S58]。机身所载的一切，包括燃油和人与货物，都计入重力；水平飞行时，机翼的升力要与它平衡 [S1]。\n\n这是通用外形，不对应任何制造商、型号或航空公司 [S58]。"
       },
       "primitive": {
         "kind": "sweep",
@@ -622,8 +622,8 @@
         "bevel": 0.004,
         "at": [
           0.31,
-          1.1585,
-          1.784
+          1.1501,
+          1.7
         ],
         "rotation": [
           12,
@@ -683,8 +683,8 @@
         "bevel": 0.004,
         "at": [
           0.31,
-          1.1585,
-          -1.784
+          1.1501,
+          -1.7
         ],
         "rotation": [
           -12,
@@ -720,6 +720,7 @@
         "en": "The outer skin of a separate wing-box model, shown only in chapter 02, beat 1, where it is drawn faint so that the spars and ribs show through. It forms the wing’s smooth surface.\n\nTwo spars, the skin panels and the ribs at their ends together make a closed box, one common way of building a wing; real structures vary with the design [S43]. This short piece is a generic example drawn for structure, not at the airliner’s scale [S58].\n\nThe skin is the surface the air flows over; its shape comes from the ribs underneath [S43].",
         "zh": "一个独立翼盒模型的外层蒙皮，只在第 02 章第 1 拍出现；那一拍把它画得很淡，透出里面的翼梁和翼肋。它构成机翼平滑的表面。\n\n两根翼梁、蒙皮板和两端的翼肋合成一个封闭的盒，这是机翼常见的一种做法；真实结构随设计而不同 [S43]。这一小段是为说明结构画的通用样件，不按客机的比例 [S58]。\n\n空气流过的就是蒙皮的表面；它的形状由下面的翼肋撑出来 [S43]。"
       },
+      "shell": true,
       "primitive": {
         "kind": "extrude",
         "shape": [
@@ -2017,8 +2018,8 @@
         "zh": "从机翼上表面抬起，减升增阻。"
       },
       "detail": {
-        "en": "A panel on the upper surface of the left wing, ahead of the flap; it is mentioned in chapter 04 and lies flat in the model.\n\nSpoilers reduce lift and add drag; they are different from flaps [S8]. Only one panel is drawn, on the left wing, to keep the picture clear; this says nothing about how many a real wing has [S58].",
-        "zh": "左翼上表面、襟翼前方的一块板，在第 04 章提到；模型里它是收平的。\n\n扰流板减少升力、增加阻力，与襟翼不同 [S8]。为了画面清楚，只在左翼画了一块，这并不说明真实机翼上有几块 [S58]。"
+        "en": "A panel on the upper surface of the left wing, ahead of the flap; it rises in chapter 04’s last pose, independently of the flaps.\n\nSpoilers reduce lift and add drag; they are different from flaps [S8]. Only one panel is drawn, on the left wing, to keep the picture clear; this says nothing about how many a real wing has [S58].",
+        "zh": "左翼上表面、襟翼前方的一块板，在第 04 章最后一个姿态中抬起，与襟翼分开。\n\n扰流板减少升力、增加阻力，与襟翼不同 [S8]。为了画面清楚，只在左翼画了一块，这并不说明真实机翼上有几块 [S58]。"
       },
       "primitive": {
         "kind": "extrude",
@@ -2231,7 +2232,7 @@
             -0.66
           ],
           [
-            -0.2624,
+            -0.2623,
             -0.052,
             -0.495
           ],
@@ -2271,7 +2272,7 @@
             0.66
           ]
         ],
-        "radius": 0.027,
+        "radius": 0.016,
         "section": {
           "flat": 0.48
         },
@@ -2282,7 +2283,7 @@
         ],
         "radial": 16,
         "at": [
-          -0.0992,
+          -0.1412,
           1.0783,
           0.96
         ],
@@ -2325,7 +2326,7 @@
             0.66
           ],
           [
-            -0.2624,
+            -0.2623,
             -0.052,
             0.495
           ],
@@ -2365,7 +2366,7 @@
             -0.66
           ]
         ],
-        "radius": 0.027,
+        "radius": 0.016,
         "section": {
           "flat": 0.48
         },
@@ -2376,7 +2377,7 @@
         ],
         "radial": 16,
         "at": [
-          -0.0992,
+          -0.1412,
           1.0783,
           -0.96
         ],
@@ -3226,6 +3227,7 @@
         "en": "The outer casing of the separate turbofan cutaway, seen in chapter 05 and in beat 3 of the background chapter. The half facing you is cut away so the inside shows; the fixed guide vanes behind the fan belong to it.\n\nAir enters through the inlet at the front, and the fan splits it between the core and the bypass stream around it [S9]. The cutaway is drawn for structure; its size has no common scale with the airliner [S58].",
         "zh": "独立涡扇剖面模型的外壳，见第 05 章和背景章第 3 拍。朝向你的一半被剖掉，露出里面；风扇后面固定不动的导向叶片也属于它。\n\n空气从前方的进气口进入，风扇把它分成穿过核心的一股和绕过核心的外涵气流 [S9]。这个剖面只用来说明结构，尺寸与客机没有共同比例尺 [S58]。"
       },
+      "shell": true,
       "primitive": {
         "kind": "lathe",
         "profile": [
@@ -3545,6 +3547,7 @@
         "en": "The ring-shaped channel between the core and the engine case, chapter 05, beat 2. Air pushed by the outer part of the fan flows through it.\n\nBypass air goes around the combustor and turbines and never passes through them; it leaves through the bypass outlet and adds to the thrust [S9].\n\nEngineers compare the two streams with the bypass ratio, a ratio of air mass flows; the dots on the stage show the route, not the amount [S9, S58].",
         "zh": "核心与发动机外壳之间的环形通道，见第 05 章第 2 拍。风扇外圈推动的空气从这里流过。\n\n外涵空气绕过燃烧室和涡轮，从不穿过它们；它从外涵出口排出，也贡献推力 [S9]。\n\n工程师用涵道比比较两股气流，那是空气质量流量之比；舞台上的点只表示路线，不表示流量 [S9, S58]。"
       },
+      "shell": true,
       "primitive": {
         "kind": "lathe",
         "profile": [
@@ -3916,12 +3919,12 @@
           "kind": "box",
           "size": [
             0.03,
-            0.0842,
+            0.0882,
             0.0045
           ],
           "at": [
             -0.46,
-            0.9134,
+            0.9114,
             -2.8
           ],
           "rotation": [
@@ -3935,12 +3938,12 @@
           "kind": "box",
           "size": [
             0.03,
-            0.0692,
+            0.0732,
             0.0045
           ],
           "at": [
             -0.35,
-            0.9094,
+            0.9074,
             -2.8
           ],
           "rotation": [
@@ -3954,12 +3957,12 @@
           "kind": "box",
           "size": [
             0.03,
-            0.0548,
+            0.0588,
             0.0045
           ],
           "at": [
             -0.24,
-            0.9057,
+            0.9037,
             -2.8
           ],
           "rotation": [
@@ -3973,12 +3976,12 @@
           "kind": "box",
           "size": [
             0.03,
-            0.0418,
+            0.0458,
             0.0045
           ],
           "at": [
             -0.13,
-            0.9027,
+            0.9007,
             -2.8
           ],
           "rotation": [
@@ -4030,10 +4033,6 @@
         "kind": "lathe",
         "profile": [
           [
-            0.082,
-            0.03
-          ],
-          [
             0.152,
             0.03
           ],
@@ -4050,19 +4049,23 @@
             0.212
           ],
           [
-            0.096,
+            0.136,
             0.212
           ],
           [
-            0.08,
+            0.151,
             0.17
           ],
           [
-            0.078,
+            0.154,
             0.08
           ],
           [
-            0.082,
+            0.146,
+            0.03
+          ],
+          [
+            0.152,
             0.03
           ]
         ],
@@ -4079,6 +4082,61 @@
         ],
         "color": "stainless"
       },
+      "extra": [
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0.082,
+              0.03
+            ],
+            [
+              0.078,
+              0.08
+            ],
+            [
+              0.08,
+              0.17
+            ],
+            [
+              0.096,
+              0.212
+            ],
+            [
+              0.102,
+              0.212
+            ],
+            [
+              0.086,
+              0.17
+            ],
+            [
+              0.084,
+              0.08
+            ],
+            [
+              0.088,
+              0.03
+            ],
+            [
+              0.082,
+              0.03
+            ]
+          ],
+          "segments": 64,
+          "at": [
+            0,
+            0.8,
+            -2.8
+          ],
+          "rotation": [
+            0,
+            0,
+            -90
+          ],
+          "color": "stainless"
+        }
+      ],
       "explode": {
         "dir": [
           0,
@@ -4247,12 +4305,12 @@
           "kind": "box",
           "size": [
             0.032,
-            0.0534,
+            0.0574,
             0.0045
           ],
           "at": [
             0.295,
-            0.9117,
+            0.9097,
             -2.8
           ],
           "rotation": [
@@ -4319,12 +4377,12 @@
           "kind": "box",
           "size": [
             0.032,
-            0.0607,
+            0.0647,
             0.0045
           ],
           "at": [
             0.44,
-            0.9254,
+            0.9234,
             -2.8
           ],
           "rotation": [
@@ -4338,12 +4396,12 @@
           "kind": "box",
           "size": [
             0.032,
-            0.071,
+            0.075,
             0.0045
           ],
           "at": [
             0.565,
-            0.9305,
+            0.9285,
             -2.8
           ],
           "rotation": [
@@ -4509,6 +4567,80 @@
         "color": "steel"
       },
       "extra": [
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0.034,
+              -0.495
+            ],
+            [
+              0.07,
+              -0.495
+            ],
+            [
+              0.07,
+              -0.487
+            ],
+            [
+              0.034,
+              -0.487
+            ],
+            [
+              0.034,
+              -0.495
+            ]
+          ],
+          "segments": 64,
+          "at": [
+            0,
+            0.8,
+            -2.8
+          ],
+          "rotation": [
+            0,
+            0,
+            -90
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0.034,
+              -0.038
+            ],
+            [
+              0.084,
+              -0.038
+            ],
+            [
+              0.084,
+              -0.03
+            ],
+            [
+              0.034,
+              -0.03
+            ],
+            [
+              0.034,
+              -0.038
+            ]
+          ],
+          "segments": 64,
+          "at": [
+            0,
+            0.8,
+            -2.8
+          ],
+          "rotation": [
+            0,
+            0,
+            -90
+          ],
+          "color": "steel"
+        },
         {
           "kind": "lathe",
           "profile": [
@@ -6071,6 +6203,558 @@
   ],
   "animations": [
     {
+      "id": "balanced-travel-fuselage-shell",
+      "target": "fuselage-shell",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-cockpit-glazing",
+      "target": "cockpit-glazing",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-wing-left",
+      "target": "wing-left",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-wing-right",
+      "target": "wing-right",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-wing-tip-left",
+      "target": "wing-tip-left",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-wing-tip-right",
+      "target": "wing-tip-right",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-aileron-left",
+      "target": "aileron-left",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-aileron-right",
+      "target": "aileron-right",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-spoiler-left",
+      "target": "spoiler-left",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-flap-left",
+      "target": "flap-left",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-flap-right",
+      "target": "flap-right",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-slat-left",
+      "target": "slat-left",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-slat-right",
+      "target": "slat-right",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-tailplane-left",
+      "target": "tailplane-left",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-tailplane-right",
+      "target": "tailplane-right",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-elevator-left",
+      "target": "elevator-left",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-elevator-right",
+      "target": "elevator-right",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-fin",
+      "target": "fin",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-rudder",
+      "target": "rudder",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-nacelle-left",
+      "target": "nacelle-left",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-nacelle-right",
+      "target": "nacelle-right",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-fan-left",
+      "target": "fan-left",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balanced-travel-fan-right",
+      "target": "fan-right",
+      "kind": "sequence",
+      "loop": false,
+      "keys": [
+        {
+          "t": 0,
+          "offset": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "t": 2,
+          "offset": [
+            -0.3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
       "id": "fan-left-spin",
       "target": "fan-left",
       "kind": "rotate",
@@ -6505,171 +7189,19 @@
         ]
       }
     },
-    "balanced-travel": {
-      "duration": 2,
-      "fuselage-shell": {
-        "offset": [
-          -0.3,
-          0,
-          0
-        ]
-      },
-      "cockpit-glazing": {
-        "offset": [
-          -0.3,
-          0,
-          0
-        ]
-      },
-      "wing-left": {
-        "offset": [
-          -0.3,
-          0,
-          0
-        ]
-      },
-      "wing-right": {
-        "offset": [
-          -0.3,
-          0,
-          0
-        ]
-      },
-      "wing-tip-left": {
-        "offset": [
-          -0.3,
-          0,
-          0
-        ]
-      },
-      "wing-tip-right": {
-        "offset": [
-          -0.3,
-          0,
-          0
-        ]
-      },
-      "aileron-left": {
-        "offset": [
-          -0.3,
-          0,
-          0
-        ]
-      },
-      "aileron-right": {
-        "offset": [
-          -0.3,
-          0,
-          0
-        ]
-      },
-      "spoiler-left": {
-        "offset": [
-          -0.3,
-          0,
-          0
-        ]
-      },
-      "flap-left": {
-        "offset": [
-          -0.3,
-          0,
-          0
-        ]
-      },
-      "flap-right": {
-        "offset": [
-          -0.3,
-          0,
-          0
-        ]
-      },
-      "slat-left": {
-        "offset": [
-          -0.3,
-          0,
-          0
-        ]
-      },
-      "slat-right": {
-        "offset": [
-          -0.3,
-          0,
-          0
-        ]
-      },
-      "tailplane-left": {
-        "offset": [
-          -0.3,
-          0,
-          0
-        ]
-      },
-      "tailplane-right": {
-        "offset": [
-          -0.3,
-          0,
-          0
-        ]
-      },
-      "elevator-left": {
-        "offset": [
-          -0.3,
-          0,
-          0
-        ]
-      },
-      "elevator-right": {
-        "offset": [
-          -0.3,
-          0,
-          0
-        ]
-      },
-      "fin": {
-        "offset": [
-          -0.3,
-          0,
-          0
-        ]
-      },
-      "rudder": {
-        "offset": [
-          -0.3,
-          0,
-          0
-        ]
-      },
-      "nacelle-left": {
-        "offset": [
-          -0.3,
-          0,
-          0
-        ]
-      },
-      "nacelle-right": {
-        "offset": [
-          -0.3,
-          0,
-          0
-        ]
-      },
-      "fan-left": {
-        "offset": [
-          -0.3,
-          0,
-          0
-        ]
-      },
-      "fan-right": {
-        "offset": [
-          -0.3,
-          0,
-          0
-        ]
-      }
-    },
     "high-lift-open": {
+      "spoiler-left": {
+        "pivot": [
+          0.0248,
+          1.0414,
+          0.42
+        ],
+        "rotation": [
+          6.8346,
+          5.7227,
+          33.5404
+        ]
+      },
       "flap-left": {
         "pivot": [
           0.0765,
@@ -6844,9 +7376,9 @@
       },
       "camera": {
         "position": [
-          8.3,
-          3.05,
-          1.5
+          6.1,
+          2.5,
+          1.15
         ],
         "target": [
           0.35,
@@ -7314,6 +7846,37 @@
       }
     ],
     "bind": [
+      {
+        "control": "diagram-case",
+        "animation": [
+          "balanced-travel-fuselage-shell",
+          "balanced-travel-cockpit-glazing",
+          "balanced-travel-wing-left",
+          "balanced-travel-wing-right",
+          "balanced-travel-wing-tip-left",
+          "balanced-travel-wing-tip-right",
+          "balanced-travel-aileron-left",
+          "balanced-travel-aileron-right",
+          "balanced-travel-spoiler-left",
+          "balanced-travel-flap-left",
+          "balanced-travel-flap-right",
+          "balanced-travel-slat-left",
+          "balanced-travel-slat-right",
+          "balanced-travel-tailplane-left",
+          "balanced-travel-tailplane-right",
+          "balanced-travel-elevator-left",
+          "balanced-travel-elevator-right",
+          "balanced-travel-fin",
+          "balanced-travel-rudder",
+          "balanced-travel-nacelle-left",
+          "balanced-travel-nacelle-right",
+          "balanced-travel-fan-left",
+          "balanced-travel-fan-right"
+        ],
+        "enabled": {
+          "eq": "level"
+        }
+      },
       {
         "control": "angle-deg",
         "part": [

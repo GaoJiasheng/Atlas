@@ -22,12 +22,12 @@ export const PART_TEXT: Record<string, PartText> = {
     detail: p(
       [
         'The long body of the generic airliner: the wings, the tail and the cockpit are all attached to it, and the passengers and cargo ride inside. It is on the stage in the background chapter and in chapters 01, 04, 06 and 07; the four-force arrows of chapter 01 start from its outline.',
-        'The design airliner is 40 m long, 36 m across the wings and 12 m high, drawn ten times smaller [S58]. Everything the fuselage carries, including the fuel and the load, adds to the weight that the wings must balance in level flight [S1].',
+        'The design airliner is nominally about 40 m long, 36 m across the wings and 12 m high, drawn ten times smaller [S58]. Everything the fuselage carries, including the fuel and the load, adds to the weight that the wings must balance in level flight [S1].',
         'It is a generic shape with no windows of any real type, and no maker, model or airline is meant [S58].',
       ],
       [
         '通用客机的长条形机体：机翼、尾翼和驾驶舱都装在它上面，乘客和货物在里面。背景章和第 01、04、06、07 章的舞台上都有它；第 01 章的四力箭头从它的轮廓画出。',
-        '设计中的客机长 40 米、翼展 36 米、高 12 米，按十分之一画出 [S58]。机身所载的一切，包括燃油和人与货物，都计入重力；水平飞行时，机翼的升力要与它平衡 [S1]。',
+        '设计中的客机名义尺寸约长 40 米、翼展 36 米、高 12 米，按十分之一画出 [S58]。机身所载的一切，包括燃油和人与货物，都计入重力；水平飞行时，机翼的升力要与它平衡 [S1]。',
         '这是通用外形，不对应任何制造商、型号或航空公司 [S58]。',
       ],
     ),
@@ -207,11 +207,11 @@ export const PART_TEXT: Record<string, PartText> = {
     summary: t('Rises from the top of the wing to cut lift and add drag.', '从机翼上表面抬起，减升增阻。'),
     detail: p(
       [
-        'A panel on the upper surface of the left wing, ahead of the flap; it is mentioned in chapter 04 and lies flat in the model.',
+        'A panel on the upper surface of the left wing, ahead of the flap; it rises in chapter 04’s last pose, independently of the flaps.',
         'Spoilers reduce lift and add drag; they are different from flaps [S8]. Only one panel is drawn, on the left wing, to keep the picture clear; this says nothing about how many a real wing has [S58].',
       ],
       [
-        '左翼上表面、襟翼前方的一块板，在第 04 章提到；模型里它是收平的。',
+        '左翼上表面、襟翼前方的一块板，在第 04 章最后一个姿态中抬起，与襟翼分开。',
         '扰流板减少升力、增加阻力，与襟翼不同 [S8]。为了画面清楚，只在左翼画了一块，这并不说明真实机翼上有几块 [S58]。',
       ],
     ),

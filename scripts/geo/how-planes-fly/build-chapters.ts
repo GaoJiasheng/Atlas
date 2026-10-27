@@ -181,7 +181,7 @@ const CHAPTERS: Chapter[] = [
         set: 'W',
         camera: FORCES,
         labels: ['wing-left', 'fuselage-shell'],
-        run: true,
+        run: false,
         sim: { diagram: 'vertical' },
         caption: t(
           'Weight pulls the aircraft towards Earth. In this level-flight picture, lift acts upwards against it.',
@@ -193,7 +193,6 @@ const CHAPTERS: Chapter[] = [
         camera: FORCES,
         labels: ['nacelle-left'],
         run: true,
-        pose: 'balanced-travel',
         sim: { diagram: 'level' },
         caption: t(
           'Lift balances weight and thrust balances drag in this steady, level example. The aircraft keeps moving.',
@@ -204,7 +203,7 @@ const CHAPTERS: Chapter[] = [
         set: 'W',
         camera: FORCES,
         labels: ['nacelle-left', 'wing-left'],
-        run: true,
+        run: false,
         sim: { diagram: 'axial' },
         caption: t(
           'Thrust acts forwards, while drag opposes motion through the air. These arrows show forces on the aircraft.',
@@ -216,7 +215,7 @@ const CHAPTERS: Chapter[] = [
         minus: ['nacelle-left', 'nacelle-right', 'fan-left', 'fan-right'],
         camera: SIDE,
         labels: ['wing-left', 'fuselage-shell'],
-        run: true,
+        run: false,
         sim: { diagram: 'vertical' },
         caption: t('A glider needs no engine to have lift. An engine and a wing do different jobs.', '滑翔机没有发动机，也能产生升力。发动机和机翼做的事不同。'),
       },
@@ -231,7 +230,7 @@ const CHAPTERS: Chapter[] = [
         ),
       },
     ],
-    index: ['fuselage-shell', 'wing-left', 'wing-right', 'nacelle-left', 'nacelle-right', 'inflow-reference'],
+    index: ['fuselage-shell', 'wing-left', 'wing-right', 'nacelle-left', 'nacelle-right', 'inflow-reference', 'foil-sample'],
   },
   {
     id: 'wing-and-air',
@@ -242,7 +241,7 @@ const CHAPTERS: Chapter[] = [
     beats: [
       {
         set: 'B',
-        ghost: ['wing-box-skin'],
+        minus: ['wing-box-skin'],
         camera: 'wing-structure-view',
         labels: ['front-spar', 'rear-spar', 'wing-ribs'],
         run: false,
@@ -447,7 +446,7 @@ const CHAPTERS: Chapter[] = [
         set: 'W',
         camera: HIGH_LIFT,
         pose: 'high-lift-open',
-        labels: ['flap-left', 'slat-left'],
+        labels: ['flap-left', 'slat-left', 'spoiler-left'],
         run: false,
         caption: t(
           'Flaps and slats change the wing for lower-speed flight. Flaps also add drag; they are different from spoilers.',

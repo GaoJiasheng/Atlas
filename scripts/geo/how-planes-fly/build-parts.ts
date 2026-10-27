@@ -163,6 +163,8 @@ function mainWing(side: 1 | -1): Json {
   };
 }
 function winglet(side: 1 | -1): Json {
+  // Seat the tip device on the final wing station, rather than beyond the slanted sweep cap.
+  const z = TIP_Z - 0.08;
   return {
     kind: 'extrude',
     shape: [
@@ -173,7 +175,7 @@ function winglet(side: 1 | -1): Json {
     ],
     depth: 0.012,
     bevel: 0.004,
-    at: v4([0.31, yWing(TIP_Z) - 0.006, side * (TIP_Z + 0.004)]),
+    at: v4([0.31, yWing(z) - 0.006, side * z]),
     rotation: [side * 12, 0, 0],
     ...SKIN,
   };
@@ -188,22 +190,25 @@ const AILERON: [number, number] = [1.0, 1.7];
 const FLAP: [number, number] = [0.22, 0.98];
 const SPOILER: [number, number] = [0.42, 0.92];
 const SLAT: [number, number] = [0.3, 1.62];
+const spoilerLift = () => {
+  const z = (SPOILER[0] + SPOILER[1]) / 2;
+  return lensHalf(z, H(z) - 0.04 - LE(z)) + 0.003;
+};
 function spoiler(): Json {
   const zs = [SPOILER[0], SPOILER[1]];
   const poly: [number, number][] = [...zs.map((z) => [H(z) - 0.075, z] as [number, number]), ...[...zs].reverse().map((z) => [H(z) - 0.008, z] as [number, number])];
-  const zm = (SPOILER[0] + SPOILER[1]) / 2;
-  const lift = lensHalf(zm, H(zm) - 0.04 - LE(zm)) + 0.003;
-  return planform(poly, 1, 0.006, 0.002, lift);
+  return planform(poly, 1, 0.006, 0.002, spoilerLift());
 }
 function slat(side: 1 | -1): Json {
+  // Narrow leading-edge cuff: seated into the wing at rest, clear of it after the 0.025 forward deployment.
   const n = 9;
   const zs = Array.from({ length: n }, (_, i) => SLAT[0] + ((SLAT[1] - SLAT[0]) * i) / (n - 1));
   const mid = zs[4]!;
-  const at: Vec3 = [LE(mid) + 0.012, yWing(mid), side * mid];
+  const at: Vec3 = [LE(mid) - 0.03, yWing(mid), side * mid];
   return {
     kind: 'sweep',
-    path: zs.map((z) => v4([LE(z) + 0.012 - at[0], yWing(z) - at[1], side * z - at[2]])),
-    radius: 0.027,
+    path: zs.map((z) => v4([LE(z) - 0.03 - at[0], yWing(z) - at[1], side * z - at[2]])),
+    radius: 0.016,
     section: { flat: 0.48 },
     up: [0, 1, 0],
     radial: 16,
@@ -404,7 +409,7 @@ function wingBox(): Record<string, Json> {
     return Array.from({ length: 20 }, (_, k) => [r4(cx + r * Math.cos((2 * Math.PI * k) / 20)), r4(cy + r * Math.sin((2 * Math.PI * k) / 20))]);
   });
   return {
-    'wing-box-skin': { primitive: { kind: 'extrude', shape: outlineOf(outer), holes: [outlineOf(inner)], depth: BOX_SPAN, bevel: 0, at: BOX, ...SKIN } },
+    'wing-box-skin': { shell: true, primitive: { kind: 'extrude', shape: outlineOf(outer), holes: [outlineOf(inner)], depth: BOX_SPAN, bevel: 0, at: BOX, ...SKIN } },
     'front-spar': spar(0.15),
     'rear-spar': spar(0.62),
     'wing-ribs': { primitive: { kind: 'extrude', shape: outlineOf(ribOuter), holes, depth: 0.008, bevel: 0, at: BOX, color: 'casing', tint: '#a8adb1' }, repeat: { count: 3, axis: [0, 0, 1], spacing: 0.4 } },
@@ -460,7 +465,7 @@ function bladeRows(rows: { u: number; r0: number; r1: number; chord: number; sta
     repeat: { count: 24, axis: [1, 0, 0], radius: 0.001 },
   };
 }
-const rotorRow = (u: number, chord: number, stagger: number) => ({ u, r0: rIn(u), r1: rOut(u) - 0.006, chord, stagger });
+const rotorRow = (u: number, chord: number, stagger: number) => ({ u, r0: rIn(u) - 0.004, r1: rOut(u) - 0.006, chord, stagger });
 const statorRow = (u: number, chord: number, stagger: number) => ({ u, r0: rIn(u) + 0.006, r1: rOut(u), chord, stagger });
 
 function engineParts(): Record<string, Json> {
@@ -473,6 +478,7 @@ function engineParts(): Record<string, Json> {
     // Core casing and its cowl: the inner wall of the bypass outside, the core path inside; inlet guide vanes at the splitter.
     // The engine case: fan case and nacelle, the outer wall of the bypass, with fixed guide vanes (struts) behind the fan.
     'engine-shell': {
+      shell: true,
       primitive: engineLathe(
         [
           [0.345, -0.92],
@@ -512,6 +518,7 @@ function engineParts(): Record<string, Json> {
       ],
     },
     'bypass-duct': {
+      shell: true,
       // The bypass duct's inner wall (the core cowl) and, inside it, the core casing: two skins joined at the splitter lip.
       primitive: engineLathe(
         [
@@ -539,21 +546,19 @@ function engineParts(): Record<string, Json> {
     },
     'compressor-bank': bladeRows([-0.405, -0.295, -0.185, -0.075].map((u) => statorRow(u, 0.026, -38)), { color: 'casing', tint: '#a3a8ad' }),
     'compressor-rotor': bladeRows([-0.46, -0.35, -0.24, -0.13].map((u) => rotorRow(u, 0.03, 40)), { color: 'steel' }),
+    // Separate inner and outer liners leave an annular gas passage, rather
+    // than filling the chamber with a solid band through the core stream.
     'combustor-ring': {
       primitive: engineLathe(
-        [
-          [0.082, 0.03],
-          [0.152, 0.03],
-          [0.16, 0.08],
-          [0.157, 0.17],
-          [0.142, 0.212],
-          [0.096, 0.212],
-          [0.08, 0.17],
-          [0.078, 0.08],
-          [0.082, 0.03],
-        ],
+        [[0.152, 0.03], [0.16, 0.08], [0.157, 0.17], [0.142, 0.212],
+         [0.136, 0.212], [0.151, 0.17], [0.154, 0.08], [0.146, 0.03], [0.152, 0.03]],
         { color: 'stainless' },
       ),
+      extra: [engineLathe(
+        [[0.082, 0.03], [0.078, 0.08], [0.08, 0.17], [0.096, 0.212],
+         [0.102, 0.212], [0.086, 0.17], [0.084, 0.08], [0.088, 0.03], [0.082, 0.03]],
+        { color: 'stainless' },
+      )],
     },
     'turbine-bank': bladeRows([statorRow(0.235, 0.03, -45), statorRow(0.375, 0.03, -40), statorRow(0.505, 0.03, -40)], { color: 'casing', tint: '#a3a8ad' }),
     'hp-turbine-rotor': bladeRows([rotorRow(0.295, 0.032, 48)], { color: 'steel' }),
@@ -587,6 +592,9 @@ function engineParts(): Record<string, Json> {
         { color: 'steel' },
       ),
       extra: [
+        // Radial webs join the hollow compressor drum to its drive shaft.
+        engineLathe([[0.034, -0.495], [0.07, -0.495], [0.07, -0.487], [0.034, -0.487], [0.034, -0.495]], { color: 'steel' }),
+        engineLathe([[0.034, -0.038], [0.084, -0.038], [0.084, -0.03], [0.034, -0.03], [0.034, -0.038]], { color: 'steel' }),
         engineLathe(
           [
             [0.068, -0.5],
@@ -864,18 +872,15 @@ function poses(): Json {
     throw new Error('rudder: no direction');
   })();
   const flap = (side: 1 | -1) => ({ ...teDown(hingeAt(FLAP[0], side), hingeAt(FLAP[1], side), 20), offset: [0.04, 0, 0] });
+  const spoilerHinge = (z: number): Vec3 => [H(z) - 0.075, yWing(z) + spoilerLift(), z];
   const bank: Json = { duration: 0 };
   for (const id of W) bank[id] = { pivot: CG, rotation: [-20, 0, 0] };
-  // A short steady move forwards (−X) in the level-flight beat: a pose, so the force arrows (which follow poses) stay on the aircraft.
-  const travel: Json = { duration: 2 };
-  for (const id of W) travel[id] = { offset: [-0.3, 0, 0] };
   return {
     'controls-roll': { 'aileron-left': ail(1, roll), 'aileron-right': ail(-1, -roll) },
     'controls-pitch': { 'elevator-left': elev(1), 'elevator-right': elev(-1) },
     'controls-yaw': { rudder: rudderTurn },
     'controls-bank': bank,
-    'balanced-travel': travel,
-    'high-lift-open': { 'flap-left': flap(1), 'flap-right': flap(-1), 'slat-left': { offset: [-0.025, -0.008, 0] }, 'slat-right': { offset: [-0.025, -0.008, 0] } },
+    'high-lift-open': { 'spoiler-left': teDown(spoilerHinge(SPOILER[0]), spoilerHinge(SPOILER[1]), -35), 'flap-left': flap(1), 'flap-right': flap(-1), 'slat-left': { offset: [-0.025, -0.008, 0] }, 'slat-right': { offset: [-0.025, -0.008, 0] } },
   };
 }
 
@@ -929,6 +934,8 @@ function flows(): Json[] {
 function animations(): Json[] {
   const spin = (id: string, target: string, rpm: number) => ({ id, target, kind: 'rotate', axis: [1, 0, 0], rpm });
   return [
+    // One non-looping, eased forward illustration; all W parts share the same keys.
+    ...W.map((target) => ({ id: `balanced-travel-${target}`, target, kind: 'sequence', loop: false, keys: [{ t: 0, offset: [0, 0, 0] }, { t: 2, offset: [-0.3, 0, 0] }] })),
     spin('fan-left-spin', 'fan-left', 30),
     spin('fan-right-spin', 'fan-right', 30),
     spin('fan-disc-spin', 'fan-disc', 30),
@@ -1005,6 +1012,7 @@ function sim(): Json {
       },
     ],
     bind: [
+      { control: 'diagram-case', animation: W.map((id) => `balanced-travel-${id}`), enabled: { eq: 'level' } },
       { control: 'angle-deg', part: ['foil-sample', 'chord-marker'], rotate: { axis: [0, 0, 1], per: -1, pivot: PIVOT } },
       { output: 'flow-state', flow: 'section-air', airfoilFlow: true },
       { control: 'flow-view', flow: 'section-air', visible: { eq: 'streamlines' } },
