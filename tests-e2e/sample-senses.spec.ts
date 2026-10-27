@@ -20,7 +20,7 @@ for(const lang of ['en','zh'])for(const theme of ['paper','cinema'])test(`${lang
 });
 test('paused and reduced-motion wave keeps a deterministic seek on a phone',async({page})=>{
  await page.setViewportSize({width:390,height:844});await page.emulateMedia({reducedMotion:'reduce'});await open(page,'ch=sample-sound');await page.evaluate(()=>(window.__atlas!.engine as unknown as Engine).apply({run:true}));
- await page.evaluate(()=>(window.__atlas!.engine as unknown as Engine).sensesSeek(.25));const first=await read(page);await page.waitForTimeout(200);expect((await read(page)).wave.phaseCycles).toBe(first.wave.phaseCycles);expect(first.wave.playing).toBe(false);
+ await page.evaluate(()=>(window.__atlas!.engine as unknown as Engine).sensesSeek(.25));await expect.poll(async()=>(await read(page)).wave.phaseCycles).toBe(.25);const first=await read(page);await page.waitForTimeout(200);expect((await read(page)).wave.phaseCycles).toBe(first.wave.phaseCycles);expect(first.wave.playing).toBe(false);
 });
 test('ordinary manual scene transition resets phase; control and RUN patches preserve it',async({page})=>{
  await page.emulateMedia({reducedMotion:'reduce'});await open(page,'ch=sample-sound');

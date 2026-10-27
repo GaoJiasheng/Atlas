@@ -618,3 +618,13 @@ CI=1 ATLAS_E2E_PORT=5446 pnpm e2e
 ```
 
 实际draw calls/首屏JS、EN/ZH标签是否遮挡或出屏、两套theme、触控目标、手机抽屉、动态减少、深链与E返回组装态仍待浏览器确认。只测得静态几何97,586三角形，不能用它推断GPU帧率。没有部署、提交或推送。
+
+### 9.4 浏览器验收（2026-10-27，Claude Opus，合并 main 至 4773f2b 之后）
+
+- 看过的截图：`--beats` en/zh × paper/cinema 共 160 张（presentation 1920×1080）、en-paper `--layout` 8 个尺寸（含 1024×768、390×844，布局问题 0）、`--keys` en-paper 与 zh-cinema（按键失败 0）、`--perf --gpu`（Metal）。beat links 4 组都是 40/40。zh-cinema 的 `--layout` 在机器负载约 180–260 时截图超时，未完成。
+- 读得通的：眼球剖面（角膜在前、虹膜中间是孔、晶状体在后、视网膜内衬、视神经出后方）；01 章 2 → 4 mm 内孔变化肉眼可见；耳部链路从左到右是外耳道 → 鼓膜 → 锤骨 → 砧骨 → 镫骨 → 卵圆窗 → 耳蜗，听骨三块相连；05 章信号点从毛细胞区走向听神经；两套主题都正常着色。正文的光路、调节、听骨、毛细胞、频率/振幅和照护措辞核对无误，照护部分具体、不吓人（补了一句：光线强时瞳孔变小、暗时变大，S2/S24）。
+- 读不通的（退回 Codex，见主题 `FIXES.md`）：光学台在统一 `cmToScene` 下倒像（远物像高 0.006 场景单位）和偏焦散斑（0.0028）都看不见，两物点光线同色；没有对准光学台的镜头；纵波疏密只有 ±8%，粒子行在画面底边；毛细胞放大窗挡在耳部前面，没有可见的比例边界；6/40（en）与 2/40（zh）张拍图舞台偶发空白，拍次每轮不同；手机竖屏总览只看到眼。
+- 性能（Metal，负载很高时）：各章 draw calls 10–24、三角 4.4k–67k、45–64 fps；预算 <80 calls、≤350k 三角，均在内。page JS 516 KB gz 是全站 SpaceScene 共有的，不是本题新增。
+- 回归：light-and-shadows、sample-light `--beats --keys` 拍与键全过；`sun-shadows` 等章节标签不在屏的提示在 main 基线上同样出现（负载造成），不是本分支引入。sample-senses `--beats --keys` 全过。
+- 门槛：check 0 error；validate 70 题 0 error；test 4,952 例中 1 例 CPU 时间预算（fill.test）在负载下超时，单跑通过；build 143 页。smoke 的计数冲突按指示取 main 的数，未把本题算进去。
+- e2e（端口 5446，eyes-and-ears、sample-senses、smoke、light-and-shadows、sample-light，workers=2）：47 例中 33 过、14 败；单独重跑后只剩 smoke 的 4 例首页计数（取 main 的数，实际多 1 题），其余为负载超时或下面两处测试写错。修了两处没跑过的测试：手机拍步进——章节打开时停在拍前（BEAT –/5），按一次"下一拍"进入 b=1 而不是 b=2；sample-senses 的 seek 定位先等相位读数变成 .25 再比较。

@@ -126,7 +126,8 @@ test('phone reduced motion: touch controls and beat stepping', async ({ page }) 
   await increase.click();
   expect((await sim(page)).outputs['visual-hz']).toBe(2);
   expect((await senses(page)).wave?.playing).toBe(false);
+  // The chapter opens before its first beat (BEAT –/5); Next enters beat 1.
   await page.locator('.space-beatline__btn').last().click();
-  await expect.poll(() => page.url()).toContain('b=2');
+  await expect.poll(() => page.url()).toContain('b=1');
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
 });
