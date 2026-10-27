@@ -1,0 +1,491 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.248685,
+          53.47532
+        ]
+      },
+      "properties": {
+        "id": "loc-manchester",
+        "name": "Manchester",
+        "source": "Natural Earth ne_10m_populated_places",
+        "sourceId": 1159149119,
+        "licence": "public-domain",
+        "locationPrecision": "city-reference-point; not historical site footprint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.961934,
+          53.405068
+        ]
+      },
+      "properties": {
+        "id": "loc-liverpool",
+        "name": "Liverpool",
+        "source": "Natural Earth ne_10m_populated_places",
+        "sourceId": 1159146371,
+        "licence": "public-domain",
+        "locationPrecision": "city-reference-point; not historical site footprint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.921943,
+          52.47692
+        ]
+      },
+      "properties": {
+        "id": "loc-birmingham",
+        "name": "Birmingham",
+        "source": "Natural Earth ne_10m_populated_places",
+        "sourceId": 1159149367,
+        "licence": "public-domain",
+        "locationPrecision": "city-reference-point; not historical site footprint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.165706,
+          52.941084
+        ]
+      },
+      "properties": {
+        "id": "loc-nottingham",
+        "name": "Nottingham",
+        "source": "Natural Earth ne_10m_populated_places",
+        "sourceId": 1159135319,
+        "licence": "public-domain",
+        "locationPrecision": "city-reference-point; not historical site footprint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.239101,
+          55.86227
+        ]
+      },
+      "properties": {
+        "id": "loc-glasgow",
+        "name": "Glasgow",
+        "source": "Natural Earth ne_10m_populated_places",
+        "sourceId": 1159150591,
+        "licence": "public-domain",
+        "locationPrecision": "city-reference-point; not historical site footprint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.331371,
+          50.835263
+        ]
+      },
+      "properties": {
+        "id": "loc-brussels",
+        "name": "Brussels",
+        "source": "Natural Earth ne_10m_populated_places",
+        "sourceId": 1159151465,
+        "licence": "public-domain",
+        "locationPrecision": "city-reference-point; not historical site footprint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.079985,
+          49.449991
+        ]
+      },
+      "properties": {
+        "id": "loc-nuremberg",
+        "name": "Nürnberg",
+        "source": "Natural Earth ne_10m_populated_places",
+        "sourceId": 1159146953,
+        "licence": "public-domain",
+        "locationPrecision": "city-reference-point; not historical site footprint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.314074,
+          59.94096
+        ]
+      },
+      "properties": {
+        "id": "loc-st-petersburg",
+        "name": "St.  Petersburg",
+        "source": "Natural Earth ne_10m_populated_places",
+        "sourceId": 1159151291,
+        "licence": "public-domain",
+        "locationPrecision": "city-reference-point; not historical site footprint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          72.875839,
+          19.068408
+        ]
+      },
+      "properties": {
+        "id": "loc-mumbai",
+        "name": "Mumbai",
+        "source": "Natural Earth ne_10m_populated_places",
+        "sourceId": 1159151611,
+        "licence": "public-domain",
+        "locationPrecision": "city-reference-point; not historical site footprint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.278053,
+          13.091934
+        ]
+      },
+      "properties": {
+        "id": "loc-chennai",
+        "name": "Chennai",
+        "source": "Natural Earth ne_10m_populated_places",
+        "sourceId": 1159151431,
+        "licence": "public-domain",
+        "locationPrecision": "city-reference-point; not historical site footprint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.434559,
+          31.218398
+        ]
+      },
+      "properties": {
+        "id": "loc-shanghai",
+        "name": "Shanghai",
+        "source": "Natural Earth ne_10m_populated_places",
+        "sourceId": 1159151605,
+        "licence": "public-domain",
+        "locationPrecision": "city-reference-point; not historical site footprint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.192431,
+          39.626283
+        ]
+      },
+      "properties": {
+        "id": "loc-tangshan",
+        "name": "Tangshan",
+        "source": "Natural Earth ne_10m_populated_places",
+        "sourceId": 1159147045,
+        "licence": "public-domain",
+        "locationPrecision": "city-reference-point; not historical site footprint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.602021,
+          35.430656
+        ]
+      },
+      "properties": {
+        "id": "loc-yokohama",
+        "name": "Yokohama",
+        "source": "Natural Earth ne_10m_populated_places",
+        "sourceId": 1159147167,
+        "licence": "public-domain",
+        "locationPrecision": "city-reference-point; not historical site footprint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.749462,
+          35.686963
+        ]
+      },
+      "properties": {
+        "id": "loc-tokyo",
+        "name": "Tokyo",
+        "source": "Natural Earth ne_10m_populated_places",
+        "sourceId": 1159151609,
+        "licence": "public-domain",
+        "locationPrecision": "city-reference-point; not historical site footprint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          103.853875,
+          1.294979
+        ]
+      },
+      "properties": {
+        "id": "loc-singapore-city",
+        "name": "Singapore",
+        "source": "Natural Earth ne_10m_populated_places",
+        "sourceId": 1159151627,
+        "licence": "public-domain",
+        "locationPrecision": "city-reference-point; not historical site footprint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          32.290008,
+          31.25999
+        ]
+      },
+      "properties": {
+        "id": "loc-port-said",
+        "name": "Bur Said",
+        "source": "Natural Earth ne_10m_populated_places",
+        "sourceId": 1159149855,
+        "licence": "public-domain",
+        "locationPrecision": "city-reference-point; not historical site footprint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          32.549941,
+          30.004976
+        ]
+      },
+      "properties": {
+        "id": "loc-suez-city",
+        "name": "Suez",
+        "source": "Natural Earth ne_10m_populated_places",
+        "sourceId": 1159149853,
+        "licence": "public-domain",
+        "locationPrecision": "city-reference-point; not historical site footprint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.064983,
+          4.599989
+        ]
+      },
+      "properties": {
+        "id": "loc-ipoh",
+        "name": "Ipoh",
+        "source": "Natural Earth ne_10m_populated_places",
+        "sourceId": 1159148315,
+        "licence": "public-domain",
+        "locationPrecision": "city-reference-point; not historical site footprint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.719991,
+          4.86496
+        ]
+      },
+      "properties": {
+        "id": "loc-taiping",
+        "name": "Taiping",
+        "source": "Natural Earth ne_10m_populated_places",
+        "sourceId": 1159148311,
+        "licence": "public-domain",
+        "locationPrecision": "city-reference-point; not historical site footprint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.688699,
+          3.139797
+        ]
+      },
+      "properties": {
+        "id": "loc-kuala-lumpur",
+        "name": "Kuala Lumpur",
+        "source": "Natural Earth ne_10m_populated_places",
+        "sourceId": 1159151317,
+        "licence": "public-domain",
+        "locationPrecision": "city-reference-point; not historical site footprint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.088368,
+          29.968908
+        ]
+      },
+      "properties": {
+        "id": "loc-new-orleans",
+        "name": "New Orleans",
+        "source": "Natural Earth ne_10m_populated_places",
+        "sourceId": 1159151233,
+        "licence": "public-domain",
+        "locationPrecision": "city-reference-point; not historical site footprint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.47762,
+          51.02574
+        ]
+      },
+      "properties": {
+        "id": "loc-mechelen",
+        "name": "Mechelen",
+        "source": "GeoNames cities15000",
+        "sourceId": "2791537",
+        "licence": "CC-BY-4.0",
+        "locationPrecision": "city-reference-point; not historical site footprint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.39,
+          45.43389
+        ]
+      },
+      "properties": {
+        "id": "loc-saint-etienne",
+        "name": "Saint-Étienne",
+        "source": "GeoNames cities15000",
+        "sourceId": "2980291",
+        "licence": "CC-BY-4.0",
+        "locationPrecision": "city-reference-point; not historical site footprint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.3187,
+          54.56848
+        ]
+      },
+      "properties": {
+        "id": "loc-stockton",
+        "name": "Stockton-on-Tees",
+        "source": "GeoNames cities15000",
+        "sourceId": "2636876",
+        "licence": "CC-BY-4.0",
+        "locationPrecision": "city-reference-point; not historical site footprint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.08333,
+          52.5
+        ]
+      },
+      "properties": {
+        "id": "loc-dudley",
+        "name": "Dudley",
+        "source": "GeoNames cities15000",
+        "sourceId": "2650839",
+        "licence": "CC-BY-4.0",
+        "locationPrecision": "city-reference-point; not historical site footprint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.55039,
+          54.52429
+        ]
+      },
+      "properties": {
+        "id": "loc-darlington",
+        "name": "Darlington",
+        "source": "GeoNames cities15000",
+        "sourceId": "2651513",
+        "licence": "CC-BY-4.0",
+        "locationPrecision": "city-reference-point; not historical site footprint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.38256,
+          41.87871
+        ]
+      },
+      "properties": {
+        "id": "loc-pawtucket",
+        "name": "Pawtucket",
+        "source": "GeoNames cities15000",
+        "sourceId": "5223869",
+        "licence": "CC-BY-4.0",
+        "locationPrecision": "city-reference-point; not historical site footprint"
+      }
+    }
+  ]
+}

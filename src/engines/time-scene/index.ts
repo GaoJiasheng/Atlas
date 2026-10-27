@@ -14,7 +14,8 @@ export interface TimeSceneExt {
   /** Current time on the axis. */
   t: TimePoint | null;
   month?: number;
-  beat: number | null;
+  /** The beat on show (0-based), `null` / absent = the chapter's own state. URL `b`. */
+  beat?: number | null;
   inset?: 'world' | 'southeast-asia' | 'mexico';
   insetVisible?: boolean;
   fossilMode?: 'age-window' | 'all-mesozoic';

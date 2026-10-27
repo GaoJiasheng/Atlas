@@ -35,6 +35,9 @@ import { CircuitDiagram } from '../hud/CircuitCard';
 import { EnergyDiagram } from '../hud/EnergyCard';
 import { CycleDiagram } from '../hud/CycleCard';
 import { KeyDiagram } from '../hud/KeyCard';
+import { AirfoilPlot } from './AirfoilPlot';
+import { AirfoilPressure } from './AirfoilPressure';
+import type { StageBridge } from '../bridge';
 import { TryChart } from './TryChart';
 import { SourceRefs } from '../../widgets/SourcePopover';
 import { tableSources } from '../lib/sim/table';
@@ -188,6 +191,7 @@ function Table({ file, sim, card, ui, chapter }: { file: PartsFile; sim: SimData
     const values: Record<string, SimOutputValue> = {};
     for (const o of outs) values[o.id] = view.outputs[o.id]!;
     for (const o of ys) values[o.id] = view.outputs[o.id]!;
+    if(sim.airfoil) values[sim.airfoil.plot.y] = view.outputs[sim.airfoil.plot.y]!;
     if (judge) values[judge.output] = view.outputs[judge.output]!;
     const tables = ui.getState().simTables;
     ui.setState({ simTables: { ...tables, [chapter]: recordRow(tables[chapter] ?? [], { vary: view.values[card.vary]!, values }) } });
@@ -237,7 +241,7 @@ function Table({ file, sim, card, ui, chapter }: { file: PartsFile; sim: SimData
           )}
         </tbody>
       </table>
-      {ys.length > 0 && <TryChart rows={rows} vary={vary} ys={ys} current={view.values[card.vary]} />}
+      {ys.length > 0 && !(sim.airfoil && card.vary === sim.airfoil.angle) && <TryChart rows={rows} vary={vary} ys={ys} current={view.values[card.vary]} />}
     </div>
   );
 }
@@ -281,7 +285,7 @@ function SortFold({ file, sim }: { file: PartsFile; sim: SimData }) {
   );
 }
 
-export function TryIt({ file, ui }: { file: PartsFile; ui: SpaceUiStore }) {
+export function TryIt({ file, ui, bridge }: { file: PartsFile; ui: SpaceUiStore; bridge:StageBridge }) {
   const t = useT();
   const { locale } = useSceneContext();
   const store = useSimStore();
@@ -353,6 +357,8 @@ export function TryIt({ file, ui }: { file: PartsFile; ui: SpaceUiStore }) {
           </p>
         )}
       </dl>
+      {sim.airfoil && card.vary === sim.airfoil.angle && <AirfoilPlot sim={sim} values={values} ui={ui} chapter={chapter} />}
+      {sim.airfoil && <AirfoilPressure file={file} values={values} ui={ui} bridge={bridge} />}
       <Replay ids={runs} slow={slow} ui={ui} />
       {card.predict && <Predict file={file} sim={sim} card={card} ui={ui} chapter={chapter} />}
       {card.record && <Table file={file} sim={sim} card={card} ui={ui} chapter={chapter} />}

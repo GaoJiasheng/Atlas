@@ -124,11 +124,15 @@ export interface MechanismReading {
 export type MechanismSave = Record<string, { thetaRad: number; qaHold: boolean }>;
 
 export interface StageBridge {
+  /** Orbit sims (docs/44 §4.10): what OrbitDriver really drew for the snapshot `snapshotId` (world position / quaternion / scale, Sun uniforms). */
+  orbitRendered?: { snapshotId: number; parts: Record<string, { position: number[]; quaternion: number[]; scale: number[]; visible: boolean }>; solarDirections: Record<string, number[]> };
   mechanisms: Map<string, MechanismReading>;
   seekMechanism(id: string, deg: number): boolean;
   resetMechanisms(): void;
   saveMechanisms(): MechanismSave;
   restoreMechanisms(saved: MechanismSave): void;
+  airfoilPulse: number;
+  airfoilArrows: Map<string,{force:string;dir:[number,number,number];shown:boolean;scaled:boolean}>;
   fills: Map<string, FillReading>;
   /** Copies a `count` binding draws, per part (QA `copies(id)`). */
   copies: Map<string, number>;
@@ -206,6 +210,7 @@ export function createBridge(): StageBridge {
     restoreMechanisms: () => {},
     width: 0,
     height: 0,
+    airfoilPulse: 0, airfoilArrows: new Map(),
     resolution: 1,
     cameraDistance: 0,
     focal: 0,

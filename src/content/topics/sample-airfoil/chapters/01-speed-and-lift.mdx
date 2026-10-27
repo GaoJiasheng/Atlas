@@ -1,0 +1,209 @@
+---
+{
+  "id": "speed-and-lift",
+  "order": 1,
+  "title": {
+    "en": "Speed and lift",
+    "zh": "速度与升力"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": true,
+    "part": null,
+    "layers": [
+      "airfoil-bench",
+      "airframe",
+      "flight-flows"
+    ],
+    "camera": {
+      "position": [
+        0,
+        1,
+        7.5
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "fov": 30
+    },
+    "labels": [
+      "foil-sample",
+      "inflow-reference"
+    ],
+    "hide": [
+      "force-body"
+    ],
+    "pose": null,
+    "cutaway": "none",
+    "index": {
+      "parts": [
+        "foil-sample",
+        "chord-marker",
+        "inflow-reference",
+        "angle-marker"
+      ]
+    },
+    "summary": {
+      "en": "Draft airfoil engine exercise.",
+      "zh": "草稿翼型引擎测试。"
+    },
+    "sim": {
+      "set": {
+        "angle-deg": 4,
+        "airspeed-mps": 40,
+        "altitude-m": 0,
+        "flow-view": "streamlines",
+        "diagram-case": "none"
+      },
+      "try": {
+        "vary": "airspeed-mps",
+        "also": [
+          "flow-view"
+        ],
+        "keep": [
+          "angle-deg"
+        ],
+        "observe": [
+          "angle-now",
+          "cl-now",
+          "lift-n",
+          "flow-state"
+        ],
+        "record": true,
+        "predict": {
+          "prompt": {
+            "en": "In this model, double the speed. What changes?",
+            "zh": "在模型中把速度加倍，升力怎样变？"
+          },
+          "start": {
+            "airspeed-mps": 20
+          },
+          "change": {
+            "airspeed-mps": 40
+          },
+          "observe": "lift-n",
+          "options": [
+            {
+              "id": "more",
+              "label": {
+                "en": "More",
+                "zh": "更多"
+              },
+              "means": "more"
+            },
+            {
+              "id": "same",
+              "label": {
+                "en": "Same",
+                "zh": "相同"
+              },
+              "means": "same"
+            }
+          ]
+        }
+      }
+    },
+    "beats": [
+      {
+        "sim": {
+          "set": {
+            "angle-deg": 4,
+            "airspeed-mps": 20,
+            "altitude-m": 0,
+            "flow-view": "streamlines",
+            "diagram-case": "none"
+          }
+        },
+        "run": true,
+        "part": null,
+        "view": "assembled",
+        "explode": 0,
+        "cutaway": "none",
+        "pose": null,
+        "hide": [
+          "force-body"
+        ],
+        "labels": [
+          "foil-sample",
+          "inflow-reference"
+        ],
+        "caption": {
+          "en": "Draft test state · SIM, not aircraft performance.",
+          "zh": "草稿测试状态 · 模拟，并非飞机性能。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "angle-deg": 4,
+            "airspeed-mps": 40,
+            "altitude-m": 0,
+            "flow-view": "streamlines",
+            "diagram-case": "none"
+          }
+        },
+        "run": true,
+        "part": null,
+        "view": "assembled",
+        "explode": 0,
+        "cutaway": "none",
+        "pose": null,
+        "hide": [
+          "force-body"
+        ],
+        "labels": [
+          "foil-sample",
+          "inflow-reference"
+        ],
+        "caption": {
+          "en": "Draft test state · SIM, not aircraft performance.",
+          "zh": "草稿测试状态 · 模拟，并非飞机性能。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "angle-deg": 4,
+            "airspeed-mps": 0,
+            "altitude-m": 0,
+            "flow-view": "pressure",
+            "diagram-case": "none"
+          }
+        },
+        "run": true,
+        "part": null,
+        "view": "assembled",
+        "explode": 0,
+        "cutaway": "none",
+        "pose": null,
+        "hide": [
+          "force-body"
+        ],
+        "labels": [
+          "foil-sample",
+          "inflow-reference"
+        ],
+        "caption": {
+          "en": "Draft test state · SIM, not aircraft performance.",
+          "zh": "草稿测试状态 · 模拟，并非飞机性能。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Draft engine fixture text. These values are model results, not measurements.
+
+</Lang>
+
+<Lang zh>
+
+草稿引擎测试文字。这里的数值由模型给出，并非实测。
+
+</Lang>

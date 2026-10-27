@@ -64,6 +64,8 @@ import type { GeoController } from './stages/geo/controller';
 import { Timeline, formatReadout } from './timeline/Timeline';
 import { EventInspector } from './EventInspector';
 import { EntityInspector } from './EntityInspector';
+import { ChapterIndex } from './ChapterIndex';
+import { eventSelectionPatch } from './lib/reader';
 import { BandCard, PerfReadout, useFps } from './hud/HudPanels';
 import { DatedLayerPlate } from './hud/DatedLayerPlate';
 import type { DatedLayerIndex } from './lib/datedLayers';
@@ -147,7 +149,7 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
   const inset = useScene<TimeSceneExt, TimeSceneExt['inset']>((s) => s.inset) ?? 'world';
   const insetVisible = useScene<TimeSceneExt, boolean | undefined>((s) => s.insetVisible) ?? true;
   const fossilMode = useScene<TimeSceneExt, TimeSceneExt['fossilMode']>((s) => s.fossilMode) ?? 'age-window';
-  const activeBeat = useScene<TimeSceneExt, number | null>((s) => s.beat);
+  const activeBeat = useScene<TimeSceneExt, number | null>((s) => s.beat ?? null);
   const selectedMa = storeT && isGeoTime(storeT) ? storeT.ma : 0;
   const outsideSelection = useRef<string | null>(null);
   const [selectedObjectId, setSelectedObjectId] = useState<string | null>(null);
@@ -185,7 +187,7 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
       // A topic dated to the year writes years back (`t=-0350`).
       const tp = fromNumber(v, model.scale, { precision: model.datePrecision, maDigits: model.maDigits });
       const key = formatTimeParam(tp);
-      if (store.getState().beat !== null) store.getState().patch({ beat: null });
+      if (store.getState().beat != null) store.getState().patch({ beat: null });
       if (key !== lastWritten.current) {
         lastWritten.current = key;
         store.getState().patch({ t: tp, beat: null });
@@ -216,20 +218,46 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
   const [selected, setSelected] = useState<string | null>(null);
   const [selectedEntity, setSelectedEntity] = useState<string | null>(null);
   const [cardExpanded, setCardExpanded] = useState(false);
+  const anchorRef = useRef(anchor);
+  anchorRef.current = anchor;
+  /** The beat the bar rests on (scrubbing, a date jump or a new chapter leave it). */
+  const anchoredBeat = useCallback(() => {
+    const a = anchorRef.current;
+    const chapter = a ? story[a.segment]?.id : undefined;
+    return chapter !== undefined && typeof a?.tick === 'number' ? { chapter, index: a.tick } : null;
+  }, [story]);
+  // Closing a detail returns the emphasis of the beat the bar rests on, else the chapter's.
   const restoreHighlight = useCallback(() => {
     const s = store.getState();
-    s.patch({ highlight: s.chapterTarget(s.chapter).highlight });
-  }, [store]);
+    const at = anchoredBeat();
+    const beat = at?.chapter === s.chapter ? beatsRef.current.find((b) => b.chapter === at.chapter && b.index === at.index) : undefined;
+    s.patch({ highlight: [...(beat?.spec?.highlight ?? s.chapterTarget(s.chapter).highlight)] });
+  }, [store, anchoredBeat]);
   const selectEvent = useCallback(
     (id: string) => {
-      // The presentation's map is for looking around: the caption says what the beat is about.
-      if (presentation.isPresenting()) return;
+      if (presentation.isPresenting() || !geo.events.some((event) => event.id === id)) return false;
+      store.getState().patch({ highlight: [id] });
       setSelectedEntity(null);
       setSelected(id);
-      store.getState().patch({ highlight: [id] });
+      revealReader();
+      return true;
     },
-    [store],
+    [store, geo.events, revealReader],
   );
+  const selectIndexedEvent = useCallback((id: string) => {
+    const s = store.getState();
+    const patch = eventSelectionPatch(s, geo.events, id, presentation.isPresenting());
+    if (!patch) return false;
+    // A place keeps the time, so it keeps the beat the bar rests on; a dated event leaves it.
+    const at = geo.events.find((event) => event.id === id)?.kind === 'site' ? anchoredBeat() : null;
+    if (at) pendingBeat.current = at;
+    // Store transitions clear old selections synchronously: select only after applying the map state.
+    s.applyState(patch);
+    setSelectedEntity(null);
+    setSelected(id);
+    revealReader();
+    return true;
+  }, [store, geo.events, revealReader, anchoredBeat]);
   const closeEvent = useCallback(() => {
     setSelected(null);
     restoreHighlight();
@@ -244,8 +272,9 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
       }
       setSelectedEntity(id);
       store.getState().patch({ highlight: [id] });
+      revealReader();
     },
-    [store, selectedEntity, restoreHighlight],
+    [store, selectedEntity, restoreHighlight, revealReader],
   );
   const closeEntity = useCallback(() => {
     setSelectedEntity(null);
@@ -412,7 +441,7 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
       const st = store.getState();
       if (urlBeatDone.current || st.transition.reason !== 'url') return;
       urlBeatDone.current = true;
-      if (st.beat === null) return;
+      if (st.beat == null) return;
       const b = beatsRef.current.find((x) => x.chapter === st.chapter && x.index === st.beat);
       if (!b) { st.patch({ beat: null }); return; }
       pendingBeat.current = { chapter: b.chapter, index: b.index };
@@ -430,7 +459,7 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
     const normalize = () => {
       const st = store.getState();
       const patch: Partial<TimeSceneExt & SceneSnapshot> = {};
-      const beat = st.beat === null ? undefined : beatsRef.current.find((b) => b.chapter === st.chapter && b.index === st.beat);
+      const beat = st.beat == null ? undefined : beatsRef.current.find((b) => b.chapter === st.chapter && b.index === st.beat);
       const fallback = beat?.spec?.t ?? st.chapterTarget(st.chapter).t;
       const ma = st.t && isGeoTime(st.t) ? st.t.ma : fallback && isGeoTime(fallback) ? fallback.ma : deepTime.reconstruction.frames[0]!.t.ma;
       const quantized = fromNumber(-Math.min(deepTime.reconstruction.frames[0]!.t.ma, Math.max(0, ma)) * 1e6, 'ma', { maDigits: topic.maDigits });
@@ -684,17 +713,25 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
       } } : {}),
       urlBaseline: (state) => {
         const st = state as SceneSnapshot<TimeSceneExt>;
-        const b = st.beat === null ? undefined : beatsRef.current.find((b) => b.chapter === st.chapter && b.index === st.beat);
+        const b = st.beat == null ? undefined : beatsRef.current.find((b) => b.chapter === st.chapter && b.index === st.beat);
         return b ? { ...timeBeatState(store.getState().chapterTarget(b.chapter), b.spec, b.index), beat: null } : null;
       },
-      ...(deepTime ? { test: { geology: () => ({
-        reconstruction: controllerRef.current?.reconstructionStats?.() ?? reconstructionStats,
-        inset: { coordinateSpace: 'modern', view: inset, insetVisible, fossilMode,
-          ...Object.fromEntries(Object.entries(modernCounts ?? {}).filter(([k]) => !['visiblePoints', 'visibleFossils'].includes(k))),
-          suppressedCollections: deepTime.inset?.suppression.collections ?? 0, suppressedOccurrences: deepTime.inset?.suppression.occurrences ?? 0,
-          highlightedObjectIds: store.getState().highlight, selectedObjectId,
-        },
-      }) } } : {}),
+      test: {
+        selectEvent: (id: string) => selectIndexedEvent(id),
+        reader: () => ({
+          indexIds: [...((chapters.find((c) => c.id === store.getState().chapter)?.state as TimeChapterState | undefined)?.index ?? [])],
+          selectedId: selected ?? selectedEntity,
+          detailCount: selected || selectedEntity ? 1 : 0,
+        }),
+        ...(deepTime ? { geology: () => ({
+          reconstruction: controllerRef.current?.reconstructionStats?.() ?? reconstructionStats,
+          inset: { coordinateSpace: 'modern', view: inset, insetVisible, fossilMode,
+            ...Object.fromEntries(Object.entries(modernCounts ?? {}).filter(([k]) => !['visiblePoints', 'visibleFossils'].includes(k))),
+            suppressedCollections: deepTime.inset?.suppression.collections ?? 0, suppressedOccurrences: deepTime.inset?.suppression.occurrences ?? 0,
+            highlightedObjectIds: store.getState().highlight, selectedObjectId,
+          },
+        }) } : {}),
+      },
       escape: () => {
         if (isPresenting()) {
           stopPresentation(true);
@@ -748,6 +785,8 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
     cardExpanded,
     selected,
     selectedEntity,
+    selectIndexedEvent,
+    chapters,
     closeEvent,
     closeEntity,
     region, reconstructed, topic.modernInset, inset, insetVisible, fossilMode, modernPatch, deepTime, modernCounts, selectedObjectId, reconstructionStats,
@@ -757,6 +796,7 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
 
   const selectedEvent = selected ? geo.events.find((e) => e.id === selected) ?? null : null;
   const pickedEntity = selectedEntity ? geo.entities.find((e) => e.id === selectedEntity) ?? null : null;
+  const indexIds = (chapters.find((c) => c.id === currentChapter)?.state as TimeChapterState | undefined)?.index ?? [];
 
   const geologyProps = deepTime ? {
     bundle: deepTime, locale, selectedMa, stats: reconstructionStats, fossilMode, counts: modernCounts,
@@ -853,13 +893,17 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
         />
       </SceneSlot>
 
+      <SceneSlot name="readerEnd">
+        <ChapterIndex ids={indexIds} events={geo.events} selected={selected} locale={locale} disabled={presenting} onSelect={selectIndexedEvent} />
+      </SceneSlot>
+
       {selectedEvent && (
-        <SceneSlot name="inspector">
+        <SceneSlot name="readerTop">
           <EventInspector event={selectedEvent} model={model} locale={locale} onClose={closeEvent} />
         </SceneSlot>
       )}
       {pickedEntity && (
-        <SceneSlot name="inspector">
+        <SceneSlot name="readerTop">
           <EntityInspector entity={pickedEntity} model={model} playhead={playhead} locale={locale} onClose={closeEntity} />
         </SceneSlot>
       )}

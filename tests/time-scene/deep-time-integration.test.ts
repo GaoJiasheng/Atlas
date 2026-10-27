@@ -14,7 +14,7 @@ import { fromNumber, toNumber } from '../../src/engines/time-scene/lib/time';
 import { geoTime } from '../../src/content/schema/common';
 import { topicSchema } from '../../src/content/schema/topic';
 import { loadDeepTime } from '../../src/engines/time-scene/deep-time-build';
-import { timeSceneGeoData, timeSceneIds, timeChapterRefs } from '../../src/engines/time-scene/schema';
+import { timeSceneGeoData, timeSceneIds, timeChapterRefs, timeChapterIndexIssues } from '../../src/engines/time-scene/schema';
 
 type Snap = SceneSnapshot<TimeSceneExt>;
 const cam: GeoCamera = { center: [-30, 5], zoom: 1.1 };
@@ -34,7 +34,7 @@ function viaLink(search: string): Snap {
   const { t, beat, highlight, inset, insetVisible, fossilMode, ...common } = fields;
   s.getState().hydrate({ ...common, ...timeSceneEngine.fromUrl({ t, beat, highlight, inset, insetVisible, fossilMode }) });
   const state = s.getState();
-  const index = state.beat;
+  const index = state.beat ?? null;
   if (index !== null && index >= 0 && index < beats.length) state.applyState(linkedTimeBeatState(timeBeatState(state.chapterTarget(state.chapter), beats[index], index), state.transition.fields ?? []), { instant: true });
   else if (index !== null) state.patch({ beat: null });
   return s.getState().snapshot();
@@ -47,7 +47,7 @@ function viaAxis(index: number): Snap {
 function linkOf(state: Snap): string {
   const s = store();
   const target = s.getState().chapterTarget(state.chapter);
-  const baseline = state.beat === null ? target : timeBeatState(target, beats[state.beat], state.beat);
+  const baseline = state.beat == null ? target : timeBeatState(target, beats[state.beat], state.beat);
   return mergeSearch('', encodeSceneState(state, { ...baseline, beat: target.beat }));
 }
 
@@ -128,7 +128,11 @@ describe('local deep-time manifest build integration', () => {
     const ids = timeSceneIds(result).map((o) => o.id);
     expect(new Set(ids).size).toBe(ids.length);
     expect(ids).toContain(result.deepTime!.points[0]!.id);
-    expect(timeChapterRefs({ highlight: [ids[0]!], index: [ids[1]!], beats: [{ caption: { en: 'TEST', zh: '测试' }, highlight: [ids[2]!] }] })).toEqual([ids[1], ids[0], ids[2]]);
+    const state = { highlight: [ids[0]!], index: [ids[1]!], beats: [{ caption: { en: 'TEST', zh: '测试' }, highlight: [ids[2]!] }] };
+    expect(timeChapterRefs(state)).toEqual([ids[0], ids[2]]);
+    // The reader index is checked on its own: a reconstruction topic's lists its modern points / cards.
+    expect(timeChapterIndexIssues({ index: [result.deepTime!.points[0]!.id, result.deepTime!.cards[0]!.id] }, result)).toEqual([]);
+    expect(timeChapterIndexIssues({ index: ['missing-object'] }, result)).toEqual(['state.index.0: unknown modern point or card "missing-object"']);
   });
   it('fails on missing local files and unknown sources before a runtime request can happen', () => {
     expect(() => loadDeepTime(topic, data, () => undefined)).toThrow('file not found');

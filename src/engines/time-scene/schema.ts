@@ -562,7 +562,6 @@ export const timeChapterState = z
   .object({
     /** Target time for the chapter (`t` in the URL). */
     time: timePoint.optional(),
-    index: z.array(kebabId).optional(),
     inset: z.enum(['world', 'southeast-asia', 'mexico']).optional(),
     insetVisible: z.boolean().optional(),
     fossilMode: z.enum(['age-window', 'all-mesozoic']).optional(),
@@ -570,6 +569,14 @@ export const timeChapterState = z
     layers: z.array(kebabId).optional(),
     /** Event / movement / entity ids to emphasise. */
     highlight: z.array(kebabId).optional(),
+    /** Ordered event ids reachable from this chapter's reader (a reconstruction topic: its modern points / cards, docs/47 E-DE2); never inherited. */
+    index: z.array(kebabId).optional().superRefine((ids, ctx) => {
+      const seen = new Set<string>();
+      ids?.forEach((id, i) => {
+        if (seen.has(id)) ctx.addIssue({ code: z.ZodIssueCode.custom, message: `duplicate event "${id}"`, path: [i] });
+        seen.add(id);
+      });
+    }),
     theme: theme.optional(),
     /** The child's question for this chapter (reading panel header when there is no `summary`). */
     question: bilingual.optional(),
@@ -624,7 +631,17 @@ export function timeScenePresetIds(data: TimeSceneGeoData): string[] {
 }
 
 export function timeChapterRefs(state: TimeChapterState): string[] {
-  return [...(state.index ?? []), ...(state.highlight ?? []), ...(state.beats ?? []).flatMap((b) => b.highlight ?? [])];
+  return [...(state.highlight ?? []), ...(state.beats ?? []).flatMap((b) => b.highlight ?? [])];
+}
+
+/** The reader index lists events; a reconstruction topic's lists its modern points / cards (docs/47 E-DE2) instead. */
+export function timeChapterIndexIssues(state: TimeChapterState, data: Pick<TimeSceneGeoData, 'events'> & Partial<Pick<TimeSceneGeoData, 'deepTime'>>): string[] {
+  if (data.deepTime) {
+    const objects = new Set([...data.deepTime.points, ...data.deepTime.cards].map((object) => object.id));
+    return (state.index ?? []).flatMap((id, i) => objects.has(id) ? [] : [`state.index.${i}: unknown modern point or card "${id}"`]);
+  }
+  const events = new Set(data.events.map((event) => event.id));
+  return (state.index ?? []).flatMap((id, i) => events.has(id) ? [] : [`state.index.${i}: unknown event "${id}"`]);
 }
 
 /** Layer ids are topic-dependent, so check them after parsing the chapter. */
