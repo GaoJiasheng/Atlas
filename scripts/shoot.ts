@@ -37,6 +37,8 @@ import { capacity, fillBounds, fillShapeForPrimitive, levelForVolume } from '../
 import { bendAxisIndex, bendCurve } from '../src/engines/space-scene/lib/bend';
 import { animationHz, shiftEntry, tintLevel } from '../src/engines/space-scene/lib/sim/bind';
 import type { PartsFile } from '../src/engines/space-scene/schema';
+import type { MechanismReading } from '../src/engines/space-scene/bridge';
+import { LINK_ROLES, PORT_ROLES, ROLE_ENDPOINTS } from '../src/engines/space-scene/lib/mechanism';
 import { dragVerdict, type DragSample, type DragVerdict } from './lib/drag-settle';
 
 const ROOT = resolve(import.meta.dirname, '..');
@@ -677,6 +679,59 @@ async function shiftIssues(s: Session): Promise<string[]> {
   return issues;
 }
 
+/** Rigid drawn endpoints, valve states and closed-path visibility share one frame. */
+async function mechanismDrawIssues(s: Session): Promise<string[]> {
+  const path = join(ROOT, 'src/content/topics', s.topic, 'data/parts.json');
+  if (!existsSync(path)) return [];
+  const file = JSON.parse(readFileSync(path, 'utf8')) as PartsFile;
+  if (!file.mechanisms?.length) return [];
+  const readings = await s.page.evaluate((ids) => {
+    const engine = window.__atlas!.engine as unknown as {
+      mechanism(id: string): MechanismReading | null;
+      flow(id: string): { paths: Record<string, { visible: boolean }> } | null;
+    };
+    return ids.map(({ id, flows }) => ({
+      frame: engine.mechanism(id),
+      flows: Object.fromEntries(flows.map((flow) => [flow, engine.flow(flow)])),
+    }));
+  }, file.mechanisms.map((m) => ({ id: m.id, flows: [...new Set(PORT_ROLES.map((p) => m.ports[p].flow.id))] })));
+  const issues: string[] = [];
+  const distance = (a: readonly number[], b: readonly number[]) => Math.hypot(...a.map((v, k) => v - b[k]!));
+  for (const [index, spec] of file.mechanisms.entries()) {
+    const read = readings[index]!, frame = read.frame;
+    if (!frame) { issues.push(`${spec.id}: no mechanism frame on stage`); continue; }
+    if (!Number.isFinite(frame.thetaRad) || frame.linkResidualM >= 1e-9 || frame.clearanceMarginM <= 0)
+      issues.push(`${spec.id}: invalid physical frame or insufficient clearance`);
+    if (Math.abs(frame.sunAngleRad + frame.planetAngleRad - 2 * frame.thetaRad) > 1e-10)
+      issues.push(`${spec.id}: sun/planet phase does not match the shared orbit`);
+    for (const role of LINK_ROLES) {
+      const binding = spec.parts[role], drawn = frame.parts[binding.part];
+      const pair = ROLE_ENDPOINTS[role];
+      if (!drawn?.endpoints || drawn.matrix.length !== 16 || drawn.matrix.some((v) => !Number.isFinite(v))) {
+        issues.push(`${binding.part}: no finite drawn matrix/endpoints`); continue;
+      }
+      const length = distance(binding.restEndpoints[0], binding.restEndpoints[1]);
+      if (Math.abs(distance(drawn.endpoints[0]!, drawn.endpoints[1]!) - length) > 1e-9)
+        issues.push(`${binding.part}: drawn rod changed length`);
+      // Display explode translates both endpoints equally; it cannot change the physical direction.
+      const a = frame.points[pair[0]]!, b = frame.points[pair[1]]!;
+      for (let axis = 0; axis < 2; axis++)
+        if (Math.abs((drawn.endpoints[1]![axis]! - drawn.endpoints[0]![axis]!) - (b[axis]! - a[axis]!)) > 1e-9)
+          issues.push(`${binding.part}: drawn endpoints disagree with the physical frame`);
+    }
+    for (const role of PORT_ROLES) {
+      const port = spec.ports[role], key = `${port.flow.id}:${port.flow.path}`;
+      const open = frame.pistonDirection === 'down' ? role === 'upperIn' || role === 'lowerOut'
+        : frame.pistonDirection === 'up' ? role === 'lowerIn' || role === 'upperOut' : false;
+      if (frame.ports[role] !== open || frame.gates[key] !== open)
+        issues.push(`${key}: valve and gate disagree with piston direction`);
+      if (!open && read.flows[port.flow.id]?.paths[port.flow.path]?.visible)
+        issues.push(`${key}: closed port still draws particles`);
+    }
+  }
+  return issues;
+}
+
 /**
  * Every beat opened from its link (`?ch=<chapter>&b=<n>`) in a fresh document of its own, against the scene the presentation
  * showed: a field that differs, or a run not at its end (links jump to the end), is a beat failure.
@@ -711,6 +766,7 @@ async function runBeatLinks(s: Session, beats: { chapter: string; index: number 
     for (const issue of await hzIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     for (const issue of await tintIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     for (const issue of await orbitIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
+    for (const issue of await mechanismDrawIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     if (diffs.length) report.beatFailures.push(`${name}: opened from ${link}: ${diffs.join('; ')}`);
     else same++;
     if (diffs.length) console.log(`  ${`${name} (link)`.padEnd(36)} FAIL  ${diffs.join('; ').slice(0, 300)}`);
@@ -770,6 +826,7 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
     for (const issue of await hzIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     for (const issue of await tintIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     for (const issue of await orbitIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
+    for (const issue of await mechanismDrawIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     await s.page.screenshot({ path: join(out, `${name}${o.suffix}.png`) });
     console.log(`  ${name.padEnd(36)} ${landed ? 'OK' : 'FAIL'}${missing.length ? `  (no label: ${missing.join(', ')})` : ''}`);
     // A looping exercise beat (SpaceScene exercise mode) also gets a still at its start and end keys.

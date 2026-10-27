@@ -45,6 +45,8 @@ import { MAX_FLOW_PATHS } from './lib/flow-curve';
 import { beatSimSchema, chapterSimIssues, chapterSimSchema, simIssues, simSchema } from './sim-schema';
 import { materialsShowable } from './lib/sim/materials';
 import { linkOrbitTable, orbitTableIssues } from './orbit-rotation-schema';
+import { mechanismIssues, mechanismSchema } from './mechanism-schema';
+export { mechanismIssues } from './mechanism-schema';
 
 /* ------------------------------------------------------------------ */
 /* Parts                                                               */
@@ -1195,9 +1197,11 @@ export const partsFileBase = z
     sites: z.array(siteSchema).max(256).optional(),
     /** Try-it simulation: controls, a model, outputs and bindings (sim-schema.ts, docs/06 「SpaceScene · 试一试」). */
     sim: simSchema.optional(),
+    mechanisms: z.array(mechanismSchema).max(1).default([]),
   })
   .strict()
   .superRefine((file, ctx) => {
+    for (const x of mechanismIssues(file.mechanisms, file)) ctx.addIssue({ code: z.ZodIssueCode.custom, ...x });
     if (file.sim) {
       const countable = new Set(file.parts.filter((p) => p.repeat !== undefined && (p.extra ?? []).length === 0).map((p) => p.id));
       for (const x of simIssues(file.sim, {

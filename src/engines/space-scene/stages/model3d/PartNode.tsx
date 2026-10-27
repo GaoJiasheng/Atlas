@@ -972,6 +972,29 @@ export function PartNode(props: PartNodeProps) {
           } else props.fillBridge.shifts.set(part.id, { offset: [...m.shiftNow], target: [...m.shiftTo], shown: handle.visible, delay: m.shiftDelay });
         }
       }
+      const mechanism = runtime.mechanismParts.get(part.id);
+      if (mechanism) {
+        // The outer group keeps its authored centre and display explode. Inside it,
+        // apply the physical rigid delta about world points, without scaling a rod.
+        pr.matrix.makeTranslation(-shape.position[0], -shape.position[1], -shape.position[2])
+          .multiply(mechanism.matrix).multiply(tmpT.makeTranslation(...shape.position));
+        const e = pr.matrix.elements;
+        const h = props.anchorHalf;
+        handle.half[0] = Math.abs(e[0]!) * h[0] + Math.abs(e[4]!) * h[1] + Math.abs(e[8]!) * h[2];
+        handle.half[1] = Math.abs(e[1]!) * h[0] + Math.abs(e[5]!) * h[1] + Math.abs(e[9]!) * h[2];
+        handle.half[2] = Math.abs(e[2]!) * h[0] + Math.abs(e[6]!) * h[1] + Math.abs(e[10]!) * h[2];
+        if (g) {
+          tmpM.makeTranslation(g.position.x, g.position.y, g.position.z).multiply(pr.matrix)
+            .multiply(tmpT.makeTranslation(-shape.position[0], -shape.position[1], -shape.position[2]));
+          tmpM.toArray(mechanism.reading.matrix);
+          if (mechanism.restEndpoints && mechanism.reading.endpoints) {
+            for (let i = 0; i < 2; i++) {
+              tmpV.copy(mechanism.restEndpoints[i]!).applyMatrix4(tmpM);
+              tmpV.toArray(mechanism.reading.endpoints[i]!);
+            }
+          }
+        }
+      }
       pr.matrixWorldNeedsUpdate = true;
       // The label anchor follows the pose.
       const move = (rest: readonly number[], out: Vec3) => {

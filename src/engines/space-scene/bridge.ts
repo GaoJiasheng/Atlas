@@ -104,8 +104,33 @@ export interface AnimationReading {
   on: number;
 }
 
+/** Physical points precede display explode; part matrices map rest world metres to the actual displayed world metres. */
+export interface MechanismReading {
+  thetaRad: number;
+  phaseDeg: number;
+  cycles: number;
+  pistonDirection: 'up' | 'down' | 'switch';
+  points: Record<string, [number, number, number]>;
+  planetAngleRad: number;
+  sunAngleRad: number;
+  shaftTurns: number;
+  ports: Record<string, boolean>;
+  linkResidualM: number;
+  clearanceMarginM: number;
+  parts: Record<string, { matrix: number[]; endpoints?: number[][] }>;
+  gates: Record<string, boolean>;
+}
+
+export type MechanismSave = Record<string, { thetaRad: number; qaHold: boolean }>;
+
 export interface StageBridge {
-  orbitRendered?: {snapshotId:number;parts:Record<string,{position:number[];quaternion:number[];scale:number[];visible:boolean}>;solarDirections:Record<string,number[]>};
+  /** Orbit sims (docs/44 §4.10): what OrbitDriver really drew for the snapshot `snapshotId` (world position / quaternion / scale, Sun uniforms). */
+  orbitRendered?: { snapshotId: number; parts: Record<string, { position: number[]; quaternion: number[]; scale: number[]; visible: boolean }>; solarDirections: Record<string, number[]> };
+  mechanisms: Map<string, MechanismReading>;
+  seekMechanism(id: string, deg: number): boolean;
+  resetMechanisms(): void;
+  saveMechanisms(): MechanismSave;
+  restoreMechanisms(saved: MechanismSave): void;
   fills: Map<string, FillReading>;
   /** Copies a `count` binding draws, per part (QA `copies(id)`). */
   copies: Map<string, number>;
@@ -176,6 +201,11 @@ export function cameraSettled(bridge: StageBridge, id: number, timeoutMs: number
 
 export function createBridge(): StageBridge {
   return {
+    mechanisms: new Map(),
+    seekMechanism: () => false,
+    resetMechanisms: () => {},
+    saveMechanisms: () => ({}),
+    restoreMechanisms: () => {},
     width: 0,
     height: 0,
     resolution: 1,

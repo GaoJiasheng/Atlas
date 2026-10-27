@@ -62,6 +62,7 @@ import { filingMatrices, filingsCard } from './geometry';
 import { SimOverlays } from './SimOverlays';
 import { TimelineClock } from './TimelineClock';
 import { AnimClocks } from './AnimClocks';
+import { MechanismDriver } from './MechanismDriver';
 import type { Matrix4 } from 'three';
 import { getOrbitSession } from '../../lib/sim/orbit-session';
 import { OrbitClockDriver, OrbitDriver } from './OrbitDriver';
@@ -596,6 +597,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
 
   return (
     <RuntimeContext.Provider value={runtime}>
+      {data.mechanisms.length > 0 && <MechanismDriver data={data} store={store} ui={ui} bridge={bridge} />}
       {orbitSession && <OrbitClockDriver orbit={orbitSession} />}
       {!orbitSession && <RunClock run={s.run} alwaysOn={alwaysOn} />}
       <AnimClocks animations={data.animations} effects={sim?.animations} bridge={bridge} snapKey={snap.current.key} />

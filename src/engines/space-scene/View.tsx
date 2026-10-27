@@ -222,6 +222,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
   const named = useMemo(() => file.presets ?? [], [file.presets]);
   /** The scene on entering (before ORBIT / REFERENCE / the selection were dropped). */
   const entered = useRef<SpaceSavedState | null>(null);
+  const enteredMechanisms = useRef<ReturnType<typeof bridge.saveMechanisms>>({});
   /**
    * Put the stage in a beat's state (lib/beat-scene.ts): its chapter's target
    * plus the beat's fields and camera. The presentation's `applyBeat`, the
@@ -235,6 +236,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
   const applyBeatState = (b: Beat<SpaceBeatSpec>, instant: boolean): Promise<void> | undefined => {
     const st = store.getState();
     const before = st.snapshot();
+    bridge.resetMechanisms();
     ui.setState({ orbit: false, nextTweenMs: instant ? null : BEAT_TWEEN_MS, beatCamera: b.spec?.camera !== undefined ? 'authored' : 'auto' });
     st.applyState(beatScene(b), { instant });
     if (instant) return;
@@ -259,6 +261,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
     captionOf: (b, l) => tx(b.caption, l),
     applyBeat: (b, { instant }) => applyBeatState(b, instant),
     onEnter: () => {
+      enteredMechanisms.current = bridge.saveMechanisms();
       const st = store.getState();
       const snap = st.snapshot();
       const u = ui.getState();
@@ -299,6 +302,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       store
         .getState()
         .applyState({ chapter, layers, camera, view, part, explode, run, cutaway, hidden, pose, ghosted, exercise, tints, sites, beat, sim, ...(orbitSession ? { orbitTime: orbitTime ?? null } : {}), demo: null }, { instant: false });
+      bridge.restoreMechanisms(enteredMechanisms.current);
       hud.setState({ presetId: saved.presetId, cameraFree: saved.cameraFree });
     },
   };
@@ -626,6 +630,11 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
           };
         },
         shadows: () => Object.fromEntries(bridge.shadows),
+        mechanism: (id: string) => {
+          const m = bridge.mechanisms.get(id);
+          return m ? structuredClone(m) : null;
+        },
+        seekMechanism: (id: string, deg: number) => bridge.seekMechanism(id, deg),
         // Copies of a counted `repeat` part drawn now (a `count` binding: the balls of a table's per cents); null without one.
         copies: (id: string) => bridge.copies.get(id) ?? null,
         // A try-it tint drawn now (docs/41 E-S1: a cup's pale seedlings): the colour it blends toward and how far (0–1, 3 decimals); null without a tint binding.
