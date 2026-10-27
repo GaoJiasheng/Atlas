@@ -617,4 +617,6 @@ PRESENT 的字幕自足；图只在普通阅读出现。退出演示沿用恢复
 
 **相对 §2 的出入。** 背景第 1 拍不开月层，字幕改为“月平均图层还没有打开”；字幕里的“MSS”改“新加坡气象局”，“《水》”改《新加坡的水》。正文中的地图读数按数据核正：1 月南中国海风来自东、东北，7 月赤道以南 850 hPa 为东风（不是东南风）。没有做图的章末锚点（`Figure` 无 id）。《新加坡的水》第 02 章加一句回链。
 
-**引擎小修。** 雨层装上后 1:50m 海岸被移到 1:10m 遮罩之上，新加坡近景出现两条海岸线；改为在雨格上另画一层随 zoom 7→8 淡出的 1:50m 海岸（`climateStyle.ts` `coastOverClimate`），原海岸留在遮罩下；单测 `tests/time-scene/climate-coast.test.ts`。另外 `scripts/shoot.ts --beats` 在取每拍快照前等月份提交（`renderedMonth === month`，最多 30 秒）：负载高时软件 WebGL 画一个新月份要 2–8 秒，原来固定等 1.5 秒会误报；页面 20 秒内未 ready 时重新加载，最多三次。
+**引擎小修。** 雨层装上后 1:50m 海岸被移到 1:10m 遮罩之上，新加坡近景出现两条海岸线；改为在雨格上另画一层随 zoom 7→8 淡出的 1:50m 海岸（`climateStyle.ts` `coastOverClimate`），原海岸留在遮罩下；单测 `tests/time-scene/climate-coast.test.ts`。另外 `scripts/shoot.ts` 的 `Session.load` 在页面 20 秒内未 ready 时重新加载，最多三次（负载很高时软件 WebGL 首帧可超过 20 秒）；每拍等月份提交沿用 §9.2 的 `settleClimate`。
+
+**门槛（合并 f5c34bb 之后，机器负载 140–210）。** `pnpm check` 0 错；`pnpm validate` 57 题 0/0；`pnpm test` 163 文件 4243 项全过（`schemas.test.ts` 一次超时，单跑通过）；`pnpm build` 117 页。`shoot --beats --keys` 四种语言×主题：每种 36 拍、36/36 链接一致、章节高亮全在、0 拍失败；zh·cinema 的 `drag` 键一次超时，重跑 0 失败。`--layout` 在 1920×1080 及以下六种尺寸四种组合均 0 问题；2560×1440 与 3840×2160 的“打开链接”在这种负载下 3×20 秒都未 ready（4K 实测约 56 秒才首次提交月份），未能跑完。`--perf --gpu` 通过（MapLibre 舞台无渲染计数，月页 JS 447.8 KB gzip）。e2e 只跑本题、smoke、sample-climate（`--workers=2`）：本题 9 项与 smoke 首页计数全过；sample-climate 与 sample-space/sample-time 的 smoke 有超时（ready 20 秒、5 秒轮询），单跑仍受负载影响，留给主会话合并时全量复跑。
