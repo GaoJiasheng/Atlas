@@ -52,7 +52,7 @@ Wind: 12×399 nodes, 21×19, 850 hPa, m/s, [90,-15] at 2.5° south-to-north row-
 
 ## Artificial resources
 
-`public/geo/sample-climate-fixture-wind.json` and `sample-climate-fixture-rain.json` are deliberately artificial, offset 2×2 test arrays, attributed to S199. They include zero, null, 29/30 years, calm flow and six compass directions over the 12 months. They are not observations and do not represent real land, coast or weather boundaries. Their numeric/coordinate test values are released as PD-derived fixture data; surrounding authored text remains CC BY-NC-SA 4.0.
+`public/geo/sample-climate-fixture-wind.json` and `sample-climate-fixture-rain.json` are deliberately artificial, offset 2×2 test arrays, attributed to S199. They include zero, null, 29/30 years, calm flow and six compass directions over the 12 months. They are not observations and do not represent real land, coast or weather boundaries. They are Atlas-authored test values (the schema field `licenceFamily: PD-derived` only records that no share-alike input is mixed in) and fall under LICENSE-CONTENT like the rest of the fixture. The NOAA arrays need attribution only; it is given here and in THIRD-PARTY-NOTICES.md.
 
 ## M01–M12 derivation record
 

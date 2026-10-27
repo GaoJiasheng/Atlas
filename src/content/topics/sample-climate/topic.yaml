@@ -24,7 +24,10 @@
     "periodId": "clim-1991-2020",
     "startYear": 1991,
     "endYear": 2020,
-    "initialMonth": 1
+    "initialMonth": 1,
+    "keySources": [
+      "S199"
+    ]
   },
   "monthlyLayers": [
     {

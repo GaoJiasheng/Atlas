@@ -33,7 +33,7 @@
  *   engine view on the client (engines may touch window / WebGL freely; the
  *   server renders a stage placeholder). `__atlas.ready` waits for both.
  */
-import { monthlyUrlPatch } from '../time-scene/lib/climatology-state';
+import { monthlyUrlBaseline, monthlyUrlPatch } from '../time-scene/lib/climatology-state';
 import type { TimeSceneExt } from '../time-scene';
 import type { SceneStore } from './store';
 import {
@@ -243,7 +243,12 @@ export default function SceneHost(props: SceneHostProps) {
     if (topic.temporalMode === 'climatology') window.addEventListener('popstate', hydrate);
     const stopSync = startUrlSync({
       read: () => store.getState().snapshot() as UrlState,
-      baseline: (state) => (hud.getState().controls.urlBaseline?.(state as SceneSnapshot) ?? store.getState().chapterTarget(state.chapter ?? null)) as UrlState,
+      // A monthly topic's baseline is known before its view loads, so the first canonical write is already right.
+      baseline: (state) =>
+        (hud.getState().controls.urlBaseline?.(state as SceneSnapshot) ??
+          (topic.temporalMode === 'climatology'
+            ? monthlyUrlBaseline(store as SceneStore<TimeSceneExt>, chapters, state as SceneSnapshot<TimeSceneExt>)
+            : store.getState().chapterTarget(state.chapter ?? null))) as UrlState,
       subscribe: (listener) => store.subscribe(listener),
     });
     // Canonicalize invalid monthly b/m/t even when the author state needs no change.

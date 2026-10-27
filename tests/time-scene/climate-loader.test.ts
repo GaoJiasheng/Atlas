@@ -18,6 +18,25 @@ const settle = async () => {
   await Promise.resolve();
 };
 describe('per mount resource caching and failure isolation', () => {
+  it('calls the global fetch unbound by default (browsers reject fetch with a foreign `this`)', async () => {
+    const strict = vi.fn(function (this: unknown) {
+      if (this !== undefined && this !== globalThis) return Promise.reject(new TypeError('Illegal invocation'));
+      return Promise.resolve(new Response(JSON.stringify(body)));
+    });
+    vi.stubGlobal('fetch', strict);
+    try {
+      const loader = new ClimateLoader(context, () => {});
+      loader.load(layer);
+      await settle();
+      await new Promise((r) => setTimeout(r, 0));
+      expect(strict).toHaveBeenCalledTimes(1);
+      expect(loader.states.get(layer.id)?.status).toBe('ready');
+      loader.dispose();
+    } finally {
+      vi.unstubAllGlobals();
+    }
+  });
+
   it('fetches once across any month reads, retries only explicitly', async () => {
     const fetcher = vi.fn(async () => new Response(JSON.stringify(body)));
     const loader = new ClimateLoader(context, () => {}, fetcher as typeof fetch);

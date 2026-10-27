@@ -398,8 +398,12 @@ type BeatScene = Record<string, unknown> & { unfinished: string[] };
 function beatSceneOf(page: Page): Promise<BeatScene | null> {
   return page.evaluate(() => {
     const st = window.__atlas!.state() as unknown as Record<string, unknown>;
-    const climate = (window.__atlas!.engine as unknown as { climatology?(): { month: number; renderedMonth: number; authoredMonth: number; periodId: string } }).climatology?.();
+    const climate = (window.__atlas!.engine as unknown as {
+      climatology?(): { month: number; renderedMonth: number; authoredMonth: number; periodId: string; layers?: Record<string, { status: string }> };
+    }).climatology?.();
+    const shownLayers = Array.isArray(st.layers) ? (st.layers as string[]) : [];
     if (climate) return {
+      notReady: Object.entries(climate.layers ?? {}).filter(([id, l]) => shownLayers.includes(id) && l.status !== 'ready').map(([id, l]) => `${id}:${l.status}`),
       ...Object.fromEntries(['chapter', 'beat', 'month', 'layers', 'highlight', 'camera'].map(k => [k, st[k] ?? null])),
       renderedMonth: climate.renderedMonth,
       authoredMonth: climate.authoredMonth,
@@ -691,6 +695,7 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
     if (scene) shown.set(name, scene);
     if (scene && 'renderedMonth' in scene && (scene.month !== scene.renderedMonth || scene.month !== scene.authoredMonth))
       report.beatFailures.push(`${name}: authored/store/rendered months disagree: ${scene.authoredMonth}/${scene.month}/${scene.renderedMonth}`);
+    if (scene && Array.isArray(scene.notReady) && scene.notReady.length > 0) report.beatFailures.push(`${name}: monthly layers on show not ready: ${scene.notReady.join(', ')}`);
     // Energy bars on show (SpaceScene, docs/31 E-EN6) must add up to 100 %: energy is neither made nor lost.
     const bars = await s.page.evaluate(
       () => (window.__atlas!.engine as unknown as { energyBars?(): Record<string, { potential: number; kinetic: number; lost: number; shown: boolean }> }).energyBars?.() ?? {},
@@ -761,9 +766,21 @@ async function runClimateStates(s: Session, o: Options, out: string, report: Run
         e.toggleMonthlyLayer(layer.id, layer.id === x.primary[layer.quantity] && x.shot[layer.quantity]);
       if (x.shot.name === 'climate-cell') e.inspectClimateCell(105, 0);
     }, {shot, definitions, primary});
+    // The map commits a month on its next drawn frame (software GL can take a while): wait for it, then judge.
+    await s.page
+      .waitForFunction(
+        (m) => {
+          const c = (window.__atlas!.engine as unknown as { climatology(): { renderedMonth: number } }).climatology();
+          return c.renderedMonth === m;
+        },
+        shot.month,
+        { timeout: 5000 },
+      )
+      .catch(() => {});
     await s.page.waitForTimeout(350);
     const state = await beatSceneOf(s.page);
     if (state?.month !== shot.month || state.renderedMonth !== shot.month) report.beatFailures.push(`${shot.name}: month did not commit`);
+    if (Array.isArray(state?.notReady) && state.notReady.length > 0) report.beatFailures.push(`${shot.name}: monthly layers on show not ready: ${state.notReady.join(', ')}`);
     await s.page.screenshot({ path: join(out, `${shot.name}${o.suffix}.png`) });
   }
   await s.page.setViewportSize({ width: 390, height: 844 });
@@ -1396,6 +1413,7 @@ async function main(): Promise<number> {
         if (o.keys) console.log(`  key failures: ${keyFails}`);
         if (o.layout) console.log(`  layout issues: ${report.layout.length}`);
         if (o.beats) console.log(`  beat failures: ${report.beatFailures.length}`);
+        if (o.beats) for (const f of report.beatFailures) console.log(`    ${f}`);
         if (o.tasks) console.log(`  task failures: ${report.taskFailures.length}`);
         for (const f of report.taskFailures) console.log(`    ${f}`);
         if (keyFails || report.layout.length || report.beatFailures.length || report.taskFailures.length || bad.length) failed = true;

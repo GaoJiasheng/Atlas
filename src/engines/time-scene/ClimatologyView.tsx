@@ -5,17 +5,18 @@ import { SceneSlot, useHud, useScene, useSceneContext, useSceneControls, useScen
 import type { SceneControls } from '../core/controls';
 import { ChapterAxis } from '../core/axis/ChapterAxis';
 import { flatIndex, stepBeat } from '../core/axis/axis';
-import { chapterNumbers, storyChapters } from '../core/chapters';
+import { chapterNumbers, isBackground } from '../core/chapters';
 import { usePresentation } from '../core/presentation';
-import { tx } from '../../i18n';
+import { t as tl, tx } from '../../i18n';
 import { ControlPanel, type ControlRow } from '../widgets/ControlPanel';
 import { ClimatologyReaderTop, ClimatologyIndex } from './ClimatologyReader';
 import type { ClimatologyBeat, ClimatologyChapterState, ClimatologyGeoData } from './schema';
-import { cycleMonth, exploringText, monthlyBeatScene, monthText, ownMonthlyBeats, type ClimatologyExt } from './lib/climatology-state';
+import { cycleMonth, exploringText, monthlyBeatScene, monthText, ownMonthlyBeats, setClimatologyMonth, monthlyUrlBaseline, type ClimatologyExt } from './lib/climatology-state';
 import { ClimatologyStage, type ClimateGeoController, type ClimateSnapshot } from './stages/geo/ClimatologyStage';
 import { ClimateCellControls } from './ClimateCellControls';
 import { ClimateKey } from './ClimateKey';
 import { ClimateCellDetail } from './ClimateCellDetail';
+import { Icon } from '../widgets/icons';
 import './climatology.css';
 import './time-scene.css';
 
@@ -34,6 +35,8 @@ export default function ClimatologyView({ topic, data, chapters, locale }: Engin
     theme: s.theme,
   }));
   const open = useHud((h) => h.panelsOpen);
+  // The rain key is needed to read the map: open on wider screens, a chip on phones (it would cover half the map).
+  const [overlayOpen, setOverlayOpen] = useState(() => window.matchMedia('(min-width: 760px)').matches);
   const [controller, setController] = useState<ClimateGeoController | null>(null);
   const controllerRef = useRef(controller);
   controllerRef.current = controller;
@@ -149,7 +152,7 @@ export default function ClimatologyView({ topic, data, chapters, locale }: Engin
   );
   const monthStep = useCallback(
     (delta: -1 | 1) => {
-      store.getState().setClimatologyMonth(cycleMonth(store.getState().month, delta));
+      setClimatologyMonth(store, cycleMonth(store.getState().month, delta));
     },
     [store],
   );
@@ -173,9 +176,10 @@ export default function ClimatologyView({ topic, data, chapters, locale }: Engin
   const numbers = useMemo(() => chapterNumbers(chapters), [chapters]);
   const axisChapters = useMemo(
     () =>
-      storyChapters(chapters).map((c) => ({
+      // docs/08 §2: every chapter is a segment, the background chapter as `BG`.
+      chapters.map((c) => ({
         id: c.id,
-        number: String(numbers.get(c.id) ?? 1).padStart(2, '0'),
+        number: isBackground(c) ? tl(locale, 'chapter.backgroundShort') : String(numbers.get(c.id) ?? 0).padStart(2, '0'),
         title: tx(c.title, locale),
         beats: presentation.beats.filter((b) => b.chapter === c.id).map((b) => tx(b.caption, locale)),
       })),
@@ -229,14 +233,7 @@ export default function ClimatologyView({ topic, data, chapters, locale }: Engin
       beats: presentation.controls,
       beatStep: step,
       monthStep,
-      urlBaseline: (raw) => {
-        const s = raw as SceneSnapshot<ClimatologyExt>;
-        if (!s.chapter) return null;
-        return {
-          ...monthlyBeatScene(store, chapters, s.chapter, s.beat ?? 0),
-          beat: 0,
-        };
-      },
+      urlBaseline: (raw) => monthlyUrlBaseline(store, chapters, raw as SceneSnapshot<ClimatologyExt>),
       status: [`${monthText(state.month, locale)} · ${topic.climatology!.startYear}–${topic.climatology!.endYear}`],
       labels: true,
       specRows: [
@@ -294,7 +291,7 @@ export default function ClimatologyView({ topic, data, chapters, locale }: Engin
         return false;
       },
       test: {
-        setClimatologyMonth: ((n: number) => store.getState().setClimatologyMonth(n)) as never,
+        setClimatologyMonth: ((n: number) => setClimatologyMonth(store, n)) as never,
         sampleClimate: ((lon: number, lat: number, month?: number) =>
           controllerRef.current?.sampleClimate(lon, lat, month) ?? null) as never,
         climatology: (() => ({
@@ -345,6 +342,7 @@ export default function ClimatologyView({ topic, data, chapters, locale }: Engin
         id: l.id,
         label: l.label,
       })),
+      { kind: 'mode' as const, id: 'labels' },
     ],
     [topic.monthlyLayers],
   );
@@ -384,7 +382,7 @@ export default function ClimatologyView({ topic, data, chapters, locale }: Engin
           max="12"
           step="1"
           value={state.month}
-          onChange={(e) => store.getState().setClimatologyMonth(Number(e.currentTarget.value))}
+          onChange={(e) => setClimatologyMonth(store, Number(e.currentTarget.value))}
         />
         <button type="button" data-climatology-next aria-label={locale === 'zh' ? '下个月' : 'Next month'} onClick={() => monthStep(1)}>
           ›
@@ -441,8 +439,14 @@ export default function ClimatologyView({ topic, data, chapters, locale }: Engin
         />
       </SceneSlot>
       <SceneSlot name="stageOverlay">
-        <details className="atlas-overlay-card ts-overlay clim-overlay" open>
-          <summary>{locale === 'zh' ? '图层与图例' : 'Layers and key'}</summary>
+        <details className="atlas-overlay-card ts-overlay" open={overlayOpen} onToggle={(e) => setOverlayOpen(e.currentTarget.open)}>
+          <summary className="ts-overlay__summary" aria-label={tl(locale, 'time.layersAndKey')}>
+            <span className="ts-overlay__closed">
+              <Icon name="layers" size={18} />
+              <span>{tl(locale, 'time.layersAndKey')}</span>
+            </span>
+            <Icon name="close" size={18} className="ts-overlay__open" />
+          </summary>
           <ControlPanel layers={layers} tools={tools} />
           <ClimateKey topic={topic} locale={locale} layers={state.layers} snapshot={snapshot} controller={controller} />
         </details>

@@ -46,6 +46,16 @@ export function monthlyBeatScene(
   };
 }
 
+/** The URL baseline: the shown beat's own scene (so `m` / `cam` / `layers` are written only when they differ from it); `b` is written unless it is the first beat. */
+export function monthlyUrlBaseline(
+  store: SceneStore<TimeSceneExt>,
+  chapters: readonly Chapter[],
+  state: Pick<SceneSnapshot<TimeSceneExt>, 'chapter' | 'beat'>,
+): SceneSnapshot<ClimatologyExt> | null {
+  if (!state.chapter) return null;
+  return { ...monthlyBeatScene(store, chapters, state.chapter, state.beat ?? 0), beat: 0 };
+}
+
 /** Apply URL priority before exposing the scene: chapter → beat → explicit overrides. */
 export function monthlyUrlPatch(
   store: SceneStore<TimeSceneExt>,
@@ -83,4 +93,11 @@ export function exploringText(month: number, authoredMonth: number, locale: 'en'
     : locale === 'zh'
       ? `正在查看${monthText(month, locale)}；字幕指原拍${monthText(authoredMonth, locale)}`
       : `Exploring ${monthText(month, locale)}; caption refers to ${monthText(authoredMonth, locale)}`;
+}
+
+/** The one month action (PLATE range, ‹ ›, Shift + ← →, test API): integers 1…12 only; anything else changes nothing. */
+export function setClimatologyMonth<E extends TimeSceneExt>(store: SceneStore<E>, month: number): boolean {
+  if (!Number.isInteger(month) || month < 1 || month > 12) return false;
+  store.getState().patch({ month } as Partial<SceneSnapshot<E>>);
+  return true;
 }

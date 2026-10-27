@@ -5,21 +5,6 @@ Atlas code is MIT (see `LICENSE`); Atlas content is CC BY-NC-SA 4.0 (see
 
 ## Geographic data
 
-`sample-climate` uses NOAA PSL NCEP/NCAR Reanalysis 1 monthly 850 hPa wind
-climatology and GPCP V2.3 monthly precipitation-rate climatology (1991–2020),
-distributed as public-domain-derived numeric arrays in
-`public/geo/sample-climate-{wind-850,rain-gpcp}-1991-2020.json`. NCEP Reanalysis
-and GPCP precipitation data provided by NOAA PSL, Boulder, Colorado, USA,
-https://psl.noaa.gov/. Changes: source-id metadata remapped; numeric arrays,
-native coordinates and valid-year counts unchanged. Native-grid cell polygons
-and projected wind glyphs are PD-derived. These are not official NOAA products
-or forecasts. The fixture's six city anchors preserve Natural Earth 1:110m
-populated-place coordinates (public domain). Separate 2×2 arrays are artificial
-test values, not observations. Exact requests, input/output SHA-256 and licence
-families are in `src/content/topics/sample-climate/data/SOURCES.md` and
-`scripts/geo/sample-climate/SOURCES-GEO.md`. NOAA software is not covered by this
-data acknowledgement.
-
 | Work | Use | Licence |
 |---|---|---|
 | CShapes 2.0 (Schvitz, Girardin, Rüegger, Walter, Cederman, Gleditsch; ETH Zürich) | sovereign borders at each keyframe date | CC BY-NC-SA 4.0 |
@@ -32,6 +17,9 @@ data acknowledgement.
 | Natural Earth 1:10m rivers and lake centerlines, lakes (v5.0.0) | `ancient-civilisations` rivers and the Tonlé Sap outline (`public/geo/ancient-rivers.json`) | Public domain |
 | Wikidata | point coordinates (P625) of the `ancient-civilisations` events and sites | CC0 |
 | Kanguole, *Ancient North China Plain blank relief map.svg* (Wikimedia Commons), via `public/geo/warring-states-rivers.json` | two reconstructed Yellow River courses in `public/geo/ancient-rivers.json`, which is therefore published CC BY-SA 4.0 (see LICENSE-CONTENT) | CC BY-SA 4.0 |
+| NOAA PSL NCEP/NCAR Reanalysis 1, monthly long-term mean 850 hPa `uwnd` / `vwnd` with valid-year counts, 1991–2020 (https://psl.noaa.gov/) | `sample-climate` wind arrays (`public/geo/sample-climate-wind-850-1991-2020.json`); native 2.5° grid, values unchanged, source ids remapped | Public domain (US Government data); "NCEP Reanalysis data provided by NOAA PSL, Boulder, Colorado, USA" |
+| GPCP Version 2.3 monthly precipitation, long-term mean 1991–2020, via NOAA PSL (https://psl.noaa.gov/) | `sample-climate` rain arrays (`public/geo/sample-climate-rain-gpcp-1991-2020.json`); native 2.5° grid, values unchanged, source ids remapped | Public domain (US Government data); "GPCP Precipitation data provided by NOAA PSL, Boulder, Colorado, USA" |
+| Natural Earth 1:110m populated places | `sample-climate` city anchor coordinates (`data/events.json`) | Public domain |
 
 ## 3D anatomy models
 

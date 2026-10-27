@@ -396,6 +396,15 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
     requestRender();
   });
   resizeObserver.observe(container);
+  // Clicking or dragging the map must not leave keyboard focus on the canvas (digit presets, `,` / `.`).
+  const canvas = map.getCanvas();
+  let pointerAt = 0;
+  const onPointerDown = () => (pointerAt = performance.now());
+  const onCanvasFocus = () => {
+    if (performance.now() - pointerAt < 600) canvas.blur();
+  };
+  container.addEventListener('pointerdown', onPointerDown, true);
+  canvas.addEventListener('focus', onCanvasFocus);
   map.on('movestart', (event) => {
     userGesture ||= Boolean((event as { originalEvent?: Event }).originalEvent);
   });
@@ -556,6 +565,8 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
       unsubscribe();
       observer.disconnect();
       resizeObserver.disconnect();
+      container.removeEventListener('pointerdown', onPointerDown, true);
+      canvas.removeEventListener('focus', onCanvasFocus);
       leaders.destroy();
       labelRoot.remove();
       scale.remove();

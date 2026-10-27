@@ -594,3 +594,17 @@ PRESENT 的字幕自足；图只在普通阅读出现。退出演示沿用恢复
 **可复核门槛。** `pnpm check`：0 errors、0 warnings、3条既有 unused-variable hints；`pnpm validate`：56 topics、0 errors、0 warnings；`pnpm test`：161 files、4226 tests 全过；`pnpm build`：115 pages，静态构建通过。`git diff --check` 通过。单测覆盖实际数组 T01/T03–T06、网格边界/方向/雨档/null T07–T10、schema/source/period 错误、month/URL/order、缓存/显式重试/旧 promise/卸载；浏览器用例在 `tests-e2e/sample-climate.spec.ts`（EN/ZH × paper/cinema、全部12拍、URL/刷新/history/locale/theme、range与快捷键、PRESENT恢复、地图拖动、手机、0/null/29年、隐藏层、error/retry、暖缓存离线）。`scripts/shoot.ts` 增加每拍 authored/store/rendered 月核对、fresh `?ch&b` 核对及 M01/M07/M12、单层/全关/格点/手机截图任务。浏览器合同 T11–T18 仍须在有浏览器权限的环境跑完；§8的正式内容/发布勾选保持未完成。
 
 详细构建依赖尺寸、逐文件输出指纹与受阻的回归命令记录见 `scripts/geo/sample-climate/ENGINE-QA.md`。
+
+### 9.2 验收复核（2026-10-27，Claude；浏览器门槛已跑）
+
+浏览器可用后跑通 shoot/e2e，发现并修正（行为变化以此为准）：
+
+1. **月资源在浏览器里全部加载失败。** `ClimateLoader` 默认把裸 `fetch` 存成实例字段，调用时 `this`=loader，浏览器报 “Illegal invocation”，风雨四层都是 error、地图空白；单测只注入了 mock 所以没发现。改为包一层箭头函数，并加单测（严格 `this` 的 fetch 桩）。`shoot --beats` 的每拍和气候截图现在把“开着但未 ready 的月层”判为失败，并逐条打印 beat failures。
+2. **章轴背景段。** §4.1 写“背景不占段”，与 docs/08 §2 HUD 铁律（背景章 = `BG` 段，与 SpaceScene/MathScene 一致）冲突；按铁律改为 BG 段，背景 4 拍在轴上可点。刻度位置等距规则不变，正式章仍各 4 刻度。
+3. **键盘。** 点/拖地图后焦点留在 canvas，数字预设与 `,` `.` 失效；照搬历史 controller 的 canvas 焦点保护。补上 LABELS 行（宿主已注册 `L`，面板缺按钮）。
+4. **共享核心收缩。** `setClimatologyMonth` 从共享 `core/store.ts` 移到 `time-scene/lib/climatology-state.ts`（同一校验，UI/快捷键/测试 API 共用）；其余核心改动（`m` codec、`fromUrl(fields, topic)`、月模式 hydration/popstate、`ready()`、`monthStep`、`revealReader`、按 temporalMode 懒加载视图、`engineSchemas(…, temporalMode)`）都只在 climatology 分支生效，保留。
+5. **图层与图例卡**改用历史视图同一 `ts-overlay` 结构（关闭时为图标芯片）；≥760 px 默认展开（雨色阶是读图必需），手机默认收起，不再盖住半张地图。“正在查看”提示阅读面板与 PRESENT 共用 `exploringText`（月名而非“month 7”）。
+6. **许可。** 撤回 LICENSE-CONTENT 的 PD-derived 例外段：公有领域数据只需署名，不需要也不应写成另一种许可例外；改为 THIRD-PARTY-NOTICES 地理数据表的三行鸣谢（NCEP/NCAR R1、GPCP v2.3、NE 110m 城市点）。§3 第 299 行与 §8 勾选项里“LICENSE-CONTENT 列例外”的要求据此作废。rain token 移到 holder 色之后、带独立注释，hex 改小写。
+7. **KEY 来源。** 引擎原在每层来源芯片后硬编码追加 `S199`（本题专有 id）；改为作者字段 `climatology.keySources: ["S199"]`（可选，validate 检查 id 在 sources.json）。正式主题照此写。
+
+仍未达标/留给正文：月页静态 JS 约 447 KB gzip（>400 KB 目标，主要是既有 MapLibre 与 React，未在本轮重构）；iPad 真机切月 p95 未测。

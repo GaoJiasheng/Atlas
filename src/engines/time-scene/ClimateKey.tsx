@@ -65,7 +65,7 @@ export function ClimateKey({
                   {'pressureHpa' in resource ? ` · ${resource.pressureHpa} hPa` : ''}
                 </p>
               )}
-              <SourceRefs ids={[...new Set([...layer.sources, 'S199'])]} locale={locale} />
+              <SourceRefs ids={[...new Set([...layer.sources, ...(topic.climatology?.keySources ?? [])])]} locale={locale} />
             </div>
           );
         })}

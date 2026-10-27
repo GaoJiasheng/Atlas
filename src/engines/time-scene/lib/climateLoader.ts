@@ -18,7 +18,8 @@ export class ClimateLoader {
   constructor(
     private context: Omit<ClimateValidationContext, 'quantity'>,
     private changed: () => void,
-    private fetcher: typeof fetch = fetch,
+    // Wrapped: a bare `fetch` stored on the instance is called with `this` = loader ("Illegal invocation" in browsers).
+    private fetcher: typeof fetch = (input, init) => fetch(input, init),
   ) {}
   load(layer: MonthlyLayer, retry = false): void {
     if (this.disposed || (!retry && this.states.has(layer.id))) return;

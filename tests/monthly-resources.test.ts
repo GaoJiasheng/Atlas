@@ -32,6 +32,12 @@ describe('monthly public resources: build/validate cross-checks', () => {
       },
     ]);
   });
+  it('checks the KEY display-rule sources (climatology.keySources)', () => {
+    const value = { ...smallTopic(), climatology: { ...topic.climatology!, keySources: ['S199', 'S998'] } };
+    expect(monthlyResourceIssues(value, sources, readGeo)).toEqual([
+      { file: 'topic.yaml', message: 'climatology.keySources.1: unknown source S998' },
+    ]);
+  });
   it('checks resource quantity, period, sources and source-chip agreement', () => {
     const value = smallTopic();
     const resource = readGeo('sample-climate-fixture-rain');

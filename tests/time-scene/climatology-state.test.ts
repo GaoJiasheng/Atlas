@@ -5,7 +5,7 @@ import { engineSchemas, validateEngineChapterState } from '../../src/engines/sch
 import { createSceneStore } from '../../src/engines/core/store';
 import { decodeSceneState, encodeSceneState, mergeSearch } from '../../src/engines/core/url-state';
 import { timeSceneEngine } from '../../src/engines/time-scene';
-import { monthlyUrlPatch, monthlyBeatScene, cycleMonth, type ClimatologyExt } from '../../src/engines/time-scene/lib/climatology-state';
+import { monthlyUrlPatch, monthlyBeatScene, cycleMonth, setClimatologyMonth, type ClimatologyExt } from '../../src/engines/time-scene/lib/climatology-state';
 import { tickPosition, stepBeat } from '../../src/engines/core/axis/axis';
 import { buildBeats } from '../../src/engines/core/presentation/beats';
 import type { Chapter, SceneSnapshot } from '../../src/engines/core/types';
@@ -167,10 +167,10 @@ describe('monthly state and URL priorities', () => {
       camera,
     });
     const before = store.getState().snapshot();
-    expect(store.getState().setClimatologyMonth(7)).toBe(true);
+    expect(setClimatologyMonth(store, 7)).toBe(true);
     expect(store.getState().snapshot()).toEqual({ ...before, month: 7 });
     for (const bad of [0, 13, 2.5, NaN, Infinity]) {
-      expect(store.getState().setClimatologyMonth(bad)).toBe(false);
+      expect(setClimatologyMonth(store, bad)).toBe(false);
       expect(store.getState().month).toBe(7);
     }
     expect(cycleMonth(12, 1)).toBe(1);

@@ -490,7 +490,7 @@ colors.ts  time-scene.css
 ```json
 {
   "temporalMode": "climatology",
-  "climatology": {"periodId":"clim-1991-2020","startYear":1991,"endYear":2020,"initialMonth":1},
+  "climatology": {"periodId":"clim-1991-2020","startYear":1991,"endYear":2020,"initialMonth":1,"keySources":["S199"]},
   "monthlyLayers": [
     {"id":"clim-wind","type":"monthly-climatology","quantity":"wind","file":"sample-climate-wind-850-1991-2020","label":{"en":"Regional wind · 850 hPa","zh":"区域风 · 850 hPa"},"periodId":"clim-1991-2020","sources":["S22","S25","S101"]},
     {"id":"clim-rain","type":"monthly-climatology","quantity":"rain","file":"sample-climate-rain-gpcp-1991-2020","label":{"en":"Mean rain rate","zh":"平均降水率"},"periodId":"clim-1991-2020","sources":["S32","S25","S102"]}
@@ -498,7 +498,7 @@ colors.ts  time-scene.css
 }
 ```
 
-`file` 是 `public/geo/<file>.json` 的 kebab-case stem；不能是路径或外部 URL。只装一种 quantity 也合法。source 必须在本主题 `sources.json`，period 与主题一致。资源是 docs/50 §4.2 的原始 `monthly-wind` / `monthly-rain` 结构，12 帧、南→北 row-major；非有限数、越界值、坏长度/单位/月序/基准期会在 build/validate 与运行时拒绝。资源按挂载缓存，重试才重取；null 有独立有效掩码，不转成有效 0。
+`keySources`（可选）是 KEY 显示规则（雨档、箭头标尺）的来源，跟在每层数据来源芯片后。`file` 是 `public/geo/<file>.json` 的 kebab-case stem；不能是路径或外部 URL。只装一种 quantity 也合法。source 必须在本主题 `sources.json`，period 与主题一致。资源是 docs/50 §4.2 的原始 `monthly-wind` / `monthly-rain` 结构，12 帧、南→北 row-major；非有限数、越界值、坏长度/单位/月序/基准期会在 build/validate 与运行时拒绝。资源按挂载缓存，重试才重取；null 有独立有效掩码，不转成有效 0。
 
 ```json
 {
@@ -518,13 +518,13 @@ colors.ts  time-scene.css
 {"id":"site-singapore","kind":"site","at":[103.853875,1.294979],"importance":1,"title":{"en":"Singapore","zh":"新加坡"},"summary":{"en":"City reading anchor, not a weather station.","zh":"城市阅读锚点，不是气象站。"},"sources":["S103"]}
 ```
 
-底部唯一章轴复用 `ChapterAxis`，背景不占段；点章落首拍，`,` / `.` 与阅读 ‹/› 走同一路径。月份 range/前后月在 PLATE，手机入口在阅读节拍前；Shift+←/→ 循环月份，range 自己处理方向键/Home/End。探索月份只改 month，不改拍/镜头/图层；字幕旁与 PRESENT 明示原拍月份。PRESENT 进入当前拍，退出恢复进入前状态。
+底部唯一章轴复用 `ChapterAxis`，背景章与其他引擎一样是 `BG` 段（docs/08 §2 铁律）；点章落首拍，`,` / `.` 与阅读 ‹/› 走同一路径。月份 range/前后月在 PLATE，手机入口在阅读节拍前；Shift+←/→ 循环月份，range 自己处理方向键/Home/End。探索月份只改 month，不改拍/镜头/图层；字幕旁与 PRESENT 明示原拍月份。PRESENT 进入当前拍，退出恢复进入前状态。
 
 URL `b` 从 1 起，store beat 从 0 起；`m` 只接受整数 1…12。优先级为章首拍→有效 b→有效 m/其他覆盖；无效 b 回首拍，无效 m 忽略，月题移除 t，保留未知 query。与所选拍相同的月份/相机/图层省略，换语言前 flush，popstate 重建同一路径。示例 `?ch=northeast-monsoon&b=3&m=7` 是第三拍、探索7月。
 
 `ClimatologyView` 在 readerTop 放节拍、静态 site/格点详情，在 readerEnd 放地点索引；不使用正文尾 inspector。site 与 cell 互斥，选择打开桌面 reader/手机 sheet。格点雨用各自 footprint，风用覆盖内最近节点（等距取较小索引），无空间插值。雨是 MapLibre 原生格 fill、固定七档 theme token；风是当前地图投影的静态 SVG，最多300箭、锚点相隔44px，静风<0.2m/s用空心圈。KEY 与开关同步，来源使用既有 SourceRefs。
 
-测试沿 `SceneControls.test`：`engine.setClimatologyMonth(n)`、`sampleClimate(lon,lat)`、`climatology()`；后者含月/渲染月/作者月、选择、各 layer status、有效数/实际画出数、loads/geometryBuilds/commits。`stats().climatology` 同一舞台快照；`state().t/playhead=null`。另有 `goToClimatologyBeat(chapter,index)`、`toggleMonthlyLayer(id,on)`、`inspectClimateCell(lon,lat)`、`selectClimatologySite(id)`、`retryClimateLayer(id)`，全部复用 UI 动作。`SceneControls.ready()` 使 `__atlas.ready` 等待首批开启层 ready/error。`shoot --beats` 每拍检查作者月=store月=rendered月，并重新打开每个 `?ch&b`；另截M01/M07/M12、风/雨单开、全关、选点与手机月份入口。
+测试沿 `SceneControls.test`：`engine.setClimatologyMonth(n)`、`sampleClimate(lon,lat)`、`climatology()`；后者含月/渲染月/作者月、选择、各 layer status、有效数/实际画出数、loads/geometryBuilds/commits。`stats().climatology` 同一舞台快照；`state().t/playhead=null`。另有 `goToClimatologyBeat(chapter,index)`、`toggleMonthlyLayer(id,on)`、`inspectClimateCell(lon,lat)`、`selectClimatologySite(id)`、`retryClimateLayer(id)`，全部复用 UI 动作。`SceneControls.ready()` 使 `__atlas.ready` 等待首批开启层 ready/error。月份动作是 `lib/climatology-state.ts` 的 `setClimatologyMonth(store, n)`（不在共享 store 里）。`shoot --beats` 每拍检查作者月=store月=rendered月、开着的月层都已 ready（error/loading 判失败），并重新打开每个 `?ch&b`；另截M01/M07/M12、风/雨单开、全关、选点与手机月份入口。
 
 可运行夹具：`sample-climate`（draft、12拍），数据来源/变换哈希见其 `data/SOURCES.md`。人工2×2是测试数据，不能用于正文天气地图。
 

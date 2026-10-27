@@ -4,15 +4,6 @@
   font-size: 12px;
   color: var(--ink);
 }
-.clim-overlay > summary {
-  min-height: 44px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  font: 500 11px/1.4 var(--font-hud);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
 .ts-climate-key {
   font: 400 11px/1.5 var(--font-hud);
   color: var(--ink);

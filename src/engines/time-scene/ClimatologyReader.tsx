@@ -5,6 +5,7 @@ import { tx, type BilingualText } from '../../i18n';
 import { SourceRefs } from '../widgets/SourcePopover';
 import { Icon } from '../widgets/icons';
 import { defaultCaption } from '../core/presentation/beats';
+import { exploringText } from './lib/climatology-state';
 import './climatology-reader.css';
 
 export interface StaticSite {
@@ -70,9 +71,7 @@ export function ClimatologyReaderTop({
       </div>
       {month !== authoredMonth && (
         <p className="clim-exploring" role="status">
-          {locale === 'zh'
-            ? `正在查看${month}月；字幕指原拍${authoredMonth}月`
-            : `Exploring month ${month}; caption refers to month ${authoredMonth}`}
+          {exploringText(month, authoredMonth, locale)}
         </p>
       )}
       {selectedSite && (

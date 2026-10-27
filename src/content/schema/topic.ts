@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { bilingual, kebabId, level, theme } from './common';
 import { TOKEN_NAMES } from '../../theme/theme';
 import { monthlyLayerSchema } from '../../engines/time-scene/lib/climate';
+import { sourceId } from './sources';
 
 /** The six fixed top-level categories, in display order. */
 export const SUBJECTS = [
@@ -141,6 +142,8 @@ export const climatologyPeriod = z.object({
   startYear: z.number().int(),
   endYear: z.number().int(),
   initialMonth: z.number().int().min(1).max(12),
+  /** Sources for the KEY's display rules (rain bins, arrow scale), shown beside each layer's data sources. */
+  keySources: z.array(sourceId).optional(),
 }).strict().refine((p) => p.startYear <= p.endYear, { path: ['endYear'], message: 'endYear must be at least startYear' });
 export type ClimatologyPeriod = z.output<typeof climatologyPeriod>;
 

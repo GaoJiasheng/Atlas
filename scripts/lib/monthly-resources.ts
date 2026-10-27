@@ -38,6 +38,8 @@ export function monthlyResourceIssues(
     visit(readGeo(stem), stem);
   }
   const period = topic.climatology;
+  for (const [i, source] of (period.keySources ?? []).entries())
+    if (!sources.has(source)) issues.push({ file: 'topic.yaml', message: `climatology.keySources.${i}: unknown source ${source}` });
   for (const [index, layer] of (topic.monthlyLayers ?? []).entries()) {
     const file = `public/geo/${layer.file}.json`;
     for (const [sourceIndex, source] of layer.sources.entries())
