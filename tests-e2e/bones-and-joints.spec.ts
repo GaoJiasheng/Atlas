@@ -9,7 +9,7 @@ type Engine = {
   anchor(id: string): { shown: boolean; onScreen: boolean } | null;
 };
 const read = (page: Page) => page.evaluate(() => (window.__atlas!.engine as unknown as Engine).sim());
-const joint = (page: Page, id: string) => page.evaluate((name) => (window.__atlas?.engine as unknown as Engine | undefined)?.joint(name) ?? null, id);
+const joint = (page: Page, id: string) => page.evaluate((name) => (window.__atlas?.engine as unknown as Engine | undefined)?.joint?.(name) ?? null, id);
 const pointDistance = (a: number[], b: number[]) => Math.hypot(...a.map((n, i) => n - b[i]!));
 async function open(page: Page, query = '', locale = 'en') {
   await page.goto(`/${locale}/topics/bones-and-joints/${query ? `?${query}` : ''}`);
