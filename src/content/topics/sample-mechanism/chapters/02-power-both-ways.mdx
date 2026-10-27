@@ -1,0 +1,204 @@
+---
+{
+  "id": "power-both-ways",
+  "order": 2,
+  "title": {
+    "en": "Both working directions",
+    "zh": "两个工作方向"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": true,
+    "part": null,
+    "layers": [
+      "working-motion",
+      "steam-flow"
+    ],
+    "labels": [
+      "beam",
+      "piston",
+      "sun",
+      "planet"
+    ],
+    "camera": {
+      "position": [
+        10,
+        8.5,
+        17
+      ],
+      "target": [
+        -0.4,
+        2.8,
+        0
+      ],
+      "fov": 30
+    },
+    "summary": {
+      "en": "A single mechanism frame keeps the rods, gears and valve routes together.",
+      "zh": "同一份机构帧同步连杆、齿轮和配汽路径。"
+    },
+    "sim": {
+      "set": {
+        "experiment": "mechanism",
+        "motion-mode": "manual",
+        "phase-deg": 0
+      },
+      "try": {
+        "vary": "cold-pressure",
+        "keep": [
+          {
+            "en": "Same bore, rod and hot-side pressure",
+            "zh": "相同内径、杆径和热端压强"
+          }
+        ],
+        "observe": [
+          "force-down",
+          "force-up",
+          "work-cycle"
+        ],
+        "record": true,
+        "predict": {
+          "prompt": {
+            "en": "How will the indicated work per cycle change?",
+            "zh": "每周期指示功会怎样变化？"
+          },
+          "start": {
+            "cold-pressure": 20
+          },
+          "change": {
+            "cold-pressure": 50
+          },
+          "observe": "work-cycle",
+          "options": [
+            {
+              "id": "more",
+              "label": {
+                "en": "More",
+                "zh": "变大"
+              },
+              "means": "more"
+            },
+            {
+              "id": "less",
+              "label": {
+                "en": "Less",
+                "zh": "变小"
+              },
+              "means": "less"
+            },
+            {
+              "id": "same",
+              "label": {
+                "en": "The same",
+                "zh": "不变"
+              },
+              "means": "same"
+            }
+          ]
+        }
+      }
+    },
+    "index": {
+      "parts": [
+        "beam",
+        "parallel-inner",
+        "parallel-outer",
+        "parallel-bottom",
+        "radius-rod",
+        "drive-rod",
+        "centre-link",
+        "piston-rod",
+        "pump-rod",
+        "piston",
+        "pump-piston",
+        "shaft",
+        "flywheel",
+        "sun",
+        "planet",
+        "cylinder",
+        "valve-upper-in",
+        "valve-lower-in",
+        "valve-upper-out",
+        "valve-lower-out"
+      ]
+    },
+    "beats": [
+      {
+        "sim": {
+          "set": {
+            "phase-deg": 0
+          }
+        },
+        "caption": {
+          "en": "The downward stroke opens the upper inlet and lower exhaust.",
+          "zh": "向下行程开启上进汽阀和下排汽阀。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "phase-deg": 90
+          }
+        },
+        "caption": {
+          "en": "At ninety degrees the same geometry determines both valves and rods.",
+          "zh": "九十度时，同一份几何解同时决定阀口和连杆。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "phase-deg": 180
+          }
+        },
+        "caption": {
+          "en": "The upward stroke opens the lower inlet and upper exhaust.",
+          "zh": "向上行程开启下进汽阀和上排汽阀。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "phase-deg": 270
+          }
+        },
+        "camera": "gear-view",
+        "labels": [
+          "planet",
+          "sun",
+          "centre-link"
+        ],
+        "caption": {
+          "en": "The planet stays fixed to its connecting rod; the centre link keeps the gear spacing.",
+          "zh": "行星轮固定在传动杆上；定距连杆保持齿轮中心距。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "motion-mode": "auto",
+            "phase-deg": 0
+          }
+        },
+        "caption": {
+          "en": "A complete cycle gives two net sun turns, using one continuously solved mechanism.",
+          "zh": "连续解算的同一机构每完成一个周期，太阳轮净转两圈。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Draft engine fixture: this chapter checks the model state shown in the caption. Every numerical outcome comes from the design study [S1].
+
+</Lang>
+
+<Lang zh>
+
+引擎草稿测试：本章核对字幕对应的模型状态。所有数值结果来自设计研究 [S1]。
+
+</Lang>

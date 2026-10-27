@@ -25,6 +25,8 @@ export interface ReferenceSave {
 }
 
 export interface SpaceUiState {
+  /** An invalid live mechanism stops safely and reports a bilingual configuration error. */
+  mechanismError: boolean;
   /** ORBIT preset: slow turntable until the user drags. */
   orbit: boolean;
   /** REFERENCE mode on (with what to restore). */
@@ -61,6 +63,7 @@ export type SpaceUiStore = StoreApi<SpaceUiState>;
 
 export function createSpaceUi(): SpaceUiStore {
   return createStore<SpaceUiState>()(() => ({
+    mechanismError: false,
     orbit: false,
     reference: null,
     nextTweenMs: null,

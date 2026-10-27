@@ -1,0 +1,68 @@
+{
+  "gear-0": {
+    "chapter": "power-both-ways",
+    "preset": "gear-view",
+    "wait": 600,
+    "js": "window.__atlas.engine.seekMechanism('main-engine', 0)"
+  },
+  "valves-0": {
+    "chapter": "power-both-ways",
+    "wait": 600,
+    "js": "window.__atlas.engine.seekMechanism('main-engine', 0); window.__atlas.engine.apply({ camera: { position: [-1.1, 3.5, 4.5], target: [-2.5, 2.7, 0.12], fov: 30 }, cutaway: 'half' })"
+  },
+  "gear-90": {
+    "chapter": "power-both-ways",
+    "preset": "gear-view",
+    "wait": 600,
+    "js": "window.__atlas.engine.seekMechanism('main-engine', 90)"
+  },
+  "valves-90": {
+    "chapter": "power-both-ways",
+    "wait": 600,
+    "js": "window.__atlas.engine.seekMechanism('main-engine', 90); window.__atlas.engine.apply({ camera: { position: [-1.1, 3.5, 4.5], target: [-2.5, 2.7, 0.12], fov: 30 }, cutaway: 'half' })"
+  },
+  "gear-180": {
+    "chapter": "power-both-ways",
+    "preset": "gear-view",
+    "wait": 600,
+    "js": "window.__atlas.engine.seekMechanism('main-engine', 180)"
+  },
+  "valves-180": {
+    "chapter": "power-both-ways",
+    "wait": 600,
+    "js": "window.__atlas.engine.seekMechanism('main-engine', 180); window.__atlas.engine.apply({ camera: { position: [-1.1, 3.5, 4.5], target: [-2.5, 2.7, 0.12], fov: 30 }, cutaway: 'half' })"
+  },
+  "gear-270": {
+    "chapter": "power-both-ways",
+    "preset": "gear-view",
+    "wait": 600,
+    "js": "window.__atlas.engine.seekMechanism('main-engine', 270)"
+  },
+  "valves-270": {
+    "chapter": "power-both-ways",
+    "wait": 600,
+    "js": "window.__atlas.engine.seekMechanism('main-engine', 270); window.__atlas.engine.apply({ camera: { position: [-1.1, 3.5, 4.5], target: [-2.5, 2.7, 0.12], fov: 30 }, cutaway: 'half' })"
+  },
+  "gear-360": {
+    "chapter": "power-both-ways",
+    "preset": "gear-view",
+    "wait": 600,
+    "js": "window.__atlas.engine.seekMechanism('main-engine', 360)"
+  },
+  "valves-360": {
+    "chapter": "power-both-ways",
+    "wait": 600,
+    "js": "window.__atlas.engine.seekMechanism('main-engine', 360); window.__atlas.engine.apply({ camera: { position: [-1.1, 3.5, 4.5], target: [-2.5, 2.7, 0.12], fov: 30 }, cutaway: 'half' })"
+  },
+  "crossing-depth": {
+    "chapter": "power-both-ways",
+    "preset": "linkage-view",
+    "wait": 600,
+    "js": "window.__atlas.engine.seekMechanism('main-engine', 90)"
+  },
+  "hero-clean": {
+    "chapter": "before-you-start",
+    "hud": false,
+    "wait": 900
+  }
+}

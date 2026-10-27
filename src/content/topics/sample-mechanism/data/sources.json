@@ -1,0 +1,12 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "Atlas mechanism design study: docs/52 §3.3–4; see data/SOURCES.md for all dimensions, equations and gear sampling.",
+        "zh": "Atlas 机构设计研究：docs/52 第3.3–4节；尺寸、算式和齿轮采样见 data/SOURCES.md。"
+      },
+      "design": true
+    }
+  ]
+}
