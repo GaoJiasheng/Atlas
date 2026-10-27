@@ -41,3 +41,61 @@ export function outcomeOf(before: number, after: number): Outcome {
   if (scale < EPS || Math.abs(after - before) <= SAME_BAND * scale) return 'same';
   return after > before ? 'more' : 'less';
 }
+
+/** Conditions identify one fair-test record; only the varied value may differ between rows. */
+export function tableContextKey(
+  chapter: string,
+  values: Readonly<Record<string, SimValue>>,
+  vary: string,
+): string {
+  return JSON.stringify([
+    chapter,
+    Object.keys(values)
+      .filter((id) => id !== vary)
+      .sort()
+      .map((id) => [id, values[id]]),
+  ]);
+}
+
+/** A prediction belongs to the exact before/after conditions, including time. */
+export function predictionContextKey(
+  chapter: string,
+  values: Readonly<Record<string, SimValue>>,
+): string {
+  return tableContextKey(chapter, values, "");
+}
+
+export interface PredictionSnapshot {
+  chapter: string;
+  guess: string;
+  before: Record<string, SimValue>;
+  after: Record<string, SimValue>;
+  /** Values on show before the prediction applied its authored starting point. */
+  restore?: Record<string, SimValue>;
+  value: number | string;
+}
+
+export function predictionIsCurrent(
+  answer: PredictionSnapshot | null,
+  chapter: string,
+  values: Readonly<Record<string, SimValue>>,
+): boolean {
+  return (
+    answer !== null &&
+    answer.chapter === chapter &&
+    predictionContextKey(chapter, answer.after) ===
+      predictionContextKey(chapter, values)
+  );
+}
+
+export function predictionHidden(
+  hasPrediction: boolean,
+  revealed: boolean,
+  answer: PredictionSnapshot | null,
+  chapter: string,
+  values: Readonly<Record<string, SimValue>>,
+): boolean {
+  return (
+    hasPrediction && !revealed && !predictionIsCurrent(answer, chapter, values)
+  );
+}

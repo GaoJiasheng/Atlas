@@ -91,6 +91,7 @@ it('actual topic watcher resets only changed physical keep conditions and predic
       chapter: 'angles',
       guess: 'more',
       before: { ...v },
+      after: { ...v },
       value: 0.47,
     },
   });

@@ -1,0 +1,3816 @@
+{
+  "parts": [
+    {
+      "id": "bath-beaker",
+      "group": "transfer",
+      "name": {
+        "en": "Bath beaker",
+        "zh": "温浴烧杯"
+      },
+      "summary": {
+        "en": "Holds the liquid and leaves its surface open.",
+        "zh": "盛放液体，杯口保持敞开。"
+      },
+      "detail": {
+        "en": "The thin glass wall, base and small pouring lip are original apparatus geometry. The water surface is separate; this is not a sealed pressure vessel. [S27]",
+        "zh": "薄玻璃杯壁、杯底和小杯嘴是原创器材几何。水面为独立零件；这不是密封压力容器。 [S27]"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          -0.55,
+          0.75,
+          0.08
+        ],
+        "profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.042,
+            0
+          ],
+          [
+            0.045,
+            0.003
+          ],
+          [
+            0.045,
+            0.117
+          ],
+          [
+            0.046,
+            0.119
+          ],
+          [
+            0.046,
+            0.12
+          ],
+          [
+            0.043,
+            0.12
+          ],
+          [
+            0.043,
+            0.118
+          ],
+          [
+            0.042,
+            0.006
+          ],
+          [
+            0,
+            0.006
+          ]
+        ],
+        "color": "glass",
+        "segments": 40
+      },
+      "extra": [
+        {
+          "kind": "extrude",
+          "at": [
+            -0.5930000000000001,
+            0.866,
+            0.08
+          ],
+          "shape": [
+            [
+              -0.014,
+              -0.002
+            ],
+            [
+              0,
+              -0.003
+            ],
+            [
+              0.004,
+              0.003
+            ],
+            [
+              0,
+              0.004
+            ],
+            [
+              -0.014,
+              0.002
+            ]
+          ],
+          "depth": 0.012,
+          "color": "glass"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": false,
+      "shell": true,
+      "connects": [
+        "bath-water"
+      ]
+    },
+    {
+      "id": "bath-water",
+      "group": "transfer",
+      "name": {
+        "en": "Maintained bath",
+        "zh": "恒温温浴"
+      },
+      "summary": {
+        "en": "Provides the liquid whose temperature is modelled.",
+        "zh": "表示模型求温度的液体。"
+      },
+      "detail": {
+        "en": "An external reservoir maintains the selected bath temperature. The model does not solve the finite bath’s energy change. [S27]",
+        "zh": "外部热库维持选定的温浴温度。模型不求这杯有限水量的能量变化。 [S27]"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "at": [
+          -0.55,
+          0.7885,
+          0.08
+        ],
+        "size": [
+          0.041,
+          0.041,
+          0.065
+        ],
+        "color": "glass",
+        "tint": "token:water"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": false
+    },
+    {
+      "id": "metal-spoon",
+      "group": "transfer",
+      "name": {
+        "en": "Metal spoon",
+        "zh": "金属勺"
+      },
+      "summary": {
+        "en": "Carries heat between the bath and its far end.",
+        "zh": "在温浴与勺柄远端之间传热。"
+      },
+      "detail": {
+        "en": "The shallow hollow bowl joins the continuous handle. Both spoons have the same outline, immersion depth, initial temperature and effective tip heat capacity in this teaching model. These are effective paths, not measured real-spoon properties. [S27]",
+        "zh": "浅凹勺碗与连续手柄相连。教学模型让两勺外形、浸入深度、初温和远端有效热容量相同。这是有效导热通路，并非两把真实勺子的实测性质。 [S27]"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          -0.567,
+          0.795,
+          0.095
+        ],
+        "profile": [
+          [
+            0,
+            -0.0035
+          ],
+          [
+            0.005,
+            -0.003
+          ],
+          [
+            0.01,
+            -0.0015
+          ],
+          [
+            0.012,
+            0.001
+          ],
+          [
+            0.0118,
+            0.002
+          ],
+          [
+            0.0105,
+            0.0015
+          ],
+          [
+            0.008,
+            -0.0002
+          ],
+          [
+            0.003,
+            -0.0016
+          ],
+          [
+            0,
+            -0.0016
+          ]
+        ],
+        "color": "stainless",
+        "segments": 40,
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1.4
+        ]
+      },
+      "extra": [
+        {
+          "kind": "extrude",
+          "at": [
+            -0.567,
+            0.795,
+            0.095
+          ],
+          "depth": 0.002,
+          "bevel": 0.0003,
+          "color": "stainless",
+          "shape": [
+            [
+              -0.003,
+              0.01
+            ],
+            [
+              -0.0035,
+              0.024
+            ],
+            [
+              -0.003,
+              0.1
+            ],
+            [
+              -0.004,
+              0.137
+            ],
+            [
+              -0.002,
+              0.143
+            ],
+            [
+              0.002,
+              0.143
+            ],
+            [
+              0.004,
+              0.137
+            ],
+            [
+              0.003,
+              0.1
+            ],
+            [
+              0.0035,
+              0.024
+            ],
+            [
+              0.003,
+              0.01
+            ]
+          ]
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": false,
+      "connects": [
+        "bath-water",
+        "metal-tip-marker"
+      ]
+    },
+    {
+      "id": "plastic-spoon",
+      "group": "transfer",
+      "name": {
+        "en": "Plastic spoon",
+        "zh": "塑料勺"
+      },
+      "summary": {
+        "en": "Carries heat between the bath and its far end.",
+        "zh": "在温浴与勺柄远端之间传热。"
+      },
+      "detail": {
+        "en": "The shallow hollow bowl joins the continuous handle. Both spoons have the same outline, immersion depth, initial temperature and effective tip heat capacity in this teaching model. These are effective paths, not measured real-spoon properties. [S27]",
+        "zh": "浅凹勺碗与连续手柄相连。教学模型让两勺外形、浸入深度、初温和远端有效热容量相同。这是有效导热通路，并非两把真实勺子的实测性质。 [S27]"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          -0.533,
+          0.795,
+          0.095
+        ],
+        "profile": [
+          [
+            0,
+            -0.0035
+          ],
+          [
+            0.005,
+            -0.003
+          ],
+          [
+            0.01,
+            -0.0015
+          ],
+          [
+            0.012,
+            0.001
+          ],
+          [
+            0.0118,
+            0.002
+          ],
+          [
+            0.0105,
+            0.0015
+          ],
+          [
+            0.008,
+            -0.0002
+          ],
+          [
+            0.003,
+            -0.0016
+          ],
+          [
+            0,
+            -0.0016
+          ]
+        ],
+        "color": "plastic",
+        "segments": 40,
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1.4
+        ]
+      },
+      "extra": [
+        {
+          "kind": "extrude",
+          "at": [
+            -0.533,
+            0.795,
+            0.095
+          ],
+          "depth": 0.002,
+          "bevel": 0.0003,
+          "color": "plastic",
+          "shape": [
+            [
+              -0.003,
+              0.01
+            ],
+            [
+              -0.0035,
+              0.024
+            ],
+            [
+              -0.003,
+              0.1
+            ],
+            [
+              -0.004,
+              0.137
+            ],
+            [
+              -0.002,
+              0.143
+            ],
+            [
+              0.002,
+              0.143
+            ],
+            [
+              0.004,
+              0.137
+            ],
+            [
+              0.003,
+              0.1
+            ],
+            [
+              0.0035,
+              0.024
+            ],
+            [
+              0.003,
+              0.01
+            ]
+          ]
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": false,
+      "connects": [
+        "bath-water",
+        "plastic-tip-marker"
+      ]
+    },
+    {
+      "id": "metal-tip-marker",
+      "group": "transfer",
+      "name": {
+        "en": "Metal tip indicator",
+        "zh": "金属远端指示片"
+      },
+      "summary": {
+        "en": "Indicates the model temperature at the far end.",
+        "zh": "指示模型中勺柄远端的温度。"
+      },
+      "detail": {
+        "en": "This separate pointer is a temperature diagram. The uniform tip node is not the temperature at every location along the spoon, and the material does not glow when warm. [S27]",
+        "zh": "独立指示片是温度示意。远端单节点温度并非整把勺子各处的温度；材料受热时不发光。 [S27]"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          -0.567,
+          0.944,
+          0.095
+        ],
+        "size": [
+          0.007,
+          0.002,
+          0.003
+        ],
+        "color": "token:signal"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": false,
+      "connects": [
+        "metal-spoon"
+      ]
+    },
+    {
+      "id": "plastic-tip-marker",
+      "group": "transfer",
+      "name": {
+        "en": "Plastic tip indicator",
+        "zh": "塑料远端指示片"
+      },
+      "summary": {
+        "en": "Indicates the model temperature at the far end.",
+        "zh": "指示模型中勺柄远端的温度。"
+      },
+      "detail": {
+        "en": "This separate pointer is a temperature diagram. The uniform tip node is not the temperature at every location along the spoon, and the material does not glow when warm. [S27]",
+        "zh": "独立指示片是温度示意。远端单节点温度并非整把勺子各处的温度；材料受热时不发光。 [S27]"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          -0.533,
+          0.944,
+          0.095
+        ],
+        "size": [
+          0.007,
+          0.002,
+          0.003
+        ],
+        "color": "token:signal"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": false,
+      "connects": [
+        "plastic-spoon"
+      ]
+    },
+    {
+      "id": "probe",
+      "group": "transfer",
+      "name": {
+        "en": "Bath thermometer",
+        "zh": "温浴温度计"
+      },
+      "summary": {
+        "en": "Measures temperature with its bulb in the water.",
+        "zh": "感温端浸入水中以测量温度。"
+      },
+      "detail": {
+        "en": "The bulb is above the cup bottom and clear of its wall. Its support holds the stem; the separate indicator is a linear temperature display, not a liquid-volume calculation. [S27]",
+        "zh": "感温端不碰杯底和杯壁。支架固定测温杆；独立指示片按温度线性移动，并非液体体积模型。 [S27]"
+      },
+      "primitive": {
+        "kind": "tube",
+        "at": [
+          -0.55,
+          0.777,
+          0.055
+        ],
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0.2,
+            0
+          ]
+        ],
+        "radius": 0.0022,
+        "color": "glass"
+      },
+      "extra": [
+        {
+          "kind": "sphere",
+          "at": [
+            -0.55,
+            0.777,
+            0.055
+          ],
+          "size": [
+            0.004
+          ],
+          "color": "steel"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": false,
+      "connects": [
+        "probe-clamp",
+        "probe-marker"
+      ]
+    },
+    {
+      "id": "probe-marker",
+      "group": "transfer",
+      "name": {
+        "en": "Bath thermometer indicator",
+        "zh": "温浴温度计指示片"
+      },
+      "summary": {
+        "en": "Marks the model temperature on the probe.",
+        "zh": "标示探头对应的模型温度。"
+      },
+      "detail": {
+        "en": "The indicator moves along the stem with the same full-precision control or model reading shown in the card. Position is a calibrated diagram, not a claimed liquid volume. [S27]",
+        "zh": "指示片与卡片中的控件值或模型温度使用同一个全精度数值。位置是校准示意，不代表计算过的液柱体积。 [S27]"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          -0.55,
+          0.847,
+          0.0585
+        ],
+        "size": [
+          0.007,
+          0.002,
+          0.002
+        ],
+        "color": "token:signal"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": false,
+      "connects": [
+        "probe"
+      ]
+    },
+    {
+      "id": "retort-stand",
+      "group": "transfer",
+      "name": {
+        "en": "Retort stand",
+        "zh": "铁架台"
+      },
+      "summary": {
+        "en": "Supports the clamp above the open bath.",
+        "zh": "支承敞口温浴上方的夹具。"
+      },
+      "detail": {
+        "en": "The base rests on the bench. The upright and clamp support the probe without holding its bulb against the cup. [S27]",
+        "zh": "底座落在台面上。直杆与夹具支承温度计，不让感温端贴住烧杯。 [S27]"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "at": [
+          -0.66,
+          0.88,
+          0.055
+        ],
+        "size": [
+          0.004,
+          0.004,
+          0.25
+        ],
+        "color": "steel"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "at": [
+            -0.66,
+            0.758,
+            0.055
+          ],
+          "size": [
+            0.075,
+            0.016,
+            0.065
+          ],
+          "bevel": 0.002,
+          "color": "steel"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": false,
+      "connects": [
+        "probe-clamp"
+      ]
+    },
+    {
+      "id": "probe-clamp",
+      "group": "transfer",
+      "name": {
+        "en": "Probe clamp",
+        "zh": "温度计夹具"
+      },
+      "summary": {
+        "en": "Holds the stem while the bulb stays immersed.",
+        "zh": "夹住测温杆，让感温端保持浸没。"
+      },
+      "detail": {
+        "en": "The horizontal arm meets the stand and the thermometer stem. The probe remains above the cup bottom. [S27]",
+        "zh": "横臂连接铁架台与温度计杆。感温端与杯底留有间隔。 [S27]"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "at": [
+          -0.605,
+          0.97,
+          0.055
+        ],
+        "size": [
+          0.0035,
+          0.0035,
+          0.11
+        ],
+        "color": "steel",
+        "rotation": [
+          0,
+          0,
+          90
+        ]
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "at": [
+            -0.55,
+            0.97,
+            0.055
+          ],
+          "size": [
+            0.014,
+            0.01,
+            0.012
+          ],
+          "color": "rubber"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": false,
+      "connects": [
+        "retort-stand",
+        "probe"
+      ]
+    },
+    {
+      "id": "heater",
+      "group": "curves",
+      "name": {
+        "en": "Electric heater",
+        "zh": "电热台"
+      },
+      "summary": {
+        "en": "Supplies the selected power to the heating model.",
+        "zh": "向加热模型提供选定功率。"
+      },
+      "detail": {
+        "en": "The generic electric heater supports an open beaker. The ideal model ignores container heat capacity and heat loss; switching decorative RUN does not advance time. [S27]",
+        "zh": "通用电热台支承敞口烧杯。理想模型忽略容器热容量与散热；装饰性运转开关不会推进实验时间。 [S27]"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "at": [
+          0.15,
+          0.7675,
+          0.1
+        ],
+        "size": [
+          0.14,
+          0.035,
+          0.14
+        ],
+        "bevel": 0.004,
+        "color": "enamel"
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "at": [
+            0.15,
+            0.786,
+            0.1
+          ],
+          "size": [
+            0.052,
+            0.052,
+            0.003
+          ],
+          "color": "steel"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": false,
+      "connects": [
+        "heater-beaker"
+      ]
+    },
+    {
+      "id": "heater-beaker",
+      "group": "curves",
+      "name": {
+        "en": "Heating beaker",
+        "zh": "加热烧杯"
+      },
+      "summary": {
+        "en": "Holds the liquid and leaves its surface open.",
+        "zh": "盛放液体，杯口保持敞开。"
+      },
+      "detail": {
+        "en": "The thin glass wall, base and small pouring lip are original apparatus geometry. The water surface is separate; this is not a sealed pressure vessel. [S27]",
+        "zh": "薄玻璃杯壁、杯底和小杯嘴是原创器材几何。水面为独立零件；这不是密封压力容器。 [S27]"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          0.15,
+          0.788,
+          0.1
+        ],
+        "profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.042,
+            0
+          ],
+          [
+            0.045,
+            0.003
+          ],
+          [
+            0.045,
+            0.117
+          ],
+          [
+            0.046,
+            0.119
+          ],
+          [
+            0.046,
+            0.12
+          ],
+          [
+            0.043,
+            0.12
+          ],
+          [
+            0.043,
+            0.118
+          ],
+          [
+            0.042,
+            0.006
+          ],
+          [
+            0,
+            0.006
+          ]
+        ],
+        "color": "glass",
+        "segments": 40
+      },
+      "extra": [
+        {
+          "kind": "extrude",
+          "at": [
+            0.107,
+            0.904,
+            0.1
+          ],
+          "shape": [
+            [
+              -0.014,
+              -0.002
+            ],
+            [
+              0,
+              -0.003
+            ],
+            [
+              0.004,
+              0.003
+            ],
+            [
+              0,
+              0.004
+            ],
+            [
+              -0.014,
+              0.002
+            ]
+          ],
+          "depth": 0.012,
+          "color": "glass"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": false,
+      "shell": true,
+      "connects": [
+        "heater-water"
+      ]
+    },
+    {
+      "id": "heater-water",
+      "group": "curves",
+      "name": {
+        "en": "Heated water",
+        "zh": "加热的水"
+      },
+      "summary": {
+        "en": "Provides the liquid whose temperature is modelled.",
+        "zh": "表示模型求温度的液体。"
+      },
+      "detail": {
+        "en": "Water mass is an independent numerical input to the heat-capacity model. The displayed level is a fixed schematic level, not a volume or mass scale. [S27]",
+        "zh": "水的质量是热容量模型的独立数值输入。画面水位固定为示意水位，不是体积或质量刻度。 [S27]"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "at": [
+          0.15,
+          0.8265,
+          0.1
+        ],
+        "size": [
+          0.041,
+          0.041,
+          0.065
+        ],
+        "color": "glass",
+        "tint": "token:water"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": false
+    },
+    {
+      "id": "heater-probe",
+      "group": "curves",
+      "name": {
+        "en": "Heating probe",
+        "zh": "加热探头"
+      },
+      "summary": {
+        "en": "Measures temperature with its bulb in the water.",
+        "zh": "感温端浸入水中以测量温度。"
+      },
+      "detail": {
+        "en": "The bulb is above the cup bottom and clear of its wall. Its support holds the stem; the separate indicator is a linear temperature display, not a liquid-volume calculation. [S27]",
+        "zh": "感温端不碰杯底和杯壁。支架固定测温杆；独立指示片按温度线性移动，并非液体体积模型。 [S27]"
+      },
+      "primitive": {
+        "kind": "tube",
+        "at": [
+          0.15,
+          0.8150000000000001,
+          0.078
+        ],
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0.2,
+            0
+          ]
+        ],
+        "radius": 0.0022,
+        "color": "glass"
+      },
+      "extra": [
+        {
+          "kind": "sphere",
+          "at": [
+            0.15,
+            0.8150000000000001,
+            0.078
+          ],
+          "size": [
+            0.004
+          ],
+          "color": "steel"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": false,
+      "connects": [
+        "heater-probe-support",
+        "heater-probe-marker"
+      ]
+    },
+    {
+      "id": "heater-probe-marker",
+      "group": "curves",
+      "name": {
+        "en": "Heating probe indicator",
+        "zh": "加热探头指示片"
+      },
+      "summary": {
+        "en": "Marks the model temperature on the probe.",
+        "zh": "标示探头对应的模型温度。"
+      },
+      "detail": {
+        "en": "The indicator moves along the stem with the same full-precision control or model reading shown in the card. Position is a calibrated diagram, not a claimed liquid volume. [S27]",
+        "zh": "指示片与卡片中的控件值或模型温度使用同一个全精度数值。位置是校准示意，不代表计算过的液柱体积。 [S27]"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          0.15,
+          0.885,
+          0.0815
+        ],
+        "size": [
+          0.007,
+          0.002,
+          0.002
+        ],
+        "color": "token:signal"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": false,
+      "connects": [
+        "heater-probe"
+      ]
+    },
+    {
+      "id": "cooling-beaker",
+      "group": "curves",
+      "name": {
+        "en": "Cooling beaker",
+        "zh": "冷却烧杯"
+      },
+      "summary": {
+        "en": "Holds the liquid and leaves its surface open.",
+        "zh": "盛放液体，杯口保持敞开。"
+      },
+      "detail": {
+        "en": "The thin glass wall, base and small pouring lip are original apparatus geometry. The water surface is separate; this is not a sealed pressure vessel. [S27]",
+        "zh": "薄玻璃杯壁、杯底和小杯嘴是原创器材几何。水面为独立零件；这不是密封压力容器。 [S27]"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          0.55,
+          0.75,
+          0.1
+        ],
+        "profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.042,
+            0
+          ],
+          [
+            0.045,
+            0.003
+          ],
+          [
+            0.045,
+            0.117
+          ],
+          [
+            0.046,
+            0.119
+          ],
+          [
+            0.046,
+            0.12
+          ],
+          [
+            0.043,
+            0.12
+          ],
+          [
+            0.043,
+            0.118
+          ],
+          [
+            0.042,
+            0.006
+          ],
+          [
+            0,
+            0.006
+          ]
+        ],
+        "color": "glass",
+        "segments": 40
+      },
+      "extra": [
+        {
+          "kind": "extrude",
+          "at": [
+            0.507,
+            0.866,
+            0.1
+          ],
+          "shape": [
+            [
+              -0.014,
+              -0.002
+            ],
+            [
+              0,
+              -0.003
+            ],
+            [
+              0.004,
+              0.003
+            ],
+            [
+              0,
+              0.004
+            ],
+            [
+              -0.014,
+              0.002
+            ]
+          ],
+          "depth": 0.012,
+          "color": "glass"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": false,
+      "shell": true,
+      "connects": [
+        "cooling-water"
+      ]
+    },
+    {
+      "id": "cooling-water",
+      "group": "curves",
+      "name": {
+        "en": "Cooling water",
+        "zh": "冷却的水"
+      },
+      "summary": {
+        "en": "Provides the liquid whose temperature is modelled.",
+        "zh": "表示模型求温度的液体。"
+      },
+      "detail": {
+        "en": "This body exchanges heat with a fixed 25 °C reservoir. The effective conductance includes the whole heat-transfer path and is not a material’s thermal conductivity. [S27]",
+        "zh": "这份水与固定为25 °C的热库交换热量。有效传热系数代表整条传热通路，不是某种材料的导热率。 [S27]"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "at": [
+          0.55,
+          0.7885,
+          0.1
+        ],
+        "size": [
+          0.041,
+          0.041,
+          0.065
+        ],
+        "color": "glass",
+        "tint": "token:water"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": false
+    },
+    {
+      "id": "cool-probe",
+      "group": "curves",
+      "name": {
+        "en": "Cooling probe",
+        "zh": "冷却探头"
+      },
+      "summary": {
+        "en": "Measures temperature with its bulb in the water.",
+        "zh": "感温端浸入水中以测量温度。"
+      },
+      "detail": {
+        "en": "The bulb is above the cup bottom and clear of its wall. Its support holds the stem; the separate indicator is a linear temperature display, not a liquid-volume calculation. [S27]",
+        "zh": "感温端不碰杯底和杯壁。支架固定测温杆；独立指示片按温度线性移动，并非液体体积模型。 [S27]"
+      },
+      "primitive": {
+        "kind": "tube",
+        "at": [
+          0.55,
+          0.777,
+          0.078
+        ],
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0.2,
+            0
+          ]
+        ],
+        "radius": 0.0022,
+        "color": "glass"
+      },
+      "extra": [
+        {
+          "kind": "sphere",
+          "at": [
+            0.55,
+            0.777,
+            0.078
+          ],
+          "size": [
+            0.004
+          ],
+          "color": "steel"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": false,
+      "connects": [
+        "cooler-probe-support",
+        "cool-probe-marker"
+      ]
+    },
+    {
+      "id": "cool-probe-marker",
+      "group": "curves",
+      "name": {
+        "en": "Cooling probe indicator",
+        "zh": "冷却探头指示片"
+      },
+      "summary": {
+        "en": "Marks the model temperature on the probe.",
+        "zh": "标示探头对应的模型温度。"
+      },
+      "detail": {
+        "en": "The indicator moves along the stem with the same full-precision control or model reading shown in the card. Position is a calibrated diagram, not a claimed liquid volume. [S27]",
+        "zh": "指示片与卡片中的控件值或模型温度使用同一个全精度数值。位置是校准示意，不代表计算过的液柱体积。 [S27]"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          0.55,
+          0.847,
+          0.0815
+        ],
+        "size": [
+          0.007,
+          0.002,
+          0.002
+        ],
+        "color": "token:signal"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": false,
+      "connects": [
+        "cool-probe"
+      ]
+    },
+    {
+      "id": "wrap",
+      "group": "curves",
+      "name": {
+        "en": "Insulating wrap",
+        "zh": "隔热包覆层"
+      },
+      "summary": {
+        "en": "Reduces the model’s heat-transfer rate.",
+        "zh": "减小模型中的传热速率。"
+      },
+      "detail": {
+        "en": "An annular sleeve surrounds the cooling cup without sealing its open mouth. The wrapped setting uses lower effective conductance; it supplies no energy and can also slow warming from cold. [S27]",
+        "zh": "环形包覆层围住冷却杯，不封住杯口。包覆条件采用较低的有效传热系数；它不供能，也能减慢冷物体升温。 [S27]"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          0.55,
+          0.807,
+          0.1
+        ],
+        "profile": [
+          [
+            0.05,
+            -0.051
+          ],
+          [
+            0.06,
+            -0.051
+          ],
+          [
+            0.06,
+            0.051
+          ],
+          [
+            0.05,
+            0.051
+          ],
+          [
+            0.05,
+            -0.051
+          ]
+        ],
+        "color": "rubber",
+        "segments": 40
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": true,
+      "shell": true,
+      "connects": [
+        "cooling-beaker",
+        "air-gap",
+        "room-reference"
+      ]
+    },
+    {
+      "id": "air-gap",
+      "group": "curves",
+      "name": {
+        "en": "Air gap",
+        "zh": "空气间隙"
+      },
+      "summary": {
+        "en": "Marks the space between the cup and its wrap.",
+        "zh": "标示烧杯与包覆层之间的间隙。"
+      },
+      "detail": {
+        "en": "This hollow annular space is a schematic part of the insulation path. It is not a fluid pipe or a separate solved air-temperature field. [S27]",
+        "zh": "中空环形间隙示意隔热通路的一部分，不是流体管线，也没有独立求解空气温度场。 [S27]"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          0.55,
+          0.807,
+          0.1
+        ],
+        "profile": [
+          [
+            0.0455,
+            -0.05
+          ],
+          [
+            0.0495,
+            -0.05
+          ],
+          [
+            0.0495,
+            0.05
+          ],
+          [
+            0.0455,
+            0.05
+          ],
+          [
+            0.0455,
+            -0.05
+          ]
+        ],
+        "color": "glass",
+        "segments": 40
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": true,
+      "connects": [
+        "wrap",
+        "cooling-beaker"
+      ]
+    },
+    {
+      "id": "rod",
+      "group": "expansion",
+      "name": {
+        "en": "Steel rod",
+        "zh": "钢杆"
+      },
+      "summary": {
+        "en": "Provides a solid with a freely moving right end.",
+        "zh": "表示右端能够自由伸缩的固体杆。"
+      },
+      "detail": {
+        "en": "The rod is 100 mm long at the 25 °C reference in the linear model. Its drawn mesh stays at its reference length; only the separate pointer displays the calculated endpoint displacement enlarged 500 times. [S27]",
+        "zh": "线性模型中，钢杆在25 °C参考温度下长100 mm。杆网格保留参考长度；只有独立指示片显示放大500倍的计算端点位移。 [S27]"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "at": [
+          0.05,
+          0.807,
+          -0.22
+        ],
+        "size": [
+          0.003,
+          0.003,
+          0.1
+        ],
+        "color": "steel",
+        "rotation": [
+          0,
+          0,
+          90
+        ]
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": false,
+      "connects": [
+        "rod-support-left",
+        "rod-support-right",
+        "rod-end-marker"
+      ]
+    },
+    {
+      "id": "rod-end-marker",
+      "group": "expansion",
+      "name": {
+        "en": "Enlarged endpoint indicator",
+        "zh": "放大端点指示片"
+      },
+      "summary": {
+        "en": "Shows rod-end displacement enlarged 500 times.",
+        "zh": "显示放大500倍的杆端位移。"
+      },
+      "detail": {
+        "en": "The thin pointer is separate from the rod. A 0.072 mm model extension moves it 0.036 m on this diagram; negative extension moves it left. It is not the physical rod end. [S27]",
+        "zh": "薄指示片与钢杆分开。模型伸长0.072 mm时，图中指示片移动0.036 m；负伸长使它向左移动。它不是钢杆的实际端头。 [S27]"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          0.1,
+          0.825,
+          -0.198
+        ],
+        "size": [
+          0.0015,
+          0.032,
+          0.015
+        ],
+        "color": "token:signal"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": false,
+      "connects": [
+        "rod"
+      ]
+    },
+    {
+      "id": "rod-support-left",
+      "group": "expansion",
+      "name": {
+        "en": "Left rod support",
+        "zh": "钢杆左支承"
+      },
+      "summary": {
+        "en": "Supports the rod without locking both ends.",
+        "zh": "托住钢杆，不把两端同时锁死。"
+      },
+      "detail": {
+        "en": "An open shallow saddle supports the rod. The rod can move along its axis as temperature changes; the pair is not a pair of fixed end clamps. [S27]",
+        "zh": "开放浅鞍座托住钢杆，允许它随温度变化沿轴向移动；两个支承不是两只锁死端点的夹具。 [S27]"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "at": [
+          0.01,
+          0.775,
+          -0.22
+        ],
+        "size": [
+          0.018,
+          0.05,
+          0.035
+        ],
+        "bevel": 0.002,
+        "color": "steel"
+      },
+      "extra": [
+        {
+          "kind": "extrude",
+          "at": [
+            0.01,
+            0.797,
+            -0.22
+          ],
+          "shape": [
+            [
+              -0.009,
+              0
+            ],
+            [
+              0.009,
+              0
+            ],
+            [
+              0.009,
+              0.019
+            ],
+            [
+              0.005,
+              0.019
+            ],
+            [
+              0.005,
+              0.009
+            ],
+            [
+              0,
+              0.007
+            ],
+            [
+              -0.005,
+              0.009
+            ],
+            [
+              -0.005,
+              0.019
+            ],
+            [
+              -0.009,
+              0.019
+            ]
+          ],
+          "depth": 0.01,
+          "rotation": [
+            0,
+            90,
+            0
+          ],
+          "color": "steel"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": false,
+      "connects": [
+        "rod"
+      ]
+    },
+    {
+      "id": "rod-support-right",
+      "group": "expansion",
+      "name": {
+        "en": "Sliding rod support",
+        "zh": "钢杆滑动支承"
+      },
+      "summary": {
+        "en": "Supports the rod without locking both ends.",
+        "zh": "托住钢杆，不把两端同时锁死。"
+      },
+      "detail": {
+        "en": "An open shallow saddle supports the rod. The rod can move along its axis as temperature changes; the pair is not a pair of fixed end clamps. [S27]",
+        "zh": "开放浅鞍座托住钢杆，允许它随温度变化沿轴向移动；两个支承不是两只锁死端点的夹具。 [S27]"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "at": [
+          0.09,
+          0.775,
+          -0.22
+        ],
+        "size": [
+          0.018,
+          0.05,
+          0.035
+        ],
+        "bevel": 0.002,
+        "color": "steel"
+      },
+      "extra": [
+        {
+          "kind": "extrude",
+          "at": [
+            0.09,
+            0.797,
+            -0.22
+          ],
+          "shape": [
+            [
+              -0.009,
+              0
+            ],
+            [
+              0.009,
+              0
+            ],
+            [
+              0.009,
+              0.019
+            ],
+            [
+              0.005,
+              0.019
+            ],
+            [
+              0.005,
+              0.009
+            ],
+            [
+              0,
+              0.007
+            ],
+            [
+              -0.005,
+              0.009
+            ],
+            [
+              -0.005,
+              0.019
+            ],
+            [
+              -0.009,
+              0.019
+            ]
+          ],
+          "depth": 0.01,
+          "rotation": [
+            0,
+            90,
+            0
+          ],
+          "color": "steel"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": false,
+      "connects": [
+        "rod"
+      ]
+    },
+    {
+      "id": "expansion-ball",
+      "group": "expansion",
+      "name": {
+        "en": "Expansion ball",
+        "zh": "热胀小球"
+      },
+      "summary": {
+        "en": "Compares a cold ball with its warmed illustration.",
+        "zh": "比较小球原状与受热后的示意状态。"
+      },
+      "detail": {
+        "en": "This independent qualitative ball-and-ring scene enlarges the visual size change. It does not use the steel rod’s dimensions or coefficient, and it gives no numerical ball temperature or expansion. [S27]",
+        "zh": "球环是独立的定性场景，尺寸变化为了观察而放大。不使用钢杆尺寸或系数，也不给小球温度或膨胀量数字。 [S27]"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          0.24,
+          0.865,
+          -0.22
+        ],
+        "size": [
+          0.02
+        ],
+        "color": "steel"
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "at": [
+            0.24,
+            0.913,
+            -0.22
+          ],
+          "size": [
+            0.0025,
+            0.0025,
+            0.06
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "cylinder",
+          "at": [
+            0.24,
+            0.952,
+            -0.22
+          ],
+          "size": [
+            0.006,
+            0.006,
+            0.025
+          ],
+          "color": "plastic"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": false,
+      "connects": [
+        "expansion-ring"
+      ]
+    },
+    {
+      "id": "expansion-ring",
+      "group": "expansion",
+      "name": {
+        "en": "Ring with an opening",
+        "zh": "带孔圆环"
+      },
+      "summary": {
+        "en": "Keeps the original opening for the ball comparison.",
+        "zh": "在小球对照中保持原来的孔。"
+      },
+      "detail": {
+        "en": "The annular ring has a real 44 mm design opening rather than a solid painted disc. In this ball-only warming scene the ring stays in its original state; a separately heated ring would expand too. [S27]",
+        "zh": "圆环有真实的设计孔洞，并非把孔画在实心圆盘上。在只加热小球的情景中，环保持原状；若另外加热圆环，环也会膨胀。 [S27]"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          0.24,
+          0.818,
+          -0.22
+        ],
+        "profile": [
+          [
+            0.022,
+            -0.004
+          ],
+          [
+            0.033,
+            -0.004
+          ],
+          [
+            0.033,
+            0.004
+          ],
+          [
+            0.022,
+            0.004
+          ],
+          [
+            0.022,
+            -0.004
+          ]
+        ],
+        "color": "steel",
+        "segments": 40
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "at": [
+            0.295,
+            0.818,
+            -0.22
+          ],
+          "size": [
+            0.0025,
+            0.0025,
+            0.05
+          ],
+          "color": "steel",
+          "rotation": [
+            0,
+            0,
+            90
+          ]
+        },
+        {
+          "kind": "cylinder",
+          "at": [
+            0.335,
+            0.818,
+            -0.22
+          ],
+          "size": [
+            0.006,
+            0.006,
+            0.035
+          ],
+          "color": "plastic",
+          "rotation": [
+            0,
+            0,
+            90
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            0.24,
+            0.782,
+            -0.248
+          ],
+          "size": [
+            0.018,
+            0.064,
+            0.012
+          ],
+          "color": "steel"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": false,
+      "connects": [
+        "expansion-ball"
+      ]
+    },
+    {
+      "id": "expansion-thermometer",
+      "group": "expansion",
+      "name": {
+        "en": "Liquid-column demonstration",
+        "zh": "液柱演示"
+      },
+      "summary": {
+        "en": "Shows a longer liquid column in a fixed glass sleeve.",
+        "zh": "在固定玻璃套管中显示变长的液柱。"
+      },
+      "detail": {
+        "en": "Only the coloured liquid column changes length in these qualitative poses. Its fixed glass sleeve, bulb and support belong to the bench context geometry so the glass does not grow. This is a diagram of liquid expansion, without a volume or temperature solver. [S27]",
+        "zh": "定性姿态只改变有色液柱长度。固定玻璃套管、球泡和支座并入台面背景几何，因此玻璃不会跟着变长。这是液体膨胀示意，没有体积或温度求解器。 [S27]"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "at": [
+          0.4,
+          0.8215,
+          -0.24
+        ],
+        "size": [
+          0.0016,
+          0.0016,
+          0.045
+        ],
+        "color": "token:signal"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": false
+    },
+    {
+      "id": "gas-cylinder",
+      "group": "expansion",
+      "name": {
+        "en": "Open-top piston cylinder",
+        "zh": "可动活塞筒"
+      },
+      "summary": {
+        "en": "Contains the gas below a movable piston.",
+        "zh": "围住可动活塞下方的气体。"
+      },
+      "detail": {
+        "en": "The transparent cylinder has a fixed bottom and an open top. The piston moves upward in the qualitative warm pose; no pressure, gas volume or gas law is calculated. [S27]",
+        "zh": "透明筒有固定底部和敞开上端。受热定性姿态使活塞上移；模型不计算压强、气体体积或气体方程。 [S27]"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          0.65,
+          0.75,
+          -0.24
+        ],
+        "profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.026,
+            0
+          ],
+          [
+            0.029,
+            0.004
+          ],
+          [
+            0.029,
+            0.14
+          ],
+          [
+            0.026,
+            0.14
+          ],
+          [
+            0.026,
+            0.006
+          ],
+          [
+            0,
+            0.006
+          ]
+        ],
+        "color": "glass",
+        "segments": 40
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": true,
+      "shell": true,
+      "connects": [
+        "gas-piston"
+      ]
+    },
+    {
+      "id": "gas-piston",
+      "group": "expansion",
+      "name": {
+        "en": "Movable piston",
+        "zh": "可动活塞"
+      },
+      "summary": {
+        "en": "Moves to leave more space for warmed gas.",
+        "zh": "移动以给受热气体留出更大空间。"
+      },
+      "detail": {
+        "en": "The piston is a separate solid disc with a slender handle. Its two positions show a qualitative change in gas space under a movable boundary, not a sealed rigid container being heated. [S27]",
+        "zh": "活塞是带细柄的独立圆盘。两个位置只定性表示可动边界下的气体空间变化，不表示加热密封刚性容器。 [S27]"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "at": [
+          0.65,
+          0.815,
+          -0.24
+        ],
+        "size": [
+          0.0255,
+          0.0255,
+          0.008
+        ],
+        "color": "steel"
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "at": [
+            0.65,
+            0.866,
+            -0.24
+          ],
+          "size": [
+            0.0025,
+            0.0025,
+            0.094
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "cylinder",
+          "at": [
+            0.65,
+            0.914,
+            -0.24
+          ],
+          "size": [
+            0.011,
+            0.011,
+            0.006
+          ],
+          "color": "plastic"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": false,
+      "connects": [
+        "gas-cylinder"
+      ]
+    },
+    {
+      "id": "bath-holder",
+      "group": "transfer",
+      "name": {
+        "en": "Spoon holder",
+        "zh": "勺架"
+      },
+      "summary": {
+        "en": "Holds both spoons at the same immersion depth.",
+        "zh": "把两勺固定在相同浸入深度。"
+      },
+      "detail": {
+        "en": "A rear upright carries a crossbar behind both handles. Two short front tabs meet the handles without covering their bowls. Equal immersion is a design condition, not an inferred property of their colours. [S27]",
+        "zh": "后方立柱支承两勺柄后面的横梁；短托片接触手柄，不遮住勺碗。相同浸入深度是设计条件，不由颜色推断。 [S27]"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          -0.55,
+          0.905,
+          0.12
+        ],
+        "size": [
+          0.055,
+          0.006,
+          0.02
+        ],
+        "color": "steel"
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "at": [
+            -0.55,
+            0.8275,
+            0.13
+          ],
+          "size": [
+            0.008,
+            0.155,
+            0.012
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "box",
+          "at": [
+            -0.55,
+            0.755,
+            0.13
+          ],
+          "size": [
+            0.07,
+            0.01,
+            0.04
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "box",
+          "at": [
+            -0.567,
+            0.905,
+            0.1035
+          ],
+          "size": [
+            0.008,
+            0.004,
+            0.017
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "box",
+          "at": [
+            -0.533,
+            0.905,
+            0.1035
+          ],
+          "size": [
+            0.008,
+            0.004,
+            0.017
+          ],
+          "color": "steel"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": false,
+      "connects": [
+        "metal-spoon",
+        "plastic-spoon"
+      ]
+    },
+    {
+      "id": "heater-probe-support",
+      "group": "curves",
+      "name": {
+        "en": "Heating probe stand",
+        "zh": "加热探头支架"
+      },
+      "summary": {
+        "en": "Holds its probe clear of the cup wall and bottom.",
+        "zh": "支承探头，让感温端不碰杯壁和杯底。"
+      },
+      "detail": {
+        "en": "The base rests on the bench beside the cup. A continuous upright and arm meet the probe stem above the open mouth. [S27]",
+        "zh": "底座放在烧杯旁的台面上。连续立杆与横臂在杯口上方连接探头杆。 [S27]"
+      },
+      "primitive": {
+        "kind": "tube",
+        "at": [
+          0.06,
+          0.76,
+          0.078
+        ],
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0.2230000000000001,
+            0
+          ],
+          [
+            0.09,
+            0.2230000000000001,
+            0
+          ]
+        ],
+        "radius": 0.0035,
+        "color": "steel"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "at": [
+            0.06,
+            0.756,
+            0.078
+          ],
+          "size": [
+            0.04,
+            0.012,
+            0.045
+          ],
+          "bevel": 0.001,
+          "color": "steel"
+        },
+        {
+          "kind": "box",
+          "at": [
+            0.15,
+            0.9830000000000001,
+            0.078
+          ],
+          "size": [
+            0.012,
+            0.009,
+            0.012
+          ],
+          "color": "rubber"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": false,
+      "connects": [
+        "heater-probe"
+      ]
+    },
+    {
+      "id": "cooler-probe-support",
+      "group": "curves",
+      "name": {
+        "en": "Cooling probe stand",
+        "zh": "冷却探头支架"
+      },
+      "summary": {
+        "en": "Holds its probe clear of the cup wall and bottom.",
+        "zh": "支承探头，让感温端不碰杯壁和杯底。"
+      },
+      "detail": {
+        "en": "The base rests on the bench beside the cup. A continuous upright and arm meet the probe stem above the open mouth. [S27]",
+        "zh": "底座放在烧杯旁的台面上。连续立杆与横臂在杯口上方连接探头杆。 [S27]"
+      },
+      "primitive": {
+        "kind": "tube",
+        "at": [
+          0.4600000000000001,
+          0.76,
+          0.078
+        ],
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0.18500000000000005,
+            0
+          ],
+          [
+            0.09,
+            0.18500000000000005,
+            0
+          ]
+        ],
+        "radius": 0.0035,
+        "color": "steel"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "at": [
+            0.4600000000000001,
+            0.756,
+            0.078
+          ],
+          "size": [
+            0.04,
+            0.012,
+            0.045
+          ],
+          "bevel": 0.001,
+          "color": "steel"
+        },
+        {
+          "kind": "box",
+          "at": [
+            0.55,
+            0.9450000000000001,
+            0.078
+          ],
+          "size": [
+            0.012,
+            0.009,
+            0.012
+          ],
+          "color": "rubber"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": false,
+      "connects": [
+        "cool-probe"
+      ]
+    },
+    {
+      "id": "room-reference",
+      "group": "curves",
+      "name": {
+        "en": "Room-temperature reference",
+        "zh": "环境温度参考"
+      },
+      "summary": {
+        "en": "Marks the fixed environment used by the cooling model.",
+        "zh": "标示冷却模型采用的固定环境温度。"
+      },
+      "detail": {
+        "en": "The model reservoir stays at the design reference of 25 °C. This is not a live thermometer or a reading of Singapore weather. [S27]",
+        "zh": "模型热库固定为设计参考值25 °C。这不是实时温度计，也不是新加坡天气读数。 [S27]"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "at": [
+          0.75,
+          0.79,
+          0.1
+        ],
+        "size": [
+          0.045,
+          0.08,
+          0.014
+        ],
+        "bevel": 0.002,
+        "color": "enamel"
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "at": [
+            0.75,
+            0.756,
+            0.1
+          ],
+          "size": [
+            0.07,
+            0.012,
+            0.05
+          ],
+          "color": "steel"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.025
+      },
+      "castShadow": false,
+      "clip": false,
+      "connects": [
+        "wrap",
+        "cooling-water"
+      ]
+    },
+    {
+      "id": "bench",
+      "context": true,
+      "name": {
+        "en": "Laboratory bench",
+        "zh": "实验台"
+      },
+      "summary": {
+        "en": "Supports the independent model apparatus.",
+        "zh": "支承各个独立模型的器材。"
+      },
+      "detail": {
+        "en": "Original 1.8 × 0.7 m design bench, top at 0.75 m. Adjacent apparatus are separate experiments, not thermally connected. The fixed glass envelope and bulb of the qualitative liquid-column diagram are static context; only its selected liquid column lengthens. [S27]",
+        "zh": "原创设计台面为1.8 × 0.7 m，台面高0.75 m。并排器材属于独立实验，不表示互相热接触。定性液柱图的固定玻璃外壳和球泡是静态背景；只有可选液柱变长。[S27]"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "at": [
+          0,
+          0.73,
+          0
+        ],
+        "size": [
+          1.8,
+          0.04,
+          0.7
+        ],
+        "bevel": 0.006,
+        "color": "plastic"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "at": [
+            -0.78,
+            0.355,
+            -0.25
+          ],
+          "size": [
+            0.045,
+            0.71,
+            0.045
+          ],
+          "bevel": 0.004,
+          "color": "powder"
+        },
+        {
+          "kind": "bevelBox",
+          "at": [
+            -0.78,
+            0.355,
+            0.25
+          ],
+          "size": [
+            0.045,
+            0.71,
+            0.045
+          ],
+          "bevel": 0.004,
+          "color": "powder"
+        },
+        {
+          "kind": "bevelBox",
+          "at": [
+            0.78,
+            0.355,
+            -0.25
+          ],
+          "size": [
+            0.045,
+            0.71,
+            0.045
+          ],
+          "bevel": 0.004,
+          "color": "powder"
+        },
+        {
+          "kind": "bevelBox",
+          "at": [
+            0.78,
+            0.355,
+            0.25
+          ],
+          "size": [
+            0.045,
+            0.71,
+            0.045
+          ],
+          "bevel": 0.004,
+          "color": "powder"
+        },
+        {
+          "kind": "box",
+          "at": [
+            0,
+            0.66,
+            -0.25
+          ],
+          "size": [
+            1.56,
+            0.035,
+            0.025
+          ],
+          "color": "powder"
+        },
+        {
+          "kind": "box",
+          "at": [
+            0,
+            0.66,
+            0.25
+          ],
+          "size": [
+            1.56,
+            0.035,
+            0.025
+          ],
+          "color": "powder"
+        },
+        {
+          "kind": "box",
+          "at": [
+            -0.78,
+            0.66,
+            0
+          ],
+          "size": [
+            0.025,
+            0.035,
+            0.5
+          ],
+          "color": "powder"
+        },
+        {
+          "kind": "box",
+          "at": [
+            0.78,
+            0.66,
+            0
+          ],
+          "size": [
+            0.025,
+            0.035,
+            0.5
+          ],
+          "color": "powder"
+        },
+        {
+          "kind": "tube",
+          "at": [
+            0.4,
+            0.798,
+            -0.24
+          ],
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0.117,
+              0
+            ]
+          ],
+          "radius": 0.004,
+          "color": "glass"
+        },
+        {
+          "kind": "sphere",
+          "at": [
+            0.4,
+            0.79,
+            -0.24
+          ],
+          "size": [
+            0.012
+          ],
+          "color": "glass"
+        },
+        {
+          "kind": "sphere",
+          "at": [
+            0.4,
+            0.79,
+            -0.24
+          ],
+          "size": [
+            0.009
+          ],
+          "color": "token:signal"
+        },
+        {
+          "kind": "box",
+          "at": [
+            0.4,
+            0.761,
+            -0.24
+          ],
+          "size": [
+            0.035,
+            0.022,
+            0.035
+          ],
+          "color": "steel"
+        }
+      ],
+      "castShadow": true,
+      "clip": false
+    }
+  ],
+  "groups": [
+    {
+      "id": "transfer",
+      "name": {
+        "en": "Heat transfer",
+        "zh": "传热"
+      },
+      "color": "token:ink-2"
+    },
+    {
+      "id": "curves",
+      "name": {
+        "en": "Heating and cooling",
+        "zh": "加热与冷却"
+      },
+      "color": "token:cold"
+    },
+    {
+      "id": "expansion",
+      "name": {
+        "en": "Expansion",
+        "zh": "膨胀"
+      },
+      "color": "token:neutral"
+    },
+    {
+      "id": "heat-paths",
+      "name": {
+        "en": "Energy-transfer symbols",
+        "zh": "能量传递符号"
+      },
+      "color": "token:signal"
+    }
+  ],
+  "flows": [
+    {
+      "id": "heat-to-metal",
+      "group": "heat-paths",
+      "path": [
+        [
+          -0.567,
+          0.791,
+          0.115
+        ],
+        [
+          -0.567,
+          0.815,
+          0.115
+        ],
+        [
+          -0.567,
+          0.875,
+          0.115
+        ],
+        [
+          -0.567,
+          0.938,
+          0.115
+        ]
+      ],
+      "speed": 0.08,
+      "count": 48,
+      "size": 0.45,
+      "spread": 0.0008,
+      "color": "token:signal",
+      "ends": "fade",
+      "clip": false,
+      "parts": [
+        "bath-water",
+        "metal-spoon",
+        "metal-tip-marker"
+      ],
+      "whenRun": true
+    },
+    {
+      "id": "heat-to-plastic",
+      "group": "heat-paths",
+      "path": [
+        [
+          -0.533,
+          0.791,
+          0.115
+        ],
+        [
+          -0.533,
+          0.815,
+          0.115
+        ],
+        [
+          -0.533,
+          0.875,
+          0.115
+        ],
+        [
+          -0.533,
+          0.938,
+          0.115
+        ]
+      ],
+      "speed": 0.08,
+      "count": 48,
+      "size": 0.45,
+      "spread": 0.0008,
+      "color": "token:signal",
+      "ends": "fade",
+      "clip": false,
+      "parts": [
+        "bath-water",
+        "plastic-spoon",
+        "plastic-tip-marker"
+      ],
+      "whenRun": true
+    }
+  ],
+  "animations": [],
+  "presets": [
+    {
+      "id": "view-hero",
+      "label": {
+        "en": "Bench",
+        "zh": "实验台"
+      },
+      "camera": {
+        "position": [
+          2.6,
+          2.2,
+          3.25
+        ],
+        "target": [
+          0,
+          0.55,
+          0
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "view-probe",
+      "label": {
+        "en": "Thermometer",
+        "zh": "温度计"
+      },
+      "camera": {
+        "position": [
+          -0.15,
+          1.15,
+          0.65
+        ],
+        "target": [
+          -0.55,
+          0.87,
+          0.08
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "view-spoons",
+      "label": {
+        "en": "Spoons",
+        "zh": "勺子"
+      },
+      "camera": {
+        "position": [
+          -0.2,
+          1.25,
+          0.8
+        ],
+        "target": [
+          -0.55,
+          0.86,
+          0.08
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "view-heater",
+      "label": {
+        "en": "Heating",
+        "zh": "加热"
+      },
+      "camera": {
+        "position": [
+          0.65,
+          1.25,
+          0.75
+        ],
+        "target": [
+          0.15,
+          0.9,
+          0.1
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "view-cooler",
+      "label": {
+        "en": "Cooling",
+        "zh": "冷却"
+      },
+      "camera": {
+        "position": [
+          1.05,
+          1.2,
+          0.75
+        ],
+        "target": [
+          0.55,
+          0.86,
+          0.1
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "view-expansion",
+      "label": {
+        "en": "Expansion",
+        "zh": "膨胀"
+      },
+      "camera": {
+        "position": [
+          0.7,
+          1.3,
+          0.7
+        ],
+        "target": [
+          0.32,
+          0.85,
+          -0.22
+        ],
+        "fov": 30
+      }
+    }
+  ],
+  "poses": {
+    "ball-ring-start": {
+      "expansion-ball": {
+        "scale": 1
+      }
+    },
+    "ball-ring-warm": {
+      "expansion-ball": {
+        "scale": 1.2
+      }
+    },
+    "liquid-column-start": {
+      "expansion-thermometer": {
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "pivot": [
+          0.4,
+          0.799,
+          -0.24
+        ]
+      }
+    },
+    "liquid-column-warm": {
+      "expansion-thermometer": {
+        "scale": [
+          1,
+          1.9,
+          1
+        ],
+        "pivot": [
+          0.4,
+          0.799,
+          -0.24
+        ]
+      }
+    },
+    "gas-start": {
+      "gas-piston": {
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "gas-warm": {
+      "gas-piston": {
+        "offset": [
+          0,
+          0.035,
+          0
+        ]
+      }
+    }
+  },
+  "units": {
+    "modelUnit": "m",
+    "scale": 1
+  },
+  "views": {
+    "assembled": {
+      "camera": {
+        "position": [
+          2.6,
+          2.2,
+          3.25
+        ],
+        "target": [
+          0,
+          0.55,
+          0
+        ],
+        "fov": 30
+      }
+    },
+    "exploded": {
+      "camera": {
+        "position": [
+          2.6,
+          2.2,
+          3.25
+        ],
+        "target": [
+          0,
+          0.55,
+          0
+        ],
+        "fov": 30
+      }
+    },
+    "cover": {
+      "position": [
+        2.6,
+        2.2,
+        3.25
+      ],
+      "target": [
+        0,
+        0.55,
+        0
+      ],
+      "fov": 30
+    },
+    "section": {
+      "plane": "xy"
+    },
+    "reference": {
+      "fit": "layers"
+    },
+    "cutaway": {
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "offset": 0.1
+    },
+    "cuts": {
+      "wrap-section": {
+        "normal": [
+          0,
+          0,
+          -1
+        ],
+        "offset": 0.1,
+        "label": {
+          "en": "Wrap section",
+          "zh": "包覆层剖面"
+        }
+      },
+      "gas-section": {
+        "normal": [
+          0,
+          0,
+          -1
+        ],
+        "offset": -0.24,
+        "label": {
+          "en": "Piston section",
+          "zh": "活塞筒剖面"
+        }
+      }
+    }
+  },
+  "spec": [
+    {
+      "key": {
+        "en": "Elapsed time",
+        "zh": "经过时间"
+      },
+      "value": "0–300 s",
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Default water mass",
+        "zh": "默认水量"
+      },
+      "value": "200 g",
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Environment",
+        "zh": "环境"
+      },
+      "value": "25 °C",
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Reference rod",
+        "zh": "参考钢杆"
+      },
+      "value": "100 mm",
+      "tag": "design"
+    }
+  ],
+  "telemetry": [
+    {
+      "key": {
+        "en": "Temperature",
+        "zh": "温度"
+      },
+      "follow": [
+        "heated-c",
+        "cool-c"
+      ],
+      "unit": "°C",
+      "scope": "observe",
+      "lag": 0,
+      "decimals": 1
+    },
+    {
+      "key": {
+        "en": "Far ends",
+        "zh": "勺柄远端"
+      },
+      "follow": [
+        "metal-c",
+        "plastic-c"
+      ],
+      "unit": "°C",
+      "scope": "observe",
+      "lag": 0,
+      "decimals": 1
+    },
+    {
+      "key": {
+        "en": "Net energy",
+        "zh": "净传入能量"
+      },
+      "follow": [
+        "heated-j",
+        "cool-energy-j"
+      ],
+      "unit": "J",
+      "scope": "observe",
+      "lag": 0,
+      "decimals": 0
+    },
+    {
+      "key": {
+        "en": "Input energy",
+        "zh": "外部供能"
+      },
+      "follow": "heated-input-j",
+      "unit": "J",
+      "scope": "observe",
+      "lag": 0,
+      "decimals": 0
+    },
+    {
+      "key": {
+        "en": "Net rate",
+        "zh": "净传入功率"
+      },
+      "follow": [
+        "cool-rate-w",
+        "metal-rate-w",
+        "plastic-rate-w"
+      ],
+      "unit": "W",
+      "scope": "observe",
+      "lag": 0,
+      "decimals": 1
+    },
+    {
+      "key": {
+        "en": "Rod extension",
+        "zh": "钢杆伸长"
+      },
+      "follow": "rod-delta-mm",
+      "unit": "mm",
+      "scope": "observe",
+      "lag": 0,
+      "decimals": 3
+    }
+  ],
+  "sim": {
+    "kind": "heat",
+    "controls": [
+      {
+        "id": "elapsed-s",
+        "kind": "step",
+        "values": [
+          0,
+          30,
+          60,
+          90,
+          120,
+          150,
+          180,
+          210,
+          240,
+          270,
+          300
+        ],
+        "default": 0,
+        "unit": "s",
+        "label": {
+          "en": "Elapsed time",
+          "zh": "经过时间"
+        }
+      },
+      {
+        "id": "water-g",
+        "kind": "step",
+        "values": [
+          200,
+          300,
+          400
+        ],
+        "default": 200,
+        "unit": "g",
+        "label": {
+          "en": "Water mass",
+          "zh": "水的质量"
+        }
+      },
+      {
+        "id": "heater-w",
+        "kind": "step",
+        "values": [
+          0,
+          50,
+          100
+        ],
+        "default": 100,
+        "unit": "W",
+        "label": {
+          "en": "Heater power",
+          "zh": "加热功率"
+        }
+      },
+      {
+        "id": "cool-start-c",
+        "kind": "step",
+        "values": [
+          5,
+          45,
+          65,
+          85
+        ],
+        "default": 85,
+        "unit": "°C",
+        "label": {
+          "en": "Starting temperature",
+          "zh": "冷却初温"
+        }
+      },
+      {
+        "id": "cover",
+        "kind": "choice",
+        "default": "bare",
+        "label": {
+          "en": "Insulation",
+          "zh": "包覆"
+        },
+        "options": [
+          {
+            "id": "bare",
+            "label": {
+              "en": "Bare",
+              "zh": "裸杯"
+            }
+          },
+          {
+            "id": "wrapped",
+            "label": {
+              "en": "Wrapped",
+              "zh": "包覆"
+            }
+          }
+        ]
+      },
+      {
+        "id": "bath-c",
+        "kind": "step",
+        "values": [
+          5,
+          25,
+          45,
+          65,
+          85
+        ],
+        "default": 85,
+        "unit": "°C",
+        "label": {
+          "en": "Bath temperature",
+          "zh": "温浴温度"
+        }
+      },
+      {
+        "id": "rod-c",
+        "kind": "step",
+        "values": [
+          5,
+          25,
+          45,
+          65,
+          85
+        ],
+        "default": 25,
+        "unit": "°C",
+        "label": {
+          "en": "Rod temperature",
+          "zh": "杆温度"
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "id": "heated-c",
+        "from": "temperature:heater",
+        "label": {
+          "en": "Heated-water temperature",
+          "zh": "加热水温"
+        },
+        "unit": "°C",
+        "decimals": 1
+      },
+      {
+        "id": "heated-j",
+        "from": "energy:heater",
+        "label": {
+          "en": "Net energy received",
+          "zh": "净传入能量"
+        },
+        "unit": "J",
+        "decimals": 0
+      },
+      {
+        "id": "heated-input-j",
+        "from": "supplied:heater",
+        "label": {
+          "en": "Energy supplied",
+          "zh": "外部供能"
+        },
+        "unit": "J",
+        "decimals": 0
+      },
+      {
+        "id": "metal-c",
+        "from": "temperature:metal-tip",
+        "label": {
+          "en": "Metal far-end temperature",
+          "zh": "金属远端温度"
+        },
+        "unit": "°C",
+        "decimals": 1
+      },
+      {
+        "id": "plastic-c",
+        "from": "temperature:plastic-tip",
+        "label": {
+          "en": "Plastic far-end temperature",
+          "zh": "塑料远端温度"
+        },
+        "unit": "°C",
+        "decimals": 1
+      },
+      {
+        "id": "metal-rate-w",
+        "from": "rate:metal-tip",
+        "label": {
+          "en": "Metal net heating rate",
+          "zh": "金属净传入功率"
+        },
+        "unit": "W",
+        "decimals": 0
+      },
+      {
+        "id": "plastic-rate-w",
+        "from": "rate:plastic-tip",
+        "label": {
+          "en": "Plastic net heating rate",
+          "zh": "塑料净传入功率"
+        },
+        "unit": "W",
+        "decimals": 0
+      },
+      {
+        "id": "tip-comparison",
+        "from": "compare:tips",
+        "label": {
+          "en": "Far-end comparison",
+          "zh": "远端温度比较"
+        },
+        "kind": "state",
+        "states": {
+          "first-warmer": {
+            "en": "Metal warmer",
+            "zh": "金属较暖"
+          },
+          "same": {
+            "en": "Same",
+            "zh": "相同"
+          },
+          "second-warmer": {
+            "en": "Plastic warmer",
+            "zh": "塑料较暖"
+          }
+        }
+      },
+      {
+        "id": "cool-c",
+        "from": "temperature:cooler",
+        "label": {
+          "en": "Cooling-water temperature",
+          "zh": "冷却水温"
+        },
+        "unit": "°C",
+        "decimals": 1
+      },
+      {
+        "id": "cool-rate-w",
+        "from": "rate:cooler",
+        "label": {
+          "en": "Net heating rate",
+          "zh": "冷却净传入功率"
+        },
+        "unit": "W",
+        "decimals": 0
+      },
+      {
+        "id": "cool-energy-j",
+        "from": "energy:cooler",
+        "label": {
+          "en": "Cooling net energy",
+          "zh": "冷却净传入能量"
+        },
+        "unit": "J",
+        "decimals": 0
+      },
+      {
+        "id": "cool-reservoir-j",
+        "from": "reservoir-energy:cooler",
+        "label": {
+          "en": "Energy to environment",
+          "zh": "传至环境的净能量"
+        },
+        "unit": "J",
+        "decimals": 0
+      },
+      {
+        "id": "cool-direction",
+        "from": "direction:cooler",
+        "label": {
+          "en": "Cooling-water change",
+          "zh": "冷却方向"
+        },
+        "kind": "state",
+        "states": {
+          "warming": {
+            "en": "Warming",
+            "zh": "升温"
+          },
+          "steady": {
+            "en": "Steady",
+            "zh": "稳定"
+          },
+          "cooling": {
+            "en": "Cooling",
+            "zh": "降温"
+          }
+        }
+      },
+      {
+        "id": "heated-direction",
+        "from": "direction:heater",
+        "label": {
+          "en": "Heated-water change",
+          "zh": "加热方向"
+        },
+        "kind": "state",
+        "states": {
+          "warming": {
+            "en": "Warming",
+            "zh": "升温"
+          },
+          "steady": {
+            "en": "Steady",
+            "zh": "稳定"
+          },
+          "cooling": {
+            "en": "Cooling",
+            "zh": "降温"
+          }
+        }
+      },
+      {
+        "id": "metal-direction",
+        "from": "direction:metal-tip",
+        "label": {
+          "en": "Metal temperature change",
+          "zh": "金属方向"
+        },
+        "kind": "state",
+        "states": {
+          "warming": {
+            "en": "Warming",
+            "zh": "升温"
+          },
+          "steady": {
+            "en": "Steady",
+            "zh": "稳定"
+          },
+          "cooling": {
+            "en": "Cooling",
+            "zh": "降温"
+          }
+        }
+      },
+      {
+        "id": "plastic-direction",
+        "from": "direction:plastic-tip",
+        "label": {
+          "en": "Plastic temperature change",
+          "zh": "塑料方向"
+        },
+        "kind": "state",
+        "states": {
+          "warming": {
+            "en": "Warming",
+            "zh": "升温"
+          },
+          "steady": {
+            "en": "Steady",
+            "zh": "稳定"
+          },
+          "cooling": {
+            "en": "Cooling",
+            "zh": "降温"
+          }
+        }
+      },
+      {
+        "id": "rod-delta-mm",
+        "from": "delta-mm:rod",
+        "label": {
+          "en": "Rod extension",
+          "zh": "杆伸长量"
+        },
+        "unit": "mm",
+        "decimals": 3
+      },
+      {
+        "id": "rod-length-mm",
+        "from": "length-mm:rod",
+        "label": {
+          "en": "Rod length",
+          "zh": "杆长度"
+        },
+        "unit": "mm",
+        "decimals": 3
+      },
+      {
+        "id": "heater-rate-w",
+        "from": "rate:heater",
+        "label": {
+          "en": "Heater net heating rate",
+          "zh": "加热净传入功率"
+        },
+        "unit": "W",
+        "decimals": 0
+      },
+      {
+        "id": "heated-change-k",
+        "from": "change:heater",
+        "label": {
+          "en": "Heating temperature change",
+          "zh": "加热温差"
+        },
+        "unit": "K",
+        "decimals": 1
+      },
+      {
+        "id": "cool-change-k",
+        "from": "change:cooler",
+        "label": {
+          "en": "Cooling temperature change",
+          "zh": "冷却温差"
+        },
+        "unit": "K",
+        "decimals": 1
+      },
+      {
+        "id": "heated-reservoir-j",
+        "from": "reservoir-energy:heater",
+        "label": {
+          "en": "Heater energy to environment",
+          "zh": "加热传至热库能量"
+        },
+        "unit": "J",
+        "decimals": 0
+      },
+      {
+        "id": "metal-energy-j",
+        "from": "energy:metal-tip",
+        "label": {
+          "en": "Metal net energy",
+          "zh": "金属净传入能量"
+        },
+        "unit": "J",
+        "decimals": 0
+      },
+      {
+        "id": "plastic-energy-j",
+        "from": "energy:plastic-tip",
+        "label": {
+          "en": "Plastic net energy",
+          "zh": "塑料净传入能量"
+        },
+        "unit": "J",
+        "decimals": 0
+      }
+    ],
+    "heat": {
+      "time": "elapsed-s",
+      "lumps": {
+        "heater": {
+          "initial": 25,
+          "capacity": {
+            "mass": {
+              "control": "water-g"
+            },
+            "specific": 4.2
+          },
+          "power": {
+            "control": "heater-w"
+          }
+        },
+        "cooler": {
+          "initial": {
+            "control": "cool-start-c"
+          },
+          "capacity": {
+            "mass": {
+              "control": "water-g"
+            },
+            "specific": 4.2
+          },
+          "power": 0,
+          "reservoir": {
+            "temperature": 25,
+            "conductance": {
+              "control": "cover",
+              "values": {
+                "bare": 2,
+                "wrapped": 0.5
+              }
+            }
+          }
+        },
+        "metal-tip": {
+          "initial": 25,
+          "capacity": 20,
+          "power": 0,
+          "reservoir": {
+            "temperature": {
+              "control": "bath-c"
+            },
+            "conductance": 0.3333333333333333
+          }
+        },
+        "plastic-tip": {
+          "initial": 25,
+          "capacity": 20,
+          "power": 0,
+          "reservoir": {
+            "temperature": {
+              "control": "bath-c"
+            },
+            "conductance": 0.03333333333333333
+          }
+        }
+      },
+      "expansions": {
+        "rod": {
+          "temperature": {
+            "control": "rod-c"
+          },
+          "reference": 25,
+          "length": 0.1,
+          "alpha": 0.000012
+        }
+      },
+      "compare": {
+        "tips": {
+          "first": "metal-tip",
+          "second": "plastic-tip",
+          "epsilon": 0.01
+        }
+      }
+    },
+    "bind": [
+      {
+        "control": "bath-c",
+        "part": "probe-marker",
+        "offset": {
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "per": 0.0008,
+          "origin": 25
+        }
+      },
+      {
+        "output": "heated-c",
+        "part": "heater-probe-marker",
+        "offset": {
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "per": 0.0008,
+          "origin": 25
+        }
+      },
+      {
+        "output": "cool-c",
+        "part": "cool-probe-marker",
+        "offset": {
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "per": 0.0008,
+          "origin": 25
+        }
+      },
+      {
+        "output": "metal-c",
+        "part": "metal-tip-marker",
+        "offset": {
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "per": 0.0004,
+          "origin": 25
+        }
+      },
+      {
+        "output": "plastic-c",
+        "part": "plastic-tip-marker",
+        "offset": {
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "per": 0.0004,
+          "origin": 25
+        }
+      },
+      {
+        "output": "rod-delta-mm",
+        "part": "rod-end-marker",
+        "offset": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "per": 0.5,
+          "origin": 0
+        }
+      },
+      {
+        "control": "cover",
+        "part": [
+          "wrap",
+          "air-gap"
+        ],
+        "visible": {
+          "eq": "wrapped"
+        }
+      },
+      {
+        "output": "metal-rate-w",
+        "flow": "heat-to-metal",
+        "intensity": {
+          "full": 20,
+          "mode": "speed"
+        }
+      },
+      {
+        "output": "plastic-rate-w",
+        "flow": "heat-to-plastic",
+        "intensity": {
+          "full": 20,
+          "mode": "speed"
+        }
+      }
+    ]
+  }
+}

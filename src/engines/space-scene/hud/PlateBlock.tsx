@@ -34,7 +34,7 @@ import { realLength, scaleBar } from '../lib/units';
 import { FOLLOW_LAG, formatReading, lagValue, readingDecimals, readingTarget } from '../lib/telemetry';
 import { numberOf, outputDecimals, SEPARATE_EXPERIMENTS } from '../lib/sim';
 import type { SimControl, SimValue } from '../sim-schema';
-import { useSimView } from './sim';
+import { usePredictionHidden, useSimView } from './sim';
 import { timeText, valueWords } from '../lib/sim/text';
 import { cardStates } from '../lib/sim/replay';
 import { statusTag, tableSources } from '../lib/sim/table';
@@ -177,11 +177,12 @@ function controlStatus(c: SimControl, v: SimValue | undefined): string {
   return tx(c.options.find((o) => o.id === v)?.label ?? { en: String(v), zh: String(v) }, 'en').toUpperCase();
 }
 
-function Telemetry({ rows, run, file }: { rows: readonly TelemetryRow[]; run: boolean; file: PartsFile }) {
+function Telemetry({ rows, run, file, ui }: { rows: readonly TelemetryRow[]; run: boolean; file: PartsFile; ui: SpaceUiStore }) {
   const sim = file.sim;
   const { locale } = useSceneContext();
   const t = useT();
   const view = useSimView(file);
+  const concealed = usePredictionHidden(ui, view);
   // Instant transitions (deep links, snaps for tests / screenshots) jump to the end values.
   const snapId = useScene<SpaceSceneExt, number>((st) => (st.transition.instant ? st.transition.id : -1));
   const snap = useRef(0);
@@ -227,6 +228,7 @@ function Telemetry({ rows, run, file }: { rows: readonly TelemetryRow[]; run: bo
   const rowSources = sim?.table && view ? tableSources(sim.table, view.values) : {};
   const tag = statusTag(card?.observe ?? [], sim?.outputs ?? []);
   let at = 0;
+  if (concealed) return null;
   return (
     <>
       <p className="space-plate__sim">
@@ -346,7 +348,7 @@ export function PlateBlock({ file, ui, bridge }: { file: PartsFile; ui: SpaceUiS
             </span>
           ))}
         </p>
-        {file.telemetry && <Telemetry rows={file.telemetry} run={s.run} file={file} />}
+        {file.telemetry && <Telemetry rows={file.telemetry} run={s.run} file={file} ui={ui} />}
         {picked ? (
           <button type="button" className="space-plate__sel" title={t('space.plate.show', { name: tx(picked.name, locale) })} onClick={showInspector}>
             <b>{partNumber(file, picked.id)}</b>

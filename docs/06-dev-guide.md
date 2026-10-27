@@ -2508,3 +2508,65 @@ QA：`engine.airfoil()` 提供当前标量、fieldReady/version/inputKey、路�
 - **堆场**：求值须传已有 `evaluateSim` 的 parts 参数；`evaluateSimOnStage` 已如此传入。`yard-slots` 的键为 `<part>:x/y/z/shown`，相对各主primitive.at；原状保持静止，cleared/retrieved把存在的阻挡箱移到park，retrieved另把target移到retrieved。超出above的阻挡箱shown0，目标始终为底层。绑定 `{output:"yard-slots",part:[...],shift:{ease:0,lift:0}}`；不把直线位移当作安全吊运路径。QA继续读 `engine.shift(id)`。
 - **校验**：严格字段/有限数/正尺寸与slow≥1；控件类型、合法默认值与范围；目标/阻挡箱互异、非context primitive；clearBottomY清过起终点箱顶、trolley原点高于最高吊具顶、knots严格递增；lift起终点位于模型静止包络。输出只允许上述15种，kind与全部状态标签须准确；count的repeat数量须覆盖该控制值。现有绑定/pose引用校验保留。source id沿用现有 `S1` 格式（prep文献 `S01` 映射 `S1`）。
 - **镜头远平面**：舞台相机 far 默认 200 m；模型半径大到轨道最远距离超过它时（港口约 100 m 的岸桥），`CameraRig` 按 `farPlane(radius)`（`lib/camera.ts`：`max(200, 20 × 0.9R + 2R)`）抬高，否则窄屏 / 竖屏下相机退远后整座模型被裁掉。展品尺度的主题仍是 200，不受影响。
+### SpaceScene · 试一试 · 热（heat）
+
+`sim.kind: "heat"`（docs/55 §4 E-H1）为互不耦合的均温物体求解显式时刻温度。`heat-schema.ts` 验证作者数据，`lib/sim/heat.ts` 的 `solveHeatAt(heat, resolvedValues, seconds)` 返回 quantity 字典；常规 `solveHeat` 从 `heat.time` 读取秒数。共用 `evaluateSim`、offset、signed flow，不接入 Timeline 播放时钟；`simTimelineChannels` 返回 null，`SEPARATE_EXPERIMENTS.heat = true`。完整七控件/二十四输出模板见 `tests/space-scene/fixtures/heat-bench.ts`；草稿 `sample-heat` 的六张卡覆盖同温、温浴、包覆、加热、冷却和固体膨胀。所有示例数值均为 DESIGN / SIM，并非真实器材测量。
+
+```json
+{
+  "kind": "heat",
+  "controls": [
+    { "id": "elapsed-s", "kind": "step", "label": { "en": "Elapsed time", "zh": "经过时间" }, "values": [0, 60, 120, 180, 240, 300], "default": 0, "unit": "s" },
+    { "id": "power-w", "kind": "step", "label": { "en": "Power", "zh": "功率" }, "values": [0, 50, 100], "default": 100, "unit": "W" }
+  ],
+  "outputs": [
+    { "id": "heated-c", "from": "temperature:water", "label": { "en": "Water temperature", "zh": "水温" }, "unit": "°C", "decimals": 1 }
+  ],
+  "heat": {
+    "time": "elapsed-s",
+    "lumps": { "water": { "initial": 25, "capacity": 840, "power": { "control": "power-w" } } }
+  }
+}
+```
+
+- `time` 必须引用 step：秒单位 `s`、不写 `format:"time"`、从0严格递增、至少两个值、所有值0–600 s。其合法步值用于 store / URL，连续曲线内部可在步值之间调用同一解析函数。时间不能同时被用作 `initial` / `power` / `capacity` / reservoir 参数，否则不再是固定参数的单调模型。
+- NumericSource 是有限数、`{"control":"step-id"}`，或 `{"control":"choice-id","values":{"bare":2,"wrapped":0.5}}`。choice映射必须完整且无多余键，toggle不能作为数值源。step引用必须带对应物理单位（温度°C、质量g、功率W、conductance W/K），不接受时刻格式。`capacity` 是正J/K数值，或 `{"mass":{"control":"water-g"},"specific":4.2}`，mass单位g、specific单位J/(g·K)，所有允许质量均>0。`power` 默认0，必须≥0 W；reservoir可省，写时是 `{"temperature":25,"conductance":2}`，conductance必须>0 W/K。
+- `lumps` 1–6个；`expansions`、`compare` 各0–4个，三张表的对象id不重名。`expansions.rod` 是 `{"temperature":{"control":"rod-c"},"reference":25,"length":0.1,"alpha":0.000012}`（m、K⁻¹）；length>0、alpha≥0。`compare.tips` 是 `{"first":"metal-tip","second":"plastic-tip","epsilon":0.01}`，两端是不同且存在的lump，epsilon≥0 °C。
+- 无reservoir：`T=T₀+Pt/C`；有reservoir：`T∞=Tₐ+P/U`，`T=T∞+(T₀−T∞)exp(−Ut/C)`。`q=P−U(T−Tₐ)`，`E=C(T−T₀)`，`Ein=Pt`，`Eout=Ein−E`。每个实验仅遍历它所读控件的全部允许值，检查0和最大时间：完整轨迹必须0–95 °C且数值有限。越界构建报错，不截断成沸腾平台。所有能量和温差保留符号；恒温热库由外部维持，不能称为有限杯水的封闭能量账。
+
+| quantity `from` | kind / unit | 内容 |
+|---|---|---|
+| `temperature:<lump>` | number / °C | 温度 |
+| `change:<lump>` | number / K | 相对初温的变化 |
+| `rate:<lump>` | number / W | 净传入功率 |
+| `energy:<lump>` | number / J | 净传入能量 |
+| `supplied:<lump>` | number / J | 定功率累计供能 |
+| `reservoir-energy:<lump>` | number / J | 净传至热库能量 |
+| `direction:<lump>` | state / 无单位 | warming / steady / cooling（q的±1e−9 W） |
+| `compare:<pair>` | state / 无单位 | first-warmer / same / second-warmer（epsilon比较带） |
+| `delta-mm:<rod>`、`length-mm:<rod>` | number / mm | 伸长量 / 长度 |
+
+每个输出必须声明准确的kind和unit；state必须给上表全部状态写双语标签，不能加入其他状态。不存在的quantity或对象报错。杆输出为真实模型毫米，`offset:{"axis":[1,0,0],"per":0.5,"origin":0}` 只将独立marker位移放大500倍（0.072mm → 0.036m）；静止杆本身不缩放。温度计示意marker可用Y向offset；温度不是体积，不能接fill。
+
+`state.sim.try.curve`（E-H2）与已有记录图 `record.chart` 分开：
+
+```json
+{
+  "set": { "elapsed-s": 0 },
+  "try": {
+    "vary": "elapsed-s",
+    "also": ["power-w"],
+    "observe": ["heated-c"],
+    "record": true,
+    "curve": { "x": "elapsed-s", "y": ["heated-c"], "samples": 101 }
+  }
+}
+```
+
+curve.x只允许heat.time，y为1–3个温度number输出（°C），samples整数33–201、默认101。横域取时间控件首末值，纵轴0–100 °C；同一个solver采样、端点包含、分段直线，无拟合与积分。模型曲线/展开值表为模型预计，记录按钮才会把当前显式时刻加入学生记录表。`vary`可以是cover，curve.x仍是elapsed-s；不把类别控件变成时间轴。曲线缓存包含模型、其余控制量、series和采样配置，排除游标elapsed；改变游标只重新求一个时刻。
+
+带predict的自由卡默认遮蔽当前卡答案、曲线与关联PLATE；讲解章/拍可写 `sim.reveal:true`，不隐藏既定教材知识。预测选择保留before/after条件，之后任意条件或时间改变即使预测失效。记录context为当前章+除vary外全部resolved controls：非vary改变清表并提示“Conditions changed; start a new record. / 条件已改变，请开始新记录。”；只变vary保留其他行，同值覆盖，最多12行，无本地持久化。普通URL仍通过 `sim=elapsed-s.120~power-w.100` 进入同一时刻；等待、RUN、REFERENCE和reduced motion均不改变实验时间。`__atlas.engine.sim()` 的values/outputs/table及只读curve数值诊断可核对游标、PLATE和记录行一致。
+
+曲线只读诊断精确形状为 `sim().curve = { x, domain: [min,max], series: [{ id, points: [{ x,y }] }], cursor: { x, values: { "heated-c": 39.285714285714285 } } }`。`points` 是采样数值，`cursor.values` 是当前时刻同solver直接求值，测试接口不返回SVG。未揭示预测同时隐藏手动记录表；before/after快照用于当前条件解释与恢复。`sim.reveal:true`仅在当前resolved controls等于该章/拍的原始输入时生效，手动改条件会使这次教材揭示失效。
+
+热实验卡隐藏当前读数时，提供显式操作 **Show current result / 显示当前结果**（`data-sim-reveal`）。该操作仅在临时UI里记录当前章与全部resolved controls的context，不改时间、质量、功率等输入，也不应用预测的固定start/change情景；可直接查看并手动记录任意合法时刻。之后改任意条件或时间、换章或拍，显式揭示失效，旧预测before/after说明也不沿用；再次点击才能显示新条件。此遮蔽机制只对heat开启，已有其他sim主题保留其读数/PLATE默认可见行为；通用记录条件隔离与预测失效仍共享。只读诊断`sim().reveal`给出当前显式揭示context或null。
