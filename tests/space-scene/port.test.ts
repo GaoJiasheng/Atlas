@@ -5,6 +5,7 @@ import { partsFile, spaceChapterState } from '../../src/engines/space-scene/sche
 import { portSchema, portSourceIssues } from '../../src/engines/space-scene/port-schema';
 import { simSchema, simIssues, chapterSimIssues, quantityKind, simTimelineChannels, type SimValues } from '../../src/engines/space-scene/sim-schema';
 import { evaluateSim, SEPARATE_EXPERIMENTS } from '../../src/engines/space-scene/lib/sim';
+import { evaluateSimOnStage } from '../../src/engines/space-scene/lib/sim/carrier';
 import { portLift, portYard, PORT_CHANNELS } from '../../src/engines/space-scene/lib/sim/port';
 import { channelValue, isTimeline } from '../../src/engines/space-scene/lib/sim/timeline';
 import { resolveSimValues, decodeSimParam } from '../../src/engines/space-scene/lib/sim/controls';
@@ -94,6 +95,11 @@ describe('yard model', () => {
     expect([18 + slots['yard-blocker-a:x']!, 3.8865 + slots['yard-blocker-a:y']!, 40 + slots['yard-blocker-a:z']!]).toEqual([28, 1.2955, 40]);
     expect([18 + slots['yard-blocker-b:x']!, Number((6.4775 + slots['yard-blocker-b:y']!).toFixed(8)), 40 + slots['yard-blocker-b:z']!]).toEqual([38, 1.2955, 40]);
     expect([18 + slots['yard-target:x']!, 1.2955 + slots['yard-target:y']!, 40 + slots['yard-target:z']!]).toEqual([18, 1.2955, 50]);
+  });
+  it('on the stage the slots are offsets from the parts\' rest centres, not from the origin', () => {
+    const { outputs } = evaluateSimOnStage(sim, file, resolveSimValues(sim, { above: 2, 'yard-state': 'retrieved' }), null);
+    const slots = outputs['yard-slots'] as Record<string, number>;
+    expect([slots['yard-blocker-a:x'], slots['yard-blocker-a:z'], slots['yard-target:z']]).toEqual([10, 0, 10]);
   });
   it('above=0 hides both blockers without changing the target tier', () => {
     const q = out({ above: 0 }); const slots = q['yard-slots'] as Record<string, number>;

@@ -618,3 +618,19 @@ PLATE最多6行，本章observe优先：boxes、teu、rehandles、capacity-rate�
 - `pnpm check`：Astro 777 files，0 errors／0 warnings／3个既有 unused hints；最终 TypeScript 亦完成 exit 0；`pnpm build` 最终 exit 0：121 static pages（120.88s），内含59主题再校验0错误／0警告，PWA产物生成。EN/ZH构建HTML各含35首页主题和2幅港口地图，built payload已确认只有working-box可剖切。
 - 浏览器 shoot／e2e 按明确指令跳过；手机390×844、paper/cinema、EN/ZH、reduced-motion、labels、模式组合、实际drawcalls与回归均未测。不能据此声称R2–R6视觉或性能通过。下一步主session使用 `ATLAS_E2E_PORT=5450`。
 - 无 git 写操作，无 package.json／lockfile、review-queue 或 next-batch 修改；`git diff --check` 通过。
+
+### 9.4 浏览器验收（Claude，2026-10-27）
+
+看了什么：`pnpm shoot container-port --beats` 的 EN·paper 全 36 拍；EN·cinema、ZH·paper、ZH·cinema 的 36 拍用同一套 `goToBeat(instant)` 逐拍截图（机器负载 ~170，官方 shoot 一组要 20 分钟，故其余三组用等价的逐拍脚本）；390×844 手机样张；`--layout` 的 EN·paper 七个尺寸；`--keys`；`--perf --gpu`；回归 sample-port、steam-engine、aircon 的 `--beats --keys`。
+
+找到并修掉的问题：
+1. **远平面**：舞台相机 far 固定 200 m，港口模型半径约 70 m，窄屏（900×1200、1024×768）相机退到 ~300 m，整座模型被裁掉、只剩标注。新增 `farPlane(radius)`（`lib/camera.ts`，`CameraRig` 应用；展品尺度仍是 200）+ 单测；docs/06 加一条。
+2. **堆场位移**：`evaluateSimOnStage` 没把零件传给 port 求解器，`yard-slots` 以原点为静止中心，浏览器里阻挡箱与取出的目标箱飞到 [28,…,40] 之类的“偏移”处，画面外。现与 sort 一样传 `source.parts`，加单测（浏览器 `shift()` 读到 [10,-2.591,0] / [20,-5.182,0] / 目标 [0,0,10]）。docs/06 原先的说法终于成立。
+3. **镜头**：第 02 章 3–5 拍沿用第 1 拍的近镜头，小车 / 箱子不在画面里（标注“no label: trolley”）；各给显式镜头。生成器 `build-chapters.ts` 同步，重跑与现 MDX 一致。
+4. **`[` `]` 键**：第 01 章 `try.vary` 是 n40，其默认值 1 与 `]` 走到的值相同，URL 不写 `sim=`，shoot 的键检查失败；改为 vary n20、also n40。
+5. 两份 e2e 的竞态：长度在 12 s 与 16 s 相同，轮询要同时等终点 z；URL 断言要等 `n40.2` 而不是 `sim=`；章轴按钮中心被节拍刻度盖住，点左上角；lock 用例先等 beat 自己的 sim 值写入。
+
+数字：perf（SwiftShader→Metal GPU 档）draw calls 5–31、三角形 ≤10.6k（预算 ≤80 / 0.3M）、fps 47–66（负载下）；page JS 503.6 KB gz（共 11 文件，含 three 与引擎，非首屏数）。layout 0 issue；keys 修后无失败；beats 36/36 链接落在同一场景；无控制台错误、无外部请求。
+
+未决 / 给 Gavin：第 05 章“真实海岸地图”拍在演示模式里只有岸桥模型（地图是阅读面板内的静态图版，D0-4）；cinema 下码头与堆场台面近白，偏亮；官方 shoot 在高负载下偶发整帧空白（逐拍脚本里不出现），是机器负载而非内容。
+

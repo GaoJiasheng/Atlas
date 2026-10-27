@@ -39,7 +39,7 @@ test.describe('container-port', () => {
     }
     const chapterButton = page.locator('.atlas-axis__btn[data-chapter="boxes-and-teu"]');
     await expect(chapterButton).toHaveAccessibleName(new RegExp(locale === 'en' ? 'Boxes and TEU' : '箱子与标准箱单位'));
-    await chapterButton.click();
+    await chapterButton.click({ position: { x: 6, y: 6 } }); // the beat ticks of a five-beat chapter sit over the button's centre
     await expect(page).toHaveURL(/ch=boxes-and-teu/);
     await expect(page.locator('#atlas-panel-title')).toContainText(locale === 'en' ? 'Boxes and TEU' : '箱子与标准箱单位');
     await expect(page.locator('.space-try')).toHaveAttribute('data-chapter', 'boxes-and-teu');
@@ -53,7 +53,7 @@ test.describe('container-port', () => {
     await expect(readout(page, 'teu')).toHaveText('4');
     await page.locator('.space-try [data-sim-control="n40"] button[aria-label$="Next value"]').click();
     await expect.poll(async () => (await sim(page)).outputs.teu).toBe(6);
-    await expect(page).toHaveURL(/sim=/);
+    await expect(page).toHaveURL(/n40\.2/); // the deep link already has sim=: wait for the new value, not the key
     await page.reload();
     await page.waitForFunction(() => window.__atlas !== undefined);
     expect(await page.evaluate(() => window.__atlas!.ready)).toBe(true);
@@ -75,7 +75,8 @@ test.describe('container-port', () => {
     await expect.poll(async () => (await sim(page)).timeline['lift-run']?.playing).toBe(true);
     for (const [t, length, spreaderY, z] of [[0, 36.809, 12.891, -18], [12, 21.809, 27.891, -18], [16, 21.809, 27.891, -4], [28, 44.809, 4.891, 10], [30, 44.809, 4.891, 10], [32, 21.809, 27.891, 10]]) {
       expect(await page.evaluate((t) => (window.__atlas!.engine as unknown as Engine).simSeek('lift-run', t), t!)).toBe(true);
-      await expect.poll(async () => (await span(page))?.length).toBeCloseTo(length!, 3);
+      // The length is the same at 12 s and 16 s (only the trolley moves): wait for the end z too, or a slow frame reads the old one.
+      await expect.poll(async () => { const s = await span(page); return s ? [Math.round(s.length * 1e3) / 1e3, Math.round(Math.abs(s.to[2]! - z!) * 1e3) / 1e3] : null; }, { timeout: 20_000 }).toEqual([length, 1]);
       const frame = await page.evaluate(() => {
         const e = window.__atlas!.engine as unknown as Engine;
         return { t: e.sim().timeline['lift-run']?.t, ropes: ['rope-a', 'rope-b', 'rope-c', 'rope-d'].map((id) => e.span(id)), anchor: e.anchor('rope-a') };
@@ -99,11 +100,12 @@ test.describe('container-port', () => {
   test('an unconfirmed lock holds the source; hide/show and reduced motion keep final spans coherent', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await open(page, 'ch=the-crane-load-path&b=5&theme=cinema');
+    await expect.poll(async () => (await sim(page)).values['lift-live'], { timeout: 20_000 }).toBe(true); // the beat's own sim values are in before we change one
     await set(page, { 'lock-confirmed': false });
     await expect.poll(async () => (await sim(page)).outputs['lift-status']).toBe('lock-not-confirmed');
-    await expect.poll(async () => (await span(page))?.length).toBeCloseTo(36.809, 3);
+    await expect.poll(async () => (await span(page))?.length, { timeout: 20_000 }).toBeCloseTo(36.809, 3);
     await set(page, { 'lock-confirmed': true });
-    await expect.poll(async () => (await span(page))?.length).toBeCloseTo(21.809, 3);
+    await expect.poll(async () => (await span(page))?.length, { timeout: 20_000 }).toBeCloseTo(21.809, 3);
     await page.evaluate(() => (window.__atlas!.engine as unknown as Engine).apply({ hidden: ['trolley'] }));
     await expect.poll(async () => (await span(page))?.shown).toBe(false);
     await page.evaluate(() => (window.__atlas!.engine as unknown as Engine).apply({ hidden: [] }));
@@ -118,8 +120,8 @@ test.describe('container-port', () => {
     expect((await sim(page)).values['yard-state']).toBe('retrieved');
     expect((await shift(page, 'yard-target'))?.offset[1]).toBeCloseTo(0, 4);
     await set(page, { above: 0 });
-    await expect.poll(async () => (await shift(page, 'yard-blocker-a'))?.shown).toBe(false);
-    await expect.poll(async () => (await shift(page, 'yard-blocker-b'))?.shown).toBe(false);
+    await expect.poll(async () => (await shift(page, 'yard-blocker-a'))?.shown, { timeout: 20_000 }).toBe(false);
+    await expect.poll(async () => (await shift(page, 'yard-blocker-b'))?.shown, { timeout: 20_000 }).toBe(false);
     expect((await sim(page)).outputs).toMatchObject({ rehandles: 0, 'retrieval-lifts': 1 });
   });
 

@@ -38,7 +38,8 @@ test.describe('sample-port', () => {
     await expect.poll(async () => (await span(page))?.length).toBeCloseTo(21.809, 3);
     for (const [t, length, bottom, z] of [[0,36.809,12.891,-19],[12,21.809,27.891,-19],[16,21.809,27.891,-5],[28,44.809,4.891,9],[32,21.809,27.891,9]]) {
       await page.evaluate((t) => (window.__atlas!.engine as unknown as Engine).simSeek('lift-run', t), t!);
-      await expect.poll(async () => (await span(page))?.length).toBeCloseTo(length!, 3);
+      // The length is the same at 12 s and 16 s (only the trolley moves): wait for the end z too, or a slow frame reads the old one.
+      await expect.poll(async () => { const s = await span(page); return s ? [Math.round(s.length * 1e3) / 1e3, Math.round(s.to[2]! * 1e3) / 1e3] : null; }, { timeout: 20_000 }).toEqual([length, z]);
       for (const id of ['rope-a','rope-b','rope-c','rope-d']) {
         const s = (await span(page,id))!;
         expect(s.length).toBeCloseTo(length!, 3); expect(s.to[1]).toBeCloseTo(bottom! + .3, 3);
@@ -80,7 +81,7 @@ test.describe('sample-port', () => {
     expect((await shift(page,'yard-blocker-b'))?.offset).toEqual([20,-5.182,0]);
     expect((await sim(page)).outputs['retrieval-lifts']).toBe(3);
     await set(page, { above:0 });
-    await expect.poll(async () => (await shift(page,'yard-blocker-a'))?.shown).toBe(false);
+    await expect.poll(async () => (await shift(page,'yard-blocker-a'))?.shown, { timeout: 20_000 }).toBe(false);
     expect((await shift(page,'yard-blocker-b'))?.shown).toBe(false);
     expect((await sim(page)).outputs.rehandles).toBe(0);
   });

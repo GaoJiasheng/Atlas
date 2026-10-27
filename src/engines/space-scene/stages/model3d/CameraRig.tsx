@@ -56,6 +56,7 @@ import {
   fitSphereCamera,
   exerciseFraming,
   fitExerciseCamera,
+  farPlane,
   fitSpan,
   ORBIT_PERIOD_S,
   roundCamera,
@@ -133,6 +134,15 @@ export function CameraRig({
     const t = c ? c.target : { x: 0, y: 0, z: 0 };
     return { position: [camera.position.x, camera.position.y, camera.position.z], target: [t.x, t.y, t.z], fov: camera.fov };
   };
+
+  useEffect(() => {
+    const far = farPlane(minDistance / 0.9);
+    if (camera.far !== far) {
+      camera.far = far;
+      camera.updateProjectionMatrix();
+      invalidate();
+    }
+  }, [camera, invalidate, minDistance]);
 
   useEffect(() => {
     bridge.liveCamera = current;
