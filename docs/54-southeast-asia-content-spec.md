@@ -448,3 +448,15 @@ T17 canonical 规则在此定为：**总是写回合法 baseline context 的完�
 最终 `pnpm check` 通过（789文件、0错误0警告、4既有提示，tsc退出0）；`pnpm validate` 通过（60主题、0错误0警告）；`pnpm test` 全过（168文件、4,369项；新增引擎22+内容21）；`pnpm build` 通过（123页、PWA），build再执行内容验证通过。`git diff --check`通过。静态输出核对EN/ZH首页35已发布卡及本题运行数据1,112,854 B、11国/5河线/44来源。没有git写入，没有package/lockfile、review-queue或next-batch改动。
 
 浏览器 `shoot` / `e2e` 依BRIEF明令跳过，未开或控制用户浏览器，未把它们记为通过。主会话用5442端口跑浏览器合同，并核EN/ZH×paper/cinema、390×844/1024×768、33拍地图标签/镜头、图链接、离线和性能预算；回归sample-climate/four-taps/singapore-land-use。中文逐段、当地译词、梯田年代范围和课纲索引证据等级请Gavin核读；未来3D梯田与扩展文化默认不在本题范围。完整清单与命令在主题REVIEW.md，逐段/逐句事实账本在AUDIT.md。
+
+### 9.4 浏览器验收（主会话代理，2026-10-27）
+
+分支先 `git merge main`（含 E-IR1、airfoil、orbit `orb-t`）：SceneHost / url-state 两处冲突按“两边都保留”合并（`geoContext` 与 `orbitTime` 字段并存；URL 键序 `… t, gc, m, at, … sim, orb-t, layers …`）。`tests-e2e/smoke.spec.ts` 冲突取 main 版本，再只为本题加一：38 主题、76 徽章、geography 3 题、末图版 38，并加 southeast-asia 卡片断言。
+
+**看过的图**：`shoot --beats` en-paper、zh-cinema（1920 演示）及 `--gpu` 复拍；另按拍链接逐拍截 en-paper 1024×768 与 zh-cinema 390×844 共 66 张；`--layout --keys --gpu` 四组 EN/ZH × paper/cinema，七种尺寸含 1024×768、390×844。国形、河线、峰点、海名、成员着色、一月/七月雨格与风箭头都与字幕相符；1997-07-23 为 9 国（越南已入）、1999 为 10、2025-10-26 为 11；格点读数一月 u/v 1.1/−4.9、雨 3.8 mm/day，七月 0.1/3.6、3.7，与 §4.4 T11–T12 一致。负载 160+ 时 swiftshader 演示截图会落后一拍才重绘（地图层停在上一拍）；同一批拍在硬件 GL 与链接重开下全部正确，记为负载伪影，不是引擎错误。
+
+**数字**：`--beats` 0 失败，拍链接 33/33 与演示一致，章高亮全部在屏；`--keys` 0 失败（swiftshader 下 drag 偶发超时，ww2 / four-taps 同时段同样失败，GPU 复跑通过）；`--layout` 0 问题；控制台干净，无外部请求。页面 JS 452.8 KB gz（与 sample-climate 451.7、ww2 457.1 同级）；`data.json` 1,112,917 B（gzip 396 KB），按需加载。`--perf` 对月气候/地理控制器不出 draw call / fps（与 sample-climate 相同的既有缺口），只能记要素数 24、主相机缩放。回归 `--beats --keys`：sample-geography、sample-climate、ww2、four-taps、singapore-land-use、industrial-revolution 拍失败均为 0。e2e（southeast-asia、sample-geography、sample-climate、smoke，workers=2）：本题与夹具全过；sample-climate 月份提交 5 s 轮询与 smoke sample-space 在负载下失败，单独重跑通过。
+
+**本轮修正**：① `case-tourism` 的 locationRef 按 §2 06 改回 `geo-phl`（原为 `geo-sgp`，导致 06-4 的 geo-phl 高亮被选择覆盖、地图无高亮）；`build.py` 同步，`provenance.json` 输出哈希更新。② 详情里的“查看图示”改为同页 `<a href>`，按“当前章正文含此图”判断是否显示，而不是当时可见；手机阅读面板折起时选案例也有链接（原实现手机上永远不出现）；补 44px 样式。③ e2e：两份手机测试先展开阅读面板（与 sample-climate 相同）；月份提交轮询放宽到 30 s。
+
+**留给 Gavin**：`monsoon-and-weather` 合入后，在 03 正文第三段（季风）加 `<TopicLink slug="monsoon-and-weather">`，本题不重复季风讲解；“寮国 / 亚细安 / 南中国海”等本地用词仍待核读。1024×768 下预设镜头以整张画布为中心，目标有时落在左侧 PLATE 文字下（TimeScene 通病，非本题）。

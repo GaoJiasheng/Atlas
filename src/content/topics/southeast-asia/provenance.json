@@ -35,8 +35,8 @@
   ],
   "output": {
     "file": "geography.json",
-    "bytes": 1086970,
-    "sha256": "a4456a93a556c75ffebf60e14d0ddef56ca03c1d80209494618cfba7132d9d61",
+    "bytes": 1087033,
+    "sha256": "c4da17f18e1681f707a4bb6d019de81d92c3e83534d9d0450aac5d589facbb42",
     "countryGeometrySha256": "2c72413ff669f7e486ce84cb903202c309d6c0ccc8131b586f9fa1bf35000f9d"
   },
   "countries": [

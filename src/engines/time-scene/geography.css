@@ -42,3 +42,14 @@
     min-height: 44px;
   }
 }
+.geo-figure-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: 12px;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font: 12px var(--font-mono);
+  letter-spacing: 0.06em;
+  text-decoration: none;
+}

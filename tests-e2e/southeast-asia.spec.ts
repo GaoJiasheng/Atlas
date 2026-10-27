@@ -12,7 +12,7 @@ async function open(page:Page,query='',locale='en'){
 }
 async function beat(page:Page,c:string,i:number){
  expect(await page.evaluate(([c,i])=>(window.__atlas!.engine as unknown as Engine).goToGeographyBeat(c,i),[c,i] as [string,number])).toBe(true);
- await expect.poll(async()=>{const s=await snapshot(page);return s.climatology?s.climatology.month===s.climatology.renderedMonth:true}).toBe(true);
+ await expect.poll(async()=>{const s=await snapshot(page);return s.climatology?s.climatology.month===s.climatology.renderedMonth:true},{timeout:30_000}).toBe(true);
 }
 for(const locale of ['en','zh'])for(const theme of ['paper','cinema'])test(`${locale}/${theme}: 33 authored beats and fixed country geometries`,async({page})=>{
  test.setTimeout(120_000);
@@ -39,6 +39,7 @@ test('member dates include Timor-Leste, same-day accessions and immutable shapes
  expect((await snapshot(page)).memberCount).toBe(11);await expect(page.locator('[data-member-count]')).toHaveText('Membership layer off');
 });
 test('native January/July samples and country-scale cases clear across contexts',async({page})=>{
+ test.setTimeout(120_000);
  await open(page,'ch=seasons-and-rain&b=2');
  await expect.poll(async()=>((await snapshot(page)).climateSample?.rain as {rate?:number})?.rate).toBe(3.784817);
  await beat(page,'seasons-and-rain',2);
@@ -51,6 +52,7 @@ test('native January/July samples and country-scale cases clear across contexts'
  expect(await page.evaluate(()=>(window.__atlas!.engine as unknown as Engine).sampleClimate(105,0))).toBeNull();
 });
 test('URL contexts have atomic precedence and canonical invalid-parameter recovery',async({page})=>{
+ test.setTimeout(180_000);
  await open(page,'ch=seasons-and-rain&b=3&gc=c&m=13');expect((await snapshot(page)).context).toEqual({kind:'climatology',month:7});
  await expect(page).toHaveURL(/[?&]m=7(?:&|$)/);
  await open(page,'ch=asean&b=1&gc=a&at=2025-10-26');expect((await snapshot(page)).memberCount).toBe(11);
@@ -63,6 +65,7 @@ test('390px Chinese reader supports case selection and figure links without runt
  const external:string[]=[];let localOrigin:string|null=null;
  page.on('request',r=>{if(!/^https?:/.test(r.url()))return;const origin=new URL(r.url()).origin;if(localOrigin===null&&r.isNavigationRequest())localOrigin=origin;if(localOrigin!==null&&origin!==localOrigin)external.push(r.url());});
  await page.setViewportSize({width:390,height:844});await open(page,'ch=forests-and-parks&b=4','zh');
+ await page.locator('.atlas-panel__toggle[aria-expanded="false"]').click();
  // Opening a case uses the same reader reveal action on desktop and phone.
  await page.evaluate(()=>(window.__atlas!.engine as unknown as Engine).selectGeography('case-mangrove-roots'));
  await expect(page.locator('[data-geography-selection="case-mangrove-roots"]')).toContainText('国家尺度参考');

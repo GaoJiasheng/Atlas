@@ -75,7 +75,9 @@ test.describe("date-free geography engine fixture", () => {
           ),
         );
         await expect
-          .poll(async () => (await snapshot(page)).climatology?.renderedMonth)
+          .poll(async () => (await snapshot(page)).climatology?.renderedMonth, {
+            timeout: 30_000,
+          })
           .toBe(7);
         expect((await snapshot(page)).selection).toBe("cell-105-0");
         expect(
@@ -141,6 +143,8 @@ test.describe("date-free geography engine fixture", () => {
   }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await open(page, "ch=members");
+    // The phone reader starts folded; its context entry lives inside it (as on sample-climate).
+    await page.locator('.atlas-panel__toggle[aria-expanded="false"]').click();
     await page.locator(".geo-phone-context summary").click();
     await page
       .locator(".geo-phone-context [data-membership-date]")

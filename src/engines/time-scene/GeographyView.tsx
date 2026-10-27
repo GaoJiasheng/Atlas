@@ -529,15 +529,17 @@ export default function GeographyView({
     selected && "figure" in selected && typeof selected.figure === "string"
       ? selected.figure
       : null;
+  // The figure must sit in this chapter's body; on a phone that body may be folded away when the case is chosen, so visibility is not required.
+  const figureTarget = (id: string) =>
+    [...document.querySelectorAll<HTMLElement>(`[id="${id}"]`)].find(
+      (e) =>
+        e.closest("[data-chapter-body]")?.getAttribute("data-chapter-body") ===
+        chapter.id,
+    ) ?? null;
   const [visibleFigure, setVisibleFigure] = useState<string | null>(null);
   useEffect(() => {
     setVisibleFigure(
-      selectedFigure &&
-        [
-          ...document.querySelectorAll<HTMLElement>(`[id="${selectedFigure}"]`),
-        ].some((e) => e.getClientRects().length)
-        ? selectedFigure
-        : null,
+      selectedFigure && figureTarget(selectedFigure) ? selectedFigure : null,
     );
   }, [chapter.id, selectedFigure, selected?.id]);
   const detail = selected ? (
@@ -577,20 +579,19 @@ export default function GeographyView({
         </p>
       )}
       {visibleFigure && visibleFigure === selectedFigure && (
-        <button
-          type="button"
-          onClick={() => {
-            [
-              ...document.querySelectorAll<HTMLElement>(
-                `[id="${visibleFigure}"]`,
-              ),
-            ]
-              .find((e) => e.getClientRects().length)
-              ?.scrollIntoView({ block: "start", behavior: "smooth" });
+        <a
+          href={`#${visibleFigure}`}
+          className="geo-figure-link"
+          onClick={(e) => {
+            e.preventDefault();
+            figureTarget(visibleFigure)?.scrollIntoView({
+              block: "start",
+              behavior: "smooth",
+            });
           }}
         >
           {zh ? "查看图示" : "View figure"}
-        </button>
+        </a>
       )}
     </article>
   ) : cell ? (
