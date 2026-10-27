@@ -75,6 +75,7 @@ export const TOKEN_NAMES = [
   'air',
   'seedling',
   'seedling-pale',
+  'rain-0', 'rain-1', 'rain-2', 'rain-3', 'rain-4', 'rain-5', 'rain-6',
   'holder-1',
   'holder-2',
   'holder-3',

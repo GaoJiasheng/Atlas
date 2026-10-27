@@ -1,0 +1,94 @@
+{
+  "id": "sample-climate",
+  "title": {
+    "en": "Sample: Climate engine fixture",
+    "zh": "示例：气候引擎测试"
+  },
+  "subtitle": {
+    "en": "Draft fixture/test data for calendar-month maps",
+    "zh": "历月地图的草稿测试数据"
+  },
+  "subject": "geography",
+  "tags": [
+    "climate",
+    "engine-fixture"
+  ],
+  "mode": "time",
+  "engine": "time-scene",
+  "stage": "geo",
+  "theme": "paper",
+  "sensitivity": "open",
+  "status": "draft",
+  "temporalMode": "climatology",
+  "climatology": {
+    "periodId": "clim-1991-2020",
+    "startYear": 1991,
+    "endYear": 2020,
+    "initialMonth": 1,
+    "keySources": [
+      "S199"
+    ]
+  },
+  "monthlyLayers": [
+    {
+      "id": "clim-wind",
+      "type": "monthly-climatology",
+      "quantity": "wind",
+      "file": "sample-climate-wind-850-1991-2020",
+      "label": {
+        "en": "Regional wind · 850 hPa",
+        "zh": "区域风 · 850 hPa"
+      },
+      "periodId": "clim-1991-2020",
+      "sources": [
+        "S22",
+        "S25",
+        "S101"
+      ]
+    },
+    {
+      "id": "clim-rain",
+      "type": "monthly-climatology",
+      "quantity": "rain",
+      "file": "sample-climate-rain-gpcp-1991-2020",
+      "label": {
+        "en": "Mean rain rate",
+        "zh": "平均降水率"
+      },
+      "periodId": "clim-1991-2020",
+      "sources": [
+        "S32",
+        "S25",
+        "S102"
+      ]
+    },
+    {
+      "id": "fixture-wind",
+      "type": "monthly-climatology",
+      "quantity": "wind",
+      "file": "sample-climate-fixture-wind",
+      "label": {
+        "en": "Artificial fixture wind",
+        "zh": "人工测试风"
+      },
+      "periodId": "clim-1991-2020",
+      "sources": [
+        "S199"
+      ]
+    },
+    {
+      "id": "fixture-rain",
+      "type": "monthly-climatology",
+      "quantity": "rain",
+      "file": "sample-climate-fixture-rain",
+      "label": {
+        "en": "Artificial fixture rain",
+        "zh": "人工测试雨"
+      },
+      "periodId": "clim-1991-2020",
+      "sources": [
+        "S199"
+      ]
+    }
+  ]
+}

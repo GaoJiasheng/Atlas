@@ -102,7 +102,8 @@ export interface GeoController {
   /** Regional plate: the camera that shows the whole plate (the first preset); null on the world map. */
   plateCamera(): GeoCamera | null;
   stats(): { features: number; zoom: number; datedLayers: Record<string, DatedLayerStats> };
-  catalogueScreen(at: [number, number]): [number, number];
+  /** Viewport CSS position of a catalogue anchor (dated geo stage only). */
+  catalogueScreen?(at: [number, number]): [number, number];
   destroy(): void;
 }
 
@@ -1168,7 +1169,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       const { metadata, prepared: { collection, index } } = result.value;
       const t = playhead.get();
       const drawn = createDatedMapLayer(map, def, collection, tokens, datedColor(def, t), t, index);
-      drawn.setSelected(store.getState().pick);
+      drawn.setSelected(store.getState().pick ?? null);
       datedLayers.push(drawn);
       info.entries = metadata.entries;
       info.features = collection;
@@ -1273,7 +1274,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
         applyVisibility();
         requestRender();
       }
-      if (s.pick !== prev.pick) for (const layer of datedLayers) layer.setSelected(s.pick);
+      if (s.pick !== prev.pick) for (const layer of datedLayers) layer.setSelected(s.pick ?? null);
       if (s.highlight !== prev.highlight || s.pick !== prev.pick) requestRender();
     }),
   );

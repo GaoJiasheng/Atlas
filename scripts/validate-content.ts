@@ -75,6 +75,7 @@ import { badTokens } from '../src/lib/rich-text';
 import { matterWarnings } from '../src/engines/space-scene/matter-schema';
 import type { PartsFile } from '../src/engines/space-scene/schema';
 import { bareQuantities } from '../src/engines/math-scene/validate-measure';
+import { monthlyResourceIssues } from './lib/monthly-resources';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 // ATLAS_TOPICS_DIR lets tests / tooling validate another tree.
@@ -387,7 +388,8 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
   const ids = new IdRegistry(topicFile);
   ids.add(topic.id, 'topic');
   for (const layer of topic.datedLayers ?? []) ids.add(layer.id, 'dated layer');
-  const schemas = engineSchemas(topic.engine, topic.stage);
+  for (const layer of topic.monthlyLayers ?? []) ids.add(layer.id, 'monthly layer');
+  const schemas = engineSchemas(topic.engine, topic.stage, topic.temporalMode);
 
   /* ---- data ---- */
   const dataDir = join(dir, 'data');
@@ -468,6 +470,8 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
       const file = issue.file.startsWith('public/') ? join(ROOT, issue.file) : join(dir, issue.file);
       (issue.level === 'error' ? error : warn)(file, issue.message);
     }
+    for (const issue of monthlyResourceIssues(topic, sources ?? new Set(), readGeo))
+      error(issue.file.startsWith('public/') ? join(ROOT, issue.file) : join(dir, issue.file), issue.message);
   }
   const presets = new Set(data !== undefined ? schemas.presetIds(data) : []);
   const glossaryFile = data !== undefined ? (data as { glossary?: GlossaryFile }).glossary : undefined;
@@ -537,7 +541,7 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
       }
       for (const issue of schemas.chapterIssues?.(state.data, data) ?? []) error(file, issue);
       if (topic.engine === 'time-scene' && topic.stage === 'geo') {
-        for (const issue of timeChapterLayerIssues(state.data as TimeChapterState, topic.datedLayers)) error(file, issue);
+        for (const issue of timeChapterLayerIssues(state.data as TimeChapterState, [...(topic.datedLayers ?? []), ...(topic.monthlyLayers ?? [])])) error(file, issue);
         for (const issue of timeCatalogueIndexIssues(state.data as TimeChapterState, topic.datedLayers ?? [], (name) => {
           const target = join(PUBLIC_DIR, 'geo', `${name}.json`);
           return existsSync(target) ? JSON.parse(readFileSync(target, 'utf8')) : undefined;

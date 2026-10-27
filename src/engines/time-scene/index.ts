@@ -7,12 +7,16 @@ import { defineEngine } from '../core/engine';
 import type { ChapterState, TimePoint } from '../core/types';
 import type { TimeSceneGeoData } from './schema';
 import { isGeoTime } from '../../lib/time';
+import { monthlyChapterFields } from './lib/climatology-state';
 
 /** TimeScene's fields on top of SceneState. `t` is in the URL. */
 export interface TimeSceneExt {
-  pick: string | null;
+  /** Selected catalogue feature (docs/49 E-PH1). URL `pick`. */
+  pick?: string | null;
   /** Current time on the axis. */
   t: TimePoint | null;
+  month?: number;
+  beat?: number | null;
   /** Ids (events, movements, entities) the current chapter emphasises. */
   highlight: string[];
 }
@@ -26,17 +30,20 @@ function asTimePoint(value: unknown): TimePoint | null {
 export const timeSceneEngine = defineEngine<TimeSceneExt, TimeSceneGeoData>({
   id: 'time-scene',
   defaults(_topic, data) {
+    if (_topic.temporalMode === 'climatology') return { t: null, month: _topic.climatology!.initialMonth, beat: 0, highlight: [], layers: ['base', 'sites'] };
     const first = data && 'control' in data ? data.control.keyframes[0]?.t : undefined;
     return { pick: null, t: first ?? null, highlight: [], layers: ['base', 'control', 'movements', 'battles'] };
   },
   fromChapterState(state: ChapterState) {
+    if (typeof state.month === 'number') return monthlyChapterFields(state);
     const out: Partial<TimeSceneExt> = {};
     const t = asTimePoint(state.time);
     if (t) out.t = t;
     if (Array.isArray(state.highlight)) out.highlight = state.highlight.filter((h): h is string => typeof h === 'string');
     return out;
   },
-  fromUrl(fields) {
+  fromUrl(fields, topic) {
+    if (topic?.temporalMode === 'climatology') return { t: null, ...(fields.month !== undefined ? {month: fields.month}: {}), ...(fields.beat !== undefined ? {beat: fields.beat} : {}), ...(fields.highlight !== undefined ? {highlight: fields.highlight}: {}) };
     const out: Partial<TimeSceneExt> = {};
     if (fields.pick !== undefined) out.pick = fields.pick;
     if (fields.t !== undefined) out.t = fields.t;

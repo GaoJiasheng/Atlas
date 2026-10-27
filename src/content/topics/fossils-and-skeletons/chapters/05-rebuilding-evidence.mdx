@@ -1,0 +1,378 @@
+---
+{
+  "id": "rebuilding-evidence",
+  "order": 5,
+  "title": {
+    "en": "Rebuilding from evidence",
+    "zh": "依据证据重建骨架"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "cutaway": "none",
+    "layers": [
+      "skeleton"
+    ],
+    "ghost": [],
+    "hide": [],
+    "labels": [
+      "sk-skull",
+      "sk-trunk",
+      "sk-pelvis",
+      "sk-tail-tip"
+    ],
+    "part": null,
+    "camera": {
+      "position": [
+        0.88444,
+        3.70163,
+        14.59097
+      ],
+      "target": [
+        -0.23794,
+        1.90582,
+        0
+      ],
+      "fov": 34
+    },
+    "sim": {
+      "set": {
+        "ash-case": "wide",
+        "evidence-view": "whole"
+      },
+      "try": {
+        "vary": "evidence-view",
+        "keep": [
+          {
+            "en": "Same twelve invented teaching modules",
+            "zh": "同一套十二个虚构教学模块"
+          },
+          {
+            "en": "Modules are not bones or a specimen inventory",
+            "zh": "模块不是骨头，也不是标本清单"
+          }
+        ],
+        "observe": [
+          "direct-count",
+          "comparison-count",
+          "inferred-count",
+          "visible-count"
+        ],
+        "record": true
+      }
+    },
+    "summary": {
+      "en": "A skeleton is rebuilt from evidence. A replica's material and the evidence behind its shape are separate questions.",
+      "zh": "骨架依据证据重建。复制件是什么材料，与它的形状依据来自哪里，是两个问题。"
+    },
+    "beats": [
+      {
+        "view": "assembled",
+        "explode": 0,
+        "run": false,
+        "cutaway": "none",
+        "layers": [
+          "skeleton"
+        ],
+        "ghost": [],
+        "hide": [],
+        "labels": [
+          "sk-skull",
+          "sk-trunk",
+          "sk-pelvis",
+          "sk-tail-tip"
+        ],
+        "part": null,
+        "camera": "skeleton-side",
+        "sim": {
+          "set": {
+            "ash-case": "wide",
+            "evidence-view": "whole"
+          }
+        },
+        "caption": {
+          "en": "Ivory marks direct records, blue-grey comparison and grey inferred parts. These twelve teaching modules are invented, not twelve bones or a museum inventory.",
+          "zh": "象牙色表示直接记录，蓝灰表示比较，灰色表示推定。这十二个教学模块是虚构的，不是十二块骨，也不是馆藏清单。"
+        }
+      },
+      {
+        "view": "exploded",
+        "explode": 0.35,
+        "run": false,
+        "cutaway": "none",
+        "layers": [
+          "skeleton"
+        ],
+        "ghost": [],
+        "hide": [],
+        "labels": [
+          "sk-skull",
+          "sk-trunk",
+          "sk-pelvis",
+          "sk-arm-l",
+          "sk-leg-l"
+        ],
+        "part": null,
+        "camera": {
+          "position": [
+            0.88444,
+            3.70163,
+            14.59097
+          ],
+          "target": [
+            -0.23794,
+            1.90582,
+            0
+          ],
+          "fov": 34
+        },
+        "sim": {
+          "set": {
+            "ash-case": "wide",
+            "evidence-view": "whole"
+          }
+        },
+        "caption": {
+          "en": "Separating the modules makes their connections easier to see. The arrangement explains anatomy; it is not a map of where the bones were found.",
+          "zh": "把模块稍稍拆开，可以看清相互位置。这个排法解释身体结构，并不是骨头出土位置的记录。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "run": false,
+        "cutaway": "none",
+        "layers": [
+          "skeleton"
+        ],
+        "ghost": [],
+        "hide": [],
+        "labels": [
+          "sk-neck",
+          "sk-ribs",
+          "sk-arm-r"
+        ],
+        "part": null,
+        "camera": {
+          "position": [
+            0.88444,
+            3.70163,
+            14.59097
+          ],
+          "target": [
+            -0.23794,
+            1.90582,
+            0
+          ],
+          "fov": 34
+        },
+        "sim": {
+          "set": {
+            "ash-case": "wide",
+            "evidence-view": "supported"
+          }
+        },
+        "caption": {
+          "en": "The inferred tail modules disappear. The comparison-based modules remain: they represent evidence from other bones or corresponding body parts.",
+          "zh": "推定的两个尾部模块隐藏了。依据比较的部分仍在，表示参考其他骨件或相对应的身体部分。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "run": false,
+        "cutaway": "none",
+        "layers": [
+          "skeleton"
+        ],
+        "ghost": [],
+        "hide": [],
+        "labels": [
+          "sk-skull",
+          "sk-jaw",
+          "sk-pelvis"
+        ],
+        "part": null,
+        "camera": {
+          "position": [
+            0.88444,
+            3.70163,
+            14.59097
+          ],
+          "target": [
+            -0.23794,
+            1.90582,
+            0
+          ],
+          "fov": 34
+        },
+        "sim": {
+          "set": {
+            "ash-case": "wide",
+            "evidence-view": "direct"
+          }
+        },
+        "caption": {
+          "en": "Only directly evidenced modules remain in this invented example. The skull represents a cast of a documented original, so a replica can still carry direct shape evidence.",
+          "zh": "在这个虚构例子中，只留下有直接依据的模块。头骨代表已记录原件的复制件，所以复制件也可以保留直接的形状证据。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "run": false,
+        "cutaway": "none",
+        "layers": [
+          "skeleton"
+        ],
+        "ghost": [],
+        "hide": [],
+        "labels": [
+          "sk-arm-l",
+          "sk-arm-r"
+        ],
+        "part": null,
+        "camera": {
+          "position": [
+            -0.96541173,
+            2.42544301,
+            3.84519751
+          ],
+          "target": [
+            -1.58895727,
+            1.90582173,
+            4e-08
+          ],
+          "fov": 34
+        },
+        "sim": {
+          "set": {
+            "ash-case": "wide",
+            "evidence-view": "whole"
+          }
+        },
+        "caption": {
+          "en": "Both hands return, each with two functional fingers in this Tyrannosaurus teaching reconstruction. The complete picture combines several kinds of evidence; it does not mean every part was found together.",
+          "zh": "两只手重新显示；这个霸王龙教学复原的每只手有两个功能性手指。完整画面结合了几种依据，并不表示所有部分都一起被发现。"
+        }
+      }
+    ],
+    "index": {
+      "parts": [
+        "sk-skull",
+        "sk-jaw",
+        "sk-neck",
+        "sk-trunk",
+        "sk-ribs",
+        "sk-pelvis",
+        "sk-arm-l",
+        "sk-arm-r",
+        "sk-leg-l",
+        "sk-leg-r",
+        "sk-tail-base",
+        "sk-tail-tip"
+      ]
+    }
+  }
+}
+---
+
+<Lang en>
+
+A reconstructed skeleton begins with work on evidence. Preparators remove surrounding rock, conserve fragile material and record what is present. Anatomy and comparison help researchers arrange separated parts. The skull and jaw connect with the neck and trunk; the pelvis links the hindlimbs and tail. The separated view clarifies these relationships, rather <Num s="S7,S56">than recording an excavation layout</Num>.
+
+<Figure src="figures/fossils-and-skeletons-rebuilding-a-skeleton" alt={{ en: "A complete-looking Tyrannosaurus teaching skeleton, with two short forelimbs and a raised tapering tail.", zh: "看似完整的霸王龙教学骨架，有两条短前肢和抬起的渐细长尾。" }} caption={{ en: "A teaching reconstruction of Tyrannosaurus rex. A complete image does not show how much of one individual was found.", zh: "霸王龙教学复原；画面完整，不等于发现了一个完整个体。" }} />
+
+The Reconstruction evidence card filters an invented inventory of <Num s="S90">twelve teaching modules</Num>. Each module may contain many bones. Direct records supply <Num s="S90">seven modules</Num>, <Term id="comparison-evidence">comparative evidence</Term> supplies <Num s="S90">three</Num>, and inference supplies <Num s="S90">two</Num>. Hiding inferred and then comparison-based modules leaves visible gaps, while the underlying inventory stays unchanged. These counts are <Num s="S90">not a museum completeness calculation</Num>.
+
+The skull represents a <Term id="cast">museum cast</Term> made from a documented original. Its display material is a replica, but its shape still has direct evidence. By contrast, the neck represents a copy based on another specimen, and the ribs and corresponding forelimb use comparative restoration. The table in the detail below keeps the basis of each shape <Num s="S55,S56,S90">separate from its display material</Num>.
+
+This is a generic Tyrannosaurus rex teaching reconstruction. Each hand has <Num s="S9">two functional fingers</Num>, and each foot has <Num s="S48">three main weight-bearing toes</Num>; a raised smaller toe is outside that count. These constraints describe this animal's anatomy, rather than every dinosaur. A complete outline combines evidence without proving that a complete individual was discovered together. It alone cannot establish precise <Num s="S7,S90">skin colour or a call</Num>.
+
+<More title={{"en": "Cleaning and conserving", "zh": "清理与保存"}}>
+
+Preparators remove surrounding rock, stabilise fragile fossils and document the material. Replicas can protect vulnerable originals and share evidence with other institutions. A display may combine original <Num s="S56">fossils, replicas and sculpted restorations</Num>.
+
+</More>
+
+<More title={{"en": "Evidence and display material", "zh": "形状依据与展示材料"}}>
+
+A documented original can supply direct shape evidence even when a replica stands on the mount. The following is the complete invented teaching inventory, with shape evidence and material kept on separate axes. It <Num s="S55,S56,S90">describes no named museum specimen</Num>.
+
+| Module | Shape evidence | Display material |
+| --- | --- | --- |
+| Skull | Direct | Replica of recorded original |
+| Jaw | Direct | Original |
+| Neck | Comparison | Copy of another specimen |
+| Trunk axis | Direct | Original |
+| Ribs | Comparison | Comparative restoration |
+| Pelvis | Direct | Original |
+| Left forelimb | Direct | Original |
+| Right forelimb | Comparison | Restoration from corresponding side |
+| Left hindlimb | Direct | Original |
+| Right hindlimb | Direct | Original |
+| Tail base | Inferred | Sculpted restoration |
+| Tail tip | Inferred | Sculpted restoration |
+
+</More>
+
+<More title={{"en": "What the skeleton does not tell us", "zh": "骨架没有单独告诉我们的事"}}>
+
+Anatomy can constrain reconstruction without answering every question. Our generic skeleton alone does not establish precise skin colour, a call or a complete excavation inventory. Complete appearance is not a measure of how much <Num s="S7,S55,S90">of an individual was recovered</Num>.
+
+</More>
+
+Show on the model: <a href="?ch=rebuilding-evidence&amp;b=1&amp;part=sk-skull">Skull</a> · <a href="?ch=rebuilding-evidence&amp;b=1&amp;part=sk-jaw">Jaw</a> · <a href="?ch=rebuilding-evidence&amp;b=1&amp;part=sk-neck">Neck</a> · <a href="?ch=rebuilding-evidence&amp;b=1&amp;part=sk-trunk">Trunk</a> · <a href="?ch=rebuilding-evidence&amp;b=1&amp;part=sk-ribs">Ribs</a> · <a href="?ch=rebuilding-evidence&amp;b=1&amp;part=sk-pelvis">Pelvis</a> · <a href="?ch=rebuilding-evidence&amp;b=1&amp;part=sk-arm-l">Left forelimb</a> · <a href="?ch=rebuilding-evidence&amp;b=1&amp;part=sk-arm-r">Right forelimb</a> · <a href="?ch=rebuilding-evidence&amp;b=1&amp;part=sk-leg-l">Left hindlimb</a> · <a href="?ch=rebuilding-evidence&amp;b=1&amp;part=sk-leg-r">Right hindlimb</a> · <a href="?ch=rebuilding-evidence&amp;b=1&amp;part=sk-tail-base">Tail base</a> · <a href="?ch=rebuilding-evidence&amp;b=1&amp;part=sk-tail-tip">Tail tip</a>.
+
+</Lang>
+
+<Lang zh>
+
+重建骨架从处理证据开始。工作人员清理围岩、保存易损材料，并记录已经发现的部分，再利用解剖与比较来安排分散骨件。头骨和下颌接向颈部与躯干，骨盆连接后肢和尾部。拆开视图只帮助看清结构关系，<Num s="S7,S56">不是发掘现场的出土位置图</Num>。
+
+<Figure src="figures/fossils-and-skeletons-rebuilding-a-skeleton" alt={{ en: "A complete-looking Tyrannosaurus teaching skeleton, with two short forelimbs and a raised tapering tail.", zh: "看似完整的霸王龙教学骨架，有两条短前肢和抬起的渐细长尾。" }} caption={{ en: "A teaching reconstruction of Tyrannosaurus rex. A complete image does not show how much of one individual was found.", zh: "霸王龙教学复原；画面完整，不等于发现了一个完整个体。" }} />
+
+复原依据卡筛选一套虚构的 <Num s="S90">十二个教学模块</Num>，模块可能包含许多骨头。其中 <Num s="S90">七个</Num>有直接记录，<Num s="S90">三个</Num>来自<Term id="comparison-evidence">比较依据</Term>，<Num s="S90">两个</Num>是推定。逐步隐藏会留下缺口，库存分类却没有改变；<Num s="S90">这些数量不能换算成馆藏完整率</Num>。
+
+头骨代表已记录原件的<Term id="cast">博物馆复制件</Term>。展示材料是复制品，形状仍有直接依据。颈部则参照其他标本复制；肋部和对应前肢属于有比较依据的补塑。细看表把形状依据与展示材料分别列出，<Num s="S55,S56,S90">避免把复制一律理解为猜测</Num>。
+
+这是通用霸王龙教学复原，每手有 <Num s="S9">两个功能性手指</Num>，每足有 <Num s="S48">三个主要承重趾</Num>，小抬趾不计在内。这些约束不能推广到所有恐龙。完整轮廓结合了不同依据，不证明曾一起发现完整个体；<Num s="S7,S90">骨架本身也不能单独确定精确皮色或叫声</Num>。
+
+<More title={{"en": "Cleaning and conserving", "zh": "清理与保存"}}>
+
+工作人员清理围岩、加固易损化石并记录材料。复制品可保护脆弱原件，也让异地机构分享证据。<Num s="S56">展架可能结合原化石、复制品与补塑部分</Num>。
+
+</More>
+
+<More title={{"en": "Evidence and display material", "zh": "形状依据与展示材料"}}>
+
+已记录原件的形状，即使通过复制品上架展示，仍可有直接依据。下表是虚构教学库存全表，将形状依据与展示材料分开；<Num s="S55,S56,S90">它不描述任何具名馆藏</Num>。
+
+| 模块 | 形状依据 | 展示材料 |
+| --- | --- | --- |
+| 头骨 | 直接 | 已记录原件的复制 |
+| 下颌 | 直接 | 原件 |
+| 颈部 | 比较 | 其他标本的复制 |
+| 躯干轴 | 直接 | 原件 |
+| 肋部 | 比较 | 依据比较的补塑 |
+| 骨盆 | 直接 | 原件 |
+| 左前肢 | 直接 | 原件 |
+| 右前肢 | 比较 | 参照对侧的补塑 |
+| 左后肢 | 直接 | 原件 |
+| 右后肢 | 直接 | 原件 |
+| 尾基 | 推定 | 示意补塑 |
+| 尾端 | 推定 | 示意补塑 |
+
+</More>
+
+<More title={{"en": "What the skeleton does not tell us", "zh": "骨架没有单独告诉我们的事"}}>
+
+身体结构可以约束复原，却不能回答全部问题。通用骨架本身不能确定精确皮色、叫声或完整出土清单。<Num s="S7,S55,S90">外形完整不等于某个个体已经发现的比例</Num>。
+
+</More>
+
+在模型中查看： <a href="?ch=rebuilding-evidence&amp;b=1&amp;part=sk-skull">头骨</a> · <a href="?ch=rebuilding-evidence&amp;b=1&amp;part=sk-jaw">下颌</a> · <a href="?ch=rebuilding-evidence&amp;b=1&amp;part=sk-neck">颈部</a> · <a href="?ch=rebuilding-evidence&amp;b=1&amp;part=sk-trunk">躯干轴</a> · <a href="?ch=rebuilding-evidence&amp;b=1&amp;part=sk-ribs">肋部</a> · <a href="?ch=rebuilding-evidence&amp;b=1&amp;part=sk-pelvis">骨盆</a> · <a href="?ch=rebuilding-evidence&amp;b=1&amp;part=sk-arm-l">左前肢</a> · <a href="?ch=rebuilding-evidence&amp;b=1&amp;part=sk-arm-r">右前肢</a> · <a href="?ch=rebuilding-evidence&amp;b=1&amp;part=sk-leg-l">左后肢</a> · <a href="?ch=rebuilding-evidence&amp;b=1&amp;part=sk-leg-r">右后肢</a> · <a href="?ch=rebuilding-evidence&amp;b=1&amp;part=sk-tail-base">尾基</a> · <a href="?ch=rebuilding-evidence&amp;b=1&amp;part=sk-tail-tip">尾端</a>.
+
+</Lang>
+
