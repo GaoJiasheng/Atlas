@@ -3,7 +3,7 @@ import { expect, test, type Page } from '@playwright/test';
 
 type Reading = { angles: Record<string, number>; position: number[]; quaternion: number[] };
 type Engine = { joint(id: string): Reading | null; sim(): { values: Record<string, unknown>; outputs: Record<string, unknown> } };
-const joint = (page: Page, id: string) => page.evaluate((name) => (window.__atlas!.engine as unknown as Engine).joint(name), id);
+const joint = (page: Page, id: string) => page.evaluate((name) => (window.__atlas?.engine as unknown as Engine | undefined)?.joint(name) ?? null, id);
 const value = (page: Page, name: string) => page.evaluate((id) => (window.__atlas!.engine as unknown as Engine).sim().values[id], name);
 async function open(page: Page, query: string, locale = 'en') {
   await page.goto(`/${locale}/topics/sample-joint/?${query}`);

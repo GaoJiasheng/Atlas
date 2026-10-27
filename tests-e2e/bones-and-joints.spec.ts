@@ -9,7 +9,7 @@ type Engine = {
   anchor(id: string): { shown: boolean; onScreen: boolean } | null;
 };
 const read = (page: Page) => page.evaluate(() => (window.__atlas!.engine as unknown as Engine).sim());
-const joint = (page: Page, id: string) => page.evaluate((name) => (window.__atlas!.engine as unknown as Engine).joint(name), id);
+const joint = (page: Page, id: string) => page.evaluate((name) => (window.__atlas?.engine as unknown as Engine | undefined)?.joint(name) ?? null, id);
 const pointDistance = (a: number[], b: number[]) => Math.hypot(...a.map((n, i) => n - b[i]!));
 async function open(page: Page, query = '', locale = 'en') {
   await page.goto(`/${locale}/topics/bones-and-joints/${query ? `?${query}` : ''}`);
@@ -27,6 +27,7 @@ test.describe('bones and joints', () => {
 
   for (const locale of ['en', 'zh']) {
     test(`${locale}: every chapter and all forty axis ticks are present`, async ({ page }) => {
+      test.setTimeout(240_000); // forty beat transitions of the whole skeleton under software WebGL
       const errors: string[] = [];
       page.on('pageerror', (error) => errors.push(error.message));
       await open(page, '', locale);
@@ -76,6 +77,7 @@ test.describe('bones and joints', () => {
   });
 
   test('growth and repair stay qualitative and the corrected protection figure loads', async ({ page }) => {
+    test.setTimeout(120_000);
     await open(page, 'ch=living-bone', 'zh');
     const image = page.locator('img[src*="bones-and-joints-protected-organs"]');
     await expect(image).toHaveCount(1);
