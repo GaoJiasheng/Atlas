@@ -1,0 +1,51 @@
+---
+id: before-you-start
+order: 0
+title:
+  en: Sample background
+  zh: 示例背景
+state:
+  view: assembled
+  explode: 0
+  run: false
+  part: null
+  layers:
+  - test-web
+  camera:
+    position:
+    - 0.5
+    - 0.5
+    - 0.9
+    target:
+    - 0
+    - 0.05
+    - 0
+    fov: 32
+  summary:
+    en: Sample directed food web with table readings.
+    zh: 带查表读数的食物网示例。
+  index:
+    parts:
+    - mangrove
+    - algae
+    - fiddlers
+    - tree-crabs
+    - mudskipper
+    - heron
+  beats:
+  - caption:
+      en: Sample graph with all six nodes.
+      zh: 六节点示例图。
+  - sim:
+      set:
+        remove: n-algae
+        inspect: n-fiddlers
+    caption:
+      en: 'Sample removed algae: the fiddlers have no shown food.'
+      zh: 移走藻类：招潮蟹在图中无食物。
+kind: background
+---
+
+<Lang en>Sample fixture text for the directed card and existing table model.</Lang>
+
+<Lang zh>用于有向关系卡与现有表模型的示例文字。</Lang>

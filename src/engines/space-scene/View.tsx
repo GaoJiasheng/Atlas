@@ -76,6 +76,7 @@ import { SitesOverlay } from './hud/SitesOverlay';
 import { CircuitCard } from './hud/CircuitCard';
 import { EnergyCard } from './hud/EnergyCard';
 import { CycleCard } from './hud/CycleCard';
+import { FoodWebCard } from './hud/FoodWebCard';
 import { KeyCard } from './hud/KeyCard';
 import { EnergyBarLabels } from './hud/EnergyBarLabels';
 import { GroupScaleBars } from './hud/GroupScaleBars';
@@ -564,7 +565,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       },
       specRows: spaceSpecRows(file),
       status,
-      card: orbitSession ? both('space.card.orbit') : file.sim?.sort ? both('space.card.key') : file.sim?.lifeCycle ? both('space.card.cycle') : file.sim?.energy ? both('space.card.energy') : file.sim?.circuit?.diagram ? both('space.card.circuit') : both('space.card.title'),
+      card: file.sim?.foodWeb ? { en: 'Food web', zh: '食物网' } : orbitSession ? both('space.card.orbit') : file.sim?.sort ? both('space.card.key') : file.sim?.lifeCycle ? both('space.card.cycle') : file.sim?.energy ? both('space.card.energy') : file.sim?.circuit?.diagram ? both('space.card.circuit') : both('space.card.title'),
       beats: beatControls,
       beatStep,
       // At a beat the URL leaves out what `?ch=<chapter>&b=<n>` brings back (the beat's scene), not the chapter's target.
@@ -816,7 +817,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         <GroupScaleBars file={file} bridge={bridge} />
         <EnergyBarLabels file={file} bridge={bridge} />
       </SceneSlot>
-      <SceneSlot name="card">{orbitSession ? <OrbitCard file={file} /> : file.sim?.sort ? <KeyCard file={file} /> : file.sim?.lifeCycle ? <CycleCard file={file} /> : file.sim?.energy ? <EnergyCard file={file} /> : file.sim?.circuit?.diagram ? <CircuitCard file={file} /> : <PartChainCard file={file} />}</SceneSlot>
+      <SceneSlot name="card">{file.sim?.foodWeb ? <FoodWebCard file={file} /> : orbitSession ? <OrbitCard file={file} /> : file.sim?.sort ? <KeyCard file={file} /> : file.sim?.lifeCycle ? <CycleCard file={file} /> : file.sim?.energy ? <EnergyCard file={file} /> : file.sim?.circuit?.diagram ? <CircuitCard file={file} /> : <PartChainCard file={file} />}</SceneSlot>
       <SceneSlot name="plate">
         <PlateBlock file={file} ui={ui} bridge={bridge} />
       </SceneSlot>
@@ -846,6 +847,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         />
         {orbitSession && <OrbitCard file={file} reader />}
         <TryIt file={file} ui={ui} bridge={bridge} />
+        {file.sim?.foodWeb && <FoodWebCard file={file} reader />}
         <Inspector file={file} fitness={fitness} training={training} />
       </SceneSlot>
       <SceneSlot name="readerEnd">

@@ -1,0 +1,404 @@
+{
+  "note": {
+    "en": "Original selected teaching graph. Functional groups and links from different observation scopes; not a local field survey.",
+    "zh": "原创选编教学图。节点含功能组，连线来自不同观察范围，不是一个本地实测网。"
+  },
+  "controls": [
+    {
+      "id": "remove",
+      "kind": "choice",
+      "label": {
+        "en": "Remove from this web",
+        "zh": "从这个网移走"
+      },
+      "default": "none",
+      "options": [
+        {
+          "id": "none",
+          "label": {
+            "en": "Nothing",
+            "zh": "不移走"
+          }
+        },
+        {
+          "id": "n-mangrove",
+          "label": {
+            "en": "Mangrove leaf supply",
+            "zh": "红树叶片供应"
+          }
+        },
+        {
+          "id": "n-algae",
+          "label": {
+            "en": "Surface algae",
+            "zh": "泥面藻类"
+          }
+        },
+        {
+          "id": "n-tree-crabs",
+          "label": {
+            "en": "Climbing crabs",
+            "zh": "攀爬蟹类"
+          }
+        },
+        {
+          "id": "n-fiddlers",
+          "label": {
+            "en": "Fiddler crabs",
+            "zh": "招潮蟹"
+          }
+        },
+        {
+          "id": "n-mudskipper",
+          "label": {
+            "en": "Giant mudskipper",
+            "zh": "弹涂鱼"
+          }
+        },
+        {
+          "id": "n-heron",
+          "label": {
+            "en": "Heron",
+            "zh": "鹭"
+          }
+        }
+      ]
+    },
+    {
+      "id": "inspect",
+      "kind": "choice",
+      "label": {
+        "en": "Inspect food pathways",
+        "zh": "查看食物路径"
+      },
+      "default": "n-mudskipper",
+      "options": [
+        {
+          "id": "n-tree-crabs",
+          "label": {
+            "en": "Climbing crabs",
+            "zh": "攀爬蟹类"
+          }
+        },
+        {
+          "id": "n-fiddlers",
+          "label": {
+            "en": "Fiddler crabs",
+            "zh": "招潮蟹"
+          }
+        },
+        {
+          "id": "n-mudskipper",
+          "label": {
+            "en": "Giant mudskipper",
+            "zh": "弹涂鱼"
+          }
+        },
+        {
+          "id": "n-heron",
+          "label": {
+            "en": "Heron",
+            "zh": "鹭"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tide",
+      "kind": "choice",
+      "label": {
+        "en": "Diagrammatic tide pose",
+        "zh": "示意潮位姿态"
+      },
+      "default": "low",
+      "options": [
+        {
+          "id": "low",
+          "label": {
+            "en": "Low",
+            "zh": "低水位"
+          }
+        },
+        {
+          "id": "high",
+          "label": {
+            "en": "High",
+            "zh": "高水位"
+          }
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n-mangrove",
+      "label": {
+        "en": "Mangrove leaf supply",
+        "zh": "红树叶片供应"
+      },
+      "role": "producer",
+      "parts": [
+        "bakau-tree",
+        "bakau-prop"
+      ],
+      "d": [
+        0.25,
+        0.1
+      ],
+      "facts": [
+        "F14",
+        "F18"
+      ],
+      "sources": [
+        "S6",
+        "S24"
+      ]
+    },
+    {
+      "id": "n-algae",
+      "label": {
+        "en": "Surface algae",
+        "zh": "泥面藻类"
+      },
+      "role": "producer",
+      "parts": [
+        "algae-patch"
+      ],
+      "d": [
+        0.75,
+        0.1
+      ],
+      "facts": [
+        "F13",
+        "F18"
+      ],
+      "sources": [
+        "S18",
+        "S24"
+      ]
+    },
+    {
+      "id": "n-tree-crabs",
+      "label": {
+        "en": "Climbing crabs",
+        "zh": "攀爬蟹类"
+      },
+      "role": "consumer",
+      "parts": [
+        "tree-crabs"
+      ],
+      "d": [
+        0.25,
+        0.37
+      ],
+      "facts": [
+        "F14",
+        "F16"
+      ],
+      "sources": [
+        "S6",
+        "S7"
+      ]
+    },
+    {
+      "id": "n-fiddlers",
+      "label": {
+        "en": "Fiddler crabs",
+        "zh": "招潮蟹"
+      },
+      "role": "consumer",
+      "parts": [
+        "fiddler-crabs"
+      ],
+      "d": [
+        0.75,
+        0.37
+      ],
+      "facts": [
+        "F11",
+        "F13"
+      ],
+      "sources": [
+        "S5",
+        "S18"
+      ]
+    },
+    {
+      "id": "n-mudskipper",
+      "label": {
+        "en": "Giant mudskipper",
+        "zh": "弹涂鱼"
+      },
+      "role": "consumer",
+      "parts": [
+        "giant-mudskipper"
+      ],
+      "d": [
+        0.5,
+        0.64
+      ],
+      "facts": [
+        "F08",
+        "F10"
+      ],
+      "sources": [
+        "S4"
+      ]
+    },
+    {
+      "id": "n-heron",
+      "label": {
+        "en": "Heron",
+        "zh": "鹭"
+      },
+      "role": "consumer",
+      "parts": [
+        "heron"
+      ],
+      "d": [
+        0.5,
+        0.9
+      ],
+      "facts": [
+        "F10",
+        "F26"
+      ],
+      "sources": [
+        "S4",
+        "S29"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-leaves-tree",
+      "to": "n-tree-crabs",
+      "material": "leaf-litter",
+      "label": {
+        "en": "Food to consumer",
+        "zh": "食物到消费者"
+      },
+      "facts": [
+        "F14"
+      ],
+      "sources": [
+        "S6"
+      ],
+      "evidence": "local-observation",
+      "note": {
+        "en": "Fallen leaf material, not a living producer node for detritus.",
+        "zh": "这条边表示叶片输入，不把死叶当活生产者。"
+      },
+      "from": "n-mangrove"
+    },
+    {
+      "id": "e-algae-tree",
+      "to": "n-tree-crabs",
+      "material": "feeding",
+      "label": {
+        "en": "Food to consumer",
+        "zh": "食物到消费者"
+      },
+      "facts": [
+        "F16"
+      ],
+      "sources": [
+        "S7"
+      ],
+      "evidence": "indexed-only",
+      "note": {
+        "en": "Indexed climbing-crab account. This selected group-level possibility is not a verified local Episesarma diet link. Different climbing-crab kinds are grouped here.",
+        "zh": "只读到攀爬蟹类资料的索引。此线是功能组层面的可能关系，不是本地某种 Episesarma 的已核食谱；这里合并了不同蟹类。"
+      },
+      "from": "n-algae"
+    },
+    {
+      "id": "e-algae-fiddlers",
+      "to": "n-fiddlers",
+      "material": "feeding",
+      "label": {
+        "en": "Food to consumer",
+        "zh": "食物到消费者"
+      },
+      "facts": [
+        "F13"
+      ],
+      "sources": [
+        "S18"
+      ],
+      "evidence": "general",
+      "note": {
+        "en": "Observed elsewhere; possible food-group link, not a Singapore measurement.",
+        "zh": "外地观察支持可能关系；不是本地食性实测。"
+      },
+      "from": "n-algae"
+    },
+    {
+      "id": "e-fiddlers-fish",
+      "to": "n-mudskipper",
+      "material": "feeding",
+      "label": {
+        "en": "Food to consumer",
+        "zh": "食物到消费者"
+      },
+      "facts": [
+        "F10",
+        "F23",
+        "F25"
+      ],
+      "sources": [
+        "S4",
+        "S13",
+        "S31"
+      ],
+      "evidence": "indexed-only",
+      "note": {
+        "en": "General guide differs from the Lim Chu Kang sample; not a measured local pair.",
+        "zh": "一般指南与林厝港样本不同；不是本地实测配对。"
+      },
+      "from": "n-fiddlers"
+    },
+    {
+      "id": "e-tree-fish",
+      "to": "n-mudskipper",
+      "material": "feeding",
+      "label": {
+        "en": "Food to consumer",
+        "zh": "食物到消费者"
+      },
+      "facts": [
+        "F24"
+      ],
+      "sources": [
+        "S13"
+      ],
+      "evidence": "reported-observation",
+      "note": {
+        "en": "The indexed paper reports opportunistic feeding on an Episesarma crab, without a feeding frequency. This functional group includes other climbing crabs.",
+        "zh": "论文索引报告了对 Episesarma 蟹的机会取食观察，没有取食频率。这个功能组也包含其他攀爬蟹类。"
+      },
+      "from": "n-tree-crabs"
+    },
+    {
+      "id": "e-fish-heron",
+      "to": "n-heron",
+      "material": "feeding",
+      "label": {
+        "en": "Food to consumer",
+        "zh": "食物到消费者"
+      },
+      "facts": [
+        "F10"
+      ],
+      "sources": [
+        "S4"
+      ],
+      "evidence": "general",
+      "note": {
+        "en": "NParks identifies herons as predators of giant mudskippers.",
+        "zh": "NParks 明述鹭会捕食这种弹涂鱼。"
+      },
+      "from": "n-mudskipper"
+    }
+  ]
+}

@@ -56,6 +56,7 @@ import { chapterSchema } from '../src/content/schema/chapter';
 import { KEBAB_ID } from '../src/content/schema/common';
 import { sourceIds, type SourcesFile } from '../src/content/schema/sources';
 import { airfoilSourceIssues } from '../src/engines/space-scene/airfoil-schema';
+import { foodWebSourceIssues } from '../src/engines/space-scene/food-web-schema';
 import { tableSourceIssues } from '../src/engines/space-scene/table-schema';
 import { glossaryIds, type GlossaryFile } from '../src/content/schema/glossary';
 import { engineSchemas, formatIssues } from '../src/engines/schemas';
@@ -456,6 +457,9 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
   if (matterFile?.sim?.table)
     for (const issue of tableSourceIssues(matterFile.sim.table, matterFile.sim.outputs, new Map((sourcesFile?.sources ?? []).map((x) => [x.id, x]))))
       error(join(dataDir, 'parts.json'), `sim.${issue.path.join('.')}: ${issue.message}`);
+  if (matterFile?.sim?.foodWeb)
+    for (const issue of foodWebSourceIssues(matterFile.sim.foodWeb, sources ?? new Set()))
+      error(join(dataDir, 'parts.json'), `sim.foodWeb.${issue.path.join('.')}: ${issue.message}`);
   if (matterFile?.sim?.matter) for (const issue of matterWarnings(matterFile.sim.matter, new Map(matterFile.sim.controls.map((c) => [c.id, c])))) warn(join(dataDir, 'parts.json'), `sim.matter.${issue.path.join('.')}: ${issue.message}`);
   // The life-cycle ring card's second ring links to another topic (docs/33 §4.3): checked like `<TopicLink slug ch>`.
   const cycleLink = data !== undefined ? (data as { parts?: { sim?: { lifeCycle?: { card?: { compare?: { link?: { topic: string; chapter?: string } } } } } } }).parts?.sim?.lifeCycle?.card?.compare?.link : undefined;
