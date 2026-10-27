@@ -42,3 +42,7 @@
 5. **奴役写法**：02 章写“把人当作财产，强迫他们劳动”，克制但抽象；是否按“沉重内容讲细节”补买卖与暴力惩罚（需来源）。
 6. **HUD 沿用战争主题词**：状态行“0 场战斗 · 0 条行动 · K1→K2 0 %”，图层面板仍列“控制区 / 行动路线 / 何时加入”，本题全为空；属引擎层，可另开任务按主题隐藏空层。
 7. 核心 `inspector` 插槽现在没有引擎使用（保留未删）。
+
+## 门槛（合并 main 后）
+
+`pnpm check` 0 错 / 0 警告；`pnpm validate` 57 题 0 / 0；`pnpm test` 160 文件 4,256 测试全过；`pnpm build` 117 页。`pnpm shoot industrial-revolution --beats --keys --layout --locale en,zh --theme paper,cinema`：四组各 37 拍、按键、八种尺寸布局 0 失败，控制台干净（一次负载下的 zh/paper 布局误报单独重跑为 0）。回归 `--beats --keys`：singapore-after-1965、ancient-civilisations、singapore-land-use 0 失败；ww2 的拖动释放镜头在机器高负载时失败、单独重跑通过（main 同样通过）。`CI=1 pnpm e2e` 全量 344 条：340 过；industrial 铁路一条是 Codex 未跑过的测试写错了控件（已改，本题 9 条单独全过）；heart-and-lungs 屏息、sample-space 冒烟两条是 SpaceScene 截图超时，同负载下 main 也同样失败，与本分支无关。
