@@ -730,3 +730,24 @@ T01–T28 的 unit tests 逐项编写；数字容差见 §4.9，clock 用注入 
 **性能实测边界**：Apple M5 Max / macOS arm64；预热1000次后10000次纯 snapshot 求值平均 **0.0188ms**；本地太阳 JSON **90248 bytes**（≤100KB）。构建日志相对施工前，SpaceScene View gzip约+9.1KB、Model3DStage约+2.6KB、公共小块约+0.3KB，合计约12KB，低于新增15KB目标；这不是浏览器首屏网络采样。未取得实际 draw calls / triangles / GPU fps / 长时间GC、首屏≤300KB、两主题 / 八尺寸布局、截图目视、网络与console运行时审计；这些都是尚未通过的验收项，没有静默放宽预算。已授权可继续的工作以恢复浏览器执行后的这些 gates 为界。
 
 **浏览器补记**：最终独立执行 `CI=1 ATLAS_E2E_PORT=5401 pnpm e2e tests-e2e/sample-orbit.spec.ts`，9/9同样在 Chromium 启动时被拒绝（未执行页面断言）；`pnpm shoot sample-orbit --perf --gpu` 也在启动阶段被相同 MachPort 权限拒绝，未取得GPU测量或截图。
+
+### 9.2 验收（Claude，2026-10-27）
+
+浏览器 gate 在本机可跑，补齐 §9.1 缺的截图 / e2e。审查后保留 Codex 的结构（一个 sim kind、会话 + OrbitDriver、两个 overlay、OrbitCard 占原 card 槽），只改了看得见的错和多余的东西：
+
+- **月相窗颜色反了**：paper 上亮部画成 `--ink`（深色），暗部是底色，孩子会把暗的半边读成亮的。改为两套主题都取较亮的 token 画亮部、较暗的画暗部；颜色从 canvas `fillStyle` 读，不再 `getImageData`（原来每拍一条 console 警告）。
+- **观察卡太高**：1280×720 / 1024×768 下 03–07 章卡片出屏、压住章节轴（36 条 layout 问题）。卡头改为 Observation / 观察窗（原来显示“零件链路”）；图与读数并排，影图只裁到天体所在的细条；删掉卡里重复的 Earth / Moon 选择按钮（选择走本章索引，铁律）。现在 0 条。
+- **视盘窗**：月球画成两套主题都暗的剪影；月球在太阳一侧时影图把地球放右边，两者都在框内。
+- **夹具月球 tint**：`ink-2` 在 paper 上是深灰，亮面和暗面分不出 → 改 `neutral`（两套主题都是中灰）。正式主题定稿时 §3.5 的 token 表照此改。
+- 去掉未使用的 store 字段 `orbitClock`、重复的 24 项上限检查；撤回 LICENSE-CONTENT / THIRD-PARTY-NOTICES 的夹具条目（不发行第三方素材）。
+- e2e：day 直链只写了两个 sim 值，URL 的 sim 是整套值，章节的 `lab: day` 被替换成默认 coupled → 测试链接补 `lab.day`（引擎行为与其他 sim 一致，不改）。
+
+| Gate | 结果 |
+|---|---|
+| check / validate / test / build | 0 errors；56 topics 0 errors；156 files / 4210 tests；115 pages |
+| `shoot sample-orbit --beats --keys --layout --theme paper,cinema` | 39 拍 × 2 主题 0 failures，39/39 直链同景，orb-t = orbitSeek，layout 0（八个尺寸），console clean |
+| 回归 `--beats --keys` | light-and-shadows、sample-light、energy-conversion、sample-heart、materials、flower-and-seed、fractions、sample-time：均 0 failures、console clean |
+
+看过的截图：地轴在 02 章两极值拍方向不变（观察点相对地心偏移逐位相同）；01/04 章明暗界线朝向太阳（相机在夜侧时整球暗，是对的）；04 章上弦月北朝上右亮 50.13 %；05/06 章日全食 / 环食 / 月全食的视盘与影图；BG.3 真尺度标签；手机 390 宽。
+
+仍留给内容施工：03 章观察点、04/05 章月球在章初镜头下没有可见标签（夹具镜头，shoot 只记不判）；轨道导引管在近景里偏粗（半径 = 地球显示半径 × 0.012）；`simEffects` 的普通绑定读的是进入章节时的 orbit 输出，运行中不会刷新——目前夹具没有这类绑定，正式主题若要按 orbit 输出显隐零件需先补。
