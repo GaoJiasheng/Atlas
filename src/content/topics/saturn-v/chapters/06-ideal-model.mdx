@@ -1,0 +1,430 @@
+---
+{
+  "id": "ideal-model",
+  "order": 6,
+  "title": {
+    "en": "Limits of an ideal model",
+    "zh": "理想模型的边界"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "part": null,
+    "run": false,
+    "cutaway": "none",
+    "pose": "translunar-stack",
+    "hide": [],
+    "ghost": [],
+    "layers": [
+      "stage-one",
+      "upper-stages",
+      "guidance-adapter",
+      "return-craft",
+      "lander"
+    ],
+    "labels": [
+      "sivb-shell"
+    ],
+    "camera": {
+      "position": [
+        55,
+        95,
+        62
+      ],
+      "target": [
+        0,
+        85.8,
+        0
+      ],
+      "fov": 30
+    },
+    "summary": {
+      "en": "Limits of an ideal model: follow each part through the change of configuration.",
+      "zh": "理想模型的边界：沿着构型变化辨认各部分。"
+    },
+    "question": {
+      "en": "Why does changing an input change the reading?",
+      "zh": "改一个变量，读数为何改变？"
+    },
+    "sim": {
+      "set": {
+        "payload": 200,
+        "propellant": 600,
+        "carry-inert": false,
+        "stage-choice": "first",
+        "phase": 3
+      },
+      "try": {
+        "vary": "payload",
+        "keep": [
+          {
+            "en": "The chosen effective exhaust speed",
+            "zh": "规定的有效排气速度"
+          },
+          {
+            "en": "Dry hardware before optional extra structure",
+            "zh": "不含额外结构的干质量"
+          }
+        ],
+        "observe": [
+          "initial-mass",
+          "final-mass",
+          "ideal-dv"
+        ],
+        "record": {
+          "chart": {
+            "y": "ideal-dv"
+          }
+        },
+        "also": [
+          "propellant",
+          "carry-inert"
+        ],
+        "predict": {
+          "prompt": {
+            "en": "Keep propellant fixed and increase payload. What happens to ideal speed change?",
+            "zh": "固定推进剂、增加载荷，理想速度变化怎样改变？"
+          },
+          "start": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "first"
+          },
+          "change": {
+            "payload": 300
+          },
+          "observe": "ideal-dv",
+          "options": [
+            {
+              "id": "more",
+              "label": {
+                "en": "Increases",
+                "zh": "增大"
+              },
+              "means": "more"
+            },
+            {
+              "id": "less",
+              "label": {
+                "en": "Decreases",
+                "zh": "减小"
+              },
+              "means": "less"
+            },
+            {
+              "id": "same",
+              "label": {
+                "en": "Stays the same",
+                "zh": "不变"
+              },
+              "means": "same"
+            }
+          ]
+        }
+      }
+    },
+    "beats": [
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "translunar-stack",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander"
+        ],
+        "camera": {
+          "position": [
+            55,
+            95,
+            62
+          ],
+          "target": [
+            0,
+            85.8,
+            0
+          ],
+          "fov": 30
+        },
+        "labels": [
+          "sivb-shell"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "first",
+            "phase": 3
+          }
+        },
+        "caption": {
+          "en": "The experiment uses a small imaginary rocket, not Saturn V’s flight numbers.",
+          "zh": "实验使用一枚小型假想火箭，不是土星五号的飞行数值。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "translunar-stack",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander"
+        ],
+        "camera": {
+          "position": [
+            55,
+            95,
+            62
+          ],
+          "target": [
+            0,
+            85.8,
+            0
+          ],
+          "fov": 30
+        },
+        "labels": [
+          "sivb-shell"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "first",
+            "phase": 3
+          }
+        },
+        "caption": {
+          "en": "Keep propellant fixed and increase payload. The ideal speed change falls.",
+          "zh": "保持推进剂不变、增加载荷，理想速度变化会下降。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "translunar-stack",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander"
+        ],
+        "camera": {
+          "position": [
+            55,
+            95,
+            62
+          ],
+          "target": [
+            0,
+            85.8,
+            0
+          ],
+          "fov": 30
+        },
+        "labels": [
+          "sivb-shell"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "first",
+            "phase": 3
+          }
+        },
+        "caption": {
+          "en": "Keep payload fixed and add propellant. More mass can be expelled.",
+          "zh": "保持载荷不变、增加推进剂，可排出的质量增加。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "translunar-stack",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander"
+        ],
+        "camera": {
+          "position": [
+            55,
+            95,
+            62
+          ],
+          "target": [
+            0,
+            85.8,
+            0
+          ],
+          "fov": 30
+        },
+        "labels": [
+          "sivb-shell"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "first",
+            "phase": 3
+          }
+        },
+        "caption": {
+          "en": "Removing unused structure changes the mass ratio, but this model ignores drag and gravity losses.",
+          "zh": "去掉无用结构会改变质量比，但本模型忽略阻力与重力损失。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "return-cm",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander"
+        ],
+        "camera": {
+          "position": [
+            8,
+            6,
+            10
+          ],
+          "target": [
+            0,
+            2.5,
+            0
+          ],
+          "fov": 30
+        },
+        "labels": [
+          "cm-shell"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "first",
+            "phase": 12
+          }
+        },
+        "caption": {
+          "en": "Hardware explains how a mission worked. The history also includes other programmes, crews and costs.",
+          "zh": "硬件解释任务怎样工作；历史还包括其他项目、乘组与投入。"
+        }
+      }
+    ],
+    "index": {
+      "parts": [
+        "sivb-shell",
+        "cm-shell"
+      ]
+    }
+  }
+}
+---
+
+<Lang en>
+
+The rocket picture now accompanies a separate experiment. Its <Term id="term-delta-v">ideal speed change</Term> is calculated for an imaginary small rocket. It is not Saturn V's measured speed, a launch prediction or the speed at a point in the illustrated mission. The SIM label applies even when the picture shows familiar hardware.
+
+The model fixes effective exhaust speed at <Num s="S90">3000 m/s</Num> and dry hardware at <Num s="S90">100 kg</Num>. Payload is useful carried mass; propellant is the mass available to expel. Final mass includes the hardware and payload that remain. Initial mass adds the propellant. Optional inert hardware stays aboard throughout this ideal comparison.
+
+At the default payload of <Num s="S90">200 kg</Num> and propellant of <Num s="S90">600 kg</Num>, with no extra inert hardware, initial mass is <Num s="S90">900 kg</Num> and final mass is <Num s="S90">300 kg</Num>. The calculated change is <Num s="S90">3295.84 m/s</Num>. Increase payload while keeping propellant fixed: more mass remains, and the calculated change falls.
+
+Predict before revealing the new reading, then record a row. Change only one input for a clear comparison. More propellant at the same payload raises the ideal result here; carrying extra unused structure lowers it. Neither observation means a real rocket can carry unlimited propellant or ignore the structure needed to hold it.
+
+This table ignores air resistance, gravity losses and changing exhaust conditions. It does not integrate an orbit or calculate landing safety. Hardware explains part of a mission; its history also includes other programmes, crews, risks and costs. A technical comparison alone cannot decide that wider history.
+
+<More title={{"en": "The calculation behind the table", "zh": "表格背后的算式"}}>
+
+NASA’s ideal rocket equation gives <Num s="S47">Δv = ve × ln(m0/mf)</Num>: effective exhaust speed times the natural logarithm of initial mass divided by final mass. It sets aside weight and drag. This topic chooses its inputs separately in the design study. For the default case the mass ratio is <Num s="S90">3</Num>, giving <Num s="S90">3000 × ln(3) = 3295.84 m/s</Num>.
+
+</More>
+
+<More title={{"en": "What a recorded row establishes", "zh": "一行记录能说明什么"}}>
+
+A row records a controlled comparison within this chosen model. It does not demonstrate the payload capacity, reliability or cost of a historical launch vehicle. Keep the assumptions with the result when explaining it to someone else.
+
+</More>
+
+<More title={{"en": "Restoring the indexed configuration", "zh": "恢复索引需要的构型"}}>
+
+Use <a href={'?ch=ideal-model&b=1'}>the upper launch vehicle</a> before selecting the third-stage shell. Use <a href={'?ch=ideal-model&b=5'}>the returning cabin</a> before selecting the command-module shell. Returning to the experiment reconstructs its chosen defaults.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+火箭图旁边现在是一项独立实验。<Term id="term-delta-v">理想速度变化</Term>是为小型假想火箭计算的量，不是土星五号的实测速度，也不是图中某一飞行时刻的速度。即使画面仍展示熟悉的硬件，带“模拟”标记的读数也不能改称历史测量。
+
+模型固定有效排气速度为 <Num s="S90">3000 米/秒</Num>，干结构为 <Num s="S90">100 千克</Num>。载荷是有用的携带物，推进剂是可供排出的质量。最终质量包括留下的结构和载荷，初始质量还要加上推进剂；额外惰性结构在这项对照中始终带着。
+
+默认载荷 <Num s="S90">200 千克</Num>、推进剂 <Num s="S90">600 千克</Num>，不加额外结构时，初始质量为 <Num s="S90">900 千克</Num>，最终为 <Num s="S90">300 千克</Num>，理想速度变化为 <Num s="S90">3295.84 米/秒</Num>。固定推进剂、增加载荷，留下的质量增大，读数便下降。
+
+先保留假设，先猜再看，然后记录一行，每次只改一个输入。更多推进剂会提高这里的理想结果，多带无用结构则降低它；这不表示真实火箭能无限装推进剂。表格忽略阻力、重力损失和排气条件变化，也不计算轨道或着陆安全。硬件只是任务的一部分，历史还包括其他项目、乘组、风险和投入，不能只凭工程比较裁定。
+
+<More title={{"en": "The calculation behind the table", "zh": "表格背后的算式"}}>
+
+NASA 的理想火箭方程为 <Num s="S47">Δv = ve × ln(m0/mf)</Num>，即有效排气速度乘以初始质量与最终质量比的自然对数，并暂不计重量与阻力；本题设计研究另选输入。默认质量比为 <Num s="S90">3</Num>，所以得到 <Num s="S90">3000 × ln(3) = 3295.84 米/秒</Num>。
+
+</More>
+
+<More title={{"en": "What a recorded row establishes", "zh": "一行记录能说明什么"}}>
+
+一行记录只确立所选模型中的受控比较，不能证明历史火箭的载荷能力、可靠程度或成本。向别人解释结果时，应把假设一起说明。
+
+</More>
+
+<More title={{"en": "Restoring the indexed configuration", "zh": "恢复索引需要的构型"}}>
+
+选第三级外壳前先点<a href={'?ch=ideal-model&b=1'}>上段运载火箭</a>；选指令舱壳前先点<a href={'?ch=ideal-model&b=5'}>返回乘员舱</a>。回到实验节拍会重建规定的默认输入。
+
+</More>
+
+</Lang>
+

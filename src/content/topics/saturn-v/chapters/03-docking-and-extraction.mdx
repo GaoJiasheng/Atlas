@@ -1,0 +1,359 @@
+---
+{
+  "id": "docking-and-extraction",
+  "order": 3,
+  "title": {
+    "en": "Turning and extracting",
+    "zh": "转身与抽取"
+  },
+  "state": {
+    "view": "xray",
+    "explode": 0,
+    "part": null,
+    "run": false,
+    "cutaway": "none",
+    "pose": "translunar-stack",
+    "hide": [],
+    "ghost": [],
+    "layers": [
+      "stage-one",
+      "upper-stages",
+      "guidance-adapter",
+      "return-craft",
+      "lander"
+    ],
+    "labels": [
+      "sla-shell",
+      "lm-ascent"
+    ],
+    "camera": {
+      "position": [
+        18,
+        105,
+        22
+      ],
+      "target": [
+        0,
+        94.5,
+        0
+      ],
+      "fov": 30
+    },
+    "summary": {
+      "en": "Turning and extracting: follow each part through the change of configuration.",
+      "zh": "转身与抽取：沿着构型变化辨认各部分。"
+    },
+    "question": {
+      "en": "How does the lunar module leave its launch position?",
+      "zh": "登月舱怎样离开发射时的位置？"
+    },
+    "sim": {
+      "set": {
+        "payload": 200,
+        "propellant": 600,
+        "carry-inert": false,
+        "stage-choice": "first",
+        "phase": 3
+      }
+    },
+    "beats": [
+      {
+        "view": "xray",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "translunar-stack",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander"
+        ],
+        "camera": {
+          "position": [
+            18,
+            105,
+            22
+          ],
+          "target": [
+            0,
+            94.5,
+            0
+          ],
+          "fov": 30
+        },
+        "labels": [
+          "sla-shell",
+          "lm-ascent"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "first",
+            "phase": 3
+          }
+        },
+        "caption": {
+          "en": "The adapter encloses the lunar module during launch. Its legs are folded.",
+          "zh": "发射时，适配器包住登月舱，支腿收拢。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "csm-clear",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander"
+        ],
+        "camera": {
+          "position": [
+            34,
+            111,
+            38
+          ],
+          "target": [
+            7.5,
+            96,
+            0
+          ],
+          "fov": 30
+        },
+        "labels": [
+          "cm-shell",
+          "sm-shell"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "first",
+            "phase": 4
+          }
+        },
+        "caption": {
+          "en": "The command and service modules move clear of the adapter.",
+          "zh": "指令舱与服务舱先离开适配器。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "csm-turned",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander"
+        ],
+        "camera": {
+          "position": [
+            34,
+            111,
+            38
+          ],
+          "target": [
+            7.5,
+            96,
+            0
+          ],
+          "fov": 30
+        },
+        "labels": [
+          "cm-probe"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "first",
+            "phase": 5
+          }
+        },
+        "caption": {
+          "en": "The spacecraft turns so the command-module nose faces the lunar module.",
+          "zh": "飞船转身，让指令舱鼻端朝向登月舱。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "nose-to-lm",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander"
+        ],
+        "camera": {
+          "position": [
+            27,
+            108,
+            34
+          ],
+          "target": [
+            0,
+            95.8,
+            0
+          ],
+          "fov": 30
+        },
+        "labels": [
+          "cm-probe",
+          "lm-docking-port"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "first",
+            "phase": 6
+          }
+        },
+        "caption": {
+          "en": "The nose connects to the lunar module’s docking port.",
+          "zh": "鼻端与登月舱的对接口连接。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "csm-lm-extracted",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander"
+        ],
+        "camera": {
+          "position": [
+            27,
+            24,
+            34
+          ],
+          "target": [
+            0,
+            10.8,
+            0
+          ],
+          "fov": 30
+        },
+        "labels": [
+          "lm-ascent",
+          "lm-descent"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "first",
+            "phase": 7
+          }
+        },
+        "caption": {
+          "en": "The docked spacecraft pulls the lunar module out; it is no longer inside the adapter.",
+          "zh": "对接后的飞船把登月舱抽出；它不再留在适配器内。"
+        }
+      }
+    ],
+    "index": {
+      "parts": [
+        "sla-shell",
+        "lm-ascent",
+        "cm-shell",
+        "sm-shell",
+        "cm-probe",
+        "lm-docking-port",
+        "lm-descent"
+      ]
+    }
+  }
+}
+---
+
+<Lang en>
+
+At launch the lunar module is packed beneath the service module, inside the spacecraft adapter. Its legs are folded so that it fits within the enclosing structure. The tapered panels around it are a protective carrier, not part of the lunar landing cabin. Begin with the enclosed arrangement, then reveal the inside.
+
+After the third stage sends Apollo toward the Moon, the command and service modules move away together. Their connection is kept intact. Next the pair turns so the command module's nose faces back toward the lunar module. Follow the nose probe rather than the rear of the connected craft: the docking connection is at the other end.
+
+The probe meets the docking port on top of the lunar module. With this connection made, the spacecraft draws the lunar module out of the adapter. There is still only one lunar module. It has changed from an enclosed load to a connected craft outside the carrier; the model does not create another copy at extraction.
+
+Use the beats in order to compare the configurations. Each stop is a complete pose, so returning to an earlier beat reconstructs the same arrangement. The clear gaps and sideways offsets make the relationships legible. They are teaching choices, not measured separation distances or a simulated collision.
+
+The Apollo cutaway figure later in this topic helps distinguish cabin space from supporting equipment. Here the important evidence is the changing connection: below the service module at launch, then attached at the command-module nose. Parts keep their partners as the spacecraft turns.
+
+<More title={{"en": "A connection, not a collision solver", "zh": "连接关系，不是碰撞求解"}}>
+
+The displayed docking ports are aligned by designed rigid poses. The model does not solve contact forces, docking speeds or navigation. It holds the attached equipment together so the connection is understandable.
+
+</More>
+
+<More title={{"en": "Packed and extracted", "zh": "收纳与抽取"}}>
+
+Use <a href={'?ch=docking-and-extraction&b=1'}>the enclosed adapter</a> before selecting its shell. Use <a href={'?ch=docking-and-extraction&b=3'}>the turned craft</a> for the probe, <a href={'?ch=docking-and-extraction&b=4'}>the docking interface</a> for the port, and <a href={'?ch=docking-and-extraction&b=5'}>the extracted lander</a> for its stages.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+发射时，登月舱位于服务舱下方，收在飞船适配器里面，支腿折拢，才能放进外围结构。包住它的渐缩面板是运载时的保护结构，不是登月乘员舱的一部分。先看完整外壳，再揭开内部，比较容易理解它原来藏在哪里。
+
+第三级把阿波罗送上通向月球的轨迹后，指令舱与服务舱先作为整体离开。两舱之间仍然连接。接着它们转身，让指令舱的鼻端朝回登月舱。观察鼻端的对接探杆，不要把相连飞行器的尾部当成对接端。
+
+探杆对准登月舱顶部的接口，连接之后，再把登月舱从适配器里抽出来。模型始终只有一份登月舱；改变的是它从“被包住的载荷”变成“接在外面的飞行器”。抽取并不意味着在旁边新生成另一艘飞船。
+
+依次点击节拍，可以来回比较完整构型。画面中的横向距离和停靠位置是为了看清连接而选的，不是实测分离距离，也没有计算碰撞过程。转身时，舱体与储箱必须一起移动。后面的阿波罗剖面图用来解释乘员区和支持设备；这一章先抓住连接关系如何改变，以及每个舱段始终带着哪些零件。
+
+<More title={{"en": "A connection, not a collision solver", "zh": "连接关系，不是碰撞求解"}}>
+
+画面对接口由设计的刚体姿态对齐，不计算接触力、对接速度或导航；相连设备作为整体移动，便于看清连接。
+
+</More>
+
+<More title={{"en": "Packed and extracted", "zh": "收纳与抽取"}}>
+
+选适配器壳前先点<a href={'?ch=docking-and-extraction&b=1'}>封闭适配器</a>；探杆用<a href={'?ch=docking-and-extraction&b=3'}>转身构型</a>，接口用<a href={'?ch=docking-and-extraction&b=4'}>对接构型</a>，登月舱两级用<a href={'?ch=docking-and-extraction&b=5'}>抽取后构型</a>。
+
+</More>
+
+</Lang>
+

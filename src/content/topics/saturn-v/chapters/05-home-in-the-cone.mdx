@@ -1,0 +1,358 @@
+---
+{
+  "id": "home-in-the-cone",
+  "order": 5,
+  "title": {
+    "en": "Home in the cone",
+    "zh": "指令舱返回"
+  },
+  "state": {
+    "view": "xray",
+    "explode": 0,
+    "part": null,
+    "run": false,
+    "cutaway": "none",
+    "pose": "rendezvous",
+    "hide": [],
+    "ghost": [],
+    "layers": [
+      "stage-one",
+      "upper-stages",
+      "guidance-adapter",
+      "return-craft",
+      "lander"
+    ],
+    "labels": [
+      "cm-couches"
+    ],
+    "camera": {
+      "position": [
+        22,
+        29,
+        28
+      ],
+      "target": [
+        0,
+        18,
+        0
+      ],
+      "fov": 30
+    },
+    "summary": {
+      "en": "Home in the cone: follow each part through the change of configuration.",
+      "zh": "指令舱返回：沿着构型变化辨认各部分。"
+    },
+    "question": {
+      "en": "Which part protects the returning crew?",
+      "zh": "哪一部分保护三个人返回？"
+    },
+    "sim": {
+      "set": {
+        "payload": 200,
+        "propellant": 600,
+        "carry-inert": false,
+        "stage-choice": "first",
+        "phase": 10
+      }
+    },
+    "beats": [
+      {
+        "view": "xray",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "rendezvous",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander"
+        ],
+        "camera": {
+          "position": [
+            22,
+            29,
+            28
+          ],
+          "target": [
+            0,
+            18,
+            0
+          ],
+          "fov": 30
+        },
+        "labels": [
+          "cm-couches"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "first",
+            "phase": 10
+          }
+        },
+        "caption": {
+          "en": "The three astronauts and their samples gather inside the command module.",
+          "zh": "三名宇航员与标本汇集到指令舱内。"
+        }
+      },
+      {
+        "view": "xray",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "homeward-csm",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander"
+        ],
+        "camera": {
+          "position": [
+            18,
+            11,
+            22
+          ],
+          "target": [
+            0,
+            5,
+            0
+          ],
+          "fov": 30
+        },
+        "labels": [
+          "sm-engine",
+          "sm-tanks"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "first",
+            "phase": 11
+          }
+        },
+        "caption": {
+          "en": "The service module supplies return propulsion and support.",
+          "zh": "服务舱提供返航推进与支持。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "return-cm",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander"
+        ],
+        "camera": {
+          "position": [
+            8,
+            6,
+            10
+          ],
+          "target": [
+            0,
+            2.5,
+            0
+          ],
+          "fov": 30
+        },
+        "labels": [
+          "cm-shell"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "first",
+            "phase": 12
+          }
+        },
+        "caption": {
+          "en": "The service module separates before atmospheric entry.",
+          "zh": "进入大气层之前，服务舱与指令舱分离。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "return-cm",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander"
+        ],
+        "camera": {
+          "position": [
+            8,
+            6,
+            10
+          ],
+          "target": [
+            0,
+            2.5,
+            0
+          ],
+          "fov": 30
+        },
+        "labels": [
+          "cm-heatshield"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "first",
+            "phase": 12
+          }
+        },
+        "caption": {
+          "en": "The blunt heat shield faces the airflow and protects the cabin.",
+          "zh": "钝头防热底面朝向气流，保护乘员舱。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "return-cm",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander"
+        ],
+        "camera": {
+          "position": [
+            8,
+            6,
+            10
+          ],
+          "target": [
+            0,
+            2.5,
+            0
+          ],
+          "fov": 30
+        },
+        "labels": [
+          "cm-shell"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "first",
+            "phase": 12
+          }
+        },
+        "caption": {
+          "en": "The command module returns. The rocket stages and lunar module do not return with it.",
+          "zh": "指令舱返回；火箭各级与登月舱不会随它一起回到地球。"
+        }
+      }
+    ],
+    "index": {
+      "parts": [
+        "cm-couches",
+        "sm-engine",
+        "sm-tanks",
+        "cm-shell",
+        "sm-shell",
+        "cm-heatshield"
+      ]
+    }
+  }
+}
+---
+
+<Lang en>
+
+The command module is the crew cabin that returns through Earth's atmosphere. Its <Num s="S21,S25">three</Num> couches fit inside a compact cone. After the lunar landing crew rejoins the orbiting craft, the astronauts and the collected samples travel in this cabin. The seats are drawn without human figures so their arrangement remains visible.
+
+Beneath it, the service module supplies propulsion and support during the journey. Its main engine and stored supplies perform work that the small returning cabin does not have to provide alone. In the explanatory figure, distinguish this supporting section from the inhabited cone above it. The drawing simplifies internal equipment and cannot establish a complete count of tanks or small thrusters.
+
+Before atmospheric entry, the service module separates. The lunar module and launch stages are also absent from the returning craft. Follow the change from a connected pair to the cabin alone; the large service-engine nozzle must not remain attached under the capsule.
+
+The broad, blunt base is the <Term id="term-heatshield">heat shield</Term>. Facing the airflow during entry, it protects the cabin from severe heating. It is a continuous protective surface, which is why this model keeps it visible when the outer cabin shell is cut away.
+
+Compare the return configuration with the launch view. The escape tower and docking probe are no longer present. Shape alone does not tell the whole mission story: the same cabin has different equipment attached at different times. This static study identifies those differences without computing entry temperature, deceleration or a safe flight procedure.
+
+<Figure src="figures/saturn-v-apollo-cutaway" alt={{ en: "Explanatory Apollo cutaway with crew couches in the cone and service equipment beneath.", zh: "锥形舱内座位及下方服务设备的阿波罗解释性剖面。" }} caption={{ en: "Crew space above, service equipment below. Reused explanatory cutaway; not a precise tank or thruster count diagram.", zh: "上方为乘员区，下方为服务设备。复用的解释性剖面，不是储箱或小喷嘴的精确计数图。" }} />
+
+<More title={{"en": "An explanatory cutaway", "zh": "解释性剖面"}}>
+
+The reused Apollo illustration identifies crew space and service equipment. It is not a measured tank or thruster diagram. Its shading and cutaway are a drawing convention, while the selectable model provides the chapter’s part relationships.
+
+</More>
+
+<More title={{"en": "Before selecting discarded equipment", "zh": "先把已抛弃设备显示出来"}}>
+
+In the return pose the service module is hidden. Use <a href={'?ch=home-in-the-cone&b=2'}>the homeward pair</a> before selecting its engine or tanks. Use <a href={'?ch=home-in-the-cone&b=1'}>the cabin cutaway</a> for couches, or <a href={'?ch=home-in-the-cone&b=4'}>the return base</a> for the heat shield.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+指令舱是穿过地球大气层返回的乘员舱，小小的锥形空间里安排 <Num s="S21,S25">三个</Num>座位。登月乘员回到轨道飞船后，宇航员和采集的标本都在这里踏上归途。模型不放人物，让座位之间的关系保持可见。
+
+下方的服务舱在旅途中提供推进与支持。它的大喷管和储存设备承担了许多工作，使返回的小舱不必独自携带全部设备。对照解释性剖面图，把上方的乘员区与下方的支持设备分开看；图中简化了内部布置，不能据此点算完整的储箱或小喷嘴数量。
+
+进入大气层之前，服务舱与指令舱分离。登月舱和火箭各级也不在返回构型里。观察相连的两舱变成单独舱体，大型服务发动机喷管不应继续挂在返回舱底下。
+
+宽而钝的底部是<Term id="term-heatshield">防热盾</Term>，再入时朝向气流，限制乘员舱受热。即使外壳剖开，模型也保留这片连续保护面。与发射构型相比，逃逸塔和对接探杆已不在场。同一个舱在不同阶段连接不同设备，必须结合任务顺序来认。这里不计算再入温度、减速过程，也不提供飞行操作程序。
+
+<Figure src="figures/saturn-v-apollo-cutaway" alt={{ en: "Explanatory Apollo cutaway with crew couches in the cone and service equipment beneath.", zh: "锥形舱内座位及下方服务设备的阿波罗解释性剖面。" }} caption={{ en: "Crew space above, service equipment below. Reused explanatory cutaway; not a precise tank or thruster count diagram.", zh: "上方为乘员区，下方为服务设备。复用的解释性剖面，不是储箱或小喷嘴的精确计数图。" }} />
+
+<More title={{"en": "An explanatory cutaway", "zh": "解释性剖面"}}>
+
+复用的阿波罗插图辨认乘员区与服务设备，不是储箱或小喷嘴的测量图。排线和剖面是绘图方法，可选模型另行说明本章的零件关系。
+
+</More>
+
+<More title={{"en": "Before selecting discarded equipment", "zh": "先把已抛弃设备显示出来"}}>
+
+返回姿态中服务舱已隐藏。选它的发动机或储箱前先点<a href={'?ch=home-in-the-cone&b=2'}>返航两舱构型</a>；座位用<a href={'?ch=home-in-the-cone&b=1'}>乘员舱剖面</a>；防热盾用<a href={'?ch=home-in-the-cone&b=4'}>返回底面</a>。
+
+</More>
+
+</Lang>
+
