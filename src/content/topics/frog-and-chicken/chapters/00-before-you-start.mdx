@@ -1,0 +1,335 @@
+---
+id: before-you-start
+order: 0
+title:
+  en: One life and the next
+  zh: 一生与下一代
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  pose: null
+  layers: &id001
+  - frog-cycle
+  - chicken-cycle
+  hide:
+  - compare-frog
+  - compare-chicken
+  - compare-mosquito
+  - compare-plant
+  - comparison-marker
+  - comparison-tray
+  - egg-white
+  - egg-yolk
+  ghost: []
+  labels: &id002
+  - frog-adult
+  - chicken-adult
+  camera: &id003
+    position:
+    - 10
+    - 10
+    - 14
+    target:
+    - 0
+    - 0.4
+    - 0
+    fov: 32
+  highlight:
+    signal: &id004
+    - frog-adult
+    - chicken-adult
+  sim:
+    set:
+      frog-view: adult
+      chicken-view: adult
+      egg-open: false
+      fertilised: true
+      compare-view: frog
+  summary:
+    en: Two animals develop differently, but both have a next generation.
+    zh: 两种动物的发育过程不同，都有下一代。
+  note:
+    en: Observation model, not a development forecast. Each selection compares separately drawn specimens.
+    zh: 观察模型，不是发育预测。每次选择用来比较分别绘制的标本。
+  beats:
+  - view: assembled
+    explode: 0
+    part: null
+    run: false
+    cutaway: none
+    pose: null
+    layers: *id001
+    hide:
+    - compare-frog
+    - compare-chicken
+    - compare-mosquito
+    - compare-plant
+    - comparison-marker
+    - comparison-tray
+    - egg-white
+    - egg-yolk
+    ghost: []
+    labels: *id002
+    camera:
+      position:
+      - 7.6
+      - 7.6
+      - 10.6
+      target:
+      - 0
+      - 0.4
+      - 0
+      fov: 32
+    highlight:
+      signal: *id004
+    sim:
+      set:
+        frog-view: adult
+        chicken-view: adult
+        egg-open: false
+        fertilised: true
+        compare-view: frog
+    caption:
+      en: The frog and hen are two adult animals. Their young will develop in different ways.
+      zh: 这里是两种成体：青蛙和母鸡。它们的幼体会以不同的方式发育。
+  - view: assembled
+    explode: 0
+    part: null
+    run: false
+    cutaway: none
+    pose: null
+    layers: *id001
+    hide:
+    - compare-frog
+    - compare-chicken
+    - compare-mosquito
+    - compare-plant
+    - comparison-marker
+    - comparison-tray
+    - egg-white
+    - egg-yolk
+    ghost: []
+    labels:
+    - frog-eggs
+    - frog-next-generation
+    camera:
+      position:
+      - 0
+      - 5
+      - 6
+      target:
+      - -2.8
+      - 0.4
+      - 0
+      fov: 32
+    highlight:
+      signal:
+      - frog-eggs
+      - frog-next-generation
+    sim:
+      set:
+        frog-view: egg
+        chicken-view: adult
+        egg-open: false
+        fertilised: true
+        compare-view: frog
+    caption:
+      en: The eggs belong to the next generation. This adult does not turn back into an egg.
+      zh: 这些卵属于下一代。这只成蛙不会变回卵。
+  - view: assembled
+    explode: 0
+    part: null
+    run: false
+    cutaway: none
+    pose: null
+    layers: *id001
+    hide:
+    - compare-frog
+    - compare-chicken
+    - compare-mosquito
+    - compare-plant
+    - comparison-marker
+    - comparison-tray
+    - egg-white
+    - egg-yolk
+    ghost: []
+    labels:
+    - chicken-chick
+    camera:
+      position:
+      - 5.6
+      - 5
+      - 6
+      target:
+      - 2.8
+      - 0.4
+      - 0
+      fov: 32
+    highlight:
+      signal:
+      - chicken-chick
+    sim:
+      set:
+        frog-view: adult
+        chicken-view: chick
+        egg-open: false
+        fertilised: true
+        compare-view: frog
+    caption:
+      en: A chick is a young chicken. It grows before it can reproduce as an adult.
+      zh: 雏鸡是幼小的鸡。它继续生长，成年后才可能繁殖。
+  - view: assembled
+    explode: 0
+    part: null
+    run: false
+    cutaway: none
+    pose: null
+    layers: *id001
+    hide:
+    - compare-frog
+    - compare-chicken
+    - compare-mosquito
+    - compare-plant
+    - comparison-marker
+    - comparison-tray
+    - egg-white
+    - egg-yolk
+    ghost: []
+    labels:
+    - frog-marker
+    - chicken-marker
+    camera:
+      position:
+      - 7.6
+      - 7.6
+      - 10.6
+      target:
+      - 0
+      - 0.4
+      - 0
+      fov: 32
+    highlight:
+      signal:
+      - frog-marker
+      - chicken-marker
+    sim:
+      set:
+        frog-view: adult
+        chicken-view: adult
+        egg-open: false
+        fertilised: true
+        compare-view: frog
+    caption:
+      en: The models are arranged for comparison. Their sizes and spaces do not measure how long development takes.
+      zh: 模型按方便比较的方式摆放。大小和间距都不能用来计算发育时间。
+  - view: assembled
+    explode: 0
+    part: null
+    run: false
+    cutaway: none
+    pose: null
+    layers: *id001
+    hide:
+    - compare-frog
+    - compare-chicken
+    - compare-mosquito
+    - compare-plant
+    - comparison-marker
+    - comparison-tray
+    - egg-white
+    - egg-yolk
+    ghost: []
+    labels:
+    - frog-adult
+    - frog-eggs
+    - frog-next-generation
+    camera:
+      position:
+      - 0
+      - 5
+      - 6
+      target:
+      - -2.8
+      - 0.4
+      - 0
+      fov: 32
+    highlight:
+      signal:
+      - frog-adult
+      - frog-eggs
+      - frog-next-generation
+    sim:
+      set:
+        frog-view: adult
+        chicken-view: adult
+        egg-open: false
+        fertilised: true
+        compare-view: frog
+    caption:
+      en: Follow growth around the display, then read the last link as reproduction into a new generation.
+      zh: 沿着展台观察成长；最后一段连接表示繁殖，接到新一代。
+  index:
+    parts:
+    - frog-adult
+    - chicken-adult
+    - frog-eggs
+    - chicken-egg
+    - chicken-chick
+    - frog-marker
+    - chicken-marker
+    - frog-next-generation
+    - chicken-next-generation
+kind: background
+---
+
+<Lang en>
+
+The display begins with a mature frog and a mature hen. An <Term id="adult">adult</Term> is a mature animal that has reached the stage when it can reproduce. The younger forms around them look different. The young frog changes greatly in shape, while a young chicken already has a bird's body form. Follow each sequence separately before comparing them.
+
+A <Term id="life-cycle">life cycle</Term> connects development with the next generation. Start at an <Term id="egg">egg</Term>, follow the young animal as it develops, then find the adult. The young bird on the chicken tray is a <Term id="chick">chick</Term>, a young chicken. It grows before reaching the adult stage. The specimens are selected views of that development, rather than every change an animal goes through.
+
+The final link has a different meaning from the links showing growth. It represents <Term id="reproduction">reproduction</Term>, the production of offspring. The adult does not shrink or turn back into an egg. Eggs at the beginning of a new round belong to the next generation. A ring helps show this connection across generations; it does not show one animal living for ever.
+
+The dark marker beads show which observation the controls have selected. They are pointers, not animals travelling around the ring. Every stage is enlarged separately, so compare shapes rather than body lengths. Equal spaces do not mean equal amounts of time. You can inspect the specimens in either direction, but a real animal does not reverse its development when you move the pointer back.
+
+<More title={{"en": "Reading the final link", "zh": "读最后一段连接"}}>
+
+Growth changes an individual. Reproduction produces new individuals. Both belong in a life cycle, but they are different processes. The frog and chicken rings mark the return link as “next generation” to keep that distinction visible.
+
+</More>
+
+<More title={{"en": "An observation model", "zh": "用来观察的模型"}}>
+
+The trays, ring spacing and marker beads are teaching arrangements. They do not represent a pond, a nest or a clock. This topic compares selected forms without calculating development speed or predicting which eggs will survive.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+先看展台上的成蛙和母鸡。<Term id="adult">成体</Term>是已经成熟、进入能够繁殖的生命阶段的动物。它们周围摆着幼小阶段的标本：青蛙的幼体与成体形状差别很大，幼小的鸡已经具有鸟类的身体形态。先分别沿着两个环观察，再比较它们的变化。
+
+<Term id="life-cycle">生活史</Term>也叫生命周期，把发育与下一代联系起来。从<Term id="egg">卵</Term>开始，观察幼体怎样发育，再找到成体。鸡的幼体叫<Term id="chick">雏鸡</Term>，还要继续生长，才能进入成体阶段。这些标本选取了发育过程中的一些样子，没有把每一点变化都画出来。
+
+最后一段连接与前面表示生长的连接不同，它表示<Term id="reproduction">繁殖</Term>，也就是产生后代。成体不会缩小，也不会变回卵。新一轮开始处的卵属于下一代。环形排列帮助我们看出世代之间的联系，不表示同一只动物能够一直活下去。
+
+深色的小珠标出控件选中的观察位置，不是绕着环移动的动物。各阶段分别放大，应当比较形状，不能用模型量身长。相同的间距也不表示相同的发育时间。你可以向前、向后查看标本，但把指示珠拨回去，并不会使真实动物的发育倒过来。
+
+<More title={{"en": "Reading the final link", "zh": "读最后一段连接"}}>
+
+生长改变同一个体；繁殖产生新的个体。两者都属于生活史，却是不同的过程。青蛙环和鸡环都把返回处标作“下一代”，帮助我们分清这两种联系。
+
+</More>
+
+<More title={{"en": "An observation model", "zh": "用来观察的模型"}}>
+
+展台、环的间距和指示珠都是讲解用的安排，不代表池塘、鸡窝或时钟。本主题比较选定的形态，不计算发育速度，也不预测哪些卵能够存活。
+
+</More>
+
+</Lang>
