@@ -1,0 +1,177 @@
+---
+{
+  "id": "speed-feedback",
+  "order": 3,
+  "title": {
+    "en": "Static governor",
+    "zh": "静态调速器"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "layers": [
+      "regulation"
+    ],
+    "labels": [
+      "governor-balls",
+      "governor-ball-right",
+      "governor-collar",
+      "throttle-disc"
+    ],
+    "camera": {
+      "position": [
+        3.8,
+        3.8,
+        6
+      ],
+      "target": [
+        1.4,
+        2.6,
+        0.9
+      ],
+      "fov": 30
+    },
+    "summary": {
+      "en": "A single mechanism frame keeps the rods, gears and valve routes together.",
+      "zh": "同一份机构帧同步连杆、齿轮和配汽路径。"
+    },
+    "sim": {
+      "set": {
+        "experiment": "governor",
+        "motion-mode": "manual",
+        "phase-deg": 0,
+        "governor-rpm": 60
+      },
+      "try": {
+        "vary": "governor-rpm",
+        "keep": [
+          {
+            "en": "Same link lengths, balls and gravity",
+            "zh": "相同杆长、球和重力"
+          }
+        ],
+        "observe": [
+          "collar-rise",
+          "throttle-opening"
+        ],
+        "record": true,
+        "predict": {
+          "prompt": {
+            "en": "How will the model throttle opening change?",
+            "zh": "模型的节流阀开度会怎样变化？"
+          },
+          "start": {
+            "governor-rpm": 60
+          },
+          "change": {
+            "governor-rpm": 120
+          },
+          "observe": "throttle-opening",
+          "options": [
+            {
+              "id": "more",
+              "label": {
+                "en": "More",
+                "zh": "变大"
+              },
+              "means": "more"
+            },
+            {
+              "id": "less",
+              "label": {
+                "en": "Less",
+                "zh": "变小"
+              },
+              "means": "less"
+            },
+            {
+              "id": "same",
+              "label": {
+                "en": "The same",
+                "zh": "不变"
+              },
+              "means": "same"
+            }
+          ]
+        }
+      }
+    },
+    "index": {
+      "parts": [
+        "governor-balls",
+        "governor-ball-right",
+        "governor-upper",
+        "governor-upper-right",
+        "governor-lower",
+        "governor-lower-right",
+        "governor-collar",
+        "throttle-link",
+        "throttle-rod",
+        "throttle-crank",
+        "throttle-disc",
+        "governor-spindle"
+      ]
+    },
+    "beats": [
+      {
+        "sim": {
+          "set": {
+            "governor-rpm": 60
+          }
+        },
+        "caption": {
+          "en": "Compare a complete static governor position. All rods keep their lengths.",
+          "zh": "比较完整的调速器静态姿态；所有刚杆均保持长度。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "governor-rpm": 90
+          }
+        },
+        "caption": {
+          "en": "Compare a complete static governor position. All rods keep their lengths.",
+          "zh": "比较完整的调速器静态姿态；所有刚杆均保持长度。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "governor-rpm": 120
+          }
+        },
+        "caption": {
+          "en": "Compare a complete static governor position. All rods keep their lengths.",
+          "zh": "比较完整的调速器静态姿态；所有刚杆均保持长度。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "governor-rpm": 60
+          }
+        },
+        "caption": {
+          "en": "Compare a complete static governor position. All rods keep their lengths.",
+          "zh": "比较完整的调速器静态姿态；所有刚杆均保持长度。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Draft engine fixture: this chapter checks the model state shown in the caption. Every numerical outcome comes from the design study [S1].
+
+</Lang>
+
+<Lang zh>
+
+引擎草稿测试：本章核对字幕对应的模型状态。所有数值结果来自设计研究 [S1]。
+
+</Lang>

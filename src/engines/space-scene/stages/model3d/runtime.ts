@@ -16,6 +16,14 @@ import { Matrix4, Vector3 } from 'three';
 import type { Playback } from '../../lib/sim/timeline';
 import type { AnimClock } from '../../lib/sim/hz';
 
+export interface MechanismPartRuntime {
+  /** Rigid delta, rest world metres → current physical world metres. */
+  matrix: Matrix4;
+  /** Rest rod ends in world metres (z preserves the authored depth). */
+  restEndpoints?: [Vector3, Vector3];
+  reading: { matrix: number[]; endpoints?: number[][] };
+}
+
 /** Where the exercise puts the body (scene coordinates), for the free-standing equipment and the ground. */
 export interface ExercisePlacement {
   /** The trunk joint (the root turn's pivot) after the turn and offset. */
@@ -37,6 +45,8 @@ export interface ExercisePlacement {
 }
 
 export interface StageRuntime {
+  mechanismParts: Map<string, MechanismPartRuntime>;
+  mechanismGates: Map<string, boolean>;
   energy: number;
   phase: number;
   elapsed: number;
@@ -58,7 +68,7 @@ export interface StageRuntime {
 }
 
 export function createRuntime(run: boolean, explode: number): StageRuntime {
-  return { energy: run ? 1 : 0, phase: 0, elapsed: 0, explode, shadowDirty: true, moved: 0, contract: new Map(), root: new Matrix4(), bonesMoved: 0, exercise: null, play: new Map(), clocks: new Map() };
+  return { mechanismParts: new Map(), mechanismGates: new Map(), energy: run ? 1 : 0, phase: 0, elapsed: 0, explode, shadowDirty: true, moved: 0, contract: new Map(), root: new Matrix4(), bonesMoved: 0, exercise: null, play: new Map(), clocks: new Map() };
 }
 
 export const RuntimeContext = createContext<StageRuntime | null>(null);

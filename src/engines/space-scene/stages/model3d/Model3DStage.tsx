@@ -52,6 +52,7 @@ const NO_TRAINING: readonly string[] = [];
 export default function Model3DStage({ store, data, ui, bridge, chapters, label, fitness, training = NO_TRAINING, locale }: Model3DStageProps) {
   const playable = useMemo(() => new Set(training), [training]);
   const model = useStore(ui, (u) => u.model);
+  const mechanismError = useStore(ui, (u) => u.mechanismError);
   const wrapRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rootRef = useRef<ReconcilerRoot<HTMLCanvasElement> | null>(null);
@@ -128,6 +129,7 @@ export default function Model3DStage({ store, data, ui, bridge, chapters, label,
   return (
     <div ref={wrapRef} className="space-stage" role="img" aria-label={label}>
       <canvas ref={canvasRef} className="space-stage__canvas" />
+      {mechanismError && <p className="space-stage__failed" role="status">Mechanism configuration error. Motion has stopped.<span lang="zh-Hans">机构配置错误，运动已停止。</span></p>}
       {model.state === 'loading' && (
         <div
           className="space-stage__progress"
