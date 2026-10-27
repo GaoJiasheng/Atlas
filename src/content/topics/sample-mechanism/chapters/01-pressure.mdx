@@ -1,0 +1,157 @@
+---
+{
+  "id": "pressure",
+  "order": 1,
+  "title": {
+    "en": "Pressure table",
+    "zh": "压强数表"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "layers": [
+      "working-motion",
+      "steam-flow"
+    ],
+    "labels": [
+      "beam",
+      "piston",
+      "sun",
+      "planet"
+    ],
+    "camera": {
+      "position": [
+        10,
+        8.5,
+        17
+      ],
+      "target": [
+        -0.4,
+        2.8,
+        0
+      ],
+      "fov": 30
+    },
+    "summary": {
+      "en": "A single mechanism frame keeps the rods, gears and valve routes together.",
+      "zh": "同一份机构帧同步连杆、齿轮和配汽路径。"
+    },
+    "sim": {
+      "set": {
+        "experiment": "pressure",
+        "motion-mode": "manual",
+        "phase-deg": 0
+      },
+      "try": {
+        "vary": "cold-pressure",
+        "keep": [
+          {
+            "en": "Same piston and hot-side pressure",
+            "zh": "相同活塞与热端压强"
+          }
+        ],
+        "observe": [
+          "force-down"
+        ],
+        "record": true,
+        "predict": {
+          "prompt": {
+            "en": "How will the downward force change in this model?",
+            "zh": "模型中的向下合力会怎样变化？"
+          },
+          "start": {
+            "cold-pressure": 20
+          },
+          "change": {
+            "cold-pressure": 50
+          },
+          "observe": "force-down",
+          "options": [
+            {
+              "id": "more",
+              "label": {
+                "en": "More",
+                "zh": "变大"
+              },
+              "means": "more"
+            },
+            {
+              "id": "less",
+              "label": {
+                "en": "Less",
+                "zh": "变小"
+              },
+              "means": "less"
+            },
+            {
+              "id": "same",
+              "label": {
+                "en": "The same",
+                "zh": "不变"
+              },
+              "means": "same"
+            }
+          ]
+        }
+      }
+    },
+    "index": {
+      "parts": [
+        "beam",
+        "parallel-inner",
+        "parallel-outer",
+        "parallel-bottom",
+        "radius-rod",
+        "drive-rod",
+        "centre-link",
+        "piston-rod",
+        "pump-rod",
+        "piston",
+        "pump-piston",
+        "shaft",
+        "flywheel",
+        "sun",
+        "planet",
+        "cylinder",
+        "valve-upper-in",
+        "valve-lower-in",
+        "valve-upper-out",
+        "valve-lower-out"
+      ]
+    },
+    "beats": [
+      {
+        "caption": {
+          "en": "The pressure table evaluates both piston faces and the exposed rod area.",
+          "zh": "压强数表同时处理活塞两面和外露杆面积。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "cold-pressure": 50
+          }
+        },
+        "caption": {
+          "en": "Higher cold-side pressure reduces the downward net force.",
+          "zh": "冷端压强升高，向下合力减小。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Draft engine fixture: this chapter checks the model state shown in the caption. Every numerical outcome comes from the design study [S1].
+
+</Lang>
+
+<Lang zh>
+
+引擎草稿测试：本章核对字幕对应的模型状态。所有数值结果来自设计研究 [S1]。
+
+</Lang>

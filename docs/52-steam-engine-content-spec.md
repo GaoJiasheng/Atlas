@@ -706,3 +706,42 @@ phaseDeg 在 [0,360)，cycles=θ/2π，shaftTurns=δs/2π 保留累计圈数，�
 - [ ] 施工记录与实际差异、零件/拍数、性能、截图路径、剩余限制填本文件§9；合格后steam-engine直接published，社会史主题独立审阅门槛保持。
 
 ## 9. 引擎记录（施工后填写）
+
+### 9.1 E-ST1 / E-ST2（2026-10-27；引擎已实现，浏览器验收已补跑通过）
+
+本轮只做两项引擎与 **`sample-mechanism` draft 夹具**，没有施工或发布生产 `steam-engine`。全部改动留在 working tree；没有 git 写操作、依赖或 package/lockfile 变更，也没有改 review-queue。
+
+**实现**：`mechanism-schema.ts` 提供严格对象、控件值域、独占驱动、端点/流路径引用和完整周期几何校验；`lib/mechanism.ts` 提供固定 branch 圆交点、缓存帧、主梁/平行机构/齿轮/泵解算及真实死点门控；`lib/mechanism-clock.ts` 管理单相位、手动/自动、QA hold 与保存恢复。`MechanismDriver.tsx` 在 parts/flows/probes 前写共享帧，`PartNode.tsx` 应用刚体变换，`Flows.tsx` 在当帧切断关闭路径的 alpha。锚点、包围盒和点击层级跟随同一变换；原有主题的 group bounds 路径保留。运行配置错误冻结并关四路，舞台显示双语错误。
+
+共享接线限于 schema 的四行注册、SceneRoot 的 import/条件驱动、runtime/bridge 的缓存与方法、View 的测试 API/拍重置/P snapshot，以及现有 parts/flows/probes 的短分支；**没有改 SIM_KINDS、simSchema、evaluateSim、quantityKind、timeline、SEPARATE_EXPERIMENTS 或通用绑定 DSL**。API `parts[id].matrix` 明确定义为「rest 世界米坐标 → 此刻绘制世界米坐标」的刚体矩阵，包含展示拆开偏移；物理 `points` 不含拆开。
+
+**夹具与检查**：`src/content/topics/sample-mechanism/` 有 36 个零件、5 章、16 拍、15 个完整有来源 table 行、三个 `duration:0` 的调速器姿态、三排账本与四条固定阀口路径。`generate.mjs` 可重建 table、静态姿态、θ=0 restEndpoints 和 48/48 齿轮；每轮四个 90° 扇区，每扇区 146 个轮廓点（一个 primitive + 三个 extra 扇区）。256 个相对齿周期相位的 174,788 次齿廓边界采样检查没有发现重叠；这是离散多边形审计，不是制造精度保证。`qa-shots.json` 保存五个角度的齿轮/阀口及交叉杆静帧拍摄方案。
+
+测试文件为 `tests/space-scene/{beam-steam,steam-bindings,mechanism-clock}.test.ts` 与 `tests-e2e/sample-mechanism.spec.ts`。浏览器用例包括整周实际绘制端点/矩阵、四阀抬升、关路粒子、非整点死点、深链接、QA 非法输入无变化、自动模式保护/恢复、P、调速器投影锚点、账本份数、reduced motion 和旧主题 null API。调速器各杆端点的严格数值检查在纯姿态测试中；浏览器另外核对实际投影的球、滑套和四摆臂中心，没有扩展通用零件矩阵 API。
+
+**与 §4 的出入**（全部列出）：
+
+1. 夹具与 e2e 名字由 `sample-steam` 改为 `sample-mechanism`，遵照本轮用户指定；生产主题名不变。
+2. 相位时钟单独放入 `lib/mechanism-clock.ts` 并加单测，便于无 WebGL 时验证变速不跳相和保存恢复；没有增加对作者的字段。
+3. 按引擎 brief 的要求，`pnpm shoot --beats` 还增加机制绘制检查（每拍与拍链接的刚杆长度/方向、物理残差、齿相位、阀/门控一致、关路不可见）；§4.5 原先说明它不自动验证杆长/门控，现在已有这一层检查。全面扫描与恢复仍由 e2e 负责，不增加命令旗标。
+4. 独占驱动检查同时拒绝既有 `at` / `place` 位置绑定和 rig node；它们同样会争用机构目标的变换。阀芯要求非零 openOffset；所有配置错误带路径和目标。
+5. **浏览器门槛尚未通过**：本机托管 sandbox 在页面加载前拒绝 Chromium 的 Mach-port 注册（`bootstrap_check_in … MachPortRendezvousServer … Permission denied (1100)`）。Computer Use 的 Chrome 入口也返回未获使用授权；没有绕过、改权限或伪造截图。因此下列浏览器检查是已尝试但被环境阻塞，不是通过。
+
+**数值与性能**：4096 帧刚杆残差 <1e−9 m；32768 帧行程 1.2192000154 m、Dx 区间 [−2.500931896, −2.499137005] m、最低余隙 >0.002 m；太阳净两圈；九行压力表、三档 h/阀开度、三行能量和刚性调速器数据均由独立算式单测核对。Apple M5 Max / arm64 / macOS / Node v25.8.2 上，预热后的 10,000 次复用缓存解算中位数 **0.000959 ms**、p95 0.001125 ms，低于 0.2 ms；帧路径不分配向量、矩阵、geometry 或 material。绘制 calls/tris、真实 GPU fps、首屏加载 gzip 总量与 demand-loop 实测尚未取得，不能据静态审查声称满足预算。
+
+**门槛记录**：最终命令结果见下表；日志保存在 `/private/tmp/atlas-steam-engine-qa/`。改前 build 为 55 主题 / 113 页，单测 4179/4179。第一次并行 test/build 中，四个新测试的绑定索引断言已修正；旧 `tests/schemas.test.ts` 在并行 build / 浏览器失败重试的负载下两次超过 5 秒，独立复跑 41/41 通过。降低并行度的全量 `pnpm run test --maxWorkers=2` 为 4236/4236；待浏览器尝试结束后，原命令 **`pnpm test` 也为 4236/4236、158/158 文件全过**（10.93 s），其中 57 条是本轮新增。
+
+| 门槛 | 本轮结果 |
+|---|---|
+| `pnpm check` | 0 error / 0 warning；3 个既有 hint |
+| `pnpm validate` | 56 主题，0 error / 0 warning |
+| `pnpm test` | 4236/4236，158/158 文件全过；含本轮 57 条 |
+| `pnpm build` | 通过，115 页；现有 Vite 大 chunk 提示保留 |
+| `pnpm shoot sample-mechanism --locale all --theme all --beats --keys --layout` | Chromium 启动阻塞，0 张可供人工检查的截图 |
+| 五相位 `--shots` 与 `--perf --gpu --size 1920x1080` | 同一启动阻塞，未取得视觉/绘制性能读数 |
+| 五主题改前/改后 `--beats --keys` | aircon、energy-conversion、sample-materials、sample-heart、b200-server 均在浏览器启动前失败；无法证明 0 个新增回归 |
+| `CI=1 ATLAS_E2E_PORT=5402 pnpm e2e` | 346/346 在 Chromium 启动处失败（含本夹具 11 条），0 条到达页面；非应用断言失败 |
+
+剩余工作仅为在获准运行 Chromium 的环境重新执行上述浏览器门槛、逐张看 EN/ZH × paper/cinema 拍图/五相位剖面，并测绘制/加载预算；`sample-mechanism` 保持 draft，未将 §8 或生产发布标成完成。
+
+**浏览器验收（2026-10-27，Claude 代理补跑，取代上文第 5 条和表中三行浏览器记录）**：`pnpm shoot sample-mechanism --beats --keys --layout`（paper、cinema）控制台干净，键 / 布局 / 拍 0 失败，16/16 拍链接落在演示场景；看过两套主题拍图、1024×768 布局和调速器、能量章：主梁随拍摆动、活塞杆始终竖直、太阳行星轮与飞轮逐拍换姿。回归 `--beats --keys`：aircon、energy-conversion、sample-materials、sample-heart 0 失败；b200-server 软件 GL 下两次截图超时（机器负载 50–100），`--gpu` 下 0 失败。`CI=1 pnpm e2e` 344/346，失败的 ancient-civilisations:59 与 sample-heart:87 单独复跑通过（负载抖动），sample-mechanism 11/11 通过。仍未做：ZH 截图、`--perf --gpu` 绘制与加载预算，留给生产 steam-engine 验收。

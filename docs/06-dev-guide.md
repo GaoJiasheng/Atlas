@@ -1684,6 +1684,44 @@ docs/40 §4.2 E-HL1。`sim.kind: "table"`：模型不算，只**按控件查有�
 - **validate**（`tableIssues`，parts 文件解析时）：`keys` 是控件、不重复；行的 `when` 恰好写全 `keys`、值合法；每个实验对 `keys` 的全部值组合**恰好一行**（列出缺的、重的）；`set` 的键是输出、种类对得上（数 / `{ value, decimals }` 给数输出，带标签的状态 id 给状态输出）；同一实验每行设定同一组输出；一个输出只属于一个实验；输出不写 `from`、只能是数或状态；`count` 绑定的零件 `repeat.count` ≥ 该输出在表里的最大份数（按 `count` 的取整），否则报"not enough balls"；先猜后看的 `change` 只改 `observe` 所在实验的 `keys`（`tablePredictIssues`，章节校验）。**来源**（`tableSourceIssues`，`pnpm validate` 对照 `data/sources.json`）：每个 `S#` 都在；设定 `sim` 数输出的行至少引一条 `design: true` 的来源（`sources.json` 新的可选字段：主题自己的设计研究；`SOURCES.md` 标注 design study），设定 `typical` 数输出的行至少引一条不是设计研究的来源；只设定状态的行引什么都行。
 - **测试 API**：`__atlas.engine.sim()` 照旧，表模型多一个 `sources`：`{ <typical 输出>: [S#…] }`（此刻那一行的来源）；`copies(partId)`：`count` 绑定此刻画出的份数。
 
+### SpaceScene · 平面横梁机构（`mechanisms`，beam-steam）
+
+docs/52 §4 E-ST1/E-ST2；完整可运行作者例子在 `src/content/topics/sample-mechanism/data/parts.json`，生成器 `src/content/topics/sample-mechanism/generate.mjs`（`node` 直接运行；包括齿廓采样检查）。这是可选的根字段 `mechanisms`（缺省 `[]`，最多一项），**不增加 sim 种类**：压力、三档静态调速器和归一化能量账仍用 `sim.kind: "table"`。不增加 URL 字段、HUD、键位、齿轮 primitive 或通用物理引擎。
+
+机构对象、clock、geometry、parts 的 role 与 ports 均拒收未知键。以下是根条目开头（`parts` / `ports` 按后面的必需角色补全）：
+
+```json
+{
+  "id": "main-engine", "kind": "beam-steam", "origin": [0, 5.6, 0],
+  "clock": {
+    "phaseControl": "phase-deg", "rateControl": "cycle-rate",
+    "modeControl": "motion-mode", "experimentControl": "experiment"
+  },
+  "geometry": {
+    "beamPivot": [0, 0], "shaftCentre": [2.5, -3], "radiusPivot": [-2.5, -0.8],
+    "beamHalfM": 2.5, "connectingRodM": 3, "orbitM": 0.6092838281609874,
+    "shortLinkM": 0.8, "radiusRodM": 1.25, "innerFraction": 0.5,
+    "beamBranch": 1, "parallelBranch": 1, "pistonRodM": 2.4,
+    "cylinderX": -2.5, "radialDisplayClearanceM": 0.003,
+    "nominalStrokeM": 1.2192,
+    "pump": { "beamFraction": -0.4, "sliderX": -1, "rodM": 4.5 }
+  }
+}
+```
+
+- **控件**：phase 是 `step` `[0,90,180,270,360]`；rate 是 `step` `[8,10,12]`；mode 是 `choice` `manual/auto`；experiment 是 `choice` `pressure/mechanism/governor/energy`。控件 id 可改，但须由 clock 引用；标签与选项仍须双语。不把非整步 QA 角写入控件。
+- **必需的 parts 角色**：`beam, innerLink, outerLink, bottomLink, radiusRod, driveRod, centreLink, piston, pistonRod, planet, sun, shaft, flywheel, pumpRod, pumpPiston`，每个恰好一次，目标 part 不重复。杆角色（beam、四根平行机构杆、driveRod、centreLink、pistonRod、pumpRod）写 `{ "part": "…", "restEndpoints": [[x0,y0],[x1,y1]] }`；端点须是 θ=0 的本地 XY 解。其余只写 `{ "part": "…" }`。几何按 θ=0 装配，world XY = 本地 XY + origin；part 自己的 `at` / `rotation` 保留静态深度和形状方向。
+- **独占驱动**：机构与阀芯目标须是独立 primitive（可带 extra）；不与 repeat/bilateral、mesh/rig、独立动画、命名 pose（含章/拍/sim）或 offset/rotate/play/shift/stretch/bend/fill 绑定共用。刚杆用平移和绕 Z 旋转，不缩放。固定汽缸、支架与阀体不登记动态角色。
+- **四端口**：`ports` 恰有 `upperIn/lowerIn/upperOut/lowerOut`。每项如 `{ "part": "valve-upper-in", "openOffset": [0,0.015,0], "flow": { "id": "port-steam", "path": "upper" } }`。`openOffset` 是世界轴向抬阀向量；一个固定 flow/path 只给一个 gate，不同时受 sim visible/intensity/state/tidal 控制，不加移动端点。
+- **求解与校验**：`lib/mechanism.ts` 纯函数 `solveMechanism(thetaRad, geometry, out)` 复用 `createMechanismFrame()` 缓存；圆交点固定 branch，D 的横移保留，太阳与行星相位满足 δs+δp=2θ。死点用实际 dDy/dθ 判断（不是写死 90°/270°），下行只开 upperIn/lowerOut，上行只开 lowerIn/upperOut，切换四口关。`mechanism-schema.ts mechanismIssues` 由 SpaceScene schema 接入 validate：引用/互斥/控件域、4096 帧可达与刚杆残差、32768 帧行程与余隙；错误含 JSON path 和目标 id。
+- **每帧顺序**：共享时钟 → 一次求解 → 零件/阀芯刚体变换 → 既有拆开展示偏移 → 标注、点击代理、流和测试读数。四阀与四 gate 取同一 frame；关 gate 当帧路径 opacity 为零，原有路径显隐与 gate 取 AND。运行求解失败则冻结并关四路，显示双语配置错误。
+- **运行与恢复**：auto + experiment pressure/mechanism + RUN 才推进；pause、REFERENCE、开始 EXPLODED、isolate、solo、隐藏标签页、reduced motion 都冻结。rate 只改后续斜率；cold/work/governor 不重置相位。manual 或 phase 更改立即 seek；新章/拍从 base⊕beat 的 phase 起步。R/E/isolate/solo 退出从原相位继续；P 额外保存/恢复 `{thetaRad,qaHold}`。无机构主题继续走原路径。
+- **链接**：沿用 `ch,b,sim,run,view,pose`；`sim` 整组覆盖拍基线。手动五档可精确静帧分享；auto 链接从声明相位开始，不编码累计运行圈数。无 timeline/replay 就不注册空的 G。
+
+测试 API `__atlas.engine.mechanism(id)`：无机构/未知 id 返回 null；否则返回 `{thetaRad,phaseDeg,cycles,pistonDirection,points,planetAngleRad,sunAngleRad,shaftTurns,ports,linkResidualM,clearanceMarginM,parts,gates}`。`points` 为 A/O/F/P/K/C/B/E/D/S/Q/W 的**未拆开世界米坐标**；`parts[partId].matrix` 是 16 个数的实际绘制矩阵，杆的 `endpoints` 含展示拆开；`gates` 用 `"<flow>:<path>"` 键。`phaseDeg` 在 [0,360)，cycles 和 shaftTurns 保留累计圈数。
+
+`__atlas.engine.seekMechanism("main-engine",45.5)` 仅 QA 瞬态，合法范围为有限 0≤deg≤360，成功返回 true 并保持；360 对应 cycles=1、shaftTurns=2、phaseDeg=0。未知 id、NaN、越界返回 false 且不改状态。用户改 phase/mode 或换章/拍清除 QA hold；读取不改状态。`pnpm shoot sample-mechanism --beats --keys --layout` 复用既有检查，每拍与拍链接另查实际绘制杆长/方向、物理残差、齿相位、阀/门控一致和关路无粒子；用 `--shots` 的 `js` 调 seek 保存齿轮/阀门静帧。全周期、阀芯位移与恢复由 `tests-e2e/sample-mechanism.spec.ts` 读绘制矩阵与流状态验收，不以截图或纯函数结果替代。
+
 ### SpaceScene · 动画频率（`hz`）与整条流的强度
 
 docs/40 §4.3 E-HL2。两条新绑定，任何模型都能用：

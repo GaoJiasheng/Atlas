@@ -176,6 +176,7 @@ function FlowPaths({
   const geometry = useMemo(() => particleGeometry(perPath, 1013 + index * 7919, flow.spread), [index, perPath, flow.spread]);
   /** Each path's phase (fraction travelled) and fade, kept across speed changes. */
   const state = useRef(paths.map((p) => ({ phase: 0, alpha: 1, share: 1, visibility: effect?.visibility?.[p.id] === false ? 0 : 1 })));
+  const gateKeys = useMemo(() => paths.map((p) => `${flow.id}:${p.id}`), [flow.id, paths]);
   useEffect(() => {
     state.current = paths.map((p) => ({ phase: 0, alpha: 1, share: 1, visibility: effect?.visibility?.[p.id] === false ? 0 : 1 }));
     // A new set of field lines fades in.
@@ -278,8 +279,11 @@ function FlowPaths({
         s.alpha = 1;
         s.share = 1;
       }
-      const targetVisibility = effect?.visibility?.[p.id] === false ? 0 : 1;
-      s.visibility = damp(s.visibility, targetVisibility, PATH_FADE, dt);
+      const gateOpen = runtime.mechanismGates.get(gateKeys[k]!) !== false;
+      const targetVisibility = gateOpen && effect?.visibility?.[p.id] !== false ? 1 : 0;
+      // Closing a mechanical port cuts its particles in this very frame. An
+      // ordinary visibility binding keeps the established soft fade.
+      s.visibility = gateOpen ? damp(s.visibility, targetVisibility, PATH_FADE, dt) : 0;
       if (Math.abs(s.visibility - targetVisibility) < 0.003) s.visibility = targetVisibility;
       else easing = true;
       u.uPhase.value[k] = s.phase - Math.floor(s.phase);
