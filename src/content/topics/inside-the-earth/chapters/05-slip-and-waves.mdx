@@ -1,0 +1,221 @@
+---
+id: slip-and-waves
+order: 5
+title:
+  en: Slip and seismic waves
+  zh: 滑动与地震波
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  cutaway: none
+  run: false
+  part: null
+  pose: null
+  hide: []
+  ghost: []
+  layers:
+  - ground-and-waves
+  labels: &id001
+  - fault-left
+  - fault-right
+  - fault-marker-lock
+  camera:
+    position:
+    - 0
+    - 2.2
+    - 6.5
+    target:
+    - 0
+    - 0
+    - 0
+    fov: 34
+  summary:
+    en: Slow deformation stores energy; sudden slip releases it as waves.
+    zh: 缓慢变形储存能量，突然滑动把能量以波的形式释放。
+  sim:
+    set:
+      wave-kind: p
+      wave-step: 0
+      water-depth: 4000
+      sea-step: 0
+      sea-uplift: true
+      flow-mode: none
+    try:
+      vary: wave-step
+      also:
+      - wave-kind
+      keep:
+      - en: The same diagram amplitude, frequency and model speeds
+        zh: 相同的图解振幅、频率和模型速度
+      observe:
+      - wave-stage
+      - wave-front
+  beats:
+  - pose: null
+    labels: *id001
+    sim:
+      set:
+        wave-kind: p
+        wave-step: 0
+        water-depth: 4000
+        sea-step: 0
+        sea-uplift: true
+        flow-mode: none
+    caption:
+      en: This fault model has no magma. Its rocks can still deform and store elastic energy.
+      zh: 这个断层模型没有岩浆；岩石仍可变形，储存弹性能。
+  - pose: fault-loaded
+    labels:
+    - fault-marker-left
+    - fault-marker-lock
+    - fault-marker-right
+    sim:
+      set:
+        wave-kind: p
+        wave-step: 0
+        water-depth: 4000
+        sea-step: 0
+        sea-uplift: true
+        flow-mode: none
+    caption:
+      en: The marker bends while the contact stays locked.
+      zh: 接触处仍锁定时，标记带已经弯曲。
+  - pose: fault-slipped
+    labels:
+    - fault-marker-lock
+    - fault-focus
+    - fault-epicentre
+    sim:
+      set:
+        wave-kind: p
+        wave-step: 0
+        water-depth: 4000
+        sea-step: 0
+        sea-uplift: true
+        flow-mode: none
+    caption:
+      en: Slip leaves an offset. Rupture starts at the focus; the epicentre is directly above it at the surface.
+      zh: 滑动留下错距；破裂从震源开始，地表正上方是震中。
+  - pose: fault-slipped
+    camera:
+      position:
+      - 0
+      - 0.15
+      - 6.5
+      target:
+      - 0
+      - -0.4
+      - 0
+      fov: 34
+    labels:
+    - wave-p-e
+    - wave-s-e
+    sim:
+      set:
+        wave-kind: p
+        wave-step: 3
+        water-depth: 4000
+        sea-step: 0
+        sea-uplift: true
+        flow-mode: none
+    caption:
+      en: In the upper P row, markers move along the direction of travel. Both rows show the same model instant.
+      zh: 上排P波的标记沿传播方向来回运动；两排表示同一个模型时刻。
+  - pose: fault-slipped
+    camera:
+      position:
+      - 0
+      - 0.15
+      - 6.5
+      target:
+      - 0
+      - -0.4
+      - 0
+      fov: 34
+    labels:
+    - wave-p-e
+    - wave-s-e
+    sim:
+      set:
+        wave-kind: s
+        wave-step: 5
+        water-depth: 4000
+        sea-step: 0
+        sea-uplift: true
+        flow-mode: none
+    caption:
+      en: In the lower S row, motion is across the direction of travel. The slower disturbance has not travelled as far.
+      zh: 下排S波的运动垂直于传播方向；较慢的扰动还没有传得那么远。
+  index:
+    parts:
+    - fault-left
+    - fault-right
+    - fault-marker-left
+    - fault-marker-lock
+    - fault-marker-right
+    - fault-focus
+    - fault-epicentre
+    - wave-p-e
+    - wave-s-e
+---
+
+<Lang en>
+
+The fault blocks contain no magma. A <Term id="fault">fault</Term> is a fracture surface along which rocks can move relative to one another. While contact stays locked, continued movement around it can deform the rocks and store elastic energy. Watch the marker band bend before there is any slip at the locked contact. Deformation and sliding are different stages.
+
+When the contact slips suddenly, stored energy is released as seismic waves. The marker becomes less bent, but an offset remains between its sides. Rupture begins at the <Term id="focus">focus</Term> inside the rock. The <Term id="epicentre">epicentre</Term> is the point on the surface directly above that starting place; it does not name the whole fault or the place that must shake most strongly.
+
+The rows below compare disturbances travelling through solid material. In a <Term id="p-wave">P wave</Term>, markers move back and forth parallel to the travel direction. In an <Term id="s-wave">S wave</Term>, they move across it. P travels faster than S in this comparison, as it does in a solid. Both rows show the same model instant. A marker moves near its starting place while the disturbance passes onward.
+
+Use the snapshot control to compare positions, then switch which wave front the card reads. Switching the inspected wave does not advance either row. Displacement is enlarged, and the speeds use diagram units rather than measured ground speeds. Real ground motion also includes surface waves. <TopicLink slug="forces">Forces</TopicLink> and <TopicLink slug="energy-conversion">Energy Conversion</TopicLink> provide the earlier vocabulary for deformation and stored energy.
+
+<More title={{"en": "Wave model numbers", "zh": "波台的模型数字"}}>
+
+In this model, amplitude is <Num s="S63">0.08 scene units</Num>, frequency <Num s="S63">1 cycle per model second</Num>, and the P and S speeds are respectively <Num s="S63">4</Num> and <Num s="S63">2 diagram units per model second</Num>. A step advances <Num s="S63">0.25 model seconds</Num>. These are teaching parameters, not measured seismic velocities; du means diagram unit.
+
+</More>
+
+<More title={{"en": "A liquid outer core", "zh": "液态外核"}}>
+
+S waves do not travel directly through the liquid outer core. That property helps scientists infer its state; it does not turn the solid mantle into liquid.
+
+</More>
+
+<More title={{"en": "Event size and local effects", "zh": "事件大小与当地影响"}}>
+
+Magnitude describes the size of an earthquake event; intensity describes its effects at a particular place. The Hong Kong Observatory distinguishes them. This bench calculates neither, and it cannot predict the exact time and place of a future earthquake.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+这件断层小样没有岩浆。<Term id="fault">断层</Term>是岩体可以沿着相对移动的破裂面。接触处被锁住时，周围继续运动，岩石仍可变形并储存弹性能。先看标记带弯曲，再看接触处滑动；变形与滑动是不同阶段。
+
+突然滑动时，储存的能量以地震波形式释放。标记带不再那么弯，两边却留下错距。岩石内部破裂开始的位置叫<Term id="focus">震源</Term>；它在地表正上方的位置叫<Term id="epicentre">震中</Term>。震中不是整条断层，也不表示那里一定震得最强。
+
+下方两排比较固体中的扰动。<Term id="p-wave">P 波（纵波）</Term>的标记沿传播方向来回运动；<Term id="s-wave">S 波（横波）</Term>则垂直于传播方向运动。在这个比较中，P 波比 S 波快，两排展示同一个模型时刻。扰动继续传播，标记只在原位附近往返，并没有一路移到远处。
+
+用快照控件比较同一标记前后的位置，再切换要读取哪种波的波前。切换类型并不推进任何一排。位移已经放大，速度用图解单位，不是实测地面速度；真实地面运动还包括表面波。<TopicLink slug="forces">力</TopicLink>与<TopicLink slug="energy-conversion">能量转换</TopicLink>可以帮助复习变形和储能的用语。比较时要分清岩石的局部往返与扰动传向远处。
+
+<More title={{"en": "Wave model numbers", "zh": "波台的模型数字"}}>
+
+本模型振幅为 <Num s="S63">0.08 场景单位</Num>，频率为<Num s="S63">每模型秒 1 周</Num>，P、S 速度分别为<Num s="S63">每模型秒 4</Num>和 <Num s="S63">2 图解单位</Num>；一步前进 <Num s="S63">0.25 模型秒</Num>。这是教学参数，不是实测地震波速；du 表示图解单位。
+
+</More>
+
+<More title={{"en": "A liquid outer core", "zh": "液态外核"}}>
+
+S 波不能直接穿过液态外核。这种性质帮助科学家推断外核的物态，却不能据此把固态地幔说成液体。
+
+</More>
+
+<More title={{"en": "Event size and local effects", "zh": "事件大小与当地影响"}}>
+
+香港天文台区分震级与烈度：震级描述地震事件的大小，烈度描述某处受到的影响。这台模型不计算两者，也不能精确预测未来地震的时间和地点。
+
+</More>
+
+</Lang>
