@@ -105,3 +105,11 @@ The skills under `.claude/skills/` are working notes for AI assistants, not lice
 Figures and claims in topic texts cite their sources with `[S#]` ids; each
 topic's `data/SOURCES.md` lists them with URLs. Quotations are short and
 attributed; no source text is reproduced beyond that.
+
+## Watt steam engine (`steam-engine`)
+
+| Source / work | Use and changes | Licence |
+|---|---|---|
+| Science Museum Group collection, *Rotative Steam Engine by Boulton and Watt, 1788* (object 1861-46, https://collection.sciencemuseumgroup.org.uk/objects/co50948/rotative-steam-engine-by-boulton-and-watt-1788), *Newcomen Atmospheric Engine* (https://collection.sciencemuseumgroup.org.uk/objects/co50900/newcomen-atmospheric-engine) and *James Watt* (https://collection.sciencemuseumgroup.org.uk/people/ap24508/watt-james), accessed 2026-10-27 | Object descriptions independently rewritten, shortened and translated for the chapters, part explanations and glossary; museum photographs are not copied, traced or used as textures | Descriptive text CC BY 4.0, https://creativecommons.org/licenses/by/4.0/ (metadata CC0) |
+
+The other sources of this topic (public-domain mechanism texts, NASA, NOAA and NIST explanatory pages, the Lap-engine dimension references) are cited fact by fact; no text, drawing or image from them is reproduced. Per-source locators are in `src/content/topics/steam-engine/data/SOURCES.md`. The three illustrations (`public/illustrations/steam-engine*.webp`) are original artwork under the content licence above.
