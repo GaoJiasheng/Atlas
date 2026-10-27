@@ -129,6 +129,8 @@ export interface SceneCommand {
 
 /** What an engine registers. Every field is optional. */
 export interface SceneControls {
+  /** Static layer engines can defer test readiness until initial resources settle. */
+  ready?(): boolean;
   /** Camera presets, in key order (digit `1` = first, …, `9`, then `0` = the tenth; later ones have buttons only). */
   presets?: {
     items: readonly ScenePreset[];
@@ -146,6 +148,8 @@ export interface SceneControls {
   commands?: readonly SceneCommand[];
   /** What the key hint calls the commands (default "check · hint · undo"; SpaceScene's try-it keys: "try it"). */
   commandsHint?: HudText;
+  /** Calendar month nudge, bound to Shift + Left/Right where supported. */
+  monthStep?(delta: -1 | 1): void;
   /** Engine-specific test hooks, exposed as `window.__atlas.engine` (docs/06). */
   test?: Record<string, (...args: never[]) => unknown>;
   /** A `<Task id>` in a chapter body was pressed: go to that sub-step; true when it exists. */

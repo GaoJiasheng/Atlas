@@ -1,0 +1,229 @@
+{
+  "terms": [
+    {
+      "id": "steam-engine",
+      "term": {
+        "en": "Steam engine",
+        "zh": "蒸汽机"
+      },
+      "definition": {
+        "en": "A machine that uses steam to perform mechanical work.",
+        "zh": "利用蒸汽做机械功的机器。"
+      },
+      "see": [
+        "cylinder"
+      ]
+    },
+    {
+      "id": "cylinder",
+      "term": {
+        "en": "Cylinder",
+        "zh": "汽缸"
+      },
+      "definition": {
+        "en": "The chamber in which a piston moves.",
+        "zh": "活塞在其中运动的腔体。"
+      },
+      "see": [
+        "piston"
+      ]
+    },
+    {
+      "id": "piston",
+      "term": {
+        "en": "Piston",
+        "zh": "活塞"
+      },
+      "definition": {
+        "en": "A close-fitting moving part acted on by pressure on its faces.",
+        "zh": "在缸内运动、两面受到压力作用的零件。"
+      },
+      "see": [
+        "pressure-difference"
+      ]
+    },
+    {
+      "id": "pressure-difference",
+      "term": {
+        "en": "Pressure difference",
+        "zh": "压强差"
+      },
+      "definition": {
+        "en": "The difference between pressures on two sides.",
+        "zh": "两侧压强的差别。"
+      },
+      "see": [
+        "piston"
+      ]
+    },
+    {
+      "id": "condensation",
+      "term": {
+        "en": "Condensation",
+        "zh": "凝结"
+      },
+      "definition": {
+        "en": "The change from vapour to liquid.",
+        "zh": "物质从气态变成液态的变化。"
+      },
+      "see": [
+        "separate-condenser"
+      ]
+    },
+    {
+      "id": "separate-condenser",
+      "term": {
+        "en": "Separate condenser",
+        "zh": "分离冷凝器"
+      },
+      "definition": {
+        "en": "A vessel separate from the working cylinder where exhaust steam condenses.",
+        "zh": "独立于工作汽缸、让排出蒸汽凝结的容器。"
+      },
+      "see": [
+        "air-pump"
+      ]
+    },
+    {
+      "id": "air-pump",
+      "term": {
+        "en": "Air pump",
+        "zh": "抽气泵"
+      },
+      "definition": {
+        "en": "A pump that removes air and water from this condensing system.",
+        "zh": "在这套冷凝系统中把空气和水移走的泵。"
+      },
+      "see": [
+        "separate-condenser"
+      ]
+    },
+    {
+      "id": "double-acting",
+      "term": {
+        "en": "Double-acting",
+        "zh": "双作用"
+      },
+      "definition": {
+        "en": "Working strokes occur in both directions of piston travel.",
+        "zh": "活塞两个方向的行程都能做功。"
+      },
+      "see": [
+        "piston"
+      ]
+    },
+    {
+      "id": "parallel-motion",
+      "term": {
+        "en": "Parallel motion",
+        "zh": "平行运动机构"
+      },
+      "definition": {
+        "en": "Watt’s linked-bar arrangement giving an approximately straight piston-rod path.",
+        "zh": "瓦特用连杆组合得到近似直线活塞杆路径的机构。"
+      },
+      "see": [
+        "pivot"
+      ]
+    },
+    {
+      "id": "pivot",
+      "term": {
+        "en": "Pivot",
+        "zh": "支点或枢轴"
+      },
+      "definition": {
+        "en": "A joint about which a member turns; it may be fixed or moving.",
+        "zh": "杆件绕它转动的连接点；可以固定，也可以随机构移动。"
+      },
+      "see": [
+        "parallel-motion"
+      ]
+    },
+    {
+      "id": "sun-and-planet",
+      "term": {
+        "en": "Sun-and-planet gear",
+        "zh": "太阳与行星齿轮机构"
+      },
+      "definition": {
+        "en": "A rod-carried planet gear travels around a sun gear on the output shaft.",
+        "zh": "传动杆带着行星轮，绕输出轴上的太阳轮运动。"
+      },
+      "see": [
+        "flywheel"
+      ]
+    },
+    {
+      "id": "flywheel",
+      "term": {
+        "en": "Flywheel",
+        "zh": "飞轮"
+      },
+      "definition": {
+        "en": "A wheel that stores and returns rotational kinetic energy.",
+        "zh": "储存并交还转动动能的轮。"
+      },
+      "see": [
+        "work"
+      ]
+    },
+    {
+      "id": "centrifugal-governor",
+      "term": {
+        "en": "Centrifugal governor",
+        "zh": "离心调速器"
+      },
+      "definition": {
+        "en": "A speed-sensitive mechanism that adjusts steam admission through a linkage.",
+        "zh": "随转速变化、通过连杆调整进汽的机构。"
+      },
+      "see": [
+        "throttle",
+        "feedback"
+      ]
+    },
+    {
+      "id": "throttle",
+      "term": {
+        "en": "Throttle valve",
+        "zh": "节流阀"
+      },
+      "definition": {
+        "en": "A valve that restricts the steam supply passage.",
+        "zh": "限制供汽通道开度的阀。"
+      },
+      "see": [
+        "centrifugal-governor"
+      ]
+    },
+    {
+      "id": "feedback",
+      "term": {
+        "en": "Feedback",
+        "zh": "反馈"
+      },
+      "definition": {
+        "en": "A path by which an output affects the input that drives it.",
+        "zh": "输出反过来影响驱动它的输入的路径。"
+      },
+      "see": [
+        "throttle"
+      ]
+    },
+    {
+      "id": "work",
+      "term": {
+        "en": "Mechanical work",
+        "zh": "机械功"
+      },
+      "definition": {
+        "en": "Energy transferred by the component of a force along a displacement.",
+        "zh": "力沿位移方向的分量所传递的能量。"
+      },
+      "see": [
+        "flywheel"
+      ]
+    }
+  ]
+}

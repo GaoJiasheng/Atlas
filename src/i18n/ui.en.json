@@ -1,6 +1,5 @@
 {
   "time.mission.relatedSites": "Related launch centres",
-  "time.mission.index": "Chapter evidence and places",
   "time.kind.mission": "Mission",
   "time.mission.mapPoint": "Map point: associated launch centre",
   "time.mission.storyRange": "The year lines show this story’s scope, not the founding dates of countries.",
@@ -216,6 +215,7 @@
   "space.status.flowLocked": "Flow off while exploded",
   "space.card.title": "Part chain",
   "space.card.key": "Flowchart",
+  "space.card.orbit": "Observation",
   "space.try.key": "Flowchart",
   "space.key.yes": "Yes",
   "space.key.no": "No",
@@ -361,6 +361,7 @@
   "time.preset.plate": "Whole plate",
   "time.preset.theatre": "Whole area",
   "time.card.title": "Participation and area",
+  "time.index.title": "Places and events in this chapter",
   "time.card.showAll": "Show all, {n} more",
   "time.spec.entities": "Entities",
   "time.spec.keyframes": "Keyframes",

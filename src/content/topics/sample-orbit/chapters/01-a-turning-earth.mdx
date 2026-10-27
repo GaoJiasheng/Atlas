@@ -1,0 +1,202 @@
+---
+{
+  "id": "a-turning-earth",
+  "order": 1,
+  "title": {
+    "en": "Sample 1 · a turning earth",
+    "zh": "示例 1 · 模型对照"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "cutaway": "none",
+    "ghost": [],
+    "layers": [
+      "solar-body",
+      "earth-system",
+      "moon-system",
+      "orbital-guides"
+    ],
+    "labels": [
+      "earth-body",
+      "observer-marker"
+    ],
+    "camera": {
+      "position": [
+        0.6,
+        0.5,
+        1.4
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ],
+      "fov": 40
+    },
+    "index": {
+      "parts": [
+        "sun-body",
+        "earth-body",
+        "moon-body",
+        "observer-marker",
+        "near-side-mark",
+        "earth-axis",
+        "equator-ring",
+        "earth-track",
+        "lunar-track",
+        "orbital-plane",
+        "node-line",
+        "light-ray-guide",
+        "scale-ruler"
+      ]
+    },
+    "sim": {
+      "set": {
+        "lab": "day",
+        "elapsed": 0,
+        "year-angle": 0,
+        "lunar-angle": 0,
+        "spin-angle": 0,
+        "obliquity": 0,
+        "lunar-tilt": 0,
+        "node-angle": 0,
+        "observer-lat": 0,
+        "moon-range": 384400,
+        "synchronous": true,
+        "scale-mode": "schematic",
+        "day-index": 1
+      },
+      "try": {
+        "vary": "spin-angle",
+        "observe": [
+          "observer-altitude-deg",
+          "observer-day"
+        ]
+      }
+    },
+    "beats": [
+      {
+        "sim": {
+          "set": {
+            "spin-angle": 0
+          }
+        },
+        "caption": {
+          "en": "Sample 1.1: circular model comparison.",
+          "zh": "示例 1.1：圆轨道模型对照。"
+        },
+        "camera": {
+          "position": [
+            0.6,
+            0.22,
+            0
+          ],
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "fov": 40
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "spin-angle": 90
+          }
+        },
+        "caption": {
+          "en": "Sample 1.2: circular model comparison.",
+          "zh": "示例 1.2：圆轨道模型对照。"
+        },
+        "camera": {
+          "position": [
+            0,
+            0.22,
+            -0.6
+          ],
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "fov": 40
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "spin-angle": 180
+          }
+        },
+        "caption": {
+          "en": "Sample 1.3: circular model comparison.",
+          "zh": "示例 1.3：圆轨道模型对照。"
+        },
+        "camera": {
+          "position": [
+            -0.6,
+            0.22,
+            0
+          ],
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "fov": 40
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "spin-angle": 270
+          }
+        },
+        "caption": {
+          "en": "Sample 1.4: circular model comparison.",
+          "zh": "示例 1.4：圆轨道模型对照。"
+        },
+        "camera": {
+          "position": [
+            0,
+            0.22,
+            0.6
+          ],
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "fov": 40
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "spin-angle": 360
+          }
+        },
+        "caption": {
+          "en": "Sample 1.5: circular model comparison.",
+          "zh": "示例 1.5：圆轨道模型对照。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Draft engine fixture. Compare model geometry and computed readings. The dark side uses a faint teaching fill; this is no dated sky prediction.
+
+</Lang>
+
+<Lang zh>
+
+引擎草稿测试。比较模型几何与计算读数。暗侧采用微弱教学填光；此模型不预测具体日期的天空。
+
+</Lang>

@@ -53,7 +53,7 @@ import { createPlayhead, type Playhead } from './lib/playhead';
 import type { Anchor, SegmentSpec } from './lib/segmentScale';
 import { clamp, fromNumber, keyframeWindow, stepFor, toNumber, type TimePoint } from './lib/time';
 import { frameAt } from './lib/frame';
-import { missionContext, hasMapAnchor, missionChapterIndex } from './lib/missions';
+import { missionContext, hasMapAnchor } from './lib/missions';
 import { controlAreas, frameStats, referencePair } from './lib/stats';
 import { withEntityColours } from './lib/holders';
 import { formatTime } from './lib/format';
@@ -62,6 +62,8 @@ import type { GeoController } from './stages/geo/controller';
 import { Timeline, formatReadout } from './timeline/Timeline';
 import { EventInspector } from './EventInspector';
 import { EntityInspector } from './EntityInspector';
+import { ChapterIndex } from './ChapterIndex';
+import { eventSelectionPatch } from './lib/reader';
 import { BandCard, PerfReadout, useFps } from './hud/HudPanels';
 import { MissionBeatLine } from './hud/MissionBeatLine';
 import { DatedLayerPlate } from './hud/DatedLayerPlate';
@@ -98,7 +100,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   const geo = useMemo(() => withEntityColours(data as TimeSceneGeoData, topic.colorBy), [data, topic.colorBy]);
   const region = topic.basemap?.region ?? null;
   const store = useSceneStore<TimeSceneExt>();
-  const { hud } = useSceneContext();
+  const { hud, revealReader } = useSceneContext();
   const currentChapter = useScene<TimeSceneExt, string | null>((s) => s.chapter);
   const layers = useScene<TimeSceneExt, string[]>((s) => s.layers);
   const highlight = useScene<TimeSceneExt, string[]>((s) => s.highlight);
@@ -164,22 +166,46 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   const [selected, setSelected] = useState<string | null>(null);
   const [selectedEntity, setSelectedEntity] = useState<string | null>(null);
   const [cardExpanded, setCardExpanded] = useState(false);
+  const anchorRef = useRef(anchor);
+  anchorRef.current = anchor;
+  /** The beat the bar rests on (scrubbing, a date jump or a new chapter leave it). */
+  const anchoredBeat = useCallback(() => {
+    const a = anchorRef.current;
+    const chapter = a ? story[a.segment]?.id : undefined;
+    return chapter !== undefined && typeof a?.tick === 'number' ? { chapter, index: a.tick } : null;
+  }, [story]);
+  // Closing a detail returns the emphasis of the beat the bar rests on, else the chapter's.
   const restoreHighlight = useCallback(() => {
     const s = store.getState();
-    const target = s.chapterTarget(s.chapter);
-    const beat = model.timePresentation ? beatsRef.current.find((item) => item.chapter === s.chapter && item.index === s.beat) : undefined;
-    s.patch({ highlight: beat ? timeBeatScene(target, beat, true).highlight : target.highlight });
-  }, [store, model.timePresentation]);
+    const at = anchoredBeat();
+    const beat = at?.chapter === s.chapter ? beatsRef.current.find((b) => b.chapter === at.chapter && b.index === at.index) : undefined;
+    s.patch({ highlight: [...(beat?.spec?.highlight ?? s.chapterTarget(s.chapter).highlight)] });
+  }, [store, anchoredBeat]);
   const selectEvent = useCallback(
     (id: string) => {
-      // The presentation's map is for looking around: the caption says what the beat is about.
-      if (presentation.isPresenting()) return;
+      if (presentation.isPresenting() || !geo.events.some((event) => event.id === id)) return false;
+      store.getState().patch({ highlight: [id] });
       setSelectedEntity(null);
       setSelected(id);
-      store.getState().patch({ highlight: [id] });
+      revealReader();
+      return true;
     },
-    [store],
+    [store, geo.events, revealReader],
   );
+  const selectIndexedEvent = useCallback((id: string) => {
+    const s = store.getState();
+    const patch = eventSelectionPatch(s, geo.events, id, presentation.isPresenting());
+    if (!patch) return false;
+    // A place keeps the time, so it keeps the beat the bar rests on; a dated event leaves it.
+    const at = geo.events.find((event) => event.id === id)?.kind === 'site' ? anchoredBeat() : null;
+    if (at) pendingBeat.current = at;
+    // Store transitions clear old selections synchronously: select only after applying the map state.
+    s.applyState(model.timePresentation && !at ? { ...patch, beat: null } : patch);
+    setSelectedEntity(null);
+    setSelected(id);
+    revealReader();
+    return true;
+  }, [store, geo.events, revealReader, anchoredBeat, model.timePresentation]);
   const closeEvent = useCallback(() => {
     setSelected(null);
     restoreHighlight();
@@ -194,8 +220,9 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       }
       setSelectedEntity(id);
       store.getState().patch({ highlight: [id] });
+      revealReader();
     },
-    [store, selectedEntity, restoreHighlight],
+    [store, selectedEntity, restoreHighlight, revealReader],
   );
   const closeEntity = useCallback(() => {
     setSelectedEntity(null);
@@ -591,13 +618,21 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
         const target = store.getState().chapterTarget(beat.chapter);
         return { ...timeBeatScene(target, beat, true), beat: target.beat };
       } } : {}),
-      test: { missionContext: (id: string) => missionContext(model, id) },
       specRows,
       status: [statusT],
       time: { now: () => playhead.get() },
       // No participants (a single-country story): no participation card, not an empty frame.
       ...(geo.entities.length > 0 ? { card: topic.timePresentation?.entityLabel ?? bi('time.card.title'), cardToggle: { expanded: cardExpanded, set: setCardExpanded } } : {}),
       beats: beatControls,
+      test: {
+        missionContext: (id: string) => missionContext(model, id),
+        selectEvent: (id: string) => selectIndexedEvent(id),
+        reader: () => ({
+          indexIds: [...((chapters.find((c) => c.id === store.getState().chapter)?.state as TimeChapterState | undefined)?.index ?? [])],
+          selectedId: selected ?? selectedEntity,
+          detailCount: selected || selectedEntity ? 1 : 0,
+        }),
+      },
       escape: () => {
         if (isPresenting()) {
           stopPresentation(true);
@@ -650,6 +685,8 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     cardExpanded,
     selected,
     selectedEntity,
+    selectIndexedEvent,
+    chapters,
     closeEvent,
     closeEntity,
     region,
@@ -660,8 +697,8 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
 
   const selectedEvent = selected ? geo.events.find((e) => e.id === selected) ?? null : null;
   const pickedEntity = selectedEntity ? geo.entities.find((e) => e.id === selectedEntity) ?? null : null;
+  const indexIds = (chapters.find((c) => c.id === currentChapter)?.state as TimeChapterState | undefined)?.index ?? [];
 
-  const chapterIndex = useMemo(() => model.timePresentation ? missionChapterIndex(geo.events, chapters.find((chapter) => chapter.id === currentChapter)?.state as TimeChapterState | undefined) : [], [model, geo.events, chapters, currentChapter]);
 
   return (
     <div className="ts-stage" ref={stageRef} data-reference={reference || undefined} data-presenting={presenting || undefined} data-region-plate={region ? '' : undefined}>
@@ -740,19 +777,12 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
         />
       </SceneSlot>
 
-      {chapterIndex.length > 0 && <SceneSlot name="readerEnd">
-        <section className="ts-index" aria-labelledby="ts-index-title">
-          <h3 id="ts-index-title">{t('time.mission.index')}</h3>
-          <ul>{chapterIndex.map((event) => <li key={event.id}>
-            <button type="button" className="ts-index__row" data-event={event.id} data-map-visibility={event.mapVisibility ?? 'anchor'} aria-pressed={selected === event.id} onClick={() => selectEvent(event.id)}>
-              <span>{tx(event.title, locale)}</span>
-              <small>{tx(event.summary, locale)}</small>
-            </button>
-          </li>)}</ul>
-        </section>
-      </SceneSlot>}
-      <SceneSlot name={model.timePresentation ? 'readerTop' : 'inspector'}>
-        {model.timePresentation && <MissionBeatLine captions={presentation.beats.filter((beat) => beat.chapter === currentChapter && beat.spec).map((beat) => tx(beat.caption, locale))} beat={currentBeat} focus={`${currentChapter}|${selected ?? ''}|${selectedEntity ?? ''}`} onBeat={(index) => { if (currentChapter) goToBeatFromBar(currentChapter, index); }} />}
+      <SceneSlot name="readerEnd">
+        <ChapterIndex ids={indexIds} events={geo.events} selected={selected} locale={locale} disabled={presenting} onSelect={selectIndexedEvent} />
+      </SceneSlot>
+
+      <SceneSlot name="readerTop">
+        {model.timePresentation && <MissionBeatLine captions={presentation.beats.filter((beat) => beat.chapter === currentChapter && beat.spec).map((beat) => tx(beat.caption, locale))} beat={currentBeat} focus={currentChapter ?? ''} onBeat={(index) => { if (currentChapter) goToBeatFromBar(currentChapter, index); }} />}
         {selectedEvent && <EventInspector event={selectedEvent} model={model} locale={locale} onClose={closeEvent} />}
         {pickedEntity && <EntityInspector entity={pickedEntity} model={model} playhead={playhead} locale={locale} onClose={closeEntity} />}
       </SceneSlot>

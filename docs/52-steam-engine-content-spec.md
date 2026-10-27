@@ -745,3 +745,25 @@ phaseDeg 在 [0,360)，cycles=θ/2π，shaftTurns=δs/2π 保留累计圈数，�
 剩余工作仅为在获准运行 Chromium 的环境重新执行上述浏览器门槛、逐张看 EN/ZH × paper/cinema 拍图/五相位剖面，并测绘制/加载预算；`sample-mechanism` 保持 draft，未将 §8 或生产发布标成完成。
 
 **浏览器验收（2026-10-27，Claude 代理补跑，取代上文第 5 条和表中三行浏览器记录）**：`pnpm shoot sample-mechanism --beats --keys --layout`（paper、cinema）控制台干净，键 / 布局 / 拍 0 失败，16/16 拍链接落在演示场景；看过两套主题拍图、1024×768 布局和调速器、能量章：主梁随拍摆动、活塞杆始终竖直、太阳行星轮与飞轮逐拍换姿。回归 `--beats --keys`：aircon、energy-conversion、sample-materials、sample-heart 0 失败；b200-server 软件 GL 下两次截图超时（机器负载 50–100），`--gpu` 下 0 失败。`CI=1 pnpm e2e` 344/346，失败的 ancient-civilisations:59 与 sample-heart:87 单独复跑通过（负载抖动），sample-mechanism 11/11 通过。仍未做：ZH 截图、`--perf --gpu` 绘制与加载预算，留给生产 steam-engine 验收。
+
+### 9.2 生产内容施工（2026-10-27；浏览器门槛交主会话）
+
+`steam-engine` 已从 §9.1 的 `sample-mechanism` 夹具扩展：背景加七章、36 个定稿双语字幕、四卡、56 可选件和 4 context、7 组/链路卡 4 列、6 条流、15 行表、3 调速姿态/4 纽科门端态、16 来源、16 名词、3 张批准插图。新增 `generate.mjs` 仅重建 parts.json，`qa-shots.json` 保存五相位、交叉杆与泵上行取景。没有引擎、依赖、package/lockfile、review-queue 或 git 写入改动。
+
+内容数据修正：02/07 索引分别补 pump-rod/boiler-water，保证 56 件覆盖；00/06 保留 14 项。linkage-view 及 02.1/05.2/07.3 镜头经 CPU 全视口投影调整；36 拍标签锚点均在 16:9 视口内，**尚不能证明 HUD 避让、遮挡和手机取景**。节流阀片 rest 朝向改为随姿态绕 Z 改变 Y 轴汽路遮挡，实际法向有单测；示意皮带/直角取力没有与主机速度联立。来源 S1/S14 因现有 schema 仅允许 HTTP(S) 而不设虚构 URL；六份 800/1600 图外另导出两份现有 Figure 所需 1200×900。三张最终 PNG 的哈希及父快照复用、PD 图身份和 NC-SA 派生清单见 SOURCES/AUDIT 及根许可登记。
+
+`pnpm check`：0 errors/0 warnings、3 既有 hints；`pnpm validate`：57 topics、0/0；`pnpm test`：159 files、4256/4256（本主题 20/20）；`pnpm build`：117 pages。生产 e2e 11 条成功枚举但未运行。独立 32768 帧生产机构扫描、刚杆端点/静态姿态/链段/阀片/算式/字幕数值检查通过。CPU 几何最多 59 个可见 pieces、122900 triangles，无非有限顶点；此计数不含实际阴影/流/高亮等渲染开销，不能冒充 draw calls 或 GPU 性能。最终日志在 `/private/tmp/atlas-steam-content-{check,validate,test,build}.log`。
+
+**本轮 brief 明确禁止在 sandbox 运行浏览器 gates 或用用户浏览器/桌面绕过**，因此 `pnpm shoot`、手机目视、双语双主题逐拍、绘制/加载预算及 `CI=1 ATLAS_E2E_PORT=5421 pnpm e2e` 留给主会话，截图 0 张，未声称视觉验收通过。依 §8 保持 draft；验收完再 published 并更新 smoke 计数。姊妹主题尚不存在，三个规定位置的 industrial-revolution 链接只登记在 REVIEW、产品保留普通双语阅读说明；目标实际 published 后生效。Gavin 的全部 D1–D12 默认与中文优先审阅清单见 REVIEW.md。
+
+### 9.3 浏览器验收（2026-10-27，Claude 主会话；`steam-engine` 发布为 published）
+
+**看过的画面**：`pnpm shoot steam-engine --beats --tasks --keys --layout --locale en,zh --theme paper,cinema`（layout 含 3840×2160 至 1024×768、900×1200、390×844 共 8 个尺寸）全部 0 失败；`beat links: 36 of 36`；控制台干净。逐张看了 en-paper 的 36 拍（拼图），en-cinema、zh-paper、zh-cinema 各看了 6–8 个代表拍（背景、各章首/关键拍、能量账本）；另看了各章视图、`mode-*`、1024×768 和 390×844 布局图，以及 `qa-shots.json` 的五相位齿轮/阀口、交叉杆、泵上行取景。整机、纽科门模块、阀口剖面、交叉不连接的杆件、三档调速器、能量账本都清楚；活塞随相位在中—底—中—顶之间移动，活塞杆始终竖直，平行四边形各杆随梁摆动而保持刚性，上下阀对按行程切换，流和阀口与行程一致。HUD 无重叠。`hero-clean`（hud:false）在 paper/cinema 里画布是空的，aircon 同样如此，是 shoot 在软件 GL 下的既有现象，非本主题问题。
+
+**修了什么（均为镜头数据，无引擎改动）**：初跑列出的五处“有标签 id 但屏幕上没有”——03 章三拍里 `valve-lower-out` 被字幕卡盖住（`cylinder-view` 过近，下排汽阀在 82% 以下）、04 章第 1/4 拍的 `piston-rod` 在画外、02 章第 4 拍的 `hot-well`/`feed-pump` 在画外、05 章第 3 拍的 `centre-link` 被齿轮挡住。改了 `cylinder-view`（[−0.5,3.5,6] → [−2.45,2.3,0.2]）、`linkage-view`（[−1,7,8.5] → [−1.2,4.5,0]）、02.4、04.4 和 05.3（改从机后看，使定距连杆可见）；`generate.mjs` 预设同步。复拍 36 拍后这几处都有标签。
+
+**性能（`--perf --gpu --size 1920x1080`，Apple M5 Max，ANGLE Metal，缓冲 1520×1023 / hero-clean 1920×1080）**：整机视图（ch01/ch08/hero/流/剖/爆）61 draw calls、122,904 三角形（预算：静止 <75、硬门槛 <100、≤1.5M tris）；各章 14–61 calls、6.6k–122.9k tris；帧率 41–63 fps（机器负载 ≈150，吃不满 60）。五相位、交叉杆、泵上行取景 19–29 calls。首屏 JS 500.3 KB gzip / 11 文件（与 aircon 等所有 SpaceScene 主题同值，来自共用引擎包，超过 docs/02 的 300 KB 目标，非本主题新增）。
+
+**e2e 与门槛**：`pnpm check` 0 错 / 0 警告 / 3 既有 hints；`pnpm validate` 57 topics、0/0；`pnpm test` 159 files、4256/4256；`pnpm build` 117 pages。`smoke.spec.ts` 计数已改（topic 34、徽章 68、science 11、`:visible` 34、drawing 图 34、plate 34、ww2 图版 34），index 两个用例两语言全绿。机器负载 120–170，协调者要求不跑全量 e2e，只跑本主题和 smoke：`steam-engine.spec.ts` 11/11 通过，其中 4 条在负载下先失败（5 秒轮询等不到渲染帧、索引逐项点击等“稳定帧”），把 `seekMechanism`/P 恢复的轮询放宽到 30 秒、索引点击改 `force` 并给 240 秒后，单独复跑全绿，判为负载抖动，不是产品问题；smoke 的 `sample-space (en/zh)` 逐章步进用例在此负载下超 60 秒（单独复跑仍超），该用例与本主题无关，留合并时在正常负载下复核。
+
+**未做 / 留给 Gavin**：①预设键 4（NEWCOMEN）在 00/02–07 章里不会自动打开“比较模型”图层，纽科门模块被隐藏，镜头会飞到空场景（预设不携带图层，属引擎限制，未改）；②`--layout` 的 390×844 只验证布局不溢出，没有逐拍的手机取景图；③首屏 JS 超标是共用引擎问题。

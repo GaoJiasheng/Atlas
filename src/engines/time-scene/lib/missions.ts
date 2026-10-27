@@ -29,19 +29,3 @@ export function missionContext(model: TimeModel, id: string) {
 export function hasMapAnchor(event: SceneEvent): event is SceneEvent & { at: [number, number] } {
   return event.mapVisibility !== 'timeline-only' && event.at !== undefined;
 }
-
-/** Explicit chapter/beat highlights are the index; mission facilities follow their evidence. */
-export function missionChapterIndex(events: readonly SceneEvent[], state: { highlight?: string[]; beats?: { highlight?: string[] }[] } | undefined): SceneEvent[] {
-  const ids = new Set([...(state?.highlight ?? []), ...(state?.beats ?? []).flatMap((beat) => beat.highlight ?? [])]);
-  for (const id of [...ids]) {
-    const context = events.find((event) => event.id === id)?.missionContext;
-    if (context) {
-      ids.add(context.anchorSite);
-      for (const site of context.relatedSites ?? []) ids.add(site);
-    }
-  }
-  return [...ids].flatMap((id) => {
-    const event = events.find((event) => event.id === id);
-    return event ? [event] : [];
-  });
-}

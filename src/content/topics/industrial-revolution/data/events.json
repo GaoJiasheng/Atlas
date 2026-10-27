@@ -1,0 +1,1554 @@
+[
+  {
+    "id": "loc-manchester",
+    "t": "1760",
+    "kind": "site",
+    "at": [
+      -2.248685,
+      53.47532
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Manchester",
+      "zh": "曼彻斯特"
+    },
+    "summary": {
+      "en": "Modern city reference, not a precise historical facility location.",
+      "zh": "现代城市参照，不是历史设施的精确位置。"
+    },
+    "detail": {
+      "en": "This marker locates Manchester using a modern gazetteer. It does not date the founding of the city, locate a particular historical building, station, mine or plantation, or draw a historical boundary. Use the chapter’s dated milestones for documentary context.",
+      "zh": "此点用现代地名资料定位曼彻斯特，不表示建城年、特定历史建筑、车站、矿坑或种植园的位置，也不绘历史边界。具体文献背景见本章有日期的里程碑。"
+    },
+    "sources": [
+      "S68",
+      "S64",
+      "S3",
+      "S75",
+      "S13",
+      "S14",
+      "S9",
+      "S44",
+      "S34",
+      "S80",
+      "S76",
+      "S77",
+      "S63",
+      "S81",
+      "S40",
+      "S41",
+      "S42",
+      "S43",
+      "S45",
+      "S46"
+    ]
+  },
+  {
+    "id": "loc-liverpool",
+    "t": "1760",
+    "kind": "site",
+    "at": [
+      -2.961934,
+      53.405068
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Liverpool",
+      "zh": "利物浦"
+    },
+    "summary": {
+      "en": "Modern city reference, not a precise historical facility location.",
+      "zh": "现代城市参照，不是历史设施的精确位置。"
+    },
+    "detail": {
+      "en": "This marker locates Liverpool using a modern gazetteer. It does not date the founding of the city, locate a particular historical building, station, mine or plantation, or draw a historical boundary. Use the chapter’s dated milestones for documentary context.",
+      "zh": "此点用现代地名资料定位利物浦，不表示建城年、特定历史建筑、车站、矿坑或种植园的位置，也不绘历史边界。具体文献背景见本章有日期的里程碑。"
+    },
+    "sources": [
+      "S68",
+      "S44",
+      "S76",
+      "S77",
+      "S63",
+      "S40",
+      "S41",
+      "S42",
+      "S43",
+      "S45",
+      "S46"
+    ]
+  },
+  {
+    "id": "loc-birmingham",
+    "t": "1760",
+    "kind": "site",
+    "at": [
+      -1.921943,
+      52.47692
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Birmingham",
+      "zh": "伯明翰"
+    },
+    "summary": {
+      "en": "Modern city reference, not a precise historical facility location.",
+      "zh": "现代城市参照，不是历史设施的精确位置。"
+    },
+    "detail": {
+      "en": "This marker locates Birmingham using a modern gazetteer. It does not date the founding of the city, locate a particular historical building, station, mine or plantation, or draw a historical boundary. Use the chapter’s dated milestones for documentary context. The 1788 Lap engine used a centrifugal governor and drove metal-polishing machinery. This is one documented machine, not a date when all Britain adopted steam.",
+      "zh": "此点用现代地名资料定位伯明翰，不表示建城年、特定历史建筑、车站、矿坑或种植园的位置，也不绘历史边界。具体文献背景见本章有日期的里程碑。 1788年的Lap机使用离心调速器，带动金属抛光机械。这是一台有文献记录的机器，不是全英国改用蒸汽的日期。"
+    },
+    "sources": [
+      "S68",
+      "S6",
+      "S14",
+      "S9",
+      "S81",
+      "S64"
+    ]
+  },
+  {
+    "id": "loc-nottingham",
+    "t": "1760",
+    "kind": "site",
+    "at": [
+      -1.165706,
+      52.941084
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Nottingham",
+      "zh": "诺丁汉"
+    },
+    "summary": {
+      "en": "Modern city reference, not a precise historical facility location.",
+      "zh": "现代城市参照，不是历史设施的精确位置。"
+    },
+    "detail": {
+      "en": "This marker locates Nottingham using a modern gazetteer. It does not date the founding of the city, locate a particular historical building, station, mine or plantation, or draw a historical boundary. Use the chapter’s dated milestones for documentary context.",
+      "zh": "此点用现代地名资料定位诺丁汉，不表示建城年、特定历史建筑、车站、矿坑或种植园的位置，也不绘历史边界。具体文献背景见本章有日期的里程碑。"
+    },
+    "sources": [
+      "S68",
+      "S3",
+      "S75",
+      "S13"
+    ]
+  },
+  {
+    "id": "loc-glasgow",
+    "t": "1760",
+    "kind": "site",
+    "at": [
+      -4.239101,
+      55.86227
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Glasgow",
+      "zh": "格拉斯哥"
+    },
+    "summary": {
+      "en": "Modern city reference, not a precise historical facility location.",
+      "zh": "现代城市参照，不是历史设施的精确位置。"
+    },
+    "detail": {
+      "en": "This marker locates Glasgow using a modern gazetteer. It does not date the founding of the city, locate a particular historical building, station, mine or plantation, or draw a historical boundary. Use the chapter’s dated milestones for documentary context.",
+      "zh": "此点用现代地名资料定位格拉斯哥，不表示建城年、特定历史建筑、车站、矿坑或种植园的位置，也不绘历史边界。具体文献背景见本章有日期的里程碑。"
+    },
+    "sources": [
+      "S68",
+      "S4",
+      "S6",
+      "S7"
+    ]
+  },
+  {
+    "id": "loc-brussels",
+    "t": "1760",
+    "kind": "site",
+    "at": [
+      4.331371,
+      50.835263
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Brussels",
+      "zh": "布鲁塞尔"
+    },
+    "summary": {
+      "en": "Modern city reference, not a precise historical facility location.",
+      "zh": "现代城市参照，不是历史设施的精确位置。"
+    },
+    "detail": {
+      "en": "This marker locates Brussels using a modern gazetteer. It does not date the founding of the city, locate a particular historical building, station, mine or plantation, or draw a historical boundary. Use the chapter’s dated milestones for documentary context.",
+      "zh": "此点用现代地名资料定位布鲁塞尔，不表示建城年、特定历史建筑、车站、矿坑或种植园的位置，也不绘历史边界。具体文献背景见本章有日期的里程碑。"
+    },
+    "sources": [
+      "S68",
+      "S18",
+      "S19",
+      "S61",
+      "S63",
+      "S50"
+    ]
+  },
+  {
+    "id": "loc-nuremberg",
+    "t": "1760",
+    "kind": "site",
+    "at": [
+      11.079985,
+      49.449991
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Nuremberg",
+      "zh": "纽伦堡"
+    },
+    "summary": {
+      "en": "Modern city reference, not a precise historical facility location.",
+      "zh": "现代城市参照，不是历史设施的精确位置。"
+    },
+    "detail": {
+      "en": "This marker locates Nuremberg using a modern gazetteer. It does not date the founding of the city, locate a particular historical building, station, mine or plantation, or draw a historical boundary. Use the chapter’s dated milestones for documentary context.",
+      "zh": "此点用现代地名资料定位纽伦堡，不表示建城年、特定历史建筑、车站、矿坑或种植园的位置，也不绘历史边界。具体文献背景见本章有日期的里程碑。"
+    },
+    "sources": [
+      "S68",
+      "S18",
+      "S19",
+      "S61",
+      "S63",
+      "S50"
+    ]
+  },
+  {
+    "id": "loc-st-petersburg",
+    "t": "1760",
+    "kind": "site",
+    "at": [
+      30.314074,
+      59.94096
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Saint Petersburg",
+      "zh": "圣彼得堡"
+    },
+    "summary": {
+      "en": "Modern city reference, not a precise historical facility location.",
+      "zh": "现代城市参照，不是历史设施的精确位置。"
+    },
+    "detail": {
+      "en": "This marker locates Saint Petersburg using a modern gazetteer. It does not date the founding of the city, locate a particular historical building, station, mine or plantation, or draw a historical boundary. Use the chapter’s dated milestones for documentary context.",
+      "zh": "此点用现代地名资料定位圣彼得堡，不表示建城年、特定历史建筑、车站、矿坑或种植园的位置，也不绘历史边界。具体文献背景见本章有日期的里程碑。"
+    },
+    "sources": [
+      "S68",
+      "S21",
+      "S82",
+      "S63"
+    ]
+  },
+  {
+    "id": "loc-mumbai",
+    "t": "1760",
+    "kind": "site",
+    "at": [
+      72.875839,
+      19.068408
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Mumbai",
+      "zh": "孟买（当时 Bombay）"
+    },
+    "summary": {
+      "en": "Modern city reference, not a precise historical facility location.",
+      "zh": "现代城市参照，不是历史设施的精确位置。"
+    },
+    "detail": {
+      "en": "This marker locates Mumbai using a modern gazetteer. It does not date the founding of the city, locate a particular historical building, station, mine or plantation, or draw a historical boundary. Use the chapter’s dated milestones for documentary context.",
+      "zh": "此点用现代地名资料定位孟买（当时 Bombay），不表示建城年、特定历史建筑、车站、矿坑或种植园的位置，也不绘历史边界。具体文献背景见本章有日期的里程碑。"
+    },
+    "sources": [
+      "S68",
+      "S22",
+      "S49",
+      "S3",
+      "S24",
+      "S25"
+    ]
+  },
+  {
+    "id": "loc-chennai",
+    "t": "1760",
+    "kind": "site",
+    "at": [
+      80.278053,
+      13.091934
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Chennai",
+      "zh": "钦奈（当时 Madras）"
+    },
+    "summary": {
+      "en": "Modern city reference, not a precise historical facility location.",
+      "zh": "现代城市参照，不是历史设施的精确位置。"
+    },
+    "detail": {
+      "en": "This marker locates Chennai using a modern gazetteer. It does not date the founding of the city, locate a particular historical building, station, mine or plantation, or draw a historical boundary. Use the chapter’s dated milestones for documentary context.",
+      "zh": "此点用现代地名资料定位钦奈（当时 Madras），不表示建城年、特定历史建筑、车站、矿坑或种植园的位置，也不绘历史边界。具体文献背景见本章有日期的里程碑。"
+    },
+    "sources": [
+      "S68",
+      "S27",
+      "S29"
+    ]
+  },
+  {
+    "id": "loc-shanghai",
+    "t": "1760",
+    "kind": "site",
+    "at": [
+      121.434559,
+      31.218398
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Shanghai",
+      "zh": "上海"
+    },
+    "summary": {
+      "en": "Modern city reference, not a precise historical facility location.",
+      "zh": "现代城市参照，不是历史设施的精确位置。"
+    },
+    "detail": {
+      "en": "This marker locates Shanghai using a modern gazetteer. It does not date the founding of the city, locate a particular historical building, station, mine or plantation, or draw a historical boundary. Use the chapter’s dated milestones for documentary context.",
+      "zh": "此点用现代地名资料定位上海，不表示建城年、特定历史建筑、车站、矿坑或种植园的位置，也不绘历史边界。具体文献背景见本章有日期的里程碑。"
+    },
+    "sources": [
+      "S68",
+      "S25",
+      "S3",
+      "S24",
+      "S49"
+    ]
+  },
+  {
+    "id": "loc-tangshan",
+    "t": "1760",
+    "kind": "site",
+    "at": [
+      118.192431,
+      39.626283
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Tangshan",
+      "zh": "唐山"
+    },
+    "summary": {
+      "en": "Modern city reference, not a precise historical facility location.",
+      "zh": "现代城市参照，不是历史设施的精确位置。"
+    },
+    "detail": {
+      "en": "This marker locates Tangshan using a modern gazetteer. It does not date the founding of the city, locate a particular historical building, station, mine or plantation, or draw a historical boundary. Use the chapter’s dated milestones for documentary context.",
+      "zh": "此点用现代地名资料定位唐山，不表示建城年、特定历史建筑、车站、矿坑或种植园的位置，也不绘历史边界。具体文献背景见本章有日期的里程碑。"
+    },
+    "sources": [
+      "S68",
+      "S79"
+    ]
+  },
+  {
+    "id": "loc-yokohama",
+    "t": "1760",
+    "kind": "site",
+    "at": [
+      139.602021,
+      35.430656
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Yokohama",
+      "zh": "横滨"
+    },
+    "summary": {
+      "en": "Modern city reference, not a precise historical facility location.",
+      "zh": "现代城市参照，不是历史设施的精确位置。"
+    },
+    "detail": {
+      "en": "This marker locates Yokohama using a modern gazetteer. It does not date the founding of the city, locate a particular historical building, station, mine or plantation, or draw a historical boundary. Use the chapter’s dated milestones for documentary context.",
+      "zh": "此点用现代地名资料定位横滨，不表示建城年、特定历史建筑、车站、矿坑或种植园的位置，也不绘历史边界。具体文献背景见本章有日期的里程碑。"
+    },
+    "sources": [
+      "S68",
+      "S78",
+      "S24"
+    ]
+  },
+  {
+    "id": "loc-tokyo",
+    "t": "1760",
+    "kind": "site",
+    "at": [
+      139.749462,
+      35.686963
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Tokyo",
+      "zh": "东京"
+    },
+    "summary": {
+      "en": "Modern city reference, not a precise historical facility location.",
+      "zh": "现代城市参照，不是历史设施的精确位置。"
+    },
+    "detail": {
+      "en": "This marker locates Tokyo using a modern gazetteer. It does not date the founding of the city, locate a particular historical building, station, mine or plantation, or draw a historical boundary. Use the chapter’s dated milestones for documentary context.",
+      "zh": "此点用现代地名资料定位东京，不表示建城年、特定历史建筑、车站、矿坑或种植园的位置，也不绘历史边界。具体文献背景见本章有日期的里程碑。"
+    },
+    "sources": [
+      "S68",
+      "S78",
+      "S24"
+    ]
+  },
+  {
+    "id": "loc-singapore-city",
+    "t": "1760",
+    "kind": "site",
+    "at": [
+      103.853875,
+      1.294979
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Singapore",
+      "zh": "新加坡"
+    },
+    "summary": {
+      "en": "Modern city reference, not a precise historical facility location.",
+      "zh": "现代城市参照，不是历史设施的精确位置。"
+    },
+    "detail": {
+      "en": "This marker locates Singapore using a modern gazetteer. It does not date the founding of the city, locate a particular historical building, station, mine or plantation, or draw a historical boundary. Use the chapter’s dated milestones for documentary context.",
+      "zh": "此点用现代地名资料定位新加坡，不表示建城年、特定历史建筑、车站、矿坑或种植园的位置，也不绘历史边界。具体文献背景见本章有日期的里程碑。"
+    },
+    "sources": [
+      "S68",
+      "S28",
+      "S27",
+      "S29",
+      "S30",
+      "S32",
+      "S59",
+      "S44",
+      "S3",
+      "S24",
+      "S25",
+      "S49"
+    ]
+  },
+  {
+    "id": "loc-port-said",
+    "t": "1760",
+    "kind": "site",
+    "at": [
+      32.290008,
+      31.25999
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Port Said",
+      "zh": "塞得港"
+    },
+    "summary": {
+      "en": "Modern city reference, not a precise historical facility location.",
+      "zh": "现代城市参照，不是历史设施的精确位置。"
+    },
+    "detail": {
+      "en": "This marker locates Port Said using a modern gazetteer. It does not date the founding of the city, locate a particular historical building, station, mine or plantation, or draw a historical boundary. Use the chapter’s dated milestones for documentary context.",
+      "zh": "此点用现代地名资料定位塞得港，不表示建城年、特定历史建筑、车站、矿坑或种植园的位置，也不绘历史边界。具体文献背景见本章有日期的里程碑。"
+    },
+    "sources": [
+      "S68",
+      "S28"
+    ]
+  },
+  {
+    "id": "loc-suez-city",
+    "t": "1760",
+    "kind": "site",
+    "at": [
+      32.549941,
+      30.004976
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Suez",
+      "zh": "苏伊士"
+    },
+    "summary": {
+      "en": "Modern city reference, not a precise historical facility location.",
+      "zh": "现代城市参照，不是历史设施的精确位置。"
+    },
+    "detail": {
+      "en": "This marker locates Suez using a modern gazetteer. It does not date the founding of the city, locate a particular historical building, station, mine or plantation, or draw a historical boundary. Use the chapter’s dated milestones for documentary context.",
+      "zh": "此点用现代地名资料定位苏伊士，不表示建城年、特定历史建筑、车站、矿坑或种植园的位置，也不绘历史边界。具体文献背景见本章有日期的里程碑。"
+    },
+    "sources": [
+      "S68",
+      "S28"
+    ]
+  },
+  {
+    "id": "loc-ipoh",
+    "t": "1760",
+    "kind": "site",
+    "at": [
+      101.064983,
+      4.599989
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Ipoh",
+      "zh": "怡保"
+    },
+    "summary": {
+      "en": "Modern city reference, not a precise historical facility location.",
+      "zh": "现代城市参照，不是历史设施的精确位置。"
+    },
+    "detail": {
+      "en": "This marker locates Ipoh using a modern gazetteer. It does not date the founding of the city, locate a particular historical building, station, mine or plantation, or draw a historical boundary. Use the chapter’s dated milestones for documentary context.",
+      "zh": "此点用现代地名资料定位怡保，不表示建城年、特定历史建筑、车站、矿坑或种植园的位置，也不绘历史边界。具体文献背景见本章有日期的里程碑。"
+    },
+    "sources": [
+      "S68",
+      "S59",
+      "S44"
+    ]
+  },
+  {
+    "id": "loc-taiping",
+    "t": "1760",
+    "kind": "site",
+    "at": [
+      100.719991,
+      4.86496
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Taiping",
+      "zh": "太平"
+    },
+    "summary": {
+      "en": "Modern city reference, not a precise historical facility location.",
+      "zh": "现代城市参照，不是历史设施的精确位置。"
+    },
+    "detail": {
+      "en": "This marker locates Taiping using a modern gazetteer. It does not date the founding of the city, locate a particular historical building, station, mine or plantation, or draw a historical boundary. Use the chapter’s dated milestones for documentary context.",
+      "zh": "此点用现代地名资料定位太平，不表示建城年、特定历史建筑、车站、矿坑或种植园的位置，也不绘历史边界。具体文献背景见本章有日期的里程碑。"
+    },
+    "sources": [
+      "S68",
+      "S59"
+    ]
+  },
+  {
+    "id": "loc-kuala-lumpur",
+    "t": "1760",
+    "kind": "site",
+    "at": [
+      101.688699,
+      3.139797
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Kuala Lumpur",
+      "zh": "吉隆坡"
+    },
+    "summary": {
+      "en": "Modern city reference, not a precise historical facility location.",
+      "zh": "现代城市参照，不是历史设施的精确位置。"
+    },
+    "detail": {
+      "en": "This marker locates Kuala Lumpur using a modern gazetteer. It does not date the founding of the city, locate a particular historical building, station, mine or plantation, or draw a historical boundary. Use the chapter’s dated milestones for documentary context.",
+      "zh": "此点用现代地名资料定位吉隆坡，不表示建城年、特定历史建筑、车站、矿坑或种植园的位置，也不绘历史边界。具体文献背景见本章有日期的里程碑。"
+    },
+    "sources": [
+      "S68"
+    ]
+  },
+  {
+    "id": "loc-new-orleans",
+    "t": "1760",
+    "kind": "site",
+    "at": [
+      -90.088368,
+      29.968908
+    ],
+    "importance": 1,
+    "title": {
+      "en": "New Orleans",
+      "zh": "新奥尔良"
+    },
+    "summary": {
+      "en": "Modern city reference, not a precise historical facility location.",
+      "zh": "现代城市参照，不是历史设施的精确位置。"
+    },
+    "detail": {
+      "en": "This marker locates New Orleans using a modern gazetteer. It does not date the founding of the city, locate a particular historical building, station, mine or plantation, or draw a historical boundary. Use the chapter’s dated milestones for documentary context.",
+      "zh": "此点用现代地名资料定位新奥尔良，不表示建城年、特定历史建筑、车站、矿坑或种植园的位置，也不绘历史边界。具体文献背景见本章有日期的里程碑。"
+    },
+    "sources": [
+      "S68",
+      "S44",
+      "S70"
+    ]
+  },
+  {
+    "id": "loc-mechelen",
+    "t": "1760",
+    "kind": "site",
+    "at": [
+      4.47762,
+      51.02574
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Mechelen",
+      "zh": "梅赫伦"
+    },
+    "summary": {
+      "en": "Modern city reference, not a precise historical facility location.",
+      "zh": "现代城市参照，不是历史设施的精确位置。"
+    },
+    "detail": {
+      "en": "This marker locates Mechelen using a modern gazetteer. It does not date the founding of the city, locate a particular historical building, station, mine or plantation, or draw a historical boundary. Use the chapter’s dated milestones for documentary context.",
+      "zh": "此点用现代地名资料定位梅赫伦，不表示建城年、特定历史建筑、车站、矿坑或种植园的位置，也不绘历史边界。具体文献背景见本章有日期的里程碑。"
+    },
+    "sources": [
+      "S72",
+      "S18",
+      "S19",
+      "S61"
+    ]
+  },
+  {
+    "id": "loc-saint-etienne",
+    "t": "1760",
+    "kind": "site",
+    "at": [
+      4.39,
+      45.43389
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Saint-Étienne",
+      "zh": "圣艾蒂安"
+    },
+    "summary": {
+      "en": "Modern city reference, not a precise historical facility location.",
+      "zh": "现代城市参照，不是历史设施的精确位置。"
+    },
+    "detail": {
+      "en": "This marker locates Saint-Étienne using a modern gazetteer. It does not date the founding of the city, locate a particular historical building, station, mine or plantation, or draw a historical boundary. Use the chapter’s dated milestones for documentary context.",
+      "zh": "此点用现代地名资料定位圣艾蒂安，不表示建城年、特定历史建筑、车站、矿坑或种植园的位置，也不绘历史边界。具体文献背景见本章有日期的里程碑。"
+    },
+    "sources": [
+      "S72",
+      "S17",
+      "S63"
+    ]
+  },
+  {
+    "id": "loc-stockton",
+    "t": "1760",
+    "kind": "site",
+    "at": [
+      -1.3187,
+      54.56848
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Stockton-on-Tees",
+      "zh": "斯托克顿"
+    },
+    "summary": {
+      "en": "Modern city reference, not a precise historical facility location.",
+      "zh": "现代城市参照，不是历史设施的精确位置。"
+    },
+    "detail": {
+      "en": "This marker locates Stockton-on-Tees using a modern gazetteer. It does not date the founding of the city, locate a particular historical building, station, mine or plantation, or draw a historical boundary. Use the chapter’s dated milestones for documentary context.",
+      "zh": "此点用现代地名资料定位斯托克顿，不表示建城年、特定历史建筑、车站、矿坑或种植园的位置，也不绘历史边界。具体文献背景见本章有日期的里程碑。"
+    },
+    "sources": [
+      "S72"
+    ]
+  },
+  {
+    "id": "loc-dudley",
+    "t": "1760",
+    "kind": "site",
+    "at": [
+      -2.08333,
+      52.5
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Dudley",
+      "zh": "达德利"
+    },
+    "summary": {
+      "en": "Modern city reference, not a precise historical facility location.",
+      "zh": "现代城市参照，不是历史设施的精确位置。"
+    },
+    "detail": {
+      "en": "This marker locates Dudley using a modern gazetteer. It does not date the founding of the city, locate a particular historical building, station, mine or plantation, or draw a historical boundary. Use the chapter’s dated milestones for documentary context. Newcomen’s practical mine-pumping engine was erected near Dudley in 1712. Condensing steam reduced cylinder pressure; atmospheric pressure drove the piston down.",
+      "zh": "此点用现代地名资料定位达德利，不表示建城年、特定历史建筑、车站、矿坑或种植园的位置，也不绘历史边界。具体文献背景见本章有日期的里程碑。 1712年，纽科门实用抽水机在达德利附近建成。蒸汽凝结使汽缸压力降低，大气压力推动活塞向下。"
+    },
+    "sources": [
+      "S72",
+      "S4",
+      "S6"
+    ]
+  },
+  {
+    "id": "loc-darlington",
+    "t": "1760",
+    "kind": "site",
+    "at": [
+      -1.55039,
+      54.52429
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Darlington",
+      "zh": "达灵顿"
+    },
+    "summary": {
+      "en": "Modern city reference, not a precise historical facility location.",
+      "zh": "现代城市参照，不是历史设施的精确位置。"
+    },
+    "detail": {
+      "en": "This marker locates Darlington using a modern gazetteer. It does not date the founding of the city, locate a particular historical building, station, mine or plantation, or draw a historical boundary. Use the chapter’s dated milestones for documentary context.",
+      "zh": "此点用现代地名资料定位达灵顿，不表示建城年、特定历史建筑、车站、矿坑或种植园的位置，也不绘历史边界。具体文献背景见本章有日期的里程碑。"
+    },
+    "sources": [
+      "S72"
+    ]
+  },
+  {
+    "id": "loc-pawtucket",
+    "t": "1760",
+    "kind": "site",
+    "at": [
+      -71.38256,
+      41.87871
+    ],
+    "importance": 1,
+    "title": {
+      "en": "Pawtucket",
+      "zh": "波塔基特"
+    },
+    "summary": {
+      "en": "Modern city reference, not a precise historical facility location.",
+      "zh": "现代城市参照，不是历史设施的精确位置。"
+    },
+    "detail": {
+      "en": "This marker locates Pawtucket using a modern gazetteer. It does not date the founding of the city, locate a particular historical building, station, mine or plantation, or draw a historical boundary. Use the chapter’s dated milestones for documentary context.",
+      "zh": "此点用现代地名资料定位波塔基特，不表示建城年、特定历史建筑、车站、矿坑或种植园的位置，也不绘历史边界。具体文献背景见本章有日期的里程碑。"
+    },
+    "sources": [
+      "S72",
+      "S20"
+    ]
+  },
+  {
+    "id": "ev-watt-model",
+    "t": "1765",
+    "kind": "milestone",
+    "at": [
+      -4.239101,
+      55.86227
+    ],
+    "importance": 2,
+    "title": {
+      "en": "Watt’s condenser model",
+      "zh": "瓦特的冷凝器模型"
+    },
+    "summary": {
+      "en": "By 1765 Watt had developed a working model using a separate condenser.",
+      "zh": "到1765年，瓦特已做出采用分离式冷凝器的工作模型。"
+    },
+    "detail": {
+      "en": "Regional location reference at Glasgow; not the precise location of this historical facility or event. By 1765 Watt had developed a working model using a separate condenser. A model was a different stage from the later patent and commercial engines.",
+      "zh": "地区定位参照为格拉斯哥，不是该历史设施或事件的精确坐标。到1765年，瓦特已做出采用分离式冷凝器的工作模型。模型、后来的专利与商业机器，是不同的环节。"
+    },
+    "sources": [
+      "S6"
+    ]
+  },
+  {
+    "id": "ev-watt-patent",
+    "t": "1769-01-05",
+    "kind": "milestone",
+    "at": [
+      -4.239101,
+      55.86227
+    ],
+    "importance": 2,
+    "title": {
+      "en": "Separate-condenser patent",
+      "zh": "分离式冷凝器专利"
+    },
+    "summary": {
+      "en": "Watt’s separate-condenser patent was granted on 5 January 1769.",
+      "zh": "瓦特的分离式冷凝器专利于1769年1月5日获批。"
+    },
+    "detail": {
+      "en": "Regional location reference at Glasgow; not the precise location of this historical facility or event. Watt’s separate-condenser patent was granted on 5 January 1769. Steam could condense in a separate cold vessel while the working cylinder stayed hot.",
+      "zh": "地区定位参照为格拉斯哥，不是该历史设施或事件的精确坐标。瓦特的分离式冷凝器专利于1769年1月5日获批。蒸汽在另外的冷容器中凝结，工作汽缸则可保持热。"
+    },
+    "sources": [
+      "S7"
+    ]
+  },
+  {
+    "id": "ev-jenny-patent",
+    "t": "1770",
+    "kind": "milestone",
+    "at": [
+      -1.165706,
+      52.941084
+    ],
+    "importance": 2,
+    "title": {
+      "en": "Jenny patent",
+      "zh": "珍妮纺纱机专利"
+    },
+    "summary": {
+      "en": "Hargreaves patented the spinning jenny in 1770.",
+      "zh": "哈格里夫斯于1770年取得珍妮纺纱机专利。"
+    },
+    "detail": {
+      "en": "Regional location reference at Nottingham; not the precise location of this historical facility or event. Hargreaves patented the spinning jenny in 1770. It made yarn; a weaving shuttle carried weft across warp. The patent date is not a shared invention date for every textile machine.",
+      "zh": "地区定位参照为诺丁汉，不是该历史设施或事件的精确坐标。哈格里夫斯于1770年取得珍妮纺纱机专利。它用来纺纱；织布梭子则把纬纱带过经纱。不能把一个专利年份用作所有纺织机器的发明年。"
+    },
+    "sources": [
+      "S13"
+    ]
+  },
+  {
+    "id": "ev-commercial-watt",
+    "t": "1776",
+    "kind": "milestone",
+    "at": [
+      -1.921943,
+      52.47692
+    ],
+    "importance": 2,
+    "title": {
+      "en": "Commercial engines operating",
+      "zh": "商业蒸汽机投入运行"
+    },
+    "summary": {
+      "en": "Commercial Boulton and Watt engines were operating by 1776.",
+      "zh": "到1776年，博尔顿与瓦特的商业用蒸汽机已在运转。"
+    },
+    "detail": {
+      "en": "Regional location reference at Birmingham; not the precise location of this historical facility or event. Commercial Boulton and Watt engines were operating by 1776. Birmingham is a regional anchor for the engineering story, not the measured position of each engine.",
+      "zh": "地区定位参照为伯明翰，不是该历史设施或事件的精确坐标。到1776年，博尔顿与瓦特的商业用蒸汽机已在运转。伯明翰帮助定位机器制造的故事，不表示每一台机器的实测位置。"
+    },
+    "sources": [
+      "S6"
+    ]
+  },
+  {
+    "id": "ev-pawtucket-machinery",
+    "t": "1790-12",
+    "kind": "milestone",
+    "at": [
+      -71.38256,
+      41.87871
+    ],
+    "importance": 2,
+    "title": {
+      "en": "Cotton machinery running",
+      "zh": "棉纺机器运转"
+    },
+    "summary": {
+      "en": "Slater got cotton-spinning machinery running in Pawtucket in December 1790.",
+      "zh": "斯莱特于1790年12月在波塔基特让棉纺机器运转，使用的是水力。"
+    },
+    "detail": {
+      "en": "Regional location reference at Pawtucket; not the precise location of this historical facility or event. Slater got cotton-spinning machinery running in Pawtucket in December 1790. It used water power. The surviving Slater Mill building dates to 1793.",
+      "zh": "地区定位参照为波塔基特，不是该历史设施或事件的精确坐标。斯莱特于1790年12月在波塔基特让棉纺机器运转，使用的是水力。今天保留的斯莱特厂房建于1793年。"
+    },
+    "sources": [
+      "S20"
+    ]
+  },
+  {
+    "id": "ev-slater-mill-building",
+    "t": "1793",
+    "kind": "milestone",
+    "at": [
+      -71.38256,
+      41.87871
+    ],
+    "importance": 2,
+    "title": {
+      "en": "Slater Mill building and workers",
+      "zh": "斯莱特厂房与工人"
+    },
+    "summary": {
+      "en": "The surviving Slater Mill building dates to 1793.",
+      "zh": "今天保留的斯莱特厂房建于1793年。"
+    },
+    "detail": {
+      "en": "Regional location reference at Pawtucket; not the precise location of this historical facility or event. The surviving Slater Mill building dates to 1793. Children worked in this early factory system for wages and under employers’ control; a factory did not have to be steam-powered.",
+      "zh": "地区定位参照为波塔基特，不是该历史设施或事件的精确坐标。今天保留的斯莱特厂房建于1793年。这套早期工厂制度雇用儿童；他们领取工资，也受雇主控制。工厂未必使用蒸汽动力。"
+    },
+    "sources": [
+      "S20"
+    ]
+  },
+  {
+    "id": "ev-stockton-darlington",
+    "t": "1825",
+    "kind": "milestone",
+    "at": [
+      -1.55039,
+      54.52429
+    ],
+    "importance": 2,
+    "title": {
+      "en": "Stockton and Darlington Railway",
+      "zh": "斯托克顿—达灵顿铁路"
+    },
+    "summary": {
+      "en": "The Stockton and Darlington Railway opened in 1825.",
+      "zh": "斯托克顿—达灵顿铁路于1825年开通。"
+    },
+    "detail": {
+      "en": "Regional location reference at Darlington; not the precise location of this historical facility or event. The Stockton and Darlington Railway opened in 1825. This city reference does not draw its route or locate a precise historical station.",
+      "zh": "地区定位参照为达灵顿，不是该历史设施或事件的精确坐标。斯托克顿—达灵顿铁路于1825年开通。这个城市参照点不绘线路，也不标历史车站的精确位置。"
+    },
+    "sources": [
+      "S76",
+      "S77"
+    ]
+  },
+  {
+    "id": "ev-rocket-rainhill",
+    "t": "1829",
+    "kind": "milestone",
+    "at": [
+      -2.961934,
+      53.405068
+    ],
+    "importance": 2,
+    "title": {
+      "en": "Rocket at Rainhill",
+      "zh": "Rocket 与雷恩希尔试验"
+    },
+    "summary": {
+      "en": "Rocket was built by Robert Stephenson & Co.",
+      "zh": "Rocket由Robert Stephenson & Co.于1829年制造，并在雷恩希尔试验中获胜。"
+    },
+    "detail": {
+      "en": "Regional location reference at Liverpool; not the precise location of this historical facility or event. Rocket was built by Robert Stephenson & Co. in 1829 and won the Rainhill trials. Its early form had a 0-2-2 wheel arrangement. The preserved locomotive was later substantially rebuilt and is incomplete. The illustration is an interpretive reconstruction, not an original construction drawing.",
+      "zh": "地区定位参照为利物浦，不是该历史设施或事件的精确坐标。Rocket由Robert Stephenson & Co.于1829年制造，并在雷恩希尔试验中获胜。它早期采用0-2-2车轮配置。现存机车后来经过大幅改建，而且并不完整。插图是解释性复原，不是原始精密工程图。"
+    },
+    "sources": [
+      "S65",
+      "S66",
+      "S67"
+    ]
+  },
+  {
+    "id": "ev-liverpool-manchester",
+    "t": "1830",
+    "kind": "milestone",
+    "at": [
+      -2.248685,
+      53.47532
+    ],
+    "importance": 2,
+    "title": {
+      "en": "Liverpool and Manchester Railway",
+      "zh": "利物浦—曼彻斯特铁路"
+    },
+    "summary": {
+      "en": "The Liverpool and Manchester Railway opened in 1830, carrying steam-hauled passengers and freight.",
+      "zh": "利物浦—曼彻斯特铁路于1830年开通，以蒸汽机车运送旅客与货物。"
+    },
+    "detail": {
+      "en": "Regional location reference at Manchester; not the precise location of this historical facility or event. The Liverpool and Manchester Railway opened in 1830, carrying steam-hauled passengers and freight. Its two city references are not a mapped railway route.",
+      "zh": "地区定位参照为曼彻斯特，不是该历史设施或事件的精确坐标。利物浦—曼彻斯特铁路于1830年开通，以蒸汽机车运送旅客与货物。地图上的两个城市参照点，不是一条测绘线路。"
+    },
+    "sources": [
+      "S76",
+      "S77"
+    ]
+  },
+  {
+    "id": "ev-factory-act",
+    "t": "1833",
+    "kind": "milestone",
+    "at": [
+      -2.248685,
+      53.47532
+    ],
+    "importance": 2,
+    "title": {
+      "en": "Factory Act, national context",
+      "zh": "工厂法，全国背景"
+    },
+    "summary": {
+      "en": "The 1833 Factory Act restricted child work in covered textile mills.",
+      "zh": "1833年《工厂法》限制部分纺织厂中的童工，规定两小时学习，并设四名监察员。"
+    },
+    "detail": {
+      "en": "Regional location reference at Manchester; not the precise location of this historical facility or event. The 1833 Factory Act restricted child work in covered textile mills. It provided two hours of schooling and four inspectors. Sources from 1836 record breaches: the law did not end child labour. Manchester is a reading anchor for a law with national scope, not its place of passage.",
+      "zh": "地区定位参照为曼彻斯特，不是该历史设施或事件的精确坐标。1833年《工厂法》限制部分纺织厂中的童工，规定两小时学习，并设四名监察员。1836年的记录仍显示违规，立法没有终结童工。曼彻斯特是全国性法律的阅读锚点，不表示法案在此通过。"
+    },
+    "sources": [
+      "S34",
+      "S80"
+    ]
+  },
+  {
+    "id": "ev-belgium-rail",
+    "t": "1835-05-05",
+    "kind": "milestone",
+    "at": [
+      4.47762,
+      51.02574
+    ],
+    "importance": 2,
+    "title": {
+      "en": "Brussels–Mechelen service",
+      "zh": "布鲁塞尔—梅赫伦铁路"
+    },
+    "summary": {
+      "en": "The Brussels–Mechelen service opened on 5 May 1835.",
+      "zh": "布鲁塞尔—梅赫伦铁路于1835年5月5日开通。"
+    },
+    "detail": {
+      "en": "Regional location reference at Mechelen; not the precise location of this historical facility or event. The Brussels–Mechelen service opened on 5 May 1835. The Belgium-built Le Belge followed that December. A railway opening is not the date of a whole country’s industrialisation.",
+      "zh": "地区定位参照为梅赫伦，不是该历史设施或事件的精确坐标。布鲁塞尔—梅赫伦铁路于1835年5月5日开通。同年12月，比利时制造的Le Belge机车随后出现。铁路开通日不是整个国家工业化的日期。"
+    },
+    "sources": [
+      "S18"
+    ]
+  },
+  {
+    "id": "ev-nuremberg-rail",
+    "t": "1835",
+    "kind": "milestone",
+    "at": [
+      11.079985,
+      49.449991
+    ],
+    "importance": 2,
+    "title": {
+      "en": "Nuremberg–Fürth railway",
+      "zh": "纽伦堡—菲尔特铁路"
+    },
+    "summary": {
+      "en": "The Nuremberg–Fürth railway opened in 1835 in the German states.",
+      "zh": "纽伦堡—菲尔特铁路于1835年在德意志诸邦开通。"
+    },
+    "detail": {
+      "en": "Regional location reference at Nuremberg; not the precise location of this historical facility or event. The Nuremberg–Fürth railway opened in 1835 in the German states. Regional origins and institutional changes mattered; these histories were not a single national starting event.",
+      "zh": "地区定位参照为纽伦堡，不是该历史设施或事件的精确坐标。纽伦堡—菲尔特铁路于1835年在德意志诸邦开通。各地基础与制度变化都很重要，不能把这些经历合成一次全国性的起点。"
+    },
+    "sources": [
+      "S19"
+    ]
+  },
+  {
+    "id": "ev-russia-rail",
+    "t": "1837",
+    "kind": "milestone",
+    "at": [
+      30.314074,
+      59.94096
+    ],
+    "importance": 2,
+    "title": {
+      "en": "Tsarskoye Selo railway",
+      "zh": "皇村铁路"
+    },
+    "summary": {
+      "en": "The Tsarskoye Selo public railway officially opened on 30 October 1837 Old Style, corresponding to 11 November New Style.",
+      "zh": "皇村公共铁路的正式开通日为俄历1837年10月30日，相当于公历11月11日。"
+    },
+    "detail": {
+      "en": "Regional location reference at Saint Petersburg; not the precise location of this historical facility or event. The Tsarskoye Selo public railway officially opened on 30 October 1837 Old Style, corresponding to 11 November New Style. The timeline uses the year to avoid mixing calendar systems.",
+      "zh": "地区定位参照为圣彼得堡，不是该历史设施或事件的精确坐标。皇村公共铁路的正式开通日为俄历1837年10月30日，相当于公历11月11日。时间轴采用年份，避免混用历法。"
+    },
+    "sources": [
+      "S21"
+    ]
+  },
+  {
+    "id": "ev-india-passenger",
+    "t": "1853-04-16",
+    "kind": "milestone",
+    "at": [
+      72.875839,
+      19.068408
+    ],
+    "importance": 2,
+    "title": {
+      "en": "Bori Bunder–Thane passengers",
+      "zh": "博里本德—塔纳客运"
+    },
+    "summary": {
+      "en": "The Bori Bunder–Thane passenger train began on 16 April 1853.",
+      "zh": "博里本德—塔纳客运列车于1853年4月16日开通。"
+    },
+    "detail": {
+      "en": "Regional location reference at Mumbai; not the precise location of this historical facility or event. The Bori Bunder–Thane passenger train began on 16 April 1853. This particular service did not begin all industrial activity in India. Mumbai is a modern city anchor, not a precise station coordinate.",
+      "zh": "地区定位参照为孟买（当时 Bombay），不是该历史设施或事件的精确坐标。博里本德—塔纳客运列车于1853年4月16日开通。这项具体服务并不标志印度全部工业活动的开始。孟买是现代城市参照，不是精确车站坐标。"
+    },
+    "sources": [
+      "S22"
+    ]
+  },
+  {
+    "id": "ev-us-census-enslavement",
+    "t": "1860",
+    "kind": "milestone",
+    "at": [
+      -90.088368,
+      29.968908
+    ],
+    "importance": 2,
+    "title": {
+      "en": "US census context",
+      "zh": "美国人口普查背景"
+    },
+    "summary": {
+      "en": "The 1860 United States census counted 3,953,760 enslaved people nationally, about four million.",
+      "zh": "1860年美国人口普查记录，全国被奴役者为3,953,760人，约四百万人。"
+    },
+    "detail": {
+      "en": "Regional location reference at New Orleans; not the precise location of this historical facility or event. The 1860 United States census counted 3,953,760 enslaved people nationally, about four million. They did not all work in cotton. This is neither a death toll nor the population of New Orleans: the city anchors a cotton economy connected to enslaved labour. Enslaved people were treated as property and compelled to work.",
+      "zh": "地区定位参照为新奥尔良，不是该历史设施或事件的精确坐标。1860年美国人口普查记录，全国被奴役者为3,953,760人，约四百万人。他们并非全部从事棉花生产。这不是死亡人数，也不是新奥尔良的人口；城市点用来定位与奴隶劳动相连的棉业。被奴役者被当作财产，并遭到强迫劳动。"
+    },
+    "sources": [
+      "S70",
+      "S44"
+    ]
+  },
+  {
+    "id": "ev-jiangnan-arsenal",
+    "t": "1865",
+    "kind": "milestone",
+    "at": [
+      121.434559,
+      31.218398
+    ],
+    "importance": 2,
+    "title": {
+      "en": "Jiangnan Arsenal",
+      "zh": "江南制造局"
+    },
+    "summary": {
+      "en": "The Jiangnan Arsenal was established in Shanghai in 1865.",
+      "zh": "江南制造局于1865年在上海成立，制造武器、机器与船舶，也支持技术翻译。"
+    },
+    "detail": {
+      "en": "Regional location reference at Shanghai; not the precise location of this historical facility or event. The Jiangnan Arsenal was established in Shanghai in 1865. It made weapons, machinery and ships and supported technical translation. The city marker does not draw the arsenal’s boundary.",
+      "zh": "地区定位参照为上海，不是该历史设施或事件的精确坐标。江南制造局于1865年在上海成立，制造武器、机器与船舶，也支持技术翻译。城市点不表示制造局的厂界。"
+    },
+    "sources": [
+      "S25"
+    ]
+  },
+  {
+    "id": "ev-suez-opening",
+    "t": "1869-11-17",
+    "kind": "milestone",
+    "at": [
+      32.549941,
+      30.004976
+    ],
+    "importance": 2,
+    "title": {
+      "en": "Suez Canal opens",
+      "zh": "苏伊士运河开通"
+    },
+    "summary": {
+      "en": "The Suez Canal opened on 17 November 1869, linking the Mediterranean and Red seas.",
+      "zh": "苏伊士运河于1869年11月17日开通，连起地中海与红海。"
+    },
+    "detail": {
+      "en": "Regional location reference at Suez; not the precise location of this historical facility or event. The Suez Canal opened on 17 November 1869, linking the Mediterranean and Red seas. Port Said and Suez are modern endpoint references; no surveyed historical canal line is drawn.",
+      "zh": "地区定位参照为苏伊士，不是该历史设施或事件的精确坐标。苏伊士运河于1869年11月17日开通，连起地中海与红海。塞得港与苏伊士只是现代城市端点参照，地图没有绘制经过测绘的历史渠线。"
+    },
+    "sources": [
+      "S28"
+    ]
+  },
+  {
+    "id": "ev-new-harbour-record",
+    "t": "1869",
+    "kind": "milestone",
+    "at": [
+      103.853875,
+      1.294979
+    ],
+    "importance": 2,
+    "title": {
+      "en": "Annual New Harbour record",
+      "zh": "新港全年记录"
+    },
+    "summary": {
+      "en": "NLB reports 99 steamers and 65 sailing vessels visiting New Harbour wharves in 1869, and 541 steamers and 91 sailing vessels in 1879.",
+      "zh": "国家图书馆管理局记录：1869年到访新港码头的蒸汽船为99艘、帆船为65艘；1879年分别为541艘与91艘。"
+    },
+    "detail": {
+      "en": "Regional location reference at Singapore; not the precise location of this historical facility or event. NLB reports 99 steamers and 65 sailing vessels visiting New Harbour wharves in 1869, and 541 steamers and 91 sailing vessels in 1879. These are annual wharf records, not a global fleet count, not all Singapore shipping, and not a deduplicated list of vessel identities. Deeper berths and steam shipping helped shift port activity towards New Harbour.",
+      "zh": "地区定位参照为新加坡，不是该历史设施或事件的精确坐标。国家图书馆管理局记录：1869年到访新港码头的蒸汽船为99艘、帆船为65艘；1879年分别为541艘与91艘。这是按年统计的码头记录，不是全球船队数、新加坡全部航运或去重后的船舶身份清单。深水泊位与蒸汽航运推动港务向新港转移。"
+    },
+    "sources": [
+      "S28"
+    ]
+  },
+  {
+    "id": "ev-cable-completion",
+    "t": "1870-12-31",
+    "kind": "milestone",
+    "at": [
+      103.853875,
+      1.294979
+    ],
+    "importance": 2,
+    "title": {
+      "en": "Madras–Singapore cable completed",
+      "zh": "马德拉斯—新加坡电缆完成"
+    },
+    "summary": {
+      "en": "The Madras–Singapore telegraph cable was completed on 31 December 1870.",
+      "zh": "马德拉斯—新加坡电报电缆于1870年12月31日完成，服务通告在1871年1月6日刊登。"
+    },
+    "detail": {
+      "en": "Regional location reference at Singapore; not the precise location of this historical facility or event. The Madras–Singapore telegraph cable was completed on 31 December 1870. Service was advertised on 6 January 1871. Chennai and Singapore are city endpoint references, not a mapped cable course. Signals travelled electrically, not as steam inside the cable.",
+      "zh": "地区定位参照为新加坡，不是该历史设施或事件的精确坐标。马德拉斯—新加坡电报电缆于1870年12月31日完成，服务通告在1871年1月6日刊登。钦奈与新加坡只是城市端点参照，不是电缆敷设路线。信号靠电传送，不是蒸汽在电缆里流动。"
+    },
+    "sources": [
+      "S29"
+    ]
+  },
+  {
+    "id": "ev-cable-advertised",
+    "t": "1871-01-06",
+    "kind": "milestone",
+    "at": [
+      103.853875,
+      1.294979
+    ],
+    "importance": 2,
+    "title": {
+      "en": "Cable service advertised",
+      "zh": "电缆服务通告"
+    },
+    "summary": {
+      "en": "Cable service was advertised on 6 January 1871, after completion on 31 December 1870.",
+      "zh": "电缆在1870年12月31日完成后，于1871年1月6日刊登服务通告。"
+    },
+    "detail": {
+      "en": "Regional location reference at Singapore; not the precise location of this historical facility or event. Cable service was advertised on 6 January 1871, after completion on 31 December 1870. Regional gutta-percha insulated submarine cables. It is distinct here from plantation rubber.",
+      "zh": "地区定位参照为新加坡，不是该历史设施或事件的精确坐标。电缆在1870年12月31日完成后，于1871年1月6日刊登服务通告。这一区域出产的古塔胶用作海底电缆绝缘材料，本题将它与种植园橡胶分开。"
+    },
+    "sources": [
+      "S29"
+    ]
+  },
+  {
+    "id": "ev-japan-rail",
+    "t": "1872",
+    "kind": "milestone",
+    "at": [
+      139.602021,
+      35.430656
+    ],
+    "importance": 2,
+    "title": {
+      "en": "Shimbashi–Yokohama railway",
+      "zh": "新桥—横滨铁路"
+    },
+    "summary": {
+      "en": "The Shimbashi–Yokohama railway opened in 1872.",
+      "zh": "新桥—横滨铁路于1872年开通。"
+    },
+    "detail": {
+      "en": "Regional location reference at Yokohama; not the precise location of this historical facility or event. The Shimbashi–Yokohama railway opened in 1872. Japanese industrial transformation across the 1850s–1910 involved imported expertise and adaptation by Japanese engineers. A single opening did not transform every sector at once.",
+      "zh": "地区定位参照为横滨，不是该历史设施或事件的精确坐标。新桥—横滨铁路于1872年开通。1850年代至1910年间，日本的工业变化包括引进专业知识，以及日本工程师的改造运用。一条铁路开通，不表示所有行业同时转型。"
+    },
+    "sources": [
+      "S78",
+      "S24"
+    ]
+  },
+  {
+    "id": "ev-rubber-arrival",
+    "t": "1877",
+    "kind": "milestone",
+    "at": [
+      103.853875,
+      1.294979
+    ],
+    "importance": 2,
+    "title": {
+      "en": "Rubber seedlings arrive",
+      "zh": "橡胶苗抵达"
+    },
+    "summary": {
+      "en": "Rubber seedlings reached Singapore in 1877.",
+      "zh": "橡胶苗于1877年抵达新加坡。"
+    },
+    "detail": {
+      "en": "Regional location reference at Singapore; not the precise location of this historical facility or event. Rubber seedlings reached Singapore in 1877. Ridley became director of the Botanic Gardens in 1888. These are distinct stages, not a single event; this marker draws no historical plantation boundary.",
+      "zh": "地区定位参照为新加坡，不是该历史设施或事件的精确坐标。橡胶苗于1877年抵达新加坡。Ridley在1888年出任植物园负责人。这是不同阶段，不能合成一次事件；此点也不绘历史种植园范围。"
+    },
+    "sources": [
+      "S30"
+    ]
+  },
+  {
+    "id": "ev-tangxu-rail",
+    "t": "1881",
+    "kind": "milestone",
+    "at": [
+      118.192431,
+      39.626283
+    ],
+    "importance": 2,
+    "title": {
+      "en": "Tangshan–Xugezhuang construction",
+      "zh": "唐山—胥各庄铁路建设"
+    },
+    "summary": {
+      "en": "The Tangshan–Xugezhuang railway was constructed in 1881.",
+      "zh": "唐山—胥各庄铁路在1881年建设。"
+    },
+    "detail": {
+      "en": "Regional location reference at Tangshan; not the precise location of this historical facility or event. The Tangshan–Xugezhuang railway was constructed in 1881. No exact opening day or claim to a national industrial starting date is inferred.",
+      "zh": "地区定位参照为唐山，不是该历史设施或事件的精确坐标。唐山—胥各庄铁路在1881年建设。这里不补出精确开通日，也不把它说成全国工业的起点。"
+    },
+    "sources": [
+      "S79"
+    ]
+  },
+  {
+    "id": "ev-pulau-brani-smelter",
+    "t": "1890",
+    "kind": "milestone",
+    "at": [
+      103.853875,
+      1.294979
+    ],
+    "importance": 2,
+    "title": {
+      "en": "Pulau Brani tin smelting",
+      "zh": "布拉尼岛炼锡"
+    },
+    "summary": {
+      "en": "Straits Trading was founded in 1887 and built its Pulau Brani tin smelter in 1890.",
+      "zh": "海峡贸易公司于1887年成立，1890年建成布拉尼岛炼锡厂。"
+    },
+    "detail": {
+      "en": "Regional location reference at Singapore; not the precise location of this historical facility or event. Straits Trading was founded in 1887 and built its Pulau Brani tin smelter in 1890. Smelting in Singapore and mining in Malaya were different activities. This Singapore city reference is not the factory site or boundary.",
+      "zh": "地区定位参照为新加坡，不是该历史设施或事件的精确坐标。海峡贸易公司于1887年成立，1890年建成布拉尼岛炼锡厂。在新加坡冶炼与在马来亚采矿是不同工作。新加坡城市参照点不是厂址或厂界。"
+    },
+    "sources": [
+      "S32"
+    ]
+  },
+  {
+    "id": "ev-russia-investment-review",
+    "t": "1900",
+    "kind": "milestone",
+    "at": [
+      30.314074,
+      59.94096
+    ],
+    "importance": 2,
+    "title": {
+      "en": "Foreign capital, a retrospective",
+      "zh": "外国资本，历史回顾"
+    },
+    "summary": {
+      "en": "From a 1900 viewpoint, this marker looks back on foreign capital entering late-nineteenth- and early-twentieth-century Russia.",
+      "zh": "此点以1900年为回顾视角，讨论十九世纪末至二十世纪初外国资本进入俄国。"
+    },
+    "detail": {
+      "en": "Regional location reference at Saint Petersburg; not the precise location of this historical facility or event. From a 1900 viewpoint, this marker looks back on foreign capital entering late-nineteenth- and early-twentieth-century Russia. This follows Malik’s published synopsis, not a newly measured investment total or a claim about every Russian region.",
+      "zh": "地区定位参照为圣彼得堡，不是该历史设施或事件的精确坐标。此点以1900年为回顾视角，讨论十九世纪末至二十世纪初外国资本进入俄国。叙述限于Malik的出版简介，不提供新测投资总额，也不概括俄国所有地区。"
+    },
+    "sources": [
+      "S82"
+    ]
+  },
+  {
+    "id": "ev-coal-smoke-estimate",
+    "t": "1900",
+    "kind": "milestone",
+    "at": [
+      -2.248685,
+      53.47532
+    ],
+    "importance": 2,
+    "title": {
+      "en": "Looking back at coal smoke",
+      "zh": "回顾煤烟影响"
+    },
+    "summary": {
+      "en": "Hanlon's historical research links industrial coal smoke with mortality risk.",
+      "zh": "Hanlon的历史研究把工业煤烟与死亡风险联系起来。"
+    },
+    "detail": {
+      "en": "Regional location reference at Manchester; not the precise location of this historical facility or event. Seen from 1900: Hanlon’s September 2015 historical research links industrial coal smoke with mortality risk. The geological layer is not measured pollution. The paper’s abstract and introduction give different figures for its estimate, so no number is given here, and there is no total death toll for the Industrial Revolution.",
+      "zh": "地区定位参照为曼彻斯特，不是该历史设施或事件的精确坐标。从1900年回看：Hanlon在2015年9月的历史研究中联系工业煤烟与死亡风险。地质图层并非实测污染。论文摘要与导言给出的估计数字并不一致，因此这里不列数字；工业革命也没有一个死亡总数。"
+    },
+    "sources": [
+      "S81"
+    ]
+  },
+  {
+    "id": "ev-machinery-law",
+    "t": "1844",
+    "kind": "milestone",
+    "at": [
+      -2.248685,
+      53.47532
+    ],
+    "importance": 2,
+    "title": {
+      "en": "Machinery safeguards",
+      "zh": "机器防护规定"
+    },
+    "summary": {
+      "en": "The 1844 factory legislation required dangerous machinery to be guarded and restricted child work.",
+      "zh": "1844年的工厂法规要求为危险机器加设防护，并限制童工。"
+    },
+    "detail": {
+      "en": "Regional location reference at Manchester; not the precise location of this historical facility or event. The 1844 factory legislation required dangerous machinery to be guarded and restricted child work. Manchester is a regional reading anchor for legislation of wider scope; it is not asserted to be the place of passage.",
+      "zh": "地区定位参照为曼彻斯特，不是该历史设施或事件的精确坐标。1844年的工厂法规要求为危险机器加设防护，并限制童工。曼彻斯特只是适用范围更广的法律之地区阅读锚点，不表示法案在此通过。"
+    },
+    "sources": [
+      "S35"
+    ]
+  },
+  {
+    "id": "ev-hours-law",
+    "t": "1847",
+    "kind": "milestone",
+    "at": [
+      -2.248685,
+      53.47532
+    ],
+    "importance": 2,
+    "title": {
+      "en": "Textile working hours",
+      "zh": "纺织工时规定"
+    },
+    "summary": {
+      "en": "The 1847 Factory Act limited hours for women and young people in textile factories.",
+      "zh": "1847年《工厂法》限制纺织厂妇女与青少年的工时，后续法律继续处理规避行为。"
+    },
+    "detail": {
+      "en": "Regional location reference at Manchester; not the precise location of this historical facility or event. The 1847 Factory Act limited hours for women and young people in textile factories. Further laws addressed evasions. Manchester is a reading anchor, not the place of passage or a claim that every factory complied.",
+      "zh": "地区定位参照为曼彻斯特，不是该历史设施或事件的精确坐标。1847年《工厂法》限制纺织厂妇女与青少年的工时，后续法律继续处理规避行为。曼彻斯特是阅读锚点，不表示立法地点，也不说明每间厂都已守法。"
+    },
+    "sources": [
+      "S35"
+    ]
+  },
+  {
+    "id": "ev-union-law",
+    "t": "1871",
+    "kind": "milestone",
+    "at": [
+      -2.248685,
+      53.47532
+    ],
+    "importance": 2,
+    "title": {
+      "en": "Trade union legal status",
+      "zh": "工会法律地位"
+    },
+    "summary": {
+      "en": "The TUC describes the 1871 Trade Union Act as legalising unions’ status and protecting their funds.",
+      "zh": "英国职工大会将1871年《工会法》描述为确立工会合法地位、保护工会资金的法律。"
+    },
+    "detail": {
+      "en": "Regional location reference at Manchester; not the precise location of this historical facility or event. The TUC describes the 1871 Trade Union Act as legalising unions’ status and protecting their funds. Manchester anchors the regional labour story, not the location where the law passed.",
+      "zh": "地区定位参照为曼彻斯特，不是该历史设施或事件的精确坐标。英国职工大会将1871年《工会法》描述为确立工会合法地位、保护工会资金的法律。曼彻斯特帮助定位地区劳动史，不表示法案在此通过。"
+    },
+    "sources": [
+      "S37"
+    ]
+  },
+  {
+    "id": "ev-health-law-first",
+    "t": "1848",
+    "kind": "milestone",
+    "at": [
+      -2.248685,
+      53.47532
+    ],
+    "importance": 2,
+    "title": {
+      "en": "Public health legislation",
+      "zh": "公共卫生立法"
+    },
+    "summary": {
+      "en": "The Public Health Act of 1848 developed public responsibility for sanitation and water infrastructure.",
+      "zh": "1848年《公共卫生法》推进公共部门对卫生与供水设施的责任。"
+    },
+    "detail": {
+      "en": "Regional location reference at Manchester; not the precise location of this historical facility or event. The Public Health Act of 1848 developed public responsibility for sanitation and water infrastructure. Manchester is a regional reading anchor for wider legislation, not the place of passage.",
+      "zh": "地区定位参照为曼彻斯特，不是该历史设施或事件的精确坐标。1848年《公共卫生法》推进公共部门对卫生与供水设施的责任。曼彻斯特是适用范围更广的法规之地区阅读锚点，不表示法案在此通过。"
+    },
+    "sources": [
+      "S38"
+    ]
+  },
+  {
+    "id": "ev-health-law-later",
+    "t": "1875",
+    "kind": "milestone",
+    "at": [
+      -2.248685,
+      53.47532
+    ],
+    "importance": 2,
+    "title": {
+      "en": "Local sanitation duties",
+      "zh": "地方卫生责任"
+    },
+    "summary": {
+      "en": "The Public Health Act of 1875 developed local responsibility for sanitation and water infrastructure.",
+      "zh": "1875年《公共卫生法》推进地方对卫生与供水设施的责任。"
+    },
+    "detail": {
+      "en": "Regional location reference at Manchester; not the precise location of this historical facility or event. The Public Health Act of 1875 developed local responsibility for sanitation and water infrastructure. It was a later stage in legislation, not proof that pollution had ended. Manchester is a regional reading anchor.",
+      "zh": "地区定位参照为曼彻斯特，不是该历史设施或事件的精确坐标。1875年《公共卫生法》推进地方对卫生与供水设施的责任。这是立法的后续阶段，不表示污染已经结束。曼彻斯特只是地区阅读锚点。"
+    },
+    "sources": [
+      "S38"
+    ]
+  }
+]

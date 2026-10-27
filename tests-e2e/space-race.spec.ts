@@ -88,7 +88,7 @@ test('Chinese preserves historical Singapore time, source mass and timeline-only
   await expect(reader(page)).toContainText(/账目范围|口径/);
   await expect(page.locator('.ts-co[data-id="ev-n-one-costs"]')).toHaveCount(0);
   await expect(page.locator('.ts-co[data-id="ev-costs-human"]')).toHaveCount(0);
-  await reader(page).locator('[data-event="ev-n-one-costs"]').click();
+  await reader(page).locator('[data-time-target="ev-n-one-costs"]').click();
   await expect(page.locator('.ts-event')).toContainText(/卢布/);
   await expect(page.locator('.ts-event [data-mission-context]')).toHaveCount(0);
   expect(await mission(page, 'ev-n-one-costs')).toBeNull();

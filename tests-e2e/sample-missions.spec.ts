@@ -30,7 +30,7 @@ for (const locale of ['en', 'zh']) {
     await expect(page.locator('.ts-co[data-id="fixture-lunar-outcome"] .ts-co__badge')).toHaveText(locale === 'en' ? 'Moon surface · associated launch centre' : '月面任务 · 关联发射中心');
     const context = await page.evaluate(() => (window.__atlas!.engine.missionContext as unknown as (id: string) => unknown)('fixture-lunar-outcome'));
     expect(context).toEqual({ setting: 'moon-surface', anchorRole: 'associated-launch-centre', anchorSite: 'site-fixture-centre', relatedSites: [], occurredAt: '1969-07-20T20:17:39Z', at: [-80.64861111111112, 28.52472222222222] });
-    const lunarRow = page.locator('.ts-index__row[data-event="fixture-lunar-outcome"]');
+    const lunarRow = page.locator('.ts-index__row[data-time-target="fixture-lunar-outcome"]');
     expect((await lunarRow.boundingBox())!.height).toBeGreaterThanOrEqual(44);
     await lunarRow.click();
     const inspector = page.locator('[data-mission-context="fixture-lunar-outcome"]');
@@ -41,7 +41,7 @@ for (const locale of ['en', 'zh']) {
     await open(page, 'ch=dated-evidence&b=3', locale);
     await expect.poll(() => stats(page)).toMatchObject({ recordedEvents: 3, activeEvents: 1, eventMarkers: 2 });
     await expect(page.locator('.ts-co[data-id="fixture-retrospective"]')).toHaveCount(0);
-    await page.locator('.ts-index__row[data-event="fixture-retrospective"]').click();
+    await page.locator('.ts-index__row[data-time-target="fixture-retrospective"]').click();
     await expect(page.locator('#ts-event-fixture-retrospective')).toBeVisible();
     await expect(page.locator('.ts-event__mission')).toHaveCount(0);
     await expect(page.getByText(/KM²/)).toHaveCount(0);
@@ -84,7 +84,7 @@ test('phone: chapter evidence has touch targets and preserves unlocated inspecto
   await expect.poll(() => stats(page)).toMatchObject({ recordedEvents: 2, activeEvents: 2, eventMarkers: 2 });
   await next.click();
   await expect(line).toContainText('3/3');
-  const row = page.locator('.ts-index__row[data-event="fixture-retrospective"]');
+  const row = page.locator('.ts-index__row[data-time-target="fixture-retrospective"]');
   await row.scrollIntoViewIfNeeded();
   expect((await row.boundingBox())!.height).toBeGreaterThanOrEqual(44);
   await row.click();

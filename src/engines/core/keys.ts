@@ -25,7 +25,12 @@ export function useSceneKeys(hud: HudStore, actions: HudActions, step: (delta: 1
       const key = e.key;
 
       if (key === 'ArrowLeft' || key === 'ArrowRight') {
-        if (e.shiftKey || target?.closest(OWN_ARROW_KEYS)) return;
+        if (target?.closest(OWN_ARROW_KEYS)) return;
+        if (e.shiftKey) {
+          const monthStep = hud.getState().controls.monthStep;
+          if (monthStep) { e.preventDefault(); monthStep(key === 'ArrowRight' ? 1 : -1); }
+          return;
+        }
         e.preventDefault();
         step(key === 'ArrowRight' ? 1 : -1);
         return;

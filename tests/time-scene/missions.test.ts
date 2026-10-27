@@ -11,7 +11,7 @@ import { timePresentation } from '../../src/content/schema/topic';
 import { buildTimeModel } from '../../src/engines/time-scene/lib/model';
 import { frameAt } from '../../src/engines/time-scene/lib/frame';
 import { frameStats } from '../../src/engines/time-scene/lib/stats';
-import { hasMapAnchor, missionBadge, missionContext, missionChapterIndex } from '../../src/engines/time-scene/lib/missions';
+import { hasMapAnchor, missionBadge, missionContext } from '../../src/engines/time-scene/lib/missions';
 import { toNumber } from '../../src/engines/time-scene/lib/time';
 import entities from '../../src/content/topics/sample-missions/data/entities.json';
 import control from '../../src/content/topics/sample-missions/data/control.json';
@@ -74,10 +74,6 @@ describe('mission evidence contract', () => {
     expect(other.bounds).toEqual(model.bounds);
     expect(hasMapAnchor(other.events[2]!.event)).toBe(false);
   });
-  it('indexes independent outcomes and their deduplicated associated sites in chapter order', () => {
-    expect(missionChapterIndex(data.events, { beats: [{ highlight: [lunar.id, 'fixture-orbit-outcome'] }, { highlight: ['fixture-retrospective', lunar.id] }] }).map((event) => event.id))
-      .toEqual([lunar.id, 'fixture-orbit-outcome', 'fixture-retrospective', 'site-fixture-centre']);
-  });
   it('counts a docking once with two associated centres', () => {
     const value = fresh();
     value.events.push({ ...value.events[0]!, id: 'site-second', at: [63.3051, 45.9648] });
@@ -87,7 +83,6 @@ describe('mission evidence contract', () => {
     const docking = buildTimeModel(timeSceneGeoData.parse(value), [], { timePresentation: presentation });
     expect(frameStats(docking, frameAt(docking, toNumber('1969-07-20'))).recordedEvents).toBe(1);
     expect(missionContext(docking, lunar.id)!.relatedSites).toEqual(['site-second']);
-    expect(missionChapterIndex(docking.sites.concat(docking.events.map((item) => item.event)), { highlight: [lunar.id] }).map((event) => event.id)).toEqual([lunar.id, 'site-fixture-centre', 'site-second']);
   });
 });
 

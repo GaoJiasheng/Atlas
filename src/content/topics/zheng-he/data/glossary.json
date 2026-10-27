@@ -1,0 +1,169 @@
+{
+  "terms": [
+    {
+      "id": "term-envoy",
+      "term": {
+        "en": "envoy",
+        "zh": "使节"
+      },
+      "definition": {
+        "en": "A person sent to represent a ruler or government.",
+        "zh": "代表统治者或政府出使的人。"
+      }
+    },
+    {
+      "id": "term-tribute",
+      "term": {
+        "en": "tribute",
+        "zh": "朝贡"
+      },
+      "definition": {
+        "en": "Gifts and formal recognition within a court’s diplomatic order; meanings and benefits could differ.",
+        "zh": "在朝廷外交秩序中进献礼物并表达承认；各方的理解和利益不一定相同。"
+      }
+    },
+    {
+      "id": "term-monsoon",
+      "term": {
+        "en": "monsoon",
+        "zh": "季风"
+      },
+      "definition": {
+        "en": "A large-scale seasonal change in wind circulation.",
+        "zh": "大范围、随季节变化的风循环。"
+      }
+    },
+    {
+      "id": "term-interpreter",
+      "term": {
+        "en": "interpreter",
+        "zh": "通事"
+      },
+      "definition": {
+        "en": "A person who helps speakers of different languages communicate.",
+        "zh": "帮助使用不同语言的人沟通的人。"
+      }
+    },
+    {
+      "id": "term-depot",
+      "term": {
+        "en": "staging depot",
+        "zh": "仓储据点"
+      },
+      "definition": {
+        "en": "A place to store supplies and assemble for another stage.",
+        "zh": "存放物资、集合并准备下一段航程的地方。"
+      }
+    },
+    {
+      "id": "term-temasek",
+      "term": {
+        "en": "Temasek",
+        "zh": "淡马锡"
+      },
+      "definition": {
+        "en": "A historical name found in sources about the Singapore region.",
+        "zh": "史料中见于新加坡区域的历史地名。"
+      }
+    },
+    {
+      "id": "term-melaka",
+      "term": {
+        "en": "Melaka",
+        "zh": "马六甲"
+      },
+      "definition": {
+        "en": "A Malay port polity central to this topic’s straits connections.",
+        "zh": "本主题海峡交流中的马来港口政权。"
+      }
+    },
+    {
+      "id": "term-old-port",
+      "term": {
+        "en": "Old Port",
+        "zh": "旧港"
+      },
+      "definition": {
+        "en": "A historical name associated here with Palembang; not a precise battlefield coordinate.",
+        "zh": "本主题对应今天巨港的历史名称，不是精确战场坐标。"
+      }
+    },
+    {
+      "id": "term-hormuz",
+      "term": {
+        "en": "Hormuz",
+        "zh": "霍尔木兹"
+      },
+      "definition": {
+        "en": "The island port destination in the expedition account.",
+        "zh": "远航记载中的岛上港口目的地。"
+      }
+    },
+    {
+      "id": "term-swahili",
+      "term": {
+        "en": "Swahili coastal culture",
+        "zh": "斯瓦希里沿海文化"
+      },
+      "definition": {
+        "en": "East African coastal culture central to its port histories.",
+        "zh": "东非沿海港口历史中的重要地方文化。"
+      }
+    },
+    {
+      "id": "term-qilin",
+      "term": {
+        "en": "qilin",
+        "zh": "麒麟"
+      },
+      "definition": {
+        "en": "An auspicious mythical creature used by courtiers to interpret the giraffe.",
+        "zh": "宫廷用来解释长颈鹿的一种祥瑞神话动物。"
+      }
+    },
+    {
+      "id": "term-inscription",
+      "term": {
+        "en": "inscription",
+        "zh": "碑刻"
+      },
+      "definition": {
+        "en": "Writing preserved on an object such as a stone stele.",
+        "zh": "刻在石碑等物件上保存下来的文字。"
+      }
+    },
+    {
+      "id": "term-evidence",
+      "term": {
+        "en": "historical evidence",
+        "zh": "历史证据"
+      },
+      "definition": {
+        "en": "Surviving material used to answer a question about the past.",
+        "zh": "用来回答过去某个问题的留存材料。"
+      }
+    },
+    {
+      "id": "term-interpretation",
+      "term": {
+        "en": "interpretation",
+        "zh": "历史解释"
+      },
+      "definition": {
+        "en": "An argued account based on selected evidence, open to scrutiny.",
+        "zh": "依据所选证据提出、可以被检验的解释。"
+      }
+    },
+    {
+      "id": "term-treasure-ship",
+      "term": {
+        "en": "treasure ship",
+        "zh": "宝船"
+      },
+      "definition": {
+        "en": "A name used for major fleet vessels, whose dimensions remain disputed.",
+        "zh": "用于船队大型船只的名称，其尺寸仍有争论。"
+      }
+    }
+  ]
+}

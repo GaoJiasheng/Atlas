@@ -98,7 +98,7 @@ export interface GeoController {
   fitCamera(): GeoCamera | null;
   /** Regional plate: the camera that shows the whole plate (the first preset); null on the world map. */
   plateCamera(): GeoCamera | null;
-  stats(): { features: number; eventMarkers: number; zoom: number; datedLayers: Record<string, DatedLayerStats> };
+  stats(): { features: number; eventMarkers?: number; zoom: number; datedLayers: Record<string, DatedLayerStats> };
   destroy(): void;
 }
 

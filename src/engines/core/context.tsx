@@ -50,6 +50,8 @@ export interface SceneContextValue {
   hud: HudStore;
   /** The actions behind the HUD buttons and keys (modes, presets, HUD, reader). */
   actions: HudActions;
+  /** Reveal selected details in the docked reader or the existing mobile sheet. */
+  revealReader(): void;
   topic: TopicMeta;
   chapters: readonly Chapter[];
   locale: Locale;
