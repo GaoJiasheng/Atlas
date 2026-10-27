@@ -154,14 +154,16 @@ test('phase north-up ignores main camera orbit; eclipse remains separate', async
   expect((await orbit(page)).panel.kind).toBe('apparent-discs');
   await matrices(page);
 });
-test('39 chapter+beat links reproduce presentation instant states and actual rendered bindings', async ({ page }) => {
-  // 39 page loads plus 39 instant beats: about 4 min on an idle machine with software WebGL.
-  test.setTimeout(600_000);
+test('chapter+beat links reproduce presentation instant states and actual rendered bindings', async ({ page }) => {
+  // Each chapter's first beat plus the true-scale beat (BG.3); `pnpm shoot sample-orbit --beats` compares all 39 links.
+  test.setTimeout(300_000);
   await open(page);
-  const beats = await page.evaluate(() => window.__atlas!.beats());
-  expect(beats).toHaveLength(39);
+  const all = await page.evaluate(() => window.__atlas!.beats());
+  expect(all).toHaveLength(39);
+  const beats = all.filter((b) => b.index === 0 || (b.chapter === 'before-you-start' && b.index === 2));
+  expect(beats).toHaveLength(9);
   for (let i = 0; i < beats.length; i++) {
-    await page.evaluate((i) => window.__atlas!.goToBeat(i, { instant: true }), i);
+    await page.evaluate((i) => window.__atlas!.goToBeat(i, { instant: true }), all.indexOf(beats[i]!));
     await settled(page);
     const expected = await orbit(page),
       values = (await sim(page)).values;
