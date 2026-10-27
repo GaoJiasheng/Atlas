@@ -68,6 +68,9 @@ export function formatTimeParam(t: TimePoint): string {
 
 export function parseTimeParam(raw: string): TimePoint | null {
   const geo = /^(\d+(?:\.\d+)?)ma$/.exec(raw);
-  if (geo) return { ma: Number(geo[1]) };
+  if (geo) {
+    const ma = Number(geo[1]);
+    return Number.isFinite(ma * 1e6) ? { ma } : null;
+  }
   return isoDateToMs(raw) === null ? null : raw;
 }

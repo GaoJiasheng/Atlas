@@ -139,6 +139,26 @@
       "0000000000000000"
     ]
   },
+  "dinosaur-earth": {
+    "mask": [
+      "0000000110000000",
+      "0000016ddb400000",
+      "00004dfffff80000",
+      "0005efffffff7000",
+      "005effffffffe500",
+      "05efffffffffff50",
+      "0cffffffffffffb0",
+      "1dffffffffffffd1",
+      "1cffffffffffffc0",
+      "07ffffffffffffc0",
+      "02dfffffffffff90",
+      "004dffffffffff70",
+      "0002afffffffff50",
+      "000005dffffffd20",
+      "00000038cdccb300",
+      "0000000011000000"
+    ]
+  },
   "energy-conversion": {
     "mask": [
       "0000000000000000",

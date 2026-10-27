@@ -1,0 +1,131 @@
+{
+  "version": 1,
+  "modelId": "sample-de-model",
+  "modelLabel": {
+    "en": "TEST/DESIGN land",
+    "zh": "测试／设计陆地"
+  },
+  "coordinateSpace": "reconstructed",
+  "geometryMeaning": "exposed-land",
+  "method": {
+    "en": "Synthetic geometry exercises the engine; it is not a reconstruction of Earth.",
+    "zh": "合成几何仅测试引擎，不是地球复原。"
+  },
+  "sources": [
+    "S1"
+  ],
+  "frames": [
+    {
+      "id": "sample-de-frame-250",
+      "t": {
+        "ma": 250
+      },
+      "file": "sample-de-land-250",
+      "sampleBounds": [
+        -180,
+        -90,
+        180,
+        90
+      ],
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "sample-de-frame-230",
+      "t": {
+        "ma": 230
+      },
+      "file": "sample-de-land-230",
+      "sampleBounds": [
+        -180,
+        -90,
+        180,
+        90
+      ],
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "sample-de-frame-150",
+      "t": {
+        "ma": 150
+      },
+      "file": "sample-de-land-150",
+      "sampleBounds": [
+        -180,
+        -90,
+        180,
+        90
+      ],
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "sample-de-frame-100",
+      "t": {
+        "ma": 100
+      },
+      "file": "sample-de-land-100",
+      "sampleBounds": [
+        -180,
+        -90,
+        180,
+        90
+      ],
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "sample-de-frame-70",
+      "t": {
+        "ma": 70
+      },
+      "file": "sample-de-land-70",
+      "sampleBounds": [
+        -180,
+        -90,
+        180,
+        90
+      ],
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "sample-de-frame-65",
+      "t": {
+        "ma": 65
+      },
+      "file": "sample-de-land-65",
+      "sampleBounds": [
+        -180,
+        -90,
+        180,
+        90
+      ],
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "sample-de-frame-0",
+      "t": {
+        "ma": 0
+      },
+      "file": "sample-de-land-0",
+      "sampleBounds": [
+        -180,
+        -90,
+        180,
+        90
+      ],
+      "sources": [
+        "S1"
+      ]
+    }
+  ]
+}

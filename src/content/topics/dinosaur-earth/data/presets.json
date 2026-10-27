@@ -1,0 +1,32 @@
+{
+  "presets": [
+    {
+      "id": "pangaea-context",
+      "label": {
+        "en": "Pangaea",
+        "zh": "盘古大陆"
+      },
+      "camera": {
+        "center": [
+          30,
+          0
+        ],
+        "zoom": 1.45
+      }
+    },
+    {
+      "id": "singapore",
+      "label": {
+        "en": "Singapore: modern reference",
+        "zh": "新加坡：现代参照"
+      },
+      "camera": {
+        "center": [
+          103.816925,
+          1.366587
+        ],
+        "zoom": 3.6
+      }
+    }
+  ]
+}
