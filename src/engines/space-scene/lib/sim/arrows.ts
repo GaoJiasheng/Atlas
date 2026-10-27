@@ -39,6 +39,21 @@ export function arrowLength(value: number, per: number, max: number): number {
   return Math.min(max, Math.abs(value) * per);
 }
 
+/** A force arrow's shaft and head scale with the overlay's `per` (the length of 1 N): this many newtons' worth. */
+const VECTOR_FULL = 1.6;
+/** Smallest arrow scale as a share of the overlay's longest arrow (`max`). */
+const VECTOR_MIN_SHARE = 0.16;
+
+/**
+ * Shaft and head scale of a force-vectors overlay (scene units): 1.6 N's
+ * worth of length, but never below 0.16 × `max`, so an overlay measured in
+ * thousands of newtons (the airfoil's lift, docs/45 E-AF5) still draws a
+ * visible shaft and head. The overlays in newtons keep their old scale.
+ */
+export function vectorScale(per: number, max: number): number {
+  return Math.max(per * VECTOR_FULL, max * VECTOR_MIN_SHARE);
+}
+
 /** The arrow's value now: a number, a number output, or a timeline channel at model time `t` (the end state when `t` is not given). */
 export function arrowValue(a: ForceArrow, outputs: SimOutputs, t?: number): number {
   if (typeof a.value === 'number') return a.value;

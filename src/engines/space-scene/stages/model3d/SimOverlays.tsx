@@ -26,7 +26,7 @@ import { energyBarValues } from '../../lib/sim/bars';
 import { isTimeline } from '../../lib/sim/timeline';
 import type { StageBridge } from '../../bridge';
 import { resolveSimValues } from '../../lib/sim/controls';
-import { ARROW_FLOOR as VECTOR_FLOOR, arrowLength as vectorLength, arrowValue, arrowWhen, FORCE_COLORS } from '../../lib/sim/arrows';
+import { ARROW_FLOOR as VECTOR_FLOOR, arrowLength as vectorLength, arrowValue, arrowWhen, FORCE_COLORS, vectorScale } from '../../lib/sim/arrows';
 import { resolveDataColor } from '../../lib/color';
 import { damp, normalize3, type Vec3 } from '../../lib/math';
 import type { PartDisplay } from '../../lib/visibility';
@@ -178,8 +178,6 @@ function ForceArrows({
 
 
 type Vectors = Extract<SimOverlay, { kind: 'force-vectors' }>;
-/** A force arrow's shaft and head scale with the overlay's `per` (the length of 1 N): this many newtons' worth. */
-const VECTOR_FULL = 1.6;
 const tmpStart: Vec3 = [0, 0, 0];
 const tmpDir: Vec3 = [0, 0, 0];
 
@@ -232,7 +230,7 @@ function ForceVectors({
   }, [snapKey]);
   const readings = useMemo(() => overlay.arrows.map(a => ({force:a.force,dir:[0,0,0] as Vec3,shown:false,scaled:false})),[overlay]);
   useEffect(()=>{if(sim.airfoil)readings.forEach((r,i)=>bridge.airfoilArrows.set(`${sim.overlays.indexOf(overlay)}:${i}`,r));return()=>{readings.forEach((_,i)=>bridge.airfoilArrows.delete(`${sim.overlays.indexOf(overlay)}:${i}`));};},[sim,overlay,bridge,readings]);
-  const full = overlay.per * VECTOR_FULL;
+  const full = vectorScale(overlay.per, overlay.max);
 
   useFrame((state, delta) => {
     const dt = Math.min(delta, MAX_DT);

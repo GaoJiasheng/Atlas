@@ -720,3 +720,18 @@ Cl、bank、flow separation、bypass、spool、三种转动等在正文用一句
 **已知未验收项**：图形／触控／深链／暂停／reduced-motion／切换图层和展开恢复／bank的浏览器断言已写但没跑；无截图路径。流层架构最多3次绘制，实际draw calls、三角形、drawing buffer、renderer、首屏300KB gz与真机fps均未实测，不宣称达标。构建仍给出既有大chunk提示；不能用单个chunk gzip大小冒充首屏总量。冷角度目标50ms与每任务≤8ms仍需浏览器复核；Node测量只记为CPU探针，不作iPad结论。没有依赖／package.json／lockfile／review-queue变更，没有写git历史。
 
 Node CPU探针（Node v25.8.2，darwin arm64；与check/build并行，含调度噪声，无browser/renderer）：1024点时α4/8/12总工作计时57.29/46.33/51.11ms，单次generator yield间隔最大2.43/1.95/4.64ms；因此不能宣称冷角50ms目标已验收。分片调度目标4ms，浏览器总任务≤8ms与真机预算仍待复核。所有16条路径为complete；完整场单测在1024点下仍通过。
+
+### 9.2 浏览器验收（2026-10-27，Claude，`sample-airfoil` 与回归主题）
+
+**代码审阅**：b1f97b5 对共享文件的改动都是加法式登记（SIM_KINDS、simSchema、quantityKind、states／issues、SEPARATE_EXPERIMENTS、FORCE_KINDS／名称／token、overlay 联合、flowBind 的 `airfoilFlow`、`shoot.ts` 的 airfoil 一致性检查、`validate-content.ts` 一行来源检查、extrude `bevel` 放宽到 ≥0）；其他主题的行为路径不变。`LICENSE-CONTENT`、`THIRD-PARTY-NOTICES.md` 里只覆盖原创夹具内容的两段已撤回（原创内容本来就在 CC BY-NC-SA 4.0 总条款下，无例外可写）。
+
+**看图结论**（`pnpm shoot sample-airfoil --beats --keys --layout --theme paper,cinema`，SwiftShader，1920×1080 及八个布局尺寸）：两主题各 16 拍、16/16 拍链接一致、0 键位失败、0 布局问题、console 干净。逐张看过：流线绕上下两面、上游上洗与下游下洗；同一路上等 tau 的示踪点在翼型上方间距明显大于下方（按局部速度前进）；比较标记从同一上游截面同刻发出，不在后缘等待。α ±16° 与 20° 只剩静态虚线分离示意，虚线在正角上侧、负角下侧并随样件转；附着流线、粒子和压力均停用。升力–迎角图：±12° 内实线、外侧虚线加斜线底，y 轴对称取 ±1.1×峰值（Cl 轴 ±1.54），当前点落在曲线上。压力图只在 ideal-attached 时出现（α4：上表面 Cp 负峰约 −1.69，负值朝上），α16 显示“此状态不计算压力”。力箭头沿世界方向：样件升力 [0,1,0]，负角向下；bank 姿态的倾斜升力 [0,.94,−.34] 与竖直重力分开。
+
+**修复（各带单测）**：
+
+1. **力箭头在大牛顿数下看不见**。`force-vectors` 的箭杆和箭头粗细按 `per × 1.6 N` 缩放；翼型 `per = 0.00015`（单位是上千牛顿）时箭杆半径只有约 8×10⁻⁶ 场景单位，升力箭头实际不可见。新增 `lib/sim/arrows.ts` 的 `vectorScale(per, max) = max(per × 1.6, 0.16 × max)`，`SimOverlays` 改用它：`forces`、`sample-forces` 的比例不变（0.064、0.048），翼型变为 0.08。测试：`tests/space-scene/airfoil.test.ts`「force-vector arrow scale」。
+2. **冷角度流场超出 50 ms 目标**（确有其事）。浏览器 Chrome trace（SwiftShader，机器负载约 120）实测改前：冷角度 α 8/−8/0/−4/12/−12 从 setSim 到 fieldReady 52–64 ms，主线程任务合计 42–54 ms。原因是追踪每步重复求同一点的场：每步开头的探针与 RK4 的 k1 是同一点，上一步末的探针又是下一步开头；中间段 `segmentClear` 与随后的单位方向各做一次逆映射。改为复用这些求值（`clearUnit`、`unitOf`，步末探针转为下一步开头），算法和步长不变，输出逐位相同（七个角度的路径散列与改前一致）。改后同一测法：30–42 ms（墙钟），主线程合计 31–43 ms；单个任务最大 6.4–9.0 ms，偶有一个 >8 ms 的任务落在发布结果后的渲染，而非追踪切片（切片预算仍为 4 ms）。Node 下单次追踪约 22–26 ms（改前 36–57 ms）。测试：`tests/space-scene/airfoil-field.test.ts`「tracer reuses each field evaluation」，钉住改前追踪出的路径长度、末端 tau 与第 500 个样本点。
+
+**门槛记录（改后，不含 how-planes-fly 内容）**：`pnpm check` 0 错误 0 警告（3 个原有 hint）；`pnpm validate` 56 主题 0/0；`pnpm build` 115 页；`pnpm test` 160 文件 4271 条，整套跑时 2 条因机器负载超时（`tests/schemas.test.ts` 5 s 限时），单独重跑通过。改后 `pnpm shoot sample-airfoil --beats --keys --theme paper,cinema`：两主题 16/16 拍、拍链接一致、0 键位失败、0 拍失败。回归 `pnpm shoot <t> --beats --keys`（en·paper）：aircon 24/24 拍、0 失败；其余主题与浏览器 e2e 结果见 §9.3。
+
+**仍未覆盖**：真机（iPad）帧率与触控；Lighthouse。

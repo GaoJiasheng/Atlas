@@ -63,8 +63,3 @@ and `docs/screenshots/heart-and-lungs/` are derived from Z-Anatomy
 (https://creativecommons.org/licenses/by-sa/4.0/), with the attribution given in
 `THIRD-PARTY-NOTICES.md`. The texts and the other data files of these topics stay
 under CC BY-NC-SA 4.0 as above.
-
-Original sample-airfoil fixture: text, procedural Joukowski geometry, design
-study S58 and data stay under CC BY-NC-SA 4.0 above. No licence-family
-exceptions; no third-party coordinates, CAD, images or software are included.
-The airfoil engine source code follows the repository software licence.

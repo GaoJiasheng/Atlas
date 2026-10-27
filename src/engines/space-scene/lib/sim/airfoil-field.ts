@@ -151,6 +151,19 @@ function cross(a: XY, b: XY, c: XY) {
   return (b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0]);
 }
 const boundsCache = new WeakMap<readonly XY[], number[]>();
+function boundsOf(poly: readonly XY[]): number[] {
+  let bounds = boundsCache.get(poly);
+  if (!bounds) {
+    bounds = [
+      Math.min(...poly.map((p) => p[0])),
+      Math.max(...poly.map((p) => p[0])),
+      Math.min(...poly.map((p) => p[1])),
+      Math.max(...poly.map((p) => p[1])),
+    ];
+    boundsCache.set(poly, bounds);
+  }
+  return bounds;
+}
 export function segmentClear(
   a: XY,
   b: XY,
@@ -162,24 +175,18 @@ export function segmentClear(
     Array.from({ length: 128 }, (_, j) =>
       surfacePoint((2 * Math.PI * j) / 128, angle),
     );
-  let bounds = boundsCache.get(poly);
-  if (!bounds) {
-    bounds = [
-      Math.min(...poly.map((p) => p[0])),
-      Math.max(...poly.map((p) => p[0])),
-      Math.min(...poly.map((p) => p[1])),
-      Math.max(...poly.map((p) => p[1])),
-    ];
-    boundsCache.set(poly, bounds);
-  }
-  if (
+  if (!nearBody(a, b, boundsOf(poly))) return true;
+  if (inverseAirfoil(b[0], b[1], angle).status !== 'outside') return false;
+  return edgesClear(a, b, poly);
+}
+const nearBody = (a: XY, b: XY, bounds: readonly number[]) =>
+  !(
     Math.max(a[0], b[0]) < bounds[0]! ||
     Math.min(a[0], b[0]) > bounds[1]! ||
     Math.max(a[1], b[1]) < bounds[2]! ||
     Math.min(a[1], b[1]) > bounds[3]!
-  )
-    return true;
-  if (inverseAirfoil(b[0], b[1], angle).status !== 'outside') return false;
+  );
+function edgesClear(a: XY, b: XY, poly: readonly XY[]): boolean {
   for (let i = 0; i < poly.length; i++) {
     const c = poly[i]!,
       d = poly[(i + 1) % poly.length]!;
@@ -191,30 +198,38 @@ export function segmentClear(
   }
   return true;
 }
-function unit(p: XY, angle: number): XY | null {
-  const v = airfoilProbe(...p, angle);
+type Probe = ReturnType<typeof airfoilProbe>;
+/** The unit flow direction of a probe, or null where the field has none (inside, invalid, stagnation). */
+function unitOf(v: Probe): XY | null {
   if (v.status !== 'outside') return null;
   const n = Math.hypot(v.uOverV!, v.vOverV!);
   return n < 1e-5 ? null : [v.uOverV! / n, v.vOverV! / n];
 }
-function rk(p: XY, h: number, angle: number, poly: XY[]): XY | null {
-  const k1 = unit(p, angle);
-  if (!k1) return null;
+/**
+ * segmentClear(a, b) followed by the unit direction at b, with one field
+ * evaluation at b instead of two (the same tests, in an order that cannot
+ * change the result: both are pure).
+ */
+function clearUnit(a: XY, b: XY, angle: number, poly: XY[], bounds: readonly number[]): XY | null {
+  const v = airfoilProbe(b[0], b[1], angle);
+  if (v.status !== 'outside') return null;
+  if (nearBody(a, b, bounds) && !edgesClear(a, b, poly)) return null;
+  return unitOf(v);
+}
+function rk(p: XY, h: number, angle: number, poly: XY[], k1: XY): XY | null {
+  const bounds = boundsOf(poly);
   const at = (k: XY, s: number): XY => [
     p[0] + h * k[0] * s,
     p[1] + h * k[1] * s,
   ];
   const p2 = at(k1, 0.5);
-  if (!segmentClear(p, p2, angle, poly)) return null;
-  const k2 = unit(p2, angle);
+  const k2 = clearUnit(p, p2, angle, poly, bounds);
   if (!k2) return null;
   const p3 = at(k2, 0.5);
-  if (!segmentClear(p, p3, angle, poly)) return null;
-  const k3 = unit(p3, angle);
+  const k3 = clearUnit(p, p3, angle, poly, bounds);
   if (!k3) return null;
   const p4 = at(k3, 1);
-  if (!segmentClear(p, p4, angle, poly)) return null;
-  const k4 = unit(p4, angle);
+  const k4 = clearUnit(p, p4, angle, poly, bounds);
   if (!k4) return null;
   const end: XY = [
     p[0] + (h * (k1[0] + 2 * k2[0] + 2 * k3[0] + k4[0])) / 6,
@@ -291,20 +306,19 @@ export function* traceAirfoil(
       status: AirfoilPath['status'] = 'budget-stop';
     const xy: number[] = [...p],
       tau: number[] = [0];
+    // The field at the path's current point: each step's end probe is the next step's start.
+    let v0 = airfoilProbe(...p, angle);
     for (let n = 0; n < 2048; n++) {
       if (n % 32 === 0) yield;
-      const v0 = airfoilProbe(...p, angle);
-      if (
-        v0.status !== 'outside' ||
-        Math.hypot(v0.uOverV!, v0.vOverV!) < 1e-5
-      ) {
+      const k1 = unitOf(v0);
+      if (!k1) {
         status = 'stagnation';
         break;
       }
       let next: XY | null = null,
         h = step;
       for (let retry = 0; retry <= 8; retry++, h /= 2) {
-        next = rk(p, h, angle, poly);
+        next = rk(p, h, angle, poly, k1);
         if (next) break;
       }
       if (!next) {
@@ -331,6 +345,7 @@ export function* traceAirfoil(
       xy.push(...next);
       tau.push(time);
       p = next;
+      v0 = v1;
       if (f < 1 || p[0] >= 3) {
         status = 'complete';
         break;

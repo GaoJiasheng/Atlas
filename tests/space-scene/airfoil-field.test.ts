@@ -179,3 +179,28 @@ describe('analytic Joukowski field', () => {
     cache.dispose();
   }, 30000);
 });
+
+describe('tracer reuses each field evaluation (browser acceptance, docs/45 §9.2)', () => {
+  // Reference values from the tracer before the reuse (commit b1f97b5): the
+  // same RK4 steps, so the same paths; only repeated evaluations were dropped.
+  const run = (angle: number) => {
+    const g = traceAirfoil(angle);
+    let r = g.next();
+    while (!r.done) r = g.next();
+    return r.value;
+  };
+  it.each([
+    [4, [['seed-01', 1024, 4.58351326, 0.6881601, -0.8320438], ['seed-07', 1024, 4.636645794, 0.6682335, -0.0661725], ['seed-10', 1024, 4.406804085, 0.7497878, 0.1613011], ['seed-16', 1024, 4.407440662, 0.7182398, 0.881461]]],
+    [-12, [['seed-01', 1024, 4.25598526, 0.745222, -0.9226459], ['seed-07', 1024, 4.261644363, 0.7979978, -0.2311053], ['seed-10', 1024, 4.324327946, 0.8003605, -0.0463908], ['seed-16', 1024, 4.790859699, 0.6541111, 0.7718403]]],
+  ] as const)('α%s paths are the ones traced before', (angle, want) => {
+    const f = run(angle);
+    for (const [id, n, tauEnd, x, y] of want) {
+      const p = f.paths.find((p) => p.id === id)!;
+      expect(p.status).toBe('complete');
+      expect(p.tau.length).toBe(n);
+      expect(p.tau[n - 1]).toBeCloseTo(tauEnd, 6);
+      expect(p.xy[1000]).toBeCloseTo(x, 6);
+      expect(p.xy[1001]).toBeCloseTo(y, 6);
+    }
+  });
+});

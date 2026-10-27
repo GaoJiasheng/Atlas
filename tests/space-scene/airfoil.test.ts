@@ -142,3 +142,15 @@ it('bank fixed vectors select just lift and gravity, with no horizontal arrows',
   expect(arrows[1]!.dir[1]).toBeCloseTo(0.9396926208, 10);
   expect(arrows[1]!.dir[2]).toBeCloseTo(-0.3420201433, 10);
 });
+
+describe('force-vector arrow scale (browser acceptance, docs/45 §9.2)', () => {
+  it('an overlay in thousands of newtons keeps a visible shaft; overlays in newtons keep their scale', async () => {
+    const { vectorScale } = await import('../../src/engines/space-scene/lib/sim/arrows');
+    // forces and sample-forces: unchanged (1.6 N's worth of length).
+    expect(vectorScale(0.04, 0.25)).toBeCloseTo(0.064, 12);
+    expect(vectorScale(0.03, 0.25)).toBeCloseTo(0.048, 12);
+    // Airfoil lift (per 0.00015 m/N): was 0.00024 scene units, an invisible shaft.
+    expect(vectorScale(0.00015, 0.5)).toBeCloseTo(0.08, 12);
+    expect(vectorScale(0.0004, 0.55)).toBeCloseTo(0.088, 12);
+  });
+});
