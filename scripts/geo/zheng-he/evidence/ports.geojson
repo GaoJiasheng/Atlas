@@ -1,0 +1,433 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.778029,
+          32.051965
+        ]
+      },
+      "properties": {
+        "id": "place-nanjing",
+        "name": {
+          "en": "Nanjing",
+          "zh": "南京"
+        },
+        "upstreamName": "Nanjing",
+        "source": "D02",
+        "upstreamId": 1159151385,
+        "role": "fleet-origin-region",
+        "coordinateMeaning": "Modern gazetteer city point; geographic locator only, not a medieval quay, battle coordinate, fleet track or proof of personal landing",
+        "factIds": [
+          "ZH-F01"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          119.2981,
+          26.081942
+        ]
+      },
+      "properties": {
+        "id": "place-fuzhou",
+        "name": {
+          "en": "Fuzhou",
+          "zh": "福州（福建沿岸参照点）"
+        },
+        "upstreamName": "Fuzhou",
+        "source": "D02",
+        "upstreamId": 1159151329,
+        "role": "regional-anchor",
+        "coordinateMeaning": "Modern gazetteer city point; geographic locator only, not a medieval quay, battle coordinate, fleet track or proof of personal landing",
+        "factIds": [
+          "ZH-F01"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.578041,
+          24.901962
+        ]
+      },
+      "properties": {
+        "id": "place-quanzhou",
+        "name": {
+          "en": "Quanzhou",
+          "zh": "泉州"
+        },
+        "upstreamName": "Quanzhou",
+        "source": "D02",
+        "upstreamId": 1159149791,
+        "role": "context-port",
+        "coordinateMeaning": "Modern gazetteer city point; geographic locator only, not a medieval quay, battle coordinate, fleet track or proof of personal landing",
+        "factIds": [
+          "ZH-F01"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.246461,
+          2.206414
+        ]
+      },
+      "properties": {
+        "id": "place-melaka",
+        "name": {
+          "en": "Malacca",
+          "zh": "马六甲"
+        },
+        "upstreamName": "Malacca",
+        "source": "D02",
+        "upstreamId": 1159148319,
+        "role": "fleet-port",
+        "coordinateMeaning": "Modern gazetteer city point; geographic locator only, not a medieval quay, battle coordinate, fleet track or proof of personal landing",
+        "factIds": [
+          "ZH-F01"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          103.853875,
+          1.294979
+        ]
+      },
+      "properties": {
+        "id": "place-temasek-region",
+        "name": {
+          "en": "Singapore (regional anchor)",
+          "zh": "淡马锡／新加坡岛区域"
+        },
+        "upstreamName": "Singapore",
+        "source": "D02",
+        "upstreamId": 1159151627,
+        "role": "context-not-landing",
+        "coordinateMeaning": "Modern gazetteer city point; geographic locator only, not a medieval quay, battle coordinate, fleet track or proof of personal landing",
+        "factIds": [
+          "ZH-F25",
+          "ZH-F27"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.748084,
+          -2.978093
+        ]
+      },
+      "properties": {
+        "id": "place-palembang",
+        "name": {
+          "en": "Palembang",
+          "zh": "旧港（巨港）"
+        },
+        "upstreamName": "Palembang",
+        "source": "D02",
+        "upstreamId": 1159150839,
+        "role": "conflict-region",
+        "coordinateMeaning": "Modern gazetteer city point; geographic locator only, not a medieval quay, battle coordinate, fleet track or proof of personal landing",
+        "factIds": [
+          "ZH-F01"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.748887,
+          -7.24729
+        ]
+      },
+      "properties": {
+        "id": "place-java-region",
+        "name": {
+          "en": "Surabaya (regional anchor)",
+          "zh": "爪哇（泗水区域参照点）"
+        },
+        "upstreamName": "Surabaya",
+        "source": "D02",
+        "upstreamId": 1159151339,
+        "role": "regional-anchor-not-battle-site",
+        "coordinateMeaning": "Modern gazetteer city point; geographic locator only, not a medieval quay, battle coordinate, fleet track or proof of personal landing",
+        "factIds": [
+          "ZH-F19"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.22197,
+          10.016953
+        ]
+      },
+      "properties": {
+        "id": "place-kochi",
+        "name": {
+          "en": "Kochi",
+          "zh": "柯枝（科钦）"
+        },
+        "upstreamName": "Kochi",
+        "source": "D02",
+        "upstreamId": 1159150009,
+        "role": "fleet-port",
+        "coordinateMeaning": "Modern gazetteer city point; geographic locator only, not a medieval quay, battle coordinate, fleet track or proof of personal landing",
+        "factIds": [
+          "ZH-F01"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.768044,
+          11.252382
+        ]
+      },
+      "properties": {
+        "id": "place-calicut",
+        "name": {
+          "en": "Kozhikode",
+          "zh": "古里"
+        },
+        "upstreamName": "Kozhikode",
+        "source": "D02",
+        "upstreamId": 1159150463,
+        "role": "fleet-port",
+        "coordinateMeaning": "Modern gazetteer city point; geographic locator only, not a medieval quay, battle coordinate, fleet track or proof of personal landing",
+        "factIds": [
+          "ZH-F01"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.240001,
+          6.030005
+        ]
+      },
+      "properties": {
+        "id": "place-galle",
+        "name": {
+          "en": "Galle",
+          "zh": "加勒（碑文发现地）"
+        },
+        "upstreamName": "Galle",
+        "source": "D02",
+        "upstreamId": 1159146379,
+        "role": "source-findspot-not-battle-site",
+        "coordinateMeaning": "Modern gazetteer city point; geographic locator only, not a medieval quay, battle coordinate, fleet track or proof of personal landing",
+        "factIds": [
+          "ZH-F28",
+          "ZH-F29"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          45.00949,
+          12.779723
+        ]
+      },
+      "properties": {
+        "id": "place-aden",
+        "name": {
+          "en": "Aden",
+          "zh": "亚丁"
+        },
+        "upstreamName": "Aden",
+        "source": "D02",
+        "upstreamId": 1159150595,
+        "role": "expedition-port",
+        "coordinateMeaning": "Modern gazetteer city point; geographic locator only, not a medieval quay, battle coordinate, fleet track or proof of personal landing",
+        "factIds": [
+          "ZH-F01"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          45.364732,
+          2.068627
+        ]
+      },
+      "properties": {
+        "id": "place-mogadishu",
+        "name": {
+          "en": "Mogadishu",
+          "zh": "摩加迪沙"
+        },
+        "upstreamName": "Mogadishu",
+        "source": "D02",
+        "upstreamId": 1159150715,
+        "role": "expedition-port",
+        "coordinateMeaning": "Modern gazetteer city point; geographic locator only, not a medieval quay, battle coordinate, fleet track or proof of personal landing",
+        "factIds": [
+          "ZH-F01"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.100022,
+          -3.209999
+        ]
+      },
+      "properties": {
+        "id": "place-malindi",
+        "name": {
+          "en": "Malindi",
+          "zh": "马林迪"
+        },
+        "upstreamName": "Malindi",
+        "source": "D02",
+        "upstreamId": 1159148341,
+        "role": "expedition-port",
+        "coordinateMeaning": "Modern gazetteer city point; geographic locator only, not a medieval quay, battle coordinate, fleet track or proof of personal landing",
+        "factIds": [
+          "ZH-F01"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.14145,
+          5.1914
+        ]
+      },
+      "properties": {
+        "id": "place-samudera-region",
+        "name": {
+          "en": "Lhokseumawe (regional anchor)",
+          "zh": "苏门答剌附近区域（今司马威参照）"
+        },
+        "upstreamName": "Lhokseumawe",
+        "source": "D02",
+        "upstreamId": 1159148309,
+        "role": "regional-anchor-not-palace-site",
+        "coordinateMeaning": "Modern gazetteer city point; geographic locator only, not a medieval quay, battle coordinate, fleet track or proof of personal landing",
+        "factIds": [
+          "ZH-F21"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          90.406634,
+          23.725006
+        ]
+      },
+      "properties": {
+        "id": "place-bengal-region",
+        "name": {
+          "en": "Dhaka (regional anchor)",
+          "zh": "孟加拉区域（今达卡参照）"
+        },
+        "upstreamName": "Dhaka",
+        "source": "D02",
+        "upstreamId": 1159151467,
+        "role": "regional-anchor-not-giraffe-boarding",
+        "coordinateMeaning": "Modern gazetteer city point; geographic locator only, not a medieval quay, battle coordinate, fleet track or proof of personal landing",
+        "factIds": [
+          "ZH-F31"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          56.4529,
+          27.095
+        ]
+      },
+      "properties": {
+        "id": "place-hormuz",
+        "name": {
+          "en": "Hormuz",
+          "zh": "霍尔木兹"
+        },
+        "source": "D03",
+        "geonamesId": "131231",
+        "upstreamName": "Hormoz",
+        "role": "fleet-port",
+        "coordinateMeaning": "Modern town locator; not measured medieval landing coordinate",
+        "factIds": [
+          "ZH-F12"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          39.49808,
+          -8.95897
+        ]
+      },
+      "properties": {
+        "id": "place-kilwa",
+        "name": {
+          "en": "Kilwa Kisiwani",
+          "zh": "基尔瓦"
+        },
+        "source": "D04",
+        "geonamesId": "157382",
+        "upstreamName": "Kilwa Kisiwani",
+        "role": "context-not-confirmed-visit",
+        "coordinateMeaning": "Modern town locator; not measured medieval landing coordinate",
+        "factIds": [
+          "ZH-F33",
+          "ZH-F34"
+        ]
+      }
+    }
+  ]
+}
