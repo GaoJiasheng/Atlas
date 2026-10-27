@@ -406,7 +406,8 @@ function beatSceneOf(page: Page): Promise<BeatScene | null> {
     return {
       ...Object.fromEntries(keys.map((k) => [k, st[k] ?? null])),
       sim: sim?.values ?? null,
-      // Orbit sims (docs/44): the shared snapshot and its outputs, rounded to 1e-6 (snapshot ids differ between loads).
+      // Orbit sims (docs/44): the shared snapshot and its outputs, rounded to 1e-6. Snapshot ids differ between loads, and what the
+      // stage drew (`rendered`, fades included) is per frame: orbitIssues checks it against the snapshot once the frame lands.
       ...(() => {
         const e = window.__atlas!.engine as unknown as { orbit?(): Record<string, unknown> | null; sim?(): unknown };
         const orbit = e.orbit?.();
@@ -417,7 +418,7 @@ function beatSceneOf(page: Page): Promise<BeatScene | null> {
             : Array.isArray(v)
               ? v.map(normalize)
               : v && typeof v === 'object'
-                ? Object.fromEntries(Object.entries(v).filter(([k]) => k !== 'snapshotId').map(([k, x]) => [k, normalize(x)]))
+                ? Object.fromEntries(Object.entries(v).filter(([k]) => k !== 'snapshotId' && k !== 'rendered').map(([k, x]) => [k, normalize(x)]))
                 : v;
         return { orbit: normalize(orbit), orbitOutputs: normalize(e.sim?.()) };
       })(),
