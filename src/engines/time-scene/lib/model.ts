@@ -70,6 +70,7 @@ export interface TimeModel {
   /** [west, south, east, north] of all data geometry. */
   bounds: [number, number, number, number] | null;
   /** The topic's `datePrecision`: the finest date part shown (and written back to the URL). */
+  maDigits?: 0 | 1 | 2 | 3;
   datePrecision?: DatePrecision;
   /** The span crosses from BCE into CE (dates, min < 0 < max): years 1–999 CE are written '150 CE' / '公元150年' (lib/format.ts, docs/43 E1). */
   mixedEra: boolean;
@@ -77,6 +78,7 @@ export interface TimeModel {
 
 export interface TimeModelOptions {
   timePresentation?: TimePresentation;
+  maDigits?: 0 | 1 | 2 | 3;
   datePrecision?: DatePrecision;
 }
 
@@ -158,6 +160,7 @@ export function buildTimeModel(
   return {
     ...(options.timePresentation ? { timePresentation: options.timePresentation } : {}),
     scale,
+    maDigits: options.maDigits,
     min,
     max,
     span,

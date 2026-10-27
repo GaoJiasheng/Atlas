@@ -1,4 +1,4 @@
-import { timeBeatScene, timeLinkedBeatPatch } from '../../src/engines/time-scene/lib/beatScene';
+import { timeBeatState, linkedTimeBeatState } from '../../src/engines/time-scene/lib/beatState';
 import { encodeSceneState } from '../../src/engines/core/url-state';
 import type { Beat } from '../../src/engines/core/presentation';
 import type { TimeBeat } from '../../src/engines/time-scene/schema';
@@ -155,23 +155,19 @@ describe('opt-in mission presentation', () => {
 });
 
 
-describe('mission beat state and existing b URL key', () => {
-  const target: SceneSnapshot<TimeSceneExt> = { chapter: 'dated-evidence', t: '1969-07-19', beat: 0, highlight: [], layers: ['base', 'battles'], camera: { center: [0, 20], zoom: 1 } };
+describe('mission beats use the shared TimeScene beat state (lib/beatState)', () => {
+  const target: SceneSnapshot<TimeSceneExt> = { chapter: 'dated-evidence', t: '1969-07-19', beat: null, highlight: [], layers: ['base', 'battles'], camera: { center: [0, 20], zoom: 1 } };
   const beat: Beat<TimeBeat> = { chapter: 'dated-evidence', chapterIndex: 1, index: 1, count: 3, caption: { en: 'Lunar evidence', zh: '月面证据' }, spec: { t: '1969-07-20', highlight: ['fixture-lunar-outcome'], caption: { en: 'Lunar evidence', zh: '月面证据' } } };
-  it('uses one scene for presentation, map ticks and phone controls', () => {
-    expect(timeBeatScene(target, beat, true)).toMatchObject({ t: '1969-07-20', beat: 1, highlight: ['fixture-lunar-outcome'], camera: target.camera });
+  it('uses one scene for presentation, map ticks and the reader beat line', () => {
+    expect(timeBeatState(target, beat.spec, beat.index)).toMatchObject({ t: '1969-07-20', beat: 1, highlight: ['fixture-lunar-outcome'], camera: target.camera });
   });
   it('keeps explicit link fields while filling missing beat fields', () => {
-    const scene = timeBeatScene(target, beat, true);
-    expect(timeLinkedBeatPatch(scene, ['t', 'camera'])).toEqual({ highlight: ['fixture-lunar-outcome'], layers: ['base', 'battles'] });
+    const scene = timeBeatState(target, beat.spec, beat.index);
+    expect(linkedTimeBeatState(scene, ['t', 'camera'])).toEqual({ chapter: 'dated-evidence', beat: 1, highlight: ['fixture-lunar-outcome'], layers: ['base', 'battles'] });
   });
   it('writes only ch/b for the exact beat using its scene as the URL baseline', () => {
-    const scene = timeBeatScene(target, beat, true);
-    expect(encodeSceneState(scene, { ...scene, beat: target.beat })).toEqual([['ch', 'dated-evidence'], ['b', '2']]);
+    const scene = timeBeatState(target, beat.spec, beat.index);
+    expect(encodeSceneState(scene, { ...scene, beat: null })).toEqual([['ch', 'dated-evidence'], ['b', '2']]);
     expect(encodeSceneState(target, target)).toEqual([['ch', 'dated-evidence']]);
-  });
-  it('does not add a beat field to legacy topic beat states', () => {
-    const { beat: _beat, ...legacy } = target;
-    expect(timeBeatScene(legacy, beat, false)).not.toHaveProperty('beat');
   });
 });

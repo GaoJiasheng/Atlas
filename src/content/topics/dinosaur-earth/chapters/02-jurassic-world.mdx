@@ -1,0 +1,149 @@
+---
+id: jurassic-world
+order: 2
+title:
+  en: "Jurassic: a world separating"
+  zh: 侏罗纪：逐渐分开的世界
+state:
+  time:
+    ma: 150
+  camera:
+    center:
+      - 0
+      - 5
+    zoom: 1.1
+  layers:
+    - base
+    - fossils-modern
+  highlight:
+    - card-museum-origin
+  inset: southeast-asia
+  insetVisible: true
+  fossilMode: age-window
+  index:
+    - card-museum-origin
+  summary:
+    en: Compare reconstructed frames as land separates.
+    zh: 对照复原样本，看陆地逐渐分开。
+  beats:
+    - t:
+        ma: 200
+      camera:
+        center:
+          - 0
+          - 5
+        zoom: 1.1
+      layers:
+        - base
+        - fossils-modern
+      highlight: []
+      insetVisible: false
+      fossilMode: age-window
+      caption:
+        en: "200 million years ago: this is a Jurassic map sample. The period boundary is older, at 201.4 million
+          years ago in the cited chart."
+        zh: 2 亿年前：这是侏罗纪内的一张地图。所引年代表的时期界线更早，为 2.014 亿年前。
+    - t:
+        ma: 170
+      camera:
+        center:
+          - 0
+          - 5
+        zoom: 1.1
+      layers:
+        - base
+        - fossils-modern
+      highlight: []
+      insetVisible: false
+      fossilMode: age-window
+      caption:
+        en: "170 million years ago: compare this reconstruction with the earlier frame. Pangaea’s breakup took place
+          over millions of years."
+        zh: 1.7 亿年前：对照前一张复原图。盘古大陆的分裂经历了漫长的地质时间。
+    - t:
+        ma: 150
+      camera:
+        center:
+          - 0
+          - 5
+        zoom: 1.1
+      layers:
+        - base
+        - fossils-modern
+      highlight: []
+      insetVisible: true
+      fossilMode: age-window
+      caption:
+        en: "150 million years ago: the large map shows reconstructed land, while the inset keeps fossil finds in
+          modern coordinates."
+        zh: 1.5 亿年前：大图显示复原陆地，小图仍按现代经纬度显示化石发现地。
+      inset: world
+    - t:
+        ma: 150
+      camera:
+        center:
+          - 0
+          - 5
+        zoom: 1.1
+      layers:
+        - base
+        - fossils-modern
+      highlight:
+        - card-museum-origin
+      insetVisible: true
+      fossilMode: age-window
+      caption:
+        en: "150 million years ago: The museum in Singapore displays Jurassic sauropods found in Wyoming. Their
+          display location is different from their place of discovery."
+        zh: 1.5 亿年前：新加坡博物馆展示的侏罗纪蜥脚类化石发现于怀俄明州。展出地点与发现地点不同。
+      inset: southeast-asia
+---
+
+<Lang en>
+
+The Jurassic sits between the Triassic and the Cretaceous. The chart used here places its boundaries at <Num s="S1">201.4</Num> and <Num s="S1">143.1</Num> million years ago. Our first Jurassic land sample is <Num s="S29">200</Num> million years old. A sample inside a period does not mark the beginning of that period: the map sequence and the geological chart answer different questions. <sup><button type="button" className="atlas-src" data-source="S1" aria-label="Source S1">S1</button></sup>
+
+Compare the samples at <Num s="S29">200</Num>, <Num s="S29">170</Num> and <Num s="S29">150</Num> million years ago. The changing pattern belongs to the long breakup of Pangaea. These are separate reconstructions of land derived from modelled elevation. The screen does not calculate continents sliding continuously between them. Watch the map-sample reading whenever you choose a time between the supplied samples. <sup><button type="button" className="atlas-src" data-source="S29" aria-label="Source S29">S29</button><button type="button" className="atlas-src" data-source="S62" aria-label="Source S62">S62</button></sup>
+
+The small map adds a different kind of information. Its dots stay at modern find locations. Their published age ranges decide which records enter the browsing window. The dots have not been carried backwards onto the ancient land. A nearby dot and a coastline on the large map therefore cannot establish an animal's exact ancient position. <sup><button type="button" className="atlas-src" data-source="S65" aria-label="Source S65">S65</button></sup>
+
+Open the museum-origin card. Singapore's natural history museum displays diplodocid sauropod fossils from Wyoming's Jurassic Morrison Formation. Their place of exhibition and place of discovery are different. The reconstruction provides broad geographical context; its selected age cannot assign a precise age to an individual museum specimen. Follow the specimen's own source instead. <sup><button type="button" className="atlas-src" data-source="S17" aria-label="Source S17">S17</button><button type="button" className="atlas-src" data-source="S57" aria-label="Source S57">S57</button></sup>
+
+<More title={{"en": "Reconstruction and coastline", "zh": "复原地形与海岸"}}>
+
+PALEOMAP PaleoDEM describes reconstructed elevation and water depth. Here, positive elevation is classified as exposed land; exact zero belongs to the non-land side. This is a mapping decision, not a measured ancient shoreline. <sup><button type="button" className="atlas-src" data-source="S29">S29</button></sup>
+
+</More>
+
+<More title={{"en": "From discovery to exhibition", "zh": "从发现到展出"}}>
+
+The museum's account identifies Dana Quarry near Ten Sleep, Wyoming, and the Jurassic Morrison Formation. It does not make Singapore the excavation site. Continue to <TopicLink slug="fossils-and-skeletons" ch="singapore-skeletons">the Singapore skeletons</TopicLink> for the museum evidence. <sup><button type="button" className="atlas-src" data-source="S57">S57</button></sup>
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+侏罗纪位于三叠纪之后、白垩纪之前。这里采用的年代表把两端列为 <Num s="S1">201.4</Num> 和 <Num s="S1">143.1</Num> 百万年前。本章最早的地图样本是 <Num s="S29">2</Num> 亿年前，处于侏罗纪之内，并非时期起点。先分清地图的样本年龄与地质时期界线，再读陆地的变化。现代国家名称也不应变成远古大陆上的国界。 <sup><button type="button" className="atlas-src" data-source="S1" aria-label="来源 S1">S1</button></sup>
+
+依次对照 <Num s="S29">2</Num> 亿、<Num s="S29">1.7</Num> 亿和 <Num s="S29">1.5</Num> 亿年前的样本，可以观察盘古大陆逐渐分开的格局。陆地轮廓来自模型高程，不是远古照片。样本之间没有计算连续的大陆运动；选择中间年代时，要同时看地图样本读数。 <sup><button type="button" className="atlas-src" data-source="S29" aria-label="来源 S29">S29</button><button type="button" className="atlas-src" data-source="S62" aria-label="来源 S62">S62</button></sup>
+
+现代小图的点始终留在今天的发现地点，发表的年龄范围则决定哪些记录进入浏览窗。这些点没有被搬到远古大陆上。不能把大图的一段海岸与小图的一个点直接拼合，便认定某只恐龙当时所在的准确位置。 <sup><button type="button" className="atlas-src" data-source="S65" aria-label="来源 S65">S65</button></sup>
+
+打开馆藏来源卡，可以看到新加坡展示的梁龙科蜥脚类化石来自怀俄明州的侏罗纪莫里森组。展出地点与发现地点各有意义。地图提供古地理背景，单具标本的年龄仍须依据自身材料和来源，不能由当前地图的读数代定。 <sup><button type="button" className="atlas-src" data-source="S17" aria-label="来源 S17">S17</button><button type="button" className="atlas-src" data-source="S57" aria-label="来源 S57">S57</button></sup>
+
+<More title={{"en": "Reconstruction and coastline", "zh": "复原地形与海岸"}}>
+
+PALEOMAP PaleoDEM 提供复原的高程与水深。本图把正高程归为露出水面的陆地，精确零值归到非陆地一侧。这是制图选择，不是实测古岸线。<sup><button type="button" className="atlas-src" data-source="S29">S29</button></sup>
+
+</More>
+
+<More title={{"en": "From discovery to exhibition", "zh": "从发现到展出"}}>
+
+馆方介绍注明怀俄明州 Ten Sleep 附近的 Dana Quarry，以及侏罗纪莫里森组。新加坡是展出地点，并非这些标本的挖掘地。继续到<TopicLink slug="fossils-and-skeletons" ch="singapore-skeletons">新加坡的骨架</TopicLink>阅读馆藏证据。<sup><button type="button" className="atlas-src" data-source="S57">S57</button></sup>
+
+</More>
+
+</Lang>
+

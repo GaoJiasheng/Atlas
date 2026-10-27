@@ -1,0 +1,13 @@
+id: sample-joint
+title: { en: "Sample: Numeric joint binding", zh: "示例：数字关节绑定" }
+subtitle: { en: "A shared rig and a static lookup table", zh: "共用骨架与静态查值表" }
+subject: biology
+levels: [P4]
+moe: []
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: draft
+note: { en: "Engine fixture · adult reference meshes Z-Anatomy / BodyParts3D, CC BY-SA 4.0 · ideal static readings", zh: "引擎测试 · 成人参考网格 Z-Anatomy / BodyParts3D，CC BY-SA 4.0 · 理想静力读数" }

@@ -1,0 +1,376 @@
+---
+id: eggs-and-tadpoles
+order: 1
+title:
+  en: Eggs and tadpoles
+  zh: 卵与蝌蚪
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  pose: null
+  layers: &id001
+  - frog-cycle
+  hide:
+  - chicken-egg
+  - egg-shell-window
+  - egg-yolk
+  - egg-white
+  - egg-embryo
+  - chicken-chick
+  - chicken-adult
+  - chicken-marker
+  - chicken-next-generation
+  - chicken-tray
+  - compare-frog
+  - compare-chicken
+  - compare-mosquito
+  - compare-plant
+  - comparison-marker
+  - comparison-tray
+  ghost: []
+  labels: &id002
+  - frog-eggs
+  camera: &id003
+    position:
+    - 0
+    - 5
+    - 6
+    target:
+    - -2.8
+    - 0.4
+    - 0
+    fov: 32
+  highlight:
+    signal: &id004
+    - frog-eggs
+  sim:
+    set:
+      frog-view: egg
+      chicken-view: egg
+      egg-open: false
+      fertilised: true
+      compare-view: frog
+    try:
+      vary: frog-view
+      keep:
+      - en: Same selected specimens and display scale
+        zh: 相同的标本与展示比例
+      observe:
+      - frog-form
+  summary:
+    en: In this pond-frog example, an egg hatches into a tadpole.
+    zh: 在这个池塘型青蛙的例子中，卵孵出蝌蚪。
+  beats:
+  - view: assembled
+    explode: 0
+    part: null
+    run: false
+    cutaway: none
+    pose: null
+    layers: *id001
+    hide:
+    - chicken-egg
+    - egg-shell-window
+    - egg-yolk
+    - egg-white
+    - egg-embryo
+    - chicken-chick
+    - chicken-adult
+    - chicken-marker
+    - chicken-next-generation
+    - chicken-tray
+    - compare-frog
+    - compare-chicken
+    - compare-mosquito
+    - compare-plant
+    - comparison-marker
+    - comparison-tray
+    ghost: []
+    labels: *id002
+    camera:
+      position:
+      - -1.8
+      - 2
+      - 1
+      target:
+      - -2.8
+      - 0.4
+      - -1.4
+      fov: 30
+    highlight:
+      signal: *id004
+    sim:
+      set:
+        frog-view: egg
+        chicken-view: egg
+        egg-open: false
+        fertilised: true
+        compare-view: frog
+    caption:
+      en: Each visible jelly capsule surrounds an embryo in this egg model. The display shows only a small part of a clutch.
+      zh: 卵模型中，每个可见的胶质包被围着一个胚胎。这里仅画一小部分卵团。
+  - view: assembled
+    explode: 0
+    part: null
+    run: false
+    cutaway: none
+    pose: null
+    layers: *id001
+    hide:
+    - chicken-egg
+    - egg-shell-window
+    - egg-yolk
+    - egg-white
+    - egg-embryo
+    - chicken-chick
+    - chicken-adult
+    - chicken-marker
+    - chicken-next-generation
+    - chicken-tray
+    - compare-frog
+    - compare-chicken
+    - compare-mosquito
+    - compare-plant
+    - comparison-marker
+    - comparison-tray
+    ghost: []
+    labels:
+    - frog-tadpole
+    camera:
+      position:
+      - 0
+      - 5
+      - 6
+      target:
+      - -2.8
+      - 0.4
+      - 0
+      fov: 32
+    highlight:
+      signal:
+      - frog-tadpole
+    sim:
+      set:
+        frog-view: tadpole
+        chicken-view: egg
+        egg-open: false
+        fertilised: true
+        compare-view: frog
+    caption:
+      en: In this example, the young frog hatches as a tadpole, with a tail and no visible legs.
+      zh: 在这个例子里，幼体孵出时是蝌蚪：长着尾巴，还看不到腿。
+  - view: assembled
+    explode: 0
+    part: null
+    run: false
+    cutaway: none
+    pose: null
+    layers: *id001
+    hide:
+    - chicken-egg
+    - egg-shell-window
+    - egg-yolk
+    - egg-white
+    - egg-embryo
+    - chicken-chick
+    - chicken-adult
+    - chicken-marker
+    - chicken-next-generation
+    - chicken-tray
+    - compare-frog
+    - compare-chicken
+    - compare-mosquito
+    - compare-plant
+    - comparison-marker
+    - comparison-tray
+    ghost: []
+    labels:
+    - frog-tadpole
+    camera:
+      position:
+      - -0.4
+      - 2
+      - 2
+      target:
+      - -1.468521
+      - 0.4
+      - -0.432624
+      fov: 30
+    highlight:
+      signal:
+      - frog-tadpole
+    sim:
+      set:
+        frog-view: tadpole
+        chicken-view: egg
+        egg-open: false
+        fertilised: true
+        compare-view: frog
+    caption:
+      en: The tadpole swims with its tail. Its shape differs greatly from the adult frog shown elsewhere on the tray.
+      zh: 蝌蚪靠尾巴游动。它的形状与展台另一处的成蛙差别很大。
+  - view: assembled
+    explode: 0
+    part: null
+    run: false
+    cutaway: none
+    pose: null
+    layers: *id001
+    hide:
+    - chicken-egg
+    - egg-shell-window
+    - egg-yolk
+    - egg-white
+    - egg-embryo
+    - chicken-chick
+    - chicken-adult
+    - chicken-marker
+    - chicken-next-generation
+    - chicken-tray
+    - compare-frog
+    - compare-chicken
+    - compare-mosquito
+    - compare-plant
+    - comparison-marker
+    - comparison-tray
+    ghost: []
+    labels:
+    - frog-adult
+    - frog-tadpole
+    camera:
+      position:
+      - 0
+      - 5
+      - 6
+      target:
+      - -2.8
+      - 0.4
+      - 0
+      fov: 32
+    highlight:
+      signal:
+      - frog-adult
+      - frog-tadpole
+    sim:
+      set:
+        frog-view: adult
+        chicken-view: egg
+        egg-open: false
+        fertilised: true
+        compare-view: frog
+    caption:
+      en: These different forms belong to the same kind of animal. A tadpole is a young frog.
+      zh: 这些不同的形态属于同一种动物。蝌蚪是青蛙的幼体。
+  - view: assembled
+    explode: 0
+    part: null
+    run: false
+    cutaway: none
+    pose: null
+    layers: *id001
+    hide:
+    - chicken-egg
+    - egg-shell-window
+    - egg-yolk
+    - egg-white
+    - egg-embryo
+    - chicken-chick
+    - chicken-adult
+    - chicken-marker
+    - chicken-next-generation
+    - chicken-tray
+    - compare-frog
+    - compare-chicken
+    - compare-mosquito
+    - compare-plant
+    - comparison-marker
+    - comparison-tray
+    ghost: []
+    labels:
+    - frog-marker
+    camera:
+      position:
+      - 0
+      - 5
+      - 6
+      target:
+      - -2.8
+      - 0.4
+      - 0
+      fov: 32
+    highlight:
+      signal:
+      - frog-marker
+    sim:
+      set:
+        frog-view: tadpole
+        chicken-view: egg
+        egg-open: false
+        fertilised: true
+        compare-view: frog
+    caption:
+      en: The control chooses an observation. It does not count days; development time varies between species and conditions.
+      zh: 这个控件选择观察哪一阶段，不计算天数。不同物种和条件下，发育时间并不相同。
+  index:
+    parts:
+    - frog-eggs
+    - frog-tadpole
+    - frog-adult
+    - frog-marker
+---
+
+<Lang en>
+
+Look closely at the small group of frog eggs. Each visible jelly coat surrounds an <Term id="embryo">embryo</Term>, a developing young animal. Only part of a clutch is shown. The amount drawn is a choice for the display, not a claim about how many eggs every frog lays. The eggs and the next specimen are also enlarged separately.
+
+In this pond-frog example, a young frog emerges as a <Term id="tadpole">tadpole</Term>. Coming out of an egg is called <Term id="hatching">hatching</Term>. The selected swimming tadpole has a rounded body and a long tail, with no visible legs. Its tail moves it through the water. The model is a still observation of this form, not a film of an egg hatching. <FlyTo preset="frog-overview">Follow the frog observations</FlyTo>
+
+Compare the tadpole with the adult frog on the same tray. The tadpole does not look like a small copy of the adult. Even so, it is a young frog, not a fish that later changes into a frog. To identify its place in the life cycle, follow the sequence from the egg and onwards through the changing body forms.
+
+Use the frog observation control to move the pointer from egg to tadpole, then back to inspect the egg again. The other specimens remain available for comparison. The control chooses a view; it does not advance a day counter. Development takes different amounts of time in different frog species and conditions, so there is no single frog timetable on this display.
+
+<Figure src="figures/frog-and-chicken-eggs-and-tadpole" alt={{"en": "A graphite drawing of a small group of jelly-coated frog eggs and a separate swimming tadpole with a long tail and no visible legs.", "zh": "石墨画：一小团有胶质包被的蛙卵，旁边另画一只长尾、看不到腿的游泳蝌蚪。"}} caption={{"en": "Jelly-coated eggs and one free-swimming tadpole, enlarged separately.", "zh": "胶质包被的卵与一只自由游泳的蝌蚪，各自放大。"}} />
+
+<More title={{"en": "One frog pathway", "zh": "一种青蛙的发育路线"}}>
+
+Many frogs have a free-living tadpole stage, but not all do. Some develop inside their eggs and emerge as froglets. The pond-type sequence here is an example to study, not a rule that every frog species must follow.
+
+</More>
+
+<More title={{"en": "No shared frog clock", "zh": "没有统一的青蛙时钟"}}>
+
+Published accounts describe different species and environments. This model uses their observations of changing form without borrowing a seasonal calendar from another place. A stage label tells you what can be seen, rather than the animal’s exact age.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+近看这一小团蛙卵。每个可见的胶质包被都围着一个<Term id="embryo">胚胎</Term>，也就是发育中的幼体。这里仅画出卵团的一小部分，画多少是展示的选择，不表示每只蛙都会产这么多卵。卵和旁边的幼体标本也分别放大，不能直接比较大小。
+
+在这个池塘型青蛙的例子里，幼体从卵中出来时是<Term id="tadpole">蝌蚪</Term>。从卵中出来叫<Term id="hatching">孵出</Term>。所选的游泳蝌蚪身体圆，有长尾巴，还看不到腿，靠尾巴在水中游动。模型展示的是这个阶段静止的样子，没有播放一枚卵正在孵出的影片。<FlyTo preset="frog-overview">沿着青蛙的阶段观察</FlyTo>
+
+再看同一展台上的成蛙。蝌蚪并不像一只缩小的成蛙，但它仍然是青蛙的幼体，不是一条以后才变成青蛙的鱼。不能只凭外形有些相像，就把它归成鱼。沿着卵和之后的身体变化，才能看清它在生活史中的位置。
+
+试着用观察控件把指示珠从卵拨到蝌蚪，再回头细看卵。其他标本仍留在展台上，方便对照。控件只选择视图，不把日历往前拨。不同蛙种、不同条件下，发育所需的时间并不相同，因此展台没有给所有青蛙共用的天数表。
+
+<Figure src="figures/frog-and-chicken-eggs-and-tadpole" alt={{"en": "A graphite drawing of a small group of jelly-coated frog eggs and a separate swimming tadpole with a long tail and no visible legs.", "zh": "石墨画：一小团有胶质包被的蛙卵，旁边另画一只长尾、看不到腿的游泳蝌蚪。"}} caption={{"en": "Jelly-coated eggs and one free-swimming tadpole, enlarged separately.", "zh": "胶质包被的卵与一只自由游泳的蝌蚪，各自放大。"}} />
+
+<More title={{"en": "One frog pathway", "zh": "一种青蛙的发育路线"}}>
+
+许多蛙有自由生活的蝌蚪阶段，但并非全部如此。有些蛙在卵内发育，出来时已经是幼蛙。这里的池塘型顺序是供观察的例子，不是每一种蛙都必须遵循的规则。
+
+</More>
+
+<More title={{"en": "No shared frog clock", "zh": "没有统一的青蛙时钟"}}>
+
+公开资料描述的物种和环境不同。模型采用其中关于形态变化的观察，没有搬用另一个地方的季节日历。阶段名称告诉我们能看见什么，不代表这只动物的确切年龄。
+
+</More>
+
+</Lang>

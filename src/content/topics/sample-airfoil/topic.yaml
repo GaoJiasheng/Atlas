@@ -1,0 +1,11 @@
+id: sample-airfoil
+title: { en: "Sample: Airfoil bench", zh: "示例：翼型实验台" }
+subtitle: { en: "Draft engine fixture", zh: "草稿引擎测试" }
+subject: science
+moe: []
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+status: draft
+note: { en: "Original teaching design · not measurements or aircraft performance", zh: "原创教学设计 · 不是实测或飞机性能数据" }

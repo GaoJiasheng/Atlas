@@ -1,3 +1,4 @@
+import { portSourceIssues } from '../src/engines/space-scene/port-schema';
 /**
  * Content validator: `pnpm validate` (also runs before `pnpm build`).
  *
@@ -55,10 +56,13 @@ import { topicSchema, type TopicMeta } from '../src/content/schema/topic';
 import { chapterSchema } from '../src/content/schema/chapter';
 import { KEBAB_ID } from '../src/content/schema/common';
 import { sourceIds, type SourcesFile } from '../src/content/schema/sources';
+import { airfoilSourceIssues } from '../src/engines/space-scene/airfoil-schema';
+import { foodWebSourceIssues } from '../src/engines/space-scene/food-web-schema';
 import { tableSourceIssues } from '../src/engines/space-scene/table-schema';
 import { glossaryIds, type GlossaryFile } from '../src/content/schema/glossary';
 import { engineSchemas, formatIssues } from '../src/engines/schemas';
 import { timeChapterLayerIssues, timeSceneTopicIssues, type TimeChapterState, type TimeSceneGeoData } from '../src/engines/time-scene/schema';
+import { loadDeepTime } from '../src/engines/time-scene/deep-time-build';
 import {
   exercisesFile,
   musclesFile,
@@ -387,6 +391,7 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
 
   const ids = new IdRegistry(topicFile);
   ids.add(topic.id, 'topic');
+  if (topic.basemap?.reconstruction) for (const id of ['base', 'fossils-modern']) ids.add(id, 'reconstruction layer');
   for (const layer of topic.datedLayers ?? []) ids.add(layer.id, 'dated layer');
   for (const layer of topic.monthlyLayers ?? []) ids.add(layer.id, 'monthly layer');
   const schemas = engineSchemas(topic.engine, topic.stage, topic.temporalMode);
@@ -412,6 +417,11 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
   }
 
   let data: unknown;
+  if (topic.basemap?.reconstruction) {
+    try { Object.assign(raw, loadDeepTime(topic, raw, (stem) => { const f = join(PUBLIC_DIR, 'geo', `${stem}.json`); return existsSync(f) ? readJson(f) : undefined; })); }
+    catch (e) { error(topicFile, String(e)); return; }
+  }
+  if (topic.maDigits !== undefined && (typeof (raw.control as { keyframes?: { t?: unknown }[] } | undefined)?.keyframes?.[0]?.t !== 'object')) error(topicFile, 'maDigits requires geological Ma control frames');
   const parsedData = schemas.data.safeParse(withSharedFitness(raw, shared));
   if (parsedData.success) {
     data = parsedData.data;
@@ -443,10 +453,15 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
       warn(join(dataDir, 'parts.json'), `views.exerciseBody "wire": model ${model} has no "skin-wire" node, so the engine decimates the skin outline at load (slower, rougher)`);
   }
   const matterFile = topic.engine === 'space-scene' && data ? (data as { parts?: PartsFile }).parts : undefined;
+  if (matterFile?.sim?.port) for (const issue of portSourceIssues(matterFile.sim.port, new Map((sourcesFile?.sources ?? []).map((x) => [x.id, x])))) error(join(dataDir, 'parts.json'), `sim.port.${issue.path.join('.')}: ${issue.message}`);
   // A table model's rows (docs/40 §4.2): every source listed, SIM rows citing the design study, TYPICAL rows another source.
+  if (matterFile?.sim?.airfoil) for (const issue of airfoilSourceIssues(matterFile.sim.airfoil, new Map((sourcesFile?.sources ?? []).map(x => [x.id, x])))) error(join(dataDir, 'parts.json'), `sim.airfoil.${issue.path.join('.')}: ${issue.message}`);
   if (matterFile?.sim?.table)
     for (const issue of tableSourceIssues(matterFile.sim.table, matterFile.sim.outputs, new Map((sourcesFile?.sources ?? []).map((x) => [x.id, x]))))
       error(join(dataDir, 'parts.json'), `sim.${issue.path.join('.')}: ${issue.message}`);
+  if (matterFile?.sim?.foodWeb)
+    for (const issue of foodWebSourceIssues(matterFile.sim.foodWeb, sources ?? new Set()))
+      error(join(dataDir, 'parts.json'), `sim.foodWeb.${issue.path.join('.')}: ${issue.message}`);
   if (matterFile?.sim?.matter) for (const issue of matterWarnings(matterFile.sim.matter, new Map(matterFile.sim.controls.map((c) => [c.id, c])))) warn(join(dataDir, 'parts.json'), `sim.matter.${issue.path.join('.')}: ${issue.message}`);
   // The life-cycle ring card's second ring links to another topic (docs/33 §4.3): checked like `<TopicLink slug ch>`.
   const cycleLink = data !== undefined ? (data as { parts?: { sim?: { lifeCycle?: { card?: { compare?: { link?: { topic: string; chapter?: string } } } } } } }).parts?.sim?.lifeCycle?.card?.compare?.link : undefined;
@@ -464,6 +479,9 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
     for (const issue of timeSceneTopicIssues(topic, data as TimeSceneGeoData, readGeo)) {
       const file = issue.file.startsWith('public/') ? join(ROOT, issue.file) : join(dir, issue.file);
       (issue.level === 'error' ? error : warn)(file, issue.message);
+    }
+    if(topic.temporalMode==='geography' && topic.geography){
+      for(const m of (data as {geography:{members:{id:string;joined:string}[]}}).geography.members)if(m.joined>topic.geography.asOf)error(join(dataDir,'geography.json'),`${m.id}: joined after geography.asOf`);
     }
     for (const issue of monthlyResourceIssues(topic, sources ?? new Set(), readGeo))
       error(issue.file.startsWith('public/') ? join(ROOT, issue.file) : join(dir, issue.file), issue.message);
@@ -511,6 +529,16 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
     const chapter = parsed.data;
     chapterInfos.push({ id: chapter.id, order: chapter.order, kind: chapter.kind, state: chapter.state });
     ids.add(chapter.id, 'chapter', file);
+    if (topic.basemap?.reconstruction || topic.maDigits !== undefined) {
+      const st = chapter.state as TimeChapterState;
+      for (const when of [st.time, ...(st.beats ?? []).map((b) => b.t)])
+        if (when !== undefined && typeof when !== 'object') error(file, 'geological TimeScene requires Ma in every chapter and beat');
+      if (topic.basemap?.reconstruction) {
+        const objects = new Set([...(data as TimeSceneGeoData).deepTime?.points ?? [], ...(data as TimeSceneGeoData).deepTime?.cards ?? []].map((p) => p.id));
+        for (const id of [...st.index ?? [], ...st.highlight ?? [], ...(st.beats ?? []).flatMap((b) => b.highlight ?? [])]) if (!objects.has(id)) error(file, `deep-time object reference not found: ${id}`);
+        for (const layer of [...st.layers ?? [], ...(st.beats ?? []).flatMap((b) => b.layers ?? [])]) if (layer !== 'fossils-modern' && layer !== 'base') error(file, `reconstruction has no layer ${layer}`);
+      }
+    }
 
     const prev = orders.get(chapter.order);
     if (prev) error(file, `order ${chapter.order} duplicates ${prev}`);
@@ -531,12 +559,13 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
     if (!state.success) {
       reportZod(file, state.error, 'state.');
     } else if (data !== undefined) {
+      if(topic.temporalMode==='geography' && topic.geography){const gs=state.data as {geoContext:{kind:string;date?:string};beats:{geoContext:{kind:string;date?:string}}[]};for(const ctx of [gs.geoContext,...gs.beats.map(b=>b.geoContext)]){if(ctx.kind==='climatology'&&(!topic.climatology||!topic.monthlyLayers?.length))error(file,'climatology context requires monthly layers and metadata');if(ctx.kind==='membership'&&(ctx.date!<topic.geography.dateRange[0]||ctx.date!>topic.geography.dateRange[1]))error(file,'geoContext membership date outside geography.dateRange');}}
       for (const ref of schemas.chapterRefs(state.data)) {
         if (!ids.has(ref)) error(file, `state references unknown id "${ref}"`);
       }
       for (const issue of schemas.chapterIssues?.(state.data, data) ?? []) error(file, issue);
       if (topic.engine === 'time-scene' && topic.stage === 'geo')
-        for (const issue of timeChapterLayerIssues(state.data as TimeChapterState, [...(topic.datedLayers ?? []), ...(topic.monthlyLayers ?? [])])) error(file, issue);
+        for (const issue of timeChapterLayerIssues(state.data as TimeChapterState, [...(topic.datedLayers ?? []), ...(topic.monthlyLayers ?? []), ...((data as {geography?: {layers:{id:string}[]}})?.geography?.layers ?? []), ...(topic.temporalMode==='geography'?[{id:'geo-countries'},{id:'geo-membership'},{id:'geo-anchors'}]:[])])) error(file, issue);
     }
   }
   if (data !== undefined) {

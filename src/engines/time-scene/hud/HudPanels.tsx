@@ -247,9 +247,10 @@ export function BandCard({ model, playhead, locale, highlight, segments, anchor,
 /* ------------------------------------------------------------------ */
 
 /** Frames per second of the page, sampled with rAF over 500 ms windows. */
-export function useFps(): RefObject<number> {
+export function useFps(enabled = true): RefObject<number> {
   const fps = useRef(0);
   useEffect(() => {
+    if (!enabled) return;
     let raf = 0;
     let n = 0;
     let since = performance.now();
@@ -264,16 +265,16 @@ export function useFps(): RefObject<number> {
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, []);
+  }, [enabled]);
   return fps;
 }
 
-export function PerfReadout({ read }: { read(): { features: number; zoom: number; fps: number } | null }) {
+export function PerfReadout({ read }: { read(): { features: number; zoom: number; fps?: number } | null }) {
   const [text, setText] = useState('');
   useEffect(() => {
     const update = () => {
       const s = read();
-      if (s) setText(`FEATURES ${s.features.toLocaleString('en')} · ZOOM ${s.zoom.toFixed(1)} · ${s.fps} FPS`);
+      if (s) setText(`FEATURES ${s.features.toLocaleString('en')} · ZOOM ${s.zoom.toFixed(1)}${s.fps === undefined ? '' : ` · ${s.fps} FPS`}`);
     };
     update();
     const id = setInterval(update, 500);

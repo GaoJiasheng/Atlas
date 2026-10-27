@@ -1,0 +1,13 @@
+id: sun-earth-moon
+title: { en: "Sun, Earth and Moon", zh: "太阳、地球、月亮" }
+subtitle: { en: "Connect daylight, seasons, Moon phases and eclipses to position and light", zh: "从位置、朝向与光照理解昼夜、季节、月相和日月食" }
+subject: science
+tags: [singapore, space, beyond-syllabus]
+levels: [P4, P5, P6]
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+status: published
+illustration: sun-earth-moon
+note: { en: "Model study · sizes and gaps can use different scales · circular motions explain geometry, not eclipse timings · faint dark-side teaching fill", zh: "模型研究 · 球体大小与间距可用不同尺度 · 圆形运动解释位置关系，不预测食的时刻 · 暗侧微弱填光为教学画法" }

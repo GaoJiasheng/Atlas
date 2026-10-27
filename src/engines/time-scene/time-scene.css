@@ -1227,13 +1227,6 @@ button.ts-co:focus-visible {
   color: var(--ink-2);
 }
 
-.ts-beatline { display: flex; gap: 8px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid var(--line); }
-.ts-beatline__text { flex: 1; min-width: 0; margin: 0; font-size: 12px; line-height: 1.5; }
-.ts-beatline__text b { display: block; font: 600 11px / 1.5 var(--font-hud); text-transform: uppercase; letter-spacing: .1em; }
-.ts-beatline__nav { display: flex; flex: none; }
-.ts-beatline__nav button { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; }
-.ts-beatline__nav button:disabled { opacity: .35; cursor: default; }
-.ts-beatline__nav button:focus-visible { outline: 2px solid var(--signal); outline-offset: -2px; }
 
 /* ------------------------------------------------------------------ */
 /* Chapter index (InfoPanel `readerEnd` slot; as SpaceScene's .space-index) */

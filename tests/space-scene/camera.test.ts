@@ -3,7 +3,9 @@ import {
   COVER_FILL,
   COVER_FILL_HEIGHT,
   COVER_MAX_HEIGHT,
+  BASE_FAR,
   DEFAULT_CAMERA,
+  farPlane,
   fitCameraToAspect,
   fitSphereCamera,
   referenceCamera,
@@ -146,5 +148,14 @@ describe('fitSphereCamera (default cover camera)', () => {
     // A wide subject (height-fit is not binding) keeps the sphere fit.
     const flat = fitSphereCamera(view, [0, 0, 0], 1.2, 1.6, undefined, [1.1, 0.1, 0.4]);
     expect(dist(flat)).toBeCloseTo(dist(fitSphereCamera(view, [0, 0, 0], 1.2, 1.6)), 9);
+  });
+});
+
+describe('farPlane', () => {
+  it('keeps 200 m for exhibit-sized models and reaches a site-sized one from its farthest orbit distance', () => {
+    expect(farPlane(1.5)).toBe(BASE_FAR);
+    expect(farPlane(9)).toBe(BASE_FAR);
+    const radius = 60;
+    expect(farPlane(radius)).toBeGreaterThan(radius * 0.9 * 20 + radius);
   });
 });

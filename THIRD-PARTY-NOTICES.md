@@ -88,6 +88,38 @@ The glb and the geometry derived from it (`scripts/anatomy/heart-lungs/centrelin
 `landmarks.json`, `routes.json`, and the flow paths, pivots and camera targets taken
 from them into the topic's `parts.json`) are CC BY-SA 4.0.
 
+### Bones and joints (`public/models/bones-and-joints.glb`)
+
+The adult skeleton, seven hand-bone detail specimens, two arm-muscle groups and
+body outline derive from the cached Z-Anatomy / BodyParts3D anatomy sources.
+The GLB carries the upstream attribution:
+
+```
+BodyParts3D - The Database Center for Life Science - CC-BY-SA 2.1 Japan
+Z-Anatomy - The open source atlas of anatomy - CC-BY-SA 4.0
+```
+
+Source: https://github.com/LluisV/Z-Anatomy. BodyParts3D's current distribution
+is CC BY 4.0 (https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html); that
+does not replace the CC BY-SA 4.0 terms of the selected Z-Anatomy derivative.
+Changes for Atlas: source structures selected and grouped, simplified within
+sampled surface tolerances, renamed and rigidly assigned to existing joints;
+existing muscle skinning retained; joint-detail specimens repositioned and
+original teaching sections and an ideal lever added. The topic-local export
+path and its limitations are recorded in `scripts/anatomy/bones-joints/`.
+
+The GLB, the entire topic `data/parts.json`, derived rig/manifest/audit/previews
+and model screenshots are CC BY-SA 4.0. Atlas's original geometry, labels and
+mathematical configuration in that packet are offered under the same licence.
+OpenStax teaching prose is kept in separate NC-SA chapters/glossary; no
+OpenStax image, diagram or prose is baked into the BY-SA geometry packet.
+The independent graphite illustrations retain CC BY-NC-SA 4.0 and are not
+model-render derivatives. See `LICENSE-CONTENT` and the topic's
+`data/SOURCES.md` for the file boundaries.
+
+The draft `sample-joint` fixture reuses `muscles-arms.glb` and its rig. Its
+`data/parts.json` is also CC BY-SA 4.0 with the same upstream attribution.
+
 ## Industrial Revolution map data (`industrial-revolution`)
 
 | Work | Use | Licence |
@@ -128,3 +160,51 @@ attributed; no source text is reproduced beyond that.
 | Science Museum Group collection, *Rotative Steam Engine by Boulton and Watt, 1788* (object 1861-46, https://collection.sciencemuseumgroup.org.uk/objects/co50948/rotative-steam-engine-by-boulton-and-watt-1788), *Newcomen Atmospheric Engine* (https://collection.sciencemuseumgroup.org.uk/objects/co50900/newcomen-atmospheric-engine) and *James Watt* (https://collection.sciencemuseumgroup.org.uk/people/ap24508/watt-james), accessed 2026-10-27 | Object descriptions independently rewritten, shortened and translated for the chapters, part explanations and glossary; museum photographs are not copied, traced or used as textures | Descriptive text CC BY 4.0, https://creativecommons.org/licenses/by/4.0/ (metadata CC0) |
 
 The other sources of this topic (public-domain mechanism texts, NASA, NOAA and NIST explanatory pages, the Lap-engine dimension references) are cited fact by fact; no text, drawing or image from them is reproduced. Per-source locators are in `src/content/topics/steam-engine/data/SOURCES.md`. The three illustrations (`public/illustrations/steam-engine*.webp`) are original artwork under the content licence above.
+
+## Dinosaur Earth (`dinosaur-earth`)
+
+**PALEOMAP PaleoDEMs v2**, Christopher R. Scotese and Nicky Wright (2018),
+Zenodo record 5460860, <https://doi.org/10.5281/zenodo.5460860>. Upstream
+licence **CC BY 4.0**, <https://creativecommons.org/licenses/by/4.0/>.
+`public/geo/de-land-{250,230,200,170,150,130,100,70,65,0}.json` are Atlas
+adaptations licensed **CC BY-NC-SA 4.0**: ten verified 1° CSV elevation grids
+were classified with strict `z>0`, converted to nearest-sample categorical
+cells, unioned, clipped to explicit source-domain/dateline and Mercator polar
+limits, and encoded as TopoJSON with shared true-coast arcs. Exact-zero samples
+remain non-land; old-grid 179…180° is unavailable. No modern coast substitution,
+seam welding, continuous interpolation or synthetic 66 Ma frame. Only exact
+collinear reduction is applied. Per-input/output hashes, grid limits, changes
+and topology checks are in `scripts/geo/dinosaur-earth/SOURCES-GEO.md` and
+`build-report.json`.
+
+**Paleobiology Database contributors**, API 1.2 fixed CSV snapshots 26 October 2026.
+Both raw responses explicitly declare **CC0**,
+<https://creativecommons.org/publicdomain/zero/1.0/>. The retained occurrence
+and collection facts in `public/geo/de-modern-points.json`, together with the
+815 original retained-public-record citations in `public/geo/de-pbdb-references.json`,
+remain CC0. The manifest binds the bibliography locally for offline inspector access.
+The bounded global and TH/LA/MY query snapshots were stably deduplicated by
+occurrence, Malaysian locations were suppressed before grouping, and the
+public result retains 2103 occurrences in 1274 collections. Original occurrence,
+collection and publication reference numbers and separate age bounds are
+preserved. Complete exact queries and contributor/publication credit:
+`src/content/topics/dinosaur-earth/data/SOURCES.md` and
+`scripts/geo/dinosaur-earth/publication-references.json`. No raw Malaysian
+location data is deployed. The selected record is not a census.
+
+**Natural Earth contributors**, 110m land v4.1.0 / 50m countries v5.1.1,
+<https://www.naturalearthdata.com/>. **Public domain**, per
+<https://www.naturalearthdata.com/about/terms-of-use/>.
+`public/geo/de-modern-land.json` retains global 110m land;
+`de-modern-countries.json` selects 15 real country features for the modern
+SEA/Mexico inset views. Shapefile winding is converted to RFC 7946 and
+coordinates rounded to 6 decimal places. No additional restrictions are
+asserted. These files and the Singapore DBF label anchor are modern references
+only, never ancient reconstruction inputs.
+
+The two modern editorial reference points, four text evidence cards,
+manifests, original bilingual prose and the three approved generated
+illustrations are Atlas content (CC BY-NC-SA 4.0). Modern factual coordinates
+retain their original source credit and are not claimed as exclusive facts.
+The illustrations are conceptual drawings, not specimen photographs,
+measured reconstructions or third-party map geometry.

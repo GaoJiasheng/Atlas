@@ -1,0 +1,17 @@
+id: bones-and-joints
+title: { en: "Bones and Joints", zh: "骨骼与关节" }
+subtitle: { en: "A connected living frame: support, protection and movement", zh: "连起来的活支架：支持、保护与运动" }
+shortTitle: { en: "Bones & joints", zh: "骨骼与关节" }
+subject: biology
+tags: [beyond-syllabus, health, space]
+levels: [P4]
+moe:
+  - "MOE Primary Science 2023 cohort, updated January 2026, printed p.53: P4 overview of human systems. Detailed bone names and mechanisms are enrichment."
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: published
+illustration: bones-and-joints
+note: { en: "Adult male reference anatomy · Z-Anatomy / BodyParts3D meshes, CC BY-SA 4.0 · Teaching sections and lever model are schematic.", zh: "成人男性参考解剖 · Z-Anatomy / BodyParts3D 网格，CC BY-SA 4.0 · 教学截面与杠杆为示意。" }

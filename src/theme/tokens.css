@@ -129,6 +129,9 @@
   --f-friction: #744518;
   --f-elastic: #576a2f;
   --f-push: #8c5e86;
+  --f-lift: #346b70;
+  --f-drag: #93602e;
+  --f-thrust: #735885;
   /* Forms of energy (docs/31 E-EN3): light mustard (the lightest), electrical blue, kinetic teal-green, sound purple, heat red-orange, potential olive-brown; apart from each other under the three colour-vision deficiencies (ΔE*ab ≥ 10, Machado 2009) and ≥ 3:1 on the paper. */
   --en-light: #a37808;
   --en-electrical: #2970c2;
@@ -258,6 +261,9 @@
   --f-friction: #e5aa77;
   --f-elastic: #c0d492;
   --f-push: #ce9bc7;
+  --f-lift: #85b9bd;
+  --f-drag: #d0a16c;
+  --f-thrust: #b59aca;
   --en-light: #eccd66;
   --en-electrical: #4d8dd7;
   --en-kinetic: #58c4a3;

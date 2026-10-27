@@ -1,0 +1,388 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://www.moe.gov.sg/-/media/files/primary/syllabus/2023-primary-science.ashx",
+      "text": {
+        "en": "MOE CPDD. Science Teaching & Learning Syllabus, Primary Three to Six (2023 syllabus; Updated Jan 2026).",
+        "zh": "新加坡教育部《小学三至六年级科学教学大纲》，2023 课程，2026 年 1 月更新。"
+      },
+      "note": {
+        "en": "Accessed 27 October 2026. Existing repository PDF read with pdftotext; live URLs present robot verification; stopped. Copyright; factual consultation only; no asset redistribution. ",
+        "zh": "准备阶段读取仓库中已有的教育部 PDF；线上地址出现验证后停止。印刷页 67–70 与 PDF 页 68–71 分开记录；基础课程范围另核。"
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://www.nparks.gov.sg/visit/parks/sungei-buloh-wetland-reserve/special-features/mangrove-plants",
+      "text": {
+        "en": "NParks. Mangrove plants at Sungei Buloh Wetland Reserve.",
+        "zh": "国家公园局：双溪布洛湿地保护区的红树植物。"
+      },
+      "note": {
+        "en": "Accessed 27 October 2026. Full text read. Copyright; factual consultation only; no asset redistribution. ",
+        "zh": "2026 年 10 月 27 日核对。科学事实只作概括引用；不重新发布来源的照片、图解或其他资产。"
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://www.nparks.gov.sg/florafaunaweb/flora/3/2/3263",
+      "text": {
+        "en": "NParks Flora & Fauna Web. Avicennia alba Blume.",
+        "zh": "国家公园局 Flora & Fauna Web：Avicennia alba（Api-api Putih）。"
+      },
+      "note": {
+        "en": "Accessed 27 October 2026. Full text read. Copyright; factual consultation only; no asset redistribution. ",
+        "zh": "2026 年 10 月 27 日核对。科学事实只作概括引用；不重新发布来源的照片、图解或其他资产。"
+      }
+    },
+    {
+      "id": "S4",
+      "url": "https://biodiversitysg.nparks.gov.sg/our-biodiversity/marine-fishes/giant-mudskipper/",
+      "text": {
+        "en": "NParks BiodiversitySG. Giant Mudskipper.",
+        "zh": "国家公园局 BiodiversitySG：弹涂鱼 Periophthalmodon schlosseri。"
+      },
+      "note": {
+        "en": "Accessed 27 October 2026. Full text read. Copyright; factual consultation only; no asset redistribution. ",
+        "zh": "2026 年 10 月 27 日核对。科学事实只作概括引用；不重新发布来源的照片、图解或其他资产。"
+      }
+    },
+    {
+      "id": "S5",
+      "url": "https://mangrove.nus.edu.sg/guidebooks/text/2053.htm",
+      "text": {
+        "en": "Ng & Sivasothi (eds), NUS / Singapore Science Centre. Fiddler crabs, A Guide to Mangroves of Singapore.",
+        "zh": "Ng 与 Sivasothi 主编，NUS／新加坡科学馆《新加坡红树林指南》：招潮蟹。"
+      },
+      "note": {
+        "en": "Accessed 27 October 2026. Full text read. Copyright; factual consultation only; no asset redistribution. ",
+        "zh": "2026 年 10 月 27 日核对。科学事实只作概括引用；不重新发布来源的照片、图解或其他资产。"
+      }
+    },
+    {
+      "id": "S6",
+      "url": "https://mangrove.nus.edu.sg/pub/wetlands/text/97-4-2-2.htm",
+      "text": {
+        "en": "Linda Goh, Sungei Buloh Nature Park; NUS archive. Just a Crabby Note: Mangrove Crabs of Sungei Buloh, Wetlands 4(2), August 1997.",
+        "zh": "Linda Goh，双溪布洛自然公园《Wetlands》4(2)，1997 年 8 月：红树林蟹。"
+      },
+      "note": {
+        "en": "Accessed 27 October 2026. Full text read. Copyright; factual consultation only; no asset redistribution. ",
+        "zh": "2026 年 10 月 27 日核对。科学事实只作概括引用；不重新发布来源的照片、图解或其他资产。"
+      }
+    },
+    {
+      "id": "S7",
+      "url": "https://www.nparks.gov.sg/docs/default-source/sbwr-wetlands-newsletter/wetlands-newsletter--vol-6-no-1-apr-1999.pdf",
+      "text": {
+        "en": "Sungei Buloh Nature Park / NParks. Tree Climbing Crabs in Singapore Mangroves, Wetlands 6(1), April 1999.",
+        "zh": "双溪布洛自然公园／国家公园局《Wetlands》6(1)，1999 年 4 月：新加坡红树林的爬树蟹。"
+      },
+      "note": {
+        "en": "Accessed 27 October 2026. Indexed panel text only; PDF has no extractable text, screenshot cache miss; no binary downloaded. Copyright; factual consultation only; no asset redistribution.  Only indexed illustrated panel text checked. This functional group combines different climbing-crab kinds; no measured diet of one Episesarma species is claimed.",
+        "zh": "仅核对搜索索引中的图版文字，未读完整 PDF。藻食与叶食可属于不同攀爬蟹类；不把这个功能组当成一种 Episesarma 的实测食谱。"
+      }
+    },
+    {
+      "id": "S8",
+      "url": "https://www.nparks.gov.sg/visit/parks/park-detail/sungei-buloh-wetland-reserve",
+      "text": {
+        "en": "NParks. Sungei Buloh Wetland Reserve.",
+        "zh": "国家公园局：双溪布洛湿地保护区。"
+      },
+      "note": {
+        "en": "Accessed 27 October 2026. Full text read. Copyright; factual consultation only; no asset redistribution. ",
+        "zh": "2026 年 10 月 27 日核对。科学事实只作概括引用；不重新发布来源的照片、图解或其他资产。"
+      }
+    },
+    {
+      "id": "S9",
+      "url": "https://www.nparks.gov.sg/publications-resources/articles/recognising-trees-of-the-mangroves",
+      "text": {
+        "en": "NParks. Recognising Trees of the Mangroves, 3 February 2025.",
+        "zh": "国家公园局：认识红树林的树木，2025 年 2 月 3 日。"
+      },
+      "note": {
+        "en": "Accessed 27 October 2026. Full text read. Copyright; factual consultation only; no asset redistribution. ",
+        "zh": "2026 年 10 月 27 日核对。科学事实只作概括引用；不重新发布来源的照片、图解或其他资产。"
+      }
+    },
+    {
+      "id": "S10",
+      "url": "https://www.floridamuseum.ufl.edu/southflorida/habitats/mangroves/mangrove-life/",
+      "text": {
+        "en": "Florida Museum of Natural History, University of Florida. Mangrove Life: South Florida Aquatic Environments.",
+        "zh": "佛罗里达自然历史博物馆：红树林中的生命。"
+      },
+      "note": {
+        "en": "Accessed 27 October 2026. Full text read. Copyright; factual consultation only; no asset redistribution. ",
+        "zh": "2026 年 10 月 27 日核对。科学事实只作概括引用；不重新发布来源的照片、图解或其他资产。"
+      }
+    },
+    {
+      "id": "S11",
+      "url": "https://clic.gse.harvard.edu/file_url/188",
+      "text": {
+        "en": "Tina A. Grotzer & Belinda Bell Basca; Harvard author copy. How does grasping the underlying causal structures of ecosystems impact students understanding? JBE 38(1), 16–29 (2003).",
+        "zh": "Grotzer 与 Bell Basca（2003）：理解生态系统因果结构与学生的理解，作者提供的论文。"
+      },
+      "note": {
+        "en": "Accessed 27 October 2026. Full author-hosted PDF text read in web viewer; no download. Copyright; factual consultation only; no asset redistribution. ",
+        "zh": "2026 年 10 月 27 日核对。科学事实只作概括引用；不重新发布来源的照片、图解或其他资产。"
+      }
+    },
+    {
+      "id": "S12",
+      "url": "https://pz.harvard.edu/sites/default/files/revised_ecosystem.pdf",
+      "text": {
+        "en": "Project Zero, Harvard Graduate School of Education. Causal Patterns in Ecosystems, second edition (2011).",
+        "zh": "哈佛教育研究生院 Project Zero《生态系统中的因果模式》第二版，2011 年。"
+      },
+      "note": {
+        "en": "Accessed 27 October 2026. Full PDF text read in web viewer; no download. Copyright; factual consultation only; no asset redistribution. ",
+        "zh": "2026 年 10 月 27 日核对。科学事实只作概括引用；不重新发布来源的照片、图解或其他资产。"
+      }
+    },
+    {
+      "id": "S13",
+      "url": "https://lkcnhm.nus.edu.sg/app/uploads/2017/04/64rbz220-228.pdf",
+      "text": {
+        "en": "Theresa L. Su & Shirley S. L. Lim, Lee Kong Chian Natural History Museum. Niche partitioning in two syntopic mudskipper species in a Singapore mangrove, RBZ 64:220–228 (2016).",
+        "zh": "Su 与 Lim（2016）：新加坡红树林中两种同域弹涂鱼的生态位分化，《Raffles Bulletin of Zoology》64：220–228。"
+      },
+      "note": {
+        "en": "Accessed 27 October 2026. Indexed discussion pp.226–227 read; full viewer rejects 14,795,969-byte PDF; no download; medium confidence. Copyright; factual consultation only; no asset redistribution. ",
+        "zh": "仅核对论文索引中的讨论段；完整 PDF 约 14.8 MB，查看器拒绝读取。局地样本没有检出某种猎物，不等于该鱼不能取食；Episesarma 取食记录为论文转述的机会观察，不是食量比例。"
+      }
+    },
+    {
+      "id": "S14",
+      "url": "https://www.edb.gov.hk/attachment/en/curriculum-development/kla/science-edu/ref-and-resources/Biology_Glossary_2020.pdf",
+      "text": {
+        "en": "Hong Kong Education Bureau. English-Chinese Biology Glossary (2020).",
+        "zh": "香港教育局《英汉生物学词汇》，2020 年。"
+      },
+      "note": {
+        "en": "Accessed 27 October 2026. Full text read. Copyright; factual consultation only; no asset redistribution. ",
+        "zh": "2026 年 10 月 27 日核对。科学事实只作概括引用；不重新发布来源的照片、图解或其他资产。"
+      }
+    },
+    {
+      "id": "S15",
+      "url": "https://www.zaobao.com.sg/news/fukan/multiplex/story20180118-827930",
+      "text": {
+        "en": "李喜梅, 联合早报. 弹涂鱼 湿地精灵成了舌尖美味, 18 January 2018.",
+        "zh": "李喜梅，《联合早报》：弹涂鱼 湿地精灵成了舌尖美味，2018 年 1 月 18 日；仅用于本地术语。"
+      },
+      "note": {
+        "en": "Accessed 27 October 2026. Public text read; terminology only. Copyright; factual consultation only; no asset redistribution. ",
+        "zh": "2026 年 10 月 27 日核对。科学事实只作概括引用；不重新发布来源的照片、图解或其他资产。"
+      }
+    },
+    {
+      "id": "S16",
+      "url": "https://www.zaobao.com.sg/lifestyle/eco/story20240825-4510298",
+      "text": {
+        "en": "小川舒, 联合早报. 保护红树林 让海洋生物繁衍生息, 25 August 2024.",
+        "zh": "小川舒，《联合早报》：保护红树林 让海洋生物繁衍生息，2024 年 8 月 25 日；仅用公开术语片段。"
+      },
+      "note": {
+        "en": "Accessed 27 October 2026. Subscriber marker; public terminology excerpt only; full article skipped. Copyright; factual consultation only; no asset redistribution. ",
+        "zh": "只读公开术语片段；订阅文章全文未读，不采用其中生态数值。"
+      }
+    },
+    {
+      "id": "S17",
+      "url": "https://www.visitsingapore.com/content/desktop/zh_cn/travel-guide-tips/about-singapore/city-in-nature/sustainable-biodiversity/",
+      "text": {
+        "en": "Singapore Tourism Board, VisitSingapore. 探索新加坡的生物多样性 / 新加坡的可持续保护区.",
+        "zh": "新加坡旅游局 VisitSingapore：探索新加坡的生物多样性；用于双溪布洛中文地名。"
+      },
+      "note": {
+        "en": "Accessed 27 October 2026. Full text read. Copyright; factual consultation only; no asset redistribution. ",
+        "zh": "2026 年 10 月 27 日核对。科学事实只作概括引用；不重新发布来源的照片、图解或其他资产。"
+      }
+    },
+    {
+      "id": "S18",
+      "url": "https://www.forestry.gov.cn/c/www/kptplz/685220.jhtml",
+      "text": {
+        "en": "国家林业和草原局; original reporting 总台福建总站. 湿地微观世界：退潮时分 招潮蟹忙干饭, 21 August 2026.",
+        "zh": "国家林业和草原局转总台福建总站报道：退潮时分 招潮蟹忙干饭，2026 年 8 月 21 日。"
+      },
+      "note": {
+        "en": "Accessed 27 October 2026. Full text read. Copyright; factual consultation only; no asset redistribution. ",
+        "zh": "福建当地的观察报道，不是新加坡样本；只支持招潮蟹功能组的可能食物关系。"
+      }
+    },
+    {
+      "id": "S19",
+      "url": "https://zenodo.org/records/6894273",
+      "text": {
+        "en": "Bunting et al., Zenodo. Global Mangrove Watch 1996–2020, version 3.0.",
+        "zh": "Bunting 等，Global Mangrove Watch 1996–2020，3.0 版；仅作未采用数据源清单。"
+      },
+      "note": {
+        "en": "Accessed 27 October 2026. Metadata read; supersession warning points to v4.1.12; no data downloaded. CC BY 4.0 reported in catalogue; fetched Rights field blank; verify API before acquisition. ",
+        "zh": "只核对元数据；旧版有被新版取代的提示。没有下载或发布地图。"
+      }
+    },
+    {
+      "id": "S20",
+      "url": "https://www.naturalearthdata.com/about/terms-of-use/",
+      "text": {
+        "en": "Natural Earth. Natural Earth Terms of Use.",
+        "zh": "Natural Earth 使用条款；未采用其地图数据。"
+      },
+      "note": {
+        "en": "Accessed 27 October 2026. Full terms read. Public domain. ",
+        "zh": "2026 年 10 月 27 日核对。科学事实只作概括引用；不重新发布来源的照片、图解或其他资产。"
+      }
+    },
+    {
+      "id": "S21",
+      "url": "https://www.openstreetmap.org/copyright",
+      "text": {
+        "en": "OpenStreetMap Foundation. Copyright and License.",
+        "zh": "OpenStreetMap 版权与许可；未采用其数据。"
+      },
+      "note": {
+        "en": "Accessed 27 October 2026. Licence page read. ODbL 1.0 data; website documentation separately CC BY-SA 2.0. ",
+        "zh": "2026 年 10 月 27 日核对。科学事实只作概括引用；不重新发布来源的照片、图解或其他资产。"
+      }
+    },
+    {
+      "id": "S22",
+      "url": "https://commons.wikimedia.org/wiki/File:Periophthalmodon_schlosseri.jpg",
+      "text": {
+        "en": "Bernhard Luth / Wikimedia Commons. Periophthalmodon schlosseri.jpg.",
+        "zh": "Bernhard Luth 的弹涂鱼照片，Wikimedia Commons；只看参考，不发布或描摹。"
+      },
+      "note": {
+        "en": "Accessed 27 October 2026. File metadata read; photo not downloaded. CC BY-SA 2.0 DE. ",
+        "zh": "只核对照片元数据并参考形态；不下载、不发布、不描摹照片或生成衍生纹理。照片为 CC BY-SA 2.0 DE，与本主题原创 NC-SA 文件分开。"
+      }
+    },
+    {
+      "id": "S23",
+      "url": "https://prosea.prota4u.org/view.aspx?id=4941",
+      "text": {
+        "en": "L.S.L. Chua (1998), PROSEA Foundation. Avicennia alba, PROSEA record 4941.",
+        "zh": "L.S.L. Chua（1998），PROSEA Avicennia alba 条目；只作文字参考。"
+      },
+      "note": {
+        "en": "Accessed 27 October 2026. Record and rights read; no illustration downloaded. CC BY-NC-SA 3.0 NL text only; illustrations excluded. ",
+        "zh": "只参考文字；文字许可为 CC BY-NC-SA 3.0 NL，不含插图。未复制插图。"
+      }
+    },
+    {
+      "id": "S24",
+      "url": "https://openstax.org/books/biology-2e/pages/46-2-energy-flow-through-ecosystems",
+      "text": {
+        "en": "Clark, Douglas & Choi, OpenStax / Rice University. Energy Flow through Ecosystems, Biology 2e §46.2.",
+        "zh": "OpenStax／莱斯大学《Biology 2e》第 46.2 节：生态系统中的能量流动。"
+      },
+      "note": {
+        "en": "Accessed 27 October 2026. Text read; no diagram copied. CC BY-NC-SA 4.0 current footer; individual credits apply. ",
+        "zh": "读取文字；不复制图解，不采用固定十分之一能量传递系数。"
+      }
+    },
+    {
+      "id": "S25",
+      "url": "https://biodiversitysg.nparks.gov.sg/our-ecosystems/coastal-and-marine-habitats/mangrove-forests-in-singapore/",
+      "text": {
+        "en": "NParks BiodiversitySG. Mangrove forests in Singapore, updated 1 July 2026.",
+        "zh": "国家公园局 BiodiversitySG：新加坡的红树林，2026 年 7 月 1 日更新。"
+      },
+      "note": {
+        "en": "Accessed 27 October 2026. Full text read. Copyright; factual consultation only; no asset redistribution. ",
+        "zh": "2026 年 10 月 27 日核对。科学事实只作概括引用；不重新发布来源的照片、图解或其他资产。"
+      }
+    },
+    {
+      "id": "S26",
+      "url": "https://mangrove.nus.edu.sg/guidebooks/text/1010b.htm",
+      "text": {
+        "en": "Ng & Sivasothi (eds), NUS / Singapore Science Centre. Oxygen in the mangrove ecosystem.",
+        "zh": "NUS／新加坡科学馆《新加坡红树林指南》：红树林生态系统中的氧气。"
+      },
+      "note": {
+        "en": "Accessed 27 October 2026. Full text read. Copyright; factual consultation only; no asset redistribution. ",
+        "zh": "2026 年 10 月 27 日核对。科学事实只作概括引用；不重新发布来源的照片、图解或其他资产。"
+      }
+    },
+    {
+      "id": "S27",
+      "url": "https://mangrove.nus.edu.sg/guidebooks/text/1011b.htm",
+      "text": {
+        "en": "Ng & Sivasothi (eds), NUS / Singapore Science Centre. Tides and the mangrove ecosystem.",
+        "zh": "NUS／新加坡科学馆《新加坡红树林指南》：潮水与红树林生态系统。"
+      },
+      "note": {
+        "en": "Accessed 27 October 2026. Full text read. Copyright; factual consultation only; no asset redistribution. ",
+        "zh": "2026 年 10 月 27 日核对。科学事实只作概括引用；不重新发布来源的照片、图解或其他资产。"
+      }
+    },
+    {
+      "id": "S28",
+      "url": "https://www.nparks.gov.sg/nature/species-list/arthropoda-horseshoe-crabs-and-marine-decapod-crustaceans",
+      "text": {
+        "en": "NParks. Singapore marine decapod crustaceans species list.",
+        "zh": "国家公园局：新加坡海生十足目甲壳类名录；旧指南的 Uca 不作现行属名。"
+      },
+      "note": {
+        "en": "Accessed 27 October 2026. Full text read. Copyright; factual consultation only; no asset redistribution. ",
+        "zh": "2026 年 10 月 27 日核对。科学事实只作概括引用；不重新发布来源的照片、图解或其他资产。"
+      }
+    },
+    {
+      "id": "S29",
+      "url": "https://www.nparks.gov.sg/publications-resources/articles/herons-vs-storks--telling-them-apart",
+      "text": {
+        "en": "NParks. Herons vs Storks: Telling Them Apart.",
+        "zh": "国家公园局：分辨鹭与鹳；鹭的形态和一般食物。"
+      },
+      "note": {
+        "en": "Accessed 27 October 2026. Full text read. Copyright; factual consultation only; no asset redistribution. ",
+        "zh": "2026 年 10 月 27 日核对。科学事实只作概括引用；不重新发布来源的照片、图解或其他资产。"
+      }
+    },
+    {
+      "id": "S30",
+      "text": {
+        "en": "Atlas original mangrove teaching-model design study, docs/53. Schematic mudbank and specimens inspired by Singapore mangroves, not a survey of Sungei Buloh, not to scale. The selected directed graph has six functional nodes and six possible feeding links. Climbing crabs group several kinds, with leaf feeding and algae grazing from different accounts. Table rows enumerate seven removal choices, four inspected consumers and two tide poses. Nodes are supported if still present and reachable from an available producer through the selected links. Active links connect supported nodes; foods counts the active incoming links of the inspected node. The intact model has six present, six supported, six active links and two shown mudskipper food inputs. Removing fiddlers gives five present, five supported, four active links and one mudskipper input. Removing algae gives five present, four supported, three active links and one mudskipper input, or no shown fiddler input. High-water pose offsets water by 0.14 model units and climbing crabs by 0.16; low-water offsets are zero. These are scene offsets, not tide measurements.",
+        "zh": "本主题的 Atlas 原创设计研究，见 docs/53。泥岸与标本是参考新加坡红树林的示意，不是双溪布洛调查，也不按比例。选入的有向图有六个功能节点、六条可能的取食关系。攀爬蟹类合并不同种类，叶食和藻食来自不同资料。查表数据枚举七种移走选择、四个查看对象和两种潮位姿态。一个节点未被移走、且能沿选入关系从生产者到达，就标作仍有食物路径；有效连线连接这样的节点。“图内食物种类”数查看节点的有效输入。完整模型：未移走六节点、有路径六节点、六条有效线，弹涂鱼有两种输入。移走招潮蟹：五、五、四，弹涂鱼剩一种；移走藻类：五、四、三，弹涂鱼剩一种，招潮蟹则没有图内食物。高水位把水面移高 0.14、攀爬蟹类移高 0.16 模型单位；低水位位移为零。这是场景位移，不是实测潮位。"
+      },
+      "note": {
+        "en": "DESIGN/SIM, not measured abundance or a population forecast. Removal closes one node’s continuing supply and associated links; unsupported animal symbols remain visible. Old litter, carcasses, reproduction, movement, other food and decay rates are omitted. Functional-group links need not occur in one species, place, season or tide. Food-web links show food to consumer, never nutrient return. Equal line widths do not encode equal amounts. Tide only changes drawing pose and does not alter food calculations. Original procedural geometry and reused original Atlas illustrations; no third-party dataset, photograph or traced geometry shipped.",
+        "zh": "设计／模拟值，不是野外数量或种群预测。移走关闭一个节点的持续供应及相关线；没有图内食物路径的动物仍保留图标。不模拟旧落叶、尸体、繁殖、迁移、其他食物或分解速率。功能组关系未必在同一物种、地点、季节或潮时发生。箭头从食物指向消费者，不表示养分回流；同样线宽不表示同样食量。潮位只改画面姿态，不改食物计算。几何为原创程序化模型，图像复用 Atlas 原创图；未发布第三方数据集、照片或描摹几何。"
+      },
+      "design": true
+    },
+    {
+      "id": "S31",
+      "url": "https://www.nparks.gov.sg/docs/default-source/parks-docs/coney-island-park/coney-island-park-guide.pdf?sfvrsn=3795bb08_1",
+      "text": {
+        "en": "NParks. Coney Island DIY guide.",
+        "zh": "国家公园局：科尼岛公园指南；弹涂鱼条目。"
+      },
+      "note": {
+        "en": "Accessed 27 October 2026. Indexed text only; original URL 404; corroboration only. Copyright; factual consultation only; no asset redistribution. ",
+        "zh": "旧准备稿 URL 返回 404；本轮找到现行国家公园局指南 URL，仅核对索引中的弹涂鱼条目，全文抓取超时。作为一般食性的佐证，不当作双溪布洛实测配对。"
+      }
+    },
+    {
+      "id": "S32",
+      "url": "https://bih.gov.hk/en/hong-kong-species/intertidal-invertebrates/index.html",
+      "text": {
+        "en": "Agriculture, Fisheries and Conservation Department, Hong Kong Biodiversity Information Hub. Intertidal Invertebrates.",
+        "zh": "香港渔农自然护理署生物多样性资讯站：潮间带无脊椎动物；蟹的附肢。"
+      },
+      "note": {
+        "en": "Accessed 27 October 2026. Full public page read; no asset downloaded. Copyright; factual consultation only. Crabs paragraph",
+        "zh": "2026 年 10 月 27 日核对。科学事实只作概括引用；不重新发布来源的照片、图解或其他资产。"
+      }
+    }
+  ]
+}

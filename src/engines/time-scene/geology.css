@@ -1,0 +1,13 @@
+/* Secondary scientific readouts: the bar's state line and the left PLATE; the floating readout is for the presentation only. */
+.ts-recon-readout { display:none; position:absolute; top:12px; left:50%; transform:translateX(-50%); z-index:4; max-width:min(550px,70%); padding:6px 10px; color:var(--ink); background:var(--panel); border:1px solid var(--line); font:11px/1.45 var(--font-mono); text-align:center; pointer-events:auto; }
+.ts-recon-readout small, .ts-recon-readout strong { display:block; }
+.atlas-scene[data-hud="off"] .ts-recon-readout { visibility:hidden; }
+.atlas-scene:has(.ts-stage[data-presenting]) .ts-recon-readout { display:block; visibility:visible; }
+.ts-geology-plate { overflow-y:auto; }
+.ts-geology-plate .ts-plate__row dd { text-align:right; }
+.ts-geology-plate__note { margin:6px 0 0; color:var(--ink-3); font:calc(10 * var(--u))/1.5 var(--font-hud); }
+.ts-beatline { display:flex; align-items:start; gap:8px; padding:8px 0; border-bottom:1px solid var(--line); font:12px/1.5 var(--font-hud); }
+.ts-beatline p { flex:1; margin:0; }
+.ts-beatline b { display:block; color:var(--ink-2); font:11px/1.5 var(--font-mono); }
+.ts-beatline span { display:flex; }
+.ts-beatline button { min-width:44px; min-height:44px; color:var(--ink); background:transparent; border:1px solid var(--line); font-size:22px; cursor:pointer; }

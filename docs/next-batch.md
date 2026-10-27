@@ -92,3 +92,8 @@ Codex 预研（`art/research/<slug>/`、`art/planned/<slug>/`）全部交回后�
 | 62 | `container-port` | SpaceScene | 港口 sim、绳索 span 绑定 | 直接上线 |
 
 插图：28 张已看过；骨骼与关节「保护内脏」图缺肋骨须重画，土星五号缺封面须补画，东南亚「区域合作」圆桌图偏弱，定稿时换题材。
+
+### Codex 恢复后（2026-11-03 12:19 起）要做的
+
+- 重画 bones-and-joints「保护内脏」图：第 11–12 肋后端连到胸椎（见该主题 FIXES.md 的 F1 reopened），处理后放回 02 章。
+- dinosaur-earth FIXES.md 全部项 + 正文改写成小学生读得顺的文字；monsoon-and-weather 首页卡片计数、THIRD-PARTY-NOTICES 行、1024 宽图例（原任务 map-polish 因额度用完未开始，worktree `.claude/worktrees/codex-map-polish` 是空的）。

@@ -41,7 +41,6 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, type Ref } from 'react';
 import { useFrame, type ThreeEvent } from '@react-three/fiber';
 import {
-  Box3,
   Color,
   DetachedBindMode,
   Euler,
@@ -70,6 +69,7 @@ import { keepAnimating, MAX_DT, prefersReducedMotion, useRuntime } from './runti
 import { createPartMaterial, clippingForPart, setPartClipping, stylePartMaterial, styleFibreGrain, type PartStyle, type PartUniforms } from './materials';
 import type { FibreMeasure } from './GltfSource';
 import { skinnedRaycast } from './skinPick';
+import { updateSkinAnchor } from './skinAnchor';
 import type { ShapePiece } from './geometry';
 import type { SimSettle } from '../../sim-schema';
 import { nearestTurn, SETTLE_EPS_LENGTH, stepSwing } from '../../lib/sim/settle';
@@ -141,6 +141,8 @@ export interface PartHandle {
   /** Whether cutaway planes apply to this part and its label / site anchors. */
   clip: boolean;
   object: Object3D;
+  /** Main primitive-local (relative to primitive.at) → final model frame, written after pose/play/shift/animations. */
+  attachmentMatrix: Matrix4;
   /** Bounds centre relative to the part centre (group boxes, the on-screen box). */
   offset: Vec3;
   /** Leader-label anchor relative to the part centre (the bounds centre; a pipe's path midpoint). */
@@ -195,6 +197,7 @@ export interface PartNodeProps {
   count?: number | null;
   /** Try-it offset (scene units) and turn about a unit axis through the part centre or `pivot` (a scene point at rest), eased or swinging (`settle`). */
   simMove?: SimMove | null;
+  airfoilSnap?: boolean;
   /** Try-it timeline channels the part plays (moves and turns). */
   play?: readonly SimPlay[] | null;
   /** Try-it stretch of the part's coil. */
@@ -243,8 +246,6 @@ const TINT = 0.55;
 /** In an exercise, the share of that tint a relaxed (lengthened) muscle keeps. */
 const TINT_REST = 0.45;
 const tmpQ = new Quaternion();
-const tmpBox = new Box3();
-const tmpInv = new Matrix4();
 const tmpM = new Matrix4();
 const tmpPose = new Matrix4();
 const tmpTurn = new Matrix4();
@@ -560,6 +561,7 @@ export function PartNode(props: PartNodeProps) {
     () => ({
       clip: part.clip !== false,
       object: null as unknown as Object3D,
+      attachmentMatrix: new Matrix4(),
       offset: [...props.anchorOffset] as Vec3,
       point: [...props.anchorPoint] as Vec3,
       radius: props.anchorRadius,
@@ -726,7 +728,11 @@ export function PartNode(props: PartNodeProps) {
     m.cast = cast;
     // See-through families (membrane, glass) never hide what is behind them from the labels.
     handle.fade = m.fade * style.look.opacity;
-    handle.visible = shown && display.visible;
+    const nowVisible = shown && display.visible;
+    // The label probe reads handles before this node in a frame: a snapped change (load, deep link)
+    // needs one more frame, or its anchor keeps the old visibility and its label never appears.
+    if (handle.visible !== nowVisible) keepAnimating(state.invalidate);
+    handle.visible = nowVisible;
 
     // Selection edge (hover: weaker).
     const selTarget = display.selected ? 1 : props.hovered && display.visible ? 0.45 : 0;
@@ -854,7 +860,7 @@ export function PartNode(props: PartNodeProps) {
       const settle = sm?.settle;
       // A swinging turn goes the short way round to its target; a plain one eases straight there.
       const turnTo = settle ? nearestTurn(m.turn, sm!.deg) : (sm?.deg ?? 0);
-      if (snap) {
+      if (snap || props.airfoilSnap) {
         m.turn = turnTo;
         m.turnV = 0;
       } else if (settle) {
@@ -1178,26 +1184,14 @@ export function PartNode(props: PartNodeProps) {
     const sk = handle.skinned;
     if (sk && m.skinMoved !== runtime.bonesMoved && (m.frame % SKIN_ANCHOR_EVERY === 0 || runtime.bonesMoved === 0)) {
       m.skinMoved = runtime.bonesMoved;
-      // Parents too: the root group's new matrix (exercise turn) reaches the mesh before the render does.
-      sk.updateWorldMatrix(true, false);
-      tmpBox.makeEmpty();
-      tmpInv.copy(runtime.root).invert().multiply(sk.matrixWorld);
-      for (const i of skinSamples) tmpBox.expandByPoint(sk.getVertexPosition(i, tmpV).applyMatrix4(tmpInv));
-      if (!tmpBox.isEmpty() && g) {
-        const cx = (tmpBox.min.x + tmpBox.max.x) / 2 - g.position.x;
-        const cy = (tmpBox.min.y + tmpBox.max.y) / 2 - g.position.y;
-        const cz = (tmpBox.min.z + tmpBox.max.z) / 2 - g.position.z;
-        handle.point[0] = handle.offset[0] = cx;
-        handle.point[1] = handle.offset[1] = cy;
-        handle.point[2] = handle.offset[2] = cz;
-        handle.half[0] = (tmpBox.max.x - tmpBox.min.x) / 2;
-        handle.half[1] = (tmpBox.max.y - tmpBox.min.y) / 2;
-        handle.half[2] = (tmpBox.max.z - tmpBox.min.z) / 2;
-      }
+      if (g) updateSkinAnchor(sk, skinSamples, runtime.root, g.position, handle, () => keepAnimating(state.invalidate));
     } else if (sk && m.skinMoved !== runtime.bonesMoved) keepAnimating(state.invalidate); // the last pose still needs measuring
 
     if (moving || m.fade !== targetFade || m.base !== targetBase || m.aside !== asideTarget || m.sel !== selTarget || m.tint !== tintTarget || m.simTint !== simTarget || m.glow !== glowTarget)
       keepAnimating(state.invalidate);
+    // Read by SpanDriver after every PartNode has consumed this frame's pose,
+    // timeline and shift. The primitive's authored local points share this frame.
+    if (g && pr && anim) handle.attachmentMatrix.makeTranslation(g.position.x, g.position.y, g.position.z).multiply(pr.matrix).multiply(anim.matrix);
   });
 
   const onClick = (e: ThreeEvent<MouseEvent>) => {

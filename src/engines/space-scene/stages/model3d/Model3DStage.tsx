@@ -24,6 +24,7 @@ import type { FitnessBundle } from '../../../../content/schema/fitness';
 import { t, type Locale } from '../../../../i18n';
 import type { SpaceUiStore } from '../../ui';
 import type { StageBridge } from '../../bridge';
+import { freeStageRect } from '../../lib/hud-framing';
 import { DEFAULT_CAMERA } from '../../lib/camera';
 import { extendThree } from './extend';
 import { useStageLook } from './look';
@@ -112,6 +113,47 @@ export default function Model3DStage({ store, data, ui, bridge, chapters, label,
       root.unmount();
     };
   }, [store, bridge]);
+
+  // The DOM HUD lives outside R3F. Measure only on layout changes, not per rendered frame.
+  useEffect(() => {
+    const stage = wrapRef.current, scene = stage?.closest('.atlas-scene');
+    if (!data.views.hudFrame || !stage || !scene) return;
+    let frame = 0, alive = true;
+    const resize = new ResizeObserver(() => schedule());
+    const measure = () => {
+      frame = 0;
+      const box = stage.getBoundingClientRect();
+      const presenting = ui.getState().presenting;
+      const panels = [...scene.querySelectorAll('[data-hud-panel]')]
+        .filter(el => el.getAttribute('data-hud-panel') !== 'perf' && (!presenting || el.getAttribute('data-hud-panel')!.startsWith('present')))
+        .flatMap(el => el.getAttribute('data-hud-panel') === 'overlay' ? [...el.children] : [el]);
+      resize.observe(stage);
+      const rects = panels.flatMap(el => {
+        resize.observe(el);
+        const r = el.getBoundingClientRect();
+        if (r.width < 1 || r.height < 1 || getComputedStyle(el).visibility === 'hidden') return [];
+        return [{ x0: r.left-box.left, y0: r.top-box.top, x1: r.right-box.left, y1: r.bottom-box.top }];
+      });
+      bridge.freeStage = freeStageRect(box.width, box.height, rects);
+      bridge.invalidate();
+    };
+    const schedule = () => { if (alive && !frame) frame = requestAnimationFrame(measure); };
+    const mutations = new MutationObserver(schedule);
+    mutations.observe(scene, { childList: true, subtree: true });
+    const attributes = new MutationObserver(schedule);
+    attributes.observe(scene, { attributes: true });
+    const off = ui.subscribe((s, prev) => { if (s.presenting !== prev.presenting || s.cover !== prev.cover) schedule(); });
+    scene.addEventListener('transitionend', schedule);
+    document.fonts?.ready.then(schedule);
+    measure();
+    return () => {
+      alive = false;
+      resize.disconnect(); mutations.disconnect(); attributes.disconnect(); off();
+      scene.removeEventListener('transitionend', schedule);
+      cancelAnimationFrame(frame);
+      delete bridge.freeStage;
+    };
+  }, [data.views.hudFrame, bridge, ui]);
 
   // Re-render the R3F tree whenever the inputs change (data / theme).
   useLayoutEffect(() => {

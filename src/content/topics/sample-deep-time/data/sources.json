@@ -1,0 +1,12 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "TEST/DESIGN: Atlas synthetic fixture. Shapes, ages, records and suppression counts are designed for software assertions, not scientific evidence.",
+        "zh": "测试／设计：Atlas 合成夹具。图形、年代、记录及抑制计数用于软件断言，并非科学证据。"
+      },
+      "design": true
+    }
+  ]
+}

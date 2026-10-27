@@ -1,0 +1,1649 @@
+{
+  "parts": [
+    {
+      "id": "mangrove",
+      "name": {
+        "en": "Leaves",
+        "zh": "叶片"
+      },
+      "group": "test-web",
+      "summary": {
+        "en": "Sample object for testing selection.",
+        "zh": "用于测试选择的示例对象。"
+      },
+      "detail": {
+        "en": "Sample fixture object; no scientific shape is represented.",
+        "zh": "示例对象，不表示科学形状。"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.055
+        ],
+        "at": [
+          -0.2,
+          0.06,
+          -0.1
+        ],
+        "color": "plastic",
+        "tint": "token:neutral"
+      }
+    },
+    {
+      "id": "algae",
+      "name": {
+        "en": "Algae",
+        "zh": "藻类"
+      },
+      "group": "test-web",
+      "summary": {
+        "en": "Sample object for testing selection.",
+        "zh": "用于测试选择的示例对象。"
+      },
+      "detail": {
+        "en": "Sample fixture object; no scientific shape is represented.",
+        "zh": "示例对象，不表示科学形状。"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.055
+        ],
+        "at": [
+          0.0,
+          0.06,
+          -0.1
+        ],
+        "color": "plastic",
+        "tint": "token:neutral"
+      }
+    },
+    {
+      "id": "fiddlers",
+      "name": {
+        "en": "Fiddlers",
+        "zh": "招潮蟹"
+      },
+      "group": "test-web",
+      "summary": {
+        "en": "Sample object for testing selection.",
+        "zh": "用于测试选择的示例对象。"
+      },
+      "detail": {
+        "en": "Sample fixture object; no scientific shape is represented.",
+        "zh": "示例对象，不表示科学形状。"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.055
+        ],
+        "at": [
+          0.2,
+          0.06,
+          -0.1
+        ],
+        "color": "plastic",
+        "tint": "token:neutral"
+      }
+    },
+    {
+      "id": "tree-crabs",
+      "name": {
+        "en": "Tree crabs",
+        "zh": "树蟹"
+      },
+      "group": "test-web",
+      "summary": {
+        "en": "Sample object for testing selection.",
+        "zh": "用于测试选择的示例对象。"
+      },
+      "detail": {
+        "en": "Sample fixture object; no scientific shape is represented.",
+        "zh": "示例对象，不表示科学形状。"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.055
+        ],
+        "at": [
+          -0.2,
+          0.06,
+          0.1
+        ],
+        "color": "plastic",
+        "tint": "token:neutral"
+      }
+    },
+    {
+      "id": "mudskipper",
+      "name": {
+        "en": "Mudskipper",
+        "zh": "弹涂鱼"
+      },
+      "group": "test-web",
+      "summary": {
+        "en": "Sample object for testing selection.",
+        "zh": "用于测试选择的示例对象。"
+      },
+      "detail": {
+        "en": "Sample fixture object; no scientific shape is represented.",
+        "zh": "示例对象，不表示科学形状。"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.055
+        ],
+        "at": [
+          0.0,
+          0.06,
+          0.1
+        ],
+        "color": "plastic",
+        "tint": "token:neutral"
+      }
+    },
+    {
+      "id": "heron",
+      "name": {
+        "en": "Heron",
+        "zh": "鹭"
+      },
+      "group": "test-web",
+      "summary": {
+        "en": "Sample object for testing selection.",
+        "zh": "用于测试选择的示例对象。"
+      },
+      "detail": {
+        "en": "Sample fixture object; no scientific shape is represented.",
+        "zh": "示例对象，不表示科学形状。"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.055
+        ],
+        "at": [
+          0.2,
+          0.06,
+          0.1
+        ],
+        "color": "plastic",
+        "tint": "token:neutral"
+      }
+    }
+  ],
+  "groups": [
+    {
+      "id": "test-web",
+      "name": {
+        "en": "Test web",
+        "zh": "测试网"
+      },
+      "color": "token:ink"
+    }
+  ],
+  "views": {
+    "assembled": {
+      "camera": {
+        "position": [
+          0.5,
+          0.5,
+          0.9
+        ],
+        "target": [
+          0,
+          0.05,
+          0
+        ],
+        "fov": 32
+      }
+    },
+    "cover": {
+      "position": [
+        0.5,
+        0.5,
+        0.9
+      ],
+      "target": [
+        0,
+        0.05,
+        0
+      ],
+      "fov": 32
+    }
+  },
+  "presets": [
+    {
+      "id": "web",
+      "label": {
+        "en": "Test web",
+        "zh": "测试网"
+      },
+      "camera": {
+        "position": [
+          0.5,
+          0.5,
+          0.9
+        ],
+        "target": [
+          0,
+          0.05,
+          0
+        ],
+        "fov": 32
+      }
+    }
+  ],
+  "sim": {
+    "kind": "table",
+    "controls": [
+      {
+        "id": "remove",
+        "kind": "choice",
+        "label": {
+          "en": "Remove",
+          "zh": "移走"
+        },
+        "default": "none",
+        "options": [
+          {
+            "id": "none",
+            "label": {
+              "en": "None",
+              "zh": "不移走"
+            }
+          },
+          {
+            "id": "n-mangrove",
+            "label": {
+              "en": "Leaves",
+              "zh": "叶片"
+            }
+          },
+          {
+            "id": "n-algae",
+            "label": {
+              "en": "Algae",
+              "zh": "藻类"
+            }
+          },
+          {
+            "id": "n-fiddlers",
+            "label": {
+              "en": "Fiddlers",
+              "zh": "招潮蟹"
+            }
+          },
+          {
+            "id": "n-tree-crabs",
+            "label": {
+              "en": "Tree crabs",
+              "zh": "树蟹"
+            }
+          },
+          {
+            "id": "n-mudskipper",
+            "label": {
+              "en": "Mudskipper",
+              "zh": "弹涂鱼"
+            }
+          },
+          {
+            "id": "n-heron",
+            "label": {
+              "en": "Heron",
+              "zh": "鹭"
+            }
+          }
+        ]
+      },
+      {
+        "id": "inspect",
+        "kind": "choice",
+        "label": {
+          "en": "Inspect",
+          "zh": "观察"
+        },
+        "default": "n-mudskipper",
+        "options": [
+          {
+            "id": "n-fiddlers",
+            "label": {
+              "en": "Fiddlers",
+              "zh": "招潮蟹"
+            }
+          },
+          {
+            "id": "n-tree-crabs",
+            "label": {
+              "en": "Tree crabs",
+              "zh": "树蟹"
+            }
+          },
+          {
+            "id": "n-mudskipper",
+            "label": {
+              "en": "Mudskipper",
+              "zh": "弹涂鱼"
+            }
+          },
+          {
+            "id": "n-heron",
+            "label": {
+              "en": "Heron",
+              "zh": "鹭"
+            }
+          }
+        ]
+      },
+      {
+        "id": "tide",
+        "kind": "choice",
+        "label": {
+          "en": "Tide",
+          "zh": "潮位"
+        },
+        "default": "low",
+        "options": [
+          {
+            "id": "low",
+            "label": {
+              "en": "Low",
+              "zh": "低"
+            }
+          },
+          {
+            "id": "high",
+            "label": {
+              "en": "High",
+              "zh": "高"
+            }
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "id": "present-count",
+        "kind": "number",
+        "label": {
+          "en": "present-count",
+          "zh": "present-count"
+        },
+        "unit": ""
+      },
+      {
+        "id": "supported-count",
+        "kind": "number",
+        "label": {
+          "en": "supported-count",
+          "zh": "supported-count"
+        },
+        "unit": ""
+      },
+      {
+        "id": "active-links",
+        "kind": "number",
+        "label": {
+          "en": "active-links",
+          "zh": "active-links"
+        },
+        "unit": ""
+      },
+      {
+        "id": "status-n-mangrove",
+        "kind": "state",
+        "label": {
+          "en": "status-n-mangrove",
+          "zh": "status-n-mangrove"
+        },
+        "unit": "",
+        "states": {
+          "unchanged": {
+            "en": "Unchanged",
+            "zh": "不变"
+          },
+          "fewer-foods": {
+            "en": "Fewer foods",
+            "zh": "食物种类减少"
+          },
+          "no-shown-food": {
+            "en": "No shown food",
+            "zh": "图中无食物来源"
+          },
+          "removed": {
+            "en": "Removed",
+            "zh": "已移走"
+          }
+        }
+      },
+      {
+        "id": "status-n-algae",
+        "kind": "state",
+        "label": {
+          "en": "status-n-algae",
+          "zh": "status-n-algae"
+        },
+        "unit": "",
+        "states": {
+          "unchanged": {
+            "en": "Unchanged",
+            "zh": "不变"
+          },
+          "fewer-foods": {
+            "en": "Fewer foods",
+            "zh": "食物种类减少"
+          },
+          "no-shown-food": {
+            "en": "No shown food",
+            "zh": "图中无食物来源"
+          },
+          "removed": {
+            "en": "Removed",
+            "zh": "已移走"
+          }
+        }
+      },
+      {
+        "id": "status-n-fiddlers",
+        "kind": "state",
+        "label": {
+          "en": "status-n-fiddlers",
+          "zh": "status-n-fiddlers"
+        },
+        "unit": "",
+        "states": {
+          "unchanged": {
+            "en": "Unchanged",
+            "zh": "不变"
+          },
+          "fewer-foods": {
+            "en": "Fewer foods",
+            "zh": "食物种类减少"
+          },
+          "no-shown-food": {
+            "en": "No shown food",
+            "zh": "图中无食物来源"
+          },
+          "removed": {
+            "en": "Removed",
+            "zh": "已移走"
+          }
+        }
+      },
+      {
+        "id": "status-n-tree-crabs",
+        "kind": "state",
+        "label": {
+          "en": "status-n-tree-crabs",
+          "zh": "status-n-tree-crabs"
+        },
+        "unit": "",
+        "states": {
+          "unchanged": {
+            "en": "Unchanged",
+            "zh": "不变"
+          },
+          "fewer-foods": {
+            "en": "Fewer foods",
+            "zh": "食物种类减少"
+          },
+          "no-shown-food": {
+            "en": "No shown food",
+            "zh": "图中无食物来源"
+          },
+          "removed": {
+            "en": "Removed",
+            "zh": "已移走"
+          }
+        }
+      },
+      {
+        "id": "status-n-mudskipper",
+        "kind": "state",
+        "label": {
+          "en": "status-n-mudskipper",
+          "zh": "status-n-mudskipper"
+        },
+        "unit": "",
+        "states": {
+          "unchanged": {
+            "en": "Unchanged",
+            "zh": "不变"
+          },
+          "fewer-foods": {
+            "en": "Fewer foods",
+            "zh": "食物种类减少"
+          },
+          "no-shown-food": {
+            "en": "No shown food",
+            "zh": "图中无食物来源"
+          },
+          "removed": {
+            "en": "Removed",
+            "zh": "已移走"
+          }
+        }
+      },
+      {
+        "id": "status-n-heron",
+        "kind": "state",
+        "label": {
+          "en": "status-n-heron",
+          "zh": "status-n-heron"
+        },
+        "unit": "",
+        "states": {
+          "unchanged": {
+            "en": "Unchanged",
+            "zh": "不变"
+          },
+          "fewer-foods": {
+            "en": "Fewer foods",
+            "zh": "食物种类减少"
+          },
+          "no-shown-food": {
+            "en": "No shown food",
+            "zh": "图中无食物来源"
+          },
+          "removed": {
+            "en": "Removed",
+            "zh": "已移走"
+          }
+        }
+      },
+      {
+        "id": "active-e-leaves-tree",
+        "kind": "number",
+        "label": {
+          "en": "active-e-leaves-tree",
+          "zh": "active-e-leaves-tree"
+        },
+        "unit": ""
+      },
+      {
+        "id": "active-e-algae-tree",
+        "kind": "number",
+        "label": {
+          "en": "active-e-algae-tree",
+          "zh": "active-e-algae-tree"
+        },
+        "unit": ""
+      },
+      {
+        "id": "active-e-algae-fiddlers",
+        "kind": "number",
+        "label": {
+          "en": "active-e-algae-fiddlers",
+          "zh": "active-e-algae-fiddlers"
+        },
+        "unit": ""
+      },
+      {
+        "id": "active-e-fiddlers-fish",
+        "kind": "number",
+        "label": {
+          "en": "active-e-fiddlers-fish",
+          "zh": "active-e-fiddlers-fish"
+        },
+        "unit": ""
+      },
+      {
+        "id": "active-e-tree-fish",
+        "kind": "number",
+        "label": {
+          "en": "active-e-tree-fish",
+          "zh": "active-e-tree-fish"
+        },
+        "unit": ""
+      },
+      {
+        "id": "active-e-fish-heron",
+        "kind": "number",
+        "label": {
+          "en": "active-e-fish-heron",
+          "zh": "active-e-fish-heron"
+        },
+        "unit": ""
+      },
+      {
+        "id": "foods",
+        "kind": "number",
+        "label": {
+          "en": "foods",
+          "zh": "foods"
+        },
+        "unit": ""
+      },
+      {
+        "id": "food-status",
+        "kind": "state",
+        "label": {
+          "en": "food-status",
+          "zh": "food-status"
+        },
+        "unit": "",
+        "states": {
+          "unchanged": {
+            "en": "Unchanged",
+            "zh": "不变"
+          },
+          "fewer-foods": {
+            "en": "Fewer foods",
+            "zh": "食物种类减少"
+          },
+          "no-shown-food": {
+            "en": "No shown food",
+            "zh": "图中无食物来源"
+          },
+          "removed": {
+            "en": "Removed",
+            "zh": "已移走"
+          }
+        }
+      },
+      {
+        "id": "water-rise",
+        "kind": "number",
+        "label": {
+          "en": "water-rise",
+          "zh": "water-rise"
+        },
+        "unit": ""
+      },
+      {
+        "id": "crab-rise",
+        "kind": "number",
+        "label": {
+          "en": "crab-rise",
+          "zh": "crab-rise"
+        },
+        "unit": ""
+      },
+      {
+        "id": "show-fiddlers",
+        "kind": "number",
+        "label": {
+          "en": "show-fiddlers",
+          "zh": "show-fiddlers"
+        },
+        "unit": ""
+      }
+    ],
+    "foodWeb": {
+      "inspect": "inspect",
+      "nodes": [
+        {
+          "id": "n-mangrove",
+          "label": {
+            "en": "Leaves",
+            "zh": "叶片"
+          },
+          "role": "producer",
+          "parts": [
+            "mangrove"
+          ],
+          "d": [
+            0.25,
+            0.1
+          ],
+          "output": "status-n-mangrove",
+          "sources": [
+            "S1"
+          ]
+        },
+        {
+          "id": "n-algae",
+          "label": {
+            "en": "Algae",
+            "zh": "藻类"
+          },
+          "role": "producer",
+          "parts": [
+            "algae"
+          ],
+          "d": [
+            0.75,
+            0.1
+          ],
+          "output": "status-n-algae",
+          "sources": [
+            "S1"
+          ]
+        },
+        {
+          "id": "n-fiddlers",
+          "label": {
+            "en": "Fiddlers",
+            "zh": "招潮蟹"
+          },
+          "role": "consumer",
+          "parts": [
+            "fiddlers"
+          ],
+          "d": [
+            0.25,
+            0.37
+          ],
+          "output": "status-n-fiddlers",
+          "sources": [
+            "S1"
+          ]
+        },
+        {
+          "id": "n-tree-crabs",
+          "label": {
+            "en": "Tree crabs",
+            "zh": "树蟹"
+          },
+          "role": "consumer",
+          "parts": [
+            "tree-crabs"
+          ],
+          "d": [
+            0.75,
+            0.37
+          ],
+          "output": "status-n-tree-crabs",
+          "sources": [
+            "S1"
+          ]
+        },
+        {
+          "id": "n-mudskipper",
+          "label": {
+            "en": "Mudskipper",
+            "zh": "弹涂鱼"
+          },
+          "role": "consumer",
+          "parts": [
+            "mudskipper"
+          ],
+          "d": [
+            0.5,
+            0.64
+          ],
+          "output": "status-n-mudskipper",
+          "sources": [
+            "S1"
+          ]
+        },
+        {
+          "id": "n-heron",
+          "label": {
+            "en": "Heron",
+            "zh": "鹭"
+          },
+          "role": "consumer",
+          "parts": [
+            "heron"
+          ],
+          "d": [
+            0.5,
+            0.9
+          ],
+          "output": "status-n-heron",
+          "sources": [
+            "S1"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "id": "e-leaves-tree",
+          "to": "n-tree-crabs",
+          "output": "active-e-leaves-tree",
+          "evidence": "local-observation",
+          "sources": [
+            "S1"
+          ],
+          "note": {
+            "en": "Sample relation evidence; this is a test graph.",
+            "zh": "示例关系证据；这是测试用图。"
+          },
+          "from": "n-mangrove"
+        },
+        {
+          "id": "e-algae-tree",
+          "to": "n-tree-crabs",
+          "output": "active-e-algae-tree",
+          "evidence": "indexed-only",
+          "sources": [
+            "S1"
+          ],
+          "note": {
+            "en": "Sample relation evidence; this is a test graph.",
+            "zh": "示例关系证据；这是测试用图。"
+          },
+          "from": "n-algae"
+        },
+        {
+          "id": "e-algae-fiddlers",
+          "to": "n-fiddlers",
+          "output": "active-e-algae-fiddlers",
+          "evidence": "general",
+          "sources": [
+            "S1"
+          ],
+          "note": {
+            "en": "Sample relation evidence; this is a test graph.",
+            "zh": "示例关系证据；这是测试用图。"
+          },
+          "from": "n-algae"
+        },
+        {
+          "id": "e-fiddlers-fish",
+          "to": "n-mudskipper",
+          "output": "active-e-fiddlers-fish",
+          "evidence": "general",
+          "sources": [
+            "S1"
+          ],
+          "note": {
+            "en": "Sample relation evidence; this is a test graph.",
+            "zh": "示例关系证据；这是测试用图。"
+          },
+          "from": "n-fiddlers"
+        },
+        {
+          "id": "e-tree-fish",
+          "to": "n-mudskipper",
+          "output": "active-e-tree-fish",
+          "evidence": "reported-observation",
+          "sources": [
+            "S1"
+          ],
+          "note": {
+            "en": "Sample relation evidence; this is a test graph.",
+            "zh": "示例关系证据；这是测试用图。"
+          },
+          "from": "n-tree-crabs"
+        },
+        {
+          "id": "e-fish-heron",
+          "to": "n-heron",
+          "output": "active-e-fish-heron",
+          "evidence": "local-observation",
+          "sources": [
+            "S1"
+          ],
+          "note": {
+            "en": "Sample relation evidence; this is a test graph.",
+            "zh": "示例关系证据；这是测试用图。"
+          },
+          "from": "n-mudskipper"
+        }
+      ],
+      "note": {
+        "en": "Test graph: arrows show food to consumer; no population forecast.",
+        "zh": "测试图：箭头从食物指向消费者；不预测数量。"
+      }
+    },
+    "table": {
+      "experiments": {
+        "web": {
+          "keys": [
+            "remove"
+          ],
+          "rows": [
+            {
+              "when": {
+                "remove": "none"
+              },
+              "set": {
+                "present-count": 6,
+                "supported-count": 6,
+                "active-links": 6,
+                "status-n-mangrove": "unchanged",
+                "status-n-algae": "unchanged",
+                "status-n-fiddlers": "unchanged",
+                "status-n-tree-crabs": "unchanged",
+                "status-n-mudskipper": "unchanged",
+                "status-n-heron": "unchanged",
+                "active-e-leaves-tree": 1,
+                "active-e-algae-tree": 1,
+                "active-e-algae-fiddlers": 1,
+                "active-e-fiddlers-fish": 1,
+                "active-e-tree-fish": 1,
+                "active-e-fish-heron": 1
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-mangrove"
+              },
+              "set": {
+                "present-count": 5,
+                "supported-count": 5,
+                "active-links": 5,
+                "status-n-mangrove": "removed",
+                "status-n-algae": "unchanged",
+                "status-n-fiddlers": "unchanged",
+                "status-n-tree-crabs": "fewer-foods",
+                "status-n-mudskipper": "unchanged",
+                "status-n-heron": "unchanged",
+                "active-e-leaves-tree": 0,
+                "active-e-algae-tree": 1,
+                "active-e-algae-fiddlers": 1,
+                "active-e-fiddlers-fish": 1,
+                "active-e-tree-fish": 1,
+                "active-e-fish-heron": 1
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-algae"
+              },
+              "set": {
+                "present-count": 5,
+                "supported-count": 4,
+                "active-links": 3,
+                "status-n-mangrove": "unchanged",
+                "status-n-algae": "removed",
+                "status-n-fiddlers": "no-shown-food",
+                "status-n-tree-crabs": "fewer-foods",
+                "status-n-mudskipper": "fewer-foods",
+                "status-n-heron": "unchanged",
+                "active-e-leaves-tree": 1,
+                "active-e-algae-tree": 0,
+                "active-e-algae-fiddlers": 0,
+                "active-e-fiddlers-fish": 0,
+                "active-e-tree-fish": 1,
+                "active-e-fish-heron": 1
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-fiddlers"
+              },
+              "set": {
+                "present-count": 5,
+                "supported-count": 5,
+                "active-links": 4,
+                "status-n-mangrove": "unchanged",
+                "status-n-algae": "unchanged",
+                "status-n-fiddlers": "removed",
+                "status-n-tree-crabs": "unchanged",
+                "status-n-mudskipper": "fewer-foods",
+                "status-n-heron": "unchanged",
+                "active-e-leaves-tree": 1,
+                "active-e-algae-tree": 1,
+                "active-e-algae-fiddlers": 0,
+                "active-e-fiddlers-fish": 0,
+                "active-e-tree-fish": 1,
+                "active-e-fish-heron": 1
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-tree-crabs"
+              },
+              "set": {
+                "present-count": 5,
+                "supported-count": 5,
+                "active-links": 3,
+                "status-n-mangrove": "unchanged",
+                "status-n-algae": "unchanged",
+                "status-n-fiddlers": "unchanged",
+                "status-n-tree-crabs": "removed",
+                "status-n-mudskipper": "fewer-foods",
+                "status-n-heron": "unchanged",
+                "active-e-leaves-tree": 0,
+                "active-e-algae-tree": 0,
+                "active-e-algae-fiddlers": 1,
+                "active-e-fiddlers-fish": 1,
+                "active-e-tree-fish": 0,
+                "active-e-fish-heron": 1
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-mudskipper"
+              },
+              "set": {
+                "present-count": 5,
+                "supported-count": 4,
+                "active-links": 3,
+                "status-n-mangrove": "unchanged",
+                "status-n-algae": "unchanged",
+                "status-n-fiddlers": "unchanged",
+                "status-n-tree-crabs": "unchanged",
+                "status-n-mudskipper": "removed",
+                "status-n-heron": "no-shown-food",
+                "active-e-leaves-tree": 1,
+                "active-e-algae-tree": 1,
+                "active-e-algae-fiddlers": 1,
+                "active-e-fiddlers-fish": 0,
+                "active-e-tree-fish": 0,
+                "active-e-fish-heron": 0
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-heron"
+              },
+              "set": {
+                "present-count": 5,
+                "supported-count": 5,
+                "active-links": 5,
+                "status-n-mangrove": "unchanged",
+                "status-n-algae": "unchanged",
+                "status-n-fiddlers": "unchanged",
+                "status-n-tree-crabs": "unchanged",
+                "status-n-mudskipper": "unchanged",
+                "status-n-heron": "removed",
+                "active-e-leaves-tree": 1,
+                "active-e-algae-tree": 1,
+                "active-e-algae-fiddlers": 1,
+                "active-e-fiddlers-fish": 1,
+                "active-e-tree-fish": 1,
+                "active-e-fish-heron": 0
+              },
+              "source": [
+                "S2"
+              ]
+            }
+          ]
+        },
+        "inspection": {
+          "keys": [
+            "remove",
+            "inspect"
+          ],
+          "rows": [
+            {
+              "when": {
+                "remove": "none",
+                "inspect": "n-fiddlers"
+              },
+              "set": {
+                "foods": 1,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "none",
+                "inspect": "n-tree-crabs"
+              },
+              "set": {
+                "foods": 2,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "none",
+                "inspect": "n-mudskipper"
+              },
+              "set": {
+                "foods": 2,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "none",
+                "inspect": "n-heron"
+              },
+              "set": {
+                "foods": 1,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-mangrove",
+                "inspect": "n-fiddlers"
+              },
+              "set": {
+                "foods": 1,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-mangrove",
+                "inspect": "n-tree-crabs"
+              },
+              "set": {
+                "foods": 1,
+                "food-status": "fewer-foods"
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-mangrove",
+                "inspect": "n-mudskipper"
+              },
+              "set": {
+                "foods": 2,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-mangrove",
+                "inspect": "n-heron"
+              },
+              "set": {
+                "foods": 1,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-algae",
+                "inspect": "n-fiddlers"
+              },
+              "set": {
+                "foods": 0,
+                "food-status": "no-shown-food"
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-algae",
+                "inspect": "n-tree-crabs"
+              },
+              "set": {
+                "foods": 1,
+                "food-status": "fewer-foods"
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-algae",
+                "inspect": "n-mudskipper"
+              },
+              "set": {
+                "foods": 1,
+                "food-status": "fewer-foods"
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-algae",
+                "inspect": "n-heron"
+              },
+              "set": {
+                "foods": 1,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-fiddlers",
+                "inspect": "n-fiddlers"
+              },
+              "set": {
+                "foods": 0,
+                "food-status": "removed"
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-fiddlers",
+                "inspect": "n-tree-crabs"
+              },
+              "set": {
+                "foods": 2,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-fiddlers",
+                "inspect": "n-mudskipper"
+              },
+              "set": {
+                "foods": 1,
+                "food-status": "fewer-foods"
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-fiddlers",
+                "inspect": "n-heron"
+              },
+              "set": {
+                "foods": 1,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-tree-crabs",
+                "inspect": "n-fiddlers"
+              },
+              "set": {
+                "foods": 1,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-tree-crabs",
+                "inspect": "n-tree-crabs"
+              },
+              "set": {
+                "foods": 0,
+                "food-status": "removed"
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-tree-crabs",
+                "inspect": "n-mudskipper"
+              },
+              "set": {
+                "foods": 1,
+                "food-status": "fewer-foods"
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-tree-crabs",
+                "inspect": "n-heron"
+              },
+              "set": {
+                "foods": 1,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-mudskipper",
+                "inspect": "n-fiddlers"
+              },
+              "set": {
+                "foods": 1,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-mudskipper",
+                "inspect": "n-tree-crabs"
+              },
+              "set": {
+                "foods": 2,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-mudskipper",
+                "inspect": "n-mudskipper"
+              },
+              "set": {
+                "foods": 0,
+                "food-status": "removed"
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-mudskipper",
+                "inspect": "n-heron"
+              },
+              "set": {
+                "foods": 0,
+                "food-status": "no-shown-food"
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-heron",
+                "inspect": "n-fiddlers"
+              },
+              "set": {
+                "foods": 1,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-heron",
+                "inspect": "n-tree-crabs"
+              },
+              "set": {
+                "foods": 2,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-heron",
+                "inspect": "n-mudskipper"
+              },
+              "set": {
+                "foods": 2,
+                "food-status": "unchanged"
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-heron",
+                "inspect": "n-heron"
+              },
+              "set": {
+                "foods": 0,
+                "food-status": "removed"
+              },
+              "source": [
+                "S2"
+              ]
+            }
+          ]
+        },
+        "tide-pose": {
+          "keys": [
+            "remove",
+            "tide"
+          ],
+          "rows": [
+            {
+              "when": {
+                "remove": "none",
+                "tide": "low"
+              },
+              "set": {
+                "water-rise": 0,
+                "crab-rise": 0,
+                "show-fiddlers": 1
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "none",
+                "tide": "high"
+              },
+              "set": {
+                "water-rise": 0.14,
+                "crab-rise": 0.16,
+                "show-fiddlers": 0
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-mangrove",
+                "tide": "low"
+              },
+              "set": {
+                "water-rise": 0,
+                "crab-rise": 0,
+                "show-fiddlers": 1
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-mangrove",
+                "tide": "high"
+              },
+              "set": {
+                "water-rise": 0.14,
+                "crab-rise": 0.16,
+                "show-fiddlers": 0
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-algae",
+                "tide": "low"
+              },
+              "set": {
+                "water-rise": 0,
+                "crab-rise": 0,
+                "show-fiddlers": 1
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-algae",
+                "tide": "high"
+              },
+              "set": {
+                "water-rise": 0.14,
+                "crab-rise": 0.16,
+                "show-fiddlers": 0
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-fiddlers",
+                "tide": "low"
+              },
+              "set": {
+                "water-rise": 0,
+                "crab-rise": 0,
+                "show-fiddlers": 0
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-fiddlers",
+                "tide": "high"
+              },
+              "set": {
+                "water-rise": 0.14,
+                "crab-rise": 0.16,
+                "show-fiddlers": 0
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-tree-crabs",
+                "tide": "low"
+              },
+              "set": {
+                "water-rise": 0,
+                "crab-rise": 0,
+                "show-fiddlers": 1
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-tree-crabs",
+                "tide": "high"
+              },
+              "set": {
+                "water-rise": 0.14,
+                "crab-rise": 0.16,
+                "show-fiddlers": 0
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-mudskipper",
+                "tide": "low"
+              },
+              "set": {
+                "water-rise": 0,
+                "crab-rise": 0,
+                "show-fiddlers": 1
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-mudskipper",
+                "tide": "high"
+              },
+              "set": {
+                "water-rise": 0.14,
+                "crab-rise": 0.16,
+                "show-fiddlers": 0
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-heron",
+                "tide": "low"
+              },
+              "set": {
+                "water-rise": 0,
+                "crab-rise": 0,
+                "show-fiddlers": 1
+              },
+              "source": [
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "remove": "n-heron",
+                "tide": "high"
+              },
+              "set": {
+                "water-rise": 0.14,
+                "crab-rise": 0.16,
+                "show-fiddlers": 0
+              },
+              "source": [
+                "S2"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "bind": []
+  }
+}

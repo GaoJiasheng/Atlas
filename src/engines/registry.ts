@@ -29,10 +29,11 @@ const views = new Map<string, LazyExoticComponent<ComponentType<EngineViewProps>
 /** Lazily-loaded view component for an engine (memoised per engine). */
 export function getEngineView(id: EngineId, temporalMode?: string): LazyExoticComponent<ComponentType<EngineViewProps>> {
   const monthly = id === 'time-scene' && temporalMode === 'climatology';
-  const key = monthly ? `${id}:climatology` : id;
+  const geography = id === 'time-scene' && temporalMode === 'geography';
+  const key = geography ? `${id}:geography` : monthly ? `${id}:climatology` : id;
   let view = views.get(key);
   if (!view) {
-    view = lazy<ComponentType<EngineViewProps>>(() => monthly ? import('./time-scene/ClimatologyView') : ENGINES[id].load());
+    view = lazy<ComponentType<EngineViewProps>>(() => geography ? import('./time-scene/GeographyView') : monthly ? import('./time-scene/ClimatologyView') : ENGINES[id].load());
     views.set(key, view);
   }
   return view;

@@ -1,0 +1,233 @@
+{
+  "terms": [
+    {
+      "id": "rotation",
+      "term": {
+        "en": "rotation",
+        "zh": "自转"
+      },
+      "definition": {
+        "en": "Turning about a body's own axis.",
+        "zh": "天体绕自身轴线转动。"
+      },
+      "see": [
+        "orbit"
+      ]
+    },
+    {
+      "id": "orbit",
+      "term": {
+        "en": "orbit",
+        "zh": "公转"
+      },
+      "definition": {
+        "en": "Moving around another body.",
+        "zh": "围绕另一天体运动。"
+      },
+      "see": [
+        "rotation"
+      ]
+    },
+    {
+      "id": "obliquity",
+      "term": {
+        "en": "axial tilt",
+        "zh": "地轴倾角"
+      },
+      "definition": {
+        "en": "The angle between the spin axis and the orbital normal.",
+        "zh": "自转轴与轨道法线的夹角。"
+      },
+      "see": [
+        "hemisphere"
+      ]
+    },
+    {
+      "id": "hemisphere",
+      "term": {
+        "en": "hemisphere",
+        "zh": "半球"
+      },
+      "definition": {
+        "en": "Half a globe; here north or south of the equator.",
+        "zh": "球体的一半；这里指赤道以北或以南。"
+      },
+      "see": [
+        "obliquity"
+      ]
+    },
+    {
+      "id": "daylight",
+      "term": {
+        "en": "daylight duration",
+        "zh": "昼长"
+      },
+      "definition": {
+        "en": "Daylight length under a stated horizon convention.",
+        "zh": "在指定地平线定义下的白昼时长。"
+      },
+      "see": [
+        "solar-day"
+      ]
+    },
+    {
+      "id": "solar-day",
+      "term": {
+        "en": "solar day",
+        "zh": "太阳日"
+      },
+      "definition": {
+        "en": "A cycle measured relative to the Sun.",
+        "zh": "按相对太阳的位置回归计量的周期。"
+      },
+      "see": [
+        "rotation",
+        "solar-noon"
+      ]
+    },
+    {
+      "id": "solar-noon",
+      "term": {
+        "en": "solar noon",
+        "zh": "太阳正午"
+      },
+      "definition": {
+        "en": "The Sun's daily crossing of the local meridian.",
+        "zh": "太阳每天经过当地子午线的时刻。"
+      },
+      "see": [
+        "solar-day"
+      ]
+    },
+    {
+      "id": "phase",
+      "term": {
+        "en": "Moon phase",
+        "zh": "月相"
+      },
+      "definition": {
+        "en": "The shape of the sunlit portion seen from Earth.",
+        "zh": "从地球看见的月球受光部分的形状。"
+      },
+      "see": [
+        "synodic-month"
+      ]
+    },
+    {
+      "id": "synchronous-rotation",
+      "term": {
+        "en": "synchronous rotation",
+        "zh": "同步自转"
+      },
+      "definition": {
+        "en": "One spin during one orbit.",
+        "zh": "公转一周时自转一周。"
+      },
+      "see": [
+        "rotation",
+        "orbit"
+      ]
+    },
+    {
+      "id": "synodic-month",
+      "term": {
+        "en": "synodic month",
+        "zh": "朔望月"
+      },
+      "definition": {
+        "en": "The new-Moon-to-new-Moon cycle.",
+        "zh": "从一次新月到下次新月的周期。"
+      },
+      "see": [
+        "phase"
+      ]
+    },
+    {
+      "id": "node",
+      "term": {
+        "en": "orbital node",
+        "zh": "轨道交点"
+      },
+      "definition": {
+        "en": "A crossing of the lunar orbit and Earth's orbital plane.",
+        "zh": "月球轨道穿过地球轨道平面的位置。"
+      },
+      "see": [
+        "solar-eclipse",
+        "lunar-eclipse"
+      ]
+    },
+    {
+      "id": "solar-eclipse",
+      "term": {
+        "en": "solar eclipse",
+        "zh": "日食"
+      },
+      "definition": {
+        "en": "The Moon covers the Sun for an observer.",
+        "zh": "对某个观察者而言，月球遮住太阳。"
+      },
+      "see": [
+        "apparent-diameter",
+        "annular-eclipse"
+      ]
+    },
+    {
+      "id": "lunar-eclipse",
+      "term": {
+        "en": "lunar eclipse",
+        "zh": "月食"
+      },
+      "definition": {
+        "en": "The Moon enters Earth's shadow.",
+        "zh": "月球进入地球影子。"
+      },
+      "see": [
+        "node"
+      ]
+    },
+    {
+      "id": "annular-eclipse",
+      "term": {
+        "en": "annular solar eclipse",
+        "zh": "日环食"
+      },
+      "definition": {
+        "en": "A central solar eclipse leaving a bright ring.",
+        "zh": "太阳周围仍留下明亮光环的中心日食。"
+      },
+      "see": [
+        "apparent-diameter",
+        "solar-eclipse"
+      ]
+    },
+    {
+      "id": "apparent-diameter",
+      "term": {
+        "en": "apparent diameter",
+        "zh": "视直径"
+      },
+      "definition": {
+        "en": "A body's angular width from a chosen place.",
+        "zh": "从指定地点看到的天体角宽度。"
+      },
+      "see": [
+        "annular-eclipse"
+      ]
+    },
+    {
+      "id": "lunisolar-calendar",
+      "term": {
+        "en": "lunisolar calendar",
+        "zh": "阴阳历"
+      },
+      "definition": {
+        "en": "A calendar combining lunar months and solar-year information.",
+        "zh": "结合月相月份与太阳年信息的历法。"
+      },
+      "see": [
+        "synodic-month"
+      ]
+    }
+  ]
+}

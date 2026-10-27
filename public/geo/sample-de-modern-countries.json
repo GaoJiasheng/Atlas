@@ -1,0 +1,40 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "sample-de-country-th",
+      "properties": {
+        "id": "sample-de-country-th",
+        "name": "TEST/DESIGN"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98,
+              5
+            ],
+            [
+              112,
+              5
+            ],
+            [
+              112,
+              22
+            ],
+            [
+              98,
+              22
+            ],
+            [
+              98,
+              5
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

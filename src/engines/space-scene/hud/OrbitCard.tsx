@@ -193,6 +193,7 @@ function Shadow({ orbit, zh }: { orbit: OrbitSession; zh: boolean }) {
           M
         </text>
       </svg>
+      {orbit.config.panel.shadowNote && <p>{text(zh, orbit.config.panel.shadowNote.en, orbit.config.panel.shadowNote.zh)}</p>}
     </figure>
   );
 }

@@ -26,7 +26,7 @@ import { energyBarValues } from '../../lib/sim/bars';
 import { isTimeline } from '../../lib/sim/timeline';
 import type { StageBridge } from '../../bridge';
 import { resolveSimValues } from '../../lib/sim/controls';
-import { ARROW_FLOOR as VECTOR_FLOOR, arrowLength as vectorLength, arrowValue, arrowWhen, FORCE_COLORS } from '../../lib/sim/arrows';
+import { ARROW_FLOOR as VECTOR_FLOOR, arrowLength as vectorLength, arrowValue, arrowWhen, FORCE_COLORS, vectorScale } from '../../lib/sim/arrows';
 import { resolveDataColor } from '../../lib/color';
 import { damp, normalize3, type Vec3 } from '../../lib/math';
 import type { PartDisplay } from '../../lib/visibility';
@@ -178,8 +178,6 @@ function ForceArrows({
 
 
 type Vectors = Extract<SimOverlay, { kind: 'force-vectors' }>;
-/** A force arrow's shaft and head scale with the overlay's `per` (the length of 1 N): this many newtons' worth. */
-const VECTOR_FULL = 1.6;
 const tmpStart: Vec3 = [0, 0, 0];
 const tmpDir: Vec3 = [0, 0, 0];
 
@@ -194,6 +192,7 @@ function ForceVectors({
   exploded,
   look,
   snapKey,
+  bridge,
 }: {
   overlay: Vectors;
   sim: SimData;
@@ -205,6 +204,7 @@ function ForceVectors({
   exploded: boolean;
   look: StageLook;
   snapKey: number;
+  bridge:StageBridge;
 }) {
   const runtime = useRuntime();
   const ref = useRef<Mesh>(null);
@@ -228,7 +228,10 @@ function ForceVectors({
   useEffect(() => {
     m.current.snap = true;
   }, [snapKey]);
-  const full = overlay.per * VECTOR_FULL;
+  const readings = useMemo(() => overlay.arrows.map(a => ({force:a.force,dir:[0,0,0] as Vec3,shown:false,scaled:false})),[overlay]);
+  useEffect(()=>{if(sim.airfoil)readings.forEach((r,i)=>bridge.airfoilArrows.set(`${sim.overlays.indexOf(overlay)}:${i}`,r));return()=>{readings.forEach((_,i)=>bridge.airfoilArrows.delete(`${sim.overlays.indexOf(overlay)}:${i}`));};},[sim,overlay,bridge,readings]);
+  // Thickness: the overlay's own `width`, else scaled from `per` with a floor from `max`.
+  const full = overlay.width ?? vectorScale(overlay.per, overlay.max);
 
   useFrame((state, delta) => {
     const dt = Math.min(delta, MAX_DT);
@@ -265,6 +268,8 @@ function ForceVectors({
         carr[k + 2] = c.b;
         carr[k + 3] = s.fade[i]!;
       }
+      readings[i]!.shown = !!h && s.fade[i]! > 0 && !!on[i];
+      readings[i]!.scaled = Math.abs(s.v[i]!) * overlay.per > overlay.max;
       if (!h || s.fade[i]! <= 0) {
         // Collapse a hidden arrow to a point (nothing drawn).
         parr.fill(0, o * 3, (o + ARROW_VERTS) * 3);
@@ -280,6 +285,7 @@ function ForceVectors({
       tmpDir[0] = d[0] * sign;
       tmpDir[1] = d[1] * sign;
       tmpDir[2] = d[2] * sign;
+      for(let j=0;j<3;j++)readings[i]!.dir[j]=tmpDir[j]!;
       const len = Math.max(vectorLength(s.v[i]!, overlay.per, overlay.max), HEAD_L * full * 0.5);
       key += `${tmpStart[0]},${tmpStart[1]},${tmpStart[2]}|${len}|${sign}|${s.fade[i]};`;
       writeArrow(parr, o, tmpStart, tmpDir, len, full);
@@ -514,13 +520,14 @@ export function SimOverlays({
         />
       )}
       {overlays.map((o, i) => {
-        if (o.kind === 'energy-bars' || o.kind === 'orbit-guides' || o.kind === 'orbit-eclipse-shadow') return null;
+        if (o.kind === 'energy-bars' || o.kind === 'orbit-guides' || o.kind === 'orbit-eclipse-shadow' || o.kind === 'airfoil-pressure') return null;
         if (o.kind === 'shadow-cast') return <ShadowCast key={i} overlay={o} index={i} sim={sim} values={resolved} outputs={outputs} handles={handles} displays={displays} layers={layers} exploded={exploded} look={look} snapKey={snapKey} bridge={bridge} />;
         if (o.kind === 'force-vectors')
           return (
             <ForceVectors
               key={i}
               overlay={o}
+              bridge={bridge}
               sim={sim}
               values={resolved}
               outputs={outputs}

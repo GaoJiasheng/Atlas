@@ -1,0 +1,90 @@
+---
+id: sample-web
+order: 1
+title:
+  en: Sample relations
+  zh: 示例关系
+state:
+  view: assembled
+  explode: 0
+  run: false
+  part: null
+  layers:
+  - test-web
+  camera:
+    position:
+    - 0.5
+    - 0.5
+    - 0.9
+    target:
+    - 0
+    - 0.05
+    - 0
+    fov: 32
+  summary:
+    en: Sample directed food web with table readings.
+    zh: 带查表读数的食物网示例。
+  index:
+    parts:
+    - mangrove
+    - algae
+    - fiddlers
+    - tree-crabs
+    - mudskipper
+    - heron
+  beats:
+  - caption:
+      en: Sample graph with all six nodes.
+      zh: 六节点示例图。
+  - sim:
+      set:
+        remove: n-algae
+        inspect: n-fiddlers
+    caption:
+      en: 'Sample removed algae: the fiddlers have no shown food.'
+      zh: 移走藻类：招潮蟹在图中无食物。
+  sim:
+    set:
+      remove: none
+      inspect: n-mudskipper
+      tide: low
+    try:
+      vary: remove
+      also:
+      - inspect
+      - tide
+      keep:
+      - en: Same selected relations
+        zh: 同一组选入关系
+      observe:
+      - foods
+      - food-status
+      - active-links
+      record: true
+      predict:
+        prompt:
+          en: 'Sample prediction: remove fiddlers.'
+          zh: 示例猜想：移走招潮蟹。
+        start:
+          remove: none
+          inspect: n-mudskipper
+          tide: low
+        change:
+          remove: n-fiddlers
+        observe: foods
+        options:
+        - id: less
+          label:
+            en: Less
+            zh: 减少
+          means: less
+        - id: same
+          label:
+            en: Same
+            zh: 不变
+          means: same
+---
+
+<Lang en>Sample fixture text for the directed card and existing table model.</Lang>
+
+<Lang zh>用于有向关系卡与现有表模型的示例文字。</Lang>

@@ -444,6 +444,14 @@ describe('force arrows', () => {
     ],
   });
   const values = (set: SimValues) => resolveSimValues(sim, set);
+  it('`width` is optional and positive: it sets the arrow thickness apart from `per`', () => {
+    const base = { kind: 'force-vectors', arrows: [{ part: 'block', force: 'push', dir: [1, 0, 0], value: 1 }] };
+    const parse = (o: object) => simSchema.safeParse({ ...forcesSim, overlays: [o] });
+    expect(parse(base).success).toBe(true);
+    const wide = parse({ ...base, width: 0.06 });
+    expect(wide.success && wide.data.overlays[0]!.kind === 'force-vectors' && wide.data.overlays[0]!.width).toBe(0.06);
+    expect(parse({ ...base, width: 0 }).success).toBe(false);
+  });
   it('length ∝ newtons (1.0 N twice 0.5 N), capped at max; a channel read at a time, else at the end', () => {
     expect(arrowLength(1, 0.03, 0.25)).toBeCloseTo(2 * arrowLength(0.5, 0.03, 0.25), 12);
     expect(arrowLength(20, 0.03, 0.25)).toBe(0.25);

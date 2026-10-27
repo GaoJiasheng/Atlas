@@ -1,0 +1,263 @@
+{
+  "terms": [
+    {
+      "id": "organism",
+      "term": {
+        "en": "Organism",
+        "zh": "生物"
+      },
+      "definition": {
+        "en": "An individual living thing.",
+        "zh": "一个有生命的个体。"
+      },
+      "see": [
+        "population"
+      ]
+    },
+    {
+      "id": "population",
+      "term": {
+        "en": "Population",
+        "zh": "种群"
+      },
+      "definition": {
+        "en": "Organisms of the same kind living and reproducing in a place at a time.",
+        "zh": "在一定地点和时间生活、繁殖的同类生物。"
+      },
+      "see": [
+        "organism",
+        "community"
+      ]
+    },
+    {
+      "id": "community",
+      "term": {
+        "en": "Community",
+        "zh": "群落"
+      },
+      "definition": {
+        "en": "Different populations living together in a place.",
+        "zh": "生活在同一地方的不同种群。"
+      },
+      "see": [
+        "population",
+        "habitat"
+      ]
+    },
+    {
+      "id": "habitat",
+      "term": {
+        "en": "Habitat",
+        "zh": "生境"
+      },
+      "definition": {
+        "en": "The place where an organism lives, with its surrounding conditions.",
+        "zh": "生物生活的地方，以及周围的环境条件。"
+      },
+      "see": [
+        "community",
+        "mangrove-forest"
+      ]
+    },
+    {
+      "id": "mangrove-forest",
+      "term": {
+        "en": "Mangrove forest",
+        "zh": "红树林"
+      },
+      "definition": {
+        "en": "A coastal forest with trees suited to intertidal conditions and its associated habitat.",
+        "zh": "树木能应对潮间带条件的海岸森林，以及相关的生境。"
+      },
+      "see": [
+        "intertidal"
+      ]
+    },
+    {
+      "id": "producer",
+      "term": {
+        "en": "Producer",
+        "zh": "生产者"
+      },
+      "definition": {
+        "en": "Here, a plant or alga that uses sunlight to make food. The live tree supplies leaf material; dead leaves are not producers.",
+        "zh": "在这里，指利用阳光制造食物的植物或藻类。活树供应叶片，死叶本身不是生产者。"
+      },
+      "see": [
+        "consumer"
+      ]
+    },
+    {
+      "id": "consumer",
+      "term": {
+        "en": "Consumer",
+        "zh": "消费者"
+      },
+      "definition": {
+        "en": "An organism that obtains food from other organisms or their material.",
+        "zh": "从其他生物或其物质获得食物的生物。"
+      },
+      "see": [
+        "producer",
+        "decomposer"
+      ]
+    },
+    {
+      "id": "decomposer",
+      "term": {
+        "en": "Decomposer",
+        "zh": "分解者"
+      },
+      "definition": {
+        "en": "An organism, such as a bacterium or fungus, that breaks down dead organic material and obtains energy from it.",
+        "zh": "分解死亡有机物、并从中获得能量的生物，例如细菌和真菌。"
+      },
+      "see": [
+        "detritus",
+        "consumer"
+      ]
+    },
+    {
+      "id": "predator",
+      "term": {
+        "en": "Predator",
+        "zh": "捕食者"
+      },
+      "definition": {
+        "en": "The animal that catches and eats another animal in a particular feeding relationship.",
+        "zh": "在某一取食关系中，捕捉并吃掉另一动物的一方。"
+      },
+      "see": [
+        "prey"
+      ]
+    },
+    {
+      "id": "prey",
+      "term": {
+        "en": "Prey",
+        "zh": "猎物"
+      },
+      "definition": {
+        "en": "The animal caught and eaten in a particular feeding relationship.",
+        "zh": "在某一取食关系中，被捕捉和吃掉的动物。"
+      },
+      "see": [
+        "predator"
+      ]
+    },
+    {
+      "id": "food-chain",
+      "term": {
+        "en": "Food chain",
+        "zh": "食物链"
+      },
+      "definition": {
+        "en": "A single pathway showing food passing to consumers. The arrows point from food to the organism eating it.",
+        "zh": "显示食物传给消费者的一条路径；箭头从食物指向取食者。"
+      },
+      "see": [
+        "food-web"
+      ]
+    },
+    {
+      "id": "food-web",
+      "term": {
+        "en": "Food web",
+        "zh": "食物网"
+      },
+      "definition": {
+        "en": "Connected food chains that share organisms or functional groups. This topic selects only some possible links.",
+        "zh": "共享生物或功能组、彼此相连的食物链。本主题只选入部分可能关系。"
+      },
+      "see": [
+        "food-chain"
+      ]
+    },
+    {
+      "id": "adaptation",
+      "term": {
+        "en": "Adaptation",
+        "zh": "适应"
+      },
+      "definition": {
+        "en": "A structure or behaviour that helps an organism cope with conditions, feed, avoid predators or reproduce.",
+        "zh": "帮助生物应对条件、取食、避开捕食者或繁殖的结构或行为。"
+      },
+      "see": [
+        "breathing-root",
+        "prop-root"
+      ]
+    },
+    {
+      "id": "breathing-root",
+      "term": {
+        "en": "Breathing root",
+        "zh": "呼吸根"
+      },
+      "definition": {
+        "en": "In this model, an upright root of Api-api Putih connected to shallow lateral roots; it takes in oxygen above the muddy soil.",
+        "zh": "本模型中指 Api-api Putih 从浅层侧根向上伸出的根，在泥面上方吸收氧气。"
+      },
+      "see": [
+        "adaptation",
+        "prop-root"
+      ]
+    },
+    {
+      "id": "prop-root",
+      "term": {
+        "en": "Prop root",
+        "zh": "支柱根"
+      },
+      "definition": {
+        "en": "A root that reaches down from a trunk or branch and supports the tree in soft mud, as in Bakau Minyak.",
+        "zh": "从干或枝向下伸入泥中、支撑树体的根，例如 Bakau Minyak 的根。"
+      },
+      "see": [
+        "breathing-root"
+      ]
+    },
+    {
+      "id": "intertidal",
+      "term": {
+        "en": "Intertidal zone",
+        "zh": "潮间带"
+      },
+      "definition": {
+        "en": "The shore zone that changes between covered and exposed as tides rise and fall.",
+        "zh": "随着潮水涨退，在被水覆盖与露出之间变化的岸带。"
+      },
+      "see": [
+        "mangrove-forest"
+      ]
+    },
+    {
+      "id": "detritus",
+      "term": {
+        "en": "Detritus",
+        "zh": "碎屑"
+      },
+      "definition": {
+        "en": "Fragments of dead organic material, such as broken leaf matter. It is not the same as human litter.",
+        "zh": "死亡有机物的碎片，例如碎叶；不等于人丢弃的垃圾。"
+      },
+      "see": [
+        "decomposer"
+      ]
+    },
+    {
+      "id": "fiddler-crab",
+      "term": {
+        "en": "Fiddler crab",
+        "zh": "招潮蟹"
+      },
+      "definition": {
+        "en": "A group of crabs whose males have one enlarged claw and one small feeding claw. This does not describe every crab.",
+        "zh": "一类雄体有一只大螯和一只取食小螯的蟹；不是所有蟹都这样。"
+      },
+      "see": [
+        "consumer"
+      ]
+    }
+  ]
+}
