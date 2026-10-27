@@ -1,0 +1,384 @@
+---
+{
+  "id": "orientation",
+  "order": 0,
+  "title": {
+    "en": "One rocket, several craft",
+    "zh": "一枚火箭，几种飞行器"
+  },
+  "kind": "background",
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "part": null,
+    "run": false,
+    "cutaway": "none",
+    "pose": "launch-packed",
+    "hide": [],
+    "ghost": [],
+    "layers": [
+      "stage-one",
+      "upper-stages",
+      "guidance-adapter",
+      "return-craft",
+      "lander"
+    ],
+    "labels": [
+      "cm-shell",
+      "les-tower",
+      "sic-shell",
+      "sivb-shell"
+    ],
+    "camera": {
+      "position": [
+        175,
+        57,
+        198
+      ],
+      "target": [
+        0,
+        45,
+        0
+      ],
+      "fov": 30
+    },
+    "summary": {
+      "en": "One rocket, several craft: follow each part through the change of configuration.",
+      "zh": "一枚火箭，几种飞行器：沿着构型变化辨认各部分。"
+    },
+    "question": {
+      "en": "Does the whole rocket go to the Moon?",
+      "zh": "整枚火箭都会到月球吗？"
+    },
+    "sim": {
+      "set": {
+        "payload": 200,
+        "propellant": 600,
+        "carry-inert": false,
+        "stage-choice": "first",
+        "phase": 0
+      }
+    },
+    "note": {
+      "en": "Apollo 11 engineering enrichment, beyond the primary syllabus. Major outlines follow references; internal equipment and display distances are simplified. SIM values belong to a separate imaginary rocket.",
+      "zh": "阿波罗 11 号工程拓展，超出小学课纲。主要外形有参考，内部设备与展示间距简化；模拟数值属于另一枚假想火箭。"
+    },
+    "beats": [
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "launch-packed",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander"
+        ],
+        "camera": {
+          "position": [
+            175,
+            57,
+            198
+          ],
+          "target": [
+            0,
+            45,
+            0
+          ],
+          "fov": 30
+        },
+        "labels": [
+          "cm-shell",
+          "les-tower",
+          "sic-shell",
+          "sivb-shell"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "first",
+            "phase": 0
+          }
+        },
+        "caption": {
+          "en": "The assembled stack is about 111 m tall, including the spacecraft and escape system.",
+          "zh": "完整发射构型约高111米，包括飞船与逃逸系统。"
+        }
+      },
+      {
+        "view": "xray",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "launch-packed",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander"
+        ],
+        "camera": {
+          "position": [
+            175,
+            57,
+            198
+          ],
+          "target": [
+            0,
+            45,
+            0
+          ],
+          "fov": 30
+        },
+        "labels": [
+          "sic-shell",
+          "sii-shell",
+          "sivb-shell"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "first",
+            "phase": 0
+          }
+        },
+        "caption": {
+          "en": "Saturn V has three main propulsion stages. The V does not mean five stages.",
+          "zh": "土星五号有三个主推进级；“五”不是级数。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "launch-packed",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander"
+        ],
+        "camera": {
+          "position": [
+            38,
+            115,
+            46
+          ],
+          "target": [
+            0,
+            98,
+            0
+          ],
+          "fov": 30
+        },
+        "labels": [
+          "cm-shell",
+          "sm-shell",
+          "sla-shell",
+          "les-tower"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "first",
+            "phase": 0
+          }
+        },
+        "caption": {
+          "en": "The spacecraft sits above the launch vehicle; the lunar module is stowed inside the adapter.",
+          "zh": "飞船位于运载火箭上方；登月舱收在适配器内部。"
+        }
+      },
+      {
+        "view": "xray",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "launch-packed",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander"
+        ],
+        "camera": {
+          "position": [
+            175,
+            57,
+            198
+          ],
+          "target": [
+            0,
+            45,
+            0
+          ],
+          "fov": 30
+        },
+        "labels": [
+          "cm-heatshield"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "first",
+            "phase": 0
+          }
+        },
+        "caption": {
+          "en": "Only the command module returns through Earth’s atmosphere.",
+          "zh": "只有指令舱穿过地球大气层返回。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "launch-packed",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander"
+        ],
+        "camera": {
+          "position": [
+            175,
+            57,
+            198
+          ],
+          "target": [
+            0,
+            45,
+            0
+          ],
+          "fov": 30
+        },
+        "labels": [
+          "iu-ring"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "first",
+            "phase": 0
+          }
+        },
+        "caption": {
+          "en": "These cutaway and exploded views explain parts; they are not photographs of a flight.",
+          "zh": "剖视与拆解用来解释零件，不是飞行照片。"
+        }
+      }
+    ],
+    "index": {
+      "parts": [
+        "cm-shell",
+        "sic-shell",
+        "sivb-shell",
+        "sii-shell",
+        "sm-shell",
+        "sla-shell",
+        "cm-heatshield",
+        "iu-ring",
+        "les-tower"
+      ]
+    }
+  }
+}
+---
+
+<Lang en>
+
+The tall object on the stage is an assembled launch stack. It includes the Saturn V <Term id="term-launch-vehicle">launch vehicle</Term>, which launches and accelerates the spacecraft, and the Apollo spacecraft above it. The complete stack stood about <Num s="S24">111 m</Num> tall. Its narrow top is not another large propulsion section: it contains the crew cabin and the escape system.
+
+Saturn V had <Num s="S24">three</Num> main propulsion sections, called <Term id="term-stage">stages</Term>, which could separate. Read upward from the broad lower body to the narrower upper body. The letter V is part of its name, not a count of propulsion sections. During the mission these sections separated after their work was done. The whole tower did not travel to the lunar surface.
+
+Above the launch vehicle are several spacecraft sections with different jobs. The <Term id="term-cm">command module</Term> carries the crew. The <Term id="term-sm">service module</Term> supplies propulsion and support. The <Term id="term-lm">lunar module</Term> travels inside the tapered adapter at launch, rather than beside the rocket. Follow the shell of the adapter before looking through it: a hidden part has not ceased to exist.
+
+The cone-shaped command module alone comes back through Earth's atmosphere. Before following that journey, predict what happens when an engine stops: the craft does not immediately stop moving. Gravity still acts in space. Orbiting motion and the absence of an engine burn can occur together.
+
+Use the chapter beats to change configuration. Cutaway and exploded views make internal relationships visible; they are explanatory drawings. Separation gaps, camera movements and the empty space around the craft are not a scale map of the journey.
+
+<More title={{"en": "Reading the plate", "zh": "怎样读图"}}>
+
+The visible body is an Apollo 11 configuration study. NASA references constrain the major outline, while internal layout and separated display positions are simplified. Use each part’s source note to distinguish historical references from design values.
+
+</More>
+
+<More title={{"en": "Motion with the engine off", "zh": "关机后仍会运动"}}>
+
+An engine changes motion; continued motion does not require continued thrust. Gravity does not disappear in space. <TopicLink slug="forces" ch="gravity-and-weight">Revisit gravity and weight</TopicLink> before following orbital configurations.
+
+</More>
+
+<More title={{"en": "Selecting a visible part", "zh": "先显示，再选零件"}}>
+
+Use <a href={'?ch=orientation&b=1'}>the full launch stack</a> before selecting a part in this chapter’s index. All indexed parts belong to that configuration; cutaway can reveal a surface behind its shell.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+舞台上是一整套发射构型，包括把飞船送上天空并加速的土星五号<Term id="term-launch-vehicle">运载火箭</Term>，以及顶端的阿波罗飞船。完整构型约高 <Num s="S24">111 米</Num>。顺着细长外形向上看，最尖的部分包括乘员舱和逃逸系统，不是另一个大型推进级。
+
+土星五号有 <Num s="S24">三个</Num>可分离的主推进<Term id="term-stage">级</Term>，从宽阔的下段排到较细的上段。名称里的“五”不表示推进段数量。任务进行时，用完的部分会先后分离，整座高塔不会一起落到月面。先认外形，再看剖面，比较容易分清发射工具与飞行器。
+
+火箭上方的飞船也不是单独一个舱。<Term id="term-cm">指令舱</Term>搭载乘员，<Term id="term-sm">服务舱</Term>提供推进与支持，<Term id="term-lm">登月舱</Term>则收在渐缩的适配器内部。它没有在火箭旁边再挂一份；被外壳遮住也不等于不存在。各部分后来会分开、转身和重新连接。
+
+最终穿过地球大气层的是锥形指令舱。先想想发动机关闭后会怎样：飞船不会立刻停住，太空中也仍然有引力。接下来用节拍观察构型变化。剖开外壳、拉开零件是解释结构的读图方式，画面中的空隙与镜头移动不表示真实地月距离，也不是任务飞行照片。
+
+<More title={{"en": "Reading the plate", "zh": "怎样读图"}}>
+
+这是阿波罗 11 号构型研究。NASA 资料约束主要外形，内部布局与拆开后的摆放位置经过简化；零件来源把历史资料与设计值分开。
+
+</More>
+
+<More title={{"en": "Motion with the engine off", "zh": "关机后仍会运动"}}>
+
+发动机改变运动；保持运动并不需要一直有推力，太空里引力也没有消失。可先回看<TopicLink slug="forces" ch="gravity-and-weight">引力与重量</TopicLink>，再读轨道构型。
+
+</More>
+
+<More title={{"en": "Selecting a visible part", "zh": "先显示，再选零件"}}>
+
+先点<a href={'?ch=orientation&b=1'}>完整发射构型</a>，再从本章索引选择零件。它们都在这一构型中，剖视可揭示外壳后面的表面。
+
+</More>
+
+</Lang>
+

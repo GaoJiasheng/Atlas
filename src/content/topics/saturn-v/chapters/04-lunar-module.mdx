@@ -1,0 +1,373 @@
+---
+{
+  "id": "lunar-module",
+  "order": 4,
+  "title": {
+    "en": "The two-stage lunar module",
+    "zh": "两级登月舱"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "part": null,
+    "run": false,
+    "cutaway": "none",
+    "pose": "lm-landed",
+    "hide": [],
+    "ghost": [],
+    "layers": [
+      "stage-one",
+      "upper-stages",
+      "guidance-adapter",
+      "return-craft",
+      "lander"
+    ],
+    "labels": [
+      "lm-legs",
+      "lm-ladder"
+    ],
+    "camera": {
+      "position": [
+        14,
+        7,
+        16
+      ],
+      "target": [
+        0,
+        3.5,
+        0
+      ],
+      "fov": 30
+    },
+    "summary": {
+      "en": "The two-stage lunar module: follow each part through the change of configuration.",
+      "zh": "两级登月舱：沿着构型变化辨认各部分。"
+    },
+    "question": {
+      "en": "What stays behind when the crew leaves the Moon?",
+      "zh": "离开月球时什么留下？"
+    },
+    "sim": {
+      "set": {
+        "payload": 200,
+        "propellant": 600,
+        "carry-inert": false,
+        "stage-choice": "first",
+        "phase": 8
+      }
+    },
+    "beats": [
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "lm-landed",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander"
+        ],
+        "camera": {
+          "position": [
+            14,
+            7,
+            16
+          ],
+          "target": [
+            0,
+            3.5,
+            0
+          ],
+          "fov": 30
+        },
+        "labels": [
+          "lm-legs",
+          "lm-ladder"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "first",
+            "phase": 8
+          }
+        },
+        "caption": {
+          "en": "Four landing legs support the descent stage; one front leg carries the ladder.",
+          "zh": "四支着陆腿支撑下降级，前方一支腿带着梯子。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "lm-landed",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander"
+        ],
+        "camera": {
+          "position": [
+            14,
+            7,
+            16
+          ],
+          "target": [
+            0,
+            3.5,
+            0
+          ],
+          "fov": 30
+        },
+        "labels": [
+          "lm-descent-engine"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "first",
+            "phase": 8
+          }
+        },
+        "caption": {
+          "en": "The descent engine controls the approach. A parachute cannot work in a near-vacuum.",
+          "zh": "下降发动机控制接近月面；降落伞不能在近真空中工作。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "lm-landed",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander"
+        ],
+        "camera": {
+          "position": [
+            38,
+            20,
+            40
+          ],
+          "target": [
+            9,
+            7,
+            0
+          ],
+          "fov": 30
+        },
+        "labels": [
+          "lm-ascent",
+          "cm-shell"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "first",
+            "phase": 8
+          }
+        },
+        "caption": {
+          "en": "Two astronauts descend while Collins remains in lunar orbit.",
+          "zh": "两人下降到月面，科林斯留在月球轨道。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "lm-ascent",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander"
+        ],
+        "camera": {
+          "position": [
+            18,
+            14,
+            22
+          ],
+          "target": [
+            0,
+            8,
+            0
+          ],
+          "fov": 30
+        },
+        "labels": [
+          "lm-ascent-engine",
+          "lm-descent"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "first",
+            "phase": 9
+          }
+        },
+        "caption": {
+          "en": "The ascent stage lifts away. The descent stage and legs remain behind.",
+          "zh": "上升级升空，下降级与支腿留在月面。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "rendezvous",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander"
+        ],
+        "camera": {
+          "position": [
+            22,
+            29,
+            28
+          ],
+          "target": [
+            0,
+            18,
+            0
+          ],
+          "fov": 30
+        },
+        "labels": [
+          "lm-docking-port",
+          "cm-probe"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "first",
+            "phase": 10
+          }
+        },
+        "caption": {
+          "en": "The ascending craft meets and docks with the command and service modules.",
+          "zh": "上升的飞行器与指令舱、服务舱交会对接。"
+        }
+      }
+    ],
+    "index": {
+      "parts": [
+        "lm-legs",
+        "lm-ladder",
+        "lm-descent-engine",
+        "lm-ascent",
+        "cm-shell",
+        "lm-ascent-engine",
+        "lm-descent",
+        "lm-docking-port",
+        "cm-probe"
+      ]
+    }
+  }
+}
+---
+
+<Lang en>
+
+The lunar module is a separate craft with a lower descent stage and an upper ascent stage. In the landing configuration, <Num s="S26">four</Num> legs support the lower stage. A ladder runs down <Num s="S26">one</Num> front leg. The angular cabin above is built for work in space and near the Moon, not for flying like an aircraft through Earth's air.
+
+The descent engine beneath the lower stage controls the approach to the surface. The Moon has a very thin exosphere rather than an Earth-like atmosphere. A parachute cannot provide the atmospheric braking used on Earth. The model therefore identifies an engine and landing structure; it does not show a parachute lowering the cabin.
+
+During Apollo 11, <Num s="S21">two</Num> astronauts, Neil Armstrong and Buzz Aldrin, descended in the lunar module while Michael Collins remained in lunar orbit. The command module is placed beside the lander here only as a reminder. Their screen distance does not represent the distance from the surface to orbit.
+
+For departure, the upper cabin and its own ascent engine rise away. The descent stage, landing legs and ladder stay behind. Watch the docking port move with the upper cabin: it belongs to that departing section, not to the structure left on the ground.
+
+The ascent craft later meets and docks with the command and service modules. This requires a changing connection between spacecraft, not the entire lander returning to Earth. The beat poses show that sequence without claiming to calculate a landing trajectory, fuel consumption or orbital rendezvous.
+
+<More title={{"en": "Surface and orbit are separate places", "zh": "月面与轨道不是同一处"}}>
+
+The command module is shown beside the lander to keep both crew roles visible. This is an explanatory layout. It does not place the orbiting craft at landing-leg height or use screen distance as an altitude measurement.
+
+</More>
+
+<More title={{"en": "The Moon and parachutes", "zh": "月球与降落伞"}}>
+
+The lunar exosphere is extremely thin. A parachute needs enough surrounding gas to brake a falling craft. Do not transfer an Earth landing mechanism to the Moon just because both journeys end at a surface.
+
+</More>
+
+<More title={{"en": "Returning to visible hardware", "zh": "回到可见构型"}}>
+
+Use <a href={'?ch=lunar-module&b=1'}>the landed stage</a> for legs and ladder, <a href={'?ch=lunar-module&b=2'}>the descent engine</a>, <a href={'?ch=lunar-module&b=4'}>the ascent separation</a> for the ascent engine, or <a href={'?ch=lunar-module&b=5'}>rendezvous</a> for the docking parts, then select the index.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+登月舱是一艘独立飞行器，下部为下降级，上部为上升级。着陆构型中，<Num s="S26">四支</Num>腿支撑下部结构，只有前方 <Num s="S26">一支</Num>腿带着梯子。上方乘员舱外形有棱有角，它在太空和月球附近工作，不需要像飞机那样穿过地球空气飞行。
+
+下降发动机位于下部，控制接近月面的过程。月球只有非常稀薄的外逸层，没有地球那样的大气，因此降落伞不能提供地球上常用的空气减速。图中要辨认的是发动机与着陆结构，而不是靠降落伞把舱体放下来。
+
+阿波罗 11 号的阿姆斯特朗和奥尔德林共 <Num s="S21">两人</Num>下降，科林斯留在月球轨道。模型把指令舱放在旁边作提醒，屏幕上的距离不代表月面到轨道的距离，也不能据此判断真实的相对位置。
+
+离开月面时，上部舱体和独立的上升发动机升起，下降级、支腿与梯子留在原处。顶部的对接口跟着上部移动，说明它们属于离开的飞行器。留下的硬件不再随乘员加速。随后上升级与指令舱、服务舱交会对接。节拍解释部件归属和连接顺序，不计算着陆轨迹、燃料消耗或轨道交会。
+
+<More title={{"en": "Surface and orbit are separate places", "zh": "月面与轨道不是同一处"}}>
+
+指令舱摆在登月舱旁边，是为同时提醒不同乘员的任务。这不表示轨道飞船就在支腿旁，也不能拿屏幕距离测量轨道高度。
+
+</More>
+
+<More title={{"en": "The Moon and parachutes", "zh": "月球与降落伞"}}>
+
+月球外逸层极稀薄；降落伞需要足够的周围气体才能减速。两次旅程都以接触表面结束，不表示地球的着陆方式能直接搬到月球。
+
+</More>
+
+<More title={{"en": "Returning to visible hardware", "zh": "回到可见构型"}}>
+
+选支腿或梯子先点<a href={'?ch=lunar-module&b=1'}>着陆构型</a>；下降发动机点<a href={'?ch=lunar-module&b=2'}>发动机视角</a>；上升发动机点<a href={'?ch=lunar-module&b=4'}>上升分离</a>；接口点<a href={'?ch=lunar-module&b=5'}>交会对接</a>，再用索引。
+
+</More>
+
+</Lang>
+
