@@ -9,6 +9,8 @@
  * Build-time only (zod); the client imports the types.
  */
 import { z } from 'zod';
+import { airfoilSchema, airfoilIssues } from './airfoil-schema';
+import { airfoilQuantity, AIRFOIL_STATES } from './lib/sim/airfoil';
 import { benchShadow, lightQuantity, lightStates, shapeHalfDepth } from './lib/sim/light';
 import { sunPosition } from './lib/sim/sun';
 import { simQuantities } from './lib/sim';
@@ -286,6 +288,7 @@ const flowBind = z
     ...source,
     /** One flow or several (an `intensity` from a number output runs them all at one pace). */
     flow: z.union([kebabId, z.array(kebabId).min(1)]),
+    airfoilFlow: z.literal(true).optional(),
     paths: z.array(kebabId).min(1).max(16).optional(),
     /** The flow runs only while the condition holds. */
     visible: simCondition.optional(),
@@ -832,7 +835,7 @@ export type LifeCycleData = z.output<typeof lifeCycleSchema>;
  * true relative value), `lift` above the parts' centres (default 0.02).
  * Shown while both parts are on show, the value is ≥ 0.5 and `when` holds.
  */
-export const FORCE_KINDS = ['gravity', 'friction', 'elastic', 'push', 'magnetic'] as const;
+export const FORCE_KINDS = ['gravity', 'friction', 'elastic', 'push', 'magnetic', 'lift', 'drag', 'thrust'] as const;
 export type ForceKind = (typeof FORCE_KINDS)[number];
 export const ARROW_ANCHORS = ['centre', 'top', 'bottom'] as const;
 
@@ -895,6 +898,7 @@ export const shadowCastSchema = z.object({
 
 export const simOverlaySchema = z.discriminatedUnion('kind', [
   shadowCastSchema,
+  z.object({kind:z.literal('airfoil-pressure'),part:kebabId,group:kebabId,when:z.object({control:kebabId,is:simCondition}).strict()}).strict(),
   /**
    * Force arrows (docs/30 F3): `per` scene units per newton (default 0.03),
    * at most `max` long (0.25), faded below 0.05 N; all arrows one draw call;
@@ -951,7 +955,7 @@ export const simOverlaySchema = z.discriminatedUnion('kind', [
 export type SimOverlay = z.output<typeof simOverlaySchema>;
 export type ShadowCastOverlay = Extract<SimOverlay, { kind: 'shadow-cast' }>;
 
-export const SIM_KINDS = ['circuit', 'magnet', 'force', 'energy', 'life-cycle', 'matter', 'light', 'sort', 'materials', 'table', 'seeds'] as const;
+export const SIM_KINDS = ['circuit', 'magnet', 'force', 'energy', 'life-cycle', 'matter', 'light', 'sort', 'materials', 'table', 'seeds', 'airfoil'] as const;
 export type SimKind = (typeof SIM_KINDS)[number];
 
 export const MAX_SIM_CONTROLS = 16;
@@ -976,6 +980,7 @@ export const simSchema = z
     sort: sortSchema.optional(),
     table: tableSchema.optional(),
     seeds: seedsSchema.optional(),
+    airfoil: airfoilSchema.optional(),
   })
   .strict()
   // A table's `{ value, decimals }` cells: their outputs show those values with those decimals (lib/sim/text.ts).
@@ -1114,6 +1119,7 @@ const MAGNET_STATES: readonly string[] = ['facing', 'field-state'];
 /** The kind of a model quantity (an output's `from`), or null when the model (or the data it needs) has none of that name. */
 export function quantityKind(sim: SimData, from: string): SimOutput['kind'] | null {
   switch (sim.kind) {
+    case 'airfoil': return sim.airfoil ? airfoilQuantity(sim.airfoil, from, sim.controls) : null;
     case 'sort':
       return sim.sort ? sortQuantity(sim.sort, from) : null;
     case 'matter':
@@ -1221,7 +1227,7 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
   sim.outputs.forEach((o, i) => {
     if (sim.outputs.findIndex((x) => x.id === o.id) !== i) issue(['outputs', i, 'id'], `duplicate output "${o.id}"`);
     if (o.predictOnly && sim.kind !== 'sort') issue(['outputs', i, 'predictOnly'], 'predictOnly belongs to a state output of the sort model');
-    if (o.tag !== undefined && sim.kind !== 'table') issue(['outputs', i, 'tag'], '`tag` belongs to an output of the table model');
+    if (o.tag !== undefined && sim.kind !== 'table' && !(sim.kind === 'airfoil' && o.kind === 'number' && o.tag === 'sim')) issue(['outputs', i, 'tag'], '`tag` belongs to an output of the table model');
     if (o.decimalsAt !== undefined && sim.kind !== 'table') issue(['outputs', i, 'decimalsAt'], '`decimalsAt` is set by the table model from its `{ value, decimals }` cells (not written)');
     const from = o.from ?? o.id;
     if (o.format === 'time' && (o.kind !== 'number' || o.unit !== 'h' || (from.startsWith('control:') && (() => { const c = controls.get(from.slice(8)); return c?.kind !== 'step' || c.values.some((v) => v < 0 || v > 24); })()))) issue(['outputs', i, 'format'], 'time format needs a number output in hours, 0–24');
@@ -1237,7 +1243,7 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
       issue(['outputs', i, 'from'], needs ? `"${from}" needs the ${sim.kind} model's \`${needs}\` data` : `the ${sim.kind} model has no quantity "${from}"`);
     } else if (kind !== o.kind) issue(['outputs', i, 'kind'], `"${from}" is a ${kind}, not a ${o.kind}`);
     const states =
-      sim.kind === 'light' && sim.light
+      sim.kind === 'airfoil' && from === 'flow-state' ? AIRFOIL_STATES : sim.kind === 'light' && sim.light
         ? lightStates(sim.light, from, sim.controls)
         : sim.kind === 'matter' && sim.matter
         ? matterQuantity(sim.matter, from)?.states
@@ -1272,6 +1278,7 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
       for (const st of Object.keys(o.states ?? {})) if (!known.includes(st)) issue(['outputs', i, 'states', st], `"${from}" is never "${st}" (${known.join(', ')})`);
     }
   });
+  for (const x of airfoilIssues(sim)) issue(x.path, x.message);
   if (sim.kind === 'sort' && !sim.sort) issue(['sort'], 'a sort sim needs `sort`');
   if (sim.sort) sortIssues(sim.sort, controls, (ctx.partData ?? []) as readonly SortCheckPart[], sim.outputs).forEach((x) => issue(x.path[0] === 'outputs' ? x.path : ['sort', ...x.path], x.message));
   if (sim.kind === 'matter' && !sim.matter) issue(['matter'], 'a matter sim needs `matter`');
@@ -1481,7 +1488,8 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
         if (b.intensity) issue(['bind', i, 'intensity'], 'a field-line flow has no per-path intensity');
         stateBound.add(`flow:${flowId}`);
       }
-      if (!b.visible && !b.intensity && !b.stops && !b.state) issue(['bind', i], 'a flow binding needs visible, intensity, stops or state');
+      if (b.airfoilFlow) { if (sim.kind !== 'airfoil') issue(['bind', i, 'airfoilFlow'], 'airfoilFlow requires kind airfoil'); stateBound.add(`flow:${flowId}`); }
+      if (!b.visible && !b.intensity && !b.stops && !b.state && !b.airfoilFlow) issue(['bind', i], 'a flow binding needs visible, intensity, stops or state');
     } else {
       if (outp?.kind === 'timeline') issue(['bind', i, 'output'], `"${src}" is a timeline: it moves parts (\`play\`), not animations`);
       for (const id of Array.isArray(b.animation) ? b.animation : [b.animation]) {
@@ -1518,6 +1526,7 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
     else if (w.output !== undefined && !outputs.has(w.output)) issue([...path, 'when', 'output'], `unknown output "${w.output}"`);
   };
   sim.overlays.forEach((o, i) => {
+    if (o.kind === 'airfoil-pressure') { if (sim.kind !== 'airfoil') issue(['overlays', i], 'airfoil-pressure requires airfoil'); whenIssues(['overlays', i], o.when); if (!ctx.parts.has(o.part) || ctx.groups && !ctx.groups.has(o.group)) issue(['overlays', i], 'unknown pressure part/group'); return; }
     if (o.kind === 'force-vectors') {
       if (o.group !== undefined && ctx.groups && !ctx.groups.has(o.group)) issue(['overlays', i, 'group'], `unknown group "${o.group}"`);
       o.arrows.forEach((a, k) => {

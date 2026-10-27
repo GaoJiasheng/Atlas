@@ -651,6 +651,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
             tintColor={display.tintRef ? resolveDataColor(display.tintRef, look.tokens, look.theme) : null}
             count={sim?.count.get(part.id) ?? null}
             simMove={simMoves.get(part.id) ?? null}
+            airfoilSnap={!!data.sim?.airfoil && [data.sim.airfoil.section.part, 'chord-marker'].includes(part.id)}
             play={sim?.play.get(part.id) ?? null}
             stretch={sim?.stretch.get(part.id) ?? null}
             bend={sim?.bend.get(part.id) ?? null}
@@ -697,7 +698,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
       )}
       </group>
       {/* Flow paths do not follow the parts apart: no particles while exploded (docs/12 §7.5, G16). */}
-      <Flows bridge={bridge} flows={data.flows} layers={s.view === 'exploded' ? NO_LAYERS : s.layers} look={look} clipping={clipping} effects={sim?.flows} fieldLines={linesOf} />
+      <Flows airfoil={data.sim?.airfoil ? {file:data,ui,values:resolveSimValues(data.sim,s.sim),on:s.view !== 'exploded' && displays.get(data.sim.airfoil.section.part)?.visible === true,run:s.run && !referenceOn} : undefined} bridge={bridge} flows={data.flows} layers={s.view === 'exploded' ? NO_LAYERS : s.layers} look={look} clipping={clipping} effects={sim?.flows} fieldLines={linesOf} />
       <CameraRig
         store={store}
         ui={ui}

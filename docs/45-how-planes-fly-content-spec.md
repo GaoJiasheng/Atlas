@@ -699,3 +699,24 @@ Cl、bank、flow separation、bypass、spool、三种转动等在正文用一句
 - [ ] 过门槛后 `topic.yaml.status: published`；施工方将实际改动、测试结果、与本 spec 的出入、截图路径、已知局限填 §9。任何偏离人工失速身份／来源／动力学范围的改动先改本规格，不能悄悄换成“实测”。
 
 ## 9. 引擎记录（施工后填写）
+
+### 9.1 引擎 E-AF1–E-AF5（2026-10-27，Codex，`sample-airfoil`）
+
+**范围与文件**：只施工 §4 引擎与 draft 夹具；没有展开正式飞机主题、三张插图、整机／翼盒／涡扇或38拍正文。新增 `airfoil-schema.ts`；`lib/sim/airfoil.ts`（标量、曲线与记录签名）、`airfoil-field.ts`（解析场、逆映射、RK4、tau重采样）、`airfoil-cache.ts`（分片与版本／生命周期）、`airfoil-api.ts`；`explorer/AirfoilDriver.tsx`、`AirfoilPlot.tsx`、`AirfoilPressure.tsx`；`stages/model3d/AirfoilFlow.tsx` 是既有 Flows 的受控 provider，复用 flowMaterial 的纹理／GPU points，不新造普通流引擎。共同注册保持单行／短分支：SIM_KINDS、simSchema、simQuantities、quantityKind、states/issues、SEPARATE_EXPERIMENTS；无 timeline。既有 SimOverlays、KEY 与 force-vectors 加 lift/drag/thrust，两个主题有独立语义 token；没有 frame。文档：docs/06 新作者节、docs/08、夹具 `data/SOURCES.md`、内容许可声明。`sample-airfoil` 五章16拍：背景、速度（含V0）、迎角（0/4/12/16/−16/20、压力）、高度、固定bank；来源S58自描述设计。测试模板 `tests/space-scene/fixtures/airfoil-bench.ts`；四个要求的单测文件、force-token测试、e2e与shoot逐拍／深链断言均已添加。
+
+**与 §4 的出入／实施选择**：
+
+1. **S04 写作 S4**：现有公共来源 ID schema 不接受前导零。公式来源与身份不变，S11/S57/S58照原编号；没有扩大全局sourceId规则。
+2. **既有 extrude 原先不接受 bevel:0**：把该字段从 positive 改成 finite nonnegative，才可按 §4 写明确的零倒角；其他 primitive 的规则未改。夹具轮廓直接从原创公式采样，不用外部坐标。
+3. **夹具页面采用 NASA 大气**，因此默认L=923.9031443933111 N；测试模板另外导出固定ρ1.225模型以逐项复现 §4.7 的922.687616507778 N。这是刻意区分，不用固定密度数替换页面默认。夹具的对照块仅练习固定世界方向，不能冒充飞机几何。
+4. **本地任务分片而非 Worker**：RK4每32步、tau重采样每128点可yield，调度循环目标4ms；每路1024个等tau样本（provider上限2048），普通流采样预算不变。缓存只存无量纲场（角度，最多11项）；输入完整key还含速度／密度／几何，用递增版本拒绝旧结果。卸载取消发布、清缓存并释放GPU资源。
+5. **测试数组限制**：`airfoilSamples()` 只在dev或localhost/127.0.0.1/[::1]测试host返回新副本，远程production返回null；运行期不保留测试副本。其余测试API只有airfoil主题才注册。
+6. **浏览器门槛按本任务brief跳过**：未运行shoot、e2e、Lighthouse或截图／真机性能检查，也未操作用户浏览器／桌面。这些仍待主会话；不把纯函数通过当作视觉通过。§8整题清单没有因此勾选。
+
+**数值／自动校验**：新增89条单测，包括 §4.7 所有标量和S11读数、64个Cp样本、4096中点独立压力积分、边界法向残差、完整流线段穿透与每路ψ漂移、±角镜像、同刻seed07/seed10的不同到达时间与步长收敛、V0/失速不可用、过时异步结果拒绝、实际记录守卫清表／清预测、章切换保留兼容表、固定bank向量与两主题token对比。schema反例覆盖越域、NaN/Infinity、模型／knots／sources、未知字段／外部profile、错from／state、双provider／混强度、额外transform、压力引用和禁止frame。所有失败均通过修实现／数据或把浮点断言改为规格已有误差界解决，未篡改预期物理数字。
+
+**门槛记录**：`pnpm test`：160文件、4268条全过（新增89条）。`pnpm validate`：56主题、0错误、0警告。`pnpm check`：0错误、0警告、3个原有hint。`pnpm build`：115页，包含EN/ZH的sample-airfoil。一次误启动重叠build导致旧build的dist chunk被新build清理而失败；后一个独立完成的build全过，最终复核亦只运行一个build。浏览器e2e文件共14项，未执行；主会话命令 `CI=1 ATLAS_E2E_PORT=5406 pnpm e2e`。`pnpm shoot sample-airfoil --beats --keys --layout` 以及 `forces`、`sample-forces`、`energy-conversion` 的改前／改后 `--beats --keys` 全部跳过；没有可声称的0新增视觉失败结论。共享纯函数回归随全量单测通过。
+
+**已知未验收项**：图形／触控／深链／暂停／reduced-motion／切换图层和展开恢复／bank的浏览器断言已写但没跑；无截图路径。流层架构最多3次绘制，实际draw calls、三角形、drawing buffer、renderer、首屏300KB gz与真机fps均未实测，不宣称达标。构建仍给出既有大chunk提示；不能用单个chunk gzip大小冒充首屏总量。冷角度目标50ms与每任务≤8ms仍需浏览器复核；Node测量只记为CPU探针，不作iPad结论。没有依赖／package.json／lockfile／review-queue变更，没有写git历史。
+
+Node CPU探针（Node v25.8.2，darwin arm64；与check/build并行，含调度噪声，无browser/renderer）：1024点时α4/8/12总工作计时57.29/46.33/51.11ms，单次generator yield间隔最大2.43/1.95/4.64ms；因此不能宣称冷角50ms目标已验收。分片调度目标4ms，浏览器总任务≤8ms与真机预算仍待复核。所有16条路径为complete；完整场单测在1024点下仍通过。

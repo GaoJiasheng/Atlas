@@ -54,6 +54,7 @@ export const TOKEN_NAMES = [
   'f-friction',
   'f-elastic',
   'f-push',
+  'f-lift', 'f-drag', 'f-thrust',
   'en-light',
   'en-electrical',
   'en-kinetic',

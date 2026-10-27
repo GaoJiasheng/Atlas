@@ -79,6 +79,8 @@ import { CycleCard } from './hud/CycleCard';
 import { KeyCard } from './hud/KeyCard';
 import { EnergyBarLabels } from './hud/EnergyBarLabels';
 import { GroupScaleBars } from './hud/GroupScaleBars';
+import { airfoilApi } from './lib/sim/airfoil-api';
+import { AirfoilDriver } from './explorer/AirfoilDriver';
 import { TryIt } from './explorer/TryIt';
 import { setSim } from './hud/sim';
 import { replay } from './explorer/TryIt';
@@ -586,6 +588,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
             ...(sim.table ? { sources: Object.fromEntries(Object.entries(tableSources(sim.table, values)).filter(([id]) => sim.outputs.find((o) => o.id === id)?.tag === 'typical')) } : {}),
           };
         },
+        ...(file.sim?.airfoil ? airfoilApi(file,store,ui,bridge,chapters) : {}),
         shadows: () => Object.fromEntries(bridge.shadows),
         // Copies of a counted `repeat` part drawn now (a `count` binding: the balls of a table's per cents); null without one.
         copies: (id: string) => bridge.copies.get(id) ?? null,
@@ -742,6 +745,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
 
   return (
     <>
+      {file.sim?.airfoil && <AirfoilDriver file={file} store={store} ui={ui} chapters={chapters} />}
       <Suspense fallback={<StageLoading label={t('space.loading')} />}>
         <Model3DStage
           store={store}
@@ -792,7 +796,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
           canNext={canStep(1)}
           onStep={beatStep}
         />
-        <TryIt file={file} ui={ui} />
+        <TryIt file={file} ui={ui} bridge={bridge} />
         <Inspector file={file} fitness={fitness} training={training} />
       </SceneSlot>
       <SceneSlot name="readerEnd">

@@ -55,6 +55,7 @@ import { topicSchema, type TopicMeta } from '../src/content/schema/topic';
 import { chapterSchema } from '../src/content/schema/chapter';
 import { KEBAB_ID } from '../src/content/schema/common';
 import { sourceIds, type SourcesFile } from '../src/content/schema/sources';
+import { airfoilSourceIssues } from '../src/engines/space-scene/airfoil-schema';
 import { tableSourceIssues } from '../src/engines/space-scene/table-schema';
 import { glossaryIds, type GlossaryFile } from '../src/content/schema/glossary';
 import { engineSchemas, formatIssues } from '../src/engines/schemas';
@@ -442,6 +443,7 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
   }
   const matterFile = topic.engine === 'space-scene' && data ? (data as { parts?: PartsFile }).parts : undefined;
   // A table model's rows (docs/40 §4.2): every source listed, SIM rows citing the design study, TYPICAL rows another source.
+  if (matterFile?.sim?.airfoil) for (const issue of airfoilSourceIssues(matterFile.sim.airfoil, new Map((sourcesFile?.sources ?? []).map(x => [x.id, x])))) error(join(dataDir, 'parts.json'), `sim.airfoil.${issue.path.join('.')}: ${issue.message}`);
   if (matterFile?.sim?.table)
     for (const issue of tableSourceIssues(matterFile.sim.table, matterFile.sim.outputs, new Map((sourcesFile?.sources ?? []).map((x) => [x.id, x]))))
       error(join(dataDir, 'parts.json'), `sim.${issue.path.join('.')}: ${issue.message}`);

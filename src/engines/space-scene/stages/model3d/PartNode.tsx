@@ -193,6 +193,7 @@ export interface PartNodeProps {
   count?: number | null;
   /** Try-it offset (scene units) and turn about a unit axis through the part centre or `pivot` (a scene point at rest), eased or swinging (`settle`). */
   simMove?: SimMove | null;
+  airfoilSnap?: boolean;
   /** Try-it timeline channels the part plays (moves and turns). */
   play?: readonly SimPlay[] | null;
   /** Try-it stretch of the part's coil. */
@@ -851,7 +852,7 @@ export function PartNode(props: PartNodeProps) {
       const settle = sm?.settle;
       // A swinging turn goes the short way round to its target; a plain one eases straight there.
       const turnTo = settle ? nearestTurn(m.turn, sm!.deg) : (sm?.deg ?? 0);
-      if (snap) {
+      if (snap || props.airfoilSnap) {
         m.turn = turnTo;
         m.turnV = 0;
       } else if (settle) {

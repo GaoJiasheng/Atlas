@@ -2152,3 +2152,12 @@ button.space-plate__sel:focus-visible {
   letter-spacing: 0.06em;
   fill: var(--ink-2);
 }
+
+/* Airfoil SVGs stay inside the existing reader card, including on phones. */
+.space-airfoil-plot { margin: 1rem 0; max-width: 100%; }
+.space-airfoil-plot svg { display: block; width: 100%; height: auto; overflow: visible; }
+.space-airfoil-plot text { fill: var(--ink-2); font-size: 12px; font-family: var(--font-mono); }
+.space-airfoil-plot figcaption { font-size: .75rem; color: var(--ink); }
+.space-airfoil-plot p, .space-airfoil-status p { font-size: .72rem; line-height: 1.5; overflow-wrap: anywhere; }
+.space-airfoil-samples { display: flex; flex-wrap: wrap; gap: .25rem; }
+.space-airfoil-samples button { min-height: 44px; }

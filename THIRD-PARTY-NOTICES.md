@@ -102,3 +102,12 @@ The skills under `.claude/skills/` are working notes for AI assistants, not lice
 Figures and claims in topic texts cite their sources with `[S#]` ids; each
 topic's `data/SOURCES.md` lists them with URLs. Quotations are short and
 attributed; no source text is reproduced beyond that.
+
+## Sample airfoil fixture
+
+`src/content/topics/sample-airfoil/` is an original teaching design under
+CC BY-NC-SA 4.0, with no licence-family exceptions. Mathematical references
+are NASA's lift equation, metric atmosphere and conformal mapping pages
+(S4/S11/S57); S58 describes the original illustrative model and limitations.
+No NASA software, UIUC coordinates, third-party CAD or images are reproduced.
+See `src/content/topics/sample-airfoil/data/SOURCES.md`.

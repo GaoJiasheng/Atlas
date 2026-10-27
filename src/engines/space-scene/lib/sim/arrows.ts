@@ -11,6 +11,7 @@ import { channelPeak, channelValue, isTimeline } from './timeline';
 
 /** One colour per kind of force (theme tokens; the magnetic force keeps the magnets topic's north-pole red). */
 export const FORCE_COLORS: Readonly<Record<ForceKind, string>> = {
+  lift: 'token:f-lift', drag: 'token:f-drag', thrust: 'token:f-thrust',
   gravity: 'token:f-gravity',
   friction: 'token:f-friction',
   elastic: 'token:f-elastic',
@@ -20,6 +21,7 @@ export const FORCE_COLORS: Readonly<Record<ForceKind, string>> = {
 
 /** The KEY names (syllabus wording; "push or pull" for a push of the rod or a pull of the balance). */
 export const FORCE_NAMES: Readonly<Record<ForceKind, BilingualText>> = {
+  lift: { en: 'Lift', zh: '升力' }, drag: { en: 'Drag', zh: '阻力' }, thrust: { en: 'Thrust', zh: '推力' },
   gravity: { en: 'Gravitational force', zh: '重力' },
   friction: { en: 'Frictional force', zh: '摩擦力' },
   elastic: { en: 'Elastic spring force', zh: '弹簧的弹力' },
