@@ -36,6 +36,8 @@ import { chromium, type Browser, type Page } from '@playwright/test';
 import { hudLayoutIssues, LAYOUT_SIZES } from '../tests-e2e/hud-layout';
 import { capacity, fillBounds, fillShapeForPrimitive, levelForVolume } from '../src/engines/space-scene/lib/fill';
 import { bendAxisIndex, bendCurve } from '../src/engines/space-scene/lib/bend';
+import { solveAirfoil } from '../src/engines/space-scene/lib/sim/airfoil';
+import { airfoilInputKey } from '../src/engines/space-scene/lib/sim/airfoil-cache';
 import { animationHz, shiftEntry, tintLevel } from '../src/engines/space-scene/lib/sim/bind';
 import type { PartsFile } from '../src/engines/space-scene/schema';
 import type { MechanismReading } from '../src/engines/space-scene/bridge';
@@ -435,6 +437,7 @@ function beatSceneOf(page: Page): Promise<BeatScene | null> {
                 : v;
         return { orbit: normalize(orbit), orbitOutputs: normalize(e.sim?.()) };
       })(),
+      airfoil: (()=>{const a=(window.__atlas!.engine as unknown as {airfoil?():{inputKey:string;mode:string;cl:number;lift:number;plot:unknown}}).airfoil?.();return a?{inputKey:a.inputKey,mode:a.mode,cl:a.cl,lift:a.lift,plot:a.plot}:null;})(),
       unfinished: Object.entries(sim?.timeline ?? {})
         .filter(([, r]) => r.playing || r.t !== r.duration)
         .map(([id]) => id),
@@ -746,6 +749,24 @@ async function mechanismDrawIssues(s: Session): Promise<string[]> {
   return issues;
 }
 
+/** Airfoil beats and their links must agree with the resolved scalar snapshot and current field. */
+async function airfoilIssues(s:Session):Promise<string[]> {
+  const path=join(ROOT,'src/content/topics',s.topic,'data/parts.json');
+  if(!existsSync(path))return [];
+  const file=JSON.parse(readFileSync(path,'utf8')) as PartsFile;
+  const d=file?.sim?.airfoil;if(!d)return [];
+  await s.page.waitForFunction(()=>{const e=window.__atlas!.engine as unknown as {airfoil():{fieldReady:boolean}};return e.airfoil()?.fieldReady;},null,{timeout:30000});
+  const reading=await s.page.evaluate(()=>{const e=window.__atlas!.engine as unknown as {sim():{values:Record<string,number|string|boolean>};airfoil():{inputKey:string;mode:string;cl:number;lift:number;pathCount:number;pressureCount:number;pathStatuses:{status:string}[];plot:{current:{x:number;y:number}}}};return {a:e.airfoil(),v:e.sim().values};});
+  const want=solveAirfoil(d,reading.v),a=reading.a,out:string[]=[];
+  if(a.inputKey!==airfoilInputKey(d,reading.v))out.push('airfoil field inputKey is stale');
+  if(a.mode!==want.mode||Math.abs(a.cl-want.cl)>1e-8||Math.abs(a.lift-want.lift)>1e-5)out.push('airfoil mode/Cl/lift differs from resolved inputs');
+  if(want.mode==='ideal-attached'&&(a.pathCount!==16||a.pressureCount!==64||a.pathStatuses.some(p=>p.status!=='complete')))out.push('attached airfoil field incomplete');
+  if(want.mode!=='ideal-attached'&&(a.pathCount||a.pressureCount))out.push('still/stall retains attached paths or pressure');
+  const output=file!.sim!.outputs.find(o=>o.id===d.plot.y),y=output?.from==='lift-n'?want.lift:want.cl;
+  if(a.plot.current.x!==want.angle||Math.abs(a.plot.current.y-y)>1e-8)out.push('airfoil plot current point is stale');
+  return out;
+}
+
 /**
  * Every beat opened from its link (`?ch=<chapter>&b=<n>`) in a fresh document of its own, against the scene the presentation
  * showed: a field that differs, or a run not at its end (links jump to the end), is a beat failure.
@@ -782,6 +803,7 @@ async function runBeatLinks(s: Session, beats: { chapter: string; index: number 
     for (const issue of await tintIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     for (const issue of await orbitIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     for (const issue of await mechanismDrawIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
+    for (const issue of await airfoilIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     if (diffs.length) report.beatFailures.push(`${name}: opened from ${link}: ${diffs.join('; ')}`);
     else same++;
     if (diffs.length) console.log(`  ${`${name} (link)`.padEnd(36)} FAIL  ${diffs.join('; ').slice(0, 300)}`);
@@ -847,6 +869,7 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
     for (const issue of await tintIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     for (const issue of await orbitIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     for (const issue of await mechanismDrawIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
+    for (const issue of await airfoilIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     await s.page.screenshot({ path: join(out, `${name}${o.suffix}.png`) });
     console.log(`  ${name.padEnd(36)} ${landed ? 'OK' : 'FAIL'}${missing.length ? `  (no label: ${missing.join(', ')})` : ''}`);
     // A looping exercise beat (SpaceScene exercise mode) also gets a still at its start and end keys.

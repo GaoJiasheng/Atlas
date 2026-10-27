@@ -2319,3 +2319,41 @@ pnpm tsx scripts/geo/lib/check.ts --topic ww2         # MapLibre（Playwright）
 - **按年代裁过的要素不再沿底图海岸**（docs/28 P2，`simplify.ts`）：`pipeline.coast.excludeBox: [w, s, e, n]`（缺省 `null`）：这个框里不做海岸一步。底图陆地和水都挖掉这个框，于是框里的要素不被擦水、框外的 holder 也不会补缝长进来；框里的要素保持 compose 给它的海岸（新加坡要素已按时代 `intersect` 到 `work/coast-L#.geojson`）；柔佛、廖内等框里的邻国要素也就不再裁到 10m 海岸，需要的话在 compose 里 `intersect` 到 10m 陆地。偏差统计在框里不跳过"海里"的点。
 - **分框细度**（docs/28 P3，`simplify.ts`）：`pipeline.focus` 的一项可以写成 `{ "box": [w, s, e, n], "fineKm": 0.005 }`，这个框用自己的固定间隔（岛尺度要几米，区域框照旧 1 km 上下）：先从普通焦点框里挖出来，单独简化，用自己那份陆地沿海岸（与 inside / outside 两半同一做法）；排在前面的框在重叠处优先。自动预算搜索只调普通焦点框的间隔。没有这种项、没有 `excludeBox` 时产物与以前逐字节相同（ww1、ww2、warring-states、four-taps 的 simplify 改前改后各跑一次比对过）。
 - 东南亚近景底图：`scripts/build-geo.ts` 另出 `public/geo/land-10m-sea.json`（Natural Earth 1:10m 陆地，裁到 95°E–125°E、9°S–22°N，TopoJSON，约 234 KB）。GeoStage 在镜头 zoom ≥ 6.5 且视野与该框相交时才 fetch；zoom 7 起绘制、到 8 完全显现：框内先铺一层水色遮住 50m 陆地（不透明度 7→8 渐入），10m 陆地和海岸线叠在上面，颜色同为 `--land` / `--land-edge` / `--water` token。其他主题不加载它。
+
+### SpaceScene · 试一试 · 翼型（airfoil）
+
+docs/45 §4 E-AF1–5。`kind:"airfoil"`；严格数据 `airfoil-schema.ts`，原创纯函数 `lib/sim/airfoil.ts` 与 `airfoil-field.ts`。注册 SIM_KINDS / simQuantities / quantityKind；无 timeline，`SEPARATE_EXPERIMENTS.airfoil=true`。作者完整模板 `tests/space-scene/fixtures/airfoil-bench.ts`，草稿 `sample-airfoil`。夹具页面用 NASA 平均大气，模板另导出固定密度 1.225 的数值测试例。
+
+```json
+{"model":"joukowski-illustrative-v1","angle":"angle-deg","speed":"airspeed-mps","atmosphere":{"kind":"nasa-troposphere","altitude":"altitude-m"},"profile":{"epsilon":0.08},"chord":1,"area":2,"section":{"part":"foil-sample","origin":[-0.5,1,0]},"stall":{"tag":"illustrative","peakDeg":12,"knots":[[12,1],[16,0.85],[20,0.6]],"source":"S58"},"sources":["S4","S11","S57","S58"],"plot":{"y":"cl-now"}}
+```
+
+物理控制必须 step：angle −20…20°、speed 0…60 m/s、altitude 0…10000 m；constant 大气改写为 `{"kind":"constant","density":1.225}`（0<ρ≤2）。未知字段、非法数与错误引用报具体路径；直接求解非法输入抛 `AirfoilInputError{field,reason}`。数输出 `rho/q/cl/lift-n/control:<本模型数控件>`，`tag:"sim"`；状态 `flow-state` 必须给 still / ideal-attached / separated-illustration 三个双语标签，不写 tag。`plot.y` 是 from=cl 或 lift-n 的数输出 ID。来源全存在，stall.source 必须在 sources 中且 `design:true`；S4 对应 spec 的 S04（公共来源 ID 不接受前导零）。
+
+几何：128 点 Joukowski 原创轮廓，乘 chord 后写现有 extrude.shape、depth .12、bevel 0；at=section.origin、无 scale/rotation/mirror/额外几何。样件与 `chord-marker` 只有一个相同的 `rotate`：
+
+```json
+{"control":"angle-deg","part":["foil-sample","chord-marker"],"rotate":{"axis":[0,0,1],"per":-1,"pivot":[-0.25,1,0]}}
+```
+
+这两个 airfoil 对象的转动直接到目标角，其他 rotate 缓动照旧。inflow-reference 保持固定。`airfoilOutline()` 导出轮廓，不能使用外部坐标或 wing primitive；前表面=origin.z+.06，场平面再前移 .002。
+
+流层复用单批 GPU points、既有 flow 材质与层开关。只给一条 flow 写 provider，flow 无 path/paths；count128、speed1、spread0、whenRun true、clip false、flat true；不混 intensity/state/tidal/stops/bilateral。普通 visible 可叠加 AND：
+
+```json
+[{"output":"flow-state","flow":"section-air","airfoilFlow":true},{"control":"flow-view","flow":"section-air","visible":{"eq":"streamlines"}}]
+```
+
+16 条固定种子，RK4 .008 上限、2048 步、碰撞时最多8次减半；全线段检查，失败路无点并提示。每路按自己的 tau 均匀重采样（最多2048点），不用 Catmull-Rom。每路8点，编号0为同刻发射的 signal 环，其余循环；各路到达时间不归一。时钟 dt·V/c/80；RUN/暂停/减少动态冻结点，静态线保留；关层、隐藏样件或展开时全部实验图解隐藏。±12°外只显示静态虚线及人工失速说明，V0 无路径或压力。缓存按角度存无量纲场，最多11项；速度/密度不重追线。分片任务以4ms为目标，追踪与重采样都有 yield；版本号拒绝过时结果，切主题释放缓存和纹理。
+
+卡内 `AirfoilPlot` 仅 vary=angle 出现：−20…20 每 .5°，有符号对称 y，实线附着、虚线+斜线底为人工失速区，当前点及共用表的记录方标。不给 T2/T6 另画曲线。airfoil 的记录条件签名包含模型/几何/大气/非 vary 的物理控件；改变即清本章表与预测并读屏提示；flow-view/diagram-case 不清表。共用表仍最多12行、驻内存。
+
+```json
+{"kind":"airfoil-pressure","part":"foil-sample","group":"flight-flows","when":{"control":"flow-view","is":{"eq":"pressure"}}}
+```
+
+`AirfoilPressure` 进同一试一试卡，Cp负向朝上、真实样本极值、上下支线型不同。六个触控代表样本钮读出坐标与 Cp，并对应实体表面标记。暂停保留压力；V0/失速显示不可用，不保留旧 Cp。完整压力64个中点与同场一致；≥2048中点积分只用于无黏二维自洽 QA，不宣称真实阻力为零。
+
+force-vectors 增加 lift/drag/thrust（KEY：Lift/升力、Drag/阻力、Thrust/推力），token `f-lift/f-drag/f-thrust` 两主题均≥3:1。仍用固定世界 dir、value、when、负值反向和合批；无 frame 字段。离散 bank pose 要 duration0，并把升力 dir 写 `[0,0.9396926208,-0.3420201433]`，重力 `[0,-1,0]`；不显示水平推阻。
+
+QA：`engine.airfoil()` 提供当前标量、fieldReady/version/inputKey、路径状态、压力数、pulseTime、实际画出的箭头方向、曲线与记录签名；`airfoilProbe({x,y})` 对已旋转弦坐标求值（无可用场则 unavailable/null），`airfoilSamples()` 仅 dev/本机测试 host 返回新副本。`ready` 只保证舞台，还要等 airfoil.fieldReady 且 inputKey 当前；`shoot --beats` 检查拍及拍链接的输入、Cl/L、场、图中点一致性。浏览器验收见 `tests-e2e/sample-airfoil.spec.ts`；专用端口 `ATLAS_E2E_PORT=5406`。
