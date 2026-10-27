@@ -41,6 +41,7 @@ import type { BasemapOptions, BlocLabels, DatedLayerDef, EntityStrings } from '.
 import type { Playhead } from '../../lib/playhead';
 import { frameAt, type Frame } from '../../lib/frame';
 import { areaLabelPoint, metresPerPixel, pickWorldCopy, pointAlong, projectNearCentre, scaleBar, type LngLat } from '../../lib/geo';
+import { hasMapAnchor, missionBadge } from '../../lib/missions';
 import { referencePair } from '../../lib/stats';
 import { formatTime, formatTimeRange } from '../../lib/format';
 import { aspectBounds, regionGraticule, regionMaxBounds } from '../../lib/region';
@@ -102,7 +103,7 @@ export interface GeoController {
   fitCamera(): GeoCamera | null;
   /** Regional plate: the camera that shows the whole plate (the first preset); null on the world map. */
   plateCamera(): GeoCamera | null;
-  stats(): { features: number; zoom: number; datedLayers: Record<string, DatedLayerStats>; reconstruction?: ReconstructionStats };
+  stats(): { features: number; eventMarkers?: number; zoom: number; datedLayers: Record<string, DatedLayerStats>; reconstruction?: ReconstructionStats };
   reconstructionStats?(): ReconstructionStats;
   destroy(): void;
 }
@@ -523,12 +524,13 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     updateArrowheads(frame, on.has('movements'));
 
     /* events: hollow ring (hairline) + dot sized by importance; squares and siege rings are HTML (updateMarks) */
-    const eventFeatures: Feature[] = frame.events.map((ef) => {
+    const eventFeatures: Feature[] = frame.events.flatMap((ef): Feature[] => {
       const en = model.events.find((x) => x.event.id === ef.id)!;
       const e = en.event;
+      if (!hasMapAnchor(e)) return [];
       const isHl = hl.has(e.id);
       const color = eventColor(e, en.start);
-      return {
+      return [{
         type: 'Feature',
         geometry: { type: 'Point', coordinates: e.at },
         properties: {
@@ -540,7 +542,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
           sw: isHl ? 1.6 : 1,
           o: e.displayOffset || SQUARE_KINDS.has(e.kind) || TRIANGLE_KINDS.has(e.kind) ? 0 : ef.active || isHl ? 1 : 0.6,
         },
-      };
+      }];
     });
     setIfChanged(
       SRC.events,
@@ -549,7 +551,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     );
 
     /* one-shot pulse when an event becomes active */
-    const nowActive = new Set(frame.events.filter((e) => e.active).map((e) => e.id));
+    const nowActive = new Set(frame.events.filter((e) => e.active && hasMapAnchor(model.events.find((item) => item.event.id === e.id)!.event)).map((e) => e.id));
     if (activeEvents && on.has('battles') && !reducedMotion) {
       for (const id of nowActive) if (!activeEvents.has(id)) pulse(id);
     }
@@ -560,7 +562,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       on.has('sites')
         ? {
             type: 'FeatureCollection',
-            features: model.sites.map((e) => ({ type: 'Feature', geometry: { type: 'Point', coordinates: e.at }, properties: { id: e.id } })),
+            features: model.sites.filter(hasMapAnchor).map((e) => ({ type: 'Feature', geometry: { type: 'Point', coordinates: e.at }, properties: { id: e.id } })),
           }
         : EMPTY,
     );
@@ -658,7 +660,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
 
   /** Mark colour: cold tone for evacuations / liberations, else the attacker at the event's start, else ink. */
   const eventColor = (e: SceneEvent, start: number): string => {
-    if (e.kind === 'milestone') return tokens.ink;
+    if (e.kind === 'milestone' || e.kind === 'mission') return tokens.ink;
     if (COLD_KINDS.has(e.kind)) return tokens.cold || tokens.ink;
     return e.sides ? sideColor(e.sides.attacker, start) : tokens.ink;
   };
@@ -677,6 +679,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       for (const ef of frame.events) {
         const en = model.events.find((x) => x.event.id === ef.id)!;
         const e = en.event;
+        if (!hasMapAnchor(e)) continue;
         const isHl = hl.has(e.id);
         const r = eventRadius(e, ef.active, isHl);
         if (e.displayOffset && !SQUARE_KINDS.has(e.kind) && !TRIANGLE_KINDS.has(e.kind)) {
@@ -701,7 +704,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       }
     }
     if (sitesOn) {
-      for (const e of model.sites) want.set(`site:${e.id}`, { at: e.at, className: 'ts-mark ts-mark--site', size: 9, active: true, hl: hl.has(e.id) });
+      for (const e of model.sites.filter(hasMapAnchor)) want.set(`site:${e.id}`, { at: e.at, className: 'ts-mark ts-mark--site', size: 9, active: true, hl: hl.has(e.id) });
     }
     for (const [key, marker] of marks) {
       if (!want.has(key)) {
@@ -745,6 +748,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     const en = model.events.find((x) => x.event.id === id);
     if (!en) return;
     const e = en.event;
+    if (!hasMapAnchor(e)) return;
     const el = document.createElement('div');
     el.className = SQUARE_KINDS.has(e.kind) ? 'ts-pulse ts-pulse--square' : 'ts-pulse';
     el.style.setProperty('--ts-color', eventColor(e, en.start));
@@ -860,10 +864,12 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
         if (!ef.active && !hl.has(ef.id)) continue;
         if (presenting && !hl.has(ef.id)) continue;
         const e = model.events.find((x) => x.event.id === ef.id)!.event;
+        if (!hasMapAnchor(e)) continue;
         items.push({
           key: `event:${e.id}`,
           id: e.id,
           kind: 'event',
+          badge: missionBadge(e, locale) ?? undefined,
           en: e.title.en,
           zh: e.title.zh,
           note: tx(e.summary, locale),
@@ -876,12 +882,13 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       }
     }
     if (on.has('sites')) {
-      for (const e of model.sites) {
+      for (const e of model.sites.filter(hasMapAnchor)) {
         if (!hl.has(e.id)) continue;
         items.push({
           key: `event:${e.id}`,
           id: e.id,
           kind: 'event',
+          badge: missionBadge(e, locale) ?? undefined,
           en: e.title.en,
           zh: e.title.zh,
           note: tx(e.summary, locale),
@@ -1060,7 +1067,9 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       ...(on.has('battles') ? lastFrame.events.map((ef) => model.events.find((entry) => entry.event.id === ef.id)!.event) : []),
       ...(on.has('sites') ? model.sites : []),
     ];
-    const id = eventAtDisplayPoint(events, (at) => map.project(at), e.point);
+    // Coordinate-free records (docs/60) have no marker to hit.
+    const placed = events.filter((ev): ev is typeof ev & { at: LngLat } => ev.at !== undefined);
+    const id = eventAtDisplayPoint(placed, (at) => map.project(at), e.point);
     if (id) options.onSelectEvent(id);
   });
 
@@ -1375,7 +1384,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       if (region) features += riverSig ? riverSig.split('|')[0]!.split(',').filter(Boolean).length : 0;
       const dated = Object.fromEntries(datedLayers.map((layer) => [layer.id, layer.stats()]));
       for (const layer of datedLayers) if (on.has(layer.id)) features += dated[layer.id]!.visible;
-      return { features, zoom: Math.round(map.getZoom() * 10) / 10, datedLayers: dated };
+      return { features, eventMarkers: on.has('battles') ? featureCounts[SRC.events] ?? 0 : 0, zoom: Math.round(map.getZoom() * 10) / 10, datedLayers: dated };
     },
     destroy() {
       destroyed = true;

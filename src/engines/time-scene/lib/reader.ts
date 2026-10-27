@@ -2,6 +2,7 @@
 import type { GeoCamera, SceneSnapshot } from '../../core/types';
 import type { TimeSceneExt } from '../index';
 import type { SceneEvent } from '../schema';
+import { hasMapAnchor } from './missions';
 
 export function eventSelectionPatch(
   state: SceneSnapshot<TimeSceneExt>,
@@ -16,7 +17,8 @@ export function eventSelectionPatch(
   const camera: GeoCamera = state.camera && 'center' in state.camera ? state.camera : { center: [20, 10], zoom: 1.4 };
   return {
     ...(event.kind === 'site' ? {} : { t: event.t }),
-    camera: { ...camera, center: [...event.at] },
+    // Unlocated evidence (missions `timeline-only`) jumps in time only; the camera stays.
+    camera: hasMapAnchor(event) ? { ...camera, center: [...event.at] } : camera,
     layers: state.layers.includes(layer) ? [...state.layers] : [...state.layers, layer],
     highlight: [id],
   };

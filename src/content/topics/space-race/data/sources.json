@@ -1,0 +1,568 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "MOE Singapore · Primary Science syllabus (2023 cohort, Jan 2026 cached version)",
+        "zh": "MOE Singapore · Primary Science syllabus (2023 cohort, Jan 2026 cached version)"
+      },
+      "url": "https://www.moe.gov.sg/-/media/files/primary/syllabus/primary-science-syllabus-2023_may24.pdf",
+      "note": {
+        "en": "printed pp.63–64,80; PDF pp.64–65,81 · Preparation access: cached-PDF-verified",
+        "zh": "printed pp.63–64,80; PDF pp.64–65,81 · 准备阶段访问记录：cached-PDF-verified"
+      }
+    },
+    {
+      "id": "S2",
+      "text": {
+        "en": "MOE Singapore · 2020 Social Studies Primary syllabus, Jan 2024 update",
+        "zh": "MOE Singapore · 2020 Social Studies Primary syllabus, Jan 2024 update"
+      },
+      "url": "https://www.moe.gov.sg/-/media/files/primary/2020-social-studies-primary.pdf",
+      "note": {
+        "en": "printed p.25; PDF p.26 · Preparation access: cached-PDF-verified",
+        "zh": "printed p.25; PDF p.26 · 准备阶段访问记录：cached-PDF-verified"
+      }
+    },
+    {
+      "id": "S3",
+      "text": {
+        "en": "NASA · Sputnik and the dawn of the space age",
+        "zh": "NASA · Sputnik and the dawn of the space age"
+      },
+      "url": "https://www.nasa.gov/history/65-years-ago-sputnik-ushers-in-the-space-age/",
+      "note": {
+        "en": "Sputnik 1; R-7; NASA formation · Preparation access: public-page-read",
+        "zh": "Sputnik 1; R-7; NASA formation · 准备阶段访问记录：public-page-read"
+      }
+    },
+    {
+      "id": "S4",
+      "text": {
+        "en": "NASA JPL · Explorer 1",
+        "zh": "NASA JPL · Explorer 1"
+      },
+      "url": "https://www.jpl.nasa.gov/missions/explorer-1/",
+      "note": {
+        "en": "mission overview · Preparation access: JPL public search result; direct HTTP403, SR006 also cross-checks NASA S42",
+        "zh": "mission overview · 准备阶段访问记录：JPL public search result; direct HTTP403, SR006 also cross-checks NASA S42"
+      }
+    },
+    {
+      "id": "S5",
+      "text": {
+        "en": "ESA · Sputnik anniversary",
+        "zh": "ESA · Sputnik anniversary"
+      },
+      "url": "https://www.esa.int/Science_Exploration/Space_Science/Integral/30_September_-_4_October",
+      "note": {
+        "en": "4 October; sphere and antenna geometry · Preparation access: public-page-read",
+        "zh": "4 October; sphere and antenna geometry · 准备阶段访问记录：public-page-read"
+      }
+    },
+    {
+      "id": "S6",
+      "text": {
+        "en": "NASA · A Brief History of Animals in Space",
+        "zh": "NASA · A Brief History of Animals in Space"
+      },
+      "url": "https://www.nasa.gov/history/a-brief-history-of-animals-in-space/",
+      "note": {
+        "en": "Laika; US animal flights · Preparation access: public-page-read",
+        "zh": "Laika; US animal flights · 准备阶段访问记录：public-page-read"
+      }
+    },
+    {
+      "id": "S7",
+      "text": {
+        "en": "NASA · Before Apollo",
+        "zh": "NASA · Before Apollo"
+      },
+      "url": "https://www.nasa.gov/specials/apollo50th/before.html",
+      "note": {
+        "en": "Gagarin; Shepard; Glenn; Mercury · Preparation access: public-page-read",
+        "zh": "Gagarin; Shepard; Glenn; Mercury · 准备阶段访问记录：public-page-read"
+      }
+    },
+    {
+      "id": "S8",
+      "text": {
+        "en": "NASA StarChild · Valentina Tereshkova",
+        "zh": "NASA StarChild · Valentina Tereshkova"
+      },
+      "url": "https://starchild.gsfc.nasa.gov/docs/StarChild/whos_who_level2/tereshkova.html",
+      "note": {
+        "en": "Vostok 6 · Preparation access: public-page-read",
+        "zh": "Vostok 6 · 准备阶段访问记录：public-page-read"
+      }
+    },
+    {
+      "id": "S9",
+      "text": {
+        "en": "Aleksei Leonov / UNESCO Courier · My first steps in space",
+        "zh": "Aleksei Leonov / UNESCO Courier · My first steps in space"
+      },
+      "url": "https://courier.unesco.org/en/articles/my-first-steps-space",
+      "note": {
+        "en": "1965 first-person account; translated recollection · Preparation access: public-page-read",
+        "zh": "1965 first-person account; translated recollection · 准备阶段访问记录：public-page-read"
+      }
+    },
+    {
+      "id": "S10",
+      "text": {
+        "en": "Smithsonian NASM · What was the Gemini Program?",
+        "zh": "Smithsonian NASM · What was the Gemini Program?"
+      },
+      "url": "https://airandspace.si.edu/stories/editorial/what-was-gemini-program",
+      "note": {
+        "en": "duration, EVA, rendezvous · Preparation access: Smithsonian indexed text only; HTTP403 skipped; SR013 now primarily S42",
+        "zh": "duration, EVA, rendezvous · 准备阶段访问记录：Smithsonian indexed text only; HTTP403 skipped; SR013 now primarily S42"
+      }
+    },
+    {
+      "id": "S11",
+      "text": {
+        "en": "NASA · Gemini VIII, first docking",
+        "zh": "NASA · Gemini VIII, first docking"
+      },
+      "url": "https://www.nasa.gov/history/55-years-ago-gemini-viii-the-first-docking-in-space/",
+      "note": {
+        "en": "March 1966 docking and emergency · Preparation access: public-page-read",
+        "zh": "March 1966 docking and emergency · 准备阶段访问记录：public-page-read"
+      }
+    },
+    {
+      "id": "S12",
+      "text": {
+        "en": "NASA Science · Moon Missions",
+        "zh": "NASA Science · Moon Missions"
+      },
+      "url": "https://science.nasa.gov/moon/missions/",
+      "note": {
+        "en": "1959–1975 rows; launch versus arrival columns · Preparation access: public-page-read",
+        "zh": "1959–1975 rows; launch versus arrival columns · 准备阶段访问记录：public-page-read"
+      }
+    },
+    {
+      "id": "S13",
+      "text": {
+        "en": "NASA NSSDC · Soviet Missions to the Moon",
+        "zh": "NASA NSSDC · Soviet Missions to the Moon"
+      },
+      "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunarussr.html",
+      "note": {
+        "en": "Luna 2/3/9/10/16/17 · Preparation access: public-page-read",
+        "zh": "Luna 2/3/9/10/16/17 · 准备阶段访问记录：public-page-read"
+      }
+    },
+    {
+      "id": "S14",
+      "text": {
+        "en": "NASA / Kennedy address · The Decision to Go to the Moon",
+        "zh": "NASA / Kennedy address · The Decision to Go to the Moon"
+      },
+      "url": "https://www.nasa.gov/history/the-decision-to-go-to-the-moon/",
+      "note": {
+        "en": "25 May 1961; landing AND safe return · Preparation access: public-page-read",
+        "zh": "25 May 1961; landing AND safe return · 准备阶段访问记录：public-page-read"
+      }
+    },
+    {
+      "id": "S15",
+      "text": {
+        "en": "NASA · Apollo 1",
+        "zh": "NASA · Apollo 1"
+      },
+      "url": "https://www.nasa.gov/mission/apollo-1/",
+      "note": {
+        "en": "27 January 1967 fire; crew; redesign · Preparation access: public-page-read",
+        "zh": "27 January 1967 fire; crew; redesign · 准备阶段访问记录：public-page-read"
+      }
+    },
+    {
+      "id": "S16",
+      "text": {
+        "en": "NASA StarChild · Vladimir Komarov",
+        "zh": "NASA StarChild · Vladimir Komarov"
+      },
+      "url": "https://starchild.gsfc.nasa.gov/docs/StarChild/space_level2/komarov.html",
+      "note": {
+        "en": "Soyuz 1 parachute failure · Preparation access: public-page-read",
+        "zh": "Soyuz 1 parachute failure · 准备阶段访问记录：public-page-read"
+      }
+    },
+    {
+      "id": "S17",
+      "text": {
+        "en": "NASA · Remembering Soyuz 11",
+        "zh": "NASA · Remembering Soyuz 11"
+      },
+      "url": "https://www.nasa.gov/history/50-years-ago-remembering-the-crew-of-soyuz-11/",
+      "note": {
+        "en": "June 1971; crew names; pressure valve; Salyut 1 · Preparation access: public-page-read",
+        "zh": "June 1971; crew names; pressure valve; Salyut 1 · 准备阶段访问记录：public-page-read"
+      }
+    },
+    {
+      "id": "S18",
+      "text": {
+        "en": "Asif A. Siddiqi / NASA SP-2000-4408 · Challenge to Apollo, Part 2",
+        "zh": "Asif A. Siddiqi / NASA SP-2000-4408 · Challenge to Apollo, Part 2"
+      },
+      "url": "https://www.nasa.gov/wp-content/uploads/static/history/SP-4408pt2.pdf",
+      "note": {
+        "en": "printed p.838 / PDF p.339: costs; N1 trials and Zond chapters · Preparation access: web tool read PDF and printed p838 cost paragraph",
+        "zh": "printed p.838 / PDF p.339: costs; N1 trials and Zond chapters · 准备阶段访问记录：web tool read PDF and printed p838 cost paragraph"
+      }
+    },
+    {
+      "id": "S19",
+      "text": {
+        "en": "Boris Chertok / NASA SP-2011-4110 · Rockets and People, Vol. IV: The Moon Race",
+        "zh": "Boris Chertok / NASA SP-2011-4110 · Rockets and People, Vol. IV: The Moon Race"
+      },
+      "url": "https://www.nasa.gov/wp-content/uploads/2023/04/sp-4110-vol4.pdf",
+      "note": {
+        "en": "editorial cost discussion; participant memoir perspective · Preparation access: web tool read PDF; cost statement corroborated S42",
+        "zh": "editorial cost discussion; participant memoir perspective · 准备阶段访问记录：web tool read PDF; cost statement corroborated S42"
+      }
+    },
+    {
+      "id": "S20",
+      "text": {
+        "en": "Richard Orloff / NASA SP-4029 · Apollo 11 Mission Summary, Apollo by the Numbers",
+        "zh": "Richard Orloff / NASA SP-4029 · Apollo 11 Mission Summary, Apollo by the Numbers"
+      },
+      "url": "https://www.nasa.gov/wp-content/uploads/static/history/SP-4029/Apollo_11a_Summary.htm",
+      "note": {
+        "en": "Lunar Surface; landing and step timestamps; sample mass; return · Preparation access: public-page-read",
+        "zh": "Lunar Surface; landing and step timestamps; sample mass; return · 准备阶段访问记录：public-page-read"
+      }
+    },
+    {
+      "id": "S21",
+      "text": {
+        "en": "NASA · Apollo 11 Mission Overview",
+        "zh": "NASA · Apollo 11 Mission Overview"
+      },
+      "url": "https://www.nasa.gov/missions/apollo/apollo-11-mission-overview/",
+      "note": {
+        "en": "launch, crew roles, docking, ascent, return · Preparation access: public-page-read",
+        "zh": "launch, crew roles, docking, ascent, return · 准备阶段访问记录：public-page-read"
+      }
+    },
+    {
+      "id": "S22",
+      "text": {
+        "en": "NASA · National Goal Nears Fulfillment",
+        "zh": "NASA · National Goal Nears Fulfillment"
+      },
+      "url": "https://www.nasa.gov/history/50-years-ago-national-goal-nears-fulfillment/",
+      "note": {
+        "en": "Luna 15 and US–USSR trajectory exchange · Preparation access: public-page-read",
+        "zh": "Luna 15 and US–USSR trajectory exchange · 准备阶段访问记录：public-page-read"
+      }
+    },
+    {
+      "id": "S23",
+      "text": {
+        "en": "NASA · The Apollo-Soyuz Mission",
+        "zh": "NASA · The Apollo-Soyuz Mission"
+      },
+      "url": "https://www.nasa.gov/missions/apollo-soyuz/the-apollo-soyuz-mission/",
+      "note": {
+        "en": "17 July 1975; Saturn IB, not Saturn V · Preparation access: public-page-read",
+        "zh": "17 July 1975; Saturn IB, not Saturn V · 准备阶段访问记录：public-page-read"
+      }
+    },
+    {
+      "id": "S24",
+      "text": {
+        "en": "NASA · What Was the Saturn V?",
+        "zh": "NASA · What Was the Saturn V?"
+      },
+      "url": "https://www.nasa.gov/learning-resources/for-kids-and-students/what-was-the-saturn-v-grades-5-8/",
+      "note": {
+        "en": "dimensions; stage sequence; Apollo 4/8/9/10/11; 111 m · Preparation access: public-page-read",
+        "zh": "dimensions; stage sequence; Apollo 4/8/9/10/11; 111 m · 准备阶段访问记录：public-page-read"
+      }
+    },
+    {
+      "id": "S25",
+      "text": {
+        "en": "NASA · Apollo 11 press kit (1969)",
+        "zh": "NASA · Apollo 11 press kit (1969)"
+      },
+      "url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/a/Apollo_11.pdf",
+      "note": {
+        "en": "printed pp.110–115, Saturn stages and propulsion; PDF pages verified in reference audit · Preparation access: cached-PDF-verified",
+        "zh": "printed pp.110–115, Saturn stages and propulsion; PDF pages verified in reference audit · 准备阶段访问记录：cached-PDF-verified"
+      }
+    },
+    {
+      "id": "S26",
+      "text": {
+        "en": "NASA spacecraft reference · Lunar Module and SLA overview",
+        "zh": "NASA spacecraft reference · Lunar Module and SLA overview"
+      },
+      "url": "https://www.nasa.gov/wp-content/uploads/static/history/alsj/08_LM_%26_SLA_Overview_pp61-68.pdf",
+      "note": {
+        "en": "printed pp.61–68; descent/ascent and four legs · Preparation access: web tool opened PDF; local D15 LM text p100/107 corroborates",
+        "zh": "printed pp.61–68; descent/ascent and four legs · 准备阶段访问记录：web tool opened PDF; local D15 LM text p100/107 corroborates"
+      }
+    },
+    {
+      "id": "S27",
+      "text": {
+        "en": "NASA Glenn · Solid Rocket Engine",
+        "zh": "NASA Glenn · Solid Rocket Engine"
+      },
+      "url": "https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/solid-rocket-engine/",
+      "note": {
+        "en": "oxidiser carried; thrust in vacuum · Preparation access: public-page-read",
+        "zh": "oxidiser carried; thrust in vacuum · 准备阶段访问记录：public-page-read"
+      }
+    },
+    {
+      "id": "S28",
+      "text": {
+        "en": "NASA History · Wernher von Braun biography",
+        "zh": "NASA History · Wernher von Braun biography"
+      },
+      "url": "https://www.nasa.gov/history/sputnik/braun.html",
+      "note": {
+        "en": "V-2 and Mittelwerk forced labour · Preparation access: public-page-read",
+        "zh": "V-2 and Mittelwerk forced labour · 准备阶段访问记录：public-page-read"
+      }
+    },
+    {
+      "id": "S29",
+      "text": {
+        "en": "NASA History · Sergei P. Korolev biography",
+        "zh": "NASA History · Sergei P. Korolev biography"
+      },
+      "url": "https://www.nasa.gov/history/sputnik/korolev.html",
+      "note": {
+        "en": "imprisonment, Kolyma and prison design bureaus · Preparation access: public-page-read",
+        "zh": "imprisonment, Kolyma and prison design bureaus · 准备阶段访问记录：public-page-read"
+      }
+    },
+    {
+      "id": "S30",
+      "text": {
+        "en": "Potvin et al., Disciplinary and Interdisciplinary Science Education Research (2023) · Falling bodies across schooling and experience",
+        "zh": "Potvin et al., Disciplinary and Interdisciplinary Science Education Research (2023) · Falling bodies across schooling and experience"
+      },
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10249391/",
+      "note": {
+        "en": "doi:10.1186/s43031-023-00075-4; context-dependent misconceptions · Preparation access: public-page-read",
+        "zh": "doi:10.1186/s43031-023-00075-4; context-dependent misconceptions · 准备阶段访问记录：public-page-read"
+      }
+    },
+    {
+      "id": "S31",
+      "text": {
+        "en": "Kavanagh & Sneider, Astronomy Education Review 5(2), 2007 · Learning about Gravity II. Trajectories and Orbits: A Guide for Teachers and Curriculum Developers",
+        "zh": "Kavanagh & Sneider, Astronomy Education Review 5(2), 2007 · Learning about Gravity II. Trajectories and Orbits: A Guide for Teachers and Curriculum Developers"
+      },
+      "url": "https://istardb.org/wp-content/uploads/tainacan-items/1018/19649/Kavanagh_Sneider_2006_Learning-about-Gravity-II-1.pdf",
+      "note": {
+        "en": "review, not a Singapore pupil survey · Preparation access: web tool read PDF, title and pp19/39 misconceptions",
+        "zh": "review, not a Singapore pupil survey · 准备阶段访问记录：web tool read PDF, title and pp19/39 misconceptions"
+      }
+    },
+    {
+      "id": "S32",
+      "text": {
+        "en": "Science Centre Singapore · Stargazing at Science Centre Singapore",
+        "zh": "Science Centre Singapore · Stargazing at Science Centre Singapore"
+      },
+      "url": "https://voiddeck.science.edu.sg/articles/space/scob-stargazing/",
+      "note": {
+        "en": "observatory and lunar telescope viewing; not a timetable · Preparation access: web tool full article read; direct HTTP403 skipped",
+        "zh": "observatory and lunar telescope viewing; not a timetable · 准备阶段访问记录：web tool full article read; direct HTTP403 skipped"
+      }
+    },
+    {
+      "id": "S33",
+      "text": {
+        "en": "NLB NewspaperSG · 南洋商报 21 July 1969",
+        "zh": "NLB NewspaperSG · 南洋商报 21 July 1969"
+      },
+      "url": "https://eresources.nlb.gov.sg/newspapers/digitised/issue/nysp19690721-1",
+      "note": {
+        "en": "issue index: 阿波羅十一號, 蘇聯探月十五號 · Preparation access: NLB public issue index only; HTTP202/gate skipped, no page scans downloaded",
+        "zh": "issue index: 阿波羅十一號, 蘇聯探月十五號 · 准备阶段访问记录：NLB public issue index only; HTTP202/gate skipped, no page scans downloaded"
+      }
+    },
+    {
+      "id": "S34",
+      "text": {
+        "en": "China State Archives Administration · 人类首次登月后的活动记录",
+        "zh": "China State Archives Administration · 人类首次登月后的活动记录"
+      },
+      "url": "https://www.saac.gov.cn/daj/gjjldt/201207/fa5598cc853d40fea18313dd3ba6d097.shtml",
+      "note": {
+        "en": "Chinese forms and crew roles only; not exact mission timing · Preparation access: public-page-read",
+        "zh": "Chinese forms and crew roles only; not exact mission timing · 准备阶段访问记录：public-page-read"
+      }
+    },
+    {
+      "id": "S35",
+      "text": {
+        "en": "National Research Council (1999) · Lunokhod mobility rationale",
+        "zh": "National Research Council (1999) · Lunokhod mobility rationale"
+      },
+      "url": "https://www.nationalacademies.org/read/6430/chapter/5",
+      "note": {
+        "en": "Box 3.1: eight wheels and lid · Preparation access: public-page-read",
+        "zh": "Box 3.1: eight wheels and lid · 准备阶段访问记录：public-page-read"
+      }
+    },
+    {
+      "id": "S36",
+      "text": {
+        "en": "Natural Earth · Natural Earth terms of use",
+        "zh": "Natural Earth · Natural Earth terms of use"
+      },
+      "url": "https://www.naturalearthdata.com/about/terms-of-use/",
+      "note": {
+        "en": "public-domain vector and raster data · Preparation access: web tool full Terms of Use read: public-domain geodata",
+        "zh": "public-domain vector and raster data · 准备阶段访问记录：web tool full Terms of Use read: public-domain geodata"
+      }
+    },
+    {
+      "id": "S37",
+      "text": {
+        "en": "Wikimedia · Wikidata structured data licence",
+        "zh": "Wikimedia · Wikidata structured data licence"
+      },
+      "url": "https://www.wikidata.org/wiki/Wikidata:Licensing",
+      "note": {
+        "en": "CC0 structured main namespace data · Preparation access: web tool Wikidata:Licensing read; CC0 structured statements",
+        "zh": "CC0 structured main namespace data · 准备阶段访问记录：web tool Wikidata:Licensing read; CC0 structured statements"
+      }
+    },
+    {
+      "id": "S38",
+      "text": {
+        "en": "NASA · NASA images and media guidelines",
+        "zh": "NASA · NASA images and media guidelines"
+      },
+      "url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "note": {
+        "en": "US government work; third-party credits, marks and likenesses excluded · Preparation access: public-page-read",
+        "zh": "US government work; third-party credits, marks and likenesses excluded · 准备阶段访问记录：public-page-read"
+      }
+    },
+    {
+      "id": "S39",
+      "text": {
+        "en": "NASA Science · Apollo Press Kits",
+        "zh": "NASA Science · Apollo Press Kits"
+      },
+      "url": "https://science.nasa.gov/resource/apollo-press-kits/",
+      "note": {
+        "en": "Apollo 11 historical drawings; as-planned not as-flown · Preparation access: public-page-read",
+        "zh": "Apollo 11 historical drawings; as-planned not as-flown · 准备阶段访问记录：public-page-read"
+      }
+    },
+    {
+      "id": "S40",
+      "text": {
+        "en": "NASA Glenn · Specific Impulse",
+        "zh": "NASA Glenn · Specific Impulse"
+      },
+      "url": "https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/specific-impulse/",
+      "note": {
+        "en": "effective exhaust velocity and ideal rocket equation context · Preparation access: public-page-read",
+        "zh": "effective exhaust velocity and ideal rocket equation context · 准备阶段访问记录：public-page-read"
+      }
+    },
+    {
+      "id": "S41",
+      "text": {
+        "en": "Kenneth Tay / NLB BiblioAsia · Daylight Robbery: Singapore’s Shifting Time Zones",
+        "zh": "Kenneth Tay / NLB BiblioAsia · Daylight Robbery: Singapore’s Shifting Time Zones"
+      },
+      "url": "https://biblioasia.nlb.gov.sg/all-sections/vol-21-issue-3-oct-dec-2025-singapore-time-zones/",
+      "note": {
+        "en": "timeline caption and 1945–1981 discussion · Preparation access: web tool full NLB article read, historical offset timeline",
+        "zh": "timeline caption and 1945–1981 discussion · 准备阶段访问记录：web tool full NLB article read, historical offset timeline"
+      }
+    },
+    {
+      "id": "S42",
+      "text": {
+        "en": "Garber and Launius / NASA · A Brief History of NASA",
+        "zh": "Garber and Launius / NASA · A Brief History of NASA"
+      },
+      "url": "https://www.nasa.gov/history/SP-4225/documentation/brief-history/history.htm",
+      "note": {
+        "en": "Going to the Moon: costs; Skylab · Preparation access: public-page-read",
+        "zh": "Going to the Moon: costs; Skylab · 准备阶段访问记录：public-page-read"
+      }
+    },
+    {
+      "id": "S43",
+      "text": {
+        "en": "Paul Coffman / NASA NTRS · Rocketdyne J-2 Saturn V 2nd and 3rd Stage Engine",
+        "zh": "Paul Coffman / NASA NTRS · Rocketdyne J-2 Saturn V 2nd and 3rd Stage Engine"
+      },
+      "url": "https://ntrs.nasa.gov/citations/20100027318",
+      "note": {
+        "en": "abstract: five plus one engines; S-IVB restart · Preparation access: web tool NTRS abstract read; direct HTTP403 skipped",
+        "zh": "abstract: five plus one engines; S-IVB restart · 准备阶段访问记录：web tool NTRS abstract read; direct HTTP403 skipped"
+      }
+    },
+    {
+      "id": "S44",
+      "text": {
+        "en": "NASA Science · Moon Facts",
+        "zh": "NASA Science · Moon Facts"
+      },
+      "url": "https://science.nasa.gov/moon/facts/",
+      "note": {
+        "en": "Atmosphere and exosphere; lunar gravity · Preparation access: public-page-read-via-web",
+        "zh": "Atmosphere and exosphere; lunar gravity · 准备阶段访问记录：public-page-read-via-web"
+      }
+    },
+    {
+      "id": "S45",
+      "text": {
+        "en": "Casey Dreier / The Planetary Society; original cost reconstruction, peer-reviewed Space Policy analysis · How much did the Apollo program cost?",
+        "zh": "Casey Dreier / The Planetary Society; original cost reconstruction, peer-reviewed Space Policy analysis · How much did the Apollo program cost?"
+      },
+      "url": "https://www.planetary.org/space-policy/cost-of-apollo",
+      "note": {
+        "en": "Actual cost table, 1960–1973:25.8bn; no inflation-adjusted figure reused here · Preparation access: public-page-read-via-web",
+        "zh": "Actual cost table, 1960–1973:25.8bn; no inflation-adjusted figure reused here · 准备阶段访问记录：public-page-read-via-web"
+      }
+    },
+    {
+      "id": "S46",
+      "text": {
+        "en": "NASA / Apollo 204 Review Board · Apollo 204 Review Board: Findings, Determinations and Recommendations",
+        "zh": "NASA / Apollo 204 Review Board · Apollo 204 Review Board: Findings, Determinations and Recommendations"
+      },
+      "url": "https://www.nasa.gov/wp-content/uploads/static/history/Apollo204/find.html",
+      "note": {
+        "en": "Findings1–5: ignition uncertainty, oxygen, combustible materials, hatch and rescue arrangements · Preparation access: public-page-read-via-web",
+        "zh": "Findings1–5: ignition uncertainty, oxygen, combustible materials, hatch and rescue arrangements · 准备阶段访问记录：public-page-read-via-web"
+      }
+    },
+    {
+      "id": "S47",
+      "text": {
+        "en": "Wikidata P625 · Baikonur, Kennedy Space Center and Cape Canaveral",
+        "zh": "维基数据P625 · 拜科努尔、肯尼迪航天中心与卡纳维拉尔角"
+      },
+      "url": "https://www.wikidata.org/wiki/Q177477",
+      "note": {
+        "en": "Q177477, Q48821, Q334465. CC0 facility reference coordinates, read 27 October 2026. Kennedy statement has no additional reference; centre-level only.",
+        "zh": "Q177477、Q48821、Q334465。CC0设施参照坐标，2026年10月27日读取。肯尼迪条目没有附加参考，只用作中心级定位。"
+      }
+    }
+  ]
+}

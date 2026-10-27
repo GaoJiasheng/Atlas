@@ -37,6 +37,7 @@ export interface ParticipationFrame {
 }
 
 export interface Frame {
+  t: number;
   control: KeyframeWindow<KeyframeN>;
   movements: MovementFrame[];
   /** Events that have started (or are highlighted). */
@@ -88,8 +89,8 @@ export function frameAt(model: TimeModel, t: number, highlight: readonly string[
   const events: EventFrame[] = [];
   for (const e of model.events) {
     const started = t >= e.start;
-    if (!started && !hl.has(e.event.id)) continue;
-    events.push({ id: e.event.id, active: started && t <= e.end });
+    if (!started && (e.event.kind === 'mission' || !hl.has(e.event.id))) continue;
+    events.push({ id: e.event.id, active: started && (e.event.kind === 'mission' || model.timePresentation ? t < e.end : t <= e.end) });
   }
 
   const participation: ParticipationFrame[] = [];
@@ -99,7 +100,7 @@ export function frameAt(model: TimeModel, t: number, highlight: readonly string[
     participation.push({ entityId, flash: flashSpan > 0 ? 1 - progressAlong(en.joined, en.joined + flashSpan, t) : 0 });
   }
 
-  return { control, movements, events, participation };
+  return { t, control, movements, events, participation };
 }
 
 /** Reflect `p` through `origin` (turns a point ahead into a point behind). */

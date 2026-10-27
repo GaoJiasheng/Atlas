@@ -45,6 +45,8 @@ export interface FrameStats {
   participants: number;
   entities: number;
   activeBattles: number;
+  activeEvents: number;
+  recordedEvents: number;
   activeMovements: number;
   /** Keyframe at or before `t` (-1 before the first) and the next one (-1 after the last). */
   prevIndex: number;
@@ -60,7 +62,16 @@ export function frameStats(model: TimeModel, frame: Frame): FrameStats {
     const e = model.events.find((x) => x.event.id === ef.id)?.event;
     if (e && BATTLE_KINDS.has(e.kind)) activeBattles++;
   }
+  let activeEvents = 0;
+  let recordedEvents = 0;
+  for (const event of model.events) {
+    if (event.start > frame.t) continue;
+    recordedEvents++;
+    if (frame.t < event.activeUntil || (model.scale === 'ma' && frame.t === event.activeUntil)) activeEvents++;
+  }
   return {
+    activeEvents,
+    recordedEvents,
     participants: frame.participation.length,
     entities: model.entities.size,
     activeBattles,

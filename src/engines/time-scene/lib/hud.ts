@@ -2,6 +2,7 @@
 import type { TimeModel } from './model';
 import { BATTLE_KINDS } from './stats';
 import type { ControlRow } from '../../widgets/ControlPanel';
+import type { HudText } from '../../core/controls';
 import type { Locale } from '../../core/types';
 import { t } from '../../../i18n';
 
@@ -22,7 +23,7 @@ export function timeHudAvailability(model: TimeModel) {
 export function timeLayerRows(
   available: ReturnType<typeof timeHudAvailability>,
   locale: Locale,
-  options: { territory?: boolean; borders?: boolean; dated?: readonly ControlRow[] } = {},
+  options: { territory?: boolean; borders?: boolean; dated?: readonly ControlRow[]; labels?: { events?: HudText; participation?: HudText } } = {},
 ): ControlRow[] {
   return [
     ...(available.control ? [{ kind: 'layer' as const, id: 'control', label: t(locale, 'time.layer.control') }] : []),
@@ -30,8 +31,8 @@ export function timeLayerRows(
     ...(options.borders === false ? [] : [{ kind: 'mode' as const, id: 'borders', label: t(locale, 'time.layer.borders') }]),
     { kind: 'mode', id: 'graticule', label: t(locale, 'time.layer.graticule') },
     ...(available.movements ? [{ kind: 'mode' as const, id: 'flow', label: t(locale, 'time.layer.movements') }] : []),
-    ...(available.events ? [{ kind: 'layer' as const, id: 'battles', label: t(locale, 'time.layer.battles') }] : []),
-    ...(available.participation ? [{ kind: 'layer' as const, id: 'participation', label: t(locale, 'time.layer.participation') }] : []),
+    ...(available.events ? [{ kind: 'layer' as const, id: 'battles', label: options.labels?.events ?? t(locale, 'time.layer.battles') }] : []),
+    ...(available.participation ? [{ kind: 'layer' as const, id: 'participation', label: options.labels?.participation ?? t(locale, 'time.layer.participation') }] : []),
     ...(available.sites ? [{ kind: 'layer' as const, id: 'sites', label: t(locale, 'time.layer.sites') }] : []),
     ...(options.dated ?? []),
     { kind: 'mode', id: 'labels', label: t(locale, 'time.layer.labels') },

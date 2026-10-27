@@ -1,0 +1,24 @@
+id: sample-missions
+title: { en: "Sample: mission evidence", zh: "示例：任务证据" }
+subtitle: { en: "Synthetic mission-location engine fixture", zh: "任务地点引擎合成夹具" }
+subject: history
+tags: [beyond-syllabus]
+mode: time
+engine: time-scene
+stage: geo
+status: draft
+theme: paper
+timePresentation:
+  mode: missions
+  showArea: false
+  eventsLabel: { en: Events, zh: 事件 }
+  entityLabel: { en: Programmes, zh: 项目 }
+blocLabels:
+  axis: { en: Programme A, zh: 项目甲 }
+  allied: { en: Programme B, zh: 项目乙 }
+  neutral: { en: Context, zh: 背景 }
+  out: { en: Outside this story, zh: 本段以外 }
+strings:
+  joined: { en: Story starts, zh: 叙事开始 }
+  left: { en: Story ends, zh: 叙事结束 }
+  notYet: { en: Outside this story, zh: 本段以外 }

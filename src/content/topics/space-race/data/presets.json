@@ -1,0 +1,46 @@
+{
+  "presets": [
+    {
+      "id": "view-world",
+      "label": {
+        "en": "Earth",
+        "zh": "地球"
+      },
+      "camera": {
+        "center": [
+          -10,
+          25
+        ],
+        "zoom": 0.5
+      }
+    },
+    {
+      "id": "view-baikonur",
+      "label": {
+        "en": "Baikonur",
+        "zh": "拜科努尔"
+      },
+      "camera": {
+        "center": [
+          63.30511111111111,
+          45.96480555555556
+        ],
+        "zoom": 3.5
+      }
+    },
+    {
+      "id": "view-florida",
+      "label": {
+        "en": "Florida",
+        "zh": "佛罗里达"
+      },
+      "camera": {
+        "center": [
+          -80.62,
+          28.51
+        ],
+        "zoom": 4.8
+      }
+    }
+  ]
+}
