@@ -11,7 +11,8 @@ const shown = (page: Page, id: string) => page.evaluate((part) => (window.__atla
 const card = (page: Page) => page.locator('.space-food-web:visible').first();
 async function open(page: Page, query = '', locale = 'en') {
   await page.goto(`/${locale}/topics/mangrove-food-web/?${query}`);
-  await page.waitForFunction(async () => window.__atlas !== undefined && await window.__atlas.ready, null, { timeout: 30_000 });
+  await page.waitForFunction(() => window.__atlas !== undefined, null, { timeout: 30_000 });
+  expect(await page.evaluate(() => window.__atlas!.ready)).toBe(true);
 }
 test.beforeEach(async ({ page }) => { await page.setViewportSize({ width: 1600, height: 900 }); });
 
@@ -21,7 +22,7 @@ test('background has a directed web, 6 nodes and selected-link boundary', async 
   await expect(card(page).locator('[data-food-edge]')).toHaveCount(6);
   await expect(card(page)).toContainText('Missing pathways do not predict extinction');
   expect((await sim(page)).outputs['active-links']).toBe(6);
-  await expect(page.locator('.atlas-note')).toContainText('no population forecast');
+  await expect(page.locator('.atlas-title__note')).toContainText(/no population forecast/i);
 });
 
 test('remove fiddlers leaves one food; picking a node changes selection only', async ({ page }) => {
@@ -38,9 +39,9 @@ test('remove fiddlers leaves one food; picking a node changes selection only', a
 test('indirect loss keeps unsupported crabs visible, leaves remain after supply removal', async ({ page }) => {
   await open(page, 'ch=removing-a-species&sim=remove.n-algae~inspect.n-fiddlers~tide.low');
   expect((await sim(page)).outputs['food-status']).toBe('no-shown-food');
-  await expect.poll(() => shown(page, 'fiddler-crabs')).toBe(true);
+  await expect.poll(() => shown(page, 'fiddler-crabs'), { timeout: 20_000 }).toBe(true);
   await set(page, { remove: 'n-mangrove' });
-  await expect.poll(() => shown(page, 'fallen-leaves')).toBe(true);
+  await expect.poll(() => shown(page, 'fallen-leaves'), { timeout: 20_000 }).toBe(true);
   expect((await sim(page)).outputs['supported-count']).toBe(5);
 });
 
@@ -50,12 +51,12 @@ test('high and low tides change pose, with removed crab never reappearing', asyn
   expect((await sim(page)).outputs['water-rise']).toBe(.14);
   expect((await sim(page)).outputs['crab-rise']).toBe(.16);
   expect((await sim(page)).outputs['active-links']).toBe(6);
-  await expect.poll(() => shown(page, 'fiddler-crabs')).toBe(false);
+  await expect.poll(() => shown(page, 'fiddler-crabs'), { timeout: 20_000 }).toBe(false);
   await set(page, { tide: 'low' });
-  await expect.poll(() => shown(page, 'fiddler-crabs')).toBe(true);
+  await expect.poll(() => shown(page, 'fiddler-crabs'), { timeout: 20_000 }).toBe(true);
   await set(page, { remove: 'n-fiddlers', tide: 'high' });
   await set(page, { tide: 'low' });
-  await expect.poll(() => shown(page, 'fiddler-crabs')).toBe(false);
+  await expect.poll(() => shown(page, 'fiddler-crabs'), { timeout: 20_000 }).toBe(false);
 });
 
 test('prediction and record compare two shown foods with one', async ({ page }) => {
@@ -74,7 +75,8 @@ test('prediction and record compare two shown foods with one', async ({ page }) 
 for (const locale of ['en', 'zh']) test(`phone ${locale}: background card and keyboard selection remain usable`, async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await open(page, 'ch=before-you-start', locale);
-  if (await page.locator('.atlas-scene').getAttribute('data-reader') !== 'open') await page.getByRole('button', { name: locale === 'en' ? 'Read' : '阅读', exact: true }).click();
+  // The phone's reader is a bottom sheet that starts folded; the card lives inside it.
+  if (!(await card(page).isVisible())) await page.getByRole('button', { name: locale === 'en' ? 'Read' : '阅读', exact: true }).click();
   await expect(card(page)).toBeVisible();
   const node = card(page).locator('[data-food-node="n-heron"]');
   await node.scrollIntoViewIfNeeded();

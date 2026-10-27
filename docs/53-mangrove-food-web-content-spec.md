@@ -492,3 +492,15 @@ F16修订：攀爬蟹类合并不同种类；藻食/叶食关系不再声称为�
 
 主session待跑：`pnpm shoot mangrove-food-web --beats --tasks --keys --layout --locale en,zh --theme paper,cinema`，sample-food-web、living-things、heart-and-lungs回归截图，以及 `CI=1 ATLAS_E2E_PORT=5441 pnpm e2e`。13条新e2e规约已写（真实主题7+fixture6），本轮没有浏览器、截图、GPU或桌面控制。中文优先的代作决定/事实范围/配图软目标/待验项完整列于REVIEW.md。
 
+
+### 9.5 Browser acceptance (Claude, 2026-10-27)
+
+Looked at: all 36 beats in en/zh × paper/cinema at 1920×1080 (presentation shots), the FoodWebCard at chapter 06 for none / fiddlers / algae / mudskipper removed and at high tide, `--layout` at eight sizes incl. 1024×768 and 390×844 (en and zh, both themes), `--keys` (all keys, both locales and themes).
+
+- **Food-web card.** Arrows run food to eater (header reads "Food → consumer"). Removing algae gives climbing crabs "fewer shown foods", fiddlers "no food path shown", mudskipper "fewer shown foods", heron unchanged; removing the mudskipper leaves the heron with no path. Matches §4.4 and the beat captions. Hiding a species in the card hides the matching 3D part; high tide hides the fiddlers but the node stays.
+- **Habitat.** Low and high tide poses read correctly (water covers the bank and the lower prop roots at high; burrow opening stays; climbing crab rises). Api-api has pencil roots joined to lateral roots in the cutaway; Bakau has prop roots; the two systems are on separate trees.
+- **Animals.** Crabs: eight walking legs, two chelipeds, eye stalks; fiddler has one big and one small claw. Fish: two eyes, pectoral fins, no legs. Heron: two legs.
+- **Syllabus.** Checked against the 2023 MOE P6 "Interactions within the Environment" pages (printed 67–70): survival factors, population definition, "mangrove swamp", "structural or behavioural", unfavourable-environment outcomes ("adapt and survive; move to other places or die") and the positive impacts "Conservation, Reforestation" are all as the beats say.
+- **Fix.** The fiddler crab sat on a pencil root (the root went through its body). Moved the crab and its flow anchor from [-.35,0,.04] to [-.10,0,.13]; parts.json and geometry-audit.json regenerated from `build-topic.ts` / `audit-geometry.ts`.
+- **Perf** (`--perf --gpu`, Apple M5 Max under heavy machine load): 28 draw calls static, 34 with FLOW, 35,910 triangles, about 60 fps (load-limited). Inside the spec budget (<50/<60 calls, <0.3M tris). Page JS 503 KB gz is the shared engine chunk (identical for aircon and the fixture), not topic-specific.
+- **Left for Gavin.** 06 and 07 hide the mangrove tree when "Mangrove leaf supply" is removed, so the climbing-crab symbol floats where the trunk was (07.1). The fiddler big claw is a faceted prism and the gill-chamber schematic is an abstract shell; both are legible but crude. 04.3 and similar beats name a food link while presentation mode shows only particles, not the card.
