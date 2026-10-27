@@ -1,0 +1,67 @@
+{
+  "datasets": {
+    "ne-land": {
+      "ref": "G1",
+      "title": "Natural Earth 1:10m land (pinned D01)",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_land.geojson",
+      "file": "ne-10m-land.geojson",
+      "page": "https://www.naturalearthdata.com/about/terms-of-use/",
+      "author": "Natural Earth contributors",
+      "license": "Public domain",
+      "role": "modern regional coast, not medieval coastline"
+    },
+    "ne-places": {
+      "ref": "G2",
+      "title": "Natural Earth populated places (D02)",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_populated_places.geojson",
+      "file": "ne-10m-populated-places.geojson",
+      "page": "https://www.naturalearthdata.com/about/terms-of-use/",
+      "author": "Natural Earth contributors",
+      "license": "Public domain",
+      "role": "15 modern city reference points, not proof of landing"
+    },
+    "geonames-ir": {
+      "ref": "G3",
+      "title": "GeoNames Iran country dump (D03)",
+      "url": "https://download.geonames.org/export/dump/IR.zip",
+      "file": "geonames-IR.zip",
+      "page": "https://download.geonames.org/export/dump/readme.txt",
+      "author": "GeoNames",
+      "license": "CC BY 4.0",
+      "role": "Hormuz island town, geonameid 131231"
+    },
+    "geonames-tz": {
+      "ref": "G4",
+      "title": "GeoNames Tanzania country dump (D04)",
+      "url": "https://download.geonames.org/export/dump/TZ.zip",
+      "file": "geonames-TZ.zip",
+      "page": "https://download.geonames.org/export/dump/readme.txt",
+      "author": "GeoNames",
+      "license": "CC BY 4.0",
+      "role": "Kilwa Kisiwani, geonameid 157382; trading context not confirmed fleet landing"
+    }
+  },
+  "ohm": {},
+  "svg": {},
+  "raster": {},
+  "keyframes": [],
+  "pipeline": {
+    "plannedKeyframes": 9,
+    "focus": [
+      [
+        35,
+        -15,
+        125,
+        37
+      ]
+    ],
+    "regionLand": {
+      "padDeg": 0.25,
+      "simplifyKm": 0.5,
+      "minIslandKm2": 1,
+      "quantization": 1000000,
+      "budgetKB": 1800,
+      "mapshaper": true
+    }
+  }
+}

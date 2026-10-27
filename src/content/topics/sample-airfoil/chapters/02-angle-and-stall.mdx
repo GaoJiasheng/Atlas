@@ -1,0 +1,263 @@
+---
+{
+  "id": "angle-and-stall",
+  "order": 2,
+  "title": {
+    "en": "Angle and stall",
+    "zh": "迎角与失速"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": true,
+    "part": null,
+    "layers": [
+      "airfoil-bench",
+      "airframe",
+      "flight-flows"
+    ],
+    "camera": {
+      "position": [
+        0,
+        1,
+        7.5
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "fov": 30
+    },
+    "labels": [
+      "foil-sample",
+      "inflow-reference"
+    ],
+    "hide": [
+      "force-body"
+    ],
+    "pose": null,
+    "cutaway": "none",
+    "index": {
+      "parts": [
+        "foil-sample",
+        "chord-marker",
+        "inflow-reference",
+        "angle-marker"
+      ]
+    },
+    "summary": {
+      "en": "Draft airfoil engine exercise.",
+      "zh": "草稿翼型引擎测试。"
+    },
+    "sim": {
+      "set": {
+        "angle-deg": 4,
+        "airspeed-mps": 40,
+        "altitude-m": 0,
+        "flow-view": "streamlines",
+        "diagram-case": "none"
+      },
+      "try": {
+        "vary": "angle-deg",
+        "also": [
+          "flow-view",
+          "airspeed-mps"
+        ],
+        "keep": [
+          "airspeed-mps"
+        ],
+        "observe": [
+          "angle-now",
+          "cl-now",
+          "lift-n",
+          "flow-state"
+        ],
+        "record": true
+      }
+    },
+    "beats": [
+      {
+        "sim": {
+          "set": {
+            "angle-deg": 0,
+            "airspeed-mps": 40,
+            "altitude-m": 0,
+            "flow-view": "streamlines",
+            "diagram-case": "none"
+          }
+        },
+        "run": true,
+        "part": null,
+        "view": "assembled",
+        "explode": 0,
+        "cutaway": "none",
+        "pose": null,
+        "hide": [
+          "force-body"
+        ],
+        "labels": [
+          "foil-sample",
+          "inflow-reference"
+        ],
+        "caption": {
+          "en": "Draft test state · SIM, not aircraft performance.",
+          "zh": "草稿测试状态 · 模拟，并非飞机性能。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "angle-deg": 4,
+            "airspeed-mps": 40,
+            "altitude-m": 0,
+            "flow-view": "pressure",
+            "diagram-case": "none"
+          }
+        },
+        "run": true,
+        "part": null,
+        "view": "assembled",
+        "explode": 0,
+        "cutaway": "none",
+        "pose": null,
+        "hide": [
+          "force-body"
+        ],
+        "labels": [
+          "foil-sample",
+          "inflow-reference"
+        ],
+        "caption": {
+          "en": "Draft test state · SIM, not aircraft performance.",
+          "zh": "草稿测试状态 · 模拟，并非飞机性能。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "angle-deg": 12,
+            "airspeed-mps": 40,
+            "altitude-m": 0,
+            "flow-view": "streamlines",
+            "diagram-case": "none"
+          }
+        },
+        "run": true,
+        "part": null,
+        "view": "assembled",
+        "explode": 0,
+        "cutaway": "none",
+        "pose": null,
+        "hide": [
+          "force-body"
+        ],
+        "labels": [
+          "foil-sample",
+          "inflow-reference"
+        ],
+        "caption": {
+          "en": "Draft test state · SIM, not aircraft performance.",
+          "zh": "草稿测试状态 · 模拟，并非飞机性能。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "angle-deg": 16,
+            "airspeed-mps": 40,
+            "altitude-m": 0,
+            "flow-view": "pressure",
+            "diagram-case": "none"
+          }
+        },
+        "run": true,
+        "part": null,
+        "view": "assembled",
+        "explode": 0,
+        "cutaway": "none",
+        "pose": null,
+        "hide": [
+          "force-body"
+        ],
+        "labels": [
+          "foil-sample",
+          "inflow-reference"
+        ],
+        "caption": {
+          "en": "Draft test state · SIM, not aircraft performance.",
+          "zh": "草稿测试状态 · 模拟，并非飞机性能。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "angle-deg": -16,
+            "airspeed-mps": 40,
+            "altitude-m": 0,
+            "flow-view": "streamlines",
+            "diagram-case": "none"
+          }
+        },
+        "run": true,
+        "part": null,
+        "view": "assembled",
+        "explode": 0,
+        "cutaway": "none",
+        "pose": null,
+        "hide": [
+          "force-body"
+        ],
+        "labels": [
+          "foil-sample",
+          "inflow-reference"
+        ],
+        "caption": {
+          "en": "Draft test state · SIM, not aircraft performance.",
+          "zh": "草稿测试状态 · 模拟，并非飞机性能。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "angle-deg": 20,
+            "airspeed-mps": 40,
+            "altitude-m": 0,
+            "flow-view": "streamlines",
+            "diagram-case": "none"
+          }
+        },
+        "run": true,
+        "part": null,
+        "view": "assembled",
+        "explode": 0,
+        "cutaway": "none",
+        "pose": null,
+        "hide": [
+          "force-body"
+        ],
+        "labels": [
+          "foil-sample",
+          "inflow-reference"
+        ],
+        "caption": {
+          "en": "Draft test state · SIM, not aircraft performance.",
+          "zh": "草稿测试状态 · 模拟，并非飞机性能。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Draft engine fixture text. These values are model results, not measurements.
+
+</Lang>
+
+<Lang zh>
+
+草稿引擎测试文字。这里的数值由模型给出，并非实测。
+
+</Lang>

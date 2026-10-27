@@ -748,6 +748,11 @@ T01–T28 的 unit tests 逐项编写；数字容差见 §4.9，clock 用注入 
 | `shoot sample-orbit --beats --keys --layout --theme paper,cinema` | 39 拍 × 2 主题 0 failures，39/39 直链同景，orb-t = orbitSeek，layout 0（八个尺寸），console clean |
 | 回归 `--beats --keys` | light-and-shadows、sample-light、energy-conversion、sample-heart、materials、flower-and-seed、fractions、sample-time：均 0 failures、console clean |
 
+| `CI=1 pnpm e2e`（全量，合并 main 前的构建） | 333 passed / 11 failed：heart-and-lungs、sample-heart（屏气后呼吸动画未归零）、singapore-after-1965、singapore-land-use、sample-space smoke、sample-forces、space-label-drag 均为超时或帧率阈值；同一负载下在 main 的构建上逐个重跑，失败相同（机器负载 100–160） |
+| 合并 main（蒸汽机构引擎、inside-the-earth）后 | check 0 errors；4308 tests；58 topics；119 pages；`shoot sample-orbit --beats`（两主题）39/39、0 failures；`shoot sample-mechanism --beats --keys --layout` 16/16、0 failures、console clean；e2e sample-orbit 8/9 + sample-mechanism 10/11 单独重跑（失败均为高负载下超时 / 0.4 rad 帧步阈值） |
+
+e2e 的直链测试原来逐个打开 39 拍（负载下 7–10 分钟），改为每章第一拍 + BG.3 真尺度共 9 拍；全部 39 拍的对照由 `shoot --beats` 做。shoot 的拍 / 直链对照不再比较 `rendered`（逐帧绘制状态，含淡入），这一项由 orbitIssues 在帧落地后对照快照检查——高负载下直链 400 ms 时首帧可能还没画，造成 2/39 的偶发差异。
+
 看过的截图：地轴在 02 章两极值拍方向不变（观察点相对地心偏移逐位相同）；01/04 章明暗界线朝向太阳（相机在夜侧时整球暗，是对的）；04 章上弦月北朝上右亮 50.13 %；05/06 章日全食 / 环食 / 月全食的视盘与影图；BG.3 真尺度标签；手机 390 宽。
 
 仍留给内容施工：03 章观察点、04/05 章月球在章初镜头下没有可见标签（夹具镜头，shoot 只记不判）；轨道导引管在近景里偏粗（半径 = 地球显示半径 × 0.012）；`simEffects` 的普通绑定读的是进入章节时的 orbit 输出，运行中不会刷新——目前夹具没有这类绑定，正式主题若要按 orbit 输出显隐零件需先补。

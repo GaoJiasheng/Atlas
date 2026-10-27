@@ -15,6 +15,7 @@
  * This module is build-time only (zod); client code imports its *types* only.
  */
 import { z } from 'zod';
+import { deepTimeBundleSchema } from './deep-time';
 import {
   bilingual,
   colorRef,
@@ -321,8 +322,7 @@ export const EVENT_RESULTS = ['attacker', 'defender', 'draw', 'inconclusive'] as
 
 const forceTable = z.record(kebabId, z.number().nonnegative());
 
-export const eventSchema = z
-  .object({
+const eventFields = {
     id: kebabId,
     t: timePoint,
     until: timePoint.optional(),
@@ -343,9 +343,9 @@ export const eventSchema = z
     sources: z.array(sourceId).optional(),
     /** Optional metadata only; nothing is hidden or gated on it. */
     sensitive: z.boolean().default(false),
-  })
-  .strict()
-  .superRefine((e, ctx) => {
+};
+
+export const eventSchema = z.object(eventFields).strict().superRefine((e, ctx) => {
     if ((e.kind === 'battle' || e.kind === 'landing' || e.kind === 'bombing') && !e.sides) {
       ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['sides'], message: `${e.kind} events need sides` });
     }
@@ -362,6 +362,11 @@ export const eventSchema = z
 export type SceneEvent = z.output<typeof eventSchema>;
 
 export const eventsFile = z.array(eventSchema);
+
+/** Date-free sites exist only in the explicitly selected monthly branch. */
+export const staticSite = z.object({ ...eventFields, kind: z.literal('site'), t: z.never().optional(), until: z.never().optional() }).strict();
+export type StaticSite = z.output<typeof staticSite>;
+
 
 /* ------------------------------------------------------------------ */
 /* presets.json (optional)                                             */
@@ -444,6 +449,7 @@ export type RiversFile = z.output<typeof riversFile>;
 /** Parsed `data/*.json` of a GeoStage topic, keyed by file name. */
 export const timeSceneGeoData = z
   .object({
+    deepTime: deepTimeBundleSchema.optional(),
     entities: entitiesFile,
     control: controlFile,
     movements: movementsFile,
@@ -490,6 +496,26 @@ export const timeSceneGeoData = z
   });
 export type TimeSceneGeoData = z.output<typeof timeSceneGeoData>;
 
+export const climatologyGeoData = z.object({
+  entities: z.array(z.never()).max(0),
+  control: z.object({ keyframes: z.array(z.never()).max(0) }).strict(),
+  movements: z.array(z.never()).max(0),
+  events: z.array(staticSite),
+  presets: presetsFile.optional(), sources: sourcesFile.optional(), glossary: glossaryFile.optional(),
+}).strict().superRefine((data, ctx) => {
+  const sources = sourceIds(data.sources);
+  data.events.forEach((e, i) => {
+    const entityRef = (id: string, path: (string | number)[]) => ctx.addIssue({code: z.ZodIssueCode.custom, path: ['events', i, ...path], message: `unknown entity "${id}" (climatology has no entities)`});
+    if (e.sides) { entityRef(e.sides.attacker, ['sides', 'attacker']); entityRef(e.sides.defender, ['sides', 'defender']); }
+    for (const field of ['forces', 'casualties'] as const) for (const id of Object.keys(e[field] ?? {})) entityRef(id, [field, id]);
+  });
+  data.events.forEach((e, i) => (e.sources ?? []).forEach((id, j) => {
+    if (!sources.has(id)) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['events', i, 'sources', j], message: `unknown source "${id}" (needs data/sources.json)` });
+  }));
+});
+export type ClimatologyGeoData = z.output<typeof climatologyGeoData>;
+
+
 /**
  * DiagramStage data (SVG keyframes) is specified in Phase 2. Until then any
  * object is accepted so a diagram topic can be scaffolded.
@@ -516,6 +542,9 @@ export type TimeLayer = (typeof TIME_LAYERS)[number];
 export const timeBeat = z
   .object({
     t: timePoint.optional(),
+    inset: z.enum(['world', 'southeast-asia', 'mexico']).optional(),
+    insetVisible: z.boolean().optional(),
+    fossilMode: z.enum(['age-window', 'all-mesozoic']).optional(),
     camera: geoCamera.optional(),
     layers: z.array(kebabId).optional(),
     highlight: z.array(kebabId).optional(),
@@ -533,10 +562,21 @@ export const timeChapterState = z
   .object({
     /** Target time for the chapter (`t` in the URL). */
     time: timePoint.optional(),
+    inset: z.enum(['world', 'southeast-asia', 'mexico']).optional(),
+    insetVisible: z.boolean().optional(),
+    fossilMode: z.enum(['age-window', 'all-mesozoic']).optional(),
     camera: geoCamera.optional(),
     layers: z.array(kebabId).optional(),
     /** Event / movement / entity ids to emphasise. */
     highlight: z.array(kebabId).optional(),
+    /** Ordered event ids reachable from this chapter's reader (a reconstruction topic: its modern points / cards, docs/47 E-DE2); never inherited. */
+    index: z.array(kebabId).optional().superRefine((ids, ctx) => {
+      const seen = new Set<string>();
+      ids?.forEach((id, i) => {
+        if (seen.has(id)) ctx.addIssue({ code: z.ZodIssueCode.custom, message: `duplicate event "${id}"`, path: [i] });
+        seen.add(id);
+      });
+    }),
     theme: theme.optional(),
     /** The child's question for this chapter (reading panel header when there is no `summary`). */
     question: bilingual.optional(),
@@ -556,12 +596,27 @@ export const timeChapterState = z
   .refine((s) => !s.answer || s.question, { message: '`answer` needs a `question`', path: ['answer'] });
 export type TimeChapterState = z.output<typeof timeChapterState>;
 
+const { t: _historicalBeatTime, ...monthlyBeatFields } = timeBeat.shape;
+export const climatologyBeat = z.object({ ...monthlyBeatFields, month: z.number().int().min(1).max(12) }).strict();
+export type ClimatologyBeat = z.output<typeof climatologyBeat>;
+// Reuse all established chapter fields, without admitting historical time.
+const { time: _historicalChapterTime, beats: _historicalBeats, ...monthlyChapterFields } = timeChapterState.innerType().shape;
+export const climatologyChapterState = z.object({
+  ...monthlyChapterFields, month: z.number().int().min(1).max(12),
+  index: z.array(kebabId).refine((ids) => new Set(ids).size === ids.length, 'index must not contain duplicate site ids').optional(), beats: z.array(climatologyBeat).min(1).optional(),
+}).strict().refine((s) => !s.answer || s.question, { message: '`answer` needs a `question`', path: ['answer'] });
+export type ClimatologyChapterState = z.output<typeof climatologyChapterState>;
+
+
 /* ------------------------------------------------------------------ */
 /* Id helpers for the validator                                        */
 /* ------------------------------------------------------------------ */
 
 export function timeSceneIds(data: TimeSceneGeoData, topic?: Pick<TopicLike, 'datedLayers'>): { kind: string; id: string }[] {
   return [
+    ...(data.deepTime ? (data.glossary?.terms ?? []).map((t) => ({ kind: 'term', id: t.id })) : []),
+    ...(data.deepTime?.reconstruction.frames ?? []).map((f) => ({ kind: 'reconstruction frame', id: f.id })),
+    ...[...(data.deepTime?.points ?? []), ...(data.deepTime?.cards ?? [])].map((p) => ({ kind: 'modern evidence', id: p.id })),
     ...data.entities.map((e) => ({ kind: 'entity', id: e.id })),
     ...data.movements.map((m) => ({ kind: 'movement', id: m.id })),
     ...data.events.map((e) => ({ kind: 'event', id: e.id })),
@@ -579,9 +634,19 @@ export function timeChapterRefs(state: TimeChapterState): string[] {
   return [...(state.highlight ?? []), ...(state.beats ?? []).flatMap((b) => b.highlight ?? [])];
 }
 
+/** The reader index lists events; a reconstruction topic's lists its modern points / cards (docs/47 E-DE2) instead. */
+export function timeChapterIndexIssues(state: TimeChapterState, data: Pick<TimeSceneGeoData, 'events'> & Partial<Pick<TimeSceneGeoData, 'deepTime'>>): string[] {
+  if (data.deepTime) {
+    const objects = new Set([...data.deepTime.points, ...data.deepTime.cards].map((object) => object.id));
+    return (state.index ?? []).flatMap((id, i) => objects.has(id) ? [] : [`state.index.${i}: unknown modern point or card "${id}"`]);
+  }
+  const events = new Set(data.events.map((event) => event.id));
+  return (state.index ?? []).flatMap((id, i) => events.has(id) ? [] : [`state.index.${i}: unknown event "${id}"`]);
+}
+
 /** Layer ids are topic-dependent, so check them after parsing the chapter. */
-export function timeChapterLayerIssues(state: TimeChapterState, layers: readonly Pick<DatedLayerDef, 'id'>[] = []): string[] {
-  const known = new Set<string>([...TIME_LAYERS, ...layers.map((layer) => layer.id)]);
+export function timeChapterLayerIssues(state: Pick<TimeChapterState, 'layers' | 'beats'>, layers: readonly Pick<DatedLayerDef, 'id'>[] = []): string[] {
+  const known = new Set<string>([...TIME_LAYERS, 'fossils-modern', ...layers.map((layer) => layer.id)]);
   const issues: string[] = [];
   const check = (ids: readonly string[] | undefined, path: string) => {
     for (const id of ids ?? []) if (!known.has(id)) issues.push(`${path}: unknown layer "${id}"`);

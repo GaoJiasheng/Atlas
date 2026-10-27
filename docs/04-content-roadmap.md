@@ -11,8 +11,10 @@
 | 空调是怎么把房间变冷的 | science | space | SpaceScene/Model3D | Sci P4 热；课外 | 2026 第二个（验证 SpaceScene） | 已完成 5 章（待审） |
 | 一只蝗虫的身体（黑角瓦兰蝗解剖） | biology | space | SpaceScene/Model3D | Sci P3 Diversity、Cycles；与人体系统对照；详见 docs/14 | 2026 第三个（验证生物解剖模板） | 已完成 6 章（待审） |
 | 人体肌肉系列（胸 / 背 / 肩 / 臂 / 腿 / 腰腹） | biology | space | SpaceScene/Model3D | 人体系统与课外健身知识；详见 docs/16 §16 | 2026 | published ×6（2026-10-12） |
+| 红树林食物网（生境剖面、适应与条件性取食关系） | science | space + sim | SpaceScene/Model3D + table + directed foodWeb card | Sci P6 环境中的相互作用；详见 docs/53 | 2026 提前 | published（2026-10-27）：背景 + 7 章、36 拍；浏览器验收待主 session |
 | 新加坡 1819–1965 | history | time | TimeScene/Geo | SS P4 新加坡故事 | 2027 |
 | 一株植物（盆栽辣椒：根茎叶花果种子，P3–P6 五个课题） | biology | space | SpaceScene/Model3D | Sci P3 生命周期；P4 植物部位与功能；P5 运输系统与繁殖；P6 光合作用与传播；详见 docs/26 | 2026 提前 | published（2026-10-14）：7 章 37 拍 |
+| 青蛙与鸡的生活史（卵、幼体、成体与下一代） | biology | space + sim | SpaceScene/Model3D + 既有 `table`、pose、visible | Sci P3 Cycles in Plants and Animals (Life Cycles)；详见 docs/56 | 2026（提前） | published（2026-10-27）：背景 + 5 章、30 拍；浏览器验收交主会话 |
 | 生物的分类（标本台：生物与非生物、四大类、开花与不开花植物、动物六类、分错了的动物、自己做流程图） | science | space + sim | SpaceScene/Model3D + 试一试（`sim`，kind sort） | Sci P3 Diversity of Living and Non-Living Things；详见 docs/38 | 2026（提前） | published（2026-10-22）：背景 + 6 章 39 拍 |
 | 磁铁 | science | space + sim | SpaceScene/Model3D + 试一试（`sim`，kind magnet） | Sci P3 磁；详见 docs/22 | 2028 | spec 草案 |
 | 消化系统 | biology | space | Layer2D | Sci P4 人体系统 | 2028 |
@@ -20,7 +22,7 @@
 | 新加坡的四大水喉（1867 年至今，蓄水池、厂址、柔佛河输水管） | geography | time | TimeScene/Geo（岛尺度底图，docs/17 C1） | SS P3 资源；详见 docs/24 §15 | 2026（提前） | published（2026-10-14），背景 + 5 章 23 拍 |
 | 光与影（光学实验台 + 暗箱 + 户外杆影；看见、直线传播、影子的形状与大小、太阳下的影子） | science | space + sim | SpaceScene/Model3D + 试一试（`sim`，kind light） | Sci P4 Energy Forms and Uses（Light）；详见 docs/35 | 2026（提前） | published（2026-10-20）：背景 + 7 章 41 拍 |
 | 大陆漂移与板块 | geography | time | TimeScene/Geo+morph | 课外拓展（地理） | 2028–2029 |
-| 山脉与火山形成 | geography | time + space | Diagram + Model3D | 课外拓展 | 2029 |
+| 地球内部与火山剖面 | geography | space + sim | SpaceScene/Model3D + 既有table试一试 | 地理拓展（非新增PSLE必考单元）；详见 docs/48 | 2026（提前） | published（2026-10-27）：背景 + 7章、36拍、91件 |
 | 电路是怎么工作的（手电筒 + 电路板） | science | space + sim | SpaceScene/Model3D + 试一试（`sim`，kind circuit） | Sci P5 Electrical System；详见 docs/23 | 2026 提前（与植物并行） | published（2026-10-14）：6 章 31 拍，「试一试」扩展（`sim`）随本主题上线 |
 | 呼吸与循环系统 | biology | space | Layer2D/Model3D | Sci P5 呼吸与循环（人体与植物） | 2030 |
 | 力（摩擦、重力、弹力） | science | sim | Simulation | Sci P6 | 2030 |

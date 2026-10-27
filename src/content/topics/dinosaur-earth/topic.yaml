@@ -1,0 +1,29 @@
+id: dinosaur-earth
+title: { en: "Dinosaur Earth", zh: "恐龙时代的地球" }
+subtitle: { en: "Moving continents, fossil finds and the boundary at 66 Ma", zh: "移动的大陆、化石发现与6600万年前的界线" }
+subject: geography
+tags: [dinosaurs, deep-time, beyond-syllabus]
+mode: time
+engine: time-scene
+stage: geo
+theme: paper
+sensitivity: open
+status: published
+maDigits: 3
+illustration: dinosaur-earth
+note:
+  en: "Reconstructed land from PALEOMAP PaleoDEM v2; modern find locations are shown separately. Selected records are not a dinosaur census."
+  zh: "陆地根据 PALEOMAP PaleoDEM v2 复原；今天的发现地点另图显示。所选记录不是恐龙普查。"
+basemap: { reconstruction: { file: de-reconstruction, selection: hold-older } }
+modernInset:
+  file: de-modern-inset
+  land: de-modern-land
+  countries: de-modern-countries
+  label: { en: "Modern find locations · today", zh: "现代发现地点 · 今天" }
+  defaultView: world
+  defaultVisible: true
+  ageWindowHalfWidthMa: 5
+  views:
+    - { id: world, label: { en: "World", zh: "世界" }, bounds: [-180, -85, 180, 85] }
+    - { id: southeast-asia, label: { en: "Southeast Asia", zh: "东南亚" }, bounds: [90, -10, 120, 25] }
+    - { id: mexico, label: { en: "Mexico", zh: "墨西哥" }, bounds: [-105, 10, -80, 30] }

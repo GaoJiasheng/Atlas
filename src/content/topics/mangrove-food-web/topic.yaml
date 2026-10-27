@@ -1,0 +1,16 @@
+id: mangrove-food-web
+title: { en: "Mangrove Food Web", zh: "红树林食物网" }
+subtitle: { en: "Conditions, adaptations and selected food pathways in a mangrove habitat", zh: "红树林生境中的条件、适应与选入的食物路径" }
+shortTitle: { en: "Mangrove food web", zh: "红树林食物网" }
+subject: science
+levels: [P6]
+tags: [singapore, psle, p6, mangroves, space]
+moe: ["MOE 2023 Science P6 Interactions within the Environment: survival factors; organism, population, community and habitat; structural and behavioural adaptations; feeding relationships and energy; human impact"]
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: published
+illustration: mangrove-food-web
+note: { en: "Habitat teaching model · selected possible feeding links · schematic tide poses · no population forecast", zh: "生境教学模型 · 选入部分可能的取食关系 · 潮位姿态示意 · 不预测种群数量" }

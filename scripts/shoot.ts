@@ -31,10 +31,13 @@ import { dirname, extname, join, normalize, resolve } from 'node:path';
 import type { AddressInfo } from 'node:net';
 import { parseArgs } from 'node:util';
 import { gzipSync } from 'node:zlib';
+import { parse as parseYaml } from 'yaml';
 import { chromium, type Browser, type Page } from '@playwright/test';
 import { hudLayoutIssues, LAYOUT_SIZES } from '../tests-e2e/hud-layout';
 import { capacity, fillBounds, fillShapeForPrimitive, levelForVolume } from '../src/engines/space-scene/lib/fill';
 import { bendAxisIndex, bendCurve } from '../src/engines/space-scene/lib/bend';
+import { solveAirfoil } from '../src/engines/space-scene/lib/sim/airfoil';
+import { airfoilInputKey } from '../src/engines/space-scene/lib/sim/airfoil-cache';
 import { animationHz, shiftEntry, tintLevel } from '../src/engines/space-scene/lib/sim/bind';
 import type { PartsFile } from '../src/engines/space-scene/schema';
 import type { MechanismReading } from '../src/engines/space-scene/bridge';
@@ -243,12 +246,18 @@ class Session {
    */
   async load(path: string, what: string): Promise<void> {
     const { page } = this;
-    await page.goto(`${this.origin}${path}`);
-    await page.waitForFunction(() => window.__atlas !== undefined, null, { timeout: 60_000 });
-    const ready = await page.evaluate(() =>
-      Promise.race([window.__atlas!.ready, new Promise<boolean>((resolve) => window.setTimeout(() => resolve(false), 60_000))]),
-    );
-    if (!ready) throw new Error(`${what}: stage never became ready`);
+    // `__atlas.ready` gives up after 20 s; software WebGL on a heavily loaded machine can need longer
+    // for a first paint, so a stage that is not ready is loaded afresh twice more before it fails.
+    for (let attempt = 1; ; attempt++) {
+      await page.goto(`${this.origin}${path}`);
+      await page.waitForFunction(() => window.__atlas !== undefined, null, { timeout: 60_000 });
+      const ready = await page.evaluate(() =>
+        Promise.race([window.__atlas!.ready, new Promise<boolean>((resolve) => window.setTimeout(() => resolve(false), 60_000))]),
+      );
+      if (ready) return;
+      if (attempt === 3) throw new Error(`${what}: stage never became ready`);
+      console.log(`  ${what}: stage not ready, loading again (${attempt + 1}/3)`);
+    }
   }
 
   /** The topic page as the session opened it (after link checks have navigated the tab away): loaded, in the session's theme. */
@@ -389,24 +398,53 @@ function unlabelled(s: Session): Promise<string[]> {
     const shown = new Set(
       [...document.querySelectorAll<HTMLElement>('.ts-co')].filter((e) => e.dataset.hidden === 'false' && e.style.opacity === '1').map((e) => e.dataset.id),
     );
+    for (const el of document.querySelectorAll<HTMLElement>('.ts-modern-label[data-id], .ts-evidence-card[data-id]')) {
+      const r = el.getBoundingClientRect(); if (r.width > 0 && r.height > 0 && el.checkVisibility()) shown.add(el.dataset.id);
+    }
     const highlight = (window.__atlas!.state() as { highlight?: string[] }).highlight ?? [];
     return highlight.filter((id) => !shown.has(id));
   });
 }
 
-/** A SpaceScene beat's scene: the fields a beat sets, the try-it values on show and the runs not at their end; `null` for other engines. */
+/** The authored beat's rendered scene, including discrete monthly maps. */
 type BeatScene = Record<string, unknown> & { unfinished: string[] };
-function beatSceneOf(page: Page): Promise<BeatScene | null> {
+async function beatSceneOf(page: Page): Promise<BeatScene | null> {
+  // A reconstruction map (docs/47 E-DE1): compare the sample actually drawn, so let the frame settle first.
+  await page
+    .waitForFunction(() => {
+      const g = (window.__atlas!.engine as unknown as { geology?(): { reconstruction: { status: string } | null } }).geology?.();
+      return !g || (g.reconstruction !== null && g.reconstruction.status !== 'loading');
+    }, null, { timeout: 30_000 })
+    .catch(() => undefined);
   return page.evaluate(() => {
-    if (!document.querySelector('.atlas-scene[data-engine="space-scene"]')) return null;
+    const geology = (window.__atlas!.engine as unknown as { geology?(): { reconstruction: Record<string, unknown> | null; inset: Record<string, unknown> } }).geology?.();
+    if (geology) {
+      const st = window.__atlas!.state() as unknown as Record<string, unknown>;
+      const { geometryUpdates: _updates, ...reconstruction } = geology.reconstruction ?? {};
+      return { ...Object.fromEntries(['chapter', 't', 'highlight', 'layers', 'camera', 'inset', 'insetVisible', 'fossilMode'].map((k) => [k, st[k] ?? null])), reconstruction, inset: geology.inset, unfinished: [] };
+    }
     const st = window.__atlas!.state() as unknown as Record<string, unknown>;
+    const climate = (window.__atlas!.engine as unknown as {
+      climatology?(): { month: number; renderedMonth: number; authoredMonth: number; periodId: string; layers?: Record<string, { status: string }> };
+    }).climatology?.();
+    const shownLayers = Array.isArray(st.layers) ? (st.layers as string[]) : [];
+    if (climate) return {
+      notReady: Object.entries(climate.layers ?? {}).filter(([id, l]) => shownLayers.includes(id) && l.status !== 'ready').map(([id, l]) => `${id}:${l.status}`),
+      ...Object.fromEntries(['chapter', 'beat', 'month', 'layers', 'highlight', 'camera'].map(k => [k, st[k] ?? null])),
+      renderedMonth: climate.renderedMonth,
+      authoredMonth: climate.authoredMonth,
+      periodId: climate.periodId,
+      unfinished: [],
+    };
+    if (!document.querySelector('.atlas-scene[data-engine="space-scene"]')) return null;
     const keys = ['chapter', 'view', 'part', 'explode', 'run', 'cutaway', 'pose', 'hidden', 'ghosted', 'layers', 'exercise', 'tints', 'sites', 'camera'];
     type Run = { t: number; duration: number; playing: boolean };
     const sim = (window.__atlas!.engine as unknown as { sim?(): { values: Record<string, unknown>; timeline: Record<string, Run> } | null }).sim?.() ?? null;
     return {
       ...Object.fromEntries(keys.map((k) => [k, st[k] ?? null])),
       sim: sim?.values ?? null,
-      // Orbit sims (docs/44): the shared snapshot and its outputs, rounded to 1e-6 (snapshot ids differ between loads).
+      // Orbit sims (docs/44): the shared snapshot and its outputs, rounded to 1e-6. Snapshot ids differ between loads, and what the
+      // stage drew (`rendered`, fades included) is per frame: orbitIssues checks it against the snapshot once the frame lands.
       ...(() => {
         const e = window.__atlas!.engine as unknown as { orbit?(): Record<string, unknown> | null; sim?(): unknown };
         const orbit = e.orbit?.();
@@ -417,10 +455,11 @@ function beatSceneOf(page: Page): Promise<BeatScene | null> {
             : Array.isArray(v)
               ? v.map(normalize)
               : v && typeof v === 'object'
-                ? Object.fromEntries(Object.entries(v).filter(([k]) => k !== 'snapshotId').map(([k, x]) => [k, normalize(x)]))
+                ? Object.fromEntries(Object.entries(v).filter(([k]) => k !== 'snapshotId' && k !== 'rendered').map(([k, x]) => [k, normalize(x)]))
                 : v;
         return { orbit: normalize(orbit), orbitOutputs: normalize(e.sim?.()) };
       })(),
+      airfoil: (()=>{const a=(window.__atlas!.engine as unknown as {airfoil?():{inputKey:string;mode:string;cl:number;lift:number;plot:unknown}}).airfoil?.();return a?{inputKey:a.inputKey,mode:a.mode,cl:a.cl,lift:a.lift,plot:a.plot}:null;})(),
       unfinished: Object.entries(sim?.timeline ?? {})
         .filter(([, r]) => r.playing || r.t !== r.duration)
         .map(([id]) => id),
@@ -732,6 +771,24 @@ async function mechanismDrawIssues(s: Session): Promise<string[]> {
   return issues;
 }
 
+/** Airfoil beats and their links must agree with the resolved scalar snapshot and current field. */
+async function airfoilIssues(s:Session):Promise<string[]> {
+  const path=join(ROOT,'src/content/topics',s.topic,'data/parts.json');
+  if(!existsSync(path))return [];
+  const file=JSON.parse(readFileSync(path,'utf8')) as PartsFile;
+  const d=file?.sim?.airfoil;if(!d)return [];
+  await s.page.waitForFunction(()=>{const e=window.__atlas!.engine as unknown as {airfoil():{fieldReady:boolean}};return e.airfoil()?.fieldReady;},null,{timeout:30000});
+  const reading=await s.page.evaluate(()=>{const e=window.__atlas!.engine as unknown as {sim():{values:Record<string,number|string|boolean>};airfoil():{inputKey:string;mode:string;cl:number;lift:number;pathCount:number;pressureCount:number;pathStatuses:{status:string}[];plot:{current:{x:number;y:number}}}};return {a:e.airfoil(),v:e.sim().values};});
+  const want=solveAirfoil(d,reading.v),a=reading.a,out:string[]=[];
+  if(a.inputKey!==airfoilInputKey(d,reading.v))out.push('airfoil field inputKey is stale');
+  if(a.mode!==want.mode||Math.abs(a.cl-want.cl)>1e-8||Math.abs(a.lift-want.lift)>1e-5)out.push('airfoil mode/Cl/lift differs from resolved inputs');
+  if(want.mode==='ideal-attached'&&(a.pathCount!==16||a.pressureCount!==64||a.pathStatuses.some(p=>p.status!=='complete')))out.push('attached airfoil field incomplete');
+  if(want.mode!=='ideal-attached'&&(a.pathCount||a.pressureCount))out.push('still/stall retains attached paths or pressure');
+  const output=file!.sim!.outputs.find(o=>o.id===d.plot.y),y=output?.from==='lift-n'?want.lift:want.cl;
+  if(a.plot.current.x!==want.angle||Math.abs(a.plot.current.y-y)>1e-8)out.push('airfoil plot current point is stale');
+  return out;
+}
+
 /**
  * Every beat opened from its link (`?ch=<chapter>&b=<n>`) in a fresh document of its own, against the scene the presentation
  * showed: a field that differs, or a run not at its end (links jump to the end), is a beat failure.
@@ -752,6 +809,7 @@ async function runBeatLinks(s: Session, beats: { chapter: string; index: number 
     const link = `?ch=${encodeURIComponent(b.chapter)}&b=${b.index + 1}`;
     await s.load(`${path}${link}${theme ? `&theme=${theme}` : ''}`, `${name} (link)`);
     await linked.waitForTimeout(400);
+    await settleClimate(linked);
     const got = await beatSceneOf(linked);
     const diffs: string[] = [];
     for (const key of Object.keys(want)) {
@@ -767,6 +825,7 @@ async function runBeatLinks(s: Session, beats: { chapter: string; index: number 
     for (const issue of await tintIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     for (const issue of await orbitIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     for (const issue of await mechanismDrawIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
+    for (const issue of await airfoilIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     if (diffs.length) report.beatFailures.push(`${name}: opened from ${link}: ${diffs.join('; ')}`);
     else same++;
     if (diffs.length) console.log(`  ${`${name} (link)`.padEnd(36)} FAIL  ${diffs.join('; ').slice(0, 300)}`);
@@ -812,9 +871,14 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
       missing = await unlabelled(s);
     }
     if (missing.length) report.beatNotes.push(`${name}: no label for ${missing.join(', ')}`);
+    // A monthly map commits its month on a drawn frame once the rain source has settled (slow under software GL): wait, then judge.
+    await settleClimate(s.page);
     // The scene this beat shows (SpaceScene), for its link below.
     const scene = landed ? await beatSceneOf(s.page) : null;
     if (scene) shown.set(name, scene);
+    if (scene && 'renderedMonth' in scene && (scene.month !== scene.renderedMonth || scene.month !== scene.authoredMonth))
+      report.beatFailures.push(`${name}: authored/store/rendered months disagree: ${scene.authoredMonth}/${scene.month}/${scene.renderedMonth}`);
+    if (scene && Array.isArray(scene.notReady) && scene.notReady.length > 0) report.beatFailures.push(`${name}: monthly layers on show not ready: ${scene.notReady.join(', ')}`);
     // Energy bars on show (SpaceScene, docs/31 E-EN6) must add up to 100 %: energy is neither made nor lost.
     const bars = await s.page.evaluate(
       () => (window.__atlas!.engine as unknown as { energyBars?(): Record<string, { potential: number; kinetic: number; lost: number; shown: boolean }> }).energyBars?.() ?? {},
@@ -827,6 +891,7 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
     for (const issue of await tintIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     for (const issue of await orbitIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     for (const issue of await mechanismDrawIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
+    for (const issue of await airfoilIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     await s.page.screenshot({ path: join(out, `${name}${o.suffix}.png`) });
     console.log(`  ${name.padEnd(36)} ${landed ? 'OK' : 'FAIL'}${missing.length ? `  (no label: ${missing.join(', ')})` : ''}`);
     // A looping exercise beat (SpaceScene exercise mode) also gets a still at its start and end keys.
@@ -853,6 +918,69 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
   await s.apply({ wait: 300 });
   console.log(`  beats -> ${out} (${beats.length})`);
   await runBeatLinks(s, beats, shown, report);
+  await runClimateStates(s, o, out, report);
+}
+
+/** Wait (bounded) until a monthly map shows the store's month; a no-op for other scenes. Callers still judge the result. */
+function settleClimate(page: Page): Promise<unknown> {
+  return page
+    .waitForFunction(
+      () => {
+        const c = (window.__atlas!.engine as unknown as { climatology?(): { month: number; renderedMonth: number } }).climatology?.();
+        return !c || c.renderedMonth === c.month;
+      },
+      null,
+      { timeout: 10_000 },
+    )
+    .catch(() => {});
+}
+
+/** Monthly field visual states that a narrative need not explicitly author. */
+async function runClimateStates(s: Session, o: Options, out: string, report: RunReport): Promise<void> {
+  if (!await s.ev(() => typeof window.__atlas!.engine.climatology === 'function')) return;
+  const metadata = parseYaml(readFileSync(join(ROOT, 'src/content/topics', s.topic, 'topic.yaml'), 'utf8')) as { monthlyLayers: { id: string; quantity: 'wind' | 'rain' }[] };
+  const definitions = metadata.monthlyLayers;
+  const active = await s.ev(() => window.__atlas!.state().layers);
+  const primary = Object.fromEntries((['wind', 'rain'] as const).map(quantity => [quantity, (definitions.find(layer => layer.quantity === quantity && active.includes(layer.id)) ?? definitions.find(layer => layer.quantity === quantity))?.id]));
+  const shots = [
+    { name: 'climate-m01', month: 1, wind: true, rain: true },
+    { name: 'climate-m07', month: 7, wind: true, rain: true },
+    { name: 'climate-m12', month: 12, wind: true, rain: true },
+    { name: 'climate-wind-only', month: 1, wind: true, rain: false },
+    { name: 'climate-rain-only', month: 1, wind: false, rain: true },
+    { name: 'climate-off', month: 1, wind: false, rain: false },
+    { name: 'climate-cell', month: 7, wind: true, rain: true },
+  ];
+  for (const shot of shots) {
+    await s.page.evaluate(x => {
+      const api = window.__atlas!;
+      api.setMode('presentation', false);
+      api.setHud(true);
+      const e = api.engine as unknown as {
+        setClimatologyMonth(n: number): boolean;
+        toggleMonthlyLayer(id: string, on: boolean): void;
+        inspectClimateCell(lon: number, lat: number): void;
+      };
+      e.setClimatologyMonth(x.shot.month);
+      for (const layer of x.definitions)
+        e.toggleMonthlyLayer(layer.id, layer.id === x.primary[layer.quantity] && x.shot[layer.quantity]);
+      if (x.shot.name === 'climate-cell') e.inspectClimateCell(105, 0);
+    }, {shot, definitions, primary});
+    await settleClimate(s.page);
+    await s.page.waitForTimeout(350);
+    const state = await beatSceneOf(s.page);
+    if (state?.month !== shot.month || state.renderedMonth !== shot.month) report.beatFailures.push(`${shot.name}: month did not commit`);
+    if (Array.isArray(state?.notReady) && state.notReady.length > 0) report.beatFailures.push(`${shot.name}: monthly layers on show not ready: ${state.notReady.join(', ')}`);
+    await s.page.screenshot({ path: join(out, `${shot.name}${o.suffix}.png`) });
+  }
+  await s.page.setViewportSize({ width: 390, height: 844 });
+  const read = s.page.locator('.atlas-panel__toggle[aria-expanded="false"]');
+  if (await read.count()) await read.click();
+  const entry = s.page.locator('[data-climatology-phone] summary');
+  if (await entry.count()) await entry.click();
+  await s.page.screenshot({ path: join(out, `climate-phone-months${o.suffix}.png`) });
+  await s.page.setViewportSize({ width: o.size[0], height: o.size[1] });
+  await s.reopen();
 }
 
 /** Ids each chapter's own state asks to label (TimeScene `highlight`, SpaceScene `labels`) with no label on screen at the chapter camera: listed, never a failure. */
@@ -1195,8 +1323,12 @@ async function runKeys(s: Session, o: Options, report: RunReport): Promise<void>
         const st = (await s.state()) as unknown as { chapter: string | null; beat?: number | null; presentation: unknown; hud: boolean };
         return { st, i: beats.findIndex((b) => b.chapter === st.chapter && b.index === (st.beat ?? 0)) };
       };
+      // A chapter with no segment on the axis (TimeScene's background chapter has no place in time) has no ticks to fill.
       const filled = (chapter: string | null, beat: number | null | undefined) =>
-        page.evaluate(([c, b]) => document.querySelector(`[data-beat="${c}.${b}"]`)?.hasAttribute('data-filled') ?? false, [chapter, beat] as const);
+        page.evaluate(
+          ([c, b]) => (document.querySelector(`[data-beat^="${c}."]`) ? document.querySelector(`[data-beat="${c}.${b}"]`)?.hasAttribute('data-filled') ?? false : true),
+          [chapter, beat] as const,
+        );
       if (beats.length < 3) {
         record({ ...base, ok: true, note: 'fewer than three beats (skipped)' });
         continue;
@@ -1475,6 +1607,7 @@ async function main(): Promise<number> {
         if (o.keys) console.log(`  key failures: ${keyFails}`);
         if (o.layout) console.log(`  layout issues: ${report.layout.length}`);
         if (o.beats) console.log(`  beat failures: ${report.beatFailures.length}`);
+        if (o.beats) for (const f of report.beatFailures) console.log(`    ${f}`);
         if (o.tasks) console.log(`  task failures: ${report.taskFailures.length}`);
         for (const f of report.taskFailures) console.log(`    ${f}`);
         if (keyFails || report.layout.length || report.beatFailures.length || report.taskFailures.length || bad.length) failed = true;

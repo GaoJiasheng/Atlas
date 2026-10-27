@@ -1,6 +1,9 @@
 import { z } from 'zod';
 import { bilingual, kebabId, level, theme } from './common';
+import { modernInsetConfigSchema } from '../../engines/time-scene/deep-time';
 import { TOKEN_NAMES } from '../../theme/theme';
+import { monthlyLayerSchema } from '../../engines/time-scene/lib/climate';
+import { sourceId } from './sources';
 
 /** The six fixed top-level categories, in display order. */
 export const SUBJECTS = [
@@ -84,9 +87,11 @@ export const basemapOptions = z
     local: kebabId.optional(),
     region: regionBasemap.optional(),
     maxZoom: z.number().min(6).max(16).optional(),
+    reconstruction: z.object({ file: kebabId, selection: z.literal('hold-older') }).strict().optional(),
   })
   .strict()
-  .refine((b) => (b.local === undefined) !== (b.region === undefined), 'basemap needs exactly one of `local` or `region`');
+  .refine((b) => [b.local, b.region, b.reconstruction].filter((v) => v !== undefined).length === 1, 'basemap needs exactly one of `local`, `region` or `reconstruction`')
+  .refine((b) => !b.reconstruction || b.maxZoom === undefined, 'reconstruction fixes maxZoom at 3.6');
 export type BasemapOptions = z.output<typeof basemapOptions>;
 
 /**
@@ -135,6 +140,16 @@ export const datedLayers = z.array(datedLayerDef).superRefine((layers, ctx) => {
 });
 
 /** `src/content/topics/<slug>/topic.yaml` (docs/02). */
+export const climatologyPeriod = z.object({
+  periodId: kebabId,
+  startYear: z.number().int(),
+  endYear: z.number().int(),
+  initialMonth: z.number().int().min(1).max(12),
+  /** Sources for the KEY's display rules (rain bins, arrow scale), shown beside each layer's data sources. */
+  keySources: z.array(sourceId).optional(),
+}).strict().refine((p) => p.startYear <= p.endYear, { path: ['endYear'], message: 'endYear must be at least startYear' });
+export type ClimatologyPeriod = z.output<typeof climatologyPeriod>;
+
 export const topicSchema = z
   .object({
     id: kebabId,
@@ -175,8 +190,13 @@ export const topicSchema = z
     blocLabels: blocLabels.optional(),
     /** TimeScene: island- / city-scale basemap (`{ local: land-sg, maxZoom: 13 }`) or a regional plate (`{ region: { bounds, land, rivers } }`). */
     basemap: basemapOptions.optional(),
+    modernInset: modernInsetConfigSchema.optional(),
+    maDigits: z.union([z.literal(0), z.literal(1), z.literal(2), z.literal(3)]).optional(),
     /** TimeScene GeoStage: dated GPU overlays from public/geo/<file>.json. */
     datedLayers: datedLayers.optional(),
+    temporalMode: z.enum(['chronological', 'climatology']).default('chronological'),
+    climatology: climatologyPeriod.optional(),
+    monthlyLayers: z.array(monthlyLayerSchema).min(1).optional(),
     /**
      * TimeScene: `entity` colours every control area by its holder (`entities[].color`,
      * `token:holder-1` … `token:holder-8`, assigned by scripts/geo/lib/colour-holders.ts)
@@ -199,8 +219,29 @@ export const topicSchema = z
   })
   .strict()
   .superRefine((topic, ctx) => {
+    if (topic.temporalMode === 'climatology') {
+      if (topic.engine !== 'time-scene' || topic.stage !== 'geo') ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['temporalMode'], message: 'climatology requires time-scene with stage: geo' });
+      if (!topic.monthlyLayers) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['monthlyLayers'], message: 'at least one monthly layer is required' });
+      if (!topic.climatology) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['climatology'], message: 'climatology period is required' });
+      if (topic.datedLayers !== undefined) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['datedLayers'], message: 'climatology does not support datedLayers' });
+    } else if (topic.climatology) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['climatology'], message: 'climatology metadata requires temporalMode: climatology' });
+    if (topic.monthlyLayers) {
+      if (topic.temporalMode !== 'climatology') ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['monthlyLayers'], message: 'monthlyLayers requires climatology mode' });
+      const used = new Set<string>([...BUILTIN_TIME_LAYER_IDS, ...(topic.datedLayers ?? []).map((l) => l.id)]);
+      topic.monthlyLayers.forEach((layer, i) => {
+        if (used.has(layer.id)) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['monthlyLayers', i, 'id'], message: 'layer id must be unique and cannot collide with built-in layers' });
+        used.add(layer.id);
+        if (layer.periodId !== topic.climatology?.periodId) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['monthlyLayers', i, 'periodId'], message: 'must match climatology.periodId' });
+      });
+    }
     if (topic.datedLayers !== undefined && (topic.engine !== 'time-scene' || topic.stage !== 'geo'))
       ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['datedLayers'], message: '`datedLayers` requires time-scene with stage: geo' });
+    if (topic.basemap?.reconstruction && (topic.engine !== 'time-scene' || topic.stage !== 'geo' || topic.datedLayers !== undefined))
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['basemap'], message: 'reconstruction requires time-scene/geo without datedLayers' });
+    if (topic.modernInset && !topic.basemap?.reconstruction)
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['modernInset'], message: 'modernInset requires reconstruction' });
+    if (topic.maDigits !== undefined && topic.engine !== 'time-scene')
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['maDigits'], message: 'maDigits requires a geological TimeScene' });
     const stages: readonly string[] = ENGINE_STAGES[topic.engine];
     if (!stages.includes(topic.stage)) {
       ctx.addIssue({

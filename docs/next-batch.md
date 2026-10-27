@@ -73,3 +73,22 @@ fossils-and-skeletons 不需要新引擎。
 - 引擎代理：读对应规格 §4、docs/06 注册约定、docs/37/38/40/41 的 §9 引擎记录；做 sample-* 夹具、单测、e2e、shoot 检查、docs/06 小节、规格 §9 记录；交回前合并 main。
 - 内容代理：读规格（§9 覆盖前文）、对应 skill、夹具；插图用 `art/planned/<slug>/` 已审过的图（`scripts/illustrate.ts` 处理）；REVIEW.md 写给 Gavin 的项；不改 review-queue 和 package.json；自己的 ATLAS_E2E_PORT；smoke 计数冲突由主会话对齐。
 - Codex 调用：`codex exec --skip-git-repo-check --sandbox workspace-write -c sandbox_workspace_write.network_access=true -C <dir>`（`danger-full-access` 会被安全检查拦下）。
+
+## 七、第四批（2026-10-27 Gavin："codex的预研的，都做起来"）
+
+Codex 预研（`art/research/<slug>/`、`art/planned/<slug>/`）全部交回后直接施工：每题一个 Codex 任务，依次定稿规格 → 引擎（如需）→ 正文，之后 Claude 浏览器验收、合并上线。历史两题按草稿走。
+
+| # | slug | 引擎 | 预研提出的新引擎工作（定稿时再压） | 上线方式 |
+|---|---|---|---|---|
+| 53 | `mangrove-food-web` | SpaceScene | 食物网求解 + 有向食物网卡 | 直接上线 |
+| 54 | `southeast-asia` | TimeScene（现今地理） | 地理情境与静态图层、成员筛选；复用季风逐月气候层 | 直接上线；季风引擎合并后开工 |
+| 55 | `heat` | SpaceScene | 热模型、温度曲线与游标、记录隔离 | 直接上线 |
+| 56 | `frog-and-chicken` | SpaceScene | 无 | 直接上线 |
+| 57 | `bones-and-joints` | SpaceScene | 杠杆 sim、关节绑定 | 直接上线 |
+| 58 | `eyes-and-ears` | SpaceScene | 感官求解、近轴成像、纵波 | 直接上线 |
+| 59 | `zheng-he` | TimeScene（历史） | 无 | 草稿 |
+| 60 | `space-race` | TimeScene（历史） | 任务地点语义、非战争标签与统计（可能已有） | 草稿 |
+| 61 | `saturn-v` | SpaceScene | 无 | 直接上线 |
+| 62 | `container-port` | SpaceScene | 港口 sim、绳索 span 绑定 | 直接上线 |
+
+插图：28 张已看过；骨骼与关节「保护内脏」图缺肋骨须重画，土星五号缺封面须补画，东南亚「区域合作」圆桌图偏弱，定稿时换题材。

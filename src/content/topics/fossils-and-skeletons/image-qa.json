@@ -1,0 +1,90 @@
+{
+  "checked": "2026-10-27",
+  "generated": 0,
+  "modifiedSourcePNGs": 0,
+  "processing": "Existing scripts/illustrate.ts; approved PNGs read only",
+  "records": [
+    {
+      "input": "/Users/gavin/work/atlas/art/planned/fossils-and-skeletons/fossils-and-skeletons.png",
+      "sha256": "845ea8fab647dd79f17c10df6798502ab1a5d18a56bfa6faae23f1d0e371d5a1",
+      "width": 1024,
+      "height": 1024,
+      "channels": 4,
+      "gray": true,
+      "minAlpha": 0,
+      "maxAlpha": 255,
+      "bounds": [
+        77,
+        158,
+        946,
+        865
+      ],
+      "outputs": [
+        {
+          "path": "public/illustrations/fossils-and-skeletons.webp",
+          "bytes": 89910,
+          "width": 800,
+          "height": 800,
+          "alpha": true
+        },
+        {
+          "path": "public/illustrations/fossils-and-skeletons@2x.webp",
+          "bytes": 261956,
+          "width": 1600,
+          "height": 1600,
+          "alpha": true
+        }
+      ]
+    },
+    {
+      "input": "/Users/gavin/work/atlas/art/planned/fossils-and-skeletons/fossils-and-skeletons-fossilisation.png",
+      "sha256": "95e2f0367ead1ef0cd6565ff243d9ae2e9d4e3e46f1f7cd63f5cb5e5aa32f721",
+      "width": 1536,
+      "height": 1152,
+      "channels": 4,
+      "gray": true,
+      "minAlpha": 0,
+      "maxAlpha": 255,
+      "bounds": [
+        115,
+        139,
+        1419,
+        1012
+      ],
+      "outputs": [
+        {
+          "path": "public/illustrations/figures/fossils-and-skeletons-fossilisation.webp",
+          "bytes": 228032,
+          "width": 1200,
+          "height": 900,
+          "alpha": true
+        }
+      ]
+    },
+    {
+      "input": "/Users/gavin/work/atlas/art/planned/fossils-and-skeletons/fossils-and-skeletons-rebuilding-a-skeleton.png",
+      "sha256": "f187e160069eaa0a7b2de1221b2b8af651dc0514c88dbf9dce88d18fffee3b6a",
+      "width": 1536,
+      "height": 1152,
+      "channels": 4,
+      "gray": true,
+      "minAlpha": 0,
+      "maxAlpha": 255,
+      "bounds": [
+        115,
+        222,
+        1419,
+        928
+      ],
+      "outputs": [
+        {
+          "path": "public/illustrations/figures/fossils-and-skeletons-rebuilding-a-skeleton.webp",
+          "bytes": 115184,
+          "width": 1200,
+          "height": 900,
+          "alpha": true
+        }
+      ]
+    }
+  ]
+}

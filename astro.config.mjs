@@ -64,9 +64,9 @@ export default defineConfig({
         ],
       },
       workbox: {
-        // App shell: pages, JS, CSS, icons. The big GeoJSON basemaps (/geo), models (/models)
-        // and per-topic engine data (/topics/<slug>/data.json, fetched by SceneHost) are
-        // deliberately NOT precached; they are cached on first use below.
+        // App shell: pages, JS, CSS, icons. The big GeoJSON basemaps (/geo), models (/models),
+        // per-topic engine data (/topics/<slug>/data.json, fetched by SceneHost) and the webp
+        // illustrations are deliberately NOT precached; they are cached on first use below.
         globPatterns: ['**/*.{html,js,css,svg,png,webmanifest}'],
         globIgnores: ['geo/**', 'models/**', 'topics/**/data.json'],
         // Deep links carry scene state in the query string (?ch=...&t=...).
@@ -74,6 +74,13 @@ export default defineConfig({
         navigateFallback: null,
         cleanupOutdatedCaches: true,
         runtimeCaching: [
+          {
+            // A deep-time topic has ten lazy frames plus independent modern evidence files.
+            // Keep its visited local assets together, apart from the eight-entry historical map cache.
+            urlPattern: /\/geo\/(?:de-|sample-de-)[^/]+\.json$/,
+            handler: 'CacheFirst',
+            options: { cacheName: 'atlas-deep-time-geo', expiration: { maxEntries: 32, maxAgeSeconds: 60 * 60 * 24 * 30 }, cacheableResponse: { statuses: [200] } },
+          },
           {
             urlPattern: /\/geo\/[^/]+\.json$/,
             handler: 'CacheFirst',
@@ -98,6 +105,16 @@ export default defineConfig({
             options: {
               cacheName: 'atlas-models',
               expiration: { maxEntries: 16, maxAgeSeconds: 60 * 60 * 24 * 30 },
+              cacheableResponse: { statuses: [200] },
+            },
+          },
+          {
+            // Covers and chapter figures: a visited topic keeps its pictures offline.
+            urlPattern: /\/illustrations\/.+\.webp$/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'atlas-illustrations',
+              expiration: { maxEntries: 240, maxAgeSeconds: 60 * 60 * 24 * 30 },
               cacheableResponse: { statuses: [200] },
             },
           },

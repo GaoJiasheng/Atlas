@@ -14,9 +14,13 @@ Atlas code is MIT (see `LICENSE`); Atlas content is CC BY-NC-SA 4.0 (see
 | United States Military Academy, Department of History atlases; US Army Center of Military History maps | fronts, routes, dates | Public domain (US Government work) |
 | UMN Historical National Boundaries | cross-check only | see repository |
 | Cliopatria v0.2.1, Seshat Global History Databank (https://github.com/Seshat-Global-History-Databank/cliopatria, Zenodo record 13363121, data paper doi:10.1038/s41597-025-04516-9) | `ancient-civilisations` control areas (16 keyframes) and Southeast Asian sphere layers (`public/geo/ac-*.json`); changes: clipped to the Natural Earth coast, simplified, records merged per state | CC BY 4.0 |
+| GeoNames gazetteer (https://www.geonames.org), records 131231 (Hormoz) and 157382 (Kilwa Kisiwani) | two site coordinates of `zheng-he` (`data/events.json`); no changes beyond selection and added descriptions | CC BY 4.0 |
 | Natural Earth 1:10m rivers and lake centerlines, lakes (v5.0.0) | `ancient-civilisations` rivers and the Tonlé Sap outline (`public/geo/ancient-rivers.json`) | Public domain |
 | Wikidata | point coordinates (P625) of the `ancient-civilisations` events and sites | CC0 |
 | Kanguole, *Ancient North China Plain blank relief map.svg* (Wikimedia Commons), via `public/geo/warring-states-rivers.json` | two reconstructed Yellow River courses in `public/geo/ancient-rivers.json`, which is therefore published CC BY-SA 4.0 (see LICENSE-CONTENT) | CC BY-SA 4.0 |
+| NOAA PSL NCEP/NCAR Reanalysis 1, monthly long-term mean 850 hPa `uwnd` / `vwnd` with valid-year counts, 1991–2020 (https://psl.noaa.gov/) | `sample-climate` wind arrays (`public/geo/sample-climate-wind-850-1991-2020.json`); native 2.5° grid, values unchanged, source ids remapped | Public domain (US Government data); "NCEP Reanalysis data provided by NOAA PSL, Boulder, Colorado, USA" |
+| GPCP Version 2.3 monthly precipitation, long-term mean 1991–2020, via NOAA PSL (https://psl.noaa.gov/) | `sample-climate` rain arrays (`public/geo/sample-climate-rain-gpcp-1991-2020.json`); native 2.5° grid, values unchanged, source ids remapped | Public domain (US Government data); "GPCP Precipitation data provided by NOAA PSL, Boulder, Colorado, USA" |
+| Natural Earth 1:110m populated places | `sample-climate` city anchor coordinates (`data/events.json`) | Public domain |
 
 ## 3D anatomy models
 
@@ -84,6 +88,20 @@ The glb and the geometry derived from it (`scripts/anatomy/heart-lungs/centrelin
 `landmarks.json`, `routes.json`, and the flow paths, pivots and camera targets taken
 from them into the topic's `parts.json`) are CC BY-SA 4.0.
 
+## Industrial Revolution map data (`industrial-revolution`)
+
+| Work | Use | Licence |
+|---|---|---|
+| RShapes 1.0 (Müller-Crepon, Girardin; ETH Zürich, https://icr.ethz.ch/data/rshapes/). Requested reference: Cederman, Girardin, Müller-Crepon and Pengl (2025), *Nationalism and the Transformation of the State*, Cambridge University Press | `public/geo/industrial-rail-rshapes.json`; changes: features touching the Great Britain / Ireland main islands removed, years to 1914, simplified, quantised, same-year connected lines merged. Derived only from RShapes (no CC BY-SA or OpenHistoricalMap input) | CC BY-NC-SA 4.0 |
+| British Geological Survey, *Coal resources for new technologies* (https://www.bgs.ac.uk/datasets/coal-resources-for-new-technologies/) | `public/geo/industrial-coal-strata.json`; changes: GB coal-bearing strata only, EPSG:27700 to WGS84 (OSGB36 seven-parameter, no OSTN15 grid), simplified, quantised | Open Government Licence 3.0 |
+| GeoNames cities15000 (https://www.geonames.org/) | six modern city coordinates in the topic's `data/events.json` | CC BY 4.0 |
+| Natural Earth 1:10m populated places and 1:50m land | 21 modern city coordinates; main-island masks | Public domain |
+
+Attribution: **Contains British Geological Survey materials © UKRI 2026.** The
+BGS product also carries *Contains OS data © Crown copyright 2020*; no OS map is
+redistributed. City coordinates © GeoNames. Inputs, hashes and methods:
+`scripts/geo/industrial-revolution/SOURCES-GEO.md`.
+
 ## Fonts and libraries
 
 | Work | Licence |
@@ -102,3 +120,59 @@ The skills under `.claude/skills/` are working notes for AI assistants, not lice
 Figures and claims in topic texts cite their sources with `[S#]` ids; each
 topic's `data/SOURCES.md` lists them with URLs. Quotations are short and
 attributed; no source text is reproduced beyond that.
+
+## Watt steam engine (`steam-engine`)
+
+| Source / work | Use and changes | Licence |
+|---|---|---|
+| Science Museum Group collection, *Rotative Steam Engine by Boulton and Watt, 1788* (object 1861-46, https://collection.sciencemuseumgroup.org.uk/objects/co50948/rotative-steam-engine-by-boulton-and-watt-1788), *Newcomen Atmospheric Engine* (https://collection.sciencemuseumgroup.org.uk/objects/co50900/newcomen-atmospheric-engine) and *James Watt* (https://collection.sciencemuseumgroup.org.uk/people/ap24508/watt-james), accessed 2026-10-27 | Object descriptions independently rewritten, shortened and translated for the chapters, part explanations and glossary; museum photographs are not copied, traced or used as textures | Descriptive text CC BY 4.0, https://creativecommons.org/licenses/by/4.0/ (metadata CC0) |
+
+The other sources of this topic (public-domain mechanism texts, NASA, NOAA and NIST explanatory pages, the Lap-engine dimension references) are cited fact by fact; no text, drawing or image from them is reproduced. Per-source locators are in `src/content/topics/steam-engine/data/SOURCES.md`. The three illustrations (`public/illustrations/steam-engine*.webp`) are original artwork under the content licence above.
+
+## Dinosaur Earth (`dinosaur-earth`)
+
+**PALEOMAP PaleoDEMs v2**, Christopher R. Scotese and Nicky Wright (2018),
+Zenodo record 5460860, <https://doi.org/10.5281/zenodo.5460860>. Upstream
+licence **CC BY 4.0**, <https://creativecommons.org/licenses/by/4.0/>.
+`public/geo/de-land-{250,230,200,170,150,130,100,70,65,0}.json` are Atlas
+adaptations licensed **CC BY-NC-SA 4.0**: ten verified 1° CSV elevation grids
+were classified with strict `z>0`, converted to nearest-sample categorical
+cells, unioned, clipped to explicit source-domain/dateline and Mercator polar
+limits, and encoded as TopoJSON with shared true-coast arcs. Exact-zero samples
+remain non-land; old-grid 179…180° is unavailable. No modern coast substitution,
+seam welding, continuous interpolation or synthetic 66 Ma frame. Only exact
+collinear reduction is applied. Per-input/output hashes, grid limits, changes
+and topology checks are in `scripts/geo/dinosaur-earth/SOURCES-GEO.md` and
+`build-report.json`.
+
+**Paleobiology Database contributors**, API 1.2 fixed CSV snapshots 26 October 2026.
+Both raw responses explicitly declare **CC0**,
+<https://creativecommons.org/publicdomain/zero/1.0/>. The retained occurrence
+and collection facts in `public/geo/de-modern-points.json`, together with the
+815 original retained-public-record citations in `public/geo/de-pbdb-references.json`,
+remain CC0. The manifest binds the bibliography locally for offline inspector access.
+The bounded global and TH/LA/MY query snapshots were stably deduplicated by
+occurrence, Malaysian locations were suppressed before grouping, and the
+public result retains 2103 occurrences in 1274 collections. Original occurrence,
+collection and publication reference numbers and separate age bounds are
+preserved. Complete exact queries and contributor/publication credit:
+`src/content/topics/dinosaur-earth/data/SOURCES.md` and
+`scripts/geo/dinosaur-earth/publication-references.json`. No raw Malaysian
+location data is deployed. The selected record is not a census.
+
+**Natural Earth contributors**, 110m land v4.1.0 / 50m countries v5.1.1,
+<https://www.naturalearthdata.com/>. **Public domain**, per
+<https://www.naturalearthdata.com/about/terms-of-use/>.
+`public/geo/de-modern-land.json` retains global 110m land;
+`de-modern-countries.json` selects 15 real country features for the modern
+SEA/Mexico inset views. Shapefile winding is converted to RFC 7946 and
+coordinates rounded to 6 decimal places. No additional restrictions are
+asserted. These files and the Singapore DBF label anchor are modern references
+only, never ancient reconstruction inputs.
+
+The two modern editorial reference points, four text evidence cards,
+manifests, original bilingual prose and the three approved generated
+illustrations are Atlas content (CC BY-NC-SA 4.0). Modern factual coordinates
+retain their original source credit and are not claimed as exclusive facts.
+The illustrations are conceptual drawings, not specimen photographs,
+measured reconstructions or third-party map geometry.

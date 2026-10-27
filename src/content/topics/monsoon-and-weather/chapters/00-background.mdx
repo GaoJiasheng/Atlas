@@ -1,0 +1,199 @@
+---
+{
+  "id": "background",
+  "order": 0,
+  "kind": "background",
+  "title": {
+    "en": "Read a year of weather",
+    "zh": "怎样读一整年的天气"
+  },
+  "sensitive": false,
+  "state": {
+    "month": 1,
+    "camera": {
+      "center": [
+        115,
+        7.5
+      ],
+      "zoom": 3.35,
+      "pitch": 0,
+      "bearing": 0
+    },
+    "layers": [
+      "base",
+      "sites"
+    ],
+    "highlight": [],
+    "summary": {
+      "en": "January, with the 1991–2020 monthly layers still switched off: this map shows Southeast Asia. Its city points are reading anchors, not weather stations.",
+      "zh": "1 月，1991–2020 年的月平均图层还没有打开：地图显示东南亚。城市点帮助认位置，并不代表气象站。"
+    },
+    "index": [
+      "site-singapore",
+      "site-kuala-lumpur",
+      "site-jakarta",
+      "site-hanoi",
+      "site-bangkok",
+      "site-manila"
+    ],
+    "beats": [
+      {
+        "month": 1,
+        "camera": {
+          "center": [
+            115,
+            7.5
+          ],
+          "zoom": 3.35,
+          "pitch": 0,
+          "bearing": 0
+        },
+        "layers": [
+          "base",
+          "sites"
+        ],
+        "highlight": [],
+        "caption": {
+          "en": "January, with the 1991–2020 monthly layers still switched off: this map shows Southeast Asia. Its city points are reading anchors, not weather stations.",
+          "zh": "1 月，1991–2020 年的月平均图层还没有打开：地图显示东南亚。城市点帮助认位置，并不代表气象站。"
+        }
+      },
+      {
+        "month": 1,
+        "camera": {
+          "center": [
+            115,
+            7.5
+          ],
+          "zoom": 3.35,
+          "pitch": 0,
+          "bearing": 0
+        },
+        "layers": [
+          "base",
+          "sites",
+          "clim-wind"
+        ],
+        "highlight": [],
+        "caption": {
+          "en": "January climatology: wind arrows point towards the air’s motion. The values describe the regional 850 hPa level, not surface gusts.",
+          "zh": "1 月气候平均：风箭头朝空气移动的方向。数值表示区域 850 hPa 气压层的风，不是地面阵风。"
+        }
+      },
+      {
+        "month": 1,
+        "camera": {
+          "center": [
+            115,
+            7.5
+          ],
+          "zoom": 3.35,
+          "pitch": 0,
+          "bearing": 0
+        },
+        "layers": [
+          "base",
+          "sites",
+          "clim-rain"
+        ],
+        "highlight": [],
+        "caption": {
+          "en": "January climatology: shaded cells show mean precipitation rate in millimetres per day. They do not show today’s rain.",
+          "zh": "1 月气候平均：色块表示平均降水率，单位是毫米／日，并不显示今天下雨的地方。"
+        }
+      },
+      {
+        "month": 1,
+        "camera": {
+          "center": [
+            103.85,
+            1.3
+          ],
+          "zoom": 8,
+          "pitch": 0,
+          "bearing": 0
+        },
+        "layers": [
+          "base",
+          "sites"
+        ],
+        "highlight": [
+          "site-singapore"
+        ],
+        "caption": {
+          "en": "January reference view: Singapore is the local anchor. Open Water in Singapore to revisit evaporation, condensation and the water cycle.",
+          "zh": "1 月参考视图：新加坡是本地锚点。打开《新加坡的水》，重温蒸发、凝结和水循环。"
+        }
+      }
+    ],
+    "note": {
+      "en": "These maps compare calendar-month means for 1991–2020. Wind is a regional pressure-level reanalysis; rain is a satellite–gauge estimate. Neither is a forecast or a school observation. City points locate the discussion.",
+      "zh": "地图比较 1991–2020 年各月平均。风来自区域气压层再分析，雨来自卫星与测站合成估计；它们不是预报，也不是学校观测。城市点只标示讨论位置。"
+    }
+  }
+}
+---
+
+<Lang en>
+
+<Term id="term-weather">Weather</Term> is what the air is doing now: a sudden shower, a breezy afternoon, a hot and still morning. <Term id="term-climate">Climate</Term> is the pattern you find when you look at the weather of a place over many years. This topic is about climate: the winds and the rain that come back to Southeast Asia at about the same time of year, year after year.
+
+Each map is a <Term id="term-climatology">monthly climatology</Term>. For every calendar month it shows the average of the <Num s="S101,S102">30</Num> Januaries, or the 30 Februaries, from 1991 to 2020. The arrows are wind from a <Term id="term-reanalysis">reanalysis</Term>, at the <Num s="S101">850 hPa</Num> level of the air above the ground. The shaded squares are rain, estimated from satellites and rain gauges, in millimetres per day. Each square is one grid cell <Num s="S102">2.5°</Num> across; its straight edges belong to the grid, not to the rain. Neither layer is a forecast, and neither is what fell outside your school.
+
+Find the city points: Singapore, Kuala Lumpur, Jakarta, Hanoi, Bangkok and Manila. They are there to help you find your place. None of them is a weather station. Step through the months with the month control, and switch the wind and the rain on and off in the layers panel. <FlyTo preset="view-region">Southeast Asia</FlyTo>
+
+Rain starts with water vapour that rises, cools and turns back into tiny droplets of water: <Term id="term-condensation">condensation</Term>. The water cycle chapter of <TopicLink slug="water" ch="the-water-cycle">Water in Singapore</TopicLink> shows how that works. <FlyTo preset="view-singapore">Singapore</FlyTo>
+
+<More title={{ en: "How the twelve maps were made", zh: "十二幅月平均图是怎样做成的" }}>
+
+The wind comes from NCEP/NCAR Reanalysis 1 and the rain from GPCP Version 2.3, both prepared by the United States National Oceanic and Atmospheric Administration (NOAA). Their own files already give the 1991–2020 average for each month, and every cell in this region has data for all <Num s="S101,S102">30</Num> years. The numbers are copied as they are, square by square, with no smoothing. The wind points and the rain squares sit half a cell apart, so each is read on its own. Tap "Inspect climate cell" to read the values for one place and month.
+
+Weather-service maps and radar pictures are not copied into this topic; the maps are drawn from these open data files only.
+
+</More>
+
+<More title={{ en: "Where the wind comes from, where the arrow points", zh: "风从哪里来，箭头指向哪里" }}>
+
+A wind is named for the direction it comes from: a northeast wind blows from the northeast. The arrows on these maps point the other way, to where the air is going, so a northeast wind is drawn as an arrow pointing south-west. Each arrow is a <Term id="term-wind-vector">wind vector</Term>: one part says how fast the air moves east, the other how fast it moves north.
+
+</More>
+
+<More title={{ en: "A grid cell is not Changi", zh: "格点不是樟宜站" }}>
+
+Changi's rain gauge measures one spot and adds up the rain in a month, in millimetres. A rain square here is <Num s="S102">2.5°</Num> across and gives an average rate in millimetres per day, so the two kinds of number cannot be compared directly. Over high ground the 850 hPa values may be extrapolated estimates. And the 850 hPa wind is never the wind you would feel at the surface.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+<Term id="term-weather">天气</Term>是空气此刻的样子：一阵骤雨、一个有风的下午、一个闷热无风的早晨。把一个地方许多年的天气放在一起看，找出其中的规律，就是<Term id="term-climate">气候</Term>。这个主题讲的是气候：每年差不多同一时候回到东南亚的风和雨。
+
+每幅地图都是一幅<Term id="term-climatology">月气候平均</Term>图：每个月份，把 1991 年到 2020 年的 <Num s="S101,S102">30</Num> 个 1 月（或 30 个 2 月……）平均起来。箭头是风，取自<Term id="term-reanalysis">再分析</Term>资料，位于地面以上的 <Num s="S101">850 hPa</Num> 气压层；色块是雨，由卫星和雨量计合成估算，单位是毫米／日。每个方块是一个边长 <Num s="S102">2.5°</Num> 的格子，笔直的边是格网的边，不是雨的边界。两层都不是预报，也不是学校门口那一天下的雨。
+
+在图上找一找这些城市点：新加坡、吉隆坡、雅加达、河内、曼谷和马尼拉。它们只是帮你认位置，没有一个是气象站。用月份控件一个月一个月地看，在图层面板里分别开关风和雨。<FlyTo preset="view-region">东南亚</FlyTo>
+
+雨的来历，要从水蒸气说起：它上升、冷却，又变回极小的水滴，这叫<Term id="term-condensation">凝结</Term>。具体怎样发生，可以看<TopicLink slug="water" ch="the-water-cycle">《新加坡的水》</TopicLink>里讲水循环的一章。<FlyTo preset="view-singapore">新加坡</FlyTo>
+
+<More title={{ en: "How the twelve maps were made", zh: "十二幅月平均图是怎样做成的" }}>
+
+风取自 NCEP/NCAR 再分析 1，雨取自 GPCP 第 2.3 版，都由美国国家海洋和大气管理局（NOAA）整理。它们的原始文件已经给出 1991–2020 年每个月的平均值，这一带每个格子都有全部 <Num s="S101,S102">30</Num> 年的资料。数字逐格原样照抄，没有做平滑。风的格点和雨的方块相差半格，所以各读各的。点“查看气候格点”，就能读出某个地方、某个月的数值。
+
+本主题没有复制气象部门的地图或雷达图，地图只用这些公开数据文件画成。
+
+</More>
+
+<More title={{ en: "Where the wind comes from, where the arrow points", zh: "风从哪里来，箭头指向哪里" }}>
+
+风按它吹来的方向命名：东北风是从东北吹来的风。图上的箭头却指向空气去的地方，所以东北风画成一支指向西南的箭头。每支箭头都是一个<Term id="term-wind-vector">风矢量</Term>：一个分量说空气向东移动多快，另一个分量说它向北移动多快。
+
+</More>
+
+<More title={{ en: "A grid cell is not Changi", zh: "格点不是樟宜站" }}>
+
+樟宜站的雨量计只量一个点，把一个月的雨加起来，单位是毫米。这里的雨量方块边长 <Num s="S102">2.5°</Num>，给的是平均每日降水率，单位是毫米／日，所以两种数字不能直接相比。在高地上，850 hPa 的数值可能是外推出来的估计值。而且 850 hPa 的风，从来不是你在地面上感觉到的风。
+
+</More>
+
+</Lang>

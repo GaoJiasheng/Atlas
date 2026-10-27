@@ -15,6 +15,15 @@ changes, and distribute your contributions under the same licence.
 
 Full licence text: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
 
+Note — Industrial Revolution (topic `industrial-revolution`): no exception;
+its map layers stay under CC BY-NC-SA 4.0 as above. The dated railway layer
+(`public/geo/industrial-rail-rshapes.json`) is derived only from RShapes 1.0
+(CC BY-NC-SA 4.0) and contains no CC BY-SA material. The coal-bearing strata
+(`public/geo/industrial-coal-strata.json`) contain British Geological Survey
+materials © UKRI 2026 (Open Government Licence 3.0, which still applies to the
+underlying BGS material). City coordinates from GeoNames are CC BY 4.0.
+Attribution: `THIRD-PARTY-NOTICES.md`.
+
 Why NonCommercial-ShareAlike: the historical control areas are derived from
 CShapes 2.0 (CC BY-NC-SA 4.0) and from Wikimedia Commons maps (CC BY-SA); the
 derived data must carry compatible terms. Third-party sources and their own
@@ -63,3 +72,18 @@ and `docs/screenshots/heart-and-lungs/` are derived from Z-Anatomy
 (https://creativecommons.org/licenses/by-sa/4.0/), with the attribution given in
 `THIRD-PARTY-NOTICES.md`. The texts and the other data files of these topics stay
 under CC BY-NC-SA 4.0 as above.
+
+Dinosaur Earth (topic `dinosaur-earth`) data-family notice: reconstructed land
+and coastline files `public/geo/de-land-*.json` adapt PALEOMAP PaleoDEMs v2 by
+Christopher R. Scotese and Nicky Wright (2018), upstream CC BY 4.0
+(https://creativecommons.org/licenses/by/4.0/), Zenodo
+https://doi.org/10.5281/zenodo.5460860. Atlas adaptations are CC BY-NC-SA 4.0
+as above; original attribution and the modification notice are retained in
+`scripts/geo/dinosaur-earth/SOURCES-GEO.md`. The PBDB-derived occurrence and
+collection facts in `public/geo/de-modern-points.json` and the retained public-record
+bibliography `public/geo/de-pbdb-references.json` remain CC0
+(https://creativecommons.org/publicdomain/zero/1.0/); the modern Natural Earth
+geometry `public/geo/de-modern-land.json` and `de-modern-countries.json` remains
+public domain, without added restrictions. Atlas editorial reference/card
+text and manifests remain CC BY-NC-SA 4.0. These families are separate files;
+no CC BY-SA source is combined with CC BY-NC-SA data.

@@ -133,6 +133,8 @@ export interface StageBridge {
   resetMechanisms(): void;
   saveMechanisms(): MechanismSave;
   restoreMechanisms(saved: MechanismSave): void;
+  airfoilPulse: number;
+  airfoilArrows: Map<string,{force:string;dir:[number,number,number];shown:boolean;scaled:boolean}>;
   fills: Map<string, FillReading>;
   /** Copies a `count` binding draws, per part (QA `copies(id)`). */
   copies: Map<string, number>;
@@ -210,6 +212,7 @@ export function createBridge(): StageBridge {
     restoreMechanisms: () => {},
     width: 0,
     height: 0,
+    airfoilPulse: 0, airfoilArrows: new Map(),
     resolution: 1,
     cameraDistance: 0,
     focal: 0,

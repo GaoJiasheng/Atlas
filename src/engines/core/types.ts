@@ -30,8 +30,14 @@ export interface SceneState {
 
 /** Keys every engine may add on top of `SceneState`, with their URL keys. */
 export interface UrlEngineFields {
+  /** TimeScene modern reference inset (only for reconstruction topics). */
+  inset?: 'world' | 'southeast-asia' | 'mexico';
+  insetVisible?: boolean;
+  fossilMode?: 'age-window' | 'all-mesozoic';
   /** SpaceScene orbit sims: model seconds on show (paused). URL `orb-t`. */
   orbitTime?: number | null;
+  /** TimeScene climatology: calendar month 1..12. URL `m`. */
+  month?: number;
   /** TimeScene: current time. URL `t`. */
   t?: TimePoint | null;
   /** SpaceScene: beat of the current chapter on show (0-based; `null` = the chapter's own state). URL `b`, 1-based. */
@@ -135,7 +141,7 @@ export interface EngineDescriptor<E extends EngineExtension = EngineExtension, D
    */
   fromChapterState(state: ChapterState): Partial<E>;
   /** Accept engine fields decoded from the URL (validate, drop the rest). */
-  fromUrl(fields: UrlEngineFields): Partial<E>;
+  fromUrl(fields: UrlEngineFields, topic?: TopicMeta): Partial<E>;
   /** Lazily load the engine view (stage + controls). */
   load(): Promise<{ default: ComponentType<EngineViewProps<D>> }>;
 }

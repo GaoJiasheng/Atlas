@@ -1,0 +1,193 @@
+{
+  "terms": [
+    {
+      "id": "term-industrial-revolution",
+      "term": {
+        "en": "Industrial Revolution",
+        "zh": "工业革命"
+      },
+      "definition": {
+        "en": "A period of changes in production and power, beginning with Britain in this topic; other regions changed at different times.",
+        "zh": "本题用来描述先从英国讲起的生产与动力变化，各地并不同步。"
+      },
+      "see": [
+        "term-mechanisation"
+      ]
+    },
+    {
+      "id": "term-mechanisation",
+      "term": {
+        "en": "Mechanisation",
+        "zh": "机械化"
+      },
+      "definition": {
+        "en": "Using machines to perform production tasks; machines need not use steam.",
+        "zh": "用机器完成生产任务；机器未必靠蒸汽。"
+      },
+      "see": [
+        "term-factory"
+      ]
+    },
+    {
+      "id": "term-spinning",
+      "term": {
+        "en": "Spinning",
+        "zh": "纺纱"
+      },
+      "definition": {
+        "en": "Making yarn; it is a different task from weaving cloth.",
+        "zh": "做出纱线，与把纱线织成布的工作不同。"
+      },
+      "see": [
+        "term-weaving"
+      ]
+    },
+    {
+      "id": "term-weaving",
+      "term": {
+        "en": "Weaving",
+        "zh": "织布"
+      },
+      "definition": {
+        "en": "Crossing weft yarn with warp yarns to make cloth; a shuttle carries the weft.",
+        "zh": "把纬纱与经纱交织成布；梭子带着纬纱穿行。"
+      },
+      "see": [
+        "term-spinning"
+      ]
+    },
+    {
+      "id": "term-factory",
+      "term": {
+        "en": "Factory",
+        "zh": "工厂"
+      },
+      "definition": {
+        "en": "A place where workers and machinery are brought together for production; early factories could use water power.",
+        "zh": "把工人与机器集中起来生产的场所；早期工厂也能用水力。"
+      }
+    },
+    {
+      "id": "term-steam-engine",
+      "term": {
+        "en": "Steam engine",
+        "zh": "蒸汽机"
+      },
+      "definition": {
+        "en": "An engine using steam and pressure differences to move machinery.",
+        "zh": "利用蒸汽及压力差带动机械的动力装置。"
+      },
+      "see": [
+        "term-condensation"
+      ]
+    },
+    {
+      "id": "term-condensation",
+      "term": {
+        "en": "Condensation",
+        "zh": "凝结（冷凝）"
+      },
+      "definition": {
+        "en": "Steam changes to liquid water; in these early engines this lowers pressure.",
+        "zh": "蒸汽变回液态水；在这些早期机器中，冷凝使压力降低。"
+      }
+    },
+    {
+      "id": "term-coalfield",
+      "term": {
+        "en": "Coalfield",
+        "zh": "煤田"
+      },
+      "definition": {
+        "en": "A region containing coal-bearing rocks, not a list of mines operating in a particular year.",
+        "zh": "含有煤层的地区，不等于某年正在开采的煤矿清单。"
+      }
+    },
+    {
+      "id": "term-steamship",
+      "term": {
+        "en": "Steamship",
+        "zh": "蒸汽船"
+      },
+      "definition": {
+        "en": "A vessel using a steam engine for propulsion; it is distinguished from a sailing vessel in the harbour records.",
+        "zh": "以蒸汽机推动的船，在本题码头记录中与帆船分开统计。"
+      }
+    },
+    {
+      "id": "term-telegraph",
+      "term": {
+        "en": "Telegraph",
+        "zh": "电报"
+      },
+      "definition": {
+        "en": "Sending messages by electrical signals; a manual key makes and breaks a circuit.",
+        "zh": "用电信号传递消息；手控电键接通、断开电路。"
+      }
+    },
+    {
+      "id": "term-gutta-percha",
+      "term": {
+        "en": "Gutta-percha",
+        "zh": "古塔胶"
+      },
+      "definition": {
+        "en": "A material used to insulate submarine telegraph cables, distinct from plantation rubber in this topic.",
+        "zh": "海底电报电缆所用的绝缘材料，与本题种植园橡胶分开。"
+      }
+    },
+    {
+      "id": "term-slavery",
+      "term": {
+        "en": "Slavery",
+        "zh": "奴隶制"
+      },
+      "definition": {
+        "en": "A system in which people were treated as property and compelled to work; slave-grown cotton supplied mechanised manufacture.",
+        "zh": "把人当作财产、强迫劳动的制度；被奴役者种出的棉花供给机械化制造。"
+      },
+      "see": [
+        "term-indenture"
+      ]
+    },
+    {
+      "id": "term-indenture",
+      "term": {
+        "en": "Indentured labour",
+        "zh": "契约劳工"
+      },
+      "definition": {
+        "en": "A labour arrangement binding a worker to an employer for a period; contracts, recruitment and debt could restrict freedom.",
+        "zh": "工人在一定期限内受雇佣契约约束的安排；契约、招工与债务可能限制自由。"
+      },
+      "see": [
+        "term-kangany"
+      ]
+    },
+    {
+      "id": "term-kangany",
+      "term": {
+        "en": "Kangany recruitment",
+        "zh": "康加尼招工制"
+      },
+      "definition": {
+        "en": "Recruitment through an overseer, one of several systems used for Indian labour migration to Malaya.",
+        "zh": "通过工头招募劳工，是印度劳工迁往马来亚的招工方式之一。"
+      },
+      "see": [
+        "term-indenture"
+      ]
+    },
+    {
+      "id": "term-deindustrialisation",
+      "term": {
+        "en": "Deindustrialisation",
+        "zh": "去工业化"
+      },
+      "definition": {
+        "en": "A decline in manufacturing activity in a defined sector or region; Indian experiences differed across industries and places.",
+        "zh": "某行业或地区制造活动的衰退；印度各行业、各地经历并不相同。"
+      }
+    }
+  ]
+}

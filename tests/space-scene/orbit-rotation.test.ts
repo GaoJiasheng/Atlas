@@ -441,6 +441,9 @@ describe('orbit URL boundary', () => {
     expect(decodeSceneState('orb-t=12.1234567').orbitTime).toBeUndefined();
     expect(decodeSceneState('orb-t=12&run=1').run).toBe(true); // Pause belongs to the orbit runtime, not other engines' codec.
     expect(encodeSceneState({ orbitTime: null })).toEqual([]);
+    // Shares the key space with TimeScene's month `m`: both survive a round trip.
+    const both = new URLSearchParams(encodeSceneState({ month: 3, orbitTime: 60 }));
+    expect([both.get('m'), both.get('orb-t')]).toEqual(['3', '60']);
   });
   it('static-comparison labs (rate 0) are still: FLOW and SPACE stay off there only', () => {
     const still = (lab: string) => orbitIsStill({ config: cfg, snapshot: snapshot({ lab }) } as unknown as OrbitSession);

@@ -8,6 +8,7 @@
  * This module is build-time only (zod); client code imports its *types* only.
  */
 import { z } from 'zod';
+import { airfoilPartIssues } from './airfoil-schema';
 import { bilingual, colorRef, KEBAB_ID, kebabId, level, theme, vec3, type Bilingual } from '../../content/schema/common';
 import { orbitCamera } from '../../content/schema/camera';
 import { sourcesFile } from '../../content/schema/sources';
@@ -311,7 +312,7 @@ export const primitiveSchema = z
         shape: outline,
         holes: z.array(outline).max(16).optional(),
         depth: positive,
-        bevel: positive.optional(),
+        bevel: z.number().finite().nonnegative().optional(),
         ...placement,
       })
       .strict(),
@@ -1242,6 +1243,7 @@ export const partsFileBase = z
         for (const id of Object.keys(pose.parts))
           if (writers.has(id)) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['poses', name, 'parts', id], message: 'orbit writer forbids pose motion' });
     }
+    for (const x of airfoilPartIssues(file as PartsFile)) ctx.addIssue({code:z.ZodIssueCode.custom,...x});
     file.parts.forEach((p, i) => {
       const at = (path: (string | number)[], message: string) => ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['parts', i, ...path], message });
       (p.extra ?? []).forEach((e, k) => {
@@ -1254,7 +1256,7 @@ export const partsFileBase = z
     file.flows.forEach((f, i) => {
       if (f.tidal && 'sync' in f.tidal && !file.animations.some((a) => a.id === (f.tidal as { sync: string }).sync))
         ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['flows', i, 'tidal', 'sync'], message: `unknown animation "${f.tidal.sync}"` });
-      if (f.path.length === 0 && file.sim?.kind !== 'magnet')
+      if (f.path.length === 0 && file.sim?.kind !== 'magnet' && !file.sim?.bind.some(b => 'flow' in b && b.flow === f.id && b.airfoilFlow))
         ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['flows', i, 'path'], message: 'give `path` or `paths` (only a magnet sim\'s field-line flow has neither)' });
     });
     const outputs = new Map((file.sim?.outputs ?? []).map((o) => [o.id, o]));

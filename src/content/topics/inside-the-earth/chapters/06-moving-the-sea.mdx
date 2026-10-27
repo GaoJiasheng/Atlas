@@ -1,0 +1,235 @@
+---
+id: moving-the-sea
+order: 6
+title:
+  en: Moving the sea
+  zh: 海水被移开
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  cutaway: none
+  run: false
+  part: null
+  pose: null
+  hide:
+  - building-ground
+  - building-foundation
+  - building-frame
+  - building-floors
+  - building-core
+  ghost: []
+  layers:
+  - water-and-structures
+  labels: &id001
+  - sea-bed
+  - sea-column-i
+  camera:
+    position:
+    - 0
+    - 1.5
+    - 5.8
+    target:
+    - 0
+    - 0
+    - 0
+    fov: 34
+  summary:
+    en: Moving the seafloor can displace water and start long waves.
+    zh: 海床移动能移开海水，激起长波。
+  sim:
+    set:
+      wave-kind: p
+      wave-step: 0
+      water-depth: 4000
+      sea-step: 0
+      sea-uplift: true
+      flow-mode: none
+    try:
+      vary: water-depth
+      also:
+      - sea-uplift
+      - sea-step
+      keep:
+      - en: For a depth comparison, keep displacement on and the same step
+        zh: 比较水深时，保持位移源开启、步骤相同
+      observe:
+      - longwave-ms
+      - longwave-kmh
+      - water-stage
+      record: true
+      predict:
+        prompt:
+          en: In this model, will the theoretical speed increase or decrease when the water becomes shallower?
+          zh: 在这个模型中变浅后，理论速度会增大还是减小？
+        start:
+          sea-uplift: true
+          sea-step: 3
+          water-depth: 4000
+        change:
+          water-depth: 100
+        observe: longwave-kmh
+        options:
+        - id: faster
+          label:
+            en: Increase
+            zh: 增大
+          means: more
+        - id: slower
+          label:
+            en: Decrease
+            zh: 减小
+          means: less
+  beats:
+  - labels: *id001
+    sim:
+      set:
+        wave-kind: p
+        wave-step: 0
+        water-depth: 4000
+        sea-step: 0
+        sea-uplift: false
+        flow-mode: none
+    caption:
+      en: Not every earthquake makes a tsunami. This model's water stays at rest when its seafloor-displacement source is off.
+      zh: 地震不一定产生海啸；这个模型关闭海床位移源时，水体保持静止。
+  - labels:
+    - sea-bed
+    - sea-bed-left
+    - sea-bed-right
+    - sea-column-i
+    sim:
+      set:
+        wave-kind: p
+        wave-step: 0
+        water-depth: 4000
+        sea-step: 1
+        sea-uplift: true
+        flow-mode: none
+    caption:
+      en: The source region rises and falls, displacing the water above it.
+      zh: 源区海床有升有降，移开上方的海水。
+  - labels:
+    - sea-column-g
+    - sea-column-i
+    - sea-column-k
+    sim:
+      set:
+        wave-kind: p
+        wave-step: 0
+        water-depth: 4000
+        sea-step: 3
+        sea-uplift: true
+        flow-mode: none
+    caption:
+      en: The disturbance spreads both ways. The depth markers remind us that the whole water column takes part.
+      zh: 扰动向两边传播；水深标记提醒我们，整个水柱都参与运动。
+  - pose: sea-shallow
+    camera:
+      position:
+      - 0
+      - 0.4
+      - 4.5
+      target:
+      - 0
+      - -0.6
+      - 0
+      fov: 34
+    labels:
+    - sea-coast
+    - sea-column-i
+    sim:
+      set:
+        wave-kind: p
+        wave-step: 0
+        water-depth: 100
+        sea-step: 3
+        sea-uplift: true
+        flow-mode: none
+    caption:
+      en: In shallower water, tsunami waves slow and can grow higher. This shore section is qualitative.
+      zh: 海啸进入浅水会减速，波可能变高；这个近岸剖面是定性示意。
+  - pose: null
+    labels:
+    - sea-column-i
+    sim:
+      set:
+        wave-kind: p
+        wave-step: 0
+        water-depth: 4000
+        sea-step: 3
+        sea-uplift: true
+        flow-mode: none
+    caption:
+      en: At a model depth of 4,000 metres the calculation gives about 713 kilometres per hour; at 100 metres, about 113. These are model speeds.
+      zh: 模型水深4000米时，计算速度约每小时713千米；100米时约113。这些是模型速度。
+  index:
+    parts:
+    - sea-bed
+    - sea-bed-left
+    - sea-bed-right
+    - sea-column-g
+    - sea-column-i
+    - sea-column-k
+    - sea-coast
+---
+
+<Lang en>
+
+Model calculation: begin with the seafloor-displacement source off. The water stays at rest, even though the card can still display a theoretical wave speed. Turn the source on and advance a step. The central seafloor rises while neighbouring sections fall, displacing water above them. This example shows how a seafloor change can start a disturbance; not every earthquake produces a tsunami.
+
+A <Term id="tsunami">tsunami</Term> is a series of long waves caused by a large, sudden displacement of water. In the sea sample the disturbance spreads both ways. The depth markers represent a water column, the water from the surface down to the bed. Tsunami motion involves that whole depth. The markers are enlarged symbols, not measured tracks of separate parcels of seawater.
+
+Select the separate shore sample. As tsunami waves enter shallower water they slow down, their wavelength, the distance between successive crests, shortens, and their height can increase. This section is qualitative. Its changed shape does not come from a calculation of a real coast, and the snapshots are diagram steps rather than seconds.
+
+Predict the speed change, then compare depths in the card. In this model, <Num s="S63">4,000 m</Num> gives about <Num s="S63">713 km/h</Num>, and <Num s="S63">100 m</Num> about <Num s="S63">113 km/h</Num>. Record rows at the different depths while keeping the source and step fixed. Clear the table before changing those other controls. The record stores depth, theoretical speed and water state; it is not an archive of water snapshots.
+
+<More title={{"en": "The speed approximation", "zh": "速度近似"}}>
+
+For a long wave, c ≈ √(gh). Here g is <Num s="S15,S63">9.8 m/s²</Num> and h is model depth. At <Num s="S63">100, 1,000 and 4,000 m</Num>, model speeds are <Num s="S63">31.3, 99.0 and 198.0 m/s</Num>, or <Num s="S63">112.7, 356.4 and 712.8 km/h</Num>. Conversion uses unrounded speeds multiplied by <Num s="S63">3.6</Num>. The formula gives speed if a wave is present, including when the source is off. It gives no height, flooding or real arrival time.
+
+</More>
+
+<More title={{"en": "Other ways to move water", "zh": "其他水体位移成因"}}>
+
+Tsunamis are unrelated to tides. Landslides and volcanic processes can also displace water. Turning off this model's seafloor source removes only this source; it does not rule out those other causes. Changing depth changes the calculated speed, not the number of diagram cells advanced.
+
+</More>
+
+<More title={{"en": "The first arrival", "zh": "最先到达的波"}}>
+
+NOAA explains that a tsunami does not always arrive trough first, so the sea need not withdraw before it rises. The first wave is not necessarily the largest. The single diagram pattern is not a checklist for judging a real coast.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+模型计算：先关闭海床位移源，水体保持静止，卡片仍可能显示理论速度。打开源并前进一步，中央海床上升，相邻部分下降，移开上方海水。这个示例说明海床变化怎样产生扰动，不代表每次地震都会产生海啸。
+
+<Term id="tsunami">海啸</Term>是大量水体突然位移产生的长波列。小样的扰动向两边传播；从水面到海床的整段海水叫水柱，海啸运动涉及整个水深。台上的水深标记是放大的符号，不是逐团海水的实测运动轨迹。
+
+再选择独立的近岸小样。海啸进入浅水后减速，相邻波峰之间的距离，也就是波长，会缩短，波高可能增加。这里的形状变化只是定性说明，并未计算真实海岸的波高。快照步骤也不是秒，不能从前进格数推算到岸时间。
+
+先猜变浅后的速度变化，再用卡片比较。本模型水深 <Num s="S63">4000 米</Num>时约为<Num s="S63">每小时 713 千米</Num>；<Num s="S63">100 米</Num>时约为<Num s="S63">每小时 113 千米</Num>。记录不同水深时，保持源开关和步骤相同；改变它们前先清表。记录只保存水深、理论速度和水体状态，并不是水位快照档案。源关闭时读数非零，也不能因此说水体已经出现海啸。
+
+<More title={{"en": "The speed approximation", "zh": "速度近似"}}>
+
+长波速度近似为 c ≈ √(gh)。这里 g 取 <Num s="S15,S63">9.8 米每平方秒</Num>，h 为模型水深。<Num s="S63">100、1000、4000 米</Num>对应 <Num s="S63">31.3、99.0、198.0 米每秒</Num>，或<Num s="S63">每小时 112.7、356.4、712.8 千米</Num>。换算用未舍入速度乘 <Num s="S63">3.6</Num>。即使源关闭，也会给出存在长波时的理论速度；公式不计算波高、淹没或真实到岸时间。
+
+</More>
+
+<More title={{"en": "Other ways to move water", "zh": "其他水体位移成因"}}>
+
+海啸与潮汐无关，滑坡和火山过程也能移开水体。关闭本模型的海床源，只移除了这一种源，并没有排除其他成因。改变水深只改变计算速度，不改变图解前进的格数。
+
+</More>
+
+<More title={{"en": "The first arrival", "zh": "最先到达的波"}}>
+
+NOAA 说明，海啸不一定先到波谷，所以海水不一定先退后涨；首波也不一定最大。这里单一的图解形态，不能拿来判断真实海岸的情况。
+
+</More>
+
+</Lang>
