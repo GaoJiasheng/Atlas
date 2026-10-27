@@ -810,3 +810,13 @@ Chromium 本机可跑（机器负载 90–140，多代理同时跑浏览器）�
 | shoot / 浏览器 e2e / GPU | 按本轮用户明确指示跳过，未调用浏览器或桌面工具。 |
 
 **主会话复验重点**：1280×720 / 1024×768 的 04.3、05.3、07.3、07.5 主体是否都在自由区；1600×900 与中间尺寸 resize / 卡片折叠 / 尺度切换 / 自由相机；双语双主题的轴、平面、观察点、近侧标记标签；01.5/02.5 的锚点，04.5/06.5 的太阳与 04.5 的受光远侧；近景法线/倾角弧细线及 F4 新说明后的卡片高度。§8 不据静态结果勾选。
+
+### 9.6 返工复验（Claude，2026-10-27）
+
+复验 §9.5（F1–F5 与 `views.hudFrame`）。逐项状态写在 `FIXES.md` 末尾表。
+
+- **F1 / F3 / F4 / F5**：地轴、轨道平面标签出现并指向轴端 / 法线端；导引管半径减半后仍可读；观察卡有“影锥太细”的说明；01.5 / 02.5 / 06.5 标签与镜头已修，04.5 太阳移出画面（远侧仍主要靠字幕）。BG.2 与偶尔 02.4 仍报 `no label: earth-axis`，章镜头也有若干章级提示，不是失败。
+- **F2**：1280×720 的 04.3 / 05.3 / 07.3 / 07.5 月球清楚地落在观察卡左侧；1600×900 不变。**1024×768 未完成**：月球、地球都在画内，但地球缩到约 14 px，拉远后太阳盘压在左栏文字上，留在 FIXES.md。
+- **引擎是否真的可选**：`hudFrame` 缺省时 `CameraRig.fitHud` 直接返回原相机，`Model3DStage` 的测量 effect 也直接返回；1600×900 的 aircon、heart-and-lungs 与未改前外观一致（目视）。
+- **shoot**：sun-earth-moon en/zh × paper/cinema `--beats --keys --layout`：console clean，layout 8 个尺寸 0 问题，keys 与 beat links 在无负载抖动时 39/39。负载 150–250 下每轮会出现 1–2 个随机项：`beat-… (link)` 的 orbit 不同（400 ms 内页面还没出第一帧，`engine.orbit()` 为空；5 s 后与演示逐位相同，`sample-orbit` 同样出现）、`key "h"` 的恢复按钮 5 s 内没淡入（未改动的 aircon 同样失败；单独打开三个主题均 <0.6 s 出现）。回归：aircon beat links 24/24、keys 除 `h`；sample-orbit 同。heart-and-lungs、sample-heart 的 shoot 在 30 s screenshot 超时中止（机器负载，未得结果）。
+- **e2e**（`--workers=2`，`test.setTimeout` 与 `--timeout` 临时抬高，已还原）：sun-earth-moon、sample-orbit、smoke 三个 spec 36/36 通过，用时 45 min。
