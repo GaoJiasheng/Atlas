@@ -223,6 +223,7 @@ function checkBodyComponents(
   tasks: Set<string> | null,
   beats: number | null,
   measuring = false,
+  events: Set<string> | null = null,
 ): void {
   for (const { raw, attrs } of tagAttrs(body, 'Num')) {
     const ids = (attrs.s ?? '').split(/[\s,]+/).filter(Boolean);
@@ -239,6 +240,8 @@ function checkBodyComponents(
     const id = attrs.preset;
     if (!id) error(file, `<FlyTo> needs a preset, e.g. <FlyTo preset="singapore-island">: ${raw}`);
     else if (!presets.has(id)) error(file, `<FlyTo preset="${id}">: unknown preset (not a named camera preset of this topic)`);
+    if (attrs.event !== undefined && !events?.has(attrs.event))
+      error(file, `<FlyTo event="${attrs.event}">: unknown event (not in this TimeScene topic's data/events.json)`);
   }
   for (const { raw, attrs } of tagAttrs(body, 'TopicLink')) {
     const slug = attrs.slug;
@@ -492,6 +495,9 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
       error(issue.file.startsWith('public/') ? join(ROOT, issue.file) : join(dir, issue.file), issue.message);
   }
   const presets = new Set(data !== undefined ? schemas.presetIds(data) : []);
+  const eventIds = data !== undefined && topic.engine === 'time-scene'
+    ? new Set((data as { events: { id: string }[] }).events.map((event) => event.id))
+    : null;
   const glossaryFile = data !== undefined ? (data as { glossary?: GlossaryFile }).glossary : undefined;
   const terms = glossaryFile ? glossaryIds(glossaryFile) : 'glossary' in raw ? new Set<string>() : null;
   const tasks = data !== undefined && schemas.taskIds ? new Set(schemas.taskIds(data)) : null;
@@ -524,7 +530,7 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
     checkBilingual(file, front);
     checkLangBlocks(file, match[2] ?? '');
     // Only when the data parsed: otherwise the data errors already explain missing ids.
-    if (data !== undefined) checkBodyComponents(file, match[2] ?? '', sources, presets, terms, tasks, lessonBeats(data, (front as { id?: unknown }).id), drawsInstruments(data));
+    if (data !== undefined) checkBodyComponents(file, match[2] ?? '', sources, presets, terms, tasks, lessonBeats(data, (front as { id?: unknown }).id), drawsInstruments(data), eventIds);
 
     const parsed = chapterSchema.safeParse(front);
     if (!parsed.success) {

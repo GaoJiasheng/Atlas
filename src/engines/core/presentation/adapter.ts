@@ -80,7 +80,7 @@ export interface SpaceBeatSpec extends BeatBase {
   /** Muscle parts whose attachment markers show in this beat; default the chapter's. */
   sites?: string[];
   /** Try-it control values for this beat, on top of the chapter's `sim.set`. */
-  sim?: { set: Record<string, boolean | number | string> };
+  sim?: { set: Record<string, boolean | number | string>; reveal?: boolean };
 }
 
 export interface SpaceSavedState {

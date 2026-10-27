@@ -1097,5 +1097,15 @@
   "math.specimen.net": "折到一半的正方体展开图",
   "math.grid.faces": "面数",
   "math.net.work.oppositeDone": "● 和 ● 相对",
-  "math.net.work.bottomDone": "找到了：底"
+  "math.net.work.bottomDone": "找到了：底",
+  "space.try.curve": "模型曲线",
+  "space.try.elapsed": "经过时间（s）",
+  "space.try.zero": "回到 0 s",
+  "space.try.modelTable": "模型值表",
+  "space.try.conditionsChanged": "条件已改变，请开始新记录。",
+  "space.try.comparedConditions": "比较时的条件",
+  "space.try.conditions": "条件",
+  "space.try.before": "之前",
+  "space.try.after": "之后",
+  "space.try.showCurrent": "显示当前结果"
 }

@@ -1,0 +1,121 @@
+---
+{
+  "id": "sample-heating",
+  "order": 4,
+  "title": {
+    "en": "Heating",
+    "zh": "加热"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": true,
+    "part": null,
+    "layers": [
+      "transfer",
+      "curves",
+      "expansion"
+    ],
+    "labels": [],
+    "camera": {
+      "position": [
+        0.2,
+        0.65,
+        1.25
+      ],
+      "target": [
+        0,
+        0.04,
+        0
+      ],
+      "fov": 36
+    },
+    "summary": {
+      "en": "Draft engine fixture: explicit model inputs and results.",
+      "zh": "引擎测试草稿：显式模型输入与结果。"
+    },
+    "index": {
+      "parts": [
+        "heater-block",
+        "thermometer-marker",
+        "cool-block",
+        "wrap",
+        "metal-tip",
+        "plastic-tip",
+        "rod",
+        "rod-end-marker"
+      ]
+    },
+    "sim": {
+      "set": {
+        "water-g": 200,
+        "heater-w": 100,
+        "elapsed-s": 0
+      },
+      "try": {
+        "vary": "elapsed-s",
+        "also": [
+          "water-g",
+          "heater-w"
+        ],
+        "observe": [
+          "heated-c",
+          "heated-j",
+          "heated-input-j"
+        ],
+        "curve": {
+          "x": "elapsed-s",
+          "y": [
+            "heated-c"
+          ],
+          "samples": 101
+        },
+        "record": {
+          "chart": {
+            "y": "heated-c"
+          }
+        }
+      }
+    },
+    "beats": [
+      {
+        "sim": {
+          "set": {
+            "water-g": 200,
+            "heater-w": 100,
+            "elapsed-s": 0
+          }
+        },
+        "caption": {
+          "en": "Schematic model: the selected inputs determine this explicit instant.",
+          "zh": "示意模型：所选输入决定这一显式时刻。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "elapsed-s": 120
+          },
+          "reveal": true
+        },
+        "caption": {
+          "en": "A second explicit input state; no experiment clock runs in the background.",
+          "zh": "第二组显式输入状态，没有后台实验时钟。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Draft engine fixture. Values are model results, not measurements.
+
+</Lang>
+
+<Lang zh>
+
+引擎测试草稿。数值为模型结果，并非实测。
+
+</Lang>

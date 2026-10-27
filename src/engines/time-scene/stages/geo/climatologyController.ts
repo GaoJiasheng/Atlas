@@ -109,7 +109,7 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
       cursor: 'pointer',
       fontSize: '12px',
     });
-    const marker = new Marker({ element: button }).setLngLat(site.at).addTo(map);
+    const marker = new Marker({ element: button, offset: site.displayOffset ? [...site.displayOffset] : [0, 0] }).setLngLat(site.at).addTo(map);
     button.addEventListener('click', (e) => {
       e.stopPropagation();
       if (!presentation && !options.isPresenting?.()) {

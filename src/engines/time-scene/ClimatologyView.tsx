@@ -191,6 +191,7 @@ export default function ClimatologyView({ topic, data, chapters, locale }: Engin
   const grid = wind?.grid ?? rain?.grid;
   const controls = useMemo<SceneControls>(
     () => ({
+      selectEvent: (id) => !presentation.isPresenting() && selectSite(id),
       presets: {
         items: [
           { id: 'world', label: { en: 'World', zh: '世界' } },

@@ -26,11 +26,11 @@ import type { SpaceUiStore } from '../ui';
 import { numberOf, type SimOutputValue } from '../lib/sim';
 import { evaluateSimOnStage } from '../lib/sim/carrier';
 import { resolveSimValues, stepValue } from '../lib/sim/controls';
-import { outcomeOf, recordRow } from '../lib/sim/trial';
+import { outcomeOf, predictionIsCurrent, recordRow, tableContextKey } from '../lib/sim/trial';
 import { outputText, outputWords, valueText, valueWords } from '../lib/sim/text';
 import { cardTimelines } from '../lib/sim/replay';
 import { isTimeline } from '../lib/sim/timeline';
-import { setSim, useSimStore, useSimView } from '../hud/sim';
+import { revealCurrentResult, setSim, usePredictionHidden, useSimStore, useSimView } from '../hud/sim';
 import { CircuitDiagram } from '../hud/CircuitCard';
 import { EnergyDiagram } from '../hud/EnergyCard';
 import { CycleDiagram } from '../hud/CycleCard';
@@ -39,6 +39,7 @@ import { AirfoilPlot } from './AirfoilPlot';
 import { AirfoilPressure } from './AirfoilPressure';
 import type { StageBridge } from '../bridge';
 import { TryChart } from './TryChart';
+import { TryCurve } from './TryCurve';
 import { SourceRefs } from '../../widgets/SourcePopover';
 import { tableSources } from '../lib/sim/table';
 
@@ -119,23 +120,26 @@ function Predict({ file, sim, card, ui, chapter }: { file: PartsFile; sim: SimDa
   const { locale } = useSceneContext();
   const store = useSimStore();
   const view = useSimView(file)!;
-  const answer = useStore(ui, (u) => (u.simPredict?.chapter === chapter ? u.simPredict : null));
+  const saved = useStore(ui, (u) => u.simPredict);
+  const answer = predictionIsCurrent(saved, chapter, view.values) ? saved : null;
   const p = card.predict!;
   const observed = sim.outputs.find((o) => o.id === p.observe);
   const isState = observed?.kind === 'state';
   const pick = (id: string) => {
-    const before = { ...store.getState().sim };
+    const restore = resolveSimValues(sim, store.getState().sim);
     // From the prediction's starting point (the switch closed …): read the observed output there, then make the change.
     for (const [k, v] of Object.entries(p.start ?? {})) setSim(store, sim, k, v);
     const st = store.getState();
+    const before = resolveSimValues(sim, st.sim);
     const out = evaluateSimOnStage(sim, file, resolveSimValues(sim, st.sim), st.pose, card.observe).outputs[p.observe];
     const value = isState ? String(out ?? '') : numberOf(out);
-    ui.setState({ simPredict: { chapter, guess: id, before, value } });
     for (const [k, v] of Object.entries(p.change)) setSim(store, sim, k, v);
+    const after = resolveSimValues(sim, store.getState().sim);
+    ui.setState({ simPredict: { chapter, guess: id, before, after, restore, value } });
   };
   const back = () => {
-    if (answer) store.getState().patch({ sim: { ...answer.before } });
-    ui.setState({ simPredict: null });
+    if (answer) store.getState().patch({ sim: { ...(answer.restore ?? answer.before) } });
+    ui.setState({ simPredict: null, simReveal: null });
   };
   if (!answer) {
     return (
@@ -166,6 +170,13 @@ function Predict({ file, sim, card, ui, chapter }: { file: PartsFile; sim: SimDa
         <span>{t('space.try.predicted', { guess: guess ? tx(guess.label, locale) : '' })}</span>
         <span>{t('space.try.observed', { seen })}</span>
       </p>
+      <details className="space-curve__values">
+        <summary>{t('space.try.comparedConditions')}</summary>
+        <table className="space-try__table">
+          <thead><tr><th scope="col">{t('space.try.conditions')}</th><th scope="col">{t('space.try.before')}</th><th scope="col">{t('space.try.after')}</th></tr></thead>
+          <tbody>{sim.controls.map((c) => <tr key={c.id}><th scope="row">{tx(c.label, locale)}</th><td>{valueText(c, answer.before[c.id], locale)}</td><td>{valueText(c, answer.after[c.id], locale)}</td></tr>)}</tbody>
+        </table>
+      </details>
       <button type="button" className="space-try__opt" onClick={back}>
         {t('space.try.again')}
       </button>
@@ -178,6 +189,7 @@ function Table({ file, sim, card, ui, chapter }: { file: PartsFile; sim: SimData
   const { locale } = useSceneContext();
   const view = useSimView(file)!;
   const rows = useStore(ui, (u) => u.simTables[chapter]) ?? [];
+  const notice = useStore(ui, (u) => u.simTableNotices[chapter] ?? false);
   const vary = sim.controls.find((c) => c.id === card.vary)!;
   const outs = card.observe.map((id) => sim.outputs.find((o) => o.id === id)!).filter((o) => o.kind !== 'vector' && o.kind !== 'timeline');
   const rec = card.record !== true && card.record ? card.record : null;
@@ -194,12 +206,18 @@ function Table({ file, sim, card, ui, chapter }: { file: PartsFile; sim: SimData
     if(sim.airfoil) values[sim.airfoil.plot.y] = view.outputs[sim.airfoil.plot.y]!;
     if (judge) values[judge.output] = view.outputs[judge.output]!;
     const tables = ui.getState().simTables;
-    ui.setState({ simTables: { ...tables, [chapter]: recordRow(tables[chapter] ?? [], { vary: view.values[card.vary]!, values }) } });
+    const context = tableContextKey(chapter, view.values, card.vary);
+    const previous = ui.getState().simTableContexts[chapter] === context ? tables[chapter] ?? [] : [];
+    ui.setState({ simTables: { ...tables, [chapter]: recordRow(previous, { vary: view.values[card.vary]!, values }) },
+      simTableContexts: { ...ui.getState().simTableContexts, [chapter]: context },
+      simTableNotices: { ...ui.getState().simTableNotices, [chapter]: false },
+    });
   };
   const clear = () => ui.setState({ simTables: { ...ui.getState().simTables, [chapter]: [] } });
   const head = (o: SimOutput) => `${tx(o.label, locale)}${o.unit && o.format !== 'time' ? ` (${o.unit})` : ''}`;
   return (
     <div className="space-try__record">
+      {notice && <p className="space-try__notice" role="status">{t('space.try.conditionsChanged')}</p>}
       <span className="space-try__actions">
         <button type="button" className="space-try__opt space-try__rec" data-sim-record="" onClick={record}>
           {t('space.try.record')}
@@ -291,6 +309,8 @@ export function TryIt({ file, ui, bridge }: { file: PartsFile; ui: SpaceUiStore;
   const store = useSimStore();
   const chapter = useScene<SpaceSceneExt, string | null>((s) => s.chapter);
   const view = useSimView(file);
+  const hidden = usePredictionHidden(ui, view);
+  const notice = useStore(ui, (state) => chapter !== null && state.simTableNotices[chapter] === true);
   if (!view || !chapter) return null;
   if (!view.card) return view.sim.lifeCycle ? <LifeCycleFold file={file} sim={view.sim} /> : view.sim.sort ? <SortFold file={file} sim={view.sim} /> : null;
   const { sim, card, values, outputs } = view;
@@ -332,7 +352,7 @@ export function TryIt({ file, ui, bridge }: { file: PartsFile; ui: SpaceUiStore;
           <Control key={c.id} c={c} value={values[c.id]} primary={i === 0} onSet={(v) => setSim(store, sim, c.id, v)} />
         ))}
       </div>
-      <dl className="space-try__readouts">
+      {!hidden && <dl className="space-try__readouts">
         {observed.map((o) => (
           <div key={o.id} className="space-try__readout" data-sim-output={o.id} data-state={o.kind === 'state' ? String(outputs[o.id]) : undefined} data-tag={o.tag ?? 'sim'}>
             <dt>
@@ -356,12 +376,15 @@ export function TryIt({ file, ui, bridge }: { file: PartsFile; ui: SpaceUiStore;
             {typicalRefs.length > 0 && <SourceRefs ids={typicalRefs} locale={locale} />}
           </p>
         )}
-      </dl>
+      </dl>}
       {sim.airfoil && card.vary === sim.airfoil.angle && <AirfoilPlot sim={sim} values={values} ui={ui} chapter={chapter} />}
       {sim.airfoil && <AirfoilPressure file={file} values={values} ui={ui} bridge={bridge} />}
       <Replay ids={runs} slow={slow} ui={ui} />
+      {hidden && <button type="button" className="space-try__opt" data-sim-reveal="" onClick={() => revealCurrentResult(ui, chapter, values)}>{t('space.try.showCurrent')}</button>}
+      {hidden && notice && <p className="space-try__notice" role="status">{t('space.try.conditionsChanged')}</p>}
       {card.predict && <Predict file={file} sim={sim} card={card} ui={ui} chapter={chapter} />}
-      {card.record && <Table file={file} sim={sim} card={card} ui={ui} chapter={chapter} />}
+      {!hidden && card.curve && <TryCurve sim={sim} values={values} curve={card.curve} />}
+      {!hidden && card.record && <Table file={file} sim={sim} card={card} ui={ui} chapter={chapter} />}
       {sim.circuit?.diagram && (
         <details className="space-try__diagram" open>
           <summary>{t('space.try.diagram')}</summary>

@@ -1,0 +1,220 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "Singapore MOE, Primary Science Syllabus 2023 (updated May 2024), printed pp.76–77. P4 Heat covers temperature, heat transfer, conductors and size changes.",
+        "zh": "新加坡教育部《小学科学课纲2023》（2024年5月更新），印刷页76–77：P4热单元的温度、传热、导体和尺寸变化。"
+      },
+      "url": "https://www.moe.gov.sg/-/media/files/primary/syllabus/2023-primary-science.ashx",
+      "note": {
+        "en": "Official cached PDF provenance checked in the preparation dossier (SHA256 0556023ceb55fe80de75ae044011b8c77ea7ea494a1873d2b224a9b2b8083ab0). Live verification gate was not bypassed; no syllabus PDF distributed.",
+        "zh": "准备卷已核官方PDF缓存来源及哈希；实时入口验证页未绕过，未分发整份课纲。"
+      }
+    },
+    {
+      "id": "S2",
+      "text": {
+        "en": "OpenStax, College Physics 2e §13.1: thermometer measurement, thermal equilibrium and the liquid-in-glass principle.",
+        "zh": "OpenStax《College Physics 2e》13.1节：温度计测温、热平衡及液体玻璃温度计原理。"
+      },
+      "url": "https://openstax.org/books/college-physics-2e/pages/13-1-temperature",
+      "note": {
+        "en": "Read in preparation 2026-10-27; CC BY-NC-SA 4.0 (current web edition). Current preface S18 governs this web edition; older mirrors label earlier versions CC BY 4.0. Individual third-party image licences require separate checks; no images copied.",
+        "zh": "2026-10-27准备阶段已读；仅作事实参考，未复用原图或数据文件。本轮另复取正文核对。"
+      }
+    },
+    {
+      "id": "S3",
+      "text": {
+        "en": "OpenStax, College Physics 2e §14.1: heat as energy transfer caused by temperature difference; spontaneous transfer toward a colder body.",
+        "zh": "OpenStax《College Physics 2e》14.1节：热是温差造成的能量传递，自发净传热由高温至低温。"
+      },
+      "url": "https://openstax.org/books/college-physics-2e/pages/14-1-heat",
+      "note": {
+        "en": "Read in preparation 2026-10-27; CC BY-NC-SA 4.0 (current web edition). Current preface S18 governs this web edition; older mirrors label earlier versions CC BY 4.0. Individual third-party image licences require separate checks; no images copied.",
+        "zh": "2026-10-27准备阶段已读；仅作事实参考，未复用原图或数据文件。本轮另复取正文核对。"
+      }
+    },
+    {
+      "id": "S4",
+      "text": {
+        "en": "OpenStax, College Physics 2e §14.5: conduction depends on material, area, length and temperature difference.",
+        "zh": "OpenStax《College Physics 2e》14.5节：传导与材料、截面积、长度及温差有关。"
+      },
+      "url": "https://openstax.org/books/college-physics-2e/pages/14-5-conduction",
+      "note": {
+        "en": "Read in preparation 2026-10-27; CC BY-NC-SA 4.0 (current web edition). Current preface S18 governs this web edition; older mirrors label earlier versions CC BY 4.0. Individual third-party image licences require separate checks; no images copied.",
+        "zh": "2026-10-27准备阶段已读；仅作事实参考，未复用原图或数据文件。本轮另复取正文核对。"
+      }
+    },
+    {
+      "id": "S5",
+      "text": {
+        "en": "OpenStax, College Physics 2e §13.2: free thermal expansion, holes and a representative steel coefficient of 12 × 10⁻⁶ per kelvin.",
+        "zh": "OpenStax《College Physics 2e》13.2节：自由热膨胀、孔及钢的代表性线胀系数12×10⁻⁶每开尔文。"
+      },
+      "url": "https://openstax.org/books/college-physics-2e/pages/13-2-thermal-expansion-of-solids-and-liquids",
+      "note": {
+        "en": "Read in preparation 2026-10-27; CC BY-NC-SA 4.0 (current web edition). Current preface S18 governs this web edition; older mirrors label earlier versions CC BY 4.0. Individual third-party image licences require separate checks; no images copied.",
+        "zh": "2026-10-27准备阶段已读；仅作事实参考，未复用原图或数据文件。本轮另复取正文核对。"
+      }
+    },
+    {
+      "id": "S6",
+      "text": {
+        "en": "OpenStax, College Physics 2e §14.2: Q = mcΔT when there is no phase change or work. Representative water specific heat 4186 J/(kg·°C), rounded independently to 4.2 J/(g·K) here.",
+        "zh": "OpenStax《College Physics 2e》14.2节：无相变或做功时Q=mcΔT。水比热代表值4186 J/(kg·°C)，本模型独立取整为4.2 J/(g·K)。"
+      },
+      "url": "https://openstax.org/books/college-physics-2e/pages/14-2-temperature-change-and-heat-capacity",
+      "note": {
+        "en": "Read in preparation 2026-10-27; CC BY-NC-SA 4.0 (current web edition). Current preface S18 governs this web edition; older mirrors label earlier versions CC BY 4.0. Individual third-party image licences require separate checks; no images copied.",
+        "zh": "2026-10-27准备阶段已读；仅作事实参考，未复用原图或数据文件。本轮另复取正文核对。"
+      }
+    },
+    {
+      "id": "S7",
+      "text": {
+        "en": "OpenStax, College Physics 2e §14.3: a phase change can transfer energy without changing temperature at fixed pressure.",
+        "zh": "OpenStax《College Physics 2e》14.3节：固定压力下，相变可在温度不变时传递能量。"
+      },
+      "url": "https://openstax.org/books/college-physics-2e/pages/14-3-phase-change-and-latent-heat",
+      "note": {
+        "en": "Read in preparation 2026-10-27; CC BY-NC-SA 4.0 (current web edition). Current preface S18 governs this web edition; older mirrors label earlier versions CC BY 4.0. Individual third-party image licences require separate checks; no images copied.",
+        "zh": "2026-10-27准备阶段已读；仅作事实参考，未复用原图或数据文件。"
+      }
+    },
+    {
+      "id": "S8",
+      "text": {
+        "en": "OpenStax, College Physics 2e §13.3: gas temperature, volume and pressure; constant-pressure expansion requires a movable boundary.",
+        "zh": "OpenStax《College Physics 2e》13.3节：气体温度、体积及压力的关系；定压膨胀需要可动边界。"
+      },
+      "url": "https://openstax.org/books/college-physics-2e/pages/13-3-the-ideal-gas-law",
+      "note": {
+        "en": "Read in preparation 2026-10-27; CC BY-NC-SA 4.0 (current web edition). Current preface S18 governs this web edition; older mirrors label earlier versions CC BY 4.0. Individual third-party image licences require separate checks; no images copied.",
+        "zh": "2026-10-27准备阶段已读；仅作事实参考，未复用原图或数据文件。"
+      }
+    },
+    {
+      "id": "S10",
+      "text": {
+        "en": "Exploratorium Teacher Institute, Cold Metal: different rates of heat transfer can make equal-temperature materials feel different. No photograph or activity text reproduced.",
+        "zh": "Exploratorium教师研究所《Cold Metal》：传热速率不同，可让同温材料有不同手感。未复制照片或活动原文。"
+      },
+      "url": "https://www.exploratorium.edu/snacks/cold-metal",
+      "note": {
+        "en": "Read in preparation 2026-10-27; CC BY-NC-SA 4.0. Licence explicitly displayed on page. Conceptual reference, no image download.",
+        "zh": "2026-10-27准备阶段已读；仅作事实参考，未复用原图或数据文件。本轮另复取正文核对。"
+      }
+    },
+    {
+      "id": "S14",
+      "text": {
+        "en": "Meteorological Service Singapore, Climate of Singapore: outdoor air climatology is specific to its station and reference period, not the temperature of this model cup.",
+        "zh": "新加坡气象署《Climate of Singapore》：室外空气气候资料有观测站和基准时期，不是本课模型杯的水温。"
+      },
+      "url": "https://www.weather.gov.sg/climate-climate-of-singapore",
+      "note": {
+        "en": "Read in preparation 2026-10-27; Reference only; no redistribution clearance. 1991–2020 normals, not today’s weather or a school-lab measurement.",
+        "zh": "2026-10-27准备阶段已读；仅作事实参考，未复用原图或数据文件。"
+      }
+    },
+    {
+      "id": "S15",
+      "text": {
+        "en": "NParks, Sembawang Hot Spring Park: temperature statements belong to a specified location; no park image, map, opening status or visit advice reused.",
+        "zh": "国家公园局《Sembawang Hot Spring Park》：温度叙述属于指定位置；未复用照片、地图、开放状态或游览建议。"
+      },
+      "url": "https://www.nparks.gov.sg/visit/parks/park-detail/sembawang-hot-spring-park/",
+      "note": {
+        "en": "Read in preparation 2026-10-27; Reference only; no image/data reuse clearance. Collection-point temperature is location-specific. At access, banner says closed for urgent maintenance until 30 Oct 26. No visit recommendation or opening-hours content in static lesson.",
+        "zh": "2026-10-27准备阶段已读；仅作事实参考，未复用原图或数据文件。"
+      }
+    },
+    {
+      "id": "S16",
+      "text": {
+        "en": "Hong Kong Education Bureau, English–Chinese Physics Glossary (2020): reference for individual physics terms. Simplified characters are editorial conversions, not evidence of Singapore MOE usage.",
+        "zh": "香港教育局《物理科英汉词汇表》（2020）：个别物理术语参考。简体字为编辑转换，不代表新加坡教育部用语。"
+      },
+      "url": "https://www.edb.gov.hk/attachment/en/curriculum-development/kla/science-edu/ref-and-resources/PhyGlossary_2020.pdf",
+      "note": {
+        "en": "Reference-only glossary; no PDF redistributed. Full phrases good/poor conductor, insulation and heating curve remain editorial choices, not claimed official Singapore Chinese.",
+        "zh": "仅参考词汇，未分发PDF。热的良导体、热的不良导体、隔热、加热曲线等完整短语仍属编辑用语，不称新加坡官方华文。"
+      }
+    },
+    {
+      "id": "S17",
+      "text": {
+        "en": "Hong Kong Education Bureau, English–Chinese Science (S1–3) Glossary (2017): individual term reference only.",
+        "zh": "香港教育局《科学科（中一至中三）英汉词汇表》（2017）：仅供个别术语参考。"
+      },
+      "url": "https://www.edb.gov.hk/attachment/en/curriculum-development/kla/science-edu/ref-and-resources/SciGlossary_2017.pdf",
+      "note": {
+        "en": "Reference-only glossary; no PDF redistributed. Full phrases good/poor conductor, insulation and heating curve remain editorial choices, not claimed official Singapore Chinese.",
+        "zh": "仅参考词汇，未分发PDF。热的良导体、热的不良导体、隔热、加热曲线等完整短语仍属编辑用语，不称新加坡官方华文。"
+      }
+    },
+    {
+      "id": "S18",
+      "text": {
+        "en": "OpenStax, College Physics 2e Preface: current web edition is CC BY-NC-SA 4.0; separate third-party figure licences are not assumed.",
+        "zh": "OpenStax《College Physics 2e》序言：当前网页版本为CC BY-NC-SA 4.0，不据此推定第三方配图许可。"
+      },
+      "url": "https://openstax.org/books/college-physics-2e/pages/preface",
+      "note": {
+        "en": "Read in preparation 2026-10-27; CC BY-NC-SA 4.0. Licence checked live; no reliance on old CC BY mirrors.",
+        "zh": "2026-10-27准备阶段已读；仅作事实参考，未复用原图或数据文件。本轮另复取正文核对。"
+      }
+    },
+    {
+      "id": "S20",
+      "text": {
+        "en": "OpenStax, University Physics Volume 2 §1.3: ordinary free expansion, increasing average particle separation and the water exception near freezing.",
+        "zh": "OpenStax《University Physics Volume 2》1.3节：通常的自由膨胀、粒子平均间距增加及接近结冰温度时水的例外。"
+      },
+      "url": "https://openstax.org/books/university-physics-volume-2/pages/1-3-thermal-expansion",
+      "note": {
+        "en": "Read in preparation 2026-10-27; Reference only in this plan; no figures copied. Water anomaly, free expansion and microscopic explanation; do not reuse third-party bridge photo.",
+        "zh": "2026-10-27准备阶段已读；仅作事实参考，未复用原图或数据文件。本轮另复取正文核对。"
+      }
+    },
+    {
+      "id": "S21",
+      "text": {
+        "en": "OpenStax, University Physics Volume 2 §1.6: conduction without bulk transport, insulation in both directions and radiation without contact.",
+        "zh": "OpenStax《University Physics Volume 2》1.6节：无整体物质流动的传导、双向隔热及无接触的辐射。"
+      },
+      "url": "https://openstax.org/books/university-physics-volume-2/pages/1-6-mechanisms-of-heat-transfer",
+      "note": {
+        "en": "Read in preparation 2026-10-27; Reference only in this plan; no figures copied. ",
+        "zh": "2026-10-27准备阶段已读；仅作事实参考，未复用原图或数据文件。"
+      }
+    },
+    {
+      "id": "S27",
+      "design": true,
+      "text": {
+        "en": "Atlas original Heat design study (docs/55). Generic bench 1.8 × 0.7 m, top 0.75 m. DESIGN: water 200/300/400 g, c=4.2 J/(g·K), power 0/50/100 W, time 0–300 s; cooler starts 5/45/65/85 °C in a fixed 25 °C environment, conductance bare 2 or wrapped 0.5 W/K; spoon tips start 25 °C, each effective capacity 20 J/K, maintained bath 5/25/45/65/85 °C, effective conductances 1/3 and 1/30 W/K. Rod: 0.1 m at 25 °C, alpha 0.000012/K; separate displacement indicator ×500. SIM: at120 s heater39.285714286 °C, energy12000 J; at300 s cooler bare54.372499573 °C, wrapped75.187858438 °C; at60 s hot-bath tips62.927233530 and30.709754918 °C; at85 °C rod delta0.072 mm, indicated0.036 m.",
+        "zh": "本主题Atlas原创热实验台设计研究（docs/55）。通用台1.8×0.7米、台面高0.75米。设计：水200/300/400克、比热4.2 J/(g·K)、功率0/50/100瓦、时间0–300秒；冷却初温5/45/65/85℃、固定环境25℃、裸杯/包覆有效传热系数2/0.5 W/K；勺端初温25℃、各有效热容20 J/K、恒温浴5/25/45/65/85℃、有效导热通路1/3和1/30 W/K。杆在25℃长0.1米、线胀系数0.000012/K，独立位移指示放大500倍。模拟：120秒加热水温39.285714286℃、供能12000焦；300秒裸杯54.372499573℃、包覆75.187858438℃；60秒热浴勺端62.927233530/30.709754918℃；杆85℃伸长0.072毫米，指示位移0.036米。"
+      },
+      "note": {
+        "en": "Not measurements. C=mc; C dT/dt=P−U(T−Ta); T=T0+Pt/C for U=0, otherwise T=Ta+P/U+(T0−Ta−P/U)exp(−Ut/C). E=C(T−T0), supplied=Pt, reservoir energy=Pt−E. DeltaL=L0 alpha(T−Tref). Background equations S4/S6/S29; representative steel coefficient S5. Ignores cup capacity, spatial gradients, evaporation and variable surroundings. Baths externally maintained; equal effective tip capacities are teaching parameters. Liquid levels and gas/liquid/ball poses qualitative; fixed rod geometry, separate enlarged indicator. Original geometry/art; no third-party assets or downloaded observations.",
+        "zh": "并非实测。热容量C=mc；C dT/dt=P−U(T−Ta)；U为零时温度按恒功率直线上升，否则按指数趋近。净传入能量=C×温差，外部供能=Pt，热库所得=供能−净传入。伸长量=原长×系数×温差。公式依据S04/S6/S29、钢代表值S05。忽略杯热容、空间温度梯度、蒸发和变动环境；温浴外部维持，勺端相同有效热容是教学参数。液位及气体/液体/球姿态仅定性；钢杆几何不变，只移动独立放大指示。几何与插画原创，无第三方资产及下载观测。"
+      }
+    },
+    {
+      "id": "S29",
+      "text": {
+        "en": "OpenStax, Calculus Volume 2 §4.3 Separable Equations, Newton cooling subsection and Example4.13: fixed-ambient proportional-rate model and exponential solution.",
+        "zh": "OpenStax《Calculus Volume 2》4.3节可分离方程，牛顿冷却小节及例4.13：固定环境下的比例变化率模型及指数解。"
+      },
+      "url": "https://openstax.org/books/calculus-volume-2/pages/4-3-separable-equations",
+      "note": {
+        "en": "Full text read2026-10-27. Atlas independently substitutes k=−U/C; constant power extension is DESIGN. Replaces inaccessible Khan S9 as support for dossier H19/H28. No source text, example values or images copied.",
+        "zh": "2026-10-27已读正文。Atlas独立代入k=−U/C，恒功率扩展属设计。替代本轮取不到正文的Khan S9，支持研究卷H19/H28。未复制原文、例题数值或配图。"
+      }
+    }
+  ]
+}

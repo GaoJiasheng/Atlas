@@ -56,6 +56,7 @@ import { createSceneStore } from './store';
 import { SceneContext, type SceneContextValue, type SlotName } from './context';
 import { decodeSceneState, startUrlSync, type UrlState } from './url-state';
 import { createHudActions, createHudStore, trackCamera } from './controls';
+import { activateFlyTo } from './flyto';
 import { chapterNumbers, isBackground, storyChapters } from './chapters';
 import { useSceneKeys } from './keys';
 import { installTestApi } from './test-api';
@@ -395,8 +396,7 @@ export default function SceneHost(props: SceneHostProps) {
       const button = e.target instanceof Element ? e.target.closest<HTMLElement>('[data-flyto]') : null;
       if (!button || !el.contains(button)) return;
       e.preventDefault();
-      // Same path as the VIEW buttons and digit keys; on phones fold the sheet so the map shows.
-      if (actions.setPreset(button.dataset.flyto ?? '')) setSheetOpen(false);
+      activateFlyTo(button.dataset, hud.getState().controls, actions.setPreset, () => setSheetOpen(false));
     };
     // `<Term>` is a span with role="button": Enter and Space open it too.
     const onKeyDown = (e: KeyboardEvent) => {

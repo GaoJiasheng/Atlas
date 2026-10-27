@@ -11,8 +11,7 @@ import { createStore, type StoreApi } from 'zustand/vanilla';
 import type { OrbitCamera } from '../core/types';
 import type { SpaceSceneExt } from './index';
 import type { ExerciseBody } from '../../lib/anatomy';
-import type { SimValues } from './sim-schema';
-import type { TableRow } from './lib/sim/trial';
+import type { PredictionSnapshot, TableRow } from './lib/sim/trial';
 
 /** What REFERENCE saved on entry, restored when it is switched off. */
 export interface ReferenceSave {
@@ -56,8 +55,14 @@ export interface SpaceUiState {
   exerciseBody: ExerciseBody | null;
   /** Try-it data tables by chapter id (in memory only: a reload clears them, like MathScene's work). */
   simTables: Readonly<Record<string, readonly TableRow[]>>;
+  /** Conditions stored with each temporary record. */
+  simTableContexts: Readonly<Record<string, string>>;
+  /** Chapters whose old records were cleared after conditions changed. */
+  simTableNotices: Readonly<Record<string, boolean>>;
   /** A predict-then-observe answer: the option picked, and the values and observed reading (a number or a state) before the change. */
-  simPredict: { chapter: string; guess: string; before: SimValues; value: number | string } | null;
+  simPredict: PredictionSnapshot | null;
+  /** Explicitly show the current heat result without applying a fixed prediction scenario. */
+  simReveal: { chapter: string; context: string } | null;
   /** "Run again" (the try-it button, key G): a count and the timeline outputs it plays from the start (the stage watches the count). */
   simReplay: { n: number; ids: readonly string[] };
   /** QA (`__atlas.engine.simSeek`): hold timeline `id` at model time `t` (a new `n` each request). */
@@ -80,7 +85,10 @@ export function createSpaceUi(): SpaceUiStore {
     meshBounds: null,
     exerciseBody: null,
     simTables: {},
+    simTableContexts: {},
+    simTableNotices: {},
     simPredict: null,
+    simReveal: null,
     simReplay: { n: 0, ids: [] },
     simSeek: null,
   }));

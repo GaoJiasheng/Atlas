@@ -66,6 +66,7 @@ import { EventInspector } from './EventInspector';
 import { EntityInspector } from './EntityInspector';
 import { ChapterIndex } from './ChapterIndex';
 import { eventSelectionPatch } from './lib/reader';
+import { timeHudAvailability, timeLayerRows } from './lib/hud';
 import { BandCard, PerfReadout, useFps } from './hud/HudPanels';
 import { CatalogueInspector } from './CatalogueInspector';
 import { CatalogueIndex } from './CatalogueIndex';
@@ -181,6 +182,7 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
     const n = t0 !== null ? toNumber(t0) : Number.NaN;
     return createPlayhead(Number.isFinite(n) ? n : model.min);
   });
+  const available = useMemo(() => timeHudAvailability(model), [model]);
   useEffect(() => () => playhead.destroy(), [playhead]);
 
   /** Last `t` this view wrote, so the store echo is not treated as a jump. */
@@ -615,25 +617,19 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
   }, [geo, model, layers, locale, topic.blocLabels, topic.datedLayers, byEntity, areas, legendKeyframe, approximate, region, coastToday, territoryOn]); // `t` is bound to `locale`
 
   /* ---------- control panel: LAYERS (store layers + drawing modes) and TOOLS ---------- */
+  // Territory names (N) draw control-area names, regional river names or today's coastline; none of them, no row and no key.
+  const territoryAvailable = available.control || !!region?.rivers || coastToday;
   const panelLayers = useMemo<ControlRow[]>(
     () => reconstructed ? [
       { kind: 'layer', id: 'fossils-modern', label: { en: 'Selected fossil collections', zh: '所选化石采集记录' } },
       ...['inset-world', 'inset-southeast-asia', 'inset-mexico', 'inset-visible', 'fossil-all'].map((id) => ({ kind: 'mode' as const, id })),
       { kind: 'mode', id: 'graticule', label: t('time.layer.graticule') },
-    ] : [
-      { kind: 'layer', id: 'control', label: t('time.layer.control') },
-      { kind: 'mode', id: 'territory', label: t('time.layer.territory') },
-      // A regional plate has no modern borders.
-      ...(region ? [] : [{ kind: 'mode' as const, id: 'borders', label: t('time.layer.borders') }]),
-      { kind: 'mode', id: 'graticule', label: t('time.layer.graticule') },
-      { kind: 'mode', id: 'flow', label: t('time.layer.movements') },
-      { kind: 'layer', id: 'battles', label: t('time.layer.battles') },
-      { kind: 'layer', id: 'participation', label: t('time.layer.participation') },
-      ...(model.sites.length > 0 ? [{ kind: 'layer' as const, id: 'sites', label: t('time.layer.sites') }] : []),
-      ...(topic.datedLayers ?? []).map((layer) => ({ kind: 'layer' as const, id: layer.id, label: layer.label, color: layer.color ?? entityCssColor(geo.entities.find((e) => e.id === layer.holder))})),
-      { kind: 'mode', id: 'labels', label: t('time.layer.labels') },
-    ],
-    [model, locale, region, topic.datedLayers, geo.entities, reconstructed], // `t` is bound to `locale`
+    ] : timeLayerRows(available, locale, {
+      borders: !region,
+      territory: territoryAvailable,
+      dated: (topic.datedLayers ?? []).map((layer) => ({ kind: 'layer' as const, id: layer.id, label: layer.label, color: layer.color ?? entityCssColor(geo.entities.find((e) => e.id === layer.holder))})),
+    }),
+    [available, locale, region, territoryAvailable, topic.datedLayers, geo.entities, reconstructed], // `t` is bound to `locale`
   );
   const hasGlossary = (geo.glossary?.terms.length ?? 0) > 0;
   const panelTools = useMemo<ControlRow[]>(
@@ -706,10 +702,10 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
       },
       modes: {
         items: [
-          ...(!reconstructed ? [{ id: 'flow', key: 'f', label: t('time.mode.flow'), on: movementsOn, tone: 'hot' as const, status: 'FLOW' }] : []),
+          ...(!reconstructed && available.movements ? [{ id: 'flow', key: 'f', label: t('time.mode.flow'), on: movementsOn, tone: 'hot' as const, status: 'FLOW' }] : []),
           ...(region || reconstructed ? [] : [{ id: 'borders', key: 'b', label: t('time.mode.borders'), on: bordersOn }]),
           { id: 'graticule', key: 'g', label: t('time.mode.graticule'), on: graticuleOn, phone: false },
-          ...(!reconstructed ? [{ id: 'territory', key: 'n', label: t('time.mode.territory'), on: territoryOn }] : []),
+          ...(!reconstructed && territoryAvailable ? [{ id: 'territory', key: 'n', label: t('time.mode.territory'), on: territoryOn }] : []),
           ...(topic.modernInset ? [
             ...topic.modernInset.views.map((v) => ({ id: `inset-${v.id}`, label: v.label, on: inset === v.id })),
             { id: 'inset-visible', label: { en: 'Modern find map', zh: '现代发现地图' }, on: insetVisible },
@@ -773,6 +769,7 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
         const b = st.beat == null ? undefined : beatsRef.current.find((b) => b.chapter === st.chapter && b.index === st.beat);
         return b ? { ...timeBeatState(store.getState().chapterTarget(b.chapter), b.spec, b.index), beat: null } : null;
       },
+      selectEvent: selectIndexedEvent,
       test: {
         selectEvent: (id: string) => selectIndexedEvent(id),
         reader: () => ({
@@ -832,10 +829,12 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
     topic.datedLayers,
     geo,
     model,
+    available,
     movementsOn,
     bordersOn,
     graticuleOn,
     territoryOn,
+    territoryAvailable,
     reference,
     presenting,
     presentationStatus,

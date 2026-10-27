@@ -1,0 +1,1043 @@
+{
+  "parts": [
+    {
+      "id": "bench",
+      "name": {
+        "en": "Test bench",
+        "zh": "测试台"
+      },
+      "summary": {
+        "en": "Schematic heat engine fixture.",
+        "zh": "热引擎几何测试。"
+      },
+      "detail": {
+        "en": "Educational model results, not apparatus measurements.",
+        "zh": "教学模型结果，并非器材实测。"
+      },
+      "context": true,
+      "clip": false,
+      "primitive": {
+        "kind": "box",
+        "at": [
+          0,
+          -0.025,
+          0
+        ],
+        "size": [
+          0.9,
+          0.04,
+          0.4
+        ],
+        "color": "wood"
+      }
+    },
+    {
+      "id": "heater-block",
+      "name": {
+        "en": "Heated model",
+        "zh": "加热模型"
+      },
+      "summary": {
+        "en": "Schematic heat engine fixture.",
+        "zh": "热引擎几何测试。"
+      },
+      "detail": {
+        "en": "Educational model results, not apparatus measurements.",
+        "zh": "教学模型结果，并非器材实测。"
+      },
+      "group": "curves",
+      "primitive": {
+        "kind": "box",
+        "at": [
+          -0.25,
+          0.035,
+          0
+        ],
+        "size": [
+          0.11,
+          0.07,
+          0.09
+        ],
+        "color": "membrane"
+      }
+    },
+    {
+      "id": "thermometer-marker",
+      "name": {
+        "en": "Temperature indicator",
+        "zh": "温度指示"
+      },
+      "summary": {
+        "en": "Schematic heat engine fixture.",
+        "zh": "热引擎几何测试。"
+      },
+      "detail": {
+        "en": "Educational model results, not apparatus measurements.",
+        "zh": "教学模型结果，并非器材实测。"
+      },
+      "group": "curves",
+      "primitive": {
+        "kind": "box",
+        "at": [
+          -0.25,
+          0.09,
+          0
+        ],
+        "size": [
+          0.015,
+          0.01,
+          0.015
+        ],
+        "color": "steel"
+      }
+    },
+    {
+      "id": "cool-block",
+      "name": {
+        "en": "Cooling model",
+        "zh": "冷却模型"
+      },
+      "summary": {
+        "en": "Schematic heat engine fixture.",
+        "zh": "热引擎几何测试。"
+      },
+      "detail": {
+        "en": "Educational model results, not apparatus measurements.",
+        "zh": "教学模型结果，并非器材实测。"
+      },
+      "group": "curves",
+      "primitive": {
+        "kind": "box",
+        "at": [
+          0,
+          0.035,
+          0
+        ],
+        "size": [
+          0.11,
+          0.07,
+          0.09
+        ],
+        "color": "membrane"
+      }
+    },
+    {
+      "id": "wrap",
+      "name": {
+        "en": "Insulation indicator",
+        "zh": "包覆指示"
+      },
+      "summary": {
+        "en": "Schematic heat engine fixture.",
+        "zh": "热引擎几何测试。"
+      },
+      "detail": {
+        "en": "Educational model results, not apparatus measurements.",
+        "zh": "教学模型结果，并非器材实测。"
+      },
+      "group": "curves",
+      "primitive": {
+        "kind": "box",
+        "at": [
+          0,
+          0.012,
+          0
+        ],
+        "size": [
+          0.14,
+          0.015,
+          0.12
+        ],
+        "color": "tissue"
+      }
+    },
+    {
+      "id": "metal-tip",
+      "name": {
+        "en": "Metal tip model",
+        "zh": "金属远端模型"
+      },
+      "summary": {
+        "en": "Schematic heat engine fixture.",
+        "zh": "热引擎几何测试。"
+      },
+      "detail": {
+        "en": "Educational model results, not apparatus measurements.",
+        "zh": "教学模型结果，并非器材实测。"
+      },
+      "group": "transfer",
+      "primitive": {
+        "kind": "box",
+        "at": [
+          0.24,
+          0.04,
+          0.05
+        ],
+        "size": [
+          0.15,
+          0.01,
+          0.025
+        ],
+        "color": "steel"
+      }
+    },
+    {
+      "id": "plastic-tip",
+      "name": {
+        "en": "Plastic tip model",
+        "zh": "塑料远端模型"
+      },
+      "summary": {
+        "en": "Schematic heat engine fixture.",
+        "zh": "热引擎几何测试。"
+      },
+      "detail": {
+        "en": "Educational model results, not apparatus measurements.",
+        "zh": "教学模型结果，并非器材实测。"
+      },
+      "group": "transfer",
+      "primitive": {
+        "kind": "box",
+        "at": [
+          0.24,
+          0.04,
+          -0.03
+        ],
+        "size": [
+          0.15,
+          0.01,
+          0.025
+        ],
+        "color": "tissue"
+      }
+    },
+    {
+      "id": "rod",
+      "name": {
+        "en": "Reference rod",
+        "zh": "参考杆"
+      },
+      "summary": {
+        "en": "Schematic heat engine fixture.",
+        "zh": "热引擎几何测试。"
+      },
+      "detail": {
+        "en": "Educational model results, not apparatus measurements.",
+        "zh": "教学模型结果，并非器材实测。"
+      },
+      "group": "expansion",
+      "primitive": {
+        "kind": "box",
+        "at": [
+          0,
+          0.045,
+          -0.13
+        ],
+        "size": [
+          0.1,
+          0.01,
+          0.01
+        ],
+        "color": "steel"
+      }
+    },
+    {
+      "id": "rod-end-marker",
+      "name": {
+        "en": "Enlarged endpoint indicator",
+        "zh": "放大端点指示"
+      },
+      "summary": {
+        "en": "Schematic heat engine fixture.",
+        "zh": "热引擎几何测试。"
+      },
+      "detail": {
+        "en": "Educational model results, not apparatus measurements.",
+        "zh": "教学模型结果，并非器材实测。"
+      },
+      "group": "expansion",
+      "primitive": {
+        "kind": "box",
+        "at": [
+          0.05,
+          0.065,
+          -0.13
+        ],
+        "size": [
+          0.003,
+          0.03,
+          0.03
+        ],
+        "color": "steel"
+      }
+    }
+  ],
+  "groups": [
+    {
+      "id": "transfer",
+      "name": {
+        "en": "Transfer",
+        "zh": "传热"
+      },
+      "color": "token:hot"
+    },
+    {
+      "id": "curves",
+      "name": {
+        "en": "Curves",
+        "zh": "曲线"
+      },
+      "color": "token:cold"
+    },
+    {
+      "id": "expansion",
+      "name": {
+        "en": "Expansion",
+        "zh": "膨胀"
+      },
+      "color": "token:neutral"
+    }
+  ],
+  "flows": [
+    {
+      "id": "heat-to-metal",
+      "group": "transfer",
+      "color": "token:hot",
+      "speed": 0.15,
+      "count": 32,
+      "size": 0.15,
+      "spread": 0.003,
+      "whenRun": false,
+      "path": [
+        [
+          0.15,
+          0.055,
+          0.05
+        ],
+        [
+          0.22,
+          0.055,
+          0.05
+        ],
+        [
+          0.31,
+          0.055,
+          0.05
+        ]
+      ]
+    }
+  ],
+  "views": {
+    "assembled": {
+      "camera": {
+        "position": [
+          0.2,
+          0.65,
+          1.25
+        ],
+        "target": [
+          0,
+          0.04,
+          0
+        ],
+        "fov": 36
+      }
+    },
+    "cover": {
+      "position": [
+        0.2,
+        0.65,
+        1.25
+      ],
+      "target": [
+        0,
+        0.04,
+        0
+      ],
+      "fov": 36
+    },
+    "section": {
+      "plane": "xz"
+    },
+    "shadows": "contact"
+  },
+  "presets": [
+    {
+      "id": "bench-view",
+      "label": {
+        "en": "Bench",
+        "zh": "实验台"
+      },
+      "camera": {
+        "position": [
+          0.2,
+          0.65,
+          1.25
+        ],
+        "target": [
+          0,
+          0.04,
+          0
+        ],
+        "fov": 36
+      }
+    }
+  ],
+  "spec": [
+    {
+      "key": {
+        "en": "Elapsed time",
+        "zh": "经过时间"
+      },
+      "value": {
+        "en": "0–300 s",
+        "zh": "0–300 s"
+      },
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Rod indicator",
+        "zh": "杆端指示"
+      },
+      "value": {
+        "en": "Displacement ×500",
+        "zh": "位移放大500倍"
+      },
+      "tag": "design"
+    }
+  ],
+  "telemetry": [
+    {
+      "key": {
+        "en": "Heated water",
+        "zh": "加热水温"
+      },
+      "unit": "°C",
+      "follow": "heated-c",
+      "scope": "observe",
+      "lag": 0
+    },
+    {
+      "key": {
+        "en": "Cooling water",
+        "zh": "冷却水温"
+      },
+      "unit": "°C",
+      "follow": "cool-c",
+      "scope": "observe",
+      "lag": 0
+    },
+    {
+      "key": {
+        "en": "Metal tip",
+        "zh": "金属远端"
+      },
+      "unit": "°C",
+      "follow": "metal-c",
+      "scope": "observe",
+      "lag": 0
+    },
+    {
+      "key": {
+        "en": "Plastic tip",
+        "zh": "塑料远端"
+      },
+      "unit": "°C",
+      "follow": "plastic-c",
+      "scope": "observe",
+      "lag": 0
+    },
+    {
+      "key": {
+        "en": "Rod extension",
+        "zh": "杆伸长量"
+      },
+      "unit": "mm",
+      "follow": "rod-delta-mm",
+      "scope": "observe",
+      "lag": 0
+    }
+  ],
+  "sim": {
+    "kind": "heat",
+    "controls": [
+      {
+        "id": "elapsed-s",
+        "label": {
+          "en": "elapsed-s",
+          "zh": "经过时间"
+        },
+        "kind": "step",
+        "values": [
+          0,
+          30,
+          60,
+          90,
+          120,
+          150,
+          180,
+          210,
+          240,
+          270,
+          300
+        ],
+        "default": 0,
+        "unit": "s"
+      },
+      {
+        "id": "water-g",
+        "label": {
+          "en": "water-g",
+          "zh": "水的质量"
+        },
+        "kind": "step",
+        "values": [
+          200,
+          300,
+          400
+        ],
+        "default": 200,
+        "unit": "g"
+      },
+      {
+        "id": "heater-w",
+        "label": {
+          "en": "heater-w",
+          "zh": "加热功率"
+        },
+        "kind": "step",
+        "values": [
+          0,
+          50,
+          100
+        ],
+        "default": 100,
+        "unit": "W"
+      },
+      {
+        "id": "cool-start-c",
+        "label": {
+          "en": "cool-start-c",
+          "zh": "冷却初温"
+        },
+        "kind": "step",
+        "values": [
+          5,
+          45,
+          65,
+          85
+        ],
+        "default": 85,
+        "unit": "°C"
+      },
+      {
+        "id": "cover",
+        "label": {
+          "en": "Cover",
+          "zh": "包覆"
+        },
+        "kind": "choice",
+        "options": [
+          {
+            "id": "bare",
+            "label": {
+              "en": "Bare",
+              "zh": "裸杯"
+            }
+          },
+          {
+            "id": "wrapped",
+            "label": {
+              "en": "Wrapped",
+              "zh": "包覆"
+            }
+          }
+        ],
+        "default": "bare"
+      },
+      {
+        "id": "bath-c",
+        "label": {
+          "en": "bath-c",
+          "zh": "温浴温度"
+        },
+        "kind": "step",
+        "values": [
+          5,
+          25,
+          45,
+          65,
+          85
+        ],
+        "default": 85,
+        "unit": "°C"
+      },
+      {
+        "id": "rod-c",
+        "label": {
+          "en": "rod-c",
+          "zh": "杆温度"
+        },
+        "kind": "step",
+        "values": [
+          5,
+          25,
+          45,
+          65,
+          85
+        ],
+        "default": 25,
+        "unit": "°C"
+      }
+    ],
+    "outputs": [
+      {
+        "id": "heated-c",
+        "label": {
+          "en": "heated-c",
+          "zh": "加热水温"
+        },
+        "kind": "number",
+        "from": "temperature:heater",
+        "unit": "°C",
+        "decimals": 1
+      },
+      {
+        "id": "heated-j",
+        "label": {
+          "en": "heated-j",
+          "zh": "净传入能量"
+        },
+        "kind": "number",
+        "from": "energy:heater",
+        "unit": "J",
+        "decimals": 0
+      },
+      {
+        "id": "heated-input-j",
+        "label": {
+          "en": "heated-input-j",
+          "zh": "外部供能"
+        },
+        "kind": "number",
+        "from": "supplied:heater",
+        "unit": "J",
+        "decimals": 0
+      },
+      {
+        "id": "metal-c",
+        "label": {
+          "en": "metal-c",
+          "zh": "金属远端温度"
+        },
+        "kind": "number",
+        "from": "temperature:metal-tip",
+        "unit": "°C",
+        "decimals": 1
+      },
+      {
+        "id": "plastic-c",
+        "label": {
+          "en": "plastic-c",
+          "zh": "塑料远端温度"
+        },
+        "kind": "number",
+        "from": "temperature:plastic-tip",
+        "unit": "°C",
+        "decimals": 1
+      },
+      {
+        "id": "metal-rate-w",
+        "label": {
+          "en": "metal-rate-w",
+          "zh": "金属净传入功率"
+        },
+        "kind": "number",
+        "from": "rate:metal-tip",
+        "unit": "W",
+        "decimals": 0
+      },
+      {
+        "id": "plastic-rate-w",
+        "label": {
+          "en": "plastic-rate-w",
+          "zh": "塑料净传入功率"
+        },
+        "kind": "number",
+        "from": "rate:plastic-tip",
+        "unit": "W",
+        "decimals": 0
+      },
+      {
+        "id": "tip-comparison",
+        "label": {
+          "en": "Tip comparison",
+          "zh": "远端温度比较"
+        },
+        "kind": "state",
+        "from": "compare:tips",
+        "states": {
+          "first-warmer": {
+            "en": "Metal warmer",
+            "zh": "金属较暖"
+          },
+          "same": {
+            "en": "Same",
+            "zh": "相同"
+          },
+          "second-warmer": {
+            "en": "Plastic warmer",
+            "zh": "塑料较暖"
+          }
+        }
+      },
+      {
+        "id": "cool-c",
+        "label": {
+          "en": "cool-c",
+          "zh": "冷却水温"
+        },
+        "kind": "number",
+        "from": "temperature:cooler",
+        "unit": "°C",
+        "decimals": 1
+      },
+      {
+        "id": "cool-rate-w",
+        "label": {
+          "en": "cool-rate-w",
+          "zh": "冷却净传入功率"
+        },
+        "kind": "number",
+        "from": "rate:cooler",
+        "unit": "W",
+        "decimals": 0
+      },
+      {
+        "id": "cool-energy-j",
+        "label": {
+          "en": "cool-energy-j",
+          "zh": "冷却净传入能量"
+        },
+        "kind": "number",
+        "from": "energy:cooler",
+        "unit": "J",
+        "decimals": 0
+      },
+      {
+        "id": "cool-reservoir-j",
+        "label": {
+          "en": "cool-reservoir-j",
+          "zh": "传至环境的净能量"
+        },
+        "kind": "number",
+        "from": "reservoir-energy:cooler",
+        "unit": "J",
+        "decimals": 0
+      },
+      {
+        "id": "cool-direction",
+        "label": {
+          "en": "cool-direction",
+          "zh": "冷却方向"
+        },
+        "kind": "state",
+        "from": "direction:cooler",
+        "states": {
+          "warming": {
+            "en": "Warming",
+            "zh": "升温"
+          },
+          "steady": {
+            "en": "Steady",
+            "zh": "稳定"
+          },
+          "cooling": {
+            "en": "Cooling",
+            "zh": "降温"
+          }
+        }
+      },
+      {
+        "id": "heated-direction",
+        "label": {
+          "en": "heated-direction",
+          "zh": "加热方向"
+        },
+        "kind": "state",
+        "from": "direction:heater",
+        "states": {
+          "warming": {
+            "en": "Warming",
+            "zh": "升温"
+          },
+          "steady": {
+            "en": "Steady",
+            "zh": "稳定"
+          },
+          "cooling": {
+            "en": "Cooling",
+            "zh": "降温"
+          }
+        }
+      },
+      {
+        "id": "metal-direction",
+        "label": {
+          "en": "metal-direction",
+          "zh": "金属方向"
+        },
+        "kind": "state",
+        "from": "direction:metal-tip",
+        "states": {
+          "warming": {
+            "en": "Warming",
+            "zh": "升温"
+          },
+          "steady": {
+            "en": "Steady",
+            "zh": "稳定"
+          },
+          "cooling": {
+            "en": "Cooling",
+            "zh": "降温"
+          }
+        }
+      },
+      {
+        "id": "plastic-direction",
+        "label": {
+          "en": "plastic-direction",
+          "zh": "塑料方向"
+        },
+        "kind": "state",
+        "from": "direction:plastic-tip",
+        "states": {
+          "warming": {
+            "en": "Warming",
+            "zh": "升温"
+          },
+          "steady": {
+            "en": "Steady",
+            "zh": "稳定"
+          },
+          "cooling": {
+            "en": "Cooling",
+            "zh": "降温"
+          }
+        }
+      },
+      {
+        "id": "rod-delta-mm",
+        "label": {
+          "en": "rod-delta-mm",
+          "zh": "杆伸长量"
+        },
+        "kind": "number",
+        "from": "delta-mm:rod",
+        "unit": "mm",
+        "decimals": 3
+      },
+      {
+        "id": "rod-length-mm",
+        "label": {
+          "en": "rod-length-mm",
+          "zh": "杆长度"
+        },
+        "kind": "number",
+        "from": "length-mm:rod",
+        "unit": "mm",
+        "decimals": 3
+      },
+      {
+        "id": "heater-rate-w",
+        "label": {
+          "en": "heater-rate-w",
+          "zh": "加热净传入功率"
+        },
+        "kind": "number",
+        "from": "rate:heater",
+        "unit": "W",
+        "decimals": 0
+      },
+      {
+        "id": "heated-change-k",
+        "label": {
+          "en": "heated-change-k",
+          "zh": "加热温差"
+        },
+        "kind": "number",
+        "from": "change:heater",
+        "unit": "K",
+        "decimals": 1
+      },
+      {
+        "id": "cool-change-k",
+        "label": {
+          "en": "cool-change-k",
+          "zh": "冷却温差"
+        },
+        "kind": "number",
+        "from": "change:cooler",
+        "unit": "K",
+        "decimals": 1
+      },
+      {
+        "id": "heated-reservoir-j",
+        "label": {
+          "en": "heated-reservoir-j",
+          "zh": "加热传至热库能量"
+        },
+        "kind": "number",
+        "from": "reservoir-energy:heater",
+        "unit": "J",
+        "decimals": 0
+      },
+      {
+        "id": "metal-energy-j",
+        "label": {
+          "en": "metal-energy-j",
+          "zh": "金属净传入能量"
+        },
+        "kind": "number",
+        "from": "energy:metal-tip",
+        "unit": "J",
+        "decimals": 0
+      },
+      {
+        "id": "plastic-energy-j",
+        "label": {
+          "en": "plastic-energy-j",
+          "zh": "塑料净传入能量"
+        },
+        "kind": "number",
+        "from": "energy:plastic-tip",
+        "unit": "J",
+        "decimals": 0
+      }
+    ],
+    "bind": [
+      {
+        "output": "heated-c",
+        "part": "thermometer-marker",
+        "offset": {
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "per": 0.001,
+          "origin": 25
+        }
+      },
+      {
+        "output": "rod-delta-mm",
+        "part": "rod-end-marker",
+        "offset": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "per": 0.5,
+          "origin": 0
+        }
+      },
+      {
+        "output": "metal-rate-w",
+        "flow": "heat-to-metal",
+        "intensity": {
+          "full": 20,
+          "mode": "speed"
+        }
+      },
+      {
+        "control": "cover",
+        "part": "wrap",
+        "visible": {
+          "eq": "wrapped"
+        }
+      }
+    ],
+    "overlays": [],
+    "heat": {
+      "time": "elapsed-s",
+      "lumps": {
+        "heater": {
+          "initial": 25,
+          "capacity": {
+            "mass": {
+              "control": "water-g"
+            },
+            "specific": 4.2
+          },
+          "power": {
+            "control": "heater-w"
+          }
+        },
+        "cooler": {
+          "initial": {
+            "control": "cool-start-c"
+          },
+          "capacity": {
+            "mass": {
+              "control": "water-g"
+            },
+            "specific": 4.2
+          },
+          "power": 0,
+          "reservoir": {
+            "temperature": 25,
+            "conductance": {
+              "control": "cover",
+              "values": {
+                "bare": 2,
+                "wrapped": 0.5
+              }
+            }
+          }
+        },
+        "metal-tip": {
+          "initial": 25,
+          "capacity": 20,
+          "power": 0,
+          "reservoir": {
+            "temperature": {
+              "control": "bath-c"
+            },
+            "conductance": 0.3333333333333333
+          }
+        },
+        "plastic-tip": {
+          "initial": 25,
+          "capacity": 20,
+          "power": 0,
+          "reservoir": {
+            "temperature": {
+              "control": "bath-c"
+            },
+            "conductance": 0.03333333333333333
+          }
+        }
+      },
+      "expansions": {
+        "rod": {
+          "temperature": {
+            "control": "rod-c"
+          },
+          "reference": 25,
+          "length": 0.1,
+          "alpha": 0.000012
+        }
+      },
+      "compare": {
+        "tips": {
+          "first": "metal-tip",
+          "second": "plastic-tip",
+          "epsilon": 0.01
+        }
+      }
+    }
+  }
+}
