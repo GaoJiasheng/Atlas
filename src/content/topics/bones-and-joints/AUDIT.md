@@ -52,3 +52,22 @@
 - 已目检原图/处理图与正、背、左、肘姿态CPU源比较。CPU诊断归档在`scripts/anatomy/cache/bones-joints/previews/`（本地，不进git）；不声称查看过浏览器截图。
 
 Browser gates were deliberately not executed, as the build brief forbids them in this sandbox. Main-session handoff uses `ATLAS_E2E_PORT=5445`, with per-beat/keys/tasks/layout screenshots in EN/ZH and paper/cinema, including390×844. Native Blender startup exited139; named anatomy approval, actual muscle deformation, labels and runtime performance remain pending. No git writes, package or lockfile changes were made.
+
+## Acceptance rework F1–F5 — 2026-10-27
+
+All 61 selectable detail cards (EN/ZH) now explain anatomy in 2–4 student-facing sentences. The independent card source is `scripts/geo/bones-and-joints/details.mjs`; the existing content builder regenerates parts.json from it. S30 source geometry and S34 model references are retained; S32/S33 accompany the named muscle/tendon attachments. No OpenStax wording was copied into the BY-SA packet. The 34-source registry is unchanged.
+
+The following reviewer information was moved out of reader cards and remains applicable:
+
+- Skeleton selections contain one or several named source structures at adult reference scale; selection counts are not individual bone counts. The seven left-hand close-ups are translated, with source scale and relative positions retained.
+- The left biceps/triceps heads are grouped; original source rig, weights and fibre fields remain. Motion and tension are qualitative. Named attachment-face medical review and local joint-axis review remain pending.
+- Tendon segments are enlarged original teaching geometry guided by inherited candidate sites, not isolated scanned tendons. No surface-accuracy or medical approval is claimed.
+- Internal bone lattice, tissue dimensions, capsule window, joint space and repair specimens are qualitative teaching reconstructions. Red/yellow marrow distribution is illustrative and varies by age and bone. The repaired outline is not a prediction of a particular fracture or a healing deadline.
+- F1 withdraws the old false figure count: the former 118,178 B WebP had 14 ribs per side according to browser review. Its replacement was independently traced to 12 per side after generation and processing; FIGURES.md and the final-image count overlay record the evidence. Source GLB rib counts remain separate evidence.
+- The fixed lever hinge is a new unselectable context part; there remain 61 selectable parts, now with two context parts (skin and pivot). The source GLB, rig and 24 numerical lever rows are unchanged.
+
+Offline previews use the runtime geometry builder and the authored cameras, then a CPU triangle painter. They caught and corrected a reversed lower-joint profile; final bone/joint/repair previews were visually inspected. They do not establish WebGL materials, transparency, label layout, browser performance, mobile acceptance or medical accuracy. Browser/desktop use and browser gates were expressly prohibited for this rework session.
+
+The engine repair is limited to scheduling a follow-up demand frame after sampled skin-anchor measurement. The unit test uses the existing muscles-arms ulna mesh and an elbow-only pose; it verifies that the next label probe sees posed bounds without changing joint rotation. Existing six-frame sampling and anchor maths are retained.
+
+Rework final gates: `pnpm check` exit 0 (801 files, 0 errors/warnings, four pre-existing hints); `pnpm validate` exit 0 (61 topics, no errors/warnings); `pnpm test -- --maxWorkers=2 --testTimeout=30000` exit 0 (172 files, 4,382 tests); `pnpm build` exit 0 (125 static pages). Final static audit confirms all original detail source ids are retained, every selectable card has 2–4 sentences in each language, original rig/poses/numerical simulation data are unchanged, and `git diff --check` passes. Browser gates were skipped as requested; no browser/desktop or git writes occurred.

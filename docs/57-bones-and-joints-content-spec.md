@@ -498,7 +498,7 @@ pnpm check、validate、test、build必须运行并记录结果。浏览器shoot
 - 保留既有table：24行、9数输出（6力学量及distance/tip-x/tip-y布局量）；四个PLATE跟随量为load/load-arm/muscle-force/angle，并由本章observe限定。最后集成复核补齐了最初遗漏的telemetry；新增内容单测检查读数连线，离线生成器同步。角度绑定只覆盖elbow.l；探索/其它章无覆盖。梁在x=4，与成人手臂分工位；正文提供ELBOW镜头链接作数值角度对照。
 - GLB：3,024,092 bytes、313,580 triangles、44 mesh nodes、49材质primitive、19关节；SHA `4ddb706ff0664f772e294d6210294258556775a3037cf7c3a3ed51fead6f362e`。骨架源236项双向采样误差最大0.945331684 mm；压缩后bbox最大附加差0.002653061 mm；未放宽1 mm/4MB/350k门槛。失败的两侧顶骨及第四肋软骨恢复源几何；保留每侧First–Twelfth十二肋+十块软骨。源肌肉的逐mesh量化先解码到bind world再合并，避免共用错误inverse bind矩阵；蒙皮/纤维/关节链沿用源数据。
 - Blender启动139，改走主题内Three FBXLoader+独立二进制FBX控制点审计与glTF压缩输出检查。不是原生Blender验收。正/背/左/肘姿态CPU source/reduced对比均已目检并归档`scripts/anatomy/cache/bones-joints/previews/`（本地，不进git），详见report/preview-review；不把骨刚性投影当真实肌肉形变或浏览器画面检查。所有附着/局部关节轴仍为pending人审。
-- 保护器官图用built-in image_gen经3次编辑重绘：12对肋骨、胸骨、后方脊柱、心肺位于胸廓内；第二次修正下方肋弓/浮肋，第三次清除两片孤立残片。最终原图与WebP逐对目检；临床准确性未获具名认证。prompt、hash、检查局限见主题`FIGURES.md`。两张既有approved图逐张检查后沿用。输出封面80,164/240,250 bytes，活骨图98,398 bytes，保护图118,178 bytes，均在illustrate预算内。
+- 保护器官图用built-in image_gen经3次编辑重绘：12对肋骨、胸骨、后方脊柱、心肺位于胸廓内；第二次修正下方肋弓/浮肋，第三次清除两片孤立残片。当时的12对目检记录被§9.4推翻，不能当作通过证据；§9.5另行重绘、逐对标记并纠正FIGURES.md。临床准确性未获具名认证。prompt、hash、检查局限见主题`FIGURES.md`。两张既有approved图逐张检查后沿用。输出封面80,164/240,250 bytes，活骨图98,398 bytes，保护图118,178 bytes，均在illustrate预算内。
 - LICENSE-CONTENT/THIRD-PARTY-NOTICES明确整个parts/GLB/源派生rig/sites/预览/截图为BY-SA；独立图与OpenStax教学正文/名词表为NC-SA，互不烘入同一派生文件。另登记sample-joint的BY-SA parts。9个已出版相邻主题只增加双语回链句；smoke预期35主题、13biology、70badges、末版35。
 
 ### 9.3 最终非浏览器门槛与交接
@@ -524,3 +524,28 @@ pnpm check、validate、test、build必须运行并记录结果。浏览器shoot
 - **本轮修正**：力箭头因`per`=0.001被缩成发丝（引擎新增可选`width`，主题用0.06，负载箭头改`at: bottom`）；首次载入/深链时标签不出现（PartNode可见性翻转时多请求一帧）；01-05、04-01/03/04/05镜头按实际标本包围盒重取景；CPU预览PNG移出git。
 - **未通过、交回Codex**（`src/content/topics/bones-and-joints/FIXES.md`）：F1 保护器官图实为每侧14条肋（7真肋+4假肋+3浮肋），须重绘为12对；F2 61件零件详情是审查口吻，需改写为学生文字；F3 骨截面、通用滑膜关节、四个修复标本的原创几何不达技术图版标准，关节软骨画成悬空圆片、红骨髓缺失；F4 杠杆工位无支点与0.04 m附着标记。
 - **另记**：深链上仅肘屈的姿态时，蒙皮零件标签锚点停在静息位（04-02、05-02/03的尺骨），main上muscles-arms同样存在，属引擎既有问题。
+
+### 9.5 验收返工 F1–F5（Codex，2026-10-27）
+
+| 项 | 已完成的修改与证据 |
+|---|---|
+| F1 | built-in image_gen共3次（≤4次）：第1次未接受，第2次逐条编号，第3次仅清除编号后重新计数。最终PNG和处理WebP均按每侧7真肋+3假肋+2浮肋=12条核对。`scripts/geo/bones-and-joints/rib-count.svg`在最终WebP上标出24个逐条核对点。`illustrate.ts figure`重处理1200×900、q76、122,018 B；FIGURES.md撤回旧图12对的错误记录，保存方法、prompt与hash。 |
+| F2 | 61可选部件的EN/ZH detail全部重写为2–4句学生文字，另改皮肤context。`scripts/geo/bones-and-joints/details.mjs`为独立撰写的BY-SA文本，既有content生成器导入；保留S30/S34并为肌肉/肌腱补S32/S33。成人尺度、源结构合组、原rig/weights/fibres、附着骨面/轴pending等审查说明迁至AUDIT，未丢失。 |
+| F3 | 原创模型实现于新增的`geo/bones-and-joints/specimens.mjs`，由实际既有管线`anatomy/bones-joints/content.mjs`导入（本worktree原来没有geo/bones-and-joints目录）。骨壁闭合、200°保留、实体厚度和既有剖面线；骨膜瓣、滋养动脉入口/分支、连接骨小梁、两端红髓与骨干黄髓。软骨帽与骨端共用内边界，反向剖面的绕序已修；有囊壁/滑膜内衬/滑液体积，外部韧带。四个同外形长骨按血肿、软骨痂、硬骨痂、轻隆起重塑从左到右，无时间刻度。重取骨截面/关节/修复列镜头，去掉多余囊ghost。 |
+| F4 | 杠杆新增不动的铰链销/三角架context（`lever-pivot`），梁上r=.04 m圆点与横刻线随既有rotate。现有visible绑定含pivot；无新engine feature。61可选件保持，总63件=61+skin+pivot。 |
+| F5 | 既有main引擎问题：label probe先于PartNode读锚点，最后一次骨架采样完成却没有后继demand frame。抽取原采样计算为`skinAnchor.ts`，成功测量后多请求一帧；六帧采样节奏、坐标算法、pose/相机/picking保持。真实muscles-arms ulna的elbow-only深链数值夹具验证后继probe读到最终位置/包围盒、骨旋转不变。 |
+
+原始解剖GLB及其sha、rig、源清单、24行杠杆平衡数据不变。新增offline `preview.ts`调用运行时相同geometry builder与章拍镜头，CPU三角面诊断归档在ignored anatomy cache；已目检bone/joint/repair并迭代一次。最终合并piece/triangle：骨截面6/197,284、通用关节8/10,776、修复列7/51,796。这些是离线几何数量，不是runtime draw-call、FPS或浏览器材质/标签验收。
+
+用户明确要求跳过本sandbox的shoot/e2e，且不得控制用户浏览器或桌面，本次全部遵守；主会话重新核对F1图、F2点选详情、F3模型与选中态/双主题/手机、F4各角度标记，以及muscles-arms ch04 b1与bones 04-02/05-02的F5深链。具名解剖审查仍不标绿。无git写入，无package/lockfile/review-queue改动。
+
+最终非浏览器门槛（本次返工最终状态）：
+
+| 命令 | 结果 |
+|---|---|
+| `pnpm check` | exit 0；801文件、0错误、0警告、4个既有提示。 |
+| `pnpm validate` | exit 0；61主题、0错误、0警告。 |
+| `pnpm test -- --maxWorkers=2 --testTimeout=30000` | exit 0；172文件、4,382测试全过，含真实ulna标签回归与4项标本/支点几何关系测试。沿用前次记录的低并发/30秒门槛，不改既有测试或断言。 |
+| `pnpm build` | exit 0；125静态页面；build内校验同样61主题、0错误、0警告。 |
+| 额外静态审计 | 61件×EN/ZH每卡2–4句；所有原detail来源编号保留；无审查口吻。GLB SHA仍为4ddb706f…，rig/poses/24行sim与原数据一致，仅existing visible绑定新增pivot。`git diff --check`通过。 |
+| shoot / e2e / browser / desktop | 按用户要求全部跳过，没有打开或驱动用户浏览器/桌面；主会话重验，未标浏览器通过。 |

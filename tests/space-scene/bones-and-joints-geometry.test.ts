@@ -19,7 +19,7 @@ describe('bones and joints: exact source geometry packet', () => {
     expect(manifest.parts.slice(0,34).every((p: {station: number[]}) => p.station.every(x => x === 0))).toBe(true);
     expect(manifest.parts.slice(34).every((p: {station: number[]}) => p.station[0]! < -2)).toBe(true);
     expect(file.parts.filter(p => !p.context)).toHaveLength(61);
-    expect(file.parts.filter(p => p.context).map(p => p.id)).toEqual(['skin-outline']);
+    expect(file.parts.filter(p => p.context).map(p => p.id).sort()).toEqual(['lever-pivot', 'skin-outline']);
     const meshNames = gltf.nodes.filter((n: {mesh?: number}) => n.mesh !== undefined).map((n: {name: string}) => n.name).sort();
     expect(meshNames).toHaveLength(44);
     expect(meshNames).toEqual(file.parts.flatMap(p => p.mesh ? [p.mesh] : []).sort());

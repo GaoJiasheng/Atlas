@@ -41,7 +41,6 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, type Ref } from 'react';
 import { useFrame, type ThreeEvent } from '@react-three/fiber';
 import {
-  Box3,
   Color,
   DetachedBindMode,
   Euler,
@@ -70,6 +69,7 @@ import { keepAnimating, MAX_DT, prefersReducedMotion, useRuntime } from './runti
 import { createPartMaterial, clippingForPart, setPartClipping, stylePartMaterial, styleFibreGrain, type PartStyle } from './materials';
 import type { FibreMeasure } from './GltfSource';
 import { skinnedRaycast } from './skinPick';
+import { updateSkinAnchor } from './skinAnchor';
 import type { ShapePiece } from './geometry';
 import type { SimSettle } from '../../sim-schema';
 import { nearestTurn, SETTLE_EPS_LENGTH, stepSwing } from '../../lib/sim/settle';
@@ -241,8 +241,6 @@ const TINT = 0.55;
 /** In an exercise, the share of that tint a relaxed (lengthened) muscle keeps. */
 const TINT_REST = 0.45;
 const tmpQ = new Quaternion();
-const tmpBox = new Box3();
-const tmpInv = new Matrix4();
 const tmpM = new Matrix4();
 const tmpPose = new Matrix4();
 const tmpTurn = new Matrix4();
@@ -1179,22 +1177,7 @@ export function PartNode(props: PartNodeProps) {
     const sk = handle.skinned;
     if (sk && m.skinMoved !== runtime.bonesMoved && (m.frame % SKIN_ANCHOR_EVERY === 0 || runtime.bonesMoved === 0)) {
       m.skinMoved = runtime.bonesMoved;
-      // Parents too: the root group's new matrix (exercise turn) reaches the mesh before the render does.
-      sk.updateWorldMatrix(true, false);
-      tmpBox.makeEmpty();
-      tmpInv.copy(runtime.root).invert().multiply(sk.matrixWorld);
-      for (const i of skinSamples) tmpBox.expandByPoint(sk.getVertexPosition(i, tmpV).applyMatrix4(tmpInv));
-      if (!tmpBox.isEmpty() && g) {
-        const cx = (tmpBox.min.x + tmpBox.max.x) / 2 - g.position.x;
-        const cy = (tmpBox.min.y + tmpBox.max.y) / 2 - g.position.y;
-        const cz = (tmpBox.min.z + tmpBox.max.z) / 2 - g.position.z;
-        handle.point[0] = handle.offset[0] = cx;
-        handle.point[1] = handle.offset[1] = cy;
-        handle.point[2] = handle.offset[2] = cz;
-        handle.half[0] = (tmpBox.max.x - tmpBox.min.x) / 2;
-        handle.half[1] = (tmpBox.max.y - tmpBox.min.y) / 2;
-        handle.half[2] = (tmpBox.max.z - tmpBox.min.z) / 2;
-      }
+      if (g) updateSkinAnchor(sk, skinSamples, runtime.root, g.position, handle, () => keepAnimating(state.invalidate));
     } else if (sk && m.skinMoved !== runtime.bonesMoved) keepAnimating(state.invalidate); // the last pose still needs measuring
 
     if (moving || m.fade !== targetFade || m.base !== targetBase || m.aside !== asideTarget || m.sel !== selTarget || m.tint !== tintTarget || m.simTint !== simTarget || m.glow !== glowTarget)
