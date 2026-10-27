@@ -1,0 +1,292 @@
+{
+  "meta": {
+    "slug": "sun-earth-moon",
+    "prepared": "2026-10-26",
+    "licence": "CC0-1.0",
+    "scope": "Independent arithmetic expectations for a future engine; no application implementation or tests claimed.",
+    "source_ids": [
+      "S08",
+      "S09",
+      "S10",
+      "S33",
+      "S36"
+    ],
+    "fact_ids": [
+      "F006",
+      "F007",
+      "F009",
+      "F013",
+      "F017",
+      "F023",
+      "F024",
+      "F033",
+      "F034",
+      "F035",
+      "F036",
+      "F037",
+      "F038"
+    ]
+  },
+  "constants": {
+    "sun_radius_km": 695700.0,
+    "earth_radius_km": 6371.0,
+    "moon_radius_km": 1737.4,
+    "au_km": 149597870.7,
+    "moon_reference_km": 384400,
+    "model_year_seconds": 31557600,
+    "spin_seconds": 86164.09054,
+    "moon_period_seconds": 2360594.88
+  },
+  "daylight": [
+    {
+      "lat_deg": 0,
+      "declination_deg": 23.44,
+      "geometric_daylight_hours": 12.0,
+      "noon_altitude_deg": 66.56
+    },
+    {
+      "lat_deg": 0,
+      "declination_deg": -23.44,
+      "geometric_daylight_hours": 12.0,
+      "noon_altitude_deg": 66.56
+    },
+    {
+      "lat_deg": 0,
+      "declination_deg": 0,
+      "geometric_daylight_hours": 12.0,
+      "noon_altitude_deg": 90
+    },
+    {
+      "lat_deg": 45,
+      "declination_deg": 23.44,
+      "geometric_daylight_hours": 15.425892413189418,
+      "noon_altitude_deg": 68.44
+    },
+    {
+      "lat_deg": 45,
+      "declination_deg": -23.44,
+      "geometric_daylight_hours": 8.57410758681058,
+      "noon_altitude_deg": 21.560000000000002
+    },
+    {
+      "lat_deg": 45,
+      "declination_deg": 0,
+      "geometric_daylight_hours": 12.0,
+      "noon_altitude_deg": 45
+    },
+    {
+      "lat_deg": -45,
+      "declination_deg": 23.44,
+      "geometric_daylight_hours": 8.57410758681058,
+      "noon_altitude_deg": 21.560000000000002
+    },
+    {
+      "lat_deg": -45,
+      "declination_deg": -23.44,
+      "geometric_daylight_hours": 15.425892413189418,
+      "noon_altitude_deg": 68.44
+    },
+    {
+      "lat_deg": -45,
+      "declination_deg": 0,
+      "geometric_daylight_hours": 12.0,
+      "noon_altitude_deg": 45
+    },
+    {
+      "lat_deg": 80,
+      "declination_deg": 23.44,
+      "geometric_daylight_hours": 24,
+      "noon_altitude_deg": 33.44
+    },
+    {
+      "lat_deg": 80,
+      "declination_deg": -23.44,
+      "geometric_daylight_hours": 0,
+      "noon_altitude_deg": -13.439999999999998
+    },
+    {
+      "lat_deg": 80,
+      "declination_deg": 0,
+      "geometric_daylight_hours": 12.0,
+      "noon_altitude_deg": 10
+    }
+  ],
+  "phases": [
+    {
+      "lunar_angle_deg": 0,
+      "lit_fraction_geocentric": 0.0,
+      "disc_separation_deg_topocentric": 0.0,
+      "solar_eclipse": "annular"
+    },
+    {
+      "lunar_angle_deg": 0.3,
+      "lit_fraction_geocentric": 6.889235097562452e-06,
+      "disc_separation_deg_topocentric": 0.3050559370301208,
+      "solar_eclipse": "partial"
+    },
+    {
+      "lunar_angle_deg": 1,
+      "lit_fraction_geocentric": 7.654526097111702e-05,
+      "disc_separation_deg_topocentric": 1.0168523050237388,
+      "solar_eclipse": "none"
+    },
+    {
+      "lunar_angle_deg": 90,
+      "lit_fraction_geocentric": 0.5012847734034753,
+      "disc_separation_deg_topocentric": 90.94952651628924,
+      "solar_eclipse": "none"
+    },
+    {
+      "lunar_angle_deg": 180,
+      "lit_fraction_geocentric": 1.0,
+      "disc_separation_deg_topocentric": 180.0,
+      "solar_eclipse": "none"
+    },
+    {
+      "lunar_angle_deg": 270,
+      "lit_fraction_geocentric": 0.5012847734034753,
+      "disc_separation_deg_topocentric": 90.94952651628924,
+      "solar_eclipse": "none"
+    }
+  ],
+  "central_discs": [
+    {
+      "moon_range_km": 363300,
+      "sun_diameter_deg": 0.5329289107683478,
+      "moon_diameter_deg": 0.5577920563134362,
+      "solar_eclipse_at_central_model_observer": "total"
+    },
+    {
+      "moon_range_km": 384400,
+      "sun_diameter_deg": 0.5329289107683478,
+      "moon_diameter_deg": 0.5266582075711118,
+      "solar_eclipse_at_central_model_observer": "annular"
+    },
+    {
+      "moon_range_km": 405500,
+      "sun_diameter_deg": 0.5329289107683478,
+      "moon_diameter_deg": 0.4988161807385825,
+      "solar_eclipse_at_central_model_observer": "annular"
+    }
+  ],
+  "scale": {
+    "earth_diameter_mm": 10,
+    "moon_diameter_mm": 2.7270444200282533,
+    "earth_moon_centre_distance_mm": 301.6794851671637,
+    "earth_moon_surface_gap_mm": 295.31596295714957,
+    "sun_diameter_m": 1.091979281117564,
+    "earth_sun_distance_m": 117.40532938314236
+  },
+  "periods": {
+    "synodic_days_coplanar": 29.53067536811803,
+    "solar_day_seconds_zero_tilt": 86399.9949493172
+  },
+  "off_node_moon_height_km": 34471.66896909067,
+  "exact_half_lit_lunar_angles_deg": [
+    89.85277516465717,
+    270.14722483534285
+  ],
+  "solar_year_rows": {
+    "79": {
+      "date": "2026-03-20",
+      "sunrise_sgt": "07:09",
+      "solar_noon_sgt": "13:13",
+      "sunset_sgt": "19:16",
+      "daylight_minutes": 726.488,
+      "sunrise_azimuth_deg": 90.236,
+      "sunset_azimuth_deg": 269.964
+    },
+    "172": {
+      "date": "2026-06-21",
+      "sunrise_sgt": "07:01",
+      "solar_noon_sgt": "13:07",
+      "sunset_sgt": "19:13",
+      "daylight_minutes": 732.005,
+      "sunrise_azimuth_deg": 66.532,
+      "sunset_azimuth_deg": 293.469
+    },
+    "266": {
+      "date": "2026-09-23",
+      "sunrise_sgt": "06:54",
+      "solar_noon_sgt": "12:58",
+      "sunset_sgt": "19:01",
+      "daylight_minutes": 726.474,
+      "sunrise_azimuth_deg": 89.96,
+      "sunset_azimuth_deg": 269.843
+    },
+    "299": {
+      "date": "2026-10-26",
+      "sunrise_sgt": "06:47",
+      "solar_noon_sgt": "12:49",
+      "sunset_sgt": "18:51",
+      "daylight_minutes": 724.417,
+      "sunrise_azimuth_deg": 102.337,
+      "sunset_azimuth_deg": 257.491
+    },
+    "355": {
+      "date": "2026-12-21",
+      "sunrise_sgt": "07:02",
+      "solar_noon_sgt": "13:03",
+      "sunset_sgt": "19:04",
+      "daylight_minutes": 722.886,
+      "sunrise_azimuth_deg": 113.423,
+      "sunset_azimuth_deg": 246.575
+    }
+  },
+  "lunar_eclipses": [
+    {
+      "lunar_angle_deg": 180,
+      "x_behind_earth_km": 384400.0,
+      "off_axis_km": 0.0,
+      "umbra_signed_distance_km": -4599.731021637463,
+      "penumbra_signed_distance_km": -8175.010251865169,
+      "lunar_eclipse": "total"
+    },
+    {
+      "lunar_angle_deg": 180.75,
+      "x_behind_earth_km": 384367.0675194483,
+      "off_axis_km": 5031.640537624803,
+      "umbra_signed_distance_km": 431.7043494989648,
+      "penumbra_signed_distance_km": -3143.2705709559286,
+      "lunar_eclipse": "partial"
+    },
+    {
+      "lunar_angle_deg": 181,
+      "x_behind_earth_km": 384341.4540181168,
+      "off_axis_km": 6708.705034491782,
+      "umbra_signed_distance_km": 2108.6330181543617,
+      "penumbra_signed_distance_km": -1466.1043371002233,
+      "lunar_eclipse": "penumbral"
+    },
+    {
+      "lunar_angle_deg": 182,
+      "x_behind_earth_km": 384165.8339061404,
+      "off_axis_km": 13415.366532441372,
+      "umbra_signed_distance_km": 8814.414079584807,
+      "penumbra_signed_distance_km": 5241.307498931012,
+      "lunar_eclipse": "none"
+    }
+  ],
+  "synchronous_orientation": {
+    "zero_inclination_quarter_from_new": {
+      "earth_to_moon_unit": [
+        0,
+        0,
+        1
+      ],
+      "locked_local_x_world": [
+        0,
+        0,
+        -1
+      ],
+      "unlocked_local_x_world": [
+        1,
+        0,
+        0
+      ],
+      "locked_mark_dot_earth_direction": 1,
+      "unlocked_mark_dot_earth_direction": 0
+    },
+    "convention": "Unlocked reference orientation is fixed at lunar-angle=0, not reset to point at Earth each time the control changes."
+  }
+}

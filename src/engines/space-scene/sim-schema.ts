@@ -29,6 +29,7 @@ import { OUTPUT_TAGS, tableCellDecimals, tableIssues, tablePredictIssues, tableS
 import { tableQuantity, tableStates } from './lib/sim/table';
 import { sensesIssues, sensesSchema } from './senses-schema';
 import { sensesExperiment, sensesQuantity, SENSES_STATES } from './lib/sim/senses';
+import { orbitRotationSchema, orbitIssues, orbitQuantity, ORBIT_STATES, ORBIT_STEPS, bodyTransformSchema, solarIlluminationSchema } from './orbit-rotation-schema';
 import { seedsIssues, seedsSchema } from './seeds-schema';
 import { seedsQuantity, seedsStates } from './lib/sim/seeds';
 
@@ -62,7 +63,7 @@ export const simControlSchema = z.discriminatedUnion('kind', [
     .object({
       ...controlBase,
       kind: z.literal('step'),
-      values: z.array(z.number()).min(2).max(24),
+      values: z.array(z.number().finite()).min(2).max(366),
       default: z.number(),
       /** Shown after the value (`cm`); empty for counts. */
       unit: z.string().trim().max(8).optional(),
@@ -182,6 +183,9 @@ const partBind = z
      */
     fill: z.object({ per: z.number().positive(), below: z.number().nonnegative().default(0), meniscus: z.number().nonnegative().max(0.01).default(0), ease: z.number().nonnegative().max(10).default(0.6) }).strict().optional(),
     count: z.union([z.literal(true), z.object({ per: z.number().positive().default(1), minus: z.number().default(0) }).strict()]).optional(),
+    /** Orbit sims (docs/44 E-SEM2): place / turn / size the part from the snapshot's body frame, or light it from the analytic Sun. */
+    bodyTransform: bodyTransformSchema.optional(),
+    solarIllumination: solarIlluminationSchema.optional(),
     /**
      * Move along `axis` (scene units, after any pose) by (value − `origin`) ×
      * `per`; `settle`: a damped swing to each new value (a hanger bouncing on
@@ -899,6 +903,40 @@ export const simOverlaySchema = z.discriminatedUnion('kind', [
   shadowCastSchema,
   z.object({ kind: z.literal('paraxial-eye'), model: z.literal('eye'), group: kebabId.optional(), origin: vec3, cmToScene: z.number().finite().positive(), halfApertureSamples: z.literal(1), when: z.object({ ...source, is: simValue }).strict().optional() }).strict(),
   z.object({ kind: z.literal('longitudinal-wave'), model: z.literal('sound'), group: kebabId.optional(), origin: vec3, axis: vec3, count: z.literal(41), spacing: z.literal(.05), referenceIndex: z.number().int().min(0).max(40), when: z.object({ ...source, is: simValue }).strict().optional() }).strict(),
+  /** Orbit sims (docs/44 E-SEM2): the six guide parts OrbitDriver redraws from the shared snapshot (tracks, plane, node line, rays, ruler). */
+  z
+    .object({
+      kind: z.literal('orbit-guides'),
+      group: kebabId,
+      parts: z.object({ earthTrack: kebabId, lunarTrack: kebabId, plane: kebabId, nodes: kebabId, rays: kebabId, ruler: kebabId }).strict(),
+      axes: z.boolean(),
+      tracks: z.boolean(),
+      nodes: z.boolean(),
+      incidence: z.boolean(),
+      terminators: z.boolean(),
+      when: z
+        .object({ ...source, is: simCondition.default(true) })
+        .strict()
+        .optional(),
+    })
+    .strict(),
+  /** Orbit sims (docs/44 E-SEM3): the finite-Sun umbra / penumbra / antumbra strip in the observation window, at one scale. */
+  z
+    .object({
+      kind: z.literal('orbit-eclipse-shadow'),
+      group: kebabId,
+      bodies: z.object({ source: z.literal('sun'), planet: z.literal('earth'), satellite: z.literal('moon') }).strict(),
+      localFrame: z.literal('earth-moon'),
+      labs: z
+        .array(z.enum(['moon', 'eclipse']))
+        .min(1)
+        .max(2),
+      when: z
+        .object({ ...source, is: simCondition.default(true) })
+        .strict()
+        .optional(),
+    })
+    .strict(),
   /**
    * Force arrows (docs/30 F3): `per` scene units per newton (default 0.03),
    * at most `max` long (0.25), faded below 0.05 N; all arrows one draw call;
@@ -955,7 +993,7 @@ export const simOverlaySchema = z.discriminatedUnion('kind', [
 export type SimOverlay = z.output<typeof simOverlaySchema>;
 export type ShadowCastOverlay = Extract<SimOverlay, { kind: 'shadow-cast' }>;
 
-export const SIM_KINDS = ['circuit', 'magnet', 'force', 'energy', 'life-cycle', 'matter', 'light', 'sort', 'materials', 'table', 'seeds', 'senses'] as const;
+export const SIM_KINDS = ['circuit', 'magnet', 'force', 'energy', 'life-cycle', 'matter', 'light', 'sort', 'materials', 'table', 'seeds', 'orbit-rotation', 'senses'] as const;
 export type SimKind = (typeof SIM_KINDS)[number];
 
 export const MAX_SIM_CONTROLS = 16;
@@ -980,9 +1018,21 @@ export const simSchema = z
     sort: sortSchema.optional(),
     table: tableSchema.optional(),
     seeds: seedsSchema.optional(),
+    orbitRotation: orbitRotationSchema.optional(),
     senses: sensesSchema.optional(),
   })
   .strict()
+  // Step controls keep the 24-value cap; only the orbit model's day-of-year control is the complete ordered 1..365.
+  .superRefine((sim, ctx) => {
+    sim.controls.forEach((c, i) => {
+      if (c.kind !== 'step') return;
+      const date = sim.kind === 'orbit-rotation' && c.id === sim.orbitRotation?.solarYear.control;
+      if (c.values.length > 24 && !date)
+        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['controls', i, 'values'], message: 'at most 24 step values; only the orbit solarYear date control may exceed 24' });
+      if (date && c.values.join('|') !== ORBIT_STEPS['day-index']!.join('|'))
+        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['controls', i, 'values'], message: 'date values must be consecutive ordered integers 1..365' });
+    });
+  })
   // A table's `{ value, decimals }` cells: their outputs show those values with those decimals (lib/sim/text.ts).
   .transform((sim) => {
     if (!sim.table) return sim;
@@ -1128,6 +1178,7 @@ export function quantityKind(sim: SimData, from: string): SimOutput['kind'] | nu
       return sim.materials ? materialsQuantity(sim.materials, from, sim.controls) : null;
     case 'table':
       return sim.table && sim.outputs.some((o) => o.id === from) ? tableQuantity(sim.table, from) : null;
+    case 'orbit-rotation': return orbitQuantity(from);
     case 'seeds':
       return sim.seeds ? seedsQuantity(sim.seeds, from, sim.controls) : null;
     case 'light': {
@@ -1232,7 +1283,7 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
     const from = o.from ?? o.id;
     if (o.format === 'time' && (o.kind !== 'number' || o.unit !== 'h' || (from.startsWith('control:') && (() => { const c = controls.get(from.slice(8)); return c?.kind !== 'step' || c.values.some((v) => v < 0 || v > 24); })()))) issue(['outputs', i, 'format'], 'time format needs a number output in hours, 0–24');
     const kind = quantityKind(sim, from);
-    if (o.format === 'time' && kind === 'number' && o.unit === 'h') {
+    if (o.format === 'time' && kind === 'number' && o.unit === 'h' && sim.kind !== 'orbit-rotation') {
       const reads = from.startsWith('control:') ? sim.controls.filter((c) => c.id === from.slice(8)) : sim.kind === 'light' && sim.light?.sun && from.startsWith('sun:') ? sim.controls.filter((c) => [sim.light!.sun!.time, sim.light!.sun!.date].includes(c.id)) : sim.controls;
       if (combinations(reads, defaults).some((values) => { const value = simQuantities(sim, values)[from]; return typeof value !== 'number' || !Number.isFinite(value) || value < 0 || value > 24; })) issue(['outputs', i, 'format'], 'time format output values must be finite hours in 0–24');
     }
@@ -1243,7 +1294,7 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
       issue(['outputs', i, 'from'], needs ? `"${from}" needs the ${sim.kind} model's \`${needs}\` data` : `the ${sim.kind} model has no quantity "${from}"`);
     } else if (kind !== o.kind) issue(['outputs', i, 'kind'], `"${from}" is a ${kind}, not a ${o.kind}`);
     const states =
-      sim.kind === 'senses' ? SENSES_STATES[from] : sim.kind === 'light' && sim.light
+      sim.kind === 'senses' ? SENSES_STATES[from] : sim.kind === 'orbit-rotation' ? ORBIT_STATES[from] : sim.kind === 'light' && sim.light
         ? lightStates(sim.light, from, sim.controls)
         : sim.kind === 'matter' && sim.matter
         ? matterQuantity(sim.matter, from)?.states
@@ -1282,7 +1333,7 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
   if (sim.kind === 'senses' && !sim.senses) issue(['senses'], 'a senses sim needs senses');
   if (sim.senses) {
     if (sim.kind !== 'senses') issue(['senses'], 'senses belongs only to kind senses');
-    for (const key of ['circuit','magnet','force','energy','lifeCycle','matter','light','sort','materials','table','seeds'] as const) if (sim[key]) issue([key], 'senses cannot contain another kind configuration');
+    for (const key of ['circuit','magnet','force','energy','lifeCycle','matter','light','sort','materials','table','seeds','orbitRotation'] as const) if (sim[key]) issue([key], 'senses cannot contain another kind configuration');
     sensesIssues(sim.senses, controls).forEach((x) => issue(['senses', ...x.path], x.message));
   }
   if (sim.kind === 'sort' && !sim.sort) issue(['sort'], 'a sort sim needs `sort`');
@@ -1291,6 +1342,7 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
   if (sim.kind === 'materials' && !sim.materials) issue(['materials'], 'a materials sim needs `materials`');
   if (sim.kind === 'table' && !sim.table) issue(['table'], 'a table sim needs `table`');
   if (sim.table) tableIssues(sim.table, controls, sim.outputs, (ctx.partData ?? []) as readonly TableCheckPart[], tableCounts(sim)).forEach((x) => issue(x.path, x.message));
+  if (sim.kind === 'orbit-rotation' || sim.orbitRotation) orbitIssues(sim, controls).forEach(x => issue(x.path, x.message));
   if (sim.kind === 'seeds' && !sim.seeds) issue(['seeds'], 'a seeds sim needs `seeds`');
   if (sim.seeds) seedsIssues(sim.seeds, controls).forEach((x) => issue(['seeds', ...x.path], x.message));
   if (sim.materials) materialsIssues(sim.materials, controls).forEach((x) => issue(['materials', ...x.path], x.message));
@@ -1328,6 +1380,7 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
     if (b.control && !ctl) issue(['bind', i, 'control'], `unknown control "${src}"`);
     if (b.output && !outp) issue(['bind', i, 'output'], `unknown output "${src}"`);
     if ('part' in b) {
+      if ((b.bodyTransform || b.solarIllumination) && sim.kind !== 'orbit-rotation') issue(['bind', i], 'bodyTransform / solarIllumination need orbit-rotation');
       const ids = Array.isArray(b.part) ? b.part : [b.part];
       for (const id of ids) if (!ctx.parts.has(id)) issue(['bind', i, 'part'], `unknown part "${id}"`);
       for (const pose of Object.values(b.pose ?? {})) if (pose !== null && !ctx.poses.has(pose)) issue(['bind', i, 'pose'], `unknown pose "${pose}"`);
@@ -1452,7 +1505,7 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
         }
       }
       const fields = ['place', 'visible', 'pose', 'glow', 'tint', 'count', 'offset', 'rotate', 'at', 'state', 'play', 'stretch', 'fill', 'shift', 'bend'].filter(has);
-      if (fields.length === 0) issue(['bind', i], 'a part binding needs place, visible, pose, glow, tint, count, offset, rotate, at, state, play, stretch, fill, shift or bend');
+      if (fields.length === 0 && !b.bodyTransform && !b.solarIllumination) issue(['bind', i], 'a part binding needs place, visible, pose, glow, tint, count, offset, rotate, at, state, play, stretch, fill, shift or bend');
     } else if ('flow' in b) {
       if (outp?.kind === 'timeline') issue(['bind', i, 'output'], `"${src}" is a timeline: it moves parts (\`play\`), not flows`);
       const flowIds = Array.isArray(b.flow) ? b.flow : [b.flow];
@@ -1594,6 +1647,14 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
       }
       if (o.rays && ctx.groups && !ctx.groups.has(o.rays.group)) issue([...at, 'rays', 'group'], `unknown group "${o.rays.group}"`);
       if (o.trail) { if ('part' in o.source) issue([...at, 'trail'], 'a chalk trail needs parallel sunlight'); if (controls.get(o.trail.control)?.kind !== 'step') issue([...at, 'trail', 'control'], 'a trail needs a step control'); }
+      return;
+    }
+    if (o.kind === 'orbit-guides' || o.kind === 'orbit-eclipse-shadow') {
+      if (sim.kind !== 'orbit-rotation') issue(['overlays', i, 'kind'], 'orbit overlay needs orbit-rotation');
+      if (ctx.groups && !ctx.groups.has(o.group)) issue(['overlays', i, 'group'], `unknown group ${o.group}`);
+      if (o.kind === 'orbit-guides')
+        for (const [key, id] of Object.entries(o.parts)) if (!ctx.parts.has(id)) issue(['overlays', i, 'parts', key], `unknown part ${id}`);
+      whenIssues(['overlays', i], o.when);
       return;
     }
     const [a, b] = o.between;

@@ -1,0 +1,88 @@
+{
+  "sources": [
+    {
+      "id": "S22",
+      "text": {
+        "en": "NCEP/NCAR Reanalysis 1",
+        "zh": "NCEP/NCAR 再分析 1"
+      },
+      "url": "https://psl.noaa.gov/data/gridded/data.ncep.reanalysis.html",
+      "note": {
+        "en": "Fixture input copied from the research cache, 2026-10-27; public-domain-derived data. See SOURCES.md for exact files, hashes and original requests.",
+        "zh": "2026-10-27 从研究缓存复制的测试输入；公有领域衍生数据。文件、哈希及原请求见 SOURCES.md。"
+      }
+    },
+    {
+      "id": "S25",
+      "text": {
+        "en": "NOAA PSL data use and acknowledgement",
+        "zh": "NOAA PSL 数据使用与鸣谢"
+      },
+      "url": "https://psl.noaa.gov/data/help/help_body.html",
+      "note": {
+        "en": "Fixture input copied from the research cache, 2026-10-27; public-domain-derived data. See SOURCES.md for exact files, hashes and original requests.",
+        "zh": "2026-10-27 从研究缓存复制的测试输入；公有领域衍生数据。文件、哈希及原请求见 SOURCES.md。"
+      }
+    },
+    {
+      "id": "S32",
+      "text": {
+        "en": "GPCP monthly precipitation CDR",
+        "zh": "GPCP 月降水资料"
+      },
+      "url": "https://www.ncei.noaa.gov/products/climate-data-records/precipitation-gpcp-monthly",
+      "note": {
+        "en": "Fixture input copied from the research cache, 2026-10-27; public-domain-derived data. See SOURCES.md for exact files, hashes and original requests.",
+        "zh": "2026-10-27 从研究缓存复制的测试输入；公有领域衍生数据。文件、哈希及原请求见 SOURCES.md。"
+      }
+    },
+    {
+      "id": "S101",
+      "text": {
+        "en": "NOAA PSL 1991–2020 850 hPa monthly wind climatology",
+        "zh": "NOAA PSL 1991–2020 年 850 hPa 月平均风"
+      },
+      "url": "https://psl.noaa.gov/thredds/dodsC/Datasets/ncep.reanalysis.derived/pressure/uwnd.mon.ltm.1991-2020.nc.das",
+      "note": {
+        "en": "Fixture input copied from the research cache, 2026-10-27; public-domain-derived data. See SOURCES.md for exact files, hashes and original requests.",
+        "zh": "2026-10-27 从研究缓存复制的测试输入；公有领域衍生数据。文件、哈希及原请求见 SOURCES.md。"
+      }
+    },
+    {
+      "id": "S102",
+      "text": {
+        "en": "NOAA PSL GPCP V2.3 monthly mean precipitation rate",
+        "zh": "NOAA PSL GPCP V2.3 月平均降水率"
+      },
+      "url": "https://psl.noaa.gov/thredds/dodsC/Datasets/gpcp/precip.mon.ltm.1991-2020.nc.das",
+      "note": {
+        "en": "Fixture input copied from the research cache, 2026-10-27; public-domain-derived data. See SOURCES.md for exact files, hashes and original requests.",
+        "zh": "2026-10-27 从研究缓存复制的测试输入；公有领域衍生数据。文件、哈希及原请求见 SOURCES.md。"
+      }
+    },
+    {
+      "id": "S103",
+      "text": {
+        "en": "Natural Earth 1:110m populated places",
+        "zh": "Natural Earth 1:110m 城市点"
+      },
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_populated_places.geojson",
+      "note": {
+        "en": "Fixture input copied from the research cache, 2026-10-27; public-domain-derived data. See SOURCES.md for exact files, hashes and original requests.",
+        "zh": "2026-10-27 从研究缓存复制的测试输入；公有领域衍生数据。文件、哈希及原请求见 SOURCES.md。"
+      }
+    },
+    {
+      "id": "S199",
+      "text": {
+        "en": "Atlas fixture and display design rules",
+        "zh": "Atlas 测试数据与显示设计规则"
+      },
+      "design": true,
+      "note": {
+        "en": "Artificial 2×2 test arrays are not observations. Rain bins: <1, 1–<2, 2–<4, 4–<8, 8–<16, 16–<32, ≥32 mm/day. Wind calm threshold <0.2 m/s, length clamp(3×hypot(u,v),8,36) px; compass bearing atan2(u,v); 1 decimal for displayed rates.",
+        "zh": "人工 2×2 数组不是观测。雨量分档：<1、1–<2、2–<4、4–<8、8–<16、16–<32、≥32 mm/day。静风阈值 <0.2 m/s；箭长 clamp(3×hypot(u,v),8,36) px；方位 atan2(u,v)；速率显示一位小数。"
+      }
+    }
+  ]
+}

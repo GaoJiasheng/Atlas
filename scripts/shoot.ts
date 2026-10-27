@@ -31,6 +31,7 @@ import { dirname, extname, join, normalize, resolve } from 'node:path';
 import type { AddressInfo } from 'node:net';
 import { parseArgs } from 'node:util';
 import { gzipSync } from 'node:zlib';
+import { parse as parseYaml } from 'yaml';
 import { chromium, type Browser, type Page } from '@playwright/test';
 import { hudLayoutIssues, LAYOUT_SIZES } from '../tests-e2e/hud-layout';
 import { capacity, fillBounds, fillShapeForPrimitive, levelForVolume } from '../src/engines/space-scene/lib/fill';
@@ -394,18 +395,46 @@ function unlabelled(s: Session): Promise<string[]> {
   });
 }
 
-/** A SpaceScene beat's scene: the fields a beat sets, the try-it values on show and the runs not at their end; `null` for other engines. */
+/** The authored beat's rendered scene, including discrete monthly maps. */
 type BeatScene = Record<string, unknown> & { unfinished: string[] };
 function beatSceneOf(page: Page): Promise<BeatScene | null> {
   return page.evaluate(() => {
-    if (!document.querySelector('.atlas-scene[data-engine="space-scene"]')) return null;
     const st = window.__atlas!.state() as unknown as Record<string, unknown>;
+    const climate = (window.__atlas!.engine as unknown as {
+      climatology?(): { month: number; renderedMonth: number; authoredMonth: number; periodId: string; layers?: Record<string, { status: string }> };
+    }).climatology?.();
+    const shownLayers = Array.isArray(st.layers) ? (st.layers as string[]) : [];
+    if (climate) return {
+      notReady: Object.entries(climate.layers ?? {}).filter(([id, l]) => shownLayers.includes(id) && l.status !== 'ready').map(([id, l]) => `${id}:${l.status}`),
+      ...Object.fromEntries(['chapter', 'beat', 'month', 'layers', 'highlight', 'camera'].map(k => [k, st[k] ?? null])),
+      renderedMonth: climate.renderedMonth,
+      authoredMonth: climate.authoredMonth,
+      periodId: climate.periodId,
+      unfinished: [],
+    };
+    if (!document.querySelector('.atlas-scene[data-engine="space-scene"]')) return null;
     const keys = ['chapter', 'view', 'part', 'explode', 'run', 'cutaway', 'pose', 'hidden', 'ghosted', 'layers', 'exercise', 'tints', 'sites', 'camera'];
     type Run = { t: number; duration: number; playing: boolean };
     const sim = (window.__atlas!.engine as unknown as { sim?(): { values: Record<string, unknown>; timeline: Record<string, Run> } | null }).sim?.() ?? null;
     return {
       ...Object.fromEntries(keys.map((k) => [k, st[k] ?? null])),
       sim: sim?.values ?? null,
+      // Orbit sims (docs/44): the shared snapshot and its outputs, rounded to 1e-6. Snapshot ids differ between loads, and what the
+      // stage drew (`rendered`, fades included) is per frame: orbitIssues checks it against the snapshot once the frame lands.
+      ...(() => {
+        const e = window.__atlas!.engine as unknown as { orbit?(): Record<string, unknown> | null; sim?(): unknown };
+        const orbit = e.orbit?.();
+        if (!orbit) return {};
+        const normalize = (v: unknown): unknown =>
+          typeof v === 'number'
+            ? Math.round(v * 1e6) / 1e6
+            : Array.isArray(v)
+              ? v.map(normalize)
+              : v && typeof v === 'object'
+                ? Object.fromEntries(Object.entries(v).filter(([k]) => k !== 'snapshotId' && k !== 'rendered').map(([k, x]) => [k, normalize(x)]))
+                : v;
+        return { orbit: normalize(orbit), orbitOutputs: normalize(e.sim?.()) };
+      })(),
       unfinished: Object.entries(sim?.timeline ?? {})
         .filter(([, r]) => r.playing || r.t !== r.duration)
         .map(([id]) => id),
@@ -496,6 +525,55 @@ async function bendIssues(s: Session): Promise<string[]> {
       if (Math.abs(drawn.length - length) > length * 0.005) issues.push(`${id}: bent length ${drawn.length.toFixed(4)} m, not ${length} m`);
     }
   }
+  return issues;
+}
+
+/** Orbit bindings: compare the actual world matrix / illumination uniform with the shared physical snapshot. */
+async function orbitIssues(s: Session): Promise<string[]> {
+  const path = join(ROOT, 'src/content/topics', s.topic, 'data/parts.json');
+  if (!existsSync(path)) return [];
+  const file = JSON.parse(readFileSync(path, 'utf8')) as PartsFile;
+  if (!file.sim?.orbitRotation) return [];
+  await s.page.waitForFunction(() => {
+    const o = (window.__atlas!.engine as unknown as { orbit(): any }).orbit();
+    return !!o?.rendered && o.snapshotId === o.rendered.snapshotId;
+  });
+  const o = await s.page.evaluate(() => (window.__atlas!.engine as unknown as { orbit(): any }).orbit());
+  const issues: string[] = [];
+  const cfg = file.sim.orbitRotation;
+  for (const b of file.sim.bind) {
+    if (!('part' in b)) continue;
+    for (const id of Array.isArray(b.part) ? b.part : [b.part]) {
+      const got = o.rendered.parts[id];
+      if (!got) {
+        issues.push(`${id}: no actual rendered matrix`);
+        continue;
+      }
+      if (b.bodyTransform?.attachment === 'centre') {
+        const body = b.bodyTransform.body;
+        if (got.position.some((v: number, j: number) => Math.abs(v - o.display.centres[body][j]) > 1e-6))
+          issues.push(`${id}: rendered position differs from display snapshot`);
+        const q = o.physical.bodies[body].quaternion;
+        if (Math.abs(Math.abs(got.quaternion.reduce((v: number, x: number, j: number) => v + x * q[j], 0)) - 1) > 1e-6)
+          issues.push(`${id}: rendered quaternion differs`);
+        if (b.bodyTransform.scaleWithRadius !== false && got.scale.some((v: number) => Math.abs(v - o.display.radii[body]) > 1e-8))
+          issues.push(`${id}: rendered radius differs`);
+      }
+      if (b.solarIllumination) {
+        const body = b.solarIllumination.body;
+        if (o.rendered.solarDirections[body]?.some((v: number, j: number) => Math.abs(v - o.physical.solarDirections[body][j]) > 1e-9))
+          issues.push(`${id}: solar uniform differs`);
+      }
+    }
+  }
+  if (o.scale === 'true-scale' && Math.abs(o.display.radii.earth - cfg.bodies[1].radiusKm * cfg.display.trueScaleMPerKm) > 1e-10)
+    issues.push('true scale radius differs');
+  if (o.panel.kind === 'phase' && !o.panel.northUp) issues.push('phase window is not north-up');
+  if (
+    o.panel.shadowFrame &&
+    Math.abs(o.panel.shadowFrame.radii.moon / o.panel.shadowFrame.radii.earth - cfg.bodies[2].radiusKm / cfg.bodies[1].radiusKm) > 1e-10
+  )
+    issues.push('shadow frame does not use one scale');
   return issues;
 }
 
@@ -710,6 +788,7 @@ async function runBeatLinks(s: Session, beats: { chapter: string; index: number 
     const link = `?ch=${encodeURIComponent(b.chapter)}&b=${b.index + 1}`;
     await s.load(`${path}${link}${theme ? `&theme=${theme}` : ''}`, `${name} (link)`);
     await linked.waitForTimeout(400);
+    await settleClimate(linked);
     const got = await beatSceneOf(linked);
     const diffs: string[] = [];
     for (const key of Object.keys(want)) {
@@ -723,11 +802,26 @@ async function runBeatLinks(s: Session, beats: { chapter: string; index: number 
     for (const issue of await shiftIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     for (const issue of await hzIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     for (const issue of await tintIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
+    for (const issue of await orbitIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     for (const issue of await mechanismDrawIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     for (const issue of await sensesDrawIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     if (diffs.length) report.beatFailures.push(`${name}: opened from ${link}: ${diffs.join('; ')}`);
     else same++;
     if (diffs.length) console.log(`  ${`${name} (link)`.padEnd(36)} FAIL  ${diffs.join('; ').slice(0, 300)}`);
+  }
+  // Orbit sims: a link with `orb-t` opens on the same snapshot as seeking the clock there.
+  const orbitFile = join(ROOT, 'src/content/topics', s.topic, 'data/parts.json');
+  if (beats.length && existsSync(orbitFile) && (JSON.parse(readFileSync(orbitFile, 'utf8')) as PartsFile).sim?.orbitRotation) {
+    const b = beats[0]!;
+    const link = `?ch=${encodeURIComponent(b.chapter)}&b=${b.index + 1}`;
+    await s.load(`${path}${link}`, 'orbit seek');
+    await s.page.evaluate(() => (window.__atlas!.engine as unknown as { orbitSeek(t: number): boolean }).orbitSeek(21600));
+    await orbitIssues(s);
+    const want = await beatSceneOf(s.page);
+    await s.load(`${path}${link}&orb-t=21600`, 'orbit time link');
+    await orbitIssues(s);
+    const got = await beatSceneOf(s.page);
+    if (JSON.stringify(want?.orbit) !== JSON.stringify(got?.orbit)) report.beatFailures.push('orb-t=21600 differs from orbitSeek(21600)');
   }
   await s.reopen();
   console.log(`  beat links: ${same} of ${shown.size} open on the presentation's scene`);
@@ -756,9 +850,14 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
       missing = await unlabelled(s);
     }
     if (missing.length) report.beatNotes.push(`${name}: no label for ${missing.join(', ')}`);
+    // A monthly map commits its month on a drawn frame once the rain source has settled (slow under software GL): wait, then judge.
+    await settleClimate(s.page);
     // The scene this beat shows (SpaceScene), for its link below.
     const scene = landed ? await beatSceneOf(s.page) : null;
     if (scene) shown.set(name, scene);
+    if (scene && 'renderedMonth' in scene && (scene.month !== scene.renderedMonth || scene.month !== scene.authoredMonth))
+      report.beatFailures.push(`${name}: authored/store/rendered months disagree: ${scene.authoredMonth}/${scene.month}/${scene.renderedMonth}`);
+    if (scene && Array.isArray(scene.notReady) && scene.notReady.length > 0) report.beatFailures.push(`${name}: monthly layers on show not ready: ${scene.notReady.join(', ')}`);
     // Energy bars on show (SpaceScene, docs/31 E-EN6) must add up to 100 %: energy is neither made nor lost.
     const bars = await s.page.evaluate(
       () => (window.__atlas!.engine as unknown as { energyBars?(): Record<string, { potential: number; kinetic: number; lost: number; shown: boolean }> }).energyBars?.() ?? {},
@@ -769,6 +868,7 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
     for (const issue of await shiftIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     for (const issue of await hzIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     for (const issue of await tintIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
+    for (const issue of await orbitIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     for (const issue of await mechanismDrawIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     for (const issue of await sensesDrawIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     await s.page.screenshot({ path: join(out, `${name}${o.suffix}.png`) });
@@ -797,6 +897,69 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
   await s.apply({ wait: 300 });
   console.log(`  beats -> ${out} (${beats.length})`);
   await runBeatLinks(s, beats, shown, report);
+  await runClimateStates(s, o, out, report);
+}
+
+/** Wait (bounded) until a monthly map shows the store's month; a no-op for other scenes. Callers still judge the result. */
+function settleClimate(page: Page): Promise<unknown> {
+  return page
+    .waitForFunction(
+      () => {
+        const c = (window.__atlas!.engine as unknown as { climatology?(): { month: number; renderedMonth: number } }).climatology?.();
+        return !c || c.renderedMonth === c.month;
+      },
+      null,
+      { timeout: 10_000 },
+    )
+    .catch(() => {});
+}
+
+/** Monthly field visual states that a narrative need not explicitly author. */
+async function runClimateStates(s: Session, o: Options, out: string, report: RunReport): Promise<void> {
+  if (!await s.ev(() => typeof window.__atlas!.engine.climatology === 'function')) return;
+  const metadata = parseYaml(readFileSync(join(ROOT, 'src/content/topics', s.topic, 'topic.yaml'), 'utf8')) as { monthlyLayers: { id: string; quantity: 'wind' | 'rain' }[] };
+  const definitions = metadata.monthlyLayers;
+  const active = await s.ev(() => window.__atlas!.state().layers);
+  const primary = Object.fromEntries((['wind', 'rain'] as const).map(quantity => [quantity, (definitions.find(layer => layer.quantity === quantity && active.includes(layer.id)) ?? definitions.find(layer => layer.quantity === quantity))?.id]));
+  const shots = [
+    { name: 'climate-m01', month: 1, wind: true, rain: true },
+    { name: 'climate-m07', month: 7, wind: true, rain: true },
+    { name: 'climate-m12', month: 12, wind: true, rain: true },
+    { name: 'climate-wind-only', month: 1, wind: true, rain: false },
+    { name: 'climate-rain-only', month: 1, wind: false, rain: true },
+    { name: 'climate-off', month: 1, wind: false, rain: false },
+    { name: 'climate-cell', month: 7, wind: true, rain: true },
+  ];
+  for (const shot of shots) {
+    await s.page.evaluate(x => {
+      const api = window.__atlas!;
+      api.setMode('presentation', false);
+      api.setHud(true);
+      const e = api.engine as unknown as {
+        setClimatologyMonth(n: number): boolean;
+        toggleMonthlyLayer(id: string, on: boolean): void;
+        inspectClimateCell(lon: number, lat: number): void;
+      };
+      e.setClimatologyMonth(x.shot.month);
+      for (const layer of x.definitions)
+        e.toggleMonthlyLayer(layer.id, layer.id === x.primary[layer.quantity] && x.shot[layer.quantity]);
+      if (x.shot.name === 'climate-cell') e.inspectClimateCell(105, 0);
+    }, {shot, definitions, primary});
+    await settleClimate(s.page);
+    await s.page.waitForTimeout(350);
+    const state = await beatSceneOf(s.page);
+    if (state?.month !== shot.month || state.renderedMonth !== shot.month) report.beatFailures.push(`${shot.name}: month did not commit`);
+    if (Array.isArray(state?.notReady) && state.notReady.length > 0) report.beatFailures.push(`${shot.name}: monthly layers on show not ready: ${state.notReady.join(', ')}`);
+    await s.page.screenshot({ path: join(out, `${shot.name}${o.suffix}.png`) });
+  }
+  await s.page.setViewportSize({ width: 390, height: 844 });
+  const read = s.page.locator('.atlas-panel__toggle[aria-expanded="false"]');
+  if (await read.count()) await read.click();
+  const entry = s.page.locator('[data-climatology-phone] summary');
+  if (await entry.count()) await entry.click();
+  await s.page.screenshot({ path: join(out, `climate-phone-months${o.suffix}.png`) });
+  await s.page.setViewportSize({ width: o.size[0], height: o.size[1] });
+  await s.reopen();
 }
 
 /** Ids each chapter's own state asks to label (TimeScene `highlight`, SpaceScene `labels`) with no label on screen at the chapter camera: listed, never a failure. */
@@ -1419,6 +1582,7 @@ async function main(): Promise<number> {
         if (o.keys) console.log(`  key failures: ${keyFails}`);
         if (o.layout) console.log(`  layout issues: ${report.layout.length}`);
         if (o.beats) console.log(`  beat failures: ${report.beatFailures.length}`);
+        if (o.beats) for (const f of report.beatFailures) console.log(`    ${f}`);
         if (o.tasks) console.log(`  task failures: ${report.taskFailures.length}`);
         for (const f of report.taskFailures) console.log(`    ${f}`);
         if (keyFails || report.layout.length || report.beatFailures.length || report.taskFailures.length || bad.length) failed = true;

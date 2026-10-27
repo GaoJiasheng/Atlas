@@ -130,6 +130,8 @@ export interface SensesReading {
 export interface StageBridge {
   senses: SensesReading;
   sensesSeek(cycles: number): boolean;
+  /** Orbit sims (docs/44 §4.10): what OrbitDriver really drew for the snapshot `snapshotId` (world position / quaternion / scale, Sun uniforms). */
+  orbitRendered?: { snapshotId: number; parts: Record<string, { position: number[]; quaternion: number[]; scale: number[]; visible: boolean }>; solarDirections: Record<string, number[]> };
   mechanisms: Map<string, MechanismReading>;
   seekMechanism(id: string, deg: number): boolean;
   resetMechanisms(): void;

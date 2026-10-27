@@ -205,7 +205,9 @@ function Telemetry({ rows, run, file }: { rows: readonly TelemetryRow[]; run: bo
     const j = k++;
     return readingTarget(rows[i]!, run, na[j] ? 0 : followed[j]);
   }));
-  const values = useReadings(cells, targets, snap.current);
+  const orbit = sim?.kind === 'orbit-rotation';
+  const eased = useReadings(orbit ? [] : cells, orbit ? [] : targets, snap.current);
+  const values = orbit ? targets : eased;
   // `SIM CLOSED · 2 BATTERIES`: the state the card observes (else predicts, else the first its controls or the chapter's
   // settings move, else the model's first unless its experiments are separate), then the try-it card's controls.
   const card = view?.card;
