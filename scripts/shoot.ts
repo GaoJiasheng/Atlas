@@ -775,6 +775,66 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
   await runBeatLinks(s, beats, shown, report);
 }
 
+/** Catalogue QA uses the same UI/action as readers and leaves other engines untouched (docs/49 E-PH1). */
+async function runCatalogues(s: Session, out: string, report: RunReport): Promise<void> {
+  const supported = await s.ev(() => typeof window.__atlas!.engine.catalogueState === 'function');
+  if (!supported) return;
+  type CatalogueReading = {
+    pick: string | null;
+    layers: Record<string, { status: 'loading' | 'ready' | 'error'; visible: number }>;
+    indexCount: number;
+    renderedRows: number;
+    selectedScreen?: [number, number] | null;
+  };
+  const chapters = await s.ev(() => window.__atlas!.chapters());
+  let selected = 0;
+  for (const chapter of chapters) {
+    await s.apply({ chapter, wait: 400 });
+    await s.page.waitForFunction(() => {
+      const e = window.__atlas!.engine as { catalogueState(): CatalogueReading };
+      return Object.values(e.catalogueState().layers).every((layer) => layer.status !== 'loading');
+    }, null, { timeout: 30_000 });
+    const read = () => s.page.evaluate(() => (window.__atlas!.engine as { catalogueState(): CatalogueReading }).catalogueState());
+    const state = await read();
+    if (state.renderedRows > 50) report.beatFailures.push(`${chapter}: catalogue renders ${state.renderedRows} rows (maximum 50)`);
+    for (const [id, layer] of Object.entries(state.layers)) {
+      if (layer.status === 'error') report.beatFailures.push(`${chapter}: catalogue ${id} failed to load`);
+    }
+    const id = await s.page.locator('[data-catalogue-row]').first().getAttribute('data-catalogue-row').catch(() => null);
+    if (!id) continue;
+    const ok = await s.page.evaluate((pick) => (window.__atlas!.engine as { selectCatalogue(id: string | null): boolean }).selectCatalogue(pick), id);
+    if (!ok) {
+      report.beatFailures.push(`${chapter}: visible catalogue row ${id} could not be selected`);
+      continue;
+    }
+    await s.page.waitForTimeout(2400);
+    const chosen = await read();
+    if (chosen.pick !== id) report.beatFailures.push(`${chapter}: catalogue selected ${chosen.pick}, expected ${id}`);
+    const structure = await s.page.evaluate(() => {
+      const detail = document.querySelector('[data-catalogue-inspector]');
+      const prose = document.querySelector('.atlas-panel .atlas-prose');
+      const header = document.querySelector('.atlas-panel__header');
+      return {
+        exists: !!detail,
+        beforeProse: !!detail && !!prose && !!(detail.compareDocumentPosition(prose) & Node.DOCUMENT_POSITION_FOLLOWING),
+        afterHeader: !!detail && !!header && !!(header.compareDocumentPosition(detail) & Node.DOCUMENT_POSITION_FOLLOWING),
+      };
+    });
+    if (!structure.exists || !structure.beforeProse || !structure.afterHeader)
+      report.beatFailures.push(`${chapter}: catalogue inspector must follow the chapter header and precede prose`);
+    const point = chosen.selectedScreen;
+    const view = s.page.viewportSize();
+    if (!point || !view || point[0] < 0 || point[1] < 0 || point[0] > view.width || point[1] > view.height)
+      report.beatFailures.push(`${chapter}: selected catalogue anchor is not on screen`);
+    await s.page.screenshot({ path: join(out, `catalogue-${chapter}.png`) });
+    selected++;
+    await s.page.evaluate(() => (window.__atlas!.engine as { selectCatalogue(id: string | null): boolean }).selectCatalogue(null));
+    if ((await read()).pick !== null) report.beatFailures.push(`${chapter}: catalogue clear did not clear selection`);
+  }
+  await s.apply({ wait: 300 });
+  console.log(`  catalogue selections: ${selected} chapters checked (50-row cap, inspector order, anchor)`);
+}
+
 /** Ids each chapter's own state asks to label (TimeScene `highlight`, SpaceScene `labels`) with no label on screen at the chapter camera: listed, never a failure. */
 async function runChapterHighlights(s: Session, report: RunReport): Promise<void> {
   const chapters = await s.ev(() => window.__atlas!.chapters());
@@ -1368,6 +1428,7 @@ async function main(): Promise<number> {
             await runBeats(s, o, out, report);
             console.log('  -- chapter highlights');
             await runChapterHighlights(s, report);
+            await runCatalogues(s, out, report);
           }
           if (o.tasks) {
             console.log('  -- tasks');

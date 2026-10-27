@@ -61,6 +61,11 @@ import { Timeline, formatReadout } from './timeline/Timeline';
 import { EventInspector } from './EventInspector';
 import { EntityInspector } from './EntityInspector';
 import { BandCard, PerfReadout, useFps } from './hud/HudPanels';
+import { CatalogueInspector } from './CatalogueInspector';
+import { CatalogueIndex } from './CatalogueIndex';
+import { catalogueItems, resolveCataloguePick, visibleCatalogue, type CatalogueLayer } from './lib/catalogue';
+import { eventImpacts } from './lib/impacts';
+import { datedLayerState } from './lib/datedLayers';
 import { DatedLayerPlate } from './hud/DatedLayerPlate';
 import type { DatedLayerIndex } from './lib/datedLayers';
 import { BLOC_CSS, entityCssColor } from './colors';
@@ -98,6 +103,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   const { hud } = useSceneContext();
   const currentChapter = useScene<TimeSceneExt, string | null>((s) => s.chapter);
   const layers = useScene<TimeSceneExt, string[]>((s) => s.layers);
+  const pick = useScene<TimeSceneExt, string | null>((s) => s.pick);
   const highlight = useScene<TimeSceneExt, string[]>((s) => s.highlight);
   const storeT = useScene<TimeSceneExt, TimePoint | null>((s) => s.t);
 
@@ -160,14 +166,17 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   const [selected, setSelected] = useState<string | null>(null);
   const [selectedEntity, setSelectedEntity] = useState<string | null>(null);
   const [cardExpanded, setCardExpanded] = useState(false);
+  const beatHighlight = useRef<string[] | null>(null);
+  const resolvedPick = useRef<string | null>(null);
   const restoreHighlight = useCallback(() => {
     const s = store.getState();
-    s.patch({ highlight: s.chapterTarget(s.chapter).highlight });
+    s.patch({ highlight: beatHighlight.current ?? s.chapterTarget(s.chapter).highlight });
   }, [store]);
   const selectEvent = useCallback(
     (id: string) => {
       // The presentation's map is for looking around: the caption says what the beat is about.
       if (presentation.isPresenting()) return;
+      store.getState().patch({ pick: null });
       setSelectedEntity(null);
       setSelected(id);
       store.getState().patch({ highlight: [id] });
@@ -180,6 +189,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   }, [restoreHighlight]);
   const selectEntity = useCallback(
     (id: string) => {
+      store.getState().patch({ pick: null });
       setSelected(null);
       if (selectedEntity === id) {
         setSelectedEntity(null);
@@ -206,6 +216,8 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
         if (transitioned) {
           setSelected(null);
           setSelectedEntity(null);
+          if (s.transition.reason === 'chapter') beatHighlight.current = null;
+          if (s.transition.reason !== 'url' && s.pick) s.patch({ pick: null });
           const segment = story.findIndex((c) => c.id === s.chapter);
           const pending = pendingBeat.current;
           pendingBeat.current = null;
@@ -283,6 +295,51 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   const [datedIndexes, setDatedIndexes] = useState<{ id: string; index: DatedLayerIndex }[]>([]);
 
 
+  const [catalogueLayers, setCatalogueLayers] = useState<CatalogueLayer[]>([]);
+  const renderedRows = useRef(0);
+  const countRows = useCallback((count: number) => { renderedRows.current = count; }, []);
+  const boundary = useSyncExternalStore(playhead.subscribe, () => datedIndexes.map(({ index }) => datedLayerState(index, playhead.get()).signature).join('|'), () => '');
+  const chapterState = chapters.find((chapter) => chapter.id === currentChapter)?.state as TimeChapterState | undefined;
+  const indexSpec = anchor?.tick !== null && anchor?.tick !== undefined ? chapterState?.beats?.[anchor.tick]?.catalogueIndex ?? chapterState?.catalogueIndex : chapterState?.catalogueIndex;
+  const catalogueEntries = useMemo(() => catalogueItems(catalogueLayers, layers, playhead.get(), indexSpec), [catalogueLayers, layers, playhead, indexSpec, boundary]);
+  const selectedLayer = pick ? catalogueLayers.find((layer) => layer.entries.some((entry) => entry.id === pick)) : undefined;
+  const pickedCatalogue = selectedLayer?.entries.find((entry) => entry.id === pick);
+  const selectCatalogue = useCallback((id: string | null): boolean => {
+    if (presentation.isPresenting()) return false;
+    if (id === null) { store.getState().patch({ pick: null }); restoreHighlight(); return true; }
+    const current = store.getState();
+    const layer = catalogueLayers.find((layer) => current.layers.includes(layer.id) && visibleCatalogue(layer, playhead.get()).some((entry) => entry.id === id));
+    const entry = layer?.entries.find((entry) => entry.id === id);
+    if (!entry) return false;
+    setSelected(null);
+    setSelectedEntity(null);
+    resolvedPick.current = id;
+    current.patch({ pick: id, highlight: [] });
+    const camera = current.camera;
+    current.applyCameraPreset({ center: entry.at, zoom: camera && 'zoom' in camera ? camera.zoom : 5 }, { instant: false });
+    return true;
+  }, [catalogueLayers, playhead, store, restoreHighlight]);
+  useEffect(() => {
+    if (!pick) {
+      resolvedPick.current = null;
+      if (new URLSearchParams(window.location.search).has('pick')) store.getState().patch({ pick: null });
+      return;
+    }
+    const state = store.getState();
+    const resolution = resolveCataloguePick(pick, state.pick, topic.datedLayers ?? [], state.layers, catalogueLayers, playhead.get());
+    if (resolution === 'cancelled' || resolution === 'waiting') return;
+    if (resolution === 'invalid') {
+      state.patch({ pick: null });
+      if (resolvedPick.current === pick) restoreHighlight();
+    } else {
+      if (state.highlight.length) state.patch({ highlight: [] });
+      if (resolvedPick.current !== pick) {
+        resolvedPick.current = pick;
+        if (!new URLSearchParams(window.location.search).has('cam')) state.applyCameraPreset({ center: resolution.entry.at, zoom: state.camera && 'zoom' in state.camera ? state.camera.zoom : 5 }, { instant: true });
+      }
+    }
+  }, [pick, catalogueLayers, layers, boundary, topic.datedLayers, store, playhead, restoreHighlight]);
+
   /* ---------- REFERENCE (R): adjacent keyframe as dashed outlines ---------- */
   const [reference, setReference] = useState(false);
   const referenceRef = useRef(false);
@@ -304,6 +361,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   const applyBeatState = (b: Beat<TimeBeat>, instant: boolean) => {
     const s = store.getState();
     const spec = b.spec;
+    beatHighlight.current = spec?.highlight ?? s.chapterTarget(b.chapter).highlight;
     pendingBeat.current = { chapter: b.chapter, index: b.index };
     s.applyState(
       {
@@ -414,7 +472,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       if (!layers.includes(layer.id)) continue;
       items.push({ id: `dated-layer-${layer.id}`, label: layer.label, color: layer.color ?? entityCssColor(geo.entities.find((e) => e.id === layer.holder)), kind: layer.kind === 'area' ? 'fill' : layer.kind === 'line' ? 'line' : 'point' });
     }
-    if (topic.datedLayers?.some((layer) => layer.kind === 'point' && layers.includes(layer.id)))
+    if (topic.datedLayers?.some((layer) => layer.kind === 'point' && layer.recent !== false && layer.temporal?.mode !== 'reference' && layers.includes(layer.id)))
       items.push({ id: 'dated-recent', label: bi('time.legend.datedRecent'), color: 'var(--signal)', kind: 'ring' });
     if (layers.includes('movements') && geo.movements.length)
       items.push({ id: 'movement', label: t('time.movement'), color: 'var(--ink-muted)', kind: 'arrow' });
@@ -554,6 +612,11 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
           }
         },
       },
+      test: {
+        selectCatalogue,
+        catalogueState: () => ({ pick: store.getState().pick, layers: Object.fromEntries((topic.datedLayers ?? []).filter((def) => def.catalogue && (store.getState().layers.includes(def.id) || catalogueLayers.some((layer) => layer.id === def.id))).map((def) => { const layer = catalogueLayers.find((loaded) => loaded.id === def.id); return [def.id, { status: layer?.status ?? 'loading', visible: layer && store.getState().layers.includes(def.id) ? visibleCatalogue(layer, playhead.get()).length : 0 }]; })), indexCount: catalogueEntries.length, renderedRows: renderedRows.current, selectedScreen: pickedCatalogue ? controllerRef.current?.catalogueScreen(pickedCatalogue.at) ?? null : null }),
+        impacts: (eventId: string) => eventImpacts(geo.events, eventId),
+      },
       labels: true,
       stats: () => {
         const s = readStats();
@@ -583,6 +646,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
           closeEntity();
           return true;
         }
+        if (store.getState().pick) { selectCatalogue(null); return true; }
         if (selected) {
           closeEvent();
           return true;
@@ -596,6 +660,11 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     };
   }, [
     store,
+    catalogueLayers,
+    catalogueEntries,
+    pickedCatalogue,
+    selectCatalogue,
+    topic.datedLayers,
     geo,
     model,
     movementsOn,
@@ -635,6 +704,8 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
         model={model}
         locale={locale}
         onSelectEvent={selectEvent}
+        onSelectCatalogue={selectCatalogue}
+        onCatalogueLayers={setCatalogueLayers}
         onController={setController}
         onLocalLand={onLocalLand}
         onDatedLayers={setDatedIndexes}
@@ -681,7 +752,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       </SceneSlot>
       {topic.datedLayers?.some((layer) => layer.count) && (
         <SceneSlot name="plate">
-          <DatedLayerPlate definitions={topic.datedLayers} indexes={datedIndexes} layers={layers} playhead={playhead} locale={locale} />
+          <DatedLayerPlate selectedSummary={pickedCatalogue?.title} catalogueLayers={catalogueLayers} definitions={topic.datedLayers} indexes={datedIndexes} layers={layers} playhead={playhead} locale={locale} />
         </SceneSlot>
       )}
 
@@ -704,6 +775,9 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
         />
       </SceneSlot>
 
+      {indexSpec && <SceneSlot name="readerEnd"><CatalogueIndex entries={catalogueEntries} locale={locale} pick={pick} onSelect={selectCatalogue} onRows={countRows} /></SceneSlot>}
+      {catalogueLayers.some((layer) => layers.includes(layer.id) && layer.status === 'error') && <SceneSlot name="inspector"><p role="status">{locale === 'en' ? 'Layer could not be loaded' : '图层未能载入'}</p></SceneSlot>}
+      {pickedCatalogue && selectedLayer && <SceneSlot name="inspector"><CatalogueInspector entry={pickedCatalogue} layer={selectedLayer.def} locale={locale} onClose={() => selectCatalogue(null)} /></SceneSlot>}
       {selectedEvent && (
         <SceneSlot name="inspector">
           <EventInspector event={selectedEvent} model={model} locale={locale} onClose={closeEvent} />

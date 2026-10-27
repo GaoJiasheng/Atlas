@@ -58,7 +58,7 @@ import { sourceIds, type SourcesFile } from '../src/content/schema/sources';
 import { tableSourceIssues } from '../src/engines/space-scene/table-schema';
 import { glossaryIds, type GlossaryFile } from '../src/content/schema/glossary';
 import { engineSchemas, formatIssues } from '../src/engines/schemas';
-import { timeChapterLayerIssues, timeSceneTopicIssues, type TimeChapterState, type TimeSceneGeoData } from '../src/engines/time-scene/schema';
+import { timeCatalogueIndexIssues, timeChapterLayerIssues, timeSceneTopicIssues, type TimeChapterState, type TimeSceneGeoData } from '../src/engines/time-scene/schema';
 import {
   exercisesFile,
   musclesFile,
@@ -459,6 +459,11 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
       const file = join(PUBLIC_DIR, 'geo', `${name}.json`);
       return existsSync(file) ? readJson(file) : undefined;
     };
+    for (const layer of topic.datedLayers ?? []) {
+      if (!layer.catalogue) continue;
+      const catalogue = readGeo(layer.catalogue.file) as { entries?: { id: string }[] } | undefined;
+      for (const entry of catalogue?.entries ?? []) if (typeof entry.id === 'string') ids.add(entry.id, 'catalogue feature', join(PUBLIC_DIR, 'geo', `${layer.catalogue.file}.json`));
+    }
     for (const issue of timeSceneTopicIssues(topic, data as TimeSceneGeoData, readGeo)) {
       const file = issue.file.startsWith('public/') ? join(ROOT, issue.file) : join(dir, issue.file);
       (issue.level === 'error' ? error : warn)(file, issue.message);
@@ -531,8 +536,13 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
         if (!ids.has(ref)) error(file, `state references unknown id "${ref}"`);
       }
       for (const issue of schemas.chapterIssues?.(state.data, data) ?? []) error(file, issue);
-      if (topic.engine === 'time-scene' && topic.stage === 'geo')
+      if (topic.engine === 'time-scene' && topic.stage === 'geo') {
         for (const issue of timeChapterLayerIssues(state.data as TimeChapterState, topic.datedLayers)) error(file, issue);
+        for (const issue of timeCatalogueIndexIssues(state.data as TimeChapterState, topic.datedLayers ?? [], (name) => {
+          const target = join(PUBLIC_DIR, 'geo', `${name}.json`);
+          return existsSync(target) ? JSON.parse(readFileSync(target, 'utf8')) : undefined;
+        })) error(file, issue);
+      }
     }
   }
   if (data !== undefined) {

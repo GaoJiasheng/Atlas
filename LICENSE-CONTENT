@@ -63,3 +63,23 @@ and `docs/screenshots/heart-and-lungs/` are derived from Z-Anatomy
 (https://creativecommons.org/licenses/by-sa/4.0/), with the attribution given in
 `THIRD-PARTY-NOTICES.md`. The texts and the other data files of these topics stay
 under CC BY-NC-SA 4.0 as above.
+
+Exception — Plates and hazards (topic `plates-and-hazards`): the PB2002-derived
+files `public/geo/ph-plate-divergent.json`, `ph-plate-transform.json`,
+`ph-plate-subduction.json`, `ph-plate-convergent.json`, `ph-orogens.json`,
+and the corresponding `ph-catalogue-plate-*.json` / `ph-catalogue-orogens.json`
+retain the Open Data Commons Attribution License 1.0 (ODC-BY 1.0) database
+notice and attribution to Peter Bird, Hugo Ahlenius/Nordpil and conversion
+contributors. https://opendatacommons.org/licenses/by/1-0/
+USGS earthquake, Smithsonian GVP employee-produced database facts and NOAA
+NCEI compiled location/type facts in `public/geo/ph-quake-sample.json`,
+`ph-volcano-catalogue.json`, `ph-observations-1883.json`,
+`ph-observations-2004.json`, `ph-observations-2018.json` and their corresponding
+`ph-catalogue-*.json` are public-domain source facts; this licence does not
+claim exclusive rights in them. The existing Natural Earth basemap remains
+public domain. Atlas original bilingual narrative, explanatory catalogue
+text, translations, event impacts and crosswalk organisation remain under
+CC BY-NC-SA 4.0. No GVP photographs, source-report prose, whole NOAA poster,
+CC BY-SA or ODbL input is incorporated in this topic. Per-file provenance and
+notices are in `src/content/topics/plates-and-hazards/data/SOURCES.md` and
+`provenance/`; attribution is in `THIRD-PARTY-NOTICES.md`.

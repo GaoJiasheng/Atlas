@@ -497,6 +497,27 @@ colors.ts  time-scene.css
 | `sources.json`（可选） | 见上文"加一个主题"第 4 步。 |
 | `glossary.json`（可选） | 名词表，见「名词表」。 |
 
+#### 事件影响估计 `impacts`（E-PH2）
+
+事件可选 `impacts: ImpactRecord[]`，定义在 `time-scene/impactSchema.ts`，不另建文件或 loader：
+
+```json
+{
+  "id": "impact-example",
+  "measure": "deaths",
+  "estimate": { "kind": "more-than", "value": 70000 },
+  "label": { "en": "Deaths", "zh": "死亡人数" },
+  "scope": { "en": "Surrounding areas", "zh": "周边地区" },
+  "sourceAsOf": "2011-09-29",
+  "sourceDateKind": "publication",
+  "sources": ["S22"]
+}
+```
+
+`measure` 还可为 `dead-or-missing-presumed-dead`；`kind` 为 `reported/about/more-than`。value 与可选 `components[].value` 都须为有限非负整数；组件形状 `{ id, label: { en, zh }, value, sources }`。label/scope/组件标签两语必填，sources 至少一条且须存在；impact/组件 id 全题唯一。`sourceAsOf` 只接受真实公历 `YYYY/ YYYY-MM/ YYYY-MM-DD`，保留原精度；`sourceDateKind` 为 `publication`（来源发布日期）或 `accessed`（读取日期），不能把读取日写成修订日期。
+
+可选 `componentsComplete` 必须伴随 components；分项和不得超过总数，`true` 只用于 `reported` 且和必须相等。不完整分项不推导“其余”记录，约数与下界估计不合成新总量。同一事件不能兼具 impacts 与旧 casualties。EventInspector 在摘要后常显每条定义、静态中性 Counter、scope、来源日期与 SourceRefs，独立估计逐条画，不进 CounterVersus。Counter 的可选 `valueLabel` 只替换数字文案（如 `More than 70,000 / 超过70,000`），不改图标刻度或算法；无此属性时旧显示逐字不变。分项保持作者顺序，非完整表有双语提示；具体“四国”范围由内容写在 scope。`__atlas.engine.impacts(eventId)` 返回已校验记录，未知事件返回 `[]`。没有新增选择或 URL 状态。合成 fixture 与 E-PH1 共用 `sample-science-layers`，其测试估计不作历史事实。
+
 **`site` 事件**是静态点位（监狱、纪念碑、建筑）：`t` 照写但不参与时间——不进时间轴范围、不进泳道和统计、不脉冲；只在 `sites` 图层打开时显示（小空心菱形 + 中心点），点击同样打开 inspector（眉题 `P-01`），高亮时出引线标注。
 
 章节 `state`：`time`（ISO 三种精度或 `{ ma }`）、`camera`、`layers`、`highlight`（实体/行动/事件 id）、`theme`、`note`（只在背景章：阅读说明）、`summary`（`{ en, zh }`，阅读面板标题下的一句话，也是默认演示字幕）、`question` / `answer`（`{ en, zh }`；没有 `summary` 时阅读面板头部显示 `question`；`answer` 必须配 `question`，目前不渲染），以及可选的 `beats`（演示节拍，见下）。底部条上每章一段，段从本章 `time`（第一拍更早就取第一拍的 `t`）开始，段里每拍一个刻度——**拍就是时间轴的结构**；**章节顺序必须等于时间顺序**（`tests/schemas.test.ts` 对 ww2 有检查）。
@@ -2214,3 +2235,15 @@ pnpm tsx scripts/geo/lib/check.ts --topic ww2         # MapLibre（Playwright）
 - **按年代裁过的要素不再沿底图海岸**（docs/28 P2，`simplify.ts`）：`pipeline.coast.excludeBox: [w, s, e, n]`（缺省 `null`）：这个框里不做海岸一步。底图陆地和水都挖掉这个框，于是框里的要素不被擦水、框外的 holder 也不会补缝长进来；框里的要素保持 compose 给它的海岸（新加坡要素已按时代 `intersect` 到 `work/coast-L#.geojson`）；柔佛、廖内等框里的邻国要素也就不再裁到 10m 海岸，需要的话在 compose 里 `intersect` 到 10m 陆地。偏差统计在框里不跳过"海里"的点。
 - **分框细度**（docs/28 P3，`simplify.ts`）：`pipeline.focus` 的一项可以写成 `{ "box": [w, s, e, n], "fineKm": 0.005 }`，这个框用自己的固定间隔（岛尺度要几米，区域框照旧 1 km 上下）：先从普通焦点框里挖出来，单独简化，用自己那份陆地沿海岸（与 inside / outside 两半同一做法）；排在前面的框在重叠处优先。自动预算搜索只调普通焦点框的间隔。没有这种项、没有 `excludeBox` 时产物与以前逐字节相同（ww1、ww2、warring-states、four-taps 的 simplify 改前改后各跑一次比对过）。
 - 东南亚近景底图：`scripts/build-geo.ts` 另出 `public/geo/land-10m-sea.json`（Natural Earth 1:10m 陆地，裁到 95°E–125°E、9°S–22°N，TopoJSON，约 234 KB）。GeoStage 在镜头 zoom ≥ 6.5 且视野与该框相交时才 fetch；zoom 7 起绘制、到 8 完全显现：框内先铺一层水色遮住 50m 陆地（不透明度 7→8 渐入），10m 陆地和海岸线叠在上面，颜色同为 `--land` / `--land-edge` / `--water` token。其他主题不加载它。
+
+### TimeScene · 科学参考图层与目录（E-PH1，docs/49）
+
+`datedLayers` 增量复用同一 GPU source、KEY、LAYERS、PLATE 与日历 playhead；旧定义省略新字段时保留 f/u 与 recent 样式。`temporal: {mode: reference, note: {en,zh}, release: "PB2002"}` 的 geometry 禁止 f/u，跨全部年代保持可见，PLATE 常显 REF.、说明与版本；`recent:false` 关闭新增点 draw layer、KEY 与计数。普通 dated 仍是有限十进制年 `f`、可选排他 `u`。`basemap:{maxZoom:8}` 可仅限制全球底图缩放。
+
+每层可加 `catalogue:{file:"my-catalogue"}`，与几何在第一次开启该层时一起读取本地 `public/geo/*.json`，关闭后缓存，不逐帧 setData；几何解码/日期建索引按250条一批让出主线程（原生JSON解析仍同步，需按完整数据实测解析时延）。文件形状：`{ entries: [{ id, title: {en,zh}, summary: {en,zh}, at: [lon,lat], sources: ["S1"], rows: [{key:"depth",label:{en:"Depth",zh:"深度"},value:null,unit:{en:"km",zh:"千米"}}] }] }`。`value` 为有限数值、非空双语或 null；null 显示 Not recorded / 未记录。entry id 直接 join 同层唯一 properties.id，全题对象命名唯一，不能复制成 event；Point 锚点与坐标相等，线在250m量化容差内，面在面内。编译校验来源、双语、rows.key 唯一、几何和目录不重不漏。观测层只接受 identity/source/type/doubtful/position/version 字段，不接受高度或到达值。
+
+章与拍的 `catalogueIndex:[{layerId:"my-layer",ids:["some-id"]}]` 可列指定 id；省 ids 列本层当前可见项。拍覆盖同组，省略则用章值。只交当前开启层的可见条目到 readerEnd 索引，按 id 排序，标题两语/id搜索150ms防抖，每页50行，未来记录不能点选。索引、GPU点线面命中、测试 hook 共用选择动作；事件优先，其后22px范围精算距离/id排序。详情沿现有 inspector 插槽出现在章头与拍之后、正文之前。选择以 entry.at 为镜头锚点，GPU signal overlay高亮；不为目录创建 HTML marker。
+
+`encoding:{radius:{property:"mag",min:6,max:9.5,px:[2,8]}}` 只用于Point，要求每个mag有限且≥6。显示半径 `2+6*clamp((mag-6)/3.5,0,1)` px；这是展示编码，不改变源震级。`pick=<catalogue-id>` 是最长128字符kebab-id，引擎字段只在 core typed URL passthrough 注册；合法可见pick优先于hl，未知则回退旧hl，取消选择恢复当前拍/章highlight。隐藏层、回退日期、换章会清pick；深链等本层几何与元数据完成才解析，失败写双语错误并清pick。显式URL cam保留，其他有效pick深链飞到at。换主题/语言沿URL保留id。
+
+测试使用 `__atlas.engine.selectCatalogue(id|null):boolean`（隐藏对象或演示中返回false）、`catalogueState():{pick,layers:{[id]:{status,visible}},indexCount,renderedRows,selectedScreen}`；layers只报告已请求或当前开启的目录层，status为loading/ready/error，selectedScreen为选中锚点的视口CSS坐标或null。既有stats().datedLayers增加可选mode/sourceUpdates，sourceUpdates初次提交为1；跨时间边界才setFilter。`sample-science-layers`保持draft，合成数据不能作为科学来源；专用unit/e2e与shoot目录选中截图用于验收。

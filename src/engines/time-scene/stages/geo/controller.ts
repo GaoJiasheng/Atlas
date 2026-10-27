@@ -43,11 +43,13 @@ import { formatTime, formatTimeRange } from '../../lib/format';
 import { aspectBounds, regionGraticule, regionMaxBounds } from '../../lib/region';
 import { parseRivers, riverCollection, riversAt, type RiverN } from '../../lib/rivers';
 import { decodeLocalLand, localEraAt, localLandFilter, parseLocalLand, type LocalEra } from '../../lib/localLand';
-import { decodeDatedLayer, type DatedLayerLoaded } from '../../lib/datedLayers';
+import { catalogueHitDistance, catalogueVisible, nearestCatalogue, type CatalogueLayer } from '../../lib/catalogue';
+import type { CatalogueEntry } from '../../catalogueSchema';
+import { prepareDatedLayer, type DatedLayerLoaded } from '../../lib/datedLayers';
 import { createLeaders, intersects, type LeaderItem } from './leaders';
 import { createTerritoryLabels } from './territory';
 import { createRiverLabels } from './rivers';
-import { createDatedMapLayer, type DatedLayerStats, type DatedMapLayer } from './datedLayers';
+import { createDatedMapLayer, datedLayerStyles, type DatedLayerStats, type DatedMapLayer } from './datedLayers';
 import { EMPTY, GROUPS, HI, HI_BBOX, HI_LOAD_ZOOM, LAYER, LOCAL, MAX_ZOOM, DASH_SEQUENCE, DASH_STEP_MS, REFERENCE_MS, REGION, SRC, buildGeoStyle, graticule, riverFilter } from './style';
 
 export interface GeoControllerOptions {
@@ -71,6 +73,8 @@ export interface GeoControllerOptions {
   /** Optional static point, line or area sources with numeric year windows. */
   datedLayers?: readonly DatedLayerDef[];
   onSelectEvent(id: string): void;
+  onSelectCatalogue?(id: string): void;
+  onCatalogueLayers?(layers: CatalogueLayer[]): void;
   /** The island-scale land (`basemap.local`) has loaded: whether it has a `coast-today` line (the legend lists it). */
   onLocalLand?(info: { coastToday: boolean }): void;
   /** Dates have been indexed once; the PLATE can calculate counts without scanning features. */
@@ -98,6 +102,7 @@ export interface GeoController {
   /** Regional plate: the camera that shows the whole plate (the first preset); null on the world map. */
   plateCamera(): GeoCamera | null;
   stats(): { features: number; zoom: number; datedLayers: Record<string, DatedLayerStats> };
+  catalogueScreen(at: [number, number]): [number, number];
   destroy(): void;
 }
 
@@ -321,6 +326,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     // Today's coastline over a dated island coast is a reference line, read with the names (N).
     if (localLand && !region) map.setLayoutProperty(LOCAL.today, 'visibility', territoryOn ? 'visible' : 'none');
     for (const layer of datedLayers) layer.setVisible(on.has(layer.id));
+    void loadDatedLayers();
     if (on.has('borders') && !region) void ensureCountries();
   };
 
@@ -1031,15 +1037,15 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   map.on('click', (e) => {
     const on = layersOn();
     const targets = [...(on.has('battles') ? [LAYER.eventRing] : []), ...(on.has('sites') ? [LAYER.siteHit] : [])];
-    if (targets.length === 0) return;
+    if (targets.length === 0 && !datedLayers.length) return;
     const { x, y } = e.point;
-    const hits = map.queryRenderedFeatures(
+    const hits = targets.length ? map.queryRenderedFeatures(
       [
         [x - HIT_RADIUS, y - HIT_RADIUS],
         [x + HIT_RADIUS, y + HIT_RADIUS],
       ],
       { layers: targets },
-    );
+    ) : [];
     let best: { id: string; d: number } | null = null;
     for (const f of hits) {
       const id = (f.properties as { id?: string }).id;
@@ -1050,7 +1056,21 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       const d = Math.hypot(p.x - x, p.y - y);
       if (!best || d < best.d) best = { id, d };
     }
-    if (best) options.onSelectEvent(best.id);
+    if (best) { options.onSelectEvent(best.id); return; }
+    const candidates: { id: string; distance: number }[] = [];
+    const active = datedLayers.filter((layer) => on.has(layer.id) && layer.def.catalogue);
+    const drawIds = active.flatMap((layer) => datedLayerStyles(layer.def, tokens, datedColor(layer.def, playhead.get()), playhead.get()).filter((style) => !style.id.endsWith('-recent')).map((style) => style.id));
+    if (drawIds.length) for (const hit of map.queryRenderedFeatures([[x - 22, y - 22], [x + 22, y + 22]], { layers: drawIds })) {
+      const id = hit.properties?.id as string | undefined;
+      if (!id) continue;
+      const sourceLayer = catalogueLayers.find((layer) => layer.entries.some((entry) => entry.id === id));
+      if (!sourceLayer || !catalogueVisible(sourceLayer.def, hit, playhead.get())) continue;
+      const project = (p: number[]) => projectNearCentre((q) => map.project(q), p as LngLat, x);
+      const distance = catalogueHitDistance(hit.geometry, e.point, project);
+      candidates.push({ id, distance });
+    }
+    const id = nearestCatalogue(candidates);
+    if (id) options.onSelectCatalogue?.(id);
   });
 
   /* ---------- regional 1:10m land (lazy: zoomed in over Southeast Asia) ---------- */
@@ -1113,28 +1133,43 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   /* ---------- optional dated data layers (one static GPU source per definition) ---------- */
   const datedColor = (def: DatedLayerDef, t: number) =>
     def.color ? resolveColorRef(def.color, tokens) : def.holder ? entityColor(def.holder, t) : tokens.ink;
+  const catalogueLayers: CatalogueLayer[] = [];
+  const loadingLayers = new Set<string>();
+  const notifyCatalogue = () => options.onCatalogueLayers?.([...catalogueLayers]);
   const loadDatedLayers = async () => {
-    const definitions = options.datedLayers ?? [];
-    if (!definitions.length) return;
-    const results = await Promise.allSettled(definitions.map(async (def) => {
-      const topo = await fetchJson<Parameters<typeof topoFeature>[0]>(withBase(`/geo/${def.file}.json`));
-      const collection = decodeDatedLayer(topo, def.file);
-      if (!collection) throw new Error(`${def.file}.json has no object "${def.file}"`);
-      return { def, collection };
-    }));
-    if (destroyed) return;
-    for (const result of results) {
-      if (result.status === 'rejected') {
-        console.warn('[atlas] dated layer unavailable:', result.reason);
-        continue;
+    const definitions = (options.datedLayers ?? []).filter((def) => layersOn().has(def.id) && !loadingLayers.has(def.id));
+    definitions.forEach((def) => loadingLayers.add(def.id));
+    for (const def of definitions) {
+      const info: CatalogueLayer = { id: def.id, def, status: 'loading', entries: [], features: { type: 'FeatureCollection', features: [] } };
+      catalogueLayers.push(info);
+      notifyCatalogue();
+      try {
+        const [topo, metadata] = await Promise.all([
+          fetchJson<Parameters<typeof topoFeature>[0]>(withBase(`/geo/${def.file}.json`)),
+          def.catalogue ? fetchJson<{ entries: CatalogueEntry[] }>(withBase(`/geo/${def.catalogue.file}.json`)) : Promise.resolve({ entries: [] }),
+        ]);
+        if (destroyed) return;
+        const prepared = await prepareDatedLayer(topo, def.file, def);
+        if (destroyed) return;
+        if (!prepared) throw new Error(`${def.file}: missing named object`);
+        const { collection, index } = prepared;
+        const t = playhead.get();
+        const drawn = createDatedMapLayer(map, def, collection, tokens, datedColor(def, t), t, index);
+        drawn.setSelected(store.getState().pick);
+        datedLayers.push(drawn);
+        info.entries = metadata.entries;
+        info.features = collection;
+        info.status = 'ready';
+        applyVisibility();
+        options.onDatedLayers?.(datedLayers.map(({ id, index }) => ({ id, index })));
+        notifyCatalogue();
+        requestRender();
+      } catch {
+        if (destroyed) return;
+        info.status = 'error';
+        notifyCatalogue();
       }
-      const { def, collection } = result.value;
-      const t = playhead.get();
-      datedLayers.push(createDatedMapLayer(map, def, collection, tokens, datedColor(def, t), t));
     }
-    applyVisibility();
-    options.onDatedLayers?.(datedLayers.map(({ id, index }) => ({ id, index })));
-    requestRender();
   };
 
   /* ---------- regional plate: its land (into the base `land` source) and its rivers ---------- */
@@ -1230,7 +1265,8 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
         applyVisibility();
         requestRender();
       }
-      if (s.highlight !== prev.highlight) requestRender();
+      if (s.pick !== prev.pick) for (const layer of datedLayers) layer.setSelected(s.pick);
+      if (s.highlight !== prev.highlight || s.pick !== prev.pick) requestRender();
     }),
   );
   disposers.push(playhead.subscribe(requestRender));
@@ -1275,6 +1311,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   });
 
   return {
+    catalogueScreen(at) { const p = map.project(at); const rect = container.getBoundingClientRect(); return [p.x + rect.left, p.y + rect.top]; },
     setLocale(next) {
       if (next === locale) return;
       locale = next;

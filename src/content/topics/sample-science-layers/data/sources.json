@@ -1,0 +1,16 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "Atlas synthetic engine acceptance records, docs/49 §4.2–4.3.",
+        "zh": "Atlas 合成引擎验收记录，docs/49 第4.2–4.3节。"
+      },
+      "note": {
+        "en": "Display parameters and invented fixture data; not scientific observations.",
+        "zh": "显示参数与虚构夹具数据，并非科学观测。"
+      },
+      "design": true
+    }
+  ]
+}

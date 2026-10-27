@@ -20,6 +20,8 @@ export interface GeoStageProps {
   model: TimeModel;
   locale: Locale;
   onSelectEvent(id: string): void;
+  onSelectCatalogue?(id: string): void;
+  onCatalogueLayers?(layers: import('../../lib/catalogue').CatalogueLayer[]): void;
   /** The controller once the map chunk has loaded (null on unmount). */
   onController(controller: GeoController | null): void;
   /** The island-scale land has loaded (`basemap.local`): whether it has today's coastline. */
@@ -27,7 +29,7 @@ export interface GeoStageProps {
   onDatedLayers?(info: DatedLayerLoaded[]): void;
 }
 
-export function GeoStage({ store, playhead, model, locale, onSelectEvent, onController, onLocalLand, onDatedLayers }: GeoStageProps) {
+export function GeoStage({ store, playhead, model, locale, onSelectEvent, onSelectCatalogue, onCatalogueLayers, onController, onLocalLand, onDatedLayers }: GeoStageProps) {
   const t = useT();
   const { slots, topic } = useSceneContext();
   const leadersSvg = slots.leaders;
@@ -40,6 +42,10 @@ export function GeoStage({ store, playhead, model, locale, onSelectEvent, onCont
   const territoryRef = useRef<HTMLDivElement>(null);
   const scaleRef = useRef<HTMLDivElement>(null);
   const controllerRef = useRef<GeoController | null>(null);
+  const catalogueRef = useRef(onSelectCatalogue);
+  catalogueRef.current = onSelectCatalogue;
+  const catalogueLayersRef = useRef(onCatalogueLayers);
+  catalogueLayersRef.current = onCatalogueLayers;
   const selectRef = useRef(onSelectEvent);
   selectRef.current = onSelectEvent;
   const controllerCb = useRef(onController);
@@ -78,6 +84,8 @@ export function GeoStage({ store, playhead, model, locale, onSelectEvent, onCont
           strings: stringsRef.current,
           datedLayers: datedLayersRef.current,
           onSelectEvent: (id) => selectRef.current(id),
+          onSelectCatalogue: (id) => catalogueRef.current?.(id),
+          onCatalogueLayers: (info) => catalogueLayersRef.current?.(info),
           onLocalLand: (info) => localLandCb.current?.(info),
           onDatedLayers: (info) => datedLayersCb.current?.(info),
         });

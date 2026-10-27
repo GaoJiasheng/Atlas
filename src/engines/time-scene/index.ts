@@ -10,6 +10,7 @@ import { isGeoTime } from '../../lib/time';
 
 /** TimeScene's fields on top of SceneState. `t` is in the URL. */
 export interface TimeSceneExt {
+  pick: string | null;
   /** Current time on the axis. */
   t: TimePoint | null;
   /** Ids (events, movements, entities) the current chapter emphasises. */
@@ -26,7 +27,7 @@ export const timeSceneEngine = defineEngine<TimeSceneExt, TimeSceneGeoData>({
   id: 'time-scene',
   defaults(_topic, data) {
     const first = data && 'control' in data ? data.control.keyframes[0]?.t : undefined;
-    return { t: first ?? null, highlight: [], layers: ['base', 'control', 'movements', 'battles'] };
+    return { pick: null, t: first ?? null, highlight: [], layers: ['base', 'control', 'movements', 'battles'] };
   },
   fromChapterState(state: ChapterState) {
     const out: Partial<TimeSceneExt> = {};
@@ -37,6 +38,7 @@ export const timeSceneEngine = defineEngine<TimeSceneExt, TimeSceneGeoData>({
   },
   fromUrl(fields) {
     const out: Partial<TimeSceneExt> = {};
+    if (fields.pick !== undefined) out.pick = fields.pick;
     if (fields.t !== undefined) out.t = fields.t;
     if (fields.highlight !== undefined) out.highlight = fields.highlight;
     return out;

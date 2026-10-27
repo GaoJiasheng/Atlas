@@ -642,3 +642,37 @@ S05/S09/S46/S52不作为本题必要来源：未成功再次直取的部分分�
 只读代码/文档/研究输入、网络复核及写本文件；未建应用主题，未运行app check/test/build/e2e/shoot。已机械核对68事实结论、8章38拍、字幕英文长度、fact/source映射及文件中的范围约束；不把研究准备检查或PNG原稿检查当产品门槛通过。未修改研究档、图片、许可文件、review queue或package；无git命令、安装、登录或条款接受操作。
 
 ## 9. 引擎记录（施工后填写）
+
+### 9.1 E-PH1 · 参考层与可选目录（2026-10-27）
+
+实现保留datedLayers同一来源路径：topic schema新增temporal/recent/catalogue/encoding，TimeScene schema校验reference禁止f/u、dated窗口、Point mag、目录完整join/来源/锚点/双语/全题唯一id与章拍索引。`catalogueSchema.ts`只在构建期引入zod，客户端只import type；目录join、全题唯一id、几何属性与章拍索引校验抽到`catalogueValidation.ts`，共享schema仅保留短调用和既有导出转发，便于并行分支合并。目录详情显式列Record ID / 记录编号。`lib/catalogue.ts`提供可见集合、搜索分页、半径和距离/id顺序；原dated index增加reference恒定签名和recent:false，GPUsource静态提交，帧间不重建。controller首次开启层时懒取几何/目录，loading/ready/error回报到原PLATE/inspector；错误不用0掩盖。选中通过GPU overlay与单一selectCatalogue动作；章末readerEnd列表150ms搜索、50行分页，详情仍为章头→拍→详情→正文→索引。core只新增pick typed URL字段、codec顺序和SceneHost透传，无新store action/registry/schema注册。
+
+`pick`等待启用层完成，失败或不可见则清理；旧hl在无效pick时保留，有效pick则互斥，ESC取消恢复拍/章高亮。URL显式cam保留，其他pick深链以entry.at定位。`catalogueState`包含规范字段，另加selectedScreen给shoot检查选中锚点位于视口；关闭且从未请求的层不列入状态（status没有idle），已请求层保留缓存状态。fixture `sample-science-layers`为draft，含2 reference点、3 dated+mag点、2同日关联观测与旧f/u点，并包含E-PH2合成事件。unit覆盖数值/边界、来源一次提交和60帧无边界零filter；专用e2e覆盖两语两主题、深链、未来项、关层、ESC、演示守卫、延迟与错误。shoot由主会话补入目录选中读数与截图。
+
+与§4.2的明确差异/额外兼容：全球`basemap:{maxZoom:8}`原schema只接受local/region，新增仅maxZoom选项以支持本题既定配置；目录选择不创建HTML引线，使用GPU高亮及视图锚点（0条目录引线符合最多1条约束）；观察行白名单含longitude/latitude作为位置字段。几何解码/日期建索引按250条一批让出主线程；单个JSON响应的原生解析与最终数值排序仍是同步操作，完整文件单次解析是否超过50ms尚未有浏览器实测，不能声称硬时限通过。真实设备fps与生产Vite分包增量仍需主会话在完整数据构建后实测，不能把纯函数测试称为性能全绿。子代理遵守BRIEF-ENGINE没有运行浏览器门槛；局部check0errors、validate57topics0errors/0warnings、旧dated+新时间缓存30tests通过，完整门槛以主会话最终报告为准。
+
+复查修复：选中GPU overlay也应用dated时间过滤，回退到未来条目前即隐藏，边界间不重写；切换主题同时刷新选中圆的填色和轮廓；deferred pick解析先核对当前store.pick，旧章异步回包不能重新选择，目标层ready即可解析、不等待无关层。`catalogue-runtime.test.ts`5项覆盖这些回归及1001要素4次批间yield、输出几何/索引与同步版本完全一致；另修复多边形bbox命中精算，拒绝距角点31px的44px包围盒候选并尊重面洞。相关GPU/缓存测试22/22通过。当前来源载入结果每次发新数组；渲染只对每层二分边界签名变化重建目录集合，帧间不扫描全部条目。
+
+包体旁证（esbuild0.25.12，HEAD只读导出到tmp，与当前同参数browser/ES2022/minify、入口View.tsx、包含共享依赖及E-PH2、每份JS独立gzip）：基线369361B gzip、当前373748B、增量4387B（4.28KiB）；raw JS从1311989到1325302B。低于15KB新增目标；这是可复现单bundle对照，不冒称生产Vite分包实测，也没有消除原有TimeScene总包体债务。CSS单独从89109到89704B；浏览器帧率和JSON原生解析时延尚未测量。
+
+### 9.2 E-PH2 · 事件来源估计记录（2026-10-27）
+
+已实现 `impactSchema.ts`、`lib/impacts.ts`、`ImpactRecords.tsx` 与 EventInspector 摘要后的小分支；events schema 只加可选 impacts 与互斥校验，整题检查来源与全题唯一 id。旧事件不填 impacts 时保持原路径。`Counter.valueLabel?` 只传入包括限定词的数字文案，图标/刻度算法没有修改；同文案用于视觉与 aria。总数、定义、scope、实际精度日期和 SourceRefs 同 section 常显；独立估计分行、无动画/对抗/平均；分项保留作者顺序，不推导剩余人数。`__atlas.engine.impacts(eventId)` 沿 View 的 test hooks 返回原已校验 records，未知事件 `[]`；不加 loader/URL/store。
+
+数值向量由 `tests/time-scene/impacts.test.ts` 的14项测试验证：227343、差556、Thailand9000→228131；完整总和与 reported 限制；null/负数/小数/非有限数、未知来源、非法2024-02-30、双语缺失、id冲突、impact+casualties均拒绝；70000下界、92000独立估计、36000约数两语与 publication/accessed 标签通过。测试也以静态 HTML 验证 Counter/SourceRefs、总数与范围同屏结构、不生成第五项。合成 fixture 的3个事件包含全部合法数据形状，另有 `tests-e2e/sample-science-impacts.spec.ts` 检查两语/两主题/普通事件选择/来源弹层。
+
+偏差：组件类型没有“国家”单位，通用 engine 的不完整提示为 “Selected entries shown; not a complete breakdown. / 这里只列部分条目，并非完整分项。”；本题明确的“四个国家”完整原句由 impact.scope/正文提供，避免通用组件把所有分项误称国家。其余 §4.3 无范围偏差。局部单测14/14通过；浏览器门槛按 BRIEF-ENGINE 禁止在子代理运行，e2e/shoot 尚未执行，完整集成 check/validate/test/build 与浏览器/包体门槛以主会话实际结果为准。
+
+### 9.3 两阶段整合与草稿内容（2026-10-27）
+
+已在同一worktree先完成E-PH1/E-PH2与合成fixture，再施工`plates-and-hazards`。主题保持`status:draft`；8章、38拍、10个科学图层及10份懒载目录、5个disaster+4个site、7个空帧、15术语、33来源、3幅既有图。未修改smoke计数、package/lockfile、review-queue，未做git写入或发布。对共享core的改动仅typed `pick`字段、URL codec与SceneHost透传；新验证主体已抽到独立`catalogueValidation.ts`，未改store/keys/context/registry或`[slug].astro`。
+
+数据转换`build-data.ts`逐项核验26个冻结输入hash；保留5824个PB分片/5819原序号、13个orogen、1214个火山位置、3729个地震和2664个有效观测位置。几何1,449,977B、目录4,982,515B，最大目录1,743,895B；PB四文件592,532B。DP900m+1e6网格后逐原始顶点量测：全球p50/p95/max=13.717/127.120/656.172m；SEA=10.366/46.112/81.363m。USGS/NCEI点坐标精确保留，UTC日用既有toNumber，观测只按显式crosswalk源日出现；无高度/到达数值、无插值或危险区。逐文件PD/ODC-BY/原创NC-SA通知与21个输出hash在topic/provenance及两份许可文件。
+
+内容/路径偏差：`inside-the-earth`未合并，12个slug-only链接实际触发validate缺topic错误；已在原位置保留规划中配套主题文字，恢复位置逐项列REVIEW，未藏成未经校验的原始href。build-only crosswalk/转换报告放topic/provenance而非runtime data/*.json；现有engine数据schema严格，不为审计增加运行时loader或忽略键。Q的原始id在title、magType/status/UTC日在summary、epoch/updated/depth在rows，NCEI原row/event id在稳定id与summary、类型/疑问标记在rows，版本在层/summary；这种压缩保留事实且符合5MB目录预算，不增加新文件格式。
+
+既有illustrate管线处理三图后，以near-lossless灰度WebP确保解码后每个非透明像素R=G=B；四个密度文件均有透明像素，逐张打开且在paper/cinema底色合成图上复看。实际125454/422108/234700/138682B，超过illustrate的90/260/120KB软目标；这是精确中性灰优先的明确图像体积偏差。图形/说明内容未更换，未生成新图。可复现脚本`build-illustrations.ts`和逐图hash/pixel报告在provenance/illustrations.json。
+
+验收：整合`pnpm test`163files/4286tests全部通过（基线158files/4236tests）；`pnpm validate`58topics、0error/0warning；`pnpm check`0error/0warning（原3条hint；本轮新增unused已移除后复查）。Phase1 build117pages通过；最终build119pages通过。Playwright仅做无浏览器test--list，登记363tests/41files，不当执行通过。生产构建静态import闭包估计10files/468033B gzip，超过旧300KB总页预算；这不是浏览器网络实测，也不拿旧391KB文档值当本轮基线。第一次并行build/test时旧schemas控制区解析5s超时，单独41/41通过，随后全套也通过。未修改旧主题数据来遮盖回归。
+
+**浏览器门槛未执行**：本次两个brief明确禁止sandbox内shoot/e2e，未尝试浏览器/桌面绕过。已添加fixture、本题e2e与shoot目录数值/inspector顺序/选中锚点截图检查，但不能据此声称手机/双主题/键盘触摸/标注布局、延迟加载浏览器路径、来源焦点、GPU帧率或生产Vite实际网络JS总量通过。`ww2`、`sample-dated-layers`、`ancient-civilisations`、`singapore-land-use`、`singapore-after-1965`的shoot/e2e回归同样留给主会话；实际设备60/30fps、原生JSON解析50ms与旧391KB总JS债务仍待浏览器量测。运行e2e固定`CI=1 ATLAS_E2E_PORT=5424 pnpm e2e`。

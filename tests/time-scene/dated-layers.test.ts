@@ -97,7 +97,7 @@ describe('dated GPU layers', () => {
     layer.update(1961);
     expect(map.setFilter).toHaveBeenCalledTimes(3);
     expect(map.setFilter.mock.lastCall?.[0]).toBe('ts-dated-blocks-recent');
-    expect(layer.stats()).toEqual({ total: 2, visible: 1, recent: 0, filterUpdates: 3 });
+    expect(layer.stats()).toMatchObject({ total: 2, visible: 1, recent: 0, filterUpdates: 3, sourceUpdates: 1 });
     expect(map.addSource).toHaveBeenCalledOnce();
   });
 

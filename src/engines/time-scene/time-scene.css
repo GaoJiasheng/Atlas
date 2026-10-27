@@ -1206,3 +1206,12 @@ button.ts-co:focus-visible {
   font: 500 calc(12 * var(--u)) / 1.5 var(--font-mono);
 }
 .ts-plate__row[data-enabled="false"] dd { color: var(--ink-3); }
+
+/* A bounded catalogue belongs at the chapter's existing reader-end slot. */
+.ts-catalogue-index { border-top: 1px solid var(--line); padding-top: 12px; }
+.ts-catalogue-index input { width: 100%; min-height: 44px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); padding: 8px; }
+.ts-catalogue-index ul { list-style: none; padding: 0; }
+.ts-catalogue-index button { min-height: 44px; color: var(--ink); background: transparent; border: 0; border-bottom: 1px solid var(--line); text-align: start; padding: 8px; width: 100%; }
+.ts-catalogue-index button[aria-pressed="true"] { color: var(--signal); }
+.ts-catalogue-index nav { display: flex; align-items: center; gap: 12px; }
+.ts-catalogue-index nav button { width: 44px; }

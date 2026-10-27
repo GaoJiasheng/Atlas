@@ -86,7 +86,7 @@ export const basemapOptions = z
     maxZoom: z.number().min(6).max(16).optional(),
   })
   .strict()
-  .refine((b) => (b.local === undefined) !== (b.region === undefined), 'basemap needs exactly one of `local` or `region`');
+  .refine((b) => !(b.local !== undefined && b.region !== undefined) && (b.local !== undefined || b.region !== undefined || b.maxZoom !== undefined), 'basemap needs local, region, or maxZoom; local and region are mutually exclusive');
 export type BasemapOptions = z.output<typeof basemapOptions>;
 
 /**
@@ -120,9 +120,15 @@ export const datedLayerDef = z
     count: z.boolean().optional(),
     /** The PLATE row's short name (`HDB blocks` / `组屋`); defaults to `label`. */
     countLabel: bilingual.optional(),
+    temporal: z.discriminatedUnion('mode', [z.object({ mode: z.literal('dated') }).strict(), z.object({ mode: z.literal('reference'), note: bilingual.refine((value) => !!value.zh.trim(), 'reference note requires non-empty Chinese'), release: z.string().trim().min(1) }).strict()]).optional(),
+    recent: z.boolean().optional(),
+    catalogue: z.object({ file: kebabId }).strict().optional(),
+    encoding: z.object({ radius: z.object({ property: z.literal('mag'), min: z.literal(6), max: z.literal(9.5), px: z.tuple([z.literal(2), z.literal(8)]) }).strict() }).strict().optional(),
   })
   .strict()
   .refine((layer) => layer.holder !== undefined || layer.color !== undefined, { path: ['color'], message: 'a dated layer needs `holder` or `color`' })
+  .refine((layer) => !layer.encoding || layer.kind === 'point', { path: ['encoding'], message: 'radius encoding requires point geometry' })
+  .refine((layer) => layer.temporal?.mode !== 'reference' || layer.recent !== true, { path: ['recent'], message: 'reference layers cannot have recent points' })
   .refine((layer) => layer.countLabel === undefined || layer.count === true, { path: ['countLabel'], message: '`countLabel` needs `count: true`' });
 export type DatedLayerDef = z.output<typeof datedLayerDef>;
 

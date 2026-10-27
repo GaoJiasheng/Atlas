@@ -18,6 +18,7 @@ import type { TimeModel } from './lib/model';
 import { counterPer, formatTimeRange } from './lib/format';
 import { toNumber } from './lib/time';
 import { sideCssColor } from './colors';
+import { ImpactRecords } from './ImpactRecords';
 
 export interface EventInspectorProps {
   event: SceneEvent;
@@ -114,6 +115,8 @@ export function EventInspector({ event, model, locale, onClose }: EventInspector
         {tx(event.summary, locale)}
         {event.sources && event.sources.length > 0 && <SourceRefs ids={event.sources} locale={locale} />}
       </p>
+
+      {event.impacts && <ImpactRecords records={event.impacts} locale={locale} />}
 
       {(event.sides || event.result) && (
         <dl className="ts-event__facts">

@@ -1,0 +1,23 @@
+{
+  "_comment": "Synthetic engine acceptance fixture; no scientific datasets or fabricated historical control regions.",
+  "datasets": {},
+  "ohm": {},
+  "svg": {},
+  "raster": {},
+  "keyframes": [],
+  "pipeline": {
+    "plannedKeyframes": 3,
+    "focus": [
+      [
+        99,
+        -2,
+        107,
+        5
+      ]
+    ],
+    "coast": {
+      "detailBox": null,
+      "detailLand": null
+    }
+  }
+}
