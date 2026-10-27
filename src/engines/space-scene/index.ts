@@ -12,8 +12,8 @@ export const SPACE_VIEW_IDS: readonly SpaceView[] = ['assembled', 'xray', 'explo
 
 /** SpaceScene's fields on top of SceneState (docs/03 §B Explorer). */
 export interface SpaceSceneExt {
+  /** Orbit sims (docs/44 E-SEM1): the paused model time in seconds; `null` = the elapsed control's seed / running. */
   orbitTime?: number | null;
-  orbitClock?: import("./lib/sim/orbit-clock").OrbitClockState;
   part: string | null;
   view: SpaceView;
   explode: number;

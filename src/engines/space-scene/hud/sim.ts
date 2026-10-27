@@ -1,4 +1,3 @@
-import { getOrbitSession } from '../lib/sim/orbit-session';
 /**
  * The try-it state as the HUD reads it (the try-it card, the circuit diagram,
  * the PLATE readings): the values on show, the model's outputs, the chapter's
@@ -10,6 +9,7 @@ import { getOrbitSession } from '../lib/sim/orbit-session';
 import { useMemo, useSyncExternalStore } from 'react';
 import { useScene, useSceneContext, useSceneStore } from '../../core/context';
 import type { SceneStore } from '../../core/store';
+import { getOrbitSession } from '../lib/sim/orbit-session';
 import type { SpaceSceneExt } from '../index';
 import type { PartsFile, SpaceChapterState } from '../schema';
 import type { SimData, SimTry, SimValue, SimValues } from '../sim-schema';

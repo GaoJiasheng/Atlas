@@ -182,14 +182,16 @@ test('presentation exit restores controls and physical time; reduced motion load
   await open(page, '?ch=a-turning-earth&orb-t=21600');
   expect((await orbit(page)).running).toBe(false);
 });
-test('phone mounts one accessible observation window and keeps selection in the reader', async ({ page }) => {
+test('phone mounts one accessible observation window and selects from the chapter index', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await open(page, '?ch=singapore-daylight&b=2', 'zh');
   await page.getByRole('button', { name: '阅读', exact: true }).click();
   await expect(page.locator('[data-orbit-panel]')).toHaveCount(1);
   await page.getByRole('button', { name: '后一天', exact: true }).click();
   expect((await sim(page)).values['day-index']).toBe(173);
-  await page.locator('[data-orbit-panel]').getByRole('button', { name: '地球', exact: true }).click();
+  // Selection stays the chapter index's (no second picker in the observation window).
+  await expect(page.locator('[data-orbit-panel] button', { hasText: '地球' })).toHaveCount(0);
+  await page.locator('.space-index__row[data-part="earth-body"]').click();
   expect(await page.evaluate(() => (window.__atlas!.state() as unknown as { part: string }).part)).toBe('earth-body');
   await expect(page.locator('.atlas-reader .space-inspector')).toHaveAttribute('aria-label', '地球');
 });

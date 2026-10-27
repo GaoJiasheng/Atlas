@@ -1,11 +1,11 @@
+/** Three observations in the existing card / narrow reader slot; one shared session. */
 import { SourceRefs } from '../../widgets/SourcePopover';
 import { useStageLook } from '../stages/model3d/look';
 import { holds } from '../lib/sim/bind';
-/** Three observations in the existing card / narrow reader slot; one shared session. */
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
 import { useSceneContext } from '../../core/context';
 import type { PartsFile } from '../schema';
-import { getOrbitSession, type OrbitSession } from '../lib/sim/orbit-session';
+import { getOrbitSession, orbitIsStill, type OrbitSession } from '../lib/sim/orbit-session';
 import { add, dot, mul, sub, unit, rotate, finiteShadow } from '../lib/sim/orbit-rotation';
 import { northBasis } from '../lib/sim/orbit-projection';
 import { outputText } from '../lib/sim/text';
@@ -48,6 +48,15 @@ export function orbitPanelReading(orbit: OrbitSession) {
     notApplicable: s.lab === 'local-year' ? 'orbit geometry readings are not applicable to the computed solar table' : null,
   };
 }
+type Rgb = [number, number, number];
+const luma = ([r, g, b]: Rgb) => 0.2126 * r + 0.7152 * g + 0.0722 * b;
+/** A colour token as RGB: the canvas normalises an opaque fillStyle to #rrggbb (no pixel readback). */
+function tokenRgb(ctx: CanvasRenderingContext2D, css: CSSStyleDeclaration, name: string): Rgb {
+  ctx.fillStyle = '#000';
+  ctx.fillStyle = css.getPropertyValue(name).trim();
+  const v = String(ctx.fillStyle);
+  return v.startsWith('#') ? ([1, 3, 5].map((i) => parseInt(v.slice(i, i + 2), 16)) as Rgb) : ((v.match(/[\d.]+/g) ?? ['0', '0', '0']).slice(0, 3).map(Number) as Rgb);
+}
 function Phase({ orbit, label }: { orbit: OrbitSession; label: string }) {
   const look = useStageLook();
   const canvas = useRef<HTMLCanvasElement>(null);
@@ -57,16 +66,9 @@ function Phase({ orbit, label }: { orbit: OrbitSession; label: string }) {
     const c = canvas.current,
       ctx = c?.getContext('2d');
     if (!c || !ctx) return;
+    // Lit = the lighter of the two theme tokens, unlit = the darker (paper and cinema swap them), then exact sphere-ray normals.
     const css = getComputedStyle(c),
-      bright = css.getPropertyValue('--ink').trim(),
-      dark = css.getPropertyValue('--bg').trim();
-    // A tiny 2-colour palette from the two theme tokens, then exact sphere-ray normals.
-    ctx.fillStyle = bright;
-    ctx.fillRect(0, 0, 1, 1);
-    const lit = ctx.getImageData(0, 0, 1, 1).data;
-    ctx.fillStyle = dark;
-    ctx.fillRect(0, 0, 1, 1);
-    const dim = ctx.getImageData(0, 0, 1, 1).data;
+      [lit, dim] = [tokenRgb(ctx, css, '--ink'), tokenRgb(ctx, css, '--panel-solid')].sort((a, b) => luma(b) - luma(a)) as [Rgb, Rgb];
     const size = 160,
       image = ctx.createImageData(size, size),
       E = s.bodies.earth.position,
@@ -129,9 +131,6 @@ function Discs({ orbit, label }: { orbit: OrbitSession; label: string }) {
       <circle cx="150" cy="82" r="68" className="space-orbit__sun" />
       <circle cx={150 + x} cy={82 + y} r={d.moonRadius * k} className="space-orbit__moon" />
       <path d="M82 158 H218 M82 154 V162 M218 154 V162" className="space-orbit__line" />
-      <text x="150" y="154" textAnchor="middle">
-        {((2 * d.sunRadius * 180) / Math.PI).toFixed(3)}°
-      </text>
     </svg>
   );
 }
@@ -145,8 +144,11 @@ function Shadow({ orbit, zh }: { orbit: OrbitSession; zh: boolean }) {
     off = Math.hypot(...sub(m, mul(axis, x))),
     extent = Math.max(430000, off * 1.15),
     k = Math.min(260 / 550000, 92 / (extent + 10000)),
-    cx = 35,
-    cy = 68;
+    // Earth at the left with its shadow running right; a Moon on the Sun's side (x < 0) puts Earth at the right so both stay in frame.
+    cx = x < 0 ? 265 : 35,
+    cy = 68,
+    // Crop to the strip the bodies and cones use (one scale, so the strip is thin unless the Moon is far off the axis).
+    top = Math.min(cy - off * k - 16, cy - 20);
   const cone = (source: number, body: number, D: number, ox: number, oy = 0, ax = 1, ay = 0) => {
     const ku = Math.asin((source - body) / D),
       kp = Math.asin((source + body) / D),
@@ -167,7 +169,7 @@ function Shadow({ orbit, zh }: { orbit: OrbitSession; zh: boolean }) {
     <figure className="space-orbit__shadow">
       <figcaption>{text(zh, 'Finite Sun · one scale · no atmospheric brightness', '有限太阳 · 同一比例 · 非大气亮度预测')}</figcaption>
       <svg
-        viewBox="0 0 300 130"
+        viewBox={`0 ${top} 300 ${cy + 20 - top}`}
         role="img"
         aria-label={text(zh, 'Earth and Moon with finite-source umbra, penumbra and antumbra', '地月与有限光源本影、半影和伪本影')}
       >
@@ -184,10 +186,10 @@ function Shadow({ orbit, zh }: { orbit: OrbitSession; zh: boolean }) {
           )}
         <circle cx={cx} cy={cy} r={R * k} className="space-orbit__moon" />
         <circle cx={cx + x * k} cy={cy - off * k} r={mr * k} className="space-orbit__moon" />
-        <text x={cx} y={cy + 16}>
+        <text x={cx} y={cy + 14}>
           E
         </text>
-        <text x={cx + x * k} y={Math.max(10, cy - off * k - 8)}>
+        <text x={cx + x * k} y={cy - off * k - 6}>
           M
         </text>
       </svg>
@@ -226,7 +228,6 @@ export function OrbitCard({ file, reader = false }: { file: PartsFile; reader?: 
     const o = sim.outputs.find((o) => (o.from ?? o.id) === id);
     return o ? outputText(o, orbit.outputs[o.id], locale) + (o.unit && o.format !== 'time' ? ' ' + o.unit : '') : '—';
   };
-  const choose = (id: string) => store.getState().patch({ part: id });
   const scale = String(orbit.values[c.display.scale]),
     multipliers = orbit.display.multipliers;
   const row = c.solarYear.table?.days[s.dayIndex - 1];
@@ -262,31 +263,33 @@ export function OrbitCard({ file, reader = false }: { file: PartsFile; reader?: 
       )}
       {kind === 'phase' && (
         <>
-          <Phase orbit={orbit} label={`${read('moon-phase')} · ${read('moon-lit-percent')}`} />
-          <p>
-            {read('moon-phase')} · {read('moon-lit-percent')}
-          </p>
+          <div className="space-orbit__view">
+            <Phase orbit={orbit} label={`${read('moon-phase')} · ${read('moon-lit-percent')}`} />
+            <p>
+              {read('moon-phase')} · {read('moon-lit-percent')}
+              <br />
+              {text(zh, 'Lunar eclipse: ', '月食：')}
+              {read('lunar-eclipse')}
+            </p>
+          </div>
           <p>{text(zh, 'Geometric lit fraction; eclipse dimming is separate. Faint teaching fill.', '几何亮部比例；食遮暗单列。暗侧为教学填光。')}</p>
-          <p>
-            {text(zh, 'Lunar eclipse: ', '月食：')}
-            {read('lunar-eclipse')}
-          </p>
         </>
       )}
       {kind === 'apparent-discs' && (
         <>
-          <Discs orbit={orbit} label={`${read('solar-eclipse')}; ${read('sun-diameter-deg')} / ${read('moon-diameter-deg')}`} />
-          <p>
-            {text(zh, 'Solar eclipse: ', '日食：')}
-            {read('solar-eclipse')} ·{' '}
-            {s.quantities['solar-visible'] === 1 ? text(zh, 'above horizon', '地平线上方') : text(zh, 'alignment below horizon', '地平下的排列')}
-          </p>
-          <p>
-            {text(zh, 'Sun / Moon diameter', '日 / 月视直径')} {read('sun-diameter-deg')} / {read('moon-diameter-deg')}
-          </p>
-          <p>
-            {text(zh, 'Separation', '分离角')} {read('disc-separation-deg')}
-          </p>
+          <div className="space-orbit__view">
+            <Discs orbit={orbit} label={`${read('solar-eclipse')}; ${read('sun-diameter-deg')} / ${read('moon-diameter-deg')}`} />
+            <p>
+              {text(zh, 'Solar eclipse: ', '日食：')}
+              {read('solar-eclipse')}
+              <br />
+              {s.quantities['solar-visible'] === 1 ? text(zh, 'above horizon', '地平线上方') : text(zh, 'alignment below horizon', '地平下的排列')}
+              <br />
+              {text(zh, 'Sun / Moon ⌀', '日 / 月视直径')} {read('sun-diameter-deg')} / {read('moon-diameter-deg')}
+              <br />
+              {text(zh, 'Separation', '分离角')} {read('disc-separation-deg')}
+            </p>
+          </div>
         </>
       )}
       {kind === 'solar-year' && row && (
@@ -346,16 +349,9 @@ export function OrbitCard({ file, reader = false }: { file: PartsFile; reader?: 
       <p>
         <SourceRefs ids={kind === 'solar-year' ? ['S33', 'S36'] : ['S36']} locale={locale} />
       </p>
-      <div className="space-orbit__pick">
-        {['earth', 'moon'].map((id) => (
-          <button key={id} type="button" onClick={() => choose(`${id}-body`)}>
-            {text(zh, id === 'earth' ? 'Earth' : 'Moon', id === 'earth' ? '地球' : '月球')}
-          </button>
-        ))}
-      </div>
-      <p>
+      <p className="space-orbit__mapping">
         {text(zh, 'Solid spheres: X-RAY, CUTAWAY and EXPLODED do not apply.', '实心球体：不使用透视、剖切或拆解。')}
-        {['eclipse', 'local-year'].includes(s.lab) ? text(zh, ' Static comparison.', ' 静态比较。') : ''}
+        {orbitIsStill(orbit) ? text(zh, ' Static comparison: no FLOW.', ' 静态比较：不运行。') : ''}
       </p>
     </section>
   );

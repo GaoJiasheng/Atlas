@@ -1752,7 +1752,7 @@ docs/40 §4.4 E-HL3。流的可选字段：
 
 两种 overlay 沿用 ≤4 上限、when 和 group 引用。phase 是地心北朝上球面射线视图，主相机不旋转它；食遮暗与几何亮部读数分列。apparent-discs 是模型地表点的同角度尺视盘；地平下仍可算几何食型，但写“地平下的排列”。shadow 用物理半径、距离与有限太阳切线在独立同尺度图内画本影、半影和伪本影；不和示意放大球接线。全年图只读365行，固定720–735 min，标“纵轴放大区间”，指针与44px前后日按钮都调用既有 `setSim`。
 
-`orbit-session.ts` 每个 scene 一个会话，store 的 `orbitClock={seedSeconds,elapsedSeconds,running}` 与 `run` 共用状态。stage 在 parts 前推进同一个 t / snapshot，HUD 读同一 outputs。单帧Δ≤0.05s，后台恢复清基准、无补跑，maxSeconds夹住停；暂停按需绘制。除 scale 外改控件停并回 elapsed seed；scale 只映射 display，保持物理 snapshot 实例。coupled/year 用太阳显示原点，其余实验用地球原点；真尺度保持统一 m/km。近景与总览相机在尺度变化时重映射；初始章/拍链接直接使用作者给出的目标镜头。eclipse/local-year 的运行命令禁用。
+`orbit-session.ts` 每个 scene 一个会话，会话里的钟 `{seedSeconds,elapsedSeconds,running}` 跟 store 的 `run` / `orbitTime` 同步。stage 在 parts 前推进同一个 t / snapshot，HUD 读同一 outputs。单帧Δ≤0.05s，后台恢复清基准、无补跑，maxSeconds夹住停；暂停按需绘制。除 scale 外改控件停并回 elapsed seed；scale 只映射 display，保持物理 snapshot 实例。coupled/year 用太阳显示原点，其余实验用地球原点；真尺度保持统一 m/km。近景与总览相机在尺度变化时重映射；初始章/拍链接直接使用作者给出的目标镜头。eclipse/local-year 的运行命令禁用。
 
 URL `orb-t=21600.123456`：有限十进制、≤6小数、范围0..31557600；加载暂停，非法回seed。章→拍→URL sim→orb-t，换章/拍清时间；REFERENCE 暂停并保持t，演示退出恢复 controls / t / run。URL只在状态变更 / 暂停同步，不逐帧写。新 kind 不接 timeline 的“终态重播”。
 

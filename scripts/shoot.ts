@@ -404,11 +404,20 @@ function beatSceneOf(page: Page): Promise<BeatScene | null> {
     return {
       ...Object.fromEntries(keys.map((k) => [k, st[k] ?? null])),
       sim: sim?.values ?? null,
+      // Orbit sims (docs/44): the shared snapshot and its outputs, rounded to 1e-6 (snapshot ids differ between loads).
       ...(() => {
-        const e=window.__atlas!.engine as unknown as {orbit?(): Record<string,unknown>|null;sim?():unknown};const orbit=e.orbit?.();
-        if(!orbit)return {};
-        const normalize=(v:unknown):unknown=>typeof v==='number'?Math.round(v*1e6)/1e6:Array.isArray(v)?v.map(normalize):v&&typeof v==='object'?Object.fromEntries(Object.entries(v).filter(([k])=>k!=='snapshotId').map(([k,x])=>[k,normalize(x)])):v;
-        return {orbit:normalize(orbit),orbitOutputs:normalize(e.sim?.())};
+        const e = window.__atlas!.engine as unknown as { orbit?(): Record<string, unknown> | null; sim?(): unknown };
+        const orbit = e.orbit?.();
+        if (!orbit) return {};
+        const normalize = (v: unknown): unknown =>
+          typeof v === 'number'
+            ? Math.round(v * 1e6) / 1e6
+            : Array.isArray(v)
+              ? v.map(normalize)
+              : v && typeof v === 'object'
+                ? Object.fromEntries(Object.entries(v).filter(([k]) => k !== 'snapshotId').map(([k, x]) => [k, normalize(x)]))
+                : v;
+        return { orbit: normalize(orbit), orbitOutputs: normalize(e.sim?.()) };
       })(),
       unfinished: Object.entries(sim?.timeline ?? {})
         .filter(([, r]) => r.playing || r.t !== r.duration)
@@ -503,42 +512,60 @@ async function bendIssues(s: Session): Promise<string[]> {
   return issues;
 }
 
+/** Orbit bindings: compare the actual world matrix / illumination uniform with the shared physical snapshot. */
+async function orbitIssues(s: Session): Promise<string[]> {
+  const path = join(ROOT, 'src/content/topics', s.topic, 'data/parts.json');
+  if (!existsSync(path)) return [];
+  const file = JSON.parse(readFileSync(path, 'utf8')) as PartsFile;
+  if (!file.sim?.orbitRotation) return [];
+  await s.page.waitForFunction(() => {
+    const o = (window.__atlas!.engine as unknown as { orbit(): any }).orbit();
+    return !!o?.rendered && o.snapshotId === o.rendered.snapshotId;
+  });
+  const o = await s.page.evaluate(() => (window.__atlas!.engine as unknown as { orbit(): any }).orbit());
+  const issues: string[] = [];
+  const cfg = file.sim.orbitRotation;
+  for (const b of file.sim.bind) {
+    if (!('part' in b)) continue;
+    for (const id of Array.isArray(b.part) ? b.part : [b.part]) {
+      const got = o.rendered.parts[id];
+      if (!got) {
+        issues.push(`${id}: no actual rendered matrix`);
+        continue;
+      }
+      if (b.bodyTransform?.attachment === 'centre') {
+        const body = b.bodyTransform.body;
+        if (got.position.some((v: number, j: number) => Math.abs(v - o.display.centres[body][j]) > 1e-6))
+          issues.push(`${id}: rendered position differs from display snapshot`);
+        const q = o.physical.bodies[body].quaternion;
+        if (Math.abs(Math.abs(got.quaternion.reduce((v: number, x: number, j: number) => v + x * q[j], 0)) - 1) > 1e-6)
+          issues.push(`${id}: rendered quaternion differs`);
+        if (b.bodyTransform.scaleWithRadius !== false && got.scale.some((v: number) => Math.abs(v - o.display.radii[body]) > 1e-8))
+          issues.push(`${id}: rendered radius differs`);
+      }
+      if (b.solarIllumination) {
+        const body = b.solarIllumination.body;
+        if (o.rendered.solarDirections[body]?.some((v: number, j: number) => Math.abs(v - o.physical.solarDirections[body][j]) > 1e-9))
+          issues.push(`${id}: solar uniform differs`);
+      }
+    }
+  }
+  if (o.scale === 'true-scale' && Math.abs(o.display.radii.earth - cfg.bodies[1].radiusKm * cfg.display.trueScaleMPerKm) > 1e-10)
+    issues.push('true scale radius differs');
+  if (o.panel.kind === 'phase' && !o.panel.northUp) issues.push('phase window is not north-up');
+  if (
+    o.panel.shadowFrame &&
+    Math.abs(o.panel.shadowFrame.radii.moon / o.panel.shadowFrame.radii.earth - cfg.bodies[2].radiusKm / cfg.bodies[1].radiusKm) > 1e-10
+  )
+    issues.push('shadow frame does not use one scale');
+  return issues;
+}
+
 /**
  * Every animation an `hz` binding paces (docs/40 §4.3) plays at the bound
  * frequency now: (output − origin) × per, within 1 % (beats and beat links
  * jump to it; a stage that has not drawn the animation yet is not checked).
  */
-/** Orbit bindings: compare the actual world matrix / illumination uniform with the shared physical snapshot. */
-async function orbitIssues(s: Session): Promise<string[]> {
-  const path=join(ROOT,'src/content/topics',s.topic,'data/parts.json');
-  if(!existsSync(path))return [];
-  const file=JSON.parse(readFileSync(path,'utf8')) as PartsFile;
-  if(!file.sim?.orbitRotation)return [];
-  await s.page.waitForFunction(()=>{const o=(window.__atlas!.engine as unknown as {orbit():any}).orbit();return !!o?.rendered&&o.snapshotId===o.rendered.snapshotId;});
-  const o=await s.page.evaluate(()=>(window.__atlas!.engine as unknown as {orbit():any}).orbit());
-  const issues:string[]=[];
-  const cfg=file.sim.orbitRotation;
-  for(const b of file.sim.bind){
-    if(!('part'in b))continue;
-    for(const id of Array.isArray(b.part)?b.part:[b.part]){
-      const got=o.rendered.parts[id];
-      if(!got){issues.push(`${id}: no actual rendered matrix`);continue;}
-      if(b.bodyTransform?.attachment==='centre'){
-        const body=b.bodyTransform.body;
-        if(got.position.some((v:number,j:number)=>Math.abs(v-o.display.centres[body][j])>1e-6))issues.push(`${id}: rendered position differs from display snapshot`);
-        const q=o.physical.bodies[body].quaternion;
-        if(Math.abs(Math.abs(got.quaternion.reduce((v:number,x:number,j:number)=>v+x*q[j],0))-1)>1e-6)issues.push(`${id}: rendered quaternion differs`);
-        if(b.bodyTransform.scaleWithRadius!==false&&got.scale.some((v:number)=>Math.abs(v-o.display.radii[body])>1e-8))issues.push(`${id}: rendered radius differs`);
-      }
-      if(b.solarIllumination){const body=b.solarIllumination.body;if(o.rendered.solarDirections[body]?.some((v:number,j:number)=>Math.abs(v-o.physical.solarDirections[body][j])>1e-9))issues.push(`${id}: solar uniform differs`);}
-    }
-  }
-  if(o.scale==='true-scale'&&Math.abs(o.display.radii.earth-cfg.bodies[1].radiusKm*cfg.display.trueScaleMPerKm)>1e-10)issues.push('true scale radius differs');
-  if(o.panel.kind==='phase'&&!o.panel.northUp)issues.push('phase window is not north-up');
-  if(o.panel.shadowFrame&&Math.abs(o.panel.shadowFrame.radii.moon/o.panel.shadowFrame.radii.earth-cfg.bodies[2].radiusKm/cfg.bodies[1].radiusKm)>1e-10)issues.push('shadow frame does not use one scale');
-  return issues;
-}
-
 async function hzIssues(s: Session): Promise<string[]> {
   const path = join(ROOT, 'src/content/topics', s.topic, 'data/parts.json');
   if (!existsSync(path)) return [];
@@ -688,15 +715,19 @@ async function runBeatLinks(s: Session, beats: { chapter: string; index: number 
     else same++;
     if (diffs.length) console.log(`  ${`${name} (link)`.padEnd(36)} FAIL  ${diffs.join('; ').slice(0, 300)}`);
   }
-  const orbitFile=join(ROOT,'src/content/topics',s.topic,'data/parts.json');
-  if(beats.length&&existsSync(orbitFile)&&(JSON.parse(readFileSync(orbitFile,'utf8')) as PartsFile).sim?.orbitRotation){
-    const b=beats[0]!;const link=`?ch=${encodeURIComponent(b.chapter)}&b=${b.index+1}`;
+  // Orbit sims: a link with `orb-t` opens on the same snapshot as seeking the clock there.
+  const orbitFile = join(ROOT, 'src/content/topics', s.topic, 'data/parts.json');
+  if (beats.length && existsSync(orbitFile) && (JSON.parse(readFileSync(orbitFile, 'utf8')) as PartsFile).sim?.orbitRotation) {
+    const b = beats[0]!;
+    const link = `?ch=${encodeURIComponent(b.chapter)}&b=${b.index + 1}`;
     await s.load(`${path}${link}`, 'orbit seek');
-    await s.page.evaluate(()=>(window.__atlas!.engine as unknown as {orbitSeek(t:number):boolean}).orbitSeek(21600));
-    await orbitIssues(s);const want=await beatSceneOf(s.page);
+    await s.page.evaluate(() => (window.__atlas!.engine as unknown as { orbitSeek(t: number): boolean }).orbitSeek(21600));
+    await orbitIssues(s);
+    const want = await beatSceneOf(s.page);
     await s.load(`${path}${link}&orb-t=21600`, 'orbit time link');
-    await orbitIssues(s);const got=await beatSceneOf(s.page);
-    if(JSON.stringify(want?.orbit)!==JSON.stringify(got?.orbit))report.beatFailures.push('orb-t=21600 differs from orbitSeek(21600)');
+    await orbitIssues(s);
+    const got = await beatSceneOf(s.page);
+    if (JSON.stringify(want?.orbit) !== JSON.stringify(got?.orbit)) report.beatFailures.push('orb-t=21600 differs from orbitSeek(21600)');
   }
   await s.reopen();
   console.log(`  beat links: ${same} of ${shown.size} open on the presentation's scene`);

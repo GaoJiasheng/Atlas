@@ -1,5 +1,3 @@
-import { getOrbitSession } from '../../lib/sim/orbit-session';
-import { OrbitClockDriver, OrbitDriver } from './OrbitDriver';
 /**
  * The R3F scene graph of Model3DStage. Lives in its own reconciler root (see
  * Model3DStage.tsx), so it gets the scene store, engine UI store, bridge and
@@ -65,6 +63,8 @@ import { SimOverlays } from './SimOverlays';
 import { TimelineClock } from './TimelineClock';
 import { AnimClocks } from './AnimClocks';
 import type { Matrix4 } from 'three';
+import { getOrbitSession } from '../../lib/sim/orbit-session';
+import { OrbitClockDriver, OrbitDriver } from './OrbitDriver';
 
 const GltfSource = lazy(() => import('./GltfSource'));
 
@@ -193,7 +193,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
       instant: st.transition.instant,
     })),
   );
-  const orbitSession = data.sim?.orbitRotation ? getOrbitSession(store,data.sim) : null;
+  const orbitSession = data.sim?.orbitRotation ? getOrbitSession(store, data.sim) : null;
   const invalidate = useThree((st) => st.invalidate);
   const gl = useThree((st) => st.gl);
   const dpr = useThree((st) => st.viewport.dpr);
@@ -381,7 +381,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
   const simRun = useMemo<{ effects: SimEffects; outputs: SimOutputs; frames: MagnetFrames } | null>(() => {
     if (!data.sim) return null;
     const values = resolveSimValues(data.sim, s.sim);
-    const { outputs, frames } = orbitSession ? {outputs:orbitSession.outputs,frames:new Map()} : evaluateSimOnStage(data.sim, data, values, s.pose);
+    const { outputs, frames } = orbitSession ? { outputs: orbitSession.outputs, frames: new Map() } : evaluateSimOnStage(data.sim, data, values, s.pose);
     return { effects: simEffects(data.sim, values, outputs), outputs, frames };
   }, [data, s.sim, s.pose]);
   const sim = simRun?.effects ?? null;

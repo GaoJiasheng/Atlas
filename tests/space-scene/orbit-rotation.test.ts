@@ -20,6 +20,7 @@ import {
 } from '../../src/engines/space-scene/lib/sim/orbit-rotation';
 import { orbitDisplay, bodyPlacement, northBasis } from '../../src/engines/space-scene/lib/sim/orbit-projection';
 import { orbitClock, stepOrbitClock, decodeOrbitTime } from '../../src/engines/space-scene/lib/sim/orbit-clock';
+import { orbitIsStill, type OrbitSession } from '../../src/engines/space-scene/lib/sim/orbit-session';
 import { orbitRotationSchema, orbitTableIssues } from '../../src/engines/space-scene/orbit-rotation-schema';
 const cfg = orbitRotationSchema.parse({
   ...raw.sim.orbitRotation,
@@ -440,6 +441,11 @@ describe('orbit URL boundary', () => {
     expect(decodeSceneState('orb-t=12.1234567').orbitTime).toBeUndefined();
     expect(decodeSceneState('orb-t=12&run=1').run).toBe(true); // Pause belongs to the orbit runtime, not other engines' codec.
     expect(encodeSceneState({ orbitTime: null })).toEqual([]);
+  });
+  it('static-comparison labs (rate 0) are still: FLOW and SPACE stay off there only', () => {
+    const still = (lab: string) => orbitIsStill({ config: cfg, snapshot: snapshot({ lab }) } as unknown as OrbitSession);
+    expect(['coupled', 'day', 'year', 'moon'].map(still)).toEqual([false, false, false, false]);
+    expect(['eclipse', 'local-year'].map(still)).toEqual([true, true]);
   });
   it('pure solver stays under one millisecond per evaluation after warmup', () => {
     for (let i = 0; i < 100; i++) solve({}, i);

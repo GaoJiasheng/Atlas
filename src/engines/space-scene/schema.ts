@@ -1,4 +1,3 @@
-import { linkOrbitTable, orbitTableIssues } from './orbit-rotation-schema';
 /**
  * SpaceScene data schemas (docs/03 §B).
  *
@@ -45,6 +44,7 @@ import { MAX_EXPLODE_STAGE } from './lib/explode';
 import { MAX_FLOW_PATHS } from './lib/flow-curve';
 import { beatSimSchema, chapterSimIssues, chapterSimSchema, simIssues, simSchema } from './sim-schema';
 import { materialsShowable } from './lib/sim/materials';
+import { linkOrbitTable, orbitTableIssues } from './orbit-rotation-schema';
 
 /* ------------------------------------------------------------------ */
 /* Parts                                                               */
@@ -1217,13 +1217,21 @@ export const partsFileBase = z
       }))
         ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['sim', ...x.path], message: x.message });
     }
-    if(file.sim?.orbitRotation){
-      if(file.rig)ctx.addIssue({code:z.ZodIssueCode.custom,path:['rig'],message:'orbit body frames cannot inherit rig or exercise root motion'});
-      const writers=new Set(file.sim.bind.flatMap(b=>'part'in b&&b.bodyTransform?(Array.isArray(b.part)?b.part:[b.part]):[]));
-      for(const o of file.sim.overlays)if(o.kind==='orbit-guides')for(const id of Object.values(o.parts))writers.add(id);
-      file.parts.forEach((p,i)=>{if(writers.has(p.id)&&p.explode.dist!==0)ctx.addIssue({code:z.ZodIssueCode.custom,path:['parts',i,'explode'],message:'orbit writer forbids explode motion'});});
-      file.animations.forEach((a,i)=>{if(writers.has(a.target))ctx.addIssue({code:z.ZodIssueCode.custom,path:['animations',i,'target'],message:'orbit writer forbids animation motion'});});
-      for(const [name,pose]of Object.entries(file.poses??{}))for(const id of Object.keys(pose.parts))if(writers.has(id))ctx.addIssue({code:z.ZodIssueCode.custom,path:['poses',name,'parts',id],message:'orbit writer forbids pose motion'});
+    if (file.sim?.orbitRotation) {
+      if (file.rig) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['rig'], message: 'orbit body frames cannot inherit rig or exercise root motion' });
+      const writers = new Set(file.sim.bind.flatMap((b) => ('part' in b && b.bodyTransform ? (Array.isArray(b.part) ? b.part : [b.part]) : [])));
+      for (const o of file.sim.overlays) if (o.kind === 'orbit-guides') for (const id of Object.values(o.parts)) writers.add(id);
+      file.parts.forEach((p, i) => {
+        if (writers.has(p.id) && p.explode.dist !== 0)
+          ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['parts', i, 'explode'], message: 'orbit writer forbids explode motion' });
+      });
+      file.animations.forEach((a, i) => {
+        if (writers.has(a.target))
+          ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['animations', i, 'target'], message: 'orbit writer forbids animation motion' });
+      });
+      for (const [name, pose] of Object.entries(file.poses ?? {}))
+        for (const id of Object.keys(pose.parts))
+          if (writers.has(id)) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['poses', name, 'parts', id], message: 'orbit writer forbids pose motion' });
     }
     file.parts.forEach((p, i) => {
       const at = (path: (string | number)[], message: string) => ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['parts', i, ...path], message });
@@ -1486,11 +1494,14 @@ const spaceSceneDataBase = z
   .superRefine((data, ctx) => {
     const issue = (path: (string | number)[], message: string) => ctx.addIssue({ code: z.ZodIssueCode.custom, path, message });
     // `[S#]` markers in part details must cite data/sources.json, `[M#]` the shared sources.
-    if(data.parts.sim?.orbitRotation) {
-      const c=data.parts.sim.orbitRotation; orbitTableIssues(c).forEach(x=>issue(['parts','sim',...x.path],x.message));
-      const src=new Map((data.sources?.sources??[]).map(s=>[s.id,s]));
-      c.sources.forEach((id,i)=>{if(!src.has(id))issue(['parts','sim','orbitRotation','sources',i],`unknown source ${id}`);});
-      if(!src.get('S36')?.design)issue(['parts','sim','orbitRotation','sources'],'S36 must be a design study');
+    if (data.parts.sim?.orbitRotation) {
+      const c = data.parts.sim.orbitRotation;
+      orbitTableIssues(c).forEach((x) => issue(['parts', 'sim', ...x.path], x.message));
+      const src = new Map((data.sources?.sources ?? []).map((s) => [s.id, s]));
+      c.sources.forEach((id, i) => {
+        if (!src.has(id)) issue(['parts', 'sim', 'orbitRotation', 'sources', i], `unknown source ${id}`);
+      });
+      if (!src.get('S36')?.design) issue(['parts', 'sim', 'orbitRotation', 'sources'], 'S36 must be a design study');
     }
     const known = new Set((data.sources?.sources ?? []).map((s) => s.id));
     const shared = new Set((data.fitness?.sources ?? []).map((s) => s.id));

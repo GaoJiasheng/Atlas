@@ -44,9 +44,10 @@ import type { TextureKit } from './textures';
 import { DEFAULT_BULGE, MAX_SHORTEN, MAX_SHORTEN_CAP } from '../../lib/rig';
 
 export interface PartUniforms {
-  uOrbitLight: {value:number};
-  uOrbitFill: {value:number};
-  uOrbitSun: {value:Vector3};
+  /** Orbit sims (OrbitDriver): 0 = the studio lights, 1 = lit only by the analytic Sun along `uOrbitSun` (world, unit) with `uOrbitFill` on the night side, 2 = self-lit (the Sun). */
+  uOrbitLight: { value: number };
+  uOrbitFill: { value: number };
+  uOrbitSun: { value: Vector3 };
   uContract: { value: number };
   /** Muscle length (origin → insertion, local units) and belly thickness. */
   uLen: { value: number };
@@ -240,7 +241,9 @@ export interface PartMaterial {
 
 export function createPartMaterial(): PartMaterial {
   const uniforms: PartUniforms = {
-    uOrbitLight:{value:0},uOrbitFill:{value:0.035},uOrbitSun:{value:new Vector3(-1,0,0)},
+    uOrbitLight: { value: 0 },
+    uOrbitFill: { value: 0.035 },
+    uOrbitSun: { value: new Vector3(-1, 0, 0) },
     uContract: { value: 0 },
     uLen: { value: 0 },
     uThick: { value: 0 },

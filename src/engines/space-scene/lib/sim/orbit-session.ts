@@ -23,6 +23,8 @@ export interface OrbitSession {
   sync(): void;
   dispose(): void;
 }
+/** Whether the lab on show is a static comparison (its clock rate is 0: no FLOW / SPACE). */
+export const orbitIsStill = (o: OrbitSession): boolean => !(o.config.clock.rateByLab[o.snapshot.lab as keyof typeof o.config.clock.rateByLab] > 0);
 const sessions = new WeakMap<object, OrbitSession>();
 export function getOrbitSession(store: SceneStore<SpaceSceneExt>, sim: SimData): OrbitSession | null {
   return sim.orbitRotation ? (sessions.get(store) ?? createSession(store, sim)) : null;
@@ -106,7 +108,6 @@ function createSession(store: SceneStore<SpaceSceneExt>, sim: SimData): OrbitSes
         store.getState().patch({
           run: shouldRun,
           orbitTime: shouldRun ? null : clock.elapsedSeconds,
-          orbitClock: clock,
         });
         busy = false;
       }

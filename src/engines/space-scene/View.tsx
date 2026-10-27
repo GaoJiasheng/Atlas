@@ -1,5 +1,3 @@
-import { getOrbitSession } from './lib/sim/orbit-session';
-import { OrbitCard, orbitPanelReading } from './hud/OrbitCard';
 /**
  * SpaceScene view: Model3DStage (react-three-fiber, lazy-loaded so the HUD
  * appears before three.js arrives) + the technical-plate HUD content in the
@@ -90,6 +88,8 @@ import { evaluateSimOnStage } from './lib/sim/carrier';
 import { tableSources } from './lib/sim/table';
 import type { SimTry } from './sim-schema';
 import { SIM_KEYS } from '../core/controls';
+import { getOrbitSession, orbitIsStill, type OrbitSession } from './lib/sim/orbit-session';
+import { OrbitCard, orbitPanelReading } from './hud/OrbitCard';
 import './space-scene.css';
 
 const Model3DStage = lazy(() => import('./stages/model3d/Model3DStage'));
@@ -128,6 +128,14 @@ function chapterCamera(chapter: Chapter | undefined, inherited: unknown, view: S
   return asOrbit(chapter?.state.camera) ?? views[view]?.camera ?? asOrbit(inherited) ?? DEFAULT_CAMERA;
 }
 
+/** The three bodies as the orbit snapshot shows them now (REFERENCE frames them, not the parts' authored geometry). */
+function orbitBodyBounds({ display: d }: OrbitSession): { min: [number, number, number]; max: [number, number, number] } {
+  const ids = ['sun', 'earth', 'moon'] as const;
+  const axis = (f: (id: (typeof ids)[number], j: number) => number, pick: (...v: number[]) => number) =>
+    [0, 1, 2].map((j) => pick(...ids.map((id) => f(id, j)))) as [number, number, number];
+  return { min: axis((id, j) => d.centres[id][j]! - d.radii[id], Math.min), max: axis((id, j) => d.centres[id][j]! + d.radii[id], Math.max) };
+}
+
 type Pick5 = Pick<SpaceSceneExt, 'view' | 'explode' | 'run' | 'cutaway' | 'part' | 'beat' | 'sim'> & { chapter: string | null };
 
 const sameJson = (a: unknown, b: unknown) => JSON.stringify(a ?? null) === JSON.stringify(b ?? null);
@@ -136,8 +144,12 @@ const ownBeats = (c: Chapter | undefined): readonly SpaceBeatSpec[] => (c?.state
 export default function SpaceSceneView({ data, chapters, locale }: EngineViewProps) {
   const file = (data as SpaceSceneData).parts;
   const store = useSceneStore<SpaceSceneExt>();
-  const orbitSession = useMemo(() => file.sim?.orbitRotation ? getOrbitSession(store,file.sim) : null,[store,file.sim]);
-  useEffect(() => {if(orbitSession)store.getState().patch({orbitClock:orbitSession.clock,run:false});return()=>orbitSession?.dispose();},[orbitSession,store]);
+  // Orbit sims (docs/44 E-SEM1): one clock + physical snapshot per scene, shared by the stage, the HUD and the test API.
+  const orbitSession = useMemo(() => (file.sim?.orbitRotation ? getOrbitSession(store, file.sim) : null), [store, file.sim]);
+  useEffect(() => {
+    if (orbitSession) store.getState().patch({ run: false });
+    return () => orbitSession?.dispose();
+  }, [orbitSession, store]);
   const { hud, actions } = useSceneContext();
   const t = useT();
   const [ui] = useState(createSpaceUi);
@@ -180,7 +192,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       });
       st.patch({ run: false, view: st.view === 'exploded' ? 'assembled' : st.view });
       const aspect = bridge.width > 0 && bridge.height > 0 ? bridge.width / bridge.height : 1.5;
-      const orbitBounds = orbitSession ? (()=>{const d=orbitSession.display;const ids=['sun','earth','moon'] as const;return {min:[0,1,2].map(j=>Math.min(...ids.map(id=>d.centres[id][j]!-d.radii[id]))) as [number,number,number],max:[0,1,2].map(j=>Math.max(...ids.map(id=>d.centres[id][j]!+d.radii[id]))) as [number,number,number]};})() : null;
+      const orbitBounds = orbitSession ? orbitBodyBounds(orbitSession) : null;
       const referenceBounds = orbitBounds ?? (file.views.reference?.fit === 'layers'
         ? modelBounds(file.parts.filter((p) => !p.context && (p.group === undefined || st.layers.includes(p.group)) && !st.hidden.includes(p.id))) ?? bounds
         : bounds);
@@ -465,7 +477,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       },
       { id: 'cutaway', key: 'c', label: t('space.mode.cutaway'), disabled: !!orbitSession, on: s.cutaway !== 'none', tone: 'cut', status: cutStatus },
       // Flow paths do not follow the parts apart (docs/12 §7.5): no FLOW while exploded.
-      { id: 'flow', key: 'f', label: t('space.mode.flow'), on: s.run, tone: 'hot', disabled: inReference || exploded || !!(orbitSession && orbitSession.config.clock.rateByLab[orbitSession.snapshot.lab as keyof typeof orbitSession.config.clock.rateByLab] === 0) },
+      { id: 'flow', key: 'f', label: t('space.mode.flow'), on: s.run, tone: 'hot', disabled: inReference || exploded || (!!orbitSession && orbitIsStill(orbitSession)) },
       { id: 'reference', key: 'r', label: t('space.mode.reference'), on: inReference, tone: 'ink', disabled: presenting, phone: false },
       { id: 'presentation', key: 'p', label: t('present.mode'), on: presenting, tone: 'signal', status: presentationStatus, phone: false },
     ];
@@ -523,7 +535,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       pause: {
         paused: !s.run,
         set: (paused) => {
-          if (!ui.getState().reference && (!orbitSession || orbitSession.config.clock.rateByLab[orbitSession.snapshot.lab as keyof typeof orbitSession.config.clock.rateByLab] > 0)) set({ run: !paused });
+          if (!ui.getState().reference && !(orbitSession && orbitIsStill(orbitSession))) set({ run: !paused });
         },
       },
       stats: () => {
@@ -546,7 +558,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       },
       specRows: spaceSpecRows(file),
       status,
-      card: file.sim?.sort ? both('space.card.key') : file.sim?.lifeCycle ? both('space.card.cycle') : file.sim?.energy ? both('space.card.energy') : file.sim?.circuit?.diagram ? both('space.card.circuit') : both('space.card.title'),
+      card: orbitSession ? both('space.card.orbit') : file.sim?.sort ? both('space.card.key') : file.sim?.lifeCycle ? both('space.card.cycle') : file.sim?.energy ? both('space.card.energy') : file.sim?.circuit?.diagram ? both('space.card.circuit') : both('space.card.title'),
       beats: beatControls,
       beatStep,
       // At a beat the URL leaves out what `?ch=<chapter>&b=<n>` brings back (the beat's scene), not the chapter's target.
@@ -570,8 +582,24 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
           return true;
         },
         // Try-it (docs/06 「SpaceScene · 试一试」): the values on show, what was set, the outputs, the card and its table.
-        orbit: () => orbitSession ? JSON.parse(JSON.stringify({snapshotId:orbitSession.id,timeSeconds:orbitSession.clock.elapsedSeconds,running:orbitSession.clock.running,lab:orbitSession.snapshot.lab,scale:orbitSession.values[orbitSession.config.display.scale],physical:{bodies:orbitSession.snapshot.bodies,axis:orbitSession.snapshot.axis,solarDirections:orbitSession.snapshot.solarDirections},display:orbitSession.display,rendered:bridge.orbitRendered ?? null,panel:orbitPanelReading(orbitSession)}, (_key,value)=>typeof value==='number'&&!Number.isFinite(value)?null:value)) : null,
-        orbitSeek: (seconds:number) => orbitSession?.seek(seconds) ?? false,
+        // Orbit sims (docs/44 §4.10): the shared snapshot (physical km, display m), what the stage really drew, the observation window; NaN → null.
+        orbit: () => {
+          const o = orbitSession;
+          if (!o) return null;
+          const reading = {
+            snapshotId: o.id,
+            timeSeconds: o.clock.elapsedSeconds,
+            running: o.clock.running,
+            lab: o.snapshot.lab,
+            scale: o.values[o.config.display.scale],
+            physical: { bodies: o.snapshot.bodies, axis: o.snapshot.axis, solarDirections: o.snapshot.solarDirections },
+            display: o.display,
+            rendered: bridge.orbitRendered ?? null,
+            panel: orbitPanelReading(o),
+          };
+          return JSON.parse(JSON.stringify(reading, (_key, value) => (typeof value === 'number' && !Number.isFinite(value) ? null : value)));
+        },
+        orbitSeek: (seconds: number) => orbitSession?.seek(seconds) ?? false,
         sim: () => {
           const sim = file.sim;
           if (!sim) return null;
@@ -591,7 +619,8 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
             table: ui.getState().simTables[st.chapter ?? ''] ?? [],
             timeline,
             replays: ui.getState().simReplay.n,
-            ...(orbitSession ? {sources:Object.fromEntries(sim.outputs.map(o=>[o.id,(o.from??o.id).startsWith('local-')?['S33']:orbitSession.config.sources]))} : {}),
+            // An orbit model: the computed table's source for its local-* readings, the model's sources for the rest.
+            ...(orbitSession ? { sources: Object.fromEntries(sim.outputs.map((o) => [o.id, (o.from ?? o.id).startsWith('local-') ? ['S33'] : orbitSession.config.sources])) } : {}),
             // A table model (docs/40 §4.2): the sources of the row each typical output comes from now.
             ...(sim.table ? { sources: Object.fromEntries(Object.entries(tableSources(sim.table, values)).filter(([id]) => sim.outputs.find((o) => o.id === id)?.tag === 'typical')) } : {}),
           };

@@ -63,5 +63,3 @@ and `docs/screenshots/heart-and-lungs/` are derived from Z-Anatomy
 (https://creativecommons.org/licenses/by-sa/4.0/), with the attribution given in
 `THIRD-PARTY-NOTICES.md`. The texts and the other data files of these topics stay
 under CC BY-NC-SA 4.0 as above.
-
-Exception — orbit engine fixture: `src/content/topics/sample-orbit/data/singapore-sun-2026.json` and `tests/space-scene/fixtures/orbit-oracles.json` are original CC0-1.0 computed data / arithmetic expectations. Table metadata was edited to remove the obsolete MSS cross-check and clarify the calculated, minute-level estimate. All numerical rows are preserved. The fixture prose and authored geometry remain CC BY-NC-SA 4.0. See its data/SOURCES.md for hashes and provenance.
