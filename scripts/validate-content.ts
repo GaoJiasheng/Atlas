@@ -465,6 +465,9 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
       const file = issue.file.startsWith('public/') ? join(ROOT, issue.file) : join(dir, issue.file);
       (issue.level === 'error' ? error : warn)(file, issue.message);
     }
+    if(topic.temporalMode==='geography' && topic.geography){
+      for(const m of (data as {geography:{members:{id:string;joined:string}[]}}).geography.members)if(m.joined>topic.geography.asOf)error(join(dataDir,'geography.json'),`${m.id}: joined after geography.asOf`);
+    }
     for (const issue of monthlyResourceIssues(topic, sources ?? new Set(), readGeo))
       error(issue.file.startsWith('public/') ? join(ROOT, issue.file) : join(dir, issue.file), issue.message);
   }
@@ -531,12 +534,13 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
     if (!state.success) {
       reportZod(file, state.error, 'state.');
     } else if (data !== undefined) {
+      if(topic.temporalMode==='geography' && topic.geography){const gs=state.data as {geoContext:{kind:string;date?:string};beats:{geoContext:{kind:string;date?:string}}[]};for(const ctx of [gs.geoContext,...gs.beats.map(b=>b.geoContext)]){if(ctx.kind==='climatology'&&(!topic.climatology||!topic.monthlyLayers?.length))error(file,'climatology context requires monthly layers and metadata');if(ctx.kind==='membership'&&(ctx.date!<topic.geography.dateRange[0]||ctx.date!>topic.geography.dateRange[1]))error(file,'geoContext membership date outside geography.dateRange');}}
       for (const ref of schemas.chapterRefs(state.data)) {
         if (!ids.has(ref)) error(file, `state references unknown id "${ref}"`);
       }
       for (const issue of schemas.chapterIssues?.(state.data, data) ?? []) error(file, issue);
       if (topic.engine === 'time-scene' && topic.stage === 'geo')
-        for (const issue of timeChapterLayerIssues(state.data as TimeChapterState, [...(topic.datedLayers ?? []), ...(topic.monthlyLayers ?? [])])) error(file, issue);
+        for (const issue of timeChapterLayerIssues(state.data as TimeChapterState, [...(topic.datedLayers ?? []), ...(topic.monthlyLayers ?? []), ...((data as {geography?: {layers:{id:string}[]}})?.geography?.layers ?? []), ...(topic.temporalMode==='geography'?[{id:'geo-countries'},{id:'geo-membership'},{id:'geo-anchors'}]:[])])) error(file, issue);
     }
   }
   if (data !== undefined) {

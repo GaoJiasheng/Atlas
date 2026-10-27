@@ -7,6 +7,7 @@ import { defineEngine } from '../core/engine';
 import type { ChapterState, TimePoint } from '../core/types';
 import type { TimeSceneGeoData } from './schema';
 import { isGeoTime } from '../../lib/time';
+import { geographyChapterFields } from './lib/geography';
 import { monthlyChapterFields } from './lib/climatology-state';
 
 /** TimeScene's fields on top of SceneState. `t` is in the URL. */
@@ -14,6 +15,8 @@ export interface TimeSceneExt {
   /** Current time on the axis. */
   t: TimePoint | null;
   month?: number;
+  geoContext?: import('./lib/geography').GeoContext;
+  geoSelection?: string | null;
   beat?: number | null;
   /** Ids (events, movements, entities) the current chapter emphasises. */
   highlight: string[];
@@ -28,11 +31,13 @@ function asTimePoint(value: unknown): TimePoint | null {
 export const timeSceneEngine = defineEngine<TimeSceneExt, TimeSceneGeoData>({
   id: 'time-scene',
   defaults(_topic, data) {
+    if (_topic.temporalMode === 'geography') return { t:null, month:undefined, beat:0, geoContext:_topic.geography!.initialContext, geoSelection:null, highlight:[], layers:['base','geo-countries'] };
     if (_topic.temporalMode === 'climatology') return { t: null, month: _topic.climatology!.initialMonth, beat: 0, highlight: [], layers: ['base', 'sites'] };
     const first = data && 'control' in data ? data.control.keyframes[0]?.t : undefined;
     return { t: first ?? null, highlight: [], layers: ['base', 'control', 'movements', 'battles'] };
   },
   fromChapterState(state: ChapterState) {
+    if (state.geoContext) return geographyChapterFields(state);
     if (typeof state.month === 'number') return monthlyChapterFields(state);
     const out: Partial<TimeSceneExt> = {};
     const t = asTimePoint(state.time);
@@ -41,6 +46,7 @@ export const timeSceneEngine = defineEngine<TimeSceneExt, TimeSceneGeoData>({
     return out;
   },
   fromUrl(fields, topic) {
+    if (topic?.temporalMode === 'geography') return {t:null,geoContext:fields.geoContext,beat:fields.beat,highlight:fields.highlight};
     if (topic?.temporalMode === 'climatology') return { t: null, ...(fields.month !== undefined ? {month: fields.month}: {}), ...(fields.beat !== undefined ? {beat: fields.beat} : {}), ...(fields.highlight !== undefined ? {highlight: fields.highlight}: {}) };
     const out: Partial<TimeSceneExt> = {};
     if (fields.t !== undefined) out.t = fields.t;

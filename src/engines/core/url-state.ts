@@ -21,7 +21,7 @@ import { decodeSimParam, encodeSimParam } from '../space-scene/lib/sim/controls'
 export type UrlState = Partial<SceneState & UrlEngineFields>;
 
 /** Order in which keys are written (most meaningful first). */
-export const URL_KEY_ORDER = ['ch', 'b', 'task', 'model', 't', 'm', 'hl', 'part', 'view', 'explode', 'run', 'cut', 'pose', 'sim', 'layers', 'cam', 'theme'] as const;
+export const URL_KEY_ORDER = ['ch', 'b', 'task', 'model', 't', 'gc', 'm', 'at', 'hl', 'part', 'view', 'explode', 'run', 'cut', 'pose', 'sim', 'layers', 'cam', 'theme'] as const;
 export type UrlKey = (typeof URL_KEY_ORDER)[number];
 
 const ID_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -51,7 +51,10 @@ function encodeField(key: UrlKey, state: UrlState): string | null {
       return state.theme ?? null;
     case 't':
       return state.t === undefined ? null : state.t === null ? '' : formatTimeParam(state.t);
+    case 'gc': return state.geoContext ? ({present:'p',climatology:'c',membership:'a'} as const)[state.geoContext.kind] : null;
+    case 'at': return state.geoContext?.kind==='membership' ? state.geoContext.date : null;
     case 'm':
+      if(state.geoContext)return state.geoContext.kind==='climatology'?String(state.geoContext.month):null;
       return state.month === undefined ? null : String(state.month);
     case 'hl':
       return state.highlight === undefined ? null : state.highlight.join(',');
@@ -132,6 +135,11 @@ export function decodeSceneState(input: string | URLSearchParams): UrlState {
 
   const m = params.get('m');
   if (m !== null && /^(?:[1-9]|1[0-2])$/.test(m)) out.month = Number(m);
+
+  const gc = params.get('gc');
+  if(gc==='p')out.geoContext={kind:'present'};
+  else if(gc==='c' && out.month!==undefined)out.geoContext={kind:'climatology',month:out.month};
+  else if(gc==='a') {const date=params.get('at');if(date && /^\d{4}-\d{2}-\d{2}$/.test(date) && parseTimeParam(date))out.geoContext={kind:'membership',date};}
 
   const hl = params.get('hl');
   if (hl !== null) out.highlight = hl === '' ? [] : hl.split(',').filter((id) => ID_RE.test(id));

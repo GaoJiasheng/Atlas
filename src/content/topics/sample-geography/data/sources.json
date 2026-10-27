@@ -1,0 +1,530 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "2020 Social Studies Primary Teaching and Learning Syllabus — MOE Singapore",
+        "zh": "2020 年小学社会科教学大纲"
+      },
+      "note": {
+        "en": "Printed pp.35–36; P5 Part 2; Official search-indexed PDF excerpts verified; direct PDF URLs returned human verification. No challenge attempted; PDF page image unavailable.",
+        "zh": "2026-10-27 核对官方索引资料。部分直连页面有人机验证或拒绝访问；没有绕过，也未下载其图片。所用事实和访问限制见 AUDIT.md。"
+      },
+      "url": "https://www.moe.gov.sg/-/media/files/primary/2020-social-studies-primary.ashx"
+    },
+    {
+      "id": "S2",
+      "text": {
+        "en": "Science Teaching & Learning Syllabus, Primary 3–6, 2023 cohort — MOE Singapore",
+        "zh": "小学三至六年级科学教学大纲（2023 级）"
+      },
+      "note": {
+        "en": "P5 water-cycle adjacency; page-level verification unavailable; Blocked by human verification; curriculum adjacency based on published water topic metadata, not a fresh PDF verification.",
+        "zh": "2026-10-27 核对官方索引资料。部分直连页面有人机验证或拒绝访问；没有绕过，也未下载其图片。所用事实和访问限制见 AUDIT.md。"
+      },
+      "url": "https://www.moe.gov.sg/api/media/ba3562d3-5b31-4459-8693-45cde7b97273/Primary-Science-Syllabus-2023_May24.pdf"
+    },
+    {
+      "id": "S3",
+      "text": {
+        "en": "M49 geographic regions overview — UN Statistics Division",
+        "zh": "M49 地理区域分类"
+      },
+      "note": {
+        "en": "South-eastern Asia, code 035; Page text opened, unless noted.",
+        "zh": "2026-10-27 核对的参考资料；具体章节、事实编号与适用范围见 AUDIT.md。只转述事实，不复制原文或原图。"
+      },
+      "url": "https://unstats.un.org/unsd/methodology/m49/overview/"
+    },
+    {
+      "id": "S4",
+      "text": {
+        "en": "About ASEAN — ASEAN Secretariat",
+        "zh": "亚细安简介与入会日期"
+      },
+      "note": {
+        "en": "Establishment and accession dates; Official search-indexed text verified; direct open 403.",
+        "zh": "2026-10-27 核对官方索引资料。部分直连页面有人机验证或拒绝访问；没有绕过，也未下载其图片。所用事实和访问限制见 AUDIT.md。"
+      },
+      "url": "https://asean.org/about-asean"
+    },
+    {
+      "id": "S5",
+      "text": {
+        "en": "Forging a New Era: Timor-Leste Admitted into ASEAN — ASEAN Secretariat",
+        "zh": "开启新纪元：东帝汶加入亚细安"
+      },
+      "note": {
+        "en": "26 October 2025; admission announcement; Official indexed full announcement read.",
+        "zh": "2026-10-27 核对官方索引资料。部分直连页面有人机验证或拒绝访问；没有绕过，也未下载其图片。所用事实和访问限制见 AUDIT.md。"
+      },
+      "url": "https://asean.org/forging-a-new-era-timor-leste-admitted-into-asean/"
+    },
+    {
+      "id": "S6",
+      "text": {
+        "en": "History: The Founding of ASEAN — ASEAN Secretariat",
+        "zh": "亚细安的创立"
+      },
+      "note": {
+        "en": "Bangkok, 8 August 1967; founding states; Official indexed text read.",
+        "zh": "2026-10-27 核对官方索引资料。部分直连页面有人机验证或拒绝访问；没有绕过，也未下载其图片。所用事实和访问限制见 AUDIT.md。"
+      },
+      "url": "https://asean.org/the-founding-of-asean/"
+    },
+    {
+      "id": "S7",
+      "text": {
+        "en": "Climate of Singapore — Meteorological Service Singapore",
+        "zh": "新加坡的气候"
+      },
+      "note": {
+        "en": "Seasons; Rainfall; Surface Wind; Changi 1991–2020 table; Page text opened, unless noted.",
+        "zh": "2026-10-27 核对的参考资料；具体章节、事实编号与适用范围见 AUDIT.md。只转述事实，不复制原文或原图。"
+      },
+      "url": "https://www.weather.gov.sg/climate-climate-of-singapore/"
+    },
+    {
+      "id": "S8",
+      "text": {
+        "en": "Mekong River Basin / Geography — Mekong River Commission",
+        "zh": "湄公河流域地理"
+      },
+      "note": {
+        "en": "Approximate river length and countries; Primary agency text opened; basin overview https://www.mrcmekong.org/mekong-river-basin/ also indexed.",
+        "zh": "2026-10-27 核对官方索引资料。部分直连页面有人机验证或拒绝访问；没有绕过，也未下载其图片。所用事实和访问限制见 AUDIT.md。"
+      },
+      "url": "https://www.mrcmekong.org/geography/"
+    },
+    {
+      "id": "S9",
+      "text": {
+        "en": "Rice Terraces of the Philippine Cordilleras — UNESCO World Heritage Centre",
+        "zh": "菲律宾科迪勒拉山脉水稻梯田"
+      },
+      "note": {
+        "en": "Outstanding Universal Value; five clusters; Chinese description; dating claim; Page text opened, unless noted.",
+        "zh": "2026-10-27 核对的参考资料；具体章节、事实编号与适用范围见 AUDIT.md。只转述事实，不复制原文或原图。"
+      },
+      "url": "https://whc.unesco.org/en/list/722/"
+    },
+    {
+      "id": "S10",
+      "text": {
+        "en": "Ifugao Rice Terraces System — FAO GIAHS",
+        "zh": "伊富高稻作遗产系统"
+      },
+      "note": {
+        "en": "Components of the living agricultural system; Primary indexed text read; images not downloaded.",
+        "zh": "2026-10-27 核对官方索引资料。部分直连页面有人机验证或拒绝访问；没有绕过，也未下载其图片。所用事实和访问限制见 AUDIT.md。"
+      },
+      "url": "https://www.fao.org/giahs/giahs-around-the-world/philippines-ifugao-rice-terraces-system/en"
+    },
+    {
+      "id": "S11",
+      "text": {
+        "en": "Renewing Ifugao history and cultural heritage through visual storytelling — UCLA Center for Southeast Asian Studies",
+        "zh": "重新认识伊富高梯田的年代"
+      },
+      "note": {
+        "en": "Acabado research programme, 2012–2016; University report on its own research; indexed text read.",
+        "zh": "2026-10-27 核对官方索引资料。部分直连页面有人机验证或拒绝访问；没有绕过，也未下载其图片。所用事实和访问限制见 AUDIT.md。"
+      },
+      "url": "https://asia.ucla.edu/cseas/article/214711"
+    },
+    {
+      "id": "S12",
+      "text": {
+        "en": "NParks regional links — NParks Singapore",
+        "zh": "亚细安遗产公园与生物多样性合作"
+      },
+      "note": {
+        "en": "ASEAN Heritage Parks and regional conservation; Page text opened, unless noted.",
+        "zh": "2026-10-27 核对的参考资料；具体章节、事实编号与适用范围见 AUDIT.md。只转述事实，不复制原文或原图。"
+      },
+      "url": "https://www.nparks.gov.sg/nature/nparks-regional-links"
+    },
+    {
+      "id": "S13",
+      "text": {
+        "en": "Semiconductor industry — Singapore Economic Development Board",
+        "zh": "新加坡半导体产业"
+      },
+      "note": {
+        "en": "IC design, industrial land, talent; Primary indexed text read; no investment statistics adopted.",
+        "zh": "2026-10-27 核对官方索引资料。部分直连页面有人机验证或拒绝访问；没有绕过，也未下载其图片。所用事实和访问限制见 AUDIT.md。"
+      },
+      "url": "https://www.edb.gov.sg/en/our-industries/semiconductor.html"
+    },
+    {
+      "id": "S14",
+      "text": {
+        "en": "Action Roadmap for Sustainable Tourism Development in ASEAN — ASEAN Secretariat / ERIA",
+        "zh": "亚细安可持续旅游路线图"
+      },
+      "note": {
+        "en": "Regional tourism sustainability; Primary indexed description read.",
+        "zh": "2026-10-27 核对官方索引资料。部分直连页面有人机验证或拒绝访问；没有绕过，也未下载其图片。所用事实和访问限制见 AUDIT.md。"
+      },
+      "url": "https://asean.org/book/action-roadmap-for-sustainable-tourism-development-in-asean/"
+    },
+    {
+      "id": "S15",
+      "text": {
+        "en": "Immaculate Misconceptions — Jane Dove / Geographical Association, 1999",
+        "zh": "儿童对自然环境的理解：研究综述"
+      },
+      "note": {
+        "en": "Printed p.11 and p.21; research synthesis; 48-page PDF opened through web extraction, not downloaded to disk. Secondary literature synthesis; not a Singapore prevalence study.",
+        "zh": "2026-10-27 核对的参考资料；具体章节、事实编号与适用范围见 AUDIT.md。只转述事实，不复制原文或原图。"
+      },
+      "url": "https://geography.org.uk/wp-content/uploads/2023/05/Immaculate_Misconceptions_-_Jane_Dove.pdf"
+    },
+    {
+      "id": "S16",
+      "text": {
+        "en": "Pupils’ representations of rivers on 2D and 3D maps — Procedia Social and Behavioral Sciences / Elsevier, 2011",
+        "zh": "小学生在二维与三维地图中的河流认知"
+      },
+      "note": {
+        "en": "Abstract; 11-year-old pupils; river direction and landscape; Indexed primary abstract only; direct open 403. No outcome percentages or direction-specific prevalence claimed.",
+        "zh": "2026-10-27 核对官方索引资料。部分直连页面有人机验证或拒绝访问；没有绕过，也未下载其图片。所用事实和访问限制见 AUDIT.md。"
+      },
+      "url": "https://www.sciencedirect.com/science/article/pii/S1877042811012675"
+    },
+    {
+      "id": "S17",
+      "text": {
+        "en": "Terms of Use — Natural Earth",
+        "zh": "Natural Earth 使用条款"
+      },
+      "note": {
+        "en": "All raster and vector map data public domain; Page text opened, unless noted.",
+        "zh": "2026-10-27 核对的参考资料；具体章节、事实编号与适用范围见 AUDIT.md。只转述事实，不复制原文或原图。"
+      },
+      "url": "https://www.naturalearthdata.com/about/terms-of-use/"
+    },
+    {
+      "id": "S18",
+      "text": {
+        "en": "Physical labels — Natural Earth",
+        "zh": "Natural Earth 自然区域标签资料"
+      },
+      "note": {
+        "en": "Physical regions and elevation points; accuracy caveat; Page text opened, unless noted.",
+        "zh": "2026-10-27 核对的参考资料；具体章节、事实编号与适用范围见 AUDIT.md。只转述事实，不复制原文或原图。"
+      },
+      "url": "https://www.naturalearthdata.com/downloads/10m-physical-vectors/10m-physical-labels/"
+    },
+    {
+      "id": "S19",
+      "text": {
+        "en": "Rivers + lake centerlines — Natural Earth",
+        "zh": "Natural Earth 河流与湖泊中线"
+      },
+      "note": {
+        "en": "Single-line drainage; cartographic generalisation; Page text opened, unless noted.",
+        "zh": "2026-10-27 核对的参考资料；具体章节、事实编号与适用范围见 AUDIT.md。只转述事实，不复制原文或原图。"
+      },
+      "url": "https://www.naturalearthdata.com/downloads/10m-physical-vectors/10m-rivers-lake-centerlines/"
+    },
+    {
+      "id": "S20",
+      "text": {
+        "en": "Data access and citing data and plots — NOAA Physical Sciences Laboratory",
+        "zh": "NOAA PSL 数据使用政策"
+      },
+      "note": {
+        "en": "Federal public-domain policy and attribution; Page text opened, unless noted.",
+        "zh": "2026-10-27 核对的参考资料；具体章节、事实编号与适用范围见 AUDIT.md。只转述事实，不复制原文或原图。"
+      },
+      "url": "https://psl.noaa.gov/data/help/help_body.html"
+    },
+    {
+      "id": "S21",
+      "text": {
+        "en": "Monsoon and Weather content spec — Atlas repository",
+        "zh": "Atlas 季风主题研究与原生月气候资料"
+      },
+      "note": {
+        "en": "§0.4, §3–4; E-MW1–3; branch codex/monsoon-engine dependency; Local read; implementation not assumed merged. Reuse existing monthly data, not a new climate model.; local:docs/50-monsoon-and-weather-content-spec.md",
+        "zh": "2026-10-27 核对的参考资料；具体章节、事实编号与适用范围见 AUDIT.md。只转述事实，不复制原文或原图。"
+      }
+    },
+    {
+      "id": "S22",
+      "text": {
+        "en": "东帝汶正式加入东盟，成为其第11个成员国 — The Business Times, Singapore",
+        "zh": "东帝汶正式加入东盟，成为其第11个成员国 · 新加坡商业时报"
+      },
+      "note": {
+        "en": "26 October 2025; title and indexed text; Singapore Chinese attestation for 东帝汶 / 东盟 / 亚细安; no paywall entered.",
+        "zh": "2026-10-27 核对官方索引资料。部分直连页面有人机验证或拒绝访问；没有绕过，也未下载其图片。所用事实和访问限制见 AUDIT.md。"
+      },
+      "url": "https://www.businesstimes.com.sg/zh-hans/international/timor-leste-officially-admitted-asean-becoming-its-11th-member"
+    },
+    {
+      "id": "S23",
+      "text": {
+        "en": "探索新加坡的生物多样性 — Singapore Tourism Board",
+        "zh": "红树林与双溪布洛的中文用词"
+      },
+      "note": {
+        "en": "Chinese biodiversity article; Official indexed Chinese text; attests 双溪布洛湿地保留区 / 红树林.",
+        "zh": "2026-10-27 核对官方索引资料。部分直连页面有人机验证或拒绝访问；没有绕过，也未下载其图片。所用事实和访问限制见 AUDIT.md。"
+      },
+      "url": "https://www.visitsingapore.com/content/desktop/zh_cn/travel-guide-tips/about-singapore/city-in-nature/sustainable-biodiversity"
+    },
+    {
+      "id": "S24",
+      "text": {
+        "en": "源 magazine 145 — Singapore Federation of Chinese Clan Associations",
+        "zh": "《源》第145期 · 新加坡宗乡会馆联合总会"
+      },
+      "note": {
+        "en": "Chinese architecture discussion, searchable 高脚屋 paragraph; Singapore organisation’s indexed PDF text; term attestation, not an exact reference for generated house.",
+        "zh": "2026-10-27 核对官方索引资料。部分直连页面有人机验证或拒绝访问；没有绕过，也未下载其图片。所用事实和访问限制见 AUDIT.md。"
+      },
+      "url": "https://sfcca.sg/wp-content/uploads/2023/01/Yuan-145%E6%95%B4%E6%9C%AC.pdf"
+    },
+    {
+      "id": "S25",
+      "text": {
+        "en": "何为季风 — China Weather / China Meteorological Administration",
+        "zh": "季风气候术语"
+      },
+      "note": {
+        "en": "17 May 2012; seasonal circulation; Primary Chinese terminology evidence, not Singapore-local wording.",
+        "zh": "2026-10-27 核对的参考资料；具体章节、事实编号与适用范围见 AUDIT.md。只转述事实，不复制原文或原图。"
+      },
+      "url": "https://www.weather.com.cn/science/rdht/05/1636825.shtml"
+    },
+    {
+      "id": "S101",
+      "text": {
+        "en": "Natural Earth admin-0 countries, acquired bytes — Natural Earth",
+        "zh": "Natural Earth 国家边界快照"
+      },
+      "note": {
+        "en": "ADM0_A3 selection; NAME_ZH and LABEL_X/Y; data/inventory.json SHA-256; Opened page text or local data file; no media downloaded.",
+        "zh": "2026-10-27 取得的 Natural Earth 公有领域资料；采用固定字节快照，来源文件与 SHA-256 见 data/SOURCES.md，不宣称是法律边界或最新测量。"
+      },
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_admin_0_countries.geojson"
+    },
+    {
+      "id": "S102",
+      "text": {
+        "en": "Natural Earth drainage, acquired bytes — Natural Earth",
+        "zh": "Natural Earth 河流快照"
+      },
+      "note": {
+        "en": "name / name_alt; data/rivers-sea.geojson; Opened page text or local data file; no media downloaded.",
+        "zh": "2026-10-27 取得的 Natural Earth 公有领域资料；采用固定字节快照，来源文件与 SHA-256 见 data/SOURCES.md，不宣称是法律边界或最新测量。"
+      },
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_rivers_lake_centerlines.geojson"
+    },
+    {
+      "id": "S103",
+      "text": {
+        "en": "Rhizophora apiculata — NParks Flora & Fauna Web",
+        "zh": "Rhizophora apiculata 的形态 · NParks"
+      },
+      "note": {
+        "en": "Roots; Foliage; Foliar arrangement; Opened page text or local data file; no media downloaded.",
+        "zh": "2026-10-27 核对的参考资料；具体章节、事实编号与适用范围见 AUDIT.md。只转述事实，不复制原文或原图。"
+      },
+      "url": "https://www.nparks.gov.sg/florafaunaweb/flora/3/2/3265"
+    },
+    {
+      "id": "S104",
+      "text": {
+        "en": "Bukit Timah Nature Reserve — NParks",
+        "zh": "武吉知马自然保护区"
+      },
+      "note": {
+        "en": "Introduction; primary rainforest; Opened page text or local data file; no media downloaded.",
+        "zh": "2026-10-27 核对的参考资料；具体章节、事实编号与适用范围见 AUDIT.md。只转述事实，不复制原文或原图。"
+      },
+      "url": "https://www.nparks.gov.sg/visit/parks/park-detail/bukit-timah-nature-reserve"
+    },
+    {
+      "id": "S105",
+      "text": {
+        "en": "Sungei Buloh Wetland Reserve — NParks",
+        "zh": "双溪布洛湿地保留区"
+      },
+      "note": {
+        "en": "Introduction; wetlands/mangroves and migratory birds; Opened page text or local data file; no media downloaded.",
+        "zh": "2026-10-27 核对的参考资料；具体章节、事实编号与适用范围见 AUDIT.md。只转述事实，不复制原文或原图。"
+      },
+      "url": "https://www.nparks.gov.sg/visit/parks/park-detail/sungei-buloh-wetland-reserve"
+    },
+    {
+      "id": "S106",
+      "text": {
+        "en": "Kampong house — National Heritage Board / Roots",
+        "zh": "甘榜房屋实例"
+      },
+      "note": {
+        "en": "Collection item description; Official indexed description verified; direct open human-verification gated. Image not downloaded, no challenge attempted.",
+        "zh": "2026-10-27 核对官方索引资料。部分直连页面有人机验证或拒绝访问；没有绕过，也未下载其图片。所用事实和访问限制见 AUDIT.md。"
+      },
+      "url": "https://www.roots.gov.sg/Collection-Landing/listing/1077823"
+    },
+    {
+      "id": "S107",
+      "text": {
+        "en": "Songket — UNESCO Intangible Cultural Heritage",
+        "zh": "宋吉手工织造"
+      },
+      "note": {
+        "en": "Malaysia; hand-weaving description; Indexed primary description verified; direct open human-verification gated. No media downloaded.",
+        "zh": "2026-10-27 核对官方索引资料。部分直连页面有人机验证或拒绝访问；没有绕过，也未下载其图片。所用事实和访问限制见 AUDIT.md。"
+      },
+      "url": "https://ich.unesco.org/en/RL/songket-01505"
+    },
+    {
+      "id": "S108",
+      "text": {
+        "en": "Natural Earth marine areas — Natural Earth",
+        "zh": "Natural Earth 海域名称"
+      },
+      "note": {
+        "en": "Four source polygons and derived label anchors; NAME_ZH; Opened page text or local data file; no media downloaded.",
+        "zh": "2026-10-27 取得的 Natural Earth 公有领域资料；采用固定字节快照，来源文件与 SHA-256 见 data/SOURCES.md，不宣称是法律边界或最新测量。"
+      },
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_geography_marine_polys.geojson"
+    },
+    {
+      "id": "S109",
+      "text": {
+        "en": "Natural Earth elevation points — Natural Earth",
+        "zh": "Natural Earth 山峰位置"
+      },
+      "note": {
+        "en": "Four named peak points; name_zh; heights not adopted; Opened page text or local data file; no media downloaded.",
+        "zh": "2026-10-27 取得的 Natural Earth 公有领域资料；采用固定字节快照，来源文件与 SHA-256 见 data/SOURCES.md，不宣称是法律边界或最新测量。"
+      },
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_geography_regions_elevation_points.geojson"
+    },
+    {
+      "id": "S110",
+      "text": {
+        "en": "Natural Earth populated places — Natural Earth",
+        "zh": "Natural Earth 城市位置"
+      },
+      "note": {
+        "en": "Eleven named city anchors; NAME_ZH; same bytes as monsoon cache; Opened page text or local data file; no media downloaded.",
+        "zh": "2026-10-27 取得的 Natural Earth 公有领域资料；采用固定字节快照，来源文件与 SHA-256 见 data/SOURCES.md，不宣称是法律边界或最新测量。"
+      },
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_populated_places.geojson"
+    },
+    {
+      "id": "S111",
+      "text": {
+        "en": "Reused climate arrays and calculated sample cells — NOAA PSL / GPCP; Atlas derivation",
+        "zh": "月气候数组的独立样本读数"
+      },
+      "note": {
+        "en": "meta.samples; copied source ASCII and monsoon-source-inventory.json; Local original-value calculations; original download URLs and hash chain retained.; local:art/research/southeast-asia/data/inventory.json",
+        "zh": "从同一组 1991–2020 年原生月气候数组读取；风与雨分别按各自格网采样，不重采样、不作逐日预报。"
+      }
+    },
+    {
+      "id": "S112",
+      "text": {
+        "en": "The ASEAN Charter, Chinese version — ASEAN Secretariat",
+        "zh": "亚细安宪章中文本"
+      },
+      "note": {
+        "en": "Chinese preamble; country names including 寮国; Official indexed Chinese text; terminology only, historical ten-member list is not current membership.",
+        "zh": "2026-10-27 核对官方索引资料。部分直连页面有人机验证或拒绝访问；没有绕过，也未下载其图片。所用事实和访问限制见 AUDIT.md。"
+      },
+      "url": "https://asean.org/wp-content/uploads/2021/08/2012-The-ASEAN-Charter-in-English-and-ASEAN-Languages-May.pdf"
+    },
+    {
+      "id": "S113",
+      "text": {
+        "en": "马国计划加强国际商业及海事纠纷司法管辖权 — 联合早报",
+        "zh": "马国计划加强国际商业及海事纠纷司法管辖权 · 联合早报"
+      },
+      "note": {
+        "en": "Title and indexed passage; Singapore wording attestation for 南中国海 / 马六甲海峡 only; no political/legal claims adopted.",
+        "zh": "2026-10-27 核对官方索引资料。部分直连页面有人机验证或拒绝访问；没有绕过，也未下载其图片。所用事实和访问限制见 AUDIT.md。"
+      },
+      "url": "https://www.zaobao.com.sg/news/sea/story20261018-9856055"
+    },
+    {
+      "id": "S114",
+      "text": {
+        "en": "Records on the establishment of ASEAN — National Archives of Singapore",
+        "zh": "关于亚细安创立的档案 · 新加坡国家档案馆"
+      },
+      "note": {
+        "en": "Declaration aims and cooperation; Primary archive indexed description verified; no audio copied.",
+        "zh": "2026-10-27 核对官方索引资料。部分直连页面有人机验证或拒绝访问；没有绕过，也未下载其图片。所用事实和访问限制见 AUDIT.md。"
+      },
+      "url": "https://www.nas.gov.sg/archivesonline/MOWAsean_1"
+    },
+    {
+      "id": "S201",
+      "text": {
+        "en": "NCEP/NCAR Reanalysis 1",
+        "zh": "NCEP/NCAR 再分析 1"
+      },
+      "url": "https://psl.noaa.gov/data/gridded/data.ncep.reanalysis.html",
+      "note": {
+        "en": "Shared sample-climate regional data, not the artificial 2×2 fixture. Public-domain-derived; identical resource files are reused.",
+        "zh": "共享 sample-climate 的真实区域资料，不使用人工 2×2 测试数组。公有领域衍生，直接复用同一资源文件。"
+      }
+    },
+    {
+      "id": "S202",
+      "text": {
+        "en": "GPCP monthly precipitation CDR",
+        "zh": "GPCP 月降水气候资料"
+      },
+      "url": "https://www.ncei.noaa.gov/products/climate-data-records/precipitation-gpcp-monthly",
+      "note": {
+        "en": "Shared sample-climate regional data, not the artificial 2×2 fixture. Public-domain-derived; identical resource files are reused.",
+        "zh": "共享 sample-climate 的真实区域资料，不使用人工 2×2 测试数组。公有领域衍生，直接复用同一资源文件。"
+      }
+    },
+    {
+      "id": "S203",
+      "text": {
+        "en": "NOAA PSL 1991–2020 monthly 850 hPa wind",
+        "zh": "NOAA PSL 1991–2020 年 850 hPa 月平均风"
+      },
+      "url": "https://psl.noaa.gov/thredds/dodsC/Datasets/ncep.reanalysis.derived/pressure/uwnd.mon.ltm.1991-2020.nc.das",
+      "note": {
+        "en": "Shared sample-climate regional data, not the artificial 2×2 fixture. Public-domain-derived; identical resource files are reused.",
+        "zh": "共享 sample-climate 的真实区域资料，不使用人工 2×2 测试数组。公有领域衍生，直接复用同一资源文件。"
+      }
+    },
+    {
+      "id": "S204",
+      "text": {
+        "en": "NOAA PSL GPCP V2.3 monthly precipitation rate",
+        "zh": "NOAA PSL GPCP V2.3 月平均降水率"
+      },
+      "url": "https://psl.noaa.gov/thredds/dodsC/Datasets/gpcp/precip.mon.ltm.1991-2020.nc.das",
+      "note": {
+        "en": "Shared sample-climate regional data, not the artificial 2×2 fixture. Public-domain-derived; identical resource files are reused.",
+        "zh": "共享 sample-climate 的真实区域资料，不使用人工 2×2 测试数组。公有领域衍生，直接复用同一资源文件。"
+      }
+    },
+    {
+      "id": "S205",
+      "text": {
+        "en": "Atlas climate display rules",
+        "zh": "Atlas 气候显示规则"
+      },
+      "design": true,
+      "note": {
+        "en": "Display design, not measurements. Rain bins: <1,1–<2,2–<4,4–<8,8–<16,16–<32,≥32 mm/day. Wind arrow bearing atan2(u,v), calm threshold 0.2 m/s, native-grid spacing 2.5°; no shared wind/rain index.",
+        "zh": "显示设计，不是测量。雨量分档：<1、1–<2、2–<4、4–<8、8–<16、16–<32、≥32 mm/day。风箭头方位 atan2(u,v)，静风阈值 0.2 m/s；原生格距 2.5°，风雨不共用索引。"
+      }
+    }
+  ]
+}

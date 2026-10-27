@@ -1,0 +1,136 @@
+{
+  "terms": [
+    {
+      "id": "term-region",
+      "term": {
+        "en": "Region",
+        "zh": "区域"
+      },
+      "definition": {
+        "en": "A grouping used to study places together.",
+        "zh": "为一起研究地方而使用的分组。"
+      }
+    },
+    {
+      "id": "term-landlocked",
+      "term": {
+        "en": "Landlocked",
+        "zh": "内陆的"
+      },
+      "definition": {
+        "en": "Having no coastline.",
+        "zh": "没有海岸。"
+      }
+    },
+    {
+      "id": "term-archipelago",
+      "term": {
+        "en": "Archipelago",
+        "zh": "群岛"
+      },
+      "definition": {
+        "en": "A group of islands, not an organisation’s member list.",
+        "zh": "一组岛屿，不是组织成员名单。"
+      }
+    },
+    {
+      "id": "term-strait",
+      "term": {
+        "en": "Strait",
+        "zh": "海峡"
+      },
+      "definition": {
+        "en": "A narrow sea passage between land areas.",
+        "zh": "陆地之间较窄的海上通道。"
+      }
+    },
+    {
+      "id": "term-river-system",
+      "term": {
+        "en": "River system",
+        "zh": "水系"
+      },
+      "definition": {
+        "en": "Connected river reaches considered together.",
+        "zh": "一起阅读的相连河段。"
+      }
+    },
+    {
+      "id": "term-climatology",
+      "term": {
+        "en": "Monthly climate mean",
+        "zh": "月气候平均"
+      },
+      "definition": {
+        "en": "Calendar-month statistics over a stated multi-year period.",
+        "zh": "指定多年时期中按月份统计的资料。"
+      }
+    },
+    {
+      "id": "term-monsoon",
+      "term": {
+        "en": "Monsoon",
+        "zh": "季风"
+      },
+      "definition": {
+        "en": "A seasonally changing large-scale atmospheric circulation.",
+        "zh": "随季节改变的大范围大气环流。"
+      }
+    },
+    {
+      "id": "term-mangrove",
+      "term": {
+        "en": "Mangrove forest",
+        "zh": "红树林"
+      },
+      "definition": {
+        "en": "Coastal plant communities such as those at Sungei Buloh.",
+        "zh": "如双溪布洛所见的海岸植物群落。"
+      }
+    },
+    {
+      "id": "term-terrace",
+      "term": {
+        "en": "Rice terrace",
+        "zh": "水稻梯田"
+      },
+      "definition": {
+        "en": "A retained field made along a slope.",
+        "zh": "沿坡修成、有挡护的田面。"
+      }
+    },
+    {
+      "id": "term-irrigation",
+      "term": {
+        "en": "Irrigation",
+        "zh": "灌溉"
+      },
+      "definition": {
+        "en": "Supplying water to cultivated fields.",
+        "zh": "向耕作田地供水。"
+      }
+    },
+    {
+      "id": "term-asean",
+      "term": {
+        "en": "ASEAN",
+        "zh": "亚细安"
+      },
+      "definition": {
+        "en": "An organisation of neighbouring states whose members joined on different dates.",
+        "zh": "成员按不同日期加入的区域国家组织。"
+      }
+    },
+    {
+      "id": "term-cooperation",
+      "term": {
+        "en": "Cooperation",
+        "zh": "合作"
+      },
+      "definition": {
+        "en": "Working together on shared matters, such as conservation.",
+        "zh": "在共同事务上携手行动，如保育。"
+      }
+    }
+  ]
+}

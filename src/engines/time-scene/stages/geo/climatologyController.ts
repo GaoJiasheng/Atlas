@@ -1,3 +1,6 @@
+import { installGeographyLayers } from './geographyLayers';
+import { geographyHighlightIds, type GeographyExt } from '../../lib/geography';
+import type { SceneStore } from '../../../core/store';
 import { Map as MlMap, Marker, type GeoJSONSource } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { feature as topoFeature } from 'topojson-client';
@@ -17,7 +20,9 @@ import type { ClimatologyStageProps, ClimateGeoController, ClimateSnapshot } fro
 export function createClimatologyController(options: ClimatologyStageProps & { container: HTMLElement }): ClimateGeoController {
   const { store, topic, data, container } = options,
     definitions = topic.monthlyLayers ?? [],
-    period = topic.climatology!;
+    period = topic.climatology ?? {periodId:'none',startYear:0,endYear:0,initialMonth:1};
+  const currentMonth=()=>{const s=store.getState();return options.geography?(s.geoContext?.kind==='climatology'?s.geoContext.month:period.initialMonth):s.month??period.initialMonth};
+  let geographyLayer: ReturnType<typeof installGeographyLayers>|null=null;
   let locale = options.locale,
     destroyed = false,
     loaded = false,
@@ -28,6 +33,7 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
     cells = 0;
   let paintGeneration = 0,
     leaderSignature = '',
+    geographyLeaderSignature = '',
     publishedSignature = '';
   let selected: ClimateSnapshot['selected'] = null,
     presentation = false;
@@ -75,7 +81,7 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
     container,
     labelRoot,
     onSelect(id) {
-      if (!presentation && !options.isPresenting?.()) options.onSelectSite(id);
+      if (!presentation && !options.isPresenting?.()) {if(options.geography)options.onSelectGeography?.(id);else options.onSelectSite(id);}
     },
     panelFilter: (el) => !presentation || (el.getAttribute('data-hud-panel') ?? '').startsWith('present'),
     onBand: (band) => {
@@ -122,7 +128,7 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
     return def ? loader.states.get(def.id) : undefined;
   }
   function snapshot(): ClimateSnapshot {
-    const month = store.getState().month ?? period.initialMonth;
+    const month = currentMonth();
     const count = (q: 'wind' | 'rain') => {
       const state = states(q);
       return state?.status === 'ready' ? state.data.frames[month - 1]!.valid.reduce((sum, n) => sum + n, 0) : 0;
@@ -169,7 +175,7 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
     raf = 0;
     if (destroyed) return;
     const state = store.getState(),
-      month = state.month ?? period.initialMonth,
+      month = currentMonth(),
       tk = readThemeTokens();
     const on = new Set(state.layers);
     drawnVectors = 0;
@@ -184,7 +190,7 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
     });
     const highlights = selected?.kind === 'site' ? [selected.id] : (state.highlight ?? []);
     const nextLeaderSignature = `${on.has('sites')}|${highlights.join(',')}|${locale}|${presentation}`;
-    if (nextLeaderSignature !== leaderSignature) {
+    if (!options.geography && nextLeaderSignature !== leaderSignature) {
       leaderSignature = nextLeaderSignature;
       leaders.setItems(
         on.has('sites')
@@ -204,6 +210,12 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
           : [],
       );
     }
+    if(options.geography){
+      const g=options.geography,ids=geographyHighlightIds(g,state.highlight??[],state.geoSelection);
+      const signature=JSON.stringify([ids,state.layers,locale,presentation]);
+      if(signature!==geographyLeaderSignature){geographyLeaderSignature=signature;leaders.setItems(ids.slice(0,3).flatMap(id=>{const a=g.anchors.find(a=>a.id===id),layer=g.layers.find(l=>l.features.features.some(f=>f.properties.id===id));const visible=layer?on.has(layer.id):on.has('geo-anchors')||on.has('geo-countries');return a&&visible?[{key:`geography:${id}`,id,kind:'event' as const,en:a.name.en,zh:a.name.zh,note:'',at:a.at,pinned:true,clickable:!presentation}]:[]}));}
+      geographyLayer?.update();
+    }
     leaders.update();
     const bar = scaleBar(metresPerPixel(map.getZoom(), map.getCenter().lat), 120),
       w = Math.round(bar.px),
@@ -212,7 +224,7 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
     const parts: string[] = [];
     for (const def of definitions) {
       const status = loader.states.get(def.id),
-        visible = on.has(def.id);
+        visible = on.has(def.id) && (!options.geography || state.geoContext?.kind==='climatology');
       layerCounts[def.id] = { drawnVectors: 0, cells: 0 };
       if (status?.status !== 'ready') {
         if (loaded && installed.has(def.id) && def.quantity === 'rain') {
@@ -261,6 +273,7 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
           installed.add(def.id);
           // Coastlines remain above climate fills, including lazy high-resolution coastline.
           for (const id of [BASE_LAYER_IDS.landEdge, HI.edge, LOCAL.edge, LOCAL.today]) if (map.getLayer(id)) map.moveLayer(id);
+          geographyLayer?.raise();
         }
         const paint = rainPaint(month, tk);
         map.setPaintProperty(fill, 'fill-color', paint.color);
@@ -358,6 +371,7 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
   const unsubscribe = store.subscribe(sync);
   map.on('load', () => {
     loaded = true;
+    if(options.geography)geographyLayer=installGeographyLayers(map,options.geography,store as SceneStore<GeographyExt>,id=>options.onSelectGeography?.(id));
     sync();
     loadHighDetail();
     const staticFiles = [
@@ -429,6 +443,8 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
   });
   map.on('click', (e) => {
     if (!presentation && !options.isPresenting?.()) {
+      if(options.geography && store.getState().geoContext?.kind!=='climatology' && geographyLayer?.click(e))return;
+      if(options.geography && store.getState().geoContext?.kind!=='climatology')return;
       selected = { kind: 'cell', at: [e.lngLat.lng, e.lngLat.lat] };
       options.onSelectCell(e.lngLat.lng, e.lngLat.lat);
       requestRender();
@@ -466,6 +482,7 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
     for (const layer of style.layers)
       if (map.getLayer(layer.id) && 'paint' in layer && layer.paint)
         for (const [key, value] of Object.entries(layer.paint)) map.setPaintProperty(layer.id, key, value);
+    geographyLayer?.recolor();
     requestRender();
   }
   map.on('load', recolor);
@@ -477,11 +494,11 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
   definitions.forEach((d) => loader.load(d));
   sync();
   return {
-    sampleClimate: (lon, lat, month = store.getState().month ?? period.initialMonth) =>
+    sampleClimate: (lon, lat, month = currentMonth()) =>
       sampleClimate(lon, lat, month, states('wind'), states('rain')),
     ready() {
       return (
-        loaded &&
+        loaded && (!options.geography || geographyLayer?.ready()===true) &&
         definitions
           .filter((d) => store.getState().layers.includes(d.id))
           .every((d) => {
@@ -491,7 +508,7 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
               (s?.status === 'ready' && (d.quantity !== 'rain' || (installed.has(d.id) && map.isSourceLoaded(`climate-${d.id}`))))
             );
           }) &&
-        renderedMonth === (store.getState().month ?? period.initialMonth)
+        renderedMonth === (currentMonth())
       );
     },
     retryClimateLayer(id) {
@@ -559,7 +576,7 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
     },
     plateCamera: () => null,
     stats: () => ({
-      features: data.events.length + cells + drawnVectors,
+      features: data.events.length + cells + drawnVectors + (options.geography ? options.geography.countries.features.length + options.geography.layers.reduce((n,l)=>n+l.features.features.length,0) : 0),
       zoom: map.getZoom(),
       datedLayers: {},
     }),
@@ -578,6 +595,7 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
       windGeometry.clear();
       markers.forEach((m) => m.marker.remove());
       svg.remove();
+      geographyLayer?.destroy();
       map.remove();
     },
   };
