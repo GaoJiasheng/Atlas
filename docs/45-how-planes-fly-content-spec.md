@@ -757,3 +757,15 @@ Node CPU探针（Node v25.8.2，darwin arm64；与check/build并行，含调度�
 **自动门槛和浏览器边界**：本轮brief明确禁止sandbox运行shoot／e2e，且禁止用用户浏览器或桌面绕行；因此未运行浏览器、Lighthouse、真机触控／fps、实际draw calls／triangles／首屏预算验收。§9.2–9.3此前的引擎通过不能转记为正式主题通过。新增 `tests/how-planes-fly-content.test.ts` 对生产parts与章节做caption／模型读数、数量、mask、索引、三卡、bank世界向量、两轴转速与套接、抬板、燃烧室气路和鼓筒腹板断言；新增 `tests-e2e/how-planes-fly.spec.ts`，12项用例经 `ATLAS_E2E_PORT=5425 pnpm exec playwright test tests-e2e/how-planes-fly.spec.ts --list` 发现通过（只列举，未启动浏览器）。主会话运行 `pnpm shoot how-planes-fly --beats --tasks --keys --layout --locale en,zh --theme paper,cinema`，人工看390×844与全章标签，再运行 `CI=1 ATLAS_E2E_PORT=5425 pnpm e2e`。最终四项非浏览器门槛结果见本节后续记录。
 
 **最终非浏览器门槛**：`pnpm check`通过（831文件，0错误、0警告，4个既有hint）；`pnpm validate`通过（65主题，0错误、0警告）；`pnpm test`通过（178文件、4,566测试，其中正式主题21项）；`pnpm build`通过（133页，含本主题EN/ZH，PWA164预缓存条目；仍有既有大chunk提示，未据此宣称首屏预算通过）；`git diff --check`通过。一次新增单测的可选字段TS错误已修正后完整重跑check通过；首次生产内容单测指出01章索引漏项，补内容后通过，没有删弱断言。e2e只发现12项，shoot／浏览器e2e与设备验收均按brief留给主会话。无package／lockfile／review-queue改动，无引擎改动，无git写命令。
+
+### 9.5 浏览器验收（2026-10-27，Claude Sonnet 5.5）
+
+**看了什么**：`pnpm shoot how-planes-fly --beats --tasks --keys --layout` 在 en/paper、en/cinema 完整跑完（38 拍、24 个按键、8 个尺寸含 1024×768 与 390×844）；zh/paper 的 38 拍截图逐章看过；zh/cinema 重跑 `--beats --keys --layout`（zh/paper 的 keys／layout 因机器负载 190 以上被中止，结构与 en 相同）。结果：控制台干净，按键失败 0，布局问题 0，节拍失败 0，38/38 拍链接打开与演示场景一致。整机读作通用无品牌双发下单翼客机、常规尾翼；翼盒显示两根翼梁、三道翼肋和蒙皮；涡扇纵剖里低压轴穿过空心高压轴；四个工位在每一拍都按完整 mask 出现，没有互相漏出（唯一例外是规格 03-5 要求的静止机舱＋fan，见下）。章节 07 措辞克制，日期区分交付／商业服务／运营／开幕，558 座建筑与 4,096 座坟墓按建筑和坟墓计数。拍内文字与翼型图、升力读数一致。
+
+**性能**（`--perf --gpu`，M5 Max，ANGLE Metal，1520×1023，负载很高）：各章 6–30 次绘制、≤45.6 k 三角形、54–62 fps；预算 <100 / ≤1.5 M 达标。不是 iPad 结论。
+
+**修正**：02-1 翼盒拍原来整块隐藏蒙皮，翼盒读成只有骨架；改为蒙皮 ghost（淡罩在梁与肋外），单测与 e2e 同步。e2e 两处断言改为不依赖瞬时状态：键盘 `,` `.` 用 URL 的 `b` 参数（非演示模式下 `state().presentation` 为空）；扰流板复位用拍的新加载作基准（同一页内瞬时 `goToBeat` 跨镜头后画面停在旧框，直到下一次舞台更新，见下）。
+
+**目标 e2e**（`how-planes-fly`、`smoke`、`sample-airfoil`、`forces`、`energy-conversion`，2 workers）：51 通过；`how-planes-fly` 两处如上修正后 12/12 通过；`smoke` 的 sample-space (zh) 截图超时单跑通过（负载）。
+
+**留给 Gavin**：03-5（失速）按规格把右机舱＋fan 放在翼型试验台旁，机舱是半透明悬空件，只带一截挂架；要不要删掉这两件让工位完全不漏，由 Gavin 定。另：`__atlas.goToBeat(n, { instant: true })` 在同一页内从一个镜头跳到另一个镜头的拍时，相机画面停在旧框直到下一次舞台更新（pose 调用或再次 goToBeat 才会校正），未确认是否与负载有关，属引擎观察，未改。

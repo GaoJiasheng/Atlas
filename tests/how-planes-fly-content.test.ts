@@ -83,10 +83,10 @@ describe('how-planes-fly production content and model', () => {
     }
   });
 
-  it('shows one station at a time, with the specified fan demonstration and actual skin removal', () => {
+  it('shows one station at a time, with the specified fan demonstration and the wing skin drawn faint over the frame', () => {
     const box = at('wing-and-air', 1);
-    expect(shown(box).sort()).toEqual(['front-spar', 'rear-spar', 'wing-ribs'].sort());
-    expect(box.hide).toContain('wing-box-skin'); expect(box.ghost).not.toContain('wing-box-skin');
+    expect(shown(box).sort()).toEqual(['front-spar', 'rear-spar', 'wing-box-skin', 'wing-ribs'].sort());
+    expect(box.ghost).toEqual(['wing-box-skin']);
     for (const i of [2, 3, 4, 5]) expect(shown(at('wing-and-air', i)).sort()).toEqual(['foil-sample', 'chord-marker', 'inflow-reference', 'angle-marker', 'display-plinth'].sort());
     expect(shown(at('angle-and-stall', 5))).toEqual(expect.arrayContaining(['foil-sample', 'fan-right', 'nacelle-right']));
     expect(at('angle-and-stall', 5).run).toBe(true);

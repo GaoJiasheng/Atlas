@@ -241,7 +241,7 @@ const CHAPTERS: Chapter[] = [
     beats: [
       {
         set: 'B',
-        minus: ['wing-box-skin'],
+        ghost: ['wing-box-skin'],
         camera: 'wing-structure-view',
         labels: ['front-spar', 'rear-spar', 'wing-ribs'],
         run: false,

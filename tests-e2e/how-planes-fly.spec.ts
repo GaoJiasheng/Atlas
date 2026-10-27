@@ -146,7 +146,7 @@ for (const locale of ['en', 'zh']) for (const theme of ['paper', 'cinema']) {
 test('station masks, static bank vectors, fan during stall and distinct engine spools', async ({ page }) => {
   await page.setViewportSize({ width: 1600, height: 900 });
   await open(page, 'ch=wing-and-air&b=1');
-  await expect.poll(async () => (await anchor(page, 'wing-box-skin'))?.shown).toBe(false);
+  await expect.poll(async () => (await anchor(page, 'wing-box-skin'))?.shown).toBe(true);
   for (const id of ['front-spar', 'rear-spar', 'wing-ribs']) await expect.poll(async () => (await anchor(page, id))?.shown).toBe(true);
   await beat(page, 'changing-direction', 3);
   await expect.poll(async () => (await read(page)).arrowDirections.some(a => a.force === 'gravity')).toBe(true);
@@ -185,11 +185,13 @@ test('pause and reduced motion hold the actual-topic flow clock; keyboard moves 
   const b = (await read(page)).pulseTime;
   await page.waitForTimeout(150); expect((await read(page)).pulseTime).toBe(b);
   await page.locator('.atlas-scene').focus();
+  const urlBeat = () => new URL(page.url()).searchParams.get('b');
+  expect(urlBeat()).toBe('2');
   await page.keyboard.press('.');
-  await expect.poll(() => page.evaluate(() => window.__atlas!.state().presentation?.beat)).toBe(2);
+  await expect.poll(urlBeat).toBe('3');
   expect(await page.evaluate(() => window.__atlas!.state().presentation?.autoplay)).not.toBe(true);
   await page.keyboard.press(',');
-  await expect.poll(() => page.evaluate(() => window.__atlas!.state().presentation?.beat)).toBe(1);
+  await expect.poll(urlBeat).toBe('2');
 });
 
 
@@ -214,6 +216,8 @@ test('the balanced level-flight beat runs all 23 travel clips and resets on leav
   await expect.poll(travel).toEqual(whole.map(() => 1));
   await beat(page, 'changing-direction', 4);
   await expect.poll(travel).toEqual(whole.map(() => 0));
+  // A fresh load of the beat, so the framing is the beat's own (an instant jump from another camera can leave the old framing until the next stage update).
+  await open(page, 'ch=changing-direction&b=5');
   // An instant pose still reaches the stage on the next rendered frame.
   await page.evaluate(() => new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))));
   const raised = (await anchor(page, 'spoiler-left'))!;
