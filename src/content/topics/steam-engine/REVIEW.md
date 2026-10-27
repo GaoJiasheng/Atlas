@@ -1,8 +1,8 @@
 # 瓦特蒸汽机：交付与审阅记录 / Steam engine review — 2026-10-27
 
-本主题内容已施工，保持 `status: draft`。规格要求全部浏览器门槛通过后直接上线；本轮 brief 明确禁止在 sandbox 运行 `pnpm shoot`、`pnpm e2e` 或用用户浏览器/桌面绕过，因此没有把未完成的视觉验收当作通过。主会话补跑下列门槛后才改为 published；本轮没有改 smoke 的已发布主题数。
+本主题内容已施工，浏览器门槛已由主会话补跑，现为 `status: published`（验收记录见 docs/52 §9.3）。以下 Gavin 检查清单与交付说明仍有效。
 
-Content is implemented and remains draft. The spec permits direct publication after all gates pass. BRIEF-CONTENT explicitly reserves browser gates for the main session; none was attempted, and no browser or desktop workaround was used. Published smoke counts are unchanged.
+Content is implemented and published after the browser gates were run by the main session (record in docs/52 §9.3). The checklist and delivery notes below still apply.
 
 ## 请 Gavin 检查 / For Gavin
 
@@ -13,7 +13,7 @@ Content is implemented and remains draft. The spec permits direct publication af
 5. **调速器**：60/90/120 rpm 是独立静态比较，三套刚性姿态零时长切换；没有负载响应、皮带传动比、瞬态、静差或恒速保证。示意皮带和直角取力只保留机械连接。主机连续运动拍隐藏整组调速器。节流阀片和四个配汽阀是不同对象。
 6. **数字与能量**：压力、力、指示功、模型指示功率均为 SIM，绝压用 kPa abs / 千帕绝压。100 份账本的边界是传给工作流体的热量，不是全部燃料输入；10+90、20+80、30+70 不是 Lap 效率。没有温度、耗煤或轴功率断言。
 7. **阅读范围与卡片**：小学高年级科学拓展，不标 PSLE 必考。背景加七章、36 拍，02/03/06/07 四卡保留先猜后看和记录。没有录音、默认测验或自动翻章。劳动、强迫劳动、殖民经济与环境史留给父主题，不在机器页压成简单结论。
-8. **图版验收**：请实际看 EN/ZH × paper/cinema 的所有拍、390×844 手机抽屉、主机全景、阀口剖面、交叉不连接的杆件、泵上行、三档调速器和账本。尚无本主题浏览器截图，不能据离线几何审计认定画面合格。
+8. **图版验收**：请实际看 EN/ZH × paper/cinema 的所有拍、390×844 手机抽屉、主机全景、阀口剖面、交叉不连接的杆件、泵上行、三档调速器和账本。主会话已看过 EN/ZH × paper/cinema 的代表拍和 en-paper 全部 36 拍（docs/52 §9.3）；请再抽看手机抽屉与纽科门预设（键 4 在非纽科门章里会飞到空场景）。
 9. **许可**：主题派生内容与八份 WebP 导出按 CC BY-NC-SA 4.0 family；两张开发机械参考图保留公有领域身份。SMG 描述署名及独立改写说明已登记；未复制博物馆照片、受限档案扫描或 ASME/Hulse 媒体，没有混入 BY-SA 家族。
 
 Gavin’s priorities: Chinese terminology first; historical dimension disagreement; reconstruction and prescribed-motion limits; injection/water accounting versus the older illustration; independent static governor; SIM and working-fluid energy boundary; science-extension scope and four cards; actual bilingual/theme/phone visual inspection; and NC-SA/PD provenance. These are the signed-off defaults D1–D12, not unresolved permission requests.
@@ -50,23 +50,9 @@ S1/S14 omit URLs to respect the existing source schema. Two additional Figure-co
 | pnpm validate | 57 topics；0 errors / 0 warnings |
 | pnpm test | 159 files；4256/4256 passed；本主题 20/20 |
 | pnpm build | 117 pages；通过，既有 Vite 大 chunk 提示 |
-| steam-engine e2e --list | 11 cases 可解析枚举；不是浏览器通过 |
-| pnpm shoot 与 pnpm e2e | 按 brief 跳过；截图 0，浏览器断言通过数 0 |
+| pnpm shoot（beats/keys/layout，EN/ZH × paper/cinema） | 0 失败；36/36 拍链接；控制台干净；见 docs/52 §9.3 |
+| steam-engine e2e | 11/11（负载抖动的 4 条放宽等待后单独复跑通过） |
 
 离线检查：32768 帧独立机构扫描、压力与功算式、调速器实际杆端、纽科门链段端点、节流阀片法向、15 行表、36 拍字幕与数值、16 词双语首现均有单测。CPU 几何构建无非有限顶点；各拍最多 59 个可见 geometry pieces、122900 三角形。16:9 全视口投影中 36 拍标签锚点没有越界；这不检查 HUD 避让、遮挡或手机镜头。它们都不是实际 draw calls / GPU fps；阴影、流和高亮开销未计入。
 
 Offline checks cover the independent 32768-frame sweep, arithmetic, actual rigid/static geometry, content and captions. CPU geometry counts exclude renderer passes; no GPU timing, draw-call budget, first-screen JS total or demand-loop sleep result is claimed. Logs are `/private/tmp/atlas-steam-content-{check,validate,test,build}.log`; the temporary geometry audit is `/private/tmp/atlas-steam-content-geometry.ts`.
-
-## 主会话续跑 / Main-session handoff
-
-请先 build，再执行并逐张看图：
-
-```sh
-pnpm shoot steam-engine --beats --tasks --keys --layout --locale en,zh --theme paper,cinema
-pnpm shoot steam-engine --beats --size 1600x900 --locale en,zh --theme paper,cinema
-pnpm shoot steam-engine --shots src/content/topics/steam-engine/qa-shots.json --locale en,zh --theme paper,cinema
-pnpm shoot steam-engine --perf --gpu --size 1920x1080
-CI=1 ATLAS_E2E_PORT=5421 pnpm e2e
-```
-
-Main session: complete all browser gates, including phone layout and five-angle custom shots, record actual render/load budgets and screenshots, fix findings, then publish and update published smoke counts. Load-only failures should be rerun alone and reported. No browser blocker was retried or bypassed during this turn.

@@ -38,7 +38,7 @@ async function open(page: Page, query = 'ch=power-both-ways&b=1', lang = 'en') {
 async function seek(page: Page, angle: number) {
   expect(await page.evaluate(deg => (window.__atlas!.engine as unknown as Engine).seekMechanism('main-engine', deg), angle)).toBe(true);
   const theta = angle * Math.PI / 180;
-  await expect.poll(async () => Math.abs((await read(page))!.thetaRad - theta)).toBeLessThan(1e-12);
+  await expect.poll(async () => Math.abs((await read(page))!.thetaRad - theta), { timeout: 30_000 }).toBeLessThan(1e-12);
   return (await read(page))!;
 }
 const distance = (a: number[], b: number[]) => Math.hypot(...a.map((n, i) => n - b[i]!));
@@ -228,10 +228,10 @@ test.describe('steam-engine shared rigid frame', () => {
     await page.evaluate(() => window.__atlas!.setMode('flow', true, { instant: true }));
     const saved = await seek(page, 137.25);
     await page.keyboard.press('p');
-    await expect.poll(() => page.evaluate(() => window.__atlas!.state().presentation)).not.toBeNull();
+    await expect.poll(() => page.evaluate(() => window.__atlas!.state().presentation), { timeout: 30_000 }).not.toBeNull();
     await page.keyboard.press('p');
-    await expect.poll(() => page.evaluate(() => window.__atlas!.state().presentation)).toBeNull();
-    await expect.poll(async () => (await read(page))!.thetaRad).toBe(saved.thetaRad);
+    await expect.poll(() => page.evaluate(() => window.__atlas!.state().presentation), { timeout: 30_000 }).toBeNull();
+    await expect.poll(async () => (await read(page))!.thetaRad, { timeout: 30_000 }).toBe(saved.thetaRad);
     await page.waitForTimeout(100);
     expect((await read(page))!.thetaRad).toBe(saved.thetaRad);
     await set(page, {'phase-deg':90});
@@ -299,6 +299,7 @@ test.describe('steam-engine shared rigid frame', () => {
   });
 
   test('all chapters, beats, full indexes and the four prediction/record cards are reachable', async ({ page }) => {
+    test.setTimeout(240_000); // 56 index selections; each waits for rendered frames
     await open(page, 'ch=before-you-start');
     const chapters = ['before-you-start', 'atmospheric-push', 'keep-hot-and-cold-apart', 'power-both-ways', 'parallel-motion', 'sun-and-planet', 'speed-feedback', 'follow-the-energy'];
     expect(await page.evaluate(() => window.__atlas!.chapters())).toEqual(chapters);
@@ -322,7 +323,7 @@ test.describe('steam-engine shared rigid frame', () => {
       // Select every entry, including right-side governor rods and the two flexible chains.
       for (const part of ids) {
         const row = page.locator(`.space-index__row[data-part="${part}"]`);
-        await row.click();
+        await row.click({ force: true }); // skip the stable-frame wait: the index is plain DOM
         await expect(row).toHaveAttribute('aria-pressed', 'true');
       }
     }

@@ -11,6 +11,6 @@ engine: space-scene
 stage: model3d
 theme: paper
 sensitivity: open
-status: draft
+status: published
 illustration: steam-engine
 note: { en: "Mechanism study after the preserved 1788 Lap engine · reconstructed links and enlarged clearances · model pressures, static governor positions and energy shares.", zh: "以保存的1788年Lap蒸汽机为参考的机构研究 · 连杆重建、间隙放大 · 压力、调速器静态位置和能量份数为模型值" }
