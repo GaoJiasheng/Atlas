@@ -136,6 +136,7 @@ export interface PartShape {
 
 /** What the label probe needs to know about a part (filled by PartNode). */
 export interface PartHandle {
+  orbitUniforms?: import("./materials").PartUniforms[];
   /** Whether cutaway planes apply to this part and its label / site anchors. */
   clip: boolean;
   object: Object3D;
@@ -562,6 +563,7 @@ export function PartNode(props: PartNodeProps) {
       point: [...props.anchorPoint] as Vec3,
       radius: props.anchorRadius,
       half: [...props.anchorHalf] as Vec3,
+      orbitUniforms: pms.map(pm=>pm.uniforms),
       meshes: [],
       fade: 0,
       visible: false,

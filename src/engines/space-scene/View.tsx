@@ -1,3 +1,5 @@
+import { getOrbitSession } from './lib/sim/orbit-session';
+import { OrbitCard, orbitPanelReading } from './hud/OrbitCard';
 /**
  * SpaceScene view: Model3DStage (react-three-fiber, lazy-loaded so the HUD
  * appears before three.js arrives) + the technical-plate HUD content in the
@@ -126,7 +128,7 @@ function chapterCamera(chapter: Chapter | undefined, inherited: unknown, view: S
   return asOrbit(chapter?.state.camera) ?? views[view]?.camera ?? asOrbit(inherited) ?? DEFAULT_CAMERA;
 }
 
-type Pick5 = Pick<SpaceSceneExt, 'view' | 'explode' | 'run' | 'cutaway' | 'part' | 'beat'> & { chapter: string | null };
+type Pick5 = Pick<SpaceSceneExt, 'view' | 'explode' | 'run' | 'cutaway' | 'part' | 'beat' | 'sim'> & { chapter: string | null };
 
 const sameJson = (a: unknown, b: unknown) => JSON.stringify(a ?? null) === JSON.stringify(b ?? null);
 const ownBeats = (c: Chapter | undefined): readonly SpaceBeatSpec[] => (c?.state as SpaceChapterState | undefined)?.beats ?? [];
@@ -134,6 +136,8 @@ const ownBeats = (c: Chapter | undefined): readonly SpaceBeatSpec[] => (c?.state
 export default function SpaceSceneView({ data, chapters, locale }: EngineViewProps) {
   const file = (data as SpaceSceneData).parts;
   const store = useSceneStore<SpaceSceneExt>();
+  const orbitSession = useMemo(() => file.sim?.orbitRotation ? getOrbitSession(store,file.sim) : null,[store,file.sim]);
+  useEffect(() => {if(orbitSession)store.getState().patch({orbitClock:orbitSession.clock,run:false});return()=>orbitSession?.dispose();},[orbitSession,store]);
   const { hud, actions } = useSceneContext();
   const t = useT();
   const [ui] = useState(createSpaceUi);
@@ -148,6 +152,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
     part: st.part,
     chapter: st.chapter,
     beat: st.beat,
+    sim: st.sim,
   }));
 
   const bounds = useMemo(() => modelBounds(file.parts), [file.parts]);
@@ -175,9 +180,10 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       });
       st.patch({ run: false, view: st.view === 'exploded' ? 'assembled' : st.view });
       const aspect = bridge.width > 0 && bridge.height > 0 ? bridge.width / bridge.height : 1.5;
-      const referenceBounds = file.views.reference?.fit === 'layers'
+      const orbitBounds = orbitSession ? (()=>{const d=orbitSession.display;const ids=['sun','earth','moon'] as const;return {min:[0,1,2].map(j=>Math.min(...ids.map(id=>d.centres[id][j]!-d.radii[id]))) as [number,number,number],max:[0,1,2].map(j=>Math.max(...ids.map(id=>d.centres[id][j]!+d.radii[id]))) as [number,number,number]};})() : null;
+      const referenceBounds = orbitBounds ?? (file.views.reference?.fit === 'layers'
         ? modelBounds(file.parts.filter((p) => !p.context && (p.group === undefined || st.layers.includes(p.group)) && !st.hidden.includes(p.id))) ?? bounds
-        : bounds;
+        : bounds);
       const cam: OrbitCamera = file.views.reference?.camera ?? (referenceBounds ? referenceCamera(referenceBounds, plane, aspect) : DEFAULT_CAMERA);
       st.applyCameraPreset(cam, { instant });
       hud.setState({ presetId: REFERENCE_PRESET, cameraFree: false });
@@ -265,6 +271,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         sites: [...snap.sites],
         beat: snap.beat,
         sim: { ...snap.sim },
+        orbitTime: orbitSession?.clock.elapsedSeconds,
         orbit: u.orbit,
         presetId: ref ? ref.presetId : h.presetId,
         cameraFree: ref ? ref.cameraFree : h.cameraFree,
@@ -276,10 +283,10 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
     saveState: () => entered.current!,
     restoreState: (saved) => {
       ui.setState({ presenting: false, orbit: saved.orbit });
-      const { chapter, layers, camera, view, part, explode, run, cutaway, hidden, pose, ghosted, exercise, tints, sites, beat, sim } = saved;
+      const { chapter, layers, camera, view, part, explode, run, cutaway, hidden, pose, ghosted, exercise, tints, sites, beat, sim, orbitTime } = saved;
       store
         .getState()
-        .applyState({ chapter, layers, camera, view, part, explode, run, cutaway, hidden, pose, ghosted, exercise, tints, sites, beat, sim, demo: null }, { instant: false });
+        .applyState({ chapter, layers, camera, view, part, explode, run, cutaway, hidden, pose, ghosted, exercise, tints, sites, beat, sim, ...(orbitSession ? { orbitTime: orbitTime ?? null } : {}), demo: null }, { instant: false });
       hud.setState({ presetId: saved.presetId, cameraFree: saved.cameraFree });
     },
   };
@@ -446,19 +453,19 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
     const cutName = s.cutaway !== 'none' && s.cutaway !== 'half' ? s.cutaway : null;
     const cutStatus = `${t('space.mode.cutaway')} ${cutName ? tx(file.views.cuts?.[cutName]?.label ?? { en: cutName, zh: cutName }, 'en') : '50'}`;
     const modes: SceneMode[] = [
-      { id: 'xray', key: 'x', label: t('space.mode.xray'), on: s.view === 'xray', tone: 'xray' },
+      { id: 'xray', key: 'x', label: t('space.mode.xray'), disabled: !!orbitSession, on: s.view === 'xray', tone: 'xray' },
       {
         id: 'exploded',
         key: 'e',
         // A topic may name it (PEEL / 剥层 for staged muscle layers).
         label: file.views.explodeLabel ? tx(file.views.explodeLabel, locale) : t('space.mode.exploded'),
         on: s.view === 'exploded',
-        disabled: inReference,
+        disabled: inReference || !!orbitSession,
         status: `${file.views.explodeLabel ? tx(file.views.explodeLabel, 'en').toUpperCase() : t('space.state.explode')} ${pct}`,
       },
-      { id: 'cutaway', key: 'c', label: t('space.mode.cutaway'), on: s.cutaway !== 'none', tone: 'cut', status: cutStatus },
+      { id: 'cutaway', key: 'c', label: t('space.mode.cutaway'), disabled: !!orbitSession, on: s.cutaway !== 'none', tone: 'cut', status: cutStatus },
       // Flow paths do not follow the parts apart (docs/12 §7.5): no FLOW while exploded.
-      { id: 'flow', key: 'f', label: t('space.mode.flow'), on: s.run, tone: 'hot', disabled: inReference || exploded },
+      { id: 'flow', key: 'f', label: t('space.mode.flow'), on: s.run, tone: 'hot', disabled: inReference || exploded || !!(orbitSession && orbitSession.config.clock.rateByLab[orbitSession.snapshot.lab as keyof typeof orbitSession.config.clock.rateByLab] === 0) },
       { id: 'reference', key: 'r', label: t('space.mode.reference'), on: inReference, tone: 'ink', disabled: presenting, phone: false },
       { id: 'presentation', key: 'p', label: t('present.mode'), on: presenting, tone: 'signal', status: presentationStatus, phone: false },
     ];
@@ -516,7 +523,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       pause: {
         paused: !s.run,
         set: (paused) => {
-          if (!ui.getState().reference) set({ run: !paused });
+          if (!ui.getState().reference && (!orbitSession || orbitSession.config.clock.rateByLab[orbitSession.snapshot.lab as keyof typeof orbitSession.config.clock.rateByLab] > 0)) set({ run: !paused });
         },
       },
       stats: () => {
@@ -563,6 +570,8 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
           return true;
         },
         // Try-it (docs/06 「SpaceScene · 试一试」): the values on show, what was set, the outputs, the card and its table.
+        orbit: () => orbitSession ? JSON.parse(JSON.stringify({snapshotId:orbitSession.id,timeSeconds:orbitSession.clock.elapsedSeconds,running:orbitSession.clock.running,lab:orbitSession.snapshot.lab,scale:orbitSession.values[orbitSession.config.display.scale],physical:{bodies:orbitSession.snapshot.bodies,axis:orbitSession.snapshot.axis,solarDirections:orbitSession.snapshot.solarDirections},display:orbitSession.display,rendered:bridge.orbitRendered ?? null,panel:orbitPanelReading(orbitSession)}, (_key,value)=>typeof value==='number'&&!Number.isFinite(value)?null:value)) : null,
+        orbitSeek: (seconds:number) => orbitSession?.seek(seconds) ?? false,
         sim: () => {
           const sim = file.sim;
           if (!sim) return null;
@@ -577,11 +586,12 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
           return {
             values,
             set: { ...st.sim },
-            outputs: evaluateSimOnStage(sim, file, values, st.pose, card?.observe).outputs,
+            outputs: orbitSession?.outputs ?? evaluateSimOnStage(sim, file, values, st.pose, card?.observe).outputs,
             try: card,
             table: ui.getState().simTables[st.chapter ?? ''] ?? [],
             timeline,
             replays: ui.getState().simReplay.n,
+            ...(orbitSession ? {sources:Object.fromEntries(sim.outputs.map(o=>[o.id,(o.from??o.id).startsWith('local-')?['S33']:orbitSession.config.sources]))} : {}),
             // A table model (docs/40 §4.2): the sources of the row each typical output comes from now.
             ...(sim.table ? { sources: Object.fromEntries(Object.entries(tableSources(sim.table, values)).filter(([id]) => sim.outputs.find((o) => o.id === id)?.tag === 'typical')) } : {}),
           };
@@ -764,7 +774,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         <GroupScaleBars file={file} bridge={bridge} />
         <EnergyBarLabels file={file} bridge={bridge} />
       </SceneSlot>
-      <SceneSlot name="card">{file.sim?.sort ? <KeyCard file={file} /> : file.sim?.lifeCycle ? <CycleCard file={file} /> : file.sim?.energy ? <EnergyCard file={file} /> : file.sim?.circuit?.diagram ? <CircuitCard file={file} /> : <PartChainCard file={file} />}</SceneSlot>
+      <SceneSlot name="card">{orbitSession ? <OrbitCard file={file} /> : file.sim?.sort ? <KeyCard file={file} /> : file.sim?.lifeCycle ? <CycleCard file={file} /> : file.sim?.energy ? <EnergyCard file={file} /> : file.sim?.circuit?.diagram ? <CircuitCard file={file} /> : <PartChainCard file={file} />}</SceneSlot>
       <SceneSlot name="plate">
         <PlateBlock file={file} ui={ui} bridge={bridge} />
       </SceneSlot>
@@ -792,6 +802,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
           canNext={canStep(1)}
           onStep={beatStep}
         />
+        {orbitSession && <OrbitCard file={file} reader />}
         <TryIt file={file} ui={ui} />
         <Inspector file={file} fitness={fitness} training={training} />
       </SceneSlot>

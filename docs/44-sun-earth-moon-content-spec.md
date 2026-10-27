@@ -692,3 +692,41 @@ T01–T28 的 unit tests 逐项编写；数字容差见 §4.9，clock 用注入 
 - [ ] `data/SOURCES.md`、LICENSE-CONTENT、THIRD-PARTY-NOTICES 的 CC0 / NC-SA provenance 与例外齐全，没有 BY-SA/NC-SA 混合派生文件；最终 `status: published`，记录截图 `hero-paper`、`hero-clean`、`hero-dark`、`hero-zh`、`phone-390` 与关键科学状态到 `docs/screenshots/sun-earth-moon/`。
 
 ## 9. 引擎记录（施工后填写）
+
+### 9.1 E-SEM1–E-SEM3 引擎施工记录（Codex，2026-10-27）
+
+**范围与状态**：只施工引擎与 `sample-orbit` draft 夹具，没有创建正式 `sun-earth-moon` 内容、图像或星历。§8 不打勾：数值、schema、类型与构建已通过，浏览器启动被当前执行环境拒绝，尚未完成视觉 / e2e / GPU 验收。未修改依赖、lockfile 或 review queue，未执行 git 写操作。
+
+**实现文件**：
+
+- E-SEM1：`orbit-rotation-schema.ts`；`lib/sim/orbit-{constants,rotation,clock,session}.ts`。注册 SIM_KINDS / simSchema / quantityKind / 状态表 / simQuantities / evaluateSim / SEPARATE_EXPERIMENTS；原五参数后追加 context，不改变旧参数含义；无 timeline channels。13控件、23输出、共享可恢复t、受限365日期例外、有限视盘与影锥法向距离、计算年表读取。`core/url-state.ts` / `types.ts` / `SceneHost.tsx` 与 SpaceScene 的 beat / presentation 保存 `orb-t`；暂停、尺度切换、控件重置、REFERENCE 与演示恢复读同一个会话。
+- E-SEM2：`lib/sim/orbit-projection.ts`、`stages/model3d/OrbitDriver.tsx`，接入 SceneRoot / PartNode / materials / CameraRig / bridge。沿既有可选 part 节点写绝对位置、四元数和半径；表面附件用父体半径；解析明暗覆盖棚灯输出，无新色 token。实际 world matrix 与太阳 uniform 从舞台反读到 `engine.orbit()`；`engine.orbitSeek()` 通过同一会话定位，等 rendered.snapshotId 后比较。PLATE 跟随 orbit 输出不作独立缓动。
+- E-SEM3：`hud/OrbitCard.tsx` 与现有 card / readerTop 槽。地心北朝上球面射线月相、模型观察点同角尺视盘、365日计算曲线；影图独立同尺度，含本影 / 半影 / 伪本影，月食遮暗与几何亮部百分比分开。`orbit-guides` 更新六个真实 guide 节点的几何，不另画不可选副本；零倾角隐藏交线。全年图指针 / 前后日与 TryIt 共用 setSim，来源复用 SourceRefs，没有新 selection kind 或底条。
+- 夹具：`src/content/topics/sample-orbit/`，8章 / 39拍，13 parts、4 groups、13 controls、23 outputs、9 binds、2 overlays、5张 TryIt；两种尺度、三种观察窗、离节点 / 偏食 / 环食 / 全月食均有状态。背景、06、07也有尺度按钮；X-RAY / CUTAWAY / EXPLODED 禁用并写双语原因。年表为独立 CC0 文件，365行数值不变，只删旧 MSS cross_check 并改 precision；来源、哈希和许可例外见夹具 SOURCES.md、LICENSE-CONTENT 与 THIRD-PARTY-NOTICES。
+- 验证：`tests/space-scene/orbit-rotation.test.ts`（30 tests，覆盖 T01–T28、365日期异常、旧24项上限、39拍、URL / context / clock / restoration）；CC0 `tests/space-scene/fixtures/orbit-oracles.json`；`tests-e2e/sample-orbit.spec.ts`（9项，含39直链、矩阵 / uniform、手机、REFERENCE / presentation / reduce-motion、注入30/60/120fps与后台时间）。`scripts/shoot.ts` 扩展原 --beats / runBeatLinks：收 snapshot 与实际变换，比较拍与直链，并比较 orb-t 与 orbitSeek；旧模型不进入分支。作者完整 JSON 与注册说明见 docs/06 新节。
+
+**相对 §4 的差异与理由**：
+
+1. 现有 source id 规则为 `S[1-9]…`，不允许 S08 / S09。作者数据使用 **S8 / S9**，其余 S10 / S33 / S36 原号不变；oracle 原文件不改。没有为一个主题放宽全站来源规则。
+2. `solarYear.table` 是构建链接本地 file 后的内部字段；浏览器随主题 data.json 一次取得它，作者模板只写 file。没有新的太阳表网络请求或运行时路径解析。
+3. 绝对天体写者集中在 **OrbitDriver**，在既有 PartNode 动画之后、CameraRig / LabelProbe 之前应用，并更新实际 bounds / picking mesh / bridge；没有把天文绝对坐标混进通用 offset/rotate 的缓动栈。实际可选节点与光照仍是原舞台对象。
+4. 物理 snapshot 使用每次求值返回的独立普通数值记录，**不是 §4.3 所要求的全预分配物理结果缓冲**；显示尺度切换保持 snapshot 实例，纯求解实测约0.019ms，渲染侧几何、材质与 THREE 临时向量预分配。运行时长时间GC / 真机帧率尚未取得，不能把算术速度视作该项性能验收通过。
+5. 数值T01–T28无变更；名义90°弦月仍约50.1284773403%，并未改成精确50%。影锥仍用真实物理半径 / 距离；图中球体没有为可读性单独放大。观察窗使用原槽位和一个共享会话，没新增卡片对象或第二模型。
+
+**已执行 gates 与限制**：
+
+| Gate | 本轮结果 |
+|---|---|
+| `pnpm check` | 0 errors、0 warnings，3个仓库既有 unused 提示；包含最终新增 e2e 的类型复核。 |
+| `pnpm validate` | 56 topics，0 errors、0 warnings。 |
+| `pnpm test` | 156 files / **4209 tests passed**（orbit 30 tests）。 |
+| `pnpm build` | **115 pages built**，静态构建成功。 |
+| `pnpm shoot sample-orbit --beats --keys --layout` | 浏览器创建阶段失败，0页面执行，未生成可审截图。 |
+| 四个回归 topic 的 `--beats --keys` | light-and-shadows / sample-light / energy-conversion / sample-heart 在修改前和修改后均因相同 Chromium MachPort 权限错误而无法启动。没有可比较的功能结果，**不能声称0新增回归**。 |
+| `CI=1 ATLAS_E2E_PORT=5401 pnpm e2e` | 343 tests 均失败于 browser fixture 启动，页面断言未执行；新增第9项后另单跑 sample-orbit，结果见下补记。 |
+
+浏览器错误为 `bootstrap_check_in … MachPortRendezvousServer … Permission denied (1100)`。computer-use 工具另返回 “Computer Use was not approved to use Google Chrome”；未操作授权、验证或条款页面，没有尝试绕过限制。
+
+**性能实测边界**：Apple M5 Max / macOS arm64；预热1000次后10000次纯 snapshot 求值平均 **0.0188ms**；本地太阳 JSON **90248 bytes**（≤100KB）。构建日志相对施工前，SpaceScene View gzip约+9.1KB、Model3DStage约+2.6KB、公共小块约+0.3KB，合计约12KB，低于新增15KB目标；这不是浏览器首屏网络采样。未取得实际 draw calls / triangles / GPU fps / 长时间GC、首屏≤300KB、两主题 / 八尺寸布局、截图目视、网络与console运行时审计；这些都是尚未通过的验收项，没有静默放宽预算。已授权可继续的工作以恢复浏览器执行后的这些 gates 为界。
+
+**浏览器补记**：最终独立执行 `CI=1 ATLAS_E2E_PORT=5401 pnpm e2e tests-e2e/sample-orbit.spec.ts`，9/9同样在 Chromium 启动时被拒绝（未执行页面断言）；`pnpm shoot sample-orbit --perf --gpu` 也在启动阶段被相同 MachPort 权限拒绝，未取得GPU测量或截图。

@@ -105,6 +105,7 @@ export interface AnimationReading {
 }
 
 export interface StageBridge {
+  orbitRendered?: {snapshotId:number;parts:Record<string,{position:number[];quaternion:number[];scale:number[];visible:boolean}>;solarDirections:Record<string,number[]>};
   fills: Map<string, FillReading>;
   /** Copies a `count` binding draws, per part (QA `copies(id)`). */
   copies: Map<string, number>;

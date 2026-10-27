@@ -1707,6 +1707,59 @@ docs/40 §4.4 E-HL3。流的可选字段：
 - **validate**：`sync` 是存在的动画；不能有颜色 `stops`、不能 `ends: open`。**测试**：`tidal.test.ts`（相位 → 速度符号、一周期净位移 0、换频率不跳、随动画停、两端淡出）。
 - **`flat: true`**（任何流的可选字段，与 E-HL4 的两种红配套）：dark plate 上也不发光——普通混合、没有白芯，粒子保持自己的颜色（默认的 cinema 流是叠加混合 + 白芯，深酒红会被洗成粉白、和鲜红分不开）；paper 不变。心肺的血流都写 `flat: true`（`flowMaterial.ts styleFlowMaterial`）。
 
+### SpaceScene · 试一试 · 太阳、地球与月球（orbit-rotation）
+
+`docs/44 §4` 的 E-SEM1–3。完整可解析模板是 `src/content/topics/sample-orbit/data/parts.json`（draft，13 controls、23 outputs、13 selectable parts、2 overlays）；8 章 / 39 拍覆盖三种观察窗、真尺度、离交点、偏食、环食、全月食。这里只施工引擎夹具，未创建正式 `sun-earth-moon` 内容。
+
+注册：`SIM_KINDS` → `simSchema.orbitRotation`（`orbit-rotation-schema.ts`）→ `simQuantities` / `evaluateSim`（`lib/sim/orbit-rotation.ts`）→ `quantityKind` / `ORBIT_STATES`（`orbit-constants.ts`）→ `SEPARATE_EXPERIMENTS['orbit-rotation']=true`。没有 timeline channels；`evaluateSim(sim, values, observe, frames, parts, {timeSeconds})` 在原五参数末尾增加可选 context，旧模型不读它。未知输出和种类不符都报错，不依赖缺量回退。
+
+配置严格使用 `version:1, model:"idealised-circular", units:"km-s-deg", frame:"atlas-ecliptic-y-up"`；`controls` 的键是 `lab, elapsed, year-angle, lunar-angle, spin-angle, obliquity, lunar-tilt, node-angle, observer-lat, moon-range, synchronous, scale-mode, day-index`，值是一一对应的 control id。值集见完整模板 / docs/44 §4.2。只有 `solarYear.control` 可以超出旧 24 项上限，必须是完整有序的 1..365；其他 kind / 控件仍最多24项。全年的验证只遍历日期，避免与无关实验输入作笛卡尔积。
+
+```json
+{
+  "solarYear": {
+    "file": "singapore-sun-2026.json", "control": "day-index", "year": 2026,
+    "lat": 1.3342, "lon": 103.7357, "zoneHours": 8, "thresholdDeg": -0.833, "source": "S33"
+  },
+  "panel": {
+    "byLab": { "moon": "phase", "eclipse": "apparent-discs", "local-year": "solar-year" },
+    "north": "earth-axis"
+  },
+  "sources": ["S8", "S9", "S10", "S33", "S36"]
+}
+```
+
+这是 `orbitRotation` 中的三个字段，不是另一个 sim。年表放主题 `data/`，从研究原文件复制所有365行，只编辑说明元数据；构建时 `linkOrbitTable` 消耗配置的本地文件，校验后装入 `solarYear.table`，浏览器只读已打包数据，不另发请求。作者不手写 `table`。文件名不能含路径、协议、查询串；完整日期、时刻顺序、坐标、阈值和时区都校验。不能用已取整日落减日出替换 `daylight_minutes`。S33 是计算来源，S36 是 `design:true` 的公式/假设来源；不把年表标 TYPICAL。现有 source-id 规则不允许前导零，所以本题来源 S08 / S09 在作者数据中写 S8 / S9。
+
+```json
+[
+  { "output": "body-frame", "part": "earth-body", "bodyTransform": { "body": "earth", "attachment": "centre" } },
+  { "output": "body-frame", "part": "near-side-mark", "bodyTransform": { "body": "moon", "attachment": "surface", "localDirection": [1,0,0], "surfaceFactor": 1.006, "scaleWithRadius": true } },
+  { "output": "solar-directions", "part": "moon-body", "solarIllumination": { "body": "moon", "darkFill": 0.035 } }
+]
+```
+
+这些是 `sim.bind` 项。天体、轴、赤道与标记都使用父体半径为1的局部几何。`surface` 要非零 direction、正 factor≤1.1；`centre` 不写 direction / factor；observer 只能 centre，用地球显示半径安放。绝对位置已包含 parent。`body-frame` 是32个固定点键 `earth.xKm`、`earth.qw`、`earth.radiusKm` 等；`solar-directions` 是6个 `earth.x/y/z`、`moon.x/y/z` 键。向量由求解器产生，不是作者输入。非单位四元数 / 缺键检查见 `validateBodyFrame`。
+
+`bodyTransform` 与 guide writer 的零件禁止重复写变换、pose、动画、explode、offset、rotate、shift、place 或 play；普通显隐和 selection 保持原行为。`OrbitDriver` 更新既有可选 mesh，guide primitive 在首帧由同一节点的动态几何替换，不画第二份锚点。轨道128段；零倾角不画交线，并写“平面重合”。Earth / Moon 的解析太阳明暗覆盖棚灯输出，暗侧填光≤0.05；太阳自发光，不投假点光源影子。所有颜色取已有双主题 token。
+
+```json
+[
+  { "kind":"orbit-guides", "group":"orbital-guides", "parts":{"earthTrack":"earth-track","lunarTrack":"lunar-track","plane":"orbital-plane","nodes":"node-line","rays":"light-ray-guide","ruler":"scale-ruler"}, "axes":true,"tracks":true,"nodes":true,"incidence":true,"terminators":true },
+  { "kind":"orbit-eclipse-shadow", "group":"orbital-guides", "bodies":{"source":"sun","planet":"earth","satellite":"moon"}, "localFrame":"earth-moon", "labs":["moon","eclipse"] }
+]
+```
+
+两种 overlay 沿用 ≤4 上限、when 和 group 引用。phase 是地心北朝上球面射线视图，主相机不旋转它；食遮暗与几何亮部读数分列。apparent-discs 是模型地表点的同角度尺视盘；地平下仍可算几何食型，但写“地平下的排列”。shadow 用物理半径、距离与有限太阳切线在独立同尺度图内画本影、半影和伪本影；不和示意放大球接线。全年图只读365行，固定720–735 min，标“纵轴放大区间”，指针与44px前后日按钮都调用既有 `setSim`。
+
+`orbit-session.ts` 每个 scene 一个会话，store 的 `orbitClock={seedSeconds,elapsedSeconds,running}` 与 `run` 共用状态。stage 在 parts 前推进同一个 t / snapshot，HUD 读同一 outputs。单帧Δ≤0.05s，后台恢复清基准、无补跑，maxSeconds夹住停；暂停按需绘制。除 scale 外改控件停并回 elapsed seed；scale 只映射 display，保持物理 snapshot 实例。coupled/year 用太阳显示原点，其余实验用地球原点；真尺度保持统一 m/km。近景与总览相机在尺度变化时重映射；初始章/拍链接直接使用作者给出的目标镜头。eclipse/local-year 的运行命令禁用。
+
+URL `orb-t=21600.123456`：有限十进制、≤6小数、范围0..31557600；加载暂停，非法回seed。章→拍→URL sim→orb-t，换章/拍清时间；REFERENCE 暂停并保持t，演示退出恢复 controls / t / run。URL只在状态变更 / 暂停同步，不逐帧写。新 kind 不接 timeline 的“终态重播”。
+
+测试 API：`engine.orbit()` 给 snapshotId / t / running / lab / scale、physical km与四元数、display m与倍率、实际 world matrix / uniform 反读的 rendered，以及 panel / shadowFrame；NaN 在此 hook 为 null，附不适用说明。`engine.orbitSeek(seconds)` 验范围、暂停并请求首帧直达；等 `rendered.snapshotId === snapshotId` 再比图。`engine.sim()` 仍保留原字段，outputs 读共享动态 snapshot。`pnpm shoot --beats` 收录 orbit / outputs，与每个 ch+b 直链比较，另比实际矩阵、太阳 uniform、真尺度、北朝上和影窗同尺度。
+
+测试：`tests/space-scene/orbit-rotation.test.ts`（T01–T28、365日期异常、旧24项上限、39拍、clock/context/URL/restoration），独立CC0 `fixtures/orbit-oracles.json`；`tests-e2e/sample-orbit.spec.ts`（9项）。浏览器与性能验收状态以 docs/44 §9 为准，不能把纯函数通过当渲染通过。
+
 ### SpaceScene · 试一试 · 种子（seeds）
 
 docs/41 §4.2–§4.3 E-S1。`sim.kind: "seeds"`：开花植物的种子三件事，三个子模型各自可选（数据里没写的不提供它的量）——`dispersal`（选一个果实 → 它靠什么传播、哪个结构帮了忙）、`timing`（实验室的一个温度 → 一半发芽的中位天数；第 d 天到了没有）、`cups`（萌发测试：几杯种子各在什么条件下 → 查看那天发没发芽、幼苗什么颜色、两杯之间改了几样）。模型只把**有来源的事实按规则组合**（docs/41 D8–D9：哪些条件下发芽、实测的中位天数、NParks 写的传播方式），不编数字。注册走 `SIM_KINDS` → `simQuantities`（`lib/sim/seeds.ts solveSeeds`）→ `quantityKind`（`seedsQuantity`；状态表 `seedsStates`：按子模型读的控件穷举出会出现的状态），没有时间线（`simTimelineChannels` 为 null），`SEPARATE_EXPERIMENTS.seeds = true`（三套互不相干：PLATE 块尾只写本章卡片观察的状态）。纯函数、同步、确定（一次求值 < 0.05 ms，有单测）。严格数据与交叉校验 `seeds-schema.ts`（`seedsSchema`、`seedsIssues`）。完整作者模板：`tests/space-scene/fixtures/seeds-bench.ts`（docs/41 §4.2 的整段 `sim`，按 §0.3 改成四杯 A、B、D、E；另有 §2.6 初稿的五杯 `FIVE_CUPS`）；草稿夹具 `sample-seeds`（背景章 + 传播、温度与天数、四只杯三章）；单测 `tests/space-scene/seeds.test.ts`、`tests/theme/seedling-token.test.ts`；e2e `tests-e2e/sample-seeds.spec.ts`。

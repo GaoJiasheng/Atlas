@@ -1,3 +1,4 @@
+import { getOrbitSession } from '../lib/sim/orbit-session';
 /**
  * The try-it state as the HUD reads it (the try-it card, the circuit diagram,
  * the PLATE readings): the values on show, the model's outputs, the chapter's
@@ -6,7 +7,7 @@
  * The outputs are the stage's: the magnets where the pose on show and the
  * try-it bindings put their parts (lib/sim/carrier.ts).
  */
-import { useMemo } from 'react';
+import { useMemo, useSyncExternalStore } from 'react';
 import { useScene, useSceneContext, useSceneStore } from '../../core/context';
 import type { SceneStore } from '../../core/store';
 import type { SpaceSceneExt } from '../index';
@@ -35,6 +36,9 @@ export function setSim(store: SceneStore<SpaceSceneExt>, sim: SimData, id: strin
 
 export function useSimView(file: Pick<PartsFile, 'sim' | 'parts' | 'poses'>): SimView | null {
   const { chapters } = useSceneContext();
+  const store = useSimStore();
+  const orbit = file.sim?.orbitRotation ? getOrbitSession(store, file.sim) : null;
+  const orbitId = useSyncExternalStore(orbit?.subscribe ?? (() => () => {}), () => orbit?.id ?? 0, () => 0);
   const s = useScene<SpaceSceneExt, { set: SimValues; chapter: string | null; pose: string | null }>((st) => ({ set: st.sim, chapter: st.chapter, pose: st.pose }));
   return useMemo(() => {
     const sim = file.sim;
@@ -42,8 +46,8 @@ export function useSimView(file: Pick<PartsFile, 'sim' | 'parts' | 'poses'>): Si
     const values = resolveSimValues(sim, s.set);
     const state = chapters.find((c) => c.id === s.chapter)?.state as SpaceChapterState | undefined;
     const card = state?.sim?.try ?? null;
-    return { sim, values, outputs: evaluateSimOnStage(sim, file, values, s.pose, card?.observe).outputs, card, chapterSet: state?.sim?.set ?? {} };
-  }, [file, s.set, s.chapter, s.pose, chapters]);
+    return { sim, values, outputs: orbit?.outputs ?? evaluateSimOnStage(sim, file, values, s.pose, card?.observe).outputs, card, chapterSet: state?.sim?.set ?? {} };
+  }, [file, s.set, s.chapter, s.pose, chapters, orbitId, orbit]);
 }
 
 export function useSimStore(): SceneStore<SpaceSceneExt> {

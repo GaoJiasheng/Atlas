@@ -102,3 +102,7 @@ The skills under `.claude/skills/` are working notes for AI assistants, not lice
 Figures and claims in topic texts cite their sources with `[S#]` ids; each
 topic's `data/SOURCES.md` lists them with URLs. Quotations are short and
 attributed; no source text is reproduced beyond that.
+
+## Sun–Earth–Moon orbit engine fixture
+
+`sample-orbit` uses original schematic geometry and no third-party textures or artwork. NASA/JPL numerical parameters support the circular teaching model; website prose and images are not redistributed. The computed 365-day Singapore reference-point table and the independent arithmetic oracle are CC0-1.0, kept in separate files. Source/derived hashes, NOAA/Meeus conventions and metadata edits are recorded in `src/content/topics/sample-orbit/data/SOURCES.md`. The fixture prose/geometry is project CC BY-NC-SA 4.0; there is no BY-SA mixed derivative.

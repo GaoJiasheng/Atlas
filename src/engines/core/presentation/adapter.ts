@@ -84,6 +84,7 @@ export interface SpaceBeatSpec extends BeatBase {
 }
 
 export interface SpaceSavedState {
+  orbitTime?: number | undefined;
   chapter: string | null;
   layers: string[];
   /** The live camera (as the store keeps it, independent of the stage aspect). */

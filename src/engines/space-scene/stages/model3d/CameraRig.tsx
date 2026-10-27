@@ -90,7 +90,9 @@ export function CameraRig({
   minDistance,
   span,
   exerciseView,
+  orbitSession,
 }: {
+  orbitSession?: import("../../lib/sim/orbit-session").OrbitSession | null;
   store: SceneStore<SpaceSceneExt>;
   ui: SpaceUiStore;
   bridge: StageBridge;
@@ -111,6 +113,7 @@ export function CameraRig({
   const stageSize = useRef(size);
   stageSize.current = size;
   const orbit = useStore(ui, (s) => s.orbit);
+  const orbitFrame = useRef({scale:orbitSession?.values[orbitSession.config.display.scale],radius:orbitSession?.display.radii.earth ?? 1,earthMoon:orbitSession ? Math.hypot(...orbitSession.display.centres.moon.map((v,i)=>v-orbitSession.display.centres.earth[i]!)) : 1,earthSun:orbitSession ? Math.hypot(...orbitSession.display.origin) || orbitSession.config.display.schematic.earthOrbitM : 1,transition:store.getState().transition.id});
   // Latest props for the store subscriptions.
   const props = useRef({ chapters, views, sphere, span, exerciseView });
   props.current = { chapters, views, sphere, span, exerciseView };
@@ -404,6 +407,19 @@ export function CameraRig({
       }
       keepAnimating(state.invalidate);
     }
+    if(orbitSession){
+      const frame=orbitFrame.current,scale=orbitSession.values[orbitSession.config.display.scale],id=store.getState().transition.id;
+      const earthMoon=Math.hypot(...orbitSession.display.centres.moon.map((v,i)=>v-orbitSession.display.centres.earth[i]!));
+      const earthSun=Math.hypot(...orbitSession.display.centres.sun.map((v,i)=>v-orbitSession.display.centres.earth[i]!));
+      if(frame.scale!==scale&&frame.transition===id){
+        const lab=orbitSession.snapshot.lab,ratio=lab==='day'||lab==='local-year'?orbitSession.display.radii.earth/frame.radius:lab==='coupled'||lab==='year'?earthSun/frame.earthSun:earthMoon/frame.earthMoon;
+        const cam=current();const centre=lab==='coupled'||lab==='year'?orbitSession.display.centres.sun:orbitSession.display.centres.earth;
+        const mapped:OrbitCamera={...cam,position:cam.position.map((v,i)=>centre[i]!+(v-centre[i]!)*ratio) as [number,number,number],target:cam.target.map((v,i)=>centre[i]!+(v-centre[i]!)*ratio) as [number,number,number]};
+        relax(mapped);if(controls.current)controls.current.maxDistance=Math.max(minDistance*20,Math.hypot(...mapped.position)*4);apply(mapped);
+      }
+      frame.scale=scale;frame.radius=orbitSession.display.radii.earth;frame.earthMoon=earthMoon;frame.earthSun=earthSun;frame.transition=id;
+      const near=Math.min(.01,orbitSession.display.radii.earth*.02),far=Math.max(1000,earthSun*4);if(camera.near!==near||camera.far!==far){camera.near=near;camera.far=far;camera.updateProjectionMatrix();}
+    }
     const t = controls.current?.target;
     if (t) bridge.cameraDistance = camera.position.distanceTo(t);
   });
@@ -429,7 +445,7 @@ export function CameraRig({
       enableDamping
       dampingFactor={0.09}
       minDistance={floor}
-      maxDistance={minDistance * 20}
+      maxDistance={orbitSession ? 1000 : minDistance * 20}
       zoomSpeed={0.8}
       maxPolarAngle={Math.PI * 0.82}
       onStart={() => {

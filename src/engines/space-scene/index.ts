@@ -12,6 +12,8 @@ export const SPACE_VIEW_IDS: readonly SpaceView[] = ['assembled', 'xray', 'explo
 
 /** SpaceScene's fields on top of SceneState (docs/03 §B Explorer). */
 export interface SpaceSceneExt {
+  orbitTime?: number | null;
+  orbitClock?: import("./lib/sim/orbit-clock").OrbitClockState;
   part: string | null;
   view: SpaceView;
   explode: number;
@@ -114,6 +116,7 @@ export const spaceSceneEngine = defineEngine<SpaceSceneExt, SpaceSceneData>({
       demo: null,
       beat: null,
       sim: {},
+      ...(data?.parts.sim?.orbitRotation ? { orbitTime: null } : {}),
       // All groups visible by default.
       layers: data ? data.parts.groups.map((g) => g.id) : [],
     };
@@ -146,6 +149,7 @@ export const spaceSceneEngine = defineEngine<SpaceSceneExt, SpaceSceneData>({
     if (isId(fields.cutaway)) out.cutaway = fields.cutaway;
     if (fields.pose === null || isId(fields.pose)) out.pose = fields.pose;
     if (fields.beat === null || (typeof fields.beat === 'number' && Number.isInteger(fields.beat) && fields.beat >= 0)) out.beat = fields.beat;
+    if (fields.orbitTime !== undefined) out.orbitTime = fields.orbitTime;
     if (fields.sim !== undefined) out.sim = { ...fields.sim };
     return out;
   },

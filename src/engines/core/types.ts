@@ -30,6 +30,7 @@ export interface SceneState {
 
 /** Keys every engine may add on top of `SceneState`, with their URL keys. */
 export interface UrlEngineFields {
+  orbitTime?: number | null;
   /** TimeScene: current time. URL `t`. */
   t?: TimePoint | null;
   /** SpaceScene: beat of the current chapter on show (0-based; `null` = the chapter's own state). URL `b`, 1-based. */
