@@ -6,6 +6,8 @@
 import type { z } from 'zod';
 import type { EngineId } from '../content/schema/topic';
 import {
+  climatologyGeoData, climatologyChapterState,
+  type ClimatologyGeoData, type ClimatologyChapterState,
   timeChapterRefs,
   timeChapterState,
   timeSceneDiagramData,
@@ -49,9 +51,17 @@ export interface EngineSchemaSet {
   topicIssues?(chapters: readonly ChapterInfo[], data: unknown): LessonIssue[];
 }
 
-export function engineSchemas(engine: EngineId, stage: string): EngineSchemaSet {
+export function engineSchemas(engine: EngineId, stage: string, temporalMode?: 'chronological' | 'climatology'): EngineSchemaSet {
   switch (engine) {
     case 'time-scene':
+      if (temporalMode === 'climatology') return {
+        data: climatologyGeoData, chapterState: climatologyChapterState,
+        requiredFiles: ['entities', 'control', 'movements', 'events'],
+        ids: (raw) => { const d = raw as ClimatologyGeoData; return [...d.events.map((e) => ({kind: 'site', id: e.id})), ...(d.presets?.presets ?? []).map((p) => ({kind: 'preset', id:p.id}))]; },
+        chapterRefs: (raw) => { const s = raw as ClimatologyChapterState; return [...(s.highlight ?? []), ...(s.index ?? []), ...(s.beats ?? []).flatMap((b) => b.highlight ?? [])]; },
+        chapterIssues: (raw, data) => { const s = raw as ClimatologyChapterState; const sites = new Set((data as ClimatologyGeoData).events.map((e) => e.id)); const issues = (s.index ?? []).filter((id) => !sites.has(id)).map((id) => `state.index: unknown site "${id}"`); const listed = new Set(s.index ?? []); for (const id of new Set([...(s.highlight ?? []), ...(s.beats ?? []).flatMap((b) => b.highlight ?? [])])) if (sites.has(id) && !listed.has(id)) issues.push(`highlighted site "${id}" must appear in state.index`); return issues; },
+        presetIds: (raw) => ((raw as ClimatologyGeoData).presets?.presets ?? []).map((p) => p.id),
+      };
       if (stage === 'diagram') {
         return {
           data: timeSceneDiagramData,
@@ -115,10 +125,16 @@ export function formatIssues(error: z.ZodError, prefix = ''): string[] {
  * Parse raw engine data at build time. Throws with a readable message so
  * `astro build` fails loudly on bad content.
  */
-export function parseEngineData(engine: EngineId, stage: string, raw: Record<string, unknown>, label: string): unknown {
-  const result = engineSchemas(engine, stage).data.safeParse(raw);
+export function parseEngineData(engine: EngineId, stage: string, raw: Record<string, unknown>, label: string, temporalMode?: 'chronological' | 'climatology'): unknown {
+  const result = engineSchemas(engine, stage, temporalMode).data.safeParse(raw);
   if (!result.success) {
     throw new Error(`Invalid engine data for ${label}:\n  ${formatIssues(result.error).join('\n  ')}`);
   }
   return result.data;
+}
+
+/** The page and CLI validator select the same topic-aware chapter branch. */
+export function validateEngineChapterState(engine: EngineId, stage: string, raw: unknown, label: string, temporalMode?: 'chronological' | 'climatology'): void {
+  const result = engineSchemas(engine, stage, temporalMode).chapterState.safeParse(raw);
+  if (!result.success) throw new Error(`Invalid engine chapter state for ${label}:\n  ${formatIssues(result.error).join('\n  ')}`);
 }

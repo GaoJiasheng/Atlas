@@ -483,6 +483,51 @@ lib/region.ts lib/rivers.ts lib/holders.ts lib/dated.ts lib/localLand.ts   纯�
 colors.ts  time-scene.css
 ```
 
+### 月气候模式（E-MW1–3，docs/50 §4）
+
+`temporalMode: climatology` 是 TimeScene/geo 的显式分支。历史主题缺省 `chronological`，继续使用日期、控制区、playhead 与 Timeline。月份不转换成年份，不经过日期模型。作者最小配置（这些是实际可用 JSON 字段）：
+
+```json
+{
+  "temporalMode": "climatology",
+  "climatology": {"periodId":"clim-1991-2020","startYear":1991,"endYear":2020,"initialMonth":1,"keySources":["S199"]},
+  "monthlyLayers": [
+    {"id":"clim-wind","type":"monthly-climatology","quantity":"wind","file":"sample-climate-wind-850-1991-2020","label":{"en":"Regional wind · 850 hPa","zh":"区域风 · 850 hPa"},"periodId":"clim-1991-2020","sources":["S22","S25","S101"]},
+    {"id":"clim-rain","type":"monthly-climatology","quantity":"rain","file":"sample-climate-rain-gpcp-1991-2020","label":{"en":"Mean rain rate","zh":"平均降水率"},"periodId":"clim-1991-2020","sources":["S32","S25","S102"]}
+  ]
+}
+```
+
+`keySources`（可选）是 KEY 显示规则（雨档、箭头标尺）的来源，跟在每层数据来源芯片后。`file` 是 `public/geo/<file>.json` 的 kebab-case stem；不能是路径或外部 URL。只装一种 quantity 也合法。source 必须在本主题 `sources.json`，period 与主题一致。资源是 docs/50 §4.2 的原始 `monthly-wind` / `monthly-rain` 结构，12 帧、南→北 row-major；非有限数、越界值、坏长度/单位/月序/基准期会在 build/validate 与运行时拒绝。资源按挂载缓存，重试才重取；null 有独立有效掩码，不转成有效 0。
+
+```json
+{
+  "month":12,
+  "camera":{"center":[115,7.5],"zoom":3.35},
+  "layers":["base","sites","clim-wind","clim-rain"],
+  "highlight":["site-singapore"],
+  "index":["site-singapore"],
+  "summary":{"en":"Fixture/test data.","zh":"测试数据。"},
+  "beats":[{"month":12,"camera":{"center":[115,7.5],"zoom":3.35},"layers":["base","sites","clim-wind","clim-rain"],"highlight":["site-singapore"],"caption":{"en":"December fixture view.","zh":"12月测试视图。"}}]
+}
+```
+
+章节/拍必填整数 `month:1…12`，按章 order 和拍数组顺序播放，允许倒月和同月连续拍。章节不能写 `time`，拍不能写 `t` 或 `index`。`state.index` 不重复且只引用静态 site，章及拍高亮地点须在索引中。月模式 `entities=[]`、`movements=[]`、`control={"keyframes":[]}`；events 只能为无 `t/until` 的 site：
+
+```json
+{"id":"site-singapore","kind":"site","at":[103.853875,1.294979],"importance":1,"title":{"en":"Singapore","zh":"新加坡"},"summary":{"en":"City reading anchor, not a weather station.","zh":"城市阅读锚点，不是气象站。"},"sources":["S103"]}
+```
+
+底部唯一章轴复用 `ChapterAxis`，背景章与其他引擎一样是 `BG` 段（docs/08 §2 铁律）；点章落首拍，`,` / `.` 与阅读 ‹/› 走同一路径。月份 range/前后月在 PLATE，手机入口在阅读节拍前；Shift+←/→ 循环月份，range 自己处理方向键/Home/End。探索月份只改 month，不改拍/镜头/图层；字幕旁与 PRESENT 明示原拍月份。PRESENT 进入当前拍，退出恢复进入前状态。
+
+URL `b` 从 1 起，store beat 从 0 起；`m` 只接受整数 1…12。优先级为章首拍→有效 b→有效 m/其他覆盖；无效 b 回首拍，无效 m 忽略，月题移除 t，保留未知 query。与所选拍相同的月份/相机/图层省略，换语言前 flush，popstate 重建同一路径。示例 `?ch=northeast-monsoon&b=3&m=7` 是第三拍、探索7月。
+
+`ClimatologyView` 在 readerTop 放节拍、静态 site/格点详情，在 readerEnd 放地点索引；不使用正文尾 inspector。site 与 cell 互斥，选择打开桌面 reader/手机 sheet。格点雨用各自 footprint，风用覆盖内最近节点（等距取较小索引），无空间插值。雨是 MapLibre 原生格 fill、固定七档 theme token；风是当前地图投影的静态 SVG，最多300箭、锚点相隔44px，静风<0.2m/s用空心圈。KEY 与开关同步，来源使用既有 SourceRefs。
+
+测试沿 `SceneControls.test`：`engine.setClimatologyMonth(n)`、`sampleClimate(lon,lat)`、`climatology()`；后者含月/渲染月/作者月、选择、各 layer status、有效数/实际画出数、loads/geometryBuilds/commits。`stats().climatology` 同一舞台快照；`state().t/playhead=null`。另有 `goToClimatologyBeat(chapter,index)`、`toggleMonthlyLayer(id,on)`、`inspectClimateCell(lon,lat)`、`selectClimatologySite(id)`、`retryClimateLayer(id)`，全部复用 UI 动作。`SceneControls.ready()` 使 `__atlas.ready` 等待首批开启层 ready/error。月份动作是 `lib/climatology-state.ts` 的 `setClimatologyMonth(store, n)`（不在共享 store 里）。`shoot --beats` 每拍检查作者月=store月=rendered月、开着的月层都已 ready（error/loading 判失败），并重新打开每个 `?ch&b`；另截M01/M07/M12、风/雨单开、全关、选点与手机月份入口。
+
+可运行夹具：`sample-climate`（draft、12拍），数据来源/变换哈希见其 `data/SOURCES.md`。人工2×2是测试数据，不能用于正文天气地图。
+
 ### 作者怎么写数据
 
 四个文件放 `data/`（schema 见 docs/03 §A 与 `schema.ts`）：
@@ -2176,10 +2221,11 @@ scripts/math/check-pool.ts   题库草稿自证：pnpm tsx scripts/math/check-po
 | key | 含义 | 取值 | 引擎 | 例 |
 |---|---|---|---|---|
 | `ch` | 当前章节 | 章节 id | 通用 | `ch=power-on` |
-| `b` | 本章的当前拍（章节轴） | 1 起的整数；不写 = 本章自身状态（SpaceScene：打开 = 章节轴上的这一拍，含拍的 `sim.set` 与镜头，URL 里写了的字段优先；MathScene：= 1 时不写；讲解拍之后的一拍是小测，练习章第 k 拍是第 k 题） | SpaceScene、MathScene | `ch=training-the-chest&b=2` |
+| `b` | 本章的当前拍（章节轴） | 1 起的整数；月模式不写 = 首拍；其他引擎不写 = 本章自身状态（SpaceScene：打开 = 章节轴上的这一拍，含拍的 `sim.set` 与镜头，URL 里写了的字段优先；MathScene：= 1 时不写；讲解拍之后的一拍是小测，练习章第 k 拍是第 k 题） | SpaceScene、MathScene、TimeScene climatology | `ch=training-the-chest&b=2` |
 | `layers` | 打开的图层 / 组 | 逗号分隔 id；空值 = 全关 | 通用 | `layers=control,battles` |
 | `cam` | 镜头 | 地图 `lng,lat,zoom[,pitch[,bearing]]`；3D `px,py,pz,tx,ty,tz`；空值 = 无 | 通用 | `cam=103.8,1.35,7.5` |
 | `theme` | 场景主题 | `paper` \| `cinema` | 通用 | `theme=cinema` |
+| `m` | 月气候模式当前月 | 整数 `1…12`，非法忽略；与所选拍相同则省略 | TimeScene climatology | `m=7` |
 | `t` | 当前时间 | `YYYY` / `YYYY-MM` / `YYYY-MM-DD` / `<n>ma`（地质时间，如 `200ma`）；空值 = 无 | TimeScene | `t=1942-02-10` |
 | `hl` | 高亮对象 | 逗号分隔的实体 / 行动 / 事件 id；空值 = 取消高亮 | TimeScene | `hl=battle-of-singapore` |
 | `part` | 选中零件 | 零件 id；空值 = 不选 | SpaceScene | `part=compressor` |
