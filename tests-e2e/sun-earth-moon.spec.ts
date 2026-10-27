@@ -273,7 +273,7 @@ for (const locale of ['en', 'zh']) for (const theme of ['paper', 'cinema']) {
     await expect(page.locator('.atlas-reader')).toContainText(locale === 'en' ? 'Face away from the Sun' : '背向太阳');
     for (const mode of ['xray','cutaway','exploded']) await expect(page.locator(`[data-mode="${mode}"]`)).toBeDisabled();
     await open(page, `?ch=a-tilted-year&b=3&theme=${theme}`, locale);
-    const figure = page.locator('.atlas-reader .atlas-figure img');
+    const figure = page.locator('.atlas-reader .atlas-figure img:visible');
     await expect(figure).toHaveCount(1);
     await expect(figure).toHaveAttribute('src', /sun-earth-moon-parallel-axes\.webp$/);
     await expect(page.locator('.atlas-reader [data-source="S3"]').first()).toBeAttached();

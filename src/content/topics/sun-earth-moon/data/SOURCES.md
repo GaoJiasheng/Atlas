@@ -135,7 +135,7 @@ The earlier `image-audit.json` cover record is stale (different hash/bytes). The
 | Three original generated illustrations and published WebP versions | Project **CC BY-NC-SA 4.0** | Original generated output, not NASA/Science Centre imagery. Existing PNG to WebP conversion only. |
 | NASA, NOAA, HKO, MSS, NUS, SCCC and Science Centre source webpages/illustrations | **Not redistributed** | Used for fact checks only. Readability is not treated as an open-asset licence. |
 
-No CC BY-SA, ODbL or ODC-BY derived asset enters this topic. CC0 table/oracle remain separate from NC-SA material; repository licence notices record these exceptions. No terms acceptance, login or verification bypass was performed.
+No CC BY-SA, ODbL or ODC-BY derived asset enters this topic. CC0 table/oracle remain separate from NC-SA material (original Atlas work with no third-party licence, so the repository licence notices carry no entry for this topic). No terms acceptance, login or verification bypass was performed.
 
 ## Language and editorial limits
 

@@ -770,3 +770,21 @@ T01–T28 的 unit tests 逐项编写；数字容差见 §4.9，clock 用注入 
 | `pnpm shoot` / `pnpm e2e` / GPU | **按本次 BRIEF-CONTENT 的明确沙箱规则跳过**，交主会话执行；e2e 使用 `ATLAS_E2E_PORT=5422`。没有尝试控制用户浏览器/桌面，没有生成或借用舞台截图。 |
 
 §8 浏览器、所有尺寸/语言/主题、标签漏标、运行时网络/console、相机运行跟随、截图目视、实际 calls/triangles/GPU fps 与首屏预算均没有在本轮验收；原清单不据此勾选。发布状态来自用户指示，不能读成“全部浏览器 gates 已绿”。给 Gavin 的逐段审读、代定项和主会话命令见主题 REVIEW.md。没有 git 写操作、package/lockfile 或 review queue 修改。
+
+### 9.4 浏览器验收（Claude，2026-10-27）
+
+Chromium 本机可跑（机器负载 90–140，多代理同时跑浏览器）。审了 Codex 的未提交改动后分两个提交：Codex 内容 + 本节的小修。
+
+**审 diff**：`orbitalTiltGuide`（`orbit-projection.ts`）+ `OrbitDriver` 只改 `plane` 导引的点序，有单测（零倾角 / 弧半径 / 端点与物理轴一致）；`sample-orbit` 的 beats、keys 回归 0 失败。`LICENSE-CONTENT` / `THIRD-PARTY-NOTICES.md` 的新条目已撤回：太阳表和三张插画是原创内容，没有第三方或 share-alike 素材（同夹具时的处理）；`data/SOURCES.md` 末句相应改为“原创，仓库许可声明不设本题条目”。smoke 计数（34 题、68 徽章、science 11、图版 34）由 `smoke.spec.ts` 实跑确认。
+
+**gates**：`pnpm check` 0 errors；`pnpm validate` 58 topics 0 errors；`pnpm test` 160 files / 4277 passed（首次一个超时用例是高负载，立即重跑全过）；`pnpm build` 119 pages。
+
+**shoot** `sun-earth-moon --beats --tasks --keys --layout`，en/zh × paper/cinema 四组：39 拍 × 4 全部落地，39/39 直链同景（en-paper 最终构建首跑有 ch03 两条直链差异，仅负载下出现，空载单独重跑 39/39，另用 400 ms / 6 s 两次读取比对 `engine.orbit()` 无差异）；keys 0 失败，layout 八个尺寸 0 问题，console clean；页面 JS 511.5 KB gz / 11 文件（既有 SpaceScene 共享包基线 467–485 KB，超 docs/02 的 300 KB 是已知遗留；`sample-orbit` 同为 511.5 KB，即本题内容没有增加页面 JS）。逐张目视：背景与 7 章、两主题、两语言；1600×900 HUD 态看了 03–07 的观察卡；390×844、1024×768、1280×720 抽查。科学内容：四个月相拍亮部朝太阳、与观察窗北朝上月相一致（上弦右亮 50.13 %、满月、下弦）；明暗界线朝向太阳；02 章两个至点的轴向屏幕角度相同、受光半球互换；观察窗给出日全食 / 日环食 / 偏食视盘、月全食、安全拍文字；BG.3 真尺度读数 10 mm / 302 mm；两张正文图与封面图均渲染。
+
+**GPU**（`--perf --gpu`，Apple M5 Max / ANGLE Metal，1920×1080，drawing buffer 1520×1023）：各章 2–11 draw calls、5,952–20,712 三角形、60–62 fps，远低于 <50 calls / <0.1 M 三角形的静止目标。
+
+**小修**：04.3、05.3、07.3、07.5 的满月拍月球在 1600×900 HUD 下落在观察卡 / 图层面板后面 → 目标与相机 x 改到 0.3、fov 46；04.2 首个上弦月被演示字幕盖住 → 相机与目标 z 各加 0.2（1.8 / 0.2）。
+
+**e2e**（`CI=1 ATLAS_E2E_PORT=5422`；负载平均 120–250，主会话要求不跑全量，全量由合并时执行）：`sun-earth-moon.spec.ts` 13/13 通过；`smoke.spec.ts` 14/14；`sample-orbit.spec.ts` 除 39 直链一项外 6/6。默认 60 s 超时在这台机器上对三个 spec 都有大量超时（含无关的 `sample-space`），加 `--timeout` 单独重跑后通过；39 直链测试自带 600 s 上限，本机负载下需要 23.6 min，临时抬高上限（已还原）单跑通过。唯一真失败是测试本身：`published content` 四项用 `.atlas-figure img` 计数得 2，因为中英文正文各有一份 `<Figure>` 同在 DOM（一份被 CSS 隐藏），改成 `img:visible` 后四项通过。
+
+**剩余**：`FIXES.md` 五项（地轴无标签、1280 及以下窄屏满月拍被卡遮住、近景导引线过粗、影图条近乎空白、几处小标注），交 Codex 返工后复验；§8 清单中“截图保存到 `docs/screenshots/sun-earth-moon/`”未做（截图只在验收者本机 `shots/`，不进 git）。
