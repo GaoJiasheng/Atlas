@@ -1,0 +1,108 @@
+---
+{
+  "id": "before-you-start",
+  "order": 0,
+  "kind": "background",
+  "title": {
+    "en": "Shared mechanism fixture",
+    "zh": "共用机构测试"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "layers": [
+      "working-motion",
+      "steam-flow"
+    ],
+    "labels": [
+      "beam",
+      "piston",
+      "sun",
+      "planet"
+    ],
+    "camera": {
+      "position": [
+        10,
+        8.5,
+        17
+      ],
+      "target": [
+        -0.4,
+        2.8,
+        0
+      ],
+      "fov": 30
+    },
+    "summary": {
+      "en": "A single mechanism frame keeps the rods, gears and valve routes together.",
+      "zh": "同一份机构帧同步连杆、齿轮和配汽路径。"
+    },
+    "sim": {
+      "set": {
+        "experiment": "mechanism",
+        "motion-mode": "manual",
+        "phase-deg": 0
+      }
+    },
+    "index": {
+      "parts": [
+        "beam",
+        "parallel-inner",
+        "parallel-outer",
+        "parallel-bottom",
+        "radius-rod",
+        "drive-rod",
+        "centre-link",
+        "piston-rod",
+        "pump-rod",
+        "piston",
+        "pump-piston",
+        "shaft",
+        "flywheel",
+        "sun",
+        "planet",
+        "cylinder",
+        "valve-upper-in",
+        "valve-lower-in",
+        "valve-upper-out",
+        "valve-lower-out"
+      ]
+    },
+    "beats": [
+      {
+        "caption": {
+          "en": "A schematic engine fixture with one shared phase.",
+          "zh": "一套使用同一相位的机构示意测试。"
+        }
+      },
+      {
+        "camera": "linkage-view",
+        "labels": [
+          "parallel-inner",
+          "parallel-outer",
+          "parallel-bottom",
+          "radius-rod"
+        ],
+        "caption": {
+          "en": "The crossing rods occupy separate depths. Their crossing is not a joint.",
+          "zh": "交叉杆处在不同深度；交叉处不是铰链。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Draft engine fixture: this chapter checks the model state shown in the caption. Every numerical outcome comes from the design study [S1].
+
+</Lang>
+
+<Lang zh>
+
+引擎草稿测试：本章核对字幕对应的模型状态。所有数值结果来自设计研究 [S1]。
+
+</Lang>

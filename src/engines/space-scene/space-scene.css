@@ -2153,6 +2153,32 @@ button.space-plate__sel:focus-visible {
   fill: var(--ink-2);
 }
 
+/* Sun–Earth–Moon observations (docs/44 E-SEM3) in the existing card slot, or the reader on narrow screens: compact enough for a 720 px stage. */
+.space-orbit { font: .68rem/1.4 var(--font-mono); color: var(--ink-2); max-width: 100%; }
+.space-orbit h3 { font: inherit; color: var(--ink); letter-spacing: .04em; margin: .35rem 0; }
+.space-orbit p { margin: .25rem 0; }
+.space-orbit__view { display: flex; align-items: center; gap: .6rem; }
+.space-orbit__view > p { flex: 1; min-width: 0; margin: 0; }
+.space-orbit__view canvas { flex: none; display: block; width: 88px; height: 88px; }
+.space-orbit svg { display: block; width: 100%; max-height: 110px; touch-action: none; }
+.space-orbit__view svg { flex: none; width: 46%; }
+.space-orbit svg text { font: 9px var(--font-mono); fill: var(--ink-2); }
+.space-orbit button { min-height: 44px; min-width: 44px; padding: .35rem .5rem; border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; }
+.space-orbit button:disabled { opacity: .4; cursor: default; }
+.space-orbit__scale { display: flex; flex-wrap: wrap; gap: .3rem .5rem; align-items: center; }
+.space-orbit__mapping { font-size: .6rem; overflow-wrap: anywhere; color: var(--ink-3); }
+.space-orbit__line { fill: none; stroke: var(--ink-3); stroke-width: .8; }
+.space-orbit__pointer { stroke: var(--signal); stroke-width: 1.4; }
+.space-orbit__sun { fill: var(--en-light); stroke: var(--ink-2); stroke-width: .6; }
+/* The Moon's night side: dark on both plates. */
+.space-orbit__moon { fill: var(--ink); stroke: var(--ink-3); stroke-width: .4; }
+:root[data-theme="cinema"] .space-orbit__moon { fill: var(--panel-solid); }
+.space-orbit__umbra { fill: var(--ink); opacity: .25; }
+.space-orbit__penumbra { fill: var(--ink-3); opacity: .16; }
+.space-orbit__shadow { margin: .3rem 0 0; border-top: 1px solid var(--line); }
+.space-orbit__shadow figcaption { font-size: .6rem; }
+.space-orbit__days { display: flex; justify-content: space-between; align-items: center; gap: .4rem; }
+@media (max-width: 1023px) { .space-orbit { margin: .6rem 0; padding: .6rem 0; border-bottom: 1px solid var(--line); } }
 /* Airfoil SVGs stay inside the existing reader card, including on phones. */
 .space-airfoil-plot { margin: 1rem 0; max-width: 100%; }
 .space-airfoil-plot svg { display: block; width: 100%; height: auto; overflow: visible; }

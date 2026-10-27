@@ -273,9 +273,9 @@ store.getState().chapterTarget(id);                                // 某章的�
 |---|---|---|
 | `bottomBar` | 底部最下 | 时间轴 / Explorer 控件（44px 触控，不随 HUD 缩小，4K 时放大） |
 | `stageOverlay` | 右列，示意卡下 | 控制面板 `ControlPanel`：LAYERS（图层 + 绘制类模式）、TOOLS（其余模式 + 隐藏 HUD）、KEY（图例） |
-| `inspector` | InfoPanel 内，正文之后 | 选中对象详情（TimeScene） |
-| `readerTop` | InfoPanel 滚动区最上，章头正下方、正文之前 | SpaceScene：节拍行 + 选中零件 / 当前动作卡（docs/08 §2 铁律 c、d）；MathScene：节拍行 + 小测托盘 |
-| `readerEnd` | InfoPanel 内，正文之后 | SpaceScene：本章索引（`state.index`）；MathScene：要点 + 课纲对照 |
+| `inspector` | InfoPanel 内，正文之后 | 遗留扩展插槽；选中对象用 readerTop |
+| `readerTop` | InfoPanel 滚动区最上，章头正下方、正文之前 | TimeScene：选中事件 / 实体；SpaceScene：节拍行 + 选中零件 / 当前动作卡（docs/08 §2 铁律 c、d）；MathScene：节拍行 + 小测托盘 |
+| `readerEnd` | InfoPanel 内，正文之后 | TimeScene：本章事件索引；SpaceScene：本章索引（`state.index`）；MathScene：要点 + 课纲对照 |
 | `plate` | 左列底部，章节轨之下 | 次级读数的紧凑块（SpaceScene：PLATE 图版块；MathScene：模型 · 份数 · 标记 · 分数）；手机隐藏 |
 | `card` | 右列顶 | 示意 SVG 卡的**内容**；标题由 `controls.card` 注册，宿主画框和 `A NAME 中文` 表头；注册了 `cardToggle` 时表头是展开按钮（`aria-expanded`），框带 `data-expanded`，展开后高 ≤ 右列 60%，内容自己滚动 |
 | `panel01` `panel02` `panel03` | 底部三块等高面板 | 面板**内容**；标题由 `controls.panels` 注册，宿主画框和 `01 NAME 中文` 表头；没注册标题的面板不出现，一个都没注册时整条面板带不出现（现在三个引擎都不注册） |
@@ -476,12 +476,57 @@ stages/geo/leaders.ts      引线标注（两列、避让、逐帧投影）
 timeline/Timeline.tsx      唯一的底部条（bottomBar）：泳道开关 · 标尺 · 状态串，下方可展开三条泳道（PRESENT 在顶栏）
 hud/HudPanels.tsx          card 参与与面积条带卡（可展开、行可点）、perf 读数
 hud/shared.tsx             useSize / usePlayheadT / useUnit / 斜线图案 / 章节时间窗
-EventInspector.tsx         点事件 → inspector 插槽（Counter / 双方 CounterVersus；细看折叠块；来源上标；伤亡始终显示）
-EntityInspector.tsx        点参与卡的一行 → inspector 插槽（名称、阵营时段、加入 / 退出、当前面积）
+EventInspector.tsx         点事件 → readerTop 插槽（Counter / 双方 CounterVersus；细看折叠块；来源上标；伤亡始终显示）
+EntityInspector.tsx        点参与卡的一行 → readerTop 插槽（名称、阵营时段、加入 / 退出、当前面积）
 lib/time.ts lib/format.ts lib/geo.ts lib/model.ts lib/frame.ts lib/playhead.ts lib/ticks.ts lib/segmentScale.ts lib/stats.ts lib/bloc.ts lib/control.ts lib/bandRows.ts
 lib/region.ts lib/rivers.ts lib/holders.ts lib/dated.ts lib/localLand.ts   纯函数，单测在 tests/time-scene/
 colors.ts  time-scene.css
 ```
+
+### 月气候模式（E-MW1–3，docs/50 §4）
+
+`temporalMode: climatology` 是 TimeScene/geo 的显式分支。历史主题缺省 `chronological`，继续使用日期、控制区、playhead 与 Timeline。月份不转换成年份，不经过日期模型。作者最小配置（这些是实际可用 JSON 字段）：
+
+```json
+{
+  "temporalMode": "climatology",
+  "climatology": {"periodId":"clim-1991-2020","startYear":1991,"endYear":2020,"initialMonth":1,"keySources":["S199"]},
+  "monthlyLayers": [
+    {"id":"clim-wind","type":"monthly-climatology","quantity":"wind","file":"sample-climate-wind-850-1991-2020","label":{"en":"Regional wind · 850 hPa","zh":"区域风 · 850 hPa"},"periodId":"clim-1991-2020","sources":["S22","S25","S101"]},
+    {"id":"clim-rain","type":"monthly-climatology","quantity":"rain","file":"sample-climate-rain-gpcp-1991-2020","label":{"en":"Mean rain rate","zh":"平均降水率"},"periodId":"clim-1991-2020","sources":["S32","S25","S102"]}
+  ]
+}
+```
+
+`keySources`（可选）是 KEY 显示规则（雨档、箭头标尺）的来源，跟在每层数据来源芯片后。`file` 是 `public/geo/<file>.json` 的 kebab-case stem；不能是路径或外部 URL。只装一种 quantity 也合法。source 必须在本主题 `sources.json`，period 与主题一致。资源是 docs/50 §4.2 的原始 `monthly-wind` / `monthly-rain` 结构，12 帧、南→北 row-major；非有限数、越界值、坏长度/单位/月序/基准期会在 build/validate 与运行时拒绝。资源按挂载缓存，重试才重取；null 有独立有效掩码，不转成有效 0。
+
+```json
+{
+  "month":12,
+  "camera":{"center":[115,7.5],"zoom":3.35},
+  "layers":["base","sites","clim-wind","clim-rain"],
+  "highlight":["site-singapore"],
+  "index":["site-singapore"],
+  "summary":{"en":"Fixture/test data.","zh":"测试数据。"},
+  "beats":[{"month":12,"camera":{"center":[115,7.5],"zoom":3.35},"layers":["base","sites","clim-wind","clim-rain"],"highlight":["site-singapore"],"caption":{"en":"December fixture view.","zh":"12月测试视图。"}}]
+}
+```
+
+章节/拍必填整数 `month:1…12`，按章 order 和拍数组顺序播放，允许倒月和同月连续拍。章节不能写 `time`，拍不能写 `t` 或 `index`。`state.index` 不重复且只引用静态 site，章及拍高亮地点须在索引中。月模式 `entities=[]`、`movements=[]`、`control={"keyframes":[]}`；events 只能为无 `t/until` 的 site：
+
+```json
+{"id":"site-singapore","kind":"site","at":[103.853875,1.294979],"importance":1,"title":{"en":"Singapore","zh":"新加坡"},"summary":{"en":"City reading anchor, not a weather station.","zh":"城市阅读锚点，不是气象站。"},"sources":["S103"]}
+```
+
+底部唯一章轴复用 `ChapterAxis`，背景章与其他引擎一样是 `BG` 段（docs/08 §2 铁律）；点章落首拍，`,` / `.` 与阅读 ‹/› 走同一路径。月份 range/前后月在 PLATE，手机入口在阅读节拍前；Shift+←/→ 循环月份，range 自己处理方向键/Home/End。探索月份只改 month，不改拍/镜头/图层；字幕旁与 PRESENT 明示原拍月份。PRESENT 进入当前拍，退出恢复进入前状态。
+
+URL `b` 从 1 起，store beat 从 0 起；`m` 只接受整数 1…12。优先级为章首拍→有效 b→有效 m/其他覆盖；无效 b 回首拍，无效 m 忽略，月题移除 t，保留未知 query。与所选拍相同的月份/相机/图层省略，换语言前 flush，popstate 重建同一路径。示例 `?ch=northeast-monsoon&b=3&m=7` 是第三拍、探索7月。
+
+`ClimatologyView` 在 readerTop 放节拍、静态 site/格点详情，在 readerEnd 放地点索引；不使用正文尾 inspector。site 与 cell 互斥，选择打开桌面 reader/手机 sheet。格点雨用各自 footprint，风用覆盖内最近节点（等距取较小索引），无空间插值。雨是 MapLibre 原生格 fill、固定七档 theme token；风是当前地图投影的静态 SVG，最多300箭、锚点相隔44px，静风<0.2m/s用空心圈。KEY 与开关同步，来源使用既有 SourceRefs。
+
+测试沿 `SceneControls.test`：`engine.setClimatologyMonth(n)`、`sampleClimate(lon,lat)`、`climatology()`；后者含月/渲染月/作者月、选择、各 layer status、有效数/实际画出数、loads/geometryBuilds/commits。`stats().climatology` 同一舞台快照；`state().t/playhead=null`。另有 `goToClimatologyBeat(chapter,index)`、`toggleMonthlyLayer(id,on)`、`inspectClimateCell(lon,lat)`、`selectClimatologySite(id)`、`retryClimateLayer(id)`，全部复用 UI 动作。`SceneControls.ready()` 使 `__atlas.ready` 等待首批开启层 ready/error。月份动作是 `lib/climatology-state.ts` 的 `setClimatologyMonth(store, n)`（不在共享 store 里）。`shoot --beats` 每拍检查作者月=store月=rendered月、开着的月层都已 ready（error/loading 判失败），并重新打开每个 `?ch&b`；另截M01/M07/M12、风/雨单开、全关、选点与手机月份入口。
+
+可运行夹具：`sample-climate`（draft、12拍），数据来源/变换哈希见其 `data/SOURCES.md`。人工2×2是测试数据，不能用于正文天气地图。
 
 ### 作者怎么写数据
 
@@ -500,6 +545,12 @@ colors.ts  time-scene.css
 **`site` 事件**是静态点位（监狱、纪念碑、建筑）：`t` 照写但不参与时间——不进时间轴范围、不进泳道和统计、不脉冲；只在 `sites` 图层打开时显示（小空心菱形 + 中心点），点击同样打开 inspector（眉题 `P-01`），高亮时出引线标注。
 
 章节 `state`：`time`（ISO 三种精度或 `{ ma }`）、`camera`、`layers`、`highlight`（实体/行动/事件 id）、`theme`、`note`（只在背景章：阅读说明）、`summary`（`{ en, zh }`，阅读面板标题下的一句话，也是默认演示字幕）、`question` / `answer`（`{ en, zh }`；没有 `summary` 时阅读面板头部显示 `question`；`answer` 必须配 `question`，目前不渲染），以及可选的 `beats`（演示节拍，见下）。底部条上每章一段，段从本章 `time`（第一拍更早就取第一拍的 `t`）开始，段里每拍一个刻度——**拍就是时间轴的结构**；**章节顺序必须等于时间顺序**（`tests/schemas.test.ts` 对 ww2 有检查）。
+
+**本章事件索引（docs/51 E-IR1）**：`state.index: [loc-dudley, ev-watt-patent]` 是当前章独立、有序的事件 id 数组（省略 = 无按钮，不从前章继承）。只接受本题 `events.json` 的事件，包括 `site` / `milestone`；不接受图层、实体、行动或跨主题 id；重复 id 定位第二项，未知目标定位 `state.index.<i>`。`timeChapterIndexIssues` 注册到 `engineSchemas.chapterIssues`，与原有 highlight 校验分开。
+
+`ChapterIndex.tsx` 放在 `readerEnd`（标题 `time.index.title`，样式同 SpaceScene 的 `.space-index`），按钮使用事件的双语 title，带 `data-time-target`、`aria-pressed`，命中高度至少 44 CSS px。索引选地点开 `sites`、保持日期；选非地点开 `battles`、跳到事件的原始日期（保留日精度），不换章或启动演示；镜头只改 center，保留 zoom / pitch / bearing。非法 id 或演示中返回 false、无副作用。原地图 / 引线选择继续复用唯一的 EventInspector，事件和实体详情移到 `readerTop`；未选择不画空框。宿主 `revealReader()` 打开已有阅读面板 / 手机抽屉并在展开后回到顶部；小于 1024 CSS px 只展开临时抽屉，不覆盖 `sessionStorage['atlas:reader']` 的 dock 折叠偏好，桌面显式选中会沿用原来的 reader 持久化路径打开列。关详情恢复底部条当前所停拍（anchor 的刻度）的高亮；拖时间、跳日期或换章后没有所停拍，恢复章默认。索引与选中 id 不新增 URL 字段。此项不包含阅读节拍行或 `b` 参数适配（E-IR2）。
+
+测试 API：`__atlas.engine.selectEvent(id): boolean` 走索引路径；`__atlas.engine.reader()` 返回 `{ indexIds: string[], selectedId: string | null, detailCount: number }`（详情数量 0 或 1）。纯函数 `lib/reader.ts` 和 schema 有 `tests/time-scene/reader.test.ts` 单测；真实 draft 主题 `industrial-revolution` 作为内容验收样本，不另建占位夹具。
 
 演示节拍（`state.beats`，可选，加法）：
 
@@ -1678,6 +1729,44 @@ docs/40 §4.2 E-HL1。`sim.kind: "table"`：模型不算，只**按控件查有�
 - **validate**（`tableIssues`，parts 文件解析时）：`keys` 是控件、不重复；行的 `when` 恰好写全 `keys`、值合法；每个实验对 `keys` 的全部值组合**恰好一行**（列出缺的、重的）；`set` 的键是输出、种类对得上（数 / `{ value, decimals }` 给数输出，带标签的状态 id 给状态输出）；同一实验每行设定同一组输出；一个输出只属于一个实验；输出不写 `from`、只能是数或状态；`count` 绑定的零件 `repeat.count` ≥ 该输出在表里的最大份数（按 `count` 的取整），否则报"not enough balls"；先猜后看的 `change` 只改 `observe` 所在实验的 `keys`（`tablePredictIssues`，章节校验）。**来源**（`tableSourceIssues`，`pnpm validate` 对照 `data/sources.json`）：每个 `S#` 都在；设定 `sim` 数输出的行至少引一条 `design: true` 的来源（`sources.json` 新的可选字段：主题自己的设计研究；`SOURCES.md` 标注 design study），设定 `typical` 数输出的行至少引一条不是设计研究的来源；只设定状态的行引什么都行。
 - **测试 API**：`__atlas.engine.sim()` 照旧，表模型多一个 `sources`：`{ <typical 输出>: [S#…] }`（此刻那一行的来源）；`copies(partId)`：`count` 绑定此刻画出的份数。
 
+### SpaceScene · 平面横梁机构（`mechanisms`，beam-steam）
+
+docs/52 §4 E-ST1/E-ST2；完整可运行作者例子在 `src/content/topics/sample-mechanism/data/parts.json`，生成器 `src/content/topics/sample-mechanism/generate.mjs`（`node` 直接运行；包括齿廓采样检查）。这是可选的根字段 `mechanisms`（缺省 `[]`，最多一项），**不增加 sim 种类**：压力、三档静态调速器和归一化能量账仍用 `sim.kind: "table"`。不增加 URL 字段、HUD、键位、齿轮 primitive 或通用物理引擎。
+
+机构对象、clock、geometry、parts 的 role 与 ports 均拒收未知键。以下是根条目开头（`parts` / `ports` 按后面的必需角色补全）：
+
+```json
+{
+  "id": "main-engine", "kind": "beam-steam", "origin": [0, 5.6, 0],
+  "clock": {
+    "phaseControl": "phase-deg", "rateControl": "cycle-rate",
+    "modeControl": "motion-mode", "experimentControl": "experiment"
+  },
+  "geometry": {
+    "beamPivot": [0, 0], "shaftCentre": [2.5, -3], "radiusPivot": [-2.5, -0.8],
+    "beamHalfM": 2.5, "connectingRodM": 3, "orbitM": 0.6092838281609874,
+    "shortLinkM": 0.8, "radiusRodM": 1.25, "innerFraction": 0.5,
+    "beamBranch": 1, "parallelBranch": 1, "pistonRodM": 2.4,
+    "cylinderX": -2.5, "radialDisplayClearanceM": 0.003,
+    "nominalStrokeM": 1.2192,
+    "pump": { "beamFraction": -0.4, "sliderX": -1, "rodM": 4.5 }
+  }
+}
+```
+
+- **控件**：phase 是 `step` `[0,90,180,270,360]`；rate 是 `step` `[8,10,12]`；mode 是 `choice` `manual/auto`；experiment 是 `choice` `pressure/mechanism/governor/energy`。控件 id 可改，但须由 clock 引用；标签与选项仍须双语。不把非整步 QA 角写入控件。
+- **必需的 parts 角色**：`beam, innerLink, outerLink, bottomLink, radiusRod, driveRod, centreLink, piston, pistonRod, planet, sun, shaft, flywheel, pumpRod, pumpPiston`，每个恰好一次，目标 part 不重复。杆角色（beam、四根平行机构杆、driveRod、centreLink、pistonRod、pumpRod）写 `{ "part": "…", "restEndpoints": [[x0,y0],[x1,y1]] }`；端点须是 θ=0 的本地 XY 解。其余只写 `{ "part": "…" }`。几何按 θ=0 装配，world XY = 本地 XY + origin；part 自己的 `at` / `rotation` 保留静态深度和形状方向。
+- **独占驱动**：机构与阀芯目标须是独立 primitive（可带 extra）；不与 repeat/bilateral、mesh/rig、独立动画、命名 pose（含章/拍/sim）或 offset/rotate/play/shift/stretch/bend/fill 绑定共用。刚杆用平移和绕 Z 旋转，不缩放。固定汽缸、支架与阀体不登记动态角色。
+- **四端口**：`ports` 恰有 `upperIn/lowerIn/upperOut/lowerOut`。每项如 `{ "part": "valve-upper-in", "openOffset": [0,0.015,0], "flow": { "id": "port-steam", "path": "upper" } }`。`openOffset` 是世界轴向抬阀向量；一个固定 flow/path 只给一个 gate，不同时受 sim visible/intensity/state/tidal 控制，不加移动端点。
+- **求解与校验**：`lib/mechanism.ts` 纯函数 `solveMechanism(thetaRad, geometry, out)` 复用 `createMechanismFrame()` 缓存；圆交点固定 branch，D 的横移保留，太阳与行星相位满足 δs+δp=2θ。死点用实际 dDy/dθ 判断（不是写死 90°/270°），下行只开 upperIn/lowerOut，上行只开 lowerIn/upperOut，切换四口关。`mechanism-schema.ts mechanismIssues` 由 SpaceScene schema 接入 validate：引用/互斥/控件域、4096 帧可达与刚杆残差、32768 帧行程与余隙；错误含 JSON path 和目标 id。
+- **每帧顺序**：共享时钟 → 一次求解 → 零件/阀芯刚体变换 → 既有拆开展示偏移 → 标注、点击代理、流和测试读数。四阀与四 gate 取同一 frame；关 gate 当帧路径 opacity 为零，原有路径显隐与 gate 取 AND。运行求解失败则冻结并关四路，显示双语配置错误。
+- **运行与恢复**：auto + experiment pressure/mechanism + RUN 才推进；pause、REFERENCE、开始 EXPLODED、isolate、solo、隐藏标签页、reduced motion 都冻结。rate 只改后续斜率；cold/work/governor 不重置相位。manual 或 phase 更改立即 seek；新章/拍从 base⊕beat 的 phase 起步。R/E/isolate/solo 退出从原相位继续；P 额外保存/恢复 `{thetaRad,qaHold}`。无机构主题继续走原路径。
+- **链接**：沿用 `ch,b,sim,run,view,pose`；`sim` 整组覆盖拍基线。手动五档可精确静帧分享；auto 链接从声明相位开始，不编码累计运行圈数。无 timeline/replay 就不注册空的 G。
+
+测试 API `__atlas.engine.mechanism(id)`：无机构/未知 id 返回 null；否则返回 `{thetaRad,phaseDeg,cycles,pistonDirection,points,planetAngleRad,sunAngleRad,shaftTurns,ports,linkResidualM,clearanceMarginM,parts,gates}`。`points` 为 A/O/F/P/K/C/B/E/D/S/Q/W 的**未拆开世界米坐标**；`parts[partId].matrix` 是 16 个数的实际绘制矩阵，杆的 `endpoints` 含展示拆开；`gates` 用 `"<flow>:<path>"` 键。`phaseDeg` 在 [0,360)，cycles 和 shaftTurns 保留累计圈数。
+
+`__atlas.engine.seekMechanism("main-engine",45.5)` 仅 QA 瞬态，合法范围为有限 0≤deg≤360，成功返回 true 并保持；360 对应 cycles=1、shaftTurns=2、phaseDeg=0。未知 id、NaN、越界返回 false 且不改状态。用户改 phase/mode 或换章/拍清除 QA hold；读取不改状态。`pnpm shoot sample-mechanism --beats --keys --layout` 复用既有检查，每拍与拍链接另查实际绘制杆长/方向、物理残差、齿相位、阀/门控一致和关路无粒子；用 `--shots` 的 `js` 调 seek 保存齿轮/阀门静帧。全周期、阀芯位移与恢复由 `tests-e2e/sample-mechanism.spec.ts` 读绘制矩阵与流状态验收，不以截图或纯函数结果替代。
+
 ### SpaceScene · 动画频率（`hz`）与整条流的强度
 
 docs/40 §4.3 E-HL2。两条新绑定，任何模型都能用：
@@ -1706,6 +1795,59 @@ docs/40 §4.4 E-HL3。流的可选字段：
 - 两端一律淡入淡出（`ends: fade`）；被同步的动画停了（RUN 关、`enabled` 绑定缓停）粒子跟着停；`prefers-reduced-motion`：粒子不动。可以和数 / 向量 `intensity`、`visible` 同用。
 - **validate**：`sync` 是存在的动画；不能有颜色 `stops`、不能 `ends: open`。**测试**：`tidal.test.ts`（相位 → 速度符号、一周期净位移 0、换频率不跳、随动画停、两端淡出）。
 - **`flat: true`**（任何流的可选字段，与 E-HL4 的两种红配套）：dark plate 上也不发光——普通混合、没有白芯，粒子保持自己的颜色（默认的 cinema 流是叠加混合 + 白芯，深酒红会被洗成粉白、和鲜红分不开）；paper 不变。心肺的血流都写 `flat: true`（`flowMaterial.ts styleFlowMaterial`）。
+
+### SpaceScene · 试一试 · 太阳、地球与月球（orbit-rotation）
+
+`docs/44 §4` 的 E-SEM1–3。完整可解析模板是 `src/content/topics/sample-orbit/data/parts.json`（draft，13 controls、23 outputs、13 selectable parts、2 overlays）；8 章 / 39 拍覆盖三种观察窗、真尺度、离交点、偏食、环食、全月食。这里只施工引擎夹具，未创建正式 `sun-earth-moon` 内容。
+
+注册：`SIM_KINDS` → `simSchema.orbitRotation`（`orbit-rotation-schema.ts`）→ `simQuantities` / `evaluateSim`（`lib/sim/orbit-rotation.ts`）→ `quantityKind` / `ORBIT_STATES`（`orbit-constants.ts`）→ `SEPARATE_EXPERIMENTS['orbit-rotation']=true`。没有 timeline channels；`evaluateSim(sim, values, observe, frames, parts, {timeSeconds})` 在原五参数末尾增加可选 context，旧模型不读它。未知输出和种类不符都报错，不依赖缺量回退。
+
+配置严格使用 `version:1, model:"idealised-circular", units:"km-s-deg", frame:"atlas-ecliptic-y-up"`；`controls` 的键是 `lab, elapsed, year-angle, lunar-angle, spin-angle, obliquity, lunar-tilt, node-angle, observer-lat, moon-range, synchronous, scale-mode, day-index`，值是一一对应的 control id。值集见完整模板 / docs/44 §4.2。只有 `solarYear.control` 可以超出旧 24 项上限，必须是完整有序的 1..365；其他 kind / 控件仍最多24项。全年的验证只遍历日期，避免与无关实验输入作笛卡尔积。
+
+```json
+{
+  "solarYear": {
+    "file": "singapore-sun-2026.json", "control": "day-index", "year": 2026,
+    "lat": 1.3342, "lon": 103.7357, "zoneHours": 8, "thresholdDeg": -0.833, "source": "S33"
+  },
+  "panel": {
+    "byLab": { "moon": "phase", "eclipse": "apparent-discs", "local-year": "solar-year" },
+    "north": "earth-axis"
+  },
+  "sources": ["S8", "S9", "S10", "S33", "S36"]
+}
+```
+
+这是 `orbitRotation` 中的三个字段，不是另一个 sim。年表放主题 `data/`，从研究原文件复制所有365行，只编辑说明元数据；构建时 `linkOrbitTable` 消耗配置的本地文件，校验后装入 `solarYear.table`，浏览器只读已打包数据，不另发请求。作者不手写 `table`。文件名不能含路径、协议、查询串；完整日期、时刻顺序、坐标、阈值和时区都校验。不能用已取整日落减日出替换 `daylight_minutes`。S33 是计算来源，S36 是 `design:true` 的公式/假设来源；不把年表标 TYPICAL。现有 source-id 规则不允许前导零，所以本题来源 S08 / S09 在作者数据中写 S8 / S9。
+
+```json
+[
+  { "output": "body-frame", "part": "earth-body", "bodyTransform": { "body": "earth", "attachment": "centre" } },
+  { "output": "body-frame", "part": "near-side-mark", "bodyTransform": { "body": "moon", "attachment": "surface", "localDirection": [1,0,0], "surfaceFactor": 1.006, "scaleWithRadius": true } },
+  { "output": "solar-directions", "part": "moon-body", "solarIllumination": { "body": "moon", "darkFill": 0.035 } }
+]
+```
+
+这些是 `sim.bind` 项。天体、轴、赤道与标记都使用父体半径为1的局部几何。`surface` 要非零 direction、正 factor≤1.1；`centre` 不写 direction / factor；observer 只能 centre，用地球显示半径安放。绝对位置已包含 parent。`body-frame` 是32个固定点键 `earth.xKm`、`earth.qw`、`earth.radiusKm` 等；`solar-directions` 是6个 `earth.x/y/z`、`moon.x/y/z` 键。向量由求解器产生，不是作者输入。非单位四元数 / 缺键检查见 `validateBodyFrame`。
+
+`bodyTransform` 与 guide writer 的零件禁止重复写变换、pose、动画、explode、offset、rotate、shift、place 或 play；普通显隐和 selection 保持原行为。`OrbitDriver` 更新既有可选 mesh，guide primitive 在首帧由同一节点的动态几何替换，不画第二份锚点。轨道128段；零倾角不画交线，并写“平面重合”。Earth / Moon 的解析太阳明暗覆盖棚灯输出，暗侧填光≤0.05；太阳自发光，不投假点光源影子。所有颜色取已有双主题 token。
+
+```json
+[
+  { "kind":"orbit-guides", "group":"orbital-guides", "parts":{"earthTrack":"earth-track","lunarTrack":"lunar-track","plane":"orbital-plane","nodes":"node-line","rays":"light-ray-guide","ruler":"scale-ruler"}, "axes":true,"tracks":true,"nodes":true,"incidence":true,"terminators":true },
+  { "kind":"orbit-eclipse-shadow", "group":"orbital-guides", "bodies":{"source":"sun","planet":"earth","satellite":"moon"}, "localFrame":"earth-moon", "labs":["moon","eclipse"] }
+]
+```
+
+两种 overlay 沿用 ≤4 上限、when 和 group 引用。phase 是地心北朝上球面射线视图，主相机不旋转它；食遮暗与几何亮部读数分列。apparent-discs 是模型地表点的同角度尺视盘；地平下仍可算几何食型，但写“地平下的排列”。shadow 用物理半径、距离与有限太阳切线在独立同尺度图内画本影、半影和伪本影；不和示意放大球接线。全年图只读365行，固定720–735 min，标“纵轴放大区间”，指针与44px前后日按钮都调用既有 `setSim`。
+
+`orbit-session.ts` 每个 scene 一个会话，会话里的钟 `{seedSeconds,elapsedSeconds,running}` 跟 store 的 `run` / `orbitTime` 同步。stage 在 parts 前推进同一个 t / snapshot，HUD 读同一 outputs。单帧Δ≤0.05s，后台恢复清基准、无补跑，maxSeconds夹住停；暂停按需绘制。除 scale 外改控件停并回 elapsed seed；scale 只映射 display，保持物理 snapshot 实例。coupled/year 用太阳显示原点，其余实验用地球原点；真尺度保持统一 m/km。近景与总览相机在尺度变化时重映射；初始章/拍链接直接使用作者给出的目标镜头。eclipse/local-year 的运行命令禁用。
+
+URL `orb-t=21600.123456`：有限十进制、≤6小数、范围0..31557600；加载暂停，非法回seed。章→拍→URL sim→orb-t，换章/拍清时间；REFERENCE 暂停并保持t，演示退出恢复 controls / t / run。URL只在状态变更 / 暂停同步，不逐帧写。新 kind 不接 timeline 的“终态重播”。
+
+测试 API：`engine.orbit()` 给 snapshotId / t / running / lab / scale、physical km与四元数、display m与倍率、实际 world matrix / uniform 反读的 rendered，以及 panel / shadowFrame；NaN 在此 hook 为 null，附不适用说明。`engine.orbitSeek(seconds)` 验范围、暂停并请求首帧直达；等 `rendered.snapshotId === snapshotId` 再比图。`engine.sim()` 仍保留原字段，outputs 读共享动态 snapshot。`pnpm shoot --beats` 收录 orbit / outputs，与每个 ch+b 直链比较，另比实际矩阵、太阳 uniform、真尺度、北朝上和影窗同尺度。
+
+测试：`tests/space-scene/orbit-rotation.test.ts`（T01–T28、365日期异常、旧24项上限、39拍、clock/context/URL/restoration），独立CC0 `fixtures/orbit-oracles.json`；`tests-e2e/sample-orbit.spec.ts`（9项）。浏览器与性能验收状态以 docs/44 §9 为准，不能把纯函数通过当渲染通过。
 
 ### SpaceScene · 试一试 · 种子（seeds）
 
@@ -1825,7 +1967,7 @@ state:
 
 ### 引线标注（`hud/LeaderLabels.tsx` + `lib/leader-layout.ts`，master-spec J）
 
-- 每条：编号 + EN 名（粗、大写）/ 中文 / 一行说明（`summary` 截断）。锚点左边的标签右对齐，右边的左对齐并带小三角；细引线 = 标签边 → 16 px 水平短线 → 直线到投影锚点上的空心圆。锚点 = 零件包围盒中心；单根 `tube`（管路）的包围盒中心常在半空，改用路径一半长度处的点（`shapes.ts anchorPoint`）。
+- 每条：编号 + EN 名（粗、大写）/ 中文 / 一行说明（`summary` 截断）。锚点左边的标签右对齐，右边的左对齐并带小三角；细引线 = 标签边 → 16 px 水平短线 → 直线到投影锚点上的空心圆。锚点 = 零件包围盒中心；单根 `tube`（管路）的包围盒中心常在半空，改用路径一半长度处的点；闭合环形局部 `lathe` 的中心落在孔内时，改用中高度处真实切面内的点（只在截面为唯一环形区间且不重复时，沿用缩放／镜像／旋转；实体和其他形体不变，`shapes.ts anchorPoint`）。
 - 舞台每帧（`probes.tsx LabelProbe`）把锚点和零件包围盒的屏幕框（8 个角的投影，`x0 y0 x1 y1`）写进 bridge，HUD 侧只写 `transform` / `opacity` / `d` / `cx` / `cy`；字号、文字宽度与 `[data-hud-panel]` 矩形只在 resize、字体加载、标签集合变化时测量。
 - **摆放**（`layoutLeaders`，纯函数，有单测；规则同 TimeScene 的地图引线）：两列对齐。列在 HUD 空带的边上，没有 HUD 块挡着时不超出舞台 22 % / 78 %，并朝本侧锚点（零件屏幕框）收拢。每个标签放在锚点那一侧（空带左右三分之一各归一侧，中间三分之一归近的一列，40 px 迟滞），尽量与锚点齐平。硬约束：在空带内、离 HUD 块 ≥ 8 px、不压别的标签、不压任何被标零件的锚点、锚点在标签的引线一侧、引线 ≤ 舞台宽 35 %。软约束（代价）：与锚点的竖直距离、不压被标零件的屏幕框（别的零件重罚、自己的轻罚）、引线不交叉、不穿过别的标签、上一帧的位置（迟滞，镜头动时不跳）。列里放不下时可以离开列、贴在自己零件旁边（代价更高）。先按优先级贪心放一遍（选中的零件、组、大件），再在其余都放好后把每个标签重放，最多两遍。**允许压在模型上**：没有被标零件的地方可以放；这时文字底下垫一块纸色底板（`.space-co__plate`，0.8 不透明，只在标签框压到某个显示中的零件时出现）。
 - 锚点在背后 / 出屏 / 被剖掉 / 被遮挡 / 落在 HUD 块下 → 淡出。遮挡：节流 raycast，每帧最多 2 个，**只查 HUD 可能标注的零件**（`bridge.labelled`），镜头、零件位置、拆开、移开 / 淡入淡出变了才重查；每个零件最多 5 条射线（锚点，再是包围盒中心到四个角的一半、朝镜头那面），有一条到达就算看得见。X-RAY 时不判遮挡；选中零件永远标注、signal 色高亮、不因遮挡隐藏。
@@ -2109,10 +2251,11 @@ scripts/math/check-pool.ts   题库草稿自证：pnpm tsx scripts/math/check-po
 | key | 含义 | 取值 | 引擎 | 例 |
 |---|---|---|---|---|
 | `ch` | 当前章节 | 章节 id | 通用 | `ch=power-on` |
-| `b` | 本章的当前拍（章节轴） | 1 起的整数；不写 = 本章自身状态（SpaceScene：打开 = 章节轴上的这一拍，含拍的 `sim.set` 与镜头，URL 里写了的字段优先；MathScene：= 1 时不写；讲解拍之后的一拍是小测，练习章第 k 拍是第 k 题） | SpaceScene、MathScene | `ch=training-the-chest&b=2` |
+| `b` | 本章的当前拍（章节轴） | 1 起的整数；月模式不写 = 首拍；其他引擎不写 = 本章自身状态（SpaceScene：打开 = 章节轴上的这一拍，含拍的 `sim.set` 与镜头，URL 里写了的字段优先；MathScene：= 1 时不写；讲解拍之后的一拍是小测，练习章第 k 拍是第 k 题） | SpaceScene、MathScene、TimeScene climatology | `ch=training-the-chest&b=2` |
 | `layers` | 打开的图层 / 组 | 逗号分隔 id；空值 = 全关 | 通用 | `layers=control,battles` |
 | `cam` | 镜头 | 地图 `lng,lat,zoom[,pitch[,bearing]]`；3D `px,py,pz,tx,ty,tz`；空值 = 无 | 通用 | `cam=103.8,1.35,7.5` |
 | `theme` | 场景主题 | `paper` \| `cinema` | 通用 | `theme=cinema` |
+| `m` | 月气候模式当前月 | 整数 `1…12`，非法忽略；与所选拍相同则省略 | TimeScene climatology | `m=7` |
 | `t` | 当前时间 | `YYYY` / `YYYY-MM` / `YYYY-MM-DD` / `<n>ma`（地质时间，如 `200ma`）；空值 = 无 | TimeScene | `t=1942-02-10` |
 | `hl` | 高亮对象 | 逗号分隔的实体 / 行动 / 事件 id；空值 = 取消高亮 | TimeScene | `hl=battle-of-singapore` |
 | `part` | 选中零件 | 零件 id；空值 = 不选 | SpaceScene | `part=compressor` |

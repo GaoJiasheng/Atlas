@@ -155,6 +155,14 @@
   --holder-6: #5b97b8;
   --holder-7: #7f3a5f;
   --holder-8: #3f7a3f;
+  /* Monthly rain-rate bins (docs/50 §4.3), low → high: 0–<1, 1–<2, 2–<4, 4–<8, 8–<16, 16–<32, ≥32 mm/day. */
+  --rain-0: #e2ecec;
+  --rain-1: #c8dbdd;
+  --rain-2: #a4c5ca;
+  --rain-3: #7ba8b2;
+  --rain-4: #548995;
+  --rain-5: #326876;
+  --rain-6: #174856;
   /* Opposite faces (docs/39 D10): indigo, deep green, plum; apart from each other, --signal, --cold and --hot under the three colour-vision deficiencies (ΔE*ab ≥ 10, Machado 2009) and ≥ 3:1 on the paper. */
   --face-1: #5a35c8;
   --face-2: #2d5a34;
@@ -275,6 +283,14 @@
   --holder-6: #86bfdc;
   --holder-7: #b5698f;
   --holder-8: #6fa66a;
+  /* Monthly rain-rate bins (docs/50 §4.3), low → high: 0–<1, 1–<2, 2–<4, 4–<8, 8–<16, 16–<32, ≥32 mm/day. */
+  --rain-0: #303c3e;
+  --rain-1: #3d5155;
+  --rain-2: #4c6970;
+  --rain-3: #5e838d;
+  --rain-4: #78a1ac;
+  --rain-5: #9bbfc7;
+  --rain-6: #c7dce0;
   --face-1: #aaa4ec;
   --face-2: #6cd894;
   --face-3: #c060d8;

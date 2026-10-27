@@ -1,0 +1,156 @@
+---
+{
+  "id": "follow-the-energy",
+  "order": 4,
+  "title": {
+    "en": "Energy account",
+    "zh": "能量账本"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "layers": [
+      "teaching"
+    ],
+    "labels": [
+      "energy-input",
+      "energy-work",
+      "energy-reject"
+    ],
+    "camera": {
+      "position": [
+        -7.5,
+        4.4,
+        9
+      ],
+      "target": [
+        -10,
+        1.8,
+        0
+      ],
+      "fov": 30
+    },
+    "summary": {
+      "en": "A single mechanism frame keeps the rods, gears and valve routes together.",
+      "zh": "同一份机构帧同步连杆、齿轮和配汽路径。"
+    },
+    "sim": {
+      "set": {
+        "experiment": "energy",
+        "work-share": 20,
+        "motion-mode": "manual",
+        "phase-deg": 0
+      },
+      "try": {
+        "vary": "work-share",
+        "keep": [
+          {
+            "en": "One hundred heat-input units",
+            "zh": "一百份输入热量"
+          }
+        ],
+        "observe": [
+          "useful-work",
+          "heat-out"
+        ],
+        "record": true,
+        "predict": {
+          "prompt": {
+            "en": "How will the rejected heat share change?",
+            "zh": "排出热量的份数会怎样变化？"
+          },
+          "start": {
+            "work-share": 20
+          },
+          "change": {
+            "work-share": 30
+          },
+          "observe": "heat-out",
+          "options": [
+            {
+              "id": "more",
+              "label": {
+                "en": "More",
+                "zh": "变大"
+              },
+              "means": "more"
+            },
+            {
+              "id": "less",
+              "label": {
+                "en": "Less",
+                "zh": "变小"
+              },
+              "means": "less"
+            },
+            {
+              "id": "same",
+              "label": {
+                "en": "The same",
+                "zh": "不变"
+              },
+              "means": "same"
+            }
+          ]
+        }
+      }
+    },
+    "index": {
+      "parts": [
+        "energy-input",
+        "energy-work",
+        "energy-reject"
+      ]
+    },
+    "beats": [
+      {
+        "sim": {
+          "set": {
+            "work-share": 10
+          }
+        },
+        "caption": {
+          "en": "The two output rows together equal the separate input row. These are normalized model shares.",
+          "zh": "两排输出合计等于独立的一排输入；这里比较归一化模型份数。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "work-share": 20
+          }
+        },
+        "caption": {
+          "en": "The two output rows together equal the separate input row. These are normalized model shares.",
+          "zh": "两排输出合计等于独立的一排输入；这里比较归一化模型份数。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "work-share": 30
+          }
+        },
+        "caption": {
+          "en": "The two output rows together equal the separate input row. These are normalized model shares.",
+          "zh": "两排输出合计等于独立的一排输入；这里比较归一化模型份数。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Draft engine fixture: this chapter checks the model state shown in the caption. Every numerical outcome comes from the design study [S1].
+
+</Lang>
+
+<Lang zh>
+
+引擎草稿测试：本章核对字幕对应的模型状态。所有数值结果来自设计研究 [S1]。
+
+</Lang>

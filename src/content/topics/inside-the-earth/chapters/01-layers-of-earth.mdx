@@ -1,0 +1,194 @@
+---
+id: layers-of-earth
+order: 1
+title:
+  en: Earth's layers
+  zh: 地球的层
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  cutaway: none
+  run: false
+  part: null
+  pose: null
+  hide: []
+  ghost: []
+  layers:
+  - planet-shells
+  labels: &id001
+  - earth-crust
+  camera:
+    position:
+    - 0.4
+    - 0.35
+    - 4.8
+    target:
+    - 0
+    - -0.25
+    - 0
+    fov: 32
+  summary:
+    en: The moving plates contain crust and rigid uppermost mantle.
+    zh: 移动的板块包括地壳和刚性的最上部地幔。
+  sim:
+    set:
+      wave-kind: p
+      wave-step: 0
+      water-depth: 4000
+      sea-step: 0
+      sea-uplift: true
+      flow-mode: none
+  beats:
+  - part: earth-crust
+    labels: *id001
+    sim:
+      set:
+        wave-kind: p
+        wave-step: 0
+        water-depth: 4000
+        sea-step: 0
+        sea-uplift: true
+        flow-mode: none
+    caption:
+      en: The crust is a thin rocky skin. Its thickness varies; this shell uses a land-crust example.
+      zh: 地壳是很薄的外层岩石，厚度并不均匀；这里采用陆壳示例。
+  - part: earth-mantle
+    labels:
+    - earth-mantle
+    sim:
+      set:
+        wave-kind: p
+        wave-step: 0
+        water-depth: 4000
+        sea-step: 0
+        sea-uplift: true
+        flow-mode: none
+    caption:
+      en: The mantle is mostly solid, yet its rock can deform over geological time.
+      zh: 地幔大部分是固态的，但岩石能在地质时间尺度上变形。
+  - part: earth-outer-core
+    labels:
+    - earth-outer-core
+    - earth-inner-core
+    sim:
+      set:
+        wave-kind: p
+        wave-step: 0
+        water-depth: 4000
+        sea-step: 0
+        sea-uplift: true
+        flow-mode: none
+    caption:
+      en: Liquid metal surrounds the solid inner core. Neither core supplies the volcano's magma.
+      zh: 液态金属包围着固态内核；内外核都不是火山的岩浆储存区。
+  - part: null
+    labels:
+    - earth-inner-core
+    - earth-outer-core
+    sim:
+      set:
+        wave-kind: p
+        wave-step: 0
+        water-depth: 4000
+        sea-step: 0
+        sea-uplift: true
+        flow-mode: none
+    caption:
+      en: In this model, the inner-core boundary is about 1,221 kilometres from the centre and the outer-core boundary about 3,485 kilometres. These are radii.
+      zh: 模型的内核边界离中心约1221千米，外核边界约3485千米；这些是半径。
+  - camera:
+      position:
+      - 0
+      - -1.1
+      - 4
+      target:
+      - 0
+      - -1.4
+      - 0
+      fov: 34
+    labels:
+    - plate-crust
+    - plate-rigid-mantle
+    - plate-deep-mantle
+    sim:
+      set:
+        wave-kind: p
+        wave-step: 0
+        water-depth: 4000
+        sea-step: 0
+        sea-uplift: true
+        flow-mode: none
+    caption:
+      en: The crust and rigid uppermost mantle form a plate together. The mantle below remains mostly solid too.
+      zh: 地壳与刚性的最上部地幔合起来才是板块；下方地幔也大部分是固态。
+  index:
+    parts:
+    - earth-crust
+    - earth-mantle
+    - earth-outer-core
+    - earth-inner-core
+    - plate-crust
+    - plate-rigid-mantle
+    - plate-deep-mantle
+---
+
+<Lang en>
+
+Start at the cut edge. Earth's crust is a thin rocky outer layer, and its thickness varies from place to place. This globe uses a uniform land-crust example of <Num s="S59,S63">30 km</Num>. It keeps that shell thin against Earth's approximate mean radius of <Num s="S58">6,371 km</Num>, rather than making every layer equally wide.
+
+Beneath the crust is the mantle. Most of it is solid rock, although that rock can change shape over geological time. Slowly deforming does not mean that all of it has melted. Farther in, the <Term id="outer-core">outer core</Term> is liquid metal surrounding the solid-metal <Term id="inner-core">inner core</Term>. The volcanic material in later chapters does not come from either core.
+
+A radius runs from the centre to a boundary. In this teaching globe, the inner-core boundary is about <Num s="S59">1,221 km</Num> from the centre and the outer-core boundary about <Num s="S58">3,485 km</Num> away. Those are radii, not layer thicknesses. The model combines rounded values from different NASA pages; it is an approximate sphere for comparison.
+
+Now select the enlarged sample below the globe. Crust and rigid uppermost mantle together form the <Term id="lithosphere">lithosphere</Term>. A moving block of that shell is a <Term id="tectonic-plate">tectonic plate</Term>. The mantle beneath remains mostly solid. A plate can carry both continental and oceanic crust, so a coastline is not automatically a plate boundary. Keep the material layers and the moving shell separate in your explanation.
+
+<More title={{"en": "Radius and thickness", "zh": "半径与厚度"}}>
+
+A radius starts at the centre; a shell thickness is the distance between its inner and outer boundaries. In this design the outer-core thickness is <Num s="S63">2,264 km</Num>, found by subtracting its inner radius from its outer radius.
+
+</More>
+
+<More title={{"en": "A crust example", "zh": "地壳只是示例"}}>
+
+NASA's Earth facts page gives a land average of about <Num s="S59">30 km</Num> and an oceanic example of about <Num s="S59">5 km</Num>. This teaching shell chooses the former uniformly. Real crust is not a uniform shell of that thickness.
+
+</More>
+
+<More title={{"en": "A solid that deforms", "zh": "会变形的固体"}}>
+
+BGS describes solid mantle rock that deforms over very long times. The local partially molten regions in a later chapter do not make the entire mantle a liquid ocean. <TopicLink slug="states-of-matter">Compare solid and liquid</TopicLink>.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+先看切口最外边。地壳是岩石组成的薄外层，各处厚度不同。这个球用均匀的 <Num s="S59,S63">30 千米</Num>陆壳作示例，与地球约 <Num s="S58">6371 千米</Num>的平均半径相比，仍然很薄；并没有把各层画成一样厚。
+
+地壳下方是地幔。它大部分是固态岩石，却能在很长的地质时间内变形。能缓慢变形，不等于全部熔化。更里面，液态金属的<Term id="outer-core">外核</Term>包围着固态金属的<Term id="inner-core">内核</Term>；后面火山里的岩浆并非来自地核。
+
+半径从中心量到某个边界。本模型的内核边界离中心约 <Num s="S59">1221 千米</Num>，外核边界约 <Num s="S58">3485 千米</Num>。这是半径，不是各层厚度。数值取自不同的 NASA 页面，拼成近似球体，方便比较。
+
+再看球体下方放大的小样。地壳与刚性的最上部地幔合称<Term id="lithosphere">岩石圈</Term>，其中移动的块体叫<Term id="tectonic-plate">板块</Term>。下方地幔也大部分是固态。一块板块可以同时带着大陆地壳和海洋地壳，所以海岸线不一定是板块边缘。按材料分层，与按力学性质辨认板块，是不同的读法。岩石圈跨过了地壳和地幔的材料分界，并不是额外套在外面的另一层。同一小样内，各部分要一起辨认，不能只把最上面的薄地壳叫作完整板块。
+
+<More title={{"en": "Radius and thickness", "zh": "半径与厚度"}}>
+
+半径从中心开始，壳层厚度则是内外边界之间的距离。本设计将外核的外半径减去内半径，得到厚度 <Num s="S63">2264 千米</Num>。
+
+</More>
+
+<More title={{"en": "A crust example", "zh": "地壳只是示例"}}>
+
+NASA 的地球介绍给出陆地平均约 <Num s="S59">30 千米</Num>、海洋示例约 <Num s="S59">5 千米</Num>。模型统一采用前者；真实地壳并不是处处同厚的壳。
+
+</More>
+
+<More title={{"en": "A solid that deforms", "zh": "会变形的固体"}}>
+
+英国地质调查局说明，固态地幔岩石能在极长时间内变形。后面看到的局部部分熔融，不等于整个地幔变成液态海洋。可回到<TopicLink slug="states-of-matter">固态与液态</TopicLink>作比较。
+
+</More>
+
+</Lang>

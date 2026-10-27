@@ -1,0 +1,381 @@
+---
+{
+  "id": "before-you-start",
+  "order": 0,
+  "title": {
+    "en": "Before you start",
+    "zh": "开始之前"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "cutaway": "none",
+    "pose": null,
+    "layers": [
+      "steam-supply",
+      "working-motion",
+      "condensing",
+      "regulation"
+    ],
+    "hide": [
+      "nc-cylinder",
+      "nc-piston",
+      "nc-beam",
+      "nc-pump",
+      "nc-jet",
+      "nc-chain",
+      "nc-pump-chain",
+      "energy-input",
+      "energy-work",
+      "energy-reject"
+    ],
+    "ghost": [],
+    "labels": [
+      "boiler",
+      "cylinder",
+      "beam",
+      "flywheel"
+    ],
+    "camera": {
+      "position": [
+        11,
+        9,
+        15
+      ],
+      "target": [
+        -0.5,
+        2.8,
+        0
+      ],
+      "fov": 30
+    },
+    "summary": {
+      "en": "A steam engine links hot water and a moving machine. This study follows one preserved engine and separates recorded dimensions from teaching examples.",
+      "zh": "蒸汽机把加热的水和运转的机器连起来。本研究以一台保存的机器为参考，把记录中的尺寸与教学示例分开。"
+    },
+    "sim": {
+      "set": {
+        "experiment": "mechanism",
+        "motion-mode": "manual",
+        "phase-deg": 0,
+        "cycle-rate": 10,
+        "cold-pressure": 20,
+        "governor-rpm": 90,
+        "work-share": 20
+      }
+    },
+    "index": {
+      "parts": [
+        "boiler",
+        "cylinder",
+        "piston",
+        "piston-rod",
+        "beam",
+        "flywheel",
+        "condenser",
+        "air-pump",
+        "nc-cylinder",
+        "nc-piston",
+        "nc-beam",
+        "nc-pump",
+        "nc-chain",
+        "nc-pump-chain"
+      ]
+    },
+    "note": {
+      "en": "Recorded dimensions, reconstructed links and calculated teaching examples are kept distinct. Industrial history continues in a separate topic.",
+      "zh": "记录尺寸、重建连杆和计算示例分别注明。工业化的历史由另一个主题继续展开。"
+    },
+    "beats": [
+      {
+        "view": "assembled",
+        "explode": 0,
+        "run": false,
+        "part": null,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "steam-supply",
+          "working-motion",
+          "condensing",
+          "regulation"
+        ],
+        "hide": [
+          "nc-cylinder",
+          "nc-piston",
+          "nc-beam",
+          "nc-pump",
+          "nc-jet",
+          "nc-chain",
+          "nc-pump-chain",
+          "energy-input",
+          "energy-work",
+          "energy-reject"
+        ],
+        "ghost": [],
+        "labels": [
+          "boiler",
+          "cylinder",
+          "beam",
+          "flywheel"
+        ],
+        "camera": "hero",
+        "sim": {
+          "set": {
+            "experiment": "mechanism",
+            "motion-mode": "manual",
+            "phase-deg": 0,
+            "cycle-rate": 10,
+            "cold-pressure": 20,
+            "governor-rpm": 90,
+            "work-share": 20
+          }
+        },
+        "caption": {
+          "en": "Follow the parts from the boiler to the cylinder, then through the beam to the flywheel. This is a mechanism study after the preserved Lap engine.",
+          "zh": "从锅炉看到汽缸，再沿着横梁看到飞轮。这是以保存的 Lap 蒸汽机为参考的机构研究。"
+        },
+        "highlight": {
+          "signal": [
+            "boiler",
+            "cylinder",
+            "beam",
+            "flywheel"
+          ]
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "run": false,
+        "part": null,
+        "cutaway": "none",
+        "pose": "nc-fill",
+        "layers": [
+          "teaching"
+        ],
+        "hide": [
+          "boiler",
+          "boiler-water",
+          "furnace",
+          "steam-main",
+          "throttle",
+          "throttle-disc",
+          "valve-chest",
+          "valve-upper-in",
+          "valve-lower-in",
+          "valve-upper-out",
+          "valve-lower-out",
+          "cylinder",
+          "piston",
+          "piston-rod",
+          "beam",
+          "parallel-inner",
+          "parallel-outer",
+          "parallel-bottom",
+          "radius-rod",
+          "drive-rod",
+          "planet",
+          "sun",
+          "centre-link",
+          "shaft",
+          "flywheel",
+          "governor-spindle",
+          "governor-balls",
+          "governor-ball-right",
+          "governor-upper",
+          "governor-upper-right",
+          "governor-lower",
+          "governor-lower-right",
+          "governor-collar",
+          "throttle-link",
+          "throttle-rod",
+          "throttle-crank",
+          "condenser",
+          "injection-jet",
+          "cooling-cistern",
+          "air-pump",
+          "pump-piston",
+          "pump-rod",
+          "hot-well",
+          "feed-pump",
+          "water-pipes",
+          "load-wheel",
+          "energy-input",
+          "energy-work",
+          "energy-reject"
+        ],
+        "ghost": [],
+        "labels": [
+          "nc-cylinder",
+          "nc-beam"
+        ],
+        "camera": "newcomen-view",
+        "sim": {
+          "set": {
+            "experiment": "mechanism",
+            "motion-mode": "manual",
+            "phase-deg": 0,
+            "cycle-rate": 10,
+            "cold-pressure": 20,
+            "governor-rpm": 90,
+            "work-share": 20
+          }
+        },
+        "caption": {
+          "en": "Steam engines were already pumping mine water before Watt’s improvements. The earlier comparison module shows the atmospheric engine’s open cylinder.",
+          "zh": "在瓦特改良之前，蒸汽机已经用于抽出矿井里的水。旁边的比较模块展示大气式蒸汽机的开口汽缸。"
+        }
+      },
+      {
+        "view": "xray",
+        "explode": 0,
+        "run": false,
+        "part": null,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "steam-supply",
+          "working-motion",
+          "condensing",
+          "regulation"
+        ],
+        "hide": [
+          "nc-cylinder",
+          "nc-piston",
+          "nc-beam",
+          "nc-pump",
+          "nc-jet",
+          "nc-chain",
+          "nc-pump-chain",
+          "energy-input",
+          "energy-work",
+          "energy-reject"
+        ],
+        "ghost": [],
+        "labels": [
+          "cylinder",
+          "piston",
+          "piston-rod"
+        ],
+        "camera": "cylinder-view",
+        "sim": {
+          "set": {
+            "experiment": "mechanism",
+            "motion-mode": "manual",
+            "phase-deg": 0,
+            "cycle-rate": 10,
+            "cold-pressure": 20,
+            "governor-rpm": 90,
+            "work-share": 20
+          }
+        },
+        "caption": {
+          "en": "The bore and stroke come from published records. The links and clearances are reconstructed; the motion is prescribed, rather than calculated from the steam force.",
+          "zh": "内径和行程来自公开记录。连杆和间隙经过重建；画面中的运动由相位控制，并不是根据蒸汽推力计算出来的。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "run": false,
+        "part": null,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "steam-supply",
+          "working-motion",
+          "condensing",
+          "regulation",
+          "steam-flow",
+          "water-flow"
+        ],
+        "hide": [
+          "nc-cylinder",
+          "nc-piston",
+          "nc-beam",
+          "nc-pump",
+          "nc-jet",
+          "nc-chain",
+          "nc-pump-chain",
+          "energy-input",
+          "energy-work",
+          "energy-reject"
+        ],
+        "ghost": [],
+        "labels": [
+          "condenser",
+          "air-pump"
+        ],
+        "camera": "condenser-view",
+        "sim": {
+          "set": {
+            "experiment": "mechanism",
+            "motion-mode": "manual",
+            "phase-deg": 0,
+            "cycle-rate": 10,
+            "cold-pressure": 20,
+            "governor-rpm": 90,
+            "work-share": 20
+          }
+        },
+        "caption": {
+          "en": "Water changes between liquid and vapour here. The dots mark routes through the model, while numbers marked SIM are teaching examples.",
+          "zh": "水在这里发生液态与气态之间的变化。小点标出模型中的路径，标着 SIM 的数字是教学示例。"
+        }
+      }
+    ]
+  },
+  "kind": "background"
+}
+---
+
+<Lang en>
+
+<Term id="steam-engine">A steam engine</Term> uses steam to do mechanical work. On the stage, follow the boiler to the <Term id="cylinder">cylinder</Term>, the chamber containing the moving <Term id="piston">piston</Term>. Above it, the beam carries the motion towards the large wheel. This study takes the preserved Lap engine of <Num s="S2">1788</Num> as its reference. It is a reconstructed explanation of a mechanism, rather than a copy of every surviving detail. [S2, S7] <FlyTo preset="hero">Look over the whole engine</FlyTo>
+
+Steam engines were pumping mine water before Watt’s improvements. The separate comparison station shows an earlier atmospheric arrangement. Watt’s working model, condenser patent and commercial machines belong to different stages; the machine on this stage combines later developments. A date attached to one improvement is not the invention date of the complete machine. [S11, S12, S13]
+
+Follow three connected processes: water changes state, pressure acts on the piston, and linked parts transmit motion. The topic <TopicLink slug="states-of-matter" ch="gases">States of Matter: gases</TopicLink> introduces the gaseous state. Here, the coloured dots show routes through pipes. They are not individual molecules, measured flow rates or a temperature scale. [S1, S9]
+
+Use the bottom chapter rail to choose a still frame, then rotate the model to inspect the connections. SIM marks a calculated teaching example. Pressure readings do not drive the animation: the mechanism follows a chosen phase, while its rigid links stay connected. Gaps are enlarged so that moving parts can be seen. Industrial history has a separate reading topic covering people, materials and wider changes. [S1]
+
+<More title={{ en: "Recorded dimensions and a disagreement", zh: "记录中的尺寸与差异" }}>
+
+ASME gives a bore of <Num s="S3">18.75 in</Num>, about <Num s="S3">0.476 m</Num>, and a stroke of <Num s="S3">4 ft</Num>, about <Num s="S3">1.219 m</Num>. The Birmingham catalogue instead records a bore of <Num s="S4">18 in</Num>, or <Num s="S4">0.4572 m</Num>. The reason for the difference is unresolved. Model researcher David K. Hulse reports a flywheel diameter of <Num s="S5">16 ft</Num>, about <Num s="S5">4.88 m</Num>. The conversions follow NIST length definitions; they add no historical measurement precision. [S16]
+
+</More>
+
+<More title={{ en: "Reading the model", zh: "怎样读这个模型" }}>
+
+The bore, stroke and wheel diameter have named references. Link lengths, pipe positions and display clearances belong to this design study. The Newcomen comparison and energy account occupy separate stations. They are teaching models, not extra parts of the Lap engine. Picking an index entry opens that part’s explanation; selecting a beat restores its stated view. [S1]
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+<Term id="steam-engine">蒸汽机</Term>利用蒸汽做机械功。先从台上的锅炉看到<Term id="cylinder">汽缸</Term>，里面装着能运动的<Term id="piston">活塞</Term>；再往上看，横梁把运动传向大轮。本研究以保存的 <Num s="S2">1788</Num> 年 Lap 蒸汽机为参考，重建一套便于观察的机构，并不复制所有实物细节。[S2, S7]<FlyTo preset="hero">看看整台蒸汽机</FlyTo>
+
+在瓦特改良之前，蒸汽机已经用于矿井抽水。旁边的独立工位展示较早的大气式机构。瓦特的工作模型、冷凝器专利和商用机器属于不同阶段；眼前这台机构包含后来的改进，不能把某项专利的日期当作整机的发明日期。[S11, S12, S13]
+
+沿着画面，可以同时追踪物态变化、压力作用和机械传动。<TopicLink slug="states-of-matter" ch="gases">“物质的状态”的“气体”</TopicLink>先介绍气态。管内的小点只标路径，不代表单个分子、实测流量或温度刻度。[S1, S9]
+
+点击底部的节拍刻度，可以切换静帧，再旋转模型看接头。SIM 表示计算出来的教学示例。机构按照给定相位运动，刚杆保持连接；画面并不是用蒸汽推力算出加速度，部分间隙也已放大。本章索引同时列出主机与比较模块，方便在不同工位间找到相应对象。工业化中的劳动者、原料和更广泛的变化，由另一个历史主题继续讨论。[S1]
+
+<More title={{ en: "Recorded dimensions and a disagreement", zh: "记录中的尺寸与差异" }}>
+
+ASME 记录的内径是 <Num s="S3">18.75 英寸</Num>，约 <Num s="S3">0.476 米</Num>；行程是 <Num s="S3">4 英尺</Num>，约 <Num s="S3">1.219 米</Num>。伯明翰档案目录另记内径 <Num s="S4">18 英寸</Num>，即 <Num s="S4">0.4572 米</Num>，差异原因尚未确定。模型研究者 David K. Hulse 报道飞轮直径为 <Num s="S5">16 英尺</Num>，约 <Num s="S5">4.88 米</Num>。换算采用 NIST 的长度定义，不增加历史测量的精度。[S16]
+
+</More>
+
+<More title={{ en: "Reading the model", zh: "怎样读这个模型" }}>
+
+内径、行程和飞轮直径有具名参考。连杆长度、管路位置和显示间隙则属于本设计研究。纽科门比较模块与能量账本设在独立工位，并不是 Lap 蒸汽机多出来的零件。点击本章索引可以查看相应零件，点击节拍可以恢复该拍的取景和状态。[S1]
+
+</More>
+
+</Lang>

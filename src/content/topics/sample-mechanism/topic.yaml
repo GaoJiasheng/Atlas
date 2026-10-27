@@ -1,0 +1,13 @@
+id: sample-mechanism
+title: { en: "Sample: Shared mechanism", zh: "示例：共用机构" }
+subtitle: { en: "Draft fixture for a rigid beam mechanism", zh: "刚性横梁机构的草稿测试" }
+subject: science
+levels: [P5]
+moe: []
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: draft
+note: { en: "Engine fixture · reconstructed links and enlarged clearances · model pressures, static governor positions and energy shares", zh: "引擎测试 · 连杆重建、间隙放大 · 压力、调速器静态位置和能量份数均为模型值" }

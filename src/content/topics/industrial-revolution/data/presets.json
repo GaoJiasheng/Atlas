@@ -1,0 +1,228 @@
+{
+  "presets": [
+    {
+      "id": "view-global",
+      "label": {
+        "en": "Global",
+        "zh": "世界"
+      },
+      "camera": {
+        "center": [
+          70,
+          25
+        ],
+        "zoom": 0.3,
+        "pitch": 0,
+        "bearing": 0
+      }
+    },
+    {
+      "id": "view-britain",
+      "label": {
+        "en": "Britain",
+        "zh": "英国"
+      },
+      "camera": {
+        "center": [
+          -2.6,
+          54.1
+        ],
+        "zoom": 4.5,
+        "pitch": 0,
+        "bearing": 0
+      }
+    },
+    {
+      "id": "view-europe",
+      "label": {
+        "en": "Europe",
+        "zh": "欧洲大陆"
+      },
+      "camera": {
+        "center": [
+          10,
+          50
+        ],
+        "zoom": 3.0,
+        "pitch": 0,
+        "bearing": 0
+      }
+    },
+    {
+      "id": "view-new-england",
+      "label": {
+        "en": "New England",
+        "zh": "新英格兰"
+      },
+      "camera": {
+        "center": [
+          -71.5,
+          41.9
+        ],
+        "zoom": 5.8,
+        "pitch": 0,
+        "bearing": 0
+      }
+    },
+    {
+      "id": "view-atlantic",
+      "label": {
+        "en": "Atlantic",
+        "zh": "大西洋联系"
+      },
+      "camera": {
+        "center": [
+          -46,
+          43
+        ],
+        "zoom": 1.0,
+        "pitch": 0,
+        "bearing": 0
+      }
+    },
+    {
+      "id": "view-russia",
+      "label": {
+        "en": "Russia",
+        "zh": "俄国案例"
+      },
+      "camera": {
+        "center": [
+          30.7,
+          59.3
+        ],
+        "zoom": 4.4,
+        "pitch": 0,
+        "bearing": 0
+      }
+    },
+    {
+      "id": "view-india",
+      "label": {
+        "en": "India",
+        "zh": "印度案例"
+      },
+      "camera": {
+        "center": [
+          73,
+          20
+        ],
+        "zoom": 3.8,
+        "pitch": 0,
+        "bearing": 0
+      }
+    },
+    {
+      "id": "view-china",
+      "label": {
+        "en": "China",
+        "zh": "上海"
+      },
+      "camera": {
+        "center": [
+          121.0,
+          31.2
+        ],
+        "zoom": 4.6,
+        "pitch": 0,
+        "bearing": 0
+      }
+    },
+    {
+      "id": "view-egypt",
+      "label": {
+        "en": "Egypt",
+        "zh": "苏伊士两端"
+      },
+      "camera": {
+        "center": [
+          32.4,
+          30.5
+        ],
+        "zoom": 6.2,
+        "pitch": 0,
+        "bearing": 0
+      }
+    },
+    {
+      "id": "view-singapore-region",
+      "label": {
+        "en": "Singapore Region",
+        "zh": "新加坡区域"
+      },
+      "camera": {
+        "center": [
+          103.8,
+          1.4
+        ],
+        "zoom": 6.0,
+        "pitch": 0,
+        "bearing": 0
+      }
+    },
+    {
+      "id": "view-indian-ocean",
+      "label": {
+        "en": "Indian Ocean",
+        "zh": "印度洋"
+      },
+      "camera": {
+        "center": [
+          91,
+          8
+        ],
+        "zoom": 2.5,
+        "pitch": 0,
+        "bearing": 0
+      }
+    },
+    {
+      "id": "view-japan",
+      "label": {
+        "en": "Japan",
+        "zh": "日本案例"
+      },
+      "camera": {
+        "center": [
+          139.7,
+          35.5
+        ],
+        "zoom": 5.0,
+        "pitch": 0,
+        "bearing": 0
+      }
+    },
+    {
+      "id": "view-north-china",
+      "label": {
+        "en": "North China",
+        "zh": "华北"
+      },
+      "camera": {
+        "center": [
+          118,
+          39.5
+        ],
+        "zoom": 4.7,
+        "pitch": 0,
+        "bearing": 0
+      }
+    },
+    {
+      "id": "view-malaya",
+      "label": {
+        "en": "Malaya",
+        "zh": "马来亚"
+      },
+      "camera": {
+        "center": [
+          102.1,
+          3.5
+        ],
+        "zoom": 5.0,
+        "pitch": 0,
+        "bearing": 0
+      }
+    }
+  ]
+}
