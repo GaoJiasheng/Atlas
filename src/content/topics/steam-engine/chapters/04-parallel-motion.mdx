@@ -1,0 +1,347 @@
+---
+{
+  "id": "parallel-motion",
+  "order": 4,
+  "title": {
+    "en": "A nearly straight path",
+    "zh": "近似直线的路径"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "cutaway": "none",
+    "pose": null,
+    "layers": [
+      "working-motion"
+    ],
+    "hide": [
+      "nc-cylinder",
+      "nc-piston",
+      "nc-beam",
+      "nc-pump",
+      "nc-jet",
+      "nc-chain",
+      "nc-pump-chain",
+      "energy-input",
+      "energy-work",
+      "energy-reject",
+      "steam-main",
+      "water-pipes"
+    ],
+    "ghost": [],
+    "labels": [
+      "beam",
+      "parallel-inner",
+      "radius-rod",
+      "piston-rod"
+    ],
+    "camera": {
+      "position": [
+        -1,
+        7.7,
+        6.5
+      ],
+      "target": [
+        -1.2,
+        5,
+        0
+      ],
+      "fov": 30
+    },
+    "summary": {
+      "en": "The end of a rocking beam follows an arc. Watt’s linked bars give the piston rod a path that is nearly straight.",
+      "zh": "摆动横梁的端点走弧线。瓦特的连杆组合让活塞杆得到一条近似直线的路径。"
+    },
+    "sim": {
+      "set": {
+        "experiment": "mechanism",
+        "motion-mode": "manual",
+        "phase-deg": 0,
+        "cycle-rate": 10,
+        "cold-pressure": 20,
+        "governor-rpm": 90,
+        "work-share": 20
+      }
+    },
+    "index": {
+      "parts": [
+        "beam",
+        "parallel-inner",
+        "parallel-outer",
+        "parallel-bottom",
+        "radius-rod",
+        "piston-rod"
+      ]
+    },
+    "beats": [
+      {
+        "view": "assembled",
+        "explode": 0,
+        "run": false,
+        "part": null,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "working-motion"
+        ],
+        "hide": [
+          "nc-cylinder",
+          "nc-piston",
+          "nc-beam",
+          "nc-pump",
+          "nc-jet",
+          "nc-chain",
+          "nc-pump-chain",
+          "energy-input",
+          "energy-work",
+          "energy-reject",
+          "steam-main",
+          "water-pipes"
+        ],
+        "ghost": [],
+        "labels": [
+          "beam",
+          "piston-rod"
+        ],
+        "camera": "linkage-view",
+        "sim": {
+          "set": {
+            "experiment": "mechanism",
+            "motion-mode": "manual",
+            "phase-deg": 0,
+            "cycle-rate": 10,
+            "cold-pressure": 20,
+            "governor-rpm": 90,
+            "work-share": 20
+          }
+        },
+        "caption": {
+          "en": "The beam rocks about a fixed pivot. A point at its end follows an arc, so it cannot simply be fixed directly to a straight-moving piston rod.",
+          "zh": "横梁绕固定支点摆动，端点走的是弧线，因此不能简单地直接固定在直线运动的活塞杆上。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "run": false,
+        "part": null,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "working-motion"
+        ],
+        "hide": [
+          "nc-cylinder",
+          "nc-piston",
+          "nc-beam",
+          "nc-pump",
+          "nc-jet",
+          "nc-chain",
+          "nc-pump-chain",
+          "energy-input",
+          "energy-work",
+          "energy-reject",
+          "steam-main",
+          "water-pipes"
+        ],
+        "ghost": [
+          "cylinder",
+          "piston",
+          "piston-rod",
+          "beam",
+          "parallel-outer",
+          "parallel-bottom",
+          "drive-rod",
+          "planet",
+          "sun",
+          "centre-link",
+          "shaft",
+          "flywheel",
+          "load-wheel",
+          "engine-frame"
+        ],
+        "labels": [
+          "parallel-inner",
+          "radius-rod"
+        ],
+        "camera": "linkage-view",
+        "sim": {
+          "set": {
+            "experiment": "mechanism",
+            "motion-mode": "manual",
+            "phase-deg": 90,
+            "cycle-rate": 10,
+            "cold-pressure": 20,
+            "governor-rpm": 90,
+            "work-share": 20
+          }
+        },
+        "caption": {
+          "en": "A short link joins the beam to a radius rod with its own fixed pivot. Their combined motion gives a nearly straight path.",
+          "zh": "一根短连杆把横梁与另一根有固定支点的摇杆连起来。它们的组合运动得到近似直线的路径。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "run": false,
+        "part": null,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "working-motion"
+        ],
+        "hide": [
+          "nc-cylinder",
+          "nc-piston",
+          "nc-beam",
+          "nc-pump",
+          "nc-jet",
+          "nc-chain",
+          "nc-pump-chain",
+          "energy-input",
+          "energy-work",
+          "energy-reject",
+          "steam-main",
+          "water-pipes"
+        ],
+        "ghost": [],
+        "labels": [
+          "parallel-inner",
+          "parallel-outer",
+          "parallel-bottom",
+          "piston-rod"
+        ],
+        "camera": "linkage-view",
+        "sim": {
+          "set": {
+            "experiment": "mechanism",
+            "motion-mode": "manual",
+            "phase-deg": 180,
+            "cycle-rate": 10,
+            "cold-pressure": 20,
+            "governor-rpm": 90,
+            "work-share": 20
+          }
+        },
+        "caption": {
+          "en": "The added parallelogram carries that motion to the piston rod. The crossing bars pass at different depths; there is no joint at the crossing.",
+          "zh": "加上的平行四边形把这一运动传到活塞杆。交叉的杆件处于不同深度，交叉处没有铰链。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "run": false,
+        "part": null,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "working-motion"
+        ],
+        "hide": [
+          "nc-cylinder",
+          "nc-piston",
+          "nc-beam",
+          "nc-pump",
+          "nc-jet",
+          "nc-chain",
+          "nc-pump-chain",
+          "energy-input",
+          "energy-work",
+          "energy-reject",
+          "steam-main",
+          "water-pipes"
+        ],
+        "ghost": [],
+        "labels": [
+          "piston-rod",
+          "radius-rod"
+        ],
+        "camera": {
+          "position": [
+            -1.5,
+            6.2,
+            3.8
+          ],
+          "target": [
+            -2.45,
+            4.9,
+            0
+          ],
+          "fov": 30
+        },
+        "sim": {
+          "set": {
+            "experiment": "mechanism",
+            "motion-mode": "manual",
+            "phase-deg": 270,
+            "cycle-rate": 10,
+            "cold-pressure": 20,
+            "governor-rpm": 90,
+            "work-share": 20
+          }
+        },
+        "caption": {
+          "en": "This is an approximate straight line. Our reconstructed link lengths give less than two millimetres of sideways movement, with display clearances enlarged to show it.",
+          "zh": "这是一条近似直线。本研究重建的连杆尺寸产生不到两毫米的横向移动，显示间隙也已放大。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+The beam turns about a fixed support. Its end follows an arc, while the piston rod must pass through the cylinder’s seal along a nearly straight path. Simply fastening the rod to the beam end would force these paths together. The linked bars above the cylinder provide a different connection, with joints that allow the members to turn relative to one another. [S6] <FlyTo preset="linkage-view">Look at the links above the cylinder</FlyTo>
+
+Watt’s <Term id="parallel-motion">parallel motion</Term> combines an approximate straight-line linkage with a parallelogram. A short inner link joins the beam to a radius rod. The beam has its own fixed <Term id="pivot">pivot</Term>, and the radius rod turns about a different fixed pivot. These supports must stay separate: joining them would create a different mechanism. The moving joints trace paths determined by the lengths of the connected bars. [S6]
+
+The added parallelogram carries the nearly straight motion to the piston rod. Trace its outline around the inner link, the beam section, the hanging outer link and the bottom link. Some bars appear to cross when viewed from the front. Rotate the model to see that they occupy different depths. There is no hinge at their crossing, so they pass without becoming another joint. [S6]
+
+Choose the successive still phases on the beat rail and watch the output connection. Its path is close to straight, rather than mathematically exact. How close depends on the chosen lengths. This reconstructed geometry preserves the linked motion and allows a small sideways movement; the displayed gaps are enlarged so that the difference remains visible. The illustration explains the connections, not their manufacturing dimensions. [S1, S6, S14]
+
+<Figure src="figures/steam-engine-parallel-motion" alt={{ en: "A hinged parallelogram attached to a beam and a separately pivoted radius rod, with one descending piston rod and no joint at the crossing.", zh: "横梁连接铰接平行四边形，另有独立支点的摇杆；一根活塞杆向下伸出，杆件交叉处没有铰链。" }} caption={{ en: "Watt’s parallel motion: a hinged parallelogram and a separately pivoted radius rod. The crossing is not a joint.", zh: "瓦特平行运动机构：铰接平行四边形与有独立支点的摇杆；交叉处不是铰链。" }} />
+
+<More title={{ en: "An approximate line", zh: "近似直线" }}>
+
+The study’s calculated sideways range is about <Num s="S1">1.795 mm</Num> over a full cycle. This is a result for these reconstructed lengths, not an error quoted for every Watt engine. The display’s radial clearance is <Num s="S1">3 mm</Num>. A small numerical error in checking rod closure is a calculation tolerance, not a claim about the precision of historical construction. [S1]
+
+</More>
+
+<More title={{ en: "Read the connections first", zh: "先读连接关系" }}>
+
+The historical reference distinguishes fixed beam and radius-rod supports from the moving joints. A short schematic can show the approximate straight-line idea while leaving out the parallelogram that carries it to the output. This model includes that complete arrangement. The generated illustration was checked against the historical topology, but no dimensions were measured from it. [S6, S14]
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+横梁绕固定支座摆动，端点走的是弧线；活塞杆穿过汽缸密封口时，却需要近似直线的路径。若把杆简单固定在横梁端点，两种路径就会冲突。汽缸上方的连杆用可转动的连接点，把这两种运动接起来。[S6]<FlyTo preset="linkage-view">看看汽缸上方的连杆</FlyTo>
+
+瓦特的<Term id="parallel-motion">平行运动机构</Term>，把近似直线机构与平行四边形组合起来。内侧短连杆连接横梁和摇杆。横梁有自己的固定<Term id="pivot">支点或枢轴</Term>，摇杆则绕另一个固定点转动，两个固定点不能合并。活动连接点的路径，由相连杆件的长度共同决定。[S6]
+
+加上的平行四边形，把近似直线运动传到活塞杆。沿内侧短杆、横梁的一段、外侧吊杆和底杆，可以找到它的轮廓。正面看似交叉的杆，实际上处于不同深度；旋转模型便能看清。交叉处没有铰链，两根杆没有在那里接成新的关节。[S6]
+
+依次点击拍轴上的静态相位，观察输出连接点。它走得接近直线，却不是数学上的精确直线，接近程度还取决于杆长。本研究保留重建几何产生的微小横移，并放大显示间隙。配图只用来解释哪根杆接在哪里，不能当作制造尺寸图。[S1, S6, S14]
+
+<Figure src="figures/steam-engine-parallel-motion" alt={{ en: "A hinged parallelogram attached to a beam and a separately pivoted radius rod, with one descending piston rod and no joint at the crossing.", zh: "横梁连接铰接平行四边形，另有独立支点的摇杆；一根活塞杆向下伸出，杆件交叉处没有铰链。" }} caption={{ en: "Watt’s parallel motion: a hinged parallelogram and a separately pivoted radius rod. The crossing is not a joint.", zh: "瓦特平行运动机构：铰接平行四边形与有独立支点的摇杆；交叉处不是铰链。" }} />
+
+<More title={{ en: "An approximate line", zh: "近似直线" }}>
+
+本研究算得完整周期的横移范围约 <Num s="S1">1.795 毫米</Num>，只适用于这里重建的杆长，不能当作所有瓦特机构共有的误差。模型显示径向间隙为 <Num s="S1">3 毫米</Num>。检查刚杆闭合时的微小数值残差，属于计算容差，并不代表历史制造精度。[S1]
+
+</More>
+
+<More title={{ en: "Read the connections first", zh: "先读连接关系" }}>
+
+历史参考图明确区分横梁、摇杆各自的固定支点与活动关节。常见简图可以先解释近似直线原理，却省去把运动传到输出端的平行四边形。本模型保留完整组合。插图已按历史图核对连接拓扑，但没有从生成的图像量取杆长。[S6, S14]
+
+</More>
+
+</Lang>

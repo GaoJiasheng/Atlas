@@ -745,3 +745,13 @@ phaseDeg 在 [0,360)，cycles=θ/2π，shaftTurns=δs/2π 保留累计圈数，�
 剩余工作仅为在获准运行 Chromium 的环境重新执行上述浏览器门槛、逐张看 EN/ZH × paper/cinema 拍图/五相位剖面，并测绘制/加载预算；`sample-mechanism` 保持 draft，未将 §8 或生产发布标成完成。
 
 **浏览器验收（2026-10-27，Claude 代理补跑，取代上文第 5 条和表中三行浏览器记录）**：`pnpm shoot sample-mechanism --beats --keys --layout`（paper、cinema）控制台干净，键 / 布局 / 拍 0 失败，16/16 拍链接落在演示场景；看过两套主题拍图、1024×768 布局和调速器、能量章：主梁随拍摆动、活塞杆始终竖直、太阳行星轮与飞轮逐拍换姿。回归 `--beats --keys`：aircon、energy-conversion、sample-materials、sample-heart 0 失败；b200-server 软件 GL 下两次截图超时（机器负载 50–100），`--gpu` 下 0 失败。`CI=1 pnpm e2e` 344/346，失败的 ancient-civilisations:59 与 sample-heart:87 单独复跑通过（负载抖动），sample-mechanism 11/11 通过。仍未做：ZH 截图、`--perf --gpu` 绘制与加载预算，留给生产 steam-engine 验收。
+
+### 9.2 生产内容施工（2026-10-27；浏览器门槛交主会话）
+
+`steam-engine` 已从 §9.1 的 `sample-mechanism` 夹具扩展：背景加七章、36 个定稿双语字幕、四卡、56 可选件和 4 context、7 组/链路卡 4 列、6 条流、15 行表、3 调速姿态/4 纽科门端态、16 来源、16 名词、3 张批准插图。新增 `generate.mjs` 仅重建 parts.json，`qa-shots.json` 保存五相位、交叉杆与泵上行取景。没有引擎、依赖、package/lockfile、review-queue 或 git 写入改动。
+
+内容数据修正：02/07 索引分别补 pump-rod/boiler-water，保证 56 件覆盖；00/06 保留 14 项。linkage-view 及 02.1/05.2/07.3 镜头经 CPU 全视口投影调整；36 拍标签锚点均在 16:9 视口内，**尚不能证明 HUD 避让、遮挡和手机取景**。节流阀片 rest 朝向改为随姿态绕 Z 改变 Y 轴汽路遮挡，实际法向有单测；示意皮带/直角取力没有与主机速度联立。来源 S1/S14 因现有 schema 仅允许 HTTP(S) 而不设虚构 URL；六份 800/1600 图外另导出两份现有 Figure 所需 1200×900。三张最终 PNG 的哈希及父快照复用、PD 图身份和 NC-SA 派生清单见 SOURCES/AUDIT 及根许可登记。
+
+`pnpm check`：0 errors/0 warnings、3 既有 hints；`pnpm validate`：57 topics、0/0；`pnpm test`：159 files、4256/4256（本主题 20/20）；`pnpm build`：117 pages。生产 e2e 11 条成功枚举但未运行。独立 32768 帧生产机构扫描、刚杆端点/静态姿态/链段/阀片/算式/字幕数值检查通过。CPU 几何最多 59 个可见 pieces、122900 triangles，无非有限顶点；此计数不含实际阴影/流/高亮等渲染开销，不能冒充 draw calls 或 GPU 性能。最终日志在 `/private/tmp/atlas-steam-content-{check,validate,test,build}.log`。
+
+**本轮 brief 明确禁止在 sandbox 运行浏览器 gates 或用用户浏览器/桌面绕过**，因此 `pnpm shoot`、手机目视、双语双主题逐拍、绘制/加载预算及 `CI=1 ATLAS_E2E_PORT=5421 pnpm e2e` 留给主会话，截图 0 张，未声称视觉验收通过。依 §8 保持 draft；验收完再 published 并更新 smoke 计数。姊妹主题尚不存在，三个规定位置的 industrial-revolution 链接只登记在 REVIEW、产品保留普通双语阅读说明；目标实际 published 后生效。Gavin 的全部 D1–D12 默认与中文优先审阅清单见 REVIEW.md。

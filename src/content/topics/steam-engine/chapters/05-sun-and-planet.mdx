@@ -1,0 +1,423 @@
+---
+{
+  "id": "sun-and-planet",
+  "order": 5,
+  "title": {
+    "en": "From rocking to rotation",
+    "zh": "从摆动到转动"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "cutaway": "none",
+    "pose": null,
+    "layers": [
+      "working-motion",
+      "regulation"
+    ],
+    "hide": [
+      "nc-cylinder",
+      "nc-piston",
+      "nc-beam",
+      "nc-pump",
+      "nc-jet",
+      "nc-chain",
+      "nc-pump-chain",
+      "energy-input",
+      "energy-work",
+      "energy-reject"
+    ],
+    "ghost": [],
+    "labels": [
+      "drive-rod",
+      "planet",
+      "sun",
+      "flywheel"
+    ],
+    "camera": {
+      "position": [
+        11,
+        9,
+        15
+      ],
+      "target": [
+        -0.5,
+        2.8,
+        0
+      ],
+      "fov": 30
+    },
+    "summary": {
+      "en": "A connecting rod carries a gear around another gear on the output shaft. The pair converts rocking motion into rotation.",
+      "zh": "传动杆带着一个齿轮，绕着输出轴上的另一个齿轮运动。这对齿轮把摆动转换成转动。"
+    },
+    "sim": {
+      "set": {
+        "experiment": "mechanism",
+        "motion-mode": "manual",
+        "phase-deg": 0,
+        "cycle-rate": 10,
+        "cold-pressure": 20,
+        "governor-rpm": 90,
+        "work-share": 20
+      }
+    },
+    "index": {
+      "parts": [
+        "beam",
+        "drive-rod",
+        "planet",
+        "sun",
+        "centre-link",
+        "shaft",
+        "flywheel",
+        "load-wheel",
+        "piston"
+      ]
+    },
+    "beats": [
+      {
+        "view": "assembled",
+        "explode": 0,
+        "run": false,
+        "part": null,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "working-motion",
+          "regulation"
+        ],
+        "hide": [
+          "nc-cylinder",
+          "nc-piston",
+          "nc-beam",
+          "nc-pump",
+          "nc-jet",
+          "nc-chain",
+          "nc-pump-chain",
+          "energy-input",
+          "energy-work",
+          "energy-reject"
+        ],
+        "ghost": [],
+        "labels": [
+          "beam",
+          "drive-rod",
+          "flywheel"
+        ],
+        "camera": "hero",
+        "sim": {
+          "set": {
+            "experiment": "mechanism",
+            "motion-mode": "manual",
+            "phase-deg": 0,
+            "cycle-rate": 10,
+            "cold-pressure": 20,
+            "governor-rpm": 90,
+            "work-share": 20
+          }
+        },
+        "caption": {
+          "en": "The piston and beam move back and forth. A factory shaft needs rotation, so another mechanism connects these motions.",
+          "zh": "活塞和横梁来回运动，工厂的传动轴却需要转动，因此要用另一套机构把两种运动连接起来。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "run": false,
+        "part": null,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "working-motion",
+          "regulation"
+        ],
+        "hide": [
+          "nc-cylinder",
+          "nc-piston",
+          "nc-beam",
+          "nc-pump",
+          "nc-jet",
+          "nc-chain",
+          "nc-pump-chain",
+          "energy-input",
+          "energy-work",
+          "energy-reject"
+        ],
+        "ghost": [],
+        "labels": [
+          "drive-rod",
+          "planet",
+          "sun"
+        ],
+        "camera": {
+          "position": [
+            5.2,
+            5.4,
+            7
+          ],
+          "target": [
+            2.5,
+            3.8,
+            0
+          ],
+          "fov": 30
+        },
+        "sim": {
+          "set": {
+            "experiment": "mechanism",
+            "motion-mode": "manual",
+            "phase-deg": 90,
+            "cycle-rate": 10,
+            "cold-pressure": 20,
+            "governor-rpm": 90,
+            "work-share": 20
+          }
+        },
+        "caption": {
+          "en": "The planet gear is fixed to the connecting rod. It rocks with that rod rather than spinning freely on its own axle.",
+          "zh": "行星轮固定在传动杆上，随杆件摆动，并不是在自己的轴上自由空转。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "run": false,
+        "part": null,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "working-motion",
+          "regulation"
+        ],
+        "hide": [
+          "nc-cylinder",
+          "nc-piston",
+          "nc-beam",
+          "nc-pump",
+          "nc-jet",
+          "nc-chain",
+          "nc-pump-chain",
+          "energy-input",
+          "energy-work",
+          "energy-reject"
+        ],
+        "ghost": [],
+        "labels": [
+          "centre-link",
+          "planet",
+          "sun",
+          "shaft"
+        ],
+        "camera": {
+          "position": [
+            5.1,
+            3.8,
+            3.8
+          ],
+          "target": [
+            2.5,
+            2.6,
+            0
+          ],
+          "fov": 30
+        },
+        "sim": {
+          "set": {
+            "experiment": "mechanism",
+            "motion-mode": "manual",
+            "phase-deg": 180,
+            "cycle-rate": 10,
+            "cold-pressure": 20,
+            "governor-rpm": 90,
+            "work-share": 20
+          }
+        },
+        "caption": {
+          "en": "The centre link keeps the two gear centres the same distance apart. The sun gear is fixed to the output shaft.",
+          "zh": "定距连杆让两个齿轮的中心距保持不变。太阳轮固定在输出轴上。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "run": true,
+        "part": null,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "working-motion"
+        ],
+        "hide": [
+          "nc-cylinder",
+          "nc-piston",
+          "nc-beam",
+          "nc-pump",
+          "nc-jet",
+          "nc-chain",
+          "nc-pump-chain",
+          "energy-input",
+          "energy-work",
+          "energy-reject",
+          "governor-spindle",
+          "governor-balls",
+          "governor-ball-right",
+          "governor-upper",
+          "governor-upper-right",
+          "governor-lower",
+          "governor-lower-right",
+          "governor-collar",
+          "throttle-link",
+          "throttle-rod",
+          "throttle-crank",
+          "throttle",
+          "throttle-disc"
+        ],
+        "ghost": [],
+        "labels": [
+          "planet",
+          "sun",
+          "flywheel"
+        ],
+        "camera": {
+          "position": [
+            4.7,
+            3.8,
+            3.8
+          ],
+          "target": [
+            2.5,
+            2.6,
+            0
+          ],
+          "fov": 30
+        },
+        "sim": {
+          "set": {
+            "experiment": "mechanism",
+            "motion-mode": "auto",
+            "phase-deg": 0,
+            "cycle-rate": 10,
+            "cold-pressure": 20,
+            "governor-rpm": 90,
+            "work-share": 20
+          }
+        },
+        "caption": {
+          "en": "With equal gears, one complete piston cycle gives two net turns of the sun and flywheel. Watch the shared mechanism, not separate wheel animations.",
+          "zh": "两个齿轮相等时，活塞一个完整周期让太阳轮和飞轮净转两圈。这里整套机构共用同一个运动相位。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "run": true,
+        "part": null,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "working-motion"
+        ],
+        "hide": [
+          "nc-cylinder",
+          "nc-piston",
+          "nc-beam",
+          "nc-pump",
+          "nc-jet",
+          "nc-chain",
+          "nc-pump-chain",
+          "energy-input",
+          "energy-work",
+          "energy-reject",
+          "governor-spindle",
+          "governor-balls",
+          "governor-ball-right",
+          "governor-upper",
+          "governor-upper-right",
+          "governor-lower",
+          "governor-lower-right",
+          "governor-collar",
+          "throttle-link",
+          "throttle-rod",
+          "throttle-crank",
+          "throttle",
+          "throttle-disc"
+        ],
+        "ghost": [],
+        "labels": [
+          "flywheel",
+          "load-wheel",
+          "shaft"
+        ],
+        "camera": "hero",
+        "sim": {
+          "set": {
+            "experiment": "mechanism",
+            "motion-mode": "auto",
+            "phase-deg": 0,
+            "cycle-rate": 10,
+            "cold-pressure": 20,
+            "governor-rpm": 90,
+            "work-share": 20
+          }
+        },
+        "caption": {
+          "en": "The flywheel stores and returns rotational energy as the driving effort varies. Power leaves through the machine drive; the wheel does not create energy.",
+          "zh": "驱动力变化时，飞轮储存并交还转动的能量。动力从机器取力端传出，飞轮并不创造能量。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+The piston and beam move back and forth, while the machine drive needs rotation. Follow the connecting rod down from the beam to the small gears beside the large wheel. Watt’s <Term id="sun-and-planet">sun-and-planet gear</Term> connects these motions. The names describe the gears’ arrangement; they do not make this an astronomical model. [S2, S6] <FlyTo preset="hero">Trace the drive from beam to wheel</FlyTo>
+
+The planet gear is fixed to the connecting rod. As that rod changes angle, the planet rocks with it; it is not a loose wheel spinning freely on its own axle. A separate centre link connects the gear centres and keeps them the same distance apart. The sun gear is fixed to the output shaft, so its rotation turns the shaft. Follow these connections before starting the mechanism. [S6, S7]
+
+With equal gears, one complete piston cycle produces <Num s="S6">two net turns</Num> of the sun and output shaft. The connecting rod also rocks during the cycle, so the instantaneous ratio is not simply constant. In the running beats, the links, gear positions and valves all use one shared phase. They are not independent wheel animations fitted together by eye. [S1, S6]
+
+The large <Term id="flywheel">flywheel</Term> stores rotational kinetic energy and gives it back as driving effort varies. Mechanical energy leaves through the machine drive. The wheel does not create energy, and storing energy is a different role from the governor’s regulation of steam supply. Pause the motion and use the still phases to inspect the meshing gears and the separate centre link. [S7]
+
+<More title={{ en: "Rod angle and gear angle", zh: "杆角与齿轮角" }}>
+
+For equal external gears in this design, sun-angle change + planet-angle change = twice the orbital-angle change. Because the planet is fixed to the rod, its world angle changes as the rod rocks. Over the complete cycle the rod returns to its original angle, leaving the sun with the net rotation described above. This is a kinematic relationship, not a calculation of shaft acceleration under load. [S1, S6]
+
+</More>
+
+<More title={{ en: "Reference wheel and reconstructed teeth", zh: "参考飞轮与重建齿形" }}>
+
+ASME and Hulse report different flywheel rim tooth counts. The model therefore omits a precise countable rim drive. Those rim teeth are a different feature from the sun-and-planet pair. The equal tooth profiles in the small gears belong to this design study; their visible geometry explains engagement, rather than certifying historical manufacturing dimensions. [S1, S3, S5]
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+活塞和横梁来回运动，机器取力端却需要转动。沿着横梁下方的传动杆，可以找到大轮旁的小齿轮。瓦特的<Term id="sun-and-planet">太阳与行星齿轮机构</Term>把两种运动连接起来。这些名字描述齿轮的相对布置，并不是天文模型。[S2, S6]<FlyTo preset="hero">沿横梁找到取力端</FlyTo>
+
+行星轮固定在传动杆上，随着杆的角度变化而摆动，并不是一只在自己轴上自由空转的小轮。另一根独立的定距连杆连接两个齿轮的中心，使中心距保持不变。太阳轮固定在输出轴上，因此太阳轮转动时，也带动输出轴。先认清这些连接，再启动机构。[S6, S7]
+
+两个齿轮相等时，活塞一个完整周期让太阳轮和输出轴净转 <Num s="S6">两圈</Num>。周期内传动杆也在摆动，因此瞬时转动比例并非简单恒定。运行拍里的连杆、齿轮和阀口共用同一个相位，并不是分别播放几个轮子的动画后，再凭外观拼在一起。[S1, S6]
+
+大<Term id="flywheel">飞轮</Term>储存转动动能，并在驱动力变化时交还。机械能由机器取力端传出，轮子本身不创造能量。飞轮储能，与调速器调整供汽是不同作用。暂停后再切换静态相位，可以观察齿轮啮合和独立定距连杆的位置关系。[S7]
+
+<More title={{ en: "Rod angle and gear angle", zh: "杆角与齿轮角" }}>
+
+本设计的相等外齿轮满足：太阳轮角度变化 + 行星轮角度变化 = 轨道角变化的两倍。行星轮固定在传动杆上，因此它在世界坐标中的角度会随杆摆动。完整周期后，杆回到原角度，太阳轮则保留上面所说的净转动。这是运动几何关系，并没有计算负载作用下的轴加速度。[S1, S6]
+
+</More>
+
+<More title={{ en: "Reference wheel and reconstructed teeth", zh: "参考飞轮与重建齿形" }}>
+
+ASME 与 Hulse 报道的飞轮外缘齿数不同，因此模型不画可精确数齿的外缘取力齿圈。外缘齿与太阳、行星这一对齿轮并非同一处结构。模型小齿轮的相等齿廓属于设计研究，用来解释啮合，不代表已核定的历史制造尺寸。[S1, S3, S5]
+
+</More>
+
+</Lang>

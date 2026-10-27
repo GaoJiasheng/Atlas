@@ -1,0 +1,442 @@
+---
+{
+  "id": "follow-the-energy",
+  "order": 7,
+  "title": {
+    "en": "Follow the energy",
+    "zh": "跟着能量走"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "cutaway": "none",
+    "pose": null,
+    "layers": [
+      "steam-supply",
+      "working-motion",
+      "condensing",
+      "regulation"
+    ],
+    "hide": [
+      "nc-cylinder",
+      "nc-piston",
+      "nc-beam",
+      "nc-pump",
+      "nc-jet",
+      "nc-chain",
+      "nc-pump-chain",
+      "energy-input",
+      "energy-work",
+      "energy-reject"
+    ],
+    "ghost": [],
+    "labels": [
+      "furnace",
+      "boiler",
+      "shaft",
+      "condenser"
+    ],
+    "camera": {
+      "position": [
+        11,
+        9,
+        15
+      ],
+      "target": [
+        -0.5,
+        2.8,
+        0
+      ],
+      "fov": 30
+    },
+    "summary": {
+      "en": "Fuel heats the water, the engine delivers work, and heat leaves through the condenser. Follow a separate model energy account, then continue to the history topic.",
+      "zh": "燃料给水供热，蒸汽机输出功，热量也从冷凝器排出。先读一份独立的模型能量账本，再继续历史主题。"
+    },
+    "sim": {
+      "set": {
+        "experiment": "energy",
+        "motion-mode": "manual",
+        "phase-deg": 0,
+        "cycle-rate": 10,
+        "cold-pressure": 20,
+        "governor-rpm": 90,
+        "work-share": 20
+      },
+      "try": {
+        "vary": "work-share",
+        "observe": [
+          "useful-work",
+          "heat-out"
+        ],
+        "keep": [
+          {
+            "en": "One hundred heat-input units",
+            "zh": "一百份输入热量"
+          }
+        ],
+        "record": true,
+        "predict": {
+          "prompt": {
+            "en": "How will the rejected heat share change?",
+            "zh": "排出热量的份数会怎样变化？"
+          },
+          "start": {
+            "work-share": 20
+          },
+          "change": {
+            "work-share": 30
+          },
+          "observe": "heat-out",
+          "options": [
+            {
+              "id": "more",
+              "label": {
+                "en": "More",
+                "zh": "变大"
+              },
+              "means": "more"
+            },
+            {
+              "id": "less",
+              "label": {
+                "en": "Less",
+                "zh": "变小"
+              },
+              "means": "less"
+            },
+            {
+              "id": "same",
+              "label": {
+                "en": "The same",
+                "zh": "不变"
+              },
+              "means": "same"
+            }
+          ]
+        }
+      }
+    },
+    "index": {
+      "parts": [
+        "furnace",
+        "boiler",
+        "piston",
+        "shaft",
+        "condenser",
+        "cooling-cistern",
+        "load-wheel",
+        "energy-input",
+        "energy-work",
+        "energy-reject",
+        "flywheel",
+        "boiler-water"
+      ]
+    },
+    "beats": [
+      {
+        "view": "assembled",
+        "explode": 0,
+        "run": false,
+        "part": null,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "steam-supply",
+          "working-motion",
+          "condensing",
+          "regulation"
+        ],
+        "hide": [
+          "nc-cylinder",
+          "nc-piston",
+          "nc-beam",
+          "nc-pump",
+          "nc-jet",
+          "nc-chain",
+          "nc-pump-chain",
+          "energy-input",
+          "energy-work",
+          "energy-reject"
+        ],
+        "ghost": [],
+        "labels": [
+          "furnace",
+          "boiler",
+          "piston",
+          "shaft"
+        ],
+        "camera": "hero",
+        "sim": {
+          "set": {
+            "experiment": "energy",
+            "motion-mode": "manual",
+            "phase-deg": 0,
+            "cycle-rate": 10,
+            "cold-pressure": 20,
+            "governor-rpm": 90,
+            "work-share": 20
+          }
+        },
+        "caption": {
+          "en": "Fuel supplies heat to the water. Steam does work on the piston, and the mechanism passes mechanical energy to the output shaft.",
+          "zh": "燃料向水供热。蒸汽对活塞做功，机构再把机械能传到输出轴。"
+        },
+        "highlight": {
+          "signal": [
+            "furnace",
+            "boiler",
+            "piston",
+            "shaft"
+          ]
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "run": false,
+        "part": null,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "steam-supply",
+          "working-motion",
+          "condensing",
+          "regulation"
+        ],
+        "hide": [
+          "nc-cylinder",
+          "nc-piston",
+          "nc-beam",
+          "nc-pump",
+          "nc-jet",
+          "nc-chain",
+          "nc-pump-chain",
+          "energy-input",
+          "energy-work",
+          "energy-reject"
+        ],
+        "ghost": [],
+        "labels": [
+          "condenser",
+          "cooling-cistern"
+        ],
+        "camera": "condenser-view",
+        "sim": {
+          "set": {
+            "experiment": "energy",
+            "motion-mode": "manual",
+            "phase-deg": 0,
+            "cycle-rate": 10,
+            "cold-pressure": 20,
+            "governor-rpm": 90,
+            "work-share": 20
+          }
+        },
+        "caption": {
+          "en": "The condenser transfers heat to cooling water. Heat rejected here is still energy; it has not disappeared.",
+          "zh": "冷凝器把热量传给冷却水。这里排出的热量仍然是能量，并没有消失。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "run": false,
+        "part": null,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "teaching"
+        ],
+        "hide": [
+          "boiler",
+          "boiler-water",
+          "furnace",
+          "steam-main",
+          "throttle",
+          "throttle-disc",
+          "valve-chest",
+          "valve-upper-in",
+          "valve-lower-in",
+          "valve-upper-out",
+          "valve-lower-out",
+          "cylinder",
+          "piston",
+          "piston-rod",
+          "beam",
+          "parallel-inner",
+          "parallel-outer",
+          "parallel-bottom",
+          "radius-rod",
+          "drive-rod",
+          "planet",
+          "sun",
+          "centre-link",
+          "shaft",
+          "flywheel",
+          "governor-spindle",
+          "governor-balls",
+          "governor-ball-right",
+          "governor-upper",
+          "governor-upper-right",
+          "governor-lower",
+          "governor-lower-right",
+          "governor-collar",
+          "throttle-link",
+          "throttle-rod",
+          "throttle-crank",
+          "condenser",
+          "injection-jet",
+          "cooling-cistern",
+          "air-pump",
+          "pump-piston",
+          "pump-rod",
+          "hot-well",
+          "feed-pump",
+          "water-pipes",
+          "load-wheel",
+          "nc-cylinder",
+          "nc-piston",
+          "nc-beam",
+          "nc-pump",
+          "nc-jet",
+          "nc-chain",
+          "nc-pump-chain"
+        ],
+        "ghost": [],
+        "labels": [
+          "energy-input",
+          "energy-work",
+          "energy-reject"
+        ],
+        "camera": {
+          "position": [
+            -7.5,
+            4.4,
+            9
+          ],
+          "target": [
+            -10,
+            1.6,
+            0
+          ],
+          "fov": 30
+        },
+        "sim": {
+          "set": {
+            "experiment": "energy",
+            "motion-mode": "manual",
+            "phase-deg": 0,
+            "cycle-rate": 10,
+            "cold-pressure": 20,
+            "governor-rpm": 90,
+            "work-share": 20
+          }
+        },
+        "caption": {
+          "en": "This separate example divides one hundred heat-input units into twenty work units and eighty rejected-heat units. It is an energy account, not a measurement of the Lap engine.",
+          "zh": "这个独立示例把一百份输入热量分成二十份功和八十份排热。这是一份能量账本，不是 Lap 蒸汽机的测量结果。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "run": false,
+        "part": null,
+        "cutaway": "none",
+        "pose": null,
+        "layers": [
+          "steam-supply",
+          "working-motion",
+          "condensing",
+          "regulation"
+        ],
+        "hide": [
+          "nc-cylinder",
+          "nc-piston",
+          "nc-beam",
+          "nc-pump",
+          "nc-jet",
+          "nc-chain",
+          "nc-pump-chain",
+          "energy-input",
+          "energy-work",
+          "energy-reject"
+        ],
+        "ghost": [],
+        "labels": [
+          "boiler",
+          "flywheel",
+          "load-wheel"
+        ],
+        "camera": "hero",
+        "sim": {
+          "set": {
+            "experiment": "energy",
+            "motion-mode": "manual",
+            "phase-deg": 0,
+            "cycle-rate": 10,
+            "cold-pressure": 20,
+            "governor-rpm": 90,
+            "work-share": 20
+          }
+        },
+        "caption": {
+          "en": "This study follows a machine. The history topic follows the people, materials and wider changes around industrialisation.",
+          "zh": "本研究沿着机器讲原理。历史主题则继续讨论工业化中的劳动者、原料和更广泛的变化。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Start at the furnace and boiler. Fuel provides energy as heat passes into the boiler water. The steam acts on the piston, and the mechanism transfers mechanical energy to the output shaft and machine drive. Water and steam are matter moving through the apparatus; heat describes energy transferred, rather than a material flowing alongside them. [S7, S10] <FlyTo preset="hero">Follow the energy through the engine</FlyTo>
+
+At the condenser, steam gives heat to cooling water as it becomes liquid. That energy has not disappeared. The cooling water carries energy away from the engine. The actual boiler and its surroundings also have other energy transfers, so an account beginning with heat supplied to the working fluid has a different boundary from one beginning with all the fuel’s chemical energy. [S7, S9, S10]
+
+The separate account station divides <Num s="S1">100</Num> heat-input units into <Num s="S1">20</Num> work units and <Num s="S1">80</Num> rejected-heat units. Each tile represents a normalized unit. Compare the input row with the combined output rows, rather than adding all the rows together. The try-it card changes the work share while keeping the input fixed; the rejected-heat share changes to preserve the total. [S1]
+
+<TopicLink slug="energy-conversion" ch="stored-energy">Energy Conversion: stored energy</TopicLink> follows energy stores, while <TopicLink slug="energy-conversion" ch="never-used-up">energy is never used up</TopicLink> explains conservation. This page follows a machine. The planned Industrial Revolution reading follows people, materials and wider changes, including labour and environmental history. Its discussions belong in that separate historical account. [S14]
+
+<More title={{ en: "The account’s boundary", zh: "账本的边界" }}>
+
+For the working fluid over a complete heat-engine cycle, its stored energy returns to the starting value. Applying energy conservation gives heat input = work out + heat rejected, or Qh = W + Qc. This is the design study’s application of the conservation law. The example is not a measurement of Lap’s efficiency, and its adjustable shares are not controls on a real engine. [S1, S10]
+
+</More>
+
+<More title={{ en: "Conservation and useful energy", zh: "能量守恒与用途" }}>
+
+The card can show <Num s="S1">10 + 90</Num>, <Num s="S1">20 + 80</Num> or <Num s="S1">30 + 70</Num> output units, always matching the input row. Energy carried away as heat still counts, even though it is not the mechanical work delivered at the shaft. The model does not turn those bookkeeping choices into a fuel consumption or a historical performance claim. [S1, S10]
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+先找到炉膛和锅炉。燃料提供能量，热传给水；蒸汽作用在活塞上，机构再把机械能传到输出轴和机器取力端。水和蒸汽是流经装置的物质，热则描述能量的传递，并不是另一种与蒸汽并排流动的物质。[S7, S10]<FlyTo preset="hero">沿着机器追踪能量</FlyTo>
+
+在冷凝器里，蒸汽变成液态水，同时向冷却水放热。这部分能量没有消失，而是由冷却水带离机器。真实锅炉与周围环境之间还有其他能量传递，因此“进入工作流体的热量”与“燃料的全部化学能”是两种不同的账本边界。[S7, S9, S10]
+
+独立账本工位把 <Num s="S1">100</Num> 份输入热量分成 <Num s="S1">20</Num> 份功和 <Num s="S1">80</Num> 份排热。一片代表一归一化单位。应该比较输入一排与输出两排的合计，不能把所有排再相加。试一试卡保持输入不变，改变功的份数，排热随之变化，使总量相等。[S1]
+
+<TopicLink slug="energy-conversion" ch="stored-energy">“能量转换”的“储存的能量”</TopicLink>介绍能量储存，<TopicLink slug="energy-conversion" ch="never-used-up">“能量不会用完”</TopicLink>继续解释守恒。本页沿机器讲原理；计划中的“工业革命”历史主题，则从劳动者、原料与更广泛的变化展开劳动和环境史阅读。返回停机全景后，可以把锅炉里的水、活塞与取力轮重新连成一条能量路径。[S14]
+
+<More title={{ en: "The account’s boundary", zh: "账本的边界" }}>
+
+以热机的工作流体为边界，完整循环后，它储存的能量回到起始值。把能量守恒用于这个循环，得到：输入热量 = 输出功 + 排出热量，即 Qh = W + Qc。这是本设计研究对守恒定律的应用。示例并非 Lap 效率的测量，改变份数也不是在调节真实机器。[S1, S10]
+
+</More>
+
+<More title={{ en: "Conservation and useful energy", zh: "能量守恒与用途" }}>
+
+卡片可以显示 <Num s="S1">10 + 90</Num>、<Num s="S1">20 + 80</Num> 或 <Num s="S1">30 + 70</Num> 份输出，都与输入排相等。热带走的能量虽然不是输出轴传出的机械功，仍然计入账本。这里没有把这些份数当作耗煤量，也没有据此声称历史机器的实际性能。[S1, S10]
+
+</More>
+
+</Lang>
