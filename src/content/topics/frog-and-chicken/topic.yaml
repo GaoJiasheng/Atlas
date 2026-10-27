@@ -1,0 +1,32 @@
+id: frog-and-chicken
+title:
+  en: Frog and Chicken Life Cycles
+  zh: 青蛙与鸡的生活史
+subtitle:
+  en: 'Eggs, young animals and adults: follow development, then the next generation'
+  zh: 从卵、幼体到成体：观察发育，再走向下一代
+shortTitle:
+  en: Frog & chicken
+  zh: 青蛙与鸡
+subject: biology
+tags:
+- singapore
+- psle
+- p3
+- animals
+- life-cycles
+- space
+moe:
+- 'MOE 2023 Science P3 Cycles in Plants and Animals (Life Cycles): understand that different living things have
+  different life cycles; observe and compare chicken and frog'
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: published
+illustration: frog-and-chicken
+note:
+  en: Model study · stages independently enlarged · selected views of continuous development · spacing is not time.
+    Observation model, not a development forecast.
+  zh: 模型研究 · 各阶段分别放大 · 选取连续发育中的视图 · 间距不代表时间。观察模型，不是发育预测。
