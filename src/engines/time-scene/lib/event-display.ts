@@ -35,3 +35,16 @@ export function eventAtDisplayPoint(
   }
   return best?.id ?? null;
 }
+
+/**
+ * Hairline leg from a shifted mark back to its source anchor (mark-local px, origin = mark centre):
+ * starts `gap` px short of the anchor and ends on the mark's ring of radius `r`; null when too short to draw.
+ */
+export function displayLeg(offset: DisplayOffset, r: number, gap = 6): { x1: number; y1: number; x2: number; y2: number } | null {
+  const [dx, dy] = offset;
+  const length = Math.hypot(dx, dy);
+  if (length <= r + gap) return null;
+  const ux = dx / length;
+  const uy = dy / length;
+  return { x1: -ux * (length - gap), y1: -uy * (length - gap), x2: -ux * r, y2: -uy * r };
+}

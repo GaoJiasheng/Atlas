@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { eventAtDisplayPoint, eventDisplayPoint } from '../../src/engines/time-scene/lib/event-display';
+import { displayLeg, eventAtDisplayPoint, eventDisplayPoint } from '../../src/engines/time-scene/lib/event-display';
 import { eventSchema, staticSite } from '../../src/engines/time-scene/schema';
 import type { LngLat } from '../../src/engines/time-scene/lib/geo';
 
@@ -61,5 +61,16 @@ describe('screen-only event offsets', () => {
     const item = { id: 'date-line', at: [-179, 0] as LngLat, displayOffset: [12, -10] as [number, number] };
     expect(eventDisplayPoint(projectWorld, item, 360)).toEqual({ x: 373, y: -10 });
     expect(eventAtDisplayPoint([item], projectWorld, { x: 373, y: -10 })).toBe(item.id);
+  });
+
+  it('draws a leg from the shifted ring back towards the stationary anchor', () => {
+    const leg = displayLeg([0, -96], 5)!;
+    // Mark-local: the anchor sits 96 px below the ring centre; the leg stops 6 px short of it and starts on the ring.
+    expect(leg).toEqual({ x1: -0, y1: 90, x2: -0, y2: 5 });
+    const diagonal = displayLeg([60, 80], 4, 10)!;
+    expect(Math.hypot(diagonal.x1, diagonal.y1)).toBeCloseTo(90);
+    expect(Math.hypot(diagonal.x2, diagonal.y2)).toBeCloseTo(4);
+    expect(diagonal.x1 / diagonal.y1).toBeCloseTo(60 / 80);
+    expect(displayLeg([3, 4], 2)).toBeNull();
   });
 });

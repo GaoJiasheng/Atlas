@@ -466,13 +466,15 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   }, [geo, model, layers, locale, topic.blocLabels, topic.datedLayers, byEntity, areas, legendKeyframe, approximate, region, coastToday, territoryOn]); // `t` is bound to `locale`
 
   /* ---------- control panel: LAYERS (store layers + drawing modes) and TOOLS ---------- */
+  // Territory names (N) draw control-area names, regional river names or today's coastline; none of them, no row and no key.
+  const territoryAvailable = available.control || !!region?.rivers || coastToday;
   const panelLayers = useMemo<ControlRow[]>(
     () => timeLayerRows(available, locale, {
       borders: !region,
-      territory: !!(region?.rivers || coastToday),
+      territory: territoryAvailable,
       dated: (topic.datedLayers ?? []).map((layer) => ({ kind: 'layer' as const, id: layer.id, label: layer.label, color: layer.color ?? entityCssColor(geo.entities.find((e) => e.id === layer.holder))})),
     }),
-    [available, locale, region, coastToday, topic.datedLayers, geo.entities], // `t` is bound to `locale`
+    [available, locale, region, territoryAvailable, topic.datedLayers, geo.entities], // `t` is bound to `locale`
   );
   const hasGlossary = (geo.glossary?.terms.length ?? 0) > 0;
   const panelTools = useMemo<ControlRow[]>(
@@ -545,7 +547,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
           ...(available.movements ? [{ id: 'flow', key: 'f', label: t('time.mode.flow'), on: movementsOn, tone: 'hot' as const, status: 'FLOW' }] : []),
           ...(region ? [] : [{ id: 'borders', key: 'b', label: t('time.mode.borders'), on: bordersOn }]),
           { id: 'graticule', key: 'g', label: t('time.mode.graticule'), on: graticuleOn, phone: false },
-          { id: 'territory', key: 'n', label: t('time.mode.territory'), on: territoryOn },
+          ...(territoryAvailable ? [{ id: 'territory', key: 'n', label: t('time.mode.territory'), on: territoryOn }] : []),
           {
             id: 'reference',
             key: 'r',
@@ -635,6 +637,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     bordersOn,
     graticuleOn,
     territoryOn,
+    territoryAvailable,
     reference,
     presenting,
     presentationStatus,

@@ -555,3 +555,10 @@ NE land 的 feature 数不是岛屿数；Geometry MultiPolygon 内有许多岛�
 
 
 本轮最终非浏览器门槛（2026-10-27）：`pnpm check` exit 0，814 files、0 errors／0 warnings、4 hints；`pnpm validate` exit 0，63 topics、0 errors／0 warnings；全量 `pnpm test -- --maxWorkers=2` exit 0，175 files／4,479 tests 全过；`pnpm build` exit 0，129 static pages、PWA 完成（共享大 chunk 提醒仍在）。初次默认并发 test 有两项未修改的几何测试超过 5 秒，降低 worker 数后完整重跑通过；未放宽超时或改测试配置。`git diff --check` 通过。EN／ZH 静态成品各有 40 个郑和可选 FlyTo 行，两题仍为 draft。shoot／e2e 按用户要求未运行，完全未打开或驱动浏览器／桌面。
+
+### 9.5 浏览器验收（Claude，2026-10-27）
+
+- `pnpm shoot zheng-he --beats --keys`：40 拍 0 失败；修正 N 键后 keys 0 失败（原先无领土名称却注册 N 键）。
+- **对象索引**：02 章（1600×900）与 04 章（390×844，中文）各点四行 `<FlyTo event>`：选中对象正确、`detailCount` 1、详情在章头下、预设取景保留、阅读面板保持展开；手机上详情抽屉保留。
+- **南京偏移**：在 07 章中国沿岸视图逐个点击九个位置（八个环形记录 + 中心城市点），九次选中各不相同；1433 拍第九个记录 evt-final-return 出现并在环上。整区视图（zoom 3）下 96 px 半径约等于上千公里，环上标记会落到山东、台湾附近，读者难看出它们属于南京；已给偏移标记加一条 hairline 腿连回南京点（`displayLeg`，单测覆盖）。半径是否随缩放收小，留给 Gavin。
+- 文字：S2 中文来源名去掉套括号，改为"韦德（Geoff Wade）／新加坡国立大学亚洲研究所工作论文第 31 号（2004）·《郑和远航：重新评估》"，SOURCES.md 同步。

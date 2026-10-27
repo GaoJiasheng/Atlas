@@ -328,6 +328,8 @@ test.describe('steam-engine shared rigid frame', () => {
       }
     }
     expect(allIndexed.size).toBe(56);
-    await expect(page.locator('a[href*="/topics/industrial-revolution/"]')).toHaveCount(0);
+    // Sister links to the history topic (chapters 02, 03, 06 and two in 07), each to a real chapter.
+    const irLinks = await page.locator('a[href*="/topics/industrial-revolution/"]').evaluateAll(links => links.map(a => new URL(a.getAttribute('href')!, location.href).search).sort());
+    expect(irLinks).toEqual(['?ch=ir-connected-world-debates', '?ch=ir-railways-networks', '?ch=ir-seas-signals', '?ch=ir-thread-coal-power', '?ch=ir-thread-coal-power']);
   });
 });

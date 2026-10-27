@@ -32,7 +32,7 @@ import { t as translate, tx, withBase } from '../../../../i18n';
 import type { TimeSceneExt } from '../../index';
 import { entityBlocAt, type TimeModel } from '../../lib/model';
 import type { SceneEvent } from '../../schema';
-import { eventAtDisplayPoint, type DisplayOffset } from '../../lib/event-display';
+import { displayLeg, eventAtDisplayPoint, type DisplayOffset } from '../../lib/event-display';
 import { sideAt, warStatusAt } from '../../lib/bloc';
 import { blocLabel, entityDated, entityWord } from '../../lib/blocLabels';
 import type { BasemapOptions, BlocLabels, DatedLayerDef, EntityStrings } from '../../../../content/schema/topic';
@@ -720,7 +720,10 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       if (m.ring) {
         const { r, dot, stroke, fill, width, opacity } = m.ring;
         const centre = m.size / 2;
-        el.firstElementChild!.innerHTML = `<svg width="${m.size}" height="${m.size}" viewBox="0 0 ${m.size} ${m.size}" aria-hidden="true" style="opacity:${opacity}"><circle cx="${centre}" cy="${centre}" r="${r}" fill="${tokens.paper}" fill-opacity="0.55" stroke="${stroke}" stroke-width="${width}"/><circle cx="${centre}" cy="${centre}" r="${dot}" fill="${fill}"/></svg>`;
+        // A hairline leg back to the source anchor: the shift is a display spacing, not another place.
+        const leg = m.displayOffset ? displayLeg(m.displayOffset, r) : null;
+        const legSvg = leg ? `<line x1="${centre + leg.x1}" y1="${centre + leg.y1}" x2="${centre + leg.x2}" y2="${centre + leg.y2}" stroke="${tokens['ink-2']}" stroke-width="0.75" stroke-opacity="0.6"/>` : '';
+        el.firstElementChild!.innerHTML = `<svg width="${m.size}" height="${m.size}" viewBox="0 0 ${m.size} ${m.size}" aria-hidden="true" style="opacity:${opacity};overflow:visible">${legSvg}<circle cx="${centre}" cy="${centre}" r="${r}" fill="${tokens.paper}" fill-opacity="0.55" stroke="${stroke}" stroke-width="${width}"/><circle cx="${centre}" cy="${centre}" r="${dot}" fill="${fill}"/></svg>`;
       }
       el.style.setProperty('--ts-size', `${m.size}px`);
       if (m.color) el.style.setProperty('--ts-color', m.color);

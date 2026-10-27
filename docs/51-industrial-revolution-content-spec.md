@@ -794,3 +794,13 @@ E-IR1 保留并精简：恢复高亮改用底部条 anchor（删 readerBeat）�
 
 
 本轮最终非浏览器门槛（2026-10-27）：`pnpm check` exit 0，814 files、0 errors／0 warnings、4 hints；`pnpm validate` exit 0，63 topics、0 errors／0 warnings；全量 `pnpm test -- --maxWorkers=2` exit 0，175 files／4,479 tests 全过；`pnpm build` exit 0，129 static pages、PWA 完成（共享大 chunk 提醒仍在）。初次默认并发 test 有两项未修改的几何测试超过 5 秒，降低 worker 数后完整重跑通过；未放宽超时或改测试配置。`git diff --check` 通过。EN／ZH 静态成品各有 40 个郑和可选 FlyTo 行，两题仍为 draft。shoot／e2e 按用户要求未运行，完全未打开或驱动浏览器／桌面。
+
+### 9.6 浏览器验收（Claude，2026-10-27）
+
+- **共享引擎回归**：`pnpm shoot <t> --beats --keys` 跑 sample-time、ww1、ww2、four-taps、singapore-1819-1965、singapore-after-1965、singapore-land-use、ancient-civilisations、warring-states、industrial-revolution、zheng-he（main 上没有 monsoon-and-weather）：beat failures 全部 0。机器负载 140–240，`h` 恢复片淡入（0.35 s 拖到约 5 s）与 `drag` 自由镜头超时在多个主题间时有时无；同样的 drag 探针在 main 构建上同样不释放 four-taps 镜头，判为负载问题，非回归。
+- **战争读数与图层**：ww1 / ww2 保留参与方、战斗、行动、关键帧读数与全部战争图层；industrial-revolution 与 singapore-after-1965 不再出状态串和空图层行；zheng-he 因确有旧港等 battle 事件保留战斗读数（"0 场战斗"在非战段可见，记为 Gavin 待看）。
+- **修正**：无可画领土名称的题（zheng-he、industrial-revolution）仍注册 N 键但 LAYERS 无此行，`--keys` 报 "no button for this mode"；改为 N 键与行同条件（控制区、区域河名或今日岸线），两题 `--keys` 0 失败。
+- **索引行**：本题自动索引（04 章四行）点击后 `selectedId` 正确、详情在章头下、相机飞到对象且标注在舞台内。
+- **正文**：EN / ZH 八章逐段读过：来源号、数字与 Term/Num 与改写前逐一比对无丢失；立场平衡。顺了四句英文（03 章开头倒装句、"Railway passengers joined regions"、04 章 "It joined a country" 与电报广告重复句）及对应中文一句。部分段落对 10–12 岁仍偏抽象（"These explanations need not form opposing teams"、"different explanatory tasks"），留给 Gavin 定稿时再看。
+- **姊妹链接**：五处去向与回链在构建产物中解析到实际章节；steam-engine 两处链接文字改为对方章标题（"Railways, different beginnings"、"Seas and signals"）。
+- **门槛**：`pnpm check` 0 errors，`pnpm validate` 63 题 0 错，`pnpm test` 175 文件 / 4,480 测试全过，`pnpm build` 129 页。定向 e2e（industrial-revolution、zheng-he、steam-engine、smoke、hud、dated-layers、sample-climate、ancient-civilisations、singapore-after-1965、singapore-land-use、time-label-dates、time-label-drag，`--workers=2`）117 项 107 过；单独重跑后剩 steam-engine 一项（仍断言"无工业革命链接"，已改为核对五条实际去向，重跑 11/11 过），time-label-dates 两项与 hud sample-space 两项在 main 构建上同样失败（场景 5 s 内未加载完），判为负载问题。
