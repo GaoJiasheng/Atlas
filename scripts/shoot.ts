@@ -646,6 +646,7 @@ async function runBeatLinks(s: Session, beats: { chapter: string; index: number 
     const link = `?ch=${encodeURIComponent(b.chapter)}&b=${b.index + 1}`;
     await s.load(`${path}${link}${theme ? `&theme=${theme}` : ''}`, `${name} (link)`);
     await linked.waitForTimeout(400);
+    await settleClimate(linked);
     const got = await beatSceneOf(linked);
     const diffs: string[] = [];
     for (const key of Object.keys(want)) {
@@ -690,6 +691,8 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
       missing = await unlabelled(s);
     }
     if (missing.length) report.beatNotes.push(`${name}: no label for ${missing.join(', ')}`);
+    // A monthly map commits its month on a drawn frame once the rain source has settled (slow under software GL): wait, then judge.
+    await settleClimate(s.page);
     // The scene this beat shows (SpaceScene), for its link below.
     const scene = landed ? await beatSceneOf(s.page) : null;
     if (scene) shown.set(name, scene);
@@ -735,6 +738,20 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
   await runClimateStates(s, o, out, report);
 }
 
+/** Wait (bounded) until a monthly map shows the store's month; a no-op for other scenes. Callers still judge the result. */
+function settleClimate(page: Page): Promise<unknown> {
+  return page
+    .waitForFunction(
+      () => {
+        const c = (window.__atlas!.engine as unknown as { climatology?(): { month: number; renderedMonth: number } }).climatology?.();
+        return !c || c.renderedMonth === c.month;
+      },
+      null,
+      { timeout: 10_000 },
+    )
+    .catch(() => {});
+}
+
 /** Monthly field visual states that a narrative need not explicitly author. */
 async function runClimateStates(s: Session, o: Options, out: string, report: RunReport): Promise<void> {
   if (!await s.ev(() => typeof window.__atlas!.engine.climatology === 'function')) return;
@@ -766,17 +783,7 @@ async function runClimateStates(s: Session, o: Options, out: string, report: Run
         e.toggleMonthlyLayer(layer.id, layer.id === x.primary[layer.quantity] && x.shot[layer.quantity]);
       if (x.shot.name === 'climate-cell') e.inspectClimateCell(105, 0);
     }, {shot, definitions, primary});
-    // The map commits a month on its next drawn frame (software GL can take a while): wait for it, then judge.
-    await s.page
-      .waitForFunction(
-        (m) => {
-          const c = (window.__atlas!.engine as unknown as { climatology(): { renderedMonth: number } }).climatology();
-          return c.renderedMonth === m;
-        },
-        shot.month,
-        { timeout: 5000 },
-      )
-      .catch(() => {});
+    await settleClimate(s.page);
     await s.page.waitForTimeout(350);
     const state = await beatSceneOf(s.page);
     if (state?.month !== shot.month || state.renderedMonth !== shot.month) report.beatFailures.push(`${shot.name}: month did not commit`);
