@@ -67,7 +67,7 @@ P4 Light 的看见光源/反射光（C01；S01 印 p.75/PDF p.76）与收集感�
 | 孔直径 d | 2 / 4 mm（孔径教学值） | 只考面积相对量，不拟合真实瞳孔反射；SIM02。 |
 | 示例频率 | 250 / 500 Hz，**无声** | 是设定输入值，非测量儿童能听的范围；SIM04。 |
 | 显示慢放 | f/250 = 1 / 2 Hz | 固定 250 倍慢放，控制变化不改变慢放倍率；SIM04。 |
-| 振幅 | 1 / 2（相对），位移上限 .0125 / .025 scene unit | 示意粒子位移，不换算耳膜/听骨位移或 dB；H11–H12。 |
+| 振幅 | 1 / 2（相对），位移上限 .035 / .07 scene unit（2026-10-27 F3 由 .0125 / .025 提高，见 §9.5） | 示意粒子位移，不换算耳膜/听骨位移或 dB；H11–H12。 |
 
 ## 2. 分区与模型数据计划
 
@@ -89,7 +89,7 @@ Y向上，+Z朝观者；不声称单位米。眼工位中心 `[-2,0,0]`，包络
 
 眼参考轴前→后为局部 +X：角膜前极 x=-1，iris≈-.65，lens≈-.45，后壁≈1，optic-nerve x>1。眼壳并非空球：玻璃体单独透明填充，网格中不把膜当实体球。耳外→内局部 +X，eardrum≈-.5，malleus≈-.35，incus≈-.05，stapes≈.25，oval-window≈.42；耳蜗在内侧，咽鼓管向前下方。**这些是布局起点，不是解剖测量**；R2对照 S02、S07、S24–S26调整（E08、H03–H10）。
 
-毛细胞放大工位 `[2,-.2,1.6]`，独立边界说明“放大示意，非同一比例 / Enlarged schematic, different scale”。不写 magnification 数值，不画伪造毫米尺。光学模型另一工位局部 `origin:[-1,-1.5,1.3], cmToScene:.06`，x从-u到6；与眼球剖面之间保留间距，并写“角膜与晶状体合成一个有效透镜 / Cornea and lens combined in one effective lens”。
+毛细胞放大工位 `[3.15,-1.3,.35]`（F3/F4 修订：原 `[2,-.2,1.6]` 挡在中耳前，移到耳蜗右下方，HUD 画虚线边框 `views.insets`，见 §9.5），独立边界说明“放大示意，非同一比例 / Enlarged schematic, different scale”。不写 magnification 数值，不画伪造毫米尺。光学模型另一工位局部 `origin:[-1,-2.4,1.3], cmToScene:.06, yScale:20`（F1 修订：原 origin y −1.5、无竖向放大；高度竖向放大×20 并在舞台/PLATE/详情/spec 行写明，见 §9.5），x从-u到6；与眼球剖面之间保留间距，并写“角膜与晶状体合成一个有效透镜 / Cornea and lens combined in one effective lens”。
 
 ### 2.3 零件清单（26个可选中 part；pupil 是 iris 中的洞，不另做实心零件）
 
@@ -209,7 +209,7 @@ interface SensesData {
     slowFactor: number;        // 250 fixed for every comparison
     baseFrequencyHz: number;   // 250
     baseWavelengthScene: number; // 1
-    baseDisplacementScene: number; // .0125
+    baseDisplacementScene: number; // .035（F3 修订，原 .0125）
     sources: string[];         // H11–H12 and SIM04 design
   };
 }
@@ -282,7 +282,7 @@ interface LongitudinalWaveOverlay {
 
 RUN=false或sound-active=false时冻结clock；sound-active=false目标位移归零，restart从当前相位继续，重播按钮只用于有replay的卡（本稿无，不擅加G）。Hz/幅度变化可平滑≤.5s，定态截图/深链接/reduced-motion立即snap。一个250倍slow label同时读实际设定frequency与显示Hz，不能只写“慢放”不出倍率。500Hz的显示节律应为250Hz的两倍（SIM04）。
 
-校验 group 若写须存在；最大A/lambda<1/(2*pi)，保证x映射单调不穿粒子；本配置最坏.025/.5=.05，2*pi*.05=.314159<1。count/spacing固定、referenceIndex整数在范围内；axis单位化，origin有限。粒子半径≤.008；41粒子一个InstancedMesh、基线一次draw，无每帧React setState。组件卸载释放geometry/material，pause不继续请求帧。增debug `wave:{phaseCycles,positions,rests,visualHz,lambda,A,playing,slowFactor}` 与 `sensesSeek(cycles)`（测试接口，不是新儿童控件）可确定截图。
+校验 group 若写须存在；最大A/lambda<1/(2*pi)，保证x映射单调不穿粒子；本配置最坏.07/.5=.14，2*pi*.14=.8796<1（F3 修订后；原 .025/.5）。count/spacing固定、referenceIndex整数在范围内；axis单位化，origin有限。粒子半径≤.008；41粒子一个InstancedMesh、基线一次draw，无每帧React setState。组件卸载释放geometry/material，pause不继续请求帧。增debug `wave:{phaseCycles,positions,rests,visualHz,lambda,A,playing,slowFactor}` 与 `sensesSeek(cycles)`（测试接口，不是新儿童控件）可确定截图。
 
 **绑定计划（现有语法，不添新绑定kind）**：
 
@@ -309,10 +309,10 @@ RUN=false或sound-active=false时冻结clock；sound-active=false目标位移归
 | near物距12、far焦距40/11、d2 | v=120/23=5.217391304348，m=-10/23；屏中心=-1/3，blur=7/150=.046666666667 cm；behind-retina。 |
 | far物距40、near焦距3、d2 | v=120/37=3.243243243243，m=-3/37；屏中心=-.1，blur=7/150 cm；before-retina。 |
 | 偏焦两例d4 | blur=7/75=.093333333333 cm，其他几何量不变。 |
-| 250Hz、amplitude1、active | visual-hz=1，lambda=1，A=.0125，amplitude-level=1。SIM04 |
+| 250Hz、amplitude1、active | visual-hz=1，lambda=1，A=.035，amplitude-level=1。SIM04 |
 | 500Hz、amplitude1 | visual-hz=2，lambda=.5，A同前，amplitude-level仍1（设定位移振幅，不是声强）。 |
-| 250Hz、amplitude2 | visual-hz仍1，lambda仍1，A=.025，amplitude-level=2；不推断声强或主观响度倍数。 |
-| 参考粒子x0=.25、250Hz/A1、phase0 | x=.2625；phase=.25 cycles时x=.25；phase=1时回到.2625。 |
+| 250Hz、amplitude2 | visual-hz仍1，lambda仍1，A=.07，amplitude-level=2；不推断声强或主观响度倍数。 |
+| 参考粒子x0=.25、250Hz/A1、phase0 | x=.285；phase=.25 cycles时x=.25；phase=1时回到.285。 |
 | 同粒子500Hz/A1、phase0 | x=.25；一显示秒完成2周期，静止点仍.25。 |
 | active=false | visual-hz=0，A=0，amplitude-level=0，sound-state=still；粒子回静止点。 |
 | 骨链Hz binding | 1→2Hz，所有四动画相位同步；0时停；数值不得超过现有4Hz夹值。 |
@@ -628,3 +628,24 @@ CI=1 ATLAS_E2E_PORT=5446 pnpm e2e
 - 回归：light-and-shadows、sample-light `--beats --keys` 拍与键全过；`sun-shadows` 等章节标签不在屏的提示在 main 基线上同样出现（负载造成），不是本分支引入。sample-senses `--beats --keys` 全过。
 - 门槛：check 0 error；validate 70 题 0 error；test 4,952 例中 1 例 CPU 时间预算（fill.test）在负载下超时，单跑通过；build 143 页。smoke 的计数冲突按指示取 main 的数，未把本题算进去。
 - e2e（端口 5446，eyes-and-ears、sample-senses、smoke、light-and-shadows、sample-light，workers=2）：47 例中 33 过、14 败；单独重跑后只剩 smoke 的 4 例首页计数（取 main 的数，实际多 1 题），其余为负载超时或下面两处测试写错。修了两处没跑过的测试：手机拍步进——章节打开时停在拍前（BEAT –/5），按一次"下一拍"进入 b=1 而不是 b=2；sample-senses 的 seek 定位先等相位读数变成 .25 再比较。
+
+### 9.5 F1–F6 返工（2026-10-27，Claude Opus，worktree `codex/eyes`，合并 main 至 6708b62）
+
+主题 `FIXES.md` 六项与两项顺带全部完成；引擎改动都是可选字段或通用补丁，light-and-shadows / sample-light 的数据与渲染路径不变。
+
+- **F1 光学台**：`paraxial-eye` 新增可选 `yScale`（有限，1–40，默认 1）与 `pointColors: [token, token]`（只收 `token:`）。本题 `yScale: 20`、`origin [-1,-2.4,1.3]`（台整体移到眼下方，不与眼包络重叠）；只放大高度，距离仍按 `cmToScene .06`，`solveSenses` / `effectiveEyeRays` 与全部读数不变（单测证明）。上点 `token:ray-top`（琥珀）、下点 `token:ray-bottom`（青），两套主题都定义（`tests/theme/ray-point-tokens.test.ts`：ΔE ≥ 40、离 signal ≥ 15、对底色 ≥ 3:1），光线逐顶点着色仍一次绘制，物点标记零件用同一 token，且大小不同（不靠颜色也能分）。接收面光斑改为与几何模糊同宽的圆斑（×yScale），聚焦时为可见小点；接收面加高到 ±.45、透镜画成可见的薄片。披露：舞台在接收面上方写「VERTICAL ×20 · SCHEMATIC / 竖向放大 ×20 · 示意」和两色图例（`hud/SensesStageLabel.tsx`），PLATE 加一行，物点上/下与接收面三条详情和 spec 行写明。02 章保持 far/far：放大后倒像上下分开、颜色分得清，不需要改用 near/near（不偏离 §5.0）。
+- **F2 镜头**：`focus-bench` 重新对准光学台（眼在上、台在下，整台在作者镜头内；hudFrame 只拟合作者镜头里看得到的主体），02 章与 03.1–03.4、01.5 用它；02.2、02.4–02.5、03.5 用 eye。开启 `views.hudFrame`（巩膜、物点上下、接收面、耳廓、耳蜗、基底膜条、毛细胞、信号点、粒子参照）。
+- **F3 纵波**：`baseDisplacementScene` .0125 → .035（schema 固定值、两份 parts.json、oracles、单测、e2e、本稿 §1.4/§4.1/§4.3/§4.4、docs/06 同步）；250 Hz/振幅1 疏密约 ±22%，最坏 2πA/λ = .88 < 1 仍不交叉。粒子半径 .013（`WAVE_PARTICLE_RADIUS`，偏离 §4.3「≤ .008」，为可读性），刻度与基线移到粒子下方、参考刻度加粗，粒子参照零件两端加端桩（框住整行）。`wave` 镜头以粒子行为主体、耳在上方；06 章隐藏咽鼓管与平衡结构。
+- **F4 放大窗**：窗移到耳蜗右下方 `[3.15,-1.3,.35]`，信号点移到条带右端，信号路径改走窗右侧上到听神经。新增通用 `views.insets`（≤4；HUD 发丝虚线框 + 标签，跟随所列零件的屏幕框，不写放大倍数；`lib/insets.ts` + `hud/InsetFrames.tsx`，单测），本题标「放大示意·非同一比例」。`cochlea` 镜头同时框住耳蜗与放大窗；07.3 不再隐藏基底膜条，细胞体可见。
+- **F5 空白舞台**：查明是 shoot 时序，不是 senses 驱动竞态。每拍 shoot 先回 HUD（舞台 1520×1023）再进演示（1920×1080），画布改尺寸清空 WebGL 缓冲；软件 GL 重负载下一帧可要数秒，1.5 s 固定等待后的截图落在清空与重绘之间。用 8× CPU 节流复现（`before-you-start-1`：画布 1520×1023、标签在、无模型）。修复：`SceneStats.lastFrame`（SpaceScene 最后一帧时刻）；shoot 用 MutationObserver 记下画布尺寸改写，截图前等到改尺寸后的新帧（超时记拍失败）；e2e 断言演示改尺寸后一定有新帧。另修 hudFrame 拟合读 R3F 实时尺寸（改尺寸后紧跟的一帧早于 CameraRig 重渲染）。
+- **F6 竖屏总览**：`freeStageRect` 在叠放竖屏（宽高比 < 0.8）只让横跨中线的上下面板收窄自由区，左上角标题块不再把模型挤进右侧窄列（单测）；390×844 的 00/07 总览两个工位都入画（e2e）。
+- **顺带**：视网膜改为等厚平滑球冠衬层，巩膜剖面平滑，切面不再呈折线；视网膜、角膜 arc 改为 178°，切面在保留侧，标签不再被剖切藏掉（原 01/02/03 的 retina、cornea「无标签」提示）。耳廓改为平滑外缘 + 卷起的耳轮 + 对耳轮（不再是八边形厚片）。
+
+- **补**：睫状环 arc 210 → 178（03.3 的 ciliary-ring 标签同样被剖切藏掉）；hudFrame 再列 cornea、auditory-nerve，竖屏总览眼前缘与听神经不切边。
+
+浏览器验收（软件 GL，机器负载约 50–100；`--gpu` 为 Metal）：
+- `pnpm shoot eyes-and-ears --beats --tasks --keys --layout --locale en,zh --theme paper,cinema`：4 组各 40/40 拍、beat links 40/40、chapter highlights 全在屏、key / layout / beat 失败 0、console clean；160 张拍图空白 0（自检脚本按舞台区像素方差判断）。逐张看过光学台（01.5、02.1、02.3、03.1–03.4）、纵波（06 全章）、耳与放大窗（04.5、05 全章、07.3）：倒像上下分开、两色可辨、偏焦为圆斑而聚焦为小点、接收面上方有竖向放大说明；疏密清楚；放大窗在耳蜗右下方，有虚线边框与「放大示意·非同一比例」，不挡中耳。唯一的拍提示为 03.3 的 ciliary-ring（已按上条修，探针确认锚点在屏）。
+- `--size 390x844 --beats`（en-paper）：40/40，演示模式竖屏不画引线标注（引擎既有行为，各题一致）；光学台、纵波行、放大窗都在字幕卡上方；00/07 总览两个工位都入画（HUD 模式下图层卡默认展开会盖住耳部，收起即见）。
+- 回归：sample-senses、light-and-shadows（41）、sample-light（25）`--beats --keys` 拍与键失败 0，beat links 全过。
+- `--perf --gpu`：各章 draw calls 10–23、三角 1.2 万–7.0 万、40–60 fps（负载下）；page JS 532 KB gz 为全站 SpaceScene 共有。
+- e2e（端口 5446，workers=2）：eyes-and-ears 16（新增 F1/F2/F5、F3/F4、F6 三例）、sample-senses 7、sun-earth-moon 10（hudFrame 改动回归）全过；light-and-shadows 全过；smoke 4 例首页计数按指示取 main 的数（实际多本题 1 个），由主会话合并时改。

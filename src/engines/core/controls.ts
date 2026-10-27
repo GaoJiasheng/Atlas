@@ -78,6 +78,8 @@ export interface SceneStats {
   features?: number;
   zoom?: number;
   gpu?: string;
+  /** `performance.now()` of the stage's last drawn frame (QA: a screenshot waits for a frame after a canvas resize). */
+  lastFrame?: number;
 }
 
 export const PANEL_SLOTS = ['panel01', 'panel02', 'panel03'] as const;

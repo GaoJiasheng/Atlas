@@ -116,6 +116,8 @@ export function CameraRig({
   const camera = useThree((s) => s.camera) as unknown as PerspectiveCamera;
   const invalidate = useThree((s) => s.invalidate);
   const size = useThree((s) => s.size);
+  // The live store: a frame drawn right after a stage resize runs before this component re-renders with the new size.
+  const live = useThree((s) => s.get);
   const stageSize = useRef(size);
   stageSize.current = size;
   const orbit = useStore(ui, (s) => s.orbit);
@@ -147,12 +149,14 @@ export function CameraRig({
   const hudCamera = useRef<OrbitCamera | null>(null);
   const fitHud = (cam: OrbitCamera): OrbitCamera => {
     if (!views.hudFrame || !bridge.freeStage || ui.getState().cover || user.current.active) return cam;
-    cam = fitCameraToAspect(cam, stageSize.current.width / stageSize.current.height);
+    // Fit to the stage as it is now (the HUD → presentation resize), not as of the last React render.
+    const { width, height } = live().size;
+    cam = fitCameraToAspect(cam, width / height);
     const boxes: FrameBox[] = views.hudFrame.parts.flatMap(id => {
       const h = handles.get(id);
       return h?.visible ? [{ center: [h.object.position.x + h.offset[0], h.object.position.y + h.offset[1], h.object.position.z + h.offset[2]] as [number,number,number], half: h.half }] : [];
     });
-    return fitCameraToHud(cam, boxes, stageSize.current.width, stageSize.current.height, bridge.freeStage);
+    return fitCameraToHud(cam, boxes, width, height, bridge.freeStage);
   };
 
   const current = (): OrbitCamera => {

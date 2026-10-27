@@ -10,7 +10,7 @@ for(const lang of ['en','zh'])for(const theme of ['paper','cinema'])test(`${lang
  await set(page,{'pupil-mm':4});await expect.poll(async()=>Number((await read(page)).eye.readings['blur-diameter'])).toBeCloseTo(7/75,9);
  await set(page,{'light-in':false});await expect.poll(async()=>(await read(page)).eye.active).toBe(false);expect((await read(page)).eye.hiddenReason).toBe('dark');
  await page.evaluate(()=>(window.__atlas!.engine as unknown as Engine).apply({view:'exploded',explode:1}));await expect.poll(async()=>(await read(page)).eye.hiddenReason).toBe('exploded');
- await open(page,'ch=sample-sound',lang,theme);await page.evaluate(()=>(window.__atlas!.engine as unknown as Engine).sensesSeek(0));await expect.poll(async()=>(await read(page)).wave.positions[5]).toBeCloseTo(.2625,9);
+ await open(page,'ch=sample-sound',lang,theme);await page.evaluate(()=>(window.__atlas!.engine as unknown as Engine).sensesSeek(0));await expect.poll(async()=>(await read(page)).wave.positions[5]).toBeCloseTo(.285,9);
  await page.evaluate(()=>(window.__atlas!.engine as unknown as Engine).sensesSeek(.25));await expect.poll(async()=>(await read(page)).wave.positions[5]).toBeCloseTo(.25,9);
  await set(page,{'frequency-hz':500});expect((await page.evaluate(()=>(window.__atlas!.engine as unknown as Engine).sim())).outputs['visual-hz']).toBe(2);
  await expect(page.locator('[data-senses-notes]')).toContainText('250');

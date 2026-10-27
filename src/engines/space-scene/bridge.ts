@@ -134,7 +134,7 @@ export interface MechanismReading {
 export type MechanismSave = Record<string, { thetaRad: number; qaHold: boolean }>;
 
 export interface SensesReading {
-  eye?: ReturnType<typeof import('./lib/sim/senses').effectiveEyeRays> & { active: boolean; hiddenReason: string | null; readings: Record<string, number | string>; rendered: { object: number[]; lens: number[]; retina: number[] }[][] };
+  eye?: ReturnType<typeof import('./lib/sim/senses').effectiveEyeRays> & { yScale: number; active: boolean; hiddenReason: string | null; readings: Record<string, number | string>; rendered: { object: number[]; lens: number[]; retina: number[] }[][]; label: { x: number; y: number; shown: boolean } };
   wave?: { phaseCycles: number; positions: number[]; rests: number[]; visualHz: number; lambda: number; A: number; playing: boolean; slowFactor: number; active: boolean; hiddenReason: string | null };
 }
 export interface StageBridge {

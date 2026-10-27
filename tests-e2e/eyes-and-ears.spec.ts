@@ -81,11 +81,11 @@ test('frequency prediction preserves amplitude and the reference particle return
   expect((await senses(page)).eye?.active).toBe(false);
   await set(page, { 'frequency-hz': 250 });
   await page.evaluate(() => (window.__atlas!.engine as unknown as Engine).sensesSeek(0));
-  await expect.poll(async () => (await senses(page)).wave?.positions[5]).toBeCloseTo(.2625, 9);
+  await expect.poll(async () => (await senses(page)).wave?.positions[5]).toBeCloseTo(.285, 9);
   await page.evaluate(() => (window.__atlas!.engine as unknown as Engine).sensesSeek(.25));
   await expect.poll(async () => (await senses(page)).wave?.positions[5]).toBeCloseTo(.25, 9);
   await page.evaluate(() => (window.__atlas!.engine as unknown as Engine).sensesSeek(1));
-  await expect.poll(async () => (await senses(page)).wave?.positions[5]).toBeCloseTo(.2625, 9);
+  await expect.poll(async () => (await senses(page)).wave?.positions[5]).toBeCloseTo(.285, 9);
   await set(page, { 'sound-active': false });
   await expect.poll(async () => (await senses(page)).wave?.positions[5]).toBe(.25);
   expect((await senses(page)).wave?.playing).toBe(false);
@@ -130,4 +130,61 @@ test('phone reduced motion: touch controls and beat stepping', async ({ page }) 
   await page.locator('.space-beatline__btn').last().click();
   await expect.poll(() => page.url()).toContain('b=1');
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
+});
+
+type Frame = { x0: number; y0: number; x1: number; y1: number };
+const api = (p: Page) => p.evaluate(() => {
+  const e = window.__atlas!.engine as unknown as { freeStage(): Frame | null; anchor(id: string): { x: number; y: number; shown: boolean; onScreen: boolean } | null };
+  const ids = ['object-top', 'object-bottom', 'retinal-screen', 'retina', 'cochlea-shell', 'eardrum', 'malleus', 'incus', 'wave-reference', 'hair-patch'];
+  return { frame: e.freeStage(), anchors: Object.fromEntries(ids.map((id) => [id, e.anchor(id)])) };
+});
+const inside = (a: { x: number; y: number } | null, f: Frame | null) => !!a && !!f && a.x >= f.x0 && a.x <= f.x1 && a.y >= f.y0 && a.y <= f.y1;
+async function present(p: Page, chapter: string, beat: number) {
+  await p.evaluate(([c, b]) => window.__atlas!.goToBeat(window.__atlas!.beats().findIndex((x) => x.chapter === c && x.index === b), { instant: true }), [chapter, beat] as const);
+}
+
+test('F1/F2/F5: the bench reads in the presentation, inside the free band, redrawn after the resize', async ({ page }) => {
+  await page.addInitScript(() => {
+    new MutationObserver((list) => { if (list.some((m) => m.target instanceof HTMLCanvasElement)) (window as unknown as { resized: number }).resized = performance.now(); })
+      .observe(document, { attributes: true, attributeFilter: ['width', 'height'], subtree: true });
+  });
+  await open(page, 'ch=near-far-and-focus');
+  await present(page, 'near-far-and-focus', 1);
+  // The HUD → presentation resize clears the canvas; a frame must follow it (no empty stage under live labels).
+  await page.waitForFunction(() => ((window.__atlas!.stats() as { lastFrame?: number }).lastFrame ?? 0) > ((window as unknown as { resized?: number }).resized ?? 0), null, { timeout: 20_000 });
+  expect((await sim(page)).outputs['focus-state']).toBe('behind-retina');
+  await expect.poll(async () => {
+    const { frame, anchors } = await api(page);
+    return ['object-top', 'object-bottom', 'retinal-screen'].every((id) => inside(anchors[id]!, frame));
+  }, { timeout: 15_000 }).toBe(true);
+  const eye = (await senses(page)).eye as unknown as { yScale: number; label: { shown: boolean } };
+  expect(eye.yScale).toBe(20);
+  await expect(page.locator('[data-senses-stage]')).toContainText('×20');
+  await expect.poll(async () => page.locator('[data-senses-stage]').evaluate((el) => getComputedStyle(el).opacity)).toBe('1');
+});
+
+test('F3/F4: the wave row and the framed hair-cell window stay clear of the ear and the caption', async ({ page }) => {
+  await open(page, 'ch=pitch-and-strength');
+  await present(page, 'pitch-and-strength', 0);
+  await expect.poll(async () => (await senses(page)).wave?.positions[5]).toBeDefined();
+  const wave = (await senses(page)).wave as unknown as { A: number };
+  expect(wave.A).toBeCloseTo(.035, 9);
+  await expect.poll(async () => { const { frame, anchors } = await api(page); return inside(anchors['wave-reference']!, frame); }, { timeout: 15_000 }).toBe(true);
+  await present(page, 'vibration-to-signal', 2);
+  const inset = page.locator('[data-inset="hair-cell-window"]');
+  await expect.poll(async () => inset.evaluate((el) => getComputedStyle(el).opacity), { timeout: 15_000 }).toBe('1');
+  await expect(inset).toContainText(/different scale/i);
+  const box = await inset.locator('rect').evaluate((r) => ({ x0: +r.getAttribute('x')!, y0: +r.getAttribute('y')!, x1: +r.getAttribute('x')! + +r.getAttribute('width')!, y1: +r.getAttribute('y')! + +r.getAttribute('height')! }));
+  const { frame, anchors } = await api(page);
+  for (const id of ['malleus', 'incus', 'cochlea-shell']) expect(inside(anchors[id]!, box), id).toBe(false);
+  expect(inside(anchors['hair-patch']!, frame)).toBe(true);
+});
+
+test('F6: the phone overview shows both stations', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await open(page, 'ch=before-you-start');
+  await expect.poll(async () => {
+    const { anchors } = await api(page);
+    return ['retina', 'eardrum', 'cochlea-shell'].every((id) => anchors[id]?.onScreen && anchors[id]!.x > 0 && anchors[id]!.x < 390);
+  }, { timeout: 15_000 }).toBe(true);
 });

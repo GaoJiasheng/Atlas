@@ -21,8 +21,11 @@ export function SensesNotes({ file }: { file: PartsFile }) {
   // A dark eye card still reports predicted geometry, so its disclosure must survive the light visibility condition.
   const eye = shown('paraxial-eye') || (observingEye && eyeStudy), wave = shown('longitudinal-wave');
   if (!eye && !wave) return null;
+  const bench = view.sim.overlays.find(o => o.kind === 'paraxial-eye');
+  const yScale = bench?.kind === 'paraxial-eye' ? bench.yScale : 1;
   return <div className="space-plate__sim" data-senses-notes="">
     {eye && <p>{zh ? '角膜与晶状体合并为有效透镜；接收面表示视网膜。课堂近轴示意，非活眼精确追迹。' : 'Effective cornea + lens; receiver = retina. Paraxial classroom model, not precise living-eye ray tracing.'}</p>}
+    {eye && yScale > 1 && <p>{zh ? `高度竖向放大 ×${yScale}，示意；距离不放大。` : `Heights drawn ×${yScale} vertically, schematic; distances unscaled.`}</p>}
     {wave && <p>{zh ? `设定 ${view.values[s.frequencyHz]} Hz · 显示 ${quantities['visual-hz']} Hz · ${s.slowFactor} 倍慢放；振幅表示相对位移。` : `Set ${view.values[s.frequencyHz]} Hz · displayed ${quantities['visual-hz']} Hz · ${s.slowFactor}× slower; amplitude means relative displacement.`}</p>}
     {eye && quantities['eye-state'] === 'dark' && <p>{zh ? '暗处：焦点读数仅为几何预测，没有光线或实际光像。' : 'Dark: focus readings are geometry predictions; no light rays or actual light image.'}</p>}
     {exploded && <p>{zh ? '拆开时隐藏光路和纵波示意。' : 'Optics and wave overlays are hidden while exploded.'}</p>}

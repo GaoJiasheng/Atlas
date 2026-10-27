@@ -80,6 +80,8 @@ import { FoodWebCard } from './hud/FoodWebCard';
 import { KeyCard } from './hud/KeyCard';
 import { EnergyBarLabels } from './hud/EnergyBarLabels';
 import { GroupScaleBars } from './hud/GroupScaleBars';
+import { InsetFrames } from './hud/InsetFrames';
+import { SensesStageLabel } from './hud/SensesStageLabel';
 import { airfoilApi } from './lib/sim/airfoil-api';
 import { AirfoilDriver } from './explorer/AirfoilDriver';
 import { TryIt } from './explorer/TryIt';
@@ -556,6 +558,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
           shadowMapUpdates: st.shadowMapUpdates,
           fps: st.fps === undefined ? undefined : Math.round(st.fps * 10) / 10,
           gpu: st.gpu,
+          lastFrame: st.lastFrame,
           // The live camera (tests: where the stage really is, not the stored target).
           ...(live ? { camera: { ...roundCamera(live), fov: Math.round((live.fov ?? 0) * 100) / 100 } } : {}),
           // A standing exercise: how far the planted feet still slide (cm).
@@ -633,6 +636,8 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
           };
         },
         senses: () => bridge.senses,
+        /** The measured free HUD band the hudFrame camera fits into (stage CSS px), or null. */
+        freeStage: () => (bridge.freeStage ? { ...bridge.freeStage } : null),
         sensesSeek: (cycles: number) => bridge.sensesSeek(cycles),
         joint: (id: string) => { const j = bridge.joints.get(id); return j ? structuredClone(j) : null; },
         ...(file.sim?.airfoil ? airfoilApi(file,store,ui,bridge,chapters) : {}),
@@ -822,6 +827,8 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         <LeaderLabels file={file} chapters={chapters} bridge={bridge} ui={ui} />
         <SitesOverlay file={file} bridge={bridge} />
         <GroupScaleBars file={file} bridge={bridge} />
+        <InsetFrames file={file} bridge={bridge} />
+        {file.sim?.kind === 'senses' && <SensesStageLabel file={file} bridge={bridge} />}
         <EnergyBarLabels file={file} bridge={bridge} />
       </SceneSlot>
       <SceneSlot name="card">{file.sim?.foodWeb ? <FoodWebCard file={file} /> : orbitSession ? <OrbitCard file={file} /> : file.sim?.sort ? <KeyCard file={file} /> : file.sim?.lifeCycle ? <CycleCard file={file} /> : file.sim?.energy ? <EnergyCard file={file} /> : file.sim?.circuit?.diagram ? <CircuitCard file={file} /> : <PartChainCard file={file} />}</SceneSlot>

@@ -921,7 +921,7 @@ export const shadowCastSchema = z.object({
 
 export const simOverlaySchema = z.discriminatedUnion('kind', [
   shadowCastSchema,
-  z.object({ kind: z.literal('paraxial-eye'), model: z.literal('eye'), group: kebabId.optional(), origin: vec3, cmToScene: z.number().finite().positive(), halfApertureSamples: z.literal(1), when: z.object({ ...source, is: simValue }).strict().optional() }).strict(),
+  z.object({ kind: z.literal('paraxial-eye'), model: z.literal('eye'), group: kebabId.optional(), origin: vec3, cmToScene: z.number().finite().positive(), yScale: z.number().finite().min(1).max(40).default(1), pointColors: z.tuple([colorRef, colorRef]).optional(), halfApertureSamples: z.literal(1), when: z.object({ ...source, is: simValue }).strict().optional() }).strict(),
   z.object({ kind: z.literal('longitudinal-wave'), model: z.literal('sound'), group: kebabId.optional(), origin: vec3, axis: vec3, count: z.literal(41), spacing: z.literal(.05), referenceIndex: z.number().int().min(0).max(40), when: z.object({ ...source, is: simValue }).strict().optional() }).strict(),
   /** Orbit sims (docs/44 E-SEM2): the six guide parts OrbitDriver redraws from the shared snapshot (tracks, plane, node line, rays, ruler). */
   z
@@ -1677,6 +1677,7 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
       if (o.group && ctx.groups && !ctx.groups.has(o.group)) issue([...at, 'group'], `unknown group ${o.group}`);
       if (sim.kind !== 'senses' || !sim.senses) issue(at, 'senses overlays require kind senses and senses data');
       if (o.origin.some((v) => !Number.isFinite(v))) issue([...at, 'origin'], 'origin must be finite');
+      if (o.kind === 'paraxial-eye' && o.pointColors?.some((c) => !c.startsWith('token:'))) issue([...at, 'pointColors'], 'object-point colours must be theme tokens (token:<name>), one per object point');
       if (o.kind === 'longitudinal-wave' && (!o.axis.every(Number.isFinite) || Math.abs(Math.hypot(...o.axis) - 1) > 1e-9)) issue([...at, 'axis'], 'axis must be finite and normalised');
       whenIssues(at, o.when);
       if (o.when?.control) { const c = controls.get(o.when.control); if (c && !legalValue(c, o.when.is)) issue([...at, 'when', 'is'], 'condition must be a legal control value'); }

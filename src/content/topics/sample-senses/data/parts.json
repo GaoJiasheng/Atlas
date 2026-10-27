@@ -518,7 +518,7 @@
         "slowFactor": 250,
         "baseFrequencyHz": 250,
         "baseWavelengthScene": 1,
-        "baseDisplacementScene": 0.0125,
+        "baseDisplacementScene": 0.035,
         "sources": [
           "S1"
         ]

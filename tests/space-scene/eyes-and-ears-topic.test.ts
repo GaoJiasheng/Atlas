@@ -132,8 +132,14 @@ describe('eyes-and-ears: captions match the displayed numbers and states', () =>
     expect(chapter('pitch-and-strength').state.summary.en).toMatch(/250/);
     expect(chapter('pitch-and-strength').state.summary.zh).toMatch(/250/);
     const rest = .25;
-    expect(longitudinalPositions(41, .05, .0125, 1, 0)[5]).toBeCloseTo(rest + .0125, 12);
-    expect(longitudinalPositions(41, .05, .0125, 1, 1)[5]).toBeCloseTo(rest + .0125, 12);
+    const A = sim.senses!.sound.baseDisplacementScene;
+    expect(A).toBe(.035);
+    expect(longitudinalPositions(41, .05, A, 1, 0)[5]).toBeCloseTo(rest + A, 12);
+    expect(longitudinalPositions(41, .05, A, 1, 1)[5]).toBeCloseTo(rest + A, 12);
+    // Compressions read: at 250 Hz / amplitude 1 neighbouring spacing swings by about ±22 % (2πA/λ).
+    const p = longitudinalPositions(41, .05, A, 1, 0), gaps = p.slice(1).map((x, i) => x - p[i]!);
+    expect(Math.min(...gaps) / .05).toBeLessThan(.8);
+    expect(Math.max(...gaps) / .05).toBeGreaterThan(1.2);
   });
 
   it('paces all four ear-transfer animations with the same output', () => {

@@ -213,6 +213,10 @@ class Session {
     // tsx compiles with keepNames: page.evaluate callbacks reference a helper that only exists in Node.
     await context.addInitScript(() => {
       (window as unknown as { __name: <T>(fn: T) => T }).__name = (fn) => fn;
+      // Setting a canvas's width / height clears its drawing buffer: note when, so a shot can wait for the next drawn frame.
+      new MutationObserver((list) => {
+        if (list.some((m) => m.target instanceof HTMLCanvasElement)) (window as unknown as { __atlasCanvasResized: number }).__atlasCanvasResized = performance.now();
+      }).observe(document, { attributes: true, attributeFilter: ['width', 'height'], subtree: true });
     });
     const page = await context.newPage();
     const s = new Session(page, origin, topic, locale, theme);
@@ -309,6 +313,21 @@ class Session {
     await page.waitForTimeout(spec.wait ?? 900);
   }
 
+  /**
+   * Wait (bounded) until the stage has drawn a frame since its canvas last changed size. A resize
+   * (the HUD hiding for the presentation, a resolution step) clears the WebGL canvas, and under a
+   * heavily loaded software GL the next frame can take seconds: a shot taken in between shows an empty
+   * stage under live labels. False when no frame came; engines that do not report frames pass at once.
+   */
+  async drawn(timeoutMs = 20_000): Promise<boolean> {
+    return this.page
+      .waitForFunction(() => {
+        const last = (window.__atlas!.stats() as { lastFrame?: number }).lastFrame;
+        return last === undefined || last > ((window as unknown as { __atlasCanvasResized?: number }).__atlasCanvasResized ?? 0);
+      }, null, { timeout: timeoutMs, polling: 100 })
+      .then(() => true, () => false);
+  }
+
   jsSize(): { files: number; gzKB: number } {
     let bytes = 0;
     for (const f of this.jsFiles) {
@@ -361,6 +380,7 @@ async function runShots(s: Session, o: Options, out: string, report: RunReport):
     if (!spec) throw new Error(`no such shot "${n}" (have: ${Object.keys(shots).join(', ')})`);
     await s.apply(spec);
     if (o.perf) await s.page.waitForTimeout(2000);
+    await s.drawn();
     await s.page.screenshot({ path: join(out, `${n}${o.suffix}.png`) });
     const st = await s.stats();
     report.shots[n] = st;
@@ -733,11 +753,11 @@ async function sensesDrawIssues(s: Session): Promise<string[]> {
     const read = engine.senses(), issues:string[] = [];
     if (!read.eye) issues.push('missing eye geometry');
     else for (const point of read.eye.points) for (const ray of point.rays) if (Math.abs(ray.retina[0]!-read.eye.r)>1e-9) issues.push('eye ray passes the receiver');
-    if (read.eye && optical) for(let pi=0;pi<read.eye.points.length;pi++) for(let ri=0;ri<3;ri++) for(const endpoint of ['object','lens','retina'] as const) { const want=read.eye.points[pi]!.rays[ri]![endpoint], actual=read.eye.rendered[pi]![ri]![endpoint]; for(let axis=0;axis<3;axis++) if(Math.abs(actual[axis]!-(optical.origin[axis]!+want[axis]!*optical.cmToScene))>1e-4) issues.push(`eye ${pi}/${ri}/${endpoint} geometry differs from solver`); }
+    if (read.eye && optical) for(let pi=0;pi<read.eye.points.length;pi++) for(let ri=0;ri<3;ri++) for(const endpoint of ['object','lens','retina'] as const) { const want=read.eye.points[pi]!.rays[ri]![endpoint], actual=read.eye.rendered[pi]![ri]![endpoint]; for(let axis=0;axis<3;axis++) if(Math.abs(actual[axis]!-(optical.origin[axis]!+want[axis]!*optical.cmToScene*(axis===1?optical.yScale:1)))>1e-4) issues.push(`eye ${pi}/${ri}/${endpoint} geometry differs from solver`); }
     if (!read.wave || read.wave.positions.length !== 41) issues.push('missing 41-particle longitudinal wave');
     else for(let i=0;i<41;i++) { const w=read.wave; const want=w.rests[i]!+w.A*Math.sin(2*Math.PI*(w.rests[i]!/w.lambda-w.phaseCycles)); if(Math.abs(w.positions[i]!-want)>1e-4) issues.push(`wave particle ${i} disagrees with solver`); }
     return issues;
-  }, optical?.kind === 'paraxial-eye' ? { origin:optical.origin, cmToScene:optical.cmToScene } : null);
+  }, optical?.kind === 'paraxial-eye' ? { origin:optical.origin, cmToScene:optical.cmToScene, yScale:optical.yScale ?? 1 } : null);
 }
 
 /** Rigid drawn endpoints, valve states and closed-path visibility share one frame. */
@@ -916,6 +936,7 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
     for (const issue of await mechanismDrawIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     for (const issue of await sensesDrawIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     for (const issue of await airfoilIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
+    if (!(await s.drawn())) report.beatFailures.push(`${name}: the stage drew no frame after its canvas was resized`);
     await s.page.screenshot({ path: join(out, `${name}${o.suffix}.png`) });
     console.log(`  ${name.padEnd(36)} ${landed ? 'OK' : 'FAIL'}${missing.length ? `  (no label: ${missing.join(', ')})` : ''}`);
     // A looping exercise beat (SpaceScene exercise mode) also gets a still at its start and end keys.
@@ -931,6 +952,7 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
           continue;
         }
         await s.page.waitForTimeout(o.perf ? 2400 : 1500);
+        await s.drawn();
         await s.page.screenshot({ path: join(out, `${name}-${phase}${o.suffix}.png`) });
         // A standing exercise keeps its feet planted: how far they still slide (cm), noted past FOOT_SLIP_CM.
         const slip = (await s.stats()).footSlip;
@@ -1499,6 +1521,7 @@ async function runLayout(s: Session, out: string, report: RunReport, locale: str
       await check(`preset ${p}`);
     }
     await s.apply({ chapter: chapters[0], wait: 800 });
+    await s.drawn();
     await page.screenshot({ path: join(out, `layout-${w}x${h}.png`) });
     // Opened from a link at this size (a shared beat: `?ch=<chapter>&b=2`, the reader and the HUD laid out on load, not after a
     // resize), each in a fresh document (Session.load); then the topic again as the session opened it. Engines without beats
@@ -1508,6 +1531,7 @@ async function runLayout(s: Session, out: string, report: RunReport, locale: str
       await page.waitForTimeout(700);
       await check(`${c} opened at beat 2`);
     }
+    await s.drawn();
     await page.screenshot({ path: join(out, `layout-${w}x${h}-linked.png`) });
     await s.reopen();
     console.log(`  ${`${w}x${h}`.padEnd(10)} ${issues.length ? issues.length + ' issue(s)' : 'OK'}`);

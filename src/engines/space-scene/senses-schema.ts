@@ -14,7 +14,7 @@ export function sensesIssues(data: SensesData, controls: ReadonlyMap<string, Sim
   const out: { path: (string | number)[]; message: string }[] = [];
   const issue = (path: (string | number)[], message: string) => out.push({ path, message });
   const e = data.eye, s = data.sound;
-  for (const [field, expected] of [['slowFactor',250],['baseFrequencyHz',250],['baseWavelengthScene',1],['baseDisplacementScene',.0125]] as const) if (s[field] !== expected) issue(['sound', field], `this classroom comparison requires ${expected}`);
+  for (const [field, expected] of [['slowFactor',250],['baseFrequencyHz',250],['baseWavelengthScene',1],['baseDisplacementScene',.035]] as const) if (s[field] !== expected) issue(['sound', field], `this classroom comparison requires ${expected}`);
   if (e.retinaCm !== 4 || e.referencePupilMm !== 2 || e.objectHeightsCm[0] !== 1 || e.objectHeightsCm[1] !== -.5 || e.objectsCm.near !== 12 || e.objectsCm.far !== 40 || e.focalCm.near !== 3 || Math.abs(e.focalCm.far - 40/11) > 1e-12) issue(['eye'], 'use the fixed classroom geometry: u 12/40, f 3/(40/11), retina 4, reference pupil 2, heights 1/-.5');
   const expected = [
     ['eye', 'illumination', e.illumination, 'light-in', 'toggle', [false, true], true],

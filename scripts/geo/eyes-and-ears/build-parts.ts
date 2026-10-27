@@ -24,18 +24,54 @@ const lathe = (at: V3, profile: number[][], more: P = {}): P =>
 const ring = (at: V3, inner: number, outer: number, thick: number, more: P = {}): P =>
   lathe(at, [[inner, -thick / 2], [outer, -thick / 2], [outer, thick / 2], [inner, thick / 2], [inner, -thick / 2]], more);
 const parts: P[] = [];
+/** Closed Catmull-Rom outline through control points, `per` samples per span (smooth extrude edges). */
+const smoothLoop = (pts: number[][], per = 6) => pts.flatMap((_, i) => {
+  const p0 = pts[(i - 1 + pts.length) % pts.length]!, p1 = pts[i]!, p2 = pts[(i + 1) % pts.length]!, p3 = pts[(i + 2) % pts.length]!;
+  return Array.from({ length: per }, (_, k) => {
+    const t = k / per, t2 = t * t, t3 = t2 * t;
+    return [0, 1].map(j => round(.5 * (2 * p1[j]! + (-p0[j]! + p2[j]!) * t + (2 * p0[j]! - 5 * p1[j]! + 4 * p2[j]! - p3[j]!) * t2 + (-p0[j]! + 3 * p1[j]! - 3 * p2[j]! + p3[j]!) * t3)));
+  });
+});
+/** Open Catmull-Rom polyline through control points (ends kept), `per` samples per span; radii clamped ≥ 0. */
+const smoothOpen = (pts: number[][], per = 4) => {
+  const at = (i: number) => pts[Math.max(0, Math.min(pts.length - 1, i))]!;
+  const out: number[][] = [];
+  for (let i = 0; i < pts.length - 1; i++) for (let k = 0; k < per; k++) {
+    const p0 = at(i - 1), p1 = at(i), p2 = at(i + 1), p3 = at(i + 2), t = k / per, t2 = t * t, t3 = t2 * t;
+    const v = [0, 1].map(j => .5 * (2 * p1[j]! + (-p0[j]! + p2[j]!) * t + (2 * p0[j]! - 5 * p1[j]! + 4 * p2[j]! - p3[j]!) * t2 + (-p0[j]! + 3 * p1[j]! - 3 * p2[j]! + p3[j]!) * t3));
+    out.push([round(Math.max(0, v[0]!)), round(v[1]!)]);
+  }
+  out.push(pts[pts.length - 1]!);
+  return out;
+};
+/** Thin spherical-cap shell profile [r, y] (lathe): outer then inner surface, closed, evenly sampled. */
+const capShell = (centreY: number, outer: number, inner: number, fromDeg: number, samples = 28) => {
+  const arc = (R: number, reverse: boolean) => Array.from({ length: samples + 1 }, (_, i) => {
+    const a = (fromDeg + (90 - fromDeg) * (reverse ? samples - i : i) / samples) * Math.PI / 180;
+    return [round(Math.max(0, R * Math.cos(a))), round(centreY + R * Math.sin(a))];
+  });
+  const out = [...arc(outer, false), ...arc(inner, true)];
+  return [...out, out[0]!];
+};
 function add(id: string, group: string, en: string, zh: string, summaryEn: string, summaryZh: string,
   detailEn: string, detailZh: string, primitive: P, more: P = {}) {
   parts.push({ id, group, name: bi(en, zh), summary: bi(summaryEn, summaryZh), detail: bi(detailEn, detailZh),
     primitive, castShadow: false, ...more });
 }
 
+/* Study layout (DESIGN). The enlarged hair-cell window sits below and right of the cochlea, clear of the
+ * middle ear; the optical bench sits below the eye, clear of its envelope, its heights drawn ×BENCH_Y. */
+const WIN: V3 = [3.15, -1.30, .35];
+const win = (dx: number, dy: number, dz = 0): V3 => [round(WIN[0] + dx), round(WIN[1] + dy), round(WIN[2] + dz)];
+const BENCH: V3 = [-1, -2.4, 1.3], BENCH_CM = .06, BENCH_Y = 20;
+const benchAt = (xCm: number, yCm: number): V3 => [round(BENCH[0] + xCm * BENCH_CM), round(BENCH[1] + yCm * BENCH_CM * BENCH_Y), BENCH[2]];
+
 /* Eye: anterior → posterior is +X. Rings have a genuine open centre. */
 add('cornea', 'eye-front', 'Cornea', '角膜',
   'The transparent cornea admits and bends incoming light.', '透明的角膜让光进入，并使光折射。',
   'The cornea is the curved transparent surface at the front of the eye, ahead of the iris and lens. It works with the lens to focus incoming light. [S2]\n\nThis clear shell is an original cutaway schematic. Its thickness and curvature are design choices; the separate optical bench combines the cornea and lens into one effective lens. [S31]',
   '角膜是眼睛前端弯曲、透明的表面，位于虹膜和晶状体之前。它与晶状体一起使入眼的光聚焦。[S2]\n\n这里的透明薄壳是原创剖面示意，厚度与曲率是设计值。另一个光学工位把角膜与晶状体合成一个有效透镜。[S31]',
-  lathe([-2, 0, 0], [[0, -1.08], [.25, -1.04], [.44, -.92], [.57, -.73], [.55, -.715], [.42, -.905], [.24, -1.015], [0, -1.055]], { color: 'glass', tint: 'token:bone', arc: 300 }),
+  lathe([-2, 0, 0], [[0, -1.08], [.25, -1.04], [.44, -.92], [.57, -.73], [.55, -.715], [.42, -.905], [.24, -1.015], [0, -1.055]], { color: 'glass', tint: 'token:bone', arc: 178 }),
   { connects: ['iris'], shell: true });
 add('iris', 'eye-front', 'Iris', '虹膜',
   'The iris controls the size of the opening called the pupil.', '虹膜调节称为瞳孔的开口大小。',
@@ -57,12 +93,13 @@ add('ciliary-ring', 'eye-front', 'Ciliary ring', '睫状环',
   'The ciliary apparatus changes the tension holding the lens.', '睫状装置改变悬持晶状体的张力。',
   'The ciliary body surrounds the lens and connects to it through suspensory fibres. Changes in muscle action and fibre tension allow the lens to change shape. [S3]\n\nThe ring and a few radial fibres are enlarged schematic landmarks. The number of fibres drawn is not an anatomical count, and their movement is not calculated here. [S31]',
   '睫状体环绕晶状体，通过悬韧带与它相连。肌肉活动和纤维张力的变化，使晶状体能改变形状。[S3]\n\n环与少量放射纤维是便于辨认的放大示意。画出的纤维数不代表解剖总数，这里也不计算纤维运动。[S31]',
-  ring([-2.45, 0, 0], .59, .68, .075, { ...tissue('token:muscle-2'), arc: 210 }), { extra: fibres, connects: ['lens'] });
+  ring([-2.45, 0, 0], .59, .68, .075, { ...tissue('token:muscle-2'), arc: 178 }), { extra: fibres, connects: ['lens'] });
 add('sclera-shell', 'eye-receiver', 'Sclera', '巩膜',
   'The sclera forms the tough outer wall of the eyeball.', '巩膜构成眼球坚韧的外壁。',
   'The sclera is the outer coat surrounding most of the eyeball. At the front, the transparent cornea takes its place. The retina lines the inside of the back region. [S24]\n\nThis hollow shell is opened toward the viewer to expose the inside. It is not an empty solid sphere. X-ray changes this outer shell while leaving internal structures readable; dimensions are schematic. [S31]',
   '巩膜包围眼球的大部分，形成外层壁；眼球前端则是透明的角膜。后部内壁的里面衬着视网膜。[S24]\n\n这是一层中空外壳，朝观察者的一面打开，以露出内部。它不是一颗实心球。透视时主要降低外壳的不透明度，使内层仍可辨认；尺寸均为示意。[S31]',
-  lathe([-2, 0, 0], [[.56, -.73], [.73, -.50], [.85, -.10], [.84, .30], [.68, .67], [.35, .88], [0, .95], [0, .895], [.32, .83], [.63, .62], [.79, .28], [.80, -.10], [.68, -.48], [.51, -.73], [.56, -.73]], { arc: 225 }),
+  // Outer then inner wall, smoothed (Catmull-Rom) so the cut face reads as a clean curve, not a polygon.
+  lathe([-2, 0, 0], smoothOpen([[.56, -.73], [.73, -.50], [.85, -.10], [.84, .30], [.68, .67], [.35, .88], [0, .95]], 5).concat(smoothOpen([[0, .895], [.32, .83], [.63, .62], [.79, .28], [.80, -.10], [.68, -.48], [.51, -.73]], 5), [[.56, -.73]]), { arc: 225, segments: 64 }),
   { shell: true, connects: ['cornea', 'retina'], castShadow: true });
 add('vitreous', 'eye-receiver', 'Vitreous', '玻璃体',
   'The vitreous is the clear gel filling the space behind the lens.', '玻璃体是填充晶状体后方空间的透明胶状物。',
@@ -74,7 +111,9 @@ add('retina', 'eye-receiver', 'Retina', '视网膜',
   'The retina receives light and starts electrical signalling.', '视网膜接收光，并启动电信号传递。',
   'The retina is a thin light-sensitive layer at the back inside the eye. Rod and cone cells help convert incoming light into electrical activity. [S2, S24]\n\nThis thin lining follows the inside wall; it is not a second eyeball. Individual receptor distributions and the later processing of vision in the brain are omitted. Light rays stop at the receiver in the separate bench; nerve paths show signals. [S31]',
   '视网膜是眼球内部后方的一层薄薄的感光组织，其中的视杆细胞和视锥细胞帮助把入射光转成电活动。[S2, S24]\n\n这里的薄层贴着内壁，不是另一个眼球。模型没有画感光细胞分布，也没有模拟脑内的视觉处理。另一个工位的光线止于接收面，神经路径表示信号。[S31]',
-  lathe([-2, 0, 0], [[.68, -.38], [.774, -.08], [.76, .27], [.61, .60], [.30, .81], [0, .872], [0, .855], [.29, .795], [.596, .587], [.745, .265], [.758, -.08], [.665, -.38], [.68, -.38]], { ...tissue('token:muscle-1'), arc: 200 }),
+  // A smooth, even lining just inside the sclera (centre y .08, radius ≈ .817): the cut edge reads as one clean curve.
+  // Arc just under 180°: its own clean end face lies on the kept side of the eye cut, so the label anchor stays on show.
+  lathe([-2, 0, 0], capShell(.08, .808, .792, -34), { ...tissue('token:muscle-1'), arc: 178, segments: 64 }),
   { connects: ['optic-nerve'] });
 add('optic-nerve', 'eye-receiver', 'Optic nerve', '视神经',
   'The optic nerve carries visual signals toward the brain.', '视神经把视觉信号传向大脑。',
@@ -84,13 +123,20 @@ add('optic-nerve', 'eye-receiver', 'Optic nerve', '视神经',
   { connects: ['retina'] });
 
 /* Ear: simplified original outlines, three continuous ossicles. */
-const pinnaOutline = [[-.15,-.72],[-.37,-.58],[-.48,-.26],[-.51,.18],[-.39,.62],[-.16,.84],[.08,.77],[.22,.49],[.17,.12],[.05,-.19],[.02,-.52],[-.15,-.72]];
+// Smooth ear outline: helix over the top and down the back, a soft lobule, the tragus side toward the canal (+x).
+const pinnaOutline = smoothLoop([[.20,.50],[.10,.76],[-.12,.86],[-.36,.73],[-.49,.40],[-.51,.02],[-.43,-.36],[-.29,-.62],[-.13,-.75],[.02,-.67],[.06,-.47],[.08,-.27],[.17,-.13],[.22,.12],[.22,.34]]);
+const helixRim: V3[] = [[.14,.66,0],[.02,.77,0],[-.12,.80,.005],[-.30,.69,.01],[-.42,.42,.012],[-.45,.05,.012],[-.39,-.30,.01],[-.27,-.54,.005]];
+const antihelix: V3[] = [[-.20,-.34,0],[-.27,-.06,.005],[-.25,.22,.008],[-.13,.48,.005],[.02,.58,0]];
 add('pinna', 'ear-transfer', 'Pinna', '耳廓',
   'The pinna helps collect sound toward the ear canal.', '耳廓帮助把声音汇入外耳道。',
   'The pinna is the visible outer flap of the ear. Its folds lead toward the entrance of the ear canal; it is only one part of the ear. [S7]\n\nThis single-ear schematic uses an original outer rim and inner fold. Fine skin anatomy and personal differences are omitted, and this station is enlarged independently from the eye. [S31]',
   '耳廓是从外面看得见的耳部，褶皱通向外耳道入口。它只是耳朵的一部分。[S7]\n\n这一只耳的示意由原创外缘与内侧褶皱组成，省略皮肤细节和个体差异。它与眼睛工位分别放大，不共用真实比例。[S31]',
-  { kind: 'extrude', at: [.90, 0, -.18], shape: pinnaOutline, depth: .13, bevel: .025, ...tissue('token:muscle-1') },
-  { extra: [sweep([.90,0,-.05], [[-.10,-.53,-.02],[-.30,-.22,.04],[-.31,.28,.05],[-.15,.58,.02],[.02,.46,0],[.02,.17,0]], [.065,.078,.072,.06,.055,.045], { ...tissue('token:bone') }), sphere([.96,-.13,-.05],.12,[.7,1,1.2],'tissue','token:muscle-2')], connects: ['canal'], clip: false });
+  { kind: 'extrude', at: [.90, 0, -.18], shape: pinnaOutline, depth: .13, bevel: .04, ...tissue('token:muscle-1') },
+  { extra: [
+    sweep([.90,0,-.10], helixRim, [.035,.05,.058,.062,.06,.056,.05,.042], { ...tissue('token:muscle-1'), segments: 64, radial: 14, caps: 'round' }),
+    sweep([.90,0,-.11], antihelix, [.028,.036,.038,.034,.024], { ...tissue('token:muscle-2'), segments: 40, radial: 12, caps: 'round' }),
+    sphere([.96,-.13,-.06],.12,[.75,1,1.1],'tissue','token:muscle-2'),
+  ], connects: ['canal'], clip: false });
 add('canal', 'ear-transfer', 'Ear canal', '外耳道',
   'The ear canal guides sound vibration to the eardrum.', '外耳道把声音振动传到鼓膜。',
   'The ear canal runs inward from the pinna and ends at the eardrum. It does not continue through the middle ear into the cochlea. [S7]\n\nThe open U-shaped wall exposes the air passage in this longitudinal cut. Its shortened path is a display choice; do not put objects into the ear canal. [S18, S31]',
@@ -146,13 +192,13 @@ add('basilar-strip', 'ear-receiver', 'Basilar membrane', '基底膜',
   'A travelling wave along the basilar membrane moves nearby sensory structures.', '沿基底膜传播的行波使附近的感受结构运动。',
   'The basilar membrane lies within the cochlea. Cochlear fluid movement sets up a travelling wave along it; different regions respond most strongly to different frequencies. [S7]\n\nThis unfolded strip is an enlarged schematic, at a different scale and outside its anatomical position. A single local patch rises and falls as one sample; this is not a simulation of a spatial travelling wave, biological timing or cochlear tuning. [S31]',
   '基底膜位于耳蜗内部，耳蜗液体的运动在它上面形成行波。不同区域对不同频率的响应较强。[S7]\n\n展开的条带是独立放大示意，比例与原位不同。单个局部膜片作为一个示意样本整体起伏，不模拟空间行波、生理时延或具体的耳蜗调谐曲线。[S31]',
-  {kind:'extrude', at:[2,-.48,1.6], shape:[[-.65,-.025],[.65,-.045],[.65,.045],[-.65,.025]], depth:.23, bevel:.008, ...tissue('token:muscle-1')},
+  {kind:'extrude', at:win(0,-.28), shape:[[-.65,-.025],[.65,-.045],[.65,.045],[-.65,.025]], depth:.23, bevel:.008, ...tissue('token:muscle-1')},
   {clip:false,short:bi('Basilar strip','基底膜'),connects:['hair-patch']});
 const cellExtra: P[] = [];
 const bundleExtra: P[] = [];
 for (const x of [-.30,0,.30]) {
-  cellExtra.push(sphere([2+x,-.24,1.6],.13,[.70,1.55,.70],'tissue','token:bone'));
-  for (const [i,h] of [.13,.18,.23].entries()) bundleExtra.push(sweep([2+x+(i-1)*.035,-.055,1.6],[[0,0,0],[.015,h,0]],.012,{...tissue('token:ink-2'),caps:'flat'}));
+  cellExtra.push(sphere(win(x,-.04),.13,[.70,1.55,.70],'tissue','token:bone'));
+  for (const [i,h] of [.13,.18,.23].entries()) bundleExtra.push(sweep(win(x+(i-1)*.035,.145),[[0,0,0],[.015,h,0]],.012,{...tissue('token:ink-2'),caps:'flat'}));
 }
 // Fixed cell bodies stay with the membrane; only the fine bundles tilt.
 parts.find(p=>p.id==='basilar-strip')!.extra = cellExtra;
@@ -183,30 +229,31 @@ add('balance-context','ear-receiver','Balance organs','平衡结构',
 /* Study points: deliberately asymmetrical, separate from anatomical retina. */
 add('object-top','study-bench','Object top','物体上部',
   'This point marks the upper part of the model object.','这一点表示模型物体的上部。',
-  'The upper point supplies one set of rays to the effective lens. At the receiver its beam centre lies below the optical axis. [S11]\n\nThe model height is one model centimetre. This larger point and the smaller lower point make the inversion readable without drawing a photographic image; these are design values, not eye measurements. [S31]',
-  '物体上部的一点向有效透镜提供一组光线；在接收面上，这束光的中心位于光轴下方。[S11]\n\n模型高度为一模型厘米。较大的上点与较小的下点帮助辨认倒立关系，不表示完整照片；这些是设计值，不是眼球测量。[S31]',
-  sphere([-3.4,-1.44,1.3],.034,[1,1,1],'tissue','token:ink-2'),{clip:false,connects:['retinal-screen']});
+  'The upper point supplies one set of rays to the effective lens. At the receiver its beam centre lies below the optical axis. [S11]\n\nThe model height is one model centimetre. The bench draws heights twenty times taller than distances so the inverted image and any blur can be seen; this vertical exaggeration is schematic. This larger amber point and the smaller teal lower point, with their matching rays, make the inversion readable without drawing a photographic image; these are design values, not eye measurements. [S31]',
+  '物体上部的一点向有效透镜提供一组光线；在接收面上，这束光的中心位于光轴下方。[S11]\n\n模型高度为一模型厘米。为了看清倒像和光斑，实验台把高度画成距离的二十倍，这是示意性的竖向放大。较大的琥珀色上点、较小的青色下点及各自同色的光线帮助辨认倒立关系，不表示完整照片；这些是设计值，不是眼球测量。[S31]',
+  {kind:'sphere',at:benchAt(-40,1),size:[.04],color:'token:ray-top'},{clip:false,connects:['retinal-screen']});
 add('object-bottom','study-bench','Object bottom','物体下部',
   'This point marks the lower part of the model object.','这一点表示模型物体的下部。',
-  'The lower point supplies the other three rays in the optical model. Its beam centre reaches the upper part of the receiver. [S11]\n\nIts height is minus half a model centimetre. The two unequal marker sizes belong to the teaching object and do not represent a living structure. [S31]',
-  '模型下部的一点提供另一组三条光线，它的光束中心到达接收面的上部。[S11]\n\n高度为负半模型厘米。两个大小不同的标记只属于教学物体，不表示生物结构。[S31]',
-  sphere([-3.4,-1.53,1.3],.022,[1,1,1],'tissue','token:ink-2'),{clip:false,connects:['object-top']});
+  'The lower point supplies the other three rays in the optical model. Its beam centre reaches the upper part of the receiver. [S11]\n\nIts height is minus half a model centimetre, drawn with the same twentyfold vertical exaggeration as the rest of the bench. The two unequal marker sizes and colours belong to the teaching object and do not represent a living structure. [S31]',
+  '模型下部的一点提供另一组三条光线，它的光束中心到达接收面的上部。[S11]\n\n高度为负半模型厘米，与整个实验台一样按二十倍竖向放大绘制。两个大小、颜色不同的标记只属于教学物体，不表示生物结构。[S31]',
+  {kind:'sphere',at:benchAt(-40,-.5),size:[.026],color:'token:ray-bottom'},{clip:false,connects:['object-top']});
 add('retinal-screen','study-bench','Model receiver','模型接收面',
   'The fixed receiver shows where the model light bundle arrives.','固定接收面显示模型光束落在哪里。',
-  'This receiver represents the retina in the separate effective-lens model. Light rays terminate at the receiver; a focused point or blur is derived from the same thin-lens geometry as the readouts. [S11]\n\nIt stays four model centimetres behind the effective lens. This frame is not a second anatomical retina, and its dimensions are design values rather than human measurements. [S31]',
-  '这一接收面在独立有效透镜模型中代表视网膜。光线到这里为止；清晰点或散开的光斑与读数使用同一套薄透镜几何计算。[S11]\n\n它固定在有效透镜后四模型厘米。线框不是另一层解剖视网膜，尺寸是设计值，不是人体测量。[S31]',
-  {kind:'box',at:[-.76,-1.50,1.30],size:[.007,.18,.007],color:'token:ink-2'},
-  {extra:[{kind:'box',at:[-.76,-1.59,1.30],size:[.007,.007,.10],color:'token:ink-2'},{kind:'box',at:[-.76,-1.41,1.30],size:[.007,.007,.10],color:'token:ink-2'},lathe([-1,-1.5,1.3],[[0,-.009],[.045,-.006],[.075,0],[.045,.006],[0,.009]],{color:'glass',tint:'token:bone',segments:24})],clip:false,short:bi('Receiver','接收面')});
+  'This receiver represents the retina in the separate effective-lens model. Light rays terminate at the receiver; a focused point or blur is derived from the same thin-lens geometry as the readouts. [S11]\n\nIt stays four model centimetres behind the effective lens. Heights on the bench, including the spot, are drawn twenty times taller than distances (a schematic vertical exaggeration). This frame is not a second anatomical retina, and its dimensions are design values rather than human measurements. [S31]',
+  '这一接收面在独立有效透镜模型中代表视网膜。光线到这里为止；清晰点或散开的光斑与读数使用同一套薄透镜几何计算。[S11]\n\n它固定在有效透镜后四模型厘米。实验台上的高度（包括光斑）都画成距离的二十倍，这是示意性的竖向放大。线框不是另一层解剖视网膜，尺寸是设计值，不是人体测量。[S31]',
+  // Receiver half-height .45 scene units covers every near/far image and blur at BENCH_Y; the thin lens disc spans the drawn aperture.
+  {kind:'box',at:benchAt(4,0),size:[.008,.9,.008],color:'token:ink-2'},
+  {extra:[{kind:'box',at:[benchAt(4,0)[0],round(BENCH[1]-.45),BENCH[2]],size:[.008,.008,.10],color:'token:ink-2'},{kind:'box',at:[benchAt(4,0)[0],round(BENCH[1]+.45),BENCH[2]],size:[.008,.008,.10],color:'token:ink-2'},lathe(BENCH,[[0,-.014],[.10,-.010],[.17,0],[.10,.010],[0,.014]],{color:'tissue',tint:'token:ink-3',segments:32,scale:[1,1,.35]})],clip:false,short:bi('Receiver','接收面')});
 add('signal-marker','ear-receiver','Signal','信号',
   'This marker identifies the start of the hearing-signal route.','这一标记指出听觉信号通路的起点。',
   'Electrical signalling begins after sensory transduction, rather than being a continuation of incoming light or a stream of outside air. [S2, S7]\n\nThe small marker sits beside the enlarged hair-cell window. Moving route markers represent signals only, and their size and speed are chosen for visibility. [S31]',
   '感受结构转导之后才开始电信号传递；它不是入射光的延续，也不是外界空气流。[S2, S7]\n\n小标记位于放大毛细胞窗旁。路径中的移动标记只表示信号，大小与速度按可见性设计。[S31]',
-  sphere([2,-.56,1.6],.045,[1,1,1],'tissue','token:ink-2'),{clip:false,connects:['hair-patch','auditory-nerve']});
+  sphere(win(.74,-.24),.045,[1,1,1],'tissue','token:ink-2'),{clip:false,connects:['hair-patch','auditory-nerve']});
 add('wave-reference','study-bench','Particle reference','粒子参照',
   'The rest mark shows that a medium particle moves locally back and forth.','静止位置标记显示介质粒子只在附近来回运动。',
   'In a longitudinal sound wave, medium particles move back and forth about their rest positions while the wave pattern travels. A particle does not make the journey from a source to the ear. [S9]\n\nThis fixed tick marks the highlighted particle’s rest position. The silent model uses a fixed slowdown factor and relative displacement; it is not a sound-level meter or a hearing test. [S31]',
   '纵向声波中的介质粒子在静止位置附近往复，而波的形态向前传播。粒子不会从声源一路走到耳朵。[S9]\n\n固定短刻度标出高亮粒子的静止位置。无声模型使用固定慢放倍率与相对位移，不是声级计或听力测试。[S31]',
-  {kind:'box',at:[1.25,-1.50,1.29],size:[.004,.08,.004],color:'token:ink-2'}, {clip:false,short:bi('Rest position','静止位置')});
+  {kind:'box',at:[1.25,-1.50,1.29],size:[.006,.10,.006],color:'token:ink-2'}, {extra:[{kind:'box',at:[.985,-1.53,1.29],size:[.006,.07,.006],color:'token:ink-3'},{kind:'box',at:[3.015,-1.53,1.29],size:[.006,.07,.006],color:'token:ink-3'}],clip:false,short:bi('Rest position','静止位置')});
 
 // Fixed outer iris diameter; only the opening changes. Context is not selectable.
 for (const [id,inner] of [['iris-aperture-small',.12],['iris-aperture-large',.24]] as const) parts.push({
@@ -218,10 +265,14 @@ for (const [id,inner] of [['iris-aperture-small',.12],['iris-aperture-large',.24
 const presets = [
   {id:'overview',label:bi('OVERVIEW','总览'),camera:{position:[0,2,11.8],target:[.20,0,0],fov:32}},
   {id:'eye',label:bi('EYE','眼睛'),camera:{position:[-4.3,1.1,4.8],target:[-2,0,0],fov:28}},
-  {id:'focus-bench',label:bi('FOCUS','聚焦'),camera:{position:[-1.8,.5,7],target:[-1.9,-.8,.6],fov:28}},
+  // The optical bench under the eye: object points, effective lens and receiver all in frame, the eye above.
+  // (hudFrame only fits subjects the authored view includes, so the whole bench is inside this frame.)
+  {id:'focus-bench',label:bi('FOCUS','聚焦'),camera:{position:[-2.05,-.45,9.4],target:[-2.05,-1.0,.7],fov:30}},
   {id:'ear',label:bi('EAR','耳朵'),camera:{position:[2,1.0,5.4],target:[2.1,.02,-.05],fov:30}},
-  {id:'cochlea',label:bi('COCHLEA','耳蜗'),camera:{position:[2,1,4.9],target:[2.30,-.10,.7],fov:30}},
-  {id:'wave',label:bi('VIBRATION','振动'),camera:{position:[2,1,6.8],target:[2,-.75,.65],fov:29}},
+  // Cochlea and the enlarged hair-cell window below it, both clear of the caption band.
+  {id:'cochlea',label:bi('COCHLEA','耳蜗'),camera:{position:[2.95,.25,5.9],target:[3.0,-.45,.1],fov:30}},
+  // The particle row is the subject; the ear stays above it as context.
+  {id:'wave',label:bi('VIBRATION','振动'),camera:{position:[2.1,-.05,6.3],target:[2.1,-.5,.65],fov:28}},
 ];
 const boneAnimations = ['drum-vibrate','malleus-rock','incus-rock','stapes-piston'];
 const sequence = (id:string,target:string,offset:V3,pivot?:V3) => ({id,target,kind:'sequence',loop:true,...(pivot?{pivot}:{}),keys:[
@@ -233,7 +284,7 @@ const animations = [
   {id:'incus-rock',target:'incus',kind:'oscillate',axis:[0,0,1],amplitude:1.3,hz:1,pivot:[1.86,.25,-.065]},
   sequence('stapes-piston','stapes',[.008,0,0]),
   sequence('basilar-wave','basilar-strip',[0,.045,0]),
-  {id:'bundle-bend',target:'hair-patch',kind:'sequence',loop:true,pivot:[2,-.055,1.6],keys:[
+  {id:'bundle-bend',target:'hair-patch',kind:'sequence',loop:true,pivot:win(0,.145),keys:[
     {t:0,offset:[0,0,0],rotation:[0,0,0]},
     {t:.25,offset:[0,.045,0],rotation:[0,0,5]},
     {t:.5,offset:[0,0,0],rotation:[0,0,0]},
@@ -281,10 +332,10 @@ const sim = {
   ],
   senses:{
     eye:{illumination:'light-in',pupilMm:'pupil-mm',object:'object-range',focus:'lens-focus',objectsCm:{near:12,far:40},focalCm:{near:3,far:40/11},retinaCm:4,referencePupilMm:2,objectHeightsCm:[1,-.5],sources:['S11','S31']},
-    sound:{active:'sound-active',frequencyHz:'frequency-hz',amplitude:'amplitude',slowFactor:250,baseFrequencyHz:250,baseWavelengthScene:1,baseDisplacementScene:.0125,sources:['S9','S10','S31']},
+    sound:{active:'sound-active',frequencyHz:'frequency-hz',amplitude:'amplitude',slowFactor:250,baseFrequencyHz:250,baseWavelengthScene:1,baseDisplacementScene:.035,sources:['S9','S10','S31']},
   },
   overlays:[
-    {kind:'paraxial-eye',group:'study-bench',model:'eye',origin:[-1,-1.5,1.3],cmToScene:.06,halfApertureSamples:1,when:{control:'light-in',is:true}},
+    {kind:'paraxial-eye',group:'study-bench',model:'eye',origin:BENCH,cmToScene:BENCH_CM,yScale:BENCH_Y,pointColors:['token:ray-top','token:ray-bottom'],halfApertureSamples:1,when:{control:'light-in',is:true}},
     {kind:'longitudinal-wave',group:'study-bench',model:'sound',origin:[1,-1.5,1.3],axis:[1,0,0],count:41,spacing:.05,referenceIndex:5,when:{control:'sound-active',is:true}},
   ],
 };
@@ -301,24 +352,27 @@ const data = {
   ],
   flows:[
     {id:'optic-signal',group:'nerve-signals',path:[[-1.17,.03,-.12],[-1.08,.02,-.12],[-.92,.0,-.16],[-.69,-.05,-.23]],speed:.22,color:'token:en-electrical',count:18,size:.7,spread:.006,parts:['retina','optic-nerve'],clip:false},
-    {id:'auditory-signal',group:'nerve-signals',path:[[2,-.56,1.6],[2.25,-.65,1.35],[2.8,-.36,.58],[3.01,.12,-.22],[3.24,.26,-.24],[3.54,.25,-.29],[3.74,.27,-.34]],speed:.28,color:'token:en-electrical',count:32,size:.7,spread:.006,parts:['hair-patch','auditory-nerve'],clip:false},
+    {id:'auditory-signal',group:'nerve-signals',path:[win(.74,-.24),win(.80,.10,-.05),win(.66,.48,-.12),[3.62,-.42,-.05],[3.22,-.05,-.18],[3.01,.12,-.22],[3.24,.26,-.24],[3.54,.25,-.29],[3.74,.27,-.34]],speed:.28,color:'token:en-electrical',count:32,size:.7,spread:.006,parts:['hair-patch','auditory-nerve'],clip:false},
   ],
   animations,
   poses:{
     'lens-far':{lens:{pivot:[-2.47,0,0],scale:[1,1,1]},duration:.5},
     'lens-near':{lens:{pivot:[-2.47,0,0],scale:[1.5,.88,.88]},duration:.5},
     'object-far':{'object-top':{offset:[0,0,0]},'object-bottom':{offset:[0,0,0]},duration:.3},
-    'object-near':{'object-top':{offset:[1.68,0,0]},'object-bottom':{offset:[1.68,0,0]},duration:.3},
+    'object-near':{'object-top':{offset:[round((40-12)*BENCH_CM),0,0]},'object-bottom':{offset:[round((40-12)*BENCH_CM),0,0]},duration:.3},
   },
   views:{
     assembled:{camera:presets[0]!.camera},exploded:{camera:presets[3]!.camera},
     cutaway:{normal:[0,0,-1],offset:0},section:{plane:'xy'},cover:presets[0]!.camera,
+    hudFrame:{parts:['cornea','sclera-shell','object-top','object-bottom','retinal-screen','pinna','cochlea-shell','auditory-nerve','basilar-strip','hair-patch','signal-marker','wave-reference']},
+    insets:[{id:'hair-cell-window',parts:['basilar-strip','hair-patch','signal-marker'],label:bi('Enlarged schematic · different scale','放大示意·非同一比例')}],
     cuts:{'eye-cut':{normal:[0,0,-1],offset:0,label:bi('Eye section','眼部剖面')},'ear-cut':{normal:[0,0,-1],offset:0,label:bi('Ear section','耳部剖面')}},
   },
   presets,
   spec:[
     {key:bi('Model','模型'),value:bi('Original schematic · separate scales','原创示意·各工位比例不同'),tag:'design'},
     {key:bi('Optics','光学'),value:bi('Cornea + lens → one effective lens','角膜与晶状体合成一个有效透镜'),tag:'sim'},
+    {key:bi('Bench heights','实验台高度'),value:bi(`Vertical ×${BENCH_Y} · schematic`,`竖向放大 ×${BENCH_Y}·示意`),tag:'design'},
     {key:bi('Hair-cell window','毛细胞窗'),value:bi('Enlarged schematic · different scale','放大示意·非同一比例'),tag:'design'},
   ],
   sim,

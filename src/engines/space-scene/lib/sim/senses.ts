@@ -58,3 +58,26 @@ export function solveSenses(data: SensesData, values: SimValues): Record<string,
 export function longitudinalPositions(count: number, spacing: number, amplitude: number, wavelength: number, phaseCycles: number): number[] {
   return Array.from({ length: count }, (_, i) => { const x = i * spacing; return x + amplitude * Math.sin(2 * Math.PI * (x / wavelength - phaseCycles)); });
 }
+
+/** Particle radius of the longitudinal row, scene units (DESIGN: about a quarter of the rest spacing). */
+export const WAVE_PARTICLE_RADIUS = .013;
+/** A focused point on the bench receiver is a small visible dot, not a vanishing speck (scene units). */
+export const BENCH_DOT_RADIUS = .012;
+interface Bench { origin: readonly number[]; cmToScene: number; yScale?: number }
+/** Model centimetres → scene: x and z at `cmToScene`; y also times the disclosed vertical exaggeration. */
+export function benchVertex(o: Bench, v: readonly number[]): [number, number, number] {
+  const y = o.yScale ?? 1;
+  return [o.origin[0]! + v[0]! * o.cmToScene, o.origin[1]! + v[1]! * o.cmToScene * y, o.origin[2]! + v[2]! * o.cmToScene];
+}
+/** Scale of a unit sphere drawn as the receiver spot: a round patch whose diameter is the geometric
+ * blur at the bench's vertical scale (the rays' spread on the receiver); a focused point is a small dot. */
+export function benchSpotScale(o: Bench, spotDiameterCm: number, focused: boolean): [number, number, number] {
+  const half = focused ? 0 : spotDiameterCm * o.cmToScene * (o.yScale ?? 1) / 2;
+  const r = Math.max(BENCH_DOT_RADIUS, half);
+  return [r, r, r];
+}
+/** Scene point for the stage note: above the receiver, level with the highest object point, where no ray runs. */
+export function benchLabelPoint(o: Bench, eye: { r: number; points: { h: number }[] }): [number, number, number] {
+  const high = Math.max(...eye.points.map((p) => p.h));
+  return benchVertex(o, [eye.r, high, 0]);
+}
