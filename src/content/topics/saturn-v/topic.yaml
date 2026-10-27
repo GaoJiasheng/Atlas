@@ -1,0 +1,15 @@
+id: saturn-v
+title: { en: "Saturn V and the Apollo Spacecraft", zh: "土星五号与阿波罗飞船" }
+subtitle: { en: "A launch vehicle, a lunar lander and a returning cabin", zh: "运载火箭、登月舱与返回舱" }
+subject: science
+tags: [beyond-syllabus, space]
+moe: []
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: published
+illustration: saturn-v
+shortTitle: { en: "Saturn V", zh: "土星五号" }
+note: { en: "Apollo 11 configuration study · internal layout simplified", zh: "阿波罗11号构型研究 · 内部布局简化" }

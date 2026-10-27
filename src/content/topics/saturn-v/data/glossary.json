@@ -1,0 +1,169 @@
+{
+  "terms": [
+    {
+      "id": "term-launch-vehicle",
+      "term": {
+        "en": "Launch vehicle",
+        "zh": "运载火箭"
+      },
+      "definition": {
+        "en": "A rocket that launches and accelerates a spacecraft.",
+        "zh": "把飞船发射并加速的火箭。"
+      }
+    },
+    {
+      "id": "term-stage",
+      "term": {
+        "en": "Stage",
+        "zh": "级"
+      },
+      "definition": {
+        "en": "A propulsion section that can be separated from the remaining vehicle.",
+        "zh": "可以与其余飞行器分离的一段推进结构。"
+      }
+    },
+    {
+      "id": "term-thrust",
+      "term": {
+        "en": "Thrust",
+        "zh": "推力"
+      },
+      "definition": {
+        "en": "Force on a rocket associated with expelling propellant.",
+        "zh": "火箭排出推进物质时所受到的力。"
+      }
+    },
+    {
+      "id": "term-propellant",
+      "term": {
+        "en": "Propellant",
+        "zh": "推进剂"
+      },
+      "definition": {
+        "en": "Material carried by an engine system and expelled to produce thrust; here fuel and oxidiser together.",
+        "zh": "发动机系统携带并排出以产生推力的物质；这里包括燃料与氧化剂。"
+      }
+    },
+    {
+      "id": "term-fuel",
+      "term": {
+        "en": "Fuel",
+        "zh": "燃料"
+      },
+      "definition": {
+        "en": "A substance that reacts with an oxidiser to release energy.",
+        "zh": "与氧化剂反应并释放能量的物质。"
+      }
+    },
+    {
+      "id": "term-oxidiser",
+      "term": {
+        "en": "Oxidiser",
+        "zh": "氧化剂"
+      },
+      "definition": {
+        "en": "A substance that supports the fuel reaction; a rocket carries its own.",
+        "zh": "支持燃料反应的物质；火箭自己携带它。"
+      }
+    },
+    {
+      "id": "term-nozzle",
+      "term": {
+        "en": "Nozzle",
+        "zh": "喷管"
+      },
+      "definition": {
+        "en": "A shaped outlet that guides expanding exhaust gas.",
+        "zh": "引导膨胀排气的成形出口。"
+      }
+    },
+    {
+      "id": "term-iu",
+      "term": {
+        "en": "Instrument unit",
+        "zh": "仪器舱"
+      },
+      "definition": {
+        "en": "The launch vehicle unit that provides guidance and control.",
+        "zh": "为运载火箭提供制导与控制的部分。"
+      }
+    },
+    {
+      "id": "term-parking-orbit",
+      "term": {
+        "en": "Parking orbit",
+        "zh": "停泊轨道"
+      },
+      "definition": {
+        "en": "An Earth orbit used before departure toward the Moon.",
+        "zh": "向月球出发前先进入的地球轨道。"
+      }
+    },
+    {
+      "id": "term-tli",
+      "term": {
+        "en": "Translunar injection",
+        "zh": "地月转移入轨"
+      },
+      "definition": {
+        "en": "An acceleration that sends the spacecraft onto a path toward the Moon.",
+        "zh": "把飞船送上通向月球轨迹的一次加速。"
+      }
+    },
+    {
+      "id": "term-cm",
+      "term": {
+        "en": "Command module",
+        "zh": "指令舱"
+      },
+      "definition": {
+        "en": "Apollo cabin carrying the crew and returning through Earth’s atmosphere.",
+        "zh": "搭载阿波罗乘员、穿过地球大气层返回的舱体。"
+      }
+    },
+    {
+      "id": "term-sm",
+      "term": {
+        "en": "Service module",
+        "zh": "服务舱"
+      },
+      "definition": {
+        "en": "Apollo section supplying propulsion and support, discarded before re-entry.",
+        "zh": "提供阿波罗推进与支持、再入前抛弃的舱段。"
+      }
+    },
+    {
+      "id": "term-lm",
+      "term": {
+        "en": "Lunar module",
+        "zh": "登月舱"
+      },
+      "definition": {
+        "en": "The separate Apollo craft with descent and ascent stages for lunar landing and return to lunar orbit.",
+        "zh": "具有下降级和上升级，往返月面与月球轨道的独立阿波罗飞行器。"
+      }
+    },
+    {
+      "id": "term-heatshield",
+      "term": {
+        "en": "Heat shield",
+        "zh": "防热盾"
+      },
+      "definition": {
+        "en": "A protective surface that limits heating of the cabin during atmospheric entry.",
+        "zh": "再入大气层时限制乘员舱受热的保护表面。"
+      }
+    },
+    {
+      "id": "term-delta-v",
+      "term": {
+        "en": "Ideal speed change",
+        "zh": "理想速度变化"
+      },
+      "definition": {
+        "en": "A calculated change in velocity from an ideal exhaust speed and mass ratio; not a measured flight speed.",
+        "zh": "由理想排气速度与质量比计算的速度改变量，不是实测飞行速度。"
+      }
+    }
+  ]
+}

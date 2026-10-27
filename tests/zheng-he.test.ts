@@ -96,7 +96,7 @@ describe('zheng-he draft history topic', () => {
         for (const id of state.highlight) {
           const event = eventById.get(id);
           expect(event, `${chapter.id}: ${id}`).toBeDefined();
-          expect(inViewport(event!.at, state.camera), `${chapter.id}: ${id} outside camera`).toBe(true);
+          expect(inViewport(event!.at!, state.camera), `${chapter.id}: ${id} outside camera`).toBe(true);
         }
       }
     }

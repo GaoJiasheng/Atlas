@@ -1,0 +1,401 @@
+---
+{
+  "id": "stages-and-mass",
+  "order": 2,
+  "title": {
+    "en": "Stages and mass",
+    "zh": "分级与质量"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "part": null,
+    "run": false,
+    "cutaway": "none",
+    "pose": "launch-packed",
+    "hide": [],
+    "ghost": [],
+    "layers": [
+      "stage-one",
+      "upper-stages",
+      "guidance-adapter",
+      "return-craft",
+      "lander"
+    ],
+    "labels": [
+      "sic-shell",
+      "sii-shell",
+      "sivb-shell"
+    ],
+    "camera": {
+      "position": [
+        175,
+        57,
+        198
+      ],
+      "target": [
+        0,
+        45,
+        0
+      ],
+      "fov": 30
+    },
+    "summary": {
+      "en": "Stages and mass: follow each part through the change of configuration.",
+      "zh": "分级与质量：沿着构型变化辨认各部分。"
+    },
+    "question": {
+      "en": "Why discard empty structure?",
+      "zh": "为什么丢掉空的结构？"
+    },
+    "sim": {
+      "set": {
+        "payload": 200,
+        "propellant": 600,
+        "carry-inert": false,
+        "stage-choice": "first",
+        "phase": 0
+      },
+      "try": {
+        "vary": "carry-inert",
+        "keep": [
+          {
+            "en": "The chosen effective exhaust speed",
+            "zh": "规定的有效排气速度"
+          },
+          {
+            "en": "Dry hardware before optional extra structure",
+            "zh": "不含额外结构的干质量"
+          },
+          {
+            "en": "Payload 200 kg and propellant 600 kg",
+            "zh": "载荷 200 千克、推进剂 600 千克"
+          }
+        ],
+        "observe": [
+          "initial-mass",
+          "final-mass",
+          "ideal-dv"
+        ],
+        "record": {
+          "chart": {
+            "y": "ideal-dv"
+          }
+        }
+      }
+    },
+    "beats": [
+      {
+        "view": "xray",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "launch-packed",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander"
+        ],
+        "camera": {
+          "position": [
+            175,
+            57,
+            198
+          ],
+          "target": [
+            0,
+            45,
+            0
+          ],
+          "fov": 30
+        },
+        "labels": [
+          "sic-shell",
+          "sii-shell",
+          "sivb-shell"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "first",
+            "phase": 0
+          }
+        },
+        "caption": {
+          "en": "Five first-stage engines, five second-stage engines and one third-stage engine are not all firing together.",
+          "zh": "一级五台、二级五台、三级一台主发动机，并非同时工作。"
+        }
+      },
+      {
+        "view": "xray",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "upper-stack",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander"
+        ],
+        "camera": {
+          "position": [
+            100,
+            82,
+            112
+          ],
+          "target": [
+            0,
+            76,
+            0
+          ],
+          "fov": 30
+        },
+        "labels": [
+          "sii-shell",
+          "j2-centre",
+          "j2-outer"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "second",
+            "phase": 1
+          }
+        },
+        "caption": {
+          "en": "After the first stage separates, the second stage continues the climb.",
+          "zh": "第一级分离后，第二级继续加速。"
+        }
+      },
+      {
+        "view": "xray",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "parking-stack",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander"
+        ],
+        "camera": {
+          "position": [
+            55,
+            95,
+            62
+          ],
+          "target": [
+            0,
+            85.8,
+            0
+          ],
+          "fov": 30
+        },
+        "labels": [
+          "sivb-shell",
+          "sivb-engine"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "third",
+            "phase": 2
+          }
+        },
+        "caption": {
+          "en": "The third stage helps establish a parking orbit around Earth.",
+          "zh": "第三级帮助飞船进入环绕地球的停泊轨道。"
+        }
+      },
+      {
+        "view": "xray",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "translunar-stack",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander"
+        ],
+        "camera": {
+          "position": [
+            55,
+            95,
+            62
+          ],
+          "target": [
+            0,
+            85.8,
+            0
+          ],
+          "fov": 30
+        },
+        "labels": [
+          "sivb-engine",
+          "iu-ring"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "third",
+            "phase": 3
+          }
+        },
+        "caption": {
+          "en": "The third-stage engine restarts to send Apollo toward the Moon.",
+          "zh": "第三级发动机再次启动，把阿波罗送向月球。"
+        }
+      },
+      {
+        "view": "assembled",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "translunar-stack",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander"
+        ],
+        "camera": {
+          "position": [
+            55,
+            95,
+            62
+          ],
+          "target": [
+            0,
+            85.8,
+            0
+          ],
+          "fov": 30
+        },
+        "labels": [
+          "sivb-shell"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "third",
+            "phase": 3
+          }
+        },
+        "caption": {
+          "en": "In the ideal comparison, carrying an extra 100 kg lowers the speed change from 3295.84 to 2748.87 m/s.",
+          "zh": "理想对照中，多带100千克结构，速度变化由3295.84降至2748.87米/秒。"
+        }
+      }
+    ],
+    "index": {
+      "parts": [
+        "sic-shell",
+        "sii-shell",
+        "sivb-shell",
+        "j2-centre",
+        "j2-outer",
+        "sivb-engine",
+        "iu-ring"
+      ]
+    }
+  }
+}
+---
+
+<Lang en>
+
+Read the stack from the bottom upward. A stage is a propulsion section that can separate from the vehicle. The first stage uses <Num s="S25">five</Num> F-1 engines; the second uses <Num s="S25">five</Num> J-2 engines; the third uses <Num s="S25">one</Num> J-2. These main engines do not all operate together.
+
+The first stage burns kerosene with liquid oxygen. Both upper stages use liquid hydrogen with liquid oxygen. As a lower stage finishes its work, separating it removes structure that no longer needs to be accelerated. Watch the outer shell and its internal equipment disappear together. A shell leaving while its tanks stayed attached would tell the wrong mechanical story.
+
+The third stage first helps establish a <Term id="term-parking-orbit">parking orbit</Term>, an orbit around Earth before departure. Later it restarts for <Term id="term-tli">translunar injection</Term>, the acceleration that sends Apollo toward the Moon. Restart means another operation of the same engine, not the appearance of another engine. The ring-shaped <Term id="term-iu">instrument unit</Term> provides guidance and control; it is not an extra main propulsion stage.
+
+The ideal comparison below uses an imaginary small rocket. Keep payload and propellant unchanged and carry an additional <Num s="S90">100 kg</Num> of inert hardware. Its calculated speed change falls from <Num s="S90">3295.84 m/s</Num> to <Num s="S90">2748.87 m/s</Num>. This isolates the effect of carrying extra structure.
+
+That comparison explains a reason for staging, but it is not a prediction of Saturn V's speed. The picture changes configuration, while the table answers a separate question about mass.
+
+<More title={{"en": "A controlled mass comparison", "zh": "只比较质量"}}>
+
+The card fixes payload at <Num s="S90">200 kg</Num> and propellant at <Num s="S90">600 kg</Num>. Only the extra <Num s="S90">100 kg</Num> of inert structure changes. These are chosen teaching inputs, not masses of Saturn stages.
+
+</More>
+
+<More title={{"en": "Sequence and calculation", "zh": "顺序与计算"}}>
+
+The stage configurations explain which hardware remains. The ideal experiment holds its inputs independently of phase: changing to parking orbit does not silently replace the payload or propellant with real mission values.
+
+</More>
+
+<More title={{"en": "Recovering an earlier stage", "zh": "回看已分离的级"}}>
+
+After a stage is hidden, first choose <a href={'?ch=stages-and-mass&b=1'}>all stage shells</a>, <a href={'?ch=stages-and-mass&b=2'}>the second-stage engines</a> or <a href={'?ch=stages-and-mass&b=3'}>the third stage</a>, then use the corresponding index entry.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+从下向上读整枚火箭。级是能够与其余飞行器分离的一段推进结构。第一级有 <Num s="S25">五台</Num> F-1，第二级有 <Num s="S25">五台</Num> J-2，第三级有 <Num s="S25">一台</Num> J-2；这些主发动机并非同时工作。
+
+下级使用煤油与液氧，上面两级使用液氢与液氧。下级完成工作后分离，剩下的飞行器便不用继续带着已无用的结构加速。观察时，外壳与内部设备一起退出画面；若只让壳离开而把储箱留住，就会误解真正的连接关系。
+
+第三级先帮助进入环绕地球的<Term id="term-parking-orbit">停泊轨道</Term>，后来再次启动，完成<Term id="term-tli">地月转移入轨</Term>，把阿波罗送向月球。重启是同一台发动机再次工作，不是多生出一台。环状<Term id="term-iu">仪器舱</Term>负责制导与控制，也不算主推进级。
+
+下面的理想对照另用一枚小型假想火箭。固定载荷与推进剂，多带 <Num s="S90">100 千克</Num>惰性结构，计算的速度变化从 <Num s="S90">3295.84 米/秒</Num>降到 <Num s="S90">2748.87 米/秒</Num>。先比较相同载荷，再比较是否保留额外结构，才能把质量的作用单独看清。这说明分级的一个理由，却不是土星五号的速度预测。几何图解释构型，表格单独比较质量，两者不能混成真实飞行模拟。
+
+<More title={{"en": "A controlled mass comparison", "zh": "只比较质量"}}>
+
+卡片固定载荷 <Num s="S90">200 千克</Num>与推进剂 <Num s="S90">600 千克</Num>，只改变是否多带 <Num s="S90">100 千克</Num>惰性结构。它们是教学输入，不是土星各级的质量。
+
+</More>
+
+<More title={{"en": "Sequence and calculation", "zh": "顺序与计算"}}>
+
+构型解释哪些硬件留下；理想实验的输入独立于飞行阶段。切到停泊轨道，不会暗中把载荷或推进剂换成真实任务数值。
+
+</More>
+
+<More title={{"en": "Recovering an earlier stage", "zh": "回看已分离的级"}}>
+
+某级隐藏后，先点<a href={'?ch=stages-and-mass&b=1'}>各级外壳</a>、<a href={'?ch=stages-and-mass&b=2'}>第二级发动机</a>或<a href={'?ch=stages-and-mass&b=3'}>第三级</a>，再选相应索引。
+
+</More>
+
+</Lang>
+

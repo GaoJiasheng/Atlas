@@ -1,0 +1,334 @@
+---
+{
+  "id": "carried-oxidiser",
+  "order": 1,
+  "title": {
+    "en": "Carrying oxidiser",
+    "zh": "自带氧化剂"
+  },
+  "state": {
+    "view": "xray",
+    "explode": 0,
+    "part": null,
+    "run": false,
+    "cutaway": "none",
+    "pose": "launch-packed",
+    "hide": [],
+    "ghost": [],
+    "layers": [
+      "stage-one",
+      "upper-stages",
+      "guidance-adapter",
+      "return-craft",
+      "lander",
+      "propellant-flow"
+    ],
+    "labels": [
+      "sic-fuel",
+      "sic-oxidiser"
+    ],
+    "camera": {
+      "position": [
+        55,
+        28,
+        66
+      ],
+      "target": [
+        0,
+        25,
+        0
+      ],
+      "fov": 30
+    },
+    "summary": {
+      "en": "Carrying oxidiser: follow each part through the change of configuration.",
+      "zh": "自带氧化剂：沿着构型变化辨认各部分。"
+    },
+    "question": {
+      "en": "How can an engine work without air?",
+      "zh": "没有空气，发动机怎样工作？"
+    },
+    "sim": {
+      "set": {
+        "payload": 200,
+        "propellant": 600,
+        "carry-inert": false,
+        "stage-choice": "first",
+        "phase": 0
+      },
+      "try": {
+        "vary": "stage-choice",
+        "keep": [
+          {
+            "en": "The same geometric scale",
+            "zh": "同一几何比例"
+          },
+          {
+            "en": "The same reference plate",
+            "zh": "同一图版"
+          }
+        ],
+        "observe": [
+          "engine-count",
+          "fuel-name"
+        ],
+        "record": true
+      }
+    },
+    "beats": [
+      {
+        "view": "xray",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "launch-packed",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander",
+          "propellant-flow"
+        ],
+        "camera": "tank",
+        "labels": [
+          "sic-fuel",
+          "sic-oxidiser"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "first",
+            "phase": 0
+          }
+        },
+        "caption": {
+          "en": "The first stage stores kerosene fuel and liquid oxygen in separate tanks.",
+          "zh": "第一级把煤油燃料和液氧分别储存在两个储箱中。"
+        }
+      },
+      {
+        "view": "xray",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "launch-packed",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander",
+          "propellant-flow"
+        ],
+        "camera": "engines",
+        "labels": [
+          "f1-centre",
+          "f1-outer"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "first",
+            "phase": 0
+          }
+        },
+        "caption": {
+          "en": "Five F-1 engines form a centre-and-four pattern below the tanks.",
+          "zh": "五台F-1发动机位于储箱下方，中央一台、外围四台。"
+        }
+      },
+      {
+        "view": "xray",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "launch-packed",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander",
+          "propellant-flow"
+        ],
+        "camera": "engines",
+        "labels": [
+          "f1-centre"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "first",
+            "phase": 0
+          }
+        },
+        "caption": {
+          "en": "Hot gas leaves the nozzle; the rocket gains momentum in the other direction.",
+          "zh": "高温气体排出喷管，火箭获得相反方向的动量。"
+        }
+      },
+      {
+        "view": "xray",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "launch-packed",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander",
+          "propellant-flow"
+        ],
+        "camera": "tank",
+        "labels": [
+          "sic-oxidiser"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "first",
+            "phase": 0
+          }
+        },
+        "caption": {
+          "en": "Carried oxidiser lets the engine work without taking oxygen from the air.",
+          "zh": "自带氧化剂使发动机无需从空气中吸取氧气。"
+        }
+      },
+      {
+        "view": "xray",
+        "explode": 0,
+        "part": null,
+        "run": false,
+        "cutaway": "none",
+        "pose": "launch-packed",
+        "hide": [],
+        "ghost": [],
+        "layers": [
+          "stage-one",
+          "upper-stages",
+          "guidance-adapter",
+          "return-craft",
+          "lander",
+          "propellant-flow"
+        ],
+        "camera": "tank",
+        "labels": [
+          "sic-fuel"
+        ],
+        "sim": {
+          "set": {
+            "payload": 200,
+            "propellant": 600,
+            "carry-inert": false,
+            "stage-choice": "first",
+            "phase": 0
+          }
+        },
+        "caption": {
+          "en": "The turbofan figure shows an air intake. A rocket carries its oxidiser.",
+          "zh": "涡扇图中的进气口提供空气；火箭自带氧化剂。"
+        }
+      }
+    ],
+    "index": {
+      "parts": [
+        "sic-fuel",
+        "sic-oxidiser",
+        "f1-centre",
+        "f1-outer"
+      ]
+    }
+  }
+}
+---
+
+<Lang en>
+
+Look through the first-stage shell at the separate tanks. One holds kerosene <Term id="term-fuel">fuel</Term>; the other holds liquid oxygen, the <Term id="term-oxidiser">oxidiser</Term> that supports the reaction. Fuel and oxidiser together form the <Term id="term-propellant">propellant</Term> carried for these engines. Oxygen is not the fuel in this pair.
+
+Below the tanks are <Num s="S25">five</Num> F-1 engines: <Num s="S25">one</Num> in the centre and <Num s="S25">four</Num> around it. The repeated outside engine is a group of real engine positions, not a row of extra stages. The diagram follows feeds from both tanks toward the engines; it leaves out much of the actual plumbing and machinery.
+
+Reaction energy heats the gas, which expands through a shaped outlet called a <Term id="term-nozzle">nozzle</Term>. Gas leaves in one direction and the vehicle gains momentum in the other. The force on the vehicle is <Term id="term-thrust">thrust</Term>. This does not require surrounding air as a surface to push against. Carried oxidiser lets a rocket engine work in a vacuum.
+
+Compare the explanatory turbofan figure. Its intake draws in air, including the oxygen used by its combustion system. It is an air-breathing engine, not a drawing of an F-1. The rocket carries both reaction supplies instead.
+
+The Try it card changes the stage reference: first and second stages each use <Num s="S25">five</Num> main engines, while the third uses <Num s="S25">one</Num>. It changes sourced readings, not the rocket's size or a calculated flight. Use RUN only to inspect the slow feed demonstration.
+
+<Figure src="figures/saturn-v-air-breathing-engine" alt={{ en: "Explanatory turbofan cutaway showing an air intake and internal engine path.", zh: "带进气口与内部通路的解释性涡扇剖面。" }} caption={{ en: "A turbofan takes in air; a rocket carries oxidiser. This explanatory illustration is an air-breathing engine, not an F-1.", zh: "涡扇吸入空气；火箭自带氧化剂。这是吸气式发动机的解释性插图，不是 F-1。" }} />
+
+<More title={{"en": "Feed, not a flight model", "zh": "进料示意，不是飞行模拟"}}>
+
+The feed demonstration uses named fuel and oxidiser paths. Their colours distinguish substances, not teams or countries. RUN shows deliberately slow flow; changing the stage reference does not ignite every engine on the stack.
+
+</More>
+
+<More title={{"en": "The two upper stages", "zh": "上面两级"}}>
+
+Both upper stages use liquid hydrogen fuel and liquid oxygen oxidiser. Their J-2 engines differ from the first-stage F-1 engines. The stage selector reads the historical engine arrangement; the separate ideal experiment does not change with this selector.
+
+</More>
+
+<More title={{"en": "Selecting the tanks and engines", "zh": "选择储箱与发动机"}}>
+
+Choose <a href={'?ch=carried-oxidiser&b=1'}>the tank view</a> for either tank, or <a href={'?ch=carried-oxidiser&b=2'}>the engine view</a> for the centre and outer engines, then select the index entry.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+穿过第一级外壳，可以看到分开的储箱。一箱装煤油<Term id="term-fuel">燃料</Term>，另一箱装液氧；液氧是支持反应的<Term id="term-oxidiser">氧化剂</Term>。两者合称这套发动机的<Term id="term-propellant">推进剂</Term>。这里氧气不是燃料，也不是从周围空气临时吸进来的。
+
+储箱下方有 <Num s="S25">五台</Num> F-1 发动机，中央 <Num s="S25">一台</Num>，外围 <Num s="S25">四台</Num>。外围重复排列的是发动机，不是多出来的火箭级。沿进料线可追到发动机入口；真实的泵、阀门和管路远比图中复杂，这里只保留容易辨认的关系。
+
+反应释放能量，使气体变热并经过<Term id="term-nozzle">喷管</Term>膨胀排出。气体向后离开，火箭获得相反方向的动量；作用在火箭上的力叫<Term id="term-thrust">推力</Term>。观察储箱与喷管时，要同时区分能量从哪里释放，以及排出的物质来自哪里。这不需要空气当作可推动的墙，因此自带氧化剂的火箭也能在真空中工作。
+
+再对照涡扇示意图：进气口吸入空气，燃烧所需氧气随空气进入。那是吸气式发动机，不是 F-1 剖面。试一试卡只切换各级的资料读数，不改变几何比例，也不计算真实飞行。开启运转时看到的是放慢的进料示范，不能把流点速度读成实际排气速度。
+
+<Figure src="figures/saturn-v-air-breathing-engine" alt={{ en: "Explanatory turbofan cutaway showing an air intake and internal engine path.", zh: "带进气口与内部通路的解释性涡扇剖面。" }} caption={{ en: "A turbofan takes in air; a rocket carries oxidiser. This explanatory illustration is an air-breathing engine, not an F-1.", zh: "涡扇吸入空气；火箭自带氧化剂。这是吸气式发动机的解释性插图，不是 F-1。" }} />
+
+<More title={{"en": "Feed, not a flight model", "zh": "进料示意，不是飞行模拟"}}>
+
+进料示范分别标明燃料与氧化剂，颜色区别物质，不代表国家。运转中的流动刻意放慢；切换级别资料不表示整栈发动机一起点火。
+
+</More>
+
+<More title={{"en": "The two upper stages", "zh": "上面两级"}}>
+
+上面两级都用液氢燃料与液氧氧化剂，J-2 与下级 F-1 不同。级别选择读的是历史发动机配置，旁边的理想质量实验不随它改变。
+
+</More>
+
+<More title={{"en": "Selecting the tanks and engines", "zh": "选择储箱与发动机"}}>
+
+选储箱前先点<a href={'?ch=carried-oxidiser&b=1'}>储箱视角</a>；选中央或外围发动机前先点<a href={'?ch=carried-oxidiser&b=2'}>发动机视角</a>，再点索引。
+
+</More>
+
+</Lang>
+

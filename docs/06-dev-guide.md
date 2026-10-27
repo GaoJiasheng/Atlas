@@ -274,7 +274,7 @@ store.getState().chapterTarget(id);                                // 某章的�
 | `bottomBar` | 底部最下 | 时间轴 / Explorer 控件（44px 触控，不随 HUD 缩小，4K 时放大） |
 | `stageOverlay` | 右列，示意卡下 | 控制面板 `ControlPanel`：LAYERS（图层 + 绘制类模式）、TOOLS（其余模式 + 隐藏 HUD）、KEY（图例） |
 | `inspector` | InfoPanel 内，正文之后 | 遗留扩展插槽；选中对象用 readerTop |
-| `readerTop` | InfoPanel 滚动区最上，章头正下方、正文之前 | TimeScene：选中事件 / 实体；SpaceScene：节拍行 + 选中零件 / 当前动作卡（docs/08 §2 铁律 c、d）；MathScene：节拍行 + 小测托盘 |
+| `readerTop` | InfoPanel 滚动区最上，章头正下方、正文之前 | TimeScene：选中事件 / 实体（`timePresentation: missions` 的主题前面加节拍行）；SpaceScene：节拍行 + 选中零件 / 当前动作卡（docs/08 §2 铁律 c、d）；MathScene：节拍行 + 小测托盘 |
 | `readerEnd` | InfoPanel 内，正文之后 | TimeScene：本章事件索引；SpaceScene：本章索引（`state.index`）；MathScene：要点 + 课纲对照 |
 | `plate` | 左列底部，章节轨之下 | 次级读数的紧凑块（SpaceScene：PLATE 图版块；MathScene：模型 · 份数 · 标记 · 分数）；手机隐藏 |
 | `card` | 右列顶 | 示意 SVG 卡的**内容**；标题由 `controls.card` 注册，宿主画框和 `A NAME 中文` 表头；注册了 `cardToggle` 时表头是展开按钮（`aria-expanded`），框带 `data-expanded`，展开后高 ≤ 右列 60%，内容自己滚动 |
@@ -586,6 +586,44 @@ UI：左 PLATE 显示现今国形、上下文/日期/成员数，C 显示基准�
 可选 `componentsComplete` 必须伴随 components；分项和不得超过总数，`true` 只用于 `reported` 且和必须相等。不完整分项不推导“其余”记录，约数与下界估计不合成新总量。同一事件不能兼具 impacts 与旧 casualties。EventInspector 在摘要后常显每条定义、静态中性 Counter、scope、来源日期与 SourceRefs，独立估计逐条画，不进 CounterVersus。Counter 的可选 `valueLabel` 只替换数字文案（如 `More than 70,000 / 超过70,000`），不改图标刻度或算法；无此属性时旧显示逐字不变。分项保持作者顺序，非完整表有双语提示；具体“四国”范围由内容写在 scope。`__atlas.engine.impacts(eventId)` 返回已校验记录，未知事件返回 `[]`。没有新增选择或 URL 状态。合成 fixture 与 E-PH1 共用 `sample-science-layers`，其测试估计不作历史事实。
 
 **同址事件的显示偏移**：`events.json` 可选 `displayOffset: [x, y]`（CSS px，右／下为正，每轴 −96…96）。它只移动事件／地点标记、脉冲、引线锚点及 44 px 点击目标，偏移后的圆点画一条 hairline 腿连回原坐标（`displayLeg`，离锚点留 6 px），读者看得出它属于哪个地点；`at`、地理包围盒和镜头取景仍使用原始来源坐标。只用于拆开重叠点，并在主题 `data/SOURCES.md` 记录确定性排布规则；显示偏移不声称事件发生在另一地理位置。引擎选择偏移后最近的标记，未配置时位置不变。单测见 `tests/time-scene/event-display.test.ts`。
+### 任务地点与非战争呈现（missions）
+
+默认主题保持原有地图、统计、参与卡行为。可在 `topic.yaml` opt-in：
+
+```yaml
+timePresentation:
+  mode: missions
+  showArea: false
+  eventsLabel: { en: Events, zh: 事件 }
+  entityLabel: { en: Programmes, zh: 项目 }
+```
+
+对象严格校验，`showArea` 只能 `false`，两个标签都必须有非空 EN/ZH，限 `time-scene` / `geo`。内部图层 id 仍是 `battles`；按钮、KEY、事件眉题、状态串、读屏与图版读主题词。状态串只显示全部项目数和已记录证据数；参与卡按 `entities` 输入顺序显示全部年份线，隐藏面积带、KM² 与面积排行；实体详情同样隐藏面积。卡片与详情明确“年份线是本段故事范围，不是国家成立日期”。无行动数据时省略行动开关与 FLOW 快捷键。
+
+`events.json` 新增 `kind: "mission"`，复用中性 milestone 的 GL 圆环、44px 点击命中、现有高亮/选择/URL/演示路径。mission 必须给至少一个可解析来源与严格的 `missionContext`，其他 kind 禁止该字段：
+
+```json
+{
+  "id": "example-lunar-outcome", "kind": "mission", "t": "1969-07-20",
+  "at": [-80.64861111111112, 28.52472222222222], "importance": 2,
+  "title": { "en": "Example lunar outcome", "zh": "示例月面结果" },
+  "summary": { "en": "Read the actual setting separately from the Earth anchor.", "zh": "分别读清真实环境与地球关联点。" },
+  "sources": ["S1"],
+  "missionContext": {
+    "programme": "programme-a", "setting": "moon-surface",
+    "anchorRole": "associated-launch-centre", "anchorSite": "site-kennedy",
+    "relatedSites": [], "occurredAt": "1969-07-20T20:17:39Z"
+  }
+}
+```
+
+`programme` 必须存在于 entities，`anchorSite` / 可选的最多3个 `relatedSites` 必须指向 `kind: site` 的事件。relatedSites 不重复、不含 anchorSite；mission 的 at 各坐标必须与 anchorSite 相差≤1e-5 degrees。`setting` 必填，只接受 `earth-surface / earth-orbit / lunar-orbit / moon-surface / cislunar / suborbital`；suborbital 用于未形成完整轨道的飞行，避免误写成地表或轨道。mission 的 t 只接受 YYYY-MM-DD；可选 occurredAt 必须是有效的 UTC YYYY-MM-DDTHH:mm:ssZ，其日期须等于 t，错误落在 `missionContext.occurredAt`。UTC原时刻只展示，播放头仍是日级。
+
+任务引线第一行固定显示实际环境与“关联发射中心”；详情标题下先显示环境和原 UTC 时刻，再说明地图点为关联发射中心并列出实际名称及所有相关中心名称。历史 mission 圆环保留；只有 t 已到的 mission 能进入 frame，即使被提前高亮也不提前出现。`EventN.missionContext` 保留语义；`__atlas.engine.missionContext(id)` 只读返回 `{ setting, anchorRole, anchorSite, relatedSites, occurredAt, at }`，未知/非mission 返回 null，缺省 relatedSites=[]、occurredAt=null，数组是独立副本。
+
+无地图位置的证据写 `mapVisibility: "timeline-only"`（缺省 `"anchor"`）；可省略 at。禁止用于 mission/site/battle/landing/bombing；政治回顾可用。它仍进日期泳道、索引与详情，永不进 GL 点/脉冲/引线/地图 bounds；即使作者写了 at 也忽略其地图几何。missions 模式与 reconstruction 主题共用 View 内的 `TimeBeatLine`（readerTop，详情之前）和 `,` / `.`（`beatStep`）；拍状态只有一套：`lib/beatState`（`timeBeatState` / `linkedTimeBeatState`），章轴刻度、P、`b` 链接与 URL 基线都走它。章末索引沿用 E-IR1 的 `ChapterIndex`（作者写的 `state.index`）；timeline-only 条目在索引行带 `data-map-visibility="timeline-only"`，供 shoot 的漏标审计跳过，选中时只跳日期、不移镜头。b链接保留显式t/cam/hl等覆盖值，其余从该拍恢复；URL基线按该拍省略相同字段，b保持。自由时间拖动清空拍号（beat:null）；P从当前拍进入。静态站点仍不计事件数量。
+
+`frameStats` 与 `__atlas.stats()` 增加 `activeEvents`（非site，发生日期至until含当日；未写until只当天）与 `recordedEvents`（发生日期≤播放头，含timeline-only）。`activeBattles` 定义不变；`eventMarkers` 是此刻 GL 事件 source 的点数（battles关闭时0），不含site。统计复用现有 frame；API不维护独立状态。纯函数在 `lib/missions.ts`，测试 `tests/time-scene/missions.test.ts`，草稿夹具 `sample-missions`，浏览器测试 `tests-e2e/sample-missions.spec.ts`。视觉验收：`pnpm shoot sample-missions --beats --keys --layout`（包含拍链接与双主题）。
 
 **`site` 事件**是静态点位（监狱、纪念碑、建筑）：`t` 照写但不参与时间——不进时间轴范围、不进泳道和统计、不脉冲；只在 `sites` 图层打开时显示（小空心菱形 + 中心点），点击同样打开 inspector（眉题 `P-01`），高亮时出引线标注。
 
@@ -612,6 +650,8 @@ beats:
 ```
 
 每拍 = 本章累积目标 ⊕ 拍里写的字段。没写 `beats` 的章 = 一拍（本章状态，字幕 = `summary`，没有就 `question`，再没有就章名）。ww2 的第 07 章（哥打巴鲁 → 半岛南下 → 渡柔佛海峡 → 投降）和第 11 章（广岛 → 满洲 → 东京湾 → 新加坡受降）各写了四拍。
+
+TimeScene missions的章索引行带`data-map-visibility`；shoot逐拍/逐章的unlabelled审计只豁免明确timeline-only的记录，不豁免有地图锚点的任务。
 
 ### 图层（`layers` 里的 id）与地图语法（docs/08 §5）
 
@@ -2347,7 +2387,7 @@ scripts/math/check-pool.ts   题库草稿自证：pnpm tsx scripts/math/check-po
 | key | 含义 | 取值 | 引擎 | 例 |
 |---|---|---|---|---|
 | `ch` | 当前章节 | 章节 id | 通用 | `ch=power-on` |
-| `b` | 本章的当前拍（章节轴） | 1 起的整数；月模式不写 = 首拍；其他引擎不写 = 本章自身状态（SpaceScene：打开 = 章节轴上的这一拍，含拍的 `sim.set` 与镜头，URL 里写了的字段优先；MathScene：= 1 时不写；讲解拍之后的一拍是小测，练习章第 k 拍是第 k 题） | SpaceScene、MathScene、TimeScene climatology | `ch=training-the-chest&b=2` |
+| `b` | 本章的当前拍（章节轴） | 1 起的整数；月模式与 missions 不写 = 首拍；其他引擎不写 = 本章自身状态（SpaceScene：打开 = 章节轴上的这一拍，含拍的 `sim.set` 与镜头，URL 里写了的字段优先；MathScene：= 1 时不写；讲解拍之后的一拍是小测，练习章第 k 拍是第 k 题） | SpaceScene、MathScene、TimeScene climatology、TimeScene missions | `ch=training-the-chest&b=2` |
 | `layers` | 打开的图层 / 组 | 逗号分隔 id；空值 = 全关 | 通用 | `layers=control,battles` |
 | `cam` | 镜头 | 地图 `lng,lat,zoom[,pitch[,bearing]]`；3D `px,py,pz,tx,ty,tz`；空值 = 无 | 通用 | `cam=103.8,1.35,7.5` |
 | `theme` | 场景主题 | `paper` \| `cinema` | 通用 | `theme=cinema` |

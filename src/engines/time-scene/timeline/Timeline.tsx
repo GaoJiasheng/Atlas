@@ -363,8 +363,8 @@ export function Timeline(props: TimelineProps) {
           <>
             <ul className="ts-lanes__labels" aria-hidden="true">
               <li style={{ top: LANES.k[0], height: LANES.k[1] - LANES.k[0] }}>{tr('time.spec.keyframes')}</li>
-              <li style={{ top: LANES.m[0], height: LANES.m[1] - LANES.m[0] }}>{tr('time.spec.movements')}</li>
-              <li style={{ top: LANES.e[0], height: LANES.e[1] - LANES.e[0] }}>{tr('time.spec.events')}</li>
+              {!model.timePresentation && <li style={{ top: LANES.m[0], height: LANES.m[1] - LANES.m[0] }}>{tr('time.spec.movements')}</li>}
+              <li style={{ top: LANES.e[0], height: LANES.e[1] - LANES.e[0] }}>{model.timePresentation ? tx(model.timePresentation.eventsLabel, locale) : tr('time.spec.events')}</li>
             </ul>
             <div id="ts-lanes" className="ts-lanes">
               {width > 0 && <Swimlanes model={model} scale={scale} width={width} headX={headX} current={current} />}
@@ -388,7 +388,10 @@ export function StateCluster({ model, t, highlight, locale }: { model: TimeModel
   const k = (i: number) => (i >= 0 ? `K${i + 1}` : '—');
   const bi = (key: UiKey): BilingualText => ({ en: translate('en', key), zh: translate('zh', key) });
   const title = (label: BilingualText, value: string) => `${label.en} / ${label.zh} — ${value}`;
-  const parts: { id: string; text: string; label: BilingualText; show: boolean }[] = [
+  const parts: { id: string; text: string; label: BilingualText; show: boolean }[] = model.timePresentation ? [
+    { id: 'entities', text: `${pad(stats.entities)} ${tx(model.timePresentation.entityLabel, locale)}`, label: model.timePresentation.entityLabel, show: true },
+    { id: 'recorded-events', text: `${pad(stats.recordedEvents)} ${tx(model.timePresentation.eventsLabel, locale)}`, label: model.timePresentation.eventsLabel, show: true },
+  ] : [
     { id: 'participants', text: `${pad(stats.participants)} / ${pad(stats.entities)}`, label: bi('time.state.participants'), show: available.participants },
     { id: 'battles', text: tr(stats.activeBattles === 1 ? 'time.cluster.battle' : 'time.cluster.battles', { n: stats.activeBattles }), label: bi('time.state.battles'), show: available.battles },
     {

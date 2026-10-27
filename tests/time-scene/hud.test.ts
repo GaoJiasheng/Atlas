@@ -16,8 +16,8 @@ import { ControlPanel } from '../../src/engines/widgets/ControlPanel';
 const root = new URL('../../src/content/topics/', import.meta.url);
 const topics = readdirSync(root).filter((slug) => {
   const topic = parse(readFileSync(new URL(`${slug}/topic.yaml`, root), 'utf8'));
-  // Monthly topics have their own view and fixed non-war controls, covered in climatology-state.test.ts.
-  return topic.engine === 'time-scene' && topic.temporalMode !== 'climatology';
+  // Monthly and geography topics have their own views and fixed non-war controls (climatology-state.test.ts, geography tests).
+  return topic.engine === 'time-scene' && topic.temporalMode !== 'climatology' && topic.temporalMode !== 'geography';
 });
 const models = new Map(topics.map((slug) => {
   const data = Object.fromEntries(['control', 'entities', 'events', 'movements', 'sources'].map((name) => [name, JSON.parse(readFileSync(new URL(`${slug}/data/${name}.json`, root), 'utf8'))]));

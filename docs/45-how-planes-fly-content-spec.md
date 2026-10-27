@@ -743,3 +743,29 @@ Node CPU探针（Node v25.8.2，darwin arm64；与check/build并行，含调度�
 **性能**（`pnpm shoot sample-airfoil --perf --gpu`，Apple M5 Max，ANGLE Metal，1520×1023 / 1920×1080）：各章 9 次绘制、30,820 个三角形、60 fps；EXPLODED 4 次。目标 <100 / ≤1.5 M 达标。不是 iPad 结论。
 
 **浏览器 e2e**：在 b1f97b5 上全套跑过一次（1 worker，3.4 小时）：270 通过、79 失败，失败散布在与翼型无关的 TimeScene／MathScene／HUD 用例，属负载超时。其中 `sample-airfoil.spec.ts` 的“signed α…”四个组合是真问题：V=0 且负迎角时升力读 −0（q=0 乘负 Cl），断言 `toBe(0)` 失败。改为 `lift = q·S·Cl || 0`，单测 `airfoil.test.ts`「zero speed at a negative angle」。修复后单跑 `sample-airfoil`、`smoke`、`forces`、`sample-forces`（`--workers=2`，16 分钟）：36 通过、5 失败；`sample-airfoil` 15/15 全过，`smoke` 除两条 sample-space“舞台出现”（30 s 内画布未出现）外全过。`forces` 与 `sample-forces` 的“记录一行再画图”用例在负载下超时（60 s）；用 headless 探针在 `sample-forces` 连点 8 次“记录”，8 行全部写入、无页面错误，单次点击 1.4–18 s，判为负载超时而非回归；sample-space 的画布超时同理（该主题加载 glb，不经本次改动的代码）。整套 e2e 待主会话合并时重跑。
+
+### 9.4 正式主题内容与静态模型复核（2026-10-27，Codex）
+
+**范围**：继续既有内容提交 `2db8e60`，没有重建主题或改写git历史。保留 `status: published`（本轮用户明确指定）。交付背景＋7章、38拍、3张先猜后看记录卡、44个可选件＋1个context、5组、16名词、24条来源、3张已批准插图（封面两个WebP尺寸＋两个正文Figure文件）。章／拍均写完整mask、五个sim输入及复位；补01章漏掉的 `foil-sample` 索引，04最后一拍增加扰流板标注。`forces`、`energy-conversion` 各新增中英链接句；其余主题正文与引擎不改。smoke按37个published、74个badge、science13、最后Plate37更新。
+
+**模型和文案修正**：原 `balanced-travel` 是pose，不能据此声称播放匀速运动。改为23件共享的非循环sequence（2秒前移0.3场景单位），只在level示意开启；01第一拍和离开后的整机拍停RUN，保证进入运动拍时从停机启动。既有sequence与RUN采用缓动，**与规格的匀速动画有明确出入**：它只表示短段运动，不计算匀速或加速度；物理结论由有条件的平衡力图说明。S58两语同步说明。02-1实际hide蒙皮，不再ghost；04-5扰流板绕板前铰线抬起35°，细看／零件说明／S58同步，不再写收平。燃烧室由实心环改为两层薄衬壁，核心热流从两壁之间通过；高压鼓筒增加两道径向腹板接轴，转子叶根向鼓筒内嵌，避免悬浮。翼蒙皮／发动机外壳／外涵壁标shell以正确参与X-RAY。缝翼改窄并重置前缘位置，保留0.025前移、0.008下移，在展开状态留间隙；翼尖重接到主翼。40／36／12 m在S58和零件细看明确为名义近似尺寸，不作实测包络。纠正“稳定爬升必不平衡”“转弯必变速变高”“巡航各量必同时变化”三处过度概括。
+
+**两轮CPU几何诊断**：使用实际 `partPieces` 网格、正交三角面投影与简化CPU明暗，无浏览器、WebGL材质、HUD或overlay。先读既有三张批准PNG和来源拓扑，再看基线与改后整机、翼盒和发动机纵剖；第二轮根据投影暴露的翼尖间隙与缝翼展开重叠修正后复看。可复现脚本 `pnpm tsx scripts/geo/how-planes-fly/audit-geometry.mjs`，输出在gitignored的 `docs/screenshots/how-planes-fly/static-{aircraft,wingbox,engine}-{before,after}.png`，候选干涉在 `static-geometry-after.json`。原翼尖最近点距离约0.04574场景单位；修正后翼面／翼尖有18处边面交叉，接合可见。展开缝翼的六个展向剖面间隙约0.0034–0.0223场景单位。最终整机网格包络约4.040×1.157×3.486（X／Y／Z）；是示意外形，不是名义尺寸的制造公差。保守AABB相交候选：W静止33／展开8、B2／2、E40／18；空心壳包含内部件、叶根接鼓筒、翼肋接翼梁等属预期候选，不能把包围盒相交数写成真实碰撞数。轻微主翼／舵面接缝与完全展开构型仍需运行期逐视角检查。这些图**不是**§8要求的浏览器截图，也不据此宣称材质、标签、手机或性能通过。
+
+**审阅／事实记录**：`REVIEW.md`中文优先逐段列出8章、全部细看／卡片／图的审阅点与D1–D12默认；`AUDIT.md`保留F01–F59全部59项处置（39 verified、6 changed、14 cut）、F-D01–06复算、明确本轮重开的来源范围与三图hash。最终主文EN234–278字母词、ZH354–409汉字（06为359），排除细看、Figure与markup。所有历史日期区分交付／商业服务／运营／典礼，558建筑与4,096坟墓不推成人数。没有新增外来坐标／CAD／NASA源码或图，没有异许可家族例外。
+
+**自动门槛和浏览器边界**：本轮brief明确禁止sandbox运行shoot／e2e，且禁止用用户浏览器或桌面绕行；因此未运行浏览器、Lighthouse、真机触控／fps、实际draw calls／triangles／首屏预算验收。§9.2–9.3此前的引擎通过不能转记为正式主题通过。新增 `tests/how-planes-fly-content.test.ts` 对生产parts与章节做caption／模型读数、数量、mask、索引、三卡、bank世界向量、两轴转速与套接、抬板、燃烧室气路和鼓筒腹板断言；新增 `tests-e2e/how-planes-fly.spec.ts`，12项用例经 `ATLAS_E2E_PORT=5425 pnpm exec playwright test tests-e2e/how-planes-fly.spec.ts --list` 发现通过（只列举，未启动浏览器）。主会话运行 `pnpm shoot how-planes-fly --beats --tasks --keys --layout --locale en,zh --theme paper,cinema`，人工看390×844与全章标签，再运行 `CI=1 ATLAS_E2E_PORT=5425 pnpm e2e`。最终四项非浏览器门槛结果见本节后续记录。
+
+**最终非浏览器门槛**：`pnpm check`通过（831文件，0错误、0警告，4个既有hint）；`pnpm validate`通过（65主题，0错误、0警告）；`pnpm test`通过（178文件、4,566测试，其中正式主题21项）；`pnpm build`通过（133页，含本主题EN/ZH，PWA164预缓存条目；仍有既有大chunk提示，未据此宣称首屏预算通过）；`git diff --check`通过。一次新增单测的可选字段TS错误已修正后完整重跑check通过；首次生产内容单测指出01章索引漏项，补内容后通过，没有删弱断言。e2e只发现12项，shoot／浏览器e2e与设备验收均按brief留给主会话。无package／lockfile／review-queue改动，无引擎改动，无git写命令。
+
+### 9.5 浏览器验收（2026-10-27，Claude Sonnet 5.5）
+
+**看了什么**：`pnpm shoot how-planes-fly --beats --tasks --keys --layout` 在 en/paper、en/cinema 完整跑完（38 拍、24 个按键、8 个尺寸含 1024×768 与 390×844）；zh/paper 的 38 拍截图逐章看过；zh/cinema 重跑 `--beats --keys --layout`（zh/paper 的 keys／layout 因机器负载 190 以上被中止，结构与 en 相同）。结果：控制台干净，按键失败 0，布局问题 0，节拍失败 0，38/38 拍链接打开与演示场景一致。整机读作通用无品牌双发下单翼客机、常规尾翼；翼盒显示两根翼梁、三道翼肋和蒙皮；涡扇纵剖里低压轴穿过空心高压轴；四个工位在每一拍都按完整 mask 出现，没有互相漏出（唯一例外是规格 03-5 要求的静止机舱＋fan，见下）。章节 07 措辞克制，日期区分交付／商业服务／运营／开幕，558 座建筑与 4,096 座坟墓按建筑和坟墓计数。拍内文字与翼型图、升力读数一致。
+
+**性能**（`--perf --gpu`，M5 Max，ANGLE Metal，1520×1023，负载很高）：各章 6–30 次绘制、≤45.6 k 三角形、54–62 fps；预算 <100 / ≤1.5 M 达标。不是 iPad 结论。
+
+**修正**：02-1 翼盒拍原来整块隐藏蒙皮，翼盒读成只有骨架；改为蒙皮 ghost（淡罩在梁与肋外），单测与 e2e 同步。e2e 两处断言改为不依赖瞬时状态：键盘 `,` `.` 用 URL 的 `b` 参数（非演示模式下 `state().presentation` 为空）；扰流板复位用拍的新加载作基准（同一页内瞬时 `goToBeat` 跨镜头后画面停在旧框，直到下一次舞台更新，见下）。
+
+**目标 e2e**（`how-planes-fly`、`smoke`、`sample-airfoil`、`forces`、`energy-conversion`，2 workers）：51 通过；`how-planes-fly` 两处如上修正后 12/12 通过；`smoke` 的 sample-space (zh) 截图超时单跑通过（负载）。
+
+**留给 Gavin**：03-5（失速）按规格把右机舱＋fan 放在翼型试验台旁，机舱是半透明悬空件，只带一截挂架；要不要删掉这两件让工位完全不漏，由 Gavin 定。另：`__atlas.goToBeat(n, { instant: true })` 在同一页内从一个镜头跳到另一个镜头的拍时，相机画面停在旧框直到下一次舞台更新（pose 调用或再次 goToBeat 才会校正），未确认是否与负载有关，属引擎观察，未改。

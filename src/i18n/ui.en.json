@@ -1,4 +1,8 @@
 {
+  "time.mission.relatedSites": "Related launch centres",
+  "time.kind.mission": "Mission",
+  "time.mission.mapPoint": "Map point: associated launch centre",
+  "time.mission.storyRange": "The year lines show this story’s scope, not the founding dates of countries.",
   "site.name": "Atlas",
   "site.tagline": "A textbook that moves",
   "site.description": "Interactive, bilingual scenes for curious primary school students.",

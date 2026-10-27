@@ -1,0 +1,90 @@
+{
+  "topic": "space-race",
+  "inputs": [
+    {
+      "id": "D01",
+      "file": "ne_50m_land.geojson",
+      "sha256": "e874b27a51d146452be360cafb3cc50c86001074a67d534113e6534682f9826b",
+      "licence": "Public domain",
+      "deployment": "reuse public/geo/land-50m.json (Natural Earth 1:50m via world-atlas; not byte-identical to raw GeoJSON)"
+    },
+    {
+      "id": "D02",
+      "file": "launch-centres-wikidata.geojson",
+      "sha256": "1e3928ecc0c2d036d89402a032b47a86cdc9537ec612d52c15546156ab4fdcd7",
+      "licence": "CC0-1.0",
+      "deployment": "events.json three site points and matching mission anchors"
+    }
+  ],
+  "centres": [
+    {
+      "type": "Feature",
+      "id": "baikonur-centre",
+      "properties": {
+        "id": "baikonur-centre",
+        "name": {
+          "en": "Baikonur Cosmodrome",
+          "zh": "拜科努尔航天发射场"
+        },
+        "source": "https://www.wikidata.org/wiki/Q177477",
+        "property": "P625",
+        "source_dms": "45°57'53.3\"N, 63°18'18.4\"E",
+        "precision_note": "Facility reference point, not individual launch pad; maximum map zoom 4.8",
+        "licence": "CC0-1.0"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          63.30511111111111,
+          45.96480555555556
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "kennedy-centre",
+      "properties": {
+        "id": "kennedy-centre",
+        "name": {
+          "en": "Kennedy Space Center",
+          "zh": "肯尼迪航天中心"
+        },
+        "source": "https://www.wikidata.org/wiki/Q48821",
+        "property": "P625",
+        "source_dms": "28°31'29\"N, 80°38'55\"W",
+        "precision_note": "Facility reference point, not individual launch pad; maximum map zoom 4.8",
+        "licence": "CC0-1.0"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.64861111111112,
+          28.52472222222222
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cape-centre",
+      "properties": {
+        "id": "cape-centre",
+        "name": {
+          "en": "Cape Canaveral launch area",
+          "zh": "卡纳维拉尔角发射区"
+        },
+        "source": "https://www.wikidata.org/wiki/Q334465",
+        "property": "P625",
+        "source_dms": "28°29'20\"N, 80°34'40\"W",
+        "precision_note": "Facility reference point, not individual launch pad; maximum map zoom 4.8",
+        "licence": "CC0-1.0"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.57777777777777,
+          28.48888888888889
+        ]
+      }
+    }
+  ]
+}

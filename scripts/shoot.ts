@@ -402,7 +402,8 @@ function unlabelled(s: Session): Promise<string[]> {
       const r = el.getBoundingClientRect(); if (r.width > 0 && r.height > 0 && el.checkVisibility()) shown.add(el.dataset.id);
     }
     const highlight = (window.__atlas!.state() as { highlight?: string[] }).highlight ?? [];
-    return highlight.filter((id) => !shown.has(id));
+    const unlocated = new Set([...document.querySelectorAll<HTMLElement>('.ts-index__row[data-map-visibility="timeline-only"]')].map((row) => row.dataset.timeTarget));
+    return highlight.filter((id) => !unlocated.has(id) && !shown.has(id));
   });
 }
 
