@@ -503,7 +503,7 @@ colors.ts  time-scene.css
 
 **本章事件索引（docs/51 E-IR1）**：`state.index: [loc-dudley, ev-watt-patent]` 是当前章独立、有序的事件 id 数组（省略 = 无按钮，不从前章继承）。只接受本题 `events.json` 的事件，包括 `site` / `milestone`；不接受图层、实体、行动或跨主题 id；重复 id 定位第二项，未知目标定位 `state.index.<i>`。`timeChapterIndexIssues` 注册到 `engineSchemas.chapterIssues`，与原有 highlight 校验分开。
 
-`ChapterIndex.tsx` 放在 `readerEnd`，按钮使用事件的双语 title，带 `data-time-target`、`aria-pressed`，命中高度至少 44 CSS px。索引选地点开 `sites`、保持日期；选非地点开 `battles`、跳到事件的原始日期（保留日精度），不换章或启动演示；镜头只改 center，保留 zoom / pitch / bearing。非法 id 或演示中返回 false、无副作用。原地图 / 引线选择继续复用唯一的 EventInspector，事件和实体详情移到 `readerTop`；未选择不画空框。宿主 `revealReader()` 打开已有阅读面板 / 手机抽屉并在展开后回到顶部；小于 1024 CSS px 只展开临时抽屉，不覆盖 `sessionStorage['atlas:reader']` 的 dock 折叠偏好，桌面显式选中会沿用原来的 reader 持久化路径打开列。关详情恢复最近显式套用拍的高亮；拍失效时恢复章默认。索引与选中 id 不新增 URL 字段。此项不包含阅读节拍行或 `b` 参数适配（E-IR2）。
+`ChapterIndex.tsx` 放在 `readerEnd`（标题 `time.index.title`，样式同 SpaceScene 的 `.space-index`），按钮使用事件的双语 title，带 `data-time-target`、`aria-pressed`，命中高度至少 44 CSS px。索引选地点开 `sites`、保持日期；选非地点开 `battles`、跳到事件的原始日期（保留日精度），不换章或启动演示；镜头只改 center，保留 zoom / pitch / bearing。非法 id 或演示中返回 false、无副作用。原地图 / 引线选择继续复用唯一的 EventInspector，事件和实体详情移到 `readerTop`；未选择不画空框。宿主 `revealReader()` 打开已有阅读面板 / 手机抽屉并在展开后回到顶部；小于 1024 CSS px 只展开临时抽屉，不覆盖 `sessionStorage['atlas:reader']` 的 dock 折叠偏好，桌面显式选中会沿用原来的 reader 持久化路径打开列。关详情恢复底部条当前所停拍（anchor 的刻度）的高亮；拖时间、跳日期或换章后没有所停拍，恢复章默认。索引与选中 id 不新增 URL 字段。此项不包含阅读节拍行或 `b` 参数适配（E-IR2）。
 
 测试 API：`__atlas.engine.selectEvent(id): boolean` 走索引路径；`__atlas.engine.reader()` 返回 `{ indexIds: string[], selectedId: string | null, detailCount: number }`（详情数量 0 或 1）。纯函数 `lib/reader.ts` 和 schema 有 `tests/time-scene/reader.test.ts` 单测；真实 draft 主题 `industrial-revolution` 作为内容验收样本，不另建占位夹具。
 

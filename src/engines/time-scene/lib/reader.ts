@@ -3,13 +3,6 @@ import type { GeoCamera, SceneSnapshot } from '../../core/types';
 import type { TimeSceneExt } from '../index';
 import type { SceneEvent } from '../schema';
 
-export interface ReaderBeat { chapter: string; index: number; highlight: string[] }
-
-/** Closing a detail returns the applied beat's emphasis, rather than its chapter's first view. */
-export function readerHighlight(chapter: string | null, beat: ReaderBeat | null, fallback: readonly string[]): string[] {
-  return [...(beat?.chapter === chapter ? beat.highlight : fallback)];
-}
-
 export function eventSelectionPatch(
   state: SceneSnapshot<TimeSceneExt>,
   events: readonly SceneEvent[],

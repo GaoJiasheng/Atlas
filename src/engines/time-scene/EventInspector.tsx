@@ -6,7 +6,7 @@
  * `detail` sits in a collapsed "More" block; `sources` are superscript ids
  * that open the host's source popover (`data-source`, widgets/SourcePopover).
  */
-import { useEffect, useRef, type CSSProperties } from 'react';
+import type { CSSProperties } from 'react';
 import type { Locale } from '../core/types';
 import { tx } from '../../i18n';
 import { useT } from '../core/context';
@@ -72,14 +72,10 @@ function ForceTable({
 
 export function EventInspector({ event, model, locale, onClose }: EventInspectorProps) {
   const t = useT();
-  const ref = useRef<HTMLElement>(null);
   const nameOf = (id: string) => tx(model.entities.get(id)?.entity.name ?? id, locale);
   const at = toNumber(event.t);
   const colorOf = (id: string) => sideCssColor(model.entities.get(id)?.entity, at);
 
-  useEffect(() => {
-    ref.current?.closest('.atlas-panel__scroll')?.scrollTo({ top: 0 });
-  }, [event.id]);
 
   const isSite = event.kind === 'site';
   const p = model.datePrecision;
@@ -90,7 +86,7 @@ export function EventInspector({ event, model, locale, onClose }: EventInspector
   const other = locale === 'zh' ? event.title.en : event.title.zh;
 
   return (
-    <article ref={ref} className="ts-event" aria-labelledby={`ts-event-${event.id}`}>
+    <article className="ts-event" aria-labelledby={`ts-event-${event.id}`}>
       <header className="ts-event__header">
         <p className="ts-event__eyebrow">
           <span>{index}</span>

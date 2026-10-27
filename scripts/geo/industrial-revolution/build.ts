@@ -60,16 +60,16 @@ const railway: FeatureCollection = { type: 'FeatureCollection', features: raw.fe
   if (island) removed++;
   return !island && Number(f.properties?.year) <= 1914;
 }).map(f => {
-  const { lid, year, spliced } = f.properties!;
-  return { ...f, properties: { id: `rail-seg-${lid}`, f: year, lid, year, spliced, src: ['G4'], licence: 'CC-BY-NC-SA-4.0' } };
+  const { lid, year } = f.properties!;
+  return { ...f, properties: { id: `rail-seg-${lid}`, f: year, lid } };
 }) };
 assert(removed === 1061 && railway.features.length === 18804, 'RShapes extraction count changed');
 const counts = Object.fromEntries([1760, 1830, 1834, 1840, 1850, 1869, 1871, 1890, 1914].map(y => [y, railway.features.filter(f => Number(f.properties?.f) <= y).length]));
 assert(JSON.stringify(Object.values(counts)) === JSON.stringify([0, 0, 35, 428, 1925, 7355, 8339, 15577, 18804]), 'RShapes dated counts changed');
 type Topology = Parameters<typeof feature>[0] & { objects: Record<string, { type: string; geometries: { type: string | null; arcs?: unknown; properties: Record<string, unknown> }[] }> };
 const restoredRailLids = new Set<number>();
-async function topology(fc: FeatureCollection, name: string, interval: number, clean: boolean) {
-  const result = await ms.applyCommands(`-i input.geojson -simplify dp interval=${interval} keep-shapes ${clean ? '-clean allow-overlaps rewind' : ''} -o format=topojson quantization=1000000 ${name}.json`, { 'input.geojson': JSON.stringify(fc) });
+async function topology(fc: FeatureCollection, name: string, interval: number, clean: boolean, quantization: number) {
+  const result = await ms.applyCommands(`-i input.geojson -simplify dp interval=${interval} keep-shapes ${clean ? '-clean allow-overlaps rewind' : ''} -o format=topojson quantization=${quantization} ${name}.json`, { 'input.geojson': JSON.stringify(fc) });
   const topo = JSON.parse(String(result[`${name}.json`])) as Topology;
   const obj = topo.objects.input!;
   delete topo.objects.input;
@@ -106,18 +106,57 @@ async function topology(fc: FeatureCollection, name: string, interval: number, c
   }
   return topo;
 }
+// docs/51 §3.3-7: merge lines of the same construction year that share a source
+// endpoint (connected runs) into one feature. Every arc and date is kept; the
+// lid count of each run is `n`, so the per-lid dated counts remain testable.
+const railQuantization = 100000;
+const endpointKey = (p: Position) => `${p[0]},${p[1]}`;
+const parent = railway.features.map((_, i) => i);
+const runRoot = (i: number): number => (parent[i] === i ? i : (parent[i] = runRoot(parent[i]!)));
+const endpointOwner = new Map<string, number>();
+railway.features.forEach((f, i) => {
+  if (f.geometry.type !== 'MultiLineString') throw new Error('RShapes lines must be MultiLineString');
+  for (const line of f.geometry.coordinates) for (const p of [line[0]!, line.at(-1)!]) {
+    const key = `${f.properties!.f}|${endpointKey(p)}`;
+    const other = endpointOwner.get(key);
+    if (other === undefined) endpointOwner.set(key, i); else parent[runRoot(i)] = runRoot(other);
+  }
+});
+const runOf = new Map(railway.features.map((f, i) => [String(f.properties!.id), runRoot(i)]));
+function mergeRuns(topo: Topology): Topology {
+  const obj = topo.objects['industrial-rail-rshapes']!;
+  const runs = new Map<number, typeof obj.geometries>();
+  for (const g of obj.geometries) {
+    const run = runOf.get(String(g.properties.id))!;
+    runs.set(run, [...(runs.get(run) ?? []), g]);
+  }
+  const geometries = [...runs.values()].map(members => {
+    const arcs = members.flatMap(g => g.arcs as number[][]);
+    const properties = { f: members[0]!.properties.f, n: members.length };
+    return arcs.length === 1 ? { type: 'LineString', arcs: arcs[0], properties } : { type: 'MultiLineString', arcs, properties };
+  }).sort((a, b) => Number(a.properties.f) - Number(b.properties.f));
+  return { ...topo, objects: { 'industrial-rail-rshapes': { type: 'GeometryCollection', geometries } } } as Topology;
+}
 let railTopo: Topology | undefined;
+let railOut: Topology | undefined;
 let railInterval = 750;
 const railCandidates: { intervalMetres: number; bytes: number }[] = [];
 for (const interval of [750, 1000, 1250, 1500]) {
-  railTopo = await topology(railway, 'industrial-rail-rshapes', interval, false);
+  railTopo = await topology(railway, 'industrial-rail-rshapes', interval, false, railQuantization);
+  railOut = mergeRuns(railTopo);
   railInterval = interval;
-  const bytes = Buffer.byteLength(JSON.stringify(railTopo));
+  const bytes = Buffer.byteLength(JSON.stringify(railOut));
   railCandidates.push({ intervalMetres: interval, bytes });
   if (bytes <= 1_500_000) break;
 }
-assert(railTopo, 'Missing rail topology');
+assert(railTopo && railOut, 'Missing rail topology');
 assert(railTopo.objects['industrial-rail-rshapes']!.geometries.length === 18804, 'Rail features lost');
+const runs = railOut.objects['industrial-rail-rshapes']!.geometries;
+assert(runs.reduce((sum, g) => sum + Number(g.properties.n), 0) === 18804, 'Rail lids lost in merge');
+for (const [year, count] of Object.entries(counts)) {
+  assert(runs.filter(g => Number(g.properties.f) <= Number(year)).reduce((sum, g) => sum + Number(g.properties.n), 0) === count, `Merged rail count changed at ${year}`);
+}
+const runCounts = Object.fromEntries(Object.keys(counts).map(y => [y, runs.filter(g => Number(g.properties.f) <= Number(y)).length]));
 const coalNative = JSON.parse(execFileSync('python3', [join(import.meta.dirname, 'read-bgs.py'), research], { maxBuffer: 30_000_000, encoding: 'utf8' })) as FeatureCollection<MultiPolygon>;
 const coal = structuredClone(coalNative);
 const src = proj.pj_init('+init=epsg:27700'), dst = proj.pj_init('+proj=longlat +datum=WGS84');
@@ -133,7 +172,7 @@ for (const f of coal.features) for (const p of points(f.geometry.coordinates)) {
 // source's polygon/hole membership. This retains narrow or tiny geological
 // exclusions instead of dropping 206 holes under ordinary keep-shapes.
 const protectedRings: FeatureCollection = { type: 'FeatureCollection', features: coal.features.flatMap(f => f.geometry.coordinates.flatMap((poly, p) => poly.map((ring, r) => ({ type: 'Feature' as const, properties: { ...f.properties, id: `${f.properties!.id}-p${p}-r${r}`, parent: f.properties!.id, p, r }, geometry: { type: 'Polygon' as const, coordinates: [ring] } })))) };
-const coalTopo = await topology(protectedRings, 'industrial-coal-strata', 500, true);
+const coalTopo = await topology(protectedRings, 'industrial-coal-strata', 500, true, 1000000);
 const protectedGeometries = coalTopo.objects['industrial-coal-strata']!.geometries;
 coalTopo.objects['industrial-coal-strata']!.geometries = coal.features.map(f => {
   const members = protectedGeometries.filter(g => g.properties.parent === f.properties!.id);
@@ -214,7 +253,7 @@ function deviation(source: FeatureCollection, decoded: FeatureCollection) {
 const railDecoded = feature(railTopo, railTopo.objects['industrial-rail-rshapes']! as Parameters<typeof feature>[1]) as unknown as FeatureCollection;
 const railDeviation = deviation(railway, railDecoded), coalDeviation = deviation(coal, coalDecoded);
 const outputs: Record<string, string> = {
-  'industrial-rail-rshapes.json': JSON.stringify(railTopo),
+  'industrial-rail-rshapes.json': JSON.stringify(railOut),
   'industrial-coal-strata.json': JSON.stringify(coalTopo),
   'industrial-places.geojson': readFileSync(join(research, 'industrial-places.geojson'), 'utf8'),
   'control.json': JSON.stringify({ keyframes: [{ t: '1760', features: { type: 'FeatureCollection', features: [] } }, { t: '1914', features: { type: 'FeatureCollection', features: [] } }] }),
@@ -227,7 +266,7 @@ for (const [name, data] of Object.entries(outputs)) {
 }
 const report = {
   inputs: hashes, tools: { mapshaper: version('mapshaper'), mproj: version('mproj') },
-  rail: { rawFeatures: raw.features.length, removedTouchingMainIslands: removed, features: railway.features.length, counts, simplifyMetres: railInterval, candidates: railCandidates, sourceGeometryRestoredLids: [...restoredRailLids], deviation: railDeviation, quantization: 1000000, licence: 'CC-BY-NC-SA-4.0' },
+  rail: { rawFeatures: raw.features.length, removedTouchingMainIslands: removed, features: railway.features.length, counts, mergedRuns: runs.length, runCounts, merge: 'Same construction year and a shared source endpoint (connected run); properties f (year) and n (source lids in the run)', simplifyMetres: railInterval, candidates: railCandidates, sourceGeometryRestoredLids: [...restoredRailLids], deviation: railDeviation, quantization: railQuantization, licence: 'CC-BY-NC-SA-4.0' },
   coal: { features: 622, nativeRings: coalNative.features.flatMap(f => f.geometry.coordinates.flat()).length, nativePolygonComponents: nativePolygons.length, outputPolygonComponents: polygons.length, wrongWinding, interRingCrossingPolygons: 0, holesOutsideExteriors: 0, sourceGeometryRestoredPolygons: restoredCoalPolygons, ...rings, deviation: coalDeviation, simplifyMetres: 500, quantization: 1000000, crsFrom: 'EPSG:27700', crsTo: 'EPSG:4326', transform: 'mproj EPSG registry OSGB36 seven-parameter Helmert → WGS84; no OSTN15 grid supported', maxNumericalRoundTripMetres: roundTripMetres, positionalAccuracy: 'Not independently measured; numerical round trip is not positional accuracy. No survey-level accuracy claim.' },
   sizes: size,
 };

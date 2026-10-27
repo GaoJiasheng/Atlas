@@ -9,7 +9,7 @@ Built 2026-10-27 for a **draft** topic. Research inputs are read-only files in `
 | G1 | Natural Earth 50m land, [download](https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_50m_land.geojson), [terms](https://www.naturalearthdata.com/about/terms-of-use/) | Public domain | Two main-island outer rings containing London/Dublin select whole RShapes features for exclusion. The existing bundled NE physical basemap supplies land/coast at runtime. Modern reference, not historical shorelines. |
 | G2 | Natural Earth 10m populated places, [download](https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_populated_places.geojson) | Public domain | 21 modern city reference points, selected by exact name **and** modern country; original NE_ID retained. No population or historical-site footprint claim. |
 | G3 | GeoNames [cities15000](https://download.geonames.org/export/dump/cities15000.zip), [about](https://www.geonames.org/about.html) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Six retained original TSV rows: Pawtucket, Dudley, Mechelen, Darlington, Stockton-on-Tees, Saint-Étienne. Current gazetteer locations, not original stations or factory buildings. © GeoNames, https://www.geonames.org/. |
-| G4 | Müller-Crepon, Girardin / ETH Zürich, [RShapes 1.0](https://icr.ethz.ch/data/rshapes/), [GeoJSON](https://icr.ethz.ch/data/rshapes/RShapes.geojson) | [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) | One feature for each selected original lid; dated cumulative construction records. The actual raw years are 1834–1921, although publisher coverage ends 1922. Does not establish traction, continued operation, kilometres or global coverage. |
+| G4 | Müller-Crepon, Girardin / ETH Zürich, [RShapes 1.0](https://icr.ethz.ch/data/rshapes/), [GeoJSON](https://icr.ethz.ch/data/rshapes/RShapes.geojson) | [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) | Every selected original lid, merged only into same-year connected runs; dated cumulative construction records. The actual raw years are 1834–1921, although publisher coverage ends 1922. Does not establish traction, continued operation, kilometres or global coverage. |
 | G5 | British Geological Survey, [Coal resources for new technologies](https://www.bgs.ac.uk/datasets/coal-resources-for-new-technologies/), [download ZIP](https://www.bgs.ac.uk/?wpdmdl=41597), [BGS attribution](https://www.bgs.ac.uk/bgs-intellectual-property-rights/open-government-licence/) | [Open Government Licence 3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/) | GB `Coal-bearing strata` only; 622 native MultiPolygon features. Modern geological reference based on 2004 maps. Northern Ireland EPSG:29900 and mine-workings/exploitation tables are excluded. |
 
 RShapes requested reference: Cederman, Lars-Erik, Luc Girardin, Carl Müller-Crepon, and Yannick Pengl (2025), *Nationalism and the Transformation of the State: Border Change and Political Violence in the Modern World*, Cambridge University Press.
@@ -26,13 +26,16 @@ Runtime dated layers belong in `public/geo/industrial-rail-rshapes.json` and `pu
 
 ## Railway transformation
 
-Validate every raw coordinate as finite WGS84. Select the two Natural Earth main-island exterior rings containing London and Dublin. Remove any **whole** RShapes feature with a vertex inside either ring: 1,061 removed from 20,661 before filtering year ≤1914. The 18,804 selected original lids exactly match the prefetched subset; no shoreline clipping or replacement line is drawn. Offshore islands are not a surveyed exclusion, so the description is available continental coverage. `spliced` is preserved without guessing its meaning.
+Validate every raw coordinate as finite WGS84. Select the two Natural Earth main-island exterior rings containing London and Dublin. Remove any **whole** RShapes feature with a vertex inside either ring: 1,061 removed from 20,661 before filtering year ≤1914. The 18,804 selected original lids exactly match the prefetched subset; no shoreline clipping or replacement line is drawn. Offshore islands are not a surveyed exclusion, so the description is available continental coverage. `spliced` is not carried into production (its meaning is not documented; it stays in the source file).
 
-Each output MultiLineString has `id`, `f`, original `lid/year/spliced`, `src:[G4]`, and `licence:CC-BY-NC-SA-4.0`. DP intervals 750/1,000/1,250/1,500 m are tried in order, with quantization 1,000,000. The final interval is 1,500 m. The small closed source loop lid 17463 collapses under ordinary DP; its actual original coordinates are quantized and restored into the same RShapes topology. Every source lid remains a non-null MultiLineString. No geometry is drawn or inferred.
+DP intervals 750/1,000/1,250/1,500 m are tried in order until the output is ≤ 1.5 MB; 750 m already fits. Quantisation is 100,000 (a grid of about 50 m × 40 m at 50° N, far below the 750 m simplification and a pixel at the topic's closest railway view, zoom 4.4). The small closed source loop lid 17463 collapses under ordinary DP; its actual original coordinates are quantised and restored into the same topology. No geometry is drawn or inferred.
+
+Then, as docs/51 §3.3-7 allows, lines that share a construction year **and** a source endpoint are merged into one connected run (union-find on exact source endpoint coordinates; arcs are only regrouped, never moved). Output features are `LineString` / `MultiLineString` with `f` (the year) and `n` (how many source lids the run holds); the source/licence fields are recorded once here and in `THIRD-PARTY-NOTICES.md` rather than on 18,804 features. All 18,804 lids survive in 8,906 runs; the build asserts the lid sum at every year below.
 
 | T | 1760 | 1830 | 1834 | 1840 | 1850 | 1869 | 1871 | 1890 | 1914 |
 |---|---|---|---|---|---|---|---|---|---|
 | Selected original lids with year≤T | 0 | 0 | 35 | 428 | 1,925 | 7,355 | 8,339 | 15,577 | 18,804 |
+| Production runs with f≤T (runtime `visible`) | 0 | 0 | 11 | 182 | 830 | 3,230 | 3,691 | 7,273 | 8,906 |
 
 These are data regressions, never kilometres, traffic, wealth, steam trains or total operational network counts. Missing England/Wales, US or Asian lines are gaps in this selected source, not historical zero.
 
@@ -46,15 +49,15 @@ After transformation every coordinate is finite and inside −9…3° longitude 
 
 ## Measured changes and budgets
 
-Every source vertex is compared to the nearest output line/boundary belonging to the same source id, using local equirectangular metre distances. This one-way diagnostic is not a georeferencing residual, a strict Hausdorff bound or source accuracy. Rail (333,186 vertices): p50 229 m, p95 957 m, p99 1,248 m, max 1,931 m. Coal (169,654 vertices): p50 65 m, p95 309 m, p99 414 m, max 1,926 m. Mapshaper repair and shape preservation mean the interval parameter is not a promise that every point moves less than the nominal interval. Georeferencing is **not applicable**: source coordinates were transformed, never fit to a raster.
+Every source vertex is compared to the nearest output line/boundary belonging to the same source id, using local equirectangular metre distances. This one-way diagnostic is not a georeferencing residual, a strict Hausdorff bound or source accuracy. Rail (333,186 vertices, measured before the run merge, which moves nothing): p50 135 m, p95 494 m, p99 640 m, max 839 m. Coal (169,654 vertices): p50 65 m, p95 309 m, p99 414 m, max 1,926 m. Mapshaper repair and shape preservation mean the interval parameter is not a promise that every point moves less than the nominal interval. Georeferencing is **not applicable**: source coordinates were transformed, never fit to a raster.
 
 | Production geometry | Raw bytes | gzip bytes | Target result |
 |---|---:|---:|---|
-| Rail | 3,942,408 | 530,795 | Exceeds 1.5 MB raw target; preserves all required ids and attributes |
+| Rail | 1,304,627 | 300,369 | Within 1.5 MB raw target |
 | Coal | 266,680 | 75,990 | Within 350 KB raw target |
-| Total two layers | 4,209,088 | 606,785 | Exceeds 2 MB raw geometry target |
+| Total two layers | 1,571,307 | 376,359 | Within 2 MB raw geometry target |
 
-The rail **properties alone** occupy 2,049,993 bytes, before geometry objects or arcs; the required properties and 18,804 one-lid features cannot fit a 1.5 MB raw file. No historical feature/date is removed to hide this conflict. gzip sizes are reported separately and do not relabel the raw budget as passed. `build-report.json` records each attempted interval. This is an explicit review item.
+The first build (one feature per lid, seven properties each, DP 1,500 m, quantisation 1,000,000) was 3,942,408 bytes, of which 2,049,993 were properties. Dropping the repeated properties and merging same-year connected lines brought it within budget at a finer 750 m interval; no historical feature, lid or date was removed. `build-report.json` records each attempted interval.
 
 ## Keyframes, points and absent routes
 
@@ -69,8 +72,8 @@ The 27-place artifact preserves 21 Natural Earth and six GeoNames ids/licences. 
 
 ## Visual review and remaining runtime checks
 
-`qa/bgs-native-wgs84-production.png` compares native CRS, full transformation and production at independently labelled extents. `qa/rshapes-1834-1914-source-production.png` compares identical geographic extents at the first selected year and final year. Both images were actually opened and inspected: broad distribution and coverage match, early rail stays sparse and the 1914 network retains the source pattern. These are offline static geometry comparisons, not runtime screenshots, and are not a substitute for MapLibre label/layout checks. The first/last empty runtime frames and Suez/cable endpoint screenshots remain for the main-session browser gates, which are unavailable under BRIEF-CONTENT.
+`compare.ts` writes two local QA images to `qa/` (not in git): `bgs-native-wgs84-production.png` compares native CRS, full transformation and production at independently labelled extents; `rshapes-1834-1914-source-production.png` compares identical geographic extents at the first selected year and 1914. Both were opened: broad distribution and coverage match, early rail stays sparse and the 1914 network keeps the source pattern. They are offline geometry comparisons, not runtime screenshots; MapLibre labels and layout are checked by `pnpm shoot`.
 
 ## Licence isolation
 
-Rail topology and its comparison image contain RShapes NC-SA plus public-domain selection only. No CC BY-SA geometry, attribute, tracing, topology or image is mixed into them. BGS files/comparison retain OGL attribution and source-context OS notice. Place coordinates retain PD/GeoNames CC BY rights; authored event prose stays Atlas CC BY-NC-SA. No OHM element ships: the mixed-provenance bounded response remains research quarantine. Optional NE rivers are not shipped as canals. Root `LICENSE-CONTENT` and `THIRD-PARTY-NOTICES.md` record these exact file families.
+Rail topology contains RShapes NC-SA plus public-domain selection only. No CC BY-SA geometry, attribute, tracing, topology or image is mixed into them. BGS files retain OGL attribution and source-context OS notice. Place coordinates retain PD/GeoNames CC BY rights; authored event prose stays Atlas CC BY-NC-SA. No OHM element ships: the mixed-provenance bounded response remains research quarantine. Optional NE rivers are not shipped as canals. `THIRD-PARTY-NOTICES.md` carries the attributions; `LICENSE-CONTENT` notes that no licence exception is needed (every distributed derivative is compatible with Atlas CC BY-NC-SA 4.0).

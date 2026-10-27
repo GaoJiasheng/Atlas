@@ -25,23 +25,24 @@
       "1890": 15577,
       "1914": 18804
     },
-    "simplifyMetres": 1500,
+    "mergedRuns": 8906,
+    "runCounts": {
+      "1760": 0,
+      "1830": 0,
+      "1834": 11,
+      "1840": 182,
+      "1850": 830,
+      "1869": 3230,
+      "1871": 3691,
+      "1890": 7273,
+      "1914": 8906
+    },
+    "merge": "Same construction year and a shared source endpoint (connected run); properties f (year) and n (source lids in the run)",
+    "simplifyMetres": 750,
     "candidates": [
       {
         "intervalMetres": 750,
-        "bytes": 4019035
-      },
-      {
-        "intervalMetres": 1000,
-        "bytes": 3982142
-      },
-      {
-        "intervalMetres": 1250,
-        "bytes": 3958095
-      },
-      {
-        "intervalMetres": 1500,
-        "bytes": 3942408
+        "bytes": 1304627
       }
     ],
     "sourceGeometryRestoredLids": [
@@ -50,12 +51,12 @@
     "deviation": {
       "vertices": 333186,
       "method": "Every source vertex to nearest output boundary/line of the same source id; local equirectangular metres. Not positional accuracy or a strict Hausdorff bound.",
-      "p50Metres": 229.10001679624145,
-      "p95Metres": 956.7292035636037,
-      "p99Metres": 1247.2845145823044,
-      "maxMetres": 1930.8869891606935
+      "p50Metres": 134.9068128088506,
+      "p95Metres": 494.09344744919224,
+      "p99Metres": 639.5311126095376,
+      "maxMetres": 839.3902335274944
     },
-    "quantization": 1000000,
+    "quantization": 100000,
     "licence": "CC-BY-NC-SA-4.0"
   },
   "coal": {
@@ -93,9 +94,9 @@
   },
   "sizes": {
     "industrial-rail-rshapes.json": {
-      "bytes": 3942408,
-      "gzipBytes": 530795,
-      "sha256": "d4eea6a3d8f7a46e68929f8f9c8ad9a617fef1859262547740d29b816bab788e"
+      "bytes": 1304627,
+      "gzipBytes": 300369,
+      "sha256": "1db7acc983f35fbdafca3bfff1012c888606c96515d0d140b0e8fc750d38acf2"
     },
     "industrial-coal-strata.json": {
       "bytes": 266680,

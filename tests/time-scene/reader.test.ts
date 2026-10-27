@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { engineSchemas } from '../../src/engines/schemas';
 import { eventSchema, timeChapterIndexIssues, timeChapterRefs, timeChapterState } from '../../src/engines/time-scene/schema';
-import { eventSelectionPatch, readerHighlight } from '../../src/engines/time-scene/lib/reader';
+import { eventSelectionPatch } from '../../src/engines/time-scene/lib/reader';
 import type { SceneSnapshot } from '../../src/engines/core/types';
 import type { TimeSceneExt } from '../../src/engines/time-scene';
 
@@ -84,12 +84,5 @@ describe('TimeScene reader selection', () => {
 
   it('can center a topic whose chapter has no authored camera', () => {
     expect(eventSelectionPatch({ ...initial, camera: null }, events, site.id)?.camera).toEqual({ center: site.at, zoom: 1.4 });
-  });
-
-  it('restores the applied second beat highlight, then falls back after a time or chapter change', () => {
-    const beat = { chapter: 'steam', index: 1, highlight: ['loc-glasgow'] };
-    expect(readerHighlight('steam', beat, ['loc-dudley', 'loc-birmingham'])).toEqual(['loc-glasgow']);
-    expect(readerHighlight('cotton', beat, ['loc-pawtucket'])).toEqual(['loc-pawtucket']);
-    expect(readerHighlight('steam', null, ['loc-dudley', 'loc-birmingham'])).toEqual(['loc-dudley', 'loc-birmingham']);
   });
 });

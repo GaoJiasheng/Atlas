@@ -123,13 +123,15 @@ test('railway dates match the source sample and switching off removes every visi
   await page.setViewportSize({ width: 1920, height: 1080 });
   await open(page, 'ch=ir-connected-world-debates&t=1914&layers=base,rail-rshapes,sites');
   const rails = () => page.evaluate(() => (window.__atlas!.stats() as unknown as DatedStats).datedLayers?.['rail-rshapes']);
-  await expect.poll(async () => (await rails())?.total).toBe(18804);
-  await expect.poll(async () => (await rails())?.visible).toBe(18804);
-  await page.locator('.ts-overlay > summary').click();
-  await page.locator('[data-layer="rail-rshapes"]').click();
+  await expect.poll(async () => (await rails())?.total).toBe(8906); // same-year connected runs of the 18,804 RShapes lids
+  await expect.poll(async () => (await rails())?.visible).toBe(8906);
+  const toggle = page.locator('[data-layer="rail-rshapes"]');
+  await expect(toggle).toHaveAttribute('aria-pressed', 'true');
+  await toggle.click();
+  await expect(toggle).toHaveAttribute('aria-pressed', 'false');
   await expect.poll(async () => (await rails())?.visible).toBe(0);
   await open(page, 'ch=ir-railways-networks&t=1834&layers=base,rail-rshapes,sites');
-  await expect.poll(async () => (await rails())?.visible).toBe(35);
+  await expect.poll(async () => (await rails())?.visible).toBe(11); // 35 lids
 });
 
 for (const locale of ['en', 'zh']) for (const theme of ['paper', 'cinema'] as const) {

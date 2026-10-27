@@ -356,6 +356,7 @@
   "time.preset.plate": "Whole plate",
   "time.preset.theatre": "Whole area",
   "time.card.title": "Participation and area",
+  "time.index.title": "Places and events in this chapter",
   "time.card.showAll": "Show all, {n} more",
   "time.spec.entities": "Entities",
   "time.spec.keyframes": "Keyframes",

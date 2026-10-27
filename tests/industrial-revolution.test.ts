@@ -112,24 +112,25 @@ describe('industrial-revolution documentary content', () => {
 });
 
 describe('industrial-revolution real geographic data', () => {
-  it('retains one RShapes feature per lid and every expected construction-date count', () => {
+  it('keeps every RShapes lid, merged only into same-year connected runs, with every construction-date count', () => {
     const fc = layer('industrial-rail-rshapes');
-    expect(fc.features).toHaveLength(18804);
-    const ids = new Set();
+    expect(fc.features).toHaveLength(8906);
+    let lids = 0;
     for (const feature of fc.features) {
       const p = feature.properties!;
-      expect(p.id).toBe(`rail-seg-${p.lid}`);
-      expect(p.f).toBe(p.year);
-      expect(p.src).toEqual(['G4']);
-      expect(p.licence).toBe('CC-BY-NC-SA-4.0');
-      expect(feature.geometry.type).toBe('MultiLineString');
-      ids.add(p.lid);
+      expect(Object.keys(p).sort()).toEqual(['f', 'n']);
+      expect(Number.isInteger(p.f) && Number.isInteger(p.n) && p.n >= 1).toBe(true);
+      expect(['LineString', 'MultiLineString']).toContain(feature.geometry.type);
+      lids += p.n;
     }
-    expect(ids.size).toBe(18804);
+    expect(lids).toBe(18804);
+    const lidsBy = (year: number) => fc.features.filter((f) => f.properties!.f <= year).reduce((sum, f) => sum + f.properties!.n, 0);
     const indexed = indexDatedLayer(fc);
-    for (const [year, count] of [[1830, 0], [1834, 35], [1840, 428], [1850, 1925], [1869, 7355], [1871, 8339], [1890, 15577], [1914, 18804]]) {
-      expect(datedLayerState(indexed, year!).visible, String(year)).toBe(count);
+    for (const [year, count, runs] of [[1830, 0, 0], [1834, 35, 11], [1840, 428, 182], [1850, 1925, 830], [1869, 7355, 3230], [1871, 8339, 3691], [1890, 15577, 7273], [1914, 18804, 8906]]) {
+      expect(lidsBy(year!), String(year)).toBe(count);
+      expect(datedLayerState(indexed, year!).visible, String(year)).toBe(runs);
     }
+    expect(Buffer.byteLength(readFileSync(join(root, 'public/geo/industrial-rail-rshapes.json'))), 'docs/51 §3.3-7 railway budget').toBeLessThanOrEqual(1_500_000);
     expect(topic.datedLayers.every((l: { count: boolean }) => l.count === false)).toBe(true);
   });
 

@@ -356,6 +356,7 @@
   "time.preset.plate": "全图",
   "time.preset.theatre": "全区",
   "time.card.title": "参与与控制面积",
+  "time.index.title": "本章的地点与事件",
   "time.card.showAll": "展开全部，另 {n} 方",
   "time.spec.entities": "参与方",
   "time.spec.keyframes": "关键帧",

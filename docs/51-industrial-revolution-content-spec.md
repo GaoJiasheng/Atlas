@@ -770,3 +770,7 @@ id 带 `term-` 防止与章节 / 事件重名；每词 EN、ZH 正文第一次�
 **其余偏差**：铁路3,942,408字节（gzip530,795），煤层266,680（gzip75,990），总几何4,209,088，铁路/总几何超预算；必需铁路属性本身已超过1.5MB，未删原feature或日期。引擎data响应89,493字节，topic JSON106,697字节。构建资产依赖闭包（TimeScene/地图控制器/宿主/React及静态依赖）gzip464,499字节，超过400KB目标；这不是浏览器请求记录，未擅自扩展E-IR1做共享打包重构。E-IR2、reader增量gzip/运行时响应/帧时仍未测；reader行和b链接未承诺实现。定制HUD五行不在topic schema，保留已有通用规格行，将限定写入note/正文/详情。world的设计zoom0.3受既有地图minZoom0.5限制，待截图审镜头。`steam-engine`不存在且validator拒绝缺失slug，所有姊妹/双向链接位置列REVIEW，没有输出死链或虚构ch id。敏感中文、译名与默认决定逐段列REVIEW，事实删改及读取深度列AUDIT。
 
 **门槛**：check755文件0error/0warning（3既有hint）；validate56主题0error/0warning；test157文件4,200测试全过，最终几何/索引改动后topic+reader21/21再次过；build115页成功。成品两份几何哈希与public原件一致，中英文draft路由已生成、首页无发布入口。新增9项topic e2e只编写未运行。遵守两份BRIEF的sandbox限制，未运行shoot/e2e、未控制用户浏览器/桌面；端口5407的双语双主题手机/平板/全尺寸截图、离线/语音/性能及sample-time/sample-dated-layers/ww2浏览器回归均交主会话，不能将本记录视作浏览器验收通过。
+
+### 9.3 主会话验收（2026-10-27）
+
+E-IR1 保留并精简：恢复高亮改用底部条 anchor（删 readerBeat），去掉详情组件里与 `revealReader()` 重复的滚动，索引标题进 i18n、样式同 `.space-index`。铁路按 §3.3-7 合并同年且端点相连的原线：18,804 个 lid 全保留在 8,906 段（`f` 年份、`n` 段内 lid 数），DP 750 m、量化 100,000；铁路 1,304,627 B、煤层 266,680 B、合计 1,571,307 B，均达预算（上面 §9.2 的超预算数字是首版）。地图 `visible` 计数按段：1834 = 11、1914 = 8,906。页面 JS 453.6 KB gz 超 400 KB 属所有地图主题共用的 MapLibre 分包，列 REVIEW。shoot（双语 × 双主题，37 拍、按键、八种尺寸布局）0 失败、控制台干净；结果与待判断项见 `src/content/topics/industrial-revolution/REVIEW.md`。

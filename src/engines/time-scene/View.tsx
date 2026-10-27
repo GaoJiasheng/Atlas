@@ -61,7 +61,7 @@ import { Timeline, formatReadout } from './timeline/Timeline';
 import { EventInspector } from './EventInspector';
 import { EntityInspector } from './EntityInspector';
 import { ChapterIndex } from './ChapterIndex';
-import { eventSelectionPatch, readerHighlight, type ReaderBeat } from './lib/reader';
+import { eventSelectionPatch } from './lib/reader';
 import { BandCard, PerfReadout, useFps } from './hud/HudPanels';
 import { DatedLayerPlate } from './hud/DatedLayerPlate';
 import type { DatedLayerIndex } from './lib/datedLayers';
@@ -122,16 +122,11 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   });
   useEffect(() => () => playhead.destroy(), [playhead]);
 
-  // Last explicitly applied beat; kept locally until the separate E-IR2 URL adapter exists.
-  const readerBeat = useRef<ReaderBeat | null>(null);
-
   /** Last `t` this view wrote, so the store echo is not treated as a jump. */
   const lastWritten = useRef<string | null>(null);
 
   const commit = useCallback(
     (n: number) => {
-      // Scrubbing can round back to the same year; it still leaves the applied beat.
-      readerBeat.current = null;
       const v = clamp(n, model.min, model.max);
       playhead.set(v);
       // A topic dated to the year writes years back (`t=-0350`).
@@ -167,11 +162,21 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   const [selected, setSelected] = useState<string | null>(null);
   const [selectedEntity, setSelectedEntity] = useState<string | null>(null);
   const [cardExpanded, setCardExpanded] = useState(false);
+  const anchorRef = useRef(anchor);
+  anchorRef.current = anchor;
+  /** The beat the bar rests on (scrubbing, a date jump or a new chapter leave it). */
+  const anchoredBeat = useCallback(() => {
+    const a = anchorRef.current;
+    const chapter = a ? story[a.segment]?.id : undefined;
+    return chapter !== undefined && typeof a?.tick === 'number' ? { chapter, index: a.tick } : null;
+  }, [story]);
+  // Closing a detail returns the emphasis of the beat the bar rests on, else the chapter's.
   const restoreHighlight = useCallback(() => {
     const s = store.getState();
-    const beat = readerBeat.current;
-    s.patch({ highlight: readerHighlight(s.chapter, beat, s.chapterTarget(s.chapter).highlight) });
-  }, [store]);
+    const at = anchoredBeat();
+    const beat = at?.chapter === s.chapter ? beatsRef.current.find((b) => b.chapter === at.chapter && b.index === at.index) : undefined;
+    s.patch({ highlight: [...(beat?.spec?.highlight ?? s.chapterTarget(s.chapter).highlight)] });
+  }, [store, anchoredBeat]);
   const selectEvent = useCallback(
     (id: string) => {
       if (presentation.isPresenting() || !geo.events.some((event) => event.id === id)) return false;
@@ -187,17 +192,16 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     const s = store.getState();
     const patch = eventSelectionPatch(s, geo.events, id, presentation.isPresenting());
     if (!patch) return false;
-    const beat = readerBeat.current;
-    const site = geo.events.find((event) => event.id === id)?.kind === 'site';
-    if (site && beat) pendingBeat.current = { chapter: beat.chapter, index: beat.index };
+    // A place keeps the time, so it keeps the beat the bar rests on; a dated event leaves it.
+    const at = geo.events.find((event) => event.id === id)?.kind === 'site' ? anchoredBeat() : null;
+    if (at) pendingBeat.current = at;
     // Store transitions clear old selections synchronously: select only after applying the map state.
     s.applyState(patch);
-    if (site) readerBeat.current = beat;
     setSelectedEntity(null);
     setSelected(id);
     revealReader();
     return true;
-  }, [store, geo.events, revealReader]);
+  }, [store, geo.events, revealReader, anchoredBeat]);
   const closeEvent = useCallback(() => {
     setSelected(null);
     restoreHighlight();
@@ -229,7 +233,6 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
         const transitioned =
           s.transition.id !== prev.transition.id && s.transition.reason !== 'preset' && s.transition.reason !== 'snap';
         if (transitioned) {
-          readerBeat.current = null;
           setSelected(null);
           setSelectedEntity(null);
           const segment = story.findIndex((c) => c.id === s.chapter);
@@ -249,7 +252,6 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
             });
           }
         }
-        if (!transitioned && s.t !== prev.t) readerBeat.current = null;
         if (!transitioned && s.t === prev.t) return;
         if (s.t === null) return;
         const key = formatTimeParam(s.t);
@@ -342,7 +344,6 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       },
       { instant },
     );
-    readerBeat.current = { chapter: b.chapter, index: b.index, highlight: [...store.getState().highlight] };
     // A beat's camera is authored, not the reader's: the status line keeps "CHAPTER NN VIEW".
     hud.setState({ cameraFree: false });
   };

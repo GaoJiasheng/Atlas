@@ -86,59 +86,17 @@ from them into the topic's `parts.json`) are CC BY-SA 4.0.
 
 ## Industrial Revolution map data (`industrial-revolution`)
 
-**RShapes 1.0 — Müller-Crepon, Girardin / ETH Zürich, International Conflict
-Research.** [Dataset](https://icr.ethz.ch/data/rshapes/),
-[GeoJSON](https://icr.ethz.ch/data/rshapes/RShapes.geojson),
-[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
-Publisher-requested reference: Cederman, Lars-Erik, Luc Girardin, Carl
-Müller-Crepon, and Yannick Pengl (2025), *Nationalism and the Transformation of
-the State: Border Change and Political Violence in the Modern World*, Cambridge
-University Press. Distributed files:
-`public/geo/industrial-rail-rshapes.json` and
-`scripts/geo/industrial-revolution/qa/rshapes-1834-1914-source-production.png`.
-Changes: exclude whole features touching Natural Earth main-island masks for
-Great Britain/Ireland; select construction year through 1914; simplify and
-quantize, restoring an actual source loop that collapsed during simplification.
-All 18,804 selected original lids retain their dates and spliced values. The
-derived files are CC BY-NC-SA 4.0, contain no CC BY-SA/OHM input, and represent
-available continental construction records rather than steam traction or a
-complete operational network.
+| Work | Use | Licence |
+|---|---|---|
+| RShapes 1.0 (Müller-Crepon, Girardin; ETH Zürich, https://icr.ethz.ch/data/rshapes/). Requested reference: Cederman, Girardin, Müller-Crepon and Pengl (2025), *Nationalism and the Transformation of the State*, Cambridge University Press | `public/geo/industrial-rail-rshapes.json`; changes: features touching the Great Britain / Ireland main islands removed, years to 1914, simplified, quantised, same-year connected lines merged. Derived only from RShapes (no CC BY-SA or OpenHistoricalMap input) | CC BY-NC-SA 4.0 |
+| British Geological Survey, *Coal resources for new technologies* (https://www.bgs.ac.uk/datasets/coal-resources-for-new-technologies/) | `public/geo/industrial-coal-strata.json`; changes: GB coal-bearing strata only, EPSG:27700 to WGS84 (OSGB36 seven-parameter, no OSTN15 grid), simplified, quantised | Open Government Licence 3.0 |
+| GeoNames cities15000 (https://www.geonames.org/) | six modern city coordinates in the topic's `data/events.json` | CC BY 4.0 |
+| Natural Earth 1:10m populated places and 1:50m land | 21 modern city coordinates; main-island masks | Public domain |
 
-**British Geological Survey / UKRI — Coal resources for new technologies.**
-[Product](https://www.bgs.ac.uk/datasets/coal-resources-for-new-technologies/),
-[BGS OGL attribution](https://www.bgs.ac.uk/bgs-intellectual-property-rights/open-government-licence/),
-[Open Government Licence 3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/).
-**Contains British Geological Survey materials © UKRI 2026.** Source-context
-notice: **Contains OS data © Crown copyright 2020.** Distributed files:
-`public/geo/industrial-coal-strata.json` and
-`scripts/geo/industrial-revolution/qa/bgs-native-wgs84-production.png`.
-Changes: select GB Coal-bearing strata only; EPSG:27700 to WGS84 using the
-installed mproj OSGB36 seven-parameter transformation without OSTN15 grids;
-simplify, preserve source rings/components, quantize, and restore four source
-polygons where simplification displaced holes across/outside an exterior. All 622 features, 624
-polygon components and 1,017 rings remain. Underlying BGS material retains OGL
-rights. This is modern geology, not a historical mine-operation layer; no OS
-base-map image, Northern Ireland table or mine-workings layer is redistributed.
-
-**Natural Earth and GeoNames — modern city coordinates.** Natural Earth
-[populated places](https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/)
-and [terms](https://www.naturalearthdata.com/about/terms-of-use/) are public
-domain. © [GeoNames](https://www.geonames.org/),
-[cities15000](https://download.geonames.org/export/dump/cities15000.zip),
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Files:
-`scripts/geo/industrial-revolution/industrial-places.geojson` (21 Natural Earth
-points plus six GeoNames points; original source ids/licences retained), and
-the site/milestone coordinates derived from them in
-`src/content/topics/industrial-revolution/data/events.json`. No population
-attributes, historical factory footprints or exact station coordinates are
-claimed. New event prose stays Atlas CC BY-NC-SA 4.0. Natural Earth land also
-supplies public-domain physical reference and main-island selection masks.
-
-Input/output SHA-256, source file records, transformations, numerical/error
-limits and exact attribution appear in
-`scripts/geo/industrial-revolution/SOURCES-GEO.md`, `build-report.json` and
-`src/content/topics/industrial-revolution/data/SOURCES.md`. The mixed-provenance
-OpenHistoricalMap research sample and optional rivers are not shipped.
+Attribution: **Contains British Geological Survey materials © UKRI 2026.** The
+BGS product also carries *Contains OS data © Crown copyright 2020*; no OS map is
+redistributed. City coordinates © GeoNames. Inputs, hashes and methods:
+`scripts/geo/industrial-revolution/SOURCES-GEO.md`.
 
 ## Fonts and libraries
 
