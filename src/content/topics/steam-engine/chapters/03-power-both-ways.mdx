@@ -1,0 +1,427 @@
+---
+{
+  "id": "power-both-ways",
+  "order": 3,
+  "title": {
+    "en": "Power in both directions",
+    "zh": "两个方向都做功"
+  },
+  "state": {
+    "view": "xray",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "cutaway": "none",
+    "pose": null,
+    "layers": [
+      "steam-supply",
+      "working-motion",
+      "condensing",
+      "steam-flow"
+    ],
+    "hide": [
+      "nc-cylinder",
+      "nc-piston",
+      "nc-beam",
+      "nc-pump",
+      "nc-jet",
+      "nc-chain",
+      "nc-pump-chain",
+      "energy-input",
+      "energy-work",
+      "energy-reject"
+    ],
+    "ghost": [],
+    "labels": [
+      "valve-chest",
+      "cylinder",
+      "piston",
+      "piston-rod"
+    ],
+    "camera": {
+      "position": [
+        -0.5,
+        3.5,
+        6.0
+      ],
+      "target": [
+        -2.45,
+        2.3,
+        0.2
+      ],
+      "fov": 30
+    },
+    "summary": {
+      "en": "The valve gear swaps the high- and low-pressure sides. The piston can deliver a working stroke in each direction.",
+      "zh": "配汽机构交换高压侧和低压侧，让活塞在两个方向的行程中都能做功。"
+    },
+    "sim": {
+      "set": {
+        "experiment": "pressure",
+        "motion-mode": "manual",
+        "phase-deg": 0,
+        "cycle-rate": 10,
+        "cold-pressure": 20,
+        "governor-rpm": 90,
+        "work-share": 20
+      },
+      "try": {
+        "vary": "cold-pressure",
+        "observe": [
+          "force-down",
+          "force-up",
+          "work-cycle"
+        ],
+        "keep": [
+          {
+            "en": "Same bore, rod and hot-side pressure",
+            "zh": "相同内径、杆径和热侧压力"
+          }
+        ],
+        "record": true,
+        "predict": {
+          "prompt": {
+            "en": "How will the work per cycle change?",
+            "zh": "每周期的功会怎样变化？"
+          },
+          "start": {
+            "cold-pressure": 20
+          },
+          "change": {
+            "cold-pressure": 50
+          },
+          "observe": "work-cycle",
+          "options": [
+            {
+              "id": "more",
+              "label": {
+                "en": "More",
+                "zh": "变大"
+              },
+              "means": "more"
+            },
+            {
+              "id": "less",
+              "label": {
+                "en": "Less",
+                "zh": "变小"
+              },
+              "means": "less"
+            },
+            {
+              "id": "same",
+              "label": {
+                "en": "The same",
+                "zh": "不变"
+              },
+              "means": "same"
+            }
+          ]
+        }
+      }
+    },
+    "index": {
+      "parts": [
+        "valve-chest",
+        "valve-upper-in",
+        "valve-lower-in",
+        "valve-upper-out",
+        "valve-lower-out",
+        "cylinder",
+        "piston",
+        "piston-rod",
+        "steam-main",
+        "condenser"
+      ]
+    },
+    "beats": [
+      {
+        "view": "xray",
+        "explode": 0,
+        "run": false,
+        "part": null,
+        "cutaway": "cylinder-front",
+        "pose": null,
+        "layers": [
+          "steam-supply",
+          "working-motion",
+          "condensing",
+          "steam-flow"
+        ],
+        "hide": [
+          "nc-cylinder",
+          "nc-piston",
+          "nc-beam",
+          "nc-pump",
+          "nc-jet",
+          "nc-chain",
+          "nc-pump-chain",
+          "energy-input",
+          "energy-work",
+          "energy-reject"
+        ],
+        "ghost": [],
+        "labels": [
+          "cylinder",
+          "piston",
+          "piston-rod"
+        ],
+        "camera": "cylinder-view",
+        "sim": {
+          "set": {
+            "experiment": "pressure",
+            "motion-mode": "manual",
+            "phase-deg": 0,
+            "cycle-rate": 10,
+            "cold-pressure": 20,
+            "governor-rpm": 90,
+            "work-share": 20
+          }
+        },
+        "caption": {
+          "en": "This cylinder has a sealed top, with the piston rod passing through a gland. Steam can act on either side of the piston.",
+          "zh": "这个汽缸上端封闭，活塞杆穿过密封填料口。蒸汽可以作用在活塞的两面。"
+        }
+      },
+      {
+        "view": "xray",
+        "explode": 0,
+        "run": false,
+        "part": null,
+        "cutaway": "cylinder-front",
+        "pose": null,
+        "layers": [
+          "steam-supply",
+          "working-motion",
+          "condensing",
+          "steam-flow"
+        ],
+        "hide": [
+          "nc-cylinder",
+          "nc-piston",
+          "nc-beam",
+          "nc-pump",
+          "nc-jet",
+          "nc-chain",
+          "nc-pump-chain",
+          "energy-input",
+          "energy-work",
+          "energy-reject"
+        ],
+        "ghost": [],
+        "labels": [
+          "valve-upper-in",
+          "valve-lower-out",
+          "piston"
+        ],
+        "camera": "cylinder-view",
+        "sim": {
+          "set": {
+            "experiment": "pressure",
+            "motion-mode": "manual",
+            "phase-deg": 0,
+            "cycle-rate": 10,
+            "cold-pressure": 20,
+            "governor-rpm": 90,
+            "work-share": 20
+          }
+        },
+        "caption": {
+          "en": "For downward travel, the upper inlet admits steam and the lower outlet leads to the condenser. The opposite pair stays closed.",
+          "zh": "向下运动时，上方的进汽口通入蒸汽，下方的排汽口接通冷凝器。另一对阀口关闭。"
+        }
+      },
+      {
+        "view": "xray",
+        "explode": 0,
+        "run": false,
+        "part": null,
+        "cutaway": "cylinder-front",
+        "pose": null,
+        "layers": [
+          "steam-supply",
+          "working-motion",
+          "condensing",
+          "steam-flow"
+        ],
+        "hide": [
+          "nc-cylinder",
+          "nc-piston",
+          "nc-beam",
+          "nc-pump",
+          "nc-jet",
+          "nc-chain",
+          "nc-pump-chain",
+          "energy-input",
+          "energy-work",
+          "energy-reject"
+        ],
+        "ghost": [],
+        "labels": [
+          "valve-lower-in",
+          "valve-upper-out",
+          "piston"
+        ],
+        "camera": "cylinder-view",
+        "sim": {
+          "set": {
+            "experiment": "pressure",
+            "motion-mode": "manual",
+            "phase-deg": 180,
+            "cycle-rate": 10,
+            "cold-pressure": 20,
+            "governor-rpm": 90,
+            "work-share": 20
+          }
+        },
+        "caption": {
+          "en": "Now the lower inlet and upper exhaust are open. The pressure difference acts upwards, giving the other working stroke.",
+          "zh": "现在下方进汽口和上方排汽口打开。压强差产生向上的力，完成另一个做功行程。"
+        }
+      },
+      {
+        "view": "xray",
+        "explode": 0,
+        "run": false,
+        "part": null,
+        "cutaway": "cylinder-front",
+        "pose": null,
+        "layers": [
+          "steam-supply",
+          "working-motion",
+          "condensing",
+          "steam-flow"
+        ],
+        "hide": [
+          "nc-cylinder",
+          "nc-piston",
+          "nc-beam",
+          "nc-pump",
+          "nc-jet",
+          "nc-chain",
+          "nc-pump-chain",
+          "energy-input",
+          "energy-work",
+          "energy-reject"
+        ],
+        "ghost": [],
+        "labels": [
+          "piston",
+          "piston-rod"
+        ],
+        "camera": "cylinder-view",
+        "sim": {
+          "set": {
+            "experiment": "pressure",
+            "motion-mode": "manual",
+            "phase-deg": 0,
+            "cycle-rate": 10,
+            "cold-pressure": 20,
+            "governor-rpm": 90,
+            "work-share": 20
+          }
+        },
+        "caption": {
+          "en": "At the chosen model pressures, the downward force is about sixteen kilonewtons. The smaller force from below must be subtracted.",
+          "zh": "在选定的模型压力下，向下的合力约为十六千牛。计算时必须减去下方较小的推力。"
+        }
+      },
+      {
+        "view": "xray",
+        "explode": 0,
+        "run": false,
+        "part": null,
+        "cutaway": "cylinder-front",
+        "pose": null,
+        "layers": [
+          "steam-supply",
+          "working-motion",
+          "condensing",
+          "steam-flow"
+        ],
+        "hide": [
+          "nc-cylinder",
+          "nc-piston",
+          "nc-beam",
+          "nc-pump",
+          "nc-jet",
+          "nc-chain",
+          "nc-pump-chain",
+          "energy-input",
+          "energy-work",
+          "energy-reject"
+        ],
+        "ghost": [],
+        "labels": [
+          "piston",
+          "piston-rod"
+        ],
+        "camera": "cylinder-view",
+        "sim": {
+          "set": {
+            "experiment": "pressure",
+            "motion-mode": "manual",
+            "phase-deg": 180,
+            "cycle-rate": 10,
+            "cold-pressure": 20,
+            "governor-rpm": 90,
+            "work-share": 20
+          }
+        },
+        "caption": {
+          "en": "The rod takes up part of the upper face. Including its area makes the two model working forces slightly different.",
+          "zh": "活塞杆占去了上表面的一部分面积。把这部分算进去，模型中两个方向的做功推力就略有不同。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Look at the working cylinder’s sealed top. The piston rod passes through a gland, a seal around the moving rod. Steam can act on either face of the piston. A <Term id="double-acting">double-acting</Term> engine has a working stroke in both directions, so its connection to the beam must transmit both pushing and pulling forces. [S2, S7] <FlyTo preset="cylinder-view">Look inside the working cylinder</FlyTo>
+
+For downward travel, the upper inlet connects the top of the cylinder to the steam supply. The lower exhaust connects the space below the piston to the condenser. For upward travel, the other pair opens: steam enters below and exhaust leaves above. Inlet means steam entering the cylinder; exhaust means steam leaving it. The model’s independently selectable valve parts make these paired routes visible. [S7]
+
+Pressure acts on both faces. Find the net force by subtracting the opposing forces, rather than counting only the stronger push. The rod occupies part of the upper face, leaving less area exposed to the steam there. The outside air also acts on the exposed rod. Including all these areas makes the calculated working forces slightly different in the two directions. [S1, S8]
+
+A force transferring energy through motion does <Term id="work">mechanical work</Term>. In this constant-force model, work depends on force and distance; power describes how quickly work is done. The try-it card raises the cold-side pressure while keeping the bore, rod and hot-side pressure fixed. Both working forces and the work per cycle fall. The displayed motion still follows its prescribed phase. [S1, S15]
+
+<More title={{ en: "The model force account", zh: "模型的受力账本" }}>
+
+All displayed pressures are absolute pressures, measured from vacuum, rather than gauge pressures measured relative to outside air. Let A be the full piston area and Ar the rod area. The signed downward force is top pressure × (A − Ar) + outside pressure × Ar − bottom pressure × A. At the default model pressures, the working forces are about <Num s="S1">16.022 kN</Num> down and <Num s="S1">15.930 kN</Num> up. [S1, S8]
+
+</More>
+
+<More title={{ en: "Indicated work and ideal valve timing", zh: "指示功与理想配汽" }}>
+
+The model gives about <Num s="S1">38.96 kJ</Num> of indicated work per cycle. At <Num s="S1">10 cycles per minute</Num>, its model indicated power is <Num s="S1">6.493 kW</Num>. These calculations omit friction, inertia, leakage, expansion and pump work; they are not output-shaft measurements. The logical valve routes are an ideal switching explanation, not manufacturing drawings or measured timing for Lap. [S1, S7]
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+工作汽缸上端有密封缸盖，活塞杆穿过填料密封口。蒸汽可以作用在活塞的两面。<Term id="double-acting">双作用</Term>表示两个方向的行程都能做功，因此连接横梁的机构既要传推力，也要传拉力。[S2, S7]<FlyTo preset="cylinder-view">看看工作汽缸里面</FlyTo>
+
+向下运动时，上方进汽口把汽缸上部接到供汽管，下方排汽口则把下部接到冷凝器。向上运动时，另一对阀口打开：从下面进汽，从上面排汽。“进汽”就是蒸汽进入汽缸，“排汽”就是离开汽缸。图中的阀口各自可以选择查看，便于沿着配对路径追踪。[S7]
+
+活塞两面都受到压力作用。计算合力时，要把相反方向的力相减，不能只算较强的一边。活塞杆占去上表面的一部分，使蒸汽接触的面积变小；外界空气也作用在外露杆上。把这些面积一致算进去，模型两个方向的做功推力就略有不同。[S1, S8]
+
+力通过运动传递能量，就是做<Term id="work">机械功</Term>。在这个恒力模型中，功取决于力与路程；功率则描述做功的快慢。试一试卡保持内径、杆径与热侧压力不变，只提高冷侧压力，两向推力和每周期功都会减小。画面里的运动仍由给定相位控制。[S1, S15]
+
+<More title={{ en: "The model force account", zh: "模型的受力账本" }}>
+
+这里一律采用以真空为零点的绝压，不与相对外界空气的表压混用。设完整活塞面积为 A、杆面积为 Ar，向下的带符号合力为：上侧压强 × (A − Ar) + 外界压强 × Ar − 下侧压强 × A。默认模型输入下，向下做功推力约 <Num s="S1">16.022 千牛</Num>，向上约 <Num s="S1">15.930 千牛</Num>。[S1, S8]
+
+</More>
+
+<More title={{ en: "Indicated work and ideal valve timing", zh: "指示功与理想配汽" }}>
+
+模型每周期指示功约 <Num s="S1">38.96 千焦</Num>；按每分钟 <Num s="S1">10 个周期</Num>，模型指示功率为 <Num s="S1">6.493 千瓦</Num>。模型不计摩擦、惯性、泄漏与截止膨胀，也不扣除泵功，不是输出轴上的测量。逻辑阀口只解释理想切换，并非 Lap 原阀制造图或实测正时。[S1, S7]
+
+</More>
+
+</Lang>

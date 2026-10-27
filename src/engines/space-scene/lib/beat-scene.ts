@@ -29,6 +29,7 @@ export function beatScene(
   const own = typeof spec?.camera === 'object' ? spec.camera : undefined;
   return {
     ...target,
+    ...(target.orbitTime !== undefined ? { orbitTime: null } : {}),
     view,
     ...(spec?.part !== undefined ? { part: spec.part } : {}),
     ...(spec?.explode !== undefined ? { explode: spec.explode } : {}),

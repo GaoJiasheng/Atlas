@@ -1,0 +1,138 @@
+---
+{
+  "id": "singapore-daylight",
+  "order": 3,
+  "title": {
+    "en": "Sample 3 · singapore daylight",
+    "zh": "示例 3 · 模型对照"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "cutaway": "none",
+    "ghost": [],
+    "layers": [
+      "earth-system"
+    ],
+    "labels": [
+      "earth-body",
+      "observer-marker"
+    ],
+    "camera": {
+      "position": [
+        0.6,
+        0.5,
+        1.4
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ],
+      "fov": 40
+    },
+    "index": {
+      "parts": [
+        "earth-body",
+        "observer-marker"
+      ]
+    },
+    "sim": {
+      "set": {
+        "lab": "local-year",
+        "elapsed": 0,
+        "year-angle": 0,
+        "lunar-angle": 0,
+        "spin-angle": 180,
+        "obliquity": 23.44,
+        "lunar-tilt": 5.145,
+        "node-angle": 0,
+        "observer-lat": 1.3342,
+        "moon-range": 384400,
+        "synchronous": true,
+        "scale-mode": "schematic",
+        "day-index": 79
+      },
+      "try": {
+        "vary": "day-index",
+        "observe": [
+          "local-sunrise",
+          "local-noon",
+          "local-sunset",
+          "local-daylight-minutes"
+        ]
+      }
+    },
+    "beats": [
+      {
+        "sim": {
+          "set": {
+            "day-index": 79
+          }
+        },
+        "caption": {
+          "en": "Sample 3.1: circular model comparison.",
+          "zh": "示例 3.1：圆轨道模型对照。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "day-index": 172
+          }
+        },
+        "caption": {
+          "en": "Sample 3.2: circular model comparison.",
+          "zh": "示例 3.2：圆轨道模型对照。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "day-index": 355
+          }
+        },
+        "caption": {
+          "en": "Sample 3.3: circular model comparison.",
+          "zh": "示例 3.3：圆轨道模型对照。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "day-index": 299
+          }
+        },
+        "caption": {
+          "en": "Sample 3.4: circular model comparison.",
+          "zh": "示例 3.4：圆轨道模型对照。"
+        }
+      },
+      {
+        "sim": {
+          "set": {
+            "day-index": 79
+          }
+        },
+        "caption": {
+          "en": "Sample 3.5: circular model comparison.",
+          "zh": "示例 3.5：圆轨道模型对照。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Draft engine fixture. Compare model geometry and computed readings. The dark side uses a faint teaching fill; this is no dated sky prediction.
+
+</Lang>
+
+<Lang zh>
+
+引擎草稿测试。比较模型几何与计算读数。暗侧采用微弱教学填光；此模型不预测具体日期的天空。
+
+</Lang>

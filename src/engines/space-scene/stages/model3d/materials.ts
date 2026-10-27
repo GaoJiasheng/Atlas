@@ -44,6 +44,10 @@ import type { TextureKit } from './textures';
 import { DEFAULT_BULGE, MAX_SHORTEN, MAX_SHORTEN_CAP } from '../../lib/rig';
 
 export interface PartUniforms {
+  /** Orbit sims (OrbitDriver): 0 = the studio lights, 1 = lit only by the analytic Sun along `uOrbitSun` (world, unit) with `uOrbitFill` on the night side, 2 = self-lit (the Sun). */
+  uOrbitLight: { value: number };
+  uOrbitFill: { value: number };
+  uOrbitSun: { value: Vector3 };
   uContract: { value: number };
   /** Muscle length (origin → insertion, local units) and belly thickness. */
   uLen: { value: number };
@@ -114,6 +118,9 @@ if (uContract > 0.0001) {
 `;
 
 const FRAGMENT_DECLS = /* glsl */ `
+uniform float uOrbitLight;
+uniform float uOrbitFill;
+uniform vec3 uOrbitSun;
 uniform float uGrain;
 uniform float uGrainK;
 varying vec3 vGrainP;
@@ -234,6 +241,9 @@ export interface PartMaterial {
 
 export function createPartMaterial(): PartMaterial {
   const uniforms: PartUniforms = {
+    uOrbitLight: { value: 0 },
+    uOrbitFill: { value: 0.035 },
+    uOrbitSun: { value: new Vector3(-1, 0, 0) },
     uContract: { value: 0 },
     uLen: { value: 0 },
     uThick: { value: 0 },
@@ -266,9 +276,16 @@ export function createPartMaterial(): PartMaterial {
       .replace('#include <normal_fragment_maps>', GRAIN)
       .replace('#include <clipping_planes_fragment>', CUT_FACE)
       .replace('#include <color_fragment>', TINT)
-      .replace('#include <emissivemap_fragment>', SELECTION);
+      .replace('#include <emissivemap_fragment>', SELECTION)
+      .replace('#include <opaque_fragment>', `
+        if (uOrbitLight > 0.5) {
+          vec3 worldNormal = inverseTransformDirection(normalize(vNormal), viewMatrix);
+          float light = uOrbitLight > 1.5 ? 1.0 : uOrbitFill + (1.0-uOrbitFill)*max(0.0,dot(normalize(worldNormal),uOrbitSun));
+          outgoingLight = diffuseColor.rgb * light;
+        }
+        #include <opaque_fragment>`);
   };
-  material.customProgramCacheKey = () => 'atlas-part-4';
+  material.customProgramCacheKey = () => 'atlas-part-5';
   return { material, uniforms };
 }
 
