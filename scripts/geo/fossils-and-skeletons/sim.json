@@ -1,0 +1,396 @@
+{
+  "kind": "table",
+  "controls": [
+    {
+      "id": "ash-case",
+      "kind": "choice",
+      "default": "wide",
+      "label": {
+        "en": "Ash pair",
+        "zh": "灰层对"
+      },
+      "options": [
+        {
+          "id": "wide",
+          "label": {
+            "en": "Wide interval",
+            "zh": "较宽间隔"
+          }
+        },
+        {
+          "id": "close",
+          "label": {
+            "en": "Closer beds",
+            "zh": "年龄更近"
+          }
+        },
+        {
+          "id": "precise",
+          "label": {
+            "en": "Smaller errors",
+            "zh": "误差更小"
+          }
+        }
+      ]
+    },
+    {
+      "id": "evidence-view",
+      "kind": "choice",
+      "default": "whole",
+      "label": {
+        "en": "Evidence shown",
+        "zh": "显示依据"
+      },
+      "options": [
+        {
+          "id": "whole",
+          "label": {
+            "en": "All modules",
+            "zh": "全部模块"
+          }
+        },
+        {
+          "id": "supported",
+          "label": {
+            "en": "Direct and comparison",
+            "zh": "直接与比较"
+          }
+        },
+        {
+          "id": "direct",
+          "label": {
+            "en": "Direct records only",
+            "zh": "仅直接记录"
+          }
+        }
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "id": "ash-lower-age",
+      "label": {
+        "en": "Lower ash age",
+        "zh": "下灰层年龄"
+      },
+      "unit": "Ma",
+      "decimals": 2,
+      "tag": "sim",
+      "kind": "number"
+    },
+    {
+      "id": "ash-upper-age",
+      "label": {
+        "en": "Upper ash age",
+        "zh": "上灰层年龄"
+      },
+      "unit": "Ma",
+      "decimals": 2,
+      "tag": "sim",
+      "kind": "number"
+    },
+    {
+      "id": "ash-lower-error",
+      "label": {
+        "en": "Lower set error",
+        "zh": "下灰层设定误差"
+      },
+      "unit": "Ma",
+      "decimals": 2,
+      "tag": "sim",
+      "kind": "number"
+    },
+    {
+      "id": "ash-upper-error",
+      "label": {
+        "en": "Upper set error",
+        "zh": "上灰层设定误差"
+      },
+      "unit": "Ma",
+      "decimals": 2,
+      "tag": "sim",
+      "kind": "number"
+    },
+    {
+      "id": "bracket-young",
+      "label": {
+        "en": "Younger limit",
+        "zh": "较年轻界限"
+      },
+      "unit": "Ma",
+      "decimals": 2,
+      "tag": "sim",
+      "kind": "number"
+    },
+    {
+      "id": "bracket-old",
+      "label": {
+        "en": "Older limit",
+        "zh": "较古老界限"
+      },
+      "unit": "Ma",
+      "decimals": 2,
+      "tag": "sim",
+      "kind": "number"
+    },
+    {
+      "id": "bracket-width",
+      "label": {
+        "en": "Central bracket width",
+        "zh": "中心夹定宽度"
+      },
+      "unit": "Ma",
+      "decimals": 2,
+      "tag": "sim",
+      "kind": "number"
+    },
+    {
+      "id": "envelope-young",
+      "label": {
+        "en": "Outer younger limit",
+        "zh": "外包年轻界限"
+      },
+      "unit": "Ma",
+      "decimals": 2,
+      "tag": "sim",
+      "kind": "number"
+    },
+    {
+      "id": "envelope-old",
+      "label": {
+        "en": "Outer older limit",
+        "zh": "外包古老界限"
+      },
+      "unit": "Ma",
+      "decimals": 2,
+      "tag": "sim",
+      "kind": "number"
+    },
+    {
+      "id": "direct-count",
+      "label": {
+        "en": "Direct modules",
+        "zh": "直接模块"
+      },
+      "unit": "",
+      "decimals": 0,
+      "tag": "sim",
+      "kind": "number"
+    },
+    {
+      "id": "comparison-count",
+      "label": {
+        "en": "Comparison modules",
+        "zh": "比较模块"
+      },
+      "unit": "",
+      "decimals": 0,
+      "tag": "sim",
+      "kind": "number"
+    },
+    {
+      "id": "inferred-count",
+      "label": {
+        "en": "Inferred modules",
+        "zh": "推定模块"
+      },
+      "unit": "",
+      "decimals": 0,
+      "tag": "sim",
+      "kind": "number"
+    },
+    {
+      "id": "visible-count",
+      "label": {
+        "en": "Visible modules",
+        "zh": "可见模块"
+      },
+      "unit": "",
+      "decimals": 0,
+      "tag": "sim",
+      "kind": "number"
+    },
+    {
+      "id": "comparison-visible",
+      "kind": "state",
+      "label": {
+        "en": "Comparison visibility",
+        "zh": "比较部分显隐"
+      },
+      "states": {
+        "shown": {
+          "en": "Shown",
+          "zh": "显示"
+        },
+        "hidden": {
+          "en": "Hidden",
+          "zh": "隐藏"
+        }
+      }
+    },
+    {
+      "id": "inferred-visible",
+      "kind": "state",
+      "label": {
+        "en": "Inferred visibility",
+        "zh": "推定部分显隐"
+      },
+      "states": {
+        "shown": {
+          "en": "Shown",
+          "zh": "显示"
+        },
+        "hidden": {
+          "en": "Hidden",
+          "zh": "隐藏"
+        }
+      }
+    }
+  ],
+  "table": {
+    "experiments": {
+      "ash-bracket": {
+        "keys": [
+          "ash-case"
+        ],
+        "rows": [
+          {
+            "when": {
+              "ash-case": "wide"
+            },
+            "set": {
+              "ash-lower-age": 150,
+              "ash-upper-age": 148,
+              "ash-lower-error": 0.2,
+              "ash-upper-error": 0.2,
+              "bracket-young": 148,
+              "bracket-old": 150,
+              "bracket-width": 2,
+              "envelope-young": 147.8,
+              "envelope-old": 150.2
+            },
+            "source": [
+              "S90"
+            ]
+          },
+          {
+            "when": {
+              "ash-case": "close"
+            },
+            "set": {
+              "ash-lower-age": 149.4,
+              "ash-upper-age": 148.6,
+              "ash-lower-error": 0.1,
+              "ash-upper-error": 0.1,
+              "bracket-young": 148.6,
+              "bracket-old": 149.4,
+              "bracket-width": 0.8,
+              "envelope-young": 148.5,
+              "envelope-old": 149.5
+            },
+            "source": [
+              "S90"
+            ]
+          },
+          {
+            "when": {
+              "ash-case": "precise"
+            },
+            "set": {
+              "ash-lower-age": 150,
+              "ash-upper-age": 148,
+              "ash-lower-error": 0.05,
+              "ash-upper-error": 0.05,
+              "bracket-young": 148,
+              "bracket-old": 150,
+              "bracket-width": 2,
+              "envelope-young": 147.95,
+              "envelope-old": 150.05
+            },
+            "source": [
+              "S90"
+            ]
+          }
+        ]
+      },
+      "skeleton-evidence": {
+        "keys": [
+          "evidence-view"
+        ],
+        "rows": [
+          {
+            "when": {
+              "evidence-view": "whole"
+            },
+            "set": {
+              "direct-count": 7,
+              "comparison-count": 3,
+              "inferred-count": 2,
+              "visible-count": 12,
+              "comparison-visible": "shown",
+              "inferred-visible": "shown"
+            },
+            "source": [
+              "S90"
+            ]
+          },
+          {
+            "when": {
+              "evidence-view": "supported"
+            },
+            "set": {
+              "direct-count": 7,
+              "comparison-count": 3,
+              "inferred-count": 2,
+              "visible-count": 10,
+              "comparison-visible": "shown",
+              "inferred-visible": "hidden"
+            },
+            "source": [
+              "S90"
+            ]
+          },
+          {
+            "when": {
+              "evidence-view": "direct"
+            },
+            "set": {
+              "direct-count": 7,
+              "comparison-count": 3,
+              "inferred-count": 2,
+              "visible-count": 7,
+              "comparison-visible": "hidden",
+              "inferred-visible": "hidden"
+            },
+            "source": [
+              "S90"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "bind": [
+    {
+      "output": "comparison-visible",
+      "part": [
+        "sk-neck",
+        "sk-ribs",
+        "sk-arm-r"
+      ],
+      "visible": {
+        "eq": "shown"
+      }
+    },
+    {
+      "output": "inferred-visible",
+      "part": [
+        "sk-tail-base",
+        "sk-tail-tip"
+      ],
+      "visible": {
+        "eq": "shown"
+      }
+    }
+  ]
+}
