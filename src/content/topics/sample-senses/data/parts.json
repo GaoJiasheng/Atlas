@@ -1,0 +1,560 @@
+{
+  "parts": [
+    {
+      "id": "lens-plane",
+      "name": {
+        "en": "Effective lens",
+        "zh": "有效透镜"
+      },
+      "group": "bench",
+      "summary": {
+        "en": "Engine fixture schematic.",
+        "zh": "引擎测试示意。"
+      },
+      "detail": {
+        "en": "Model test fixture, not a measured organ. [S1]",
+        "zh": "模型测试示意，非器官测量。[S1]"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.01,
+          0.14,
+          0.02
+        ],
+        "at": [
+          1,
+          1,
+          -0.015
+        ],
+        "color": "token:ink-2"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.1
+      }
+    },
+    {
+      "id": "receiver",
+      "name": {
+        "en": "Receiver",
+        "zh": "接收面"
+      },
+      "group": "bench",
+      "summary": {
+        "en": "Engine fixture schematic.",
+        "zh": "引擎测试示意。"
+      },
+      "detail": {
+        "en": "Model test fixture, not a measured organ. [S1]",
+        "zh": "模型测试示意，非器官测量。[S1]"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.01,
+          0.14,
+          0.02
+        ],
+        "at": [
+          1.24,
+          1,
+          -0.015
+        ],
+        "color": "token:ink-2"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.1
+      }
+    },
+    {
+      "id": "wave-reference",
+      "name": {
+        "en": "Reference rest point",
+        "zh": "参考静止点"
+      },
+      "group": "bench",
+      "summary": {
+        "en": "Engine fixture schematic.",
+        "zh": "引擎测试示意。"
+      },
+      "detail": {
+        "en": "Model test fixture, not a measured organ. [S1]",
+        "zh": "模型测试示意，非器官测量。[S1]"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.01,
+          0.02,
+          0.02
+        ],
+        "at": [
+          -0.75,
+          0.46,
+          0
+        ],
+        "color": "token:ink-2"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.1
+      }
+    }
+  ],
+  "groups": [
+    {
+      "id": "bench",
+      "name": {
+        "en": "Schematic bench",
+        "zh": "示意实验台"
+      },
+      "color": "token:ink-2"
+    },
+    {
+      "id": "eye-study",
+      "name": {
+        "en": "Optical study",
+        "zh": "光学示意"
+      },
+      "color": "token:en-light"
+    },
+    {
+      "id": "wave-study",
+      "name": {
+        "en": "Wave study",
+        "zh": "纵波示意"
+      },
+      "color": "token:air"
+    }
+  ],
+  "flows": [],
+  "animations": [],
+  "views": {
+    "assembled": {
+      "camera": {
+        "position": [
+          0,
+          0.8,
+          6
+        ],
+        "target": [
+          0,
+          0.8,
+          0
+        ],
+        "fov": 40
+      }
+    },
+    "exploded": {
+      "camera": {
+        "position": [
+          0,
+          0.8,
+          6
+        ],
+        "target": [
+          0,
+          0.8,
+          0
+        ],
+        "fov": 40
+      }
+    },
+    "cutaway": {
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "offset": 0
+    },
+    "section": {
+      "plane": "xy"
+    },
+    "cover": {
+      "position": [
+        0,
+        0.8,
+        6
+      ],
+      "target": [
+        0,
+        0.8,
+        0
+      ],
+      "fov": 40
+    }
+  },
+  "sim": {
+    "kind": "senses",
+    "controls": [
+      {
+        "id": "light-in",
+        "kind": "toggle",
+        "label": {
+          "en": "Incoming light",
+          "zh": "入射光"
+        },
+        "default": true
+      },
+      {
+        "id": "pupil-mm",
+        "kind": "step",
+        "label": {
+          "en": "Aperture",
+          "zh": "孔径"
+        },
+        "default": 2,
+        "values": [
+          2,
+          4
+        ],
+        "unit": "mm"
+      },
+      {
+        "id": "object-range",
+        "kind": "choice",
+        "label": {
+          "en": "Object",
+          "zh": "物体"
+        },
+        "default": "far",
+        "options": [
+          {
+            "id": "near",
+            "label": {
+              "en": "near",
+              "zh": "近"
+            }
+          },
+          {
+            "id": "far",
+            "label": {
+              "en": "far",
+              "zh": "远"
+            }
+          }
+        ]
+      },
+      {
+        "id": "lens-focus",
+        "kind": "choice",
+        "label": {
+          "en": "Lens focus",
+          "zh": "调焦"
+        },
+        "default": "far",
+        "options": [
+          {
+            "id": "near",
+            "label": {
+              "en": "near",
+              "zh": "近"
+            }
+          },
+          {
+            "id": "far",
+            "label": {
+              "en": "far",
+              "zh": "远"
+            }
+          }
+        ]
+      },
+      {
+        "id": "sound-active",
+        "kind": "toggle",
+        "label": {
+          "en": "Sound active",
+          "zh": "声音启用"
+        },
+        "default": true
+      },
+      {
+        "id": "frequency-hz",
+        "kind": "step",
+        "label": {
+          "en": "Frequency",
+          "zh": "频率"
+        },
+        "default": 250,
+        "values": [
+          250,
+          500
+        ],
+        "unit": "Hz"
+      },
+      {
+        "id": "amplitude",
+        "kind": "step",
+        "label": {
+          "en": "Relative displacement",
+          "zh": "相对位移"
+        },
+        "default": 1,
+        "values": [
+          1,
+          2
+        ],
+        "unit": "×"
+      }
+    ],
+    "outputs": [
+      {
+        "id": "aperture-area",
+        "from": "aperture-area",
+        "kind": "number",
+        "label": {
+          "en": "Aperture area",
+          "zh": "孔径面积"
+        },
+        "decimals": 3,
+        "unit": "mm²"
+      },
+      {
+        "id": "relative-light",
+        "from": "relative-light",
+        "kind": "number",
+        "label": {
+          "en": "Relative incoming light",
+          "zh": "相对进光量"
+        },
+        "decimals": 3,
+        "unit": "×"
+      },
+      {
+        "id": "image-distance",
+        "from": "image-distance",
+        "kind": "number",
+        "label": {
+          "en": "Image distance",
+          "zh": "像距"
+        },
+        "decimals": 3,
+        "unit": "model cm"
+      },
+      {
+        "id": "magnification",
+        "from": "magnification",
+        "kind": "number",
+        "label": {
+          "en": "Focal-plane magnification",
+          "zh": "焦面放大率"
+        },
+        "decimals": 3,
+        "unit": "×"
+      },
+      {
+        "id": "retinal-top-y",
+        "from": "retinal-top-y",
+        "kind": "number",
+        "label": {
+          "en": "Receiver centre y",
+          "zh": "接收面中心y"
+        },
+        "decimals": 3,
+        "unit": "model cm"
+      },
+      {
+        "id": "blur-diameter",
+        "from": "blur-diameter",
+        "kind": "number",
+        "label": {
+          "en": "Blur diameter",
+          "zh": "光斑直径"
+        },
+        "decimals": 3,
+        "unit": "model cm"
+      },
+      {
+        "id": "focus-state",
+        "from": "focus-state",
+        "kind": "state",
+        "label": {
+          "en": "Geometric focus",
+          "zh": "几何焦点"
+        },
+        "states": {
+          "on-retina": {
+            "en": "On receiver",
+            "zh": "在接收面上"
+          },
+          "before-retina": {
+            "en": "Before receiver",
+            "zh": "在接收面前"
+          },
+          "behind-retina": {
+            "en": "Behind receiver",
+            "zh": "在接收面后"
+          }
+        }
+      },
+      {
+        "id": "eye-state",
+        "from": "eye-state",
+        "kind": "state",
+        "label": {
+          "en": "Light state",
+          "zh": "光照状态"
+        },
+        "states": {
+          "dark": {
+            "en": "Dark · geometry prediction",
+            "zh": "暗处·几何预测"
+          },
+          "lit": {
+            "en": "Lit",
+            "zh": "有光"
+          }
+        }
+      },
+      {
+        "id": "visual-hz",
+        "from": "visual-hz",
+        "kind": "number",
+        "label": {
+          "en": "Displayed frequency",
+          "zh": "显示频率"
+        },
+        "decimals": 3,
+        "unit": "Hz"
+      },
+      {
+        "id": "wavelength-scene",
+        "from": "wavelength-scene",
+        "kind": "number",
+        "label": {
+          "en": "Model wavelength",
+          "zh": "模型波长"
+        },
+        "decimals": 3,
+        "unit": "×"
+      },
+      {
+        "id": "displacement-max",
+        "from": "displacement-max",
+        "kind": "number",
+        "label": {
+          "en": "Maximum displacement",
+          "zh": "最大位移"
+        },
+        "decimals": 3,
+        "unit": "×"
+      },
+      {
+        "id": "amplitude-level",
+        "from": "amplitude-level",
+        "kind": "number",
+        "label": {
+          "en": "Relative displacement amplitude",
+          "zh": "相对位移振幅"
+        },
+        "decimals": 3,
+        "unit": "×"
+      },
+      {
+        "id": "sound-state",
+        "from": "sound-state",
+        "kind": "state",
+        "label": {
+          "en": "Sound state",
+          "zh": "声音状态"
+        },
+        "states": {
+          "still": {
+            "en": "Still",
+            "zh": "静止"
+          },
+          "vibrating": {
+            "en": "Vibrating",
+            "zh": "振动"
+          }
+        }
+      }
+    ],
+    "bind": [],
+    "senses": {
+      "eye": {
+        "illumination": "light-in",
+        "pupilMm": "pupil-mm",
+        "object": "object-range",
+        "focus": "lens-focus",
+        "objectsCm": {
+          "near": 12,
+          "far": 40
+        },
+        "focalCm": {
+          "near": 3,
+          "far": 3.6363636363636362
+        },
+        "retinaCm": 4,
+        "referencePupilMm": 2,
+        "objectHeightsCm": [
+          1,
+          -0.5
+        ],
+        "sources": [
+          "S1"
+        ]
+      },
+      "sound": {
+        "active": "sound-active",
+        "frequencyHz": "frequency-hz",
+        "amplitude": "amplitude",
+        "slowFactor": 250,
+        "baseFrequencyHz": 250,
+        "baseWavelengthScene": 1,
+        "baseDisplacementScene": 0.035,
+        "sources": [
+          "S1"
+        ]
+      }
+    },
+    "overlays": [
+      {
+        "kind": "paraxial-eye",
+        "model": "eye",
+        "origin": [
+          1,
+          1,
+          0
+        ],
+        "cmToScene": 0.06,
+        "halfApertureSamples": 1,
+        "group": "eye-study"
+      },
+      {
+        "kind": "longitudinal-wave",
+        "model": "sound",
+        "origin": [
+          -1,
+          0.5,
+          0
+        ],
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "count": 41,
+        "spacing": 0.05,
+        "referenceIndex": 5,
+        "group": "wave-study"
+      }
+    ]
+  }
+}

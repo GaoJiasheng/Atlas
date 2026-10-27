@@ -1,0 +1,218 @@
+---
+{
+  "id": "vibration-to-signal",
+  "order": 5,
+  "title": {
+    "en": "From vibration to signal",
+    "zh": "从振动到信号"
+  },
+  "sensitive": false,
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "part": null,
+    "run": true,
+    "cutaway": "ear-cut",
+    "pose": null,
+    "ghost": [],
+    "layers": [
+      "ear-transfer",
+      "ear-receiver"
+    ],
+    "hide": [
+      "signal-marker"
+    ],
+    "labels": [
+      "cochlea-shell",
+      "basilar-strip",
+      "hair-patch"
+    ],
+    "camera": {
+      "position": [
+        2.95,
+        0.25,
+        5.9
+      ],
+      "target": [
+        3,
+        -0.45,
+        0.1
+      ],
+      "fov": 30
+    },
+    "sim": {
+      "set": {
+        "light-in": false,
+        "pupil-mm": 2,
+        "object-range": "far",
+        "lens-focus": "far",
+        "sound-active": true,
+        "frequency-hz": 250,
+        "amplitude": 1
+      }
+    },
+    "index": {
+      "parts": [
+        "cochlea-shell",
+        "basilar-strip",
+        "hair-patch",
+        "auditory-nerve",
+        "signal-marker",
+        "balance-context",
+        "oval-window"
+      ]
+    },
+    "beats": [
+      {
+        "part": "cochlea-shell",
+        "hide": [
+          "basilar-strip",
+          "hair-patch",
+          "signal-marker",
+          "balance-context"
+        ],
+        "labels": [
+          "cochlea-shell",
+          "oval-window"
+        ],
+        "caption": {
+          "en": "Cochlear fluid motion makes the basilar membrane move. The enlarged strip will show local motion only.",
+          "zh": "耳蜗液体的运动使基底膜活动；旁边的放大条带只显示局部运动。"
+        }
+      },
+      {
+        "part": "basilar-strip",
+        "hide": [
+          "hair-patch",
+          "signal-marker",
+          "balance-context"
+        ],
+        "labels": [
+          "basilar-strip",
+          "cochlea-shell"
+        ],
+        "caption": {
+          "en": "The strip shown here is an enlarged schematic of the membrane, at a different scale.",
+          "zh": "这里的条带是基底膜的放大示意，另用独立比例。"
+        }
+      },
+      {
+        "part": "hair-patch",
+        "hide": [
+          "signal-marker",
+          "balance-context"
+        ],
+        "labels": [
+          "hair-patch",
+          "basilar-strip"
+        ],
+        "caption": {
+          "en": "The enlarged patch marks the sensory region. In the ear, tiny hair-like bundles bend during motion.",
+          "zh": "放大区标出感受细胞所在的位置；耳内微小的纤毛束会随运动弯曲。"
+        }
+      },
+      {
+        "part": "signal-marker",
+        "layers": [
+          "ear-transfer",
+          "ear-receiver",
+          "nerve-signals"
+        ],
+        "hide": [
+          "balance-context"
+        ],
+        "labels": [
+          "hair-patch",
+          "signal-marker"
+        ],
+        "caption": {
+          "en": "Hair-cell activity helps start electrical signalling.",
+          "zh": "毛细胞的活动帮助启动电信号传递。"
+        }
+      },
+      {
+        "part": "auditory-nerve",
+        "layers": [
+          "ear-transfer",
+          "ear-receiver",
+          "nerve-signals"
+        ],
+        "hide": [],
+        "labels": [
+          "auditory-nerve",
+          "hair-patch"
+        ],
+        "caption": {
+          "en": "Signals, rather than a stream of air, travel along the nerve.",
+          "zh": "沿神经传递的是信号，不是一股空气。"
+        }
+      }
+    ],
+    "summary": {
+      "en": "Cochlear fluid movement moves a membrane and bends sensory-cell bundles. A separate enlarged study leads from mechanical movement to nerve signalling.",
+      "zh": "耳蜗液体运动带动膜与感受细胞上的小束。独立放大示意接着显示机械运动怎样连接到神经信号。"
+    }
+  }
+}
+---
+
+<Lang en>
+
+The cochlea is shown with its enclosing surface opened so that the receiving process can be discussed. Movement transferred at the oval window disturbs the fluid inside. A travelling wave develops along the basilar membrane, a flexible partition supporting the sensory structures. Air does not travel through the fluid and then pour into the auditory nerve.
+
+The nearby strip is an enlarged, unrolled study of that membrane. It is separated from the curled organ to make local motion visible. Follow the strip towards the enlarged cell patch. This arrangement is a teaching layout: it is not another organ beside the ear, and its distance from the cochlea is not an anatomical measurement.
+
+A <Term id="hair-cell">hair cell</Term> is a sensory cell with microscopic hair-like projections above it. The projections form a bundle; they are not ordinary hairs growing out of the ear. When the structures move, the bundles bend. Their bending helps start electrical signalling. The patch shows only a few enlarged examples, without claiming a total number of cells or a magnification value.
+
+The final beats introduce the signal marker and then the auditory nerve. Follow the marker from the sensory region towards the nerve, keeping it distinct from the mechanical motion shown earlier. What travels along the nerve is an electrical signal. The brain processes incoming activity so that sounds can be recognised and understood. The model stops at this pathway and does not draw all the connections inside the brain. <FlyTo preset="cochlea">Examine the sensory region</FlyTo>
+
+<More title={{"en": "Different places, different pitches", "zh": "不同位置响应不同音高"}}>
+
+Higher pitches produce their strongest response nearer the cochlear base; lower pitches peak nearer the apex. These are qualitative locations. This stage does not map an input frequency to a measured distance along a real cochlea. [S7, S8]
+
+</More>
+
+<More title={{"en": "Balance beside hearing", "zh": "听觉旁边的平衡结构"}}>
+
+The vestibular region and semicircular canals have roles in balance. They are shown as neighbouring context, not as extra stations along the sound-to-signal route. The cochlea is the hearing structure followed here. [S8]
+
+</More>
+
+<More title={{"en": "Marks show signals", "zh": "用标记表示信号"}}>
+
+The moving markers show signalling, not air, liquid or light particles. The enlarged strip shows local up-and-down movement, not a computed spatial travelling wave. The cell bodies stay on the strip while the enlarged bundle strokes tilt together as a schematic cue; individual stereocilia are not independently simulated. These studies use a separate scale. [S31]
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+耳蜗的包围表面打开，可以讨论里面的接收过程。卵圆窗传来的运动使内部液体产生扰动，支撑感受结构的柔性分隔——基底膜——上出现行波。这里不是空气穿过液体，再灌进听神经；从外界声音到神经信号之间，经历了不同形式的变化。
+
+旁边的长条是基底膜的放大、展开示意。把它与卷曲的耳蜗分开，局部运动才容易看清。沿长条找到放大的细胞区：这是一种教学摆放，不是耳朵旁边又长出一个器官，工位之间的距离也不表示真实解剖距离。
+
+<Term id="hair-cell">毛细胞</Term>是感受细胞，顶部有成束的微小毛发状突起，不是普通耳毛。有关结构运动时，这些束会弯曲，帮助启动电信号传递。放大窗只画少量例子，既不表示毛细胞总数，也没有给出精确放大倍数。把细胞、顶端小束和下方传信号的位置分开看，便能顺着过程读图。
+
+最后几拍才引入信号标记，再转向听神经。跟随标记从感受区域朝神经前进，同时与前面的机械运动区分开。神经上传递的是电信号，大脑处理这些活动后，声音才能被识别和理解。模型到这条路线为止，没有画出脑内全部连接。<FlyTo preset="cochlea">看看感受细胞区域</FlyTo>
+
+<More title={{"en": "Different places, different pitches", "zh": "不同位置响应不同音高"}}>
+
+较高音的最强响应较靠近耳蜗基底，较低音的峰值较靠近顶端。这里只说明大致区域，不把输入频率换算成真实耳蜗上的测量距离。[S7, S8]
+
+</More>
+
+<More title={{"en": "Balance beside hearing", "zh": "听觉旁边的平衡结构"}}>
+
+前庭与半规管参与平衡，作为相邻结构出现在场景中，不是声音变成信号途中额外经过的接收站。这里跟随的听觉结构是耳蜗。[S8]
+
+</More>
+
+<More title={{"en": "Marks show signals", "zh": "用标记表示信号"}}>
+
+移动标记表示信号，不是空气、液体或光粒子。放大条带只显示局部起伏，不计算空间行波；细胞体留在膜条上，放大的纤毛笔画共同倾斜作提示，不逐根计算独立纤毛运动。这些研究另用独立比例。[S31]
+
+</More>
+
+</Lang>
+

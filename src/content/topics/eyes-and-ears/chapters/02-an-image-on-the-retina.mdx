@@ -1,0 +1,201 @@
+---
+{
+  "id": "an-image-on-the-retina",
+  "order": 2,
+  "title": {
+    "en": "An image on the retina",
+    "zh": "视网膜上的像"
+  },
+  "sensitive": false,
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "part": null,
+    "run": false,
+    "cutaway": "eye-cut",
+    "pose": null,
+    "ghost": [],
+    "layers": [
+      "eye-front",
+      "eye-receiver",
+      "study-bench"
+    ],
+    "hide": [
+      "ciliary-ring",
+      "wave-reference"
+    ],
+    "labels": [
+      "object-top",
+      "lens",
+      "retina"
+    ],
+    "camera": {
+      "position": [
+        -2.05,
+        -0.45,
+        9.4
+      ],
+      "target": [
+        -2.05,
+        -1,
+        0.7
+      ],
+      "fov": 30
+    },
+    "sim": {
+      "set": {
+        "light-in": true,
+        "pupil-mm": 2,
+        "object-range": "far",
+        "lens-focus": "far",
+        "sound-active": false,
+        "frequency-hz": 250,
+        "amplitude": 1
+      }
+    },
+    "index": {
+      "parts": [
+        "object-top",
+        "object-bottom",
+        "cornea",
+        "lens",
+        "retina",
+        "retinal-screen",
+        "optic-nerve"
+      ]
+    },
+    "beats": [
+      {
+        "part": "object-top",
+        "labels": [
+          "object-top",
+          "object-bottom"
+        ],
+        "caption": {
+          "en": "Light reflected from an illuminated object enters the eye.",
+          "zh": "被照亮物体反射的光进入眼睛。"
+        }
+      },
+      {
+        "camera": "eye",
+        "part": "lens",
+        "labels": [
+          "cornea",
+          "lens"
+        ],
+        "caption": {
+          "en": "The cornea and lens work together to focus light. The separate study combines them in one effective lens.",
+          "zh": "角膜和晶状体一起把光聚焦；旁边的示意把它们合成一个有效透镜。"
+        }
+      },
+      {
+        "camera": "focus-bench",
+        "part": "retinal-screen",
+        "labels": [
+          "object-top",
+          "object-bottom",
+          "retinal-screen"
+        ],
+        "caption": {
+          "en": "Light from the object’s top reaches the lower part of the model receiver.",
+          "zh": "物体上部来的光落到模型接收面的下方。"
+        }
+      },
+      {
+        "camera": "eye",
+        "part": "retina",
+        "labels": [
+          "retina"
+        ],
+        "caption": {
+          "en": "Cells in the retina change light into electrical signals.",
+          "zh": "视网膜中的感光细胞把光转成电信号。"
+        }
+      },
+      {
+        "camera": "eye",
+        "part": "optic-nerve",
+        "run": true,
+        "layers": [
+          "eye-front",
+          "eye-receiver",
+          "nerve-signals"
+        ],
+        "labels": [
+          "retina",
+          "optic-nerve"
+        ],
+        "caption": {
+          "en": "The optic nerve carries signals to the brain. Light does not continue down the nerve.",
+          "zh": "视神经把信号传到大脑；光不会继续沿神经前进。"
+        }
+      }
+    ],
+    "summary": {
+      "en": "Cornea and lens work together to focus incoming light. A separate effective-lens study shows inversion; retinal cells then begin electrical signalling.",
+      "zh": "角膜与晶状体共同聚焦入眼的光。旁边的有效透镜示意显示倒立成像；视网膜细胞再开始电信号传递。"
+    }
+  }
+}
+---
+
+<Lang en>
+
+The separate optical study shows light from an illuminated object. Its upper and lower markers stand for different places on that object. Before following a ray, predict where light from the upper marker will reach the receiver. The lines show selected paths; real light from each visible point spreads along many paths, and the eye admits only some of it.
+
+In the organ, light passes through the curved cornea and then through the lens behind the iris. Cornea and lens work together to focus it. In the study beside the organ, their combined action is represented by a single effective lens. This simplification keeps the object, bending point and receiving plane easy to compare. It is not the outline of a second eye.
+
+Follow the paths from the upper marker. They reach the lower part of the receiver, while paths from the lower marker reach higher. The resulting image is inverted. The model receiver represents where light lands; it is separate from the thin retinal lining shown inside the anatomical eye. The retina contains cells that respond to incoming light.
+
+At the final beats, follow the change from light to electrical signalling and then select the optic nerve. Its moving marks represent signals travelling towards the brain. They do not represent light continuing through a hollow tube. Seeing depends on both the eye's receiving structures and the brain's processing of their signals. <FlyTo preset="focus-bench">Follow the light paths</FlyTo>
+
+<More title={{"en": "An inverted image", "zh": "倒立的像"}}>
+
+The optical image on the retina is inverted. This does not require a small person or a picture-turning machine inside the brain: neural processing supports our perception of the surroundings. The study only calculates the optical part. [S4, S31]
+
+</More>
+
+<More title={{"en": "Light-sensitive cells", "zh": "感光细胞"}}>
+
+Rods support seeing in dim light and much peripheral vision. Cones support colour and fine central detail. Their microscopic arrangement is not modelled here, and the displayed marks do not represent a cell count. [S24]
+
+</More>
+
+<More title={{"en": "Before the eye", "zh": "入眼之前"}}>
+
+Return to <TopicLink slug="light-and-shadows" ch="seeing-light">seeing light</TopicLink> to follow source, illuminated object and eye together. Light must reach the eye; looking alone does not send a beam out to an object. [S1, S2]
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+旁边的光学示意从一个被照亮的物体开始。上、下标记代表物体上的不同位置。沿光路看以前，先猜上方标记来的光会到接收面的哪里。图中只选画了部分路径；真实物体上可见位置的光会朝许多方向传播，眼睛只接收其中一部分。
+
+在眼球中，光先穿过弯曲的角膜，再经过虹膜后面的晶状体。这些结构共同把光聚焦。旁边的实验台用一个有效透镜合并表示角膜与晶状体的作用，让物体、折光位置和接收面容易比较。它是简化的光学研究，不是又一只眼睛的外形。
+
+跟着上方标记发出的光路，看它们到达接收面的下部；下方标记来的光则到达较高处，因此形成倒立的像。模型接收面表示光落到的位置，与眼球内壁上薄薄的视网膜分开展示。真实视网膜中含有响应入眼光线的细胞，并非一块普通投影幕。
+
+最后几拍把光变为电信号的阶段分开，再选中视神经。沿神经移动的标记表示传向大脑的信号，不是光继续穿过空心管。看见东西既依赖眼内的接收结构，也依赖大脑处理传来的信号；不能只用几条光路解释整个视觉过程。<FlyTo preset="focus-bench">跟随光的路径</FlyTo>
+
+<More title={{"en": "An inverted image", "zh": "倒立的像"}}>
+
+视网膜上的光学像是倒立的。这不需要脑内有小人观看，也不需要一台把照片翻面的机器；神经处理支持我们对周围环境的知觉。实验台只计算光学部分。[S4, S31]
+
+</More>
+
+<More title={{"en": "Light-sensitive cells", "zh": "感光细胞"}}>
+
+视杆细胞支持暗处和许多周边视觉；视锥细胞支持色觉与精细的中心视觉。这里不模拟它们的显微排列，也不能把画面标记当成细胞总数。[S24]
+
+</More>
+
+<More title={{"en": "Before the eye", "zh": "入眼之前"}}>
+
+回到<TopicLink slug="light-and-shadows" ch="seeing-light">看见光</TopicLink>，可以连起来观察光源、被照亮的物体与眼睛。必须有光进入眼睛；仅仅看着物体，并不会由眼睛发出光束。[S1, S2]
+
+</More>
+
+</Lang>
+

@@ -55,6 +55,7 @@ import type { z } from 'zod';
 import { topicSchema, type TopicMeta } from '../src/content/schema/topic';
 import { chapterSchema } from '../src/content/schema/chapter';
 import { KEBAB_ID } from '../src/content/schema/common';
+import { sensesSourceIssues } from '../src/engines/space-scene/senses-schema';
 import { sourceIds, type SourcesFile } from '../src/content/schema/sources';
 import { airfoilSourceIssues } from '../src/engines/space-scene/airfoil-schema';
 import { foodWebSourceIssues } from '../src/engines/space-scene/food-web-schema';
@@ -458,6 +459,7 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
   const matterFile = topic.engine === 'space-scene' && data ? (data as { parts?: PartsFile }).parts : undefined;
   if (matterFile?.sim?.port) for (const issue of portSourceIssues(matterFile.sim.port, new Map((sourcesFile?.sources ?? []).map((x) => [x.id, x])))) error(join(dataDir, 'parts.json'), `sim.port.${issue.path.join('.')}: ${issue.message}`);
   // A table model's rows (docs/40 §4.2): every source listed, SIM rows citing the design study, TYPICAL rows another source.
+  if (matterFile?.sim?.senses) for (const issue of sensesSourceIssues(matterFile.sim.senses, sources ?? new Set())) error(join(dataDir, 'parts.json'), `sim.senses.${issue.path.join('.')}: ${issue.message}`);
   if (matterFile?.sim?.airfoil) for (const issue of airfoilSourceIssues(matterFile.sim.airfoil, new Map((sourcesFile?.sources ?? []).map(x => [x.id, x])))) error(join(dataDir, 'parts.json'), `sim.airfoil.${issue.path.join('.')}: ${issue.message}`);
   if (matterFile?.sim?.table)
     for (const issue of tableSourceIssues(matterFile.sim.table, matterFile.sim.outputs, new Map((sourcesFile?.sources ?? []).map((x) => [x.id, x]))))

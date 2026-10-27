@@ -8,6 +8,7 @@
  */
 import type { SimData, SimTry, SimValues } from '../../sim-schema';
 import { evaluateSim, type SimOutputs } from './index';
+import { sensesExperiment } from './senses';
 import { isTimeline } from './timeline';
 
 type Card = Pick<SimTry, 'vary' | 'also' | 'observe' | 'replay'>;
@@ -43,6 +44,7 @@ export function cardTimelines(sim: SimData, values: SimValues, card: Card): stri
 
 /** The state outputs the card's controls, or the controls the chapter sets (`set`), move (in the outputs' order). */
 export function cardStates(sim: SimData, values: SimValues, card: Card, set: Readonly<SimValues> = {}): string[] {
-  const ids = sim.outputs.filter((o) => o.kind === 'state').map((o) => o.id);
+  const experiments = new Set(card.observe.map((id) => sensesExperiment(sim.outputs.find((o) => o.id === id)?.from ?? id)));
+  const ids = sim.outputs.filter((o) => o.kind === 'state' && (sim.kind !== 'senses' || experiments.has(sensesExperiment(o.from ?? o.id)))).map((o) => o.id);
   return changedByCard(sim, values, card, ids, (v) => String(v), Object.keys(set));
 }

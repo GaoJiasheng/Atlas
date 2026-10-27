@@ -1,0 +1,287 @@
+---
+{
+  "id": "near-far-and-focus",
+  "order": 3,
+  "title": {
+    "en": "Near, far and focus",
+    "zh": "看近与看远"
+  },
+  "sensitive": false,
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "part": null,
+    "run": false,
+    "cutaway": "eye-cut",
+    "pose": null,
+    "ghost": [],
+    "layers": [
+      "eye-front",
+      "eye-receiver",
+      "study-bench"
+    ],
+    "hide": [
+      "wave-reference"
+    ],
+    "labels": [
+      "lens",
+      "retinal-screen",
+      "object-top"
+    ],
+    "camera": {
+      "position": [
+        -2.05,
+        -0.45,
+        9.4
+      ],
+      "target": [
+        -2.05,
+        -1,
+        0.7
+      ],
+      "fov": 30
+    },
+    "sim": {
+      "set": {
+        "light-in": true,
+        "pupil-mm": 2,
+        "object-range": "far",
+        "lens-focus": "far",
+        "sound-active": false,
+        "frequency-hz": 250,
+        "amplitude": 1
+      },
+      "try": {
+        "vary": "object-range",
+        "also": [
+          "lens-focus"
+        ],
+        "keep": [
+          "light-in",
+          "pupil-mm",
+          {
+            "en": "Receiver fixed in place",
+            "zh": "接收面位置固定"
+          }
+        ],
+        "observe": [
+          "focus-state",
+          "image-distance"
+        ],
+        "record": true,
+        "predict": {
+          "prompt": {
+            "en": "The object is near but focus is still set for far. After choosing near focus, where will the focus be in this model?",
+            "zh": "物体已移近，调焦仍在远档。改成近焦后，模型焦点会在哪里？"
+          },
+          "start": {
+            "object-range": "near",
+            "lens-focus": "far",
+            "pupil-mm": 2,
+            "light-in": true
+          },
+          "change": {
+            "lens-focus": "near"
+          },
+          "observe": "focus-state",
+          "options": [
+            {
+              "id": "on-retina",
+              "label": {
+                "en": "On the receiver",
+                "zh": "在接收面上"
+              },
+              "means": "on-retina"
+            },
+            {
+              "id": "before-retina",
+              "label": {
+                "en": "Before the receiver",
+                "zh": "在接收面前"
+              },
+              "means": "before-retina"
+            },
+            {
+              "id": "behind-retina",
+              "label": {
+                "en": "Behind the receiver",
+                "zh": "在接收面后"
+              },
+              "means": "behind-retina"
+            }
+          ]
+        }
+      }
+    },
+    "index": {
+      "parts": [
+        "lens",
+        "ciliary-ring",
+        "retina",
+        "retinal-screen",
+        "object-top",
+        "object-bottom"
+      ]
+    },
+    "beats": [
+      {
+        "part": "lens",
+        "pose": "lens-far",
+        "sim": {
+          "set": {
+            "object-range": "far",
+            "lens-focus": "far"
+          }
+        },
+        "caption": {
+          "en": "The far-object setting focuses on the receiver in this model. Its effective lens combines cornea and lens.",
+          "zh": "这个模型的远物设置把光聚在接收面上；有效透镜合并角膜与晶状体的作用。"
+        }
+      },
+      {
+        "part": "object-top",
+        "labels": [
+          "object-top",
+          "retinal-screen"
+        ],
+        "sim": {
+          "set": {
+            "object-range": "near",
+            "lens-focus": "far"
+          }
+        },
+        "caption": {
+          "en": "Move the object nearer without changing focus: the model spot spreads.",
+          "zh": "物体移近、聚焦设置不变时，模型光斑散开。"
+        }
+      },
+      {
+        "part": "lens",
+        "pose": "lens-near",
+        "labels": [
+          "lens",
+          "ciliary-ring"
+        ],
+        "sim": {
+          "set": {
+            "object-range": "near",
+            "lens-focus": "near"
+          }
+        },
+        "caption": {
+          "en": "For near viewing, the lens becomes rounder. The model focus returns to the receiver.",
+          "zh": "看近处时，晶状体变得更圆鼓；模型焦点回到接收面上。"
+        }
+      },
+      {
+        "part": "retinal-screen",
+        "labels": [
+          "retinal-screen",
+          "object-top"
+        ],
+        "sim": {
+          "set": {
+            "object-range": "near",
+            "lens-focus": "near"
+          }
+        },
+        "caption": {
+          "en": "The receiver stays fixed while the model focus returns to it.",
+          "zh": "接收面没有移动，模型的聚焦位置回到它上面。"
+        }
+      },
+      {
+        "camera": "eye",
+        "layers": [
+          "eye-front",
+          "eye-receiver"
+        ],
+        "part": "retina",
+        "labels": [
+          "retina",
+          "lens"
+        ],
+        "sim": {
+          "set": {
+            "object-range": "far",
+            "lens-focus": "far"
+          }
+        },
+        "caption": {
+          "en": "In myopia, distant light focuses in front of the retina; prescribed lenses can help. This model does not diagnose it.",
+          "zh": "近视时，远处来的光聚在视网膜前；按处方配镜可帮助看清。本模型不诊断近视。"
+        }
+      }
+    ],
+    "summary": {
+      "en": "Bring the model object nearer, then change focus while the receiver stays fixed. Its effective lens combines the cornea and lens; distances are teaching values.",
+      "zh": "模型接收面保持固定，先移近物体，再改变聚焦设置。有效透镜合并角膜与晶状体的作用，距离是教学设定。"
+    }
+  }
+}
+---
+
+<Lang en>
+
+Start with the far object and far-focus settings. The light paths meet on the model receiver. Its position stays fixed throughout this comparison. Bring the object nearer without changing focus. The geometrical meeting point now lies beyond the receiver, so the light reaches the receiver as a spread-out spot rather than a sharply focused point.
+
+Use the card to predict where the focus will lie after changing to the near-focus setting. Keep the object near and leave the opening unchanged. Reveal the result: the paths meet on the receiver again. Record both states, including the description of focus position. The receiver has not moved to collect the image; the effective focusing power has changed.
+
+In an eye, the lens changes shape during accommodation. For near viewing it becomes rounder; for distant viewing it is flatter. The ring of ciliary muscle around the lens changes the tension on the fibres holding it. The stage shows the lens-shape difference clearly, while the separate optical bench combines cornea and lens into its effective lens. The bench's distances are teaching choices, not measurements of a child.
+
+Changing focus for a nearby object is different from <Term id="myopia">myopia</Term>, or short-sightedness. In myopia, light from distant objects focuses in front of the retina and distant things can look blurred. An eye-care professional can prescribe lenses to help a person see clearly. This simulation cannot tell whether someone needs glasses or what prescription would suit them. <FlyTo preset="focus-bench">Compare near and far focus</FlyTo>
+
+<Figure src="figures/eyes-and-ears-lens-shapes" alt={{"en": "Two schematic views of the same biconvex lens: flatter for distant viewing and rounder for near viewing.", "zh": "同一双凸晶状体的两个示意视图：看远较扁，看近较圆鼓。"}} caption={{"en": "Accommodation changes lens shape; these are not two different refractive conditions. Original illustration for this topic.", "zh": "调节使晶状体形状改变；这里不是两个不同的屈光病种。为本主题绘制的原创示意图。"}} />
+
+<More title={{"en": "Fixed receiver, changing focus", "zh": "接收面固定，聚焦改变"}}>
+
+In this model, the receiver is <Num s="S31">4 model cm</Num> behind the effective lens. Far and near objects are at <Num s="S31">40 model cm</Num> and <Num s="S31">12 model cm</Num>. Matching effective focal lengths are <Num s="S31">40/11 model cm</Num> and <Num s="S31">3 model cm</Num>. They satisfy the ideal thin-lens equation; none is a human-eye measurement.
+
+</More>
+
+<More title={{"en": "Correcting blur and controlling myopia", "zh": "矫正模糊与控制近视"}}>
+
+Glasses can correct refractive blur. NUHS distinguishes that improvement from curing myopia: slowing progression and correcting vision are different goals. The card models neither treatment nor eyeball growth. [S5, S6, S14]
+
+</More>
+
+<More title={{"en": "The changing lens", "zh": "改变形状的晶状体"}}>
+
+The illustration compares accommodation in the same schematic lens, with the same viewing direction. It does not compare a short-sighted eye with a long-sighted eye. The shape change is qualitative, and its thickness is not an anatomical measurement. [S4, S31]
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+先选远物与远焦设置，光路在模型接收面上相会。整个比较中，接收面的位置保持固定。把物体移近而不改调焦，几何焦点便落到接收面后方；光到达接收面时还没聚成一点，留下散开的光斑。
+
+在卡片上先猜：保持物体在近处、开口大小不变，改成近焦设置以后，焦点会在哪里？揭示结果，便能看见光路重新聚在接收面上。把前后状态都记下来，除了数字，也比较描述焦点位置的文字。这里不是接收面移过去接住像，而是有效聚焦能力变了。
+
+真实眼睛调节时，晶状体也改变形状：看近处较圆鼓，看远处较扁。周围的睫状肌改变牵住晶状体的纤维张力。舞台把形状差别表现得清楚；光学实验台则把角膜和晶状体合成一个有效透镜。实验台的距离是教学设定，不是儿童眼球的测量值。
+
+看近物时调焦，与<Term id="myopia">近视</Term>是不同的事。近视时，远处来的光聚在视网膜前，远处物体可能模糊；眼科专业人员可按检查结果配镜，帮助看清。屏幕上的模拟不能判断你是否需要眼镜，也不能给出处方度数。<FlyTo preset="focus-bench">比较近物与远物的聚焦</FlyTo>
+
+<Figure src="figures/eyes-and-ears-lens-shapes" alt={{"en": "Two schematic views of the same biconvex lens: flatter for distant viewing and rounder for near viewing.", "zh": "同一双凸晶状体的两个示意视图：看远较扁，看近较圆鼓。"}} caption={{"en": "Accommodation changes lens shape; these are not two different refractive conditions. Original illustration for this topic.", "zh": "调节使晶状体形状改变；这里不是两个不同的屈光病种。为本主题绘制的原创示意图。"}} />
+
+<More title={{"en": "Fixed receiver, changing focus", "zh": "接收面固定，聚焦改变"}}>
+
+这个模拟的接收面在有效透镜后 <Num s="S31">4 模型厘米</Num>。远物、近物的物距分别为 <Num s="S31">40 模型厘米</Num>、<Num s="S31">12 模型厘米</Num>；匹配的有效焦距分别为 <Num s="S31">40/11 模型厘米</Num>、<Num s="S31">3 模型厘米</Num>。它们满足理想薄透镜公式，都不是人眼测量值。
+
+</More>
+
+<More title={{"en": "Correcting blur and controlling myopia", "zh": "矫正模糊与控制近视"}}>
+
+眼镜能矫正屈光造成的模糊。NUHS 把改善视力与治愈近视区分开：减缓发展和矫正视力是不同目标。卡片既不模拟治疗，也不模拟眼球生长。[S5, S6, S14]
+
+</More>
+
+<More title={{"en": "The changing lens", "zh": "改变形状的晶状体"}}>
+
+图版从相同方向比较同一示意晶状体的调节，不是在比较近视眼和远视眼。形状差别只作定性说明，厚度不是解剖测量值。[S4, S31]
+
+</More>
+
+</Lang>
+

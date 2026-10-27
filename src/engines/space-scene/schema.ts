@@ -961,6 +961,13 @@ export const viewsSchema = z
     /** Opt-in HUD-aware framing; only these subjects that intersect the authored view are fitted. */
     hudFrame: z.object({ parts: z.array(kebabId).min(1).max(32) }).strict().optional(),
     /**
+     * Enlarged-window borders (docs/58 F4, `hud/InsetFrames.tsx`): a hairline frame drawn
+     * around the on-screen boxes of these parts while any of them is on show, with its label
+     * (e.g. "Enlarged schematic · different scale") at the top-left corner. No magnification
+     * number is implied; use a group `scale` for a measured one.
+     */
+    insets: z.array(z.object({ id: kebabId, parts: z.array(kebabId).min(1).max(12), label: bilingual }).strict()).max(4).optional(),
+    /**
      * How the body reads while an exercise plays (topics with a skinned
      * `context` skin part): `wire` (default when the glb has a `skin-wire`
      * node) draws the low-poly figure as ink hairlines over a faint
@@ -1210,6 +1217,10 @@ export const partsFileBase = z
     for (const [i, id] of (file.views.hudFrame?.parts ?? []).entries())
       if (!file.parts.some(p => p.id === id && !p.context))
         ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['views', 'hudFrame', 'parts', i], message: `unknown selectable framing part ${id}` });
+    for (const [i, inset] of (file.views.insets ?? []).entries())
+      for (const [j, id] of inset.parts.entries())
+        if (!file.parts.some(p => p.id === id && !p.context))
+          ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['views', 'insets', i, 'parts', j], message: `unknown selectable inset part ${id}` });
     for (const x of mechanismIssues(file.mechanisms, file)) ctx.addIssue({ code: z.ZodIssueCode.custom, ...x });
     if (file.sim) {
       const spanTargets = new Set(file.sim.bind.flatMap((b) => 'part' in b && b.span && typeof b.part === 'string' ? [b.part] : []));

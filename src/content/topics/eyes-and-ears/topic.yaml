@@ -1,0 +1,18 @@
+id: eyes-and-ears
+title: { en: "Eyes and Ears", zh: "眼睛与耳朵" }
+subtitle: { en: "From light and vibration to nerve signals", zh: "从光与振动到神经信号" }
+shortTitle: { en: "Eyes & ears", zh: "眼与耳" }
+subject: biology
+tags: [beyond-syllabus]
+levels: [P2, P3, P4, P5, P6]
+moe:
+  - "MOE Science P4 Light: seeing light sources and reflected light; eye anatomy and hearing mechanisms are enrichment"
+  - "MOE Science investigation practices: gathering data using senses and apparatus"
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: published
+illustration: eyes-and-ears
+note: { en: "Original schematic anatomy · separate eye and ear study stations · effective-lens and enlarged cell studies use separate scales · silent model, not a medical test", zh: "原创解剖示意 · 眼与耳分设工位 · 有效透镜与细胞放大研究另用独立比例 · 静音模型，不作医学测试" }
