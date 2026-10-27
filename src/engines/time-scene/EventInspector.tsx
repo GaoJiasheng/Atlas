@@ -1,5 +1,5 @@
 /**
- * Details of a clicked event, shown in the InfoPanel's `inspector` slot.
+ * Details of a clicked event, shown in the InfoPanel's `readerTop` slot.
  * Forces and casualties use Counter ("one icon = N", docs/02); a table with
  * exactly two sides is drawn as one two-sided Counter on a shared scale
  * (attacker left).
@@ -78,7 +78,7 @@ export function EventInspector({ event, model, locale, onClose }: EventInspector
   const colorOf = (id: string) => sideCssColor(model.entities.get(id)?.entity, at);
 
   useEffect(() => {
-    ref.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    ref.current?.closest('.atlas-panel__scroll')?.scrollTo({ top: 0 });
   }, [event.id]);
 
   const isSite = event.kind === 'site';

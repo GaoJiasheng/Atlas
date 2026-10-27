@@ -746,3 +746,27 @@ id 带 `term-` 防止与章节 / 事件重名；每词 EN、ZH 正文第一次�
 - [ ] 关键操作≥44px、无hover必需操作；已访问主题离线可读；EN/ZH、paper/cinema、键盘/触控、语音各看/听两拍。实现结果写§9，不把规格阶段写成施工成功。
 
 ## 9. 引擎记录（施工后填写）
+
+
+### 9.1 引擎 E-IR1（2026-10-27，Codex）
+
+**先核对再施工**：日期图层 / GPU 日期过滤与计数、空 control / 零实体、site / milestone、共享 readerTop / readerEnd、来源弹层、SceneControls.test 与 core b codec 全已存在，未重建。实际 TimeScene 仍无事件索引、详情仍在低位 inspector，因此只补 E-IR1：`schema.ts` 的 index 与 event-only 引用检查、`engines/schemas.ts` 一行校验注册、`ChapterIndex.tsx`、`lib/reader.ts`、View 的 reader slots / 选择路径 / 测试钩子、索引样式。事件 / 实体详情各沿用原组件，未重复渲染；宿主仅加 `SceneContext.revealReader()` 回调，连接已有阅读面板、手机抽屉与滚动容器，没有新持久化字段或核心 test API。reveal 用本地 revision 在 layout effect 里等抽屉展开后滚回顶部，重复选择同一对象也生效。小于 1024 CSS px 只展开临时抽屉，保留 `atlas:reader` 的 dock 折叠偏好；桌面选中则打开 reader 列并沿用已有持久化路径。docs/06 已记数据形状。
+
+**与 §4 的出入及原因**：
+
+1. 用户本轮明确只要求一个工程项 E-IR1。实际 E-IR2 也缺失，因而没有新增 beat store 字段、阅读节拍行、逗号/句号键或 b URL 适配。E-IR1 的关闭恢复使用 View 内最近已套用拍的本地记录；site 选择保留它，非 site 跳时 / 自选时间（含拖动后仍四舍五入到同一年）/ 换章使其失效。不猜同日拍号；与 E-IR2 相关的 §4 浏览器 oracle 不属于本轮实现。
+2. 不另建 `sample-*` 夹具：依用户授权，由真实 draft `industrial-revolution` 内容和其 e2e 用例覆盖新路径。`tests/time-scene/reader.test.ts` 保留独立纯函数 / schema 单测。
+3. 地图 / 引线继续沿用原来的不跳时间的选择行为；索引和 `engine.selectEvent` 才采用 §4 指定的日期 / 镜头跳转。二者共享选中状态与唯一详情组件。
+4. 对章节没有镜头的现有内容，索引选择以既有 world zoom 1.4 作为兜底，只把 center 改到事件坐标；有镜头时完整保留 zoom / pitch / bearing。未加地图数据重写、sim 或跨引擎宿主。
+
+**验证**：新增 reader 单测 15 条，连同既有 schema 41 条、dated-layer schema 13 条，69/69 通过。TimeScene 全目录单测 238/238 通过（27 个文件）；`pnpm check` 通过，752 个文件 0 error、0 warning、3 个既有 unused hints（warring-states 两处、sim.test 一处）。全量 validate / test / build 由本轮主会话继续执行，结果见本节后续记录 / REVIEW.md。按 BRIEF-ENGINE，子代理未运行 `pnpm shoot` / `pnpm e2e`，未打开用户浏览器或桌面；待主会话在端口 5407 完成浏览器验收。真实 1914 铁路线截图、性能预算和纸色 / cinema 双语手机布局未由本条单测声称通过。
+
+### 9.2 draft 内容与最终非浏览器验收（2026-10-27）
+
+`industrial-revolution` 已施工，仍为 **draft**，未发布、未改 smoke 计数。八个双语阅读章、37 个逐拍字幕（背景4拍、正式33拍）、29个 More/语言、15个名词（各语言首次各包一次）、54条稳定编号来源、14个镜头、58个事件（27现代城市site+31文献milestone）。章索引条数为2/9/8/17/10/13/15/38；第05章按§3.4加入可选吉隆坡参照，全部58事件均可从reader到达。零实体/零movements、1760/1914两空control帧。无新机械sim或绘造的路线/历史港区。三张批准图经illustrate处理，实际查看成品；Rocket额外以同源章图显示限定图注。
+
+**地图与许可**：两份独立TopoJSON在现有加载器要求的`public/geo/`，没有复制到严格的topic data schema。RShapes18,804原lid保留，1830/1834/1840/1850/1869/1871/1890/1914累计0/35/428/1925/7355/8339/15577/18804。煤层仅GB的622要素/624面/1,017环，0退化/自交/同面环间相交/外置孔/绕向错误；对四个简化后孔失效的面恢复源坐标。OSGB36正式七参数转换无OSTN15网格，不宣称测量级精度。两种来源的离线原图/成品对照分别生成并实际查看；不是运行时截图。来源、原始/成品哈希、变换、简化误差、覆盖缺口与恢复对象见`SOURCES-GEO.md`及`build-report.json`。RShapes独立CC BY-NC-SA4.0，无BY-SA/OHM混入；BGS OGL、NE公有领域、GeoNames CC BY署名及根许可例外/第三方通知已补。
+
+**其余偏差**：铁路3,942,408字节（gzip530,795），煤层266,680（gzip75,990），总几何4,209,088，铁路/总几何超预算；必需铁路属性本身已超过1.5MB，未删原feature或日期。引擎data响应89,493字节，topic JSON106,697字节。构建资产依赖闭包（TimeScene/地图控制器/宿主/React及静态依赖）gzip464,499字节，超过400KB目标；这不是浏览器请求记录，未擅自扩展E-IR1做共享打包重构。E-IR2、reader增量gzip/运行时响应/帧时仍未测；reader行和b链接未承诺实现。定制HUD五行不在topic schema，保留已有通用规格行，将限定写入note/正文/详情。world的设计zoom0.3受既有地图minZoom0.5限制，待截图审镜头。`steam-engine`不存在且validator拒绝缺失slug，所有姊妹/双向链接位置列REVIEW，没有输出死链或虚构ch id。敏感中文、译名与默认决定逐段列REVIEW，事实删改及读取深度列AUDIT。
+
+**门槛**：check755文件0error/0warning（3既有hint）；validate56主题0error/0warning；test157文件4,200测试全过，最终几何/索引改动后topic+reader21/21再次过；build115页成功。成品两份几何哈希与public原件一致，中英文draft路由已生成、首页无发布入口。新增9项topic e2e只编写未运行。遵守两份BRIEF的sandbox限制，未运行shoot/e2e、未控制用户浏览器/桌面；端口5407的双语双主题手机/平板/全尺寸截图、离线/语音/性能及sample-time/sample-dated-layers/ww2浏览器回归均交主会话，不能将本记录视作浏览器验收通过。

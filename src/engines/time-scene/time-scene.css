@@ -5,6 +5,15 @@
  */
 
 /* ------------------------------------------------------------------ */
+/* Chapter index: normal reader type, token colours, 44 CSS px targets. */
+.ts-index { margin-top: 24px; border-top: 1px solid var(--line); padding-top: 14px; }
+.ts-index__title { margin: 0 0 8px; color: var(--ink-2); font: 500 12px / 1.4 var(--font-hud); letter-spacing: .08em; text-transform: uppercase; }
+.ts-index__list { margin: 0; padding: 0; list-style: none; }
+.ts-index__row { display: block; width: 100%; min-height: 44px; padding: 10px 8px; border: 0; border-bottom: 1px solid var(--line); background: transparent; color: var(--ink); font: 400 15px / 1.5 var(--font-hud); text-align: start; cursor: pointer; }
+.ts-index__row[aria-pressed="true"] { color: var(--signal); background: var(--panel); }
+.ts-index__row:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+.ts-index__row:disabled { cursor: default; opacity: .5; }
+
 /* Stage                                                               */
 /* ------------------------------------------------------------------ */
 
@@ -1029,7 +1038,7 @@ button.ts-co:focus-visible {
 }
 
 /* ------------------------------------------------------------------ */
-/* Event inspector (InfoPanel `inspector` slot)                        */
+/* Event inspector (InfoPanel `readerTop` slot)                        */
 /* ------------------------------------------------------------------ */
 
 .ts-event {

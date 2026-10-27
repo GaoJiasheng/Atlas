@@ -15,6 +15,26 @@ changes, and distribute your contributions under the same licence.
 
 Full licence text: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
 
+Exception — Industrial Revolution (topic `industrial-revolution`): the dated
+railway layer (`public/geo/industrial-rail-rshapes.json`) and its source/production
+comparison (`scripts/geo/industrial-revolution/qa/rshapes-1834-1914-source-production.png`)
+are derived only from RShapes 1.0 (Müller-Crepon, Girardin / ETH Zürich,
+CC BY-NC-SA 4.0), with public-domain Natural Earth mask selection. These files
+remain CC BY-NC-SA 4.0; they contain no CC BY-SA-derived geometry or attributes.
+The geological layer (`public/geo/industrial-coal-strata.json`) and comparison
+(`scripts/geo/industrial-revolution/qa/bgs-native-wgs84-production.png`) retain
+their underlying British Geological Survey Open Government Licence 3.0 rights
+(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/),
+including the credit "Contains British Geological Survey materials © UKRI 2026"
+and source-context OS notice. Modern city coordinates in
+`scripts/geo/industrial-revolution/industrial-places.geojson` and the coordinates
+derived from them into the topic's `data/events.json` retain Natural Earth
+public-domain and GeoNames CC BY 4.0 rights
+(https://creativecommons.org/licenses/by/4.0/). Newly authored topic prose stays
+under Atlas CC BY-NC-SA 4.0. Exact inputs, changes and attribution are recorded
+in the topic's data/SOURCES.md, the pipeline's SOURCES-GEO.md and
+THIRD-PARTY-NOTICES.md. No OpenHistoricalMap element is distributed by this topic.
+
 Why NonCommercial-ShareAlike: the historical control areas are derived from
 CShapes 2.0 (CC BY-NC-SA 4.0) and from Wikimedia Commons maps (CC BY-SA); the
 derived data must carry compatible terms. Third-party sources and their own

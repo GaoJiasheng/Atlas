@@ -1,6 +1,6 @@
 /**
  * Details of an entity picked in the participation card (BandCard row), shown
- * in the InfoPanel's `inspector` slot: name (both languages), bloc spans,
+ * in the InfoPanel's `readerTop` slot: name (both languages), bloc spans,
  * joined / left, and the approximate controlled area at the playhead time.
  */
 import { useEffect, useMemo, useRef, type CSSProperties } from 'react';
@@ -34,7 +34,7 @@ export function EntityInspector({ entity, model, playhead, locale, onClose }: En
   const areas = useMemo(() => controlAreas(model), [model]);
 
   useEffect(() => {
-    ref.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    ref.current?.closest('.atlas-panel__scroll')?.scrollTo({ top: 0 });
   }, [entity.id]);
 
   const index = `N-${String([...model.entities.keys()].indexOf(entity.id) + 1).padStart(2, '0')}`;

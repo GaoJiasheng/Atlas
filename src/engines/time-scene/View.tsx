@@ -60,6 +60,8 @@ import type { GeoController } from './stages/geo/controller';
 import { Timeline, formatReadout } from './timeline/Timeline';
 import { EventInspector } from './EventInspector';
 import { EntityInspector } from './EntityInspector';
+import { ChapterIndex } from './ChapterIndex';
+import { eventSelectionPatch, readerHighlight, type ReaderBeat } from './lib/reader';
 import { BandCard, PerfReadout, useFps } from './hud/HudPanels';
 import { DatedLayerPlate } from './hud/DatedLayerPlate';
 import type { DatedLayerIndex } from './lib/datedLayers';
@@ -95,7 +97,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   const geo = useMemo(() => withEntityColours(data as TimeSceneGeoData, topic.colorBy), [data, topic.colorBy]);
   const region = topic.basemap?.region ?? null;
   const store = useSceneStore<TimeSceneExt>();
-  const { hud } = useSceneContext();
+  const { hud, revealReader } = useSceneContext();
   const currentChapter = useScene<TimeSceneExt, string | null>((s) => s.chapter);
   const layers = useScene<TimeSceneExt, string[]>((s) => s.layers);
   const highlight = useScene<TimeSceneExt, string[]>((s) => s.highlight);
@@ -120,11 +122,16 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   });
   useEffect(() => () => playhead.destroy(), [playhead]);
 
+  // Last explicitly applied beat; kept locally until the separate E-IR2 URL adapter exists.
+  const readerBeat = useRef<ReaderBeat | null>(null);
+
   /** Last `t` this view wrote, so the store echo is not treated as a jump. */
   const lastWritten = useRef<string | null>(null);
 
   const commit = useCallback(
     (n: number) => {
+      // Scrubbing can round back to the same year; it still leaves the applied beat.
+      readerBeat.current = null;
       const v = clamp(n, model.min, model.max);
       playhead.set(v);
       // A topic dated to the year writes years back (`t=-0350`).
@@ -162,18 +169,35 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   const [cardExpanded, setCardExpanded] = useState(false);
   const restoreHighlight = useCallback(() => {
     const s = store.getState();
-    s.patch({ highlight: s.chapterTarget(s.chapter).highlight });
+    const beat = readerBeat.current;
+    s.patch({ highlight: readerHighlight(s.chapter, beat, s.chapterTarget(s.chapter).highlight) });
   }, [store]);
   const selectEvent = useCallback(
     (id: string) => {
-      // The presentation's map is for looking around: the caption says what the beat is about.
-      if (presentation.isPresenting()) return;
+      if (presentation.isPresenting() || !geo.events.some((event) => event.id === id)) return false;
+      store.getState().patch({ highlight: [id] });
       setSelectedEntity(null);
       setSelected(id);
-      store.getState().patch({ highlight: [id] });
+      revealReader();
+      return true;
     },
-    [store],
+    [store, geo.events, revealReader],
   );
+  const selectIndexedEvent = useCallback((id: string) => {
+    const s = store.getState();
+    const patch = eventSelectionPatch(s, geo.events, id, presentation.isPresenting());
+    if (!patch) return false;
+    const beat = readerBeat.current;
+    const site = geo.events.find((event) => event.id === id)?.kind === 'site';
+    if (site && beat) pendingBeat.current = { chapter: beat.chapter, index: beat.index };
+    // Store transitions clear old selections synchronously: select only after applying the map state.
+    s.applyState(patch);
+    if (site) readerBeat.current = beat;
+    setSelectedEntity(null);
+    setSelected(id);
+    revealReader();
+    return true;
+  }, [store, geo.events, revealReader]);
   const closeEvent = useCallback(() => {
     setSelected(null);
     restoreHighlight();
@@ -188,8 +212,9 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       }
       setSelectedEntity(id);
       store.getState().patch({ highlight: [id] });
+      revealReader();
     },
-    [store, selectedEntity, restoreHighlight],
+    [store, selectedEntity, restoreHighlight, revealReader],
   );
   const closeEntity = useCallback(() => {
     setSelectedEntity(null);
@@ -204,6 +229,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
         const transitioned =
           s.transition.id !== prev.transition.id && s.transition.reason !== 'preset' && s.transition.reason !== 'snap';
         if (transitioned) {
+          readerBeat.current = null;
           setSelected(null);
           setSelectedEntity(null);
           const segment = story.findIndex((c) => c.id === s.chapter);
@@ -223,6 +249,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
             });
           }
         }
+        if (!transitioned && s.t !== prev.t) readerBeat.current = null;
         if (!transitioned && s.t === prev.t) return;
         if (s.t === null) return;
         const key = formatTimeParam(s.t);
@@ -315,6 +342,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       },
       { instant },
     );
+    readerBeat.current = { chapter: b.chapter, index: b.index, highlight: [...store.getState().highlight] };
     // A beat's camera is authored, not the reader's: the status line keeps "CHAPTER NN VIEW".
     hud.setState({ cameraFree: false });
   };
@@ -565,6 +593,14 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       // No participants (a single-country story): no participation card, not an empty frame.
       ...(geo.entities.length > 0 ? { card: bi('time.card.title'), cardToggle: { expanded: cardExpanded, set: setCardExpanded } } : {}),
       beats: beatControls,
+      test: {
+        selectEvent: (id: string) => selectIndexedEvent(id),
+        reader: () => ({
+          indexIds: [...((chapters.find((c) => c.id === store.getState().chapter)?.state as TimeChapterState | undefined)?.index ?? [])],
+          selectedId: selected ?? selectedEntity,
+          detailCount: selected || selectedEntity ? 1 : 0,
+        }),
+      },
       escape: () => {
         if (isPresenting()) {
           stopPresentation(true);
@@ -617,6 +653,8 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     cardExpanded,
     selected,
     selectedEntity,
+    selectIndexedEvent,
+    chapters,
     closeEvent,
     closeEntity,
     region,
@@ -626,6 +664,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
 
   const selectedEvent = selected ? geo.events.find((e) => e.id === selected) ?? null : null;
   const pickedEntity = selectedEntity ? geo.entities.find((e) => e.id === selectedEntity) ?? null : null;
+  const indexIds = (chapters.find((c) => c.id === currentChapter)?.state as TimeChapterState | undefined)?.index ?? [];
 
   return (
     <div className="ts-stage" ref={stageRef} data-reference={reference || undefined} data-presenting={presenting || undefined} data-region-plate={region ? '' : undefined}>
@@ -704,13 +743,17 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
         />
       </SceneSlot>
 
+      <SceneSlot name="readerEnd">
+        <ChapterIndex ids={indexIds} events={geo.events} selected={selected} locale={locale} disabled={presenting} onSelect={selectIndexedEvent} />
+      </SceneSlot>
+
       {selectedEvent && (
-        <SceneSlot name="inspector">
+        <SceneSlot name="readerTop">
           <EventInspector event={selectedEvent} model={model} locale={locale} onClose={closeEvent} />
         </SceneSlot>
       )}
       {pickedEntity && (
-        <SceneSlot name="inspector">
+        <SceneSlot name="readerTop">
           <EntityInspector entity={pickedEntity} model={model} playhead={playhead} locale={locale} onClose={closeEntity} />
         </SceneSlot>
       )}

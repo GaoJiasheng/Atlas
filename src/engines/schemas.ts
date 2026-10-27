@@ -7,6 +7,7 @@ import type { z } from 'zod';
 import type { EngineId } from '../content/schema/topic';
 import {
   timeChapterRefs,
+  timeChapterIndexIssues,
   timeChapterState,
   timeSceneDiagramData,
   timeSceneGeoData,
@@ -68,6 +69,7 @@ export function engineSchemas(engine: EngineId, stage: string): EngineSchemaSet 
         requiredFiles: ['entities', 'control', 'movements', 'events'],
         ids: (d) => timeSceneIds(d as TimeSceneGeoData),
         chapterRefs: (s) => timeChapterRefs(s as TimeChapterState),
+        chapterIssues: (s, d) => timeChapterIndexIssues(s as TimeChapterState, d as TimeSceneGeoData),
         presetIds: (d) => timeScenePresetIds(d as TimeSceneGeoData),
       };
     case 'space-scene':

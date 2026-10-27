@@ -273,9 +273,9 @@ store.getState().chapterTarget(id);                                // 某章的�
 |---|---|---|
 | `bottomBar` | 底部最下 | 时间轴 / Explorer 控件（44px 触控，不随 HUD 缩小，4K 时放大） |
 | `stageOverlay` | 右列，示意卡下 | 控制面板 `ControlPanel`：LAYERS（图层 + 绘制类模式）、TOOLS（其余模式 + 隐藏 HUD）、KEY（图例） |
-| `inspector` | InfoPanel 内，正文之后 | 选中对象详情（TimeScene） |
-| `readerTop` | InfoPanel 滚动区最上，章头正下方、正文之前 | SpaceScene：节拍行 + 选中零件 / 当前动作卡（docs/08 §2 铁律 c、d）；MathScene：节拍行 + 小测托盘 |
-| `readerEnd` | InfoPanel 内，正文之后 | SpaceScene：本章索引（`state.index`）；MathScene：要点 + 课纲对照 |
+| `inspector` | InfoPanel 内，正文之后 | 遗留扩展插槽；选中对象用 readerTop |
+| `readerTop` | InfoPanel 滚动区最上，章头正下方、正文之前 | TimeScene：选中事件 / 实体；SpaceScene：节拍行 + 选中零件 / 当前动作卡（docs/08 §2 铁律 c、d）；MathScene：节拍行 + 小测托盘 |
+| `readerEnd` | InfoPanel 内，正文之后 | TimeScene：本章事件索引；SpaceScene：本章索引（`state.index`）；MathScene：要点 + 课纲对照 |
 | `plate` | 左列底部，章节轨之下 | 次级读数的紧凑块（SpaceScene：PLATE 图版块；MathScene：模型 · 份数 · 标记 · 分数）；手机隐藏 |
 | `card` | 右列顶 | 示意 SVG 卡的**内容**；标题由 `controls.card` 注册，宿主画框和 `A NAME 中文` 表头；注册了 `cardToggle` 时表头是展开按钮（`aria-expanded`），框带 `data-expanded`，展开后高 ≤ 右列 60%，内容自己滚动 |
 | `panel01` `panel02` `panel03` | 底部三块等高面板 | 面板**内容**；标题由 `controls.panels` 注册，宿主画框和 `01 NAME 中文` 表头；没注册标题的面板不出现，一个都没注册时整条面板带不出现（现在三个引擎都不注册） |
@@ -476,8 +476,8 @@ stages/geo/leaders.ts      引线标注（两列、避让、逐帧投影）
 timeline/Timeline.tsx      唯一的底部条（bottomBar）：泳道开关 · 标尺 · 状态串，下方可展开三条泳道（PRESENT 在顶栏）
 hud/HudPanels.tsx          card 参与与面积条带卡（可展开、行可点）、perf 读数
 hud/shared.tsx             useSize / usePlayheadT / useUnit / 斜线图案 / 章节时间窗
-EventInspector.tsx         点事件 → inspector 插槽（Counter / 双方 CounterVersus；细看折叠块；来源上标；伤亡始终显示）
-EntityInspector.tsx        点参与卡的一行 → inspector 插槽（名称、阵营时段、加入 / 退出、当前面积）
+EventInspector.tsx         点事件 → readerTop 插槽（Counter / 双方 CounterVersus；细看折叠块；来源上标；伤亡始终显示）
+EntityInspector.tsx        点参与卡的一行 → readerTop 插槽（名称、阵营时段、加入 / 退出、当前面积）
 lib/time.ts lib/format.ts lib/geo.ts lib/model.ts lib/frame.ts lib/playhead.ts lib/ticks.ts lib/segmentScale.ts lib/stats.ts lib/bloc.ts lib/control.ts lib/bandRows.ts
 lib/region.ts lib/rivers.ts lib/holders.ts lib/dated.ts lib/localLand.ts   纯函数，单测在 tests/time-scene/
 colors.ts  time-scene.css
@@ -500,6 +500,12 @@ colors.ts  time-scene.css
 **`site` 事件**是静态点位（监狱、纪念碑、建筑）：`t` 照写但不参与时间——不进时间轴范围、不进泳道和统计、不脉冲；只在 `sites` 图层打开时显示（小空心菱形 + 中心点），点击同样打开 inspector（眉题 `P-01`），高亮时出引线标注。
 
 章节 `state`：`time`（ISO 三种精度或 `{ ma }`）、`camera`、`layers`、`highlight`（实体/行动/事件 id）、`theme`、`note`（只在背景章：阅读说明）、`summary`（`{ en, zh }`，阅读面板标题下的一句话，也是默认演示字幕）、`question` / `answer`（`{ en, zh }`；没有 `summary` 时阅读面板头部显示 `question`；`answer` 必须配 `question`，目前不渲染），以及可选的 `beats`（演示节拍，见下）。底部条上每章一段，段从本章 `time`（第一拍更早就取第一拍的 `t`）开始，段里每拍一个刻度——**拍就是时间轴的结构**；**章节顺序必须等于时间顺序**（`tests/schemas.test.ts` 对 ww2 有检查）。
+
+**本章事件索引（docs/51 E-IR1）**：`state.index: [loc-dudley, ev-watt-patent]` 是当前章独立、有序的事件 id 数组（省略 = 无按钮，不从前章继承）。只接受本题 `events.json` 的事件，包括 `site` / `milestone`；不接受图层、实体、行动或跨主题 id；重复 id 定位第二项，未知目标定位 `state.index.<i>`。`timeChapterIndexIssues` 注册到 `engineSchemas.chapterIssues`，与原有 highlight 校验分开。
+
+`ChapterIndex.tsx` 放在 `readerEnd`，按钮使用事件的双语 title，带 `data-time-target`、`aria-pressed`，命中高度至少 44 CSS px。索引选地点开 `sites`、保持日期；选非地点开 `battles`、跳到事件的原始日期（保留日精度），不换章或启动演示；镜头只改 center，保留 zoom / pitch / bearing。非法 id 或演示中返回 false、无副作用。原地图 / 引线选择继续复用唯一的 EventInspector，事件和实体详情移到 `readerTop`；未选择不画空框。宿主 `revealReader()` 打开已有阅读面板 / 手机抽屉并在展开后回到顶部；小于 1024 CSS px 只展开临时抽屉，不覆盖 `sessionStorage['atlas:reader']` 的 dock 折叠偏好，桌面显式选中会沿用原来的 reader 持久化路径打开列。关详情恢复最近显式套用拍的高亮；拍失效时恢复章默认。索引与选中 id 不新增 URL 字段。此项不包含阅读节拍行或 `b` 参数适配（E-IR2）。
+
+测试 API：`__atlas.engine.selectEvent(id): boolean` 走索引路径；`__atlas.engine.reader()` 返回 `{ indexIds: string[], selectedId: string | null, detailCount: number }`（详情数量 0 或 1）。纯函数 `lib/reader.ts` 和 schema 有 `tests/time-scene/reader.test.ts` 单测；真实 draft 主题 `industrial-revolution` 作为内容验收样本，不另建占位夹具。
 
 演示节拍（`state.beats`，可选，加法）：
 
