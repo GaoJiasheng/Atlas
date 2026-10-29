@@ -97,3 +97,27 @@ Codex 预研（`art/research/<slug>/`、`art/planned/<slug>/`）全部交回后�
 
 - 重画 bones-and-joints「保护内脏」图：第 11–12 肋后端连到胸椎（见该主题 FIXES.md 的 F1 reopened），处理后放回 02 章。
 - dinosaur-earth FIXES.md 全部项 + 正文改写成小学生读得顺的文字；monsoon-and-weather 首页卡片计数、THIRD-PARTY-NOTICES 行、1024 宽图例（原任务 map-polish 因额度用完未开始，worktree `.claude/worktrees/codex-map-polish` 是空的）。
+
+## 八、第五批与下周的 Claude 验收清单（2026-10-29 Gavin："先让 codex 搞着……codex 都准备好下周再开 claude"）
+
+**第五批（Codex 预研 → Codex 施工，一条龙；Claude 下周再验收）**
+
+| # | slug | 引擎 | 上线方式 | 分支 / 工作区 |
+|---|---|---|---|---|
+| 63 | `cells` | SpaceScene（显微切片 + 细胞模型） | 直接上线 | `codex/b-cells` |
+| 64 | `sound` | SpaceScene（复用眼耳主题的纵波） | 直接上线 | `codex/b-sound` |
+| 65 | `solar-system` | SpaceScene（复用轨道 sim） | 直接上线 | `codex/b-solar-system` |
+| 66 | `coral-reef` | SpaceScene（复用食物网卡） | 直接上线 | `codex/b-coral-reef` |
+
+预研在 `art/research/<slug>/`、`art/planned/<slug>/`；脚本 `prep/chain.sh`（会话 scratchpad）。
+
+**Codex 已做完或在做、等 Claude 浏览器验收再合并的分支**（都从 main 切出，未提交，Codex 只跑了单测和构建）：
+
+- `codex/map-polish`：恐龙 FIXES + 正文改写；季风首页计数、第三方声明、1024 宽图例。
+- `codex/images`：骨骼「保护内脏」图重画并放回 02 章；土星五号封面五台 F-1。
+- `codex/sem-1024`：太阳地球月亮 1024×768 构图（主体最小屏幕半径、太阳避开 HUD）。
+- `codex/ts-frame`：地图主题镜头避开左右 HUD 面板。
+- 可读性通读 `codex/read-*`：fossils+inside、mangrove+frog、steam+planes、heat+eyes、sem+saturn-v、container-port、monsoon+sea、zheng-he+space-race。未排：dinosaur（在 map-polish 里）、industrial-revolution（已改）、bones-and-joints（等 images 合并）、plates-and-hazards（等合并）。
+- `codex/plates`（草稿）：Claude 代理正在合并 main，交回后由主会话合并上线；其 FIXES.md F1–F3 之后交 Codex。
+
+**验收方法**：每个分支用 `prep/BRIEF-ACCEPT.md` 派 Claude 代理（只跑相关 e2e，`--workers=2`）；可读性分支只需截图查字幕在手机宽度不溢出、读几段中英文。合并时 smoke 计数由主会话对齐。机器负载太高时全量 e2e 不可信，等空闲再跑一次全量。
