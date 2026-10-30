@@ -564,6 +564,27 @@ UI：左 PLATE 显示现今国形、上下文/日期/成员数，C 显示基准�
 | `sources.json`（可选） | 见上文"加一个主题"第 4 步。 |
 | `glossary.json`（可选） | 名词表，见「名词表」。 |
 
+#### 事件影响估计 `impacts`（E-PH2）
+
+事件可选 `impacts: ImpactRecord[]`，定义在 `time-scene/impactSchema.ts`，不另建文件或 loader：
+
+```json
+{
+  "id": "impact-example",
+  "measure": "deaths",
+  "estimate": { "kind": "more-than", "value": 70000 },
+  "label": { "en": "Deaths", "zh": "死亡人数" },
+  "scope": { "en": "Surrounding areas", "zh": "周边地区" },
+  "sourceAsOf": "2011-09-29",
+  "sourceDateKind": "publication",
+  "sources": ["S22"]
+}
+```
+
+`measure` 还可为 `dead-or-missing-presumed-dead`；`kind` 为 `reported/about/more-than`。value 与可选 `components[].value` 都须为有限非负整数；组件形状 `{ id, label: { en, zh }, value, sources }`。label/scope/组件标签两语必填，sources 至少一条且须存在；impact/组件 id 全题唯一。`sourceAsOf` 只接受真实公历 `YYYY/ YYYY-MM/ YYYY-MM-DD`，保留原精度；`sourceDateKind` 为 `publication`（来源发布日期）或 `accessed`（读取日期），不能把读取日写成修订日期。
+
+可选 `componentsComplete` 必须伴随 components；分项和不得超过总数，`true` 只用于 `reported` 且和必须相等。不完整分项不推导“其余”记录，约数与下界估计不合成新总量。同一事件不能兼具 impacts 与旧 casualties。EventInspector 在摘要后常显每条定义、静态中性 Counter、scope、来源日期与 SourceRefs，独立估计逐条画，不进 CounterVersus。Counter 的可选 `valueLabel` 只替换数字文案（如 `More than 70,000 / 超过70,000`），不改图标刻度或算法；无此属性时旧显示逐字不变。分项保持作者顺序，非完整表有双语提示；具体“四国”范围由内容写在 scope。`__atlas.engine.impacts(eventId)` 返回已校验记录，未知事件返回 `[]`。没有新增选择或 URL 状态。合成 fixture 与 E-PH1 共用 `sample-science-layers`，其测试估计不作历史事实。
+
 **同址事件的显示偏移**：`events.json` 可选 `displayOffset: [x, y]`（CSS px，右／下为正，每轴 −96…96）。它只移动事件／地点标记、脉冲、引线锚点及 44 px 点击目标，偏移后的圆点画一条 hairline 腿连回原坐标（`displayLeg`，离锚点留 6 px），读者看得出它属于哪个地点；`at`、地理包围盒和镜头取景仍使用原始来源坐标。只用于拆开重叠点，并在主题 `data/SOURCES.md` 记录确定性排布规则；显示偏移不声称事件发生在另一地理位置。引擎选择偏移后最近的标记，未配置时位置不变。单测见 `tests/time-scene/event-display.test.ts`。
 ### 任务地点与非战争呈现（missions）
 
@@ -678,7 +699,7 @@ datedLayers:
 
 - 文件必须是 **TopoJSON，且只有一个与 `file` 同名的对象**。`point` 对应 Point / MultiPoint，`line` 对应 LineString / MultiLineString，`area` 对应 Polygon / MultiPolygon。可以量化（带 `transform`，管线 `quantization=100000` 的输出照用）。每个几何的 `properties` 至少 `{ f: 1960 }`；可选 `u: 1980`、`certainty: approximate`（缺省 `certain`）、`h: 12`（楼层元数据，本轮不按高度改点大小）。`f` / `u` 是**有限的十进制年数字**，预先转换 ISO 日期；`f < u`，无 `u` 表示一直保留。语义复用 `lib/dated.ts` 的 `[from, to)`：开始年出现、结束年消失。数组宜按 `f` 排序；引擎载入时只把日期索引排序一次，几何顺序不影响结果。
 - 章节及拍的 `layers` 直接写图层 `id`，比如 `[base, control, housing-blocks, dated-rail, battles]`；没列出即关闭。图层文件的年份不另行扩展时间轴范围，章节日期或控制区关键帧（不是拍的日期）应覆盖要展示的年代。控制面板 LAYERS 每层一行，开关和章节共用 store（URL 状态同其它图层）。KEY 每个开启图层一行；点图层另有“过去一年新增”图例。
-- 每层一个 GeoJSON source，载入后只 `setData` 一次。MapLibre GPU 过滤数字属性：`f <= T && (u ?? +∞) > T`；点半径随缩放为 1.2–3 px。过去一年新增点（`T-1 < f <= T`，且尚未消失）大一号、signal 色描边。线宽从 zoom 10 的 1 px 线性增至 zoom 13 的 2.5 px，不透明度 .9；面淡底 .35、同色 .6 px 边，近似面淡底再 ×.7、边虚线。放在控制区之上、事件之下；颜色随 paper / cinema token 更新。
+- 每层一个 GeoJSON source，地图载入时就 fetch；带 `catalogue` 的层（E-PH1）改为**第一次开启该层时**才 fetch，关闭后保留，载入后只 `setData` 一次。MapLibre GPU 过滤数字属性：`f <= T && (u ?? +∞) > T`；点半径在区域 / 全球视图（zoom ≤ 8）为 2.2 px，城市尺度随缩放为 1.2–3 px（zoom 9–14）。过去一年新增点（`T-1 < f <= T`，且尚未消失）大一号、signal 色描边。线宽从 zoom 10 的 1 px 线性增至 zoom 13 的 2.5 px，不透明度 .9；面淡底 .35、同色 .6 px 边，近似面淡底再 ×.7、边虚线。放在控制区之上、事件之下；颜色随 paper / cinema token 更新。
 - `lib/datedLayers.ts` 对开始、结束和新增窗口的结束边界各建有序索引，二分求当前计数。只在**可见集合变化**时重设过滤器（不是只比较计数：同年拆一栋又建一栋也要更新）；播放头在两次边界之间缓动不会逐帧 `setFilter`。新增窗口同样单独缓存。
 - `count: true` 的当前可见要素数出现在左列可收起的 PLATE 块，关闭图层读数为 0，尚未载入为 `—`；手机随 PLATE 隐藏。MultiPoint 按一个要素计数，要按楼栋计数请每栋写一个 Point。`stats().datedLayers[id]` 给出 `total / visible / recent / filterUpdates`，用于性能与边界回归检查；关闭时 `visible` 为 0。
 - `pnpm validate` 检查文件、对象、几何、日期区间、holder、token、双语以及章节 / 拍的图层引用；图层 id 与其它主题对象共用唯一命名空间，不能占用内置图层名。
@@ -2434,6 +2455,18 @@ pnpm tsx scripts/geo/lib/check.ts --topic ww2         # MapLibre（Playwright）
 - **按年代裁过的要素不再沿底图海岸**（docs/28 P2，`simplify.ts`）：`pipeline.coast.excludeBox: [w, s, e, n]`（缺省 `null`）：这个框里不做海岸一步。底图陆地和水都挖掉这个框，于是框里的要素不被擦水、框外的 holder 也不会补缝长进来；框里的要素保持 compose 给它的海岸（新加坡要素已按时代 `intersect` 到 `work/coast-L#.geojson`）；柔佛、廖内等框里的邻国要素也就不再裁到 10m 海岸，需要的话在 compose 里 `intersect` 到 10m 陆地。偏差统计在框里不跳过"海里"的点。
 - **分框细度**（docs/28 P3，`simplify.ts`）：`pipeline.focus` 的一项可以写成 `{ "box": [w, s, e, n], "fineKm": 0.005 }`，这个框用自己的固定间隔（岛尺度要几米，区域框照旧 1 km 上下）：先从普通焦点框里挖出来，单独简化，用自己那份陆地沿海岸（与 inside / outside 两半同一做法）；排在前面的框在重叠处优先。自动预算搜索只调普通焦点框的间隔。没有这种项、没有 `excludeBox` 时产物与以前逐字节相同（ww1、ww2、warring-states、four-taps 的 simplify 改前改后各跑一次比对过）。
 - 东南亚近景底图：`scripts/build-geo.ts` 另出 `public/geo/land-10m-sea.json`（Natural Earth 1:10m 陆地，裁到 95°E–125°E、9°S–22°N，TopoJSON，约 234 KB）。GeoStage 在镜头 zoom ≥ 6.5 且视野与该框相交时才 fetch；zoom 7 起绘制、到 8 完全显现：框内先铺一层水色遮住 50m 陆地（不透明度 7→8 渐入），10m 陆地和海岸线叠在上面，颜色同为 `--land` / `--land-edge` / `--water` token。其他主题不加载它。
+
+### TimeScene · 科学参考图层与目录（E-PH1，docs/49）
+
+`datedLayers` 增量复用同一 GPU source、KEY、LAYERS、PLATE 与日历 playhead；旧定义省略新字段时保留 f/u 与 recent 样式。`temporal: {mode: reference, note: {en,zh}, release: "PB2002"}` 的 geometry 禁止 f/u，跨全部年代保持可见，PLATE 常显 REF.、说明与版本；`recent:false` 关闭新增点 draw layer、KEY 与计数。普通 dated 仍是有限十进制年 `f`、可选排他 `u`。`basemap:{maxZoom:8}` 可仅限制全球底图缩放。
+
+每层可加 `catalogue:{file:"my-catalogue"}`，与几何在第一次开启该层时一起读取本地 `public/geo/*.json`，关闭后缓存，不逐帧 setData；几何解码/日期建索引按250条一批让出主线程（原生JSON解析仍同步，需按完整数据实测解析时延）。文件形状：`{ entries: [{ id, title: {en,zh}, summary: {en,zh}, at: [lon,lat], sources: ["S1"], rows: [{key:"depth",label:{en:"Depth",zh:"深度"},value:null,unit:{en:"km",zh:"千米"}}] }] }`。`value` 为有限数值、非空双语或 null；null 显示 Not recorded / 未记录。entry id 直接 join 同层唯一 properties.id，全题对象命名唯一，不能复制成 event；Point 锚点与坐标相等，线在250m量化容差内，面在面内。编译校验来源、双语、rows.key 唯一、几何和目录不重不漏。观测层只接受 identity/source/type/doubtful/position/version 字段，不接受高度或到达值。
+
+章与拍的 `catalogueIndex:[{layerId:"my-layer",ids:["some-id"]}]` 可列指定 id；省 ids 列本层当前可见项。拍覆盖同组，省略则用章值。只交当前开启层的可见条目到 readerEnd 索引，按 id 排序，标题两语/id搜索150ms防抖，每页50行，未来记录不能点选。索引、GPU点线面命中、测试 hook 共用选择动作；事件优先，其后22px范围精算距离/id排序。详情沿现有 inspector 插槽出现在章头与拍之后、正文之前。选择以 entry.at 为镜头锚点，GPU signal overlay高亮；不为目录创建 HTML marker。
+
+`encoding:{radius:{property:"mag",min:6,max:9.5,px:[2,8]}}` 只用于Point，要求每个mag有限且≥6。显示半径 `2+6*clamp((mag-6)/3.5,0,1)` px；这是展示编码，不改变源震级。`pick=<catalogue-id>` 是最长128字符kebab-id，引擎字段只在 core typed URL passthrough 注册；合法可见pick优先于hl，未知则回退旧hl，取消选择恢复当前拍/章highlight。隐藏层、回退日期、换章会清pick；深链等本层几何与元数据完成才解析，失败写双语错误并清pick。显式URL cam保留，其他有效pick深链飞到at。换主题/语言沿URL保留id。
+
+测试使用 `__atlas.engine.selectCatalogue(id|null):boolean`（隐藏对象或演示中返回false）、`catalogueState():{pick,layers:{[id]:{status,visible}},indexCount,renderedRows,selectedScreen}`；layers只报告已请求或当前开启的目录层，status为loading/ready/error，selectedScreen为选中锚点的视口CSS坐标或null。既有stats().datedLayers增加可选mode/sourceUpdates，sourceUpdates初次提交为1；跨时间边界才setFilter。`sample-science-layers`保持draft，合成数据不能作为科学来源；专用unit/e2e与shoot目录选中截图用于验收。
 
 #### orbit-rotation 内容补记（2026-10-27）
 

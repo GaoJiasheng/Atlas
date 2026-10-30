@@ -12,6 +12,8 @@ import { monthlyChapterFields } from './lib/climatology-state';
 
 /** TimeScene's fields on top of SceneState. `t` is in the URL. */
 export interface TimeSceneExt {
+  /** Selected catalogue feature (docs/49 E-PH1). URL `pick`. */
+  pick?: string | null;
   /** Current time on the axis. */
   t: TimePoint | null;
   month?: number;
@@ -38,7 +40,7 @@ export const timeSceneEngine = defineEngine<TimeSceneExt, TimeSceneGeoData>({
     if (topic.temporalMode === 'geography') return { t: null, month: undefined, beat: 0, geoContext: topic.geography!.initialContext, geoSelection: null, highlight: [], layers: ['base', 'geo-countries'] };
     if (topic.temporalMode === 'climatology') return { t: null, month: topic.climatology!.initialMonth, beat: 0, highlight: [], layers: ['base', 'sites'] };
     const first = data && 'control' in data ? data.control.keyframes[0]?.t : undefined;
-    return { t: first ?? null, beat: null, highlight: [], layers: topic.basemap?.reconstruction ? ['base', 'fossils-modern'] : ['base', 'control', 'movements', 'battles'], ...(topic.modernInset ? { inset: topic.modernInset.defaultView, insetVisible: topic.modernInset.defaultVisible, fossilMode: 'age-window' as const } : {}) };
+    return { pick: null, t: first ?? null, beat: null, highlight: [], layers: topic.basemap?.reconstruction ? ['base', 'fossils-modern'] : ['base', 'control', 'movements', 'battles'], ...(topic.modernInset ? { inset: topic.modernInset.defaultView, insetVisible: topic.modernInset.defaultVisible, fossilMode: 'age-window' as const } : {}) };
   },
   fromChapterState(state: ChapterState) {
     if (state.geoContext) return geographyChapterFields(state);
@@ -57,6 +59,7 @@ export const timeSceneEngine = defineEngine<TimeSceneExt, TimeSceneGeoData>({
     if (topic?.temporalMode === 'geography') return {t:null,geoContext:fields.geoContext,beat:fields.beat,highlight:fields.highlight};
     if (topic?.temporalMode === 'climatology') return { t: null, ...(fields.month !== undefined ? {month: fields.month}: {}), ...(fields.beat !== undefined ? {beat: fields.beat} : {}), ...(fields.highlight !== undefined ? {highlight: fields.highlight}: {}) };
     const out: Partial<TimeSceneExt> = {};
+    if (fields.pick !== undefined) out.pick = fields.pick;
     if (fields.beat !== undefined) out.beat = fields.beat;
     if (fields.inset !== undefined) out.inset = fields.inset;
     if (fields.insetVisible !== undefined) out.insetVisible = fields.insetVisible;

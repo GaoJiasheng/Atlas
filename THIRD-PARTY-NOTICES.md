@@ -208,3 +208,49 @@ illustrations are Atlas content (CC BY-NC-SA 4.0). Modern factual coordinates
 retain their original source credit and are not claimed as exclusive facts.
 The illustrations are conceptual drawings, not specimen photographs,
 measured reconstructions or third-party map geometry.
+
+## Plates and hazards — frozen scientific reference datasets
+
+- **PB2002**, Peter Bird (2003), “An updated digital model of plate boundaries”,
+  doi:10.1029/2001GC000252. GeoJSON conversion by Hugo Ahlenius/Nordpil and
+  fraxen/tectonicplates contributors, https://github.com/fraxen/tectonicplates.
+  Derived database files `public/geo/ph-plate-{divergent,transform,subduction,convergent}.json`,
+  `ph-orogens.json` and `ph-catalogue-{plate-divergent,plate-transform,plate-subduction,plate-convergent,orogens}.json`
+  retain **ODC-BY 1.0**, https://opendatacommons.org/licenses/by/1-0/.
+  Modified: selected original STEPCLASS groups, preserved split geometry parts
+  and SEQNUM, simplified/quantized geometry and separate bilingual catalogue.
+  Modern reference model, not historical plate or coastline reconstruction.
+- **Smithsonian Global Volcanism Program**, Venzke, E. (compiler), *Volcanoes of
+  the World*, v5.4.0, doi:10.5479/si.GVP.VOTW5-2026.5.4. WFS snapshot
+  2026-10-26, https://volcano.si.edu/database/webservices.cfm.
+  `ph-volcano-catalogue.json` and `ph-catalogue-volcano-catalogue.json` use only
+  employee-produced database facts treated as **public domain** under the
+  database-specific statement at https://volcano.si.edu/gvp_termsofuse.cfm.
+  Photo links/captions/credits and geological-summary prose are excluded.
+- **US Geological Survey**, reviewed ComCat earthquake sample, UTC
+  2000-01-01 inclusive to 2025-01-01 exclusive, catalogue magnitude at least 6,
+  snapshot 2026-10-26, https://earthquake.usgs.gov/fdsnws/event/1/.
+  `ph-quake-sample.json` / `ph-catalogue-quake-sample.json` retain numerical
+  source facts as **public domain**; no third-party linked products are used.
+  Magnitude types, source times and updates are preserved, not homogenised.
+- **NOAA/NCEI/WDS Global Historical Tsunami Database**,
+  doi:10.7289/V5PN93H7, https://www.ngdc.noaa.gov/hazel/hazard-service/api/v1/tsunamis/.
+  `ph-observations-{1883,2004,2018}.json` and matching catalogue files select
+  **public-domain NOAA compiled location/type facts** from complete paginated
+  snapshots 2026-10-26. Source-event association is explicit. Missing-coordinate
+  records remain in the audit; no height, arrival-time, report text or photograph
+  is redistributed. Clearance is limited to these compiled tables, per dataset
+  metadata and NCEI Open Data Policy §4a–c, not third-party archive attachments.
+- **Natural Earth**, https://www.naturalearthdata.com/about/terms-of-use/,
+  existing local 50m global and 10m Southeast Asia land files: **public domain**.
+  Used once as modern reference coastlines; no new coastline file.
+- **NOAA/ITIC October 2024 Indian Ocean tsunami poster**, facts only:
+  https://www.ncei.noaa.gov/sites/default/files/2024-11/IO_Poster_20241030_final_lowres.pdf.
+  Atlas independently organises the sourced total, definition, source date and
+  explicitly incomplete four-country breakdown in `events.json`. The mixed-rights
+  poster, photographs and layout are not reproduced.
+
+Atlas's original explanatory text and translations remain CC BY-NC-SA 4.0;
+no BY-SA/NC-SA combination or restricted/by-agreement material is used.
+Frozen hashes, output hashes, versions, modifications, coverage, simplification
+residuals and per-file licences are recorded in the topic's data provenance.

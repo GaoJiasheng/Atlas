@@ -15,6 +15,8 @@
  * This module is build-time only (zod); client code imports its *types* only.
  */
 import { z } from 'zod';
+import { catalogueIndex } from './catalogueSchema';
+import { catalogueGeometryIssues, catalogueTopicIssues } from './catalogueValidation';
 import { deepTimeBundleSchema } from './deep-time';
 import {
   bilingual,
@@ -28,6 +30,7 @@ import { areaGeometry, feature, featureCollection, lineString, position } from '
 import { geoCamera } from '../../content/schema/camera';
 import { sourceId, sourceIds, sourcesFile } from '../../content/schema/sources';
 import { glossaryFile } from '../../content/schema/glossary';
+import { impactRecordSchema } from './impactSchema';
 import { compareTime, isIsoDate } from '../../lib/time';
 import { decodeControl, decodeTopologyObject } from './lib/control';
 import { colourConflicts, holderAdjacency } from './lib/holders';
@@ -356,6 +359,7 @@ const eventFields = {
     sides: z.object({ attacker: kebabId, defender: kebabId }).strict().optional(),
     forces: forceTable.optional(),
     casualties: forceTable.optional(),
+    impacts: z.array(impactRecordSchema).min(1).optional(),
     /** Required for battle / landing. */
     result: z.enum(EVENT_RESULTS).optional(),
     importance: z.union([z.literal(1), z.literal(2), z.literal(3)]),
@@ -370,6 +374,9 @@ const eventFields = {
 };
 
 export const eventSchema = z.object(eventFields).strict().superRefine((e, ctx) => {
+    if (e.impacts !== undefined && e.casualties !== undefined) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['impacts'], message: 'an event cannot have both impacts and legacy casualties' });
+    }
     if (e.mapVisibility === 'timeline-only' && ['mission', 'site', 'battle', 'landing', 'bombing'].includes(e.kind))
       ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['mapVisibility'], message: `${e.kind} events require a map anchor` });
     if (e.mapVisibility !== 'timeline-only' && !e.at)
@@ -529,6 +536,23 @@ export const timeSceneGeoData = z
       for (const key of Object.keys(e.casualties ?? {})) check(key, ['events', i, 'casualties', key]);
     });
     const sources = sourceIds(data.sources);
+    const impactIds = new Set([
+      ...data.entities.map((entry) => entry.id), ...data.movements.map((entry) => entry.id),
+      ...data.events.map((entry) => entry.id), ...(data.presets?.presets ?? []).map((entry) => entry.id),
+      ...(data.glossary?.terms ?? []).map((entry) => entry.id),
+    ]);
+    data.events.forEach((event, eventIndex) => event.impacts?.forEach((record, recordIndex) => {
+      const path = ['events', eventIndex, 'impacts', recordIndex];
+      const check = (entry: { id: string; sources: string[] }, at: (string | number)[]) => {
+        if (impactIds.has(entry.id)) ctx.addIssue({ code: z.ZodIssueCode.custom, path: [...at, 'id'], message: `duplicate impact id "${entry.id}"` });
+        impactIds.add(entry.id);
+        entry.sources.forEach((id, index) => {
+          if (!sources.has(id)) ctx.addIssue({ code: z.ZodIssueCode.custom, path: [...at, 'sources', index], message: `unknown impact source "${id}" (not in data/sources.json)` });
+        });
+      };
+      check(record, path);
+      record.components?.forEach((component, index) => check(component, [...path, 'components', index]));
+    }));
     data.events.forEach((e, i) =>
       (e.sources ?? []).forEach((id, j) => {
         if (!sources.has(id)) {
@@ -595,6 +619,7 @@ export const timeBeat = z
     camera: geoCamera.optional(),
     layers: z.array(kebabId).optional(),
     highlight: z.array(kebabId).optional(),
+    catalogueIndex: catalogueIndex.optional(),
     caption: bilingual,
     audio: z
       .string()
@@ -637,6 +662,7 @@ export const timeChapterState = z
      */
     note: bilingual.optional(),
     /** PRESENTATION beats for this chapter; default = one beat (the chapter's state, `summary` as caption). */
+    catalogueIndex: catalogueIndex.optional(),
     beats: z.array(timeBeat).min(1).optional(),
   })
   .strict()
@@ -667,6 +693,9 @@ export function timeSceneIds(data: TimeSceneGeoData, topic?: Pick<TopicLike, 'da
     ...data.entities.map((e) => ({ kind: 'entity', id: e.id })),
     ...data.movements.map((m) => ({ kind: 'movement', id: m.id })),
     ...data.events.map((e) => ({ kind: 'event', id: e.id })),
+    ...data.events.flatMap((e) => (e.impacts ?? []).flatMap((record) => [
+      { kind: 'impact', id: record.id }, ...(record.components ?? []).map((part) => ({ kind: 'impact component', id: part.id })),
+    ])),
     ...(data.presets?.presets ?? []).map((p) => ({ kind: 'preset', id: p.id })),
     ...(topic?.datedLayers ?? []).map((layer) => ({ kind: 'dated layer', id: layer.id })),
   ];
@@ -735,7 +764,7 @@ const datedPointGeometry = z.discriminatedUnion('type', [
 const datedLineGeometry = z.discriminatedUnion('type', [lineString, multiLineString]);
 
 /** Validate the one named TopoJSON object and its decoded dated geometries. */
-export function datedLayerIssues(raw: unknown, layer: Pick<DatedLayerDef, 'file' | 'kind'>): string[] {
+export function datedLayerIssues(raw: unknown, layer: Pick<DatedLayerDef, 'file' | 'kind' | 'temporal' | 'catalogue' | 'encoding'>): string[] {
   const parsed = topologySchema.safeParse(raw);
   if (!parsed.success) return parsed.error.issues.slice(0, 10).map((issue) => `${issue.path.join('.')}: ${issue.message}`);
   if (!Object.hasOwn(parsed.data.objects, layer.file)) return [`dated layer: expected a TopoJSON object "${layer.file}"`];
@@ -746,8 +775,9 @@ export function datedLayerIssues(raw: unknown, layer: Pick<DatedLayerDef, 'file'
     const object = parsed.data.objects[layer.file]!;
     if (object.type === 'GeometryCollection' && Array.isArray(object.geometries) && decoded.features.length !== object.geometries.length)
       return ['dated layer: every feature must have a non-null geometry'];
-    const result = featureCollection(feature(geometry, datedLayerProperties)).safeParse(decoded);
-    return result.success ? [] : result.error.issues.slice(0, 10).map((issue) => `${issue.path.join('.')}: ${issue.message}`);
+    const result = featureCollection(feature(geometry, layer.temporal?.mode === 'reference' ? z.object({ f: z.never().optional(), u: z.never().optional() }).passthrough() : datedLayerProperties)).safeParse(decoded);
+    if (result.success) return catalogueGeometryIssues(decoded, layer);
+    return result.error.issues.slice(0, 10).map((issue) => `${issue.path.join('.')}: ${issue.message}`);
   } catch (error) {
     return [`dated layer: cannot decode "${layer.file}": ${(error as Error).message}`];
   }
@@ -774,6 +804,7 @@ export function timeSceneTopicIssues(topic: TopicLike, data: TimeSceneGeoData, r
     if (raw === undefined) issues.push({ level: 'error', file: geo(layer.file), message: `dated layer "${layer.id}": file not found` });
     else for (const message of datedLayerIssues(raw, layer)) issues.push({ level: 'error', file: geo(layer.file), message });
   }
+  issues.push(...catalogueTopicIssues(topic.datedLayers ?? [], data, timeSceneIds(data, topic).map((entry) => entry.id), readGeo));
   const local = topic.basemap?.local;
   if (local) {
     const raw = readGeo(local);
@@ -869,3 +900,5 @@ function riverTopologyFeatures(raw: unknown): unknown[] {
     return [];
   }
 }
+
+export { timeCatalogueIndexIssues } from './catalogueValidation';

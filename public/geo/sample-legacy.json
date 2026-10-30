@@ -1,0 +1,1 @@
+{"type":"Topology","objects":{"sample-legacy":{"type":"GeometryCollection","geometries":[{"type":"Point","coordinates":[103,1],"properties":{"id":"sample-old","f":2000,"u":2001}}]}},"arcs":[]}

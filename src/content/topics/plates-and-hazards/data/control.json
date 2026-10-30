@@ -1,0 +1,53 @@
+{
+  "keyframes": [
+    {
+      "t": "1815-04-10",
+      "features": {
+        "type": "FeatureCollection",
+        "features": []
+      }
+    },
+    {
+      "t": "1883-08-27",
+      "features": {
+        "type": "FeatureCollection",
+        "features": []
+      }
+    },
+    {
+      "t": "2004-12-25",
+      "features": {
+        "type": "FeatureCollection",
+        "features": []
+      }
+    },
+    {
+      "t": "2004-12-26",
+      "features": {
+        "type": "FeatureCollection",
+        "features": []
+      }
+    },
+    {
+      "t": "2018-12-22",
+      "features": {
+        "type": "FeatureCollection",
+        "features": []
+      }
+    },
+    {
+      "t": "2022-02-25",
+      "features": {
+        "type": "FeatureCollection",
+        "features": []
+      }
+    },
+    {
+      "t": "2024-12-31",
+      "features": {
+        "type": "FeatureCollection",
+        "features": []
+      }
+    }
+  ]
+}

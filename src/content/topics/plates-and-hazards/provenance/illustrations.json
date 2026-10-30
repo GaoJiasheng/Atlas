@@ -1,0 +1,42 @@
+{
+  "method": "Approved PNGs through existing illustrate.ts, then grayscale near-lossless WebP quality40; alpha retained. This avoids 1-level chroma decoder rounding in lossy YUV WebP. No new image generation.",
+  "softBudgetDeviation": "Exact decoded R=G=B takes priority over the illustrate.ts soft compression targets; actual sizes recorded below.",
+  "reports": [
+    {
+      "file": "public/illustrations/plates-and-hazards.webp",
+      "bytes": 125454,
+      "sha256": "290205012eecc4a43f7daa6658cbee196876162db2355c0497bd8b82bee61b39",
+      "width": 800,
+      "height": 800,
+      "transparentPixels": 411852,
+      "colouredPixels": 0
+    },
+    {
+      "file": "public/illustrations/plates-and-hazards@2x.webp",
+      "bytes": 422108,
+      "sha256": "4cce576bfcd688e0c3268199cdfe9215d848a9d5dcdfd5c351587a0d0c870f61",
+      "width": 1600,
+      "height": 1600,
+      "transparentPixels": 1634269,
+      "colouredPixels": 0
+    },
+    {
+      "file": "public/illustrations/figures/plates-and-hazards-fault-offset.webp",
+      "bytes": 234700,
+      "sha256": "4d2ea5436a6666d1cff78ea49a67cd7e642e819dc275a74e569ee7843875846b",
+      "width": 1200,
+      "height": 900,
+      "transparentPixels": 573799,
+      "colouredPixels": 0
+    },
+    {
+      "file": "public/illustrations/figures/plates-and-hazards-tsunami-shoaling.webp",
+      "bytes": 138682,
+      "sha256": "f6e74cf7eb0c17b242cb171bc189f239e3efe94bf7bf943a5410e9643d67a0d4",
+      "width": 1200,
+      "height": 900,
+      "transparentPixels": 746323,
+      "colouredPixels": 0
+    }
+  ]
+}

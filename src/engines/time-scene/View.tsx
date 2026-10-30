@@ -69,6 +69,11 @@ import { ChapterIndex } from './ChapterIndex';
 import { eventSelectionPatch } from './lib/reader';
 import { timeHudAvailability, timeLayerRows } from './lib/hud';
 import { BandCard, PerfReadout, useFps } from './hud/HudPanels';
+import { CatalogueInspector } from './CatalogueInspector';
+import { CatalogueIndex } from './CatalogueIndex';
+import { catalogueItems, resolveCataloguePick, visibleCatalogue, type CatalogueLayer } from './lib/catalogue';
+import { eventImpacts } from './lib/impacts';
+import { datedLayerState } from './lib/datedLayers';
 import { DatedLayerPlate } from './hud/DatedLayerPlate';
 import type { DatedLayerIndex } from './lib/datedLayers';
 import { BLOC_CSS, entityCssColor } from './colors';
@@ -147,6 +152,7 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
   const { hud, revealReader } = useSceneContext();
   const currentChapter = useScene<TimeSceneExt, string | null>((s) => s.chapter);
   const layers = useScene<TimeSceneExt, string[]>((s) => s.layers);
+  const pick = useScene<TimeSceneExt, string | null>((s) => s.pick ?? null);
   const highlight = useScene<TimeSceneExt, string[]>((s) => s.highlight);
   const storeT = useScene<TimeSceneExt, TimePoint | null>((s) => s.t);
 
@@ -223,6 +229,7 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
   const [selected, setSelected] = useState<string | null>(null);
   const [selectedEntity, setSelectedEntity] = useState<string | null>(null);
   const [cardExpanded, setCardExpanded] = useState(false);
+  const resolvedPick = useRef<string | null>(null);
   const anchorRef = useRef(anchor);
   anchorRef.current = anchor;
   /** The beat the bar rests on (scrubbing, a date jump or a new chapter leave it). */
@@ -241,7 +248,7 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
   const selectEvent = useCallback(
     (id: string) => {
       if (presentation.isPresenting() || !geo.events.some((event) => event.id === id)) return false;
-      store.getState().patch({ highlight: [id] });
+      store.getState().patch({ pick: null, highlight: [id] });
       setSelectedEntity(null);
       setSelected(id);
       revealReader();
@@ -269,6 +276,7 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
   }, [restoreHighlight]);
   const selectEntity = useCallback(
     (id: string) => {
+      store.getState().patch({ pick: null });
       setSelected(null);
       if (selectedEntity === id) {
         setSelectedEntity(null);
@@ -296,6 +304,7 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
         if (transitioned) {
           setSelected(null);
           setSelectedEntity(null);
+          if (s.transition.reason !== 'url' && s.pick) s.patch({ pick: null });
           const segment = story.findIndex((c) => c.id === s.chapter);
           const pending = pendingBeat.current;
           pendingBeat.current = null;
@@ -372,6 +381,54 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
   const onLocalLand = useCallback((info: { coastToday: boolean }) => setCoastToday(info.coastToday), []);
   const [datedIndexes, setDatedIndexes] = useState<{ id: string; index: DatedLayerIndex }[]>([]);
 
+
+  const [catalogueLayers, setCatalogueLayers] = useState<CatalogueLayer[]>([]);
+  const renderedRows = useRef(0);
+  const countRows = useCallback((count: number) => { renderedRows.current = count; }, []);
+  // Only catalogue layers re-render the view at a count boundary; plain dated layers (HDB blocks) keep scrubbing cheap.
+  const catalogueIndexes = useMemo(() => datedIndexes.filter(({ id }) => topic.datedLayers?.some((def) => def.id === id && def.catalogue)), [datedIndexes, topic.datedLayers]);
+  const boundary = useSyncExternalStore(playhead.subscribe, () => catalogueIndexes.map(({ index }) => datedLayerState(index, playhead.get()).signature).join('|'), () => '');
+  const chapterState = chapters.find((chapter) => chapter.id === currentChapter)?.state as TimeChapterState | undefined;
+  const indexSpec = anchor?.tick !== null && anchor?.tick !== undefined ? chapterState?.beats?.[anchor.tick]?.catalogueIndex ?? chapterState?.catalogueIndex : chapterState?.catalogueIndex;
+  const catalogueEntries = useMemo(() => catalogueItems(catalogueLayers, layers, playhead.get(), indexSpec), [catalogueLayers, layers, playhead, indexSpec, boundary]);
+  const selectedLayer = pick ? catalogueLayers.find((layer) => layer.entries.some((entry) => entry.id === pick)) : undefined;
+  const pickedCatalogue = selectedLayer?.entries.find((entry) => entry.id === pick);
+  const selectCatalogue = useCallback((id: string | null): boolean => {
+    if (presentation.isPresenting()) return false;
+    if (id === null) { store.getState().patch({ pick: null }); restoreHighlight(); return true; }
+    const current = store.getState();
+    const layer = catalogueLayers.find((layer) => current.layers.includes(layer.id) && visibleCatalogue(layer, playhead.get()).some((entry) => entry.id === id));
+    const entry = layer?.entries.find((entry) => entry.id === id);
+    if (!entry) return false;
+    setSelected(null);
+    setSelectedEntity(null);
+    resolvedPick.current = id;
+    current.patch({ pick: id, highlight: [] });
+    const camera = current.camera;
+    current.applyCameraPreset({ center: entry.at, zoom: camera && 'zoom' in camera ? camera.zoom : 5 }, { instant: false });
+    revealReader();
+    return true;
+  }, [catalogueLayers, playhead, store, restoreHighlight, revealReader]);
+  useEffect(() => {
+    if (!pick) {
+      resolvedPick.current = null;
+      if (new URLSearchParams(window.location.search).has('pick')) store.getState().patch({ pick: null });
+      return;
+    }
+    const state = store.getState();
+    const resolution = resolveCataloguePick(pick, state.pick ?? null, topic.datedLayers ?? [], state.layers, catalogueLayers, playhead.get());
+    if (resolution === 'cancelled' || resolution === 'waiting') return;
+    if (resolution === 'invalid') {
+      state.patch({ pick: null });
+      if (resolvedPick.current === pick) restoreHighlight();
+    } else {
+      if (state.highlight.length) state.patch({ highlight: [] });
+      if (resolvedPick.current !== pick) {
+        resolvedPick.current = pick;
+        if (!new URLSearchParams(window.location.search).has('cam')) state.applyCameraPreset({ center: resolution.entry.at, zoom: state.camera && 'zoom' in state.camera ? state.camera.zoom : 5 }, { instant: true });
+      }
+    }
+  }, [pick, catalogueLayers, layers, boundary, topic.datedLayers, store, playhead, restoreHighlight]);
 
   /* ---------- REFERENCE (R): adjacent keyframe as dashed outlines ---------- */
   const [reference, setReference] = useState(false);
@@ -539,9 +596,9 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
     if (coastToday && territoryOn) items.push({ id: 'coast-today', label: bi('time.legend.coastToday'), color: 'var(--ink)', kind: 'line-dashed' });
     for (const layer of topic.datedLayers ?? []) {
       if (!layers.includes(layer.id)) continue;
-      items.push({ id: `dated-layer-${layer.id}`, label: layer.label, color: layer.color ?? entityCssColor(geo.entities.find((e) => e.id === layer.holder)), kind: layer.kind === 'area' ? 'fill' : layer.kind === 'line' ? 'line' : 'point' });
+      items.push({ id: `dated-layer-${layer.id}`, label: layer.temporal?.mode === 'reference' ? { en: `${layer.label.en} · REF. ${layer.temporal.release}`, zh: `${layer.label.zh} · REF. ${layer.temporal.release}` } : layer.label, color: layer.color ?? entityCssColor(geo.entities.find((e) => e.id === layer.holder)), kind: layer.kind === 'area' ? 'fill' : layer.kind === 'line' ? 'line' : 'point' });
     }
-    if (topic.datedLayers?.some((layer) => layer.kind === 'point' && layers.includes(layer.id)))
+    if (topic.datedLayers?.some((layer) => layer.kind === 'point' && layer.recent !== false && layer.temporal?.mode !== 'reference' && layers.includes(layer.id)))
       items.push({ id: 'dated-recent', label: bi('time.legend.datedRecent'), color: 'var(--signal)', kind: 'ring' });
     if (layers.includes('movements') && geo.movements.length)
       items.push({ id: 'movement', label: t('time.movement'), color: 'var(--ink-muted)', kind: 'arrow' });
@@ -725,6 +782,9 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
           selectedId: selected ?? selectedEntity,
           detailCount: selected || selectedEntity ? 1 : 0,
         }),
+        selectCatalogue,
+        catalogueState: () => ({ pick: store.getState().pick ?? null, layers: Object.fromEntries((topic.datedLayers ?? []).filter((def) => def.catalogue && (store.getState().layers.includes(def.id) || catalogueLayers.some((layer) => layer.id === def.id))).map((def) => { const layer = catalogueLayers.find((loaded) => loaded.id === def.id); return [def.id, { status: layer?.status ?? 'loading', visible: layer && store.getState().layers.includes(def.id) ? visibleCatalogue(layer, playhead.get()).length : 0 }]; })), indexCount: catalogueEntries.length, renderedRows: renderedRows.current, selectedScreen: pickedCatalogue ? controllerRef.current?.catalogueScreen?.(pickedCatalogue.at) ?? null : null }),
+        impacts: (eventId: string) => eventImpacts(geo.events, eventId),
         ...(deepTime ? { geology: () => ({
           reconstruction: controllerRef.current?.reconstructionStats?.() ?? reconstructionStats,
           inset: { coordinateSpace: 'modern', view: inset, insetVisible, fossilMode,
@@ -753,6 +813,7 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
           closeEntity();
           return true;
         }
+        if (store.getState().pick) { selectCatalogue(null); return true; }
         if (selected) {
           closeEvent();
           return true;
@@ -766,6 +827,11 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
     };
   }, [
     store,
+    catalogueLayers,
+    catalogueEntries,
+    pickedCatalogue,
+    selectCatalogue,
+    topic.datedLayers,
     geo,
     model,
     available,
@@ -817,6 +883,8 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
         model={model}
         locale={locale}
         onSelectEvent={selectEvent}
+        onSelectCatalogue={selectCatalogue}
+        onCatalogueLayers={setCatalogueLayers}
         onController={setController}
         onLocalLand={onLocalLand}
         onDatedLayers={setDatedIndexes}
@@ -873,7 +941,7 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
       </SceneSlot>
       {topic.datedLayers?.some((layer) => layer.count) && (
         <SceneSlot name="plate">
-          <DatedLayerPlate definitions={topic.datedLayers} indexes={datedIndexes} layers={layers} playhead={playhead} locale={locale} />
+          <DatedLayerPlate selectedSummary={pickedCatalogue?.title} catalogueLayers={catalogueLayers} definitions={topic.datedLayers} indexes={datedIndexes} layers={layers} playhead={playhead} locale={locale} />
         </SceneSlot>
       )}
 
@@ -901,6 +969,9 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
         <ChapterIndex ids={indexIds} events={geo.events} selected={selected} locale={locale} disabled={presenting} onSelect={selectIndexedEvent} />
       </SceneSlot>
 
+      {indexSpec && <SceneSlot name="readerEnd"><CatalogueIndex entries={catalogueEntries} locale={locale} pick={pick} onSelect={selectCatalogue} onRows={countRows} /></SceneSlot>}
+      {catalogueLayers.some((layer) => layers.includes(layer.id) && layer.status === 'error') && <SceneSlot name="readerTop"><p role="status">{locale === 'en' ? 'Layer could not be loaded' : '图层未能载入'}</p></SceneSlot>}
+      {pickedCatalogue && selectedLayer && <SceneSlot name="readerTop"><CatalogueInspector entry={pickedCatalogue} layer={selectedLayer.def} locale={locale} onClose={() => selectCatalogue(null)} /></SceneSlot>}
       <SceneSlot name="readerTop">
         {selectedEvent && <EventInspector event={selectedEvent} model={model} locale={locale} onClose={closeEvent} />}
         {pickedEntity && <EntityInspector entity={pickedEntity} model={model} playhead={playhead} locale={locale} onClose={closeEntity} />}

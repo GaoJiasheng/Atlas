@@ -22,7 +22,7 @@ import { decodeSimParam, encodeSimParam } from '../space-scene/lib/sim/controls'
 export type UrlState = Partial<SceneState & UrlEngineFields>;
 
 /** Order in which keys are written (most meaningful first). */
-export const URL_KEY_ORDER = ['ch', 'b', 'task', 'model', 't', 'gc', 'm', 'at', 'inset', 'inset-visible', 'fossil-mode', 'hl', 'part', 'view', 'explode', 'run', 'cut', 'pose', 'sim', 'orb-t', 'layers', 'cam', 'theme'] as const;
+export const URL_KEY_ORDER = ['ch', 'b', 'task', 'model', 't', 'gc', 'm', 'at', 'pick', 'inset', 'inset-visible', 'fossil-mode', 'hl', 'part', 'view', 'explode', 'run', 'cut', 'pose', 'sim', 'orb-t', 'layers', 'cam', 'theme'] as const;
 export type UrlKey = (typeof URL_KEY_ORDER)[number];
 
 const ID_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -57,6 +57,8 @@ function encodeField(key: UrlKey, state: UrlState): string | null {
     case 'm':
       if(state.geoContext)return state.geoContext.kind==='climatology'?String(state.geoContext.month):null;
       return state.month === undefined ? null : String(state.month);
+    case 'pick':
+      return state.pick || null;
     case 'inset': return state.inset ?? null;
     case 'inset-visible': return state.insetVisible === undefined ? null : state.insetVisible ? '1' : '0';
     case 'fossil-mode': return state.fossilMode ?? null;
@@ -151,6 +153,9 @@ export function decodeSceneState(input: string | URLSearchParams): UrlState {
   if(gc==='p')out.geoContext={kind:'present'};
   else if(gc==='c' && out.month!==undefined)out.geoContext={kind:'climatology',month:out.month};
   else if(gc==='a') {const date=params.get('at');if(date && /^\d{4}-\d{2}-\d{2}$/.test(date) && parseTimeParam(date))out.geoContext={kind:'membership',date};}
+
+  const pick = params.get('pick');
+  if (pick && pick.length <= 128 && ID_RE.test(pick)) out.pick = pick;
 
   const hl = params.get('hl');
   if (hl !== null) out.highlight = hl === '' ? [] : hl.split(',').filter((id) => ID_RE.test(id));

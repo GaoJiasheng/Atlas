@@ -1,0 +1,211 @@
+# Authoring contract: docs/49; sensitive content remains draft for Gavin.
+id: plates-and-hazards
+title:
+  en: Plates and hazards
+  zh: 板块与灾害地图
+subtitle:
+  en: Historical events and modern reference maps, 1815–2024
+  zh: 历史事件与现代参考地图，1815—2024年
+shortTitle:
+  en: Plates and hazards
+  zh: 板块与灾害
+subject: geography
+mode: time
+engine: time-scene
+stage: geo
+theme: paper
+sensitivity: open
+status: draft
+tags:
+- beyond-syllabus
+- singapore
+- map
+illustration: plates-and-hazards
+datePrecision: day
+basemap:
+  maxZoom: 8
+datedLayers:
+- id: ph-plate-divergent
+  file: ph-plate-divergent
+  kind: line
+  color: token:cold
+  label:
+    en: Divergent boundaries · OSR / CRB
+    zh: 张裂边界 · OSR / CRB
+  count: true
+  countLabel:
+    en: Divergent parts
+    zh: 张裂线段
+  temporal:
+    mode: reference
+    note:
+      en: Fixed modern model; not historical reconstruction.
+      zh: 固定现代模型，不是历史复原。
+    release: PB2002 · snapshot 2026-10-26
+  recent: false
+  catalogue:
+    file: ph-catalogue-plate-divergent
+- id: ph-plate-transform
+  file: ph-plate-transform
+  kind: line
+  color: token:ink-2
+  label:
+    en: Transform boundaries · OTF / CTF
+    zh: 转换边界 · OTF / CTF
+  count: true
+  countLabel:
+    en: Transform parts
+    zh: 转换线段
+  temporal:
+    mode: reference
+    note:
+      en: Fixed modern model; not historical reconstruction.
+      zh: 固定现代模型，不是历史复原。
+    release: PB2002 · snapshot 2026-10-26
+  recent: false
+  catalogue:
+    file: ph-catalogue-plate-transform
+- id: ph-plate-subduction
+  file: ph-plate-subduction
+  kind: line
+  color: token:hot
+  label:
+    en: Subduction boundaries · SUB
+    zh: 俯冲边界 · SUB
+  count: true
+  countLabel:
+    en: Subduction parts
+    zh: 俯冲线段
+  temporal:
+    mode: reference
+    note:
+      en: Fixed modern model; not historical reconstruction.
+      zh: 固定现代模型，不是历史复原。
+    release: PB2002 · snapshot 2026-10-26
+  recent: false
+  catalogue:
+    file: ph-catalogue-plate-subduction
+- id: ph-plate-convergent
+  file: ph-plate-convergent
+  kind: line
+  color: token:loop
+  label:
+    en: Other convergent boundaries · OCB / CCB
+    zh: 其他汇聚边界 · OCB / CCB
+  count: true
+  countLabel:
+    en: Other convergent parts
+    zh: 其他汇聚线段
+  temporal:
+    mode: reference
+    note:
+      en: Fixed modern model; not historical reconstruction.
+      zh: 固定现代模型，不是历史复原。
+    release: PB2002 · snapshot 2026-10-26
+  recent: false
+  catalogue:
+    file: ph-catalogue-plate-convergent
+- id: ph-orogens
+  file: ph-orogens
+  kind: area
+  color: token:neutral
+  label:
+    en: Broad boundary regions in the model
+    zh: 模型中的宽边界区
+  count: true
+  countLabel:
+    en: Model boundary regions
+    zh: 模型宽边界区
+  temporal:
+    mode: reference
+    note:
+      en: Broad boundary zones in the model, not hazard zones.
+      zh: 模型中的宽边界区，不是危险区。
+    release: PB2002 · snapshot 2026-10-26
+  recent: false
+  catalogue:
+    file: ph-catalogue-orogens
+- id: ph-volcano-catalogue
+  file: ph-volcano-catalogue
+  kind: point
+  color: token:neutral
+  label:
+    en: Holocene volcano location catalogue
+    zh: 全新世火山位置目录
+  count: true
+  countLabel:
+    en: Volcano locations
+    zh: 火山目录位置
+  temporal:
+    mode: reference
+    note:
+      en: Modern catalogue locations; not eruption status on this date.
+      zh: 现代目录位置，不表示所示日期正在喷发。
+    release: GVP VOTW v5.4.0 · snapshot 2026-10-26
+  recent: false
+  catalogue:
+    file: ph-catalogue-volcano-catalogue
+- id: ph-quake-sample
+  file: ph-quake-sample
+  kind: point
+  color: token:cold
+  count: true
+  countLabel:
+    en: Sample earthquakes
+    zh: 样本地震
+  label:
+    en: USGS reviewed sample · 2000–2024 · catalogue M ≥ 6 · mixed magType · snapshot 2026-10-26
+    zh: USGS 已审样本 · 2000—2024 年 · 目录 M ≥ 6 · 保留不同震级类型 · 快照 2026-10-26
+  recent: false
+  catalogue:
+    file: ph-catalogue-quake-sample
+  encoding:
+    radius:
+      property: mag
+      min: 6
+      max: 9.5
+      px:
+      - 2
+      - 8
+- id: ph-observations-1883
+  file: ph-observations-1883
+  kind: point
+  color: token:loop
+  count: true
+  countLabel:
+    en: 1883 associated observations
+    zh: 1883 年关联观测
+  label:
+    en: NCEI 1883 associated locations · whole group on source date, not arrival playback · snapshot 2026-10-26
+    zh: NCEI 1883 年关联位置 · 按源事件日整组显示，不按到达时刻回放 · 快照 2026-10-26
+  recent: false
+  catalogue:
+    file: ph-catalogue-observations-1883
+- id: ph-observations-2004
+  file: ph-observations-2004
+  kind: point
+  color: token:loop
+  count: true
+  countLabel:
+    en: 2004 associated observations
+    zh: 2004 年关联观测
+  label:
+    en: NCEI 2004 associated locations · whole group on source date, not arrival playback · snapshot 2026-10-26
+    zh: NCEI 2004 年关联位置 · 按源事件日整组显示，不按到达时刻回放 · 快照 2026-10-26
+  recent: false
+  catalogue:
+    file: ph-catalogue-observations-2004
+- id: ph-observations-2018
+  file: ph-observations-2018
+  kind: point
+  color: token:loop
+  count: true
+  countLabel:
+    en: 2018 associated observations
+    zh: 2018 年关联观测
+  label:
+    en: NCEI 2018 associated locations · whole group on source date, not arrival playback · snapshot 2026-10-26
+    zh: NCEI 2018 年关联位置 · 按源事件日整组显示，不按到达时刻回放 · 快照 2026-10-26
+  recent: false
+  catalogue:
+    file: ph-catalogue-observations-2018

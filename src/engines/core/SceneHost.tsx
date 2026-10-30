@@ -235,9 +235,9 @@ export default function SceneHost(props: SceneHostProps) {
     if (!dataReady) return;
     const hydrate = () => {
       const decoded = decodeSceneState(window.location.search);
-      const { t: time, month, geoContext, beat, highlight, part, view, explode, run, cutaway, pose, task, model, sim, orbitTime, inset, insetVisible, fossilMode, ...common } = decoded;
+      const { t: time, month, geoContext, beat, pick, highlight, part, view, explode, run, cutaway, pose, task, model, sim, orbitTime, inset, insetVisible, fossilMode, ...common } = decoded;
       const engineFields: UrlEngineFields = {
-        t: time, month, geoContext, beat, highlight, part, view, explode, run, cutaway, pose, task, model, sim, orbitTime,
+        t: time, month, geoContext, beat, pick, highlight, part, view, explode, run, cutaway, pose, task, model, sim, orbitTime,
         // The modern-inset fields belong to reconstruction topics only (docs/47 E-DE3).
         ...(topic.modernInset ? { inset, insetVisible, fossilMode } : {}),
       };

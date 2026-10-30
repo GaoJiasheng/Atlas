@@ -1,0 +1,394 @@
+[
+  {
+    "id": "event-tambora-1815",
+    "t": "1815-04-10",
+    "at": [
+      118,
+      -8.25
+    ],
+    "kind": "disaster",
+    "importance": 3,
+    "title": {
+      "en": "Tambora, 1815",
+      "zh": "坦博拉（Tambora），1815 年"
+    },
+    "summary": {
+      "en": "The eruption affected communities around Sumbawa; later food shortages were part of the loss of life.",
+      "zh": "喷发影响松巴哇周边居民；灾后的粮食短缺也是死亡原因的一部分。"
+    },
+    "sources": [
+      "S19",
+      "S22",
+      "S21",
+      "S603",
+      "S604"
+    ],
+    "sensitive": true,
+    "detail": {
+      "en": "The map uses GVP volcano 264040 as its location. VEI 7 belongs to episode 16231 (1812–1815), not an earthquake magnitude. The selected historical day comes from NCEI event 613; it does not date the whole eruption episode.",
+      "zh": "位置采用 GVP 火山 264040。VEI 7 属于 16231 号喷发记录（1812—1815 年），不是地震震级。选用的历史日期来自 NCEI 613 号事件，不表示整段喷发活动只持续一天。"
+    },
+    "impacts": [
+      {
+        "id": "impact-tambora-hvo",
+        "measure": "deaths",
+        "estimate": {
+          "kind": "more-than",
+          "value": 70000
+        },
+        "label": {
+          "en": "Deaths",
+          "zh": "死亡人数"
+        },
+        "scope": {
+          "en": "Surrounding areas; historical estimate reported by USGS HVO.",
+          "zh": "周边地区；USGS 夏威夷火山观测站记载的历史估计。"
+        },
+        "sourceAsOf": "2011-09-29",
+        "sourceDateKind": "publication",
+        "sources": [
+          "S22"
+        ]
+      },
+      {
+        "id": "impact-tambora-table",
+        "measure": "deaths",
+        "estimate": {
+          "kind": "reported",
+          "value": 92000
+        },
+        "label": {
+          "en": "Deaths",
+          "zh": "死亡人数"
+        },
+        "scope": {
+          "en": "Separate historical estimate; starvation identified as the main cause. These estimates are not a statistical range.",
+          "zh": "另一项历史估计，主要死因为饥饿。两项估计不是统计置信区间。"
+        },
+        "sourceAsOf": "2026-10-27",
+        "sourceDateKind": "accessed",
+        "sources": [
+          "S21"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "event-krakatau-1883",
+    "t": "1883-08-27",
+    "at": [
+      105.4233,
+      -6.1009
+    ],
+    "kind": "disaster",
+    "importance": 3,
+    "title": {
+      "en": "Krakatau, 1883",
+      "zh": "喀拉喀托（Krakatau），1883 年"
+    },
+    "summary": {
+      "en": "The disaster caused about 36,000 deaths, mainly from tsunamis: an undated USGS historical table, accessed 27 October 2026.",
+      "zh": "这次灾害造成约 36,000 人死亡，主要由于海啸；数据为无发布日期的 USGS 历史表估计，读取于 2026 年 10 月 27 日。"
+    },
+    "sources": [
+      "S21",
+      "S603",
+      "S604"
+    ],
+    "sensitive": true,
+    "detail": {
+      "en": "The same undated USGS table, accessed 27 October 2026, lists a historical estimate of 36,417 deaths, mainly from tsunamis. The reference volcano centre does not reconstruct the island in 1883. The major disaster day differs from the start of the longer eruption episode.",
+      "zh": "同一张未注明发布日期、于 2026 年 10 月 27 日读取的 USGS 表列出 36,417 人死亡的历史估计，主要由于海啸。火山中心参考点不是 1883 年岛形的复原；主要灾难日期也不同于较长喷发记录的起日。"
+    },
+    "impacts": [
+      {
+        "id": "impact-krakatau-estimate",
+        "measure": "deaths",
+        "estimate": {
+          "kind": "about",
+          "value": 36000
+        },
+        "label": {
+          "en": "Deaths",
+          "zh": "死亡人数"
+        },
+        "scope": {
+          "en": "Mainly from tsunamis; rounded historical estimate in the USGS table.",
+          "zh": "主要由于海啸；USGS 表中取整的历史估计。"
+        },
+        "sourceAsOf": "2026-10-27",
+        "sourceDateKind": "accessed",
+        "sources": [
+          "S21"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "event-sumatra-2004",
+    "t": "2004-12-26",
+    "at": [
+      95.982,
+      3.295
+    ],
+    "kind": "disaster",
+    "importance": 3,
+    "title": {
+      "en": "Indian Ocean earthquake and tsunami",
+      "zh": "印度洋地震与海啸"
+    },
+    "summary": {
+      "en": "NOAA/ITIC’s October 2024 accounting records 227,899 people dead or missing and presumed dead in 15 countries.",
+      "zh": "NOAA/ITIC 2024 年 10 月统计记载，15 个国家共 227,899 人死亡或失踪并推定死亡。"
+    },
+    "sources": [
+      "S54",
+      "S17",
+      "S12",
+      "S603",
+      "S606"
+    ],
+    "sensitive": true,
+    "detail": {
+      "en": "USGS solution: Mw 9.1, depth 30 km, 2004-12-26 00:58:53.450 UTC. MSS uses 9.2 in its account; each value keeps its own source. The epicentre is a point above the rupture’s starting location, not the full rupture. USGS tsunami=0 is not interpreted as no tsunami: the explicit NCEI association is event 2439.",
+      "zh": "USGS 解：Mw 9.1，深度 30 公里，UTC 时间 2004-12-26 00:58:53.450。新加坡气象署说明采用 9.2，各自保留出处。震中只是破裂开始位置上方的地表点，不代表整段破裂。USGS 的 tsunami=0 不解释为没有海啸；明确关联的 NCEI 海啸事件为 2439。"
+    },
+    "impacts": [
+      {
+        "id": "impact-indian-ocean",
+        "measure": "dead-or-missing-presumed-dead",
+        "estimate": {
+          "kind": "reported",
+          "value": 227899
+        },
+        "label": {
+          "en": "Dead or missing and presumed dead",
+          "zh": "死亡或失踪并推定死亡"
+        },
+        "scope": {
+          "en": "15 countries, NOAA/ITIC October 2024 accounting. Earthquake and tsunami deaths cannot be fully separated. Four countries shown; not a complete breakdown.",
+          "zh": "15 个国家，NOAA/ITIC 2024 年 10 月统计；无法完全拆分地震与海啸死亡。这里只列四个国家，并非完整分项。"
+        },
+        "sourceAsOf": "2024-10",
+        "sourceDateKind": "publication",
+        "sources": [
+          "S17"
+        ],
+        "components": [
+          {
+            "id": "impact-indonesia",
+            "label": {
+              "en": "Indonesia",
+              "zh": "印度尼西亚"
+            },
+            "value": 167540,
+            "sources": [
+              "S17"
+            ]
+          },
+          {
+            "id": "impact-sri-lanka",
+            "label": {
+              "en": "Sri Lanka",
+              "zh": "斯里兰卡"
+            },
+            "value": 35322,
+            "sources": [
+              "S17"
+            ]
+          },
+          {
+            "id": "impact-india",
+            "label": {
+              "en": "India",
+              "zh": "印度"
+            },
+            "value": 16269,
+            "sources": [
+              "S17"
+            ]
+          },
+          {
+            "id": "impact-thailand",
+            "label": {
+              "en": "Thailand",
+              "zh": "泰国"
+            },
+            "value": 8212,
+            "sources": [
+              "S17"
+            ]
+          }
+        ],
+        "componentsComplete": false
+      }
+    ]
+  },
+  {
+    "id": "event-anak-2018",
+    "t": "2018-12-22",
+    "at": [
+      105.4233,
+      -6.1009
+    ],
+    "kind": "disaster",
+    "importance": 3,
+    "title": {
+      "en": "Anak Krakatau collapse, 2018",
+      "zh": "喀拉喀托之子（Anak Krakatau）崩塌，2018 年"
+    },
+    "summary": {
+      "en": "A volcanic collapse triggered a tsunami in the Sunda Strait. Its observations are kept separate from the 1883 records.",
+      "zh": "火山体崩塌引发巽他海峡海啸；观测与 1883 年记录分开。"
+    },
+    "sources": [
+      "S12",
+      "S603",
+      "S604",
+      "S606"
+    ],
+    "sensitive": false,
+    "detail": {
+      "en": "This marker uses the GVP Krakatau reference centre, not a measured collapse initiation point. The GVP 2018–2020 episode began on 18 June 2018, before the collapse; NCEI event 5699 gives the tsunami source date. No unverified death figure is shown.",
+      "zh": "标记采用 GVP 喀拉喀托参考中心，不是实测崩塌起点。GVP 的 2018—2020 年喷发记录始于 2018 年 6 月 18 日，早于崩塌；NCEI 5699 号事件给出海啸源事件日。本题不列未经所选来源核验的死亡数字。"
+    }
+  },
+  {
+    "id": "event-pasaman-2022",
+    "t": "2022-02-25",
+    "at": [
+      100.1006,
+      0.219
+    ],
+    "kind": "disaster",
+    "importance": 3,
+    "title": {
+      "en": "West Sumatra earthquake, 2022",
+      "zh": "西苏门答腊地震，2022 年"
+    },
+    "summary": {
+      "en": "People in Singapore reported feeling this distant earthquake. The map separates the source parameters from local shaking reports.",
+      "zh": "新加坡有人报告感到这次远处地震；地图区分震源参数与本地震感记录。"
+    },
+    "sources": [
+      "S601",
+      "S602",
+      "S23",
+      "S25"
+    ],
+    "sensitive": false,
+    "detail": {
+      "en": "The selected USGS solution us6000gzyg is magnitude 6.1, type mww, depth 4 km; the EOS public-lecture account uses 6.2. These are source-specific estimates, not Singapore intensity values. BCA guidance is linked in the chapter with its reading date, not as a real-time warning.",
+      "zh": "选用的 USGS 解 us6000gzyg 为震级 6.1、类型 mww、深度 4 公里；地球观测研究所公开讲座说明采用 6.2。这些是各来源的估计，不是新加坡烈度。章节注明建设局指引的读取日期并链接原页，不作为实时警示。"
+    }
+  },
+  {
+    "id": "site-tambora",
+    "t": "1815-04-10",
+    "at": [
+      118,
+      -8.25
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Tambora",
+      "zh": "坦博拉（Tambora）"
+    },
+    "summary": {
+      "en": "A fixed GVP reference location, not a record of eruption on the date shown.",
+      "zh": "GVP 固定参考位置，不表示所示日期正在喷发。"
+    },
+    "sources": [
+      "S19",
+      "S604"
+    ],
+    "sensitive": false,
+    "detail": {
+      "en": "This is a static location. Its required timeline date is a display convention, not a founding or activity date.",
+      "zh": "这是固定地点；必填年代日期只是显示约定，不是地点建立或活动日期。"
+    }
+  },
+  {
+    "id": "site-krakatau",
+    "t": "1815-04-10",
+    "at": [
+      105.4233,
+      -6.1009
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Krakatau",
+      "zh": "喀拉喀托（Krakatau）"
+    },
+    "summary": {
+      "en": "The modern GVP reference centre; historical coastlines are not reconstructed.",
+      "zh": "现代 GVP 参考中心；本题不复原历史海岸。"
+    },
+    "sources": [
+      "S604"
+    ],
+    "sensitive": false,
+    "detail": {
+      "en": "This is a static location. Its required timeline date is a display convention, not a founding or activity date.",
+      "zh": "这是固定地点；必填年代日期只是显示约定，不是地点建立或活动日期。"
+    }
+  },
+  {
+    "id": "site-kilauea",
+    "t": "1815-04-10",
+    "at": [
+      -155.287,
+      19.421
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Kilauea",
+      "zh": "基拉韦厄（Kilauea）"
+    },
+    "summary": {
+      "en": "A volcano within an oceanic plate, illustrating a boundary-only explanation’s limits.",
+      "zh": "位于大洋板块内部的火山，说明仅凭边界解释位置的局限。"
+    },
+    "sources": [
+      "S45",
+      "S604"
+    ],
+    "sensitive": false,
+    "detail": {
+      "en": "This is a static location. Its required timeline date is a display convention, not a founding or activity date.",
+      "zh": "这是固定地点；必填年代日期只是显示约定，不是地点建立或活动日期。"
+    }
+  },
+  {
+    "id": "site-singapore",
+    "t": "1815-04-10",
+    "at": [
+      103.82,
+      1.35
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Singapore (orientation point)",
+      "zh": "新加坡（方位点）"
+    },
+    "summary": {
+      "en": "An editorial orientation anchor, not an instrument station or a measurement of one building’s shaking.",
+      "zh": "编辑取景的方位锚点，不是仪器站，也不代表某幢楼的摇晃测量。"
+    },
+    "sources": [
+      "S608",
+      "S12",
+      "S23",
+      "S25"
+    ],
+    "sensitive": false,
+    "detail": {
+      "en": "This is a static location. Its required timeline date is a display convention, not a founding or activity date.",
+      "zh": "这是固定地点；必填年代日期只是显示约定，不是地点建立或活动日期。"
+    }
+  }
+]
