@@ -1,0 +1,33 @@
+id: coral-reef
+title:
+  en: Coral Reefs
+  zh: 珊瑚礁
+subtitle:
+  en: Animals, algal partners and evidence from Singapore reefs
+  zh: 从新加坡珊瑚礁看动物、藻伙伴与环境证据
+shortTitle:
+  en: Coral reefs
+  zh: 珊瑚礁
+subject: biology
+levels:
+- P6
+tags:
+- singapore
+- psle
+- p6
+- corals
+- space
+moe:
+- 'MOE 2023 Science P6 Standard Interactions within the Environment: environmental
+  factors; organism, population and community; adaptations; food webs; human impact.
+  Coral reefs are an application habitat, not a named syllabus requirement.'
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: published
+illustration: coral-reef
+note:
+  en: Model study · schematic habitat and enlarged specimens
+  zh: 模型研究 · 生境示意及放大标本

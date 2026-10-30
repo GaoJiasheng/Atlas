@@ -180,7 +180,7 @@ describe('plates-and-hazards audit artefacts', () => {
       let transparent=0,coloured=0;
       for(let i=0;i<data.length;i+=4) {
         if(data[i+3]===0) transparent++;
-        if(data[i+3] && Math.max(data[i],data[i+1],data[i+2])-Math.min(data[i],data[i+1],data[i+2])>2) coloured++;
+        if(data[i+3] && Math.max(data[i]!,data[i+1]!,data[i+2]!)-Math.min(data[i]!,data[i+1]!,data[i+2]!)>2) coloured++;
       }
       expect(transparent).toBeGreaterThan(0); expect(coloured).toBe(0);
       expect([info.width,info.height]).toEqual([record.width,record.height]);

@@ -1,0 +1,170 @@
+---
+id: reef-zones
+order: 2
+title:
+  en: Three connected reef zones
+  zh: 相连的三个礁区
+level: P6
+state:
+  camera:
+    position:
+      - 2
+      - 1.4
+      - 3.7
+    target:
+      - 0
+      - -0.1
+      - 0
+    fov: 30
+  layers:
+    - reef-habitat
+    - polyp-closeup
+    - web-specimens
+    - evidence-tools
+    - feeding-flows
+  hide: []
+  labels:
+    - reef-flat
+  part: null
+  view: assembled
+  explode: 0
+  run: false
+  cutaway: none
+  pose: null
+  ghost: []
+  summary:
+    en: Depth and light create different conditions across a reef.
+    zh: 深度和光照使礁区的生活条件不同。
+  sim:
+    set:
+      remove: none
+      inspect: n-coral
+      depth-m: 3
+      water-case: more-turbid
+      evidence-state: partnered
+    try:
+      vary: depth-m
+      also:
+        - water-case
+      keep:
+        - en: Same coefficient within each water case
+          zh: 每种水体内保持同一设计系数
+      observe:
+        - light-index
+      record: true
+  beats:
+    - part: reef-flat
+      labels:
+        - reef-flat
+      caption:
+        en: The reef flat is the shallow zone nearest the shore. Parts may be exposed at low tide.
+        zh: 礁坪靠近岸边，水较浅；部分地方会在低潮时露出水面。
+    - part: reef-crest
+      labels:
+        - reef-crest
+      caption:
+        en: The crest faces incoming waves and can reduce their energy.
+        zh: 礁脊迎向海浪，可削弱传来的波浪能量。
+    - part: reef-slope
+      labels:
+        - reef-slope
+      caption:
+        en: The reef slope descends seaward, where less light is available.
+        zh: 礁坡向海中下降，较深处可获得的光更少。
+    - camera: evidence
+      layers:
+        - reef-habitat
+        - polyp-closeup
+        - web-specimens
+        - evidence-tools
+        - feeding-flows
+      hide: []
+      labels:
+        - light-marker
+      part: null
+      sim:
+        set:
+          depth-m: 7
+          water-case: more-turbid
+      caption:
+        en: In this illustrative water case, the light index falls as depth increases.
+        zh: 在这个示意水体中，深度增加，相对光指数下降。
+    - camera: evidence
+      layers:
+        - reef-habitat
+        - polyp-closeup
+        - web-specimens
+        - evidence-tools
+        - feeding-flows
+      hide: []
+      labels:
+        - water-haze
+        - light-marker
+      part: null
+      sim:
+        set:
+          depth-m: 3
+          water-case: more-turbid
+      caption:
+        en: Singapore has living reefs in turbid water. This light index does not predict survival.
+        zh: 新加坡浑浊海水里也有活珊瑚礁；这里的光指数不预测存活。
+  index:
+    parts:
+      - reef-flat
+      - reef-crest
+      - reef-slope
+      - water-haze
+      - light-marker
+---
+
+<Lang en>
+
+Follow the model from the shoreward side towards the sea. The <Term id="reef-flat">reef flat</Term> is a shallow, relatively level area. Some parts can be exposed during low tide. Farther out, the <Term id="reef-crest">reef crest</Term> faces incoming waves. Its structure can reduce wave energy. Beyond it, the <Term id="reef-slope">reef slope</Term> descends into deeper water. These zones join together rather than forming separate islands.
+
+Depth affects the light reaching photosynthetic organisms. Communities can differ between zones as conditions change. Here a <Term id="community">community</Term> means populations of different kinds of organisms living together. A connected coral colony is not automatically the whole population of its species, and one coral species is not the whole reef community.
+
+Try the light comparison. Choose a water case, keep it fixed, then increase the illustrative depth. The marker moves as the relative light index falls. Return to the same depth before comparing the other water case. That way you can describe which input changed. The readout is labelled SIM because it comes from a designed calculation, not an underwater light measurement.
+
+Singapore supports living reefs in turbid water. Suspended particles reduce light, while particles that settle can cover surfaces. These effects interact with local conditions; clearer water alone is not a complete measure of reef health. The scene shows the order of the zones and a comparison rule. It does not set a depth beyond which every coral dies.
+
+<Figure src="figures/coral-reef-zones" alt={{ en: "Graphite schematic profile joining a shallow reef flat, a raised crest and a descending reef slope.", zh: "石墨示意剖面：浅平礁坪、抬起的礁脊与下降礁坡彼此相连。" }} caption={{ en: "A general reef profile, without mapped locations or a geographic scale.", zh: "一般礁区剖面，没有测绘地点或地理比例含义。" }} />
+
+<More title={{"en": "A controlled comparison", "zh": "一次有控制的比较"}}>
+
+The design calculation is L = 100 exp(−kz). The selected depths are <Num s="S50">1, 3 and 7 m</Num>; illustrative k values are <Num s="S50">0.1 and 0.5 per metre</Num>. These coefficients were not fitted to Singapore measurements. Compare depth within a fixed water case before comparing cases.
+
+</More>
+
+<More title={{"en": "Different reported depths", "zh": "不同来源的深度口径"}}>
+
+A 2020 study at Kusu and Pulau Hantu compared crests at <Num s="S10">2–3 m</Num> with slopes at <Num s="S10">7 m</Num>. A 2019 NUS report described typical coral limits near <Num s="S11">8 m</Num> at its study sites. Other descriptions near <Num s="S9">10 m</Num> and a photic-zone depth of less than <Num s="S10">11 m</Num> use different scopes. The paper’s detailed results also show daily and site variation. These descriptions are not interchangeable universal boundaries.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+沿模型由岸边向海看，<Term id="reef-flat">礁坪</Term>较浅而平，部分地方在低潮时会露出水面。再向外是迎向海浪的<Term id="reef-crest">礁脊</Term>，结构可削弱波浪能量；接着，<Term id="reef-slope">礁坡</Term>向深水下降。三个区相连，并不是三座分开的岛。
+
+深度会影响光合生物能得到的光，各区的生物组合也可不同。<Term id="community">群落</Term>指在同一地方共同生活的多个种群；一个相连的珊瑚群体，不自动等于该物种的整个种群，一个珊瑚物种也不是整片礁的全部群落。
+
+试光比较时，先选定水体并保持不变，再增加示意深度，观察相对光指数怎样下降。比较另一种水体前，先回到相同深度。这样才说得清改变了哪项输入。读数标有 SIM，表示来自设计计算，不是海中实测照度。
+
+新加坡浑浊海水中也有活珊瑚礁。悬浮颗粒减少透光，沉下来的颗粒则可覆盖表面，影响还与当地条件相互作用。因此不能只凭水清不清判断整片礁是否健康。模型显示的是分区顺序与比较规则，没有规定所有珊瑚必死的深度界线。
+
+<Figure src="figures/coral-reef-zones" alt={{ en: "Graphite schematic profile joining a shallow reef flat, a raised crest and a descending reef slope.", zh: "石墨示意剖面：浅平礁坪、抬起的礁脊与下降礁坡彼此相连。" }} caption={{ en: "A general reef profile, without mapped locations or a geographic scale.", zh: "一般礁区剖面，没有测绘地点或地理比例含义。" }} />
+
+<More title={{"en": "A controlled comparison", "zh": "一次有控制的比较"}}>
+
+设计计算为 L = 100 exp(−kz)，可选深度为 <Num s="S50">1、3、7 m</Num>，示意系数 k 为每米 <Num s="S50">0.1 或 0.5</Num>。系数没有按新加坡实测拟合。先固定水体比较深度，再比较水体。
+
+</More>
+
+<More title={{"en": "Different reported depths", "zh": "不同来源的深度口径"}}>
+
+2020 年在龟屿与韩都岛的研究比较 <Num s="S10">2–3 m</Num> 深礁脊和 <Num s="S10">7 m</Num> 深礁坡；2019 年国大报道在其研究地点描述约 <Num s="S11">8 m</Num> 的常见珊瑚深度界限。另有接近 <Num s="S9">10 m</Num> 的描述和不足 <Num s="S10">11 m</Num> 的透光层口径，所指不同；论文详细结果还有每日与地点差异，不能合成统一界线。
+
+</More>
+
+</Lang>

@@ -1,0 +1,535 @@
+{
+  "meta": {
+    "preparationOnly": true,
+    "webNodes": 6,
+    "webEdges": 4,
+    "outputs": 20,
+    "tableRows": 37,
+    "exhaustiveControlCombinations": 378,
+    "allAssertionsPassed": true,
+    "fullTopicRuntimeValidated": false,
+    "simSchemaCheckFile": "sim-schema-checks.json"
+  },
+  "webCases": [
+    {
+      "remove": "none",
+      "inspect": "n-zooplankton",
+      "present-count": 6,
+      "supported-count": 6,
+      "active-links": 4,
+      "status-n-symbionts": "unchanged",
+      "status-n-phytoplankton": "unchanged",
+      "status-n-zooplankton": "unchanged",
+      "status-n-coral": "unchanged",
+      "status-n-turf-algae": "unchanged",
+      "status-n-parrotfish": "unchanged",
+      "active-e-symbionts-coral": 1,
+      "active-e-phyto-zoo": 1,
+      "active-e-zoo-coral": 1,
+      "active-e-algae-parrotfish": 1,
+      "foods": 1,
+      "food-status": "unchanged"
+    },
+    {
+      "remove": "none",
+      "inspect": "n-coral",
+      "present-count": 6,
+      "supported-count": 6,
+      "active-links": 4,
+      "status-n-symbionts": "unchanged",
+      "status-n-phytoplankton": "unchanged",
+      "status-n-zooplankton": "unchanged",
+      "status-n-coral": "unchanged",
+      "status-n-turf-algae": "unchanged",
+      "status-n-parrotfish": "unchanged",
+      "active-e-symbionts-coral": 1,
+      "active-e-phyto-zoo": 1,
+      "active-e-zoo-coral": 1,
+      "active-e-algae-parrotfish": 1,
+      "foods": 2,
+      "food-status": "unchanged"
+    },
+    {
+      "remove": "none",
+      "inspect": "n-parrotfish",
+      "present-count": 6,
+      "supported-count": 6,
+      "active-links": 4,
+      "status-n-symbionts": "unchanged",
+      "status-n-phytoplankton": "unchanged",
+      "status-n-zooplankton": "unchanged",
+      "status-n-coral": "unchanged",
+      "status-n-turf-algae": "unchanged",
+      "status-n-parrotfish": "unchanged",
+      "active-e-symbionts-coral": 1,
+      "active-e-phyto-zoo": 1,
+      "active-e-zoo-coral": 1,
+      "active-e-algae-parrotfish": 1,
+      "foods": 1,
+      "food-status": "unchanged"
+    },
+    {
+      "remove": "n-symbionts",
+      "inspect": "n-zooplankton",
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 3,
+      "status-n-symbionts": "removed",
+      "status-n-phytoplankton": "unchanged",
+      "status-n-zooplankton": "unchanged",
+      "status-n-coral": "fewer-foods",
+      "status-n-turf-algae": "unchanged",
+      "status-n-parrotfish": "unchanged",
+      "active-e-symbionts-coral": 0,
+      "active-e-phyto-zoo": 1,
+      "active-e-zoo-coral": 1,
+      "active-e-algae-parrotfish": 1,
+      "foods": 1,
+      "food-status": "unchanged"
+    },
+    {
+      "remove": "n-symbionts",
+      "inspect": "n-coral",
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 3,
+      "status-n-symbionts": "removed",
+      "status-n-phytoplankton": "unchanged",
+      "status-n-zooplankton": "unchanged",
+      "status-n-coral": "fewer-foods",
+      "status-n-turf-algae": "unchanged",
+      "status-n-parrotfish": "unchanged",
+      "active-e-symbionts-coral": 0,
+      "active-e-phyto-zoo": 1,
+      "active-e-zoo-coral": 1,
+      "active-e-algae-parrotfish": 1,
+      "foods": 1,
+      "food-status": "fewer-foods"
+    },
+    {
+      "remove": "n-symbionts",
+      "inspect": "n-parrotfish",
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 3,
+      "status-n-symbionts": "removed",
+      "status-n-phytoplankton": "unchanged",
+      "status-n-zooplankton": "unchanged",
+      "status-n-coral": "fewer-foods",
+      "status-n-turf-algae": "unchanged",
+      "status-n-parrotfish": "unchanged",
+      "active-e-symbionts-coral": 0,
+      "active-e-phyto-zoo": 1,
+      "active-e-zoo-coral": 1,
+      "active-e-algae-parrotfish": 1,
+      "foods": 1,
+      "food-status": "unchanged"
+    },
+    {
+      "remove": "n-phytoplankton",
+      "inspect": "n-zooplankton",
+      "present-count": 5,
+      "supported-count": 4,
+      "active-links": 2,
+      "status-n-symbionts": "unchanged",
+      "status-n-phytoplankton": "removed",
+      "status-n-zooplankton": "no-shown-food",
+      "status-n-coral": "fewer-foods",
+      "status-n-turf-algae": "unchanged",
+      "status-n-parrotfish": "unchanged",
+      "active-e-symbionts-coral": 1,
+      "active-e-phyto-zoo": 0,
+      "active-e-zoo-coral": 0,
+      "active-e-algae-parrotfish": 1,
+      "foods": 0,
+      "food-status": "no-shown-food"
+    },
+    {
+      "remove": "n-phytoplankton",
+      "inspect": "n-coral",
+      "present-count": 5,
+      "supported-count": 4,
+      "active-links": 2,
+      "status-n-symbionts": "unchanged",
+      "status-n-phytoplankton": "removed",
+      "status-n-zooplankton": "no-shown-food",
+      "status-n-coral": "fewer-foods",
+      "status-n-turf-algae": "unchanged",
+      "status-n-parrotfish": "unchanged",
+      "active-e-symbionts-coral": 1,
+      "active-e-phyto-zoo": 0,
+      "active-e-zoo-coral": 0,
+      "active-e-algae-parrotfish": 1,
+      "foods": 1,
+      "food-status": "fewer-foods"
+    },
+    {
+      "remove": "n-phytoplankton",
+      "inspect": "n-parrotfish",
+      "present-count": 5,
+      "supported-count": 4,
+      "active-links": 2,
+      "status-n-symbionts": "unchanged",
+      "status-n-phytoplankton": "removed",
+      "status-n-zooplankton": "no-shown-food",
+      "status-n-coral": "fewer-foods",
+      "status-n-turf-algae": "unchanged",
+      "status-n-parrotfish": "unchanged",
+      "active-e-symbionts-coral": 1,
+      "active-e-phyto-zoo": 0,
+      "active-e-zoo-coral": 0,
+      "active-e-algae-parrotfish": 1,
+      "foods": 1,
+      "food-status": "unchanged"
+    },
+    {
+      "remove": "n-zooplankton",
+      "inspect": "n-zooplankton",
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 2,
+      "status-n-symbionts": "unchanged",
+      "status-n-phytoplankton": "unchanged",
+      "status-n-zooplankton": "removed",
+      "status-n-coral": "fewer-foods",
+      "status-n-turf-algae": "unchanged",
+      "status-n-parrotfish": "unchanged",
+      "active-e-symbionts-coral": 1,
+      "active-e-phyto-zoo": 0,
+      "active-e-zoo-coral": 0,
+      "active-e-algae-parrotfish": 1,
+      "foods": 0,
+      "food-status": "removed"
+    },
+    {
+      "remove": "n-zooplankton",
+      "inspect": "n-coral",
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 2,
+      "status-n-symbionts": "unchanged",
+      "status-n-phytoplankton": "unchanged",
+      "status-n-zooplankton": "removed",
+      "status-n-coral": "fewer-foods",
+      "status-n-turf-algae": "unchanged",
+      "status-n-parrotfish": "unchanged",
+      "active-e-symbionts-coral": 1,
+      "active-e-phyto-zoo": 0,
+      "active-e-zoo-coral": 0,
+      "active-e-algae-parrotfish": 1,
+      "foods": 1,
+      "food-status": "fewer-foods"
+    },
+    {
+      "remove": "n-zooplankton",
+      "inspect": "n-parrotfish",
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 2,
+      "status-n-symbionts": "unchanged",
+      "status-n-phytoplankton": "unchanged",
+      "status-n-zooplankton": "removed",
+      "status-n-coral": "fewer-foods",
+      "status-n-turf-algae": "unchanged",
+      "status-n-parrotfish": "unchanged",
+      "active-e-symbionts-coral": 1,
+      "active-e-phyto-zoo": 0,
+      "active-e-zoo-coral": 0,
+      "active-e-algae-parrotfish": 1,
+      "foods": 1,
+      "food-status": "unchanged"
+    },
+    {
+      "remove": "n-coral",
+      "inspect": "n-zooplankton",
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 2,
+      "status-n-symbionts": "unchanged",
+      "status-n-phytoplankton": "unchanged",
+      "status-n-zooplankton": "unchanged",
+      "status-n-coral": "removed",
+      "status-n-turf-algae": "unchanged",
+      "status-n-parrotfish": "unchanged",
+      "active-e-symbionts-coral": 0,
+      "active-e-phyto-zoo": 1,
+      "active-e-zoo-coral": 0,
+      "active-e-algae-parrotfish": 1,
+      "foods": 1,
+      "food-status": "unchanged"
+    },
+    {
+      "remove": "n-coral",
+      "inspect": "n-coral",
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 2,
+      "status-n-symbionts": "unchanged",
+      "status-n-phytoplankton": "unchanged",
+      "status-n-zooplankton": "unchanged",
+      "status-n-coral": "removed",
+      "status-n-turf-algae": "unchanged",
+      "status-n-parrotfish": "unchanged",
+      "active-e-symbionts-coral": 0,
+      "active-e-phyto-zoo": 1,
+      "active-e-zoo-coral": 0,
+      "active-e-algae-parrotfish": 1,
+      "foods": 0,
+      "food-status": "removed"
+    },
+    {
+      "remove": "n-coral",
+      "inspect": "n-parrotfish",
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 2,
+      "status-n-symbionts": "unchanged",
+      "status-n-phytoplankton": "unchanged",
+      "status-n-zooplankton": "unchanged",
+      "status-n-coral": "removed",
+      "status-n-turf-algae": "unchanged",
+      "status-n-parrotfish": "unchanged",
+      "active-e-symbionts-coral": 0,
+      "active-e-phyto-zoo": 1,
+      "active-e-zoo-coral": 0,
+      "active-e-algae-parrotfish": 1,
+      "foods": 1,
+      "food-status": "unchanged"
+    },
+    {
+      "remove": "n-turf-algae",
+      "inspect": "n-zooplankton",
+      "present-count": 5,
+      "supported-count": 4,
+      "active-links": 3,
+      "status-n-symbionts": "unchanged",
+      "status-n-phytoplankton": "unchanged",
+      "status-n-zooplankton": "unchanged",
+      "status-n-coral": "unchanged",
+      "status-n-turf-algae": "removed",
+      "status-n-parrotfish": "no-shown-food",
+      "active-e-symbionts-coral": 1,
+      "active-e-phyto-zoo": 1,
+      "active-e-zoo-coral": 1,
+      "active-e-algae-parrotfish": 0,
+      "foods": 1,
+      "food-status": "unchanged"
+    },
+    {
+      "remove": "n-turf-algae",
+      "inspect": "n-coral",
+      "present-count": 5,
+      "supported-count": 4,
+      "active-links": 3,
+      "status-n-symbionts": "unchanged",
+      "status-n-phytoplankton": "unchanged",
+      "status-n-zooplankton": "unchanged",
+      "status-n-coral": "unchanged",
+      "status-n-turf-algae": "removed",
+      "status-n-parrotfish": "no-shown-food",
+      "active-e-symbionts-coral": 1,
+      "active-e-phyto-zoo": 1,
+      "active-e-zoo-coral": 1,
+      "active-e-algae-parrotfish": 0,
+      "foods": 2,
+      "food-status": "unchanged"
+    },
+    {
+      "remove": "n-turf-algae",
+      "inspect": "n-parrotfish",
+      "present-count": 5,
+      "supported-count": 4,
+      "active-links": 3,
+      "status-n-symbionts": "unchanged",
+      "status-n-phytoplankton": "unchanged",
+      "status-n-zooplankton": "unchanged",
+      "status-n-coral": "unchanged",
+      "status-n-turf-algae": "removed",
+      "status-n-parrotfish": "no-shown-food",
+      "active-e-symbionts-coral": 1,
+      "active-e-phyto-zoo": 1,
+      "active-e-zoo-coral": 1,
+      "active-e-algae-parrotfish": 0,
+      "foods": 0,
+      "food-status": "no-shown-food"
+    },
+    {
+      "remove": "n-parrotfish",
+      "inspect": "n-zooplankton",
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 3,
+      "status-n-symbionts": "unchanged",
+      "status-n-phytoplankton": "unchanged",
+      "status-n-zooplankton": "unchanged",
+      "status-n-coral": "unchanged",
+      "status-n-turf-algae": "unchanged",
+      "status-n-parrotfish": "removed",
+      "active-e-symbionts-coral": 1,
+      "active-e-phyto-zoo": 1,
+      "active-e-zoo-coral": 1,
+      "active-e-algae-parrotfish": 0,
+      "foods": 1,
+      "food-status": "unchanged"
+    },
+    {
+      "remove": "n-parrotfish",
+      "inspect": "n-coral",
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 3,
+      "status-n-symbionts": "unchanged",
+      "status-n-phytoplankton": "unchanged",
+      "status-n-zooplankton": "unchanged",
+      "status-n-coral": "unchanged",
+      "status-n-turf-algae": "unchanged",
+      "status-n-parrotfish": "removed",
+      "active-e-symbionts-coral": 1,
+      "active-e-phyto-zoo": 1,
+      "active-e-zoo-coral": 1,
+      "active-e-algae-parrotfish": 0,
+      "foods": 2,
+      "food-status": "unchanged"
+    },
+    {
+      "remove": "n-parrotfish",
+      "inspect": "n-parrotfish",
+      "present-count": 5,
+      "supported-count": 5,
+      "active-links": 3,
+      "status-n-symbionts": "unchanged",
+      "status-n-phytoplankton": "unchanged",
+      "status-n-zooplankton": "unchanged",
+      "status-n-coral": "unchanged",
+      "status-n-turf-algae": "unchanged",
+      "status-n-parrotfish": "removed",
+      "active-e-symbionts-coral": 1,
+      "active-e-phyto-zoo": 1,
+      "active-e-zoo-coral": 1,
+      "active-e-algae-parrotfish": 0,
+      "foods": 0,
+      "food-status": "removed"
+    }
+  ],
+  "lightCases": [
+    {
+      "when": {
+        "depth-m": 1,
+        "water-case": "less-turbid"
+      },
+      "set": {
+        "light-index": 90.48374180359595,
+        "haze-shown": 0
+      },
+      "source": [
+        "S50"
+      ]
+    },
+    {
+      "when": {
+        "depth-m": 1,
+        "water-case": "more-turbid"
+      },
+      "set": {
+        "light-index": 60.653065971263345,
+        "haze-shown": 1
+      },
+      "source": [
+        "S50"
+      ]
+    },
+    {
+      "when": {
+        "depth-m": 3,
+        "water-case": "less-turbid"
+      },
+      "set": {
+        "light-index": 74.08182206817179,
+        "haze-shown": 0
+      },
+      "source": [
+        "S50"
+      ]
+    },
+    {
+      "when": {
+        "depth-m": 3,
+        "water-case": "more-turbid"
+      },
+      "set": {
+        "light-index": 22.313016014842983,
+        "haze-shown": 1
+      },
+      "source": [
+        "S50"
+      ]
+    },
+    {
+      "when": {
+        "depth-m": 7,
+        "water-case": "less-turbid"
+      },
+      "set": {
+        "light-index": 49.65853037914095,
+        "haze-shown": 0
+      },
+      "source": [
+        "S50"
+      ]
+    },
+    {
+      "when": {
+        "depth-m": 7,
+        "water-case": "more-turbid"
+      },
+      "set": {
+        "light-index": 3.0197383422318502,
+        "haze-shown": 1
+      },
+      "source": [
+        "S50"
+      ]
+    }
+  ],
+  "bleachingCases": [
+    {
+      "when": {
+        "evidence-state": "partnered"
+      },
+      "set": {
+        "tissue-shown": 1,
+        "partners-shown": 1,
+        "tissue-evidence": "partnered"
+      },
+      "source": [
+        "S50"
+      ]
+    },
+    {
+      "when": {
+        "evidence-state": "bleached-alive"
+      },
+      "set": {
+        "tissue-shown": 1,
+        "partners-shown": 0,
+        "tissue-evidence": "bleached-alive"
+      },
+      "source": [
+        "S50"
+      ]
+    },
+    {
+      "when": {
+        "evidence-state": "dead-skeleton"
+      },
+      "set": {
+        "tissue-shown": 0,
+        "partners-shown": 0,
+        "tissue-evidence": "dead-skeleton"
+      },
+      "source": [
+        "S50"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,192 @@
+---
+id: changing-one-node
+order: 5
+title:
+  en: Changing one food-web node
+  zh: 改变一个食物网节点
+level: P6
+state:
+  camera:
+    position:
+      - 10
+      - 1.8
+      - 3.4
+    target:
+      - 10
+      - 0.3
+      - 0
+    fov: 30
+  layers:
+    - reef-habitat
+    - polyp-closeup
+    - web-specimens
+    - evidence-tools
+    - feeding-flows
+  hide: []
+  labels:
+    - web-symbionts
+  part: null
+  view: assembled
+  explode: 0
+  run: false
+  cutaway: none
+  pose: null
+  ghost: []
+  summary:
+    en: Compare shown food pathways and keep inference within the model.
+    zh: 比较已画食物路径，保留推论边界。
+  sim:
+    set:
+      remove: none
+      inspect: n-coral
+      depth-m: 3
+      water-case: more-turbid
+      evidence-state: partnered
+    try:
+      vary: remove
+      also:
+        - inspect
+      keep:
+        - en: Same selected food pathways
+          zh: 同一组选入食物路径
+      observe:
+        - foods
+        - food-status
+        - active-links
+      record: true
+      predict:
+        prompt:
+          en: After removing algal partners, how does the coral’s shown food-input count change?
+          zh: 移走共生藻后，珊瑚的已画食物输入条数怎样改变？
+        start:
+          remove: none
+          inspect: n-coral
+          depth-m: 3
+          water-case: more-turbid
+          evidence-state: partnered
+        change:
+          remove: n-symbionts
+        observe: foods
+        options:
+          - id: less
+            label:
+              en: Fewer inputs
+              zh: 输入减少
+            means: less
+          - id: same
+            label:
+              en: Same count
+              zh: 条数不变
+            means: same
+          - id: zero
+            label:
+              en: No shown food
+              zh: 图内无食物
+            means: zero
+  beats:
+    - labels:
+        - web-symbionts
+        - web-zooplankton
+        - web-coral
+      sim:
+        set:
+          remove: none
+          inspect: n-coral
+      caption:
+        en: Predict how many shown food inputs remain for the coral animal.
+        zh: 先猜：珊瑚动物还剩多少条本图画出的食物输入？
+    - labels:
+        - web-zooplankton
+        - web-coral
+      sim:
+        set:
+          remove: n-symbionts
+          inspect: n-coral
+      caption:
+        en: In this model, one of the two shown inputs is removed; one remains.
+        zh: 在这个模型里，原来画出的两条输入少了一条，还剩一条。
+    - labels:
+        - web-zooplankton
+      sim:
+        set:
+          remove: n-phytoplankton
+          inspect: n-zooplankton
+      caption:
+        en: This zooplankton group now has no food pathway shown in the diagram.
+        zh: 图中这组浮游动物现在没有已画的食物路径。
+    - labels:
+        - web-symbionts
+        - web-coral
+      sim:
+        set:
+          remove: n-phytoplankton
+          inspect: n-coral
+      caption:
+        en: The coral retains the partner pathway. The count does not measure enough food for survival.
+        zh: 珊瑚仍有伙伴这条路径；条数不能说明食物是否足以维持生存。
+    - labels:
+        - web-parrotfish
+      sim:
+        set:
+          remove: n-turf-algae
+          inspect: n-parrotfish
+      caption:
+        en: Record what changed in this diagram. Unshown foods and population changes remain unknown.
+        zh: 记录本图改变了什么；未画食物和种群变化仍不由这个模型确定。
+  index:
+    parts:
+      - web-symbionts
+      - web-phytoplankton
+      - web-zooplankton
+      - web-coral
+      - web-turf-algae
+      - web-parrotfish
+---
+
+<Lang en>
+
+Begin with the coral as the inspected consumer and no node removed. In this model it has <Num s="S50">2</Num> shown food inputs: partner products and zooplankton. Predict what happens to that count when the partner node is removed. Apply the change and compare. The count becomes <Num s="S50">1</Num>, because the zooplankton pathway remains in the diagram.
+
+That result is a count of different shown inputs, not a measurement of food energy. The remaining pathway does not prove that the coral receives enough food to survive. Likewise, removing the partner node from this graph does not simulate the temperature or tissue processes of bleaching. A graph intervention has a narrower meaning than an environmental event.
+
+Reset, then remove phytoplankton and inspect zooplankton. Its selected producer pathway is unavailable, so the card reports no shown food. Inspect the coral without changing that removal. The partner route still reaches it. Explaining this indirect effect means tracing the steps through phytoplankton and zooplankton, rather than assuming all consumers change in the same way.
+
+Finally, compare the parrotfish before and after removing reef-surface algae, and record the result. The animal symbol can remain even when its selected food path is unavailable. Other foods, movement and time are outside this model. A careful conclusion names what changed inside the diagram and what field evidence would still be needed to explain a real population.
+
+<More title={{"en": "A path is not a population", "zh": "路径不是种群数量"}}>
+
+The graph starts from producers that remain and follows the selected directed paths. An active input needs both endpoints present and a supported food source. Counts describe this rule, not abundance, mass, energy or time to starvation. [S50]
+
+</More>
+
+<More title={{"en": "Comparing removal explanations", "zh": "比较移走节点的解释"}}>
+
+Compare the reasoning in <TopicLink slug="mangrove-food-web" ch="removing-a-species">removing a mangrove food-web node</TopicLink>. The card rules are shared; this graph has its own chosen organisms and pathways.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+开始时查看珊瑚，保持没有移走节点。在这个模型里，珊瑚有 <Num s="S50">2</Num> 条已画食物输入：伙伴产物与浮游动物。先预测移走伙伴节点的结果，再应用改变。计数变为 <Num s="S50">1</Num>，因为浮游动物这条路径仍留在图中。
+
+这个数比较的是图内输入种类，不测量食物能量。仍有一条路径，不足以证明珊瑚获得维持生存所需的食物。移走伙伴节点也没有模拟白化的温度或组织过程；图上的操作含义比真实环境事件窄得多。
+
+重置后移走浮游植物，再查看浮游动物。它选入的生产者路径不可用，卡片会显示“图内无食物”。不改变移走状态，改看珊瑚，伙伴路线却仍可通向它。解释间接影响，要追踪浮游植物经过浮游动物的步骤，不能假定所有消费者都同样改变。
+
+最后比较移走礁面藻前后的鹦嘴鱼，并保存记录。即使图内食物路径不可用，动物造型也可保留。其他食物、迁移和时间没有列入模型。结论应先说明图内改变了什么，再指出若要解释真实种群，还需哪些实地证据，不能把缺少的资料当成确定的死亡预测。
+
+<More title={{"en": "A path is not a population", "zh": "路径不是种群数量"}}>
+
+图从未移走的生产者出发，沿选入的有向路径追踪。有效输入要求两端仍在，而且食物来源有路径支持。计数描述这条规则，不是生物数量、质量、能量或多久会饥饿。[S50]
+
+</More>
+
+<More title={{"en": "Comparing removal explanations", "zh": "比较移走节点的解释"}}>
+
+可比较<TopicLink slug="mangrove-food-web" ch="removing-a-species">移走红树林食物网节点</TopicLink>的解释方式。卡片规则相同，本图的生物与路径则按珊瑚礁内容另行选取。
+
+</More>
+
+</Lang>
