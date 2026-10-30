@@ -527,3 +527,10 @@ CI=1 ATLAS_E2E_PORT=5454 pnpm e2e
 仍待 paper/cinema 全章全拍、1920／1600／1024／768／390 宽布局、标签、剖切／透视／流／爆炸／参考模式组合、手机触控、键盘、URL、离线、语音、运行时外部请求与 GPU calls 性能验收。CPU piece 数不等于 draw calls；本轮不宣称达成 FPS 或首屏 JS 预算。静止 <50、运转 <60 calls、FLOW 增幅 <10、0.3 M tris 与首屏 300 KB gz 仍作为目标交主会话实测。
 
 给 Gavin 的八项后审：P6 Standard 应用定位与章序；18 主线中文词／地点词；不同放大比例与 12 触手示例；六节点四边的伙伴转移与推论边界；光指数与深度口径；三独立白化证据状态；地方保护的目标／行动／结果区别；真实浏览器视觉和性能。每项的默认处置、对应段落与偏差详列 `src/content/topics/coral-reef/REVIEW.md`。
+
+### 9.5 浏览器验收（Claude，2026-10-30）
+
+- `pnpm shoot coral-reef --beats --tasks --keys --layout --locale en,zh --theme paper,cinema`：四组合均 0 key failures、0 layout issues、0 beat failures、console clean；39 拍链接全部落在演示场景，章高亮全在屏内；八个尺寸（3840 至 390×844）全部 OK。人工看图：全部八章（paper／EN 1920×1080）、cinema 四张、ZH 三拍与手机 390×844 两张；标注、字幕、食物网卡、阅读面板无重叠或溢出，模型形态与各拍字幕相符。首屏 JS 537.1 KB gz（11 个文件）。
+- `--perf --gpu`（Apple M5 Max，机器重载下）：各章／各模式／各预设 calls 9–16（目标 <50），三角形每视图 15,232–107,952（<0.3 M；总 299,124 因局部取景不同时绘制），FLOW 增幅 +4 calls；FPS 25–60，低值出现在负载 >50 时的 760×511 缓冲，不作为预算依据。
+- e2e（`tests-e2e/coral-reef.spec.ts` + `smoke.spec.ts`，workers=2）：29 项全过，无重跑。
+- 剩余：1024×768 下 PLATE 食物网卡居中、模型缩得很小（卡片＋左列＋阅读面板同时展开的引擎默认布局，未超出检查规则）；1920 以上、手机均正常。真实触屏、语音与离线之外的主观视觉仍待 Gavin 后审。
