@@ -1,0 +1,646 @@
+---
+{
+  "id": "through-the-air",
+  "order": 4,
+  "title": {
+    "en": "Through the air",
+    "zh": "穿过大气"
+  },
+  "state": {
+    "run": false,
+    "part": null,
+    "camera": {
+      "position": [
+        4,
+        3,
+        12
+      ],
+      "target": [
+        0,
+        0.3,
+        0
+      ],
+      "fov": 36
+    },
+    "layers": [
+      "light-and-air"
+    ],
+    "hide": [
+      "sun",
+      "mercury",
+      "venus",
+      "earth",
+      "mars",
+      "jupiter",
+      "saturn",
+      "uranus",
+      "neptune",
+      "saturn-rings",
+      "orbit-tracks",
+      "scale-ruler",
+      "moon-parent",
+      "moon-demo",
+      "asteroid-specimen",
+      "asteroid-belt",
+      "comet-sun",
+      "comet-nucleus",
+      "comet-coma",
+      "ion-tail",
+      "dust-tail",
+      "meteor-world",
+      "atmosphere-shell",
+      "meteor-trail",
+      "pluto",
+      "sun-cut-shell",
+      "sun-core",
+      "reflecting-world",
+      "reflection-rays",
+      "observer",
+      "horizon",
+      "sky-stars",
+      "orion-pattern",
+      "crux-pattern",
+      "scorpius-pattern",
+      "depth-stars",
+      "earth-viewpoint",
+      "light-ruler",
+      "proxima-marker",
+      "galaxy-disc",
+      "galaxy-bar",
+      "sun-location"
+    ],
+    "labels": [
+      "star-source",
+      "straight-rays"
+    ],
+    "view": "assembled",
+    "explode": 0,
+    "cutaway": "none",
+    "summary": {
+      "en": "With the atmosphere removed, this model’s source stays steady.",
+      "zh": "拿掉大气后，模型中的光源保持稳定。"
+    },
+    "index": {
+      "parts": [
+        "star-source",
+        "observer-eye",
+        "straight-rays",
+        "air-column",
+        "light-rays",
+        "disc-source",
+        "disc-rays"
+      ]
+    },
+    "sim": {
+      "set": {
+        "lab": "twinkle",
+        "elapsed-years": 0,
+        "planet": "earth",
+        "scale-mode": "overview",
+        "sky-date": "2026-01-15",
+        "sky-hour": 20,
+        "observer": "singapore",
+        "sky-target": "orion",
+        "pattern-links": true,
+        "depth": false,
+        "atmosphere": false,
+        "source-kind": "point",
+        "altitude-mode": "high",
+        "twinkle-seconds": 0,
+        "comet-step": 0,
+        "distance-target": "sun-earth"
+      },
+      "try": {
+        "vary": "twinkle-seconds",
+        "also": [
+          "atmosphere",
+          "source-kind",
+          "altitude-mode"
+        ],
+        "keep": [
+          {
+            "en": "Compare teaching snapshots; no live sky forecast.",
+            "zh": "比较教学快照，不作实时天空预报。"
+          }
+        ],
+        "observe": [
+          "scale-state",
+          "twinkle-flux",
+          "twinkle-state"
+        ]
+      }
+    },
+    "beats": [
+      {
+        "caption": {
+          "en": "With the atmosphere removed, this model’s source stays steady.",
+          "zh": "拿掉大气后，模型中的光源保持稳定。"
+        },
+        "run": false,
+        "part": null,
+        "camera": {
+          "position": [
+            4,
+            3,
+            12
+          ],
+          "target": [
+            0,
+            0.3,
+            0
+          ],
+          "fov": 36
+        },
+        "layers": [
+          "light-and-air"
+        ],
+        "hide": [
+          "sun",
+          "mercury",
+          "venus",
+          "earth",
+          "mars",
+          "jupiter",
+          "saturn",
+          "uranus",
+          "neptune",
+          "saturn-rings",
+          "orbit-tracks",
+          "scale-ruler",
+          "moon-parent",
+          "moon-demo",
+          "asteroid-specimen",
+          "asteroid-belt",
+          "comet-sun",
+          "comet-nucleus",
+          "comet-coma",
+          "ion-tail",
+          "dust-tail",
+          "meteor-world",
+          "atmosphere-shell",
+          "meteor-trail",
+          "pluto",
+          "sun-cut-shell",
+          "sun-core",
+          "reflecting-world",
+          "reflection-rays",
+          "observer",
+          "horizon",
+          "sky-stars",
+          "orion-pattern",
+          "crux-pattern",
+          "scorpius-pattern",
+          "depth-stars",
+          "earth-viewpoint",
+          "light-ruler",
+          "proxima-marker",
+          "galaxy-disc",
+          "galaxy-bar",
+          "sun-location"
+        ],
+        "labels": [
+          "star-source",
+          "straight-rays"
+        ],
+        "sim": {
+          "set": {
+            "lab": "twinkle",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": false,
+            "source-kind": "point",
+            "altitude-mode": "high",
+            "twinkle-seconds": 0,
+            "comet-step": 0,
+            "distance-target": "sun-earth"
+          }
+        }
+      },
+      {
+        "caption": {
+          "en": "The bent path marks refraction through changing air. A sampled time step changes this model’s received brightness.",
+          "zh": "弯曲光路表示光经过变化空气时的折射；时间步改变模型中的接收亮度。"
+        },
+        "run": false,
+        "part": null,
+        "camera": {
+          "position": [
+            4,
+            3,
+            12
+          ],
+          "target": [
+            0,
+            0.3,
+            0
+          ],
+          "fov": 36
+        },
+        "layers": [
+          "light-and-air"
+        ],
+        "hide": [
+          "sun",
+          "mercury",
+          "venus",
+          "earth",
+          "mars",
+          "jupiter",
+          "saturn",
+          "uranus",
+          "neptune",
+          "saturn-rings",
+          "orbit-tracks",
+          "scale-ruler",
+          "moon-parent",
+          "moon-demo",
+          "asteroid-specimen",
+          "asteroid-belt",
+          "comet-sun",
+          "comet-nucleus",
+          "comet-coma",
+          "ion-tail",
+          "dust-tail",
+          "meteor-world",
+          "atmosphere-shell",
+          "meteor-trail",
+          "pluto",
+          "sun-cut-shell",
+          "sun-core",
+          "reflecting-world",
+          "reflection-rays",
+          "observer",
+          "horizon",
+          "sky-stars",
+          "orion-pattern",
+          "crux-pattern",
+          "scorpius-pattern",
+          "depth-stars",
+          "earth-viewpoint",
+          "light-ruler",
+          "proxima-marker",
+          "galaxy-disc",
+          "galaxy-bar",
+          "sun-location"
+        ],
+        "labels": [
+          "air-column",
+          "light-rays",
+          "star-source"
+        ],
+        "sim": {
+          "set": {
+            "lab": "twinkle",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "point",
+            "altitude-mode": "high",
+            "twinkle-seconds": 1,
+            "comet-step": 0,
+            "distance-target": "sun-earth"
+          }
+        }
+      },
+      {
+        "caption": {
+          "en": "The apparent disc averages several paths, reducing the simulated fluctuation. The drawn path is a qualitative guide.",
+          "zh": "视圆盘对多条路径作平均，减弱模拟起伏；图中光路只是定性辅助线。"
+        },
+        "run": false,
+        "part": null,
+        "camera": {
+          "position": [
+            4,
+            3,
+            12
+          ],
+          "target": [
+            0,
+            0.3,
+            0
+          ],
+          "fov": 36
+        },
+        "layers": [
+          "light-and-air"
+        ],
+        "hide": [
+          "sun",
+          "mercury",
+          "venus",
+          "earth",
+          "mars",
+          "jupiter",
+          "saturn",
+          "uranus",
+          "neptune",
+          "saturn-rings",
+          "orbit-tracks",
+          "scale-ruler",
+          "moon-parent",
+          "moon-demo",
+          "asteroid-specimen",
+          "asteroid-belt",
+          "comet-sun",
+          "comet-nucleus",
+          "comet-coma",
+          "ion-tail",
+          "dust-tail",
+          "meteor-world",
+          "atmosphere-shell",
+          "meteor-trail",
+          "pluto",
+          "sun-cut-shell",
+          "sun-core",
+          "reflecting-world",
+          "reflection-rays",
+          "observer",
+          "horizon",
+          "sky-stars",
+          "orion-pattern",
+          "crux-pattern",
+          "scorpius-pattern",
+          "depth-stars",
+          "earth-viewpoint",
+          "light-ruler",
+          "proxima-marker",
+          "galaxy-disc",
+          "galaxy-bar",
+          "sun-location"
+        ],
+        "labels": [
+          "disc-source",
+          "air-column"
+        ],
+        "sim": {
+          "set": {
+            "lab": "twinkle",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "disc",
+            "altitude-mode": "high",
+            "twinkle-seconds": 1,
+            "comet-step": 0,
+            "distance-target": "sun-earth"
+          }
+        }
+      },
+      {
+        "caption": {
+          "en": "The low-altitude setting increases the illustrative fluctuation: near-horizon light crosses more atmosphere.",
+          "zh": "低高度设置让示意起伏增大：靠近地平线的光会穿过更多大气。"
+        },
+        "run": false,
+        "part": null,
+        "camera": {
+          "position": [
+            4,
+            3,
+            12
+          ],
+          "target": [
+            0,
+            0.3,
+            0
+          ],
+          "fov": 36
+        },
+        "layers": [
+          "light-and-air"
+        ],
+        "hide": [
+          "sun",
+          "mercury",
+          "venus",
+          "earth",
+          "mars",
+          "jupiter",
+          "saturn",
+          "uranus",
+          "neptune",
+          "saturn-rings",
+          "orbit-tracks",
+          "scale-ruler",
+          "moon-parent",
+          "moon-demo",
+          "asteroid-specimen",
+          "asteroid-belt",
+          "comet-sun",
+          "comet-nucleus",
+          "comet-coma",
+          "ion-tail",
+          "dust-tail",
+          "meteor-world",
+          "atmosphere-shell",
+          "meteor-trail",
+          "pluto",
+          "sun-cut-shell",
+          "sun-core",
+          "reflecting-world",
+          "reflection-rays",
+          "observer",
+          "horizon",
+          "sky-stars",
+          "orion-pattern",
+          "crux-pattern",
+          "scorpius-pattern",
+          "depth-stars",
+          "earth-viewpoint",
+          "light-ruler",
+          "proxima-marker",
+          "galaxy-disc",
+          "galaxy-bar",
+          "sun-location"
+        ],
+        "labels": [
+          "star-source",
+          "air-column"
+        ],
+        "sim": {
+          "set": {
+            "lab": "twinkle",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "point",
+            "altitude-mode": "low",
+            "twinkle-seconds": 1,
+            "comet-step": 0,
+            "distance-target": "sun-earth"
+          }
+        }
+      },
+      {
+        "caption": {
+          "en": "This is a qualitative comparison. A planet can still twinkle.",
+          "zh": "这是定性的比较；行星也可能闪烁。"
+        },
+        "run": false,
+        "part": null,
+        "camera": {
+          "position": [
+            4,
+            3,
+            12
+          ],
+          "target": [
+            0,
+            0.3,
+            0
+          ],
+          "fov": 36
+        },
+        "layers": [
+          "light-and-air"
+        ],
+        "hide": [
+          "sun",
+          "mercury",
+          "venus",
+          "earth",
+          "mars",
+          "jupiter",
+          "saturn",
+          "uranus",
+          "neptune",
+          "saturn-rings",
+          "orbit-tracks",
+          "scale-ruler",
+          "moon-parent",
+          "moon-demo",
+          "asteroid-specimen",
+          "asteroid-belt",
+          "comet-sun",
+          "comet-nucleus",
+          "comet-coma",
+          "ion-tail",
+          "dust-tail",
+          "meteor-world",
+          "atmosphere-shell",
+          "meteor-trail",
+          "pluto",
+          "sun-cut-shell",
+          "sun-core",
+          "reflecting-world",
+          "reflection-rays",
+          "observer",
+          "horizon",
+          "sky-stars",
+          "orion-pattern",
+          "crux-pattern",
+          "scorpius-pattern",
+          "depth-stars",
+          "earth-viewpoint",
+          "light-ruler",
+          "proxima-marker",
+          "galaxy-disc",
+          "galaxy-bar",
+          "sun-location"
+        ],
+        "labels": [
+          "disc-source",
+          "disc-rays"
+        ],
+        "sim": {
+          "set": {
+            "lab": "twinkle",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "disc",
+            "altitude-mode": "high",
+            "twinkle-seconds": 2,
+            "comet-step": 0,
+            "distance-target": "sun-earth"
+          }
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+The light-path station starts with a steady source and no atmosphere. Its received signal stays steady in this model. Add the air layer and compare another time step. The incoming light changes direction slightly, and the amount reaching the marked receiver changes. This is a model of atmospheric twinkling: the rapid changes usually seen in starlight from the ground arise along the journey through air. <Num s="S12,S37" />
+
+Air is not optically identical everywhere. As changing patches of air move across the light path, they bend the light by changing amounts. This bending is <Term id="refraction">refraction</Term>. A distant star appears almost like a point, so its narrow bundle of light is strongly affected by the changing paths. The star need not be switching its own light on and off for the observer to see twinkling. <Num s="S12" />
+
+Replace the point source with the planet's apparent disc. Different parts of that tiny disc send light along slightly different atmospheric paths. Some fluctuations partly cancel when the received light is combined, so planets usually twinkle less than stars. The model opens those paths out far enough to inspect them. Their visible separation is a teaching choice, rather than the apparent width of a planet in the real sky. <Num s="S13,S37" />
+
+Move the path towards the <Term id="horizon">horizon</Term>, the local boundary between the sky above and the directions below. Light arriving from low in the sky crosses more atmosphere, and stars there often twinkle more strongly. The comparison shows a tendency, not a reliable identification test. A planet can twinkle too. Compare the air setting, source type and time step while keeping the other settings fixed. <Num s="S12,S13" />
+
+<More title={{ en: "Straight paths and bending paths", zh: "直线光路与偏折光路" }}>
+
+The straight-line model in <TopicLink slug="light-and-shadows" ch="straight-lines">Light and shadows</TopicLink> applies when the optical conditions are uniform. Air with changing optical properties requires a more detailed description. The main mechanism here is refraction, rather than treating scattering as the cause of the usual rapid twinkle.
+
+</More>
+
+<More title={{ en: "Relative flux in this model", zh: "模型中的相对光通量" }}>
+
+The receiver uses arbitrary relative units. With air removed its value is <Num s="S37">1</Num>. At a selected high-path time step, the point example gives <Num s="S37">1.10</Num> while the disc average gives <Num s="S37">1.01</Num>. These calculated examples illustrate partial averaging; they are not brightness measurements, weather predictions or a claim that real stars never vary intrinsically. <Num s="S37" />
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+光路工位先拿掉大气，模型中稳定光源送到接收点的信号保持不变。加入空气层，再选另一个时间步，光路略有偏折，到达接收点的光量也改变了。这里解释的是从地面常见的快速闪烁：变化主要出现在星光穿过空气的途中，不必是恒星自身忽明忽暗。 <Num s="S12,S37" />
+
+不同位置的空气，光学条件并不完全相同。变化的空气经过光路时，光的偏折也随之改变，这种方向改变叫<Term id="refraction">折射</Term>。遥远恒星看起来近似一个点，来自它的窄光束容易受到这些变化影响。模型把偏折画得清楚，是为了解释关系，不是还原肉眼所见的光线形状。 <Num s="S12" />
+
+把点光源换成行星的视圆面，不同位置的光会经过略有差别的空气路径。接收时把这些光合起来，部分起伏互相抵消，因此行星通常比恒星闪得少。图上把路径分开，让人看清这种平均作用；不能把线间距离当成真实天空中行星的视宽度。 <Num s="S13,S37" />
+
+再把光路移近<Term id="horizon">地平线</Term>，也就是本地天空上方与下方方向的分界。低处星光要穿过更多大气，往往闪得更明显。这只是一般趋势，不能凭闪不闪就可靠地区分恒星与行星；行星也可能闪烁。比较时逐项改变空气、光源或时间步，其余设定保持相同。 <Num s="S12,S13" />
+
+<More title={{ en: "Straight paths and bending paths", zh: "直线光路与偏折光路" }}>
+
+<TopicLink slug="light-and-shadows" ch="straight-lines">《光与影》的直线传播模型</TopicLink>适用于光学条件均匀的情况。空气光学性质改变时，需要进一步描述光路。这里通常快速闪烁的主要机制是折射，不能简单换成光的散射。
+
+</More>
+
+<More title={{ en: "Relative flux in this model", zh: "模型中的相对光通量" }}>
+
+接收值用任意相对单位表示。拿掉空气时，值为 <Num s="S37">1</Num>。选定的较高光路时间步中，点光源例子为 <Num s="S37">1.10</Num>，圆面平均值为 <Num s="S37">1.01</Num>。这些模拟数字只说明起伏可部分平均，不是亮度实测、天气预报，也不表示所有真实恒星自身永不变光。 <Num s="S37" />
+
+</More>
+
+</Lang>

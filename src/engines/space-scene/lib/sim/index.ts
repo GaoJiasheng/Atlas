@@ -1,4 +1,5 @@
 import { solveMicroscope } from './microscope';
+import { solveSolarSystem } from './solar-system';
 import { solvePort } from './port';
 /**
  * The try-it model registry (docs/22 §4.3 S2; pure, synchronous, well under
@@ -53,6 +54,7 @@ export function compassPoint(sim: SimData, values: SimValues): Vec3 | null {
 
 /** Every model quantity for these control values; `observe`: the outputs the chapter's try-it card observes. */
 export function simQuantities(sim: SimData, values: SimValues, observe: readonly string[] = [], frames?: MagnetFrames, parts: readonly MatterPart[] = [], context?: { timeSeconds: number }): Record<string, SimOutputValue> {
+  if (sim.kind === 'solar-system' && sim.solarSystem) return solveSolarSystem(sim.solarSystem,values);
   if (sim.kind === 'orbit-rotation' && sim.orbitRotation) return solveOrbitRotation(sim.orbitRotation, values, context);
   if (sim.kind === 'microscope' && sim.microscope) return solveMicroscope(sim.microscope, values);
   if (sim.kind === 'senses' && sim.senses) return solveSenses(sim.senses, values);
@@ -97,7 +99,7 @@ export function evaluateSim(sim: SimData, values: SimValues, observe: readonly s
  * magnets or one animal's life cycle is one system: its first state (the
  * stage on the day on show) always describes the bench.
  */
-export const SEPARATE_EXPERIMENTS: Readonly<Record<SimKind, boolean>> = { circuit: false, magnet: false, force: true, energy: true, 'life-cycle': false, matter: true, light: true, sort: true, materials: true, table: true, seeds: true, heat: true, 'orbit-rotation': true, airfoil: true, port: true, senses: true, microscope: true };
+export const SEPARATE_EXPERIMENTS: Readonly<Record<SimKind, boolean>> = { circuit: false, magnet: false, force: true, energy: true, 'life-cycle': false, matter: true, light: true, sort: true, materials: true, table: true, seeds: true, heat: true, 'orbit-rotation': true, airfoil: true, port: true, senses: true, microscope: true, 'solar-system': true };
 
 /** A number output's value (0 for states and vectors; NaN = not applicable here). */
 export const numberOf = (v: SimOutputValue | undefined): number => (typeof v === 'number' ? v : 0);

@@ -75,6 +75,12 @@ export default defineConfig({
         cleanupOutdatedCaches: true,
         runtimeCaching: [
           {
+            // Independently licensed same-origin stellar catalogues stay available after a visit.
+            urlPattern: /\/catalogues\/solar-system\/[a-z0-9-]+\.json$/,
+            handler: 'CacheFirst',
+            options: { cacheName: 'atlas-catalogues', expiration: { maxEntries: 8, maxAgeSeconds: 60 * 60 * 24 * 30 }, cacheableResponse: { statuses: [200] } },
+          },
+          {
             // A deep-time topic has ten lazy frames plus independent modern evidence files.
             // Keep its visited local assets together, apart from the eight-entry historical map cache.
             urlPattern: /\/geo\/(?:de-|sample-de-)[^/]+\.json$/,

@@ -1,0 +1,221 @@
+---
+{
+  "id": "twinkle-samples",
+  "order": 5,
+  "title": {
+    "en": "Twinkle samples",
+    "zh": "闪烁取样"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "cutaway": "none",
+    "ghost": [],
+    "layers": [
+      "light-and-air"
+    ],
+    "labels": [],
+    "camera": {
+      "position": [
+        0,
+        2,
+        9
+      ],
+      "target": [
+        0,
+        0.5,
+        0
+      ],
+      "fov": 38
+    },
+    "summary": {
+      "en": "Draft engine fixture: compare explicit model inputs and outputs.",
+      "zh": "引擎草稿测试：对照显式模型输入与输出。"
+    },
+    "index": {
+      "parts": [
+        "star-source",
+        "air-layer"
+      ]
+    },
+    "sim": {
+      "set": {
+        "lab": "twinkle",
+        "elapsed-years": 0,
+        "planet": "earth",
+        "scale-mode": "overview",
+        "sky-date": "2026-01-15",
+        "sky-hour": 20,
+        "observer": "singapore",
+        "sky-target": "orion",
+        "pattern-links": true,
+        "depth": false,
+        "atmosphere": true,
+        "source-kind": "point",
+        "altitude-mode": "high",
+        "twinkle-seconds": 0,
+        "comet-step": 0,
+        "distance-target": "sun-earth"
+      },
+      "try": {
+        "vary": "twinkle-seconds",
+        "observe": [
+          "twinkle-flux",
+          "twinkle-state"
+        ]
+      }
+    },
+    "beats": [
+      {
+        "run": false,
+        "sim": {
+          "set": {
+            "lab": "twinkle",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "point",
+            "altitude-mode": "high",
+            "twinkle-seconds": 0,
+            "comet-step": 0,
+            "distance-target": "sun-earth"
+          }
+        },
+        "caption": {
+          "en": "SIM · The source stays steady; this is a qualitative light-path model.",
+          "zh": "模拟 · 光源恒定，这是定性光路模型。"
+        }
+      },
+      {
+        "run": false,
+        "sim": {
+          "set": {
+            "lab": "twinkle",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "point",
+            "altitude-mode": "high",
+            "twinkle-seconds": 1,
+            "comet-step": 0,
+            "distance-target": "sun-earth"
+          }
+        },
+        "caption": {
+          "en": "SIM · A point source fluctuates through air.",
+          "zh": "模拟 · 点光源穿过空气时起伏。"
+        }
+      },
+      {
+        "run": false,
+        "sim": {
+          "set": {
+            "lab": "twinkle",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "disc",
+            "altitude-mode": "high",
+            "twinkle-seconds": 1,
+            "comet-step": 0,
+            "distance-target": "sun-earth"
+          }
+        },
+        "caption": {
+          "en": "SIM · Several paths partly average the fluctuation.",
+          "zh": "模拟 · 多条光路使起伏部分平均。"
+        }
+      },
+      {
+        "run": false,
+        "sim": {
+          "set": {
+            "lab": "twinkle",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "disc",
+            "altitude-mode": "low",
+            "twinkle-seconds": 1,
+            "comet-step": 0,
+            "distance-target": "sun-earth"
+          }
+        },
+        "caption": {
+          "en": "SIM · The low-altitude example has a larger designed amplitude.",
+          "zh": "模拟 · 近地平示例采用更大的设计振幅。"
+        }
+      },
+      {
+        "run": false,
+        "sim": {
+          "set": {
+            "lab": "twinkle",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": false,
+            "source-kind": "point",
+            "altitude-mode": "high",
+            "twinkle-seconds": 1,
+            "comet-step": 0,
+            "distance-target": "sun-earth"
+          }
+        },
+        "caption": {
+          "en": "SIM · Without air, this model is steady.",
+          "zh": "模拟 · 无空气时本模型恒定。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Draft software fixture. Compare the calculated SIM readings with the rendered geometry. The model uses teaching alignment, schematic overview sizes and fixed J2000 star directions; it is not a sky forecast.
+
+</Lang>
+
+<Lang zh>
+
+软件草稿测试。对照计算的模拟读数与舞台几何。模型采用教学排列、示意总览大小和固定J2000恒星方向；不预测真实天空。
+
+</Lang>

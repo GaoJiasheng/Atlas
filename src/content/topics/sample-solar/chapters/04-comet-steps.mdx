@@ -1,0 +1,195 @@
+---
+{
+  "id": "comet-steps",
+  "order": 4,
+  "title": {
+    "en": "Comet steps",
+    "zh": "彗星步进"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "cutaway": "none",
+    "ghost": [],
+    "layers": [
+      "small-bodies"
+    ],
+    "labels": [],
+    "camera": {
+      "position": [
+        0,
+        8,
+        20
+      ],
+      "target": [
+        -1,
+        0,
+        0
+      ],
+      "fov": 38
+    },
+    "summary": {
+      "en": "Draft engine fixture: compare explicit model inputs and outputs.",
+      "zh": "引擎草稿测试：对照显式模型输入与输出。"
+    },
+    "index": {
+      "parts": [
+        "comet-nucleus",
+        "comet-coma",
+        "ion-tail",
+        "dust-tail"
+      ]
+    },
+    "sim": {
+      "set": {
+        "lab": "small-bodies",
+        "elapsed-years": 0,
+        "planet": "earth",
+        "scale-mode": "overview",
+        "sky-date": "2026-01-15",
+        "sky-hour": 20,
+        "observer": "singapore",
+        "sky-target": "orion",
+        "pattern-links": true,
+        "depth": false,
+        "atmosphere": true,
+        "source-kind": "point",
+        "altitude-mode": "high",
+        "twinkle-seconds": 0,
+        "comet-step": 0,
+        "distance-target": "sun-earth"
+      },
+      "try": {
+        "vary": "comet-step",
+        "observe": [
+          "comet-angle"
+        ]
+      }
+    },
+    "beats": [
+      {
+        "run": false,
+        "sim": {
+          "set": {
+            "lab": "small-bodies",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "point",
+            "altitude-mode": "high",
+            "twinkle-seconds": 0,
+            "comet-step": 0,
+            "distance-target": "sun-earth"
+          }
+        },
+        "caption": {
+          "en": "SIM · The ion tail points away from the Sun; local geometry is schematic.",
+          "zh": "模拟 · 离子尾朝向反太阳方向，局部几何为示意。"
+        }
+      },
+      {
+        "run": false,
+        "sim": {
+          "set": {
+            "lab": "small-bodies",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "point",
+            "altitude-mode": "high",
+            "twinkle-seconds": 0,
+            "comet-step": 90,
+            "distance-target": "sun-earth"
+          }
+        },
+        "caption": {
+          "en": "SIM · The ion tail points away from the Sun; local geometry is schematic.",
+          "zh": "模拟 · 离子尾朝向反太阳方向，局部几何为示意。"
+        }
+      },
+      {
+        "run": false,
+        "sim": {
+          "set": {
+            "lab": "small-bodies",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "point",
+            "altitude-mode": "high",
+            "twinkle-seconds": 0,
+            "comet-step": 180,
+            "distance-target": "sun-earth"
+          }
+        },
+        "caption": {
+          "en": "SIM · The ion tail points away from the Sun; local geometry is schematic.",
+          "zh": "模拟 · 离子尾朝向反太阳方向，局部几何为示意。"
+        }
+      },
+      {
+        "run": false,
+        "sim": {
+          "set": {
+            "lab": "small-bodies",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "point",
+            "altitude-mode": "high",
+            "twinkle-seconds": 0,
+            "comet-step": 270,
+            "distance-target": "sun-earth"
+          }
+        },
+        "caption": {
+          "en": "SIM · The ion tail points away from the Sun; local geometry is schematic.",
+          "zh": "模拟 · 离子尾朝向反太阳方向，局部几何为示意。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Draft software fixture. Compare the calculated SIM readings with the rendered geometry. The model uses teaching alignment, schematic overview sizes and fixed J2000 star directions; it is not a sky forecast.
+
+</Lang>
+
+<Lang zh>
+
+软件草稿测试。对照计算的模拟读数与舞台几何。模型采用教学排列、示意总览大小和固定J2000恒星方向；不预测真实天空。
+
+</Lang>

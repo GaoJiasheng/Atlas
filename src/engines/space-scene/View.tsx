@@ -155,6 +155,8 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
   const file = (data as SpaceSceneData).parts;
   const store = useSceneStore<SpaceSceneExt>();
   // Orbit sims (docs/44 E-SEM1): one clock + physical snapshot per scene, shared by the stage, the HUD and the test API.
+  const solarSnapshots = file.sim?.kind === 'solar-system';
+  useEffect(()=>{if(!solarSnapshots)return;const stop=()=>{if(store.getState().run)store.getState().patch({run:false});};stop();return store.subscribe(stop);},[solarSnapshots,store]);
   const orbitSession = useMemo(() => (file.sim?.orbitRotation ? getOrbitSession(store, file.sim) : null), [store, file.sim]);
   useEffect(() => {
     if (orbitSession) store.getState().patch({ run: false });
@@ -507,7 +509,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       },
       { id: 'cutaway', key: 'c', label: t('space.mode.cutaway'), disabled: !!orbitSession || !!microscopeOn, on: s.cutaway !== 'none', tone: 'cut', status: cutStatus },
       // Flow paths do not follow the parts apart (docs/12 §7.5): no FLOW while exploded.
-      { id: 'flow', key: 'f', label: t('space.mode.flow'), on: s.run, tone: 'hot', disabled: inReference || exploded || (!!orbitSession && orbitIsStill(orbitSession)) },
+      { id: 'flow', key: 'f', label: t('space.mode.flow'), on: s.run, tone: 'hot', disabled: solarSnapshots || inReference || exploded || (!!orbitSession && orbitIsStill(orbitSession)) },
       { id: 'reference', key: 'r', label: t('space.mode.reference'), on: inReference, tone: 'ink', disabled: presenting, phone: false },
       { id: 'presentation', key: 'p', label: t('present.mode'), on: presenting, tone: 'signal', status: presentationStatus, phone: false },
     ];
@@ -565,7 +567,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       pause: {
         paused: !s.run,
         set: (paused) => {
-          if (!ui.getState().reference && !(orbitSession && orbitIsStill(orbitSession))) set({ run: !paused });
+          if (!solarSnapshots && !ui.getState().reference && !(orbitSession && orbitIsStill(orbitSession))) set({ run: !paused });
         },
       },
       stats: () => {
@@ -661,6 +663,8 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
           };
         },
         microscopeField: () => file.sim?.microscope ? microscopeFieldReading(file.sim.microscope, resolveSimValues(file.sim, store.getState().sim)) : null,
+        solarSystem: () => file.sim?.solarSystem ? {sky:bridge.solarSky??{status:'loading'},outputs:evaluateSimOnStage(file.sim,file,resolveSimValues(file.sim,store.getState().sim),store.getState().pose).outputs,scales:Object.fromEntries(bridge.scales)} : null,
+        scale: (id:string) => bridge.scales.get(id) ?? null,
         senses: () => bridge.senses,
         /** The measured free HUD band the hudFrame camera fits into (stage CSS px), or null. */
         freeStage: () => (bridge.freeStage ? { ...bridge.freeStage } : null),

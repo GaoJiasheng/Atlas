@@ -125,3 +125,11 @@ CC BY-NC-SA 4.0. No GVP photographs, source-report prose, whole NOAA poster,
 CC BY-SA or ODbL input is incorporated in this topic. Per-file provenance and
 notices are in `src/content/topics/plates-and-hazards/data/SOURCES.md` and
 `provenance/`; attribution is in `THIRD-PARTY-NOTICES.md`.
+
+Exception — solar system and stars (topic `solar-system`): the independently
+distributed star catalogue `public/catalogues/solar-system/stars-hyg-v41-cc-by-sa.json`
+is a selection/reformatting of HYG Database v4.1 (David Nash / Astronexus),
+licensed CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).
+It contains no Atlas CC BY-NC-SA prose or original pattern artwork. The
+chapter text, source notes, model settings and original pattern links remain
+CC BY-NC-SA 4.0. See `THIRD-PARTY-NOTICES.md` for attribution and changes.

@@ -655,6 +655,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
             tintColor={display.tintRef ? resolveDataColor(display.tintRef, look.tokens, look.theme) : null}
             count={sim?.count.get(part.id) ?? null}
             simMove={simMoves.get(part.id) ?? null}
+            simScale={sim?.scale.get(part.id)}
             airfoilSnap={!!data.sim?.airfoil && [data.sim.airfoil.section.part, 'chord-marker'].includes(part.id)}
             play={sim?.play.get(part.id) ?? null}
             stretch={sim?.stretch.get(part.id) ?? null}

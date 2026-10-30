@@ -254,3 +254,24 @@ Atlas's original explanatory text and translations remain CC BY-NC-SA 4.0;
 no BY-SA/NC-SA combination or restricted/by-agreement material is used.
 Frozen hashes, output hashes, versions, modifications, coverage, simplification
 residuals and per-file licences are recorded in the topic's data provenance.
+
+## Solar system — separately licensed star catalogue
+
+Star positions: **HYG Database v4.1, David Nash / Astronexus**,
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+Source: <https://raw.githubusercontent.com/astronexus/HYG-Database/main/hyg/CURRENT/hygdata_v41.csv>
+and <https://github.com/astronexus/HYG-Database>. HYG acknowledges the underlying
+Hipparcos, Yale Bright Star and Gliese catalogues.
+
+`public/catalogues/solar-system/stars-hyg-v41-cc-by-sa.json` retains 28 rows:
+bright Orion, Crux and Scorpius stars, with comparison records. Changes:
+selected rows/columns and JSON formatting; no positional corrections.
+RA is hours, declination degrees, distance parsecs. Positions are J2000
+references, with historical distance estimates, not observation forecasts.
+The catalogue source SHA-256 is recorded in its metadata; the distributed
+subset SHA-256 is `c8a2a4282f7d83a87523996e317675dbe7ab5feb569c57ec7c8bb491a60c13a0`.
+
+This file stays independent of the Atlas topic bundle. Original constellation
+recognition links reference catalogue identifiers at runtime; they are not
+added to the share-alike catalogue. No third-party constellation chart or
+photograph is distributed.

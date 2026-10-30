@@ -1,0 +1,10 @@
+id: sample-solar
+title: { en: "Sample: solar system", zh: "示例：太阳系" }
+subtitle: { en: "Draft astronomy engine fixture", zh: "天文引擎草稿测试" }
+subject: science
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+status: draft
+note: { en: "SIM · teaching alignment, not today's sky · overview sizes and spacing are schematic · sky uses fixed J2000 directions", zh: "模拟 · 初始位置为教学排列，非当天星空 · 总览大小与间隔为示意 · 天空采用固定J2000方向" }

@@ -1250,6 +1250,12 @@ export const partsFileBase = z
       }))
         ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['sim', ...x.path], message: x.message });
     }
+    if(file.sim){
+      const scaled=new Set(file.sim.bind.flatMap(b=>'part' in b&&b.scale?(Array.isArray(b.part)?b.part:[b.part]):[]));
+      file.animations.forEach((a,i)=>{if(scaled.has(a.target))ctx.addIssue({code:'custom',path:['animations',i,'target'],message:'scale binding forbids a competing animation writer'});});
+      file.parts.forEach((p,i)=>{if(scaled.has(p.id)&&p.explode.dist!==0)ctx.addIssue({code:'custom',path:['parts',i,'explode'],message:'scale binding forbids a competing explode writer'});});
+      for(const [name,pose] of Object.entries(file.poses??{}))for(const id of Object.keys(pose.parts))if(scaled.has(id))ctx.addIssue({code:'custom',path:['poses',name,'parts',id],message:'scale binding forbids a competing pose writer'});
+    }
     if (file.sim?.orbitRotation) {
       if (file.rig) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['rig'], message: 'orbit body frames cannot inherit rig or exercise root motion' });
       const writers = new Set(file.sim.bind.flatMap((b) => ('part' in b && b.bodyTransform ? (Array.isArray(b.part) ? b.part : [b.part]) : [])));
@@ -1537,6 +1543,7 @@ const spaceSceneDataBase = z
       });
       if (!src.get('S36')?.design) issue(['parts', 'sim', 'orbitRotation', 'sources'], 'S36 must be a design study');
     }
+    if(data.parts.sim?.solarSystem){const sources=new Set((data.sources?.sources??[]).map(s=>s.id));data.parts.sim.solarSystem.sources.forEach((id,i)=>{if(!sources.has(id))issue(['parts','sim','solarSystem','sources',i],`unknown source ${id}`);});}
     const known = new Set((data.sources?.sources ?? []).map((s) => s.id));
     const shared = new Set((data.fitness?.sources ?? []).map((s) => s.id));
     const muscles = new Map((data.fitness?.muscles ?? []).map((m) => [m.id, m]));

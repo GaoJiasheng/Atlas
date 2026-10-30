@@ -200,6 +200,7 @@ export interface SimEffects {
   /** Copies of a `repeat` part on show. */
   count: Map<string, number>;
   fill: Map<string, SimFill>;
+  scale: Map<string, number>;
   /** Scene-unit offset per part. */
   offset: Map<string, Vec3>;
   place: Map<string, SimPlace>;
@@ -273,6 +274,7 @@ export function simEffects(sim: SimData, values: SimValues, outputs: SimOutputs)
     tint: new Map(),
     count: new Map(),
     fill: new Map(),
+    scale: new Map(),
     offset: new Map(),
     place: new Map(),
     offsetSettle: new Map(),
@@ -316,6 +318,7 @@ export function simEffects(sim: SimData, values: SimValues, outputs: SimOutputs)
           if (name !== undefined && name !== null) out.poses.set(id, name);
           else if (name === null && !out.poses.has(id)) out.poses.set(id, null);
         }
+        if(b.scale){if(typeof v!=='number'||!Number.isFinite(v)||v<0)throw new RangeError(`scale ${id} requires a finite nonnegative number`);out.scale.set(id,v*b.scale.per);}
         if (b.glow) {
           const x = Math.min(MAX_GLOW, Math.max(0, num(v) / b.glow.full));
           out.glow.set(id, { color: b.glow.color, level: b.glow.curve === 'sqrt' ? Math.sqrt(x) : x });

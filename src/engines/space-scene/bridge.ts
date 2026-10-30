@@ -138,6 +138,7 @@ export interface SensesReading {
   wave?: { phaseCycles: number; positions: number[]; rests: number[]; visualHz: number; lambda: number; A: number; playing: boolean; slowFactor: number; active: boolean; hiddenReason: string | null };
 }
 export interface StageBridge {
+  solarSky?: {status:string;utc?:string;latitude?:number;depth?:boolean;rows?:unknown[]};
   senses: SensesReading;
   sensesSeek(cycles: number): boolean;
   /** Actual rig rotations and world origins after skinning motion (QA only). */
@@ -163,6 +164,7 @@ export interface StageBridge {
   animations: Map<string, AnimationReading>;
   bends: Map<string, BendReading>;
   shifts: Map<string, ShiftReading>;
+  scales: Map<string, {target:number; actual:[number,number,number]}>;
   fillBenchmarks: Map<string, () => number>;
   flowPaths: Map<string, Record<string, { visible: boolean }>>;
   /** Flows a number `intensity` paces (docs/40 §4.3): the factor every path runs at (QA `flow(id).pace`). */
@@ -247,6 +249,7 @@ export function createBridge(): StageBridge {
     tints: new Map(),
     bends: new Map(),
     shifts: new Map(),
+    scales: new Map(),
     fillBenchmarks: new Map(),
     flowPaths: new Map(),
     flowPace: new Map(),

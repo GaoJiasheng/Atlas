@@ -1,0 +1,1915 @@
+{
+  "parts": [
+    {
+      "id": "sun",
+      "name": {
+        "en": "Sun",
+        "zh": "太阳"
+      },
+      "group": "solar-family",
+      "summary": {
+        "en": "Engine fixture: Sun",
+        "zh": "引擎测试：太阳"
+      },
+      "detail": {
+        "en": "SIM teaching geometry for checking numerical outputs and rendered bindings. [S37]",
+        "zh": "用于核对数值输出和舞台绑定的模拟教学几何。[S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          1
+        ],
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:en-light"
+      }
+    },
+    {
+      "id": "mercury",
+      "name": {
+        "en": "Mercury",
+        "zh": "水星"
+      },
+      "group": "solar-family",
+      "summary": {
+        "en": "Engine fixture: Mercury",
+        "zh": "引擎测试：水星"
+      },
+      "detail": {
+        "en": "SIM teaching geometry for checking numerical outputs and rendered bindings. [S37]",
+        "zh": "用于核对数值输出和舞台绑定的模拟教学几何。[S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          1
+        ],
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:neutral"
+      }
+    },
+    {
+      "id": "venus",
+      "name": {
+        "en": "Venus",
+        "zh": "金星"
+      },
+      "group": "solar-family",
+      "summary": {
+        "en": "Engine fixture: Venus",
+        "zh": "引擎测试：金星"
+      },
+      "detail": {
+        "en": "SIM teaching geometry for checking numerical outputs and rendered bindings. [S37]",
+        "zh": "用于核对数值输出和舞台绑定的模拟教学几何。[S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          1
+        ],
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:neutral"
+      }
+    },
+    {
+      "id": "earth",
+      "name": {
+        "en": "Earth",
+        "zh": "地球"
+      },
+      "group": "solar-family",
+      "summary": {
+        "en": "Engine fixture: Earth",
+        "zh": "引擎测试：地球"
+      },
+      "detail": {
+        "en": "SIM teaching geometry for checking numerical outputs and rendered bindings. [S37]",
+        "zh": "用于核对数值输出和舞台绑定的模拟教学几何。[S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          1
+        ],
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:neutral"
+      }
+    },
+    {
+      "id": "mars",
+      "name": {
+        "en": "Mars",
+        "zh": "火星"
+      },
+      "group": "solar-family",
+      "summary": {
+        "en": "Engine fixture: Mars",
+        "zh": "引擎测试：火星"
+      },
+      "detail": {
+        "en": "SIM teaching geometry for checking numerical outputs and rendered bindings. [S37]",
+        "zh": "用于核对数值输出和舞台绑定的模拟教学几何。[S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          1
+        ],
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:neutral"
+      }
+    },
+    {
+      "id": "jupiter",
+      "name": {
+        "en": "Jupiter",
+        "zh": "木星"
+      },
+      "group": "solar-family",
+      "summary": {
+        "en": "Engine fixture: Jupiter",
+        "zh": "引擎测试：木星"
+      },
+      "detail": {
+        "en": "SIM teaching geometry for checking numerical outputs and rendered bindings. [S37]",
+        "zh": "用于核对数值输出和舞台绑定的模拟教学几何。[S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          1
+        ],
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:neutral"
+      }
+    },
+    {
+      "id": "saturn",
+      "name": {
+        "en": "Saturn",
+        "zh": "土星"
+      },
+      "group": "solar-family",
+      "summary": {
+        "en": "Engine fixture: Saturn",
+        "zh": "引擎测试：土星"
+      },
+      "detail": {
+        "en": "SIM teaching geometry for checking numerical outputs and rendered bindings. [S37]",
+        "zh": "用于核对数值输出和舞台绑定的模拟教学几何。[S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          1
+        ],
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:neutral"
+      }
+    },
+    {
+      "id": "uranus",
+      "name": {
+        "en": "Uranus",
+        "zh": "天王星"
+      },
+      "group": "solar-family",
+      "summary": {
+        "en": "Engine fixture: Uranus",
+        "zh": "引擎测试：天王星"
+      },
+      "detail": {
+        "en": "SIM teaching geometry for checking numerical outputs and rendered bindings. [S37]",
+        "zh": "用于核对数值输出和舞台绑定的模拟教学几何。[S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          1
+        ],
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:neutral"
+      }
+    },
+    {
+      "id": "neptune",
+      "name": {
+        "en": "Neptune",
+        "zh": "海王星"
+      },
+      "group": "solar-family",
+      "summary": {
+        "en": "Engine fixture: Neptune",
+        "zh": "引擎测试：海王星"
+      },
+      "detail": {
+        "en": "SIM teaching geometry for checking numerical outputs and rendered bindings. [S37]",
+        "zh": "用于核对数值输出和舞台绑定的模拟教学几何。[S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          1
+        ],
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:neutral"
+      }
+    },
+    {
+      "id": "saturn-rings",
+      "name": {
+        "en": "Saturn rings",
+        "zh": "土星环"
+      },
+      "group": "solar-family",
+      "summary": {
+        "en": "Engine fixture: Saturn rings",
+        "zh": "引擎测试：土星环"
+      },
+      "detail": {
+        "en": "SIM teaching geometry for checking numerical outputs and rendered bindings. [S37]",
+        "zh": "用于核对数值输出和舞台绑定的模拟教学几何。[S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "torus",
+        "size": [
+          1.5,
+          0.08
+        ],
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:neutral",
+        "rotation": [
+          90,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "comet-nucleus",
+      "name": {
+        "en": "Comet nucleus",
+        "zh": "彗核"
+      },
+      "group": "small-bodies",
+      "summary": {
+        "en": "Engine fixture: Comet nucleus",
+        "zh": "引擎测试：彗核"
+      },
+      "detail": {
+        "en": "SIM teaching geometry for checking numerical outputs and rendered bindings. [S37]",
+        "zh": "用于核对数值输出和舞台绑定的模拟教学几何。[S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.13
+        ],
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:neutral"
+      }
+    },
+    {
+      "id": "comet-coma",
+      "name": {
+        "en": "Comet coma",
+        "zh": "彗发"
+      },
+      "group": "small-bodies",
+      "summary": {
+        "en": "Engine fixture: Comet coma",
+        "zh": "引擎测试：彗发"
+      },
+      "detail": {
+        "en": "SIM teaching geometry for checking numerical outputs and rendered bindings. [S37]",
+        "zh": "用于核对数值输出和舞台绑定的模拟教学几何。[S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "torus",
+        "size": [
+          0.2,
+          0.02
+        ],
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:neutral",
+        "rotation": [
+          90,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "ion-tail",
+      "name": {
+        "en": "Ion tail",
+        "zh": "离子尾"
+      },
+      "group": "small-bodies",
+      "summary": {
+        "en": "Engine fixture: Ion tail",
+        "zh": "引擎测试：离子尾"
+      },
+      "detail": {
+        "en": "SIM teaching geometry for checking numerical outputs and rendered bindings. [S37]",
+        "zh": "用于核对数值输出和舞台绑定的模拟教学几何。[S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "box",
+        "size": [
+          2,
+          0.025,
+          0.025
+        ],
+        "at": [
+          1,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:cold"
+      }
+    },
+    {
+      "id": "dust-tail",
+      "name": {
+        "en": "Dust tail",
+        "zh": "尘尾"
+      },
+      "group": "small-bodies",
+      "summary": {
+        "en": "Engine fixture: Dust tail",
+        "zh": "引擎测试：尘尾"
+      },
+      "detail": {
+        "en": "SIM teaching geometry for checking numerical outputs and rendered bindings. [S37]",
+        "zh": "用于核对数值输出和舞台绑定的模拟教学几何。[S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "box",
+        "size": [
+          1.6,
+          0.05,
+          0.05
+        ],
+        "at": [
+          0.8,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:neutral",
+        "rotation": [
+          0,
+          15,
+          0
+        ]
+      }
+    },
+    {
+      "id": "star-source",
+      "name": {
+        "en": "Steady star source",
+        "zh": "恒定恒星光源"
+      },
+      "group": "light-and-air",
+      "summary": {
+        "en": "Engine fixture: Steady star source",
+        "zh": "引擎测试：恒定恒星光源"
+      },
+      "detail": {
+        "en": "SIM teaching geometry for checking numerical outputs and rendered bindings. [S37]",
+        "zh": "用于核对数值输出和舞台绑定的模拟教学几何。[S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.23
+        ],
+        "at": [
+          0,
+          1,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:en-light"
+      }
+    },
+    {
+      "id": "air-layer",
+      "name": {
+        "en": "Air layer",
+        "zh": "空气层"
+      },
+      "group": "light-and-air",
+      "summary": {
+        "en": "Engine fixture: Air layer",
+        "zh": "引擎测试：空气层"
+      },
+      "detail": {
+        "en": "SIM teaching geometry for checking numerical outputs and rendered bindings. [S37]",
+        "zh": "用于核对数值输出和舞台绑定的模拟教学几何。[S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "box",
+        "size": [
+          3,
+          0.03,
+          1
+        ],
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:air"
+      }
+    },
+    {
+      "id": "observer",
+      "name": {
+        "en": "Observer",
+        "zh": "观察者"
+      },
+      "group": "local-sky",
+      "summary": {
+        "en": "Engine fixture: Observer",
+        "zh": "引擎测试：观察者"
+      },
+      "detail": {
+        "en": "SIM teaching geometry for checking numerical outputs and rendered bindings. [S37]",
+        "zh": "用于核对数值输出和舞台绑定的模拟教学几何。[S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.08
+        ],
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:neutral"
+      }
+    },
+    {
+      "id": "horizon",
+      "name": {
+        "en": "Horizon",
+        "zh": "地平线"
+      },
+      "group": "local-sky",
+      "summary": {
+        "en": "Engine fixture: Horizon",
+        "zh": "引擎测试：地平线"
+      },
+      "detail": {
+        "en": "SIM teaching geometry for checking numerical outputs and rendered bindings. [S37]",
+        "zh": "用于核对数值输出和舞台绑定的模拟教学几何。[S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "torus",
+        "size": [
+          5,
+          0.015
+        ],
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:neutral",
+        "rotation": [
+          90,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "light-ruler",
+      "name": {
+        "en": "Light-distance marker",
+        "zh": "光行距离标记"
+      },
+      "group": "galaxy-context",
+      "summary": {
+        "en": "Engine fixture: Light-distance marker",
+        "zh": "引擎测试：光行距离标记"
+      },
+      "detail": {
+        "en": "SIM teaching geometry for checking numerical outputs and rendered bindings. [S37]",
+        "zh": "用于核对数值输出和舞台绑定的模拟教学几何。[S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "box",
+        "size": [
+          3,
+          0.015,
+          0.015
+        ],
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:neutral"
+      }
+    },
+    {
+      "id": "sky-stars",
+      "name": {
+        "en": "Catalogue stars",
+        "zh": "星表恒星"
+      },
+      "group": "local-sky",
+      "summary": {
+        "en": "Engine fixture: Catalogue stars",
+        "zh": "引擎测试：星表恒星"
+      },
+      "detail": {
+        "en": "The separate catalogue layer supplies this semantic group; the marker is not a star radius. [S37]",
+        "zh": "独立星表图层提供此语义组；标记不表示恒星半径。[S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.001
+        ],
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:ink-3"
+      }
+    },
+    {
+      "id": "orion-pattern",
+      "name": {
+        "en": "Orion pattern",
+        "zh": "猎户座图案"
+      },
+      "group": "local-sky",
+      "summary": {
+        "en": "Engine fixture: Orion pattern",
+        "zh": "引擎测试：猎户座图案"
+      },
+      "detail": {
+        "en": "The separate catalogue layer supplies this semantic group; the marker is not a star radius. [S37]",
+        "zh": "独立星表图层提供此语义组；标记不表示恒星半径。[S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.001
+        ],
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:ink-3"
+      }
+    },
+    {
+      "id": "crux-pattern",
+      "name": {
+        "en": "Crux pattern",
+        "zh": "南十字座图案"
+      },
+      "group": "local-sky",
+      "summary": {
+        "en": "Engine fixture: Crux pattern",
+        "zh": "引擎测试：南十字座图案"
+      },
+      "detail": {
+        "en": "The separate catalogue layer supplies this semantic group; the marker is not a star radius. [S37]",
+        "zh": "独立星表图层提供此语义组；标记不表示恒星半径。[S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.001
+        ],
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:ink-3"
+      }
+    },
+    {
+      "id": "scorpius-pattern",
+      "name": {
+        "en": "Scorpius pattern",
+        "zh": "天蝎座图案"
+      },
+      "group": "local-sky",
+      "summary": {
+        "en": "Engine fixture: Scorpius pattern",
+        "zh": "引擎测试：天蝎座图案"
+      },
+      "detail": {
+        "en": "The separate catalogue layer supplies this semantic group; the marker is not a star radius. [S37]",
+        "zh": "独立星表图层提供此语义组；标记不表示恒星半径。[S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.001
+        ],
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:ink-3"
+      }
+    },
+    {
+      "id": "depth-stars",
+      "name": {
+        "en": "Catalogue depth",
+        "zh": "星表深度"
+      },
+      "group": "local-sky",
+      "summary": {
+        "en": "Engine fixture: Catalogue depth",
+        "zh": "引擎测试：星表深度"
+      },
+      "detail": {
+        "en": "The separate catalogue layer supplies this semantic group; the marker is not a star radius. [S37]",
+        "zh": "独立星表图层提供此语义组；标记不表示恒星半径。[S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.001
+        ],
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:ink-3"
+      }
+    }
+  ],
+  "groups": [
+    {
+      "id": "solar-family",
+      "name": {
+        "en": "Solar family",
+        "zh": "太阳系天体"
+      },
+      "color": "token:ink-3",
+      "card": false
+    },
+    {
+      "id": "small-bodies",
+      "name": {
+        "en": "Comet model",
+        "zh": "彗星模型"
+      },
+      "color": "token:ink-3",
+      "card": false
+    },
+    {
+      "id": "light-and-air",
+      "name": {
+        "en": "Light and air",
+        "zh": "光与空气"
+      },
+      "color": "token:ink-3",
+      "card": false
+    },
+    {
+      "id": "local-sky",
+      "name": {
+        "en": "Local sky",
+        "zh": "本地天空"
+      },
+      "color": "token:ink-3",
+      "card": false
+    },
+    {
+      "id": "galaxy-context",
+      "name": {
+        "en": "Light distance",
+        "zh": "光行距离"
+      },
+      "color": "token:ink-3",
+      "card": false
+    }
+  ],
+  "views": {
+    "assembled": {
+      "camera": {
+        "position": [
+          15,
+          35,
+          75
+        ],
+        "target": [
+          10,
+          0,
+          0
+        ],
+        "fov": 38
+      }
+    },
+    "cover": {
+      "position": [
+        15,
+        35,
+        75
+      ],
+      "target": [
+        10,
+        0,
+        0
+      ],
+      "fov": 38
+    },
+    "shadows": "none"
+  },
+  "sim": {
+    "kind": "solar-system",
+    "solarSystem": {
+      "version": 1,
+      "bodies": [
+        {
+          "id": "sun",
+          "radiusKm": 700000
+        },
+        {
+          "id": "mercury",
+          "radiusKm": 2439.4,
+          "aAu": 0.38709927,
+          "periodYears": 0.2408467
+        },
+        {
+          "id": "venus",
+          "radiusKm": 6051.8,
+          "aAu": 0.72333566,
+          "periodYears": 0.61519726
+        },
+        {
+          "id": "earth",
+          "radiusKm": 6371.0084,
+          "aAu": 1.00000261,
+          "periodYears": 1.0000174
+        },
+        {
+          "id": "mars",
+          "radiusKm": 3389.5,
+          "aAu": 1.52371034,
+          "periodYears": 1.8808476
+        },
+        {
+          "id": "jupiter",
+          "radiusKm": 69911,
+          "aAu": 5.202887,
+          "periodYears": 11.862615
+        },
+        {
+          "id": "saturn",
+          "radiusKm": 58232,
+          "aAu": 9.53667594,
+          "periodYears": 29.447498
+        },
+        {
+          "id": "uranus",
+          "radiusKm": 25362,
+          "aAu": 19.18916464,
+          "periodYears": 84.016846
+        },
+        {
+          "id": "neptune",
+          "radiusKm": 24622,
+          "aAu": 30.06992276,
+          "periodYears": 164.79132
+        }
+      ],
+      "controls": {
+        "lab": "lab",
+        "elapsedYears": "elapsed-years",
+        "planet": "planet",
+        "scaleMode": "scale-mode",
+        "skyDate": "sky-date",
+        "skyHour": "sky-hour",
+        "observer": "observer",
+        "skyTarget": "sky-target",
+        "patternLinks": "pattern-links",
+        "depth": "depth",
+        "atmosphere": "atmosphere",
+        "sourceKind": "source-kind",
+        "altitudeMode": "altitude-mode",
+        "twinkleSeconds": "twinkle-seconds",
+        "cometStep": "comet-step",
+        "distanceTarget": "distance-target"
+      },
+      "patterns": {
+        "orion": [
+          [
+            "27989",
+            "25336"
+          ],
+          [
+            "25336",
+            "24436"
+          ],
+          [
+            "24436",
+            "27366"
+          ],
+          [
+            "27366",
+            "27989"
+          ],
+          [
+            "25930",
+            "26311"
+          ],
+          [
+            "26311",
+            "26727"
+          ]
+        ],
+        "crux": [
+          [
+            "61084",
+            "60718"
+          ],
+          [
+            "59747",
+            "62434"
+          ]
+        ],
+        "scorpius": [
+          [
+            "78401",
+            "80763"
+          ],
+          [
+            "80763",
+            "82396"
+          ],
+          [
+            "82396",
+            "86228"
+          ],
+          [
+            "86228",
+            "85927"
+          ]
+        ]
+      },
+      "sources": [
+        "S5",
+        "S6",
+        "S37"
+      ]
+    },
+    "controls": [
+      {
+        "id": "lab",
+        "kind": "choice",
+        "label": {
+          "en": "Experiment",
+          "zh": "实验"
+        },
+        "default": "orbits",
+        "options": [
+          {
+            "id": "orbits",
+            "label": {
+              "en": "Orbits",
+              "zh": "轨道"
+            }
+          },
+          {
+            "id": "sizes",
+            "label": {
+              "en": "Sizes",
+              "zh": "大小"
+            }
+          },
+          {
+            "id": "distances",
+            "label": {
+              "en": "Distances",
+              "zh": "距离"
+            }
+          },
+          {
+            "id": "small-bodies",
+            "label": {
+              "en": "Small bodies",
+              "zh": "较小天体"
+            }
+          },
+          {
+            "id": "twinkle",
+            "label": {
+              "en": "Twinkle",
+              "zh": "闪烁"
+            }
+          },
+          {
+            "id": "sky",
+            "label": {
+              "en": "Sky",
+              "zh": "天空"
+            }
+          },
+          {
+            "id": "galaxy",
+            "label": {
+              "en": "Light distances",
+              "zh": "光行距离"
+            }
+          }
+        ]
+      },
+      {
+        "id": "elapsed-years",
+        "kind": "step",
+        "label": {
+          "en": "Elapsed model years",
+          "zh": "模型经过年数"
+        },
+        "values": [
+          0,
+          0.25,
+          1,
+          12,
+          30,
+          84,
+          165
+        ],
+        "default": 0,
+        "unit": "yr"
+      },
+      {
+        "id": "planet",
+        "kind": "choice",
+        "label": {
+          "en": "Selected planet",
+          "zh": "选中行星"
+        },
+        "default": "earth",
+        "options": [
+          {
+            "id": "mercury",
+            "label": {
+              "en": "Mercury",
+              "zh": "水星"
+            }
+          },
+          {
+            "id": "venus",
+            "label": {
+              "en": "Venus",
+              "zh": "金星"
+            }
+          },
+          {
+            "id": "earth",
+            "label": {
+              "en": "Earth",
+              "zh": "地球"
+            }
+          },
+          {
+            "id": "mars",
+            "label": {
+              "en": "Mars",
+              "zh": "火星"
+            }
+          },
+          {
+            "id": "jupiter",
+            "label": {
+              "en": "Jupiter",
+              "zh": "木星"
+            }
+          },
+          {
+            "id": "saturn",
+            "label": {
+              "en": "Saturn",
+              "zh": "土星"
+            }
+          },
+          {
+            "id": "uranus",
+            "label": {
+              "en": "Uranus",
+              "zh": "天王星"
+            }
+          },
+          {
+            "id": "neptune",
+            "label": {
+              "en": "Neptune",
+              "zh": "海王星"
+            }
+          }
+        ]
+      },
+      {
+        "id": "scale-mode",
+        "kind": "choice",
+        "label": {
+          "en": "Display scale",
+          "zh": "显示比例"
+        },
+        "default": "overview",
+        "options": [
+          {
+            "id": "overview",
+            "label": {
+              "en": "Overview",
+              "zh": "总览"
+            }
+          },
+          {
+            "id": "true-scale",
+            "label": {
+              "en": "True scale",
+              "zh": "真比例"
+            }
+          }
+        ]
+      },
+      {
+        "id": "sky-date",
+        "kind": "choice",
+        "label": {
+          "en": "Example date",
+          "zh": "示例日期"
+        },
+        "default": "2026-01-15",
+        "options": [
+          {
+            "id": "2026-01-15",
+            "label": {
+              "en": "2026-01-15",
+              "zh": "2026-01-15"
+            }
+          },
+          {
+            "id": "2026-04-15",
+            "label": {
+              "en": "2026-04-15",
+              "zh": "2026-04-15"
+            }
+          },
+          {
+            "id": "2026-07-15",
+            "label": {
+              "en": "2026-07-15",
+              "zh": "2026-07-15"
+            }
+          },
+          {
+            "id": "2026-10-15",
+            "label": {
+              "en": "2026-10-15",
+              "zh": "2026-10-15"
+            }
+          }
+        ]
+      },
+      {
+        "id": "sky-hour",
+        "kind": "step",
+        "label": {
+          "en": "Singapore clock",
+          "zh": "新加坡钟点"
+        },
+        "values": [
+          0,
+          2,
+          4,
+          18,
+          20,
+          22
+        ],
+        "default": 20,
+        "unit": "SGT"
+      },
+      {
+        "id": "observer",
+        "kind": "choice",
+        "label": {
+          "en": "Observer",
+          "zh": "观察点"
+        },
+        "default": "singapore",
+        "options": [
+          {
+            "id": "singapore",
+            "label": {
+              "en": "Singapore",
+              "zh": "新加坡"
+            }
+          },
+          {
+            "id": "equator",
+            "label": {
+              "en": "Equator",
+              "zh": "赤道"
+            }
+          },
+          {
+            "id": "north45",
+            "label": {
+              "en": "45 north",
+              "zh": "北纬45度"
+            }
+          }
+        ]
+      },
+      {
+        "id": "sky-target",
+        "kind": "choice",
+        "label": {
+          "en": "Sky pattern",
+          "zh": "星空图案"
+        },
+        "default": "orion",
+        "options": [
+          {
+            "id": "orion",
+            "label": {
+              "en": "Orion",
+              "zh": "猎户座"
+            }
+          },
+          {
+            "id": "crux",
+            "label": {
+              "en": "Crux",
+              "zh": "南十字座"
+            }
+          },
+          {
+            "id": "scorpius",
+            "label": {
+              "en": "Scorpius",
+              "zh": "天蝎座"
+            }
+          }
+        ]
+      },
+      {
+        "id": "pattern-links",
+        "kind": "toggle",
+        "label": {
+          "en": "Pattern links",
+          "zh": "图案连线"
+        },
+        "default": true
+      },
+      {
+        "id": "depth",
+        "kind": "toggle",
+        "label": {
+          "en": "Catalogue depth",
+          "zh": "星表深度"
+        },
+        "default": false
+      },
+      {
+        "id": "atmosphere",
+        "kind": "toggle",
+        "label": {
+          "en": "Air",
+          "zh": "空气"
+        },
+        "default": true
+      },
+      {
+        "id": "source-kind",
+        "kind": "choice",
+        "label": {
+          "en": "Light source",
+          "zh": "光源"
+        },
+        "default": "point",
+        "options": [
+          {
+            "id": "point",
+            "label": {
+              "en": "Point",
+              "zh": "点光源"
+            }
+          },
+          {
+            "id": "disc",
+            "label": {
+              "en": "Disc",
+              "zh": "圆面光源"
+            }
+          }
+        ]
+      },
+      {
+        "id": "altitude-mode",
+        "kind": "choice",
+        "label": {
+          "en": "Sky altitude",
+          "zh": "天空高度"
+        },
+        "default": "high",
+        "options": [
+          {
+            "id": "high",
+            "label": {
+              "en": "High",
+              "zh": "高空"
+            }
+          },
+          {
+            "id": "low",
+            "label": {
+              "en": "Low",
+              "zh": "近地平"
+            }
+          }
+        ]
+      },
+      {
+        "id": "twinkle-seconds",
+        "kind": "step",
+        "label": {
+          "en": "Sample time",
+          "zh": "取样时刻"
+        },
+        "values": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "default": 0,
+        "unit": "s"
+      },
+      {
+        "id": "comet-step",
+        "kind": "step",
+        "label": {
+          "en": "Comet position",
+          "zh": "彗星位置"
+        },
+        "values": [
+          0,
+          90,
+          180,
+          270
+        ],
+        "default": 0,
+        "unit": "°"
+      },
+      {
+        "id": "distance-target",
+        "kind": "choice",
+        "label": {
+          "en": "Light distance",
+          "zh": "光行距离"
+        },
+        "default": "sun-earth",
+        "options": [
+          {
+            "id": "sun-earth",
+            "label": {
+              "en": "Sun–Earth",
+              "zh": "太阳至地球"
+            }
+          },
+          {
+            "id": "neptune",
+            "label": {
+              "en": "Neptune reference",
+              "zh": "海王星参考距离"
+            }
+          },
+          {
+            "id": "proxima",
+            "label": {
+              "en": "Proxima",
+              "zh": "比邻星"
+            }
+          },
+          {
+            "id": "milky-way",
+            "label": {
+              "en": "Milky Way diameter",
+              "zh": "银河系直径"
+            }
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "id": "planet-frame",
+        "kind": "vector",
+        "label": {
+          "en": "Physical frame",
+          "zh": "物理坐标"
+        }
+      },
+      {
+        "id": "display-positions",
+        "kind": "vector",
+        "label": {
+          "en": "Display positions",
+          "zh": "显示位置"
+        }
+      },
+      {
+        "id": "radius-sun",
+        "kind": "number",
+        "label": {
+          "en": "Sun display radius",
+          "zh": "太阳显示半径"
+        },
+        "unit": "m",
+        "decimals": 3
+      },
+      {
+        "id": "radius-mercury",
+        "kind": "number",
+        "label": {
+          "en": "Mercury display radius",
+          "zh": "水星显示半径"
+        },
+        "unit": "m",
+        "decimals": 3
+      },
+      {
+        "id": "radius-venus",
+        "kind": "number",
+        "label": {
+          "en": "Venus display radius",
+          "zh": "金星显示半径"
+        },
+        "unit": "m",
+        "decimals": 3
+      },
+      {
+        "id": "radius-earth",
+        "kind": "number",
+        "label": {
+          "en": "Earth display radius",
+          "zh": "地球显示半径"
+        },
+        "unit": "m",
+        "decimals": 3
+      },
+      {
+        "id": "radius-mars",
+        "kind": "number",
+        "label": {
+          "en": "Mars display radius",
+          "zh": "火星显示半径"
+        },
+        "unit": "m",
+        "decimals": 3
+      },
+      {
+        "id": "radius-jupiter",
+        "kind": "number",
+        "label": {
+          "en": "Jupiter display radius",
+          "zh": "木星显示半径"
+        },
+        "unit": "m",
+        "decimals": 3
+      },
+      {
+        "id": "radius-saturn",
+        "kind": "number",
+        "label": {
+          "en": "Saturn display radius",
+          "zh": "土星显示半径"
+        },
+        "unit": "m",
+        "decimals": 3
+      },
+      {
+        "id": "radius-uranus",
+        "kind": "number",
+        "label": {
+          "en": "Uranus display radius",
+          "zh": "天王星显示半径"
+        },
+        "unit": "m",
+        "decimals": 3
+      },
+      {
+        "id": "radius-neptune",
+        "kind": "number",
+        "label": {
+          "en": "Neptune display radius",
+          "zh": "海王星显示半径"
+        },
+        "unit": "m",
+        "decimals": 3
+      },
+      {
+        "id": "planet-diameter-km",
+        "kind": "number",
+        "label": {
+          "en": "Planet diameter",
+          "zh": "行星直径"
+        },
+        "unit": "km",
+        "decimals": 3
+      },
+      {
+        "id": "reference-au",
+        "kind": "number",
+        "label": {
+          "en": "Reference distance",
+          "zh": "参考距离"
+        },
+        "unit": "AU",
+        "decimals": 3
+      },
+      {
+        "id": "period-years",
+        "kind": "number",
+        "label": {
+          "en": "Orbital period",
+          "zh": "公转周期"
+        },
+        "unit": "yr",
+        "decimals": 3
+      },
+      {
+        "id": "completed-turns",
+        "kind": "number",
+        "label": {
+          "en": "Completed turns",
+          "zh": "已走圈数"
+        },
+        "unit": "",
+        "decimals": 3
+      },
+      {
+        "id": "twinkle-flux",
+        "kind": "number",
+        "label": {
+          "en": "Relative flux",
+          "zh": "相对光通量"
+        },
+        "unit": "",
+        "decimals": 3
+      },
+      {
+        "id": "comet-angle",
+        "kind": "number",
+        "label": {
+          "en": "Anti-solar angle",
+          "zh": "反太阳方向角"
+        },
+        "unit": "°",
+        "decimals": 3
+      },
+      {
+        "id": "light-distance-km",
+        "kind": "number",
+        "label": {
+          "en": "Light distance",
+          "zh": "光行距离"
+        },
+        "unit": "km",
+        "decimals": 3
+      },
+      {
+        "id": "light-time-seconds",
+        "kind": "number",
+        "label": {
+          "en": "Light travel time",
+          "zh": "光行时间"
+        },
+        "unit": "s",
+        "decimals": 3
+      },
+      {
+        "id": "comet-positions",
+        "kind": "vector",
+        "label": {
+          "en": "Comet positions",
+          "zh": "彗星位置"
+        }
+      },
+      {
+        "id": "scale-state",
+        "kind": "state",
+        "label": {
+          "en": "Scale disclosure",
+          "zh": "比例说明"
+        },
+        "states": {
+          "overview": {
+            "en": "Schematic overview",
+            "zh": "示意总览"
+          },
+          "true-scale": {
+            "en": "One scale for radii and centres",
+            "zh": "半径与中心同尺"
+          },
+          "size-row": {
+            "en": "Same-scale planet sizes; arranged spacing",
+            "zh": "行星大小同尺，间隔排版"
+          },
+          "distance-ruler": {
+            "en": "Same-scale distances and radii",
+            "zh": "距离与半径同尺"
+          },
+          "schematic": {
+            "en": "Local schematic",
+            "zh": "局部示意"
+          },
+          "sky": {
+            "en": "Approximate J2000 teaching sky",
+            "zh": "J2000近似教学天空"
+          }
+        }
+      },
+      {
+        "id": "twinkle-state",
+        "kind": "state",
+        "label": {
+          "en": "Twinkle model",
+          "zh": "闪烁模型"
+        },
+        "states": {
+          "steady": {
+            "en": "Steady",
+            "zh": "恒定"
+          },
+          "point-fluctuation": {
+            "en": "Point fluctuation",
+            "zh": "点光源起伏"
+          },
+          "disc-averaged": {
+            "en": "Disc averaged",
+            "zh": "圆面平均"
+          }
+        }
+      }
+    ],
+    "bind": [
+      {
+        "output": "display-positions",
+        "part": [
+          "sun",
+          "mercury",
+          "venus",
+          "earth",
+          "mars",
+          "jupiter",
+          "saturn",
+          "uranus",
+          "neptune",
+          "saturn-rings"
+        ],
+        "shift": {
+          "ease": 0,
+          "stagger": 0,
+          "lift": 0
+        }
+      },
+      {
+        "output": "radius-sun",
+        "part": "sun",
+        "scale": {
+          "per": 1
+        }
+      },
+      {
+        "output": "radius-mercury",
+        "part": "mercury",
+        "scale": {
+          "per": 1
+        }
+      },
+      {
+        "output": "radius-venus",
+        "part": "venus",
+        "scale": {
+          "per": 1
+        }
+      },
+      {
+        "output": "radius-earth",
+        "part": "earth",
+        "scale": {
+          "per": 1
+        }
+      },
+      {
+        "output": "radius-mars",
+        "part": "mars",
+        "scale": {
+          "per": 1
+        }
+      },
+      {
+        "output": "radius-jupiter",
+        "part": "jupiter",
+        "scale": {
+          "per": 1
+        }
+      },
+      {
+        "output": "radius-saturn",
+        "part": "saturn",
+        "scale": {
+          "per": 1
+        }
+      },
+      {
+        "output": "radius-uranus",
+        "part": "uranus",
+        "scale": {
+          "per": 1
+        }
+      },
+      {
+        "output": "radius-neptune",
+        "part": "neptune",
+        "scale": {
+          "per": 1
+        }
+      },
+      {
+        "output": "radius-saturn",
+        "part": "saturn-rings",
+        "scale": {
+          "per": 1
+        }
+      },
+      {
+        "output": "comet-positions",
+        "part": [
+          "comet-nucleus",
+          "comet-coma",
+          "ion-tail",
+          "dust-tail"
+        ],
+        "shift": {
+          "ease": 0,
+          "stagger": 0,
+          "lift": 0
+        }
+      },
+      {
+        "output": "comet-angle",
+        "part": [
+          "ion-tail",
+          "dust-tail"
+        ],
+        "rotate": {
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "per": 1,
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "output": "twinkle-flux",
+        "part": "star-source",
+        "glow": {
+          "color": "token:en-light",
+          "full": 1.3,
+          "curve": "linear"
+        }
+      },
+      {
+        "control": "atmosphere",
+        "part": "air-layer",
+        "visible": true
+      },
+      {
+        "control": "lab",
+        "part": [
+          "sun",
+          "mercury",
+          "venus",
+          "earth",
+          "mars",
+          "jupiter",
+          "saturn",
+          "uranus",
+          "neptune",
+          "saturn-rings"
+        ],
+        "visible": {
+          "in": [
+            "orbits",
+            "sizes",
+            "distances"
+          ]
+        }
+      },
+      {
+        "control": "lab",
+        "part": [
+          "comet-nucleus",
+          "comet-coma",
+          "ion-tail",
+          "dust-tail"
+        ],
+        "visible": {
+          "in": [
+            "small-bodies"
+          ]
+        }
+      },
+      {
+        "control": "lab",
+        "part": [
+          "star-source",
+          "air-layer"
+        ],
+        "visible": {
+          "in": [
+            "twinkle"
+          ]
+        }
+      },
+      {
+        "control": "lab",
+        "part": [
+          "observer",
+          "horizon",
+          "sky-stars",
+          "orion-pattern",
+          "crux-pattern",
+          "scorpius-pattern",
+          "depth-stars"
+        ],
+        "visible": {
+          "in": [
+            "sky"
+          ]
+        }
+      },
+      {
+        "control": "lab",
+        "part": [
+          "light-ruler"
+        ],
+        "visible": {
+          "in": [
+            "galaxy"
+          ]
+        }
+      }
+    ],
+    "overlays": [
+      {
+        "kind": "catalogue-sky",
+        "group": "local-sky",
+        "catalogue": "stars-hyg-v41-cc-by-sa.json",
+        "radius": 5
+      }
+    ]
+  }
+}
