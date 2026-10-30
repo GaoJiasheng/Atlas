@@ -1,0 +1,32 @@
+{
+  "sources": [
+    {
+      "id": "S5",
+      "text": {
+        "en": "NASA/JPL: planetary physical parameters",
+        "zh": "NASA/JPL：行星物理参数"
+      },
+      "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html"
+    },
+    {
+      "id": "S6",
+      "text": {
+        "en": "NASA/JPL: reference orbital elements",
+        "zh": "NASA/JPL：参考轨道要素"
+      },
+      "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html"
+    },
+    {
+      "id": "S37",
+      "text": {
+        "en": "Atlas astronomy engine fixture design study",
+        "zh": "Atlas天文引擎测试设计"
+      },
+      "design": true,
+      "note": {
+        "en": "SIM: circular coplanar orbits with synthetic zero phase; approximate fixed-J2000 sky; qualitative twinkle; comet E steps and anti-solar tail. No dated ephemeris or visibility forecast. All display spacing and overview radii are designed. Catalogue data are separately distributed under CC BY-SA 4.0.",
+        "zh": "模拟：共面圆轨道、零相位教学排列；固定J2000近似天空；定性闪烁；彗星E步与反太阳尾。非当天星历或可见性预报。总览半径和间隔为设计值。星表独立以CC BY-SA 4.0发布。"
+      }
+    }
+  ]
+}

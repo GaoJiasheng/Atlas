@@ -33,6 +33,7 @@
 | 丝绸之路 / 郑和下西洋 | history | time | TimeScene/Geo | 课外拓展（历史） | 随时 |
 | 分数（P2–P4：平均分、等值分数、同分母与相关分母加减、带分数；比例留待后续） | math | lesson | MathScene/SVG | MOE 2021 数学课纲 Fractions（P2、P3，P4 桥）；详见 docs/15 | 2026 P2 起用，P3 接着做 | 已完成 12 步 + 练习（待审） |
 | 拆开一台 AI 服务器（NVIDIA DGX B200） | computer | space | SpaceScene/Model3D | 课外（MOE 小学无计算机课纲）；能量转换与热的传递接 Sci P4 热；详见 docs/18 | 2026（computer 类第一个） | published（2026-10-13） |
+| 太阳系与恒星（比例、八行星、较小天体、闪烁与新加坡星空、光年与银河系） | science | space + sim | SpaceScene/Model3D + solar-system 快照 | P4 光、P6太阳与能量接口；天文为拓展，详见 docs/65 | 2026（提前） | published（2026-10-29）：背景 + 7章、40拍；浏览器门槛交主会话 |
 | 土星五号与阿波罗飞船 | science | space + sim | SpaceScene/Model3D + 既有 table 试一试 | 课外拓展（非新增 PSLE 必考单元）；详见 docs/61 | 2026（提前） | published（2026-10-27）：背景 + 6 章、35 拍、33 个零件定义；浏览器验收交主 session |
 | 二进制与像素 | computer | 待定 | 待定 | 待定 | 待定 |
 

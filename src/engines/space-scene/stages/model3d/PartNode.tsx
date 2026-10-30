@@ -200,6 +200,7 @@ export interface PartNodeProps {
   airfoilSnap?: boolean;
   /** Try-it timeline channels the part plays (moves and turns). */
   play?: readonly SimPlay[] | null;
+  simScale?: number;
   /** Try-it stretch of the part's coil. */
   stretch?: SimStretch | null;
   /** Try-it bend of the part's strip (its main primitive, cut into slabs along the axis: shapes.ts). */
@@ -364,7 +365,7 @@ export function PartNode(props: PartNodeProps) {
     fillMotion.current.drawn = NaN;
     return () => fillGeometry?.dispose();
   }, [fillGeometry]);
-  useEffect(() => () => { props.fillBridge?.fills.delete(part.id); props.fillBridge?.shifts.delete(part.id); props.fillBridge?.copies.delete(part.id); props.fillBridge?.tints.delete(part.id); }, [props.fillBridge, part.id]);
+  useEffect(() => () => { props.fillBridge?.fills.delete(part.id); props.fillBridge?.shifts.delete(part.id); props.fillBridge?.scales.delete(part.id); props.fillBridge?.copies.delete(part.id); props.fillBridge?.tints.delete(part.id); }, [props.fillBridge, part.id]);
   useEffect(() => {
     if (!fillShape || !fillGeometry || !props.fillBridge || !props.fill) return;
     const binding = props.fill;
@@ -447,6 +448,7 @@ export function PartNode(props: PartNodeProps) {
     bendLength: 0,
     /** The played moves and turns last frame (a change asks the labels and shadows to look again). */
     playKey: '',
+    scalar: 1,
     /** Turning speed of a swinging (`settle`) turn, degrees per second. */
     turnV: 0,
     /** Per animation: its integrated angle (a sim-driven rotate) and how far it is switched on. */
@@ -885,6 +887,9 @@ export function PartNode(props: PartNodeProps) {
         aboutPivot(pr.matrix, tmpTurn.makeRotationAxis(tmpV.set(sm.axis[0], sm.axis[1], sm.axis[2]), m.turn * DEG2RAD), c);
       }
       pr.matrix.multiply(tmpPose);
+      const scalar = props.simScale ?? 1;
+      if (m.scalar !== scalar) { m.scalar = scalar; moving = true; }
+      pr.matrix.scale(tmpV.setScalar(scalar));
       const place = sm?.place;
       if (place) {
         if (m.placeTarget !== place) {
@@ -1000,6 +1005,21 @@ export function PartNode(props: PartNodeProps) {
             }
           }
         }
+      }
+      if (props.simScale !== undefined && props.fillBridge) {
+        const e = pr.matrix.elements;
+        let reading = props.fillBridge.scales.get(part.id);
+        if (!reading) { reading = { target: props.simScale, actual: [1, 1, 1] }; props.fillBridge.scales.set(part.id, reading); }
+        reading.target = props.simScale;
+        reading.actual[0] = Math.hypot(e[0]!, e[1]!, e[2]!);
+        reading.actual[1] = Math.hypot(e[4]!, e[5]!, e[6]!);
+        reading.actual[2] = Math.hypot(e[8]!, e[9]!, e[10]!);
+        const k = props.simScale;
+        const h = props.anchorHalf;
+        handle.half[0] = Math.abs(e[0]!) * h[0] + Math.abs(e[4]!) * h[1] + Math.abs(e[8]!) * h[2];
+        handle.half[1] = Math.abs(e[1]!) * h[0] + Math.abs(e[5]!) * h[1] + Math.abs(e[9]!) * h[2];
+        handle.half[2] = Math.abs(e[2]!) * h[0] + Math.abs(e[6]!) * h[1] + Math.abs(e[10]!) * h[2];
+        handle.radius = props.anchorRadius * k;
       }
       pr.matrixWorldNeedsUpdate = true;
       // The label anchor follows the pose.

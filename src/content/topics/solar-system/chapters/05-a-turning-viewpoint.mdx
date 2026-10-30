@@ -1,0 +1,660 @@
+---
+{
+  "id": "a-turning-viewpoint",
+  "order": 5,
+  "title": {
+    "en": "A turning viewpoint",
+    "zh": "转动的视点"
+  },
+  "state": {
+    "run": false,
+    "part": null,
+    "camera": {
+      "position": [
+        9,
+        7,
+        11
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "fov": 42
+    },
+    "layers": [
+      "local-sky"
+    ],
+    "hide": [
+      "sun",
+      "mercury",
+      "venus",
+      "earth",
+      "mars",
+      "jupiter",
+      "saturn",
+      "uranus",
+      "neptune",
+      "saturn-rings",
+      "orbit-tracks",
+      "scale-ruler",
+      "moon-parent",
+      "moon-demo",
+      "asteroid-specimen",
+      "asteroid-belt",
+      "comet-sun",
+      "comet-nucleus",
+      "comet-coma",
+      "ion-tail",
+      "dust-tail",
+      "meteor-world",
+      "atmosphere-shell",
+      "meteor-trail",
+      "pluto",
+      "sun-cut-shell",
+      "sun-core",
+      "star-source",
+      "disc-source",
+      "air-column",
+      "light-rays",
+      "straight-rays",
+      "observer-eye",
+      "reflecting-world",
+      "reflection-rays",
+      "crux-pattern",
+      "scorpius-pattern",
+      "depth-stars",
+      "earth-viewpoint",
+      "light-ruler",
+      "proxima-marker",
+      "galaxy-disc",
+      "galaxy-bar",
+      "sun-location",
+      "disc-rays"
+    ],
+    "labels": [
+      "observer",
+      "horizon",
+      "sky-stars"
+    ],
+    "view": "assembled",
+    "explode": 0,
+    "cutaway": "none",
+    "summary": {
+      "en": "The horizon belongs to the observer; the star direction is far beyond Earth.",
+      "zh": "地平线属于观察者；恒星方向则指向遥远的太空。"
+    },
+    "index": {
+      "parts": [
+        "observer",
+        "horizon",
+        "sky-stars",
+        "orion-pattern",
+        "earth-viewpoint"
+      ]
+    },
+    "sim": {
+      "set": {
+        "lab": "sky",
+        "elapsed-years": 0,
+        "planet": "earth",
+        "scale-mode": "overview",
+        "sky-date": "2026-01-15",
+        "sky-hour": 20,
+        "observer": "singapore",
+        "sky-target": "orion",
+        "pattern-links": true,
+        "depth": false,
+        "atmosphere": true,
+        "source-kind": "point",
+        "altitude-mode": "high",
+        "twinkle-seconds": 0,
+        "comet-step": 0,
+        "distance-target": "sun-earth"
+      },
+      "try": {
+        "vary": "sky-hour",
+        "also": [
+          "sky-date"
+        ],
+        "keep": [
+          {
+            "en": "Compare teaching snapshots; no live sky forecast.",
+            "zh": "比较教学快照，不作实时天空预报。"
+          }
+        ],
+        "observe": [
+          "scale-state"
+        ]
+      }
+    },
+    "beats": [
+      {
+        "caption": {
+          "en": "The horizon belongs to the observer; the star direction is far beyond Earth.",
+          "zh": "地平线属于观察者；恒星方向则指向遥远的太空。"
+        },
+        "run": false,
+        "part": null,
+        "camera": {
+          "position": [
+            9,
+            7,
+            11
+          ],
+          "target": [
+            0,
+            1,
+            0
+          ],
+          "fov": 42
+        },
+        "layers": [
+          "local-sky"
+        ],
+        "hide": [
+          "sun",
+          "mercury",
+          "venus",
+          "earth",
+          "mars",
+          "jupiter",
+          "saturn",
+          "uranus",
+          "neptune",
+          "saturn-rings",
+          "orbit-tracks",
+          "scale-ruler",
+          "moon-parent",
+          "moon-demo",
+          "asteroid-specimen",
+          "asteroid-belt",
+          "comet-sun",
+          "comet-nucleus",
+          "comet-coma",
+          "ion-tail",
+          "dust-tail",
+          "meteor-world",
+          "atmosphere-shell",
+          "meteor-trail",
+          "pluto",
+          "sun-cut-shell",
+          "sun-core",
+          "star-source",
+          "disc-source",
+          "air-column",
+          "light-rays",
+          "straight-rays",
+          "observer-eye",
+          "reflecting-world",
+          "reflection-rays",
+          "crux-pattern",
+          "scorpius-pattern",
+          "depth-stars",
+          "earth-viewpoint",
+          "light-ruler",
+          "proxima-marker",
+          "galaxy-disc",
+          "galaxy-bar",
+          "sun-location",
+          "disc-rays"
+        ],
+        "labels": [
+          "observer",
+          "horizon",
+          "sky-stars"
+        ],
+        "sim": {
+          "set": {
+            "lab": "sky",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "point",
+            "altitude-mode": "high",
+            "twinkle-seconds": 0,
+            "comet-step": 0,
+            "distance-target": "sun-earth"
+          }
+        }
+      },
+      {
+        "caption": {
+          "en": "Compare the same date two hours later: the star directions have shifted relative to the horizon.",
+          "zh": "比较同一日期两小时后的快照：星点方向相对地平线改变了。"
+        },
+        "run": false,
+        "part": null,
+        "camera": {
+          "position": [
+            9,
+            7,
+            11
+          ],
+          "target": [
+            0,
+            1,
+            0
+          ],
+          "fov": 42
+        },
+        "layers": [
+          "local-sky"
+        ],
+        "hide": [
+          "sun",
+          "mercury",
+          "venus",
+          "earth",
+          "mars",
+          "jupiter",
+          "saturn",
+          "uranus",
+          "neptune",
+          "saturn-rings",
+          "orbit-tracks",
+          "scale-ruler",
+          "moon-parent",
+          "moon-demo",
+          "asteroid-specimen",
+          "asteroid-belt",
+          "comet-sun",
+          "comet-nucleus",
+          "comet-coma",
+          "ion-tail",
+          "dust-tail",
+          "meteor-world",
+          "atmosphere-shell",
+          "meteor-trail",
+          "pluto",
+          "sun-cut-shell",
+          "sun-core",
+          "star-source",
+          "disc-source",
+          "air-column",
+          "light-rays",
+          "straight-rays",
+          "observer-eye",
+          "reflecting-world",
+          "reflection-rays",
+          "crux-pattern",
+          "scorpius-pattern",
+          "depth-stars",
+          "earth-viewpoint",
+          "light-ruler",
+          "proxima-marker",
+          "galaxy-disc",
+          "galaxy-bar",
+          "sun-location",
+          "disc-rays"
+        ],
+        "labels": [
+          "sky-stars",
+          "horizon"
+        ],
+        "sim": {
+          "set": {
+            "lab": "sky",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 22,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "point",
+            "altitude-mode": "high",
+            "twinkle-seconds": 0,
+            "comet-step": 0,
+            "distance-target": "sun-earth"
+          }
+        }
+      },
+      {
+        "caption": {
+          "en": "This external reference marks the ground observer. The distant star directions are projected around the local horizon.",
+          "zh": "外部参照标出地面观察者；遥远恒星的方向投影在本地地平线周围。"
+        },
+        "run": false,
+        "part": null,
+        "camera": {
+          "position": [
+            10,
+            8,
+            13
+          ],
+          "target": [
+            0,
+            1,
+            0
+          ],
+          "fov": 36
+        },
+        "layers": [
+          "local-sky"
+        ],
+        "hide": [
+          "sun",
+          "mercury",
+          "venus",
+          "earth",
+          "mars",
+          "jupiter",
+          "saturn",
+          "uranus",
+          "neptune",
+          "saturn-rings",
+          "orbit-tracks",
+          "scale-ruler",
+          "moon-parent",
+          "moon-demo",
+          "asteroid-specimen",
+          "asteroid-belt",
+          "comet-sun",
+          "comet-nucleus",
+          "comet-coma",
+          "ion-tail",
+          "dust-tail",
+          "meteor-world",
+          "atmosphere-shell",
+          "meteor-trail",
+          "pluto",
+          "sun-cut-shell",
+          "sun-core",
+          "star-source",
+          "disc-source",
+          "air-column",
+          "light-rays",
+          "straight-rays",
+          "observer-eye",
+          "reflecting-world",
+          "reflection-rays",
+          "crux-pattern",
+          "scorpius-pattern",
+          "depth-stars",
+          "light-ruler",
+          "proxima-marker",
+          "galaxy-disc",
+          "galaxy-bar",
+          "sun-location",
+          "disc-rays"
+        ],
+        "labels": [
+          "earth-viewpoint",
+          "observer",
+          "horizon"
+        ],
+        "sim": {
+          "set": {
+            "lab": "sky",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "point",
+            "altitude-mode": "high",
+            "twinkle-seconds": 0,
+            "comet-step": 0,
+            "distance-target": "sun-earth"
+          }
+        }
+      },
+      {
+        "caption": {
+          "en": "At the same clock time on another date, the nightward view is different.",
+          "zh": "换一个日期，在相同钟点朝夜空看，面向的太空方向会改变。"
+        },
+        "run": false,
+        "part": null,
+        "camera": {
+          "position": [
+            9,
+            7,
+            11
+          ],
+          "target": [
+            0,
+            1,
+            0
+          ],
+          "fov": 42
+        },
+        "layers": [
+          "local-sky"
+        ],
+        "hide": [
+          "sun",
+          "mercury",
+          "venus",
+          "earth",
+          "mars",
+          "jupiter",
+          "saturn",
+          "uranus",
+          "neptune",
+          "saturn-rings",
+          "orbit-tracks",
+          "scale-ruler",
+          "moon-parent",
+          "moon-demo",
+          "asteroid-specimen",
+          "asteroid-belt",
+          "comet-sun",
+          "comet-nucleus",
+          "comet-coma",
+          "ion-tail",
+          "dust-tail",
+          "meteor-world",
+          "atmosphere-shell",
+          "meteor-trail",
+          "pluto",
+          "sun-cut-shell",
+          "sun-core",
+          "star-source",
+          "disc-source",
+          "air-column",
+          "light-rays",
+          "straight-rays",
+          "observer-eye",
+          "reflecting-world",
+          "reflection-rays",
+          "orion-pattern",
+          "crux-pattern",
+          "scorpius-pattern",
+          "depth-stars",
+          "earth-viewpoint",
+          "light-ruler",
+          "proxima-marker",
+          "galaxy-disc",
+          "galaxy-bar",
+          "sun-location",
+          "disc-rays"
+        ],
+        "labels": [
+          "horizon",
+          "sky-stars"
+        ],
+        "sim": {
+          "set": {
+            "lab": "sky",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-04-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "point",
+            "altitude-mode": "high",
+            "twinkle-seconds": 0,
+            "comet-step": 0,
+            "distance-target": "sun-earth"
+          }
+        }
+      },
+      {
+        "caption": {
+          "en": "Follow the day-and-night link for Earth’s spin and the illuminated half.",
+          "zh": "沿昼夜的链接，继续看地球自转与被照亮的半面。"
+        },
+        "run": false,
+        "part": null,
+        "camera": {
+          "position": [
+            9,
+            7,
+            11
+          ],
+          "target": [
+            0,
+            1,
+            0
+          ],
+          "fov": 42
+        },
+        "layers": [
+          "local-sky"
+        ],
+        "hide": [
+          "sun",
+          "mercury",
+          "venus",
+          "earth",
+          "mars",
+          "jupiter",
+          "saturn",
+          "uranus",
+          "neptune",
+          "saturn-rings",
+          "orbit-tracks",
+          "scale-ruler",
+          "moon-parent",
+          "moon-demo",
+          "asteroid-specimen",
+          "asteroid-belt",
+          "comet-sun",
+          "comet-nucleus",
+          "comet-coma",
+          "ion-tail",
+          "dust-tail",
+          "meteor-world",
+          "atmosphere-shell",
+          "meteor-trail",
+          "pluto",
+          "sun-cut-shell",
+          "sun-core",
+          "star-source",
+          "disc-source",
+          "air-column",
+          "light-rays",
+          "straight-rays",
+          "observer-eye",
+          "reflecting-world",
+          "reflection-rays",
+          "crux-pattern",
+          "scorpius-pattern",
+          "depth-stars",
+          "earth-viewpoint",
+          "light-ruler",
+          "proxima-marker",
+          "galaxy-disc",
+          "galaxy-bar",
+          "sun-location",
+          "disc-rays"
+        ],
+        "labels": [
+          "observer",
+          "horizon"
+        ],
+        "sim": {
+          "set": {
+            "lab": "sky",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "point",
+            "altitude-mode": "high",
+            "twinkle-seconds": 0,
+            "comet-step": 0,
+            "distance-target": "sun-earth"
+          }
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+The horizon view puts the observer at the centre of the local sky. Its boundary stays attached to that place on Earth. The star markers instead represent directions far beyond Earth. Choose the later snapshot on the same date and compare a marker with the horizon. A changed position in this local view does not mean that the star has quickly travelled around our planet. <Num s="S30,S31,S37" />
+
+The paired examples use <Num s="S37">20:00</Num> and <Num s="S37">22:00</Num> Singapore time, separated by <Num s="S37">two hours</Num>. Keep the location and date fixed. The sky's apparent sweep comes mainly from the changing direction of an observer carried by Earth's rotation. Stars have their own motions, but their directions can be treated as approximately fixed over this short comparison. <Num s="S30,S37" />
+
+The outside view adds a small Earth reference to the local-horizon diagram. It locates the ground observer without modelling Earth's rotation on that sphere. Read this reference with the changed star directions in the selected sky snapshots. The sky diagram describes where to look; Earth's rotation explains why those directions change during a night. The linked topic supplies the rotating-globe mechanism. <Num s="S30,S37" />
+
+Now choose another date while keeping the local clock time the same. Earth's progress around the Sun changes which direction faces into the night, so the same clock reading need not give the same sky through the year. This annual change is different from the sweep during a single night. The selected dates are teaching comparisons. <TopicLink slug="sun-earth-moon" ch="a-turning-earth">A turning Earth</TopicLink> explains day and night; <TopicLink slug="sun-earth-moon" ch="a-tilted-year">A tilted year</TopicLink> follows the separate mechanism behind seasons. <Num s="S32,S37" />
+
+<More title={{ en: "Directions, rather than a nearby dome", zh: "方向不等于近处穹顶" }}>
+
+The drawn dome is a place to plot directions. Its radius is not a measured distance to the stars. Each catalogue direction is converted into a height above the geometric horizon and a direction around it. The calculation uses observer location and time. It omits the bending of light near the horizon and does not predict observed rising or setting.
+
+</More>
+
+<More title={{ en: "Keep the comparison controlled", zh: "每次只换一个条件" }}>
+
+To compare a single night's change, keep the date and place fixed and change the clock time. To compare the annual view, keep the place and clock time fixed and change the date. Clouds, buildings and street lighting are outside this model. A missing real-world observation should not be filled in as though a model snapshot were a sky recording. <Num s="S32,S37" />
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+地平视图把观察者放在本地天空中央，地平线始终属于地球上的这个地点。星点则标记指向遥远太空的方向。选择同一天较晚的快照，比较星点与地平线的关系；本地视图中的位置改变，不表示恒星在短时间内绕地球跑了一圈。 <Num s="S30,S31,S37" />
+
+这组例子选用新加坡时间 <Num s="S37">20:00</Num> 与 <Num s="S37">22:00</Num>，相隔 <Num s="S37">两小时</Num>，地点和日期不变。地球自转带着观察者转动，观看方向改变，产生夜空扫过的视运动。恒星本身也有运动，只是在这段短比较里，可以把它们的方向近似看成固定。 <Num s="S30,S37" />
+
+外部视图在地平图中加入一个小地球参照，用来说明地面观察者的位置，小球本身没有同步模拟地球自转。把它与选定快照中改变的恒星方向一起读：地平图描述朝哪里看，自转原理解释为什么一夜之间方向会改变。需要看转动球体的机制时，再进入链接主题。 <Num s="S30,S37" />
+
+再保持本地钟点不变，换一个日期。地球沿轨道前进，夜晚朝向的太空方向也随之变化；同一钟点在一年中不一定看到相同星空。这与同一夜里的扫过不同。示例日期只用于对照，昼夜机制可继续看<TopicLink slug="sun-earth-moon" ch="a-turning-earth">《自转的地球》</TopicLink>，四季的另一套机制则见<TopicLink slug="sun-earth-moon" ch="a-tilted-year">《倾斜的一年》</TopicLink>。 <Num s="S32,S37" />
+
+<More title={{ en: "Directions, rather than a nearby dome", zh: "方向不等于近处穹顶" }}>
+
+画出的天穹用于标方向，半径不代表恒星距离。计算把星表方向转换成地平线上方的高度与环绕地平的方向，需要地点和时间。它省略近地平光线偏折，不提供实际观测的升落预报。
+
+</More>
+
+<More title={{ en: "Keep the comparison controlled", zh: "每次只换一个条件" }}>
+
+比较一夜中的变化，固定日期与地点，只改钟点。比较年内夜空，固定地点与钟点，只改日期。云、建筑和街灯不在模型内。户外看不见时应如实留白，不能把模型快照填成实际观测记录。 <Num s="S32,S37" />
+
+</More>
+
+</Lang>

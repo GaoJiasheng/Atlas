@@ -1,0 +1,3753 @@
+{
+  "parts": [
+    {
+      "id": "sun",
+      "name": {
+        "en": "Sun",
+        "zh": "太阳"
+      },
+      "group": "solar-family",
+      "summary": {
+        "en": "Supplies sunlight to the solar system.",
+        "zh": "为太阳系提供阳光。"
+      },
+      "detail": {
+        "en": "The Sun is a star. Nuclear fusion in its hot plasma core releases energy. It has no solid surface. Its gravity holds the solar system together. [S3]\n\nThe physical reference radius is rounded to 700,000 km. This teaching sphere is enlarged in overview; its warm tone identifies a light source. Surface shading on other spheres only reveals their shape, not a day/night calculation. [S37]",
+        "zh": "太阳是恒星。高温等离子体核心中的核聚变释放能量；它没有固体表面。太阳的引力维系着太阳系。[S3]\n\n物理输入把半径粗略取作700,000千米。总览放大了这个教学球体；暖色用于辨认光源。其他球体的表面明暗只帮助看清形状，不计算昼夜。[S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:en-light",
+        "size": [
+          1
+        ]
+      }
+    },
+    {
+      "id": "mercury",
+      "name": {
+        "en": "Mercury",
+        "zh": "水星"
+      },
+      "group": "solar-family",
+      "summary": {
+        "en": "Orbits the Sun as a rocky planet.",
+        "zh": "作为类地行星绕太阳公转。"
+      },
+      "detail": {
+        "en": "Mercury is a rocky planet. Mean radius 2439.4 km; the displayed diameter is twice that. Its sidereal orbital period is 0.240847 Julian years. [S4,S5]\n\nThe reference semimajor axis is 0.387099 AU. This is a fitted reference value, not today's Sun distance. The model uses it as a circular radius with uniform angular motion; real orbits are ellipses. All starting phases are a teaching alignment. [S6,S26,S37]",
+        "zh": "水星是类地行星。平均半径为2439.4千米；直径是半径的两倍。恒星公转周期为0.240847儒略年。[S4,S5]\n\n参考半长轴为0.387099天文单位；这是拟合参考值，不是今天到太阳的距离。模型把它用作匀角速圆轨道的半径，真实轨道是椭圆。起始位置是教学排列。[S6,S26,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:neutral",
+        "size": [
+          1
+        ]
+      }
+    },
+    {
+      "id": "venus",
+      "name": {
+        "en": "Venus",
+        "zh": "金星"
+      },
+      "group": "solar-family",
+      "summary": {
+        "en": "Orbits the Sun as a rocky planet.",
+        "zh": "作为类地行星绕太阳公转。"
+      },
+      "detail": {
+        "en": "Venus is a rocky planet. Mean radius 6051.8 km; the displayed diameter is twice that. Its sidereal orbital period is 0.615197 Julian years. [S4,S5]\n\nThe reference semimajor axis is 0.723336 AU. This is a fitted reference value, not today's Sun distance. The model uses it as a circular radius with uniform angular motion; real orbits are ellipses. All starting phases are a teaching alignment. [S6,S26,S37]",
+        "zh": "金星是类地行星。平均半径为6051.8千米；直径是半径的两倍。恒星公转周期为0.615197儒略年。[S4,S5]\n\n参考半长轴为0.723336天文单位；这是拟合参考值，不是今天到太阳的距离。模型把它用作匀角速圆轨道的半径，真实轨道是椭圆。起始位置是教学排列。[S6,S26,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:ink-3",
+        "size": [
+          1
+        ]
+      }
+    },
+    {
+      "id": "earth",
+      "name": {
+        "en": "Earth",
+        "zh": "地球"
+      },
+      "group": "solar-family",
+      "summary": {
+        "en": "Orbits the Sun as a rocky planet.",
+        "zh": "作为类地行星绕太阳公转。"
+      },
+      "detail": {
+        "en": "Earth is a rocky planet. Mean radius 6371.01 km; the displayed diameter is twice that. Its sidereal orbital period is 1.00002 Julian years. [S4,S5]\n\nThe reference semimajor axis is 1 AU. This is a fitted reference value, not today's Sun distance. The model uses it as a circular radius with uniform angular motion; real orbits are ellipses. All starting phases are a teaching alignment. [S6,S26,S37]",
+        "zh": "地球是类地行星。平均半径为6371.01千米；直径是半径的两倍。恒星公转周期为1.00002儒略年。[S4,S5]\n\n参考半长轴为1天文单位；这是拟合参考值，不是今天到太阳的距离。模型把它用作匀角速圆轨道的半径，真实轨道是椭圆。起始位置是教学排列。 地球轨道参数采用地月质心的代理值。[S6,S26,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:cold",
+        "size": [
+          1
+        ]
+      }
+    },
+    {
+      "id": "mars",
+      "name": {
+        "en": "Mars",
+        "zh": "火星"
+      },
+      "group": "solar-family",
+      "summary": {
+        "en": "Orbits the Sun as a rocky planet.",
+        "zh": "作为类地行星绕太阳公转。"
+      },
+      "detail": {
+        "en": "Mars is a rocky planet. Mean radius 3389.5 km; the displayed diameter is twice that. Its sidereal orbital period is 1.88085 Julian years. [S4,S5]\n\nThe reference semimajor axis is 1.52371 AU. This is a fitted reference value, not today's Sun distance. The model uses it as a circular radius with uniform angular motion; real orbits are ellipses. All starting phases are a teaching alignment. [S6,S26,S37]",
+        "zh": "火星是类地行星。平均半径为3389.5千米；直径是半径的两倍。恒星公转周期为1.88085儒略年。[S4,S5]\n\n参考半长轴为1.52371天文单位；这是拟合参考值，不是今天到太阳的距离。模型把它用作匀角速圆轨道的半径，真实轨道是椭圆。起始位置是教学排列。[S6,S26,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:signal",
+        "size": [
+          1
+        ]
+      }
+    },
+    {
+      "id": "jupiter",
+      "name": {
+        "en": "Jupiter",
+        "zh": "木星"
+      },
+      "group": "solar-family",
+      "summary": {
+        "en": "Orbits the Sun as a gas giant.",
+        "zh": "作为气态巨行星绕太阳公转。"
+      },
+      "detail": {
+        "en": "Jupiter is a gas giant. It has no hard surface to stand on. Mean radius 69911 km; the displayed diameter is twice that. Its sidereal orbital period is 11.8626 Julian years. [S4,S5]\n\nThe reference semimajor axis is 5.20289 AU. This is a fitted reference value, not today's Sun distance. The model uses it as a circular radius with uniform angular motion; real orbits are ellipses. All starting phases are a teaching alignment. [S6,S26,S37]",
+        "zh": "木星是气态巨行星。 它没有可以站立的硬表面。平均半径为69911千米；直径是半径的两倍。恒星公转周期为11.8626儒略年。[S4,S5]\n\n参考半长轴为5.20289天文单位；这是拟合参考值，不是今天到太阳的距离。模型把它用作匀角速圆轨道的半径，真实轨道是椭圆。起始位置是教学排列。[S6,S26,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:ink-2",
+        "size": [
+          1
+        ]
+      }
+    },
+    {
+      "id": "saturn",
+      "name": {
+        "en": "Saturn",
+        "zh": "土星"
+      },
+      "group": "solar-family",
+      "summary": {
+        "en": "Orbits the Sun as a gas giant.",
+        "zh": "作为气态巨行星绕太阳公转。"
+      },
+      "detail": {
+        "en": "Saturn is a gas giant. It has no hard surface to stand on. Mean radius 58232 km; the displayed diameter is twice that. Its sidereal orbital period is 29.4475 Julian years. [S4,S5]\n\nThe reference semimajor axis is 9.53668 AU. This is a fitted reference value, not today's Sun distance. The model uses it as a circular radius with uniform angular motion; real orbits are ellipses. All starting phases are a teaching alignment. [S6,S26,S37]",
+        "zh": "土星是气态巨行星。 它没有可以站立的硬表面。平均半径为58232千米；直径是半径的两倍。恒星公转周期为29.4475儒略年。[S4,S5]\n\n参考半长轴为9.53668天文单位；这是拟合参考值，不是今天到太阳的距离。模型把它用作匀角速圆轨道的半径，真实轨道是椭圆。起始位置是教学排列。[S6,S26,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:neutral",
+        "size": [
+          1
+        ]
+      }
+    },
+    {
+      "id": "uranus",
+      "name": {
+        "en": "Uranus",
+        "zh": "天王星"
+      },
+      "group": "solar-family",
+      "summary": {
+        "en": "Orbits the Sun as a ice giant.",
+        "zh": "作为冰巨行星绕太阳公转。"
+      },
+      "detail": {
+        "en": "Uranus is an ice giant. It has no hard surface to stand on. Mean radius 25362 km; the displayed diameter is twice that. Its sidereal orbital period is 84.0168 Julian years. [S4,S5]\n\nThe reference semimajor axis is 19.1892 AU. This is a fitted reference value, not today's Sun distance. The model uses it as a circular radius with uniform angular motion; real orbits are ellipses. All starting phases are a teaching alignment. [S6,S26,S37]",
+        "zh": "天王星是冰巨行星。 它没有可以站立的硬表面。平均半径为25362千米；直径是半径的两倍。恒星公转周期为84.0168儒略年。[S4,S5]\n\n参考半长轴为19.1892天文单位；这是拟合参考值，不是今天到太阳的距离。模型把它用作匀角速圆轨道的半径，真实轨道是椭圆。起始位置是教学排列。[S6,S26,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:cold",
+        "size": [
+          1
+        ]
+      }
+    },
+    {
+      "id": "neptune",
+      "name": {
+        "en": "Neptune",
+        "zh": "海王星"
+      },
+      "group": "solar-family",
+      "summary": {
+        "en": "Orbits the Sun as a ice giant.",
+        "zh": "作为冰巨行星绕太阳公转。"
+      },
+      "detail": {
+        "en": "Neptune is an ice giant. It has no hard surface to stand on. Mean radius 24622 km; the displayed diameter is twice that. Its sidereal orbital period is 164.791 Julian years. [S4,S5]\n\nThe reference semimajor axis is 30.0699 AU. This is a fitted reference value, not today's Sun distance. The model uses it as a circular radius with uniform angular motion; real orbits are ellipses. All starting phases are a teaching alignment. [S6,S26,S37]",
+        "zh": "海王星是冰巨行星。 它没有可以站立的硬表面。平均半径为24622千米；直径是半径的两倍。恒星公转周期为164.791儒略年。[S4,S5]\n\n参考半长轴为30.0699天文单位；这是拟合参考值，不是今天到太阳的距离。模型把它用作匀角速圆轨道的半径，真实轨道是椭圆。起始位置是教学排列。[S6,S26,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:cold",
+        "size": [
+          1
+        ]
+      }
+    },
+    {
+      "id": "saturn-rings",
+      "name": {
+        "en": "Saturn’s rings",
+        "zh": "土星环"
+      },
+      "group": "solar-family",
+      "summary": {
+        "en": "Represent many orbiting pieces of ice and rock.",
+        "zh": "表示绕土星运动的大量冰块和岩块。"
+      },
+      "detail": {
+        "en": "Saturn’s rings contain many pieces of ice and rock, not a solid hoop. This thin annulus shows their overall form; its thickness and gaps are illustrative. It shares Saturn’s centre and size mapping. [S11,S37]",
+        "zh": "土星环由大量冰块和岩块组成，不是实心圆箍。薄环只表示整体形态，厚度和缝隙是示意。它与土星共用中心和大小映射。[S11,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:ink-3",
+        "profile": [
+          [
+            1.3,
+            -0.008
+          ],
+          [
+            2.05,
+            -0.008
+          ],
+          [
+            2.05,
+            0.008
+          ],
+          [
+            1.3,
+            0.008
+          ],
+          [
+            1.3,
+            -0.008
+          ]
+        ],
+        "segments": 96
+      }
+    },
+    {
+      "id": "orbit-tracks",
+      "name": {
+        "en": "Orbit guides",
+        "zh": "轨道辅助线"
+      },
+      "group": "solar-family",
+      "summary": {
+        "en": "Trace idealised circular paths.",
+        "zh": "描出理想化的圆形路径。"
+      },
+      "detail": {
+        "en": "These lines are paths, not rods or walls in space. Overview compresses orbital distances using a square-root mapping. True scale and distance views hide these schematic guides. [S37]\n\nReal planetary orbits are ellipses; speeds vary along them. This lesson compares periods without claiming to predict positions on a date. [S26]",
+        "zh": "这些线表示路径，不是太空中的杆或墙。总览用平方根映射压缩轨道距离；真比例与距离尺隐藏这些示意线。[S37]\n\n真实行星轨道是椭圆，沿轨道的速率会改变。本主题比较周期，不预测某一天的位置。[S26]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "torus",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:ink-3",
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "size": [
+          3.1108651127941886,
+          0.012
+        ]
+      },
+      "extra": [
+        {
+          "kind": "torus",
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "color": "matte",
+          "tint": "token:ink-3",
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "size": [
+            4.252457113246411,
+            0.012
+          ]
+        },
+        {
+          "kind": "torus",
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "color": "matte",
+          "tint": "token:ink-3",
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "size": [
+            5.000006524995743,
+            0.012
+          ]
+        },
+        {
+          "kind": "torus",
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "color": "matte",
+          "tint": "token:ink-3",
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "size": [
+            6.171933125042753,
+            0.012
+          ]
+        },
+        {
+          "kind": "torus",
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "color": "matte",
+          "tint": "token:ink-3",
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "size": [
+            11.40491889493301,
+            0.012
+          ]
+        },
+        {
+          "kind": "torus",
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "color": "matte",
+          "tint": "token:ink-3",
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "size": [
+            15.440754466670338,
+            0.012
+          ]
+        },
+        {
+          "kind": "torus",
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "color": "matte",
+          "tint": "token:ink-3",
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "size": [
+            21.902719374543427,
+            0.012
+          ]
+        },
+        {
+          "kind": "torus",
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "color": "matte",
+          "tint": "token:ink-3",
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "size": [
+            27.418024527671573,
+            0.012
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scale-ruler",
+      "name": {
+        "en": "Reference-distance ruler",
+        "zh": "参考距离尺"
+      },
+      "group": "solar-family",
+      "summary": {
+        "en": "Marks reference centres with separate ticks.",
+        "zh": "用独立刻线标出参考中心位置。"
+      },
+      "detail": {
+        "en": "The line uses a common reference-distance scale: ten scene units per AU. Each tall tick marks a centre position; a tick is not a planet’s diameter. The actual spheres keep the same physical size-to-distance scale and can be too small to see. [S6,S37]\n\nAU is an exactly defined unit; semimajor axes are reference orbit sizes. Earth’s value here is an Earth–Moon barycentre proxy. [S6,S7]",
+        "zh": "这条线用同一参考距离尺：每个天文单位对应十个场景单位。竖刻线标出中心位置，不表示行星直径。真正的球体维持统一的大小与距离比例，可能小到看不清。[S6,S37]\n\n天文单位是精确定义的长度；半长轴表示参考轨道大小。这里的地球参数采用地月质心代理值。[S6,S7]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "tube",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:ink-2",
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            301,
+            0,
+            0
+          ]
+        ],
+        "radius": 0.035
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "at": [
+            3.8709927,
+            1.5,
+            0
+          ],
+          "color": "matte",
+          "tint": "token:signal",
+          "size": [
+            0.1,
+            0.1,
+            3
+          ]
+        },
+        {
+          "kind": "cylinder",
+          "at": [
+            7.2333566000000005,
+            1.5,
+            0
+          ],
+          "color": "matte",
+          "tint": "token:signal",
+          "size": [
+            0.1,
+            0.1,
+            3
+          ]
+        },
+        {
+          "kind": "cylinder",
+          "at": [
+            10.0000261,
+            1.5,
+            0
+          ],
+          "color": "matte",
+          "tint": "token:signal",
+          "size": [
+            0.1,
+            0.1,
+            3
+          ]
+        },
+        {
+          "kind": "cylinder",
+          "at": [
+            15.2371034,
+            1.5,
+            0
+          ],
+          "color": "matte",
+          "tint": "token:signal",
+          "size": [
+            0.1,
+            0.1,
+            3
+          ]
+        },
+        {
+          "kind": "cylinder",
+          "at": [
+            52.02887,
+            1.5,
+            0
+          ],
+          "color": "matte",
+          "tint": "token:signal",
+          "size": [
+            0.1,
+            0.1,
+            3
+          ]
+        },
+        {
+          "kind": "cylinder",
+          "at": [
+            95.3667594,
+            1.5,
+            0
+          ],
+          "color": "matte",
+          "tint": "token:signal",
+          "size": [
+            0.1,
+            0.1,
+            3
+          ]
+        },
+        {
+          "kind": "cylinder",
+          "at": [
+            191.8916464,
+            1.5,
+            0
+          ],
+          "color": "matte",
+          "tint": "token:signal",
+          "size": [
+            0.1,
+            0.1,
+            3
+          ]
+        },
+        {
+          "kind": "cylinder",
+          "at": [
+            300.69922760000003,
+            1.5,
+            0
+          ],
+          "color": "matte",
+          "tint": "token:signal",
+          "size": [
+            0.1,
+            0.1,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "moon-parent",
+      "name": {
+        "en": "Parent planet",
+        "zh": "母体行星"
+      },
+      "group": "small-bodies",
+      "summary": {
+        "en": "Provides a local reference for a moon’s orbit.",
+        "zh": "为卫星轨道提供局部参照。"
+      },
+      "detail": {
+        "en": "A natural satellite orbits a larger body; the pair also travels around the Sun. This local planet and its companion are schematic, not a scale reconstruction of Earth and Moon. [S8,S37]",
+        "zh": "自然卫星绕较大的天体运动；两者也一起绕太阳公转。这个母体与伴星是局部示意，不是按比例重建的地月系统。[S8,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          -2,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:cold",
+        "size": [
+          0.8
+        ]
+      }
+    },
+    {
+      "id": "moon-demo",
+      "name": {
+        "en": "Natural satellite",
+        "zh": "自然卫星"
+      },
+      "group": "small-bodies",
+      "summary": {
+        "en": "Orbits its parent while accompanying it around the Sun.",
+        "zh": "绕母体运动，同时随母体绕太阳公转。"
+      },
+      "detail": {
+        "en": "This companion represents a natural satellite. A moon is not an additional major planet. Mercury and Venus have no moons. The guide marks a local orbit, without reproducing lunar phases or eclipses. [S8]\n\nFor Earth’s Moon, use the linked Sun, Earth and Moon lesson. [S37]",
+        "zh": "这个伴星表示自然卫星，不是多出的一颗主要行星。水星和金星没有卫星。辅助圈只表示局部轨道，不重画月相或食。[S8]\n\n地球的月球另见链接的《太阳、地球、月亮》。[S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          -0.1,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:ink-2",
+        "size": [
+          0.18
+        ]
+      },
+      "extra": [
+        {
+          "kind": "torus",
+          "at": [
+            -2,
+            0,
+            0
+          ],
+          "color": "matte",
+          "tint": "token:ink-3",
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "size": [
+            1.9,
+            0.012
+          ]
+        }
+      ]
+    },
+    {
+      "id": "asteroid-specimen",
+      "name": {
+        "en": "Asteroid specimen",
+        "zh": "小行星标本"
+      },
+      "group": "small-bodies",
+      "summary": {
+        "en": "Represents a small rocky body.",
+        "zh": "表示较小的岩质天体。"
+      },
+      "detail": {
+        "en": "Asteroids are rocky remnants of solar-system formation. This irregular specimen is an original illustrative shape, not a named asteroid or measured surface. Many asteroids orbit in the main belt between Mars and Jupiter. [S9,S37]",
+        "zh": "小行星是太阳系形成后留下的岩质天体。这块不规则标本是原创示意形状，不对应某颗有名的小行星或实测表面。许多小行星位于火星与木星之间的主带。[S9,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          2,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:ink-2",
+        "scale": [
+          1,
+          0.65,
+          0.8
+        ],
+        "size": [
+          0.65
+        ]
+      }
+    },
+    {
+      "id": "asteroid-belt",
+      "name": {
+        "en": "Sparse belt sample",
+        "zh": "稀疏主带样本"
+      },
+      "group": "small-bodies",
+      "summary": {
+        "en": "Represents widely separated bodies in the main belt.",
+        "zh": "表示主带中分散的天体。"
+      },
+      "detail": {
+        "en": "Most asteroids are in the main belt between Mars and Jupiter. The marks are a sparse teaching sample, not a count, measured density or wall of touching rocks. Not every asteroid is in this belt. [S9,S37]",
+        "zh": "多数小行星位于火星与木星之间的主带。图中只是稀疏的教学标记，不表示数量、实测密度或紧挨着的石墙；并非所有小行星都在主带。[S9,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:ink-2",
+        "size": [
+          0.065
+        ]
+      },
+      "repeat": {
+        "count": 36,
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "radius": 3.2
+      }
+    },
+    {
+      "id": "comet-sun",
+      "name": {
+        "en": "Sun direction reference",
+        "zh": "太阳方向参照"
+      },
+      "group": "small-bodies",
+      "summary": {
+        "en": "Locates the Sun in the comet experiment.",
+        "zh": "标出彗星实验中的太阳。"
+      },
+      "detail": {
+        "en": "This source marks the Sun at the focus of the illustrative comet ellipse. Sizes and tail lengths are schematic; four eccentric-anomaly steps are not equally spaced times. [S10,S37]",
+        "zh": "这个光源标出示意彗星椭圆焦点上的太阳。大小与尾长不按比例；四个偏近点角步骤不代表相等的时间间隔。[S10,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:en-light",
+        "size": [
+          0.35
+        ]
+      }
+    },
+    {
+      "id": "comet-nucleus",
+      "name": {
+        "en": "Comet nucleus",
+        "zh": "彗核"
+      },
+      "group": "small-bodies",
+      "summary": {
+        "en": "Contains ice and dust.",
+        "zh": "包含冰与尘埃。"
+      },
+      "detail": {
+        "en": "Heating near the Sun can release gas and dust from an icy nucleus, forming a coma and tails. Sunlight and solar wind drive material generally away from the Sun. The narrow ion tail and broader dust tail need not point behind the comet’s motion. [S10]\n\nThe four positions and tail lengths are a qualitative construction, not a named comet ephemeris. [S37]",
+        "zh": "含冰彗核接近太阳受热时，可能释放气体与尘埃，形成彗发和彗尾。阳光与太阳风使物质大致向背离太阳的方向延伸。细离子尾与较宽的尘尾不一定拖在运动方向后方。[S10]\n\n四个位置和尾长都是定性构图，不是某颗有名彗星的星历。[S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:ink-2",
+        "scale": [
+          1.2,
+          0.75,
+          0.9
+        ],
+        "size": [
+          0.15
+        ]
+      }
+    },
+    {
+      "id": "comet-coma",
+      "name": {
+        "en": "Coma",
+        "zh": "彗发"
+      },
+      "group": "small-bodies",
+      "summary": {
+        "en": "Marks the cloud around an active nucleus.",
+        "zh": "标出活跃彗核周围的云状物。"
+      },
+      "detail": {
+        "en": "Heating near the Sun can release gas and dust from an icy nucleus, forming a coma and tails. Sunlight and solar wind drive material generally away from the Sun. The narrow ion tail and broader dust tail need not point behind the comet’s motion. [S10]\n\nThe four positions and tail lengths are a qualitative construction, not a named comet ephemeris. [S37]",
+        "zh": "含冰彗核接近太阳受热时，可能释放气体与尘埃，形成彗发和彗尾。阳光与太阳风使物质大致向背离太阳的方向延伸。细离子尾与较宽的尘尾不一定拖在运动方向后方。[S10]\n\n四个位置和尾长都是定性构图，不是某颗有名彗星的星历。[S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "membrane",
+        "tint": "token:ink-3",
+        "size": [
+          0.35
+        ]
+      }
+    },
+    {
+      "id": "ion-tail",
+      "name": {
+        "en": "Ion tail",
+        "zh": "离子尾"
+      },
+      "group": "small-bodies",
+      "summary": {
+        "en": "Points generally away from the Sun.",
+        "zh": "大致指向背离太阳的方向。"
+      },
+      "detail": {
+        "en": "Heating near the Sun can release gas and dust from an icy nucleus, forming a coma and tails. Sunlight and solar wind drive material generally away from the Sun. The narrow ion tail and broader dust tail need not point behind the comet’s motion. [S10]\n\nThe four positions and tail lengths are a qualitative construction, not a named comet ephemeris. [S37]",
+        "zh": "含冰彗核接近太阳受热时，可能释放气体与尘埃，形成彗发和彗尾。阳光与太阳风使物质大致向背离太阳的方向延伸。细离子尾与较宽的尘尾不一定拖在运动方向后方。[S10]\n\n四个位置和尾长都是定性构图，不是某颗有名彗星的星历。[S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "tube",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:cold",
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            3,
+            0,
+            0
+          ]
+        ],
+        "radius": 0.025
+      }
+    },
+    {
+      "id": "dust-tail",
+      "name": {
+        "en": "Dust tail",
+        "zh": "尘埃尾"
+      },
+      "group": "small-bodies",
+      "summary": {
+        "en": "Curves alongside the narrow ion tail.",
+        "zh": "在细离子尾旁形成弯曲的尾。"
+      },
+      "detail": {
+        "en": "Heating near the Sun can release gas and dust from an icy nucleus, forming a coma and tails. Sunlight and solar wind drive material generally away from the Sun. The narrow ion tail and broader dust tail need not point behind the comet’s motion. [S10]\n\nThe four positions and tail lengths are a qualitative construction, not a named comet ephemeris. [S37]",
+        "zh": "含冰彗核接近太阳受热时，可能释放气体与尘埃，形成彗发和彗尾。阳光与太阳风使物质大致向背离太阳的方向延伸。细离子尾与较宽的尘尾不一定拖在运动方向后方。[S10]\n\n四个位置和尾长都是定性构图，不是某颗有名彗星的星历。[S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sweep",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:neutral",
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.8,
+            0,
+            -0.15
+          ],
+          [
+            1.8,
+            0,
+            -0.45
+          ],
+          [
+            2.6,
+            0,
+            -0.7
+          ]
+        ],
+        "radius": [
+          0.02,
+          0.12,
+          0.17,
+          0.04
+        ]
+      }
+    },
+    {
+      "id": "meteor-world",
+      "name": {
+        "en": "Atmospheric world",
+        "zh": "有大气的天体"
+      },
+      "group": "small-bodies",
+      "summary": {
+        "en": "Places the meteor example at an atmosphere.",
+        "zh": "把流星现象放在大气环境里。"
+      },
+      "detail": {
+        "en": "This local sphere marks a planet with an atmosphere. A meteor is a light phenomenon during atmospheric passage, not a star falling through space. [S25,S37]",
+        "zh": "这个局部球体表示有大气的行星。流星是天体穿过大气时出现的发光现象，不是恒星从太空落下来。[S25,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          -2,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:cold",
+        "size": [
+          0.8
+        ]
+      }
+    },
+    {
+      "id": "atmosphere-shell",
+      "name": {
+        "en": "Atmosphere reference",
+        "zh": "大气示意层"
+      },
+      "group": "small-bodies",
+      "summary": {
+        "en": "Locates the air around the meteor example.",
+        "zh": "标出流星例子中的大气位置。"
+      },
+      "detail": {
+        "en": "The transparent shell locates an atmosphere; its thickness is enlarged to make it visible. This is not a measured atmospheric-height scale. [S25,S37]",
+        "zh": "透明壳标出大气的位置；厚度放大了，便于看见，不是大气高度的测量尺。[S25,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          -2,
+          0,
+          0
+        ],
+        "color": "membrane",
+        "tint": "token:ink-3",
+        "size": [
+          1.05
+        ]
+      }
+    },
+    {
+      "id": "meteor-trail",
+      "name": {
+        "en": "Meteor light",
+        "zh": "流星光迹"
+      },
+      "group": "small-bodies",
+      "summary": {
+        "en": "Marks light produced during atmospheric passage.",
+        "zh": "标出穿过大气时产生的发光现象。"
+      },
+      "detail": {
+        "en": "A meteor is the luminous phenomenon associated with an incoming meteoroid in an atmosphere. Material that reaches the ground is a meteorite. The drawn streak marks light, not a stellar body or a measured trajectory. [S25,S37]",
+        "zh": "流星是流星体进入大气时出现的发光现象。到达地面的物质称为陨石。图中的线表示光迹，不是恒星本体或实测轨迹。[S25,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "tube",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:signal",
+        "path": [
+          [
+            -2.85,
+            0.65,
+            0
+          ],
+          [
+            -2.2,
+            0.98,
+            0
+          ]
+        ],
+        "radius": 0.035
+      }
+    },
+    {
+      "id": "pluto",
+      "name": {
+        "en": "Pluto",
+        "zh": "冥王星"
+      },
+      "group": "small-bodies",
+      "summary": {
+        "en": "Remains in the solar system as a dwarf planet.",
+        "zh": "以矮行星身份留在太阳系中。"
+      },
+      "detail": {
+        "en": "Pluto is classified as a dwarf planet and remains a solar-system body. It is not one of the eight major planets counted in this lesson. Classification changes a label, not whether the object exists. Size and placement here are schematic. [S4,S37]",
+        "zh": "冥王星属于矮行星，仍然是太阳系天体；它不在本主题所数的八颗主要行星之中。分类改变的是名称，不是天体是否存在。这里的大小与位置都是示意。[S4,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          4,
+          0,
+          -2
+        ],
+        "color": "matte",
+        "tint": "token:ink-2",
+        "size": [
+          0.22
+        ]
+      }
+    },
+    {
+      "id": "sun-cut-shell",
+      "name": {
+        "en": "Sun cutaway study",
+        "zh": "太阳剖面示意"
+      },
+      "group": "light-and-air",
+      "summary": {
+        "en": "Exposes an illustrative interior.",
+        "zh": "展示示意性的内部。"
+      },
+      "detail": {
+        "en": "The opening lets us locate the energy-releasing core. Neither this cut surface nor the relative layer thickness is a measurement of the Sun. [S3,S37]",
+        "zh": "开口帮助定位释放能量的核心。切口和各层相对厚度都不是太阳的测量数据。[S3,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "lathe",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:en-light",
+        "profile": [
+          [
+            0,
+            -1.5
+          ],
+          [
+            0.9,
+            -1.2
+          ],
+          [
+            1.45,
+            -0.4
+          ],
+          [
+            1.5,
+            0
+          ],
+          [
+            1.45,
+            0.4
+          ],
+          [
+            0.9,
+            1.2
+          ],
+          [
+            0,
+            1.5
+          ]
+        ],
+        "segments": 64,
+        "arc": 180
+      }
+    },
+    {
+      "id": "sun-core",
+      "name": {
+        "en": "Solar core marker",
+        "zh": "太阳核心标记"
+      },
+      "group": "light-and-air",
+      "summary": {
+        "en": "Locates the region where fusion releases energy.",
+        "zh": "定位核聚变释放能量的区域。"
+      },
+      "detail": {
+        "en": "Nuclear fusion in the solar core releases energy. The Sun is hot plasma, not a ball of ordinary burning fuel. This core marker shows location, not a measured core radius. [S3,S37]",
+        "zh": "太阳核心的核聚变释放能量。太阳是高温等离子体，不是燃烧普通燃料的火球。核心标记只表示位置，不表示实测半径。[S3,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:hot",
+        "size": [
+          0.45
+        ]
+      }
+    },
+    {
+      "id": "star-source",
+      "name": {
+        "en": "Point-like source",
+        "zh": "点状光源"
+      },
+      "group": "light-and-air",
+      "summary": {
+        "en": "Provides a qualitative comparison light.",
+        "zh": "提供定性比较的光源。"
+      },
+      "detail": {
+        "en": "A distant star appears nearly point-like; a planet’s apparent disc sends light along several atmospheric paths. Averaging those paths usually reduces rapid twinkling. This source shape and sampled brightness are qualitative, not angular-size or weather measurements. [S12,S13,S37]",
+        "zh": "遥远恒星看起来近似光点；行星的视圆盘让光经过多条大气路径，不同起伏的平均通常会减弱快速闪烁。光源形状和分步亮度都是定性示意，不是角直径或天气测量。[S12,S13,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          -3,
+          1.5,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:en-light",
+        "size": [
+          0.14
+        ]
+      }
+    },
+    {
+      "id": "disc-source",
+      "name": {
+        "en": "Apparent disc source",
+        "zh": "视圆盘光源"
+      },
+      "group": "light-and-air",
+      "summary": {
+        "en": "Provides a qualitative comparison light.",
+        "zh": "提供定性比较的光源。"
+      },
+      "detail": {
+        "en": "A distant star appears nearly point-like; a planet’s apparent disc sends light along several atmospheric paths. Averaging those paths usually reduces rapid twinkling. This source shape and sampled brightness are qualitative, not angular-size or weather measurements. [S12,S13,S37]",
+        "zh": "遥远恒星看起来近似光点；行星的视圆盘让光经过多条大气路径，不同起伏的平均通常会减弱快速闪烁。光源形状和分步亮度都是定性示意，不是角直径或天气测量。[S12,S13,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          -3,
+          1.5,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:en-light",
+        "scale": [
+          0.3,
+          1,
+          1
+        ],
+        "size": [
+          0.38
+        ]
+      }
+    },
+    {
+      "id": "air-column",
+      "name": {
+        "en": "Air-path sample",
+        "zh": "空气路径样本"
+      },
+      "group": "light-and-air",
+      "summary": {
+        "en": "Locates changing refractive conditions along the light path.",
+        "zh": "标出光路中折射条件会改变的空气。"
+      },
+      "detail": {
+        "en": "Moving air with changing refractive conditions bends arriving light differently. The translucent planes locate a qualitative atmosphere sample; they are not solid sheets in the sky. Near-horizon paths cross more atmosphere. [S12,S13,S37]",
+        "zh": "流动空气中的折射条件会变化，使到来的光发生不同的偏折。半透明平面只标出定性的大气样本，不是天空里的固体薄板。接近地平线的光路会穿过更多大气。[S12,S13,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "plane",
+        "at": [
+          -0.7,
+          0.2,
+          0
+        ],
+        "color": "membrane",
+        "tint": "token:cold",
+        "rotation": [
+          0,
+          90,
+          0
+        ],
+        "size": [
+          1.4,
+          3.4
+        ]
+      },
+      "extra": [
+        {
+          "kind": "plane",
+          "at": [
+            0.7,
+            0.2,
+            0
+          ],
+          "color": "membrane",
+          "tint": "token:cold",
+          "rotation": [
+            0,
+            90,
+            0
+          ],
+          "size": [
+            1.4,
+            3.4
+          ]
+        }
+      ]
+    },
+    {
+      "id": "light-rays",
+      "name": {
+        "en": "Bent-light guide",
+        "zh": "偏折光路线"
+      },
+      "group": "light-and-air",
+      "summary": {
+        "en": "Shows a continuous schematic bent path through air.",
+        "zh": "表示光经过空气时连续而偏折的示意路径。"
+      },
+      "detail": {
+        "en": "The guide shows refraction: changing optical conditions change a light path. The bends are exaggerated to read on a small screen. Use the sampled time control to compare brightness; this line is a qualitative diagram, not a tracked photon. [S12,S37]",
+        "zh": "辅助线表示折射：光学条件改变会使光路改变。偏折被放大了，便于在小屏幕上辨认。用分步时间控件比较亮度；线条是定性图，不是对单个光子的追踪。[S12,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "tube",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:signal",
+        "path": [
+          [
+            -3,
+            1.5,
+            0
+          ],
+          [
+            -0.7,
+            0.65,
+            0
+          ],
+          [
+            0.7,
+            0.05,
+            0
+          ],
+          [
+            3,
+            -1,
+            0
+          ]
+        ],
+        "radius": 0.018
+      }
+    },
+    {
+      "id": "disc-rays",
+      "name": {
+        "en": "Disc-path samples",
+        "zh": "圆盘光路样本"
+      },
+      "group": "light-and-air",
+      "summary": {
+        "en": "Shows several continuous paths from an apparent disc.",
+        "zh": "表示来自视圆盘的多条连续光路。"
+      },
+      "detail": {
+        "en": "These four illustrative paths arrive at the same receiving point from different source positions. The model averages independent sampled fluctuations to explain why a planet usually twinkles less than a point-like star. The paths are a static qualitative guide, not measured angular separations or phase-dependent ray tracing. [S13,S37]",
+        "zh": "四条示意光路从光源不同位置到达同一接收点。模型对不同路径的分步起伏作平均，解释为什么行星通常比点状恒星闪烁得少。这些线是静态定性辅助线，不是实测角间距或随相位变化的光线追踪。[S13,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "tube",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "path": [
+          [
+            -3,
+            1.2,
+            0
+          ],
+          [
+            -0.7,
+            0.25,
+            0
+          ],
+          [
+            0.7,
+            -0.15,
+            0
+          ],
+          [
+            3,
+            -1,
+            0
+          ]
+        ],
+        "radius": 0.012,
+        "color": "matte",
+        "tint": "token:signal"
+      },
+      "extra": [
+        {
+          "kind": "tube",
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "path": [
+            [
+              -3,
+              1.4,
+              0
+            ],
+            [
+              -0.7,
+              0.65,
+              0
+            ],
+            [
+              0.7,
+              -0.15000000000000002,
+              0
+            ],
+            [
+              3,
+              -1,
+              0
+            ]
+          ],
+          "radius": 0.012,
+          "color": "matte",
+          "tint": "token:signal"
+        },
+        {
+          "kind": "tube",
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "path": [
+            [
+              -3,
+              1.6,
+              0
+            ],
+            [
+              -0.7,
+              0.69,
+              0
+            ],
+            [
+              0.7,
+              0.21000000000000002,
+              0
+            ],
+            [
+              3,
+              -1,
+              0
+            ]
+          ],
+          "radius": 0.012,
+          "color": "matte",
+          "tint": "token:signal"
+        },
+        {
+          "kind": "tube",
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "path": [
+            [
+              -3,
+              1.8,
+              0
+            ],
+            [
+              -0.7,
+              1.01,
+              0
+            ],
+            [
+              0.7,
+              0.29,
+              0
+            ],
+            [
+              3,
+              -1,
+              0
+            ]
+          ],
+          "radius": 0.012,
+          "color": "matte",
+          "tint": "token:signal"
+        }
+      ]
+    },
+    {
+      "id": "straight-rays",
+      "name": {
+        "en": "Straight-light guide",
+        "zh": "直光路线"
+      },
+      "group": "light-and-air",
+      "summary": {
+        "en": "Shows the corresponding unobstructed reference path.",
+        "zh": "表示对应的无遮挡参考光路。"
+      },
+      "detail": {
+        "en": "Removing the atmospheric sample leaves a straight reference path and constant simulated flux. This isolates the atmospheric cause of the illustrated twinkle; it does not claim all real stars have constant intrinsic brightness. [S12,S37]",
+        "zh": "拿掉大气样本后，参考光路变直，模拟通量保持稳定。这个对照分离出图中闪烁的大气成因，并非声称所有真实恒星的内在亮度都不变。[S12,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "tube",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:signal",
+        "path": [
+          [
+            -3,
+            1.5,
+            0
+          ],
+          [
+            3,
+            -1,
+            0
+          ]
+        ],
+        "radius": 0.018
+      }
+    },
+    {
+      "id": "observer-eye",
+      "name": {
+        "en": "Receiving point",
+        "zh": "接收点"
+      },
+      "group": "light-and-air",
+      "summary": {
+        "en": "Shows the received relative brightness.",
+        "zh": "表示接收到的相对亮度。"
+      },
+      "detail": {
+        "en": "This receiving point represents the observer’s position. Its glow changes with the calculated received flux, while the source stays steady. It is not a scale model of an eye or telescope. Relative flux uses arbitrary units; changes are qualitative, not weather or stellar-magnitude measurements. [S12,S13,S37]",
+        "zh": "这个接收点代表观察位置。它的亮度随计算的接收通量改变，光源本身保持稳定。它不是眼睛或望远镜的比例模型。相对通量使用任意单位，变化只作定性示意，不是天气或恒星星等测量。[S12,S13,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          3,
+          -1,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:ink-2",
+        "size": [
+          0.16
+        ]
+      }
+    },
+    {
+      "id": "reflecting-world",
+      "name": {
+        "en": "Reflecting planet",
+        "zh": "反光行星"
+      },
+      "group": "light-and-air",
+      "summary": {
+        "en": "Reflects part of the incoming sunlight.",
+        "zh": "反射一部分到来的阳光。"
+      },
+      "detail": {
+        "en": "Planets are visible by reflected sunlight rather than by shining like the Sun. The teaching rays mark an incoming path and a reflected path toward a receiving point. Surface shading is illustrative. [S1,S4,S37]",
+        "zh": "行星依靠反射太阳光被看见，不像太阳那样发光。教学光线标出来光与朝接收点去的反射路径。表面明暗是示意。[S1,S4,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          3,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:cold",
+        "size": [
+          0.65
+        ]
+      }
+    },
+    {
+      "id": "reflection-rays",
+      "name": {
+        "en": "Emitted and reflected light",
+        "zh": "发光与反光"
+      },
+      "group": "light-and-air",
+      "summary": {
+        "en": "Links the Sun, a reflecting world and a receiving point.",
+        "zh": "把太阳、反光行星与接收点连起来。"
+      },
+      "detail": {
+        "en": "The two segments illustrate emitted sunlight reaching a planet and some reflected light reaching an observer. Angles, sizes and spacing are layout choices, not a ray-tracing solution. [S1,S37]",
+        "zh": "两段线表示太阳发出的光到达行星，以及部分反射光到达观察者。角度、大小与间距只是排版，不是光线追踪解。[S1,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "tube",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:signal",
+        "path": [
+          [
+            0.7,
+            0,
+            0
+          ],
+          [
+            2.6,
+            0,
+            0.512
+          ],
+          [
+            4,
+            -1,
+            3
+          ]
+        ],
+        "radius": 0.02
+      }
+    },
+    {
+      "id": "observer",
+      "name": {
+        "en": "Singapore observer",
+        "zh": "新加坡观察点"
+      },
+      "group": "local-sky",
+      "summary": {
+        "en": "Defines the local horizon.",
+        "zh": "定义本地地平线。"
+      },
+      "detail": {
+        "en": "The observation origin uses latitude 1.3342°N and longitude 103.7357°E as teaching inputs near Singapore’s Science Centre. They are not claimed as an official survey. Hours use Singapore time, UTC+08. The geometric horizon ignores buildings, cloud and sky brightness. [S37]\n\nScience Centre Singapore provides a local astronomy context; actual observing depends on conditions. [S15]",
+        "zh": "观察原点采用北纬1.3342度、东经103.7357度作为接近新加坡科学馆的教学输入，不称官方测绘。钟点采用UTC+08的新加坡时间。几何地平线忽略建筑、云和天空亮度。[S37]\n\n科学馆提供本地天文学习背景；实际观测仍受条件影响。[S15]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:signal",
+        "size": [
+          0.1
+        ]
+      }
+    },
+    {
+      "id": "horizon",
+      "name": {
+        "en": "Local horizon",
+        "zh": "本地地平线"
+      },
+      "group": "local-sky",
+      "summary": {
+        "en": "Divides directions above and below the observer.",
+        "zh": "划分观察者上方与下方的天空方向。"
+      },
+      "detail": {
+        "en": "This ring is the local geometric horizon. North is scene −Z, east +X, up +Y. A star plotted above the ring is geometrically above the horizon; it is not guaranteed visible to the eye. [S31,S37]",
+        "zh": "这个环表示本地几何地平线：场景负Z为北，正X为东，正Y向上。星点画在环上方，只表示几何上在地平线之上，不保证肉眼能看见。[S31,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "torus",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:ink-3",
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "size": [
+          5,
+          0.018
+        ]
+      },
+      "extra": [
+        {
+          "kind": "tube",
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "color": "matte",
+          "tint": "token:signal",
+          "path": [
+            [
+              0,
+              0,
+              -5.3
+            ],
+            [
+              0,
+              0,
+              -4.8
+            ]
+          ],
+          "radius": 0.035
+        },
+        {
+          "kind": "tube",
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "color": "matte",
+          "tint": "token:cold",
+          "path": [
+            [
+              4.8,
+              0,
+              0
+            ],
+            [
+              5.3,
+              0,
+              0
+            ]
+          ],
+          "radius": 0.035
+        }
+      ]
+    },
+    {
+      "id": "sky-stars",
+      "name": {
+        "en": "Catalogue star directions",
+        "zh": "星表方向"
+      },
+      "group": "local-sky",
+      "summary": {
+        "en": "Locates catalogue directions and their imagined pattern.",
+        "zh": "标出星表方向与人画出的图案。"
+      },
+      "detail": {
+        "en": "The points come from 28 selected HYG v4.1 catalogue records, kept separately under CC BY-SA 4.0. Fixed J2000 directions are projected through an approximate sidereal-time model. The small aggregate marker is a label anchor, not an extra star. [S28,S30,S31,S34,S37]\n\nRecognition lines are original teaching links, not IAU boundaries or physical connections. They can be switched off. Depth uses historical catalogue distance estimates; missing distances are omitted. [S14,S32,S37]",
+        "zh": "星点来自28条HYG v4.1星表记录，单独保留CC BY-SA 4.0许可。固定J2000方向经近似恒星时模型投影。微小的集合标记只承载引线，不是多出来的一颗恒星。[S28,S30,S31,S34,S37]\n\n识别线是原创教学辅助线，不是IAU边界或物理连接，可以关闭。深度对照使用历史星表距离估计，缺值不会当作零距离。[S14,S32,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:ink-3",
+        "size": [
+          0.012
+        ]
+      }
+    },
+    {
+      "id": "orion-pattern",
+      "name": {
+        "en": "Orion recognition guide",
+        "zh": "猎户座识别辅助线"
+      },
+      "group": "local-sky",
+      "summary": {
+        "en": "Locates catalogue directions and their imagined pattern.",
+        "zh": "标出星表方向与人画出的图案。"
+      },
+      "detail": {
+        "en": "The points come from 28 selected HYG v4.1 catalogue records, kept separately under CC BY-SA 4.0. Fixed J2000 directions are projected through an approximate sidereal-time model. The small aggregate marker is a label anchor, not an extra star. [S28,S30,S31,S34,S37]\n\nRecognition lines are original teaching links, not IAU boundaries or physical connections. They can be switched off. Depth uses historical catalogue distance estimates; missing distances are omitted. [S14,S32,S37]",
+        "zh": "星点来自28条HYG v4.1星表记录，单独保留CC BY-SA 4.0许可。固定J2000方向经近似恒星时模型投影。微小的集合标记只承载引线，不是多出来的一颗恒星。[S28,S30,S31,S34,S37]\n\n识别线是原创教学辅助线，不是IAU边界或物理连接，可以关闭。深度对照使用历史星表距离估计，缺值不会当作零距离。[S14,S32,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:ink-3",
+        "size": [
+          0.012
+        ]
+      }
+    },
+    {
+      "id": "crux-pattern",
+      "name": {
+        "en": "Crux recognition guide",
+        "zh": "南十字座识别辅助线"
+      },
+      "group": "local-sky",
+      "summary": {
+        "en": "Locates catalogue directions and their imagined pattern.",
+        "zh": "标出星表方向与人画出的图案。"
+      },
+      "detail": {
+        "en": "The points come from 28 selected HYG v4.1 catalogue records, kept separately under CC BY-SA 4.0. Fixed J2000 directions are projected through an approximate sidereal-time model. The small aggregate marker is a label anchor, not an extra star. [S28,S30,S31,S34,S37]\n\nRecognition lines are original teaching links, not IAU boundaries or physical connections. They can be switched off. Depth uses historical catalogue distance estimates; missing distances are omitted. [S14,S32,S37]",
+        "zh": "星点来自28条HYG v4.1星表记录，单独保留CC BY-SA 4.0许可。固定J2000方向经近似恒星时模型投影。微小的集合标记只承载引线，不是多出来的一颗恒星。[S28,S30,S31,S34,S37]\n\n识别线是原创教学辅助线，不是IAU边界或物理连接，可以关闭。深度对照使用历史星表距离估计，缺值不会当作零距离。[S14,S32,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:ink-3",
+        "size": [
+          0.012
+        ]
+      }
+    },
+    {
+      "id": "scorpius-pattern",
+      "name": {
+        "en": "Scorpius recognition guide",
+        "zh": "天蝎座识别辅助线"
+      },
+      "group": "local-sky",
+      "summary": {
+        "en": "Locates catalogue directions and their imagined pattern.",
+        "zh": "标出星表方向与人画出的图案。"
+      },
+      "detail": {
+        "en": "The points come from 28 selected HYG v4.1 catalogue records, kept separately under CC BY-SA 4.0. Fixed J2000 directions are projected through an approximate sidereal-time model. The small aggregate marker is a label anchor, not an extra star. [S28,S30,S31,S34,S37]\n\nRecognition lines are original teaching links, not IAU boundaries or physical connections. They can be switched off. Depth uses historical catalogue distance estimates; missing distances are omitted. [S14,S32,S37]",
+        "zh": "星点来自28条HYG v4.1星表记录，单独保留CC BY-SA 4.0许可。固定J2000方向经近似恒星时模型投影。微小的集合标记只承载引线，不是多出来的一颗恒星。[S28,S30,S31,S34,S37]\n\n识别线是原创教学辅助线，不是IAU边界或物理连接，可以关闭。深度对照使用历史星表距离估计，缺值不会当作零距离。[S14,S32,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:ink-3",
+        "size": [
+          0.012
+        ]
+      }
+    },
+    {
+      "id": "depth-stars",
+      "name": {
+        "en": "Catalogue depth comparison",
+        "zh": "星表深度对照"
+      },
+      "group": "local-sky",
+      "summary": {
+        "en": "Locates catalogue directions and their imagined pattern.",
+        "zh": "标出星表方向与人画出的图案。"
+      },
+      "detail": {
+        "en": "The points come from 28 selected HYG v4.1 catalogue records, kept separately under CC BY-SA 4.0. Fixed J2000 directions are projected through an approximate sidereal-time model. The small aggregate marker is a label anchor, not an extra star. [S28,S30,S31,S34,S37]\n\nRecognition lines are original teaching links, not IAU boundaries or physical connections. They can be switched off. Depth uses historical catalogue distance estimates; missing distances are omitted. [S14,S32,S37]",
+        "zh": "星点来自28条HYG v4.1星表记录，单独保留CC BY-SA 4.0许可。固定J2000方向经近似恒星时模型投影。微小的集合标记只承载引线，不是多出来的一颗恒星。[S28,S30,S31,S34,S37]\n\n识别线是原创教学辅助线，不是IAU边界或物理连接，可以关闭。深度对照使用历史星表距离估计，缺值不会当作零距离。[S14,S32,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:ink-3",
+        "size": [
+          0.012
+        ]
+      }
+    },
+    {
+      "id": "earth-viewpoint",
+      "name": {
+        "en": "Rotating viewpoint reference",
+        "zh": "转动视点参照"
+      },
+      "group": "local-sky",
+      "summary": {
+        "en": "Shows the ground observer belongs to Earth.",
+        "zh": "表示地面观察者属于地球。"
+      },
+      "detail": {
+        "en": "The small external reference sphere locates the observing viewpoint. It does not reproduce the day/night or seasons mechanisms, which are in the linked topic. Compare sky snapshots at different local hours to see apparent motion. [S30,S31,S37]",
+        "zh": "这个小球是外部观察位置的参照，不重画链接主题已有的昼夜和季节机制。比较不同本地钟点的天空快照，可以看到视运动。[S30,S31,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          0,
+          -0.6,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:cold",
+        "size": [
+          0.5
+        ]
+      }
+    },
+    {
+      "id": "light-ruler",
+      "name": {
+        "en": "Light-distance reference",
+        "zh": "光行距离参照"
+      },
+      "group": "galaxy-context",
+      "summary": {
+        "en": "Compares distance and vacuum light travel time.",
+        "zh": "比较距离与真空中的光行时间。"
+      },
+      "detail": {
+        "en": "The line is a schematic comparator, not a common metric length for all targets. Read the selected distance and vacuum light-time outputs. One light-year is c times one Julian year; light takes about 499 seconds across one AU. [S7,S29,S37]",
+        "zh": "线条只作示意比较，不把所有目标画在同一长度尺上。请读所选距离与真空光行时间。光年等于光速乘一个儒略年；光穿过一个天文单位约需499秒。[S7,S29,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "tube",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:ink-2",
+        "path": [
+          [
+            -4,
+            0,
+            0
+          ],
+          [
+            4,
+            0,
+            0
+          ]
+        ],
+        "radius": 0.022
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "at": [
+            -4,
+            0,
+            0
+          ],
+          "color": "matte",
+          "tint": "token:ink-2",
+          "size": [
+            0.025,
+            0.025,
+            0.6
+          ]
+        },
+        {
+          "kind": "cylinder",
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "color": "matte",
+          "tint": "token:ink-2",
+          "size": [
+            0.025,
+            0.025,
+            0.6
+          ]
+        },
+        {
+          "kind": "cylinder",
+          "at": [
+            4,
+            0,
+            0
+          ],
+          "color": "matte",
+          "tint": "token:ink-2",
+          "size": [
+            0.025,
+            0.025,
+            0.6
+          ]
+        }
+      ]
+    },
+    {
+      "id": "proxima-marker",
+      "name": {
+        "en": "Proxima distance marker",
+        "zh": "比邻星距离标记"
+      },
+      "group": "galaxy-context",
+      "summary": {
+        "en": "Marks the nearest star beyond the Sun in the distance comparison.",
+        "zh": "在距离对照中标出太阳以外最近的恒星。"
+      },
+      "detail": {
+        "en": "Proxima Centauri is about 4.24 light-years from the Sun. This large marker gives its position in a schematic comparison; it does not show naked-eye brightness or stellar diameter. It is not the bright Alpha Centauri pair. [S17,S37]",
+        "zh": "比邻星距太阳约4.24光年。这个放大的点只在示意比较中标出位置，不表示肉眼亮度或恒星直径，也不是明亮的半人马座α双星。[S17,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          4,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:signal",
+        "size": [
+          0.14
+        ]
+      }
+    },
+    {
+      "id": "galaxy-disc",
+      "name": {
+        "en": "Milky Way disc study",
+        "zh": "银河系盘面示意"
+      },
+      "group": "galaxy-context",
+      "summary": {
+        "en": "Places the solar system inside a much larger galaxy.",
+        "zh": "把太阳系放进大得多的星系背景中。"
+      },
+      "detail": {
+        "en": "Our Sun and solar system belong to the Milky Way. This flattened disc with curved bands is a structural reconstruction, not a photograph from outside our galaxy. The bands are representative; do not count them as a measured arm map. The stellar disc is roughly 100,000 light-years across, without a sharp edge. [S16,S24,S35,S37]",
+        "zh": "太阳和太阳系属于银河系。扁盘与弯曲带是结构重建，不是从银河系外拍摄的照片。带状结构只是代表性画法，不能数作实测旋臂图。恒星盘直径粗略约十万光年，没有清楚的硬边界。[S16,S24,S35,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:neutral",
+        "scale": [
+          1,
+          0.045,
+          0.7
+        ],
+        "size": [
+          5
+        ]
+      },
+      "extra": [
+        {
+          "kind": "tube",
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "color": "matte",
+          "tint": "token:ink-3",
+          "path": [
+            [
+              0.9,
+              0.27,
+              0.0
+            ],
+            [
+              1.114404665111389,
+              0.27,
+              0.07826939865111328
+            ],
+            [
+              1.3132892143072639,
+              0.27,
+              0.1863518322857674
+            ],
+            [
+              1.4903249230359454,
+              0.27,
+              0.3227080656741828
+            ],
+            [
+              1.6394885693251355,
+              0.27,
+              0.48521525451657854
+            ],
+            [
+              1.7551651237807455,
+              0.27,
+              0.6711957540458842
+            ],
+            [
+              1.8322450650994857,
+              0.27,
+              0.8774544036558851
+            ],
+            [
+              1.8662149369741516,
+              0.27,
+              1.1003238098019765
+            ],
+            [
+              1.85323984686346,
+              0.27,
+              1.3357170412549113
+            ],
+            [
+              1.7902367086195135,
+              0.27,
+              1.5791870498090066
+            ],
+            [
+              1.6749371481912334,
+              0.27,
+              1.8259920370331353
+            ],
+            [
+              1.5059391231329167,
+              0.27,
+              2.071165904782776
+            ],
+            [
+              1.2827464508474238,
+              0.27,
+              2.3095928550267866
+            ],
+            [
+              1.0057955956284483,
+              0.27,
+              2.5360851440180516
+            ],
+            [
+              0.6764692287429585,
+              0.27,
+              2.7454629477478503
+            ],
+            [
+              0.2970962470043522,
+              0.27,
+              2.93263526061592
+            ],
+            [
+              -0.12906188857169656,
+              0.27,
+              3.0926807278104165
+            ],
+            [
+              -0.5978384535312354,
+              0.27,
+              3.220927304349618
+            ]
+          ],
+          "radius": 0.045
+        },
+        {
+          "kind": "tube",
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "color": "matte",
+          "tint": "token:ink-3",
+          "path": [
+            [
+              -0.4543614941398718,
+              0.27,
+              0.5438219009887905
+            ],
+            [
+              -0.6591212513259874,
+              0.27,
+              0.6338611805945586
+            ],
+            [
+              -0.8928098685149648,
+              0.27,
+              0.6994714890217634
+            ],
+            [
+              -1.1503341962443434,
+              0.27,
+              0.7376057931618564
+            ],
+            [
+              -1.426035635673542,
+              0.27,
+              0.7456962915535297
+            ],
+            [
+              -1.7137775067378946,
+              0.27,
+              0.7217019205500498
+            ],
+            [
+              -2.0070401552778763,
+              0.27,
+              0.6641483338833715
+            ],
+            [
+              -2.2990225112315263,
+              0.27,
+              0.5721597604662851
+            ],
+            [
+              -2.5827487192979115,
+              0.27,
+              0.4454822509964344
+            ],
+            [
+              -2.8511783902092827,
+              0.27,
+              0.2844979362486923
+            ],
+            [
+              -3.0973189658471663,
+              0.27,
+              0.09023003748024036
+            ],
+            [
+              -3.31433865563858,
+              0.27,
+              -0.13566150932569612
+            ],
+            [
+              -3.495678385477382,
+              0.27,
+              -0.39089383008697015
+            ],
+            [
+              -3.6351612040987726,
+              0.27,
+              -0.6725841805346209
+            ],
+            [
+              -3.7270976154173696,
+              0.27,
+              -0.9772820723432809
+            ],
+            [
+              -3.7663853486034173,
+              0.27,
+              -1.3010101032868662
+            ],
+            [
+              -3.7486021401600036,
+              0.27,
+              -1.6393130199708785
+            ],
+            [
+              -3.670090183282893,
+              0.27,
+              -1.9873144297819523
+            ]
+          ],
+          "radius": 0.045
+        },
+        {
+          "kind": "tube",
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "color": "matte",
+          "tint": "token:ink-3",
+          "path": [
+            [
+              -0.4412347392066295,
+              0.27,
+              -0.5490927366205606
+            ],
+            [
+              -0.4488950727295726,
+              0.27,
+              -0.7182740944115726
+            ],
+            [
+              -0.41182604577108195,
+              0.27,
+              -0.892602745308366
+            ],
+            [
+              -0.32884144711201635,
+              0.27,
+              -1.0674628884902857
+            ],
+            [
+              -0.1996314979443961,
+              0.27,
+              -1.2381389905272968
+            ],
+            [
+              -0.02477732692578112,
+              0.27,
+              -1.399892560589741
+            ],
+            [
+              0.19424774323557295,
+              0.27,
+              -1.5480398021308963
+            ],
+            [
+              0.45509018139108487,
+              0.27,
+              -1.67802906236236
+            ],
+            [
+              0.7545414133321818,
+              0.27,
+              -1.7855169994227638
+            ],
+            [
+              1.0885758990133854,
+              0.27,
+              -1.866442399572708
+            ],
+            [
+              1.452401681031169,
+              0.27,
+              -1.9170966029127323
+            ],
+            [
+              1.8405227961148163,
+              0.27,
+              -1.9341895357283454
+            ],
+            [
+              2.246812780836927,
+              0.27,
+              -1.914910400163736
+            ],
+            [
+              2.6645983513351372,
+              0.27,
+              -1.8569821369012713
+            ],
+            [
+              3.086752196470796,
+              0.27,
+              -1.7587088531122863
+            ],
+            [
+              3.505793696324471,
+              0.27,
+              -1.6190154952370543
+            ],
+            [
+              3.9139962648806317,
+              0.27,
+              -1.4374791431061629
+            ],
+            [
+              4.303499918652327,
+              0.27,
+              -1.2143514073686066
+            ]
+          ],
+          "radius": 0.045
+        }
+      ]
+    },
+    {
+      "id": "galaxy-bar",
+      "name": {
+        "en": "Central bar and bulge study",
+        "zh": "中央棒与核球示意"
+      },
+      "group": "galaxy-context",
+      "summary": {
+        "en": "Marks the central structure of the schematic galaxy.",
+        "zh": "标出示意星系的中央结构。"
+      },
+      "detail": {
+        "en": "The Milky Way is a barred spiral galaxy. The elongated centre marks a bar and central concentration of stars; their relative dimensions here are illustrative. This is not a solid central object or a measured boundary. [S24,S35,S37]",
+        "zh": "银河系是棒旋星系。拉长的中心表示中央棒和恒星较集中的区域；相对大小是示意。它不是一个实心中央物体，也不是实测边界。[S24,S35,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          0,
+          0.25,
+          0
+        ],
+        "color": "matte",
+        "tint": "token:ink-2",
+        "scale": [
+          1.35,
+          0.22,
+          0.45
+        ],
+        "size": [
+          1
+        ]
+      }
+    },
+    {
+      "id": "sun-location",
+      "name": {
+        "en": "Solar-system inclusion marker",
+        "zh": "太阳系包含关系标记"
+      },
+      "group": "galaxy-context",
+      "summary": {
+        "en": "Identifies a solar-system location within the disc.",
+        "zh": "在盘面内标出太阳系的包含关系。"
+      },
+      "detail": {
+        "en": "This enlarged marker says the solar system lies within the Milky Way. Its placement is schematic, not a precision position or an exact Sun-to-edge distance. We observe the Milky Way from inside it. [S16,S35,S37]",
+        "zh": "放大的标记表示太阳系位于银河系之内。位置是示意，不是精确定位，也不给太阳到边缘的距离。我们从银河系内部观测它。[S16,S35,S37]"
+      },
+      "clip": false,
+      "castShadow": false,
+      "primitive": {
+        "kind": "sphere",
+        "at": [
+          2.7,
+          0.3,
+          0.4
+        ],
+        "color": "matte",
+        "tint": "token:signal",
+        "size": [
+          0.12
+        ]
+      }
+    }
+  ],
+  "groups": [
+    {
+      "id": "solar-family",
+      "name": {
+        "en": "Solar family",
+        "zh": "太阳系天体"
+      },
+      "color": "token:signal",
+      "card": false
+    },
+    {
+      "id": "small-bodies",
+      "name": {
+        "en": "Small bodies",
+        "zh": "较小天体"
+      },
+      "color": "token:ink-2",
+      "card": false
+    },
+    {
+      "id": "light-and-air",
+      "name": {
+        "en": "Light and air",
+        "zh": "光与空气"
+      },
+      "color": "token:cold",
+      "card": false
+    },
+    {
+      "id": "local-sky",
+      "name": {
+        "en": "Local sky",
+        "zh": "本地天空"
+      },
+      "color": "token:ink-3",
+      "card": false
+    },
+    {
+      "id": "galaxy-context",
+      "name": {
+        "en": "Galactic context",
+        "zh": "星系背景"
+      },
+      "color": "token:neutral",
+      "card": false
+    }
+  ],
+  "flows": [],
+  "animations": [],
+  "views": {
+    "assembled": {
+      "camera": {
+        "position": [
+          25,
+          38,
+          65
+        ],
+        "target": [
+          8,
+          0,
+          0
+        ],
+        "fov": 36
+      }
+    },
+    "cover": {
+      "position": [
+        16,
+        25,
+        46
+      ],
+      "target": [
+        8,
+        0,
+        0
+      ],
+      "fov": 36
+    },
+    "shadows": "none",
+    "section": {
+      "plane": "xz"
+    }
+  },
+  "spec": [
+    {
+      "key": {
+        "en": "Model",
+        "zh": "模型"
+      },
+      "value": {
+        "en": "Circular orbits · snapshots",
+        "zh": "圆轨道 · 分步快照"
+      },
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Sky",
+        "zh": "星空"
+      },
+      "value": {
+        "en": "J2000 · approximate horizon",
+        "zh": "J2000 · 近似地平线"
+      },
+      "tag": "design"
+    }
+  ],
+  "telemetry": [
+    {
+      "key": {
+        "en": "Diameter",
+        "zh": "直径"
+      },
+      "unit": "km",
+      "follow": "planet-diameter-km",
+      "decimals": 0
+    },
+    {
+      "key": {
+        "en": "Reference orbit",
+        "zh": "参考轨道"
+      },
+      "unit": "AU",
+      "follow": "reference-au",
+      "decimals": 2
+    },
+    {
+      "key": {
+        "en": "Period",
+        "zh": "周期"
+      },
+      "unit": "y",
+      "follow": "period-years",
+      "decimals": 2
+    }
+  ],
+  "sim": {
+    "kind": "solar-system",
+    "solarSystem": {
+      "version": 1,
+      "bodies": [
+        {
+          "id": "sun",
+          "radiusKm": 700000
+        },
+        {
+          "id": "mercury",
+          "radiusKm": 2439.4,
+          "aAu": 0.38709927,
+          "periodYears": 0.2408467
+        },
+        {
+          "id": "venus",
+          "radiusKm": 6051.8,
+          "aAu": 0.72333566,
+          "periodYears": 0.61519726
+        },
+        {
+          "id": "earth",
+          "radiusKm": 6371.0084,
+          "aAu": 1.00000261,
+          "periodYears": 1.0000174
+        },
+        {
+          "id": "mars",
+          "radiusKm": 3389.5,
+          "aAu": 1.52371034,
+          "periodYears": 1.8808476
+        },
+        {
+          "id": "jupiter",
+          "radiusKm": 69911,
+          "aAu": 5.202887,
+          "periodYears": 11.862615
+        },
+        {
+          "id": "saturn",
+          "radiusKm": 58232,
+          "aAu": 9.53667594,
+          "periodYears": 29.447498
+        },
+        {
+          "id": "uranus",
+          "radiusKm": 25362,
+          "aAu": 19.18916464,
+          "periodYears": 84.016846
+        },
+        {
+          "id": "neptune",
+          "radiusKm": 24622,
+          "aAu": 30.06992276,
+          "periodYears": 164.79132
+        }
+      ],
+      "controls": {
+        "lab": "lab",
+        "elapsedYears": "elapsed-years",
+        "planet": "planet",
+        "scaleMode": "scale-mode",
+        "skyDate": "sky-date",
+        "skyHour": "sky-hour",
+        "observer": "observer",
+        "skyTarget": "sky-target",
+        "patternLinks": "pattern-links",
+        "depth": "depth",
+        "atmosphere": "atmosphere",
+        "sourceKind": "source-kind",
+        "altitudeMode": "altitude-mode",
+        "twinkleSeconds": "twinkle-seconds",
+        "cometStep": "comet-step",
+        "distanceTarget": "distance-target"
+      },
+      "patterns": {
+        "orion": [
+          [
+            "27989",
+            "25336"
+          ],
+          [
+            "25336",
+            "24436"
+          ],
+          [
+            "24436",
+            "27366"
+          ],
+          [
+            "27366",
+            "27989"
+          ],
+          [
+            "25930",
+            "26311"
+          ],
+          [
+            "26311",
+            "26727"
+          ]
+        ],
+        "crux": [
+          [
+            "61084",
+            "60718"
+          ],
+          [
+            "59747",
+            "62434"
+          ]
+        ],
+        "scorpius": [
+          [
+            "78401",
+            "80763"
+          ],
+          [
+            "80763",
+            "82396"
+          ],
+          [
+            "82396",
+            "86228"
+          ],
+          [
+            "86228",
+            "85927"
+          ]
+        ]
+      },
+      "sources": [
+        "S5",
+        "S6",
+        "S37"
+      ]
+    },
+    "controls": [
+      {
+        "id": "lab",
+        "kind": "choice",
+        "label": {
+          "en": "Experiment",
+          "zh": "实验"
+        },
+        "default": "orbits",
+        "options": [
+          {
+            "id": "orbits",
+            "label": {
+              "en": "Orbits",
+              "zh": "轨道"
+            }
+          },
+          {
+            "id": "sizes",
+            "label": {
+              "en": "Sizes",
+              "zh": "大小"
+            }
+          },
+          {
+            "id": "distances",
+            "label": {
+              "en": "Distances",
+              "zh": "距离"
+            }
+          },
+          {
+            "id": "small-bodies",
+            "label": {
+              "en": "Small bodies",
+              "zh": "较小天体"
+            }
+          },
+          {
+            "id": "twinkle",
+            "label": {
+              "en": "Twinkle",
+              "zh": "闪烁"
+            }
+          },
+          {
+            "id": "sky",
+            "label": {
+              "en": "Sky",
+              "zh": "天空"
+            }
+          },
+          {
+            "id": "galaxy",
+            "label": {
+              "en": "Light distances",
+              "zh": "光行距离"
+            }
+          }
+        ]
+      },
+      {
+        "id": "elapsed-years",
+        "kind": "step",
+        "label": {
+          "en": "Elapsed model years",
+          "zh": "模型经过年数"
+        },
+        "values": [
+          0,
+          0.25,
+          1,
+          12,
+          30,
+          84,
+          165
+        ],
+        "default": 0,
+        "unit": "yr"
+      },
+      {
+        "id": "planet",
+        "kind": "choice",
+        "label": {
+          "en": "Selected planet",
+          "zh": "选中行星"
+        },
+        "default": "earth",
+        "options": [
+          {
+            "id": "mercury",
+            "label": {
+              "en": "Mercury",
+              "zh": "水星"
+            }
+          },
+          {
+            "id": "venus",
+            "label": {
+              "en": "Venus",
+              "zh": "金星"
+            }
+          },
+          {
+            "id": "earth",
+            "label": {
+              "en": "Earth",
+              "zh": "地球"
+            }
+          },
+          {
+            "id": "mars",
+            "label": {
+              "en": "Mars",
+              "zh": "火星"
+            }
+          },
+          {
+            "id": "jupiter",
+            "label": {
+              "en": "Jupiter",
+              "zh": "木星"
+            }
+          },
+          {
+            "id": "saturn",
+            "label": {
+              "en": "Saturn",
+              "zh": "土星"
+            }
+          },
+          {
+            "id": "uranus",
+            "label": {
+              "en": "Uranus",
+              "zh": "天王星"
+            }
+          },
+          {
+            "id": "neptune",
+            "label": {
+              "en": "Neptune",
+              "zh": "海王星"
+            }
+          }
+        ]
+      },
+      {
+        "id": "scale-mode",
+        "kind": "choice",
+        "label": {
+          "en": "Display scale",
+          "zh": "显示比例"
+        },
+        "default": "overview",
+        "options": [
+          {
+            "id": "overview",
+            "label": {
+              "en": "Overview",
+              "zh": "总览"
+            }
+          },
+          {
+            "id": "true-scale",
+            "label": {
+              "en": "True scale",
+              "zh": "真比例"
+            }
+          }
+        ]
+      },
+      {
+        "id": "sky-date",
+        "kind": "choice",
+        "label": {
+          "en": "Example date",
+          "zh": "示例日期"
+        },
+        "default": "2026-01-15",
+        "options": [
+          {
+            "id": "2026-01-15",
+            "label": {
+              "en": "2026-01-15",
+              "zh": "2026-01-15"
+            }
+          },
+          {
+            "id": "2026-04-15",
+            "label": {
+              "en": "2026-04-15",
+              "zh": "2026-04-15"
+            }
+          },
+          {
+            "id": "2026-07-15",
+            "label": {
+              "en": "2026-07-15",
+              "zh": "2026-07-15"
+            }
+          },
+          {
+            "id": "2026-10-15",
+            "label": {
+              "en": "2026-10-15",
+              "zh": "2026-10-15"
+            }
+          }
+        ]
+      },
+      {
+        "id": "sky-hour",
+        "kind": "step",
+        "label": {
+          "en": "Singapore clock",
+          "zh": "新加坡钟点"
+        },
+        "values": [
+          0,
+          2,
+          4,
+          18,
+          20,
+          22
+        ],
+        "default": 20,
+        "unit": "SGT"
+      },
+      {
+        "id": "observer",
+        "kind": "choice",
+        "label": {
+          "en": "Observer",
+          "zh": "观察点"
+        },
+        "default": "singapore",
+        "options": [
+          {
+            "id": "singapore",
+            "label": {
+              "en": "Singapore",
+              "zh": "新加坡"
+            }
+          },
+          {
+            "id": "equator",
+            "label": {
+              "en": "Equator",
+              "zh": "赤道"
+            }
+          },
+          {
+            "id": "north45",
+            "label": {
+              "en": "45 north",
+              "zh": "北纬45度"
+            }
+          }
+        ]
+      },
+      {
+        "id": "sky-target",
+        "kind": "choice",
+        "label": {
+          "en": "Sky pattern",
+          "zh": "星空图案"
+        },
+        "default": "orion",
+        "options": [
+          {
+            "id": "orion",
+            "label": {
+              "en": "Orion",
+              "zh": "猎户座"
+            }
+          },
+          {
+            "id": "crux",
+            "label": {
+              "en": "Crux",
+              "zh": "南十字座"
+            }
+          },
+          {
+            "id": "scorpius",
+            "label": {
+              "en": "Scorpius",
+              "zh": "天蝎座"
+            }
+          }
+        ]
+      },
+      {
+        "id": "pattern-links",
+        "kind": "toggle",
+        "label": {
+          "en": "Pattern links",
+          "zh": "图案连线"
+        },
+        "default": true
+      },
+      {
+        "id": "depth",
+        "kind": "toggle",
+        "label": {
+          "en": "Catalogue depth",
+          "zh": "星表深度"
+        },
+        "default": false
+      },
+      {
+        "id": "atmosphere",
+        "kind": "toggle",
+        "label": {
+          "en": "Air",
+          "zh": "空气"
+        },
+        "default": true
+      },
+      {
+        "id": "source-kind",
+        "kind": "choice",
+        "label": {
+          "en": "Light source",
+          "zh": "光源"
+        },
+        "default": "point",
+        "options": [
+          {
+            "id": "point",
+            "label": {
+              "en": "Point",
+              "zh": "点光源"
+            }
+          },
+          {
+            "id": "disc",
+            "label": {
+              "en": "Disc",
+              "zh": "圆面光源"
+            }
+          }
+        ]
+      },
+      {
+        "id": "altitude-mode",
+        "kind": "choice",
+        "label": {
+          "en": "Sky altitude",
+          "zh": "天空高度"
+        },
+        "default": "high",
+        "options": [
+          {
+            "id": "high",
+            "label": {
+              "en": "High",
+              "zh": "高空"
+            }
+          },
+          {
+            "id": "low",
+            "label": {
+              "en": "Low",
+              "zh": "近地平"
+            }
+          }
+        ]
+      },
+      {
+        "id": "twinkle-seconds",
+        "kind": "step",
+        "label": {
+          "en": "Sample time",
+          "zh": "取样时刻"
+        },
+        "values": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "default": 0,
+        "unit": "s"
+      },
+      {
+        "id": "comet-step",
+        "kind": "step",
+        "label": {
+          "en": "Comet position",
+          "zh": "彗星位置"
+        },
+        "values": [
+          0,
+          90,
+          180,
+          270
+        ],
+        "default": 0,
+        "unit": "°"
+      },
+      {
+        "id": "distance-target",
+        "kind": "choice",
+        "label": {
+          "en": "Light distance",
+          "zh": "光行距离"
+        },
+        "default": "sun-earth",
+        "options": [
+          {
+            "id": "sun-earth",
+            "label": {
+              "en": "Sun–Earth",
+              "zh": "太阳至地球"
+            }
+          },
+          {
+            "id": "neptune",
+            "label": {
+              "en": "Neptune reference",
+              "zh": "海王星参考距离"
+            }
+          },
+          {
+            "id": "proxima",
+            "label": {
+              "en": "Proxima",
+              "zh": "比邻星"
+            }
+          },
+          {
+            "id": "milky-way",
+            "label": {
+              "en": "Milky Way diameter",
+              "zh": "银河系直径"
+            }
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "id": "planet-frame",
+        "kind": "vector",
+        "label": {
+          "en": "Physical frame",
+          "zh": "物理坐标"
+        }
+      },
+      {
+        "id": "display-positions",
+        "kind": "vector",
+        "label": {
+          "en": "Display positions",
+          "zh": "显示位置"
+        }
+      },
+      {
+        "id": "radius-sun",
+        "kind": "number",
+        "label": {
+          "en": "Sun display radius",
+          "zh": "太阳显示半径"
+        },
+        "unit": "m",
+        "decimals": 3
+      },
+      {
+        "id": "radius-mercury",
+        "kind": "number",
+        "label": {
+          "en": "Mercury display radius",
+          "zh": "水星显示半径"
+        },
+        "unit": "m",
+        "decimals": 3
+      },
+      {
+        "id": "radius-venus",
+        "kind": "number",
+        "label": {
+          "en": "Venus display radius",
+          "zh": "金星显示半径"
+        },
+        "unit": "m",
+        "decimals": 3
+      },
+      {
+        "id": "radius-earth",
+        "kind": "number",
+        "label": {
+          "en": "Earth display radius",
+          "zh": "地球显示半径"
+        },
+        "unit": "m",
+        "decimals": 3
+      },
+      {
+        "id": "radius-mars",
+        "kind": "number",
+        "label": {
+          "en": "Mars display radius",
+          "zh": "火星显示半径"
+        },
+        "unit": "m",
+        "decimals": 3
+      },
+      {
+        "id": "radius-jupiter",
+        "kind": "number",
+        "label": {
+          "en": "Jupiter display radius",
+          "zh": "木星显示半径"
+        },
+        "unit": "m",
+        "decimals": 3
+      },
+      {
+        "id": "radius-saturn",
+        "kind": "number",
+        "label": {
+          "en": "Saturn display radius",
+          "zh": "土星显示半径"
+        },
+        "unit": "m",
+        "decimals": 3
+      },
+      {
+        "id": "radius-uranus",
+        "kind": "number",
+        "label": {
+          "en": "Uranus display radius",
+          "zh": "天王星显示半径"
+        },
+        "unit": "m",
+        "decimals": 3
+      },
+      {
+        "id": "radius-neptune",
+        "kind": "number",
+        "label": {
+          "en": "Neptune display radius",
+          "zh": "海王星显示半径"
+        },
+        "unit": "m",
+        "decimals": 3
+      },
+      {
+        "id": "planet-diameter-km",
+        "kind": "number",
+        "label": {
+          "en": "Planet diameter",
+          "zh": "行星直径"
+        },
+        "unit": "km",
+        "decimals": 3
+      },
+      {
+        "id": "reference-au",
+        "kind": "number",
+        "label": {
+          "en": "Reference distance",
+          "zh": "参考距离"
+        },
+        "unit": "AU",
+        "decimals": 3
+      },
+      {
+        "id": "period-years",
+        "kind": "number",
+        "label": {
+          "en": "Orbital period",
+          "zh": "公转周期"
+        },
+        "unit": "yr",
+        "decimals": 3
+      },
+      {
+        "id": "completed-turns",
+        "kind": "number",
+        "label": {
+          "en": "Completed turns",
+          "zh": "已走圈数"
+        },
+        "unit": "",
+        "decimals": 3
+      },
+      {
+        "id": "twinkle-flux",
+        "kind": "number",
+        "label": {
+          "en": "Relative flux",
+          "zh": "相对光通量"
+        },
+        "unit": "",
+        "decimals": 3
+      },
+      {
+        "id": "comet-angle",
+        "kind": "number",
+        "label": {
+          "en": "Anti-solar angle",
+          "zh": "反太阳方向角"
+        },
+        "unit": "°",
+        "decimals": 3
+      },
+      {
+        "id": "light-distance-km",
+        "kind": "number",
+        "label": {
+          "en": "Light distance",
+          "zh": "光行距离"
+        },
+        "unit": "km",
+        "decimals": 3
+      },
+      {
+        "id": "light-time-seconds",
+        "kind": "number",
+        "label": {
+          "en": "Light travel time",
+          "zh": "光行时间"
+        },
+        "unit": "s",
+        "decimals": 3
+      },
+      {
+        "id": "comet-positions",
+        "kind": "vector",
+        "label": {
+          "en": "Comet positions",
+          "zh": "彗星位置"
+        }
+      },
+      {
+        "id": "scale-state",
+        "kind": "state",
+        "label": {
+          "en": "Scale disclosure",
+          "zh": "比例说明"
+        },
+        "states": {
+          "overview": {
+            "en": "Enlarged bodies; compressed gaps; teaching alignment",
+            "zh": "天体放大、间距压缩；教学排列"
+          },
+          "true-scale": {
+            "en": "One size-and-distance scale; bodies may be invisible",
+            "zh": "大小与距离统一比例；球体可能看不清"
+          },
+          "size-row": {
+            "en": "One planet-size scale; gaps are layout",
+            "zh": "行星大小同比例；间隔为排版"
+          },
+          "distance-ruler": {
+            "en": "One scale; ticks mark positions, not diameters",
+            "zh": "统一比例；刻线标位置，不是直径"
+          },
+          "schematic": {
+            "en": "Local schematic; no common size-distance scale",
+            "zh": "局部示意；大小与距离不共用比例"
+          },
+          "sky": {
+            "en": "Fixed J2000 directions; approximate teaching horizon",
+            "zh": "固定J2000方向；近似教学地平线"
+          }
+        }
+      },
+      {
+        "id": "twinkle-state",
+        "kind": "state",
+        "label": {
+          "en": "Twinkle model",
+          "zh": "闪烁模型"
+        },
+        "states": {
+          "steady": {
+            "en": "Steady",
+            "zh": "恒定"
+          },
+          "point-fluctuation": {
+            "en": "Point fluctuation",
+            "zh": "点光源起伏"
+          },
+          "disc-averaged": {
+            "en": "Disc averaged",
+            "zh": "圆面平均"
+          }
+        }
+      }
+    ],
+    "bind": [
+      {
+        "output": "display-positions",
+        "part": [
+          "sun",
+          "mercury",
+          "venus",
+          "earth",
+          "mars",
+          "jupiter",
+          "saturn",
+          "uranus",
+          "neptune",
+          "saturn-rings"
+        ],
+        "shift": {
+          "ease": 0,
+          "stagger": 0,
+          "lift": 0
+        }
+      },
+      {
+        "output": "radius-sun",
+        "part": "sun",
+        "scale": {
+          "per": 1
+        }
+      },
+      {
+        "output": "radius-mercury",
+        "part": "mercury",
+        "scale": {
+          "per": 1
+        }
+      },
+      {
+        "output": "radius-venus",
+        "part": "venus",
+        "scale": {
+          "per": 1
+        }
+      },
+      {
+        "output": "radius-earth",
+        "part": "earth",
+        "scale": {
+          "per": 1
+        }
+      },
+      {
+        "output": "radius-mars",
+        "part": "mars",
+        "scale": {
+          "per": 1
+        }
+      },
+      {
+        "output": "radius-jupiter",
+        "part": "jupiter",
+        "scale": {
+          "per": 1
+        }
+      },
+      {
+        "output": "radius-saturn",
+        "part": [
+          "saturn",
+          "saturn-rings"
+        ],
+        "scale": {
+          "per": 1
+        }
+      },
+      {
+        "output": "radius-uranus",
+        "part": "uranus",
+        "scale": {
+          "per": 1
+        }
+      },
+      {
+        "output": "radius-neptune",
+        "part": "neptune",
+        "scale": {
+          "per": 1
+        }
+      },
+      {
+        "control": "atmosphere",
+        "part": [
+          "air-column",
+          "light-rays",
+          "disc-rays"
+        ],
+        "visible": true
+      },
+      {
+        "control": "atmosphere",
+        "part": "straight-rays",
+        "visible": {
+          "eq": false
+        }
+      },
+      {
+        "control": "source-kind",
+        "part": "star-source",
+        "visible": {
+          "eq": "point"
+        }
+      },
+      {
+        "control": "source-kind",
+        "part": "disc-source",
+        "visible": {
+          "eq": "disc"
+        }
+      },
+      {
+        "output": "twinkle-flux",
+        "part": "observer-eye",
+        "glow": {
+          "color": "token:en-light",
+          "full": 1.3,
+          "curve": "linear"
+        }
+      },
+      {
+        "output": "radius-sun",
+        "part": "sun",
+        "glow": {
+          "color": "token:en-light",
+          "full": 0.7,
+          "curve": "linear"
+        }
+      },
+      {
+        "output": "comet-positions",
+        "part": [
+          "comet-nucleus",
+          "comet-coma",
+          "ion-tail",
+          "dust-tail"
+        ],
+        "shift": {
+          "ease": 0,
+          "stagger": 0,
+          "lift": 0
+        }
+      },
+      {
+        "output": "comet-angle",
+        "part": [
+          "ion-tail",
+          "dust-tail"
+        ],
+        "rotate": {
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "per": 1
+        }
+      },
+      {
+        "control": "scale-mode",
+        "part": "orbit-tracks",
+        "visible": {
+          "eq": "overview"
+        }
+      },
+      {
+        "control": "source-kind",
+        "part": "light-rays",
+        "visible": {
+          "eq": "point"
+        }
+      },
+      {
+        "control": "source-kind",
+        "part": "disc-rays",
+        "visible": {
+          "eq": "disc"
+        }
+      },
+      {
+        "output": "radius-sun",
+        "part": [
+          "star-source",
+          "disc-source"
+        ],
+        "glow": {
+          "color": "token:en-light",
+          "full": 0.7,
+          "curve": "linear"
+        }
+      }
+    ],
+    "overlays": [
+      {
+        "kind": "catalogue-sky",
+        "group": "local-sky",
+        "catalogue": "stars-hyg-v41-cc-by-sa.json",
+        "radius": 5
+      }
+    ]
+  },
+  "poses": {
+    "receiving-reflection": {
+      "observer-eye": {
+        "offset": [
+          1,
+          0,
+          3
+        ]
+      },
+      "duration": 0
+    }
+  }
+}

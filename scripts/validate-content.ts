@@ -1,3 +1,4 @@
+import { parseStarCatalogue } from '../src/engines/space-scene/lib/sim/solar-sky';
 import { portSourceIssues } from '../src/engines/space-scene/port-schema';
 /**
  * Content validator: `pnpm validate` (also runs before `pnpm build`).
@@ -457,6 +458,7 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
       warn(join(dataDir, 'parts.json'), `views.exerciseBody "wire": model ${model} has no "skin-wire" node, so the engine decimates the skin outline at load (slower, rougher)`);
   }
   const matterFile = topic.engine === 'space-scene' && data ? (data as { parts?: PartsFile }).parts : undefined;
+  if(matterFile?.sim?.solarSystem) for(const overlay of matterFile.sim.overlays) if(overlay.kind==='catalogue-sky'){const path=join(PUBLIC_DIR,'catalogues/solar-system',overlay.catalogue);try{parseStarCatalogue(JSON.parse(readFileSync(path,'utf8')),matterFile.sim.solarSystem.patterns);}catch(e){error(join(dataDir,'parts.json'),`catalogue-sky ${overlay.catalogue}: ${String(e)}`);}}
   if (matterFile?.sim?.port) for (const issue of portSourceIssues(matterFile.sim.port, new Map((sourcesFile?.sources ?? []).map((x) => [x.id, x])))) error(join(dataDir, 'parts.json'), `sim.port.${issue.path.join('.')}: ${issue.message}`);
   // A table model's rows (docs/40 §4.2): every source listed, SIM rows citing the design study, TYPICAL rows another source.
   if (matterFile?.sim?.senses) for (const issue of sensesSourceIssues(matterFile.sim.senses, sources ?? new Set())) error(join(dataDir, 'parts.json'), `sim.senses.${issue.path.join('.')}: ${issue.message}`);
