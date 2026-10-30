@@ -1,0 +1,12 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "design": true,
+      "text": {
+        "en": "Atlas original microscope fixture: 10× ocular; objectives4/10/40; field number18mm; field diameter18000/objective µm; per-feature linear teaching clarity over widths20/8/2 µm. Synthetic finite patches and dimensions are design values, not measured microscopy.",
+        "zh": "Atlas原创显微镜测试：10倍目镜、4/10/40倍物镜、视场数18毫米；视野直径为18000除以物镜倍率，单位微米；各特征按20/8/2微米窗口计算线性教学清晰度。有限合成标本尺寸为设计值，非真实显微测量。"
+      }
+    }
+  ]
+}

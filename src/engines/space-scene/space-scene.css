@@ -2264,3 +2264,10 @@ button.space-plate__sel:focus-visible {
 .space-senses-note tspan[style] {
   stroke: none;
 }
+
+/* The field has one renderer: desktop card or the narrow reading panel. */
+.space-microscope { margin: 0 auto; width: 100%; box-sizing: border-box; padding: 8px 10px; color: var(--ink); font: 11px/1.45 var(--font-mono); }
+.space-microscope figcaption { display: flex; justify-content: space-between; gap: 8px; padding-bottom: 8px; }
+.space-microscope canvas { display: block; width: 100%; height: auto; aspect-ratio: 1; border-radius: 50%; border: 1px solid var(--ink); background: var(--paper); }
+.space-microscope p { margin: 6px 0; }
+.space-microscope ul { display: flex; flex-wrap: wrap; gap: 4px 12px; padding: 0; list-style: none; font-size: 10px; }

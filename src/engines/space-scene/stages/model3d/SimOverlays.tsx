@@ -525,7 +525,7 @@ export function SimOverlays({
         />
       )}
       {overlays.map((o, i) => {
-        if (o.kind === 'energy-bars' || o.kind === 'orbit-guides' || o.kind === 'orbit-eclipse-shadow' || o.kind === 'airfoil-pressure') return null;
+        if (o.kind === 'microscope-field' || o.kind === 'energy-bars' || o.kind === 'orbit-guides' || o.kind === 'orbit-eclipse-shadow' || o.kind === 'airfoil-pressure') return null;
         if (o.kind === 'paraxial-eye' || o.kind === 'longitudinal-wave') return <SensesOverlay key={i} overlay={o} sim={sim} values={resolved} outputs={outputs} exploded={exploded} layers={layers} run={run} snapKey={snapKey} phaseKey={phaseKey} look={look} bridge={bridge} />;
         if (o.kind === 'shadow-cast') return <ShadowCast key={i} overlay={o} index={i} sim={sim} values={resolved} outputs={outputs} handles={handles} displays={displays} layers={layers} exploded={exploded} look={look} snapKey={snapKey} bridge={bridge} />;
         if (o.kind === 'force-vectors')

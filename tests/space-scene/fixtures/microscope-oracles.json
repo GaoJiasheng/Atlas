@@ -1,0 +1,303 @@
+{
+  "meta": {
+    "description": "Independent arithmetic fixtures for the proposed engine; no runtime implementation or app test claimed",
+    "facts": [
+      "F-D01",
+      "F-D02",
+      "F-D03",
+      "F-D04",
+      "F-X01"
+    ]
+  },
+  "config": {
+    "ocularPower": 10,
+    "fieldNumberMm": 18,
+    "widthUm": {
+      "4": 20,
+      "10": 8,
+      "40": 2
+    },
+    "targets": {
+      "onion-bulb": [
+        200,
+        0,
+        0
+      ],
+      "pondweed-leaf": [
+        0,
+        0,
+        3
+      ],
+      "prepared-cheek": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "cases": [
+    {
+      "id": "T1",
+      "input": {
+        "specimen": "onion-bulb",
+        "objective": 4,
+        "slideX": 0,
+        "slideY": 0,
+        "focusZ": 0,
+        "illumination": 0.5,
+        "enabled": true
+      },
+      "expected": {
+        "totalPower": 40,
+        "fieldDiameterUm": 4500.0,
+        "u": -0.08888888888888889,
+        "v": 0.0,
+        "clarity": 1.0,
+        "blurPx": 0.0,
+        "targetLocation": "inside",
+        "focusStatus": "sharp",
+        "viewStatus": "sharp"
+      }
+    },
+    {
+      "id": "T2",
+      "input": {
+        "specimen": "onion-bulb",
+        "objective": 10,
+        "slideX": 0,
+        "slideY": 0,
+        "focusZ": 0,
+        "illumination": 0.5,
+        "enabled": true
+      },
+      "expected": {
+        "totalPower": 100,
+        "fieldDiameterUm": 1800.0,
+        "u": -0.2222222222222222,
+        "v": 0.0,
+        "clarity": 1.0,
+        "blurPx": 0.0,
+        "targetLocation": "inside",
+        "focusStatus": "sharp",
+        "viewStatus": "sharp"
+      }
+    },
+    {
+      "id": "T3",
+      "input": {
+        "specimen": "onion-bulb",
+        "objective": 40,
+        "slideX": -200,
+        "slideY": 0,
+        "focusZ": 0,
+        "illumination": 0.5,
+        "enabled": true
+      },
+      "expected": {
+        "totalPower": 400,
+        "fieldDiameterUm": 450.0,
+        "u": 0.0,
+        "v": 0.0,
+        "clarity": 1.0,
+        "blurPx": 0.0,
+        "targetLocation": "inside",
+        "focusStatus": "sharp",
+        "viewStatus": "sharp"
+      }
+    },
+    {
+      "id": "T4",
+      "input": {
+        "specimen": "onion-bulb",
+        "objective": 40,
+        "slideX": -100,
+        "slideY": 0,
+        "focusZ": 0,
+        "illumination": 0.5,
+        "enabled": true
+      },
+      "expected": {
+        "totalPower": 400,
+        "fieldDiameterUm": 450.0,
+        "u": -0.4444444444444444,
+        "v": 0.0,
+        "clarity": 1.0,
+        "blurPx": 0.0,
+        "targetLocation": "inside",
+        "focusStatus": "sharp",
+        "viewStatus": "sharp"
+      }
+    },
+    {
+      "id": "T5",
+      "input": {
+        "specimen": "onion-bulb",
+        "objective": 40,
+        "slideX": 100,
+        "slideY": 0,
+        "focusZ": 0,
+        "illumination": 0.5,
+        "enabled": true
+      },
+      "expected": {
+        "totalPower": 400,
+        "fieldDiameterUm": 450.0,
+        "u": -1.3333333333333333,
+        "v": 0.0,
+        "clarity": 1.0,
+        "blurPx": 0.0,
+        "targetLocation": "outside",
+        "focusStatus": "sharp",
+        "viewStatus": "outside"
+      }
+    },
+    {
+      "id": "T6",
+      "input": {
+        "specimen": "onion-bulb",
+        "objective": 40,
+        "slideX": -200,
+        "slideY": 0,
+        "focusZ": 1,
+        "illumination": 0.5,
+        "enabled": true
+      },
+      "expected": {
+        "totalPower": 400,
+        "fieldDiameterUm": 450.0,
+        "u": 0.0,
+        "v": 0.0,
+        "clarity": 0.5,
+        "blurPx": 4.0,
+        "targetLocation": "inside",
+        "focusStatus": "soft",
+        "viewStatus": "soft"
+      }
+    },
+    {
+      "id": "T7",
+      "input": {
+        "specimen": "onion-bulb",
+        "objective": 40,
+        "slideX": -200,
+        "slideY": 0,
+        "focusZ": 2,
+        "illumination": 0.5,
+        "enabled": true
+      },
+      "expected": {
+        "totalPower": 400,
+        "fieldDiameterUm": 450.0,
+        "u": 0.0,
+        "v": 0.0,
+        "clarity": 0,
+        "blurPx": 8,
+        "targetLocation": "inside",
+        "focusStatus": "blurred",
+        "viewStatus": "blurred"
+      }
+    },
+    {
+      "id": "T8",
+      "input": {
+        "specimen": "pondweed-leaf",
+        "objective": 40,
+        "slideX": 0,
+        "slideY": 0,
+        "focusZ": 3,
+        "illumination": 0.5,
+        "enabled": true
+      },
+      "expected": {
+        "totalPower": 400,
+        "fieldDiameterUm": 450.0,
+        "u": 0.0,
+        "v": 0.0,
+        "clarity": 1.0,
+        "blurPx": 0.0,
+        "targetLocation": "inside",
+        "focusStatus": "sharp",
+        "viewStatus": "sharp"
+      }
+    },
+    {
+      "id": "T9",
+      "input": {
+        "specimen": "pondweed-leaf",
+        "objective": 40,
+        "slideX": 0,
+        "slideY": 0,
+        "focusZ": 3,
+        "illumination": 0,
+        "enabled": true
+      },
+      "expected": {
+        "totalPower": 400,
+        "fieldDiameterUm": 450.0,
+        "u": 0.0,
+        "v": 0.0,
+        "clarity": 1.0,
+        "blurPx": 0.0,
+        "targetLocation": "inside",
+        "focusStatus": "sharp",
+        "viewStatus": "dark"
+      }
+    },
+    {
+      "id": "T10",
+      "input": {
+        "specimen": "prepared-cheek",
+        "objective": 40,
+        "slideX": 0,
+        "slideY": 100,
+        "focusZ": 0,
+        "illumination": 0.5,
+        "enabled": true
+      },
+      "expected": {
+        "totalPower": 400,
+        "fieldDiameterUm": 450.0,
+        "u": 0.0,
+        "v": -0.4444444444444444,
+        "clarity": 1.0,
+        "blurPx": 0.0,
+        "targetLocation": "inside",
+        "focusStatus": "sharp",
+        "viewStatus": "sharp"
+      }
+    },
+    {
+      "id": "T12",
+      "input": {
+        "specimen": "onion-bulb",
+        "objective": 4,
+        "slideX": 0,
+        "slideY": 0,
+        "focusZ": 0,
+        "illumination": 0.5,
+        "enabled": false
+      },
+      "expected": {
+        "totalPower": 40,
+        "fieldDiameterUm": 4500.0,
+        "u": -0.08888888888888889,
+        "v": 0.0,
+        "clarity": 1.0,
+        "blurPx": 0.0,
+        "targetLocation": "inside",
+        "focusStatus": "sharp",
+        "viewStatus": "inactive"
+      }
+    }
+  ],
+  "additionalCases": {
+    "T11": {
+      "widthUm": 100,
+      "fractionAt4": 0.022222222222222223,
+      "fractionAt40": 0.2222222222222222
+    },
+    "T13": "schema invalid inputs: reject",
+    "T14": "setSim invalid returns false; URL normalizes to default4",
+    "T15": "locale/theme/beat state replay roundtrip"
+  }
+}

@@ -1198,5 +1198,25 @@
       "0000000000000000",
       "0000000000000000"
     ]
+  },
+  "cells": {
+    "mask": [
+      "0000000000000000",
+      "0012540000000000",
+      "06deffc300000000",
+      "0afffff700110000",
+      "1dfffffc07dd5000",
+      "1efffffd4effe700",
+      "1efffffd7fffff40",
+      "1efffffe8fffffb0",
+      "1efffffe4dffffe1",
+      "1dfffffe3bffffd1",
+      "1dfffffe2bffffd1",
+      "0cfffffd18ffff70",
+      "0bfffffb008ffb10",
+      "018dffd300023100",
+      "0001244000000000",
+      "0000000000000000"
+    ]
   }
 }

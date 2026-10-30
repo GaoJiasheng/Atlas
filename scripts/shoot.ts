@@ -1,3 +1,4 @@
+import { microscopeFieldReading } from '../src/engines/space-scene/lib/sim/microscope';
 /**
  * `pnpm shoot <topic> [options] [shot names...]` — Playwright QA driver for the
  * technical-plate scenes (docs/08 §7). Port of the industrial-3d-showcase
@@ -482,6 +483,7 @@ async function beatSceneOf(page: Page): Promise<BeatScene | null> {
                 : v;
         return { orbit: normalize(orbit), orbitOutputs: normalize(e.sim?.()) };
       })(),
+      microscope: (window.__atlas!.engine as unknown as {microscopeField?():unknown}).microscopeField?.() ?? null,
       airfoil: (()=>{const a=(window.__atlas!.engine as unknown as {airfoil?():{inputKey:string;mode:string;cl:number;lift:number;plot:unknown}}).airfoil?.();return a?{inputKey:a.inputKey,mode:a.mode,cl:a.cl,lift:a.lift,plot:a.plot}:null;})(),
       unfinished: Object.entries(sim?.timeline ?? {})
         .filter(([, r]) => r.playing || r.t !== r.duration)
@@ -834,6 +836,24 @@ async function airfoilIssues(s:Session):Promise<string[]> {
   return out;
 }
 
+/** Compare finite microscope telemetry and the actual single field buffer to its pure model. */
+async function microscopeDrawIssues(s:Session):Promise<string[]> {
+  const path=join(ROOT,'src/content/topics',s.topic,'data/parts.json');if(!existsSync(path))return [];
+  const file=JSON.parse(readFileSync(path,'utf8')) as PartsFile;if(!file.sim?.microscope)return [];
+  const read=await s.page.evaluate(()=>{
+    const e=window.__atlas!.engine as unknown as {sim():{values:Record<string,number|string|boolean>};microscopeField():ReturnType<typeof microscopeFieldReading>};
+    return {field:e.microscopeField(),values:e.sim().values,canvases:Array.from(document.querySelectorAll<HTMLCanvasElement>('[data-microscope-field] canvas')).map(c=>[c.width,c.height]),state:window.__atlas!.state() as unknown as {view:string;cutaway:string}};
+  });
+  const want=microscopeFieldReading(file.sim.microscope,read.values),out:string[]=[];
+  if(JSON.stringify(read.field)!==JSON.stringify(want))out.push('microscope field differs from resolved pure model');
+  if(![read.field.totalPower,read.field.fieldDiameterUm,...read.field.targetUV].every(Number.isFinite))out.push('microscope field has non-finite telemetry');
+  if(read.field.visibleFeatureIds.length>2048)out.push('microscope exceeds finite feature budget');
+  const on=read.values[file.sim.microscope.controls.enabled]===true;
+  if(read.canvases.length!==(on?1:0)||read.canvases.some(c=>c[0]!==512||c[1]!==512))out.push('microscope must mount exactly one512px field when enabled');
+  if(on&&(read.state.view!=='assembled'||read.state.cutaway!=='none'))out.push('microscope observation must use assembled view');
+  return out;
+}
+
 /**
  * Every beat opened from its link (`?ch=<chapter>&b=<n>`) in a fresh document of its own, against the scene the presentation
  * showed: a field that differs, or a run not at its end (links jump to the end), is a beat failure.
@@ -871,6 +891,7 @@ async function runBeatLinks(s: Session, beats: { chapter: string; index: number 
     for (const issue of await orbitIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     for (const issue of await mechanismDrawIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     for (const issue of await sensesDrawIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
+    for (const issue of await microscopeDrawIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     for (const issue of await airfoilIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     if (diffs.length) report.beatFailures.push(`${name}: opened from ${link}: ${diffs.join('; ')}`);
     else same++;
@@ -938,6 +959,7 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
     for (const issue of await orbitIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     for (const issue of await mechanismDrawIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     for (const issue of await sensesDrawIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
+    for (const issue of await microscopeDrawIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     for (const issue of await airfoilIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     if (!(await s.drawn())) report.beatFailures.push(`${name}: the stage drew no frame after its canvas was resized`);
     await s.page.screenshot({ path: join(out, `${name}${o.suffix}.png`) });
