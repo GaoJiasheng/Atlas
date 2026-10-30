@@ -167,9 +167,11 @@ describe('eyes-and-ears: bilingual text and scope', () => {
     }
   });
 
-  it('contains no absent sound link, medical test, audio access or unfinished copy', () => {
+  it('links to the published sound lesson without audio access or unfinished copy', () => {
     const all = chapters.map(c => c.body).join('\n');
-    expect(all).not.toMatch(/slug="sound"|getUserMedia|AudioContext|TODO|placeholder|PSLE必考|PSLE core/i);
+    expect(all).not.toMatch(/getUserMedia|AudioContext|TODO|placeholder|PSLE必考|PSLE core/i);
+    expect(chapter('pitch-and-strength').body).toContain('slug="sound" ch="02-a-medium-to-travel"');
+    expect(yaml(readFileSync(join(DIR, '../sound/topic.yaml'), 'utf8')).status).toBe('published');
     expect(chapter('care-and-protection').body).toMatch(/cotton buds/);
     expect(chapter('care-and-protection').body).toMatch(/不要直视太阳/);
     for (const c of chapters) {

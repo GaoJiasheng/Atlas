@@ -13,6 +13,7 @@ import type { StageBridge } from '../bridge';
 export function SensesStageLabel({ file, bridge }: { file: PartsFile; bridge: StageBridge }) {
   const t = useT();
   const bench = useMemo(() => {
+    if (file.sim?.senses?.profile === 'sound-only') return null;
     const o = file.sim?.overlays.find((x) => x.kind === 'paraxial-eye');
     return o?.kind === 'paraxial-eye' && (o.yScale > 1 || o.pointColors) ? o : null;
   }, [file.sim]);

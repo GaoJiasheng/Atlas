@@ -1060,15 +1060,16 @@ export function PartNode(props: PartNodeProps) {
         // Try-it: an animation switched off eases out; a rotate with a bound speed integrates its own angle.
         const sim = props.animSim?.get(a.id);
         const onTarget = sim?.enabled === false ? 0 : 1;
-        m.on[i] = snap ? onTarget : damp(m.on[i] ?? 1, onTarget, 6, dt);
+        const acoustic = runtime.sound.markerIds.has(a.id);
+        m.on[i] = snap || acoustic ? onTarget : damp(m.on[i] ?? 1, onTarget, 6, dt);
         if (Math.abs(m.on[i]! - onTarget) < 0.003) m.on[i] = onTarget;
         else moving = true;
         const always = !a.whenRun;
-        if ((!always && runtime.energy === 0) || m.on[i] === 0) return;
+        if ((!always && runtime.energy === 0 && !acoustic) || m.on[i] === 0) return;
         // Paced by an `hz` binding (lib/sim/hz.ts): its own integrated phase, as the animation's own time.
         const paced = runtime.clocks.get(a.id);
         const t = paced?.paced ? clockTime(a, paced.cycles) : always ? runtime.elapsed : runtime.phase;
-        const k = (always ? 1 : runtime.energy) * m.on[i]!;
+        const k = (always || acoustic ? 1 : runtime.energy) * m.on[i]!;
         if (a.kind === 'rotate' && sim?.rpm !== undefined) {
           m.angle[i] = (m.angle[i]! + dt * k * (sim.rpm / 60) * 2 * Math.PI) % (2 * Math.PI);
           aboutPivot(anim.matrix, tmpM.makeRotationFromQuaternion(tmpQ.setFromAxisAngle(axes[i]!, m.angle[i]!)), pivots[i]!);
@@ -1114,11 +1115,11 @@ export function PartNode(props: PartNodeProps) {
       props.animations.forEach((a, i) => {
         if (!isEach(a)) return;
         const always = !a.whenRun;
-        if (!always && runtime.energy === 0) return;
+        if (!always && runtime.energy === 0 && !runtime.sound.markerIds.has(a.id)) return;
         // Paced by an `hz` binding (lib/sim/hz.ts): its own integrated phase, as the animation's own time.
         const paced = runtime.clocks.get(a.id);
         const t = paced?.paced ? clockTime(a, paced.cycles) : always ? runtime.elapsed : runtime.phase;
-        const k = always ? 1 : runtime.energy;
+        const k = always || runtime.sound.markerIds.has(a.id) ? 1 : runtime.energy;
         if (a.kind === 'pulse') {
           animationScale3(a, t, k, tmpS3);
           tmpEach.multiply(tmpM.makeScale(tmpS3[0], tmpS3[1], tmpS3[2]));

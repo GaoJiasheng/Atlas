@@ -4,7 +4,7 @@
  */
 import { defineEngine } from '../core/engine';
 import type { ChapterState } from '../core/types';
-import type { SpaceSceneData, SpaceView } from './schema';
+import type { SpaceSceneData, SpaceView, SensesFrame } from './schema';
 import type { SimValues } from './sim-schema';
 import { EXERCISE_PHASES, type ExercisePhase } from '../../lib/anatomy';
 
@@ -57,6 +57,8 @@ export interface SpaceSceneExt {
    * lib/sim/controls.ts). URL `sim`.
    */
   sim: SimValues;
+  /** Author phase snapshot, reconstructed from chapter + beat; never encoded in URL. */
+  sensesFrame?: SensesFrame | null;
 }
 
 const KEBAB = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -116,6 +118,7 @@ export const spaceSceneEngine = defineEngine<SpaceSceneExt, SpaceSceneData>({
       demo: null,
       beat: null,
       sim: {},
+      sensesFrame: null,
       ...(data?.parts.sim?.orbitRotation ? { orbitTime: null } : {}),
       // All groups visible by default.
       layers: data ? data.parts.groups.map((g) => g.id) : [],
@@ -138,6 +141,7 @@ export const spaceSceneEngine = defineEngine<SpaceSceneExt, SpaceSceneData>({
     out.demo = null;
     out.beat = null;
     out.sim = simSetOf(state.sim);
+    out.sensesFrame = state.sensesFrame && typeof state.sensesFrame === 'object' ? { ...state.sensesFrame } as SensesFrame : null;
     return out;
   },
   fromUrl(fields) {

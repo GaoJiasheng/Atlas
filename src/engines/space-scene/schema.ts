@@ -1676,6 +1676,13 @@ const muscleStateFields = {
   sites: z.array(kebabId).optional(),
 };
 
+/** Author snapshots use the same phase clock as the acoustic source markers. */
+export const sensesFrameSchema = z.object({
+  waveCycles: z.number().finite().min(0).max(1).optional(),
+  echoProgress: z.number().finite().min(0).max(1).optional(),
+}).strict().refine(x => x.waveCycles !== undefined || x.echoProgress !== undefined, 'sensesFrame needs at least one phase');
+export type SensesFrame = z.output<typeof sensesFrameSchema>;
+
 export const spaceBeat = z
   .object({
     view: z.enum(SPACE_VIEWS).optional(),
@@ -1692,6 +1699,7 @@ export const spaceBeat = z
     /** Groups (or parts) drawn faint for this beat (not cumulative); default the chapter's. */
     ghost: z.array(kebabId).optional(),
     ...muscleStateFields,
+    sensesFrame: sensesFrameSchema.optional(),
     /** Try-it control values for this beat, on top of the chapter's `sim.set`. */
     sim: beatSimSchema.optional(),
     caption: bilingual,
@@ -1760,6 +1768,7 @@ export const spaceChapterState = z
     /** The background chapter's reading note ("How this topic is written"; docs/06 背景章; only on `kind: background`). */
     note: bilingual.optional(),
     ...muscleStateFields,
+    sensesFrame: sensesFrameSchema.optional(),
     /** PRESENTATION beats for this chapter; default = one beat (the chapter's state, `summary` as caption). */
     beats: z.array(spaceBeat).min(1).optional(),
     /** The chapter index after the body in the reading panel (exercises or parts). */
@@ -1812,8 +1821,12 @@ export function spaceChapterIssues(state: SpaceChapterState, data: SpaceSceneDat
   const sited = new Set((f.sites ?? []).map((x) => x.muscle));
   const check = (
     where: string,
-    s: Pick<SpaceBeat, 'part' | 'hide' | 'labels' | 'layers' | 'pose' | 'ghost' | 'cutaway' | 'exercise' | 'highlight' | 'sites'> & { camera?: unknown },
+    s: Pick<SpaceBeat, 'part' | 'hide' | 'labels' | 'layers' | 'pose' | 'ghost' | 'cutaway' | 'exercise' | 'highlight' | 'sites' | 'sensesFrame'> & { camera?: unknown },
   ) => {
+    if (s.sensesFrame) {
+      if (f.sim?.kind !== 'senses') out.push(`${where}sensesFrame: requires a senses sim`);
+      if (s.sensesFrame.echoProgress !== undefined && (f.sim?.senses?.profile !== 'sound-only' || !f.sim.senses.soundLab || !f.sim.overlays.some(o => o.kind === 'sound-echo-pulse'))) out.push(`${where}sensesFrame.echoProgress: requires sound-only, soundLab and sound-echo-pulse`);
+    }
     const part = (field: string, id: string, selectable: boolean) => {
       const p = parts.get(id);
       if (!p) out.push(`${where}${field}: unknown part "${id}"`);

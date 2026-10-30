@@ -35,7 +35,7 @@ import { solveHeat } from './heat';
 import { EMPTY_TIMELINE, type Timeline } from './timeline';
 
 /** An output's value: a number, a state id, numbers per id (a vector) or a run over time (a timeline). */
-export type SimOutputValue = number | string | Readonly<Record<string, number>> | Timeline;
+export type SimOutputValue = null | number | string | Readonly<Record<string, number>> | Timeline;
 export type SimOutputs = Readonly<Record<string, SimOutputValue>>;
 
 /** Where the compass is: `magnet.compass`, else the first `at` binding's ring at its control's value (null: none). */
@@ -86,7 +86,7 @@ export function evaluateSim(sim: SimData, values: SimValues, observe: readonly s
   const out: Record<string, SimOutputValue> = {};
   for (const o of sim.outputs) {
     const v = q[o.from ?? o.id];
-    out[o.id] = v ?? (o.kind === 'state' ? (Object.keys(o.states ?? {})[0] ?? '') : o.kind === 'vector' ? {} : o.kind === 'timeline' ? EMPTY_TIMELINE : 0);
+    out[o.id] = v === null && o.nullable ? null : v ?? (o.kind === 'state' ? (Object.keys(o.states ?? {})[0] ?? '') : o.kind === 'vector' ? {} : o.kind === 'timeline' ? EMPTY_TIMELINE : 0);
   }
   return out;
 }
@@ -102,7 +102,7 @@ export function evaluateSim(sim: SimData, values: SimValues, observe: readonly s
 export const SEPARATE_EXPERIMENTS: Readonly<Record<SimKind, boolean>> = { circuit: false, magnet: false, force: true, energy: true, 'life-cycle': false, matter: true, light: true, sort: true, materials: true, table: true, seeds: true, heat: true, 'orbit-rotation': true, airfoil: true, port: true, senses: true, microscope: true, 'solar-system': true };
 
 /** A number output's value (0 for states and vectors; NaN = not applicable here). */
-export const numberOf = (v: SimOutputValue | undefined): number => (typeof v === 'number' ? v : 0);
+export const numberOf = (v: SimOutputValue | undefined): number => (typeof v === 'number' ? v : v === null ? NaN : 0);
 
 /** Decimals an output is shown with: a table cell's own for this value (`decimalsAt`), else the output's, else 3 for amps, 2 for volts, 0 otherwise. */
 export function outputDecimals(o: Pick<SimOutput, 'decimals' | 'unit'> & { decimalsAt?: Readonly<Record<string, number>> | undefined }, value?: number): number {

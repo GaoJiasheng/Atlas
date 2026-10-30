@@ -2700,3 +2700,47 @@ The draft `sample-microscope` exercises inversion, finite patches, three specime
 `{kind:'catalogue-sky',group:'local-sky',catalogue:'stars-hyg-v41-cc-by-sa.json',radius:5}` 仅在 lab=sky、group 开启且未爆炸时画 Points/LineSegments。星表从同源 `${BASE_URL}catalogues/solar-system/<filename>` 独立读取，保留 CC BY-SA 4.0、署名与源 SHA256；不进 topic data 合并，不保存与原创边的混合派生文件。构建验证器及加载器都核对 RA/Dec、id 和边端点；失败显示双语重试按钮。目录被 PWA CacheFirst 缓存，原始文件随静态/Capacitor 包携带。`sky-stars`、各 `<target>-pattern` 与 `depth-stars` 聚合选择点每帧随其可见星均值移动，避免标签在更换钟点后留在旧处。天空是固定 J2000 的近似地平图，不输出升落预报；深度缺值及 ≥100000pc 哨兵屏蔽。Singapore/equator/north45 比较点的经度统一为103.7357°E，纬度分别1.3342/0/45°，同一 SGT 钟点可比较纬度效应。
 
 调试 API：`engine.solarSystem()` 返回 `outputs`、`sky:{status,utc,latitude,depth,rows}` 及 `scales`；`engine.scale(id)` 给 `target` 与实际矩阵的三轴尺度 `actual`；已有 `engine.shift(id)` 仍读实际位移。所有快照保持 paused，FLOW 与运行快捷键不可用，URL/API 也不能让全局 run 变成天文时间。单测 `tests/space-scene/solar-system.test.ts`，浏览器契约 `tests-e2e/sample-solar.spec.ts`；本施工环境按 brief 跳过浏览器执行，主会话补跑。
+
+### SpaceScene · senses：sound-only、传播与单次回声（docs/64 §4 E-SO1–3）
+
+`sim.kind:"senses"` 继续复用同一纵波方程、try-it、记录、URL 和 RUN。`senses.profile` 缺省 `eye-and-sound`，既有七控件眼耳主题无须改数据。新增 `sound-only` 只收声音三控件，禁止 `eye` 配置、眼部控件/输出及 `paraxial-eye`。需要传播实验时再加 `soundLab`：
+
+```json
+{"profile":"sound-only","sound":{"active":"sound-active","frequencyHz":"frequency-hz","amplitude":"amplitude","slowFactor":250,"baseFrequencyHz":250,"baseWavelengthScene":1,"baseDisplacementScene":0.035,"sources":["S1"]},"soundLab":{"medium":"medium","distanceM":"distance-m","speedMps":{"air":340,"water":1500,"solid-example":5000},"sources":["S1"]}}
+```
+
+固定控件：`sound-active` toggle 默认 true；`frequency-hz` step `[250,500]` 默认250、Hz；`amplitude` step `[1,2]` 默认1、相对位移。soundLab 增加 `medium` choice，选项恰为 `air|water|solid-example|vacuum`、默认 air；`distance-m` step `[17,34,68]` 默认34、m。声速表固定为空气340、水1500、选定虚拟均匀固体5000 m/s；后者是 DESIGN，不能称为所有固体的速度。所有 source id 必须存在于本题 sources。
+
+新 `source-drive` 是 state 输出，标签必须完整列出 `off|amplitude-one|amplitude-two`。用两套现有 oscillate marker 表现不同幅度，分别绑定 enabled 与同源 Hz：
+
+```json
+[{"output":"source-drive","animation":"source-one","enabled":{"eq":"amplitude-one"}},{"output":"visual-hz","animation":"source-one","hz":{"per":1}}]
+```
+
+`oscillate.amplitude` 是**角度**，不是场景位移；marker 只是局部振动示意，不能把主体整块摆动称为真实振型。sound-only 的 `visual-hz` 动画直接共用 wave 的 `phaseCycles`，免除通用 Hz 绑定原有0.5秒缓动；频率、幅度、active、章/拍变化归零，seek 同步。sound-active=false 是停源且归静止点；run=false 是冻结当前画面，保留非零模型读数。其它模型的 Hz 缓动和 legacy senses 不变。
+
+`solveSoundLab(config,values)` 解析计算：speed-mps 在真空是 null，其它介质是固定教学速度；one-way-ms 为 `1000*d/c`、echo-ms 为 `2000*d/c`，仅启用源且有介质时有值。propagation-state 优先 `no-medium`，再 `source-off`，否则 `transmitted`。空值表示没有传播事件，不能写零毫秒或无穷大。三种输出都必须显式声明 nullable：
+
+```json
+{"id":"one-way-ms","from":"one-way-ms","kind":"number","nullable":true,"label":{"en":"One-way time","zh":"单程时间"},"unit":"ms","decimals":3}
+```
+
+只有 speed-mps、one-way-ms、echo-ms 可 nullable；读数和记录把 null 写成 “No transmission / 无传播”，不附单位；图跳过 null，不跨缺失值连线；预测不把 null 当0。nullable 不可连接 pose/hz/rpm/intensity 等数值绑定，URL 只存输入。观察这些输出必须同时 observe propagation-state；speed-mps 还需通过 vary/also/keep 纳入 medium。senses 的实验族另分 transmission（speed-mps、one-way-ms、propagation-state）和 echo（echo-ms）：前者 vary medium/distance-m/sound-active；后者只 vary distance-m、固定 air 与启用源。echo 的 observe 允许一并放 propagation-state；frequency/amplitude 卡保持 sound 族，不能串用眼部或传播控制。
+
+介质外观沿用普通 control visible：air-cell/water-cell/solid-bar 各只在对应 medium 显示，真空时全部隐藏但驱动源仍存在；longitudinal-wave 加 `when:{"control":"medium","is":"air"}`，不把空气粒子复制成水或固体粒子模型。
+
+```json
+{"kind":"sound-echo-pulse","model":"echo","group":"echo-study","origin":[-1.1,1.05,0],"axis":[1,0,0],"visualDistancesScene":{"near":1,"mid":1.4,"far":2.2},"slowFactor":10,"reference":"distance-m","sources":["S1"]}
+```
+
+回声 overlay 只允许 sound-only+soundLab，origin 有限、axis 为单位向量；17/34/68 m 固定映射 near/mid/far 示意距离，时间读取同一 echo-ms。颜色复用两套主题的 token:en-sound。它是包络位置，不是空气粒子；wave 慢放250倍，echo 单独慢放10倍。只有 echo 卡、组可见、air、源启用、assembled 且实际 explode=0 和 RUN 时推进；完成一次往返后 hold。暂停继续，完成后再次 RUN 从0重演；隐藏/拆解冻结且不继续调度，echo 播放时连续 wave 隐藏。以34 m 为例，physicalEchoMs=200，完整画面2秒，elapsedVisual 0/.5/1/1.5/2 秒对应沿轴 pathPosition 0/.7/1.4/.7/0 场景单位；路径示意不代表同一实长比例尺。
+
+作者章/拍 state 可写严格快照，至少有一项、每项有限且0..1：
+
+```json
+{"sensesFrame":{"waveCycles":0.25,"echoProgress":0.5},"run":false}
+```
+
+waveCycles 仅 senses 可用；echoProgress 还要求 sound-only、soundLab 和 echo overlay。每次切拍从章基线重新构造，先应用 inputs/可见性，再归零和读作者快照；不继承上一拍。URL 恢复和 presentation 读同一数据；减少动态固定作者帧，RUN 不推进，未写则0。此字段不是测试 seek 命令。
+
+QA：`engine.senses()` 返回 profile，sound-only 的 eye 明确 undefined；wave 使用既有 positions/rests/phaseCycles。sourceMarkers 按 animation id 返回 `{phaseCycles,visualHz,on}`；soundLab.echo 返回 `{elapsedVisual,u,pathPosition,atReturn,playing,hiddenReason,physicalEchoMs,slowFactor}`，其中 pathPosition 是沿 axis 的标量场景距离。`sensesEchoSeek(u)` 仅收有限0..1；sound-only 的 `sensesSeek(cycles)` 同域，legacy 保留原有行为。草稿 `sample-sound` 展示四张卡、全部介质、nullable 记录、marker enabled/Hz、波与回声作者帧；`tests-e2e/sample-sound.spec.ts` 覆盖中英/paper/cinema、深链接、相位、空值、往返及手机减少动态，专用端口 `ATLAS_E2E_PORT=5452`。浏览器门槛留给主会话，文件存在不代表已运行。

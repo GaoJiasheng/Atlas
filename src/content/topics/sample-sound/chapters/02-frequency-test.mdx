@@ -1,0 +1,151 @@
+---
+{
+  "id": "frequency-test",
+  "order": 2,
+  "title": {
+    "en": "Frequency fixture",
+    "zh": "频率测试"
+  },
+  "sensitive": false,
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "cutaway": "none",
+    "layers": [
+      "bench",
+      "wave-study"
+    ],
+    "hide": [],
+    "labels": [
+      "source-driver",
+      "receiver",
+      "wave-reference"
+    ],
+    "camera": {
+      "position": [
+        0,
+        0.8,
+        6
+      ],
+      "target": [
+        0,
+        0.8,
+        0
+      ],
+      "fov": 40
+    },
+    "summary": {
+      "en": "DRAFT schematic engine test.",
+      "zh": "草稿引擎示意测试。"
+    },
+    "sim": {
+      "set": {
+        "sound-active": true,
+        "frequency-hz": 250,
+        "amplitude": 1,
+        "medium": "air",
+        "distance-m": 34
+      },
+      "try": {
+        "vary": "frequency-hz",
+        "also": [
+          "sound-active"
+        ],
+        "keep": [
+          "amplitude",
+          "medium",
+          "distance-m"
+        ],
+        "observe": [
+          "visual-hz",
+          "wavelength-scene",
+          "sound-state"
+        ],
+        "record": {
+          "chart": {
+            "y": "visual-hz"
+          }
+        },
+        "predict": {
+          "prompt": {
+            "en": "Raise frequency: what happens to displayed frequency?",
+            "zh": "提高频率，显示频率怎样变化？"
+          },
+          "start": {
+            "frequency-hz": 250
+          },
+          "change": {
+            "frequency-hz": 500
+          },
+          "observe": "visual-hz",
+          "options": [
+            {
+              "id": "more",
+              "label": {
+                "en": "Higher",
+                "zh": "更高"
+              },
+              "means": "more"
+            },
+            {
+              "id": "same",
+              "label": {
+                "en": "Same",
+                "zh": "相同"
+              },
+              "means": "same"
+            }
+          ]
+        }
+      }
+    },
+    "beats": [
+      {
+        "caption": {
+          "en": "The initial phase is zero.",
+          "zh": "初始相位为零。"
+        }
+      },
+      {
+        "caption": {
+          "en": "This author snapshot is a quarter-cycle.",
+          "zh": "作者快照为四分之一周期。"
+        },
+        "sensesFrame": {
+          "waveCycles": 0.25
+        }
+      },
+      {
+        "caption": {
+          "en": "The next beat uses its chapter baseline.",
+          "zh": "下一拍使用章节基线。"
+        }
+      },
+      {
+        "caption": {
+          "en": "Higher frequency starts from phase zero.",
+          "zh": "提高频率后从零相位开始。"
+        },
+        "sim": {
+          "set": {
+            "frequency-hz": 500
+          }
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Draft fixture for deterministic, silent wave and echo engine checks. [S1]
+
+</Lang>
+
+<Lang zh>
+
+用于确定性静音纵波与回声引擎检查的草稿示例。[S1]
+
+</Lang>

@@ -234,7 +234,7 @@ function truthy(v: SimValue | SimOutputValue | undefined, firstState: string | u
   if (isTimeline(v)) return v.duration > 0;
   if (typeof v === 'number') return Math.abs(v) > 1e-9;
   if (typeof v === 'string') return v !== '' && v !== firstState;
-  return v !== undefined && Object.values(v).some((x) => Math.abs(x) > 1e-9);
+  return v !== undefined && v !== null && Object.values(v).some((x) => Math.abs(x) > 1e-9);
 }
 
 export function holds(cond: SimCondition, v: SimValue | SimOutputValue | undefined, firstState?: string): boolean {
@@ -396,7 +396,7 @@ export function simEffects(sim: SimData, values: SimValues, outputs: SimOutputs)
             for (const path of b.paths) f.visibility[path] = (f.visibility[path] ?? true) && holds(b.visible, v, first);
           } else if (!holds(b.visible, v, first)) f.visible = false;
         }
-        if (b.intensity && v !== undefined && typeof v === 'object' && !isTimeline(v)) {
+        if (b.intensity && v !== undefined && v !== null && typeof v === 'object' && !isTimeline(v)) {
           const { full, mode } = b.intensity;
           const cap = mode === 'density' ? 1 : 2;
           // A vector keyed `<flow>:<path>` (the energy model's `paths`) gives this flow the entries that start with its id.

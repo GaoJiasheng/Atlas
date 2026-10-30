@@ -1,0 +1,172 @@
+---
+{
+  "id": "echo-distance-test",
+  "order": 4,
+  "title": {
+    "en": "Echo fixture",
+    "zh": "回声测试"
+  },
+  "sensitive": false,
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "cutaway": "none",
+    "layers": [
+      "bench",
+      "echo-study"
+    ],
+    "hide": [],
+    "labels": [
+      "echo-emitter",
+      "reflector-near",
+      "reflector-mid",
+      "reflector-far"
+    ],
+    "camera": {
+      "position": [
+        0,
+        0.8,
+        6
+      ],
+      "target": [
+        0,
+        0.8,
+        0
+      ],
+      "fov": 40
+    },
+    "summary": {
+      "en": "DRAFT schematic engine test.",
+      "zh": "草稿引擎示意测试。"
+    },
+    "sim": {
+      "set": {
+        "sound-active": true,
+        "frequency-hz": 250,
+        "amplitude": 1,
+        "medium": "air",
+        "distance-m": 34
+      },
+      "try": {
+        "vary": "distance-m",
+        "keep": [
+          "sound-active",
+          "frequency-hz",
+          "amplitude",
+          "medium"
+        ],
+        "observe": [
+          "echo-ms",
+          "propagation-state"
+        ],
+        "record": {
+          "chart": {
+            "y": "echo-ms"
+          }
+        },
+        "predict": {
+          "prompt": {
+            "en": "Double distance: what happens to return time?",
+            "zh": "距离加倍，返回时间怎样变化？"
+          },
+          "start": {
+            "distance-m": 34
+          },
+          "change": {
+            "distance-m": 68
+          },
+          "observe": "echo-ms",
+          "options": [
+            {
+              "id": "later",
+              "label": {
+                "en": "Later",
+                "zh": "更晚"
+              },
+              "means": "more"
+            },
+            {
+              "id": "same",
+              "label": {
+                "en": "Same",
+                "zh": "相同"
+              },
+              "means": "same"
+            }
+          ]
+        }
+      }
+    },
+    "beats": [
+      {
+        "caption": {
+          "en": "The envelope begins at the source.",
+          "zh": "包络从声源开始。"
+        },
+        "sensesFrame": {
+          "echoProgress": 0
+        }
+      },
+      {
+        "caption": {
+          "en": "Halfway through the return time, at the wall.",
+          "zh": "返回时间过半，到达墙面。"
+        },
+        "sensesFrame": {
+          "echoProgress": 0.5
+        }
+      },
+      {
+        "caption": {
+          "en": "The envelope has returned.",
+          "zh": "包络已返回。"
+        },
+        "sensesFrame": {
+          "echoProgress": 1
+        }
+      },
+      {
+        "caption": {
+          "en": "The next beat does not inherit the return frame.",
+          "zh": "下一拍不继承返回快照。"
+        }
+      },
+      {
+        "caption": {
+          "en": "The near wall represents seventeen metres.",
+          "zh": "近墙表示十七米。"
+        },
+        "sim": {
+          "set": {
+            "distance-m": 17
+          }
+        }
+      },
+      {
+        "caption": {
+          "en": "The far wall represents sixty-eight metres.",
+          "zh": "远墙表示六十八米。"
+        },
+        "sim": {
+          "set": {
+            "distance-m": 68
+          }
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Draft fixture for deterministic, silent wave and echo engine checks. [S1]
+
+</Lang>
+
+<Lang zh>
+
+用于确定性静音纵波与回声引擎检查的草稿示例。[S1]
+
+</Lang>

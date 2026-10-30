@@ -1,0 +1,180 @@
+{
+  "terms": [
+    {
+      "id": "vibration",
+      "term": {
+        "en": "Vibration",
+        "zh": "振动"
+      },
+      "definition": {
+        "en": "Repeated motion near a rest position.",
+        "zh": "在静止位置附近反复运动。"
+      }
+    },
+    {
+      "id": "source",
+      "term": {
+        "en": "Sound source",
+        "zh": "声源"
+      },
+      "definition": {
+        "en": "An object whose vibration starts a sound disturbance.",
+        "zh": "振动时引起声音扰动的物体。"
+      }
+    },
+    {
+      "id": "medium",
+      "term": {
+        "en": "Medium",
+        "zh": "介质"
+      },
+      "definition": {
+        "en": "Matter through which a mechanical sound disturbance can travel.",
+        "zh": "能够传递机械声音扰动的物质。"
+      }
+    },
+    {
+      "id": "vacuum",
+      "term": {
+        "en": "Vacuum",
+        "zh": "真空"
+      },
+      "definition": {
+        "en": "An ideal region without matter; it cannot transmit a mechanical sound wave.",
+        "zh": "理想情况下没有物质的区域，不能传播机械声波。"
+      }
+    },
+    {
+      "id": "sound-wave",
+      "term": {
+        "en": "Sound wave",
+        "zh": "声波"
+      },
+      "definition": {
+        "en": "A disturbance that propagates through a medium.",
+        "zh": "在介质中传播的声音扰动。"
+      }
+    },
+    {
+      "id": "longitudinal",
+      "term": {
+        "en": "Longitudinal wave",
+        "zh": "纵波"
+      },
+      "definition": {
+        "en": "A wave whose local medium motion is along the direction of propagation.",
+        "zh": "介质局部运动与波传播方向相同的波。"
+      }
+    },
+    {
+      "id": "frequency",
+      "term": {
+        "en": "Frequency",
+        "zh": "频率"
+      },
+      "definition": {
+        "en": "The number of complete cycles in a second.",
+        "zh": "每秒完成的振动循环次数。"
+      }
+    },
+    {
+      "id": "hertz",
+      "term": {
+        "en": "Hertz",
+        "zh": "赫兹"
+      },
+      "definition": {
+        "en": "The frequency unit: one hertz means one cycle per second.",
+        "zh": "频率单位；一赫兹表示每秒完成一次循环。"
+      }
+    },
+    {
+      "id": "pitch",
+      "term": {
+        "en": "Pitch",
+        "zh": "音高"
+      },
+      "definition": {
+        "en": "The highness or lowness of a sound; for simple tones it relates to frequency.",
+        "zh": "声音听起来高或低的感觉，也称音调；对于简单音与频率有关。"
+      }
+    },
+    {
+      "id": "amplitude",
+      "term": {
+        "en": "Amplitude",
+        "zh": "振幅"
+      },
+      "definition": {
+        "en": "The greatest displacement from a rest position.",
+        "zh": "离开静止位置的最大位移。"
+      }
+    },
+    {
+      "id": "loudness",
+      "term": {
+        "en": "Loudness",
+        "zh": "响度"
+      },
+      "definition": {
+        "en": "How strong or weak a sound seems to a listener.",
+        "zh": "听者对声音大或小的感受，不等于声强。"
+      }
+    },
+    {
+      "id": "wavelength",
+      "term": {
+        "en": "Wavelength",
+        "zh": "波长"
+      },
+      "definition": {
+        "en": "The spacing between adjacent positions at the same stage of a wave pattern.",
+        "zh": "波形中相邻且处于相同振动阶段的位置之间的距离。"
+      }
+    },
+    {
+      "id": "echo",
+      "term": {
+        "en": "Echo",
+        "zh": "回声"
+      },
+      "definition": {
+        "en": "Sound that returns after reflection.",
+        "zh": "经过反射后返回的声音。"
+      }
+    },
+    {
+      "id": "resonance",
+      "term": {
+        "en": "Resonance",
+        "zh": "共振"
+      },
+      "definition": {
+        "en": "A stronger response when a drive is near a system’s natural frequency.",
+        "zh": "驱动频率接近系统固有频率时，响应较强的现象。"
+      }
+    },
+    {
+      "id": "noise",
+      "term": {
+        "en": "Noise",
+        "zh": "噪音"
+      },
+      "definition": {
+        "en": "Unwanted sound or sound that interferes with an activity; harmful exposure is a separate judgment.",
+        "zh": "生活中不想听到或妨碍活动的声音；是否有害还要看暴露情况。"
+      }
+    },
+    {
+      "id": "hearing-care",
+      "term": {
+        "en": "Hearing care",
+        "zh": "听力保护"
+      },
+      "definition": {
+        "en": "Actions that reduce harmful sound exposure and seek help for persistent hearing concerns.",
+        "zh": "减少有害声音暴露，并在持续出现听觉问题时寻求帮助的做法。"
+      }
+    }
+  ]
+}
