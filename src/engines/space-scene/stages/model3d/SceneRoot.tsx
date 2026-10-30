@@ -12,7 +12,7 @@ import type { SceneStore } from '../../../core/store';
 import type { Chapter } from '../../../core/types';
 import { withBase } from '../../../../i18n';
 import type { SpaceSceneExt } from '../../index';
-import type { PartsFile } from '../../schema';
+import type { PartsFile, SpaceChapterState } from '../../schema';
 import type { FitnessBundle } from '../../../../content/schema/fitness';
 import type { SpaceUiStore } from '../../ui';
 import type { StageBridge } from '../../bridge';
@@ -22,6 +22,7 @@ import { bendAxisIndex } from '../../lib/bend';
 import { jointOf, musclePartIds } from '../../lib/rig';
 import { activeSites } from '../../lib/sites';
 import { sensesMotionBlocked, stepRunTime } from '../../lib/run-clock';
+import { SoundClock } from './SoundClock';
 import { animationsByPart } from '../../lib/animation';
 import { resolveDataColor, resolveMaterialLook } from '../../lib/color';
 import { easeInOutCubic, normalize3, type Vec3 } from '../../lib/math';
@@ -113,7 +114,7 @@ const HAND_LINE_INK = 0.7;
 const SHADOW_CASTER_RATIO = 0.28;
 
 /** Eases `run` in/out and advances the shared clocks. */
-function RunClock({ run, alwaysOn, simKind, view }: { run: boolean; alwaysOn: boolean; simKind?: string; view: string }) {
+function RunClock({ run, alwaysOn, simKind, view, acoustic = false }: { run: boolean; alwaysOn: boolean; simKind?: string; view: string; acoustic?: boolean }) {
   const runtime = useRuntime();
   const invalidate = useThree((s) => s.invalidate);
   useEffect(() => invalidate(), [run, simKind, view, invalidate]);
@@ -121,7 +122,7 @@ function RunClock({ run, alwaysOn, simKind, view }: { run: boolean; alwaysOn: bo
     const dt = Math.min(delta, MAX_DT);
     const blocked = sensesMotionBlocked(simKind, view, runtime.explode);
     stepRunTime(runtime, run, dt, blocked);
-    if (!blocked && (runtime.energy > 0 || alwaysOn)) keepAnimating(state.invalidate);
+    if (!acoustic && !blocked && (runtime.energy > 0 || alwaysOn)) keepAnimating(state.invalidate);
   });
   return null;
 }
@@ -188,6 +189,9 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
       sites: st.sites,
       demo: st.demo,
       sim: st.sim,
+      sensesFrame: st.sensesFrame,
+      chapter: st.chapter,
+      beat: st.beat,
       transitionId: st.transition.id,
       instant: st.transition.instant,
     })),
@@ -580,6 +584,10 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
     if (s.instant) snap.current.key += 1;
   }
 
+  const chapterState = chapters.find(c => c.id === s.chapter)?.state as SpaceChapterState | undefined;
+  const echoContext = (chapterState?.sim?.try?.observe ?? []).some(id => data.sim?.outputs.some(o => o.id === id && (o.from ?? o.id) === 'echo-ms'));
+  const soundMarkersVisible = data.animations.some(a => displays.get(a.target)?.visible && sim?.animations.get(a.id)?.hz !== undefined && sim.animations.get(a.id)?.enabled !== false);
+
   const hoverVisible = hovered && displays.get(hovered)?.visible && displays.get(hovered)?.selectable ? hovered : null;
   useEffect(() => {
     gl.domElement.style.cursor = hoverVisible ? 'pointer' : '';
@@ -597,9 +605,14 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
     <RuntimeContext.Provider value={runtime}>
       {data.mechanisms.length > 0 && <MechanismDriver data={data} store={store} ui={ui} bridge={bridge} />}
       {orbitSession && <OrbitClockDriver orbit={orbitSession} />}
-      {!orbitSession && <RunClock run={s.run} alwaysOn={alwaysOn} simKind={data.sim?.kind} view={s.view} />}
-      <AnimClocks animations={data.animations} effects={sim?.animations} bridge={bridge} snapKey={snap.current.key} />
+      {!orbitSession && <RunClock run={s.run} alwaysOn={alwaysOn} simKind={data.sim?.kind} view={s.view} acoustic={data.sim?.senses?.profile === 'sound-only'} />}
       <ExplodeClock target={explodeTarget} snapKey={snap.current.key} />
+      {data.sim?.senses?.profile === 'sound-only' && (
+        <SoundClock sim={data.sim} values={resolveSimValues(data.sim, s.sim)} frame={s.sensesFrame}
+          snapKey={s.transitionId} run={s.run} exploded={s.view === 'exploded'} layers={s.layers}
+          echoContext={echoContext} markerVisible={soundMarkersVisible} bridge={bridge} />
+      )}
+      <AnimClocks animations={data.animations} effects={sim?.animations} bridge={bridge} snapKey={snap.current.key} />
       <Lighting look={look} center={bounds.center} radius={bounds.modelRadius} runtime={runtime} shadows={data.views.shadows} />
       <GroundShadow floor={bounds.floor} radius={bounds.radius} look={look} runtime={runtime} shadows={data.views.shadows} />
       {needsMotion && (
@@ -698,6 +711,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
           exploded={s.view === 'exploded'}
           run={s.run}
           phaseKey={s.transitionId}
+          sensesFrame={s.sensesFrame}
           look={look}
           snapKey={snap.current.key}
           bridge={bridge}

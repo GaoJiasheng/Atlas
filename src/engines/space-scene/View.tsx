@@ -293,6 +293,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         sites: [...snap.sites],
         beat: snap.beat,
         sim: { ...snap.sim },
+        sensesFrame: snap.sensesFrame,
         orbitTime: orbitSession?.clock.elapsedSeconds,
         orbit: u.orbit,
         presetId: ref ? ref.presetId : h.presetId,
@@ -305,10 +306,10 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
     saveState: () => entered.current!,
     restoreState: (saved) => {
       ui.setState({ presenting: false, orbit: saved.orbit });
-      const { chapter, layers, camera, view, part, explode, run, cutaway, hidden, pose, ghosted, exercise, tints, sites, beat, sim, orbitTime } = saved;
+      const { chapter, layers, camera, view, part, explode, run, cutaway, hidden, pose, ghosted, exercise, tints, sites, beat, sim, sensesFrame, orbitTime } = saved;
       store
         .getState()
-        .applyState({ chapter, layers, camera, view, part, explode, run, cutaway, hidden, pose, ghosted, exercise, tints, sites, beat, sim, ...(orbitSession ? { orbitTime: orbitTime ?? null } : {}), demo: null }, { instant: false });
+        .applyState({ chapter, layers, camera, view, part, explode, run, cutaway, hidden, pose, ghosted, exercise, tints, sites, beat, sim, sensesFrame, ...(orbitSession ? { orbitTime: orbitTime ?? null } : {}), demo: null }, { instant: false });
       bridge.restoreMechanisms(enteredMechanisms.current);
       hud.setState({ presetId: saved.presetId, cameraFree: saved.cameraFree });
     },
@@ -650,6 +651,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         /** The measured free HUD band the hudFrame camera fits into (stage CSS px), or null. */
         freeStage: () => (bridge.freeStage ? { ...bridge.freeStage } : null),
         sensesSeek: (cycles: number) => bridge.sensesSeek(cycles),
+        sensesEchoSeek: (u: number) => bridge.sensesEchoSeek(u),
         joint: (id: string) => { const j = bridge.joints.get(id); return j ? structuredClone(j) : null; },
         ...(file.sim?.airfoil ? airfoilApi(file,store,ui,bridge,chapters) : {}),
         shadows: () => Object.fromEntries(bridge.shadows),

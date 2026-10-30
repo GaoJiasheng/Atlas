@@ -1,0 +1,108 @@
+---
+{
+  "id": "amplitude-test",
+  "order": 3,
+  "title": {
+    "en": "Amplitude fixture",
+    "zh": "振幅测试"
+  },
+  "sensitive": false,
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "cutaway": "none",
+    "layers": [
+      "bench",
+      "wave-study"
+    ],
+    "hide": [],
+    "labels": [
+      "source-driver",
+      "receiver",
+      "wave-reference"
+    ],
+    "camera": {
+      "position": [
+        0,
+        0.8,
+        6
+      ],
+      "target": [
+        0,
+        0.8,
+        0
+      ],
+      "fov": 40
+    },
+    "summary": {
+      "en": "DRAFT schematic engine test.",
+      "zh": "草稿引擎示意测试。"
+    },
+    "sim": {
+      "set": {
+        "sound-active": true,
+        "frequency-hz": 250,
+        "amplitude": 1,
+        "medium": "air",
+        "distance-m": 34
+      },
+      "try": {
+        "vary": "amplitude",
+        "also": [
+          "sound-active"
+        ],
+        "keep": [
+          "frequency-hz",
+          "medium",
+          "distance-m"
+        ],
+        "observe": [
+          "displacement-max",
+          "amplitude-level",
+          "sound-state"
+        ],
+        "record": {
+          "chart": {
+            "y": "displacement-max"
+          }
+        }
+      }
+    },
+    "beats": [
+      {
+        "caption": {
+          "en": "Relative amplitude one.",
+          "zh": "相对振幅一。"
+        }
+      },
+      {
+        "caption": {
+          "en": "Double relative displacement, same frequency.",
+          "zh": "相对位移加倍，频率相同。"
+        },
+        "sim": {
+          "set": {
+            "amplitude": 2
+          }
+        },
+        "sensesFrame": {
+          "waveCycles": 0.25
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Draft fixture for deterministic, silent wave and echo engine checks. [S1]
+
+</Lang>
+
+<Lang zh>
+
+用于确定性静音纵波与回声引擎检查的草稿示例。[S1]
+
+</Lang>

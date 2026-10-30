@@ -459,6 +459,7 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
   const matterFile = topic.engine === 'space-scene' && data ? (data as { parts?: PartsFile }).parts : undefined;
   if (matterFile?.sim?.port) for (const issue of portSourceIssues(matterFile.sim.port, new Map((sourcesFile?.sources ?? []).map((x) => [x.id, x])))) error(join(dataDir, 'parts.json'), `sim.port.${issue.path.join('.')}: ${issue.message}`);
   // A table model's rows (docs/40 §4.2): every source listed, SIM rows citing the design study, TYPICAL rows another source.
+  for (const [i, overlay] of (matterFile?.sim?.overlays ?? []).entries()) if (overlay.kind === 'sound-echo-pulse') for (const id of overlay.sources) if (!sources?.has(id)) error(join(dataDir,'parts.json'), `sim.overlays.${i}.sources: unknown source ${id}`);
   if (matterFile?.sim?.senses) for (const issue of sensesSourceIssues(matterFile.sim.senses, sources ?? new Set())) error(join(dataDir, 'parts.json'), `sim.senses.${issue.path.join('.')}: ${issue.message}`);
   if (matterFile?.sim?.airfoil) for (const issue of airfoilSourceIssues(matterFile.sim.airfoil, new Map((sourcesFile?.sources ?? []).map(x => [x.id, x])))) error(join(dataDir, 'parts.json'), `sim.airfoil.${issue.path.join('.')}: ${issue.message}`);
   if (matterFile?.sim?.table)

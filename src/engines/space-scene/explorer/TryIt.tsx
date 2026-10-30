@@ -132,7 +132,7 @@ function Predict({ file, sim, card, ui, chapter }: { file: PartsFile; sim: SimDa
     const st = store.getState();
     const before = resolveSimValues(sim, st.sim);
     const out = evaluateSimOnStage(sim, file, resolveSimValues(sim, st.sim), st.pose, card.observe).outputs[p.observe];
-    const value = isState ? String(out ?? '') : numberOf(out);
+    const value = out === null ? null : isState ? String(out ?? '') : numberOf(out);
     for (const [k, v] of Object.entries(p.change)) setSim(store, sim, k, v);
     const after = resolveSimValues(sim, store.getState().sim);
     ui.setState({ simPredict: { chapter, guess: id, before, after, restore, value } });
@@ -160,9 +160,10 @@ function Predict({ file, sim, card, ui, chapter }: { file: PartsFile; sim: SimDa
   const guess = p.options.find((o) => o.id === answer.guess);
   // A state is revealed by its label (the car turns); a number by how it changed, in the options' words where one matches.
   const now = view.outputs[p.observe];
-  const outcome = isState ? String(now ?? '') : outcomeOf(typeof answer.value === 'number' ? answer.value : 0, numberOf(now));
+  const noTransmission = now === null || answer.value === null;
+  const outcome = noTransmission ? 'no-transmission' : isState ? String(now ?? '') : outcomeOf(typeof answer.value === 'number' ? answer.value : 0, numberOf(now));
   const match = isState ? undefined : p.options.find((o) => o.means === outcome);
-  const seen = isState && observed ? outputText(observed, now, locale) : match ? tx(match.label, locale) : t(`space.try.outcome.${outcome}` as UiKey);
+  const seen = noTransmission ? (locale === 'zh' ? '无传播' : 'No transmission') : isState && observed ? outputText(observed, now, locale) : match ? tx(match.label, locale) : t(`space.try.outcome.${outcome}` as UiKey);
   return (
     <div className="space-try__predict" data-answered="">
       <p className="space-try__prompt">{tx(p.prompt, locale)}</p>
@@ -208,7 +209,7 @@ function Table({ file, sim, card, ui, chapter }: { file: PartsFile; sim: SimData
     const tables = ui.getState().simTables;
     const context = tableContextKey(chapter, view.values, card.vary);
     const previous = ui.getState().simTableContexts[chapter] === context ? tables[chapter] ?? [] : [];
-    ui.setState({ simTables: { ...tables, [chapter]: recordRow(previous, { vary: view.values[card.vary]!, values }) },
+    ui.setState({ simTables: { ...tables, [chapter]: recordRow(previous, { vary: view.values[card.vary]!, values, controls: { ...view.values } }) },
       simTableContexts: { ...ui.getState().simTableContexts, [chapter]: context },
       simTableNotices: { ...ui.getState().simTableNotices, [chapter]: false },
     });
@@ -361,7 +362,7 @@ export function TryIt({ file, ui, bridge }: { file: PartsFile; ui: SpaceUiStore;
             </dt>
             <dd>
               <b aria-label={outputWords(o, outputs[o.id], locale)}>{outputText(o, outputs[o.id], locale)}</b>
-              {o.kind === 'number' && o.unit && o.format !== 'time' && <small> {o.unit}</small>}
+              {o.kind === 'number' && outputs[o.id] !== null && o.unit && o.format !== 'time' && <small> {o.unit}</small>}
             </dd>
           </div>
         ))}

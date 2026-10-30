@@ -46,6 +46,7 @@ export function beatScene(
     beat: b.index,
     // Try-it values: the chapter's, then the beat's (not cumulative across beats).
     sim: { ...target.sim, ...(spec?.sim?.set ?? {}) },
+    sensesFrame: { ...target.sensesFrame, ...spec?.sensesFrame },
     camera: own ?? preset ?? chapterCamera(view),
   };
 }

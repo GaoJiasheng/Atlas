@@ -25,6 +25,8 @@ export interface ChartPoint {
 export interface ChartSeries {
   output: SimOutput;
   points: ChartPoint[];
+  /** Separate paths: null readings break the line rather than bridging the gap. */
+  segments: ChartPoint[][];
 }
 
 export interface ChartModel {
@@ -64,13 +66,18 @@ export function chartModel(rows: readonly TableRow[], vary: SimControl, ys: read
   const kind: ChartKind = vary.kind === 'step' ? 'line' : 'bar';
   const ticks: SimValue[] = vary.kind === 'step' ? [...vary.values].sort((a, b) => a - b) : vary.kind === 'choice' ? vary.options.map((o) => o.id) : [false, true];
   const xOf = (v: SimValue) => (kind === 'line' ? (v as number) : ticks.indexOf(v));
-  const series = ys.map((output) => ({
-    output,
-    points: rows
-      .map((r) => ({ x: xOf(r.vary), key: r.vary, y: numberOf(r.values[output.id]), current: r.vary === current }))
-      .filter((p) => p.x >= (kind === 'line' ? -Infinity : 0) && Number.isFinite(p.y))
-      .sort((a, b) => a.x - b.x),
-  }));
+  const series = ys.map((output) => {
+    const ordered = rows.map((r) => ({ x: xOf(r.vary), key: r.vary, y: numberOf(r.values[output.id]), current: r.vary === current }))
+      .filter(p => p.x >= (kind === 'line' ? -Infinity : 0)).sort((a,b) => a.x-b.x);
+    const segments: ChartPoint[][] = [];
+    let segment: ChartPoint[] = [];
+    for (const point of ordered) {
+      if (!Number.isFinite(point.y)) { if (segment.length) segments.push(segment); segment = []; }
+      else segment.push(point);
+    }
+    if (segment.length) segments.push(segment);
+    return { output, points: segments.flat(), segments };
+  });
   const top = Math.max(0, ...series.flatMap((s) => s.points.map((p) => p.y)));
   const { max, step } = niceAxis(top);
   const x: [number, number] = kind === 'line' ? [ticks[0] as number, ticks[ticks.length - 1] as number] : [0, ticks.length - 1];
@@ -108,6 +115,10 @@ export function chartSummary(m: ChartModel, w: SummaryWords): string {
     const name = w.y(s.output);
     const pts = s.points;
     if (pts.length === 0) return '';
+    if (m.kind === 'line' && (s.segments.length > 1 || pts.length === 1)) {
+      const list = pts.map(p => `${w.xText(p.key)} ${w.yText(s.output,p.y)}`).join(zh ? '，' : ', ');
+      return zh ? `${name}：${list}；无传播处断开` : `${name}: ${list}; gaps at no transmission`;
+    }
     if (m.kind === 'bar') {
       const list = pts.map((p) => `${w.xText(p.key)} ${w.yText(s.output, p.y)}`).join(zh ? '，' : ', ');
       const hi = pts.reduce((a, b) => (b.y > a.y ? b : a));

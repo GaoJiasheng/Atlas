@@ -241,6 +241,7 @@ function Telemetry({ rows, run, file, ui }: { rows: readonly TelemetryRow[]; run
           const idx = list.map((_, j) => start + j);
           const shown = idx.filter((j) => !na[j]);
           const blank = shown.length === 0;
+          const noTransmission = list.some(c => c.id !== null && view?.outputs[c.id] === null && outputs.get(c.id)?.nullable);
           const follows = r.follow !== undefined;
           const ids = follows ? list.map((c) => c.id!) : [];
           const isClips = ids.some((id) => sim?.kind === 'magnet' && (outputs.get(id)?.from ?? id) === 'clips');
@@ -252,7 +253,7 @@ function Telemetry({ rows, run, file, ui }: { rows: readonly TelemetryRow[]; run
               data-observe={follows && (ids.some((id) => observed.has(id)) || (isClips && !blank)) ? '' : undefined}
               title={`${r.key.en} / ${r.key.zh}`}
             >
-              {r.key.en.toUpperCase()} <b>{blank ? '—' : shown.map((j) => cells[j]!.id !== null && outputs.get(cells[j]!.id!)?.format === 'time' ? timeText(values[j]!, 'en').toUpperCase() : formatReading(values[j]!, cells[j]!.decimals)).join(' · ')}</b>
+              {r.key.en.toUpperCase()} <b>{blank ? (noTransmission ? (locale === 'zh' ? '无传播' : 'No transmission') : '—') : shown.map((j) => cells[j]!.id !== null && outputs.get(cells[j]!.id!)?.format === 'time' ? timeText(values[j]!, 'en').toUpperCase() : formatReading(values[j]!, cells[j]!.decimals)).join(' · ')}</b>
               {r.unit && !blank && !ids.some((id) => outputs.get(id)?.format === 'time') && <small> {r.unit}</small>}
               {follows && !blank && ids.every((id) => outputs.get(id)?.tag === 'typical') && (
                 <>

@@ -80,6 +80,7 @@ export interface SpaceBeatSpec extends BeatBase {
   /** Muscle parts whose attachment markers show in this beat; default the chapter's. */
   sites?: string[];
   /** Try-it control values for this beat, on top of the chapter's `sim.set`. */
+  sensesFrame?: { waveCycles?: number; echoProgress?: number };
   sim?: { set: Record<string, boolean | number | string>; reveal?: boolean };
 }
 
@@ -105,6 +106,7 @@ export interface SpaceSavedState {
   beat: number | null;
   /** Try-it control values set. */
   sim: Record<string, boolean | number | string>;
+  sensesFrame?: { waveCycles?: number; echoProgress?: number } | null;
   /** ORBIT turntable on. */
   orbit: boolean;
   /** The VIEW preset lit before, and whether the camera had been moved since. */

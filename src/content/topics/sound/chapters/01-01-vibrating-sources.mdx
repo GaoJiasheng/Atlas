@@ -1,0 +1,265 @@
+---
+{
+  "id": "01-vibrating-sources",
+  "order": 1,
+  "title": {
+    "zh": "看得见的振动",
+    "en": "Visible vibration"
+  },
+  "sensitive": false,
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "cutaway": "none",
+    "hide": [],
+    "run": false,
+    "layers": [
+      "sources"
+    ],
+    "labels": [
+      "fork",
+      "drumhead"
+    ],
+    "camera": {
+      "position": [
+        -2.7,
+        2.9,
+        5.5
+      ],
+      "target": [
+        -2.2,
+        1.15,
+        0.8
+      ],
+      "fov": 34
+    },
+    "summary": {
+      "en": "Identify local vibration using the fork and membrane markers.",
+      "zh": "借助音叉与鼓面的标记辨认局部振动。"
+    },
+    "index": {
+      "parts": [
+        "fork",
+        "fork-marker",
+        "drumhead",
+        "drum-marker"
+      ]
+    },
+    "sim": {
+      "set": {
+        "sound-active": true,
+        "frequency-hz": 250,
+        "amplitude": 1,
+        "medium": "air",
+        "distance-m": 34
+      }
+    },
+    "beats": [
+      {
+        "camera": {
+          "position": [
+            -2.7,
+            2.9,
+            5.5
+          ],
+          "target": [
+            -2.2,
+            1.15,
+            0.8
+          ],
+          "fov": 34
+        },
+        "run": false,
+        "labels": [
+          "fork",
+          "drumhead"
+        ],
+        "layers": [
+          "sources"
+        ],
+        "sim": {
+          "set": {
+            "sound-active": true,
+            "frequency-hz": 250,
+            "amplitude": 1,
+            "medium": "air",
+            "distance-m": 34
+          }
+        },
+        "caption": {
+          "en": "Locate the two fork arms and the single drumhead before starting the motion model.",
+          "zh": "先找到音叉的两臂和鼓的一层鼓面，再开始看运动示意。"
+        }
+      },
+      {
+        "camera": {
+          "position": [
+            -2.7,
+            2.9,
+            5.5
+          ],
+          "target": [
+            -2.2,
+            1.15,
+            0.8
+          ],
+          "fov": 34
+        },
+        "run": true,
+        "labels": [
+          "fork-marker",
+          "fork"
+        ],
+        "layers": [
+          "sources"
+        ],
+        "sim": {
+          "set": {
+            "sound-active": true,
+            "frequency-hz": 250,
+            "amplitude": 1,
+            "medium": "air",
+            "distance-m": 34
+          }
+        },
+        "caption": {
+          "en": "The marker traces back-and-forth vibration. The fork shape remains a structural reference.",
+          "zh": "小点示意来回振动。音叉本体保留静止外形，供我们辨认结构。"
+        }
+      },
+      {
+        "camera": {
+          "position": [
+            -2.7,
+            2.9,
+            5.5
+          ],
+          "target": [
+            -2.2,
+            1.15,
+            0.8
+          ],
+          "fov": 34
+        },
+        "run": true,
+        "labels": [
+          "drum-marker",
+          "drumhead"
+        ],
+        "layers": [
+          "sources"
+        ],
+        "sim": {
+          "set": {
+            "sound-active": true,
+            "frequency-hz": 250,
+            "amplitude": 1,
+            "medium": "air",
+            "distance-m": 34
+          }
+        },
+        "caption": {
+          "en": "A second marker traces local motion at the drumhead centre. This is not a calculated membrane mode.",
+          "zh": "另一个小点示意鼓面中央的局部运动。画面没有计算鼓面的真实振型。"
+        }
+      },
+      {
+        "camera": {
+          "position": [
+            -2.7,
+            2.9,
+            5.5
+          ],
+          "target": [
+            -2.2,
+            1.15,
+            0.8
+          ],
+          "fov": 34
+        },
+        "run": false,
+        "labels": [
+          "fork-marker",
+          "drum-marker"
+        ],
+        "layers": [
+          "sources"
+        ],
+        "sim": {
+          "set": {
+            "sound-active": true,
+            "frequency-hz": 250,
+            "amplitude": 1,
+            "medium": "air",
+            "distance-m": 34
+          }
+        },
+        "caption": {
+          "en": "Pause freezes the model at one instant. Switching the source off instead returns its markers to rest.",
+          "zh": "暂停把画面停在一个瞬间。关闭声源则让示意点回到静止位置。"
+        },
+        "sensesFrame": {
+          "waveCycles": 0.25
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Find the fork’s joined arms and the drum’s stretched surface. These are different structures, but both can vibrate and disturb the surrounding air. A sound source needs motion; merely recognising the outline of a musical object does not explain how it makes sound. In this model the stationary structures help you locate the moving region. [S1, S3]
+
+Start the motion and watch the mark beside a fork arm. It moves back and forth near the same place. This is an enlarged indication of local vibration. The model does not swing the entire fork across the bench, and it does not trace a measured bending shape of the metal. Keep the rest of the fork in view as a reference. [S1]
+
+Now find the mark at the centre of the drumhead. The stretched membrane is the vibrating surface; the shell supports it. A real membrane can move in complicated patterns across its surface. Here a small marker indicates motion at one location, while the membrane drawing remains a structural specimen. It is not a calculated pattern for a particular drum. [S1, S3]
+
+Pause the model. The marker remains at the displayed instant, even when that point is away from its rest position. Turning the source off has a different meaning: it removes the drive and returns the model markers to rest. That return is a display rule, not a simulation of a struck instrument gradually losing its motion. [S1]
+
+When describing a source, name the vibrating part before naming the whole object. Compare the fork arm with the drumhead. To compare stopping the source, use the separate source switch in the <TopicLink slug="sound" ch="02-a-medium-to-travel">next medium experiment</TopicLink>; leave the medium unchanged for that observation.
+
+<Figure src="figures/sound-drum-membrane" alt={{"en": "A single stretched membrane across a hollow drum shell with a front cutaway and a soft striker.", "zh": "一层绷紧薄膜覆盖空心鼓壳，前部剖开，旁边有软头鼓槌。"}} caption={{"en": "Original structural study: the cutaway reveals the shell cavity; no vibration phase is shown.", "zh": "原创结构图：剖开鼓壳以显示空腔，没有表示鼓面的振动相位。"}} />
+
+<More title={{"en": "The membrane specimen", "zh": "鼓面结构参考"}}>
+
+The illustration shows a stretched membrane over an open shell. Its cutaway makes the cavity visible; it does not show the membrane at a particular vibration phase. The animated marker and the static illustration serve different purposes. [S1]
+
+</More>
+
+<More title={{"en": "Observing a real source", "zh": "观察实物声源"}}>
+
+A classroom comparison can be arranged by an adult using suitable equipment and a soft striker. The model does not require a real striking activity. Its enlarged motion should not be copied by bending or hitting an object harder. [S1]
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+先找出音叉相连的叉臂，再找鼓上绷紧的鼓面。它们外形不同，却都能振动，使周围空气产生扰动。认出乐器的名字还不够，还要指出究竟哪一部分在动。画面保留静止的结构，帮助我们把运动位置和物件外形对应起来。[S1, S3]
+
+开始运转，观察叉臂旁的标记。它在原处附近来回运动，是经过放大的局部振动示意。整把音叉没有横穿实验台，金属的真实弯曲形状也没有被逐点计算。看标记时仍可对照静止的叉臂，不要把标记大小当作真实金属位移。[S1]
+
+再找到鼓面中央的小点。绷紧的薄膜是振动表面，鼓壳提供支撑。真实鼓面的不同位置可以形成复杂的运动图样。这里的小点只表示局部运动，完整鼓面则供我们辨认结构，不是某面实鼓的计算振型。[S1, S3]
+
+暂停后，标记保留在画面当时的位置，即使它已偏离静止点。关闭声源则不同：模型撤去驱动，让标记回到静止位置。这种立即返回是显示规则，没有计算敲击后运动逐渐减弱的过程，也不表示真实乐器会突然停住。[S1]
+
+说明声源时，先说振动部分，再说整个物件。比较叉臂和鼓面，也可从章末索引分别选中它们。停源比较可在<TopicLink slug="sound" ch="02-a-medium-to-travel">下一章的介质实验</TopicLink>使用声源开关，观察时先保持介质不变；不需要通过更大的敲击声验证。
+
+<Figure src="figures/sound-drum-membrane" alt={{"en": "A single stretched membrane across a hollow drum shell with a front cutaway and a soft striker.", "zh": "一层绷紧薄膜覆盖空心鼓壳，前部剖开，旁边有软头鼓槌。"}} caption={{"en": "Original structural study: the cutaway reveals the shell cavity; no vibration phase is shown.", "zh": "原创结构图：剖开鼓壳以显示空腔，没有表示鼓面的振动相位。"}} />
+
+<More title={{"en": "The membrane specimen", "zh": "鼓面结构参考"}}>
+
+图中是一层薄膜和开底鼓壳，局部剖开后能看见空腔。它没有表示鼓面某一时刻的振动形状。运动标记与静态插图承担不同的说明任务。[S1]
+
+</More>
+
+<More title={{"en": "Observing a real source", "zh": "观察实物声源"}}>
+
+实物观察可由成人使用合适器材和软头敲击物安排。本课不要求进行真实敲击，不要为了重现图中的放大运动而用力弯折或重击物件。[S1]
+
+</More>
+
+</Lang>
+

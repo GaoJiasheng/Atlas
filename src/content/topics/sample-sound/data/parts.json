@@ -1,0 +1,986 @@
+{
+  "parts": [
+    {
+      "id": "source-driver",
+      "name": {
+        "en": "Source driver",
+        "zh": "声源驱动面"
+      },
+      "group": "bench",
+      "summary": {
+        "en": "Schematic engine test specimen.",
+        "zh": "引擎测试示意物件。"
+      },
+      "detail": {
+        "en": "Original DESIGN fixture; not measured apparatus. [S1]",
+        "zh": "原创设计测试件，非实测器材。[S1]"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.05,
+          0.3,
+          0.12
+        ],
+        "at": [
+          -1.2,
+          0.5,
+          0
+        ],
+        "color": "token:ink-2"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.15
+      }
+    },
+    {
+      "id": "source-marker-one",
+      "name": {
+        "en": "Source marker · amplitude 1",
+        "zh": "声源标记·振幅1"
+      },
+      "group": "bench",
+      "summary": {
+        "en": "Schematic engine test specimen.",
+        "zh": "引擎测试示意物件。"
+      },
+      "detail": {
+        "en": "Original DESIGN fixture; not measured apparatus. [S1]",
+        "zh": "原创设计测试件，非实测器材。[S1]"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.035,
+          0.035,
+          0.035
+        ],
+        "at": [
+          -1.2,
+          0.75,
+          0.08
+        ],
+        "color": "token:en-sound"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.15
+      }
+    },
+    {
+      "id": "source-marker-two",
+      "name": {
+        "en": "Source marker · amplitude 2",
+        "zh": "声源标记·振幅2"
+      },
+      "group": "bench",
+      "summary": {
+        "en": "Schematic engine test specimen.",
+        "zh": "引擎测试示意物件。"
+      },
+      "detail": {
+        "en": "Original DESIGN fixture; not measured apparatus. [S1]",
+        "zh": "原创设计测试件，非实测器材。[S1]"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.035,
+          0.035,
+          0.035
+        ],
+        "at": [
+          -1.2,
+          0.75,
+          0.08
+        ],
+        "color": "token:en-sound"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.15
+      }
+    },
+    {
+      "id": "receiver",
+      "name": {
+        "en": "Receiver",
+        "zh": "接收面"
+      },
+      "group": "bench",
+      "summary": {
+        "en": "Schematic engine test specimen.",
+        "zh": "引擎测试示意物件。"
+      },
+      "detail": {
+        "en": "Original DESIGN fixture; not measured apparatus. [S1]",
+        "zh": "原创设计测试件，非实测器材。[S1]"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.05,
+          0.3,
+          0.12
+        ],
+        "at": [
+          1.15,
+          0.5,
+          0
+        ],
+        "color": "token:ink-2"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.15
+      }
+    },
+    {
+      "id": "wave-reference",
+      "name": {
+        "en": "Reference rest point",
+        "zh": "参考静止点"
+      },
+      "group": "bench",
+      "summary": {
+        "en": "Schematic engine test specimen.",
+        "zh": "引擎测试示意物件。"
+      },
+      "detail": {
+        "en": "Original DESIGN fixture; not measured apparatus. [S1]",
+        "zh": "原创设计测试件，非实测器材。[S1]"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.01,
+          0.025,
+          0.025
+        ],
+        "at": [
+          -0.75,
+          0.43,
+          0
+        ],
+        "color": "token:ink-2"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.15
+      }
+    },
+    {
+      "id": "air-cell",
+      "name": {
+        "en": "Air specimen",
+        "zh": "空气示意槽"
+      },
+      "group": "bench",
+      "summary": {
+        "en": "Schematic engine test specimen.",
+        "zh": "引擎测试示意物件。"
+      },
+      "detail": {
+        "en": "Original DESIGN fixture; not measured apparatus. [S1]",
+        "zh": "原创设计测试件，非实测器材。[S1]"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          2,
+          0.035,
+          0.15
+        ],
+        "at": [
+          0,
+          0.25,
+          -0.09
+        ],
+        "color": "token:air"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.15
+      }
+    },
+    {
+      "id": "water-cell",
+      "name": {
+        "en": "Water specimen",
+        "zh": "水示意槽"
+      },
+      "group": "bench",
+      "summary": {
+        "en": "Schematic engine test specimen.",
+        "zh": "引擎测试示意物件。"
+      },
+      "detail": {
+        "en": "Original DESIGN fixture; not measured apparatus. [S1]",
+        "zh": "原创设计测试件，非实测器材。[S1]"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          2,
+          0.035,
+          0.15
+        ],
+        "at": [
+          0,
+          0.25,
+          -0.09
+        ],
+        "color": "token:water"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.15
+      }
+    },
+    {
+      "id": "solid-bar",
+      "name": {
+        "en": "Chosen uniform solid",
+        "zh": "选定均匀固体"
+      },
+      "group": "bench",
+      "summary": {
+        "en": "Schematic engine test specimen.",
+        "zh": "引擎测试示意物件。"
+      },
+      "detail": {
+        "en": "Original DESIGN fixture; not measured apparatus. [S1]",
+        "zh": "原创设计测试件，非实测器材。[S1]"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          2,
+          0.035,
+          0.15
+        ],
+        "at": [
+          0,
+          0.25,
+          -0.09
+        ],
+        "color": "token:ink-2"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.15
+      }
+    },
+    {
+      "id": "echo-emitter",
+      "name": {
+        "en": "Echo source and receiver",
+        "zh": "回声源与接收处"
+      },
+      "group": "echo-study",
+      "summary": {
+        "en": "Schematic engine test specimen.",
+        "zh": "引擎测试示意物件。"
+      },
+      "detail": {
+        "en": "Original DESIGN fixture; not measured apparatus. [S1]",
+        "zh": "原创设计测试件，非实测器材。[S1]"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.05,
+          0.18,
+          0.12
+        ],
+        "at": [
+          -1.1,
+          1.05,
+          0
+        ],
+        "color": "token:ink-2"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.15
+      }
+    },
+    {
+      "id": "reflector-near",
+      "name": {
+        "en": "17 m reflector",
+        "zh": "17米反射面"
+      },
+      "group": "echo-study",
+      "summary": {
+        "en": "Schematic engine test specimen.",
+        "zh": "引擎测试示意物件。"
+      },
+      "detail": {
+        "en": "Original DESIGN fixture; not measured apparatus. [S1]",
+        "zh": "原创设计测试件，非实测器材。[S1]"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.025,
+          0.3,
+          0.25
+        ],
+        "at": [
+          -0.1,
+          1.05,
+          0
+        ],
+        "color": "token:ink-2"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.15
+      }
+    },
+    {
+      "id": "reflector-mid",
+      "name": {
+        "en": "34 m reflector",
+        "zh": "34米反射面"
+      },
+      "group": "echo-study",
+      "summary": {
+        "en": "Schematic engine test specimen.",
+        "zh": "引擎测试示意物件。"
+      },
+      "detail": {
+        "en": "Original DESIGN fixture; not measured apparatus. [S1]",
+        "zh": "原创设计测试件，非实测器材。[S1]"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.025,
+          0.3,
+          0.25
+        ],
+        "at": [
+          0.3,
+          1.05,
+          0
+        ],
+        "color": "token:ink-2"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.15
+      }
+    },
+    {
+      "id": "reflector-far",
+      "name": {
+        "en": "68 m reflector",
+        "zh": "68米反射面"
+      },
+      "group": "echo-study",
+      "summary": {
+        "en": "Schematic engine test specimen.",
+        "zh": "引擎测试示意物件。"
+      },
+      "detail": {
+        "en": "Original DESIGN fixture; not measured apparatus. [S1]",
+        "zh": "原创设计测试件，非实测器材。[S1]"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.025,
+          0.3,
+          0.25
+        ],
+        "at": [
+          1.1,
+          1.05,
+          0
+        ],
+        "color": "token:ink-2"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.15
+      }
+    }
+  ],
+  "groups": [
+    {
+      "id": "bench",
+      "name": {
+        "en": "Schematic bench",
+        "zh": "示意实验台"
+      },
+      "color": "token:ink-2"
+    },
+    {
+      "id": "wave-study",
+      "name": {
+        "en": "Longitudinal wave",
+        "zh": "纵波"
+      },
+      "color": "token:en-sound"
+    },
+    {
+      "id": "echo-study",
+      "name": {
+        "en": "Echo pulse",
+        "zh": "回声脉冲"
+      },
+      "color": "token:en-sound"
+    }
+  ],
+  "flows": [],
+  "animations": [
+    {
+      "id": "source-one",
+      "target": "source-marker-one",
+      "kind": "oscillate",
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "amplitude": 8,
+      "hz": 1,
+      "pivot": [
+        -1.2,
+        0.5,
+        0.08
+      ],
+      "whenRun": true
+    },
+    {
+      "id": "source-two",
+      "target": "source-marker-two",
+      "kind": "oscillate",
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "amplitude": 16,
+      "hz": 1,
+      "pivot": [
+        -1.2,
+        0.5,
+        0.08
+      ],
+      "whenRun": true
+    }
+  ],
+  "views": {
+    "assembled": {
+      "camera": {
+        "position": [
+          0,
+          0.8,
+          6
+        ],
+        "target": [
+          0,
+          0.8,
+          0
+        ],
+        "fov": 40
+      }
+    },
+    "exploded": {
+      "camera": {
+        "position": [
+          0,
+          0.8,
+          6
+        ],
+        "target": [
+          0,
+          0.8,
+          0
+        ],
+        "fov": 40
+      }
+    },
+    "cutaway": {
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "offset": 0
+    },
+    "section": {
+      "plane": "xy"
+    },
+    "cover": {
+      "position": [
+        0,
+        0.8,
+        6
+      ],
+      "target": [
+        0,
+        0.8,
+        0
+      ],
+      "fov": 40
+    }
+  },
+  "sim": {
+    "kind": "senses",
+    "controls": [
+      {
+        "id": "sound-active",
+        "kind": "toggle",
+        "label": {
+          "en": "Sound active",
+          "zh": "声音启用"
+        },
+        "default": true
+      },
+      {
+        "id": "frequency-hz",
+        "kind": "step",
+        "label": {
+          "en": "Frequency",
+          "zh": "频率"
+        },
+        "default": 250,
+        "values": [
+          250,
+          500
+        ],
+        "unit": "Hz"
+      },
+      {
+        "id": "amplitude",
+        "kind": "step",
+        "label": {
+          "en": "Relative displacement",
+          "zh": "相对位移"
+        },
+        "default": 1,
+        "values": [
+          1,
+          2
+        ],
+        "unit": "×"
+      },
+      {
+        "id": "medium",
+        "kind": "choice",
+        "label": {
+          "en": "Medium",
+          "zh": "介质"
+        },
+        "default": "air",
+        "options": [
+          {
+            "id": "air",
+            "label": {
+              "en": "Air",
+              "zh": "空气"
+            }
+          },
+          {
+            "id": "water",
+            "label": {
+              "en": "Water",
+              "zh": "水"
+            }
+          },
+          {
+            "id": "solid-example",
+            "label": {
+              "en": "Chosen solid",
+              "zh": "选定固体"
+            }
+          },
+          {
+            "id": "vacuum",
+            "label": {
+              "en": "Vacuum",
+              "zh": "真空"
+            }
+          }
+        ]
+      },
+      {
+        "id": "distance-m",
+        "kind": "step",
+        "label": {
+          "en": "Reflector distance",
+          "zh": "反射面距离"
+        },
+        "values": [
+          17,
+          34,
+          68
+        ],
+        "default": 34,
+        "unit": "m"
+      }
+    ],
+    "outputs": [
+      {
+        "id": "visual-hz",
+        "from": "visual-hz",
+        "kind": "number",
+        "label": {
+          "en": "Displayed frequency",
+          "zh": "显示频率"
+        },
+        "decimals": 3,
+        "unit": "Hz"
+      },
+      {
+        "id": "wavelength-scene",
+        "from": "wavelength-scene",
+        "kind": "number",
+        "label": {
+          "en": "Model wavelength",
+          "zh": "模型波长"
+        },
+        "decimals": 3,
+        "unit": "×"
+      },
+      {
+        "id": "displacement-max",
+        "from": "displacement-max",
+        "kind": "number",
+        "label": {
+          "en": "Maximum displacement",
+          "zh": "最大位移"
+        },
+        "decimals": 3,
+        "unit": "×"
+      },
+      {
+        "id": "amplitude-level",
+        "from": "amplitude-level",
+        "kind": "number",
+        "label": {
+          "en": "Relative displacement amplitude",
+          "zh": "相对位移振幅"
+        },
+        "decimals": 3,
+        "unit": "×"
+      },
+      {
+        "id": "sound-state",
+        "from": "sound-state",
+        "kind": "state",
+        "label": {
+          "en": "Sound state",
+          "zh": "声音状态"
+        },
+        "states": {
+          "still": {
+            "en": "Still",
+            "zh": "静止"
+          },
+          "vibrating": {
+            "en": "Vibrating",
+            "zh": "振动"
+          }
+        }
+      },
+      {
+        "id": "source-drive",
+        "from": "source-drive",
+        "kind": "state",
+        "label": {
+          "en": "Source drive",
+          "zh": "声源驱动"
+        },
+        "states": {
+          "off": {
+            "en": "Off",
+            "zh": "关闭"
+          },
+          "amplitude-one": {
+            "en": "Amplitude 1",
+            "zh": "振幅1"
+          },
+          "amplitude-two": {
+            "en": "Amplitude 2",
+            "zh": "振幅2"
+          }
+        }
+      },
+      {
+        "id": "speed-mps",
+        "from": "speed-mps",
+        "kind": "number",
+        "nullable": true,
+        "label": {
+          "en": "Teaching speed",
+          "zh": "教学速度"
+        },
+        "unit": "m/s",
+        "decimals": 3
+      },
+      {
+        "id": "one-way-ms",
+        "from": "one-way-ms",
+        "kind": "number",
+        "nullable": true,
+        "label": {
+          "en": "One-way time",
+          "zh": "单程时间"
+        },
+        "unit": "ms",
+        "decimals": 3
+      },
+      {
+        "id": "echo-ms",
+        "from": "echo-ms",
+        "kind": "number",
+        "nullable": true,
+        "label": {
+          "en": "Return time",
+          "zh": "返回时间"
+        },
+        "unit": "ms",
+        "decimals": 3
+      },
+      {
+        "id": "propagation-state",
+        "from": "propagation-state",
+        "kind": "state",
+        "label": {
+          "en": "Transmission",
+          "zh": "传播"
+        },
+        "states": {
+          "no-medium": {
+            "en": "No medium",
+            "zh": "无介质"
+          },
+          "source-off": {
+            "en": "Source off",
+            "zh": "声源关闭"
+          },
+          "transmitted": {
+            "en": "Transmitted",
+            "zh": "可传播"
+          }
+        }
+      }
+    ],
+    "bind": [
+      {
+        "output": "source-drive",
+        "animation": "source-one",
+        "enabled": {
+          "eq": "amplitude-one"
+        }
+      },
+      {
+        "output": "visual-hz",
+        "animation": "source-one",
+        "hz": {
+          "per": 1
+        }
+      },
+      {
+        "control": "amplitude",
+        "part": "source-marker-one",
+        "visible": {
+          "eq": 1
+        }
+      },
+      {
+        "output": "source-drive",
+        "animation": "source-two",
+        "enabled": {
+          "eq": "amplitude-two"
+        }
+      },
+      {
+        "output": "visual-hz",
+        "animation": "source-two",
+        "hz": {
+          "per": 1
+        }
+      },
+      {
+        "control": "amplitude",
+        "part": "source-marker-two",
+        "visible": {
+          "eq": 2
+        }
+      },
+      {
+        "control": "medium",
+        "part": "air-cell",
+        "visible": {
+          "eq": "air"
+        }
+      },
+      {
+        "control": "medium",
+        "part": "water-cell",
+        "visible": {
+          "eq": "water"
+        }
+      },
+      {
+        "control": "medium",
+        "part": "solid-bar",
+        "visible": {
+          "eq": "solid-example"
+        }
+      },
+      {
+        "control": "distance-m",
+        "part": "reflector-near",
+        "visible": {
+          "eq": 17
+        }
+      },
+      {
+        "control": "distance-m",
+        "part": "reflector-mid",
+        "visible": {
+          "eq": 34
+        }
+      },
+      {
+        "control": "distance-m",
+        "part": "reflector-far",
+        "visible": {
+          "eq": 68
+        }
+      }
+    ],
+    "senses": {
+      "profile": "sound-only",
+      "sound": {
+        "active": "sound-active",
+        "frequencyHz": "frequency-hz",
+        "amplitude": "amplitude",
+        "slowFactor": 250,
+        "baseFrequencyHz": 250,
+        "baseWavelengthScene": 1,
+        "baseDisplacementScene": 0.035,
+        "sources": [
+          "S1"
+        ]
+      },
+      "soundLab": {
+        "medium": "medium",
+        "distanceM": "distance-m",
+        "speedMps": {
+          "air": 340,
+          "water": 1500,
+          "solid-example": 5000
+        },
+        "sources": [
+          "S1"
+        ]
+      }
+    },
+    "overlays": [
+      {
+        "kind": "longitudinal-wave",
+        "model": "sound",
+        "origin": [
+          -1,
+          0.5,
+          0
+        ],
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "count": 41,
+        "spacing": 0.05,
+        "referenceIndex": 5,
+        "group": "wave-study",
+        "when": {
+          "control": "medium",
+          "is": "air"
+        }
+      },
+      {
+        "kind": "sound-echo-pulse",
+        "model": "echo",
+        "group": "echo-study",
+        "origin": [
+          -1.1,
+          1.05,
+          0
+        ],
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "visualDistancesScene": {
+          "near": 1,
+          "mid": 1.4,
+          "far": 2.2
+        },
+        "slowFactor": 10,
+        "reference": "distance-m",
+        "sources": [
+          "S1"
+        ]
+      }
+    ]
+  }
+}
