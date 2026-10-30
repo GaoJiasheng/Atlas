@@ -1,0 +1,71 @@
+{
+  "date": "2026-10-29",
+  "licence": "Atlas original content, CC BY-NC-SA 4.0",
+  "origin": "Approved generated originals; no third-party photographs, traced geometry or textures.",
+  "method": "scripts/illustrate.ts process / figure. Small cover additionally re-encoded q40/alpha50 (q34/alpha30 fallback), unchanged 800×800 framing and transparent background. Figure script quality floor retained; figure budgets are soft.",
+  "visualReview": "Original and final art inspected: one polyp mouth, twelve unbranched tentacles; continuous flat/crest/slope; cover depicts skeletal morphology and does not establish living tissue.",
+  "assets": [
+    {
+      "name": "coral-reef",
+      "input": {
+        "file": "coral-reef.png",
+        "bytes": 956802,
+        "sha256": "9ce30a0c8d920b229569b432b0e5e467aa75b26cfc993656801ece824d3725d1"
+      },
+      "outputs": [
+        {
+          "file": "public/illustrations/coral-reef.webp",
+          "bytes": 57538,
+          "sha256": "9e9947a4681abd37fed64c9b411d0fef9053e95cab63e1402eb5109525c7772e",
+          "width": 800,
+          "height": 800,
+          "alpha": true
+        },
+        {
+          "file": "public/illustrations/coral-reef@2x.webp",
+          "bytes": 261592,
+          "sha256": "7f97033a77911ec1caafe3e6da855baa55706786af8ca08014c07b50a275523d",
+          "width": 1600,
+          "height": 1600,
+          "alpha": true
+        }
+      ]
+    },
+    {
+      "name": "coral-reef-polyp",
+      "input": {
+        "file": "coral-reef-polyp.png",
+        "bytes": 1117940,
+        "sha256": "51203cca7047d6746794b4ef5bf38ed1640939122dbdf6779567bbebae1588e4"
+      },
+      "outputs": [
+        {
+          "file": "public/illustrations/figures/coral-reef-polyp.webp",
+          "bytes": 126140,
+          "sha256": "9da5357a2d9f656696d4a760224666010f67706c44e73484bdd7ee3e014a9c3f",
+          "width": 1200,
+          "height": 900,
+          "alpha": true
+        }
+      ]
+    },
+    {
+      "name": "coral-reef-zones",
+      "input": {
+        "file": "coral-reef-zones.png",
+        "bytes": 1028154,
+        "sha256": "31608e4a03eefe378be1e6e332d9569b6cdcf53dc5638513e05d11122287b340"
+      },
+      "outputs": [
+        {
+          "file": "public/illustrations/figures/coral-reef-zones.webp",
+          "bytes": 127842,
+          "sha256": "2725e67aa745d5673bbb23d2ebe1064ba3960b525412c25b41f8fcd46ae2aa0c",
+          "width": 1200,
+          "height": 900,
+          "alpha": true
+        }
+      ]
+    }
+  ]
+}

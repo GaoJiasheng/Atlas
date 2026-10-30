@@ -1,0 +1,1378 @@
+{
+  "kind": "table",
+  "controls": [
+    {
+      "id": "remove",
+      "kind": "choice",
+      "label": {
+        "en": "Remove from this web",
+        "zh": "从本图移走"
+      },
+      "default": "none",
+      "options": [
+        {
+          "id": "none",
+          "label": {
+            "en": "Nothing",
+            "zh": "不移走"
+          }
+        },
+        {
+          "id": "n-symbionts",
+          "label": {
+            "en": "Algal partners",
+            "zh": "共生藻"
+          }
+        },
+        {
+          "id": "n-phytoplankton",
+          "label": {
+            "en": "Phytoplankton",
+            "zh": "浮游植物"
+          }
+        },
+        {
+          "id": "n-zooplankton",
+          "label": {
+            "en": "Zooplankton",
+            "zh": "浮游动物"
+          }
+        },
+        {
+          "id": "n-coral",
+          "label": {
+            "en": "Coral animal",
+            "zh": "珊瑚动物"
+          }
+        },
+        {
+          "id": "n-turf-algae",
+          "label": {
+            "en": "Reef-surface algae",
+            "zh": "礁面藻类"
+          }
+        },
+        {
+          "id": "n-parrotfish",
+          "label": {
+            "en": "Parrotfish",
+            "zh": "鹦嘴鱼"
+          }
+        }
+      ]
+    },
+    {
+      "id": "inspect",
+      "kind": "choice",
+      "label": {
+        "en": "Inspect consumer",
+        "zh": "观察消费者"
+      },
+      "default": "n-coral",
+      "options": [
+        {
+          "id": "n-zooplankton",
+          "label": {
+            "en": "Zooplankton",
+            "zh": "浮游动物"
+          }
+        },
+        {
+          "id": "n-coral",
+          "label": {
+            "en": "Coral animal",
+            "zh": "珊瑚动物"
+          }
+        },
+        {
+          "id": "n-parrotfish",
+          "label": {
+            "en": "Parrotfish",
+            "zh": "鹦嘴鱼"
+          }
+        }
+      ]
+    },
+    {
+      "id": "depth-m",
+      "kind": "step",
+      "label": {
+        "en": "Illustrative depth",
+        "zh": "示意深度"
+      },
+      "values": [
+        1,
+        3,
+        7
+      ],
+      "default": 3,
+      "unit": "m"
+    },
+    {
+      "id": "water-case",
+      "kind": "choice",
+      "label": {
+        "en": "Illustrative water case",
+        "zh": "示意水体"
+      },
+      "default": "more-turbid",
+      "options": [
+        {
+          "id": "less-turbid",
+          "label": {
+            "en": "Less turbid",
+            "zh": "较低浑浊度"
+          }
+        },
+        {
+          "id": "more-turbid",
+          "label": {
+            "en": "More turbid",
+            "zh": "较高浑浊度"
+          }
+        }
+      ]
+    },
+    {
+      "id": "evidence-state",
+      "kind": "choice",
+      "label": {
+        "en": "Compare tissue evidence",
+        "zh": "比较组织证据"
+      },
+      "default": "partnered",
+      "options": [
+        {
+          "id": "partnered",
+          "label": {
+            "en": "With algal partners",
+            "zh": "有共生藻"
+          }
+        },
+        {
+          "id": "bleached-alive",
+          "label": {
+            "en": "Bleached, living tissue",
+            "zh": "白化，仍有活组织"
+          }
+        },
+        {
+          "id": "dead-skeleton",
+          "label": {
+            "en": "Dead, bare skeleton",
+            "zh": "已死，只余骨骼"
+          }
+        }
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "id": "present-count",
+      "kind": "number",
+      "label": {
+        "en": "Present diagram nodes",
+        "zh": "未移走图节点"
+      },
+      "decimals": 0,
+      "tag": "sim"
+    },
+    {
+      "id": "supported-count",
+      "kind": "number",
+      "label": {
+        "en": "Nodes with shown paths",
+        "zh": "有已画路径节点"
+      },
+      "decimals": 0,
+      "tag": "sim"
+    },
+    {
+      "id": "active-links",
+      "kind": "number",
+      "label": {
+        "en": "Active diagram links",
+        "zh": "有效图连线"
+      },
+      "decimals": 0,
+      "tag": "sim"
+    },
+    {
+      "id": "status-n-symbionts",
+      "kind": "state",
+      "label": {
+        "en": "Algal partners",
+        "zh": "共生藻"
+      },
+      "states": {
+        "unchanged": {
+          "en": "Shown food paths unchanged",
+          "zh": "已画食物路径未变"
+        },
+        "fewer-foods": {
+          "en": "Fewer shown food paths",
+          "zh": "已画食物路径减少"
+        },
+        "no-shown-food": {
+          "en": "No shown food path",
+          "zh": "没有已画食物路径"
+        },
+        "removed": {
+          "en": "Removed from this diagram",
+          "zh": "从本图移走"
+        }
+      }
+    },
+    {
+      "id": "status-n-phytoplankton",
+      "kind": "state",
+      "label": {
+        "en": "Phytoplankton",
+        "zh": "浮游植物"
+      },
+      "states": {
+        "unchanged": {
+          "en": "Shown food paths unchanged",
+          "zh": "已画食物路径未变"
+        },
+        "fewer-foods": {
+          "en": "Fewer shown food paths",
+          "zh": "已画食物路径减少"
+        },
+        "no-shown-food": {
+          "en": "No shown food path",
+          "zh": "没有已画食物路径"
+        },
+        "removed": {
+          "en": "Removed from this diagram",
+          "zh": "从本图移走"
+        }
+      }
+    },
+    {
+      "id": "status-n-zooplankton",
+      "kind": "state",
+      "label": {
+        "en": "Zooplankton",
+        "zh": "浮游动物"
+      },
+      "states": {
+        "unchanged": {
+          "en": "Shown food paths unchanged",
+          "zh": "已画食物路径未变"
+        },
+        "fewer-foods": {
+          "en": "Fewer shown food paths",
+          "zh": "已画食物路径减少"
+        },
+        "no-shown-food": {
+          "en": "No shown food path",
+          "zh": "没有已画食物路径"
+        },
+        "removed": {
+          "en": "Removed from this diagram",
+          "zh": "从本图移走"
+        }
+      }
+    },
+    {
+      "id": "status-n-coral",
+      "kind": "state",
+      "label": {
+        "en": "Coral animal",
+        "zh": "珊瑚动物"
+      },
+      "states": {
+        "unchanged": {
+          "en": "Shown food paths unchanged",
+          "zh": "已画食物路径未变"
+        },
+        "fewer-foods": {
+          "en": "Fewer shown food paths",
+          "zh": "已画食物路径减少"
+        },
+        "no-shown-food": {
+          "en": "No shown food path",
+          "zh": "没有已画食物路径"
+        },
+        "removed": {
+          "en": "Removed from this diagram",
+          "zh": "从本图移走"
+        }
+      }
+    },
+    {
+      "id": "status-n-turf-algae",
+      "kind": "state",
+      "label": {
+        "en": "Reef-surface algae",
+        "zh": "礁面藻类"
+      },
+      "states": {
+        "unchanged": {
+          "en": "Shown food paths unchanged",
+          "zh": "已画食物路径未变"
+        },
+        "fewer-foods": {
+          "en": "Fewer shown food paths",
+          "zh": "已画食物路径减少"
+        },
+        "no-shown-food": {
+          "en": "No shown food path",
+          "zh": "没有已画食物路径"
+        },
+        "removed": {
+          "en": "Removed from this diagram",
+          "zh": "从本图移走"
+        }
+      }
+    },
+    {
+      "id": "status-n-parrotfish",
+      "kind": "state",
+      "label": {
+        "en": "Parrotfish",
+        "zh": "鹦嘴鱼"
+      },
+      "states": {
+        "unchanged": {
+          "en": "Shown food paths unchanged",
+          "zh": "已画食物路径未变"
+        },
+        "fewer-foods": {
+          "en": "Fewer shown food paths",
+          "zh": "已画食物路径减少"
+        },
+        "no-shown-food": {
+          "en": "No shown food path",
+          "zh": "没有已画食物路径"
+        },
+        "removed": {
+          "en": "Removed from this diagram",
+          "zh": "从本图移走"
+        }
+      }
+    },
+    {
+      "id": "active-e-symbionts-coral",
+      "kind": "number",
+      "label": {
+        "en": "Link active",
+        "zh": "连线有效"
+      },
+      "decimals": 0,
+      "tag": "sim"
+    },
+    {
+      "id": "active-e-phyto-zoo",
+      "kind": "number",
+      "label": {
+        "en": "Link active",
+        "zh": "连线有效"
+      },
+      "decimals": 0,
+      "tag": "sim"
+    },
+    {
+      "id": "active-e-zoo-coral",
+      "kind": "number",
+      "label": {
+        "en": "Link active",
+        "zh": "连线有效"
+      },
+      "decimals": 0,
+      "tag": "sim"
+    },
+    {
+      "id": "active-e-algae-parrotfish",
+      "kind": "number",
+      "label": {
+        "en": "Link active",
+        "zh": "连线有效"
+      },
+      "decimals": 0,
+      "tag": "sim"
+    },
+    {
+      "id": "foods",
+      "kind": "number",
+      "label": {
+        "en": "Shown food inputs",
+        "zh": "已画食物输入"
+      },
+      "decimals": 0,
+      "tag": "sim"
+    },
+    {
+      "id": "food-status",
+      "kind": "state",
+      "label": {
+        "en": "Shown food status",
+        "zh": "已画食物状态"
+      },
+      "states": {
+        "unchanged": {
+          "en": "Shown food paths unchanged",
+          "zh": "已画食物路径未变"
+        },
+        "fewer-foods": {
+          "en": "Fewer shown food paths",
+          "zh": "已画食物路径减少"
+        },
+        "no-shown-food": {
+          "en": "No shown food path",
+          "zh": "没有已画食物路径"
+        },
+        "removed": {
+          "en": "Removed from this diagram",
+          "zh": "从本图移走"
+        }
+      }
+    },
+    {
+      "id": "light-index",
+      "kind": "number",
+      "label": {
+        "en": "Relative light index",
+        "zh": "相对光指数"
+      },
+      "decimals": 1,
+      "tag": "sim"
+    },
+    {
+      "id": "haze-shown",
+      "kind": "number",
+      "label": {
+        "en": "Haze shown",
+        "zh": "显示悬浮物"
+      },
+      "decimals": 0,
+      "tag": "sim"
+    },
+    {
+      "id": "tissue-shown",
+      "kind": "number",
+      "label": {
+        "en": "Tissue shown",
+        "zh": "显示活组织"
+      },
+      "decimals": 0,
+      "tag": "sim"
+    },
+    {
+      "id": "partners-shown",
+      "kind": "number",
+      "label": {
+        "en": "Partners shown",
+        "zh": "显示共生藻"
+      },
+      "decimals": 0,
+      "tag": "sim"
+    },
+    {
+      "id": "tissue-evidence",
+      "kind": "state",
+      "label": {
+        "en": "Tissue evidence",
+        "zh": "组织证据"
+      },
+      "states": {
+        "partnered": {
+          "en": "With algal partners",
+          "zh": "有共生藻"
+        },
+        "bleached-alive": {
+          "en": "Bleached, living tissue",
+          "zh": "白化，仍有活组织"
+        },
+        "dead-skeleton": {
+          "en": "Dead, bare skeleton",
+          "zh": "已死，只余骨骼"
+        }
+      }
+    }
+  ],
+  "table": {
+    "experiments": {
+      "web": {
+        "keys": [
+          "remove"
+        ],
+        "rows": [
+          {
+            "when": {
+              "remove": "none"
+            },
+            "set": {
+              "present-count": 6,
+              "supported-count": 6,
+              "active-links": 4,
+              "status-n-symbionts": "unchanged",
+              "status-n-phytoplankton": "unchanged",
+              "status-n-zooplankton": "unchanged",
+              "status-n-coral": "unchanged",
+              "status-n-turf-algae": "unchanged",
+              "status-n-parrotfish": "unchanged",
+              "active-e-symbionts-coral": 1,
+              "active-e-phyto-zoo": 1,
+              "active-e-zoo-coral": 1,
+              "active-e-algae-parrotfish": 1
+            },
+            "source": [
+              "S50"
+            ]
+          },
+          {
+            "when": {
+              "remove": "n-symbionts"
+            },
+            "set": {
+              "present-count": 5,
+              "supported-count": 5,
+              "active-links": 3,
+              "status-n-symbionts": "removed",
+              "status-n-phytoplankton": "unchanged",
+              "status-n-zooplankton": "unchanged",
+              "status-n-coral": "fewer-foods",
+              "status-n-turf-algae": "unchanged",
+              "status-n-parrotfish": "unchanged",
+              "active-e-symbionts-coral": 0,
+              "active-e-phyto-zoo": 1,
+              "active-e-zoo-coral": 1,
+              "active-e-algae-parrotfish": 1
+            },
+            "source": [
+              "S50"
+            ]
+          },
+          {
+            "when": {
+              "remove": "n-phytoplankton"
+            },
+            "set": {
+              "present-count": 5,
+              "supported-count": 4,
+              "active-links": 2,
+              "status-n-symbionts": "unchanged",
+              "status-n-phytoplankton": "removed",
+              "status-n-zooplankton": "no-shown-food",
+              "status-n-coral": "fewer-foods",
+              "status-n-turf-algae": "unchanged",
+              "status-n-parrotfish": "unchanged",
+              "active-e-symbionts-coral": 1,
+              "active-e-phyto-zoo": 0,
+              "active-e-zoo-coral": 0,
+              "active-e-algae-parrotfish": 1
+            },
+            "source": [
+              "S50"
+            ]
+          },
+          {
+            "when": {
+              "remove": "n-zooplankton"
+            },
+            "set": {
+              "present-count": 5,
+              "supported-count": 5,
+              "active-links": 2,
+              "status-n-symbionts": "unchanged",
+              "status-n-phytoplankton": "unchanged",
+              "status-n-zooplankton": "removed",
+              "status-n-coral": "fewer-foods",
+              "status-n-turf-algae": "unchanged",
+              "status-n-parrotfish": "unchanged",
+              "active-e-symbionts-coral": 1,
+              "active-e-phyto-zoo": 0,
+              "active-e-zoo-coral": 0,
+              "active-e-algae-parrotfish": 1
+            },
+            "source": [
+              "S50"
+            ]
+          },
+          {
+            "when": {
+              "remove": "n-coral"
+            },
+            "set": {
+              "present-count": 5,
+              "supported-count": 5,
+              "active-links": 2,
+              "status-n-symbionts": "unchanged",
+              "status-n-phytoplankton": "unchanged",
+              "status-n-zooplankton": "unchanged",
+              "status-n-coral": "removed",
+              "status-n-turf-algae": "unchanged",
+              "status-n-parrotfish": "unchanged",
+              "active-e-symbionts-coral": 0,
+              "active-e-phyto-zoo": 1,
+              "active-e-zoo-coral": 0,
+              "active-e-algae-parrotfish": 1
+            },
+            "source": [
+              "S50"
+            ]
+          },
+          {
+            "when": {
+              "remove": "n-turf-algae"
+            },
+            "set": {
+              "present-count": 5,
+              "supported-count": 4,
+              "active-links": 3,
+              "status-n-symbionts": "unchanged",
+              "status-n-phytoplankton": "unchanged",
+              "status-n-zooplankton": "unchanged",
+              "status-n-coral": "unchanged",
+              "status-n-turf-algae": "removed",
+              "status-n-parrotfish": "no-shown-food",
+              "active-e-symbionts-coral": 1,
+              "active-e-phyto-zoo": 1,
+              "active-e-zoo-coral": 1,
+              "active-e-algae-parrotfish": 0
+            },
+            "source": [
+              "S50"
+            ]
+          },
+          {
+            "when": {
+              "remove": "n-parrotfish"
+            },
+            "set": {
+              "present-count": 5,
+              "supported-count": 5,
+              "active-links": 3,
+              "status-n-symbionts": "unchanged",
+              "status-n-phytoplankton": "unchanged",
+              "status-n-zooplankton": "unchanged",
+              "status-n-coral": "unchanged",
+              "status-n-turf-algae": "unchanged",
+              "status-n-parrotfish": "removed",
+              "active-e-symbionts-coral": 1,
+              "active-e-phyto-zoo": 1,
+              "active-e-zoo-coral": 1,
+              "active-e-algae-parrotfish": 0
+            },
+            "source": [
+              "S50"
+            ]
+          }
+        ]
+      },
+      "inspection": {
+        "keys": [
+          "remove",
+          "inspect"
+        ],
+        "rows": [
+          {
+            "when": {
+              "remove": "none",
+              "inspect": "n-zooplankton"
+            },
+            "set": {
+              "foods": 1,
+              "food-status": "unchanged"
+            },
+            "source": [
+              "S50"
+            ]
+          },
+          {
+            "when": {
+              "remove": "none",
+              "inspect": "n-coral"
+            },
+            "set": {
+              "foods": 2,
+              "food-status": "unchanged"
+            },
+            "source": [
+              "S50"
+            ]
+          },
+          {
+            "when": {
+              "remove": "none",
+              "inspect": "n-parrotfish"
+            },
+            "set": {
+              "foods": 1,
+              "food-status": "unchanged"
+            },
+            "source": [
+              "S50"
+            ]
+          },
+          {
+            "when": {
+              "remove": "n-symbionts",
+              "inspect": "n-zooplankton"
+            },
+            "set": {
+              "foods": 1,
+              "food-status": "unchanged"
+            },
+            "source": [
+              "S50"
+            ]
+          },
+          {
+            "when": {
+              "remove": "n-symbionts",
+              "inspect": "n-coral"
+            },
+            "set": {
+              "foods": 1,
+              "food-status": "fewer-foods"
+            },
+            "source": [
+              "S50"
+            ]
+          },
+          {
+            "when": {
+              "remove": "n-symbionts",
+              "inspect": "n-parrotfish"
+            },
+            "set": {
+              "foods": 1,
+              "food-status": "unchanged"
+            },
+            "source": [
+              "S50"
+            ]
+          },
+          {
+            "when": {
+              "remove": "n-phytoplankton",
+              "inspect": "n-zooplankton"
+            },
+            "set": {
+              "foods": 0,
+              "food-status": "no-shown-food"
+            },
+            "source": [
+              "S50"
+            ]
+          },
+          {
+            "when": {
+              "remove": "n-phytoplankton",
+              "inspect": "n-coral"
+            },
+            "set": {
+              "foods": 1,
+              "food-status": "fewer-foods"
+            },
+            "source": [
+              "S50"
+            ]
+          },
+          {
+            "when": {
+              "remove": "n-phytoplankton",
+              "inspect": "n-parrotfish"
+            },
+            "set": {
+              "foods": 1,
+              "food-status": "unchanged"
+            },
+            "source": [
+              "S50"
+            ]
+          },
+          {
+            "when": {
+              "remove": "n-zooplankton",
+              "inspect": "n-zooplankton"
+            },
+            "set": {
+              "foods": 0,
+              "food-status": "removed"
+            },
+            "source": [
+              "S50"
+            ]
+          },
+          {
+            "when": {
+              "remove": "n-zooplankton",
+              "inspect": "n-coral"
+            },
+            "set": {
+              "foods": 1,
+              "food-status": "fewer-foods"
+            },
+            "source": [
+              "S50"
+            ]
+          },
+          {
+            "when": {
+              "remove": "n-zooplankton",
+              "inspect": "n-parrotfish"
+            },
+            "set": {
+              "foods": 1,
+              "food-status": "unchanged"
+            },
+            "source": [
+              "S50"
+            ]
+          },
+          {
+            "when": {
+              "remove": "n-coral",
+              "inspect": "n-zooplankton"
+            },
+            "set": {
+              "foods": 1,
+              "food-status": "unchanged"
+            },
+            "source": [
+              "S50"
+            ]
+          },
+          {
+            "when": {
+              "remove": "n-coral",
+              "inspect": "n-coral"
+            },
+            "set": {
+              "foods": 0,
+              "food-status": "removed"
+            },
+            "source": [
+              "S50"
+            ]
+          },
+          {
+            "when": {
+              "remove": "n-coral",
+              "inspect": "n-parrotfish"
+            },
+            "set": {
+              "foods": 1,
+              "food-status": "unchanged"
+            },
+            "source": [
+              "S50"
+            ]
+          },
+          {
+            "when": {
+              "remove": "n-turf-algae",
+              "inspect": "n-zooplankton"
+            },
+            "set": {
+              "foods": 1,
+              "food-status": "unchanged"
+            },
+            "source": [
+              "S50"
+            ]
+          },
+          {
+            "when": {
+              "remove": "n-turf-algae",
+              "inspect": "n-coral"
+            },
+            "set": {
+              "foods": 2,
+              "food-status": "unchanged"
+            },
+            "source": [
+              "S50"
+            ]
+          },
+          {
+            "when": {
+              "remove": "n-turf-algae",
+              "inspect": "n-parrotfish"
+            },
+            "set": {
+              "foods": 0,
+              "food-status": "no-shown-food"
+            },
+            "source": [
+              "S50"
+            ]
+          },
+          {
+            "when": {
+              "remove": "n-parrotfish",
+              "inspect": "n-zooplankton"
+            },
+            "set": {
+              "foods": 1,
+              "food-status": "unchanged"
+            },
+            "source": [
+              "S50"
+            ]
+          },
+          {
+            "when": {
+              "remove": "n-parrotfish",
+              "inspect": "n-coral"
+            },
+            "set": {
+              "foods": 2,
+              "food-status": "unchanged"
+            },
+            "source": [
+              "S50"
+            ]
+          },
+          {
+            "when": {
+              "remove": "n-parrotfish",
+              "inspect": "n-parrotfish"
+            },
+            "set": {
+              "foods": 0,
+              "food-status": "removed"
+            },
+            "source": [
+              "S50"
+            ]
+          }
+        ]
+      },
+      "light": {
+        "keys": [
+          "depth-m",
+          "water-case"
+        ],
+        "rows": [
+          {
+            "when": {
+              "depth-m": 1,
+              "water-case": "less-turbid"
+            },
+            "set": {
+              "light-index": 90.48374180359595,
+              "haze-shown": 0
+            },
+            "source": [
+              "S50"
+            ]
+          },
+          {
+            "when": {
+              "depth-m": 1,
+              "water-case": "more-turbid"
+            },
+            "set": {
+              "light-index": 60.653065971263345,
+              "haze-shown": 1
+            },
+            "source": [
+              "S50"
+            ]
+          },
+          {
+            "when": {
+              "depth-m": 3,
+              "water-case": "less-turbid"
+            },
+            "set": {
+              "light-index": 74.08182206817179,
+              "haze-shown": 0
+            },
+            "source": [
+              "S50"
+            ]
+          },
+          {
+            "when": {
+              "depth-m": 3,
+              "water-case": "more-turbid"
+            },
+            "set": {
+              "light-index": 22.313016014842983,
+              "haze-shown": 1
+            },
+            "source": [
+              "S50"
+            ]
+          },
+          {
+            "when": {
+              "depth-m": 7,
+              "water-case": "less-turbid"
+            },
+            "set": {
+              "light-index": 49.65853037914095,
+              "haze-shown": 0
+            },
+            "source": [
+              "S50"
+            ]
+          },
+          {
+            "when": {
+              "depth-m": 7,
+              "water-case": "more-turbid"
+            },
+            "set": {
+              "light-index": 3.0197383422318502,
+              "haze-shown": 1
+            },
+            "source": [
+              "S50"
+            ]
+          }
+        ]
+      },
+      "bleaching": {
+        "keys": [
+          "evidence-state"
+        ],
+        "rows": [
+          {
+            "when": {
+              "evidence-state": "partnered"
+            },
+            "set": {
+              "tissue-shown": 1,
+              "partners-shown": 1,
+              "tissue-evidence": "partnered"
+            },
+            "source": [
+              "S50"
+            ]
+          },
+          {
+            "when": {
+              "evidence-state": "bleached-alive"
+            },
+            "set": {
+              "tissue-shown": 1,
+              "partners-shown": 0,
+              "tissue-evidence": "bleached-alive"
+            },
+            "source": [
+              "S50"
+            ]
+          },
+          {
+            "when": {
+              "evidence-state": "dead-skeleton"
+            },
+            "set": {
+              "tissue-shown": 0,
+              "partners-shown": 0,
+              "tissue-evidence": "dead-skeleton"
+            },
+            "source": [
+              "S50"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "bind": [
+    {
+      "control": "remove",
+      "part": "web-symbionts",
+      "visible": {
+        "ne": "n-symbionts"
+      }
+    },
+    {
+      "control": "remove",
+      "part": "web-phytoplankton",
+      "visible": {
+        "ne": "n-phytoplankton"
+      }
+    },
+    {
+      "control": "remove",
+      "part": "web-zooplankton",
+      "visible": {
+        "ne": "n-zooplankton"
+      }
+    },
+    {
+      "control": "remove",
+      "part": "web-coral",
+      "visible": {
+        "ne": "n-coral"
+      }
+    },
+    {
+      "control": "remove",
+      "part": "web-turf-algae",
+      "visible": {
+        "ne": "n-turf-algae"
+      }
+    },
+    {
+      "control": "remove",
+      "part": "web-parrotfish",
+      "visible": {
+        "ne": "n-parrotfish"
+      }
+    },
+    {
+      "output": "active-e-symbionts-coral",
+      "flow": "e-symbionts-coral",
+      "intensity": {
+        "full": 1,
+        "mode": "density"
+      }
+    },
+    {
+      "output": "active-e-phyto-zoo",
+      "flow": "e-phyto-zoo",
+      "intensity": {
+        "full": 1,
+        "mode": "density"
+      }
+    },
+    {
+      "output": "active-e-zoo-coral",
+      "flow": "e-zoo-coral",
+      "intensity": {
+        "full": 1,
+        "mode": "density"
+      }
+    },
+    {
+      "output": "active-e-algae-parrotfish",
+      "flow": "e-algae-parrotfish",
+      "intensity": {
+        "full": 1,
+        "mode": "density"
+      }
+    },
+    {
+      "output": "haze-shown",
+      "part": "water-haze",
+      "visible": {
+        "eq": 1
+      }
+    },
+    {
+      "output": "light-index",
+      "part": "light-marker",
+      "offset": {
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "per": 0.01,
+        "origin": 0
+      }
+    },
+    {
+      "output": "tissue-shown",
+      "part": [
+        "polyp-tissue",
+        "polyp-mouth",
+        "polyp-tentacles"
+      ],
+      "visible": {
+        "eq": 1
+      }
+    },
+    {
+      "output": "partners-shown",
+      "part": "polyp-symbionts",
+      "visible": {
+        "eq": 1
+      }
+    }
+  ],
+  "foodWeb": {
+    "inspect": "inspect",
+    "nodes": [
+      {
+        "id": "n-symbionts",
+        "label": {
+          "en": "Algal partners",
+          "zh": "共生藻"
+        },
+        "role": "producer",
+        "parts": [
+          "web-symbionts"
+        ],
+        "d": [
+          0.25,
+          0.12
+        ],
+        "output": "status-n-symbionts",
+        "sources": [
+          "S7"
+        ]
+      },
+      {
+        "id": "n-phytoplankton",
+        "label": {
+          "en": "Phytoplankton",
+          "zh": "浮游植物"
+        },
+        "role": "producer",
+        "parts": [
+          "web-phytoplankton"
+        ],
+        "d": [
+          0.75,
+          0.12
+        ],
+        "output": "status-n-phytoplankton",
+        "sources": [
+          "S18",
+          "S19"
+        ]
+      },
+      {
+        "id": "n-zooplankton",
+        "label": {
+          "en": "Zooplankton",
+          "zh": "浮游动物"
+        },
+        "role": "consumer",
+        "parts": [
+          "web-zooplankton"
+        ],
+        "d": [
+          0.75,
+          0.39
+        ],
+        "output": "status-n-zooplankton",
+        "sources": [
+          "S18"
+        ]
+      },
+      {
+        "id": "n-coral",
+        "label": {
+          "en": "Coral animal",
+          "zh": "珊瑚动物"
+        },
+        "role": "consumer",
+        "parts": [
+          "web-coral"
+        ],
+        "d": [
+          0.5,
+          0.65
+        ],
+        "output": "status-n-coral",
+        "sources": [
+          "S6",
+          "S7"
+        ]
+      },
+      {
+        "id": "n-turf-algae",
+        "label": {
+          "en": "Reef-surface algae",
+          "zh": "礁面藻类"
+        },
+        "role": "producer",
+        "parts": [
+          "web-turf-algae"
+        ],
+        "d": [
+          0.25,
+          0.9
+        ],
+        "output": "status-n-turf-algae",
+        "sources": [
+          "S17"
+        ]
+      },
+      {
+        "id": "n-parrotfish",
+        "label": {
+          "en": "Parrotfish",
+          "zh": "鹦嘴鱼"
+        },
+        "role": "consumer",
+        "parts": [
+          "web-parrotfish"
+        ],
+        "d": [
+          0.75,
+          0.9
+        ],
+        "output": "status-n-parrotfish",
+        "sources": [
+          "S17"
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "id": "e-symbionts-coral",
+        "from": "n-symbionts",
+        "to": "n-coral",
+        "output": "active-e-symbionts-coral",
+        "evidence": "general",
+        "sources": [
+          "S7"
+        ],
+        "note": {
+          "en": "Food products pass from partners to host; this does not show ingestion of algal cells.",
+          "zh": "此箭头表示伙伴把制成的食物传给宿主，不表示吞食整颗藻细胞。"
+        }
+      },
+      {
+        "id": "e-phyto-zoo",
+        "from": "n-phytoplankton",
+        "to": "n-zooplankton",
+        "output": "active-e-phyto-zoo",
+        "evidence": "general",
+        "sources": [
+          "S18"
+        ],
+        "note": {
+          "en": "Selected herbivorous zooplankton; not every zooplankton species has this diet.",
+          "zh": "选取摄食浮游植物的浮游动物，不代表全部种类。"
+        }
+      },
+      {
+        "id": "e-zoo-coral",
+        "from": "n-zooplankton",
+        "to": "n-coral",
+        "output": "active-e-zoo-coral",
+        "evidence": "general",
+        "sources": [
+          "S6",
+          "S18"
+        ],
+        "note": {
+          "en": "General capture of animal plankton, not a feeding observation at a named Singapore island.",
+          "zh": "一般摄食关系，不是本题在某座岛观察到的一次捕食。"
+        }
+      },
+      {
+        "id": "e-algae-parrotfish",
+        "from": "n-turf-algae",
+        "to": "n-parrotfish",
+        "output": "active-e-algae-parrotfish",
+        "evidence": "general",
+        "sources": [
+          "S17"
+        ],
+        "note": {
+          "en": "General reef-surface grazing described by NParks; other foods are omitted.",
+          "zh": "NParks说明的一般礁面摄食，其他食物未画出。"
+        }
+      }
+    ],
+    "note": {
+      "en": "Selected general food pathways. Counts describe this diagram, not survival or measured populations. The partner arrow transfers food products; it is not ingestion.",
+      "zh": "只选取一般食物路径。计数描述本图，不预测存活或实际种群。伙伴箭头表示食物产物转移，不表示吞食。"
+    }
+  }
+}

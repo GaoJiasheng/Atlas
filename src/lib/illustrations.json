@@ -1158,5 +1158,25 @@
       "0000000000000000",
       "0000000000000000"
     ]
+  },
+  "coral-reef": {
+    "mask": [
+      "0000000000000000",
+      "0000000010000000",
+      "0000028cca610000",
+      "00017efffffd5000",
+      "001bfffffffff600",
+      "01affffffffffe30",
+      "06ffffffffffff90",
+      "0cffffffffffffc1",
+      "1effffffffffffd1",
+      "09ffffffffffffa0",
+      "019ffffffffffc30",
+      "0018efffffff9000",
+      "00002affffeeb100",
+      "000001568b312000",
+      "0000000000000000",
+      "0000000000000000"
+    ]
   }
 }
