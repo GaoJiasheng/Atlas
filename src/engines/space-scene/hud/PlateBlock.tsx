@@ -229,7 +229,7 @@ function Telemetry({ rows, run, file, ui }: { rows: readonly TelemetryRow[]; run
   const rowSources = sim?.table && view ? tableSources(sim.table, view.values) : {};
   const tag = statusTag(card?.observe ?? [], sim?.outputs ?? []);
   let at = 0;
-  if (concealed) return null;
+  if (concealed || sim?.microscope && view?.values[sim.microscope.controls.enabled] !== true) return null;
   return (
     <>
       <p className="space-plate__sim">

@@ -16,6 +16,7 @@
 | 新加坡 1819–1965 | history | time | TimeScene/Geo | SS P4 新加坡故事 | 2027 |
 | 一株植物（盆栽辣椒：根茎叶花果种子，P3–P6 五个课题） | biology | space | SpaceScene/Model3D | Sci P3 生命周期；P4 植物部位与功能；P5 运输系统与繁殖；P6 光合作用与传播；详见 docs/26 | 2026 提前 | published（2026-10-14）：7 章 37 拍 |
 | 青蛙与鸡的生活史（卵、幼体、成体与下一代） | biology | space + sim | SpaceScene/Model3D + 既有 `table`、pose、visible | Sci P3 Cycles in Plants and Animals (Life Cycles)；详见 docs/56 | 2026（提前） | published（2026-10-27）：背景 + 5 章、30 拍；浏览器验收交主会话 |
+| 细胞（植物与动物细胞、结构与作用、安全显微观察） | biology | space + sim | SpaceScene/Model3D + microscope + simulated field | MOE 2023 P5：生命基本单位；细胞细部与显微镜为用户指定深化；详见 docs/63 | 2026（提前） | published（2026-10-29）：背景 + 7 章、40 拍；浏览器验收交主会话 |
 | 生物的分类（标本台：生物与非生物、四大类、开花与不开花植物、动物六类、分错了的动物、自己做流程图） | science | space + sim | SpaceScene/Model3D + 试一试（`sim`，kind sort） | Sci P3 Diversity of Living and Non-Living Things；详见 docs/38 | 2026（提前） | published（2026-10-22）：背景 + 6 章 39 拍 |
 | 磁铁 | science | space + sim | SpaceScene/Model3D + 试一试（`sim`，kind magnet） | Sci P3 磁；详见 docs/22 | 2028 | spec 草案 |
 | 消化系统 | biology | space | Layer2D | Sci P4 人体系统 | 2028 |

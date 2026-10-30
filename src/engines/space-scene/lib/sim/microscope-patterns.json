@@ -1,0 +1,428 @@
+{
+  "meta": {
+    "slug": "cells",
+    "status": "Original synthetic design for a future engine; not observations, microscopy images or measured cell sizes",
+    "licenceFamily": "CC BY-NC-SA 4.0",
+    "facts": [
+      "F-D01",
+      "F-D02",
+      "F-D03",
+      "F-D04",
+      "F-X01",
+      "F-X02"
+    ],
+    "dedupSharedWalls": true,
+    "maxVisibleFeatures": 2048
+  },
+  "patterns": [
+    {
+      "id": "onion-grid",
+      "periodUm": [
+        300,
+        120
+      ],
+      "originUm": [
+        0,
+        0
+      ],
+      "tileRange": {
+        "x": [
+          -2,
+          2
+        ],
+        "y": [
+          -2,
+          2
+        ]
+      },
+      "features": [
+        {
+          "id": "onion-cell",
+          "kind": "polygon",
+          "role": "wall",
+          "atUm": [
+            150,
+            0,
+            0
+          ],
+          "parentCell": "onion-cell",
+          "contrast": 0.7,
+          "pointsUm": [
+            [
+              -150,
+              -60
+            ],
+            [
+              150,
+              -60
+            ],
+            [
+              150,
+              60
+            ],
+            [
+              -150,
+              60
+            ]
+          ]
+        },
+        {
+          "id": "onion-content",
+          "kind": "polygon",
+          "role": "cytoplasm-area",
+          "atUm": [
+            150,
+            0,
+            0
+          ],
+          "parentCell": "onion-cell",
+          "contrast": 0.08,
+          "pointsUm": [
+            [
+              -148,
+              -58
+            ],
+            [
+              148,
+              -58
+            ],
+            [
+              148,
+              58
+            ],
+            [
+              -148,
+              58
+            ]
+          ]
+        },
+        {
+          "id": "onion-nucleus",
+          "kind": "ellipse",
+          "role": "nucleus",
+          "atUm": [
+            200,
+            0,
+            0
+          ],
+          "parentCell": "onion-cell",
+          "contrast": 0.7,
+          "axesUm": [
+            18,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "id": "leaf-grid",
+      "periodUm": [
+        80,
+        40
+      ],
+      "originUm": [
+        0,
+        0
+      ],
+      "tileRange": {
+        "x": [
+          -5,
+          5
+        ],
+        "y": [
+          -5,
+          5
+        ]
+      },
+      "features": [
+        {
+          "id": "leaf-cell",
+          "kind": "polygon",
+          "role": "wall",
+          "atUm": [
+            30,
+            10,
+            0
+          ],
+          "parentCell": "leaf-cell",
+          "contrast": 0.7,
+          "pointsUm": [
+            [
+              -40,
+              -20
+            ],
+            [
+              40,
+              -20
+            ],
+            [
+              40,
+              20
+            ],
+            [
+              -40,
+              20
+            ]
+          ]
+        },
+        {
+          "id": "leaf-content",
+          "kind": "polygon",
+          "role": "cytoplasm-area",
+          "atUm": [
+            30,
+            10,
+            0
+          ],
+          "parentCell": "leaf-cell",
+          "contrast": 0.04,
+          "pointsUm": [
+            [
+              -39,
+              -19
+            ],
+            [
+              39,
+              -19
+            ],
+            [
+              39,
+              19
+            ],
+            [
+              -39,
+              19
+            ]
+          ]
+        },
+        {
+          "id": "pondweed-near-chloroplast",
+          "kind": "ellipse",
+          "role": "chloroplast",
+          "atUm": [
+            0,
+            0,
+            3
+          ],
+          "parentCell": "leaf-cell",
+          "contrast": 0.7,
+          "axesUm": [
+            8,
+            5
+          ]
+        },
+        {
+          "id": "leaf-chloroplast-2",
+          "kind": "ellipse",
+          "role": "chloroplast",
+          "atUm": [
+            30,
+            -3,
+            -3
+          ],
+          "parentCell": "leaf-cell",
+          "contrast": 0.7,
+          "axesUm": [
+            8,
+            5
+          ]
+        },
+        {
+          "id": "leaf-chloroplast-3",
+          "kind": "ellipse",
+          "role": "chloroplast",
+          "atUm": [
+            60,
+            0,
+            3
+          ],
+          "parentCell": "leaf-cell",
+          "contrast": 0.7,
+          "axesUm": [
+            8,
+            5
+          ]
+        },
+        {
+          "id": "leaf-chloroplast-4",
+          "kind": "ellipse",
+          "role": "chloroplast",
+          "atUm": [
+            0,
+            20,
+            -3
+          ],
+          "parentCell": "leaf-cell",
+          "contrast": 0.7,
+          "axesUm": [
+            8,
+            5
+          ]
+        },
+        {
+          "id": "leaf-chloroplast-5",
+          "kind": "ellipse",
+          "role": "chloroplast",
+          "atUm": [
+            30,
+            23,
+            3
+          ],
+          "parentCell": "leaf-cell",
+          "contrast": 0.7,
+          "axesUm": [
+            8,
+            5
+          ]
+        },
+        {
+          "id": "leaf-chloroplast-6",
+          "kind": "ellipse",
+          "role": "chloroplast",
+          "atUm": [
+            60,
+            20,
+            -3
+          ],
+          "parentCell": "leaf-cell",
+          "contrast": 0.7,
+          "axesUm": [
+            8,
+            5
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cheek-grid",
+      "periodUm": [
+        110,
+        90
+      ],
+      "originUm": [
+        0,
+        0
+      ],
+      "tileRange": {
+        "x": [
+          -4,
+          4
+        ],
+        "y": [
+          -4,
+          4
+        ]
+      },
+      "features": [
+        {
+          "id": "cheek-cell",
+          "kind": "polygon",
+          "role": "membrane-boundary",
+          "atUm": [
+            0,
+            0,
+            0
+          ],
+          "parentCell": "cheek-cell",
+          "contrast": 0.7,
+          "pointsUm": [
+            [
+              -30,
+              -8
+            ],
+            [
+              -23,
+              -20
+            ],
+            [
+              -4,
+              -22.5
+            ],
+            [
+              22,
+              -15
+            ],
+            [
+              30,
+              3
+            ],
+            [
+              20,
+              20
+            ],
+            [
+              -5,
+              22.5
+            ],
+            [
+              -25,
+              12
+            ]
+          ]
+        },
+        {
+          "id": "cheek-content",
+          "kind": "polygon",
+          "role": "cytoplasm-area",
+          "atUm": [
+            0,
+            0,
+            0
+          ],
+          "parentCell": "cheek-cell",
+          "contrast": 0.05,
+          "pointsUm": [
+            [
+              -29,
+              -7
+            ],
+            [
+              -22,
+              -19
+            ],
+            [
+              -4,
+              -21.5
+            ],
+            [
+              21,
+              -14
+            ],
+            [
+              29,
+              3
+            ],
+            [
+              19,
+              19
+            ],
+            [
+              -5,
+              21.5
+            ],
+            [
+              -24,
+              11
+            ]
+          ]
+        },
+        {
+          "id": "cheek-nucleus",
+          "kind": "ellipse",
+          "role": "nucleus",
+          "atUm": [
+            0,
+            0,
+            0
+          ],
+          "parentCell": "cheek-cell",
+          "contrast": 0.7,
+          "axesUm": [
+            12,
+            9
+          ]
+        }
+      ]
+    }
+  ]
+}

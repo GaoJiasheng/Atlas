@@ -1,0 +1,235 @@
+{
+  "terms": [
+    {
+      "id": "cell",
+      "term": {
+        "en": "cell",
+        "zh": "细胞"
+      },
+      "definition": {
+        "en": "A basic unit of life. Some organisms contain one cell and others many.",
+        "zh": "生命的基本单位。有的生物由一个细胞构成，有的包含许多细胞。"
+      },
+      "see": [
+        "tissue"
+      ]
+    },
+    {
+      "id": "cell-membrane",
+      "term": {
+        "en": "cell membrane",
+        "zh": "细胞膜"
+      },
+      "definition": {
+        "en": "A boundary separating cell contents from the surroundings and regulating passage of substances.",
+        "zh": "分隔细胞内外、调节物质进出的边界。"
+      },
+      "see": [
+        "cell-wall",
+        "cytoplasm"
+      ]
+    },
+    {
+      "id": "cytoplasm",
+      "term": {
+        "en": "cytoplasm",
+        "zh": "细胞质"
+      },
+      "definition": {
+        "en": "The cell region outside the nucleus, containing many structures and sites of chemical reactions.",
+        "zh": "细胞核以外的区域，包含多种结构，许多化学反应在这里进行。"
+      },
+      "see": [
+        "nucleus",
+        "cell-membrane"
+      ]
+    },
+    {
+      "id": "nucleus",
+      "term": {
+        "en": "nucleus",
+        "zh": "细胞核"
+      },
+      "definition": {
+        "en": "A structure containing genetic instructions and helping control cell activities. Its position varies.",
+        "zh": "保存遗传指令、参与控制细胞活动的结构；位置不一定在中央。"
+      },
+      "see": [
+        "cell"
+      ]
+    },
+    {
+      "id": "cell-wall",
+      "term": {
+        "en": "cell wall",
+        "zh": "细胞壁"
+      },
+      "definition": {
+        "en": "A supporting, protective structure outside the membrane in a plant cell.",
+        "zh": "植物细胞膜外的支持与保护结构。"
+      },
+      "see": [
+        "cell-membrane"
+      ]
+    },
+    {
+      "id": "chloroplast",
+      "term": {
+        "en": "chloroplast",
+        "zh": "叶绿体"
+      },
+      "definition": {
+        "en": "A structure where photosynthesis uses light energy to make food. It contains chlorophyll.",
+        "zh": "含叶绿素、利用光能进行光合作用制造食物的结构。"
+      },
+      "see": [
+        "chlorophyll"
+      ]
+    },
+    {
+      "id": "vacuole",
+      "term": {
+        "en": "vacuole",
+        "zh": "液泡"
+      },
+      "definition": {
+        "en": "A fluid-filled compartment. Mature plant cells often have a large central vacuole containing cell sap.",
+        "zh": "含液体的腔室；成熟植物细胞常有含细胞液的中央大液泡。"
+      },
+      "see": [
+        "cell-wall"
+      ]
+    },
+    {
+      "id": "chlorophyll",
+      "term": {
+        "en": "chlorophyll",
+        "zh": "叶绿素"
+      },
+      "definition": {
+        "en": "A pigment that absorbs light energy used in photosynthesis.",
+        "zh": "吸收光合作用所用光能的色素。"
+      },
+      "see": [
+        "chloroplast"
+      ]
+    },
+    {
+      "id": "microscope",
+      "term": {
+        "en": "microscope",
+        "zh": "显微镜"
+      },
+      "definition": {
+        "en": "An instrument that magnifies small objects for observation. This topic uses a compound light microscope model.",
+        "zh": "放大微小物体以供观察的仪器；本主题使用复式光学显微镜模型。"
+      },
+      "see": [
+        "eyepiece",
+        "objective"
+      ]
+    },
+    {
+      "id": "eyepiece",
+      "term": {
+        "en": "eyepiece",
+        "zh": "目镜"
+      },
+      "definition": {
+        "en": "The lens assembly on the observer’s side of a microscope.",
+        "zh": "显微镜上靠近观察者的镜组。"
+      },
+      "see": [
+        "objective",
+        "magnification"
+      ]
+    },
+    {
+      "id": "objective",
+      "term": {
+        "en": "objective",
+        "zh": "物镜"
+      },
+      "definition": {
+        "en": "The lens assembly close to a microscope specimen.",
+        "zh": "显微镜上靠近标本的镜组。"
+      },
+      "see": [
+        "eyepiece",
+        "magnification"
+      ]
+    },
+    {
+      "id": "slide",
+      "term": {
+        "en": "slide",
+        "zh": "载玻片"
+      },
+      "definition": {
+        "en": "A glass support carrying a thin specimen for microscope observation.",
+        "zh": "承载薄标本、供显微镜观察的玻璃片。"
+      },
+      "see": [
+        "coverslip"
+      ]
+    },
+    {
+      "id": "coverslip",
+      "term": {
+        "en": "coverslip",
+        "zh": "盖玻片"
+      },
+      "definition": {
+        "en": "A thin glass piece covering a prepared specimen on a slide.",
+        "zh": "覆盖在载玻片标本上的薄玻璃片。"
+      },
+      "see": [
+        "slide"
+      ]
+    },
+    {
+      "id": "magnification",
+      "term": {
+        "en": "magnification",
+        "zh": "放大率"
+      },
+      "definition": {
+        "en": "How much larger an image appears than its object. Enlarging a blur need not reveal more detail.",
+        "zh": "图像相对物体放大的程度；放大模糊图像不一定增加细节。"
+      },
+      "see": [
+        "eyepiece",
+        "objective"
+      ]
+    },
+    {
+      "id": "tissue",
+      "term": {
+        "en": "tissue",
+        "zh": "组织"
+      },
+      "definition": {
+        "en": "A structure made of cells working together; tissues contribute to organs.",
+        "zh": "由协同工作的细胞构成的结构；组织参与组成器官。"
+      },
+      "see": [
+        "cell",
+        "organ"
+      ]
+    },
+    {
+      "id": "organ",
+      "term": {
+        "en": "organ",
+        "zh": "器官"
+      },
+      "definition": {
+        "en": "A body part made of tissues contributing to a function, such as a leaf or small intestine.",
+        "zh": "由组织构成、执行一定功能的部分，例如叶或小肠。"
+      },
+      "see": [
+        "tissue"
+      ]
+    }
+  ]
+}

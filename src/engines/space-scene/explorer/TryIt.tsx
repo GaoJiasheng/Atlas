@@ -1,3 +1,4 @@
+import { MicroscopeField } from '../hud/MicroscopeField';
 /**
  * The try-it card (docs/22 §4.3 S3, S6, S7; docs/08 §2 HUD 铁律 d): in the
  * reading panel after the beat line and before the inspector, for a chapter
@@ -398,6 +399,7 @@ export function TryIt({ file, ui, bridge }: { file: PartsFile; ui: SpaceUiStore;
         </details>
       )}
       {sim.lifeCycle && <LifeCycleFold file={file} sim={sim} />}
+      {sim.microscope && <MicroscopeField file={file} location="mobile" />}
       {sim.sort && <SortFold file={file} sim={sim} />}
     </section>
   );
