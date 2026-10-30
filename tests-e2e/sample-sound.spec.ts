@@ -61,8 +61,8 @@ test('wave and source-drive share phase; controls snap and inactive source retur
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await open(page, 'ch=amplitude-test');
   await set(page, { 'frequency-hz': 500, amplitude: 2 });
-  await waveSeek(page, .25);
-  await expect.poll(async () => (await senses(page)).wave.phaseCycles).toBe(.25);
+  // A seek before the next frame's clock sync is overwritten by it; seek again until it holds.
+  await expect.poll(async () => { await waveSeek(page, .25); return (await senses(page)).wave.phaseCycles; }).toBe(.25);
   const before = await senses(page);
   expect(before.wave.positions[0]).toBeCloseTo(-.07, 9);
   expect(before.sourceMarkers['source-two']!.phaseCycles).toBe(before.wave.phaseCycles);
@@ -108,8 +108,9 @@ test('single echo travels out and back, holds and hides under incompatible state
   }
   expect((await senses(page)).soundLab.echo.atReturn).toBe(true);
   expect((await senses(page)).soundLab.echo.playing).toBe(false);
-  await set(page, { 'distance-m': 68 }); await echoSeek(page, .5);
-  expect((await senses(page)).soundLab.echo.pathPosition).toBeCloseTo(2.2, 9);
+  // The new distance restarts the echo clock on the next frame; seek again until the seek outlives that restart.
+  await set(page, { 'distance-m': 68 });
+  await expect.poll(async () => { await echoSeek(page, .5); return (await senses(page)).soundLab.echo.pathPosition; }).toBeCloseTo(2.2, 9);
   expect((await senses(page)).soundLab.echo.elapsedVisual).toBe(2);
   await apply(page, { run: true });
   await expect.poll(async () => (await senses(page)).wave.playing).toBe(false);

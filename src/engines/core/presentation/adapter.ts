@@ -79,8 +79,9 @@ export interface SpaceBeatSpec extends BeatBase {
   highlight?: { signal: string[]; cold: string[]; custom?: Record<string, string> } | null;
   /** Muscle parts whose attachment markers show in this beat; default the chapter's. */
   sites?: string[];
-  /** Try-it control values for this beat, on top of the chapter's `sim.set`. */
+  /** Author phase snapshot for this beat (sound-only senses): wave cycles, echo progress. */
   sensesFrame?: { waveCycles?: number; echoProgress?: number };
+  /** Try-it control values for this beat, on top of the chapter's `sim.set`. */
   sim?: { set: Record<string, boolean | number | string>; reveal?: boolean };
 }
 

@@ -71,8 +71,9 @@ test('vacuum leaves source enabled, hides the air strip and records null with it
 
 test('source and wave share one phase; changing frequency preserves displacement and changing amplitude preserves pace',async({page})=>{
   await page.emulateMedia({reducedMotion:'reduce'});await open(page,0,2);
-  await apply(page,{run:false});await seekWave(page,.25);
-  await expect.poll(async()=>(await senses(page)).wave.phaseCycles).toBe(.25);
+  await apply(page,{run:false});
+  // A seek before the first frame's clock sync is overwritten by it; seek again until it holds.
+  await expect.poll(async()=>{await seekWave(page,.25);return (await senses(page)).wave.phaseCycles;}).toBe(.25);
   const local=await senses(page),markers=Object.values(local.sourceMarkers).filter(m=>m.on);
   expect(markers.length).toBeGreaterThan(0);
   for(const marker of markers){expect(marker.phaseCycles).toBe(local.wave.phaseCycles);expect(marker.visualHz).toBe(1);}
@@ -116,8 +117,9 @@ test('echo uses every outward and return endpoint and hides under water, vacuum,
     expect((await senses(page)).soundLab.echo.elapsedVisual).toBeCloseTo(2*u,9);
   }
   for(const [distance,duration,wall] of [[17,1,1],[34,2,1.4],[68,4,2.2]] as const){
-    await set(page,{'distance-m':distance});await seekEcho(page,.5);
-    await expect.poll(async()=>(await senses(page)).soundLab.echo.pathPosition).toBeCloseTo(wall,9);
+    // A new distance restarts the echo clock on the next frame; seek again until the seek outlives that restart.
+    await set(page,{'distance-m':distance});
+    await expect.poll(async()=>{await seekEcho(page,.5);return (await senses(page)).soundLab.echo.pathPosition;}).toBeCloseTo(wall,9);
     expect((await senses(page)).soundLab.echo.elapsedVisual).toBe(duration/2);
   }
   await set(page,{medium:'water'});await expect.poll(async()=>(await senses(page)).soundLab.echo.hiddenReason).toBe('medium');

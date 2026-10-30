@@ -29,8 +29,12 @@ export function SoundClock({ sim, values, frame, snapKey, run, exploded, layers,
     bridge.senses.sourceMarkers = {};
     bridge.sensesSeek = cycles => { if (!seekSoundPhase(cycles)) return false; clock.phaseCycles = cycles; clock.waveHold = true; bridge.invalidate(); return true; };
     bridge.sensesEchoSeek = u => { if (!echo || !seekSoundPhase(u)) return false; clock.elapsedVisual = u * duration; clock.echoHold = true; bridge.invalidate(); return true; };
-    return () => { clock.markerIds = new Set(); bridge.senses = {}; bridge.sensesSeek = () => false; bridge.sensesEchoSeek = () => false; };
-  }, [clock, markers, bridge, echo, duration]);
+    if (echo) bridge.senses.soundLab = soundLab;
+    bridge.invalidate();
+    return () => { clock.markerIds = new Set(); bridge.sensesSeek = () => false; bridge.sensesEchoSeek = () => false; };
+  }, [clock, markers, bridge, echo, duration, soundLab]);
+  // A reading rebuilt on a dependency change must not drop the wave overlay's or the other readings; only leaving the stage clears them.
+  useEffect(() => () => { bridge.senses = {}; }, [bridge]);
   useFrame((state, delta) => {
     syncSoundMotion(clock, seen.current, keys, frame, duration);
     if (run !== wasRun.current) {

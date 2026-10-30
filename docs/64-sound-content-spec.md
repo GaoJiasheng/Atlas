@@ -600,3 +600,12 @@ frequency/amplitude图在现有try-it表图里，不新开底部时轴。声速/
 新增浏览器用例 22 项（sample-sound 8 + sound 14），已写未跑。主会话须执行 `pnpm shoot sound --beats --tasks --keys --layout --locale en,zh --theme paper,cinema`、sample-sound 与 eyes-and-ears 回归，再以 `CI=1 ATLAS_E2E_PORT=5452 pnpm e2e` 验证。需目视 32 拍、标签/剖面/模式、两主题、iPad 与 390×844 手机、44px 命中目标、无外部请求及 GPU 预算。没有 git 写入、依赖修改、部署或未合并分支依赖。
 
 给 Gavin：审读静音与各工位尺度声明、虚拟固体的设计速度、中文“音高/振幅/响度”与局部运动示意、四卡/六图层组合及定性护耳建议；浏览器验收尚待主会话。具体逐段列表见 REVIEW.md。
+
+### 9.4 浏览器验收（Claude，2026-10-30）
+
+- `pnpm shoot sound --beats --keys --locale en,zh --theme paper,cinema`：4 组合各 32 拍全部 OK，控制台干净，键位 0 失败，beat 失败 0；`--layout`（en paper 八档、zh cinema 八档）布局问题 0，含 1024×768 与 390×844。目视 8 章 EN paper、4 拍 EN/ZH cinema、3 拍 ZH 手机宽；波条、回声脉冲、真空、乐器、护耳工位都与字幕一致。
+- `--perf --gpu`（机器被其他代理占满）：draw calls 10–22（目标 <60），三角形 5.4k–37k（目标 <100k），fps 38–63；页面 JS 539.9 KB gz，与 solar-system 等既有 space 主题同值，本分支未增加。
+- 回归：`sample-sound`、`eyes-and-ears`、`aircon` 各 `--beats --keys`，控制台干净，0 失败。
+- 修正：`scripts/shoot.ts` 的 senses 检查对 sound-only 不再要求眼几何（原先 64 拍误报）；`SoundClock` 依赖变化时的清理不再抹掉波条与其他读数，并 invalidate 一次（按需渲染下，停源/改介质后 `senses().wave` 会一直为空）；`sound` 加 `views.hudFrame`（原无，测试期待自由区取景）；两条 e2e 的“改距离后立刻 seek”等待下一帧重置；`adapter.ts` 里被插断的注释。
+- 留给 Gavin：1024×768 平板上左列 PLATE 的英文注释会压在模型上（引擎既有布局，未改）；06 章第 2 拍 `18` 的引线与 `20` 的标签卡轻微交叠；02 章真空拍里有一个小紫点（声源标记）悬在空隙中。
+- 门槛：`pnpm check` 0 错误；`pnpm validate` 87 主题 0/0；`pnpm test` 223 文件 5530 测试；`pnpm build` 177 页；目标 e2e（sound 14 + sample-sound 8 + smoke + eyes-and-ears）全绿（4402 端口，workers=2）。起初 6 个失败里 5 个是上述引擎/配置/等待问题，其余是 seek 与首帧时钟同步的竞态（改为轮询重 seek）。

@@ -2388,6 +2388,25 @@
         -1
       ],
       "offset": 0
+    },
+    "hudFrame": {
+      "parts": [
+        "fork",
+        "drum-shell",
+        "source-driver",
+        "air-cell",
+        "water-cell",
+        "solid-bar",
+        "receiver",
+        "wave-reference",
+        "pulse-emitter",
+        "echo-receiver",
+        "reflector-far",
+        "monochord-box",
+        "pipe",
+        "speaker-case",
+        "hearing-protector"
+      ]
     }
   },
   "presets": [

@@ -748,19 +748,20 @@ async function sensesDrawIssues(s: Session): Promise<string[]> {
   const file = JSON.parse(readFileSync(path, 'utf8')) as PartsFile;
   if (file.sim?.kind !== 'senses') return [];
   const optical = file.sim.overlays.find(o => o.kind === 'paraxial-eye');
-  return s.page.evaluate((optical) => {
+  const soundOnly = file.sim.senses?.profile === 'sound-only';
+  return s.page.evaluate(({ optical, soundOnly }) => {
     const engine = window.__atlas!.engine as unknown as {
       senses(): { eye?: { r:number; points:{rays:{object:number[];lens:number[];retina:number[]}[]}[]; rendered:{object:number[];lens:number[];retina:number[]}[][] }; wave?: { positions:number[]; rests:number[]; A:number; lambda:number; phaseCycles:number } };
       sensesSeek(cycles:number):boolean;
     };
     const read = engine.senses(), issues:string[] = [];
-    if (!read.eye) issues.push('missing eye geometry');
+    if (!read.eye) { if (!soundOnly) issues.push('missing eye geometry'); }
     else for (const point of read.eye.points) for (const ray of point.rays) if (Math.abs(ray.retina[0]!-read.eye.r)>1e-9) issues.push('eye ray passes the receiver');
     if (read.eye && optical) for(let pi=0;pi<read.eye.points.length;pi++) for(let ri=0;ri<3;ri++) for(const endpoint of ['object','lens','retina'] as const) { const want=read.eye.points[pi]!.rays[ri]![endpoint], actual=read.eye.rendered[pi]![ri]![endpoint]; for(let axis=0;axis<3;axis++) if(Math.abs(actual[axis]!-(optical.origin[axis]!+want[axis]!*optical.cmToScene*(axis===1?optical.yScale:1)))>1e-4) issues.push(`eye ${pi}/${ri}/${endpoint} geometry differs from solver`); }
     if (!read.wave || read.wave.positions.length !== 41) issues.push('missing 41-particle longitudinal wave');
     else for(let i=0;i<41;i++) { const w=read.wave; const want=w.rests[i]!+w.A*Math.sin(2*Math.PI*(w.rests[i]!/w.lambda-w.phaseCycles)); if(Math.abs(w.positions[i]!-want)>1e-4) issues.push(`wave particle ${i} disagrees with solver`); }
     return issues;
-  }, optical?.kind === 'paraxial-eye' ? { origin:optical.origin, cmToScene:optical.cmToScene, yScale:optical.yScale ?? 1 } : null);
+  }, { optical: optical?.kind === 'paraxial-eye' ? { origin:optical.origin, cmToScene:optical.cmToScene, yScale:optical.yScale ?? 1 } : null, soundOnly });
 }
 
 /** Rigid drawn endpoints, valve states and closed-path visibility share one frame. */
