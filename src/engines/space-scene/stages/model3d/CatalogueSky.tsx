@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { Html } from '@react-three/drei/web/Html';
-import { BufferGeometry, Float32BufferAttribute } from 'three';
+import { BufferGeometry, Float32BufferAttribute, LineBasicMaterial, PointsMaterial } from 'three';
 import type { SimData, SimOverlay, SimValues } from '../../sim-schema';
 import type { StageBridge } from '../../bridge';
 import type { PartHandle } from './PartNode';
@@ -79,5 +79,11 @@ export function CatalogueSky({ overlay, sim, values, on, look, bridge, handles }
     } });
     const shown = on && values[c.controls.lab] === 'sky';
     const color = resolveDataColor('token:ink', look.tokens, look.theme);
-    return <group visible={shown}>{sky && <><points geometry={data.pg} frustumCulled={false}><pointsMaterial color={color} size={.075} sizeAttenuation transparent depthWrite={false} toneMapped={false}/></points><lineSegments geometry={data.lg} frustumCulled={false}><lineBasicMaterial color={resolveDataColor('token:signal', look.tokens, look.theme)} transparent opacity={.65} toneMapped={false}/></lineSegments></>}{shown && (error || !sky) && <Html center><div style={{ background: 'var(--panel-solid)', color: 'var(--ink)', padding: '12px', whiteSpace: 'nowrap' }}>{error ? <button style={{ minHeight: 44 }} onClick={() => setRetry(v => v + 1)}>Retry star catalogue / 重试星表</button> : 'Loading star catalogue / 正在载入星表'}</div></Html>}</group>;
+    const lineColor = resolveDataColor('token:signal', look.tokens, look.theme);
+    // Materials are built imperatively: the stage registers only a few classes as JSX (extend.ts).
+    const pointMaterial = useMemo(() => new PointsMaterial({ color, size: .12, sizeAttenuation: true, transparent: true, depthWrite: false, toneMapped: false }), [color]);
+    const lineMaterial = useMemo(() => new LineBasicMaterial({ color: lineColor, transparent: true, opacity: .65, toneMapped: false }), [lineColor]);
+    useEffect(() => () => pointMaterial.dispose(), [pointMaterial]);
+    useEffect(() => () => lineMaterial.dispose(), [lineMaterial]);
+    return <group visible={shown}>{sky && <><points geometry={data.pg} material={pointMaterial} frustumCulled={false}/><lineSegments geometry={data.lg} material={lineMaterial} frustumCulled={false}/></>}{shown && (error || !sky) && <Html center><div style={{ background: 'var(--panel-solid)', color: 'var(--ink)', padding: '12px', whiteSpace: 'nowrap' }}>{error ? <button style={{ minHeight: 44 }} onClick={() => setRetry(v => v + 1)}>Retry star catalogue / 重试星表</button> : 'Loading star catalogue / 正在载入星表'}</div></Html>}</group>;
 }

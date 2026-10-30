@@ -731,10 +731,11 @@ async function shiftIssues(s: Session): Promise<string[]> {
         if (drawn.shown) issues.push(`${id}: the model hides it, but it is drawn`);
         continue;
       }
-      const off = Math.max(...want.offset.map((x, i) => Math.abs(x - drawn.offset[i]!)));
-      if (off > 0.001) issues.push(`${id}: drawn at offset ${drawn.offset.join(', ')}, the model says ${want.offset.map((x) => x.toFixed(4)).join(', ')}`);
       const group = groupOf.get(id);
       const visible = (group === undefined || state.layers.includes(group)) && !state.hidden.includes(id);
+      // A part in a layer that is off is not mounted, so its offset is not applied (and not worth comparing).
+      const off = visible ? Math.max(...want.offset.map((x, i) => Math.abs(x - drawn.offset[i]!))) : 0;
+      if (off > 0.001) issues.push(`${id}: drawn at offset ${drawn.offset.join(', ')}, the model says ${want.offset.map((x) => x.toFixed(4)).join(', ')}`);
       if (visible && !drawn.shown) issues.push(`${id}: the model shows it, but it is not drawn`);
     }
   }
@@ -1331,6 +1332,12 @@ async function runKeys(s: Session, o: Options, report: RunReport): Promise<void>
         if (!ok) note = 'U did not undo the last move';
       }
     } else if (k.type === 'pause') {
+      // A solar-system snapshot topic never runs: its clock steps are discrete and SPACE leaves the scene paused.
+      const parts = join(ROOT, 'src/content/topics', s.topic, 'data/parts.json');
+      if (existsSync(parts) && (JSON.parse(readFileSync(parts, 'utf8')) as PartsFile).sim?.kind === 'solar-system') {
+        record({ ...base, ok: (await s.state()).paused === true, note: 'snapshot topic stays paused (skipped)' });
+        continue;
+      }
       const before = (await s.state()).paused;
       await press(k.key);
       ok = await until(async () => (await s.state()).paused === !before);

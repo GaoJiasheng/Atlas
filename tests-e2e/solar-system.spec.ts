@@ -90,6 +90,7 @@ test('shared size and distance scales reach actual rendered matrices', async ({ 
 });
 
 test('received twinkle samples, anti-solar comet and light-distance targets match their captions', async ({ page }) => {
+  test.setTimeout(180_000); // eight page loads
   for (const [beat, flux] of [[1, 1], [2, 1.1], [3, 1.01], [4, 1.3], [5, .99]]) {
     await open(page, 'through-the-air', beat);
     expect((await engine(page)).outputs['twinkle-flux']).toBeCloseTo(flux!, 12);

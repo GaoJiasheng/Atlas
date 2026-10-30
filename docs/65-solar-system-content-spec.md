@@ -459,3 +459,13 @@ published，背景+7主章，40拍，49可选对象、5组、0flow、0自动动�
 ### 9.4 给 Gavin
 
 请审默认快照取舍、三种比例读法、中文词形与新加坡坐标的DESIGN标识；确认星座/文化措辞、银河系重建边界、图片大小取舍。主会话完成EN/ZH×paper/cinema逐拍、手机390、目录失败重试/离线与性能验收。完整逐章审阅项在src/content/topics/solar-system/REVIEW.md，事实/许可在AUDIT.md及data/SOURCES.md。
+
+### 9.5 浏览器验收（Claude，2026-10-30）
+
+- 首轮 `pnpm shoot` 发现真缺陷：`CatalogueSky` 用了 `<pointsMaterial>` / `<lineBasicMaterial>`，而舞台只 `extend` 了少数类（extend.ts），抛 `R3F: PointsMaterial is not part of the THREE namespace`，整个舞台空白（40 拍全空）。已改为命令式创建材质并随依赖释放；星点 0.075→0.12 以便 1920 宽下可读。
+- 太阳剖面壳（`sun-cut-shell`）原 profile 仅 7 点，正视像多边形；改为 24 段半圆 profile，现为光滑半球切口。
+- `shoot --keys` 的 SPACE 检查对 `sim.kind: solar-system` 快照主题跳过（引擎有意保持暂停，见 View.tsx `solarSnapshots`），不再误报 FAIL。
+- 看过：EN paper 全 40 拍 1920×1080 中的各章代表拍（总览/同尺行/距离尺/太阳剖面/彗尾/小行星带/光路/视点/猎户与天蝎/深度/银河系）、1024×768 八章、ZH 390×844 三章、cinema 三张；脚本：EN/ZH × paper/cinema 各 40 拍 beats、keys、layout（8 个尺寸）、tasks 全绿，console clean，layout 问题 0，beat 失败 0。
+- 性能（`--perf --gpu`，M5 Max，机器负载约 50）：静态章 draw calls 1–11、三角形 ≤55k（预算 <50 / <0.3M），fps 57–63；page JS 544 KB gz（与既有 space-scene 主题同值，引擎基线，非本主题新增）。
+- e2e（`CI=1 ATLAS_E2E_PORT=4403`，workers=2）：solar-system 9 项、sample-solar 8 项通过；两处测试自身问题已修（sample-solar 里 `-0` vs `0`；solar-system 多页加载用例加 180 s 超时）。
+- 遗留：距离尺一拍（eight-worlds-5）按设计只显示竖刻线，球体不可见，1920 下刻线偏淡；1024×768 与手机上图层/工具面板盖住部分舞台（引擎通用布局，layout 检查无重叠）；猎户座等星点仍较小。图像 185/187 KB 超 120 KB 目标，保持原样。

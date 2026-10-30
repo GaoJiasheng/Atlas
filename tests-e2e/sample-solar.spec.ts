@@ -58,7 +58,7 @@ test('nine-body physical frame, selected readings and actual scale/shift binding
   for (const id of bodyIds) {
     const positions = before.outputs['display-positions'] as Vector;
     await expect.poll(async () => page.evaluate((id) => (window.__atlas!.engine as unknown as Engine).shift(id)?.target, id))
-      .toEqual(['x', 'y', 'z'].map((axis) => Math.round(positions[`${id}:${axis}`]! * 1e4) / 1e4));
+      .toEqual(['x', 'y', 'z'].map((axis) => Math.round(positions[`${id}:${axis}`]! * 1e4) / 1e4 + 0));
   }
   await set(page, { 'scale-mode': 'true-scale' });
   expect((await solar(page)).outputs['planet-frame']).toEqual(physical);
