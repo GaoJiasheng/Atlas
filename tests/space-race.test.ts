@@ -37,8 +37,8 @@ const eventText = (id: string, lang: keyof Bi) => {
 };
 
 describe('space-race content (docs/60)', () => {
-  it('remains a draft enrichment history topic with mission vocabulary and exactly two programmes', () => {
-    expect(topic.status).toBe('draft');
+  it('is a published enrichment history topic with mission vocabulary and exactly two programmes', () => {
+    expect(topic.status).toBe('published');
     expect(topic.engine).toBe('time-scene');
     expect(topic.subject).toBe('history');
     expect(topic.tags).toContain('beyond-syllabus');

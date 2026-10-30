@@ -8,7 +8,7 @@ mode: time
 engine: time-scene
 stage: geo
 theme: paper
-status: draft
+status: published
 datePrecision: year
 sensitivity: open
 tags: [history, map]

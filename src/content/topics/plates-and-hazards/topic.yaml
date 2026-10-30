@@ -1,4 +1,4 @@
-# Authoring contract: docs/49; sensitive content remains draft for Gavin.
+# Authoring contract: docs/49.
 id: plates-and-hazards
 title:
   en: Plates and hazards
@@ -15,7 +15,7 @@ engine: time-scene
 stage: geo
 theme: paper
 sensitivity: open
-status: draft
+status: published
 tags:
 - beyond-syllabus
 - singapore

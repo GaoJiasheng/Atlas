@@ -135,8 +135,8 @@ describe('singapore-land-use: chapters', () => {
     expect(b5).toBeGreaterThanOrEqual(eras[4]!);
   });
 
-  it('is fully bilingual, has no grade labels and stays a draft', () => {
-    expect(topic.status).toBe('draft');
+  it('is fully bilingual, has no grade labels and is published', () => {
+    expect(topic.status).toBe('published');
     const files = [
       ...chapters.map((c) => c.source),
       text(`${dir}topic.yaml`),

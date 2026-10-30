@@ -4,8 +4,8 @@
   "reports": [
     {
       "file": "public/illustrations/plates-and-hazards.webp",
-      "bytes": 125454,
-      "sha256": "290205012eecc4a43f7daa6658cbee196876162db2355c0497bd8b82bee61b39",
+      "bytes": 90076,
+      "sha256": "e8148c17086069e0ce178f3b2e348801af75e5dd43e65ed7e8ae21a4cf99961b",
       "width": 800,
       "height": 800,
       "transparentPixels": 411852,
@@ -13,8 +13,8 @@
     },
     {
       "file": "public/illustrations/plates-and-hazards@2x.webp",
-      "bytes": 422108,
-      "sha256": "4cce576bfcd688e0c3268199cdfe9215d848a9d5dcdfd5c351587a0d0c870f61",
+      "bytes": 254668,
+      "sha256": "75d46e81aa1bacd65ff6facf7710827db04bf6326e8c28c7fabb8ea2ea771d5c",
       "width": 1600,
       "height": 1600,
       "transparentPixels": 1634269,
