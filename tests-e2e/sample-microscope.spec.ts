@@ -19,7 +19,7 @@ for(const locale of ['en','zh'])for(const theme of ['paper','cinema'])test(`${lo
  await set(page,{'field-on':false});await expect(page.locator('[data-microscope-field]')).toHaveCount(0);expect((await read(page)).viewStatus).toBe('inactive');expect((await read(page)).totalPower).toBe(400);
  await page.evaluate(()=>(window.__atlas!.engine as unknown as Engine).apply({view:'exploded',explode:1,cutaway:'half'}));await set(page,{'field-on':true});await expect.poll(()=>page.evaluate(()=>(window.__atlas!.state() as unknown as {view:string}).view)).toBe('assembled');
  await expect(page.locator('[data-microscope-field] canvas')).toHaveAttribute('role','img');
- const before=await read(page);await page.reload();await page.waitForFunction(()=>window.__atlas?.ready);expect(await read(page)).toEqual(before);
+ const before=await read(page);await page.waitForTimeout(1200);/* the sim state reaches the URL after a short debounce */await page.reload();await page.waitForFunction(()=>window.__atlas?.ready);expect(await read(page)).toEqual(before);
  const url=new URL(page.url());url.pathname=`/${locale==='en'?'zh':'en'}/topics/sample-microscope/`;url.searchParams.set('theme',theme==='paper'?'cinema':'paper');await page.goto(url.toString());await page.waitForFunction(()=>window.__atlas?.ready);expect(await read(page)).toEqual(before);
 });
 test('390px phone has the same single field inside TryIt and usable44px controls',async({page})=>{
@@ -30,4 +30,10 @@ test('390px phone has the same single field inside TryIt and usable44px controls
 });
 test('illegal URL value normalizes to default rather than false readings',async({page})=>{
  await page.goto('/en/topics/sample-microscope/?ch=field&b=1&sim=objective.20~field-on.on');await page.waitForFunction(()=>window.__atlas?.ready);expect((await read(page)).totalPower).toBe(40);expect((await read(page)).fieldDiameterUm).toBe(4500);
+});
+test('observation locks the x-ray, exploded and cutaway modes instead of silently ignoring them',async({page})=>{
+ await open(page);
+ for(const mode of ['xray','exploded','cutaway'])await expect(page.locator(`[data-mode="${mode}"]`)).toBeDisabled();
+ await set(page,{'field-on':false});
+ for(const mode of ['xray','exploded','cutaway'])await expect(page.locator(`[data-mode="${mode}"]`)).toBeEnabled();
 });

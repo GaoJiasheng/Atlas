@@ -64,7 +64,7 @@ export function MicroscopeField({file,location}:{file:PartsFile;location:'deskto
  const label=`${tx(input.specimen.label,locale)} · ${reading.totalPower}× · ${reading.fieldDiameterUm} µm · ${status}`;
  return <figure className="space-microscope" data-microscope-field="" data-location={location} aria-label={label} style={{maxWidth:overlay.diameterPx}}>
   <figcaption>{tx(overlay.title,locale)} <span className="atlas-chip">SIM</span></figcaption>
-  <canvas ref={canvas} width={512} height={512} role="img" aria-label={label} style={{filter:`brightness(${input.illumination})`}} />
+  <canvas ref={canvas} width={512} height={512} role="img" aria-label={label} style={{filter:`brightness(${input.illumination===0?0:.5+input.illumination/2})`}} />
   <p>{tx(input.specimen.label,locale)}</p>
   <p aria-live="polite">{status} · {reading.totalPower}× · {reading.fieldDiameterUm} µm</p>
   <ul aria-label={locale==='en'?'Visible structures':'可观察结构'}>{list.map(role=><li key={role}>{tx(roles[role],locale)}</li>)}</ul>

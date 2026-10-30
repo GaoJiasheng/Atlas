@@ -121,6 +121,7 @@ test.describe('cells', () => {
   test('phone drawer exposes a single accessible field and working controls', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await open(page, 'ch=microscope-try-it&b=3');
+    const toggle = page.locator('.atlas-panel__toggle[aria-expanded="false"]'); if (await toggle.count()) await toggle.click();
     await expect(page.locator('.space-try')).toHaveCount(1);
     const canvas = page.locator('.space-try canvas[role="img"]');
     await expect(canvas).toHaveCount(1); await expect(canvas).toHaveAttribute('aria-label', /.+/);

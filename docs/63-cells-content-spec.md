@@ -687,3 +687,11 @@ H封面镜头用pair-hero，图版画面在HUD关闭后仍完整。hudFrame按�
 CPU 实际生成 76,120 三角形、39 geometry pieces / material slots，低于静态目标；40 拍标签锚点在所写 16:9 相机视锥中。**这些不是实际 draw calls、GPU fps、HUD 避让或手机视觉证明**。运行时绘制、加载、真实响应式与两套主题仍待浏览器验收；没有声称满足首屏 JS/GPU 预算。
 
 **给 Gavin / 主会话**：REVIEW.md 列全部默认值与逐段复核点。优先核对 2023 锚点与拓展范围、中文术语、教师指导和预制玻片安全段落、典型植物/上皮细胞及洋葱反例、模拟焦点与实测的区别；再跑指定端口浏览器门槛，人工看 EN/ZH × paper/cinema、40 拍、390×844 手机抽屉、标注、索引切回可见拍与记录流程，并补实际性能。published 是用户指定状态，不等于这些浏览器检查已通过。无提交、安装、依赖或 package/lockfile 改动；review-queue 与 next-batch 未编辑。
+
+### 9.x 浏览器验收（Claude Sonnet 5.5，2026-10-30）
+
+`pnpm shoot cells --beats --tasks --keys --layout --locale en,zh --theme paper,cinema` 四组合全绿：40/40 拍、8 个版面尺寸（3840×2160…390×844）0 布局问题、按键 0 失败、控制台干净；肉眼看了 8 章（paper/EN）、2 章 cinema、3 张 390 宽中文和显微视野 4×/10×/40× 的桌面图。`--perf --gpu`：draw calls 最多 26（静止 <50、观察 <60），最大 67,518 三角形（<0.3M）；首屏 JS 541.2 KB gz，与 aircon 相同（共享 SpaceScene 包）；fps 在机器满载（load ≈ 65）下 29–61，不作为预算证据。回归：sample-microscope、heart-and-lungs、aircon 的 `--beats --keys` 无控制台错误。
+
+修了四处：(1) `scope-whole` 镜头切掉目镜，调远并抬高；(2) 视野 `brightness(illumination)` 把默认 0.5 压成深灰，改为 0 保持黑、其余 0.5+illumination/2；(3) 视野卡片加 8×10 px 内边距（文字原先贴边）；(4) 视野开启时 X / E / C 键静默无效，现在按钮置灰（sample-microscope 脚本检查曾因此失败，补了 e2e）。两条 e2e 测试修正：URL 重放前等待 1.2 s 去抖；手机用例先展开阅读抽屉。
+
+遗留：动物细胞模型在 paper 下很淡（扁平半透明椭球，靠透视/剖切才读得出）；`power-and-field` 与 `microscope-safely` 个别拍的“目镜/40× 物镜”标签在镜头内不可见（镜头已改善，40× 物镜在转盘后方被遮挡）；视野里洋葱细胞为矩形格，示意性强。

@@ -495,17 +495,17 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
     const cutName = s.cutaway !== 'none' && s.cutaway !== 'half' ? s.cutaway : null;
     const cutStatus = `${t('space.mode.cutaway')} ${cutName ? tx(file.views.cuts?.[cutName]?.label ?? { en: cutName, zh: cutName }, 'en') : '50'}`;
     const modes: SceneMode[] = [
-      { id: 'xray', key: 'x', label: t('space.mode.xray'), disabled: !!orbitSession, on: s.view === 'xray', tone: 'xray' },
+      { id: 'xray', key: 'x', label: t('space.mode.xray'), disabled: !!orbitSession || !!microscopeOn, on: s.view === 'xray', tone: 'xray' },
       {
         id: 'exploded',
         key: 'e',
         // A topic may name it (PEEL / 剥层 for staged muscle layers).
         label: file.views.explodeLabel ? tx(file.views.explodeLabel, locale) : t('space.mode.exploded'),
         on: s.view === 'exploded',
-        disabled: inReference || !!orbitSession,
+        disabled: inReference || !!orbitSession || !!microscopeOn,
         status: `${file.views.explodeLabel ? tx(file.views.explodeLabel, 'en').toUpperCase() : t('space.state.explode')} ${pct}`,
       },
-      { id: 'cutaway', key: 'c', label: t('space.mode.cutaway'), disabled: !!orbitSession, on: s.cutaway !== 'none', tone: 'cut', status: cutStatus },
+      { id: 'cutaway', key: 'c', label: t('space.mode.cutaway'), disabled: !!orbitSession || !!microscopeOn, on: s.cutaway !== 'none', tone: 'cut', status: cutStatus },
       // Flow paths do not follow the parts apart (docs/12 §7.5): no FLOW while exploded.
       { id: 'flow', key: 'f', label: t('space.mode.flow'), on: s.run, tone: 'hot', disabled: inReference || exploded || (!!orbitSession && orbitIsStill(orbitSession)) },
       { id: 'reference', key: 'r', label: t('space.mode.reference'), on: inReference, tone: 'ink', disabled: presenting, phone: false },
