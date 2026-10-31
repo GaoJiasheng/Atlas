@@ -73,6 +73,10 @@ export default defineConfig({
         ignoreURLParametersMatching: [/.*/],
         navigateFallback: null,
         cleanupOutdatedCaches: true,
+        // BaseLayout registers the worker itself and never posts SKIP_WAITING, so without these
+        // a new deploy waits behind any open tab forever and keeps serving the old precache.
+        skipWaiting: true,
+        clientsClaim: true,
         runtimeCaching: [
           {
             // Independently licensed same-origin stellar catalogues stay available after a visit.

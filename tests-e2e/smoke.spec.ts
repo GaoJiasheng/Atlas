@@ -256,6 +256,8 @@ test('PWA: manifest linked, manifest and service worker served', async ({ page, 
   expect(manifest.short_name).toBe('Atlas');
   const sw = await request.get('/sw.js');
   expect(sw.ok()).toBe(true);
+  // A new deploy must take over open tabs instead of waiting behind them.
+  expect(await sw.text()).toMatch(/self\.skipWaiting\(\),\w+\.clientsClaim\(\)/);
 });
 
 test('regional plate (sample-region): no world land, BCE labels, dated rivers, holder key, t round trip', async ({ page }) => {
