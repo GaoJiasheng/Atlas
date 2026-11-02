@@ -48,6 +48,9 @@ export interface Model3DStageProps {
 
 type RootStore = UseBoundStore<StoreApi<RootState>>;
 
+/** How long after a HUD change its blocks are measured (ms): after the browser has laid the change out and painted it. */
+const MEASURE_DELAY_MS = 120;
+
 const NO_TRAINING: readonly string[] = [];
 
 export default function Model3DStage({ store, data, ui, bridge, chapters, label, fitness, training = NO_TRAINING, locale }: Model3DStageProps) {
@@ -114,15 +117,17 @@ export default function Model3DStage({ store, data, ui, bridge, chapters, label,
     };
   }, [store, bridge]);
 
-  // The DOM HUD lives outside R3F: measure its visible blocks on layout changes (not per rendered frame);
+  // The DOM HUD lives outside R3F: measure its visible blocks on layout changes (not per rendered frame, and a
+  // beat after the change rather than in the next animation frame: reading boxes while the DOM is still dirty
+  // forces a layout inside the frame that answers an interaction, which slows exactly that frame);
   // CameraRig frames the view in the area they leave free and re-fits when they move (docs/67 §9).
   useEffect(() => {
     const stage = wrapRef.current, scene = stage?.closest('.atlas-scene');
     if (!stage || !scene) return;
-    let frame = 0, alive = true;
+    let timer = 0, alive = true;
     const resize = new ResizeObserver(() => schedule());
     const measure = () => {
-      frame = 0;
+      timer = 0;
       bridge.hudPending = false;
       const box = stage.getBoundingClientRect(), view = scene.getBoundingClientRect();
       const presenting = ui.getState().presenting;
@@ -155,10 +160,11 @@ export default function Model3DStage({ store, data, ui, bridge, chapters, label,
       rootStore.current?.getState().invalidate();
     };
     const schedule = () => {
-      if (!alive || frame) return;
-      // A HUD change waits for the next frame to be measured: not ready until then (a busy first load can hold it for seconds).
+      if (!alive || timer) return;
+      // A HUD change waits to be measured (throttled, not debounced: a stream of readout updates still gets measured);
+      // not ready until then (a busy first load can hold it for seconds).
       bridge.hudPending = true;
-      frame = requestAnimationFrame(measure);
+      timer = window.setTimeout(measure, MEASURE_DELAY_MS);
     };
     const mutations = new MutationObserver(schedule);
     mutations.observe(scene, { childList: true, subtree: true });
@@ -172,7 +178,7 @@ export default function Model3DStage({ store, data, ui, bridge, chapters, label,
       alive = false;
       resize.disconnect(); mutations.disconnect(); attributes.disconnect(); off();
       scene.removeEventListener('transitionend', schedule);
-      cancelAnimationFrame(frame);
+      window.clearTimeout(timer);
       delete bridge.freeStage;
       delete bridge.hudPanels;
       delete bridge.hudStacked;
