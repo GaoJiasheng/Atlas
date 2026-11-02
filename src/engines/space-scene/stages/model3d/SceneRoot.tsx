@@ -33,6 +33,7 @@ import { Lighting } from './Lighting';
 import { GroundShadow } from './GroundShadow';
 import { LabelProbe, ResolutionGovernor, ShadowUpdater, SitesProbe, StatsProbe, type GroupMembers } from './probes';
 import { WIRE_FILL_OPACITY } from './bodyStyle';
+import { StageMark } from './StageMark';
 import type { HandColors } from './Hands';
 import { handPlan, RELAXED } from '../../lib/hands';
 import type { ExerciseBody } from '../../../../lib/anatomy';
@@ -398,6 +399,11 @@ export function SceneGraph({ store, ui, bridge, data, fitness, playable, chapter
     return { effects: simEffects(data.sim, values, outputs), outputs, frames };
   }, [data, s.sim, s.pose]);
   const sim = simRun?.effects ?? null;
+  const overlaysExpected = Boolean(simRun && (data.sim?.overlays.length ?? 0) > 0);
+  useEffect(() => {
+    bridge.overlaysExpected = overlaysExpected;
+    return () => { bridge.overlaysExpected = false; };
+  }, [bridge, overlaysExpected]);
   const displays = useMemo(() => {
     const out = resolveAllPartDisplays(data.parts, { view: s.view, part: s.part, layers: s.layers, hidden: s.hidden, ghosted, solo: s.solo, highlight });
     // A part a try-it binding hides fades out like a hidden layer (and is not picked).
@@ -759,6 +765,7 @@ export function SceneGraph({ store, ui, bridge, data, fitness, playable, chapter
       <StatsProbe bridge={bridge} />
       <ShadowUpdater runtime={runtime} enabled={!data.views.shadows || data.views.shadows === 'auto'} bridge={bridge} />
       <ResolutionGovernor bridge={bridge} base={stageDpr} />
+      <StageMark bridge={bridge} name="scene" />
       </Suspense>
     </RuntimeContext.Provider>
   );

@@ -9,6 +9,7 @@ import { resolveSimValues } from '../../lib/sim/controls';
 import type { PartDisplay } from '../../lib/visibility';
 import type { PartHandle } from './PartNode';
 import type { StageLook } from './look';
+import { StageMark } from './StageMark';
 
 export { ARROW_LENGTH, ARROW_LIFT, arrowLength } from './arrowGeometry';
 
@@ -103,6 +104,7 @@ export function SimOverlays({
         const ok = Number.isFinite(value);
         return <ForceArrows key={i} overlay={o} value={ok ? value : 0} on={on && ok} handles={handles} look={look} snapKey={snapKey} />;
       })}
+      <StageMark bridge={bridge} name="overlays" />
     </Suspense>
   );
 }

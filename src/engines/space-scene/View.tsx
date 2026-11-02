@@ -61,7 +61,7 @@ import type { SpaceSceneExt } from './index';
 import { beatBaseline, beatScene as sceneOfBeat, linkedBeatPatch } from './lib/beat-scene';
 import type { SpaceChapterState, SpaceSceneData, SpaceView, ViewPresets } from './schema';
 import { createSpaceUi } from './ui';
-import { cameraSettled, createBridge } from './bridge';
+import { cameraSettled, createBridge, stageReady } from './bridge';
 import { DEFAULT_EXPLODE } from './explorer/ExplorerBar';
 import { ExplorerOverlay } from './explorer/ExplorerOverlay';
 import { Inspector } from './explorer/Inspector';
@@ -519,6 +519,7 @@ function SpaceSceneView({ data, chapters, locale, orbitRuntime, testHooks }: Eng
       ...(exploded && !inReference && file.flows.length > 0 ? [t('space.status.flowLocked').toLocaleUpperCase()] : []),
     ];
     return {
+      ready: () => stageReady(bridge),
       presets: {
         items: presets,
         set: (id, { instant }) => {
