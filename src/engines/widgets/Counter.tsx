@@ -15,6 +15,8 @@ export interface CounterProps {
   per: number;
   locale: Locale;
   label?: BilingualText | string;
+  /** Optional source-qualified wording, e.g. "More than 70,000"; numeric icon scale stays unchanged. */
+  valueLabel?: string;
   icon?: CounterIcon;
   /** CSS colour or `token:` ref. */
   color?: string;
@@ -76,10 +78,11 @@ function IconGrid({
  * always shown this way, never as images). Icons are drawn in ink with the
  * functional colour as fill; the last icon is partially filled.
  */
-export function Counter({ value, per, locale, label, icon = 'person', color = 'var(--ink)', maxIcons = 50 }: CounterProps) {
+export function Counter({ value, per, locale, label, valueLabel, icon = 'person', color = 'var(--ink)', maxIcons = 50 }: CounterProps) {
   const safePer = per > 0 ? per : 1;
   const fmt = new Intl.NumberFormat(NUMBER_LOCALE[locale]);
   const text = label ? tx(label, locale) : '';
+  const displayedValue = valueLabel ?? fmt.format(value);
 
   return (
     <figure className="atlas-counter">
@@ -89,11 +92,11 @@ export function Counter({ value, per, locale, label, icon = 'person', color = 'v
         icon={icon}
         color={resolveColorRef(color)}
         maxIcons={maxIcons}
-        label={`${text} ${fmt.format(value)}`.trim()}
+        label={`${text} ${displayedValue}`.trim()}
       />
       <figcaption className="atlas-counter__caption">
         {text && <strong>{text}: </strong>}
-        <span>{fmt.format(value)}</span>
+        <span>{displayedValue}</span>
         <span className="atlas-counter__unit">· {unitText(safePer, icon, locale, fmt)}</span>
       </figcaption>
     </figure>

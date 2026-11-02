@@ -1,0 +1,408 @@
+---
+{
+  "id": "compare-cells",
+  "order": 4,
+  "title": {
+    "en": "Comparing cells",
+    "zh": "同与不同"
+  },
+  "kind": "chapter",
+  "sensitive": false,
+  "state": {
+    "camera": {
+      "position": [
+        -0.1,
+        0.22,
+        0.4
+      ],
+      "target": [
+        -0.1,
+        0.12,
+        0
+      ],
+      "fov": 30
+    },
+    "view": "xray",
+    "cutaway": "half",
+    "explode": 0,
+    "run": false,
+    "pose": null,
+    "part": "plant-chloroplasts",
+    "labels": [
+      "plant-cell-wall",
+      "plant-membrane",
+      "plant-cytoplasm",
+      "plant-nucleus",
+      "plant-chloroplasts",
+      "plant-vacuole"
+    ],
+    "hide": [
+      "scope-base",
+      "scope-arm",
+      "scope-eyepiece",
+      "scope-tube",
+      "scope-turret",
+      "scope-objective-four",
+      "scope-objective-ten",
+      "scope-objective-forty",
+      "scope-stage",
+      "slide-glass",
+      "coverslip-glass",
+      "scope-condenser",
+      "scope-illuminator",
+      "scope-coarse-focus",
+      "scope-fine-focus",
+      "onion-patch",
+      "leaf-context",
+      "tissue-patch",
+      "intestine-context",
+      "body-context"
+    ],
+    "sim": {
+      "set": {
+        "specimen": "pondweed-leaf",
+        "objective": 4,
+        "slide-x": 0,
+        "slide-y": 0,
+        "focus-z": 0,
+        "illumination": 0.5,
+        "field-on": false
+      },
+      "try": {
+        "vary": "specimen",
+        "also": [
+          "objective",
+          "field-on",
+          "illumination"
+        ],
+        "keep": [
+          {
+            "en": "The same objective, slide position and fine focus when comparing specimens",
+            "zh": "比较标本时保持物镜、玻片位置和微调相同"
+          }
+        ],
+        "observe": [
+          "total-power",
+          "field-diameter-um",
+          "focus-status"
+        ],
+        "record": true
+      }
+    },
+    "summary": {
+      "en": "Compare shared structures, then test an idea with another specimen.",
+      "zh": "比较共同结构，再用不同标本检验推测。"
+    },
+    "index": {
+      "parts": [
+        "plant-cell-wall",
+        "plant-membrane",
+        "plant-cytoplasm",
+        "plant-nucleus",
+        "plant-chloroplasts",
+        "plant-vacuole",
+        "animal-membrane",
+        "animal-cytoplasm",
+        "animal-nucleus",
+        "slide-glass",
+        "scope-turret",
+        "onion-patch"
+      ]
+    },
+    "layers": [
+      "animal-cell",
+      "plant-cell",
+      "microscope-bench",
+      "tissue-context"
+    ],
+    "beats": [
+      {
+        "camera": "plant-close",
+        "view": "xray",
+        "cutaway": "half",
+        "explode": 0,
+        "run": false,
+        "pose": null,
+        "part": "plant-chloroplasts",
+        "labels": [
+          "plant-cell-wall",
+          "plant-membrane",
+          "plant-cytoplasm",
+          "plant-nucleus",
+          "plant-chloroplasts",
+          "plant-vacuole"
+        ],
+        "hide": [
+          "scope-base",
+          "scope-arm",
+          "scope-eyepiece",
+          "scope-tube",
+          "scope-turret",
+          "scope-objective-four",
+          "scope-objective-ten",
+          "scope-objective-forty",
+          "scope-stage",
+          "slide-glass",
+          "coverslip-glass",
+          "scope-condenser",
+          "scope-illuminator",
+          "scope-coarse-focus",
+          "scope-fine-focus",
+          "onion-patch",
+          "leaf-context",
+          "tissue-patch",
+          "intestine-context",
+          "body-context"
+        ],
+        "sim": {
+          "set": {
+            "specimen": "pondweed-leaf",
+            "objective": 4,
+            "slide-x": 0,
+            "slide-y": 0,
+            "focus-z": 0,
+            "illumination": 0.5,
+            "field-on": false
+          }
+        },
+        "caption": {
+          "en": "Predict first: must onion-bulb epidermal cells have chloroplasts too? Next we change the specimen.",
+          "zh": "先猜一猜：洋葱鳞茎表皮细胞也一定有叶绿体吗？接着换标本看。"
+        }
+      },
+      {
+        "camera": "scope-stage-close",
+        "view": "assembled",
+        "cutaway": "none",
+        "explode": 0,
+        "run": false,
+        "pose": null,
+        "part": "slide-glass",
+        "labels": [
+          "slide-glass",
+          "scope-turret"
+        ],
+        "hide": [
+          "animal-membrane",
+          "animal-cytoplasm",
+          "animal-nucleus",
+          "plant-cell-wall",
+          "plant-membrane",
+          "plant-cytoplasm",
+          "plant-nucleus",
+          "plant-chloroplasts",
+          "plant-vacuole",
+          "onion-patch",
+          "leaf-context",
+          "tissue-patch",
+          "intestine-context",
+          "body-context"
+        ],
+        "sim": {
+          "set": {
+            "specimen": "onion-bulb",
+            "objective": 10,
+            "slide-x": -200,
+            "slide-y": 0,
+            "focus-z": 0,
+            "illumination": 0.5,
+            "field-on": true
+          }
+        },
+        "caption": {
+          "en": "Onion-bulb epidermis is plant tissue without chloroplasts. Some internal structures are easier to distinguish after staining.",
+          "zh": "洋葱鳞茎表皮是植物细胞，却没有叶绿体；有些内部结构需要染色才容易辨认。"
+        }
+      },
+      {
+        "camera": "scope-stage-close",
+        "view": "assembled",
+        "cutaway": "none",
+        "explode": 0,
+        "run": false,
+        "pose": null,
+        "part": "slide-glass",
+        "labels": [
+          "slide-glass",
+          "scope-turret"
+        ],
+        "hide": [
+          "animal-membrane",
+          "animal-cytoplasm",
+          "animal-nucleus",
+          "plant-cell-wall",
+          "plant-membrane",
+          "plant-cytoplasm",
+          "plant-nucleus",
+          "plant-chloroplasts",
+          "plant-vacuole",
+          "onion-patch",
+          "leaf-context",
+          "tissue-patch",
+          "intestine-context",
+          "body-context"
+        ],
+        "sim": {
+          "set": {
+            "specimen": "pondweed-leaf",
+            "objective": 40,
+            "slide-x": 0,
+            "slide-y": 0,
+            "focus-z": 3,
+            "illumination": 0.5,
+            "field-on": true
+          }
+        },
+        "caption": {
+          "en": "A green pondweed leaf shows chloroplasts. Different specimens need not match one textbook drawing.",
+          "zh": "换成绿色水生植物的叶，能观察到叶绿体；标本不同，不能只按一个图样推断。"
+        }
+      },
+      {
+        "camera": "scope-stage-close",
+        "view": "assembled",
+        "cutaway": "none",
+        "explode": 0,
+        "run": false,
+        "pose": null,
+        "part": "slide-glass",
+        "labels": [
+          "slide-glass",
+          "scope-turret"
+        ],
+        "hide": [
+          "animal-membrane",
+          "animal-cytoplasm",
+          "animal-nucleus",
+          "plant-cell-wall",
+          "plant-membrane",
+          "plant-cytoplasm",
+          "plant-nucleus",
+          "plant-chloroplasts",
+          "plant-vacuole",
+          "onion-patch",
+          "leaf-context",
+          "tissue-patch",
+          "intestine-context",
+          "body-context"
+        ],
+        "sim": {
+          "set": {
+            "specimen": "prepared-cheek",
+            "objective": 40,
+            "slide-x": 0,
+            "slide-y": 0,
+            "focus-z": 0,
+            "illumination": 0.5,
+            "field-on": true
+          }
+        },
+        "caption": {
+          "en": "A prepared cheek-cell slide provides an animal-cell comparison, without walls or chloroplasts.",
+          "zh": "预制的口腔上皮玻片可用来比较动物细胞；它们没有细胞壁和叶绿体。"
+        }
+      },
+      {
+        "camera": "pair-hero",
+        "view": "xray",
+        "cutaway": "none",
+        "explode": 0,
+        "run": false,
+        "pose": null,
+        "part": null,
+        "labels": [
+          "animal-membrane",
+          "animal-cytoplasm",
+          "animal-nucleus",
+          "onion-patch"
+        ],
+        "hide": [
+          "scope-base",
+          "scope-arm",
+          "scope-eyepiece",
+          "scope-tube",
+          "scope-turret",
+          "scope-objective-four",
+          "scope-objective-ten",
+          "scope-objective-forty",
+          "scope-stage",
+          "slide-glass",
+          "coverslip-glass",
+          "scope-condenser",
+          "scope-illuminator",
+          "scope-coarse-focus",
+          "scope-fine-focus",
+          "leaf-context",
+          "tissue-patch",
+          "intestine-context",
+          "body-context"
+        ],
+        "sim": {
+          "set": {
+            "specimen": "prepared-cheek",
+            "objective": 40,
+            "slide-x": 0,
+            "slide-y": 0,
+            "focus-z": 0,
+            "illumination": 0.5,
+            "field-on": false
+          }
+        },
+        "caption": {
+          "en": "The shared parts are membrane, cytoplasm and nucleus. Shape is a clue; structure and specimen identity provide stronger evidence.",
+          "zh": "共同点是细胞膜、细胞质和细胞核；外形只是线索，证据还要看结构与标本来源。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Start with the plant model, then change to the prepared onion-bulb field. The specimen matters. An underground onion bulb has non-green tissues; its epidermal cells provide an example of plant cells without chloroplasts. The visible pattern shows neighbouring cells with supporting walls. Calling it a plant specimen does not require adding green bodies to every cell in the drawing.
+
+Next select the green pondweed leaf. Its cells do contain chloroplasts. Look around the edges and compare the same kind of structure at different focal planes. Chloroplasts occupy peripheral cytoplasm around the large vacuole, including near and far surfaces. Focusing on one depth need not make every chloroplast equally clear. The simulated field represents that limitation rather than showing a perfectly sharp cutaway.
+
+The prepared cheek-cell example supplies an animal comparison. It has a membrane, cytoplasm and nucleus, without a plant cell wall or chloroplasts. A faint boundary or nucleus is not proof that the corresponding structure is missing. Preparation and contrast affect what an observer can distinguish. The named specimens and the modelled structures together support the comparison.
+
+Return to the explanatory models after comparing the fields. Use several features and the specimen’s origin; do not use a rectangular outline, a round outline or the absence of visible green as the sole test. The onion example directly checks the claim that all plant cells have chloroplasts. It does not show that all parts of an onion plant lack them.
+
+<More title={{"en": "An onion boundary", "zh": "洋葱细胞的边界"}}>
+
+In the onion-bulb preparation, the wall is easier to distinguish than the membrane and thin peripheral cytoplasm. The model explains where those structures are; the field does not pretend to resolve a separate membrane line everywhere.
+
+</More>
+
+<More title={{"en": "Seeing is conditional", "zh": "看见结构需要条件"}}>
+
+A microscope observation describes what is visible at the current preparation, lighting and focus. A biological explanation can also use other evidence. Keep “I cannot distinguish it here” separate from “this kind of cell lacks it”.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+先看植物模型，再切到洋葱鳞茎的模拟玻片。判断时，标本取自哪里很重要。地下鳞茎的非绿色表皮细胞，是没有叶绿体的植物细胞例子。连续的边界展示相邻细胞与支持性的壁；既然标本来自植物，也不需要在每个细胞里硬加绿色小体。
+
+换成绿色水草叶，可以看见叶绿体。比较外围结构，以及不同焦平面下的清晰程度。叶绿体位于大液泡周围的细胞质中，也分布在靠近观察者和较远的一面。把一层调清楚，其他深度不一定同样清楚。模拟视野保留这个限制，不把它画成处处清晰的剖面。
+
+预制口腔上皮细胞提供动物例子：有膜、质和核，没有植物细胞的壁和叶绿体。但一个核或一条边界很淡，并不足以证明结构不存在。制片与对比度会影响观察；标本信息和可见结构要放在一起判断。
+
+回到说明模型，再比较多个特征。不能只凭长方形、圆形，或“没有看见绿色”，就判定细胞属于哪类。洋葱鳞茎检验了“所有植物细胞都有叶绿体”的说法；它不代表洋葱整株的所有部位都没有叶绿体。
+
+<More title={{"en": "An onion boundary", "zh": "洋葱细胞的边界"}}>
+
+在洋葱鳞茎标本中，壁通常比膜和外围薄层细胞质容易辨认。模型解释这些结构在哪里；视野不假装每处都能清楚分出另一条膜线。
+
+</More>
+
+<More title={{"en": "Seeing is conditional", "zh": "看见结构需要条件"}}>
+
+显微观察记录的是当前制片、照明和焦点下可见的内容。生物学解释还会使用其他证据。“这里辨认不清”和“这种细胞没有这个结构”，是不同的判断。
+
+</More>
+
+</Lang>
+

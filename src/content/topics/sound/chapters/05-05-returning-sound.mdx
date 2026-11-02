@@ -1,0 +1,320 @@
+---
+{
+  "id": "05-returning-sound",
+  "order": 5,
+  "title": {
+    "zh": "回来的声音",
+    "en": "Returning sound"
+  },
+  "sensitive": false,
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "cutaway": "none",
+    "hide": [],
+    "run": false,
+    "layers": [
+      "reflection"
+    ],
+    "labels": [
+      "pulse-emitter",
+      "reflector-mid"
+    ],
+    "camera": {
+      "position": [
+        2,
+        2.4,
+        5.7
+      ],
+      "target": [
+        1.8,
+        1,
+        0.8
+      ],
+      "fov": 34
+    },
+    "summary": {
+      "en": "Follow the complete outward and return path.",
+      "zh": "完整观察去程与回程。"
+    },
+    "index": {
+      "parts": [
+        "pulse-emitter",
+        "reflector-near",
+        "reflector-mid",
+        "reflector-far",
+        "echo-receiver"
+      ]
+    },
+    "sim": {
+      "set": {
+        "sound-active": true,
+        "frequency-hz": 250,
+        "amplitude": 1,
+        "medium": "air",
+        "distance-m": 34
+      },
+      "try": {
+        "vary": "distance-m",
+        "keep": [
+          "medium",
+          "sound-active",
+          "frequency-hz",
+          "amplitude"
+        ],
+        "observe": [
+          "echo-ms",
+          "propagation-state"
+        ],
+        "record": {
+          "chart": {
+            "y": "echo-ms"
+          }
+        },
+        "predict": {
+          "prompt": {
+            "en": "Move the reflector farther away at the same speed.",
+            "zh": "声速相同，把反射面移远。"
+          },
+          "start": {
+            "distance-m": 34
+          },
+          "change": {
+            "distance-m": 68
+          },
+          "observe": "echo-ms",
+          "options": [
+            {
+              "id": "more",
+              "label": {
+                "en": "Later return",
+                "zh": "更晚返回"
+              },
+              "means": "more"
+            },
+            {
+              "id": "same",
+              "label": {
+                "en": "Same return time",
+                "zh": "返回时间相同"
+              },
+              "means": "same"
+            }
+          ]
+        }
+      }
+    },
+    "beats": [
+      {
+        "camera": {
+          "position": [
+            2,
+            2.4,
+            5.7
+          ],
+          "target": [
+            1.8,
+            1,
+            0.8
+          ],
+          "fov": 34
+        },
+        "run": false,
+        "labels": [
+          "pulse-emitter",
+          "reflector-mid"
+        ],
+        "layers": [
+          "reflection"
+        ],
+        "sim": {
+          "set": {
+            "sound-active": true,
+            "frequency-hz": 250,
+            "amplitude": 1,
+            "medium": "air",
+            "distance-m": 34
+          }
+        },
+        "caption": {
+          "en": "The emitter and receiver share one position. The reflector is thirty-four metres away in the model.",
+          "zh": "发射处和接收处共址。在这个模型中，反射面离它们三十四米。"
+        },
+        "sensesFrame": {
+          "echoProgress": 0
+        }
+      },
+      {
+        "camera": {
+          "position": [
+            2,
+            2.4,
+            5.7
+          ],
+          "target": [
+            1.8,
+            1,
+            0.8
+          ],
+          "fov": 34
+        },
+        "run": true,
+        "labels": [
+          "pulse-emitter",
+          "reflector-mid"
+        ],
+        "layers": [
+          "reflection"
+        ],
+        "sim": {
+          "set": {
+            "sound-active": true,
+            "frequency-hz": 250,
+            "amplitude": 1,
+            "medium": "air",
+            "distance-m": 34
+          }
+        },
+        "caption": {
+          "en": "A pulse marker travels to the reflector and returns. The moving marker represents the pulse position, not travelling air.",
+          "zh": "脉冲标记先到反射面，再返回。移动的是脉冲位置示意，不是一路迁移的空气。"
+        },
+        "sensesFrame": {
+          "echoProgress": 0
+        }
+      },
+      {
+        "camera": {
+          "position": [
+            2,
+            2.4,
+            5.7
+          ],
+          "target": [
+            1.8,
+            1,
+            0.8
+          ],
+          "fov": 34
+        },
+        "run": false,
+        "labels": [
+          "echo-receiver",
+          "reflector-mid"
+        ],
+        "layers": [
+          "reflection"
+        ],
+        "sim": {
+          "set": {
+            "sound-active": true,
+            "frequency-hz": 250,
+            "amplitude": 1,
+            "medium": "air",
+            "distance-m": 34
+          }
+        },
+        "caption": {
+          "en": "The model calculates two tenths of a second for the round trip. The display takes two seconds because it is slowed.",
+          "zh": "模型算出来回需要零点二秒。画面慢放后，这段往返显示为两秒。"
+        },
+        "sensesFrame": {
+          "echoProgress": 1
+        }
+      },
+      {
+        "camera": {
+          "position": [
+            2,
+            2.4,
+            5.7
+          ],
+          "target": [
+            1.8,
+            1,
+            0.8
+          ],
+          "fov": 34
+        },
+        "run": true,
+        "labels": [
+          "reflector-far",
+          "echo-receiver"
+        ],
+        "layers": [
+          "reflection"
+        ],
+        "sim": {
+          "set": {
+            "sound-active": true,
+            "frequency-hz": 250,
+            "amplitude": 1,
+            "medium": "air",
+            "distance-m": 68
+          }
+        },
+        "caption": {
+          "en": "Moving the reflector farther away doubles the return time in this fixed-speed example.",
+          "zh": "把反射面移到更远的预设位置，在这个固定声速例子里，返回时间加倍。"
+        },
+        "sensesFrame": {
+          "echoProgress": 0
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+At this station the emitting and receiving symbols share a starting place. A reflector stands away from them. An <Term id="echo">echo</Term> is sound that returns after reflection. Follow the outward part of the route first, then the return. The source-to-reflector distance is only part of the journey needed to receive the echo. [S17]
+
+In the default model the reflector is <Num s="S1">34 m</Num> away. Sound must travel that distance to the reflector and the same distance back, giving a total path of <Num s="S1">68 m</Num>. At the chosen air speed of <Num s="S16">340 m/s</Num>, the calculated return time is <Num s="S1">0.2 seconds</Num>. The calculation follows the whole route, even though the symbols are drawn close together on a small bench. [S1]
+
+The moving mark represents a pulse’s position. It is not a parcel of air that leaves the source, strikes the wall and comes back. At the other station, air markers oscillate locally; here the envelope mark tracks where a short disturbance has reached. The two diagrams answer different questions. [S1, S3]
+
+Use the distance card to compare the reflector presets. Keep the medium and source setting fixed, record each return time, and then compare the entries. A longer out-and-back route takes longer at the same speed. The moving mark holds after one completed trip, so the return can be inspected. [S1, S17]
+
+This is an ideal reflection model. It calculates travel time, without predicting the reflected sound’s strength or whether a listener could distinguish it. The display is slowed separately from the continuous wave strip. Read the physical time rather than timing the animation with a watch. [S1]
+
+<More title={{"en": "Physical time and display time", "zh": "物理时间与显示时间"}}>
+
+The default physical return of <Num s="S1">0.2 s</Num> takes <Num s="S1">2 s</Num> to display because the echo is slowed <Num s="S1">10 times</Num>. Reflector presets of <Num s="S1">17</Num>, <Num s="S1">34</Num> and <Num s="S1">68 m</Num> give physical returns of <Num s="S1">0.1</Num>, <Num s="S1">0.2</Num> and <Num s="S1">0.4 s</Num>. The drawn wall positions are schematic, without a shared distance scale.
+
+</More>
+
+<More title={{"en": "An active-sonar connection", "zh": "与主动声呐的连接"}}>
+
+Active sonar emits sound and detects its return. When the outward and return paths are equal, reflector distance equals sound speed multiplied by return time, divided by <Num s="S1">2</Num>. Our bench isolates this timing principle; it does not solve underwater refraction, absorption or complex reflected paths. [S17]
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+这个工位把发射处与接收处放在同一位置，反射面则在远处。声音经过反射再返回，便可能形成<Term id="echo">回声</Term>。先沿去程看到反射面，再沿回程返回起点。声源到反射面的距离只是旅程的一部分，接收到回声还需要返回这一段。[S17]
+
+默认模型里，反射面离起点 <Num s="S1">34 米</Num>。声音去、回各走同样距离，总路程为 <Num s="S1">68 米</Num>。采用空气声速约 <Num s="S16">340 米每秒</Num>，计算返回时间为 <Num s="S1">0.2 秒</Num>。桌面符号画得很近，不改变这个按完整来回路径进行的计算。[S1]
+
+移动标记表示脉冲的位置，不是一团空气离开声源、撞墙后再折返。另一个工位的空气点在局部往复；这里的包络标记则帮助观察短暂扰动到达哪里。两种图回答的问题不同，不能把回声标记当成真实空气粒子。[S1, S3]
+
+在距离卡上比较反射面的不同预设。保持介质与声源设定不变，记录每次返回时间，再比较各行。同样速度下，来回路程较长就需要更多时间。标记完成一次往返后停留，方便检查返回位置。[S1, S17]
+
+这是理想反射模型，只计算传播时间，没有预测返回声音有多强，也不保证听者能够分辨这次回声。显示慢放与连续波条带不同。比较时读取物理时间，不要用手表给动画计时。[S1]
+
+<More title={{"en": "Physical time and display time", "zh": "物理时间与显示时间"}}>
+
+默认物理返回时间为 <Num s="S1">0.2 秒</Num>，慢放 <Num s="S1">10 倍</Num> 后显示为 <Num s="S1">2 秒</Num>。反射面距离预设为 <Num s="S1">17</Num>、<Num s="S1">34</Num>、<Num s="S1">68 米</Num>，物理返回分别为 <Num s="S1">0.1</Num>、<Num s="S1">0.2</Num>、<Num s="S1">0.4 秒</Num>。画中墙的位置只是示意，没有统一距离比例尺。
+
+</More>
+
+<More title={{"en": "An active-sonar connection", "zh": "与主动声呐的连接"}}>
+
+主动声呐发出声音并探测返回声音。去、回路径相等时，反射面距离等于声速乘以返回时间，再除以 <Num s="S1">2</Num>。实验台只突出这个计时原理，没有计算水下折射、吸收或复杂反射路径。[S17]
+
+</More>
+
+</Lang>
+

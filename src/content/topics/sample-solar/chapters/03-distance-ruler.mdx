@@ -1,0 +1,149 @@
+---
+{
+  "id": "distance-ruler",
+  "order": 3,
+  "title": {
+    "en": "Distance ruler",
+    "zh": "距离尺"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "cutaway": "none",
+    "ghost": [],
+    "layers": [
+      "solar-family"
+    ],
+    "labels": [],
+    "camera": {
+      "position": [
+        160,
+        150,
+        600
+      ],
+      "target": [
+        150,
+        0,
+        0
+      ],
+      "fov": 38
+    },
+    "summary": {
+      "en": "Draft engine fixture: compare explicit model inputs and outputs.",
+      "zh": "引擎草稿测试：对照显式模型输入与输出。"
+    },
+    "index": {
+      "parts": [
+        "sun",
+        "mercury",
+        "venus",
+        "earth",
+        "mars",
+        "jupiter",
+        "saturn",
+        "uranus",
+        "neptune",
+        "saturn-rings"
+      ]
+    },
+    "sim": {
+      "set": {
+        "lab": "distances",
+        "elapsed-years": 0,
+        "planet": "earth",
+        "scale-mode": "overview",
+        "sky-date": "2026-01-15",
+        "sky-hour": 20,
+        "observer": "singapore",
+        "sky-target": "orion",
+        "pattern-links": true,
+        "depth": false,
+        "atmosphere": true,
+        "source-kind": "point",
+        "altitude-mode": "high",
+        "twinkle-seconds": 0,
+        "comet-step": 0,
+        "distance-target": "sun-earth"
+      },
+      "try": {
+        "vary": "planet",
+        "observe": [
+          "reference-au",
+          "scale-state",
+          "radius-earth"
+        ]
+      }
+    },
+    "beats": [
+      {
+        "run": false,
+        "sim": {
+          "set": {
+            "lab": "distances",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "point",
+            "altitude-mode": "high",
+            "twinkle-seconds": 0,
+            "comet-step": 0,
+            "distance-target": "sun-earth"
+          }
+        },
+        "caption": {
+          "en": "SIM · Reference distances and radii use one scale.",
+          "zh": "模拟 · 参考距离与半径共用一把尺。"
+        }
+      },
+      {
+        "run": false,
+        "sim": {
+          "set": {
+            "lab": "distances",
+            "elapsed-years": 0,
+            "planet": "neptune",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "point",
+            "altitude-mode": "high",
+            "twinkle-seconds": 0,
+            "comet-step": 0,
+            "distance-target": "sun-earth"
+          }
+        },
+        "caption": {
+          "en": "SIM · The farthest reference centre is much farther along the ruler.",
+          "zh": "模拟 · 最远行星的参考中心位于尺的远端。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Draft software fixture. Compare the calculated SIM readings with the rendered geometry. The model uses teaching alignment, schematic overview sizes and fixed J2000 star directions; it is not a sky forecast.
+
+</Lang>
+
+<Lang zh>
+
+软件草稿测试。对照计算的模拟读数与舞台几何。模型采用教学排列、示意总览大小和固定J2000恒星方向；不预测真实天空。
+
+</Lang>

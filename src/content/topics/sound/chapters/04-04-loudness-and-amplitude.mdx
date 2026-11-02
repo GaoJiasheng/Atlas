@@ -1,0 +1,305 @@
+---
+{
+  "id": "04-loudness-and-amplitude",
+  "order": 4,
+  "title": {
+    "zh": "响度与振幅",
+    "en": "Loudness and amplitude"
+  },
+  "sensitive": false,
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "cutaway": "none",
+    "hide": [],
+    "run": false,
+    "layers": [
+      "transmission",
+      "air-wave"
+    ],
+    "labels": [
+      "wave-reference"
+    ],
+    "camera": {
+      "position": [
+        0,
+        2.5,
+        5.9
+      ],
+      "target": [
+        -0.1,
+        0.95,
+        0.8
+      ],
+      "fov": 33
+    },
+    "summary": {
+      "en": "Change relative displacement while keeping frequency fixed.",
+      "zh": "固定频率，只改变相对位移。"
+    },
+    "index": {
+      "parts": [
+        "wave-reference"
+      ]
+    },
+    "sim": {
+      "set": {
+        "sound-active": true,
+        "frequency-hz": 250,
+        "amplitude": 1,
+        "medium": "air",
+        "distance-m": 34
+      },
+      "try": {
+        "vary": "amplitude",
+        "keep": [
+          "frequency-hz",
+          "medium",
+          "sound-active",
+          "distance-m"
+        ],
+        "observe": [
+          "displacement-max",
+          "amplitude-level",
+          "sound-state"
+        ],
+        "record": {
+          "chart": {
+            "y": "displacement-max"
+          }
+        },
+        "predict": {
+          "prompt": {
+            "en": "Increase relative amplitude at unchanged frequency.",
+            "zh": "频率不变，增大相对振幅。"
+          },
+          "start": {
+            "amplitude": 1
+          },
+          "change": {
+            "amplitude": 2
+          },
+          "observe": "displacement-max",
+          "options": [
+            {
+              "id": "more",
+              "label": {
+                "en": "Greater displacement",
+                "zh": "位移更大"
+              },
+              "means": "more"
+            },
+            {
+              "id": "same",
+              "label": {
+                "en": "Same displacement",
+                "zh": "位移相同"
+              },
+              "means": "same"
+            }
+          ]
+        }
+      }
+    },
+    "beats": [
+      {
+        "camera": {
+          "position": [
+            0,
+            2.5,
+            5.9
+          ],
+          "target": [
+            -0.1,
+            0.95,
+            0.8
+          ],
+          "fov": 33
+        },
+        "run": true,
+        "labels": [
+          "wave-reference"
+        ],
+        "layers": [
+          "transmission",
+          "air-wave"
+        ],
+        "sim": {
+          "set": {
+            "sound-active": true,
+            "frequency-hz": 250,
+            "amplitude": 1,
+            "medium": "air",
+            "distance-m": 34
+          }
+        },
+        "caption": {
+          "en": "Keep frequency fixed. Predict what changes when the relative displacement amplitude increases.",
+          "zh": "先固定频率，再预测：相对位移振幅增大时，什么会改变。"
+        }
+      },
+      {
+        "camera": {
+          "position": [
+            0,
+            2.5,
+            5.9
+          ],
+          "target": [
+            -0.1,
+            0.95,
+            0.8
+          ],
+          "fov": 33
+        },
+        "run": true,
+        "labels": [
+          "wave-reference"
+        ],
+        "layers": [
+          "transmission",
+          "air-wave"
+        ],
+        "sim": {
+          "set": {
+            "sound-active": true,
+            "frequency-hz": 250,
+            "amplitude": 2,
+            "medium": "air",
+            "distance-m": 34
+          }
+        },
+        "caption": {
+          "en": "The markers move farther from their rest ticks. The displayed cycle rate remains one per second.",
+          "zh": "示意点离静止刻度更远，但画面仍每秒循环一次。"
+        }
+      },
+      {
+        "camera": {
+          "position": [
+            0,
+            2.5,
+            5.9
+          ],
+          "target": [
+            -0.1,
+            0.95,
+            0.8
+          ],
+          "fov": 33
+        },
+        "run": true,
+        "labels": [
+          "wave-reference"
+        ],
+        "layers": [
+          "transmission",
+          "air-wave"
+        ],
+        "sim": {
+          "set": {
+            "sound-active": true,
+            "frequency-hz": 250,
+            "amplitude": 1,
+            "medium": "air",
+            "distance-m": 34
+          }
+        },
+        "caption": {
+          "en": "Returning to the smaller amplitude reduces displacement without changing the frequency setting.",
+          "zh": "调回较小振幅，往复位移缩小，频率设定没有改变。"
+        }
+      },
+      {
+        "camera": {
+          "position": [
+            0,
+            2.5,
+            5.9
+          ],
+          "target": [
+            -0.1,
+            0.95,
+            0.8
+          ],
+          "fov": 33
+        },
+        "run": false,
+        "labels": [
+          "wave-reference"
+        ],
+        "layers": [
+          "transmission",
+          "air-wave"
+        ],
+        "sim": {
+          "set": {
+            "sound-active": true,
+            "frequency-hz": 250,
+            "amplitude": 2,
+            "medium": "air",
+            "distance-m": 34
+          }
+        },
+        "caption": {
+          "en": "These are relative motion settings. The model does not measure decibels or promise twice the perceived loudness.",
+          "zh": "这些是相对位移设定。模型不测分贝，也不表示听起来恰好大声两倍。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Keep the air setting and repetition rate unchanged. The card now changes <Term id="amplitude">amplitude</Term>, the greatest displacement from a rest position. Watch the highlighted marker move farther from its tick at the larger setting. It still completes each cycle at the same pace. Extent of motion and rate of repetition are separate features. [S4]
+
+The model’s relative settings are <Num s="S1">1</Num> and <Num s="S1">2</Num>. Selecting the larger one doubles the chosen displacement, while the input remains <Num s="S1">250 Hz</Num>. You can compare the largest excursions or pause at a visible instant. A point passing through its rest position has a small instantaneous displacement even when its full oscillation has a large amplitude. [S1, S4]
+
+<Term id="loudness">Loudness</Term> is how strong or weak a sound seems to a listener. Under comparable conditions a sound wave with greater amplitude carries greater intensity and is generally heard as louder. This connection does not make loudness the same quantity as displacement, and it does not turn this silent model into a listening measurement. [S6]
+
+Return to the smaller setting and record both observations. The displayed repetition rate stays unchanged. Comparing only the width of the motion prevents a larger excursion from being mistaken for a higher pitch. This is why the experiment holds frequency fixed while you change amplitude. [S1, S6]
+
+The readout is relative motion, not a decibel level. Doubling this setting does not promise that a sound would seem exactly twice as loud. Keep device volume unchanged: the visual comparison supplies all the information needed for this experiment. [S1, S6]
+
+<More title={{"en": "Displacement in this model", "zh": "本模型的位移"}}>
+
+At the two relative settings, the chosen maximum displacements are <Num s="S1">0.035</Num> and <Num s="S1">0.07 scene units</Num>. They are schematic local displacements, not an actual air-pressure reading or a measured distance inside a listener’s ear.
+
+</More>
+
+<More title={{"en": "A volume percentage is different", "zh": "设备百分比是另一回事"}}>
+
+A device’s volume setting is not this displacement control. The model has no speaker output, microphone input or calibration for a real listening level. It cannot decide whether an environment or a pair of headphones is safe. [S1]
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+保持空气介质与重复节律不变，现在只改变<Term id="amplitude">振幅</Term>，即离开静止位置的最大位移。较大档位使标记离刻度更远，但每次循环的节律相同。往复范围与重复快慢是不同特征，应分开观察，不能只凭画面“动得厉害”就判断频率。[S4]
+
+模型的相对档位为 <Num s="S1">1</Num> 和 <Num s="S1">2</Num>。选择较大档位，会把选定的位移幅度加倍，输入仍保持 <Num s="S1">250 赫兹</Num>。可以比较最大偏移，也可以暂停观察一个瞬间。点经过静止位置时，当时的位移很小，并不表示整次振动的振幅也小。[S1, S4]
+
+<Term id="loudness">响度</Term>是听起来声音大或小的感受。条件相近时，较大的声波振幅对应较大的声强，通常也听起来更响。不过，响度不等于位移；这项关系也不会让静音模型变成听声测量工具，不能用屏幕范围推断个人感受。[S6]
+
+再调回较小档位，把两次观察记录下来。显示的重复节律保持不变。固定频率，只比较运动范围，能避免把较大的振幅误当成较高的音高。这正是公平比较需要保持其他条件相同的原因。[S1, S6]
+
+读数表示相对运动，不是分贝。相对档位加倍，不保证实际听起来恰好大声两倍。保持设备音量不变，单靠画面就能完成这项比较，也不需要播放声音验证。[S1, S6]
+
+<More title={{"en": "Displacement in this model", "zh": "本模型的位移"}}>
+
+两档对应的最大位移设计值为 <Num s="S1">0.035</Num> 与 <Num s="S1">0.07 个场景单位</Num>。这是示意性的局部位移，不是空气压强读数，也不是听者耳内的实测距离。
+
+</More>
+
+<More title={{"en": "A volume percentage is different", "zh": "设备百分比是另一回事"}}>
+
+设备音量设置不是这里的位移控制。模型没有扬声器输出、麦克风输入，也没有真实听声水平的校准，不能判断环境或耳机是否安全。[S1]
+
+</More>
+
+</Lang>
+

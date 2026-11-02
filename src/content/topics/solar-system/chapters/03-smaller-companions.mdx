@@ -1,0 +1,680 @@
+---
+{
+  "id": "smaller-companions",
+  "order": 3,
+  "title": {
+    "en": "Smaller companions",
+    "zh": "较小的天体"
+  },
+  "state": {
+    "run": false,
+    "part": null,
+    "camera": {
+      "position": [
+        3,
+        3,
+        7
+      ],
+      "target": [
+        -1,
+        0,
+        0
+      ],
+      "fov": 36
+    },
+    "layers": [
+      "small-bodies"
+    ],
+    "hide": [
+      "sun",
+      "mercury",
+      "venus",
+      "earth",
+      "mars",
+      "jupiter",
+      "saturn",
+      "uranus",
+      "neptune",
+      "saturn-rings",
+      "orbit-tracks",
+      "scale-ruler",
+      "asteroid-specimen",
+      "asteroid-belt",
+      "comet-sun",
+      "comet-nucleus",
+      "comet-coma",
+      "ion-tail",
+      "dust-tail",
+      "meteor-world",
+      "atmosphere-shell",
+      "meteor-trail",
+      "pluto",
+      "sun-cut-shell",
+      "sun-core",
+      "star-source",
+      "disc-source",
+      "air-column",
+      "light-rays",
+      "straight-rays",
+      "observer-eye",
+      "reflecting-world",
+      "reflection-rays",
+      "observer",
+      "horizon",
+      "sky-stars",
+      "orion-pattern",
+      "crux-pattern",
+      "scorpius-pattern",
+      "depth-stars",
+      "earth-viewpoint",
+      "light-ruler",
+      "proxima-marker",
+      "galaxy-disc",
+      "galaxy-bar",
+      "sun-location",
+      "disc-rays"
+    ],
+    "labels": [
+      "moon-parent",
+      "moon-demo"
+    ],
+    "view": "assembled",
+    "explode": 0,
+    "cutaway": "none",
+    "summary": {
+      "en": "A moon orbits its parent while both travel around the Sun.",
+      "zh": "卫星绕着母体公转，同时也随母体绕太阳运动。"
+    },
+    "index": {
+      "parts": [
+        "moon-parent",
+        "moon-demo",
+        "asteroid-specimen",
+        "asteroid-belt",
+        "pluto",
+        "comet-sun",
+        "comet-nucleus",
+        "comet-coma",
+        "ion-tail",
+        "dust-tail",
+        "meteor-world",
+        "atmosphere-shell",
+        "meteor-trail"
+      ]
+    },
+    "sim": {
+      "set": {
+        "lab": "small-bodies",
+        "elapsed-years": 0,
+        "planet": "earth",
+        "scale-mode": "overview",
+        "sky-date": "2026-01-15",
+        "sky-hour": 20,
+        "observer": "singapore",
+        "sky-target": "orion",
+        "pattern-links": true,
+        "depth": false,
+        "atmosphere": true,
+        "source-kind": "point",
+        "altitude-mode": "high",
+        "twinkle-seconds": 0,
+        "comet-step": 0,
+        "distance-target": "sun-earth"
+      },
+      "try": {
+        "vary": "comet-step",
+        "also": [],
+        "keep": [
+          {
+            "en": "Compare teaching snapshots; no live sky forecast.",
+            "zh": "比较教学快照，不作实时天空预报。"
+          },
+          {
+            "en": "For the tail comparison, open the fourth beat.",
+            "zh": "比较彗尾时，请打开本章第四拍。"
+          }
+        ],
+        "observe": [
+          "scale-state",
+          "comet-angle"
+        ]
+      }
+    },
+    "beats": [
+      {
+        "caption": {
+          "en": "A moon orbits its parent while both travel around the Sun.",
+          "zh": "卫星绕着母体公转，同时也随母体绕太阳运动。"
+        },
+        "run": false,
+        "part": null,
+        "camera": {
+          "position": [
+            3,
+            3,
+            7
+          ],
+          "target": [
+            -1,
+            0,
+            0
+          ],
+          "fov": 36
+        },
+        "layers": [
+          "small-bodies"
+        ],
+        "hide": [
+          "sun",
+          "mercury",
+          "venus",
+          "earth",
+          "mars",
+          "jupiter",
+          "saturn",
+          "uranus",
+          "neptune",
+          "saturn-rings",
+          "orbit-tracks",
+          "scale-ruler",
+          "asteroid-specimen",
+          "asteroid-belt",
+          "comet-sun",
+          "comet-nucleus",
+          "comet-coma",
+          "ion-tail",
+          "dust-tail",
+          "meteor-world",
+          "atmosphere-shell",
+          "meteor-trail",
+          "pluto",
+          "sun-cut-shell",
+          "sun-core",
+          "star-source",
+          "disc-source",
+          "air-column",
+          "light-rays",
+          "straight-rays",
+          "observer-eye",
+          "reflecting-world",
+          "reflection-rays",
+          "observer",
+          "horizon",
+          "sky-stars",
+          "orion-pattern",
+          "crux-pattern",
+          "scorpius-pattern",
+          "depth-stars",
+          "earth-viewpoint",
+          "light-ruler",
+          "proxima-marker",
+          "galaxy-disc",
+          "galaxy-bar",
+          "sun-location",
+          "disc-rays"
+        ],
+        "labels": [
+          "moon-parent",
+          "moon-demo"
+        ],
+        "sim": {
+          "set": {
+            "lab": "small-bodies",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "point",
+            "altitude-mode": "high",
+            "twinkle-seconds": 0,
+            "comet-step": 0,
+            "distance-target": "sun-earth"
+          }
+        }
+      },
+      {
+        "caption": {
+          "en": "Most asteroids lie between Mars and Jupiter; this sparse belt is schematic.",
+          "zh": "多数小行星位于火星与木星之间；这条稀疏的小行星带是示意图。"
+        },
+        "run": false,
+        "part": null,
+        "camera": {
+          "position": [
+            6,
+            5,
+            11
+          ],
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "fov": 36
+        },
+        "layers": [
+          "small-bodies"
+        ],
+        "hide": [
+          "sun",
+          "mercury",
+          "venus",
+          "earth",
+          "mars",
+          "jupiter",
+          "saturn",
+          "uranus",
+          "neptune",
+          "saturn-rings",
+          "orbit-tracks",
+          "scale-ruler",
+          "moon-parent",
+          "moon-demo",
+          "comet-sun",
+          "comet-nucleus",
+          "comet-coma",
+          "ion-tail",
+          "dust-tail",
+          "meteor-world",
+          "atmosphere-shell",
+          "meteor-trail",
+          "sun-cut-shell",
+          "sun-core",
+          "star-source",
+          "disc-source",
+          "air-column",
+          "light-rays",
+          "straight-rays",
+          "observer-eye",
+          "reflecting-world",
+          "reflection-rays",
+          "observer",
+          "horizon",
+          "sky-stars",
+          "orion-pattern",
+          "crux-pattern",
+          "scorpius-pattern",
+          "depth-stars",
+          "earth-viewpoint",
+          "light-ruler",
+          "proxima-marker",
+          "galaxy-disc",
+          "galaxy-bar",
+          "sun-location",
+          "disc-rays"
+        ],
+        "labels": [
+          "asteroid-belt",
+          "asteroid-specimen",
+          "pluto"
+        ],
+        "sim": {
+          "set": {
+            "lab": "small-bodies",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "point",
+            "altitude-mode": "high",
+            "twinkle-seconds": 0,
+            "comet-step": 0,
+            "distance-target": "sun-earth"
+          }
+        }
+      },
+      {
+        "caption": {
+          "en": "Heating near the Sun can turn an icy comet nucleus into an active comet.",
+          "zh": "彗核接近太阳受热时，可能形成彗发和彗尾。"
+        },
+        "run": false,
+        "part": null,
+        "camera": {
+          "position": [
+            6,
+            5,
+            11
+          ],
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "fov": 36
+        },
+        "layers": [
+          "small-bodies"
+        ],
+        "hide": [
+          "sun",
+          "mercury",
+          "venus",
+          "earth",
+          "mars",
+          "jupiter",
+          "saturn",
+          "uranus",
+          "neptune",
+          "saturn-rings",
+          "orbit-tracks",
+          "scale-ruler",
+          "moon-parent",
+          "moon-demo",
+          "asteroid-specimen",
+          "asteroid-belt",
+          "ion-tail",
+          "dust-tail",
+          "meteor-world",
+          "atmosphere-shell",
+          "meteor-trail",
+          "pluto",
+          "sun-cut-shell",
+          "sun-core",
+          "star-source",
+          "disc-source",
+          "air-column",
+          "light-rays",
+          "straight-rays",
+          "observer-eye",
+          "reflecting-world",
+          "reflection-rays",
+          "observer",
+          "horizon",
+          "sky-stars",
+          "orion-pattern",
+          "crux-pattern",
+          "scorpius-pattern",
+          "depth-stars",
+          "earth-viewpoint",
+          "light-ruler",
+          "proxima-marker",
+          "galaxy-disc",
+          "galaxy-bar",
+          "sun-location",
+          "disc-rays"
+        ],
+        "labels": [
+          "comet-nucleus",
+          "comet-coma"
+        ],
+        "sim": {
+          "set": {
+            "lab": "small-bodies",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "point",
+            "altitude-mode": "high",
+            "twinkle-seconds": 0,
+            "comet-step": 0,
+            "distance-target": "sun-earth"
+          }
+        }
+      },
+      {
+        "caption": {
+          "en": "The tails extend generally away from the Sun, rather than always behind the orbit.",
+          "zh": "彗尾大致背向太阳伸展，并不总拖在公转方向的后面。"
+        },
+        "run": false,
+        "part": null,
+        "camera": {
+          "position": [
+            0,
+            6,
+            15
+          ],
+          "target": [
+            -2,
+            0,
+            0
+          ],
+          "fov": 36
+        },
+        "layers": [
+          "small-bodies"
+        ],
+        "hide": [
+          "sun",
+          "mercury",
+          "venus",
+          "earth",
+          "mars",
+          "jupiter",
+          "saturn",
+          "uranus",
+          "neptune",
+          "saturn-rings",
+          "orbit-tracks",
+          "scale-ruler",
+          "moon-parent",
+          "moon-demo",
+          "asteroid-specimen",
+          "asteroid-belt",
+          "meteor-world",
+          "atmosphere-shell",
+          "meteor-trail",
+          "pluto",
+          "sun-cut-shell",
+          "sun-core",
+          "star-source",
+          "disc-source",
+          "air-column",
+          "light-rays",
+          "straight-rays",
+          "observer-eye",
+          "reflecting-world",
+          "reflection-rays",
+          "observer",
+          "horizon",
+          "sky-stars",
+          "orion-pattern",
+          "crux-pattern",
+          "scorpius-pattern",
+          "depth-stars",
+          "earth-viewpoint",
+          "light-ruler",
+          "proxima-marker",
+          "galaxy-disc",
+          "galaxy-bar",
+          "sun-location",
+          "disc-rays"
+        ],
+        "labels": [
+          "comet-nucleus",
+          "ion-tail",
+          "dust-tail"
+        ],
+        "sim": {
+          "set": {
+            "lab": "small-bodies",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "point",
+            "altitude-mode": "high",
+            "twinkle-seconds": 0,
+            "comet-step": 180,
+            "distance-target": "sun-earth"
+          }
+        }
+      },
+      {
+        "caption": {
+          "en": "A meteor is a light phenomenon; Pluto is a dwarf planet. Neither is a falling star.",
+          "zh": "流星是发光现象，冥王星是矮行星；它们都不是掉落的恒星。"
+        },
+        "run": false,
+        "part": null,
+        "camera": {
+          "position": [
+            0,
+            2,
+            5
+          ],
+          "target": [
+            -2,
+            0,
+            0
+          ],
+          "fov": 36
+        },
+        "layers": [
+          "small-bodies"
+        ],
+        "hide": [
+          "sun",
+          "mercury",
+          "venus",
+          "earth",
+          "mars",
+          "jupiter",
+          "saturn",
+          "uranus",
+          "neptune",
+          "saturn-rings",
+          "orbit-tracks",
+          "scale-ruler",
+          "moon-parent",
+          "moon-demo",
+          "asteroid-specimen",
+          "asteroid-belt",
+          "comet-sun",
+          "comet-nucleus",
+          "comet-coma",
+          "ion-tail",
+          "dust-tail",
+          "pluto",
+          "sun-cut-shell",
+          "sun-core",
+          "star-source",
+          "disc-source",
+          "air-column",
+          "light-rays",
+          "straight-rays",
+          "observer-eye",
+          "reflecting-world",
+          "reflection-rays",
+          "observer",
+          "horizon",
+          "sky-stars",
+          "orion-pattern",
+          "crux-pattern",
+          "scorpius-pattern",
+          "depth-stars",
+          "earth-viewpoint",
+          "light-ruler",
+          "proxima-marker",
+          "galaxy-disc",
+          "galaxy-bar",
+          "sun-location",
+          "disc-rays"
+        ],
+        "labels": [
+          "meteor-trail",
+          "atmosphere-shell"
+        ],
+        "sim": {
+          "set": {
+            "lab": "small-bodies",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "point",
+            "altitude-mode": "high",
+            "twinkle-seconds": 0,
+            "comet-step": 0,
+            "distance-target": "sun-earth"
+          }
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+The close view starts with a <Term id="moon">natural satellite</Term>, or moon, beside its parent body. A moon goes around its parent while both travel around the Sun. Earth's Moon is one example; the word moon also applies to companions of other bodies. Mercury and Venus have no moons. The display does not list a total for the whole solar system, because discoveries and classifications can change. <Num s="S8,S36" />
+
+Between Mars and Jupiter, the band marks the main <Term id="asteroid">asteroid</Term> belt. Most asteroids are found in this region, though others follow paths elsewhere. These are relatively small rocky bodies. The dots identify a region, rather than building a wall of closely packed stones. The separate specimen gives a rock a readable shape without claiming that all asteroids have the same outline. <Num s="S9" />
+
+The <Term id="comet">comet</Term> station shows a nucleus containing ice and dust. Near the Sun, heating can release material into a surrounding cloud called a coma and into tails. Select another position and compare the Sun's direction with the tails. The narrow ion tail and broader dust tail extend generally away from the Sun. Their direction is not simply the reverse of the comet's motion. <Num s="S10" />
+
+Finally compare objects with events. Pluto is a <Term id="dwarf-planet">dwarf planet</Term>, a classification of solar-system body; changing its category did not remove it from the solar system. A meteor is the brief light phenomenon produced when a small space body passes through an atmosphere. A “shooting star” is therefore no falling star. Saturn's rings supply another comparison: they contain many pieces of ice and rock, rather than solid hoops. <Num s="S4,S25,S11" />
+
+<Figure src="figures/solar-system-comet-tails" alt={{ en: "A comet nucleus and coma with a straight narrow tail and a broader curved tail.", zh: "彗核与彗发连着一条细直尾和一条较宽弯尾。" }} caption={{ en: "The Sun is outside the lower-left edge; both tails extend generally away from it. Tail widths and lengths are schematic.", zh: "太阳位于画外左下方，两条尾巴总体背向太阳。尾的宽度与长度都是示意。" }} />
+
+<More title={{ en: "The Moon's separate lesson", zh: "月球的另一个主题" }}>
+
+This station identifies a companion and its path. It does not explain the Moon's changing shape. <TopicLink slug="sun-earth-moon" ch="one-moon-many-views">One Moon, many views</TopicLink> follows reflected sunlight and the changing view from Earth. Day and night, seasons and eclipses also stay with that linked topic. <Num s="S8" />
+
+</More>
+
+<More title={{ en: "A tail is not an exhaust trail", zh: "彗尾不是尾气" }}>
+
+Sunlight and the solar wind drive comet material generally away from the Sun. Dust and charged gas respond differently, producing different tail shapes. The local model uses selected positions and schematic directions; it does not calculate chemistry or brightness. Material from a meteoroid that survives to reach the ground is a meteorite, distinct from the light event called a meteor. <Num s="S10,S25,S37" />
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+近景先显示母体旁的<Term id="moon">自然卫星</Term>。卫星绕母体运动，同时也随母体绕太阳运行。地球的月球是其中一个例子，其他天体也可以有天然伴星；水星与金星则没有自然卫星。这里不列太阳系卫星总数，因为新发现与分类会使统计改变。 <Num s="S8,S36" />
+
+火星与木星之间的带状区域，是主<Term id="asteroid">小行星</Term>带。多数小行星在这里，另一些走不同的路径。它们是较小的岩质天体，图中的点只标示区域，不代表岩石紧挨成墙。旁边放大的标本方便看轮廓，也不表示每颗小行星都长得一样。 <Num s="S9" />
+
+<Term id="comet">彗星</Term>工位里，含冰和尘埃的彗核靠近太阳受热，可能释放物质，形成云雾般的彗发与彗尾。选择另一位置，比较太阳与尾的方向：细直的离子尾和较宽的尘尾，总体背向太阳伸展，并不是始终拖在运动方向后面。 <Num s="S10" />
+
+最后把天体与事件分开。冥王星是<Term id="dwarf-planet">矮行星</Term>，分类改变后仍属于太阳系。小天体进入大气时产生的短暂发光现象叫流星；俗称的“流星”不是掉落的恒星。土星环又是另一种情况：环由许多冰和岩石碎块组成，并非整块坚硬的圆箍。 <Num s="S4,S25,S11" />
+
+<Figure src="figures/solar-system-comet-tails" alt={{ en: "A comet nucleus and coma with a straight narrow tail and a broader curved tail.", zh: "彗核与彗发连着一条细直尾和一条较宽弯尾。" }} caption={{ en: "The Sun is outside the lower-left edge; both tails extend generally away from it. Tail widths and lengths are schematic.", zh: "太阳位于画外左下方，两条尾巴总体背向太阳。尾的宽度与长度都是示意。" }} />
+
+<More title={{ en: "The Moon's separate lesson", zh: "月球的另一个主题" }}>
+
+这个工位只辨认卫星与路径，不展开月相。<TopicLink slug="sun-earth-moon" ch="one-moon-many-views">《太阳、地球与月球》的同一月球、多种视角</TopicLink>，继续追踪反射阳光与地球视点的关系。昼夜、四季与食也保留在那个主题里。 <Num s="S8" />
+
+</More>
+
+<More title={{ en: "A tail is not an exhaust trail", zh: "彗尾不是尾气" }}>
+
+阳光与太阳风使彗星释放的物质总体远离太阳，尘埃与带电气体反应不同，尾的形状也不同。局部模型只用选定位置和示意方向，不计算化学过程或亮度。进入大气的小天体若有物质落到地面，留下的是陨石，与称为流星的发光现象不同。 <Num s="S10,S25,S37" />
+
+</More>
+
+</Lang>

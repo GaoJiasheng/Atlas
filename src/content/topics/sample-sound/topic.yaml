@@ -1,0 +1,12 @@
+id: sample-sound
+title: { en: "Sample: Sound", zh: "示例：声音" }
+subtitle: { en: "Silent sound engine fixture", zh: "静音声音引擎测试" }
+subject: science
+moe: []
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: draft
+note: { en: "DRAFT · DESIGN engine fixture · silent · wave slowed 250 times; echo slowed 10 times", zh: "草稿·设计引擎测试·静音·纵波慢放250倍，回声慢放10倍" }

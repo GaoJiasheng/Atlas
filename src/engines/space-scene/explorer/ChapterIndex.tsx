@@ -128,7 +128,7 @@ function ExerciseIndex({ ids, fitness, training }: { ids: readonly string[]; fit
   );
 }
 
-function PartIndex({ ids, file }: { ids: readonly string[]; file: PartsFile }) {
+function PartIndex({ ids, file, onSelectPart }: { ids: readonly string[]; file: PartsFile; onSelectPart?: (id: string) => void }) {
   const t = useT();
   const { locale } = useSceneContext();
   const store = useSceneStore<SpaceSceneExt>();
@@ -150,7 +150,7 @@ function PartIndex({ ids, file }: { ids: readonly string[]; file: PartsFile }) {
                 data-part={p.id}
                 aria-pressed={selected === p.id}
                 title={t('space.index.select', { name })}
-                onClick={() => store.getState().patch({ part: p.id })}
+                onClick={() => onSelectPart ? onSelectPart(p.id) : store.getState().patch({ part: p.id })}
               >
                 <span className="space-index__no">{partNumber(file, p.id)}</span>
                 <span className="space-index__text">
@@ -171,7 +171,9 @@ export function ChapterIndex({
   file,
   fitness,
   training,
+  onSelectPart,
 }: {
+  onSelectPart?: (id: string) => void;
   index: SpaceChapterIndex | undefined;
   file: PartsFile;
   fitness: FitnessBundle | undefined;
@@ -181,7 +183,7 @@ export function ChapterIndex({
   return (
     <>
       {index.exercises && fitness && <ExerciseIndex ids={index.exercises} fitness={fitness} training={training} />}
-      {index.parts && <PartIndex ids={index.parts} file={file} />}
+      {index.parts && <PartIndex ids={index.parts} file={file} onSelectPart={onSelectPart} />}
     </>
   );
 }
