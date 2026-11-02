@@ -1,0 +1,13 @@
+id: solar-system
+title: { en: "The Solar System and the Stars", zh: "太阳系与恒星" }
+subtitle: { en: "Compare worlds, read Singapore's sky, and follow distances beyond the Sun", zh: "比较行星，读懂新加坡的星空，把距离延伸到太阳之外" }
+subject: science
+tags: [singapore, space, beyond-syllabus]
+levels: [P4, P5, P6]
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+status: published
+illustration: solar-system
+note: { en: "Teaching snapshots · overview: enlarged bodies, compressed gaps · size row: one size scale, layout gaps · distance ruler: one scale, separate position ticks · fixed J2000 sky, no forecasts", zh: "教学快照 · 总览：放大天体、压缩间距 · 大小行：大小同比例，间隔为排版 · 距离尺：统一比例，刻线另标中心位置 · 固定J2000星空，不作预报" }

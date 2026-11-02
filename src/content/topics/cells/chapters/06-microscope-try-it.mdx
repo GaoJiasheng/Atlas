@@ -1,0 +1,366 @@
+---
+{
+  "id": "microscope-try-it",
+  "order": 6,
+  "title": {
+    "en": "Trying the microscope",
+    "zh": "显微镜试一试"
+  },
+  "kind": "chapter",
+  "sensitive": false,
+  "state": {
+    "camera": {
+      "position": [
+        0.42,
+        0.26,
+        0.32
+      ],
+      "target": [
+        0.18,
+        0.17,
+        0
+      ],
+      "fov": 30
+    },
+    "view": "assembled",
+    "cutaway": "none",
+    "explode": 0,
+    "run": false,
+    "pose": null,
+    "part": "scope-turret",
+    "labels": [
+      "scope-turret"
+    ],
+    "hide": [
+      "animal-membrane",
+      "animal-cytoplasm",
+      "animal-nucleus",
+      "plant-cell-wall",
+      "plant-membrane",
+      "plant-cytoplasm",
+      "plant-nucleus",
+      "plant-chloroplasts",
+      "plant-vacuole",
+      "onion-patch",
+      "leaf-context",
+      "tissue-patch",
+      "intestine-context",
+      "body-context"
+    ],
+    "sim": {
+      "set": {
+        "specimen": "onion-bulb",
+        "objective": 4,
+        "slide-x": 0,
+        "slide-y": 0,
+        "focus-z": 0,
+        "illumination": 0.5,
+        "field-on": true
+      },
+      "try": {
+        "vary": "focus-z",
+        "also": [
+          "slide-x",
+          "slide-y",
+          "objective",
+          "field-on"
+        ],
+        "observe": [
+          "focus-status",
+          "view-status"
+        ],
+        "record": true,
+        "keep": [
+          {
+            "en": "The same prepared specimen",
+            "zh": "同一预制标本"
+          }
+        ]
+      }
+    },
+    "summary": {
+      "en": "Keep the same specimen, centre it, change power, refocus and record.",
+      "zh": "保持同一标本，居中、换倍数、微调并记录。"
+    },
+    "index": {
+      "parts": [
+        "scope-fine-focus",
+        "scope-turret",
+        "slide-glass"
+      ]
+    },
+    "layers": [
+      "animal-cell",
+      "plant-cell",
+      "microscope-bench",
+      "tissue-context"
+    ],
+    "beats": [
+      {
+        "camera": "scope-stage-close",
+        "view": "assembled",
+        "cutaway": "none",
+        "explode": 0,
+        "run": false,
+        "pose": null,
+        "part": "scope-turret",
+        "labels": [
+          "scope-turret"
+        ],
+        "hide": [
+          "animal-membrane",
+          "animal-cytoplasm",
+          "animal-nucleus",
+          "plant-cell-wall",
+          "plant-membrane",
+          "plant-cytoplasm",
+          "plant-nucleus",
+          "plant-chloroplasts",
+          "plant-vacuole",
+          "onion-patch",
+          "leaf-context",
+          "tissue-patch",
+          "intestine-context",
+          "body-context"
+        ],
+        "sim": {
+          "set": {
+            "specimen": "onion-bulb",
+            "objective": 4,
+            "slide-x": 0,
+            "slide-y": 0,
+            "focus-z": 0,
+            "illumination": 0.5,
+            "field-on": true
+          }
+        },
+        "caption": {
+          "en": "Start at low power to find the specimen. This field is a locally generated teaching simulation, not a recorded image.",
+          "zh": "从最低倍开始找标本；这个视野是本地生成的教学模拟，不是真实拍摄。"
+        }
+      },
+      {
+        "camera": "scope-stage-close",
+        "view": "assembled",
+        "cutaway": "none",
+        "explode": 0,
+        "run": false,
+        "pose": null,
+        "part": "slide-glass",
+        "labels": [
+          "slide-glass"
+        ],
+        "hide": [
+          "animal-membrane",
+          "animal-cytoplasm",
+          "animal-nucleus",
+          "plant-cell-wall",
+          "plant-membrane",
+          "plant-cytoplasm",
+          "plant-nucleus",
+          "plant-chloroplasts",
+          "plant-vacuole",
+          "onion-patch",
+          "leaf-context",
+          "tissue-patch",
+          "intestine-context",
+          "body-context"
+        ],
+        "sim": {
+          "set": {
+            "specimen": "onion-bulb",
+            "objective": 4,
+            "slide-x": -200,
+            "slide-y": 0,
+            "focus-z": 0,
+            "illumination": 0.5,
+            "field-on": true
+          }
+        },
+        "caption": {
+          "en": "Move the selected nucleus to the centre of the field before increasing power.",
+          "zh": "将选中的细胞核移到视野中央，再提高倍数。"
+        }
+      },
+      {
+        "camera": "scope-stage-close",
+        "view": "assembled",
+        "cutaway": "none",
+        "explode": 0,
+        "run": false,
+        "pose": null,
+        "part": "scope-turret",
+        "labels": [
+          "scope-turret"
+        ],
+        "hide": [
+          "animal-membrane",
+          "animal-cytoplasm",
+          "animal-nucleus",
+          "plant-cell-wall",
+          "plant-membrane",
+          "plant-cytoplasm",
+          "plant-nucleus",
+          "plant-chloroplasts",
+          "plant-vacuole",
+          "onion-patch",
+          "leaf-context",
+          "tissue-patch",
+          "intestine-context",
+          "body-context"
+        ],
+        "sim": {
+          "set": {
+            "specimen": "onion-bulb",
+            "objective": 40,
+            "slide-x": -200,
+            "slide-y": 0,
+            "focus-z": 0,
+            "illumination": 0.5,
+            "field-on": true
+          }
+        },
+        "caption": {
+          "en": "At higher power the centred target remains in view, while less of the surrounding specimen is visible.",
+          "zh": "提高倍数后，中央的目标仍在视野中；现在能看到的周围范围更小。"
+        }
+      },
+      {
+        "camera": "scope-stage-close",
+        "view": "assembled",
+        "cutaway": "none",
+        "explode": 0,
+        "run": false,
+        "pose": null,
+        "part": "scope-fine-focus",
+        "labels": [
+          "scope-fine-focus"
+        ],
+        "hide": [
+          "animal-membrane",
+          "animal-cytoplasm",
+          "animal-nucleus",
+          "plant-cell-wall",
+          "plant-membrane",
+          "plant-cytoplasm",
+          "plant-nucleus",
+          "plant-chloroplasts",
+          "plant-vacuole",
+          "onion-patch",
+          "leaf-context",
+          "tissue-patch",
+          "intestine-context",
+          "body-context"
+        ],
+        "sim": {
+          "set": {
+            "specimen": "onion-bulb",
+            "objective": 40,
+            "slide-x": -200,
+            "slide-y": 0,
+            "focus-z": 1,
+            "illumination": 0.5,
+            "field-on": true
+          }
+        },
+        "caption": {
+          "en": "Use fine focus to compare focal planes. A structure coming into focus has not just grown inside the cell.",
+          "zh": "用微调比较两个焦平面；图像变清楚，不能当成细胞里长出了新结构。"
+        }
+      },
+      {
+        "camera": "scope-stage-close",
+        "view": "assembled",
+        "cutaway": "none",
+        "explode": 0,
+        "run": false,
+        "pose": null,
+        "part": "scope-fine-focus",
+        "labels": [
+          "scope-fine-focus"
+        ],
+        "hide": [
+          "animal-membrane",
+          "animal-cytoplasm",
+          "animal-nucleus",
+          "plant-cell-wall",
+          "plant-membrane",
+          "plant-cytoplasm",
+          "plant-nucleus",
+          "plant-chloroplasts",
+          "plant-vacuole",
+          "onion-patch",
+          "leaf-context",
+          "tissue-patch",
+          "intestine-context",
+          "body-context"
+        ],
+        "sim": {
+          "set": {
+            "specimen": "onion-bulb",
+            "objective": 40,
+            "slide-x": -200,
+            "slide-y": 0,
+            "focus-z": 0,
+            "illumination": 0.5,
+            "field-on": true
+          }
+        },
+        "caption": {
+          "en": "Return to a clear focal plane and record power and field diameter. Change one condition at a time for the comparison.",
+          "zh": "回到清楚的焦平面，记录倍数和视野直径。换条件时一次只改一个量。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Begin with the lowest objective and the onion specimen. The circular image is a teaching simulation generated on this device, not a photograph or a recording of living cells. It is a place to practise a sequence: find, centre, increase power, refine focus and record. The chosen specimen’s shapes remain the same when you change the optical settings.
+
+Find the target nucleus at low power. Move the slide until the target is near the centre. Remember that the viewed image moves opposite to the slide. Once the target is centred, increase the objective power while keeping the slide position and specimen fixed. The surrounding area decreases, but the same target should remain within the field. If it disappears, return to low power and locate it again.
+
+Now vary fine focus in small steps. A near layer and a far layer can become clear at different settings. A structure coming into focus has not suddenly grown inside the cell. At higher power the useful focus range is narrower in this model, so a small change can matter. The coarse-focus knob remains an identification feature, without a control that could drive the stage into the glass.
+
+Record the observation, then change one condition at a time. Keep the specimen constant while comparing focus; keep focus and position steady when comparing power. Illumination can make the field darker or brighter, but it does not change total power or bring a different depth into focus. The records belong to this exploration and are cleared when the page is refreshed.
+
+<More title={{"en": "What a record compares", "zh": "记录比较的对象"}}>
+
+In this chapter the main variable is fine focus. The table keeps the current controls and observations together, so you can revisit how a changed setting affected the same specimen. A row records a model state, not an independently collected biological sample.
+
+</More>
+
+<More title={{"en": "Using a real microscope", "zh": "回到真实仪器"}}>
+
+Continue to follow the teacher’s sequence and the actual instrument’s instructions. This screen provides no specimen-collection or staining procedure. At high power use fine adjustment and keep the objective clear of the slide.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+从最低倍物镜和洋葱标本开始。圆形影像是在本机生成的教学模拟，不是照片，也不是活细胞录像。这里练习的是一组有顺序的动作：找到、居中、换高倍、微调、记录。改变光学设置时，所选标本的形状保持不变。
+
+先低倍找到目标核，再移动玻片，让目标接近中央。记住图像的移动方向与玻片相反。居中以后，保持标本和玻片位置，换高倍物镜。周围范围缩小，同一个目标仍应留在视野中；若找不到，就退回低倍重新定位。
+
+接着小幅改变微调。较近和较远的结构，可能分别在不同设置下变清楚。结构进入焦点，不表示细胞突然长出了新部位。本模型在高倍下的有效调焦范围较窄，小变化也可能明显影响图像。粗调节器只供辨认，不提供大幅推动载物台的控件。
+
+记录后，一次只改一个条件。比较焦点时保持同一标本；比较倍数时先固定焦点和位置。照明能改变明暗，却不会改变总倍数，也不能代替调焦。记录用于当前这次探索，刷新页面会清除，不能把它当作真实显微实验的测量报告。
+
+<More title={{"en": "What a record compares", "zh": "记录比较的对象"}}>
+
+本章主要改变微调。表格把当前设置和观察结果放在同一行，便于比较同一标本在不同设置下的表现。每行记录模型状态，不是一次独立采集的生物样本。
+
+</More>
+
+<More title={{"en": "Using a real microscope", "zh": "回到真实仪器"}}>
+
+回到真实仪器，仍要遵守教师的步骤和仪器说明。这里不提供采样和染色方法；高倍下使用微调，始终避免物镜碰到玻片。
+
+</More>
+
+</Lang>
+

@@ -1,3 +1,7 @@
+import { microscopeSchema, microscopeOverlaySchema, microscopeIssues } from './microscope-schema';
+import { microscopeQuantity, MICROSCOPE_STATES } from './lib/sim/microscope';
+import { solarSystemSchema, solarControlIssues, SOLAR_STATES } from './solar-system-schema';
+import { solarQuantity } from './lib/sim/solar-system';
 import { portSchema, portIssues } from './port-schema';
 import { PORT_CHANNELS, PORT_STATES, portQuantity } from './lib/sim/port';
 import { spanSchema, spanIssues } from './span-schema';
@@ -36,7 +40,7 @@ import { sortQuantity } from './lib/sim/sort';
 import { OUTPUT_TAGS, tableCellDecimals, tableIssues, tablePredictIssues, tableSchema, type TableCheckPart, type TableCount } from './table-schema';
 import { tableQuantity, tableStates } from './lib/sim/table';
 import { sensesIssues, sensesSchema } from './senses-schema';
-import { sensesExperiment, sensesQuantity, SENSES_STATES } from './lib/sim/senses';
+import { sensesExperiment, sensesQuantity, SOUND_LAB_NULLABLE, SENSES_STATES } from './lib/sim/senses';
 import { orbitRotationSchema, orbitIssues, orbitQuantity, ORBIT_STATES, ORBIT_STEPS, bodyTransformSchema, solarIlluminationSchema } from './orbit-rotation-schema';
 import { seedsIssues, seedsSchema } from './seeds-schema';
 import { foodWebSchema, foodWebIssues } from './food-web-schema';
@@ -116,6 +120,7 @@ export const simOutputSchema = z
     kind: z.enum(SIM_OUTPUT_KINDS).default('number'),
     from: z.string().min(1).max(64).optional(),
     unit: z.string().trim().max(8).optional(),
+    nullable: z.boolean().optional(),
     format: z.literal('time').optional(),
     decimals: z.number().int().min(0).max(3).optional(),
     states: z.record(stateId, bilingual).optional(),
@@ -196,6 +201,7 @@ const partBind = z
     fill: z.object({ per: z.number().positive(), below: z.number().nonnegative().default(0), meniscus: z.number().nonnegative().max(0.01).default(0), ease: z.number().nonnegative().max(10).default(0.6) }).strict().optional(),
     count: z.union([z.literal(true), z.object({ per: z.number().positive().default(1), minus: z.number().default(0) }).strict()]).optional(),
     /** Orbit sims (docs/44 E-SEM2): place / turn / size the part from the snapshot's body frame, or light it from the analytic Sun. */
+    scale: z.object({ per: z.number().finite().positive().default(1) }).strict().optional(),
     bodyTransform: bodyTransformSchema.optional(),
     solarIllumination: solarIlluminationSchema.optional(),
     /**
@@ -923,8 +929,10 @@ export const shadowCastSchema = z.object({
 
 export const simOverlaySchema = z.discriminatedUnion('kind', [
   shadowCastSchema,
+  z.object({kind:z.literal('catalogue-sky'),group:kebabId,catalogue:z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*\.json$/),radius:z.number().finite().positive().default(5)}).strict(),
   z.object({ kind: z.literal('paraxial-eye'), model: z.literal('eye'), group: kebabId.optional(), origin: vec3, cmToScene: z.number().finite().positive(), yScale: z.number().finite().min(1).max(40).default(1), pointColors: z.tuple([colorRef, colorRef]).optional(), halfApertureSamples: z.literal(1), when: z.object({ ...source, is: simValue }).strict().optional() }).strict(),
   z.object({ kind: z.literal('longitudinal-wave'), model: z.literal('sound'), group: kebabId.optional(), origin: vec3, axis: vec3, count: z.literal(41), spacing: z.literal(.05), referenceIndex: z.number().int().min(0).max(40), when: z.object({ ...source, is: simValue }).strict().optional() }).strict(),
+  z.object({ kind: z.literal('sound-echo-pulse'), model: z.literal('echo'), group: kebabId, origin: vec3, axis: vec3, visualDistancesScene: z.object({near:z.literal(1),mid:z.literal(1.4),far:z.literal(2.2)}).strict(), slowFactor:z.literal(10), reference:z.literal('distance-m'), sources:z.array(z.string().regex(/^S\d+$/)).min(1) }).strict(),
   /** Orbit sims (docs/44 E-SEM2): the six guide parts OrbitDriver redraws from the shared snapshot (tracks, plane, node line, rays, ruler). */
   z
     .object({
@@ -963,6 +971,7 @@ export const simOverlaySchema = z.discriminatedUnion('kind', [
         .optional(),
     })
     .strict(),
+  microscopeOverlaySchema,
   z.object({kind:z.literal('airfoil-pressure'),part:kebabId,group:kebabId,when:z.object({control:kebabId,is:simCondition}).strict()}).strict(),
   /**
    * Force arrows (docs/30 F3): `per` scene units per newton (default 0.03),
@@ -1023,7 +1032,7 @@ export const simOverlaySchema = z.discriminatedUnion('kind', [
 export type SimOverlay = z.output<typeof simOverlaySchema>;
 export type ShadowCastOverlay = Extract<SimOverlay, { kind: 'shadow-cast' }>;
 
-export const SIM_KINDS = ['circuit', 'magnet', 'force', 'energy', 'life-cycle', 'matter', 'light', 'sort', 'materials', 'table', 'seeds', 'heat', 'orbit-rotation', 'airfoil', 'port', 'senses'] as const;
+export const SIM_KINDS = ['circuit', 'magnet', 'force', 'energy', 'life-cycle', 'matter', 'light', 'sort', 'materials', 'table', 'seeds', 'heat', 'orbit-rotation', 'airfoil', 'port', 'senses', 'microscope', 'solar-system'] as const;
 export type SimKind = (typeof SIM_KINDS)[number];
 
 export const MAX_SIM_CONTROLS = 16;
@@ -1053,6 +1062,8 @@ export const simSchema = z
     heat: heatSchema.optional(),
     orbitRotation: orbitRotationSchema.optional(),
     senses: sensesSchema.optional(),
+    microscope: microscopeSchema.optional(),
+    solarSystem: solarSystemSchema.optional(),
     airfoil: airfoilSchema.optional(),
   })
   .strict()
@@ -1061,7 +1072,7 @@ export const simSchema = z
     sim.controls.forEach((c, i) => {
       if (c.kind !== 'step') return;
       const date = sim.kind === 'orbit-rotation' && c.id === sim.orbitRotation?.solarYear.control;
-      if (c.values.length > 24 && !date)
+      if (c.values.length > 24 && !date && !(sim.kind === 'microscope' && c.id === sim.microscope?.controls.focusZ))
         ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['controls', i, 'values'], message: 'at most 24 step values; only the orbit solarYear date control may exceed 24' });
       if (date && c.values.join('|') !== ORBIT_STEPS['day-index']!.join('|'))
         ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['controls', i, 'values'], message: 'date values must be consecutive ordered integers 1..365' });
@@ -1206,7 +1217,9 @@ const MAGNET_STATES: readonly string[] = ['facing', 'field-state'];
 /** The kind of a model quantity (an output's `from`), or null when the model (or the data it needs) has none of that name. */
 export function quantityKind(sim: SimData, from: string): SimOutput['kind'] | null {
   switch (sim.kind) {
-    case 'senses': return sim.senses ? sensesQuantity(from) : null;
+    case 'microscope': return sim.microscope ? microscopeQuantity(from) : null;
+    case 'solar-system': return solarQuantity(from);
+    case 'senses': return sim.senses ? sensesQuantity(from, sim.senses) : null;
     case 'airfoil': return sim.airfoil ? airfoilQuantity(sim.airfoil, from, sim.controls) : null;
     case 'port':
       return sim.port ? portQuantity(from) : null;
@@ -1326,6 +1339,9 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
     const from = o.from ?? o.id;
     if (o.format === 'time' && (o.kind !== 'number' || o.unit !== 'h' || (from.startsWith('control:') && (() => { const c = controls.get(from.slice(8)); return c?.kind !== 'step' || c.values.some((v) => v < 0 || v > 24); })()))) issue(['outputs', i, 'format'], 'time format needs a number output in hours, 0–24');
     const kind = quantityKind(sim, from);
+    const nullable = sim.kind === 'senses' && !!sim.senses?.soundLab && (SOUND_LAB_NULLABLE as readonly string[]).includes(from);
+    if (nullable && o.nullable !== true) issue(['outputs',i,'nullable'], `${from} requires nullable: true`);
+    if (!nullable && o.nullable !== undefined) issue(['outputs',i,'nullable'], 'nullable is reserved for soundLab speed and travel-time quantities');
     if (o.format === 'time' && kind === 'number' && o.unit === 'h' && sim.kind !== 'orbit-rotation') {
       const reads = from.startsWith('control:') ? sim.controls.filter((c) => c.id === from.slice(8)) : sim.kind === 'light' && sim.light?.sun && from.startsWith('sun:') ? sim.controls.filter((c) => [sim.light!.sun!.time, sim.light!.sun!.date].includes(c.id)) : sim.controls;
       if (combinations(reads, defaults).some((values) => { const value = simQuantities(sim, values)[from]; return typeof value !== 'number' || !Number.isFinite(value) || value < 0 || value > 24; })) issue(['outputs', i, 'format'], 'time format output values must be finite hours in 0–24');
@@ -1337,7 +1353,7 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
       issue(['outputs', i, 'from'], needs ? `"${from}" needs the ${sim.kind} model's \`${needs}\` data` : `the ${sim.kind} model has no quantity "${from}"`);
     } else if (kind !== o.kind) issue(['outputs', i, 'kind'], `"${from}" is a ${kind}, not a ${o.kind}`);
     const states =
-      sim.kind === 'senses' ? SENSES_STATES[from] : sim.kind === 'orbit-rotation' ? ORBIT_STATES[from] : sim.kind === 'airfoil' && from === 'flow-state' ? AIRFOIL_STATES : sim.kind === 'port' && sim.port ? PORT_STATES[from] : sim.kind === 'light' && sim.light
+      sim.kind === 'microscope' ? MICROSCOPE_STATES[from] : sim.kind === 'solar-system' ? SOLAR_STATES[from] : sim.kind === 'senses' ? SENSES_STATES[from] : sim.kind === 'orbit-rotation' ? ORBIT_STATES[from] : sim.kind === 'airfoil' && from === 'flow-state' ? AIRFOIL_STATES : sim.kind === 'port' && sim.port ? PORT_STATES[from] : sim.kind === 'light' && sim.light
         ? lightStates(sim.light, from, sim.controls)
         : sim.kind === 'matter' && sim.matter
         ? matterQuantity(sim.matter, from)?.states
@@ -1359,7 +1375,7 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
               : EMPTYING_STATES[from]
             : undefined;
     if (states && o.kind === 'state') for (const st of states) if (!o.states?.[st]) issue(['outputs', i, 'states'], `"${from}" can be "${st}": give it a label`);
-    if (sim.kind === 'senses' && o.kind === 'state' && kind === 'state') for (const st of Object.keys(o.states ?? {})) if (!(states ?? []).includes(st)) issue(['outputs', i, 'states', st], `unknown state ${st} for ${from}`);
+    if ((sim.kind === 'senses' || sim.kind === 'microscope') && o.kind === 'state' && kind === 'state') for (const st of Object.keys(o.states ?? {})) if (!(states ?? []).includes(st)) issue(['outputs', i, 'states', st], `unknown state ${st} for ${from}`);
     if (sim.kind === 'light' && sim.light && o.kind === 'state' && kind === 'state') {
       const known = lightStates(sim.light, from, sim.controls) ?? [];
       for (const st of Object.keys(o.states ?? {})) if (!known.includes(st)) issue(['outputs', i, 'states', st], `"${from}" is never "${st}" (${known.join(', ')})`);
@@ -1383,10 +1399,23 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
       for (const st of Object.keys(o.states ?? {})) if (!known.includes(st)) issue(['outputs', i, 'states', st], `"${from}" is never "${st}" (${known.join(', ')})`);
     }
   });
+  if (sim.kind === 'microscope' && !sim.microscope) issue(['microscope'], 'a microscope sim requires microscope data');
+  if (sim.microscope) {
+    if (sim.kind !== 'microscope') issue(['microscope'], 'microscope belongs only to kind microscope');
+    microscopeIssues(sim.microscope, controls).forEach(x => issue(['microscope', ...x.path], x.message));
+    if (sim.outputs.length > 6) issue(['outputs'], 'microscope telemetry is limited to six declared outputs');
+    for (const b of sim.bind) if ('part' in b && b.offset && (Array.isArray(b.part) ? b.part : [b.part]).some(id => ctx.contextParts?.has(id) || id === 'scope-stage')) issue(['bind'], 'microscope context and stage cannot translate');
+  }
+  if (sim.kind === 'solar-system' && !sim.solarSystem) issue(['solarSystem'], 'solar-system needs solarSystem configuration');
+  if (sim.solarSystem) {
+    if(sim.kind !== 'solar-system') issue(['solarSystem'], 'solarSystem belongs only to solar-system');
+    for(const key of ['circuit','magnet','force','energy','lifeCycle','matter','light','sort','materials','table','foodWeb','seeds','heat','orbitRotation','senses','airfoil','port'] as const) if(sim[key])issue([key],'solar-system cannot contain another model configuration');
+    solarControlIssues(sim.solarSystem,sim.controls).forEach(x=>issue(x.path,x.message));
+  }
   if (sim.kind === 'senses' && !sim.senses) issue(['senses'], 'a senses sim needs senses');
   if (sim.senses) {
     if (sim.kind !== 'senses') issue(['senses'], 'senses belongs only to kind senses');
-    for (const key of ['circuit','magnet','force','energy','lifeCycle','matter','light','sort','materials','table','seeds','orbitRotation','airfoil'] as const) if (sim[key]) issue([key], 'senses cannot contain another kind configuration');
+    for (const key of ['circuit','magnet','force','energy','lifeCycle','matter','light','sort','materials','table','seeds','heat','port','orbitRotation','airfoil'] as const) if (sim[key]) issue([key], 'senses cannot contain another kind configuration');
     sensesIssues(sim.senses, controls).forEach((x) => issue(['senses', ...x.path], x.message));
   }
   for (const x of airfoilIssues(sim)) issue(x.path, x.message);
@@ -1427,6 +1456,7 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
   const bent = new Set<string>();
   const stretched = new Set<string>();
   const shifted = new Set<string>();
+  const scaled = new Set<string>();
   const hzBound = new Set<string>();
   const paced = { number: new Set<string>(), vector: new Set<string>() };
   const placed = new Set(sim.bind.flatMap((b) => ('part' in b && b.place ? (Array.isArray(b.part) ? b.part : [b.part]) : [])));
@@ -1442,6 +1472,23 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
     const src = b.control ?? b.output!;
     const ctl = b.control ? controls.get(src) : undefined;
     const outp = b.output ? outputs.get(src) : undefined;
+    if (outp?.nullable) issue(['bind',i,'output'], 'nullable quantities are readings only and cannot drive bindings');
+    if (sim.kind === 'senses') {
+      for (const field of ['visible','enabled'] as const) {
+        const condition = field in b ? (b as Record<string, unknown>)[field] as SimCondition | undefined : undefined;
+        if (!condition || condition === true) continue;
+        const comparisons = 'eq' in condition ? [condition.eq] : 'ne' in condition ? [condition.ne] : 'in' in condition ? condition.in : [];
+        for (const value of comparisons) {
+          if (ctl && !legalValue(ctl,value)) issue(['bind',i,field], 'condition must be a legal control value');
+          if (outp && (outp.kind === 'state' ? typeof value !== 'string' || !outp.states?.[value] : outp.kind !== 'number' || typeof value !== 'number' || !Number.isFinite(value))) issue(['bind',i,field], 'condition must match the output type and state');
+        }
+        if (('gte' in condition || 'lte' in condition) && (outp && outp.kind !== 'number' || ctl && ctl.kind !== 'step')) issue(['bind',i,field], 'numeric comparison requires a number');
+      }
+      if (outp && 'pose' in b && b.pose) for (const key of Object.keys(b.pose)) {
+        if (outp.kind === 'state' ? !outp.states?.[key] : outp.kind !== 'number' || !Number.isFinite(Number(key))) issue(['bind',i,'pose',key], 'pose key must match the output type and state');
+      }
+    }
+
     if (b.control && !ctl) issue(['bind', i, 'control'], `unknown control "${src}"`);
     if (b.output && !outp) issue(['bind', i, 'output'], `unknown output "${src}"`);
     if ('joint' in b) {
@@ -1461,6 +1508,7 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
         if (w.output !== undefined && !outputs.has(w.output)) issue(['bind', i, 'when', 'output'], `unknown output "${w.output}"`);
         const c = w.control !== undefined ? controls.get(w.control) : undefined;
         const o = w.output !== undefined ? outputs.get(w.output) : undefined;
+        if (o?.nullable) issue(['bind',i,'when','output'], 'nullable quantities are readings only and cannot drive bindings');
         if (o && o.kind !== 'number' && o.kind !== 'state') issue(['bind', i, 'when'], 'when needs a scalar control or output');
         const vals = w.is === true ? [] : 'eq' in w.is ? [w.is.eq] : 'ne' in w.is ? [w.is.ne] : 'in' in w.is ? w.is.in : [];
         for (const v of vals) {
@@ -1482,6 +1530,11 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
       const ids = Array.isArray(b.part) ? b.part : [b.part];
       for (const id of ids) if (!ctx.parts.has(id)) issue(['bind', i, 'part'], `unknown part "${id}"`);
       for (const pose of Object.values(b.pose ?? {})) if (pose !== null && !ctx.poses.has(pose)) issue(['bind', i, 'pose'], `unknown pose "${pose}"`);
+      if (b.scale) {
+        if (outp && outp.kind !== 'number' || ctl && ctl.kind !== 'step') issue(['bind',i,'scale'],'scale requires a numeric output or step control');
+        if(ctl?.kind==='step' && ctl.values.some(v=>v<0)) issue(['bind',i,'scale'],'scale cannot read negative values');
+        for(const id of ids){if(scaled.has(id))issue(['bind',i,'scale'],`duplicate scale for ${id}`);scaled.add(id);if(sim.bind.some(other=>'part' in other && (Array.isArray(other.part)?other.part:[other.part]).includes(id) && (other.bodyTransform||other.place||other.stretch||other.bend||other.pose||other.span)))issue(['bind',i,'scale'],`scale conflicts with another transform writer for ${id}`);}
+      }
       if (b.fill) {
         if (outp && outp.kind !== 'number' || ctl && ctl.kind !== 'step') issue(['bind', i, 'fill'], 'fill needs a number output or step control');
         for (const id of ids) {
@@ -1506,7 +1559,7 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
         const count = b.count === true ? { per: 1, minus: 0 } : b.count;
         if (copies < Math.max(sim.port && [sim.port.count.n20, sim.port.count.n40].includes(ctl.id) ? 4 : 0, ...ctl.values.map((v) => Math.max(0, Math.round((v - count.minus) / count.per))))) issue(['bind', i, 'count'], `"${id}" has too few repeat copies for the port count control`);
       }
-      if ((b.glow || b.tint || b.count || b.offset || b.rotate || b.fill) && outp && outp.kind !== 'number')
+      if ((b.glow || b.tint || b.count || b.offset || b.rotate || b.fill || b.scale) && outp && outp.kind !== 'number')
         issue(['bind', i], `glow / tint / count / offset / rotate / fill need a number, "${src}" is a ${outp.kind}`);
       if (b.shift) {
         if (!outp || outp.kind !== 'vector') issue(['bind', i, 'shift'], `shift needs a vector output (an offset per part)${outp ? `, "${src}" is a ${outp.kind}` : ''}`);
@@ -1607,7 +1660,7 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
           stateBound.add(id);
         }
       }
-      const fields = ['place', 'visible', 'pose', 'glow', 'tint', 'count', 'offset', 'rotate', 'at', 'state', 'play', 'stretch', 'fill', 'shift', 'bend'].filter(has);
+      const fields = ['scale', 'place', 'visible', 'pose', 'glow', 'tint', 'count', 'offset', 'rotate', 'at', 'state', 'play', 'stretch', 'fill', 'shift', 'bend'].filter(has);
       if (fields.length === 0 && !b.bodyTransform && !b.solarIllumination) issue(['bind', i], 'a part binding needs place, visible, pose, glow, tint, count, offset, rotate, at, state, play, stretch, fill, shift or bend');
     } else if ('flow' in b) {
       if (outp?.kind === 'timeline') issue(['bind', i, 'output'], `"${src}" is a timeline: it moves parts (\`play\`), not flows`);
@@ -1687,12 +1740,28 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
     else if (w.control !== undefined && !controls.has(w.control)) issue([...path, 'when', 'control'], `unknown control "${w.control}"`);
     else if (w.output !== undefined && !outputs.has(w.output)) issue([...path, 'when', 'output'], `unknown output "${w.output}"`);
   };
+  if (sim.overlays.filter(o => o.kind === 'microscope-field').length > 1) issue(['overlays'], 'at most one microscope-field overlay');
   sim.overlays.forEach((o, i) => {
+    if (o.kind === 'microscope-field') {
+      if (sim.kind !== 'microscope' || !sim.microscope) issue(['overlays', i], 'microscope-field requires microscope data');
+      if (o.when.control !== sim.microscope?.controls.enabled || controls.get(o.when.control)?.kind !== 'toggle') issue(['overlays', i, 'when'], 'microscope field condition must reference field-on true');
+      if (ctx.groups && !ctx.groups.has(o.group)) issue(['overlays', i, 'group'], `unknown group ${o.group}`);
+      return;
+    }
+    if (o.kind === 'sound-echo-pulse') {
+      const at = ['overlays',i];
+      if (sim.kind !== 'senses' || sim.senses?.profile !== 'sound-only' || !sim.senses.soundLab) issue(at, 'sound-echo-pulse requires senses sound-only with soundLab');
+      if (ctx.groups && !ctx.groups.has(o.group)) issue([...at,'group'], `unknown group ${o.group}`);
+      if (!o.origin.every(Number.isFinite)) issue([...at,'origin'], 'origin must be finite');
+      if (!o.axis.every(Number.isFinite) || Math.abs(Math.hypot(...o.axis)-1)>1e-9) issue([...at,'axis'], 'axis must be finite and normalised');
+      return;
+    }
     if (o.kind === 'paraxial-eye' || o.kind === 'longitudinal-wave') {
       const at = ['overlays', i];
       if (o.group && ctx.groups && !ctx.groups.has(o.group)) issue([...at, 'group'], `unknown group ${o.group}`);
       if (sim.kind !== 'senses' || !sim.senses) issue(at, 'senses overlays require kind senses and senses data');
       if (o.origin.some((v) => !Number.isFinite(v))) issue([...at, 'origin'], 'origin must be finite');
+      if (o.kind === 'paraxial-eye' && sim.senses?.profile === 'sound-only') issue(at, 'sound-only forbids paraxial-eye overlay');
       if (o.kind === 'paraxial-eye' && o.pointColors?.some((c) => !c.startsWith('token:'))) issue([...at, 'pointColors'], 'object-point colours must be theme tokens (token:<name>), one per object point');
       if (o.kind === 'longitudinal-wave' && (!o.axis.every(Number.isFinite) || Math.abs(Math.hypot(...o.axis) - 1) > 1e-9)) issue([...at, 'axis'], 'axis must be finite and normalised');
       whenIssues(at, o.when);
@@ -1700,6 +1769,7 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
       if (o.when?.output) { const output = outputs.get(o.when.output); if (output && (output.kind === 'state' ? typeof o.when.is !== 'string' || !output.states?.[o.when.is] : output.kind !== 'number' || typeof o.when.is !== 'number' || !Number.isFinite(o.when.is))) issue([...at, 'when', 'is'], 'condition must match the output type and state'); }
       return;
     }
+    if(o.kind==='catalogue-sky'){if(sim.kind!=='solar-system')issue(['overlays',i],'catalogue-sky requires solar-system');if(ctx.groups&&!ctx.groups.has(o.group))issue(['overlays',i,'group'],'unknown group');return;}
     if (o.kind === 'airfoil-pressure') { if (sim.kind !== 'airfoil') issue(['overlays', i], 'airfoil-pressure requires airfoil'); whenIssues(['overlays', i], o.when); if (!ctx.parts.has(o.part) || ctx.groups && !ctx.groups.has(o.group)) issue(['overlays', i], 'unknown pressure part/group'); return; }
     if (o.kind === 'force-vectors') {
       if (o.group !== undefined && ctx.groups && !ctx.groups.has(o.group)) issue(['overlays', i, 'group'], `unknown group "${o.group}"`);
@@ -2337,6 +2407,22 @@ export function chapterSimIssues(where: string, s: { set?: SimValues | undefined
       if (!outputs.has(id)) out.push(`${where}sim.try.observe: unknown output "${id}"`);
       else if (byId.get(id)!.kind === 'timeline') out.push(`${where}sim.try.observe: "${id}" is a timeline (it plays on the stage; observe its numbers)`);
     }
+    if (sim.kind === 'senses') {
+      const froms = t.observe.map(id => byId.get(id)?.from ?? id);
+      const hasEcho = froms.includes('echo-ms');
+      const experiments = new Set(froms.filter(from => !(hasEcho && from === 'propagation-state')).map(sensesExperiment));
+      if (experiments.size > 1) out.push(`${where}sim.try.observe: do not mix senses experiment families`);
+      const family = [...experiments][0];
+      const allowed = family === 'echo' ? ['distance-m'] : family === 'transmission' ? ['medium','distance-m','sound-active'] : family === 'sound' ? ['sound-active','frequency-hz','amplitude'] : family === 'eye-light' ? ['light-in','pupil-mm'] : ['light-in','pupil-mm','object-range','lens-focus'];
+      if ([t.vary,...(t.also ?? [])].some(id => !allowed.includes(id))) out.push(`${where}sim.try.vary: do not change an unobserved workstation`);
+      if (froms.some(from => (SOUND_LAB_NULLABLE as readonly string[]).includes(from)) && !froms.includes('propagation-state')) out.push(`${where}sim.try.observe: nullable sound readings require propagation-state`);
+      const shownControls = [t.vary,...(t.also ?? []),...(t.keep ?? []).filter((k): k is string => typeof k === 'string')];
+      if (froms.includes('speed-mps') && !shownControls.includes('medium')) out.push(`${where}sim.try: speed-mps requires the medium control in vary, also or keep`);
+      if (family === 'echo') {
+        const preset = {...Object.fromEntries(sim.controls.map(c => [c.id,c.default])),...s.set};
+        if (preset.medium !== 'air' || preset['sound-active'] !== true) out.push(`${where}sim.try: echo requires air and an active source`);
+      }
+    }
     if (sim.kind === 'materials') {
       // docs/37 D9: outcomes and the apparatus only, never a material's own numbers.
       const shown = [...t.observe, ...(t.predict ? [t.predict.observe] : [])];
@@ -2387,8 +2473,11 @@ export function chapterSimIssues(where: string, s: { set?: SimValues | undefined
         const observed = new Set(t.observe.map(id => sensesExperiment(byId.get(id)?.from ?? id)));
         const experiment = sensesExperiment(o.from ?? o.id);
         if (!observed.has(experiment)) out.push(`${where}sim.try.predict.observe: predict an experiment this card observes`);
-        const allowed = experiment === 'sound' ? ['sound-active','frequency-hz','amplitude'] : experiment === 'eye-light' ? ['light-in','pupil-mm'] : ['light-in','pupil-mm','object-range','lens-focus'];
+        const echoCard = t.observe.some(id => (byId.get(id)?.from ?? id) === 'echo-ms');
+        const allowed = echoCard || experiment === 'echo' ? ['distance-m'] : experiment === 'transmission' ? ['medium','distance-m','sound-active'] : experiment === 'sound' ? ['sound-active','frequency-hz','amplitude'] : experiment === 'eye-light' ? ['light-in','pupil-mm'] : ['light-in','pupil-mm','object-range','lens-focus'];
         if (Object.keys(t.predict.change).some(id => !allowed.includes(id))) out.push(`${where}sim.try.predict.change: do not change an unobserved workstation`);
+        const preset = {...Object.fromEntries(sim.controls.map(c => [c.id,c.default])),...s.set};
+        if (Object.entries(t.predict.start ?? {}).some(([id,v]) => !allowed.includes(id) && preset[id] !== v)) out.push(`${where}sim.try.predict.start: do not change an unobserved workstation`);
       }
       if (o && sim.table) for (const m of tablePredictIssues(sim.table, o.id, t.predict.change)) out.push(`${where}sim.try.predict.change: ${m}`);
     }

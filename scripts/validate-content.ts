@@ -1,3 +1,5 @@
+import { microscopeSourceIssues } from '../src/engines/space-scene/microscope-schema';
+import { parseStarCatalogue } from '../src/engines/space-scene/lib/sim/solar-sky';
 import { portSourceIssues } from '../src/engines/space-scene/port-schema';
 /**
  * Content validator: `pnpm validate` (also runs before `pnpm build`).
@@ -62,7 +64,7 @@ import { foodWebSourceIssues } from '../src/engines/space-scene/food-web-schema'
 import { tableSourceIssues } from '../src/engines/space-scene/table-schema';
 import { glossaryIds, type GlossaryFile } from '../src/content/schema/glossary';
 import { engineSchemas, formatIssues } from '../src/engines/schemas';
-import { timeChapterLayerIssues, timeSceneTopicIssues, type TimeChapterState, type TimeSceneGeoData } from '../src/engines/time-scene/schema';
+import { timeCatalogueIndexIssues, timeChapterLayerIssues, timeSceneTopicIssues, type TimeChapterState, type TimeSceneGeoData } from '../src/engines/time-scene/schema';
 import { loadDeepTime } from '../src/engines/time-scene/deep-time-build';
 import {
   exercisesFile,
@@ -457,8 +459,11 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
       warn(join(dataDir, 'parts.json'), `views.exerciseBody "wire": model ${model} has no "skin-wire" node, so the engine decimates the skin outline at load (slower, rougher)`);
   }
   const matterFile = topic.engine === 'space-scene' && data ? (data as { parts?: PartsFile }).parts : undefined;
+  if(matterFile?.sim?.solarSystem) for(const overlay of matterFile.sim.overlays) if(overlay.kind==='catalogue-sky'){const path=join(PUBLIC_DIR,'catalogues/solar-system',overlay.catalogue);try{parseStarCatalogue(JSON.parse(readFileSync(path,'utf8')),matterFile.sim.solarSystem.patterns);}catch(e){error(join(dataDir,'parts.json'),`catalogue-sky ${overlay.catalogue}: ${String(e)}`);}}
   if (matterFile?.sim?.port) for (const issue of portSourceIssues(matterFile.sim.port, new Map((sourcesFile?.sources ?? []).map((x) => [x.id, x])))) error(join(dataDir, 'parts.json'), `sim.port.${issue.path.join('.')}: ${issue.message}`);
   // A table model's rows (docs/40 §4.2): every source listed, SIM rows citing the design study, TYPICAL rows another source.
+  if (matterFile?.sim?.microscope) for (const issue of microscopeSourceIssues(matterFile.sim.microscope, new Map((sourcesFile?.sources ?? []).map(x => [x.id, x])))) error(join(dataDir, 'parts.json'), `sim.microscope.${issue.path.join('.')}: ${issue.message}`);
+  for (const [i, overlay] of (matterFile?.sim?.overlays ?? []).entries()) if (overlay.kind === 'sound-echo-pulse') for (const id of overlay.sources) if (!sources?.has(id)) error(join(dataDir,'parts.json'), `sim.overlays.${i}.sources: unknown source ${id}`);
   if (matterFile?.sim?.senses) for (const issue of sensesSourceIssues(matterFile.sim.senses, sources ?? new Set())) error(join(dataDir, 'parts.json'), `sim.senses.${issue.path.join('.')}: ${issue.message}`);
   if (matterFile?.sim?.airfoil) for (const issue of airfoilSourceIssues(matterFile.sim.airfoil, new Map((sourcesFile?.sources ?? []).map(x => [x.id, x])))) error(join(dataDir, 'parts.json'), `sim.airfoil.${issue.path.join('.')}: ${issue.message}`);
   if (matterFile?.sim?.table)
@@ -481,6 +486,11 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
       const file = join(PUBLIC_DIR, 'geo', `${name}.json`);
       return existsSync(file) ? readJson(file) : undefined;
     };
+    for (const layer of topic.datedLayers ?? []) {
+      if (!layer.catalogue) continue;
+      const catalogue = readGeo(layer.catalogue.file) as { entries?: { id: string }[] } | undefined;
+      for (const entry of catalogue?.entries ?? []) if (typeof entry.id === 'string') ids.add(entry.id, 'catalogue feature', join(PUBLIC_DIR, 'geo', `${layer.catalogue.file}.json`));
+    }
     for (const issue of timeSceneTopicIssues(topic, data as TimeSceneGeoData, readGeo)) {
       const file = issue.file.startsWith('public/') ? join(ROOT, issue.file) : join(dir, issue.file);
       (issue.level === 'error' ? error : warn)(file, issue.message);
@@ -572,8 +582,13 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
         if (!ids.has(ref)) error(file, `state references unknown id "${ref}"`);
       }
       for (const issue of schemas.chapterIssues?.(state.data, data) ?? []) error(file, issue);
-      if (topic.engine === 'time-scene' && topic.stage === 'geo')
+      if (topic.engine === 'time-scene' && topic.stage === 'geo') {
         for (const issue of timeChapterLayerIssues(state.data as TimeChapterState, [...(topic.datedLayers ?? []), ...(topic.monthlyLayers ?? []), ...((data as {geography?: {layers:{id:string}[]}})?.geography?.layers ?? []), ...(topic.temporalMode==='geography'?[{id:'geo-countries'},{id:'geo-membership'},{id:'geo-anchors'}]:[])])) error(file, issue);
+        for (const issue of timeCatalogueIndexIssues(state.data as TimeChapterState, topic.datedLayers ?? [], (name) => {
+          const target = join(PUBLIC_DIR, 'geo', `${name}.json`);
+          return existsSync(target) ? JSON.parse(readFileSync(target, 'utf8')) : undefined;
+        })) error(file, issue);
+      }
     }
   }
   if (data !== undefined) {

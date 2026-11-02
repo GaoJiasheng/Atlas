@@ -1,3 +1,6 @@
+import { microscopeIndexBeat } from './lib/microscope-index';
+import { MicroscopeCard } from './hud/MicroscopeField';
+import { microscopeFieldReading } from './lib/sim/microscope';
 /**
  * SpaceScene view: Model3DStage (react-three-fiber, lazy-loaded so the HUD
  * appears before three.js arrives) + the technical-plate HUD content in the
@@ -152,6 +155,8 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
   const file = (data as SpaceSceneData).parts;
   const store = useSceneStore<SpaceSceneExt>();
   // Orbit sims (docs/44 E-SEM1): one clock + physical snapshot per scene, shared by the stage, the HUD and the test API.
+  const solarSnapshots = file.sim?.kind === 'solar-system';
+  useEffect(()=>{if(!solarSnapshots)return;const stop=()=>{if(store.getState().run)store.getState().patch({run:false});};stop();return store.subscribe(stop);},[solarSnapshots,store]);
   const orbitSession = useMemo(() => (file.sim?.orbitRotation ? getOrbitSession(store, file.sim) : null), [store, file.sim]);
   useEffect(() => {
     if (orbitSession) store.getState().patch({ run: false });
@@ -173,6 +178,11 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
     beat: st.beat,
     sim: st.sim,
   }));
+
+  const microscopeOn = file.sim?.microscope && resolveSimValues(file.sim, s.sim)[file.sim.microscope.controls.enabled] === true;
+  useEffect(() => {
+    if (microscopeOn && (s.view !== 'assembled' || s.cutaway !== 'none' || s.explode !== 0)) store.getState().patch({ view: 'assembled', explode: 0, cutaway: 'none' });
+  }, [microscopeOn, s.view, s.cutaway, s.explode, store]);
 
   const bounds = useMemo(() => modelBounds(file.parts), [file.parts]);
   const plane = file.views.section?.plane ?? 'xy';
@@ -293,6 +303,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         sites: [...snap.sites],
         beat: snap.beat,
         sim: { ...snap.sim },
+        sensesFrame: snap.sensesFrame,
         orbitTime: orbitSession?.clock.elapsedSeconds,
         orbit: u.orbit,
         presetId: ref ? ref.presetId : h.presetId,
@@ -305,10 +316,10 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
     saveState: () => entered.current!,
     restoreState: (saved) => {
       ui.setState({ presenting: false, orbit: saved.orbit });
-      const { chapter, layers, camera, view, part, explode, run, cutaway, hidden, pose, ghosted, exercise, tints, sites, beat, sim, orbitTime } = saved;
+      const { chapter, layers, camera, view, part, explode, run, cutaway, hidden, pose, ghosted, exercise, tints, sites, beat, sim, sensesFrame, orbitTime } = saved;
       store
         .getState()
-        .applyState({ chapter, layers, camera, view, part, explode, run, cutaway, hidden, pose, ghosted, exercise, tints, sites, beat, sim, ...(orbitSession ? { orbitTime: orbitTime ?? null } : {}), demo: null }, { instant: false });
+        .applyState({ chapter, layers, camera, view, part, explode, run, cutaway, hidden, pose, ghosted, exercise, tints, sites, beat, sim, sensesFrame, ...(orbitSession ? { orbitTime: orbitTime ?? null } : {}), demo: null }, { instant: false });
       bridge.restoreMechanisms(enteredMechanisms.current);
       hud.setState({ presetId: saved.presetId, cameraFree: saved.cameraFree });
     },
@@ -337,6 +348,12 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
     },
     [showBeat],
   );
+  const selectIndexedPart = useCallback((id: string) => {
+    const st = store.getState(), state = chapters.find(c => c.id === st.chapter)?.state as SpaceChapterState | undefined;
+    const beat = microscopeIndexBeat(state, file, id);
+    if (st.chapter && beat !== null) goToBeat(st.chapter, beat);
+    store.getState().patch({ part: id });
+  }, [store, chapters, file, goToBeat]);
   /** `,` / `.` and the beat line's ‹ ›: one beat back / on, across chapters; in the presentation, its own step. */
   const beatStep = useCallback(
     (direction: 1 | -1) => {
@@ -481,19 +498,19 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
     const cutName = s.cutaway !== 'none' && s.cutaway !== 'half' ? s.cutaway : null;
     const cutStatus = `${t('space.mode.cutaway')} ${cutName ? tx(file.views.cuts?.[cutName]?.label ?? { en: cutName, zh: cutName }, 'en') : '50'}`;
     const modes: SceneMode[] = [
-      { id: 'xray', key: 'x', label: t('space.mode.xray'), disabled: !!orbitSession, on: s.view === 'xray', tone: 'xray' },
+      { id: 'xray', key: 'x', label: t('space.mode.xray'), disabled: !!orbitSession || !!microscopeOn, on: s.view === 'xray', tone: 'xray' },
       {
         id: 'exploded',
         key: 'e',
         // A topic may name it (PEEL / 剥层 for staged muscle layers).
         label: file.views.explodeLabel ? tx(file.views.explodeLabel, locale) : t('space.mode.exploded'),
         on: s.view === 'exploded',
-        disabled: inReference || !!orbitSession,
+        disabled: inReference || !!orbitSession || !!microscopeOn,
         status: `${file.views.explodeLabel ? tx(file.views.explodeLabel, 'en').toUpperCase() : t('space.state.explode')} ${pct}`,
       },
-      { id: 'cutaway', key: 'c', label: t('space.mode.cutaway'), disabled: !!orbitSession, on: s.cutaway !== 'none', tone: 'cut', status: cutStatus },
+      { id: 'cutaway', key: 'c', label: t('space.mode.cutaway'), disabled: !!orbitSession || !!microscopeOn, on: s.cutaway !== 'none', tone: 'cut', status: cutStatus },
       // Flow paths do not follow the parts apart (docs/12 §7.5): no FLOW while exploded.
-      { id: 'flow', key: 'f', label: t('space.mode.flow'), on: s.run, tone: 'hot', disabled: inReference || exploded || (!!orbitSession && orbitIsStill(orbitSession)) },
+      { id: 'flow', key: 'f', label: t('space.mode.flow'), on: s.run, tone: 'hot', disabled: solarSnapshots || inReference || exploded || (!!orbitSession && orbitIsStill(orbitSession)) },
       { id: 'reference', key: 'r', label: t('space.mode.reference'), on: inReference, tone: 'ink', disabled: presenting, phone: false },
       { id: 'presentation', key: 'p', label: t('present.mode'), on: presenting, tone: 'signal', status: presentationStatus, phone: false },
     ];
@@ -551,7 +568,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       pause: {
         paused: !s.run,
         set: (paused) => {
-          if (!ui.getState().reference && !(orbitSession && orbitIsStill(orbitSession))) set({ run: !paused });
+          if (!solarSnapshots && !ui.getState().reference && !(orbitSession && orbitIsStill(orbitSession))) set({ run: !paused });
         },
       },
       stats: () => {
@@ -646,10 +663,14 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
             ...(sim.table ? { sources: Object.fromEntries(Object.entries(tableSources(sim.table, values)).filter(([id]) => sim.outputs.find((o) => o.id === id)?.tag === 'typical')) } : {}),
           };
         },
+        microscopeField: () => file.sim?.microscope ? microscopeFieldReading(file.sim.microscope, resolveSimValues(file.sim, store.getState().sim)) : null,
+        solarSystem: () => file.sim?.solarSystem ? {sky:bridge.solarSky??{status:'loading'},outputs:evaluateSimOnStage(file.sim,file,resolveSimValues(file.sim,store.getState().sim),store.getState().pose).outputs,scales:Object.fromEntries(bridge.scales)} : null,
+        scale: (id:string) => bridge.scales.get(id) ?? null,
         senses: () => bridge.senses,
         /** The measured free HUD band the hudFrame camera fits into (stage CSS px), or null. */
         freeStage: () => (bridge.freeStage ? { ...bridge.freeStage } : null),
         sensesSeek: (cycles: number) => bridge.sensesSeek(cycles),
+        sensesEchoSeek: (u: number) => bridge.sensesEchoSeek(u),
         joint: (id: string) => { const j = bridge.joints.get(id); return j ? structuredClone(j) : null; },
         ...(file.sim?.airfoil ? airfoilApi(file,store,ui,bridge,chapters) : {}),
         shadows: () => Object.fromEntries(bridge.shadows),
@@ -842,7 +863,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         {file.sim?.kind === 'senses' && <SensesStageLabel file={file} bridge={bridge} />}
         <EnergyBarLabels file={file} bridge={bridge} />
       </SceneSlot>
-      <SceneSlot name="card">{file.sim?.foodWeb ? <FoodWebCard file={file} /> : orbitSession ? <OrbitCard file={file} /> : file.sim?.sort ? <KeyCard file={file} /> : file.sim?.lifeCycle ? <CycleCard file={file} /> : file.sim?.energy ? <EnergyCard file={file} /> : file.sim?.circuit?.diagram ? <CircuitCard file={file} /> : <PartChainCard file={file} />}</SceneSlot>
+      <SceneSlot name="card">{file.sim?.microscope ? <MicroscopeCard file={file} /> : file.sim?.foodWeb ? <FoodWebCard file={file} /> : orbitSession ? <OrbitCard file={file} /> : file.sim?.sort ? <KeyCard file={file} /> : file.sim?.lifeCycle ? <CycleCard file={file} /> : file.sim?.energy ? <EnergyCard file={file} /> : file.sim?.circuit?.diagram ? <CircuitCard file={file} /> : <PartChainCard file={file} />}</SceneSlot>
       <SceneSlot name="plate">
         <PlateBlock file={file} ui={ui} bridge={bridge} />
       </SceneSlot>
@@ -876,7 +897,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         <Inspector file={file} fitness={fitness} training={training} />
       </SceneSlot>
       <SceneSlot name="readerEnd">
-        <ChapterIndex index={(here?.state as SpaceChapterState | undefined)?.index} file={file} fitness={fitness} training={training} />
+        <ChapterIndex index={(here?.state as SpaceChapterState | undefined)?.index} file={file} fitness={fitness} training={training} onSelectPart={file.sim?.microscope ? selectIndexedPart : undefined} />
       </SceneSlot>
     </>
   );

@@ -200,6 +200,7 @@ export interface PartNodeProps {
   airfoilSnap?: boolean;
   /** Try-it timeline channels the part plays (moves and turns). */
   play?: readonly SimPlay[] | null;
+  simScale?: number;
   /** Try-it stretch of the part's coil. */
   stretch?: SimStretch | null;
   /** Try-it bend of the part's strip (its main primitive, cut into slabs along the axis: shapes.ts). */
@@ -364,7 +365,7 @@ export function PartNode(props: PartNodeProps) {
     fillMotion.current.drawn = NaN;
     return () => fillGeometry?.dispose();
   }, [fillGeometry]);
-  useEffect(() => () => { props.fillBridge?.fills.delete(part.id); props.fillBridge?.shifts.delete(part.id); props.fillBridge?.copies.delete(part.id); props.fillBridge?.tints.delete(part.id); }, [props.fillBridge, part.id]);
+  useEffect(() => () => { props.fillBridge?.fills.delete(part.id); props.fillBridge?.shifts.delete(part.id); props.fillBridge?.scales.delete(part.id); props.fillBridge?.copies.delete(part.id); props.fillBridge?.tints.delete(part.id); }, [props.fillBridge, part.id]);
   useEffect(() => {
     if (!fillShape || !fillGeometry || !props.fillBridge || !props.fill) return;
     const binding = props.fill;
@@ -447,6 +448,7 @@ export function PartNode(props: PartNodeProps) {
     bendLength: 0,
     /** The played moves and turns last frame (a change asks the labels and shadows to look again). */
     playKey: '',
+    scalar: 1,
     /** Turning speed of a swinging (`settle`) turn, degrees per second. */
     turnV: 0,
     /** Per animation: its integrated angle (a sim-driven rotate) and how far it is switched on. */
@@ -885,6 +887,9 @@ export function PartNode(props: PartNodeProps) {
         aboutPivot(pr.matrix, tmpTurn.makeRotationAxis(tmpV.set(sm.axis[0], sm.axis[1], sm.axis[2]), m.turn * DEG2RAD), c);
       }
       pr.matrix.multiply(tmpPose);
+      const scalar = props.simScale ?? 1;
+      if (m.scalar !== scalar) { m.scalar = scalar; moving = true; }
+      pr.matrix.scale(tmpV.setScalar(scalar));
       const place = sm?.place;
       if (place) {
         if (m.placeTarget !== place) {
@@ -1001,6 +1006,21 @@ export function PartNode(props: PartNodeProps) {
           }
         }
       }
+      if (props.simScale !== undefined && props.fillBridge) {
+        const e = pr.matrix.elements;
+        let reading = props.fillBridge.scales.get(part.id);
+        if (!reading) { reading = { target: props.simScale, actual: [1, 1, 1] }; props.fillBridge.scales.set(part.id, reading); }
+        reading.target = props.simScale;
+        reading.actual[0] = Math.hypot(e[0]!, e[1]!, e[2]!);
+        reading.actual[1] = Math.hypot(e[4]!, e[5]!, e[6]!);
+        reading.actual[2] = Math.hypot(e[8]!, e[9]!, e[10]!);
+        const k = props.simScale;
+        const h = props.anchorHalf;
+        handle.half[0] = Math.abs(e[0]!) * h[0] + Math.abs(e[4]!) * h[1] + Math.abs(e[8]!) * h[2];
+        handle.half[1] = Math.abs(e[1]!) * h[0] + Math.abs(e[5]!) * h[1] + Math.abs(e[9]!) * h[2];
+        handle.half[2] = Math.abs(e[2]!) * h[0] + Math.abs(e[6]!) * h[1] + Math.abs(e[10]!) * h[2];
+        handle.radius = props.anchorRadius * k;
+      }
       pr.matrixWorldNeedsUpdate = true;
       // The label anchor follows the pose.
       const move = (rest: readonly number[], out: Vec3) => {
@@ -1040,15 +1060,16 @@ export function PartNode(props: PartNodeProps) {
         // Try-it: an animation switched off eases out; a rotate with a bound speed integrates its own angle.
         const sim = props.animSim?.get(a.id);
         const onTarget = sim?.enabled === false ? 0 : 1;
-        m.on[i] = snap ? onTarget : damp(m.on[i] ?? 1, onTarget, 6, dt);
+        const acoustic = runtime.sound.markerIds.has(a.id);
+        m.on[i] = snap || acoustic ? onTarget : damp(m.on[i] ?? 1, onTarget, 6, dt);
         if (Math.abs(m.on[i]! - onTarget) < 0.003) m.on[i] = onTarget;
         else moving = true;
         const always = !a.whenRun;
-        if ((!always && runtime.energy === 0) || m.on[i] === 0) return;
+        if ((!always && runtime.energy === 0 && !acoustic) || m.on[i] === 0) return;
         // Paced by an `hz` binding (lib/sim/hz.ts): its own integrated phase, as the animation's own time.
         const paced = runtime.clocks.get(a.id);
         const t = paced?.paced ? clockTime(a, paced.cycles) : always ? runtime.elapsed : runtime.phase;
-        const k = (always ? 1 : runtime.energy) * m.on[i]!;
+        const k = (always || acoustic ? 1 : runtime.energy) * m.on[i]!;
         if (a.kind === 'rotate' && sim?.rpm !== undefined) {
           m.angle[i] = (m.angle[i]! + dt * k * (sim.rpm / 60) * 2 * Math.PI) % (2 * Math.PI);
           aboutPivot(anim.matrix, tmpM.makeRotationFromQuaternion(tmpQ.setFromAxisAngle(axes[i]!, m.angle[i]!)), pivots[i]!);
@@ -1094,11 +1115,11 @@ export function PartNode(props: PartNodeProps) {
       props.animations.forEach((a, i) => {
         if (!isEach(a)) return;
         const always = !a.whenRun;
-        if (!always && runtime.energy === 0) return;
+        if (!always && runtime.energy === 0 && !runtime.sound.markerIds.has(a.id)) return;
         // Paced by an `hz` binding (lib/sim/hz.ts): its own integrated phase, as the animation's own time.
         const paced = runtime.clocks.get(a.id);
         const t = paced?.paced ? clockTime(a, paced.cycles) : always ? runtime.elapsed : runtime.phase;
-        const k = always ? 1 : runtime.energy;
+        const k = always || runtime.sound.markerIds.has(a.id) ? 1 : runtime.energy;
         if (a.kind === 'pulse') {
           animationScale3(a, t, k, tmpS3);
           tmpEach.multiply(tmpM.makeScale(tmpS3[0], tmpS3[1], tmpS3[2]));
