@@ -269,10 +269,12 @@ test.describe('steam-engine shared rigid frame', () => {
         const right=normalize([-forward[2]!,0,forward[0]!]);
         const up=[right[1]!*forward[2]!-right[2]!*forward[1]!,right[2]!*forward[0]!-right[0]!*forward[2]!,right[0]!*forward[1]!-right[1]!*forward[0]!];
         const dot=(a:number[],b:number[])=>a.reduce((sum,n,i)=>sum+n*b[i]!,0),focal=H/2/Math.tan(camera.fov*Math.PI/360);
+        // The HUD framing's view offset (docs/67 §9) moves the image by this share of the stage (+ right / up).
+        const [sx,sy]=(e as unknown as {framing():{shift:[number,number]}|null}).framing()?.shift ?? [0,0];
         return Math.max(...Object.entries(points).map(([id,p])=>{
           const a=e.anchor(id);if(!a?.shown)return Infinity;
           const v=p.map((n,i)=>n-eye[i]!),depth=dot(v,forward);
-          return Math.hypot(a.x-(W/2+dot(v,right)*focal/depth),a.y-(H/2-dot(v,up)*focal/depth));
+          return Math.hypot(a.x-(W/2+sx*W+dot(v,right)*focal/depth),a.y-(H/2-sy*H-dot(v,up)*focal/depth));
         }));
       },centres)).toBeLessThan(1);
     }
