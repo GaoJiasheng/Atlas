@@ -483,6 +483,14 @@ lib/region.ts lib/rivers.ts lib/holders.ts lib/dated.ts lib/localLand.ts   纯�
 colors.ts  time-scene.css
 ```
 
+### HUD 自由区取景（TimeScene，2026-10-29）
+
+`topic.yaml` 可写 `hudFrame: true`（只允许 `engine: time-scene` + `stage: geo`）。默认关闭；仅 `sample-time` 回归夹具启用，其他主题数据和镜头保持原行为。1600×900 及更宽的 HUD 左右列仍略不对称，尚不能保证既有广角构图都受益，因此不全局开启；SpaceScene 仍用既有 `views.hudFrame` opt-in。
+
+历史地图、深时重建、月气候 / 现今地理的预设、正文 `<FlyTo>`、章 / 拍镜头共用 `lib/hud-framing.ts`。按地图容器的 CSS 像素量可见 `data-hud-panel`：overlay 量实际子卡，忽略 perf 和隐藏块；桌面 reader 已在画布外，不重复扣宽度。自由矩形复用 `core/hud-framing.ts`（SpaceScene 原算法、12 px 间隔，竖屏宽高比 < 0.8 仅限上下横带）。设左右遮挡量为 L/R、上下为 T/B，MapLibre padding = `{left:max(0,L−R), right:max(0,R−L), top:max(0,T−B), bottom:max(0,B−T)}`；目标落在自由矩形中心，**矩形居中时四边严格为 0**。不改作者的经纬度 / zoom / pitch / bearing；内建 WHOLE AREA / 区域图版的 `cameraForBounds` 会按 MapLibre 的持久 padding 计算可用尺寸，拟合 zoom 可随之改变。空 / 无效矩形退回 0，不另加 HUD 或改布局。
+
+尺寸、卡片 / reader / 轴折叠、字体和 HUD 状态变化会重新测量；H 清掉 padding，演示只避让 `present*` 面板。布局重排只改 padding、保留当前地理目标，飞行或手势中延迟到落定再更新，不抢回自由相机。padding 不进 store / URL；MapLibre `getCenter()` 保持目标语义，拖动后写回与既有逻辑相同。现代证据小图不受影响。单测 `tests/time-scene/hud-framing.test.ts` 覆盖 1024 窄桌面画布、宽屏居中、双轴、抽屉、无效矩形及观察器 / 飞行生命周期；schema 拒绝跨引擎启用。全部 TimeScene 主题走 `pnpm validate`；本次 sandbox 按任务要求跳过 `pnpm shoot` / `pnpm e2e`，由主会话在 1024×768、1600×900 及更宽、reader / card 折叠、H / 演示切换和区域 maxBounds 场景验收。
+
 ### 月气候模式（E-MW1–3，docs/50 §4）
 
 `temporalMode: climatology` 是 TimeScene/geo 的显式分支。历史主题缺省 `chronological`，继续使用日期、控制区、playhead 与 Timeline。月份不转换成年份，不经过日期模型。作者最小配置（这些是实际可用 JSON 字段）：

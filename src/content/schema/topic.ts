@@ -206,6 +206,8 @@ export const topicSchema = z
     blocLabels: blocLabels.optional(),
     /** TimeScene: island- / city-scale basemap (`{ local: land-sg, maxZoom: 13 }`) or a regional plate (`{ region: { bounds, land, rivers } }`). */
     basemap: basemapOptions.optional(),
+    /** TimeScene/geo: centre authored camera targets in the measured free HUD rectangle. */
+    hudFrame: z.boolean().optional(),
     modernInset: modernInsetConfigSchema.optional(),
     maDigits: z.union([z.literal(0), z.literal(1), z.literal(2), z.literal(3)]).optional(),
     /** TimeScene GeoStage: dated GPU overlays from public/geo/<file>.json. */
@@ -237,6 +239,8 @@ export const topicSchema = z
   })
   .strict()
   .superRefine((topic, ctx) => {
+    if (topic.hudFrame !== undefined && (topic.engine !== 'time-scene' || topic.stage !== 'geo'))
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['hudFrame'], message: '`hudFrame` requires time-scene with stage: geo' });
     if (topic.timePresentation !== undefined && (topic.engine !== 'time-scene' || topic.stage !== 'geo'))
       ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['timePresentation'], message: '`timePresentation` requires time-scene with stage: geo' });
     if (topic.timePresentation !== undefined && topic.temporalMode === 'climatology')

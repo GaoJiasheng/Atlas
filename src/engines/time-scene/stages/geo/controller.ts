@@ -29,6 +29,7 @@ import { feature as topoFeature } from 'topojson-client';
 import type { SceneStore } from '../../../core/store';
 import type { GeoCamera, Locale } from '../../../core/types';
 import { isGeoCamera } from '../../../core/camera';
+import { createMapHudFraming } from '../../lib/hud-framing';
 import { readThemeTokens, resolveColorRef, type ThemeTokens } from '../../../../theme/theme';
 import { t as translate, tx, withBase } from '../../../../i18n';
 import type { TimeSceneExt } from '../../index';
@@ -72,6 +73,8 @@ export interface GeoControllerOptions {
   blocLabels?: BlocLabels;
   /** The topic's island-scale land or regional plate (`topic.basemap`), and its `maxZoom`. */
   basemap?: BasemapOptions;
+  /** Opt-in target framing in the measured free HUD rectangle. */
+  hudFrame?: boolean;
   /** The topic's wording for entity dates (`topic.strings`); the UI strings when absent. */
   strings?: EntityStrings;
   /** Optional static point, line or area sources with numeric year windows. */
@@ -233,6 +236,8 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   map.touchZoomRotate.disableRotation();
 
   const disposers: (() => void)[] = [];
+  const hudFraming = createMapHudFraming(map, container, options.hudFrame);
+  disposers.push(() => hudFraming.destroy());
   let loaded = false;
   let destroyed = false;
 
@@ -1233,7 +1238,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
 
   /* ---------- camera ---------- */
   const applyCamera = (camera: GeoCamera, instant: boolean) => {
-    const target = { center: camera.center, zoom: camera.zoom, pitch: camera.pitch ?? 0, bearing: camera.bearing ?? 0 };
+    const target = { center: camera.center, zoom: camera.zoom, pitch: camera.pitch ?? 0, bearing: camera.bearing ?? 0, padding: hudFraming.padding() };
     if (instant || reducedMotion) map.jumpTo(target);
     else map.flyTo({ ...target, duration: FLY_MS, essential: true });
   };
@@ -1370,6 +1375,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     setPresentation(on) {
       if (on === presenting) return;
       presenting = on;
+      hudFraming.setPresentation(on);
       requestRender();
       updateLabels();
       // Placards are a little larger on the presentation stage: measure them again.

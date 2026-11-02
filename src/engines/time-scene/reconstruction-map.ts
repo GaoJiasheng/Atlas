@@ -3,6 +3,7 @@ import { Map as MlMap, type GeoJSONSource } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import type { GeoCamera } from '../core/types';
 import { isGeoCamera } from '../core/camera';
+import { createMapHudFraming } from './lib/hud-framing';
 import { readThemeTokens } from '../../theme/theme';
 import { withBase } from '../../i18n';
 import type { GeoController, GeoControllerOptions } from './stages/geo/controller';
@@ -54,6 +55,7 @@ export function createReconstructionMap(options: GeoControllerOptions, manifest:
     fadeDuration: 0,
   });
   map.touchZoomRotate.disableRotation();
+  const hudFraming = createMapHudFraming(map, options.container, options.hudFrame);
   map.on('error', (e) => console.warn('[atlas] map:', e.error?.message ?? e));
   // As the historical map: clicking the map must not steal keyboard focus (the stage is `data-keys="own"`).
   const canvas = map.getCanvas();
@@ -102,7 +104,7 @@ export function createReconstructionMap(options: GeoControllerOptions, manifest:
   });
   const selectedMa = () => -playhead.get() / 1e6;
   const applyCamera = (next: GeoCamera, instant: boolean) => {
-    const target = { center: next.center, zoom: Math.min(RECONSTRUCTION_MAX_ZOOM, next.zoom), bearing: next.bearing ?? 0, pitch: next.pitch ?? 0 };
+    const target = { center: next.center, zoom: Math.min(RECONSTRUCTION_MAX_ZOOM, next.zoom), bearing: next.bearing ?? 0, pitch: next.pitch ?? 0, padding: hudFraming.padding() };
     if (instant || reducedMotion) map.jumpTo(target);
     else map.flyTo({ ...target, duration: 2200, essential: true });
   };
@@ -133,6 +135,8 @@ export function createReconstructionMap(options: GeoControllerOptions, manifest:
     loaded = true;
     applyTheme();
     map.setLayoutProperty(RECONSTRUCTION_GRATICULE, 'visibility', graticuleOn ? 'visible' : 'none');
+    const state = store.getState();
+    if (options.hudFrame && isGeoCamera(state.camera)) applyCamera(state.camera, true);
     void frames.select(selectedMa());
   });
   map.on('wheel', () => { gesture = true; });
@@ -153,7 +157,8 @@ export function createReconstructionMap(options: GeoControllerOptions, manifest:
     }, 250);
   });
   return {
-    setLocale() {}, setLeadersSvg() {}, setTerritory() {}, setReference() {}, setPresentation() {}, refreshLabels() {},
+    setLocale() {}, setLeadersSvg() {}, setTerritory() {}, setReference() {},
+    setPresentation: (on) => hudFraming.setPresentation(on), refreshLabels() {},
     setGraticule(on) {
       graticuleOn = on;
       if (loaded) map.setLayoutProperty(RECONSTRUCTION_GRATICULE, 'visibility', on ? 'visible' : 'none');
@@ -166,6 +171,7 @@ export function createReconstructionMap(options: GeoControllerOptions, manifest:
       destroyed = true;
       sourceGeneration++;
       frames.destroy();
+      hudFraming.destroy();
       unStore(); unPlayhead(); observer.disconnect(); resizeObserver.disconnect();
       options.container.removeEventListener('pointerdown', onPointerDown, true);
       canvas.removeEventListener('focus', onCanvasFocus);

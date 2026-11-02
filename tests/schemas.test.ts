@@ -298,6 +298,17 @@ describe('aircon topic', () => {
 });
 
 describe('topic schema', () => {
+  it('accepts explicit HUD framing only on TimeScene geo topics', () => {
+    const raw = parseYaml(readFileSync(join(TOPICS, 'sample-time/topic.yaml'), 'utf8')) as Record<string, unknown>;
+    const { hudFrame: _hudFrame, ...unopted } = raw;
+    expect(topicSchema.parse(unopted).hudFrame).toBeUndefined();
+    expect(topicSchema.parse({ ...unopted, hudFrame: true }).hudFrame).toBe(true);
+    expect(topicSchema.parse({ ...unopted, hudFrame: false }).hudFrame).toBe(false);
+    expect(topicSchema.safeParse({ ...unopted, hudFrame: 'true' }).success).toBe(false);
+    expect(topicSchema.safeParse({ ...unopted, stage: 'diagram', hudFrame: true }).success).toBe(false);
+    expect(topicSchema.safeParse({ ...unopted, engine: 'space-scene', stage: 'model3d', hudFrame: true }).success).toBe(false);
+  });
+
   it('rejects a stage the engine does not have', () => {
     const raw = parseYaml(readFileSync(join(TOPICS, 'sample-time/topic.yaml'), 'utf8')) as Record<string, unknown>;
     expect(topicSchema.safeParse({ ...raw, stage: 'model3d' }).success).toBe(false);

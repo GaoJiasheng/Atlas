@@ -10,6 +10,7 @@ moe:
 mode: time
 engine: time-scene
 stage: geo
+hudFrame: true
 theme: paper
 sensitivity: guarded
 status: draft

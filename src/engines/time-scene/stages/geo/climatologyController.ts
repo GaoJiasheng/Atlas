@@ -8,6 +8,7 @@ import { withBase, tx } from '../../../../i18n';
 import { readThemeTokens } from '../../../../theme/theme';
 import { sourceIds } from '../../../../content/schema/sources';
 import { isGeoCamera } from '../../../core/camera';
+import { createMapHudFraming } from '../../lib/hud-framing';
 import { metresPerPixel, scaleBar } from '../../lib/geo';
 import { sampleClimate, windGlyphs } from '../../lib/climate';
 import { ClimateLoader } from '../../lib/climateLoader';
@@ -58,6 +59,7 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
     attributionControl: false,
     renderWorldCopies: false,
   });
+  const hudFraming = createMapHudFraming(map, container, topic.hudFrame);
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   svg.setAttribute('aria-hidden', 'true');
   Object.assign(svg.style, {
@@ -351,6 +353,7 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
       appliedTransition = state.transition.id;
       userGesture = false;
       const c = state.camera;
+      const padding = hudFraming.padding();
       map.stop();
       if (state.transition.instant || reducedMotion)
         map.jumpTo({
@@ -358,6 +361,7 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
           zoom: c.zoom,
           bearing: c.bearing ?? 0,
           pitch: c.pitch ?? 0,
+          padding,
         });
       else
         map.flyTo({
@@ -365,6 +369,7 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
           zoom: c.zoom,
           bearing: c.bearing ?? 0,
           pitch: c.pitch ?? 0,
+          padding,
           duration: 1600,
         });
     }
@@ -556,6 +561,7 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
     setReference() {},
     setPresentation(on) {
       presentation = on;
+      hudFraming.setPresentation(on);
     },
     refreshLabels: requestRender,
     fitCamera() {
@@ -591,6 +597,7 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
       unsubscribe();
       observer.disconnect();
       resizeObserver.disconnect();
+      hudFraming.destroy();
       container.removeEventListener('pointerdown', onPointerDown, true);
       canvas.removeEventListener('focus', onCanvasFocus);
       leaders.destroy();
