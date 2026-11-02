@@ -40,7 +40,8 @@ export function MathOverlay({ glossary, compact = false }: { glossary: boolean; 
     </div>
   );
   return (
-    <div className="ms-overlay-panel" data-hud-panel="math-overlay" data-folded={open ? undefined : ''}>
+    // The host's `overlay` slot is the HUD block (stage layout, layout checks): a second block here would count twice.
+    <div className="ms-overlay-panel" data-folded={open ? undefined : ''}>
       {compact && <FoldHeader className="ms-overlay__toggle" title={t(locale, 'math.toolsAndKey')} open={open} controls={bodyId} onToggle={() => actions.setLegends(!open)} />}
       {panel}
     </div>

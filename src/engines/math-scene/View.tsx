@@ -572,6 +572,7 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
       </svg>
       {equation && !showSummary && L.free.w > 0 && (
         <FoldPanel
+          key={`${s.chapter}|${cur.beat}|${equation}`}
           panel="equation"
           title={tx({ en: 'Equation', zh: '算式' }, locale)}
           className="ms-equation-panel"
@@ -579,7 +580,6 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
           style={{ left: eqBoxX, width: eqBoxW, top: eqTop }}
         >
           <p
-            key={`${s.chapter}|${cur.beat}|${equation}`}
             className="ms-equation"
             data-wrap={eqWrap || undefined}
             style={{ height: EQUATION_H, ['--eq-scale' as string]: eqScale }}

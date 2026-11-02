@@ -68,7 +68,8 @@ for (const locale of ['en', 'zh'] as const) {
       autoFold(f);
       const node = createElement(ExplorerOverlay, { file });
       let html = f.render(node);
-      expect(html).toContain('data-hud-panel="space-overlay" data-folded=""');
+      expect(html).toContain('class="atlas-overlay-card space-overlay" data-folded=""');
+      expect(html).not.toContain('data-hud-panel="space-overlay"');
       expect(html).toContain('class="atlas-ctl__rows" hidden=""');
       expect(html).toContain('<ul hidden="">');
       expect(html).toContain('<div hidden=""><div class="space-bar">');
@@ -113,7 +114,8 @@ for (const locale of ['en', 'zh'] as const) {
       autoFold(f);
       const node = createElement(MathOverlay, { glossary: false, compact });
       let html = f.render(node);
-      expect(html).toContain('data-hud-panel="math-overlay" data-folded=""');
+      expect(html).toContain('class="ms-overlay-panel" data-folded=""');
+      expect(html).not.toContain('data-hud-panel="math-overlay"');
       expect(headers.every((h) => !h.open)).toBe(true);
       if (compact) expect(html).toMatch(/class="atlas-overlay-card ms-overlay" hidden=""/);
       headers[0]!.onToggle();
@@ -140,13 +142,11 @@ for (const locale of ['en', 'zh'] as const) {
       expect(html).not.toContain('hidden=""');
     });
 
-    it.each(['equation', 'task', 'net-tools'])('%s retains its named reopen header through stage-only and restore', (panel) => {
+    it.each(['equation', 'net-tools'])('%s retains its named reopen header through stage-only and restore', (panel) => {
       const f = fixture(locale);
       const node = panel === 'equation'
         ? createElement(FoldPanel, { panel, title: 'Equation', className: 'ms-equation-panel', children: '1 + 1 = 2' })
-        : panel === 'task'
-          ? createElement(Tray, { ctl, task, run: freshRun(task), where: '01', practice: false, locale })
-          : createElement(NetTools, { fold: 50, onFold() {}, foldable: true, onTurn() {}, style: {}, locale });
+        : createElement(NetTools, { fold: 50, onFold() {}, foldable: true, onTurn() {}, style: {}, locale });
       f.actions.setStageOnly(true);
       let html = f.render(node);
       expect(html).toContain(`data-hud-panel="${panel}" data-folded=""`);
@@ -166,6 +166,19 @@ for (const locale of ['en', 'zh'] as const) {
       f.actions.setStageOnly(true);
       f.actions.setStageOnly(false);
       expect(f.render(node)).toContain('aria-expanded="false"');
+    });
+
+    it.each(['solver', 'stage-only'] as const)('the check task is lesson work, never a HUD fold (%s)', (how) => {
+      const f = fixture(locale);
+      if (how === 'solver') autoFold(f);
+      else f.actions.setStageOnly(true);
+      expect(f.hud.getState().legendsOpen).toBe(false);
+      const html = f.render(createElement(Tray, { ctl, task, run: freshRun(task), where: '01', practice: false, locale }));
+      expect(html).toContain('data-hud-panel="task"');
+      expect(html).not.toContain('data-folded');
+      expect(html).not.toContain('hidden=""');
+      expect(headers).toHaveLength(0);
+      expect(html).toContain('data-command="check"');
     });
 
     it('presentation tasks remain usable when the HUD legends are folded', () => {

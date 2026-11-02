@@ -39,7 +39,6 @@ import { hasMeasureControls, MeasureModelControls } from './MeasureControls';
 import { isMeasureTask } from '../lib/measure-kind';
 import { NetModelControls } from './NetControls';
 import { optionText } from '../lib/net-description';
-import { FoldPanel } from '../hud/FoldPanel';
 
 export interface TrayProps {
   ctl: Controller;
@@ -84,86 +83,84 @@ export function Tray(p: TrayProps) {
   const ready = !locked && answered(task, run.state);
   const spec = inputSpecOf(task);
   return (
-    <FoldPanel panel="task" title={T('math.tray.label')} className="ms-task-panel" compact={p.compact}>
-      <div ref={rootRef} className="ms-tray" data-compact={p.compact || undefined} onKeyDown={onKey} role="group" aria-label={T('math.tray.label')}>
-        {!p.captioned && (
-          <div className="ms-tray__head">
-            {p.where && <span className="ms-tray__where">{p.where}</span>}
-            <p className="ms-tray__prompt">{renderRich(tx(task.prompt, locale), locale)}</p>
-          </div>
-        )}
-        <Controls {...p} phase={phase} locked={locked} />
-        <p className="ms-tray__feedback" aria-live="polite" data-tone={fb?.tone} data-empty={fb ? undefined : ''}>
-          {fb && (
-            <>
-              <i aria-hidden="true">{fb.tone === 'correct' || fb.tone === 'phase' ? '✓' : fb.tone === 'hint' ? 'i' : '○'}</i>
-              <span>{renderRich(tx(fb.text, locale), locale)}</span>
-            </>
-          )}
-        </p>
-        {run.revealed && spec && (
-          <span className="ms-tray__answer">
-            {T('math.tray.answer')}{' '}
-            {task.model.kind === 'grid'
-              ? gridAnswerText(task, locale)
-              : isMeasureTask(task)
-                ? renderRich(answerTokens(task), locale, { line: true })
-                : spec.form === 'decimal'
-                ? renderRich(decimalAnswerLine(task, locale), locale, { line: true })
-                : usesValueBoxes(task, spec)
-                  ? renderRich(answerTokens(task), locale, { line: true })
-                  : renderRich(answersOf(spec).map((f) => `{${f.w ? `${f.w} ` : ''}${f.n}/${f.d}}`).join(' = '), locale)}
-          </span>
-        )}
-        {run.revealed && !p.practice && run.feedback?.tone !== 'reveal' && <p className="ms-tray__why">{renderRich(tx(task.feedback.reveal, locale), locale)}</p>}
-        {run.attempts.length > 0 && (
-          <p className="ms-attempts">
-            <b>{T('math.check.attempts')}</b>
-            {run.attempts.map((a, i) => (
-              <span key={i} data-tone={a.tone}>
-                <i aria-hidden="true">{a.tone === 'correct' || a.tone === 'phase' ? '✓' : '○'}</i> {a.label}
-              </span>
-            ))}
-          </p>
-        )}
-        <div className="ms-tray__actions">
-          <button type="button" className="ms-btn ms-btn--ghost" data-command="hint" disabled={!ctl.canHint()} title={`${T('math.cmd.hint')} (I)`} onClick={() => ctl.hint()}>
-            {T('math.cmd.hint')}
-            {!p.compact && <kbd>I</kbd>}
-          </button>
-          <button type="button" className="ms-btn" data-command="check" data-ready={ready || undefined} disabled={!ready} title={ready ? `${T('math.cmd.check')} (C)` : T('math.cmd.checkWhy')} onClick={() => ctl.check()}>
-            {T('math.cmd.check')}
-            {!p.compact && <kbd>C</kbd>}
-          </button>
-          {!p.practice && !locked && run.tries >= 2 && !run.revealed && (
-            <button type="button" className="ms-btn ms-btn--ghost" data-show-me="" onClick={() => ctl.showMe()}>
-              {T('math.tray.showMe')}
-            </button>
-          )}
-          {!p.practice && (p.pool ?? 0) > 1 && (
-            <button type="button" className="ms-btn ms-btn--ghost" data-another="" onClick={() => ctl.another()}>
-              {T('math.check.another')}
-            </button>
-          )}
-          {!locked && (
-            <button type="button" className="ms-btn ms-btn--quiet" data-skip="" onClick={() => ctl.skip()}>
-              {T('math.check.skip')}
-            </button>
-          )}
-          {!p.compact &&
-            p.revisit?.map((r) => (
-              <button key={r.id} type="button" className="ms-btn ms-btn--ghost" onClick={() => ctl.goToBeat(r.id, 0)}>
-                {T('math.practice.revisit', { n: r.number })}
-              </button>
-            ))}
-          {!p.compact && locked && (
-            <button type="button" className="ms-btn ms-tray__next" data-done="" onClick={() => ctl.next()}>
-              {T(p.practice ? (p.last ? 'math.practice.results' : 'math.tray.nextQuestion') : 'math.tray.nextStep')} <span aria-hidden="true">→</span>
-            </button>
-          )}
+    <div ref={rootRef} className="ms-tray" data-hud-panel={p.compact ? undefined : 'task'} data-compact={p.compact || undefined} onKeyDown={onKey} role="group" aria-label={T('math.tray.label')}>
+      {!p.captioned && (
+        <div className="ms-tray__head">
+          {p.where && <span className="ms-tray__where">{p.where}</span>}
+          <p className="ms-tray__prompt">{renderRich(tx(task.prompt, locale), locale)}</p>
         </div>
+      )}
+      <Controls {...p} phase={phase} locked={locked} />
+      <p className="ms-tray__feedback" aria-live="polite" data-tone={fb?.tone} data-empty={fb ? undefined : ''}>
+        {fb && (
+          <>
+            <i aria-hidden="true">{fb.tone === 'correct' || fb.tone === 'phase' ? '✓' : fb.tone === 'hint' ? 'i' : '○'}</i>
+            <span>{renderRich(tx(fb.text, locale), locale)}</span>
+          </>
+        )}
+      </p>
+      {run.revealed && spec && (
+        <span className="ms-tray__answer">
+          {T('math.tray.answer')}{' '}
+          {task.model.kind === 'grid'
+            ? gridAnswerText(task, locale)
+            : isMeasureTask(task)
+              ? renderRich(answerTokens(task), locale, { line: true })
+              : spec.form === 'decimal'
+              ? renderRich(decimalAnswerLine(task, locale), locale, { line: true })
+              : usesValueBoxes(task, spec)
+                ? renderRich(answerTokens(task), locale, { line: true })
+                : renderRich(answersOf(spec).map((f) => `{${f.w ? `${f.w} ` : ''}${f.n}/${f.d}}`).join(' = '), locale)}
+        </span>
+      )}
+      {run.revealed && !p.practice && run.feedback?.tone !== 'reveal' && <p className="ms-tray__why">{renderRich(tx(task.feedback.reveal, locale), locale)}</p>}
+      {run.attempts.length > 0 && (
+        <p className="ms-attempts">
+          <b>{T('math.check.attempts')}</b>
+          {run.attempts.map((a, i) => (
+            <span key={i} data-tone={a.tone}>
+              <i aria-hidden="true">{a.tone === 'correct' || a.tone === 'phase' ? '✓' : '○'}</i> {a.label}
+            </span>
+          ))}
+        </p>
+      )}
+      <div className="ms-tray__actions">
+        <button type="button" className="ms-btn ms-btn--ghost" data-command="hint" disabled={!ctl.canHint()} title={`${T('math.cmd.hint')} (I)`} onClick={() => ctl.hint()}>
+          {T('math.cmd.hint')}
+          {!p.compact && <kbd>I</kbd>}
+        </button>
+        <button type="button" className="ms-btn" data-command="check" data-ready={ready || undefined} disabled={!ready} title={ready ? `${T('math.cmd.check')} (C)` : T('math.cmd.checkWhy')} onClick={() => ctl.check()}>
+          {T('math.cmd.check')}
+          {!p.compact && <kbd>C</kbd>}
+        </button>
+        {!p.practice && !locked && run.tries >= 2 && !run.revealed && (
+          <button type="button" className="ms-btn ms-btn--ghost" data-show-me="" onClick={() => ctl.showMe()}>
+            {T('math.tray.showMe')}
+          </button>
+        )}
+        {!p.practice && (p.pool ?? 0) > 1 && (
+          <button type="button" className="ms-btn ms-btn--ghost" data-another="" onClick={() => ctl.another()}>
+            {T('math.check.another')}
+          </button>
+        )}
+        {!locked && (
+          <button type="button" className="ms-btn ms-btn--quiet" data-skip="" onClick={() => ctl.skip()}>
+            {T('math.check.skip')}
+          </button>
+        )}
+        {!p.compact &&
+          p.revisit?.map((r) => (
+            <button key={r.id} type="button" className="ms-btn ms-btn--ghost" onClick={() => ctl.goToBeat(r.id, 0)}>
+              {T('math.practice.revisit', { n: r.number })}
+            </button>
+          ))}
+        {!p.compact && locked && (
+          <button type="button" className="ms-btn ms-tray__next" data-done="" onClick={() => ctl.next()}>
+            {T(p.practice ? (p.last ? 'math.practice.results' : 'math.tray.nextQuestion') : 'math.tray.nextStep')} <span aria-hidden="true">→</span>
+          </button>
+        )}
       </div>
-    </FoldPanel>
+    </div>
   );
 }
 

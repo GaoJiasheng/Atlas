@@ -26,10 +26,10 @@ test('Space KEY and explode controls follow the solver field, reopen by keyboard
     window.__atlas!.setMode('exploded', true);
     window.__atlas!.setLegends(false);
   });
-  const overlay = page.locator('[data-hud-panel="space-overlay"]');
+  const overlay = page.locator('.space-overlay');
   await expect(overlay.locator('.atlas-legend ul')).toBeHidden();
   await expect(overlay.locator('.space-bar')).toBeHidden();
-  await reopen(page, '[data-hud-panel="space-overlay"] .atlas-legend > [data-fold-control]');
+  await reopen(page, '.space-overlay .atlas-legend > [data-fold-control]');
   await expect(overlay.locator('.atlas-legend ul')).toBeVisible();
   await expect(overlay.locator('.space-bar')).toBeVisible();
   await page.evaluate(() => {
@@ -41,7 +41,7 @@ test('Space KEY and explode controls follow the solver field, reopen by keyboard
   expect(await page.evaluate(() => window.__atlas!.state().manual.legendsOpen)).toBe(false);
 });
 
-test('Math equation and task keep labelled reopen headers through stage-only and restore', async ({ page }) => {
+test('Math equation keeps a labelled reopen header; the check is lesson work and never folds', async ({ page }) => {
   await open(page, 'fractions', 'equivalent-fractions');
   await page.evaluate(() => window.__atlas!.setLegends(false));
   await expect(page.locator('.ms-equation')).toBeHidden();
@@ -50,16 +50,17 @@ test('Math equation and task keep labelled reopen headers through stage-only and
   await page.evaluate(() => {
     const a = window.__atlas!;
     (a.engine as unknown as { goToTask(step: string, index: number, opts: { instant: boolean }): void }).goToTask('equivalent-fractions', 0, { instant: true });
-    a.setStageOnly(true);
+    a.setLegends(false);
   });
   const task = page.locator('[data-hud-panel="task"]');
-  // The reader also folds in stage-only; reveal it to reach its task header.
-  await page.evaluate(() => window.__atlas!.setReader(true));
-  await expect(task.locator('.ms-tray')).toBeHidden();
-  await reopen(page, '[data-hud-panel="task"] > [data-fold-control]');
-  await expect(task.locator('.ms-tray')).toBeVisible();
+  await expect(task).toBeVisible();
+  await expect(task.locator('[data-fold-control]')).toHaveCount(0);
+  // Docked on the stage (below 1024 px) it stays the child's work area, through stage-only too.
+  await page.setViewportSize({ width: 900, height: 1200 });
+  await page.evaluate(() => window.__atlas!.setStageOnly(true));
+  await expect(page.locator('.ms-tray-dock [data-hud-panel="task"] [data-command="check"]')).toBeVisible();
+  await expect(page.locator('[data-hud-panel="equation"] > [data-fold-control]')).toHaveAttribute('aria-expanded', 'false');
   await page.evaluate(() => window.__atlas!.setStageOnly(false));
-  await expect(task.locator('> [data-fold-control]')).toHaveAttribute('aria-expanded', 'true');
 });
 
 test('Math net tools fold with KEY and remain keyboard reachable', async ({ page }) => {

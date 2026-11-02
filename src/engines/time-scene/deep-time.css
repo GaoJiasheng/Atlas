@@ -37,6 +37,8 @@
 .ts-modern__ages p { margin: 2px 0; }
 .ts-modern-mobile { display: none; }
 .atlas-card .ts-modern { max-height: min(50vh, 600px); overflow-y: auto; }
+/* Folded, the find map is one header row: the card drops its minimum height instead of framing empty paper. */
+.atlas-card:has([data-hud-panel="modern-inset"][data-folded]) { min-height: 0; }
 .ts-modern-evidence { position: absolute; z-index: 4; top: 62px; right: 16px; width: min(350px, 34vw); max-height: calc(100% - 220px); overflow-y: auto; background: var(--paper); border: 1px solid var(--line); pointer-events: auto; }
 .ts-modern-evidence .ts-modern__list { display: none; }
 @media (max-width: 1023px) {

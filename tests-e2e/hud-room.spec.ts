@@ -44,7 +44,9 @@ for (const topic of ['aircon', 'ww2', 'fractions']) {
       await page.locator('.atlas-card__tab').click();
       await expect(page.locator('.atlas-card')).toBeVisible();
     }
-    const keyHeader = page.locator('.atlas-legend > .atlas-fold').first();
+    // The overlay's fold control: the KEY header (Space, Math) or, in TimeScene, the one "Layers and key" header that
+    // also folds its KEY. Re-resolved per action, so after folding it is whichever labelled tab remains.
+    const keyHeader = page.locator('.atlas-stage__overlay [data-fold-control]:visible').first();
     if (await keyHeader.isVisible()) {
       await keyHeader.click();
       await expect(keyHeader).toHaveAttribute('aria-expanded', 'false');

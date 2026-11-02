@@ -164,6 +164,8 @@ test.describe('measuring (MathScene instruments)', () => {
   test('phone 390x844: the check docks on the stage, the controls are finger-sized, no sideways scroll', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await open(page, '/en/topics/measuring/?ch=millilitres');
+    // As a phone opens: the tools and key stay behind their button (open() unfolds them for the sentence tests).
+    await page.evaluate(() => window.__atlas!.setLegends(false));
     await force(page, 'millilitres', 1);
     await expect.poll(async () => (await info(page)).id).toBe('ml-cup-180');
     await expect(page.locator('.ms-tray-dock [data-hud-panel="task"]')).toBeVisible();

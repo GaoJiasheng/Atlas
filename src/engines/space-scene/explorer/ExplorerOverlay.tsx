@@ -85,7 +85,8 @@ export function ExplorerOverlay({ file, glossary = false }: { file: PartsFile; g
   // Potential energy is stored, never a stream: the energy model keys its colour (bars, the energy-chain card).
   if (file.sim?.energy) add({ id: 'energy-potential', label: { en: tl('en', 'space.energy.key'), zh: tl('zh', 'space.energy.key') }, color: 'token:en-potential', kind: 'fill' });
   return (
-    <div className="atlas-overlay-card space-overlay" data-hud-panel="space-overlay" data-folded={open ? undefined : ''}>
+    // The host's `overlay` slot is the HUD block (layout checks, the room solver, leader avoidance): this card scrolls inside it.
+    <div className="atlas-overlay-card space-overlay" data-folded={open ? undefined : ''}>
       <ControlPanel layers={layers} tools={glossary ? TOOLS_GLOSSARY : TOOLS} legend={legend} />
       <div hidden={!open}>
         <ExplorerBar label={file.views.explodeLabel} />

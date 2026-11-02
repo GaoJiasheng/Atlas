@@ -57,6 +57,8 @@ test.describe('telling time (MathScene clock and timeline)', () => {
 
   test('set the clock by dragging the minute hand: the hour hand follows, the hour stepper finishes it', async ({ page }) => {
     await open(page, '/en/topics/telling-time/?ch=the-clock-face');
+    // As the page opens at this size: the tools and key stay behind their button, off the drag's path.
+    await page.evaluate(() => window.__atlas!.setLegends(false));
     await force(page, 'the-clock-face', 2);
     await expect.poll(async () => (await info(page)).id).toBe('cf-set-nine-fifteen');
     const minute = hand(page, 'minute');

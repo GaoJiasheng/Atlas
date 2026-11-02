@@ -52,6 +52,8 @@ test('catalogues retain exact ids across refresh and clear when hidden or before
   await page.reload(); await page.waitForFunction(() => window.__atlas !== undefined);
   expect(await page.evaluate(() => window.__atlas!.ready)).toBe(true);
   await expect.poll(async () => (await catalogue(page)).pick, { timeout: 30_000 }).toBe('ph-q-us6000gzyg');
+  // At this size the room solver folds the layers card into its tab: open it, as a reader would, to reach the row.
+  await page.evaluate(() => window.__atlas!.setLegends(true));
   await page.locator('[data-layer="ph-quake-sample"]').click();
   await expect.poll(async () => (await catalogue(page)).pick).toBeNull();
   await open(page, 'ch=mapping-plates&t=2004-12-25&pick=ph-q-official20041226005853450-30');

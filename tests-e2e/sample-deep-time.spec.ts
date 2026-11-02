@@ -78,6 +78,8 @@ test('independent occurrence windows, layer visibility and inset restoration', a
   await page.evaluate(() => window.__atlas!.setMode('inset-visible', true));
   await page.evaluate(() => window.__atlas!.setMode('fossil-all', true));
   expect((await geology(page)).inset).toMatchObject({ fossilsVisible: 4, fossilMode: 'all-mesozoic' });
+  // At this size the room solver folds the layers card into its tab: open it, as a reader would, to reach the row.
+  await page.evaluate(() => window.__atlas!.setLegends(true));
   await page.locator('[data-layer="fossils-modern"]').click();
   expect((await geology(page)).inset).toMatchObject({ fossilsVisible: 0, fossilsTotal: 4, referencePointsTotal: 2, referenceCardsTotal: 4 });
 });

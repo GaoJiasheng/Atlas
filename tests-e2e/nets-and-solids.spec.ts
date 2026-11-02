@@ -201,6 +201,8 @@ test.describe('nets and solids', () => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.addInitScript(() => localStorage.setItem('atlas:theme', 'cinema'));
     await open(page, 'zh', 'cuboid-nets');
+    // As a phone opens: the tools and key stay behind their button (open() unfolds them for the sentence tests).
+    await page.evaluate(() => window.__atlas!.setLegends(false));
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'cinema');
     for (const [step, i, id] of [['many-nets', 7, 'mn-complete-222'], ['cuboid-nets', 1, 'cn-complete-end'], ['prisms-and-pyramids', 7, 'pp-complete-prism']] as const) {
       await task(page, step, i, id);

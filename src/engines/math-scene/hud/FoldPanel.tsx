@@ -9,7 +9,7 @@ export function FoldPanel({ panel, title, className, style, children, compact = 
   className: string;
   style?: CSSProperties;
   children: ReactNode;
-  /** Presentation equations and trays stay outside the HUD folds. */
+  /** Presentation equations stay outside the HUD folds. */
   compact?: boolean;
 }) {
   const open = useHud((h) => h.legendsOpen);

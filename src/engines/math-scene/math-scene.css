@@ -1605,9 +1605,11 @@
 }
 
 /* The number sentence under the model (the "A" of concrete–pictorial–abstract). */
+/* The block (its fold row and the sentence) fades in with each new sentence. */
 .ms-equation-panel {
   position: absolute;
   z-index: 3;
+  animation: ms-equation-in 480ms var(--ease-out) 120ms both;
 }
 .ms-equation {
   display: flex;
@@ -1620,7 +1622,6 @@
   text-align: center;
   text-wrap: balance;
   pointer-events: none;
-  animation: ms-equation-in 480ms var(--ease-out) 120ms both;
 }
 /* The box is as wide as the sentence needs (View.tsx): one line, unless even the smaller type cannot fit the room. */
 .ms-equation > span {
@@ -1666,7 +1667,7 @@
 @media (prefers-reduced-motion: reduce) {
   .ms-beat,
   .ms-line__point,
-  .ms-equation {
+  .ms-equation-panel {
     animation: none;
   }
 }
@@ -1960,22 +1961,37 @@
 }
 
 /* Labelled fold rows stay in the layout while their bodies are display:none. */
-.ms-task-panel,
 .ms-overlay-panel {
   min-width: 0;
 }
-.ms-task-panel > .atlas-fold,
 .ms-net-tools-panel > .atlas-fold,
 .ms-equation-panel > .atlas-fold {
   width: 100%;
   text-transform: uppercase;
 }
+/* The sentence's header is a centred label, not a bar across the stage: open it sits over the sentence, folded it is
+   the one short row left of it. */
 .ms-equation-panel > .atlas-fold {
+  display: flex;
+  width: max-content;
+  max-width: 100%;
+  margin-inline: auto;
   padding-block: 4px;
 }
-.ms-tray-dock > .ms-task-panel {
-  width: 100%;
-  max-width: 760px;
+/* Compact, the TOOLS AND KEY button is the one fold: the panel's own TOOLS / KEY folds would repeat it, so they read
+   as plain section titles and leave the pointer to the button. */
+.ms-overlay-panel:has(> .ms-overlay__toggle) .ms-overlay :is(.atlas-ctl__section, .atlas-legend) > .atlas-fold {
+  min-height: 0;
+  padding: 2px 0;
+  border: 0;
+  background: none;
+  color: var(--ink-3);
+  font-size: calc(10 * var(--u));
+  letter-spacing: 0.14em;
+  pointer-events: none;
+}
+.ms-overlay-panel:has(> .ms-overlay__toggle) .ms-overlay :is(.atlas-ctl__section, .atlas-legend) > .atlas-fold > i {
+  display: none;
 }
 
 /* Below 1024 px (the reader is a sheet): the check tray docks on the stage, above the chapter axis. */
