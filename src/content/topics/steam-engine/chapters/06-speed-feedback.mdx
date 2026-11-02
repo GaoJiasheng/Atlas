@@ -78,8 +78,8 @@
       "fov": 30
     },
     "summary": {
-      "en": "The flyballs and sliding collar change the throttle opening as speed changes. This is a feedback path from rotation back to steam admission.",
-      "zh": "转速变化时，飞球和滑套会改变节流阀开度。这是一条从转动回到进汽的反馈路径。"
+      "en": "As speed changes, the flyballs and collar move the throttle. This feedback changes the steam supply.",
+      "zh": "转速改变时，飞球和滑套带动节流阀。这种反馈会改变供汽量。"
     },
     "sim": {
       "set": {
@@ -99,15 +99,15 @@
         ],
         "keep": [
           {
-            "en": "Same link lengths, balls and gravity",
-            "zh": "相同杆长、球和重力"
+            "en": "Keep the link lengths, balls and gravity the same",
+            "zh": "杆长、飞球和重力保持不变"
           }
         ],
         "record": true,
         "predict": {
           "prompt": {
-            "en": "How will the model throttle opening change?",
-            "zh": "模型的节流阀开度会怎样变化？"
+            "en": "Will the throttle opening grow, shrink or stay the same?",
+            "zh": "节流阀开度会变大、变小，还是不变？"
           },
           "start": {
             "governor-rpm": 60
@@ -234,8 +234,8 @@
           }
         },
         "caption": {
-          "en": "Two flyballs are linked to one rotating spindle and one sliding collar. The collar can rise and fall along the spindle.",
-          "zh": "两个飞球连着同一根转轴和同一个滑套。滑套可以沿轴上下移动。"
+          "en": "Two flyballs connect to one spindle and a sliding collar. The collar can move up and down the spindle.",
+          "zh": "两个飞球连接同一根转轴和一个滑套。滑套可以沿轴上下移动。"
         }
       },
       {
@@ -308,8 +308,8 @@
           }
         },
         "caption": {
-          "en": "At a higher steady speed in this ideal model, the balls sit farther out and the collar rises. The non-rotating fork carries that movement to the throttle linkage.",
-          "zh": "在这个理想模型中，较高的稳定转速对应更张开的飞球和更高的滑套。不旋转的叉环把升降运动传给节流连杆。"
+          "en": "At a higher steady model speed, the balls spread out and the collar rises. The fork passes this movement to the throttle without rotating.",
+          "zh": "模型稳定转速越高，飞球越张开，滑套越高。叉环不旋转，只把升降传给节流连杆。"
         }
       },
       {
@@ -393,8 +393,8 @@
           }
         },
         "caption": {
-          "en": "The linkage reduces the throttle opening. It limits steam admission rather than applying a brake to the flywheel.",
-          "zh": "连杆让节流阀开度减小，限制进汽，并不是给飞轮加上刹车。"
+          "en": "The linkage closes the throttle farther. This limits steam entering the engine, rather than braking the flywheel.",
+          "zh": "连杆把节流阀关小，限制进汽，而不是给飞轮刹车。"
         }
       },
       {
@@ -467,8 +467,8 @@
           }
         },
         "caption": {
-          "en": "Lower speed gives the opposite arrangement. These are three steady model positions; no response to a changing load is calculated here.",
-          "zh": "较低转速对应相反的机构位置。这里比较三个模型静态位置，并没有计算负载变化后的响应。"
+          "en": "At lower speed, the movement reverses. Compare these three steady positions; changing-load responses are not shown.",
+          "zh": "较低转速时，运动方向相反。这里比较三个稳定位置，不展示负载改变后的反应。"
         }
       }
     ]
@@ -478,25 +478,25 @@
 
 <Lang en>
 
-The <Term id="centrifugal-governor">centrifugal governor</Term> connects rotation to the steam supply. Its spindle supports <Num s="S1">two</Num> flyballs, with upper arms and lower links meeting a single sliding collar. The collar can move along the spindle. This chapter compares complete stationary arrangements, so each rod retains its length while the ball and collar positions change together. [S1, S7] <FlyTo preset="governor-view">Look at the governor linkage</FlyTo>
+The <Term id="centrifugal-governor">centrifugal governor</Term> links rotation to the steam supply. Its spindle carries <Num s="S1">two</Num> flyballs. Upper arms and lower links join them to a sliding collar, which moves along the spindle. Each rod keeps the same length as the balls and collar change position. [S1, S7] <FlyTo preset="governor-view">Look at the governor linkage</FlyTo>
 
-In this ideal static model, a higher steady speed corresponds to balls farther from the spindle and a higher collar. A fork around the collar carries its vertical movement without revolving with the spindle. The fork connects to a throttle rod and crank, which turn the valve disc in the steam passage. Trace that complete route from the balls to the valve. [S1, S7]
+At a higher steady speed in this model, the balls spread farther out and the collar rises. A fork around the collar carries this up-and-down movement without rotating with the spindle. A rod and crank pass it on to the valve disc in the steam pipe. Trace the route from balls to valve. [S1, S7]
 
-The <Term id="throttle">throttle valve</Term> restricts the supply passage. In the faster model position it closes farther, limiting steam admission. At lower speed, the arrangement reverses. This is <Term id="feedback">feedback</Term>: an output, rotation, affects the input supplying it. The throttle does not act as a brake on the flywheel, and it has a different job from the paired inlet and exhaust valves. [S7]
+The <Term id="throttle">throttle valve</Term> controls the opening in the steam pipe. In the faster position, it closes farther and limits the incoming steam. At lower speed, the movement reverses. This is <Term id="feedback">feedback</Term>: the output, rotation, changes the input, steam. The throttle controls supply. The paired inlet and exhaust valves direct steam into and out of the cylinder. [S7]
 
-Use the card to compare the steady model positions while keeping the links, balls and gravity unchanged. Observe collar rise and throttle opening. These snapshots explain the direction of the linkage’s action. They do not calculate a machine’s changing speed after a load change, the actual amount of steam passing the opening or perfectly constant running speed. [S1]
+Use the card to compare three steady positions. Keep the links, balls and gravity unchanged, then watch the collar rise and the throttle opening change. These still views show how the linkage acts. They do not show how engine speed changes after a load changes, or promise a perfectly constant speed. [S1]
 
-The <TopicLink slug="industrial-revolution" ch="ir-thread-coal-power">Industrial Revolution history</TopicLink> places the Lap engine’s governor alongside changes in textile and metalworking production.
+The <TopicLink slug="industrial-revolution" ch="ir-thread-coal-power">Industrial Revolution history</TopicLink> connects the Lap engine’s governor with changes in textile and metalworking production.
 
-<More title={{ en: "Three static comparisons", zh: "三档静态比较" }}>
+<More title={{ en: "Three steady positions", zh: "三个稳定位置" }}>
 
-The independent model speeds are <Num s="S1">60</Num>, <Num s="S1">90</Num> and <Num s="S1">120 rpm</Num>. The corresponding collar rises are about <Num s="S1">0.503</Num>, <Num s="S1">0.779</Num> and <Num s="S1">0.876 m</Num>, with throttle openings about <Num s="S1">84.9%</Num>, <Num s="S1">50.0%</Num> and <Num s="S1">36.3%</Num>. Opening is a normalized valve angle, not that percentage of a measured mass flow. [S1]
+The model compares <Num s="S1">60</Num>, <Num s="S1">90</Num> and <Num s="S1">120 rpm</Num>, or revolutions per minute. The collar rises are about <Num s="S1">0.503</Num>, <Num s="S1">0.779</Num> and <Num s="S1">0.876 m</Num>. The throttle openings are about <Num s="S1">84.9%</Num>, <Num s="S1">50.0%</Num> and <Num s="S1">36.3%</Num>. Each percentage describes the valve angle as a share of its fully open angle. It does not measure the steam flow. [S1]
 
 </More>
 
-<More title={{ en: "The cover and the complete route", zh: "封面与完整联动" }}>
+<More title={{ en: "Follow the full linkage", zh: "追踪整套连杆" }}>
 
-The cover shows the flyball subassembly and omits its external throttle linkage. The stage includes the separate fork, rod, crank and valve disc so that the feedback path can be followed. The model’s collar direction follows its reconstructed symmetric geometry; it is not copied from a historical drawing with a different lever arrangement. Main-engine running beats hide this independent static comparison. [S1, S7, S14]
+The cover shows the flyball assembly alone. In the 3D model, find the fork, rod, crank and valve disc that complete the feedback path. The collar rises with this reconstructed symmetric arrangement; historical levers arranged differently can move differently. The main engine’s running views hide this separate comparison. [S1, S7, S14]
 
 </More>
 
@@ -504,25 +504,25 @@ The cover shows the flyball subassembly and omits its external throttle linkage.
 
 <Lang zh>
 
-<Term id="centrifugal-governor">离心调速器</Term>把转动与供汽联系起来。转轴旁有 <Num s="S1">两个</Num> 飞球，上摆臂和下连杆接到同一个滑套，滑套可以沿轴升降。本章比较完整的静态姿态，球、杆与滑套的位置一起改变，刚杆长度保持不变。[S1, S7]<FlyTo preset="governor-view">看看调速器的联动</FlyTo>
+<Term id="centrifugal-governor">离心调速器</Term>把转动与供汽联系起来。转轴旁有 <Num s="S1">两个</Num> 飞球，上摆臂和下连杆把它们接到同一个滑套。滑套可以沿轴升降。飞球和滑套位置改变时，每根杆的长度保持不变。[S1, S7]<FlyTo preset="governor-view">看看调速器的联动</FlyTo>
 
-在这个理想静态模型中，较高的稳定转速对应更张开的飞球和更高的滑套。套在滑套外的叉环传递上下运动，却不跟着轴公转。叉环再连接节流连杆和曲柄，转动供汽通道中的阀片。沿着这些连接，可以从飞球一路追踪到阀片。[S1, S7]
+在这个模型中，稳定转速越高，飞球张得越开，滑套升得越高。套在滑套外的叉环传递上下运动，却不跟着转轴旋转。连杆和曲柄再把运动传给蒸汽管内的阀片。沿着连接处，就能从飞球一路找到阀片。[S1, S7]
 
-<Term id="throttle">节流阀</Term>限制供汽通道的开度。较快的模型姿态把阀关小，限制进汽；较慢时则相反。输出的转动反过来影响供汽输入，这条路径叫<Term id="feedback">反馈</Term>。节流阀不是给飞轮加刹车，也不同于交替开启的进汽阀和排汽阀。[S7]
+<Term id="throttle">节流阀</Term>控制蒸汽管道的开口。较快的姿态把阀关小，减少进汽；较慢时则相反。输出的转动改变了输入的供汽，这叫<Term id="feedback">反馈</Term>。节流阀负责控制供汽量；配对的进汽阀和排汽阀则引导蒸汽进出汽缸。[S7]
 
-试一试卡保持杆长、飞球和重力不变，比较稳定姿态下的滑套升程与阀开度。静帧说明联动的方向，却没有计算改变负载后的转速过程，也没有求出实际进汽流量，更不能据此承诺机器完全恒速。每次切换都显示完整静态姿态，而不是播放调速器转轴的旋转。[S1]
+试一试卡片比较三个稳定位置。保持杆长、飞球和重力不变，观察滑套升程与阀开度。这些静止画面展示连杆怎样传递运动，没有计算负载改变后转速如何变化，也不表示机器能完全恒速运转。[S1]
 
-<TopicLink slug="industrial-revolution" ch="ir-thread-coal-power">工业革命的历史</TopicLink>把 Lap 机的调速器，与纺织和金属加工的变化联系起来。
+<TopicLink slug="industrial-revolution" ch="ir-thread-coal-power">工业革命的历史</TopicLink>把 Lap 蒸汽机的调速器与纺织、金属加工的变化联系起来。
 
-<More title={{ en: "Three static comparisons", zh: "三档静态比较" }}>
+<More title={{ en: "Three steady positions", zh: "三个稳定位置" }}>
 
-独立比较转速为每分钟 <Num s="S1">60</Num>、<Num s="S1">90</Num>、<Num s="S1">120 转</Num>，对应滑套升程约 <Num s="S1">0.503</Num>、<Num s="S1">0.779</Num>、<Num s="S1">0.876 米</Num>，阀开度约 <Num s="S1">84.9%</Num>、<Num s="S1">50.0%</Num>、<Num s="S1">36.3%</Num>。这里的开度是阀片角度归一化的结果，不是相同比例的实测质量流量。[S1]
+模型比较每分钟 <Num s="S1">60</Num>、<Num s="S1">90</Num>、<Num s="S1">120 转</Num>。对应的滑套升程约 <Num s="S1">0.503</Num>、<Num s="S1">0.779</Num>、<Num s="S1">0.876 米</Num>，阀开度约 <Num s="S1">84.9%</Num>、<Num s="S1">50.0%</Num>、<Num s="S1">36.3%</Num>。百分数表示阀片角度占完全打开角度的多少，并不表示蒸汽流量。[S1]
 
 </More>
 
-<More title={{ en: "The cover and the complete route", zh: "封面与完整联动" }}>
+<More title={{ en: "Follow the full linkage", zh: "追踪整套连杆" }}>
 
-封面只画飞球组件，省略外接节流连杆。舞台则保留叉环、连杆、曲柄和独立阀片，让反馈路径能被完整追踪。滑套方向来自本研究重建的对称几何，没有照搬杠杆布置不同的历史图。主机运行拍隐藏这套独立静态比较，避免误读为实时调速。[S1, S7, S14]
+封面只画飞球组件。在 3D 模型里，还能找到叉环、连杆、曲柄和阀片，沿着它们看清完整的反馈路径。这套重建的对称机构让滑套向上升；历史上不同的杠杆布置可以有不同的运动方向。主机运行时，这个独立比较装置会隐藏起来。[S1, S7, S14]
 
 </More>
 

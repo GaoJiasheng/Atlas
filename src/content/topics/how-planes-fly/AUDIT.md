@@ -108,3 +108,14 @@ S58是唯一原创设计研究，`design: true`且无虚构外部URL。输入／
 详细逐段审阅和D1–D12默认项见[REVIEW.md](REVIEW.md)。模型审阅发现的travel终态pose、ghost蒙皮和flat扰流板已交主代理修正为23件共同非循环序列、隐藏蒙皮与35°抬板，并同步S58及测试。与规格“匀速示意”有一项明确出入：既有sequence及RUN渐变采用缓动，2秒前移0.3 m只表示短段前移，不是匀速或受力积分；四力平衡仍为独立概念示意。另纠正稳定爬升可力平衡、恒速水平转弯可保速保高、巡航各量须一起考虑而非每时刻全变化的文字表述。翼尖重接、缝翼剖面调整以留出展开间隙、燃烧室改薄壁以留出气路、压气机鼓筒加腹板连接高压轴；这些是内容数据修改，没有引擎改动。以上记录不能替代浏览器逐拍验收。
 
 最终非浏览器结果（2026-10-27）：`pnpm check`为831文件、0错误／0警告、4个既有hint；`pnpm validate`为65主题、0错误／0警告；`pnpm test`为178文件／4,566测试全过（本主题21项）；`pnpm build`为133页成功、PWA164预缓存条目，保留既有大chunk提示；`git diff --check`通过。新增浏览器文件只做`--list`，12项发现成功。实际浏览器验收不在这些结果之内。两轮静态几何投影与保守干涉候选的明细见docs/45 §9.4；没有宣称碰撞全清零。
+
+
+## Readability pass 2026-10-29
+
+Rewrote the eight EN/ZH chapter bodies and optional details, 38 beat captions, three prediction cards, 45 part details, selected summaries, 16 glossary definitions, two figure captions/alt texts and the topic plate note for Singapore P4–P6 readers. Sentences now describe visible parts, actions and results directly. Repeated source-list, editorial and model disclaimers were removed from reading text; the Atlas design study still records the experiment’s inputs, equations and calculated results. The existing source list and source files are unchanged.
+
+Facts, numbers, numeric source markup, term IDs, links and all model/simulation/camera configuration are unchanged. Necessary limits remain where they explain the display: separate scales, ideal flow, illustrative stall values, slowed rotation/tracers, fixed-condition altitude comparisons and a static bank. Historical delivery/service and operations/opening dates remain distinct; 558 buildings and 4,096 graves still count structures and graves, never people. Chinese captions use sentence breaks for phone reading.
+
+Validation: `pnpm exec vitest run tests/how-planes-fly-content.test.ts` — 21/21 passed. One history assertion now checks each fact separately so Chinese sentence breaks do not affect it. A structural comparison confirmed that only bilingual display text changed in chapter frontmatter and JSON, with every chapter’s `<Num>` content/source pair and every part’s source-reference counts retained (220 tags before and after, plus all 144 chapter `<Num>` tags across both locales). No browser tools used; full-project checks are handled by the main session.
+
+Final readability gates: `pnpm check` passed (0 errors, 0 warnings, 4 existing hints); `pnpm validate` passed (85 topics, 0 errors/warnings); `pnpm test` passed (219 files, 5,448 tests); `pnpm build` passed (173 pages). Both topic suites passed (steam-engine 20/20; how-planes-fly 21/21). A final structural comparison confirmed unchanged numeric citation markup, source-reference counts, link targets and non-text configuration. `pnpm shoot` and `pnpm e2e` were skipped as instructed; no browser or git writes.

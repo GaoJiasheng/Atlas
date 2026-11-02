@@ -14,4 +14,4 @@ theme: paper
 sensitivity: open
 status: published
 illustration: how-planes-fly
-note: { en: "The aircraft and engine are generic design studies. The separate wing uses ideal two-dimensional flow. The dashed stall region is an illustrative teaching rule, not measured aircraft performance.", zh: "飞机与发动机是通用设计研究。旁边的翼型采用理想二维流。失速区虚线是教学示意，不是实测飞机性能。" }
+note: { en: "The models use separate scales. SIM marks calculated readings. Beyond the chosen stall boundary, dashed lines show a simplified teaching diagram.", zh: "模型各用不同的比例。“模拟”表示计算读数。超过选定的失速分界后，虚线表示简化示意。" }

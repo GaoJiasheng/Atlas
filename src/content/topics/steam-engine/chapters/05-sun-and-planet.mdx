@@ -50,8 +50,8 @@
       "fov": 30
     },
     "summary": {
-      "en": "A connecting rod carries a gear around another gear on the output shaft. The pair converts rocking motion into rotation.",
-      "zh": "传动杆带着一个齿轮，绕着输出轴上的另一个齿轮运动。这对齿轮把摆动转换成转动。"
+      "en": "A rod carries the planet gear around the sun gear. Together they turn the output shaft.",
+      "zh": "传动杆带着行星轮绕太阳轮运动，两者一起带动输出轴旋转。"
     },
     "sim": {
       "set": {
@@ -120,8 +120,8 @@
           }
         },
         "caption": {
-          "en": "The piston and beam move back and forth. A factory shaft needs rotation, so another mechanism connects these motions.",
-          "zh": "活塞和横梁来回运动，工厂的传动轴却需要转动，因此要用另一套机构把两种运动连接起来。"
+          "en": "The piston and beam move back and forth. The gears turn this motion into rotation for the machine drive.",
+          "zh": "活塞和横梁来回运动，齿轮把这种运动变成机器取力端的转动。"
         }
       },
       {
@@ -178,8 +178,8 @@
           }
         },
         "caption": {
-          "en": "The planet gear is fixed to the connecting rod. It rocks with that rod rather than spinning freely on its own axle.",
-          "zh": "行星轮固定在传动杆上，随杆件摆动，并不是在自己的轴上自由空转。"
+          "en": "The planet gear is fixed to the connecting rod. It rocks with the rod instead of spinning freely on its own axle.",
+          "zh": "行星轮固定在传动杆上，随杆摆动，不会绕自己的轴自由空转。"
         }
       },
       {
@@ -237,8 +237,8 @@
           }
         },
         "caption": {
-          "en": "The centre link keeps the two gear centres the same distance apart. The sun gear is fixed to the output shaft.",
-          "zh": "定距连杆让两个齿轮的中心距保持不变。太阳轮固定在输出轴上。"
+          "en": "The centre link keeps the gear centres the same distance apart. The sun gear is fixed to the output shaft.",
+          "zh": "定距连杆保持齿轮中心距不变。太阳轮固定在输出轴上。"
         }
       },
       {
@@ -307,8 +307,8 @@
           }
         },
         "caption": {
-          "en": "With equal gears, one complete piston cycle gives two net turns of the sun and flywheel. Watch the shared mechanism, not separate wheel animations.",
-          "zh": "两个齿轮相等时，活塞一个完整周期让太阳轮和飞轮净转两圈。这里整套机构共用同一个运动相位。"
+          "en": "With equal gears, a complete piston cycle gives the sun and flywheel two net turns. Watch the whole linkage move together.",
+          "zh": "两个齿轮相等时，活塞一个完整周期让太阳轮和飞轮净转两圈。整套连杆一起运动。"
         }
       },
       {
@@ -365,8 +365,8 @@
           }
         },
         "caption": {
-          "en": "The flywheel stores and returns rotational energy as the driving effort varies. Power leaves through the machine drive; the wheel does not create energy.",
-          "zh": "驱动力变化时，飞轮储存并交还转动的能量。动力从机器取力端传出，飞轮并不创造能量。"
+          "en": "The flywheel stores and returns energy as the driving effort changes. Energy passes to the machine drive; the wheel does not create it.",
+          "zh": "驱动力变化时，飞轮储存并交还能量。能量传到机器取力端，飞轮不会创造能量。"
         }
       }
     ]
@@ -376,23 +376,23 @@
 
 <Lang en>
 
-The piston and beam move back and forth, while the machine drive needs rotation. Follow the connecting rod down from the beam to the small gears beside the large wheel. Watt’s <Term id="sun-and-planet">sun-and-planet gear</Term> connects these motions. The names describe the gears’ arrangement; they do not make this an astronomical model. [S2, S6] <FlyTo preset="hero">Trace the drive from beam to wheel</FlyTo>
+The piston and beam move back and forth. The machine drive needs rotation. Follow the connecting rod from the beam to the small gears beside the large wheel. Watt’s <Term id="sun-and-planet">sun-and-planet gear</Term> turns the shaft. Its names describe the gears’ positions. [S2, S6] <FlyTo preset="hero">Trace the drive from beam to wheel</FlyTo>
 
-The planet gear is fixed to the connecting rod. As that rod changes angle, the planet rocks with it; it is not a loose wheel spinning freely on its own axle. A separate centre link connects the gear centres and keeps them the same distance apart. The sun gear is fixed to the output shaft, so its rotation turns the shaft. Follow these connections before starting the mechanism. [S6, S7]
+The planet gear is fixed to the connecting rod. It rocks as the rod changes angle. A separate centre link keeps the gear centres the same distance apart. The sun gear is fixed to the output shaft, so they turn together. [S6, S7]
 
-With equal gears, one complete piston cycle produces <Num s="S6">two net turns</Num> of the sun and output shaft. The connecting rod also rocks during the cycle, so the instantaneous ratio is not simply constant. In the running beats, the links, gear positions and valves all use one shared phase. They are not independent wheel animations fitted together by eye. [S1, S6]
+With equal gears, a complete piston cycle gives the sun and shaft <Num s="S6">two net turns</Num>. The rod rocks during the cycle, so the turning ratio changes from moment to moment. Start the running beat to watch the links, gears and valves move together through the same cycle. [S1, S6]
 
-The large <Term id="flywheel">flywheel</Term> stores rotational kinetic energy and gives it back as driving effort varies. Mechanical energy leaves through the machine drive. The wheel does not create energy, and storing energy is a different role from the governor’s regulation of steam supply. Pause the motion and use the still phases to inspect the meshing gears and the separate centre link. [S7]
+The large <Term id="flywheel">flywheel</Term> stores energy as it turns, then gives energy back as the driving effort varies. Mechanical energy passes to the machine drive. The flywheel stores energy; the governor has a different job, adjusting the steam supply. Pause and choose still positions to see how the gear teeth mesh. [S7]
 
 <More title={{ en: "Rod angle and gear angle", zh: "杆角与齿轮角" }}>
 
-For equal external gears in this design, sun-angle change + planet-angle change = twice the orbital-angle change. Because the planet is fixed to the rod, its world angle changes as the rod rocks. Over the complete cycle the rod returns to its original angle, leaving the sun with the net rotation described above. This is a kinematic relationship, not a calculation of shaft acceleration under load. [S1, S6]
+For these equal external gears, sun-angle change + planet-angle change = twice the orbital-angle change. The orbital angle tracks the line joining the gear centres. The planet’s angle changes as its rod rocks. After a full cycle, the rod returns to its starting angle. The sun keeps the net rotation described above. [S1, S6]
 
 </More>
 
-<More title={{ en: "Reference wheel and reconstructed teeth", zh: "参考飞轮与重建齿形" }}>
+<More title={{ en: "Two different sets of teeth", zh: "两处不同的轮齿" }}>
 
-ASME and Hulse report different flywheel rim tooth counts. The model therefore omits a precise countable rim drive. Those rim teeth are a different feature from the sun-and-planet pair. The equal tooth profiles in the small gears belong to this design study; their visible geometry explains engagement, rather than certifying historical manufacturing dimensions. [S1, S3, S5]
+ASME and Hulse give different counts for teeth on the flywheel’s outer rim. The model leaves out a countable rim drive. Those outer teeth are separate from the small sun-and-planet pair. The small gears use equal tooth shapes to show how they mesh; the shapes are reconstructed. [S1, S3, S5]
 
 </More>
 
@@ -400,23 +400,23 @@ ASME and Hulse report different flywheel rim tooth counts. The model therefore o
 
 <Lang zh>
 
-活塞和横梁来回运动，机器取力端却需要转动。沿着横梁下方的传动杆，可以找到大轮旁的小齿轮。瓦特的<Term id="sun-and-planet">太阳与行星齿轮机构</Term>把两种运动连接起来。这些名字描述齿轮的相对布置，并不是天文模型。[S2, S6]<FlyTo preset="hero">沿横梁找到取力端</FlyTo>
+活塞和横梁来回运动，机器取力端却需要转动。沿着横梁下方的传动杆，找到大轮旁的小齿轮。瓦特的<Term id="sun-and-planet">太阳与行星齿轮机构</Term>带动输出轴旋转，名字描述了齿轮的相对位置。[S2, S6]<FlyTo preset="hero">沿横梁找到取力端</FlyTo>
 
-行星轮固定在传动杆上，随着杆的角度变化而摆动，并不是一只在自己轴上自由空转的小轮。另一根独立的定距连杆连接两个齿轮的中心，使中心距保持不变。太阳轮固定在输出轴上，因此太阳轮转动时，也带动输出轴。先认清这些连接，再启动机构。[S6, S7]
+行星轮固定在传动杆上，随杆的角度变化而摆动。另一根独立的定距连杆让两个齿轮的中心距保持不变。太阳轮固定在输出轴上，两者一起转动。[S6, S7]
 
-两个齿轮相等时，活塞一个完整周期让太阳轮和输出轴净转 <Num s="S6">两圈</Num>。周期内传动杆也在摆动，因此瞬时转动比例并非简单恒定。运行拍里的连杆、齿轮和阀口共用同一个相位，并不是分别播放几个轮子的动画后，再凭外观拼在一起。[S1, S6]
+两个齿轮相等时，活塞一个完整周期让太阳轮和输出轴净转 <Num s="S6">两圈</Num>。周期内传动杆也在摆动，所以转动比例会不断变化。启动运行节拍，就能看到连杆、齿轮和阀门一起完成同一个周期。[S1, S6]
 
-大<Term id="flywheel">飞轮</Term>储存转动动能，并在驱动力变化时交还。机械能由机器取力端传出，轮子本身不创造能量。飞轮储能，与调速器调整供汽是不同作用。暂停后再切换静态相位，可以观察齿轮啮合和独立定距连杆的位置关系。[S7]
+大<Term id="flywheel">飞轮</Term>储存转动的能量，并在驱动力变化时交还能量。机械能从机器取力端传出。飞轮负责储能，调速器则负责调整供汽。暂停后再切换静止画面，可以看清齿轮怎样啮合。[S7]
 
 <More title={{ en: "Rod angle and gear angle", zh: "杆角与齿轮角" }}>
 
-本设计的相等外齿轮满足：太阳轮角度变化 + 行星轮角度变化 = 轨道角变化的两倍。行星轮固定在传动杆上，因此它在世界坐标中的角度会随杆摆动。完整周期后，杆回到原角度，太阳轮则保留上面所说的净转动。这是运动几何关系，并没有计算负载作用下的轴加速度。[S1, S6]
+这里相等的外齿轮满足：太阳轮角度变化 + 行星轮角度变化 = 轨道角变化的两倍。轨道角表示两个齿轮中心连线的角度。行星轮随传动杆摆动，角度也跟着改变。完整周期后，杆回到原来的角度，太阳轮则保留上面所说的净转动。[S1, S6]
 
 </More>
 
-<More title={{ en: "Reference wheel and reconstructed teeth", zh: "参考飞轮与重建齿形" }}>
+<More title={{ en: "Two different sets of teeth", zh: "两处不同的轮齿" }}>
 
-ASME 与 Hulse 报道的飞轮外缘齿数不同，因此模型不画可精确数齿的外缘取力齿圈。外缘齿与太阳、行星这一对齿轮并非同一处结构。模型小齿轮的相等齿廓属于设计研究，用来解释啮合，不代表已核定的历史制造尺寸。[S1, S3, S5]
+ASME 与 Hulse 给出的飞轮外缘齿数不同，因此模型省略了可数齿的外缘取力齿圈。外缘轮齿与旁边的太阳轮、行星轮是不同结构。模型的小齿轮采用重建的相等齿形，展示轮齿怎样啮合。[S1, S3, S5]
 
 </More>
 
