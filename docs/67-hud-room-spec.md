@@ -156,3 +156,25 @@ Codex 的阶段 1（352b25e）没有跑过任何浏览器门槛。这一轮在�
 - **门槛**（机器同时跑另两个代理和 Codex，负载 80–190）：`pnpm check` 0 错 0 警告；`pnpm validate` 94 题 0 / 0；`pnpm test` 234 文件 6110 通过（取景单测 27 项，含 Three.js 投影回算）；`pnpm build` 通过。e2e（18 个 spec，workers=3）最后一轮 197 例 189 过，失败的单独重跑后剩下的都与本分支无关：how-planes-fly:87 ×4、sample-airfoil:96 ×4（改 flow-view 会清记录表，`lib/sim/session.ts` 把显示值也算进表格上下文，基线 b4a1e2e 同样失败）、heart-and-lungs:80 与 beat-links 的 forces / energy-conversion（基线同样失败）；按帧计时的 sample-mechanism:169 / steam-engine:171（基线 3 次败 2 次）、space-label-drag:156 与 sun-earth-moon:158（39 个链接 10 分钟超时；shoot 39/39 链接同场景）是负载造成的。`pnpm shoot`：sun-earth-moon `--beats` 1920 en/paper 39/39 拍、39/39 链接、console clean；aircon `--beats --layout --size 1180x820` 24/24、24/24、layout 0 问题；heart-and-lungs `--beats` 1920 zh/cinema 33/33、33/33。1180 的章级「无标签」提示是既有行为（LeaderLabels 在 HUD 竖带窄于 480 px 时只给选中零件标签），与镜头无关。
 - **留给阶段 1 / 2**：窄屏上主体仍偏小（1180 的 HUD 只给舞台留约 27–37 % 宽），要靠阶段 1 的自动收起腾出空间，取景已会跟着放大；按主体实际包围盒（而不是整块设计自由区）取景能让高瘦主体（骨架、人体）在竖带里更大，但要处理爆炸 / 动画中包围盒变化，这次没做；竖屏抽屉布局仍用原镜头，等阶段 1 定了抽屉高度再接。
 
+
+### 9.4 集成（Claude，2026-11-02，claude/hud-int）
+
+**合并**
+- `main`（map-polish、可读性轮）：TimeScene 三个「图层与图例」卡保留 hud-int 的 `HudFold` 一行标题 + ×（不恢复 `.ts-overlay__summary` 绝对定位，那会让 × 压住标题）；main 的 `MapOverlay`（≤1024 默认收起的 `<details>`）删去，默认开合交给求解器（1024×768 monsoon 实测先收图例，左列也收成页签）。现代小图保留 main 的单一标题、编号引线、视图按钮：放在右上卡里（`hosted`）时卡片标题就是唯一标题、卡片页签就是它的折叠，标题行只有视图按钮和 ×；阅读面板版自带标题；演示版是同名 `HudFold`。
+- `claude/frame-ts`、`claude/frame-space`、`codex/space-js`：自由矩形只有一个来源 —— `core/useHudRoom` 的一次测量写进 HUD store：`freeStage`（最大空矩形）和 `hudObstacles`（量它时的可见块，`.atlas-stage` 坐标，overlay 槽按卡片并按槽裁剪，H / 演示时 `.hud-fade` 里的块立即不算）。TimeScene `lib/hud-framing.ts` 订阅 `freeStage`（`GeoControllerOptions.hud`），不再自己量 DOM，删去 `lib/free-rect.ts`；SpaceScene `Model3DStage` 用 `hudObstacles` 做 `stageFraming`，横屏的 `bridge.freeStage` 用宿主的 `freeStage`，叠放时仍是文档里的全宽横带；宿主量完第一次之前不算放好。space-js 的测试钩子挪进懒加载的 `test-hooks.ts`（带上 frame-space 的 `framing()`），`ready` = 舞台内容画完（`stageReady`）且镜头按 HUD 放好（`hudSettled`）。
+- JS 预算棘轮上调一次：space-scene 530 → 539 KB（sample-space 538.63），time-scene 480 → 481 KB（480.16），见 docs/02。
+
+**修的 core 项**
+- 左列装不下自己的内容（标题 + 元数据 + PLATE，章节轨按 3 行算）时，求解器在任何尺寸先藏元数据（`HudMeasurements.left.overflow`，按标题块展开时的高度回算，留 12 px 回滞，不来回翻）；TimeScene 左列的各 PLATE 被挤时在列内滚动，不再压到章节轴下。1920×1080：monsoon 与 aircon 因此默认是 compact（其余面板都开着）；hud-room 的 1920 断言改为「左列不收成页签、卡和图例都开」。
+- 章节轴段日期按段宽取全称、取前一半（`250 Ma`）或不显示，不再被裁（深时 zh 1024）。
+- 顶栏 Z / ? 改成 STAGE·只看舞台 / HELP·帮助 加淡色键位提示（手机上不显示键位）；sample-time / sample-space 1280×720 中英文顶栏仍是一行。阅读面板说明标题改为 About this topic / 关于这个主题。
+- 抽屉布局里为选中对象打开的抽屉不再写成「阅读面板手动展开」（`atlas:reader` 保持收起，industrial-revolution 手机 4 例）；求解器在抽屉布局不写 `reader`。
+- MathScene 排版：收起的卡片竖页签是窄障碍，模型可以放在页签旁边（手机上 measuring 的量杯从 171 回到 ≥ 200 px）。
+- 并排的来源芯片命中区在间隙处分开，不再互相覆盖（dinosaur 66/70）。
+- 复核后不再出现：aircon 卡片页签被阅读竖条挡住、三个 guide-button 用例、390×844 舞台占比（抽屉布局按抽屉以上的页面算，phase 1 已改）。fractions 1133×744 / 1024×768 / 1280×720 的 `shoot --layout` 0 问题。
+
+**测试改动**（只改因新默认而必须改的）：sample-missions / sample-life-cycle 先 `setCard(true)` 再读卡；singapore-land-use 先 `setLegends(true)` 再点图层行；sample-lesson-measure / -net 手机用例回到该尺寸的默认收起（同 measuring.spec）；hud-room 两处（见上）；time-scene-folds 的现代小图改测卡片折叠。
+
+**看过的截图**：`pnpm shoot <topic> --layout --keys --layout-sizes 1280x800,1920x1080` 与 `--touch --layout-sizes 1180x820,820x1180,390x844`，ww2、dinosaur-earth、monsoon-and-weather、aircon、solar-system、fractions、measuring 共 14 轮，0 个 layout 问题、0 个键位失败；缩图看了约 15 张。1180×820 的 SpaceScene 求解器收起后自由带约 506 px 宽，引线标签照常显示（> 480 px 门槛）。
+
+**留下的**：ww2 英文 1280×720 顶栏三行（VIEW 预设多，Z / ? 加了标签后中段更窄；main 是两行）；SpaceScene 竖屏叠放（820×1180）仍用原镜头，模型会落到左列章节轨后面；dinosaur-earth 1280×800 重建图在小自由区下缩到 zoom 0.8 附近，构图待看。
