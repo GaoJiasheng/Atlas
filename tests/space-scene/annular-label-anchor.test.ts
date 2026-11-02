@@ -55,8 +55,13 @@ describe('annular partial-lathe labels point to material, not the central hole',
       const point = new Vector3(...anchorPoint(part));
       expect(point.length()).toBeGreaterThan(radii[i + 1]!);
       expect(point.length()).toBeLessThan(radii[i]!);
-      expect(point.z).toBeCloseTo(0, 12);
-      surfaceHit(part, point, new Vector3(0, 0, 1));
+      const primitive = part.primitive!;
+      if (primitive.kind !== 'lathe' || primitive.arc === undefined) throw new Error('Earth layers must keep their spherical wedge');
+      const phi = (180 - primitive.arc / 2) * Math.PI / 180;
+      const rotation = new Euler(...(primitive.rotation ?? [0, 0, 0]).map((a) => a * Math.PI / 180) as [number, number, number]);
+      const normal = new Vector3(-Math.cos(phi), 0, Math.sin(phi)).applyEuler(rotation);
+      expect(point.dot(normal)).toBeCloseTo(0, 12);
+      surfaceHit(part, point.add(new Vector3(...primitive.at)), normal);
     });
     const core = file.parts.find((p) => p.id === 'earth-inner-core')!;
     expect(anchorPoint(core)).toEqual(anchorOffset(core));

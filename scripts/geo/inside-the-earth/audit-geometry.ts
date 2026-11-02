@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { Matrix4, Mesh, MeshBasicMaterial, Raycaster, Vector3 } from 'three';
 import { parse as yaml } from 'yaml';
 import { partsFile, type Part } from '../../../src/engines/space-scene/schema';
-import { partPieces } from '../../../src/engines/space-scene/stages/model3d/geometry';
+import { eachPieces, partPieces } from '../../../src/engines/space-scene/stages/model3d/geometry';
 import { anchorHalf, anchorOffset, anchorPoint } from '../../../src/engines/space-scene/stages/model3d/shapes';
 
 const topic = resolve(dirname(fileURLToPath(import.meta.url)), '../../../src/content/topics/inside-the-earth');
@@ -18,7 +18,8 @@ const built = new Map<string, Built>();
 const restMatrices = new Map<Mesh, Matrix4>();
 const owner = new Map<Mesh, string>();
 for (const part of file.parts) {
-  const pieces = partPieces(part);
+  const each = file.animations.some(a => a.target === part.id && 'each' in a && a.each);
+  const pieces = each ? eachPieces(part) : partPieces(part);
   const meshes: Mesh[] = [];
   let triangles = 0;
   for (const piece of pieces) {
@@ -77,7 +78,7 @@ const probes = [
 const report = {
   method: 'CPU Three.js engine geometry and exact five label-probe coordinates; front-sided opaque meshes; translation-only fault-slipped pose. Material-piece counts exclude ground, shadows and flows and are not measured draw calls.',
   exclusions: 'No WebGL rendering, shader/material appearance, HUD layout, responsive camera fitting, phone touch interaction, flow rendering, offline cache or GPU performance validation.',
-  groups, chapters, probes,
+  inventory: count([...built.values()]), groups, chapters, probes,
 };
 const json = `${JSON.stringify(report, null, 2)}\n`;
 if (process.argv[2]) {

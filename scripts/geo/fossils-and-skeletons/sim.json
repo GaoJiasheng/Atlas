@@ -6,8 +6,8 @@
       "kind": "choice",
       "default": "wide",
       "label": {
-        "en": "Ash pair",
-        "zh": "灰层对"
+        "en": "Ash layer pair",
+        "zh": "灰层组合"
       },
       "options": [
         {
@@ -20,7 +20,7 @@
         {
           "id": "close",
           "label": {
-            "en": "Closer beds",
+            "en": "Closer ages",
             "zh": "年龄更近"
           }
         },
@@ -136,8 +136,8 @@
     {
       "id": "bracket-width",
       "label": {
-        "en": "Central bracket width",
-        "zh": "中心夹定宽度"
+        "en": "Range between central ages",
+        "zh": "中心年龄间隔"
       },
       "unit": "Ma",
       "decimals": 2,

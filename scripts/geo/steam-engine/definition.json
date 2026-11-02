@@ -1,0 +1,5922 @@
+{
+  "parts": [
+    {
+      "id": "boiler",
+      "name": {
+        "en": "Boiler",
+        "zh": "锅炉"
+      },
+      "group": "steam-supply",
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "shell": true,
+      "summary": {
+        "en": "Makes steam by heating water.",
+        "zh": "加热水，产生蒸汽。"
+      },
+      "detail": {
+        "en": "Heat passes through the boiler wall into the water. The furnace and water occupy separate spaces. This model shows a simplified low-pressure boiler. [S7]\n\nThe shell radius and length were chosen for this display. [S1]",
+        "zh": "热量穿过锅炉壁，传给里面的水。炉膛与盛水的空间分开。模型展示的是简化的低压锅炉。[S7]\n\n外壳半径和长度是为展示选定的。[S1]"
+      },
+      "chainName": {
+        "en": "Boiler",
+        "zh": "锅炉"
+      },
+      "castShadow": true,
+      "connects": [
+        "steam-main",
+        "boiler-water",
+        "furnace"
+      ]
+    },
+    {
+      "id": "boiler-water",
+      "name": {
+        "en": "Boiler water",
+        "zh": "锅炉水"
+      },
+      "group": "steam-supply",
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Absorbs heat and changes into water vapour.",
+        "zh": "吸收热量，变成水蒸气。"
+      },
+      "detail": {
+        "en": "Heating can change liquid water into water vapour. The fixed water level marks the water space in this model. [S9][S1]",
+        "zh": "水受热后可以从液态变成水蒸气。模型用固定液面标出盛水的空间。[S9][S1]"
+      },
+      "chainName": {
+        "en": "Boiler water",
+        "zh": "锅炉水"
+      },
+      "castShadow": false
+    },
+    {
+      "id": "furnace",
+      "name": {
+        "en": "Furnace",
+        "zh": "炉膛"
+      },
+      "group": "steam-supply",
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Supplies heat to the boiler water.",
+        "zh": "向锅炉里的水供热。"
+      },
+      "detail": {
+        "en": "Fuel burns in the furnace, outside the water space. It supplies energy that heats the boiler water and produces steam. [S7][S1]",
+        "zh": "燃料在炉膛中燃烧，为加热锅炉里的水提供能量，产生蒸汽。炉膛与盛水的空间分开。[S7][S1]"
+      },
+      "chainName": {
+        "en": "Furnace",
+        "zh": "炉膛"
+      },
+      "castShadow": false
+    },
+    {
+      "id": "steam-main",
+      "name": {
+        "en": "Steam main",
+        "zh": "供汽管"
+      },
+      "group": "steam-supply",
+      "primitive": {
+        "kind": "tube",
+        "path": [
+          [
+            -5,
+            2,
+            -0.4
+          ],
+          [
+            -5,
+            3.6,
+            -0.4
+          ],
+          [
+            2,
+            3.6,
+            -0.4
+          ],
+          [
+            2,
+            2.4,
+            -0.4
+          ],
+          [
+            2,
+            2.4,
+            0.9
+          ],
+          [
+            2,
+            2.1,
+            0.9
+          ]
+        ],
+        "radius": 0.05,
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "stainless"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "extra": [
+        {
+          "kind": "tube",
+          "path": [
+            [
+              2,
+              1.9,
+              0.9
+            ],
+            [
+              2,
+              1.35,
+              0.9
+            ],
+            [
+              -3.1,
+              1.35,
+              0.9
+            ],
+            [
+              -3.1,
+              2.4,
+              0.65
+            ]
+          ],
+          "radius": 0.05,
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "color": "stainless"
+        }
+      ],
+      "shell": true,
+      "summary": {
+        "en": "Carries steam through the throttle to the valves.",
+        "zh": "让蒸汽经过节流阀，流向配汽阀。"
+      },
+      "detail": {
+        "en": "Two pipe sections meet at the throttle valve. This display places them apart from the exhaust pipes and moving rods, so you can follow each route. The layout is a reconstruction. [S7][S1]",
+        "zh": "两段供汽管在节流阀处相接。图中把供汽管、排汽管和运动杆件分开，方便你沿着管路看。这里的布局是重建的。[S7][S1]"
+      },
+      "chainName": {
+        "en": "Steam main",
+        "zh": "供汽管"
+      },
+      "castShadow": false,
+      "connects": [
+        "throttle",
+        "valve-chest"
+      ]
+    },
+    {
+      "id": "throttle",
+      "name": {
+        "en": "Throttle body",
+        "zh": "节流阀体"
+      },
+      "group": "steam-supply",
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0.145,
+            -0.1
+          ],
+          [
+            0.16999999999999998,
+            -0.1
+          ],
+          [
+            0.16999999999999998,
+            0.1
+          ],
+          [
+            0.145,
+            0.1
+          ],
+          [
+            0.145,
+            -0.1
+          ]
+        ],
+        "at": [
+          2,
+          2,
+          0.9
+        ],
+        "color": "brass"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "shell": true,
+      "summary": {
+        "en": "Holds the disc that controls the steam opening.",
+        "zh": "容纳调节供汽开口的阀片。"
+      },
+      "detail": {
+        "en": "The hollow valve body stays fixed to the supply pipe. Inside it, a disc turns to change the opening. Select the disc to inspect it, or compare its angles at the three steady governor speeds. [S7][S1]",
+        "zh": "中空的阀体固定在供汽管上，里面的阀片转动时会改变开口。点选阀片可以细看，也可以比较调速器在三档稳定转速下的阀片角度。[S7][S1]"
+      },
+      "chainName": {
+        "en": "Throttle body",
+        "zh": "节流阀体"
+      },
+      "castShadow": false,
+      "connects": [
+        "throttle-disc",
+        "throttle-crank"
+      ]
+    },
+    {
+      "id": "throttle-disc",
+      "name": {
+        "en": "Throttle disc",
+        "zh": "节流阀片"
+      },
+      "group": "steam-supply",
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.13,
+          0.13,
+          0.015
+        ],
+        "at": [
+          2,
+          2,
+          0.9
+        ],
+        "rotation": [
+          0,
+          0,
+          45
+        ],
+        "color": "brass"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Changes the opening that steam passes through.",
+        "zh": "改变蒸汽通过的开口大小。"
+      },
+      "detail": {
+        "en": "The model’s links set the disc at three angles. The opening percentage is calculated from the angle. A given opening percentage does not mean the same percentage of steam flow. [S1]\n\nThis disc controls the supply. Four other valves switch the steam routes at the cylinder. [S7]",
+        "zh": "模型中的连杆让阀片停在三个不同角度。开度百分数按角度计算；开度是多少，并不表示蒸汽流量也占相同百分比。[S1]\n\n这块阀片控制供汽。另有四个配汽阀，负责切换汽缸的蒸汽通路。[S7]"
+      },
+      "chainName": {
+        "en": "Throttle disc",
+        "zh": "节流阀片"
+      },
+      "castShadow": false
+    },
+    {
+      "id": "valve-chest",
+      "name": {
+        "en": "Valve chest",
+        "zh": "阀箱"
+      },
+      "group": "steam-supply",
+      "primitive": {
+        "kind": "tube",
+        "path": [
+          [
+            -3.1,
+            1.7,
+            0.65
+          ],
+          [
+            -3.1,
+            3.1,
+            0.65
+          ]
+        ],
+        "radius": 0.095,
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "steel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "extra": [
+        {
+          "kind": "tube",
+          "path": [
+            [
+              -2,
+              1.7,
+              0.65
+            ],
+            [
+              -2,
+              3.1,
+              0.65
+            ]
+          ],
+          "radius": 0.095,
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "tube",
+          "path": [
+            [
+              -3.1,
+              3.1,
+              0.65
+            ],
+            [
+              -2.5,
+              3.1,
+              0.65
+            ],
+            [
+              -2.5,
+              3.1,
+              0.12
+            ]
+          ],
+          "radius": 0.045,
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "color": "stainless"
+        },
+        {
+          "kind": "tube",
+          "path": [
+            [
+              -3.1,
+              1.7,
+              0.65
+            ],
+            [
+              -2.5,
+              1.7,
+              0.65
+            ],
+            [
+              -2.5,
+              1.7,
+              0.12
+            ]
+          ],
+          "radius": 0.045,
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "color": "stainless"
+        },
+        {
+          "kind": "tube",
+          "path": [
+            [
+              -2.5,
+              3.1,
+              0.12
+            ],
+            [
+              -2.5,
+              3.1,
+              0.65
+            ],
+            [
+              -2,
+              3.1,
+              0.65
+            ],
+            [
+              -1.65,
+              3.1,
+              0.65
+            ],
+            [
+              -1.65,
+              0.55,
+              0.65
+            ]
+          ],
+          "radius": 0.045,
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "color": "stainless"
+        },
+        {
+          "kind": "tube",
+          "path": [
+            [
+              -2.5,
+              1.7,
+              0.12
+            ],
+            [
+              -2.5,
+              1.7,
+              0.65
+            ],
+            [
+              -2,
+              1.7,
+              0.65
+            ],
+            [
+              -1.4,
+              1.7,
+              0.65
+            ],
+            [
+              -1.4,
+              0.55,
+              0.65
+            ],
+            [
+              -1.65,
+              0.55,
+              0.65
+            ]
+          ],
+          "radius": 0.045,
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "color": "stainless"
+        }
+      ],
+      "shell": true,
+      "summary": {
+        "en": "Connects each cylinder end to supply or exhaust.",
+        "zh": "把汽缸两端接到供汽或排汽通路。"
+      },
+      "detail": {
+        "en": "The fixed passages connect to four valve pieces. You can select each piece separately. In this model, the valves switch when the piston changes direction. This simple rule is not a measurement of the Lap engine’s valve timing. [S7][S1]",
+        "zh": "固定通道连着四个阀芯，每个都可以单独点选。模型按活塞的运动方向切换阀门。这是一条简化规则，并非 Lap 蒸汽机实测的开关时刻。[S7][S1]"
+      },
+      "chainName": {
+        "en": "Valve chest",
+        "zh": "阀箱"
+      },
+      "castShadow": false,
+      "connects": [
+        "valve-upper-in",
+        "valve-lower-in",
+        "valve-upper-out",
+        "valve-lower-out"
+      ]
+    },
+    {
+      "id": "valve-upper-in",
+      "name": {
+        "en": "Upper inlet",
+        "zh": "上进汽阀"
+      },
+      "group": "steam-supply",
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.065,
+          0.065,
+          0.045
+        ],
+        "at": [
+          -3.1,
+          3.1,
+          0.65
+        ],
+        "color": "brass"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Lets steam enter above the piston.",
+        "zh": "让蒸汽进入活塞上方。"
+      },
+      "detail": {
+        "en": "This separate valve piece lifts to open and admits steam above the piston. Its opening follows the piston’s direction, matching the steam route shown. The model uses a lift of 0.015 m to make the opening visible. [S7][S1]",
+        "zh": "这个独立的上进汽阀芯抬起时，让蒸汽进入活塞上方。它按活塞的运动方向开关，与图中的蒸汽路径一致。模型用 0.015 米的升程显示开口。[S7][S1]"
+      },
+      "chainName": {
+        "en": "Upper inlet",
+        "zh": "上进汽阀"
+      },
+      "castShadow": false
+    },
+    {
+      "id": "valve-lower-in",
+      "name": {
+        "en": "Lower inlet",
+        "zh": "下进汽阀"
+      },
+      "group": "steam-supply",
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.065,
+          0.065,
+          0.045
+        ],
+        "at": [
+          -3.1,
+          1.7,
+          0.65
+        ],
+        "color": "brass"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Lets steam enter below the piston.",
+        "zh": "让蒸汽进入活塞下方。"
+      },
+      "detail": {
+        "en": "This separate valve piece lifts to open and admits steam below the piston. Its opening follows the piston’s direction, matching the steam route shown. The model uses a lift of 0.015 m to make the opening visible. [S7][S1]",
+        "zh": "这个独立的下进汽阀芯抬起时，让蒸汽进入活塞下方。它按活塞的运动方向开关，与图中的蒸汽路径一致。模型用 0.015 米的升程显示开口。[S7][S1]"
+      },
+      "chainName": {
+        "en": "Lower inlet",
+        "zh": "下进汽阀"
+      },
+      "castShadow": false
+    },
+    {
+      "id": "valve-upper-out",
+      "name": {
+        "en": "Upper exhaust",
+        "zh": "上排汽阀"
+      },
+      "group": "steam-supply",
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.065,
+          0.065,
+          0.045
+        ],
+        "at": [
+          -2,
+          3.1,
+          0.65
+        ],
+        "color": "brass"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Connects the upper space to the condenser.",
+        "zh": "把上部空间接到冷凝器。"
+      },
+      "detail": {
+        "en": "This separate valve piece lifts to open and lets steam above the piston leave for the condenser. Its opening follows the piston’s direction, matching the steam route shown. The model uses a lift of 0.015 m to make the opening visible. [S7][S1]",
+        "zh": "这个独立的上排汽阀芯抬起时，让活塞上方的蒸汽排向冷凝器。它按活塞的运动方向开关，与图中的蒸汽路径一致。模型用 0.015 米的升程显示开口。[S7][S1]"
+      },
+      "chainName": {
+        "en": "Upper exhaust",
+        "zh": "上排汽阀"
+      },
+      "castShadow": false
+    },
+    {
+      "id": "valve-lower-out",
+      "name": {
+        "en": "Lower exhaust",
+        "zh": "下排汽阀"
+      },
+      "group": "steam-supply",
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.065,
+          0.065,
+          0.045
+        ],
+        "at": [
+          -2,
+          1.7,
+          0.65
+        ],
+        "color": "brass"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Connects the lower space to the condenser.",
+        "zh": "把下部空间接到冷凝器。"
+      },
+      "detail": {
+        "en": "This separate valve piece lifts to open and lets steam below the piston leave for the condenser. Its opening follows the piston’s direction, matching the steam route shown. The model uses a lift of 0.015 m to make the opening visible. [S7][S1]",
+        "zh": "这个独立的下排汽阀芯抬起时，让活塞下方的蒸汽排向冷凝器。它按活塞的运动方向开关，与图中的蒸汽路径一致。模型用 0.015 米的升程显示开口。[S7][S1]"
+      },
+      "chainName": {
+        "en": "Lower exhaust",
+        "zh": "下排汽阀"
+      },
+      "castShadow": false
+    },
+    {
+      "id": "cylinder",
+      "name": {
+        "en": "Cylinder",
+        "zh": "汽缸"
+      },
+      "group": "working-motion",
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "shell": true,
+      "extra": [
+        {
+          "kind": "panelHole",
+          "size": [
+            0.55,
+            0.55,
+            0.045
+          ],
+          "hole": {
+            "r": 0.025,
+            "at": [
+              0,
+              0
+            ]
+          },
+          "at": [
+            -2.5,
+            3.2425,
+            0.12
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.275,
+            0.275,
+            0.045
+          ],
+          "at": [
+            -2.5,
+            1.6775,
+            0.12
+          ],
+          "color": "steel"
+        }
+      ],
+      "summary": {
+        "en": "Holds steam on both sides of the piston.",
+        "zh": "容纳活塞两侧的蒸汽。"
+      },
+      "detail": {
+        "en": "The cylinder’s bore is its inside diameter. ASME gives the Lap engine’s bore as 18.75 in, about 0.476 m. The Birmingham catalogue gives 18 in, or 0.4572 m. Both give a stroke of 4 ft, about 1.219 m. The records give different bore sizes. [S3][S4][S16]\n\nThe closed top has a hole for the piston rod. The model widens the gap around the moving parts to make them easier to see. [S1]",
+        "zh": "内径就是汽缸内部的直径。ASME 记录的 Lap 内径为 18.75 英寸，约 0.476 米。伯明翰目录记为 18 英寸，即 0.4572 米。两者都记载行程为 4 英尺，约 1.219 米。两份记录的内径不同。[S3][S4][S16]\n\n封闭的上盖留有活塞杆孔。模型放宽了运动零件周围的间隙，方便看清。[S1]"
+      },
+      "chainName": {
+        "en": "Cylinder",
+        "zh": "汽缸"
+      },
+      "castShadow": true,
+      "connects": [
+        "piston",
+        "valve-chest"
+      ]
+    },
+    {
+      "id": "piston",
+      "name": {
+        "en": "Piston",
+        "zh": "活塞"
+      },
+      "group": "working-motion",
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.235125,
+          0.235125,
+          0.05
+        ],
+        "at": [
+          -2.5000000096857242,
+          2.4626861751769056,
+          0.12
+        ],
+        "color": "brass"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Receives the combined push from both sides.",
+        "zh": "承受两侧压力产生的合力。"
+      },
+      "detail": {
+        "en": "Steam acts first on one face, then on the other. The rod takes up part of the upper face. Outside air also pushes on the exposed rod end. The pressure calculations include all these areas. [S8][S1]\n\nThe model leaves a 3 mm gap around the piston. You can also see the small sideways movement caused by the linkage. [S1]",
+        "zh": "蒸汽轮流作用在活塞的两面。活塞杆占去了上表面的一部分，外界空气也推着露在外面的杆端。压强计算把这些面积都算在内。[S8][S1]\n\n模型在活塞周围留出 3 毫米的径向间隙。你还能看到连杆机构带来的微小横移。[S1]"
+      },
+      "chainName": {
+        "en": "Piston",
+        "zh": "活塞"
+      },
+      "castShadow": false,
+      "connects": [
+        "piston-rod"
+      ]
+    },
+    {
+      "id": "piston-rod",
+      "name": {
+        "en": "Piston rod",
+        "zh": "活塞杆"
+      },
+      "group": "working-motion",
+      "primitive": {
+        "kind": "box",
+        "size": [
+          2.4000000000000004,
+          0.04,
+          0.07
+        ],
+        "at": [
+          -2.5000000096857242,
+          3.6626861751769058,
+          0.12
+        ],
+        "rotation": [
+          0,
+          0,
+          90
+        ],
+        "color": "steel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Passes pushing and pulling forces to the links.",
+        "zh": "把推力和拉力传给连杆机构。"
+      },
+      "detail": {
+        "en": "This rigid rod joins the piston to point D of the parallel motion. It passes through the upper cover. A chain can only pull, but this rod can pass on both pushing and pulling forces. [S6][S7]\n\nThe rod diameter chosen for this model is 0.040 m. [S1]",
+        "zh": "这根刚性杆穿过上盖，把活塞接到平行运动机构的 D 点。链条只能拉，活塞杆却能同时传递推力和拉力。[S6][S7]\n\n为这个模型选定的杆径为 0.040 米。[S1]"
+      },
+      "chainName": {
+        "en": "Piston rod",
+        "zh": "活塞杆"
+      },
+      "castShadow": false,
+      "connects": [
+        "parallel-outer"
+      ]
+    },
+    {
+      "id": "beam",
+      "name": {
+        "en": "Beam",
+        "zh": "横梁"
+      },
+      "group": "working-motion",
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Passes motion from one end to the other.",
+        "zh": "把一端的运动传到另一端。"
+      },
+      "detail": {
+        "en": "The rigid beam rocks around a fixed central pivot. Both ends move together. The parallel links and drive rod follow the same beam angle in the model. [S6][S1]",
+        "zh": "刚性横梁绕固定的中央支点摆动，两端一起运动。模型中的平行连杆和传动杆都随横梁的同一个摆角运动。[S6][S1]"
+      },
+      "chainName": {
+        "en": "Beam",
+        "zh": "横梁"
+      },
+      "castShadow": true,
+      "connects": [
+        "parallel-inner",
+        "parallel-outer",
+        "drive-rod",
+        "pump-rod"
+      ]
+    },
+    {
+      "id": "parallel-inner",
+      "name": {
+        "en": "Inner link",
+        "zh": "内侧短连杆"
+      },
+      "group": "working-motion",
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.7999999999999996,
+          0.045,
+          0.07
+        ],
+        "at": [
+          -1.2500000048428621,
+          5.231343087588453,
+          0.12
+        ],
+        "rotation": [
+          0,
+          0,
+          -90.05629561065861
+        ],
+        "color": "steel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Joins C to E with one rigid bar.",
+        "zh": "用一根刚杆连接 C 点与 E 点。"
+      },
+      "detail": {
+        "en": "The C–E bar forms one side of a parallelogram with hinged corners. It has no hinge in the middle. The bar lengths were chosen to reconstruct this mechanism. [S6][S1]",
+        "zh": "C–E 杆是平行四边形的一边，四个角由铰链连接，杆的中间没有铰链。这里的杆长是重建机构时选定的尺寸。[S6][S1]"
+      },
+      "chainName": {
+        "en": "Inner link",
+        "zh": "内连杆"
+      },
+      "castShadow": false,
+      "connects": [
+        "parallel-bottom",
+        "radius-rod"
+      ]
+    },
+    {
+      "id": "parallel-outer",
+      "name": {
+        "en": "Outer link",
+        "zh": "外侧短连杆"
+      },
+      "group": "working-motion",
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.7999999999999996,
+          0.045,
+          0.07
+        ],
+        "at": [
+          -2.4996069922447948,
+          5.262685982098473,
+          0.12
+        ],
+        "rotation": [
+          0,
+          0,
+          -90.05629561065862
+        ],
+        "color": "steel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Joins B to D, opposite the inner bar.",
+        "zh": "连接 B 点与 D 点，与内侧杆相对。"
+      },
+      "detail": {
+        "en": "The B–D bar stays parallel to C–E. The radius rod crosses it farther forward or back. The bars do not join at the crossing. [S6][S1]",
+        "zh": "B–D 杆始终与 C–E 杆平行。摇杆从前后错开的位置越过它，交叉处没有连接。[S6][S1]"
+      },
+      "chainName": {
+        "en": "Outer link",
+        "zh": "外连杆"
+      },
+      "castShadow": false
+    },
+    {
+      "id": "parallel-bottom",
+      "name": {
+        "en": "Bottom link",
+        "zh": "下连杆"
+      },
+      "group": "working-motion",
+      "primitive": {
+        "kind": "box",
+        "size": [
+          1.2500000000000002,
+          0.045,
+          0.07
+        ],
+        "at": [
+          -1.875196515984758,
+          4.847014727921896,
+          0.12
+        ],
+        "rotation": [
+          0,
+          0,
+          178.56319695653926
+        ],
+        "color": "steel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Forms the bottom of the moving parallelogram.",
+        "zh": "组成活动平行四边形的底边。"
+      },
+      "detail": {
+        "en": "The E–D bar stays parallel to the C–B section of the beam. The model calculates its two ends together with the other links, so they move as one connected mechanism. [S6][S1]",
+        "zh": "E–D 杆始终与横梁的 C–B 段平行。模型把它的两端和其他连杆一起计算，让整套相连的机构共同运动。[S6][S1]"
+      },
+      "chainName": {
+        "en": "Bottom link",
+        "zh": "下连杆"
+      },
+      "castShadow": false,
+      "connects": [
+        "parallel-outer"
+      ]
+    },
+    {
+      "id": "radius-rod",
+      "name": {
+        "en": "Radius rod",
+        "zh": "摇杆"
+      },
+      "group": "working-motion",
+      "primitive": {
+        "kind": "box",
+        "size": [
+          1.2500000000000002,
+          0.045,
+          0.07
+        ],
+        "at": [
+          -1.8751965111418958,
+          4.815671640333443,
+          -0.14
+        ],
+        "rotation": [
+          0,
+          0,
+          1.4368207491545593
+        ],
+        "color": "steel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Guides E around a separate fixed pivot.",
+        "zh": "让 E 点绕独立的固定支点运动。"
+      },
+      "detail": {
+        "en": "Point F stays fixed while point E follows a circular arc. This rod and the parallelogram guide the piston rod along a nearly straight path. There is no hinge where this rod crosses B–D. [S6]",
+        "zh": "F 点固定不动，E 点沿圆弧运动。摇杆与平行四边形一起，引导活塞杆沿近似直线运动。它与 B–D 杆的交叉处没有铰链。[S6]"
+      },
+      "chainName": {
+        "en": "Radius rod",
+        "zh": "摇杆"
+      },
+      "castShadow": false
+    },
+    {
+      "id": "drive-rod",
+      "name": {
+        "en": "Connecting rod",
+        "zh": "传动杆"
+      },
+      "group": "working-motion",
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Passes the beam’s motion to the planet gear.",
+        "zh": "把横梁的运动传给行星轮。"
+      },
+      "detail": {
+        "en": "The planet gear is fixed to the lower end of this rod. As the rod tilts, the gear tilts with it. The planet gear cannot spin freely around its own centre. [S6][S7]",
+        "zh": "行星轮固定在传动杆下端。传动杆倾斜时，行星轮的朝向也随之改变。行星轮不能绕自身中心自由转动。[S6][S7]"
+      },
+      "chainName": {
+        "en": "Connecting rod",
+        "zh": "传动杆"
+      },
+      "castShadow": false,
+      "connects": [
+        "planet"
+      ],
+      "primitive": {
+        "kind": "box",
+        "size": [
+          3,
+          0.045,
+          0.07
+        ],
+        "at": [
+          2.8042489014824263,
+          4.068657105489979,
+          -0.12
+        ],
+        "rotation": [
+          0,
+          0,
+          -78.2666860924305
+        ],
+        "color": "steel"
+      }
+    },
+    {
+      "id": "planet",
+      "name": {
+        "en": "Planet",
+        "zh": "行星轮"
+      },
+      "group": "working-motion",
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Travels around the sun gear with the drive rod.",
+        "zh": "随传动杆绕太阳轮运动。"
+      },
+      "detail": {
+        "en": "The two model gears are equal in size, and their teeth mesh without slipping. During one complete piston cycle, the sun gear makes two net turns and the planet gear returns to its starting orientation. The speed ratio changes during the cycle. [S6][S7][S1]",
+        "zh": "模型中的两只齿轮大小相等，轮齿啮合时不打滑。活塞完成一个周期，太阳轮累计净转两圈，行星轮则回到起初的朝向。两者的瞬时速度比会随周期改变。[S6][S7][S1]"
+      },
+      "chainName": {
+        "en": "Planet",
+        "zh": "行星轮"
+      },
+      "castShadow": false,
+      "connects": [
+        "sun",
+        "centre-link"
+      ]
+    },
+    {
+      "id": "sun",
+      "name": {
+        "en": "Sun",
+        "zh": "太阳轮"
+      },
+      "group": "working-motion",
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Drives the output shaft as its teeth mesh.",
+        "zh": "通过轮齿啮合带动输出轴。"
+      },
+      "detail": {
+        "en": "The sun gear is fixed to the output shaft. Its turning follows both the planet’s travel around it and the tilt of the rod holding the planet. The model calculates these movements together. [S6][S1]",
+        "zh": "太阳轮固定在输出轴上。它的转动同时取决于行星轮的绕行，以及固定行星轮的传动杆怎样倾斜。模型把这些运动一起计算。[S6][S1]"
+      },
+      "chainName": {
+        "en": "Sun",
+        "zh": "太阳轮"
+      },
+      "castShadow": false,
+      "connects": [
+        "shaft"
+      ]
+    },
+    {
+      "id": "centre-link",
+      "name": {
+        "en": "Centre link",
+        "zh": "定距连杆"
+      },
+      "group": "working-motion",
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.6092838281609874,
+          0.045,
+          0.07
+        ],
+        "at": [
+          2.8046419140804937,
+          2.5999999999999996,
+          -0.28
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "color": "steel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Keeps the gear centres a fixed distance apart.",
+        "zh": "让两齿轮中心保持固定距离。"
+      },
+      "detail": {
+        "en": "The link turns at the centres of the sun and planet gears. It keeps the centres the right distance apart. The meshing teeth still pass the rotation from one gear to the other. [S6][S1]",
+        "zh": "定距连杆的两端分别绕太阳轮和行星轮的中心转动，保持中心距不变。两齿轮之间的转动仍靠轮齿啮合来传递。[S6][S1]"
+      },
+      "chainName": {
+        "en": "Centre link",
+        "zh": "定距连杆"
+      },
+      "castShadow": false
+    },
+    {
+      "id": "shaft",
+      "name": {
+        "en": "Shaft",
+        "zh": "输出轴"
+      },
+      "group": "working-motion",
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.06,
+          0.06,
+          2
+        ],
+        "at": [
+          2.5,
+          2.6,
+          0
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "color": "steel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Passes rotation from the sun gear to the flywheel.",
+        "zh": "把太阳轮的转动传给飞轮。"
+      },
+      "detail": {
+        "en": "The sun gear and flywheel turn through the same angle on this shaft. Bearings hold the shaft in place. The model sets the shaft’s position at each stage of the cycle. [S6][S1]",
+        "zh": "太阳轮和飞轮装在同一根轴上，转过的角度相同。轴承支承着轴。模型按周期的不同阶段设定轴的转动位置。[S6][S1]"
+      },
+      "chainName": {
+        "en": "Shaft",
+        "zh": "输出轴"
+      },
+      "castShadow": false,
+      "connects": [
+        "flywheel",
+        "load-wheel",
+        "governor-spindle"
+      ]
+    },
+    {
+      "id": "flywheel",
+      "name": {
+        "en": "Flywheel",
+        "zh": "飞轮"
+      },
+      "group": "working-motion",
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Stores energy as it spins, then releases it.",
+        "zh": "转动时储存能量，再把能量释放出来。"
+      },
+      "detail": {
+        "en": "A flywheel stores and releases energy as it turns. This helps smooth out changes in motion. The model sets the speed instead of calculating this smoothing effect. [S7][S1]\n\nDavid K. Hulse reports a diameter of 16 ft, about 4.88 m. Records disagree on the number of drive teeth around the rim, so the model leaves out that tooth ring. The spokes are a reconstruction. [S5][S3][S16]",
+        "zh": "飞轮转动时储存和释放能量，让运动较为平稳。模型的速度是设定的，没有计算这种平稳效果。[S7][S1]\n\nDavid K. Hulse 报道的飞轮直径为 16 英尺，约 4.88 米。不同记录的外缘传动齿数不一致，所以模型省略了这圈轮齿。辐条也是重建的。[S5][S3][S16]"
+      },
+      "chainName": {
+        "en": "Flywheel",
+        "zh": "飞轮"
+      },
+      "castShadow": true
+    },
+    {
+      "id": "governor-spindle",
+      "name": {
+        "en": "Spindle",
+        "zh": "调速器轴"
+      },
+      "group": "regulation",
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.02,
+          0.02,
+          1.15
+        ],
+        "at": [
+          1,
+          2.5,
+          0.9
+        ],
+        "color": "steel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "extra": [
+        {
+          "kind": "torus",
+          "size": [
+            0.12,
+            0.012
+          ],
+          "at": [
+            2.5,
+            2.6,
+            0.8
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "torus",
+          "size": [
+            0.1,
+            0.012
+          ],
+          "at": [
+            1,
+            2,
+            0.8
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "tube",
+          "path": [
+            [
+              2.5,
+              2.48,
+              0.8
+            ],
+            [
+              1,
+              1.9,
+              0.8
+            ],
+            [
+              0.9,
+              2,
+              0.8
+            ],
+            [
+              1,
+              2.1,
+              0.8
+            ],
+            [
+              2.5,
+              2.72,
+              0.8
+            ],
+            [
+              2.62,
+              2.6,
+              0.8
+            ],
+            [
+              2.5,
+              2.48,
+              0.8
+            ]
+          ],
+          "radius": 0.008,
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "color": "rubber"
+        },
+        {
+          "kind": "cone",
+          "size": [
+            0.08,
+            0.08
+          ],
+          "at": [
+            1,
+            2.03,
+            0.9
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "cone",
+          "size": [
+            0.08,
+            0.08
+          ],
+          "at": [
+            1,
+            2,
+            0.86
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "color": "brass"
+        }
+      ],
+      "summary": {
+        "en": "Supports the governor balls and their arms.",
+        "zh": "支承调速器的飞球和连杆。"
+      },
+      "detail": {
+        "en": "In a real governor, rotation changes the forces on the balls, and links adjust the steam supply. Here, the spindle stays still while you compare three steady positions. The display switches directly between them, keeping the rods rigid. These comparisons are separate from acceleration, engine position and cold-side pressure. [S7][S1]\n\nThe schematic belt and right-angle drive mark the power connection, without setting a drive-speed ratio.",
+        "zh": "真实调速器旋转时，飞球的受力改变，连杆随之调节供汽。这里让轴保持静止，方便比较三个稳定位置。画面直接切换位置，让杆长保持不变。这项比较与加速过程、主机位置和冷端压强分开。[S7][S1]\n\n示意皮带和直角传动标出动力连接，不设定传动比。"
+      },
+      "chainName": {
+        "en": "Spindle",
+        "zh": "调速器轴"
+      },
+      "castShadow": false,
+      "connects": [
+        "governor-upper",
+        "governor-upper-right"
+      ]
+    },
+    {
+      "id": "governor-balls",
+      "name": {
+        "en": "Left flyball",
+        "zh": "左飞球"
+      },
+      "group": "regulation",
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.075
+        ],
+        "at": [
+          0.5123495242663968,
+          2.8895599098298517,
+          0.9
+        ],
+        "color": "brass"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Shows how far the left ball sits from the shaft.",
+        "zh": "显示左飞球离调速器轴有多远。"
+      },
+      "detail": {
+        "en": "The two balls sit symmetrically on either side of the shaft. The calculation treats each ball’s mass as concentrated at one point. [S1]\n\nCompare the left ball’s balanced positions at 60, 90 and 120 rpm. [S1]",
+        "zh": "两只飞球对称地分布在轴的两侧。计算时，把每只球的质量看作集中在一个点上。[S1]\n\n可以比较左飞球在每分钟 60、90 和 120 转时的平衡位置。[S1]"
+      },
+      "chainName": {
+        "en": "Left ball",
+        "zh": "左飞球"
+      },
+      "castShadow": false,
+      "connects": [
+        "governor-lower"
+      ]
+    },
+    {
+      "id": "governor-ball-right",
+      "name": {
+        "en": "Right flyball",
+        "zh": "右飞球"
+      },
+      "group": "regulation",
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.075
+        ],
+        "at": [
+          1.487650475733603,
+          2.8895599098298517,
+          0.9
+        ],
+        "color": "brass"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Shows how far the right ball sits from the shaft.",
+        "zh": "显示右飞球离调速器轴有多远。"
+      },
+      "detail": {
+        "en": "The right ball mirrors the left ball in this symmetric model. Both balls use the same point-mass calculation. [S1]\n\nCompare the right ball’s balanced positions at 60, 90 and 120 rpm. [S1]",
+        "zh": "在这个对称模型中，右飞球与左飞球对称。两只球都按质量集中在一点来计算。[S1]\n\n可以比较右飞球在每分钟 60、90 和 120 转时的平衡位置。[S1]"
+      },
+      "chainName": {
+        "en": "Right ball",
+        "zh": "右飞球"
+      },
+      "castShadow": false,
+      "connects": [
+        "governor-lower-right"
+      ]
+    },
+    {
+      "id": "governor-upper",
+      "name": {
+        "en": "Left upper arm",
+        "zh": "左上摆臂"
+      },
+      "group": "regulation",
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.5,
+          0.025,
+          0.07
+        ],
+        "at": [
+          0.7561747621331985,
+          2.944779954914926,
+          0.9
+        ],
+        "rotation": [
+          0,
+          0,
+          -167.23926453071914
+        ],
+        "color": "steel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Joins the fixed upper pivot to a ball.",
+        "zh": "连接固定上支点与飞球。"
+      },
+      "detail": {
+        "en": "This arm joins the fixed upper pivot to the left ball. It is 0.5 m long in the model and keeps that length in every steady position. [S1]",
+        "zh": "这根杆连接固定上支点与左飞球。模型中的杆长为 0.5 米，在各个稳定位置都保持不变。[S1]"
+      },
+      "chainName": {
+        "en": "Left upper arm",
+        "zh": "左上杆"
+      },
+      "castShadow": false,
+      "connects": [
+        "governor-balls"
+      ]
+    },
+    {
+      "id": "governor-upper-right",
+      "name": {
+        "en": "Right upper arm",
+        "zh": "右上摆臂"
+      },
+      "group": "regulation",
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.4999999999999999,
+          0.025,
+          0.07
+        ],
+        "at": [
+          1.2438252378668015,
+          2.944779954914926,
+          0.9
+        ],
+        "rotation": [
+          0,
+          0,
+          -12.760735469280885
+        ],
+        "color": "steel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Joins the fixed upper pivot to a ball.",
+        "zh": "连接固定上支点与飞球。"
+      },
+      "detail": {
+        "en": "This arm joins the fixed upper pivot to the right ball. It is 0.5 m long in the model and keeps that length as the ball moves outwards. [S1]",
+        "zh": "这根杆连接固定上支点与右飞球。模型中的杆长为 0.5 米，飞球向外移时仍保持定长。[S1]"
+      },
+      "chainName": {
+        "en": "R upper arm",
+        "zh": "右上杆"
+      },
+      "castShadow": false,
+      "connects": [
+        "governor-ball-right"
+      ]
+    },
+    {
+      "id": "governor-lower",
+      "name": {
+        "en": "Left lower link",
+        "zh": "左下连杆"
+      },
+      "group": "regulation",
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.4999999999999999,
+          0.025,
+          0.07
+        ],
+        "at": [
+          0.7561747621331985,
+          2.834339864744778,
+          0.9
+        ],
+        "rotation": [
+          0,
+          0,
+          -12.760735469280831
+        ],
+        "color": "steel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Joins a ball to the sliding collar.",
+        "zh": "连接飞球与滑套。"
+      },
+      "detail": {
+        "en": "This arm joins the left ball to the sliding collar. Its model length stays at 0.5 m as the collar changes height. [S1]",
+        "zh": "这根杆连接左飞球与滑套。滑套高度改变时，模型中的杆长仍保持 0.5 米。[S1]"
+      },
+      "chainName": {
+        "en": "lower link",
+        "zh": "左下杆"
+      },
+      "castShadow": false,
+      "connects": [
+        "governor-collar"
+      ]
+    },
+    {
+      "id": "governor-lower-right",
+      "name": {
+        "en": "Right lower link",
+        "zh": "右下连杆"
+      },
+      "group": "regulation",
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.4999999999999999,
+          0.025,
+          0.07
+        ],
+        "at": [
+          1.2438252378668015,
+          2.834339864744778,
+          0.9
+        ],
+        "rotation": [
+          0,
+          0,
+          -167.23926453071917
+        ],
+        "color": "steel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Joins a ball to the sliding collar.",
+        "zh": "连接飞球与滑套。"
+      },
+      "detail": {
+        "en": "This arm joins the right ball to the sliding collar. Its model length stays at 0.5 m in all three steady positions. [S1]",
+        "zh": "这根杆连接右飞球与滑套。模型中的杆长为 0.5 米，在三个稳定位置都相同。[S1]"
+      },
+      "chainName": {
+        "en": "R lower link",
+        "zh": "右下杆"
+      },
+      "castShadow": false,
+      "connects": [
+        "governor-collar"
+      ]
+    },
+    {
+      "id": "governor-collar",
+      "name": {
+        "en": "Collar",
+        "zh": "滑套"
+      },
+      "group": "regulation",
+      "primitive": {
+        "kind": "torus",
+        "size": [
+          0.065,
+          0.022
+        ],
+        "at": [
+          1,
+          2.779119819659704,
+          0.9
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "color": "brass"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Slides up and down the governor spindle.",
+        "zh": "沿调速器轴上下滑动。"
+      },
+      "detail": {
+        "en": "In this symmetric model, the collar sits higher at a higher steady speed. The links’ arrangement determines this direction. Historical engines could use different lever arrangements. [S7][S1]",
+        "zh": "在这个对称模型中，稳定转速越高，滑套的位置越高。这个方向由连杆的排列方式决定。历史上的蒸汽机也有不同的杠杆配置。[S7][S1]"
+      },
+      "chainName": {
+        "en": "Collar",
+        "zh": "滑套"
+      },
+      "castShadow": false,
+      "connects": [
+        "throttle-link"
+      ]
+    },
+    {
+      "id": "throttle-link",
+      "name": {
+        "en": "Collar fork",
+        "zh": "滑套叉环"
+      },
+      "group": "regulation",
+      "primitive": {
+        "kind": "torus",
+        "size": [
+          0.1,
+          0.012
+        ],
+        "at": [
+          1,
+          2.779119819659704,
+          0.9
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "color": "steel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Follows the collar up and down without orbiting.",
+        "zh": "随滑套升降，不绕轴转动。"
+      },
+      "detail": {
+        "en": "The fork fits into the collar’s groove. As the collar rises or falls, the fork passes this movement to the throttle rod. It does not travel around the spindle with the balls. [S7][S1]",
+        "zh": "叉环嵌在滑套槽里。滑套升降时，叉环把运动传给节流连杆。它不会随飞球绕调速器轴转动。[S7][S1]"
+      },
+      "chainName": {
+        "en": "Collar fork",
+        "zh": "滑套叉环"
+      },
+      "castShadow": false,
+      "connects": [
+        "throttle-rod"
+      ]
+    },
+    {
+      "id": "throttle-rod",
+      "name": {
+        "en": "Throttle rod",
+        "zh": "节流连杆"
+      },
+      "group": "regulation",
+      "primitive": {
+        "kind": "box",
+        "size": [
+          1.1000000000000005,
+          0.025,
+          0.07
+        ],
+        "at": [
+          1.3106264588906045,
+          2.32523524949116,
+          0.9
+        ],
+        "rotation": [
+          0,
+          0,
+          -55.613305263114995
+        ],
+        "color": "steel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Joins the collar fork to the throttle crank.",
+        "zh": "连接滑套叉环与节流曲柄。"
+      },
+      "detail": {
+        "en": "This fixed-length rod connects the collar fork to the throttle crank. The model uses the crossing points of two circles to find its joint positions at each steady speed. [S1]",
+        "zh": "这根定长杆把滑套叉环接到节流曲柄。模型用两个圆的交点，确定各个稳定转速下接头的位置。[S1]"
+      },
+      "chainName": {
+        "en": "Throttle rod",
+        "zh": "节流连杆"
+      },
+      "castShadow": false,
+      "connects": [
+        "throttle-crank"
+      ]
+    },
+    {
+      "id": "throttle-crank",
+      "name": {
+        "en": "Throttle crank",
+        "zh": "节流曲柄"
+      },
+      "group": "regulation",
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.40000000000000013,
+          0.025,
+          0.07
+        ],
+        "at": [
+          1.8106264588906045,
+          1.935675339661308,
+          0.9
+        ],
+        "rotation": [
+          0,
+          0,
+          -161.23887626856782
+        ],
+        "color": "steel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Turns the throttle disc around its fixed axis.",
+        "zh": "带动节流阀片绕固定轴转动。"
+      },
+      "detail": {
+        "en": "The crank joins the throttle rod to the disc’s axis. The crank and disc turn together while the valve body around them stays fixed. You can select the disc separately. [S7][S1]",
+        "zh": "曲柄把节流连杆接到阀片轴上。曲柄与阀片一起转动，周围的阀体保持不动。阀片可以单独点选。[S7][S1]"
+      },
+      "chainName": {
+        "en": "Throttle crank",
+        "zh": "节流曲柄"
+      },
+      "castShadow": false
+    },
+    {
+      "id": "condenser",
+      "name": {
+        "en": "Condenser",
+        "zh": "冷凝器"
+      },
+      "group": "condensing",
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0.22,
+            -0.35
+          ],
+          [
+            0.245,
+            -0.35
+          ],
+          [
+            0.245,
+            0.35
+          ],
+          [
+            0.22,
+            0.35
+          ],
+          [
+            0.22,
+            -0.35
+          ]
+        ],
+        "at": [
+          -1.65,
+          0.55,
+          0.65
+        ],
+        "color": "steel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "shell": true,
+      "summary": {
+        "en": "Turns exhaust steam into water outside the cylinder.",
+        "zh": "在汽缸之外，把排出的蒸汽变成水。"
+      },
+      "detail": {
+        "en": "Exhaust steam meets a spray of cold water here. As the steam condenses, it releases heat and its pressure falls. The air pump removes air and the mixed water. [S7][S9]\n\nThe model reconstructs the injection nozzle inside the condenser. The older illustration shows the main idea: keeping the hot cylinder and cold vessel apart. [S1][S14]",
+        "zh": "排出的蒸汽在这里接触喷入的冷水。蒸汽凝结时放出热量，压强随之降低。抽气泵把空气和混合水移走。[S7][S9]\n\n冷凝器内的喷口是模型重建的。旧插图展示了主要原理：把热汽缸和冷容器分开。[S1][S14]"
+      },
+      "chainName": {
+        "en": "Condenser",
+        "zh": "冷凝器"
+      },
+      "castShadow": false,
+      "connects": [
+        "air-pump",
+        "injection-jet"
+      ]
+    },
+    {
+      "id": "injection-jet",
+      "name": {
+        "en": "Injection jet",
+        "zh": "冷水喷口"
+      },
+      "group": "condensing",
+      "primitive": {
+        "kind": "tube",
+        "path": [
+          [
+            -2.6,
+            0.55,
+            1.2
+          ],
+          [
+            -2.15,
+            0.55,
+            1.2
+          ],
+          [
+            -1.65,
+            0.55,
+            0.9
+          ],
+          [
+            -1.65,
+            0.55,
+            0.65
+          ]
+        ],
+        "radius": 0.025,
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "brass"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Sprays cold water into the condenser.",
+        "zh": "把冷水喷入冷凝器。"
+      },
+      "detail": {
+        "en": "The cold-water pipe ends where water and steam mix inside the condenser. In the earlier atmospheric engine, cold water went directly into the working cylinder instead. [S7][S1]",
+        "zh": "冷水管伸到冷凝器内部，让冷水在这里与蒸汽混合。较早的大气式蒸汽机则把冷水直接喷入工作汽缸。[S7][S1]"
+      },
+      "chainName": {
+        "en": "Injection jet",
+        "zh": "冷水喷口"
+      },
+      "castShadow": false
+    },
+    {
+      "id": "cooling-cistern",
+      "name": {
+        "en": "Cooling cistern",
+        "zh": "冷水箱"
+      },
+      "group": "condensing",
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          1.05,
+          0.06,
+          1.55
+        ],
+        "bevel": 0.018,
+        "at": [
+          -1.95,
+          0.07,
+          0.95
+        ],
+        "color": "steel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.045,
+            0.75,
+            1.55
+          ],
+          "bevel": 0.018,
+          "at": [
+            -2.475,
+            0.445,
+            0.95
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.045,
+            0.75,
+            1.55
+          ],
+          "bevel": 0.018,
+          "at": [
+            -1.425,
+            0.445,
+            0.95
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            1.05,
+            0.75,
+            0.045
+          ],
+          "bevel": 0.018,
+          "at": [
+            -1.95,
+            0.445,
+            0.175
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            1.05,
+            0.75,
+            0.045
+          ],
+          "bevel": 0.018,
+          "at": [
+            -1.95,
+            0.445,
+            1.725
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "box",
+          "size": [
+            1,
+            0.018,
+            1.5
+          ],
+          "at": [
+            -1.95,
+            0.58,
+            0.95
+          ],
+          "color": "glass"
+        }
+      ],
+      "shell": true,
+      "summary": {
+        "en": "Supplies cold water to the condenser.",
+        "zh": "向冷凝器提供冷水。"
+      },
+      "detail": {
+        "en": "This tank receives cold water from outside the system. Water and heat also leave the system, so it needs a continuing supply of fresh cooling water. [S7][S1]",
+        "zh": "冷水箱从外面接收冷水。水和热量也会排到系统之外，因此需要不断补充新的冷却水。[S7][S1]"
+      },
+      "chainName": {
+        "en": "Cooling cistern",
+        "zh": "冷水箱"
+      },
+      "castShadow": false,
+      "connects": [
+        "injection-jet"
+      ]
+    },
+    {
+      "id": "air-pump",
+      "name": {
+        "en": "Air pump",
+        "zh": "抽气泵"
+      },
+      "group": "condensing",
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0.135,
+            -0.46
+          ],
+          [
+            0.16,
+            -0.46
+          ],
+          [
+            0.16,
+            0.46
+          ],
+          [
+            0.135,
+            0.46
+          ],
+          [
+            0.135,
+            -0.46
+          ]
+        ],
+        "at": [
+          -1,
+          1.1250743265917595,
+          0.12
+        ],
+        "color": "steel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "shell": true,
+      "extra": [
+        {
+          "kind": "cylinder",
+          "size": [
+            0.15,
+            0.15,
+            0.035
+          ],
+          "at": [
+            -1,
+            0.6475743265917595,
+            0.12
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "panelHole",
+          "size": [
+            0.3,
+            0.3,
+            0.035
+          ],
+          "hole": {
+            "r": 0.028,
+            "at": [
+              0,
+              0
+            ]
+          },
+          "at": [
+            -1,
+            1.6025743265917596,
+            0.12
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "color": "brass"
+        }
+      ],
+      "summary": {
+        "en": "Removes air and mixed water from the condenser.",
+        "zh": "从冷凝器抽走空气和混合水。"
+      },
+      "detail": {
+        "en": "The beam drives the pump rod. As the pump piston rises, it draws in the mixture and sends out water from above the piston. As it descends, the mixture passes through a one-way passage. The valves are shown in a simplified form. [S7][S1]",
+        "zh": "横梁带动泵杆。泵活塞上升时，抽入混合物，并排出活塞上方的水。下降时，混合物经过只能单向流动的止回通道转移。阀门采用简化画法。[S7][S1]"
+      },
+      "chainName": {
+        "en": "Air pump",
+        "zh": "抽气泵"
+      },
+      "castShadow": false,
+      "connects": [
+        "pump-piston",
+        "hot-well"
+      ]
+    },
+    {
+      "id": "pump-piston",
+      "name": {
+        "en": "Pump piston",
+        "zh": "泵活塞"
+      },
+      "group": "condensing",
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.13,
+          0.13,
+          0.045
+        ],
+        "at": [
+          -1,
+          1.1250743265917595,
+          0.12
+        ],
+        "color": "brass"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "size": [
+            0.035,
+            0.035,
+            0.009
+          ],
+          "at": [
+            -0.94,
+            1.1550743265917596,
+            0.12
+          ],
+          "color": "brass"
+        }
+      ],
+      "summary": {
+        "en": "Pushes the mixture through the air pump.",
+        "zh": "推动混合物通过抽气泵。"
+      },
+      "detail": {
+        "en": "The pump piston moves with the main engine. The model calculates their movements together, so the pump follows the beam through each stroke. The picture shows movement rather than a constant pumping rate. [S7][S1]",
+        "zh": "泵活塞随主机一起运动。模型把两者一起计算，让泵在每次行程中都随横梁运动。画面展示运动过程，不表示抽送量恒定。[S7][S1]"
+      },
+      "chainName": {
+        "en": "Pump piston",
+        "zh": "泵活塞"
+      },
+      "castShadow": false
+    },
+    {
+      "id": "pump-rod",
+      "name": {
+        "en": "Pump rod",
+        "zh": "泵杆"
+      },
+      "group": "condensing",
+      "primitive": {
+        "kind": "box",
+        "size": [
+          4.5,
+          0.045,
+          0.07
+        ],
+        "at": [
+          -0.9998427949607731,
+          3.3750743210998877,
+          0.12
+        ],
+        "rotation": [
+          0,
+          0,
+          -90.00400319345478
+        ],
+        "color": "steel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Passes beam motion to the air-pump piston.",
+        "zh": "把横梁的运动传给抽气泵活塞。"
+      },
+      "detail": {
+        "en": "A point inward from the beam’s end drives this rod. The rod keeps a fixed length and moves the pump slider vertically. Both rod ends follow the same stage of the cycle as the main piston. [S1][S7]",
+        "zh": "横梁端部以内的一个连接点带动这根杆。杆长固定，带着泵的滑块上下运动。杆的两端与主活塞按同一个周期位置运动。[S1][S7]"
+      },
+      "chainName": {
+        "en": "Pump rod",
+        "zh": "泵杆"
+      },
+      "castShadow": false,
+      "connects": [
+        "pump-piston"
+      ]
+    },
+    {
+      "id": "hot-well",
+      "name": {
+        "en": "Hot well",
+        "zh": "热井"
+      },
+      "group": "condensing",
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0.24,
+            -0.2
+          ],
+          [
+            0.265,
+            -0.2
+          ],
+          [
+            0.265,
+            0.2
+          ],
+          [
+            0.24,
+            0.2
+          ],
+          [
+            0.24,
+            -0.2
+          ]
+        ],
+        "at": [
+          -0.35,
+          0.3,
+          1.2
+        ],
+        "color": "brass"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "size": [
+            0.24,
+            0.24,
+            0.025
+          ],
+          "at": [
+            -0.35,
+            0.0875,
+            1.2
+          ],
+          "color": "brass"
+        }
+      ],
+      "summary": {
+        "en": "Collects warm water discharged by the air pump.",
+        "zh": "收集抽气泵排出的温水。"
+      },
+      "detail": {
+        "en": "The air pump sends water into the hot well. A feed pump returns part of this water to the boiler. The rest can leave through the overflow, so water does not all circulate in a closed loop. [S7][S1]",
+        "zh": "抽气泵把水送入热井。给水泵把其中一部分送回锅炉，其余的水可以从溢流口排出。水并非全部在密闭回路中循环。[S7][S1]"
+      },
+      "chainName": {
+        "en": "Hot well",
+        "zh": "热井"
+      },
+      "castShadow": false,
+      "connects": [
+        "feed-pump",
+        "water-pipes"
+      ]
+    },
+    {
+      "id": "feed-pump",
+      "name": {
+        "en": "Feed pump",
+        "zh": "给水泵"
+      },
+      "group": "condensing",
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0.08,
+            -0.175
+          ],
+          [
+            0.10500000000000001,
+            -0.175
+          ],
+          [
+            0.10500000000000001,
+            0.175
+          ],
+          [
+            0.08,
+            0.175
+          ],
+          [
+            0.08,
+            -0.175
+          ]
+        ],
+        "at": [
+          -0.75,
+          0.4,
+          1.5
+        ],
+        "color": "brass"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "size": [
+            0.085,
+            0.085,
+            0.04
+          ],
+          "at": [
+            -0.75,
+            0.595,
+            1.5
+          ],
+          "color": "brass"
+        }
+      ],
+      "summary": {
+        "en": "Returns some hot-well water to the boiler.",
+        "zh": "把热井中的部分水送回锅炉。"
+      },
+      "detail": {
+        "en": "This small pump marks the route back to the boiler. It stays fixed in this display. Fresh water replaces water that leaves the system. [S7][S1]",
+        "zh": "这台小泵标出回到锅炉的水路，图中保持固定。新的水补进来，替代离开系统的水。[S7][S1]"
+      },
+      "chainName": {
+        "en": "Feed pump",
+        "zh": "给水泵"
+      },
+      "castShadow": false,
+      "connects": [
+        "boiler"
+      ]
+    },
+    {
+      "id": "water-pipes",
+      "name": {
+        "en": "Water pipes",
+        "zh": "水管"
+      },
+      "group": "condensing",
+      "primitive": {
+        "kind": "tube",
+        "path": [
+          [
+            -1.65,
+            0.3,
+            0.65
+          ],
+          [
+            -1,
+            0.3,
+            0.12
+          ],
+          [
+            -1,
+            0.7250743265917595,
+            0.12
+          ]
+        ],
+        "radius": 0.035,
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "stainless"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "extra": [
+        {
+          "kind": "tube",
+          "path": [
+            [
+              -1,
+              1.5250743265917595,
+              0.12
+            ],
+            [
+              -0.35,
+              1.5250743265917595,
+              1.2
+            ],
+            [
+              -0.35,
+              0.5,
+              1.2
+            ]
+          ],
+          "radius": 0.035,
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "color": "stainless"
+        },
+        {
+          "kind": "tube",
+          "path": [
+            [
+              -0.35,
+              0.3,
+              1.2
+            ],
+            [
+              -0.75,
+              0.3,
+              1.5
+            ],
+            [
+              -0.75,
+              0.55,
+              1.5
+            ],
+            [
+              -4.4,
+              0.55,
+              1.5
+            ],
+            [
+              -4.4,
+              1.4,
+              0.2
+            ]
+          ],
+          "radius": 0.035,
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "color": "stainless"
+        },
+        {
+          "kind": "tube",
+          "path": [
+            [
+              -0.35,
+              0.48,
+              1.2
+            ],
+            [
+              0.15,
+              0.48,
+              1.2
+            ],
+            [
+              0.15,
+              0.15,
+              1.2
+            ]
+          ],
+          "radius": 0.035,
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "color": "stainless"
+        },
+        {
+          "kind": "tube",
+          "path": [
+            [
+              -3,
+              0.9,
+              1.2
+            ],
+            [
+              -2.475,
+              0.9,
+              1.2
+            ],
+            [
+              -2.475,
+              0.58,
+              1.2
+            ]
+          ],
+          "radius": 0.035,
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "color": "stainless"
+        }
+      ],
+      "summary": {
+        "en": "Carry water to the jet, pumps, boiler and overflow.",
+        "zh": "输送注水、排水、回水和溢流的水。"
+      },
+      "detail": {
+        "en": "Separate pipes connect the condenser, air pump, hot well and boiler. The dots help you follow each route. They do not represent molecules, temperature or the amount of water flowing. The pipe sizes and layout are reconstructed. [S7][S1]",
+        "zh": "各段水管连接冷凝器、抽气泵、热井和锅炉。小点帮助你沿水路看，不表示分子、温度或水流量。管径和布局都是重建的。[S7][S1]"
+      },
+      "chainName": {
+        "en": "Water pipes",
+        "zh": "水管"
+      },
+      "castShadow": false
+    },
+    {
+      "id": "load-wheel",
+      "name": {
+        "en": "Mill drive",
+        "zh": "机器取力轮"
+      },
+      "group": "working-motion",
+      "primitive": {
+        "kind": "torus",
+        "size": [
+          0.25,
+          0.035
+        ],
+        "at": [
+          4.97,
+          2.6,
+          -0.65
+        ],
+        "color": "wood"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "size": [
+            0.055,
+            0.055,
+            0.55
+          ],
+          "at": [
+            4.97,
+            2.6,
+            -0.65
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "color": "steel"
+        }
+      ],
+      "summary": {
+        "en": "Passes rotation on to another machine.",
+        "zh": "把转动传给其他机器。"
+      },
+      "detail": {
+        "en": "The preserved Lap engine once drove metal-polishing machinery. This small wheel shows where rotation can be passed to another machine as mechanical work. [S2][S1]",
+        "zh": "保存下来的 Lap 蒸汽机曾带动金属磨光机械。这个小轮展示转动从哪里传给另一台机器，输出机械功。[S2][S1]"
+      },
+      "chainName": {
+        "en": "Mill drive",
+        "zh": "机器取力轮"
+      },
+      "castShadow": false
+    },
+    {
+      "id": "nc-cylinder",
+      "name": {
+        "en": "Open cylinder",
+        "zh": "开口汽缸"
+      },
+      "group": "teaching",
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "size": [
+            0.325,
+            0.325,
+            0.04
+          ],
+          "at": [
+            -12.5,
+            1.13,
+            0
+          ],
+          "color": "steel"
+        }
+      ],
+      "summary": {
+        "en": "Leaves the piston’s upper face open to the air.",
+        "zh": "让活塞上表面直接接触空气。"
+      },
+      "detail": {
+        "en": "Steam enters the space below the piston. Cold water then condenses that steam inside the cylinder. This separate model shows the earlier atmospheric-engine principle. Watt’s engine uses a separate condenser instead. [S11][S12][S1]",
+        "zh": "蒸汽进入活塞下方，冷水随后在汽缸内使它凝结。这个独立模型展示较早的大气式蒸汽机原理。瓦特的蒸汽机则使用分离冷凝器。[S11][S12][S1]"
+      },
+      "chainName": {
+        "en": "Open cylinder",
+        "zh": "开口汽缸"
+      },
+      "castShadow": false,
+      "connects": [
+        "nc-piston",
+        "nc-jet"
+      ]
+    },
+    {
+      "id": "nc-piston",
+      "name": {
+        "en": "Pump-engine piston",
+        "zh": "泵机活塞"
+      },
+      "group": "teaching",
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.285,
+          0.285,
+          0.055
+        ],
+        "at": [
+          -12.5,
+          2,
+          0
+        ],
+        "color": "brass"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "size": [
+            0.025,
+            0.025,
+            1
+          ],
+          "at": [
+            -12.5,
+            2.5,
+            0
+          ],
+          "color": "steel"
+        }
+      ],
+      "summary": {
+        "en": "Receives the downward push of the air above.",
+        "zh": "承受上方空气向下的推力。"
+      },
+      "detail": {
+        "en": "Condensation lowers the pressure below the piston. The air above pushes harder and drives it down; a vacuum does not pull. No rod passes through a sealed upper cover here. The calculation therefore differs from the main engine’s calculation, which includes the rod’s area. [S11][S8][S1]",
+        "zh": "凝结让活塞下方的压强降低。上方空气推得更强，便把活塞压下去，并非真空在拉。这里没有穿过密封上盖的杆，所以计算方法与要计入杆面积的主机不同。[S11][S8][S1]"
+      },
+      "chainName": {
+        "en": "Pump piston",
+        "zh": "泵机活塞"
+      },
+      "castShadow": false,
+      "connects": [
+        "nc-chain"
+      ]
+    },
+    {
+      "id": "nc-beam",
+      "name": {
+        "en": "Pumping beam",
+        "zh": "泵机横梁"
+      },
+      "group": "teaching",
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Lifts the mine-pump rod as the piston goes down.",
+        "zh": "在活塞下降时提起矿井泵杆。"
+      },
+      "detail": {
+        "en": "Flexible chains run over the beam’s curved ends. The model shows the positions at the ends of the strokes. The chain sections wrapped around the curves are left out of the picture. [S11][S1]",
+        "zh": "柔性链条绕过横梁的弧形端部。模型展示行程两端的位置。绕在弧端上的那段链条省略不画。[S11][S1]"
+      },
+      "chainName": {
+        "en": "Pumping beam",
+        "zh": "泵机横梁"
+      },
+      "castShadow": false,
+      "connects": [
+        "nc-pump-chain"
+      ]
+    },
+    {
+      "id": "nc-pump",
+      "name": {
+        "en": "Mine pump",
+        "zh": "矿井泵"
+      },
+      "group": "teaching",
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Helps raise the engine piston on its return stroke.",
+        "zh": "在回程中帮助蒸汽机活塞升起。"
+      },
+      "detail": {
+        "en": "When steam enters again, the heavy pump side helps lift the engine piston. Mine pumps had different arrangements, so they did not all deliver water on the same direction of stroke. [S11][S1]",
+        "zh": "蒸汽再次进入时，沉重的泵侧帮助蒸汽机活塞升起。矿井泵的配置有多种，不一定都在相同方向的行程排水。[S11][S1]"
+      },
+      "chainName": {
+        "en": "Mine pump",
+        "zh": "矿井泵"
+      },
+      "castShadow": false
+    },
+    {
+      "id": "nc-chain",
+      "name": {
+        "en": "Piston-side chain",
+        "zh": "活塞侧链段"
+      },
+      "group": "teaching",
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.013,
+          0.013,
+          0.5
+        ],
+        "at": [
+          -12.5,
+          3.25,
+          0
+        ],
+        "color": "steel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Passes pulling force at the cylinder-side curve.",
+        "zh": "在汽缸侧弧端传递拉力。"
+      },
+      "detail": {
+        "en": "The exposed chain section changes length between the displayed positions. The piston and its rod remain rigid. A flexible chain can pull, but cannot push upwards like a rigid rod. [S11][S6][S1]",
+        "zh": "切换展示位置时，外露的链段长度会改变，活塞和活塞杆则保持刚性。柔性链条能拉，却不能像刚杆那样向上推。[S11][S6][S1]"
+      },
+      "chainName": {
+        "en": "Piston chain",
+        "zh": "活塞侧链段"
+      },
+      "castShadow": false,
+      "connects": [
+        "nc-beam"
+      ]
+    },
+    {
+      "id": "nc-pump-chain",
+      "name": {
+        "en": "Pump-side chain",
+        "zh": "泵侧链段"
+      },
+      "group": "teaching",
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.013,
+          0.013,
+          0.5
+        ],
+        "at": [
+          -9.5,
+          3.25,
+          0
+        ],
+        "color": "steel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "summary": {
+        "en": "Passes pulling force at the pump-side curve.",
+        "zh": "在泵侧弧端传递拉力。"
+      },
+      "detail": {
+        "en": "This chain runs vertically from a fixed tangent point on the beam’s curve to the pump rod’s top. As the beam rocks, its exposed length changes with the same beam angle as the chain on the other side. [S11][S1]",
+        "zh": "这根链条从横梁弧端的固定切点竖直垂下，接到泵杆顶端。横梁摆动时，两侧外露链段的长度都随同一个摆角改变。[S11][S1]"
+      },
+      "chainName": {
+        "en": "Pump chain",
+        "zh": "泵侧链段"
+      },
+      "castShadow": false,
+      "connects": [
+        "nc-pump"
+      ]
+    },
+    {
+      "id": "nc-jet",
+      "name": {
+        "en": "Cylinder jet",
+        "zh": "缸内喷口"
+      },
+      "group": "teaching",
+      "primitive": {
+        "kind": "tube",
+        "path": [
+          [
+            -13.1,
+            1.5,
+            0.15
+          ],
+          [
+            -12.8,
+            1.5,
+            0.15
+          ],
+          [
+            -12.5,
+            1.5,
+            0
+          ]
+        ],
+        "radius": 0.025,
+        "at": [
+          0,
+          0,
+          0
+        ],
+        "color": "brass"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "extra": [
+        {
+          "kind": "tube",
+          "path": [
+            [
+              -13.1,
+              1.2,
+              -0.15
+            ],
+            [
+              -12.5,
+              1.2,
+              -0.15
+            ]
+          ],
+          "radius": 0.04,
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "color": "stainless"
+        }
+      ],
+      "summary": {
+        "en": "Sprays cold water straight into the open cylinder.",
+        "zh": "把冷水直接喷入开口汽缸。"
+      },
+      "detail": {
+        "en": "The cold-water spray cools the cylinder as it condenses the steam. Incoming steam must warm the cylinder again on the next stroke. The nozzle and separate steam-supply stub stay fixed while the piston moves. [S11][S12][S1]",
+        "zh": "冷水喷入后，蒸汽凝结，汽缸也被冷却。下一次进汽时，蒸汽又要把汽缸加热。喷口和独立的供汽短管固定不动，不随活塞移动。[S11][S12][S1]"
+      },
+      "chainName": {
+        "en": "Cylinder jet",
+        "zh": "缸内喷口"
+      },
+      "castShadow": false
+    },
+    {
+      "id": "energy-input",
+      "name": {
+        "en": "Heat input",
+        "zh": "输入热量"
+      },
+      "group": "teaching",
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.035,
+          0.35,
+          0.12
+        ],
+        "at": [
+          -10,
+          2.8,
+          0
+        ],
+        "color": "token:hot"
+      },
+      "repeat": {
+        "count": 100,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.046
+      },
+      "summary": {
+        "en": "Shows heat transferred to the water and steam.",
+        "zh": "显示传给水和蒸汽的热量。"
+      },
+      "detail": {
+        "en": "The separate input row divides the heat supply into 100 equal units. These units count heat that reaches the working water and steam. They do not count all the chemical energy in the fuel. [S1][S10]",
+        "zh": "独立的输入一排把热量分成 100 等份。它只计算传给工作中的水和蒸汽的热量，不包括燃料里的全部化学能。[S1][S10]"
+      },
+      "chainName": {
+        "en": "Heat input",
+        "zh": "输入热量"
+      },
+      "castShadow": false,
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      }
+    },
+    {
+      "id": "energy-work",
+      "name": {
+        "en": "Useful work",
+        "zh": "输出功"
+      },
+      "group": "teaching",
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.035,
+          0.35,
+          0.12
+        ],
+        "at": [
+          -10,
+          1.6,
+          0
+        ],
+        "color": "token:signal"
+      },
+      "repeat": {
+        "count": 30,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.046
+      },
+      "summary": {
+        "en": "Shows the share of energy that leaves as work.",
+        "zh": "显示以功的形式输出的能量份数。"
+      },
+      "detail": {
+        "en": "The work row shows 10, 20 or 30 of the equal units. These examples help you follow the energy. They are not measurements of the Lap engine’s efficiency. [S1][S10]",
+        "zh": "输出功一排显示 10、20 或 30 等份。这些例子帮助你追踪能量，并非 Lap 蒸汽机的效率测量。[S1][S10]"
+      },
+      "chainName": {
+        "en": "Useful work",
+        "zh": "输出功"
+      },
+      "castShadow": false,
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      }
+    },
+    {
+      "id": "energy-reject",
+      "name": {
+        "en": "Rejected heat",
+        "zh": "排出热量"
+      },
+      "group": "teaching",
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.035,
+          0.35,
+          0.12
+        ],
+        "at": [
+          -10,
+          0.4,
+          0
+        ],
+        "color": "token:cold"
+      },
+      "repeat": {
+        "count": 90,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.046
+      },
+      "summary": {
+        "en": "Shows the remaining energy leaving as heat.",
+        "zh": "显示其余以热量形式排出的能量。"
+      },
+      "detail": {
+        "en": "The heat leaving is 90, 80 or 70 units. Add it to the work output and you get the input of 100 units. This balance describes a complete cycle, with no net change in stored energy. [S1][S10]",
+        "zh": "排出的热量为 90、80 或 70 份。把它与输出功相加，就得到输入的 100 份。这个关系适用于完整循环：循环结束时，储存的能量没有净变化。[S1][S10]"
+      },
+      "chainName": {
+        "en": "Rejected heat",
+        "zh": "排出热量"
+      },
+      "castShadow": false,
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      }
+    },
+    {
+      "id": "engine-frame",
+      "name": {
+        "en": "Support frame",
+        "zh": "支架"
+      },
+      "group": "working-motion",
+      "context": true,
+      "castShadow": true,
+      "summary": {
+        "en": "Supports the beam pivot and shaft bearings.",
+        "zh": "支承横梁支点和输出轴承。"
+      },
+      "detail": {
+        "en": "The timber and metal frame holds the fixed pivots in place. The model reconstructs the frame members and bearing positions to show their roles. [S2][S1]",
+        "zh": "木架与金属支架固定各个支点。模型重建了构件和轴承的位置，展示它们的作用。[S2][S1]"
+      }
+    },
+    {
+      "id": "foundation",
+      "name": {
+        "en": "Foundation",
+        "zh": "基础"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          11.9,
+          0.12,
+          3.1
+        ],
+        "bevel": 0.018,
+        "at": [
+          -0.6,
+          -0.08,
+          0.1
+        ],
+        "color": "matte"
+      },
+      "context": true,
+      "summary": {
+        "en": "Supports the main engine display.",
+        "zh": "支承主机模型。"
+      },
+      "detail": {
+        "en": "The base lifts the engine clear of the ground in this display. Its dimensions were chosen for the model. [S1]",
+        "zh": "底座把主机托离展示地面。尺寸是为模型选定的。[S1]"
+      }
+    },
+    {
+      "id": "boiler-seating",
+      "name": {
+        "en": "Boiler seating",
+        "zh": "锅炉支座"
+      },
+      "context": true,
+      "summary": {
+        "en": "Supports the boiler above the furnace.",
+        "zh": "在炉膛上方承托锅炉。"
+      },
+      "detail": {
+        "en": "The masonry seats support the boiler. Their shape and spacing are simplified choices for this display. [S1]",
+        "zh": "砌体支座承托着锅炉。图中简化了支座的外形和间距，方便展示。[S1]"
+      }
+    },
+    {
+      "id": "comparison-support",
+      "name": {
+        "en": "Comparison support",
+        "zh": "比较模型支架"
+      },
+      "group": "teaching",
+      "context": true,
+      "summary": {
+        "en": "Supports the separate atmospheric-engine model.",
+        "zh": "支承独立的大气式蒸汽机模型。"
+      },
+      "detail": {
+        "en": "The atmospheric-engine model has a cutaway masonry engine house, with its beam bearing resting on the bob-wall. Its placement and size help you compare it with the Lap engine. [S1]",
+        "zh": "大气式蒸汽机模型设在剖开的砌体机房中，横梁轴承支承在承梁墙上。它的位置和大小方便你与 Lap 蒸汽机作比较。[S1]"
+      }
+    }
+  ],
+  "groups": [
+    {
+      "id": "steam-supply",
+      "name": {
+        "en": "Steam supply",
+        "zh": "供汽"
+      },
+      "color": "token:hot"
+    },
+    {
+      "id": "working-motion",
+      "name": {
+        "en": "Working motion",
+        "zh": "工作传动"
+      },
+      "color": "token:signal"
+    },
+    {
+      "id": "condensing",
+      "name": {
+        "en": "Condensing and water",
+        "zh": "冷凝与水"
+      },
+      "color": "token:cold"
+    },
+    {
+      "id": "regulation",
+      "name": {
+        "en": "Speed regulation",
+        "zh": "调速联动"
+      },
+      "color": "token:ink-2"
+    },
+    {
+      "id": "teaching",
+      "name": {
+        "en": "Comparison models",
+        "zh": "比较模型"
+      },
+      "color": "token:ink-2",
+      "card": false
+    },
+    {
+      "id": "steam-flow",
+      "name": {
+        "en": "Steam routes",
+        "zh": "蒸汽路径"
+      },
+      "color": "token:hot",
+      "card": false
+    },
+    {
+      "id": "water-flow",
+      "name": {
+        "en": "Water routes",
+        "zh": "水的路径"
+      },
+      "color": "token:cold",
+      "card": false
+    }
+  ],
+  "flows": [
+    {
+      "id": "live-steam",
+      "group": "steam-flow",
+      "color": "token:hot",
+      "paths": [
+        {
+          "id": "main",
+          "path": [
+            [
+              -5,
+              2,
+              -0.4
+            ],
+            [
+              -5,
+              3.6,
+              -0.4
+            ],
+            [
+              2,
+              3.6,
+              -0.4
+            ],
+            [
+              2,
+              2.4,
+              -0.4
+            ],
+            [
+              2,
+              2.4,
+              0.9
+            ],
+            [
+              2,
+              2.1,
+              0.9
+            ]
+          ]
+        },
+        {
+          "id": "after-throttle",
+          "path": [
+            [
+              2,
+              1.9,
+              0.9
+            ],
+            [
+              2,
+              1.35,
+              0.9
+            ],
+            [
+              -3.1,
+              1.35,
+              0.9
+            ],
+            [
+              -3.1,
+              2.4,
+              0.65
+            ]
+          ]
+        }
+      ],
+      "parts": [
+        "boiler",
+        "steam-main",
+        "throttle",
+        "valve-chest"
+      ],
+      "speed": 0.12,
+      "count": 180,
+      "size": 0.6,
+      "spread": 0.004,
+      "clip": false,
+      "whenRun": true,
+      "flat": true,
+      "ends": "fade"
+    },
+    {
+      "id": "port-steam",
+      "group": "steam-flow",
+      "color": "token:hot",
+      "paths": [
+        {
+          "id": "upper",
+          "path": [
+            [
+              -3.1,
+              3.1,
+              0.65
+            ],
+            [
+              -2.5,
+              3.1,
+              0.65
+            ],
+            [
+              -2.5,
+              3.1,
+              0.12
+            ]
+          ]
+        },
+        {
+          "id": "lower",
+          "path": [
+            [
+              -3.1,
+              1.7,
+              0.65
+            ],
+            [
+              -2.5,
+              1.7,
+              0.65
+            ],
+            [
+              -2.5,
+              1.7,
+              0.12
+            ]
+          ]
+        }
+      ],
+      "parts": [
+        "valve-chest",
+        "cylinder"
+      ],
+      "speed": 0.12,
+      "count": 180,
+      "size": 0.6,
+      "spread": 0.004,
+      "clip": false,
+      "whenRun": true,
+      "flat": true,
+      "ends": "fade"
+    },
+    {
+      "id": "exhaust-steam",
+      "group": "steam-flow",
+      "color": "token:cold",
+      "paths": [
+        {
+          "id": "upper",
+          "path": [
+            [
+              -2.5,
+              3.1,
+              0.12
+            ],
+            [
+              -2.5,
+              3.1,
+              0.65
+            ],
+            [
+              -2,
+              3.1,
+              0.65
+            ],
+            [
+              -1.65,
+              3.1,
+              0.65
+            ],
+            [
+              -1.65,
+              0.55,
+              0.65
+            ]
+          ]
+        },
+        {
+          "id": "lower",
+          "path": [
+            [
+              -2.5,
+              1.7,
+              0.12
+            ],
+            [
+              -2.5,
+              1.7,
+              0.65
+            ],
+            [
+              -2,
+              1.7,
+              0.65
+            ],
+            [
+              -1.4,
+              1.7,
+              0.65
+            ],
+            [
+              -1.4,
+              0.55,
+              0.65
+            ],
+            [
+              -1.65,
+              0.55,
+              0.65
+            ]
+          ]
+        }
+      ],
+      "parts": [
+        "cylinder",
+        "condenser"
+      ],
+      "speed": 0.12,
+      "count": 180,
+      "size": 0.6,
+      "spread": 0.004,
+      "clip": false,
+      "whenRun": true,
+      "flat": true,
+      "ends": "fade"
+    },
+    {
+      "id": "cooling-water",
+      "group": "water-flow",
+      "color": "token:cold",
+      "paths": [
+        {
+          "id": "injection",
+          "path": [
+            [
+              -2.6,
+              0.55,
+              1.2
+            ],
+            [
+              -2.15,
+              0.55,
+              1.2
+            ],
+            [
+              -1.65,
+              0.55,
+              0.9
+            ],
+            [
+              -1.65,
+              0.55,
+              0.65
+            ]
+          ]
+        },
+        {
+          "id": "fresh",
+          "path": [
+            [
+              -3,
+              0.9,
+              1.2
+            ],
+            [
+              -2.475,
+              0.9,
+              1.2
+            ],
+            [
+              -2.475,
+              0.58,
+              1.2
+            ]
+          ]
+        }
+      ],
+      "parts": [
+        "cooling-cistern",
+        "injection-jet",
+        "condenser"
+      ],
+      "speed": 0.12,
+      "count": 180,
+      "size": 0.6,
+      "spread": 0.004,
+      "clip": false,
+      "whenRun": true,
+      "flat": true,
+      "ends": "fade"
+    },
+    {
+      "id": "mixed-discharge",
+      "group": "water-flow",
+      "color": "token:cold",
+      "path": [
+        [
+          -1.65,
+          0.3,
+          0.65
+        ],
+        [
+          -1,
+          0.3,
+          0.12
+        ],
+        [
+          -1,
+          0.7250743265917595,
+          0.12
+        ],
+        [
+          -1,
+          1.5250743265917595,
+          0.12
+        ],
+        [
+          -0.35,
+          1.5250743265917595,
+          1.2
+        ],
+        [
+          -0.35,
+          0.5,
+          1.2
+        ]
+      ],
+      "parts": [
+        "condenser",
+        "air-pump",
+        "hot-well"
+      ],
+      "speed": 0.12,
+      "count": 180,
+      "size": 0.6,
+      "spread": 0.004,
+      "clip": false,
+      "whenRun": true,
+      "flat": true,
+      "ends": "fade"
+    },
+    {
+      "id": "feed-water",
+      "group": "water-flow",
+      "color": "token:cold",
+      "paths": [
+        {
+          "id": "return",
+          "path": [
+            [
+              -0.35,
+              0.3,
+              1.2
+            ],
+            [
+              -0.75,
+              0.3,
+              1.5
+            ],
+            [
+              -0.75,
+              0.55,
+              1.5
+            ],
+            [
+              -4.4,
+              0.55,
+              1.5
+            ],
+            [
+              -4.4,
+              1.4,
+              0.2
+            ]
+          ]
+        },
+        {
+          "id": "overflow",
+          "path": [
+            [
+              -0.35,
+              0.48,
+              1.2
+            ],
+            [
+              0.15,
+              0.48,
+              1.2
+            ],
+            [
+              0.15,
+              0.15,
+              1.2
+            ]
+          ]
+        }
+      ],
+      "parts": [
+        "hot-well",
+        "feed-pump",
+        "boiler"
+      ],
+      "speed": 0.12,
+      "count": 180,
+      "size": 0.6,
+      "spread": 0.004,
+      "clip": false,
+      "whenRun": true,
+      "flat": true,
+      "ends": "fade"
+    }
+  ],
+  "animations": [],
+  "views": {
+    "assembled": {
+      "camera": {
+        "position": [
+          11,
+          9,
+          15
+        ],
+        "target": [
+          -0.5,
+          2.8,
+          0
+        ],
+        "fov": 30
+      }
+    },
+    "exploded": {
+      "camera": {
+        "position": [
+          11,
+          9,
+          15
+        ],
+        "target": [
+          -0.5,
+          2.8,
+          0
+        ],
+        "fov": 30
+      }
+    },
+    "section": {
+      "plane": "xy"
+    },
+    "cover": {
+      "position": [
+        11,
+        9,
+        15
+      ],
+      "target": [
+        -0.5,
+        2.8,
+        0
+      ],
+      "fov": 30
+    },
+    "reference": {
+      "fit": "layers"
+    },
+    "shadows": "auto",
+    "cuts": {
+      "cylinder-front": {
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "offset": 0.12,
+        "label": {
+          "en": "Cylinder front",
+          "zh": "汽缸正剖"
+        }
+      },
+      "condenser-front": {
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "offset": 0.65,
+        "label": {
+          "en": "Condenser front",
+          "zh": "冷凝器正剖"
+        }
+      }
+    }
+  },
+  "presets": [
+    {
+      "id": "hero",
+      "label": {
+        "en": "ENGINE",
+        "zh": "整机"
+      },
+      "camera": {
+        "position": [
+          11,
+          9,
+          15
+        ],
+        "target": [
+          -0.5,
+          2.8,
+          0
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "newcomen-view",
+      "label": {
+        "en": "NEWCOMEN",
+        "zh": "纽科门"
+      },
+      "camera": {
+        "position": [
+          -7,
+          5,
+          7
+        ],
+        "target": [
+          -11,
+          2,
+          0
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "cylinder-view",
+      "label": {
+        "en": "CYLINDER",
+        "zh": "汽缸"
+      },
+      "camera": {
+        "position": [
+          -0.5,
+          3.5,
+          6.0
+        ],
+        "target": [
+          -2.45,
+          2.3,
+          0.2
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "condenser-view",
+      "label": {
+        "en": "CONDENSER",
+        "zh": "冷凝器"
+      },
+      "camera": {
+        "position": [
+          0.5,
+          3.4,
+          5
+        ],
+        "target": [
+          -1.7,
+          0.9,
+          0.8
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "linkage-view",
+      "label": {
+        "en": "LINKS",
+        "zh": "连杆"
+      },
+      "camera": {
+        "position": [
+          -1,
+          7.0,
+          8.5
+        ],
+        "target": [
+          -1.2,
+          4.5,
+          0
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "governor-view",
+      "label": {
+        "en": "GOVERNOR",
+        "zh": "调速器"
+      },
+      "camera": {
+        "position": [
+          3,
+          4,
+          5
+        ],
+        "target": [
+          1,
+          2.1,
+          0.9
+        ],
+        "fov": 30
+      }
+    }
+  ],
+  "poses": {
+    "gov-slow": {
+      "duration": 0,
+      "governor-balls": {
+        "pivot": [
+          0.5123495242663968,
+          2.8895599098298517,
+          0.9
+        ],
+        "offset": [
+          0.053769594533188636,
+          -0.1380501127126852,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "governor-ball-right": {
+        "pivot": [
+          1.487650475733603,
+          2.8895599098298517,
+          0.9
+        ],
+        "offset": [
+          -0.053769594533188414,
+          -0.1380501127126852,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "governor-upper": {
+        "pivot": [
+          0.7561747621331985,
+          2.944779954914926,
+          0.9
+        ],
+        "offset": [
+          0.026884797266594207,
+          -0.0690250563563426,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          17.03969005708427
+        ]
+      },
+      "governor-upper-right": {
+        "pivot": [
+          1.2438252378668015,
+          2.944779954914926,
+          0.9
+        ],
+        "offset": [
+          -0.026884797266594207,
+          -0.0690250563563426,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          -17.03969005708426
+        ]
+      },
+      "governor-lower": {
+        "pivot": [
+          0.7561747621331985,
+          2.834339864744778,
+          0.9
+        ],
+        "offset": [
+          0.026884797266594207,
+          -0.20707516906902823,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          -17.039690057084314
+        ]
+      },
+      "governor-lower-right": {
+        "pivot": [
+          1.2438252378668015,
+          2.834339864744778,
+          0.9
+        ],
+        "offset": [
+          -0.026884797266594207,
+          -0.20707516906902823,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          17.0396900570843
+        ]
+      },
+      "governor-collar": {
+        "pivot": [
+          1,
+          2.779119819659704,
+          0.9
+        ],
+        "offset": [
+          0,
+          -0.2761002254253708,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "throttle-link": {
+        "pivot": [
+          1,
+          2.779119819659704,
+          0.9
+        ],
+        "offset": [
+          0,
+          -0.2761002254253708,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "throttle-rod": {
+        "pivot": [
+          1.3106264588906045,
+          2.32523524949116,
+          0.9
+        ],
+        "offset": [
+          0.06133217315330364,
+          -0.2273659681630673,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          8.167588920466962
+        ]
+      },
+      "throttle-crank": {
+        "pivot": [
+          1.8106264588906045,
+          1.935675339661308,
+          0.9
+        ],
+        "offset": [
+          0.06133217315330364,
+          -0.08931585545038212,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          31.43163151843777
+        ]
+      },
+      "throttle-disc": {
+        "pivot": [
+          2,
+          2,
+          0.9
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          31.43163151843784
+        ]
+      }
+    },
+    "gov-middle": {
+      "duration": 0,
+      "governor-balls": {
+        "pivot": [
+          0.5123495242663968,
+          2.8895599098298517,
+          0.9
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "governor-ball-right": {
+        "pivot": [
+          1.487650475733603,
+          2.8895599098298517,
+          0.9
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "governor-upper": {
+        "pivot": [
+          0.7561747621331985,
+          2.944779954914926,
+          0.9
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "governor-upper-right": {
+        "pivot": [
+          1.2438252378668015,
+          2.944779954914926,
+          0.9
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          1.5987211554602254e-14
+        ]
+      },
+      "governor-lower": {
+        "pivot": [
+          0.7561747621331985,
+          2.834339864744778,
+          0.9
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          -2.4868995751603507e-14
+        ]
+      },
+      "governor-lower-right": {
+        "pivot": [
+          1.2438252378668015,
+          2.834339864744778,
+          0.9
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "governor-collar": {
+        "pivot": [
+          1,
+          2.779119819659704,
+          0.9
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "throttle-link": {
+        "pivot": [
+          1,
+          2.779119819659704,
+          0.9
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "throttle-rod": {
+        "pivot": [
+          1.3106264588906045,
+          2.32523524949116,
+          0.9
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          7.105427357601002e-15
+        ]
+      },
+      "throttle-crank": {
+        "pivot": [
+          1.8106264588906045,
+          1.935675339661308,
+          0.9
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "throttle-disc": {
+        "pivot": [
+          2,
+          2,
+          0.9
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          4.973799150320701e-14
+        ]
+      }
+    },
+    "gov-fast": {
+      "duration": 0,
+      "governor-balls": {
+        "pivot": [
+          0.5123495242663968,
+          2.8895599098298517,
+          0.9
+        ],
+        "offset": [
+          -0.008475303370801934,
+          0.04831753944943973,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "governor-ball-right": {
+        "pivot": [
+          1.487650475733603,
+          2.8895599098298517,
+          0.9
+        ],
+        "offset": [
+          0.008475303370802045,
+          0.04831753944943973,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "governor-upper": {
+        "pivot": [
+          0.7561747621331985,
+          2.944779954914926,
+          0.9
+        ],
+        "offset": [
+          -0.004237651685401023,
+          0.024158769724719864,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          -5.623572026439575
+        ]
+      },
+      "governor-upper-right": {
+        "pivot": [
+          1.2438252378668015,
+          2.944779954914926,
+          0.9
+        ],
+        "offset": [
+          0.004237651685401023,
+          0.024158769724719864,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          5.623572026439598
+        ]
+      },
+      "governor-lower": {
+        "pivot": [
+          0.7561747621331985,
+          2.834339864744778,
+          0.9
+        ],
+        "offset": [
+          -0.004237651685401023,
+          0.07247630917415959,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          5.623572026439545
+        ]
+      },
+      "governor-lower-right": {
+        "pivot": [
+          1.2438252378668015,
+          2.834339864744778,
+          0.9
+        ],
+        "offset": [
+          0.004237651685401023,
+          0.07247630917415959,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          -5.623572026439547
+        ]
+      },
+      "governor-collar": {
+        "pivot": [
+          1,
+          2.779119819659704,
+          0.9
+        ],
+        "offset": [
+          0,
+          0.09663507889887946,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "throttle-link": {
+        "pivot": [
+          1,
+          2.779119819659704,
+          0.9
+        ],
+        "offset": [
+          0,
+          0.09663507889887946,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "throttle-rod": {
+        "pivot": [
+          1.3106264588906045,
+          2.32523524949116,
+          0.9
+        ],
+        "offset": [
+          -0.009380833914816922,
+          0.0903554681135521,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          -1.176005812619124
+        ]
+      },
+      "throttle-crank": {
+        "pivot": [
+          1.8106264588906045,
+          1.935675339661308,
+          0.9
+        ],
+        "offset": [
+          -0.009380833914816922,
+          0.042037928664112156,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          -12.363157443449609
+        ]
+      },
+      "throttle-disc": {
+        "pivot": [
+          2,
+          2,
+          0.9
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          -12.363157443449552
+        ]
+      }
+    },
+    "nc-fill": {
+      "duration": 0,
+      "nc-beam": {
+        "pivot": [
+          -11,
+          3.5,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          -12
+        ]
+      },
+      "nc-piston": {
+        "offset": [
+          0,
+          0.3141592653589793,
+          0
+        ]
+      },
+      "nc-pump": {
+        "offset": [
+          0,
+          -0.3141592653589793,
+          0
+        ]
+      },
+      "nc-chain": {
+        "pivot": [
+          -12.5,
+          3.25,
+          0
+        ],
+        "offset": [
+          0,
+          0.15707963267948966,
+          0
+        ],
+        "scale": [
+          1,
+          0.3716814692820414,
+          1
+        ]
+      },
+      "nc-pump-chain": {
+        "pivot": [
+          -9.5,
+          3.25,
+          0
+        ],
+        "offset": [
+          0,
+          -0.15707963267948966,
+          0
+        ],
+        "scale": [
+          1,
+          1.6283185307179586,
+          1
+        ]
+      }
+    },
+    "nc-condense": {
+      "duration": 0,
+      "nc-beam": {
+        "pivot": [
+          -11,
+          3.5,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          -12
+        ]
+      },
+      "nc-piston": {
+        "offset": [
+          0,
+          0.3141592653589793,
+          0
+        ]
+      },
+      "nc-pump": {
+        "offset": [
+          0,
+          -0.3141592653589793,
+          0
+        ]
+      },
+      "nc-chain": {
+        "pivot": [
+          -12.5,
+          3.25,
+          0
+        ],
+        "offset": [
+          0,
+          0.15707963267948966,
+          0
+        ],
+        "scale": [
+          1,
+          0.3716814692820414,
+          1
+        ]
+      },
+      "nc-pump-chain": {
+        "pivot": [
+          -9.5,
+          3.25,
+          0
+        ],
+        "offset": [
+          0,
+          -0.15707963267948966,
+          0
+        ],
+        "scale": [
+          1,
+          1.6283185307179586,
+          1
+        ]
+      }
+    },
+    "nc-power": {
+      "duration": 0,
+      "nc-beam": {
+        "pivot": [
+          -11,
+          3.5,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          12
+        ]
+      },
+      "nc-piston": {
+        "offset": [
+          0,
+          -0.3141592653589793,
+          0
+        ]
+      },
+      "nc-pump": {
+        "offset": [
+          0,
+          0.3141592653589793,
+          0
+        ]
+      },
+      "nc-chain": {
+        "pivot": [
+          -12.5,
+          3.25,
+          0
+        ],
+        "offset": [
+          0,
+          -0.15707963267948966,
+          0
+        ],
+        "scale": [
+          1,
+          1.6283185307179586,
+          1
+        ]
+      },
+      "nc-pump-chain": {
+        "pivot": [
+          -9.5,
+          3.25,
+          0
+        ],
+        "offset": [
+          0,
+          0.15707963267948966,
+          0
+        ],
+        "scale": [
+          1,
+          0.3716814692820414,
+          1
+        ]
+      }
+    },
+    "nc-return": {
+      "duration": 0,
+      "nc-beam": {
+        "pivot": [
+          -11,
+          3.5,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          -12
+        ]
+      },
+      "nc-piston": {
+        "offset": [
+          0,
+          0.3141592653589793,
+          0
+        ]
+      },
+      "nc-pump": {
+        "offset": [
+          0,
+          -0.3141592653589793,
+          0
+        ]
+      },
+      "nc-chain": {
+        "pivot": [
+          -12.5,
+          3.25,
+          0
+        ],
+        "offset": [
+          0,
+          0.15707963267948966,
+          0
+        ],
+        "scale": [
+          1,
+          0.3716814692820414,
+          1
+        ]
+      },
+      "nc-pump-chain": {
+        "pivot": [
+          -9.5,
+          3.25,
+          0
+        ],
+        "offset": [
+          0,
+          -0.15707963267948966,
+          0
+        ],
+        "scale": [
+          1,
+          1.6283185307179586,
+          1
+        ]
+      }
+    }
+  },
+  "mechanisms": [
+    {
+      "id": "main-engine",
+      "kind": "beam-steam",
+      "origin": [
+        0,
+        5.6,
+        0
+      ],
+      "clock": {
+        "phaseControl": "phase-deg",
+        "rateControl": "cycle-rate",
+        "modeControl": "motion-mode",
+        "experimentControl": "experiment"
+      },
+      "geometry": {
+        "beamPivot": [
+          0,
+          0
+        ],
+        "shaftCentre": [
+          2.5,
+          -3
+        ],
+        "radiusPivot": [
+          -2.5,
+          -0.8
+        ],
+        "beamHalfM": 2.5,
+        "connectingRodM": 3,
+        "orbitM": 0.6092838281609874,
+        "shortLinkM": 0.8,
+        "radiusRodM": 1.25,
+        "innerFraction": 0.5,
+        "beamBranch": 1,
+        "parallelBranch": 1,
+        "pistonRodM": 2.4,
+        "cylinderX": -2.5,
+        "radialDisplayClearanceM": 0.003,
+        "nominalStrokeM": 1.2192,
+        "pump": {
+          "beamFraction": -0.4,
+          "sliderX": -1,
+          "rodM": 4.5
+        }
+      },
+      "parts": {
+        "beam": {
+          "part": "beam",
+          "restEndpoints": [
+            [
+              0,
+              0
+            ],
+            [
+              2.4992139748038653,
+              -0.06268578902004074
+            ]
+          ]
+        },
+        "innerLink": {
+          "part": "parallel-inner",
+          "restEndpoints": [
+            [
+              -1.2496069874019327,
+              0.03134289451002037
+            ],
+            [
+              -1.2503930222837913,
+              -0.7686567193331144
+            ]
+          ]
+        },
+        "outerLink": {
+          "part": "parallel-outer",
+          "restEndpoints": [
+            [
+              -2.4992139748038653,
+              0.06268578902004074
+            ],
+            [
+              -2.5000000096857242,
+              -0.737313824823094
+            ]
+          ]
+        },
+        "bottomLink": {
+          "part": "parallel-bottom",
+          "restEndpoints": [
+            [
+              -1.2503930222837913,
+              -0.7686567193331144
+            ],
+            [
+              -2.5000000096857242,
+              -0.737313824823094
+            ]
+          ]
+        },
+        "radiusRod": {
+          "part": "radius-rod",
+          "restEndpoints": [
+            [
+              -2.5,
+              -0.8
+            ],
+            [
+              -1.2503930222837913,
+              -0.7686567193331144
+            ]
+          ]
+        },
+        "driveRod": {
+          "part": "drive-rod",
+          "restEndpoints": [
+            [
+              2.4992139748038653,
+              -0.06268578902004074
+            ],
+            [
+              3.1092838281609874,
+              -3
+            ]
+          ]
+        },
+        "centreLink": {
+          "part": "centre-link",
+          "restEndpoints": [
+            [
+              2.5,
+              -3
+            ],
+            [
+              3.1092838281609874,
+              -3
+            ]
+          ]
+        },
+        "piston": {
+          "part": "piston"
+        },
+        "pistonRod": {
+          "part": "piston-rod",
+          "restEndpoints": [
+            [
+              -2.5000000096857242,
+              -3.137313824823094
+            ],
+            [
+              -2.5000000096857242,
+              -0.737313824823094
+            ]
+          ]
+        },
+        "planet": {
+          "part": "planet"
+        },
+        "sun": {
+          "part": "sun"
+        },
+        "shaft": {
+          "part": "shaft"
+        },
+        "flywheel": {
+          "part": "flywheel"
+        },
+        "pumpRod": {
+          "part": "pump-rod",
+          "restEndpoints": [
+            [
+              -0.9996855899215462,
+              0.025074315608016297
+            ],
+            [
+              -1,
+              -4.47492567340824
+            ]
+          ]
+        },
+        "pumpPiston": {
+          "part": "pump-piston"
+        }
+      },
+      "ports": {
+        "upperIn": {
+          "part": "valve-upper-in",
+          "openOffset": [
+            0,
+            0.015,
+            0
+          ],
+          "flow": {
+            "id": "port-steam",
+            "path": "upper"
+          }
+        },
+        "lowerIn": {
+          "part": "valve-lower-in",
+          "openOffset": [
+            0,
+            0.015,
+            0
+          ],
+          "flow": {
+            "id": "port-steam",
+            "path": "lower"
+          }
+        },
+        "upperOut": {
+          "part": "valve-upper-out",
+          "openOffset": [
+            0,
+            0.015,
+            0
+          ],
+          "flow": {
+            "id": "exhaust-steam",
+            "path": "upper"
+          }
+        },
+        "lowerOut": {
+          "part": "valve-lower-out",
+          "openOffset": [
+            0,
+            0.015,
+            0
+          ],
+          "flow": {
+            "id": "exhaust-steam",
+            "path": "lower"
+          }
+        }
+      }
+    }
+  ],
+  "telemetry": [
+    {
+      "key": {
+        "en": "Force down / up",
+        "zh": "向下 / 向上合力"
+      },
+      "unit": "kN",
+      "follow": [
+        "force-down",
+        "force-up"
+      ],
+      "scope": "observe"
+    },
+    {
+      "key": {
+        "en": "Work on the piston",
+        "zh": "作用在活塞上的功"
+      },
+      "unit": "kJ",
+      "follow": "work-cycle",
+      "scope": "observe"
+    },
+    {
+      "key": {
+        "en": "Collar height gained",
+        "zh": "滑套上升高度"
+      },
+      "unit": "m",
+      "follow": "collar-rise",
+      "scope": "observe"
+    },
+    {
+      "key": {
+        "en": "Throttle",
+        "zh": "节流开度"
+      },
+      "unit": "%",
+      "follow": "throttle-opening",
+      "scope": "observe"
+    },
+    {
+      "key": {
+        "en": "Work share",
+        "zh": "输出功"
+      },
+      "unit": "units",
+      "follow": "useful-work",
+      "scope": "observe"
+    },
+    {
+      "key": {
+        "en": "Rejected heat",
+        "zh": "排出热量"
+      },
+      "unit": "units",
+      "follow": "heat-out",
+      "scope": "observe"
+    }
+  ],
+  "sim": {
+    "kind": "table",
+    "controls": [
+      {
+        "id": "experiment",
+        "kind": "choice",
+        "label": {
+          "en": "Explore",
+          "zh": "探索内容"
+        },
+        "options": [
+          {
+            "id": "pressure",
+            "label": {
+              "en": "Pressure",
+              "zh": "压强"
+            }
+          },
+          {
+            "id": "mechanism",
+            "label": {
+              "en": "Mechanism",
+              "zh": "机构"
+            }
+          },
+          {
+            "id": "governor",
+            "label": {
+              "en": "Governor",
+              "zh": "调速器"
+            }
+          },
+          {
+            "id": "energy",
+            "label": {
+              "en": "Energy account",
+              "zh": "能量账本"
+            }
+          }
+        ],
+        "default": "mechanism"
+      },
+      {
+        "id": "cold-pressure",
+        "kind": "step",
+        "label": {
+          "en": "Cold-side pressure · kPa absolute",
+          "zh": "冷端压强 · 千帕绝压"
+        },
+        "values": [
+          20,
+          50,
+          80
+        ],
+        "default": 20
+      },
+      {
+        "id": "cycle-rate",
+        "kind": "step",
+        "label": {
+          "en": "Cycles per minute",
+          "zh": "每分钟周期数"
+        },
+        "values": [
+          8,
+          10,
+          12
+        ],
+        "default": 10
+      },
+      {
+        "id": "governor-rpm",
+        "kind": "step",
+        "label": {
+          "en": "Steady governor speed · rpm",
+          "zh": "调速器稳定转速 · 转/分"
+        },
+        "values": [
+          60,
+          90,
+          120
+        ],
+        "default": 90
+      },
+      {
+        "id": "work-share",
+        "kind": "step",
+        "label": {
+          "en": "Work out of 100 energy units",
+          "zh": "每 100 份能量中输出的功"
+        },
+        "values": [
+          10,
+          20,
+          30
+        ],
+        "default": 20
+      },
+      {
+        "id": "motion-mode",
+        "kind": "choice",
+        "label": {
+          "en": "Motion",
+          "zh": "运动"
+        },
+        "options": [
+          {
+            "id": "manual",
+            "label": {
+              "en": "Manual",
+              "zh": "手动"
+            }
+          },
+          {
+            "id": "auto",
+            "label": {
+              "en": "Auto",
+              "zh": "自动"
+            }
+          }
+        ],
+        "default": "manual"
+      },
+      {
+        "id": "phase-deg",
+        "kind": "step",
+        "label": {
+          "en": "Position in the orbit · degrees",
+          "zh": "绕行位置 · 度"
+        },
+        "values": [
+          0,
+          90,
+          180,
+          270,
+          360
+        ],
+        "default": 0
+      }
+    ],
+    "outputs": [
+      {
+        "id": "hot-abs",
+        "kind": "number",
+        "tag": "sim",
+        "label": {
+          "en": "Hot pressure",
+          "zh": "热端压强"
+        },
+        "unit": "kPa abs",
+        "decimals": 3
+      },
+      {
+        "id": "cold-abs",
+        "kind": "number",
+        "tag": "sim",
+        "label": {
+          "en": "Cold pressure",
+          "zh": "冷端压强"
+        },
+        "unit": "kPa abs",
+        "decimals": 3
+      },
+      {
+        "id": "force-down",
+        "kind": "number",
+        "tag": "sim",
+        "label": {
+          "en": "Downward force",
+          "zh": "向下合力"
+        },
+        "unit": "kN",
+        "decimals": 3
+      },
+      {
+        "id": "force-up",
+        "kind": "number",
+        "tag": "sim",
+        "label": {
+          "en": "Upward force",
+          "zh": "向上合力"
+        },
+        "unit": "kN",
+        "decimals": 3
+      },
+      {
+        "id": "newcomen-force",
+        "kind": "number",
+        "tag": "sim",
+        "label": {
+          "en": "Open cylinder force",
+          "zh": "开口缸合力"
+        },
+        "unit": "kN",
+        "decimals": 3
+      },
+      {
+        "id": "work-cycle",
+        "kind": "number",
+        "tag": "sim",
+        "label": {
+          "en": "Work on the piston per cycle",
+          "zh": "每周期作用在活塞上的功"
+        },
+        "unit": "kJ",
+        "decimals": 2
+      },
+      {
+        "id": "indicated-power",
+        "kind": "number",
+        "tag": "sim",
+        "label": {
+          "en": "Model indicated power",
+          "zh": "模型指示功率"
+        },
+        "unit": "kW",
+        "decimals": 3
+      },
+      {
+        "id": "governor-speed",
+        "kind": "number",
+        "tag": "sim",
+        "label": {
+          "en": "Steady speed",
+          "zh": "稳定转速"
+        },
+        "unit": "rpm",
+        "decimals": 3
+      },
+      {
+        "id": "ball-angle",
+        "kind": "number",
+        "tag": "sim",
+        "label": {
+          "en": "Upper arm angle",
+          "zh": "上杆夹角"
+        },
+        "unit": "deg",
+        "decimals": 3
+      },
+      {
+        "id": "ball-radius",
+        "kind": "number",
+        "tag": "sim",
+        "label": {
+          "en": "Ball distance from shaft",
+          "zh": "飞球离轴距离"
+        },
+        "unit": "m",
+        "decimals": 3
+      },
+      {
+        "id": "collar-rise",
+        "kind": "number",
+        "tag": "sim",
+        "label": {
+          "en": "Collar height gained",
+          "zh": "滑套上升高度"
+        },
+        "unit": "m",
+        "decimals": 3
+      },
+      {
+        "id": "throttle-opening",
+        "kind": "number",
+        "tag": "sim",
+        "label": {
+          "en": "Throttle opening",
+          "zh": "节流阀开度"
+        },
+        "unit": "%",
+        "decimals": 1
+      },
+      {
+        "id": "governor-pose",
+        "kind": "state",
+        "label": {
+          "en": "Governor position",
+          "zh": "调速器姿态"
+        },
+        "states": {
+          "gov-slow": {
+            "en": "Slow",
+            "zh": "低速"
+          },
+          "gov-middle": {
+            "en": "Middle",
+            "zh": "中速"
+          },
+          "gov-fast": {
+            "en": "Fast",
+            "zh": "高速"
+          }
+        }
+      },
+      {
+        "id": "heat-in",
+        "kind": "number",
+        "tag": "sim",
+        "label": {
+          "en": "Heat input",
+          "zh": "输入热量"
+        },
+        "unit": "units",
+        "decimals": 0
+      },
+      {
+        "id": "useful-work",
+        "kind": "number",
+        "tag": "sim",
+        "label": {
+          "en": "Useful work",
+          "zh": "输出功"
+        },
+        "unit": "units",
+        "decimals": 0
+      },
+      {
+        "id": "heat-out",
+        "kind": "number",
+        "tag": "sim",
+        "label": {
+          "en": "Rejected heat",
+          "zh": "排出热量"
+        },
+        "unit": "units",
+        "decimals": 0
+      }
+    ],
+    "bind": [
+      {
+        "output": "governor-pose",
+        "part": [
+          "governor-balls",
+          "governor-ball-right",
+          "governor-upper",
+          "governor-upper-right",
+          "governor-lower",
+          "governor-lower-right",
+          "governor-collar",
+          "throttle-link",
+          "throttle-rod",
+          "throttle-crank",
+          "throttle-disc"
+        ],
+        "pose": {
+          "gov-slow": "gov-slow",
+          "gov-middle": "gov-middle",
+          "gov-fast": "gov-fast"
+        }
+      },
+      {
+        "output": "heat-in",
+        "part": "energy-input",
+        "count": true
+      },
+      {
+        "output": "useful-work",
+        "part": "energy-work",
+        "count": true
+      },
+      {
+        "output": "heat-out",
+        "part": "energy-reject",
+        "count": true
+      }
+    ],
+    "table": {
+      "experiments": {
+        "pressure-table": {
+          "keys": [
+            "cold-pressure",
+            "cycle-rate"
+          ],
+          "rows": [
+            {
+              "when": {
+                "cold-pressure": 20,
+                "cycle-rate": 8
+              },
+              "set": {
+                "hot-abs": 110,
+                "cold-abs": 20,
+                "force-down": 16.021640004311305,
+                "force-up": 15.93034532179799,
+                "newcomen-force": 14.487182485876406,
+                "work-cycle": 38.955860509592455,
+                "indicated-power": 5.194114734612327
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "cold-pressure": 20,
+                "cycle-rate": 10
+              },
+              "set": {
+                "hot-abs": 110,
+                "cold-abs": 20,
+                "force-down": 16.021640004311305,
+                "force-up": 15.93034532179799,
+                "newcomen-force": 14.487182485876406,
+                "work-cycle": 38.955860509592455,
+                "indicated-power": 6.49264341826541
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "cold-pressure": 20,
+                "cycle-rate": 12
+              },
+              "set": {
+                "hot-abs": 110,
+                "cold-abs": 20,
+                "force-down": 16.021640004311305,
+                "force-up": 15.93034532179799,
+                "newcomen-force": 14.487182485876406,
+                "work-cycle": 38.955860509592455,
+                "indicated-power": 7.791172101918491
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "cold-pressure": 50,
+                "cycle-rate": 8
+              },
+              "set": {
+                "hot-abs": 110,
+                "cold-abs": 50,
+                "force-down": 10.677459560704884,
+                "force-up": 10.623863990034645,
+                "newcomen-force": 9.143002042269986,
+                "work-cycle": 25.970573673061633,
+                "indicated-power": 3.4627431564082176
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "cold-pressure": 50,
+                "cycle-rate": 10
+              },
+              "set": {
+                "hot-abs": 110,
+                "cold-abs": 50,
+                "force-down": 10.677459560704884,
+                "force-up": 10.623863990034645,
+                "newcomen-force": 9.143002042269986,
+                "work-cycle": 25.970573673061633,
+                "indicated-power": 4.328428945510272
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "cold-pressure": 50,
+                "cycle-rate": 12
+              },
+              "set": {
+                "hot-abs": 110,
+                "cold-abs": 50,
+                "force-down": 10.677459560704884,
+                "force-up": 10.623863990034645,
+                "newcomen-force": 9.143002042269986,
+                "work-cycle": 25.970573673061633,
+                "indicated-power": 5.194114734612326
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "cold-pressure": 80,
+                "cycle-rate": 8
+              },
+              "set": {
+                "hot-abs": 110,
+                "cold-abs": 80,
+                "force-down": 5.3332791170984635,
+                "force-up": 5.317382658271303,
+                "newcomen-force": 3.7988215986635647,
+                "work-cycle": 12.98528683653082,
+                "indicated-power": 1.7313715782041093
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "cold-pressure": 80,
+                "cycle-rate": 10
+              },
+              "set": {
+                "hot-abs": 110,
+                "cold-abs": 80,
+                "force-down": 5.3332791170984635,
+                "force-up": 5.317382658271303,
+                "newcomen-force": 3.7988215986635647,
+                "work-cycle": 12.98528683653082,
+                "indicated-power": 2.1642144727551367
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "cold-pressure": 80,
+                "cycle-rate": 12
+              },
+              "set": {
+                "hot-abs": 110,
+                "cold-abs": 80,
+                "force-down": 5.3332791170984635,
+                "force-up": 5.317382658271303,
+                "newcomen-force": 3.7988215986635647,
+                "work-cycle": 12.98528683653082,
+                "indicated-power": 2.597057367306164
+              },
+              "source": [
+                "S1"
+              ]
+            }
+          ]
+        },
+        "governor-table": {
+          "keys": [
+            "governor-rpm"
+          ],
+          "rows": [
+            {
+              "when": {
+                "governor-rpm": 60
+              },
+              "set": {
+                "governor-speed": 60,
+                "ball-angle": 60.19957447363486,
+                "ball-radius": 0.43388088120041457,
+                "collar-rise": 0.503019594234333,
+                "throttle-opening": 84.92403502048649,
+                "governor-pose": "gov-slow"
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "governor-rpm": 90
+              },
+              "set": {
+                "governor-speed": 90,
+                "ball-angle": 77.23926453071914,
+                "ball-radius": 0.4876504757336032,
+                "collar-rise": 0.7791198196597037,
+                "throttle-opening": 50.00000000000006,
+                "governor-pose": "gov-middle"
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "governor-rpm": 120
+              },
+              "set": {
+                "governor-speed": 120,
+                "ball-angle": 82.86283655715872,
+                "ball-radius": 0.49612577910440514,
+                "collar-rise": 0.8757548985585832,
+                "throttle-opening": 36.263158396167164,
+                "governor-pose": "gov-fast"
+              },
+              "source": [
+                "S1"
+              ]
+            }
+          ]
+        },
+        "energy-table": {
+          "keys": [
+            "work-share"
+          ],
+          "rows": [
+            {
+              "when": {
+                "work-share": 10
+              },
+              "set": {
+                "heat-in": 100,
+                "useful-work": 10,
+                "heat-out": 90
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "work-share": 20
+              },
+              "set": {
+                "heat-in": 100,
+                "useful-work": 20,
+                "heat-out": 80
+              },
+              "source": [
+                "S1"
+              ]
+            },
+            {
+              "when": {
+                "work-share": 30
+              },
+              "set": {
+                "heat-in": 100,
+                "useful-work": 30,
+                "heat-out": 70
+              },
+              "source": [
+                "S1"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "spec": [
+    {
+      "key": {
+        "en": "Reference bore",
+        "zh": "参考内径"
+      },
+      "value": "≈ 0.476 m · S3",
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Reference stroke",
+        "zh": "参考行程"
+      },
+      "value": "≈ 1.219 m · S3",
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Reference flywheel diameter",
+        "zh": "参考飞轮直径"
+      },
+      "value": "≈ 4.88 m · S5",
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Engine type shown",
+        "zh": "展示的蒸汽机类型"
+      },
+      "value": {
+        "en": "Double-acting condensing",
+        "zh": "双作用冷凝式"
+      },
+      "tag": "design"
+    }
+  ]
+}

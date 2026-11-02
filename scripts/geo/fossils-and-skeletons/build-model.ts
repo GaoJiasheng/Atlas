@@ -1,7 +1,10 @@
-/** Original schematic geometry. Institutional references and limits: model-audit.md.
+/** Original anatomically informed teaching geometry. Institutional references and limits: model-audit.md.
  * Run once from author coordinates; never normalise the generated JSON again.
  */
 import fs from 'node:fs';
+import { buildBird } from '../kits/bird';
+import { boneSweep, diplodocid, ribCage, theropodForelimb, theropodHindlimb, theropodPelvis, theropodSkull, vertebra, vertebralColumn } from '../kits/dinosaur-skeleton';
+import { bakeMuseum } from './bake-museum';
 import { partBounds } from '../../../src/engines/space-scene/lib/parts';
 import { partsFile, type Part, type Primitive } from '../../../src/engines/space-scene/schema';
 
@@ -10,10 +13,7 @@ const bi = (en: string, zh: string) => ({ en, zh });
 const bone = 'token:bone';
 const parts: Part[] = [];
 function sweep(at: V, path: V[], radius: number | number[], tint = bone, options = {}): Primitive {
-  return {kind:'sweep', at, path, radius, color:'tissue', tint, caps:'round', ...options} as Primitive;
-}
-function tube(at: V,path: V[], radius: number, tint=bone): Primitive {
-  return {kind:'tube',at,path,radius,bendRadius:radius*2,color:'tissue',tint};
+  return {kind:'sweep', at, path, radius, color:'tissue', tint, radial:48, segments:24, caps:'round', ...options} as Primitive;
 }
 function box(at: V,size: V,tint='token:neutral'): Primitive {
   return {kind:'bevelBox',at,size,bevel:Math.min(...size)*.08,color:'abrasive',tint};
@@ -28,7 +28,9 @@ function add(id:string,group:string,name:[string,string],summary:[string,string]
   parts.push(p); return p;
 }
 function sampleBone(at:V,length=1.1,tint=bone): Primitive {
-  return sweep(at,[[-length/2,0,0],[-length*.39,.015,0],[-length*.22,0,0],[length*.2,-.025,0],[length*.39,0,0],[length/2,.025,0]],[.17,.19,.085,.075,.18,.15],tint,{section:{flat:.78},up:[0,0,1]});
+  // An asymmetric long-bone fragment: articular end, tapered shaft, broken
+  // distal wall. Hollow ends show cortex rather than a cartoon dog bone.
+  return sweep(at,[[-length*.48,0,0],[-length*.41,.025,0],[-length*.28,.01,0],[-length*.05,-.025,0],[length*.25,-.02,0],[length*.48,.015,0]],[length*.105,length*.145,length*.09,length*.065,length*.057,length*.07],tint,{section:{flat:.74},up:[0,0,1],hollow:length*.018,caps:'flat'});
 }
 
 // Evidence plates. Holes run through a thin upper stratum and stop on a base:
@@ -38,6 +40,14 @@ const track=[[-.10,-.39],[-.22,-.25],[-.20,-.08],[-.38,.12],[-.43,.34],[-.33,.40
 const leaf=[[-.03,-.49],[-.16,-.30],[-.30,-.06],[-.30,.14],[-.19,.35],[0,.51],[.19,.34],[.30,.12],[.28,-.10],[.14,-.34],[.03,-.49]];
 add('track-slab','specimens',['Footprint','足迹板'],['Records contact with sediment during an activity.','记录活动时与沉积物的接触。'],['The recessed outline is a trace of activity, not a foot bone resting on a rock. Its three main toe impressions are a generic teaching design; this outline does not identify the maker to a species. [S2, S7, S48, S90]','凹入的轮廓记录活动，不是放在岩石上的脚骨。三个主要趾印只是通用教学设计，不能据此鉴定制造者的物种。[S2, S7, S48, S90]'],[extrude([0,.29,0],rect(1.06,1.40),.075,[track],'token:neutral',{rotation:[-90,0,0],color:'abrasive'}),box([0,.19,0],[1.06,.12,1.40],'token:ink-2')]);
 add('leaf-slab','specimens',['Leaf imprint','叶印痕板'],['Records a leaf shape as a shallow impression.','用浅印痕记录叶的形状。'],['This example retains a shallow leaf impression without organic material or a carbon film. A leaf is a body part, so preservation as an impression does not make it activity evidence. The generic shape is not a species identification. [S54, S2, S90]','这个例子保留浅叶印痕，没有有机物或碳膜。叶属于身体部分，保存成印痕并不会使它变成活动证据。通用叶形不用于鉴定物种。[S54, S2, S90]'],[extrude([1.16,.30,0],rect(.90,1.26),.045,[leaf],'token:neutral',{rotation:[-90,0,0],color:'abrasive'}),box([1.16,.245,0],[.9,.06,1.26],'token:neutral')]);
+// Veins are recessed into the impression floor, below the slab rim. Thin
+// uncut bridges separate the holes so triangulation never crosses a vein.
+const veinHoles:number[][][]=[rect(.013,.81)];
+for(let i=0;i<6;i++)for(const side of [-1,1]){
+ const y=-.30+i*.12, tip=y+.12, w=.235*Math.sin((tip+.49)*Math.PI);
+ veinHoles.push([[side*.022,y],[side*w,tip],[side*w,tip+.008],[side*.022,y+.008]]);
+}
+parts.find(p=>p.id==='leaf-slab')!.extra!.push(extrude([1.16,.281,0],leaf.map(([x,y])=>[x!*.96,y!*.96]),.012,veinHoles,'token:neutral',{rotation:[-90,0,0],bevel:.001,color:'abrasive'}));
 add('leaf-lid','specimens',['Upper slab','覆盖片'],['Covers the impression until the slab is moved aside.','移开后才露出下面的印痕。'],['Moving this upper piece exposes the negative relief below. These two schematic pieces are not claimed to be an actual matching fossil and counterpart. [S54, S90]','移开覆盖片，才露出下方的凹印。这两片是教学示意，不称为真实配对的化石正负片。[S54, S90]'],[box([1.16,.40,0],[.90,.13,1.26])],{shell:true,explode:{dir:[0,1,0],dist:.7}});
 
 // Continuous, horizontal contacts; the middle shell leaves a cavity for one bone.
@@ -63,67 +73,58 @@ function sk(id:string,name:[string,string],level:keyof typeof basis,material:[st
  geometry.forEach(p=>{p.color='tissue';p.tint=b.tint;});
  return add(id,'skeleton',name,summary,[`${summary[0]}\n\nInvented teaching example. Shape evidence: ${b.en}.\nDisplay material: ${material[0]}. ${note[0]} [S7, S55, S56, S90]`,`${summary[1]}\n\n虚构教学例。形状依据：${b.zh}。\n展示材料：${material[1]}。${note[1]}[S7, S55, S56, S90]`],geometry,{short:bi(`${name[0]} · ${b.en}`,`${name[1]}·${b.zh}`),chainName:bi(name[0],name[1]),explode:{dir,dist},connects});
 }
-const skullOutline=[[-.83,-.21],[-.86,.11],[-.70,.25],[-.40,.31],[-.03,.45],[.27,.45],[.48,.25],[.46,-.13],[.28,-.29],[.02,-.27],[-.17,-.20],[-.39,-.25],[-.59,-.22]];
-const skullHoles=[ellipse(-.60,.08,.14,.09),[[-.39,-.04],[-.34,.19],[-.15,.25],[-.01,.12],[-.09,-.07]],ellipse(.18,.18,.12,.17),[[.33,.21],[.40,.20],[.39,-.08],[.30,-.15]]];
-const skullGeo:Primitive[]=[extrude([-2.76,2.36,.24],skullOutline,.11,skullHoles),extrude([-2.76,2.36,-.24],skullOutline,.11,skullHoles),sweep([-2.76,2.36,0],[[-.72,.18,-.24],[-.72,.24,0],[-.72,.18,.24]],.065),sweep([-2.76,2.36,0],[[.26,.40,-.24],[.26,.47,0],[.26,.40,.24]],.075)];
-for(const z of [-.24,.24]) for(let i=0;i<7;i++){const x=-3.48+i*.135; skullGeo.push(extrude([x,2.15,z],[[-.045,.035],[.047,.035],[.015,-.16],[-.016,-.12]],.065));}
+const { skull: skullGeo, jaw: jawGeo } = theropodSkull();
 sk('sk-skull',['Skull','头骨'],'direct',['cast of the documented original','已记录原件的复制件'],['Supports the jaw and encloses the open skull framework.','与下颌对应，呈现中空的骨性框架。'],skullGeo,[-1,.4,0],.5,['sk-jaw','sk-neck'],['A cast can preserve direct shape evidence. Openings are schematic; no tooth count or specimen identity is claimed.','复制件也可以保留直接形状依据；孔洞为示意，不指定牙数或标本身份。']);
-const jawGeo:Primitive[]=[];
-for(const z of [-.25,.25]) {jawGeo.push(sweep([-2.76,2.01,z],[[-.79,-.01,0],[-.48,-.11,0],[-.03,-.10,0],[.32,.02,0],[.41,.14,0]],[.065,.085,.07,.10,.07]));for(let i=0;i<6;i++)jawGeo.push(extrude([-3.45+i*.15,2.005,z],[[-.04,-.01],[.04,-.01],[.012,.115]],.055));}
-jawGeo.push(sweep([-3.48,1.99,0],[[0,0,-.25],[0,-.02,0],[0,0,.25]],.055));
 sk('sk-jaw',['Jaw','下颌'],'direct',['original fossil in this example','本例中的原化石'],['Forms the lower outline beneath the skull.','在头骨下方构成下颌轮廓。'],jawGeo,[0,-1,0],.35);
-const neckGeo=[sweep([-1.95,2.07,0],[[-.35,.23,0],[-.27,.14,0],[-.11,-.02,0],[.10,-.10,0],[.34,-.09,0]],[.12,.14,.13,.12,.14],bone,{rings:{every:.15,depth:.19}})];
+const neckGeo=vertebralColumn([[-2.30,2.39,0],[-2.13,2.20,0],[-1.94,1.99,0],[-1.65,1.98,0]],10,.075,.105,.11);
 sk('sk-neck',['Neck','颈部'],'comparison',['cast based on another specimen','参考其他标本的复制件'],['Joins the skull to the trunk in a curved axis.','以弯曲的轴连接头骨与躯干。'],neckGeo,[-1,.5,0],.4,['sk-trunk']);
-const trunkGeo:Primitive[]=[sweep([-.62,2.01,0],[[-1.03,-.03,0],[-.59,.12,0],[0,.14,0],[.55,.05,0],[1.1,-.05,0]],[.13,.15,.16,.16,.16],bone,{rings:{every:.18,depth:.2}})];
-for(let i=0;i<9;i++)trunkGeo.push(sweep([-.62,2.01,0],[[ -.85+i*.22,.08,0],[-.81+i*.22,.41,0]],[.052,.028]));
+const dorsalCentres:V[]=Array.from({length:12},(_,i)=>[-1.65+i*2.13/11,1.98+.17*Math.sin(i/11*Math.PI)-.02*i/11,0]);
+const trunkGeo:Primitive[]=dorsalCentres.flatMap((at,i)=>vertebra(at,.176,.105+i*.002,.21+i*.006));
+for(let i=0;i<6;i++){const at=dorsalCentres[i*2]!;trunkGeo.push(boneSweep(at,[[0,.04,-.19],[0,.06,0],[0,.04,.19]],[.022,.043,.022],.6,8));}
 sk('sk-trunk',['Trunk','躯干轴'],'direct',['original fossils in this example','本例中的原化石'],['Links the neck, ribs and pelvis along the back.','沿背部连接颈、肋部与骨盆。'],trunkGeo,[0,.6,0],.4,['sk-ribs','sk-pelvis','sk-arm-l','sk-arm-r']);
-const ribs:Primitive[]=[];
-for(let i=0;i<8;i++){const x=-1.47+i*.23, width=.38+Math.sin((i+1)/9*Math.PI)*.30;for(const s of [-1,1])ribs.push(tube([x,2.08,0],[[0,0,s*.07],[.02,-.17,s*width],[.08,-.54,s*width],[.15,-.86,s*.24]],.038));}
+const ribs:Primitive[]=ribCage(dorsalCentres,.66,.94,.028);
+for(let i=0;i<6;i++) ribs.push(boneSweep([-1.42+i*.22,1.19+i*.015,0],[[.06,.02,-.32],[0,-.04,0],[.06,.02,.32]],.012,.8,12));
 sk('sk-ribs',['Ribs','肋部'],'comparison',['sculpted restoration constrained by comparisons','有比较依据的补塑'],['Outlines the open rib cage beneath the trunk.','在躯干下方形成开放胸廓。'],ribs,[0,0,1],.5);
-const pelvisShape=[[-.42,.23],[-.26,.40],[.39,.39],[.61,.23],[.42,.05],[.21,-.05],[.04,-.19],[-.20,-.18],[-.31,.04]];
-const pelvisGeo:Primitive[]=[extrude([.5,1.9,.29],pelvisShape,.13,[ellipse(.04,.08,.14,.12)]),extrude([.5,1.9,-.29],pelvisShape,.13,[ellipse(.04,.08,.14,.12)])];
-for(const z of [-.29,.29]){pelvisGeo.push(sweep([.5,1.9,z],[[.07,-.09,0],[-.16,-.55,0],[-.22,-.77,0]],[.065,.05,.08]));pelvisGeo.push(sweep([.5,1.9,z],[[.12,-.11,0],[.46,-.50,0],[.62,-.66,0]],[.06,.05,.025]));}
+const pelvisGeo=theropodPelvis();
 sk('sk-pelvis',['Pelvis','骨盆'],'direct',['original fossils in this example','本例中的原化石'],['Connects the trunk with the hindlimbs and tail.','连接躯干、后肢与尾。'],pelvisGeo,[0,.5,0],.3,['sk-leg-l','sk-leg-r','sk-tail-base']);
-for(const [id,z,level] of [['sk-arm-l',.43,'direct'],['sk-arm-r',-.43,'comparison']] as const){const s=Math.sign(z);const geo:Primitive[]=[sweep([-1.45,1.76,z],[[0,0,0],[.19,-.23,s*.01],[.02,-.39,s*.015]],[.085,.065,.048])];for(const dz of [-.065,.065])geo.push(sweep([-1.43,1.37,z],[[0,0,dz],[-.17,-.03,dz],[-.28,-.08,dz],[-.31,-.15,dz]],[.039,.033,.025,.006]));sk(id,[z>0?'Left forelimb':'Right forelimb',z>0?'左前肢':'右前肢'],level,[z>0?'original fossils in this example':'sculpted counterpart constrained by comparison',z>0?'本例中的原化石':'有对侧比较依据的补塑'],['Forms a short forelimb with two functional fingers.','构成带两个功能指的短前肢。'],geo,[0,0,Math.sign(z)],.45,[],['Each T. rex hand has two functional fingers [S9]. The count does not apply to every dinosaur.','霸王龙每手有两个功能指[S9]，不能推广到所有恐龙。']);}
-for(const [id,z]of [['sk-leg-l',.48],['sk-leg-r',-.48]] as const){const s=Math.sign(z);const geo:Primitive[]=[sweep([.52,1.78,z],[[0,0,0],[-.30,-.40,s*.04],[-.35,-.63,s*.06]],[.16,.13,.14]),sweep([.17,1.15,z+s*.06],[[0,0,0],[.32,-.43,s*.02],[.29,-.72,s*.03]],[.095,.07,.095]),sweep([.46,.43,z+s*.09],[[0,0,0],[-.08,-.27,s*.01]],[.065,.075])];for(const dz of [-.16,0,.16])geo.push(sweep([.38,.16,z+s*.10],[[0,0,0],[-.21,-.03,dz*.7],[-.49,-.04,dz],[-.58,-.02,dz]],[.06,.05,.035,.007]));geo.push(sweep([.42,.33,z-s*.01],[[0,0,0],[.12,-.08,-s*.13],[.17,-.12,-s*.14]],[.027,.02,.005]));sk(id,[z>0?'Left hindlimb':'Right hindlimb',z>0?'左后肢':'右后肢'],'direct',['original fossils in this example','本例中的原化石'],['Supports the hindquarters through three main load-bearing toes.','通过三个主要承重趾支撑后部身体。'],geo,[0,0,Math.sign(z)],.5,[],['Three main support toes follow the theropod constraint [S48]. A small raised toe is not a fourth main support toe.','三个主要承重趾依兽脚类约束[S48]；小抬趾不是第四个主要承重趾。']);}
-sk('sk-tail-base',['Tail base','尾基'],'inferred',['sculpted restoration','示意补塑'],['Continues the backbone behind the pelvis.','在骨盆后延续身体轴。'],[sweep([1.36,1.92,0],[[-.4,.02,0],[0,-.01,0],[.62,-.13,0],[1.04,-.19,0]],[.17,.15,.115,.085],bone,{rings:{every:.16,depth:.17}})],[1,0,0],.45,['sk-tail-tip']);
-sk('sk-tail-tip',['Tail tip','尾端'],'inferred',['sculpted restoration','示意补塑'],['Tapers into a long tail raised clear of the platform.','逐渐收细为抬离台面的长尾。'],[sweep([2.94,1.72,0],[[-.54,.01,0],[0,-.06,0],[.62,-.10,0],[1.13,-.04,0]],[.085,.065,.037,.008],bone,{rings:{every:.17,depth:.15}})],[1,0,0],.7);
+for(const [id,z,level] of [['sk-arm-l',.43,'direct'],['sk-arm-r',-.43,'comparison']] as const){sk(id,[z>0?'Left forelimb':'Right forelimb',z>0?'左前肢':'右前肢'],level,[z>0?'original fossils in this example':'sculpted counterpart constrained by comparison',z>0?'本例中的原化石':'有对侧比较依据的补塑'],['Forms a short forelimb with two functional fingers.','构成带两个功能指的短前肢。'],theropodForelimb(z),[0,0,Math.sign(z)],.45,[],['Each T. rex hand has two functional fingers [S9]. The count does not apply to every dinosaur.','霸王龙每手有两个功能指[S9]，不能推广到所有恐龙。']);}
+for(const [id,z]of [['sk-leg-l',.48],['sk-leg-r',-.48]] as const){sk(id,[z>0?'Left hindlimb':'Right hindlimb',z>0?'左后肢':'右后肢'],'direct',['original fossils in this example','本例中的原化石'],['Supports the hindquarters through three main load-bearing toes.','通过三个主要承重趾支撑后部身体。'],theropodHindlimb(z),[0,0,Math.sign(z)],.5,[],['Three main support toes follow the theropod constraint [S48]. A small raised toe is not a fourth main support toe.','三个主要承重趾依兽脚类约束[S48]；小抬趾不是第四个主要承重趾。']);}
+sk('sk-tail-base',['Tail base','尾基'],'inferred',['sculpted restoration','示意补塑'],['Continues the backbone behind the pelvis.','在骨盆后延续身体轴。'],vertebralColumn([[.96,1.94,0],[1.55,1.89,0],[2.4,1.73,0]],16,.13,.062,.20,{chevrons:true}),[1,0,0],.45,['sk-tail-tip']);
+sk('sk-tail-tip',['Tail tip','尾端'],'inferred',['sculpted restoration','示意补塑'],['Tapers into a long tail raised clear of the platform.','逐渐收细为抬离台面的长尾。'],vertebralColumn([[2.4,1.73,0],[3.1,1.65,0],[3.7,1.62,0],[4.07,1.68,0]],24,.062,.008,.07,{chevrons:true,archLimit:8}),[1,0,0],.7);
 
 // Local living-bird study. A separate enlarged feather is a comparison object.
-const bodyGeo:Primitive[]=[{kind:'sphere',at:[-1.65,1.02,0],size:[.33],scale:[1.30,1.0,.78],color:'powder',tint:'token:ink-2'},{kind:'sphere',at:[-1.96,1.36,0],size:[.23],scale:[.95,1.06,.9],color:'powder',tint:'token:ink-2'},sweep([-2.16,1.36,0],[[0,0,0],[-.26,-.03,0]],[.09,.012],'token:bone'),extrude([-1.33,.85,0],[[-.03,.16],[.43,-.20],[.49,-.31],[.31,-.34],[-.10,-.04]],.18,[],'token:ink-2')];
-for(const z of [-.18,.18])bodyGeo.push({kind:'sphere',at:[-2.015,1.42,z],size:[.027],color:'powder',tint:'token:bone'});
+const bird = buildBird();
+const bodyGeo=bird.body;
 add('myna-body','living-museum',['Myna','八哥'],['Shows the main outline of a local living bird.','显示本地活鸟的大部位轮廓。'],['This original teaching bird represents a Javan myna found in Singapore. Birds are nested within theropod dinosaurs; combining that classification with the local occurrence makes this a local living-dinosaur example. It is not a Tyrannosaurus transforming into a myna. [S8, S23, S90]','这只原创教学鸟代表新加坡能见到的爪哇八哥。鸟类嵌套于兽脚类恐龙内；把这项分类与本地出现资料合起来，它就是本地活恐龙的例子，不是霸王龙变成八哥。[S8, S23, S90]'],bodyGeo);
-const wingGeo:Primitive[]=[extrude([-1.63,1.03,.23],[[-.26,.13],[.03,.18],[.31,-.12],[.34,-.30],[.11,-.27],[-.18,-.07]],.065,[],'token:neutral')];
-for(let i=0;i<5;i++)wingGeo.push(tube([-1.63,1.03,.27],[[i*.047-.15,.04,0],[i*.05+.06,-.21,0]],.009,'token:ink-2'));
+const wingGeo=bird.wing;
 add('myna-wing','living-museum',['Wing','翼'],['Represents the bird forelimb.','代表鸟的前肢。'],['The folded wing marks a broad anatomical region, not a measured myna bone reconstruction. Similar outlines alone do not establish ancestry; classification uses wider fossil and anatomical evidence. [S8, S10, S90]','折翼标出解剖大部位，不是八哥骨骼的测量复原。相似外形本身不能确立祖先关系，分类结合更广泛的化石与解剖证据。[S8, S10, S90]'],wingGeo);
-const birdLeg:Primitive[]=[];for(const z of [-.13,.13]){birdLeg.push(sweep([-1.7,.77,z],[[0,0,0],[.03,-.23,0],[-.06,-.47,0]],[.027,.022,.018],'token:bone'));for(const dz of [-.10,0,.10])birdLeg.push(sweep([-1.76,.30,z],[[0,0,0],[-.15,-.03,dz]],.012,'token:bone'));}
+const birdLeg=bird.legs;
 add('myna-leg','living-museum',['Bird hindlimbs','鸟的后肢'],['Supports the living-bird outline.','支撑活鸟的外形。'],['Both hindlimbs belong to the local-bird teaching model. Their appearance does not identify the maker of the separate footprint slab. No exact body measurements or fine myna osteology are claimed. [S8, S23, S90]','两条后肢属于本地鸟教学模型，外形不能用于鉴定另一工位足迹的制造者。不宣称精确身体尺寸或细致的八哥骨学数据。[S8, S23, S90]'],birdLeg);
-const featherShape=[[-.015,-.63],[-.17,-.44],[-.28,-.12],[-.25,.24],[-.13,.58],[.02,.83],[.20,.51],[.30,.13],[.26,-.22],[.13,-.48],[.015,-.63]];
-const featherGeo:Primitive[]=[extrude([-.52,1.14,.40],featherShape,.025,[],'token:bone'),tube([-.52,1.14,.425],[[0,-.78,0],[0,.1,0],[.02,.77,0]],.014,'token:ink-2')];for(let i=0;i<7;i++){const y=-.39+i*.15;const tip=y+.16;const width=Math.max(.03,.24*(1-Math.abs(tip-.06)/.78));for(const s of [-1,1])featherGeo.push(tube([-.52,1.14,.42],[[0,y,0],[s*width,tip,0]],.004,'token:ink-2'));}
+const featherGeo=bird.feather;
 add('myna-feather','living-museum',['Feather','羽毛比较件'],['Enlarges a modern feather for comparison.','放大现生鸟羽以便比较。'],['This is a modern-bird comparison model, not a fossil and not drawn to the bird body scale. Archaeopteryx fossils preserve a combination of features useful in studying early birds; this does not label it the proven direct ancestor of all birds. [S10, S90]','这是现生鸟类比较模型，不是化石，也不与鸟身体采用同一尺度。始祖鸟化石保存的特征组合有助研究早期鸟类，但不表示它已被证实是所有鸟的直接祖先。[S10, S90]'],featherGeo);
 
-function sauropod(cx:number,z:number):Primitive[]{
- const geo:Primitive[]=[sweep([cx,1,z],[[-1.0,.74,0],[-.85,.64,0],[-.61,.33,0],[-.43,.03,0],[.02,.03,0],[.38,.02,0],[.77,-.12,0],[1.26,-.19,0],[1.58,-.16,0]],[.04,.055,.065,.09,.10,.085,.055,.025,.004],bone,{rings:{every:.10,depth:.15}}),{kind:'sphere',at:[cx-1.06,1.76,z],size:[.08],scale:[1.8,.70,.75],color:'tissue',tint:bone}];
- for(const x of [-.37,.34])for(const s of [-1,1]){geo.push(sweep([cx+x,1,z+s*.16],[[0,0,0],[x<0?-.05:.13,-.38,s*.04],[x<0?-.03:.08,-.76,s*.05]],[.07,.055,.07]));geo.push(sweep([cx+x,1,z+s*.16],[[x<0?-.03:.08,-.76,s*.05],[-.08,-.80,s*.05]],[.065,.07]));}
- for(let i=0;i<5;i++)for(const s of [-1,1])geo.push(tube([cx-.30+i*.13,1.03,z],[[0,0,s*.03],[0,-.13,s*.23],[.035,-.38,s*.14]],.022));
- return geo;
-}
 for(const [id,cx,z,title,zh]of [['prince-study',.0,-.65,'Prince','Prince'],['apollonia-study',1.0,.1,'Apollonia','Apollonia'],['twinky-study',2.0,.85,'Twinky','Twinky']]as const){
- add(id,'living-museum',[`${title} study`,`${zh} 示意`],[`Introduces ${title} through a generic long-necked quadruped study.`,`以通用长颈四足示意介绍${title}。`],[`${title} is a current name used for a diplodocid sauropod fossil displayed at Lee Kong Chian Natural History Museum. The discovery site was Dana Quarry, Wyoming, in the Jurassic Morrison Formation. This original generic study does not copy the mount, individual size, species identity, sex or original-versus-restored bone inventory. Finding the specimens together is not proof of a parent–offspring relationship. [S17, S57, S90]`,`${title}是李光前自然历史博物馆展出的一具梁龙科蜥脚类化石的现行名字，发现于怀俄明州Dana采石场侏罗纪莫里森组。本原创通用示意不复制展台姿态、个体大小，不指定种、性别，也不标原骨与修复部分。一起发现不能证明亲子关系。[S17, S57, S90]`],sauropod(cx,z));
+ add(id,'living-museum',[`${title} study`,`${zh} 示意`],[`Introduces ${title} through a generic long-necked quadruped study.`,`以通用长颈四足示意介绍${title}。`],[`${title} is a current name used for a diplodocid sauropod fossil displayed at Lee Kong Chian Natural History Museum. The discovery site was Dana Quarry, Wyoming, in the Jurassic Morrison Formation. This original generic study does not copy the mount, individual size, species identity, sex or original-versus-restored bone inventory. Finding the specimens together is not proof of a parent–offspring relationship. [S17, S57, S90]`,`${title}是李光前自然历史博物馆展出的一具梁龙科蜥脚类化石的现行名字，发现于怀俄明州Dana采石场侏罗纪莫里森组。本原创通用示意不复制展台姿态、个体大小，不指定种、性别，也不标原骨与修复部分。一起发现不能证明亲子关系。[S17, S57, S90]`],diplodocid(cx,z));
 }
 
 // Bake the spec's one-time positive uniform affine transform for all six studies.
 const sets:Record<string,string[]>={specimens:parts.filter(p=>p.group==='specimens').map(p=>p.id),burial:parts.filter(p=>p.group==='burial').map(p=>p.id),'age-section':parts.filter(p=>p.group==='age-section').map(p=>p.id),skeleton:parts.filter(p=>p.group==='skeleton').map(p=>p.id),bird:parts.filter(p=>p.id.startsWith('myna-')).map(p=>p.id),museum:parts.filter(p=>p.id.endsWith('-study')).map(p=>p.id)};
-const layout:Record<string,{center:V;scale:number;bounds:{min:V;max:V}}>={};
+const layout:Record<string,{center:V;scale:number;bounds:{min:V;max:V};lift:number}>={};
+// Standing studies rest on the platform (y = 0) instead of floating at the
+// shared display centre; their cameras move with them, so framing is kept.
+const grounded=new Set(['skeleton','museum']);
 for(const [set,ids]of Object.entries(sets)){
  const items=parts.filter(p=>ids.includes(p.id));const boxes=items.map(p=>partBounds(p)!);
  const min=[0,1,2].map(i=>Math.min(...boxes.map(b=>b.min[i]!)))as V,max=[0,1,2].map(i=>Math.max(...boxes.map(b=>b.max[i]!)))as V;
  const c=min.map((v,i)=>(v+max[i]!)/2)as V;const h=min.map((v,i)=>(max[i]!-v)/2);const k=Math.min(...[4,2,1.4].map((v,i)=>h[i]!>0?v/h[i]!:Infinity));
- layout[set]={center:c,scale:k,bounds:{min,max}};
- const point=(v:V)=>v.map((x,i)=>[0,2,0][i]!+k*(x-c[i]!)) as V;
+ const lift=grounded.has(set)?-(2+k*(min[1]-c[1])):0;
+ layout[set]={center:c,scale:k,bounds:{min,max},lift};
+ const point=(v:V)=>v.map((x,i)=>[0,2+lift,0][i]!+k*(x-c[i]!)) as V;
  for(const p of items){for(const g of [p.primitive!,...(p.extra??[])]){
    g.at=point(g.at);if('size'in g&&g.size)g.size=g.size.map(v=>v*k)as never;
    if('path'in g)g.path=g.path.map(v=>v.map(x=>x*k)as V);
+   if(g.kind==='lathe')g.profile=g.profile.map(([r,y])=>[r*k,y*k]);
+   if(g.kind==='wing'){g.outline=g.outline.map(v=>v.map(x=>x*k)as[number,number]);g.veins=g.veins.map(line=>line.map(v=>v.map(x=>x*k)as[number,number]));g.thickness*=k;}
    if(g.kind==='extrude')g.shape=g.shape.map(v=>v.map(x=>x*k)as[number,number]);
    if('holes'in g&&g.holes)g.holes=g.holes.map(h=>h.map(v=>v.map(x=>x*k)as[number,number]));
    if('radius'in g&&g.radius!==undefined)g.radius=(Array.isArray(g.radius)?g.radius.map(x=>x*k):g.radius*k)as never;
@@ -131,7 +132,7 @@ for(const [set,ids]of Object.entries(sets)){
    if('rings'in g&&g.rings)g.rings.every*=k;
  }p.explode.dist*=k;}
 }
-function camera(set:string,position:V,target:V){const{center:c,scale:k}=layout[set]!;const tr=(v:V)=>v.map((x,i)=>Math.round(([0,2,0][i]!+k*(x-c[i]!))*1e5)/1e5)as V;return{position:tr(position),target:tr(target),fov:34};}
+function camera(set:string,position:V,target:V){const{center:c,scale:k,lift}=layout[set]!;const tr=(v:V)=>v.map((x,i)=>Math.round(([0,2+lift,0][i]!+k*(x-c[i]!))*1e5)/1e5)as V;return{position:tr(position),target:tr(target),fov:34};}
 const cameras={
  'evidence-close':camera('specimens',[4,3,6],[0,.7,0]),
  'burial-close':camera('burial',[4,2.8,5],[0,1,0]),
@@ -149,6 +150,16 @@ add('study-plinth','context',['Study platform','示意底台'],['Supports the sc
 const labels:Record<string,[string,string]>={'evidence-close':['Evidence','证据'],'burial-close':['Burial','埋藏'],'layers-close':['Layers','地层'],'skeleton-side':['Skeleton','骨架'],'bird-close':['Bird','鸟'],'museum-close':['Museum','馆藏']};
 const path='src/content/topics/fossils-and-skeletons/data/parts.json';
 const previous=fs.existsSync(path)?JSON.parse(fs.readFileSync(path,'utf8')):{};
+// Published copy is edited independently of the bootstrap text above. A form
+// rebuild must preserve that editorial work and every evidence label/fact.
+for(const part of parts){
+ const published=previous.parts?.find((p:Part)=>p.id===part.id);
+ if(!published)continue;
+ for(const key of ['name','short','chainName','summary','detail','connects']as const){
+  if(published[key]!==undefined)(part as any)[key]=published[key];
+  else delete (part as any)[key];
+ }
+}
 const result={...previous,parts,groups:[{id:'specimens',name:bi('Fossil evidence','化石证据'),color:'token:ink-2',card:false},{id:'burial',name:bi('Burial and minerals','埋藏与矿物'),color:'token:neutral',card:false},{id:'age-section',name:bi('Layers and ages','地层与年龄'),color:'token:ink-2',card:false},{id:'skeleton',name:bi('Rebuilding','骨架复原'),color:'token:bone'},{id:'living-museum',name:bi('Living birds and museum','活鸟与馆藏'),color:'token:neutral',card:false}],flows:[],animations:[],views:{assembled:{camera:cameras['skeleton-side']},xray:{camera:cameras['burial-close']},exploded:{camera:cameras['skeleton-side']},reference:{fit:'layers'},section:{plane:'xy'},cutaway:{normal:[0,0,-1],offset:1.07}},presets:Object.entries(labels).map(([id,label])=>({id,label:bi(...label),camera:cameras[id as keyof typeof cameras]}))};
 result.spec=[
  {key:bi('MODEL','模型'),value:bi('Schematic','示意'),tag:'design'},
@@ -157,6 +168,9 @@ result.spec=[
  {key:bi('MUSEUM','馆藏'),value:bi('Three diplodocids','三具梁龙科标本'),tag:'typical'},
 ];
 result.sim=JSON.parse(fs.readFileSync('scripts/geo/fossils-and-skeletons/sim.json','utf8'));
+if(previous.groups)result.groups=previous.groups;
+if(previous.spec)result.spec=previous.spec;
+result.model=await bakeMuseum(parts);
 partsFile.parse(result);
 fs.writeFileSync(path,JSON.stringify(result,(_,v)=>typeof v==='number'?Math.round(v*1e6)/1e6:v,2)+'\n');
 fs.writeFileSync('scripts/geo/fossils-and-skeletons/model-layout.json',JSON.stringify({studies:layout,cameras},null,2)+'\n');

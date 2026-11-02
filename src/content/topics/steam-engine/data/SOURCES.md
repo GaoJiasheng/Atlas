@@ -113,3 +113,34 @@ Cuts remain cuts: no Mayr index-based static-offset claim; no blocked MOE curric
 - [S15] NASA Glenn Research Center, Work Equals Force Times Distance, constant-force and displacement-component paragraphs: W=Fs for aligned constant force; J=N·m; power is the rate of doing work. / NASA格伦研究中心《功等于力乘距离》，常力及沿位移分量段：恒定且沿位移的力有W=Fs；焦耳=牛·米；功率为做功快慢。 (Read 2026-10-27. Work definition and independent S1 indicated-work calculation; no aircraft illustration copied. The model’s indicated power is not shaft power. / 2026-10-27读取。用于功的定义及S1独立指示功计算，不复制飞机图。模型指示功率不是轴功率。) — https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/work/
 - [S16] NIST, SI Units – Length, metric redefinition of the inch; Guide to the SI, Appendix B conversion factors. Exact definitions: 1 in=0.0254 m; 1 ft=0.3048 m. / NIST《SI单位——长度》英寸公制重定义段；《SI指南》附录B换算系数。精确定义：1英寸=0.0254米，1英尺=0.3048米。 (Read 2026-10-27; companion https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors. Independently converts 18.75 in→0.47625 m, 18 in→0.4572 m, 4 ft→1.2192 m, 16 ft→4.8768 m. Exact unit definitions do not add significant figures to historical measurements. No NIST artwork copied. / 2026-10-27读取；另核https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors。独立换算18.75英寸→0.47625米、18英寸→0.4572米、4英尺→1.2192米、16英尺→4.8768米。单位定义精确不代表历史测量多出有效位数。不复制NIST插图。) — https://www.nist.gov/pml/owm/si-units-length
 <!-- sources:end -->
+
+## 2026-11-02 geometry rebuild provenance
+
+The rebuilt forms are original procedural reconstructions using existing S2, S6,
+S7 and S11. The published teaching copy, numerical tables and mechanism bindings
+are retained in `scripts/geo/steam-engine/definition.json`; generated geometry is
+in `build-engine.mjs`, using `../kits/gear.ts`. Only the Newcomen support
+description changes, to describe the bob-wall.
+
+- S2, Science Museum Group Lap-engine photographs: inspected the heavy rim,
+  substantial beam and bearing support. CC BY-NC-SA 4.0 photographs are development
+  references only, under ignored `refs/`; no photograph is embedded or traced.
+  https://collection.sciencemuseumgroup.org.uk/objects/co50948/rotative-steam-engine-by-boulton-and-watt-1788
+- S6, Ferguson, figure 10 (Lardner 1852, public domain): inspected beam pin bosses,
+  parallel-link attachment and the bearing axis.
+  https://www.gutenberg.org/files/27106/27106-h/images/fig-10.jpg
+- S7, Lardner 1836, plate III, figure 10 (public domain): inspected Newcomen arch
+  heads, chain tangency, open cylinder, dome boiler and mine-pump shaft.
+  https://www.gutenberg.org/files/55428/55428-h/images/imgpl3.jpg
+- Following S2, the beam, A-frames and cap are timber with iron straps and
+  bearings; their sections, the straight spokes, brick setting and cutaway
+  engine-house layout are a reconstruction, not a survey of the Lap engine. The wagon boiler retains the existing
+  design envelope; its flat base is now shown accurately. Historical flywheel
+  rim tooth counts remain deliberately omitted because S3 and S5 disagree.
+
+The existing 48:48 sun/planet design, 20-degree pressure angle, module
+`orbitM / 48`, and 0.0003 m total backlash are unchanged. Involute flanks begin
+at `max(baseRadius, rootRadius)`, avoiding the old profile's radial backtracking.
+Physical tooth polygons are checked at 3,073 phases, alongside an intentionally
+incorrect phase as a negative control. Equal wheels retain two net shaft turns
+per complete orbit, with the planet fixed to the connecting rod.

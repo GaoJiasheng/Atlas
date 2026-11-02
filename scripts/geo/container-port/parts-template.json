@@ -1,0 +1,2246 @@
+{
+  "parts": [
+    {
+      "id": "ship-hull",
+      "name": {
+        "en": "Hull",
+        "zh": "船体"
+      },
+      "group": "vessel",
+      "summary": {
+        "en": "Supports the cargo and forms the vessel’s continuous body.",
+        "zh": "承载货物，构成连续的船体。"
+      },
+      "detail": {
+        "en": "Supports the cargo and forms the vessel’s continuous body. [S1,S11]",
+        "zh": "承载货物，构成连续的船体。[S1,S11]"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "castShadow": false,
+      "connects": [
+        "ship-deck"
+      ],
+      "clip": false
+    },
+    {
+      "id": "ship-deck",
+      "name": {
+        "en": "Deck",
+        "zh": "甲板"
+      },
+      "group": "vessel",
+      "summary": {
+        "en": "Provides a working surface above the hull.",
+        "zh": "在船体上方提供工作面。"
+      },
+      "detail": {
+        "en": "Provides a working surface above the hull. [S1]",
+        "zh": "在船体上方提供工作面。[S1]"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "castShadow": false,
+      "connects": [
+        "ship-hull",
+        "working-box"
+      ],
+      "clip": false
+    },
+    {
+      "id": "ship-bridge",
+      "name": {
+        "en": "Bridge",
+        "zh": "驾驶区"
+      },
+      "group": "vessel",
+      "summary": {
+        "en": "Houses the space used to navigate the ship.",
+        "zh": "提供船舶驾驶空间。"
+      },
+      "detail": {
+        "en": "Houses the space used to navigate the ship. [S1]",
+        "zh": "提供船舶驾驶空间。[S1]"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "castShadow": false,
+      "clip": false
+    },
+    {
+      "id": "ship-cargo",
+      "name": {
+        "en": "Deck cargo",
+        "zh": "甲板箱"
+      },
+      "group": "vessel",
+      "summary": {
+        "en": "Waits on deck for the next handling step.",
+        "zh": "放在甲板上，等待下一段搬运。"
+      },
+      "detail": {
+        "en": "Waits on deck for the next handling step. [S1]",
+        "zh": "放在甲板上，等待下一段搬运。[S1]"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "castShadow": false,
+      "clip": false
+    },
+    {
+      "id": "portal",
+      "name": {
+        "en": "Portal",
+        "zh": "门架"
+      },
+      "group": "quay-crane",
+      "summary": {
+        "en": "Supports the boom above the quay.",
+        "zh": "在码头上方支撑臂架。"
+      },
+      "detail": {
+        "en": "Supports the boom above the quay. [S1,S11]",
+        "zh": "在码头上方支撑臂架。[S1,S11]"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "castShadow": false,
+      "connects": [
+        "crane-boom",
+        "rail-bogies"
+      ],
+      "clip": false
+    },
+    {
+      "id": "rail-bogies",
+      "name": {
+        "en": "Bogies",
+        "zh": "行走轮组"
+      },
+      "group": "quay-crane",
+      "summary": {
+        "en": "Carry the crane along its quay rails.",
+        "zh": "让岸桥沿码头轨道移动。"
+      },
+      "detail": {
+        "en": "Carry the crane along its quay rails. [S1,S11]",
+        "zh": "让岸桥沿码头轨道移动。[S1,S11]"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "castShadow": false,
+      "connects": [
+        "crane-rails",
+        "portal"
+      ],
+      "clip": false
+    },
+    {
+      "id": "crane-rails",
+      "name": {
+        "en": "Rails",
+        "zh": "轨道"
+      },
+      "group": "quay-crane",
+      "summary": {
+        "en": "Guide the whole crane along the quay.",
+        "zh": "引导整台岸桥沿码头移动。"
+      },
+      "detail": {
+        "en": "Guide the whole crane along the quay. [S1,S11]",
+        "zh": "引导整台岸桥沿码头移动。[S1,S11]"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "castShadow": false,
+      "connects": [
+        "rail-bogies"
+      ],
+      "clip": false
+    },
+    {
+      "id": "crane-boom",
+      "name": {
+        "en": "Boom",
+        "zh": "臂架"
+      },
+      "group": "quay-crane",
+      "summary": {
+        "en": "Supports the trolley as it moves above ship and quay.",
+        "zh": "支撑在船舶和岸边上方行走的小车。"
+      },
+      "detail": {
+        "en": "Supports the trolley as it moves above ship and quay. [S1,S11]",
+        "zh": "支撑在船舶和岸边上方行走的小车。[S1,S11]"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "castShadow": false,
+      "connects": [
+        "portal",
+        "trolley"
+      ],
+      "clip": false
+    },
+    {
+      "id": "trolley",
+      "name": {
+        "en": "Trolley",
+        "zh": "小车"
+      },
+      "group": "quay-crane",
+      "summary": {
+        "en": "Moves the suspended load along the boom.",
+        "zh": "沿臂架移动悬吊的货物。"
+      },
+      "detail": {
+        "en": "Moves the suspended load along the boom. [S1,S11]",
+        "zh": "沿臂架移动悬吊的货物。[S1,S11]"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "castShadow": false,
+      "connects": [
+        "crane-boom",
+        "rope-a",
+        "rope-b",
+        "rope-c",
+        "rope-d"
+      ],
+      "clip": false
+    },
+    {
+      "id": "rope-a",
+      "name": {
+        "en": "Hoist rope",
+        "zh": "起升绳"
+      },
+      "group": "quay-crane",
+      "summary": {
+        "en": "Connects the trolley’s hoist to the spreader.",
+        "zh": "把小车上的起升机构连接到吊具。"
+      },
+      "detail": {
+        "en": "Connects the trolley’s hoist to the spreader. [S1,S11]",
+        "zh": "把小车上的起升机构连接到吊具。[S1,S11]"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "castShadow": false,
+      "connects": [
+        "trolley",
+        "spreader"
+      ],
+      "clip": false
+    },
+    {
+      "id": "rope-b",
+      "name": {
+        "en": "Hoist rope",
+        "zh": "起升绳"
+      },
+      "group": "quay-crane",
+      "summary": {
+        "en": "Connects the trolley’s hoist to the spreader.",
+        "zh": "把小车上的起升机构连接到吊具。"
+      },
+      "detail": {
+        "en": "Connects the trolley’s hoist to the spreader. [S1,S11]",
+        "zh": "把小车上的起升机构连接到吊具。[S1,S11]"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "castShadow": false,
+      "connects": [
+        "trolley",
+        "spreader"
+      ],
+      "clip": false
+    },
+    {
+      "id": "rope-c",
+      "name": {
+        "en": "Hoist rope",
+        "zh": "起升绳"
+      },
+      "group": "quay-crane",
+      "summary": {
+        "en": "Connects the trolley’s hoist to the spreader.",
+        "zh": "把小车上的起升机构连接到吊具。"
+      },
+      "detail": {
+        "en": "Connects the trolley’s hoist to the spreader. [S1,S11]",
+        "zh": "把小车上的起升机构连接到吊具。[S1,S11]"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "castShadow": false,
+      "connects": [
+        "trolley",
+        "spreader"
+      ],
+      "clip": false
+    },
+    {
+      "id": "rope-d",
+      "name": {
+        "en": "Hoist rope",
+        "zh": "起升绳"
+      },
+      "group": "quay-crane",
+      "summary": {
+        "en": "Connects the trolley’s hoist to the spreader.",
+        "zh": "把小车上的起升机构连接到吊具。"
+      },
+      "detail": {
+        "en": "Connects the trolley’s hoist to the spreader. [S1,S11]",
+        "zh": "把小车上的起升机构连接到吊具。[S1,S11]"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "castShadow": false,
+      "connects": [
+        "trolley",
+        "spreader"
+      ],
+      "clip": false
+    },
+    {
+      "id": "spreader",
+      "name": {
+        "en": "Spreader",
+        "zh": "集装箱吊具"
+      },
+      "group": "quay-crane",
+      "summary": {
+        "en": "Connects the hoist to the container’s upper corners.",
+        "zh": "把起升机构连接到集装箱的上角件。"
+      },
+      "detail": {
+        "en": "Connects the hoist to the container’s upper corners. [S1,S10]",
+        "zh": "把起升机构连接到集装箱的上角件。[S1,S10]"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "castShadow": false,
+      "connects": [
+        "rope-a",
+        "rope-b",
+        "rope-c",
+        "rope-d",
+        "twistlocks"
+      ],
+      "clip": false
+    },
+    {
+      "id": "twistlocks",
+      "name": {
+        "en": "Twistlocks",
+        "zh": "旋锁"
+      },
+      "group": "quay-crane",
+      "summary": {
+        "en": "Turn within the upper corner fittings to form a connection.",
+        "zh": "在上角件中转动，形成连接。"
+      },
+      "detail": {
+        "en": "The four lock heads turn inside the upper corner fittings. They are enlarged here so you can see the connection. [S1,S10]",
+        "zh": "四个锁头在上角件内转动。这里把锁头放大，方便看清连接。[S1,S10]"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "castShadow": false,
+      "connects": [
+        "spreader",
+        "corner-fittings"
+      ],
+      "clip": false
+    },
+    {
+      "id": "working-box",
+      "name": {
+        "en": "Working box",
+        "zh": "工作箱"
+      },
+      "group": "trace",
+      "summary": {
+        "en": "Travels from ship to carrier, yard and onward ship.",
+        "zh": "从船上到运输车、堆场，再到接续船。"
+      },
+      "detail": {
+        "en": "Travels from ship to carrier, yard and onward ship. [S1,S10]",
+        "zh": "从船上到运输车、堆场，再到接续船。[S1,S10]"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 1.8
+      },
+      "castShadow": false,
+      "connects": [
+        "ship-deck",
+        "corner-fittings"
+      ],
+      "shell": true,
+      "clip": true
+    },
+    {
+      "id": "corner-fittings",
+      "name": {
+        "en": "Upper corners",
+        "zh": "上角件"
+      },
+      "group": "trace",
+      "summary": {
+        "en": "Provide the upper corner connection points for the spreader.",
+        "zh": "在箱体上角提供吊具连接点。"
+      },
+      "detail": {
+        "en": "Provide the upper corner connection points for the spreader. [S1,S10]",
+        "zh": "在箱体上角提供吊具连接点。[S1,S10]"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "castShadow": false,
+      "connects": [
+        "working-box",
+        "twistlocks"
+      ],
+      "clip": false
+    },
+    {
+      "id": "sample-20",
+      "name": {
+        "en": "20-foot samples",
+        "zh": "20英尺样箱"
+      },
+      "group": "trace",
+      "summary": {
+        "en": "Show boxes at one common scale for TEU counting.",
+        "zh": "以相同比例显示集装箱，用于TEU计数。"
+      },
+      "detail": {
+        "en": "Show boxes at one common scale for TEU counting. [S1,S8,S9]",
+        "zh": "以相同比例显示集装箱，用于TEU计数。[S1,S8,S9]"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "castShadow": false,
+      "clip": false
+    },
+    {
+      "id": "sample-40",
+      "name": {
+        "en": "40-foot samples",
+        "zh": "40英尺样箱"
+      },
+      "group": "trace",
+      "summary": {
+        "en": "Show boxes at one common scale for TEU counting.",
+        "zh": "以相同比例显示集装箱，用于TEU计数。"
+      },
+      "detail": {
+        "en": "Show boxes at one common scale for TEU counting. [S1,S8,S9]",
+        "zh": "以相同比例显示集装箱，用于TEU计数。[S1,S8,S9]"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "castShadow": false,
+      "clip": false
+    },
+    {
+      "id": "agv-body",
+      "name": {
+        "en": "Carrier",
+        "zh": "自动导引车"
+      },
+      "group": "transfer",
+      "summary": {
+        "en": "Carries a container horizontally between handling points.",
+        "zh": "在搬运位置之间水平运送集装箱。"
+      },
+      "detail": {
+        "en": "Carries a container horizontally between handling points. [S1,S5]",
+        "zh": "在搬运位置之间水平运送集装箱。[S1,S5]"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "castShadow": false,
+      "connects": [
+        "agv-wheels",
+        "working-box"
+      ],
+      "clip": false
+    },
+    {
+      "id": "agv-wheels",
+      "name": {
+        "en": "Wheels",
+        "zh": "车轮"
+      },
+      "group": "transfer",
+      "summary": {
+        "en": "Support the carrier’s travel on land.",
+        "zh": "支撑运输车在陆地上行走。"
+      },
+      "detail": {
+        "en": "Support the carrier’s travel on land. [S1]",
+        "zh": "支撑运输车在陆地上行走。[S1]"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "castShadow": false,
+      "connects": [
+        "agv-body"
+      ],
+      "clip": false
+    },
+    {
+      "id": "yard-gantry",
+      "name": {
+        "en": "Yard gantry",
+        "zh": "场桥"
+      },
+      "group": "yard",
+      "summary": {
+        "en": "Lifts containers within the yard.",
+        "zh": "在堆场内起吊集装箱。"
+      },
+      "detail": {
+        "en": "Lifts containers within the yard. [S1,S5]",
+        "zh": "在堆场内起吊集装箱。[S1,S5]"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "castShadow": false,
+      "connects": [
+        "yard-trolley",
+        "yard-target"
+      ],
+      "clip": false
+    },
+    {
+      "id": "yard-trolley",
+      "name": {
+        "en": "Yard trolley",
+        "zh": "场桥小车"
+      },
+      "group": "yard",
+      "summary": {
+        "en": "Positions a yard lifting attachment above a box.",
+        "zh": "把堆场吊具移到箱子上方。"
+      },
+      "detail": {
+        "en": "Positions a yard lifting attachment above a box. [S1]",
+        "zh": "把堆场吊具移到箱子上方。[S1]"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "castShadow": false,
+      "connects": [
+        "yard-gantry"
+      ],
+      "clip": false
+    },
+    {
+      "id": "yard-target",
+      "name": {
+        "en": "Target",
+        "zh": "目标箱"
+      },
+      "group": "yard",
+      "summary": {
+        "en": "Sits below the boxes that must be moved first.",
+        "zh": "放在底层，上方的箱子要先移开。"
+      },
+      "detail": {
+        "en": "This target starts in the bottom tier of the yard experiment. Move the boxes above it aside, then lift it out. It is a different box from the one followed from the ship. [S1]",
+        "zh": "这个实验的目标箱位于底层。先移开上方的箱子，再把它吊出。它与从船上一路追踪的工作箱不同。[S1]"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "castShadow": false,
+      "connects": [
+        "yard-gantry"
+      ],
+      "clip": false
+    },
+    {
+      "id": "yard-blocker-a",
+      "name": {
+        "en": "Upper box A",
+        "zh": "上层箱甲"
+      },
+      "group": "yard",
+      "summary": {
+        "en": "Blocks access to the target box below.",
+        "zh": "挡住下方的目标箱。"
+      },
+      "detail": {
+        "en": "Blocks access to the target box below. [S1]",
+        "zh": "挡住下方的目标箱。[S1]"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "castShadow": false,
+      "connects": [
+        "yard-gantry"
+      ],
+      "clip": false
+    },
+    {
+      "id": "yard-blocker-b",
+      "name": {
+        "en": "Upper box B",
+        "zh": "上层箱乙"
+      },
+      "group": "yard",
+      "summary": {
+        "en": "Blocks access to the target box below.",
+        "zh": "挡住下方的目标箱。"
+      },
+      "detail": {
+        "en": "Blocks access to the target box below. [S1]",
+        "zh": "挡住下方的目标箱。[S1]"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "castShadow": false,
+      "connects": [
+        "yard-gantry"
+      ],
+      "clip": false
+    },
+    {
+      "id": "yard-slot",
+      "name": {
+        "en": "Clear slot",
+        "zh": "移箱位置"
+      },
+      "group": "yard",
+      "summary": {
+        "en": "Marks where the upper boxes wait after being moved.",
+        "zh": "标出上层箱移开后暂放的位置。"
+      },
+      "detail": {
+        "en": "Marks where the upper boxes wait after being moved. [S1]",
+        "zh": "标出上层箱移开后暂放的位置。[S1]"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "castShadow": false,
+      "clip": false
+    },
+    {
+      "id": "onward-ship",
+      "name": {
+        "en": "Onward vessel",
+        "zh": "接续船"
+      },
+      "group": "vessel",
+      "summary": {
+        "en": "Carries a transhipment box onwards to another destination.",
+        "zh": "把转运箱继续运往另一个目的地。"
+      },
+      "detail": {
+        "en": "Carries a transhipment box onwards to another destination. [S1,S12]",
+        "zh": "把转运箱继续运往另一个目的地。[S1,S12]"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "castShadow": false,
+      "connects": [
+        "working-box"
+      ],
+      "clip": false
+    },
+    {
+      "id": "destination-box",
+      "name": {
+        "en": "Local delivery",
+        "zh": "本地交付箱"
+      },
+      "group": "transfer",
+      "summary": {
+        "en": "Represents a box whose onward step is local delivery.",
+        "zh": "表示下一步为本地交付的箱子。"
+      },
+      "detail": {
+        "en": "Represents a box whose onward step is local delivery. [S1,S12]",
+        "zh": "表示下一步为本地交付的箱子。[S1,S12]"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "castShadow": false,
+      "clip": false
+    },
+    {
+      "id": "control-room",
+      "name": {
+        "en": "Control room",
+        "zh": "控制室"
+      },
+      "group": "transfer",
+      "summary": {
+        "en": "Provides a place to oversee automated port work.",
+        "zh": "供人员监控自动化港口作业。"
+      },
+      "detail": {
+        "en": "Provides a place to oversee automated port work. [S1,S5]",
+        "zh": "供人员监控自动化港口作业。[S1,S5]"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "castShadow": false,
+      "clip": false
+    },
+    {
+      "id": "quay-context",
+      "name": {
+        "en": "Quay",
+        "zh": "码头"
+      },
+      "summary": {
+        "en": "Provides the land beside the moored ship.",
+        "zh": "提供靠泊船只旁的岸上空间。"
+      },
+      "detail": {
+        "en": "Provides the land beside the moored ship. [S1]",
+        "zh": "提供靠泊船只旁的岸上空间。[S1]"
+      },
+      "context": true,
+      "castShadow": false,
+      "clip": false
+    },
+    {
+      "id": "water-context",
+      "name": {
+        "en": "Water",
+        "zh": "水面"
+      },
+      "summary": {
+        "en": "Marks the water beside the quay.",
+        "zh": "表示码头岸边的水面。"
+      },
+      "detail": {
+        "en": "Marks the water beside the quay. [S1]",
+        "zh": "表示码头岸边的水面。[S1]"
+      },
+      "context": true,
+      "castShadow": false,
+      "clip": false
+    }
+  ],
+  "groups": [
+    {
+      "id": "vessel",
+      "name": {
+        "en": "Vessel",
+        "zh": "船舶"
+      },
+      "color": "token:ink-2"
+    },
+    {
+      "id": "quay-crane",
+      "name": {
+        "en": "Quay crane",
+        "zh": "岸桥"
+      },
+      "color": "token:ink-2"
+    },
+    {
+      "id": "transfer",
+      "name": {
+        "en": "Transfer",
+        "zh": "水平运输"
+      },
+      "color": "token:ink-2"
+    },
+    {
+      "id": "yard",
+      "name": {
+        "en": "Yard",
+        "zh": "堆场"
+      },
+      "color": "token:ink-2"
+    },
+    {
+      "id": "trace",
+      "name": {
+        "en": "Box trace",
+        "zh": "箱子路径"
+      },
+      "color": "token:ink-2"
+    }
+  ],
+  "views": {
+    "assembled": {
+      "camera": {
+        "position": [
+          105,
+          85,
+          115
+        ],
+        "target": [
+          0,
+          15,
+          5
+        ],
+        "fov": 34
+      }
+    },
+    "cover": {
+      "position": [
+        105,
+        85,
+        115
+      ],
+      "target": [
+        0,
+        15,
+        5
+      ],
+      "fov": 34
+    },
+    "shadows": "contact",
+    "cuts": {
+      "box-half": {
+        "normal": [
+          0,
+          0,
+          -1
+        ],
+        "offset": -18,
+        "label": {
+          "en": "Container section",
+          "zh": "箱体剖面"
+        }
+      }
+    }
+  },
+  "presets": [
+    {
+      "id": "hero",
+      "label": {
+        "en": "Whole port",
+        "zh": "港口全景"
+      },
+      "camera": {
+        "position": [
+          105,
+          85,
+          115
+        ],
+        "target": [
+          0,
+          15,
+          5
+        ],
+        "fov": 34
+      }
+    },
+    {
+      "id": "box",
+      "label": {
+        "en": "Boxes",
+        "zh": "集装箱"
+      },
+      "camera": {
+        "position": [
+          30,
+          19,
+          28
+        ],
+        "target": [
+          0,
+          2,
+          0
+        ],
+        "fov": 32
+      }
+    },
+    {
+      "id": "lift",
+      "label": {
+        "en": "Crane",
+        "zh": "岸桥"
+      },
+      "camera": {
+        "position": [
+          35,
+          38,
+          45
+        ],
+        "target": [
+          0,
+          23,
+          -3
+        ],
+        "fov": 32
+      }
+    },
+    {
+      "id": "yard-view",
+      "label": {
+        "en": "Yard",
+        "zh": "堆场"
+      },
+      "camera": {
+        "position": [
+          75,
+          40,
+          95
+        ],
+        "target": [
+          19,
+          5,
+          39
+        ],
+        "fov": 36
+      }
+    },
+    {
+      "id": "network",
+      "label": {
+        "en": "Connection",
+        "zh": "转运联系"
+      },
+      "camera": {
+        "position": [
+          105,
+          95,
+          115
+        ],
+        "target": [
+          0,
+          12,
+          8
+        ],
+        "fov": 36
+      }
+    },
+    {
+      "id": "tuas",
+      "label": {
+        "en": "Automation",
+        "zh": "自动化"
+      },
+      "camera": {
+        "position": [
+          105,
+          85,
+          115
+        ],
+        "target": [
+          0,
+          15,
+          5
+        ],
+        "fov": 34
+      }
+    }
+  ],
+  "poses": {
+    "port-source": {
+      "trolley": {
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "spreader": {
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "twistlocks": {
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "working-box": {
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "duration": 0,
+      "corner-fittings": {
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "lift-locked": {
+      "trolley": {
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "spreader": {
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "twistlocks": {
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          90,
+          0
+        ]
+      },
+      "working-box": {
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "duration": 0,
+      "corner-fittings": {
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "lift-raised": {
+      "trolley": {
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "spreader": {
+        "offset": [
+          0,
+          15,
+          0
+        ]
+      },
+      "twistlocks": {
+        "offset": [
+          0,
+          15,
+          0
+        ],
+        "rotation": [
+          0,
+          90,
+          0
+        ]
+      },
+      "working-box": {
+        "offset": [
+          0,
+          15,
+          0
+        ]
+      },
+      "duration": 0,
+      "corner-fittings": {
+        "offset": [
+          0,
+          15,
+          0
+        ]
+      }
+    },
+    "lift-crossed": {
+      "trolley": {
+        "offset": [
+          0,
+          0,
+          28
+        ]
+      },
+      "spreader": {
+        "offset": [
+          0,
+          15,
+          28
+        ]
+      },
+      "twistlocks": {
+        "offset": [
+          0,
+          15,
+          28
+        ],
+        "rotation": [
+          0,
+          90,
+          0
+        ]
+      },
+      "working-box": {
+        "offset": [
+          0,
+          15,
+          28
+        ]
+      },
+      "duration": 0,
+      "corner-fittings": {
+        "offset": [
+          0,
+          15,
+          28
+        ]
+      }
+    },
+    "lift-landed": {
+      "trolley": {
+        "offset": [
+          0,
+          0,
+          28
+        ]
+      },
+      "spreader": {
+        "offset": [
+          0,
+          -8,
+          28
+        ]
+      },
+      "twistlocks": {
+        "offset": [
+          0,
+          -8,
+          28
+        ],
+        "rotation": [
+          0,
+          90,
+          0
+        ]
+      },
+      "working-box": {
+        "offset": [
+          0,
+          -8,
+          28
+        ]
+      },
+      "duration": 0,
+      "corner-fittings": {
+        "offset": [
+          0,
+          -8,
+          28
+        ]
+      }
+    },
+    "lift-released": {
+      "trolley": {
+        "offset": [
+          0,
+          0,
+          28
+        ]
+      },
+      "spreader": {
+        "offset": [
+          0,
+          15,
+          28
+        ]
+      },
+      "twistlocks": {
+        "offset": [
+          0,
+          15,
+          28
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "working-box": {
+        "offset": [
+          0,
+          -8,
+          28
+        ]
+      },
+      "duration": 0,
+      "corner-fittings": {
+        "offset": [
+          0,
+          -8,
+          28
+        ]
+      }
+    },
+    "lock-closeup": {
+      "trolley": {
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "spreader": {
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "twistlocks": {
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "working-box": {
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "duration": 0,
+      "corner-fittings": {
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "box-comparison": {
+      "duration": 0
+    },
+    "transfer-on-carrier": {
+      "trolley": {
+        "offset": [
+          0,
+          0,
+          28
+        ]
+      },
+      "spreader": {
+        "offset": [
+          0,
+          15,
+          28
+        ]
+      },
+      "twistlocks": {
+        "offset": [
+          0,
+          15,
+          28
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "working-box": {
+        "offset": [
+          0,
+          -8,
+          28
+        ]
+      },
+      "duration": 0,
+      "corner-fittings": {
+        "offset": [
+          0,
+          -8,
+          28
+        ]
+      }
+    },
+    "transfer-at-yard": {
+      "trolley": {
+        "offset": [
+          0,
+          0,
+          28
+        ]
+      },
+      "spreader": {
+        "offset": [
+          0,
+          15,
+          28
+        ]
+      },
+      "twistlocks": {
+        "offset": [
+          0,
+          15,
+          28
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "working-box": {
+        "offset": [
+          0,
+          -10,
+          58
+        ]
+      },
+      "duration": 0,
+      "corner-fittings": {
+        "offset": [
+          0,
+          -10,
+          58
+        ]
+      },
+      "agv-body": {
+        "offset": [
+          0,
+          0,
+          23
+        ]
+      },
+      "agv-wheels": {
+        "offset": [
+          0,
+          0,
+          23
+        ]
+      }
+    },
+    "transfer-onward": {
+      "trolley": {
+        "offset": [
+          0,
+          0,
+          28
+        ]
+      },
+      "spreader": {
+        "offset": [
+          0,
+          15,
+          28
+        ]
+      },
+      "twistlocks": {
+        "offset": [
+          0,
+          15,
+          28
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "working-box": {
+        "offset": [
+          48,
+          -3,
+          -33
+        ]
+      },
+      "duration": 0,
+      "corner-fittings": {
+        "offset": [
+          48,
+          -3,
+          -33
+        ]
+      }
+    },
+    "tuas-context": {
+      "trolley": {
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "spreader": {
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "twistlocks": {
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "working-box": {
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "duration": 0,
+      "corner-fittings": {
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  },
+  "sim": {
+    "kind": "port",
+    "controls": [
+      {
+        "id": "n20",
+        "label": {
+          "en": "20-foot boxes",
+          "zh": "20英尺箱数"
+        },
+        "kind": "step",
+        "values": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "default": 2
+      },
+      {
+        "id": "n40",
+        "label": {
+          "en": "40-foot boxes",
+          "zh": "40英尺箱数"
+        },
+        "kind": "step",
+        "values": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "default": 1
+      },
+      {
+        "id": "above",
+        "label": {
+          "en": "Boxes above target",
+          "zh": "目标箱上方箱数"
+        },
+        "kind": "step",
+        "values": [
+          0,
+          1,
+          2
+        ],
+        "default": 2
+      },
+      {
+        "id": "cranes",
+        "label": {
+          "en": "Quay cranes",
+          "zh": "岸桥台数"
+        },
+        "kind": "step",
+        "values": [
+          1,
+          2
+        ],
+        "default": 1
+      },
+      {
+        "id": "carriers",
+        "label": {
+          "en": "Carriers",
+          "zh": "运输车台数"
+        },
+        "kind": "step",
+        "values": [
+          1,
+          2
+        ],
+        "default": 1
+      },
+      {
+        "id": "yards",
+        "label": {
+          "en": "Yard cranes",
+          "zh": "场桥台数"
+        },
+        "kind": "step",
+        "values": [
+          1,
+          2
+        ],
+        "default": 1
+      },
+      {
+        "id": "arrivals",
+        "label": {
+          "en": "Arrivals per hour",
+          "zh": "每小时到达箱数"
+        },
+        "kind": "step",
+        "values": [
+          0,
+          12,
+          24,
+          36,
+          48
+        ],
+        "default": 24
+      },
+      {
+        "id": "hours",
+        "label": {
+          "en": "Model hours",
+          "zh": "模型小时"
+        },
+        "kind": "step",
+        "values": [
+          1,
+          2
+        ],
+        "default": 2
+      },
+      {
+        "id": "lock-confirmed",
+        "label": {
+          "en": "Lock confirmation",
+          "zh": "锁定确认"
+        },
+        "kind": "toggle",
+        "default": true
+      },
+      {
+        "id": "lift-live",
+        "label": {
+          "en": "Replay lift",
+          "zh": "重放吊运"
+        },
+        "kind": "toggle",
+        "default": true
+      },
+      {
+        "id": "yard-state",
+        "label": {
+          "en": "Yard step",
+          "zh": "堆场步骤"
+        },
+        "kind": "choice",
+        "default": "original",
+        "options": [
+          {
+            "id": "original",
+            "label": {
+              "en": "Stacked",
+              "zh": "原位"
+            }
+          },
+          {
+            "id": "cleared",
+            "label": {
+              "en": "Upper boxes moved",
+              "zh": "移开上层箱"
+            }
+          },
+          {
+            "id": "retrieved",
+            "label": {
+              "en": "Target retrieved",
+              "zh": "取出目标箱"
+            }
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "id": "boxes",
+        "label": {
+          "en": "Box count",
+          "zh": "箱数"
+        },
+        "unit": "boxes"
+      },
+      {
+        "id": "teu",
+        "label": {
+          "en": "TEU",
+          "zh": "标准箱单位"
+        },
+        "unit": "TEU"
+      },
+      {
+        "id": "rehandles",
+        "label": {
+          "en": "Boxes moved aside",
+          "zh": "移开箱数"
+        },
+        "unit": "moves"
+      },
+      {
+        "id": "retrieval-lifts",
+        "label": {
+          "en": "Total lifts",
+          "zh": "总起吊次数"
+        },
+        "unit": "moves"
+      },
+      {
+        "id": "crane-rate",
+        "label": {
+          "en": "Quay capacity",
+          "zh": "岸桥处理能力"
+        },
+        "unit": "boxes/h"
+      },
+      {
+        "id": "carrier-rate",
+        "label": {
+          "en": "Carrier capacity",
+          "zh": "运输车处理能力"
+        },
+        "unit": "boxes/h"
+      },
+      {
+        "id": "yard-rate",
+        "label": {
+          "en": "Yard capacity",
+          "zh": "场桥处理能力"
+        },
+        "unit": "boxes/h"
+      },
+      {
+        "id": "capacity-rate",
+        "label": {
+          "en": "Chain capacity",
+          "zh": "全链处理能力"
+        },
+        "unit": "boxes/h"
+      },
+      {
+        "id": "completed",
+        "label": {
+          "en": "Completed",
+          "zh": "完成箱数"
+        },
+        "unit": "boxes"
+      },
+      {
+        "id": "queue-growth",
+        "label": {
+          "en": "Queue growth",
+          "zh": "排队数增长"
+        },
+        "unit": "boxes/h"
+      },
+      {
+        "id": "queued",
+        "label": {
+          "en": "Queued",
+          "zh": "等候箱数"
+        },
+        "unit": "boxes"
+      },
+      {
+        "id": "lift-status",
+        "label": {
+          "en": "Lock state",
+          "zh": "锁定状态"
+        },
+        "kind": "state",
+        "states": {
+          "lock-not-confirmed": {
+            "en": "Not confirmed",
+            "zh": "未确认"
+          },
+          "ready": {
+            "en": "Confirmed",
+            "zh": "已确认"
+          }
+        }
+      },
+      {
+        "id": "bottleneck",
+        "label": {
+          "en": "Limiting step",
+          "zh": "瓶颈工序"
+        },
+        "kind": "state",
+        "states": {
+          "crane": {
+            "en": "Quay crane",
+            "zh": "岸桥"
+          },
+          "carrier": {
+            "en": "Carrier",
+            "zh": "运输车"
+          },
+          "yard": {
+            "en": "Yard crane",
+            "zh": "场桥"
+          },
+          "tied": {
+            "en": "Joint limits",
+            "zh": "共同瓶颈"
+          }
+        }
+      },
+      {
+        "id": "lift-run",
+        "label": {
+          "en": "Lift replay",
+          "zh": "吊运重放"
+        },
+        "kind": "timeline"
+      },
+      {
+        "id": "yard-slots",
+        "label": {
+          "en": "Yard positions",
+          "zh": "堆场位置"
+        },
+        "kind": "vector"
+      }
+    ],
+    "bind": [
+      {
+        "control": "n20",
+        "part": "sample-20",
+        "count": true
+      },
+      {
+        "control": "n40",
+        "part": "sample-40",
+        "count": true
+      },
+      {
+        "output": "yard-slots",
+        "part": [
+          "yard-target",
+          "yard-blocker-a",
+          "yard-blocker-b"
+        ],
+        "shift": {
+          "ease": 0,
+          "lift": 0
+        }
+      },
+      {
+        "output": "lift-run",
+        "part": "trolley",
+        "play": {
+          "channel": "trolley-dz",
+          "when": {
+            "control": "lift-live",
+            "is": true
+          },
+          "axis": [
+            0,
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "output": "lift-run",
+        "part": [
+          "spreader",
+          "twistlocks"
+        ],
+        "play": {
+          "channel": "spreader-dy",
+          "when": {
+            "control": "lift-live",
+            "is": true
+          },
+          "axis": [
+            0,
+            1,
+            0
+          ]
+        }
+      },
+      {
+        "output": "lift-run",
+        "part": [
+          "spreader",
+          "twistlocks"
+        ],
+        "play": {
+          "channel": "trolley-dz",
+          "when": {
+            "control": "lift-live",
+            "is": true
+          },
+          "axis": [
+            0,
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "output": "lift-run",
+        "part": [
+          "working-box",
+          "corner-fittings"
+        ],
+        "play": {
+          "channel": "cargo-dy",
+          "when": {
+            "control": "lift-live",
+            "is": true
+          },
+          "axis": [
+            0,
+            1,
+            0
+          ]
+        }
+      },
+      {
+        "output": "lift-run",
+        "part": [
+          "working-box",
+          "corner-fittings"
+        ],
+        "play": {
+          "channel": "cargo-dz",
+          "when": {
+            "control": "lift-live",
+            "is": true
+          },
+          "axis": [
+            0,
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "output": "lift-run",
+        "part": "twistlocks",
+        "play": {
+          "channel": "lock-deg",
+          "when": {
+            "control": "lift-live",
+            "is": true
+          },
+          "turn": [
+            0,
+            1,
+            0
+          ],
+          "each": true
+        }
+      },
+      {
+        "part": "rope-a",
+        "span": {
+          "from": {
+            "part": "trolley",
+            "point": [
+              -2.6,
+              0,
+              -1
+            ]
+          },
+          "to": {
+            "part": "spreader",
+            "point": [
+              -2.6,
+              0.3,
+              -1
+            ]
+          },
+          "minLength": 0.001
+        }
+      },
+      {
+        "part": "rope-b",
+        "span": {
+          "from": {
+            "part": "trolley",
+            "point": [
+              2.6,
+              0,
+              -1
+            ]
+          },
+          "to": {
+            "part": "spreader",
+            "point": [
+              2.6,
+              0.3,
+              -1
+            ]
+          },
+          "minLength": 0.001
+        }
+      },
+      {
+        "part": "rope-c",
+        "span": {
+          "from": {
+            "part": "trolley",
+            "point": [
+              -2.6,
+              0,
+              1
+            ]
+          },
+          "to": {
+            "part": "spreader",
+            "point": [
+              -2.6,
+              0.3,
+              1
+            ]
+          },
+          "minLength": 0.001
+        }
+      },
+      {
+        "part": "rope-d",
+        "span": {
+          "from": {
+            "part": "trolley",
+            "point": [
+              2.6,
+              0,
+              1
+            ]
+          },
+          "to": {
+            "part": "spreader",
+            "point": [
+              2.6,
+              0.3,
+              1
+            ]
+          },
+          "minLength": 0.001
+        }
+      }
+    ],
+    "port": {
+      "count": {
+        "n20": "n20",
+        "n40": "n40"
+      },
+      "lift": {
+        "enabled": "lock-confirmed",
+        "workingPart": "working-box",
+        "spreaderPart": "spreader",
+        "trolleyPart": "trolley",
+        "source": [
+          0,
+          11.2955,
+          -18
+        ],
+        "destination": [
+          0,
+          3.2955,
+          10
+        ],
+        "boxHeight": 2.591,
+        "spreaderDepth": 0.6,
+        "clearBottomY": 25,
+        "knots": {
+          "lock": 4,
+          "raised": 12,
+          "crossed": 20,
+          "landed": 28,
+          "released": 30,
+          "finished": 32
+        },
+        "slow": 1
+      },
+      "yard": {
+        "above": "above",
+        "state": "yard-state",
+        "target": "yard-target",
+        "blockers": [
+          "yard-blocker-a",
+          "yard-blocker-b"
+        ],
+        "pitch": 2.591,
+        "park": [
+          [
+            28,
+            1.2955,
+            40
+          ],
+          [
+            38,
+            1.2955,
+            40
+          ]
+        ],
+        "retrieved": [
+          18,
+          1.2955,
+          50
+        ]
+      },
+      "capacity": {
+        "cranes": "cranes",
+        "carriers": "carriers",
+        "yards": "yards",
+        "arrivals": "arrivals",
+        "hours": "hours",
+        "rate": {
+          "crane": 30,
+          "carrier": 24,
+          "yard": 18
+        }
+      },
+      "source": [
+        "S1"
+      ]
+    }
+  },
+  "spec": [
+    {
+      "key": {
+        "en": "Container",
+        "zh": "箱型"
+      },
+      "value": "20 / 40 ft",
+      "tag": "typical"
+    },
+    {
+      "key": {
+        "en": "Model width",
+        "zh": "模型箱宽"
+      },
+      "value": "2.438 m",
+      "tag": "design"
+    }
+  ]
+}
