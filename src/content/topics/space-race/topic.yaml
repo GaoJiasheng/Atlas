@@ -26,5 +26,5 @@ timePresentation:
   eventsLabel: { en: "Events", zh: "事件" }
   entityLabel: { en: "Programmes", zh: "项目" }
 note:
-  en: "Earth map · modern Natural Earth coastlines · Wikidata launch-centre reference points, not orbital or lunar locations · no flight trajectories · dates use UTC where stated"
-  zh: "地球地图 · Natural Earth现代海岸 · 维基数据发射中心参照点，不是轨道或月面位置 · 不画飞行轨迹 · 注明时使用UTC日期"
+  en: "Earth map · points mark launch centres · spacecraft positions and flight paths are not shown · dates use UTC where stated"
+  zh: "地球地图 · 点标出发射中心 · 不显示飞船位置或航迹 · 注明时使用 UTC 日期"

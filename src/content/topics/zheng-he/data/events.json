@@ -13,12 +13,12 @@
       "zh": "南京"
     },
     "summary": {
-      "en": "The marker locates the Ming court end of the expedition story. It is a modern city centre, not a measured fifteenth-century departure quay.",
-      "zh": "标记定位远航故事中明廷这一端。坐标是现代市中心，不是测得的十五世纪出发码头。"
+      "en": "Nanjing marks the Ming court end of the voyages. The point locates the modern city centre, rather than a fifteenth-century departure quay.",
+      "zh": "南京是远航与明廷相连的一端。点标出现代市中心，并非十五世纪的出发码头。"
     },
     "detail": {
-      "en": "Geographic locator only. The site date is a display convention, not a foundation or landing date. Coordinate source: D02.",
-      "zh": "仅作地理定位。地点日期是显示约定，不是建城或登陆日期。坐标来源：D02。"
+      "en": "The Yongle emperor’s court sent the first fleet in 1405. Envoys and captives later travelled back to the court.",
+      "zh": "永乐皇帝的朝廷在 1405 年派出首航船队。使节与俘虏后来也被带回朝廷。"
     },
     "sources": [
       "S4",
@@ -39,12 +39,12 @@
       "zh": "福州（福建沿岸参照点）"
     },
     "summary": {
-      "en": "Fuzhou locates the Fujian coast. This modern regional reference is not a measured fifteenth-century departure quay or proof of landing.",
-      "zh": "福州点用于定位福建沿岸。这个现代区域参照不是测得的十五世纪出发码头，也不能证明登陆。"
+      "en": "Fuzhou helps locate the Fujian coast. The point does not identify the fleet’s departure quay or a confirmed landing.",
+      "zh": "福州帮助定位福建沿岸，点位并未标出船队的出发码头或确定的登陆处。"
     },
     "detail": {
-      "en": "Geographic locator only. The site date is a display convention, not a foundation or landing date. Coordinate source: D02.",
-      "zh": "仅作地理定位。地点日期是显示约定，不是建城或登陆日期。坐标来源：D02。"
+      "en": "Navigators leaving China used compasses, observations of the sky and written sailing knowledge together.",
+      "zh": "从中国出海的航海者结合罗盘、观星和文字航海知识安排航行。"
     },
     "sources": [
       "S1",
@@ -65,12 +65,12 @@
       "zh": "泉州"
     },
     "summary": {
-      "en": "A modern city reference on the Chinese coast. It is included for regional orientation, not as a claim of a fleet landing at this point.",
-      "zh": "中国沿岸的现代城市参照点，用于辨认区域，不据此宣称船队曾在这里登陆。"
+      "en": "Quanzhou helps locate China’s coast. A fleet landing at this point is unconfirmed.",
+      "zh": "泉州帮助定位中国沿岸，船队是否在这个点登陆仍未确定。"
     },
     "detail": {
-      "en": "Geographic locator only. The site date is a display convention, not a foundation or landing date. Coordinate source: D02.",
-      "zh": "仅作地理定位。地点日期是显示约定，不是建城或登陆日期。坐标来源：D02。"
+      "en": "The fleets depended on sailors, interpreters, medical staff and repair workers as well as commanders.",
+      "zh": "船队除了统帅，也需要水手、通事、医护与修船人员。"
     },
     "sources": [
       "S1",
@@ -91,12 +91,12 @@
       "zh": "马六甲"
     },
     "summary": {
-      "en": "Melaka had its own Malay rulers and trading interests and served as a staging depot for the fleets. The point locates the modern city, not the depot.",
-      "zh": "马六甲有自己的马来统治者和贸易利益，也是船队的仓储据点。坐标定位现代城市，不是仓库实址。"
+      "en": "Melaka’s Malay rulers and merchants had their own interests. The fleets used the port to gather and store supplies. The point locates the modern city.",
+      "zh": "马六甲的马来统治者和商人有自己的利益。船队在港口集合、储存物资；点位标出现代城市。"
     },
     "detail": {
-      "en": "Geographic locator only. The site date is a display convention, not a foundation or landing date. Coordinate source: D02.",
-      "zh": "仅作地理定位。地点日期是显示约定，不是建城或登陆日期。坐标来源：D02。"
+      "en": "Yin Qing was sent to Melaka in 1403, before Zheng He’s first expedition. Local rulers sought benefits from overseas ties.",
+      "zh": "尹庆于 1403 年奉命前往马六甲，早于郑和第一次远航。当地统治者希望借海外联系获益。"
     },
     "sources": [
       "S2",
@@ -119,12 +119,12 @@
       "zh": "淡马锡／新加坡岛区域"
     },
     "summary": {
-      "en": "Temasek appears in the later navigation-chart tradition; archaeology also supports a trading settlement before 1819. Singapore city is a regional anchor, not proof of Zheng He landing.",
-      "zh": "淡马锡见于后出的航海图传统，考古也支持这里在 1819 年以前已有贸易聚落。新加坡城市点仅作区域定位，不能证明郑和登陆。"
+      "en": "Later sailing charts name Temasek. Archaeological finds also show a trading settlement before 1819. These clues do not prove that Zheng He landed here.",
+      "zh": "后出的航海图记有淡马锡，考古发现也说明这里在 1819 年以前已有贸易聚落。这些线索不能证明郑和登陆。"
     },
     "detail": {
-      "en": "Geographic locator only. The site date is a display convention, not a foundation or landing date. Coordinate source: D02.",
-      "zh": "仅作地理定位。地点日期是显示约定，不是建城或登陆日期。坐标来源：D02。"
+      "en": "Ceramics and coins found at Fort Canning give clues about early Singapore’s trading settlement.",
+      "zh": "福康宁出土的陶瓷和钱币，留下早期新加坡贸易聚落的线索。"
     },
     "sources": [
       "S3",
@@ -145,12 +145,12 @@
       "zh": "旧港（巨港）"
     },
     "summary": {
-      "en": "Old Port is associated with modern Palembang. The 1407 killing report belongs to this region; the city point is not a measured battle centre.",
-      "zh": "旧港在本题对应今天的巨港。1407 年的被杀报告与这一区域相关；城市点不是测得的战斗中心。"
+      "en": "Old Port is associated with modern Palembang. Ming records describe killings in this region in 1407; the exact battle site is unknown.",
+      "zh": "旧港对应今天的巨港。明方记录记述 1407 年这一区域发生的杀戮，战斗的准确地点仍不清楚。"
     },
     "detail": {
-      "en": "Geographic locator only. The site date is a display convention, not a foundation or landing date. Coordinate source: D02.",
-      "zh": "仅作地理定位。地点日期是显示约定，不是建城或登陆日期。坐标来源：D02。"
+      "en": "The Ming fleet fought Chen Zuyi’s force in 1407. Chen was captured and taken to China for punishment.",
+      "zh": "1407 年，明朝船队与陈祖义的势力交战。陈祖义被俘，送往中国接受惩处。"
     },
     "sources": [
       "S2",
@@ -171,12 +171,12 @@
       "zh": "爪哇（泗水区域参照点）"
     },
     "summary": {
-      "en": "Surabaya is only a Java regional anchor for the 1407 report of Ming troops being killed. The conflict site has not been established here.",
-      "zh": "泗水仅作为 1407 年明军被杀报告的爪哇区域参照点。本题没有确定冲突的实址。"
+      "en": "Surabaya helps locate Java for the 1407 report of Ming troops being killed. The exact conflict site is unknown.",
+      "zh": "泗水帮助定位爪哇，明方曾报告 1407 年有明军在岛上被杀。冲突的准确地点不详。"
     },
     "detail": {
-      "en": "Geographic locator only. The site date is a display convention, not a foundation or landing date. Coordinate source: D02.",
-      "zh": "仅作地理定位。地点日期是显示约定，不是建城或登陆日期。坐标来源：D02。"
+      "en": "The report comes from Ming records. It does not provide a complete count of losses on each side.",
+      "zh": "报告来自明方记录，没有列出各方完整的损失人数。"
     },
     "sources": [
       "S2",
@@ -197,12 +197,12 @@
       "zh": "柯枝（科钦）"
     },
     "summary": {
-      "en": "Kochi, also called Cochin and historically 柯枝, locates an Indian southwest-coast destination in the early expedition accounts. Modern city coordinates do not locate a medieval quay.",
-      "zh": "科钦（旧称柯枝）用于定位早期远航记载中的印度西南岸目的地。现代城市坐标不是中世纪码头。"
+      "en": "Kochi, also called Cochin and historically 柯枝, was an early expedition destination on India’s southwest coast. The point marks the modern city.",
+      "zh": "科钦旧称柯枝，是早期远航在印度西南岸的目的地。点位标出现代城市。"
     },
     "detail": {
-      "en": "Geographic locator only. The site date is a display convention, not a foundation or landing date. Coordinate source: D02.",
-      "zh": "仅作地理定位。地点日期是显示约定，不是建城或登陆日期。坐标来源：D02。"
+      "en": "Early fleets reached India’s southwest-coast ports, which already belonged to wider trading networks.",
+      "zh": "早期船队抵达印度西南岸港口，这些港口早已参与广阔的贸易网络。"
     },
     "sources": [
       "S1",
@@ -223,12 +223,12 @@
       "zh": "古里（科泽科德）"
     },
     "summary": {
-      "en": "Calicut, now Kozhikode, was an Indian southwest-coast destination. The point locates the modern city in a wider trading region, not a ship position.",
-      "zh": "古里，今科泽科德，是印度西南岸目的地。点定位贸易区域中的现代城市，不是船只位置。"
+      "en": "Calicut, now Kozhikode, was an expedition destination on India’s southwest coast. The point marks the modern city.",
+      "zh": "古里，今科泽科德，是船队在印度西南岸的目的地。点位标出现代城市。"
     },
     "detail": {
-      "en": "Geographic locator only. The site date is a display convention, not a foundation or landing date. Coordinate source: D02.",
-      "zh": "仅作地理定位。地点日期是显示约定，不是建城或登陆日期。坐标来源：D02。"
+      "en": "The second expedition went to Calicut for a new king’s inauguration. Zheng He organised it but did not lead it himself.",
+      "zh": "第二次远航前往古里参加新王即位典礼。郑和组织了这次航行，但未亲自率队。"
     },
     "sources": [
       "S1",
@@ -249,12 +249,12 @@
       "zh": "加勒（碑文发现地）"
     },
     "summary": {
-      "en": "Galle is the findspot of a stele with Chinese, Tamil and Persian texts and a 1409 date. It is not the Sri Lankan ruler’s palace or a known battle site.",
-      "zh": "加勒是一方有中文、泰米尔文、波斯文及 1409 年日期的石碑的发现地，不是锡兰统治者的宫殿或已知战场。"
+      "en": "Galle is where a stone stele dated 1409 was found. It carries Chinese, Tamil and Persian texts. It does not mark a ruler’s palace or a known battle site.",
+      "zh": "加勒是署年 1409 的石碑发现地，碑上有中文、泰米尔文和波斯文。这里并非已知的宫殿或战场。"
     },
     "detail": {
-      "en": "Geographic locator only. The site date is a display convention, not a foundation or landing date. Coordinate source: D02.",
-      "zh": "仅作地理定位。地点日期是显示约定，不是建城或登陆日期。坐标来源：D02。"
+      "en": "The Chinese inscription records offerings by imperial envoys to the Buddha. The other texts do not all say the same thing.",
+      "zh": "中文碑文记载皇帝使节向佛陀献礼，各种文字的内容并不完全相同。"
     },
     "sources": [
       "S13",
@@ -276,12 +276,12 @@
       "zh": "亚丁"
     },
     "summary": {
-      "en": "Aden is associated with the fifth expedition’s destinations. A modern city point locates the port region; no measured ship track is implied.",
-      "zh": "亚丁见于第五航次相关的目的地记载。现代城市点用于定位港口区域，不表示测得的航迹。"
+      "en": "Aden appears among the fifth expedition’s destinations. The point locates the modern port city.",
+      "zh": "亚丁见于第五次远航的目的地记载。点位标出现代港口城市。"
     },
     "detail": {
-      "en": "Geographic locator only. The site date is a display convention, not a foundation or landing date. Coordinate source: D02.",
-      "zh": "仅作地理定位。地点日期是显示约定，不是建城或登陆日期。坐标来源：D02。"
+      "en": "The fifth expedition carried envoys home across the western Indian Ocean.",
+      "zh": "第五次远航载着使节跨越印度洋西部，返回家乡。"
     },
     "sources": [
       "S1",
@@ -302,12 +302,12 @@
       "zh": "摩加迪沙"
     },
     "summary": {
-      "en": "Mogadishu appears among the fifth expedition’s East African destinations. An expedition destination does not prove the admiral personally landed here.",
-      "zh": "摩加迪沙列在第五航次的东非目的地中。船队目的地不能据此变成统帅本人登陆的证明。"
+      "en": "Mogadishu was an East African destination of the fifth expedition. Zheng He’s personal landing there is unconfirmed.",
+      "zh": "摩加迪沙是第五次远航的东非目的地，郑和本人是否登陆仍未确定。"
     },
     "detail": {
-      "en": "Geographic locator only. The site date is a display convention, not a foundation or landing date. Coordinate source: D02.",
-      "zh": "仅作地理定位。地点日期是显示约定，不是建城或登陆日期。坐标来源：D02。"
+      "en": "This East African port had its own inhabitants, rulers and trading interests before the visiting fleets arrived.",
+      "zh": "船队到访以前，这座东非港口已有居民、统治者和自己的贸易利益。"
     },
     "sources": [
       "S1",
@@ -328,12 +328,12 @@
       "zh": "马林迪"
     },
     "summary": {
-      "en": "Malindi appears in accounts of the fifth expedition. This modern city locator does not resolve the itinerary of every squadron or person.",
-      "zh": "马林迪见于第五航次记载。这个现代城市定位点不能确定每支分队或每个人的行程。"
+      "en": "Malindi appears in accounts of the fifth expedition. The records do not give every squadron’s or person’s full itinerary.",
+      "zh": "马林迪见于第五次远航的记载。史料没有留下每支分队或每个人的完整行程。"
     },
     "detail": {
-      "en": "Geographic locator only. The site date is a display convention, not a foundation or landing date. Coordinate source: D02.",
-      "zh": "仅作地理定位。地点日期是显示约定，不是建城或登陆日期。坐标来源：D02。"
+      "en": "Visiting ships entered an existing East African trading world. Each coastal port had its own history.",
+      "zh": "来访船只进入的是既有的东非贸易世界，各座沿海港口都有自己的历史。"
     },
     "sources": [
       "S1",
@@ -354,12 +354,12 @@
       "zh": "苏门答剌附近区域（今司马威参照）"
     },
     "summary": {
-      "en": "Modern Lhokseumawe is a nearby regional anchor for Samudera’s succession conflict. It is not a located palace, capture site, or the whole island of Sumatra.",
-      "zh": "今天的司马威是苏门答剌继位冲突的附近区域参照点，不是确定的宫殿或俘获地点；苏门答剌也不等于整座苏门答腊岛。"
+      "en": "Lhokseumawe helps locate the region near Samudera. The palace and capture site are unknown. Samudera was not the whole island of Sumatra.",
+      "zh": "司马威帮助定位苏门答剌附近区域，宫殿和俘获地点仍不清楚。苏门答剌并非整座苏门答腊岛。"
     },
     "detail": {
-      "en": "Geographic locator only. The site date is a display convention, not a foundation or landing date. Coordinate source: D02.",
-      "zh": "仅作地理定位。地点日期是显示约定，不是建城或登陆日期。坐标来源：D02。"
+      "en": "The dispute concerned who would rule Samudera. Accounts disagree about the succession.",
+      "zh": "争端涉及谁来统治苏门答剌，有关继位的记载互有矛盾。"
     },
     "sources": [
       "S2",
@@ -380,12 +380,12 @@
       "zh": "孟加拉区域（今达卡参照）"
     },
     "summary": {
-      "en": "Dhaka locates the Bengal region associated with the king’s giraffe gift in 1414. It is not the documented place where the animal boarded a ship.",
-      "zh": "达卡用于定位 1414 年国王赠送长颈鹿所涉及的孟加拉区域，不是文献确定的动物装船地点。"
+      "en": "Dhaka helps locate Bengal, whose king sent the giraffe in 1414. Where the animal boarded a ship is unknown.",
+      "zh": "达卡帮助定位孟加拉，其国王在 1414 年赠送长颈鹿。动物从哪里装船仍不清楚。"
     },
     "detail": {
-      "en": "Geographic locator only. The site date is a display convention, not a foundation or landing date. Coordinate source: D02.",
-      "zh": "仅作地理定位。地点日期是显示约定，不是建城或登陆日期。坐标来源：D02。"
+      "en": "Ming courtiers linked the giraffe to the qilin, a mythical creature thought to bring good fortune.",
+      "zh": "明廷官员把长颈鹿与麒麟联系起来，后者是传说中带来吉祥的动物。"
     },
     "sources": [
       "S5",
@@ -406,12 +406,12 @@
       "zh": "霍尔木兹"
     },
     "summary": {
-      "en": "The point is GeoNames 131231 on Hormuz island, an expedition destination in the Persian Gulf. Bandar Abbas on the mainland has not been substituted for the island.",
-      "zh": "坐标取自 GeoNames 131231，位于作为远航目的地的波斯湾霍尔木兹岛上；没有用大陆上的阿巴斯港替代岛上城镇。"
+      "en": "Hormuz was an expedition destination on an island in the Persian Gulf. The point marks the island town, across from mainland Bandar Abbas.",
+      "zh": "霍尔木兹是波斯湾的岛上远航目的地。点位标出岛上城镇，阿巴斯港则在大陆。"
     },
     "detail": {
-      "en": "Geographic locator only. The site date is a display convention, not a foundation or landing date. Coordinate source: D03.",
-      "zh": "仅作地理定位。地点日期是显示约定，不是建城或登陆日期。坐标来源：D03。"
+      "en": "Hormuz can name a town, island or strait. The fleet destination was the island port; the exact medieval harbour is unknown.",
+      "zh": "霍尔木兹可以指城镇、岛屿或海峡。船队目的地是岛上港口，当时码头的准确位置仍不清楚。"
     },
     "sources": [
       "S1",
@@ -432,12 +432,12 @@
       "zh": "基尔瓦"
     },
     "summary": {
-      "en": "Kilwa Kisiwani represents the wider Swahili trading world. Its Chinese porcelain is evidence of exchange; this topic does not claim a confirmed fleet stop here.",
-      "zh": "基尔瓦代表更广阔的斯瓦希里贸易世界。这里的中国瓷器是交换的证据；本题不把这里列成确认的船队停靠点。"
+      "en": "Kilwa belonged to the Swahili trading world. Chinese porcelain found there shows overseas exchange. A Ming fleet stop is unconfirmed.",
+      "zh": "基尔瓦属于斯瓦希里贸易世界，当地发现的中国瓷器反映海外交换。明朝船队是否停靠仍未确定。"
     },
     "detail": {
-      "en": "Geographic locator only. The site date is a display convention, not a foundation or landing date. Coordinate source: D04.",
-      "zh": "仅作地理定位。地点日期是显示约定，不是建城或登陆日期。坐标来源：D04。"
+      "en": "Kilwa’s merchants linked goods from the African interior with markets across the Indian Ocean.",
+      "zh": "基尔瓦商人把非洲腹地的物产与印度洋海外市场联系起来。"
     },
     "sources": [
       "S6",
@@ -459,12 +459,12 @@
       "zh": "第一次远航"
     },
     "summary": {
-      "en": "First expedition: conventionally dated 1405–1407. Dates distinguish the expedition sequence; they do not locate a ship at this point on an exact day.",
-      "zh": "第一次远航通常标为 1405—1407 年。日期用于区分航次，不表示某一天有船只停在这个坐标。"
+      "en": "The first expedition is usually dated 1405–1407.",
+      "zh": "第一次远航通常记作 1405—1407 年。"
     },
     "detail": {
-      "en": "The marker locates the Ming court end of the expedition story. It is a modern city centre, not a measured fifteenth-century departure quay.",
-      "zh": "标记定位远航故事中明廷这一端。坐标是现代市中心，不是测得的十五世纪出发码头。"
+      "en": "The Yongle emperor sent the fleet to display Ming power and expand diplomatic relations.",
+      "zh": "永乐皇帝派船队远航，希望展示明朝威望，扩大外交关系。"
     },
     "sources": [
       "S4",
@@ -489,12 +489,12 @@
       "zh": "旧港冲突"
     },
     "summary": {
-      "en": "Ming records reported 5,000 people killed in the 1407 action against Chen Zuyi at Old Port. This is a reported figure, not an independently verified count.",
-      "zh": "明方记录报告，1407 年旧港对陈祖义的行动中有 5,000 人被杀。这是报告数字，不是独立核实的人数。"
+      "en": "Ming records report 5,000 people killed in the 1407 fighting against Chen Zuyi at Old Port. No independent count confirms the figure.",
+      "zh": "明方记录报告，1407 年旧港对陈祖义的战事中有 5,000 人被杀，没有独立统计可以核实。"
     },
     "detail": {
-      "en": "Old Port is associated with modern Palembang. The 1407 killing report belongs to this region; the city point is not a measured battle centre. The surviving report does not establish a civilian/combatant breakdown or a known total for other losses.",
-      "zh": "城市点仅定位旧港区域，不是测得的战斗中心。现有报告不能确定平民与战斗人员的比例，也不能补出其他损失总数。"
+      "en": "Old Port is associated with Palembang. The exact battle site is unknown. The report does not separate civilians from fighters or give a complete count of other losses.",
+      "zh": "旧港对应今天的巨港，准确战场位置仍不清楚。报告没有分列平民与战斗人员，也没有列全其他损失。"
     },
     "sources": [
       "S2"
@@ -523,12 +523,12 @@
       "zh": "爪哇被杀报告"
     },
     "summary": {
-      "en": "Wade cites Ming records reporting that 170 Ming troops were killed in Java in 1407. No total for local deaths is established here.",
-      "zh": "韦德（Geoff Wade）引述明方记录，报告 1407 年有 170 名明军在爪哇被杀。本题没有确定当地人的死亡总数。"
+      "en": "Wade cites Ming records reporting 170 Ming troops killed in Java in 1407. The number of local people killed is unknown.",
+      "zh": "韦德（Geoff Wade）引述明方记录，报告 1407 年有 170 名明军在爪哇被杀。当地人的死亡人数不详。"
     },
     "detail": {
-      "en": "Surabaya is only a Java regional anchor for the 1407 report of Ming troops being killed. The conflict site has not been established here.",
-      "zh": "泗水仅作为 1407 年明军被杀报告的爪哇区域参照点。本题没有确定冲突的实址。"
+      "en": "Surabaya helps locate Java for the 1407 report of Ming troops being killed. The exact conflict site is unknown.",
+      "zh": "泗水帮助定位爪哇，明方曾报告 1407 年有明军在岛上被杀。冲突的准确地点不详。"
     },
     "sources": [
       "S2"
@@ -552,12 +552,12 @@
       "zh": "第二次远航"
     },
     "summary": {
-      "en": "Second expedition: conventionally dated 1407–1409. Dates distinguish the expedition sequence; they do not locate a ship at this point on an exact day.",
-      "zh": "第二次远航通常标为 1407—1409 年。日期用于区分航次，不表示某一天有船只停在这个坐标。"
+      "en": "The second expedition is usually dated 1407–1409.",
+      "zh": "第二次远航通常记作 1407—1409 年。"
     },
     "detail": {
-      "en": "Columbia's account places the 1407–1409 expedition at Calicut for a new king's inauguration. It says Zheng He organised the expedition but did not lead it in person. The modern Kozhikode city point marks that destination, not a ship position or a known ceremony site.",
-      "zh": "哥伦比亚大学资料记述，1407—1409 年的船队前往古里参加新王即位典礼，并说明郑和组织了这次远航，却没有亲自率队。今天科泽科德的城市坐标表示这一目的地，不是船只位置或已知的典礼实址。"
+      "en": "Columbia’s account says the 1407–1409 fleet went to Calicut for a new king's inauguration. Zheng He organised it but did not lead it in person. The point locates modern Kozhikode; the ceremony site is unknown.",
+      "zh": "哥伦比亚大学资料记述，1407—1409 年船队前往古里参加新王即位典礼。郑和组织了远航，但没有亲自率队。点位标出今天的科泽科德，典礼的确切地点不详。"
     },
     "sources": [
       "S1"
@@ -577,12 +577,12 @@
       "zh": "第三次远航"
     },
     "summary": {
-      "en": "Third expedition: conventionally dated 1409–1411. Dates distinguish the expedition sequence; they do not locate a ship at this point on an exact day.",
-      "zh": "第三次远航通常标为 1409—1411 年。日期用于区分航次，不表示某一天有船只停在这个坐标。"
+      "en": "The third expedition is usually dated 1409–1411.",
+      "zh": "第三次远航通常记作 1409—1411 年。"
     },
     "detail": {
-      "en": "The marker locates the Ming court end of the expedition story. It is a modern city centre, not a measured fifteenth-century departure quay.",
-      "zh": "标记定位远航故事中明廷这一端。坐标是现代市中心，不是测得的十五世纪出发码头。"
+      "en": "Melaka served as a place to gather ships and supplies. The period also included religious offerings and fighting in Sri Lanka.",
+      "zh": "马六甲供船队集合、储存物资。这一时期的锡兰往来既有宗教献礼，也有战事。"
     },
     "sources": [
       "S1"
@@ -606,12 +606,12 @@
       "zh": "被带到明廷的俘虏"
     },
     "summary": {
-      "en": "After fighting in Sri Lanka, Zheng He’s forces took a ruler and members of his family to the Ming court in 1411. Nanjing marks the destination of captivity.",
-      "zh": "锡兰发生战事后，郑和的军队在 1411 年将一位统治者及家人带到明廷。南京点表示被带至的一端。"
+      "en": "In 1411, after fighting in Sri Lanka, Zheng He’s forces took a ruler and members of his family to the Ming court. Nanjing marks where they were taken.",
+      "zh": "1411 年锡兰战事后，郑和军队把一位统治者及家人带到明廷。南京点标出他们被押送到的一端。"
     },
     "detail": {
-      "en": "The marker locates the Ming court end of the expedition story. It is a modern city centre, not a measured fifteenth-century departure quay.",
-      "zh": "标记定位远航故事中明廷这一端。坐标是现代市中心，不是测得的十五世纪出发码头。"
+      "en": "The captive ruler did not govern all Sri Lanka. Columbia’s account says the captives were later released.",
+      "zh": "被俘者并非全锡兰的统治者。哥伦比亚大学资料记述俘虏后来获释。"
     },
     "sources": [
       "S2"
@@ -636,12 +636,12 @@
       "zh": "第四次远航"
     },
     "summary": {
-      "en": "Fourth expedition: conventionally dated 1413–1415. Dates distinguish the expedition sequence; they do not locate a ship at this point on an exact day.",
-      "zh": "第四次远航通常标为 1413—1415 年。日期用于区分航次，不表示某一天有船只停在这个坐标。"
+      "en": "The fourth expedition is usually dated 1413–1415.",
+      "zh": "第四次远航通常记作 1413—1415 年。"
     },
     "detail": {
-      "en": "The marker locates the Ming court end of the expedition story. It is a modern city centre, not a measured fifteenth-century departure quay.",
-      "zh": "标记定位远航故事中明廷这一端。坐标是现代市中心，不是测得的十五世纪出发码头。"
+      "en": "The fleet sailed beyond India to Hormuz, an island port near the Persian Gulf entrance.",
+      "zh": "船队越过印度，抵达波斯湾入口附近的岛上港口霍尔木兹。"
     },
     "sources": [
       "S1"
@@ -665,12 +665,12 @@
       "zh": "来自孟加拉的长颈鹿"
     },
     "summary": {
-      "en": "A giraffe was presented to Yongle in 1414 as a gift from the king of Bengal. Courtiers linked it to the auspicious qilin.",
-      "zh": "1414 年，孟加拉国王赠送的长颈鹿被呈给永乐帝；宫廷将它与祥瑞麒麟联系起来。"
+      "en": "In 1414, Bengal’s king sent the Yongle emperor a giraffe. Courtiers linked it to the qilin, a mythical creature thought to bring good fortune.",
+      "zh": "1414 年，孟加拉国王赠给永乐帝一头长颈鹿。官员把它与传说中带来吉祥的麒麟联系起来。"
     },
     "detail": {
-      "en": "The marker locates the Ming court end of the expedition story. It is a modern city centre, not a measured fifteenth-century departure quay.",
-      "zh": "标记定位远航故事中明廷这一端。坐标是现代市中心，不是测得的十五世纪出发码头。"
+      "en": "The giraffe reached the emperor as a gift through Bengal’s king, rather than directly from an African animal-catching trip.",
+      "zh": "这头长颈鹿经过孟加拉国王赠给皇帝，并非由非洲捕兽后直接运来。"
     },
     "sources": [
       "S5"
@@ -694,12 +694,12 @@
       "zh": "继位争端中的俘虏"
     },
     "summary": {
-      "en": "Zheng He captured a claimant in Samudera’s succession conflict in 1415 and took him to China. Accounts of the dispute conflict.",
-      "zh": "1415 年，郑和在苏门答剌继位冲突中俘获一位争夺统治权的人，将他带往中国。争端记载互有矛盾。"
+      "en": "In 1415, Zheng He captured a man claiming Samudera’s throne and took him to China. Accounts disagree about the succession dispute.",
+      "zh": "1415 年，郑和俘获一位争夺苏门答剌统治权的人，把他带到中国。有关继位争端的记载互有矛盾。"
     },
     "detail": {
-      "en": "Modern Lhokseumawe is a nearby regional anchor for Samudera’s succession conflict. It is not a located palace, capture site, or the whole island of Sumatra.",
-      "zh": "今天的司马威是苏门答剌继位冲突的附近区域参照点，不是确定的宫殿或俘获地点；苏门答剌也不等于整座苏门答腊岛。"
+      "en": "Lhokseumawe helps locate the region near Samudera. The palace and capture site are unknown. Samudera was not the whole island of Sumatra.",
+      "zh": "司马威帮助定位苏门答剌附近区域，宫殿和俘获地点仍不清楚。苏门答剌并非整座苏门答腊岛。"
     },
     "sources": [
       "S2"
@@ -720,12 +720,12 @@
       "zh": "第五次远航"
     },
     "summary": {
-      "en": "Fifth expedition: conventionally dated 1417–1419. Dates distinguish the expedition sequence; they do not locate a ship at this point on an exact day.",
-      "zh": "第五次远航通常标为 1417—1419 年。日期用于区分航次，不表示某一天有船只停在这个坐标。"
+      "en": "The fifth expedition is usually dated 1417–1419.",
+      "zh": "第五次远航通常记作 1417—1419 年。"
     },
     "detail": {
-      "en": "The marker locates the Ming court end of the expedition story. It is a modern city centre, not a measured fifteenth-century departure quay.",
-      "zh": "标记定位远航故事中明廷这一端。坐标是现代市中心，不是测得的十五世纪出发码头。"
+      "en": "The fleet carried envoys home. Accounts name Aden, Mogadishu and Malindi among its destinations.",
+      "zh": "船队运送使节返乡，目的地记载包括亚丁、摩加迪沙和马林迪。"
     },
     "sources": [
       "S1"
@@ -749,12 +749,12 @@
       "zh": "第六次远航"
     },
     "summary": {
-      "en": "Sixth expedition: conventionally dated 1421–1422. Dates distinguish the expedition sequence; they do not locate a ship at this point on an exact day.",
-      "zh": "第六次远航通常标为 1421—1422 年。日期用于区分航次，不表示某一天有船只停在这个坐标。"
+      "en": "The sixth expedition is usually dated 1421–1422.",
+      "zh": "第六次远航通常记作 1421—1422 年。"
     },
     "detail": {
-      "en": "The marker locates the Ming court end of the expedition story. It is a modern city centre, not a measured fifteenth-century departure quay.",
-      "zh": "标记定位远航故事中明廷这一端。坐标是现代市中心，不是测得的十五世纪出发码头。"
+      "en": "Envoys returned home across the Indian Ocean. Ships needed supplies and time to wait for suitable sailing conditions.",
+      "zh": "使节跨越印度洋回乡。船队需要补给，也需要等待适合航行的条件。"
     },
     "sources": [
       "S1"
@@ -778,12 +778,12 @@
       "zh": "第七次远航"
     },
     "summary": {
-      "en": "Seventh expedition: conventionally dated 1431–1433. Dates distinguish the expedition sequence; they do not locate a ship at this point on an exact day.",
-      "zh": "第七次远航通常标为 1431—1433 年。日期用于区分航次，不表示某一天有船只停在这个坐标。"
+      "en": "The seventh expedition is usually dated 1431–1433.",
+      "zh": "第七次远航通常记作 1431—1433 年。"
     },
     "detail": {
-      "en": "The marker locates the Ming court end of the expedition story. It is a modern city centre, not a measured fifteenth-century departure quay.",
-      "zh": "标记定位远航故事中明廷这一端。坐标是现代市中心，不是测得的十五世纪出发码头。"
+      "en": "A court order in 1430 preceded the usual sailing period. The main fleet’s destinations included Hormuz.",
+      "zh": "1430 年的诏令早于通常所记的航期，主队的目的地包括霍尔木兹。"
     },
     "sources": [
       "S1"
@@ -807,12 +807,12 @@
       "zh": "这组远航的结束"
     },
     "summary": {
-      "en": "The conventionally dated final expedition ends in 1433. The end of this state-sponsored sequence did not end maritime trade.",
-      "zh": "通常纪年的最后一次远航在 1433 年结束。这组国家远航的结束不等于海上贸易终止。"
+      "en": "The final state expedition ended in 1433. Maritime trade continued after the voyages stopped.",
+      "zh": "最后一次国家远航于 1433 年结束，海上贸易此后仍在继续。"
     },
     "detail": {
-      "en": "The marker locates the Ming court end of the expedition story. It is a modern city centre, not a measured fifteenth-century departure quay.",
-      "zh": "标记定位远航故事中明廷这一端。坐标是现代市中心，不是测得的十五世纪出发码头。"
+      "en": "Government fleets and merchant networks were different. Trade and smuggling continued under changing policies.",
+      "zh": "国家船队与商人网络并不相同。政策变化之下，贸易与走私仍继续。"
     },
     "sources": [
       "S4",
