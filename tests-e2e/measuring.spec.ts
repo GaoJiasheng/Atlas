@@ -23,6 +23,8 @@ async function open(page: Page, url: string) {
   await page.goto(url);
   await page.waitForFunction(() => window.__atlas !== undefined, null, { timeout: 30_000 });
   expect(await page.evaluate(() => window.__atlas!.ready)).toBe(true);
+  // Task/equation behavior tests explicitly open the shared HUD fold.
+  await page.evaluate(() => window.__atlas!.setLegends(true));
 }
 const info = (page: Page) => page.evaluate(() => (window.__atlas!.engine as unknown as Engine).task());
 const force = (page: Page, step: string, i: number) => page.evaluate(([s, k]) => (window.__atlas!.engine as unknown as Engine).goToTask(s as string, k as number, { instant: true }), [step, i] as const);

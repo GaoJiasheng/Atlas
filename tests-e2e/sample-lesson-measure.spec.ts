@@ -13,6 +13,8 @@ const check = (page: Page) => tray(page).locator('[data-command="check"]').click
 async function open(page: Page, locale = 'en', chapter = 'scales-and-balances') {
   await page.goto(`/${locale}/topics/sample-lesson-measure/?ch=${chapter}`);
   await page.waitForFunction(() => window.__atlas?.ready);
+  // Task/equation behavior tests explicitly open the shared HUD fold.
+  await page.evaluate(() => window.__atlas!.setLegends(true));
 }
 async function task(page: Page, step: string, index: number) {
   await page.evaluate(([s, i]) => (window.__atlas!.engine as unknown as Engine).goToTask(s, i, { instant: true }), [step, index] as const);

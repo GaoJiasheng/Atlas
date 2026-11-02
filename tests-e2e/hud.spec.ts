@@ -1335,6 +1335,10 @@ test('reading panel (SpaceScene): header, beat line, inspector, body, chapter in
   const header = (await page.locator('.atlas-panel__header').boundingBox())!;
   expect((await inspector.boundingBox())!.y).toBeLessThan(header.y + header.height + 80);
   const plate = page.locator('[data-hud-panel="plate"]');
+  await page.evaluate(() => {
+    window.__atlas!.setLeftColumn('open');
+    window.__atlas!.setPlate(true);
+  });
   await expect(plate).toBeVisible();
   for (const label of ['RUN', 'ANIM', 'VIEW', 'EXPLODE']) await expect(plate.locator('dt', { hasText: label })).toHaveCount(1);
   await expect(plate.locator('.space-plate__sel')).toContainText('DRUM');
@@ -1343,9 +1347,11 @@ test('reading panel (SpaceScene): header, beat line, inspector, body, chapter in
   await plate.locator('.space-plate__head').click();
   await expect(plate).toHaveAttribute('data-folded', '');
   await expect(plate.locator('.space-plate__elev')).toBeHidden();
-  expect(await page.evaluate(() => sessionStorage.getItem('atlas:plate'))).toBe('collapsed');
+  expect(await page.evaluate(() => window.__atlas!.state().plate)).toBe(false);
+  expect(await page.evaluate(() => window.__atlas!.state().manual.plateOpen)).toBe(false);
   await plate.locator('.space-plate__head').click();
   await expect(plate.locator('.space-plate__elev')).toBeVisible();
+  await expect(plate.locator('.space-plate__head')).toHaveAttribute('aria-expanded', 'true');
 });
 
 /** The folded tab slides in; let it land before measuring. */

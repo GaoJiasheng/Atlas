@@ -119,6 +119,7 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
   const cardOpen = useHud((h) => h.cardOpen);
   // The chapter axis folds to a hairline (`panelsOpen`): the band below the labels changes.
   const axisOpen = useHud((h) => h.panelsOpen);
+  const folds = useHud((h) => `${h.leftColumn}|${h.legendsOpen}|${h.plateOpen}|${h.stageOnly}`);
   const labelsOn = useHud((h) => h.labels && (h.hud || presenting));
   const s = useScene<
     SpaceSceneExt,
@@ -256,7 +257,7 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
 
   useLayoutEffect(() => {
     measure();
-  }, [measure, candidates, locale, labelsOn, presenting, cardOpen, axisOpen]);
+  }, [measure, candidates, locale, labelsOn, presenting, cardOpen, axisOpen, folds]);
 
   // The HUD fades out (presentation) or in: its blocks count as obstacles only once they are there
   // (the fade's `visibility` step ends it; the timer covers reduced motion and slow frames).

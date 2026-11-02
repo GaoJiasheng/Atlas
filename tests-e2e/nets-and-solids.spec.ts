@@ -30,6 +30,8 @@ const slider = (page: Page, name = 'Fold') => page.getByRole('slider', { name })
 async function open(page: Page, locale = 'en', chapter = 'many-nets', beat?: number) {
   await page.goto(`/${locale}/topics/nets-and-solids/?ch=${chapter}${beat ? `&b=${beat}` : ''}`);
   await page.waitForFunction(() => window.__atlas?.ready, null, { timeout: 30_000 });
+  // Task/equation behavior tests explicitly open the shared HUD fold.
+  await page.evaluate(() => window.__atlas!.setLegends(true));
 }
 async function task(page: Page, step: string, index: number, id: string) {
   await page.evaluate(([s, i]) => (window.__atlas!.engine as unknown as Engine).goToTask(s, i, { instant: true }), [step, index] as const);
