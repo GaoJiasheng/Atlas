@@ -57,8 +57,8 @@ state:
     try:
       vary: fertilised
       keep:
-      - en: Same schematic egg, with the window open for comparison
-        zh: 同一套卵的示意结构，打开窗口来比较
+      - en: Same egg model, with the window open
+        zh: 同一个卵模型，保持壳窗打开
       observe:
       - egg-condition
       - embryo-view
@@ -66,8 +66,8 @@ state:
       - egg-open
       predict:
         prompt:
-          en: With the window open, switch to the unfertilised example. Will a developing embryo be shown?
-          zh: 窗口保持打开，改看未受精的例子。会显示发育中的胚胎吗？
+          en: Keep the window open and choose the unfertilised example. Will you see a developing embryo?
+          zh: 保持壳窗打开，选择未受精的例子。会看见发育中的胚胎吗？
         start:
           egg-open: true
           fertilised: true
@@ -126,8 +126,8 @@ state:
         fertilised: true
         compare-view: chicken
     caption:
-      en: The shell hides development inside the egg. Hatching is not the first moment of development.
-      zh: 蛋壳挡住了内部的发育过程。孵出并不是发育开始的时刻。
+      en: "The chick begins developing inside the egg before hatching. The shell hides these changes."
+      zh: "小鸡在孵出前已开始发育，蛋壳遮住了内部变化。"
   - view: assembled
     explode: 0
     part: null
@@ -178,8 +178,8 @@ state:
         fertilised: true
         compare-view: chicken
     caption:
-      en: The model window reveals a schematic embryo beside its food supply. The window is a teaching device.
-      zh: 示意窗打开，显示胚胎和营养来源。这个窗口是为讲解而设置的。
+      en: "Open the model window to see the embryo and its food supply. The cut helps us look inside."
+      zh: "打开模型壳窗，看胚胎和它的营养来源。切口方便观察内部。"
   - view: assembled
     explode: 0
     part: null
@@ -228,8 +228,8 @@ state:
         fertilised: true
         compare-view: chicken
     caption:
-      en: The yolk provides nourishment. The yolk and the developing chick are different structures.
-      zh: 卵黄提供营养。卵黄与发育中的小鸡是不同的结构。
+      en: "The yolk supplies food for the embryo. The yolk and developing chick are different parts of the egg."
+      zh: "卵黄给胚胎提供营养。卵黄和发育中的小鸡是不同部分。"
   - view: assembled
     explode: 0
     part: null
@@ -276,8 +276,8 @@ state:
         fertilised: false
         compare-view: chicken
     caption:
-      en: This example is unfertilised, so no developing chick is shown. Warmth does not fertilise an egg.
-      zh: 这个例子没有受精，因此不显示发育中的小鸡。温暖不会使卵受精。
+      en: "The unfertilised example has no developing chick. Warming an egg cannot fertilise it."
+      zh: "未受精的例子没有发育中的小鸡。保温不能使卵受精。"
   - view: assembled
     explode: 0
     part: null
@@ -324,9 +324,8 @@ state:
         fertilised: true
         compare-view: chicken
     caption:
-      en: A fertilised chicken egg normally hatches after about twenty-one days of suitable incubation. Fertilisation alone
-        does not guarantee hatching.
-      zh: 鸡的受精卵在适宜条件下孵化，通常约二十一天孵出。仅有受精并不能保证孵出。
+      en: "A fertilised chicken egg normally hatches after about twenty-one days of suitable incubation. Some fertilised eggs do not hatch."
+      zh: "受精鸡卵通常经约二十一天的适宜孵化后孵出，也有卵无法孵出。"
   index:
     parts:
     - chicken-egg
@@ -338,23 +337,23 @@ state:
 
 <Lang en>
 
-The closed chicken egg hides what is inside. Development begins before hatching, so an unbroken shell does not mean that nothing is happening. Open the model's shell window to inspect the contents. This movable piece is a teaching device. A real developing egg does not open a neat window and then close it again.
+An unbroken shell hides the changes inside a chicken egg. The chick begins developing before it hatches. Open the model's shell window to look inside. The window is a cut made for this display, and the embryo is a simple outline without an exact age.
 
-Inside, find the small embryo and the <Term id="yolk">yolk</Term> beside it. They are different structures. The yolk supplies nourishment for the developing young animal; it is not itself a small, complete chick. Egg white surrounds the yolk. The model separates these structures so that you can select them, and its embryo is a schematic shape without a stated age. <FlyTo preset="egg-close">Inspect the egg window</FlyTo>
+Find the embryo and the <Term id="yolk">yolk</Term> beside it. The yolk supplies food for the developing chick. It is a different structure from the embryo. Egg white surrounds the yolk. Select each part to see where it lies. <FlyTo preset="egg-close">Look inside the egg</FlyTo>
 
-A chick can develop only from a fertilised egg. <Term id="fertilisation">Fertilisation</Term> is the joining of male and female reproductive cells. In a chicken, it happens before the shell is added and the egg is laid. Warmth does not fertilise an egg. Switching the control compares a fertilised example with an unfertilised example; it does not perform fertilisation on one egg.
+A chick can develop only from a fertilised egg. <Term id="fertilisation">Fertilisation</Term> happens when male and female reproductive cells join. In a chicken, this happens before the shell forms and the egg is laid. Warming an unfertilised egg cannot make it fertilised.
 
-Keep the window open and predict whether the embryo will be shown in the unfertilised example. Then reveal that view. No developing embryo is shown there. A fertilised egg also needs suitable incubation conditions: fertilisation alone does not promise a chick. Normal chicken incubation is about <Num s="S8">21 days</Num>, counted from suitable incubation, rather than from buying an egg. This observation model has no hatch countdown and gives no instructions for incubating eggs.
+Keep the window open. Predict whether you will see a developing embryo when you choose the unfertilised example, then try it. A fertilised egg also needs suitable incubation conditions to develop successfully. Chicken eggs normally hatch after about <Num s="S8">21 days</Num> of suitable incubation. Count from the start of incubation, rather than the day an egg is bought. Even a fertilised egg may fail to hatch.
 
-<More title={{"en": "A shell that exchanges gases", "zh": "能交换气体的蛋壳"}}>
+<More title={{"en": "Gases pass through the shell", "zh": "气体能穿过蛋壳"}}>
 
-During development, oxygen enters and carbon dioxide leaves through pores in the shell. The shell encloses the contents but does not seal them off from all gas exchange. The model does not show these tiny pores or simulate breathing inside the egg.
+Tiny pores in the shell let oxygen enter and carbon dioxide leave as the chick develops. These pores are too small to see on this model.
 
 </More>
 
-<More title={{"en": "Hidden is a view description", "zh": "“不显示”说的是视图"}}>
+<More title={{"en": "Seeing the embryo", "zh": "查看胚胎"}}>
 
-Closing the window hides the embryo even in the fertilised example. Opening the unfertilised example also gives “no embryo shown”, for a different reason. Read the development-condition label alongside the view label. Neither label is a calculation of death or a prediction of hatch success.
+Open the window and choose the fertilised example to see the embryo. Closing the window covers it. In the unfertilised example, there is no developing chick to reveal. Read both the egg condition and the window setting when comparing the views.
 
 </More>
 
@@ -362,23 +361,23 @@ Closing the window hides the embryo even in the fertilised example. Opening the 
 
 <Lang zh>
 
-完整的鸡卵，外面看不到内部。发育在孵出以前就已开始，所以蛋壳还没破，不等于里面没有变化。打开模型的壳窗，就能查看内部。这片可以移开的壳是讲解用的安排；真实发育中的卵，不会开出整齐的窗口，再把窗口关起来。
+蛋壳还完整时，我们看不到鸡卵内部的变化。雏鸡在孵出前，就已经在卵内开始发育。打开模型的壳窗，看看里面。这个切口方便我们观察；里面的胚胎是简化的轮廓，没有表示确切的日龄。
 
-里面的小胚胎和旁边的<Term id="yolk">卵黄</Term>是不同结构。卵黄为发育中的幼体提供营养，本身不是一只完整的小鸡。卵白围在卵黄外面。模型把这些结构分开画，方便分别选中；胚胎只是没有指定日龄的示意轮廓。<FlyTo preset="egg-close">近看卵的示意窗</FlyTo>
+找出胚胎和旁边的<Term id="yolk">卵黄</Term>。卵黄为发育中的小鸡提供营养，与胚胎是不同的结构。卵白围在卵黄外面。分别选中这些部分，看看它们的位置，便能分清卵黄、卵白和小鸡的胚胎。<FlyTo preset="egg-close">观察卵的内部</FlyTo>
 
-只有受精卵才可能发育出雏鸡。<Term id="fertilisation">受精</Term>是雄性和雌性生殖细胞结合。鸡的受精发生在加上蛋壳、产卵以前，温暖不会使卵受精。切换控件，是比较受精和未受精的两个例子，不是在同一枚卵上执行受精。
+只有受精卵才可能发育出雏鸡。<Term id="fertilisation">受精</Term>是雄性和雌性生殖细胞结合。在鸡的体内，受精发生在蛋壳形成、卵产出之前。给未受精的卵保温，并不能使它受精。
 
-保持窗口打开，先猜未受精的例子会不会显示胚胎，再揭晓视图。这里不显示发育中的胚胎。受精卵还需要适宜的孵化条件，受精本身不保证孵出。鸡卵正常孵化通常约需 <Num s="S8">21 天</Num>，从适宜的孵化培育开始算，不是从买到卵时算。这个观察模型没有孵出倒计时，也不提供照着操作的孵化步骤。
+保持壳窗打开。先猜一猜，选中未受精的例子后，会不会看见发育中的胚胎，再动手查看。受精卵还需要适宜的孵化条件，才能顺利发育。鸡卵通常经过约 <Num s="S8">21 天</Num>的适宜孵化后孵出。这个时间从孵化开始算，不是从买到卵的那天算。即使已经受精，卵也可能无法孵出。
 
-<More title={{"en": "A shell that exchanges gases", "zh": "能交换气体的蛋壳"}}>
+<More title={{"en": "Gases pass through the shell", "zh": "气体能穿过蛋壳"}}>
 
-发育时，氧气经过蛋壳上的气孔进入，二氧化碳从气孔离开。蛋壳包围卵内结构，却没有隔绝所有气体交换。模型没有画出细小气孔，也没有模拟卵内的呼吸过程。
+雏鸡发育时，氧气从蛋壳的细小气孔进入，二氧化碳从气孔排出。这些气孔很小，模型没有画出。
 
 </More>
 
-<More title={{"en": "Hidden is a view description", "zh": "“不显示”说的是视图"}}>
+<More title={{"en": "Seeing the embryo", "zh": "查看胚胎"}}>
 
-即使是受精的例子，关窗也会挡住胚胎；打开未受精的例子，同样会得到“不显示胚胎”，原因却不同。要把发育条件与视图标签一起读。“不显示”不是计算出了死亡，也不是在预测孵出成功率。
+打开壳窗、选择受精的例子，就能看见胚胎。关窗会把它遮住。未受精的例子则没有发育中的小鸡可看。比较视图时，要一起查看卵是否受精、壳窗是否打开。
 
 </More>
 

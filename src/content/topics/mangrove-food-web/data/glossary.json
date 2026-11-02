@@ -66,8 +66,8 @@
         "zh": "红树林"
       },
       "definition": {
-        "en": "A coastal forest with trees suited to intertidal conditions and its associated habitat.",
-        "zh": "树木能应对潮间带条件的海岸森林，以及相关的生境。"
+        "en": "A coastal forest whose trees can live where tides cover and expose the ground, together with the other living things and conditions there.",
+        "zh": "树木能在潮水涨退的海岸生长的森林，包括那里的其他生物和环境条件。"
       },
       "see": [
         "intertidal"
@@ -80,8 +80,8 @@
         "zh": "生产者"
       },
       "definition": {
-        "en": "Here, a plant or alga that uses sunlight to make food. The live tree supplies leaf material; dead leaves are not producers.",
-        "zh": "在这里，指利用阳光制造食物的植物或藻类。活树供应叶片，死叶本身不是生产者。"
+        "en": "A plant or alga that uses sunlight to make food. A living tree is a producer; its dead leaves are not.",
+        "zh": "利用阳光制造食物的植物或藻类。活树是生产者，死叶不是。"
       },
       "see": [
         "consumer"
@@ -94,7 +94,7 @@
         "zh": "消费者"
       },
       "definition": {
-        "en": "An organism that obtains food from other organisms or their material.",
+        "en": "An organism that gets food from other organisms or their material.",
         "zh": "从其他生物或其物质获得食物的生物。"
       },
       "see": [
@@ -124,8 +124,8 @@
         "zh": "捕食者"
       },
       "definition": {
-        "en": "The animal that catches and eats another animal in a particular feeding relationship.",
-        "zh": "在某一取食关系中，捕捉并吃掉另一动物的一方。"
+        "en": "An animal that catches and eats another animal.",
+        "zh": "捕捉并吃掉另一动物的动物。"
       },
       "see": [
         "prey"
@@ -138,8 +138,8 @@
         "zh": "猎物"
       },
       "definition": {
-        "en": "The animal caught and eaten in a particular feeding relationship.",
-        "zh": "在某一取食关系中，被捕捉和吃掉的动物。"
+        "en": "An animal caught and eaten by a predator.",
+        "zh": "被捕食者捕捉和吃掉的动物。"
       },
       "see": [
         "predator"
@@ -166,8 +166,8 @@
         "zh": "食物网"
       },
       "definition": {
-        "en": "Connected food chains that share organisms or functional groups. This topic selects only some possible links.",
-        "zh": "共享生物或功能组、彼此相连的食物链。本主题只选入部分可能关系。"
+        "en": "Food chains that join through shared organisms or groups of organisms.",
+        "zh": "通过共同的生物或生物组相连的食物链。"
       },
       "see": [
         "food-chain"
@@ -195,8 +195,8 @@
         "zh": "呼吸根"
       },
       "definition": {
-        "en": "In this model, an upright root of Api-api Putih connected to shallow lateral roots; it takes in oxygen above the muddy soil.",
-        "zh": "本模型中指 Api-api Putih 从浅层侧根向上伸出的根，在泥面上方吸收氧气。"
+        "en": "A root that takes in oxygen above muddy soil. Api-api Putih has upright breathing roots joined to shallow side roots.",
+        "zh": "伸出泥面吸收氧气的根。Api-api Putih 的直立呼吸根与浅层侧根相连。"
       },
       "see": [
         "adaptation",
@@ -252,8 +252,8 @@
         "zh": "招潮蟹"
       },
       "definition": {
-        "en": "A group of crabs whose males have one enlarged claw and one small feeding claw. This does not describe every crab.",
-        "zh": "一类雄体有一只大螯和一只取食小螯的蟹；不是所有蟹都这样。"
+        "en": "A kind of crab whose males have one enlarged claw and one smaller feeding claw.",
+        "zh": "雄体有一只大螯和一只取食小螯的一类蟹。"
       },
       "see": [
         "consumer"

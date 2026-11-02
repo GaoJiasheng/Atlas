@@ -37,8 +37,8 @@ state:
     - 0.05
     fov: 32
   summary:
-    en: A food chain follows feeding energy from food to consumer.
-    zh: 食物链沿取食关系追踪能量，从食物指向消费者。
+    en: Follow food from producers to consumers.
+    zh: 沿食物路径，从生产者看到消费者。
   sim:
     set:
       remove: none
@@ -54,8 +54,8 @@ state:
     - bakau-tree
     run: false
     caption:
-      en: Plants and algae use sunlight to make food. They are producers in these pathways.
-      zh: 植物和藻类利用阳光制造食物，是这些路径中的生产者。
+      en: Plants and algae make food using sunlight. They are producers.
+      zh: 植物和藻类利用阳光制造食物，是生产者。
   - hide:
     - bacteria-inset
     - fungi-inset
@@ -64,8 +64,8 @@ state:
     - algae-patch
     - fiddler-crabs
     caption:
-      en: 'An arrow goes from food to the organism eating it: algae to an algae-feeding crab.'
-      zh: 箭头从食物指向取食者：从藻类指向吃藻的蟹。
+      en: The arrow points from algae to the crab that eats it. Read food arrows towards the eater.
+      zh: 箭头从藻类指向吃藻的蟹。沿食物箭头看，便能找到取食者。
   - hide:
     - bacteria-inset
     - fungi-inset
@@ -75,9 +75,8 @@ state:
     - giant-mudskipper
     run: true
     caption:
-      en: General guides include crabs as mudskipper food. These selected links are possible feeding relationships,
-        not a measured local menu.
-      zh: 一般指南把蟹列为弹涂鱼的食物；这些线表示可能的关系，不是当地实测食谱。
+      en: Crabs can be food for mudskippers. The moving marks trace a possible food path.
+      zh: 蟹可以成为弹涂鱼的食物。移动的光点显示一条可能的食物路径。
   - hide:
     - bacteria-inset
     - fungi-inset
@@ -86,8 +85,8 @@ state:
     - giant-mudskipper
     - heron
     caption:
-      en: A mudskipper can be a predator of crabs and prey for a heron. Its role depends on the relationship.
-      zh: 弹涂鱼可以是蟹的捕食者，也可以是鹭的猎物；角色要看它与谁发生关系。
+      en: A mudskipper can catch crabs and be caught by a heron. It can be both predator and prey.
+      zh: 弹涂鱼能捕食蟹，也会被鹭捕食。它既能是捕食者，也能是猎物。
   - hide:
     - bacteria-inset
     - fungi-inset
@@ -97,9 +96,9 @@ state:
     - algae-patch
     - heron
     caption:
-      en: Energy passes along feeding pathways, with some dissipated as heat. This model does not assign a fixed
-        transfer percentage.
-      zh: 能量沿取食路径传递，一部分散失为热；这个模型没有给各级设定固定传递百分比。
+      en: Energy passes along food paths, with some dissipated as heat. The arrows show routes, without measuring
+        the energy transferred.
+      zh: 能量沿食物路径传递，一部分散失为热。箭头显示路线，不测量传递的能量。
   index:
     parts:
     - algae-patch
@@ -112,25 +111,19 @@ state:
 
 <Lang en>
 
-Start with the tree and the algae. They use sunlight to make food and are <Term id="producer">producers</Term> in these pathways. The tree node means a living mangrove supplying leaf material, including leaves that later fall. A fallen leaf does not become a living producer. The making of food is explored further in <TopicLink slug="plant" ch="leaves-make-food">A Plant: leaves make food</TopicLink>.
+Start with the tree and algae. They use sunlight to make food, so they are <Term id="producer">producers</Term>. The living tree supplies leaves, including those that later fall. Dead leaves contain food, but cannot make more. Learn about food-making in <TopicLink slug="plant" ch="leaves-make-food">A Plant: leaves make food</TopicLink>.
 
-An animal obtains food from other organisms or their material; it is a <Term id="consumer">consumer</Term>. Read a <Term id="food-chain">food chain</Term> in the direction food passes: algae, an algae-feeding crab, a possible crab-eating mudskipper, then a heron. Each arrow points towards the consumer, not towards what a hunter is chasing. Follow arrowheads and names rather than relying on colour alone.
+An animal gets food from other organisms or their material. It is a <Term id="consumer">consumer</Term>. A <Term id="food-chain">food chain</Term> follows food from one organism to the next. One possible chain here runs from algae to an algae-feeding crab, then to a mudskipper and a heron. Each arrow points from food towards the eater.
 
-A mudskipper can be a <Term id="predator">predator</Term> in its relationship with a crab and <Term id="prey">prey</Term> in its relationship with a heron. These words describe a relationship, rather than placing the fish in a permanent category. NParks reports crustaceans and smaller fish as giant-mudskipper food, with herons among its predators. More precise diet statements depend on which observations were made.
+A mudskipper can be a <Term id="predator">predator</Term> that catches a crab, and <Term id="prey">prey</Term> caught by a heron. NParks lists crustaceans and smaller fish among giant-mudskipper foods, and herons among its predators. The same animal can have both roles.
 
-Energy passes along feeding pathways, and some is dissipated as heat. This model gives no fixed percentage for transfer between consumers. Its lines identify possible routes, not amounts of energy or numbers of animals eaten. <TopicLink slug="energy-conversion" ch="never-used-up">Energy Conversion</TopicLink> examines changes of energy form; here the focus is reading the feeding pathway correctly.
+Energy passes along food chains, with some dissipated as heat. The arrows show possible routes; their width does not measure energy or the amount eaten. There is no fixed transfer percentage in this model. Explore changes in energy form in <TopicLink slug="energy-conversion" ch="never-used-up">Energy Conversion</TopicLink>.
 
-<Figure src="figures/mangrove-food-web-predator-prey" alt={{ en: "A graphite drawing of a heron taking a small fish beside a mangrove seedling.", zh: "石墨画：红树幼苗旁，一只鹭捕捉一条小鱼。" }} caption={{ en: "A general predator–prey example. The small fish is not identified as a giant mudskipper. Reused Atlas illustration.", zh: "一般捕食关系示例；小鱼没有被鉴定为弹涂鱼。复用 Atlas 插图。" }} />
+<Figure src="figures/mangrove-food-web-predator-prey" alt={{ en: "A heron catches a small fish beside a mangrove seedling.", zh: "红树幼苗旁，一只鹭捕捉小鱼。" }} caption={{ en: "The heron is the predator; the small fish is its prey. This fish is not identified as a giant mudskipper.", zh: "鹭是捕食者，小鱼是猎物。图中小鱼未确定为弹涂鱼。" }} />
 
-<More title={{"en": "Different evidence, different scope", "zh": "不同证据有不同范围"}}>
+<More title={{"en": "Diets can differ between observations", "zh": "不同观察中的食物差异"}}>
 
-A general guide can describe a food item that was not detected in one local sample. Su and Lim’s indexed discussion reports no fiddlers or fish in their Lim Chu Kang sample and separately mentions opportunistic Episesarma feeding. The full paper was not read in this build. Neither the sample nor this graph establishes a universal menu.
-
-</More>
-
-<More title={{"en": "The bird illustration", "zh": "鸟的配图"}}>
-
-The illustration shows a heron taking a small fish. It illustrates a predator–prey relationship; the fish is not identified as a giant mudskipper.
+A general guide describes foods an animal can eat. One local sample may contain only some of them. Su and Lim reported no fiddler crabs or fish in their Lim Chu Kang sample. They also reported an observation of a mudskipper taking an Episesarma crab when the opportunity arose, without giving a feeding frequency. These differences are why the crab-to-fish arrows show possible relationships, rather than a fixed diet.
 
 </More>
 
@@ -138,25 +131,19 @@ The illustration shows a heron taking a small fish. It illustrates a predator–
 
 <Lang zh>
 
-从树和藻类开始。它们利用阳光制造食物，在这些路径中是<Term id="producer">生产者</Term>。树的节点表示活红树供应叶片，包括后来落下的叶；掉落的死叶本身不是活生产者。怎样制造食物，可以接着看<TopicLink slug="plant" ch="leaves-make-food">《一株植物》的“叶子造食物”</TopicLink>。
+从树和藻类开始。它们利用阳光制造食物，是<Term id="producer">生产者</Term>。活树供应叶片，包括后来落下的叶。死叶含有食物，却不能再制造食物。植物怎样造食物，可看<TopicLink slug="plant" ch="leaves-make-food">《一株植物》的“叶子造食物”</TopicLink>。
 
-动物从其他生物或其物质获得食物，是<Term id="consumer">消费者</Term>。沿食物传递的方向读一条可能的<Term id="food-chain">食物链</Term>：藻类、吃藻的蟹、可能取食蟹的弹涂鱼，再到鹭。每条箭头指向消费者，不是指向捕猎时追赶的目标。要读箭头和名字，不能只靠颜色判断。
+动物从其他生物或其物质获得食物，是<Term id="consumer">消费者</Term>。<Term id="food-chain">食物链</Term>显示食物怎样从一种生物传给另一种。这里一条可能的链是：藻类、吃藻的蟹、弹涂鱼，再到鹭。每条箭头从食物指向吃它的生物。
 
-弹涂鱼与蟹发生关系时，可以是<Term id="predator">捕食者</Term>；与鹭发生关系时，又可以是<Term id="prey">猎物</Term>。这些词描述双方关系，不是给鱼贴上永远不变的类别。NParks 把甲壳类与小鱼列为弹涂鱼的食物，也把鹭列为捕食它的鸟类。更精确的食谱，需要看具体观察的范围。
+弹涂鱼捕捉蟹时，是<Term id="predator">捕食者</Term>；被鹭捕捉时，是<Term id="prey">猎物</Term>。NParks 把甲壳类和小鱼列为弹涂鱼的食物，也把鹭列为它的捕食者。同一动物可以有这两种角色。
 
-能量沿取食路径传递，一部分散失为热。本模型没有给各级设定固定传递百分比。线表示可能的路线，不表示能量多少，也不表示吃了多少只动物。能量形式怎样改变，可看<TopicLink slug="energy-conversion" ch="never-used-up">《能量的转化》</TopicLink>；这里先把取食路径读清楚。
+能量沿食物链传递，一部分散失为热。箭头显示可能的路径，线的粗细不表示能量多少或吃了多少。模型没有设定固定的能量传递百分比。能量形式怎样改变，可看<TopicLink slug="energy-conversion" ch="never-used-up">《能量的转化》</TopicLink>。
 
-<Figure src="figures/mangrove-food-web-predator-prey" alt={{ en: "A graphite drawing of a heron taking a small fish beside a mangrove seedling.", zh: "石墨画：红树幼苗旁，一只鹭捕捉一条小鱼。" }} caption={{ en: "A general predator–prey example. The small fish is not identified as a giant mudskipper. Reused Atlas illustration.", zh: "一般捕食关系示例；小鱼没有被鉴定为弹涂鱼。复用 Atlas 插图。" }} />
+<Figure src="figures/mangrove-food-web-predator-prey" alt={{ en: "A heron catches a small fish beside a mangrove seedling.", zh: "红树幼苗旁，一只鹭捕捉小鱼。" }} caption={{ en: "The heron is the predator; the small fish is its prey. This fish is not identified as a giant mudskipper.", zh: "鹭是捕食者，小鱼是猎物。图中小鱼未确定为弹涂鱼。" }} />
 
-<More title={{"en": "Different evidence, different scope", "zh": "不同证据有不同范围"}}>
+<More title={{"en": "Diets can differ between observations", "zh": "不同观察中的食物差异"}}>
 
-一般指南列出的食物，未必在某个局地样本中检出。Su 与 Lim 论文的索引讨论写到林厝港样本未检出招潮蟹或鱼，另提及取食 Episesarma 的机会观察。本轮未读论文全文。该样本与本图都不能确立固定通用的食谱。
-
-</More>
-
-<More title={{"en": "The bird illustration", "zh": "鸟的配图"}}>
-
-配图中的鹭正捕捉小鱼，用来表示捕食关系；图中小鱼没有被鉴定为弹涂鱼。
+一般指南介绍动物可能吃的食物，一次当地采样可能只找到其中一部分。Su 与 Lim 在林厝港的样本中没有检出招潮蟹或鱼。他们另报告一次弹涂鱼趁机会取食 Episesarma 蟹的观察，但没有给出取食频率。因此，蟹到鱼的箭头表示可能关系，不能当作固定食谱。
 
 </More>
 
