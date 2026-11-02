@@ -325,7 +325,7 @@ summary EN “The earthquake off Sumatra generated a tsunami across the Indian O
 2. PB steps 按 `STEPCLASS` 精确映射：OSR/CRB 张裂，OTF/CTF 转换，SUB 俯冲，OCB/CCB 其他汇聚；未知 class 失败而非默认为俯冲。geometry 直接取输入，不从 STARTLONG 再手连。当前计数 1,875/474/1,147/457/1,129/341/401。原始说明的 5,819 steps 对应 5,819 个唯一 SEQNUM；转换得到 5,824 features，是其中 1152/1465/2795/4924/4946 五段各在日界线拆为两件。几何 id 写 `ph-step-<seq>-<part>`，保留原序号与两件几何，不删到凑数。原始 229 boundary segments 与转换 241 features 也不当成新增板块发现。[PH04]
 3. PB plates 54 feature 只有 52 个唯一 Code（KE、BR 各两段）；用于构建核对，不把 54 当板块数量，不补洞或人工拉线。[PH04]
 4. GVP WFS 返回 EPSG:4326 声明，但检查实际 point 为 `[lon,lat]`，如 Tambora `[118,-8.25]`；白名单数值/名称字段，不访问图像 URL。[PH04]
-5. USGS 目录窗口 `[2000-01-01T00:00:00Z,2025-01-01T00:00:00Z)`；API 的 endtime 行为不当作契约，下载后强制再过滤 `<end`。这里无边界多余记录。epoch 存精确 UTC；可见 day 取 UTC 日期，t 到某日时展示该日所有目录记录，详情仍列原时戳。不得把 Singapore 时间误作事件源时区。[F34,PH02,PH04]
+5. USGS 目录窗口 `[2000-01-01T00:00:00Z,2025-01-01T00:00:00Z)`；API 的 endtime 行为不当作契约，下载后强制再过滤 `<end`。这里无边界多余记录。epoch 存精确 UTC（provenance/quake-times.json）；可见 day 取 UTC 日期，t 到某日时展示该日所有目录记录，详情列 UTC 时刻到分钟。不得把 Singapore 时间误作事件源时区。[F34,PH02,PH04]
 6. 参考层不写伪 `f=1815`；E-PH1 `temporal.mode=reference`，日期不驱动出现。地震继续用 datedLayers：`f=toNumber(UTC day)`，只含 day≤当前 UTC 日，不另增 through-day。海啸观测每行 `f=toNumber(对应源事件日)`，沿现有 datedLayers 随源事件日期整体显示，**不做小时传播**；标题标「与该事件关联的观测，不按到达时刻回放」，部分记录在次日/更后出现也不隐瞒。[PH06]
 7. NOAA 原 `runupHt` 不能不看类型就统一解释为“岸上爬高”；本版统一不输出任何观测高度数值，只列原类型代码、位置和关联信息，不画高度图例、不排名。其他缺数字段显示“未记录”，不是 0。`doubtful=y` 独立注明但仍画位置；不增加另一种运行时筛选状态，原始表保留。[PH06]
 8. antimeridian：PB 线/面按真实 ±180 跳变拆分/展开，不能跨世界画长弦；点不 wrap 到另一半球。保存转换报告、容差、哈希和 licence notice。国界层关、海岸是现代参照；Tambora 与 Krakatau 不造历史岛形。[F54,F56]
@@ -788,3 +788,23 @@ S05/S09/S46/S52不作为本题必要来源：未成功再次直取的部分分�
 - F3：喷发段原始字段与千分位年份（“1,815”）。
 
 **给 Gavin 的判断项**：见 REVIEW.md 五。主题保持 `status: draft`。
+
+
+### 9.5 F1–F3 与可读性修订（2026-11-02）
+
+保持现有 published 状态。F1 将几何与目录文字拆开：几何仍按开启载入；目录由当前章/拍 catalogueIndex、GPU 命中或经几何 id 定位的 pick 触发，并缓存。几何已到、目录未到时，catalogueState 的选择状态仍为 loading；文字失败不妨碍几何与计数。背景索引仅列 Tambora，四类 PB 几何仍显示，PB 文字在后续索引或首次点选时才取。
+
+以下是本地输出文件的精确字节和各文件 gzip -9 之和，**不是浏览器请求实测**；不含 land-50m、HTML、JS 或 HTTP 头：
+
+| 背景首屏资源 | raw B | gzip -9 B |
+|---|---:|---:|
+| 4 × PB + 火山几何（不变） | 690,358 | 117,857 |
+| 旧实现的 5 份目录（修订前文件） | 2,079,982 | 121,276 |
+| 新实现首屏仅火山目录 | 596,984 | 33,655 |
+| 新 PB 目录文字（延后到需求触发） | 1,424,007 | 104,311 |
+
+首屏目录 raw 减少 1,482,998 B；gzip 减少 87,621 B。F2 的两行时间改成两语可读 UTC：发震时间到分钟（“26 Dec 2004, 00:58 UTC / 2004年12月26日 00:58（UTC）”，截断不四舍五入），记录更新到日；3,729 条的精确毫秒值存 provenance/quake-times.json；深度移入摘要。F3 每段喷发仅四行，编号用文本，日期精确保留原日、±182 天和存疑标记。三份完整喷发源记录另存 provenance/selected-eruptions.json。26 个冻结输入 hash 重新核验；23 个输出 hash（含新增原记录与地震时刻文件）已更新。几何仍为 1,449,977 B，目录合计 4,941,194 B，仍在 2 MB/5 MB 预算内。
+
+双语可读性按 BRIEF-READ 修订：8 章正文及细看、38 拍、9 张事件/地点卡、15 术语、两图说明与 alt、图层/PLATE 说明。事实、数值、来源引用与地图参数保留；重复免责声明和施工语言改为直接解释，读取/复核过程留在 AUDIT 与 SOURCES。保留需要的示意夸张、估计差异、伤亡口径、不完整分项、观测限制及建设局指引归属。主体长度仍满足原 EN 200–300 词 / ZH 350–500 字与段落范围。
+
+按 BRIEF-READ 不运行 shoot/e2e，不驱动用户浏览器，不写 git，不改 package/lockfile/review-queue。浏览器网络与截图验收交主会话；非浏览器检查结果见 AUDIT 的本轮记录。

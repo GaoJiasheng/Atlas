@@ -23,7 +23,7 @@ export function DatedLayerPlate({ definitions, indexes, layers, playhead, locale
   const snapshot = () => counted.map((layer) => {
     if (!layers.includes(layer.id)) return '0';
     const loaded = indexes.find((entry) => entry.id === layer.id);
-    if (catalogueLayers?.some((entry) => entry.id === layer.id && entry.status === 'error')) return 'error';
+    if (catalogueLayers?.some((entry) => entry.id === layer.id && entry.status === 'error' && entry.geometryStatus !== 'ready')) return 'error';
     return !loaded ? '—' : String(layers.includes(layer.id) ? datedLayerState(loaded.index, playhead.get()).visible : 0);
   }).join('|');
   const values = useSyncExternalStore(playhead.subscribe, snapshot, snapshot).split('|');
