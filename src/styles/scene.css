@@ -882,10 +882,10 @@
 .atlas-scene[data-card="collapsed"] .atlas-hud__right {
   margin-right: max(0px, calc(34px - 28 * var(--u)));
 }
+/* Fades in where it lands: sliding would cross the reader beside it and shrink its 44 px target mid-way. */
 @keyframes atlas-card-tab-in {
   from {
     opacity: 0;
-    transform: translateX(100%);
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -3210,8 +3210,10 @@
   }
 }
 
-/* HUD room (docs/67): one accessible fold vocabulary across all engines. */
-.atlas-fold {
+/* HUD room (docs/67): one accessible fold vocabulary across all engines.
+   Zero specificity: a component's own rules (reader strip, card tab, plate
+   headers) keep their look and their display toggles. */
+:where(.atlas-fold) {
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
@@ -3228,17 +3230,19 @@
   cursor: pointer;
   pointer-events: auto;
 }
-.atlas-fold i { font-style: normal; }
+
+:where(.atlas-fold) i { font-style: normal; }
 .atlas-fold:focus-visible { outline: 2px solid var(--signal); outline-offset: -2px; }
-.atlas-fold--vertical { flex-direction: column; }
-.atlas-fold--vertical > span { writing-mode: vertical-rl; }
+:where(.atlas-fold--vertical) { flex-direction: column; }
+:where(.atlas-fold--vertical) > span { writing-mode: vertical-rl; }
 .atlas-card__tab { width: 44px; right: max(0px, var(--safe-right)); max-height: calc(100% - 100px); overflow: hidden; }
 .atlas-card__fold { min-width: 44px; min-height: 44px; }
 .atlas-scene[data-card="collapsed"] .atlas-hud__right { margin-right: 44px; }
 .atlas-reader__strip { min-width: 44px; }
 .atlas-panels__bar { min-height: 44px; }
 .atlas-left-body { display: flex; flex-direction: column; min-height: 0; height: 100%; }
-.atlas-left-controls { display: flex; justify-content: flex-end; pointer-events: auto; }
+.atlas-left-controls { display: flex; justify-content: flex-end; gap: calc(6 * var(--u)); pointer-events: auto; }
+.atlas-left-controls .atlas-fold { gap: 6px; text-transform: uppercase; }
 .atlas-left-tab { display: none; align-self: flex-start; max-height: 65%; overflow: hidden; }
 .atlas-scene[data-left="collapsed"] .atlas-left-body { display: none; }
 .atlas-scene[data-left="collapsed"] .atlas-left-tab { display: inline-flex; }
@@ -3247,7 +3251,19 @@
 .atlas-ctl__section > .atlas-fold, .atlas-legend > .atlas-fold { width: 100%; text-transform: uppercase; }
 [hidden] { display: none !important; }
 .atlas-topbar { position: relative; }
-.atlas-guide-toggle, .atlas-stage-only { min-width: 44px; min-height: 44px; justify-content: center; }
+/* Z and ? look like their LOOK / language neighbours (one top-bar row) and hit 44×44. */
+.atlas-guide-toggle, .atlas-stage-only { min-width: 44px; justify-content: center; }
+.atlas-guide-toggle::after, .atlas-stage-only::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: max(100%, 44px);
+  transform: translateY(-50%);
+}
+.atlas-stage-only[aria-pressed="true"], .atlas-guide-toggle[aria-expanded="true"] { background: var(--ink); border-color: var(--ink); color: var(--ink-on); }
 .atlas-guide {
   position: absolute;
   top: 100%;
@@ -3278,13 +3294,15 @@
 }
 @media (max-width: 759px) {
   .atlas-scene[data-left="collapsed"] .atlas-hud { grid-template-columns: 44px minmax(0, 1fr); }
-  .atlas-left-controls { justify-content: flex-start; }
+  /* Phones keep the title + chip-row header as before (docs/67 §6): metadata is already hidden there and
+     the header is never auto-folded; Z still folds it to its tab. */
+  .atlas-left-controls { display: none; }
   .atlas-card__tab { display: flex; top: 10px; }
   .atlas-scene[data-card="collapsed"] .atlas-hud__right { margin-right: 44px; }
   .atlas-left-tab { max-height: 180px; }
 }
 
-.atlas-reader__strip { gap: 10px; padding-right: var(--safe-right); }
+.atlas-reader__strip { gap: 10px; justify-content: center; padding-right: var(--safe-right); }
 @media (max-width: 759px) {
   .atlas-hud { padding-left: max(12px, var(--safe-left)); padding-right: max(12px, var(--safe-right)); }
 }
@@ -3292,10 +3310,9 @@
 .atlas-axis[data-folded], .atlas-axis[data-folded] .atlas-axis__fold { height: 44px; min-height: 44px; }
 .atlas-axis[data-folded] .atlas-axis__fold::after { display: none; }
 @media (max-width: 759px) {
-  /* A manually reopened phone panel must really appear, not lose its tab. */
+  /* A manually reopened phone card must really appear, not lose its tab. (The PLATE block stays
+     hidden on phones, docs/08 §2: the phone header is the title and the rail's chip row.) */
   .atlas-scene[data-card="open"] .atlas-card { display: flex; }
-  .atlas-scene[data-left="open"] .atlas-plate,
-  .atlas-scene[data-left="compact"] .atlas-plate { display: flex; }
 }
 
 .atlas-panels__bar { flex-wrap: wrap; height: auto; white-space: normal; }

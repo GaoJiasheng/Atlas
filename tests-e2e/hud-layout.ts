@@ -68,11 +68,14 @@ export function hudLayoutIssues(page: Page): Promise<string[]> {
         const reader = document.querySelector('.atlas-reader');
         const drawer = !!document.querySelector('.atlas-panel__toggle') && shown(document.querySelector('.atlas-panel__toggle')!);
         const left = [...document.querySelectorAll('.atlas-hud__left [data-hud-panel]')].filter(shown);
-        const x0 = Math.max(0, ...left.map(e => e.getBoundingClientRect().right));
+        // Phones: the title and the rail's chip row are a header above the stage, not a column beside it.
+        const x0 = W < 760 ? 0 : Math.max(0, ...left.map(e => e.getBoundingClientRect().right));
         const x1 = !drawer && reader && shown(reader) ? reader.getBoundingClientRect().left : W;
-        const y1 = Math.min(dock && dock.height > 0 ? dock.top : H, drawer && reader ? reader.getBoundingClientRect().top : H);
-        if (x1-x0 < W*.5-1 || y1-top < H*.6-1)
-          out.push(`stage share: ${Math.round(x1-x0)}×${Math.round(y1-top)} < ${Math.round(W*.5)}×${Math.round(H*.6)}`);
+        // With a bottom drawer the stage is the page above it (docs/67 §2-2), so the height share is taken there.
+        const page = drawer && reader ? reader.getBoundingClientRect().top : H;
+        const y1 = Math.min(dock && dock.height > 0 ? dock.top : H, page);
+        if (x1-x0 < W*.5-1 || y1-top < page*.6-1)
+          out.push(`stage share: ${Math.round(x1-x0)}×${Math.round(y1-top)} < ${Math.round(W*.5)}×${Math.round(page*.6)}`);
       }
       for (const tab of document.querySelectorAll('[data-fold-tab],.atlas-card__tab,.atlas-reader__strip,.atlas-panels__bar')) {
         if (!shown(tab)) continue;
@@ -95,7 +98,9 @@ export async function seedGuideSeen(page: Page): Promise<void> {
 export const hudTest = base.extend<{ firstRun: boolean }>({
   firstRun: [false, { option: true }],
   page: async ({ page, firstRun }, use) => {
-    if (!firstRun) await seedGuideSeen(page);
+    // Under automation the guide never auto-opens unless the page opts in (lib/prefs.ts GUIDE_FIRST_RUN_TEST_KEY).
+    if (firstRun) await page.addInitScript(() => { try { localStorage.setItem('atlas:guide-first-run-test', '1'); } catch { /* blocked storage */ } });
+    else await seedGuideSeen(page);
     await use(page);
   },
 });

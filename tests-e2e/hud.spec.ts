@@ -11,8 +11,9 @@ async function openScene(page: Page, url: string) {
 
 for (const topic of TOPICS) {
   for (const locale of ['en', 'zh'] as const) {
-    test(`${topic} (${locale}): HUD layout has no overlap or overflow at 7 sizes`, async ({ page }) => {
-      test.setTimeout(180_000);
+    test(`${topic} (${locale}): HUD layout has no overlap or overflow at ${LAYOUT_SIZES.length} sizes`, async ({ page }) => {
+      // ~25 s per size per chapter set under software GL on a loaded machine (the docs/67 iPad sizes tripled the list).
+      test.setTimeout(LAYOUT_SIZES.length * 25_000);
       await openScene(page, `/${locale}/topics/${topic}/`);
       for (const [width, height] of LAYOUT_SIZES) {
         await page.setViewportSize({ width, height });
@@ -1348,7 +1349,7 @@ test('reading panel (SpaceScene): header, beat line, inspector, body, chapter in
   await expect(plate.locator('.space-plate__elev')).toBeVisible();
 });
 
-/** The folded tab slides in; let it land before measuring. */
+/** The folded tab fades in; let it land before measuring. */
 const settled = (tab: Locator) => tab.evaluate((el) => Promise.all(el.getAnimations().map((a) => a.finished)).then(() => undefined));
 
 test('card fold (SpaceScene): a right chevron folds the part chain into a 44 px tab on the stage edge, the Layers panel moves up, per tab', async ({ page }) => {

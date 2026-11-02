@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { OPEN_FOLDS, measureFreeStage, solveHudRoom, usesReaderDrawer, type HudMeasurements } from '../../src/engines/core/hud-room';
 import { createHudStore, createHudActions, buildKeymap } from '../../src/engines/core/controls';
-import { getHudPreferences, setHudPreferences, claimFirstGuide, GUIDE_SEEN_KEY, HUD_ROOM_KEY } from '../../src/lib/prefs';
+import { getHudPreferences, setHudPreferences, claimFirstGuide, GUIDE_FIRST_RUN_TEST_KEY, GUIDE_SEEN_KEY, HUD_ROOM_KEY } from '../../src/lib/prefs';
 import { hudScale } from '../../src/engines/core/SceneHost';
 
 const sizes: HudMeasurements = {
@@ -89,6 +89,21 @@ describe('HUD room policy', () => {
     const manual = { cardOpen: false };
     expect(solveHudRoom({ width: 1180, height: 820 }, sizes, manual).folds.leftColumn).toBe('collapsed');
     expect(solveHudRoom({ width: 1920, height: 1080 }, sizes, manual).folds).toMatchObject({ leftColumn: 'open', cardOpen: false });
+  });
+  it('in a portrait drawer the right column bounds the stage: card and key fold, the left column stays', () => {
+    const portrait = solveHudRoom({ width: 820, height: 1180 }, { ...sizes, right: { ...sizes.right, width: 330 } });
+    expect(portrait.drawer).toBe(true);
+    expect(portrait.steps).toEqual(['legends', 'card']);
+    expect(portrait.folds).toMatchObject({ legendsOpen: false, cardOpen: false, leftColumn: 'open', reader: true });
+    expect(solveHudRoom({ width: 1024, height: 1366 }, sizes).steps).toEqual(['legends', 'card']);
+    // A reader who opens the card again keeps it, even below the minimum.
+    expect(solveHudRoom({ width: 820, height: 1180 }, sizes, { cardOpen: true }).folds.cardOpen).toBe(true);
+  });
+  it('a phone keeps its title and chip-row header: only the card and key fold into tabs', () => {
+    const phone = solveHudRoom({ width: 390, height: 844 }, { ...sizes, left: { width: 366, height: 140, metadata: 0 } });
+    expect(phone.steps).toEqual(['legends', 'card']);
+    expect(phone.folds.leftColumn).toBe('open');
+    expect(phone.meetsShare).toBe(true);
   });
   it('uses drawers throughout tablet portrait and leaves wide desktop portrait docked', () => {
     for (const [w, h] of [
@@ -184,6 +199,17 @@ describe('HUD store, restoration and persistence', () => {
     expect(getHudPreferences().manual).toEqual({});
     session.set(HUD_ROOM_KEY, 'malformed');
     expect(getHudPreferences().manual).toEqual({});
+  });
+  it('never auto-opens under automation unless the page opts in', () => {
+    const local = new Map<string, string>();
+    const storage = { getItem: (k: string) => local.get(k) ?? null, setItem: (k: string, v: string) => local.set(k, v) };
+    vi.stubGlobal('window', { sessionStorage: storage, localStorage: storage });
+    vi.stubGlobal('navigator', { webdriver: true });
+    expect(claimFirstGuide()).toBe(false);
+    expect(local.has(GUIDE_SEEN_KEY)).toBe(false);
+    local.set(GUIDE_FIRST_RUN_TEST_KEY, '1');
+    expect(claimFirstGuide()).toBe(true);
+    expect(claimFirstGuide()).toBe(false);
   });
   it('does not auto-open in blocked/private storage and setters remain usable', () => {
     const blocked = {

@@ -123,6 +123,14 @@ for (const topic of ['aircon', 'ww2', 'fractions']) {
       await expect.poll(() => hudLayoutIssues(page)).toEqual([]);
       const drawer = height! > width! && width! < 1100;
       await expect(page.locator('.atlas-panel__toggle'))[drawer ? 'toBeVisible' : 'toBeHidden']();
+      if (drawer || width! < 760) {
+        // Drawer layouts: the card and keys fold to their tabs first; tablets keep the left column, phones keep
+        // their title + chip-row header (never auto-folded).
+        const state = await page.evaluate(() => window.__atlas!.state());
+        expect(state.card).toBe(false);
+        expect(state.leftColumn).toBe('open');
+        if (width! < 760) await expect(page.locator('.atlas-rail__item').first()).toBeVisible();
+      }
       if (width === 1920) {
         const state = await page.evaluate(() => window.__atlas!.state());
         expect(state.leftColumn).toBe('open');

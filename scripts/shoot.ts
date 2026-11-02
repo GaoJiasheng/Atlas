@@ -9,7 +9,8 @@ import { microscopeFieldReading } from '../src/engines/space-scene/lib/sim/micro
  *   pnpm shoot sample-time --locale zh --theme cinema --size 3840x2160 --suffix _4k
  *   pnpm shoot sample-time --shots my-shots.json     # custom shot list (format below)
  *   pnpm shoot sample-time --keys                    # every key changes state + its button
- *   pnpm shoot sample-time --layout                  # HUD overlap / overflow / a squeezed stage at eight sizes (incl. 1600x900, 1024x768), after a chapter change and opened from a beat link
+ *   pnpm shoot sample-time --layout                  # HUD overlap / overflow / a squeezed stage at every LAYOUT_SIZES size (hud-layout.ts, incl. the docs/67 iPad sizes), after a chapter change and opened from a beat link
+ *   pnpm shoot ww2 --layout --touch --layout-sizes 1180x820,820x1180   # only these sizes; --touch = a coarse-pointer iPad / phone context
  *   pnpm shoot ww2 --beats                           # every presentation beat -> shots/<topic>/<locale>-<theme>/beat-<chapter>-<n>.png
  *   pnpm shoot sample-space --perf --json out.json   # renderer numbers per shot
  *   pnpm shoot fractions --tasks                     # MathScene: every check-pool task (start, a planned wrong answer, solved) and every practice question + the summary
@@ -125,7 +126,7 @@ interface RunReport {
 function usage(): never {
   console.error(
     'usage: pnpm shoot <topic> [--locale en|zh|all] [--theme paper|cinema|all] [--size WxH] [--suffix _4k]\n' +
-      '                          [--shots file.json] [--keys] [--layout] [--beats] [--tasks] [--perf] [--gpu] [--touch] [--json out.json] [names...]',
+      '                          [--shots file.json] [--keys] [--layout] [--beats] [--tasks] [--perf] [--gpu] [--touch] [--layout-sizes WxH,...] [--json out.json] [names...]',
   );
   process.exit(2);
 }
@@ -1602,14 +1603,18 @@ async function stageIssues(page: Page): Promise<string[]> {
   });
 }
 
-async function runLayout(s: Session, out: string, report: RunReport, locale: string, theme: string): Promise<void> {
+async function runLayout(s: Session, out: string, report: RunReport, locale: string, theme: string, sizes: readonly (readonly [number, number])[] = SHOOT_LAYOUT_SIZES): Promise<void> {
   const { page } = s;
   const [chapters, presets] = await Promise.all([s.ev(() => window.__atlas!.chapters()), s.ev(() => window.__atlas!.presets())]);
   const extraPresets = presets.filter((p) => !chapters.includes(p) && !/^\d+$/.test(p));
   mkdirSync(out, { recursive: true });
-  for (const [w, h] of SHOOT_LAYOUT_SIZES) {
+  for (const [w, h] of sizes) {
     await page.setViewportSize({ width: w, height: h });
     await page.waitForTimeout(500);
+    // The HUD room solver re-runs on the next frame; a busy software-GL stage can take seconds to draw one.
+    await page
+      .waitForFunction(() => { const v = window.__atlas?.state().room?.viewport; return !v || (v.width === innerWidth && v.height === innerHeight); }, null, { timeout: 20_000 })
+      .catch(() => undefined);
     const issues: string[] = [];
     const check = async (where: string) => {
       for (const i of [...(await hudLayoutIssues(page)), ...(await stageIssues(page))]) {
@@ -1662,6 +1667,8 @@ interface Options {
   perf: boolean;
   gpu: boolean;
   touch: boolean;
+  /** `--layout-sizes`: only these sizes in the layout pass (default: every size in hud-layout.ts). */
+  layoutSizes?: [number, number][];
   json?: string;
   names: string[];
 }
@@ -1682,6 +1689,7 @@ function parse(): Options {
       perf: { type: 'boolean', default: false },
       gpu: { type: 'boolean', default: false },
       touch: { type: 'boolean', default: false },
+      'layout-sizes': { type: 'string' },
       json: { type: 'string' },
       help: { type: 'boolean', short: 'h', default: false },
     },
@@ -1702,6 +1710,7 @@ function parse(): Options {
     perf: values.perf,
     gpu: values.gpu,
     touch: values.touch,
+    layoutSizes: values['layout-sizes']?.split(',').map((v) => parseSize(v.trim())),
     json: values.json,
     names,
   };
@@ -1748,7 +1757,7 @@ async function main(): Promise<number> {
           }
           if (o.layout) {
             console.log('  -- layout');
-            await runLayout(s, out, report, locale, theme);
+            await runLayout(s, out, report, locale, theme, o.layoutSizes);
             await s.page.setViewportSize({ width: o.size[0], height: o.size[1] });
           }
         } finally {

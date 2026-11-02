@@ -1139,5 +1139,7 @@
   "guide.key.beat.next": "Next beat",
   "hud.stageOnly": "Stage only",
   "hud.left.fold": "Fold topic column",
-  "hud.left.metadata": "Show / hide topic details"
+  "hud.left.metadata": "Show / hide topic details",
+  "hud.left.details": "Details",
+  "hud.left.foldShort": "Fold"
 }
