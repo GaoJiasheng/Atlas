@@ -10,7 +10,7 @@ import { simEffects } from '../../src/engines/space-scene/lib/sim/bind';
 import { outputText } from '../../src/engines/space-scene/lib/sim/text';
 import { tableCombinations } from '../../src/engines/space-scene/lib/sim/table';
 import { tableSourceIssues } from '../../src/engines/space-scene/table-schema';
-import { isClosedPrimitive } from '../../src/engines/space-scene/stages/model3d/geometry';
+import { eachPieces, isClosedPrimitive, partPieces } from '../../src/engines/space-scene/stages/model3d/geometry';
 
 const DIR = join(import.meta.dirname, '../../src/content/topics/inside-the-earth');
 const raw = JSON.parse(readFileSync(join(DIR, 'data/parts.json'), 'utf8'));
@@ -29,7 +29,7 @@ const offset = (pose: string, part: string) => file.poses![pose]!.parts[part]!.o
 const closeVector = (actual: readonly number[], wanted: readonly number[]) => wanted.forEach((v, i) => expect(actual[i]).toBeCloseTo(v, 12));
 
 describe('inside-the-earth: concentric closed shells, never equal-thickness rings', () => {
-  it('uses the exact four radii, with closed half-shells sharing their boundary surfaces without overlap or gaps', () => {
+  it('uses the exact four radii, with closed spherical shells sharing their boundary surfaces and a quarter-wedge opening', () => {
     const radii = [0, 1221 / 6371, 3485 / 6371, 6341 / 6371, 1];
     const ids = ['earth-inner-core', 'earth-outer-core', 'earth-mantle', 'earth-crust'];
     const boundaries: number[][][] = [];
@@ -37,7 +37,9 @@ describe('inside-the-earth: concentric closed shells, never equal-thickness ring
       const p = file.parts.find((p) => p.id === id)!.primitive!;
       expect(p.kind).toBe('lathe');
       if (p.kind !== 'lathe') throw new Error(`${id} must be a shell profile`);
-      expect(p.arc).toBe(180);
+      expect(p.arc).toBe(270);
+      expect(p.segments).toBeGreaterThanOrEqual(48);
+      expect(p.rotation).toEqual(file.parts.find((p) => p.id === 'earth-crust')!.primitive!.rotation);
       expect(isClosedPrimitive(p)).toBe(true);
       expect(p.profile[0]).toEqual(p.profile.at(-1));
       const outer = radii[i + 1]!, inner = radii[i]!;
@@ -86,21 +88,127 @@ describe('inside-the-earth: the local geological models preserve the explanatory
   });
 
   it('the descending slab joins the incoming plate across its full thickness, and partial melt sits above it', () => {
-    const incoming = part('edge-sub-left').primitive!, crust = part('edge-sub-left').extra![0]!, slab = part('edge-slab').primitive!;
-    if (incoming.kind !== 'box' || crust.kind !== 'box' || slab.kind !== 'extrude') throw new Error('the slab must be a continuous extruded plate');
+    const incoming = part('edge-sub-left').primitive!, crust = part('edge-sub-left').extra![0]!, slab = part('edge-slab').primitive!, slabCrust = part('edge-slab').extra![0]!;
+    if (incoming.kind !== 'box' || crust.kind !== 'box' || slab.kind !== 'extrude' || slabCrust.kind !== 'extrude') throw new Error('the slab must be a continuous two-material extruded plate');
     const joinX = incoming.at[0] + incoming.size[0]! / 2;
     const join = slab.shape.filter(([x]) => Math.abs(x - joinX) < 1e-12);
     expect(join).toHaveLength(2);
-    expect(join.map(([, y]) => y).sort()).toEqual([incoming.at[1] - incoming.size[1]! / 2, crust.at[1] + crust.size[1]! / 2].sort().map((v) => expect.closeTo(v, 12)));
+    expect(join.map(([, y]) => y).sort()).toEqual([incoming.at[1] - incoming.size[1]! / 2, incoming.at[1] + incoming.size[1]! / 2].sort().map((v) => expect.closeTo(v, 12)));
+    const crustJoin = slabCrust.shape.filter(([x]) => Math.abs(x - joinX) < 1e-12);
+    expect(crustJoin).toHaveLength(2);
+    expect(crustJoin.map(([, y]) => y).sort()).toEqual([crust.at[1] - crust.size[1]! / 2, crust.at[1] + crust.size[1]! / 2].sort().map((v) => expect.closeTo(v, 12)));
     expect(slab.depth).toBe(incoming.size[2]);
+    expect(slabCrust.depth).toBe(crust.size[2]);
     expect(part('edge-sub-left').connects).toContain('edge-slab');
     const melt = part('edge-melt').primitive!;
     const top = slab.shape.slice(0, slab.shape.length / 2);
+    // Dense samples must turn continuously from the horizontal incoming plate;
+    // a coarse staircase can preserve the endpoints while failing this check.
+    expect(top.length).toBeGreaterThanOrEqual(65);
+    const angles = top.slice(1).map(([x, y], i) => Math.atan2(y - top[i]![1], x - top[i]![0]));
+    expect(Math.abs(angles[0]!)).toBeLessThan(0.03);
+    for (let i = 1; i < angles.length; i++) expect(Math.abs(angles[i]! - angles[i - 1]!)).toBeLessThan(0.05);
+    const bottom = slab.shape.slice(slab.shape.length / 2).reverse();
+    const crustTop = slabCrust.shape.slice(0, slabCrust.shape.length / 2);
+    const crustBottom = slabCrust.shape.slice(slabCrust.shape.length / 2).reverse();
+    top.forEach(([x, y], i) => {
+      expect(bottom[i]![0]).toBeCloseTo(x, 12);
+      expect(y - bottom[i]![1]).toBeCloseTo(incoming.size[1]!, 12);
+      closeVector(crustBottom[i]!, [x, y]);
+      expect(crustTop[i]![0]).toBeCloseTo(x, 12);
+      expect(crustTop[i]![1] - y).toBeCloseTo(crust.size[1]!, 12);
+      expect(crustTop[i]![1] - bottom[i]![1]).toBeCloseTo(incoming.size[1]! + crust.size[1]!, 12);
+    });
     const segment = top.findIndex((p, i) => p[0] <= melt.at[0] && (top[i + 1]?.[0] ?? -Infinity) >= melt.at[0]);
     expect(segment).toBeGreaterThanOrEqual(0);
     const a = top[segment]!, b = top[segment + 1]!;
     const slabY = a[1] + (melt.at[0] - a[0]) / (b[0] - a[0]) * (b[1] - a[1]);
     expect(melt.at[1]).toBeGreaterThan(slabY);
+  });
+
+  it('gives the stratovolcano inward-curving flanks and a recessed crater rather than a straight cone', () => {
+    const cone = part('volcano-cone').primitive!;
+    if (cone.kind !== 'lathe') throw new Error('the volcano must have a curved meridian');
+    expect(cone.segments).toBeGreaterThanOrEqual(48);
+    expect(isClosedPrimitive(cone)).toBe(true);
+    const summit = Math.max(...cone.profile.map(([, y]) => y));
+    const rim = cone.profile.findIndex(([, y]) => y === summit);
+    const flank = cone.profile.slice(0, rim + 1);
+    expect(flank.length).toBeGreaterThan(20);
+    const [baseR, baseY] = flank[0]!, [rimR] = flank.at(-1)!;
+    const middle = flank.find(([, y]) => y > baseY + (summit - baseY) * 0.4 && y < baseY + (summit - baseY) * 0.6)!;
+    expect(middle).toBeDefined();
+    const linearRadius = baseR + (rimR - baseR) * (middle[1] - baseY) / (summit - baseY);
+    expect(middle[0]).toBeLessThan(linearRadius - (baseR - rimR) * 0.05);
+    for (let i = 1; i < flank.length; i++) {
+      expect(flank[i]![1]).toBeGreaterThan(flank[i - 1]![1]);
+      expect(flank[i]![0]).toBeLessThan(flank[i - 1]![0]);
+    }
+    const innerWall = cone.profile.slice(rim + 1);
+    expect(innerWall.some(([r, y]) => r < rimR && y < summit - 0.1)).toBe(true);
+  });
+
+  it('fits the irregular magma chamber to its host-rock opening and connects branching passages', () => {
+    const chamber = part('volcano-storage').primitive!, host = part('volcano-host').primitive!, trunk = part('volcano-conduit').primitive!;
+    if (chamber.kind !== 'extrude' || host.kind !== 'extrude' || trunk.kind !== 'sweep') throw new Error('the chamber and plumbing must be continuous shaped solids');
+    expect(host.holes).toHaveLength(1);
+    const hole = host.holes![0]!;
+    expect(hole.length).toBeGreaterThan(24);
+    const globalShape = chamber.shape.map(([x, y]): [number, number] => [x + chamber.at[0] - host.at[0], y + chamber.at[1] - host.at[1]]);
+    for (const [x, y] of globalShape) expect(hole.some(([hx, hy]) => Math.hypot(hx - x, hy - y) < 1e-10)).toBe(true);
+    const left = Math.min(...hole.map(([x]) => x)), right = Math.max(...hole.map(([x]) => x));
+    // Bilaterally mirrored ellipses have no irregular roof or side pockets.
+    expect(hole.some(([x, y]) => !hole.some(([xx, yy]) => Math.hypot(xx - (left + right - x), yy - y) < 1e-4))).toBe(true);
+    const radius = Array.isArray(trunk.radius) ? Math.max(...trunk.radius) : trunk.radius;
+    const segmentDistance = (p: readonly number[], a: readonly number[], b: readonly number[]) => {
+      const ab = b.map((v, i) => v - a[i]!), ap = p.map((v, i) => v - a[i]!);
+      const t = Math.max(0, Math.min(1, ap.reduce((s, v, i) => s + v * ab[i]!, 0) / ab.reduce((s, v) => s + v * v, 0)));
+      return Math.hypot(...p.map((v, i) => v - a[i]! - t * ab[i]!));
+    };
+    const branches = part('volcano-conduit').extra!.filter((p) => p.kind === 'sweep');
+    expect(branches.length).toBeGreaterThanOrEqual(3);
+    for (const passage of [trunk, ...branches]) {
+      if (passage.kind !== 'sweep') throw new Error('a volcanic passage must be a sweep');
+      expect(passage.radial).toBeGreaterThanOrEqual(48);
+      if (passage === trunk) continue;
+      const endpointDistances = [passage.path[0]!, passage.path.at(-1)!].map((p) => Math.min(...trunk.path.slice(1).map((b, i) => segmentDistance(p, trunk.path[i]!, b))));
+      expect(Math.min(...endpointDistances)).toBeLessThan(radius);
+    }
+  });
+
+  it('draws an irregular ash plume as one instanced shape within the topic triangle budget', () => {
+    const ash = part('volcano-ash');
+    const fragments = [ash.primitive!, ...ash.extra!];
+    expect(fragments.length).toBeGreaterThan(20);
+    expect(fragments.every((p) => p.kind === 'lathe')).toBe(true);
+    const ys = fragments.map((p) => p.at[1]);
+    expect(Math.max(...ys) - Math.min(...ys)).toBeGreaterThan(0.6);
+    expect(file.animations.some((a) => a.target === ash.id && 'each' in a && a.each)).toBe(true);
+    const plume = eachPieces(ash);
+    try {
+      expect(plume).toHaveLength(1);
+      expect(plume[0]!.matrices!.length).toBeGreaterThan(fragments.length);
+      const geometry = plume[0]!.geometry;
+      geometry.computeBoundingBox();
+      expect(geometry.boundingBox!.max.x - geometry.boundingBox!.min.x).toBeGreaterThan(0);
+    } finally { plume.forEach((p) => p.geometry.dispose()); }
+    let triangles = 0;
+    const byGroup = new Map<string, number>();
+    for (const p of file.parts) {
+      const each = file.animations.some((a) => a.target === p.id && 'each' in a && a.each);
+      const pieces = each ? eachPieces(p) : partPieces(p);
+      for (const piece of pieces) {
+        if (!piece.lines) {
+          const count = (piece.geometry.index?.count ?? piece.geometry.getAttribute('position').count) / 3 * (piece.matrices?.length ?? 1);
+          triangles += count;
+          const group = p.group ?? 'ungrouped';
+          byGroup.set(group, (byGroup.get(group) ?? 0) + count);
+        }
+        piece.geometry.dispose();
+      }
+    }
+    expect(triangles).toBeLessThan(600_000);
+    for (const [group, count] of byGroup) expect(count, group).toBeLessThan(300_000);
   });
 
   it('loads a locked contact before releasing slip, keeps the two markers with their blocks, and marks the epicentre directly above the focus', () => {

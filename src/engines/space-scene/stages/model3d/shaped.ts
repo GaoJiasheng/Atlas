@@ -90,7 +90,7 @@ const neg = (a: Vec): Vec => [-a[0], -a[1], -a[2]];
  * containing `up` (every coil tube and return bend): the circle frame is
  * (up, tangent × up), so no twisting. Open ends.
  */
-function sweep(t: TriBuilder, pts: Vec[], up: Vec, r: number, seg = 8): void {
+function sweep(t: TriBuilder, pts: Vec[], up: Vec, r: number, seg = 24): void {
   const rings: { p: Vec; n: Vec }[][] = pts.map((p, i) => {
     const a = pts[Math.max(0, i - 1)]!;
     const b = pts[Math.min(pts.length - 1, i + 1)]!;
