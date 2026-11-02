@@ -85,7 +85,7 @@ test.describe('monsoon-and-weather', () => {
 
   test('background: reading note, BG axis segment, six indexed cities, Water link', async ({ page }) => {
     await open(page, 'ch=background');
-    await expect(page.locator('.atlas-note')).toContainText('calendar-month means for 1991–2020');
+    await expect(page.locator('.atlas-note')).toContainText('monthly averages for 1991–2020');
     await expect(page.locator('.atlas-axis')).toContainText('BG');
     for (const id of ['site-singapore', 'site-kuala-lumpur', 'site-jakarta', 'site-hanoi', 'site-bangkok', 'site-manila'])
       expect(await page.evaluate((x) => (window.__atlas!.engine as unknown as Engine).selectClimatologySite(x), id)).toBe(true);
